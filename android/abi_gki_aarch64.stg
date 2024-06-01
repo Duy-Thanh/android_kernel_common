@@ -70504,12 +70504,6 @@ member {
   offset: 4320
 }
 member {
-  id: 0x71d8837f
-  name: "decayed"
-  type_id: 0x6d7f5ff6
-  offset: 2432
-}
-member {
   id: 0x86c5c02d
   name: "decode_vbi_line"
   type_id: 0x2de44294
@@ -101463,16 +101457,16 @@ member {
   offset: 640
 }
 member {
+  id: 0x5762e1d3
+  name: "idle"
+  type_id: 0x6720d32f
+  offset: 2752
+}
+member {
   id: 0x5762e56c
   name: "idle"
   type_id: 0x6720d32f
   offset: 2048
-}
-member {
-  id: 0x5762ed84
-  name: "idle"
-  type_id: 0x6720d32f
-  offset: 2816
 }
 member {
   id: 0x5768bed4
@@ -111694,16 +111688,16 @@ member {
   offset: 192
 }
 member {
-  id: 0xde3c5099
-  name: "leaf_cfs_rq_list"
-  type_id: 0xd3c80119
-  offset: 2624
-}
-member {
   id: 0xde3c5685
   name: "leaf_cfs_rq_list"
   type_id: 0xd3c80119
   offset: 21568
+}
+member {
+  id: 0xde3c5861
+  name: "leaf_cfs_rq_list"
+  type_id: 0xd3c80119
+  offset: 2560
 }
 member {
   id: 0x4d0154e3
@@ -135693,10 +135687,10 @@ member {
   offset: 304
 }
 member {
-  id: 0x8ddcd4a8
+  id: 0x8ddcd1f3
   name: "on_list"
   type_id: 0x6720d32f
-  offset: 2560
+  offset: 2496
 }
 member {
   id: 0x7409a1c4
@@ -161005,10 +160999,10 @@ member {
   offset: 512
 }
 member {
-  id: 0x0d1ed448
+  id: 0x0d1ed539
   name: "rq"
   type_id: 0x2e029f76
-  offset: 2496
+  offset: 2432
 }
 member {
   id: 0x0d2e502f
@@ -182345,10 +182339,10 @@ member {
   offset: 32
 }
 member {
-  id: 0x86b8dbbe
+  id: 0x86b8ddbd
   name: "tg"
   type_id: 0x2ba5754c
-  offset: 2752
+  offset: 2688
 }
 member {
   id: 0xdf0c791e
@@ -212400,12 +212394,11 @@ struct_union {
     member_id: 0x031118bb
     member_id: 0x89791ec8
     member_id: 0x6b5f394b
-    member_id: 0x71d8837f
-    member_id: 0x0d1ed448
-    member_id: 0x8ddcd4a8
-    member_id: 0xde3c5099
-    member_id: 0x86b8dbbe
-    member_id: 0x5762ed84
+    member_id: 0x0d1ed539
+    member_id: 0x8ddcd1f3
+    member_id: 0xde3c5861
+    member_id: 0x86b8ddbd
+    member_id: 0x5762e1d3
   }
 }
 struct_union {
@@ -322216,7 +322209,7 @@ elf_symbol {
   name: "__balance_callbacks"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb2a5d41a
+  crc: 0x11399992
   type_id: 0x1b18f64e
   full_name: "__balance_callbacks"
 }
@@ -324061,7 +324054,7 @@ elf_symbol {
   name: "__migrate_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5b4a46ef
+  crc: 0x0526fd92
   type_id: 0x81bed9bb
   full_name: "__migrate_task"
 }
@@ -325186,7 +325179,7 @@ elf_symbol {
   name: "__task_rq_lock"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7cebe136
+  crc: 0x6bf088a0
   type_id: 0x8d7ecefa
   full_name: "__task_rq_lock"
 }
@@ -325249,7 +325242,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_account_irq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1ef221f9
+  crc: 0x399ba5c8
   type_id: 0x9bc2b791
   full_name: "__traceiter_android_rvh_account_irq"
 }
@@ -325258,7 +325251,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_after_dequeue_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x91096317
+  crc: 0x92424a31
   type_id: 0x9b116af7
   full_name: "__traceiter_android_rvh_after_dequeue_task"
 }
@@ -325267,7 +325260,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_after_enqueue_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe9040280
+  crc: 0x7d6fc9dd
   type_id: 0x9b116af7
   full_name: "__traceiter_android_rvh_after_enqueue_task"
 }
@@ -325312,7 +325305,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_can_migrate_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd653e761
+  crc: 0x00897f57
   type_id: 0x9bc25990
   full_name: "__traceiter_android_rvh_can_migrate_task"
 }
@@ -325330,7 +325323,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_check_preempt_wakeup"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5792d22f
+  crc: 0x9dd4f5db
   type_id: 0x9b10b4a6
   full_name: "__traceiter_android_rvh_check_preempt_wakeup"
 }
@@ -325348,7 +325341,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_context_switch"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x33b74e3e
+  crc: 0x952124fa
   type_id: 0x9bdc9aae
   full_name: "__traceiter_android_rvh_context_switch"
 }
@@ -325429,7 +325422,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_dequeue_entity"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf7a29398
+  crc: 0xd9651581
   type_id: 0x9b96d02c
   full_name: "__traceiter_android_rvh_dequeue_entity"
 }
@@ -325438,7 +325431,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_dequeue_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xafbd1f53
+  crc: 0xf894a1d0
   type_id: 0x9b116af7
   full_name: "__traceiter_android_rvh_dequeue_task"
 }
@@ -325447,7 +325440,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_dequeue_task_fair"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xda637f4b
+  crc: 0x16399e55
   type_id: 0x9b116af7
   full_name: "__traceiter_android_rvh_dequeue_task_fair"
 }
@@ -325492,7 +325485,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_do_sched_yield"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdab8bbed
+  crc: 0xc13b31f5
   type_id: 0x9b17b01e
   full_name: "__traceiter_android_rvh_do_sched_yield"
 }
@@ -325519,7 +325512,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_effective_cpu_util"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xed537d04
+  crc: 0xdbb5341b
   type_id: 0x9a3f301e
   full_name: "__traceiter_android_rvh_effective_cpu_util"
 }
@@ -325528,7 +325521,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_enqueue_entity"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x99b1981e
+  crc: 0x70369651
   type_id: 0x9b96d02c
   full_name: "__traceiter_android_rvh_enqueue_entity"
 }
@@ -325537,7 +325530,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_enqueue_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd7b07ec4
+  crc: 0x17b9223c
   type_id: 0x9b116af7
   full_name: "__traceiter_android_rvh_enqueue_task"
 }
@@ -325546,7 +325539,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_enqueue_task_fair"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd5e17480
+  crc: 0xed8297ce
   type_id: 0x9b116af7
   full_name: "__traceiter_android_rvh_enqueue_task_fair"
 }
@@ -325555,7 +325548,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_entity_tick"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x90172be8
+  crc: 0x2850588e
   type_id: 0x9b96d02c
   full_name: "__traceiter_android_rvh_entity_tick"
 }
@@ -325573,7 +325566,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_find_busiest_group"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x91576863
+  crc: 0x828e7dee
   type_id: 0x9b79ad21
   full_name: "__traceiter_android_rvh_find_busiest_group"
 }
@@ -325582,7 +325575,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_find_busiest_queue"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb45297f7
+  crc: 0x9eaf5b86
   type_id: 0x9a3e0766
   full_name: "__traceiter_android_rvh_find_busiest_queue"
 }
@@ -325591,7 +325584,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_find_energy_efficient_cpu"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5b3fe0bc
+  crc: 0x6e62830d
   type_id: 0x9bc38ca5
   full_name: "__traceiter_android_rvh_find_energy_efficient_cpu"
 }
@@ -325600,7 +325593,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_find_lowest_rq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x399187cb
+  crc: 0x130398b5
   type_id: 0x9bd47a1d
   full_name: "__traceiter_android_rvh_find_lowest_rq"
 }
@@ -325618,7 +325611,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_finish_prio_fork"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x33ed258f
+  crc: 0x3b7d1d16
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_finish_prio_fork"
 }
@@ -325636,7 +325629,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_flush_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x82e50348
+  crc: 0x96a0be0e
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_flush_task"
 }
@@ -325744,7 +325737,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_is_cpu_allowed"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdffa1af9
+  crc: 0x71ad5f1f
   type_id: 0x9bc253cf
   full_name: "__traceiter_android_rvh_is_cpu_allowed"
 }
@@ -325753,7 +325746,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_new_task_stats"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9ee875da
+  crc: 0xf9816954
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_new_task_stats"
 }
@@ -325789,7 +325782,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_place_entity"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcf73f643
+  crc: 0x65673d00
   type_id: 0x9b974729
   full_name: "__traceiter_android_rvh_place_entity"
 }
@@ -325798,7 +325791,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_post_init_entity_util_avg"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x010e79d0
+  crc: 0x3aec6dcc
   type_id: 0x9b8f15f1
   full_name: "__traceiter_android_rvh_post_init_entity_util_avg"
 }
@@ -325807,7 +325800,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_prepare_prio_fork"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xec05ddbc
+  crc: 0xcf8640b3
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_prepare_prio_fork"
 }
@@ -325843,7 +325836,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_replace_next_task_fair"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcf6f179c
+  crc: 0xb0bd4f81
   type_id: 0x9b14e220
   full_name: "__traceiter_android_rvh_replace_next_task_fair"
 }
@@ -325870,7 +325863,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_rtmutex_force_update"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x411c2925
+  crc: 0x1fb28a50
   type_id: 0x9bdcd7ce
   full_name: "__traceiter_android_rvh_rtmutex_force_update"
 }
@@ -325879,7 +325872,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_rtmutex_prepare_setprio"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa3f7873c
+  crc: 0xb0feb1cf
   type_id: 0x9bdc9aae
   full_name: "__traceiter_android_rvh_rtmutex_prepare_setprio"
 }
@@ -325924,7 +325917,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_sched_fork"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5089a311
+  crc: 0xdcd9e3f0
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_sched_fork"
 }
@@ -325933,7 +325926,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_sched_fork_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf14e4c65
+  crc: 0x5b2a1a77
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_sched_fork_init"
 }
@@ -325942,7 +325935,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_sched_newidle_balance"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2b017881
+  crc: 0xcff0c5db
   type_id: 0x9b18e15a
   full_name: "__traceiter_android_rvh_sched_newidle_balance"
 }
@@ -325951,7 +325944,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_sched_nohz_balancer_kick"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb8267ab6
+  crc: 0xdf0294ce
   type_id: 0x9b110126
   full_name: "__traceiter_android_rvh_sched_nohz_balancer_kick"
 }
@@ -325960,7 +325953,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_sched_rebalance_domains"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x086d4d6c
+  crc: 0x3c9338f2
   type_id: 0x9b13661d
   full_name: "__traceiter_android_rvh_sched_rebalance_domains"
 }
@@ -325969,7 +325962,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_sched_setaffinity"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x957ee2d9
+  crc: 0x73f8e334
   type_id: 0x9bd7d214
   full_name: "__traceiter_android_rvh_sched_setaffinity"
 }
@@ -325978,7 +325971,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_schedule"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x502c71c3
+  crc: 0x289f17f3
   type_id: 0x9bdc22a4
   full_name: "__traceiter_android_rvh_schedule"
 }
@@ -325987,7 +325980,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_select_fallback_rq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe240a714
+  crc: 0xc420c5f9
   type_id: 0x9a343225
   full_name: "__traceiter_android_rvh_select_fallback_rq"
 }
@@ -325996,7 +325989,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_select_task_rq_fair"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe175201e
+  crc: 0x6ae4839a
   type_id: 0x9bc391f6
   full_name: "__traceiter_android_rvh_select_task_rq_fair"
 }
@@ -326005,7 +325998,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_select_task_rq_rt"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcf81011e
+  crc: 0xc380351d
   type_id: 0x9bc391f6
   full_name: "__traceiter_android_rvh_select_task_rq_rt"
 }
@@ -326023,7 +326016,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_set_cpus_allowed_by_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x31f71053
+  crc: 0xd2b3bccd
   type_id: 0x9b67b049
   full_name: "__traceiter_android_rvh_set_cpus_allowed_by_task"
 }
@@ -326032,7 +326025,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_set_cpus_allowed_comm"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x465ef444
+  crc: 0xabf70d4b
   type_id: 0x9bd79f74
   full_name: "__traceiter_android_rvh_set_cpus_allowed_comm"
 }
@@ -326041,7 +326034,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_set_cpus_allowed_ptr"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8deebc41
+  crc: 0x5a5b439a
   type_id: 0x9bddd318
   full_name: "__traceiter_android_rvh_set_cpus_allowed_ptr"
 }
@@ -326068,7 +326061,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_set_task_comm"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf9ac16d9
+  crc: 0x87eb9418
   type_id: 0x9bc08313
   full_name: "__traceiter_android_rvh_set_task_comm"
 }
@@ -326077,7 +326070,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_set_task_cpu"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2840f790
+  crc: 0x4ceabbdb
   type_id: 0x9bcabd9d
   full_name: "__traceiter_android_rvh_set_task_cpu"
 }
@@ -326086,7 +326079,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_set_user_nice"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x495b89c7
+  crc: 0xbddb218d
   type_id: 0x9bd6ff14
   full_name: "__traceiter_android_rvh_set_user_nice"
 }
@@ -326095,7 +326088,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_setscheduler"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa8f45c84
+  crc: 0xd9abcdb9
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_setscheduler"
 }
@@ -326149,7 +326142,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_tick_entry"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4a7b6afc
+  crc: 0x5d8d07bf
   type_id: 0x9b17b01e
   full_name: "__traceiter_android_rvh_tick_entry"
 }
@@ -326158,7 +326151,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_try_to_wake_up"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb3fe3e88
+  crc: 0x4bbc6543
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_try_to_wake_up"
 }
@@ -326167,7 +326160,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_try_to_wake_up_success"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x819aa461
+  crc: 0xd0e604bf
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_try_to_wake_up_success"
 }
@@ -326185,7 +326178,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_uclamp_eff_get"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xda846838
+  crc: 0xb391b2b7
   type_id: 0x9bca85c1
   full_name: "__traceiter_android_rvh_uclamp_eff_get"
 }
@@ -326239,7 +326232,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_update_deadline"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x13fbfa0c
+  crc: 0xadd23db6
   type_id: 0x9b969713
   full_name: "__traceiter_android_rvh_update_deadline"
 }
@@ -326248,7 +326241,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_update_misfit_status"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x43d8514c
+  crc: 0x6e47a2ae
   type_id: 0x9bd01b5c
   full_name: "__traceiter_android_rvh_update_misfit_status"
 }
@@ -326266,7 +326259,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_wake_up_new_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6592df26
+  crc: 0x67c8f9fe
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_rvh_wake_up_new_task"
 }
@@ -326275,7 +326268,7 @@ elf_symbol {
   name: "__traceiter_android_vh_account_process_tick_gran"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x560109b9
+  crc: 0x696c79e3
   type_id: 0x9bd1c436
   full_name: "__traceiter_android_vh_account_process_tick_gran"
 }
@@ -326833,7 +326826,7 @@ elf_symbol {
   name: "__traceiter_android_vh_copy_process"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd7f8766f
+  crc: 0xf51782c8
   type_id: 0x9bc214f0
   full_name: "__traceiter_android_vh_copy_process"
 }
@@ -326851,7 +326844,7 @@ elf_symbol {
   name: "__traceiter_android_vh_cpu_cgroup_css_alloc"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe5f053a1
+  crc: 0x9ebfa89d
   type_id: 0x9b0bea06
   full_name: "__traceiter_android_vh_cpu_cgroup_css_alloc"
 }
@@ -326860,7 +326853,7 @@ elf_symbol {
   name: "__traceiter_android_vh_cpu_cgroup_css_alloc_early"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x49278e62
+  crc: 0xca591543
   type_id: 0x9b012fb6
   full_name: "__traceiter_android_vh_cpu_cgroup_css_alloc_early"
 }
@@ -326869,7 +326862,7 @@ elf_symbol {
   name: "__traceiter_android_vh_cpu_cgroup_css_free"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7fdaac61
+  crc: 0x0d1f1c8b
   type_id: 0x9b03e163
   full_name: "__traceiter_android_vh_cpu_cgroup_css_free"
 }
@@ -327076,7 +327069,7 @@ elf_symbol {
   name: "__traceiter_android_vh_dup_task_struct"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x442ec9c4
+  crc: 0xe65325a4
   type_id: 0x9bdc9aae
   full_name: "__traceiter_android_vh_dup_task_struct"
 }
@@ -327130,7 +327123,7 @@ elf_symbol {
   name: "__traceiter_android_vh_free_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc55776d5
+  crc: 0xa7446bea
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_vh_free_task"
 }
@@ -327346,7 +327339,7 @@ elf_symbol {
   name: "__traceiter_android_vh_irqtime_account_process_tick"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x76332983
+  crc: 0x4b309855
   type_id: 0x9bd1d928
   full_name: "__traceiter_android_vh_irqtime_account_process_tick"
 }
@@ -327445,7 +327438,7 @@ elf_symbol {
   name: "__traceiter_android_vh_map_util_freq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x892636b6
+  crc: 0xdd1c4f56
   type_id: 0x9b6e7eec
   full_name: "__traceiter_android_vh_map_util_freq"
 }
@@ -327841,7 +327834,7 @@ elf_symbol {
   name: "__traceiter_android_vh_reweight_entity"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6b1b776f
+  crc: 0x2838c4f4
   type_id: 0x9b8f15f1
   full_name: "__traceiter_android_vh_reweight_entity"
 }
@@ -328039,7 +328032,7 @@ elf_symbol {
   name: "__traceiter_android_vh_sched_move_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5b20d6d3
+  crc: 0x142edb62
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_vh_sched_move_task"
 }
@@ -328057,7 +328050,7 @@ elf_symbol {
   name: "__traceiter_android_vh_sched_setaffinity_early"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc4bbd244
+  crc: 0xf600d828
   type_id: 0x9bd7d84b
   full_name: "__traceiter_android_vh_sched_setaffinity_early"
 }
@@ -328075,7 +328068,7 @@ elf_symbol {
   name: "__traceiter_android_vh_sched_stat_runtime_rt"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf5f7efa8
+  crc: 0xceaf16b3
   type_id: 0x9bff5408
   full_name: "__traceiter_android_vh_sched_stat_runtime_rt"
 }
@@ -328084,7 +328077,7 @@ elf_symbol {
   name: "__traceiter_android_vh_scheduler_tick"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x966ca541
+  crc: 0xa5edc0ee
   type_id: 0x9b17b01e
   full_name: "__traceiter_android_vh_scheduler_tick"
 }
@@ -328120,7 +328113,7 @@ elf_symbol {
   name: "__traceiter_android_vh_setscheduler_uclamp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x99d4add4
+  crc: 0x57567a2c
   type_id: 0x9bc302e5
   full_name: "__traceiter_android_vh_setscheduler_uclamp"
 }
@@ -328957,7 +328950,7 @@ elf_symbol {
   name: "__traceiter_pelt_rt_tp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9686359d
+  crc: 0xce6308ca
   type_id: 0x9b17b01e
   full_name: "__traceiter_pelt_rt_tp"
 }
@@ -328966,7 +328959,7 @@ elf_symbol {
   name: "__traceiter_pelt_se_tp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x03a6d752
+  crc: 0xbda73227
   type_id: 0x9b8f15f1
   full_name: "__traceiter_pelt_se_tp"
 }
@@ -329011,7 +329004,7 @@ elf_symbol {
   name: "__traceiter_sched_overutilized_tp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xea7c95d4
+  crc: 0xf45990ae
   type_id: 0x9b506e5c
   full_name: "__traceiter_sched_overutilized_tp"
 }
@@ -329020,7 +329013,7 @@ elf_symbol {
   name: "__traceiter_sched_stat_blocked"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe1e524df
+  crc: 0x783ef07a
   type_id: 0x9bff5408
   full_name: "__traceiter_sched_stat_blocked"
 }
@@ -329029,7 +329022,7 @@ elf_symbol {
   name: "__traceiter_sched_stat_iowait"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xec26805e
+  crc: 0xacda74bc
   type_id: 0x9bff5408
   full_name: "__traceiter_sched_stat_iowait"
 }
@@ -329038,7 +329031,7 @@ elf_symbol {
   name: "__traceiter_sched_stat_runtime"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7778108b
+  crc: 0x2d83642d
   type_id: 0x9bfd1c84
   full_name: "__traceiter_sched_stat_runtime"
 }
@@ -329047,7 +329040,7 @@ elf_symbol {
   name: "__traceiter_sched_stat_sleep"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa9926d80
+  crc: 0xff89f429
   type_id: 0x9bff5408
   full_name: "__traceiter_sched_stat_sleep"
 }
@@ -329056,7 +329049,7 @@ elf_symbol {
   name: "__traceiter_sched_stat_wait"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd567f3cb
+  crc: 0x2d91fd5d
   type_id: 0x9bff5408
   full_name: "__traceiter_sched_stat_wait"
 }
@@ -329065,7 +329058,7 @@ elf_symbol {
   name: "__traceiter_sched_switch"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7e39490c
+  crc: 0x024bd88c
   type_id: 0x9a1d6471
   full_name: "__traceiter_sched_switch"
 }
@@ -329074,7 +329067,7 @@ elf_symbol {
   name: "__traceiter_sched_util_est_cfs_tp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4b4cd2e2
+  crc: 0xe3704fde
   type_id: 0x9b94dad5
   full_name: "__traceiter_sched_util_est_cfs_tp"
 }
@@ -329083,7 +329076,7 @@ elf_symbol {
   name: "__traceiter_sched_waking"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6d75c4d3
+  crc: 0xafa095d5
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_sched_waking"
 }
@@ -333916,7 +333909,7 @@ elf_symbol {
   name: "activate_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xda06d016
+  crc: 0x538a4498
   type_id: 0x1b7558dd
   full_name: "activate_task"
 }
@@ -334633,7 +334626,7 @@ elf_symbol {
   name: "balance_push_callback"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x507b0a6b
+  crc: 0x4ea3fd17
   type_id: 0x3e2562ef
   full_name: "balance_push_callback"
 }
@@ -336692,7 +336685,7 @@ elf_symbol {
   name: "check_preempt_curr"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4cb25de8
+  crc: 0x9ecb5329
   type_id: 0x1b7558dd
   full_name: "check_preempt_curr"
 }
@@ -337976,7 +337969,7 @@ elf_symbol {
   name: "cpu_cgrp_subsys"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x31b7b073
+  crc: 0x81e8a8eb
   type_id: 0x00571446
   full_name: "cpu_cgrp_subsys"
 }
@@ -338399,7 +338392,7 @@ elf_symbol {
   name: "cpufreq_this_cpu_can_update"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7b47b679
+  crc: 0x1d6746bb
   type_id: 0xfec3d248
   full_name: "cpufreq_this_cpu_can_update"
 }
@@ -338543,7 +338536,7 @@ elf_symbol {
   name: "cpupri_find_fitness"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd3eeefe8
+  crc: 0x38bd708e
   type_id: 0x96c4b63c
   full_name: "cpupri_find_fitness"
 }
@@ -339705,7 +339698,7 @@ elf_symbol {
   name: "deactivate_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6c8852fa
+  crc: 0x455a8ffd
   type_id: 0x1b7558dd
   full_name: "deactivate_task"
 }
@@ -344562,7 +344555,7 @@ elf_symbol {
   name: "double_rq_lock"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6b5ae078
+  crc: 0x5791561e
   type_id: 0x1ba0fc33
   full_name: "double_rq_lock"
 }
@@ -351731,7 +351724,7 @@ elf_symbol {
   name: "get_wchan"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1017b8b9
+  crc: 0xcc9b33f8
   type_id: 0x36eaa726
   full_name: "get_wchan"
 }
@@ -357123,7 +357116,7 @@ elf_symbol {
   name: "kick_process"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf7b3c182
+  crc: 0x950ca2cf
   type_id: 0x17de3be6
   full_name: "kick_process"
 }
@@ -359595,7 +359588,7 @@ elf_symbol {
   name: "migrate_swap"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc999d0fd
+  crc: 0x5cd69fea
   type_id: 0x9aaabb4a
   full_name: "migrate_swap"
 }
@@ -365685,7 +365678,7 @@ elf_symbol {
   name: "pick_highest_pushable_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x83a34a9b
+  crc: 0xb7595849
   type_id: 0x7151826e
   full_name: "pick_highest_pushable_task"
 }
@@ -365694,7 +365687,7 @@ elf_symbol {
   name: "pick_migrate_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe764e566
+  crc: 0x226e3f14
   type_id: 0x70cd0122
   full_name: "pick_migrate_task"
 }
@@ -367828,7 +367821,7 @@ elf_symbol {
   name: "raw_spin_rq_lock_nested"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4ae3525c
+  crc: 0x6d1e7d86
   type_id: 0x1a847502
   full_name: "raw_spin_rq_lock_nested"
 }
@@ -367837,7 +367830,7 @@ elf_symbol {
   name: "raw_spin_rq_unlock"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3436a72f
+  crc: 0xeca023e7
   type_id: 0x1b18f64e
   full_name: "raw_spin_rq_unlock"
 }
@@ -369394,7 +369387,7 @@ elf_symbol {
   name: "resched_curr"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0217bf7c
+  crc: 0x7612b7ff
   type_id: 0x1b18f64e
   full_name: "resched_curr"
 }
@@ -369791,7 +369784,7 @@ elf_symbol {
   name: "root_task_group"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x51232e38
+  crc: 0x8dcdab95
   type_id: 0x84d533ac
   full_name: "root_task_group"
 }
@@ -370484,7 +370477,7 @@ elf_symbol {
   name: "runqueues"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x6573bdcf
+  crc: 0x42f25486
   type_id: 0x924a9b47
   full_name: "runqueues"
 }
@@ -370646,7 +370639,7 @@ elf_symbol {
   name: "sched_set_fifo"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf88939fe
+  crc: 0x68ff9d83
   type_id: 0x17de3be6
   full_name: "sched_set_fifo"
 }
@@ -370655,7 +370648,7 @@ elf_symbol {
   name: "sched_set_fifo_low"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x21d02af1
+  crc: 0xbe24ab96
   type_id: 0x17de3be6
   full_name: "sched_set_fifo_low"
 }
@@ -370664,7 +370657,7 @@ elf_symbol {
   name: "sched_set_normal"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4922b3b6
+  crc: 0xd6ce39a9
   type_id: 0x1642b8aa
   full_name: "sched_set_normal"
 }
@@ -370673,7 +370666,7 @@ elf_symbol {
   name: "sched_setattr"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1cf5ee0b
+  crc: 0xaa12b711
   type_id: 0x9a2476b0
   full_name: "sched_setattr"
 }
@@ -370682,7 +370675,7 @@ elf_symbol {
   name: "sched_setattr_nocheck"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd7264fa3
+  crc: 0xfea6d538
   type_id: 0x9a2476b0
   full_name: "sched_setattr_nocheck"
 }
@@ -370691,7 +370684,7 @@ elf_symbol {
   name: "sched_setscheduler"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe586c729
+  crc: 0x49e6586f
   type_id: 0x9b56b28e
   full_name: "sched_setscheduler"
 }
@@ -370700,7 +370693,7 @@ elf_symbol {
   name: "sched_setscheduler_nocheck"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3ed8874e
+  crc: 0x96cb9082
   type_id: 0x9b56b28e
   full_name: "sched_setscheduler_nocheck"
 }
@@ -370709,7 +370702,7 @@ elf_symbol {
   name: "sched_show_task"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x22a20471
+  crc: 0x0eed49ae
   type_id: 0x17de3be6
   full_name: "sched_show_task"
 }
@@ -371699,7 +371692,7 @@ elf_symbol {
   name: "select_fallback_rq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x50e34adc
+  crc: 0x1fdab4f6
   type_id: 0x843cb143
   full_name: "select_fallback_rq"
 }
@@ -372176,7 +372169,7 @@ elf_symbol {
   name: "set_cpus_allowed_ptr"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6f6e99f7
+  crc: 0x92dff888
   type_id: 0x9a02b25a
   full_name: "set_cpus_allowed_ptr"
 }
@@ -372212,7 +372205,7 @@ elf_symbol {
   name: "set_next_entity"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4f9160c6
+  crc: 0x4af5581d
   type_id: 0x130ef56d
   full_name: "set_next_entity"
 }
@@ -372257,7 +372250,7 @@ elf_symbol {
   name: "set_task_cpu"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4c8aab45
+  crc: 0x1a152c35
   type_id: 0x16c82e7e
   full_name: "set_task_cpu"
 }
@@ -372266,7 +372259,7 @@ elf_symbol {
   name: "set_user_nice"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xee788bf4
+  crc: 0xae1baeb9
   type_id: 0x142e0390
   full_name: "set_user_nice"
 }
@@ -377220,7 +377213,7 @@ elf_symbol {
   name: "task_cputime_adjusted"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6a9fcc04
+  crc: 0x037eaacb
   type_id: 0x176dde0e
   full_name: "task_cputime_adjusted"
 }
@@ -377229,7 +377222,7 @@ elf_symbol {
   name: "task_rq_lock"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2c2c6d9d
+  crc: 0x4700b3b6
   type_id: 0x8d7ecefa
   full_name: "task_rq_lock"
 }
@@ -377238,7 +377231,7 @@ elf_symbol {
   name: "task_sched_runtime"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x653e6411
+  crc: 0x03e912cb
   type_id: 0x176dd804
   full_name: "task_sched_runtime"
 }
@@ -377823,7 +377816,7 @@ elf_symbol {
   name: "thread_group_cputime_adjusted"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc19ef1e5
+  crc: 0xe936ce3e
   type_id: 0x176dde0e
   full_name: "thread_group_cputime_adjusted"
 }
@@ -379632,7 +379625,7 @@ elf_symbol {
   name: "uclamp_eff_value"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf293218b
+  crc: 0x7c7b7faa
   type_id: 0x37f8837e
   full_name: "uclamp_eff_value"
 }
@@ -380740,7 +380733,7 @@ elf_symbol {
   name: "update_rq_clock"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x57b5ef19
+  crc: 0xac864e12
   type_id: 0x1b18f64e
   full_name: "update_rq_clock"
 }
@@ -385441,7 +385434,7 @@ elf_symbol {
   name: "wake_up_process"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2bf52d64
+  crc: 0xb4d7c596
   type_id: 0x9ac6895a
   full_name: "wake_up_process"
 }
@@ -385450,7 +385443,7 @@ elf_symbol {
   name: "wake_up_state"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6fe48735
+  crc: 0x677f66cc
   type_id: 0x9bd09cc2
   full_name: "wake_up_state"
 }
