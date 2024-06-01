@@ -65,9 +65,11 @@
   __traceiter_android_vh_anon_vma_name_recog
   __traceiter_android_vh_restore_mm_flags
   __traceiter_android_vh_update_vma_flags
+  __traceiter_android_vh_thp_vma_allowable_orders
   __tracepoint_android_vh_anon_vma_name_recog
   __tracepoint_android_vh_restore_mm_flags
   __tracepoint_android_vh_update_vma_flags
+  __tracepoint_android_vh_thp_vma_allowable_orders
 
 #required by metis.ko module
   __traceiter_android_vh_rwsem_read_wait_start
