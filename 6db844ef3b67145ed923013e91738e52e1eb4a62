@@ -33,6 +33,24 @@
       "message": "Please submit upstream first.",
       "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "765cd191_f6c67ce3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-06-01T18:33:49Z",
+      "side": 1,
+      "message": "This is a fix for a patch FROMLIST that is still being discussed upstream: https://lore.kernel.org/lkml/20240530104653.1234004-1-qyousef@layalina.io/",
+      "parentUuid": "63e62865_f1817bd1",
+      "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
