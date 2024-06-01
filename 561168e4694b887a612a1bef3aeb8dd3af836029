@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079904159",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3109759?revision\u003d1",
+      "key": {
+        "uuid": "3f0296ec_217f9be8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-01T09:25:03Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android13-5.15.\nBase branch change: [3103100](https://android-review.googlesource.com/c/3103100).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_page_migrating);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_urb_suitable_bypass);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fe1617 UPSTREAM: bpf: Reject variable offset alu on PTR_TO_FLOW_KEY)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_entry);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_oem_binder_struct);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_buffer_release);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_set_flag);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_clear_flag);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_init);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_tsk_init);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_tsk_free);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_start);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_end);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_add_tsk);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_ticks);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_is_task_waiting_on_io);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_start);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_end);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_start);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_end);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_downgrade_wake_finish);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tmpfile_handle_op);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tmpfile_create);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_secctx);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_create_check_inode);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_send_open);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_spf);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_init_queue);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (122377 ANDROID: vendor_hooks: add vendor hooks for init mmc queue)\n      /*\n       * For type visibility\n       */\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "561168e4694b887a612a1bef3aeb8dd3af836029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079904159",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3109759?revision\u003d1",
+      "key": {
+        "uuid": "7e740251_2cf4ad60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-01T09:25:03Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/12237719e3cb47a1918cf542319e5e9b3ab2df2a).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_page_migrating);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_urb_suitable_bypass);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fe1617 UPSTREAM: bpf: Reject variable offset alu on PTR_TO_FLOW_KEY)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_entry);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_oem_binder_struct);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_buffer_release);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_set_flag);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_clear_flag);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_init);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_tsk_init);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_tsk_free);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_start);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_end);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_add_tsk);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_ticks);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_is_task_waiting_on_io);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_start);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_end);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_start);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_end);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_downgrade_wake_finish);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tmpfile_handle_op);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tmpfile_create);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_secctx);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_create_check_inode);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_send_open);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_spf);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_init_queue);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (122377 ANDROID: vendor_hooks: add vendor hooks for init mmc queue)\n      /*\n       * For type visibility\n       */\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "561168e4694b887a612a1bef3aeb8dd3af836029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
