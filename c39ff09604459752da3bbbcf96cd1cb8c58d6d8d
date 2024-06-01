@@ -88,6 +88,24 @@
       "parentUuid": "a619a3a1_5d17d2a3",
       "revId": "c39ff09604459752da3bbbcf96cd1cb8c58d6d8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c4a7f8_ae213594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-06-01T01:43:41Z",
+      "side": 1,
+      "message": "From the previous discussion it seems like there is no other alternative to using pageflags. Current configs leave enough unused bits that we can reserve them but in the future that might not be the case, so Vivo should think about changing their features not to use pageflags.",
+      "parentUuid": "b3c8d480_331af941",
+      "revId": "c39ff09604459752da3bbbcf96cd1cb8c58d6d8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
