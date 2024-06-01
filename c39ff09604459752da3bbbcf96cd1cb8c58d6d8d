@@ -70,6 +70,24 @@
       "parentUuid": "96d21540_fee4f640",
       "revId": "c39ff09604459752da3bbbcf96cd1cb8c58d6d8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c8d480_331af941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-06-01T01:02:20Z",
+      "side": 1,
+      "message": "Memory allocation profiling will use 16 most likely and the number of available flag bits always depends on config options. Currently this does not pose immediate problem but as I said before, page flags are valuable resource and should be used only when there is no other option.",
+      "parentUuid": "a619a3a1_5d17d2a3",
+      "revId": "c39ff09604459752da3bbbcf96cd1cb8c58d6d8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
