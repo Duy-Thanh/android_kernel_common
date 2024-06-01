@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079907272",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3110739?revision\u003d1",
+      "key": {
+        "uuid": "15ea603b_c748ec4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-01T11:19:42Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android13-5.15.\nBase branch change: [3108923](https://android-review.googlesource.com/c/3108923).\n\n```\n      ## android/abi_gki_aarch64_vivo ##\n     @@\n        __traceiter_android_vh_mmc_blk_mq_rw_recovery\n        __traceiter_android_vh_mmc_blk_reset\n        __traceiter_android_vh_mmc_gpio_cd_irqt\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fe1617 UPSTREAM: bpf: Reject variable offset alu on PTR_TO_FLOW_KEY)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +  __traceiter_android_vh_mmc_init_queue\n    -   __traceiter_android_vh_oom_swapmem_gather_finish\n    -   __traceiter_android_vh_oom_swapmem_gather_init\n    ++  __traceiter_android_vh_oom_swapmem_gather_finish\n    ++  __traceiter_android_vh_oom_swapmem_gather_init\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (ffc9fa ANDROID: GKI: Update vendor symbol list for vivo)\n        __traceiter_android_vh_printk_hotplug\n    +   __traceiter_android_vh_rproc_recovery\n    +   __traceiter_android_vh_scheduler_tick\n     @@\n        __tracepoint_android_vh_mmc_blk_mq_rw_recovery\n        __tracepoint_android_vh_mmc_blk_reset\n        __tracepoint_android_vh_mmc_gpio_cd_irqt\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fe1617 UPSTREAM: bpf: Reject variable offset alu on PTR_TO_FLOW_KEY)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +  __tracepoint_android_vh_mmc_init_queue\n    -   __tracepoint_android_vh_oom_swapmem_gather_finish\n    -   __tracepoint_android_vh_oom_swapmem_gather_init\n    ++  __tracepoint_android_vh_oom_swapmem_gather_finish\n    ++  __tracepoint_android_vh_oom_swapmem_gather_init\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (ffc9fa ANDROID: GKI: Update vendor symbol list for vivo)\n        __tracepoint_android_vh_printk_hotplug\n    +   __tracepoint_android_vh_rproc_recovery\n    +   __tracepoint_android_vh_scheduler_tick\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "465ca017f1a6398e5585f9f572c339d0ba7f2fd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079907272",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3110739?revision\u003d1",
+      "key": {
+        "uuid": "3ca18f7b_eb1cd735",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-01T11:19:42Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/ffc9fa97afc9490912c0247bb2e5ade9e1c14cf3).\n\n```\n      ## android/abi_gki_aarch64_vivo ##\n     @@\n        __traceiter_android_vh_mmc_blk_mq_rw_recovery\n        __traceiter_android_vh_mmc_blk_reset\n        __traceiter_android_vh_mmc_gpio_cd_irqt\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fe1617 UPSTREAM: bpf: Reject variable offset alu on PTR_TO_FLOW_KEY)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +  __traceiter_android_vh_mmc_init_queue\n    -   __traceiter_android_vh_oom_swapmem_gather_finish\n    -   __traceiter_android_vh_oom_swapmem_gather_init\n    ++  __traceiter_android_vh_oom_swapmem_gather_finish\n    ++  __traceiter_android_vh_oom_swapmem_gather_init\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (ffc9fa ANDROID: GKI: Update vendor symbol list for vivo)\n        __traceiter_android_vh_printk_hotplug\n    +   __traceiter_android_vh_rproc_recovery\n    +   __traceiter_android_vh_scheduler_tick\n     @@\n        __tracepoint_android_vh_mmc_blk_mq_rw_recovery\n        __tracepoint_android_vh_mmc_blk_reset\n        __tracepoint_android_vh_mmc_gpio_cd_irqt\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fe1617 UPSTREAM: bpf: Reject variable offset alu on PTR_TO_FLOW_KEY)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +  __tracepoint_android_vh_mmc_init_queue\n    -   __tracepoint_android_vh_oom_swapmem_gather_finish\n    -   __tracepoint_android_vh_oom_swapmem_gather_init\n    ++  __tracepoint_android_vh_oom_swapmem_gather_finish\n    ++  __tracepoint_android_vh_oom_swapmem_gather_init\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (ffc9fa ANDROID: GKI: Update vendor symbol list for vivo)\n        __tracepoint_android_vh_printk_hotplug\n    +   __tracepoint_android_vh_rproc_recovery\n    +   __tracepoint_android_vh_scheduler_tick\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "465ca017f1a6398e5585f9f572c339d0ba7f2fd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
