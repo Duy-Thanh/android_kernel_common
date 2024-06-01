@@ -486,7 +486,10 @@ static unsigned int brcm_avs_cpufreq_get(unsigned int cpu)
 	if (!policy)
 		return 0;
 	priv = policy->driver_data;
+<<<<<<< HEAD   (e9b3e4 Merge branch 'android12-5.10' into branch 'android12-5.10-lt)
 
+=======
+>>>>>>> BRANCH (e2e4e7 Linux 5.10.215)
 	cpufreq_cpu_put(policy);
 
 	return brcm_avs_get_frequency(priv->base);
