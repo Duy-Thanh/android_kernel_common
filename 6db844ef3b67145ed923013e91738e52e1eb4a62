@@ -51,6 +51,24 @@
       "parentUuid": "63e62865_f1817bd1",
       "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb08005e_83aed91a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-02T10:07:23Z",
+      "side": 1,
+      "message": "How about reverting the original `FROMLIST` change that caused this instead?",
+      "parentUuid": "765cd191_f6c67ce3",
+      "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
