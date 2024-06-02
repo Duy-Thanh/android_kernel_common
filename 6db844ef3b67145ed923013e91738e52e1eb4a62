@@ -69,6 +69,24 @@
       "parentUuid": "765cd191_f6c67ce3",
       "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90e7037_4706a76d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-06-02T17:06:26Z",
+      "side": 1,
+      "message": "What about the KMI freeze?",
+      "parentUuid": "eb08005e_83aed91a",
+      "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
