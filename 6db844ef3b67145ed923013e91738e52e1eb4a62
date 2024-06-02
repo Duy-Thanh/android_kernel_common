@@ -87,6 +87,24 @@
       "parentUuid": "eb08005e_83aed91a",
       "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e1df328_579ca099",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-02T20:12:41Z",
+      "side": 1,
+      "message": "The KMI won\u0027t be frozen for this branch until 2024/06/14. You can find the dates here: go/gki-whatsnew#2024-feb-14",
+      "parentUuid": "f90e7037_4706a76d",
+      "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
