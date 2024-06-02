@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7847bfca_41c36657",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-02T10:55:21Z",
+      "side": 1,
+      "message": "use kernel types please `u32`.",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 15
+      },
+      "revId": "a7a6adf1d6e867d882fb588c19d9b6bd66478993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d29d98_4a33bc37",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-02T10:55:21Z",
+      "side": 1,
+      "message": "how is this going to work with multiple instances of binder in the same system at the same time?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "a7a6adf1d6e867d882fb588c19d9b6bd66478993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d6119c_2a7d45d3",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-02T10:55:21Z",
+      "side": 1,
+      "message": "ftrace is your friend 😊",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 8
+      },
+      "revId": "a7a6adf1d6e867d882fb588c19d9b6bd66478993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a201112_a5d68acd",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-02T10:55:21Z",
+      "side": 1,
+      "message": "nit, `binder_init_netlink()`, please put `binder` as the prefix of all global symbols/functions.",
+      "range": {
+        "startLine": 16,
+        "startChar": 4,
+        "endLine": 16,
+        "endChar": 23
+      },
+      "revId": "a7a6adf1d6e867d882fb588c19d9b6bd66478993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8383a658_62cfc827",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-02T10:55:21Z",
+      "side": 1,
+      "message": "what namespace are these pids in?",
+      "range": {
+        "startLine": 606,
+        "startChar": 27,
+        "endLine": 606,
+        "endChar": 30
+      },
+      "revId": "a7a6adf1d6e867d882fb588c19d9b6bd66478993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157794c7_42b81718",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-02T10:55:21Z",
+      "side": 1,
+      "message": "uapi enums should have explicit values in order to work with all compilers.",
+      "range": {
+        "startLine": 617,
+        "startChar": 1,
+        "endLine": 617,
+        "endChar": 24
+      },
+      "revId": "a7a6adf1d6e867d882fb588c19d9b6bd66478993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
