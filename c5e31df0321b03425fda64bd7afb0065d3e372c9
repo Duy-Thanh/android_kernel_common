@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe8e29dc_8fd8c7c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-06-03T16:56:44Z",
+      "side": 1,
+      "message": "I don\u0027t think there should be any rush to FROMLIST this change. Let me ask Sumit if he\u0027ll pick this up, but I don\u0027t think we absolutely need this in 15.",
+      "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
