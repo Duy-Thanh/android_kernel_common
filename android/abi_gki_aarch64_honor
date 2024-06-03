@@ -36,6 +36,7 @@
  arch_vma_name
  __pmd_trans_huge_lock
  anon_vma_name
+ pm_wakeup_irq
  vm_normal_page
  walk_page_range
  pmd_clear_bad
