@@ -3202,6 +3202,29 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 		goto free_swap_zswap;
 	}
 
+	if (swap_flags & SWAP_FLAG_MTHP_RESERVE) {
+		int order = (swap_flags & SWAP_FLAG_MTHP_RESERVE_ORDER_MASK)
+				>> SWAP_FLAG_MTHP_RESERVE_ORDER_SHIFT;
+		int percent = (swap_flags & SWAP_FLAG_MTHP_RESERVE_PERCENT_MASK)
+				>> SWAP_FLAG_MTHP_RESERVE_PERCENT_SHIFT;
+
+		if (order < 1 || order >= PMD_SHIFT) {
+			pr_err("swapon: SWAP RESERVE: %s: invalid mthp_reserve_order = %d", name->name, order);
+			return -EINVAL;
+		}
+
+		if (percent < 1 || percent > 99) {
+			pr_err("swapon: %s: invalid mthp_reserve_percent = %d", name->name, percent);
+			return -EINVAL;
+		}
+
+		p->mthp_reserve_order = order;
+		p->mthp_reserve_percent = percent;
+
+		pr_info("swapon: %s: mthp_reserve_order = %u", name->name, p->mthp_reserve_order);
+		pr_info("swapon: %s: mthp_reserve_percent = %u", name->name, p->mthp_reserve_percent);
+	}
+
 	mutex_lock(&swapon_mutex);
 	prio = -1;
 	if (swap_flags & SWAP_FLAG_PREFER)

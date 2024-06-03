@@ -29,9 +29,21 @@ struct pagevec;
 #define SWAP_FLAG_DISCARD_ONCE	0x20000 /* discard swap area at swapon-time */
 #define SWAP_FLAG_DISCARD_PAGES 0x40000 /* discard page-clusters after use */
 
+/* set if swap cluters reserve order and percent specified */
+#define SWAP_FLAG_MTHP_RESERVE			0x80000
+/* order to reserve: Orders 1 to min(PMD_SHIFT-1, 24) are valid */
+#define SWAP_FLAG_MTHP_RESERVE_ORDER_MASK	0x01F00000
+#define SWAP_FLAG_MTHP_RESERVE_ORDER_SHIFT	20
+/* percentage of swap clusters to reserve, 1 to 99 are valid */
+#define SWAP_FLAG_MTHP_RESERVE_PERCENT_MASK	0xFE000000
+#define SWAP_FLAG_MTHP_RESERVE_PERCENT_SHIFT	25
+
 #define SWAP_FLAGS_VALID	(SWAP_FLAG_PRIO_MASK | SWAP_FLAG_PREFER | \
 				 SWAP_FLAG_DISCARD | SWAP_FLAG_DISCARD_ONCE | \
-				 SWAP_FLAG_DISCARD_PAGES)
+				 SWAP_FLAG_DISCARD_PAGES | \
+				 SWAP_FLAG_MTHP_RESERVE | \
+				 SWAP_FLAG_MTHP_RESERVE_ORDER_MASK | \
+				 SWAP_FLAG_MTHP_RESERVE_PERCENT_MASK)
 #define SWAP_BATCH 64
 
 static inline int current_is_kswapd(void)
@@ -320,6 +332,10 @@ struct swap_info_struct {
 					 * protect swap count continuation page
 					 * list.
 					 */
+
+	unsigned int mthp_reserve_order;   /* Order of clusters to reserve for large folios */
+	unsigned int mthp_reserve_percent; /* Percent of clusters to reserve for large folios */
+
 	struct work_struct discard_work; /* discard worker */
 	struct swap_cluster_list discard_clusters; /* discard clusters list */
 	struct plist_node avail_lists[]; /*
