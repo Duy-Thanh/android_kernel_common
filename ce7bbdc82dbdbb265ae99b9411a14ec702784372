@@ -79,6 +79,46 @@
       "tag": "",
       "revId": "ce7bbdc82dbdbb265ae99b9411a14ec702784372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079907234",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3109759?revision\u003d4",
+      "key": {
+        "uuid": "4fbbabe4_db88691c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-03T22:01:44Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android13-5.15.\nBase branch change: [3103100](https://android-review.googlesource.com/c/3103100).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_page_migrating);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_urb_suitable_bypass);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_init_queue);\n      /*\n       * For type visibility\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "ce7bbdc82dbdbb265ae99b9411a14ec702784372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079907234",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3109759?revision\u003d4",
+      "key": {
+        "uuid": "c125c21b_ba94f7f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-03T22:01:44Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/12237719e3cb47a1918cf542319e5e9b3ab2df2a).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_page_migrating);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_urb_suitable_bypass);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_init_queue);\n      /*\n       * For type visibility\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "ce7bbdc82dbdbb265ae99b9411a14ec702784372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
