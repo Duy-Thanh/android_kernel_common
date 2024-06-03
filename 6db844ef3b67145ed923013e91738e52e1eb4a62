@@ -105,6 +105,24 @@
       "parentUuid": "f90e7037_4706a76d",
       "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b8d022_7e9c2317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-03T08:22:30Z",
+      "side": 1,
+      "message": "Also, the revert can done in an abi-safe way pretty easily.",
+      "parentUuid": "5e1df328_579ca099",
+      "revId": "6db844ef3b67145ed923013e91738e52e1eb4a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
