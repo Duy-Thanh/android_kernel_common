@@ -52,6 +52,24 @@
       "parentUuid": "fb809fce_6c2b28b8",
       "revId": "767bfeb30cb5fa3c0de44ba0fbe9c47f6f91cd56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c360672_680920d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-03T15:09:43Z",
+      "side": 1,
+      "message": "Yes, that is the preferred method. We\u0027ll revert now (in an ABI-safe way) and will reapply a new version of your patch that includes the fix. Since we are retaining the cfs_rq-\u003edecayed addition there is really no specific timeline impacting the reland.",
+      "parentUuid": "6189f131_6fd1342a",
+      "revId": "767bfeb30cb5fa3c0de44ba0fbe9c47f6f91cd56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
