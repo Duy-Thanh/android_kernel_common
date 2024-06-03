@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f36407cc_76cf3a9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2032918
+      },
+      "writtenOn": "2024-06-03T08:02:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde1bbbc_a339af5b",
+      "revId": "c6204dbb72b9412e6f4373267e497bd402e81086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88ed9701_39575c04",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-28T17:02:15Z",
       "side": 1,
       "message": "why do you need two hooks here? Please drop one of them.",
+      "revId": "c6204dbb72b9412e6f4373267e497bd402e81086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a9afa8_76f1f463",
+        "filename": "kernel/module/strict_rwx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2032918
+      },
+      "writtenOn": "2024-06-03T08:02:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9740b0ea_7d115df0",
       "revId": "c6204dbb72b9412e6f4373267e497bd402e81086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
