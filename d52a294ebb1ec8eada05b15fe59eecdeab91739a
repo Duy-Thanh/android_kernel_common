@@ -70,6 +70,24 @@
       "parentUuid": "80af58f3_f501b5de",
       "revId": "d52a294ebb1ec8eada05b15fe59eecdeab91739a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd44440_b62d65bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3427375
+      },
+      "writtenOn": "2024-06-03T04:08:12Z",
+      "side": 1,
+      "message": "yeah Todd, want to merge only this patch and skip the others.",
+      "parentUuid": "f080cccf_6e59605b",
+      "revId": "d52a294ebb1ec8eada05b15fe59eecdeab91739a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
