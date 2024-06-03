@@ -16,6 +16,23 @@
       "message": "I don\u0027t think there should be any rush to FROMLIST this change. Let me ask Sumit if he\u0027ll pick this up, but I don\u0027t think we absolutely need this in 15.",
       "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "421f65ca_c6549050",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-03T17:26:42Z",
+      "side": 1,
+      "message": "Dropped the topic setting so this can be presubmit tested on its own.",
+      "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
