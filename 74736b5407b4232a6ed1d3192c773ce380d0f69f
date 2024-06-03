@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0615cbf5_9bfb6713",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-03T05:59:20Z",
+      "side": 1,
+      "message": "Fix issues mentioned at https://r.android.com/3110338 and CC Greg.",
+      "revId": "74736b5407b4232a6ed1d3192c773ce380d0f69f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
