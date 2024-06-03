@@ -33,6 +33,24 @@
       "message": "Dropped the topic setting so this can be presubmit tested on its own.",
       "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffecd1d1_1ab35c84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-03T17:29:53Z",
+      "side": 1,
+      "message": "I guess it is a little bit of a moot point for android15-6.6 (Hailong, please correct this if it is wrong, it is a nice cleanup for upstream, but does it have impact that you actually need?). \n\nI\u0027m going to still run the presubmit testing just to see if the KABI gets impacted by marking the DMA_HEAP_VALID_HEAP_FLAGS value explicitly as a long long.",
+      "parentUuid": "fe8e29dc_8fd8c7c5",
+      "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
