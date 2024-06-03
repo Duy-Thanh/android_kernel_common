@@ -3029,6 +3029,25 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 	if (IS_ERR(p))
 		return PTR_ERR(p);
 
+	if (swap_flags & SWAP_FLAG_MTHP_RESERVE) {
+		int order = (swap_flags & SWAP_FLAG_MTHP_RESERVE_ORDER_MASK)
+				>> SWAP_FLAG_MTHP_RESERVE_ORDER_SHIFT;
+		int percent = (swap_flags & SWAP_FLAG_MTHP_RESERVE_PERCENT_MASK)
+				>> SWAP_FLAG_MTHP_RESERVE_PERCENT_SHIFT;
+
+		if (order < 1 || order >= PMD_SHIFT)
+			return -EINVAL;
+
+		if (percent < 1 || percent > 99)
+			return -EINVAL;
+
+		p->mthp_reserve_order = order;
+		p->mthp_reserve_order = percent;
+
+		pr_err("DEBUG: SWAP RESERVE: swapinfo: reserve order = %u", p->mthp_reserve_order);
+		pr_err("DEBUG: SWAP RESERVE: swapinfo: reserve percent = %u", p->mthp_reserve_percent);
+	}
+
 	INIT_WORK(&p->discard_work, swap_discard_work);
 
 	name = getname(specialfile);
