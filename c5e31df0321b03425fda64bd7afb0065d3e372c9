@@ -51,6 +51,24 @@
       "parentUuid": "fe8e29dc_8fd8c7c5",
       "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4c5cf9_35c38d48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-03T17:37:39Z",
+      "side": 1,
+      "message": "Actually, we need a flags from userspace to kernelspace to know the usage of the dma-buf on dma-buf allocation. Do you have better suggetsion when the KMI is about to freeze ? 😄",
+      "parentUuid": "fe8e29dc_8fd8c7c5",
+      "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
