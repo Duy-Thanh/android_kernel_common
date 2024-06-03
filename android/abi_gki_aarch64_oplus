@@ -45,6 +45,9 @@
   __generic_file_fsync
   get_wchan
   gov_attr_set_get
+  gnet_stats_add_queue
+  gnet_stats_copy_basic
+  gnet_stats_copy_queue
   gpiod_to_chip
   have_governor_per_policy
   i2c_smbus_read_word_data
@@ -86,6 +89,7 @@
   memcg_kmem_online_key
   neigh_xmit
   netif_receive_skb_core
+  __netif_schedule
   nf_ct_attach
   nf_ct_delete
   nf_register_net_hook
@@ -102,12 +106,14 @@
   nop_mnt_idmap
   notify_change
   nr_running
+  noop_qdisc
   of_css
   osq_lock
   osq_unlock
   override_creds
   __page_file_index
   path_get
+  pfifo_qdisc_ops
   platform_device_add
   platform_device_alloc
   platform_device_put
@@ -117,8 +123,18 @@
   prepare_to_wait_exclusive
   __printk_ratelimit
   proc_symlink
+  psched_ratecfg_precompute
   public_key_verify_signature
   put_pages_list
+  __qdisc_calculate_pkt_len
+  qdisc_create_dflt
+  qdisc_hash_add
+  qdisc_put
+  qdisc_reset
+  qdisc_tree_reduce_backlog
+  qdisc_watchdog_cancel
+  qdisc_watchdog_init
+  qdisc_watchdog_schedule_range_ns
   radix_tree_lookup_slot
   radix_tree_replace_slot
   _raw_write_trylock
@@ -477,6 +493,9 @@
   wait_for_completion_killable_timeout
   wakeup_source_remove
   wake_up_state
+  tcf_block_get
+  tcf_block_put
+  tcf_classify
   wq_worker_comm
   xt_register_match
   xt_unregister_match
