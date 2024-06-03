@@ -34,6 +34,24 @@
       "parentUuid": "e65cbab3_451a1bdf",
       "revId": "767bfeb30cb5fa3c0de44ba0fbe9c47f6f91cd56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6189f131_6fd1342a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-06-03T14:59:30Z",
+      "side": 1,
+      "message": "IIUC the preferred method to handle this then is to do a revert and apply a new FROMLIST patch, correct? What is the time frame I have to reland this?",
+      "parentUuid": "fb809fce_6c2b28b8",
+      "revId": "767bfeb30cb5fa3c0de44ba0fbe9c47f6f91cd56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
