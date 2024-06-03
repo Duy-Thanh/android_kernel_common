@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5257b57_2d988a95",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5239,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-03T11:02:11Z",
+      "side": 1,
+      "message": "```suggestion\n\t\t/* Sugov just issued an update, don\u0027t be too aggressive. */\n```",
+      "revId": "0c538cf810853e503685c7ac369f26ffdc513cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
