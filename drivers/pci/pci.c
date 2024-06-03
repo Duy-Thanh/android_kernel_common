@@ -31,7 +31,11 @@
 #include <linux/vmalloc.h>
 #include <asm/dma.h>
 #include <linux/aer.h>
+<<<<<<< HEAD   (d3c4d8 Merge d2a970972800 ("btrfs: fix off-by-one chunk length calc)
 #include <trace/hooks/pci.h>
+=======
+#include <linux/bitfield.h>
+>>>>>>> BRANCH (be7f39 PCI/DPC: Quirk PIO log size for Intel Raptor Lake Root Ports)
 #include "pci.h"
 
 DEFINE_MUTEX(pci_slot_mutex);
@@ -4576,13 +4580,10 @@ EXPORT_SYMBOL(pci_wait_for_pending_transaction);
  */
 bool pcie_has_flr(struct pci_dev *dev)
 {
-	u32 cap;
-
 	if (dev->dev_flags & PCI_DEV_FLAGS_NO_FLR_RESET)
 		return false;
 
-	pcie_capability_read_dword(dev, PCI_EXP_DEVCAP, &cap);
-	return cap & PCI_EXP_DEVCAP_FLR;
+	return FIELD_GET(PCI_EXP_DEVCAP_FLR, dev->devcap) == 1;
 }
 EXPORT_SYMBOL_GPL(pcie_has_flr);
 
