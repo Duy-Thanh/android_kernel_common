@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ab902a8_ef6ae0ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-06-03T15:09:46Z",
+      "side": 1,
+      "message": "We need to confirm that all of these mem-protect\u0027d allocations are free()\u0027d synchronously w/ VM teardown, otherwise we have a race with host reboot where the PSCI MEM_PROTECT count could remain elevated by the time we actually reset.",
+      "revId": "9f7013e8a5dcd3eafd9054f11f5c9204493a2f03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
