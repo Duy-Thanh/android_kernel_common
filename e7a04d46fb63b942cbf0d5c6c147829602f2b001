@@ -16,6 +16,24 @@
       "message": "The upstream discussion seems inconclusive. Is this fix going to make it as is?",
       "revId": "e7a04d46fb63b942cbf0d5c6c147829602f2b001",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac2acda_7cee0fca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-06-03T16:08:20Z",
+      "side": 1,
+      "message": "I don\u0027t think so. Tejun said he doesn\u0027t really want to mess with /proc/cgroups and wants to deprecate it with cgroups v1. The suggestion for a replacement is a new file in the v2 hierarchy, but I think that will change the KMI and wouldn\u0027t be ready by the freeze next week.\nThe reason I want this now is because if I add the ability to limit the depth of controller enablement in Android, then the /proc/cgroups output won\u0027t be useful at all for counting cgroups with memcg+io enabled or finding zombies.",
+      "parentUuid": "1f499ec1_a5dc8eda",
+      "revId": "e7a04d46fb63b942cbf0d5c6c147829602f2b001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
