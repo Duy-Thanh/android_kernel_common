@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e65cbab3_451a1bdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-03T08:31:37Z",
+      "side": 1,
+      "message": "Why not just do the revert in an abi-safe way?",
+      "revId": "767bfeb30cb5fa3c0de44ba0fbe9c47f6f91cd56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
