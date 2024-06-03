@@ -207,6 +207,8 @@ void madvise_vma_pad_pages(struct vm_area_struct *vma,
 			   unsigned long start, unsigned long end)
 {
 	unsigned long nr_pad_pages;
+	struct vm_area_struct stale_vma;
+	struct mm_struct *mm = vma->vm_mm;
 
 	if (!is_pgsize_migration_enabled())
 		return;
@@ -235,7 +237,29 @@ void madvise_vma_pad_pages(struct vm_area_struct *vma,
 	if (!linker_ctx())
 		return;
 
+	/*
+	 * The mmap lock needs to be taken in write mode to modify vm_flags.
+	 *
+	 * In order to avoid taking the explicit lock for all MADV_DONTNEED_[LOCKED]
+	 * calls, attempt to drop the read lock and reqcquire it in write mode.
+	 *
+	 * Concurrent modifications to the ELF VMAs are unlikely during dynamic linking.
+	 */
+	memcpy(&stale_vma, vma, sizeof(struct vm_area_struct));
+	mmap_read_unlock(mm);
+
+	mmap_write_lock(mm);
+	vma = find_vma(mm, start);
+
+	/* We just mapped this in and haven't left the linker context yet */
+	BUG_ON(!vma);
+	BUG_ON(memcmp(&stale_vma, vma, sizeof(struct vm_area_struct)));
+
+	/* Update vm_flags to reflect teh padding */
 	vma_set_pad_pages(vma, nr_pad_pages);
+
+	/* Restore the read lock */
+	mmap_write_downgrade(mm);
 }
 
 static const char *pad_vma_name(struct vm_area_struct *vma)
