@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b597be5_3aff337c",
+        "filename": "fs/buffer.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2832,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-03T20:46:36Z",
+      "side": 1,
+      "message": "why are two hooks needed? You can do everything you need with only 1 of these",
+      "revId": "f4aba9ab8454fe5d54d7af1b080a9f3a0d79897e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
