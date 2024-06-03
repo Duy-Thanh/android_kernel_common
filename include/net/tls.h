@@ -132,9 +132,6 @@ struct tls_sw_context_tx {
 	struct tls_rec *open_rec;
 	struct list_head tx_list;
 	atomic_t encrypt_pending;
-	/* protect crypto_wait with encrypt_pending */
-	spinlock_t encrypt_compl_lock;
-	int async_notify;
 	u8 async_capable:1;
 
 #define BIT_TX_SCHEDULED	0
@@ -154,11 +151,14 @@ struct tls_sw_context_rx {
 	struct sk_buff *recv_pkt;
 	u8 async_capable:1;
 	atomic_t decrypt_pending;
+<<<<<<< HEAD   (443a03 Merge 5.15.159 into android14-5.15-lts)
 	/* protect crypto_wait with decrypt_pending*/
 	spinlock_t decrypt_compl_lock;
 	bool async_notify;
 
 	ANDROID_KABI_RESERVE(1);
+=======
+>>>>>>> BRANCH (c61bd2 Linux 5.15.160)
 };
 
 struct tls_record_info {
