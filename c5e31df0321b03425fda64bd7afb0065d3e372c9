@@ -69,6 +69,24 @@
       "parentUuid": "fe8e29dc_8fd8c7c5",
       "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e4b64c_22af2961",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-03T18:13:42Z",
+      "side": 1,
+      "message": "@hailong.liu@oppo.com But does the internal casting from the u64 in the ioctls structure to an int actually impact your needs?\n\nI\u0027m not convinced yet the flags should be extended to be heap specific, and we don\u0027t understand your needs clearly enough yet to justify the changes your proposing. So while I think this patch is a good one, we also need to understand how it is necessary if the follow on changes are not included.",
+      "parentUuid": "9e4c5cf9_35c38d48",
+      "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
