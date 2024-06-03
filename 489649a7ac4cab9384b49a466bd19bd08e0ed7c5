@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6072f7b_6aa45bb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-06-03T21:26:58Z",
+      "side": 1,
+      "message": "nit: Would be better to leave one empty line in between the original patch and this section and moving Change-Id here too.\n\nSame for all following patches.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 52
+      },
+      "revId": "489649a7ac4cab9384b49a466bd19bd08e0ed7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9848e352_4d7449f4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
