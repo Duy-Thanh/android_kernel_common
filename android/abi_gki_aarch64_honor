@@ -45,6 +45,14 @@
   drop_super
   mm_trace_rss_stat
   __kfifo_len_r
+  __tracepoint_android_vh_dc_send_copy
+  __traceiter_android_vh_dc_send_copy
+  __tracepoint_android_vh_dc_receive
+  __traceiter_android_vh_dc_receive
+  __tracepoint_android_vh_set_wifi_state_connect
+  __traceiter_android_vh_set_wifi_state_connect
+  __tracepoint_android_vh_set_wifi_state_disconnect
+  __traceiter_android_vh_set_wifi_state_disconnect
   __tracepoint_android_vh_shrink_slab_bypass
   __traceiter_android_vh_shrink_slab_bypass  
   __tracepoint_android_vh_do_shrink_slab
