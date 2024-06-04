@@ -40,6 +40,30 @@
       ],
       "revId": "c0471e902884235fd3f9e772316cea5659134c42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ef49a85_2c5edeee",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-06-04T23:38:54Z",
+      "side": 1,
+      "message": "`_Alignas` is C11 syntax which is fairly new for the kernel.",
+      "parentUuid": "3abba18e_b530f71f",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "c0471e902884235fd3f9e772316cea5659134c42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
