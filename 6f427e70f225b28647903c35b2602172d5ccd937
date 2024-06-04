@@ -16,6 +16,24 @@
       "message": "This should drop the STG files changes if they are going to be handled by the KMI update.",
       "revId": "6f427e70f225b28647903c35b2602172d5ccd937",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76652694_7126626d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-06-04T17:12:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50131441_30430ffc",
+      "revId": "6f427e70f225b28647903c35b2602172d5ccd937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
