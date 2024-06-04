@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3abba18e_b530f71f",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-04T23:21:07Z",
+      "side": 1,
+      "message": "where is _Alignas defined? I don\u0027t see any other cases of it in the kernel. Should it be __aligned_u64?",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6cfa2787_e5363ca1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/android_kabi.h",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 75,
+                "endChar": 0
+              },
+              "replacement": "#define _ANDROID_BACKPORT_RESERVE_ARRAY(n, s)\t__aligned_u64 u8 android_backport_reserved##n[s]\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c0471e902884235fd3f9e772316cea5659134c42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
