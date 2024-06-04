@@ -64,6 +64,30 @@
       },
       "revId": "c0471e902884235fd3f9e772316cea5659134c42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6502ef1c_74628ac9",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-04T23:49:55Z",
+      "side": 1,
+      "message": "So new to the kernel that there are 0 other instances of it, even in linux mainline. I don\u0027t think we should be the pioneer on this. Does it do something different than __aligned_u64?",
+      "parentUuid": "5ef49a85_2c5edeee",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "c0471e902884235fd3f9e772316cea5659134c42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
