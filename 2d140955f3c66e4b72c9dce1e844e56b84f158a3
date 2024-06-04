@@ -33,6 +33,42 @@
       "message": "Any chance this _only_ happens with 16k pages? That would make sense since it might be redefining these MAP_HUGE_* values.",
       "revId": "2d140955f3c66e4b72c9dce1e844e56b84f158a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa0d59a6_38814520",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2024-06-04T20:44:35Z",
+      "side": 1,
+      "message": "No, it\u0027s happening with/without 16k pages.",
+      "parentUuid": "65f70770_9950dcf0",
+      "revId": "2d140955f3c66e4b72c9dce1e844e56b84f158a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28557077_17c1686f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2024-06-04T20:44:35Z",
+      "side": 1,
+      "message": "I\u0027ll commit this as a temporary bandaid for the warnings, but will send a patch upstream to fix the userspace macro redefinitions.",
+      "parentUuid": "e23dedc4_27624a66",
+      "revId": "2d140955f3c66e4b72c9dce1e844e56b84f158a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
