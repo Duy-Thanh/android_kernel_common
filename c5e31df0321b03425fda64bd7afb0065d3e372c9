@@ -87,6 +87,24 @@
       "parentUuid": "9e4c5cf9_35c38d48",
       "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7e7603_8490b51a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-04T03:54:59Z",
+      "side": 1,
+      "message": "Hi John\nWe can combine this first, and then we will discuss other patches",
+      "parentUuid": "06e4b64c_22af2961",
+      "revId": "c5e31df0321b03425fda64bd7afb0065d3e372c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
