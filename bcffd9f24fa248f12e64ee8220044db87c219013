@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77ba3e96_90eefc4e",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2075,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-06-04T12:57:40Z",
+      "side": 0,
+      "message": "thanks Todd, will proceed by dropping this change.",
+      "parentUuid": "d9b530a1_1fab1aea",
+      "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a230273_e3dc4899",
         "filename": "drivers/usb/host/xhci-mem.c",
         "patchSetId": 4
