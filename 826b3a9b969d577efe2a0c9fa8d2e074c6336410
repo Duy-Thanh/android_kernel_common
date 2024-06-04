@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022235db_5b6e10e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-04T12:51:36Z",
+      "side": 1,
+      "message": "\u003e Commit does not refer to the upstream commit.\n\u003e Please add a line like \u0027(cherry picked from commit \u003csha1\u003e)\u0027.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "810d809c_4d259544",
+      "revId": "826b3a9b969d577efe2a0c9fa8d2e074c6336410",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab31b21f_4d282671",
+        "filename": "fs/f2fs/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-04T12:51:36Z",
+      "side": 1,
+      "message": "```\nfs/f2fs/inode.c:497:7: error: implicit declaration of function \u0027is_meta_ino\u0027 [-Werror,-Wimplicit-function-declaration]\n                if (is_meta_ino(sbi, ino)) {\n                    ^\nfs/f2fs/inode.c:497:7: note: did you mean \u0027is_zero_ino\u0027?\ninclude/linux/fs.h:3234:20: note: \u0027is_zero_ino\u0027 declared here\nstatic inline bool is_zero_ino(ino_t ino)\n                   ^\n```",
+      "range": {
+        "startLine": 497,
+        "startChar": 6,
+        "endLine": 497,
+        "endChar": 17
+      },
+      "revId": "826b3a9b969d577efe2a0c9fa8d2e074c6336410",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
