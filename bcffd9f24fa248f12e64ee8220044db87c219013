@@ -69,6 +69,24 @@
       "parentUuid": "3a230273_e3dc4899",
       "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c88d3382_24296e95",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2195,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-06-04T17:30:24Z",
+      "side": 0,
+      "message": "If I make this a empty function, it should preserve KMI and achieve what we want to do right ? \nWould that be an acceptable change ?",
+      "parentUuid": "6551a603_7223c335",
+      "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
