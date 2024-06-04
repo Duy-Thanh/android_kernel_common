@@ -16,6 +16,24 @@
       "message": "typo: \"mediatek.co\" -\u003e \"mediatek.com\"",
       "revId": "f3e8b2ac8201269438faebd31ab0f968700ef324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced0b309_88e00150",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2008340
+      },
+      "writtenOn": "2024-06-04T01:45:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e47d628_fbd89603",
+      "revId": "f3e8b2ac8201269438faebd31ab0f968700ef324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
