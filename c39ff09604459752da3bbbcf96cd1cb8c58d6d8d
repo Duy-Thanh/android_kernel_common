@@ -159,6 +159,24 @@
       "parentUuid": "1b3c6aee_0050426b",
       "revId": "c39ff09604459752da3bbbcf96cd1cb8c58d6d8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d74cd7b4_744c327b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-04T16:36:28Z",
+      "side": 1,
+      "message": "More detail please...either here or in the bug. What are the specific uses of each of these 8 flags?",
+      "parentUuid": "2c35fe74_0762d9d3",
+      "revId": "c39ff09604459752da3bbbcf96cd1cb8c58d6d8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
