@@ -8,6 +8,7 @@
 #ifndef _LINUX_CGROUP_DEFS_H
 #define _LINUX_CGROUP_DEFS_H
 
+#include <linux/android_kabi.h>
 #include <linux/limits.h>
 #include <linux/list.h>
 #include <linux/idr.h>
@@ -525,6 +526,8 @@ struct cgroup {
 	struct bpf_local_storage __rcu  *bpf_cgrp_storage;
 #endif
 
+	ANDROID_BACKPORT_RESERVE(1);
+
 	/* All ancestors including self */
 	struct cgroup *ancestors[];
 };
@@ -567,6 +570,8 @@ struct cgroup_root {
 
 	/* The name for this hierarchy - may be empty */
 	char name[MAX_CGROUP_ROOT_NAMELEN];
+
+	ANDROID_BACKPORT_RESERVE_ARRAY(1, CGROUP_SUBSYS_COUNT * sizeof(atomic_t));
 };
 
 /*
