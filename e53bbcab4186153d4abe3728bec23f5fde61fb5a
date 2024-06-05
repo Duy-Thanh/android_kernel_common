@@ -16,6 +16,23 @@
       "message": "Series is queued for June 5 KMI update",
       "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30bf50bd_0744dae0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-05T14:08:09Z",
+      "side": 1,
+      "message": "There are build issues such as:\n```\nThese symbols are missing from the symbol list and are not available at runtime for unsigned modules:\n  of_node_get required by [\u0027vexpress-config.ko\u0027]\n  of_node_put required by [\u0027pl111_drm.ko\u0027, \u0027vexpress-config.ko\u0027, \u0027mt76.ko\u0027]\n```",
+      "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
