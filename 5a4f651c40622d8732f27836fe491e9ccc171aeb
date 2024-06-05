@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df22b5e_5b2ed0ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2001858
+      },
+      "writtenOn": "2024-06-05T19:39:25Z",
+      "side": 1,
+      "message": "This looks like it was auto-merged into upstream 6.6, so not sure if it should be cherry-picked in or will just be picked up directly.",
+      "revId": "5a4f651c40622d8732f27836fe491e9ccc171aeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
