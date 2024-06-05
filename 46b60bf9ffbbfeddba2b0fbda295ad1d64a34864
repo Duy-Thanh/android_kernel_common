@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000080391205",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3115967?revision\u003d2",
+      "key": {
+        "uuid": "eed021df_5b80a0f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-05T09:56:28Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "46b60bf9ffbbfeddba2b0fbda295ad1d64a34864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000080391205",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3115967?revision\u003d2",
+      "key": {
+        "uuid": "f0a7a29e_514270bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-05T09:56:28Z",
+      "side": 1,
+      "message": "Please **attach the following Buganizer ID(s)** to the commit message: 330201551.\nThese IDs were found in the original change with number [2998699](https://android-review.googlesource.com/c/2998699) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "46b60bf9ffbbfeddba2b0fbda295ad1d64a34864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
