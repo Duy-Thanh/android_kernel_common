@@ -104,6 +104,24 @@
       "parentUuid": "9da005b0_ab8a4456",
       "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8084f0de_13c8542e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-05T15:50:26Z",
+      "side": 1,
+      "message": "That\u0027s android15-6.6. This one Ned\u0027s refactoring to comply with current KMI",
+      "parentUuid": "86cde4f1_4984030a",
+      "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
