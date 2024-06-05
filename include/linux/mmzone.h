@@ -423,11 +423,11 @@ enum {
  */
 struct lru_gen_folio {
 	/* the aging increments the youngest generation number */
-	unsigned long max_seq;
+	unsigned long max_seq[ANON_AND_FILE];
 	/* the eviction increments the oldest generation numbers */
 	unsigned long min_seq[ANON_AND_FILE];
 	/* the birth time of each generation in jiffies */
-	unsigned long timestamps[MAX_NR_GENS];
+	unsigned long timestamps[MAX_NR_GENS][ANON_AND_FILE];
 	/* the multi-gen LRU lists, lazily sorted on eviction */
 	struct list_head folios[MAX_NR_GENS][ANON_AND_FILE][MAX_NR_ZONES];
 	/* the multi-gen LRU sizes, eventually consistent */
@@ -488,7 +488,7 @@ struct lru_gen_mm_walk {
 	/* the lruvec under reclaim */
 	struct lruvec *lruvec;
 	/* unstable max_seq from lru_gen_folio */
-	unsigned long max_seq;
+	unsigned long max_seq[ANON_AND_FILE];
 	/* scan_seq of the scan this walk is part of */
 	unsigned long scan_seq;
 	/* the next address within an mm to scan */
