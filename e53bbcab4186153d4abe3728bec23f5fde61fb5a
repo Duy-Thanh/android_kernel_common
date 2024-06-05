@@ -86,6 +86,24 @@
       "parentUuid": "40ffa894_4cad27a7",
       "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86cde4f1_4984030a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1099639
+      },
+      "writtenOn": "2024-06-05T14:41:56Z",
+      "side": 1,
+      "message": "hmm, okay, my understanding from Todd was that we actually have a chance to make KMI change before 14.06.  okay, i will follow up.   thanks",
+      "parentUuid": "9da005b0_ab8a4456",
+      "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
