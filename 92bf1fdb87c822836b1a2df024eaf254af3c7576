@@ -81,6 +81,24 @@
       "parentUuid": "46412870_50a8f7c6",
       "revId": "92bf1fdb87c822836b1a2df024eaf254af3c7576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7bb7efe_197d9b36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-06-05T16:09:34Z",
+      "side": 1,
+      "message": "Missing the repo \u0026 branch:\n\n```\nCommit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003csha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027.\n```",
+      "parentUuid": "034cbfe8_7ae55b15",
+      "revId": "92bf1fdb87c822836b1a2df024eaf254af3c7576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
