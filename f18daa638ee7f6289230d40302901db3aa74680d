@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000080384979",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3115323?revision\u003d1",
+      "key": {
+        "uuid": "185b0fa9_8727d61d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-05T09:09:18Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/24729b307eefcd7c476065cd7351c1a018082c19) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d24729b307eefcd7c476065cd7351c1a018082c19).\n\n```\n      ## drivers/usb/gadget/function/f_fs.c ##\n     @@ drivers/usb/gadget/function/f_fs.c: static void ffs_user_copy_worker(struct work_struct *work)\n    - \t\t\t\t\t\t   work);\n    - \tint ret \u003d io_data-\u003estatus;\n    + \tint ret \u003d io_data-\u003ereq-\u003estatus ? io_data-\u003ereq-\u003estatus :\n    + \t\t\t\t\t io_data-\u003ereq-\u003eactual;\n      \tbool kiocb_has_eventfd \u003d io_data-\u003ekiocb-\u003eki_flags \u0026 IOCB_EVENTFD;\n     +\tunsigned long flags;\n      \n    @@ drivers/usb/gadget/function/f_fs.c: static void ffs_user_copy_worker(struct work\n      \t\tkthread_use_mm(io_data-\u003emm);\n     @@ drivers/usb/gadget/function/f_fs.c: static void ffs_user_copy_worker(struct work_struct *work)\n      \tif (io_data-\u003effs-\u003effs_eventfd \u0026\u0026 !kiocb_has_eventfd)\n    - \t\teventfd_signal(io_data-\u003effs-\u003effs_eventfd);\n    + \t\teventfd_signal(io_data-\u003effs-\u003effs_eventfd, 1);\n      \n    -+\tspin_lock_irqsave(\u0026io_data-\u003effs-\u003eeps_lock, flags);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (3c19f7 ANDROID: set rewrite_absolute_paths_in_config for GKI aarch6)\n     +\tusb_ep_free_request(io_data-\u003eep, io_data-\u003ereq);\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\tspin_lock_irqsave(\u0026io_data-\u003effs-\u003eeps_lock, flags);\n    + \tusb_ep_free_request(io_data-\u003eep, io_data-\u003ereq);\n     +\tio_data-\u003ereq \u003d NULL;\n     +\tspin_unlock_irqrestore(\u0026io_data-\u003effs-\u003eeps_lock, flags);\n    -+\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (5883e8 UPSTREAM: usb: gadget: f_fs: Fix race between aio_cancel() a)\n    + \n      \tif (io_data-\u003eread)\n      \t\tkfree(io_data-\u003eto_free);\n    - \tffs_free_buffer(io_data);\n     @@ drivers/usb/gadget/function/f_fs.c: static void ffs_epfile_async_io_complete(struct usb_ep *_ep,\n    - \tstruct ffs_data *ffs \u003d io_data-\u003effs;\n      \n    - \tio_data-\u003estatus \u003d req-\u003estatus ? req-\u003estatus : req-\u003eactual;\n    --\tusb_ep_free_request(_ep, req);\n    + \tENTER();\n      \n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (3c19f7 ANDROID: set rewrite_absolute_paths_in_config for GKI aarch6)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\tio_data-\u003estatus \u003d req-\u003estatus ? req-\u003estatus : req-\u003eactual;\n    ++\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (5883e8 UPSTREAM: usb: gadget: f_fs: Fix race between aio_cancel() a)\n      \tINIT_WORK(\u0026io_data-\u003ework, ffs_user_copy_worker);\n      \tqueue_work(ffs-\u003eio_completion_wq, \u0026io_data-\u003ework);\n    + }\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "f18daa638ee7f6289230d40302901db3aa74680d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
