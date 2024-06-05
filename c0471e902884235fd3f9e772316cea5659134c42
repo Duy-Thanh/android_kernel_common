@@ -112,6 +112,30 @@
       },
       "revId": "c0471e902884235fd3f9e772316cea5659134c42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "575623e2_51399aea",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-05T00:31:30Z",
+      "side": 1,
+      "message": "How will this behave with older gcc toolchains (like the ones used by kernelci for some 32-bit builds). I see no evidence that this is a proposed standard practice for the linux kernel - perhaps it will be soon, but it isn\u0027t now. I quick peek at lore shows a few patches with alignas() (not _Alignas), but they were nak\u0027d (not necessarily because of the alignas()). Point is, this shouldn\u0027t be the first patch in the linux universe to land with alignas() - it should be an upstream patch. Please use the previous mechanism of your choice.",
+      "parentUuid": "536f6a16_84845657",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "c0471e902884235fd3f9e772316cea5659134c42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
