@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "273c6abf_b9226b29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-05T16:06:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "25971e9b_d3ce8abe",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "92bf1fdb87c822836b1a2df024eaf254af3c7576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46412870_50a8f7c6",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-06-05T15:38:09Z",
       "side": 1,
       "message": "Needs `cherry picked from` line:\nhttps://android.googlesource.com/kernel/common/+/android-mainline/README.md#requirements-for-other-backports\n\nhttps://cgit.freedesktop.org/drm/drm-misc/commit/?id\u003d310ec03841a36e3f45fb528f0dfdfe5b9e84b037",
+      "revId": "92bf1fdb87c822836b1a2df024eaf254af3c7576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "034cbfe8_7ae55b15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-05T16:06:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "46412870_50a8f7c6",
       "revId": "92bf1fdb87c822836b1a2df024eaf254af3c7576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
