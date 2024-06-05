@@ -15,7 +15,7 @@ load(
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
 )
-load(":modules.bzl", "get_gki_modules_list")
+load(":modules.bzl", "get_gki_modules_list", "get_kunit_modules_list")
 
 package(
     default_visibility = [
@@ -71,6 +71,7 @@ alias(
 write_file(
     name = "gki_system_dlkm_modules_arm64",
     out = "android/gki_system_dlkm_modules_arm64",
+    # Do not built kunit modules into system_dlkm
     content = get_gki_modules_list("arm64") + [
         # Ensure new line at the end.
         "",
@@ -80,7 +81,8 @@ write_file(
 write_file(
     name = "gki_system_dlkm_modules_x86_64",
     out = "android/gki_system_dlkm_modules_x86_64",
-    content = get_gki_modules_list("x86_64") + [
+    # Do not built kunit modules into system_dlkm
+    content = get_gki_modules_list("arm64") + [
         # Ensure new line at the end.
         "",
     ],
@@ -140,7 +142,7 @@ filegroup(
 define_common_kernels(target_configs = {
     "kernel_aarch64": {
         "kmi_symbol_list_strict_mode": True,
-        "module_implicit_outs": get_gki_modules_list("arm64"),
+        "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
         "kmi_symbol_list": "android/abi_gki_aarch64",
         "rewrite_absolute_paths_in_config": True,
         "kmi_symbol_list_add_only": True,
@@ -178,7 +180,7 @@ define_common_kernels(target_configs = {
     },
     "kernel_x86_64": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": get_gki_modules_list("x86_64"),
+        "module_implicit_outs": get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
         "protected_exports_list": "android/abi_gki_protected_exports_x86_64",
         "protected_modules_list": "android/gki_x86_64_protected_modules",
         "make_goals": _GKI_X86_64_MAKE_GOALS,
@@ -671,7 +673,7 @@ kernel_build(
         "modules",
         "rk3399-rock-pi-4b.dtb",
     ],
-    module_outs = get_gki_modules_list("arm64") + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,
+    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,
     visibility = ["//visibility:private"],
 )
 
@@ -694,7 +696,7 @@ kernel_build(
         "modules",
         "rk3399-rock-pi-4b.dtb",
     ],
-    module_outs = get_gki_modules_list("arm64") + _ROCKPI4_MODULE_OUTS,
+    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS,
     visibility = ["//visibility:private"],
 )
 
@@ -792,28 +794,7 @@ kernel_build(
 )
 
 # KUnit test targets
-
-# Modules defined by tools/testing/kunit/configs/android/kunit_defconfig
-_KUNIT_COMMON_MODULES = [
-    # keep sorted
-    "drivers/hid/hid-uclogic-test.ko",
-    "drivers/iio/test/iio-test-format.ko",
-    "drivers/rtc/lib_test.ko",
-    "fs/ext4/ext4-inode-test.ko",
-    "fs/fat/fat_test.ko",
-    "kernel/time/time_test.ko",
-    "lib/kunit/kunit-example-test.ko",
-    "lib/kunit/kunit-test.ko",
-    "mm/kfence/kfence_test.ko",
-    "net/core/dev_addr_lists_test.ko",
-    "sound/soc/soc-topology-test.ko",
-    "sound/soc/soc-utils-test.ko",
-]
-
-_KUNIT_CLK_MODULES = [
-    "drivers/clk/clk-gate_test.ko",
-    "drivers/clk/clk_test.ko",
-]
+_KUNIT_DIR = "testcases/kunit"
 
 kernel_build(
     name = "kunit_aarch64",
@@ -827,15 +808,19 @@ kernel_build(
     ],
     kmi_symbol_list = "android/abi_gki_aarch64_kunit",
     make_goals = ["modules"],
-    module_outs = _KUNIT_COMMON_MODULES + _KUNIT_CLK_MODULES,
+    module_outs = get_kunit_modules_list("arm64"),
 )
 
 copy_to_dist_dir(
     name = "kunit_aarch64_dist",
-    data = [":kunit_aarch64"],
+    data = [
+        "tools/testing/kunit/android/tradefed_configs/config_arm64.xml",
+        ":kunit_aarch64",
+    ],
     dist_dir = "out/kunit_aarch64/dist",
     flat = True,
     log = "info",
+    prefix = _KUNIT_DIR + "/arm64",
 )
 
 kernel_abi(
@@ -855,15 +840,19 @@ kernel_build(
         # x86_64 does not set CONFIG_COMMON_CLK
     ],
     make_goals = ["modules"],
-    module_outs = _KUNIT_COMMON_MODULES,
+    module_outs = get_kunit_modules_list("x86_64"),
 )
 
 copy_to_dist_dir(
     name = "kunit_x86_64_dist",
-    data = [":kunit_x86_64"],
+    data = [
+        "tools/testing/kunit/android/tradefed_configs/config_x86_64.xml",
+        ":kunit_x86_64",
+    ],
     dist_dir = "out/kunit_x86_64/dist",
     flat = True,
     log = "info",
+    prefix = _KUNIT_DIR + "/x86_64",
 )
 
 # DDK Headers

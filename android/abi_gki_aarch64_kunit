@@ -1,19 +1,12 @@
 [abi_symbol_list]
 # commonly used symbols
+  alt_cb_patch_nops
+  fortify_panic
   kfree
+  __kmalloc
   kmalloc_caches
   kmalloc_trace
   krealloc
-  kunit_binary_assert_format
-  kunit_binary_ptr_assert_format
-  kunit_binary_str_assert_format
-  kunit_do_failed_assertion
-  kunit_fail_assert_format
-  kunit_kmalloc_array
-  kunit_log_append
-  kunit_ptr_not_err_assert_format
-  kunit_try_catch_throw
-  kunit_unary_assert_format
   memcpy
   memset
   module_layout
@@ -21,9 +14,14 @@
   __put_task_struct
   _raw_spin_lock_irqsave
   _raw_spin_unlock_irqrestore
+  refcount_warn_saturate
   scnprintf
+  snprintf
   __stack_chk_fail
   strcmp
+  strlen
+  strncmp
+  strnlen
   strscpy
   strstr
 
@@ -95,8 +93,6 @@
   _dev_warn
   kmemdup
   memcmp
-  snprintf
-  strncmp
   usb_control_msg
   usb_hid_driver
   usb_interrupt_msg
@@ -104,16 +100,13 @@
 
 # required by iio-test-format.ko
   iio_format_value
-  strlen
 
 # required by kfence_test.ko
   for_each_kernel_tracepoint
-  fortify_panic
   get_random_u16
   jiffies
   __kfence_pool
   kfence_sample_interval
-  __kmalloc
   kmem_cache_alloc
   kmem_cache_alloc_bulk
   kmem_cache_create
@@ -128,7 +121,6 @@
   __rcu_read_lock
   __rcu_read_unlock
   strchr
-  strnlen
   strnstr
   synchronize_rcu
   synchronize_srcu
@@ -136,15 +128,33 @@
   tracepoint_probe_unregister
   tracepoint_srcu
 
-# required by kunit-test.ko
-  alt_cb_patch_nops
-  __kunit_add_resource
-  kunit_cleanup
-  kunit_destroy_resource
-  kunit_init_test
-  kunit_remove_resource
-  kunit_try_catch_run
-  refcount_warn_saturate
+# required by kunit.ko
+  add_taint
+  debugfs_create_dir
+  debugfs_create_file
+  debugfs_remove
+  kthread_complete_and_exit
+  kthread_create_on_node
+  kthread_stop
+  __list_add_valid
+  __list_del_entry_valid
+  param_ops_bool
+  param_ops_int
+  _raw_spin_lock
+  _raw_spin_unlock
+  register_module_notifier
+  seq_lseek
+  seq_printf
+  seq_puts
+  seq_read
+  single_open
+  single_release
+  strlcat
+  unregister_module_notifier
+  vsnprintf
+  wait_for_completion_timeout
+  wake_up_process
+  __warn_printk
 
 # required by lib_test.ko
   rtc_month_days
@@ -170,3 +180,21 @@
 
 # required by time_test.ko
   time64_to_tm
+
+# preserved by --additions-only
+  __kunit_add_resource
+  kunit_binary_assert_format
+  kunit_binary_ptr_assert_format
+  kunit_binary_str_assert_format
+  kunit_cleanup
+  kunit_destroy_resource
+  kunit_do_failed_assertion
+  kunit_fail_assert_format
+  kunit_init_test
+  kunit_kmalloc_array
+  kunit_log_append
+  kunit_ptr_not_err_assert_format
+  kunit_remove_resource
+  kunit_try_catch_run
+  kunit_try_catch_throw
+  kunit_unary_assert_format
