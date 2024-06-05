@@ -267,6 +267,10 @@
   __cpuhp_setup_state_cpuslocked
   __cpuhp_state_add_instance
   __cpuhp_state_remove_instance
+  cpuset_write
+  css_cs_ex
+  get_tg_name
+  get_name
   cpuhp_tasks_frozen
   cpu_hwcaps
   cpuidle_driver_state_disabled
