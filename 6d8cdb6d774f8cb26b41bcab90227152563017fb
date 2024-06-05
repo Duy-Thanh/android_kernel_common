@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d6e63e_09350a9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-05T17:09:10Z",
+      "side": 1,
+      "message": "Temporary block to avoid racing with KMI update. This will need to be rebased afterwards.",
+      "revId": "6d8cdb6d774f8cb26b41bcab90227152563017fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
