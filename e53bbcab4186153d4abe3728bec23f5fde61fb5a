@@ -33,6 +33,24 @@
       "message": "There are build issues such as:\n```\nThese symbols are missing from the symbol list and are not available at runtime for unsigned modules:\n  of_node_get required by [\u0027vexpress-config.ko\u0027]\n  of_node_put required by [\u0027pl111_drm.ko\u0027, \u0027vexpress-config.ko\u0027, \u0027mt76.ko\u0027]\n```",
       "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ffa894_4cad27a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1099639
+      },
+      "writtenOn": "2024-06-05T14:30:21Z",
+      "side": 1,
+      "message": "hi, is it possible to see the full errors, this snippet does not make sense to me, the drivers being reported in error are not introduced by BCM, however, yes, our \"abi_gki_aarch64_bcmstb\" is exposing of_node_[get|put] since we do need those, i am not sure how this impacts other drivers, i would expect the final KMI symbol to have those exported, so i do not understand why it is flagged as error...  obviously i am missing something.   if there is a way i can reproduce this issue myself, can you please let me know how to do that?   thanks",
+      "parentUuid": "30bf50bd_0744dae0",
+      "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
