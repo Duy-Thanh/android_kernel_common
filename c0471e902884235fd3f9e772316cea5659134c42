@@ -136,6 +136,30 @@
       },
       "revId": "c0471e902884235fd3f9e772316cea5659134c42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a1e322a_8822c058",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-06-05T15:21:42Z",
+      "side": 1,
+      "message": "This kernel depends on C11. If a compiler supports C11 it will build. If it doesn\u0027t support C11, then it wouldn\u0027t work for this kernel anyways.",
+      "parentUuid": "575623e2_51399aea",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "c0471e902884235fd3f9e772316cea5659134c42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
