@@ -7,7 +7,6 @@ load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("@rules_pkg//pkg:install.bzl", "pkg_install")
 load(
     "@rules_pkg//pkg:mappings.bzl",
-    "pkg_filegroup",
     "pkg_files",
     "strip_prefix",
 )
@@ -27,7 +26,7 @@ load(
     "merged_kernel_uapi_headers",
 )
 load(":abi.bzl", "cc_binary_with_abi")
-load(":modules.bzl", "get_gki_modules_list")
+load(":modules.bzl", "get_gki_modules_list", "get_kunit_modules_list")
 
 package(
     default_visibility = [
@@ -76,6 +75,7 @@ alias(
 write_file(
     name = "gki_system_dlkm_modules_arm64",
     out = "android/gki_system_dlkm_modules_arm64",
+    # Do not built kunit modules into system_dlkm
     content = get_gki_modules_list("arm64") + [
         # Ensure new line at the end.
         "",
@@ -85,7 +85,8 @@ write_file(
 write_file(
     name = "gki_system_dlkm_modules_x86_64",
     out = "android/gki_system_dlkm_modules_x86_64",
-    content = get_gki_modules_list("x86_64") + [
+    # Do not built kunit modules into system_dlkm
+    content = get_gki_modules_list("arm64") + [
         # Ensure new line at the end.
         "",
     ],
@@ -93,9 +94,13 @@ write_file(
 
 define_common_kernels(target_configs = {
     "kernel_aarch64": {
-        "module_implicit_outs": get_gki_modules_list("arm64"),
+        "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
         "ddk_headers_archive": ":kernel_aarch64_ddk_headers_archive",
+        "defconfig_fragments": [
+            "tools/testing/kunit/configs/android/kunit_defconfig",
+            "tools/testing/kunit/configs/android/kunit_clk_defconfig",
+        ],
         "extra_dist": [
             ":test_mappings_zip",
             ":tests_zip_arm64",
@@ -103,8 +108,11 @@ define_common_kernels(target_configs = {
     },
     "kernel_x86_64": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": get_gki_modules_list("x86_64"),
+        "module_implicit_outs": get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
         "make_goals": _GKI_X86_64_MAKE_GOALS,
+        "defconfig_fragments": [
+            "tools/testing/kunit/configs/android/kunit_defconfig",
+        ],
         "extra_dist": [
             ":test_mappings_zip",
             ":tests_zip_x86_64",
@@ -720,153 +728,74 @@ kernel_build(
 )
 
 # KUnit test targets
-
-# Modules defined by tools/testing/kunit/configs/android/kunit_defconfig
-_KUNIT_COMMON_MODULES = [
-    # keep sorted
-    "drivers/base/regmap/regmap-kunit.ko",
-    "drivers/base/regmap/regmap-ram.ko",
-    "drivers/base/regmap/regmap-raw-ram.ko",
-    "drivers/hid/hid-uclogic-test.ko",
-    "drivers/iio/test/iio-test-format.ko",
-    "drivers/input/tests/input_test.ko",
-    "drivers/rtc/lib_test.ko",
-    "fs/ext4/ext4-inode-test.ko",
-    "fs/fat/fat_test.ko",
-    "kernel/time/time_test.ko",
-    "lib/kunit/kunit-example-test.ko",
-    "lib/kunit/kunit-test.ko",
-    #"mm/kfence/kfence_test.ko",
-    "net/core/dev_addr_lists_test.ko",
-    "sound/soc/soc-topology-test.ko",
-    "sound/soc/soc-utils-test.ko",
-]
-
-_KUNIT_CLK_MODULES = [
-    "drivers/clk/clk-gate_test.ko",
-    "drivers/clk/clk_test.ko",
-]
-
-kernel_build(
-    name = "kunit_aarch64",
-    srcs = [":kernel_aarch64_sources"],
-    outs = [],
-    arch = "arm64",
-    base_kernel = ":kernel_aarch64",
-    build_config = "build.config.kunit.aarch64",
-    defconfig_fragments = [
-        "tools/testing/kunit/configs/android/kunit_defconfig",
-        "tools/testing/kunit/configs/android/kunit_clk_defconfig",
-    ],
-    make_goals = ["modules"],
-    module_outs = _KUNIT_COMMON_MODULES + _KUNIT_CLK_MODULES,
-)
-
-copy_to_dist_dir(
-    name = "kunit_aarch64_dist",
-    data = [":kunit_aarch64"],
-    dist_dir = "out/kunit_aarch64/dist",
-    flat = True,
-    log = "info",
-)
-
-kernel_build(
-    name = "kunit_x86_64",
-    srcs = [":kernel_x86_64_sources"],
-    outs = [],
-    arch = "x86_64",
-    base_kernel = ":kernel_x86_64",
-    build_config = "build.config.kunit.x86_64",
-    defconfig_fragments = [
-        "tools/testing/kunit/configs/android/kunit_defconfig",
-        # x86_64 does not set CONFIG_COMMON_CLK
-    ],
-    make_goals = ["modules"],
-    module_outs = _KUNIT_COMMON_MODULES,
-)
-
-copy_to_dist_dir(
-    name = "kunit_x86_64_dist",
-    data = [":kunit_x86_64"],
-    dist_dir = "out/kunit_x86_64/dist",
-    flat = True,
-    log = "info",
-)
-
 _KUNIT_DIR = "testcases/kunit"
 
-pkg_files(
-    name = "kunit_arm64_stripped",
-    srcs = [":kunit_aarch64"],
-    prefix = "arm64",
-    strip_prefix = paths.join(
-        strip_prefix.from_pkg(),
-        "kunit_aarch64",
-    ),
+copy_file(
+    name = "kunit_test_config",
+    src = select({
+        ":x86_64": "tools/testing/kunit/android/tradefed_configs/config_x86_64.xml",
+        ":arm64": "tools/testing/kunit/android/tradefed_configs/config_arm64.xml",
+    }),
+    out = _KUNIT_DIR + "/kunit.config",
     visibility = ["//visibility:private"],
 )
 
-pkg_files(
-    name = "kunit_arm64_test_config",
-    srcs = [":tools/testing/kunit/android/tradefed_configs/config_arm64.xml"],
-    renames = {
-        "tools/testing/kunit/android/tradefed_configs/config_arm64.xml": "kunit.config",
-    },
-    visibility = ["//visibility:private"],
-)
-
-pkg_filegroup(
-    name = "kunit_tests_arm64_pkg_files",
+android_filegroup(
+    name = "kunit_test_config_arm64",
     srcs = [
-        ":kunit_arm64_stripped",
-        ":kunit_arm64_test_config",
+        ":kunit_test_config",
     ],
-    prefix = _KUNIT_DIR,
+    cpu = "arm64",
     visibility = ["//visibility:private"],
 )
 
-pkg_install(
-    name = "kunit_tests_arm64_install",
+android_filegroup(
+    name = "kunit_test_config_x86_64",
     srcs = [
-        ":kunit_tests_arm64_pkg_files",
+        ":kunit_test_config",
     ],
-)
-
-pkg_files(
-    name = "kunit_x86_64_stripped",
-    srcs = [":kunit_x86_64"],
-    prefix = "x86_64",
-    strip_prefix = paths.join(
-        strip_prefix.from_pkg(),
-        "kunit_x86_64",
-    ),
+    cpu = "x86_64",
     visibility = ["//visibility:private"],
 )
 
 pkg_files(
-    name = "kunit_x86_64_test_config",
-    srcs = [":tools/testing/kunit/android/tradefed_configs/config_x86_64.xml"],
-    renames = {
-        "tools/testing/kunit/android/tradefed_configs/config_x86_64.xml": "kunit.config",
-    },
+    name = "kunit_modules_arm64",
+    srcs = [
+        "//common:kernel_aarch64/" + e
+        for e in get_kunit_modules_list("arm64")
+    ],
+    prefix = _KUNIT_DIR + "arm64/",
     visibility = ["//visibility:private"],
 )
 
-pkg_filegroup(
-    name = "kunit_tests_x86_64_pkg_files",
+pkg_files(
+    name = "kunit_modules_x86_64",
     srcs = [
-        ":kunit_x86_64_stripped",
-        ":kunit_x86_64_test_config",
+        "//common:kernel_x86_64/" + e
+        for e in get_kunit_modules_list("x86_64")
     ],
-    prefix = _KUNIT_DIR,
+    prefix = _KUNIT_DIR + "x86_64/",
     visibility = ["//visibility:private"],
 )
 
-pkg_install(
-    name = "kunit_tests_x86_64_install",
+pkg_files(
+    name = "kunit_tests_arm64",
     srcs = [
-        ":kunit_tests_x86_64_pkg_files",
+        ":kunit_modules_arm64",
+        ":kunit_test_config_arm64",
     ],
+    strip_prefix = strip_prefix.from_pkg(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_files(
+    name = "kunit_tests_x86_64",
+    srcs = [
+        ":kunit_modules_x86_64",
+        ":kunit_test_config_x86_64",
+    ],
+    strip_prefix = strip_prefix.from_pkg(),
+    visibility = ["//visibility:private"],
 )
 
 # DDK Headers
@@ -2339,7 +2268,7 @@ pkg_zip(
     name = "tests_zip_x86_64",
     srcs = [
         ":kselftest_tests_x86_64_pkg_files",
-        ":kunit_tests_x86_64_pkg_files",
+        ":kunit_tests_x86_64",
     ],
     out = "x86_64/tests.zip",
     visibility = ["//visibility:public"],
@@ -2349,7 +2278,7 @@ pkg_zip(
     name = "tests_zip_arm64",
     srcs = [
         ":kselftest_tests_arm64_pkg_files",
-        ":kunit_tests_arm64_pkg_files",
+        ":kunit_tests_arm64",
     ],
     out = "arm64/tests.zip",
     visibility = ["//visibility:public"],

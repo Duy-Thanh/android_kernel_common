@@ -6,6 +6,11 @@
         <option name="push-file" key="kunit" value="/data/kunit" />
     </target_preparer>
 
+    <target_preparer class="com.android.tradefed.targetprep.InstallKernelModulePreparer">
+        <option name="module-path" value="/data/kunit/arm64/lib/kunit/kunit.ko" />
+        <option name="install-arg" value="enable=1" />
+   </target_preparer>
+
     <!-- Modules that leave the OS in an unstable state have been temporarily commented out. -->
     <test class="com.android.tradefed.testtype.binary.KUnitModuleTest" >
         <option name="skip-binary-check" value="true" />
