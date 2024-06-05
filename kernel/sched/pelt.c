@@ -481,6 +481,15 @@ __read_mostly unsigned int sched_pelt_lshift;
 #include <trace/hooks/sched.h>
 static unsigned int sysctl_sched_pelt_multiplier = 1;
 
+
+void change_pelt_multiplier(unsigned int val , int wlc)
+{
+        sysctl_sched_pelt_multiplier = val;
+        //pr_err("@@pelt_mult = %d val %d wlc %d\n", sysctl_sched_pelt_multiplier, val, wlc);
+
+}
+EXPORT_SYMBOL_GPL(change_pelt_multiplier);
+
 int sched_pelt_multiplier(struct ctl_table *table, int write, void *buffer,
 			  size_t *lenp, loff_t *ppos)
 {
