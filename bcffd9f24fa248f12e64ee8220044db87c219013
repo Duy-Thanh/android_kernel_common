@@ -123,6 +123,24 @@
       "parentUuid": "58de9986_7971c4e1",
       "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "316fd88f_10a5336d",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2195,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-05T17:05:34Z",
+      "side": 0,
+      "message": "It\u0027s in the KMI via the exynos symbol list, so they clearly call this function.",
+      "parentUuid": "8c5b9a0a_8662f71d",
+      "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
