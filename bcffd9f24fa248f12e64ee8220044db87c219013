@@ -105,6 +105,24 @@
       "parentUuid": "c88d3382_24296e95",
       "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c5b9a0a_8662f71d",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2195,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-06-05T09:52:49Z",
+      "side": 0,
+      "message": "actually it\u0027s only line no 2643 which i see calls the api nothing else seems to be calling.\ni can take it out of the if check and not let is got failure path.",
+      "parentUuid": "58de9986_7971c4e1",
+      "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
