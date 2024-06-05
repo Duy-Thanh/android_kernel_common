@@ -51,6 +51,23 @@
       "parentUuid": "30bf50bd_0744dae0",
       "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34cf451_f46c435c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-05T14:35:09Z",
+      "side": 1,
+      "message": "I removed the KMI hashtag as this is an older release branch.",
+      "revId": "e53bbcab4186153d4abe3728bec23f5fde61fb5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
