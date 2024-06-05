@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000080425708",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3116425?revision\u003d1",
+      "key": {
+        "uuid": "9f745fa9_5821572a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-05T15:10:54Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/b361c9027b4e4159e7bcca4eb64fd26507c19994) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003db361c9027b4e4159e7bcca4eb64fd26507c19994).\n\n```\n      ## include/linux/sched/topology.h ##\n     @@ include/linux/sched/topology.h: extern void partition_sched_domains(int ndoms_new, cpumask_var_t doms_new[],\n    @@ include/linux/sched/topology.h: extern void partition_sched_domains(int ndoms_ne\n      \n     +bool cpus_equal_capacity(int this_cpu, int that_cpu);\n      bool cpus_share_cache(int this_cpu, int that_cpu);\n    - bool cpus_share_resources(int this_cpu, int that_cpu);\n      \n    + typedef const struct cpumask *(*sched_domain_mask_f)(int cpu);\n     @@ include/linux/sched/topology.h: partition_sched_domains(int ndoms_new, cpumask_var_t doms_new[],\n      {\n      }\n    @@ include/linux/sched/topology.h: partition_sched_domains(int ndoms_new, cpumask_v\n      \treturn true;\n     \n      ## kernel/sched/core.c ##\n    -@@ kernel/sched/core.c: void wake_up_if_idle(int cpu)\n    - \t}\n    +@@ kernel/sched/core.c: out:\n      }\n    + EXPORT_SYMBOL_GPL(wake_up_if_idle);\n      \n     +bool cpus_equal_capacity(int this_cpu, int that_cpu)\n     +{\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "8f5c555df3b28b1de2b1a6931023808debdfd555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
