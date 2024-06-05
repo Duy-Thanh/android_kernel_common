@@ -7,6 +7,7 @@ ACLOUD=$BIN_DIR/acloudb.sh
 TRADEFED=prebuilts/tradefed/filegroups/tradefed/tradefed.sh
 TESTSDIR=bazel-bin/common/
 LOG_DIR=${TMPDIR:-/tmp}/kselftest_$USER/$(date +%Y%m%d_%H%M%S)
+JDK_PATH=prebuilts/jdk/jdk11/linux-x86
 
 print_help() {
     echo "Usage: $0 [OPTIONS]"
@@ -129,6 +130,13 @@ if $BUILD_KERNEL; then
     # TODO: add support to build kernel for physical device
     $BAZEL run $BUILD_FLAGS //common-modules/virtual-device:virtual_device_x86_64_dist -- \
      --dist_dir=$DIST_DIR
+    exit_code=$?
+    if [ $exit_code -eq 0 ]; then
+        echo "Build kernel succeeded"
+    else
+        echo "Build kernel failed with exit code $exit_code"
+        exit 1
+    fi
 fi
 
 if $LAUNCH_CVD; then
@@ -163,6 +171,13 @@ case $ABI in
 		exit 1
 		;;
 esac
+exit_code=$?
+if [ $exit_code -eq 0 ]; then
+    echo "Build kselftest succeeded"
+else
+    echo "Build kselftest failed with exit code $exit_code"
+    exit 1
+fi
 
 if [ -z "$SELECTED_TESTS" ]; then
     echo "Running all kselftests with device $SERIAL_NUMBER..."
@@ -171,8 +186,8 @@ else
     echo "Running $SELECTED_TESTS with device $SERIAL_NUMBER ..."
 fi
 
-tf_cli="$TRADEFED run commandAndExit template/local_min \
---template:map test=suite/test_mapping_suite \
+tf_cli="JAVA_HOME=$JDK_PATH PATH=$JDK_PATH/bin:$PATH $TRADEFED run commandAndExit \
+template/local_min --template:map test=suite/test_mapping_suite \
 $TEST_FILTERS --tests-dir=$TESTSDIR --log-file-path=$LOG_DIR \
 --primary-abi-only -s $SERIAL_NUMBER"
 
