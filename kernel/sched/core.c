@@ -10523,6 +10523,14 @@ static inline struct task_group *css_tg(struct cgroup_subsys_state *css)
 	return css ? container_of(css, struct task_group, css) : NULL;
 }
 
+const char *get_tg_name(struct cgroup_subsys_state *css)
+{
+        const char *name = css_tg(css)->css.cgroup->kn->name;
+        return name;
+
+}
+EXPORT_SYMBOL_GPL(get_tg_name);
+
 static struct cgroup_subsys_state *
 cpu_cgroup_css_alloc(struct cgroup_subsys_state *parent_css)
 {
