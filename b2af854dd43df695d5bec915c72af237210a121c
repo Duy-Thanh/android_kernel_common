@@ -16,6 +16,24 @@
       "message": "this depends on aosp/3081226 which changes the KMI. Needs to wait for June 5 KMI update",
       "revId": "b2af854dd43df695d5bec915c72af237210a121c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e8bf27_04e3278f",
+        "filename": "drivers/mmc/host/sdhci-msm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2635,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-05T15:03:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58e7774a_50db19a5",
+      "revId": "b2af854dd43df695d5bec915c72af237210a121c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
