@@ -88,6 +88,30 @@
       },
       "revId": "c0471e902884235fd3f9e772316cea5659134c42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "536f6a16_84845657",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-06-05T00:14:50Z",
+      "side": 1,
+      "message": "Functionally it\u0027s the same, but I disagree we should prefer `__aligned_u64`. `__aligned_u64` adds a dependency on a UAPI header that we don\u0027t otherwise need, and also depends on a (admittedly widespread) compiler extension for `__attribute__((aligned(` instead of using the `_Alignas` core language feature. We could use `__aligned(8)` and move off the compiler extension with the rest of the kernel if someone ever sends a patch for that, but I don\u0027t think it\u0027s possible to use a type (instead of size) with it as is being done here.",
+      "parentUuid": "6502ef1c_74628ac9",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "c0471e902884235fd3f9e772316cea5659134c42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
