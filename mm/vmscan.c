@@ -3636,7 +3636,7 @@ static void reset_mm_stats(struct lruvec *lruvec, struct lru_gen_mm_walk *walk, 
 	lockdep_assert_held(&get_mm_list(lruvec_memcg(lruvec))->lock);
 
 	if (walk) {
-		hist = lru_hist_from_seq(walk->max_seq);
+		hist = lru_hist_from_seq(walk->scan_seq);
 
 		for (i = 0; i < NR_MM_STATS; i++) {
 			WRITE_ONCE(lruvec->mm_state.stats[hist][i],
@@ -3646,7 +3646,7 @@ static void reset_mm_stats(struct lruvec *lruvec, struct lru_gen_mm_walk *walk, 
 	}
 
 	if (NR_HIST_GENS > 1 && last) {
-		hist = lru_hist_from_seq(lruvec->mm_state.seq + 1);
+		hist = lru_hist_from_seq(lruvec->mm_state.scan_seq);
 
 		for (i = 0; i < NR_MM_STATS; i++)
 			WRITE_ONCE(lruvec->mm_state.stats[hist][i], 0);
@@ -3677,6 +3677,14 @@ static bool should_skip_mm(struct mm_struct *mm, struct lru_gen_mm_walk *walk)
 	return !mmget_not_zero(mm);
 }
 
+/*
+ * There is a window between when the last mm of the current iteration is
+ * claimed and when the aging process actually completes. During this
+ * window, should_run_aging() will likely still try to run aging. Use a
+ * special scan_seq value to avoid scanning based on that stale result.
+ */
+#define SCAN_ITER_FINISHING ULONG_MAX
+
 static bool iterate_mm_list(struct lruvec *lruvec, struct lru_gen_mm_walk *walk,
 			    struct mm_struct **iter)
 {
@@ -3688,9 +3696,9 @@ static bool iterate_mm_list(struct lruvec *lruvec, struct lru_gen_mm_walk *walk,
 	struct lru_gen_mm_state *mm_state = &lruvec->mm_state;
 
 	/*
-	 * mm_state->seq is incremented after each iteration of mm_list. There
-	 * are three interesting cases for this page table walker:
-	 * 1. It tries to start a new iteration with a stale max_seq: there is
+	 * mm_state->scan_seq is incremented after each iteration of mm_list.
+	 * There are three interesting cases for this page table walker:
+	 * 1. It tries to start a new iteration with a stale scan_seq: there is
 	 *    nothing left to do.
 	 * 2. It started the next iteration: it needs to reset the Bloom filter
 	 *    so that a fresh set of PTE tables can be recorded.
@@ -3699,9 +3707,9 @@ static bool iterate_mm_list(struct lruvec *lruvec, struct lru_gen_mm_walk *walk,
 	 */
 	spin_lock(&mm_list->lock);
 
-	VM_WARN_ON_ONCE(mm_state->seq + 1 < walk->max_seq);
+	VM_WARN_ON_ONCE(mm_state->scan_seq < walk->scan_seq);
 
-	if (walk->max_seq <= mm_state->seq)
+	if (walk->scan_seq < mm_state->scan_seq)
 		goto done;
 
 	if (!mm_state->head)
@@ -3713,7 +3721,7 @@ static bool iterate_mm_list(struct lruvec *lruvec, struct lru_gen_mm_walk *walk,
 	do {
 		mm_state->head = mm_state->head->next;
 		if (mm_state->head == &mm_list->fifo) {
-			WRITE_ONCE(mm_state->seq, mm_state->seq + 1);
+			WRITE_ONCE(mm_state->scan_seq, SCAN_ITER_FINISHING);
 			last = true;
 			break;
 		}
@@ -3735,7 +3743,7 @@ done:
 	spin_unlock(&mm_list->lock);
 
 	if (mm && first)
-		reset_bloom_filter(lruvec, walk->max_seq + 1);
+		reset_bloom_filter(lruvec, walk->scan_seq + 1);
 
 	if (*iter)
 		mmput_async(*iter);
@@ -3745,7 +3753,7 @@ done:
 	return last;
 }
 
-static bool iterate_mm_list_nowalk(struct lruvec *lruvec, unsigned long max_seq)
+static bool iterate_mm_list_nowalk(struct lruvec *lruvec, unsigned long scan_seq)
 {
 	bool success = false;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
@@ -3754,12 +3762,12 @@ static bool iterate_mm_list_nowalk(struct lruvec *lruvec, unsigned long max_seq)
 
 	spin_lock(&mm_list->lock);
 
-	VM_WARN_ON_ONCE(mm_state->seq + 1 < max_seq);
+	VM_WARN_ON_ONCE(mm_state->scan_seq < scan_seq);
 
-	if (max_seq > mm_state->seq) {
+	if (scan_seq >= mm_state->scan_seq) {
 		mm_state->head = NULL;
 		mm_state->tail = NULL;
-		WRITE_ONCE(mm_state->seq, mm_state->seq + 1);
+		WRITE_ONCE(mm_state->scan_seq, SCAN_ITER_FINISHING);
 		reset_mm_stats(lruvec, NULL, true);
 		success = true;
 	}
@@ -4321,7 +4329,7 @@ restart:
 			walk_pmd_range_locked(pud, addr, vma, args, bitmap, &first);
 		}
 
-		if (!walk->force_scan && !test_bloom_filter(walk->lruvec, walk->max_seq, pmd + i))
+		if (!walk->force_scan && !test_bloom_filter(walk->lruvec, walk->scan_seq, pmd + i))
 			continue;
 
 		walk->mm_stats[MM_NONLEAF_FOUND]++;
@@ -4332,7 +4340,7 @@ restart:
 		walk->mm_stats[MM_NONLEAF_ADDED]++;
 
 		/* carry over to the next generation */
-		update_bloom_filter(walk->lruvec, walk->max_seq + 1, pmd + i);
+		update_bloom_filter(walk->lruvec, walk->scan_seq + 1, pmd + i);
 	}
 
 	walk_pmd_range_locked(pud, -1, vma, args, bitmap, &first);
@@ -4397,12 +4405,12 @@ static void walk_mm(struct lruvec *lruvec, struct mm_struct *mm, struct lru_gen_
 	walk->next_addr = FIRST_USER_ADDRESS;
 
 	do {
-		DEFINE_MAX_SEQ(lruvec);
+		unsigned long scan_seq = READ_ONCE(lruvec->mm_state.scan_seq);
 
 		err = -EBUSY;
 
 		/* another thread might have called inc_max_seq() */
-		if (walk->max_seq != max_seq)
+		if (walk->scan_seq != scan_seq)
 			break;
 
 		/* folio_update_gen() requires stable folio_memcg() */
@@ -4598,7 +4606,8 @@ restart:
 }
 
 static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
-			       struct scan_control *sc, bool can_swap, bool force_scan)
+			       unsigned long scan_seq, struct scan_control *sc,
+			       bool can_swap, bool force_scan)
 {
 	bool success;
 	struct lru_gen_mm_walk *walk;
@@ -4606,8 +4615,10 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 
 	VM_WARN_ON_ONCE(max_seq > READ_ONCE(lrugen->max_seq));
-	/* see the comment in iterate_mm_list() */
-	if (max_seq <= READ_ONCE(lruvec->mm_state.seq)) {
+
+	/* see the comment on SCAN_ITER_FINISHING and in iterate_mm_list() */
+	if (scan_seq == SCAN_ITER_FINISHING ||
+	    scan_seq < READ_ONCE(lruvec->mm_state.scan_seq)) {
 		success = false;
 		goto done;
 	}
@@ -4619,18 +4630,19 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
 	 * is less efficient, but it avoids bursty page faults.
 	 */
 	if (!should_walk_mmu()) {
-		success = iterate_mm_list_nowalk(lruvec, max_seq);
+		success = iterate_mm_list_nowalk(lruvec, scan_seq);
 		goto done;
 	}
 
 	walk = set_mm_walk(NULL, true);
 	if (!walk) {
-		success = iterate_mm_list_nowalk(lruvec, max_seq);
+		success = iterate_mm_list_nowalk(lruvec, scan_seq);
 		goto done;
 	}
 
 	walk->lruvec = lruvec;
 	walk->max_seq = max_seq;
+	walk->scan_seq = scan_seq;
 	walk->can_swap = can_swap;
 	walk->force_scan = force_scan;
 
@@ -4642,6 +4654,10 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
 done:
 	if (success) {
 		inc_max_seq(lruvec, can_swap, force_scan);
+
+		VM_WARN_ON_ONCE(lruvec->mm_state.scan_seq != SCAN_ITER_FINISHING);
+		WRITE_ONCE(lruvec->mm_state.scan_seq, scan_seq + 1);
+
 		kernfs_notify(lru_gen_admin_node);
 	}
 
@@ -4789,6 +4805,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 	struct mem_cgroup *memcg = folio_memcg(folio);
 	struct pglist_data *pgdat = folio_pgdat(folio);
 	struct lruvec *lruvec = mem_cgroup_lruvec(memcg, pgdat);
+	unsigned long scan_seq = READ_ONCE(lruvec->mm_state.scan_seq);
 	DEFINE_MAX_SEQ(lruvec);
 	int old_gen, new_gen = lru_gen_from_seq(max_seq);
 
@@ -4872,7 +4889,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 
 	/* feedback from rmap walkers to page table walkers */
 	if (suitable_to_scan(i, young))
-		update_bloom_filter(lruvec, max_seq, pvmw->pmd);
+		update_bloom_filter(lruvec, scan_seq, pvmw->pmd);
 }
 
 /******************************************************************************
@@ -5470,6 +5487,7 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, bool 
 	unsigned long nr_to_scan;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
 	DEFINE_MAX_SEQ(lruvec);
+	unsigned long scan_seq = READ_ONCE(lruvec->mm_state.scan_seq);
 
 	if (mem_cgroup_below_min(sc->target_mem_cgroup, memcg))
 		return -1;
@@ -5482,7 +5500,7 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, bool 
 		return nr_to_scan;
 
 	/* skip this lruvec as it's low on cold folios */
-	return try_to_inc_max_seq(lruvec, max_seq, sc, can_swap, false) ? -1 : 0;
+	return try_to_inc_max_seq(lruvec, max_seq, scan_seq, sc, can_swap, false) ? -1 : 0;
 }
 
 static bool should_abort_scan(struct lruvec *lruvec, struct scan_control *sc)
@@ -6301,6 +6319,7 @@ static int run_aging(struct lruvec *lruvec, unsigned long seq, struct scan_contr
 {
 	DEFINE_MAX_SEQ(lruvec);
 	DEFINE_MIN_SEQ(lruvec);
+	unsigned long scan_seq = READ_ONCE(lruvec->mm_state.scan_seq);
 
 	if (seq < max_seq)
 		return 0;
@@ -6311,7 +6330,7 @@ static int run_aging(struct lruvec *lruvec, unsigned long seq, struct scan_contr
 	if (!force_scan && min_seq[!can_swap] + MAX_NR_GENS - 1 <= max_seq)
 		return -ERANGE;
 
-	try_to_inc_max_seq(lruvec, max_seq, sc, can_swap, force_scan);
+	try_to_inc_max_seq(lruvec, max_seq, scan_seq, sc, can_swap, force_scan);
 
 	return 0;
 }
@@ -6503,7 +6522,7 @@ void lru_gen_init_lruvec(struct lruvec *lruvec)
 	for_each_gen_type_zone(gen, type, zone)
 		INIT_LIST_HEAD(&lrugen->folios[gen][type][zone]);
 
-	lruvec->mm_state.seq = MIN_NR_GENS;
+	lruvec->mm_state.scan_seq = 0;
 }
 
 #ifdef CONFIG_MEMCG
