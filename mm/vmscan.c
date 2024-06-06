@@ -3419,10 +3419,15 @@ static int get_nr_gens(struct lruvec *lruvec, int type)
 
 static bool __maybe_unused seq_is_valid(struct lruvec *lruvec)
 {
-	/* see the comment on lru_gen_folio */
-	return get_nr_gens(lruvec, LRU_GEN_FILE) >= MIN_NR_GENS &&
-	       get_nr_gens(lruvec, LRU_GEN_FILE) <= get_nr_gens(lruvec, LRU_GEN_ANON) &&
-	       get_nr_gens(lruvec, LRU_GEN_ANON) <= MAX_NR_GENS;
+	int type;
+
+	for (type = ANON_AND_FILE - 1; type >= 0; type--) {
+		int nr_gens = get_nr_gens(lruvec, type);
+
+		if (nr_gens < MIN_NR_GENS || nr_gens > MAX_NR_GENS)
+			return false;
+	}
+	return true;
 }
 
 /******************************************************************************
@@ -3785,32 +3790,31 @@ static bool iterate_mm_list_nowalk(struct lruvec *lruvec, unsigned long scan_seq
  ******************************************************************************/
 
 /*
- * A feedback loop based on Proportional-Integral-Derivative (PID) controller.
+ * To decide between two eviction targets X and Y, the target whose pages have
+ * a higher estimated cost for retention is chosen. The cost of retaining a
+ * page in X is the sum of:
  *
- * The P term is refaulted/(evicted+protected) from a tier in the generation
- * currently being evicted; the I term is the exponential moving average of the
- * P term over the generations previously evicted, using the smoothing factor
- * 1/2; the D term isn't supported.
+ *  - The cost paid so far to retain the page so far. This is estimated as the
+ *    number of pages in Y that were evicted in favor of retaining pages in X
+ *    but which have since been refaulted, divided by the original size of X
+ *    to amortize the cost across all retained pages.
+ *  - The predicted cost of evicting a page in Y instead of a page in X. This
+ *    is the refault rate of Y.
  *
- * The setpoint (SP) is always the first tier of one type; the process variable
- * (PV) is either any tier of the other type or any other tier of the same
- * type.
+ * The estimated cost of retention is then multiplied by a constant gain factor.
  *
- * The error is the difference between the SP and the PV; the correction is to
- * turn off protection when SP>PV or turn on protection when SP<PV.
- *
- * For future optimizations:
- * 1. The D term may discount the other two terms over time so that long-lived
- *    generations can resist stale information.
+ * TODO: consider evicted+protected+cur_size instead of oldest_gen_size
  */
 struct ctrl_pos {
 	unsigned long refaulted;
 	unsigned long total;
+	unsigned long num_victims;
+	unsigned long gen_size;
 	int gain;
 };
 
 static void read_ctrl_pos(struct lruvec *lruvec, int type, int tier, int gain,
-			  struct ctrl_pos *pos)
+			  bool has_victims, struct ctrl_pos *pos)
 {
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 	int hist = lru_hist_from_seq(lrugen->min_seq[type]);
@@ -3822,6 +3826,14 @@ static void read_ctrl_pos(struct lruvec *lruvec, int type, int tier, int gain,
 	if (tier)
 		pos->total += lrugen->protected[hist][type][tier - 1];
 	pos->gain = gain;
+
+	if (has_victims) {
+		pos->num_victims = atomic_long_read(&lrugen->refaulted_victims[hist][type]);
+		pos->gen_size = lrugen->oldest_gen_size[hist][type];
+	} else {
+		pos->num_victims = 0;
+		pos->gen_size = 1;
+	}
 }
 
 static void reset_histograms(struct lruvec *lruvec, int type, unsigned long seq)
@@ -3838,17 +3850,24 @@ static void reset_histograms(struct lruvec *lruvec, int type, unsigned long seq)
 		if (tier)
 			WRITE_ONCE(lrugen->protected[hist][type][tier - 1], 0);
 	}
+	atomic_long_set(&lrugen->refaulted_victims[hist][type], 0);
+
+	WRITE_ONCE(lrugen->victim_seq[hist][type], 0);
+	WRITE_ONCE(lrugen->oldest_gen_size[hist][type], 0);
 }
 
 static void reset_ctrl_pos(struct lruvec *lruvec, int type)
 {
 	int hist, tier;
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
-	unsigned long seq = lrugen->min_seq[type];
+	unsigned long carry_from_seq = lrugen->min_seq[type];
+	unsigned long next_seq = carry_from_seq + 1;
+	unsigned long next_gen = lru_gen_from_seq(next_seq);
+	long total_nr_pages = 0;
 
 	lockdep_assert_held(&lruvec->lru_lock);
 
-	hist = lru_hist_from_seq(seq);
+	hist = lru_hist_from_seq(carry_from_seq);
 
 	for (tier = 0; tier < MAX_NR_TIERS; tier++) {
 		unsigned long sum;
@@ -3863,21 +3882,34 @@ static void reset_ctrl_pos(struct lruvec *lruvec, int type)
 			sum += lrugen->protected[hist][type][tier - 1];
 		WRITE_ONCE(lrugen->avg_total[type][tier], sum / 2);
 
+		total_nr_pages += lrugen->nr_pages[next_gen][type][tier];
 	}
+	/* nr_pages is eventually consistent, so fix up the estimate if it's negative. */
+	total_nr_pages = max(total_nr_pages, 0);
 
 	if (NR_HIST_GENS == 1)
-		reset_histograms(lruvec, type, seq);
+		reset_histograms(lruvec, type, carry_from_seq);
+
+	hist = lru_hist_from_seq(next_seq);
+	WRITE_ONCE(lrugen->victim_seq[hist][type], READ_ONCE(lrugen->min_seq[!type]));
+	WRITE_ONCE(lrugen->oldest_gen_size[hist][type], total_nr_pages);
+}
+
+/* Constant multiplier for cost calculations, to allow integer division. */
+#define COST_SHIFT 16
+
+static unsigned long retain_cost(struct ctrl_pos *retain, struct ctrl_pos *evict)
+{
+	unsigned long unnecessary_refaults, potential_refault;
+
+	unnecessary_refaults = (retain->num_victims << COST_SHIFT) / (retain->gen_size + 1);
+	potential_refault = (evict->refaulted << COST_SHIFT) / (evict->total + 1);
+	return retain->gain * (unnecessary_refaults + potential_refault);
 }
 
 static bool positive_ctrl_err(struct ctrl_pos *sp, struct ctrl_pos *pv)
 {
-	/*
-	 * Return true if the PV has a limited number of refaults or a lower
-	 * refaulted/total than the SP.
-	 */
-	return pv->refaulted < MIN_LRU_BATCH ||
-	       pv->refaulted * (sp->total + MIN_LRU_BATCH) * sp->gain <=
-	       (sp->refaulted + 1) * pv->total * pv->gain;
+	return retain_cost(pv, sp) > retain_cost(sp, pv);
 }
 
 /******************************************************************************
@@ -4532,12 +4564,6 @@ static bool try_to_inc_min_seq(struct lruvec *lruvec, bool can_swap)
 		}
 next:
 		;
-	}
-
-	/* see the comment on lru_gen_folio */
-	if (can_swap) {
-		min_seq[LRU_GEN_ANON] = min(min_seq[LRU_GEN_ANON], min_seq[LRU_GEN_FILE]);
-		min_seq[LRU_GEN_FILE] = max(min_seq[LRU_GEN_ANON], lrugen->min_seq[LRU_GEN_FILE]);
 	}
 
 	for (type = !can_swap; type < ANON_AND_FILE; type++) {
@@ -5242,9 +5268,9 @@ static int get_tier_idx(struct lruvec *lruvec, int type)
 	 * This value is chosen because any other tier would have at least twice
 	 * as many refaults as the first tier.
 	 */
-	read_ctrl_pos(lruvec, type, 0, 1, &sp);
+	read_ctrl_pos(lruvec, type, 0, 1, false, &sp);
 	for (tier = 1; tier < MAX_NR_TIERS; tier++) {
-		read_ctrl_pos(lruvec, type, tier, 2, &pv);
+		read_ctrl_pos(lruvec, type, tier, 2, false, &pv);
 		if (!positive_ctrl_err(&sp, &pv))
 			break;
 	}
@@ -5264,13 +5290,13 @@ static int get_type_to_scan(struct lruvec *lruvec, int swappiness, int *tier_idx
 	 * with the first tier of the other type to determine the last tier (of
 	 * the selected type) to evict.
 	 */
-	read_ctrl_pos(lruvec, LRU_GEN_ANON, 0, gain[LRU_GEN_ANON], &sp);
-	read_ctrl_pos(lruvec, LRU_GEN_FILE, 0, gain[LRU_GEN_FILE], &pv);
+	read_ctrl_pos(lruvec, LRU_GEN_ANON, 0, gain[LRU_GEN_ANON], true, &sp);
+	read_ctrl_pos(lruvec, LRU_GEN_FILE, 0, gain[LRU_GEN_FILE], true, &pv);
 	type = positive_ctrl_err(&sp, &pv);
 
-	read_ctrl_pos(lruvec, !type, 0, gain[!type], &sp);
+	read_ctrl_pos(lruvec, !type, 0, gain[!type], true, &sp);
 	for (tier = 1; tier < MAX_NR_TIERS; tier++) {
-		read_ctrl_pos(lruvec, type, tier, gain[type], &pv);
+		read_ctrl_pos(lruvec, type, tier, gain[type], true, &pv);
 		if (!positive_ctrl_err(&sp, &pv))
 			break;
 	}
@@ -5287,18 +5313,11 @@ static int isolate_folios(struct lruvec *lruvec, struct scan_control *sc, int sw
 	int type;
 	int scanned;
 	int tier = -1;
-	DEFINE_MIN_SEQ(lruvec);
 
 	/*
-	 * Try to make the obvious choice first. When anon and file are both
-	 * available from the same generation, interpret swappiness 1 as file
-	 * first and 200 as anon first.
+	 * Interpret swappiness 1 as file first and 200 as anon first.
 	 */
-	if (!swappiness)
-		type = LRU_GEN_FILE;
-	else if (min_seq[LRU_GEN_ANON] < min_seq[LRU_GEN_FILE])
-		type = LRU_GEN_ANON;
-	else if (swappiness == 1)
+	if (swappiness <= 1)
 		type = LRU_GEN_FILE;
 	else if (swappiness == 200)
 		type = LRU_GEN_ANON;
@@ -5416,40 +5435,37 @@ retry:
 	return scanned;
 }
 
-static bool should_run_aging(struct lruvec *lruvec, unsigned long *max_seq,
-			     struct scan_control *sc, bool can_swap, unsigned long *nr_to_scan)
+static bool should_run_aging(struct lruvec *lruvec, int type, unsigned long max_seq,
+			     unsigned long min_seq, struct scan_control *sc,
+			     unsigned long *nr_to_scan)
 {
-	int gen, type, zone;
+	int gen, zone;
 	unsigned long old = 0;
 	unsigned long young = 0;
 	unsigned long total = 0;
+	unsigned long seq;
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
-	DEFINE_MIN_SEQ(lruvec);
 
 	/* whether this lruvec is completely out of cold folios */
-	if (min_seq[!can_swap] + MIN_NR_GENS > max_seq[!can_swap]) {
+	if (min_seq + MIN_NR_GENS > max_seq) {
 		*nr_to_scan = 0;
 		return true;
 	}
 
-	for (type = !can_swap; type < ANON_AND_FILE; type++) {
-		unsigned long seq;
+	for (seq = min_seq; seq <= max_seq; seq++) {
+		unsigned long size = 0;
 
-		for (seq = min_seq[type]; seq <= max_seq[type]; seq++) {
-			unsigned long size = 0;
+		gen = lru_gen_from_seq(seq);
 
-			gen = lru_gen_from_seq(seq);
+		for (zone = 0; zone < MAX_NR_ZONES; zone++)
+			size += max(READ_ONCE(lrugen->nr_pages[gen][type][zone]), 0L);
 
-			for (zone = 0; zone < MAX_NR_ZONES; zone++)
-				size += max(READ_ONCE(lrugen->nr_pages[gen][type][zone]), 0L);
-
-			total += size;
-			if (seq == max_seq[type])
-				young += size;
-			else if (seq + MIN_NR_GENS == max_seq[type])
-				old += size;
-		}
+		total += size;
+		if (seq == max_seq)
+			young += size;
+		else if (seq + MIN_NR_GENS == max_seq)
+			old += size;
 	}
 
 	/* try to scrape all its memory if this memcg was deleted */
@@ -5465,7 +5481,7 @@ static bool should_run_aging(struct lruvec *lruvec, unsigned long *max_seq,
 	 * stalls when the number of generations reaches MIN_NR_GENS. Hence, the
 	 * ideal number of generations is MIN_NR_GENS+1.
 	 */
-	if (min_seq[!can_swap] + MIN_NR_GENS < max_seq[!can_swap])
+	if (min_seq + MIN_NR_GENS < max_seq)
 		return false;
 
 	/*
@@ -5488,27 +5504,46 @@ static bool should_run_aging(struct lruvec *lruvec, unsigned long *max_seq,
  * 1. Defer try_to_inc_max_seq() to workqueues to reduce latency for memcg
  *    reclaim.
  */
-static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, bool can_swap)
+static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc,
+			   bool can_swap, int *did_age)
 {
-	unsigned long nr_to_scan;
+	unsigned long nr_to_scan[ANON_AND_FILE] = {}, ret;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
 	DEFINE_MAX_SEQ(lruvec);
+	DEFINE_MIN_SEQ(lruvec);
 	unsigned long scan_seq = READ_ONCE(lruvec->mm_state.scan_seq);
-	bool should_age[ANON_AND_FILE] = { true, true };
+	bool should_age[ANON_AND_FILE] = {};
+	int type;
+	bool max_seq_inc;
 
 	if (mem_cgroup_below_min(sc->target_mem_cgroup, memcg))
 		return -1;
 
-	if (!should_run_aging(lruvec, max_seq, sc, can_swap, &nr_to_scan))
-		return nr_to_scan;
+	for (type = !can_swap; type < ANON_AND_FILE; type++) {
+		if (did_age[type])
+			continue;
+
+		should_age[type] = should_run_aging(lruvec, type, max_seq[type],
+						    min_seq[type], sc, nr_to_scan + type);
+	}
 
 	/* skip the aging path at the default priority */
-	if (sc->priority == DEF_PRIORITY)
-		return nr_to_scan;
+	if (sc->priority == DEF_PRIORITY ||
+	    (!should_age[LRU_GEN_ANON] && !should_age[LRU_GEN_FILE]))
+		return nr_to_scan[LRU_GEN_ANON] + nr_to_scan[LRU_GEN_FILE];
+
+	max_seq_inc = try_to_inc_max_seq(lruvec, max_seq, scan_seq,
+					 should_age, sc, can_swap, false);
+	ret = 0;
+	for (type = !can_swap; type < ANON_AND_FILE; type++) {
+		if (max_seq_inc)
+			did_age[type] |= should_age[type];
+		if (!did_age[type] && !should_age[type])
+			ret += nr_to_scan[type];
+	}
 
 	/* skip this lruvec as it's low on cold folios */
-	return try_to_inc_max_seq(lruvec, max_seq, scan_seq,
-				  should_age, sc, can_swap, false) ? -1 : 0;
+	return ret > 0 ? ret : (max_seq_inc ? -1  : 0);
 }
 
 static bool should_abort_scan(struct lruvec *lruvec, struct scan_control *sc)
@@ -5552,6 +5587,7 @@ static bool try_to_shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 	long nr_to_scan;
 	unsigned long scanned = 0;
 	int swappiness = get_swappiness(lruvec, sc);
+	int did_age[ANON_AND_FILE] = {};
 
 	/* clean file folios are more likely to exist */
 	if (swappiness && !(sc->gfp_mask & __GFP_IO))
@@ -5560,7 +5596,7 @@ static bool try_to_shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 	while (true) {
 		int delta;
 
-		nr_to_scan = get_nr_to_scan(lruvec, sc, swappiness);
+		nr_to_scan = get_nr_to_scan(lruvec, sc, swappiness, did_age);
 		if (nr_to_scan <= 0)
 			break;
 
@@ -6379,9 +6415,6 @@ static int run_aging(struct lruvec *lruvec, unsigned long *seqs, struct scan_con
 		if (!should_age[LRU_GEN_ANON] && !should_age[LRU_GEN_FILE])
 			return -ERANGE;
 	}
-
-	if (should_age[LRU_GEN_ANON] != should_age[LRU_GEN_FILE])
-		return -EINVAL;
 
 	try_to_inc_max_seq(lruvec, max_seq, scan_seq, should_age, sc, can_swap, force_scan);
 
