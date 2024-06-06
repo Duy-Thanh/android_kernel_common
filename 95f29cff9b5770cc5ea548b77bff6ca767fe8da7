@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "647ac734_9b5699e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-06T09:57:49Z",
+      "side": 1,
+      "message": "Can we refactor this into a set of common flags by now? I would include -pthread as well even though it is not strictly needed for all of the tests.",
+      "revId": "95f29cff9b5770cc5ea548b77bff6ca767fe8da7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
