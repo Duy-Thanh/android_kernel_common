@@ -91,9 +91,13 @@ VDSO_CFLAGS += -mthumb -fomit-frame-pointer
 else
 VDSO_CFLAGS += -marm
 endif
+# User-supplied
+VDSO_CFLAGS += $(KCPPFLAGS) $(KCFLAGS)
 
 VDSO_AFLAGS := $(VDSO_CAFLAGS)
 VDSO_AFLAGS += -D__ASSEMBLY__
+# User-supplied
+VDSO_AFLAGS += $(KAFLAGS)
 
 # From arm vDSO Makefile
 VDSO_LDFLAGS += -Bsymbolic --no-undefined -soname=linux-vdso.so.1
