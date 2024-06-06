@@ -739,7 +739,7 @@ static void verity_end_io(struct bio *bio)
 		queue_work(system_bh_wq, &io->bh_work);
 	} else {
 		INIT_WORK(&io->work, verity_work);
-		queue_work(io->v->verify_wq, &io->work);
+		queue_work_on(io->io_cpu, io->v->verify_wq, &io->work);
 	}
 }
 
@@ -855,6 +855,7 @@ static int verity_map(struct dm_target *ti, struct bio *bio)
 	bio->bi_end_io = verity_end_io;
 	bio->bi_private = io;
 	io->iter = bio->bi_iter;
+	io->io_cpu = raw_smp_processor_id();
 
 	verity_fec_init_io(io);
 

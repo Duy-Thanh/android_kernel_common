@@ -86,6 +86,7 @@ struct dm_verity_io {
 	sector_t block;
 	unsigned int n_blocks;
 	bool in_bh;
+	int io_cpu;
 
 	struct work_struct work;
 	struct work_struct bh_work;
