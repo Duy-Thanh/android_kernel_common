@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4faaaf60_2f43ea3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-06T21:20:29Z",
+      "side": 1,
+      "message": "This is not the correct Author. Please prefer the use of `git cherry-pick` instead of manually constructing the patch.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 6
+      },
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3f95ef_364c338f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-06T21:20:29Z",
+      "side": 1,
+      "message": "I think you should separate the actual `FROMGIT:` and then do the android fixes in a separate `ANDROID:` patch, in which you could list these commits:\n```\nFixes: 8e1ec97355ef (\"ANDROID: dma-heap: Provide accessors so that in-kernel drivers can allocate dmabufs from specific heaps\")\nFixes: 349e8360c9c8 (\"ANDROID: dma-heap: Rework allocation calls to return struct dma_buf instead of fd\")\n```\n\nThe separate `ANDROID:` patch we would need it to land in android-mainline too, not just this branch.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a6b4dd2_19c1339e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-06T21:20:29Z",
+      "side": 1,
+      "message": "Please append all this info at the bottom to keep \"chronological\" order.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35043db_0723d424",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-06T21:20:29Z",
+      "side": 1,
+      "message": "This should be `https://gitlab.freedesktop.org/drm/misc/kernel.git`",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a1c80e9_7187121d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-06T21:20:29Z",
+      "side": 1,
+      "message": "This patch was not properly cherry-picked. Please follow something like:\n\n```\n$ git fetch https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next\n$ git cherry-pick -xs  310ec03841a3\n\u003cfix merge issues\u003e\n$ git add drivers/dma-buf/dma-heap.c\n$ git cherry-pick --continue\n\u003cadd the AKC required info e.g. FROMLIST, bug: etc\u003e\n```",
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
