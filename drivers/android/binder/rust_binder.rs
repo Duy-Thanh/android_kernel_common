@@ -34,6 +34,7 @@ mod prio;
 mod process;
 mod range_alloc;
 mod thread;
+mod trace;
 mod transaction;
 
 module! {

@@ -29,6 +29,7 @@
 #include <linux/shrinker.h>
 #include <linux/task_work.h>
 #include <linux/workqueue.h>
+#include <trace/events/rust_binder.h>
 #include <uapi/linux/android/binder.h>
 #include <uapi/linux/android/binderfs.h>
 #include <uapi/linux/sched/types.h>
