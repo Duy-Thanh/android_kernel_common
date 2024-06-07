@@ -344304,6 +344304,15 @@ elf_symbol {
   full_name: "dev_pm_genpd_remove_notifier"
 }
 elf_symbol {
+  id: 0x77317a5b
+  name: "dev_pm_genpd_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x987867a9
+  type_id: 0x100e6fc8
+  full_name: "dev_pm_genpd_resume"
+}
+elf_symbol {
   id: 0x35986460
   name: "dev_pm_genpd_set_next_wakeup"
   is_defined: true
@@ -344320,6 +344329,15 @@ elf_symbol {
   crc: 0x96287e33
   type_id: 0x9c00c8ec
   full_name: "dev_pm_genpd_set_performance_state"
+}
+elf_symbol {
+  id: 0xbb06ab7b
+  name: "dev_pm_genpd_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe37f2ba8
+  type_id: 0x100e6fc8
+  full_name: "dev_pm_genpd_suspend"
 }
 elf_symbol {
   id: 0x7cbf8740
@@ -393253,8 +393271,10 @@ interface {
   symbol_id: 0x6ef38ba9
   symbol_id: 0xbd3b590c
   symbol_id: 0xa7986ac9
+  symbol_id: 0x77317a5b
   symbol_id: 0x35986460
   symbol_id: 0x73c97c25
+  symbol_id: 0xbb06ab7b
   symbol_id: 0x7cbf8740
   symbol_id: 0x34a65ab6
   symbol_id: 0xc60abbd3
