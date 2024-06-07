@@ -525,7 +525,7 @@ struct proc_dir_entry *proc_mkdir(const char *name,
 {
 	return proc_mkdir_data(name, 0, parent, NULL);
 }
-EXPORT_SYMBOL(proc_mkdir);
+EXPORT_SYMBOL_GPL(proc_mkdir);
 
 struct proc_dir_entry *proc_create_mount_point(const char *name)
 {
