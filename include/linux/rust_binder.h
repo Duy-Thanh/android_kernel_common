@@ -17,6 +17,7 @@ int init_rust_binderfs(void);
  * void pointer typedefs for these types.
  */
 typedef void *rust_binder_device;
+typedef void *rust_binder_transaction;
 
 int rust_binder_stats_show(struct seq_file *m, void *unused);
 DEFINE_SHOW_ATTRIBUTE(rust_binder_stats);
@@ -33,5 +34,32 @@ DEFINE_SHOW_ATTRIBUTE(rust_binder_transaction_log);
 extern const struct file_operations rust_binder_fops;
 rust_binder_device rust_binder_new_device(char *name);
 void rust_binder_remove_device(rust_binder_device device);
+
+struct rb_transaction_layout {
+	size_t debug_id;
+	size_t code;
+	size_t flags;
+};
+
+struct rust_binder_layout {
+	struct rb_transaction_layout t;
+};
+
+extern const struct rust_binder_layout RUST_BINDER_LAYOUT;
+
+static inline size_t rust_binder_transaction_debug_id(rust_binder_transaction t)
+{
+	return * (size_t *) (t + RUST_BINDER_LAYOUT.t.debug_id);
+}
+
+static inline u32 rust_binder_transaction_code(rust_binder_transaction t)
+{
+	return * (u32 *) (t + RUST_BINDER_LAYOUT.t.code);
+}
+
+static inline u32 rust_binder_transaction_flags(rust_binder_transaction t)
+{
+	return * (u32 *) (t + RUST_BINDER_LAYOUT.t.flags);
+}
 
 #endif
