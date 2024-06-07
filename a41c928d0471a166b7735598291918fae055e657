@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d600cb_256f1499",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-07T14:46:14Z",
+      "side": 1,
+      "message": "I wonder why the original patch has the `wol_enabled` cached in `phydev-\u003e`? Are there further usages of this in subsequent patches? Otherwise it seems like there wasn\u0027t really a need for it.",
+      "revId": "a41c928d0471a166b7735598291918fae055e657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aed7a09_a33f41c6",
+        "filename": "drivers/net/phy/phy_device.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1806,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-07T14:46:14Z",
+      "side": 1,
+      "message": "nit: please add a `[danesh: moved phydev-\u003ewol_enabled to avoid KMI-break]` or something similar explaining the reason for the `BACKPORT:`.",
+      "range": {
+        "startLine": 1806,
+        "startChar": 6,
+        "endLine": 1806,
+        "endChar": 17
+      },
+      "revId": "a41c928d0471a166b7735598291918fae055e657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
