@@ -16,10 +16,18 @@ DECLARE_HOOK(android_vh_ptype_head,
 
 struct sock;
 DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
+<<<<<<< HEAD   (b13efb ANDROID: GKI: Add ANDROID_OEM_DATA(1) in struct request to s)
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
 struct request_sock;
 DECLARE_HOOK(android_vh_inet_csk_clone_lock,
 	TP_PROTO(struct sock *newsk, const struct request_sock *req), TP_ARGS(newsk, req));
+||||||| BASE
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+=======
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_connect,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+>>>>>>> CHANGE (9842b4 ANDROID: GKI: net: add vendor hook for network quality estim)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
