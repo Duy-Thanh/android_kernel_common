@@ -34,9 +34,16 @@ DECLARE_HOOK(android_vh_udp_unicast_rcv_skb,
 DECLARE_HOOK(android_vh_udp6_unicast_rcv_skb,
 	TP_PROTO(struct sk_buff *skb, struct sock *sk),
 	TP_ARGS(skb, sk));
+<<<<<<< PATCH SET (baf6dc ANDROID: GKI: Add hooks for sk_alloc.)
+DECLARE_HOOK(android_vh_sk_alloc,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_sk_free,
+||||||| BASE
+=======
 DECLARE_HOOK(android_vh_tcp_rcv_established_fast_path,
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
 DECLARE_HOOK(android_vh_tcp_rcv_established_slow_path,
+>>>>>>> BASE      (0defa6 ANDROID: GKI: net: add vendor hook to check if out of order )
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
 /* macro versions of hooks are no longer required */
 
