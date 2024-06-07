@@ -19,6 +19,7 @@ DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
 DECLARE_HOOK(android_vh_tcp_connect,
 	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+<<<<<<< HEAD   (40f820 ANDROID: gki_config: enable PTDUMP_STAGE2_DEBUGFS)
 struct request_sock;
 DECLARE_HOOK(android_vh_inet_csk_clone_lock,
 	TP_PROTO(struct sock *newsk, const struct request_sock *req), TP_ARGS(newsk, req));
@@ -34,6 +35,13 @@ DECLARE_HOOK(android_vh_udp_unicast_rcv_skb,
 DECLARE_HOOK(android_vh_udp6_unicast_rcv_skb,
 	TP_PROTO(struct sk_buff *skb, struct sock *sk),
 	TP_ARGS(skb, sk));
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_sk_alloc,
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_sk_free,
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+>>>>>>> CHANGE (6137bb ANDROID: GKI: Add hooks for sk_alloc.)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
