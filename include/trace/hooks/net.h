@@ -27,6 +27,56 @@ DECLARE_HOOK(android_vh_udp_v6_connect,
 	TP_PROTO(struct sock *sk, struct sockaddr_in6 *sin6), TP_ARGS(sk, sin6));
 DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+<<<<<<< HEAD   (3364ea764038836bd664695920f48c17cdbc8524 ANDROID: Select rustc-1.91.1 (paired))
+||||||| BASE   (570da3349b98b744af66c2cc29dba1aa1bc39721 ANDROID: GKI: Add hooks for network management.)
+DECLARE_HOOK(android_vh_tcp_connect,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+struct request_sock;
+DECLARE_HOOK(android_vh_inet_csk_clone_lock,
+	TP_PROTO(struct sock *newsk, const struct request_sock *req), TP_ARGS(newsk, req));
+DECLARE_HOOK(android_vh_tcp_clean_rtx_queue,
+	TP_PROTO(struct sock *sk, int flag, long seq_rtt_us),
+	TP_ARGS(sk, flag, seq_rtt_us));
+struct inet_connection_sock;
+DECLARE_HOOK(android_vh_tcp_rcv_synack,
+	TP_PROTO(struct inet_connection_sock *icsk), TP_ARGS(icsk));
+DECLARE_HOOK(android_vh_udp_unicast_rcv_skb,
+	TP_PROTO(struct sk_buff *skb, struct sock *sk),
+	TP_ARGS(skb, sk));
+DECLARE_HOOK(android_vh_udp6_unicast_rcv_skb,
+	TP_PROTO(struct sk_buff *skb, struct sock *sk),
+	TP_ARGS(skb, sk));
+DECLARE_HOOK(android_vh_tcp_rcv_established_fast_path,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_rcv_established_slow_path,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+=======
+DECLARE_HOOK(android_vh_tcp_connect,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+struct request_sock;
+DECLARE_HOOK(android_vh_inet_csk_clone_lock,
+	TP_PROTO(struct sock *newsk, const struct request_sock *req), TP_ARGS(newsk, req));
+DECLARE_HOOK(android_vh_tcp_clean_rtx_queue,
+	TP_PROTO(struct sock *sk, int flag, long seq_rtt_us),
+	TP_ARGS(sk, flag, seq_rtt_us));
+struct inet_connection_sock;
+DECLARE_HOOK(android_vh_tcp_rcv_synack,
+	TP_PROTO(struct inet_connection_sock *icsk), TP_ARGS(icsk));
+DECLARE_HOOK(android_vh_udp_unicast_rcv_skb,
+	TP_PROTO(struct sk_buff *skb, struct sock *sk),
+	TP_ARGS(skb, sk));
+DECLARE_HOOK(android_vh_udp6_unicast_rcv_skb,
+	TP_PROTO(struct sk_buff *skb, struct sock *sk),
+	TP_ARGS(skb, sk));
+DECLARE_HOOK(android_vh_sk_alloc,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_sk_free,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_rcv_established_fast_path,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_rcv_established_slow_path,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+>>>>>>> CHANGE (64d33f0ca25bae9e1b0b08dcb144da1c5c443b2f ANDROID: GKI: Add hooks for sk_alloc.)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
