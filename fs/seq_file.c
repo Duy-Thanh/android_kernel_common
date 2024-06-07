@@ -683,7 +683,7 @@ void seq_putc(struct seq_file *m, char c)
 
 	m->buf[m->count++] = c;
 }
-EXPORT_SYMBOL(seq_putc);
+EXPORT_SYMBOL_GPL(seq_putc);
 
 void seq_puts(struct seq_file *m, const char *s)
 {
@@ -696,7 +696,7 @@ void seq_puts(struct seq_file *m, const char *s)
 	memcpy(m->buf + m->count, s, len);
 	m->count += len;
 }
-EXPORT_SYMBOL(seq_puts);
+EXPORT_SYMBOL_GPL(seq_puts);
 
 /**
  * seq_put_decimal_ull_width - A helper routine for putting decimal numbers
@@ -742,7 +742,7 @@ void seq_put_decimal_ull_width(struct seq_file *m, const char *delimiter,
 overflow:
 	seq_set_overflow(m);
 }
-EXPORT_SYMBOL(seq_put_decimal_ull_width);
+EXPORT_SYMBOL_GPL(seq_put_decimal_ull_width);
 
 void seq_put_decimal_ull(struct seq_file *m, const char *delimiter,
 			 unsigned long long num)
@@ -834,7 +834,7 @@ void seq_put_decimal_ll(struct seq_file *m, const char *delimiter, long long num
 overflow:
 	seq_set_overflow(m);
 }
-EXPORT_SYMBOL(seq_put_decimal_ll);
+EXPORT_SYMBOL_GPL(seq_put_decimal_ll);
 
 /**
  * seq_write - write arbitrary data to buffer
