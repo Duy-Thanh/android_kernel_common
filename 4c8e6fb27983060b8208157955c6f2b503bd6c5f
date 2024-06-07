@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ffee5ea_34fa0d50",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1952910
+      },
+      "writtenOn": "2024-06-07T07:22:01Z",
+      "side": 1,
+      "message": "start() and end() are used in pairs.",
+      "parentUuid": "abf4f313_9d156db5",
+      "range": {
+        "startLine": 3145,
+        "startChar": 34,
+        "endLine": 3145,
+        "endChar": 36
+      },
+      "revId": "4c8e6fb27983060b8208157955c6f2b503bd6c5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adf0b569_ebd166da",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d83cfe22_181b16d4",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3156,
+      "author": {
+        "id": 1952910
+      },
+      "writtenOn": "2024-06-07T07:22:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adf0b569_ebd166da",
+      "range": {
+        "startLine": 3156,
+        "startChar": 3,
+        "endLine": 3156,
+        "endChar": 35
+      },
+      "revId": "4c8e6fb27983060b8208157955c6f2b503bd6c5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1217c4b6_bb828c51",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-06-03T17:26:00Z",
       "side": 1,
       "message": "This would become `trace_android_vh_lock_folio_drop_mmap_end(true, ...)`",
+      "range": {
+        "startLine": 3162,
+        "startChar": 1,
+        "endLine": 3162,
+        "endChar": 62
+      },
+      "revId": "4c8e6fb27983060b8208157955c6f2b503bd6c5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "277d8edc_3af2669c",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3162,
+      "author": {
+        "id": 1952910
+      },
+      "writtenOn": "2024-06-07T07:22:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1217c4b6_bb828c51",
       "range": {
         "startLine": 3162,
         "startChar": 1,
