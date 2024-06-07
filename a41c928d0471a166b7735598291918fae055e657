@@ -57,6 +57,30 @@
       },
       "revId": "a41c928d0471a166b7735598291918fae055e657",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07707db6_a8c9b4aa",
+        "filename": "drivers/net/phy/phy_device.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1806,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-07T15:57:02Z",
+      "side": 1,
+      "message": "see example of this kind of annotation in our contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "5aed7a09_a33f41c6",
+      "range": {
+        "startLine": 1806,
+        "startChar": 6,
+        "endLine": 1806,
+        "endChar": 17
+      },
+      "revId": "a41c928d0471a166b7735598291918fae055e657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
