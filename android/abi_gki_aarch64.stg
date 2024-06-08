@@ -333899,6 +333899,13 @@ function {
   parameter_id: 0x2e18f543
 }
 function {
+  id: 0x9b974e4a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0c2e195c
+  parameter_id: 0x2131312a
+}
+function {
   id: 0x9b974f81
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -352034,6 +352041,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_arch_set_freq_scale"
 }
 elf_symbol {
+  id: 0x46a1012e
+  name: "__traceiter_android_vh_bd_link_disk_holder"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x368cf25c
+  type_id: 0x9b974e4a
+  full_name: "__traceiter_android_vh_bd_link_disk_holder"
+}
+elf_symbol {
   id: 0x530ad17d
   name: "__traceiter_android_vh_binder_alloc_new_buf_locked"
   is_defined: true
@@ -356217,6 +356233,15 @@ elf_symbol {
   crc: 0xdc53025c
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_arch_set_freq_scale"
+}
+elf_symbol {
+  id: 0x427f074c
+  name: "__tracepoint_android_vh_bd_link_disk_holder"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x4ae90258
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_bd_link_disk_holder"
 }
 elf_symbol {
   id: 0xc8703937
@@ -414714,6 +414739,7 @@ interface {
   symbol_id: 0xb288a9fe
   symbol_id: 0x685a6e8c
   symbol_id: 0xf89a975f
+  symbol_id: 0x46a1012e
   symbol_id: 0x530ad17d
   symbol_id: 0x5bd6c5e2
   symbol_id: 0x6e0b473c
@@ -415179,6 +415205,7 @@ interface {
   symbol_id: 0x8184b548
   symbol_id: 0x0bdd7ff6
   symbol_id: 0xe423541d
+  symbol_id: 0x427f074c
   symbol_id: 0xc8703937
   symbol_id: 0xec7540bc
   symbol_id: 0x61b56472
