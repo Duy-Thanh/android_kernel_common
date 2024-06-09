@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f20afc0_6328d694",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-09T17:08:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4faaaf60_2f43ea3f",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 6
+      },
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f3f95ef_364c338f",
@@ -94,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "251c65d4_0f4426a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-09T17:08:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a6b4dd2_19c1339e",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c35043db_0723d424",
@@ -117,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fefe2d3c_2f7b8b32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-09T17:08:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c35043db_0723d424",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a1c80e9_7187121d",
@@ -130,6 +202,24 @@
       "writtenOn": "2024-06-06T21:20:29Z",
       "side": 1,
       "message": "This patch was not properly cherry-picked. Please follow something like:\n\n```\n$ git fetch https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next\n$ git cherry-pick -xs  310ec03841a3\n\u003cfix merge issues\u003e\n$ git add drivers/dma-buf/dma-heap.c\n$ git cherry-pick --continue\n\u003cadd the AKC required info e.g. FROMLIST, bug: etc\u003e\n```",
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06472d0d_3785daa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-09T17:08:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1a1c80e9_7187121d",
       "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
