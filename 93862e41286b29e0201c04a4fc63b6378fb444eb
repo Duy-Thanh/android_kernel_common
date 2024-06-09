@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8545101c_7ca3ef73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-09T15:06:09Z",
+      "side": 1,
+      "message": "IMO, this should break KMI in other branch. should I add ANDRIOD: tag here ?",
+      "parentUuid": "7f3f95ef_364c338f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "93862e41286b29e0201c04a4fc63b6378fb444eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a6b4dd2_19c1339e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
