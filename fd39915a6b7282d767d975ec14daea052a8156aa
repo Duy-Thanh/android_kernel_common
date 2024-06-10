@@ -46,6 +46,30 @@
       },
       "revId": "fd39915a6b7282d767d975ec14daea052a8156aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2f8cf23_c9c106a0",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-10T16:41:34Z",
+      "side": 1,
+      "message": "ah, I see thanks. It is possible that this second patch doesn\u0027t break the KMI and we could include it later. However, it might be best to pull them all at the same time. I\u0027ll add it as `FROMLIST:` now and will amend the commit message once it gets picked by Sumit.",
+      "parentUuid": "cd194a4e_19d5169b",
+      "range": {
+        "startLine": 96,
+        "startChar": 49,
+        "endLine": 96,
+        "endChar": 59
+      },
+      "revId": "fd39915a6b7282d767d975ec14daea052a8156aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
