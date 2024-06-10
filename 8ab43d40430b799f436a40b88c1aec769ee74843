@@ -16,6 +16,24 @@
       "message": "Needs a \"Link:\" tag pointing to the submission on lore and a \"Bug:\" tag pointing to a issuetracker bug.",
       "revId": "8ab43d40430b799f436a40b88c1aec769ee74843",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e86f3c12_de5bd0de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3377095
+      },
+      "writtenOn": "2024-06-10T11:54:03Z",
+      "side": 1,
+      "message": "Thanks Todd, I\u0027ve added that in the new version",
+      "parentUuid": "d9dcc6b3_8d3f15e1",
+      "revId": "8ab43d40430b799f436a40b88c1aec769ee74843",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
