@@ -22,6 +22,30 @@
       },
       "revId": "fd39915a6b7282d767d975ec14daea052a8156aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd194a4e_19d5169b",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-10T16:16:13Z",
+      "side": 1,
+      "message": "Hi Carlos:\nBarry has already fixed this issue.\nhttps://lore.kernel.org/lkml/CANDhNCpFXKs-z5Ymy\u003d61fTqU3aXj4sM9RTD5_sEB0937CrVJBw@mail.gmail.com/T/\nI plan to push this patch once it gets into Sumit list and this patch doesn\u0027t break KMI. so should we merge this patch for now ?",
+      "parentUuid": "ffc07a0a_86daa430",
+      "range": {
+        "startLine": 96,
+        "startChar": 49,
+        "endLine": 96,
+        "endChar": 59
+      },
+      "revId": "fd39915a6b7282d767d975ec14daea052a8156aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
