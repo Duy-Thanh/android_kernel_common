@@ -301,6 +301,29 @@ static ssize_t store_state_target_residency(struct cpuidle_state *state,
 	return size;
 }
 
+static ssize_t store_state_exit_latency(struct cpuidle_state *state,
+				   struct cpuidle_state_usage *state_usage,
+				   const char *buf, size_t size)
+{
+	unsigned int value;
+	int err;
+
+	if (!capable(CAP_SYS_ADMIN))
+		return -EPERM;
+
+	err = kstrtouint(buf, 0, &value);
+	if (err)
+		return err;
+
+	value = value * NSEC_PER_USEC;
+
+	if (state->exit_latency_ns == value)
+		return size;
+
+	state->exit_latency_ns = value;
+	return size;
+}
+
 static ssize_t store_state_disable(struct cpuidle_state *state,
 				   struct cpuidle_state_usage *state_usage,
 				   const char *buf, size_t size)
@@ -333,7 +356,7 @@ static ssize_t show_state_default_status(struct cpuidle_state *state,
 
 define_one_state_ro(name, show_state_name);
 define_one_state_ro(desc, show_state_desc);
-define_one_state_ro(latency, show_state_exit_latency);
+define_one_state_rw(latency, show_state_exit_latency, store_state_exit_latency);
 define_one_state_rw(residency, show_state_target_residency, store_state_target_residency);
 define_one_state_ro(power, show_state_power_usage);
 define_one_state_ro(usage, show_state_usage);
