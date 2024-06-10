@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc07a0a_86daa430",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-10T16:01:30Z",
+      "side": 1,
+      "message": "@jstultz@google.com the `ops-\u003eallocate()` has the heap_flags parameter type defined as `unsigned long`. It seems to me this could be a potential problem with this `u64`? Sounds like more fixes are needed upstream?",
+      "range": {
+        "startLine": 96,
+        "startChar": 49,
+        "endLine": 96,
+        "endChar": 59
+      },
+      "revId": "fd39915a6b7282d767d975ec14daea052a8156aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
