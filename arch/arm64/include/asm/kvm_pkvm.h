@@ -414,4 +414,5 @@ static inline size_t pkvm_host_fp_state_size(void)
 		return sizeof(struct user_fpsimd_state);
 }
 
+int pkvm_guest_stage2_pa(pkvm_handle_t handle, u64 ipa, phys_addr_t *phys);
 #endif	/* __ARM64_KVM_PKVM_H__ */

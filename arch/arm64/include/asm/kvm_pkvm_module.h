@@ -160,7 +160,7 @@ struct pkvm_module_ops {
 
 	ANDROID_KABI_USE(1, int (*host_stage2_mod_prot_range)(u64 pfn, enum kvm_pgtable_prot prot, u64 nr_pages));
 
-	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_USE(2, int (*guest_stage2_pa)(pkvm_handle_t handle, u64 ipa, phys_addr_t *phys));
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 	ANDROID_KABI_RESERVE(5);

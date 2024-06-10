@@ -116,6 +116,7 @@ const struct pkvm_module_ops module_ops = {
 	.hyp_va = hyp_phys_to_virt,
 	.kern_hyp_va = __kern_hyp_va,
 	.host_stage2_mod_prot_range = module_change_host_page_prot_range,
+	.guest_stage2_pa = pkvm_guest_stage2_pa,
 };
 
 int __pkvm_init_module(void *module_init)
