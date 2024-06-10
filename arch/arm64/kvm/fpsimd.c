@@ -118,7 +118,7 @@ void kvm_arch_vcpu_ctxflush_fp(struct kvm_vcpu *vcpu)
  * was loaded, update the host's context tracking data mark the CPU
  * FPSIMD regs as dirty and belonging to vcpu so that they will be
  * written back if the kernel clobbers them due to kernel-mode NEON
- * before re-entry into the guest.
+ * before re-entry.
  */
 void kvm_arch_vcpu_ctxsync_fp(struct kvm_vcpu *vcpu)
 {
