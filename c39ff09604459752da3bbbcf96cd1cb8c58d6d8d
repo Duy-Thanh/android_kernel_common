@@ -177,6 +177,24 @@
       "parentUuid": "2c35fe74_0762d9d3",
       "revId": "c39ff09604459752da3bbbcf96cd1cb8c58d6d8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "419557d5_427ce945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3402659
+      },
+      "writtenOn": "2024-06-11T13:46:32Z",
+      "side": 1,
+      "message": "I have replay in the bug. Please take a look.",
+      "parentUuid": "d74cd7b4_744c327b",
+      "revId": "c39ff09604459752da3bbbcf96cd1cb8c58d6d8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
