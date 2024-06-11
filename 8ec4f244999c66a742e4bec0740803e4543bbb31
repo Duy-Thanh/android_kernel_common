@@ -16,6 +16,24 @@
       "message": "Why is this needed now?",
       "revId": "8ec4f244999c66a742e4bec0740803e4543bbb31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f5c0b8_a5ae7463",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-06-11T12:58:40Z",
+      "side": 1,
+      "message": "It\u0027s not that it\u0027s needed now. It\u0027s that when we had the fixed configuration this didn\u0027t exist, and (afaik) there is no reason to block it for protected VMs.",
+      "parentUuid": "3eadfa24_444f89e0",
+      "revId": "8ec4f244999c66a742e4bec0740803e4543bbb31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
