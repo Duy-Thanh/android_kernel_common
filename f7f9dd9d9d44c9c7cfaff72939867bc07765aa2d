@@ -106,6 +106,24 @@
       "parentUuid": "3efecfdb_8e613511",
       "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d2e111_2199262a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-06-11T15:31:21Z",
+      "side": 1,
+      "message": "ok, we have changed to apply the revert workaround for the android-mainline branch before the build, will abandon this change now.",
+      "parentUuid": "9d71c303_bfec29da",
+      "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
