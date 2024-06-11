@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081086302",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3126594?revision\u003d2",
+      "key": {
+        "uuid": "0e19f4b8_7dda12da",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-11T17:28:00Z",
+      "side": 1,
+      "message": "syntax error near \u003c\u003c",
+      "range": {
+        "startLine": 1066,
+        "startChar": 3,
+        "endLine": 1066,
+        "endChar": 3
+      },
+      "tag": "",
+      "revId": "416abc301dcdbba59ae9a91897f8ce900be0ca83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
