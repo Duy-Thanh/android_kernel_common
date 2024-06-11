@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fea72718_7d8d23cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2024-06-11T01:36:02Z",
+      "side": 1,
+      "message": "+2 to resolve P0. Please make sure standard tests pass.",
+      "revId": "8667b25ef16d1cd24f664c4c3abfb1a6590d3e1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
