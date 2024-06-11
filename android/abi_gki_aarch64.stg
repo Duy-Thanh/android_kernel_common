@@ -331993,6 +331993,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_task_blocks_on_rtmutex"
 }
 elf_symbol {
+  id: 0xa578d54c
+  name: "__traceiter_android_vh_tcp_connect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3df9e2d2
+  type_id: 0x9bba87c7
+  full_name: "__traceiter_android_vh_tcp_connect"
+}
+elf_symbol {
   id: 0x592647e4
   name: "__traceiter_android_vh_tcp_rtt_estimator"
   is_defined: true
@@ -336050,6 +336059,15 @@ elf_symbol {
   crc: 0x8ea3a911
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_task_blocks_on_rtmutex"
+}
+elf_symbol {
+  id: 0xcc46e666
+  name: "__tracepoint_android_vh_tcp_connect"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xda8cc521
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_tcp_connect"
 }
 elf_symbol {
   id: 0x3165f55a
@@ -391983,6 +392001,7 @@ interface {
   symbol_id: 0x2ecf85e9
   symbol_id: 0x34a01a22
   symbol_id: 0xdd9dd67b
+  symbol_id: 0xa578d54c
   symbol_id: 0x592647e4
   symbol_id: 0x9c4fb9ab
   symbol_id: 0x48f0cf25
@@ -392434,6 +392453,7 @@ interface {
   symbol_id: 0xefb9e5a3
   symbol_id: 0x3fe0157c
   symbol_id: 0xe5bf742d
+  symbol_id: 0xcc46e666
   symbol_id: 0x3165f55a
   symbol_id: 0x1a59144d
   symbol_id: 0x4ef2c337
