@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48e728fc_21b3a512",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1099639
+      },
+      "writtenOn": "2024-06-11T17:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c408486_4f911c5c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 31
+      },
+      "revId": "f2cb9bea0f8d0d6d518406085d860fb401fc6690",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11ff811e_6012ccd5",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-11T17:15:55Z",
       "side": 1,
       "message": "nit: typo in s/DFPE/DPFE/",
+      "range": {
+        "startLine": 10,
+        "startChar": 18,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "f2cb9bea0f8d0d6d518406085d860fb401fc6690",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d60a79_21f2d8c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1099639
+      },
+      "writtenOn": "2024-06-11T17:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11ff811e_6012ccd5",
       "range": {
         "startLine": 10,
         "startChar": 18,
