@@ -22,6 +22,30 @@
       },
       "revId": "0702b1f466d59bdd57f16ebc18726e8d799483a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a6fa7e7_94037b5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2024-06-11T20:31:55Z",
+      "side": 1,
+      "message": "Done, but b4 massages my sign-off to the end of the commit log.",
+      "parentUuid": "be930d5d_a5e5d55e",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 46
+      },
+      "revId": "0702b1f466d59bdd57f16ebc18726e8d799483a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
