@@ -46,6 +46,30 @@
       },
       "revId": "411a1625e6f61a2391996d95dbdd95d6bc595f9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "312526b2_7097c6cd",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1961338
+      },
+      "writtenOn": "2024-06-12T13:37:59Z",
+      "side": 1,
+      "message": "Hi Matthias:\nso this commit need add a whitelist/stg update patch？",
+      "parentUuid": "a25e24aa_0e1efd23",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 20
+      },
+      "revId": "411a1625e6f61a2391996d95dbdd95d6bc595f9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
