@@ -66283,6 +66283,12 @@ member {
   offset: 256
 }
 member {
+  id: 0xac5e11ff
+  name: "cpu_iddq_value"
+  type_id: 0x6720d32f
+  offset: 128
+}
+member {
   id: 0xf19eb492
   name: "cpu_partial"
   type_id: 0x4585663f
@@ -66299,6 +66305,12 @@ member {
   name: "cpu_pmu_context"
   type_id: 0x1e866a82
   offset: 640
+}
+member {
+  id: 0x7be41b46
+  name: "cpu_process_id"
+  type_id: 0x6720d32f
+  offset: 32
 }
 member {
   id: 0x0d67a595
@@ -66340,6 +66352,18 @@ member {
   id: 0xc348a85a
   name: "cpu_slab"
   type_id: 0x017ab87c
+}
+member {
+  id: 0x9bd81e85
+  name: "cpu_speedo_id"
+  type_id: 0x6720d32f
+  offset: 64
+}
+member {
+  id: 0x93278a61
+  name: "cpu_speedo_value"
+  type_id: 0x6720d32f
+  offset: 96
 }
 member {
   id: 0x90ec0ff1
@@ -95970,6 +95994,24 @@ member {
   name: "gpl_syms"
   type_id: 0x3e096c25
   offset: 2688
+}
+member {
+  id: 0x8998723d
+  name: "gpu_process_id"
+  type_id: 0x6720d32f
+  offset: 256
+}
+member {
+  id: 0xc59015c8
+  name: "gpu_speedo_id"
+  type_id: 0x6720d32f
+  offset: 288
+}
+member {
+  id: 0x1839ab9c
+  name: "gpu_speedo_value"
+  type_id: 0x6720d32f
+  offset: 320
 }
 member {
   id: 0x220ee7b2
@@ -145328,6 +145370,12 @@ member {
   bitsize: 1
 }
 member {
+  id: 0x2bdf1e4c
+  name: "platform"
+  type_id: 0x4bb568ad
+  offset: 384
+}
+member {
   id: 0x38c654ae
   name: "platform_data"
   type_id: 0x18bd6530
@@ -161945,6 +161993,12 @@ member {
   offset: 12480
 }
 member {
+  id: 0x94eb2e6e
+  name: "revision"
+  type_id: 0x43f6ac22
+  offset: 352
+}
+member {
   id: 0xbcd2b2c4
   name: "revmap"
   type_id: 0xc6e69d29
@@ -173664,6 +173718,11 @@ member {
   type_id: 0xa7c362b0
 }
 member {
+  id: 0x159f315d
+  name: "sku_id"
+  type_id: 0x6720d32f
+}
+member {
   id: 0x0a7c1b9f
   name: "sl"
   type_id: 0xc9082b19
@@ -174427,6 +174486,24 @@ member {
   name: "soc_id"
   type_id: 0x3e10b518
   offset: 256
+}
+member {
+  id: 0x8d753502
+  name: "soc_process_id"
+  type_id: 0x6720d32f
+  offset: 160
+}
+member {
+  id: 0x509bfc34
+  name: "soc_speedo_id"
+  type_id: 0x6720d32f
+  offset: 192
+}
+member {
+  id: 0x0ef921fa
+  name: "soc_speedo_value"
+  type_id: 0x6720d32f
+  offset: 224
 }
 member {
   id: 0x7614ca61
@@ -252831,6 +252908,27 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x539be05c
+  kind: STRUCT
+  name: "tegra_sku_info"
+  definition {
+    bytesize: 52
+    member_id: 0x159f315d
+    member_id: 0x7be41b46
+    member_id: 0x9bd81e85
+    member_id: 0x93278a61
+    member_id: 0xac5e11ff
+    member_id: 0x8d753502
+    member_id: 0x509bfc34
+    member_id: 0x0ef921fa
+    member_id: 0x8998723d
+    member_id: 0xc59015c8
+    member_id: 0x1839ab9c
+    member_id: 0x94eb2e6e
+    member_id: 0x2bdf1e4c
+  }
+}
+struct_union {
   id: 0xe3c6d185
   kind: STRUCT
   name: "tegra_smmu"
@@ -278513,6 +278611,90 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x4bb568ad
+  name: "tegra_platform"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "TEGRA_PLATFORM_SILICON"
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_QT"
+      value: 1
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_SYSTEM_FPGA"
+      value: 2
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_UNIT_FPGA"
+      value: 3
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_ASIM_QT"
+      value: 4
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_ASIM_LINSIM"
+      value: 5
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_DSIM_ASIM_LINSIM"
+      value: 6
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_VERIFICATION_SIMULATION"
+      value: 7
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_VDK"
+      value: 8
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_VSP"
+      value: 9
+    }
+    enumerator {
+      name: "TEGRA_PLATFORM_MAX"
+      value: 10
+    }
+  }
+}
+enumeration {
+  id: 0x43f6ac22
+  name: "tegra_revision"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "TEGRA_REVISION_UNKNOWN"
+    }
+    enumerator {
+      name: "TEGRA_REVISION_A01"
+      value: 1
+    }
+    enumerator {
+      name: "TEGRA_REVISION_A02"
+      value: 2
+    }
+    enumerator {
+      name: "TEGRA_REVISION_A03"
+      value: 3
+    }
+    enumerator {
+      name: "TEGRA_REVISION_A03p"
+      value: 4
+    }
+    enumerator {
+      name: "TEGRA_REVISION_A04"
+      value: 5
+    }
+    enumerator {
+      name: "TEGRA_REVISION_MAX"
+      value: 6
+    }
+  }
+}
+enumeration {
   id: 0x231fce4e
   name: "thermal_device_mode"
   definition {
@@ -294615,6 +294797,14 @@ function {
   id: 0x4fb5a2ed
   return_type_id: 0xc9082b19
   parameter_id: 0x2936263d
+}
+function {
+  id: 0x4fd0a112
+  return_type_id: 0x18ea6ae3
+  parameter_id: 0x3a8e2ac6
+  parameter_id: 0x3e10b518
+  parameter_id: 0x6720d32f
+  parameter_id: 0x1253769c
 }
 function {
   id: 0x501bb554
@@ -353719,6 +353909,15 @@ elf_symbol {
   full_name: "file_modified"
 }
 elf_symbol {
+  id: 0xb01e122d
+  name: "file_open_root"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe43a71f2
+  type_id: 0x4fd0a112
+  full_name: "file_open_root"
+}
+elf_symbol {
   id: 0xe7aacfe5
   name: "file_path"
   is_defined: true
@@ -382536,6 +382735,15 @@ elf_symbol {
   full_name: "tegra_mc_probe_device"
 }
 elf_symbol {
+  id: 0xcb1a674c
+  name: "tegra_sku_info"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7ea0d4ca
+  type_id: 0x539be05c
+  full_name: "tegra_sku_info"
+}
+elf_symbol {
   id: 0x7cfd9233
   name: "teo_cpu_get_util_threshold"
   is_defined: true
@@ -394505,6 +394713,7 @@ interface {
   symbol_id: 0xab45f2a8
   symbol_id: 0x41eed79f
   symbol_id: 0x08df0c2d
+  symbol_id: 0xb01e122d
   symbol_id: 0xe7aacfe5
   symbol_id: 0x9e942fbe
   symbol_id: 0x99b0f07b
@@ -397703,6 +397912,7 @@ interface {
   symbol_id: 0x591431f1
   symbol_id: 0x6869c83d
   symbol_id: 0xa8f0fe44
+  symbol_id: 0xcb1a674c
   symbol_id: 0x7cfd9233
   symbol_id: 0xbd25c7d0
   symbol_id: 0x5bbd3545
