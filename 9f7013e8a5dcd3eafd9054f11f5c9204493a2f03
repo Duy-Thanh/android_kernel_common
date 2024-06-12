@@ -16,6 +16,24 @@
       "message": "We need to confirm that all of these mem-protect\u0027d allocations are free()\u0027d synchronously w/ VM teardown, otherwise we have a race with host reboot where the PSCI MEM_PROTECT count could remain elevated by the time we actually reset.",
       "revId": "9f7013e8a5dcd3eafd9054f11f5c9204493a2f03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fcccbda_39b27382",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-06-12T12:30:47Z",
+      "side": 1,
+      "message": "`kvm_arch_destroy_vm()` will reclaim all the donated memory and by the end of this function, the PSCI counter (provided only 1 VM has ran) will be back to 0.\n\nNow, when crosvm is killed and the fd\u0027s for vCPUS, VM and KVM-devices are released, the only thing that can keep the VM alive are the stage-2 ptdump and access to the kvm stats. As none of that is expected to happen on a production system, I suppose this is safe to say after crosvm died, the VM has been teardown properly.",
+      "parentUuid": "6ab902a8_ef6ae0ab",
+      "revId": "9f7013e8a5dcd3eafd9054f11f5c9204493a2f03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
