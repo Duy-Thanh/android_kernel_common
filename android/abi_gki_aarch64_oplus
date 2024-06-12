@@ -278,6 +278,7 @@
   __traceiter_android_vh_rmqueue_bulk_bypass
   __traceiter_android_vh_rt_mutex_steal
   __traceiter_android_vh_rtmutex_waiter_prio
+  __traceiter_android_vh_rtmutex_wait_start
   __traceiter_android_vh_rwsem_can_spin_on_owner
   __traceiter_android_vh_rwsem_direct_rsteal
   __traceiter_android_vh_rwsem_downgrade_wake_finish
@@ -421,6 +422,7 @@
   __tracepoint_android_vh_rmqueue_bulk_bypass
   __tracepoint_android_vh_rt_mutex_steal
   __tracepoint_android_vh_rtmutex_waiter_prio
+  __tracepoint_android_vh_rtmutex_wait_start
   __tracepoint_android_vh_rwsem_can_spin_on_owner
   __tracepoint_android_vh_rwsem_direct_rsteal
   __tracepoint_android_vh_rwsem_downgrade_wake_finish
