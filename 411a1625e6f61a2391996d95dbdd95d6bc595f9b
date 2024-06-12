@@ -70,6 +70,30 @@
       },
       "revId": "411a1625e6f61a2391996d95dbdd95d6bc595f9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "303cba8f_878c591c",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-12T17:13:52Z",
+      "side": 1,
+      "message": "I added the hashtag `KMI-changes-for-2024-06-14`, so the change can be picked up before KMI freeze. But it has to queue.",
+      "parentUuid": "312526b2_7097c6cd",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 20
+      },
+      "revId": "411a1625e6f61a2391996d95dbdd95d6bc595f9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
