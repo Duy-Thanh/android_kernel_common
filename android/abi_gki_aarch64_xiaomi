@@ -69,6 +69,23 @@
   __tracepoint_android_vh_restore_mm_flags
   __tracepoint_android_vh_update_vma_flags
 
+#required by zram.ko module
+  __blk_alloc_disk
+  bio_end_io_acct_remapped
+  bio_endio
+  bio_start_io_acct
+  crypto_alloc_base
+  crypto_comp_compress
+  crypto_comp_decompress
+  crypto_has_alg
+  memset64
+  filp_open_block
+  blkdev_put
+  filp_close
+  bio_init
+  __bio_add_page
+  blkdev_get_by_dev
+
 #required by metis.ko module
   __traceiter_android_vh_rwsem_read_wait_start
   __traceiter_android_vh_rwsem_write_wait_start
@@ -265,7 +282,6 @@
   nvmem_register
   of_node_name_prefix
   nvmem_unregister
-  blkdev_put
   blkdev_get_by_path
   generic_shutdown_super
   sget_dev
