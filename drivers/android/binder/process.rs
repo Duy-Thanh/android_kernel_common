@@ -1383,7 +1383,7 @@ impl Process {
         _file: &File,
         cmd: u32,
         reader: &mut UserSliceReader,
-    ) -> Result<i32> {
+    ) -> Result {
         let thread = this.get_current_thread()?;
         match cmd {
             bindings::BINDER_SET_MAX_THREADS => this.set_max_threads(reader.read()?),
@@ -1398,7 +1398,7 @@ impl Process {
             bindings::BINDER_FREEZE => ioctl_freeze(reader)?,
             _ => return Err(EINVAL),
         }
-        Ok(0)
+        Ok(())
     }
 
     /// Ioctls that are read/write from the perspective of userspace.
@@ -1409,7 +1409,7 @@ impl Process {
         file: &File,
         cmd: u32,
         data: UserSlice,
-    ) -> Result<i32> {
+    ) -> Result {
         let thread = this.get_current_thread()?;
         let blocking = (file.flags() & file::flags::O_NONBLOCK) == 0;
         match cmd {
@@ -1421,7 +1421,7 @@ impl Process {
             bindings::BINDER_GET_EXTENDED_ERROR => thread.get_extended_error(data)?,
             _ => return Err(EINVAL),
         }
-        Ok(0)
+        Ok(())
     }
 }
 
@@ -1467,7 +1467,7 @@ impl Process {
         file: &File,
         cmd: u32,
         arg: *mut core::ffi::c_void,
-    ) -> Result<i32> {
+    ) -> Result {
         use kernel::ioctl::{_IOC_DIR, _IOC_SIZE};
         use kernel::uapi::{_IOC_READ, _IOC_WRITE};
 
@@ -1477,11 +1477,14 @@ impl Process {
 
         const _IOC_READ_WRITE: u32 = _IOC_READ | _IOC_WRITE;
 
-        match _IOC_DIR(cmd) {
+        let res = match _IOC_DIR(cmd) {
             _IOC_WRITE => Self::ioctl_write_only(this, file, cmd, &mut user_slice.reader()),
             _IOC_READ_WRITE => Self::ioctl_write_read(this, file, cmd, user_slice),
             _ => Err(EINVAL),
-        }
+        };
+
+        crate::trace::trace_ioctl_done(res);
+        res
     }
 
     pub(crate) fn compat_ioctl(
@@ -1489,7 +1492,7 @@ impl Process {
         file: &File,
         cmd: u32,
         arg: *mut core::ffi::c_void,
-    ) -> Result<i32> {
+    ) -> Result {
         Self::ioctl(this, file, cmd, arg)
     }
 
