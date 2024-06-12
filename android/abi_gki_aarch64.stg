@@ -314430,6 +314430,12 @@ function {
   parameter_id: 0x3332797f
 }
 function {
+  id: 0x9beff51f
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1013df15
+}
+function {
   id: 0x9bf18f52
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -320376,6 +320382,13 @@ function {
   parameter_id: 0x0ae4a2c7
   parameter_id: 0x3c44a21c
   parameter_id: 0x33756485
+}
+function {
+  id: 0x9fc54954
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0a134144
+  parameter_id: 0x33756485
+  parameter_id: 0x32bee099
 }
 function {
   id: 0x9fc5a289
@@ -331614,6 +331627,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_rt_mutex_steal"
 }
 elf_symbol {
+  id: 0xfb1b8d64
+  name: "__traceiter_android_vh_rtmutex_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd2344f4b
+  type_id: 0x9beff51f
+  full_name: "__traceiter_android_vh_rtmutex_wait_start"
+}
+elf_symbol {
   id: 0xc56d7179
   name: "__traceiter_android_vh_rtmutex_waiter_prio"
   is_defined: true
@@ -335707,6 +335729,15 @@ elf_symbol {
   crc: 0x0191909a
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_rt_mutex_steal"
+}
+elf_symbol {
+  id: 0xf01f02ea
+  name: "__tracepoint_android_vh_rtmutex_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x9dd07934
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rtmutex_wait_start"
 }
 elf_symbol {
   id: 0xeaebbadf
@@ -341940,6 +341971,15 @@ elf_symbol {
   crc: 0xb1079263
   type_id: 0x264eeece
   full_name: "contig_page_data"
+}
+elf_symbol {
+  id: 0xfda11a25
+  name: "contpte_ptep_test_and_clear_young"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4db6908c
+  type_id: 0x9fc54954
+  full_name: "contpte_ptep_test_and_clear_young"
 }
 elf_symbol {
   id: 0x610edc84
@@ -392052,6 +392092,7 @@ interface {
   symbol_id: 0xcef5d79f
   symbol_id: 0x91384eff
   symbol_id: 0xd56fbf76
+  symbol_id: 0xfb1b8d64
   symbol_id: 0xc56d7179
   symbol_id: 0x5858f827
   symbol_id: 0xaa42999f
@@ -392507,6 +392548,7 @@ interface {
   symbol_id: 0xd94bc301
   symbol_id: 0x3fc5ffc9
   symbol_id: 0xed43b088
+  symbol_id: 0xf01f02ea
   symbol_id: 0xeaebbadf
   symbol_id: 0xe471b8d5
   symbol_id: 0x403cf0dd
@@ -393200,6 +393242,7 @@ interface {
   symbol_id: 0x5a70b6f0
   symbol_id: 0xca337eb1
   symbol_id: 0x9e7d8d76
+  symbol_id: 0xfda11a25
   symbol_id: 0x610edc84
   symbol_id: 0xa8fe8eb9
   symbol_id: 0xd71898b4
