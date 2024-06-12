@@ -33,6 +33,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/alarmtimer.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/alarmtimer.h>
+
 /**
  * struct alarm_base - Alarm timer bases
  * @lock:		Lock for syncrhonized access to the base
@@ -162,6 +165,7 @@ static void alarmtimer_enqueue(struct alarm_base *base, struct alarm *alarm)
 		timerqueue_del(&base->timerqueue, &alarm->node);
 
 	timerqueue_add(&base->timerqueue, &alarm->node);
+	alarm->timer.android_oem_data1 = (u64)current->pid;
 	alarm->state |= ALARMTIMER_STATE_ENQUEUED;
 }
 
@@ -245,6 +249,8 @@ static int alarmtimer_suspend(struct device *dev)
 	struct rtc_device *rtc;
 	unsigned long flags;
 	struct rtc_time tm;
+	struct timerqueue_node *alarm_node = NULL;
+	struct alarm *rtc_alarm = NULL;
 
 	spin_lock_irqsave(&freezer_delta_lock, flags);
 	min = freezer_delta;
@@ -274,6 +280,7 @@ static int alarmtimer_suspend(struct device *dev)
 			expires = next->expires;
 			min = delta;
 			type = i;
+			alarm_node = next;
 		}
 	}
 	if (min == 0)
@@ -294,8 +301,12 @@ static int alarmtimer_suspend(struct device *dev)
 
 	/* Set alarm, if in the past reject suspend briefly to handle */
 	ret = rtc_timer_start(rtc, &rtctimer, now, 0);
-	if (ret < 0)
+	if (ret < 0) {
 		pm_wakeup_event(dev, MSEC_PER_SEC);
+	} else if (alarm_node != NULL) {
+		rtc_alarm = container_of(alarm_node, struct alarm, node);
+		trace_android_vh_alarmtimer_suspend(rtc_alarm->timer.android_oem_data1);
+	}
 	return ret;
 }
 
