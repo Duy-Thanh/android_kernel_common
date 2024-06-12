@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a1e37f0_e201d5f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-06-12T04:15:39Z",
+      "side": 1,
+      "message": "Since this is a backport, please also mention what was changed from upstream.",
+      "revId": "622c63fd70cb36b3a76674b7a975b0b35875fd0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
