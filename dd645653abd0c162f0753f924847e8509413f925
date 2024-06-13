@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84132838_0a8fc685",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 1
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-13T08:29:11Z",
+      "side": 1,
+      "message": "this is not allowed to be used by drivers, sorry.",
+      "range": {
+        "startLine": 868,
+        "startChar": 2,
+        "endLine": 868,
+        "endChar": 16
+      },
+      "revId": "dd645653abd0c162f0753f924847e8509413f925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
