@@ -151,9 +151,18 @@ static int scmi_domain_reset(const struct scmi_protocol_handle *ph, u32 domain,
 	int ret;
 	struct scmi_xfer *t;
 	struct scmi_msg_reset_domain_reset *dom;
+<<<<<<< HEAD   (7053a8 Merge 5.10.217 into android12-5.10-lts)
 	struct scmi_reset_info *pi = ph->get_priv(ph);
 	struct reset_dom_info *rdom = pi->dom_info + domain;
+=======
+	struct scmi_reset_info *pi = handle->reset_priv;
+	struct reset_dom_info *rdom;
+>>>>>>> BRANCH (61458c Linux 5.10.218)
 
+	if (domain >= pi->num_domains)
+		return -EINVAL;
+
+	rdom = pi->dom_info + domain;
 	if (rdom->async_reset)
 		flags |= ASYNCHRONOUS_RESET;
 
