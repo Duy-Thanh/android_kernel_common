@@ -22,6 +22,30 @@
       },
       "revId": "dd645653abd0c162f0753f924847e8509413f925",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb51454_1616a466",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 1
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-06-13T14:43:29Z",
+      "side": 1,
+      "message": "OK, thanks.",
+      "parentUuid": "84132838_0a8fc685",
+      "range": {
+        "startLine": 868,
+        "startChar": 2,
+        "endLine": 868,
+        "endChar": 16
+      },
+      "revId": "dd645653abd0c162f0753f924847e8509413f925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
