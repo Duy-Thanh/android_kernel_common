@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "1bc1b6831fdbfc97ef06ef24e31bbb2bc6f50cf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081389352",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132554?revision\u003d3",
+      "key": {
+        "uuid": "71952c2b_5e516167",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-13T20:10:24Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/2174035a7f1148a52f5a3f371f04224168b5b00a) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d2174035a7f1148a52f5a3f371f04224168b5b00a).\n\n```\n      ## fs/f2fs/compress.c ##\n     @@ fs/f2fs/compress.c: static void set_cluster_writeback(struct compress_ctx *cc)\n    @@ fs/f2fs/compress.c: static void set_cluster_writeback(struct compress_ctx *cc)\n     +\t\t\tlock_page(cc-\u003erpages[i]);\n     +\t\t}\n     +\t\tclear_page_private_gcing(cc-\u003erpages[i]);\n    -+\t\tif (folio_test_writeback(page_folio(cc-\u003erpages[i])))\n    ++\t\tif (PageWriteback(cc-\u003erpages[i]))\n     +\t\t\tend_page_writeback(cc-\u003erpages[i]);\n     +\t}\n     +}\n    @@ fs/f2fs/compress.c: static int f2fs_write_compressed_pages(struct compress_ctx *\n      \t\t.page \u003d NULL,\n      \t\t.encrypted_page \u003d NULL,\n      \t\t.compressed_page \u003d NULL,\n    --\t\t.submitted \u003d 0,\n    +-\t\t.submitted \u003d false,\n      \t\t.io_type \u003d io_type,\n      \t\t.io_wbc \u003d wbc,\n    - \t\t.encrypted \u003d fscrypt_inode_uses_fs_layer_crypto(cc-\u003einode) ?\n    + \t\t.encrypted \u003d fscrypt_inode_uses_fs_layer_crypto(cc-\u003einode),\n     @@ fs/f2fs/compress.c: static int f2fs_write_compressed_pages(struct compress_ctx *cc,\n      \t\t\tfio.compressed_page \u003d cc-\u003ecpages[i - 1];\n      \n      \t\tcc-\u003ecpages[i - 1] \u003d NULL;\n    -+\t\tfio.submitted \u003d 0;\n    ++\t\tfio.submitted \u003d false;\n      \t\tf2fs_outplace_write_data(\u0026dn, \u0026fio);\n     +\t\tif (unlikely(!fio.submitted)) {\n     +\t\t\tcancel_cluster_writeback(cc, cic, i);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "1bc1b6831fdbfc97ef06ef24e31bbb2bc6f50cf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
