@@ -16,6 +16,24 @@
       "message": "`ANDROID_BACKPORT_RESERVE` all these",
       "revId": "fb196dd554255125e0b5e74ca884c6685a9964f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51e1d0d4_1785c4e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-06-13T23:25:07Z",
+      "side": 1,
+      "message": "I\u0027d like to keep these  since we already know what they are going to be used for (named).\n\nThe reserve apis forced to use u64 and waste memory in some of the cases. \n\nThe plan is to revert these and add the complete patches once the fixes have been verified.",
+      "parentUuid": "c08d785c_d7320bcd",
+      "revId": "fb196dd554255125e0b5e74ca884c6685a9964f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
