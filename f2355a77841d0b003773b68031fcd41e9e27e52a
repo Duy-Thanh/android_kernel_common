@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "f2355a77841d0b003773b68031fcd41e9e27e52a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081301422",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3130716?revision\u003d1",
+      "key": {
+        "uuid": "138c8527_d9d2b604",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-13T15:53:15Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/4e527d5841e24623181edc7fd6f6598ffa810e10) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d4e527d5841e24623181edc7fd6f6598ffa810e10).\n\n```\n      ## fs/iomap/buffered-io.c ##\n    -@@ fs/iomap/buffered-io.c: static bool iomap_write_end(struct iomap_iter *iter, loff_t pos, size_t len,\n    +@@ fs/iomap/buffered-io.c: static size_t iomap_write_end(struct iomap_iter *iter, loff_t pos, size_t len,\n      static loff_t iomap_write_iter(struct iomap_iter *iter, struct iov_iter *i)\n      {\n      \tloff_t length \u003d iomap_length(iter);\n     -\tsize_t chunk \u003d PAGE_SIZE \u003c\u003c MAX_PAGECACHE_ORDER;\n      \tloff_t pos \u003d iter-\u003epos;\n    - \tssize_t total_written \u003d 0;\n    + \tssize_t written \u003d 0;\n      \tlong status \u003d 0;\n      \tstruct address_space *mapping \u003d iter-\u003einode-\u003ei_mapping;\n     +\tsize_t chunk \u003d mapping_max_folio_size(mapping);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "f2355a77841d0b003773b68031fcd41e9e27e52a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
