@@ -1163,6 +1163,7 @@ int fragmentation_index(struct zone *zone, unsigned int order)
 
 #define TEXTS_FOR_ZONES(xx) TEXT_FOR_DMA(xx) TEXT_FOR_DMA32(xx) xx "_normal", \
 					TEXT_FOR_HIGHMEM(xx) xx "_movable", \
+					xx "_nosplit", xx "_nomerge", \
 					TEXT_FOR_DEVICE(xx)
 
 const char * const vmstat_text[] = {

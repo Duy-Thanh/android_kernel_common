@@ -315,6 +315,8 @@ char * const zone_names[MAX_NR_ZONES] = {
 	 "HighMem",
 #endif
 	 "Movable",
+	 "NoSplit",
+	 "NoMerge",
 #ifdef CONFIG_ZONE_DEVICE
 	 "Device",
 #endif
