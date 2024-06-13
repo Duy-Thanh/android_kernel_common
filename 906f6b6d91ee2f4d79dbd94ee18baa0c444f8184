@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502443a8_e3bff384",
+        "filename": "mm/memblock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-06-13T17:31:18Z",
+      "side": 1,
+      "message": "same error as in https://android-review.googlesource.com/c/kernel/common/+/3091133/1/mm/memblock.c. This variable can\u0027t be __initdata_memblock because it is used by memblock_memsize_mod_reusable_size() which can be used after init.",
+      "range": {
+        "startLine": 2018,
+        "startChar": 34,
+        "endLine": 2018,
+        "endChar": 53
+      },
+      "revId": "906f6b6d91ee2f4d79dbd94ee18baa0c444f8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
