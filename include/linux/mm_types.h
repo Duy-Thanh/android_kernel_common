@@ -358,8 +358,14 @@ struct folio {
 			atomic_t _nr_pages_mapped;
 			atomic_t _pincount;
 #ifdef CONFIG_64BIT
+			unsigned int __padding;
 			unsigned int _folio_nr_pages;
 #endif
+			union {
+				unsigned long _private_1;
+				unsigned long *_dst_ul;
+				struct page **_dst_pp;
+			};
 	/* private: the union with struct page is transitional */
 		};
 		struct page __page_1;
