@@ -85,8 +85,8 @@ static inline bool gfpflags_allow_blocking(const gfp_t gfp_flags)
  * GFP_ZONES_SHIFT must be <= 2 on 32 bit platforms.
  */
 
-#if defined(CONFIG_ZONE_DEVICE) && (MAX_NR_ZONES-1) <= 4
-/* ZONE_DEVICE is not a valid GFP zone specifier */
+#if MAX_NR_ZONES - 2 - IS_ENABLED(CONFIG_ZONE_DEVICE) <= 4
+/* zones beyond ZONE_MOVABLE are not valid GFP zone specifiers */
 #define GFP_ZONES_SHIFT 2
 #else
 #define GFP_ZONES_SHIFT ZONES_SHIFT

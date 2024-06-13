@@ -815,11 +815,15 @@ enum zone_type {
 	 * there can be false negatives).
 	 */
 	ZONE_MOVABLE,
+	ZONE_NOSPLIT,
+	ZONE_NOMERGE,
 #ifdef CONFIG_ZONE_DEVICE
 	ZONE_DEVICE,
 #endif
-	__MAX_NR_ZONES
+	__MAX_NR_ZONES,
 
+	LAST_PHYS_ZONE = ZONE_MOVABLE - 1,
+	LAST_VIRT_ZONE = ZONE_NOMERGE,
 };
 
 #ifndef __GENERATING_BOUNDS_H
@@ -937,6 +941,8 @@ struct zone {
 	/* see spanned/present_pages for more description */
 	seqlock_t		span_seqlock;
 #endif
+
+	int order;
 
 	int initialized;
 
