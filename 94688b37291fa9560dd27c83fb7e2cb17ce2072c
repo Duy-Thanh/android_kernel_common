@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081549935",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132487?revision\u003d1",
+      "key": {
+        "uuid": "7c3e2273_e001bc9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-14T22:57:48Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/cd955bdd6aa5ec54cdef622a142f8899a64b5446) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dcd955bdd6aa5ec54cdef622a142f8899a64b5446).\n\n```\n      ## tools/objtool/Makefile ##\n     @@\n      include ../scripts/Makefile.include\n    @@ tools/objtool/Makefile: INCLUDES :\u003d -I$(srctree)/tools/include \\\n      \n      AWK \u003d awk\n      MKDIR \u003d mkdir\n    -@@ tools/objtool/Makefile: export BUILD_ORC\n    +@@ tools/objtool/Makefile: export SUBCMD_CHECK SUBCMD_ORC\n      export srctree OUTPUT CFLAGS SRCARCH AWK\n      include $(srctree)/tools/build/Makefile.include\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "94688b37291fa9560dd27c83fb7e2cb17ce2072c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
