@@ -46,6 +46,30 @@
       },
       "revId": "dd645653abd0c162f0753f924847e8509413f925",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2e7f62_510b8b33",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 1
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-06-14T02:38:15Z",
+      "side": 1,
+      "message": "Hello Matthias,\n\nDo we have a relevant doc stating that those symbols can\u0027t be used by drivers? So that I can avoid this in the future.",
+      "parentUuid": "4eb51454_1616a466",
+      "range": {
+        "startLine": 868,
+        "startChar": 2,
+        "endLine": 868,
+        "endChar": 16
+      },
+      "revId": "dd645653abd0c162f0753f924847e8509413f925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
