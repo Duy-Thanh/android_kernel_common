@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a06d49b0_ea9b08dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-06-14T20:52:05Z",
+      "side": 1,
+      "message": "Thanks, done.",
+      "parentUuid": "11e8c4dd_31a17dc8",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "bbacf46e5a7139aab87ecd86f5ecffbd39336def",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5681d669_6afecf80",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-06-14T19:45:56Z",
       "side": 1,
       "message": "If you decide to change it to FROMGIT please add the usual\n```\n(cherry picked from commit ... https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-unstable)\n```",
+      "revId": "bbacf46e5a7139aab87ecd86f5ecffbd39336def",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1b6183_1c4cfb68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-06-14T20:52:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5681d669_6afecf80",
       "revId": "bbacf46e5a7139aab87ecd86f5ecffbd39336def",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
