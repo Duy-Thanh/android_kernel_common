@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf98468_b2245a06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-06-14T18:23:08Z",
+      "side": 1,
+      "message": "I think this was dropped for:\nhttps://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git/commit/?h\u003dmm-unstable\u0026id\u003d6434e69814b159608a23135ca2be36024f402717",
+      "range": {
+        "startLine": 37,
+        "startChar": 27,
+        "endLine": 37,
+        "endChar": 67
+      },
+      "revId": "8d9072c0c65aa83679c42384a692c5f1523cfdab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
