@@ -25914,6 +25914,11 @@ pointer_reference {
   pointee_type_id: 0xe1a31370
 }
 pointer_reference {
+  id: 0x32fab518
+  kind: POINTER
+  pointee_type_id: 0xe1aa32fd
+}
+pointer_reference {
   id: 0x32fddfe5
   kind: POINTER
   pointee_type_id: 0xe1b79909
@@ -36782,6 +36787,11 @@ qualified {
   id: 0xe19aa462
   qualifier: CONST
   qualified_type_id: 0xf62d2702
+}
+qualified {
+  id: 0xe1aa32fd
+  qualifier: CONST
+  qualified_type_id: 0xf6ef7d7c
 }
 qualified {
   id: 0xe1c8dd66
@@ -333402,6 +333412,12 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x9b6450b7
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x32fab518
+}
+function {
   id: 0x9b653ac7
   return_type_id: 0x6720d32f
   parameter_id: 0x188b9e81
@@ -351457,6 +351473,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_flush_task"
 }
 elf_symbol {
+  id: 0x3f8473ca
+  name: "__traceiter_android_rvh_get_insn_slot"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x779969cf
+  type_id: 0x9b6450b7
+  full_name: "__traceiter_android_rvh_get_insn_slot"
+}
+elf_symbol {
   id: 0xa23fdad4
   name: "__traceiter_android_rvh_get_nohz_timer_target"
   is_defined: true
@@ -355721,6 +355746,15 @@ elf_symbol {
   crc: 0x13f642c2
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_flush_task"
+}
+elf_symbol {
+  id: 0x3cef3528
+  name: "__tracepoint_android_rvh_get_insn_slot"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1ecd7393
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_get_insn_slot"
 }
 elf_symbol {
   id: 0x555d2f3e
@@ -415077,6 +415111,7 @@ interface {
   symbol_id: 0xf6f47b2e
   symbol_id: 0x5ee64501
   symbol_id: 0xede4c5f2
+  symbol_id: 0x3f8473ca
   symbol_id: 0xa23fdad4
   symbol_id: 0x41d29e07
   symbol_id: 0xe443e259
@@ -415551,6 +415586,7 @@ interface {
   symbol_id: 0xa6457550
   symbol_id: 0xa6181f5f
   symbol_id: 0xb894fcfc
+  symbol_id: 0x3cef3528
   symbol_id: 0x555d2f3e
   symbol_id: 0x47c27595
   symbol_id: 0x7fd0bf2f
