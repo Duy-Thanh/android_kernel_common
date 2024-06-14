@@ -52,6 +52,24 @@
       "parentUuid": "51e1d0d4_1785c4e5",
       "revId": "fb196dd554255125e0b5e74ca884c6685a9964f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8520b901_5efd241f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-06-14T17:54:02Z",
+      "side": 1,
+      "message": "Applied the complete patches now, with the fix so we no longer need the reservations.",
+      "parentUuid": "ad5baabf_f7a04d84",
+      "revId": "fb196dd554255125e0b5e74ca884c6685a9964f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
