@@ -486,7 +486,10 @@ static unsigned int brcm_avs_cpufreq_get(unsigned int cpu)
 	if (!policy)
 		return 0;
 	priv = policy->driver_data;
+<<<<<<< HEAD   (d083eb Merge ef73db1cc885 ("PCI: dwc: endpoint: Fix advertised resi)
 
+=======
+>>>>>>> BRANCH (449b8b cpufreq: brcmstb-avs-cpufreq: fix up "add check for cpufreq_)
 	cpufreq_cpu_put(policy);
 
 	return brcm_avs_get_frequency(priv->base);
