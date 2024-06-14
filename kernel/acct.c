@@ -75,6 +75,10 @@ static int acct_parm[3] = {4, 2, 30};
 #define SUSPEND		(acct_parm[1])	/* <foo% free space - suspend */
 #define ACCT_TIMEOUT	(acct_parm[2])	/* foo second timeout between checks */
 
+struct test {
+       __u8 data[0];
+};
+
 #ifdef CONFIG_SYSCTL
 static struct ctl_table kern_acct_table[] = {
 	{
