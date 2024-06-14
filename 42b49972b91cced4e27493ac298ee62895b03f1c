@@ -16,6 +16,23 @@
       "message": "Cherry-picks should have the same Change-Id as their original patch.",
       "revId": "42b49972b91cced4e27493ac298ee62895b03f1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1a8d47f_3e340905",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-14T08:57:34Z",
+      "side": 1,
+      "message": "Please work upstream first.",
+      "revId": "42b49972b91cced4e27493ac298ee62895b03f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
