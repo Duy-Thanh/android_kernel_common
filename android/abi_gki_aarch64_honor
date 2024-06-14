@@ -47,6 +47,13 @@
   drop_super
   mm_trace_rss_stat
   __kfifo_len_r
+<<<<<<< HEAD   (9f4509 ANDROID: GKI: Add initialization for rwsem's oem_data and ve)
+=======
+  __traceiter_android_vh_killed_process
+  __tracepoint_android_vh_killed_process
+  __traceiter_android_vh_rwsem_write_wait_finish
+  __tracepoint_android_vh_rwsem_write_wait_finish
+>>>>>>> CHANGE (8da628 ANDROID: GKI: Update symbols to symbol list for honor)
   __tracepoint_android_rvh_cpuinfo_c_show
   __traceiter_android_rvh_cpuinfo_c_show
   __tracepoint_android_vh_dc_send_copy
