@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc7d4f5_37aebf3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-14T08:55:23Z",
+      "side": 1,
+      "message": "Cherry-picks should have the same Change-Id as their original patch.",
+      "revId": "42b49972b91cced4e27493ac298ee62895b03f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
