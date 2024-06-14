@@ -104,6 +104,24 @@
       "message": "please create a patch on top of this one to add the new symbols to the symbol list",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91375d2_94ac17e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728636
+      },
+      "writtenOn": "2024-06-14T02:03:04Z",
+      "side": 1,
+      "message": "Dear Mr. Todd\n\nThe symbol for vh was registered to android15-6.6.\nCould you please merge this ticket?\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3093643",
+      "parentUuid": "b2f13410_e5d7d763",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
