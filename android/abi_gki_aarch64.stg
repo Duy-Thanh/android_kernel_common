@@ -331552,6 +331552,14 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x9bdcdd91
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9bdcf711
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -349927,6 +349935,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_jiffies_update"
 }
 elf_symbol {
+  id: 0xe261e8cc
+  name: "__traceiter_android_vh_killed_process"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6c329cf7
+  type_id: 0x9bdcdd91
+  full_name: "__traceiter_android_vh_killed_process"
+}
+elf_symbol {
   id: 0x19426a78
   name: "__traceiter_android_vh_kmalloc_large_alloced"
   is_defined: true
@@ -355307,6 +355324,15 @@ elf_symbol {
   crc: 0xff351d68
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_jiffies_update"
+}
+elf_symbol {
+  id: 0xa48390ca
+  name: "__tracepoint_android_vh_killed_process"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x39e06e59
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_killed_process"
 }
 elf_symbol {
   id: 0xb1f4423e
@@ -416942,6 +416968,7 @@ interface {
   symbol_id: 0x0bf41403
   symbol_id: 0x4dca46cc
   symbol_id: 0xf83fbd26
+  symbol_id: 0xe261e8cc
   symbol_id: 0x19426a78
   symbol_id: 0x04e61b81
   symbol_id: 0x0992491b
@@ -417540,6 +417567,7 @@ interface {
   symbol_id: 0x31457bed
   symbol_id: 0x62c13726
   symbol_id: 0xafbca760
+  symbol_id: 0xa48390ca
   symbol_id: 0xb1f4423e
   symbol_id: 0x918a6f4b
   symbol_id: 0x8bd577fd
