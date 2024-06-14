@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee31dd2_58fc9c17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-06-14T04:21:41Z",
+      "side": 1,
+      "message": "Hello,\n\nLint prompts \"Cherry pick is not clean\". Seems reasonable. But there is no conflict prompt when I cherry-pick. Do I need to change to BACKPORT?\n\nBRs\nZhipeng",
+      "revId": "f2355a77841d0b003773b68031fcd41e9e27e52a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
