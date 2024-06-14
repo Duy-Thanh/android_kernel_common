@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4670ad4e_47de4cd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-06-14T00:51:11Z",
+      "side": 1,
+      "message": "You probably need to cp CL:3131265 to these branches for this to work. Otherwise the CF 16k target won\u0027t build.",
+      "revId": "e7eba5a1a1e68019c19e44a1576b6bfed31049da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
