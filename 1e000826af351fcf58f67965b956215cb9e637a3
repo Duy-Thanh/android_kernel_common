@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77c8842c_85222b07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Commit message added.",
+      "parentUuid": "cbdb041d_92cb6efc",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "620cffe8_310da1cb",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-03T08:41:03Z",
       "side": 1,
       "message": "binder instances are namespaced, why is this global for ALL binder instances?\n\nAnd what flags are valid here?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 31
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446a8791_71176afc",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "The binder generic netlink is designed to report abnormal transactions on all contexts. Do you think it\u0027s better to move it into struct binder_context? It\u0027s not very convenient to specifying a certain binder context from generic netlink. Probably we still need a binder ioctl to set binder_report_flags.\n\nComments added for the flags.",
+      "parentUuid": "620cffe8_310da1cb",
       "range": {
         "startLine": 16,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c17b2220_0623560b",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "2a4aa7c4_bdb37864",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 12
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9a055f4_961073e7",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-06-03T08:41:03Z",
       "side": 1,
       "message": "make this the size of the structure variable, to ensure it works properly if that structure variable changes.\n\nActually, `len` is probably not needed at all, just put the size in the call on the next line.",
+      "range": {
+        "startLine": 135,
+        "startChar": 14,
+        "endLine": 135,
+        "endChar": 34
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f21ed667_2364b618",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9a055f4_961073e7",
       "range": {
         "startLine": 135,
         "startChar": 14,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ebd6ee_bca75b0e",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Replaced these parameters with struct binder_report",
+      "parentUuid": "74de5dae_6f1f92b7",
+      "range": {
+        "startLine": 20,
+        "startChar": 5,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83b1a5eb_42787f1d",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07cc2fcf_0ff04f54",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Replaced with binder context name",
+      "parentUuid": "83b1a5eb_42787f1d",
+      "range": {
+        "startLine": 611,
+        "startChar": 7,
+        "endLine": 611,
+        "endChar": 12
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e218402f_fae9f1e2",
@@ -152,6 +296,30 @@
       "writtenOn": "2024-06-03T08:41:03Z",
       "side": 1,
       "message": "returned from where and sent to where?  And what type of value is this?",
+      "range": {
+        "startLine": 612,
+        "startChar": 15,
+        "endLine": 612,
+        "endChar": 23
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3716629_b696d209",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Comments improved",
+      "parentUuid": "e218402f_fae9f1e2",
       "range": {
         "startLine": 612,
         "startChar": 15,
@@ -187,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69e92676_c84a63da",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "This pid is copied from the binder transaction function. So it\u0027s aligned with what the user space processes see. For user apps running in the initial namespace, this is the initial one. For user apps running in a container, it\u0027s also the corresponding one.",
+      "parentUuid": "3ce52f09_c2e55fb6",
+      "range": {
+        "startLine": 613,
+        "startChar": 7,
+        "endLine": 613,
+        "endChar": 15
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec20070d_564e31e6",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -198,6 +390,30 @@
       "writtenOn": "2024-06-03T08:41:03Z",
       "side": 1,
       "message": "is this a boolean?\n\nMaybe some kernel doc for this structure might make sense to help document what you are doing here better.",
+      "range": {
+        "startLine": 617,
+        "startChar": 7,
+        "endLine": 617,
+        "endChar": 12
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a7187e5_11d31494",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Yes, a boolean. Comment updated.",
+      "parentUuid": "ec20070d_564e31e6",
       "range": {
         "startLine": 617,
         "startChar": 7,
@@ -249,6 +465,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bfd26bb_76399ac1",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Comment added to enum binder_report_flag",
+      "parentUuid": "073c9b02_eaa1d895",
+      "range": {
+        "startLine": 618,
+        "startChar": 7,
+        "endLine": 618,
+        "endChar": 12
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89d8ac1b_06a509bf",
@@ -262,6 +502,30 @@
       "writtenOn": "2024-06-03T08:41:03Z",
       "side": 1,
       "message": "size in what?",
+      "range": {
+        "startLine": 620,
+        "startChar": 7,
+        "endLine": 620,
+        "endChar": 11
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "212ae03e_7193c841",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "Comment updated",
+      "parentUuid": "89d8ac1b_06a509bf",
       "range": {
         "startLine": 620,
         "startChar": 7,
@@ -289,6 +553,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ebdbf21_b799f489",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "This is the standard way to share the generic netlink protocol between kernel and user space, similar to https://github.com/torvalds/linux/blob/master/include/uapi/linux/genetlink.h\n\nUser space apps then use the predefined commands and attributes to communicate with kernel driver.",
+      "parentUuid": "509494f5_387b883f",
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2580d80_772bbf59",
@@ -302,6 +584,30 @@
       "writtenOn": "2024-06-03T08:41:03Z",
       "side": 1,
       "message": "why is this needed to be exported to userspace?",
+      "range": {
+        "startLine": 631,
+        "startChar": 5,
+        "endLine": 631,
+        "endChar": 20
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "785a8721_41be938c",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-16T03:10:14Z",
+      "side": 1,
+      "message": "See above, plz.",
+      "parentUuid": "b2580d80_772bbf59",
       "range": {
         "startLine": 631,
         "startChar": 5,
