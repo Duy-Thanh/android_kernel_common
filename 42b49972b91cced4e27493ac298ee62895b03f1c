@@ -33,6 +33,24 @@
       "message": "Please work upstream first.",
       "revId": "42b49972b91cced4e27493ac298ee62895b03f1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3278a7_81852c7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475437
+      },
+      "writtenOn": "2024-06-17T01:23:03Z",
+      "side": 1,
+      "message": "How can I make the patch if there\u0027s conflict on cherry-picks?\nCan I use the same Change-Id in this case?",
+      "parentUuid": "0bc7d4f5_37aebf3c",
+      "revId": "42b49972b91cced4e27493ac298ee62895b03f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
