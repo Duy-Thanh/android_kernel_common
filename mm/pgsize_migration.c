@@ -295,10 +295,10 @@ struct vm_area_struct *get_pad_vma(struct vm_area_struct *vma)
 	pad->vm_start = VMA_PAD_START(pad);
 
 	/* Make the pad vma PROT_NONE */
-	vm_flags_clear(pad, VM_READ|VM_WRITE|VM_EXEC);
+	__vm_flags_mod(pad, 0, VM_READ|VM_WRITE|VM_EXEC);
 
 	/* Remove padding bits */
-	vm_flags_clear(pad, VM_PAD_MASK);
+	__vm_flags_mod(pad, 0, VM_PAD_MASK);
 
 	return pad;
 }
