@@ -16,6 +16,24 @@
       "message": "https://android-review.googlesource.com/q/Ic5a100159dc438a82a59d3f3394d1900b08912c1 added `kthread_stop_put` to the symbol list here on the LTS branch while the KMI freeze was happening on android15-6.6. So, I believe it is ok to fix up the KMI representation here to reflect that CRC change.",
       "revId": "6aa6a1e569c62c610a4f6dab6668980e9723e51c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "508de26b_4ea581d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-17T21:34:14Z",
+      "side": 1,
+      "message": "That is:\n\n```\nfunction symbol \u0027int kthread_stop_put(struct task_struct*)\u0027 changed\n  CRC changed from 0x4eb0b74f to 0x79a61e3a\n```",
+      "parentUuid": "5b1611be_05693b63",
+      "revId": "6aa6a1e569c62c610a4f6dab6668980e9723e51c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
