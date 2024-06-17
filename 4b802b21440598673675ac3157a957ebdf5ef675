@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "4b802b21440598673675ac3157a957ebdf5ef675",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081639659",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3133442?revision\u003d1",
+      "key": {
+        "uuid": "905d7184_64376c20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-17T07:55:03Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/98085b5dd8afd1ec65500eb091d061a3fee21b84).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@\n    - #include \u003ctrace/hooks/shmem_fs.h\u003e\n    - #include \u003ctrace/hooks/net.h\u003e\n    - #include \u003ctrace/hooks/syscall_check.h\u003e\n    -+#include \u003ctrace/hooks/usb.h\u003e\n    - \n    - /*\n    -  * Export tracepoints that act as a bare tracehook (ie: have no trace event\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kfree_skb);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_bpf_syscall);\n    -+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_suspend);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sdio_pm_flag_set);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_read_lazy_flag);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);\n     \n      ## drivers/usb/core/driver.c ##\n    @@ drivers/usb/core/driver.c: static int usb_suspend_both(struct usb_device *udev,\n      \t\t\tudev-\u003estate \u003d\u003d USB_STATE_SUSPENDED)\n      \t\tgoto done;\n      \n    -+\ttrace_android_vh_usb_dev_suspend(udev, msg, \u0026bypass);\n    ++\ttrace_android_rvh_usb_dev_suspend(udev, msg, \u0026bypass);\n     +\tif (bypass)\n     +\t\tgoto done;\n     +\n    @@ drivers/usb/core/driver.c: static int usb_resume_both(struct usb_device *udev, p\n      \n      \t/* Resume the device */\n     \n    - ## include/trace/hooks/usb.h (new) ##\n    + ## include/trace/hooks/usb.h ##\n     @@\n    -+/* SPDX-License-Identifier: GPL-2.0 */\n    -+#undef TRACE_SYSTEM\n    -+#define TRACE_SYSTEM usb\n    -+#undef TRACE_INCLUDE_PATH\n    -+#define TRACE_INCLUDE_PATH trace/hooks\n    -+#if !defined(_TRACE_HOOK_USB_H) || defined(TRACE_HEADER_MULTI_READ)\n    -+#define _TRACE_HOOK_USB_H\n    -+#include \u003clinux/tracepoint.h\u003e\n    -+#include \u003clinux/usb.h\u003e\n    -+#include \u003ctrace/hooks/vendor_hooks.h\u003e\n    + \n    + #include \u003ctrace/hooks/vendor_hooks.h\u003e\n    + \n    ++struct usb_device;\n    ++\n    + DECLARE_HOOK(android_vh_configfs_uevent_work,\n    + \t\tTP_PROTO(bool connected, bool disconnected, bool configured, bool uevent_sent),\n    + \t\tTP_ARGS(connected, disconnected, configured, uevent_sent));\n    + \n     +/*\n     + * Following tracepoints are not exported in tracefs and provide a\n     + * mechanism for vendor modules to hook and extend functionality\n     + */\n    -+\n    -+DECLARE_HOOK(android_vh_usb_dev_suspend,\n    ++DECLARE_RESTRICTED_HOOK(android_rvh_usb_dev_suspend,\n     +\tTP_PROTO(struct usb_device *udev, pm_message_t msg, int *bypass),\n    -+\tTP_ARGS(udev, msg, bypass));\n    ++\tTP_ARGS(udev, msg, bypass), 1);\n     +\n     +DECLARE_HOOK(android_vh_usb_dev_resume,\n     +\tTP_PROTO(struct usb_device *udev, pm_message_t msg, int *bypass),\n     +\tTP_ARGS(udev, msg, bypass));\n     +\n    -+#endif /* _TRACE_HOOK_USB_H */\n    -+/* This part must be outside protection */\n    -+#include \u003ctrace/define_trace.h\u003e\n    -+\n    + #endif /*  _TRACE_HOOK_USB_H */\n    + /*  This part must be outside protection */\n    + #include \u003ctrace/define_trace.h\u003e\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "4b802b21440598673675ac3157a957ebdf5ef675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
