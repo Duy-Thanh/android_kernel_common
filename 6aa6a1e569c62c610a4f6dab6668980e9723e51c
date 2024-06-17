@@ -34,6 +34,24 @@
       "parentUuid": "5b1611be_05693b63",
       "revId": "6aa6a1e569c62c610a4f6dab6668980e9723e51c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b7d6a5_68886b15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-17T21:58:32Z",
+      "side": 1,
+      "message": "\u003e I believe it is ok to fix up the KMI representation here to reflect that CRC change.\n\nWould it be best to do this in a separate commit on top? I\u0027ll try that to leave the merge clean.",
+      "parentUuid": "508de26b_4ea581d0",
+      "revId": "6aa6a1e569c62c610a4f6dab6668980e9723e51c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
