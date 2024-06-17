@@ -43,6 +43,7 @@
 #include <trace/hooks/mm.h>
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/dtask.h>
+#include <trace/hooks/dmabuf.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -120,3 +121,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_capacity_show);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ep_create_wakeup_source);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timerfd_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);

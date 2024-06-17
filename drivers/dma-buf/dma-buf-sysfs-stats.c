@@ -11,6 +11,13 @@
 #include <linux/printk.h>
 #include <linux/slab.h>
 #include <linux/sysfs.h>
+<<<<<<< HEAD   (a527dc6296086cbd0e329c8881d5fd2e1e5b0222 ANDROID: ABI: add initial symbol list for exynos)
+||||||| BASE   (952ba0ed61d0f9d306eada0ab7715b6cd05586ff ANDROID: block: export tracepoints)
+#include <linux/workqueue.h>
+=======
+#include <linux/workqueue.h>
+#include <trace/hooks/dmabuf.h>
+>>>>>>> CHANGE (0d385a5b58ead06f4a2b6565cb1ce02b922863ce ANDROID: dma-buf: Add vendor hook for deferred dmabuf sysfs )
 
 #include "dma-buf-sysfs-stats.h"
 
@@ -121,13 +128,17 @@ static const struct kobj_type dma_buf_ktype = {
 void dma_buf_stats_teardown(struct dma_buf *dmabuf)
 {
 	struct dma_buf_sysfs_entry *sysfs_entry;
+	bool skip_sysfs_release = false;
 
 	sysfs_entry = dmabuf->sysfs_entry;
 	if (!sysfs_entry)
 		return;
 
-	kobject_del(&sysfs_entry->kobj);
-	kobject_put(&sysfs_entry->kobj);
+	trace_android_rvh_dma_buf_stats_teardown(sysfs_entry, &skip_sysfs_release);
+	if (!skip_sysfs_release) {
+		kobject_del(&sysfs_entry->kobj);
+		kobject_put(&sysfs_entry->kobj);
+	}
 }
 
 
