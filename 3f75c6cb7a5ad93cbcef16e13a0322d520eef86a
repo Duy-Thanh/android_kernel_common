@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f20d64f_d64376d7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-17T07:59:08Z",
+      "side": 1,
+      "message": "Make that static?",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 4
+      },
+      "revId": "3f75c6cb7a5ad93cbcef16e13a0322d520eef86a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39fe11ec_fcfade41",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-17T07:59:08Z",
+      "side": 1,
+      "message": "Nit: personal taste, but I\u0027d prefer having the caller do that and have an assertion in there.",
+      "range": {
+        "startLine": 400,
+        "startChar": 1,
+        "endLine": 400,
+        "endChar": 35
+      },
+      "revId": "3f75c6cb7a5ad93cbcef16e13a0322d520eef86a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f291a56_4a3eea82",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-17T07:59:08Z",
+      "side": 1,
+      "message": "This works in practice, but given that we\u0027re releasing the lock in between the private range allocations this feels a bit wrong?\n\nMaybe we should introduce pkvm_alloc_private_va_range_align(), or just allocate PMD_SIZE*2 the first time so you\u0027re guaranteed to have an aligned mapping in there?",
+      "range": {
+        "startLine": 426,
+        "startChar": 1,
+        "endLine": 435,
+        "endChar": 2
+      },
+      "revId": "3f75c6cb7a5ad93cbcef16e13a0322d520eef86a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e37b564f_5fdc3b2b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-17T07:59:08Z",
+      "side": 1,
+      "message": "Nit: you can do that before the private range allocation, makes the error path cleaner, though we don\u0027t care all that much.",
+      "range": {
+        "startLine": 437,
+        "startChar": 1,
+        "endLine": 437,
+        "endChar": 43
+      },
+      "revId": "3f75c6cb7a5ad93cbcef16e13a0322d520eef86a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
