@@ -119,6 +119,26 @@
       "tag": "",
       "revId": "45f56b106d203ddf107041c6d8a7558d99a2793c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081687580",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132182?revision\u003d1",
+      "key": {
+        "uuid": "cd7361bc_f705a35b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-17T19:23:35Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/e08c5de06edd75e3591ea5ff426b4845cf4076ce).\n\n```\n      ## include/trace/hooks/sched.h ##\n     @@ include/trace/hooks/sched.h: DECLARE_HOOK(android_vh_mmput,\n    - \tTP_PROTO(struct mm_struct *mm),\n    - \tTP_ARGS(mm));\n    + \tTP_PROTO(void *unused),\n    + \tTP_ARGS(unused));\n      \n     -/* macro versions of hooks are no longer required */\n     +struct sched_attr;\n    @@ kernel/sched/fair.c: enqueue_task_fair(struct rq *rq, struct task_struct *p, int\n      \tfor_each_sched_entity(se) {\n     \n      ## kernel/sched/vendor_hooks.c ##\n    -@@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_post_init_entity_util_avg);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_effective_cpu_util);\n    +@@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reweight_entity);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_context_switch);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_sugov_sched_attr);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "45f56b106d203ddf107041c6d8a7558d99a2793c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
