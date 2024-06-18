@@ -22,6 +22,30 @@
       },
       "revId": "b839d0d1486323d5286c1aa84d38a4939da961b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b0a7b5_7ba02d21",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-18T14:58:04Z",
+      "side": 1,
+      "message": "Nope, not strictly necessary I think. Currently the walker actually does a consistency check based on the level, so we\u0027d lose that if we got rid of this member though. Probably not a huge deal. And yeah the PTE type should be sufficient from unmap, though we\u0027d need to move more things out of pgtable.c to interpret that from here.\n\nDunno, I don\u0027t mind the current approach that makes things obvious and is simple, but happy to change it you really hate it?",
+      "parentUuid": "14000845_6bc894a1",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "b839d0d1486323d5286c1aa84d38a4939da961b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
