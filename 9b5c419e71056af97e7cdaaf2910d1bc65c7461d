@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081806019",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3133641?revision\u003d1",
+      "key": {
+        "uuid": "bebcbc26_52fcc5f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-18T13:02:56Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "9b5c419e71056af97e7cdaaf2910d1bc65c7461d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081806019",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3133641?revision\u003d1",
+      "key": {
+        "uuid": "e29ab777_7d7d5724",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-18T13:02:56Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/971237b900c38f50e7865289a2aecb77dc7f09f3) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d971237b900c38f50e7865289a2aecb77dc7f09f3).\n\n```\n    - ## drivers/ufs/core/ufshcd.c ##\n    -@@ drivers/ufs/core/ufshcd.c: static int ufshcd_eh_host_reset_handler(struct scsi_cmnd *cmd)\n    + ## drivers/scsi/ufs/ufshcd.c ##\n    +@@ drivers/scsi/ufs/ufshcd.c: static int ufshcd_eh_host_reset_handler(struct scsi_cmnd *cmd)\n      \n      \thba \u003d shost_priv(cmd-\u003edevice-\u003ehost);\n      \n     +\t/*\n    -+\t * If runtime PM sent SSU and got a timeout, scsi_error_handler is\n    -+\t * stuck in this function waiting for flush_work(\u0026hba-\u003eeh_work). And\n    -+\t * ufshcd_err_handler(eh_work) is stuck waiting for runtime PM. Do\n    -+\t * ufshcd_link_recovery instead of eh_work to prevent deadlock.\n    ++\t * If runtime pm send SSU and got timeout, scsi_error_handler\n    ++\t * stuck at this function to wait for flush_work(\u0026hba-\u003eeh_work).\n    ++\t * And ufshcd_err_handler(eh_work) stuck at wait for runtime pm active.\n    ++\t * Do ufshcd_link_recovery instead schedule eh_work can prevent\n    ++\t * dead lock to happen.\n     +\t */\n     +\tif (hba-\u003epm_op_in_progress) {\n     +\t\tif (ufshcd_link_recovery(hba))\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "9b5c419e71056af97e7cdaaf2910d1bc65c7461d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
