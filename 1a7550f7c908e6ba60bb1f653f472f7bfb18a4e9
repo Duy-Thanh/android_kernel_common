@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "1a7550f7c908e6ba60bb1f653f472f7bfb18a4e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081877115",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132182?revision\u003d3",
+      "key": {
+        "uuid": "b16c35b4_1c260ba6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-18T23:29:10Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/e08c5de06edd75e3591ea5ff426b4845cf4076ce).\n\n```\n      ## include/trace/hooks/sched.h ##\n    -@@ include/trace/hooks/sched.h: DECLARE_HOOK(android_vh_mmput,\n    - \tTP_PROTO(struct mm_struct *mm),\n    - \tTP_ARGS(mm));\n    +@@ include/trace/hooks/sched.h: DECLARE_RESTRICTED_HOOK(android_rvh_update_blocked_fair,\n    + \tTP_PROTO(struct rq *rq),\n    + \tTP_ARGS(rq), 1);\n      \n    --/* macro versions of hooks are no longer required */\n     +struct sched_attr;\n    ++\n     +DECLARE_HOOK(android_vh_set_sugov_sched_attr,\n     +\tTP_PROTO(struct sched_attr *attr),\n     +\tTP_ARGS(attr));\n    ++\n     +DECLARE_RESTRICTED_HOOK(android_rvh_set_iowait,\n     +\tTP_PROTO(struct task_struct *p, struct rq *rq, int *should_iowait_boost),\n     +\tTP_ARGS(p, rq, should_iowait_boost), 1);\n    ++\n    + /* macro versions of hooks are no longer required */\n      \n      #endif /* _TRACE_HOOK_SCHED_H */\n    - /* This part must be outside protection */\n     \n      ## kernel/sched/cpufreq_schedutil.c ##\n     @@ kernel/sched/cpufreq_schedutil.c: static int sugov_kthread_create(struct sugov_policy *sg_policy)\n    @@ kernel/sched/fair.c: enqueue_task_fair(struct rq *rq, struct task_struct *p, int\n      \tfor_each_sched_entity(se) {\n     \n      ## kernel/sched/vendor_hooks.c ##\n    -@@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_post_init_entity_util_avg);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_effective_cpu_util);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);\n    +@@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_remove_entity_load_avg);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_blocked_fair);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_sugov_sched_attr);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_iowait);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "1a7550f7c908e6ba60bb1f653f472f7bfb18a4e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
