@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c416fcd_007693a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-06-18T11:51:50Z",
+      "side": 1,
+      "message": "Please add a line to the end of the commit message describing the changes you had to make to warrant the BACKPORT: tag. e.g. `[sebastianene@: Renamed struct foo in bar.h]`",
+      "revId": "dd894d36b249ea1001dd16bd639056aee649b20d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
