@@ -140,6 +140,24 @@
       "parentUuid": "e91375d2_94ac17e8",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b21f3b_4ac1f808",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728636
+      },
+      "writtenOn": "2024-06-18T22:24:56Z",
+      "side": 1,
+      "message": "1. symbol for vendor hook\nhttps://android.googlesource.com/kernel/common/+/10434a62350749fa2059bd292a1c45eb2e948b4d\naosp/3093643 was merged to android15-6.6/android/abi_gki_aarch64_galaxy\n\n2. symbol for consume_skb\nelf_symbol {\n  id: 0xca337eb1\n  name: \"consume_skb\"\n  is_defined: true\n  symbol_type: FUNCTION\n  crc: 0xce5f5010\n  type_id: 0x11cb8bd5\n  full_name: \"consume_skb\"\n}\nIt was already included at \u0027/android/abi_gki_aarch64.stg\u0027 file,\nSo, as far as I know, I don\u0027t have to add it additionally.\n\nAnything else?\nOr, should I add a symbol for \u0027tracepoint_consume_skb\u0027 directly, not in this patch?",
+      "parentUuid": "e9e661cf_e5993c47",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
