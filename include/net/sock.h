@@ -1955,20 +1955,28 @@ sk_dst_get(struct sock *sk)
 
 static inline void dst_negative_advice(struct sock *sk)
 {
+<<<<<<< HEAD   (5c67c5 Merge branch 'android11-5.4' into branch 'android11-5.4-lts')
 	/* *** ANDROID FIXUP ***
 	 * See b/343727534 for more details why this typedef is needed here.
 	 * *** ANDROID FIXUP ***
 	 */
 	android_dst_ops_negative_advice_new_t negative_advice;
 
+=======
+>>>>>>> BRANCH (189ee9 Linux 5.4.278)
 	struct dst_entry *dst = __sk_dst_get(sk);
 
 	sk_rethink_txhash(sk);
 
+<<<<<<< HEAD   (5c67c5 Merge branch 'android11-5.4' into branch 'android11-5.4-lts')
 	if (dst && dst->ops->negative_advice) {
 		negative_advice = (android_dst_ops_negative_advice_new_t)dst->ops->negative_advice;
 		negative_advice(sk, dst);
 	}
+=======
+	if (dst && dst->ops->negative_advice)
+		dst->ops->negative_advice(sk, dst);
+>>>>>>> BRANCH (189ee9 Linux 5.4.278)
 }
 
 static inline void
