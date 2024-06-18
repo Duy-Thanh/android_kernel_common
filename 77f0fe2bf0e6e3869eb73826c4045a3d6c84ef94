@@ -16,6 +16,24 @@
       "message": "Not blocking: Should this hook supersede the trace_android_rvh_set_user_nice() hook in newer kernels? Or is there actual value in having both?",
       "revId": "77f0fe2bf0e6e3869eb73826c4045a3d6c84ef94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "411cf13f_5082c9dc",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7354,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-06-18T19:40:58Z",
+      "side": 1,
+      "message": "I\u0027ll defer to Rick again. I think moving to use the earlier hook will be inefficient as we\u0027d have to hold the lock twice. Whether the other users can move to this hook instead I\u0027m not sure.\n\nDo you want us to update the signature to match it in case they can?",
+      "parentUuid": "bfc72bce_35f821dd",
+      "revId": "77f0fe2bf0e6e3869eb73826c4045a3d6c84ef94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
