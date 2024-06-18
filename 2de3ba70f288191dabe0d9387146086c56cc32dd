@@ -87,6 +87,24 @@
       "parentUuid": "860c09c0_531fcbb5",
       "revId": "2de3ba70f288191dabe0d9387146086c56cc32dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc0ff0e_0a22508e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-06-18T14:28:08Z",
+      "side": 1,
+      "message": "Okay, looks good, thanks:\n\n15c251f814427 tracing: Fix a possible race when disabling buffered events\nb00b500916939 tracing: Fix incomplete locking when disabling buffered events\nbc5b79df6d54e tracing: Fix a warning when allocating buffered events fails",
+      "parentUuid": "860c09c0_531fcbb5",
+      "revId": "2de3ba70f288191dabe0d9387146086c56cc32dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
