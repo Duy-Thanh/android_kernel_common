@@ -34,6 +34,24 @@
       "parentUuid": "bfc72bce_35f821dd",
       "revId": "77f0fe2bf0e6e3869eb73826c4045a3d6c84ef94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d1865fb_c4d32c36",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7354,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-18T19:50:07Z",
+      "side": 1,
+      "message": "No. We\u0027ll try to sort this in android-mainline or on the next LTS.",
+      "parentUuid": "411cf13f_5082c9dc",
+      "revId": "77f0fe2bf0e6e3869eb73826c4045a3d6c84ef94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
