@@ -158,6 +158,24 @@
       "parentUuid": "e9e661cf_e5993c47",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc83a60a_707bbc64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-18T22:44:09Z",
+      "side": 1,
+      "message": "\"consume_skb\" is for `EXPORT_SYMBOL_GPL(consume_skb)` in net/core/skbuff.c. You are adding a tracepoint (`EXPORT_TRACEPOINT_SYMBOL_GPL(consume_skb)`) which would require the symbols:\n```\n__tracepoint_consume_skb\n__traceiter_consume_skb\n```\n\nIf you don\u0027t need those symbols, then you should abandon this patch.",
+      "parentUuid": "f7b21f3b_4ac1f808",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
