@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "9ad961ed05a5c6b325dc20bef3543fe0f4ad8e8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081877142",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132184?revision\u003d4",
+      "key": {
+        "uuid": "6768b721_5dda1581",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-18T23:28:44Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/2490ab50e7c7f0200a97aadb3ca003de4a822b58).\n\n```\n      ## include/trace/hooks/sched.h ##\n    -@@ include/trace/hooks/sched.h: DECLARE_RESTRICTED_HOOK(android_rvh_update_blocked_fair,\n    - \tTP_PROTO(struct rq *rq),\n    - \tTP_ARGS(rq), 1);\n    +@@ include/trace/hooks/sched.h: DECLARE_RESTRICTED_HOOK(android_rvh_set_iowait,\n    + \tTP_PROTO(struct task_struct *p, struct rq *rq, int *should_iowait_boost),\n    + \tTP_ARGS(p, rq, should_iowait_boost), 1);\n      \n     +DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,\n     +\tTP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),\n     +\tTP_ARGS(now, rq, tsk, running), 1);\n     +\n    + /* macro versions of hooks are no longer required */\n    + \n      #endif /* _TRACE_HOOK_SCHED_H */\n    - /* This part must be outside protection */\n    - #include \u003ctrace/define_trace.h\u003e\n     \n      ## kernel/sched/rt.c ##\n     @@ kernel/sched/rt.c: static inline void set_next_task_rt(struct rq *rq, struct task_struct *p, bool f\n    - \t */\n      \tif (rq-\u003ecurr-\u003esched_class !\u003d \u0026rt_sched_class)\n      \t\tupdate_rt_rq_load_avg(rq_clock_pelt(rq), rq, 0);\n    -+\ttrace_android_rvh_update_rt_rq_load_avg(rq_clock_pelt(rq), rq, p, 0);\n      \n    ++\t/* Should always be called unlike update_rt_rq_load_avg() */\n    ++\ttrace_android_rvh_update_rt_rq_load_avg(rq_clock_pelt(rq), rq, p, 0);\n    ++\n      \trt_queue_push_tasks(rq);\n      }\n    + \n     @@ kernel/sched/rt.c: static void put_prev_task_rt(struct rq *rq, struct task_struct *p)\n      \tupdate_curr_rt(rq);\n      \n    @@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_detach_ent\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_remove_entity_load_avg);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_blocked_fair);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_sugov_sched_attr);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_iowait);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "9ad961ed05a5c6b325dc20bef3543fe0f4ad8e8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
