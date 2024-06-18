@@ -16,6 +16,24 @@
       "message": "Is there a plan for upstreaming this?",
       "revId": "bb1659002169c2e6010abdbccee399c29a1f37de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff1dfb4_955c74e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-06-18T20:23:03Z",
+      "side": 1,
+      "message": "Hi Todd. The issue only exists for Android when transitioning from 4kB to 16kB (since we cannot move the whole ecosystem at once). Once all pieces have migrated to 16kB these workarounds will be dropped. Upstream does not have these constraints which makes it non starter.",
+      "parentUuid": "91fcefa8_5e1702d8",
+      "revId": "bb1659002169c2e6010abdbccee399c29a1f37de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
