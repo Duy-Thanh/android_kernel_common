@@ -69,6 +69,24 @@
       "parentUuid": "2f4c9207_9bdd8f69",
       "revId": "2de3ba70f288191dabe0d9387146086c56cc32dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0672d218_82877897",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-06-18T14:27:40Z",
+      "side": 1,
+      "message": "I think they\u0027re:\n\n```\n15c251f81442 tracing: Fix a possible race when disabling buffered events\nb00b50091693 tracing: Fix incomplete locking when disabling buffered events\n6e0d6c685b1b tracing: Disable snapshot buffer when stopping instance tracers\n```",
+      "parentUuid": "860c09c0_531fcbb5",
+      "revId": "2de3ba70f288191dabe0d9387146086c56cc32dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
