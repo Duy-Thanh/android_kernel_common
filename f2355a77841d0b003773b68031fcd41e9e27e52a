@@ -16,6 +16,24 @@
       "message": "Hello,\n\nLint prompts \"Cherry pick is not clean\". Seems reasonable. But there is no conflict prompt when I cherry-pick. Do I need to change to BACKPORT?\n\nBRs\nZhipeng",
       "revId": "f2355a77841d0b003773b68031fcd41e9e27e52a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4496cad1_781135d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-06-18T01:43:20Z",
+      "side": 1,
+      "message": "Hello,\n\nDo these two patches need to be changed? Why wasn\u0027t it merged?\n\n\nBRs,\nzhipeng",
+      "parentUuid": "aee31dd2_58fc9c17",
+      "revId": "f2355a77841d0b003773b68031fcd41e9e27e52a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
