@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "38fdc88203f48c2434ec7c9bd3a7491dd9034d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081876273",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132190?revision\u003d4",
+      "key": {
+        "uuid": "6c9b0aab_093ee578",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-18T23:26:10Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/09474646338fa48bb410eee0c3681cb8c77dfa3b).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n     @@\n    - #include \u003ctrace/hooks/bl_hib.h\u003e\n    - #include \u003ctrace/hooks/regmap.h\u003e\n    - #include \u003ctrace/hooks/compaction.h\u003e\n    + #include \u003ctrace/hooks/fuse.h\u003e\n    + #include \u003ctrace/hooks/psi.h\u003e\n    + #include \u003ctrace/hooks/blk.h\u003e\n     +#include \u003ctrace/hooks/suspend.h\u003e\n    + \n      /*\n       * Export tracepoints that act as a bare tracehook (ie: have no trace event\n    -  * associated with them) to allow external modules to probe them.\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_begin);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_end);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bus_iommu_probe);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bd_link_disk_holder);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_begin);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio);\n     \n      ## include/trace/hooks/suspend.h (new) ##\n     @@\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "38fdc88203f48c2434ec7c9bd3a7491dd9034d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
