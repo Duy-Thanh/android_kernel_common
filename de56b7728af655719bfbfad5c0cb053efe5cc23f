@@ -122,6 +122,24 @@
       "parentUuid": "b2f13410_e5d7d763",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e661cf_e5993c47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-18T17:54:51Z",
+      "side": 1,
+      "message": "The symbols for this change are not merged. Please add them to your symbol list. aosp/3093643 has nothing to do with these symbols.",
+      "parentUuid": "e91375d2_94ac17e8",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
