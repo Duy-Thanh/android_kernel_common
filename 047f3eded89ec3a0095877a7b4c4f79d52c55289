@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee25e16a_4b92a72e",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6575,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-18T17:20:15Z",
+      "side": 1,
+      "message": "this breaks kernelci builds:\n```\nmm/vmscan.c:6936:44: error: no member named \u0027android_vendor_data1\u0027 in \u0027struct scan_control\u0027\n```\nIt should be enclosed in `#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA` as shown earlier in this file. `android_vendor_data1` is only defined under that condition.",
+      "revId": "047f3eded89ec3a0095877a7b4c4f79d52c55289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aac1ca5_b42ae608",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6936,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-18T17:20:15Z",
+      "side": 1,
+      "message": "this breaks kernelci builds:\n```\nmm/vmscan.c:6936:44: error: no member named \u0027android_vendor_data1\u0027 in \u0027struct scan_control\u0027\n```\nIt should be enclosed in `#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA` as shown earlier in this file. `android_vendor_data1` is only defined under that condition.",
+      "revId": "047f3eded89ec3a0095877a7b4c4f79d52c55289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
