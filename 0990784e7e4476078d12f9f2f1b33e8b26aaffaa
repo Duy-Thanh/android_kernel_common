@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "0990784e7e4476078d12f9f2f1b33e8b26aaffaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081795269",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132185?revision\u003d2",
+      "key": {
+        "uuid": "1741f66e_65778ee3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-18T14:07:54Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/b821a3c8fc1efe12782061993b4feef026f8ce58).\n\n```\n      ## fs/proc/base.c ##\n     @@\n    - #include \u003clinux/cn_proc.h\u003e\n    + #include \u003clinux/ksm.h\u003e\n      #include \u003clinux/cpufreq_times.h\u003e\n      #include \u003ctrace/events/oom.h\u003e\n     +#include \u003ctrace/hooks/sched.h\u003e\n    @@ include/trace/hooks/sched.h: DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_lo\n     +\tTP_PROTO(int saved_prio),\n     +\tTP_ARGS(saved_prio));\n     +\n    + /* macro versions of hooks are no longer required */\n    + \n      #endif /* _TRACE_HOOK_SCHED_H */\n    - /* This part must be outside protection */\n    - #include \u003ctrace/define_trace.h\u003e\n     \n      ## kernel/sched/vendor_hooks.c ##\n    -@@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_remove_entity_load_avg);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_blocked_fair);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg);\n    +@@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_sugov_sched_attr);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_iowait);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_inheritance);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_restore);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "0990784e7e4476078d12f9f2f1b33e8b26aaffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
