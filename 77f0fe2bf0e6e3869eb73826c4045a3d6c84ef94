@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc72bce_35f821dd",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7354,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-18T18:10:55Z",
+      "side": 1,
+      "message": "Not blocking: Should this hook supersede the trace_android_rvh_set_user_nice() hook in newer kernels? Or is there actual value in having both?",
+      "revId": "77f0fe2bf0e6e3869eb73826c4045a3d6c84ef94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
