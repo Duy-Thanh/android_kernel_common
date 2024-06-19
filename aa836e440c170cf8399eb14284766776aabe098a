@@ -52,6 +52,24 @@
       "parentUuid": "40aa223e_0d2ead0d",
       "revId": "aa836e440c170cf8399eb14284766776aabe098a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3783915d_5910602c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-19T17:48:40Z",
+      "side": 1,
+      "message": "The cited bug (b/344571420) provides no context except for a pointer to an upstream patch - which obviously is not this patch. Please create a new bug that provides all the context required to understand this series so we don\u0027t have to remember email discussions from months ago. Have all of these patches cite the new bug.",
+      "parentUuid": "708df580_d83e72b1",
+      "revId": "aa836e440c170cf8399eb14284766776aabe098a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
