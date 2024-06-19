@@ -46,6 +46,30 @@
       },
       "revId": "b839d0d1486323d5286c1aa84d38a4939da961b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78692a0e_6b098b8f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-19T06:14:17Z",
+      "side": 1,
+      "message": "Given the timeline and your CR+1, I\u0027ll merge the code as-is, but please do let me know if you prefer it changed, happy to push a new CL to do this refactoring separately.",
+      "parentUuid": "64b0a7b5_7ba02d21",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "b839d0d1486323d5286c1aa84d38a4939da961b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
