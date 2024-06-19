@@ -47,11 +47,7 @@
 #include <trace/hooks/signal.h>
 #include <trace/hooks/hung_task.h>
 #include <trace/hooks/topology.h>
-#include <trace/hooks/mm.h>
-#include <trace/hooks/fault.h>
-#include <trace/hooks/ftrace_dump.h>
-#include <trace/hooks/dtask.h>
-#include <trace/hooks/psci.h>
+#include <trace/hooks/thermal.h>
 #include <trace/hooks/power.h>
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/futex.h>
@@ -496,3 +492,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_anonymous_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_uprobe_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_swap_bio_charge);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
