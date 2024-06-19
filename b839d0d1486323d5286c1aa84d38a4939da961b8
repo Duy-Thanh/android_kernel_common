@@ -70,6 +70,30 @@
       },
       "revId": "b839d0d1486323d5286c1aa84d38a4939da961b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6904c6a0_61f5db91",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-06-19T06:57:58Z",
+      "side": 1,
+      "message": "Yup, the +1 was to avoid blocking this, so thanks for submitting it!\n\nI think it\u0027s worth having another CL to drop the \u0027level\u0027 field in `slot hyp_fixmap_slot` -- I think it makes the code clearer and means you don\u0027t have to e.g. worry about error paths where that field might not be initialised for the walker.",
+      "parentUuid": "78692a0e_6b098b8f",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "b839d0d1486323d5286c1aa84d38a4939da961b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
