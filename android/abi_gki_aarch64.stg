@@ -40731,6 +40731,11 @@ member {
   offset: 64
 }
 member {
+  id: 0x36aac7fc
+  type_id: 0x55857538
+  offset: 30400
+}
+member {
   id: 0x36ade005
   type_id: 0x5599d322
   offset: 192
@@ -47194,12 +47199,6 @@ member {
   name: "android_kabi_reserved1"
   type_id: 0x92233392
   offset: 1280
-}
-member {
-  id: 0x2d081384
-  name: "android_kabi_reserved1"
-  type_id: 0x92233392
-  offset: 30400
 }
 member {
   id: 0x2d081398
@@ -158084,6 +158083,11 @@ member {
   offset: 20224
 }
 member {
+  id: 0x0dd9959d
+  name: "psi_irq_time"
+  type_id: 0x92233392
+}
+member {
   id: 0x19bd3082
   name: "psi_uid_count"
   type_id: 0x295c7202
@@ -217168,6 +217172,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x55857538
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x0dd9959d
+    member_id: 0x27000c61
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x5599d322
   kind: UNION
   definition {
@@ -255809,7 +255823,7 @@ struct_union {
     member_id: 0x643f7f82
     member_id: 0xed73670e
     member_id: 0xd68b5760
-    member_id: 0x2d081384
+    member_id: 0x36aac7fc
     member_id: 0x63760aa1
     member_id: 0xac894736
     member_id: 0xe0f632f5
