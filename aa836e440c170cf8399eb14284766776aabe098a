@@ -16,6 +16,24 @@
       "message": "why all these \"ANDROID\" patches? Why can\u0027t they go upstream. The cited bug provides no context.",
       "revId": "aa836e440c170cf8399eb14284766776aabe098a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40aa223e_0d2ead0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-19T15:58:41Z",
+      "side": 1,
+      "message": "Rust Binder isn\u0027t upstream yet.",
+      "parentUuid": "9047425a_1ddeba66",
+      "revId": "aa836e440c170cf8399eb14284766776aabe098a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
