@@ -16,6 +16,24 @@
       "message": "the KABI reserved fields are for LTS merges, not new feature updates like this 😞",
       "revId": "2c0d68294fcf92feedc1379e9fab29ccb5974572",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026f3c68_a86547b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-19T17:46:11Z",
+      "side": 1,
+      "message": "Yeah. I\u0027m intending the change to come in via -stable, but I\u0027m just trying to work out the details of dealing with the stable KABI for this sort of change.",
+      "parentUuid": "c436072e_dbfabd4c",
+      "revId": "2c0d68294fcf92feedc1379e9fab29ccb5974572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
