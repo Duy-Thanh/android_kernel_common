@@ -22,6 +22,30 @@
       },
       "revId": "358f4bcd3339e091ab9aab57c84b5d513edc060d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adfeb2f5_1a01b9d9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-19T07:36:23Z",
+      "side": 0,
+      "message": "Perhaps I could pass a new struct along the lines of\n\nstruct create_fixmap_slot_data {\n        struct hyp_fixmap_slot *slot;\n        u32 expected_level;\n};\n\nto this walker. That would allow to keep that check, but would still get rid of hyp_fixmap_slot::field. Thoughts?",
+      "parentUuid": "6492105d_47feb481",
+      "range": {
+        "startLine": 363,
+        "startChar": 33,
+        "endLine": 363,
+        "endChar": 58
+      },
+      "revId": "358f4bcd3339e091ab9aab57c84b5d513edc060d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
