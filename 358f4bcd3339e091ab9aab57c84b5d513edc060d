@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6492105d_47feb481",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-19T07:30:36Z",
+      "side": 0,
+      "message": "FWIW I think it\u0027s a bummer to lose this check here -- kvm_pgtable_hyp_map better create a block mapping from create_fixblock(), else we\u0027ll be silently in trouble ...",
+      "range": {
+        "startLine": 363,
+        "startChar": 33,
+        "endLine": 363,
+        "endChar": 58
+      },
+      "revId": "358f4bcd3339e091ab9aab57c84b5d513edc060d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
