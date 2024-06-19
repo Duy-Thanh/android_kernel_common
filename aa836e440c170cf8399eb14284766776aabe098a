@@ -34,6 +34,24 @@
       "parentUuid": "9047425a_1ddeba66",
       "revId": "aa836e440c170cf8399eb14284766776aabe098a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708df580_d83e72b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-19T16:07:49Z",
+      "side": 1,
+      "message": "These changes would get included or squashed into the patchset when it goes upstream. See the email thread titled \"Rust Binder timeline and questions\" from back when we put Rust Binder into android15-6.6.",
+      "parentUuid": "40aa223e_0d2ead0d",
+      "revId": "aa836e440c170cf8399eb14284766776aabe098a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
