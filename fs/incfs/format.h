@@ -314,6 +314,8 @@ struct backing_file_context {
 	 * there is no need to get/put the creds
 	 */
 	const struct cred *bc_cred;
+
+	bool bc_has_bad_block;
 };
 
 struct metadata_handler {
