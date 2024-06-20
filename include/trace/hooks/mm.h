@@ -224,6 +224,11 @@ DECLARE_HOOK(android_vh_kmalloc_large_alloced,
 DECLARE_HOOK(android_vh_tune_fault_around_bytes,
 	TP_PROTO(unsigned long *fault_around_bytes),
 	TP_ARGS(fault_around_bytes));
+DECLARE_HOOK(android_vh_page_should_be_protected,
+	TP_PROTO(struct folio *folio, unsigned long nr_scanned,
+	s8 priority, u64 *ext, int *should_protect),
+	TP_ARGS(folio, nr_scanned, priority, ext, should_protect));
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
