@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c1f7bd2_f8cd32ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-20T23:52:56Z",
+      "side": 1,
+      "message": "Got to remember to generate the STG file via //common:kernel_aarch64_abi_update",
+      "revId": "4ac04ce3f64aaaae040a1cb598b44c7f0c7a51a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
