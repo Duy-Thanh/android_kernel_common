@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e862bcc_0a2c0128",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-20T17:33:08Z",
+      "side": 1,
+      "message": "should be \"ANDROID:\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01adf7b4_9055b0ae",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
