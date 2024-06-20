@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01adf7b4_9055b0ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-20T16:57:54Z",
+      "side": 1,
+      "message": "Add a \"Bug: \" tag citing the associated bug",
+      "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecbca984_b0f67d30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-20T16:57:54Z",
+      "side": 1,
+      "message": "create a patch on top of this one to add the new symbols to your symbol list",
+      "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2afe30d_21b30fb8",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-20T16:57:54Z",
+      "side": 1,
+      "message": "It looks like `scan_control` is not in the KMI yet, so we could do this. Please explain why a 2nd vendor data field is needed (in the commit message). One should be sufficient. If we do go ahead with this, then it should be changed to `ANDROID_VENDOR_DATA_ARRAY()` instead of 2 single elements.",
+      "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
