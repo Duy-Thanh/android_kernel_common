@@ -16,6 +16,24 @@
       "message": "@qperret@google.com, is there a better way to do this?",
       "revId": "060418e21406e27c100bc9b3053dd10f3ddac6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c076de_54721203",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-20T17:10:53Z",
+      "side": 1,
+      "message": "Good question, it would helpful to have more details about the use-case to answer. What type of communication needs to happen between the hypervisor and a kernel module?\n\nWhat that said I don\u0027t think `enum ipi_msg_type` is meant to be a stable kernel-hypervisor ABI and it\u0027s not even monitored by the GKI ABI tools.",
+      "parentUuid": "7bb3744d_669140a7",
+      "revId": "060418e21406e27c100bc9b3053dd10f3ddac6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
