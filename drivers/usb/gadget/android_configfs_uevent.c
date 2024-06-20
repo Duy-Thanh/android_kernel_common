@@ -84,7 +84,7 @@ static void android_work(struct work_struct *data)
 				       connected_strs)) {
 			dev_err(dev, "Failed to send connected uevent\n");
 		} else {
-			dev_dbg(dev, "sent uevent %s\n", connected_strs[0]);
+			dev_info(dev, "sent uevent %s\n", connected_strs[0]);
 			uevent_sent = true;
 		}
 	}
@@ -94,7 +94,7 @@ static void android_work(struct work_struct *data)
 					configured_strs)) {
 			dev_err(dev, "Failed to send configured uevent\n");
 		} else {
-			dev_dbg(dev, "sent uevent %s\n", configured_strs[0]);
+			dev_info(dev, "sent uevent %s\n", configured_strs[0]);
 			uevent_sent = true;
 		}
 	}
@@ -104,7 +104,7 @@ static void android_work(struct work_struct *data)
 					disconnected_strs)) {
 			dev_err(dev, "Failed to send disconnected uevent\n");
 		} else {
-			dev_dbg(dev, "sent uevent %s\n", disconnected_strs[0]);
+			dev_info(dev, "sent uevent %s\n", disconnected_strs[0]);
 			uevent_sent = true;
 		}
 	}
