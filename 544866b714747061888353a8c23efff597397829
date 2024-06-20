@@ -33,6 +33,23 @@
       "message": "Instead of adding the config to the base GKI kernel, enabling this would be better done as a vendor module.",
       "revId": "544866b714747061888353a8c23efff597397829",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "391490f1_c0b91761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-20T16:30:36Z",
+      "side": 1,
+      "message": "Must be a vendor module.",
+      "revId": "544866b714747061888353a8c23efff597397829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
