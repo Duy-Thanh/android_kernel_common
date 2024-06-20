@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53165b29_247b0ba9",
+        "filename": "drivers/android/binder_pick_impl.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-06-20T09:59:34Z",
+      "side": 1,
+      "message": "why not add `\u0026\u0026 IS_ENABLED...` after the `strcmp`s above?",
+      "revId": "7fe3f983769a3389c533bd9bbffb2e791bf58ed4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
