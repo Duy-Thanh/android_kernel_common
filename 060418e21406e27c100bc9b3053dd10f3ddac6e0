@@ -34,6 +34,24 @@
       "parentUuid": "7bb3744d_669140a7",
       "revId": "060418e21406e27c100bc9b3053dd10f3ddac6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e501ac_df68ef07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2032918
+      },
+      "writtenOn": "2024-06-21T08:20:52Z",
+      "side": 1,
+      "message": "First of all, the reserved IPI number can be used for different purposes by the vendor according to their own situation. It does not necessarily have to be used for communication between the hypervisor and the kernel. Additionally, when the hypervisor detects some illegal events, it can proactively notify the kernel in real-time through this IPI for corresponding responses.",
+      "parentUuid": "46c076de_54721203",
+      "revId": "060418e21406e27c100bc9b3053dd10f3ddac6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
