@@ -18074,6 +18074,11 @@ pointer_reference {
   pointee_type_id: 0x9fb3a41e
 }
 pointer_reference {
+  id: 0x2d7d1263
+  kind: POINTER
+  pointee_type_id: 0x9fb4af11
+}
+pointer_reference {
   id: 0x2d7d9cfc
   kind: POINTER
   pointee_type_id: 0x9fb6956c
@@ -29509,6 +29514,11 @@ pointer_reference {
   pointee_type_id: 0xdc0b0182
 }
 pointer_reference {
+  id: 0x3d98309d
+  kind: POINTER
+  pointee_type_id: 0xdc2024eb
+}
+pointer_reference {
   id: 0x3d9d0240
   kind: POINTER
   pointee_type_id: 0xdc34ef9e
@@ -29922,6 +29932,11 @@ pointer_reference {
   id: 0x3e6396e0
   kind: POINTER
   pointee_type_id: 0xd3cebd1f
+}
+pointer_reference {
+  id: 0x3e645a91
+  kind: POINTER
+  pointee_type_id: 0xd3d18cd9
 }
 pointer_reference {
   id: 0x3e6884d4
@@ -34114,6 +34129,11 @@ qualified {
   qualified_type_id: 0x3f7d42f7
 }
 qualified {
+  id: 0xd3d18cd9
+  qualifier: CONST
+  qualified_type_id: 0x3f0185ef
+}
+qualified {
   id: 0xd3e2f5cd
   qualifier: CONST
   qualified_type_id: 0x3fcc61be
@@ -34552,6 +34572,11 @@ qualified {
   id: 0xdc06b593
   qualifier: CONST
   qualified_type_id: 0x005d60c6
+}
+qualified {
+  id: 0xdc2024eb
+  qualifier: CONST
+  qualified_type_id: 0x00c72527
 }
 qualified {
   id: 0xdc34ef9e
@@ -40288,6 +40313,10 @@ member {
   type_id: 0x042d9ee3
 }
 member {
+  id: 0x22ca661e
+  type_id: 0x0407e868
+}
+member {
   id: 0x22cceba2
   type_id: 0x041dde9a
 }
@@ -40722,6 +40751,10 @@ member {
 member {
   id: 0x2ee1d79b
   type_id: 0x34a92e7f
+}
+member {
+  id: 0x2ef635de
+  type_id: 0x34f6a768
 }
 member {
   id: 0x2f71fc30
@@ -41483,6 +41516,11 @@ member {
   offset: 64
 }
 member {
+  id: 0x355bd939
+  type_id: 0x5a41364f
+  offset: 768
+}
+member {
   id: 0x355c619d
   type_id: 0x5a5fd068
   offset: 96
@@ -42089,6 +42127,11 @@ member {
 member {
   id: 0x3caf7635
   type_id: 0x7d93a8c7
+}
+member {
+  id: 0x3cb9039c
+  type_id: 0x7dca7089
+  offset: 832
 }
 member {
   id: 0x3ce71ba5
@@ -47964,12 +48007,6 @@ member {
   offset: 9344
 }
 member {
-  id: 0xb26b8661
-  name: "android_backport_reserved1"
-  type_id: 0x92233392
-  offset: 768
-}
-member {
   id: 0xb26b8cac
   name: "android_backport_reserved1"
   type_id: 0x92233392
@@ -47982,16 +48019,20 @@ member {
   offset: 14976
 }
 member {
+  id: 0xb26b8ecf
+  name: "android_backport_reserved1"
+  type_id: 0x92233392
+}
+member {
   id: 0xb2e8fb7e
   name: "android_backport_reserved1"
   type_id: 0x1159eb36
   offset: 49472
 }
 member {
-  id: 0x71aeb177
+  id: 0x71aeb2cd
   name: "android_backport_reserved2"
   type_id: 0x92233392
-  offset: 832
 }
 member {
   id: 0x71aebcd3
@@ -90979,6 +91020,11 @@ member {
   offset: 192
 }
 member {
+  id: 0x32c16e78
+  name: "finup_mb"
+  type_id: 0x2d7d1263
+}
+member {
   id: 0x9c5c45b0
   name: "firmware"
   type_id: 0x3e10b518
@@ -100958,12 +101004,6 @@ member {
   name: "hash_node"
   type_id: 0x49a73111
   offset: 1280
-}
-member {
-  id: 0x9a516c95
-  name: "hash_page_init_lock"
-  type_id: 0xf313e71a
-  offset: 2112
 }
 member {
   id: 0x8d38ad20
@@ -126555,6 +126595,17 @@ member {
   name: "mb_last"
   type_id: 0x4585663f
   offset: 576
+}
+member {
+  id: 0xacc2efa1
+  name: "mb_max_msgs"
+  type_id: 0x6720d32f
+  offset: 224
+}
+member {
+  id: 0xace04930
+  name: "mb_max_msgs"
+  type_id: 0x4585663f
 }
 member {
   id: 0x4c31afa1
@@ -210132,6 +210183,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x0407e868
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x71aeb2cd
+  }
+}
+struct_union {
   id: 0x0416665f
   kind: STRUCT
   definition {
@@ -213764,6 +213823,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x34f6a768
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0xb26b8ecf
+  }
+}
+struct_union {
   id: 0x3513af55
   kind: STRUCT
   definition {
@@ -215939,6 +216006,16 @@ struct_union {
     bytesize: 16
     member_id: 0x3cd401f2
     member_id: 0x95dac977
+  }
+}
+struct_union {
+  id: 0x5a41364f
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x32c16e78
+    member_id: 0x2ef635de
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -218221,6 +218298,16 @@ struct_union {
     member_id: 0xad898302
     member_id: 0x2c7b0ccb
     member_id: 0x2c14bb60
+  }
+}
+struct_union {
+  id: 0x7dca7089
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0xace04930
+    member_id: 0x22ca661e
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -233211,6 +233298,7 @@ struct_union {
     member_id: 0x19908cca
     member_id: 0x3c120105
     member_id: 0x35b26497
+    member_id: 0xacc2efa1
   }
 }
 struct_union {
@@ -233218,13 +233306,12 @@ struct_union {
   kind: STRUCT
   name: "fsverity_info"
   definition {
-    bytesize: 272
+    bytesize: 264
     member_id: 0x9d037ff2
     member_id: 0xd4e784ae
     member_id: 0x9c77ac0d
     member_id: 0x3b66a8ad
     member_id: 0x20de0012
-    member_id: 0x9a516c95
   }
 }
 struct_union {
@@ -257251,8 +257338,8 @@ struct_union {
     member_id: 0x7c86a539
     member_id: 0xbf57e5fd
     member_id: 0x2bac9dac
-    member_id: 0xb26b8661
-    member_id: 0x71aeb177
+    member_id: 0x355bd939
+    member_id: 0x3cb9039c
     member_id: 0x34bdae88
   }
 }
@@ -332477,6 +332564,15 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x078316ff
   parameter_id: 0xf4e0a3bd
+}
+function {
+  id: 0x9fb4af11
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0b716c32
+  parameter_id: 0x3e645a91
+  parameter_id: 0x4585663f
+  parameter_id: 0x3d98309d
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x9fb6956c
