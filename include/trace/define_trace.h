@@ -136,6 +136,10 @@
 # undef UNDEF_TRACE_INCLUDE_PATH
 #endif
 
+#ifdef CREATE_RUST_TRACE_POINTS
+# undef DEFINE_RUST_DO_TRACE
+#endif
+
 /* We may be processing more files */
 #define CREATE_TRACE_POINTS
 

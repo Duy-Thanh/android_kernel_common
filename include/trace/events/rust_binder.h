@@ -3,6 +3,7 @@
  * Copyright (C) 2024 Google, Inc.
  */
 
+#undef TRACE_INCLUDE_PATH
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM rust_binder
 
