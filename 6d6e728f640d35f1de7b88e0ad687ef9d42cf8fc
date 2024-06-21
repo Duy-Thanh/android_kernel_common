@@ -16,6 +16,23 @@
       "message": "This implicitly makes tracepoints dependent on binderfs being enabled, which is a separate config option. In theory, I think we ought to move this into its own `.c` file that gets built + linked in whenever `ANDROID_BINDER_IPC_RUST` is present regardless of `ANDROID_BINDERFS_RUST` being enabled.\n\nThat said, if there\u0027s a difficulty there, it seems very unlikely that someone wants tracepoints but *doesn\u0027t* want binderfs, so I\u0027m not too worried.",
       "revId": "6d6e728f640d35f1de7b88e0ad687ef9d42cf8fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83291a46_2e0287d1",
+        "filename": "drivers/android/binder/rust_binderfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-21T22:16:05Z",
+      "side": 1,
+      "message": "I think this snippet, whether it stays in this file or moves to another, also needs to include `EXPORT_TRACEPOINT_SYMBOL_GPL` of the relevant new tracepoints, otherwise a vendor module can\u0027t reference it.",
+      "revId": "6d6e728f640d35f1de7b88e0ad687ef9d42cf8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
