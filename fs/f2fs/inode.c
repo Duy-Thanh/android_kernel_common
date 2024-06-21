@@ -291,6 +291,7 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
 		return false;
 	}
 
+<<<<<<< HEAD   (929096 Merge branch 'android12-5.4' into branch 'android12-5.4-lts')
 	if ((fi->i_flags & F2FS_CASEFOLD_FL) && !f2fs_sb_has_casefold(sbi)) {
 		set_sbi_flag(sbi, SBI_NEED_FSCK);
 		f2fs_warn(sbi, "%s: inode (ino=%lx) has casefold flag, but casefold feature is off",
@@ -329,6 +330,12 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
 				  ri->i_log_cluster_size);
 			return false;
 		}
+=======
+	if (fi->i_xattr_nid && f2fs_check_nid_range(sbi, fi->i_xattr_nid)) {
+		f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_xattr_nid: %u, run fsck to fix.",
+			  __func__, inode->i_ino, fi->i_xattr_nid);
+		return false;
+>>>>>>> BRANCH (189ee9 Linux 5.4.278)
 	}
 
 	return true;
