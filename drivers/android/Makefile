@@ -10,7 +10,7 @@ obj-$(CONFIG_ANDROID_VENDOR_HOOKS) += vendor_hooks.o
 obj-$(CONFIG_ANDROID_DEBUG_KINFO)	+= debug_kinfo.o
 obj-$(CONFIG_ANDROID_BINDER_IPC_RUST)   += rust_binder.o
 
-rust_binder-objs := binder/rust_binder.o binder/rust_binder_events.o
+rust_binder-objs := binder/rust_binder.o binder/rust_binder_events.o binder/rust_binder_hooks.o
 ifeq ($(CONFIG_ANDROID_BINDERFS_RUST),y)
 	rust_binder-objs += binder/rust_binderfs.o
 endif
