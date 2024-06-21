@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f4be8d_aeb038f0",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-21T23:30:47Z",
+      "side": 1,
+      "message": "Moved binder_report_flags to struct binder_context so each context has its own flags that can be set separately.",
+      "parentUuid": "1b751622_175cf59b",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 31
+      },
+      "revId": "1e000826af351fcf58f67965b956215cb9e637a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a4aa7c4_bdb37864",
