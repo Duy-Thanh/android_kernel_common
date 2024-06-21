@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11fa840d_0bcfd4ac",
+        "filename": "rust/kernel/sync/arc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-21T21:59:47Z",
+      "side": 1,
+      "message": "This is not great, as it\u0027s another long-term obstacle to un-forking Arc, and means that code using a kernel Arc may not work with a std Arc if we wanted to do host tests.\n\nThat said, given that we can\u0027t const-construct an `Arc` to try to const-compute this offset, I don\u0027t see a better way.",
+      "revId": "e37c4f8a7e91764591dea02f801352c0205ac703",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
