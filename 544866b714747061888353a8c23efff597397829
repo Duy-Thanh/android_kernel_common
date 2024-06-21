@@ -68,6 +68,24 @@
       "parentUuid": "3c2208c6_1683323b",
       "revId": "544866b714747061888353a8c23efff597397829",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb42afcd_677e28d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-21T02:39:22Z",
+      "side": 1,
+      "message": "Sorry, the suggestion was for it to be built and installed as a vendor module. Enabling it in the gki_defconfig as you have done here would make it a GKI module.\n\nFor more details, see: https://source.android.com/docs/core/architecture/kernel/modules#vendor-modules",
+      "parentUuid": "e007398e_e0f48a84",
+      "revId": "544866b714747061888353a8c23efff597397829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
