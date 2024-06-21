@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91a5dcb8_0f457323",
+        "filename": "arch/arm/mach-omap2/pdata-quirks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-21T09:03:30Z",
+      "side": 1,
+      "message": "This causes the allmodconfig build to fail:\n\n```\narch/arm/mach-omap2/pdata-quirks.c:263:3: error: call to undeclared function \u0027GPIO_LOOKUP\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n                GPIO_LOOKUP(\"gpio-112-127\", 6, \"dac\", GPIO_ACTIVE_HIGH),\n                ^\n...\n```",
+      "revId": "992f4a2013376757905477255ff001e4d9b49ff0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
