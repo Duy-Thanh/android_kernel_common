@@ -34,6 +34,24 @@
       "parentUuid": "91a5dcb8_0f457323",
       "revId": "992f4a2013376757905477255ff001e4d9b49ff0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a87276c_831ed447",
+        "filename": "arch/arm/mach-omap2/pdata-quirks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-21T09:07:01Z",
+      "side": 1,
+      "message": "Oh wait, this is fixed in 6.1.89, so let me just make this all part of one topic so that is resolved that way.",
+      "parentUuid": "70f2e0dc_02c7a2ab",
+      "revId": "992f4a2013376757905477255ff001e4d9b49ff0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
