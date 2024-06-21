@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea165921_ad4721fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-21T16:57:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e862bcc_0a2c0128",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01adf7b4_9055b0ae",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-06-20T16:57:54Z",
       "side": 1,
       "message": "Add a \"Bug: \" tag citing the associated bug",
+      "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58158042_e1307b83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-21T16:57:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01adf7b4_9055b0ae",
       "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +113,24 @@
       "writtenOn": "2024-06-20T16:57:54Z",
       "side": 1,
       "message": "It looks like `scan_control` is not in the KMI yet, so we could do this. Please explain why a 2nd vendor data field is needed (in the commit message). One should be sufficient. If we do go ahead with this, then it should be changed to `ANDROID_VENDOR_DATA_ARRAY()` instead of 2 single elements.",
+      "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b62cc42_de55da04",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-21T16:57:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2afe30d_21b30fb8",
       "revId": "9f8b9291977a1f34bd2e5b785e2f773f88077344",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
