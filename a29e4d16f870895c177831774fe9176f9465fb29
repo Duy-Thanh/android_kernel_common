@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "003c2c4f_3e9f262f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-06-21T23:39:23Z",
+      "side": 1,
+      "message": "The latest revision has changed the high frequency pr_info(binder_report) to ftrace and removed those unused code.",
+      "revId": "a29e4d16f870895c177831774fe9176f9465fb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
