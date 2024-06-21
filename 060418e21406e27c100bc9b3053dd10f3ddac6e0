@@ -52,6 +52,24 @@
       "parentUuid": "46c076de_54721203",
       "revId": "060418e21406e27c100bc9b3053dd10f3ddac6e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bac9af4_b395fbec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-06-21T08:30:45Z",
+      "side": 1,
+      "message": "Again, enum ipi_msg_type is not meant to be stable -- what will happen if a new entry is added to middle of the enum via an LTS merge? This has a risk of breaking GKI stability guarantees.\n\nIn your case, could the hypervisor and the kernel module negotiate in software directly the location of the handler for the particular event? IOW, have a new hypercall that lets the kernel module say \u0027if you see this event, please eret to this location\u0027 ? The hypervisor should be able to do this relatively easily, it\u0027s nothing very different from just injecting an exception into the kernel, except that you don\u0027t get the exception vector location from VBAR_EL1, it\u0027s been negotiated in software.",
+      "parentUuid": "c6e501ac_df68ef07",
+      "revId": "060418e21406e27c100bc9b3053dd10f3ddac6e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
