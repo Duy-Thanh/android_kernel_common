@@ -16,6 +16,40 @@
       "message": "Can you have Matthew or someone else who knows rust well review these ANDROID patches and give a CR+1?",
       "revId": "26d514fa8852d8f0f9ca74a146169b94cffe4600",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77f3d9a_0eedc6c4",
+        "filename": "include/linux/rust_binder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-21T21:07:56Z",
+      "side": 1,
+      "message": "These functions seem like they should go in a private implementation header file, not the one we\u0027re going to expose to others for vendor hooking. Only `rust_binderfs.c` should be calling these functions (by referencing them through DEFINE_SHOW_ATTRIBUTE), not anyone who imports the global `rust_binder.h`. Since we\u0027re about to start explicitly opening that header up to vendors, I think it makes more sense to put the `fops` and all of these functions into a `drivers/android/binder/rust_binder.h` or `rust_binder_internal.h` file or similar. Such a header could then include the stanzas you plucked from `rust_internal.h`",
+      "revId": "26d514fa8852d8f0f9ca74a146169b94cffe4600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac2f44e_a77fc784",
+        "filename": "include/linux/rust_binder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-21T21:07:56Z",
+      "side": 1,
+      "message": "I don\u0027t think it makes a ton of sense for `DEFINE_SHOW_ATTRIBUTE` to be invoked in a header file. All of these should probably go in the `.c` file, as they define a constant that should be private to `rust_binderfs.c`. It\u0027s static, so in theory the compiler or linker should always figure out to discard it, but...",
+      "revId": "26d514fa8852d8f0f9ca74a146169b94cffe4600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
