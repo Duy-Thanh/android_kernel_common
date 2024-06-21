@@ -1531,6 +1531,7 @@ struct file *get_mm_exe_file(struct mm_struct *mm)
 	rcu_read_unlock();
 	return exe_file;
 }
+EXPORT_SYMBOL_GPL(get_mm_exe_file);
 
 /**
  * get_task_exe_file - acquire a reference to the task's executable file

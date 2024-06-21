@@ -61,6 +61,7 @@ int valid_mmap_phys_addr_range(unsigned long pfn, size_t size)
 {
 	return !(((pfn << PAGE_SHIFT) + size) & ~PHYS_MASK);
 }
+EXPORT_SYMBOL_GPL(valid_mmap_phys_addr_range);
 
 static int __init adjust_protection_map(void)
 {
