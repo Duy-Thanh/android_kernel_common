@@ -1376,8 +1376,15 @@ static int smmu_detach_dev(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_dom
 			goto out_unlock;
 		}
 		cd_table = (u64 *)(dst->data[0] & STRTAB_STE_0_S1CTXPTR_MASK);
-		if (WARN_ON(!cd_table)) {
-			ret = -ENODEV;
+
+		/*
+		 * When a device is assigned we free cd_table, and the VM dies
+		 * VFIO will try to detach the blocking domain which was forciably
+		 * detached on assignement, so we would end with stage-1 domain without
+		 * cd table.
+		 */
+		if (!cd_table) {
+			ret = 0;
 			goto out_unlock;
 		}
 
@@ -1550,6 +1557,31 @@ static bool smmu_dabt_device(struct hyp_arm_smmu_v3_device *smmu,
 	return true;
 }
 
+static int smmu_block_dev(struct kvm_hyp_iommu *iommu, u32 sid, bool is_host2guest)
+{
+	struct hyp_arm_smmu_v3_device *smmu = to_smmu(iommu);
+	static struct arm_smmu_ste *dst;
+	int ret = 0;
+
+	kvm_iommu_lock(iommu);
+	dst = smmu_get_ste_ptr(smmu, sid);
+
+	/*
+	 * VFIO will attach the device to a blocking domain, this will make the
+	 * kernel driver detach the device which should be have zeroed STE.
+	 * So, if this is not the current state of the device, something
+	 * went wrong.
+	 * For guests, we need to do more as guests might not exit cleanly
+	 * and the device might be translanting, so we have to actually block
+	 * the device and clean the STE/CD.
+	 */
+	if (dst->data[0])
+		ret = -EINVAL;
+
+	kvm_iommu_unlock(iommu);
+	return ret;
+}
+
 static bool smmu_dabt_handler(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr)
 {
 	struct hyp_arm_smmu_v3_device *smmu;
@@ -1688,4 +1720,5 @@ struct kvm_iommu_ops smmu_ops = {
 	.suspend			= smmu_suspend,
 	.resume				= smmu_resume,
 	.host_stage2_idmap		= smmu_host_stage2_idmap,
+	.block_dev			= smmu_block_dev,
 };
