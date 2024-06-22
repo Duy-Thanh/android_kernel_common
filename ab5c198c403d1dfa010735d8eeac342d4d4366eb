@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "ab5c198c403d1dfa010735d8eeac342d4d4366eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000082257823",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3143218?revision\u003d1",
+      "key": {
+        "uuid": "b502b2b6_3c07046b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-22T03:55:43Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/b499bac439f7dbf33c2931476e746e113ffc158e).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpci_override_toggling);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_typec_tcpci_get_vbus);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_store_partner_src_caps);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_get_timer);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_modify_src_caps);\n    @@ include/trace/hooks/typec.h: DECLARE_HOOK(android_vh_typec_store_partner_src_cap\n      \tTP_PROTO(unsigned int *nr_source_caps, u32 (*source_caps)[]),\n      \tTP_ARGS(nr_source_caps, source_caps));\n      \n    --#endif /* _TRACE_HOOK_UFSHCD_H */\n     +DECLARE_HOOK(android_vh_typec_tcpm_modify_src_caps,\n     +\tTP_PROTO(unsigned int *nr_src_pdo, u32 (*src_pdo)[], bool *modified),\n     +\tTP_ARGS(nr_src_pdo, src_pdo, modified));\n     +\n    -+#endif /* _TRACE_HOOK_TYPEC_H */\n    + #endif /* _TRACE_HOOK_TYPEC_H */\n      /* This part must be outside protection */\n      #include \u003ctrace/define_trace.h\u003e\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "ab5c198c403d1dfa010735d8eeac342d4d4366eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
