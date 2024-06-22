@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000082263676",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3141158?revision\u003d1",
+      "key": {
+        "uuid": "a5a14c71_47287165",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-22T06:30:58Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/458cdb59f7719f81504d392daa95a8c99c30c276).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_proc_work_ilocked);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_release_special_work);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_alloc_pages_direct_reclaim_enter);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_alloc_pages_direct_reclaim_exit);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_alloc_pages_may_oom_exit);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (1a72e2 ANDROID: GKI: update symbol list file for xiaomi)\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_begin);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_end);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bus_iommu_probe);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_queue_request_and_unlock);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_end);\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_capacity_show);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_list_add_work);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_proc_work_ilocked);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_release_special_work);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (458cdb ANDROID: GKI: add percpu_rwsem vendor hooks)\n     \n      ## include/trace/hooks/dtask.h ##\n    -@@ include/trace/hooks/dtask.h: DECLARE_HOOK(android_vh_sched_show_task,\n    +@@ include/trace/hooks/dtask.h: DECLARE_HOOK(android_vh_record_pcpu_rwsem_time_early,\n      DECLARE_HOOK(android_vh_percpu_rwsem_wq_add,\n      \tTP_PROTO(struct percpu_rw_semaphore *sem, bool reader),\n      \tTP_ARGS(sem, reader));\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "9699ab25c3c8e0b71b73df3a0d5dd432547c10d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
