@@ -1789,8 +1789,18 @@ static int thermal_pm_notify(struct notifier_block *nb,
 		list_for_each_entry(tz, &thermal_tz_list, node) {
 
 			trace_android_vh_thermal_pm_notify_suspend(tz, &irq_wakeable);
+<<<<<<< HEAD   (3a7d1771d4925a56f7eeb8a5ba1faff0c544a9ef ANDROID: zram: fix error handling in prefetch slot processin)
 			if (irq_wakeable)
 				continue;
+||||||| BASE   (23f02fa409476cb8a44108c99b550977244ac00f ANDROID: GKI: Update symbol list for xiaomi)
+=======
+			if (irq_wakeable) {
+				mutex_unlock(&tz->lock);
+				continue;
+			}
+
+			tz->suspended = true;
+>>>>>>> CHANGE (d8755d12582fc6deaa0990cb7e3715895e076da9 ANDROID: thermal: Fix cases for vendor hook function not acc)
 
 			thermal_zone_pm_prepare(tz);
 		}
@@ -1809,11 +1819,21 @@ static int thermal_pm_notify(struct notifier_block *nb,
 
 		thermal_pm_suspended = false;
 
+<<<<<<< HEAD   (3a7d1771d4925a56f7eeb8a5ba1faff0c544a9ef ANDROID: zram: fix error handling in prefetch slot processin)
 		list_for_each_entry(tz, &thermal_tz_list, node) {
 
+||||||| BASE   (23f02fa409476cb8a44108c99b550977244ac00f ANDROID: GKI: Update symbol list for xiaomi)
+			tz->suspended = false;
+
+=======
+>>>>>>> CHANGE (d8755d12582fc6deaa0990cb7e3715895e076da9 ANDROID: thermal: Fix cases for vendor hook function not acc)
 			trace_android_vh_thermal_pm_notify_suspend(tz, &irq_wakeable);
-			if (irq_wakeable)
+			if (irq_wakeable) {
+				mutex_unlock(&tz->lock);
 				continue;
+			}
+
+			tz->suspended = false;
 
 			thermal_zone_pm_complete(tz);
 		}
