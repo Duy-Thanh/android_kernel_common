@@ -340546,6 +340546,15 @@ elf_symbol {
   full_name: "netdev_printk"
 }
 elf_symbol {
+  id: 0x36e00d6e
+  name: "netdev_refcnt_read"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0f5bf8a0
+  type_id: 0x9166923b
+  full_name: "netdev_refcnt_read"
+}
+elf_symbol {
   id: 0x22c60050
   name: "netdev_rss_key_fill"
   is_defined: true
@@ -369087,6 +369096,7 @@ interface {
   symbol_id: 0xd5ed1a09
   symbol_id: 0xd78c295f
   symbol_id: 0xe42df14f
+  symbol_id: 0x36e00d6e
   symbol_id: 0x22c60050
   symbol_id: 0x7a3d8713
   symbol_id: 0xf7edefd1
