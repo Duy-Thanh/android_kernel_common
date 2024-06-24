@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0413d96_7f7aad08",
+        "filename": "include/linux/rust_binder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-24T11:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c77f3d9a_0eedc6c4",
+      "revId": "26d514fa8852d8f0f9ca74a146169b94cffe4600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ac2f44e_a77fc784",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-21T21:07:56Z",
       "side": 1,
       "message": "I don\u0027t think it makes a ton of sense for `DEFINE_SHOW_ATTRIBUTE` to be invoked in a header file. All of these should probably go in the `.c` file, as they define a constant that should be private to `rust_binderfs.c`. It\u0027s static, so in theory the compiler or linker should always figure out to discard it, but...",
+      "revId": "26d514fa8852d8f0f9ca74a146169b94cffe4600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f1b778_dbb01c0e",
+        "filename": "include/linux/rust_binder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-24T11:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ac2f44e_a77fc784",
       "revId": "26d514fa8852d8f0f9ca74a146169b94cffe4600",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
