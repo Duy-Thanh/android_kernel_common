@@ -51,6 +51,24 @@
       "parentUuid": "83291a46_2e0287d1",
       "revId": "6d6e728f640d35f1de7b88e0ad687ef9d42cf8fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e38affd_5f79d690",
+        "filename": "drivers/android/binder/rust_binderfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-24T14:59:30Z",
+      "side": 1,
+      "message": "That\u0027s accurate. I didn\u0027t see anything being exported by the end though. If you\u0027re consciously picking which to export, that\u0027s fine.",
+      "parentUuid": "a9ba9772_bd850e9e",
+      "revId": "6d6e728f640d35f1de7b88e0ad687ef9d42cf8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
