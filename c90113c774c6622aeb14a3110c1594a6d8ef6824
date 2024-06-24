@@ -16,6 +16,23 @@
       "message": "pls help review. we need this patch to fix vm_map_ram issue.thanks in advance.",
       "revId": "c90113c774c6622aeb14a3110c1594a6d8ef6824",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7743cd83_d6f749c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-06-24T19:16:47Z",
+      "side": 1,
+      "message": "Please file a respin request. See: https://source.android.com/docs/core/architecture/kernel/gki-releases#respin",
+      "revId": "c90113c774c6622aeb14a3110c1594a6d8ef6824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
