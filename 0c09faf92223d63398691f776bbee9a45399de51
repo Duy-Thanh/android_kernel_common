@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "0c09faf92223d63398691f776bbee9a45399de51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000082427166",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3080025?revision\u003d5",
+      "key": {
+        "uuid": "b9345bcc_c4652cb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-24T20:17:38Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/e2e063f5074e2e14a96875e5e5670314a41e1c34).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_cache_page);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_mem_available_adjust);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_meminfo_adjust);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_pm_notify_suspend);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_fill_prdt);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_reprogram_all_keys);\n    @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command);\n     \n    - ## drivers/scsi/ufs/ufshcd-crypto.c ##\n    + ## drivers/ufs/core/ufshcd-crypto.c ##\n     @@\n    - #include \"ufshcd.h\"\n    + #include \u003cufs/ufshcd.h\u003e\n      #include \"ufshcd-crypto.h\"\n      \n     +#undef CREATE_TRACE_POINTS\n    @@ drivers/scsi/ufs/ufshcd-crypto.c\n      /* Blk-crypto modes supported by UFS crypto */\n      static const struct ufs_crypto_alg_entry {\n      \tenum ufs_crypto_alg ufs_alg;\n    -@@ drivers/scsi/ufs/ufshcd-crypto.c: bool ufshcd_crypto_enable(struct ufs_hba *hba)\n    +@@ drivers/ufs/core/ufshcd-crypto.c: bool ufshcd_crypto_enable(struct ufs_hba *hba)\n      \t\treturn false;\n      \n      \t/* Reset might clear all keys, so reprogram all the keys. */\n    --\tif (hba-\u003eksm.num_slots)\n    --\t\tblk_ksm_reprogram_all_keys(\u0026hba-\u003eksm);\n    -+\tif (hba-\u003eksm.num_slots) {\n    +-\tblk_crypto_reprogram_all_keys(\u0026hba-\u003ecrypto_profile);\n    ++\tif (hba-\u003ecrypto_profile.num_slots) {\n     +\t\tint err \u003d -EOPNOTSUPP;\n     +\n     +\t\ttrace_android_rvh_ufs_reprogram_all_keys(hba, \u0026err);\n     +\t\tif (err \u003d\u003d -EOPNOTSUPP)\n    -+\t\t\tblk_ksm_reprogram_all_keys(\u0026hba-\u003eksm);\n    ++\t\t\tblk_crypto_reprogram_all_keys(\u0026hba-\u003ecrypto_profile);\n     +\t}\n      \n    - \tif (hba-\u003equirks \u0026 UFSHCD_QUIRK_BROKEN_CRYPTO_ENABLE)\n    + \tif (hba-\u003eandroid_quirks \u0026 UFSHCD_ANDROID_QUIRK_BROKEN_CRYPTO_ENABLE)\n      \t\treturn false;\n     \n      ## include/trace/hooks/ufshcd.h ##\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "0c09faf92223d63398691f776bbee9a45399de51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
