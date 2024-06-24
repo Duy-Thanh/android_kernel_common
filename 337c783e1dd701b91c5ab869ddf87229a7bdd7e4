@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d30c55c2_af358389",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-24T16:18:11Z",
+      "side": 1,
+      "message": "Please add information about the symbol changes. See example of this in aosp/3142440",
+      "revId": "337c783e1dd701b91c5ab869ddf87229a7bdd7e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ab18a034_2ab527ef",
