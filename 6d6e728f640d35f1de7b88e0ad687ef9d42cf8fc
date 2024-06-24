@@ -33,6 +33,24 @@
       "message": "I think this snippet, whether it stays in this file or moves to another, also needs to include `EXPORT_TRACEPOINT_SYMBOL_GPL` of the relevant new tracepoints, otherwise a vendor module can\u0027t reference it.",
       "revId": "6d6e728f640d35f1de7b88e0ad687ef9d42cf8fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ba9772_bd850e9e",
+        "filename": "drivers/android/binder/rust_binderfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-24T09:40:10Z",
+      "side": 1,
+      "message": "Wouldn\u0027t that only apply to vendor hooks and not normal tracepoints for debugging?",
+      "parentUuid": "83291a46_2e0287d1",
+      "revId": "6d6e728f640d35f1de7b88e0ad687ef9d42cf8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
