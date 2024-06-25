@@ -421,6 +421,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_queue_request_and_unlock);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_trylock_failed);
+<<<<<<< PATCH SET (fd820a ANDROID: mm: Add restricted vendor hook in oom_killer_disabl)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_oom_killer_disable);
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);
+>>>>>>> BASE      (5747d7 ANDROID: Update the ABI symbol list)

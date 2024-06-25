@@ -29,6 +29,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_do_read_fault,
 			TP_PROTO(struct file *file, pgoff_t pgoff,
 				 unsigned long *fault_around_bytes),
 			TP_ARGS(file, pgoff, fault_around_bytes), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_oom_killer_disable,
+			TP_PROTO(signed long *timeout),
+			TP_ARGS(timeout), 1);
 DECLARE_HOOK(android_vh_dm_bufio_shrink_scan_bypass,
 	TP_PROTO(unsigned long dm_bufio_current_allocated, bool *bypass),
 	TP_ARGS(dm_bufio_current_allocated, bypass));
