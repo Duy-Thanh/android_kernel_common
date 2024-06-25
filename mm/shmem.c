@@ -1745,9 +1745,17 @@ static int shmem_swapin_page(struct inode *inode, pgoff_t index,
 		}
 	}
 
+<<<<<<< HEAD   (806804 ANDROID: GKI: Update symbol list for vivo)
 	/* We have to do this with page locked to prevent races */
 	lock_page(page);
 	if (!PageSwapCache(page) || page_private(page) != swap.val ||
+=======
+	/* We have to do this with folio locked to prevent races */
+	folio_lock(folio);
+	trace_android_vh_shmem_swapin_folio(folio);
+	if (!folio_test_swapcache(folio) ||
+	    folio_swap_entry(folio).val != swap.val ||
+>>>>>>> CHANGE (88b8a0 ANDROID: vendor_hooks: add hooks to modify pageflags)
 	    !shmem_confirm_swap(mapping, index, swap)) {
 		error = -EEXIST;
 		goto unlock;

@@ -78,6 +78,9 @@
 
 #include <trace/events/kmem.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
+
 #include <asm/io.h>
 #include <asm/mmu_context.h>
 #include <asm/pgalloc.h>
@@ -3496,8 +3499,20 @@ static vm_fault_t do_wp_page(struct vm_fault *vmf)
 	 * Take out anonymous pages first, anonymous shared vmas are
 	 * not dirty accountable.
 	 */
+<<<<<<< HEAD   (806804 ANDROID: GKI: Update symbol list for vivo)
 	if (PageAnon(vmf->page)) {
 		struct page *page = vmf->page;
+=======
+	folio = page_folio(vmf->page);
+	trace_android_vh_do_wp_page(folio);
+	if (folio_test_anon(folio)) {
+		/*
+		 * If the page is exclusive to this process we must reuse the
+		 * page without further checks.
+		 */
+		if (PageAnonExclusive(vmf->page))
+			goto reuse;
+>>>>>>> CHANGE (88b8a0 ANDROID: vendor_hooks: add hooks to modify pageflags)
 
 		/* PageKsm() doesn't necessarily raise the page refcount */
 		if (PageKsm(page) || page_count(page) != 1)
@@ -3900,11 +3915,30 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 	inc_mm_counter_fast(vma->vm_mm, MM_ANONPAGES);
 	dec_mm_counter_fast(vma->vm_mm, MM_SWAPENTS);
 	pte = mk_pte(page, vma->vm_page_prot);
+<<<<<<< HEAD   (806804 ANDROID: GKI: Update symbol list for vivo)
 	if ((vmf->flags & FAULT_FLAG_WRITE) && reuse_swap_page(page, NULL)) {
 		pte = maybe_mkwrite(pte_mkdirty(pte), vma);
 		vmf->flags &= ~FAULT_FLAG_WRITE;
 		ret |= VM_FAULT_WRITE;
 		exclusive = RMAP_EXCLUSIVE;
+=======
+	trace_android_vh_do_swap_page(folio, &pte, vmf, entry);
+
+	/*
+	 * Same logic as in do_wp_page(); however, optimize for pages that are
+	 * certainly not shared either because we just allocated them without
+	 * exposing them to the swapcache or because the swap entry indicates
+	 * exclusivity.
+	 */
+	if (!folio_test_ksm(folio) &&
+	    (exclusive || folio_ref_count(folio) == 1)) {
+		if (vmf->flags & FAULT_FLAG_WRITE) {
+			pte = maybe_mkwrite(pte_mkdirty(pte), vma);
+			vmf->flags &= ~FAULT_FLAG_WRITE;
+			ret |= VM_FAULT_WRITE;
+		}
+		rmap_flags |= RMAP_EXCLUSIVE;
+>>>>>>> CHANGE (88b8a0 ANDROID: vendor_hooks: add hooks to modify pageflags)
 	}
 	flush_icache_page(vma, page);
 	if (pte_swp_soft_dirty(vmf->orig_pte))
@@ -4050,10 +4084,39 @@ skip_pmd_checks:
 			entry = pte_mkwrite(pte_mkdirty(entry));
 	}
 
+<<<<<<< HEAD   (806804 ANDROID: GKI: Update symbol list for vivo)
 	if (!pte_map_lock(vmf)) {
 		ret = VM_FAULT_RETRY;
 		goto release;
 	}
+=======
+	/* Allocate our own private page. */
+	if (unlikely(anon_vma_prepare(vma)))
+		goto oom;
+	page = alloc_zeroed_user_highpage_movable(vma, vmf->address);
+	if (!page)
+		goto oom;
+
+	if (mem_cgroup_charge(page_folio(page), vma->vm_mm, GFP_KERNEL))
+		goto oom_free_page;
+	cgroup_throttle_swaprate(page, GFP_KERNEL);
+
+	/*
+	 * The memory barrier inside __SetPageUptodate makes sure that
+	 * preceding stores to the page contents become visible before
+	 * the set_pte_at() write.
+	 */
+	__SetPageUptodate(page);
+
+	trace_android_vh_do_anonymous_page(vma, page);
+	entry = mk_pte(page, vma->vm_page_prot);
+	entry = pte_sw_mkyoung(entry);
+	if (vma->vm_flags & VM_WRITE)
+		entry = pte_mkwrite(pte_mkdirty(entry));
+
+	vmf->pte = pte_offset_map_lock(vma->vm_mm, vmf->pmd, vmf->address,
+			&vmf->ptl);
+>>>>>>> CHANGE (88b8a0 ANDROID: vendor_hooks: add hooks to modify pageflags)
 	if (!pte_none(*vmf->pte)) {
 		update_mmu_tlb(vma, vmf->address, vmf->pte);
 		goto unlock;

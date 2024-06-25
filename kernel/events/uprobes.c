@@ -30,6 +30,9 @@
 
 #include <linux/uprobes.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
+
 #define UINSNS_PER_PAGE			(PAGE_SIZE/UPROBE_XOL_SLOT_BYTES)
 #define MAX_UPROBE_XOL_SLOTS		UINSNS_PER_PAGE
 
@@ -182,9 +185,16 @@ static int __replace_page(struct vm_area_struct *vma, unsigned long addr,
 	VM_BUG_ON_PAGE(addr != pvmw.address, old_page);
 
 	if (new_page) {
+<<<<<<< HEAD   (806804 ANDROID: GKI: Update symbol list for vivo)
 		get_page(new_page);
 		page_add_new_anon_rmap(new_page, vma, addr, false);
 		lru_cache_add_inactive_or_unevictable(new_page, vma);
+=======
+		folio_get(new_folio);
+		page_add_new_anon_rmap(new_page, vma, addr);
+		folio_add_lru_vma(new_folio, vma);
+		trace_android_vh_uprobes_replace_page(new_folio, old_folio);
+>>>>>>> CHANGE (88b8a0 ANDROID: vendor_hooks: add hooks to modify pageflags)
 	} else
 		/* no new page, just dec_mm_counter for old_page */
 		dec_mm_counter(mm, MM_ANONPAGES);
