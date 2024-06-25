@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5360a48c_f6709a87",
+        "filename": "drivers/android/binder/rust_binderfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-25T11:44:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28686113_060671e9",
+      "revId": "6d6e728f640d35f1de7b88e0ad687ef9d42cf8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83291a46_2e0287d1",
