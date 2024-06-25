@@ -16,6 +16,24 @@
       "message": "Why this change is not done in android/abi_gki_aarch64_pixel ?",
       "revId": "6cb7c97efe083584c448c74ce8163a05eac57fb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb994b2e_57201871",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 2
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1967749
+      },
+      "writtenOn": "2024-06-25T18:02:28Z",
+      "side": 1,
+      "message": "Because there is no such file in 5.10 kernel. Not sure if there\u0027s any historical reason for this.",
+      "parentUuid": "08667bcb_a4da1b60",
+      "revId": "6cb7c97efe083584c448c74ce8163a05eac57fb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
