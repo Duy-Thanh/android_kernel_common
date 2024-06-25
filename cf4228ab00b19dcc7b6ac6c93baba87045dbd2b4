@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a5323c6_5e486dfa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1967749
+      },
+      "writtenOn": "2024-06-25T16:31:46Z",
+      "side": 1,
+      "message": "Got it. Is it possible to modify the change-id without creating a new CL? If not, then I\u0027ll cherry pick the 5.10 one to other branch and re-submit a new one.",
+      "parentUuid": "960b5679_a5e8dedf",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "cf4228ab00b19dcc7b6ac6c93baba87045dbd2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "869f757c_1667fa18",
