@@ -34,6 +34,24 @@
       "parentUuid": "08667bcb_a4da1b60",
       "revId": "6cb7c97efe083584c448c74ce8163a05eac57fb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2e66c75_b78eb0c1",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 2
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-06-25T18:04:20Z",
+      "side": 1,
+      "message": "Yep, I just realized that, hence +2.",
+      "parentUuid": "fb994b2e_57201871",
+      "revId": "6cb7c97efe083584c448c74ce8163a05eac57fb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
