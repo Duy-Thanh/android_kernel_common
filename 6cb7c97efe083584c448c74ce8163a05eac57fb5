@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08667bcb_a4da1b60",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 2
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-06-25T17:58:23Z",
+      "side": 1,
+      "message": "Why this change is not done in android/abi_gki_aarch64_pixel ?",
+      "revId": "6cb7c97efe083584c448c74ce8163a05eac57fb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
