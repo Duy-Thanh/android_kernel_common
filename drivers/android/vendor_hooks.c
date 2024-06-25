@@ -76,10 +76,20 @@
 #include <trace/hooks/suspend.h>
 #include <trace/hooks/fsnotify.h>
 
+#include <trace/hooks/v4l2core.h>
+#include <trace/hooks/v4l2mc.h>
+
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
  */
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_media_device_setup_link);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_reserved_fmt_fields);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fill_ext_fmtdesc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_mask_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_v4l2subdev_set_fmt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_v4l2subdev_set_selection);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_v4l2subdev_set_frame_interval);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_sendmsg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_recvmsg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_sendmsg);

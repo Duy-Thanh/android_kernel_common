@@ -25,6 +25,9 @@
 #include <media/v4l2-fh.h>
 #include <media/v4l2-ioctl.h>
 
+#include <trace/hooks/v4l2core.h>
+#include <trace/hooks/v4l2mc.h>
+
 #if defined(CONFIG_VIDEO_V4L2_SUBDEV_API)
 /*
  * The Streams API is an experimental feature. To use the Streams API, set
@@ -641,9 +644,17 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg,
 
 	case VIDIOC_SUBDEV_S_FMT: {
 		struct v4l2_subdev_format *format = arg;
+		int ret = 0;
 
 		if (format->which != V4L2_SUBDEV_FORMAT_TRY && ro_subdev)
 			return -EPERM;
+
+		trace_android_vh_v4l2subdev_set_fmt(sd, subdev_fh->state,
+					format, &ret);
+		trace_android_rvh_v4l2subdev_set_fmt(sd, subdev_fh->state,
+					format, &ret);
+		if (ret)
+			return ret;
 
 		if (!client_supports_streams)
 			format->stream = 0;
@@ -733,9 +744,15 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg,
 
 	case VIDIOC_SUBDEV_S_FRAME_INTERVAL: {
 		struct v4l2_subdev_frame_interval *fi = arg;
+		int ret = 0;
 
 		if (ro_subdev)
 			return -EPERM;
+
+		trace_android_vh_v4l2subdev_set_frame_interval(sd, fi, &ret);
+		trace_android_rvh_v4l2subdev_set_frame_interval(sd, fi, &ret);
+		if (ret)
+			return ret;
 
 		if (!client_supports_streams)
 			fi->stream = 0;
@@ -768,9 +785,17 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg,
 
 	case VIDIOC_SUBDEV_S_SELECTION: {
 		struct v4l2_subdev_selection *sel = arg;
+		int ret = 0;
 
 		if (sel->which != V4L2_SUBDEV_FORMAT_TRY && ro_subdev)
 			return -EPERM;
+
+		trace_android_vh_v4l2subdev_set_selection(sd, subdev_fh->state,
+					sel, &ret);
+		trace_android_rvh_v4l2subdev_set_selection(sd, subdev_fh->state,
+					sel, &ret);
+		if (ret)
+			return ret;
 
 		if (!client_supports_streams)
 			sel->stream = 0;
