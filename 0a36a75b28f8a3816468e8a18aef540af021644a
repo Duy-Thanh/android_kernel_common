@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b0c041_fe97db27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1639441
+      },
+      "writtenOn": "2024-06-25T08:41:04Z",
+      "side": 1,
+      "message": "Used the same bug id as in all previous upload",
+      "range": {
+        "startLine": 71,
+        "startChar": 5,
+        "endLine": 71,
+        "endChar": 14
+      },
+      "revId": "0a36a75b28f8a3816468e8a18aef540af021644a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c3c008c_e167d4c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1639441
+      },
+      "writtenOn": "2024-06-25T08:41:04Z",
+      "side": 1,
+      "message": "Same Change-Id as in previous uploads to address Matthias\u0027 comment in #3141528, original cherry ref will be saved when picking to the release branch",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 68
+      },
+      "revId": "0a36a75b28f8a3816468e8a18aef540af021644a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
