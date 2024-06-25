@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b80d4724_4c3295f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-25T16:37:02Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick the android14-5.15 version so the Change-Ids match.",
+      "revId": "edb4244693bec2e0d7692b853227df1f362e1e5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
