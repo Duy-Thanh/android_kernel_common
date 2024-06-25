@@ -2346,6 +2346,7 @@
   __traceiter_android_rvh_madvise_pageout_begin
   __traceiter_android_rvh_madvise_pageout_end
   __traceiter_android_rvh_meminfo_proc_show
+  __traceiter_android_rvh_oom_killer_disable
   __traceiter_android_rvh_post_init_entity_util_avg
   __traceiter_android_rvh_preempt_disable
   __traceiter_android_rvh_preempt_enable
@@ -2474,6 +2475,7 @@
   __tracepoint_android_rvh_madvise_pageout_begin
   __tracepoint_android_rvh_madvise_pageout_end
   __tracepoint_android_rvh_meminfo_proc_show
+  __tracepoint_android_rvh_oom_killer_disable
   __tracepoint_android_rvh_post_init_entity_util_avg
   __tracepoint_android_rvh_preempt_disable
   __tracepoint_android_rvh_preempt_enable
