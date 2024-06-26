@@ -1346,6 +1346,7 @@ impl Thread {
                 "Failure {:?} during reply - delivering BR_FAILED_REPLY to sender.",
                 err
             );
+            // TODO: trace this path?
             let reply = Err(BR_FAILED_REPLY);
             orig.from.deliver_reply(reply, &orig);
             err.reply = BR_TRANSACTION_COMPLETE;

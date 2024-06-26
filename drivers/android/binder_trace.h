@@ -432,18 +432,18 @@ TRACE_EVENT(binder_command,
 );
 
 TRACE_EVENT(binder_return,
-	TP_PROTO(uint32_t cmd),
-	TP_ARGS(cmd),
+	TP_PROTO(uint32_t ret),
+	TP_ARGS(ret),
 	TP_STRUCT__entry(
-		__field(uint32_t, cmd)
+		__field(uint32_t, ret)
 	),
 	TP_fast_assign(
-		__entry->cmd = cmd;
+		__entry->ret = ret;
 	),
 	TP_printk("cmd=0x%x %s",
-		  __entry->cmd,
-		  _IOC_NR(__entry->cmd) < ARRAY_SIZE(binder_return_strings) ?
-			  binder_return_strings[_IOC_NR(__entry->cmd)] :
+		  __entry->ret,
+		  _IOC_NR(__entry->ret) < ARRAY_SIZE(binder_return_strings) ?
+			  binder_return_strings[_IOC_NR(__entry->ret)] :
 			  "unknown")
 );
 

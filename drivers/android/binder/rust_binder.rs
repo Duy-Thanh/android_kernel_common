@@ -218,7 +218,9 @@ impl BinderReturnWriter {
     }
 
     fn write_code(&mut self, code: &u32) -> Result {
-        self.writer.write(code)
+        self.writer.write(code)?;
+        crate::trace::trace_return(*code);
+        Ok(())
     }
 
     fn write_payload<T: AsBytes>(&mut self, payload: &T) -> Result {
