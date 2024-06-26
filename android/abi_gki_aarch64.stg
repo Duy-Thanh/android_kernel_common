@@ -320802,6 +320802,13 @@ function {
   parameter_id: 0x3ac2a209
 }
 function {
+  id: 0x9039ecdf
+  return_type_id: 0x6720d32f
+  parameter_id: 0x347303b4
+  parameter_id: 0x2afee447
+  parameter_id: 0x38d23361
+}
+function {
   id: 0x903a6e2b
   return_type_id: 0x6720d32f
   parameter_id: 0x32f8fd7b
@@ -393735,6 +393742,15 @@ elf_symbol {
   full_name: "of_get_drm_display_mode"
 }
 elf_symbol {
+  id: 0xcb1195f1
+  name: "of_get_drm_panel_display_mode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x610220f1
+  type_id: 0x9039ecdf
+  full_name: "of_get_drm_panel_display_mode"
+}
+elf_symbol {
   id: 0x26fb2401
   name: "of_get_mac_address"
   is_defined: true
@@ -424061,6 +424077,7 @@ interface {
   symbol_id: 0xe36e392a
   symbol_id: 0x824695bc
   symbol_id: 0x05a46d27
+  symbol_id: 0xcb1195f1
   symbol_id: 0x26fb2401
   symbol_id: 0xd020be14
   symbol_id: 0xf5728f86
