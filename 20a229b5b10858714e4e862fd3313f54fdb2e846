@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cca342b_038e9be9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-26T23:13:16Z",
+      "side": 1,
+      "message": "Submitted alternative backport that doesn\u0027t have KABI implications here: https://r.android.com/3149041",
+      "revId": "20a229b5b10858714e4e862fd3313f54fdb2e846",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
