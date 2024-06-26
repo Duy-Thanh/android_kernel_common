@@ -220,7 +220,9 @@ impl BinderReturnWriter {
     /// Write a return code back to user space.
     /// Should be a `BR_` constant from [`defs`] e.g. [`defs::BR_TRANSACTION_COMPLETE`].
     fn write_code(&mut self, code: u32) -> Result {
-        self.writer.write(&code)
+        self.writer.write(&code)?;
+        crate::trace::trace_return(code);
+        Ok(())
     }
 
     /// Write something *other than* a return code to user space.
