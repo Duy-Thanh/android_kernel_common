@@ -33,6 +33,24 @@
       "message": "drivers/android/vendor_hooks.c.rej? why?",
       "revId": "6ff00a17f0d43c2a602d948a9a0edc6fda89d011",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7e09394_04dbf383",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-26T21:58:27Z",
+      "side": 1,
+      "message": "unresolved",
+      "parentUuid": "08563331_4fee2d58",
+      "revId": "6ff00a17f0d43c2a602d948a9a0edc6fda89d011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
