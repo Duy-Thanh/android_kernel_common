@@ -16,6 +16,23 @@
       "message": "Please help to review this commit which cherry picked from android15-6.6, thanks.",
       "revId": "0179fe50e9f79df0150408ce4311381f5de12c00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19c8fe15_7e8b7d68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-26T21:58:05Z",
+      "side": 1,
+      "message": "rebase the series to resolve the merge conflicts",
+      "revId": "0179fe50e9f79df0150408ce4311381f5de12c00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
