@@ -1153,6 +1153,8 @@ struct ext4_inode_info {
 	__u32 i_csum_seed;
 
 	kprojid_t i_projid;
+
+	ANDROID_OEM_DATA(1);
 };
 
 /*

@@ -864,6 +864,8 @@ struct f2fs_inode_info {
 
 	unsigned int atomic_write_cnt;
 	loff_t original_i_size;		/* original i_size before atomic write */
+
+	ANDROID_OEM_DATA(1);
 };
 
 static inline void get_read_extent_info(struct extent_info *ext,

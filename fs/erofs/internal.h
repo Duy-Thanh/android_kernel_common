@@ -300,6 +300,8 @@ struct erofs_inode {
 	};
 	/* the corresponding vfs inode */
 	struct inode vfs_inode;
+
+	ANDROID_OEM_DATA(1);
 };
 
 #define EROFS_I(ptr)	container_of(ptr, struct erofs_inode, vfs_inode)
