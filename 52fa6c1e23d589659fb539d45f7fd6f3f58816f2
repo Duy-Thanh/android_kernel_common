@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7583e43_fb0834e8",
+        "filename": "drivers/hwspinlock/hwspinlock_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-27T17:55:26Z",
+      "side": 1,
+      "message": "this breaks the KMI.",
+      "fixSuggestions": [
+        {
+          "fixId": "aeb86a66_ad3757e0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/hwspinlock/hwspinlock_internal.h",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "\tint (*bust)(struct hwspinlock *lock);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
