@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db4871ef_cfde99a9",
+        "filename": "kernel/trace/blktrace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-27T19:41:41Z",
+      "side": 1,
+      "message": "KMI is frozen so the parameter list cannot change... but if you just move this down so it is after line 1915, you can easily see where i is by finding the \u0027\\0\u0027 in the string. Moving it down would be fine since it really doesn\u0027t change the semantics except for zero\u0027ing an otherwise undefined byte.",
+      "revId": "cf00448896fe0e5b04d7ebdfadea2ad4de513af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
