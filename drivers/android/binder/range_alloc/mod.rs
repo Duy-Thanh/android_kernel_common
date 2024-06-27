@@ -89,10 +89,7 @@ impl FreedRange {
 struct Range<T> {
     offset: usize,
     size: usize,
-    is_oneway: bool,
-    is_reserved: bool,
-    pid: Pid,
-    data: Option<T>,
+    state: DescriptorState<T>,
 }
 
 impl<T> Range<T> {

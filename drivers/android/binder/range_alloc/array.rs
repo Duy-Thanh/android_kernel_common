@@ -10,7 +10,7 @@ use kernel::{
     task::Pid,
 };
 
-use crate::range_alloc::{FreedRange, Range};
+use crate::range_alloc::{Allocation, DescriptorState, FreedRange, Range, Reservation};
 
 /// Keeps track of allocations in a process' mmap.
 ///
@@ -61,10 +61,10 @@ impl<T> ArrayRangeAllocator<T> {
                 0,
                 range.offset,
                 range.size,
-                range.pid,
-                range.is_oneway
+                range.state.pid(),
+                range.state.is_oneway(),
             );
-            if range.is_reserved {
+            if let DescriptorState::Reserved(_) = range.state {
                 seq_print!(m, " reserved\n");
             } else {
                 seq_print!(m, " allocated\n");
@@ -124,10 +124,7 @@ impl<T> ArrayRangeAllocator<T> {
         let new_range = Range {
             offset: insert_at_offset,
             size,
-            is_oneway,
-            pid,
-            is_reserved: true,
-            data: None,
+            state: DescriptorState::new(is_oneway, pid),
         };
         // Insert the value at the given index to keep the array sorted.
         insert_within_capacity(&mut self.ranges, insert_at_idx, new_range);
@@ -144,14 +141,14 @@ impl<T> ArrayRangeAllocator<T> {
             .ok_or(EINVAL)?;
         let range = &self.ranges[i];
 
-        if !range.is_reserved {
+        if let DescriptorState::Allocated(_) = range.state {
             return Err(EPERM);
         }
 
         let size = range.size;
         let offset = range.offset;
 
-        if range.is_oneway {
+        if range.state.is_oneway() {
             self.free_oneway_space += size;
         }
 
@@ -183,13 +180,13 @@ impl<T> ArrayRangeAllocator<T> {
             .find(|range| range.offset == offset)
             .ok_or(ENOENT)?;
 
-        if !range.is_reserved {
+        let new_state = if let DescriptorState::Reserved(reservation) = range.state {
+            DescriptorState::Allocated(reservation.allocate(data))
+        } else {
             return Err(ENOENT);
-        }
+        };
 
-        assert!(range.data.is_none());
-        range.data = data;
-        range.is_reserved = false;
+        range.state = new_state;
 
         Ok(())
     }
@@ -202,18 +199,20 @@ impl<T> ArrayRangeAllocator<T> {
             .find(|range| range.offset == offset)
             .ok_or(ENOENT)?;
 
-        if range.is_reserved {
+        let (reservation, mut data) = if let DescriptorState::Allocated(allocation) = &range.state {
+            allocation.deallocate()
+        } else {
             return Err(ENOENT);
-        }
+        };
 
-        range.is_reserved = true;
-        Ok((range.size, range.data.take()))
+        range.state = DescriptorState::Reserved(reservation);
+        Ok((range.size, data.take()))
     }
 
     pub(crate) fn take_for_each<F: Fn(usize, usize, Option<T>)>(&mut self, callback: F) {
         for range in self.ranges.iter_mut() {
-            if !range.is_reserved {
-                callback(range.offset, range.size, range.data.take());
+            if let DescriptorState::Allocated(ref mut allocation) = &range.state {
+                callback(range.offset, range.size, allocation.data.take());
             }
         }
     }
