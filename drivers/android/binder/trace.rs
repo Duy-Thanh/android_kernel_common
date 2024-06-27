@@ -26,6 +26,8 @@ declare_trace! {
     fn rust_binder_transaction_node_send(t_debug_id: c_int, n: rust_binder_node,
                                          orig: *const flat_binder_object,
                                          trans: *const flat_binder_object);
+    fn rust_binder_transaction_fd_send(t_debug_id: c_int, fd: c_int, offset: usize);
+    fn rust_binder_transaction_fd_recv(t_debug_id: c_int, fd: c_int, offset: usize);
 
     fn android_vh_rust_binder_set_priority(t: rust_binder_transaction, task: *mut task_struct);
     fn android_vh_rust_binder_restore_priority(task: *mut task_struct);
@@ -129,4 +131,16 @@ pub(crate) fn trace_rust_binder_transaction_node_send(
 ) {
     // SAFETY: The pointers are valid for the duration of this call.
     unsafe { rust_binder_transaction_node_send(t_debug_id as c_int, raw_node(n), orig, trans) }
+}
+
+#[inline]
+pub(crate) fn trace_rust_binder_transaction_fd_send(t_debug_id: usize, fd: u32, offset: usize) {
+    // SAFETY: This function is always safe to call.
+    unsafe { rust_binder_transaction_fd_send(t_debug_id as c_int, fd as c_int, offset) }
+}
+
+#[inline]
+pub(crate) fn trace_rust_binder_transaction_fd_recv(t_debug_id: usize, fd: u32, offset: usize) {
+    // SAFETY: This function is always safe to call.
+    unsafe { rust_binder_transaction_fd_recv(t_debug_id as c_int, fd as c_int, offset) }
 }

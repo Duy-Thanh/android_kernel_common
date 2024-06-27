@@ -205,6 +205,12 @@ impl Allocation {
             let res = FileDescriptorReservation::get_unused_fd_flags(bindings::O_CLOEXEC)?;
             let fd = res.reserved_fd();
             self.write::<u32>(file_info.buffer_offset, &fd)?;
+            crate::trace::trace_rust_binder_transaction_fd_recv(
+                self.debug_id,
+                fd,
+                file_info.buffer_offset,
+            );
+
             reservations.try_push(Reservation {
                 res,
                 file: file_info.file,
