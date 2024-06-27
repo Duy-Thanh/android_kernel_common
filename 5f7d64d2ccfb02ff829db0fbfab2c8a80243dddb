@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf716448_4715561f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-27T18:39:39Z",
+      "side": 1,
+      "message": "uh? there are some pixel errors:\n```\nprivate/google-modules/soc/gs/drivers/soc/google/vh/kernel/pixel_em/pixel_em.c:502:10: error: call to undeclared function \u0027em_perf_state_from_pd\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  502 |         table \u003d em_perf_state_from_pd(pd);\n      |                 ^\n```\n\nI guess this build is broken as this shouldn\u0027t have anything to do with it?",
+      "revId": "5f7d64d2ccfb02ff829db0fbfab2c8a80243dddb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
