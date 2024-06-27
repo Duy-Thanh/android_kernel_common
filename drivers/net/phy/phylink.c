@@ -13,6 +13,7 @@
 #include <linux/of.h>
 #include <linux/of_mdio.h>
 #include <linux/phy.h>
+#include <linux/marvell_phy.h>
 #include <linux/phy_fixed.h>
 #include <linux/phylink.h>
 #include <linux/rtnetlink.h>
@@ -1010,7 +1011,7 @@ static int phylink_bringup_phy(struct phylink *pl, struct phy_device *phy,
 		config.interface = interface;
 
 	ret = phylink_validate(pl, supported, &config);
-	if (ret) {
+	if (ret  && phy->phy_id != MARVELL_PHY_ID_88Q2220) {
 		phylink_warn(pl, "validation of %s with support %*pb and advertisement %*pb failed: %d\n",
 			     phy_modes(config.interface),
 			     __ETHTOOL_LINK_MODE_MASK_NBITS, phy->supported,
