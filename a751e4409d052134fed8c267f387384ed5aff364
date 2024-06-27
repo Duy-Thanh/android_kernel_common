@@ -16,6 +16,24 @@
       "message": "android14-6.1 was released a while ago and is used in shipping products. Why should we unconditionally change the build flags for a production kernel. Are you sure this will have no adverse effects for Android partners?",
       "revId": "a751e4409d052134fed8c267f387384ed5aff364",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254e861f_4cec8871",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-06-27T17:59:00Z",
+      "side": 1,
+      "message": "We want to use AutoFDO profiles for Profile Guided Optimization for Android kernel code. It has two requirements:\n1. Generate vmlinux with additional debug info to map instructions accurately to source code. It needs flag changes in this patch. An explanation is in https://clang.llvm.org/docs/UsersManual.html#using-sampling-profilers.\n\n2. Collect AutoFDO profiles from dogfood devices. Currently, the latest Pixel dogfood devices are using 6.1 kernel. So we can add the debug info flags in android mainline kernel and 6.6 kernel. But we can\u0027t get AutoFDO profiles for those kernel versions.\n\nThe debug info flags are adding additional debug info in vmlinux and kernel modules for profiles. The impact of -fdebug-info-for-profiling is described https://reviews.llvm.org/D25435. The impact of `-mllvm -enable-fs-discriminator\u003dtrue` is adding flow sensitive discriminator to instruction debug information,, as described in https://reviews.llvm.org/D102246).\nThe only adverse effect is increased binary size. But size change can be ignored after stripping, as shown in https://docs.google.com/spreadsheets/d/1Jl21E3EJyBGB9SFJXGxR5c-Tyndm8_xRKoP_-NejYjY/edit?usp\u003dsharing\u0026resourcekey\u003d0-CP_a_-AZdvlwiFx7z0j2Kg.",
+      "parentUuid": "ac56c104_01f8675a",
+      "revId": "a751e4409d052134fed8c267f387384ed5aff364",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
