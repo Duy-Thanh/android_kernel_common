@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac56c104_01f8675a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-06-27T11:06:28Z",
+      "side": 1,
+      "message": "android14-6.1 was released a while ago and is used in shipping products. Why should we unconditionally change the build flags for a production kernel. Are you sure this will have no adverse effects for Android partners?",
+      "revId": "a751e4409d052134fed8c267f387384ed5aff364",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
