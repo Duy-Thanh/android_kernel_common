@@ -918,9 +918,10 @@ static int userfaultfd_release(struct inode *inode, struct file *file)
 				 vma->vm_file, vma->vm_pgoff,
 				 vma_policy(vma),
 				 NULL_VM_UFFD_CTX, anon_vma_name(vma));
-		if (prev)
+		if (prev) {
 			vma = prev;
-		else
+			rcu_assign_pointer(prev->vm_userfaultfd_ctx.ctx, NULL);
+		} else
 			prev = vma;
 		vma->vm_flags = new_flags;
 		rcu_assign_pointer(vma->vm_userfaultfd_ctx.ctx, NULL);
