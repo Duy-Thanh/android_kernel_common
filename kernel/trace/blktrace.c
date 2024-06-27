@@ -1910,7 +1910,7 @@ void blk_fill_rwbs(char *rwbs, blk_opf_t opf)
 		rwbs[i++] = 'S';
 	if (opf & REQ_META)
 		rwbs[i++] = 'M';
-	trace_android_vh_blk_fill_rwbs(rwbs, opf);
+	trace_android_vh_blk_fill_rwbs(rwbs, &i, opf);
 
 	rwbs[i] = '\0';
 }
