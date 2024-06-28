@@ -1372,7 +1372,11 @@ parse_ntb:
 	if (to_process == 1 &&
 	    (*(unsigned char *)(ntb_ptr + block_len) == 0x00)) {
 		to_process--;
+<<<<<<< HEAD   (0a36a7 UPSTREAM: af_unix: Fix garbage collector racing against conn)
 	} else if ((to_process > 0) && (block_len != 0)) {
+=======
+	} else if (to_process > 0) {
+>>>>>>> BRANCH (ca0eb5 ANDROID: cpufreq: brcmstb-avs-cpufreq: fix build error)
 		ntb_ptr = (unsigned char *)(ntb_ptr + block_len);
 		goto parse_ntb;
 	}
