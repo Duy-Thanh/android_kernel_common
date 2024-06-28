@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a42e21cb_0d1c15a9",
+        "filename": "include/trace/events/rust_binder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-28T18:30:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t both of these be binder_command_strings?",
+      "fixSuggestions": [
+        {
+          "fixId": "2cbca379_2b2a4f46",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/events/rust_binder.h",
+              "range": {
+                "startLine": 359,
+                "startChar": 0,
+                "endLine": 361,
+                "endChar": 0
+              },
+              "replacement": "\t\t  _IOC_NR(__entry-\u003ecmd) \u003c ARRAY_SIZE(binder_command_strings) ?\n\t\t\t  binder_command_strings[_IOC_NR(__entry-\u003ecmd)] :\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6ca21560edf7dbae6eb1447a4ea466beb0480838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
