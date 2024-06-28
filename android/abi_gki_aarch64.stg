@@ -35363,11 +35363,6 @@ member {
   type_id: 0x0efc611f
 }
 member {
-  id: 0x2082f479
-  type_id: 0x0d25bd0f
-  offset: 11520
-}
-member {
   id: 0x2098ac9a
   type_id: 0x0d4ccc92
   offset: 832
@@ -35567,6 +35562,11 @@ member {
 member {
   id: 0x27e3d457
   type_id: 0x10a1214c
+}
+member {
+  id: 0x28012bb9
+  type_id: 0x2f2ac20c
+  offset: 11520
 }
 member {
   id: 0x28026f1f
@@ -78175,10 +78175,10 @@ member {
   offset: 576
 }
 member {
-  id: 0xcbce1938
+  id: 0xcbce1148
   name: "exit_work"
   type_id: 0x1f3c8679
-  offset: 1408
+  offset: 1344
 }
 member {
   id: 0x154265da
@@ -79228,10 +79228,10 @@ member {
   offset: 10248
 }
 member {
-  id: 0x2bc8fdc9
+  id: 0x2bc8f5ab
   name: "fallback_llist"
   type_id: 0x0bf3e543
-  offset: 256
+  offset: 192
 }
 member {
   id: 0x1e0adfa4
@@ -79239,10 +79239,10 @@ member {
   type_id: 0x214d9bc0
 }
 member {
-  id: 0xfa3ad6ea
+  id: 0xfa3ad186
   name: "fallback_work"
   type_id: 0xf1159c31
-  offset: 320
+  offset: 256
 }
 member {
   id: 0x5261bd5a
@@ -91024,10 +91024,9 @@ member {
   type_id: 0x92233392
 }
 member {
-  id: 0xdd1ec771
+  id: 0xdd1ec390
   name: "hash_map"
   type_id: 0x3e2fe44b
-  offset: 64
 }
 member {
   id: 0xa31ad885
@@ -100708,16 +100707,16 @@ member {
   offset: 320
 }
 member {
-  id: 0x3dd488c8
+  id: 0x3dd48315
   name: "iowq_limits"
   type_id: 0x5eeb4a25
-  offset: 2176
+  offset: 2112
 }
 member {
-  id: 0x15478239
+  id: 0x15478e55
   name: "iowq_limits_set"
   type_id: 0x6d7f5ff6
-  offset: 2240
+  offset: 2176
 }
 member {
   id: 0xd364d156
@@ -116917,10 +116916,10 @@ member {
   offset: 11328
 }
 member {
-  id: 0xf2c3c54a
+  id: 0xf2c3c441
   name: "mm_account"
   type_id: 0x1b36c7a2
-  offset: 192
+  offset: 128
 }
 member {
   id: 0x8a013cf5
@@ -147770,10 +147769,10 @@ member {
   offset: 1728
 }
 member {
-  id: 0x859f0dbd
+  id: 0x859f077e
   name: "ref_comp"
   type_id: 0x3fcbf304
-  offset: 1920
+  offset: 1856
 }
 member {
   id: 0x53e1405b
@@ -153147,11 +153146,6 @@ member {
   name: "ring_size"
   type_id: 0x4585663f
   offset: 864
-}
-member {
-  id: 0x55fafd4f
-  name: "ring_sock"
-  type_id: 0x106029c6
 }
 member {
   id: 0x7633aeb9
@@ -174365,10 +174359,10 @@ member {
   offset: 256
 }
 member {
-  id: 0x3660523a
+  id: 0x3660536c
   name: "tctx_list"
   type_id: 0xd3c80119
-  offset: 1792
+  offset: 1728
 }
 member {
   id: 0x43a6cfb9
@@ -183954,16 +183948,16 @@ member {
   offset: 1408
 }
 member {
+  id: 0x042a2402
+  name: "user"
+  type_id: 0x181ee594
+  offset: 64
+}
+member {
   id: 0x042a27fc
   name: "user"
   type_id: 0x181ee594
   offset: 1024
-}
-member {
-  id: 0x042a2921
-  name: "user"
-  type_id: 0x181ee594
-  offset: 128
 }
 member {
   id: 0x042a2c60
@@ -192544,24 +192538,6 @@ struct_union {
   }
 }
 struct_union {
-  id: 0x0d25bd0f
-  kind: STRUCT
-  definition {
-    bytesize: 288
-    member_id: 0x55fafd4f
-    member_id: 0xdd1ec771
-    member_id: 0x042a2921
-    member_id: 0xf2c3c54a
-    member_id: 0x2bc8fdc9
-    member_id: 0xfa3ad6ea
-    member_id: 0xcbce1938
-    member_id: 0x3660523a
-    member_id: 0x859f0dbd
-    member_id: 0x3dd488c8
-    member_id: 0x15478239
-  }
-}
-struct_union {
   id: 0x0d2844e8
   kind: STRUCT
   definition {
@@ -194303,6 +194279,23 @@ struct_union {
     bytesize: 16
     member_id: 0xdd40e46b
     member_id: 0x6ec6b7fe
+  }
+}
+struct_union {
+  id: 0x2f2ac20c
+  kind: STRUCT
+  definition {
+    bytesize: 280
+    member_id: 0xdd1ec390
+    member_id: 0x042a2402
+    member_id: 0xf2c3c441
+    member_id: 0x2bc8f5ab
+    member_id: 0xfa3ad186
+    member_id: 0xcbce1148
+    member_id: 0x3660536c
+    member_id: 0x859f077e
+    member_id: 0x3dd48315
+    member_id: 0x15478e55
   }
 }
 struct_union {
@@ -216478,7 +216471,7 @@ struct_union {
     member_id: 0x296b856d
     member_id: 0x5c36e689
     member_id: 0x22694cf6
-    member_id: 0x2082f479
+    member_id: 0x28012bb9
   }
 }
 struct_union {
