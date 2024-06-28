@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "755191c5_80fc8828",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-06-28T19:59:48Z",
+      "side": 1,
+      "message": "Can you move these to `all_headers_allowlist_aarch64` instead since they will likely be widely used by other OOT thermal drivers as partners migrate to ddk_modules().",
+      "range": {
+        "startLine": 968,
+        "startChar": 0,
+        "endLine": 970,
+        "endChar": 0
+      },
+      "revId": "635cc1955d371072a31fc724280afcabbf5c0bfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
