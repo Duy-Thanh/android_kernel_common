@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e297cb63_385ad44d",
+        "filename": "drivers/android/binder/allocation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-28T18:13:37Z",
+      "side": 1,
+      "message": "Transmute is legal.",
+      "revId": "b5bf31404b0fb73369214972da0c3d00c86cf5b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
