@@ -16,6 +16,24 @@
       "message": "who owns this memory? The cleanup code at `err` frees it before cleaning up anything. This suggests that either the memory is potentially used after it was freed or this copy is not needed.",
       "revId": "da004395191a83d93a127734bf30ad152735ce35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53848e92_765227df",
+        "filename": "drivers/android/binder/rust_binderfs.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-28T11:05:14Z",
+      "side": 1,
+      "message": "Good point. The `rust_binder_new_device` call just takes a copy of the string.",
+      "parentUuid": "140cecac_72173ffa",
+      "revId": "da004395191a83d93a127734bf30ad152735ce35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
