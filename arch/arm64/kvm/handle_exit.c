@@ -469,10 +469,15 @@ void handle_exit_early(struct kvm_vcpu *vcpu, int exception_index)
 		kvm_handle_guest_serror(vcpu, kvm_vcpu_get_esr(vcpu));
 }
 
-static void print_nvhe_hyp_panic(const char *name, u64 panic_addr)
+static void __print_nvhe_hyp_panic(const char *name, u64 panic_addr, u64 offset)
 {
 	kvm_err("nVHE hyp %s at: [<%016llx>] %pB!\n", name, panic_addr,
-		(void *)(panic_addr + kaslr_offset()));
+		(void *)(panic_addr + offset));
+}
+
+static void print_nvhe_hyp_panic(const char *name, u64 panic_addr)
+{
+	__print_nvhe_hyp_panic(name, panic_addr, kaslr_offset());
 }
 
 static void kvm_nvhe_report_cfi_failure(u64 panic_addr)
@@ -513,15 +518,13 @@ void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
 		if (file)
 			kvm_err("nVHE hyp BUG at: %s:%u!\n", file, line);
 		else if (mod_addr)
-			kvm_err("nVHE hyp BUG at: [<%016llx>] %pB!\n", mod_addr,
-					(void *)mod_addr);
+			__print_nvhe_hyp_panic("BUG", mod_addr, 0);
 		else
 			print_nvhe_hyp_panic("BUG", panic_addr);
 	} else if (IS_ENABLED(CONFIG_CFI_CLANG) && esr_is_cfi_brk(esr)) {
 		kvm_nvhe_report_cfi_failure(panic_addr);
 	} else if (mod_addr) {
-		kvm_err("nVHE hyp panic at: [<%016llx>] %pB!\n", mod_addr,
-				(void *)mod_addr);
+		__print_nvhe_hyp_panic("panic", mod_addr, 0);
 	} else {
 		print_nvhe_hyp_panic("panic", panic_addr);
 	}
