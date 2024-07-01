@@ -22,6 +22,30 @@
       },
       "revId": "0831f8f14d06c003d80ed14168417a5f4b6a8f91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b25913b6_d29a8880",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2024-07-01T01:24:28Z",
+      "side": 1,
+      "message": "Link: https://lore.kernel.org/linux-mm/20240521023957.2587005-11-jaewon31.kim@samsung.com/",
+      "parentUuid": "5509e5c5_800f4560",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 87
+      },
+      "revId": "0831f8f14d06c003d80ed14168417a5f4b6a8f91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
