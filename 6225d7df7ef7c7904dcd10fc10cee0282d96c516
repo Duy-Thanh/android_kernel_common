@@ -3,6 +3,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f227060_ac640666",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-01T06:36:19Z",
+      "side": 1,
+      "message": "subject needs to be much more specific and no need for the branch name here.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 47
+      },
+      "revId": "6225d7df7ef7c7904dcd10fc10cee0282d96c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fdeff4_233be8d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-01T06:36:19Z",
+      "side": 1,
+      "message": "please wrap your lines at 72 columns like your editor wanted you to 😊",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 483
+      },
+      "revId": "6225d7df7ef7c7904dcd10fc10cee0282d96c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91350357_c51048d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-01T06:36:19Z",
+      "side": 1,
+      "message": "no blank line needed.",
+      "revId": "6225d7df7ef7c7904dcd10fc10cee0282d96c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4da23ce_d8c96de0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -14,6 +77,23 @@
       "writtenOn": "2024-06-25T09:39:36Z",
       "side": 1,
       "message": "The latest patchset contains conflict markers. Please resolve and repush.",
+      "revId": "6225d7df7ef7c7904dcd10fc10cee0282d96c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "905e26c3_635078d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-01T06:36:19Z",
+      "side": 1,
+      "message": "Always test-build your patches before submitting them.",
       "revId": "6225d7df7ef7c7904dcd10fc10cee0282d96c516",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
