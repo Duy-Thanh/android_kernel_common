@@ -52,6 +52,24 @@
       "parentUuid": "9d42421a_8e4ce0af",
       "revId": "9a111057f72750af719cada2ffa7ae089981ccb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "572ebf02_3d2de4bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-01T18:03:59Z",
+      "side": 1,
+      "message": "suspend is there, but resume is not:\n```\n$ grep android_rvh_usb_dev_suspend android/*\nandroid/abi_gki_aarch64_exynos:  __traceiter_android_rvh_usb_dev_suspend\nandroid/abi_gki_aarch64_exynos:  __tracepoint_android_rvh_usb_dev_suspend\nandroid/abi_gki_aarch64.stg:  name: \"__traceiter_android_rvh_usb_dev_suspend\"\nandroid/abi_gki_aarch64.stg:  full_name: \"__traceiter_android_rvh_usb_dev_suspend\"\nandroid/abi_gki_aarch64.stg:  name: \"__tracepoint_android_rvh_usb_dev_suspend\"\nandroid/abi_gki_aarch64.stg:  full_name: \"__tracepoint_android_rvh_usb_dev_suspend\"\n```",
+      "parentUuid": "567619ee_dc79c18c",
+      "revId": "9a111057f72750af719cada2ffa7ae089981ccb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
