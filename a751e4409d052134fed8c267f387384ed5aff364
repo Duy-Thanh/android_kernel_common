@@ -34,6 +34,24 @@
       "parentUuid": "ac56c104_01f8675a",
       "revId": "a751e4409d052134fed8c267f387384ed5aff364",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0464f664_22009fb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-01T10:32:25Z",
+      "side": 1,
+      "message": "Please get the needed changes upstream first, this is going to change our build system for a released, and stable, kernel, with unknown affects on everyone who is using it (as is evident by the previous patch in this series.)",
+      "parentUuid": "254e861f_4cec8871",
+      "revId": "a751e4409d052134fed8c267f387384ed5aff364",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
