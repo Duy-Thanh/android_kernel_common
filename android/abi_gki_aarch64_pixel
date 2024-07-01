@@ -550,6 +550,7 @@
   down
   downgrade_write
   down_interruptible
+  down_killable
   down_read
   down_read_trylock
   down_trylock
@@ -1155,6 +1156,14 @@
   kfree_skb_reason
   kill_fasync
   kimage_voffset
+  klist_add_head
+  klist_add_tail
+  klist_init
+  klist_iter_exit
+  klist_iter_init
+  klist_next
+  klist_node_attached
+  klist_remove
   __kmalloc
   kmalloc_caches
   kmalloc_large

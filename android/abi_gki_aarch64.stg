@@ -13684,6 +13684,11 @@ pointer_reference {
   pointee_type_id: 0xbe42b117
 }
 pointer_reference {
+  id: 0x2502324f
+  kind: POINTER
+  pointee_type_id: 0xbe482fa0
+}
+pointer_reference {
   id: 0x2503085c
   kind: POINTER
   pointee_type_id: 0xbe4cc7ee
@@ -302148,6 +302153,12 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x100359c8
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0092c032
+  parameter_id: 0x2fee15d8
+}
+function {
   id: 0x10035ee9
   return_type_id: 0x48b5725f
   parameter_id: 0x026c3dea
@@ -309196,6 +309207,11 @@ function {
   parameter_id: 0x11c404ba
 }
 function {
+  id: 0x19d8dd00
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2502324f
+}
+function {
   id: 0x19d93429
   return_type_id: 0x48b5725f
   parameter_id: 0x2668e644
@@ -310108,6 +310124,13 @@ function {
   parameter_id: 0x391f15ea
 }
 function {
+  id: 0x1b5a8722
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2fee15d8
+  parameter_id: 0x0ebf01c0
+  parameter_id: 0x0ebf01c0
+}
+function {
   id: 0x1b5c7355
   return_type_id: 0x48b5725f
   parameter_id: 0x2b79f509
@@ -310500,6 +310523,12 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x2e8d5f05
   parameter_id: 0x33756485
+}
+function {
+  id: 0x1bf7dc2c
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2fee15d8
+  parameter_id: 0x2502324f
 }
 function {
   id: 0x1bfe630d
@@ -314977,6 +315006,11 @@ function {
   id: 0x34829c1d
   return_type_id: 0x33756485
   parameter_id: 0x14b9453b
+}
+function {
+  id: 0x34a5a0a0
+  return_type_id: 0x0092c032
+  parameter_id: 0x2502324f
 }
 function {
   id: 0x34b8504b
@@ -340709,6 +340743,11 @@ function {
   parameter_id: 0x0cf3d8fe
   parameter_id: 0xc700b957
   parameter_id: 0x07dcdbe1
+}
+function {
+  id: 0x9da45323
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0092c032
 }
 function {
   id: 0x9da46876
@@ -388213,6 +388252,78 @@ elf_symbol {
   full_name: "kimage_voffset"
 }
 elf_symbol {
+  id: 0x499f7ca5
+  name: "klist_add_head"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe6f52443
+  type_id: 0x100359c8
+  full_name: "klist_add_head"
+}
+elf_symbol {
+  id: 0xcfc9f455
+  name: "klist_add_tail"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x611cfa85
+  type_id: 0x100359c8
+  full_name: "klist_add_tail"
+}
+elf_symbol {
+  id: 0x8ce1e69a
+  name: "klist_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd24e9e8c
+  type_id: 0x1b5a8722
+  full_name: "klist_init"
+}
+elf_symbol {
+  id: 0x6128fc8c
+  name: "klist_iter_exit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x819d72cb
+  type_id: 0x19d8dd00
+  full_name: "klist_iter_exit"
+}
+elf_symbol {
+  id: 0x9e89161e
+  name: "klist_iter_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe3cd5fae
+  type_id: 0x1bf7dc2c
+  full_name: "klist_iter_init"
+}
+elf_symbol {
+  id: 0x023e1288
+  name: "klist_next"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x355bc89a
+  type_id: 0x34a5a0a0
+  full_name: "klist_next"
+}
+elf_symbol {
+  id: 0x9240ba00
+  name: "klist_node_attached"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2864abc9
+  type_id: 0x9da45323
+  full_name: "klist_node_attached"
+}
+elf_symbol {
+  id: 0x55b3b820
+  name: "klist_remove"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc82c721f
+  type_id: 0x10bce19f
+  full_name: "klist_remove"
+}
+elf_symbol {
   id: 0xbc2dc163
   name: "kmalloc_caches"
   is_defined: true
@@ -423488,6 +423599,14 @@ interface {
   symbol_id: 0x95c81f5f
   symbol_id: 0x053e25cb
   symbol_id: 0x567c8a8a
+  symbol_id: 0x499f7ca5
+  symbol_id: 0xcfc9f455
+  symbol_id: 0x8ce1e69a
+  symbol_id: 0x6128fc8c
+  symbol_id: 0x9e89161e
+  symbol_id: 0x023e1288
+  symbol_id: 0x9240ba00
+  symbol_id: 0x55b3b820
   symbol_id: 0xbc2dc163
   symbol_id: 0x98b2ed59
   symbol_id: 0x158dfa03
