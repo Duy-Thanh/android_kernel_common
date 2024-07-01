@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41130e61_e675f66c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-01T15:56:17Z",
+      "side": 1,
+      "message": "This is referenced by `android/abi_gki_aarch64_exynos` and is in the KMI",
+      "revId": "9a111057f72750af719cada2ffa7ae089981ccb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
