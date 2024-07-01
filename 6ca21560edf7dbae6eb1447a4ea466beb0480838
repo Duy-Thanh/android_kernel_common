@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6362c8_079fd5f5",
+        "filename": "drivers/android/binder/rust_binder_events.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-07-01T21:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56a4b15e_e8562800",
+      "revId": "6ca21560edf7dbae6eb1447a4ea466beb0480838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a42e21cb_0d1c15a9",
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "6ca21560edf7dbae6eb1447a4ea466beb0480838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a735db0_9b31de74",
+        "filename": "include/trace/events/rust_binder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-07-01T21:00:48Z",
+      "side": 1,
+      "message": "Done - terrible copy/paste error - thank you.",
+      "parentUuid": "a42e21cb_0d1c15a9",
       "revId": "6ca21560edf7dbae6eb1447a4ea466beb0480838",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
