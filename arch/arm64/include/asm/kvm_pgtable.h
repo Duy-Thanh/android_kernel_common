@@ -118,6 +118,7 @@ static inline u64 kvm_granule_size(u32 level)
 static inline bool kvm_level_supports_block_mapping(u32 level)
 {
 	return level >= KVM_PGTABLE_MIN_BLOCK_LEVEL;
+<<<<<<< HEAD   (d78ad9 Merge branch 'android14-5.15' into branch 'android14-5.15-lt)
 }
 
 static inline bool kvm_pte_table(kvm_pte_t pte, u32 level)
@@ -129,6 +130,8 @@ static inline bool kvm_pte_table(kvm_pte_t pte, u32 level)
 		return false;
 
 	return FIELD_GET(KVM_PTE_TYPE, pte) == KVM_PTE_TYPE_TABLE;
+=======
+>>>>>>> BRANCH (764929 x86/static_call: Add support for Jcc tail-calls)
 }
 
 /**

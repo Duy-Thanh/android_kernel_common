@@ -486,7 +486,10 @@ static unsigned int brcm_avs_cpufreq_get(unsigned int cpu)
 	if (!policy)
 		return 0;
 	priv = policy->driver_data;
+<<<<<<< HEAD   (d78ad9 Merge branch 'android14-5.15' into branch 'android14-5.15-lt)
 
+=======
+>>>>>>> BRANCH (764929 x86/static_call: Add support for Jcc tail-calls)
 	cpufreq_cpu_put(policy);
 
 	return brcm_avs_get_frequency(priv->base);

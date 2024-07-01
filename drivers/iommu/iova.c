@@ -31,6 +31,7 @@ static void free_iova_rcaches(struct iova_domain *iovad);
 static void fq_destroy_all_entries(struct iova_domain *iovad);
 static void fq_flush_timeout(struct timer_list *t);
 
+<<<<<<< HEAD   (d78ad9 Merge branch 'android14-5.15' into branch 'android14-5.15-lt)
 static unsigned long limit_align_shift(struct iova_domain *iovad, unsigned long shift)
 {
 	unsigned long max_align_shift;
@@ -53,6 +54,12 @@ static int __init iommu_set_def_max_align_shift(char *str)
 }
 early_param("iommu.max_align_shift", iommu_set_def_max_align_shift);
 #endif
+=======
+unsigned long iova_rcache_range(void)
+{
+	return PAGE_SIZE << (IOVA_RANGE_CACHE_MAX_SIZE - 1);
+}
+>>>>>>> BRANCH (764929 x86/static_call: Add support for Jcc tail-calls)
 
 static int iova_cpuhp_dead(unsigned int cpu, struct hlist_node *node)
 {
