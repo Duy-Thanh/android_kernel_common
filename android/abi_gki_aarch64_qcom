@@ -1259,6 +1259,7 @@
   get_random_u32
   __get_random_u32_below
   get_sg_io_hdr
+  get_shadow_from_swap_cache
   get_slabinfo
   get_state_synchronize_rcu
   get_state_synchronize_srcu
