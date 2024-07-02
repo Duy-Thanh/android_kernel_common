@@ -34,6 +34,24 @@
       ],
       "revId": "36df178ca494f8ee2314de63ec4366f73d3f4046",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05569bd_93265435",
+        "filename": "include/linux/pm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2024-07-02T22:48:33Z",
+      "side": 1,
+      "message": "Could we use the KABI field in a way that preserves a field for LTS updates? Anant can upload soon.",
+      "parentUuid": "1c98fc84_2caebbbf",
+      "revId": "36df178ca494f8ee2314de63ec4366f73d3f4046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
