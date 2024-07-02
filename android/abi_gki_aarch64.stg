@@ -353652,6 +353652,24 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_iommu_setup_dma_ops"
 }
 elf_symbol {
+  id: 0xca6487a8
+  name: "__traceiter_android_rvh_irq_enter"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe10be4f0
+  type_id: 0x9ab9affb
+  full_name: "__traceiter_android_rvh_irq_enter"
+}
+elf_symbol {
+  id: 0x27a9670e
+  name: "__traceiter_android_rvh_irq_exit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x955f5f9b
+  type_id: 0x9ab9affb
+  full_name: "__traceiter_android_rvh_irq_exit"
+}
+elf_symbol {
   id: 0xfc83b254
   name: "__traceiter_android_rvh_irqs_disable"
   is_defined: true
@@ -358276,6 +358294,24 @@ elf_symbol {
   crc: 0x303fd014
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_iommu_setup_dma_ops"
+}
+elf_symbol {
+  id: 0xed38a40a
+  name: "__tracepoint_android_rvh_irq_enter"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x532df80f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_irq_enter"
+}
+elf_symbol {
+  id: 0xf1bb4850
+  name: "__tracepoint_android_rvh_irq_exit"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x2631645c
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_irq_exit"
 }
 elf_symbol {
   id: 0x4fd98142
@@ -419655,6 +419691,8 @@ interface {
   symbol_id: 0x7edcea8d
   symbol_id: 0x72c43156
   symbol_id: 0x61e95c07
+  symbol_id: 0xca6487a8
+  symbol_id: 0x27a9670e
   symbol_id: 0xfc83b254
   symbol_id: 0x7e99bc71
   symbol_id: 0x7c212080
@@ -420169,6 +420207,8 @@ interface {
   symbol_id: 0x0991fcbf
   symbol_id: 0x693af5b0
   symbol_id: 0x59d74b45
+  symbol_id: 0xed38a40a
+  symbol_id: 0xf1bb4850
   symbol_id: 0x4fd98142
   symbol_id: 0x695c4baf
   symbol_id: 0x99d57c12
