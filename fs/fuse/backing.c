@@ -987,6 +987,14 @@ ssize_t fuse_splice_read_backing(struct file *in, loff_t *ppos,
 	return ret;
 }
 
+ssize_t fuse_splice_write_backing(struct pipe_inode_info *pipe,
+		struct file *out, loff_t *ppos, size_t len, unsigned long flags)
+{
+	struct fuse_file *ff = out->private_data;
+
+	return iter_file_splice_write(pipe, ff->backing_file, ppos, len, flags);
+}
+
 long fuse_backing_ioctl(struct file *file, unsigned int command, unsigned long arg, int flags)
 {
 	struct fuse_file *ff = file->private_data;

@@ -5,6 +5,7 @@
 #include <linux/file.h>
 #include <linux/fuse.h>
 #include <linux/idr.h>
+#include <linux/splice.h>
 #include <linux/uio.h>
 
 #define PASSTHROUGH_IOCB_MASK                                                  \
@@ -111,7 +112,6 @@ ssize_t fuse_passthrough_read_iter(struct kiocb *iocb_fuse,
 	}
 out:
 	revert_creds(old_cred);
-
 	fuse_file_accessed(fuse_filp, passthrough_filp);
 
 	return ret;
@@ -166,6 +166,39 @@ ssize_t fuse_passthrough_write_iter(struct kiocb *iocb_fuse,
 out:
 	revert_creds(old_cred);
 	inode_unlock(fuse_inode);
+
+	return ret;
+}
+
+ssize_t fuse_passthrough_splice_read(struct file *in, loff_t *ppos,
+				     struct pipe_inode_info *pipe,
+				     size_t len, unsigned int flags)
+{
+	struct fuse_file *ff = in->private_data;
+	struct file *backing_file = ff->passthrough.filp;
+
+	pr_debug("%s: backing_file=0x%p, pos=%lld, len=%zu, flags=0x%x\n", __func__,
+		 backing_file, ppos ? *ppos : 0, len, flags);
+
+	fuse_file_accessed(in, backing_file);
+	return vfs_splice_read(backing_file, ppos, pipe, len, flags);
+}
+
+ssize_t fuse_passthrough_splice_write(struct pipe_inode_info *pipe,
+		struct file *out, loff_t *ppos, size_t len, unsigned int flags)
+{
+	struct fuse_file *ff = out->private_data;
+	struct file *backing_file = ff->passthrough.filp;
+	struct inode *inode = file_inode(out);
+	ssize_t ret;
+
+	pr_debug("%s: backing_file=0x%p, pos=%lld, len=%zu, flags=0x%x\n", __func__,
+		 backing_file, ppos ? *ppos : 0, len, flags);
+
+	inode_lock(inode);
+	ret = iter_file_splice_write(pipe, backing_file, ppos, len, flags);
+	fuse_invalidate_attr_mask(inode, FUSE_STATX_MODSIZE);
+	inode_unlock(inode);
 
 	return ret;
 }
