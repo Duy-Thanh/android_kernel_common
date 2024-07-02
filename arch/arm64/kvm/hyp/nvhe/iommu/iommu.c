@@ -471,13 +471,13 @@ static int iommu_power_on(struct kvm_power_domain *pd)
 	bool prev;
 	int ret;
 
-	hyp_spin_lock(&iommu->lock);
+	kvm_hyp_iommu_lock(&iommu->lock);
 	prev = iommu->power_is_off;
 	iommu->power_is_off = false;
 	ret = kvm_iommu_ops->resume ? kvm_iommu_ops->resume(iommu) : 0;
 	if (ret)
 		iommu->power_is_off = prev;
-	hyp_spin_unlock(&iommu->lock);
+	kvm_hyp_iommu_unlock(&iommu->lock);
 	return ret;
 }
 
@@ -488,13 +488,13 @@ static int iommu_power_off(struct kvm_power_domain *pd)
 	bool prev;
 	int ret;
 
-	hyp_spin_lock(&iommu->lock);
+	kvm_hyp_iommu_lock(&iommu->lock);
 	prev = iommu->power_is_off;
 	iommu->power_is_off = true;
 	ret = kvm_iommu_ops->suspend ? kvm_iommu_ops->suspend(iommu) : 0;
 	if (ret)
 		iommu->power_is_off = prev;
-	hyp_spin_unlock(&iommu->lock);
+	kvm_hyp_iommu_unlock(&iommu->lock);
 	return ret;
 }
 
@@ -506,7 +506,9 @@ static const struct kvm_power_domain_ops iommu_power_ops = {
 int kvm_iommu_init_device(struct kvm_hyp_iommu *iommu)
 {
 	/* See struct kvm_hyp_iommu */
-	BUILD_BUG_ON(sizeof(u32) != sizeof(hyp_spinlock_t));
+	BUILD_BUG_ON(sizeof(iommu->lock) != sizeof(hyp_spinlock_t));
+
+	kvm_hyp_iommu_lock_init(&iommu->lock);
 
 	return pkvm_init_power_domain(&iommu->power_domain, &iommu_power_ops);
 }
