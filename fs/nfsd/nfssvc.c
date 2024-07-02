@@ -936,6 +936,7 @@ nfsd(void *vrqstp)
 
 	current->fs->umask = 0;
 
+<<<<<<< HEAD   (5e5ded Merge 44889eacfe1f ("pinctrl: core: handle radix_tree_insert)
 	/*
 	 * thread is spawned with all signals set to SIG_IGN, re-enable
 	 * the ones that will bring down the thread
@@ -947,6 +948,9 @@ nfsd(void *vrqstp)
 
 	nfsdstats.th_cnt++;
 	mutex_unlock(&nfsd_mutex);
+=======
+	atomic_inc(&nfsdstats.th_cnt);
+>>>>>>> BRANCH (9b8a8e nfsd: don't allow nfsd threads to be signalled.)
 
 	set_freezable();
 
@@ -970,11 +974,15 @@ nfsd(void *vrqstp)
 		validate_process_creds();
 	}
 
+<<<<<<< HEAD   (5e5ded Merge 44889eacfe1f ("pinctrl: core: handle radix_tree_insert)
 	/* Clear signals before calling svc_exit_thread() */
 	flush_signals(current);
 
 	mutex_lock(&nfsd_mutex);
 	nfsdstats.th_cnt --;
+=======
+	atomic_dec(&nfsdstats.th_cnt);
+>>>>>>> BRANCH (9b8a8e nfsd: don't allow nfsd threads to be signalled.)
 
 out:
 	rqstp->rq_server = NULL;
