@@ -1,4 +1,9 @@
 # SPDX-License-Identifier: GPL-2.0-only
+
+config BUILT_WITH_DDK
+	bool
+	default n
+
 config CC_VERSION_TEXT
 	string
 	default "$(CC_VERSION_TEXT)"

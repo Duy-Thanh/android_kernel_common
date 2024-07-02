@@ -94,6 +94,10 @@ modpost-args += -v $(module_scmversion)
 endif
 endif
 
+ifeq ($(CONFIG_BUILT_WITH_DDK), y)
+	modpost-args += -b
+endif
+
 ifeq ($(KBUILD_EXTMOD),)
 
 # Generate the list of in-tree objects in vmlinux
