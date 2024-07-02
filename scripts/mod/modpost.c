@@ -49,6 +49,9 @@ static bool error_occurred;
 
 static bool extra_warn;
 
+/*ANDROID: Built as DDK module*/
+static bool built_with_ddk;
+
 /*
  * Cut off the warnings when there are too many. This typically occurs when
  * vmlinux is missing. ('make modules' without building vmlinux.)
@@ -1862,6 +1865,8 @@ static void add_header(struct buffer *b, struct module *mod)
 
 	if (strstarts(mod->name, "tools/testing"))
 		buf_printf(b, "\nMODULE_INFO(test, \"Y\");\n");
+	if (built_with_ddk)
+		buf_printf(b, "\nMODULE_INFO(built_with, \"DDK\");\n");
 }
 
 static void add_exported_symbols(struct buffer *buf, struct module *mod)
@@ -2193,7 +2198,7 @@ int main(int argc, char **argv)
 	LIST_HEAD(dump_lists);
 	struct dump_list *dl, *dl2;
 
-	while ((opt = getopt(argc, argv, "ei:MmnT:to:au:WwENd:v:")) != -1) {
+	while ((opt = getopt(argc, argv, "ei:MmnT:to:au:WwENd:v:b")) != -1) {
 		switch (opt) {
 		case 'e':
 			external_module = true;
@@ -2244,6 +2249,9 @@ int main(int argc, char **argv)
 			break;
 		case 'v':
 			strncpy(module_scmversion, optarg, sizeof(module_scmversion) - 1);
+			break;
+                case 'b':
+			built_with_ddk = true;
 			break;
 		default:
 			exit(1);
