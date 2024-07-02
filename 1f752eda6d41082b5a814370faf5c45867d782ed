@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000083177882",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3156357?revision\u003d2",
+      "key": {
+        "uuid": "02c8fcde_0e4bfad3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-02T02:59:52Z",
+      "side": 1,
+      "message": "Please **attach the following Buganizer ID(s)** to the commit message: 349151590.\nThese IDs were found in the original change with number [3141627](https://android-review.googlesource.com/c/3141627) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "1f752eda6d41082b5a814370faf5c45867d782ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
