@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c98fc84_2caebbbf",
+        "filename": "include/linux/pm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-02T17:34:10Z",
+      "side": 1,
+      "message": "KABI fields are exclusively for LTS updates. They cannot be used for feature backports. You need a different KMI workaround for this.",
+      "fixSuggestions": [
+        {
+          "fixId": "cd5b4181_05063b4d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/pm.h",
+              "range": {
+                "startLine": 729,
+                "startChar": 0,
+                "endLine": 730,
+                "endChar": 0
+              },
+              "replacement": "\tint (*set_performance_state)(struct device *dev, unsigned int state);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "36df178ca494f8ee2314de63ec4366f73d3f4046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
