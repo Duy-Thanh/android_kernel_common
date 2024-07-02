@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19c73a9_cbb7db0a",
+        "filename": "mm/memblock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2021,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-02T18:02:41Z",
+      "side": 1,
+      "message": "I think this changes the interface to use procfs by default (memblock_memsize_use_debugfs\u003dfalse if not specifically set). This would break any other user that expects this interface in debugfs. Please change the default. Ideally you should change this variable to `memblock_memsize_use_procfs` and have it set to \u0027false\u0027 and change the early param to `memblock_memsize_procfs`.",
+      "range": {
+        "startLine": 2021,
+        "startChar": 12,
+        "endLine": 2021,
+        "endChar": 40
+      },
+      "revId": "7a0c1d91551d19b1858462338c28831de6319346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
