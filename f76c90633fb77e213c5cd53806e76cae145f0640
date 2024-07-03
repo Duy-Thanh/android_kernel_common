@@ -34,6 +34,24 @@
       "parentUuid": "00bf15aa_b2d8164e",
       "revId": "f76c90633fb77e213c5cd53806e76cae145f0640",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ae4936_05a138bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3406862
+      },
+      "writtenOn": "2024-07-03T01:54:46Z",
+      "side": 1,
+      "message": "I rebased on top of 3152196， please help review.",
+      "parentUuid": "5bd9b048_5999a475",
+      "revId": "f76c90633fb77e213c5cd53806e76cae145f0640",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
