@@ -16,6 +16,24 @@
       "message": "IIUC, this splits out the \"internal binderfs\" definitions into a separate header file. I don\u0027t exactly understand why is this _required_ for rust though? If there is a real issue behind it I wouldn\u0027t mind having the split upstream. This reminds me of the following refactoring: https://lore.kernel.org/all/20231208152801.3425772-1-aliceryhl@google.com/\n\nHaving the duplicated definitions seems a bit iffy.",
       "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75e98bc0_979ed5a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-07-03T16:15:36Z",
+      "side": 1,
+      "message": "I removed some of the fields that Rust binderfs isn\u0027t using, so we can\u0027t share the header files as-is.\n\nThe change is not absolutely required, but tracepoints do weird things to header files, so I wanted to clean up the header files before I started trying to get tracepoints to work.",
+      "parentUuid": "9c062440_7aa181e9",
+      "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
