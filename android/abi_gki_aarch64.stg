@@ -333263,6 +333263,13 @@ function {
   parameter_id: 0x10afcfdf
 }
 function {
+  id: 0x9f8801da
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0bfc9031
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x9f89d33b
   return_type_id: 0x6720d32f
   parameter_id: 0x0e56cd62
@@ -386516,6 +386523,15 @@ elf_symbol {
   full_name: "phy_connect_direct"
 }
 elf_symbol {
+  id: 0x2bf61c61
+  name: "phy_create_lookup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x25d71c76
+  type_id: 0x9f8801da
+  full_name: "phy_create_lookup"
+}
+elf_symbol {
   id: 0x5b3ff607
   name: "phy_device_free"
   is_defined: true
@@ -415728,6 +415744,7 @@ interface {
   symbol_id: 0xc278f4fa
   symbol_id: 0x9c15bd7a
   symbol_id: 0x866cf90c
+  symbol_id: 0x2bf61c61
   symbol_id: 0x5b3ff607
   symbol_id: 0x3d4eb5a9
   symbol_id: 0x5ebc16d0
