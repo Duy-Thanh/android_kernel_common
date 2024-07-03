@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c062440_7aa181e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-03T16:03:01Z",
+      "side": 1,
+      "message": "IIUC, this splits out the \"internal binderfs\" definitions into a separate header file. I don\u0027t exactly understand why is this _required_ for rust though? If there is a real issue behind it I wouldn\u0027t mind having the split upstream. This reminds me of the following refactoring: https://lore.kernel.org/all/20231208152801.3425772-1-aliceryhl@google.com/\n\nHaving the duplicated definitions seems a bit iffy.",
+      "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
