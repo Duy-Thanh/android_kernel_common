@@ -34,6 +34,24 @@
       "parentUuid": "9c062440_7aa181e9",
       "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aaa7e19_aa7f7aea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-03T16:21:13Z",
+      "side": 1,
+      "message": "How did you plan to manage the duplication though? Any changes to these definitions in the `binder_inter.h` would need to be manually replicated in `rust_binder_inter.h` correct?",
+      "parentUuid": "75e98bc0_979ed5a9",
+      "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
