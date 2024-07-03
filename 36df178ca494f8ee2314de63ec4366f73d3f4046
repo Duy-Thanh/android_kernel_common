@@ -52,6 +52,24 @@
       "parentUuid": "1c98fc84_2caebbbf",
       "revId": "36df178ca494f8ee2314de63ec4366f73d3f4046",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36482a5e_ac75c8ef",
+        "filename": "include/linux/pm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-07-03T00:30:42Z",
+      "side": 1,
+      "message": "How? The point behind this reserved field is that if LTS needs to add a field to fix some bug, they use this. If you start using this for your functionality, how\u0027d you go about using it in a way that preserves it for LTS? You obviously can\u0027t give up the field at that point. Feel free to continue this discussion in the bug if you want.",
+      "parentUuid": "b05569bd_93265435",
+      "revId": "36df178ca494f8ee2314de63ec4366f73d3f4046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
