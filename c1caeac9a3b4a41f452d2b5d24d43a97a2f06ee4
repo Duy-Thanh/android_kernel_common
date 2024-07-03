@@ -70,6 +70,24 @@
       "parentUuid": "5aaa7e19_aa7f7aea",
       "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499ccb4c_2afa2082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-03T16:57:53Z",
+      "side": 1,
+      "message": "\u003e I mean, that\u0027s already an issue with the two different binderfs implementations.\n\nOh, I actually don\u0027t understand the reasoning behind the duplicate implementation either. Maybe this is a bigger topic to discuss for later. I would think keeping both implementations as aligned as possible would be preferred if using the actual same files isn\u0027t feasible.\n\n\u003e Would it be helpful if I rename the structs to prefix them with rust_?\n\nYou have more insight on what works best for the Rust version. If you want to do the split upstream that\u0027s an option but it is your choice here.",
+      "parentUuid": "2a239f7b_0d15f82b",
+      "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
