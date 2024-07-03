@@ -22,6 +22,30 @@
       },
       "revId": "7a0c1d91551d19b1858462338c28831de6319346",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa1b56d_4783bc00",
+        "filename": "mm/memblock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2021,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2024-07-03T03:34:55Z",
+      "side": 1,
+      "message": "Correct. At the beginning, I thought procfs interface would NOT be allowed in the upstream. So I proposed it as debugfs. But for the ACK, I\u0027d like to use procfs rather than debugfs so we can use this even on the production user build.\n\n\u003e This would break any other user that expects this interface in debugfs. \n\nI wanted to show this interface on procfs instead of debugfs. If possible, I hope to remove the debugfs and remove \u0027early_param(\"memblock_memsize_debugfs\u0027.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3091138\n\nAs disable option is provided, I think we can do that way.",
+      "parentUuid": "a19c73a9_cbb7db0a",
+      "range": {
+        "startLine": 2021,
+        "startChar": 12,
+        "endLine": 2021,
+        "endChar": 40
+      },
+      "revId": "7a0c1d91551d19b1858462338c28831de6319346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
