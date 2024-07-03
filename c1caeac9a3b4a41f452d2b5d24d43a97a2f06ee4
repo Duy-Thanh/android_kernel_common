@@ -52,6 +52,24 @@
       "parentUuid": "75e98bc0_979ed5a9",
       "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a239f7b_0d15f82b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-07-03T16:31:28Z",
+      "side": 1,
+      "message": "I mean, that\u0027s already an issue with the two different binderfs implementations. Unless the policy regarding duplicate drivers changes, I don\u0027t think there is much value in creating a generic binderfs implementation that both drivers can share.\n\nAt least now that they have separate header files, changes to C binderfs that don\u0027t think about how they affect Rust binderfs cannot accidentally change Rust binderfs in unintended ways.\n\nWould it be helpful if I rename the structs to prefix them with `rust_`?",
+      "parentUuid": "5aaa7e19_aa7f7aea",
+      "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
