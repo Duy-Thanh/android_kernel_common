@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf4df348_c9077cdb",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-07-03T11:35:55Z",
+      "side": 1,
+      "message": "Why do we have to ifdef the name?",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ab26715_fd4bcbe3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/kvm/iommu.h",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/kvm/iommu.h",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "557e506c97bdd1caea2eac7b24918a083aa18c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
