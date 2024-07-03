@@ -461,7 +461,7 @@ struct ufs_clk_scaling {
 	bool is_busy_started;
 	bool is_suspended;
 
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, struct { bool suspend_on_no_request; u32 padding; });
 };
 
 #define UFS_EVENT_HIST_LENGTH 8
