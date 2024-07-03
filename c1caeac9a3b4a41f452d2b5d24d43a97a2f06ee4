@@ -88,6 +88,24 @@
       "parentUuid": "2a239f7b_0d15f82b",
       "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c03b1b1_40d05dc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-07-03T17:28:47Z",
+      "side": 1,
+      "message": "It may make sense to make binderfs more generic so that the two drivers can share binderfs. But the status quo is that there are two binderfs implementations, and until that changes, I think it is better that they don\u0027t share these particular header files.",
+      "parentUuid": "499ccb4c_2afa2082",
+      "revId": "c1caeac9a3b4a41f452d2b5d24d43a97a2f06ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
