@@ -13,11 +13,14 @@
 #ifdef __GENKSYMS__
 struct cpumask;
 struct irq_data;
+struct gic_chip_data;
 #else
 /* struct cpumask */
 #include <linux/cpumask.h>
 /* struct irq_data */
 #include <linux/irq.h>
+/* struct gic_chip_data */
+#include <linux/irqchip/arm-gic-v3.h>
 #endif /* __GENKSYMS__ */
 DECLARE_RESTRICTED_HOOK(android_rvh_gic_v3_set_affinity,
 	TP_PROTO(struct irq_data *d, const struct cpumask *mask_val,
@@ -26,6 +29,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_gic_v3_set_affinity,
 	1);
 
 /* macro versions of hooks are no longer required */
+DECLARE_HOOK(android_vh_gic_suspend,
+	TP_PROTO(struct gic_chip_data *gd, int *ret),
+	TP_ARGS(gd, ret));
 
 #endif /* _TRACE_HOOK_GIC_V3_H */
 /* This part must be outside protection */
