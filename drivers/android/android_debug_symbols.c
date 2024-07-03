@@ -32,6 +32,11 @@ struct ads_entry {
 	[index] = { .name = #symbol, .addr = (void *)&symbol }
 #define ADS_PER_CPU_ENTRY(index, symbol) _ADS_PER_CPU_ENTRY(index, symbol)
 
+/* The slab cache mutex protects the management structures during changes */
+extern struct mutex slab_mutex;
+/* The list of all slab caches on the system */
+extern struct list_head slab_caches;
+
 /*
  * This module maintains static array of symbol and address information.
  * Add all required core kernel symbols and their addresses into ads_entries[] array,
@@ -50,6 +55,8 @@ static const struct ads_entry ads_entries[ADS_END] = {
 	ADS_ENTRY(ADS_COMPACT_PAGES, try_to_compact_pages),
 	ADS_ENTRY(ADS_SHOW_MEM, __show_mem),
 	ADS_ENTRY(ADS_TOTAL_CMA, &totalcma_pages),
+	ADS_ENTRY(ADS_SLAB_CACHES, &slab_caches),
+	ADS_ENTRY(ADS_SLAB_MUTEX, &slab_mutex),
 };
 
 /*
