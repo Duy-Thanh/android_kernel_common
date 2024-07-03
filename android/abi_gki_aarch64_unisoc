@@ -3366,3 +3366,6 @@
   __traceiter_mm_filemap_add_to_page_cache
   __tracepoint_mm_filemap_delete_from_page_cache
   __tracepoint_mm_filemap_add_to_page_cache
+
+# required by ntfs3.ko
+  posix_acl_create
