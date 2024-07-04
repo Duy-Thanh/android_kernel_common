@@ -348,6 +348,11 @@ void __init_rwsem(struct rw_semaphore *sem, const char *name,
 #ifdef CONFIG_RWSEM_SPIN_ON_OWNER
 	osq_lock_init(&sem->osq);
 #endif
+<<<<<<< HEAD   (7105e9 ANDROID: update symbol for unisoc whitelist)
+=======
+	android_init_vendor_data(sem, 1);
+	android_init_oem_data(sem, 1);
+>>>>>>> CHANGE (aaca6b ANDROID: GKI: Add initialization for rwsem's oem_data and ve)
 	trace_android_vh_rwsem_init(sem);
 }
 EXPORT_SYMBOL(__init_rwsem);
