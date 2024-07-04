@@ -34,6 +34,24 @@
       "parentUuid": "2339bf98_654cf483",
       "revId": "02944d65a993d409afe02dd05414236491ca66f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50abf18a_ec610cab",
+        "filename": "include/trace/events/rust_binder.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-04T15:21:37Z",
+      "side": 1,
+      "message": "ha, ok. that makes sense",
+      "parentUuid": "6f6f8b44_227a0f7c",
+      "revId": "02944d65a993d409afe02dd05414236491ca66f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
