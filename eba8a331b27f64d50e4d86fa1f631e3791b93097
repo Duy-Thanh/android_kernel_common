@@ -16,6 +16,69 @@
       "message": "similar to issue:345653057",
       "revId": "eba8a331b27f64d50e4d86fa1f631e3791b93097",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d943832_25867bb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-04T16:49:00Z",
+      "side": 1,
+      "message": "It seems to me that when using `DECLARE_RWSEM()` the oem and vendor fields are already initialized to zero implicitly. Perhaps the only thing missing here was initializing oem data for `init_rwsem()`? I don\u0027t see why anything else would be required.",
+      "revId": "eba8a331b27f64d50e4d86fa1f631e3791b93097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98228bb_c1c331ec",
+        "filename": "include/linux/rwsem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-04T16:49:00Z",
+      "side": 1,
+      "message": "Why do you need an explicit initializer for zero?",
+      "range": {
+        "startLine": 96,
+        "startChar": 25,
+        "endLine": 96,
+        "endChar": 26
+      },
+      "revId": "eba8a331b27f64d50e4d86fa1f631e3791b93097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09cb6262_8b93d860",
+        "filename": "include/linux/rwsem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-04T16:49:00Z",
+      "side": 1,
+      "message": "how will this logic playout for !CONFIG_ANDROID_VENDOR_OEM_DATA? I would assume this would trigger a build error.",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "eba8a331b27f64d50e4d86fa1f631e3791b93097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
