@@ -399123,6 +399123,15 @@ elf_symbol {
   full_name: "truncate_setsize"
 }
 elf_symbol {
+  id: 0x48f0148e
+  name: "try_get_dma_heap_pool_size_kb"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe0afc479
+  type_id: 0xa7203b99
+  full_name: "try_get_dma_heap_pool_size_kb"
+}
+elf_symbol {
   id: 0x3d986fb5
   name: "try_module_get"
   is_defined: true
@@ -414350,6 +414359,7 @@ interface {
   symbol_id: 0x7a43283c
   symbol_id: 0x4eb5a934
   symbol_id: 0x44cd0751
+  symbol_id: 0x48f0148e
   symbol_id: 0x3d986fb5
   symbol_id: 0x8814f5b8
   symbol_id: 0x8fa1e478

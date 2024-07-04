@@ -105,5 +105,6 @@
   __tracepoint_android_vh_watchdog_timer_softlockup
   __tracepoint_console
   __tracepoint_workqueue_execute_start
+  try_get_dma_heap_pool_size_kb
   usb_set_device_state
   yield
