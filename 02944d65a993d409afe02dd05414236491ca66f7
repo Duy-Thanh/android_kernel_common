@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2339bf98_654cf483",
+        "filename": "include/trace/events/rust_binder.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-04T15:14:02Z",
+      "side": 1,
+      "message": "Any reason for this file live inside `include/trace/events` and not the driver path?",
+      "revId": "02944d65a993d409afe02dd05414236491ca66f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
