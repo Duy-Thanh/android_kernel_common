@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "571f0250_08e00cef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-04T12:05:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c914b168_e83a38a0",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 3
+      },
+      "revId": "618738e0f40da36a8e83b19938c83ccc8e0e13c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "525cbb4f_a643c912",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-04T09:46:51Z",
       "side": 1,
       "message": "git config username should use \"Dongliang Cui\"\nreset you author and signed-off-by info",
+      "range": {
+        "startLine": 18,
+        "startChar": 14,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "618738e0f40da36a8e83b19938c83ccc8e0e13c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "338afb75_e8406ac5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-04T12:05:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "525cbb4f_a643c912",
       "range": {
         "startLine": 18,
         "startChar": 14,
@@ -83,6 +131,30 @@
       "writtenOn": "2024-07-04T09:45:12Z",
       "side": 1,
       "message": "keep sort",
+      "range": {
+        "startLine": 3370,
+        "startChar": 1,
+        "endLine": 3371,
+        "endChar": 18
+      },
+      "revId": "618738e0f40da36a8e83b19938c83ccc8e0e13c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e348e8b1_06a511df",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3371,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-04T12:05:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32350231_31e72c73",
       "range": {
         "startLine": 3370,
         "startChar": 1,
