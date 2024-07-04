@@ -16,6 +16,24 @@
       "message": "Any reason for this file live inside `include/trace/events` and not the driver path?",
       "revId": "02944d65a993d409afe02dd05414236491ca66f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f6f8b44_227a0f7c",
+        "filename": "include/trace/events/rust_binder.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-07-04T15:15:21Z",
+      "side": 1,
+      "message": "Because it needs to be included in `rust/bindings/bindings_helper.h`.",
+      "parentUuid": "2339bf98_654cf483",
+      "revId": "02944d65a993d409afe02dd05414236491ca66f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
