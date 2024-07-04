@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cd12532_c58572a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950675
+      },
+      "writtenOn": "2024-07-04T02:28:33Z",
+      "side": 1,
+      "message": "Note that there\u0027s a loose plan to replace the implementation of this with one which generates C code to use the C macros. This is a long way off, though, and should present a largely compatible API.",
+      "revId": "4beadb14601b7bcac2bfc7dd2341926846cdf4ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
