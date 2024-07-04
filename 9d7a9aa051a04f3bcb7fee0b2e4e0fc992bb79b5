@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea790bf_fe1ad30a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-07-04T10:43:49Z",
+      "side": 1,
+      "message": "Before this fix, running `max` on qemu, `paca` is missing from `id_aa64isar1_el1`:\n\n```\nmax\nfp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs sb pacg dcpodp sve2 \nsveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svef32mm svef64mm svebf16 i8mm bf16 dgh rng bti mops\n\npaca (missing here in old)\n\nid_aa64pfr0_el1: 0x1000100110011\nid_aa64pfr1_el1: 0x21\nid_aa64isar0_el1: 0x1021111110212120\nid_aa64isar1_el1: 0x11101101211002\nid_aa64isar2_el1: 0x10000\nid_aa64mmfr0_el1: 0x111ff000000\nid_aa64mmfr1_el1: 0x0\nid_aa64mmfr2_el1: 0x100000000\n```\n\nHere are the values after with this patch:\n\n```\nfp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs sb paca pacg dcpodp sve2 \nsveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svef32mm svef64mm svebf16 i8mm bf16 dgh rng bti mops\n\nid_aa64pfr0_el1: 0x1000100110011\nid_aa64pfr1_el1: 0x21\nid_aa64isar0_el1: 0x1021111110212120\nid_aa64isar1_el1: 0x11101101211012\nid_aa64isar2_el1: 0x10000\nid_aa64mmfr0_el1: 0x111ff000000\nid_aa64mmfr1_el1: 0x0\nid_aa64mmfr2_el1: 0x100000000\n```",
+      "revId": "9d7a9aa051a04f3bcb7fee0b2e4e0fc992bb79b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
