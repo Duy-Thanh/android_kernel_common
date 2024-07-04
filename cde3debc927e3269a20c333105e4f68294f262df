@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82753b11_bb69d0b2",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1887488
+      },
+      "writtenOn": "2024-07-04T03:05:34Z",
+      "side": 1,
+      "message": "The backing file is the low-level file system file. You might consider using file_{start/end}_write before/after iter_file_splice_write()\n\nCheck the the pre/post-steps of actually performing fs splice in [fs/splice.c] do_splice(), which may be helpful to you.",
+      "range": {
+        "startLine": 995,
+        "startChar": 0,
+        "endLine": 995,
+        "endChar": 73
+      },
+      "revId": "cde3debc927e3269a20c333105e4f68294f262df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac9fdfb3_6b364ca6",
+        "filename": "fs/fuse/passthrough.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1887488
+      },
+      "writtenOn": "2024-07-04T03:05:34Z",
+      "side": 1,
+      "message": "Same. file_{start/end}_write should also be used here.",
+      "revId": "cde3debc927e3269a20c333105e4f68294f262df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
