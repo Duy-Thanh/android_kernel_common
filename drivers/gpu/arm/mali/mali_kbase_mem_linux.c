@@ -23,6 +23,8 @@
  * DOC: Base kernel memory APIs, Linux implementation.
  */
 
+/* A comment */
+
 #include <linux/compat.h>
 #include <linux/kernel.h>
 #include <linux/bug.h>
