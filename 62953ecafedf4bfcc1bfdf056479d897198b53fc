@@ -70,6 +70,24 @@
       "parentUuid": "4c80be0a_8b93f9ff",
       "revId": "62953ecafedf4bfcc1bfdf056479d897198b53fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91cc1f7f_91b5353b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973577
+      },
+      "writtenOn": "2024-07-05T11:49:06Z",
+      "side": 1,
+      "message": "Hi Greg, thanks for your comments. From QC, Auto BU is trying to upstream bootloader based hibernation and we from IOT BU would leverage, on android14-6.1 auto BU got waiver to use vendor hooks (for ref Bug: 279879797). we would requesting you to consider same and approve vendor hooks for hibernation on android14-5.15.",
+      "parentUuid": "6e81ba84_006b41e2",
+      "revId": "62953ecafedf4bfcc1bfdf056479d897198b53fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
