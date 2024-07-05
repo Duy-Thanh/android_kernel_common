@@ -158,6 +158,24 @@
       "parentUuid": "8a6d974a_1d6bf060",
       "revId": "4fd4ee6570ee5af3ace15d1ea0e46e375531b9c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6ded74_9c5d811b",
+        "filename": "kernel/kprobes.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 2032918
+      },
+      "writtenOn": "2024-07-05T07:43:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a6d974a_1d6bf060",
+      "revId": "4fd4ee6570ee5af3ace15d1ea0e46e375531b9c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
