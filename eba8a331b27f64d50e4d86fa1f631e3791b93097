@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ece44f_66655521",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3388319
+      },
+      "writtenOn": "2024-07-05T06:48:03Z",
+      "side": 1,
+      "message": "hi, Carlos\nI rethought and confirmed that the modification in DECLARE_RWSEM() is indeed redundant, and I have removed it",
+      "parentUuid": "7d943832_25867bb4",
+      "revId": "eba8a331b27f64d50e4d86fa1f631e3791b93097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c98228bb_c1c331ec",
