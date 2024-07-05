@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a13426_b65e50f8",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 5012,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-07-05T09:33:46Z",
+      "side": 1,
+      "message": "This was changed to executable in aosp/3139396. This change is reverting the permission change.",
+      "parentUuid": "d6f1f953_cead52f9",
+      "range": {
+        "startLine": 5012,
+        "startChar": 8,
+        "endLine": 5012,
+        "endChar": 144
+      },
+      "revId": "618738e0f40da36a8e83b19938c83ccc8e0e13c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32350231_31e72c73",
