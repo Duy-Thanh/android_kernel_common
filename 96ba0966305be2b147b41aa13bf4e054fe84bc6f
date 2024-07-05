@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc38ff20_14f32108",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-05T16:22:59Z",
+      "side": 0,
+      "message": "IIUC, you are switching a simple integer assignment with the android_init_vendor_data() macro that uses memset()? This would possibly be an unnecessary performance downgrade no?\n\nI would think these macros are there for arrays and the naming should have probably reflected that. I\u0027ll discuss this topic with our team.",
+      "range": {
+        "startLine": 349,
+        "startChar": 6,
+        "endLine": 349,
+        "endChar": 26
+      },
+      "revId": "96ba0966305be2b147b41aa13bf4e054fe84bc6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
