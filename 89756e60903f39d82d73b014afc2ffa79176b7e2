@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dbb8950_9d35e399",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-05T09:49:21Z",
+      "side": 1,
+      "message": "No commit to actually use these hooks?  With this series, things are exported but then stripped from the kernel, so there\u0027s no way to use it and then our scripts will notice this and submit reverts for this.\n\nAlways submit symbol table updates as well, otherwise these are not usable at all.",
+      "revId": "89756e60903f39d82d73b014afc2ffa79176b7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
