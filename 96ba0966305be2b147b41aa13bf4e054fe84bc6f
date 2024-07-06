@@ -22,6 +22,30 @@
       },
       "revId": "96ba0966305be2b147b41aa13bf4e054fe84bc6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d9782fa_785a0be2",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-06T15:53:40Z",
+      "side": 0,
+      "message": "I just had a look at the assembly and this is not a concern.",
+      "parentUuid": "fc38ff20_14f32108",
+      "range": {
+        "startLine": 349,
+        "startChar": 6,
+        "endLine": 349,
+        "endChar": 26
+      },
+      "revId": "96ba0966305be2b147b41aa13bf4e054fe84bc6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
