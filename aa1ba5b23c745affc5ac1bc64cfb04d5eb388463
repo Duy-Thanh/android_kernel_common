@@ -65,6 +65,26 @@
       "robotRunId": "AR00000000000083722397",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/3163259?revision\u003d1",
       "key": {
+        "uuid": "6bc2f99d_3285b3f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-08T20:16:55Z",
+      "side": 1,
+      "message": "Commit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003csha1\u003e)\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "aa1ba5b23c745affc5ac1bc64cfb04d5eb388463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000083722397",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3163259?revision\u003d1",
+      "key": {
         "uuid": "33976f42_f1649629",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -174,6 +194,50 @@
       "fixSuggestions": [
         {
           "fixId": "6475ce3c_68f7bf14",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: chenqiwu \u003cqiwuchen55@gmail.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "aa1ba5b23c745affc5ac1bc64cfb04d5eb388463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000083722397",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3163259?revision\u003d1",
+      "key": {
+        "uuid": "0f7bf1f3_845abb99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-08T20:16:55Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: chenqiwu \u003cqiwuchen55@gmail.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "622f2a64_acc8ad22",
           "description": "Add author\u0027s Signed-off-by",
           "replacements": [
             {
