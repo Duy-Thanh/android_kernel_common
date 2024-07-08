@@ -34,6 +34,24 @@
       "parentUuid": "0dbb8950_9d35e399",
       "revId": "89756e60903f39d82d73b014afc2ffa79176b7e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2426de64_e63920f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1880085
+      },
+      "writtenOn": "2024-07-08T07:55:52Z",
+      "side": 1,
+      "message": "Added the symbol at https://android-review.googlesource.com/c/kernel/common/+/3161636.",
+      "parentUuid": "f842ed72_349f13bb",
+      "revId": "89756e60903f39d82d73b014afc2ffa79176b7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
