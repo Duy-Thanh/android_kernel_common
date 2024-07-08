@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37f8a80b_6fa944bc",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1887488
+      },
+      "writtenOn": "2024-07-08T23:34:54Z",
+      "side": 1,
+      "message": "Taking [fs/splice.c] do_splice() as an example, it performs file_start_write() on the fuse file before entering the fuse\u0027s splice_write through f_op-\u003esplice_write.\n\nTherefore, before fuse performs splice write on the backing file, it should also do file_start_write() on it first.",
+      "parentUuid": "56da48cd_c87a0b1b",
+      "range": {
+        "startLine": 995,
+        "startChar": 0,
+        "endLine": 995,
+        "endChar": 73
+      },
+      "revId": "cde3debc927e3269a20c333105e4f68294f262df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac9fdfb3_6b364ca6",
         "filename": "fs/fuse/passthrough.c",
         "patchSetId": 1
