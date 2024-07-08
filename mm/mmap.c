@@ -1696,6 +1696,7 @@ unsigned long vm_unmapped_area(struct vm_unmapped_area_info *info)
 		addr = unmapped_area(info);
 
 	trace_vm_unmapped_area(addr, info);
+	trace_android_vh_vm_unmapped_area(addr, info);
 	return addr;
 }
 EXPORT_SYMBOL_GPL(vm_unmapped_area);

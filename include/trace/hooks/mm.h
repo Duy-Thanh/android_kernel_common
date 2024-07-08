@@ -287,6 +287,13 @@ DECLARE_HOOK(android_vh_filemap_update_page,
 		struct file *file),
 	TP_ARGS(mapping, folio, file));
 
+DECLARE_HOOK(android_vh_kmem_cache_flags,
+	TP_PROTO(const char *name, slab_flags_t *flags),
+	TP_ARGS(name, flags));
+DECLARE_HOOK(android_vh_vm_unmapped_area,
+	TP_PROTO(unsigned long addr, struct vm_unmapped_area_info *info),
+	TP_ARGS(addr, info));
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

@@ -1724,6 +1724,7 @@ slab_flags_t kmem_cache_flags(unsigned int object_size,
 				flags |= block_flags;
 				return flags;
 			}
+			trace_android_vh_kmem_cache_flags(name, &flags);
 
 			if (!*end || *end == ';')
 				break;
