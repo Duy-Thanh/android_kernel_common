@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9cd120b_0b2c2dc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-09T18:37:55Z",
+      "side": 1,
+      "message": "You should post a follow-up patch to add the new hooks into your symbols list, similar to this one: https://android-review.googlesource.com/c/kernel/common/+/2651556",
+      "revId": "c5f6d106ff837c4974de6b8ed1edfef07b79b21d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
