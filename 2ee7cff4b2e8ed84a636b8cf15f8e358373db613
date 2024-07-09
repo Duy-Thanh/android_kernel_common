@@ -16,6 +16,23 @@
       "message": "I rebased on the latest code， please help review.",
       "revId": "2ee7cff4b2e8ed84a636b8cf15f8e358373db613",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "332fc6b1_e163e988",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-09T19:50:06Z",
+      "side": 1,
+      "message": "Looks like we are hitting the limit when compiled with allmodconfig:\n```\ncommon-android13-5.15/common/drivers/nvdimm/pfn_devs.c:794:3: error: call to __compiletime_assert_820 declared with \u0027error\u0027 attribute: BUILD_BUG_ON failed: sizeof(struct page) \u003e MAX_STRUCT_PAGE_SIZE\n```",
+      "revId": "2ee7cff4b2e8ed84a636b8cf15f8e358373db613",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
