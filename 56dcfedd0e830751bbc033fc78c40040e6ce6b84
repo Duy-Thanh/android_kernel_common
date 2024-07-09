@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f2c0d20_96d61727",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-09T04:18:42Z",
+      "side": 1,
+      "message": "Please keep the same Change-Id as the one you cherry-picked from. Should be `Change-Id: Id3686309da108e242a30cfaf68f859b10215f402`",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 52
+      },
+      "revId": "56dcfedd0e830751bbc033fc78c40040e6ce6b84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5fbdc277_29052096",
