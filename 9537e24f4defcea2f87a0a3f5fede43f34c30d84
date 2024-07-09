@@ -16,6 +16,24 @@
       "message": "Can you provide a few details on why these are needed?\n\n1) What problem are you seeing that you are addressing by adding these hooks?\n\n2) What benefit do you realize with these hooks\n\n3) What functionality is missing upstream that if merged would allow these hooks to later be removed?\n\nAny private details can be shared in the bug, but it would be helpful to have some context in the commit message here.",
       "revId": "9537e24f4defcea2f87a0a3f5fede43f34c30d84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4386e4f6_90748801",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-09T00:59:19Z",
+      "side": 1,
+      "message": "I will update commit message.",
+      "parentUuid": "49051a98_2019ceb8",
+      "revId": "9537e24f4defcea2f87a0a3f5fede43f34c30d84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
