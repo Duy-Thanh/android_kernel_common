@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f14629_775c086f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-09T20:13:58Z",
+      "side": 1,
+      "message": "Please split this patch so that each logical unit has its own patch.",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "e9a235f2025a6c5eac1855159b3ebee540cb4751",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99c479a8_2aeb676b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-09T20:13:58Z",
+      "side": 1,
+      "message": "Please split this patch",
+      "revId": "e9a235f2025a6c5eac1855159b3ebee540cb4751",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
