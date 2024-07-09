@@ -63,6 +63,8 @@ _COMMON_GKI_MODULES_LIST = [
     "net/l2tp/l2tp_core.ko",
     "net/l2tp/l2tp_ppp.ko",
     "net/mac802154/mac802154.ko",
+    "net/netfilter/xt_LOG.ko",
+    "net/netfilter/nf_log_syslog.ko",
     "net/nfc/nfc.ko",
     "net/rfkill/rfkill.ko",
     "net/tipc/diag.ko",
