@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000083793562",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3163083?revision\u003d1",
+      "key": {
+        "uuid": "069f42a5_f1cf57a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-09T08:59:55Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/aaca6b10f1a352dec4596548396f590500f2001b).\n\n```\n      ## kernel/locking/rwsem.c ##\n     @@ kernel/locking/rwsem.c: void __init_rwsem(struct rw_semaphore *sem, const char *name,\n      #ifdef CONFIG_RWSEM_SPIN_ON_OWNER\n      \tosq_lock_init(\u0026sem-\u003eosq);\n      #endif\n    --#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA\n    --\tsem-\u003eandroid_vendor_data1 \u003d 0;\n    --#endif\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (f6b995 UPSTREAM: usb: dwc3: core: Skip setting event buffers for ho)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\tandroid_init_vendor_data(sem, 1);\n     +\tandroid_init_oem_data(sem, 1);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (aaca6b ANDROID: GKI: Add initialization for rwsem\u0027s oem_data and ve)\n      \ttrace_android_vh_rwsem_init(sem);\n      }\n      EXPORT_SYMBOL(__init_rwsem);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "5c69edf2c3d7a982fb7fced339798a9ae38b4a7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
