@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45cd9f80_e7ed771d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-09T22:28:32Z",
+      "side": 1,
+      "message": "Causes build-break for many builds:\n```\nn file included from /tmp/bazel-working-directory/_main/common/drivers/android/vendor_hooks.c:67:\n/tmp/bazel-working-directory/_main/common/include/trace/hooks/kprobes.h:14:17: error: unknown type name \u0027kprobe_opcode_t\u0027; did you mean \u0027uprobe_opcode_t\u0027?\n   14 |         TP_PROTO(const kprobe_opcode_t *insns),\n      |                        ^~~~~~~~~~~~~~~\n      |                        uprobe_opcode_t\n/tmp/bazel-working-directory/_main/common/include/linux/tracepoint.h:147:27: note: expanded from macro \u0027TP_PROTO\u0027\n  147 | #define TP_PROTO(args...)       args\n      |                                 ^\n/tmp/bazel-working-directory/_main/common/include/trace/hooks/vendor_hooks.h:113:25: note: expanded from macro \u0027DECLARE_RESTRICTED_HOOK\u0027\n  113 |                         PARAMS(void *__data, proto))\n      |                                              ^\n/tmp/bazel-working-directory/_main/common/include/linux/tracepoint.h:107:25: note: expanded from macro \u0027PARAMS\u0027\n  107 | #define PARAMS(args...) args\n      |                         ^\n/tmp/bazel-working-directory/_main/common/include/trace/hooks/vendor_hooks.h:86:32: note: expanded from macro \u0027__DECLARE_RESTRICTED_HOOK\u0027\n   86 |         extern int __traceiter_##name(data_proto);                      \\\n      |                                       ^\n/tmp/bazel-working-directory/_main/common/arch/arm/include/asm/uprobes.h:12:13: note: \u0027uprobe_opcode_t\u0027 declared here\n   12 | typedef u32 uprobe_opcode_t;\n      |             ^\nIn file included from /tmp/bazel-working-directory/_main/common/drivers/android/vendor_hooks.c:67:\n/tmp/bazel-working-directory/_main/common/include/trace/hooks/kprobes.h:14:17: error: unknown type name \u0027kprobe_opcode_t\u0027; did you mean \u0027uprobe_opcode_t\u0027?\n   14 |         TP_PROTO(const kprobe_opcode_t *insns),\n      |                        ^~~~~~~~~~~~~~~\n      |                        uprobe_opcode_t\n/tmp/bazel-working-directory/_main/common/include/linux/tracepoint.h:147:27: note: expanded from macro \u0027TP_PROTO\u0027\n  147 | #define TP_PROTO(args...)       args\n      |                                 ^\n/tmp/bazel-working-directory/_main/common/include/trace/hooks/vendor_hooks.h:111:41: note: expanded from macro \u0027DECLARE_RESTRICTED_HOOK\u0027\n... 91 lines skipped ...\n      |                                           ^\n/tmp/bazel-working-directory/_main/common/arch/arm/include/asm/uprobes.h:12:13: note: \u0027uprobe_opcode_t\u0027 declared here\n   12 | typedef u32 uprobe_opcode_t;\n      |             ^\n6 errors generated.\nmake[5]: *** [/tmp/bazel-working-directory/_main/common/scripts/Makefile.build:243: drivers/android/vendor_hooks.o] Error 1\n\n```",
+      "revId": "e99094618b420cbe5b3dacefc33891c56cb2da23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
