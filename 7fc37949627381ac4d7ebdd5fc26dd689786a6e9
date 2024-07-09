@@ -79,6 +79,26 @@
       "tag": "",
       "revId": "7fc37949627381ac4d7ebdd5fc26dd689786a6e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000083794440",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3163083?revision\u003d2",
+      "key": {
+        "uuid": "04b643a0_94e73ea0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-09T17:36:12Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/aaca6b10f1a352dec4596548396f590500f2001b).\n\n```\n      ## kernel/locking/rwsem.c ##\n     @@ kernel/locking/rwsem.c: void __init_rwsem(struct rw_semaphore *sem, const char *name,\n      #ifdef CONFIG_RWSEM_SPIN_ON_OWNER\n      \tosq_lock_init(\u0026sem-\u003eosq);\n      #endif\n    --#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA\n    --\tsem-\u003eandroid_vendor_data1 \u003d 0;\n    --#endif\n     +\tandroid_init_vendor_data(sem, 1);\n     +\tandroid_init_oem_data(sem, 1);\n      \ttrace_android_vh_rwsem_init(sem);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "7fc37949627381ac4d7ebdd5fc26dd689786a6e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
