@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f98943_28cd08d1",
+        "filename": "fs/fuse/passthrough.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2024-07-09T16:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c13c384b_4c6f0499",
+      "revId": "380e955924ce0bfcc03faea81dc48ee5b47c4471",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9c6c484_04258644",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-07-09T00:13:26Z",
       "side": 1,
       "message": "1. Need override_creds() and revert_creds()\n2. We are writing to the fuse file, still need to hold the inode_lock",
+      "revId": "380e955924ce0bfcc03faea81dc48ee5b47c4471",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "115ec360_c0eaf970",
+        "filename": "fs/fuse/passthrough.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2024-07-09T16:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9c6c484_04258644",
       "revId": "380e955924ce0bfcc03faea81dc48ee5b47c4471",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
