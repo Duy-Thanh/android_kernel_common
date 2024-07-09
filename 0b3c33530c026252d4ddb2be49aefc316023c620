@@ -16,6 +16,24 @@
       "message": "Apologies, I\u0027m a little at a loss to understand why this patch is needed?\n\nAs cpu_busy_with_softirqs() is already exported, this code only seems to add logic to the !CONFIG_RT_SOFTIRQ_AWARE_SCHED case. As that option is enabled in GKI, this patch seems to only add unused code.\n\nIs there some bit I\u0027m missing?",
       "revId": "0b3c33530c026252d4ddb2be49aefc316023c620",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8f3cb29_ba11e2f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2024-07-09T05:03:13Z",
+      "side": 1,
+      "message": "Thanks for looking into it. We ported this from 6.6 kernel as this is needed fix.\nLater realized that it is already taken care for 6.1 in different way. \nI will abandon this",
+      "parentUuid": "e9f47148_fa8da17b",
+      "revId": "0b3c33530c026252d4ddb2be49aefc316023c620",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
