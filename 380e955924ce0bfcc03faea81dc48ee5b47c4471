@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c13c384b_4c6f0499",
+        "filename": "fs/fuse/passthrough.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1887488
+      },
+      "writtenOn": "2024-07-09T00:13:26Z",
+      "side": 1,
+      "message": "The fuse passthrough file comes from FuseDaemon, and here we should replace the credentials before operating on the backing file.\n\nNeed override_creds() and revert_creds()",
+      "revId": "380e955924ce0bfcc03faea81dc48ee5b47c4471",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9c6c484_04258644",
+        "filename": "fs/fuse/passthrough.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1887488
+      },
+      "writtenOn": "2024-07-09T00:13:26Z",
+      "side": 1,
+      "message": "1. Need override_creds() and revert_creds()\n2. We are writing to the fuse file, still need to hold the inode_lock",
+      "revId": "380e955924ce0bfcc03faea81dc48ee5b47c4471",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
