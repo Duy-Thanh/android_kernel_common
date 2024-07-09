@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a61d7d65_c3297c56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-09T17:41:32Z",
+      "side": 1,
+      "message": "The STG file contains conflict markers. Please re-create it - and test your patch before uploading.",
+      "revId": "a020d5257466386ddd4396e80b29954952e2906f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
