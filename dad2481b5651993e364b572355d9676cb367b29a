@@ -16,6 +16,24 @@
       "message": "If the vma-unlink event at userfaultfd_release()-\u003evma_merge() happened first, then on other cpu core, do_page_fault()-\u003e...-\u003eseq \u003d mmap_seq_read_start(mm) is called(there isn\u0027t a sync lock e.g. mm.mmap_lock for latter path) and dealing with the unlinked vma and its copy, make userfaultfd_release()-\u003emmap_seq_read_check() judgement will have no effect.\nRefer to partner issue:349936398, comment 16 and comment 12.",
       "revId": "dad2481b5651993e364b572355d9676cb367b29a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c460624_997d89ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-07-09T19:06:01Z",
+      "side": 1,
+      "message": "I have replied in the bug. Please take a look.",
+      "parentUuid": "086d7417_18b87ac0",
+      "revId": "dad2481b5651993e364b572355d9676cb367b29a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
