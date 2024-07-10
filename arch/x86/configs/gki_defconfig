@@ -65,6 +65,9 @@ CONFIG_NR_CPUS=32
 # CONFIG_X86_5LEVEL is not set
 # CONFIG_MTRR_SANITIZER is not set
 CONFIG_EFI=y
+CONFIG_HZ_1000=y
+CONFIG_DYN_HZ=y
+CONFIG_DYN_HZ_DEFAULT=250
 CONFIG_CMDLINE_BOOL=y
 CONFIG_CMDLINE="console=ttynull stack_depot_disable=on cgroup_disable=pressure bootconfig"
 CONFIG_HIBERNATION=y
