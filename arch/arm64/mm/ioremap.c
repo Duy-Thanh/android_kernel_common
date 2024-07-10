@@ -265,6 +265,11 @@ void ioremap_phys_range_hook(phys_addr_t phys_addr, size_t size, pgprot_t prot)
 	if (!static_branch_unlikely(&ioremap_guard_key))
 		return;
 
+	if (!IS_ALIGNED(size, guard_granule)) {
+		size = ALIGN(size, guard_granule);
+		pr_info("ioremap adjusting size to %lx", size);
+	}
+
 	VM_BUG_ON(!PAGE_ALIGNED(phys_addr) || !PAGE_ALIGNED(size));
 
 	mutex_lock(&ioremap_guard_lock);
@@ -308,6 +313,11 @@ void iounmap_phys_range_hook(phys_addr_t phys_addr, size_t size)
 
 	if (!static_branch_unlikely(&ioremap_guard_key))
 		return;
+
+	if (!IS_ALIGNED(size, guard_granule)) {
+		size = ALIGN(size, guard_granule);
+		pr_info("iounmap adjusting size to %lx", size);
+	}
 
 	VM_BUG_ON(!PAGE_ALIGNED(phys_addr) || !PAGE_ALIGNED(size));
 
