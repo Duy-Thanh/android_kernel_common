@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfdc5f1b_3ced6dfd",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 3237198
+      },
+      "writtenOn": "2024-07-10T02:49:53Z",
+      "side": 1,
+      "message": "It can also be y, then it should be built together with the kernel instead of loadable kernel module",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 32
+      },
+      "revId": "eae8e0d5c995dca17ad09c40e2379695efcb997a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
