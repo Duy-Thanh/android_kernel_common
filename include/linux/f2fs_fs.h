@@ -291,9 +291,12 @@ struct f2fs_inode {
 			__u8 i_compress_algorithm;	/* compress algorithm */
 			__u8 i_log_cluster_size;	/* log of cluster size */
 			__le16 i_compress_flag;		/* compress flag */
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 						/* 0 bit: chksum flag
 						 * [10,15] bits: compress level
 						 */
+=======
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 			__le32 i_extra_end[0];	/* for attribute size calculation */
 		} __packed;
 		__le32 i_addr[DEF_ADDRS_PER_INODE];	/* Pointers to data blocks */

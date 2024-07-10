@@ -619,6 +619,10 @@ static int f2fs_compress_pages(struct compress_ctx *cc)
 	const struct f2fs_compress_ops *cops =
 				f2fs_cops[fi->i_compress_algorithm];
 	unsigned int max_len, new_nr_cpages;
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
+=======
+	struct page **new_cpages;
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 	u32 chksum = 0;
 	int i, ret;
 
@@ -769,6 +773,33 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task)
 	if (!ret && (fi->i_compress_flag & 1 << COMPRESS_CHKSUM)) {
 		u32 provided = le32_to_cpu(dic->cbuf->chksum);
 		u32 calculated = f2fs_crc32(sbi, dic->cbuf->cdata, dic->clen);
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
+=======
+
+		if (provided != calculated) {
+			if (!is_inode_flag_set(dic->inode, FI_COMPRESS_CORRUPT)) {
+				set_inode_flag(dic->inode, FI_COMPRESS_CORRUPT);
+				printk_ratelimited(
+					"%sF2FS-fs (%s): checksum invalid, nid = %lu, %x vs %x",
+					KERN_INFO, sbi->sb->s_id, dic->inode->i_ino,
+					provided, calculated);
+			}
+			set_sbi_flag(sbi, SBI_NEED_FSCK);
+		}
+	}
+
+out_vunmap_cbuf:
+	vm_unmap_ram(dic->cbuf, dic->nr_cpages);
+out_vunmap_rbuf:
+	vm_unmap_ram(dic->rbuf, dic->cluster_size);
+destroy_decompress_ctx:
+	if (cops->destroy_decompress_ctx)
+		cops->destroy_decompress_ctx(dic);
+out_free_dic:
+	if (!verity)
+		f2fs_decompress_end_io(dic->rpages, dic->cluster_size,
+								ret, false);
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 
 		if (provided != calculated) {
 			if (!is_inode_flag_set(dic->inode, FI_COMPRESS_CORRUPT)) {
@@ -1223,7 +1254,11 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
 	loff_t psize;
 	int i, err;
 
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 	/* we should bypass data pages to proceed the kworkder jobs */
+=======
+	/* we should bypass data pages to proceed the kworker jobs */
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 	if (unlikely(f2fs_cp_error(sbi))) {
 		mapping_set_error(cc->rpages[0]->mapping, -EIO);
 		goto out_free;

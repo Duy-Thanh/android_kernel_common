@@ -303,6 +303,7 @@ compress_extension=%s	 Support adding specified extension, so that f2fs can enab
 			 For other files, we can still enable compression via ioctl.
 			 Note that, there is one reserved special extension '*', it
 			 can be set to enable compression for all files.
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 nocompress_extension=%s	   Support adding specified extension, so that f2fs can disable
 			 compression on those corresponding files, just contrary to compression extension.
 			 If you know exactly which files cannot be compressed, you can use this.
@@ -326,6 +327,16 @@ compress_mode=%s	 Control file compression mode. This supports "fs" and "user"
 compress_cache		 Support to use address space of a filesystem managed inode to
 			 cache compressed block, in order to improve cache hit ratio of
 			 random read.
+=======
+compress_chksum		 Support verifying chksum of raw data in compressed cluster.
+compress_mode=%s	 Control file compression mode. This supports "fs" and "user"
+			 modes. In "fs" mode (default), f2fs does automatic compression
+			 on the compression enabled files. In "user" mode, f2fs disables
+			 the automaic compression and gives the user discretion of
+			 choosing the target file and the timing. The user can do manual
+			 compression/decompression on the compression enabled files using
+			 ioctls.
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
 			 files using the blk-crypto framework rather than
 			 filesystem-layer encryption. This allows the use of
@@ -930,7 +941,11 @@ This is the default option. f2fs does automatic compression in the writeback of 
 compression enabled files.
 
 2) compress_mode=user
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 This disables the automatic compression and gives the user discretion of choosing the
+=======
+This disables the automaic compression and gives the user discretion of choosing the
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 target file and the timing. The user can do manual compression/decompression on the
 compression enabled files using F2FS_IOC_DECOMPRESS_FILE and F2FS_IOC_COMPRESS_FILE
 ioctls like the below.

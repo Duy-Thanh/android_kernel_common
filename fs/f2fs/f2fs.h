@@ -172,10 +172,16 @@ struct f2fs_mount_info {
 	/* For compression */
 	unsigned char compress_algorithm;	/* algorithm type */
 	unsigned char compress_log_size;	/* cluster log size */
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 	unsigned char compress_level;		/* compress level */
+=======
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 	bool compress_chksum;			/* compressed data chksum */
 	unsigned char compress_ext_cnt;		/* extension count */
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 	unsigned char nocompress_ext_cnt;		/* nocompress extension count */
+=======
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 	int compress_mode;			/* compression mode */
 	unsigned char extensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN];	/* extensions */
 	unsigned char noextensions[COMPRESS_EXT_NUM][F2FS_EXTENSION_LEN]; /* extensions */
@@ -763,7 +769,10 @@ enum {
 	FI_MMAP_FILE,		/* indicate file was mmapped */
 	FI_ENABLE_COMPRESS,	/* enable compression in "user" compression mode */
 	FI_COMPRESS_RELEASED,	/* compressed blocks were released */
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 	FI_ALIGNED_WRITE,	/* enable aligned write */
+=======
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 	FI_MAX,			/* max flag, never be used */
 };
 
@@ -820,7 +829,10 @@ struct f2fs_inode_info {
 	atomic_t i_compr_blocks;		/* # of compressed blocks */
 	unsigned char i_compress_algorithm;	/* algorithm type */
 	unsigned char i_log_cluster_size;	/* log of cluster size */
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 	unsigned char i_compress_level;		/* compress level (lz4hc,zstd) */
+=======
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 	unsigned short i_compress_flag;		/* compress flag */
 	unsigned int i_cluster_size;		/* cluster size */
 };
@@ -1366,6 +1378,7 @@ enum {
 				 */
 };
 
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 enum {
 	DISCARD_UNIT_BLOCK,	/* basic discard unit is block */
 	DISCARD_UNIT_SEGMENT,	/* basic discard unit is segment */
@@ -1383,6 +1396,8 @@ static inline int f2fs_test_bit(unsigned int nr, char *addr);
 static inline void f2fs_set_bit(unsigned int nr, char *addr);
 static inline void f2fs_clear_bit(unsigned int nr, char *addr);
 
+=======
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 /*
  * Layout of f2fs page.private:
  *
@@ -1507,9 +1522,12 @@ enum compress_flag {
 	COMPRESS_MAX_FLAG,
 };
 
+<<<<<<< HEAD   (3feee7 Merge 5.10.218 into android13-5.10-lts)
 #define	COMPRESS_WATERMARK			20
 #define	COMPRESS_PERCENT			20
 
+=======
+>>>>>>> BRANCH (a2ed16 Linux 5.10.219)
 #define COMPRESS_DATA_RESERVED_SIZE		4
 struct compress_data {
 	__le32 clen;			/* compressed data size */
