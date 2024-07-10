@@ -123,6 +123,20 @@ DECLARE_RESTRICTED_HOOK(android_rvh_bpf_skb_load_bytes,
 	TP_PROTO(const struct sk_buff *skb, u32 offset, void *to, u32 len,
 		int *handled, int *err),
 	TP_ARGS(skb, offset, to, len, handled, err), 1);
+<<<<<<< HEAD   (44add0 FROMGIT: mm: page_alloc: tighten up find_suitable_fallback())
+||||||| BASE
+DECLARE_HOOK(android_vh_dc_send_copy,
+	TP_PROTO(struct sk_buff *skb, struct net_device *dev), TP_ARGS(skb, dev));
+DECLARE_HOOK(android_vh_dc_receive,
+	TP_PROTO(struct sk_buff *skb, int *flag), TP_ARGS(skb, flag));
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_tcp_rcv_spurious_retrans,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk), 1);
+DECLARE_HOOK(android_vh_dc_send_copy,
+	TP_PROTO(struct sk_buff *skb, struct net_device *dev), TP_ARGS(skb, dev));
+DECLARE_HOOK(android_vh_dc_receive,
+	TP_PROTO(struct sk_buff *skb, int *flag), TP_ARGS(skb, flag));
+>>>>>>> CHANGE (c4db16 ANDROID: GKI: net: add vendor hooks net qos for gki purpose)
 DECLARE_HOOK(android_vh_tcp_rtt_estimator,
 	TP_PROTO(struct sock *sk, long mrtt_us), TP_ARGS(sk, mrtt_us));
 DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,

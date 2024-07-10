@@ -4700,11 +4700,19 @@ static void tcp_rcv_spurious_retrans(struct sock *sk, const struct sk_buff *skb)
 	 * repathing due to our own RTO, then rehash the socket to repath our
 	 * packets.
 	 */
+<<<<<<< HEAD   (44add0 FROMGIT: mm: page_alloc: tighten up find_suitable_fallback())
 #if IS_ENABLED(CONFIG_IPV6)
 	if (inet_csk(sk)->icsk_ca_state != TCP_CA_Loss &&
 	    skb->protocol == htons(ETH_P_IPV6) &&
 	    (tcp_sk(sk)->inet_conn.icsk_ack.lrcv_flowlabel !=
 	     ntohl(ip6_flowlabel(ipv6_hdr(skb)))) &&
+||||||| BASE
+	if (TCP_SKB_CB(skb)->seq == tcp_sk(sk)->duplicate_sack[0].start_seq &&
+=======
+	 trace_android_rvh_tcp_rcv_spurious_retrans(sk);
+
+	if (TCP_SKB_CB(skb)->seq == tcp_sk(sk)->duplicate_sack[0].start_seq &&
+>>>>>>> CHANGE (c4db16 ANDROID: GKI: net: add vendor hooks net qos for gki purpose)
 	    sk_rethink_txhash(sk))
 		NET_INC_STATS(sock_net(sk), LINUX_MIB_TCPDUPLICATEDATAREHASH);
 
