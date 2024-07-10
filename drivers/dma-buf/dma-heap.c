@@ -7,14 +7,15 @@
  */
 
 #include <linux/cdev.h>
+#include <linux/debugfs.h>
 #include <linux/device.h>
 #include <linux/dma-buf.h>
 #include <linux/dma-heap.h>
 #include <linux/err.h>
-#include <linux/kref.h>
 #include <linux/list.h>
-#include <linux/nospec.h>
+#include <linux/slab.h>
 #include <linux/syscalls.h>
+#include <linux/nospec.h>
 #include <linux/uaccess.h>
 #include <linux/xarray.h>
 #include <uapi/linux/dma-heap.h>
@@ -33,6 +34,7 @@
  * @list:		list head connecting to list of heaps
  * @heap_cdev:		heap char device
  * @refcount:		reference counter for this heap device
+ * @heap_dev		heap device struct
  *
  * Represents a heap of memory from which buffers can be made.
  */
@@ -81,7 +83,7 @@ struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 	 * Allocations from all heaps have to begin
 	 * and end on page boundaries.
 	 */
-	len = __PAGE_ALIGN(len);
+	len = PAGE_ALIGN(len);
 	if (!len)
 		return ERR_PTR(-EINVAL);
 
