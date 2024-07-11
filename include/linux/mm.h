@@ -4121,4 +4121,9 @@ static inline void accept_memory(phys_addr_t start, phys_addr_t end)
 
 #endif
 
+extern void __free_pages_ok(struct page *page, unsigned int order,
+		int __bitwise fpi_flags);
+extern void prep_new_page(struct page *page, unsigned int order,
+		gfp_t gfp_flags, unsigned int alloc_flags);
+
 #endif /* _LINUX_MM_H */
