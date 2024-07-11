@@ -2726,6 +2726,13 @@ static struct drm_i915_private __rcu *ips_mchdev;
 static void
 ips_ping_for_i915_load(void)
 {
+#if IS_ENABLED(CONFIG_INTEL_IPS)
+	/*
+	 * (b/352497771): GKI does not allow to build any vendor module which
+	 * uses symbol_get/symbol_put as symbol lookup circumvents all ABI
+	 * checking.
+	 */
+#error "Use of GKI forbidden symbol_get/symbol_put symbols, please refactor code first"
 	void (*link)(void);
 
 	link = symbol_get(ips_link_to_i915_driver);
@@ -2733,6 +2740,7 @@ ips_ping_for_i915_load(void)
 		link();
 		symbol_put(ips_link_to_i915_driver);
 	}
+#endif
 }
 
 void intel_rps_driver_register(struct intel_rps *rps)
