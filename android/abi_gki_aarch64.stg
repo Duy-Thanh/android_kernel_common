@@ -31539,6 +31539,11 @@ typedef {
   referred_type_id: 0x4585663f
 }
 typedef {
+  id: 0x94aa5e96
+  name: "fpi_t"
+  referred_type_id: 0x6720d32f
+}
+typedef {
   id: 0x39972774
   name: "fr_proto"
   referred_type_id: 0x2880e524
@@ -292428,6 +292433,13 @@ function {
   parameter_id: 0x0b27dc43
 }
 function {
+  id: 0x100bb93b
+  return_type_id: 0x48b5725f
+  parameter_id: 0x06835e9c
+  parameter_id: 0x4585663f
+  parameter_id: 0x94aa5e96
+}
+function {
   id: 0x100bdee9
   return_type_id: 0x48b5725f
   parameter_id: 0x038de60c
@@ -292471,6 +292483,14 @@ function {
   parameter_id: 0xf435685e
   parameter_id: 0x18bd6530
   parameter_id: 0xe02e14d6
+}
+function {
+  id: 0x1013ec0e
+  return_type_id: 0x48b5725f
+  parameter_id: 0x06835e9c
+  parameter_id: 0x4585663f
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x1014c641
@@ -339914,6 +339934,15 @@ elf_symbol {
   crc: 0x2b36c64e
   type_id: 0x102e93ac
   full_name: "__free_pages"
+}
+elf_symbol {
+  id: 0x547703e8
+  name: "__free_pages_ok"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x97cc79bd
+  type_id: 0x100bb93b
+  full_name: "__free_pages_ok"
 }
 elf_symbol {
   id: 0x07f88ce8
@@ -388040,6 +388069,15 @@ elf_symbol {
   full_name: "preempt_schedule_notrace"
 }
 elf_symbol {
+  id: 0x4e6d24f1
+  name: "prep_new_page"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x54c3b8a3
+  type_id: 0x1013ec0e
+  full_name: "prep_new_page"
+}
+elf_symbol {
   id: 0x98d05c44
   name: "prepare_creds"
   is_defined: true
@@ -408668,6 +408706,7 @@ interface {
   symbol_id: 0xebf4b11f
   symbol_id: 0xb8e29ef0
   symbol_id: 0x5b1ea047
+  symbol_id: 0x547703e8
   symbol_id: 0x07f88ce8
   symbol_id: 0xe458ae39
   symbol_id: 0x0025234d
@@ -414006,6 +414045,7 @@ interface {
   symbol_id: 0x48fb8c7e
   symbol_id: 0x180b11d3
   symbol_id: 0xd46a0ddb
+  symbol_id: 0x4e6d24f1
   symbol_id: 0x98d05c44
   symbol_id: 0x80c0972e
   symbol_id: 0x49317a7a
