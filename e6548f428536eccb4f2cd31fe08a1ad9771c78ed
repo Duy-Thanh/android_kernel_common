@@ -16,6 +16,24 @@
       "message": "See comment on bug.",
       "revId": "e6548f428536eccb4f2cd31fe08a1ad9771c78ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2acf9624_511fc306",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-07-11T09:04:15Z",
+      "side": 1,
+      "message": "I replied to your comment on bug, thanks.",
+      "parentUuid": "d84e4442_415c517a",
+      "revId": "e6548f428536eccb4f2cd31fe08a1ad9771c78ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
