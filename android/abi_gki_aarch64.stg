@@ -310822,6 +310822,13 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x9095a736
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3751334b
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+}
+function {
   id: 0x90977154
   return_type_id: 0x6720d32f
   parameter_id: 0x347303b4
@@ -368038,6 +368045,15 @@ elf_symbol {
   full_name: "em_pd_get"
 }
 elf_symbol {
+  id: 0xbd5eb2a5
+  name: "em_update_performance_limits"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7e273c8a
+  type_id: 0x9095a736
+  full_name: "em_update_performance_limits"
+}
+elf_symbol {
   id: 0x2935539f
   name: "emergency_restart"
   is_defined: true
@@ -377523,6 +377539,15 @@ elf_symbol {
   crc: 0x39911428
   type_id: 0xebfdc849
   full_name: "kstat"
+}
+elf_symbol {
+  id: 0x2b3485f8
+  name: "kstat_irqs_cpu"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb6bffb99
+  type_id: 0xde26a438
+  full_name: "kstat_irqs_cpu"
 }
 elf_symbol {
   id: 0x2f71359b
@@ -411513,6 +411538,7 @@ interface {
   symbol_id: 0x7c5cca7e
   symbol_id: 0xe51bdd4e
   symbol_id: 0x057c622d
+  symbol_id: 0xbd5eb2a5
   symbol_id: 0x2935539f
   symbol_id: 0x8f99729e
   symbol_id: 0xb6a9c6f8
@@ -412563,6 +412589,7 @@ interface {
   symbol_id: 0x2c162109
   symbol_id: 0x9c9d432c
   symbol_id: 0x3004454e
+  symbol_id: 0x2b3485f8
   symbol_id: 0x2f71359b
   symbol_id: 0xdf35d747
   symbol_id: 0x5dcc8e77
