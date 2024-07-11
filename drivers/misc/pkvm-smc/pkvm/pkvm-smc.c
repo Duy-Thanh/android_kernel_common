@@ -17,8 +17,8 @@ const struct pkvm_module_ops *pkvm_ops;
 bool permissive;
 
 #ifdef CONFIG_TRACING
-extern char __hyp_event_ids_start[];
-extern char __hyp_event_ids_end[];
+extern struct hyp_event_id __hyp_event_ids_start[];
+extern struct hyp_event_id __hyp_event_ids_end[];
 
 void *tracing_reserve_entry(unsigned long length)
 {

@@ -4,6 +4,7 @@
  */
 #include <asm/kvm_host.h>
 #include <asm/kvm_pkvm_module.h>
+#include <asm/kvm_hypevents.h>
 
 #include <nvhe/alloc.h>
 #include <nvhe/iommu.h>
@@ -95,6 +96,28 @@ static int _hyp_smp_processor_id(void)
 	return hyp_smp_processor_id();
 }
 
+static void tracing_mod_hyp_printk(u8 fmt_id, u64 a, u64 b, u64 c, u64 d)
+{
+#ifdef CONFIG_TRACING
+	struct trace_hyp_format___hyp_printk *entry;
+	size_t length = sizeof(*entry);
+
+	if (!atomic_read(&__hyp_printk_enabled))
+		return;
+
+	entry = tracing_reserve_entry(length);
+	if (!entry)
+		return;
+	entry->hdr.id = hyp_event_id___hyp_printk.id;
+	entry->fmt_id = fmt_id;
+	entry->a = a;
+	entry->b = b;
+	entry->c = c;
+	entry->d = d;
+	tracing_commit_entry();
+#endif
+}
+
 const struct pkvm_module_ops module_ops = {
 	.create_private_mapping = __pkvm_create_private_mapping,
 	.alloc_module_va = __pkvm_alloc_module_va,
@@ -153,6 +176,7 @@ const struct pkvm_module_ops module_ops = {
 	.iommu_snapshot_host_stage2 = kvm_iommu_snapshot_host_stage2,
 	.hyp_smp_processor_id = _hyp_smp_processor_id,
 	.iommu_flush_unmap_cache = kvm_iommu_flush_unmap_cache,
+	.tracing_mod_hyp_printk = tracing_mod_hyp_printk,
 };
 
 int __pkvm_init_module(void *module_init)

@@ -215,7 +215,7 @@ struct pkvm_module_ops {
 	int (*iommu_snapshot_host_stage2)(struct kvm_hyp_iommu_domain *domain);
 	int (*hyp_smp_processor_id)(void);
 	ANDROID_KABI_USE(1, void (*iommu_flush_unmap_cache)(struct kvm_iommu_paddr_cache *cache));
-	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_USE(2, void (*tracing_mod_hyp_printk)(u8 fmt_id, u64 a, u64 b, u64 c, u64 d));
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 	ANDROID_KABI_RESERVE(5);
