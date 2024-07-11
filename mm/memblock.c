@@ -138,11 +138,6 @@ struct memblock_type physmem = {
 };
 #endif
 
-#ifdef CONFIG_MEMBLOCK_MEMSIZE
-static long memsize_kinit;
-static bool memblock_memsize_tracking __initdata_memblock = true;
-#endif
-
 /*
  * keep a pointer to &memblock.memory in the text section to use it in
  * __next_mem_range() and its helpers.
@@ -167,6 +162,286 @@ static bool system_has_some_mirror __initdata_memblock;
 static int memblock_can_resize __initdata_memblock;
 static int memblock_memory_in_slab __initdata_memblock;
 static int memblock_reserved_in_slab __initdata_memblock;
+
+#define NAME_SIZE	100
+struct memsize_rgn_struct {
+	phys_addr_t	base;
+	long		size;
+	bool		nomap;			/*  1/32 byte */
+	bool		reusable;		/*  1/32 byte */
+	char		name[NAME_SIZE];	/* 30/32 byte */
+};
+
+#define MAX_MEMBLOCK_MEMSIZE	100
+
+static struct memsize_rgn_struct memsize_rgn[MAX_MEMBLOCK_MEMSIZE] __initdata_memblock;
+static int memsize_rgn_count __initdata_memblock;
+static long memsize_memmap;
+static long memsize_kinit;
+static bool memblock_memsize_tracking __initdata_memblock = true;
+static unsigned long memsize_code __initdata_memblock;
+static unsigned long memsize_data __initdata_memblock;
+static unsigned long memsize_ro __initdata_memblock;
+static unsigned long memsize_bss __initdata_memblock;
+static long memsize_reusable_size;
+
+enum memblock_memsize_state {
+	MEMBLOCK_MEMSIZE_NONE = 0,
+	MEMBLOCK_MEMSIZE_DEBUGFS,
+	MEMBLOCK_MEMSIZE_PROCFS,
+};
+
+static enum memblock_memsize_state memsize_state __initdata_memblock = MEMBLOCK_MEMSIZE_NONE;
+
+static int __init early_memblock_memsize(char *str)
+{
+	if (!str)
+		return -EINVAL;
+	if (strcmp(str, "none") == 0)
+		memsize_state = MEMBLOCK_MEMSIZE_NONE;
+	else if (strcmp(str, "debugfs") == 0)
+		memsize_state = MEMBLOCK_MEMSIZE_DEBUGFS;
+	else if (strcmp(str, "procfs") == 0)
+		memsize_state = MEMBLOCK_MEMSIZE_PROCFS;
+	else
+		return -EINVAL;
+	return 0;
+}
+early_param("memblock_memsize", early_memblock_memsize);
+
+void __init memblock_memsize_enable_tracking(void)
+{
+	memblock_memsize_tracking = true;
+}
+
+void __init memblock_memsize_disable_tracking(void)
+{
+	memblock_memsize_tracking = false;
+}
+
+void __init memblock_memsize_mod_memmap_size(long size)
+{
+	memsize_memmap += size;
+}
+
+void memblock_memsize_mod_kernel_size(long size)
+{
+	memsize_kinit += size;
+}
+
+void __init memblock_memsize_kernel_code_data(unsigned long code, unsigned long data,
+		unsigned long ro, unsigned long bss)
+{
+	memsize_code = code;
+	memsize_data = data;
+	memsize_ro = ro;
+	memsize_bss = bss;
+}
+
+static void __init_memblock memsize_get_valid_name(char *valid_name, const char *name)
+{
+	char *head, *tail, *found;
+	int valid_size;
+
+	head = (char *)name;
+	tail = head + strlen(name);
+
+	/* get tail position after valid char */
+	found = strchr(name, '@');
+	if (found)
+		tail = found;
+
+	valid_size = tail - head + 1;
+	if (valid_size > NAME_SIZE)
+		valid_size = NAME_SIZE;
+	strscpy(valid_name, head, valid_size);
+}
+
+void memblock_memsize_mod_reusable_size(long size)
+{
+	memsize_reusable_size += size;
+}
+
+static inline struct memsize_rgn_struct * __init_memblock memsize_get_new_rgn(void)
+{
+	if (memsize_rgn_count == ARRAY_SIZE(memsize_rgn)) {
+		pr_err("not enough space on memsize_rgn\n");
+		return NULL;
+	}
+	return &memsize_rgn[memsize_rgn_count++];
+}
+
+static bool __init_memblock memsize_update_nomap_region(const char *name, phys_addr_t base,
+					phys_addr_t size, bool nomap)
+{
+	int i;
+	struct memsize_rgn_struct *rmem_rgn, *new_rgn;
+
+	if (!name)
+		return false;
+
+	for (i = 0; i < memsize_rgn_count; i++)	{
+		rmem_rgn = &memsize_rgn[i];
+
+		/* skip either !nomap, !unknown, !overlap */
+		if (!rmem_rgn->nomap)
+			continue;
+		if (strcmp(rmem_rgn->name, "unknown"))
+			continue;
+		if (base + size <= rmem_rgn->base)
+			continue;
+		if (base >= rmem_rgn->base + rmem_rgn->size)
+			continue;
+
+		/* exactly same */
+		if (base == rmem_rgn->base && size == rmem_rgn->size) {
+			memsize_get_valid_name(rmem_rgn->name, name);
+			return true;
+		}
+
+		/* bigger */
+		if (base <= rmem_rgn->base &&
+				base + size >= rmem_rgn->base + rmem_rgn->size) {
+			memsize_get_valid_name(rmem_rgn->name, name);
+			rmem_rgn->base = base;
+			rmem_rgn->size = size;
+			return true;
+		}
+
+		/* intersect */
+		if (base < rmem_rgn->base ||
+				base + size > rmem_rgn->base + rmem_rgn->size) {
+			new_rgn = memsize_get_new_rgn();
+			if (!new_rgn)
+				return true;
+			new_rgn->base = base;
+			new_rgn->size = size;
+			new_rgn->nomap = nomap;
+			new_rgn->reusable = false;
+			memsize_get_valid_name(new_rgn->name, name);
+
+			if (base < rmem_rgn->base) {
+				rmem_rgn->size -= base + size - rmem_rgn->base;
+				rmem_rgn->base = base + size;
+			} else {
+				rmem_rgn->size -= rmem_rgn->base
+							+ rmem_rgn->size - base;
+			}
+			return true;
+		}
+
+		/* smaller */
+		new_rgn = memsize_get_new_rgn();
+		if (!new_rgn)
+			return true;
+		new_rgn->base = base;
+		new_rgn->size = size;
+		new_rgn->nomap = nomap;
+		new_rgn->reusable = false;
+		memsize_get_valid_name(new_rgn->name, name);
+
+		if (base == rmem_rgn->base && size < rmem_rgn->size) {
+			rmem_rgn->base = base + size;
+			rmem_rgn->size -= size;
+		} else if (base + size == rmem_rgn->base + rmem_rgn->size) {
+			rmem_rgn->size -= size;
+		} else {
+			new_rgn = memsize_get_new_rgn();
+			if (!new_rgn)
+				return true;
+			new_rgn->base = base + size;
+			new_rgn->size = (rmem_rgn->base + rmem_rgn->size)
+					- (base + size);
+			new_rgn->nomap = nomap;
+			new_rgn->reusable = false;
+			strscpy(new_rgn->name, "unknown", sizeof(new_rgn->name));
+			rmem_rgn->size = base - rmem_rgn->base;
+		}
+		return true;
+	}
+
+	return false;
+}
+
+void __init_memblock memblock_memsize_record(const char *name, phys_addr_t base,
+			     phys_addr_t size, bool nomap, bool reusable)
+{
+	struct memsize_rgn_struct *rgn;
+	phys_addr_t end;
+
+	if (name && memsize_state == MEMBLOCK_MEMSIZE_NONE)
+		return;
+
+	if (memsize_rgn_count == MAX_MEMBLOCK_MEMSIZE) {
+		pr_err("not enough space on memsize_rgn\n");
+		return;
+	}
+
+	if (memsize_update_nomap_region(name, base, size, nomap))
+		return;
+
+	rgn = memsize_get_new_rgn();
+	if (!rgn)
+		return;
+
+	rgn->base = base;
+	rgn->size = size;
+	rgn->nomap = nomap;
+	rgn->reusable = reusable;
+
+	if (!name)
+		strscpy(rgn->name, "unknown", sizeof(rgn->name));
+	else
+		memsize_get_valid_name(rgn->name, name);
+	end = base + size - 1;
+	memblock_dbg("%s %pa..%pa nomap:%d reusable:%d\n",
+		     __func__, &base, &end, nomap, reusable);
+}
+
+/* This function will be called to by early_init_dt_scan_nodes */
+void __init memblock_memsize_detect_hole(void)
+{
+	phys_addr_t base, end;
+	phys_addr_t prev_end, hole_sz;
+	int idx;
+	struct memblock_region *rgn;
+	int memblock_cnt = (int)memblock.memory.cnt;
+
+	/* assume that the hole size is less than 1 GB */
+	for_each_memblock_type(idx, (&memblock.memory), rgn) {
+		prev_end = (idx == 0) ? round_down(rgn->base, SZ_1G) : end;
+		base = rgn->base;
+		end = rgn->base + rgn->size;
+
+		/* only for the last region, check a hole after the region */
+		if (idx + 1 == memblock_cnt) {
+			hole_sz = round_up(end, SZ_1G) - end;
+			if (hole_sz)
+				memblock_memsize_record(NULL, end, hole_sz,
+							true, false);
+		}
+
+		/* for each region, check a hole prior to the region */
+		hole_sz = base - prev_end;
+		if (!hole_sz)
+			continue;
+		if (hole_sz < SZ_1G) {
+			memblock_memsize_record(NULL, prev_end, hole_sz, true,
+						false);
+		} else {
+			phys_addr_t hole_sz1, hole_sz2;
+
+			hole_sz1 = round_up(prev_end, SZ_1G) - prev_end;
+			if (hole_sz1)
+				memblock_memsize_record(NULL, prev_end,
+							hole_sz1, true, false);
+			hole_sz2 = base % SZ_1G;
+			if (hole_sz2)
+				memblock_memsize_record(NULL, base - hole_sz2,
+							hole_sz2, true, false);
+		}
+	}
+}
 
 bool __init_memblock memblock_has_mirror(void)
 {
@@ -699,7 +974,6 @@ repeat:
 		memblock_merge_regions(type, start_rgn, end_rgn);
 	}
 done:
-#ifdef CONFIG_MEMBLOCK_MEMSIZE
 	if (memblock_memsize_tracking) {
 		if (new_size && type == &memblock.reserved) {
 			memblock_dbg("%s: kernel %lu %+ld\n", __func__,
@@ -707,7 +981,7 @@ done:
 			memsize_kinit += size;
 		}
 	}
-#endif
+
 	return 0;
 }
 
@@ -844,7 +1118,7 @@ static int __init_memblock memblock_remove_range(struct memblock_type *type,
 
 	for (i = end_rgn - 1; i >= start_rgn; i--)
 		memblock_remove_region(type, i);
-#ifdef CONFIG_MEMBLOCK_MEMSIZE
+
 	if (memblock_memsize_tracking) {
 		if (type == &memblock.reserved) {
 			memblock_dbg("%s: kernel %lu %+ld\n", __func__,
@@ -852,7 +1126,7 @@ static int __init_memblock memblock_remove_range(struct memblock_type *type,
 			memsize_kinit -= size;
 		}
 	}
-#endif
+
 	return 0;
 }
 
@@ -2006,320 +2280,6 @@ static int __init early_memblock(char *p)
 }
 early_param("memblock", early_memblock);
 
-#ifdef CONFIG_MEMBLOCK_MEMSIZE
-
-#define NAME_SIZE	100
-struct memsize_rgn_struct {
-	phys_addr_t	base;
-	long		size;
-	bool		nomap;			/*  1/32 byte */
-	bool		reusable;		/*  1/32 byte */
-	char		name[NAME_SIZE];	/* 30/32 byte */
-};
-
-static struct memsize_rgn_struct memsize_rgn[CONFIG_MAX_MEMBLOCK_MEMSIZE] __initdata_memblock;
-static int memsize_rgn_count __initdata_memblock;
-static long memsize_memmap;
-static unsigned long memsize_code __initdata_memblock;
-static unsigned long memsize_data __initdata_memblock;
-static unsigned long memsize_ro __initdata_memblock;
-static unsigned long memsize_bss __initdata_memblock;
-static long memsize_reusable_size;
-
-enum memblock_memsize_state {
-	MEMBLOCK_MEMSIZE_NONE = 0,
-	MEMBLOCK_MEMSIZE_DEBUGFS,
-	MEMBLOCK_MEMSIZE_PROCFS,
-};
-
-static enum memblock_memsize_state memsize_state __initdata_memblock = MEMBLOCK_MEMSIZE_NONE;
-
-static int __init early_memblock_memsize(char *str)
-{
-	if (!str)
-		return -EINVAL;
-	if (strcmp(str, "none") == 0)
-		memsize_state = MEMBLOCK_MEMSIZE_NONE;
-	else if (strcmp(str, "debugfs") == 0)
-		memsize_state = MEMBLOCK_MEMSIZE_DEBUGFS;
-	else if (strcmp(str, "procfs") == 0)
-		memsize_state = MEMBLOCK_MEMSIZE_PROCFS;
-	else
-		return -EINVAL;
-	return 0;
-}
-early_param("memblock_memsize", early_memblock_memsize);
-
-void __init memblock_memsize_enable_tracking(void)
-{
-	memblock_memsize_tracking = true;
-}
-
-void __init memblock_memsize_disable_tracking(void)
-{
-	memblock_memsize_tracking = false;
-}
-
-void __init memblock_memsize_mod_memmap_size(long size)
-{
-	memsize_memmap += size;
-}
-
-void memblock_memsize_mod_kernel_size(long size)
-{
-	memsize_kinit += size;
-}
-
-void __init memblock_memsize_kernel_code_data(unsigned long code, unsigned long data,
-		unsigned long ro, unsigned long bss)
-{
-	memsize_code = code;
-	memsize_data = data;
-	memsize_ro = ro;
-	memsize_bss = bss;
-}
-
-static void __init_memblock memsize_get_valid_name(char *valid_name, const char *name)
-{
-	char *head, *tail, *found;
-	int valid_size;
-
-	head = (char *)name;
-	tail = head + strlen(name);
-
-	/* get tail position after valid char */
-	found = strchr(name, '@');
-	if (found)
-		tail = found;
-
-	valid_size = tail - head + 1;
-	if (valid_size > NAME_SIZE)
-		valid_size = NAME_SIZE;
-	strscpy(valid_name, head, valid_size);
-}
-
-void memblock_memsize_mod_reusable_size(long size)
-{
-	memsize_reusable_size += size;
-}
-
-static inline struct memsize_rgn_struct * __init_memblock memsize_get_new_rgn(void)
-{
-	if (memsize_rgn_count == ARRAY_SIZE(memsize_rgn)) {
-		pr_err("not enough space on memsize_rgn\n");
-		return NULL;
-	}
-	return &memsize_rgn[memsize_rgn_count++];
-}
-
-static bool __init_memblock memsize_update_nomap_region(const char *name, phys_addr_t base,
-					phys_addr_t size, bool nomap)
-{
-	int i;
-	struct memsize_rgn_struct *rmem_rgn, *new_rgn;
-
-	if (!name)
-		return false;
-
-	for (i = 0; i < memsize_rgn_count; i++)	{
-		rmem_rgn = &memsize_rgn[i];
-
-		/* skip either !nomap, !unknown, !overlap */
-		if (!rmem_rgn->nomap)
-			continue;
-		if (strcmp(rmem_rgn->name, "unknown"))
-			continue;
-		if (base + size <= rmem_rgn->base)
-			continue;
-		if (base >= rmem_rgn->base + rmem_rgn->size)
-			continue;
-
-		/* exactly same */
-		if (base == rmem_rgn->base && size == rmem_rgn->size) {
-			memsize_get_valid_name(rmem_rgn->name, name);
-			return true;
-		}
-
-		/* bigger */
-		if (base <= rmem_rgn->base &&
-				base + size >= rmem_rgn->base + rmem_rgn->size) {
-			memsize_get_valid_name(rmem_rgn->name, name);
-			rmem_rgn->base = base;
-			rmem_rgn->size = size;
-			return true;
-		}
-
-		/* intersect */
-		if (base < rmem_rgn->base ||
-				base + size > rmem_rgn->base + rmem_rgn->size) {
-			new_rgn = memsize_get_new_rgn();
-			if (!new_rgn)
-				return true;
-			new_rgn->base = base;
-			new_rgn->size = size;
-			new_rgn->nomap = nomap;
-			new_rgn->reusable = false;
-			memsize_get_valid_name(new_rgn->name, name);
-
-			if (base < rmem_rgn->base) {
-				rmem_rgn->size -= base + size - rmem_rgn->base;
-				rmem_rgn->base = base + size;
-			} else {
-				rmem_rgn->size -= rmem_rgn->base
-							+ rmem_rgn->size - base;
-			}
-			return true;
-		}
-
-		/* smaller */
-		new_rgn = memsize_get_new_rgn();
-		if (!new_rgn)
-			return true;
-		new_rgn->base = base;
-		new_rgn->size = size;
-		new_rgn->nomap = nomap;
-		new_rgn->reusable = false;
-		memsize_get_valid_name(new_rgn->name, name);
-
-		if (base == rmem_rgn->base && size < rmem_rgn->size) {
-			rmem_rgn->base = base + size;
-			rmem_rgn->size -= size;
-		} else if (base + size == rmem_rgn->base + rmem_rgn->size) {
-			rmem_rgn->size -= size;
-		} else {
-			new_rgn = memsize_get_new_rgn();
-			if (!new_rgn)
-				return true;
-			new_rgn->base = base + size;
-			new_rgn->size = (rmem_rgn->base + rmem_rgn->size)
-					- (base + size);
-			new_rgn->nomap = nomap;
-			new_rgn->reusable = false;
-			strscpy(new_rgn->name, "unknown", sizeof(new_rgn->name));
-			rmem_rgn->size = base - rmem_rgn->base;
-		}
-		return true;
-	}
-
-	return false;
-}
-
-void __init_memblock memblock_memsize_record(const char *name, phys_addr_t base,
-			     phys_addr_t size, bool nomap, bool reusable)
-{
-	struct memsize_rgn_struct *rgn;
-	phys_addr_t end;
-
-	if (name && memsize_state == MEMBLOCK_MEMSIZE_NONE)
-		return;
-
-	if (memsize_rgn_count == CONFIG_MAX_MEMBLOCK_MEMSIZE) {
-		pr_err("not enough space on memsize_rgn\n");
-		return;
-	}
-
-	if (memsize_update_nomap_region(name, base, size, nomap))
-		return;
-
-	rgn = memsize_get_new_rgn();
-	if (!rgn)
-		return;
-
-	rgn->base = base;
-	rgn->size = size;
-	rgn->nomap = nomap;
-	rgn->reusable = reusable;
-
-	if (!name)
-		strscpy(rgn->name, "unknown", sizeof(rgn->name));
-	else
-		memsize_get_valid_name(rgn->name, name);
-	end = base + size - 1;
-	memblock_dbg("%s %pa..%pa nomap:%d reusable:%d\n",
-		     __func__, &base, &end, nomap, reusable);
-}
-
-/* This function will be called to by early_init_dt_scan_nodes */
-void __init memblock_memsize_detect_hole(void)
-{
-	phys_addr_t base, end;
-	phys_addr_t prev_end, hole_sz;
-	int idx;
-	struct memblock_region *rgn;
-	int memblock_cnt = (int)memblock.memory.cnt;
-
-	/* assume that the hole size is less than 1 GB */
-	for_each_memblock_type(idx, (&memblock.memory), rgn) {
-		prev_end = (idx == 0) ? round_down(rgn->base, SZ_1G) : end;
-		base = rgn->base;
-		end = rgn->base + rgn->size;
-
-		/* only for the last region, check a hole after the region */
-		if (idx + 1 == memblock_cnt) {
-			hole_sz = round_up(end, SZ_1G) - end;
-			if (hole_sz)
-				memblock_memsize_record(NULL, end, hole_sz,
-							true, false);
-		}
-
-		/* for each region, check a hole prior to the region */
-		hole_sz = base - prev_end;
-		if (!hole_sz)
-			continue;
-		if (hole_sz < SZ_1G) {
-			memblock_memsize_record(NULL, prev_end, hole_sz, true,
-						false);
-		} else {
-			phys_addr_t hole_sz1, hole_sz2;
-
-			hole_sz1 = round_up(prev_end, SZ_1G) - prev_end;
-			if (hole_sz1)
-				memblock_memsize_record(NULL, prev_end,
-							hole_sz1, true, false);
-			hole_sz2 = base % SZ_1G;
-			if (hole_sz2)
-				memblock_memsize_record(NULL, base - hole_sz2,
-							hole_sz2, true, false);
-		}
-	}
-}
-
-/* assume that freeing region is NOT bigger than the previous region */
-static void __init_memblock memblock_memsize_free(phys_addr_t free_base,
-						  phys_addr_t free_size)
-{
-	int i;
-	struct memsize_rgn_struct *rgn;
-	phys_addr_t free_end, end;
-
-	free_end = free_base + free_size - 1;
-	memblock_dbg("%s %pa..%pa\n",
-		     __func__, &free_base, &free_end);
-
-	for (i = 0; i < memsize_rgn_count; i++) {
-		rgn = &memsize_rgn[i];
-
-		end = rgn->base + rgn->size;
-		if (free_base < rgn->base ||
-		    free_base >= end)
-			continue;
-
-		free_end = free_base + free_size;
-		if (free_base == rgn->base) {
-			rgn->size -= free_size;
-			if (rgn->size != 0)
-				rgn->base += free_size;
-		} else if (free_end == end) {
-			rgn->size -= free_size;
-		} else {
-			memblock_memsize_record(rgn->name, free_end,
-				end - free_end, rgn->nomap, rgn->reusable);
-			rgn->size = free_base - rgn->base;
-		}
-	}
-}
-#endif /* MEMBLOCK_MEMSIZE */
-
 static void __init free_memmap(unsigned long start_pfn, unsigned long end_pfn)
 {
 	struct page *start_pg, *end_pg;
@@ -2432,7 +2392,6 @@ static unsigned long __init __free_memory_core(phys_addr_t start,
 	unsigned long end_pfn = min_t(unsigned long,
 				      PFN_DOWN(end), max_low_pfn);
 
-#ifdef CONFIG_MEMBLOCK_MEMSIZE
 	unsigned long start_align_up = PFN_ALIGN(start);
 	unsigned long end_align_down = PFN_PHYS(end_pfn);
 
@@ -2444,7 +2403,7 @@ static unsigned long __init __free_memory_core(phys_addr_t start,
 		if (end_pfn != max_low_pfn && end_align_down < end)
 			memblock_memsize_mod_kernel_size(end - end_align_down);
 	}
-#endif
+
 	if (start_pfn >= end_pfn)
 		return 0;
 
@@ -2592,8 +2551,6 @@ static int memblock_debug_show(struct seq_file *m, void *private)
 }
 DEFINE_SHOW_ATTRIBUTE(memblock_debug);
 
-#ifdef CONFIG_MEMBLOCK_MEMSIZE
-
 static int memsize_rgn_cmp(const void *a, const void *b)
 {
 	const struct memsize_rgn_struct *ra = a, *rb = b;
@@ -2605,6 +2562,41 @@ static int memsize_rgn_cmp(const void *a, const void *b)
 		return 1;
 
 	return 0;
+}
+
+/* assume that freeing region is NOT bigger than the previous region */
+static void __init_memblock memblock_memsize_free(phys_addr_t free_base,
+						  phys_addr_t free_size)
+{
+	int i;
+	struct memsize_rgn_struct *rgn;
+	phys_addr_t free_end, end;
+
+	free_end = free_base + free_size - 1;
+	memblock_dbg("%s %pa..%pa\n",
+		     __func__, &free_base, &free_end);
+
+	for (i = 0; i < memsize_rgn_count; i++) {
+		rgn = &memsize_rgn[i];
+
+		end = rgn->base + rgn->size;
+		if (free_base < rgn->base ||
+		    free_base >= end)
+			continue;
+
+		free_end = free_base + free_size;
+		if (free_base == rgn->base) {
+			rgn->size -= free_size;
+			if (rgn->size != 0)
+				rgn->base += free_size;
+		} else if (free_end == end) {
+			rgn->size -= free_size;
+		} else {
+			memblock_memsize_record(rgn->name, free_end,
+				end - free_end, rgn->nomap, rgn->reusable);
+			rgn->size = free_base - rgn->base;
+		}
+	}
 }
 
 /* assume that freed size is always 64 KB aligned */
@@ -2712,7 +2704,6 @@ static int memblock_memsize_show(struct seq_file *m, void *private)
 }
 
 DEFINE_SHOW_ATTRIBUTE(memblock_memsize);
-#endif
 
 static int __init memblock_init_debugfs(void)
 {
@@ -2726,14 +2717,12 @@ static int __init memblock_init_debugfs(void)
 	debugfs_create_file("physmem", 0444, root, &physmem,
 			    &memblock_debug_fops);
 #endif
-#ifdef CONFIG_MEMBLOCK_MEMSIZE
 	if (memsize_state == MEMBLOCK_MEMSIZE_DEBUGFS)
 		debugfs_create_file("memsize", 0444, root, NULL,
 				    &memblock_memsize_fops);
 	else if (memsize_state == MEMBLOCK_MEMSIZE_PROCFS)
 		proc_create_single("memsize", 0, NULL,
 				    memblock_memsize_show);
-#endif
 
 	return 0;
 }
