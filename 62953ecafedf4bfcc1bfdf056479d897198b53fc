@@ -142,6 +142,24 @@
       "parentUuid": "58f3f108_f27d72ed",
       "revId": "62953ecafedf4bfcc1bfdf056479d897198b53fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0dfc1ab_d543fff4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973577
+      },
+      "writtenOn": "2024-07-12T12:26:00Z",
+      "side": 1,
+      "message": "Hi Greg, Thanks for your quick reply. \nHere is the link for discussion: https://lore.kernel.org/lkml/1652860121-24092-1-git-send-email-quic_vivekuma@quicinc.com/#r\nFor now there is discussion in progress on various option including how to incorporate custom changes required in bootloader itself for example adding support to read from non-linear offset in bootloader than bypassing randomization feature in kernel while saving the image on swap. But we do not have definite and final plan at present. So again requesting to allow this on android14-5.15, as already waiver is given on android14-6.1 kernel (Bug: 279879797).",
+      "parentUuid": "68cf7f40_79f3fe3b",
+      "revId": "62953ecafedf4bfcc1bfdf056479d897198b53fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
