@@ -87,6 +87,50 @@
       ],
       "revId": "d984bed84b83bdfa28ba57d08f2645b3dd231b33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084258801",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3169347?revision\u003d4",
+      "key": {
+        "uuid": "1eb41ac0_a140213e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-12T14:24:45Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Remi Denis-Courmont \u003cremi.denis.courmont@huawei.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "2d3d3ae7_b0751e90",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Remi Denis-Courmont \u003cremi.denis.courmont@huawei.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d984bed84b83bdfa28ba57d08f2645b3dd231b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
