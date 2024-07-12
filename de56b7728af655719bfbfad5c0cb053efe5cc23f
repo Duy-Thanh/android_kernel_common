@@ -212,6 +212,24 @@
       "parentUuid": "874df627_d8748653",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb0a9b77_d47fa9ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728636
+      },
+      "writtenOn": "2024-07-12T08:06:28Z",
+      "side": 1,
+      "message": "Dear Mr. Todd,\n\nI attempted to add an abi list for trace_consume_skb, but got a build break for AOSP.\nThe error I\u0027ve got is,\n\n    Symbols missing from the ksymtab:\n      __traceiter_consume_skb\n      __tracepoint_consume_skb\n\nI reported it at bug:348115824 and tried again according to the guidance, but continuously failed.\nSo, I thought that the cause of the build break is the absence of the required symbols.\nAnd tried again after applying this patch to the AOSP - adding \u0027EXPORT_TRACEPOINT_SYMBOL_GPL(consume_skb);\u0027\nSubsequently, the AOSP build was successful and got the new abi diff.\n\n    1 function symbol(s) added\n      \u0027int __traceiter_consume_skb(void*, struct sk_buff*, void*)\u0027\n\n    1 variable symbol(s) added\n      \u0027struct tracepoint __tracepoint_consume_skb\u0027\n\nIs it right that adding the abi list should come before this patch?\nWould you please take a look at about that?\n\nThank you.",
+      "parentUuid": "c5d400af_e6fcafb2",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
