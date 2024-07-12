@@ -230,6 +230,24 @@
       "parentUuid": "c5d400af_e6fcafb2",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36520c70_d8ca5d51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-12T17:20:56Z",
+      "side": 1,
+      "message": "This patch needs to be \"before\" (a parent of) the ABI symbol update patch. They should be submitted together so that they both appear under \"Relation chain\" in the upper right of the gerrit page.",
+      "parentUuid": "bb0a9b77_d47fa9ba",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
