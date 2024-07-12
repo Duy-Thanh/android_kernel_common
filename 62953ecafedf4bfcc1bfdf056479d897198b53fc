@@ -106,6 +106,24 @@
       "parentUuid": "91cc1f7f_91b5353b",
       "revId": "62953ecafedf4bfcc1bfdf056479d897198b53fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58f3f108_f27d72ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973577
+      },
+      "writtenOn": "2024-07-12T11:39:19Z",
+      "side": 1,
+      "message": "Hi Greg, In fact patches to enable bootloader based hibernation were posted long back, but they have faced deadlock since then because those patches are creating new ABI which is unacceptable to Upstream community and also community opposition for linear access of blkdev. Here is the patch series: \"[RFC 0/6] Bootloader based hibernation (kernel.org)\" .\nBut we need this functionality in android14-5.15 for wear product realization. would request you to consider approving this.",
+      "parentUuid": "2352e26d_02478346",
+      "revId": "62953ecafedf4bfcc1bfdf056479d897198b53fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
