@@ -52,6 +52,24 @@
       "parentUuid": "d7583e43_fb0834e8",
       "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e88fd818_c156d9bc",
+        "filename": "drivers/hwspinlock/hwspinlock_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-15T21:18:54Z",
+      "side": 1,
+      "message": "You are missing that `struct hwspinlock_ops` is already KMI so it must be kept stable. Adding the _bust_ field breaks compatibility.",
+      "parentUuid": "35f46fcc_0690bea3",
+      "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
