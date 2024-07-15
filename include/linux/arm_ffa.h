@@ -123,6 +123,12 @@
 #define FFA_FEAT_RXTX_MIN_SZ_64K	1
 #define FFA_FEAT_RXTX_MIN_SZ_16K	2
 
+/*
+ * The FF-A handle is used to identify a composite memory region and (-1UL) is
+ * reserved by the spec for the invalid handle.
+ */
+#define FFA_INVALID_HANDLE		(-1UL)
+
 /* FFA Bus/Device/Driver related */
 struct ffa_device {
 	u32 id;

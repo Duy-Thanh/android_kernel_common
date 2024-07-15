@@ -41,7 +41,10 @@
  * "ID value 0 must be returned at the Non-secure physical FF-A instance"
  * We share this ID with the host.
  */
-#define HOST_FFA_ID	0
+#define HOST_FFA_ID		0
+
+/* The number of concurrent transactions we keep track during fragmentation calls */
+#define FFA_NUM_TRANSACTION	(10)
 
 /*
  * A buffer to hold the maximum descriptor size we can see from the host,
@@ -61,6 +64,11 @@ struct kvm_ffa_buffers {
 	void *rx;
 };
 
+struct ffa_transaction {
+	u64 handle;
+	bool is_lend;
+};
+
 /*
  * Note that we don't currently lock these buffers explicitly, instead
  * relying on the locking of the host FFA buffers as we only have one
@@ -71,8 +79,20 @@ static struct kvm_ffa_buffers host_buffers;
 static u32 hyp_ffa_version;
 static bool has_version_negotiated;
 static hyp_spinlock_t version_lock;
+static struct ffa_transaction transfers[FFA_NUM_TRANSACTION];
 
 DECLARE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
+
+static struct ffa_transaction *find_ffa_transaction_locked(u64 handle)
+{
+	int i;
+
+	for (i = 0; i < FFA_NUM_TRANSACTION; i++)
+		if (transfers[i].handle == handle)
+			return &transfers[i];
+
+	return NULL;
+}
 
 static void ffa_to_smccc_error(struct arm_smccc_res *res, u64 ffa_errno)
 {
@@ -398,7 +418,7 @@ static void do_ffa_mem_frag_tx(struct arm_smccc_res *res,
 	struct ffa_mem_region_addr_range *buf;
 	int ret = FFA_RET_INVALID_PARAMETERS;
 	u32 nr_ranges;
-	bool is_lend = false;
+	struct ffa_transaction *transfer;
 
 	if (fraglen > KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE)
 		goto out;
@@ -413,8 +433,11 @@ static void do_ffa_mem_frag_tx(struct arm_smccc_res *res,
 	buf = hyp_buffers.tx;
 	memcpy(buf, host_buffers.tx, fraglen);
 	nr_ranges = fraglen / sizeof(*buf);
+	transfer = find_ffa_transaction_locked(PACK_HANDLE(handle_lo, handle_hi));
+	if (!transfer)
+		goto out_unlock;
 
-	ret = ffa_host_share_ranges(buf, nr_ranges, is_lend);
+	ret = ffa_host_share_ranges(buf, nr_ranges, transfer->is_lend);
 	if (ret) {
 		/*
 		 * We're effectively aborting the transaction, so we need
@@ -429,6 +452,8 @@ static void do_ffa_mem_frag_tx(struct arm_smccc_res *res,
 	ffa_mem_frag_tx(res, handle_lo, handle_hi, fraglen, endpoint_id);
 	if (res->a0 != FFA_SUCCESS && res->a0 != FFA_MEM_FRAG_RX)
 		WARN_ON(ffa_host_unshare_ranges(buf, nr_ranges));
+	else if (res->a0 == FFA_SUCCESS)
+		transfer->handle = FFA_INVALID_HANDLE;
 
 out_unlock:
 	hyp_spin_unlock(&host_buffers.lock);
@@ -458,6 +483,7 @@ static __always_inline void do_ffa_mem_xfer(const u64 func_id,
 	struct ffa_mem_region_attributes *ep_mem_access;
 	struct ffa_composite_mem_region *reg;
 	struct ffa_mem_region *buf;
+	struct ffa_transaction *transfer;
 	u32 offset, nr_ranges;
 	int ret = 0;
 
@@ -505,6 +531,12 @@ static __always_inline void do_ffa_mem_xfer(const u64 func_id,
 		goto out_unlock;
 	}
 
+	transfer = find_ffa_transaction_locked(FFA_INVALID_HANDLE);
+	if (!transfer) {
+		ret = FFA_RET_INVALID_PARAMETERS;
+		goto out_unlock;
+	}
+
 	nr_ranges /= sizeof(reg->constituents[0]);
 	ret = ffa_host_share_ranges(reg->constituents, nr_ranges, func_id == FFA_FN64_MEM_LEND);
 	if (ret)
@@ -517,6 +549,9 @@ static __always_inline void do_ffa_mem_xfer(const u64 func_id,
 
 		if (res->a3 != fraglen)
 			goto err_unshare;
+
+		transfer->handle  = PACK_HANDLE(res->a2, res->a3);
+		transfer->is_lend = func_id == FFA_FN64_MEM_LEND;
 	} else if (res->a0 != FFA_SUCCESS) {
 		goto err_unshare;
 	}
@@ -886,6 +921,7 @@ int hyp_ffa_init(void *pages)
 {
 	struct arm_smccc_res res;
 	void *tx, *rx;
+	int i;
 
 	if (kvm_host_psci_config.smccc_version < ARM_SMCCC_VERSION_1_1)
 		return 0;
@@ -935,6 +971,9 @@ int hyp_ffa_init(void *pages)
 	host_buffers = (struct kvm_ffa_buffers) {
 		.lock	= __HYP_SPIN_LOCK_UNLOCKED,
 	};
+
+	for (i = 0; i < FFA_NUM_TRANSACTION; i++)
+		transfers[i].handle = FFA_INVALID_HANDLE;
 
 	version_lock = __HYP_SPIN_LOCK_UNLOCKED;
 	return 0;
