@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7b955a_4509cee9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-15T22:19:49Z",
+      "side": 1,
+      "message": "Please document the changes done while backporting in the changelog.",
+      "revId": "28bf78daa8cf55db952ceb3b50788f2d9694f0a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
