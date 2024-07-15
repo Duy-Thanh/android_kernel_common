@@ -178,6 +178,24 @@
       "parentUuid": "a0dfc1ab_d543fff4",
       "revId": "62953ecafedf4bfcc1bfdf056479d897198b53fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f81b5dc1_d80743d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1880085
+      },
+      "writtenOn": "2024-07-15T07:02:02Z",
+      "side": 1,
+      "message": "Added new bug id and justification in BUG description.",
+      "parentUuid": "c81d07d0_d5739556",
+      "revId": "62953ecafedf4bfcc1bfdf056479d897198b53fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
