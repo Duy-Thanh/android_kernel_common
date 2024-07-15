@@ -248,6 +248,24 @@
       "parentUuid": "bb0a9b77_d47fa9ba",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8d80a6_e0e4522c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728636
+      },
+      "writtenOn": "2024-07-15T22:24:14Z",
+      "side": 1,
+      "message": "They asked about symbol absence.\n\nhttps://partnerissuetracker.corp.google.com/u/1/issues/352947441\nhttps://android-review.googlesource.com/c/kernel/common/+/3172199",
+      "parentUuid": "36520c70_d8ca5d51",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
