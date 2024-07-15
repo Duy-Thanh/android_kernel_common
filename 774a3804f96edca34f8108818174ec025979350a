@@ -123,6 +123,24 @@
       "parentUuid": "5c607b31_6b93fe72",
       "revId": "774a3804f96edca34f8108818174ec025979350a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc3f3113_c204e6cf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2438,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-15T15:19:55Z",
+      "side": 1,
+      "message": "Yep, that was my point, you can\u0027t reclaim a MMIO region from FF-A while you can donate it and share it.",
+      "parentUuid": "b30fbaae_79d48d89",
+      "revId": "774a3804f96edca34f8108818174ec025979350a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
