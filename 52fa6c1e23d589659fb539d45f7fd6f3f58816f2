@@ -70,6 +70,24 @@
       "parentUuid": "35f46fcc_0690bea3",
       "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85c3843_f9d886a8",
+        "filename": "drivers/hwspinlock/hwspinlock_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-15T23:01:14Z",
+      "side": 1,
+      "message": "```\nfunction symbol \u0027int __hwspin_lock_timeout(struct hwspinlock*, unsigned int, int, unsigned long*)\u0027 changed\n  CRC changed from 0xaf73026c to 0x4bf61ba5\n\nfunction symbol \u0027void __hwspin_unlock(struct hwspinlock*, int, unsigned long*)\u0027 changed\n  CRC changed from 0x7a43a485 to 0x1ee2752c\n\nfunction symbol \u0027int devm_hwspin_lock_register(struct device*, struct hwspinlock_device*, const struct hwspinlock_ops*, int, int)\u0027 changed\n  CRC changed from 0x6b52762f to 0xddfec29b\n\n... 3 omitted; 6 symbols have only CRC changes\n\ntype \u0027struct hwspinlock_ops\u0027 changed\n  byte size changed from 24 to 32\n  member \u0027int(* bust)(struct hwspinlock*, unsigned int)\u0027 was added\n  member \u0027void(* relax)(struct hwspinlock*)\u0027 changed\n    offset changed by 64\n```",
+      "parentUuid": "e88fd818_c156d9bc",
+      "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
