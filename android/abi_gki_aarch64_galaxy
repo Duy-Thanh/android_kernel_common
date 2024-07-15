@@ -41,6 +41,11 @@
   __traceiter_android_vh_watchdog_timer_softlockup
   __traceiter_console
   __traceiter_workqueue_execute_start
+<<<<<<< PATCH SET (c9f8be ANDROID: ABI: update galaxy symbol list)
+  __traceiter_kfree_skb
+  __traceiter_consume_skb
+=======
+>>>>>>> BASE      (de56b7 ANDROID: net: export symbol for tracepoint_consume_skb)
   __tracepoint_android_rvh_arm64_serror_panic
   __tracepoint_android_rvh_die_kernel_fault
   __tracepoint_android_rvh_do_el1_bti
@@ -58,5 +63,10 @@
   __tracepoint_android_vh_watchdog_timer_softlockup
   __tracepoint_console
   __tracepoint_workqueue_execute_start
+<<<<<<< PATCH SET (c9f8be ANDROID: ABI: update galaxy symbol list)
+  __tracepoint_kfree_skb
+  __tracepoint_consume_skb
+=======
+>>>>>>> BASE      (de56b7 ANDROID: net: export symbol for tracepoint_consume_skb)
   usb_set_device_state
   yield
