@@ -266,6 +266,24 @@
       "parentUuid": "36520c70_d8ca5d51",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67267eca_38ae8900",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-15T23:06:36Z",
+      "side": 1,
+      "message": "aosp/3172199 is the symbol change that needs to be rebased on top of this patch. Please submit the two patches together with this patch as the parent.",
+      "parentUuid": "ef8d80a6_e0e4522c",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
