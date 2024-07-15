@@ -51,6 +51,24 @@
       "parentUuid": "1274f146_70d9de26",
       "revId": "774a3804f96edca34f8108818174ec025979350a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8442cafc_0571cb07",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2438,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-15T14:39:23Z",
+      "side": 1,
+      "message": "Is it because the same FF-A \"RECLAIM\" invocation would be used in both sharing and lend case?\n\nIf that\u0027s the case, how about\n\n1. try to unshare (will walk the stage-2 page-table and would abort if the memory is not owned by the host)\n2. on failure, try to \"reclaim\"",
+      "parentUuid": "0dc3986d_0cb59fc7",
+      "revId": "774a3804f96edca34f8108818174ec025979350a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
