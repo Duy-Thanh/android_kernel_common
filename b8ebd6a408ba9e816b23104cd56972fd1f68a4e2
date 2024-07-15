@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084446086",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3172561?revision\u003d1",
+      "key": {
+        "uuid": "df02de4c_21f702a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-15T10:49:36Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android14-6.1.\nBase branch change: [3153983](https://android-review.googlesource.com/c/3153983).\n\n```\n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_uprobes_replace_page,\n    - DECLARE_HOOK(android_vh_shmem_swapin_folio,\n    - \tTP_PROTO(struct folio *folio),\n    - \tTP_ARGS(folio));\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_kmalloc_large_alloced,\n    + DECLARE_HOOK(android_vh_tune_fault_around_bytes,\n    + \tTP_PROTO(unsigned long *fault_around_bytes),\n    + \tTP_ARGS(fault_around_bytes));\n     +DECLARE_HOOK(android_vh_madvise_cold_or_pageout_page,\n     +\tTP_PROTO(bool pageout, struct page *page),\n     +\tTP_ARGS(pageout, page));\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "b8ebd6a408ba9e816b23104cd56972fd1f68a4e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084446086",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3172561?revision\u003d1",
+      "key": {
+        "uuid": "64fb80ac_f51b7f64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-15T10:49:36Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "b8ebd6a408ba9e816b23104cd56972fd1f68a4e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
