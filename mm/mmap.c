@@ -1930,6 +1930,7 @@ find_vma_prev(struct mm_struct *mm, unsigned long addr,
 		vma = mas_next(&mas, ULONG_MAX);
 	return vma;
 }
+EXPORT_SYMBOL_GPL(find_vma_prev);
 
 /*
  * Verify that the stack growth is acceptable and
