@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb607419_625656da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-15T22:13:53Z",
+      "side": 1,
+      "message": "It would be good to mention the reason for the reverts (replacing old implementation with the latest one?)",
+      "revId": "e03a40f7dc334c16701f7e05a96741eefc3642eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
