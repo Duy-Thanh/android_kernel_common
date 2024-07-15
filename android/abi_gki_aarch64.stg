@@ -189225,6 +189225,12 @@ member {
   offset: 64
 }
 member {
+  id: 0x0489a9d9
+  name: "suspend_on_no_request"
+  type_id: 0x6d7f5ff6
+  offset: 1672
+}
+member {
   id: 0x0b4c6d3f
   name: "suspend_opp"
   type_id: 0x19e66c71
@@ -266594,6 +266600,7 @@ struct_union {
     member_id: 0xbbefba04
     member_id: 0xb768ef54
     member_id: 0x2061f6ba
+    member_id: 0x0489a9d9
     member_id: 0x2d081217
   }
 }
