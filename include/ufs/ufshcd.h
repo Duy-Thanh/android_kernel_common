@@ -460,6 +460,9 @@ struct ufs_clk_scaling {
 	bool is_initialized;
 	bool is_busy_started;
 	bool is_suspended;
+#ifndef __GENKSYMS__
+	bool suspend_on_no_request;
+#endif
 
 	ANDROID_KABI_RESERVE(1);
 };
