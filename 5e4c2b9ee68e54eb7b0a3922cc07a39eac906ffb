@@ -99,6 +99,26 @@
       "tag": "",
       "revId": "5e4c2b9ee68e54eb7b0a3922cc07a39eac906ffb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084440571",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3171470?revision\u003d1",
+      "key": {
+        "uuid": "8992932f_56817fb8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-15T10:50:14Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/022d81a709cd553bbe2db8675f8e824f4aee6284) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d022d81a709cd553bbe2db8675f8e824f4aee6284).\n\n```\n      ## net/unix/af_unix.c ##\n     @@ net/unix/af_unix.c: static struct sk_buff *manage_oob(struct sk_buff *skb, struct sock *sk,\n    @@ net/unix/af_unix.c: static struct sk_buff *manage_oob(struct sk_buff *skb, struc\n      \t\t\t\tskb_unlink(skb, \u0026sk-\u003esk_receive_queue);\n      \t\t\t\tWRITE_ONCE(u-\u003eoob_skb, NULL);\n      \t\t\t\tif (!WARN_ON_ONCE(skb_unref(skb)))\n    -@@ net/unix/af_unix.c: again:\n    +@@ net/unix/af_unix.c: redo:\n      #if IS_ENABLED(CONFIG_AF_UNIX_OOB)\n      \t\tif (skb) {\n      \t\t\tskb \u003d manage_oob(skb, sk, flags, copied);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "5e4c2b9ee68e54eb7b0a3922cc07a39eac906ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
