@@ -79,6 +79,46 @@
       "tag": "",
       "revId": "b75ebb4fc845584650610acb08f614fe6909186d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084442302",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3172641?revision\u003d1",
+      "key": {
+        "uuid": "41acaa9b_de8df484",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-15T11:41:16Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android13-5.15.\nBase branch change: [3131560](https://android-review.googlesource.com/c/3131560).\n\n```\n      ## net/unix/af_unix.c ##\n     @@ net/unix/af_unix.c: static int queue_oob(struct socket *sock, struct msghdr *msg, struct sock *other\n    @@ net/unix/af_unix.c: static int unix_stream_recv_urg(struct unix_stream_read_stat\n      \t\tmutex_unlock(\u0026u-\u003eiolock);\n      \t\treturn -EINVAL;\n     @@ net/unix/af_unix.c: static int unix_stream_recv_urg(struct unix_stream_read_state *state)\n    + \tif (!(state-\u003eflags \u0026 MSG_PEEK))\n      \t\tWRITE_ONCE(u-\u003eoob_skb, NULL);\n    - \telse\n    - \t\tskb_get(oob_skb);\n    -+\n    + \n     +\tspin_unlock(\u0026sk-\u003esk_receive_queue.lock);\n      \tunix_state_unlock(sk);\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "b75ebb4fc845584650610acb08f614fe6909186d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084442302",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3172641?revision\u003d1",
+      "key": {
+        "uuid": "0aa5faf5_684e1e29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-15T11:41:16Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/518a994aa0b87d96f1bc6678a7035df5d1fcd7a1) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d518a994aa0b87d96f1bc6678a7035df5d1fcd7a1).\n\n```\n      ## net/unix/af_unix.c ##\n     @@ net/unix/af_unix.c: static int queue_oob(struct socket *sock, struct msghdr *msg, struct sock *other\n    @@ net/unix/af_unix.c: static int unix_stream_recv_urg(struct unix_stream_read_stat\n      \t\tmutex_unlock(\u0026u-\u003eiolock);\n      \t\treturn -EINVAL;\n     @@ net/unix/af_unix.c: static int unix_stream_recv_urg(struct unix_stream_read_state *state)\n    + \tif (!(state-\u003eflags \u0026 MSG_PEEK))\n      \t\tWRITE_ONCE(u-\u003eoob_skb, NULL);\n    - \telse\n    - \t\tskb_get(oob_skb);\n    -+\n    + \n     +\tspin_unlock(\u0026sk-\u003esk_receive_queue.lock);\n      \tunix_state_unlock(sk);\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "b75ebb4fc845584650610acb08f614fe6909186d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
