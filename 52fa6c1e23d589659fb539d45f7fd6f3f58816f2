@@ -34,6 +34,24 @@
       ],
       "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35f46fcc_0690bea3",
+        "filename": "drivers/hwspinlock/hwspinlock_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3497902
+      },
+      "writtenOn": "2024-07-15T17:12:36Z",
+      "side": 1,
+      "message": "I didn\u0027t get why it breaks KMI, it\u0027s new function and modules implementing it suppose to pass this id to check against lock owner. Please elaborate if i am missing something.",
+      "parentUuid": "d7583e43_fb0834e8",
+      "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
