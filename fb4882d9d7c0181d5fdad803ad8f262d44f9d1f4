@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084504266",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3172561?revision\u003d3",
+      "key": {
+        "uuid": "cc1662ec_23e01cff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-15T18:27:23Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android14-6.1.\nBase branch change: [3153983](https://android-review.googlesource.com/c/3153983).\n\n```\n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_uprobes_replace_page,\n    - DECLARE_HOOK(android_vh_shmem_swapin_folio,\n    - \tTP_PROTO(struct folio *folio),\n    - \tTP_ARGS(folio));\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_kmalloc_large_alloced,\n    + DECLARE_HOOK(android_vh_tune_fault_around_bytes,\n    + \tTP_PROTO(unsigned long *fault_around_bytes),\n    + \tTP_ARGS(fault_around_bytes));\n     +DECLARE_HOOK(android_vh_madvise_cold_or_pageout_page,\n     +\tTP_PROTO(bool pageout, struct page *page),\n     +\tTP_ARGS(pageout, page));\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "fb4882d9d7c0181d5fdad803ad8f262d44f9d1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
