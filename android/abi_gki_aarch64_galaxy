@@ -89,6 +89,7 @@
   __traceiter_error_report_end
   __traceiter_workqueue_execute_start
   __traceiter_kfree_skb
+  __traceiter_consume_skb
   __tracepoint_android_rvh_arm64_serror_panic
   __tracepoint_android_rvh_die_kernel_fault
   __tracepoint_android_rvh_do_el1_bti
@@ -123,5 +124,6 @@
   __tracepoint_error_report_end
   __tracepoint_workqueue_execute_start
   __tracepoint_kfree_skb
+  __tracepoint_consume_skb
   usb_set_device_state
   yield

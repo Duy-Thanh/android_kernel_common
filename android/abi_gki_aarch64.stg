@@ -326723,6 +326723,13 @@ function {
   parameter_id: 0x04f728c1
 }
 function {
+  id: 0x9bbca89e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x054f691a
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x9bbcaaf0
   return_type_id: 0x6720d32f
   parameter_id: 0x18e64f74
@@ -347191,6 +347198,15 @@ elf_symbol {
   full_name: "__traceiter_console"
 }
 elf_symbol {
+  id: 0xbbabc492
+  name: "__traceiter_consume_skb"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x569fa797
+  type_id: 0x9bbca89e
+  full_name: "__traceiter_consume_skb"
+}
+elf_symbol {
   id: 0x58dd6501
   name: "__traceiter_cpu_frequency"
   is_defined: true
@@ -351941,6 +351957,15 @@ elf_symbol {
   crc: 0xa40492f5
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_console"
+}
+elf_symbol {
+  id: 0x163f0724
+  name: "__tracepoint_consume_skb"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xba9fa4f5
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_consume_skb"
 }
 elf_symbol {
   id: 0x78b22997
@@ -410489,6 +410514,7 @@ interface {
   symbol_id: 0xdd24ab36
   symbol_id: 0xce25d5be
   symbol_id: 0x7443ed9a
+  symbol_id: 0xbbabc492
   symbol_id: 0x58dd6501
   symbol_id: 0x1643e606
   symbol_id: 0x4576397a
@@ -411017,6 +411043,7 @@ interface {
   symbol_id: 0x9772d1c0
   symbol_id: 0x9600f350
   symbol_id: 0x4971cb68
+  symbol_id: 0x163f0724
   symbol_id: 0x78b22997
   symbol_id: 0x10bc6dec
   symbol_id: 0x64c2c28c
