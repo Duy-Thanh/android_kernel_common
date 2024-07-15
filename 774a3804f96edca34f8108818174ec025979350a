@@ -87,6 +87,24 @@
       "parentUuid": "8442cafc_0571cb07",
       "revId": "774a3804f96edca34f8108818174ec025979350a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c607b31_6b93fe72",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2438,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-15T15:15:40Z",
+      "side": 1,
+      "message": "Then you\u0027d probably need to restrict the donate_ffa and share_ffa to !MMIO regions to avoid this imbalance.\n\nAlternatively, __host_check_page_state_range() will cover all cases.",
+      "parentUuid": "1b64d4dd_bab9b3e2",
+      "revId": "774a3804f96edca34f8108818174ec025979350a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
