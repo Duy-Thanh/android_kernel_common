@@ -40,6 +40,7 @@
   __traceiter_android_vh_try_to_freeze_todo_unfrozen
   __traceiter_android_vh_watchdog_timer_softlockup
   __traceiter_console
+  __traceiter_consume_skb
   __traceiter_workqueue_execute_start
   __tracepoint_android_rvh_arm64_serror_panic
   __tracepoint_android_rvh_die_kernel_fault
@@ -57,6 +58,7 @@
   __tracepoint_android_vh_try_to_freeze_todo_unfrozen
   __tracepoint_android_vh_watchdog_timer_softlockup
   __tracepoint_console
+  __tracepoint_consume_skb
   __tracepoint_workqueue_execute_start
   usb_set_device_state
   yield
