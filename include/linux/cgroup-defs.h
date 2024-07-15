@@ -192,6 +192,15 @@ struct cgroup_subsys_state {
 	 */
 	atomic_t online_cnt;
 
+	/*
+	 * Keep track of total numbers of visible descendant CSSes.
+	 * The total number of dying CSSes is tracked in
+	 * css->cgroup->nr_dying_subsys[ssid].
+	 * Protected by cgroup_mutex.
+	 * Fills 4 byte hole to avoid Android KABI break.
+	 */
+	u32 nr_descendants;
+
 	/* percpu_ref killing and RCU release */
 	struct work_struct destroy_work;
 	struct rcu_work destroy_rwork;
@@ -540,7 +549,11 @@ struct cgroup {
 	struct bpf_local_storage __rcu  *bpf_cgrp_storage;
 #endif
 
-	ANDROID_BACKPORT_RESERVE(1);
+	/*
+	 * Keep track of total number of dying CSSes at and below this cgroup.
+	 * Protected by cgroup_mutex.
+	 */
+	ANDROID_BACKPORT_USE(1, int (*nr_dying_subsys)[CGROUP_SUBSYS_COUNT]);
 
 	/* All ancestors including self */
 	struct cgroup *ancestors[];

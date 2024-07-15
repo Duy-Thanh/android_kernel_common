@@ -3635,12 +3635,40 @@ static int cgroup_events_show(struct seq_file *seq, void *v)
 static int cgroup_stat_show(struct seq_file *seq, void *v)
 {
 	struct cgroup *cgroup = seq_css(seq)->cgroup;
+	struct cgroup_subsys_state *css;
+	int dying_cnt[CGROUP_SUBSYS_COUNT];
+	int ssid;
 
 	seq_printf(seq, "nr_descendants %d\n",
 		   cgroup->nr_descendants);
+
+	/*
+	 * Show the number of live and dying csses associated with each of
+	 * non-inhibited cgroup subsystems that is bound to cgroup v2.
+	 *
+	 * Without proper lock protection, racing is possible. So the
+	 * numbers may not be consistent when that happens.
+	 */
+	rcu_read_lock();
+	for (ssid = 0; ssid < CGROUP_SUBSYS_COUNT; ssid++) {
+		dying_cnt[ssid] = -1;
+		if ((BIT(ssid) & cgrp_dfl_inhibit_ss_mask) ||
+		    (cgroup_subsys[ssid]->root !=  &cgrp_dfl_root))
+			continue;
+		css = rcu_dereference_raw(cgroup->subsys[ssid]);
+		dying_cnt[ssid] = *(cgroup->nr_dying_subsys)[ssid];
+		seq_printf(seq, "nr_subsys_%s %d\n", cgroup_subsys[ssid]->name,
+			   css ? (css->nr_descendants + 1) : 0);
+	}
+
 	seq_printf(seq, "nr_dying_descendants %d\n",
 		   cgroup->nr_dying_descendants);
-
+	for (ssid = 0; ssid < CGROUP_SUBSYS_COUNT; ssid++) {
+		if (dying_cnt[ssid] >= 0)
+			seq_printf(seq, "nr_dying_subsys_%s %d\n",
+				   cgroup_subsys[ssid]->name, dying_cnt[ssid]);
+	}
+	rcu_read_unlock();
 	return 0;
 }
 
@@ -5385,6 +5413,7 @@ static void css_free_rwork_fn(struct work_struct *work)
 			kernfs_put(cgrp->kn);
 			psi_cgroup_free(cgrp);
 			cgroup_rstat_exit(cgrp);
+			kfree(cgrp->nr_dying_subsys);
 			kfree(cgrp);
 		} else {
 			/*
@@ -5410,6 +5439,8 @@ static void css_release_work_fn(struct work_struct *work)
 	list_del_rcu(&css->sibling);
 
 	if (ss) {
+		struct cgroup *parent_cgrp;
+
 		/* css release path */
 		if (!list_empty(&css->rstat_css_node)) {
 			cgroup_rstat_flush(cgrp);
@@ -5419,6 +5450,14 @@ static void css_release_work_fn(struct work_struct *work)
 		cgroup_idr_replace(&ss->css_idr, NULL, css->id);
 		if (ss->css_released)
 			ss->css_released(css);
+
+		--*(cgrp->nr_dying_subsys)[ss->id];
+		WARN_ON_ONCE(css->nr_descendants || *(cgrp->nr_dying_subsys)[ss->id]);
+		parent_cgrp = cgroup_parent(cgrp);
+		while (parent_cgrp) {
+			--*(parent_cgrp->nr_dying_subsys)[ss->id];
+			parent_cgrp = cgroup_parent(parent_cgrp);
+		}
 	} else {
 		struct cgroup *tcgrp;
 
@@ -5503,8 +5542,11 @@ static int online_css(struct cgroup_subsys_state *css)
 		rcu_assign_pointer(css->cgroup->subsys[ss->id], css);
 
 		atomic_inc(&css->online_cnt);
-		if (css->parent)
+		if (css->parent) {
 			atomic_inc(&css->parent->online_cnt);
+			while ((css = css->parent))
+				css->nr_descendants++;
+		}
 	}
 	return ret;
 }
@@ -5526,6 +5568,16 @@ static void offline_css(struct cgroup_subsys_state *css)
 	RCU_INIT_POINTER(css->cgroup->subsys[ss->id], NULL);
 
 	wake_up_all(&css->cgroup->offline_waitq);
+
+	--*(css->cgroup->nr_dying_subsys)[ss->id];
+	/*
+	 * Parent css and cgroup cannot be freed until after the freeing
+	 * of child css, see css_free_rwork_fn().
+	 */
+	while ((css = css->parent)) {
+		css->nr_descendants--;
+		++*(css->cgroup->nr_dying_subsys)[ss->id];
+	}
 }
 
 /**
@@ -5601,9 +5653,15 @@ static struct cgroup *cgroup_create(struct cgroup *parent, const char *name,
 	if (!cgrp)
 		return ERR_PTR(-ENOMEM);
 
+	cgrp->nr_dying_subsys = kzalloc(sizeof(int) * CGROUP_SUBSYS_COUNT, GFP_KERNEL);
+	if (!cgrp->nr_dying_subsys) {
+		ret = -ENOMEM;
+		goto out_free_cgrp;
+	}
+
 	ret = percpu_ref_init(&cgrp->self.refcnt, css_release, 0, GFP_KERNEL);
 	if (ret)
-		goto out_free_cgrp;
+		goto out_free_cgrp_dying_subsys;
 
 	ret = cgroup_rstat_init(cgrp);
 	if (ret)
@@ -5697,6 +5755,8 @@ out_stat_exit:
 	cgroup_rstat_exit(cgrp);
 out_cancel_ref:
 	percpu_ref_exit(&cgrp->self.refcnt);
+out_free_cgrp_dying_subsys:
+	kfree(cgrp->nr_dying_subsys);
 out_free_cgrp:
 	kfree(cgrp);
 	return ERR_PTR(ret);
