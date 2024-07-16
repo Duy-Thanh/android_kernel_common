@@ -111,6 +111,30 @@
       },
       "revId": "ed889835884da806b124778f4c87cd3361f8d438",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a92254_f4f619d0",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-16T17:33:51Z",
+      "side": 1,
+      "message": "The changelog says this change is to fix ABI. If these changes are not affecting the ABI then they should be placed in a separate patch with their own changelog explaining why they are needed.",
+      "parentUuid": "1cfe1b6b_ae0f5ee2",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "ed889835884da806b124778f4c87cd3361f8d438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
