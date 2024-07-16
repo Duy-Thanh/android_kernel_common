@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f578b495_92356cbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-16T21:56:10Z",
+      "side": 1,
+      "message": "Please create a respin request:\n https://source.android.com/docs/core/architecture/kernel/gki-releases#respin \n \nAnd add that `Bug: #` to the commit message",
+      "revId": "b863805f599b778e584aaf588a2994c8e1819991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
