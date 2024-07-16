@@ -357900,6 +357900,15 @@ elf_symbol {
   full_name: "cma_release"
 }
 elf_symbol {
+  id: 0x036561b6
+  name: "compact_node_async"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x859ec937
+  type_id: 0x09506558
+  full_name: "compact_node_async"
+}
+elf_symbol {
   id: 0x4f627b39
   name: "compat_ptr_ioctl"
   is_defined: true
@@ -412342,6 +412351,7 @@ interface {
   symbol_id: 0x5f9864aa
   symbol_id: 0x966a7c42
   symbol_id: 0xab62b21c
+  symbol_id: 0x036561b6
   symbol_id: 0x4f627b39
   symbol_id: 0xda163e44
   symbol_id: 0xb375007c
