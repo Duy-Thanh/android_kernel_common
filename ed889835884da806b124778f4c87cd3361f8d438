@@ -159,6 +159,30 @@
       },
       "revId": "ed889835884da806b124778f4c87cd3361f8d438",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9354fa4e_05ad18d9",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-16T17:40:48Z",
+      "side": 1,
+      "message": "Please clarify that in the changelog because it\u0027s confusing with the way it is written today. It claims to fix the ABI but these definitions do nothing to ABI.",
+      "parentUuid": "8ed6e707_67dbefd6",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "ed889835884da806b124778f4c87cd3361f8d438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
