@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084594958",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3175461?revision\u003d1",
+      "key": {
+        "uuid": "48156edc_683f6bae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-16T07:27:37Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/0e10f65fa989fb9251df8dc0e85bb401c6a030b0).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@\n    - #include \u003ctrace/hooks/audio_usboffload.h\u003e\n    - #include \u003ctrace/hooks/drm_framebuffer.h\u003e\n    - #include \u003ctrace/hooks/drm_atomic.h\u003e\n    -+#include \u003ctrace/hooks/usb.h\u003e\n    - \n    - /*\n    -  * Export tracepoints that act as a bare tracehook (ie: have no trace event\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_audio_usb_offload_disconnect);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_atomic_remove_fb);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_drm_atomic_check_modeset);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_thermal_zone_device);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_contig_range_not_isolated);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_warn_alloc_tune_ratelimit);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_warn_alloc_show_mem_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_vm_swappiness);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_new_device_added);\n     \n      ## drivers/usb/core/hub.c ##\n    @@ drivers/usb/core/hub.c: int usb_new_device(struct usb_device *udev)\n      \t/* export the usbdev device-node for libusb */\n      \tudev-\u003edev.devt \u003d MKDEV(USB_DEVICE_MAJOR,\n      \t\t\t(((udev-\u003ebus-\u003ebusnum-1) * 128) + (udev-\u003edevnum-1)));\n    -\n    - ## include/trace/hooks/usb.h (new) ##\n    -@@\n    -+/* SPDX-License-Identifier: GPL-2.0 */\n    -+#undef TRACE_SYSTEM\n    -+#define TRACE_SYSTEM usb\n    -+#undef TRACE_INCLUDE_PATH\n    -+#define TRACE_INCLUDE_PATH trace/hooks\n    -+#if !defined(_TRACE_HOOK_USB_H) || defined(TRACE_HEADER_MULTI_READ)\n    -+#define _TRACE_HOOK_USB_H\n    -+#include \u003ctrace/hooks/vendor_hooks.h\u003e\n    -+/*\n    -+ * Following tracepoints are not exported in tracefs and provide a\n    -+ * mechanism for vendor modules to hook and extend functionality\n    -+ */\n    -+struct usb_device;\n    -+DECLARE_HOOK(android_vh_usb_new_device_added,\n    -+\tTP_PROTO(struct usb_device *udev, int *err),\n    -+\tTP_ARGS(udev, err));\n    -+#endif /* _TRACE_HOOK_USB_H */\n    -+/* This part must be outside protection */\n    -+#include \u003ctrace/define_trace.h\u003e\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "9df57e8d26abdc4007aa1aea3710ad9e64d517e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084594958",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3175461?revision\u003d1",
+      "key": {
+        "uuid": "45856448_020d69cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-16T07:27:37Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Aran Dalton \u003carda@allwinnertech.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "f65d55b8_aecbede2",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Aran Dalton \u003carda@allwinnertech.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9df57e8d26abdc4007aa1aea3710ad9e64d517e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
