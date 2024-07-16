@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "70ffcb00420c7ca9150e5475b5384f6d562247a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084636207",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3176619?revision\u003d2",
+      "key": {
+        "uuid": "9c36bbe3_3f3e196f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-16T16:29:52Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/0add751dfb191891de5e64494462c737870f879c).\n\n```\n      ## fs/fuse/backing.c ##\n     @@ fs/fuse/backing.c: int fuse_lookup_backing(struct fuse_bpf_args *fa, struct inode *dir,\n    @@ fs/fuse/backing.c: int fuse_lookup_backing(struct fuse_bpf_args *fa, struct inod\n      \t\treturn 0;\n      \t}\n      \n    -+\terr \u003d follow_down(\u0026fuse_entry-\u003ebacking_path);\n    ++\terr \u003d follow_down(\u0026fuse_entry-\u003ebacking_path, 0);\n     +\tif (err)\n     +\t\tgoto err_out;\n     +\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "70ffcb00420c7ca9150e5475b5384f6d562247a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
