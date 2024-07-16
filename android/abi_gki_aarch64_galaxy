@@ -14,6 +14,7 @@
   caches_clean_inval_pou
   capable
   cleancache_register_ops
+  compact_node_async
   copy_page
   _dev_alert
   device_pm_wait_for_dev
