@@ -16,6 +16,24 @@
       "message": "These all need a respin request bug. See the Lint comment for details.",
       "revId": "43428ad160e3afeef60f5a44f8b73d817dd42fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b880a773_689f7faf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-16T15:50:55Z",
+      "side": 1,
+      "message": "marking unresolved.",
+      "parentUuid": "d0433eee_48f9652b",
+      "revId": "43428ad160e3afeef60f5a44f8b73d817dd42fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
