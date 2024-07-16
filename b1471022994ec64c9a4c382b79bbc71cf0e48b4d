@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ea5445_9dd059fb",
+        "filename": "kernel/pid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-16T17:14:11Z",
+      "side": 1,
+      "message": "You are probably better off exporting this function. All other functions used in here are already exported, so you can use all of them from your module.",
+      "range": {
+        "startLine": 570,
+        "startChar": 7,
+        "endLine": 570,
+        "endChar": 20
+      },
+      "revId": "b1471022994ec64c9a4c382b79bbc71cf0e48b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "892e893b_a4d96214",
+        "filename": "mm/mm_init.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-16T17:14:11Z",
+      "side": 1,
+      "message": "This should not be exported. If you need to add a sysfs node please add it under your module\u0027s `/sys/kernel/\u003cmodule\u003e/`. As an example see how `/sys/kernel/dma_heap/total_pools_kb` is exposed in `dma_heap_sysfs_setup`.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 27
+      },
+      "revId": "b1471022994ec64c9a4c382b79bbc71cf0e48b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "758c6edb_f0ff0419",
+        "filename": "mm/mmap.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-16T17:14:11Z",
+      "side": 1,
+      "message": "All functions used here are already exported. You can simply open-code this function inside your module.",
+      "range": {
+        "startLine": 1933,
+        "startChar": 0,
+        "endLine": 1933,
+        "endChar": 33
+      },
+      "revId": "b1471022994ec64c9a4c382b79bbc71cf0e48b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
