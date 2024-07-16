@@ -941,8 +941,8 @@ static inline int is_mergeable_vma(struct vm_area_struct *vma,
 		return 0;
 	if (!anon_vma_name_eq(anon_vma_name(vma), anon_name))
 		return 0;
-	if (!is_mergable_pad_vma(vma, vm_flags))
-		return 0;
+	// if (!is_mergable_pad_vma(vma, vm_flags))
+	// 	return 0;
 	return 1;
 }
 
@@ -2459,7 +2459,7 @@ int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
 
 	/* Success. */
 	if (!err) {
-		split_pad_vma(vma, new, addr, new_below);
+		// split_pad_vma(vma, new, addr, new_below);
 		return 0;
 	}
 
