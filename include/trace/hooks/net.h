@@ -16,7 +16,28 @@ DECLARE_HOOK(android_vh_ptype_head,
 
 struct sock;
 DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
+<<<<<<< HEAD   (ed4225 ANDROID: vendor_hooks: Add tune swappiness hook in get_scan_)
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+||||||| BASE
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_connect,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+DECLARE_HOOK(android_vh_sk_alloc,
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_sk_free,
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+=======
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_connect,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+DECLARE_HOOK(android_vh_sk_alloc,
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_sk_free,
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+struct request_sock;
+DECLARE_HOOK(android_vh_inet_csk_clone_lock,
+	TP_PROTO(struct sock *newsk, const struct request_sock *req), TP_ARGS(newsk, req));
+>>>>>>> CHANGE (c86dca ANDROID: GKI: net: add vendor hook for network quality estim)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
