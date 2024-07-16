@@ -35,11 +35,6 @@ static const struct prot_bits stage2_pte_bits[] = {
 		.set	= " ",
 		.clear	= "F",
 	}, {
-		.mask	= KVM_PTE_LEAF_ATTR_HI_S2_XN | PTE_VALID,
-		.val	= KVM_PTE_LEAF_ATTR_HI_S2_XN | PTE_VALID,
-		.set	= "XN",
-		.clear	= "  ",
-	}, {
 		.mask	= KVM_PTE_LEAF_ATTR_LO_S2_S2AP_R | PTE_VALID,
 		.val	= KVM_PTE_LEAF_ATTR_LO_S2_S2AP_R | PTE_VALID,
 		.set	= "R",
@@ -49,6 +44,12 @@ static const struct prot_bits stage2_pte_bits[] = {
 		.val	= KVM_PTE_LEAF_ATTR_LO_S2_S2AP_W | PTE_VALID,
 		.set	= "W",
 		.clear	= " ",
+	}, {
+		.mask	= KVM_PTE_LEAF_ATTR_HI_S2_XN | PTE_VALID,
+		.val	= FIELD_PREP_CONST(KVM_PTE_LEAF_ATTR_HI_S2_XN,
+					   KVM_PTE_LEAF_ATTR_HI_S2_XN_XN) | PTE_VALID,
+		.set	= " ",
+		.clear	= "X",
 	}, {
 		.mask	= KVM_PTE_LEAF_ATTR_LO_S2_AF | PTE_VALID,
 		.val	= KVM_PTE_LEAF_ATTR_LO_S2_AF | PTE_VALID,
