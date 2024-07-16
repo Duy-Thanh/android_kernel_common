@@ -16,6 +16,24 @@
       "message": "Please document the changes done while backporting in the changelog.",
       "revId": "28bf78daa8cf55db952ceb3b50788f2d9694f0a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbafdf2d_49af7592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-07-16T17:32:38Z",
+      "side": 1,
+      "message": "Added to description",
+      "parentUuid": "4d7b955a_4509cee9",
+      "revId": "28bf78daa8cf55db952ceb3b50788f2d9694f0a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
