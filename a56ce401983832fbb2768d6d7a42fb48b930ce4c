@@ -74,6 +74,30 @@
       ],
       "revId": "a56ce401983832fbb2768d6d7a42fb48b930ce4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35010890_a415897c",
+        "filename": "include/linux/extcon.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-16T16:13:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7073bfa_6ec71492",
+      "range": {
+        "startLine": 150,
+        "startChar": 31,
+        "endLine": 150,
+        "endChar": 34
+      },
+      "revId": "a56ce401983832fbb2768d6d7a42fb48b930ce4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
