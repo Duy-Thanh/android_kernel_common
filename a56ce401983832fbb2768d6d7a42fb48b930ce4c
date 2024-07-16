@@ -33,6 +33,47 @@
       "message": "Must be submitted upstream first.",
       "revId": "a56ce401983832fbb2768d6d7a42fb48b930ce4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7073bfa_6ec71492",
+        "filename": "include/linux/extcon.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-16T16:13:25Z",
+      "side": 1,
+      "message": "duplicate of above.",
+      "range": {
+        "startLine": 150,
+        "startChar": 31,
+        "endLine": 150,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "88505222_ac2d2b8a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/extcon.h",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "#define EXTCON_PROP_JACK_MAX\t\t100\n#define EXTCON_PROP_JACK_CNT\t(EXTCON_PROP_JACK_MAX - EXTCON_PROP_JACK_MIN + 1)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a56ce401983832fbb2768d6d7a42fb48b930ce4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
