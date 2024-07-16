@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1781493f_13774ae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-07-16T15:02:16Z",
+      "side": 1,
+      "message": "Hello, per the Android Contribution Guidelines found here https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md, we have a strict upstream first policy. Therefore this patch should be sent upstream prior to backporting to Android 15-6.6",
+      "revId": "a56ce401983832fbb2768d6d7a42fb48b930ce4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
