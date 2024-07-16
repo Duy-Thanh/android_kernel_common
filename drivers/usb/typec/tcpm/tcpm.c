@@ -1058,6 +1058,7 @@ static int tcpm_set_roles(struct tcpm_port *port, bool attached,
 {
 	enum typec_orientation orientation;
 	enum usb_role usb_role;
+	int state;
 	int ret;
 
 	if (port->polarity == TYPEC_POLARITY_CC1)
@@ -1090,7 +1091,14 @@ static int tcpm_set_roles(struct tcpm_port *port, bool attached,
 		}
 	}
 
-	ret = tcpm_mux_set(port, TYPEC_STATE_USB, usb_role, orientation);
+	if (port->state == DEBUG_ACC_ATTACHED)
+		state = TYPEC_MODE_DEBUG;
+	else if (port->state == AUDIO_ACC_ATTACHED)
+		state = TYPEC_MODE_AUDIO;
+	else
+		state = TYPEC_STATE_USB;
+
+	ret = tcpm_mux_set(port, state, usb_role, orientation);
 	if (ret < 0)
 		return ret;
 
