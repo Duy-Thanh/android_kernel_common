@@ -135,6 +135,30 @@
       },
       "revId": "ed889835884da806b124778f4c87cd3361f8d438",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed6e707_67dbefd6",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-07-16T17:37:45Z",
+      "side": 1,
+      "message": "Sorry I meant this patch restores swap.h to the way it was before applying the 2 FROMLIST patches (no diff), (instead of changing each individual patch to conform with the ABI).",
+      "parentUuid": "d3a92254_f4f619d0",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "ed889835884da806b124778f4c87cd3361f8d438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
