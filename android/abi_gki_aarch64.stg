@@ -298960,6 +298960,11 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x17956035
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1c34c69b
+}
+function {
   id: 0x179e48e8
   return_type_id: 0x48b5725f
   parameter_id: 0x18bd6530
@@ -372729,6 +372734,15 @@ elf_symbol {
   full_name: "gro_cells_receive"
 }
 elf_symbol {
+  id: 0xa589de7f
+  name: "groups_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x732dd326
+  type_id: 0x17956035
+  full_name: "groups_free"
+}
+elf_symbol {
   id: 0x3f69092d
   name: "gs_alloc_req"
   is_defined: true
@@ -414592,6 +414606,7 @@ interface {
   symbol_id: 0x0ac30c0d
   symbol_id: 0x61ad5a29
   symbol_id: 0x4b6846bd
+  symbol_id: 0xa589de7f
   symbol_id: 0x3f69092d
   symbol_id: 0x61776461
   symbol_id: 0xfeac8d5f
