@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b46e91_50192602",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-07-17T09:46:13Z",
+      "side": 1,
+      "message": "How will this affect future LTS merges? Will this not likely introduce merge conflicts?\n\nAlso, not everything looks only vfs/nfs only ...",
+      "revId": "88eb084d18c6124acccfe06edfc161dfa11bb34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
