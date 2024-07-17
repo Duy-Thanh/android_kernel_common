@@ -51,6 +51,24 @@
       "parentUuid": "02b46e91_50192602",
       "revId": "88eb084d18c6124acccfe06edfc161dfa11bb34b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727abbe5_efe5225a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-17T09:57:34Z",
+      "side": 1,
+      "message": "It\u0027s a clean revert of the previous release, same thing we did in the 5.15 tree when the NFS changes were backported.  They were much more intrusive here than in 5.15, so you all might not have noticed it happening there.\n\nFuture LTS merges will be interesting in places, but so far it\u0027s actually easier than having to revert tens of abi breakages and fixing up the fallout for that.",
+      "parentUuid": "02b46e91_50192602",
+      "revId": "88eb084d18c6124acccfe06edfc161dfa11bb34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
