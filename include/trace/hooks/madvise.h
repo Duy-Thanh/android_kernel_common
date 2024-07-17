@@ -21,6 +21,9 @@ DECLARE_HOOK(android_vh_madvise_pageout_return_error,
 DECLARE_HOOK(android_vh_process_madvise_return_error,
 	TP_PROTO(bool *return_error),
 	TP_ARGS(return_error));
+DECLARE_HOOK(android_vh_madvise_pageout_bypass,
+	TP_PROTO(struct mm_struct *mm, bool pageout, bool *bypass),
+	TP_ARGS(mm, pageout, bypass));
 
 #endif
 
