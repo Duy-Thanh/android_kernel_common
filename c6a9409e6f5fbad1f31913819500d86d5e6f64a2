@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e01142eb_9c089789",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-07-17T16:44:49Z",
+      "side": 1,
+      "message": "This might be a bad idea for security reasons on phones.\n\nAlso why revert something which is configurable?",
+      "tag": "mailMessageId\u003d\u003cCANP3RGdM\u003dCMRF7SLW7iiHJO8vCKfKgn1YrTZdt9r-OGzeB4Gtw@mail.gmail.com\u003e",
+      "revId": "c6a9409e6f5fbad1f31913819500d86d5e6f64a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
