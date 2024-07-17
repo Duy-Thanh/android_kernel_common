@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9260afd_2fa27e44",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-17T11:31:05Z",
+      "side": 1,
+      "message": "If (pte \u0026 (KVM_PTE_LEAF_ATTR_HI_S2_XN | PTE_VALID)) \u003d\u003d PTE_VALID it will print \"X\" all the time, wouldn\u0027t it ?",
+      "range": {
+        "startLine": 49,
+        "startChar": 9,
+        "endLine": 49,
+        "endChar": 18
+      },
+      "revId": "cfb076bb2b8c48271992d98e5323025042be3970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
