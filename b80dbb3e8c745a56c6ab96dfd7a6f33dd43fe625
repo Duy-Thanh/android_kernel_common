@@ -99,6 +99,26 @@
       "tag": "",
       "revId": "b80dbb3e8c745a56c6ab96dfd7a6f33dd43fe625",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084800637",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3176347?revision\u003d3",
+      "key": {
+        "uuid": "687ca36d_e8377506",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-17T10:54:16Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android14-6.1.\nBase branch change: [3145919](https://android-review.googlesource.com/c/3145919).\n\n```\n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_kmalloc_large_alloced,\n    - DECLARE_HOOK(android_vh_tune_fault_around_bytes,\n    - \tTP_PROTO(unsigned long *fault_around_bytes),\n    - \tTP_ARGS(fault_around_bytes));\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_tune_fault_around_bytes,\n    + DECLARE_HOOK(android_vh_madvise_cold_or_pageout_page,\n    + \tTP_PROTO(bool pageout, struct page *page),\n    + \tTP_ARGS(pageout, page));\n     +DECLARE_HOOK(android_vh_do_anonymous_page,\n     +\tTP_PROTO(struct vm_area_struct *vma, struct page *page),\n     +\tTP_ARGS(vma, page));\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "b80dbb3e8c745a56c6ab96dfd7a6f33dd43fe625",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
