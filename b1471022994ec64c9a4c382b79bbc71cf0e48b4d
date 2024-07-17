@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d406aad4_5afc5aa0",
+        "filename": "kernel/pid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-17T02:49:00Z",
+      "side": 1,
+      "message": "Understood.",
+      "parentUuid": "b6ea5445_9dd059fb",
+      "range": {
+        "startLine": 570,
+        "startChar": 7,
+        "endLine": 570,
+        "endChar": 20
+      },
+      "revId": "b1471022994ec64c9a4c382b79bbc71cf0e48b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "892e893b_a4d96214",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bab95a5_e958ea34",
+        "filename": "mm/mm_init.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-17T02:49:00Z",
+      "side": 1,
+      "message": "Understood.",
+      "parentUuid": "892e893b_a4d96214",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 27
+      },
+      "revId": "b1471022994ec64c9a4c382b79bbc71cf0e48b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "758c6edb_f0ff0419",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-07-16T17:14:11Z",
       "side": 1,
       "message": "All functions used here are already exported. You can simply open-code this function inside your module.",
+      "range": {
+        "startLine": 1933,
+        "startChar": 0,
+        "endLine": 1933,
+        "endChar": 33
+      },
+      "revId": "b1471022994ec64c9a4c382b79bbc71cf0e48b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a98568_b624cd85",
+        "filename": "mm/mmap.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-17T02:49:00Z",
+      "side": 1,
+      "message": "Understood.",
+      "parentUuid": "758c6edb_f0ff0419",
       "range": {
         "startLine": 1933,
         "startChar": 0,
