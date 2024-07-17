@@ -22,6 +22,30 @@
       },
       "revId": "cfb076bb2b8c48271992d98e5323025042be3970",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acdad45b_fb28310b",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-17T13:12:34Z",
+      "side": 1,
+      "message": "It should work, if KVM_PTE_LEAF_ATTR_HI_S2_XN_XN is set, then we\u0027ll hit the \"clear\".",
+      "parentUuid": "d9260afd_2fa27e44",
+      "range": {
+        "startLine": 49,
+        "startChar": 9,
+        "endLine": 49,
+        "endChar": 18
+      },
+      "revId": "cfb076bb2b8c48271992d98e5323025042be3970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
