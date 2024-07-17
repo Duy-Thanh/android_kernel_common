@@ -2503,6 +2503,7 @@ static void rmap_walk_file(struct folio *folio,
 	struct address_space *mapping = folio_mapping(folio);
 	pgoff_t pgoff_start, pgoff_end;
 	struct vm_area_struct *vma;
+	bool got_lock = false, success = false;
 
 	/*
 	 * The page lock not only makes sure that page->mapping cannot
@@ -2518,15 +2519,23 @@ static void rmap_walk_file(struct folio *folio,
 	pgoff_start = folio_pgoff(folio);
 	pgoff_end = pgoff_start + folio_nr_pages(folio) - 1;
 	if (!locked) {
-		if (i_mmap_trylock_read(mapping))
-			goto lookup;
+		trace_android_vh_do_folio_trylock(folio,
+			&mapping->i_mmap_rwsem, &got_lock, &success);
 
-		if (rwc->try_lock) {
-			rwc->contended = true;
-			return;
+		if (success) {
+			if (!got_lock)
+				return;
+		} else {
+			if (i_mmap_trylock_read(mapping))
+				goto lookup;
+
+			if (rwc->try_lock) {
+				rwc->contended = true;
+				return;
+			}
+
+			i_mmap_lock_read(mapping);
 		}
-
-		i_mmap_lock_read(mapping);
 	}
 lookup:
 	vma_interval_tree_foreach(vma, &mapping->i_mmap,

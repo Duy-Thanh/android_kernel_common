@@ -243,6 +243,10 @@ DECLARE_HOOK(android_vh_shmem_swapin_folio,
 DECLARE_HOOK(android_vh_madvise_cold_or_pageout_page,
 	TP_PROTO(bool pageout, struct page *page),
 	TP_ARGS(pageout, page));
+DECLARE_HOOK(android_vh_do_folio_trylock,
+	TP_PROTO(struct folio *folio, struct rw_semaphore *sem,
+		bool *got_lock, bool *success),
+	TP_ARGS(folio, sem, got_lock, success));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
