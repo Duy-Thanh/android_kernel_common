@@ -1578,6 +1578,10 @@ TRACE_EVENT(svc_process,
 		__field(u32, vers)
 		__field(u32, proc)
 		__string(service, name)
+<<<<<<< HEAD   (88eb08 Revert "Merge 5.10.220 into android12-5.10-lts")
+=======
+		__string(procedure, svc_proc_name(rqst))
+>>>>>>> BRANCH (6ab8b6 Linux 5.10.221)
 		__string(addr, rqst->rq_xprt ?
 			 rqst->rq_xprt->xpt_remotebuf : "(null)")
 	),
@@ -1587,6 +1591,10 @@ TRACE_EVENT(svc_process,
 		__entry->vers = rqst->rq_vers;
 		__entry->proc = rqst->rq_proc;
 		__assign_str(service, name);
+<<<<<<< HEAD   (88eb08 Revert "Merge 5.10.220 into android12-5.10-lts")
+=======
+		__assign_str(procedure, svc_proc_name(rqst));
+>>>>>>> BRANCH (6ab8b6 Linux 5.10.221)
 		__assign_str(addr, rqst->rq_xprt ?
 			     rqst->rq_xprt->xpt_remotebuf : "(null)");
 	),
@@ -1849,6 +1857,10 @@ TRACE_EVENT(svc_stats_latency,
 	TP_STRUCT__entry(
 		__field(u32, xid)
 		__field(unsigned long, execute)
+<<<<<<< HEAD   (88eb08 Revert "Merge 5.10.220 into android12-5.10-lts")
+=======
+		__string(procedure, svc_proc_name(rqst))
+>>>>>>> BRANCH (6ab8b6 Linux 5.10.221)
 		__string(addr, rqst->rq_xprt->xpt_remotebuf)
 	),
 
@@ -1856,6 +1868,10 @@ TRACE_EVENT(svc_stats_latency,
 		__entry->xid = be32_to_cpu(rqst->rq_xid);
 		__entry->execute = ktime_to_us(ktime_sub(ktime_get(),
 							 rqst->rq_stime));
+<<<<<<< HEAD   (88eb08 Revert "Merge 5.10.220 into android12-5.10-lts")
+=======
+		__assign_str(procedure, svc_proc_name(rqst));
+>>>>>>> BRANCH (6ab8b6 Linux 5.10.221)
 		__assign_str(addr, rqst->rq_xprt->xpt_remotebuf);
 	),
 

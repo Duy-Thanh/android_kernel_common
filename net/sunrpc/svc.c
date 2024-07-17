@@ -846,6 +846,11 @@ void
 svc_rqst_free(struct svc_rqst *rqstp)
 {
 	svc_release_buffer(rqstp);
+<<<<<<< HEAD   (88eb08 Revert "Merge 5.10.220 into android12-5.10-lts")
+=======
+	if (rqstp->rq_scratch_page)
+		put_page(rqstp->rq_scratch_page);
+>>>>>>> BRANCH (6ab8b6 Linux 5.10.221)
 	kfree(rqstp->rq_resp);
 	kfree(rqstp->rq_argp);
 	kfree(rqstp->rq_auth_data);
@@ -1626,7 +1631,26 @@ u32 svc_max_payload(const struct svc_rqst *rqstp)
 EXPORT_SYMBOL_GPL(svc_max_payload);
 
 /**
+<<<<<<< HEAD   (88eb08 Revert "Merge 5.10.220 into android12-5.10-lts")
  * svc_encode_read_payload - mark a range of bytes as a READ payload
+=======
+ * svc_proc_name - Return RPC procedure name in string form
+ * @rqstp: svc_rqst to operate on
+ *
+ * Return value:
+ *   Pointer to a NUL-terminated string
+ */
+const char *svc_proc_name(const struct svc_rqst *rqstp)
+{
+	if (rqstp && rqstp->rq_procinfo)
+		return rqstp->rq_procinfo->pc_name;
+	return "unknown";
+}
+
+
+/**
+ * svc_encode_result_payload - mark a range of bytes as a result payload
+>>>>>>> BRANCH (6ab8b6 Linux 5.10.221)
  * @rqstp: svc_rqst to operate on
  * @offset: payload's byte offset in rqstp->rq_res
  * @length: size of payload, in bytes

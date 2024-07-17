@@ -597,12 +597,20 @@ fh_compose(struct svc_fh *fhp, struct svc_export *exp, struct dentry *dentry,
 			d_inode(exp->ex_path.dentry)->i_ino,
 			exp->ex_fsid, exp->ex_uuid);
 
+<<<<<<< HEAD   (88eb08 Revert "Merge 5.10.220 into android12-5.10-lts")
 		if (inode)
 			_fh_update(fhp, exp, dentry);
 		if (fhp->fh_handle.fh_fileid_type == FILEID_INVALID) {
 			fh_put(fhp);
 			return nfserr_opnotsupp;
 		}
+=======
+	if (inode)
+		_fh_update(fhp, exp, dentry);
+	if (fhp->fh_handle.fh_fileid_type == FILEID_INVALID) {
+		fh_put(fhp);
+		return nfserr_stale;
+>>>>>>> BRANCH (6ab8b6 Linux 5.10.221)
 	}
 
 	return 0;
@@ -629,10 +637,16 @@ fh_update(struct svc_fh *fhp)
 		if (fhp->fh_handle.fh_fileid_type != FILEID_ROOT)
 			return 0;
 
+<<<<<<< HEAD   (88eb08 Revert "Merge 5.10.220 into android12-5.10-lts")
 		_fh_update(fhp, fhp->fh_export, dentry);
 		if (fhp->fh_handle.fh_fileid_type == FILEID_INVALID)
 			return nfserr_opnotsupp;
 	}
+=======
+	_fh_update(fhp, fhp->fh_export, dentry);
+	if (fhp->fh_handle.fh_fileid_type == FILEID_INVALID)
+		return nfserr_stale;
+>>>>>>> BRANCH (6ab8b6 Linux 5.10.221)
 	return 0;
 out_bad:
 	printk(KERN_ERR "fh_update: fh not verified!\n");
