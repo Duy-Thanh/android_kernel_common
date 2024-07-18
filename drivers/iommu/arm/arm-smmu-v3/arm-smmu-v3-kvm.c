@@ -205,6 +205,26 @@ static void kvm_arm_smmu_remove_master(struct kvm_arm_smmu_master *master)
 	kfree(master->streams);
 }
 
+static struct kvm_arm_smmu_master *
+kvm_arm_smmu_find_master(struct arm_smmu_device *smmu, u32 sid)
+{
+	struct rb_node *node;
+	struct arm_smmu_stream *stream;
+
+	node = smmu->streams.rb_node;
+	while (node) {
+		stream = rb_entry(node, struct arm_smmu_stream, node);
+		if (stream->id < sid)
+			node = node->rb_right;
+		else if (stream->id > sid)
+			node = node->rb_left;
+		else
+			return stream->master;
+	}
+
+	return NULL;
+}
+
 static struct iommu_device *kvm_arm_smmu_probe_device(struct device *dev)
 {
 	int ret;
@@ -232,6 +252,7 @@ static struct iommu_device *kvm_arm_smmu_probe_device(struct device *dev)
 	master->ssid_bits = min(smmu->ssid_bits, master->ssid_bits);
 	xa_init(&master->domains);
 	master->idmapped = device_property_read_bool(dev, "iommu-idmapped");
+
 	ret = kvm_arm_smmu_insert_master(smmu, master);
 	if (ret)
 		goto err_free;
@@ -624,6 +645,8 @@ static irqreturn_t kvm_arm_smmu_evt_handler(int irq, void *dev)
 	static DEFINE_RATELIMIT_STATE(rs, DEFAULT_RATELIMIT_INTERVAL,
 				      DEFAULT_RATELIMIT_BURST);
 	u64 evt[EVTQ_ENT_DWORDS];
+	struct iommu_fault_event fault_evt;
+	struct kvm_arm_smmu_master *master;
 
 	if (pm_runtime_get_if_in_use(smmu->dev) != 1) {
 		dev_err(smmu->dev,"Skip EVTQ as device is OFF\n");
@@ -633,6 +656,7 @@ static irqreturn_t kvm_arm_smmu_evt_handler(int irq, void *dev)
 	do {
 		while (!queue_remove_raw(q, evt)) {
 			u8 id = FIELD_GET(EVTQ_0_ID, evt[0]);
+			u32 sid = FIELD_GET(EVTQ_0_SID, evt[0]);
 
 			if (!__ratelimit(&rs))
 				continue;
@@ -642,6 +666,13 @@ static irqreturn_t kvm_arm_smmu_evt_handler(int irq, void *dev)
 				dev_info(smmu->dev, "\t0x%016llx\n",
 					 (unsigned long long)evt[i]);
 
+			mutex_lock(&smmu->streams_mutex);
+			master = kvm_arm_smmu_find_master(smmu, sid);
+			mutex_unlock(&smmu->streams_mutex);
+			if (master)
+				arm_smmu_report_evt(smmu, evt, master->dev, &fault_evt);
+			else
+				pr_err("Couldn't find master for sid %x\n", sid);
 			cond_resched();
 		}
 
