@@ -269368,6 +269368,13 @@ function {
   parameter_id: 0x26a75523
 }
 function {
+  id: 0x18b7067a
+  return_type_id: 0x48b5725f
+  parameter_id: 0x221732c5
+  parameter_id: 0x2efe8065
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x18b73098
   return_type_id: 0x48b5725f
   parameter_id: 0x2131312a
@@ -360665,6 +360672,15 @@ elf_symbol {
   full_name: "usb_serial_generic_open"
 }
 elf_symbol {
+  id: 0x7bc2d957
+  name: "usb_serial_generic_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x35cc4ba8
+  type_id: 0x9a212231
+  full_name: "usb_serial_generic_resume"
+}
+elf_symbol {
   id: 0xbeec161b
   name: "usb_serial_generic_throttle"
   is_defined: true
@@ -360674,6 +360690,15 @@ elf_symbol {
   full_name: "usb_serial_generic_throttle"
 }
 elf_symbol {
+  id: 0x20194c97
+  name: "usb_serial_generic_tiocmiwait"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2dd03d82
+  type_id: 0x96f296a4
+  full_name: "usb_serial_generic_tiocmiwait"
+}
+elf_symbol {
   id: 0x1e85ca64
   name: "usb_serial_generic_unthrottle"
   is_defined: true
@@ -360681,6 +360706,15 @@ elf_symbol {
   crc: 0xf1a85827
   type_id: 0x1b27f18a
   full_name: "usb_serial_generic_unthrottle"
+}
+elf_symbol {
+  id: 0x261c8a11
+  name: "usb_serial_handle_dcd_change"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x79d79178
+  type_id: 0x18b7067a
+  full_name: "usb_serial_handle_dcd_change"
 }
 elf_symbol {
   id: 0xbc49d007
@@ -370738,8 +370772,11 @@ interface {
   symbol_id: 0xcb415220
   symbol_id: 0x256f289d
   symbol_id: 0xcc99e836
+  symbol_id: 0x7bc2d957
   symbol_id: 0xbeec161b
+  symbol_id: 0x20194c97
   symbol_id: 0x1e85ca64
+  symbol_id: 0x261c8a11
   symbol_id: 0xbc49d007
   symbol_id: 0x34af8a35
   symbol_id: 0x3cc50b4b
