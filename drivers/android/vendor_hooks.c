@@ -46,6 +46,7 @@
 #include <trace/hooks/module.h>
 #include <trace/hooks/mpam.h>
 #include <trace/hooks/net.h>
+#include <trace/hooks/perf.h>
 #include <trace/hooks/pm_domain.h>
 #include <trace/hooks/power.h>
 #include <trace/hooks/preemptirq.h>
@@ -91,6 +92,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_cycle_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_workqueue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_armv8pmu_counter_overflowed);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bitmap_find_best_next_area);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bpf_skb_load_bytes);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cgroup_force_kthread_migration);
@@ -135,6 +137,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_kswapd_shrink_node_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_logbuf);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_panic_unhandled);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_perf_rotate_context);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_perform_reclaim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pr_set_vma_name_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_preempt_disable);

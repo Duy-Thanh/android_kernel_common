@@ -57,7 +57,7 @@
 #include <linux/buildid.h>
 #include <linux/task_work.h>
 #include <linux/percpu-rwsem.h>
-
+#include <trace/hooks/perf.h>
 #include "internal.h"
 
 #include <asm/irq_regs.h>
@@ -4468,6 +4468,8 @@ static bool perf_rotate_context(struct perf_cpu_pmu_context *cpc)
 
 	perf_ctx_lock(cpuctx, cpuctx->task_ctx);
 	perf_pmu_disable(pmu);
+
+	trace_android_rvh_perf_rotate_context(cpc);
 
 	if (task_rotate)
 		task_event = ctx_event_to_rotate(task_epc);
