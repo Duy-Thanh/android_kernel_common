@@ -16,6 +16,24 @@
       "message": "Does this change belong to `android15-6.6-partner_predev` branch?",
       "revId": "959a41773334cd8013379939d13133078cf8d25e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "559ce216_3b70e77d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-07-18T13:19:40Z",
+      "side": 1,
+      "message": "Oops, sorry. I think I messed up my local manifest.",
+      "parentUuid": "c415873c_90d9272e",
+      "revId": "959a41773334cd8013379939d13133078cf8d25e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
