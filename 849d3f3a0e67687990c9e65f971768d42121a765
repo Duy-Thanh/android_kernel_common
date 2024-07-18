@@ -16,6 +16,24 @@
       "message": "Please explain the logic behind this change.",
       "revId": "849d3f3a0e67687990c9e65f971768d42121a765",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e5ca556_ea1486b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-18T03:07:37Z",
+      "side": 1,
+      "message": "With https://android-review.googlesource.com/c/kernel/common/+/3179242/1,\nI\u0027ve requested to add a vendor hook in madvise_cold_or_pageout_pte_range() to abort pageout process at mm-\u003emmap_lock contended.\nI also want to notify userspace this abort to let the user try this later or else.\nFirstly, madvise_pageout() always returns 0, except !can_madv_lru_vma().\nSo we can not abort immediately.\nSecond, even if it has got aborted by some condition, process_madvise will return any size of vma processed by iteration.\nThis vendor hook lets madvise to return error value on abort condition.",
+      "parentUuid": "e700f87e_4577ffe1",
+      "revId": "849d3f3a0e67687990c9e65f971768d42121a765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
