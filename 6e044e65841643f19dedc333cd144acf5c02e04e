@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4df1928a_4ea4e440",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-18T05:21:39Z",
+      "side": 1,
+      "message": "Sorry, this seems to have broken the KABI:\n```\n\nvariable symbol \u0027const struct readahead_control * GKI_struct_readahead_control\u0027 changed\n  CRC changed from 0x5bf5bc68 to 0xc9839301\n\nfunction symbol \u0027int __traceiter_android_rvh_account_irq(void *, struct task_struct *, int, s64)\u0027 changed\n  CRC changed from 0x8b3b9ed2 to 0x2be227c0\n\nfunction symbol \u0027int __traceiter_android_rvh_account_irq_end(void *, struct task_struct *, int, s64)\u0027 changed\n  CRC changed from 0xa3b8dce7 to 0x5bd5aa2e\n\n... 295 omitted; 298 symbols have only CRC changes\n```",
+      "revId": "6e044e65841643f19dedc333cd144acf5c02e04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
