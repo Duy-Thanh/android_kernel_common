@@ -4411,12 +4411,26 @@ static vm_fault_t do_read_fault(struct vm_fault *vmf)
 	 * if page by the offset is not ready to be mapped (cold cache or
 	 * something).
 	 */
+<<<<<<< HEAD   (eca2af UPSTREAM: io_uring: ensure that io_init_req() passes in the )
 	if (vma->vm_ops->map_pages && fault_around_bytes >> PAGE_SHIFT > 1) {
 		if (likely(!userfaultfd_minor(vmf->vma))) {
 			ret = do_fault_around(vmf);
 			if (ret)
 				return ret;
 		}
+||||||| BASE
+	if (should_fault_around(vmf)) {
+		ret = do_fault_around(vmf);
+		if (ret)
+			return ret;
+=======
+	if (should_fault_around(vmf)) {
+		ret = do_fault_around(vmf);
+		if (ret)
+			return ret;
+	} else {
+		trace_android_vh_do_read_fault(vmf, fault_around_pages);
+>>>>>>> CHANGE (a9867d ANDROID: mm: add vendor hook in fault and read file)
 	}
 
 	ret = __do_fault(vmf);
