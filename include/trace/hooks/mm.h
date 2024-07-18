@@ -243,6 +243,56 @@ DECLARE_HOOK(android_vh_uprobes_replace_page,
 DECLARE_HOOK(android_vh_shmem_swapin_folio,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+<<<<<<< HEAD   (8962b1 UPSTREAM: dma-buf: heaps: Fix off-by-one in CMA heap fault h)
+||||||| BASE
+DECLARE_HOOK(android_vh_madvise_cold_or_pageout_page,
+	TP_PROTO(bool pageout, struct page *page),
+	TP_ARGS(pageout, page));
+DECLARE_HOOK(android_vh_swapmem_gather_init,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_swapmem_gather_add_bypass,
+	TP_PROTO(struct mm_struct *mm, swp_entry_t entry, bool *bypass),
+	TP_ARGS(mm, entry, bypass));
+DECLARE_HOOK(android_vh_swapmem_gather_finish,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_oom_swapmem_gather_init,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_oom_swapmem_gather_finish,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+=======
+DECLARE_HOOK(android_vh_madvise_cold_or_pageout_page,
+	TP_PROTO(bool pageout, struct page *page),
+	TP_ARGS(pageout, page));
+DECLARE_HOOK(android_vh_swapmem_gather_init,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_swapmem_gather_add_bypass,
+	TP_PROTO(struct mm_struct *mm, swp_entry_t entry, bool *bypass),
+	TP_ARGS(mm, entry, bypass));
+DECLARE_HOOK(android_vh_swapmem_gather_finish,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_oom_swapmem_gather_init,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_oom_swapmem_gather_finish,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_do_read_fault,
+	TP_PROTO(struct vm_fault *vmf, unsigned long fault_around_bytes),
+	TP_ARGS(vmf, fault_around_bytes));
+DECLARE_HOOK(android_vh_filemap_read,
+	TP_PROTO(struct file *file, loff_t pos, size_t size),
+	TP_ARGS(file, pos, size));
+DECLARE_HOOK(android_vh_filemap_map_pages,
+	TP_PROTO(struct file *file, pgoff_t first_pgoff,
+		pgoff_t last_pgoff, vm_fault_t ret),
+	TP_ARGS(file, first_pgoff, last_pgoff, ret));
+>>>>>>> CHANGE (eda4e9 ANDROID: mm: add vendor hook in fault and read file)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
