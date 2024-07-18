@@ -86,6 +86,8 @@ _ARM_GKI_MODULES_LIST = [
 
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
+    "drivers/power/sequencing/pwrseq-core.ko",
+    "drivers/power/sequencing/pwrseq-qcom-wcn.ko",
     "drivers/ptp/ptp_kvm.ko",
 ]
 
