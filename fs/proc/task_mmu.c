@@ -23,6 +23,7 @@
 #include <linux/uaccess.h>
 #include <linux/pkeys.h>
 #include <trace/hooks/mm.h>
+#include <trace/hooks/fs.h>
 
 #include <asm/elf.h>
 #include <asm/tlb.h>
@@ -2073,11 +2074,15 @@ const struct file_operations proc_pid_numa_maps_operations = {
 int proc_pid_ioinfo(struct seq_file *m, struct pid_namespace *ns,
 		struct pid *pid, struct task_struct *task)
 {
-	return 0;
+	int ret = 0;
+
+	trace_android_vh_proc_pid_ioinfo(m, ns, pid, task, &ret);
+	return ret;
 }
 
 static int show_filemap(struct seq_file *m, void *v)
 {
+	trace_android_vh_show_filemap(m, v);
 	return 0;
 }
 
@@ -2090,12 +2095,23 @@ const struct seq_operations proc_pid_filemap_op = {
 
 static int pid_filemap_list(struct inode *inode, struct file *file)
 {
-	return 0;
+	struct task_struct *task = get_proc_task(file_inode(file));
+	int ret = 0;
+
+	if (task) {
+		trace_android_rvh_filemap_list(task, inode, file,
+				&proc_pid_filemap_op, &ret);
+		put_task_struct(task);
+	}
+	return ret;
 }
 
 static int proc_filemap_release(struct inode *inode, struct file *file)
 {
-	return 0;
+	int ret = 0;
+
+	trace_android_vh_filemap_release(inode, file, &ret);
+	return ret;
 }
 
 const struct file_operations proc_pid_filemap_list_operations = {
@@ -2109,13 +2125,23 @@ const struct file_operations proc_pid_filemap_list_operations = {
 static ssize_t pid_io_record_read(struct file *file,
 		char __user *buf, size_t count, loff_t *ppos)
 {
-	return 0;
+	ssize_t ret = 0;
+
+	trace_android_rvh_io_record_read(buf, count, ppos, &ret);
+	return ret;
 }
 
 static ssize_t pid_io_record_write(struct file *file,
 		const char __user *buf, size_t count, loff_t *ppos)
 {
-	return 0;
+	struct task_struct *task = get_proc_task(file_inode(file));
+	ssize_t ret = -EFAULT;
+
+	if (task) {
+		trace_android_rvh_io_record_write(task, buf, count, &ret);
+		put_task_struct(task);
+	}
+	return ret;
 }
 
 const struct file_operations proc_pid_io_record_operations = {
