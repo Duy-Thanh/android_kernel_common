@@ -17,6 +17,24 @@
       "tag": "mailMessageId\u003d\u003cCANP3RGdM\u003dCMRF7SLW7iiHJO8vCKfKgn1YrTZdt9r-OGzeB4Gtw@mail.gmail.com\u003e",
       "revId": "c6a9409e6f5fbad1f31913819500d86d5e6f64a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c39f7541_9562b6e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-07-18T21:00:21Z",
+      "side": 1,
+      "message": "The reason I\u0027ve enabled this config is this is that GKI is expected to support wear devices running 32-bit only userspaces. Since there are no alternate flavors of GKI between the different verticals, this support has to be added to the core kernel.\n\nAs for why its a revert - it will be easy to track as part of the stack of deltas from upstream that the kernel team refers to. So that we can more easily unwind this change when we finally sunset 32 bit userspace support.",
+      "parentUuid": "e01142eb_9c089789",
+      "revId": "c6a9409e6f5fbad1f31913819500d86d5e6f64a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
