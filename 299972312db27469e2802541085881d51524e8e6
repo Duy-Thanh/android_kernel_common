@@ -16,6 +16,24 @@
       "message": "no description of why now?  Why this branch only?  What changed to require this?",
       "revId": "299972312db27469e2802541085881d51524e8e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98986059_0c8297e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-07-18T09:09:40Z",
+      "side": 1,
+      "message": "Apologies for posting without details. I\u0027ll update the commit message.\n\nSupport for these audio codecs and usb-c host mode for SM8550-HDK devboard got added in v6.9, hence adding the support in android-mainline branch. SM8550-HDK (Armv9) is the new addition in LKFT lab.\n\nPS: Support for Qcom SM8{2,4,5,6}50 SoC devboard drivers also land in the db845c GKI build configs (i.e db845c_gki.fragment and BUILD.bazel/_DB845C_MODULE_OUTS[]), which at times can be confusing.",
+      "parentUuid": "eafe462f_370b28d0",
+      "revId": "299972312db27469e2802541085881d51524e8e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
