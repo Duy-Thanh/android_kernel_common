@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a6f166_418afc14",
+        "filename": "mm/madvise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-18T03:35:21Z",
+      "side": 1,
+      "message": "Actually, returning always EBUSY on bypass seems very specific to your usage. More generic way:\n\n```\n\tint ret \u003d 0;\n\n\ttrace_android_vh_madvise_pageout_return(mm, pageout, \u0026ret);\n\tif (ret)\n\t\treturn ret;\n```",
+      "range": {
+        "startLine": 382,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 16
+      },
+      "revId": "7e97303f71c8d957384e4fdc410d4586f33228ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
