@@ -34,6 +34,23 @@
       "parentUuid": "4df1928a_4ea4e440",
       "revId": "6e044e65841643f19dedc333cd144acf5c02e04e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c4b8d14_0329a27d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-18T18:38:12Z",
+      "side": 1,
+      "message": "Build-break for allmodconfig builds:\n```\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/net/wireless/wext-core.c:654:24: error: incomplete definition of type \u0027struct wireless_dev\u0027\n            dev-\u003eieee80211_ptr-\u003ewiphy-\u003ewext-\u003eget_wireless_stats)\n            ~~~~~~~~~~~~~~~~~~^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/include/linux/netdevice.h:64:8: note: forward declaration of \u0027struct wireless_dev\u0027\nstruct wireless_dev;\n       ^\n... 5 lines skipped ...\n        if (dev-\u003eieee80211_ptr \u0026\u0026 dev-\u003eieee80211_ptr-\u003ewiphy)\n                                  ~~~~~~~~~~~~~~~~~~^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/include/linux/netdevice.h:64:8: note: forward declaration of \u0027struct wireless_dev\u0027\nstruct wireless_dev;\n       ^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/net/wireless/wext-core.c:693:32: error: incomplete definition of type \u0027struct wireless_dev\u0027\n                handlers \u003d dev-\u003eieee80211_ptr-\u003ewiphy-\u003ewext;\n                           ~~~~~~~~~~~~~~~~~~^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/include/linux/netdevice.h:64:8: note: forward declaration of \u0027struct wireless_dev\u0027\nstruct wireless_dev;\n       ^\n6 errors generated.\n```\nWhich likely explains the ABI issue - looks like the visibility to some types have changed which affects the CRC for some interfaces.",
+      "revId": "6e044e65841643f19dedc333cd144acf5c02e04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
