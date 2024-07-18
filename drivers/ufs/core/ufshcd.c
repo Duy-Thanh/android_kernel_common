@@ -7454,7 +7454,6 @@ static int ufshcd_eh_device_reset_handler(struct scsi_cmnd *cmd)
 	unsigned long flags, pending_reqs = 0, not_cleared = 0;
 	struct Scsi_Host *host;
 	struct ufs_hba *hba;
-	struct ufs_hw_queue *hwq;
 	struct ufshcd_lrb *lrbp;
 	u32 pos, not_cleared_mask = 0;
 	int err;
@@ -7477,8 +7476,6 @@ static int ufshcd_eh_device_reset_handler(struct scsi_cmnd *cmd)
 			if (ufshcd_cmd_inflight(lrbp->cmd) &&
 			    lrbp->lun == lun) {
 				ufshcd_clear_cmd(hba, pos);
-				hwq = ufshcd_mcq_req_to_hwq(hba, scsi_cmd_to_rq(lrbp->cmd));
-				ufshcd_mcq_poll_cqe_lock(hba, hwq);
 			}
 		}
 		err = 0;
