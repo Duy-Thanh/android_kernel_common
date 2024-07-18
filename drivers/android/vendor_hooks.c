@@ -442,3 +442,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_clear);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_trylock_failed_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
