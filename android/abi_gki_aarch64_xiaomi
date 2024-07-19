@@ -388,3 +388,21 @@ __tracepoint_android_vh_page_should_be_protected
 __traceiter_android_vh_page_referenced_check_bypass
 __tracepoint_android_vh_page_referenced_check_bypass
 folio_total_mapcount
+
+# required by xring_pmt.ko
+  kthread_create_on_cpu
+  perf_event_create_kernel_counter
+  perf_event_disable
+  perf_event_enable
+  perf_event_release_kernel
+  proc_do_large_bitmap
+  proc_dostring
+  static_key_enable
+  __traceiter_android_rvh_context_switch
+  __traceiter_android_rvh_perf_handle_irq
+  __traceiter_android_rvh_perf_rotate_context
+  __traceiter_android_vh_dup_task_struct
+  __tracepoint_android_rvh_context_switch
+  __tracepoint_android_rvh_perf_handle_irq
+  __tracepoint_android_rvh_perf_rotate_context
+  __tracepoint_android_vh_dup_task_struct
