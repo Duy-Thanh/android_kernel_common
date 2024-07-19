@@ -393,6 +393,10 @@ folio_total_mapcount
 __tracepoint_android_rvh_update_cpus_allowed
 __traceiter_android_rvh_update_cpus_allowed
 
+# required by xring_pmt.ko
+  perf_event_create_group_counter
+  perf_event_create_kernel_counter
+
 #required by mi_async_reclaim.ko
 __traceiter_android_vh_handle_trylock_failed_folio
 __tracepoint_android_vh_handle_trylock_failed_folio

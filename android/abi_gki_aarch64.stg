@@ -311041,6 +311041,16 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x86d43e85
+  return_type_id: 0x1dce0fdd
+  parameter_id: 0x246cd286
+  parameter_id: 0x6720d32f
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x1dce0fdd
+  parameter_id: 0x74a50355
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x86d5804d
   return_type_id: 0x1dce0fdd
   parameter_id: 0x246cd286
@@ -388137,6 +388147,15 @@ elf_symbol {
   full_name: "perf_event_addr_filters_sync"
 }
 elf_symbol {
+  id: 0x6c01f531
+  name: "perf_event_create_group_counter"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5e7c284a
+  type_id: 0x86d43e85
+  full_name: "perf_event_create_group_counter"
+}
+elf_symbol {
   id: 0xea4938d9
   name: "perf_event_create_kernel_counter"
   is_defined: true
@@ -416728,6 +416747,7 @@ interface {
   symbol_id: 0xe207c73b
   symbol_id: 0x4e76f69f
   symbol_id: 0x84bf9f80
+  symbol_id: 0x6c01f531
   symbol_id: 0xea4938d9
   symbol_id: 0xdc02a166
   symbol_id: 0x2e5af443
