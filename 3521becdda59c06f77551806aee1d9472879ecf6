@@ -139,6 +139,26 @@
       "tag": "",
       "revId": "3521becdda59c06f77551806aee1d9472879ecf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000085168877",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3185901?revision\u003d1",
+      "key": {
+        "uuid": "8073df4e_5aefcf5e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-19T23:43:01Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/230ecdf71a644c9c73e0e6735b33173074ae3f94) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d230ecdf71a644c9c73e0e6735b33173074ae3f94).\n\n```\n      ## drivers/usb/typec/tcpm/tcpm.c ##\n    -@@ drivers/usb/typec/tcpm/tcpm.c: static int tcpm_register_source_caps(struct tcpm_port *port)\n    - {\n    - \tstruct usb_power_delivery_desc desc \u003d { port-\u003enegotiated_rev };\n    - \tstruct usb_power_delivery_capabilities_desc caps \u003d { };\n    --\tstruct usb_power_delivery_capabilities *cap;\n    -+\tstruct usb_power_delivery_capabilities *cap \u003d port-\u003epartner_source_caps;\n    - \n    - \tif (!port-\u003epartner_pd)\n    - \t\tport-\u003epartner_pd \u003d usb_power_delivery_register(NULL, \u0026desc);\n     @@ drivers/usb/typec/tcpm/tcpm.c: static int tcpm_register_source_caps(struct tcpm_port *port)\n      \tmemcpy(caps.pdo, port-\u003esource_caps, sizeof(u32) * port-\u003enr_source_caps);\n      \tcaps.role \u003d TYPEC_SOURCE;\n    @@ drivers/usb/typec/tcpm/tcpm.c: static int tcpm_register_source_caps(struct tcpm_\n      \tcap \u003d usb_power_delivery_register_capabilities(port-\u003epartner_pd, \u0026caps);\n      \tif (IS_ERR(cap))\n      \t\treturn PTR_ERR(cap);\n    +@@ drivers/usb/typec/tcpm/tcpm.c: static int tcpm_register_sink_caps(struct tcpm_port *port)\n    + {\n    + \tstruct usb_power_delivery_desc desc \u003d { port-\u003enegotiated_rev };\n    + \tstruct usb_power_delivery_capabilities_desc caps \u003d { };\n    +-\tstruct usb_power_delivery_capabilities *cap;\n    ++\tstruct usb_power_delivery_capabilities *cap \u003d port-\u003epartner_source_caps;\n    + \n    + \tif (!port-\u003epartner_pd)\n    + \t\tport-\u003epartner_pd \u003d usb_power_delivery_register(NULL, \u0026desc);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "3521becdda59c06f77551806aee1d9472879ecf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
