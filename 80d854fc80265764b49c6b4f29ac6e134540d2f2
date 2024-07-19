@@ -239,6 +239,26 @@
       "tag": "",
       "revId": "80d854fc80265764b49c6b4f29ac6e134540d2f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000085104021",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3184424?revision\u003d3",
+      "key": {
+        "uuid": "7a3aa884_855c7858",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-19T14:39:57Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/458cdb59f7719f81504d392daa95a8c99c30c276).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_proc_work_ilocked);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_release_special_work);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_reader_owned);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_reader_owned);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_writer_owned);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_writer_owned);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);\n    + /*\n    +  * For type visibility\n    +  */\n     \n      ## include/trace/hooks/dtask.h ##\n    -@@ include/trace/hooks/dtask.h: DECLARE_HOOK(android_vh_sched_show_task,\n    +@@ include/trace/hooks/dtask.h: struct percpu_rw_semaphore;\n      DECLARE_HOOK(android_vh_percpu_rwsem_wq_add,\n      \tTP_PROTO(struct percpu_rw_semaphore *sem, bool reader),\n      \tTP_ARGS(sem, reader));\n    @@ include/trace/hooks/dtask.h: DECLARE_HOOK(android_vh_sched_show_task,\n     +\tTP_PROTO(struct percpu_rw_semaphore *sem, long state, bool *complete),\n     +\tTP_ARGS(sem, state, complete), 1);\n      \n    - struct mutex_waiter;\n    - DECLARE_HOOK(android_vh_alter_mutex_list_add,\n    + struct rt_mutex_waiter;\n    + struct ww_acquire_ctx;\n     \n      ## kernel/locking/percpu-rwsem.c ##\n     @@ kernel/locking/percpu-rwsem.c: static void percpu_rwsem_wait(struct percpu_rw_semaphore *sem, bool reader)\n    @@ kernel/locking/percpu-rwsem.c: static bool readers_active_check(struct percpu_rw\n     +\n      \tmight_sleep();\n      \trwsem_acquire(\u0026sem-\u003edep_map, 0, 0, _RET_IP_);\n    - \ttrace_contention_begin(sem, LCB_F_PERCPU | LCB_F_WRITE);\n    + \n     @@ kernel/locking/percpu-rwsem.c: void __sched percpu_down_write(struct percpu_rw_semaphore *sem)\n      \t */\n      \n    @@ kernel/locking/percpu-rwsem.c: void __sched percpu_down_write(struct percpu_rw_s\n     +\ttrace_android_rvh_percpu_rwsem_wait_complete(sem, TASK_UNINTERRUPTIBLE, \u0026complete);\n     +\tif (!complete)\n     +\t\trcuwait_wait_event(\u0026sem-\u003ewriter, readers_active_check(sem), TASK_UNINTERRUPTIBLE);\n    - \ttrace_contention_end(sem, 0);\n      \ttrace_android_vh_record_pcpu_rwsem_starttime(current, jiffies);\n      }\n    + EXPORT_SYMBOL_GPL(percpu_down_write);\n     @@ kernel/locking/percpu-rwsem.c: void percpu_up_write(struct percpu_rw_semaphore *sem)\n      {\n      \trwsem_release(\u0026sem-\u003edep_map, _RET_IP_);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "80d854fc80265764b49c6b4f29ac6e134540d2f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
