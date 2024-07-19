@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31dde32e_56875db6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-19T23:26:37Z",
+      "side": 1,
+      "message": "This patch should come after the following patch which introduces these symbols.\n\nPlease re-order this series so the symbol additions are after the patch which adds the symbols.",
+      "revId": "d349e5f0904f3f1fdcd5ed17321b38d59778773e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
