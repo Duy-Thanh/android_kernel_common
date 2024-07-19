@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc509e79_1a276a30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-19T16:24:54Z",
+      "side": 1,
+      "message": "create a patch on top of this one to add the new symbols to your symbol list",
+      "revId": "c1c1ed867db52a186126d7841fbac3d67a324965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c796a7a_34aea8d6",
+        "filename": "include/trace/hooks/v4l2core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-19T16:24:54Z",
+      "side": 1,
+      "message": "Please remove this unnecessary inclusion.",
+      "fixSuggestions": [
+        {
+          "fixId": "469d6a2f_799d8cf6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/v4l2core.h",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c1c1ed867db52a186126d7841fbac3d67a324965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "080e06b4_3582be7b",
+        "filename": "include/trace/hooks/v4l2mc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-19T16:24:54Z",
+      "side": 1,
+      "message": "please remove this unnecessary inclusion",
+      "revId": "c1c1ed867db52a186126d7841fbac3d67a324965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
