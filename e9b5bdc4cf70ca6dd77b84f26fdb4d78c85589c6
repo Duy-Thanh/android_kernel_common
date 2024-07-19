@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6963ac31_c991df48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-19T17:15:09Z",
+      "side": 1,
+      "message": "No respin bug. When the respin bug is created, add a \"Bug:\" tag to cite it.",
+      "revId": "e9b5bdc4cf70ca6dd77b84f26fdb4d78c85589c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
