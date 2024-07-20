@@ -37,6 +37,7 @@ config VIDEO_MEDIATEK_VCODEC
 
 config VIDEO_MEDIATEK_VCODEC_TEE
 	bool "MediaTek Video Codec TEE driver"
+	depends on DMABUF_HEAPS
 	depends on OPTEE
 	depends on TEE
 	depends on VIDEO_MEDIATEK_VCODEC
