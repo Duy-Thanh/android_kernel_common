@@ -11,6 +11,7 @@
 #include "../common/mtk_vcodec_dbgfs.h"
 #include "../common/mtk_vcodec_fw_priv.h"
 #include "../common/mtk_vcodec_util.h"
+#include "mtk_vcodec_dec_optee.h"
 #include "vdec_msg_queue.h"
 
 #define MTK_VCODEC_DEC_NAME	"mtk-vcodec-dec"
@@ -262,6 +263,8 @@ struct mtk_vcodec_dec_ctx {
  * @dbgfs: debug log related information
  *
  * @chip_name: used to distinguish platforms and select the correct codec configuration values
+ *
+ * @optee_private: optee private data
  */
 struct mtk_vcodec_dec_dev {
 	struct v4l2_device v4l2_dev;
@@ -305,6 +308,8 @@ struct mtk_vcodec_dec_dev {
 	struct mtk_vcodec_dbgfs dbgfs;
 
 	enum mtk_vcodec_dec_chip_name chip_name;
+
+	struct mtk_vdec_optee_private *optee_private;
 };
 
 static inline struct mtk_vcodec_dec_ctx *fh_to_dec_ctx(struct v4l2_fh *fh)
