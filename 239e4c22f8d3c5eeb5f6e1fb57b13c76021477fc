@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8cb5cc_bf61679d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3526575
+      },
+      "writtenOn": "2024-07-20T07:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3d3b6b6_2dd5350a",
+      "revId": "239e4c22f8d3c5eeb5f6e1fb57b13c76021477fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b034a327_19a56ff7",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-07-19T17:24:37Z",
       "side": 1,
       "message": "What feature does this add? How does it improve perf?",
+      "revId": "239e4c22f8d3c5eeb5f6e1fb57b13c76021477fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269525c7_0675e3b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3526575
+      },
+      "writtenOn": "2024-07-20T07:27:25Z",
+      "side": 1,
+      "message": "Using the performance metric tracker, we can analyze detailed performance metrics during program execution,providing data analysis reference for energy efficiency optimization. For example, you can select the pmu sampling data in the scheduling time slice for analysis, and decide whether the frequency needs to be increased to improve energy efficiency. This functionality requires the addition of perf hooks.",
+      "parentUuid": "b034a327_19a56ff7",
       "revId": "239e4c22f8d3c5eeb5f6e1fb57b13c76021477fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +119,24 @@
       "writtenOn": "2024-07-19T17:24:37Z",
       "side": 1,
       "message": "Create a patch on top of this one to add these symbols to your symbol list.",
+      "revId": "239e4c22f8d3c5eeb5f6e1fb57b13c76021477fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "584fecb4_6445bdc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3526575
+      },
+      "writtenOn": "2024-07-20T07:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4f80b65_ca670292",
       "revId": "239e4c22f8d3c5eeb5f6e1fb57b13c76021477fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
