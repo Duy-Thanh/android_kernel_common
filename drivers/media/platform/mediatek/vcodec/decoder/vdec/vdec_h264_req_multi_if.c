@@ -68,6 +68,29 @@ struct vdec_h264_slice_info_ex {
 	u32 reserved;
 };
 
+/**
+ * struct vdec_h264_slice_info - decode information
+ *
+ * @nal_info:		nal info of current picture
+ * @timeout:		Decode timeout: 1 timeout, 0 no timeount
+ * @bs_buf_size:	bitstream size
+ * @bs_buf_addr:	bitstream buffer dma address
+ * @y_fb_dma:		Y frame buffer dma address
+ * @c_fb_dma:		C frame buffer dma address
+ * @vdec_fb_va:	VDEC frame buffer struct virtual address
+ * @crc:		Used to check whether hardware's status is right
+ */
+struct vdec_h264_slice_info {
+	u16 nal_info;
+	u16 timeout;
+	u32 bs_buf_size;
+	u64 bs_buf_addr;
+	u64 y_fb_dma;
+	u64 c_fb_dma;
+	u64 vdec_fb_va;
+	u32 crc[8];
+};
+
 /*
  * struct vdec_h264_slice_mem - memory address and size
  */
@@ -129,6 +152,44 @@ struct vdec_h264_slice_vsi_ex {
 };
 
 /**
+ * struct vdec_h264_slice_vsi - shared memory for decode information exchange
+ *        between SCP and Host.
+ *
+ * @wdma_err_addr:		wdma error dma address
+ * @wdma_start_addr:		wdma start dma address
+ * @wdma_end_addr:		wdma end dma address
+ * @slice_bc_start_addr:	slice bc start dma address
+ * @slice_bc_end_addr:		slice bc end dma address
+ * @row_info_start_addr:	row info start dma address
+ * @row_info_end_addr:		row info end dma address
+ * @trans_start:		trans start dma address
+ * @trans_end:			trans end dma address
+ * @wdma_end_addr_offset:	wdma end address offset
+ *
+ * @mv_buf_dma:		HW working motion vector buffer
+ *				dma address (AP-W, VPU-R)
+ * @dec:			decode information (AP-R, VPU-W)
+ * @h264_slice_params:		decode parameters for hw used
+ */
+struct vdec_h264_slice_vsi {
+	/* LAT dec addr */
+	u64 wdma_err_addr;
+	u64 wdma_start_addr;
+	u64 wdma_end_addr;
+	u64 slice_bc_start_addr;
+	u64 slice_bc_end_addr;
+	u64 row_info_start_addr;
+	u64 row_info_end_addr;
+	u64 trans_start;
+	u64 trans_end;
+	u64 wdma_end_addr_offset;
+
+	u64 mv_buf_dma[H264_MAX_MV_NUM];
+	struct vdec_h264_slice_info dec;
+	struct vdec_h264_slice_lat_dec_param h264_slice_params;
+};
+
+/**
  * struct vdec_h264_slice_share_info - shared information used to exchange
  *                                     message between lat and core
  *
@@ -176,10 +237,19 @@ struct vdec_h264_slice_inst {
 	struct mtk_vcodec_mem pred_buf;
 	struct mtk_vcodec_mem mv_buf[H264_MAX_MV_NUM];
 	struct vdec_vpu_inst vpu;
-	struct vdec_h264_slice_vsi_ex *vsi_ex;
-	struct vdec_h264_slice_vsi_ex *vsi_core_ex;
+	union {
+		struct vdec_h264_slice_vsi_ex *vsi_ex;
+		struct vdec_h264_slice_vsi *vsi;
+	};
+	union {
+		struct vdec_h264_slice_vsi_ex *vsi_core_ex;
+		struct vdec_h264_slice_vsi *vsi_core;
+	};
 
-	struct vdec_h264_slice_vsi_ex vsi_ctx_ex;
+	union {
+		struct vdec_h264_slice_vsi_ex vsi_ctx_ex;
+		struct vdec_h264_slice_vsi vsi_ctx;
+	};
 	struct vdec_h264_slice_lat_dec_param h264_slice_param;
 
 	unsigned int resolution_changed;
