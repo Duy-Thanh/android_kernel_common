@@ -238,7 +238,8 @@ void mtk_vcodec_dec_enable_hardware(struct mtk_vcodec_dec_ctx *ctx, int hw_idx)
 		mtk_vcodec_dec_child_dev_on(ctx->dev, MTK_VDEC_LAT0);
 	mtk_vcodec_dec_child_dev_on(ctx->dev, hw_idx);
 
-	mtk_vcodec_dec_enable_irq(ctx->dev, hw_idx);
+	if (!ctx->is_secure_playback)
+		mtk_vcodec_dec_enable_irq(ctx->dev, hw_idx);
 
 	if (IS_VDEC_INNER_RACING(ctx->dev->dec_capability))
 		mtk_vcodec_load_racing_info(ctx);
@@ -250,7 +251,8 @@ void mtk_vcodec_dec_disable_hardware(struct mtk_vcodec_dec_ctx *ctx, int hw_idx)
 	if (IS_VDEC_INNER_RACING(ctx->dev->dec_capability))
 		mtk_vcodec_record_racing_info(ctx);
 
-	mtk_vcodec_dec_disable_irq(ctx->dev, hw_idx);
+	if (!ctx->is_secure_playback)
+		mtk_vcodec_dec_disable_irq(ctx->dev, hw_idx);
 
 	mtk_vcodec_dec_child_dev_off(ctx->dev, hw_idx);
 	if (IS_VDEC_LAT_ARCH(ctx->dev->vdec_pdata->hw_arch) &&
