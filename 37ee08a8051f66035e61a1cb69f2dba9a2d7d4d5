@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ee843a0_dbaf8e21",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2428,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2024-07-20T01:31:55Z",
+      "side": 1,
+      "message": "Apparently the previous patch applied cleanly (using git-am) but messed up the lines (confused this line with L#2454. Hence, re-uploaded with the correction. FYI, this is what was the actual change that went in the mainline linux kernel.",
+      "revId": "37ee08a8051f66035e61a1cb69f2dba9a2d7d4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
