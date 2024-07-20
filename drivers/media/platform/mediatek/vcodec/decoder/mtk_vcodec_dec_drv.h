@@ -309,7 +309,9 @@ struct mtk_vcodec_dec_dev {
 
 	enum mtk_vcodec_dec_chip_name chip_name;
 
+#if IS_REACHABLE(CONFIG_OPTEE)
 	struct mtk_vdec_optee_private *optee_private;
+#endif
 };
 
 static inline struct mtk_vcodec_dec_ctx *fh_to_dec_ctx(struct v4l2_fh *fh)

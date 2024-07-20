@@ -34,3 +34,15 @@ config VIDEO_MEDIATEK_VCODEC
 
 	  To compile this driver as modules, choose M here: the
 	  modules will be called mtk-vcodec-dec and mtk-vcodec-enc.
+
+config VIDEO_MEDIATEK_VCODEC_TEE
+	bool "MediaTek Video Codec TEE driver"
+	depends on OPTEE
+	depends on TEE
+	depends on VIDEO_MEDIATEK_VCODEC
+	help
+	  MediaTek video codec TEE driver provides interface to
+	  communicate with secure os to process secure video.
+
+	  Setting this config with Y when the driver need to support
+	  secure video playback(SVP).
