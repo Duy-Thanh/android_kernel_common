@@ -52,6 +52,7 @@ struct mtk_vdec_optee_private {
 	struct mutex tee_mutex;
 };
 
+#if IS_REACHABLE(CONFIG_OPTEE)
 /**
  * mtk_vcodec_dec_optee_open - setup the communication channels with TA.
  * @vcodec_dev: pointer to the mtk_vcodec_dec_dev of the device
@@ -69,5 +70,23 @@ int mtk_vcodec_dec_optee_private_init(struct mtk_vcodec_dec_dev *vcodec_dev);
  * @vcodec_dev: pointer to the mtk_vcodec_dec_dev of the device
  */
 void mtk_vcodec_dec_optee_close(struct mtk_vcodec_dec_dev *vcodec_dev);
+
+#else
+
+static inline int mtk_vcodec_dec_optee_open(struct mtk_vcodec_dec_dev *vcodec_dev)
+{
+	return 0;
+}
+
+static inline int mtk_vcodec_dec_optee_private_init(struct mtk_vcodec_dec_dev *vcodec_dev)
+{
+	return 0;
+}
+
+static inline void mtk_vcodec_dec_optee_close(struct mtk_vcodec_dec_dev *vcodec_dev)
+{
+}
+
+#endif /* IS_REACHABLE(CONFIG_OPTEE) */
 
 #endif /* _MTK_VCODEC_DEC_OPTEE_H_ */
