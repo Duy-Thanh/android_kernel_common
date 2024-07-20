@@ -53,35 +53,24 @@ static dev_t dma_heap_devt;
 static struct class *dma_heap_class;
 static DEFINE_XARRAY_ALLOC(dma_heap_minors);
 
-struct dma_heap *dma_heap_find(const char *name)
-{
-	struct dma_heap *h;
-
-	mutex_lock(&heap_list_lock);
-	list_for_each_entry(h, &heap_list, list) {
-		if (!strcmp(h->name, name)) {
-			kref_get(&h->refcount);
-			mutex_unlock(&heap_list_lock);
-			return h;
-		}
-	}
-	mutex_unlock(&heap_list_lock);
-	return NULL;
-}
-EXPORT_SYMBOL_GPL(dma_heap_find);
-
-
-void dma_heap_buffer_free(struct dma_buf *dmabuf)
-{
-	dma_buf_put(dmabuf);
-}
-EXPORT_SYMBOL_GPL(dma_heap_buffer_free);
-
+/**
+ * dma_heap_buffer_alloc - Allocate dma-buf from a dma_heap
+ * @heap:	DMA-Heap to allocate from
+ * @len:	size to allocate in bytes
+ * @fd_flags:	flags to set on returned dma-buf fd
+ * @heap_flags: flags to pass to the dma heap
+ *
+ * This is for internal dma-buf allocations only. Free returned buffers with dma_buf_put().
+ */
 struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
-				      u32 fd_flags,
-				      u64 heap_flags)
+				      unsigned int fd_flags,
+				      unsigned int heap_flags)
 {
-	struct dma_buf *dma_buf;
+	if (fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
+		return ERR_PTR(-EINVAL);
+
+	if (heap_flags & ~DMA_HEAP_VALID_HEAP_FLAGS)
+		return ERR_PTR(-EINVAL);
 
 	if (fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
 		return ERR_PTR(-EINVAL);
@@ -96,24 +85,18 @@ struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 	if (!len)
 		return ERR_PTR(-EINVAL);
 
-	trace_android_vh_dma_heap_buffer_alloc_start(heap->name, len,
-			fd_flags, heap_flags);
-	dma_buf = heap->ops->allocate(heap, len, fd_flags, heap_flags);
-	trace_android_vh_dma_heap_buffer_alloc_end(heap->name, len);
-
-	return dma_buf;
+	return heap->ops->allocate(heap, len, fd_flags, heap_flags);
 }
 EXPORT_SYMBOL_GPL(dma_heap_buffer_alloc);
 
-int dma_heap_bufferfd_alloc(struct dma_heap *heap, size_t len,
-			    u32 fd_flags,
-			    u64 heap_flags)
+static int dma_heap_bufferfd_alloc(struct dma_heap *heap, size_t len,
+				   unsigned int fd_flags,
+				   unsigned int heap_flags)
 {
 	struct dma_buf *dmabuf;
 	int fd;
 
 	dmabuf = dma_heap_buffer_alloc(heap, len, fd_flags, heap_flags);
-
 	if (IS_ERR(dmabuf))
 		return PTR_ERR(dmabuf);
 
@@ -125,7 +108,6 @@ int dma_heap_bufferfd_alloc(struct dma_heap *heap, size_t len,
 	return fd;
 
 }
-EXPORT_SYMBOL_GPL(dma_heap_bufferfd_alloc);
 
 static int dma_heap_open(struct inode *inode, struct file *file)
 {
@@ -250,33 +232,6 @@ void *dma_heap_get_drvdata(struct dma_heap *heap)
 }
 EXPORT_SYMBOL_GPL(dma_heap_get_drvdata);
 
-static void dma_heap_release(struct kref *ref)
-{
-	struct dma_heap *heap = container_of(ref, struct dma_heap, refcount);
-	int minor = MINOR(heap->heap_devt);
-
-	/* Note, we already holding the heap_list_lock here */
-	list_del(&heap->list);
-
-	device_destroy(dma_heap_class, heap->heap_devt);
-	cdev_del(&heap->heap_cdev);
-	xa_erase(&dma_heap_minors, minor);
-
-	kfree(heap);
-}
-
-void dma_heap_put(struct dma_heap *h)
-{
-	/*
-	 * Take the heap_list_lock now to avoid racing with code
-	 * scanning the list and then taking a kref.
-	 */
-	mutex_lock(&heap_list_lock);
-	kref_put(&h->refcount, dma_heap_release);
-	mutex_unlock(&heap_list_lock);
-}
-EXPORT_SYMBOL_GPL(dma_heap_put);
-
 /**
  * dma_heap_get_dev() - get device struct for the heap
  * @heap: DMA-Heap to retrieve device struct from
@@ -397,6 +352,36 @@ err0:
 }
 EXPORT_SYMBOL_GPL(dma_heap_add);
 
+/**
+ * dma_heap_find - get the heap registered with the specified name
+ * @name: Name of the DMA-Heap to find
+ *
+ * Returns:
+ * The DMA-Heap with the provided name.
+ *
+ * NOTE: DMA-Heaps returned from this function MUST be released using
+ * dma_heap_put() when the user is done to enable the heap to be unloaded.
+ */
+struct dma_heap *dma_heap_find(const char *name)
+{
+	struct dma_heap *h;
+
+	mutex_lock(&heap_list_lock);
+	list_for_each_entry(h, &heap_list, list) {
+		if (!kref_get_unless_zero(&h->refcount))
+			continue;
+
+		if (!strcmp(h->name, name)) {
+			mutex_unlock(&heap_list_lock);
+			return h;
+		}
+		dma_heap_put(h);
+	}
+	mutex_unlock(&heap_list_lock);
+	return NULL;
+}
+EXPORT_SYMBOL_GPL(dma_heap_find);
+
 static void dma_heap_release(struct kref *ref)
 {
 	struct dma_heap *heap = container_of(ref, struct dma_heap, refcount);
@@ -421,6 +406,7 @@ void dma_heap_put(struct dma_heap *heap)
 {
 	kref_put(&heap->refcount, dma_heap_release);
 }
+EXPORT_SYMBOL_GPL(dma_heap_put);
 
 static char *dma_heap_devnode(const struct device *dev, umode_t *mode)
 {
