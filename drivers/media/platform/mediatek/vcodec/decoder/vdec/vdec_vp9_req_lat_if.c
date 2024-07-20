@@ -141,6 +141,7 @@ struct vdec_vp9_slice_frame_counts {
  * @skip:	skip counts.
  * @y_mode:	Y prediction mode counts.
  * @filter:	interpolation filter counts.
+ * @mv_joint:	motion vector joint counts.
  * @sign:	motion vector sign counts.
  * @classes:	motion vector class counts.
  * @class0:	motion vector class0 bit counts.
@@ -804,6 +805,9 @@ static void vdec_vp9_slice_setup_frame_ctx(struct vdec_vp9_slice_instance *insta
 	error_resilient_mode = HDR_FLAG(ERROR_RESILIENT);
 	reset_frame_context = uh->reset_frame_context;
 
+	if (instance->ctx->is_secure_playback)
+		return;
+
 	/*
 	 * according to "6.2 Uncompressed header syntax" in
 	 * "VP9 Bitstream & Decoding Process Specification",
@@ -818,8 +822,7 @@ static void vdec_vp9_slice_setup_frame_ctx(struct vdec_vp9_slice_instance *insta
 		 * 2 resets just the context specified in the frame header
 		 * 3 resets all contexts
 		 */
-		if (key_frame || error_resilient_mode ||
-		    reset_frame_context == 3) {
+		if (key_frame || error_resilient_mode || reset_frame_context == 3) {
 			/* use default table */
 			for (i = 0; i < 4; i++)
 				instance->dirty[i] = 0;
@@ -1042,6 +1045,9 @@ static void vdec_vp9_slice_setup_seg_buffer(struct vdec_vp9_slice_instance *inst
 {
 	struct vdec_vp9_slice_uncompressed_header *uh;
 
+	if (instance->ctx->is_secure_playback)
+		return;
+
 	/* reset segment buffer */
 	uh = &vsi->frame.uh;
 	if (uh->frame_type == 0 ||
@@ -1172,15 +1178,16 @@ static int vdec_vp9_slice_setup_lat(struct vdec_vp9_slice_instance *instance,
 
 	vdec_vp9_slice_setup_seg_buffer(instance, vsi, &instance->seg[0]);
 
-	/* setup prob/tile buffers for LAT */
+	if (!instance->ctx->is_secure_playback) {
+		/* setup prob/tile buffers for LAT */
+		ret = vdec_vp9_slice_setup_prob_buffer(instance, vsi);
+		if (ret)
+			goto err;
 
-	ret = vdec_vp9_slice_setup_prob_buffer(instance, vsi);
-	if (ret)
-		goto err;
-
-	ret = vdec_vp9_slice_setup_tile_buffer(instance, vsi, bs);
-	if (ret)
-		goto err;
+		ret = vdec_vp9_slice_setup_tile_buffer(instance, vsi, bs);
+		if (ret)
+			goto err;
+	}
 
 	return 0;
 
@@ -1599,7 +1606,8 @@ static int vdec_vp9_slice_update_single(struct vdec_vp9_slice_instance *instance
 		       pfc->seq, vsi->state.crc[4], vsi->state.crc[5],
 		       vsi->state.crc[6], vsi->state.crc[7]);
 
-	vdec_vp9_slice_update_prob(instance, vsi);
+	if (!instance->ctx->is_secure_playback)
+		vdec_vp9_slice_update_prob(instance, vsi);
 
 	instance->width = vsi->frame.uh.frame_width;
 	instance->height = vsi->frame.uh.frame_height;
@@ -1632,7 +1640,8 @@ static int vdec_vp9_slice_update_lat(struct vdec_vp9_slice_instance *instance,
 		return -EAGAIN;
 	}
 
-	vdec_vp9_slice_update_prob(instance, vsi);
+	if (!instance->ctx->is_secure_playback)
+		vdec_vp9_slice_update_prob(instance, vsi);
 
 	instance->width = vsi->frame.uh.frame_width;
 	instance->height = vsi->frame.uh.frame_height;
@@ -1665,7 +1674,6 @@ static int vdec_vp9_slice_setup_core_buffer(struct vdec_vp9_slice_instance *inst
 	struct vb2_queue *vq;
 	struct vdec_vp9_slice_reference *ref;
 	int plane;
-	int size;
 	int w;
 	int h;
 	int i;
@@ -1673,12 +1681,14 @@ static int vdec_vp9_slice_setup_core_buffer(struct vdec_vp9_slice_instance *inst
 	plane = instance->ctx->q_data[MTK_Q_DATA_DST].fmt->num_planes;
 	w = vsi->frame.uh.frame_width;
 	h = vsi->frame.uh.frame_height;
-	size = ALIGN(w, 64) * ALIGN(h, 64);
+
+	vsi->fb.y.size = instance->ctx->picinfo.fb_sz[0];
+	vsi->fb.c.size = instance->ctx->picinfo.fb_sz[1];
 
 	/* frame buffer */
 	vsi->fb.y.dma_addr = fb->base_y.dma_addr;
 	if (plane == 1)
-		vsi->fb.c.dma_addr = fb->base_y.dma_addr + size;
+		vsi->fb.c.dma_addr = fb->base_y.dma_addr + vsi->fb.y.size;
 	else
 		vsi->fb.c.dma_addr = fb->base_c.dma_addr;
 
@@ -1694,8 +1704,15 @@ static int vdec_vp9_slice_setup_core_buffer(struct vdec_vp9_slice_instance *inst
 		return -EINVAL;
 
 	/* update internal buffer's width/height */
-	instance->dpb[vb->index].width = w;
-	instance->dpb[vb->index].height = h;
+	for (i = 0; i < vb2_get_num_buffers(vq); i++) {
+		struct vb2_buffer *buf = vb2_get_buffer(vq, i);
+
+		if (vb == buf) {
+			instance->dpb[i].width = w;
+			instance->dpb[i].height = h;
+			break;
+		}
+	}
 
 	/*
 	 * get buffer's width/height from instance
@@ -1717,7 +1734,7 @@ static int vdec_vp9_slice_setup_core_buffer(struct vdec_vp9_slice_instance *inst
 				vb2_dma_contig_plane_dma_addr(vb, 0);
 			if (plane == 1)
 				vsi->ref[i].c.dma_addr =
-					vsi->ref[i].y.dma_addr + size;
+					vsi->ref[i].y.dma_addr + vsi->fb.y.size;
 			else
 				vsi->ref[i].c.dma_addr =
 					vb2_dma_contig_plane_dma_addr(vb, 1);
@@ -1779,7 +1796,8 @@ static int vdec_vp9_slice_setup_core(struct vdec_vp9_slice_instance *instance,
 	if (ret)
 		goto err;
 
-	vdec_vp9_slice_setup_seg_buffer(instance, vsi, &instance->seg[1]);
+	if (!instance->ctx->is_secure_playback)
+		vdec_vp9_slice_setup_seg_buffer(instance, vsi, &instance->seg[1]);
 
 	return 0;
 
@@ -1874,19 +1892,30 @@ static int vdec_vp9_slice_init(struct mtk_vcodec_dec_ctx *ctx)
 		goto error_vsi;
 	}
 	instance->init_vsi = vsi;
-	instance->core_vsi = mtk_vcodec_fw_map_dm_addr(ctx->dev->fw_handler,
-						       (u32)vsi->core_vsi);
-	if (!instance->core_vsi) {
-		mtk_vdec_err(ctx, "failed to get VP9 core vsi\n");
-		ret = -EINVAL;
-		goto error_vsi;
+
+	if (ctx->is_secure_playback) {
+		instance->core_vsi = mtk_vcodec_dec_get_shm_buffer_va(ctx->dev, MTK_VDEC_CORE,
+								      OPTEE_DATA_INDEX);
+		if (!instance->core_vsi) {
+			mtk_vdec_err(ctx, "failed to get VP9 svp core vsi\n");
+			ret = -EINVAL;
+			goto error_vsi;
+		}
+		instance->irq = 0;
+	} else {
+		instance->core_vsi = mtk_vcodec_fw_map_dm_addr(ctx->dev->fw_handler,
+							       (u32)vsi->core_vsi);
+		if (!instance->core_vsi) {
+			mtk_vdec_err(ctx, "failed to get VP9 normal core vsi\n");
+			ret = -EINVAL;
+			goto error_vsi;
+		}
+		instance->irq = 1;
+
+		ret = vdec_vp9_slice_init_default_frame_ctx(instance);
+		if (ret)
+			goto error_default_frame_ctx;
 	}
-
-	instance->irq = 1;
-
-	ret = vdec_vp9_slice_init_default_frame_ctx(instance);
-	if (ret)
-		goto error_default_frame_ctx;
 
 	ctx->drv_handle = instance;
 
@@ -2101,9 +2130,12 @@ static int vdec_vp9_slice_lat_decode(void *h_vdec, struct mtk_vcodec_mem *bs,
 		       (unsigned long)pfc->vsi.trans.dma_addr,
 		       (unsigned long)pfc->vsi.trans.dma_addr_end);
 
-	vdec_msg_queue_update_ube_wptr(&ctx->msg_queue,
-				       vsi->trans.dma_addr_end +
-				       ctx->msg_queue.wdma_addr.dma_addr);
+	if (!instance->ctx->is_secure_playback) {
+		vsi->trans.dma_addr_end += ctx->msg_queue.wdma_addr.dma_addr;
+		mtk_vdec_debug(ctx, "core dma_addr_end 0x%lx\n",
+			       (unsigned long)pfc->vsi.trans.dma_addr_end);
+	}
+	vdec_msg_queue_update_ube_wptr(&ctx->msg_queue, vsi->trans.dma_addr_end);
 	vdec_msg_queue_qbuf(&ctx->msg_queue.core_ctx, lat_buf);
 
 	return 0;
@@ -2183,9 +2215,6 @@ static int vdec_vp9_slice_core_decode(struct vdec_lat_buf *lat_buf)
 		goto err;
 	}
 
-	pfc->vsi.trans.dma_addr_end += ctx->msg_queue.wdma_addr.dma_addr;
-	mtk_vdec_debug(ctx, "core dma_addr_end 0x%lx\n",
-		       (unsigned long)pfc->vsi.trans.dma_addr_end);
 	vdec_msg_queue_update_ube_rptr(&ctx->msg_queue, pfc->vsi.trans.dma_addr_end);
 	ctx->dev->vdec_pdata->cap_to_disp(ctx, 0, lat_buf->src_buf_req);
 
