@@ -41289,11 +41289,6 @@ member {
   type_id: 0x7613f9a7
 }
 member {
-  id: 0x3e5d0376
-  type_id: 0x765a5eef
-  offset: 192
-}
-member {
   id: 0x3e670f18
   type_id: 0x76b2536c
   offset: 320
@@ -111878,11 +111873,6 @@ member {
   name: "ip_after_call"
   type_id: 0x18bd6530
   offset: 4992
-}
-member {
-  id: 0x0e850e04
-  name: "ip_defrag_offset"
-  type_id: 0x6720d32f
 }
 member {
   id: 0xbc6a844a
@@ -189235,6 +189225,12 @@ member {
   offset: 64
 }
 member {
+  id: 0x0489a9d9
+  name: "suspend_on_no_request"
+  type_id: 0x6d7f5ff6
+  offset: 1672
+}
+member {
   id: 0x0b4c6d3f
   name: "suspend_opp"
   type_id: 0x19e66c71
@@ -218984,15 +218980,6 @@ struct_union {
     bytesize: 512
     member_id: 0x83c07c3a
     member_id: 0xa70d7362
-  }
-}
-struct_union {
-  id: 0x765a5eef
-  kind: UNION
-  definition {
-    bytesize: 8
-    member_id: 0x828c89b5
-    member_id: 0x0e850e04
   }
 }
 struct_union {
@@ -258616,7 +258603,7 @@ struct_union {
   definition {
     bytesize: 248
     member_id: 0x34366909
-    member_id: 0x3e5d0376
+    member_id: 0x828c817c
     member_id: 0x318fd08b
     member_id: 0x53e7b9ea
     member_id: 0x345f6930
@@ -266614,6 +266601,7 @@ struct_union {
     member_id: 0xbbefba04
     member_id: 0xb768ef54
     member_id: 0x2061f6ba
+    member_id: 0x0489a9d9
     member_id: 0x2d081217
   }
 }
@@ -299012,6 +299000,11 @@ function {
   parameter_id: 0x1dc3d428
   parameter_id: 0x18bd6530
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x17956035
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1c34c69b
 }
 function {
   id: 0x179e48e8
@@ -373068,6 +373061,15 @@ elf_symbol {
   full_name: "gro_cells_receive"
 }
 elf_symbol {
+  id: 0xa589de7f
+  name: "groups_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x732dd326
+  type_id: 0x17956035
+  full_name: "groups_free"
+}
+elf_symbol {
   id: 0x3f69092d
   name: "gs_alloc_req"
   is_defined: true
@@ -415156,6 +415158,7 @@ interface {
   symbol_id: 0x0ac30c0d
   symbol_id: 0x61ad5a29
   symbol_id: 0x4b6846bd
+  symbol_id: 0xa589de7f
   symbol_id: 0x3f69092d
   symbol_id: 0x61776461
   symbol_id: 0xfeac8d5f
