@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb53e5b3_07820bc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-22T12:21:24Z",
+      "side": 1,
+      "message": "If you memory lend from the region that you unmap from host stage-2 then you still create fragmentation until we coalesce. I wonder if we can update the stage-1 mappings from the arm ff-a driver on FFA_LEND.",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 55
+      },
+      "revId": "2c6cbc9eaa1f61e15c3dd9076c5f3ed3f0663fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1b3ae6_8a75e7f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-22T12:21:24Z",
+      "side": 1,
+      "message": "I think we can mention `speculation` as this is why we need the unmap in the first place",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "2c6cbc9eaa1f61e15c3dd9076c5f3ed3f0663fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294107ca_896127e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-22T12:21:24Z",
+      "side": 1,
+      "message": "%s/re-enable/re-enables/",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "2c6cbc9eaa1f61e15c3dd9076c5f3ed3f0663fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a04db3f_040bddc3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2361,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-22T12:21:24Z",
+      "side": 1,
+      "message": "Q: Is this intentional (the same for unamp host path) ? Throughout this operation we don\u0027t update the IOMMUs pagetables even though we modify the mappings in the host stage-2. In this window, a DMA capable hardware can issue transactions targeting this (unmapped from AP) region.\n\nAlso do we need to map this back explicitly ? We can leave it un-mapped and it will fault on the first access.",
+      "range": {
+        "startLine": 2361,
+        "startChar": 64,
+        "endLine": 2361,
+        "endChar": 69
+      },
+      "revId": "2c6cbc9eaa1f61e15c3dd9076c5f3ed3f0663fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
