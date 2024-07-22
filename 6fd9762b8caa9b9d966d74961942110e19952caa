@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607b976a_27197e27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-07-22T09:34:24Z",
+      "side": 1,
+      "message": "that hits some compilation issues\n\n\nkernel_aarch64_gcov:\n```\ninclude/linux/thread_info.h:244:4: error: call to \u0027__bad_copy_from\u0027 declared with \u0027error\u0027 attribute: copy source size is too small\n  244 |                         __bad_copy_from();\n      |                         ^\n```\n\nkernel_kasan_x86_64:\n```\ninclude/linux/fortify-string.h:466:4: error: call to \u0027__write_overflow_field\u0027 declared with \u0027warning\u0027 attribute: detected write beyond size of field (1st parameter); maybe use struct_group()? [-Werror,-Wattribute-warning]\n  466 |                         __write_overflow_field(p_size_field, size);\n      |                         ^\n1 error generated.\n```\n\nkernel_raviole:\n```\ninclude/linux/vmstat.h:522:36: error: arithmetic between different enumeration types (\u0027enum node_stat_item\u0027 and \u0027enum lru_list\u0027) [-Werror,-Wenum-enum-conversion]\n  522 |         return node_stat_name(NR_LRU_BASE + lru) + 3; // skip \"nr_\"\n      |                               ~~~~~~~~~~~ ^ ~~~\n```",
+      "revId": "6fd9762b8caa9b9d966d74961942110e19952caa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
