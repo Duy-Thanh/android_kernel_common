@@ -16,6 +16,23 @@
       "message": "hello,\nPlease help to merge the patch, thanks.",
       "revId": "67500fe56f6790dcab92dfaa0a941fb5193df43a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdd4324e_5a865781",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2024-07-22T16:57:40Z",
+      "side": 1,
+      "message": "The description does not match the symbols that are actually exported by this patch.",
+      "revId": "67500fe56f6790dcab92dfaa0a941fb5193df43a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
