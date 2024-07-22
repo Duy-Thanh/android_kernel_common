@@ -104,6 +104,24 @@
       "parentUuid": "8e548ca9_55b8bba2",
       "revId": "af3789e3db1ae277d6083d8d2d88d25a1259a2db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a91dea5a_aa74453a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-22T12:15:11Z",
+      "side": 1,
+      "message": "As you need to support these systems going forward for a long time, getting the code upstream is the simplest way to do so, AND we can take the needed abi changes if necessary.  This change, as-is, can not be taken at all.\n\nAlso you had many years from the previous submission to get the changes merged upstream, were they rejected or did that work stall somewhere?",
+      "parentUuid": "4df3b973_8c12c9a4",
+      "revId": "af3789e3db1ae277d6083d8d2d88d25a1259a2db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
