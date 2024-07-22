@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c2b38f_24e714d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T21:05:40Z",
+      "side": 1,
+      "message": "The STG file is corrupt:\n```\nWARNING: Logging before InitGoogle() is written to STDERR\nE0000 00:00:1721640156.323242 3940291 text_format.cc:504] Error parsing text-format stg.proto.STG: 343955:5: Non-repeated field \"id\" is specified multiple times.\nundefined node: \u003c106073\u003e\n```\nPlease re-create it.",
+      "revId": "efbce01688e6b40410b3d10443724820a60aad84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
