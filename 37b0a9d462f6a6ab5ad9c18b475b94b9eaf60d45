@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000085365563",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3188439?revision\u003d2",
+      "key": {
+        "uuid": "86ca3e92_18816c7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-22T19:16:55Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/a49d107bf368cfb8f61cd8f052481a045d3ce7a9).\n\n```\n    - ## android/gki_aarch64_protected_modules ##\n    -@@ android/gki_aarch64_protected_modules: drivers/pps/pps_core.ko\n    - drivers/ptp/ptp.ko\n    - drivers/ptp/ptp_kvm.ko\n    - drivers/usb/class/cdc-acm.ko\n    -+drivers/usb/mon/usbmon.ko\n    - drivers/usb/serial/ftdi_sio.ko\n    - drivers/usb/serial/usbserial.ko\n    - lib/crypto/libarc4.ko\n    +    (cherry picked from commit a49d107bf368cfb8f61cd8f052481a045d3ce7a9)\n     \n      ## arch/arm64/configs/gki_defconfig ##\n     @@ arch/arm64/configs/gki_defconfig: CONFIG_HID_WIIMOTE\u003dy\n    @@ modules.bzl: _COMMON_GKI_MODULES_LIST \u003d [\n     +    \"drivers/usb/mon/usbmon.ko\",\n          \"drivers/usb/serial/ftdi_sio.ko\",\n          \"drivers/usb/serial/usbserial.ko\",\n    -     \"kernel/kheaders.ko\",\n    +     \"fs/netfs/netfs.ko\",\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "37b0a9d462f6a6ab5ad9c18b475b94b9eaf60d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
