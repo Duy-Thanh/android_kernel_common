@@ -1,0 +1,300 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c18eadb1_f295f5cc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5640,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "check for invalid flags?",
+      "range": {
+        "startLine": 5640,
+        "startChar": 68,
+        "endLine": 5640,
+        "endChar": 73
+      },
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ec61f61_df05bbf5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5642,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "This is global - are you sure you don\u0027t want more fine-grained control of this (eg, default to full reporting, but change the flags for some individual procs based on report spamminess or other criteria)",
+      "range": {
+        "startLine": 5642,
+        "startChar": 40,
+        "endLine": 5642,
+        "endChar": 47
+      },
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9abb0e5_7227eaef",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5644,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "how often is this called?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a540b0be_b93a2b8b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5647,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "This is global - do we have a mechanism to prevent any random app from clearing the flags?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80de2f2a_e6c34ddc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5648,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "what are we protecting here? If needed, should this lock be renamed given report_flags has nothing to do with the context manager?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3938aee3_d1218ef8",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "please add kernel-doc headers to all functions and struct definitions",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d114cc4_b5179ea7",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "what happens when this pid dies? What if PIDs are recycled to the point that this pid is a new process?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc9d200_07aa3f31",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "c-style comments please",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "121b6d36_f130837d",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "`int __init binder_init_genl(void)`?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37d2ee5b_d9e2003e",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "none of these headers are needed to call the functions declared below. Why shouldn\u0027t these be moved to binder_genl.c since they are really about the implementation internals.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5a1270ac_eee8fa11",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder_genl.h",
+              "range": {
+                "startLine": 9,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6209356b_a4c2eaed",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "how about `binder_genl_send_report()`, `binder_genl_report_enabled()` and `binder_genl_init()`?",
+      "fixSuggestions": [
+        {
+          "fixId": "05fa7f63_833cab6f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder_genl.h",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "int binder_genl_init(void);\n"
+            },
+            {
+              "path": "drivers/android/binder_genl.h",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "bool binder_genl_report_enabled(struct binder_context *context, u32 mask);\n"
+            },
+            {
+              "path": "drivers/android/binder_genl.h",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "void binder_genl_send_report(struct binder_report *report, int len);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b561aa4_807a31f9",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T20:27:25Z",
+      "side": 1,
+      "message": "Yes, please list this somewhere and add a kernel-docs header for binder_context that points to the documentation of allowed flags",
+      "fixSuggestions": [
+        {
+          "fixId": "caad9827_abfa1ae7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder_internal.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "\t * What kinds of binder transactions should be reported.\n\t * See binder_report_flags for the list of flags.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
