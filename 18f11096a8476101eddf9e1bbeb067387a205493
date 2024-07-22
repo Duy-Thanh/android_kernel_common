@@ -184,6 +184,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09240bfd_b0d55547",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5647,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T21:21:45Z",
+      "side": 1,
+      "message": "then shouldn\u0027t the selinux config change be included in this patchset?",
+      "parentUuid": "5380c53b_1df36533",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80de2f2a_e6c34ddc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 8
@@ -213,6 +231,24 @@
       "side": 1,
       "message": "In case there\u0027re multiple processes calling the ioctl at the same time, although extremely unlikely. For Android it\u0027s perfectly fine to bypass the lock here but for Linux device driver, I assume this should be protected. What do you think?",
       "parentUuid": "80de2f2a_e6c34ddc",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21b6e8f_6841f863",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5648,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T21:21:45Z",
+      "side": 1,
+      "message": "But this doesn\u0027t protect against that case. mutex or not, one of the two threads is going to go first and be overwritten by the 2nd. I don\u0027t see any benefit to the mutex here.",
+      "parentUuid": "6d425afe_69d6464a",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
