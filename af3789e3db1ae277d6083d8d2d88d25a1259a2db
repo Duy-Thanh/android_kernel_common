@@ -122,6 +122,24 @@
       "parentUuid": "4df3b973_8c12c9a4",
       "revId": "af3789e3db1ae277d6083d8d2d88d25a1259a2db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca056f1_cf0f56d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538735
+      },
+      "writtenOn": "2024-07-22T12:26:41Z",
+      "side": 1,
+      "message": "Our new platform (since k515) didn\u0027t use vendor hook function anymore, we can directly adopt the original V4L2 framework. Thus, there will be no need to upstream any patch to kernel.org. Currently, only the legacy platform is still using the vendor hook functions, that\u0027s why we try not to upstream a specific patch to kerenl.org just for a legacy platform, consider that no new platforms are using this feature.",
+      "parentUuid": "a91dea5a_aa74453a",
+      "revId": "af3789e3db1ae277d6083d8d2d88d25a1259a2db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
