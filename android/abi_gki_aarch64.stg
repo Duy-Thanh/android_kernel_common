@@ -302089,6 +302089,17 @@ function {
   parameter_id: 0x139e8957
 }
 function {
+  id: 0x1c80fcb1
+  return_type_id: 0x48b5725f
+  parameter_id: 0x32a623d7
+  parameter_id: 0x2e8d5f05
+  parameter_id: 0x2e8d5f05
+  parameter_id: 0x2e8d5f05
+  parameter_id: 0x26a97673
+  parameter_id: 0x18bd6530
+  parameter_id: 0x07dcdbe1
+}
+function {
   id: 0x1c81137a
   return_type_id: 0x48b5725f
   parameter_id: 0x30650ba6
@@ -319380,6 +319391,13 @@ function {
   parameter_id: 0x914dbfdc
   parameter_id: 0x0483e6f8
   parameter_id: 0x914dbfdc
+}
+function {
+  id: 0x96bf3e6e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2e8d5f05
+  parameter_id: 0x26a97673
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x96bf5e03
@@ -390671,6 +390689,24 @@ elf_symbol {
   full_name: "qdisc_hash_add"
 }
 elf_symbol {
+  id: 0x083bac44
+  name: "qdisc_offload_dump_helper"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfb63d399
+  type_id: 0x96bf3e6e
+  full_name: "qdisc_offload_dump_helper"
+}
+elf_symbol {
+  id: 0x9cd9475e
+  name: "qdisc_offload_graft_helper"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x347fcb50
+  type_id: 0x1c80fcb1
+  full_name: "qdisc_offload_graft_helper"
+}
+elf_symbol {
   id: 0x78f8d020
   name: "qdisc_put"
   is_defined: true
@@ -416157,6 +416193,8 @@ interface {
   symbol_id: 0x0ca915af
   symbol_id: 0xce0252f1
   symbol_id: 0xa637f7b7
+  symbol_id: 0x083bac44
+  symbol_id: 0x9cd9475e
   symbol_id: 0x78f8d020
   symbol_id: 0xae1b45d2
   symbol_id: 0x788eb5c1
