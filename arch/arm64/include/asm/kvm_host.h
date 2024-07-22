@@ -729,6 +729,24 @@ struct kvm_vcpu_arch {
 	__size_ret;							\
 })
 
+<<<<<<< HEAD   (207ff5 Merge branch 'android14-5.15' into branch 'android14-5.15-lt)
+=======
+/* vcpu_arch flags field values: */
+#define KVM_ARM64_DEBUG_DIRTY		(1 << 0)
+#define KVM_ARM64_FP_ENABLED		(1 << 1) /* guest FP regs loaded */
+#define KVM_ARM64_FP_HOST		(1 << 2) /* host FP regs loaded */
+#define KVM_ARM64_HOST_SVE_IN_USE	(1 << 3) /* backup for host TIF_SVE */
+#define KVM_ARM64_HOST_SVE_ENABLED	(1 << 4) /* SVE enabled for EL0 */
+#define KVM_ARM64_GUEST_HAS_SVE		(1 << 5) /* SVE exposed to guest */
+#define KVM_ARM64_VCPU_SVE_FINALIZED	(1 << 6) /* SVE config completed */
+#define KVM_ARM64_GUEST_HAS_PTRAUTH	(1 << 7) /* PTRAUTH exposed to guest */
+#define KVM_ARM64_PENDING_EXCEPTION	(1 << 8) /* Exception pending */
+#define KVM_ARM64_EXCEPT_MASK		(7 << 9) /* Target EL/MODE */
+#define KVM_ARM64_DEBUG_STATE_SAVE_SPE	(1 << 12) /* Save SPE context if active  */
+#define KVM_ARM64_DEBUG_STATE_SAVE_TRBE	(1 << 13) /* Save TRBE context if active  */
+#define KVM_ARM64_VCPU_IN_WFI		(1 << 14) /* WFI instruction trapped */
+
+>>>>>>> BRANCH (f45bea Linux 5.15.162)
 #define KVM_GUESTDBG_VALID_MASK (KVM_GUESTDBG_ENABLE | \
 				 KVM_GUESTDBG_USE_SW_BP | \
 				 KVM_GUESTDBG_USE_HW | \

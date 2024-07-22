@@ -623,12 +623,20 @@ fh_compose(struct svc_fh *fhp, struct svc_export *exp, struct dentry *dentry,
 			d_inode(exp->ex_path.dentry)->i_ino,
 			exp->ex_fsid, exp->ex_uuid);
 
+<<<<<<< HEAD   (207ff5 Merge branch 'android14-5.15' into branch 'android14-5.15-lt)
 		if (inode)
 			_fh_update(fhp, exp, dentry);
 		if (fhp->fh_handle.fh_fileid_type == FILEID_INVALID) {
 			fh_put(fhp);
 			return nfserr_opnotsupp;
 		}
+=======
+	if (inode)
+		_fh_update(fhp, exp, dentry);
+	if (fhp->fh_handle.fh_fileid_type == FILEID_INVALID) {
+		fh_put(fhp);
+		return nfserr_stale;
+>>>>>>> BRANCH (f45bea Linux 5.15.162)
 	}
 
 	return 0;
@@ -655,10 +663,16 @@ fh_update(struct svc_fh *fhp)
 		if (fhp->fh_handle.fh_fileid_type != FILEID_ROOT)
 			return 0;
 
+<<<<<<< HEAD   (207ff5 Merge branch 'android14-5.15' into branch 'android14-5.15-lt)
 		_fh_update(fhp, fhp->fh_export, dentry);
 		if (fhp->fh_handle.fh_fileid_type == FILEID_INVALID)
 			return nfserr_opnotsupp;
 	}
+=======
+	_fh_update(fhp, fhp->fh_export, dentry);
+	if (fhp->fh_handle.fh_fileid_type == FILEID_INVALID)
+		return nfserr_stale;
+>>>>>>> BRANCH (f45bea Linux 5.15.162)
 	return 0;
 out_bad:
 	printk(KERN_ERR "fh_update: fh not verified!\n");

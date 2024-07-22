@@ -729,8 +729,20 @@ void vgic_v3_put(struct kvm_vcpu *vcpu, bool blocking)
 
 	WARN_ON(vgic_v4_put(vcpu, blocking));
 
+<<<<<<< HEAD   (207ff5 Merge branch 'android14-5.15' into branch 'android14-5.15-lt)
 	if (likely(!is_protected_kvm_enabled()))
 		kvm_call_hyp(__vgic_v3_save_vmcr_aprs, cpu_if);
+=======
+void vgic_v3_put(struct kvm_vcpu *vcpu)
+{
+	struct vgic_v3_cpu_if *cpu_if = &vcpu->arch.vgic_cpu.vgic_v3;
+
+	WARN_ON(vgic_v4_put(vcpu));
+
+	vgic_v3_vmcr_sync(vcpu);
+
+	kvm_call_hyp(__vgic_v3_save_aprs, cpu_if);
+>>>>>>> BRANCH (f45bea Linux 5.15.162)
 
 	if (has_vhe())
 		__vgic_v3_deactivate_traps(cpu_if);
