@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2dce2a3_156ed39c",
+        "filename": "include/trace/hooks/v4l2core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3538735
+      },
+      "writtenOn": "2024-07-22T10:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c796a7a_34aea8d6",
+      "revId": "c1c1ed867db52a186126d7841fbac3d67a324965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "080e06b4_3582be7b",
@@ -66,6 +84,24 @@
       "writtenOn": "2024-07-19T16:24:54Z",
       "side": 1,
       "message": "please remove this unnecessary inclusion",
+      "revId": "c1c1ed867db52a186126d7841fbac3d67a324965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "571285a8_cb361651",
+        "filename": "include/trace/hooks/v4l2mc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3538735
+      },
+      "writtenOn": "2024-07-22T10:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "080e06b4_3582be7b",
       "revId": "c1c1ed867db52a186126d7841fbac3d67a324965",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

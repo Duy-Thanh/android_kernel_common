@@ -50,6 +50,24 @@
       "message": "Why isn\u0027t this change submitted upstream first?  We can backport it from there as it will not break the abi for that type of change.",
       "revId": "af3789e3db1ae277d6083d8d2d88d25a1259a2db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d1081a5_4b16a021",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538735
+      },
+      "writtenOn": "2024-07-22T10:00:34Z",
+      "side": 1,
+      "message": "Hi, Do you mean upstream to kernel.org? Or you mean we have to directly cherry-pick the following patches: 1699785, 1745515, 1768667 with an \"UPSTREAM\" tag instead of creating a new patch? Thanks~",
+      "parentUuid": "8acf42a6_905fc359",
+      "revId": "af3789e3db1ae277d6083d8d2d88d25a1259a2db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
