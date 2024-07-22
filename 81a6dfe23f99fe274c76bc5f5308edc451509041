@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2eb7983_f9ed85d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T16:54:12Z",
+      "side": 1,
+      "message": "this patch is being reverted in aosp/3187034 since it is not referenced by any symbol list.",
+      "revId": "81a6dfe23f99fe274c76bc5f5308edc451509041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
