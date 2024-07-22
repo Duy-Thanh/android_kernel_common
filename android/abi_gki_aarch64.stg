@@ -302597,6 +302597,11 @@ function {
   parameter_id: 0x026525e9
 }
 function {
+  id: 0x1d1a000c
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3609467c
+}
+function {
   id: 0x1d1cf212
   return_type_id: 0x48b5725f
   parameter_id: 0x3fab28c8
@@ -396759,6 +396764,15 @@ elf_symbol {
   full_name: "smpboot_register_percpu_thread"
 }
 elf_symbol {
+  id: 0xbf61e6bf
+  name: "smpboot_unregister_percpu_thread"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc393fe07
+  type_id: 0x1d1a000c
+  full_name: "smpboot_unregister_percpu_thread"
+}
+elf_symbol {
   id: 0x35280a80
   name: "snd_card_add_dev_attr"
   is_defined: true
@@ -416833,6 +416847,7 @@ interface {
   symbol_id: 0x1f9b728b
   symbol_id: 0x99a17453
   symbol_id: 0xd7393cd7
+  symbol_id: 0xbf61e6bf
   symbol_id: 0x35280a80
   symbol_id: 0x03fd01bd
   symbol_id: 0x7df62009
