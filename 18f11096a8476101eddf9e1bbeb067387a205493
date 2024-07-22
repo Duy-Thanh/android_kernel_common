@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0474a255_c7a01816",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Thanks for reviewing the patch!\n\nI\u0027ll fix the issues in new revision.",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c18eadb1_f295f5cc",
@@ -14,6 +31,30 @@
       "writtenOn": "2024-07-22T20:27:25Z",
       "side": 1,
       "message": "check for invalid flags?",
+      "range": {
+        "startLine": 5640,
+        "startChar": 68,
+        "endLine": 5640,
+        "endChar": 73
+      },
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8578852_1e5bff51",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5640,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Will add it. Thx",
+      "parentUuid": "c18eadb1_f295f5cc",
       "range": {
         "startLine": 5640,
         "startChar": 68,
@@ -49,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ed33a59_7b3d45b5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5642,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "That\u0027s a good idea!\n\nI\u0027ll add logic for pid-based flags to override the default global one.",
+      "parentUuid": "6ec61f61_df05bbf5",
+      "range": {
+        "startLine": 5642,
+        "startChar": 40,
+        "endLine": 5642,
+        "endChar": 47
+      },
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9abb0e5_7227eaef",
         "filename": "drivers/android/binder.c",
         "patchSetId": 8
@@ -60,6 +125,24 @@
       "writtenOn": "2024-07-22T20:27:25Z",
       "side": 1,
       "message": "how often is this called?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c5e036c_a155260e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5644,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "It\u0027s called only once (for each binder context) after each reboot or system crash. That\u0027s why printk instead of trace is used here.",
+      "parentUuid": "d9abb0e5_7227eaef",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +166,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5380c53b_1df36533",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5647,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "I\u0027ve thought to allow only the first registered process to change it. That\u0027s why you see a REGISTER COMMAND in binder generic netlink. However, the system_server might crash and respawn with a different pid. On the other hand, adding an Android specific permission check is not suitable for a Linux kernel patch.\n\nSo this is actually protected by SELinux, which can prevent any random apps from calling this ioctl.",
+      "parentUuid": "a540b0be_b93a2b8b",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80de2f2a_e6c34ddc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 8
@@ -94,6 +195,24 @@
       "writtenOn": "2024-07-22T20:27:25Z",
       "side": 1,
       "message": "what are we protecting here? If needed, should this lock be renamed given report_flags has nothing to do with the context manager?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d425afe_69d6464a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5648,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "In case there\u0027re multiple processes calling the ioctl at the same time, although extremely unlikely. For Android it\u0027s perfectly fine to bypass the lock here but for Linux device driver, I assume this should be protected. What do you think?",
+      "parentUuid": "80de2f2a_e6c34ddc",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -117,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcced4c5_7e045ad9",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Will add them for each function.",
+      "parentUuid": "3938aee3_d1218ef8",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d114cc4_b5179ea7",
         "filename": "drivers/android/binder_genl.c",
         "patchSetId": 8
@@ -128,6 +265,24 @@
       "writtenOn": "2024-07-22T20:27:25Z",
       "side": 1,
       "message": "what happens when this pid dies? What if PIDs are recycled to the point that this pid is a new process?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21665a6f_41ce2045",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Then the following netlink message will fail to reach the target process. This is how generic netlink works for unicast. Changing it to broadcast to prevent this awkward PID issue. but I don\u0027t think a random process should have access these reports.\n\nPlease see the netlink doc for how this PID is used at https://docs.kernel.org/userspace-api/netlink/intro.html\n\nFortunately, although the PID recycle issue can\u0027t be completely avoided, this should never happen actually. If system_server dies, it will register its new PID again before launching any other user apps.",
+      "parentUuid": "3d114cc4_b5179ea7",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -151,6 +306,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ed9e36b_72489dbd",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Will fix it.",
+      "parentUuid": "bfc9d200_07aa3f31",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "121b6d36_f130837d",
         "filename": "drivers/android/binder_genl.c",
         "patchSetId": 8
@@ -162,6 +335,24 @@
       "writtenOn": "2024-07-22T20:27:25Z",
       "side": 1,
       "message": "`int __init binder_init_genl(void)`?",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "579de60c_e4d78d08",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Yes, I should add __init.",
+      "parentUuid": "121b6d36_f130837d",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -203,6 +394,30 @@
           ]
         }
       ],
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c570988_8450c04e",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Good catch! I\u0027ll move them.",
+      "parentUuid": "37d2ee5b_d9e2003e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 26
+      },
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -264,6 +479,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fc1b0cb_6fe278f3",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Will change them. Thx!",
+      "parentUuid": "6209356b_a4c2eaed",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b561aa4_807a31f9",
         "filename": "drivers/android/binder_internal.h",
         "patchSetId": 8
@@ -293,6 +526,24 @@
           ]
         }
       ],
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fbe2b5d_109f83a2",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:15:53Z",
+      "side": 1,
+      "message": "Will add the doc and comments accordingly. Thx",
+      "parentUuid": "5b561aa4_807a31f9",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
