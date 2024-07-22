@@ -202,6 +202,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2236264_181e29e5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5647,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:45:59Z",
+      "side": 1,
+      "message": "Yes, the SELinux config change is included in the user space part of this patchset.",
+      "parentUuid": "09240bfd_b0d55547",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80de2f2a_e6c34ddc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 8
@@ -249,6 +267,24 @@
       "side": 1,
       "message": "But this doesn\u0027t protect against that case. mutex or not, one of the two threads is going to go first and be overwritten by the 2nd. I don\u0027t see any benefit to the mutex here.",
       "parentUuid": "6d425afe_69d6464a",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "958da4a7_69b10895",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5648,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-07-22T21:45:59Z",
+      "side": 1,
+      "message": "You\u0027re right. It\u0027s not necessary to use the lock here.",
+      "parentUuid": "e21b6e8f_6841f863",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
