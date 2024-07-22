@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000085365426",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3188439?revision\u003d1",
+      "key": {
+        "uuid": "25f58442_c3e1f266",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-22T19:15:34Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/a49d107bf368cfb8f61cd8f052481a045d3ce7a9).\n\n```\n    - ## android/gki_aarch64_protected_modules ##\n    -@@ android/gki_aarch64_protected_modules: drivers/pps/pps_core.ko\n    - drivers/ptp/ptp.ko\n    - drivers/ptp/ptp_kvm.ko\n    - drivers/usb/class/cdc-acm.ko\n    + ## android/gki_aarch64_protected_modules (new) ##\n    +@@\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (86621c Merge ce952d8f0e9b (\"Merge tag \u0027gpio-updates-for-v6.10-rc1\u0027 )\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++arch/arm64/geniezone/gzvm.ko\n    ++drivers/bluetooth/btbcm.ko\n    ++drivers/bluetooth/btqca.ko\n    ++drivers/bluetooth/btsdio.ko\n    ++drivers/bluetooth/hci_uart.ko\n    ++drivers/net/can/dev/can-dev.ko\n    ++drivers/net/can/slcan/slcan.ko\n    ++drivers/net/can/vcan.ko\n    ++drivers/net/macsec.ko\n    ++drivers/net/mii.ko\n    ++drivers/net/ppp/bsd_comp.ko\n    ++drivers/net/ppp/ppp_deflate.ko\n    ++drivers/net/ppp/ppp_generic.ko\n    ++drivers/net/ppp/ppp_mppe.ko\n    ++drivers/net/ppp/pppox.ko\n    ++drivers/net/ppp/pptp.ko\n    ++drivers/net/slip/slhc.ko\n    ++drivers/net/usb/aqc111.ko\n    ++drivers/net/usb/asix.ko\n    ++drivers/net/usb/ax88179_178a.ko\n    ++drivers/net/usb/cdc_eem.ko\n    ++drivers/net/usb/cdc_ether.ko\n    ++drivers/net/usb/cdc_ncm.ko\n    ++drivers/net/usb/r8152.ko\n    ++drivers/net/usb/r8153_ecm.ko\n    ++drivers/net/usb/rtl8150.ko\n    ++drivers/net/usb/usbnet.ko\n    ++drivers/net/wwan/wwan.ko\n    ++drivers/pps/pps_core.ko\n    ++drivers/ptp/ptp.ko\n    ++drivers/ptp/ptp_kvm.ko\n    ++drivers/usb/class/cdc-acm.ko\n     +drivers/usb/mon/usbmon.ko\n    - drivers/usb/serial/ftdi_sio.ko\n    - drivers/usb/serial/usbserial.ko\n    - lib/crypto/libarc4.ko\n    ++drivers/usb/serial/ftdi_sio.ko\n    ++drivers/usb/serial/usbserial.ko\n    ++lib/crypto/libarc4.ko\n    ++net/6lowpan/6lowpan.ko\n    ++net/6lowpan/nhc_dest.ko\n    ++net/6lowpan/nhc_fragment.ko\n    ++net/6lowpan/nhc_hop.ko\n    ++net/6lowpan/nhc_ipv6.ko\n    ++net/6lowpan/nhc_mobility.ko\n    ++net/6lowpan/nhc_routing.ko\n    ++net/6lowpan/nhc_udp.ko\n    ++net/8021q/8021q.ko\n    ++net/9p/9pnet.ko\n    ++net/9p/9pnet_fd.ko\n    ++net/bluetooth/bluetooth.ko\n    ++net/bluetooth/hidp/hidp.ko\n    ++net/bluetooth/rfcomm/rfcomm.ko\n    ++net/can/can.ko\n    ++net/can/can-bcm.ko\n    ++net/can/can-gw.ko\n    ++net/can/can-raw.ko\n    ++net/ieee802154/6lowpan/ieee802154_6lowpan.ko\n    ++net/ieee802154/ieee802154.ko\n    ++net/ieee802154/ieee802154_socket.ko\n    ++net/l2tp/l2tp_core.ko\n    ++net/l2tp/l2tp_ppp.ko\n    ++net/mac802154/mac802154.ko\n    ++net/nfc/nfc.ko\n    ++net/rfkill/rfkill.ko\n    ++net/tipc/diag.ko\n    ++net/tipc/tipc.ko\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (a49d10 ANDROID: GKI: Enable CONFIG_USB_MON\u003dm)\n     \n      ## arch/arm64/configs/gki_defconfig ##\n     @@ arch/arm64/configs/gki_defconfig: CONFIG_HID_WIIMOTE\u003dy\n    @@ modules.bzl: _COMMON_GKI_MODULES_LIST \u003d [\n     +    \"drivers/usb/mon/usbmon.ko\",\n          \"drivers/usb/serial/ftdi_sio.ko\",\n          \"drivers/usb/serial/usbserial.ko\",\n    -     \"kernel/kheaders.ko\",\n    +     \"fs/netfs/netfs.ko\",\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "3891f086aeefb0f7bc39dba842800e30c7b000da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
