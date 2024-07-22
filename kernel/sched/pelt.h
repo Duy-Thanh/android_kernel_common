@@ -1,3 +1,4 @@
+#include <trace/hooks/sched.h>
 #ifdef CONFIG_SMP
 #include "sched-pelt.h"
 
@@ -103,6 +104,12 @@ static inline void _update_idle_rq_clock_pelt(struct rq *rq)
  */
 static inline void update_rq_clock_pelt(struct rq *rq, s64 delta)
 {
+	int ret = 0;
+
+	trace_android_rvh_update_rq_clock_pelt(rq, delta, &ret);
+	if (ret)
+		return;
+
 	if (unlikely(is_idle_task(rq->curr))) {
 		_update_idle_rq_clock_pelt(rq);
 		return;
