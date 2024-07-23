@@ -12,6 +12,9 @@
 DECLARE_HOOK(android_vh_f2fs_file_open,
 	TP_PROTO(struct inode *inode, struct file *filp),
 	TP_ARGS(inode, filp));
+DECLARE_HOOK(android_vh_ksys_umount,
+	TP_PROTO(char __user *name, int flags),
+	TP_ARGS(name, flags));
 
 #endif /* _TRACE_HOOK_FS_H */
 

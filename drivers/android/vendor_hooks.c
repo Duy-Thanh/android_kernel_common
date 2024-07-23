@@ -456,3 +456,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_pageout_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_set_max_retries);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_try_alloc_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmabuf_page_pool_free_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ksys_umount);
