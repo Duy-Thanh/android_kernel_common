@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74473ee9_2fd8e237",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T21:43:35Z",
+      "side": 1,
+      "message": "... but not other flags like --notrim, etc.",
+      "parentUuid": "49d3b475_64b73e3d",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e978b124_1e91b994",
         "filename": "BUILD.bazel",
         "patchSetId": 14
@@ -54,6 +72,30 @@
       "writtenOn": "2024-07-23T19:46:23Z",
       "side": 1,
       "message": "nit: selects.with_or\n\nhttps://bazel.build/docs/configurable-attributes#or-chaining",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 803,
+        "endChar": 10
+      },
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd4ac857_189d409d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T21:43:35Z",
+      "side": 1,
+      "message": "(feel free to ignore this comment, since there are not too much duplication here)",
+      "parentUuid": "e978b124_1e91b994",
       "range": {
         "startLine": 796,
         "startChar": 0,
