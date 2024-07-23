@@ -16,6 +16,24 @@
       "message": "Update the symbol list in patch set 7 (add missing symbol in latest patch).",
       "revId": "1351c72919a51e8d8d6d7e2921b71eb57543236a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25655291_e6eab6d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1880085
+      },
+      "writtenOn": "2024-07-23T06:57:29Z",
+      "side": 1,
+      "message": "created the new patch for https://android-review.googlesource.com/c/kernel/common/+/3188584 missing symbols.",
+      "parentUuid": "e1027d35_0c4a74a5",
+      "revId": "1351c72919a51e8d8d6d7e2921b71eb57543236a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
