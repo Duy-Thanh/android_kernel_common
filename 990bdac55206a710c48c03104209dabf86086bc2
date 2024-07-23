@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c69cf2c0_ab8a7cf0",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T19:35:30Z",
+      "side": 1,
+      "message": "This seems to conflict with the change in gki_aarch64_protected_modules, IIUC. If a module is in `gki_aarch64_protected_modules`, then it is a protected GKI module and it cannot be overridden like this in _KUNIT_FRAMEWORK_MODULES. \n\nI wonder why this builds. I think it should be either of the following:\n\nIf you drop kunit.ko from gki_aarch64_protected_modules, this is okay, and the kunit.ko you get from :kunit_aarch64 is unsigned. It is an \"overridden\" GKI module.\n\nIf you keep kunit.ko on gki_aarch64_protected_modules, then kunit.ko needs to be deleted here at module_outs. Instead, `kunit_aarch64_dist` below may add `//common:kernel_aarch64/lib/kunit/kunit.ko`, to add the signed GKI module in the distribution directory.\n\n@ramjiyani@google.com to fact check what I said above.",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
