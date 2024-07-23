@@ -3,6 +3,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8255b24e_0626e1f1",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T19:46:23Z",
+      "side": 1,
+      "message": "delete?",
+      "range": {
+        "startLine": 791,
+        "startChar": 0,
+        "endLine": 794,
+        "endChar": 7
+      },
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d3b475_64b73e3d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T19:46:23Z",
+      "side": 1,
+      "message": "nit: could you please add a comment why we only want to build the individual tests with --debug or --gcov, but not other debug flags? i.e. why do we treat these two flags special?",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e978b124_1e91b994",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T19:46:23Z",
+      "side": 1,
+      "message": "nit: selects.with_or\n\nhttps://bazel.build/docs/configurable-attributes#or-chaining",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 803,
+        "endChar": 10
+      },
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c69cf2c0_ab8a7cf0",
         "filename": "BUILD.bazel",
         "patchSetId": 14
@@ -32,6 +95,63 @@
       "side": 1,
       "message": "On a second thought, this can\u0027t be a signed GKI module because you are loading the kernel image from one AB build (e.g. build number 123456 kernel_aarch64) and kunit.ko from the anoterh AB build (e.g. build number 123456 some other target). The signature from kunit.ko won\u0027t match the public key in the kernel image because they are from different builds.\n\nBut if you build the bazel target :kunit_aarch64 \u0026 :kernel_aarch64 in the same AB build, then having kunit.ko as a protected GKI module is fine. In that case I would even prefer it to be a protected module to prevent loading a different module accidentally.",
       "parentUuid": "c69cf2c0_ab8a7cf0",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe47ac69_d31ab617",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T19:46:23Z",
+      "side": 1,
+      "message": "This should also be under select() right?",
+      "range": {
+        "startLine": 825,
+        "startChar": 0,
+        "endLine": 828,
+        "endChar": 6
+      },
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e907b8_056529b9",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T19:46:23Z",
+      "side": 1,
+      "message": "visibility \u003d [\"//visibility:private\"],",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e44de7f_49504ca8",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-23T19:46:23Z",
+      "side": 1,
+      "message": "visibility \u003d [\"//visibility:private\"],",
       "revId": "990bdac55206a710c48c03104209dabf86086bc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
