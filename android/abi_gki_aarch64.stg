@@ -325068,6 +325068,14 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x9b3aa0ad
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x24373219
+  parameter_id: 0x11cfee5a
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x9b3b4561
   return_type_id: 0x6720d32f
   parameter_id: 0x1aee9939
@@ -345335,6 +345343,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_binder_preset"
 }
 elf_symbol {
+  id: 0xae7d043c
+  name: "__traceiter_android_vh_binder_priority_skip"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x882a2d26
+  type_id: 0x9b3aa0ad
+  full_name: "__traceiter_android_vh_binder_priority_skip"
+}
+elf_symbol {
   id: 0x3663ade6
   name: "__traceiter_android_vh_binder_proc_transaction"
   is_defined: true
@@ -350292,6 +350309,15 @@ elf_symbol {
   crc: 0x64e11223
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_binder_preset"
+}
+elf_symbol {
+  id: 0xe3a367fe
+  name: "__tracepoint_android_vh_binder_priority_skip"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe18a6484
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_binder_priority_skip"
 }
 elf_symbol {
   id: 0xc6fb73b4
@@ -411822,6 +411848,7 @@ interface {
   symbol_id: 0xd595bd2c
   symbol_id: 0xfdb48c6a
   symbol_id: 0xbff39e0e
+  symbol_id: 0xae7d043c
   symbol_id: 0x3663ade6
   symbol_id: 0x20dbced6
   symbol_id: 0x5c1ee0c5
@@ -412373,6 +412400,7 @@ interface {
   symbol_id: 0xf06625d6
   symbol_id: 0x259ffe94
   symbol_id: 0x95c75a1c
+  symbol_id: 0xe3a367fe
   symbol_id: 0xc6fb73b4
   symbol_id: 0xc6a5dbd8
   symbol_id: 0x54aac8cb
