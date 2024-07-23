@@ -642,6 +642,60 @@ impl<'a, T: ?Sized + ListItem<ID>, const ID: u64> Cursor<'a, T, ID> {
         // SAFETY: The `current` pointer always points at a member of the list.
         unsafe { self.list.remove_internal(self.current) }
     }
+
+    /// Removes the current element from the list, returning a cursor to the next element.
+    pub fn remove_go_next(self) -> (ListArc<T, ID>, Option<Cursor<'a, T, ID>>) {
+        // SAFETY: The `current` pointer always points at a member of the list.
+        let next = unsafe { (*self.current).next };
+        let old_first = self.list.first;
+
+        // SAFETY: The `current` pointer always points at a member of the list.
+        let removed = unsafe { self.list.remove_internal(self.current) };
+
+        let cursor_next = if next == old_first {
+            None
+        } else {
+            // INVARIANT: If `next` is equal to the element that was removed, then there would only
+            // be one element in the list, which implies that `next == old_first`. We are in the
+            // else branch, so `next` was not removed and is still an element in the list.
+            Some(Cursor {
+                current: next,
+                list: self.list,
+            })
+        };
+
+        (removed, cursor_next)
+    }
+
+    /// Inserts an element after the current element.
+    pub fn insert_next(&mut self, item: ListArc<T, ID>) {
+        let raw_item = ListArc::into_raw(item);
+        // SAFETY:
+        // * We just got `raw_item` from a `ListArc`, so it's in an `Arc`.
+        // * If this requirement is violated, then the previous caller of `prepare_to_insert`
+        //   violated the safety requirement that they can't give up ownership of the `ListArc`
+        //   until they call `post_remove`.
+        // * We own the `ListArc`.
+        // * Removing items] from this list is always done using `remove_internal_inner`, which
+        //   calls `post_remove` before giving up ownership.
+        let list_links = unsafe { T::prepare_to_insert(raw_item) };
+        // SAFETY: We have not yet called `post_remove`, so `list_links` is still valid.
+        let item = unsafe { ListLinks::fields(list_links) };
+
+        let prev = self.current;
+        // SAFETY: By the type invariant of List, this pointer is valid.
+        let next = unsafe { (*prev).next };
+
+        // SAFETY: Pointers in a linked list are never dangling, and the caller just gave us
+        // ownership of the fields on `item`.
+        // INVARIANT: This correctly inserts `item` between `prev` and `next`.
+        unsafe {
+            (*item).next = next;
+            (*item).prev = prev;
+            (*prev).next = item;
+            (*next).prev = item;
+        }
+    }
 }
 
 impl<'a, T: ?Sized + ListItem<ID>, const ID: u64> FusedIterator for Iter<'a, T, ID> {}
