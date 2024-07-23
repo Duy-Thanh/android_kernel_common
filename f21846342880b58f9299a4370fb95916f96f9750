@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9acf8f_7e594f94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-07-23T12:42:31Z",
+      "side": 1,
+      "message": "How was this generated? I tried it locally but saw two symbols removed which was not ideal (CL:3187224)",
+      "revId": "f21846342880b58f9299a4370fb95916f96f9750",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
