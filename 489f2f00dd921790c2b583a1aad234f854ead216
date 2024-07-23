@@ -16,6 +16,23 @@
       "message": "Hi, All\n\nJust FYI, these cherrypicks are there since 6.10-rc2:\n   https://lore.kernel.org/all/CAHk-\u003dwisJ8bS3qe6iBPwL9x\u003dPqJA5oE7tum-E9oZfyPgd2mmrw@mail.gmail.com/",
       "revId": "489f2f00dd921790c2b583a1aad234f854ead216",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "956f145b_7b5a6386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-23T16:24:52Z",
+      "side": 1,
+      "message": "Why not wait for the upstream merge like normal, why is this needed today?",
+      "revId": "489f2f00dd921790c2b583a1aad234f854ead216",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
