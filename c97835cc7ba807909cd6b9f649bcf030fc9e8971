@@ -16,6 +16,24 @@
       "message": "create a patch on top of this series to add the new symbols to your symbol list.",
       "revId": "c97835cc7ba807909cd6b9f649bcf030fc9e8971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bec6bb7e_015bbc68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1880085
+      },
+      "writtenOn": "2024-07-23T06:56:37Z",
+      "side": 1,
+      "message": "Thanks for review. Created new patch https://android-review.googlesource.com/c/kernel/common/+/3188584 on top of this patch.\nCurrently I am pushing the changes on this order 3150057, 2361843, 2361844, 2361846, 3161636, 2361847, 3188584 is there any issue, mean do I need to rebase or change the sequence?.",
+      "parentUuid": "a649173f_a63c3abf",
+      "revId": "c97835cc7ba807909cd6b9f649bcf030fc9e8971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
