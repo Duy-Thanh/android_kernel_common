@@ -22,6 +22,30 @@
       },
       "revId": "0bddbb9beeb5ca020428225d67cd762bf59208a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61216bf1_43cb2e42",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-23T03:15:12Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/3172439/comment/758c6edb_f0ff0419/\nYou suggested me to use already exported symbols.\nSo I added mas_*",
+      "parentUuid": "b461b5a1_2482c923",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 15
+      },
+      "revId": "0bddbb9beeb5ca020428225d67cd762bf59208a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
