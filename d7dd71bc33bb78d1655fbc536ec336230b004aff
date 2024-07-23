@@ -16,6 +16,24 @@
       "message": "Thanks for the patch description here. It however is still unclear to me exactly why this is desired.  Could you try providing the following details in the commit message (putting any sensitive details into the bug, if needed).\n\n1) What is the problem you\u0027re seeing that you\u0027re trying to solve with this patch\n\n2) What benefit are you able to achieve with these hooks\n\n3) What logic would need to make it upstream to allow these hooks to be eventually deprecated?",
       "revId": "d7dd71bc33bb78d1655fbc536ec336230b004aff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8880daa7_71bd2b23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3526575
+      },
+      "writtenOn": "2024-07-23T14:03:17Z",
+      "side": 1,
+      "message": "1. why need hook trace_android_rvh_armv8pmu_counter_overflowed?\nThe performance metric tracker will create multiple perf counters via perf_event_create_kernel_counter and\nselect a counter setting sample period. We will take the sample period as the statistical period. When the\nsample period expires, it need to notify the performance metric tracker to collect pmu counter statistics\nin this period. How to notify the Performance metric tracker? It rely on this hook, which is notified when\nthe arm pmu counter overflow.\n\n2. why need hook trace_android_rvh_perf_rotate_context?\nWhen the pmu context is rotated, it needs this hook to notify the performance metric tracker to end the\npmu counter statistics for this period.",
+      "parentUuid": "6bf149e5_fc054707",
+      "revId": "d7dd71bc33bb78d1655fbc536ec336230b004aff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
