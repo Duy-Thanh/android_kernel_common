@@ -16,6 +16,24 @@
       "message": "Let\u0027s merge from the normal branch instead please, no -lts only patches if at all possible.",
       "revId": "0f39131ed5c673d4d67429cf9214bf942908e020",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a105de74_1a71f774",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-23T17:16:11Z",
+      "side": 1,
+      "message": "Just to clarify this is a re-application of the patch reverted in -lts due to KABI issues here:\nhttps://r.android.com/3185223",
+      "parentUuid": "979d81cb_1ea184a0",
+      "revId": "0f39131ed5c673d4d67429cf9214bf942908e020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
