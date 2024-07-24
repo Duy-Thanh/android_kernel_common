@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b426d488_e75bdcb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-24T17:10:34Z",
+      "side": 1,
+      "message": "fix typo: UPSTREAM",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "1e56c6541ab98409bbc553ff1824649912c8a188",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c509c7ed_39644fb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-24T17:10:34Z",
+      "side": 1,
+      "message": "should be: \n```\n(cherry picked from commit 743a19e38d02fb6036dbf621edcf1cbb38e2f9e0)\n```\nsee https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "1e56c6541ab98409bbc553ff1824649912c8a188",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
