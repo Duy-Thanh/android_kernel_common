@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9302a9db_891616e5",
+        "filename": "android/abi_gki_aarch64.stg",
+        "patchSetId": 5
+      },
+      "lineNbr": 325835,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-24T17:15:54Z",
+      "side": 1,
+      "message": "This STG file is corrupt (there shouldn\u0027t be 2 ID fields). Please regenerate it.",
+      "revId": "2804a7d4748f8e7a68ad888819823ad9a2624659",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
