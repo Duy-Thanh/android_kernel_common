@@ -16,6 +16,23 @@
       "message": "upstream asked for changes...",
       "revId": "9173b5edbf63383e35c29988355d7ffeac0a4dff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43d42b94_8579a7e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-07-24T17:14:22Z",
+      "side": 1,
+      "message": "Since this patch was sent to the list just yesterday, if it\u0027s not super urgent or blocking, let\u0027s at least wait until we can pull it in as a FROMGIT: change.\nIf it becomes urgent later, we can always bring it in as FROMLIST.\nTemporary -1.",
+      "revId": "9173b5edbf63383e35c29988355d7ffeac0a4dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
