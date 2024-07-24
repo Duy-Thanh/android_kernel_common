@@ -2069,3 +2069,57 @@ const struct file_operations proc_pid_numa_maps_operations = {
 };
 
 #endif /* CONFIG_NUMA */
+
+int proc_pid_ioinfo(struct seq_file *m, struct pid_namespace *ns,
+		struct pid *pid, struct task_struct *task)
+{
+	return 0;
+}
+
+static int show_filemap(struct seq_file *m, void *v)
+{
+	return 0;
+}
+
+const struct seq_operations proc_pid_filemap_op = {
+	.start  = m_start,
+	.next   = m_next,
+	.stop   = m_stop,
+	.show   = show_filemap,
+};
+
+static int pid_filemap_list(struct inode *inode, struct file *file)
+{
+	return 0;
+}
+
+static int proc_filemap_release(struct inode *inode, struct file *file)
+{
+	return 0;
+}
+
+const struct file_operations proc_pid_filemap_list_operations = {
+	.open           = pid_filemap_list,
+	.read           = seq_read,
+	.read           = seq_read,
+	.llseek         = seq_lseek,
+	.release        = proc_filemap_release,
+};
+
+static ssize_t pid_io_record_read(struct file *file,
+		char __user *buf, size_t count, loff_t *ppos)
+{
+	return 0;
+}
+
+static ssize_t pid_io_record_write(struct file *file,
+		const char __user *buf, size_t count, loff_t *ppos)
+{
+	return 0;
+}
+
+const struct file_operations proc_pid_io_record_operations = {
+	.read           = pid_io_record_read,
+	.write          = pid_io_record_write,
+	.llseek         = noop_llseek,
+};

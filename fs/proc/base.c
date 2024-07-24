@@ -3366,6 +3366,9 @@ static const struct pid_entry tgid_base_stuff[] = {
 	ONE("ksm_merging_pages",  S_IRUSR, proc_pid_ksm_merging_pages),
 	ONE("ksm_stat",  S_IRUSR, proc_pid_ksm_stat),
 #endif
+	ONE("ioinfo", S_IRUGO, proc_pid_ioinfo),
+	REG("filemap_list", S_IRUGO, proc_pid_filemap_list_operations),
+	REG("io_record_control", S_IRUGO|S_IWUGO, proc_pid_io_record_operations),
 };
 
 static int proc_tgid_base_readdir(struct file *file, struct dir_context *ctx)
