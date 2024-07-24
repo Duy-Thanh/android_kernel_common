@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7f0db7_0991439a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-24T18:34:07Z",
+      "side": 1,
+      "message": "Thanks for the extra explanation in the commit message! This patch looks good. One issue that still needs to be resolved is the \"ANDROID: GKI: update symbol list file for xiaomi\" patch needs to come *after* this patch, not before it.",
+      "revId": "cf4246d317970f194f7315b773e8cd0b3c3d65d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
