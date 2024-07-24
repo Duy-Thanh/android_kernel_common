@@ -41,6 +41,7 @@
   gserial_suspend
   gs_free_req
   kick_all_cpus_sync
+  __lock_task_sighand
   mas_walk
   mas_prev
   mas_next
@@ -53,6 +54,7 @@
   proc_set_size
   pstore_register
   pstore_unregister
+  ptrace_may_access
   rfkill_find_type
   rfkill_get_led_trigger_name
   rfkill_pause_polling
@@ -72,6 +74,10 @@
   __traceiter_android_rvh_do_el1_undef
   __traceiter_android_rvh_do_sea
   __traceiter_android_rvh_do_sp_pc_abort
+  __traceiter_android_rvh_filemap_list
+  __traceiter_android_rvh_io_record_read
+  __traceiter_android_rvh_io_record_write
+  __traceiter_android_rvh_ksys_umount
   __traceiter_android_rvh_panic_unhandled
   __traceiter_android_rvh_process_madvise_bypass
   __traceiter_android_rvh_report_bug
@@ -83,7 +89,11 @@
   __traceiter_android_vh_cma_alloc_set_max_retries
   __traceiter_android_vh_cma_debug_show_areas
   __traceiter_android_vh_dmabuf_page_pool_free_bypass
+  __traceiter_android_vh_do_read_fault
   __traceiter_android_vh_exit_mm
+  __traceiter_android_vh_filemap_read
+  __traceiter_android_vh_filemap_map_pages
+  __traceiter_android_vh_filemap_release
   __traceiter_android_vh_free_pages_prepare_bypass
   __traceiter_android_vh_free_pages_ok_bypass
   __traceiter_android_vh_is_fpsimd_save
@@ -95,12 +105,14 @@
   __traceiter_android_vh_madvise_swapin_walk_pmd_entry
   __traceiter_android_vh_meminfo_proc_show
   __traceiter_android_vh_print_slabinfo_header
+  __traceiter_android_vh_proc_pid_ioinfo
   __traceiter_android_vh_process_madvise
   __traceiter_android_vh_process_madvise_return_error
   __traceiter_android_vh_psi_update_triggers
   __traceiter_android_vh_ptype_head
   __traceiter_android_vh_rebalance_anon_lru_bypass
   __traceiter_android_vh_rtmutex_wait_finish
+  __traceiter_android_vh_show_filemap
   __traceiter_android_vh_show_mem
   __traceiter_android_vh_show_smap
   __traceiter_android_vh_smaps_pte_entry
@@ -128,6 +140,10 @@
   __tracepoint_android_rvh_do_el1_undef
   __tracepoint_android_rvh_do_sea
   __tracepoint_android_rvh_do_sp_pc_abort
+  __tracepoint_android_rvh_filemap_list
+  __tracepoint_android_rvh_io_record_read
+  __tracepoint_android_rvh_io_record_write
+  __tracepoint_android_rvh_ksys_umount
   __tracepoint_android_rvh_panic_unhandled
   __tracepoint_android_rvh_process_madvise_bypass
   __tracepoint_android_rvh_report_bug
@@ -139,7 +155,11 @@
   __tracepoint_android_vh_cma_alloc_set_max_retries
   __tracepoint_android_vh_cma_debug_show_areas
   __tracepoint_android_vh_dmabuf_page_pool_free_bypass
+  __tracepoint_android_vh_do_read_fault
   __tracepoint_android_vh_exit_mm
+  __tracepoint_android_vh_filemap_read
+  __tracepoint_android_vh_filemap_map_pages
+  __tracepoint_android_vh_filemap_release
   __tracepoint_android_vh_free_pages_prepare_bypass
   __tracepoint_android_vh_free_pages_ok_bypass
   __tracepoint_android_vh_is_fpsimd_save
@@ -151,12 +171,14 @@
   __tracepoint_android_vh_madvise_swapin_walk_pmd_entry
   __tracepoint_android_vh_meminfo_proc_show
   __tracepoint_android_vh_print_slabinfo_header
+  __tracepoint_android_vh_proc_pid_ioinfo
   __tracepoint_android_vh_process_madvise
   __tracepoint_android_vh_process_madvise_return_error
   __tracepoint_android_vh_psi_update_triggers
   __tracepoint_android_vh_ptype_head
   __tracepoint_android_vh_rebalance_anon_lru_bypass
   __tracepoint_android_vh_rtmutex_wait_finish
+  __tracepoint_android_vh_show_filemap
   __tracepoint_android_vh_show_mem
   __tracepoint_android_vh_show_smap
   __tracepoint_android_vh_smaps_pte_entry
