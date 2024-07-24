@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed42bfe4_6e434cbb",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-24T18:18:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8255b24e_0626e1f1",
+      "range": {
+        "startLine": 791,
+        "startChar": 0,
+        "endLine": 794,
+        "endChar": 7
+      },
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49d3b475_64b73e3d",
@@ -55,6 +79,24 @@
       "side": 1,
       "message": "... but not other flags like --notrim, etc.",
       "parentUuid": "49d3b475_64b73e3d",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ee588e_6a1f03ce",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-24T18:18:25Z",
+      "side": 1,
+      "message": "Changed approach. The select is no longer needed.",
+      "parentUuid": "74473ee9_2fd8e237",
       "revId": "990bdac55206a710c48c03104209dabf86086bc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -106,6 +148,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "506c09b7_08084f9f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-24T18:18:25Z",
+      "side": 1,
+      "message": "Select is no longer needed",
+      "parentUuid": "dd4ac857_189d409d",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 803,
+        "endChar": 10
+      },
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c69cf2c0_ab8a7cf0",
@@ -141,6 +207,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0276606d_667c26ea",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-24T18:18:25Z",
+      "side": 1,
+      "message": "Changed the approach by building kunit modules with GKI kernel targets and don\u0027t built kunit modules second round.",
+      "parentUuid": "69ade7da_99480b47",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe47ac69_d31ab617",
@@ -154,6 +238,30 @@
       "writtenOn": "2024-07-23T19:46:23Z",
       "side": 1,
       "message": "This should also be under select() right?",
+      "range": {
+        "startLine": 825,
+        "startChar": 0,
+        "endLine": 828,
+        "endChar": 6
+      },
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09700e87_15180aa3",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-24T18:18:25Z",
+      "side": 1,
+      "message": "No need anymore",
+      "parentUuid": "fe47ac69_d31ab617",
       "range": {
         "startLine": 825,
         "startChar": 0,
@@ -187,6 +295,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01132cd7_a17cb26d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-24T18:18:25Z",
+      "side": 1,
+      "message": "That change can\u0027t be cherry pick to androdi15-6.6 with changes anymore. Major code blocks in that change is no longer needed anyway.",
+      "parentUuid": "0b664065_ef0ec5a3",
+      "range": {
+        "startLine": 841,
+        "startChar": 0,
+        "endLine": 841,
+        "endChar": 10
+      },
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0e907b8_056529b9",
@@ -204,6 +336,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec173820_176a7a6a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-24T18:18:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0e907b8_056529b9",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e44de7f_49504ca8",
@@ -217,6 +367,24 @@
       "writtenOn": "2024-07-23T19:46:23Z",
       "side": 1,
       "message": "visibility \u003d [\"//visibility:private\"],",
+      "revId": "990bdac55206a710c48c03104209dabf86086bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c9185bb_98416c38",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-24T18:18:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e44de7f_49504ca8",
       "revId": "990bdac55206a710c48c03104209dabf86086bc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
