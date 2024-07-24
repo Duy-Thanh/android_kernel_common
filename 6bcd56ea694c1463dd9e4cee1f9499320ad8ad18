@@ -33,6 +33,24 @@
       "message": "This cherry-pick is not clean. Are there other patches which you need to include as well?",
       "revId": "6bcd56ea694c1463dd9e4cee1f9499320ad8ad18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "939c2ccc_e354e88b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2024-07-24T01:59:28Z",
+      "side": 1,
+      "message": "I checked but there\u0027s no other patches.\nIt seems like base commit also has same lint message that \"Cherry pick is not clean\".",
+      "parentUuid": "76b096ea_733e735a",
+      "revId": "6bcd56ea694c1463dd9e4cee1f9499320ad8ad18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
