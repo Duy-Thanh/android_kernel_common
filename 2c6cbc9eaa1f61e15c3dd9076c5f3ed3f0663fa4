@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51589747_78a25192",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-24T09:24:48Z",
+      "side": 1,
+      "message": "Yeah, the stage-1 would be ideal but as far as I know, there\u0027s no easy solution for this, hence the need to do it at stage-2.",
+      "parentUuid": "eb53e5b3_07820bc2",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 55
+      },
+      "revId": "2c6cbc9eaa1f61e15c3dd9076c5f3ed3f0663fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a1b3ae6_8a75e7f9",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-22T12:21:24Z",
       "side": 1,
       "message": "I think we can mention `speculation` as this is why we need the unmap in the first place",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "2c6cbc9eaa1f61e15c3dd9076c5f3ed3f0663fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bf19854_03d8a12f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-24T09:24:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a1b3ae6_8a75e7f9",
       "range": {
         "startLine": 17,
         "startChar": 9,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc725a6_1dab1712",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-24T09:24:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "294107ca_896127e3",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "2c6cbc9eaa1f61e15c3dd9076c5f3ed3f0663fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a04db3f_040bddc3",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-07-22T12:21:24Z",
       "side": 1,
       "message": "Q: Is this intentional (the same for unamp host path) ? Throughout this operation we don\u0027t update the IOMMUs pagetables even though we modify the mappings in the host stage-2. In this window, a DMA capable hardware can issue transactions targeting this (unmapped from AP) region.\n\nAlso do we need to map this back explicitly ? We can leave it un-mapped and it will fault on the first access.",
+      "range": {
+        "startLine": 2361,
+        "startChar": 64,
+        "endLine": 2361,
+        "endChar": 69
+      },
+      "revId": "2c6cbc9eaa1f61e15c3dd9076c5f3ed3f0663fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e681db_70ad1fee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2361,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-24T09:24:48Z",
+      "side": 1,
+      "message": "If a such device does this, the memory would be protected anyway by TZPC. So no security issue here so I believe no need to waste time on updating the iommu.\n\nIt is mapped to make sure we re-install a block mapping where possible. I don\u0027t believe we treat this as a hot-path so spending a bit more time to get a more optimal stage-2 is probably a good tradeoff .",
+      "parentUuid": "0a04db3f_040bddc3",
       "range": {
         "startLine": 2361,
         "startChar": 64,
