@@ -4581,14 +4581,10 @@ static int socket_sockcreate_sid(const struct task_security_struct *tsec,
 				       secclass, NULL, socksid);
 }
 
-static int sock_has_perm(struct sock *sk, u32 perms)
+static bool sock_skip_has_perm(u32 sid)
 {
-	struct sk_security_struct *sksec = sk->sk_security;
-	struct common_audit_data ad;
-	struct lsm_network_audit net;
-
-	if (sksec->sid == SECINITSID_KERNEL)
-		return 0;
+	if (sid == SECINITSID_KERNEL)
+		return true;
 
 	/*
 	 * Before POLICYDB_CAP_USERSPACE_INITIAL_CONTEXT, sockets that
@@ -4602,7 +4598,19 @@ static int sock_has_perm(struct sock *sk, u32 perms)
 	 * setting.
 	 */
 	if (!selinux_policycap_userspace_initial_context() &&
-	    sksec->sid == SECINITSID_INIT)
+	    sid == SECINITSID_INIT)
+		return true;
+	return false;
+}
+
+
+static int sock_has_perm(struct sock *sk, u32 perms)
+{
+	struct sk_security_struct *sksec = sk->sk_security;
+	struct common_audit_data ad;
+	struct lsm_network_audit net;
+
+	if (sock_skip_has_perm(sksec->sid))
 		return 0;
 
 	ad_net_init_from_sk(&ad, &net, sk);
@@ -5934,6 +5942,26 @@ static unsigned int selinux_ip_postroute(void *priv,
 }
 #endif	/* CONFIG_NETFILTER */
 
+static int nlmsg_sock_has_extended_perms(struct sock *sk, u32 perms, u16 nlmsg_type)
+{
+	struct sk_security_struct *sksec = sk->sk_security;
+	struct common_audit_data ad;
+	struct lsm_network_audit net;
+	u8 driver;
+	u8 xperm;
+
+	if (sock_skip_has_perm(sksec->sid))
+		return 0;
+
+	ad_net_init_from_sk(&ad, &net, sk);
+
+	driver = nlmsg_type >> 8;
+	xperm = nlmsg_type & 0xff;
+
+	return avc_has_extended_perms(current_sid(), sksec->sid, sksec->sclass,
+			perms, driver, xperm, &ad);
+}
+
 static int selinux_netlink_send(struct sock *sk, struct sk_buff *skb)
 {
 	int rc = 0;
@@ -5959,7 +5987,17 @@ static int selinux_netlink_send(struct sock *sk, struct sk_buff *skb)
 
 		rc = selinux_nlmsg_lookup(sclass, nlh->nlmsg_type, &perm);
 		if (rc == 0) {
-			rc = sock_has_perm(sk, perm);
+			/* For Generic Netlink, nlmsg_type is mapped to the
+			 * family id which is dynamically assigned.
+			 * Ignore extended permissions for this type.
+			 */
+			if (selinux_policycap_netlink_xperm() &&
+				(sclass != SECCLASS_NETLINK_GENERIC_SOCKET)) {
+				rc = nlmsg_sock_has_extended_perms(
+					sk, perm, nlh->nlmsg_type);
+			} else {
+				rc = sock_has_perm(sk, perm);
+			}
 			if (rc)
 				return rc;
 		} else if (rc == -EINVAL) {
