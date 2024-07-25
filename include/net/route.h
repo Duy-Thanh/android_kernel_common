@@ -35,8 +35,6 @@
 #include <linux/cache.h>
 #include <linux/security.h>
 
-#define RTO_ONLINK	0x01
-
 static inline __u8 ip_sock_rt_scope(const struct sock *sk)
 {
 	if (sock_flag(sk, SOCK_LOCALROUTE))
@@ -76,6 +74,17 @@ struct rtable {
 	u32			rt_mtu_locked:1,
 				rt_pmtu:31;
 };
+
+#define dst_rtable(_ptr) container_of_const(_ptr, struct rtable, dst)
+
+/**
+ * skb_rtable - Returns the skb &rtable
+ * @skb: buffer
+ */
+static inline struct rtable *skb_rtable(const struct sk_buff *skb)
+{
+	return dst_rtable(skb_dst(skb));
+}
 
 static inline bool rt_is_input_route(const struct rtable *rt)
 {

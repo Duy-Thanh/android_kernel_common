@@ -605,13 +605,13 @@ static ssize_t threaded_show(struct device *dev,
 	struct net_device *netdev = to_net_dev(dev);
 	ssize_t ret = -EINVAL;
 
-	if (!rtnl_trylock())
-		return restart_syscall();
+	rcu_read_lock();
 
 	if (dev_isalive(netdev))
-		ret = sysfs_emit(buf, fmt_dec, netdev->threaded);
+		ret = sysfs_emit(buf, fmt_dec, READ_ONCE(netdev->threaded));
 
-	rtnl_unlock();
+	rcu_read_unlock();
+
 	return ret;
 }
 
@@ -2042,7 +2042,7 @@ static void net_get_ownership(const struct device *d, kuid_t *uid, kgid_t *gid)
 	net_ns_get_ownership(net, uid, gid);
 }
 
-static struct class net_class __ro_after_init = {
+static const struct class net_class = {
 	.name = "net",
 	.dev_release = netdev_release,
 	.dev_groups = net_class_groups,

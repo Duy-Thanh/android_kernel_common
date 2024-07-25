@@ -20,6 +20,7 @@ TARGETS += drivers/s390x/uvdevice
 TARGETS += drivers/net
 TARGETS += drivers/net/bonding
 TARGETS += drivers/net/team
+TARGETS += drivers/net/virtio_net
 TARGETS += dt
 TARGETS += efivarfs
 TARGETS += exec
@@ -64,7 +65,7 @@ TARGETS += net/hsr
 TARGETS += net/mptcp
 TARGETS += net/openvswitch
 TARGETS += net/tcp_ao
-TARGETS += netfilter
+TARGETS += net/netfilter
 TARGETS += nsfs
 TARGETS += perf_events
 TARGETS += pidfd
@@ -118,7 +119,7 @@ TARGETS_HOTPLUG = cpu-hotplug
 TARGETS_HOTPLUG += memory-hotplug
 
 # Networking tests want the net/lib target, include it automatically
-ifneq ($(filter net drivers/net,$(TARGETS)),)
+ifneq ($(filter net drivers/net drivers/net/hw,$(TARGETS)),)
 ifeq ($(filter net/lib,$(TARGETS)),)
 	INSTALL_DEP_TARGETS := net/lib
 endif

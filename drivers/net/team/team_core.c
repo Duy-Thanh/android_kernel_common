@@ -1831,7 +1831,7 @@ static int team_change_mtu(struct net_device *dev, int new_mtu)
 	team->port_mtu_change_allowed = false;
 	mutex_unlock(&team->lock);
 
-	dev->mtu = new_mtu;
+	WRITE_ONCE(dev->mtu, new_mtu);
 
 	return 0;
 
@@ -2808,7 +2808,7 @@ static const struct genl_multicast_group team_nl_mcgrps[] = {
 static struct genl_family team_nl_family __ro_after_init = {
 	.name		= TEAM_GENL_NAME,
 	.version	= TEAM_GENL_VERSION,
-	.maxattr	= ARRAY_SIZE(team_nl_policy),
+	.maxattr	= ARRAY_SIZE(team_nl_policy) - 1,
 	.policy = team_nl_policy,
 	.netnsok	= true,
 	.module		= THIS_MODULE,
