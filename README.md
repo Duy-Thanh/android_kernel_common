@@ -35,6 +35,9 @@ Additional requirements are listed below based on patch type
     - add upstream commit information with a `(cherry picked from commit ...)` line
     - the commit in the '(cherry picked ...)' line is preferred to be the commit
       from the stable branch matching the destination branch in ACK.
+    - all the `Bug: ...`, `Change-ID: ...`, `(cherry picked ...)`, new signature, etc
+      lines are preferred after the upstream signatures as to keep the "chronological"
+      order in the SoB section.
     - Example:
         - if the upstream commit message is
 ```
