@@ -395,6 +395,8 @@ enum {
 	LRU_GEN_CORE,
 	LRU_GEN_MM_WALK,
 	LRU_GEN_NONLEAF_YOUNG,
+	// Skip 3 to present ABI consistent with 5.15
+	LRU_GEN_ADVANCE_IN_LOCKSTEP = 4,
 	NR_LRU_GEN_CAPS
 };
 

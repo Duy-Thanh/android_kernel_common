@@ -3909,6 +3909,10 @@ static unsigned long retain_cost(struct ctrl_pos *retain, struct ctrl_pos *evict
 
 static bool positive_ctrl_err(struct ctrl_pos *sp, struct ctrl_pos *pv)
 {
+	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP))
+		return pv->refaulted < MIN_LRU_BATCH ||
+		       pv->refaulted * (sp->total + MIN_LRU_BATCH) * sp->gain <=
+		       (sp->refaulted + 1) * pv->total * pv->gain;
 	return retain_cost(pv, sp) > retain_cost(sp, pv);
 }
 
@@ -4547,6 +4551,7 @@ static bool try_to_inc_min_seq(struct lruvec *lruvec, bool can_swap)
 	bool success = false;
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 	DEFINE_MIN_SEQ(lruvec);
+	DEFINE_MAX_SEQ(lruvec);
 
 	VM_WARN_ON_ONCE(!seq_is_valid(lruvec));
 
@@ -4564,6 +4569,16 @@ static bool try_to_inc_min_seq(struct lruvec *lruvec, bool can_swap)
 		}
 next:
 		;
+	}
+
+	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP) && can_swap) {
+		unsigned long anon_gen_diff = max_seq[LRU_GEN_ANON] - min_seq[LRU_GEN_ANON];
+		unsigned long file_gen_diff = max_seq[LRU_GEN_FILE] - min_seq[LRU_GEN_FILE];
+
+		anon_gen_diff = max(anon_gen_diff, file_gen_diff);
+		min_seq[LRU_GEN_ANON] = max_seq[LRU_GEN_ANON] - anon_gen_diff;
+		min_seq[LRU_GEN_FILE] = max_seq[LRU_GEN_FILE] - anon_gen_diff;
+		min_seq[LRU_GEN_FILE] = max(min_seq[LRU_GEN_FILE], lrugen->min_seq[LRU_GEN_FILE]);
 	}
 
 	for (type = !can_swap; type < ANON_AND_FILE; type++) {
@@ -5313,11 +5328,17 @@ static int isolate_folios(struct lruvec *lruvec, struct scan_control *sc, int sw
 	int type;
 	int scanned;
 	int tier = -1;
+	unsigned long anon_num_gens = get_nr_gens(lruvec, LRU_GEN_ANON);
+	unsigned long file_num_gens = get_nr_gens(lruvec, LRU_GEN_FILE);
 
 	/*
 	 * Interpret swappiness 1 as file first and 200 as anon first.
 	 */
-	if (swappiness <= 1)
+	if (!swappiness)
+		type = LRU_GEN_FILE;
+	else if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP) && anon_num_gens > file_num_gens)
+		type = LRU_GEN_ANON;
+	else if (swappiness == 1)
 		type = LRU_GEN_FILE;
 	else if (swappiness == 200)
 		type = LRU_GEN_ANON;
@@ -5435,11 +5456,11 @@ retry:
 	return scanned;
 }
 
-static bool should_run_aging(struct lruvec *lruvec, int type, unsigned long max_seq,
-			     unsigned long min_seq, struct scan_control *sc,
+static bool should_run_aging(struct lruvec *lruvec, int type, unsigned long *max_seq,
+			     unsigned long *min_seq, struct scan_control *sc,
 			     unsigned long *nr_to_scan)
 {
-	int gen, zone;
+	int gen, end_type, zone, t_iter;
 	unsigned long old = 0;
 	unsigned long young = 0;
 	unsigned long total = 0;
@@ -5448,24 +5469,27 @@ static bool should_run_aging(struct lruvec *lruvec, int type, unsigned long max_
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
 
 	/* whether this lruvec is completely out of cold folios */
-	if (min_seq + MIN_NR_GENS > max_seq) {
+	if (min_seq[type] + MIN_NR_GENS > max_seq[type]) {
 		*nr_to_scan = 0;
 		return true;
 	}
 
-	for (seq = min_seq; seq <= max_seq; seq++) {
-		unsigned long size = 0;
+	end_type = get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP) ? LRU_GEN_FILE : type;
+	for (t_iter = type; t_iter <= end_type; t_iter++) {
+		for (seq = min_seq[t_iter]; seq <= max_seq[t_iter]; seq++) {
+			unsigned long size = 0;
 
-		gen = lru_gen_from_seq(seq);
+			gen = lru_gen_from_seq(seq);
 
-		for (zone = 0; zone < MAX_NR_ZONES; zone++)
-			size += max(READ_ONCE(lrugen->nr_pages[gen][type][zone]), 0L);
+			for (zone = 0; zone < MAX_NR_ZONES; zone++)
+				size += max(READ_ONCE(lrugen->nr_pages[gen][t_iter][zone]), 0L);
 
-		total += size;
-		if (seq == max_seq)
-			young += size;
-		else if (seq + MIN_NR_GENS == max_seq)
-			old += size;
+			total += size;
+			if (seq == max_seq[t_iter])
+				young += size;
+			else if (seq + MIN_NR_GENS == max_seq[t_iter])
+				old += size;
+		}
 	}
 
 	/* try to scrape all its memory if this memcg was deleted */
@@ -5481,7 +5505,7 @@ static bool should_run_aging(struct lruvec *lruvec, int type, unsigned long max_
 	 * stalls when the number of generations reaches MIN_NR_GENS. Hence, the
 	 * ideal number of generations is MIN_NR_GENS+1.
 	 */
-	if (min_seq + MIN_NR_GENS < max_seq)
+	if (min_seq[type] + MIN_NR_GENS < max_seq[type])
 		return false;
 
 	/*
@@ -5523,8 +5547,13 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc,
 		if (did_age[type])
 			continue;
 
-		should_age[type] = should_run_aging(lruvec, type, max_seq[type],
-						    min_seq[type], sc, nr_to_scan + type);
+		if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP) && can_swap && type == LRU_GEN_FILE) {
+			should_age[type] = should_age[LRU_GEN_ANON];
+			continue;
+		}
+
+		should_age[type] = should_run_aging(lruvec, type, max_seq,
+						    min_seq, sc, nr_to_scan + type);
 	}
 
 	/* skip the aging path at the default priority */
@@ -5988,6 +6017,9 @@ static ssize_t enabled_show(struct kobject *kobj, struct kobj_attribute *attr, c
 
 	if (should_clear_pmd_young())
 		caps |= BIT(LRU_GEN_NONLEAF_YOUNG);
+
+	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP))
+		caps |= BIT(LRU_GEN_ADVANCE_IN_LOCKSTEP);
 
 	return sysfs_emit(buf, "0x%04x\n", caps);
 }
