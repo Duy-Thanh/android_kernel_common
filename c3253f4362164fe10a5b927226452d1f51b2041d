@@ -159,6 +159,26 @@
       "tag": "",
       "revId": "c3253f4362164fe10a5b927226452d1f51b2041d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000085584020",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3192034?revision\u003d1",
+      "key": {
+        "uuid": "fc83eb69_00dcab1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-25T02:33:26Z",
+      "side": 1,
+      "message": "Failed to fetch commits for cherry pick check. Is the \"cherry picked from\" commit ID valid?\n\"cherry picked from\" commit ID: c82bc1ab2a8a5e73d9728e80c4c2ed87e8921a38\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "c3253f4362164fe10a5b927226452d1f51b2041d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
