@@ -62,6 +62,9 @@ void hyp_free(void *addr);
 void hyp_free_account(void *addr, struct kvm *host_kvm);
 
 int hyp_alloc_init(size_t size);
+int hyp_init_custom_heap(size_t size, struct hyp_allocator *allocator);
+void hyp_free_from_heap(void *addr, struct hyp_allocator *allocator);
+void *hyp_alloc_from_heap(size_t size, struct hyp_allocator *allocator);
 int hyp_alloc_refill(struct kvm_hyp_memcache *host_mc);
 int hyp_alloc_reclaimable(void);
 void hyp_alloc_reclaim(struct kvm_hyp_memcache *host_mc, int target);

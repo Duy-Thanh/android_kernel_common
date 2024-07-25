@@ -82,6 +82,8 @@ static bool has_version_negotiated;
 static hyp_spinlock_t version_lock;
 static unsigned short hyp_buff_refcnt;
 
+static struct hyp_allocator ffa_allocator;
+
 static void ffa_to_smccc_error(struct arm_smccc_res *res, u64 ffa_errno)
 {
 	*res = (struct arm_smccc_res) {
@@ -528,7 +530,7 @@ static __always_inline void do_ffa_mem_xfer(const u64 func_id,
 		goto out;
 	}
 
-	transfer = hyp_alloc(sizeof(struct ffa_mem_transfer));
+	transfer = hyp_alloc_from_heap(sizeof(struct ffa_mem_transfer), &ffa_allocator);
 	if (!transfer) {
 		ret = FFA_RET_NO_MEMORY;
 		goto out;
@@ -587,7 +589,7 @@ out:
 	if (ret) {
 		ffa_to_smccc_res(res, ret);
 		if (transfer)
-			hyp_free(transfer);
+			hyp_free_from_heap(transfer, &ffa_allocator);
 	}
 	return;
 
@@ -693,7 +695,7 @@ static void do_ffa_mem_reclaim(struct arm_smccc_res *res,
 					reg->addr_range_cnt));
 
 	list_del(&transfer->node);
-	hyp_free(transfer);
+	hyp_free_from_heap(transfer, &ffa_allocator);
 out_unlock:
 	hyp_spin_unlock(&hyp_buffers.lock);
 
@@ -1026,7 +1028,7 @@ int hyp_ffa_init(void *pages)
 {
 	struct arm_smccc_res res;
 	void *tx, *rx;
-	int i;
+	int i, ret;
 
 	if (kvm_host_psci_config.smccc_version < ARM_SMCCC_VERSION_1_1)
 		return 0;
@@ -1079,6 +1081,14 @@ int hyp_ffa_init(void *pages)
 		};
 		INIT_LIST_HEAD(&endp_buffers[i].xfer_list);
 	}
+
+	ret = hyp_init_custom_heap(SZ_512KB, &ffa_allocator);
+	if (ret)
+		return ret;
+
+	// TODO - topup the per-cpu memcaches with memory reserved from boot
+	// and make this a configurable size
+
 
 	version_lock = __HYP_SPIN_LOCK_UNLOCKED;
 	return 0;
