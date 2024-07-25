@@ -46,6 +46,30 @@
       },
       "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c6f4f1_8d365468",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-25T12:39:30Z",
+      "side": 1,
+      "message": "In that case I would prefer to have a separate heap for ff-a, and to reserve 2 pages to make sure that I will always have space when the host issues the transaction. 2 pages will hold less than 512 transfers for the host given that we also need to store metadata for the allocation. Guest can topup this on demand. Wdyth ?",
+      "parentUuid": "f626c57e_227290d9",
+      "range": {
+        "startLine": 531,
+        "startChar": 12,
+        "endLine": 531,
+        "endChar": 21
+      },
+      "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
