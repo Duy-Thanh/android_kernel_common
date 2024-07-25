@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "124c6bc5_c57b5af5",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-25T18:30:22Z",
+      "side": 1,
+      "message": "True.\n\nIf needed, we can always double check (or even automate) the metadata of the commit to prevent manually recreated commits.",
+      "parentUuid": "1ff73678_86b991e8",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 83
+      },
+      "revId": "0c1286793979c3942db459492fb1e2ac7f3e822e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1913a60d_cdec727f",
@@ -96,6 +120,24 @@
           ]
         }
       ],
+      "revId": "0c1286793979c3942db459492fb1e2ac7f3e822e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3831f52_2adf8606",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-07-25T18:30:22Z",
+      "side": 1,
+      "message": "Right this is all _preferred_ and not mandated. So do we even want to mention it here?\n\nNote the cherry-pick from the corresponding stable branch is better because the patch _might_ have been tweaked from mainline tree.",
+      "parentUuid": "1913a60d_cdec727f",
       "revId": "0c1286793979c3942db459492fb1e2ac7f3e822e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
