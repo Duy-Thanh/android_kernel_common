@@ -314,3 +314,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ep_create_wakeup_source);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timerfd_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_state);
