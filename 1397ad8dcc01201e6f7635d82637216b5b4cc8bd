@@ -142,6 +142,30 @@
       },
       "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2438df94_610891f0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-25T15:43:21Z",
+      "side": 1,
+      "message": "It\u0027s a bit of a shame to have such a complicated allocator while you don\u0027t need to handle page admission or anything like this.\n\nAlso, I was thinking, I don\u0027t think you need to track anything for the host! If that\u0027s not a handle that belongs to any guest, then you can safely deduce it belongs to the host.\n\nSo I believe you should be able to make it work with only storing transaction handles for the guests where hyp_alloc() is applicable",
+      "parentUuid": "06e39279_787885d9",
+      "range": {
+        "startLine": 531,
+        "startChar": 12,
+        "endLine": 531,
+        "endChar": 21
+      },
+      "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
