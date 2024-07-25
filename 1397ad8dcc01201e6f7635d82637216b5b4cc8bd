@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63f32a1b_b9ae4ffb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-25T11:19:22Z",
+      "side": 1,
+      "message": "Hey @vdonnefort@google.com, how can I make sure that this allocation will not fail here ?\n\nThis code will be called from both the host as well as the guest context on FF-A smc trapping. From the guest context it is a bit easier because I can create a request, populate it with the missing allocation information and force return to the host \u0026 repaint ELR to replay the instruction.\n\nFor the host is a different beast and I wanted to check with you what\u0027s the best way to overcome this allocation failure ?",
+      "range": {
+        "startLine": 531,
+        "startChar": 12,
+        "endLine": 531,
+        "endChar": 21
+      },
+      "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
