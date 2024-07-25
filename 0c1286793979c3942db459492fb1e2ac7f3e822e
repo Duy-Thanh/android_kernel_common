@@ -39,6 +39,65 @@
       },
       "revId": "0c1286793979c3942db459492fb1e2ac7f3e822e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff73678_86b991e8",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-25T18:21:38Z",
+      "side": 1,
+      "message": "We should specify _what_ is required, and not _how_ it gets there, so I\u0027d avoid a `-x` mandate here.",
+      "parentUuid": "c4fbf175_b8924cba",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 83
+      },
+      "revId": "0c1286793979c3942db459492fb1e2ac7f3e822e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1913a60d_cdec727f",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-25T18:21:38Z",
+      "side": 1,
+      "message": "This isn\u0027t quite true since most UPSTREAM-tagged patches come from mainline, not from stable kernels.\n\nIf this patch were cherry-picked from the stable branch (`v6.1.96`), then we\u0027d see `commit ecf848eb934b03959918f5269f64c0e52bc23998 upstream.` in the commit message - which we don\u0027t. The commit should be the one that was actually used.\n\nHaving said that, I agree that it would preferred to actually cherry-pick the patch from the stable kernel - in which case it should be cited in this comment (and the actual upstream sha1 would be in the commit message) - but this is an uncommon case since LTS is merged into the ACK branch monthly or bi-monthly.",
+      "fixSuggestions": [
+        {
+          "fixId": "b5d6fe7e_b5836736",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "README.md",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "      from the stable branch matching the destination branch in ACK. If the\n      patch is from mainline, the commit in the \u0027(cherry picked ...)\u0027 line is\n      preferred to be the commit from the stable branch matching the destination\n      branch in ACK.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0c1286793979c3942db459492fb1e2ac7f3e822e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
