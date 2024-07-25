@@ -174,6 +174,7 @@ struct ax88179_data {
 	u32 wol_supported;
 	u32 wolopts;
 	u8 disconnecting;
+	u8 initialized;
 };
 
 struct ax88179_int_data {
@@ -1677,6 +1678,7 @@ static int ax88179_reset(struct usbnet *dev)
 
 static int ax88179_net_reset(struct usbnet *dev)
 {
+<<<<<<< HEAD   (9964d6 Merge 7172dc93d621 ("af_unix: Add dead flag to struct scm_fp)
 	u16 tmp16;
 
 	ax88179_read_cmd(dev, AX_ACCESS_PHY, AX88179_PHY_ID, GMII_PHY_PHYSR,
@@ -1692,6 +1694,14 @@ static int ax88179_net_reset(struct usbnet *dev)
 	} else {
 		ax88179_reset(dev);
 	}
+=======
+	struct ax88179_data *ax179_data = dev->driver_priv;
+
+	if (ax179_data->initialized)
+		ax88179_reset(dev);
+	else
+		ax179_data->initialized = 1;
+>>>>>>> BRANCH (1b294a Merge tag 'net-next-6.10' of git://git.kernel.org/pub/scm/li)
 
 	return 0;
 }
