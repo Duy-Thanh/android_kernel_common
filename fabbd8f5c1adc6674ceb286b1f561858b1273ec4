@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b41b2966_6d25174a",
+        "filename": "include/linux/phy.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-25T19:26:32Z",
+      "side": 1,
+      "message": "This breaks the KMI. Please refactor to avoid changing `struct mii_bus`",
+      "fixSuggestions": [
+        {
+          "fixId": "ee8e7f63_db81321d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/phy.h",
+              "range": {
+                "startLine": 372,
+                "startChar": 0,
+                "endLine": 374,
+                "endChar": 0
+              },
+              "replacement": "\tint (*write_c45)(struct mii_bus *bus, int addr, int devnum, int regnum,\n\t\t\t  u16 val);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fabbd8f5c1adc6674ceb286b1f561858b1273ec4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
