@@ -393786,6 +393786,15 @@ elf_symbol {
   full_name: "preempt_schedule_notrace"
 }
 elf_symbol {
+  id: 0x0da24a9a
+  name: "prep_compound_page"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8106a37e
+  type_id: 0x102e93ac
+  full_name: "prep_compound_page"
+}
+elf_symbol {
   id: 0xaeaf7c63
   name: "prep_new_hpage"
   is_defined: true
@@ -420154,6 +420163,7 @@ interface {
   symbol_id: 0x48fb8c7e
   symbol_id: 0x180b11d3
   symbol_id: 0xd46a0ddb
+  symbol_id: 0x0da24a9a
   symbol_id: 0xaeaf7c63
   symbol_id: 0x98d05c44
   symbol_id: 0x80c0972e
