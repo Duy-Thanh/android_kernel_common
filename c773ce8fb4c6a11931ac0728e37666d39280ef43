@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000085855583",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3195006?revision\u003d1",
+      "key": {
+        "uuid": "c82be839_c51d0a93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-25T19:04:05Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/15d9da3f818cae676f822a04407d3c17b53357d2) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d15d9da3f818cae676f822a04407d3c17b53357d2).\n\n```\n      ## drivers/android/binder.c ##\n     @@ drivers/android/binder.c: static struct binder_ref *binder_get_ref_olocked(struct binder_proc *proc,\n      \treturn NULL;\n    @@ drivers/android/binder.c: static void binder_free_proc(struct binder_proc *proc)\n      \tput_cred(proc-\u003ecred);\n      \tbinder_stats_deleted(BINDER_STAT_PROC);\n     +\tdbitmap_free(\u0026proc-\u003edmap);\n    + \ttrace_android_vh_binder_free_proc(proc);\n      \tkfree(proc);\n      }\n    - \n     @@ drivers/android/binder.c: static int binder_open(struct inode *nodp, struct file *filp)\n      \tproc \u003d kzalloc(sizeof(*proc), GFP_KERNEL);\n      \tif (proc \u003d\u003d NULL)\n    @@ drivers/android/binder.c: static int binder_open(struct inode *nodp, struct file\n     \n      ## drivers/android/binder_internal.h ##\n     @@\n    - #include \u003clinux/uidgid.h\u003e\n    + #include \u003clinux/android_vendor.h\u003e\n      #include \u003cuapi/linux/android/binderfs.h\u003e\n      #include \"binder_alloc.h\"\n     +#include \"dbitmap.h\"\n      \n      struct binder_context {\n      \tstruct binder_node *binder_context_mgr_node;\n    -@@ drivers/android/binder_internal.h: struct binder_ref {\n    +@@ drivers/android/binder_internal.h: enum binder_prio_state {\n       * @freeze_wait:          waitqueue of processes waiting for all outstanding\n       *                        transactions to be processed\n       *                        (protected by @inner_lock)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "c773ce8fb4c6a11931ac0728e37666d39280ef43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
