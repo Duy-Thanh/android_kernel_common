@@ -3392,6 +3392,10 @@ static unsigned long retain_cost(struct ctrl_pos *retain, struct ctrl_pos *evict
 
 static bool positive_ctrl_err(struct ctrl_pos *sp, struct ctrl_pos *pv)
 {
+	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP))
+		return pv->refaulted < MIN_LRU_BATCH ||
+		       pv->refaulted * (sp->total + MIN_LRU_BATCH) * sp->gain <=
+		       (sp->refaulted + 1) * pv->total * pv->gain;
 	return retain_cost(pv, sp) > retain_cost(sp, pv);
 }
 
@@ -4111,6 +4115,7 @@ static bool try_to_inc_min_seq(struct lruvec *lruvec, int swappiness)
 	bool success = false;
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 	DEFINE_MIN_SEQ(lruvec);
+	DEFINE_MAX_SEQ(lruvec);
 
 	VM_WARN_ON_ONCE(!seq_is_valid(lruvec));
 
@@ -4128,6 +4133,19 @@ static bool try_to_inc_min_seq(struct lruvec *lruvec, int swappiness)
 		}
 next:
 		;
+	}
+
+	/* see the comment on lru_gen_folio */
+	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP) && swappiness && swappiness <= MAX_SWAPPINESS) {
+		unsigned long anon_gen_diff = max_seq[LRU_GEN_ANON] - min_seq[LRU_GEN_ANON];
+		unsigned long file_gen_diff = max_seq[LRU_GEN_FILE] - min_seq[LRU_GEN_FILE];
+		int max_diff = MAX_NR_GENS - MIN_NR_GENS - 1;
+
+		if (anon_gen_diff > file_gen_diff + max_diff) {
+			min_seq[LRU_GEN_FILE] -= (anon_gen_diff - file_gen_diff - max_diff);
+		} else if (file_gen_diff > anon_gen_diff + max_diff) {
+			min_seq[LRU_GEN_ANON] -= (file_gen_diff - anon_gen_diff - max_diff);
+		}
 	}
 
 	for_each_evictable_type(type, swappiness) {
@@ -5042,29 +5060,35 @@ retry:
 	return scanned;
 }
 
-static bool should_run_aging(struct lruvec *lruvec, int type, unsigned long max_seq,
-			     unsigned long min_seq, unsigned long *nr_to_scan)
+static bool should_run_aging(struct lruvec *lruvec, int type, unsigned long *max_seq,
+			     unsigned long *min_seq, unsigned long *nr_to_scan,
+			     int swappiness)
 {
-	int gen, zone;
+	int gen, zone, t_iter;
 	unsigned long size = 0;
 	unsigned long seq;
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 
 	*nr_to_scan = 0;
 	/* have to run aging, since eviction is not possible anymore */
-	if (min_seq + MIN_NR_GENS > max_seq)
+	if (min_seq[type] + MIN_NR_GENS > max_seq[type])
 		return true;
 
-	for (seq = min_seq; seq <= max_seq; seq++) {
-		gen = lru_gen_from_seq(seq);
+	for_each_evictable_type(t_iter, swappiness) {
+		if (!get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP) && t_iter != type)
+			continue;
 
-		for (zone = 0; zone < MAX_NR_ZONES; zone++)
-			size += max(READ_ONCE(lrugen->nr_pages[gen][type][zone]), 0L);
+		for (seq = min_seq[t_iter]; seq <= max_seq[t_iter]; seq++) {
+			gen = lru_gen_from_seq(seq);
+
+			for (zone = 0; zone < MAX_NR_ZONES; zone++)
+				size += max(READ_ONCE(lrugen->nr_pages[gen][t_iter][zone]), 0L);
+		}
 	}
 
 	*nr_to_scan = size;
 	/* better to run aging even though eviction is still possible */
-	return min_seq + MIN_NR_GENS == max_seq;
+	return min_seq[type] + MIN_NR_GENS == max_seq[type];
 }
 
 /*
@@ -5089,12 +5113,31 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, int s
 	if (mem_cgroup_below_min(sc->target_mem_cgroup, memcg))
 		return -1;
 
-	for_each_evictable_type(type, swappiness) {
-		if (did_age[type])
-			continue;
 
-		should_age[type] = should_run_aging(lruvec, type, max_seq[type],
-						    min_seq[type], nr_to_scan + type);
+	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP)) {
+		bool age;
+		unsigned long anon_num_gens = get_nr_gens(lruvec, LRU_GEN_ANON);
+		unsigned long file_num_gens = get_nr_gens(lruvec, LRU_GEN_FILE);
+
+		if (swappiness == 0)
+			type = LRU_GEN_ANON;
+		else if (swappiness > MAX_SWAPPINESS)
+			type = LRU_GEN_FILE;
+		else
+			type = anon_num_gens > file_num_gens ? LRU_GEN_ANON : LRU_GEN_FILE;
+
+		age = should_run_aging(lruvec, type, max_seq, min_seq,
+					      nr_to_scan + type, swappiness);
+		for_each_evictable_type(type, swappiness)
+			should_age[type] = age;
+	} else {
+		for_each_evictable_type(type, swappiness) {
+			if (did_age[type])
+				continue;
+
+			should_age[type] = should_run_aging(lruvec, type, max_seq, min_seq,
+							    nr_to_scan + type, swappiness);
+		}
 	}
 	ret = nr_to_scan[LRU_GEN_ANON] + nr_to_scan[LRU_GEN_FILE];
 
@@ -5560,6 +5603,9 @@ static ssize_t enabled_show(struct kobject *kobj, struct kobj_attribute *attr, c
 
 	if (should_clear_pmd_young())
 		caps |= BIT(LRU_GEN_NONLEAF_YOUNG);
+
+	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP))
+		caps |= BIT(LRU_GEN_ADVANCE_IN_LOCKSTEP);
 
 	return sysfs_emit(buf, "0x%04x\n", caps);
 }
