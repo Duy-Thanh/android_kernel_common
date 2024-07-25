@@ -592,6 +592,7 @@ static inline unsigned long host_s2_pgtable_pages(void)
 }
 
 #define KVM_FFA_MBOX_NR_PAGES	1
+#define KVM_FFA_METADATA_PAGES	4
 
 /*
  * Maximum number of consitutents allowed in a descriptor. This number is
@@ -624,7 +625,7 @@ static inline unsigned long hyp_ffa_proxy_pages(void)
 		   KVM_FFA_MAX_NR_CONSTITUENTS * sizeof(struct ffa_mem_region_addr_range);
 
 	/* Plus a page each for the hypervisor's RX and TX mailboxes. */
-	return (2 * KVM_FFA_MBOX_NR_PAGES) + DIV_ROUND_UP(desc_max, PAGE_SIZE);
+	return (2 * KVM_FFA_MBOX_NR_PAGES + KVM_FFA_METADATA_PAGES) + DIV_ROUND_UP(desc_max, PAGE_SIZE);
 }
 
 static inline size_t pkvm_host_fp_state_size(void)

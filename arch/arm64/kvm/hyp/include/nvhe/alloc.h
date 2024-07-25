@@ -4,6 +4,7 @@
 #include <linux/types.h>
 
 #include <asm/kvm_host.h>
+#include <nvhe/spinlock.h>
 
 /**
  * hyp_alloc() - Allocate memory from the heap allocator
@@ -61,7 +62,20 @@ void hyp_free(void *addr);
  */
 void hyp_free_account(void *addr, struct kvm *host_kvm);
 
+struct hyp_allocator {
+	struct list_head	chunks;
+	unsigned long		start;
+	u32			size;
+	hyp_spinlock_t		lock;
+	int __percpu		hyp_allocator_errno;
+	struct kvm_hyp_memcache __percpu	hyp_allocator_mc;
+	u8 __percpu		hyp_allocator_missing_donations;
+};
+
 int hyp_alloc_init(size_t size);
+int hyp_init_custom_heap(size_t size, struct hyp_allocator *allocator);
+void hyp_free_from_heap(void *addr, struct hyp_allocator *allocator);
+void *hyp_alloc_from_heap(size_t size, struct hyp_allocator *allocator);
 int hyp_alloc_refill(struct kvm_hyp_memcache *host_mc);
 int hyp_alloc_reclaimable(void);
 void hyp_alloc_reclaim(struct kvm_hyp_memcache *host_mc, int target);

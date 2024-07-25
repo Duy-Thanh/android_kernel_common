@@ -54,6 +54,8 @@ struct kvm_ffa_descriptor_buffer {
 };
 
 static struct kvm_ffa_descriptor_buffer ffa_desc_buf;
+static void *ffa_metadata_buffer;
+static void *ffa_metadata_cur;
 
 struct kvm_ffa_buffers {
 	hyp_spinlock_t lock;
@@ -81,6 +83,8 @@ static u32 hyp_ffa_version;
 static bool has_version_negotiated;
 static hyp_spinlock_t version_lock;
 static unsigned short hyp_buff_refcnt;
+
+static struct hyp_allocator ffa_allocator;
 
 static void ffa_to_smccc_error(struct arm_smccc_res *res, u64 ffa_errno)
 {
@@ -497,6 +501,36 @@ out:
 	return;
 }
 
+static phys_addr_t get_hyp_pa(void *va)
+{
+	return __hyp_pa(va);
+}
+
+static void *ffa_hyp_alloc(size_t len)
+{
+	u8 missing_donations;
+	void *allocation;
+	struct kvm_hyp_memcache *alloc_mc;
+
+retry_alloc:
+	allocation = hyp_alloc_from_heap(len, &ffa_allocator);
+	if (!allocation) {
+		missing_donations = *(this_cpu_ptr(&ffa_allocator.hyp_allocator_missing_donations));
+		if (!missing_donations)
+			return NULL;
+
+		if (ffa_metadata_cur - ffa_metadata_buffer >= KVM_FFA_METADATA_PAGES * PAGE_SIZE)
+			return NULL;
+
+		alloc_mc = this_cpu_ptr(&ffa_allocator.hyp_allocator_mc);
+		push_hyp_memcache(alloc_mc, ffa_metadata_cur, get_hyp_pa, 0);
+		ffa_metadata_cur += PAGE_SIZE;
+		goto retry_alloc;
+	}
+
+	return allocation;
+}
+
 static __always_inline void do_ffa_mem_xfer(const u64 func_id,
 					    struct arm_smccc_res *res,
 					    struct kvm_cpu_context *ctxt,
@@ -528,7 +562,7 @@ static __always_inline void do_ffa_mem_xfer(const u64 func_id,
 		goto out;
 	}
 
-	transfer = hyp_alloc(sizeof(struct ffa_mem_transfer));
+	transfer = ffa_hyp_alloc(sizeof(struct ffa_mem_transfer));
 	if (!transfer) {
 		ret = FFA_RET_NO_MEMORY;
 		goto out;
@@ -587,7 +621,7 @@ out:
 	if (ret) {
 		ffa_to_smccc_res(res, ret);
 		if (transfer)
-			hyp_free(transfer);
+			hyp_free_from_heap(transfer, &ffa_allocator);
 	}
 	return;
 
@@ -693,7 +727,7 @@ static void do_ffa_mem_reclaim(struct arm_smccc_res *res,
 					reg->addr_range_cnt));
 
 	list_del(&transfer->node);
-	hyp_free(transfer);
+	hyp_free_from_heap(transfer, &ffa_allocator);
 out_unlock:
 	hyp_spin_unlock(&hyp_buffers.lock);
 
@@ -1026,7 +1060,7 @@ int hyp_ffa_init(void *pages)
 {
 	struct arm_smccc_res res;
 	void *tx, *rx;
-	int i;
+	int i, ret;
 
 	if (kvm_host_psci_config.smccc_version < ARM_SMCCC_VERSION_1_1)
 		return 0;
@@ -1067,6 +1101,9 @@ int hyp_ffa_init(void *pages)
 			  (hyp_ffa_proxy_pages() - (2 * KVM_FFA_MBOX_NR_PAGES)),
 	};
 
+	pages += ffa_desc_buf.len;
+	ffa_metadata_cur = ffa_metadata_buffer = pages;
+
 	hyp_buffers = (struct kvm_ffa_buffers) {
 		.lock	= __HYP_SPIN_LOCK_UNLOCKED,
 		.tx	= tx,
@@ -1079,6 +1116,10 @@ int hyp_ffa_init(void *pages)
 		};
 		INIT_LIST_HEAD(&endp_buffers[i].xfer_list);
 	}
+
+	ret = hyp_init_custom_heap(SZ_512K, &ffa_allocator);
+	if (ret)
+		return ret;
 
 	version_lock = __HYP_SPIN_LOCK_UNLOCKED;
 	return 0;
