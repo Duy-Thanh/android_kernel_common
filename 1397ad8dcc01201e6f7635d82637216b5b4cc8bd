@@ -70,6 +70,30 @@
       },
       "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b3a609_f8571430",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-25T12:45:51Z",
+      "side": 1,
+      "message": "Or you use a static allocation for the host, and dynamic one for guests? So you can re-use as much as existing code.\n\nOn a failure on the static allocation, you can try the dynamic one, out of despair. \n\nIn all cases, we could somehow fail, how comfortable we are with that?",
+      "parentUuid": "b7c6f4f1_8d365468",
+      "range": {
+        "startLine": 531,
+        "startChar": 12,
+        "endLine": 531,
+        "endChar": 21
+      },
+      "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
