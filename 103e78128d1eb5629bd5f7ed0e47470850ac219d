@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e57755_0a3a1834",
+        "filename": "arch/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2024-07-25T16:22:03Z",
+      "side": 1,
+      "message": "Should this be a space instead of a comma? scripts/Kconfig.include suggests that the cc-option macro accepts only one argument (`$(cc-option,\u003cflag\u003e)`) and it indeed looks like only `$(1)` is passed to the compiler, so this might only test for `-fsanitize\u003dkcfi`? All current clang versions support both flags, so I\u0027m not sure you had a chance to test this.",
+      "range": {
+        "startLine": 832,
+        "startChar": 39,
+        "endLine": 832,
+        "endChar": 40
+      },
+      "revId": "103e78128d1eb5629bd5f7ed0e47470850ac219d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
