@@ -34,6 +34,7 @@
   getboottime64
   get_options
   __get_task_ioprio
+  gfp_zone
   gpiochip_find
   gs_alloc_req
   gserial_free_line
