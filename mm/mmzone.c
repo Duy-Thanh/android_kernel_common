@@ -118,3 +118,4 @@ enum zone_type gfp_zone(gfp_t flags)
 
 	return __gfp_zone(flags);
 }
+EXPORT_SYMBOL_GPL(gfp_zone);
