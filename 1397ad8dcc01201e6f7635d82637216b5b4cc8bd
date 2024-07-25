@@ -118,6 +118,30 @@
       },
       "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e39279_787885d9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-25T15:17:02Z",
+      "side": 1,
+      "message": "I would do something along these lines: https://android-review.googlesource.com/c/kernel/common/+/3196653",
+      "parentUuid": "83f93315_8676ac0d",
+      "range": {
+        "startLine": 531,
+        "startChar": 12,
+        "endLine": 531,
+        "endChar": 21
+      },
+      "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
