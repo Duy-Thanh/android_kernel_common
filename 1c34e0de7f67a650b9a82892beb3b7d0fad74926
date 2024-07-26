@@ -16,6 +16,23 @@
       "message": "Please fix the checkpatch error:\n```\n\nERROR:POINTER_LOCATION: \"(foo*)\" should be \"(foo *)\"\n#30: FILE: include/linux/fsnotify.h:109:\n```",
       "revId": "1c34e0de7f67a650b9a82892beb3b7d0fad74926",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e6f04b_633efdfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2024-07-26T22:22:51Z",
+      "side": 1,
+      "message": "Once the checkpatch error is fixed, this change looks good to me",
+      "revId": "1c34e0de7f67a650b9a82892beb3b7d0fad74926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
