@@ -392,3 +392,9 @@ folio_total_mapcount
 #required by speed_ui.ko
 __tracepoint_android_rvh_update_cpus_allowed
 __traceiter_android_rvh_update_cpus_allowed
+
+# required by xring_pmt.ko
+  __traceiter_android_rvh_armv8pmu_counter_overflowed
+  __traceiter_android_rvh_perf_rotate_context
+  __tracepoint_android_rvh_armv8pmu_counter_overflowed
+  __tracepoint_android_rvh_perf_rotate_context
