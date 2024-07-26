@@ -96,6 +96,39 @@ unsigned long ___filemap_len(struct inode *inode, unsigned long pgoff, unsigned 
 	return len;
 }
 
+#ifdef CONFIG_SHMEM
+extern vm_fault_t shmem_fault(struct vm_fault *vmf);
+
+static inline bool is_shmem_fault(const struct vm_operations_struct *vm_ops)
+{
+	return vm_ops->fault == shmem_fault;
+}
+#else	/* !CONFIG_SHMEM */
+static inline bool is_shmem_fault(const struct vm_operations_struct *vm_ops)
+{
+	return false;
+}
+#endif	/* CONFIG_SHMEM */
+
+#ifdef CONFIG_F2FS_FS
+extern vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf);
+
+static inline bool is_f2fs_filemap_fault(const struct vm_operations_struct *vm_ops)
+{
+	return vm_ops->fault == f2fs_filemap_fault;
+}
+#else	/* !CONFIG_F2FS_FS */
+static inline bool is_f2fs_filemap_fault(const struct vm_operations_struct *vm_ops)
+{
+	return false;
+}
+#endif	/* CONFIG_F2FS_FS */
+
+static inline bool is_filemap_fault(const struct vm_operations_struct *vm_ops)
+{
+	return vm_ops->fault == filemap_fault;
+}
+
 /*
  * This is called to fill any holes created by ___filemap_len()
  * with an anonymous mapping.
@@ -108,6 +141,7 @@ void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long old_
 	struct mm_struct *mm = current->mm;
 	unsigned long populate = 0;
 	struct vm_area_struct *vma;
+	const struct vm_operations_struct *vm_ops;
 
 	if (!anon_len)
 		return;
@@ -126,8 +160,22 @@ void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long old_
 	 */
 	BUG_ON(!vma);
 
-	/* Only handle fixups for filemap faults */
-	if (vma->vm_ops && vma->vm_ops->fault != filemap_fault)
+	vm_ops = vma->vm_ops;
+	if (!vm_ops)
+		return;
+
+	/*
+	 * Insert fixup vmas for file backed and shmem backed VMAs.
+	 *
+	 * Faulting off the end of a file will result in SIGBUS since there is no
+	 * file page for the given file offset.
+	 *
+	 * shmem pages live in page cache or swap cache. Looking up a page cache
+	 * page with an index (pgoff) beyond the file is invalid and will result
+	 * in shmem_get_folio_gfp() returning -EINVAL.
+	 */
+	if (!is_filemap_fault(vm_ops) && !is_f2fs_filemap_fault(vm_ops) &&
+	    !is_shmem_fault(vm_ops))
 		return;
 
 	/*
