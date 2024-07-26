@@ -106,6 +106,24 @@
       "parentUuid": "a85c3843_f9d886a8",
       "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381f508b_98407130",
+        "filename": "drivers/hwspinlock/hwspinlock_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-26T18:17:10Z",
+      "side": 1,
+      "message": "Unfortunately, it isn\u0027t that simple since these tend to be declared like this (from drivers/hwspinlock/omap_hwspinlock.c):\n```\nstatic const struct hwspinlock_ops omap_hwspinlock_ops \u003d {\n\t.trylock \u003d omap_hwspinlock_trylock,\n\t.unlock \u003d omap_hwspinlock_unlock,\n\t.relax \u003d omap_hwspinlock_relax,\n};\n...\n\tret \u003d hwspin_lock_register(bank, \u0026pdev-\u003edev, \u0026omap_hwspinlock_ops,\n\t\t\t\t\t\tbase_id, num_locks);\n```\nWhich means that a vendor module that uses the old definition won\u0027t allocate space for the new _bust_ field.\n\nIf it were me, I think I\u0027d extend the structure. Something like this:\n```\nstruct ext_hwspinlock_ops {\n  hwspinlock_ops ops;\n  int (*bust)(struct hwspinlock *lock);\n}\n```\n\nThat at least gets your _bust_ function into the structure. Presumably `hwspin_lock_bust()` is called from one of your vendor modules. Is it safe for your callers to assume that the bust function is defined? Probably so...but, if not, there would need to be some way for `hwspin_lock_bust()` to know whether there is a _bust_ function defined before using `container_of()` and referencing the extended portion of ext_hwspinlock_ops though.\n\nIf it is safe for your caller of `hwspin_lock_bust()` to assume there is a _bust_ function, then all of this can be done in your vendor module and this patch isn\u0027t needed.\n\n1. Use the extended definition of ext_hwspinlock_ops shown above\n2. Register as normal (passing \u0026ext_ops-\u003eops as the ops argument)\n3. Implement `hwspin_lock_bust()` locally in a vendor module. It gets the _bust_ function by doing a `container_of()` on the passed-in hwspinlock_ops.\n4. You drivers would call your local version of `hwspin_lock_bust()`\n\nWould that work?",
+      "parentUuid": "e4fa64fd_4ca001b4",
+      "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
