@@ -16,6 +16,24 @@
       "message": "Is a blank line allowed in this section of the CL description?",
       "revId": "0317b98d112906a740fbaf79fd7d2e7f50325fef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85be2966_44306f7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2024-07-26T16:27:13Z",
+      "side": 1,
+      "message": "I have taken reference from https://android.googlesource.com/kernel/common/+/android-mainline/README.md\n\nPlease let me know if we need to remove this blank line.",
+      "parentUuid": "63ad006c_94673e93",
+      "revId": "0317b98d112906a740fbaf79fd7d2e7f50325fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
