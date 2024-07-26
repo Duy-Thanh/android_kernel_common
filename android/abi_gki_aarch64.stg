@@ -402693,6 +402693,15 @@ elf_symbol {
   full_name: "try_module_get"
 }
 elf_symbol {
+  id: 0x2f855953
+  name: "try_to_del_timer_sync"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfaf9e645
+  type_id: 0x920d63ce
+  full_name: "try_to_del_timer_sync"
+}
+elf_symbol {
   id: 0x8814f5b8
   name: "try_to_free_mem_cgroup_pages"
   is_defined: true
@@ -418186,6 +418195,7 @@ interface {
   symbol_id: 0x4eb5a934
   symbol_id: 0x44cd0751
   symbol_id: 0x3d986fb5
+  symbol_id: 0x2f855953
   symbol_id: 0x8814f5b8
   symbol_id: 0x8fa1e478
   symbol_id: 0xe54aec5b
