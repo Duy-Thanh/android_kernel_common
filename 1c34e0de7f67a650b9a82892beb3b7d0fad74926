@@ -33,6 +33,24 @@
       "message": "Once the checkpatch error is fixed, this change looks good to me",
       "revId": "1c34e0de7f67a650b9a82892beb3b7d0fad74926",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7524318_fd743018",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2024-07-26T22:47:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72e50e0e_b4b59da7",
+      "revId": "1c34e0de7f67a650b9a82892beb3b7d0fad74926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
