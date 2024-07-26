@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5fb287_7a869411",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-07-26T06:53:43Z",
+      "side": 1,
+      "message": "Can you please use the original commit message and metadata (authorship)? You will get the correct patch to upload with\n\n```\ngit cherry-pick -x 9307a998cb9846a2557fdca286997430bee36a2a\n```\n\nthank you!",
+      "revId": "6d02f237e92332a77ece1a655b209e29bf235385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
