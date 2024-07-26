@@ -536,6 +536,22 @@
   clk_put
   serio_unregister_port
 
+# required by android-v-virt-cpufreq.ko
+  arch_freq_scale
+  cpufreq_cpu_get
+  cpufreq_cpu_put
+  cpufreq_frequency_table_verify
+  cpufreq_get_hw_max_freq
+  cpu_scale
+  dev_pm_opp_free_cpufreq_table
+  dev_pm_opp_get_opp_count
+  dev_pm_opp_init_cpufreq_table
+  dev_pm_opp_of_add_table
+  get_cpu_device
+  topology_clear_scale_freq_source
+  topology_set_scale_freq_source
+  topology_update_thermal_pressure
+
 # required by armmmci.ko
   clk_round_rate
   devm_of_iomap
