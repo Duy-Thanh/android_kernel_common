@@ -345276,6 +345276,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_hibernate_save_cmp_len"
 }
 elf_symbol {
+  id: 0x3ec3f8ef
+  name: "__traceiter_android_vh_hibernate_state"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x563dcb6d
+  type_id: 0x9a33392f
+  full_name: "__traceiter_android_vh_hibernate_state"
+}
+elf_symbol {
   id: 0x1ba2e410
   name: "__traceiter_android_vh_hibernated_do_mem_alloc"
   is_defined: true
@@ -349810,6 +349819,15 @@ elf_symbol {
   crc: 0xa114dd34
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_hibernate_save_cmp_len"
+}
+elf_symbol {
+  id: 0x78f2c5bd
+  name: "__tracepoint_android_vh_hibernate_state"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1a022782
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_hibernate_state"
 }
 elf_symbol {
   id: 0xc62a97aa
@@ -412317,6 +412335,7 @@ interface {
   symbol_id: 0x88586647
   symbol_id: 0x2b2d07aa
   symbol_id: 0x089c5048
+  symbol_id: 0x3ec3f8ef
   symbol_id: 0x1ba2e410
   symbol_id: 0xdb6662e8
   symbol_id: 0x64c2fe7a
@@ -412821,6 +412840,7 @@ interface {
   symbol_id: 0xf18e312d
   symbol_id: 0x90e3616c
   symbol_id: 0xc388a58e
+  symbol_id: 0x78f2c5bd
   symbol_id: 0xc62a97aa
   symbol_id: 0xf68497fa
   symbol_id: 0xb6603d58
