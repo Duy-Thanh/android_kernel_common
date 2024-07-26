@@ -166,6 +166,30 @@
       },
       "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b01c8c1_d6670598",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-26T09:50:51Z",
+      "side": 1,
+      "message": "`It\u0027s a bit of a shame to have such a complicated allocator while you don\u0027t need to handle page admission or anything like this.` - As a user of the allocator, I would like to be able to handle page admissions from guests when I have them as well as specifying a pre-allocated starting size. My proposed extension allows this and the creation of a new heap.\n\n`Also, I was thinking, I don\u0027t think you need to track anything for the host! If that\u0027s not a handle that belongs to any guest, then you can safely deduce it belongs to the host.` - Yes, but it makes it a larger search space and it needs additional tracking like which guests are active. (eg. you trap from host on a memory reclaim request and you have to iterate the handles of all the online guests - this works fine now as we will not have many active guests but it will not scale).",
+      "parentUuid": "2438df94_610891f0",
+      "range": {
+        "startLine": 531,
+        "startChar": 12,
+        "endLine": 531,
+        "endChar": 21
+      },
+      "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
