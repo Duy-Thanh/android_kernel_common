@@ -16,6 +16,24 @@
       "message": "Can you please use the original commit message and metadata (authorship)? You will get the correct patch to upload with\n\n```\ngit cherry-pick -x 9307a998cb9846a2557fdca286997430bee36a2a\n```\n\nthank you!",
       "revId": "6d02f237e92332a77ece1a655b209e29bf235385",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8eab815_9e5f786d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3445866
+      },
+      "writtenOn": "2024-07-26T07:38:02Z",
+      "side": 1,
+      "message": "Oh. I\u0027m sorry. I made new commit with your advise. Thank you!! 😂\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3197172",
+      "parentUuid": "5c5fb287_7a869411",
+      "revId": "6d02f237e92332a77ece1a655b209e29bf235385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
