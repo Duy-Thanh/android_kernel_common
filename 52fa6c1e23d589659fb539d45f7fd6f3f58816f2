@@ -88,6 +88,24 @@
       "parentUuid": "e88fd818_c156d9bc",
       "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4fa64fd_4ca001b4",
+        "filename": "drivers/hwspinlock/hwspinlock_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3497902
+      },
+      "writtenOn": "2024-07-26T07:32:30Z",
+      "side": 1,
+      "message": "Any suggestion to deal with this is appreciated!\nIs it ok with your first suggestion of changing the burst API signature?\nAlso do i need to move bust API as last member in structure?",
+      "parentUuid": "a85c3843_f9d886a8",
+      "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
