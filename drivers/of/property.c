@@ -1252,7 +1252,11 @@ DEFINE_SIMPLE_PROP(backlight, "backlight", NULL)
 DEFINE_SIMPLE_PROP(panel, "panel", NULL)
 DEFINE_SIMPLE_PROP(msi_parent, "msi-parent", "#msi-cells")
 DEFINE_SIMPLE_PROP(post_init_providers, "post-init-providers", NULL)
+<<<<<<< HEAD   (18f528 Merge cf1ca1f66d30 ("Merge git://git.kernel.org/pub/scm/linu)
 DEFINE_SIMPLE_PROP(access_controllers, "access-controllers", "#access-controller-cells")
+=======
+DEFINE_SIMPLE_PROP(pses, "pses", "#pse-cells")
+>>>>>>> BRANCH (7172dc af_unix: Add dead flag to struct scm_fp_list.)
 DEFINE_SUFFIX_PROP(regulators, "-supply", NULL)
 DEFINE_SUFFIX_PROP(gpio, "-gpio", "#gpio-cells")
 
@@ -1358,6 +1362,7 @@ static const struct supplier_bindings of_supplier_bindings[] = {
 	{ .parse_prop = parse_backlight, },
 	{ .parse_prop = parse_panel, },
 	{ .parse_prop = parse_msi_parent, },
+	{ .parse_prop = parse_pses, },
 	{ .parse_prop = parse_gpio_compat, },
 	{ .parse_prop = parse_interrupts, },
 	{ .parse_prop = parse_access_controllers, },

@@ -128,6 +128,8 @@ void mlx5e_stats_eth_ctrl_get(struct mlx5e_priv *priv,
 void mlx5e_stats_rmon_get(struct mlx5e_priv *priv,
 			  struct ethtool_rmon_stats *rmon,
 			  const struct ethtool_rmon_hist_range **ranges);
+void mlx5e_stats_ts_get(struct mlx5e_priv *priv,
+			struct ethtool_ts_stats *ts_stats);
 void mlx5e_get_link_ext_stats(struct net_device *dev,
 			      struct ethtool_link_ext_stats *stats);
 
@@ -431,6 +433,7 @@ struct mlx5e_sq_stats {
 	u64 stopped;
 	u64 dropped;
 	u64 recover;
+	u64 timestamps;
 	/* dirtied @completion */
 	u64 cqes ____cacheline_aligned_in_smp;
 	u64 wake;
@@ -463,6 +466,7 @@ struct mlx5e_ptp_cq_stats {
 	u64 abort;
 	u64 abort_abs_diff_ns;
 	u64 late_cqe;
+	u64 lost_cqe;
 };
 
 struct mlx5e_rep_stats {
@@ -480,6 +484,7 @@ struct mlx5e_rep_stats {
 	u64 tx_vport_rdma_multicast_bytes;
 	u64 vport_loopback_packets;
 	u64 vport_loopback_bytes;
+	u64 rx_vport_out_of_buffer;
 };
 
 struct mlx5e_stats {
@@ -500,6 +505,7 @@ static inline void mlx5e_stats_copy_rep_stats(struct rtnl_link_stats64 *vf_vport
 	vf_vport->tx_packets = rep_stats->vport_tx_packets;
 	vf_vport->rx_bytes = rep_stats->vport_rx_bytes;
 	vf_vport->tx_bytes = rep_stats->vport_tx_bytes;
+	vf_vport->rx_missed_errors = rep_stats->rx_vport_out_of_buffer;
 }
 
 extern mlx5e_stats_grp_t mlx5e_nic_stats_grps[];

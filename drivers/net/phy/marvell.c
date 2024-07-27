@@ -281,6 +281,7 @@
 
 #define MII_VCT_TXPINS			0x1A
 #define MII_VCT_RXPINS			0x1B
+#define MII_VCT_SR			0x1C
 #define MII_VCT_TXPINS_ENVCT		BIT(15)
 #define MII_VCT_TXRXPINS_VCTTST		GENMASK(14, 13)
 #define MII_VCT_TXRXPINS_VCTTST_SHIFT	13
@@ -300,6 +301,7 @@
 #define LPA_PAUSE_ASYM_FIBER	0x100
 
 #define NB_FIBER_STATS	1
+#define NB_STAT_MAX	3
 
 MODULE_DESCRIPTION("Marvell PHY driver");
 MODULE_AUTHOR("Andy Fleming");
@@ -312,11 +314,28 @@ struct marvell_hw_stat {
 	u8 bits;
 };
 
-static struct marvell_hw_stat marvell_hw_stats[] = {
+static const struct marvell_hw_stat marvell_hw_stats[] = {
 	{ "phy_receive_errors_copper", 0, 21, 16},
 	{ "phy_idle_errors", 0, 10, 8 },
 	{ "phy_receive_errors_fiber", 1, 21, 16},
 };
+
+static_assert(ARRAY_SIZE(marvell_hw_stats) <= NB_STAT_MAX);
+
+/* "simple" stat list + corresponding marvell_get_*_simple functions are used
+ * on PHYs without a page register
+ */
+struct marvell_hw_stat_simple {
+	const char *string;
+	u8 reg;
+	u8 bits;
+};
+
+static const struct marvell_hw_stat_simple marvell_hw_stats_simple[] = {
+	{ "phy_receive_errors", 21, 16},
+};
+
+static_assert(ARRAY_SIZE(marvell_hw_stats_simple) <= NB_STAT_MAX);
 
 enum {
 	M88E3082_VCT_OFF,
@@ -325,7 +344,7 @@ enum {
 };
 
 struct marvell_priv {
-	u64 stats[ARRAY_SIZE(marvell_hw_stats)];
+	u64 stats[NB_STAT_MAX];
 	char *hwmon_name;
 	struct device *hwmon_dev;
 	bool cable_test_tdr;
@@ -1977,6 +1996,11 @@ static int marvell_get_sset_count(struct phy_device *phydev)
 		return ARRAY_SIZE(marvell_hw_stats) - NB_FIBER_STATS;
 }
 
+static int marvell_get_sset_count_simple(struct phy_device *phydev)
+{
+	return ARRAY_SIZE(marvell_hw_stats_simple);
+}
+
 static void marvell_get_strings(struct phy_device *phydev, u8 *data)
 {
 	int count = marvell_get_sset_count(phydev);
@@ -1985,6 +2009,17 @@ static void marvell_get_strings(struct phy_device *phydev, u8 *data)
 	for (i = 0; i < count; i++) {
 		strscpy(data + i * ETH_GSTRING_LEN,
 			marvell_hw_stats[i].string, ETH_GSTRING_LEN);
+	}
+}
+
+static void marvell_get_strings_simple(struct phy_device *phydev, u8 *data)
+{
+	int count = marvell_get_sset_count_simple(phydev);
+	int i;
+
+	for (i = 0; i < count; i++) {
+		strscpy(data + i * ETH_GSTRING_LEN,
+			marvell_hw_stats_simple[i].string, ETH_GSTRING_LEN);
 	}
 }
 
@@ -2007,6 +2042,25 @@ static u64 marvell_get_stat(struct phy_device *phydev, int i)
 	return ret;
 }
 
+static u64 marvell_get_stat_simple(struct phy_device *phydev, int i)
+{
+	struct marvell_hw_stat_simple stat = marvell_hw_stats_simple[i];
+	struct marvell_priv *priv = phydev->priv;
+	int val;
+	u64 ret;
+
+	val = phy_read(phydev, stat.reg);
+	if (val < 0) {
+		ret = U64_MAX;
+	} else {
+		val = val & ((1 << stat.bits) - 1);
+		priv->stats[i] += val;
+		ret = priv->stats[i];
+	}
+
+	return ret;
+}
+
 static void marvell_get_stats(struct phy_device *phydev,
 			      struct ethtool_stats *stats, u64 *data)
 {
@@ -2015,6 +2069,16 @@ static void marvell_get_stats(struct phy_device *phydev,
 
 	for (i = 0; i < count; i++)
 		data[i] = marvell_get_stat(phydev, i);
+}
+
+static void marvell_get_stats_simple(struct phy_device *phydev,
+				     struct ethtool_stats *stats, u64 *data)
+{
+	int count = marvell_get_sset_count_simple(phydev);
+	int i;
+
+	for (i = 0; i < count; i++)
+		data[i] = marvell_get_stat_simple(phydev, i);
 }
 
 static int m88e1510_loopback(struct phy_device *phydev, bool enable)
@@ -2620,6 +2684,92 @@ static int m88e3082_vct_cable_test_get_status(struct phy_device *phydev,
 	}
 	if (*finished)
 		priv->vct_phase = M88E3082_VCT_OFF;
+	return 0;
+}
+
+static int m88e1111_vct_cable_test_start(struct phy_device *phydev)
+{
+	int ret;
+
+	ret = marvell_cable_test_start_common(phydev);
+	if (ret)
+		return ret;
+
+	/* It needs some magic workarounds described in VCT manual for this PHY.
+	 */
+	ret = phy_write(phydev, 29, 0x0018);
+	if (ret < 0)
+		return ret;
+
+	ret = phy_write(phydev, 30, 0x00c2);
+	if (ret < 0)
+		return ret;
+
+	ret = phy_write(phydev, 30, 0x00ca);
+	if (ret < 0)
+		return ret;
+
+	ret = phy_write(phydev, 30, 0x00c2);
+	if (ret < 0)
+		return ret;
+
+	ret = phy_write_paged(phydev, MII_MARVELL_COPPER_PAGE, MII_VCT_SR,
+			      MII_VCT_TXPINS_ENVCT);
+	if (ret < 0)
+		return ret;
+
+	ret = phy_write(phydev, 29, 0x0018);
+	if (ret < 0)
+		return ret;
+
+	ret = phy_write(phydev, 30, 0x0042);
+	if (ret < 0)
+		return ret;
+
+	return 0;
+}
+
+static u32 m88e1111_vct_distrfln_2_cm(u8 distrfln)
+{
+	if (distrfln < 36)
+		return 0;
+
+	/* Original function for meters: y = 0.8018x - 28.751 */
+	return (8018 * distrfln - 287510) / 100;
+}
+
+static int m88e1111_vct_cable_test_get_status(struct phy_device *phydev,
+					      bool *finished)
+{
+	u8 vcttst_res, distrfln;
+	int ret, result;
+
+	*finished = false;
+
+	/* Each pair use one page: A-0, B-1, C-2, D-3 */
+	for (u8 i = 0; i < 4; i++) {
+		ret = phy_read_paged(phydev, i, MII_VCT_SR);
+		if (ret < 0)
+			return ret;
+		else if (i == 0 && ret & MII_VCT_TXPINS_ENVCT)
+			return 0;
+
+		distrfln = ret & MII_VCT_TXRXPINS_DISTRFLN;
+		vcttst_res = (ret & MII_VCT_TXRXPINS_VCTTST) >>
+			      MII_VCT_TXRXPINS_VCTTST_SHIFT;
+
+		result = m88e3082_vct_cable_test_report_trans(vcttst_res,
+							      distrfln);
+		ethnl_cable_test_result(phydev, i, result);
+
+		if (distrfln < MII_VCT_TXRXPINS_DISTRFLN_MAX) {
+			u32 cm = m88e1111_vct_distrfln_2_cm(distrfln);
+
+			ethnl_cable_test_fault_length(phydev, i, cm);
+		}
+	}
+
+	*finished = true;
 	return 0;
 }
 
@@ -3463,6 +3613,8 @@ static const struct sfp_upstream_ops m88e1510_sfp_ops = {
 	.module_remove = m88e1510_sfp_remove,
 	.attach = phy_sfp_attach,
 	.detach = phy_sfp_detach,
+	.connect_phy = phy_sfp_connect_phy,
+	.disconnect_phy = phy_sfp_disconnect_phy,
 };
 
 static int m88e1510_probe(struct phy_device *phydev)
@@ -3534,6 +3686,7 @@ static struct phy_driver marvell_drivers[] = {
 		.phy_id_mask = MARVELL_PHY_ID_MASK,
 		.name = "Marvell 88E1111",
 		/* PHY_GBIT_FEATURES */
+		.flags = PHY_POLL_CABLE_TEST,
 		.probe = marvell_probe,
 		.config_init = m88e1111gbe_config_init,
 		.config_aneg = m88e1111_config_aneg,
@@ -3549,6 +3702,8 @@ static struct phy_driver marvell_drivers[] = {
 		.get_stats = marvell_get_stats,
 		.get_tunable = m88e1111_get_tunable,
 		.set_tunable = m88e1111_set_tunable,
+		.cable_test_start = m88e1111_vct_cable_test_start,
+		.cable_test_get_status = m88e1111_vct_cable_test_get_status,
 	},
 	{
 		.phy_id = MARVELL_PHY_ID_88E1111_FINISAR,
@@ -3642,6 +3797,7 @@ static struct phy_driver marvell_drivers[] = {
 		.phy_id_mask = MARVELL_PHY_ID_MASK,
 		.name = "Marvell 88E1145",
 		/* PHY_GBIT_FEATURES */
+		.flags = PHY_POLL_CABLE_TEST,
 		.probe = marvell_probe,
 		.config_init = m88e1145_config_init,
 		.config_aneg = m88e1101_config_aneg,
@@ -3656,6 +3812,8 @@ static struct phy_driver marvell_drivers[] = {
 		.get_stats = marvell_get_stats,
 		.get_tunable = m88e1111_get_tunable,
 		.set_tunable = m88e1111_set_tunable,
+		.cable_test_start = m88e1111_vct_cable_test_start,
+		.cable_test_get_status = m88e1111_vct_cable_test_get_status,
 	},
 	{
 		.phy_id = MARVELL_PHY_ID_88E1149R,
@@ -3830,6 +3988,21 @@ static struct phy_driver marvell_drivers[] = {
 		.get_stats = marvell_get_stats,
 	},
 	{
+		.phy_id = MARVELL_PHY_ID_88E6250_FAMILY,
+		.phy_id_mask = MARVELL_PHY_ID_MASK,
+		.name = "Marvell 88E6250 Family",
+		/* PHY_BASIC_FEATURES */
+		.probe = marvell_probe,
+		.aneg_done = marvell_aneg_done,
+		.config_intr = marvell_config_intr,
+		.handle_interrupt = marvell_handle_interrupt,
+		.resume = genphy_resume,
+		.suspend = genphy_suspend,
+		.get_sset_count = marvell_get_sset_count_simple,
+		.get_strings = marvell_get_strings_simple,
+		.get_stats = marvell_get_stats_simple,
+	},
+	{
 		.phy_id = MARVELL_PHY_ID_88E6341_FAMILY,
 		.phy_id_mask = MARVELL_PHY_ID_MASK,
 		.name = "Marvell 88E6341 Family",
@@ -3977,6 +4150,7 @@ static struct mdio_device_id __maybe_unused marvell_tbl[] = {
 	{ MARVELL_PHY_ID_88E1540, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E1545, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E3016, MARVELL_PHY_ID_MASK },
+	{ MARVELL_PHY_ID_88E6250_FAMILY, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E6341_FAMILY, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E6390_FAMILY, MARVELL_PHY_ID_MASK },
 	{ MARVELL_PHY_ID_88E6393_FAMILY, MARVELL_PHY_ID_MASK },
