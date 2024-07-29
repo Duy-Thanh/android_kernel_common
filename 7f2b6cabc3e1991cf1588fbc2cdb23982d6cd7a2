@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dfc336e_a81d531d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-29T07:53:57Z",
+      "side": 1,
+      "message": "There is no need to export the internal content of `struct hyp_allocator`.\n\nA simple forward declaration is enough as we don\u0027t want anyone outside of this file to touch anything inside `struct hyp_allocator`",
+      "revId": "7f2b6cabc3e1991cf1588fbc2cdb23982d6cd7a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef78db07_8d3682c7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-29T07:53:57Z",
+      "side": 1,
+      "message": "The naming convention is\n\n`hyp_alloc` for shortcut to the \"main\" allocator\n\n`hyp_allocator_` for static variables that takes a struct hyp_alloc as an argument\n\nYou can refer to https://android-review.git.corp.google.com/c/kernel/common/+/2950992/1/arch/arm64/kvm/hyp/nvhe/alloc.c \n\nwhere each function had a `hyp_allocator_` version",
+      "revId": "7f2b6cabc3e1991cf1588fbc2cdb23982d6cd7a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
