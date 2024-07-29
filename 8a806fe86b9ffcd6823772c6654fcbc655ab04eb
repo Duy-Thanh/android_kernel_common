@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a35c309_576f0279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-29T19:53:08Z",
+      "side": 1,
+      "message": "I\u0027ve fixed up the problem with the execute bit being set on the new header file. \n\nBut I\u0027ve got a question on one subltle change that isn\u0027t explained in the commit message.",
+      "revId": "8a806fe86b9ffcd6823772c6654fcbc655ab04eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "226257d9_3979f000",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5511,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-29T19:53:08Z",
+      "side": 1,
+      "message": "So this change of the vendorhook point to be before prepare_lock_switch is not explained in the commit message. Could you clarify why this is necessary,and that it is intentional? It has the potential to cause problems for other vendors who have existing hooks which expect the logic to be called after prepare_lock_switch.",
+      "revId": "8a806fe86b9ffcd6823772c6654fcbc655ab04eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
