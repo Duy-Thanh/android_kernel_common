@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23ac0289_56fa28d9",
+        "filename": "sound/usb/quirks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1856,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-07-29T07:05:52Z",
+      "side": 0,
+      "message": "hmm, those lines seem to be removed unexpectedly. I did not see another definition. What am I missing?",
+      "range": {
+        "startLine": 1853,
+        "startChar": 0,
+        "endLine": 1856,
+        "endChar": 28
+      },
+      "revId": "6a9f109c639a254d6fc0fb117c8797a254d8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
