@@ -34,6 +34,24 @@
       ],
       "revId": "fabbd8f5c1adc6674ceb286b1f561858b1273ec4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab9ea84a_db441bdf",
+        "filename": "include/linux/phy.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 3526701
+      },
+      "writtenOn": "2024-07-29T07:39:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b41b2966_6d25174a",
+      "revId": "fabbd8f5c1adc6674ceb286b1f561858b1273ec4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
