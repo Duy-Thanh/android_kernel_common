@@ -190,6 +190,30 @@
       },
       "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bee03c17_2f8377dc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-07-29T07:57:26Z",
+      "side": 1,
+      "message": "But I guess most of the time there won\u0027t be any VM running, let alone any VM with  FF-A memory.\n\nAnd also it doesn\u0027t bring any upper limit to the number of handle to track on the host side.\n\nSo if I understand your concern, I\u0027m convinced this won\u0027t be a problem in reality. And if it is, we can speed-up the search process by sorting the handles by number.",
+      "parentUuid": "4b01c8c1_d6670598",
+      "range": {
+        "startLine": 531,
+        "startChar": 12,
+        "endLine": 531,
+        "endChar": 21
+      },
+      "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
