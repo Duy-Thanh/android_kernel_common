@@ -119,6 +119,66 @@
       "tag": "",
       "revId": "8ba28f1a6e1244363690f9b480915ed24603f3a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086196526",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3198374?revision\u003d2",
+      "key": {
+        "uuid": "40160d77_36a5e7da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-29T20:22:01Z",
+      "side": 1,
+      "message": "Please **attach the following Buganizer ID(s)** to the commit message: 345309292.\nThese IDs were found in the original change with number [3185699](https://android-review.googlesource.com/c/3185699) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "8ba28f1a6e1244363690f9b480915ed24603f3a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086196526",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3198374?revision\u003d2",
+      "key": {
+        "uuid": "00db7784_93a231c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-29T20:22:01Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "8ba28f1a6e1244363690f9b480915ed24603f3a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086196526",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3198374?revision\u003d2",
+      "key": {
+        "uuid": "f38fc2aa_33709839",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-29T20:22:01Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "8ba28f1a6e1244363690f9b480915ed24603f3a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
