@@ -46,6 +46,30 @@
       },
       "revId": "6a9f109c639a254d6fc0fb117c8797a254d8e0b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4cdd79f_d24df531",
+        "filename": "sound/usb/quirks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1856,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-07-29T07:14:07Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "4240c41e_18eb84a2",
+      "range": {
+        "startLine": 1853,
+        "startChar": 0,
+        "endLine": 1856,
+        "endChar": 28
+      },
+      "revId": "6a9f109c639a254d6fc0fb117c8797a254d8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
