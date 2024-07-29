@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f21842f7_9bda408b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-29T20:50:03Z",
+      "side": 1,
+      "message": "This should be submitted to 6.6-stable and come in that way, or if urgent, submitted to the android15-6.6 branch (not -lts)",
+      "revId": "516a7aede8c9ee2cb4053409bb257e7744382ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
