@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc047b6c_2a64f968",
+        "filename": "tools/testing/kunit/android/README",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-30T22:31:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07dd964e_8f823a55",
+      "range": {
+        "startLine": 12,
+        "startChar": 69,
+        "endLine": 12,
+        "endChar": 76
+      },
+      "revId": "a62ce16618b81e292be2a1a902934aa6f20757dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d699267b_feaafc7e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-30T22:23:50Z",
       "side": 1,
       "message": "```suggestion\n  By default, the script will build the kernel and launch an Android virtual device.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 69,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "a62ce16618b81e292be2a1a902934aa6f20757dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de5ed0d5_68e1b629",
+        "filename": "tools/testing/selftests/android/README",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-30T22:31:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d699267b_feaafc7e",
       "range": {
         "startLine": 7,
         "startChar": 69,
