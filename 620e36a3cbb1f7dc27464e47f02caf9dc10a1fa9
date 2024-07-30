@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086384664",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3200354?revision\u003d2",
+      "key": {
+        "uuid": "20e1db5f_31c97b46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-30T21:54:44Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/4b0be62caf6923eac6acdb5a44eb03688e6f9dc5).\n\n```\n      ## fs/notify/inotify/inotify_user.c ##\n     @@ fs/notify/inotify/inotify_user.c: SYSCALL_DEFINE3(inotify_add_watch, int, fd, const char __user *, pathname,\n      \t\tif (path.dentry-\u003ed_op-\u003ed_canonical_path) {\n    - \t\t\tpath.dentry-\u003ed_op-\u003ed_canonical_path(\u0026path,\n    + \t\t\tret \u003d path.dentry-\u003ed_op-\u003ed_canonical_path(\u0026path,\n      \t\t\t\t\t\t\t    \u0026alteredpath);\n    --\t\t\tif (IS_ERR(alteredpath.dentry)) {\n    --\t\t\t\tret \u003d PTR_ERR(alteredpath.dentry);\n    +-\t\t\tif (ret)\n     -\t\t\t\tgoto path_put_and_out;\n    -+\t\t\tif (alteredpath.dentry !\u003d (struct dentry *)-ENOSYS) {\n    -+\t\t\t\tif (IS_ERR(alteredpath.dentry)) {\n    -+\t\t\t\t\tret \u003d PTR_ERR(alteredpath.dentry);\n    +-\n    +-\t\t\tcanonical_path \u003d \u0026alteredpath;\n    +-\t\t\tpath_put(\u0026path);\n    ++\t\t\tif (ret !\u003d -ENOSYS) {\n    ++\t\t\t\tif (ret) {\n     +\t\t\t\t\tgoto path_put_and_out;\n     +\t\t\t\t}\n    -+\n     +\t\t\t\tcanonical_path \u003d \u0026alteredpath;\n     +\t\t\t\tpath_put(\u0026path);\n    - \t\t\t}\n    --\n    --\t\t\tcanonical_path \u003d \u0026alteredpath;\n    --\t\t\tpath_put(\u0026path);\n    ++\t\t\t}\n      \t\t}\n      \t}\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "620e36a3cbb1f7dc27464e47f02caf9dc10a1fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
