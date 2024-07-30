@@ -69,6 +69,24 @@
       "parentUuid": "c51829cf_61d71dd9",
       "revId": "b033df3e8b7bb22115e6a1f204022453fde1729c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1f1e7a_045ec5a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3358448
+      },
+      "writtenOn": "2024-07-30T03:31:01Z",
+      "side": 1,
+      "message": "Implicitly from the Kconfig in this patch.",
+      "parentUuid": "e55236e4_cb2d717e",
+      "revId": "b033df3e8b7bb22115e6a1f204022453fde1729c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
