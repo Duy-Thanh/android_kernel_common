@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464202c1_88aa3b7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-30T13:40:54Z",
+      "side": 1,
+      "message": "Must also add the needed symbols to a list otherwise the hook is not exported for you to use, and that means it was not tested 😞",
+      "revId": "df01ed581134258e0ada67103e31cd069ae5620f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
