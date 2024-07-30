@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2fd01d_1211bc2e",
+        "filename": "tools/testing/kunit/android/README",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-30T21:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82bb0ec2_a864ad3d",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "13c403808c84f69650b494d95ffda9546bb0e7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d024ca72_6cd0c3cb",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-30T20:58:02Z",
       "side": 1,
       "message": "```suggestion\nRun test with a single shell script command $ common/tools/testing/android/bin/kselftest.sh:\n  By default, the kunit.sh script will build the kernel and launch an Android virtual\n  device. Additional options may be passed to disable these actions. The following are some examples\n  on how to use it:\n```\n\nRun test with a single shell script command $ common/tools/testing/android/bin/kunit.sh:\n  By default, the kunit.sh script will build the kernel and launch an Android virtual\n  device. Additional options may be passed to disable these actions. The following are some examples\n  on how to use it:",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "13c403808c84f69650b494d95ffda9546bb0e7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f906f483_969fb513",
+        "filename": "tools/testing/selftests/android/README",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-07-30T21:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d024ca72_6cd0c3cb",
       "range": {
         "startLine": 4,
         "startChar": 0,
