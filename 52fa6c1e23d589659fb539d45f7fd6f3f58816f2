@@ -124,6 +124,24 @@
       "parentUuid": "e4fa64fd_4ca001b4",
       "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "416ebc32_fd7d74d1",
+        "filename": "drivers/hwspinlock/hwspinlock_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3497902
+      },
+      "writtenOn": "2024-07-30T18:03:28Z",
+      "side": 1,
+      "message": "Thanks for suggestion, i can try that.",
+      "parentUuid": "381f508b_98407130",
+      "revId": "52fa6c1e23d589659fb539d45f7fd6f3f58816f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
