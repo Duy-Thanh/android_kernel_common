@@ -16,6 +16,23 @@
       "message": "please review",
       "revId": "b033df3e8b7bb22115e6a1f204022453fde1729c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a0e33c_3ab0c9d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-30T02:29:46Z",
+      "side": 1,
+      "message": "Is this intended to be included only for debug builds, or do you intend to have the option enabled in the gki_defconfig?",
+      "revId": "b033df3e8b7bb22115e6a1f204022453fde1729c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
