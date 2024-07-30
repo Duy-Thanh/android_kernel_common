@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a14eea9_a099b187",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-30T03:31:06Z",
+      "side": 1,
+      "message": "Revert^2 can often cause confusion as to what the patch is doing. Please use \"Reapply\" instead.\n\nie: ANDROID: Reapply \u0027vendor_hook: Add hook to abort reclaim and compaction\u0027",
+      "revId": "6c5760e8e6bc415f562b4645c9133d0d958cfdb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bee49c46_b58cfca3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-30T03:31:06Z",
+      "side": 1,
+      "message": "Lets instead describe the commit it is re-applying.",
+      "revId": "6c5760e8e6bc415f562b4645c9133d0d958cfdb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10ba857a_c89e2913",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-07-30T03:31:06Z",
+      "side": 1,
+      "message": "You need to include a symbols file update change after this patch, otherwise the vendor hooks will appear to be unused and may get reverted again.",
+      "revId": "6c5760e8e6bc415f562b4645c9133d0d958cfdb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
