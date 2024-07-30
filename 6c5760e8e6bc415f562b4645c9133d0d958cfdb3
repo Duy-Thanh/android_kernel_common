@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d09df992_316567f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3108516
+      },
+      "writtenOn": "2024-07-30T05:52:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a14eea9_a099b187",
+      "revId": "6c5760e8e6bc415f562b4645c9133d0d958cfdb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bee49c46_b58cfca3",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-07-30T03:31:06Z",
       "side": 1,
       "message": "Lets instead describe the commit it is re-applying.",
+      "revId": "6c5760e8e6bc415f562b4645c9133d0d958cfdb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fdea8cd_88f6d845",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3108516
+      },
+      "writtenOn": "2024-07-30T05:52:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bee49c46_b58cfca3",
       "revId": "6c5760e8e6bc415f562b4645c9133d0d958cfdb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
