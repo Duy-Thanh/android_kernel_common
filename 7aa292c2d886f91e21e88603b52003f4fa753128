@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36301fd0_ec087b2e",
+        "filename": "tools/testing/android/bin/kselftest.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-30T20:16:23Z",
+      "side": 1,
+      "message": "Please fix line length; check patch complains on it.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 120
+      },
+      "revId": "7aa292c2d886f91e21e88603b52003f4fa753128",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
