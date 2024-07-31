@@ -929,6 +929,7 @@ const struct file_operations ext4_file_operations = {
 	.splice_write	= iter_file_splice_write,
 	.fallocate	= ext4_fallocate,
 };
+EXPORT_SYMBOL_GPL(ext4_file_operations);
 
 const struct inode_operations ext4_file_inode_operations = {
 	.setattr	= ext4_setattr,

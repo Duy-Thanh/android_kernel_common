@@ -4963,3 +4963,4 @@ const struct file_operations f2fs_file_operations = {
 	.splice_write	= iter_file_splice_write,
 	.fadvise	= f2fs_file_fadvise,
 };
+EXPORT_SYMBOL_GPL(f2fs_file_operations);
