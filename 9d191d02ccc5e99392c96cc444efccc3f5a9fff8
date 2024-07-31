@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "917935d9_533956c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886327
+      },
+      "writtenOn": "2024-07-31T18:28:32Z",
+      "side": 1,
+      "message": "Fairly speculative. I\u0027m not sure otherwise what\u0027s intended for us to override Lint -1 from presubmit.",
+      "revId": "9d191d02ccc5e99392c96cc444efccc3f5a9fff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
