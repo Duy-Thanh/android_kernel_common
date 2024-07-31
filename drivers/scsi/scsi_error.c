@@ -1816,6 +1816,8 @@ check_type:
 	 * assume caller has checked sense and determined
 	 * the check condition was retryable.
 	 */
+	if (req->rq_flags & RQF_PM)
+		return false;
 	if (req->cmd_flags & REQ_FAILFAST_DEV || blk_rq_is_passthrough(req))
 		return true;
 
