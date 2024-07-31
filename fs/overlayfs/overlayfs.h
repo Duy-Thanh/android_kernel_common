@@ -430,7 +430,11 @@ void ovl_revert_creds(struct super_block *sb, const struct cred *oldcred);
 
 static inline const struct cred *ovl_creds(struct super_block *sb)
 {
-	return OVL_FS(sb)->creator_cred;
+	struct ovl_fs *ofs = OVL_FS(sb);
+
+	if (!ofs->config.override_creds)
+		return NULL;
+	return ofs->creator_cred;
 }
 
 int ovl_can_decode_fh(struct super_block *sb);
