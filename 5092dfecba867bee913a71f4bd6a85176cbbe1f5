@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086416014",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3199133?revision\u003d1",
+      "key": {
+        "uuid": "c6ceb5d6_1453771c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-31T02:09:24Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/74736103fb4123c71bf11fb7a6abe7c884c5269e) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d74736103fb4123c71bf11fb7a6abe7c884c5269e).\n\n```\n      ## drivers/ufs/core/ufshcd.c ##\n    -@@ drivers/ufs/core/ufshcd.c: static bool ufshcd_abort_one(struct request *rq, void *priv)\n    - \t/* Release cmd in MCQ mode if abort succeeds */\n    - \tif (is_mcq_enabled(hba) \u0026\u0026 (*ret \u003d\u003d 0)) {\n    - \t\thwq \u003d ufshcd_mcq_req_to_hwq(hba, scsi_cmd_to_rq(lrbp-\u003ecmd));\n    -+\t\tif (!hwq)\n    -+\t\t\treturn 0;\n    - \t\tspin_lock_irqsave(\u0026hwq-\u003ecq_lock, flags);\n    - \t\tif (ufshcd_cmd_inflight(lrbp-\u003ecmd))\n    - \t\t\tufshcd_release_scsi_cmd(hba, lrbp);\n    +@@ drivers/ufs/core/ufshcd.c: static bool ufshcd_abort_all(struct ufs_hba *hba)\n    + \t\t\t\tgoto out;\n    + \t\t\t}\n    + \t\t\thwq \u003d ufshcd_mcq_req_to_hwq(hba, scsi_cmd_to_rq(lrbp-\u003ecmd));\n    ++\t\t\tif (!hwq)\n    ++\t\t\t\treturn 0;\n    + \t\t\tspin_lock_irqsave(\u0026hwq-\u003ecq_lock, flags);\n    + \t\t\tif (ufshcd_cmd_inflight(lrbp-\u003ecmd))\n    + \t\t\t\tufshcd_release_scsi_cmd(hba, lrbp);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "5092dfecba867bee913a71f4bd6a85176cbbe1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
