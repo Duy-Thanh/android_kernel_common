@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe3ce39_09f5fcb6",
+        "filename": "include/linux/pgsize_migration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-07-31T21:05:46Z",
+      "side": 1,
+      "message": "should we try to find another mechanism to represent the ELF segment padding to avoid further failures when a new system call is added?",
+      "range": {
+        "startLine": 26,
+        "startChar": 27,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "31634b29_b641895c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/pgsize_migration.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": " * 4 high bits of vm_flags [62,59] are used to represent ELF segment padding up\n * to 60kB, which is sufficient for ELFs of both 16kB and 64kB segment\n * alignment (p_align). This is a temporary solution to support the transition\n * from 4kB to 16kB page size in Android.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "686ae2f5bae123fdac38023952732a5a525b008f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
