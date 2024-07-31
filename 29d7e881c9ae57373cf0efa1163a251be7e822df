@@ -16,6 +16,51 @@
       "message": "please review",
       "revId": "29d7e881c9ae57373cf0efa1163a251be7e822df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a417b1_09b37ccb",
+        "filename": "include/linux/irqdesc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-31T18:20:49Z",
+      "side": 1,
+      "message": "Breaks KMI. Please refactor to avoid changing `struct irq_desc`:\n```\nunction symbol \u0027struct fwnode_handle* __dev_fwnode(struct device*)\u0027 changed\n  CRC changed from 0x5be47850 to 0x8dc5a446\n\nfunction symbol \u0027const struct fwnode_handle* __dev_fwnode_const(const struct device*)\u0027 changed\n  CRC changed from 0x3be18f17 to 0x834eef26\n\nfunction symbol \u0027struct regmap* __devm_regmap_init_i2c(struct i2c_client*, const struct regmap_config*, struct lock_class_key*, const char*)\u0027 changed\n  CRC changed from 0x86d903c9 to 0xbfc62236\n\n... 602 omitted; 605 symbols have only CRC changes\n\ntype \u0027struct irq_desc\u0027 changed\n  member changed from \u0027unsigned int* kstat_irqs\u0027 to \u0027struct irqstat* kstat_irqs\u0027\n    type changed from \u0027unsigned int*\u0027 to \u0027struct irqstat*\u0027\n      pointed-to type changed from \u0027unsigned int\u0027 to \u0027struct irqstat\u0027\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "1164a864_cb1be6a7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/irqdesc.h",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "\tstruct irqstat\t\t*kstat_irqs;\n"
+            },
+            {
+              "path": "include/linux/irqdesc.h",
+              "range": {
+                "startLine": 132,
+                "startChar": 0,
+                "endLine": 133,
+                "endChar": 0
+              },
+              "replacement": "\treturn desc-\u003ekstat_irqs ? per_cpu(desc-\u003ekstat_irqs[cpu].cnt, cpu) : 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "29d7e881c9ae57373cf0efa1163a251be7e822df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
