@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "229484fd_fd04888b",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-07-31T21:18:21Z",
+      "side": 1,
+      "message": "what would happen if we do a mlock() over a vm_area_struct that was fold?",
+      "range": {
+        "startLine": 185,
+        "startChar": 5,
+        "endLine": 185,
+        "endChar": 31
+      },
+      "revId": "6a98e6d07b1c77d139a1a0fe42f3cc969a41198e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
