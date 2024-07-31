@@ -33,6 +33,24 @@
       "message": "This patch doesn\u0027t seem to build:\n\n...ectory/_main/common/kernel/watchdog.c:445:3: error: call to undeclared function \u0027kstat_snapshot_irqs\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  445 |                 kstat_snapshot_irqs();\n      |                 ^\n...in/common/kernel/watchdog.c:464:12: error: call to undeclared function \u0027kstat_get_irq_since_snapshot\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  464 |                         count \u003d kstat_get_irq_since_snapshot(i);\n      |                                 ^\n2 errors generated.",
       "revId": "c3aef86b531bfe4d998ee416b91628ba2225e56f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c57d494_36d689d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3358448
+      },
+      "writtenOn": "2024-07-31T02:09:20Z",
+      "side": 1,
+      "message": "Sorry, another patch is needed for this symbol. I\u0027ll commit it as soon as possible.",
+      "parentUuid": "67723fb6_326d7d3e",
+      "revId": "c3aef86b531bfe4d998ee416b91628ba2225e56f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
