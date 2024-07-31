@@ -1,0 +1,201 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7fbb5c4_d92f1052",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-07-31T15:32:16Z",
+      "side": 1,
+      "message": "I think there\u0027s too much implementation info here. Best just to say:\n\n\u003e Unmap a range of memory from the host stage-2 page-table, leaving the pages host ownership intact. The pages will be remapped lazily (subject to the usual ownership checks) in response to a faulting access from the host.",
+      "range": {
+        "startLine": 86,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "321f708e_fd8152d7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_pkvm_module.h",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": " * @host_stage2_unmap:\t\tUnmap a range of memory from the host stage-2\n * \t\t\t\tpage-table, leaving the pages host ownership\n * \t\t\t\tintact. The pages will be remapped later on\n * \t\t\t\twith @host_stage2_remap.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d23686b_024e0554",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-07-31T15:32:16Z",
+      "side": 1,
+      "message": "Drop this bit.",
+      "range": {
+        "startLine": 93,
+        "startChar": 39,
+        "endLine": 94,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a668cf5e_b6634b70",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_pkvm_module.h",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": " * \t\t\t\tmodule is done with the region. It remaps the\n * \t\t\t\tregion.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c34c3dd_446e7987",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2320,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-07-31T15:32:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we be doing the same checks as `host_request_owned_transition()` here? i.e. rejecting refcounted regions and MMIO?",
+      "range": {
+        "startLine": 2320,
+        "startChar": 0,
+        "endLine": 2320,
+        "endChar": 36
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "279698fc_847a07f8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-07-31T15:32:16Z",
+      "side": 1,
+      "message": "(same comment as above)",
+      "range": {
+        "startLine": 2347,
+        "startChar": 7,
+        "endLine": 2347,
+        "endChar": 21
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1277fd3b_371d8b4c",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-07-31T15:32:16Z",
+      "side": 1,
+      "message": "You don\u0027t need this line",
+      "range": {
+        "startLine": 1263,
+        "startChar": 0,
+        "endLine": 1263,
+        "endChar": 18
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "241200a4_9200c96e",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-07-31T15:32:16Z",
+      "side": 1,
+      "message": "Maybe this should be a `WARN_ON()`, as it would indicate that the caller hasn\u0027t matched the get/put calls properly?",
+      "range": {
+        "startLine": 1280,
+        "startChar": 5,
+        "endLine": 1280,
+        "endChar": 45
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781d9ecc_e40bdc0a",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1283,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-07-31T15:32:16Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this buys us all that much. If the refcount is 0, the `put_page` will explode in `__hyp_refcount_fetch_add()`, so you\u0027re just checking that it\u0027s not \u003d\u003d 1 which feels pretty limited in its usefulness. I\u0027d probably drop it.",
+      "range": {
+        "startLine": 1283,
+        "startChar": 4,
+        "endLine": 1283,
+        "endChar": 39
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
