@@ -40,6 +40,30 @@
       ],
       "revId": "686ae2f5bae123fdac38023952732a5a525b008f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5dd204b_c6e0a61a",
+        "filename": "include/linux/pgsize_migration.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-07-31T21:13:25Z",
+      "side": 1,
+      "message": "Hi Juan,k It\u0027s not feasible to introduce new representation due to the ABI frozen. This is why vm_flags were used.\n\nFor future we could easily catch such breakages with some additional testing.",
+      "parentUuid": "3fe3ce39_09f5fcb6",
+      "range": {
+        "startLine": 26,
+        "startChar": 27,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "686ae2f5bae123fdac38023952732a5a525b008f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
