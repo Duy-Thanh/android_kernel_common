@@ -2,11 +2,17 @@
 
 import builtins
 import inspect
+import sys
 import time
 import traceback
 from .consts import KSFT_MAIN_NAME
 
 KSFT_RESULT = None
+KSFT_RESULT_ALL = True
+
+
+class KsftFailEx(Exception):
+    pass
 
 
 class KsftSkipEx(Exception):
@@ -51,6 +57,24 @@ def ksft_ge(a, b, comment=""):
         _fail("Check failed", a, "<", b, comment)
 
 
+class ksft_raises:
+    def __init__(self, expected_type):
+        self.exception = None
+        self.expected_type = expected_type
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is None:
+            _fail(f"Expected exception {str(self.expected_type.__name__)}, none raised")
+        elif self.expected_type != exc_type:
+            _fail(f"Expected exception {str(self.expected_type.__name__)}, raised {str(exc_type.__name__)}")
+        self.exception = exc_val
+        # Suppress the exception if its the expected one
+        return self.expected_type == exc_type
+
+
 def ksft_busy_wait(cond, sleep=0.005, deadline=1, comment=""):
     end = time.monotonic() + deadline
     while True:
@@ -63,6 +87,9 @@ def ksft_busy_wait(cond, sleep=0.005, deadline=1, comment=""):
 
 
 def ktap_result(ok, cnt=1, case="", comment=""):
+    global KSFT_RESULT_ALL
+    KSFT_RESULT_ALL = KSFT_RESULT_ALL and ok
+
     res = ""
     if not ok:
         res += "not "
@@ -76,7 +103,18 @@ def ktap_result(ok, cnt=1, case="", comment=""):
     print(res)
 
 
-def ksft_run(cases, args=()):
+def ksft_run(cases=None, globs=None, case_pfx=None, args=()):
+    cases = cases or []
+
+    if globs and case_pfx:
+        for key, value in globs.items():
+            if not callable(value):
+                continue
+            for prefix in case_pfx:
+                if key.startswith(prefix):
+                    cases.append(value)
+                    break
+
     totals = {"pass": 0, "fail": 0, "skip": 0, "xfail": 0}
 
     print("KTAP version 1")
@@ -106,8 +144,16 @@ def ksft_run(cases, args=()):
             continue
 
         ktap_result(KSFT_RESULT, cnt, case)
-        totals['pass'] += 1
+        if KSFT_RESULT:
+            totals['pass'] += 1
+        else:
+            totals['fail'] += 1
 
     print(
         f"# Totals: pass:{totals['pass']} fail:{totals['fail']} xfail:{totals['xfail']} xpass:0 skip:{totals['skip']} error:0"
     )
+
+
+def ksft_exit():
+    global KSFT_RESULT_ALL
+    sys.exit(0 if KSFT_RESULT_ALL else 1)
