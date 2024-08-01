@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25833c0_c2b175b0",
+        "filename": "drivers/firmware/arm_scmi/smc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2024-08-01T12:38:31Z",
+      "side": 1,
+      "message": "My issue tracker account is out of date, so I will submit this issue here now:\n\nrockchip dts do not have a \"a2p\" in scmi node.\nWe got -22 (-EINVAL) for scmi_info-\u003eirq here,\nand in line 148 and 153, the if condition will be true when it\u0027s -22, \n    if (scmi_info-\u003eirq)\n        reinit_completion(\u0026scmi_info-\u003etx_complete);\n...\n    if (scmi_info-\u003eirq)\n        wait_for_completion(\u0026scmi_info-\u003etx_complete);\n\n\ntx_complete will abort without init_completion as below, so we should use \"if (scmi_info-\u003eirq \u003e 0)\" instead of \"if (scmi_info-\u003eirq)\" in these two place.\n\n[    0.199652][    T1] arm-scmi firmware:scmi: SCMI Notifications - Core Enabled.\n[    0.200296][    T1] list_add corruption. prev is NULL.\n[    0.200773][    T1] ------------[ cut here ]------------\n[    0.201242][    T1] kernel BUG at lib/list_debug.c:24!\n[    0.201696][    T1] Internal error: Oops - BUG: 0 [#1] PREEMPT SMP\n[    0.202246][    T1] Modules linked in:\n[    0.202581][    T1] CPU: 4 PID: 1 Comm: swapper/0 Not tainted 5.10.214-android13-4-00002-g4c868a6e89f5-ab12097184 #1\n[    0.203511][    T1] Hardware name: Rockchip RK3588S EVB8 LP4X V10 Board (DT)\n[    0.204137][    T1] pstate: 60800085 (nZCv daIf -PAN +UAO -TCO BTYPE\u003d--)\n[    0.204735][    T1] pc : __list_add_valid+0x80/0xc0\n[    0.205168][    T1] lr : __list_add_valid+0x80/0xc0\n[    0.205599][    T1] sp : ffffffc00b24b700\n[    0.205958][    T1] x29: ffffffc00b24b700 x28: 0000000000000002\n[    0.206494][    T1] x27: 00000000000000e0 x26: ffffff810019ca00\n[    0.207027][    T1] x25: 0000000000000000 x24: ffffff810122c1e0\n[    0.207560][    T1] x23: ffffff810122c1d8 x22: ffffffc00b24b728\n[    0.208097][    T1] x21: ffffff810122c1d0 x20: 0000000000000000\n[    0.208631][    T1] x19: 7fffffffffffffff x18: ffffffc00b2350b8\n[    0.209165][    T1] x17: ffffffffffffffff x16: 0000000000000000\n[    0.209697][    T1] x15: 0000000000000004 x14: ffffffc00af6d130\n[    0.210231][    T1] x13: 0000000000000fff x12: 0000000000000003\n[    0.210769][    T1] x11: 00000000ffffffff x10: c0000000ffffefff\n[    0.211300][    T1] x9 : 91b264ed20239600 x8 : 91b264ed20239600\n[    0.211834][    T1] x7 : 322e30202020205b x6 : ffffffc00b1873d8\n[    0.212365][    T1] x5 : ffffffc00b184fee x4 : 0000000000000000\n[    0.212896][    T1] x3 : 0000000000000000 x2 : 0000000000000000\n[    0.213426][    T1] x1 : ffffffc00b24b4d0 x0 : 0000000000000022\n[    0.213959][    T1] Call trace:\n[    0.214239][    T1]  __list_add_valid+0x80/0xc0\n[    0.214645][    T1]  wait_for_common+0x104/0x308\n[    0.215059][    T1]  smc_send_message+0x100/0x2a8\n[    0.215477][    T1]  do_xfer+0x128/0x858\n[    0.215826][    T1]  version_get+0x88/0x20c\n[    0.216198][    T1]  scmi_base_protocol_init+0x6c/0x720\n[    0.216663][    T1]  scmi_get_protocol_instance+0x1f4/0x49c\n[    0.217156][    T1]  scmi_probe+0x244/0x724\n[    0.217531][    T1]  platform_drv_probe+0x60/0x17c\n[    0.217956][    T1]  really_probe+0x310/0x974\n[    0.218342][    T1]  driver_probe_device+0x74/0x298\n[    0.218776][    T1]  device_driver_attach+0x158/0x208\n[    0.219224][    T1]  __driver_attach+0x248/0x420\n[    0.219634][    T1]  bus_add_driver+0x1d4/0x498\n[    0.220036][    T1]  driver_register+0x84/0x17c\n[    0.220442][    T1]  scmi_driver_init+0xb0/0xc0\n[    0.220846][    T1]  __initstub__kmod_scmi_module__425_1626_scmi_driver_init4.cfi+0x14/0x24\n[    0.221589][    T1]  do_one_initcall+0x114/0x3b0\n[    0.221998][    T1]  do_initcall_level+0xdc/0x1bc\n[    0.222415][    T1]  do_initcalls+0x58/0x9c\n[    0.222785][    T1]  do_basic_setup+0x28/0x38\n[    0.223172][    T1]  kernel_init_freeable+0xfc/0x1bc\n[    0.223616][    T1]  kernel_init+0x2c/0x304\n[    0.223988][    T1]  ret_from_fork+0x10/0x30\n[    0.224369][    T1] Code: d4210000 d000c600 9118a800 97e0729d (d4210000)\n[    0.224974][    T1] ---[ end trace 6c77dafcd8f3982d ]---\n[    0.225881][    T1] Kernel panic - not syncing: Oops - BUG: Fatal exception\n[    0.226500][    T1] SMP: stopping secondary CPUs",
+      "revId": "18126b26506236311f965cb3e4126a595d4e2323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
