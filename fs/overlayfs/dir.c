@@ -599,8 +599,9 @@ static int ovl_create_or_link(struct dentry *dentry, struct inode *inode,
 			put_cred(override_cred);
 			goto out_revert_creds;
 		}
-		put_cred(override_creds(override_cred));
+		printk("Paul: %s %d\n", __func__, __LINE__);
 		hold_cred = override_creds(override_cred);
+		put_cred(override_cred);
 	}
 
 	if (!ovl_dentry_is_whiteout(dentry))
