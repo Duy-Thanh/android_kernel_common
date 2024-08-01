@@ -22,6 +22,30 @@
       },
       "revId": "6a98e6d07b1c77d139a1a0fe42f3cc969a41198e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af8c655c_39dc39a1",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-08-01T04:04:17Z",
+      "side": 1,
+      "message": "If you mean page-by-page as init previously did, then it would succeed for the entire range since there aren\u0027t any \"hole\" (regions that would give SIGBUS).\n\nThe \"hole\" is filled by the transparent anon mapping.",
+      "parentUuid": "229484fd_fd04888b",
+      "range": {
+        "startLine": 185,
+        "startChar": 5,
+        "endLine": 185,
+        "endChar": 31
+      },
+      "revId": "6a98e6d07b1c77d139a1a0fe42f3cc969a41198e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
