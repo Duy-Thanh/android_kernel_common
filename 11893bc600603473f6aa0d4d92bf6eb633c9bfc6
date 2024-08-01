@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086647026",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3201771?revision\u003d4",
+      "key": {
+        "uuid": "ebad3008_f4abd66d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-01T14:51:43Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android15-6.6.\nBase branch change: [3119456](https://android-review.googlesource.com/c/3119456).\n\n```\n    + ## android/abi_gki_aarch64_honor ##\n    +@@\n    +   __tracepoint_android_rvh_hw_protection_shutdown\n    +   __traceiter_android_rvh_bpf_int_jit_compile_ro\n    +   __tracepoint_android_rvh_bpf_int_jit_compile_ro\n    ++  __traceiter_android_vh_sk_alloc\n    ++  __tracepoint_android_vh_sk_alloc\n    ++  __traceiter_android_vh_sk_free\n    ++  __tracepoint_android_vh_sk_free\n     \n      ## drivers/android/vendor_hooks.c ##\n     @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "11893bc600603473f6aa0d4d92bf6eb633c9bfc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086647026",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3201771?revision\u003d4",
+      "key": {
+        "uuid": "55fe5fdd_f98c439f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-01T14:51:43Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/6137bb28d644616b5ba9b0d097d5bf4330432712).\n\n```\n    + ## android/abi_gki_aarch64_honor ##\n    +@@\n    +   __tracepoint_android_rvh_hw_protection_shutdown\n    +   __traceiter_android_rvh_bpf_int_jit_compile_ro\n    +   __tracepoint_android_rvh_bpf_int_jit_compile_ro\n    ++  __traceiter_android_vh_sk_alloc\n    ++  __tracepoint_android_vh_sk_alloc\n    ++  __traceiter_android_vh_sk_free\n    ++  __tracepoint_android_vh_sk_free\n     \n      ## drivers/android/vendor_hooks.c ##\n     @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "11893bc600603473f6aa0d4d92bf6eb633c9bfc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
