@@ -214,6 +214,30 @@
       },
       "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "789c644b_6ae303e3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-08-01T13:08:15Z",
+      "side": 1,
+      "message": "I ended up doing a linear search for the moment and we can improve it later with an rbtree where we will keep the nodes sorted by handle.",
+      "parentUuid": "bee03c17_2f8377dc",
+      "range": {
+        "startLine": 531,
+        "startChar": 12,
+        "endLine": 531,
+        "endChar": 21
+      },
+      "revId": "1397ad8dcc01201e6f7635d82637216b5b4cc8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
