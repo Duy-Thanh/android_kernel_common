@@ -79,6 +79,24 @@
       "parentUuid": "d0a417b1_09b37ccb",
       "revId": "29d7e881c9ae57373cf0efa1163a251be7e822df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7d7bfc_f5e5d723",
+        "filename": "include/linux/irqdesc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-01T16:51:31Z",
+      "side": 1,
+      "message": "The patch would likely be dropped when merging from stable to ACK since it breaks KMI. It needs to be refactored no matter how it gets to android15-6.6",
+      "parentUuid": "18633168_11bce495",
+      "revId": "29d7e881c9ae57373cf0efa1163a251be7e822df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
