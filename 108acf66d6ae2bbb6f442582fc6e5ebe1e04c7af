@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be475890_a077e975",
+        "filename": "arch/x86/entry/vdso/vdso2c.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-01T17:46:36Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be ifdef\u0027ed based on on some page_size_compat flag? Will cuttlefish be affected? Why not include include/linux/page_size_compat.h?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "31deda7a_15b58302",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/entry/vdso/vdso2c.h",
+              "range": {
+                "startLine": 8,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_PAGE_SIZE_16K\n"
+            },
+            {
+              "path": "arch/x86/entry/vdso/vdso2c.h",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "108acf66d6ae2bbb6f442582fc6e5ebe1e04c7af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
