@@ -300697,6 +300697,14 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x169718bc
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1b36c7a2
+  parameter_id: 0x33756485
+  parameter_id: 0x32bee099
+  parameter_id: 0xe0bb64fa
+}
+function {
   id: 0x16983453
   return_type_id: 0x48b5725f
   parameter_id: 0x18019702
@@ -302188,6 +302196,13 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x23f09c34
   parameter_id: 0x356ba728
+}
+function {
+  id: 0x18b7067a
+  return_type_id: 0x48b5725f
+  parameter_id: 0x221732c5
+  parameter_id: 0x2efe8065
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x18befa18
@@ -322248,6 +322263,12 @@ function {
   parameter_id: 0x28bd8ba6
   parameter_id: 0x391f15ea
   parameter_id: 0x391f15ea
+}
+function {
+  id: 0x97494660
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2efe8065
+  parameter_id: 0x5d8155a5
 }
 function {
   id: 0x974dd2c8
@@ -343042,6 +343063,15 @@ elf_symbol {
   crc: 0xeae3dfd6
   type_id: 0x1c4508b2
   full_name: "__const_udelay"
+}
+elf_symbol {
+  id: 0xc266357d
+  name: "__contpte_try_unfold"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8bdeefda
+  type_id: 0x169718bc
+  full_name: "__contpte_try_unfold"
 }
 elf_symbol {
   id: 0xba429af2
@@ -405807,6 +405837,15 @@ elf_symbol {
   full_name: "tty_port_tty_wakeup"
 }
 elf_symbol {
+  id: 0x1ebf9ca2
+  name: "tty_put_char"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbfdb0393
+  type_id: 0x97494660
+  full_name: "tty_put_char"
+}
+elf_symbol {
   id: 0x727ea003
   name: "tty_register_driver"
   is_defined: true
@@ -409068,6 +409107,15 @@ elf_symbol {
   full_name: "usb_serial_generic_open"
 }
 elf_symbol {
+  id: 0x7bc2d957
+  name: "usb_serial_generic_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd87815e0
+  type_id: 0x9a212231
+  full_name: "usb_serial_generic_resume"
+}
+elf_symbol {
   id: 0xbeec161b
   name: "usb_serial_generic_throttle"
   is_defined: true
@@ -409077,6 +409125,15 @@ elf_symbol {
   full_name: "usb_serial_generic_throttle"
 }
 elf_symbol {
+  id: 0x20194c97
+  name: "usb_serial_generic_tiocmiwait"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xba7f3801
+  type_id: 0x96f296a4
+  full_name: "usb_serial_generic_tiocmiwait"
+}
+elf_symbol {
   id: 0x1e85ca64
   name: "usb_serial_generic_unthrottle"
   is_defined: true
@@ -409084,6 +409141,15 @@ elf_symbol {
   crc: 0xf6cb5625
   type_id: 0x1b27f18a
   full_name: "usb_serial_generic_unthrottle"
+}
+elf_symbol {
+  id: 0x261c8a11
+  name: "usb_serial_handle_dcd_change"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x47214acf
+  type_id: 0x18b7067a
+  full_name: "usb_serial_handle_dcd_change"
 }
 elf_symbol {
   id: 0x7bad4a68
@@ -413761,6 +413827,7 @@ interface {
   symbol_id: 0x9339caba
   symbol_id: 0xc7d06fb9
   symbol_id: 0xac1ff1ce
+  symbol_id: 0xc266357d
   symbol_id: 0xba429af2
   symbol_id: 0xe495eb53
   symbol_id: 0x1210424a
@@ -420725,6 +420792,7 @@ interface {
   symbol_id: 0xdcd44915
   symbol_id: 0xca491b5d
   symbol_id: 0x1f87b736
+  symbol_id: 0x1ebf9ca2
   symbol_id: 0x727ea003
   symbol_id: 0x2aefba25
   symbol_id: 0xe9e8ea7d
@@ -421087,8 +421155,11 @@ interface {
   symbol_id: 0xcb415220
   symbol_id: 0x256f289d
   symbol_id: 0xcc99e836
+  symbol_id: 0x7bc2d957
   symbol_id: 0xbeec161b
+  symbol_id: 0x20194c97
   symbol_id: 0x1e85ca64
+  symbol_id: 0x261c8a11
   symbol_id: 0x7bad4a68
   symbol_id: 0xbc49d007
   symbol_id: 0xedbb00b2
