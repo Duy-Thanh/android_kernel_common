@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "980878af_d24e263f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886327
+      },
+      "writtenOn": "2024-08-01T21:23:44Z",
+      "side": 1,
+      "message": "We don\u0027t have automerging yet to `-desktop` and this is required to build:\n\n```\ntools/bazel run //common-modules/virtual-device:virtual_device_x86_64_dist\n\n```",
+      "revId": "eccdfb4c83ae52209f3508742e1ea03652380c4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
