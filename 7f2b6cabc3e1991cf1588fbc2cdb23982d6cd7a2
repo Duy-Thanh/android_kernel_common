@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bdb5e38f_805e7d3c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-08-01T13:05:03Z",
+      "side": 1,
+      "message": "I had to export this because I needed to access the internal fields(allocator memcaches) from arch/arm64/kvm/hyp/nvhe/ffa.c.\n\nI plan to drop this CL.",
+      "parentUuid": "7dfc336e_a81d531d",
+      "revId": "7f2b6cabc3e1991cf1588fbc2cdb23982d6cd7a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef78db07_8d3682c7",
         "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
         "patchSetId": 4
