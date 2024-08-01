@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48fd38ac_52bc7462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-08-01T05:42:02Z",
+      "side": 1,
+      "message": "```\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:45:2: error: implicit declaration of function \u0027DEV_STATS_INC\u0027 [-Werror,-Wimplicit-function-declaration]\n        DEV_STATS_INC(dev, tx_packets);\n        ^\n  CC [M]  sound/soc/codecs/cs35l32.o\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:45:21: error: use of undeclared identifier \u0027tx_packets\u0027\n        DEV_STATS_INC(dev, tx_packets);\n                           ^\n  CC      net/ipv4/tcp_ipv4.o\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:46:2: error: implicit declaration of function \u0027DEV_STATS_ADD\u0027 [-Werror,-Wimplicit-function-declaration]\n        DEV_STATS_ADD(dev, tx_bytes, skb-\u003elen);\n        ^\n  CC [M]  fs/jffs2/summary.o\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:46:2: note: did you mean \u0027DEV_STATS_INC\u0027?\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:45:2: note: \u0027DEV_STATS_INC\u0027 declared here\n        DEV_STATS_INC(dev, tx_packets);\n        ^\n  CC [M]  drivers/crypto/inside-secure/safexcel.o\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:46:21: error: use of undeclared identifier \u0027tx_bytes\u0027\n        DEV_STATS_ADD(dev, tx_bytes, skb-\u003elen);\n                           ^\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:97:3: error: implicit declaration of function \u0027DEV_STATS_INC\u0027 [-Werror,-Wimplicit-function-declaration]\n                DEV_STATS_INC(dev, tx_packets);\n                ^\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:97:22: error: use of undeclared identifier \u0027tx_packets\u0027\n                DEV_STATS_INC(dev, tx_packets);\n                                   ^\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:98:3: error: implicit declaration of function \u0027DEV_STATS_ADD\u0027 [-Werror,-Wimplicit-function-declaration]\n                DEV_STATS_ADD(dev, tx_bytes, len);\n                ^\n  CC      net/ipv4/tcp_minisocks.o\n  CC [M]  drivers/crypto/inside-secure/safexcel_ring.o\n/mnt/disks/build-disk/src/android/common-android-4.19-stable/common/net/mac802154/tx.c:98:22: error: use of undeclared identifier \u0027tx_bytes\u0027\n                DEV_STATS_ADD(dev, tx_bytes, len);\n                                   ^\n```",
+      "revId": "da78120b9286aae93522c62ed9cc9a12d2e52026",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
