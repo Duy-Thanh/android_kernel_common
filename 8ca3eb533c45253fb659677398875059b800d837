@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b00989c6_0e13f796",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-08-01T08:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7fbb5c4_d92f1052",
+      "range": {
+        "startLine": 86,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 17
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d23686b_024e0554",
@@ -83,6 +107,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8308c9ca_9d47c302",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-08-01T08:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d23686b_024e0554",
+      "range": {
+        "startLine": 93,
+        "startChar": 39,
+        "endLine": 94,
+        "endChar": 36
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c34c3dd_446e7987",
@@ -96,6 +144,30 @@
       "writtenOn": "2024-07-31T15:32:16Z",
       "side": 1,
       "message": "Shouldn\u0027t we be doing the same checks as `host_request_owned_transition()` here? i.e. rejecting refcounted regions and MMIO?",
+      "range": {
+        "startLine": 2320,
+        "startChar": 0,
+        "endLine": 2320,
+        "endChar": 36
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "482f1db7_b04e58ed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2320,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-08-01T08:45:37Z",
+      "side": 1,
+      "message": "The !reg will reject MMIO regions... however I should make sure it is not bigger than the memory region with `is_in_mem_range`",
+      "parentUuid": "0c34c3dd_446e7987",
       "range": {
         "startLine": 2320,
         "startChar": 0,
@@ -129,6 +201,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a57a916a_06427913",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-08-01T08:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "279698fc_847a07f8",
+      "range": {
+        "startLine": 2347,
+        "startChar": 7,
+        "endLine": 2347,
+        "endChar": 21
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1277fd3b_371d8b4c",
@@ -142,6 +238,30 @@
       "writtenOn": "2024-07-31T15:32:16Z",
       "side": 1,
       "message": "You don\u0027t need this line",
+      "range": {
+        "startLine": 1263,
+        "startChar": 0,
+        "endLine": 1263,
+        "endChar": 18
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e989c0d7_9c7d996c",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-08-01T08:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1277fd3b_371d8b4c",
       "range": {
         "startLine": 1263,
         "startChar": 0,
@@ -175,6 +295,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2278c9a1_78c14b51",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-08-01T08:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "241200a4_9200c96e",
+      "range": {
+        "startLine": 1280,
+        "startChar": 5,
+        "endLine": 1280,
+        "endChar": 45
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "781d9ecc_e40bdc0a",
@@ -188,6 +332,30 @@
       "writtenOn": "2024-07-31T15:32:16Z",
       "side": 1,
       "message": "I\u0027m not convinced this buys us all that much. If the refcount is 0, the `put_page` will explode in `__hyp_refcount_fetch_add()`, so you\u0027re just checking that it\u0027s not \u003d\u003d 1 which feels pretty limited in its usefulness. I\u0027d probably drop it.",
+      "range": {
+        "startLine": 1283,
+        "startChar": 4,
+        "endLine": 1283,
+        "endChar": 39
+      },
+      "revId": "8ca3eb533c45253fb659677398875059b800d837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43d1b8a3_2c658449",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1283,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-08-01T08:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "781d9ecc_e40bdc0a",
       "range": {
         "startLine": 1283,
         "startChar": 4,
