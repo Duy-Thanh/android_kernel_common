@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "304bc15a_5f01c7fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-01T16:13:04Z",
+      "side": 1,
+      "message": "Needs to cite a respin bug",
+      "revId": "0e5f02381ee60b7df7e8670af5d3dab7d9c6d716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a391d35f_3469610e",
+        "filename": "android/abi_gki_aarch64_exynosauto",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-01T16:13:04Z",
+      "side": 1,
+      "message": "this symbol has not been added to your symbol list on android14-6.1. It must land there before merging into this release branch",
+      "revId": "0e5f02381ee60b7df7e8670af5d3dab7d9c6d716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
