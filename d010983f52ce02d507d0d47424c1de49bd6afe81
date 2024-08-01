@@ -16,6 +16,24 @@
       "message": "Please provide a description of why these symbols are needed. What feature does it enable? Are these needed for the implementation of vendor hooks? Which ones?",
       "revId": "d010983f52ce02d507d0d47424c1de49bd6afe81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7657447_327ccd03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969321
+      },
+      "writtenOn": "2024-08-01T06:29:43Z",
+      "side": 1,
+      "message": "We need to use these apis to monitor specific file open write events, and then notify us to do custom processing.\nThese are not needed for the implementation of vendor hooks. We just need to use it in our ko.",
+      "parentUuid": "1337860c_a1ba616a",
+      "revId": "d010983f52ce02d507d0d47424c1de49bd6afe81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
