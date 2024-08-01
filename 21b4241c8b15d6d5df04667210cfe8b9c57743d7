@@ -34,6 +34,24 @@
       "parentUuid": "f2bedad9_c662c7b7",
       "revId": "21b4241c8b15d6d5df04667210cfe8b9c57743d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8989bda7_d02e58ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2024-08-01T05:04:08Z",
+      "side": 1,
+      "message": "1 I separated the symbol, https://android-review.googlesource.com/c/kernel/common/+/3203870；\n2 which is a hook and does not change the original code logic.",
+      "parentUuid": "09832829_dcec05ab",
+      "revId": "21b4241c8b15d6d5df04667210cfe8b9c57743d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
