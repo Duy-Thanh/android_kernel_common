@@ -16,6 +16,23 @@
       "message": "Cherry picks to android15-6.6-lts, please merged it, thanks",
       "revId": "b95fa2495324641a8bced6a2cf0499536935586f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "753cf7e8_7018c262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-01T17:55:14Z",
+      "side": 1,
+      "message": "As this is change is already merged in android15-6.6, why are you submitting it to androdi15-6.6-lts?  \n\nUsually we don\u0027t take patches on the android15-6.6-lts patch (which is a prep branch for merging -stable updates which are then merged from android15-6.6-lts into android15-6.6)",
+      "revId": "b95fa2495324641a8bced6a2cf0499536935586f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
