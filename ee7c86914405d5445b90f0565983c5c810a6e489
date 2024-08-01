@@ -16,6 +16,24 @@
       "message": "This needs to be shashed on top of change 3201771.",
       "revId": "ee7c86914405d5445b90f0565983c5c810a6e489",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db97e5df_4e7b4a46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-01T15:23:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64cc1e2f_e637fd72",
+      "revId": "ee7c86914405d5445b90f0565983c5c810a6e489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
