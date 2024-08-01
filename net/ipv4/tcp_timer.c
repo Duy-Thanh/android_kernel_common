@@ -293,9 +293,14 @@ static int tcp_write_timeout(struct sock *sk)
 
 	if (expired) {
 		/* Has it gone just too far? */
+
+		trace_android_vh_tcp_state_change(sk, TCP_STATE_CHANGE_REASON_SYN_TIMEOUT, 0);
+
 		tcp_write_err(sk);
 		return 1;
 	}
+
+	trace_android_vh_tcp_state_change(sk, TCP_STATE_CHANGE_REASON_RETRANSMIT, 0);
 
 	if (sk_rethink_txhash(sk)) {
 		tp->timeout_rehash++;
@@ -677,7 +682,15 @@ out_reset_timer:
 		 * activated.
 		 */
 		icsk->icsk_backoff++;
+<<<<<<< HEAD   (32d3f32fbc53db0e7d79a02923d9e2c455dbfb8d ANDROID: GKI: Update symbols to symbol list)
 		icsk->icsk_rto = min(icsk->icsk_rto << 1, tcp_rto_max(sk));
+||||||| BASE   (0e47a7391b3e2e57c4769f14a7be0ba7b56b10ca ANDROID: mm: export isolate_folio and reclaim_pages)
+		icsk->icsk_rto = min(icsk->icsk_rto << 1, TCP_RTO_MAX);
+=======
+		icsk->icsk_rto = min(icsk->icsk_rto << 1, TCP_RTO_MAX);
+
+		trace_android_vh_tcp_fastsyn(sk);
+>>>>>>> CHANGE (51fe955bf6dfda4550402c3f4335814f77b4e297 ANDROID: GKI: Add hooks for TCP parameter management.)
 	}
 	tcp_reset_xmit_timer(sk, ICSK_TIME_RETRANS,
 			     tcp_clamp_rto_to_user_timeout(sk), false);
