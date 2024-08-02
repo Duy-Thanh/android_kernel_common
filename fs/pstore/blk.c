@@ -18,6 +18,10 @@
 #include <linux/file.h>
 #include <linux/init_syscalls.h>
 #include <linux/mount.h>
+#include <linux/align.h>
+
+#define PERSISTENT_RAMOOPS_BASE_ADDR	0x61F00000
+#define PERSISTENT_RAMOOPS_SIZE		0x400000
 
 static long kmsg_size = CONFIG_PSTORE_BLK_KMSG_SIZE;
 module_param(kmsg_size, long, 0400);
@@ -71,6 +75,9 @@ MODULE_PARM_DESC(blkdev, "block device for pstore storage");
 static DEFINE_MUTEX(pstore_blk_lock);
 static struct file *psblk_file;
 static struct pstore_device_info *pstore_device_info;
+
+// RAMOOPS region
+struct ramoops_t *ramoops;
 
 #define check_size(name, alignsize) ({				\
 	long _##name_ = (name);					\
@@ -185,6 +192,70 @@ void unregister_pstore_device(struct pstore_device_info *dev)
 }
 EXPORT_SYMBOL_GPL(unregister_pstore_device);
 
+static void pstore_blk_ramoops_vmap(void)
+{
+	struct page **pages;
+	phys_addr_t page_start;
+	unsigned int page_count;
+	pgprot_t prot;
+	unsigned int i;
+	void *vaddr;
+	phys_addr_t start;
+	size_t size;
+
+	start= PERSISTENT_RAMOOPS_BASE_ADDR;
+	size = PERSISTENT_RAMOOPS_SIZE;
+
+	page_start = start - offset_in_page(start);
+	page_count = DIV_ROUND_UP(size + offset_in_page(start), PAGE_SIZE);
+
+	prot = pgprot_noncached(PAGE_KERNEL);
+
+	pages = kmalloc_array(page_count, sizeof(struct page *), GFP_KERNEL);
+	if (!pages) {
+		pr_err("%s: Failed to allocate array for %u pages\n",
+		       __func__, page_count);
+		return;
+	}
+
+	for (i = 0; i < page_count; i++) {
+		phys_addr_t addr = page_start + i * PAGE_SIZE;
+		pages[i] = pfn_to_page(addr >> PAGE_SHIFT);
+	}
+	/*
+	 * VM_IOREMAP used here to bypass this region during vread()
+	 * and kmap_atomic() (i.e. kcore) to avoid __va() failures.
+	 */
+	vaddr = vmap(pages, page_count, VM_MAP | VM_IOREMAP, prot);
+	kfree(pages);
+
+	/*
+	 * Since vmap() uses page granularity, we must add the offset
+	 * into the page here, to get the byte granularity address
+	 * into the mapping to represent the actual "start" location.
+	 */
+
+	ramoops = (struct ramoops_t*) (vaddr + offset_in_page(start));
+
+	return;
+}
+
+static int pstore_blk_ramoops_init(void)
+{
+	ramoops = NULL;
+
+	pstore_blk_ramoops_vmap();
+
+	if (ramoops == NULL)
+		return -ENOMEM;
+
+	ramoops->header.magic = 0x4BC62634;
+	ramoops->header.dumpcnt = 0;
+	ramoops->header.off = sizeof(struct ramoops_header_t);
+
+	return 0;
+}
+
 static ssize_t psblk_generic_blk_read(char *buf, size_t bytes, loff_t pos)
 {
 	return kernel_read(psblk_file, buf, bytes, &pos);
@@ -197,6 +268,39 @@ static ssize_t psblk_generic_blk_write(const char *buf, size_t bytes,
 	if (in_interrupt() || irqs_disabled())
 		return -EBUSY;
 	return kernel_write(psblk_file, buf, bytes, &pos);
+}
+
+/**
+ * psblk_generic_blk_panic_write() - dump pstore blk log buffer to RAMOOPs region
+ */
+static ssize_t psblk_generic_blk_panic_write(const char *buf, size_t bytes,
+		loff_t pos)
+{
+	void *src_buf;
+	void *dest_buf;
+	struct ramoops_record_t *record;
+
+	if (!ramoops) {
+		pr_err("ramoops is NULL, skipped panic kmsg dump\n");
+		return -EFAULT;
+	}
+
+	ramoops->header.dumpcnt ++;
+
+	record = (struct ramoops_record_t *)(((char*)ramoops) + ramoops->header.off);
+
+	record->header.pos = (uint64_t)pos;
+	record->header.size = (uint64_t)bytes;
+
+	dest_buf = (void*)(&(record->buf));
+
+	src_buf =  (void *)buf;
+
+	memcpy(dest_buf, src_buf, bytes);
+
+	ramoops->header.off += (sizeof(struct ramoops_record_header_t) + ALIGN(bytes, 8));
+
+	return bytes;
 }
 
 /*
@@ -303,8 +407,12 @@ static int __init __best_effort_init(void)
 	if (!best_effort_dev)
 		return -ENOMEM;
 
+	// Mapping virtual address for ramoops memory region for crash logdump
+	pstore_blk_ramoops_init();
+
 	best_effort_dev->zone.read = psblk_generic_blk_read;
 	best_effort_dev->zone.write = psblk_generic_blk_write;
+	best_effort_dev->zone.panic_write = psblk_generic_blk_panic_write;
 
 	ret = __register_pstore_blk(best_effort_dev,
 				    early_boot_devpath(blkdev));
@@ -345,7 +453,7 @@ static int __init pstore_blk_init(void)
 
 	return ret;
 }
-late_initcall(pstore_blk_init);
+module_init(pstore_blk_init);
 
 static void __exit pstore_blk_exit(void)
 {

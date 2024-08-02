@@ -52,4 +52,51 @@ struct pstore_blk_config {
  */
 int pstore_blk_get_config(struct pstore_blk_config *info);
 
+/**
+ * struct ramoops_record_header_t - ramoops record header
+ *
+ * @pos:		Position in the block file where kmsg is dumped
+ * @size:		size of kmsg to be dumped
+ */
+struct ramoops_record_header_t {
+	uint64_t pos;
+	uint64_t size;
+};
+
+/**
+ * struct ramoops_record_t - ramoops record info
+ *
+ * @header:		ramoops record header
+ * @buf:		buf at which kmsg record is dumped
+ * @off:		Offset where next record is dumped in ramoops
+ */
+struct ramoops_record_t {
+	struct ramoops_record_header_t header;
+	char *buf;
+};
+
+/**
+ * struct ramoops_header_t - ramoops header info
+ *
+ * @header:		Random magic number
+ * @records:		Number of times the records dumped to ramoops region
+ * @off:		Offset where next record will be dumped in ramoops
+ */
+struct ramoops_header_t {
+	uint64_t magic;
+	uint32_t dumpcnt;
+	uint32_t off;
+};
+
+/**
+ * struct ramoops_t - ramoops memory layout
+ *
+ * @header:		ramoops header info
+ * @records:		ramoops kmsg records
+ */
+struct ramoops_t {
+	struct ramoops_header_t header;
+	struct ramoops_record_t *records;
+};
+
 #endif

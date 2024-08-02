@@ -40,12 +40,17 @@
  * whether the system is actually still running well enough
  * to let someone see the entry
  */
-static int pstore_update_ms = -1;
-module_param_named(update_ms, pstore_update_ms, int, 0600);
-MODULE_PARM_DESC(update_ms, "milliseconds before pstore updates its content "
+static int pstore_record_update_ms = 240000;
+module_param_named(update_record_ms, pstore_record_update_ms, int, 0600);
+MODULE_PARM_DESC(update_record_ms, "milliseconds before pstore updates its content "
 		 "(default is -1, which means runtime updates are disabled; "
 		 "enabling this option may not be safe; it may lead to further "
 		 "corruption on Oopses)");
+
+static int pstore_dump_interval_ms = 300000;
+module_param_named(update_dump_ms, pstore_dump_interval_ms, int, 0600);
+MODULE_PARM_DESC(update_dump_ms, "milliseconds before pstore dumps its content"
+		 "(default is 30000 milliseconds)");
 
 /* Names should be in the same order as the enum pstore_type_id */
 static const char * const pstore_type_names[] = {
@@ -60,13 +65,19 @@ static const char * const pstore_type_names[] = {
 	"powerpc-opal",
 };
 
-static int pstore_new_entry;
+static int pstore_new_record_entry;
 
-static void pstore_timefunc(struct timer_list *);
-static DEFINE_TIMER(pstore_timer, pstore_timefunc);
+static void pstore_read_record_timefunc(struct timer_list *);
+static DEFINE_TIMER(pstore_read_record_timer, pstore_read_record_timefunc);
 
-static void pstore_dowork(struct work_struct *);
-static DECLARE_WORK(pstore_work, pstore_dowork);
+static void pstore_read_record_dowork(struct work_struct *);
+static DECLARE_WORK(pstore_read_record_work, pstore_read_record_dowork);
+
+static void pstore_dump_timefunc(struct timer_list *);
+static DEFINE_TIMER(pstore_dump_timer, pstore_dump_timefunc);
+
+static void pstore_dump_dowork(struct work_struct *);
+static DECLARE_WORK(pstore_dump_work, pstore_dump_dowork);
 
 /*
  * psinfo_lock protects "psinfo" during calls to
@@ -99,6 +110,9 @@ struct pstore_zbackend {
 
 static char *big_oops_buf;
 static size_t big_oops_buf_sz;
+
+// kmsg dump iterator
+struct kmsg_dump_iter iter;
 
 /* How much of the console log to snapshot */
 unsigned long kmsg_bytes = CONFIG_PSTORE_DEFAULT_KMSG_BYTES;
@@ -135,12 +149,20 @@ enum pstore_type_id pstore_name_to_type(const char *name)
 }
 EXPORT_SYMBOL_GPL(pstore_name_to_type);
 
-static void pstore_timer_kick(void)
+static void pstore_read_record_timer_kick(void)
 {
-	if (pstore_update_ms < 0)
+	if (pstore_record_update_ms < 0)
 		return;
 
-	mod_timer(&pstore_timer, jiffies + msecs_to_jiffies(pstore_update_ms));
+	mod_timer(&pstore_read_record_timer, jiffies + msecs_to_jiffies(pstore_record_update_ms));
+}
+
+static void pstore_dump_timer_kick(void)
+{
+	if (pstore_dump_interval_ms < 0)
+		return;
+
+	mod_timer(&pstore_dump_timer, jiffies + msecs_to_jiffies(pstore_dump_interval_ms));
 }
 
 static bool pstore_cannot_block_path(enum kmsg_dump_reason reason)
@@ -386,12 +408,15 @@ void pstore_record_init(struct pstore_record *record,
 static void pstore_dump(struct kmsg_dumper *dumper,
 			enum kmsg_dump_reason reason)
 {
-	struct kmsg_dump_iter iter;
 	unsigned long	total = 0;
 	const char	*why;
 	unsigned int	part = 1;
 	unsigned long	flags = 0;
 	int		ret;
+	static char dmesg_line[1024];
+	size_t dmesg_line_len;
+	bool records_available = false;
+	struct kmsg_dump_iter backup_iter;
 
 	why = kmsg_dump_reason_str(reason);
 
@@ -405,15 +430,13 @@ static void pstore_dump(struct kmsg_dumper *dumper,
 		spin_lock_irqsave(&psinfo->buf_lock, flags);
 	}
 
-	kmsg_dump_rewind(&iter);
-
 	oopscount++;
-	while (total < kmsg_bytes) {
+	while (true) {
 		char *dst;
 		size_t dst_size;
 		int header_size;
 		int zipped_len = -1;
-		size_t dump_size;
+		size_t dump_size = 0;
 		struct pstore_record record;
 
 		pstore_record_init(&record, psinfo);
@@ -436,10 +459,28 @@ static void pstore_dump(struct kmsg_dumper *dumper,
 				 oopscount, part);
 		dst_size -= header_size;
 
+		/* Backup the iterator in case we want to restore. */
+		memcpy(&backup_iter, &iter, sizeof(struct kmsg_dump_iter));
+
 		/* Write dump contents. */
-		if (!kmsg_dump_get_buffer(&iter, true, dst + header_size,
-					  dst_size, &dump_size))
-			break;
+		while(dst_size > sizeof(dmesg_line)) {
+			records_available = kmsg_dump_get_line(&iter, true, dmesg_line,
+						sizeof(dmesg_line), &dmesg_line_len);
+			if (records_available == false)
+				break;
+			memcpy(dst + header_size + dump_size, dmesg_line, dmesg_line_len);
+			dump_size += dmesg_line_len;
+			dst_size -= dmesg_line_len;
+		}
+
+		if (reason != KMSG_DUMP_PANIC) {
+			if (dst_size > sizeof(dmesg_line)) {
+				/* Not enough kmsg logs to dump, so skip dumping and
+				   restore iter to backup_iter. */
+				memcpy(&iter, &backup_iter, sizeof(struct kmsg_dump_iter));
+				break;
+			}
+		}
 
 		if (big_oops_buf) {
 			zipped_len = pstore_compress(dst, psinfo->buf,
@@ -459,12 +500,16 @@ static void pstore_dump(struct kmsg_dumper *dumper,
 
 		ret = psinfo->write(&record);
 		if (ret == 0 && reason == KMSG_DUMP_OOPS) {
-			pstore_new_entry = 1;
-			pstore_timer_kick();
+			pstore_new_record_entry = 1;
+			pstore_read_record_timer_kick();
 		}
 
 		total += record.size;
 		part++;
+
+		/* No more records available. */
+		if (records_available == false)
+			break;
 	}
 	spin_unlock_irqrestore(&psinfo->buf_lock, flags);
 }
@@ -618,7 +663,10 @@ int pstore_register(struct pstore_info *psi)
 		pstore_register_pmsg();
 
 	/* Start watching for new records, if desired. */
-	pstore_timer_kick();
+	pstore_read_record_timer_kick();
+
+	/* Start dumping kernel messages*/
+	pstore_dump_timer_kick();
 
 	/*
 	 * Update the module parameter backend, so it is visible
@@ -657,9 +705,13 @@ void pstore_unregister(struct pstore_info *psi)
 	if (psi->flags & PSTORE_FLAGS_DMESG)
 		pstore_unregister_kmsg();
 
-	/* Stop timer and make sure all work has finished. */
-	del_timer_sync(&pstore_timer);
-	flush_work(&pstore_work);
+	/* Stop read record timer and make sure all work has finished. */
+	del_timer_sync(&pstore_read_record_timer);
+	flush_work(&pstore_read_record_work);
+
+	/* Stop dump timer and make sure sure all work has finished */
+	del_timer_sync(&pstore_dump_timer);
+	flush_work(&pstore_dump_work);
 
 	/* Remove all backend records from filesystem tree. */
 	pstore_put_backend_records(psi);
@@ -794,19 +846,31 @@ out:
 			psi->name);
 }
 
-static void pstore_dowork(struct work_struct *work)
+static void pstore_read_record_dowork(struct work_struct *work)
 {
 	pstore_get_records(1);
 }
 
-static void pstore_timefunc(struct timer_list *unused)
+static void pstore_read_record_timefunc(struct timer_list *unused)
 {
-	if (pstore_new_entry) {
-		pstore_new_entry = 0;
-		schedule_work(&pstore_work);
+	if (pstore_new_record_entry) {
+		pstore_new_record_entry = 0;
+		schedule_work(&pstore_read_record_work);
 	}
 
-	pstore_timer_kick();
+	pstore_read_record_timer_kick();
+}
+
+static void pstore_dump_dowork(struct work_struct *work)
+{
+	pstore_dump(&pstore_dumper, KMSG_DUMP_OOPS);
+}
+
+static void pstore_dump_timefunc(struct timer_list *usused)
+{
+	schedule_work(&pstore_dump_work);
+
+	pstore_dump_timer_kick();
 }
 
 static void __init pstore_choose_compression(void)
@@ -827,6 +891,9 @@ static void __init pstore_choose_compression(void)
 static int __init pstore_init(void)
 {
 	int ret;
+
+	// Rewind kmsg iterator to beginning of the kmsg buffer
+	kmsg_dump_rewind(&iter);
 
 	pstore_choose_compression();
 
