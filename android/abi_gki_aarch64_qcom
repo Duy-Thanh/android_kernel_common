@@ -1146,6 +1146,7 @@
   kmem_cache_destroy
   kmem_cache_free
   kmemdup
+  kmsg_dump
   kmsg_dump_get_buffer
   kmsg_dump_register
   kmsg_dump_rewind
