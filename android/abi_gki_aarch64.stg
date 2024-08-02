@@ -382843,6 +382843,15 @@ elf_symbol {
   full_name: "netdev_lower_state_changed"
 }
 elf_symbol {
+  id: 0x89470a34
+  name: "netdev_master_upper_dev_get"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8cda1aa4
+  type_id: 0xf0da0508
+  full_name: "netdev_master_upper_dev_get"
+}
+elf_symbol {
   id: 0x178677d3
   name: "netdev_master_upper_dev_link"
   is_defined: true
@@ -416508,6 +416517,7 @@ interface {
   symbol_id: 0x06bf2dbd
   symbol_id: 0x5635039f
   symbol_id: 0x5a4e487e
+  symbol_id: 0x89470a34
   symbol_id: 0x178677d3
   symbol_id: 0xb4ca02f0
   symbol_id: 0x9b8c6a7d
