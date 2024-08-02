@@ -16,6 +16,24 @@
       "message": "@amit.pundir@linaro.org, are you seeing the same kernel panic when disconnecting the USB without this revert?",
       "revId": "a94d6a8dafa96156b9c2fec3213d666ea2a6e912",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d5f2d67_949885a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2024-08-02T07:25:44Z",
+      "side": 1,
+      "message": "I am. This revert makes the panic disappear.",
+      "parentUuid": "f54e6d87_95e3b34e",
+      "revId": "a94d6a8dafa96156b9c2fec3213d666ea2a6e912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
