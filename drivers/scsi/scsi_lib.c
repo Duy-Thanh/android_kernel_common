@@ -205,6 +205,7 @@ void scsi_queue_insert(struct scsi_cmnd *cmd, int reason)
  * Returns the scsi_cmnd result field if a command was executed, or a negative
  * Linux error code if we didn't get that far.
  */
+#include <trace/hooks/scsi.h>
 int __scsi_execute(struct scsi_device *sdev, const unsigned char *cmd,
 		 int data_direction, void *buffer, unsigned bufflen,
 		 unsigned char *sense, struct scsi_sense_hdr *sshdr,
@@ -214,6 +215,13 @@ int __scsi_execute(struct scsi_device *sdev, const unsigned char *cmd,
 	struct request *req;
 	struct scsi_request *rq;
 	int ret;
+	bool skip = false;
+
+	trace_android_rvh__scsi_execute(&skip, &ret, sdev, cmd, data_direction,
+					buffer, bufflen, sense, sshdr, timeout,
+					retries, flags, rq_flags, resid);
+	if (skip)
+		return ret;
 
 	req = blk_get_request(sdev->request_queue,
 			data_direction == DMA_TO_DEVICE ?
