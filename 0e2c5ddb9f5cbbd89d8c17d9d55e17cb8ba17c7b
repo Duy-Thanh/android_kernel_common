@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b659cc1_2d36b9a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-02T15:49:14Z",
+      "side": 1,
+      "message": "If you have a scsi driver, why do you need this back-door mechanism? Can\u0027t it just work like a standard scsi driver?",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
