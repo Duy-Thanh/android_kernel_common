@@ -34,6 +34,24 @@
       "parentUuid": "f54e6d87_95e3b34e",
       "revId": "a94d6a8dafa96156b9c2fec3213d666ea2a6e912",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f1c7e94_4732b970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-08-02T17:51:14Z",
+      "side": 1,
+      "message": "Tudor\u0027s upstream fixes are here: https://lore.kernel.org/linux-usb/20240802140428.2000312-1-tudor.ambarus@linaro.org/",
+      "parentUuid": "6d5f2d67_949885a4",
+      "revId": "a94d6a8dafa96156b9c2fec3213d666ea2a6e912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
