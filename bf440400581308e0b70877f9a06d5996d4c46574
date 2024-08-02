@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad338f48_033a1c54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-02T15:28:44Z",
+      "side": 1,
+      "message": "why are you submitting this to android15-6.6-lts? It must go to android15-6.6 first and then normally merge to the -lts branch.",
+      "revId": "bf440400581308e0b70877f9a06d5996d4c46574",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
