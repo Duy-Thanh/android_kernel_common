@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee80a3ff_96e6fe2b",
+        "filename": "fs/erofs/decompressor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2024-08-02T01:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4f7f266_dcc29e05",
+      "range": {
+        "startLine": 217,
+        "startChar": 6,
+        "endLine": 217,
+        "endChar": 23
+      },
+      "revId": "916b1c9a5218eac181eedd0f376cd18ad2ac43fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e9b2145_ea6d7a51",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-01T12:54:10Z",
       "side": 1,
       "message": "nit: `bypass_decompression`",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 13
+      },
+      "revId": "916b1c9a5218eac181eedd0f376cd18ad2ac43fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d67b3bf3_79b328eb",
+        "filename": "fs/erofs/decompressor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2024-08-02T01:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e9b2145_ea6d7a51",
       "range": {
         "startLine": 258,
         "startChar": 0,
