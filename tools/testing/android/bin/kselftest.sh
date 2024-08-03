@@ -5,7 +5,7 @@ BAZEL=tools/bazel
 BIN_DIR=common/tools/testing/android/bin
 ACLOUD=$BIN_DIR/acloudb.sh
 TRADEFED=prebuilts/tradefed/filegroups/tradefed/tradefed.sh
-TESTSDIR=bazel-bin/common/
+TESTSDIR=/tmp/kselftests
 LOG_DIR=$PWD/out/test_logs/$(date +%Y%m%d_%H%M%S)
 JDK_PATH=prebuilts/jdk/jdk11/linux-x86
 
@@ -154,16 +154,16 @@ echo "Get abi from device $SERIAL_NUMBER"
 ABI=$(adb -s $SERIAL_NUMBER shell getprop ro.product.cpu.abi)
 echo "Building kselftests according to device $SERIAL_NUMBER ro.product.cpu.abi $ABI ..."
 case $ABI in
-    arm64*)
-        $BAZEL build //common:kselftest_tests_arm64
-        ;;
-    x86_64*)
-        $BAZEL build //common:kselftest_tests_x86_64
-        ;;
-    *)
-        echo "$ABI not supported"
-        exit 1
-        ;;
+	arm64*)
+		$BAZEL run //common:kselftest_tests_arm64_install -- --destdir $TESTSDIR
+		;;
+	x86_64*)
+		$BAZEL run //common:kselftest_tests_x86_64_install -- --destdir $TESTSDIR
+		;;
+	*)
+		echo "$ABI not supported"
+		exit 1
+		;;
 esac
 exit_code=$?
 if [ $exit_code -eq 0 ]; then
