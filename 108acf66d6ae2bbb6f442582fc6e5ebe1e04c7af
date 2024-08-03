@@ -50,6 +50,30 @@
       ],
       "revId": "108acf66d6ae2bbb6f442582fc6e5ebe1e04c7af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0909e56f_9e864e2c",
+        "filename": "arch/x86/entry/vdso/vdso2c.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-08-03T18:09:08Z",
+      "side": 1,
+      "message": "The the x86 page size is controlled by runtime kernel param `page_shift\u003d14`, to avoid needing a separate x86 16k kernel build.\n\n\u003e Shouldn\u0027t this be ifdef\u0027ed based on on some page_size_compat flag?\n\nBecause we need to do this at build time on the host machine, we don\u0027t know what will be the target page size. So we need to use the larger, more portable, alignment/size.\n\n\u003e Will cuttlefish be affected?\n\nx86 cuttlefish will have a extended vdso layout. It is an anonymous mapping so it wouldn\u0027t be affected by readahead. The cost would be VA space.",
+      "parentUuid": "be475890_a077e975",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 30
+      },
+      "revId": "108acf66d6ae2bbb6f442582fc6e5ebe1e04c7af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
