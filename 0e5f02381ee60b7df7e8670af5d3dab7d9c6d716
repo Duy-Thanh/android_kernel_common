@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1eae20_69a975d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-04T16:14:49Z",
+      "side": 1,
+      "message": "Is it aosp/357334461?. Please cite the respin bug with a \"Bug:\" tag on this patch.",
+      "parentUuid": "9dc5d3ef_ced29d8c",
+      "revId": "0e5f02381ee60b7df7e8670af5d3dab7d9c6d716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4afed0e2_89fc5cde",
