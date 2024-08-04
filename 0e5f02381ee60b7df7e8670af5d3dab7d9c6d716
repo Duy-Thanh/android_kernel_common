@@ -18,6 +18,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc5d3ef_ced29d8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3371323
+      },
+      "writtenOn": "2024-08-04T05:15:58Z",
+      "side": 1,
+      "message": "respin is done",
+      "parentUuid": "304bc15a_5f01c7fd",
+      "revId": "0e5f02381ee60b7df7e8670af5d3dab7d9c6d716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4afed0e2_89fc5cde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3371323
+      },
+      "writtenOn": "2024-08-04T05:15:58Z",
+      "side": 1,
+      "message": "Hi kindly consider this patch now, as the previously mentioned comments are resolved now. Thanks",
+      "revId": "0e5f02381ee60b7df7e8670af5d3dab7d9c6d716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a391d35f_3469610e",
@@ -31,6 +66,24 @@
       "writtenOn": "2024-08-01T16:13:04Z",
       "side": 1,
       "message": "this symbol has not been added to your symbol list on android14-6.1. It must land there before merging into this release branch",
+      "revId": "0e5f02381ee60b7df7e8670af5d3dab7d9c6d716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db6f7f2_c39bb298",
+        "filename": "android/abi_gki_aarch64_exynosauto",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 3371323
+      },
+      "writtenOn": "2024-08-04T05:15:58Z",
+      "side": 1,
+      "message": "this is merged now in android14-6.1",
+      "parentUuid": "a391d35f_3469610e",
       "revId": "0e5f02381ee60b7df7e8670af5d3dab7d9c6d716",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
