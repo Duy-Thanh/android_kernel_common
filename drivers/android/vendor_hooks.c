@@ -493,5 +493,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_group_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_adjust_zone_wmark);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_customize_thp_gfp_orders);
+<<<<<<< PATCH SET (5919fa ANDROID: mm: add vendor hook in zs_shrinker)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
+||||||| BASE
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_customize_pmd_gfp_bypass);
+>>>>>>> BASE      (c338a8 Revert "UPSTREAM: unicode: Don't special case ignorable code)
