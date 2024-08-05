@@ -34,6 +34,24 @@
       "parentUuid": "a8abd40e_f0cea48a",
       "revId": "063958b9ffc406e28076ff1da72149835565090f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7540b1b_620fde5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-08-05T09:56:34Z",
+      "side": 1,
+      "message": "I see. I reworded the commit message.",
+      "parentUuid": "9dd85589_66dd9d9e",
+      "revId": "063958b9ffc406e28076ff1da72149835565090f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
