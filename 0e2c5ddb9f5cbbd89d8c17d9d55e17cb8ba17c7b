@@ -16,6 +16,23 @@
       "message": "If you have a scsi driver, why do you need this back-door mechanism? Can\u0027t it just work like a standard scsi driver?",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63cc51e0_5326125c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-08-05T17:39:21Z",
+      "side": 1,
+      "message": "Has a .queuecommand() method been defined in the SCSI driver host template (struct scsi_host_template)? If so, why isn\u0027t that sufficient? If not, has it been considered to implement that method?",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
