@@ -52,6 +52,24 @@
       "parentUuid": "7fec611e_5febf156",
       "revId": "697854a2a6b99f9fc4283de789d78180bf9dcae9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d33e2df3_b30bde41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-08-05T06:10:03Z",
+      "side": 1,
+      "message": "https://issuetracker.google.com/issues/357483232\nI know how to assign it to you, it\u0027s done.",
+      "parentUuid": "ea537dd1_2728a00b",
+      "revId": "697854a2a6b99f9fc4283de789d78180bf9dcae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
