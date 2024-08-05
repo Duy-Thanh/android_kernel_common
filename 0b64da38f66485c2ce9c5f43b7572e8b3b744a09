@@ -16,6 +16,24 @@
       "message": "Let\u0027s wait until this comes via upstream-merge quite soon.",
       "revId": "0b64da38f66485c2ce9c5f43b7572e8b3b744a09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca51736b_9611f252",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-08-05T13:23:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "55de3c97_c6451b9f",
+      "revId": "0b64da38f66485c2ce9c5f43b7572e8b3b744a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
