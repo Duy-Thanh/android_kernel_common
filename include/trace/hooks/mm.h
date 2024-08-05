@@ -420,6 +420,7 @@ DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
 	TP_PROTO(struct zone *zone, u64 interval),
 	TP_ARGS(zone, interval));
 
+<<<<<<< HEAD   (5f0aee UPSTREAM: xhci: dbgtty: Improve performance by handling rece)
 DECLARE_HOOK(android_vh_lock_folio_drop_mmap_start,
 	TP_PROTO(struct task_struct **tsk, struct vm_fault *vmf,
 		struct folio *folio, struct file *file),
@@ -447,6 +448,21 @@ DECLARE_HOOK(android_vh_mm_may_oom_exit,
 DECLARE_HOOK(android_vh_calculate_totalreserve_pages,
 	TP_PROTO(bool *skip),
 	TP_ARGS(skip));
+||||||| BASE
+DECLARE_HOOK(android_vh_cma_alloc_set_max_retries,
+	TP_PROTO(int *max_retries),
+	TP_ARGS(max_retries));
+=======
+DECLARE_HOOK(android_vh_cma_alloc_set_max_retries,
+	TP_PROTO(int *max_retries),
+	TP_ARGS(max_retries));
+DECLARE_HOOK(android_vh_compact_finished,
+	TP_PROTO(bool *abort_compact),
+	TP_ARGS(abort_compact));
+DECLARE_HOOK(android_vh_madvise_cold_or_pageout_abort,
+	TP_PROTO(struct vm_area_struct *vma, bool *abort_madvise),
+	TP_ARGS(vma, abort_madvise));
+>>>>>>> CHANGE (4fcd8e Reapply "ANDROID: vendor_hook: Add hook to abort reclaim and)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

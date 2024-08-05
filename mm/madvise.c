@@ -352,11 +352,17 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,
 	struct folio *folio = NULL;
 	LIST_HEAD(folio_list);
 	bool pageout_anon_only_filter;
+<<<<<<< HEAD   (5f0aee UPSTREAM: xhci: dbgtty: Improve performance by handling rece)
 	unsigned int batch_count = 0;
+||||||| BASE
+=======
+	bool abort_madvise = false;
+>>>>>>> CHANGE (4fcd8e Reapply "ANDROID: vendor_hook: Add hook to abort reclaim and)
 	int nr;
 	int ret = 0;
 
-	if (fatal_signal_pending(current))
+	trace_android_vh_madvise_cold_or_pageout_abort(vma, &abort_madvise);
+	if (fatal_signal_pending(current) || abort_madvise)
 		return -EINTR;
 
 	trace_android_vh_madvise_pageout_bypass(mm, pageout, &ret);
