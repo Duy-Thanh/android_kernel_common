@@ -1,3 +1,4 @@
+# Canary change
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 6
 PATCHLEVEL = 10
