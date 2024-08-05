@@ -16,6 +16,24 @@
       "message": "Cherry-picks need to have the same Change-Id, which is `Change-Id: I4b637cbd2b37235eec27a985a9b5b95598247c59` in this case.\n\nAlso, isn\u0027 that aosp/3163896 ?",
       "revId": "063958b9ffc406e28076ff1da72149835565090f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dd85589_66dd9d9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3108516
+      },
+      "writtenOn": "2024-08-05T09:20:19Z",
+      "side": 1,
+      "message": "The patch was reverted, so I cannot use the same changeid：https://android-review.googlesource.com/c/kernel/common/+/3187032",
+      "parentUuid": "a8abd40e_f0cea48a",
+      "revId": "063958b9ffc406e28076ff1da72149835565090f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
