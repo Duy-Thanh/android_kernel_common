@@ -16,6 +16,24 @@
       "message": "Missed the Check-in cut off date (August 1, 2024) and I want patch to exist in android15-6.6-2024-08_r1, is that ok?\n\nI tried GKI Respin request but there is currently no 2024-08 in Monthly branch you are requesting respin.",
       "revId": "697854a2a6b99f9fc4283de789d78180bf9dcae9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fec611e_5febf156",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-08-05T05:41:40Z",
+      "side": 1,
+      "message": "Please file a respin request with the form using the 2024-07 branch and assign to me.",
+      "parentUuid": "561e5d32_1ac1f99a",
+      "revId": "697854a2a6b99f9fc4283de789d78180bf9dcae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
