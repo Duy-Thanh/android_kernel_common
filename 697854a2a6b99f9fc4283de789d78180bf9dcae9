@@ -34,6 +34,24 @@
       "parentUuid": "561e5d32_1ac1f99a",
       "revId": "697854a2a6b99f9fc4283de789d78180bf9dcae9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea537dd1_2728a00b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-08-05T06:01:11Z",
+      "side": 1,
+      "message": "I just file a respin request and using the 2024-07 branch, but I can\u0027t actively choose to assign it to you. Could you find this respin request? Email address is zhipeng.wang_1@nxp.com.",
+      "parentUuid": "7fec611e_5febf156",
+      "revId": "697854a2a6b99f9fc4283de789d78180bf9dcae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
