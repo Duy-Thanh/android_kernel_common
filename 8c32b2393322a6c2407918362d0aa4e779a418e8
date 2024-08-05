@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab22f7d0_84ae4907",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-08-05T11:23:54Z",
+      "side": 1,
+      "message": "Usually we would wait for upstream to land, but that will still take a bit.\nThe patch is rather small and not likely to conflict in a hard-to-resolve way, but be prepared that it might get ripped out if it causes issues.",
+      "revId": "8c32b2393322a6c2407918362d0aa4e779a418e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
