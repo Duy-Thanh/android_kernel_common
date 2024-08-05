@@ -70,6 +70,23 @@
       "parentUuid": "4f1c7e94_4732b970",
       "revId": "a94d6a8dafa96156b9c2fec3213d666ea2a6e912",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31627326_13a666f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2024-08-05T07:12:40Z",
+      "side": 1,
+      "message": "looks like the parent commit is not recognized. Let\u0027s rebase everything",
+      "revId": "a94d6a8dafa96156b9c2fec3213d666ea2a6e912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
