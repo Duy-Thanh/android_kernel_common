@@ -32,6 +32,7 @@
 #include <linux/swapops.h>
 #include <linux/shmem_fs.h>
 #include <linux/mmu_notifier.h>
+#include <trace/hooks/mm.h>
 
 #include <asm/tlb.h>
 
@@ -368,9 +369,11 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,
 	LIST_HEAD(folio_list);
 	bool pageout_anon_only_filter;
 	unsigned int batch_count = 0;
+	bool abort_madvise = false;
 	int nr;
 
-	if (fatal_signal_pending(current))
+	trace_android_vh_madvise_cold_or_pageout_abort(vma, &abort_madvise);
+	if (fatal_signal_pending(current) || abort_madvise)
 		return -EINTR;
 
 	pageout_anon_only_filter = pageout && !vma_is_anonymous(vma) &&
