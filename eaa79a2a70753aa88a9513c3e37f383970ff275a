@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/357334461",
       "revId": "eaa79a2a70753aa88a9513c3e37f383970ff275a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cca51226_bd6c9365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-08-05T08:57:54Z",
+      "side": 1,
+      "message": "This should be a cherry-pick from the base branch.\n\nI think you want the Change-Id of `Iff752b54d88258f2d61fab397da1104145c9297f`",
+      "revId": "eaa79a2a70753aa88a9513c3e37f383970ff275a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
