@@ -24,11 +24,13 @@ extern void __cfi_check(uint64_t id, void *ptr, void *diag);
 
 extern void cfi_module_add(struct module *mod, unsigned long base_addr);
 extern void cfi_module_remove(struct module *mod, unsigned long base_addr);
+extern unsigned long cfi_shadow_size(void);
 
 #else
 
 static inline void cfi_module_add(struct module *mod, unsigned long base_addr) {}
 static inline void cfi_module_remove(struct module *mod, unsigned long base_addr) {}
+static inline unsigned int cfi_shadow_size(void) { return 0; }
 
 #endif /* CONFIG_CFI_CLANG_SHADOW */
 

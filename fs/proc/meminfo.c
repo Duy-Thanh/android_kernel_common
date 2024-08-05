@@ -3,6 +3,7 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/mm.h>
+#include <linux/module.h>
 #include <linux/hugetlb.h>
 #include <linux/mman.h>
 #include <linux/mmzone.h>
@@ -150,6 +151,8 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
 	hugetlb_report_meminfo(m);
 
 	arch_report_meminfo(m);
+	show_val_kb(m, "ExtraModulesMemory: ",
+		    (unsigned long)atomic_long_read(&extra_modules_bytes) >> PAGE_SHIFT);
 
 	return 0;
 }

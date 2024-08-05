@@ -216,6 +216,7 @@ static void update_shadow(struct module *mod, unsigned long base_addr,
 		fn(next, mod, min_addr & PAGE_MASK, max_addr & PAGE_MASK);
 
 		set_memory_ro((unsigned long)next, SHADOW_PAGES);
+		atomic_long_add(SHADOW_SIZE, &extra_modules_bytes);
 	}
 
 	rcu_assign_pointer(cfi_shadow, next);
@@ -235,6 +236,11 @@ void cfi_module_add(struct module *mod, unsigned long base_addr)
 void cfi_module_remove(struct module *mod, unsigned long base_addr)
 {
 	update_shadow(mod, base_addr, remove_module_from_shadow);
+}
+
+unsigned long cfi_shadow_size(void)
+{
+	return SHADOW_SIZE;
 }
 
 static inline cfi_check_fn ptr_to_check_fn(const struct cfi_shadow __rcu *s,

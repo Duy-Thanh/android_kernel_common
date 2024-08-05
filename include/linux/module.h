@@ -72,6 +72,7 @@ extern ssize_t __modver_version_show(struct module_attribute *,
 				     struct module_kobject *, char *);
 
 extern struct module_attribute module_uevent;
+extern atomic_long_t extra_modules_bytes;
 
 /* These are either module local, or the kernel's dummy ones. */
 extern int init_module(void);

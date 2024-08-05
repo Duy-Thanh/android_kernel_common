@@ -99,6 +99,23 @@ static LIST_HEAD(modules);
 static void do_free_init(struct work_struct *w);
 static DECLARE_WORK(init_free_wq, do_free_init);
 static LLIST_HEAD(init_free_list);
+/*
+ * Meant to measure the overhead, in bytes, of having a driver
+ * as a module, as opposed to being built into the static kernel
+ * image.
+ */
+atomic_long_t extra_modules_bytes = ATOMIC_LONG_INIT(0);
+EXPORT_SYMBOL_GPL(extra_modules_bytes);
+
+static DEFINE_MUTEX(mebi_lock);
+static LIST_HEAD(modules_extra_bytes_info);
+struct extra_bytes_info {
+	char *name;
+	unsigned long ftrace_trampoline_size;
+	unsigned long plt_section_size;
+	unsigned long symbol_table_size;
+	struct list_head list;
+};
 
 #ifdef CONFIG_MODULES_TREE_LOOKUP
 
@@ -2459,7 +2476,7 @@ bool module_init_layout_section(const char *sname)
  * sizes, and place the offsets into sh_entsize fields: high bit means it
  * belongs in init.
  */
-static void layout_sections(struct module *mod, struct load_info *info)
+static void layout_sections(struct module *mod, struct load_info *info, struct extra_bytes_info *ebi)
 {
 	static unsigned long const masks[][2] = {
 		/*
@@ -2483,13 +2500,24 @@ static void layout_sections(struct module *mod, struct load_info *info)
 		for (i = 0; i < info->hdr->e_shnum; ++i) {
 			Elf_Shdr *s = &info->sechdrs[i];
 			const char *sname = info->secstrings + s->sh_name;
+			unsigned int prev_core_layout_size, delta;
 
 			if ((s->sh_flags & masks[m][0]) != masks[m][0]
 			    || (s->sh_flags & masks[m][1])
 			    || s->sh_entsize != ~0UL
 			    || module_init_layout_section(sname))
 				continue;
+			prev_core_layout_size = mod->core_layout.size;
 			s->sh_entsize = get_offset(mod, &mod->core_layout.size, s, i);
+			if (i == mod->arch.core.plt_shndx ||
+			    !strcmp(sname + s->sh_name, ".text.ftrace_trampoline")) {
+				delta = mod->core_layout.size - prev_core_layout_size;
+				atomic_long_add((long)delta, &extra_modules_bytes);
+				if (i == mod->arch.core.plt_shndx)
+					ebi->plt_section_size += delta;
+				else
+					ebi->ftrace_trampoline_size += delta;
+			}
 			pr_debug("\t%s\n", sname);
 		}
 		switch (m) {
@@ -2732,12 +2760,13 @@ static bool is_core_symbol(const Elf_Sym *src, const Elf_Shdr *sechdrs,
  * linux-kernel thread starting with
  * <73defb5e4bca04a6431392cc341112b1@localhost>.
  */
-static void layout_symtab(struct module *mod, struct load_info *info)
+static void layout_symtab(struct module *mod, struct load_info *info, struct extra_bytes_info *ebi)
 {
 	Elf_Shdr *symsect = info->sechdrs + info->index.sym;
 	Elf_Shdr *strsect = info->sechdrs + info->index.str;
 	const Elf_Sym *src;
 	unsigned int i, nsrc, ndst, strtab_size = 0;
+	unsigned int prev_core_layout_size, delta;
 
 	/* Put symbol section at end of init part of module. */
 	symsect->sh_flags |= SHF_ALLOC;
@@ -2760,11 +2789,16 @@ static void layout_symtab(struct module *mod, struct load_info *info)
 
 	/* Append room for core symbols at end of core part. */
 	info->symoffs = ALIGN(mod->core_layout.size, symsect->sh_addralign ?: 1);
+	prev_core_layout_size = mod->core_layout.size;
 	info->stroffs = mod->core_layout.size = info->symoffs + ndst * sizeof(Elf_Sym);
 	mod->core_layout.size += strtab_size;
 	info->core_typeoffs = mod->core_layout.size;
 	mod->core_layout.size += ndst * sizeof(char);
 	mod->core_layout.size = debug_align(mod->core_layout.size);
+	delta = mod->core_layout.size - prev_core_layout_size;
+	trace_printk("IJM: %s module symbol table bytes: %ld\n", mod->name, delta);
+	atomic_long_add(delta, &extra_modules_bytes);
+	ebi->symbol_table_size += delta;
 
 	/* Put string table section at end of init part of module. */
 	strsect->sh_flags |= SHF_ALLOC;
@@ -3606,8 +3640,15 @@ core_param(module_blacklist, module_blacklist, charp, 0400);
 static struct module *layout_and_allocate(struct load_info *info, int flags)
 {
 	struct module *mod;
+	struct extra_bytes_info *ebi, *entry;
 	unsigned int ndx;
 	int err;
+	bool add = true;
+
+	ebi = kzalloc(sizeof(*ebi), GFP_KERNEL);
+	if (!ebi)
+		return ERR_PTR(-ENOMEM);
+	INIT_LIST_HEAD(&ebi->list);
 
 	err = check_modinfo(info->mod, info, flags);
 	if (err)
@@ -3650,8 +3691,8 @@ static struct module *layout_and_allocate(struct load_info *info, int flags)
 	 * this is done generically; there doesn't appear to be any
 	 * special cases for the architectures.
 	 */
-	layout_sections(info->mod, info);
-	layout_symtab(info->mod, info);
+	layout_sections(info->mod, info, ebi);
+	layout_symtab(info->mod, info, ebi);
 
 	/* Allocate and move to the final place */
 	err = move_module(info->mod, info);
@@ -3661,6 +3702,21 @@ static struct module *layout_and_allocate(struct load_info *info, int flags)
 	/* Module has been copied to its final place now: return it. */
 	mod = (void *)info->sechdrs[info->index.mod].sh_addr;
 	kmemleak_load_module(mod, info);
+	ebi->name = kstrdup(mod->name, GFP_KERNEL);
+	mutex_lock(&mebi_lock);
+	list_for_each_entry(entry, &modules_extra_bytes_info, list) {
+		if (!strcmp(entry->name, ebi->name)) {
+			add = false;
+			break;
+		}
+	}
+	if (add) {
+		list_add(&ebi->list, &modules_extra_bytes_info);
+	} else {
+		kfree(ebi->name);
+		kfree(ebi);
+	}
+	mutex_unlock(&mebi_lock);
 	return mod;
 }
 
@@ -3856,6 +3912,8 @@ static noinline int do_init_module(struct module *mod)
 	mutex_unlock(&module_mutex);
 	wake_up_all(&module_wq);
 
+	atomic_long_add(sizeof(struct module), &extra_modules_bytes);
+	trace_printk("IJM: %s module struct module size: %ld\n", mod->name, sizeof(struct module));
 	return 0;
 
 fail_free_freeinit:
@@ -4691,6 +4749,57 @@ static const struct seq_operations modules_op = {
 	.show	= m_show
 };
 
+static unsigned long total_struct_mod_size;
+static unsigned long total_symtab_size;
+static unsigned long total_plt_sec_size;
+static unsigned long total_ftrace_trampoline_size;
+
+static void *memi_start(struct seq_file *m, loff_t *pos)
+{
+	mutex_lock(&mebi_lock);
+	total_struct_mod_size = 0;
+	total_symtab_size = 0;
+	total_plt_sec_size = 0;
+	total_ftrace_trampoline_size = 0;
+	seq_printf(m, "Module name PLT section size Ftrace Trampoline Size Symbol Table Size\n");
+	return seq_list_start(&modules_extra_bytes_info, *pos);
+}
+
+static void *memi_next(struct seq_file *m, void *p, loff_t *pos)
+{
+	return seq_list_next(p, &modules_extra_bytes_info, pos);
+}
+
+static void memi_stop(struct seq_file *m, void *p)
+{
+	seq_printf(m, "Totals: PLT sections: %ld KiB Ftrace Trampoling Sec: %ld KiB Symbol Tables: %ld KiB CFI Shadow: %ld KiB Module structures: %ld KiB\n",
+		   total_plt_sec_size >> 10, total_ftrace_trampoline_size >> 10, total_symtab_size >> 10,
+		   cfi_shadow_size() >> 10, total_struct_mod_size >> 10);
+	seq_printf(m, "Grand total: %ld KiB\n", (total_plt_sec_size + total_ftrace_trampoline_size +
+		                                total_symtab_size + cfi_shadow_size() +
+						total_struct_mod_size) >> 10);
+	mutex_unlock(&mebi_lock);
+}
+
+static int memi_show(struct seq_file *m, void *p)
+{
+	struct extra_bytes_info *ebi = list_entry(p, struct extra_bytes_info, list);
+	seq_printf(m, "%s %ld %ld %ld\n", ebi->name, ebi->plt_section_size,
+		   ebi->ftrace_trampoline_size, ebi->symbol_table_size);
+	total_struct_mod_size += sizeof(struct module);
+	total_symtab_size += ebi->symbol_table_size;
+	total_plt_sec_size += ebi->plt_section_size;
+	total_ftrace_trampoline_size += ebi->ftrace_trampoline_size;
+	return 0;
+}
+
+static const struct seq_operations modules_emi_op = {
+	.start	= memi_start,
+	.next	= memi_next,
+	.stop	= memi_stop,
+	.show	= memi_show,
+};
+
 /*
  * This also sets the "private" pointer to non-NULL if the
  * kernel pointers should be hidden (so you can just test
@@ -4710,6 +4819,11 @@ static int modules_open(struct inode *inode, struct file *file)
 	return err;
 }
 
+static int modules_emi_open(struct inode *inode, struct file *file)
+{
+	return seq_open(file, &modules_emi_op);
+}
+
 static const struct proc_ops modules_proc_ops = {
 	.proc_flags	= PROC_ENTRY_PERMANENT,
 	.proc_open	= modules_open,
@@ -4718,9 +4832,18 @@ static const struct proc_ops modules_proc_ops = {
 	.proc_release	= seq_release,
 };
 
+static const struct proc_ops modules_emi_ops = {
+	.proc_flags	= PROC_ENTRY_PERMANENT,
+	.proc_open	= modules_emi_open,
+	.proc_read	= seq_read,
+	.proc_lseek	= seq_lseek,
+	.proc_release	= seq_release,
+};
+
 static int __init proc_modules_init(void)
 {
 	proc_create("modules", 0, NULL, &modules_proc_ops);
+	proc_create("modules_extra_mem_info", 0, NULL, &modules_emi_ops);
 	return 0;
 }
 module_init(proc_modules_init);

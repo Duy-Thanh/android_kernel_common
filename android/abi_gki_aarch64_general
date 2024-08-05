@@ -687,6 +687,7 @@
   extcon_register_notifier
   extcon_set_state
   extcon_set_state_sync
+  extra_modules_bytes
   fd_install
   fget
   _find_first_bit
