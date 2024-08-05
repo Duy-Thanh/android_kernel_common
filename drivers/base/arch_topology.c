@@ -204,10 +204,15 @@ void topology_update_hw_pressure(const struct cpumask *cpus,
 
 	trace_hw_pressure_update(cpu, pressure);
 
+<<<<<<< HEAD   (947bac UPSTREAM: erofs: fix race in z_erofs_get_gbuf())
 	for_each_cpu(cpu, cpus) {
 		WRITE_ONCE(per_cpu(hw_pressure, cpu), pressure);
 		trace_android_rvh_update_thermal_stats(cpu);
 	}
+=======
+	for_each_cpu(cpu, cpus)
+		WRITE_ONCE(per_cpu(hw_pressure, cpu), pressure);
+>>>>>>> BRANCH (1613e6 Linux 6.10-rc1)
 }
 EXPORT_SYMBOL_GPL(topology_update_hw_pressure);
 
