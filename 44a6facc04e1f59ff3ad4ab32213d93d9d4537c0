@@ -86,6 +86,24 @@
       "parentUuid": "a5aa2e36_fc0c8719",
       "revId": "44a6facc04e1f59ff3ad4ab32213d93d9d4537c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b986f32_2841165d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-08-06T20:39:11Z",
+      "side": 1,
+      "message": "Ah nevermind, looks like this is just part of https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id\u003dcd955bdd6aa5ec54cdef622a142f8899a64b5446. Please just add a `Link: https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id\u003dcd955bdd6aa5ec54cdef622a142f8899a64b5446` to the commit message.",
+      "parentUuid": "795ebbea_ea04dd1e",
+      "revId": "44a6facc04e1f59ff3ad4ab32213d93d9d4537c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
