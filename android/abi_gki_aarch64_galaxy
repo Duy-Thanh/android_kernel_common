@@ -82,6 +82,8 @@
   __traceiter_android_vh_try_to_freeze_todo
   __traceiter_android_vh_try_to_freeze_todo_unfrozen
   __traceiter_android_vh_watchdog_timer_softlockup
+  __traceiter_android_vh_zs_shrinker_adjust
+  __traceiter_android_vh_zs_shrinker_bypass
   __traceiter_console
   __traceiter_workqueue_execute_start
   __tracepoint_android_rvh_arm64_serror_panic
@@ -115,6 +117,8 @@
   __tracepoint_android_vh_try_to_freeze_todo
   __tracepoint_android_vh_try_to_freeze_todo_unfrozen
   __tracepoint_android_vh_watchdog_timer_softlockup
+  __tracepoint_android_vh_zs_shrinker_adjust
+  __tracepoint_android_vh_zs_shrinker_bypass
   __tracepoint_console
   __tracepoint_workqueue_execute_start
   usb_set_device_state
