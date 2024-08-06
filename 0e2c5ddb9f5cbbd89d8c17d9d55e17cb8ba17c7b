@@ -69,6 +69,24 @@
       "parentUuid": "b748ad91_18653b7d",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66920649_5e822134",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-08-06T03:02:37Z",
+      "side": 1,
+      "message": "\u003e Why do the requests coming from submit_bio() have to be customized?\n\n Because we need to uniformly allocate tags and perform IO scheduling for all requests.\n  \n\u003e Is it clear that only a subset of the SCSI commands pass through __scsi_execute()? ... or blk_execute_rq_nowait() directly.\n\n  We have modularized SCSI, and other SCSI requests will be directed to our own SCSI driver. In our SCSI driver, we have reimplemented blk_execute_rq() and blk_execute_rq_nowait().\n  \n\u003e Has there been any attempt to send this functionality upstream?\n\nThese modifications are custom requirements mainly to facilitate the collection and addition of different IO information. This information is customized and not suitable for upstream. \n  \n  Thanks~",
+      "parentUuid": "a9bd72a2_fae8e12b",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
