@@ -880,8 +880,12 @@ static void do_ffa_mem_reclaim(struct arm_smccc_res *res,
 
 	reg = (void *)buf + offset;
 	/* If the SPMD was happy, then we should be too. */
-	WARN_ON(ffa_host_unshare_ranges(reg->constituents,
-					reg->addr_range_cnt));
+	if (vmid)
+		WARN_ON(ffa_guest_unshare_ranges(reg->constituents,
+						 reg->addr_range_cnt, ctxt, transfer));
+	else
+		WARN_ON(ffa_host_unshare_ranges(reg->constituents,
+						reg->addr_range_cnt));
 
 	if (transfer) {
 		list_del(&transfer->node);
@@ -990,6 +994,9 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	case FFA_MEM_LEND:
 	case FFA_FN64_MEM_LEND:
 		do_ffa_mem_xfer(FFA_FN64_MEM_LEND, &res, ctxt, vmid);
+		break;
+	case FFA_MEM_RECLAIM:
+		do_ffa_mem_reclaim(&res, ctxt, vmid);
 		break;
 	default:
 		if (ffa_call_supported(func_id)) {
