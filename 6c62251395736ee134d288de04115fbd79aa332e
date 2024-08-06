@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98122ae_e259f193",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-06T15:08:46Z",
+      "side": 1,
+      "message": "The patch adds way more symbols than these 4. Is this description still valid?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 75
+      },
+      "revId": "6c62251395736ee134d288de04115fbd79aa332e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ca13c3d0_b947d089",
