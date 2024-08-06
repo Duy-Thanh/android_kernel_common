@@ -68,6 +68,24 @@
       "parentUuid": "113c359d_a7cc33a5",
       "revId": "44a6facc04e1f59ff3ad4ab32213d93d9d4537c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795ebbea_ea04dd1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-08-06T20:35:17Z",
+      "side": 1,
+      "message": "The CL means that https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id\u003dcd955bdd6aa5ec54cdef622a142f8899a64b5446 is quite invasive as a backport for 5.15\". I\u0027ve checked it with https://b.corp.google.com/issues/336872347#comment12 too. The comment applies to libsubcmd only, not objtool.\n\nSo it doesn\u0027t necessarily apply to this (though I agree that it likely applies too, since it is the same underlying issue). Could you please just see how upstream fixes this, and add a `Link:` to the commit message, and say in the commit message that it is too invasive to backport this upstream change too? Right now, there\u0027s no reference on how upstream (might have already) fixed this, and thus my generic comment would be \"please fix this in upstream first\".",
+      "parentUuid": "a5aa2e36_fc0c8719",
+      "revId": "44a6facc04e1f59ff3ad4ab32213d93d9d4537c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
