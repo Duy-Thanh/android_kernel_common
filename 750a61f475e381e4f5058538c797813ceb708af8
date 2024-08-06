@@ -16,6 +16,23 @@
       "message": "For cherry picked patch 18126b265062 (UPSTREAM: firmware: arm_scmi: Fix chan_free cleanup on SMC),\nit depens on below two patches to avoid the BUG we met.\nf716cbd33f03 firmware: arm_scmi: Make smc transport use common completions\na690b7e6e774 firmware: arm_scmi: Add configurable polling mode for transports",
       "revId": "750a61f475e381e4f5058538c797813ceb708af8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c34a6af_ba8cdf6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-06T15:10:24Z",
+      "side": 1,
+      "message": "Resolve the comments on the 12-5.10 version (aosp/3206430), then update this with the final version",
+      "revId": "750a61f475e381e4f5058538c797813ceb708af8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
