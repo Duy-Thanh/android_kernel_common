@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a53905b_73a1b020",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-06T15:15:11Z",
+      "side": 1,
+      "message": "It only adds the 4 symbols to the KMI (the other additions to the symbol list are already in the KMI)",
+      "parentUuid": "c98122ae_e259f193",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 75
+      },
+      "revId": "6c62251395736ee134d288de04115fbd79aa332e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ca13c3d0_b947d089",
