@@ -16,6 +16,24 @@
       "message": "clang-r487747c prebuild has been removed by aosp/3186619. I guess we should update this to clang-r498229b?",
       "revId": "452d13e22a5861033e53ef797cb561e859d16d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cedc983_40aa1fb1",
+        "filename": "build-kernel.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2024-08-06T18:00:02Z",
+      "side": 1,
+      "message": "Or to clang-r530567 (it is the newest one as of today).",
+      "parentUuid": "19aa50e7_357411c4",
+      "revId": "452d13e22a5861033e53ef797cb561e859d16d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
