@@ -50,6 +50,24 @@
       "message": "I didn\u0027t notice that this is for objtool not libsubcmd. b/336872347 is for libsubcmd only (though I agree that the underlying issue is similar).\n\nIs there an upstream fix for this? If so, can you back port it, or at least add it to the commit message?\n\n(for libsubcmd the fixes were https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id\u003dcd955bdd6aa5ec54cdef622a142f8899a64b5446 )\n\nYou may also consider restricting your build bots/build machines to use glibc 2.37 for building these older kernels.",
       "revId": "44a6facc04e1f59ff3ad4ab32213d93d9d4537c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5aa2e36_fc0c8719",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071888
+      },
+      "writtenOn": "2024-08-06T19:16:49Z",
+      "side": 1,
+      "message": "Hi, I did this by following aosp/2755768(I mentioned it in comments), per that CL, it said \" That change is quite invasive as a backport for 5.15 and earlier. As a miminal fix...\"\n\nI think that also applies to this CL?",
+      "parentUuid": "113c359d_a7cc33a5",
+      "revId": "44a6facc04e1f59ff3ad4ab32213d93d9d4537c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
