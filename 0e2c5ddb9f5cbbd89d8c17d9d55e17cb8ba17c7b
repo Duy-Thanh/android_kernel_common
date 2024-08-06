@@ -51,6 +51,24 @@
       "parentUuid": "63cc51e0_5326125c",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bd72a2_fae8e12b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-08-06T01:05:22Z",
+      "side": 1,
+      "message": "Thanks for the feedback. A few additional questions:\n* Why do the requests coming from submit_bio() have to be customized?\n* Is it clear that only a subset of the SCSI commands pass through __scsi_execute()? Only a subset of so-called pass-through requests pass through __scsi_execute. So-called filesystem requests (requests originating from filesystems) do not pass through __scsi_execute(). Some SCSI core submits pass-through requests without calling __scsi_execute() and calls blk_execute_rq() or blk_execute_rq_nowait() directly.\n* Has there been any attempt to send this functionality upstream?",
+      "parentUuid": "b748ad91_18653b7d",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
