@@ -33,6 +33,23 @@
       "message": "See b/336872347. You might want to cherry-pick this to android14-5.15 as well.",
       "revId": "44a6facc04e1f59ff3ad4ab32213d93d9d4537c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "113c359d_a7cc33a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-08-06T19:11:24Z",
+      "side": 1,
+      "message": "I didn\u0027t notice that this is for objtool not libsubcmd. b/336872347 is for libsubcmd only (though I agree that the underlying issue is similar).\n\nIs there an upstream fix for this? If so, can you back port it, or at least add it to the commit message?\n\n(for libsubcmd the fixes were https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id\u003dcd955bdd6aa5ec54cdef622a142f8899a64b5446 )\n\nYou may also consider restricting your build bots/build machines to use glibc 2.37 for building these older kernels.",
+      "revId": "44a6facc04e1f59ff3ad4ab32213d93d9d4537c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
