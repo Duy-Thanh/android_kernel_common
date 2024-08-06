@@ -33,6 +33,24 @@
       "message": "Has a .queuecommand() method been defined in the SCSI driver host template (struct scsi_host_template)? If so, why isn\u0027t that sufficient? If not, has it been considered to implement that method?",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b748ad91_18653b7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-08-06T00:50:34Z",
+      "side": 1,
+      "message": "We have already implemented .queuecommand(), but some of our custom modifications also involve the block layer. By hooking scsi_execute, we can customize the requests coming from submit_bio and the SCSI driver. thx~",
+      "parentUuid": "63cc51e0_5326125c",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
