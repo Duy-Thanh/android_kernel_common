@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7412e1f7_7f934e33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-08-06T00:29:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "344c2c03_65b9a32e",
+      "revId": "00c55c03a6dc6bd2c2996a88dc5874d8e74be3f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca014f74_3d4ac971",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-08-05T16:22:02Z",
       "side": 1,
       "message": "AFAIK you don\u0027t use the heaps that ship with Android, which means you can change the `dma_heap_ops` `allocate` function here to do whatever you want (including your own tracepoints) since you control the implementations.",
+      "revId": "00c55c03a6dc6bd2c2996a88dc5874d8e74be3f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "542a08a0_66986193",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-08-06T00:29:36Z",
+      "side": 1,
+      "message": "Yes correct. But for that, I need to modify each heap\u0027s allocate function, right?\nAdding vendor hook here seems more simple way.",
+      "parentUuid": "ca014f74_3d4ac971",
       "revId": "00c55c03a6dc6bd2c2996a88dc5874d8e74be3f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
