@@ -618,8 +618,11 @@ static inline int pindex_to_order(unsigned int pindex)
 	int order = pindex / MIGRATE_PCPTYPES;
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
-	if (pindex == NR_LOWORDER_PCP_LISTS)
+	if (pindex == NR_LOWORDER_PCP_LISTS) {
 		order = pageblock_order;
+		if (trace_android_vh_switch_thp_pcp_to_quad_enabled())
+			order = PAGE_ALLOC_COSTLY_ORDER + 1;
+	}
 #else
 	VM_BUG_ON(order > PAGE_ALLOC_COSTLY_ORDER);
 #endif
@@ -632,7 +635,11 @@ static inline bool pcp_allowed_order(unsigned int order)
 	if (order <= PAGE_ALLOC_COSTLY_ORDER)
 		return true;
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
-	if (order == pageblock_order)
+	if (trace_android_vh_switch_thp_pcp_to_quad_enabled() &&
+		order == PAGE_ALLOC_COSTLY_ORDER + 1)
+		return true;
+	if (!trace_android_vh_switch_thp_pcp_to_quad_enabled() &&
+		order == pageblock_order)
 		return true;
 #endif
 	return false;

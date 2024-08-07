@@ -348,6 +348,9 @@ DECLARE_HOOK(android_vh_compact_finished,
 DECLARE_HOOK(android_vh_madvise_cold_or_pageout_abort,
 	TP_PROTO(struct vm_area_struct *vma, bool *abort_madvise),
 	TP_ARGS(vma, abort_madvise));
+DECLARE_HOOK(android_vh_switch_thp_pcp_to_quad,
+	TP_PROTO(void),
+	TP_ARGS(void));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
