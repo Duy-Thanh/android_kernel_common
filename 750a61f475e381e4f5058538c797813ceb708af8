@@ -51,6 +51,24 @@
       "parentUuid": "6c34a6af_ba8cdf6f",
       "revId": "750a61f475e381e4f5058538c797813ceb708af8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073bd1f9_2267f978",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-07T10:52:22Z",
+      "side": 1,
+      "message": "Still an unresolved comment on aosp/3206430",
+      "parentUuid": "65e5dc3d_03414333",
+      "revId": "750a61f475e381e4f5058538c797813ceb708af8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
