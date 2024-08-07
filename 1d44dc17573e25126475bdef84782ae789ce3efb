@@ -16,6 +16,24 @@
       "message": "We would like the symbol to be exported in the August release builds, thanks.\n\nissuetracker link: https://issuetracker.google.com/issues/357975784",
       "revId": "1d44dc17573e25126475bdef84782ae789ce3efb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea508986_73fa885a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-08-07T08:56:40Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ff00cb26_5944a23e",
+      "revId": "1d44dc17573e25126475bdef84782ae789ce3efb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
