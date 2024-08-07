@@ -69,6 +69,24 @@
       "parentUuid": "65e5dc3d_03414333",
       "revId": "750a61f475e381e4f5058538c797813ceb708af8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0539f45_f83ee370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2024-08-07T11:46:40Z",
+      "side": 1,
+      "message": "Hi Todd, Matthias,\nThis is for Matthias\u0027s question about \"Can you point to the series that contains the fix and in particular, which change it came from?\"\nWe can\u0027t apply these two directly now, quiet a lot of changes need to do, which is much higher risk than just apply this simple fix.",
+      "parentUuid": "4c2d7e7e_2158c38d",
+      "revId": "750a61f475e381e4f5058538c797813ceb708af8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
