@@ -87,6 +87,24 @@
       "parentUuid": "4c2d7e7e_2158c38d",
       "revId": "750a61f475e381e4f5058538c797813ceb708af8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "669779f1_ea6875d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-07T12:02:45Z",
+      "side": 1,
+      "message": "That\u0027s fine, but it is still helpful to point to the upstream series, so please do that. Also, please add the rationale for this patch vs taking the upstream series to the commit message (basically your comment above).",
+      "parentUuid": "b0539f45_f83ee370",
+      "revId": "750a61f475e381e4f5058538c797813ceb708af8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
