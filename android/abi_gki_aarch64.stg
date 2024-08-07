@@ -334917,6 +334917,12 @@ function {
   parameter_id: 0x02aa06b1
 }
 function {
+  id: 0x9b5a0a16
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9b5a0fe0
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -404304,6 +404310,15 @@ elf_symbol {
   full_name: "set_task_cpu"
 }
 elf_symbol {
+  id: 0x5e7a57c2
+  name: "set_task_ioprio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0a1147ab
+  type_id: 0x9b5a0a16
+  full_name: "set_task_ioprio"
+}
+elf_symbol {
   id: 0xdebcf3e9
   name: "set_user_nice"
   is_defined: true
@@ -425282,6 +425297,7 @@ interface {
   symbol_id: 0xc1ea8aaa
   symbol_id: 0x500f328c
   symbol_id: 0xe19d98a9
+  symbol_id: 0x5e7a57c2
   symbol_id: 0xdebcf3e9
   symbol_id: 0x8f1deac6
   symbol_id: 0x7d05df74
