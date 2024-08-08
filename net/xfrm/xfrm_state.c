@@ -2612,7 +2612,14 @@ int xfrm_user_policy(struct sock *sk, int optname, sockptr_t optval, int optlen)
 	struct xfrm_mgr *km;
 	struct xfrm_policy *pol = NULL;
 
+<<<<<<< PATCH SET (62a1c5 Revert "ANDROID: xfrm: remove in_compat_syscall() checks")
+	if (in_compat_syscall())
+		return -EOPNOTSUPP;
+
+	if (!optval && !optlen) {
+=======
 	if (sockptr_is_null(optval) && !optlen) {
+>>>>>>> BASE      (ed823c ANDROID: kleaf: Expect new kernel modules for soc drivers)
 		xfrm_sk_policy_insert(sk, XFRM_POLICY_IN, NULL);
 		xfrm_sk_policy_insert(sk, XFRM_POLICY_OUT, NULL);
 		__sk_dst_reset(sk);
