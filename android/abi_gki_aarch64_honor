@@ -75,6 +75,8 @@
   __traceiter_android_vh_file_is_tiny_bypass
   __tracepoint_android_vh_modify_scan_control
   __tracepoint_android_vh_should_continue_reclaim
+  __traceiter_android_vh_should_fault_around
+  __tracepoint_android_vh_should_fault_around
   __tracepoint_android_vh_file_is_tiny_bypass
   __tracepoint_android_vh_shrink_slab_bypass
   __traceiter_android_vh_shrink_slab_bypass
