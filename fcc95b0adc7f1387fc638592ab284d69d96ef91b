@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "466d5808_a9c7b429",
+        "filename": "drivers/firmware/arm_scmi/smc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2024-08-08T06:19:43Z",
+      "side": 1,
+      "message": "no (cinfo-\u003eno_completion_irq) setting here.",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 2
+      },
+      "revId": "fcc95b0adc7f1387fc638592ab284d69d96ef91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f1eb05f_dab191ba",
         "filename": "drivers/firmware/arm_scmi/smc.c",
         "patchSetId": 3
@@ -14,6 +37,24 @@
       "writtenOn": "2024-08-08T05:05:16Z",
       "side": 1,
       "message": "When it is discovered that there is no \"a2p\" interrupt in `smc_chan_setup`, it sets cinfo-\u003eno_completion_irq to `true`. It makes more sense to use that as the conditional here:\n```\nif (cinfo-\u003eno_completion_irq)\n```\nis there a reason not to do that?",
+      "revId": "fcc95b0adc7f1387fc638592ab284d69d96ef91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da20c2e4_a5af7c55",
+        "filename": "drivers/firmware/arm_scmi/smc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2024-08-08T06:19:43Z",
+      "side": 1,
+      "message": "There is no (cinfo-\u003eno_completion_irq) in the source code unless you apply below patch which is mentioned in the commit message:\nf716cbd33f03 firmware: arm_scmi: Make smc transport use common completions",
+      "parentUuid": "7f1eb05f_dab191ba",
       "revId": "fcc95b0adc7f1387fc638592ab284d69d96ef91b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
