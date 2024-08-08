@@ -2652,3 +2652,6 @@
   xhci_resume
   xhci_run
   xhci_suspend
+
+[test]
+  seq_put_decimal_ull_width
