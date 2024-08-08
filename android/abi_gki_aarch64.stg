@@ -302635,6 +302635,14 @@ function {
   parameter_id: 0x20054a7b
 }
 function {
+  id: 0x189ae8f8
+  return_type_id: 0x0beab59b
+  parameter_id: 0x1749fb69
+  parameter_id: 0x391f15ea
+  parameter_id: 0x32a623d7
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x189b5d05
   return_type_id: 0x0beab59b
   parameter_id: 0x1749fb69
@@ -345577,6 +345585,15 @@ elf_symbol {
   full_name: "__ndisc_fill_addr_option"
 }
 elf_symbol {
+  id: 0x17b7dd8e
+  name: "__neigh_create"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc1d6b9bb
+  type_id: 0x189ae8f8
+  full_name: "__neigh_create"
+}
+elf_symbol {
   id: 0x9d90da6e
   name: "__netdev_alloc_frag_align"
   is_defined: true
@@ -387719,6 +387736,15 @@ elf_symbol {
   full_name: "netdev_info"
 }
 elf_symbol {
+  id: 0x5635039f
+  name: "netdev_is_rx_handler_busy"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5d067cdb
+  type_id: 0xf20dd3f1
+  full_name: "netdev_is_rx_handler_busy"
+}
+elf_symbol {
   id: 0x5a4e487e
   name: "netdev_lower_state_changed"
   is_defined: true
@@ -415614,6 +415640,7 @@ interface {
   symbol_id: 0x6c942f5c
   symbol_id: 0xe29f2fd9
   symbol_id: 0x8b8ae791
+  symbol_id: 0x17b7dd8e
   symbol_id: 0x9d90da6e
   symbol_id: 0x6793e03f
   symbol_id: 0x17112d4d
@@ -420288,6 +420315,7 @@ interface {
   symbol_id: 0x980489ec
   symbol_id: 0x1a34a34f
   symbol_id: 0x06bf2dbd
+  symbol_id: 0x5635039f
   symbol_id: 0x5a4e487e
   symbol_id: 0x178677d3
   symbol_id: 0xb4ca02f0
