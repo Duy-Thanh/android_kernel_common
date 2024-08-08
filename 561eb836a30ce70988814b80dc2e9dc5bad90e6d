@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42252ff9_c937a676",
+        "filename": "net/xfrm/xfrm_state.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2381,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-08-08T18:42:50Z",
+      "side": 1,
+      "message": "Alistair.  I don\u0027t understand this patch.  Shouldn\u0027t this be \u0026\u0026 not ||\n\nAfter all this is a patch for Android, so CONFIG_ANDROID should be enabled.\n\nHence IS_ENABLED(CONFIG_ANDROID) is 1\n\nso this is \u0027!1 ||\u0027 which is \u00270 ||\u0027 which is nothing.",
+      "range": {
+        "startLine": 2381,
+        "startChar": 33,
+        "endLine": 2381,
+        "endChar": 35
+      },
+      "revId": "561eb836a30ce70988814b80dc2e9dc5bad90e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
