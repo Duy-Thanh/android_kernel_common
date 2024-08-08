@@ -92,6 +92,7 @@ struct kunit_resource {
 	bool should_kfree;
 
 	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
 };
 
 /**
