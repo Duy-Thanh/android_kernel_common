@@ -61,6 +61,8 @@
   device_wakeup_enable
   _dev_info
   dev_kfree_skb_any_reason
+  dev_forward_skb
+  dev_mc_sync
   devm_clk_get
   devm_i2c_new_dummy_device
   devm_ioremap
