@@ -2638,3 +2638,6 @@
   xhci_resume
   xhci_run
   xhci_suspend
+
+[test]
+  blk_queue_required_elevator_features
