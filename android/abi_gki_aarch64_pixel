@@ -2638,3 +2638,7 @@
   xhci_resume
   xhci_run
   xhci_suspend
+
+[test]
+  __traceiter_android_vh_dma_heap_buffer_alloc_start
+  __tracepoint_android_vh_dma_heap_buffer_alloc_start
