@@ -89,6 +89,15 @@ struct kunit_resource {
 	struct kref refcount;
 	struct list_head node;
 	bool should_kfree;
+<<<<<<< HEAD   (3ca020 ANDROID: GKI: update mtktv symbol)
+||||||| BASE
+
+	ANDROID_KABI_RESERVE(1);
+=======
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+>>>>>>> CHANGE (d9d1b3 ANDROID: ABI tooling test)
 };
 
 /**

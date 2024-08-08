@@ -245867,6 +245867,41 @@ struct_union {
   }
 }
 struct_union {
+<<<<<<< HEAD   (3ca020 ANDROID: GKI: update mtktv symbol)
+||||||| BASE
+  id: 0xe9bc0c6b
+  kind: STRUCT
+  name: "kunit_resource"
+  definition {
+    bytesize: 64
+    member_id: 0xff8a9909
+    member_id: 0x0de57809
+    member_id: 0xfe26bb4e
+    member_id: 0x05ec0c9b
+    member_id: 0x0fa6c604
+    member_id: 0x1a2cfce7
+    member_id: 0x2d081245
+  }
+}
+struct_union {
+=======
+  id: 0xe9bc0c6b
+  kind: STRUCT
+  name: "kunit_resource"
+  definition {
+    bytesize: 72
+    member_id: 0xff8a9909
+    member_id: 0x0de57809
+    member_id: 0xfe26bb4e
+    member_id: 0x05ec0c9b
+    member_id: 0x0fa6c604
+    member_id: 0x1a2cfce7
+    member_id: 0x2d081245
+    member_id: 0x637602ba
+  }
+}
+struct_union {
+>>>>>>> CHANGE (d9d1b3 ANDROID: ABI tooling test)
   id: 0xb2e34d06
   kind: STRUCT
   name: "kunit_suite"
@@ -345318,6 +345353,46 @@ elf_symbol {
   full_name: "__kunit_abort"
 }
 elf_symbol {
+<<<<<<< HEAD   (3ca020 ANDROID: GKI: update mtktv symbol)
+||||||| BASE
+  id: 0x9a951407
+  name: "__kunit_activate_static_stub"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe45759b7
+  type_id: 0x1abb29c8
+  full_name: "__kunit_activate_static_stub"
+}
+elf_symbol {
+  id: 0x418d6ad6
+  name: "__kunit_add_resource"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x27575b3b
+  type_id: 0x9602dbff
+  full_name: "__kunit_add_resource"
+}
+elf_symbol {
+=======
+  id: 0x9a951407
+  name: "__kunit_activate_static_stub"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe45759b7
+  type_id: 0x1abb29c8
+  full_name: "__kunit_activate_static_stub"
+}
+elf_symbol {
+  id: 0x418d6ad6
+  name: "__kunit_add_resource"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x70cfcfe0
+  type_id: 0x9602dbff
+  full_name: "__kunit_add_resource"
+}
+elf_symbol {
+>>>>>>> CHANGE (d9d1b3 ANDROID: ABI tooling test)
   id: 0x0a5cc8aa
   name: "__kunit_do_failed_assertion"
   is_defined: true
@@ -384344,6 +384419,118 @@ elf_symbol {
   full_name: "kunit_binary_assert_format"
 }
 elf_symbol {
+<<<<<<< HEAD   (3ca020 ANDROID: GKI: update mtktv symbol)
+||||||| BASE
+  id: 0x4f6edfe0
+  name: "kunit_binary_ptr_assert_format"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x28ed4641
+  type_id: 0x1d09a9ef
+  full_name: "kunit_binary_ptr_assert_format"
+}
+elf_symbol {
+  id: 0x7c041f90
+  name: "kunit_binary_str_assert_format"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2e63384a
+  type_id: 0x1d09a9ef
+  full_name: "kunit_binary_str_assert_format"
+}
+elf_symbol {
+  id: 0x47e5f38a
+  name: "kunit_cleanup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x72c0f9fc
+  type_id: 0x1adff305
+  full_name: "kunit_cleanup"
+}
+elf_symbol {
+  id: 0xa41c284f
+  name: "kunit_deactivate_static_stub"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0871d8be
+  type_id: 0x1abd0691
+  full_name: "kunit_deactivate_static_stub"
+}
+elf_symbol {
+  id: 0x310d0e78
+  name: "kunit_destroy_resource"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4c8da5a4
+  type_id: 0x964432be
+  full_name: "kunit_destroy_resource"
+}
+elf_symbol {
+  id: 0x9ab59e22
+  name: "kunit_fail_assert_format"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdeb523ca
+  type_id: 0x1d09a9ef
+  full_name: "kunit_fail_assert_format"
+}
+elf_symbol {
+=======
+  id: 0x4f6edfe0
+  name: "kunit_binary_ptr_assert_format"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x28ed4641
+  type_id: 0x1d09a9ef
+  full_name: "kunit_binary_ptr_assert_format"
+}
+elf_symbol {
+  id: 0x7c041f90
+  name: "kunit_binary_str_assert_format"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2e63384a
+  type_id: 0x1d09a9ef
+  full_name: "kunit_binary_str_assert_format"
+}
+elf_symbol {
+  id: 0x47e5f38a
+  name: "kunit_cleanup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x72c0f9fc
+  type_id: 0x1adff305
+  full_name: "kunit_cleanup"
+}
+elf_symbol {
+  id: 0xa41c284f
+  name: "kunit_deactivate_static_stub"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0871d8be
+  type_id: 0x1abd0691
+  full_name: "kunit_deactivate_static_stub"
+}
+elf_symbol {
+  id: 0x310d0e78
+  name: "kunit_destroy_resource"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3e8c387c
+  type_id: 0x964432be
+  full_name: "kunit_destroy_resource"
+}
+elf_symbol {
+  id: 0x9ab59e22
+  name: "kunit_fail_assert_format"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdeb523ca
+  type_id: 0x1d09a9ef
+  full_name: "kunit_fail_assert_format"
+}
+elf_symbol {
+>>>>>>> CHANGE (d9d1b3 ANDROID: ABI tooling test)
   id: 0xc1b901e4
   name: "kunit_hooks"
   is_defined: true
@@ -384371,6 +384558,82 @@ elf_symbol {
   full_name: "kunit_ptr_not_err_assert_format"
 }
 elf_symbol {
+<<<<<<< HEAD   (3ca020 ANDROID: GKI: update mtktv symbol)
+||||||| BASE
+  id: 0x8b34fd8e
+  name: "kunit_release_action"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x010cef3a
+  type_id: 0x1a517af8
+  full_name: "kunit_release_action"
+}
+elf_symbol {
+  id: 0x363a15f6
+  name: "kunit_remove_action"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8a7754d5
+  type_id: 0x1a517af8
+  full_name: "kunit_remove_action"
+}
+elf_symbol {
+  id: 0x81c0a916
+  name: "kunit_remove_resource"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc68fed04
+  type_id: 0x1a1c0fef
+  full_name: "kunit_remove_resource"
+}
+elf_symbol {
+  id: 0x7492950b
+  name: "kunit_run_tests"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaa6189fb
+  type_id: 0x940ad996
+  full_name: "kunit_run_tests"
+}
+elf_symbol {
+=======
+  id: 0x8b34fd8e
+  name: "kunit_release_action"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x010cef3a
+  type_id: 0x1a517af8
+  full_name: "kunit_release_action"
+}
+elf_symbol {
+  id: 0x363a15f6
+  name: "kunit_remove_action"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8a7754d5
+  type_id: 0x1a517af8
+  full_name: "kunit_remove_action"
+}
+elf_symbol {
+  id: 0x81c0a916
+  name: "kunit_remove_resource"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfcc96f3b
+  type_id: 0x1a1c0fef
+  full_name: "kunit_remove_resource"
+}
+elf_symbol {
+  id: 0x7492950b
+  name: "kunit_run_tests"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaa6189fb
+  type_id: 0x940ad996
+  full_name: "kunit_run_tests"
+}
+elf_symbol {
+>>>>>>> CHANGE (d9d1b3 ANDROID: ABI tooling test)
   id: 0x6c9fdcbe
   name: "kunit_running"
   is_defined: true
