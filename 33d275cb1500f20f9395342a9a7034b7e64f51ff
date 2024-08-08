@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f52fd6a_92bfd989",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-08-08T09:04:05Z",
+      "side": 1,
+      "message": "@cmllamas@google.com\n\n`__neigh_create` (for `neigh_create`) is a genuinely new use-case, please check if this is OK for GKI.",
+      "revId": "33d275cb1500f20f9395342a9a7034b7e64f51ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
