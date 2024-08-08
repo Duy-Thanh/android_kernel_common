@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf69e63_fe21348c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-08-08T18:36:33Z",
+      "side": 1,
+      "message": "see\n\n/* Use the 64-bit / untranslated format on Android, even for compat */\n\tif (!IS_ENABLED(CONFIG_GKI_NET_XFRM_HACKS) ||",
+      "revId": "f7e88151d667beb2d2cbc70402dcf205a60ff410",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
