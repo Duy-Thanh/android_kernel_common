@@ -250915,7 +250915,7 @@ struct_union {
   kind: STRUCT
   name: "kunit_resource"
   definition {
-    bytesize: 64
+    bytesize: 72
     member_id: 0xff8a9909
     member_id: 0x0de57809
     member_id: 0xfe26bb4e
@@ -250923,6 +250923,7 @@ struct_union {
     member_id: 0x0fa6c604
     member_id: 0x1a2cfce7
     member_id: 0x2d081245
+    member_id: 0x637602ba
   }
 }
 struct_union {
@@ -352358,7 +352359,7 @@ elf_symbol {
   name: "__kunit_add_resource"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x27575b3b
+  crc: 0x70cfcfe0
   type_id: 0x9602dbff
   full_name: "__kunit_add_resource"
 }
@@ -393365,7 +393366,7 @@ elf_symbol {
   name: "kunit_destroy_resource"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4c8da5a4
+  crc: 0x3e8c387c
   type_id: 0x964432be
   full_name: "kunit_destroy_resource"
 }
@@ -393464,7 +393465,7 @@ elf_symbol {
   name: "kunit_remove_resource"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc68fed04
+  crc: 0xfcc96f3b
   type_id: 0x1a1c0fef
   full_name: "kunit_remove_resource"
 }
