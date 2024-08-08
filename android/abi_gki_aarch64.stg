@@ -250815,7 +250815,7 @@ struct_union {
   kind: STRUCT
   name: "kunit_resource"
   definition {
-    bytesize: 64
+    bytesize: 72
     member_id: 0xff8a9909
     member_id: 0x0de57809
     member_id: 0xfe26bb4e
@@ -250823,6 +250823,7 @@ struct_union {
     member_id: 0x0fa6c604
     member_id: 0x1a2cfce7
     member_id: 0x2d081245
+    member_id: 0x637602ba
   }
 }
 struct_union {
@@ -352158,7 +352159,7 @@ elf_symbol {
   name: "__kunit_add_resource"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x27575b3b
+  crc: 0x70cfcfe0
   type_id: 0x9602dbff
   full_name: "__kunit_add_resource"
 }
@@ -354252,6 +354253,7 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_ksys_umount"
 }
 elf_symbol {
+<<<<<<< HEAD   (ff50f4 ANDROID: KVM: arm64: iommu: Remove spurious plus ("+") sign)
   id: 0x3444c3ba
   name: "__traceiter_android_rvh_logbuf"
   is_defined: true
@@ -354261,6 +354263,8 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_logbuf"
 }
 elf_symbol {
+=======
+>>>>>>> CHANGE (6b41d3 ANDROID: ABI tooing test)
   id: 0x1ea5d323
   name: "__traceiter_android_rvh_migrate_queued_task"
   is_defined: true
@@ -360111,6 +360115,7 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_ksys_umount"
 }
 elf_symbol {
+<<<<<<< HEAD   (ff50f4 ANDROID: KVM: arm64: iommu: Remove spurious plus ("+") sign)
   id: 0x8efb0ca4
   name: "__tracepoint_android_rvh_logbuf"
   is_defined: true
@@ -360120,6 +360125,8 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_logbuf"
 }
 elf_symbol {
+=======
+>>>>>>> CHANGE (6b41d3 ANDROID: ABI tooing test)
   id: 0x3cb4db49
   name: "__tracepoint_android_rvh_migrate_queued_task"
   is_defined: true
@@ -393102,7 +393109,7 @@ elf_symbol {
   name: "kunit_destroy_resource"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4c8da5a4
+  crc: 0x3e8c387c
   type_id: 0x964432be
   full_name: "kunit_destroy_resource"
 }
@@ -393201,7 +393208,7 @@ elf_symbol {
   name: "kunit_remove_resource"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc68fed04
+  crc: 0xfcc96f3b
   type_id: 0x1a1c0fef
   full_name: "kunit_remove_resource"
 }
@@ -425306,7 +425313,10 @@ interface {
   symbol_id: 0x7e99bc71
   symbol_id: 0x7c212080
   symbol_id: 0x7fcabbe6
+<<<<<<< HEAD   (ff50f4 ANDROID: KVM: arm64: iommu: Remove spurious plus ("+") sign)
   symbol_id: 0x3444c3ba
+=======
+>>>>>>> CHANGE (6b41d3 ANDROID: ABI tooing test)
   symbol_id: 0x1ea5d323
   symbol_id: 0x0d22882d
   symbol_id: 0x0250206d
@@ -425957,7 +425967,10 @@ interface {
   symbol_id: 0x695c4baf
   symbol_id: 0x99d57c12
   symbol_id: 0x26d3bcc4
+<<<<<<< HEAD   (ff50f4 ANDROID: KVM: arm64: iommu: Remove spurious plus ("+") sign)
   symbol_id: 0x8efb0ca4
+=======
+>>>>>>> CHANGE (6b41d3 ANDROID: ABI tooing test)
   symbol_id: 0x3cb4db49
   symbol_id: 0x62726c6f
   symbol_id: 0x37354e4f
