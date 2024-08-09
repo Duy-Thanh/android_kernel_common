@@ -52,6 +52,24 @@
       "parentUuid": "7a131e88_50283d9d",
       "revId": "8c32b2393322a6c2407918362d0aa4e779a418e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0985af_c6ee839c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-08-09T06:34:06Z",
+      "side": 1,
+      "message": "Miguel usually doesn\u0027t pick patches this early in the kernel cycle, so it will be a few weeks before it becomes FROMGIT. Can we take it now? It\u0027s pretty unlikely to change. I will of course submit a CL to update it if it does.",
+      "parentUuid": "d3bfae17_fb432a95",
+      "revId": "8c32b2393322a6c2407918362d0aa4e779a418e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
