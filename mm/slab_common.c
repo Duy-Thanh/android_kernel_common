@@ -1000,7 +1000,12 @@ EXPORT_SYMBOL(kmalloc_order);
 #ifdef CONFIG_TRACING
 void *kmalloc_order_trace(size_t size, gfp_t flags, unsigned int order)
 {
-	void *ret = kmalloc_order(size, flags, order);
+	void *ret;
+
+	if (is_vmalloc_addr((const void *)_RET_IP_))
+		flags |= __GFP_MODULES;
+
+	ret = kmalloc_order(size, flags, order);
 	trace_kmalloc(_RET_IP_, ret, size, PAGE_SIZE << order, flags);
 	return ret;
 }
@@ -1261,9 +1266,12 @@ static __always_inline void *__do_krealloc(const void *p, size_t new_size,
  *
  * Return: pointer to the allocated memory or %NULL in case of error
  */
-void *krealloc(const void *p, size_t new_size, gfp_t flags)
+void *_krealloc(const void *p, size_t new_size, gfp_t flags)
 {
 	void *ret;
+
+	if (is_vmalloc_addr((const void *)_RET_IP_))
+		flags |= __GFP_MODULES;
 
 	if (unlikely(!new_size)) {
 		kfree(p);
@@ -1276,7 +1284,7 @@ void *krealloc(const void *p, size_t new_size, gfp_t flags)
 
 	return ret;
 }
-EXPORT_SYMBOL(krealloc);
+EXPORT_SYMBOL(_krealloc);
 
 /**
  * kfree_sensitive - Clear sensitive information in memory before freeing

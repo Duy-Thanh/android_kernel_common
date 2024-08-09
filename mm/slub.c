@@ -4413,6 +4413,9 @@ void *__kmalloc(size_t size, gfp_t flags)
 	struct kmem_cache *s;
 	void *ret;
 
+	if (is_vmalloc_addr((const void *)_RET_IP_))
+		flags |= __GFP_MODULES;
+
 	if (unlikely(size > KMALLOC_MAX_CACHE_SIZE))
 		return kmalloc_large(size, flags);
 
@@ -4453,6 +4456,9 @@ void *__kmalloc_node(size_t size, gfp_t flags, int node)
 {
 	struct kmem_cache *s;
 	void *ret;
+
+	if (is_vmalloc_addr((const void *)_RET_IP_))
+		flags |= __GFP_MODULES;
 
 	if (unlikely(size > KMALLOC_MAX_CACHE_SIZE)) {
 		ret = kmalloc_large_node(size, flags, node);
@@ -4934,6 +4940,9 @@ void *__kmalloc_track_caller(size_t size, gfp_t gfpflags, unsigned long caller)
 {
 	struct kmem_cache *s;
 	void *ret;
+
+	if (is_vmalloc_addr((const void *)caller))
+		gfpflags |= __GFP_MODULES;
 
 	if (unlikely(size > KMALLOC_MAX_CACHE_SIZE))
 		return kmalloc_large(size, gfpflags);

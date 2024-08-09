@@ -54,25 +54,26 @@ struct vm_area_struct;
 #define ___GFP_THISNODE		0x200000u
 #define ___GFP_ACCOUNT		0x400000u
 #define ___GFP_ZEROTAGS		0x800000u
+#define ___GFP_MODULES		0x1000000u
 #ifdef CONFIG_KASAN_HW_TAGS
-#define ___GFP_SKIP_ZERO		0x1000000u
-#define ___GFP_SKIP_KASAN_UNPOISON	0x2000000u
-#define ___GFP_SKIP_KASAN_POISON	0x4000000u
+#define ___GFP_SKIP_ZERO		0x2000000u
+#define ___GFP_SKIP_KASAN_UNPOISON	0x4000000u
+#define ___GFP_SKIP_KASAN_POISON	0x8000000u
 #else
 #define ___GFP_SKIP_ZERO		0
 #define ___GFP_SKIP_KASAN_UNPOISON	0
 #define ___GFP_SKIP_KASAN_POISON	0
 #endif
 #ifdef CONFIG_CMA
-#define ___GFP_CMA		0x8000000u
+#define ___GFP_CMA		0x10000000u
 #else
 #define ___GFP_CMA		0
 #endif
 #ifdef CONFIG_LOCKDEP
 #ifdef CONFIG_CMA
-#define ___GFP_NOLOCKDEP	0x10000000u
+#define ___GFP_NOLOCKDEP	0x20000000u
 #else
-#define ___GFP_NOLOCKDEP	0x8000000u
+#define ___GFP_NOLOCKDEP	0x10000000u
 #endif
 #else
 #define ___GFP_NOLOCKDEP	0
@@ -120,12 +121,16 @@ struct vm_area_struct;
  * node with no fallbacks or placement policy enforcements.
  *
  * %__GFP_ACCOUNT causes the allocation to be accounted to kmemcg.
+ *
+ * %__GFP_MODULES causes the allocation to be accounted to allocations
+ * from modules.
  */
 #define __GFP_RECLAIMABLE ((__force gfp_t)___GFP_RECLAIMABLE)
 #define __GFP_WRITE	((__force gfp_t)___GFP_WRITE)
 #define __GFP_HARDWALL   ((__force gfp_t)___GFP_HARDWALL)
 #define __GFP_THISNODE	((__force gfp_t)___GFP_THISNODE)
 #define __GFP_ACCOUNT	((__force gfp_t)___GFP_ACCOUNT)
+#define __GFP_MODULES	((__force gfp_t)___GFP_MODULES)
 
 /**
  * DOC: Watermark modifiers
@@ -276,9 +281,9 @@ struct vm_area_struct;
 
 /* Room for N __GFP_FOO bits */
 #ifdef CONFIG_CMA
-#define __GFP_BITS_SHIFT (28 + IS_ENABLED(CONFIG_LOCKDEP))
+#define __GFP_BITS_SHIFT (29 + IS_ENABLED(CONFIG_LOCKDEP))
 #else
-#define __GFP_BITS_SHIFT (27 + IS_ENABLED(CONFIG_LOCKDEP))
+#define __GFP_BITS_SHIFT (28 + IS_ENABLED(CONFIG_LOCKDEP))
 #endif
 #define __GFP_BITS_MASK ((__force gfp_t)((1 << __GFP_BITS_SHIFT) - 1))
 

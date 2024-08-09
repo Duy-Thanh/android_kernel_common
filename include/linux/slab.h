@@ -17,6 +17,7 @@
 #include <linux/types.h>
 #include <linux/workqueue.h>
 #include <linux/percpu-refcount.h>
+#include <linux/mm.h>
 
 
 /*
@@ -355,6 +356,7 @@ kmalloc_caches[NR_KMALLOC_TYPES][KMALLOC_SHIFT_HIGH + 1];
  */
 #define KMALLOC_NOT_NORMAL_BITS					\
 	(__GFP_RECLAIMABLE |					\
+	 __GFP_MODULES |					\
 	(IS_ENABLED(CONFIG_ZONE_DMA)   ? __GFP_DMA : 0) |	\
 	(IS_ENABLED(CONFIG_MEMCG_KMEM) ? __GFP_ACCOUNT : 0))
 
@@ -376,6 +378,9 @@ static __always_inline enum kmalloc_cache_type kmalloc_type(gfp_t flags)
 	 */
 	if (IS_ENABLED(CONFIG_ZONE_DMA) && (flags & __GFP_DMA))
 		return KMALLOC_DMA;
+	if (flags & __GFP_MODULES) {
+		return flags & __GFP_RECLAIMABLE ? KMALLOC_MODULES_RECLAIM : KMALLOC_MODULES;
+	}
 	if (!IS_ENABLED(CONFIG_MEMCG_KMEM) || (flags & __GFP_RECLAIMABLE))
 		return KMALLOC_RECLAIM;
 	else
@@ -595,6 +600,9 @@ static __always_inline void *kmalloc_large(size_t size, gfp_t flags)
  */
 static __always_inline void *kmalloc(size_t size, gfp_t flags)
 {
+#ifdef MODULE
+	flags |= __GFP_MODULES;
+#endif
 	if (__builtin_constant_p(size)) {
 #ifndef CONFIG_SLOB
 		unsigned int index;
@@ -617,6 +625,10 @@ static __always_inline void *kmalloc(size_t size, gfp_t flags)
 
 static __always_inline void *kmalloc_node(size_t size, gfp_t flags, int node)
 {
+#ifdef MODULE
+	flags |= __GFP_MODULES;
+#endif
+
 #ifndef CONFIG_SLOB
 	if (__builtin_constant_p(size) &&
 		size <= KMALLOC_MAX_CACHE_SIZE) {
@@ -650,6 +662,14 @@ static inline void *kmalloc_array(size_t n, size_t size, gfp_t flags)
 	return __kmalloc(bytes, flags);
 }
 
+extern void *_krealloc(const void *p, size_t new_size, gfp_t flags);
+
+#ifdef MODULE
+#define krealloc(p, new_size, flags) _krealloc(p, new_size, flags | __GFP_MODULES)
+#else
+#define krealloc(p, new_size, flags) _krealloc(p, new_size, flags)
+#endif
+
 /**
  * krealloc_array - reallocate memory for an array.
  * @p: pointer to the memory chunk to reallocate
@@ -665,6 +685,9 @@ krealloc_array(void *p, size_t new_n, size_t new_size, gfp_t flags)
 	if (unlikely(check_mul_overflow(new_n, new_size, &bytes)))
 		return NULL;
 
+#ifdef MODULE
+	flags |= __GFP_MODULES;
+#endif
 	return krealloc(p, bytes, flags);
 }
 
