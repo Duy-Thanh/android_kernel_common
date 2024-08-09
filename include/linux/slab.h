@@ -17,6 +17,7 @@
 #include <linux/types.h>
 #include <linux/workqueue.h>
 #include <linux/percpu-refcount.h>
+#include <linux/mm.h>
 
 
 /*
@@ -355,6 +356,7 @@ kmalloc_caches[NR_KMALLOC_TYPES][KMALLOC_SHIFT_HIGH + 1];
  */
 #define KMALLOC_NOT_NORMAL_BITS					\
 	(__GFP_RECLAIMABLE |					\
+	 __GFP_MODULES |					\
 	(IS_ENABLED(CONFIG_ZONE_DMA)   ? __GFP_DMA : 0) |	\
 	(IS_ENABLED(CONFIG_MEMCG_KMEM) ? __GFP_ACCOUNT : 0))
 
@@ -376,6 +378,9 @@ static __always_inline enum kmalloc_cache_type kmalloc_type(gfp_t flags)
 	 */
 	if (IS_ENABLED(CONFIG_ZONE_DMA) && (flags & __GFP_DMA))
 		return KMALLOC_DMA;
+	if (flags & __GFP_MODULES) {
+		return flags & __GFP_RECLAIMABLE ? KMALLOC_MODULES_RECLAIM : KMALLOC_RECLAIM;
+	}
 	if (!IS_ENABLED(CONFIG_MEMCG_KMEM) || (flags & __GFP_RECLAIMABLE))
 		return KMALLOC_RECLAIM;
 	else
@@ -607,6 +612,9 @@ static __always_inline void *kmalloc(size_t size, gfp_t flags)
 		if (!index)
 			return ZERO_SIZE_PTR;
 
+		if (is_vmalloc_addr((const void *)_THIS_IP_))
+			flags |= __GFP_MODULES;
+
 		return kmem_cache_alloc_trace(
 				kmalloc_caches[kmalloc_type(flags)][index],
 				flags, size);
@@ -624,6 +632,9 @@ static __always_inline void *kmalloc_node(size_t size, gfp_t flags, int node)
 
 		if (!i)
 			return ZERO_SIZE_PTR;
+
+		if (is_vmalloc_addr((const void *)_THIS_IP_))
+			flags |= __GFP_MODULES;
 
 		return kmem_cache_alloc_node_trace(
 				kmalloc_caches[kmalloc_type(flags)][i],
