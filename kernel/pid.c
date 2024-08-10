@@ -42,7 +42,6 @@
 #include <linux/sched/signal.h>
 #include <linux/sched/task.h>
 #include <linux/idr.h>
-#include <linux/pidfs.h>
 #include <net/sock.h>
 #include <uapi/linux/pidfd.h>
 
@@ -66,13 +65,6 @@ int pid_max = PID_MAX_DEFAULT;
 
 int pid_max_min = RESERVED_PIDS + 1;
 int pid_max_max = PID_MAX_LIMIT;
-#ifdef CONFIG_FS_PID
-/*
- * Pseudo filesystems start inode numbering after one. We use Reserved
- * PIDs as a natural offset.
- */
-static u64 pidfs_ino = RESERVED_PIDS;
-#endif
 
 /*
  * PID-map pages start out as NULL, they get allocated upon
@@ -280,10 +272,6 @@ struct pid *alloc_pid(struct pid_namespace *ns, pid_t *set_tid,
 	spin_lock_irq(&pidmap_lock);
 	if (!(ns->pid_allocated & PIDNS_ADDING))
 		goto out_unlock;
-#ifdef CONFIG_FS_PID
-	pid->stashed = NULL;
-	pid->ino = ++pidfs_ino;
-#endif
 	for ( ; upid >= pid->numbers; --upid) {
 		/* Make the PID visible to find_pid_ns. */
 		idr_replace(&upid->ns->idr, pid, upid->nr);
@@ -361,11 +349,6 @@ static void __change_pid(struct task_struct *task, enum pid_type type,
 	hlist_del_rcu(&task->pid_links[type]);
 	*pid_ptr = new;
 
-	if (type == PIDTYPE_PID) {
-		WARN_ON_ONCE(pid_has_task(pid, PIDTYPE_PID));
-		wake_up_all(&pid->wait_pidfd);
-	}
-
 	for (tmp = PIDTYPE_MAX; --tmp >= 0; )
 		if (pid_has_task(pid, tmp))
 			return;
@@ -408,7 +391,8 @@ void exchange_tids(struct task_struct *left, struct task_struct *right)
 void transfer_pid(struct task_struct *old, struct task_struct *new,
 			   enum pid_type type)
 {
-	WARN_ON_ONCE(type == PIDTYPE_PID);
+	if (type == PIDTYPE_PID)
+		new->thread_pid = old->thread_pid;
 	hlist_replace_rcu(&old->pid_links[type], &new->pid_links[type]);
 }
 
@@ -691,26 +675,7 @@ static struct file *__pidfd_fget(struct task_struct *task, int fd)
 
 	up_read(&task->signal->exec_update_lock);
 
-	if (!file) {
-		/*
-		 * It is possible that the target thread is exiting; it can be
-		 * either:
-		 * 1. before exit_signals(), which gives a real fd
-		 * 2. before exit_files() takes the task_lock() gives a real fd
-		 * 3. after exit_files() releases task_lock(), ->files is NULL;
-		 *    this has PF_EXITING, since it was set in exit_signals(),
-		 *    __pidfd_fget() returns EBADF.
-		 * In case 3 we get EBADF, but that really means ESRCH, since
-		 * the task is currently exiting and has freed its files
-		 * struct, so we fix it up.
-		 */
-		if (task->flags & PF_EXITING)
-			file = ERR_PTR(-ESRCH);
-		else
-			file = ERR_PTR(-EBADF);
-	}
-
-	return file;
+	return file ?: ERR_PTR(-EBADF);
 }
 
 static int pidfd_getfd(struct pid *pid, int fd)
