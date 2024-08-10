@@ -19,6 +19,7 @@
 #include <linux/percpu-refcount.h>
 #include <linux/mm.h>
 
+#define LARGE_MODULE_ALLOC_COOKIE 0xABCDEF00UL
 
 /*
  * Flags to pass to kmem_cache_create().
@@ -159,7 +160,8 @@ struct kmem_cache *kmem_cache_create_usercopy(const char *name,
 void kmem_cache_destroy(struct kmem_cache *);
 int kmem_cache_shrink(struct kmem_cache *);
 
-extern atomic_long_t kmalloc_large_allocs_kb;
+extern atomic_long_t kmalloc_large_module_allocs_kb;
+extern atomic_long_t kmalloc_large_kernel_allocs_kb;
 
 /*
  * Please use this macro to create slab caches. Simply specify the
@@ -541,6 +543,9 @@ kmalloc_order_trace(size_t size, gfp_t flags, unsigned int order)
 static __always_inline void *kmalloc_large(size_t size, gfp_t flags)
 {
 	unsigned int order = get_order(size);
+#ifdef MODULE
+	flags |= __GFP_MODULES;
+#endif
 	return kmalloc_order_trace(size, flags, order);
 }
 

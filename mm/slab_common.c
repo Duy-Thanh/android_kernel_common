@@ -51,7 +51,8 @@ static void slab_caches_to_rcu_destroy_workfn(struct work_struct *work);
 static DECLARE_WORK(slab_caches_to_rcu_destroy_work,
 		    slab_caches_to_rcu_destroy_workfn);
 
-atomic_long_t kmalloc_large_allocs_kb = ATOMIC_LONG_INIT(0);
+atomic_long_t kmalloc_large_module_allocs_kb = ATOMIC_LONG_INIT(0);
+atomic_long_t kmalloc_large_kernel_allocs_kb = ATOMIC_LONG_INIT(0);
 
 /*
  * Set of flags that will prevent slab merging
@@ -985,7 +986,13 @@ void *kmalloc_order(size_t size, gfp_t flags, unsigned int order)
 		ret = page_address(page);
 		mod_lruvec_page_state(page, NR_SLAB_UNRECLAIMABLE_B,
 				      PAGE_SIZE << order);
-		atomic_long_add((PAGE_SIZE << order) >> 10, &kmalloc_large_allocs_kb);
+
+		if (is_vmalloc_addr((const void *)_RET_IP_) || (flags & __GFP_MODULES)) {
+			atomic_long_add((PAGE_SIZE << order) >> 10, &kmalloc_large_module_allocs_kb);
+			set_page_private(page, LARGE_MODULE_ALLOC_COOKIE);
+		} else {
+			atomic_long_add((PAGE_SIZE << order) >> 10, &kmalloc_large_kernel_allocs_kb);
+		}
 	}
 
 	trace_android_vh_kmalloc_order_alloced(page, size, flags);

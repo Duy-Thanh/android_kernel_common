@@ -3552,7 +3552,12 @@ static inline void free_nonslab_page(struct page *page, void *object)
 	VM_BUG_ON_PAGE(!PageCompound(page), page);
 	kfree_hook(object);
 	mod_lruvec_page_state(page, NR_SLAB_UNRECLAIMABLE_B, -(PAGE_SIZE << order));
-	atomic_long_sub((PAGE_SIZE << order) >> 10, &kmalloc_large_allocs_kb);
+	if (page_private(page) == LARGE_MODULE_ALLOC_COOKIE) {
+		atomic_long_sub((PAGE_SIZE << order) >> 10, &kmalloc_large_module_allocs_kb);
+		set_page_private(page, 0);
+	} else {
+		atomic_long_sub((PAGE_SIZE << order) >> 10, &kmalloc_large_kernel_allocs_kb);
+	}
 	__free_pages(page, order);
 }
 
