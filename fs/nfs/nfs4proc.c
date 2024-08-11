@@ -6800,7 +6800,7 @@ static int _nfs4_proc_getlk(struct nfs4_state *state, int cmd, struct file_lock 
 	status = nfs4_call_sync(server->client, server, &msg, &arg.seq_args, &res.seq_res, 1);
 	switch (status) {
 		case 0:
-			request->c.flc_type = F_UNLCK;
+			request->fl_type = F_UNLCK;
 			break;
 		case -NFS4ERR_DENIED:
 			status = 0;
@@ -7018,8 +7018,8 @@ static struct rpc_task *nfs4_do_unlck(struct file_lock *fl,
 	/* Ensure this is an unlock - when canceling a lock, the
 	 * canceled lock is passed in, and it won't be an unlock.
 	 */
-	fl->c.flc_type = F_UNLCK;
-	if (fl->c.flc_flags & FL_CLOSE)
+	fl->fl_type = F_UNLCK;
+	if (fl->fl_flags & FL_CLOSE)
 		set_bit(NFS_CONTEXT_UNLOCK, &ctx->flags);
 
 	data = nfs4_alloc_unlockdata(fl, ctx, lsp, seqid);
@@ -7045,11 +7045,11 @@ static int nfs4_proc_unlck(struct nfs4_state *state, int cmd, struct file_lock *
 	struct rpc_task *task;
 	struct nfs_seqid *(*alloc_seqid)(struct nfs_seqid_counter *, gfp_t);
 	int status = 0;
-	unsigned char saved_flags = request->c.flc_flags;
+	unsigned char fl_flags = request->fl_flags;
 
 	status = nfs4_set_lock_state(state, request);
 	/* Unlock _before_ we do the RPC call */
-	request->c.flc_flags |= FL_EXISTS;
+	request->fl_flags |= FL_EXISTS;
 	/* Exclude nfs_delegation_claim_locks() */
 	mutex_lock(&sp->so_delegreturn_mutex);
 	/* Exclude nfs4_reclaim_open_stateid() - note nesting! */
@@ -7073,16 +7073,14 @@ static int nfs4_proc_unlck(struct nfs4_state *state, int cmd, struct file_lock *
 	status = -ENOMEM;
 	if (IS_ERR(seqid))
 		goto out;
-	task = nfs4_do_unlck(request,
-			     nfs_file_open_context(request->c.flc_file),
-			     lsp, seqid);
+	task = nfs4_do_unlck(request, nfs_file_open_context(request->fl_file), lsp, seqid);
 	status = PTR_ERR(task);
 	if (IS_ERR(task))
 		goto out;
 	status = rpc_wait_for_completion_task(task);
 	rpc_put_task(task);
 out:
-	request->c.flc_flags = saved_flags;
+	request->fl_flags = fl_flags;
 	trace_nfs4_unlock(request, state, F_SETLK, status);
 	return status;
 }
@@ -7193,7 +7191,7 @@ static void nfs4_lock_done(struct rpc_task *task, void *calldata)
 		renew_lease(NFS_SERVER(d_inode(data->ctx->dentry)),
 				data->timestamp);
 		if (data->arg.new_lock && !data->cancelled) {
-			data->fl.c.flc_flags &= ~(FL_SLEEP | FL_ACCESS);
+			data->fl.fl_flags &= ~(FL_SLEEP | FL_ACCESS);
 			if (locks_lock_inode_wait(lsp->ls_state->inode, &data->fl) < 0)
 				goto out_restart;
 		}
@@ -7294,8 +7292,7 @@ static int _nfs4_do_setlk(struct nfs4_state *state, int cmd, struct file_lock *f
 	if (nfs_server_capable(state->inode, NFS_CAP_MOVEABLE))
 		task_setup_data.flags |= RPC_TASK_MOVEABLE;
 
-	data = nfs4_alloc_lockdata(fl,
-				   nfs_file_open_context(fl->c.flc_file),
+	data = nfs4_alloc_lockdata(fl, nfs_file_open_context(fl->fl_file),
 				   fl->fl_u.nfs4_fl.owner, GFP_KERNEL);
 	if (data == NULL)
 		return -ENOMEM;
@@ -7401,10 +7398,10 @@ static int _nfs4_proc_setlk(struct nfs4_state *state, int cmd, struct file_lock 
 {
 	struct nfs_inode *nfsi = NFS_I(state->inode);
 	struct nfs4_state_owner *sp = state->owner;
-	unsigned char flags = request->c.flc_flags;
+	unsigned char fl_flags = request->fl_flags;
 	int status;
 
-	request->c.flc_flags |= FL_ACCESS;
+	request->fl_flags |= FL_ACCESS;
 	status = locks_lock_inode_wait(state->inode, request);
 	if (status < 0)
 		goto out;
@@ -7413,7 +7410,7 @@ static int _nfs4_proc_setlk(struct nfs4_state *state, int cmd, struct file_lock 
 	if (test_bit(NFS_DELEGATED_STATE, &state->flags)) {
 		/* Yes: cache locks! */
 		/* ...but avoid races with delegation recall... */
-		request->c.flc_flags = flags & ~FL_SLEEP;
+		request->fl_flags = fl_flags & ~FL_SLEEP;
 		status = locks_lock_inode_wait(state->inode, request);
 		up_read(&nfsi->rwsem);
 		mutex_unlock(&sp->so_delegreturn_mutex);
@@ -7423,7 +7420,7 @@ static int _nfs4_proc_setlk(struct nfs4_state *state, int cmd, struct file_lock 
 	mutex_unlock(&sp->so_delegreturn_mutex);
 	status = _nfs4_do_setlk(state, cmd, request, NFS_LOCK_NEW);
 out:
-	request->c.flc_flags = flags;
+	request->fl_flags = fl_flags;
 	return status;
 }
 
@@ -7565,7 +7562,7 @@ nfs4_proc_lock(struct file *filp, int cmd, struct file_lock *request)
 	if (!(IS_SETLK(cmd) || IS_SETLKW(cmd)))
 		return -EINVAL;
 
-	if (lock_is_unlock(request)) {
+	if (request->fl_type == F_UNLCK) {
 		if (state != NULL)
 			return nfs4_proc_unlck(state, cmd, request);
 		return 0;
@@ -7574,7 +7571,7 @@ nfs4_proc_lock(struct file *filp, int cmd, struct file_lock *request)
 	if (state == NULL)
 		return -ENOLCK;
 
-	if ((request->c.flc_flags & FL_POSIX) &&
+	if ((request->fl_flags & FL_POSIX) &&
 	    !test_bit(NFS_STATE_POSIX_LOCKS, &state->flags))
 		return -ENOLCK;
 
@@ -7582,7 +7579,7 @@ nfs4_proc_lock(struct file *filp, int cmd, struct file_lock *request)
 	 * Don't rely on the VFS having checked the file open mode,
 	 * since it won't do this for flock() locks.
 	 */
-	switch (request->c.flc_type) {
+	switch (request->fl_type) {
 	case F_RDLCK:
 		if (!(filp->f_mode & FMODE_READ))
 			return -EBADF;
@@ -7604,7 +7601,7 @@ static int nfs4_delete_lease(struct file *file, void **priv)
 	return generic_setlease(file, F_UNLCK, NULL, priv);
 }
 
-static int nfs4_add_lease(struct file *file, int arg, struct file_lease **lease,
+static int nfs4_add_lease(struct file *file, int arg, struct file_lock **lease,
 			  void **priv)
 {
 	struct inode *inode = file_inode(file);
@@ -7622,7 +7619,7 @@ static int nfs4_add_lease(struct file *file, int arg, struct file_lease **lease,
 	return -EAGAIN;
 }
 
-int nfs4_proc_setlease(struct file *file, int arg, struct file_lease **lease,
+int nfs4_proc_setlease(struct file *file, int arg, struct file_lock **lease,
 		       void **priv)
 {
 	switch (arg) {
