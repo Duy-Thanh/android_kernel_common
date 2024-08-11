@@ -4,7 +4,7 @@
 
 struct bch_sb_handle {
 	struct bch_sb		*sb;
-	struct file		*s_bdev_file;
+	struct bdev_handle	*bdev_handle;
 	struct block_device	*bdev;
 	char			*sb_name;
 	struct bio		*bio;

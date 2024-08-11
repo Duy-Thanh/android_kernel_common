@@ -16,9 +16,8 @@
 #include <linux/mm.h>
 #include <linux/namei.h>
 #include <linux/init_syscalls.h>
+#include <linux/task_work.h>
 #include <linux/umh.h>
-
-#include "do_mounts.h"
 
 static __initdata bool csum_present;
 static __initdata u32 io_csum;
@@ -735,7 +734,8 @@ done:
 	initrd_start = 0;
 	initrd_end = 0;
 
-	init_flush_fput();
+	flush_delayed_fput();
+	task_work_run();
 }
 
 static ASYNC_DOMAIN_EXCLUSIVE(initramfs_domain);
