@@ -16,6 +16,24 @@
       "message": "```\nERROR: modpost: \"tracing_off\" [kernel/torture.ko] undefined!\nERROR: modpost: \"tracing_off\" [kernel/rcu/rcuscale.ko] undefined!\nERROR: modpost: \"tracing_off\" [kernel/rcu/rcutorture.ko] undefined!\n```",
       "revId": "8e4dc93516ac42a8e6175db4f7d58bee80533c19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b7c5866_0d6eb778",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-11T14:20:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a147f70_221e09bb",
+      "revId": "8e4dc93516ac42a8e6175db4f7d58bee80533c19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
