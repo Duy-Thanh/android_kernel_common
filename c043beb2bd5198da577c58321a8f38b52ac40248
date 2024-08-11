@@ -16,6 +16,24 @@
       "message": "allmodconfig build is broken",
       "revId": "c043beb2bd5198da577c58321a8f38b52ac40248",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd00c40e_ce3e4a34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-11T14:31:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1f63b05c_1de466e4",
+      "revId": "c043beb2bd5198da577c58321a8f38b52ac40248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
