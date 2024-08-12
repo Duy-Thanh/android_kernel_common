@@ -171,6 +171,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c094dabe_2f8f2374",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T20:28:39Z",
+      "side": 1,
+      "message": "It\u0027s not necessary for new GKI kernels.\n\nIn case we need it in old kernels, I can add it back in the cherry-picked CL.",
+      "parentUuid": "96b1b68b_248cef28",
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac7e19d1_0e84c3fa",
