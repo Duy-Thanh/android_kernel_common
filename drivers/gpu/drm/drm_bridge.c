@@ -723,10 +723,47 @@ void drm_atomic_bridge_chain_post_disable(struct drm_bridge *bridge,
 			if (WARN_ON(!old_bridge_state))
 				return;
 
+<<<<<<< HEAD   (2061a2 Revert "xfs: use iomap_valid method to detect stale cached i)
 			bridge->funcs->atomic_post_disable(bridge,
 							   old_bridge_state);
 		} else if (bridge->funcs->post_disable) {
 			bridge->funcs->post_disable(bridge);
+=======
+			if (next->pre_enable_prev_first) {
+				/* next bridge had requested that prev
+				 * was enabled first, so disabled last
+				 */
+				limit = next;
+
+				/* Find the next bridge that has NOT requested
+				 * prev to be enabled first / disabled last
+				 */
+				list_for_each_entry_from(next, &encoder->bridge_chain,
+							 chain_node) {
+					if (!next->pre_enable_prev_first) {
+						next = list_prev_entry(next, chain_node);
+						limit = next;
+						break;
+					}
+
+					if (list_is_last(&next->chain_node,
+							 &encoder->bridge_chain)) {
+						limit = next;
+						break;
+					}
+				}
+
+				/* Call these bridges in reverse order */
+				list_for_each_entry_from_reverse(next, &encoder->bridge_chain,
+								 chain_node) {
+					if (next == bridge)
+						break;
+
+					drm_atomic_bridge_call_post_disable(next,
+									    old_state);
+				}
+			}
+>>>>>>> BRANCH (ae9f2a Linux 6.1.93)
 		}
 	}
 }
@@ -759,11 +796,22 @@ void drm_atomic_bridge_chain_pre_enable(struct drm_bridge *bridge,
 		if (iter->funcs->atomic_pre_enable) {
 			struct drm_bridge_state *old_bridge_state;
 
+<<<<<<< HEAD   (2061a2 Revert "xfs: use iomap_valid method to detect stale cached i)
 			old_bridge_state =
 				drm_atomic_get_old_bridge_state(old_state,
 								iter);
 			if (WARN_ON(!old_bridge_state))
 				return;
+=======
+				if (!next->pre_enable_prev_first) {
+					/* Found first bridge that does NOT
+					 * request prev to be enabled first
+					 */
+					limit = next;
+					break;
+				}
+			}
+>>>>>>> BRANCH (ae9f2a Linux 6.1.93)
 
 			iter->funcs->atomic_pre_enable(iter, old_bridge_state);
 		} else if (iter->funcs->pre_enable) {

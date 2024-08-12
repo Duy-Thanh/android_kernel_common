@@ -552,6 +552,7 @@ static inline bool lockdep_softirq_start(void) { return false; }
 static inline void lockdep_softirq_end(bool in_hardirq) { }
 #endif
 
+<<<<<<< HEAD   (2061a2 Revert "xfs: use iomap_valid method to detect stale cached i)
 #ifdef CONFIG_RT_SOFTIRQ_AWARE_SCHED
 static __u32 softirq_deferred_for_rt(__u32 *pending)
 {
@@ -568,6 +569,9 @@ static __u32 softirq_deferred_for_rt(__u32 *pending)
 #endif
 
 asmlinkage __visible void __softirq_entry __do_softirq(void)
+=======
+static void handle_softirqs(bool ksirqd)
+>>>>>>> BRANCH (ae9f2a Linux 6.1.93)
 {
 	unsigned long end = jiffies + MAX_SOFTIRQ_TIME;
 	unsigned long old_flags = current->flags;
@@ -626,9 +630,13 @@ restart:
 		pending >>= softirq_bit;
 	}
 
+<<<<<<< HEAD   (2061a2 Revert "xfs: use iomap_valid method to detect stale cached i)
 	set_active_softirqs(0);
 	if (!IS_ENABLED(CONFIG_PREEMPT_RT) &&
 	    __this_cpu_read(ksoftirqd) == current)
+=======
+	if (!IS_ENABLED(CONFIG_PREEMPT_RT) && ksirqd)
+>>>>>>> BRANCH (ae9f2a Linux 6.1.93)
 		rcu_softirq_qs();
 
 	local_irq_disable();
@@ -649,6 +657,11 @@ restart:
 	lockdep_softirq_end(in_hardirq);
 	softirq_handle_end();
 	current_restore_flags(old_flags, PF_MEMALLOC);
+}
+
+asmlinkage __visible void __softirq_entry __do_softirq(void)
+{
+	handle_softirqs(false);
 }
 
 /**
@@ -987,7 +1000,7 @@ static void run_ksoftirqd(unsigned int cpu)
 		 * We can safely run softirq on inline stack, as we are not deep
 		 * in the task stack here.
 		 */
-		__do_softirq();
+		handle_softirqs(true);
 		ksoftirqd_run_end();
 		cond_resched();
 		return;
