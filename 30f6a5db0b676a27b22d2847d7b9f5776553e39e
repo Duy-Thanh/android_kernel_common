@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a331ff6_965c3c2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-08-12T13:48:40Z",
+      "side": 1,
+      "message": "The reverted CL only affects devices with zoned storage. I don\u0027t think that the devices mentioned in b/352181300 are using zoned storage.",
+      "revId": "30f6a5db0b676a27b22d2847d7b9f5776553e39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
