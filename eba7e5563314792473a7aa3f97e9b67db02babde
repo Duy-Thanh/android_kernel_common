@@ -16,6 +16,98 @@
       "message": "v9: fixes the issues of the previous revisions\nv10: ./scripts/checkpatch.pl --strict\n\nIs this version good enough for LKML review? Thanks!",
       "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab41ba10_06f466be",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3900,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-12T19:51:46Z",
+      "side": 1,
+      "message": "sizeof(report.name)? (if agree then replace for the other cases below)",
+      "range": {
+        "startLine": 3900,
+        "startChar": 39,
+        "endLine": 3900,
+        "endChar": 41
+      },
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1b8933_6a9cca78",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-12T19:51:46Z",
+      "side": 1,
+      "message": "is this important enough to log?",
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f833ef98_98d65764",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-12T19:51:46Z",
+      "side": 1,
+      "message": "does anyone care? Seems like log spam.",
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac7e19d1_0e84c3fa",
+        "filename": "drivers/android/binder_trace.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-12T19:51:46Z",
+      "side": 1,
+      "message": "is this doing anything? The code below needs the full definition so for this to compile, the struct binder_report definition is coming from a different header so this seems redundant.",
+      "fixSuggestions": [
+        {
+          "fixId": "e831dc51_8ee8da71",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder_trace.h",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
