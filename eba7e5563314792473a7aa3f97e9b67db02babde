@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6dc3e59_789ff153",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3900,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T20:07:00Z",
+      "side": 1,
+      "message": "Will fix it",
+      "parentUuid": "ab41ba10_06f466be",
+      "range": {
+        "startLine": 3900,
+        "startChar": 39,
+        "endLine": 3900,
+        "endChar": 41
+      },
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb1b8933_6a9cca78",
@@ -76,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fdd0ac7_f18c8c3b",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T20:07:00Z",
+      "side": 1,
+      "message": "Having it helps debugging. But yes, it\u0027s not critical. I\u0027ll remove it.",
+      "parentUuid": "fb1b8933_6a9cca78",
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f833ef98_98d65764",
@@ -89,6 +131,24 @@
       "writtenOn": "2024-08-12T19:51:46Z",
       "side": 1,
       "message": "does anyone care? Seems like log spam.",
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01992cf6_a715ac30",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T20:07:00Z",
+      "side": 1,
+      "message": "OEM kernels might have different versions of Linux kernels. It\u0027s important to have at least 1 printk to debug Freezer issues on their kernels.",
+      "parentUuid": "f833ef98_98d65764",
       "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -124,6 +184,24 @@
           ]
         }
       ],
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8d94d5_eb424a1f",
+        "filename": "drivers/android/binder_trace.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T20:07:00Z",
+      "side": 1,
+      "message": "Nothing actually. I just follow the legacy code to list the printed struct here. Probably we should remove those as well.",
+      "parentUuid": "ac7e19d1_0e84c3fa",
       "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
