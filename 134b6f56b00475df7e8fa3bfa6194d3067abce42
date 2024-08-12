@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000087802558",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3215599?revision\u003d2",
+      "key": {
+        "uuid": "32903e63_f65623d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-12T07:55:10Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "134b6f56b00475df7e8fa3bfa6194d3067abce42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000087802558",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3215599?revision\u003d2",
+      "key": {
+        "uuid": "d15744b6_6afb382d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-12T07:55:10Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android15-6.6.\nBase branch change: [3196139](https://android-review.googlesource.com/c/3196139).\n\n```\n      ## drivers/android/binder_alloc.c ##\n     @@ drivers/android/binder_alloc.c: void binder_alloc_deferred_release(struct binder_alloc *alloc)\n      \t\t\t__free_page(alloc-\u003epages[i].page_ptr);\n      \t\t\tpage_count++;\n      \t\t}\n    --\t\tkvfree(alloc-\u003epages);\n    +-\t\tkfree(alloc-\u003epages);\n      \t}\n      \tspin_unlock(\u0026alloc-\u003elock);\n     +\tkvfree(alloc-\u003epages);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "134b6f56b00475df7e8fa3bfa6194d3067abce42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
