@@ -155,6 +155,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96b1b68b_248cef28",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-12T20:12:47Z",
+      "side": 1,
+      "message": "They should be GKI kernels or based on GKI kernels, so isn\u0027t it enough that it is version 6.12 (or whatever release this lands in)?\n\nIs this the normal practice for netlink? Spam the log with nl version numbers?",
+      "parentUuid": "01992cf6_a715ac30",
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac7e19d1_0e84c3fa",
         "filename": "drivers/android/binder_trace.h",
         "patchSetId": 10
