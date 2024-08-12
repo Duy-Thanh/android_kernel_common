@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000087802512",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3215599?revision\u003d1",
+      "key": {
+        "uuid": "5cb9f043_24881808",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-12T07:53:59Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android15-6.6.\nBase branch change: [3196139](https://android-review.googlesource.com/c/3196139).\n\n```\n      ## drivers/android/binder_alloc.c ##\n     @@ drivers/android/binder_alloc.c: void binder_alloc_deferred_release(struct binder_alloc *alloc)\n      \t\t\t__free_page(alloc-\u003epages[i].page_ptr);\n      \t\t\tpage_count++;\n      \t\t}\n    --\t\tkvfree(alloc-\u003epages);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (244787 UPSTREAM: block: fix deadlock between sd_remove \u0026 sd_release)\n    + \t\tkfree(alloc-\u003epages);\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (717519 FROMLIST: binder_alloc: Fix sleeping function called from in)\n      \t}\n      \tspin_unlock(\u0026alloc-\u003elock);\n     +\tkvfree(alloc-\u003epages);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "6fdeb2c28de6176258c8b57495f7388dd132c38f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000087802512",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3215599?revision\u003d1",
+      "key": {
+        "uuid": "593a7dfe_93e6aebb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-12T07:53:59Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "6fdeb2c28de6176258c8b57495f7388dd132c38f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
