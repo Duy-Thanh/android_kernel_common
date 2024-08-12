@@ -1201,6 +1201,7 @@ struct f2fs_io_info {
 	struct page *encrypted_page;	/* encrypted page */
 	struct page *compressed_page;	/* compressed page */
 	struct list_head list;		/* serialize IOs */
+<<<<<<< HEAD   (70e1a7 Revert "regmap: Add bulk read/write callbacks into regmap_co)
 	bool submitted;		/* indicate IO submission */
 	int need_lock;		/* indicate we need to lock cp_rwsem */
 	bool in_list;		/* indicate fio is in io_list */
@@ -1209,11 +1210,21 @@ struct f2fs_io_info {
 	int compr_blocks;	/* # of compressed block addresses */
 	bool encrypted;		/* indicate file is encrypted */
 	bool post_read;		/* require post read */
+=======
+	unsigned int compr_blocks;	/* # of compressed block addresses */
+	unsigned int need_lock:8;	/* indicate we need to lock cp_rwsem */
+	unsigned int version:8;		/* version of the node */
+	unsigned int submitted:1;	/* indicate IO submission */
+	unsigned int in_list:1;		/* indicate fio is in io_list */
+	unsigned int is_por:1;		/* indicate IO is from recovery or not */
+	unsigned int retry:1;		/* need to reallocate block address */
+	unsigned int encrypted:1;	/* indicate file is encrypted */
+	unsigned int post_read:1;	/* require post read */
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 	enum iostat_type io_type;	/* io type */
 	struct writeback_control *io_wbc; /* writeback control */
 	struct bio **bio;		/* bio for ipu */
 	sector_t *last_block;		/* last block number in bio */
-	unsigned char version;		/* version of the node */
 };
 
 struct bio_entry {
@@ -4540,10 +4551,13 @@ static inline bool f2fs_force_buffered_io(struct inode *inode,
 
 	if (!fscrypt_dio_supported(iocb, iter))
 		return true;
+<<<<<<< HEAD   (70e1a7 Revert "regmap: Add bulk read/write callbacks into regmap_co)
 	if (fsverity_active(inode))
 		return true;
 	if (f2fs_compressed_file(inode))
 		return true;
+=======
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 
 	/* disallow direct IO if any of devices has unaligned blksize */
 	if (f2fs_is_multi_device(sbi) && !sbi->aligned_blksize)
@@ -4603,6 +4617,7 @@ static inline void f2fs_io_schedule_timeout(long timeout)
 	io_schedule_timeout(timeout);
 }
 
+<<<<<<< HEAD   (70e1a7 Revert "regmap: Add bulk read/write callbacks into regmap_co)
 static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi, pgoff_t ofs,
 					enum page_type type)
 {
@@ -4618,6 +4633,8 @@ static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi, pgoff_t ofs,
 	}
 }
 
+=======
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
 #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
 

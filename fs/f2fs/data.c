@@ -959,7 +959,7 @@ next:
 		bio_page = fio->page;
 
 	/* set submitted = true as a return value */
-	fio->submitted = true;
+	fio->submitted = 1;
 
 	inc_page_count(sbi, WB_DATA_TYPE(bio_page));
 
@@ -975,7 +975,7 @@ alloc_new:
 				(fio->type == DATA || fio->type == NODE) &&
 				fio->new_blkaddr & F2FS_IO_SIZE_MASK(sbi)) {
 			dec_page_count(sbi, WB_DATA_TYPE(bio_page));
-			fio->retry = true;
+			fio->retry = 1;
 			goto skip;
 		}
 		io->bio = __bio_alloc(fio, BIO_MAX_VECS);
@@ -1774,6 +1774,53 @@ static inline u64 blks_to_bytes(struct inode *inode, u64 blks)
 	return (blks << inode->i_blkbits);
 }
 
+<<<<<<< HEAD   (70e1a7 Revert "regmap: Add bulk read/write callbacks into regmap_co)
+=======
+static int __get_data_block(struct inode *inode, sector_t iblock,
+			struct buffer_head *bh, int create, int flag,
+			pgoff_t *next_pgofs, int seg_type, bool may_write)
+{
+	struct f2fs_map_blocks map;
+	int err;
+
+	map.m_lblk = iblock;
+	map.m_len = bytes_to_blks(inode, bh->b_size);
+	map.m_next_pgofs = next_pgofs;
+	map.m_next_extent = NULL;
+	map.m_seg_type = seg_type;
+	map.m_may_create = may_write;
+
+	err = f2fs_map_blocks(inode, &map, create, flag);
+	if (!err) {
+		map_bh(bh, inode->i_sb, map.m_pblk);
+		bh->b_state = (bh->b_state & ~F2FS_MAP_FLAGS) | map.m_flags;
+		bh->b_size = blks_to_bytes(inode, map.m_len);
+
+		if (map.m_multidev_dio)
+			bh->b_bdev = map.m_bdev;
+	}
+	return err;
+}
+
+static int get_data_block_dio_write(struct inode *inode, sector_t iblock,
+			struct buffer_head *bh_result, int create)
+{
+	return __get_data_block(inode, iblock, bh_result, create,
+				F2FS_GET_BLOCK_DIO, NULL,
+				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
+				true);
+}
+
+static int get_data_block_dio(struct inode *inode, sector_t iblock,
+			struct buffer_head *bh_result, int create)
+{
+	return __get_data_block(inode, iblock, bh_result, create,
+				F2FS_GET_BLOCK_DIO, NULL,
+				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
+				false);
+}
+
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 static int f2fs_xattr_fiemap(struct inode *inode,
 				struct fiemap_extent_info *fieinfo)
 {
@@ -2759,10 +2806,15 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
 		.old_blkaddr = NULL_ADDR,
 		.page = page,
 		.encrypted_page = NULL,
-		.submitted = false,
+		.submitted = 0,
 		.compr_blocks = compr_blocks,
+<<<<<<< HEAD   (70e1a7 Revert "regmap: Add bulk read/write callbacks into regmap_co)
 		.need_lock = LOCK_RETRY,
 		.post_read = f2fs_post_read_required(inode),
+=======
+		.need_lock = compr_blocks ? LOCK_DONE : LOCK_RETRY,
+		.post_read = f2fs_post_read_required(inode) ? 1 : 0,
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 		.io_type = io_type,
 		.io_wbc = wbc,
 		.bio = bio,
@@ -2841,6 +2893,7 @@ write:
 	if (err == -EAGAIN) {
 		err = f2fs_do_write_data_page(&fio);
 		if (err == -EAGAIN) {
+			f2fs_bug_on(sbi, compr_blocks);
 			fio.need_lock = LOCK_REQ;
 			err = f2fs_do_write_data_page(&fio);
 		}
@@ -2885,7 +2938,7 @@ out:
 	}
 
 	if (submitted)
-		*submitted = fio.submitted ? 1 : 0;
+		*submitted = fio.submitted;
 
 	return 0;
 

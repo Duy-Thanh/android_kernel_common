@@ -290,7 +290,48 @@ static void __complete_revoke_list(struct inode *inode, struct list_head *head,
 		f2fs_do_truncate_blocks(inode, start_index * PAGE_SIZE, false);
 }
 
+<<<<<<< HEAD   (70e1a7 Revert "regmap: Add bulk read/write callbacks into regmap_co)
 static int __f2fs_commit_atomic_write(struct inode *inode)
+=======
+void f2fs_drop_inmem_pages_all(struct f2fs_sb_info *sbi, bool gc_failure)
+{
+	struct list_head *head = &sbi->inode_list[ATOMIC_FILE];
+	struct inode *inode;
+	struct f2fs_inode_info *fi;
+	unsigned int count = sbi->atomic_files;
+	unsigned int looped = 0;
+next:
+	spin_lock(&sbi->inode_lock[ATOMIC_FILE]);
+	if (list_empty(head)) {
+		spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
+		return;
+	}
+	fi = list_first_entry(head, struct f2fs_inode_info, inmem_ilist);
+	inode = igrab(&fi->vfs_inode);
+	if (inode)
+		list_move_tail(&fi->inmem_ilist, head);
+	spin_unlock(&sbi->inode_lock[ATOMIC_FILE]);
+
+	if (inode) {
+		if (gc_failure) {
+			if (!fi->i_gc_failures[GC_FAILURE_ATOMIC])
+				goto skip;
+		}
+		set_inode_flag(inode, FI_ATOMIC_REVOKE_REQUEST);
+		f2fs_drop_inmem_pages(inode);
+skip:
+		iput(inode);
+	}
+	f2fs_io_schedule_timeout(DEFAULT_IO_TIMEOUT);
+	if (gc_failure) {
+		if (++looped >= count)
+			return;
+	}
+	goto next;
+}
+
+void f2fs_drop_inmem_pages(struct inode *inode)
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct f2fs_inode_info *fi = F2FS_I(inode);
@@ -3461,10 +3502,10 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
 		struct f2fs_bio_info *io;
 
 		if (F2FS_IO_ALIGNED(sbi))
-			fio->retry = false;
+			fio->retry = 0;
 
 		INIT_LIST_HEAD(&fio->list);
-		fio->in_list = true;
+		fio->in_list = 1;
 		io = sbi->write_io[fio->type] + fio->temp;
 		spin_lock(&io->io_lock);
 		list_add_tail(&fio->list, &io->io_list);
@@ -3542,7 +3583,11 @@ reallocate:
 	}
 
 	f2fs_update_device_state(fio->sbi, fio->ino, fio->new_blkaddr, 1);
+<<<<<<< HEAD   (70e1a7 Revert "regmap: Add bulk read/write callbacks into regmap_co)
 out:
+=======
+
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 	if (keep_order)
 		f2fs_up_read(&fio->sbi->io_order_lock);
 }
@@ -3560,7 +3605,7 @@ void f2fs_do_write_meta_page(struct f2fs_sb_info *sbi, struct page *page,
 		.new_blkaddr = page->index,
 		.page = page,
 		.encrypted_page = NULL,
-		.in_list = false,
+		.in_list = 0,
 	};
 
 	if (unlikely(page->index >= MAIN_BLKADDR(sbi)))
