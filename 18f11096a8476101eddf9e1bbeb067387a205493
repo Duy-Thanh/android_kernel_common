@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2acd2f24_da99c7df",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5640,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8578852_1e5bff51",
+      "range": {
+        "startLine": 5640,
+        "startChar": 68,
+        "endLine": 5640,
+        "endChar": 73
+      },
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ec61f61_df05bbf5",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "That\u0027s a good idea!\n\nI\u0027ll add logic for pid-based flags to override the default global one.",
       "parentUuid": "6ec61f61_df05bbf5",
+      "range": {
+        "startLine": 5642,
+        "startChar": 40,
+        "endLine": 5642,
+        "endChar": 47
+      },
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f3f6b2_285b9606",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5642,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "The ioctl now takes a new parameter pid to override the global flags.",
+      "parentUuid": "5ed33a59_7b3d45b5",
       "range": {
         "startLine": 5642,
         "startChar": 40,
@@ -218,6 +266,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c459112d_b979fe81",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5647,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2236264_181e29e5",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80de2f2a_e6c34ddc",
@@ -289,6 +355,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ee6d29_38b573fa",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5648,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "958da4a7_69b10895",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3938aee3_d1218ef8",
@@ -320,6 +404,24 @@
       "side": 1,
       "message": "Will add them for each function.",
       "parentUuid": "3938aee3_d1218ef8",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fae08f09_d308af4a",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcced4c5_7e045ad9",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -394,6 +496,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "959f957d_d648bbb5",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed9e36b_72489dbd",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "121b6d36_f130837d",
@@ -425,6 +545,24 @@
       "side": 1,
       "message": "Yes, I should add __init.",
       "parentUuid": "121b6d36_f130837d",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "227a59d7_a05ea414",
+        "filename": "drivers/android/binder_genl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "579de60c_e4d78d08",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -484,6 +622,30 @@
       "side": 1,
       "message": "Good catch! I\u0027ll move them.",
       "parentUuid": "37d2ee5b_d9e2003e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4096f668_f9a6e3d6",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c570988_8450c04e",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -567,6 +729,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a9855ef_8790d7cd",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fc1b0cb_6fe278f3",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b561aa4_807a31f9",
@@ -616,6 +796,24 @@
       "side": 1,
       "message": "Will add the doc and comments accordingly. Thx",
       "parentUuid": "5b561aa4_807a31f9",
+      "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb676d3_828622ac",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-08-12T19:07:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fbe2b5d_109f83a2",
       "revId": "18f11096a8476101eddf9e1bbeb067387a205493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
