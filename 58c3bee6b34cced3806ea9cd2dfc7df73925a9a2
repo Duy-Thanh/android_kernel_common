@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86997b0c_6c759df0",
+        "filename": "drivers/scsi/scsi_lib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-08-13T10:08:57Z",
+      "side": 1,
+      "message": "includes should certainly not be at this point anymore.",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 29
+      },
+      "revId": "58c3bee6b34cced3806ea9cd2dfc7df73925a9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cebaf4e_1b07927c",
+        "filename": "drivers/scsi/scsi_lib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-08-13T10:08:57Z",
+      "side": 1,
+      "message": "This is basically a way to replace the entire function. Please consider reducing the impact of this vendor hook. In particular, you will not be benefitting from (security) fixes in this code that your version of the same function does not receive.",
+      "revId": "58c3bee6b34cced3806ea9cd2dfc7df73925a9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adb737f5_6b5e98e7",
+        "filename": "include/trace/hooks/scsi.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-08-13T10:08:57Z",
+      "side": 1,
+      "message": "```\nWARNING:UNSPECIFIED_INT: Prefer \u0027unsigned int\u0027 to bare use of \u0027unsigned\u0027\n#89: FILE: include/trace/hooks/scsi.h:18:\n```",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8229038f_64813b93",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/scsi.h",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "\t\t unsigned int bufflen, unsigned char *sense,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "58c3bee6b34cced3806ea9cd2dfc7df73925a9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
