@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db4859d9_ac49a110",
+        "filename": "drivers/scsi/scsi_lib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-08-13T12:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86997b0c_6c759df0",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 29
+      },
+      "revId": "58c3bee6b34cced3806ea9cd2dfc7df73925a9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cebaf4e_1b07927c",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-08-13T10:08:57Z",
       "side": 1,
       "message": "This is basically a way to replace the entire function. Please consider reducing the impact of this vendor hook. In particular, you will not be benefitting from (security) fixes in this code that your version of the same function does not receive.",
+      "revId": "58c3bee6b34cced3806ea9cd2dfc7df73925a9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db1b780_75836753",
+        "filename": "drivers/scsi/scsi_lib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-08-13T12:36:51Z",
+      "side": 1,
+      "message": "Thank you for your suggestion. We will pay attention to and regularly check the upstream security patches internally.",
+      "parentUuid": "3cebaf4e_1b07927c",
       "revId": "58c3bee6b34cced3806ea9cd2dfc7df73925a9a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -78,6 +120,30 @@
           ]
         }
       ],
+      "revId": "58c3bee6b34cced3806ea9cd2dfc7df73925a9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3ac5a5e_03b5dd23",
+        "filename": "include/trace/hooks/scsi.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-08-13T12:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adb737f5_6b5e98e7",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 42
+      },
       "revId": "58c3bee6b34cced3806ea9cd2dfc7df73925a9a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
