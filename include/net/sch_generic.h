@@ -127,9 +127,13 @@ struct Qdisc {
 
 	struct rcu_head		rcu;
 	netdevice_tracker	dev_tracker;
+<<<<<<< HEAD   (3eb25a Merge 6.1.95 into android14-6.1-lts)
 
 	ANDROID_KABI_RESERVE(1);
 
+=======
+	struct lock_class_key	root_lock_key;
+>>>>>>> BRANCH (99e6a6 Linux 6.1.96)
 	/* private data */
 	long privdata[] ____cacheline_aligned;
 };
