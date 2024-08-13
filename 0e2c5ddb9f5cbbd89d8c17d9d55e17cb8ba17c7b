@@ -123,6 +123,24 @@
       "parentUuid": "66920649_5e822134",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10cbe18a_5504f73a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-08-13T17:41:54Z",
+      "side": 1,
+      "message": "A few additional questions:\n* Why does the tag allocation matter? I am not aware of any upstream block driver for which the tag allocation matters.\n* Please provide more information about the kind of I/O scheduling that has to be done and please explain why the I/O scheduling code has not been implemented as a block layer I/O scheduler.\n* Why have blk_execute_rq() and blk_execute_rq_nowait() been reimplemented?\n* Please provide more information about the \"collection and addition of different IO information\". What kind of additional I/O information is this about? Is the collected I/O information relevant for I/O scheduling or not? In the latter case, has the ftrace mechanism been considered?",
+      "parentUuid": "e2c29786_a0d84702",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
