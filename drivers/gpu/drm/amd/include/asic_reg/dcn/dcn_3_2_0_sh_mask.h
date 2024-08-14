@@ -11549,6 +11549,9 @@
 #define CM0_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_WRITE_EN__SHIFT                                                0x8
 #define CM0_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_INDEX_MASK                                                     0x000000FFL
 #define CM0_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_WRITE_EN_MASK                                                  0x00000100L
+//CM0_CM_TEST_DEBUG_DATA
+#define CM0_CM_TEST_DEBUG_DATA__CM_TEST_DEBUG_DATA__SHIFT                                                     0x0
+#define CM0_CM_TEST_DEBUG_DATA__CM_TEST_DEBUG_DATA_MASK                                                       0xFFFFFFFFL
 
 
 // addressBlock: dcn_dc_dpp0_dispdec_dpp_top_dispdec
@@ -12683,6 +12686,14 @@
 #define CM1_CM_COEF_FORMAT__CM_BIAS_FORMAT_MASK                                                               0x00000001L
 #define CM1_CM_COEF_FORMAT__CM_POST_CSC_COEF_FORMAT_MASK                                                      0x00000010L
 #define CM1_CM_COEF_FORMAT__CM_GAMUT_REMAP_COEF_FORMAT_MASK                                                   0x00000100L
+//CM1_CM_TEST_DEBUG_INDEX
+#define CM1_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_INDEX__SHIFT                                                   0x0
+#define CM1_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_WRITE_EN__SHIFT                                                0x8
+#define CM1_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_INDEX_MASK                                                     0x000000FFL
+#define CM1_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_WRITE_EN_MASK                                                  0x00000100L
+//CM1_CM_TEST_DEBUG_DATA
+#define CM1_CM_TEST_DEBUG_DATA__CM_TEST_DEBUG_DATA__SHIFT                                                     0x0
+#define CM1_CM_TEST_DEBUG_DATA__CM_TEST_DEBUG_DATA_MASK                                                       0xFFFFFFFFL
 
 
 // addressBlock: dcn_dc_dpp1_dispdec_dpp_top_dispdec
@@ -13817,6 +13828,14 @@
 #define CM2_CM_COEF_FORMAT__CM_BIAS_FORMAT_MASK                                                               0x00000001L
 #define CM2_CM_COEF_FORMAT__CM_POST_CSC_COEF_FORMAT_MASK                                                      0x00000010L
 #define CM2_CM_COEF_FORMAT__CM_GAMUT_REMAP_COEF_FORMAT_MASK                                                   0x00000100L
+//CM2_CM_TEST_DEBUG_INDEX
+#define CM2_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_INDEX__SHIFT                                                   0x0
+#define CM2_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_WRITE_EN__SHIFT                                                0x8
+#define CM2_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_INDEX_MASK                                                     0x000000FFL
+#define CM2_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_WRITE_EN_MASK                                                  0x00000100L
+//CM2_CM_TEST_DEBUG_DATA
+#define CM2_CM_TEST_DEBUG_DATA__CM_TEST_DEBUG_DATA__SHIFT                                                     0x0
+#define CM2_CM_TEST_DEBUG_DATA__CM_TEST_DEBUG_DATA_MASK                                                       0xFFFFFFFFL
 
 
 // addressBlock: dcn_dc_dpp2_dispdec_dpp_top_dispdec
@@ -14951,6 +14970,14 @@
 #define CM3_CM_COEF_FORMAT__CM_BIAS_FORMAT_MASK                                                               0x00000001L
 #define CM3_CM_COEF_FORMAT__CM_POST_CSC_COEF_FORMAT_MASK                                                      0x00000010L
 #define CM3_CM_COEF_FORMAT__CM_GAMUT_REMAP_COEF_FORMAT_MASK                                                   0x00000100L
+//CM3_CM_TEST_DEBUG_INDEX
+#define CM3_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_INDEX__SHIFT                                                   0x0
+#define CM3_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_WRITE_EN__SHIFT                                                0x8
+#define CM3_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_INDEX_MASK                                                     0x000000FFL
+#define CM3_CM_TEST_DEBUG_INDEX__CM_TEST_DEBUG_WRITE_EN_MASK                                                  0x00000100L
+//CM3_CM_TEST_DEBUG_DATA
+#define CM3_CM_TEST_DEBUG_DATA__CM_TEST_DEBUG_DATA__SHIFT                                                     0x0
+#define CM3_CM_TEST_DEBUG_DATA__CM_TEST_DEBUG_DATA_MASK                                                       0xFFFFFFFFL
 
 
 // addressBlock: dcn_dc_dpp3_dispdec_dpp_top_dispdec
@@ -42328,6 +42355,7 @@
 //DSC_TOP0_DSC_DEBUG_CONTROL
 #define DSC_TOP0_DSC_DEBUG_CONTROL__DSC_DBG_EN__SHIFT                                                         0x0
 #define DSC_TOP0_DSC_DEBUG_CONTROL__DSC_DBG_EN_MASK                                                           0x00000001L
+#define DSC_TOP0_DSC_DEBUG_CONTROL__DSC_TEST_CLOCK_MUX_SEL_MASK                                               0x00000070L
 
 
 // addressBlock: dcn_dc_dsc1_dispdec_dscc_dispdec
