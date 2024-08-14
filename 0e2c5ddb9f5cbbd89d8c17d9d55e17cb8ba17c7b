@@ -195,6 +195,42 @@
       "parentUuid": "07f49a1a_f14ffd74",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b92ea0_c6dc375e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-08-14T02:16:40Z",
+      "side": 1,
+      "message": "This background is that different users have different needs for their phones. In order to make the product more competitive, we need the ability to customize. The current ACK kernel cannot be changed flexibly, so we are applying for a hook to solve the current problem. Thanks~",
+      "parentUuid": "689910b3_07e1a0e9",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11609ae5_9f1306d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-08-14T02:16:40Z",
+      "side": 1,
+      "message": "The background here is that different users have varying needs for their smartphones. To enhance the product\u0027s competitiveness, we need the capability to customize. Since the current ACK kernel cannot be altered flexibly, we hope to apply for a hook to address the current issue. Thanks~",
+      "parentUuid": "689910b3_07e1a0e9",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
