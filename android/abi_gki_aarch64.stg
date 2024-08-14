@@ -343531,6 +343531,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_madvise_pageout_end"
 }
 elf_symbol {
+  id: 0xc5bd3dc9
+  name: "__traceiter_android_rvh_mapping_shrinkable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xda0f55f8
+  type_id: 0x9be885da
+  full_name: "__traceiter_android_rvh_mapping_shrinkable"
+}
+elf_symbol {
   id: 0xed2646da
   name: "__traceiter_android_rvh_meminfo_proc_show"
   is_defined: true
@@ -348074,6 +348083,15 @@ elf_symbol {
   crc: 0xcec8d47b
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_madvise_pageout_end"
+}
+elf_symbol {
+  id: 0x3147c5df
+  name: "__tracepoint_android_rvh_mapping_shrinkable"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x5cf7d2fd
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_mapping_shrinkable"
 }
 elf_symbol {
   id: 0x2252c1f0
@@ -412476,6 +412494,7 @@ interface {
   symbol_id: 0x7c212080
   symbol_id: 0xc6985675
   symbol_id: 0x15c6d0dd
+  symbol_id: 0xc5bd3dc9
   symbol_id: 0xed2646da
   symbol_id: 0x1ea5d323
   symbol_id: 0xc1a482d8
@@ -412981,6 +413000,7 @@ interface {
   symbol_id: 0x99d57c12
   symbol_id: 0xf35a6597
   symbol_id: 0xa667d2d3
+  symbol_id: 0x3147c5df
   symbol_id: 0x2252c1f0
   symbol_id: 0x3cb4db49
   symbol_id: 0x3a6f3fb2
