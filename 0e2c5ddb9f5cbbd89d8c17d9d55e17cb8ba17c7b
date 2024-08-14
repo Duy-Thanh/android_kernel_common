@@ -249,6 +249,24 @@
       "parentUuid": "63b92ea0_c6dc375e",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eabf4ec_8f316af5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-08-14T13:48:16Z",
+      "side": 1,
+      "message": "As mentioned earlier, I think that changes like this change fall outside the scope of ACK kernel CLs. The approach described above is not supported by the upstream kernel and hence should go upstream first if this approach should ever be supported in an Android kernel.\n\nHas it been considered to implement an entirely new block driver that replaces the SCSI core and the SCSI LLD that you are working on? If this approach would be followed this CL would not be necessary because all requests would go straight from the block layer core to the new block driver and would never pass through __scsi_execute(). As you may know the blk-mq core supports two kinds of block drivers:\n* Request-based. This is the most common type of block driver. These implement the .queue_rq() method. These block drivers support attaching an I/O scheduler. The SCSI core is an example of a request-based block driver.\n* Bio-based. These block drivers implement the .submit_bio() method and do not support attaching an I/O scheduler. DM_TYPE_BIO_BASED device mapper (dm) drivers fall in this category.",
+      "parentUuid": "d565638d_ea973b1b",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
