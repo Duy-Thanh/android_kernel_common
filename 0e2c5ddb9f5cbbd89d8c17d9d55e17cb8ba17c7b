@@ -177,6 +177,24 @@
       "parentUuid": "07f49a1a_f14ffd74",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689910b3_07e1a0e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-08-14T01:42:45Z",
+      "side": 1,
+      "message": "The above sounds like a deep change to me and hence something that falls outside the scope of ACK kernel customizations.",
+      "parentUuid": "07f49a1a_f14ffd74",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
