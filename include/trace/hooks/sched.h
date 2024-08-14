@@ -476,6 +476,29 @@ DECLARE_HOOK(android_vh_prio_restore,
 	TP_PROTO(int saved_prio),
 	TP_ARGS(saved_prio));
 
+DECLARE_HOOK(android_vh_check_vip_status,
+	TP_PROTO(int cur_pid, int cur_tgid, struct task_struct* task, int* ret),
+	TP_ARGS(cur_pid, cur_tgid, task, ret));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_walt_task_util,
+TP_PROTO(struct task_struct* p, unsigned long* ret),
+TP_ARGS(p, ret), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_walt_uclamp_task_util,
+TP_PROTO(struct task_struct* p, unsigned long* ret),
+TP_ARGS(p, ret), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_get_task_tags,
+TP_PROTO(struct task_struct* p, unsigned long long* ret),
+TP_ARGS(p, ret), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_get_task_rsum,
+TP_PROTO(struct task_struct* p, unsigned long long* ret),
+TP_ARGS(p, ret), 1);
+
+DECLARE_HOOK(android_rvh_check_task_tags,
+	TP_PROTO(struct task_struct *p, int *ret),
+	TP_ARGS(p, ret));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */

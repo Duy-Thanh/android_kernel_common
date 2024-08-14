@@ -12,6 +12,7 @@
 struct ufs_hba;
 struct request;
 struct ufshcd_lrb;
+struct scsi_device;
 
 DECLARE_HOOK(android_vh_ufs_fill_prdt,
 	TP_PROTO(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
@@ -95,6 +96,15 @@ DECLARE_HOOK(android_vh_ufs_err_check_ctrl,
 	TP_PROTO(struct ufs_hba *hba,
 		 bool *err_check),
 	TP_ARGS(hba, err_check));
+
+DECLARE_HOOK(android_vh_ufs_clock_scaling,
+		TP_PROTO(struct ufs_hba *hba, bool *force_out, bool *force_scaling, bool *scale_up),
+		TP_ARGS(hba, force_out, force_scaling, scale_up));
+
+
+DECLARE_HOOK(android_vh_ufs_dsm,
+		TP_PROTO(struct ufs_hba *hba, unsigned long code, char *err_msg),
+		TP_ARGS(hba, code, err_msg));
 
 #endif /* _TRACE_HOOK_UFSHCD_H */
 /* This part must be outside protection */

@@ -29,6 +29,7 @@ struct msghdr;
 struct sk_buff;
 struct sockaddr_in6;
 struct net_device;
+struct cfg80211_registered_device;
 DECLARE_RESTRICTED_HOOK(android_rvh_tcp_sendmsg,
 	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len),
 	TP_ARGS(sk, msg, len), 1);
@@ -85,6 +86,32 @@ DECLARE_HOOK(android_vh_udp_v6_connect,
 	TP_PROTO(struct sock *sk, struct sockaddr_in6 *sin6), TP_ARGS(sk, sin6));
 DECLARE_HOOK(android_vh_tcp_rtt_estimator,
 	TP_PROTO(struct sock *sk, long mrtt_us), TP_ARGS(sk, mrtt_us));
+DECLARE_HOOK(android_vh_tcp_rcv_established_fast_path,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_rcv_established_slow_path,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+struct tcp_sock;
+DECLARE_HOOK(android_vh_inet_create,
+	TP_PROTO(struct sock *sk, bool err), TP_ARGS(sk, err));
+DECLARE_HOOK(android_vh_uplink_send_msg,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_sock_create,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_set_wifi_state_connect,
+	TP_PROTO(const char *name, struct cfg80211_registered_device *rdev, struct net_device *dev, u8 *mac_addr),
+	TP_ARGS(name, rdev, dev, mac_addr));
+DECLARE_HOOK(android_vh_set_wifi_state_disconnect,
+	TP_PROTO(const char *name), TP_ARGS(name));
+DECLARE_HOOK(android_vh_tcp_rcv_rtt_update,
+	TP_PROTO(struct tcp_sock *tp, u32 sample, int win_dep), TP_ARGS(tp, sample, win_dep));
+DECLARE_HOOK(android_vh_tcp_retransmit_timer,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_udp_unicast_rcv_skb,
+	TP_PROTO(struct sk_buff *skb, struct sock *sk),
+	TP_ARGS(skb, sk));
+DECLARE_HOOK(android_vh_udp6_unicast_rcv_skb,
+	TP_PROTO(struct sk_buff *skb, struct sock *sk),
+	TP_ARGS(skb, sk));
 DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,
 	TP_PROTO(struct sock *sk, struct sk_buff *skb), TP_ARGS(sk, skb));
 DECLARE_HOOK(android_vh_build_skb_around,
@@ -108,6 +135,8 @@ DECLARE_HOOK(android_vh_tcp_clean_rtx_queue,
 struct inet_connection_sock;
 DECLARE_HOOK(android_vh_tcp_rcv_synack,
 	TP_PROTO(struct inet_connection_sock *icsk), TP_ARGS(icsk));
+DECLARE_HOOK(android_vh_tcp_srtt_estimator,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
