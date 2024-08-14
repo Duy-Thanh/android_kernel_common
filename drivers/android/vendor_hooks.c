@@ -192,8 +192,37 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_shmem_get_folio);
+<<<<<<< HEAD   (c9b7229bcf24e43094f0398ee505f2e717f6f327 FROMGIT: ASoC: Intel: sof_rt5682: add tas2563 speaker amp su)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_lazyfree_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
+||||||| BASE   (efbd2ffaf07a196a00f8dabfa514969741e2a4b4 ANDROID: GKI: export some I/O tracepoints)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_folio_alloced);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_large_alloced);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ctl_dirty_rate);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watchdog_timer_softlockup);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo_unfrozen);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_die_kernel_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_finish);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_folio_alloced);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_large_alloced);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ctl_dirty_rate);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watchdog_timer_softlockup);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo_unfrozen);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_die_kernel_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uplink_send_msg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inet_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sock_create);
+>>>>>>> CHANGE (1352e5b946c74c8e367f525811021fd2400ba65b ANDROID: GKI: Add hooks for socket management.)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_v4_connect);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_v6_connect);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_v4_connect);
