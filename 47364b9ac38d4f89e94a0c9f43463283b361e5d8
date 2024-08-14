@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab04fa54_46e9ebe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-14T17:56:24Z",
+      "side": 1,
+      "message": "This patch enables WiFi-BT on SM8550-HDK device used in LKFT.",
+      "revId": "47364b9ac38d4f89e94a0c9f43463283b361e5d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
