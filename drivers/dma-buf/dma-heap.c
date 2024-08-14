@@ -52,7 +52,13 @@ static dev_t dma_heap_devt;
 static struct class *dma_heap_class;
 static DEFINE_XARRAY_ALLOC(dma_heap_minors);
 
+<<<<<<< HEAD   (9887a6 Merge 221fd1e154ee ("Merge tag 'for-linus-6.11-1' of https:/)
 struct dma_heap *dma_heap_find(const char *name)
+=======
+static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+				 u32 fd_flags,
+				 u64 heap_flags)
+>>>>>>> BRANCH (91bd00 Merge tag 'probes-v6.11' of git://git.kernel.org/pub/scm/lin)
 {
 	struct dma_heap *h;
 

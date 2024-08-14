@@ -386,11 +386,18 @@ static struct page *alloc_largest_available(unsigned long size,
 	return NULL;
 }
 
+<<<<<<< HEAD   (9887a6 Merge 221fd1e154ee ("Merge tag 'for-linus-6.11-1' of https:/)
 static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 					       unsigned long len,
 					       unsigned long fd_flags,
 					       unsigned long heap_flags,
 					       bool uncached)
+=======
+static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+					    unsigned long len,
+					    u32 fd_flags,
+					    u64 heap_flags)
+>>>>>>> BRANCH (91bd00 Merge tag 'probes-v6.11' of git://git.kernel.org/pub/scm/lin)
 {
 	struct system_heap_buffer *buffer;
 	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
