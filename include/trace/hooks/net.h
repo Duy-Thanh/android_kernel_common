@@ -36,6 +36,46 @@ DECLARE_HOOK(android_vh_udp_v4_connect,
 	TP_ARGS(sk, daddr, dport, family));
 DECLARE_HOOK(android_vh_udp_v6_connect,
 	TP_PROTO(struct sock *sk, struct sockaddr_in6 *sin6), TP_ARGS(sk, sin6));
+<<<<<<< HEAD   (c9b7229bcf24e43094f0398ee505f2e717f6f327 FROMGIT: ASoC: Intel: sof_rt5682: add tas2563 speaker amp su)
+||||||| BASE   (efbd2ffaf07a196a00f8dabfa514969741e2a4b4 ANDROID: GKI: export some I/O tracepoints)
+DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_connect,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+DECLARE_HOOK(android_vh_sk_clone_lock,
+	TP_PROTO(struct sock *nsk), TP_ARGS(nsk));
+struct request_sock;
+DECLARE_HOOK(android_vh_inet_csk_clone_lock,
+	TP_PROTO(struct sock *newsk, const struct request_sock *req), TP_ARGS(newsk, req));
+DECLARE_HOOK(android_vh_tcp_clean_rtx_queue,
+	TP_PROTO(struct sock *sk, int flag, long seq_rtt_us),
+	TP_ARGS(sk, flag, seq_rtt_us));
+struct inet_connection_sock;
+DECLARE_HOOK(android_vh_tcp_rcv_synack,
+	TP_PROTO(struct inet_connection_sock *icsk), TP_ARGS(icsk));
+=======
+DECLARE_HOOK(android_vh_inet_create,
+	TP_PROTO(struct sock *sk, bool err), TP_ARGS(sk, err));
+DECLARE_HOOK(android_vh_uplink_send_msg,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_sock_create,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_connect,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+DECLARE_HOOK(android_vh_sk_clone_lock,
+	TP_PROTO(struct sock *nsk), TP_ARGS(nsk));
+struct request_sock;
+DECLARE_HOOK(android_vh_inet_csk_clone_lock,
+	TP_PROTO(struct sock *newsk, const struct request_sock *req), TP_ARGS(newsk, req));
+DECLARE_HOOK(android_vh_tcp_clean_rtx_queue,
+	TP_PROTO(struct sock *sk, int flag, long seq_rtt_us),
+	TP_ARGS(sk, flag, seq_rtt_us));
+struct inet_connection_sock;
+DECLARE_HOOK(android_vh_tcp_rcv_synack,
+	TP_PROTO(struct inet_connection_sock *icsk), TP_ARGS(icsk));
+>>>>>>> CHANGE (1352e5b946c74c8e367f525811021fd2400ba65b ANDROID: GKI: Add hooks for socket management.)
 DECLARE_HOOK(android_vh_udp_unicast_rcv_skb,
 	TP_PROTO(struct sk_buff *skb, struct sock *sk),
 	TP_ARGS(skb, sk));
