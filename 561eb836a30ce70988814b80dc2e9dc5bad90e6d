@@ -22,6 +22,30 @@
       },
       "revId": "561eb836a30ce70988814b80dc2e9dc5bad90e6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61683018_8cd43d0e",
+        "filename": "net/xfrm/xfrm_state.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2381,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-08-14T19:45:55Z",
+      "side": 1,
+      "message": "Originally I tried to fix this by enabling CONFIG_XFRM_USER_COMPAT in GKI (see https://android-review.git.corp.google.com/q/Icf7eda050151add2466dedbad1d0333bff188e87 for all the unsubmitted/abandoned changes) but after understanding the issue better, I moved to not enable this flag for ANDROID kernels. So I don\u0027t think the || vs \u0026\u0026 thing mattered in practice. As for why it even checks for ANDROID on an android fork of the kernel, that\u0027s just what we did back in those days (wrote patches with the intention of upstreaming) which is (once again) no longer a priority. IOW, I don\u0027t think this patch is wrong in the way it landed in the prior kernels with the options that were enabled in the .config. Feel free to revert it now you are ripping all this stuff out.",
+      "parentUuid": "42252ff9_c937a676",
+      "range": {
+        "startLine": 2381,
+        "startChar": 33,
+        "endLine": 2381,
+        "endChar": 35
+      },
+      "revId": "561eb836a30ce70988814b80dc2e9dc5bad90e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
