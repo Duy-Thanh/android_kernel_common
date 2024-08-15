@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "68af227b9573f25c25e17bdf11b93fae828ad1b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000088338865",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3221802?revision\u003d2",
+      "key": {
+        "uuid": "17c736a2_28f46a78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-15T19:31:30Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/3ed683cb941fc0a457159dbaf736eee40f82b840).\n\n```\n      ## arch/arm64/configs/db845c_gki.fragment ##\n    -@@\n    +@@ arch/arm64/configs/db845c_gki.fragment: CONFIG_MAC80211\u003dm\n      CONFIG_QRTR\u003dm\n      CONFIG_QRTR_TUN\u003dm\n      CONFIG_SCSI_UFS_QCOM\u003dm\n    +-CONFIG_USB_NET_AX8817X\u003dm\n     -CONFIG_USB_NET_AX88179_178A\u003dm\n      CONFIG_INPUT_PM8941_PWRKEY\u003dm\n      CONFIG_SERIAL_MSM\u003dm\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "68af227b9573f25c25e17bdf11b93fae828ad1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
