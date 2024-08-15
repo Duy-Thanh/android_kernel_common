@@ -303,6 +303,24 @@
       "parentUuid": "3927f199_486aaaff",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3524e2b_4458ac5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-08-15T17:05:54Z",
+      "side": 1,
+      "message": "Regarding (1), I will leave it to the ACK team to decide whether or not to accept this CL as an interim solution. It seems unlikely to me that any hooks in __scsi_execute() will ever be accepted upstream.\n\nRegarding (2), no user space code should use any /dev/block/sdX path directly. User space code should use the soft links that are available under `/dev/block/by-name`, e.g. `/dev/block/by-name/userdata`. I just checked the Android platform code and I have not found any references to /dev/block/sdX paths in the Android platform code. I could only find such references in comments in the device/google/ directory.",
+      "parentUuid": "323c0182_9146c200",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
