@@ -610,8 +610,11 @@ static int f2fs_file_open(struct inode *inode, struct file *filp)
 	filp->f_mode |= FMODE_NOWAIT | FMODE_BUF_RASYNC;
 	filp->f_mode |= FMODE_CAN_ODIRECT;
 
+<<<<<<< HEAD   (934084 Merge branch 'android15-6.6' into android15-6.6-lts)
 	trace_android_vh_f2fs_file_open(inode, filp);
 
+=======
+>>>>>>> BRANCH (721391 Linux 6.6.44)
 	err = dquot_file_open(inode, filp);
 	if (err)
 		return err;
