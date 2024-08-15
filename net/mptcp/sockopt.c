@@ -1538,6 +1538,13 @@ int mptcp_set_rcvlowat(struct sock *sk, int val)
 	struct mptcp_subflow_context *subflow;
 	int space, cap;
 
+<<<<<<< HEAD   (734ce1 Merge 6.6.44 into android15-6.6-lts)
+=======
+	/* bpf can land here with a wrong sk type */
+	if (sk->sk_protocol == IPPROTO_TCP)
+		return -EINVAL;
+
+>>>>>>> BRANCH (878fbf Linux 6.6.45)
 	if (sk->sk_userlocks & SOCK_RCVBUF_LOCK)
 		cap = sk->sk_rcvbuf >> 1;
 	else
