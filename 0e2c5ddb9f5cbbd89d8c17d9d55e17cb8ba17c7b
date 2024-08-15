@@ -321,6 +321,24 @@
       "parentUuid": "323c0182_9146c200",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f72bc66_3b790d71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-08-15T22:18:25Z",
+      "side": 1,
+      "message": "\u003e These modifications are closely tied to the vendor, and we hope to implement them temporarily through hooking. After a period of trial and optimization, we will consider submitting them to the mainline.\n\nACK shouldn\u0027t be used for trial and error use case. Please send your patch upstream.\n\nAlso, as Bart alluded, why is there a need in userspace to access /dev/sdX paths ? That sounds like a layering violation altogether.",
+      "parentUuid": "b3524e2b_4458ac5a",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
