@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81b5ced_81203638",
+        "filename": "include/trace/hooks/wqlockup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-15T16:56:21Z",
+      "side": 0,
+      "message": "Since KMI is frozen, we need to suppress the CRC change for this interface. So please enclose this in `#ifndef __GENKSYMS__`:\n```\n#ifndef __GENKSYMS__\nDECLARE_RESTRICTED_HOOK(android_rvh_alloc_and_link_pwqs,\n\tTP_PROTO(struct workqueue_struct *wq, int *ret, bool *skip),\n\tTP_ARGS(wq, ret, skip), 1);\n#else\nDECLARE_HOOK(android_rvh_alloc_and_link_pwqs,\n\tTP_PROTO(struct workqueue_struct *wq, int *ret, bool *skip),\n\tTP_ARGS(wq, ret, skip));\n#endif\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "fc5f3ba5_cd459861",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/wqlockup.h",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "#ifndef __GENKSYMS__\n"
+            },
+            {
+              "path": "include/trace/hooks/wqlockup.h",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 20,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "73f080ec349005adeea721f616e303e53bc6147d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
