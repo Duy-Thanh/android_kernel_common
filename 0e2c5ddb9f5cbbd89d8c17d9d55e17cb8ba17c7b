@@ -267,6 +267,24 @@
       "parentUuid": "d565638d_ea973b1b",
       "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3927f199_486aaaff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-08-15T01:56:52Z",
+      "side": 1,
+      "message": "1. These modifications are closely tied to the vendor, and we hope to implement them temporarily through hooking. After a period of trial and optimization, we will consider submitting them to the mainline.\n\n2. Yes, we have considered this. However, in the current Linux kernel, the device name registered by UFS is sdx, which is determined in scsi/sd.c. If we want to implement a brand new block driver, then the name cannot be sdx. But there are other modules in the entire system that will access through the name sdx. It would be a tremendous amount of work to change all the sdx references. Or, is it possible to hook sd_probe so that the device name remains sdx, but the specific process follows our custom sd_probe?\n\nThanks~",
+      "parentUuid": "1eabf4ec_8f316af5",
+      "revId": "0e2c5ddb9f5cbbd89d8c17d9d55e17cb8ba17c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
