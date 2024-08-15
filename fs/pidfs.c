@@ -113,7 +113,7 @@ static __poll_t pidfd_poll(struct file *file, struct poll_table_struct *pts)
 	task = pid_task(pid, PIDTYPE_PID);
 	if (!task)
 		poll_flags = EPOLLIN | EPOLLRDNORM | EPOLLHUP;
-	else if (task->exit_state && (thread || thread_group_empty(task)))
+	else if (READ_ONCE(task->exit_state) && (thread || thread_group_empty(task)))
 		poll_flags = EPOLLIN | EPOLLRDNORM;
 
 	return poll_flags;
