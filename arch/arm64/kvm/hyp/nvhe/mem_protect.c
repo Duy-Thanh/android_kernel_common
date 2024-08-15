@@ -22,6 +22,7 @@
 #include <nvhe/mm.h>
 #include <nvhe/modules.h>
 #include <nvhe/pkvm.h>
+#include <nvhe/ffa.h>
 
 #include "../debug-pl011.h"
 
@@ -1685,7 +1686,11 @@ static int __guest_initiate_page_transition(const struct pkvm_checked_mem_transi
 	offset = addr - ALIGN_DOWN(addr, kvm_granule_size(level));
 
 	phys = kvm_pte_to_phys(pte) + offset;
-	prot = pkvm_mkstate(kvm_pgtable_stage2_pte_prot(pte), state);
+	if (state == PKVM_PAGE_SHARED_OWNED)
+		prot = pkvm_mkstate_with_id(kvm_pgtable_stage2_pte_prot(pte), state,
+					    checked_tx->tx->completer.id);
+	else
+		prot = pkvm_mkstate(kvm_pgtable_stage2_pte_prot(pte), state);
 	return kvm_pgtable_stage2_map(&vm->pgt, addr, size, phys, prot, mc, 0);
 }
 
@@ -3009,6 +3014,7 @@ int __pkvm_host_reclaim_page(struct pkvm_hyp_vm *vm, u64 pfn, u64 ipa, u8 order)
 	size_t page_size = PAGE_SIZE << order;
 	kvm_pte_t pte;
 	int ret = 0;
+	enum pkvm_component_id borrower_id;
 
 	host_lock_component();
 	guest_lock_component(vm);
@@ -3016,9 +3022,6 @@ int __pkvm_host_reclaim_page(struct pkvm_hyp_vm *vm, u64 pfn, u64 ipa, u8 order)
 	ret = guest_get_valid_pte(vm, pfn, ipa, order, &pte);
 	if (ret)
 		goto unlock;
-
-	/* We could avoid TLB inval, it is done per VMID on the finalize path */
-	WARN_ON(kvm_pgtable_stage2_unmap(&vm->pgt, ipa, page_size));
 
 	switch((int)guest_get_page_state(pte, ipa)) {
 	case PKVM_PAGE_OWNED:
@@ -3031,12 +3034,30 @@ int __pkvm_host_reclaim_page(struct pkvm_hyp_vm *vm, u64 pfn, u64 ipa, u8 order)
 		WARN_ON(__host_check_page_state_range(phys, page_size, PKVM_PAGE_SHARED_OWNED));
 		break;
 	case PKVM_PAGE_SHARED_OWNED:
-		WARN_ON(__host_check_page_state_range(phys, page_size, PKVM_PAGE_SHARED_BORROWED));
+		borrower_id = FIELD_GET(PKVM_PAGE_BORROWED_MASK, pte);
+		if (borrower_id == PKVM_ID_HOST)
+			WARN_ON(__host_check_page_state_range(phys, page_size, PKVM_PAGE_SHARED_BORROWED));
+		else if (borrower_id == PKVM_ID_HYP) {
+			guest_unlock_component(vm);
+			host_unlock_component();
+			hyp_unpin_shared_mem(__hyp_va(phys), __hyp_va(phys) + 1);
+			host_lock_component();
+
+			WARN_ON(__pkvm_guest_unshare_hyp(vm->vcpus[0], ipa));
+			guest_lock_component(vm);
+		} else if (borrower_id == PKVM_ID_FFA) {
+			WARN_ON(kvm_guest_reclaim_dying_guest_pages(vm));
+		} else {
+			BUG_ON(1);
+		}
+
 		break;
 	default:
 		BUG_ON(1);
 	}
 
+	/* We could avoid TLB inval, it is done per VMID on the finalize path */
+	WARN_ON(kvm_pgtable_stage2_unmap(&vm->pgt, ipa, page_size));
 	WARN_ON(host_stage2_set_owner_locked(phys, page_size, PKVM_ID_HOST));
 
 unlock:

@@ -984,6 +984,38 @@ out_handled:
 	return true;
 }
 
+int kvm_guest_reclaim_dying_guest_pages(struct pkvm_hyp_vm *vm)
+{
+	int ret = 0;
+	struct pkvm_hyp_vcpu *hyp_vcpu = vm->vcpus[0];
+	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
+	unsigned int vm_handle = vm_handle_to_idx(vcpu->kvm->arch.pkvm.handle) + 1;
+	struct ffa_mem_transfer *transfer, *tmp;
+	struct arm_smccc_res res;
+
+	hyp_puts("[SHARED_WITH_FFA]");
+
+	hyp_spin_lock(&hyp_buffers.lock);
+	list_for_each_entry_safe(transfer, tmp, &endp_buffers[vm_handle].xfer_list, node) {
+		ffa_mem_reclaim(&res, HANDLE_LOW(transfer->ffa_handle),
+				      HANDLE_HIGH(transfer->ffa_handle), 0);
+		if (res.a0 != FFA_SUCCESS) {
+			hyp_puts("release memory error:");
+			hyp_putx64(res.a0); hyp_putx64(res.a2);
+			ret = 1;
+			continue;
+		}
+
+		hyp_puts("cleared the memory handle:"); hyp_putx64(transfer->ffa_handle);
+		list_del(&transfer->node);
+		hyp_free(transfer);
+	}
+
+	hyp_spin_unlock(&hyp_buffers.lock);
+
+	return ret;
+}
+
 bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 {
 	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;

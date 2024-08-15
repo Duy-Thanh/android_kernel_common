@@ -36,12 +36,29 @@ enum pkvm_page_state {
 #define PKVM_PAGE_META_STATES_MASK	(~(BIT(0) | BIT(1)))
 
 #define PKVM_PAGE_STATE_PROT_MASK	(KVM_PGTABLE_PROT_SW0 | KVM_PGTABLE_PROT_SW1)
+#define PKVM_PAGE_BORROWED_MASK		(KVM_PGTABLE_PROT_SW2 | KVM_PGTABLE_PROT_SW3)
+
 static inline enum kvm_pgtable_prot pkvm_mkstate(enum kvm_pgtable_prot prot,
 						 enum pkvm_page_state state)
 {
 	BUG_ON(state & PKVM_PAGE_META_STATES_MASK);
 	prot &= ~PKVM_PAGE_STATE_PROT_MASK;
 	prot |= FIELD_PREP(PKVM_PAGE_STATE_PROT_MASK, state);
+
+	return prot;
+}
+
+static inline enum kvm_pgtable_prot pkvm_mkstate_with_id(enum kvm_pgtable_prot prot,
+							 enum pkvm_page_state state,
+							 enum pkvm_component_id borrower_id)
+{
+	BUG_ON(state & PKVM_PAGE_META_STATES_MASK);
+	BUG_ON(borrower_id & PKVM_PAGE_META_STATES_MASK);
+
+	prot &= ~(PKVM_PAGE_STATE_PROT_MASK | PKVM_PAGE_BORROWED_MASK);
+	prot |= FIELD_PREP(PKVM_PAGE_STATE_PROT_MASK, state);
+	prot |= FIELD_PREP(PKVM_PAGE_BORROWED_MASK, borrower_id);
+
 	return prot;
 }
 
