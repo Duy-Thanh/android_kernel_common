@@ -1646,14 +1646,22 @@ static int guest_request_share(struct pkvm_checked_mem_transition *checked_tx)
 static int guest_request_unshare(struct pkvm_checked_mem_transition *checked_tx)
 {
 	int ret;
-
+	phys_addr_t completer_addr;
 	ret = __guest_request_page_transition(checked_tx,
 					      PKVM_PAGE_SHARED_OWNED);
 	if (ret)
 		return ret;
 
-	if (is_range_refcounted(checked_tx->completer_addr, checked_tx->nr_pages))
+
+	if (checked_tx->tx->completer.id == PKVM_ID_HYP)
+		completer_addr = __hyp_pa(checked_tx->completer_addr);
+	else
+		completer_addr = checked_tx->completer_addr;
+
+	if (is_range_refcounted(completer_addr, checked_tx->nr_pages)) {
+		hyp_puts("GUEST_UNSHARE : range is refcounted"); hyp_putx64(checked_tx->completer_addr);
 		return -EINVAL;
+	}
 
 	return 0;
 }
@@ -1679,7 +1687,11 @@ static int __guest_initiate_page_transition(const struct pkvm_checked_mem_transi
 	offset = addr - ALIGN_DOWN(addr, kvm_granule_size(level));
 
 	phys = kvm_pte_to_phys(pte) + offset;
-	prot = pkvm_mkstate(kvm_pgtable_stage2_pte_prot(pte), state);
+	if (state == PKVM_PAGE_SHARED_OWNED)
+		prot = pkvm_mkstate_with_id(kvm_pgtable_stage2_pte_prot(pte), state,
+					    checked_tx->tx->completer.id);
+	else
+		prot = pkvm_mkstate(kvm_pgtable_stage2_pte_prot(pte), state);
 	return kvm_pgtable_stage2_map(&vm->pgt, addr, size, phys, prot, mc, 0);
 }
 
@@ -2149,6 +2161,43 @@ int __pkvm_guest_unshare_hyp(struct pkvm_hyp_vcpu *vcpu, u64 ipa)
 
 	hyp_unlock_component();
 	guest_unlock_component(vm);
+
+	return ret;
+}
+
+/*
+ * Assumption: This function is called with the host_lock acquired as an
+ * outer lock and the guest lock acquired as an inner lock.
+ */
+int __pkvm_guest_unpin_unshare_hyp_locked(struct pkvm_hyp_vcpu *vcpu, u64 ipa, phys_addr_t pa)
+{
+	int ret;
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	struct pkvm_mem_transition unshare = {
+		.nr_pages	= 1,
+		.initiator	= {
+			.id	= PKVM_ID_GUEST,
+			.addr	= ipa,
+			.guest	= {
+				.hyp_vm = vm,
+				.mc	= &vcpu->vcpu.arch.stage2_mc,
+			},
+		},
+		.completer	= {
+			.id	= PKVM_ID_HYP,
+			.prot	= PAGE_HYP,
+		},
+	};
+	u64 nr_unshared;
+
+	host_unlock_component();
+	hyp_puts("GUEST_UNSHARE_HYP"); hyp_putx64(pa);
+	hyp_unpin_shared_mem(__hyp_va(pa), __hyp_va(pa) + 1);
+	host_lock_component();
+
+	hyp_lock_component();
+	ret = do_unshare(&unshare, &nr_unshared);
+	hyp_unlock_component();
 
 	return ret;
 }
@@ -3003,6 +3052,7 @@ int __pkvm_host_reclaim_page(struct pkvm_hyp_vm *vm, u64 pfn, u64 ipa, u8 order)
 	size_t page_size = PAGE_SIZE << order;
 	kvm_pte_t pte;
 	int ret = 0;
+	enum pkvm_component_id borrower_id;
 
 	host_lock_component();
 	guest_lock_component(vm);
@@ -3010,9 +3060,6 @@ int __pkvm_host_reclaim_page(struct pkvm_hyp_vm *vm, u64 pfn, u64 ipa, u8 order)
 	ret = guest_get_valid_pte(vm, pfn, ipa, order, &pte);
 	if (ret)
 		goto unlock;
-
-	/* We could avoid TLB inval, it is done per VMID on the finalize path */
-	WARN_ON(kvm_pgtable_stage2_unmap(&vm->pgt, ipa, page_size));
 
 	switch((int)guest_get_page_state(pte, ipa)) {
 	case PKVM_PAGE_OWNED:
@@ -3025,12 +3072,26 @@ int __pkvm_host_reclaim_page(struct pkvm_hyp_vm *vm, u64 pfn, u64 ipa, u8 order)
 		WARN_ON(__host_check_page_state_range(phys, page_size, PKVM_PAGE_SHARED_OWNED));
 		break;
 	case PKVM_PAGE_SHARED_OWNED:
-		WARN_ON(__host_check_page_state_range(phys, page_size, PKVM_PAGE_SHARED_BORROWED));
+		borrower_id = FIELD_GET(PKVM_PAGE_BORROWED_MASK, pte);
+		if (borrower_id == PKVM_ID_HOST) {
+			hyp_puts("[SHARED_WITH_HOST]"); hyp_putx64(ipa);
+			WARN_ON(__host_check_page_state_range(phys, page_size, PKVM_PAGE_SHARED_BORROWED));
+		} else if (borrower_id == PKVM_ID_HYP) {
+			hyp_puts("[SHARED_WITH_HYP]"); hyp_putx64(ipa);
+			WARN_ON(__pkvm_guest_unpin_unshare_hyp_locked(vm->vcpus[0], ipa, phys));
+		} else if (borrower_id == PKVM_ID_FFA) {
+			hyp_puts("[SHARED_WITH_FFA]");  hyp_putx64(ipa);
+		} else {
+			BUG_ON(1);
+		}
+
 		break;
 	default:
 		BUG_ON(1);
 	}
 
+	/* We could avoid TLB inval, it is done per VMID on the finalize path */
+	WARN_ON(kvm_pgtable_stage2_unmap(&vm->pgt, ipa, page_size));
 	WARN_ON(host_stage2_set_owner_locked(phys, page_size, PKVM_ID_HOST));
 
 unlock:

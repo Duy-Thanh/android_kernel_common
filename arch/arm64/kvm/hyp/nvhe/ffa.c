@@ -834,6 +834,7 @@ static void do_ffa_mem_reclaim(struct arm_smccc_res *res,
 			ret = FFA_RET_INVALID_PARAMETERS;
 			goto out_unlock;
 		}
+		hyp_puts("[FFA_GUEST_RECLAIM] ipa");
 	} else {
 		for (i = 1; i < KVM_MAX_PVMS; i++) {
 			if (list_empty(&endp_buffers[i].xfer_list))
