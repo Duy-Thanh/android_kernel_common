@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000088338774",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3221802?revision\u003d1",
+      "key": {
+        "uuid": "7ea82b61_5b1fdd61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-15T18:11:17Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/3ed683cb941fc0a457159dbaf736eee40f82b840).\n\n```\n      ## arch/arm64/configs/db845c_gki.fragment ##\n    -@@\n    +@@ arch/arm64/configs/db845c_gki.fragment: CONFIG_MAC80211\u003dm\n      CONFIG_QRTR\u003dm\n      CONFIG_QRTR_TUN\u003dm\n      CONFIG_SCSI_UFS_QCOM\u003dm\n    --CONFIG_USB_NET_AX88179_178A\u003dm\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (d66c08 ANDROID: gki - CONFIG_USB_NET_AX8817X\u003dy)\n    + CONFIG_USB_NET_AX8817X\u003dm\n    + CONFIG_USB_NET_AX88179_178A\u003dm\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (3ed683 ANDROID: gki - set CONFIG_USB_NET_AX88179_178A\u003dy (usb gbit e)\n      CONFIG_INPUT_PM8941_PWRKEY\u003dm\n      CONFIG_SERIAL_MSM\u003dm\n      CONFIG_SERIAL_QCOM_GENI\u003dm\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "8c864b8fb2fc06176013d9bbffa4f7b5f47244f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
