@@ -154,6 +154,7 @@ static int ffa_map_hyp_buffers(u64 ffa_page_count)
 	else if (hyp_refcount_inc(hyp_buff_refcnt) > 1)
 		return FFA_RET_SUCCESS;
 
+	hyp_puts("FF-A MAP RXTX hyp buffers");
 	arm_smccc_1_1_smc(FFA_FN64_RXTX_MAP,
 			  hyp_virt_to_phys(hyp_buffers.tx),
 			  hyp_virt_to_phys(hyp_buffers.rx),
@@ -982,6 +983,52 @@ static bool do_ffa_features(struct arm_smccc_res *res,
 out_handled:
 	ffa_to_smccc_res_prop(res, ret, prop);
 	return true;
+}
+
+static void kvm_guest_clear_transfer(struct ffa_mem_transfer *transfer, struct pkvm_hyp_vcpu *vcpu)
+{
+	struct ffa_translation *translation, *tmp;
+
+	list_for_each_entry_safe(translation, tmp, &transfer->translations, node) {
+		WARN_ON(__pkvm_guest_unshare_ffa(vcpu, translation->ipa));
+		list_del(&translation->node);
+		hyp_free(translation);
+	}
+}
+
+int kvm_guest_reclaim_dying_guest_pages(struct pkvm_hyp_vm *vm)
+{
+	int ret = 0;
+	struct pkvm_hyp_vcpu *hyp_vcpu = vm->vcpus[0];
+	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
+	unsigned int vm_handle = vm_handle_to_idx(vcpu->kvm->arch.pkvm.handle) + 1;
+	struct ffa_mem_transfer *transfer, *tmp;
+	struct arm_smccc_res res;
+
+	hyp_puts("reclaim_dying_guest_pages vm_handle="); hyp_putx64(vm_handle);
+
+	hyp_spin_lock(&hyp_buffers.lock);
+	list_for_each_entry_safe(transfer, tmp, &endp_buffers[vm_handle].xfer_list, node) {
+		ffa_mem_reclaim(&res, HANDLE_LOW(transfer->ffa_handle),
+				      HANDLE_HIGH(transfer->ffa_handle), 0);
+		if (res.a0 != FFA_SUCCESS) {
+			hyp_puts("release memory error:");
+			hyp_putx64(res.a0); hyp_putx64(res.a2);
+			ret = 1;
+			continue;
+		}
+
+		hyp_puts("reclaimed the memory handle:"); hyp_putx64(transfer->ffa_handle);
+		kvm_guest_clear_transfer(transfer, hyp_vcpu);
+		list_del(&transfer->node);
+		hyp_free(transfer);
+	}
+
+	endp_buffers[vm_handle].tx = NULL;
+	endp_buffers[vm_handle].rx = NULL;
+	hyp_spin_unlock(&hyp_buffers.lock);
+
+	return ret;
 }
 
 bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
