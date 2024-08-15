@@ -8,7 +8,13 @@
 #define _TRACE_HOOK_FS_H
 
 #include <trace/hooks/vendor_hooks.h>
+DECLARE_HOOK(android_vh_f2fs_dsm,
+	TP_PROTO(char *name, int len),
+	TP_ARGS(name, len));
 
+DECLARE_HOOK(android_vh_f2fs_dsm_get,
+	TP_PROTO(unsigned long code, char *err_msg),
+	TP_ARGS(code, err_msg));
 DECLARE_HOOK(android_vh_f2fs_file_open,
 	TP_PROTO(struct inode *inode, struct file *filp),
 	TP_ARGS(inode, filp));

@@ -20,7 +20,15 @@ struct track;
 DECLARE_RESTRICTED_HOOK(android_rvh_shmem_get_folio,
 			TP_PROTO(struct shmem_inode_info *info, struct folio **folio),
 			TP_ARGS(info, folio), 2);
-
+DECLARE_HOOK(android_vh_process_madvise_begin,
+	TP_PROTO(struct task_struct *t, int behavior),
+	TP_ARGS(t, behavior));
+DECLARE_HOOK(android_vh_process_madvise_iter,
+	TP_PROTO(struct task_struct *t, int behavior, ssize_t *ret),
+	TP_ARGS(t, behavior, ret));
+DECLARE_HOOK(android_vh_process_madvise_end,
+	TP_PROTO(int behavior, ssize_t *ret),
+	TP_ARGS(behavior, ret));
 DECLARE_RESTRICTED_HOOK(android_rvh_set_gfp_zone_flags,
 			TP_PROTO(unsigned int *flags),	/* gfp_t *flags */
 			TP_ARGS(flags), 1);
@@ -51,6 +59,10 @@ DECLARE_HOOK(android_vh_si_mem_available_adjust,
 DECLARE_HOOK(android_vh_si_meminfo_adjust,
 	TP_PROTO(unsigned long *totalram, unsigned long *freeram),
 	TP_ARGS(totalram, freeram));
+struct vm_fault;
+DECLARE_HOOK(android_vh_should_fault_around,
+	TP_PROTO(struct vm_fault *vmf, bool *should_around),
+	TP_ARGS(vmf, should_around));
 DECLARE_HOOK(android_vh_slab_folio_alloced,
 	TP_PROTO(unsigned int order, gfp_t flags),
 	TP_ARGS(order, flags));
@@ -160,6 +172,9 @@ DECLARE_HOOK(android_vh_try_to_unmap_one,
 	TP_PROTO(struct folio *folio, struct vm_area_struct *vma,
 		unsigned long addr, void *arg, bool ret),
 	TP_ARGS(folio, vma, addr, arg, ret));
+DECLARE_HOOK(android_vh_cma_alloc_retry,
+	TP_PROTO(char *name, int *retry),
+	TP_ARGS(name, retry));
 DECLARE_HOOK(android_vh_mm_direct_reclaim_enter,
 	TP_PROTO(unsigned int order),
 	TP_ARGS(order));
@@ -372,6 +387,15 @@ DECLARE_HOOK(android_vh_zs_shrinker_adjust,
 DECLARE_HOOK(android_vh_zs_shrinker_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
+	DECLARE_RESTRICTED_HOOK(android_rvh_vmalloc_node_bypass,
+	TP_PROTO(unsigned long size, gfp_t gfp_mask, void **addr),
+	TP_ARGS(size, gfp_mask, addr), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_vfree_bypass,
+	TP_PROTO(const void *addr, bool *bypass),
+	TP_ARGS(addr, bypass), 1);
+DECLARE_HOOK(android_vh_kmem_cache_create_usercopy,
+	TP_PROTO(unsigned int flags),
+	TP_ARGS(flags));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
