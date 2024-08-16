@@ -8,6 +8,7 @@
  * Copyright (C) 2018-2023 Intel Corporation
  */
 #include <linux/kernel.h>
+#include <linux/kmemleak.h>
 #include <linux/slab.h>
 #include <linux/module.h>
 #include <linux/netdevice.h>
@@ -1793,6 +1794,8 @@ cfg80211_bss_update(struct cfg80211_registered_device *rdev,
 				kfree_rcu(ies, rcu_head);
 			goto drop;
 		}
+		kmemleak_not_leak(new);
+		kmemleak_alloc(&new->pub, sizeof(new->pub), 1, GFP_ATOMIC);
 		memcpy(new, tmp, sizeof(*new));
 		new->refcount = 1;
 		INIT_LIST_HEAD(&new->hidden_list);
