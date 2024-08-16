@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "472946d7_c2580e84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2024-08-16T16:56:56Z",
+      "side": 1,
+      "message": "Since CPU hotplug is not a frequent operation, and if the issue does not happen easily (see question below)  I suggest wait for it to get into upstream and -stable kernel first.\n\nWould the patch submitter be willing to help backport the series to -stable, after following all the -stable rules?\n\n\u003cquestion\u003e\nhow severe is the issue, is it possible that the issue does not happen often considering CPUs are not toggled often? And/or is not easily reproducible?\n\u003c/question\u003e",
+      "revId": "ba7777e6d3c461bb16b3a88aeff441da64a90773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
