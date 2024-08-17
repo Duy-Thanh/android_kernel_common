@@ -127,9 +127,13 @@ struct Qdisc {
 
 	struct rcu_head		rcu;
 	netdevice_tracker	dev_tracker;
+<<<<<<< HEAD   (6f4a68 Revert "i2c: add fwnode APIs")
 
 	ANDROID_KABI_RESERVE(1);
 
+=======
+	struct lock_class_key	root_lock_key;
+>>>>>>> BRANCH (99e6a6 Linux 6.1.96)
 	/* private data */
 	long privdata[] ____cacheline_aligned;
 };
