@@ -2575,12 +2575,20 @@ static struct sk_buff *manage_oob(struct sk_buff *skb, struct sock *sk,
 					WRITE_ONCE(u->oob_skb, NULL);
 					consume_skb(skb);
 				}
+<<<<<<< HEAD   (cc6168 Merge 5.15.155 into android15-5.15-lts)
 			} else if (flags & MSG_PEEK) {
 				skb = NULL;
 			} else {
 				__skb_unlink(skb, &sk->sk_receive_queue);
 				WRITE_ONCE(u->oob_skb, NULL);
 				unlinked_skb = skb;
+=======
+			} else if (!(flags & MSG_PEEK)) {
+				skb_unlink(skb, &sk->sk_receive_queue);
+				WRITE_ONCE(u->oob_skb, NULL);
+				if (!WARN_ON_ONCE(skb_unref(skb)))
+					kfree_skb(skb);
+>>>>>>> BRANCH (c52b97 Linux 5.15.156)
 				skb = skb_peek(&sk->sk_receive_queue);
 			}
 		}
