@@ -2864,3 +2864,7 @@
   zs_map_object
   zs_pool_stats
   zs_unmap_object
+
+[test]
+  __traceiter_android_vh_dma_heap_buffer_alloc_start
+  __tracepoint_android_vh_dma_heap_buffer_alloc_start
