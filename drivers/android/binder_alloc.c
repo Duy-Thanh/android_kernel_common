@@ -218,51 +218,86 @@ static void binder_lru_freelist_add(struct binder_alloc *alloc,
 	}
 }
 
+static struct vm_area_struct *binder_lookup_vma(struct binder_alloc *alloc,
+						unsigned long addr,
+						bool *mmap_locked)
+{
+	struct mm_struct *mm = alloc->mm;
+	struct vm_area_struct *vma;
+
+	*mmap_locked = false;
+
+	vma = lock_vma_under_rcu(mm, addr);
+	if (vma)
+		return vma;
+
+	mmap_read_lock(mm);
+	vma = vma_lookup(mm, addr);
+	if (!vma || vma != alloc->vma) {
+		mmap_read_unlock(mm);
+		return NULL;
+	}
+
+	*mmap_locked = true;
+
+	return vma;
+}
+
 static int binder_install_single_page(struct binder_alloc *alloc,
 				      struct binder_lru_page *lru_page,
 				      unsigned long addr)
 {
+	struct vm_area_struct *vma;
 	struct page *page;
+	bool mmap_locked;
 	int ret = 0;
 
 	if (!mmget_not_zero(alloc->mm))
 		return -ESRCH;
 
-	/*
-	 * Protected with mmap_sem in write mode as multiple tasks
-	 * might race to install the same page.
-	 */
-	mmap_write_lock(alloc->mm);
-	if (binder_get_installed_page(lru_page))
+	page = alloc_page(GFP_KERNEL | __GFP_HIGHMEM | __GFP_ZERO);
+	if (!page) {
+		ret = -ENOMEM;
 		goto out;
+	}
 
-	if (!alloc->vma) {
+	vma = binder_lookup_vma(alloc, addr, &mmap_locked);
+	if (!vma) {
 		pr_err("%d: %s failed, no vma\n", alloc->pid, __func__);
 		ret = -ESRCH;
 		goto out;
 	}
 
-	page = alloc_page(GFP_KERNEL | __GFP_HIGHMEM | __GFP_ZERO);
-	if (!page) {
-		pr_err("%d: failed to allocate page\n", alloc->pid);
-		ret = -ENOMEM;
-		goto out;
-	}
-
-	ret = vm_insert_page(alloc->vma, addr, page);
-	if (ret) {
+	ret = vm_insert_page(vma, addr, page);
+	switch (ret) {
+	case -EBUSY:
+		/* Someone installed a page first, use that. */
+		ret = 0;
+		__free_page(page);
+		page = follow_page(vma, addr, 0);
+		fallthrough;
+	case 0:
+		/* Mark page installation complete and safe to use */
+		if (!binder_get_installed_page(lru_page))
+			binder_set_installed_page(lru_page, page);
+		page = NULL;
+		break;
+	default:
 		pr_err("%d: %s failed to insert page at offset %lx with %d\n",
 		       alloc->pid, __func__, addr - (uintptr_t)alloc->buffer,
 		       ret);
-		__free_page(page);
 		ret = -ENOMEM;
-		goto out;
+		break;
 	}
 
-	/* Mark page installation complete and safe to use */
-	binder_set_installed_page(lru_page, page);
+	if (mmap_locked)
+		mmap_read_unlock(alloc->mm);
+	else
+		vma_end_read(vma);
+
 out:
-	mmap_write_unlock(alloc->mm);
+	if (page)
+		__free_page(page);
 	mmput_async(alloc->mm);
 	return ret;
 }
@@ -1107,7 +1142,6 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 	trace_binder_unmap_kernel_end(alloc, index);
 
 	list_lru_isolate(lru, item);
-	mutex_unlock(&alloc->mutex);
 	spin_unlock(lock);
 
 	if (vma) {
@@ -1118,6 +1152,7 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 		trace_binder_unmap_user_end(alloc, index);
 	}
 
+	mutex_unlock(&alloc->mutex);
 	mmap_read_unlock(mm);
 	mmput_async(mm);
 	__free_page(page_to_free);
