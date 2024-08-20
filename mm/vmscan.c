@@ -1400,6 +1400,17 @@ static unsigned int demote_page_list(struct list_head *demote_pages,
 	return nr_succeeded;
 }
 
+#ifdef CONFIG_AMLOGIC_MEMORY_EXTEND
+static int can_unmap_files(struct scan_control *sc, struct page *page)
+{
+	if (!current_is_kswapd())
+		return 1;
+	if (page_mapcount(page) > 1)
+		return 0;
+	return 1;
+}
+#endif
+
 /*
  * shrink_page_list() returns the number of reclaimed pages
  */
@@ -1446,7 +1457,11 @@ retry:
 		if (unlikely(!page_evictable(page)))
 			goto activate_locked;
 
+	#ifdef CONFIG_AMLOGIC_MEMORY_EXTEND
+		if (!can_unmap_files(sc, page))
+	#else
 		if (!sc->may_unmap && page_mapped(page))
+	#endif
 			goto keep_locked;
 
 		/* page_update_gen() tried to promote this page? */
@@ -2141,8 +2156,10 @@ static int too_many_isolated(struct pglist_data *pgdat, int file,
 	 * won't get blocked by normal direct-reclaimers, forming a circular
 	 * deadlock.
 	 */
+#ifndef CONFIG_AMLOGIC_MEMORY_EXTEND
 	if ((sc->gfp_mask & (__GFP_IO | __GFP_FS)) == (__GFP_IO | __GFP_FS))
 		inactive >>= 3;
+#endif
 
 	return isolated > inactive;
 }

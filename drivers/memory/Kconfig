@@ -225,6 +225,40 @@ config STM32_FMC2_EBI
 	  devices (like SRAM, ethernet adapters, FPGAs, LCD displays, ...) on
 	  SOCs containing the FMC2 External Bus Interface.
 
+config AMLOGIC_MEMORY_EXTEND
+	bool "AMLOGIC memory extend support"
+	default n
+	help
+		Amlogic memory extend is drivers which extend for memory management
+		functions, can be used for memory debug or other features.
+
+config AMLOGIC_MEMORY_OPT
+	bool "Amlogic memory optimization support"
+	default n
+	help
+		Amlogic memory optimization support,
+		distinguish from AMLOGIC_MEMORY_EXTEND,
+		because of gki requirements, enable in
+		aarch32.
+
+config AMLOGIC_LINUX_S_OPTIMIZE
+	bool "Amlogic memory optimization support"
+	default n
+	help
+		Amlogic LINUX_S_OPTIMIZE
+
+config AMLOGIC_DTB_NODE_OPT
+	bool "Amlogic memory optimization support"
+	default n
+	help
+		Amlogic DTB_NODE_OPT
+
+config AMLOGIC_BOOT_TIME
+	bool "Amlogic memory optimization support"
+	default n
+	help
+		AMLOGIC_BOOT_TIME
+
 source "drivers/memory/samsung/Kconfig"
 source "drivers/memory/tegra/Kconfig"
 
