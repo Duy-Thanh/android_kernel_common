@@ -31,6 +31,7 @@
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/mmc.h>
+#include <trace/hooks/ogki_honor.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/sys.h>
 #include <trace/hooks/iommu.h>
@@ -441,9 +442,61 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_folio_trylock_result);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_clear);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_trylock_failed_folio);
+<<<<<<< HEAD   (8a268c ANDROID: GKI: Update symbol list for honor)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_try_alloc_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmabuf_page_pool_free_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_try_alloc_pages_gfp);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_cache_readahead_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_cache_readahead_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_get_log_usertype);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_hievent_to_jank);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_hiview_hievent_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_hiview_hievent_put_string);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_hiview_hievent_put_integral);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_hiview_hievent_report);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_hiview_hievent_destroy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_check_vip_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_task_util);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_uclamp_task_util);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_get_task_tags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_get_task_rsum);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_check_task_tags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_ufs_dsm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_f2fs_dsm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_f2fs_dsm_get);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_set_wifi_state_connect);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_set_wifi_state_disconnect);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_security_audit_log_setid);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_security_audit_log_cfi);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_security_audit_log_usercopy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_security_audit_log_module_sign);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_cma_alloc_retry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_async_psi_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_vmalloc_node_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_vfree_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_tcp_srtt_estimator);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_tcp_rcv_established_fast_path);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_tcp_rcv_established_slow_path);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_tcp_rcv_rtt_update);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_tcp_retransmit_timer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_udp_unicast_rcv_skb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_udp6_unicast_rcv_skb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_kmem_cache_create_usercopy);
+
+>>>>>>> CHANGE (eba98a ANDROID: GKI: Add vendor hook define for Honor ogki)
