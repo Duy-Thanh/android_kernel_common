@@ -16,6 +16,24 @@
       "message": "cc-ing a couple wifi folks",
       "revId": "187c3af0304ce87a268ff4132849166dcf1bf6c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca155c3_dc3016bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-08-20T09:49:44Z",
+      "side": 1,
+      "message": "This change won\u0027t impact ACK `x86_64_defconfig` and is only for the desktop branch (and intended to be temporary workaround until we\u0027ll fully enable GKI for the desktop)",
+      "parentUuid": "ebfccc7c_823d7250",
+      "revId": "187c3af0304ce87a268ff4132849166dcf1bf6c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
