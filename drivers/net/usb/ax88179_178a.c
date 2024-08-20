@@ -1676,12 +1676,30 @@ static int ax88179_reset(struct usbnet *dev)
 
 static int ax88179_net_reset(struct usbnet *dev)
 {
+<<<<<<< HEAD   (6f4a68 Revert "i2c: add fwnode APIs")
 	struct ax88179_data *ax179_data = dev->driver_priv;
 
 	if (ax179_data->initialized)
 		ax88179_reset(dev);
 	else
 		ax179_data->initialized = 1;
+=======
+	u16 tmp16;
+
+	ax88179_read_cmd(dev, AX_ACCESS_PHY, AX88179_PHY_ID, GMII_PHY_PHYSR,
+			 2, &tmp16);
+	if (tmp16) {
+		ax88179_read_cmd(dev, AX_ACCESS_MAC, AX_MEDIUM_STATUS_MODE,
+				 2, 2, &tmp16);
+		if (!(tmp16 & AX_MEDIUM_RECEIVE_EN)) {
+			tmp16 |= AX_MEDIUM_RECEIVE_EN;
+			ax88179_write_cmd(dev, AX_ACCESS_MAC, AX_MEDIUM_STATUS_MODE,
+					  2, 2, &tmp16);
+		}
+	} else {
+		ax88179_reset(dev);
+	}
+>>>>>>> BRANCH (edca08 BACKPORT: genirq/cpuhotplug, x86/vector: Prevent vector leak)
 
 	return 0;
 }
