@@ -43,6 +43,9 @@
 
 #include "internal.h"
 
+#ifdef CONFIG_AMLOGIC_MEMORY_EXTEND
+#include <linux/amlogic/memory.h>
+#endif
 /*
  * Lock order:
  *   1. slab_mutex (Global Mutex)
@@ -3814,6 +3817,9 @@ static inline unsigned int slab_order(unsigned int size,
 
 static inline int calculate_order(unsigned int size)
 {
+#ifdef CONFIG_AMLOGIC_MEMORY_OPT
+	return get_order(size);
+#else
 	unsigned int order;
 	unsigned int min_objects;
 	unsigned int max_objects;
@@ -3875,6 +3881,7 @@ static inline int calculate_order(unsigned int size)
 	if (order < MAX_ORDER)
 		return order;
 	return -ENOSYS;
+#endif
 }
 
 static void
@@ -4550,6 +4557,14 @@ size_t __ksize(const void *object)
 
 	if (unlikely(!PageSlab(page))) {
 		WARN_ON(!PageCompound(page));
+	#ifdef CONFIG_AMLOGIC_MEMORY_EXTEND
+		if (unlikely(PageOwnerPriv1(page))) {
+			pr_debug("%s, obj:%p, page:%p, index:%ld, size:%ld\n",
+				__func__, object, page_address(page),
+				page->index, PAGE_SIZE * page->index);
+			return PAGE_SIZE * page->index;
+		}
+	#endif
 		return page_size(page);
 	}
 
@@ -4569,7 +4584,13 @@ void kfree(const void *x)
 
 	page = virt_to_head_page(x);
 	if (unlikely(!PageSlab(page))) {
+	#ifdef CONFIG_AMLOGIC_MEMORY_EXTEND
+		if (aml_free_nonslab_page(page, object))
+			return;
+		__free_pages(page, compound_order(page));
+	#else
 		free_nonslab_page(page, object);
+	#endif /*CONFIG_AMLOGIC_MEMORY_EXTEND */
 		return;
 	}
 	slab_free(page->slab_cache, page, object, NULL, 1, _RET_IP_);
