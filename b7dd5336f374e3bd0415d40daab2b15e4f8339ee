@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000088759449",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3231224?revision\u003d2",
+      "key": {
+        "uuid": "cd267183_b30252b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-20T04:36:38Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/f5554725f30475b05b5178b998366f11ecb50c7f) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003df5554725f30475b05b5178b998366f11ecb50c7f).\n\n```\n      ## drivers/hid/hid-ids.h ##\n     @@\n      #define USB_DEVICE_ID_MS_TYPE_COVER_2    0x07a9\n    @@ drivers/hid/hid-microsoft.c: static const struct hid_device_id ms_devices[] \u003d {\n      \t{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_MICROSOFT, 0x091B),\n      \t\t.driver_data \u003d MS_SURFACE_DIAL },\n     -\t{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_XBOX_ONE_S_CONTROLLER),\n    -+\n     +\t{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_XBOX_CONTROLLER_MODEL_1708),\n     +\t\t.driver_data \u003d MS_QUIRK_FF },\n     +\t{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_XBOX_CONTROLLER_MODEL_1708_BLE),\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "b7dd5336f374e3bd0415d40daab2b15e4f8339ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
