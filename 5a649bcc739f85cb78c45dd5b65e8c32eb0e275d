@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98148b3_2cfd802c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-20T19:34:57Z",
+      "side": 1,
+      "message": "Is there a respin request for this patch? The patch needs to have a \"Bug:\" tag that cites a respin request bug filed as described here: https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
+      "revId": "5a649bcc739f85cb78c45dd5b65e8c32eb0e275d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
