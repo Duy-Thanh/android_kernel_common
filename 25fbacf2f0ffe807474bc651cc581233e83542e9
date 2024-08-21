@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ee9880_e359dfcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1864326
+      },
+      "writtenOn": "2024-08-21T23:22:29Z",
+      "side": 1,
+      "message": "I had to resolve trivial conflict in android/abi_gki_aarch64_vivo, but better someone with knowledge to confirm that it is done properly!",
+      "revId": "25fbacf2f0ffe807474bc651cc581233e83542e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
