@@ -712,6 +712,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_pages_batch_break);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_batch_nr_pages);
+<<<<<<< HEAD   (34998bd1fade6d61eeca16482ba16f9385222830 ANDROID: GKI: Update pixel symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_file_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
@@ -729,3 +730,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pci_pm_verify_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_read_swap_cache_async_timeout);
+||||||| BASE   (25c2206392b0c6bf06256f2081e779ccb442a501 ANDROID: abi_gki_aarch64_qcom: whitelist some xhci & traceit)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_cma);
+>>>>>>> CHANGE (1bc86634d886d4619a6bb23b07b37539d506f289 ANDROID: mm: add vendorhook bypass skip_cma)
