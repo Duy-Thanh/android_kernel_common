@@ -16,6 +16,24 @@
       "message": "There is no open respin request for this patch. The respin request bug was for a different patch and the respin is complete and the bug closed. Please create a new respin bug for this new respin.",
       "revId": "5bd364dd4356c7160a31ded581fb4a625263a795",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95207878_24e7da18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1931330
+      },
+      "writtenOn": "2024-08-21T01:08:25Z",
+      "side": 1,
+      "message": "Updating with the right respin bug: 361191076",
+      "parentUuid": "90f7722b_08348e99",
+      "revId": "5bd364dd4356c7160a31ded581fb4a625263a795",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
