@@ -33,6 +33,24 @@
       "message": "This looks like you\u0027re missing a dependency, as the cherry-pick is not clean in `ufshcd-crypto.c`",
       "revId": "9cdaef712ae6d5b250433e68a1200791c247a08d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7c78484_f8c1ad67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-08-21T10:19:41Z",
+      "side": 1,
+      "message": "My mistake, it\u0027s clean against android15-6.6.",
+      "parentUuid": "82485f1f_f7f23458",
+      "revId": "9cdaef712ae6d5b250433e68a1200791c247a08d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
