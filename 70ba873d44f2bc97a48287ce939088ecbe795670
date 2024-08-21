@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000088945582",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3235542?revision\u003d1",
+      "key": {
+        "uuid": "71941a97_3984fb86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-21T09:30:02Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/4ab9f756cbc5970f2b5abcfafbe084da4adb99a4).\n\n```\n      ## android/abi_gki_aarch64_qcom ##\n     @@\n    -   devm_extcon_dev_register\n        devm_extcon_dev_unregister\n    +   devm_extcon_register_notifier\n        devm_free_irq\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (e60e2b ANDROID: Add vendor hook for new MGLGU generation creation)\n    +   devm_gpiod_get\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +  devm_fwnode_pwm_get\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (4ab9f7 ANDROID: abi_gki_aarch64_qcom: Add devm_fwnode_pwm_get symbo)\n        devm_gpiod_get_optional\n        devm_gpio_request\n        devm_gpio_request_one\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "70ba873d44f2bc97a48287ce939088ecbe795670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
