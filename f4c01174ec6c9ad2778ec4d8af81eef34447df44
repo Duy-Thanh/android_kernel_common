@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000088907444",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3234823?revision\u003d3",
+      "key": {
+        "uuid": "62014414_2ec1e51a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-21T02:27:14Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/e774e4eca69ce8ab60df04b27f524b586ab74f17).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_cache_page);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_meminfo_adjust);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_pm_notify_suspend);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_fill_prdt);\n    -+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_complete_init);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_reprogram_all_keys);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_complete_init);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_prepare_command);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command);\n     \n    - ## drivers/scsi/ufs/ufshcd.c ##\n    -@@ drivers/scsi/ufs/ufshcd.c: static int ufshcd_probe_hba(struct ufs_hba *hba, bool async)\n    + ## drivers/ufs/core/ufshcd.c ##\n    +@@ drivers/ufs/core/ufshcd.c: static int ufshcd_probe_hba(struct ufs_hba *hba, bool init_dev_params)\n    + \t/* Enable Auto-Hibernate if configured */\n      \tufshcd_auto_hibern8_enable(hba);\n      \n    - \tufshpb_reset(hba);\n    -+\n     +\ttrace_android_rvh_ufs_complete_init(hba);\n      out:\n      \tspin_lock_irqsave(hba-\u003ehost-\u003ehost_lock, flags);\n      \tif (ret)\n     \n      ## include/trace/hooks/ufshcd.h ##\n    -@@ include/trace/hooks/ufshcd.h: DECLARE_HOOK(android_vh_ufs_fill_prdt,\n    - \t\t unsigned int segments, int *err),\n    - \tTP_ARGS(hba, lrbp, segments, err));\n    +@@ include/trace/hooks/ufshcd.h: DECLARE_RESTRICTED_HOOK(android_rvh_ufs_reprogram_all_keys,\n    + \t\t\tTP_PROTO(struct ufs_hba *hba, int *err),\n    + \t\t\tTP_ARGS(hba, err), 1);\n      \n     +DECLARE_RESTRICTED_HOOK(android_rvh_ufs_complete_init,\n     +\t\t\tTP_PROTO(struct ufs_hba *hba),\n     +\t\t\tTP_ARGS(hba), 1);\n     +\n    - DECLARE_RESTRICTED_HOOK(android_rvh_ufs_reprogram_all_keys,\n    - \t\t\tTP_PROTO(struct ufs_hba *hba, int *err),\n    - \t\t\tTP_ARGS(hba, err), 1);\n    + DECLARE_HOOK(android_vh_ufs_prepare_command,\n    + \tTP_PROTO(struct ufs_hba *hba, struct request *rq,\n    + \t\t struct ufshcd_lrb *lrbp, int *err),\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "f4c01174ec6c9ad2778ec4d8af81eef34447df44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
