@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/361202702",
       "revId": "9cdaef712ae6d5b250433e68a1200791c247a08d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82485f1f_f7f23458",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-08-21T10:17:35Z",
+      "side": 1,
+      "message": "This looks like you\u0027re missing a dependency, as the cherry-pick is not clean in `ufshcd-crypto.c`",
+      "revId": "9cdaef712ae6d5b250433e68a1200791c247a08d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
