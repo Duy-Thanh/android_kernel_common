@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ae0a0d_eb465f04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903527
+      },
+      "writtenOn": "2024-08-21T21:05:07Z",
+      "side": 1,
+      "message": "+1 to the patch but `arch/arm64/boot/dts/mediatek/mt8186-corsola-ps8640.dtsi` doesn\u0027t exist on upstream. chromeos-6.6 have this patch auto ported from 5.15 when the branch is created. However, upstream doesn\u0027t use this and we should use the upstream version, which also includes tentacruel board and is using correct panel: https://github.com/torvalds/linux/blob/master/arch/arm64/boot/dts/mediatek/mt8186-corsola-krabby.dtsi#L56",
+      "revId": "0c788d1d11fddfe378cbe75dc856a0f781f2d0a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
