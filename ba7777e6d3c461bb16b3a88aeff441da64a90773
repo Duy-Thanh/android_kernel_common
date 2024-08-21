@@ -34,6 +34,24 @@
       "parentUuid": "472946d7_c2580e84",
       "revId": "ba7777e6d3c461bb16b3a88aeff441da64a90773",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d42b01e_71185e47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-21T16:53:24Z",
+      "side": 1,
+      "message": "Given the uservisible impact, I think now that it is queued for mainline we can take it.",
+      "parentUuid": "0f2e943f_00924bb8",
+      "revId": "ba7777e6d3c461bb16b3a88aeff441da64a90773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
