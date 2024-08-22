@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da67cd2e_4f382f7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-22T15:13:11Z",
+      "side": 1,
+      "message": "Enables WiFi-BT on SM8550-HDK Armv9 devboard used in LKFT. It will land upstream in v6.12. All the necessary framework changes (i.e. power_sequencing) have already landed in android-mainline.",
+      "revId": "3ec830399e5c4dcadb63a1d11a0af64b75f2b7fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
