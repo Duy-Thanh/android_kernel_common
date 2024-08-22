@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3accc0c0_edb59fc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-22T20:28:54Z",
+      "side": 1,
+      "message": "Please explain why you need this arch-specific export in your module? I know it\u0027s exported upstream too but we still need a rationale. Don\u0027t see any useful explanation in the bug as well.",
+      "revId": "f3a927f0217c4a48d70ac1f299bed2d043b3d9b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
