@@ -5094,6 +5094,21 @@ static struct folio *alloc_anon_folio(struct vm_fault *vmf)
 
 	/* Try allocating the highest of the remaining orders. */
 	gfp = vma_thp_gfp_mask(vma);
+<<<<<<< HEAD   (95f1215cfce74de8d3ff78b5d3340c2a51d1af54 ANDROID: KVM: arm64: Fail if no IOMMU driver exists)
+||||||| BASE   (de2973e84453a799216f2e253c73c8cef023a07f UPSTREAM: tls: always refresh the queue when reading sock)
+
+	trace_android_vh_mm_customize_alloc_anon_thp(&gfp, &orders, &order, &folio);
+	if (folio)
+		goto allocated;
+
+=======
+
+	trace_android_vh_mm_customize_alloc_anon_thp(&gfp, &orders, &order, &folio);
+	if (folio)
+		goto allocated;
+
+	trace_android_vh_customize_thp_gfp_orders(&gfp, &orders, &order);
+>>>>>>> CHANGE (bb9c59d1f1b4cb245834310457365b42bc64aa7c ANDROID: vendor_hook: customize gfp and orders to alloc larg)
 	while (orders) {
 		addr = ALIGN_DOWN(vmf->address, PAGE_SIZE << order);
 		folio = vma_alloc_folio(gfp, order, vma, addr);
