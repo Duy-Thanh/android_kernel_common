@@ -69,4 +69,9 @@ obj-$(CONFIG_TMR_INJECT)	+= xilinx_tmr_inject.o
 obj-$(CONFIG_TPS6594_ESM)	+= tps6594-esm.o
 obj-$(CONFIG_TPS6594_PFSM)	+= tps6594-pfsm.o
 obj-$(CONFIG_NSM)		+= nsm.o
+<<<<<<< HEAD   (3ec830 FROMGIT: arm64: dts: qcom: sm8550-hdk: add the Wifi node)
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
+=======
+obj-$(CONFIG_MARVELL_CN10K_DPI)	+= mrvl_cn10k_dpi.o
+obj-y				+= keba/
+>>>>>>> BRANCH (3f386c Merge tag 'pci-v6.11-changes' of git://git.kernel.org/pub/sc)
