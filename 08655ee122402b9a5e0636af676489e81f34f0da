@@ -16,6 +16,23 @@
       "message": "Fixes BT on RB5 and SM8550-HDK devices used in LKFT.",
       "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15c2f62_a4d51c00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-23T07:14:40Z",
+      "side": 1,
+      "message": "Reference commits:\n9a15ce685706 (\"Bluetooth: qca: use the power sequencer for QCA6390\")\n921ad2879aa7 (\"Bluetooth: hci_qca: use the power sequencer for wcn7850 and wcn6855\")",
+      "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
