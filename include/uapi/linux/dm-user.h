@@ -56,12 +56,28 @@
 #define DM_USER_RESP_ERROR 1
 #define DM_USER_RESP_UNSUPPORTED 2
 
+enum DM_USER_MESSAGE_VERSION {
+	DM_USER_MESSAGE_V1 = 1,
+	DM_USER_MESSAGE_V2 = 2,
+	DM_USER_MESSAGE_MAX = DM_USER_MESSAGE_V2,
+}
+
 struct dm_user_message {
 	__u64 seq;
 	__u64 type;
 	__u64 flags;
 	__u64 sector;
 	__u64 len;
+	__u8 buf[];
+};
+
+struct dm_user_message_v2 {
+	__u64 seq;
+	__u64 type;
+	__u64 flags;
+	__u64 sector;
+	__u64 len;
+	__u64 ioprio;
 	__u8 buf[];
 };
 

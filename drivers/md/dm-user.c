@@ -17,6 +17,8 @@
 #include <linux/wait.h>
 #include <linux/workqueue.h>
 
+#include <dm-core.h>
+
 #define DM_MSG_PREFIX "user"
 
 #define MAX_OUTSTANDING_MESSAGES 128
@@ -26,6 +28,8 @@ module_param_named(dm_user_daemon_timeout_msec, daemon_timeout_msec, uint,
 		   0644);
 MODULE_PARM_DESC(dm_user_daemon_timeout_msec,
 		 "IO Timeout in msec if daemon does not process");
+
+static atomic_t dm_user_msg_v = ATOMIC_INIT(DM_USER_MESSAGE_V1);
 
 /*
  * dm-user uses four structures:
@@ -69,7 +73,10 @@ struct message {
 	 * the target or channel's lock, depending on which can reference them
 	 * directly.
 	 */
-	struct dm_user_message msg;
+	union {
+		struct dm_user_message msg;
+		struct dm_user_message_v2 msg_v2;
+	}
 	struct bio *bio;
 	size_t posn_to_user;
 	size_t total_to_user;
@@ -183,6 +190,13 @@ struct channel {
 	 */
 	struct message scratch_message_from_user;
 };
+
+static size_t sizeof_dm_user_message() {
+	if (atomic_read(&dm_user_message_v2) == DM_USER_MESSAGE_V2)
+		return sizeof(struct dm_user_message_v2);
+	else
+		return sizeof(struct dm_user_message);
+}
 
 static void message_kill(struct message *m, mempool_t *pool)
 {
@@ -307,13 +321,13 @@ static inline size_t bio_bytes_needed_to_user(struct bio *bio)
 {
 	switch (bio_op(bio)) {
 	case REQ_OP_WRITE:
-		return sizeof(struct dm_user_message) + bio_size(bio);
+		return sizeof_dm_user_message() + bio_size(bio);
 	case REQ_OP_READ:
 	case REQ_OP_FLUSH:
 	case REQ_OP_DISCARD:
 	case REQ_OP_SECURE_ERASE:
 	case REQ_OP_WRITE_ZEROES:
-		return sizeof(struct dm_user_message);
+		return sizeof_dm_user_message();
 
 	/*
 	 * These ops are not passed to userspace under the assumption that
@@ -328,13 +342,13 @@ static inline size_t bio_bytes_needed_from_user(struct bio *bio)
 {
 	switch (bio_op(bio)) {
 	case REQ_OP_READ:
-		return sizeof(struct dm_user_message) + bio_size(bio);
+		return sizeof_dm_user_message() + bio_size(bio);
 	case REQ_OP_WRITE:
 	case REQ_OP_FLUSH:
 	case REQ_OP_DISCARD:
 	case REQ_OP_SECURE_ERASE:
 	case REQ_OP_WRITE_ZEROES:
-		return sizeof(struct dm_user_message);
+		return sizeof_dm_user_message();
 
 	/*
 	 * These ops are not passed to userspace under the assumption that
@@ -530,9 +544,9 @@ static ssize_t msg_copy_to_iov(struct message *msg, struct iov_iter *to)
 	if (!iov_iter_count(to))
 		return 0;
 
-	if (msg->posn_to_user < sizeof(msg->msg)) {
+	if (msg->posn_to_user < sizeof_dm_user_message()) {
 		copied = copy_to_iter((char *)(&msg->msg) + msg->posn_to_user,
-				      sizeof(msg->msg) - msg->posn_to_user, to);
+				      sizeof_dm_user_message() - msg->posn_to_user, to);
 	} else {
 		copied = bio_copy_to_iter(msg->bio, to);
 		if (copied > 0)
@@ -553,10 +567,10 @@ static ssize_t msg_copy_from_iov(struct message *msg, struct iov_iter *from)
 	if (!iov_iter_count(from))
 		return 0;
 
-	if (msg->posn_from_user < sizeof(msg->msg)) {
+	if (msg->posn_from_user < sizeof_dm_user_message()) {
 		copied = copy_from_iter(
 			(char *)(&msg->msg) + msg->posn_from_user,
-			sizeof(msg->msg) - msg->posn_from_user, from);
+			sizeof_dm_user_message() - msg->posn_from_user, from);
 	} else {
 		copied = bio_copy_from_iter(msg->bio, from);
 		if (copied > 0)
@@ -906,7 +920,7 @@ static ssize_t dev_write(struct kiocb *iocb, struct iov_iter *from)
 	 * point to the scratch space.
 	 */
 	WARN_ON(c->cur_from_user == NULL);
-	if (c->cur_from_user->posn_from_user < sizeof(struct dm_user_message)) {
+	if (c->cur_from_user->posn_from_user < sizeof_dm_user_message()) {
 		struct message *msg, *old;
 
 		processed = msg_copy_from_iov(c->cur_from_user, from);
@@ -924,7 +938,7 @@ static ssize_t dev_write(struct kiocb *iocb, struct iov_iter *from)
 		 * We'll eventually build up enough bytes to do something.
 		 */
 		if (unlikely(c->cur_from_user->posn_from_user <
-			     sizeof(struct dm_user_message)))
+			     sizeof_dm_user_message()))
 			goto cleanup_unlock;
 
 		old = c->cur_from_user;
@@ -939,8 +953,8 @@ static ssize_t dev_write(struct kiocb *iocb, struct iov_iter *from)
 		}
 		mutex_unlock(&c->target->lock);
 
-		WARN_ON(old->posn_from_user != sizeof(struct dm_user_message));
-		msg->posn_from_user = sizeof(struct dm_user_message);
+		WARN_ON(old->posn_from_user != sizeof_dm_user_message());
+		msg->posn_from_user = sizeof_dm_user_message();
 		msg->return_type = old->msg.type;
 		msg->return_flags = old->msg.flags;
 		WARN_ON(msg->posn_from_user > msg->total_from_user);
@@ -1225,6 +1239,8 @@ static int user_map(struct dm_target *ti, struct bio *bio)
 	entry->msg.flags = bio_flags_to_user_flags(bio);
 	entry->msg.sector = bio->bi_iter.bi_sector;
 	entry->msg.len = bio_size(bio);
+	if (atomic_read(&dm_user_msg_v) == DM_USER_MESSAGE_V2)
+		entry->msg_v2.ioprio = bio_prio(bio);
 	entry->bio = bio;
 	entry->posn_to_user = 0;
 	entry->total_to_user = bio_bytes_needed_to_user(bio);
@@ -1249,6 +1265,29 @@ static int user_map(struct dm_target *ti, struct bio *bio)
 	return DM_MAPIO_SUBMITTED;
 }
 
+static int user_message(struct dm_target *ti, unsigned argc, char **argv,
+			char *result, unsigned maxlen)
+{
+	int r = -EINVAL;
+
+	if (argc != 2) {
+		DMWARN("Invalid dm-user message arguments, expect 2 arguments, got %d", argc);
+		return r;
+	}
+
+	if (!strcasecmp(argv[0], "dm_user_message_ver")) {
+		unsigned long ver;
+
+		if (kstrtoul(argv[1], 10, &ver) || ver <= 0 || ver > DM_USER_MESSAGE_VER_MAX)
+			return r;
+
+		atomic_set(&dm_user_msg_v, ver);
+		DMINFO("Change dm-user message version to %u.", ver);
+	}
+
+	return r;
+}
+
 static struct target_type user_target = {
 	.name = "user",
 	.version = { 1, 0, 0 },
@@ -1256,6 +1295,7 @@ static struct target_type user_target = {
 	.ctr = user_ctr,
 	.dtr = user_dtr,
 	.map = user_map,
+	.message = user_message,
 };
 
 static int __init dm_user_init(void)
