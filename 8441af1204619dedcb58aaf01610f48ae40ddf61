@@ -108,6 +108,30 @@
       },
       "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "076698fc_2e811303",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-08-23T19:02:58Z",
+      "side": 1,
+      "message": "I think the right approach would be:\n\nADVANCED\u003dy\nBIC\u003dn\nWESTWOOD\u003dn\nHTCP\u003dn\nBBR\u003dy\n(and yeah built in is fine, and even preferred)\n\n*PLUS* whatever is the config that selects the default \u003dcubic\n\nbased on:\n$ adb shell zcat /proc/config.gz | egrep -i cubic\nCONFIG_TCP_CONG_CUBIC\u003dy\nCONFIG_DEFAULT_TCP_CONG\u003d\"cubic\"\n\nI assume you\u0027d need to manually set the above.",
+      "parentUuid": "d76c2593_20fe443c",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 21
+      },
+      "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
