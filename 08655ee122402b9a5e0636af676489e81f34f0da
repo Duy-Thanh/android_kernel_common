@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e64e4a_cfff6558",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-23T06:16:47Z",
+      "side": 1,
+      "message": "Fixes BT on RB5 and SM8550-HDK devices used in LKFT.",
+      "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
