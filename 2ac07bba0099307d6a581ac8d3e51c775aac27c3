@@ -45,6 +45,30 @@
       },
       "revId": "2ac07bba0099307d6a581ac8d3e51c775aac27c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f68c37_0518e336",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-08-23T19:34:29Z",
+      "side": 1,
+      "message": "Yes, that\u0027s not needed,`writel` emits `dmb oshst` I will abandon this change.",
+      "parentUuid": "e9a02403_acc6f1f8",
+      "range": {
+        "startLine": 220,
+        "startChar": 1,
+        "endLine": 220,
+        "endChar": 8
+      },
+      "revId": "2ac07bba0099307d6a581ac8d3e51c775aac27c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
