@@ -330890,6 +330890,12 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9db1c576
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x29c600bb
+}
+function {
   id: 0x9db28ca2
   return_type_id: 0x6720d32f
   parameter_id: 0x0258f96e
@@ -363355,6 +363361,24 @@ elf_symbol {
   crc: 0x429f44d6
   type_id: 0x9d9d4b64
   full_name: "devm_reset_controller_register"
+}
+elf_symbol {
+  id: 0xbc1b7b65
+  name: "devm_rproc_add"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6fe72a07
+  type_id: 0x9db1c576
+  full_name: "devm_rproc_add"
+}
+elf_symbol {
+  id: 0x2df89a54
+  name: "devm_rproc_alloc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd2a21170
+  type_id: 0xbd324cd3
+  full_name: "devm_rproc_alloc"
 }
 elf_symbol {
   id: 0x752a2b5b
@@ -414698,6 +414722,8 @@ interface {
   symbol_id: 0xb7d7707e
   symbol_id: 0xdb0692a6
   symbol_id: 0xfafcdec5
+  symbol_id: 0xbc1b7b65
+  symbol_id: 0x2df89a54
   symbol_id: 0x752a2b5b
   symbol_id: 0xca559b71
   symbol_id: 0xa5b63f73
