@@ -33,6 +33,40 @@
       "message": "Reference commits:\n9a15ce685706 (\"Bluetooth: qca: use the power sequencer for QCA6390\")\n921ad2879aa7 (\"Bluetooth: hci_qca: use the power sequencer for wcn7850 and wcn6855\")",
       "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be98bb2_0868c1dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-23T23:39:38Z",
+      "side": 1,
+      "message": "+Ramji \n\nI\u0027m a little worried that moving this functionality into the GKI core and GKI module may impact other vendors who implement the logic in their own modules.",
+      "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633ce4aa_ffe17eb2",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-23T23:39:38Z",
+      "side": 1,
+      "message": "So it looks like CONFIG_POWER_SEQUENCING is a tristate, and could be \u003dm but CONFIG_BT_HCIUART seems to depend on POWER_SEQUENCING||!POWER_SEQUENCING.\n\nWould moving BT_HCIUART to a module better resolve this?",
+      "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
