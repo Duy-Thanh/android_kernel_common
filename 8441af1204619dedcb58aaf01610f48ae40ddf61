@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23f120ef_a1df1966",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-23T15:34:27Z",
+      "side": 1,
+      "message": "you seem to be adding more than just the BBR algorithm here.",
+      "range": {
+        "startLine": 7,
+        "startChar": 42,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03d1a044_661b4d56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-23T15:34:27Z",
+      "side": 1,
+      "message": "please wrap the commit message appropriately.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 133
+      },
+      "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "684ffc57_a4deca01",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -19,6 +65,46 @@
         "startChar": 0,
         "endLine": 11,
         "endChar": 14
+      },
+      "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2de3d1d_72932c78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-23T15:34:27Z",
+      "side": 1,
+      "message": "This seems to break `vts_kernel_net_tests`.",
+      "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76c2593_20fe443c",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-23T15:34:27Z",
+      "side": 1,
+      "message": "Doing this enables these algorithms but it also changes what the default algo is. Which I don\u0027t think is what you want? I actually can\u0027t tell which one out of all these algos is now the default because they are all selected as built-in. I don\u0027t think these configs are meant to be used like this (multiple \u003dy). It seems to me you only want one as default via \u003dy and the rest as loadable modules. Which leads me to... why not have the algos you want as modules and select them from userspace?",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 21
       },
       "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
