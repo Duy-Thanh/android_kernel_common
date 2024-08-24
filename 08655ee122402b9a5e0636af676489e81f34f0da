@@ -67,6 +67,24 @@
       "message": "So it looks like CONFIG_POWER_SEQUENCING is a tristate, and could be \u003dm but CONFIG_BT_HCIUART seems to depend on POWER_SEQUENCING||!POWER_SEQUENCING.\n\nWould moving BT_HCIUART to a module better resolve this?",
       "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a9dac22_e6279144",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-24T09:06:46Z",
+      "side": 1,
+      "message": "Sorry I read the defconfig dependencies wrong. Thank you for pointing out to CONFIG_BT_HCIUART, which is already set to \"m\". Setting POWER_SEQUENCING\u003dm works too. I\u0027ll update the patchset.",
+      "parentUuid": "633ce4aa_ffe17eb2",
+      "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
