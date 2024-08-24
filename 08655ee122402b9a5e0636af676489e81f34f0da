@@ -85,6 +85,24 @@
       "parentUuid": "633ce4aa_ffe17eb2",
       "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd609c2b_c075829f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-24T15:33:30Z",
+      "side": 1,
+      "message": "Smoke tested on RB5 and SM8550-HDK with working WiFi-BT.",
+      "parentUuid": "5a9dac22_e6279144",
+      "revId": "08655ee122402b9a5e0636af676489e81f34f0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
