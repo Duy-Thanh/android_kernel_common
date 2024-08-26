@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4be36e2d_7e48f49b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-26T18:42:37Z",
+      "side": 1,
+      "message": "Build tested for //common:kernel_x86_64_dist, //common:kernel_aarch64_dist and //common:db845c_dist targets.",
+      "revId": "e572219fb6d9fb24ae8e03d7f2ba356482b46276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
