@@ -105,6 +105,24 @@
       "parentUuid": "765c4877_c413626d",
       "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e4f416_50bba08c",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-26T19:39:44Z",
+      "side": 1,
+      "message": "Ah. Regarding \"BT_HCIUART_QCA(\u003dy in gki_defconfig)\" could you add that detail in the commit message, just to make the justification more clear (intuitively one might think that BT_HCIUART_QCA would be configured as a vendor module)",
+      "parentUuid": "ee10b06f_4165c033",
+      "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
