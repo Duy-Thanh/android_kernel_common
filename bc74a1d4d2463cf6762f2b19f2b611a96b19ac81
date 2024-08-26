@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2efa4717_2e733987",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-26T17:31:56Z",
+      "side": 1,
+      "message": "Breaks KMI:\n```\ntype \u0027struct request\u0027 changed\n  byte size changed from 320 to 328\n  member \u0027u64 android_oem_data1\u0027 was added\n  member \u0027u64 android_kabi_reserved1\u0027 changed\n    offset changed by 64\n```",
+      "revId": "bc74a1d4d2463cf6762f2b19f2b611a96b19ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
