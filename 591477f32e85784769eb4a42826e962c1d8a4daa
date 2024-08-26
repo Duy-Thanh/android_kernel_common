@@ -16,6 +16,23 @@
       "message": "hi sir\n\nplease help,if other reviewer need to be added",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7198df5f_ae0e930a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-26T17:06:48Z",
+      "side": 1,
+      "message": "Breaks all builds. You didn\u0027t even build it before submitting? How did you test that it fixed your issue it without ever building it?\n\n```\nstatic DEFINE_MUTEX(icc_lock);\n                    ^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:177:16: error: use of undeclared identifier \u0027icc_bw_lock\u0027; did you mean \u0027icc_lock\u0027?\n        mutex_unlock(\u0026icc_bw_lock);\n                      ^~~~~~~~~~~\n                      icc_lock\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:32:21: note: \u0027icc_lock\u0027 declared here\nstatic DEFINE_MUTEX(icc_lock);\n                    ^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:785:14: error: use of undeclared identifier \u0027icc_bw_lock\u0027; did you mean \u0027icc_lock\u0027?\n        mutex_lock(\u0026icc_bw_lock);\n                    ^~~~~~~~~~~\n                    icc_lock\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:32:21: note: \u0027icc_lock\u0027 declared here\nstatic DEFINE_MUTEX(icc_lock);\n                    ^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:794:16: error: use of undeclared identifier \u0027icc_bw_lock\u0027; did you mean \u0027icc_lock\u0027?\n        mutex_unlock(\u0026icc_bw_lock);\n                      ^~~~~~~~~~~\n                      icc_lock\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:32:21: note: \u0027icc_lock\u0027 declared here\nstatic DEFINE_MUTEX(icc_lock);\n                    ^\n4 errors generated.\nmake[2]: *** [/mnt/disks/build-disk/src/android/common-android13-5.15/common/scripts/Makefile.build:287: drivers/interconnect/core.o] Error 1\n\n```",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
