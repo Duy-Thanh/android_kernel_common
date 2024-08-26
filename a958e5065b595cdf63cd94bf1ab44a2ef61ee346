@@ -123,6 +123,24 @@
       "parentUuid": "ee10b06f_4165c033",
       "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d2759e_eaa0dd22",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2024-08-26T19:46:36Z",
+      "side": 1,
+      "message": "I am trying to figure out why these are not GKI modules already as they definitely not needed on every devices and probably BCM and QCA are probably physically mutually exclusive chips:\n\n```\nCONFIG_BT_HCIUART_LL\u003dy\nCONFIG_BT_HCIUART_BCM\u003dy\nCONFIG_BT_HCIUART_QCA\u003dy\n```\n\n`CONFIG_POWER_SEQUENCING` since this is a framework driver it is fine to be a GKI Module. But If I don\u0027t find a good reason for above 3; I\u0027ll convert them to GKI modules.",
+      "parentUuid": "ee10b06f_4165c033",
+      "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
