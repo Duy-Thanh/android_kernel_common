@@ -16,6 +16,23 @@
       "message": "I could build `//common:kernel_x86_64_dist` target with `POWER_SEQUENCING\u003dm` in x86/gki_defconfig as well but I can\u0027t smoke test it. And I don\u0027t want to break the targets that I can\u0027t test.",
       "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "765c4877_c413626d",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-26T17:08:36Z",
+      "side": 1,
+      "message": "(apologies, as its Monday and I\u0027m trying to remember the context from last week) Is there a reason this needs to be in the gki_defconfig and can\u0027t be in the db845c fragment?",
+      "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
