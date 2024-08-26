@@ -120,7 +120,11 @@
 #if IS_ENABLED(CONFIG_IPV6)
 #include <net/ipv6_stubs.h>
 #endif
+<<<<<<< HEAD   (dd9cf1ba4061205cb672a7eec2206deec201c5eb ANDROID: ABI: Newhooks added, honor symbol list needs updati)
 #include <net/rps.h>
+||||||| BASE   (e067e1551b5f0c669e133a33d5149a444c8b2a2f Merge 6.12.10 into android16-6.12)
+=======
+>>>>>>> CHANGE (06cb03bf39356673cbb0a0dd94922cd13507f742 ANDROID: GKI: net: add vendor hook for network quality estim)
 #include <trace/hooks/net.h>
 
 struct udp_table udp_table __read_mostly;
@@ -2650,6 +2654,7 @@ static int udp_unicast_rcv_skb(struct sock *sk, struct sk_buff *skb,
 	if (inet_get_convert_csum(sk) && uh->check && !IS_UDPLITE(sk))
 		skb_checksum_try_convert(skb, IPPROTO_UDP, inet_compute_pseudo);
 
+	trace_android_vh_udp_unicast_rcv_skb(skb, sk);
 	ret = udp_queue_rcv_skb(sk, skb);
 
 	/* a return value > 0 means to resubmit the input, but
