@@ -16,6 +16,24 @@
       "message": "Changes in relation chain has not been merged due to presubmit-verified vote. Is it possible to restore these votes or rerun them?",
       "revId": "a4c49925a234f1fd0f30d171d0d55808c6809371",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc8ced2_80b3d1e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-26T19:40:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9369a5bd_7e5d0ae6",
+      "revId": "a4c49925a234f1fd0f30d171d0d55808c6809371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
