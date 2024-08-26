@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c0e5983_d5b58569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-26T17:09:52Z",
+      "side": 1,
+      "message": "Definitely would like to have any gki_defconfigs to be done in sync between arm64 and x86.  So if this does need gki_defconfig change, please also include the x86 change here too.",
+      "parentUuid": "1b01ed6f_baa29c96",
+      "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "765c4877_c413626d",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 3
