@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13ca6ac0_cc688a89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-26T18:02:23Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "0c0e5983_d5b58569",
+      "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "765c4877_c413626d",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 3
@@ -49,6 +67,24 @@
       "writtenOn": "2024-08-26T17:08:36Z",
       "side": 1,
       "message": "(apologies, as its Monday and I\u0027m trying to remember the context from last week) Is there a reason this needs to be in the gki_defconfig and can\u0027t be in the db845c fragment?",
+      "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee10b06f_4165c033",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-26T18:02:23Z",
+      "side": 1,
+      "message": "BT_HCIUART_QCA(\u003dy in gki_defconfig) has a dependency on POWER_SEQUENCING and setting POWER_SEQUENCING\u003dm in db845c defconfig fragment doesn\u0027t work, because a CONFIG in gki_defconfig doesn\u0027t have visibility in vendor config fragment(?)",
+      "parentUuid": "765c4877_c413626d",
       "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
