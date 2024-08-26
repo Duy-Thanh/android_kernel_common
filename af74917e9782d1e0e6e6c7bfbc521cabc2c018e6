@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ccef52_ae242151",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-26T16:30:33Z",
+      "side": 1,
+      "message": "Breaks KMI:\n```\ntype \u0027struct blkcg\u0027 changed\n  byte size changed from 352 to 360\n  member \u0027u64 android_oem_data1\u0027 was added\n\ntype \u0027struct blkcg_gq\u0027 changed\n  byte size changed from 360 to 368\n  member \u0027u64 android_oem_data1\u0027 was added\n```",
+      "revId": "af74917e9782d1e0e6e6c7bfbc521cabc2c018e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
