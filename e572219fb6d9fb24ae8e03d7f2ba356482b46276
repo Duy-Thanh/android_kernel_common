@@ -16,6 +16,23 @@
       "message": "Build tested for //common:kernel_x86_64_dist, //common:kernel_aarch64_dist and //common:db845c_dist targets.",
       "revId": "e572219fb6d9fb24ae8e03d7f2ba356482b46276",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3e8e3b4_8db3bafc",
+        "filename": "modules.bzl",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2024-08-26T20:15:03Z",
+      "side": 1,
+      "message": "This one seems to be controlled by the `POWER_SEQUENCING_QCOM_WCN` and this shouldn\u0027t be part of the GKI modules as it is Qcom specific code. I think, you need to explicitly set this to `\u003dn` in `gki_defconfig` as it is default `m` with `sequencing` enabled.",
+      "revId": "e572219fb6d9fb24ae8e03d7f2ba356482b46276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

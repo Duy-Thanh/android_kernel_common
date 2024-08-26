@@ -159,6 +159,24 @@
       "parentUuid": "b6d2759e_eaa0dd22",
       "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26b4eb32_88cc478c",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2024-08-26T20:15:03Z",
+      "side": 1,
+      "message": "Ignore last 2 comments as John pointed out these are the additional support for the HCIUART driver which is already a module.\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/drivers/bluetooth/Makefile;l\u003d42-51",
+      "parentUuid": "4af6af27_0321143f",
+      "revId": "a958e5065b595cdf63cd94bf1ab44a2ef61ee346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
