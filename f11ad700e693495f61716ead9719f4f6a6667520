@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc02f89_4bfb51f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-26T17:16:35Z",
+      "side": 1,
+      "message": "Breaks KMI:\n```\ntype \u0027struct backing_dev_info\u0027 changed\n  byte size changed from 1328 to 1344\n  12 members (\u0027struct list_head wb_list\u0027 .. \u0027u64 android_kabi_reserved2\u0027) changed\n    offset changed by 128\n\ntype \u0027struct bdi_writeback\u0027 changed\n  byte size changed from 904 to 920\n  member \u0027u64 android_oem_data1[2]\u0027 was added\n```",
+      "revId": "f11ad700e693495f61716ead9719f4f6a6667520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
