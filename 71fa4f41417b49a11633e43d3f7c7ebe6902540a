@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be9d5a0c_141ee5fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-26T16:36:50Z",
+      "side": 1,
+      "message": "Breaks KMI:\n```\ntype \u0027struct signal_struct\u0027 changed\n  byte size changed from 1120 to 1128\n  member \u0027u64 android_oem_data1\u0027 was added\n```",
+      "revId": "71fa4f41417b49a11633e43d3f7c7ebe6902540a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
