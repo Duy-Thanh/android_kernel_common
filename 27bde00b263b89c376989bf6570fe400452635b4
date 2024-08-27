@@ -33,6 +33,29 @@
       "message": "This is too big to review all at once, please break up into a patch series that adds symbols in a per-subsystem way.",
       "revId": "27bde00b263b89c376989bf6570fe400452635b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04fddc1f_3bc56b3b",
+        "filename": "android/abi_gki_aarch64_hikey",
+        "patchSetId": 3
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T16:32:40Z",
+      "side": 1,
+      "message": "why do you need debugfs?",
+      "range": {
+        "startLine": 888,
+        "startChar": 0,
+        "endLine": 888,
+        "endChar": 12
+      },
+      "revId": "27bde00b263b89c376989bf6570fe400452635b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
