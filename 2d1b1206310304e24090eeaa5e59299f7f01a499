@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d13394d_bcc7610f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-27T19:40:04Z",
+      "side": 1,
+      "message": "why is the subject line repeated. It should match the upstream subject and commit message",
+      "revId": "2d1b1206310304e24090eeaa5e59299f7f01a499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f76213d_eaccdeaf",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
