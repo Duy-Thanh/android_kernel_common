@@ -174,6 +174,7 @@ struct ax88179_data {
 	u32 wol_supported;
 	u32 wolopts;
 	u8 disconnecting;
+	u8 initialized;
 };
 
 struct ax88179_int_data {
@@ -1675,6 +1676,7 @@ static int ax88179_reset(struct usbnet *dev)
 
 static int ax88179_net_reset(struct usbnet *dev)
 {
+<<<<<<< HEAD   (42515e ANDROID: sched: Add android_vh_set_task_comm)
 	u16 tmp16;
 
 	ax88179_read_cmd(dev, AX_ACCESS_PHY, AX88179_PHY_ID, GMII_PHY_PHYSR,
@@ -1690,6 +1692,14 @@ static int ax88179_net_reset(struct usbnet *dev)
 	} else {
 		ax88179_reset(dev);
 	}
+=======
+	struct ax88179_data *ax179_data = dev->driver_priv;
+
+	if (ax179_data->initialized)
+		ax88179_reset(dev);
+	else
+		ax179_data->initialized = 1;
+>>>>>>> BRANCH (9d37e2 ANDROID: add __module_get to db854c symbol list.)
 
 	return 0;
 }
