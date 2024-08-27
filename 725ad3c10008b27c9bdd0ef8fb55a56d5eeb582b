@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a8c215_69e7e397",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-08-27T08:50:47Z",
+      "side": 1,
+      "message": "hello everyone,\n\nChrome does not support downloading files larger than a few tens of M in android15-6.6-2024-08_r2 and latest aosp/android15-6.6 \n\nSteps to reproduce the problem:\n1. adb install -r  --bypass-low-target-sdk-block TrichromeLibrary64_arm64.apk\n    adb install -r  --bypass-low-target-sdk-block Chrome64_arm64.apk\n2. Open Chrome, download a file of a few tens of M, and you\u0027ll be met with the download being paused. But downloading a file of a few hundred K is successful.\n\nAfter testing, the problem disappeared after I revert the the patch. Please help to verify as well as fix it as soon as possible, it seems to me to be a serious problem, thanks.",
+      "revId": "725ad3c10008b27c9bdd0ef8fb55a56d5eeb582b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
