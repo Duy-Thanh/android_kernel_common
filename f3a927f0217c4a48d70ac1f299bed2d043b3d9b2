@@ -103,6 +103,42 @@
       "message": "Again, please document why this is needed.",
       "revId": "f3a927f0217c4a48d70ac1f299bed2d043b3d9b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93d33bc2_9b438231",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876090
+      },
+      "writtenOn": "2024-08-27T17:22:52Z",
+      "side": 1,
+      "message": "Hi Suren, As this change does not have code changes and it is just whitelisting change, we have not mentioned the rationale behind. We can update the reason if it is ok. Thanks- Venkat",
+      "parentUuid": "b6ebf01b_fec0c6db",
+      "revId": "f3a927f0217c4a48d70ac1f299bed2d043b3d9b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6572c40f_8ee45cdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876090
+      },
+      "writtenOn": "2024-08-27T17:22:52Z",
+      "side": 1,
+      "message": "Hi Greg, we have a requirement to allocate memory which is not initialized with Zero (requirement is for both uncached and cached memory) which are shared with DSP.\n\nDma-buf framework supports only initialized memory with Cached and uncached dma-buf heaps.\n\nSo we want to use ARM PMEM based API\u0027s for cache operations on memremap\u0027ed buffers. Hence whitelisting of these symbols are requested.\n\nThanks - Venkat",
+      "parentUuid": "8d239664_124efd9f",
+      "revId": "f3a927f0217c4a48d70ac1f299bed2d043b3d9b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
