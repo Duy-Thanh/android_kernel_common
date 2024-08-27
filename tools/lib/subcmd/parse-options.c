@@ -633,12 +633,16 @@ int parse_options_subcommand(int argc, const char **argv, const struct option *o
 			const char *const subcommands[], const char *usagestr[], int flags)
 {
 	struct parse_opt_ctx_t ctx;
+	char *buf = NULL;
 
 	/* build usage string if it's not provided */
 	if (subcommands && !usagestr[0]) {
+<<<<<<< HEAD   (3c0c9a ANDROID: Update the GKI symbol list and ABI XML am: 5a3d6440)
 		char *buf = NULL;
 		int i;
 
+=======
+>>>>>>> BRANCH (95fd17 Merge tag 'android12-5.10.223_r00' into android12-5.10)
 		astrcatf(&buf, "%s %s [<options>] {", subcmd_config.exec_name, argv[0]);
 
 		for (i = 0; subcommands[i]; i++) {
@@ -682,7 +686,10 @@ int parse_options_subcommand(int argc, const char **argv, const struct option *o
 			astrcatf(&error_buf, "unknown switch `%c'", *ctx.opt);
 		usage_with_options(usagestr, options);
 	}
-
+	if (buf) {
+		usagestr[0] = NULL;
+		free(buf);
+	}
 	return parse_options_end(&ctx);
 }
 
