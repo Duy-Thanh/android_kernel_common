@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e385ad95_b4fd52d3",
+        "filename": "tools/testing/kunit/android/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-27T19:45:41Z",
+      "side": 1,
+      "message": "The lines should be up to 80 chars long.",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "f55f6e3c65a47a9a450fabd69f855de5b96b1f77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
