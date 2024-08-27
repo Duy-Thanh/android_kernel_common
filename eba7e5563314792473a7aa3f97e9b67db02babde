@@ -85,6 +85,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b671d4b_a20fefef",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3981,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "what namespace is this pid in?  How are you handling pid namespaces at all?",
+      "range": {
+        "startLine": 3981,
+        "startChar": 11,
+        "endLine": 3981,
+        "endChar": 17
+      },
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9fbb266_90562773",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 5764,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "when code works properly, it is quiet. You have lots of debugging lines as pr_info() please move to pr_dbg()",
+      "range": {
+        "startLine": 5764,
+        "startChar": 4,
+        "endLine": 5764,
+        "endChar": 11
+      },
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb1b8933_6a9cca78",
         "filename": "drivers/android/binder_genl.c",
         "patchSetId": 10
@@ -191,6 +237,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1f4c8d9_13c96e36",
+        "filename": "drivers/android/binder_genl.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "why does this need to be a new .h file at all?  Why not use the existing one, binder_internal.h?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d373a6ed_13afb2b4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder_genl.h",
+              "range": {
+                "startLine": 6,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": "#ifndef _LINUX_BINDER_INTERNAL_GENL_H\n#define _LINUX_BINDER_INTERNAL_GENL_H\n"
+            },
+            {
+              "path": "drivers/android/binder_genl.h",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "#endif /* _LINUX_BINDER_INTERNAL_GENL_H */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac7e19d1_0e84c3fa",
         "filename": "drivers/android/binder_trace.h",
         "patchSetId": 10
@@ -238,6 +335,172 @@
       "side": 1,
       "message": "Nothing actually. I just follow the legacy code to list the printed struct here. Probably we should remove those as well.",
       "parentUuid": "ac7e19d1_0e84c3fa",
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94418706_3b9f83df",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "what namespace is this pid in?",
+      "range": {
+        "startLine": 659,
+        "startChar": 7,
+        "endLine": 659,
+        "endChar": 10
+      },
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d488a0c6_3de48525",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "what namespace?",
+      "range": {
+        "startLine": 667,
+        "startChar": 4,
+        "endLine": 667,
+        "endChar": 12
+      },
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "032b4e4a_6f59d911",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "what namespace?",
+      "range": {
+        "startLine": 669,
+        "startChar": 4,
+        "endLine": 669,
+        "endChar": 10
+      },
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4e2888_22a14f08",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "range": {
+        "startLine": 715,
+        "startChar": 1,
+        "endLine": 715,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0d28e8d4_500679cb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/uapi/linux/android/binder.h",
+              "range": {
+                "startLine": 716,
+                "startChar": 0,
+                "endLine": 716,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The number of attributes excluding the __BINDER_GENL_ATTR_MAX.\n\t * This is a fix to the sizeof(attr) which cannot be used to\n\t * calculate the number of attributes.\n\t */\n"
+            },
+            {
+              "path": "include/uapi/linux/android/binder.h",
+              "range": {
+                "startLine": 746,
+                "startChar": 0,
+                "endLine": 746,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The number of commands excluding the __BINDER_GENL_CMD_MAX.\n\t * This is a fix to the sizeof(cmd) which cannot be used to\n\t * calculate the number of commands.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0298e632_f9cff8b9",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "why needed?",
+      "range": {
+        "startLine": 718,
+        "startChar": 8,
+        "endLine": 718,
+        "endChar": 28
+      },
+      "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d46c0aa9_f3e12641",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:28:26Z",
+      "side": 1,
+      "message": "why needed?",
+      "range": {
+        "startLine": 748,
+        "startChar": 8,
+        "endLine": 748,
+        "endChar": 27
+      },
       "revId": "eba7e5563314792473a7aa3f97e9b67db02babde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
