@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82f6ca0b_3d31f30d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-08-27T10:03:33Z",
+      "side": 1,
+      "message": "Hi, John\n\nThis change is to enable the gki kernel for the hikey6220 build, should I create a bug or do something else for this? (want to confirm here first). And is there anything else I should check as well for the enabling of the gki kernel for the hikey6220 build?",
+      "revId": "27bde00b263b89c376989bf6570fe400452635b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
