@@ -139,6 +139,24 @@
       "parentUuid": "8d239664_124efd9f",
       "revId": "f3a927f0217c4a48d70ac1f299bed2d043b3d9b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efa1aa3e_f0e65143",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-27T17:26:49Z",
+      "side": 1,
+      "message": "This needs to be documented either in the patch changelog or in the bug.",
+      "parentUuid": "6572c40f_8ee45cdf",
+      "revId": "f3a927f0217c4a48d70ac1f299bed2d043b3d9b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
