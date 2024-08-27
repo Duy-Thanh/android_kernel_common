@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f76213d_eaccdeaf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T16:27:07Z",
+      "side": 1,
+      "message": "\"Bug: \"",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 3
+      },
+      "revId": "2d1b1206310304e24090eeaa5e59299f7f01a499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10bf7827_c9da0f8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T16:27:07Z",
+      "side": 1,
+      "message": "Why is a lockdep patch needed?",
+      "revId": "2d1b1206310304e24090eeaa5e59299f7f01a499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
