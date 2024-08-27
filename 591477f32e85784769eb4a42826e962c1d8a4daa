@@ -69,6 +69,24 @@
       "parentUuid": "f489cf9b_5b6ecfe3",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "306061f0_a2136b81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3599834
+      },
+      "writtenOn": "2024-08-27T06:54:55Z",
+      "side": 1,
+      "message": "the fix commit link:\nhttps://android-review.googlesource.com/c/kernel/common/+/3241427",
+      "parentUuid": "40034cc6_df8dd576",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
