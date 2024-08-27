@@ -105,6 +105,24 @@
       "parentUuid": "306061f0_a2136b81",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "131d9bf3_deaa8a56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-27T17:07:57Z",
+      "side": 1,
+      "message": "The lock was reverted because it caused problems in devices.",
+      "parentUuid": "a1a0f4c2_a5eb28ad",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
