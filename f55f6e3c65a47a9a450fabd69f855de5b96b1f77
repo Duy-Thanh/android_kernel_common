@@ -22,6 +22,30 @@
       },
       "revId": "f55f6e3c65a47a9a450fabd69f855de5b96b1f77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ede1aad_396e783e",
+        "filename": "tools/testing/kunit/android/README",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-08-27T20:04:46Z",
+      "side": 1,
+      "message": "This is a cherry pick. It has to be fixed in android-mainline with different change then.",
+      "parentUuid": "e385ad95_b4fd52d3",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "f55f6e3c65a47a9a450fabd69f855de5b96b1f77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
