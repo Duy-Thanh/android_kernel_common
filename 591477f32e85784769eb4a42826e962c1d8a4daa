@@ -33,6 +33,24 @@
       "message": "Breaks all builds. You didn\u0027t even build it before submitting? How did you test that it fixed your issue it without ever building it?\n\n```\nstatic DEFINE_MUTEX(icc_lock);\n                    ^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:177:16: error: use of undeclared identifier \u0027icc_bw_lock\u0027; did you mean \u0027icc_lock\u0027?\n        mutex_unlock(\u0026icc_bw_lock);\n                      ^~~~~~~~~~~\n                      icc_lock\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:32:21: note: \u0027icc_lock\u0027 declared here\nstatic DEFINE_MUTEX(icc_lock);\n                    ^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:785:14: error: use of undeclared identifier \u0027icc_bw_lock\u0027; did you mean \u0027icc_lock\u0027?\n        mutex_lock(\u0026icc_bw_lock);\n                    ^~~~~~~~~~~\n                    icc_lock\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:32:21: note: \u0027icc_lock\u0027 declared here\nstatic DEFINE_MUTEX(icc_lock);\n                    ^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:794:16: error: use of undeclared identifier \u0027icc_bw_lock\u0027; did you mean \u0027icc_lock\u0027?\n        mutex_unlock(\u0026icc_bw_lock);\n                      ^~~~~~~~~~~\n                      icc_lock\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/drivers/interconnect/core.c:32:21: note: \u0027icc_lock\u0027 declared here\nstatic DEFINE_MUTEX(icc_lock);\n                    ^\n4 errors generated.\nmake[2]: *** [/mnt/disks/build-disk/src/android/common-android13-5.15/common/scripts/Makefile.build:287: drivers/interconnect/core.o] Error 1\n\n```",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f489cf9b_5b6ecfe3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3599834
+      },
+      "writtenOn": "2024-08-27T01:57:06Z",
+      "side": 1,
+      "message": "I am sorry about that,I build it in branch android13-5.15-2023-12 but android13-5.15. \nOur code use branch android13-5.15-2023-12, it has the define of icc_bw_lock,but branch android13-5.15 haven\u0027t",
+      "parentUuid": "7198df5f_ae0e930a",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
