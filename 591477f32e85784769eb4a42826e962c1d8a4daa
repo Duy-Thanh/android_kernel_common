@@ -87,6 +87,24 @@
       "parentUuid": "40034cc6_df8dd576",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a0f4c2_a5eb28ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3599834
+      },
+      "writtenOn": "2024-08-27T08:01:12Z",
+      "side": 1,
+      "message": "I find the icc_bw_lock change, revert in android13-5.15\n\nhttps://android.googlesource.com/kernel/common/+/8ec555a902081f3de2ee0fbeae58743101e57e5f%5E%21/#F0",
+      "parentUuid": "306061f0_a2136b81",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
