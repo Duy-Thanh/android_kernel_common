@@ -68,6 +68,24 @@
       "parentUuid": "3accc0c0_edb59fc6",
       "revId": "f3a927f0217c4a48d70ac1f299bed2d043b3d9b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ebf01b_fec0c6db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-27T15:42:58Z",
+      "side": 1,
+      "message": "Please add this rationale to the changelog of the patch or in the bug so that when we look at this change years from now we can understand why this was needed.",
+      "parentUuid": "095ffd5f_6d9d8789",
+      "revId": "f3a927f0217c4a48d70ac1f299bed2d043b3d9b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
