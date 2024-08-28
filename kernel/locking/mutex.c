@@ -932,6 +932,7 @@ static noinline void __sched __mutex_unlock_slowpath(struct mutex *lock, unsigne
 	DEFINE_WAKE_Q(wake_q);
 	unsigned long owner;
 
+	trace_android_vh_before_mutex_unlock_slowpath(lock);
 	mutex_release(&lock->dep_map, ip);
 
 	/*

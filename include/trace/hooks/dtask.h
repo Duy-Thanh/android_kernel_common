@@ -97,6 +97,9 @@ DECLARE_HOOK(android_vh_alter_mutex_list_add,
 DECLARE_HOOK(android_vh_mutex_unlock_slowpath,
 	TP_PROTO(struct mutex *lock),
 	TP_ARGS(lock));
+DECLARE_HOOK(android_vh_before_mutex_unlock_slowpath,
+	TP_PROTO(struct mutex *lock),
+	TP_ARGS(lock));
 
 DECLARE_HOOK(android_vh_exit_signal_whether_wake,
 	TP_PROTO(struct task_struct *p, bool *wake),
