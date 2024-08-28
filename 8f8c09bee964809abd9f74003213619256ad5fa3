@@ -16,6 +16,23 @@
       "message": "Respin bug:b/362445989",
       "revId": "8f8c09bee964809abd9f74003213619256ad5fa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae785911_4fc60a89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008340
+      },
+      "writtenOn": "2024-08-28T02:08:22Z",
+      "side": 1,
+      "message": "Respin bug:b/362445989 to include geniezone power optimization feature.",
+      "revId": "8f8c09bee964809abd9f74003213619256ad5fa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
