@@ -123,6 +123,24 @@
       "parentUuid": "a1a0f4c2_a5eb28ad",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f4a0e6_ed70e9fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3599834
+      },
+      "writtenOn": "2024-08-28T01:51:07Z",
+      "side": 1,
+      "message": "the patch has some dependency of the reverted commit, could I commit again?",
+      "parentUuid": "131d9bf3_deaa8a56",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
