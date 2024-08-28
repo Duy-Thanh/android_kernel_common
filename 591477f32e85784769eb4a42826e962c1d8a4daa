@@ -141,6 +141,24 @@
       "parentUuid": "131d9bf3_deaa8a56",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc01b1b4_a402b1d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-08-28T06:36:38Z",
+      "side": 1,
+      "message": "If you fix the problems that the commit was causing, yes.  Otherwise no as you will end up with a bug here and your systems will not work properly.\n\nPlease test a full series of patches that does all of this correctly, together, and then we can review it.  With these spread out over different series and versions, it\u0027s impossible to do so.",
+      "parentUuid": "e1f4a0e6_ed70e9fa",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
