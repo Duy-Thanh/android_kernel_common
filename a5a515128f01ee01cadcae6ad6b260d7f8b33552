@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/362648783",
       "revId": "a5a515128f01ee01cadcae6ad6b260d7f8b33552",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63e5a175_8d40f3bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-08-28T10:55:28Z",
+      "side": 1,
+      "message": "The change is part of a series, please base on the other change.",
+      "revId": "a5a515128f01ee01cadcae6ad6b260d7f8b33552",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
