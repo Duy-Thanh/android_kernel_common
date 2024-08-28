@@ -33,6 +33,24 @@
       "message": "The change is part of a series, please base on the other change.",
       "revId": "a5a515128f01ee01cadcae6ad6b260d7f8b33552",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "960f2ca3_35a6eb31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-08-28T22:17:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63e5a175_8d40f3bf",
+      "revId": "a5a515128f01ee01cadcae6ad6b260d7f8b33552",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
