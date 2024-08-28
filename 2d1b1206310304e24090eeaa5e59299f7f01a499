@@ -98,6 +98,24 @@
       "parentUuid": "10bf7827_c9da0f8f",
       "revId": "2d1b1206310304e24090eeaa5e59299f7f01a499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a3bed1_4d429ee5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3599834
+      },
+      "writtenOn": "2024-08-28T01:57:03Z",
+      "side": 1,
+      "message": "we meet a problem, sd probe call icc_put,but ufs probe call icc_set_bw,there some race condition",
+      "parentUuid": "5346cd66_6e84291f",
+      "revId": "2d1b1206310304e24090eeaa5e59299f7f01a499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
