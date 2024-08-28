@@ -33,6 +33,24 @@
       "message": "This one seems to be controlled by the `POWER_SEQUENCING_QCOM_WCN` and this shouldn\u0027t be part of the GKI modules as it is Qcom specific code. I think, you need to explicitly set this to `\u003dn` in `gki_defconfig` as it is default `m` with `sequencing` enabled.",
       "revId": "e572219fb6d9fb24ae8e03d7f2ba356482b46276",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a0eb532_901a4141",
+        "filename": "modules.bzl",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-08-28T07:04:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d3e8e3b4_8db3bafc",
+      "revId": "e572219fb6d9fb24ae8e03d7f2ba356482b46276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
