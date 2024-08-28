@@ -4198,7 +4198,11 @@ restart:
 
 	spin_unlock_irq(&lruvec->lru_lock);
 
+<<<<<<< HEAD   (e4d275 Revert "FROMGIT: fuse: Add initial support for fs-verity")
 	kernfs_notify(lru_gen_admin_node);
+=======
+	trace_android_vh_mglru_new_gen(NULL);
+>>>>>>> BRANCH (e7cb9c UPSTREAM: net: sched: sch_multiq: fix possible OOB write in )
 }
 
 static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
