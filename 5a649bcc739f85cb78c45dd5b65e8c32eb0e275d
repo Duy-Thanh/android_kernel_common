@@ -16,6 +16,24 @@
       "message": "Is there a respin request for this patch? The patch needs to have a \"Bug:\" tag that cites a respin request bug filed as described here: https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
       "revId": "5a649bcc739f85cb78c45dd5b65e8c32eb0e275d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc7b433_822cc24e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886360
+      },
+      "writtenOn": "2024-08-28T01:23:22Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nsorry for late respond!\nI cannot pick android12-5.10-2024-08 monthly branch to submit respin request.\nCould you help check the reason. thanks",
+      "parentUuid": "e98148b3_2cfd802c",
+      "revId": "5a649bcc739f85cb78c45dd5b65e8c32eb0e275d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
