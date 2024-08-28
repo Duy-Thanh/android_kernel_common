@@ -353547,6 +353547,15 @@ elf_symbol {
   full_name: "arch_freq_scale"
 }
 elf_symbol {
+  id: 0x97ee5cc4
+  name: "arch_invalidate_pmem"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2c635527
+  type_id: 0x1567dd7e
+  full_name: "arch_invalidate_pmem"
+}
+elf_symbol {
   id: 0xc447be59
   name: "arch_timer_read_counter"
   is_defined: true
@@ -413648,6 +413657,7 @@ interface {
   symbol_id: 0x520c1997
   symbol_id: 0x2d3715da
   symbol_id: 0x7ff45ec2
+  symbol_id: 0x97ee5cc4
   symbol_id: 0xc447be59
   symbol_id: 0xc6d0ad0a
   symbol_id: 0x9403cfad
