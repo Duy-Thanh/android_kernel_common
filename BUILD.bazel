@@ -42,6 +42,8 @@ _GKI_AARCH64_MAKE_GOALS = [
     "modules",
 ]
 
+
+
 _GKI_X86_64_MAKE_GOALS = [
     "bzImage",
     "modules",
