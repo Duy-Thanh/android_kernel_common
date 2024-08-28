@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26b1bdfd_a3eaab3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-08-28T14:16:38Z",
+      "side": 1,
+      "message": "Thanks for the suggestions! is there any command that I could use to add symbols in a per-subsystem way? or need to edit the android/abi_gki_aarch64_hikey file manually with symbols for one subsystem in a change?",
+      "parentUuid": "d10fe4c6_8bc71c85",
+      "revId": "27bde00b263b89c376989bf6570fe400452635b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04fddc1f_3bc56b3b",
         "filename": "android/abi_gki_aarch64_hikey",
         "patchSetId": 3
