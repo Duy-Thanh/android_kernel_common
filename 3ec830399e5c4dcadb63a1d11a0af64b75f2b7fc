@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acbddfbf_e989f0e5",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2024-08-28T18:10:14Z",
+      "side": 0,
+      "message": "Shouldn\u0027t be `pwrseq-qcom-wcn.ko` is part of the DB845 vendor modules now?\n\nLGTM. Assuming it was never required and was being added because of the default `\u003dm`.",
+      "revId": "3ec830399e5c4dcadb63a1d11a0af64b75f2b7fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
