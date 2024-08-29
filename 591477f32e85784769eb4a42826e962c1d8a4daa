@@ -159,6 +159,24 @@
       "parentUuid": "e1f4a0e6_ed70e9fa",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b04844c_7b4eaf39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3599834
+      },
+      "writtenOn": "2024-08-29T06:48:26Z",
+      "side": 1,
+      "message": "dear Gerg\nwe now use branch android13-5.15-2023-12, the branch contains the two reverted commit. So we have tested the three commits.It is OK. we didn\u0027t encounter the problems you mentioned above",
+      "parentUuid": "dc01b1b4_a402b1d1",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
