@@ -284277,6 +284277,14 @@ enumeration {
       name: "BINDER_WORK_CLEAR_DEATH_NOTIFICATION"
       value: 9
     }
+    enumerator {
+      name: "BINDER_WORK_FROZEN_BINDER"
+      value: 10
+    }
+    enumerator {
+      name: "BINDER_WORK_CLEAR_FREEZE_NOTIFICATION"
+      value: 11
+    }
   }
 }
 enumeration {
@@ -358008,7 +358016,7 @@ elf_symbol {
   name: "__traceiter_binder_transaction_received"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x74e9c98b
+  crc: 0x1530f738
   type_id: 0x9ba51920
   full_name: "__traceiter_binder_transaction_received"
 }
