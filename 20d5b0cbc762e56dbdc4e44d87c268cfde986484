@@ -16,6 +16,24 @@
       "message": "does this change the default congestion algo?",
       "revId": "20d5b0cbc762e56dbdc4e44d87c268cfde986484",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56856516_7dfa1f09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-29T17:46:19Z",
+      "side": 1,
+      "message": "I think it does but only because of the order of operations. In `net/ipv4/Kconfig` TCP_CONG_CUBIC is `default y` and we are also setting `TCP_CONG_BBR\u003dy` here. So I believe this will override the default algo from CUBIC to BBR.",
+      "parentUuid": "e27fcd33_8d61b924",
+      "revId": "20d5b0cbc762e56dbdc4e44d87c268cfde986484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
