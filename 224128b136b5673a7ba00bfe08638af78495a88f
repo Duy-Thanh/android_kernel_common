@@ -22,6 +22,30 @@
       },
       "revId": "224128b136b5673a7ba00bfe08638af78495a88f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b7e171_52d7166f",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2480,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2024-08-29T22:54:52Z",
+      "side": 1,
+      "message": "This is the same as the original path. At this point, there is no return value, but in the next patch it has a return value which is added here, so it\u0027s resolved in the following patch.",
+      "parentUuid": "bc63d701_57cbf5b6",
+      "range": {
+        "startLine": 2480,
+        "startChar": 1,
+        "endLine": 2480,
+        "endChar": 2
+      },
+      "revId": "224128b136b5673a7ba00bfe08638af78495a88f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
