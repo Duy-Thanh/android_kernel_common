@@ -65,4 +65,45 @@ struct kernel_all_info {
 	struct kernel_info info;
 } __packed;
 
+struct kernel_info_v2 {
+	/*For Existing kernel_info */
+	struct kernel_info info;
+
+	/* For kallsyms */
+	__u64 _seqs_of_names_pa;
+
+	/* For extra elements in advance */
+	__u64 reserved_data[4];
+} __packed;
+
+struct kernel_all_info_v2 {
+	__u32 magic_number;
+	__u32 combined_checksum;
+	struct kernel_info_v2 info_v2;
+} __packed;
+
+struct debug_kinfo_variant {
+	int version;
+};
+
+struct debug_kinfo_variant_data {
+	void *all_info_addr;
+	u32 all_info_size;
+
+	/* For update_kernel_all_info function*/
+	u32 *magic_num_ptr;
+	u32 *combined_checksum_ptr;
+	u32 *checksum_info;
+	size_t info_size;
+
+	/* For build_info_set function*/
+	u8  *build_info_ptr;
+	size_t build_info_size;
+};
+
+enum {
+	DEBUG_KINFO_VERSION_1,
+	DEBUG_KINFO_VERSION_2,
+};
+
 #endif // DEBUG_KINFO_H
