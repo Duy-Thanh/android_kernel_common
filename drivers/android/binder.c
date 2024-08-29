@@ -189,6 +189,7 @@ static __printf(1, 2) void binder_user_error(const char *format, ...)
 	container_of(hdr, struct binder_fd_array_object, hdr)
 
 static struct binder_stats binder_stats;
+static struct binder_stats_extra binder_stats_extra;
 
 static inline void binder_stats_deleted(enum binder_stat_types type)
 {
@@ -198,6 +199,16 @@ static inline void binder_stats_deleted(enum binder_stat_types type)
 static inline void binder_stats_created(enum binder_stat_types type)
 {
 	atomic_inc(&binder_stats.obj_created[type]);
+}
+
+static inline void binder_stats_extra_deleted(enum binder_stat_types_extra type)
+{
+	atomic_inc(&binder_stats_extra.obj_deleted[type]);
+}
+
+static inline void binder_stats_extra_created(enum binder_stat_types_extra type)
+{
+	atomic_inc(&binder_stats_extra.obj_created[type]);
 }
 
 struct binder_transaction_log_entry {
@@ -4104,7 +4115,7 @@ binder_request_freeze_notification(struct binder_proc *proc,
 	is_frozen = ref->node->proc->is_frozen;
 	binder_inner_proc_unlock(ref->node->proc);
 
-	binder_stats_created(BINDER_STAT_FREEZE);
+	binder_stats_extra_created(BINDER_STAT_FREEZE);
 	INIT_LIST_HEAD(&freeze->work.entry);
 	freeze->cookie = handle_cookie->cookie;
 	freeze->work.type = BINDER_WORK_FROZEN_BINDER;
@@ -4190,7 +4201,7 @@ binder_freeze_notification_done(struct binder_proc *proc,
 	struct binder_work *w;
 
 	binder_inner_proc_lock(proc);
-	list_for_each_entry(w, &proc->delivered_freeze, entry) {
+	list_for_each_entry(w, &proc_wrapper(proc)->delivered_freeze, entry) {
 		struct binder_ref_freeze *tmp_freeze =
 			container_of(w, struct binder_ref_freeze, work);
 
@@ -4270,6 +4281,28 @@ binder_free_buf(struct binder_proc *proc,
 	binder_alloc_free_buf(&proc->alloc, buffer);
 }
 
+static void binder_stat_bc(struct binder_proc *proc,
+			   struct binder_thread *thread,
+			   uint32_t cmd)
+{
+	unsigned int extra;
+
+	trace_binder_command(cmd);
+	if (_IOC_NR(cmd) < ARRAY_SIZE(binder_stats.bc)) {
+		atomic_inc(&binder_stats.bc[_IOC_NR(cmd)]);
+		atomic_inc(&proc->stats.bc[_IOC_NR(cmd)]);
+		atomic_inc(&thread->stats.bc[_IOC_NR(cmd)]);
+		return;
+	}
+
+	extra = BC_STATS_EXTRA_OFFSET(cmd);
+	if (extra < ARRAY_SIZE(binder_stats_extra.bc)) {
+		atomic_inc(&binder_stats_extra.bc[extra]);
+		atomic_inc(&proc_wrapper(proc)->stats_extra.bc[extra]);
+		atomic_inc(&thread_wrapper(thread)->stats_extra.bc[extra]);
+	}
+}
+
 static int binder_thread_write(struct binder_proc *proc,
 			struct binder_thread *thread,
 			binder_uintptr_t binder_buffer, size_t size,
@@ -4287,12 +4320,8 @@ static int binder_thread_write(struct binder_proc *proc,
 		if (get_user(cmd, (uint32_t __user *)ptr))
 			return -EFAULT;
 		ptr += sizeof(uint32_t);
-		trace_binder_command(cmd);
-		if (_IOC_NR(cmd) < ARRAY_SIZE(binder_stats.bc)) {
-			atomic_inc(&binder_stats.bc[_IOC_NR(cmd)]);
-			atomic_inc(&proc->stats.bc[_IOC_NR(cmd)]);
-			atomic_inc(&thread->stats.bc[_IOC_NR(cmd)]);
-		}
+		binder_stat_bc(proc, thread, cmd);
+
 		switch (cmd) {
 		case BC_INCREFS:
 		case BC_ACQUIRE:
@@ -4760,11 +4789,20 @@ static int binder_thread_write(struct binder_proc *proc,
 static void binder_stat_br(struct binder_proc *proc,
 			   struct binder_thread *thread, uint32_t cmd)
 {
+	unsigned int extra;
+
 	trace_binder_return(cmd);
 	if (_IOC_NR(cmd) < ARRAY_SIZE(binder_stats.br)) {
 		atomic_inc(&binder_stats.br[_IOC_NR(cmd)]);
 		atomic_inc(&proc->stats.br[_IOC_NR(cmd)]);
 		atomic_inc(&thread->stats.br[_IOC_NR(cmd)]);
+	}
+
+	extra = BR_STATS_EXTRA_OFFSET(cmd);
+	if (extra < ARRAY_SIZE(binder_stats_extra.br)) {
+		atomic_inc(&binder_stats_extra.br[extra]);
+		atomic_inc(&proc_wrapper(proc)->stats_extra.br[extra]);
+		atomic_inc(&thread_wrapper(thread)->stats_extra.br[extra]);
 	}
 }
 
@@ -4980,7 +5018,7 @@ skip:
 		if (binder_worklist_empty_ilocked(&thread->todo))
 			thread->process_todo = false;
 
-		switch (w->type) {
+		switch ((int)w->type) {
 		case BINDER_WORK_TRANSACTION: {
 			binder_inner_proc_unlock(proc);
 			t = container_of(w, struct binder_transaction, work);
@@ -5159,7 +5197,7 @@ skip:
 			info.is_frozen = freeze->is_frozen;
 			info.cookie = freeze->cookie;
 			freeze->sent = true;
-			binder_enqueue_work_ilocked(w, &proc->delivered_freeze);
+			binder_enqueue_work_ilocked(w, &proc_wrapper(proc)->delivered_freeze);
 			binder_inner_proc_unlock(proc);
 
 			if (put_user(BR_FROZEN_BINDER, (uint32_t __user *)ptr))
@@ -5179,7 +5217,7 @@ skip:
 
 			binder_inner_proc_unlock(proc);
 			kfree(freeze);
-			binder_stats_deleted(BINDER_STAT_FREEZE);
+			binder_stats_extra_deleted(BINDER_STAT_FREEZE);
 			if (put_user(BR_CLEAR_FREEZE_NOTIFICATION_DONE, (uint32_t __user *)ptr))
 				return -EFAULT;
 			ptr += sizeof(uint32_t);
@@ -5452,19 +5490,21 @@ static struct binder_thread *binder_get_thread(struct binder_proc *proc)
 {
 	struct binder_thread *thread;
 	struct binder_thread *new_thread;
+	struct binder_thread_wrap *thread_wrapper;
 
 	binder_inner_proc_lock(proc);
 	thread = binder_get_thread_ilocked(proc, NULL);
 	binder_inner_proc_unlock(proc);
 	if (!thread) {
-		new_thread = kzalloc(sizeof(*thread), GFP_KERNEL);
-		if (new_thread == NULL)
+		thread_wrapper = kzalloc(sizeof(*thread_wrapper), GFP_KERNEL);
+		if (!thread_wrapper)
 			return NULL;
+		new_thread = &thread_wrapper->thread;
 		binder_inner_proc_lock(proc);
 		thread = binder_get_thread_ilocked(proc, new_thread);
 		binder_inner_proc_unlock(proc);
 		if (thread != new_thread)
-			kfree(new_thread);
+			kfree(thread_wrapper);
 	}
 	return thread;
 }
@@ -5498,7 +5538,7 @@ static void binder_free_thread(struct binder_thread *thread)
 	binder_stats_deleted(BINDER_STAT_THREAD);
 	binder_proc_dec_tmpref(thread->proc);
 	put_task_struct(thread->task);
-	kfree(thread);
+	kfree(thread_wrapper(thread));
 }
 
 static int binder_thread_release(struct binder_proc *proc,
@@ -6279,7 +6319,7 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	binder_stats_created(BINDER_STAT_PROC);
 	proc->pid = current->group_leader->pid;
 	INIT_LIST_HEAD(&proc->delivered_death);
-	INIT_LIST_HEAD(&proc->delivered_freeze);
+	INIT_LIST_HEAD(&proc_wrapper(proc)->delivered_freeze);
 	INIT_LIST_HEAD(&proc->waiting_threads);
 	filp->private_data = proc;
 
@@ -6840,8 +6880,6 @@ static const char * const binder_return_strings[] = {
 	"BR_FROZEN_REPLY",
 	"BR_ONEWAY_SPAM_SUSPECT",
 	"BR_TRANSACTION_PENDING_FROZEN",
-	"BR_FROZEN_BINDER",
-	"BR_CLEAR_FREEZE_NOTIFICATION_DONE",
 };
 
 static const char * const binder_command_strings[] = {
@@ -6864,9 +6902,6 @@ static const char * const binder_command_strings[] = {
 	"BC_DEAD_BINDER_DONE",
 	"BC_TRANSACTION_SG",
 	"BC_REPLY_SG",
-	"BC_REQUEST_FREEZE_NOTIFICATION",
-	"BC_CLEAR_FREEZE_NOTIFICATION",
-	"BC_FREEZE_NOTIFICATION_DONE",
 };
 
 static const char * const binder_objstat_strings[] = {
@@ -6877,6 +6912,20 @@ static const char * const binder_objstat_strings[] = {
 	"death",
 	"transaction",
 	"transaction_complete",
+};
+
+static const char * const binder_return_strings_extra[] = {
+	"BR_FROZEN_BINDER",
+	"BR_CLEAR_FREEZE_NOTIFICATION_DONE",
+};
+
+static const char * const binder_command_strings_extra[] = {
+	"BC_REQUEST_FREEZE_NOTIFICATION",
+	"BC_CLEAR_FREEZE_NOTIFICATION",
+	"BC_FREEZE_NOTIFICATION_DONE",
+};
+
+static const char * const binder_objstat_strings_extra[] = {
 	"freeze",
 };
 
@@ -6922,6 +6971,47 @@ static void print_binder_stats(struct seq_file *m, const char *prefix,
 	}
 }
 
+static void print_binder_stats_extra(struct seq_file *m, const char *prefix,
+			       struct binder_stats_extra *stats)
+{
+	int i;
+
+	BUILD_BUG_ON(ARRAY_SIZE(stats->bc) !=
+		     ARRAY_SIZE(binder_command_strings_extra));
+	for (i = 0; i < ARRAY_SIZE(stats->bc); i++) {
+		int temp = atomic_read(&stats->bc[i]);
+
+		if (temp)
+			seq_printf(m, "%s%s: %d\n", prefix,
+				   binder_command_strings_extra[i], temp);
+	}
+
+	BUILD_BUG_ON(ARRAY_SIZE(stats->br) !=
+		     ARRAY_SIZE(binder_return_strings_extra));
+	for (i = 0; i < ARRAY_SIZE(stats->br); i++) {
+		int temp = atomic_read(&stats->br[i]);
+
+		if (temp)
+			seq_printf(m, "%s%s: %d\n", prefix,
+				   binder_return_strings_extra[i], temp);
+	}
+
+	BUILD_BUG_ON(ARRAY_SIZE(stats->obj_created) !=
+		     ARRAY_SIZE(binder_objstat_strings_extra));
+	BUILD_BUG_ON(ARRAY_SIZE(stats->obj_created) !=
+		     ARRAY_SIZE(stats->obj_deleted));
+	for (i = 0; i < ARRAY_SIZE(stats->obj_created); i++) {
+		int created = atomic_read(&stats->obj_created[i]);
+		int deleted = atomic_read(&stats->obj_deleted[i]);
+
+		if (created || deleted)
+			seq_printf(m, "%s%s: active %d total %d\n",
+				prefix,
+				binder_objstat_strings_extra[i],
+				created - deleted,
+				created);
+	}
+}
 static void print_binder_proc_stats(struct seq_file *m,
 				    struct binder_proc *proc)
 {
@@ -6984,6 +7074,7 @@ static void print_binder_proc_stats(struct seq_file *m,
 	seq_printf(m, "  pending transactions: %d\n", count);
 
 	print_binder_stats(m, "  ", &proc->stats);
+	print_binder_stats_extra(m, "  ", &proc_wrapper(proc)->stats_extra);
 }
 
 static int state_show(struct seq_file *m, void *unused)
@@ -7032,6 +7123,7 @@ static int stats_show(struct seq_file *m, void *unused)
 	seq_puts(m, "binder stats:\n");
 
 	print_binder_stats(m, "", &binder_stats);
+	print_binder_stats_extra(m, "", &binder_stats_extra);
 
 	mutex_lock(&binder_procs_lock);
 	hlist_for_each_entry(proc, &binder_procs, proc_node)

@@ -131,15 +131,29 @@ enum binder_stat_types {
 	BINDER_STAT_DEATH,
 	BINDER_STAT_TRANSACTION,
 	BINDER_STAT_TRANSACTION_COMPLETE,
-	BINDER_STAT_FREEZE,
 	BINDER_STAT_COUNT
 };
 
 struct binder_stats {
-	atomic_t br[_IOC_NR(BR_CLEAR_FREEZE_NOTIFICATION_DONE) + 1];
-	atomic_t bc[_IOC_NR(BC_FREEZE_NOTIFICATION_DONE) + 1];
+	atomic_t br[_IOC_NR(BR_TRANSACTION_PENDING_FROZEN) + 1];
+	atomic_t bc[_IOC_NR(BC_REPLY_SG) + 1];
 	atomic_t obj_created[BINDER_STAT_COUNT];
 	atomic_t obj_deleted[BINDER_STAT_COUNT];
+};
+
+enum binder_stat_types_extra {
+	BINDER_STAT_FREEZE,
+	BINDER_STAT_EXTRA_COUNT,
+};
+
+#define BR_STATS_EXTRA_OFFSET(_br)	(_IOC_NR(_br) - _IOC_NR(BR_TRANSACTION_PENDING_FROZEN) - 1)
+#define BC_STATS_EXTRA_OFFSET(_bc)	(_IOC_NR(_bc) - _IOC_NR(BC_REPLY_SG) - 1)
+
+struct binder_stats_extra {
+	atomic_t br[BR_STATS_EXTRA_OFFSET(BR_CLEAR_FREEZE_NOTIFICATION_DONE) + 1];
+	atomic_t bc[BC_STATS_EXTRA_OFFSET(BC_FREEZE_NOTIFICATION_DONE) + 1];
+	atomic_t obj_created[BINDER_STAT_EXTRA_COUNT];
+	atomic_t obj_deleted[BINDER_STAT_EXTRA_COUNT];
 };
 
 /**
@@ -162,12 +176,13 @@ struct binder_work {
 		BINDER_WORK_DEAD_BINDER,
 		BINDER_WORK_DEAD_BINDER_AND_CLEAR,
 		BINDER_WORK_CLEAR_DEATH_NOTIFICATION,
-		BINDER_WORK_FROZEN_BINDER,
-		BINDER_WORK_CLEAR_FREEZE_NOTIFICATION,
 	} type;
 
 	ANDROID_OEM_DATA(1);
 };
+
+#define BINDER_WORK_FROZEN_BINDER		(BINDER_WORK_CLEAR_DEATH_NOTIFICATION + 1)
+#define BINDER_WORK_CLEAR_FREEZE_NOTIFICATION	(BINDER_WORK_FROZEN_BINDER + 1)
 
 struct binder_error {
 	struct binder_work work;
@@ -419,8 +434,6 @@ enum binder_prio_state {
  *                        (atomics, no lock needed)
  * @delivered_death:      list of delivered death notification
  *                        (protected by @inner_lock)
- * @delivered_freeze:     list of delivered freeze notification
- *                        (protected by @inner_lock)
  * @max_threads:          cap on number of binder threads
  *                        (protected by @inner_lock)
  * @requested_threads:    number of binder threads requested but not
@@ -467,7 +480,6 @@ struct binder_proc {
 	struct list_head todo;
 	struct binder_stats stats;
 	struct list_head delivered_death;
-	struct list_head delivered_freeze;
 	u32 max_threads;
 	int requested_threads;
 	int requested_threads_started;
@@ -488,10 +500,15 @@ struct binder_proc {
  * @proc:                    binder_proc being wrapped
  * @dmap                     dbitmap to manage available reference descriptors
  *                           (protected by @proc.outer_lock)
+ * @delivered_freeze:        list of delivered freeze notification
+ *                           (protected by @inner_lock)
+ * @stats_extra:
  */
 struct binder_proc_wrap {
 	struct binder_proc proc;
 	struct dbitmap dmap;
+	struct list_head delivered_freeze;
+	struct binder_stats_extra stats_extra;
 };
 
 static inline
@@ -567,6 +584,21 @@ struct binder_thread {
 	struct binder_priority prio_next;
 	enum binder_prio_state prio_state;
 };
+
+/**
+ * struct binder_thread_wrap - wrapper to preserve KMI in binder_thread
+ * @stats_extra:
+ */
+struct binder_thread_wrap {
+	struct binder_thread thread;
+	struct binder_stats_extra stats_extra;
+};
+
+static inline
+struct binder_thread_wrap *thread_wrapper(struct binder_thread *thread)
+{
+	return container_of(thread, struct binder_thread_wrap, thread);
+}
 
 /**
  * struct binder_txn_fd_fixup - transaction fd fixup list element
