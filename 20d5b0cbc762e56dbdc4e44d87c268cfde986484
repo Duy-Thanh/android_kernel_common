@@ -34,6 +34,24 @@
       "parentUuid": "e27fcd33_8d61b924",
       "revId": "20d5b0cbc762e56dbdc4e44d87c268cfde986484",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af937eca_a842fa19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-29T17:54:17Z",
+      "side": 1,
+      "message": "It seems to me that we can either override the default value (but still supported) with something like:\n```\nCONFIG_TCP_CONG_ADVANCED\u003dy\nCONFIG_TCP_CONG_BBR\u003dy\nCONFIG_TCP_CONG_CUBIC\u003dm\n# CONFIG_TCP_CONG_BIC is not set\n[...]\n# CONFIG_TCP_CONG_{others} is not set\n```\n\nOr simply allow userspace to select BBR when it needs to, and leave CUBIC as the default? For this option I would think that the vendor would only need to build BBR as a module and load it. I don\u0027t think we need to modify `gki_defconfig`.",
+      "parentUuid": "56856516_7dfa1f09",
+      "revId": "20d5b0cbc762e56dbdc4e44d87c268cfde986484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
