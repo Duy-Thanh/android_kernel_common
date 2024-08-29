@@ -162,6 +162,7 @@ common_kernel(
     ],
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = "android/gki_system_dlkm_modules_arm64",
+    makefile = ":Makefile",
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     visibility = ["//visibility:public"],
@@ -193,6 +194,7 @@ common_kernel(
     ],
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = "android/gki_system_dlkm_modules_arm64",
+    makefile = ":Makefile",
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     page_size = "16k",
@@ -217,6 +219,7 @@ Consider building @@//common:kernel_aarch64 with:
     ],
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = "android/gki_system_dlkm_modules_arm64",
+    makefile = ":Makefile",
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     visibility = ["//visibility:public"],
@@ -235,6 +238,7 @@ common_kernel(
         ":tests_zip_arm64",
     ],
     gki_system_dlkm_modules = "android/gki_system_dlkm_modules_arm64",
+    makefile = ":Makefile",
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     visibility = ["//visibility:public"],
@@ -257,6 +261,7 @@ Consider building @@//common:kernel_x86_64 with:
     ],
     gki_boot_img_sizes = _GKI_X86_64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = "android/gki_system_dlkm_modules_x86_64",
+    makefile = ":Makefile",
     make_goals = _GKI_X86_64_MAKE_GOALS,
     module_implicit_outs = get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
     visibility = ["//visibility:public"],
@@ -275,6 +280,7 @@ common_kernel(
     ],
     gki_boot_img_sizes = {"": "67108864"},
     gki_system_dlkm_modules = "android/gki_system_dlkm_modules_x86_64",
+    makefile = ":Makefile",
     make_goals = _GKI_X86_64_MAKE_GOALS,
     module_implicit_outs = get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
     visibility = ["//visibility:public"],
@@ -330,6 +336,7 @@ kernel_build(
         "vmlinux.symvers",
     ],
     build_config = "build.config.microdroid.aarch64",
+    makefile = ":Makefile",
     make_goals = [
         "Image",
     ],
@@ -353,6 +360,7 @@ kernel_build(
     outs = X86_64_OUTS,
     arch = "x86_64",
     build_config = "build.config.microdroid.x86_64",
+    makefile = ":Makefile",
     make_goals = [
         "bzImage",
     ],
@@ -375,6 +383,7 @@ kernel_build(
         "Image",
     ],
     build_config = "build.config.crashdump.aarch64",
+    makefile = ":Makefile",
     make_goals = [
         "Image",
     ],
@@ -396,6 +405,7 @@ kernel_build(
     outs = X86_64_OUTS,
     arch = "x86_64",
     build_config = "build.config.crashdump.x86_64",
+    makefile = ":Makefile",
     make_goals = [
         "bzImage",
     ],
@@ -665,6 +675,7 @@ kernel_build(
     # Enable mixed build.
     base_kernel = ":kernel_aarch64",
     build_config = "build.config.db845c",
+    makefile = ":Makefile",
     make_goals = [
         "modules",
         "qcom/qrb5165-rb5.dtb",
@@ -692,6 +703,7 @@ kernel_build(
     # Enable mixed build.
     base_kernel = ":kernel_aarch64",
     build_config = "build.config.db845c",
+    makefile = ":Makefile",
     make_goals = [
         "modules",
         "qcom/qrb5165-rb5.dtb",
@@ -820,6 +832,7 @@ kernel_build(
     ],
     build_config = "build.config.rockpi4",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
+    makefile = ":Makefile",
     make_goals = [
         "Image",
         "modules",
@@ -844,6 +857,7 @@ kernel_build(
     ],
     build_config = "build.config.rockpi4",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
+    makefile = ":Makefile",
     make_goals = [
         "Image",
         "modules",
@@ -898,6 +912,7 @@ kernel_build(
     # Otherwise, Bazel thinks that there are no output files, and skip building.
     outs = [".config"],
     build_config = "build.config.allmodconfig.aarch64",
+    makefile = ":Makefile",
     make_goals = [
         "Image",
         "modules",
@@ -914,6 +929,7 @@ kernel_build(
     outs = [".config"],
     arch = "x86_64",
     build_config = "build.config.allmodconfig.x86_64",
+    makefile = ":Makefile",
     make_goals = [
         "bzImage",
         "modules",
@@ -931,6 +947,7 @@ kernel_build(
     outs = [".config"],
     arch = "arm",
     build_config = "build.config.allmodconfig.arm",
+    makefile = ":Makefile",
     make_goals = [
         "zImage",
         "modules",
@@ -2545,3 +2562,7 @@ pkg_zip(
     out = "test_mappings.zip",
     visibility = ["//visibility:public"],
 )
+
+exports_files([
+    "Makefile",
+])
