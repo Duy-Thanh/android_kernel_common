@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc63d701_57cbf5b6",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2480,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2024-08-29T18:14:51Z",
+      "side": 1,
+      "message": "Missing to return ret?",
+      "range": {
+        "startLine": 2480,
+        "startChar": 1,
+        "endLine": 2480,
+        "endChar": 2
+      },
+      "revId": "224128b136b5673a7ba00bfe08638af78495a88f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
