@@ -637,8 +637,11 @@ int parse_options_subcommand(int argc, const char **argv, const struct option *o
 
 	/* build usage string if it's not provided */
 	if (subcommands && !usagestr[0]) {
+<<<<<<< HEAD   (af3743 BACKPORT: libsubcmd: Fix parse-options memory leak)
 		int i;
 
+=======
+>>>>>>> BRANCH (95fd17 Merge tag 'android12-5.10.223_r00' into android12-5.10)
 		astrcatf(&buf, "%s %s [<options>] {", subcmd_config.exec_name, argv[0]);
 
 		for (i = 0; subcommands[i]; i++) {
