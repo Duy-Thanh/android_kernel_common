@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a527946_15e20f0e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5021,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-30T21:19:58Z",
+      "side": 1,
+      "message": "Yes, let\u0027s add an STG to override since there isn\u0027t an actual ABI issue with adding enum values in this case.",
+      "parentUuid": "91ce77b2_62565bc7",
+      "revId": "0b163f91446fea1be9cd7c6a90387c00b5196def",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f4a2a81_1ea145ca",
         "filename": "drivers/android/binder_internal.h",
         "patchSetId": 1
