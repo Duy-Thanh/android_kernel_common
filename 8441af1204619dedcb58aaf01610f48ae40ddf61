@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f8443d_7e06abbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3542847
+      },
+      "writtenOn": "2024-08-30T10:33:49Z",
+      "side": 1,
+      "message": "In the newest submit version, only enable TCP_CONG_ADVANCED and add bbr algorithm. I think that it is suit for this commit message.",
+      "parentUuid": "b06ddcb2_083cb246",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 133
+      },
+      "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "684ffc57_a4deca01",
