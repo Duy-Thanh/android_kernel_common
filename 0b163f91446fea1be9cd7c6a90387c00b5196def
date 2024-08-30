@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91ce77b2_62565bc7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5021,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-30T21:10:31Z",
+      "side": 1,
+      "message": "Because I can\u0027t add new enums to `enum binder_work_type` without breaking the KMI:\n```\n  type \u0027enum binder_work_type\u0027 changed\n    enumerator \u0027BINDER_WORK_FROZEN_BINDER\u0027 (10) was added\n    enumerator \u0027BINDER_WORK_CLEAR_FREEZE_NOTIFICATION\u0027 (11) was added\n```\n\nSo this needs to be parsed into a generic int in order to process the new different types defined outside the enum:\n```\n#define BINDER_WORK_FROZEN_BINDER\t\t(BINDER_WORK_CLEAR_DEATH_NOTIFICATION + 1)\n#define BINDER_WORK_CLEAR_FREEZE_NOTIFICATION\t(BINDER_WORK_FROZEN_BINDER + 1)\n```\n\nWe could simply drop this hack and override the KMI report CR -2. I only wanted to prove a clean KMI report first.",
+      "parentUuid": "6de502aa_63aefafc",
+      "revId": "0b163f91446fea1be9cd7c6a90387c00b5196def",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f4a2a81_1ea145ca",
         "filename": "drivers/android/binder_internal.h",
         "patchSetId": 1
@@ -66,6 +84,24 @@
           ]
         }
       ],
+      "revId": "0b163f91446fea1be9cd7c6a90387c00b5196def",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "541738aa_aa4229d8",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-30T21:10:31Z",
+      "side": 1,
+      "message": "This undoes what the previous patch added. So the parent change breaks the KMI and this patch restores the original array size and moves the new stats into `struct binder_stats_extra` below.",
+      "parentUuid": "8f4a2a81_1ea145ca",
       "revId": "0b163f91446fea1be9cd7c6a90387c00b5196def",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
