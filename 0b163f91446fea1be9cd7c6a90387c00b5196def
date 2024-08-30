@@ -16,6 +16,58 @@
       "message": "FYI... this is a quick prototype of the workarounds for the frozen notification backport.",
       "revId": "0b163f91446fea1be9cd7c6a90387c00b5196def",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de502aa_63aefafc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5021,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-30T17:42:51Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "revId": "0b163f91446fea1be9cd7c6a90387c00b5196def",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f4a2a81_1ea145ca",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-30T17:42:51Z",
+      "side": 1,
+      "message": "doesn\u0027t this break KMI since the array is a different size?",
+      "fixSuggestions": [
+        {
+          "fixId": "bb8e919e_0fd242f2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder_internal.h",
+              "range": {
+                "startLine": 138,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": "\tatomic_t br[_IOC_NR(BR_CLEAR_FREEZE_NOTIFICATION_DONE) + 1];\n\tatomic_t bc[_IOC_NR(BC_FREEZE_NOTIFICATION_DONE) + 1];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0b163f91446fea1be9cd7c6a90387c00b5196def",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
