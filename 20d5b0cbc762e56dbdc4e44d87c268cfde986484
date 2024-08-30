@@ -88,6 +88,24 @@
       "tag": "mailMessageId\u003d\u003cCANP3RGd-CRNqxy28pVn02zwur8DCeRp36\u003d2b3Y0NgXmGUSB7mw@mail.gmail.com\u003e",
       "revId": "20d5b0cbc762e56dbdc4e44d87c268cfde986484",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cbb74d9_05e6374e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-30T14:07:34Z",
+      "side": 1,
+      "message": "FWIW, this is the diffconfig of the change in GKI:\n```\n TCP_CONG_ADVANCED n -\u003e y\n+DEFAULT_BBR n\n+DEFAULT_CUBIC y\n+DEFAULT_RENO n\n+TCP_CONG_BBR y\n+TCP_CONG_BIC n\n+TCP_CONG_CDG n\n+TCP_CONG_DCTCP n\n+TCP_CONG_HSTCP n\n+TCP_CONG_HTCP n\n+TCP_CONG_HYBLA n\n+TCP_CONG_ILLINOIS n\n+TCP_CONG_LP n\n+TCP_CONG_NV n\n+TCP_CONG_SCALABLE n\n+TCP_CONG_VEGAS n\n+TCP_CONG_VENO n\n+TCP_CONG_WESTWOOD n\n+TCP_CONG_YEAH n\n```",
+      "parentUuid": "ce755b67_c73740d9",
+      "revId": "20d5b0cbc762e56dbdc4e44d87c268cfde986484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

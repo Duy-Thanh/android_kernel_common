@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a73cae_bc9560e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-30T14:07:34Z",
+      "side": 1,
+      "message": "I meant fixing the unwrapped long lines, checkpatch script should recommend this. I\u0027ve rewritten the commit log now fixing this too.",
+      "parentUuid": "53f8443d_7e06abbf",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 133
+      },
+      "revId": "8441af1204619dedcb58aaf01610f48ae40ddf61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "684ffc57_a4deca01",

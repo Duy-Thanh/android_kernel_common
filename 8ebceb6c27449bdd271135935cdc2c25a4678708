@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2e86e68_f511ab81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-30T14:07:34Z",
+      "side": 1,
+      "message": "@maennich@google.com, the size impact in vmlinux is minimal (6843 bytes). With that said, I don\u0027t see a need for having this algorithm as built-in. As opposed to using \u003dm in the vendor\u0027s fragment config. So either way this should be fine.",
+      "revId": "8ebceb6c27449bdd271135935cdc2c25a4678708",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
