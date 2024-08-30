@@ -99,7 +99,7 @@ struct netfs_io_request *netfs_create_write_req(struct address_space *mapping,
 	if (IS_ERR(wreq))
 		return wreq;
 
-	_enter("R=%x", wreq->debug_id);
+	kenter("R=%x", wreq->debug_id);
 
 	ictx = netfs_inode(wreq->inode);
 	if (test_bit(NETFS_RREQ_WRITE_TO_CACHE, &wreq->flags))
@@ -122,7 +122,6 @@ struct netfs_io_request *netfs_create_write_req(struct address_space *mapping,
 	wreq->io_streams[1].transferred		= LONG_MAX;
 	if (fscache_resources_valid(&wreq->cache_resources)) {
 		wreq->io_streams[1].avail	= true;
-		wreq->io_streams[1].active	= true;
 		wreq->io_streams[1].prepare_write = wreq->cache_resources.ops->prepare_write_subreq;
 		wreq->io_streams[1].issue_write = wreq->cache_resources.ops->issue_write;
 	}
@@ -160,7 +159,7 @@ static void netfs_prepare_write(struct netfs_io_request *wreq,
 	subreq->max_nr_segs	= INT_MAX;
 	subreq->stream_nr	= stream->stream_nr;
 
-	_enter("R=%x[%x]", wreq->debug_id, subreq->debug_index);
+	kenter("R=%x[%x]", wreq->debug_id, subreq->debug_index);
 
 	trace_netfs_sreq_ref(wreq->debug_id, subreq->debug_index,
 			     refcount_read(&subreq->ref),
@@ -216,7 +215,7 @@ static void netfs_do_issue_write(struct netfs_io_stream *stream,
 {
 	struct netfs_io_request *wreq = subreq->rreq;
 
-	_enter("R=%x[%x],%zx", wreq->debug_id, subreq->debug_index, subreq->len);
+	kenter("R=%x[%x],%zx", wreq->debug_id, subreq->debug_index, subreq->len);
 
 	if (test_bit(NETFS_SREQ_FAILED, &subreq->flags))
 		return netfs_write_subrequest_terminated(subreq, subreq->error, false);
@@ -273,11 +272,11 @@ int netfs_advance_write(struct netfs_io_request *wreq,
 	size_t part;
 
 	if (!stream->avail) {
-		_leave("no write");
+		kleave("no write");
 		return len;
 	}
 
-	_enter("R=%x[%x]", wreq->debug_id, subreq ? subreq->debug_index : 0);
+	kenter("R=%x[%x]", wreq->debug_id, subreq ? subreq->debug_index : 0);
 
 	if (subreq && start != subreq->start + subreq->len) {
 		netfs_issue_write(wreq, stream);
@@ -289,7 +288,7 @@ int netfs_advance_write(struct netfs_io_request *wreq,
 	subreq = stream->construct;
 
 	part = min(subreq->max_len - subreq->len, len);
-	_debug("part %zx/%zx %zx/%zx", subreq->len, subreq->max_len, part, len);
+	kdebug("part %zx/%zx %zx/%zx", subreq->len, subreq->max_len, part, len);
 	subreq->len += part;
 	subreq->nr_segs++;
 
@@ -320,7 +319,7 @@ static int netfs_write_folio(struct netfs_io_request *wreq,
 	bool to_eof = false, streamw = false;
 	bool debug = false;
 
-	_enter("");
+	kenter("");
 
 	/* netfs_perform_write() may shift i_size around the page or from out
 	 * of the page to beyond it, but cannot move i_size into or through the
@@ -330,7 +329,7 @@ static int netfs_write_folio(struct netfs_io_request *wreq,
 
 	if (fpos >= i_size) {
 		/* mmap beyond eof. */
-		_debug("beyond eof");
+		kdebug("beyond eof");
 		folio_start_writeback(folio);
 		folio_unlock(folio);
 		wreq->nr_group_rel += netfs_folio_written_back(folio);
@@ -364,7 +363,7 @@ static int netfs_write_folio(struct netfs_io_request *wreq,
 	}
 	flen -= foff;
 
-	_debug("folio %zx %zx %zx", foff, flen, fsize);
+	kdebug("folio %zx %zx %zx", foff, flen, fsize);
 
 	/* Deal with discontinuities in the stream of dirty pages.  These can
 	 * arise from a number of sources:
@@ -488,7 +487,7 @@ static int netfs_write_folio(struct netfs_io_request *wreq,
 		for (int s = 0; s < NR_IO_STREAMS; s++)
 			netfs_issue_write(wreq, &wreq->io_streams[s]);
 
-	_leave(" = 0");
+	kleave(" = 0");
 	return 0;
 }
 
@@ -523,7 +522,7 @@ int netfs_writepages(struct address_space *mapping,
 	netfs_stat(&netfs_n_wh_writepages);
 
 	do {
-		_debug("wbiter %lx %llx", folio->index, wreq->start + wreq->submitted);
+		kdebug("wbiter %lx %llx", folio->index, wreq->start + wreq->submitted);
 
 		/* It appears we don't have to handle cyclic writeback wrapping. */
 		WARN_ON_ONCE(wreq && folio_pos(folio) < wreq->start + wreq->submitted);
@@ -547,14 +546,14 @@ int netfs_writepages(struct address_space *mapping,
 	mutex_unlock(&ictx->wb_lock);
 
 	netfs_put_request(wreq, false, netfs_rreq_trace_put_return);
-	_leave(" = %d", error);
+	kleave(" = %d", error);
 	return error;
 
 couldnt_start:
 	netfs_kill_dirty_pages(mapping, wbc, folio);
 out:
 	mutex_unlock(&ictx->wb_lock);
-	_leave(" = %d", error);
+	kleave(" = %d", error);
 	return error;
 }
 EXPORT_SYMBOL(netfs_writepages);
@@ -591,7 +590,7 @@ int netfs_advance_writethrough(struct netfs_io_request *wreq, struct writeback_c
 			       struct folio *folio, size_t copied, bool to_page_end,
 			       struct folio **writethrough_cache)
 {
-	_enter("R=%x ic=%zu ws=%u cp=%zu tp=%u",
+	kenter("R=%x ic=%zu ws=%u cp=%zu tp=%u",
 	       wreq->debug_id, wreq->iter.count, wreq->wsize, copied, to_page_end);
 
 	if (!*writethrough_cache) {
@@ -625,7 +624,7 @@ int netfs_end_writethrough(struct netfs_io_request *wreq, struct writeback_contr
 	struct netfs_inode *ictx = netfs_inode(wreq->inode);
 	int ret;
 
-	_enter("R=%x", wreq->debug_id);
+	kenter("R=%x", wreq->debug_id);
 
 	if (writethrough_cache)
 		netfs_write_folio(wreq, wbc, writethrough_cache);
@@ -658,7 +657,7 @@ int netfs_unbuffered_write(struct netfs_io_request *wreq, bool may_wait, size_t 
 	loff_t start = wreq->start;
 	int error = 0;
 
-	_enter("%zx", len);
+	kenter("%zx", len);
 
 	if (wreq->origin == NETFS_DIO_WRITE)
 		inode_dio_begin(wreq->inode);
@@ -666,7 +665,7 @@ int netfs_unbuffered_write(struct netfs_io_request *wreq, bool may_wait, size_t 
 	while (len) {
 		// TODO: Prepare content encryption
 
-		_debug("unbuffered %zx", len);
+		kdebug("unbuffered %zx", len);
 		part = netfs_advance_write(wreq, upload, start, len, false);
 		start += part;
 		len -= part;
@@ -685,6 +684,6 @@ int netfs_unbuffered_write(struct netfs_io_request *wreq, bool may_wait, size_t 
 	if (list_empty(&upload->subrequests))
 		netfs_wake_write_collector(wreq, false);
 
-	_leave(" = %d", error);
+	kleave(" = %d", error);
 	return error;
 }

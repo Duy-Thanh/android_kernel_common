@@ -409,9 +409,16 @@ choices::
 	"endchoice"
 
 This defines a choice group and accepts any of the above attributes as
-options.
+options. A choice can only be of type bool or tristate.  If no type is
+specified for a choice, its type will be determined by the type of
+the first choice element in the group or remain unknown if none of the
+choice elements have a type specified, as well.
 
-A choice only allows a single config entry to be selected.
+While a boolean choice only allows a single config entry to be
+selected, a tristate choice also allows any number of config entries
+to be set to 'm'. This can be used if multiple drivers for a single
+hardware exists and only a single driver can be compiled/loaded into
+the kernel, but all drivers can be compiled as modules.
 
 comment::
 

@@ -4,8 +4,6 @@
 
 #include <stddef.h>
 
-#include <list_types.h>
-
 struct search_data {
 	struct list_head *head;
 	struct menu *target;

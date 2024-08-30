@@ -2570,9 +2570,8 @@ int fcntl_setlk64(unsigned int fd, struct file *filp, unsigned int cmd,
 	error = do_lock_file_wait(filp, cmd, file_lock);
 
 	/*
-	 * Detect close/fcntl races and recover by zapping all POSIX locks
-	 * associated with this file and our files_struct, just like on
-	 * filp_flush(). There is no need to do that when we're
+	 * Attempt to detect a close/fcntl race and recover by releasing the
+	 * lock that was just acquired. There is no need to do that when we're
 	 * unlocking though, or for OFD locks.
 	 */
 	if (!error && file_lock->c.flc_type != F_UNLCK &&
@@ -2587,7 +2586,9 @@ int fcntl_setlk64(unsigned int fd, struct file *filp, unsigned int cmd,
 		f = files_lookup_fd_locked(files, fd);
 		spin_unlock(&files->file_lock);
 		if (f != filp) {
-			locks_remove_posix(filp, files);
+			file_lock->c.flc_type = F_UNLCK;
+			error = do_lock_file_wait(filp, cmd, file_lock);
+			WARN_ON_ONCE(error);
 			error = -EBADF;
 		}
 	}

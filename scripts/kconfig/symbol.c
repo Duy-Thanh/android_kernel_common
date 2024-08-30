@@ -40,12 +40,16 @@ struct symbol *modules_sym;
 static tristate modules_val;
 static int sym_warnings;
 
-enum symbol_type sym_get_type(const struct symbol *sym)
+enum symbol_type sym_get_type(struct symbol *sym)
 {
 	enum symbol_type type = sym->type;
 
-	if (type == S_TRISTATE && modules_val == no)
-		type = S_BOOLEAN;
+	if (type == S_TRISTATE) {
+		if (sym_is_choice_value(sym) && sym->visible == yes)
+			type = S_BOOLEAN;
+		else if (modules_val == no)
+			type = S_BOOLEAN;
+	}
 	return type;
 }
 
@@ -68,6 +72,15 @@ const char *sym_type_name(enum symbol_type type)
 	return "???";
 }
 
+struct property *sym_get_choice_prop(struct symbol *sym)
+{
+	struct property *prop;
+
+	for_all_choices(sym, prop)
+		return prop;
+	return NULL;
+}
+
 /**
  * sym_get_choice_menu - get the parent choice menu if present
  *
@@ -75,7 +88,7 @@ const char *sym_type_name(enum symbol_type type)
  *
  * Return: a choice menu if this function is called against a choice member.
  */
-struct menu *sym_get_choice_menu(const struct symbol *sym)
+struct menu *sym_get_choice_menu(struct symbol *sym)
 {
 	struct menu *menu = NULL;
 	struct menu *m;
@@ -179,6 +192,7 @@ static void sym_set_changed(struct symbol *sym)
 {
 	struct menu *menu;
 
+	sym->flags |= SYMBOL_CHANGED;
 	list_for_each_entry(menu, &sym->menus, link)
 		menu->flags |= MENU_CHANGED;
 }
@@ -194,12 +208,26 @@ static void sym_set_all_changed(void)
 static void sym_calc_visibility(struct symbol *sym)
 {
 	struct property *prop;
+	struct symbol *choice_sym = NULL;
 	tristate tri;
 
 	/* any prompt visible? */
 	tri = no;
+
+	if (sym_is_choice_value(sym))
+		choice_sym = prop_get_symbol(sym_get_choice_prop(sym));
+
 	for_all_prompts(sym, prop) {
 		prop->visible.tri = expr_calc_value(prop->visible.expr);
+		/*
+		 * Tristate choice_values with visibility 'mod' are
+		 * not visible if the corresponding choice's value is
+		 * 'yes'.
+		 */
+		if (choice_sym && sym->type == S_TRISTATE &&
+		    prop->visible.tri == mod && choice_sym->curr.tri == yes)
+			prop->visible.tri = no;
+
 		tri = EXPR_OR(tri, prop->visible.tri);
 	}
 	if (tri == mod && (sym->type != S_TRISTATE || modules_val == no))
@@ -246,14 +274,14 @@ static void sym_calc_visibility(struct symbol *sym)
  * Next locate the first visible choice value
  * Return NULL if none was found
  */
-struct symbol *sym_choice_default(struct menu *choice)
+struct symbol *sym_choice_default(struct symbol *sym)
 {
-	struct menu *menu;
 	struct symbol *def_sym;
 	struct property *prop;
+	struct expr *e;
 
 	/* any of the defaults visible? */
-	for_all_defaults(choice->sym, prop) {
+	for_all_defaults(sym, prop) {
 		prop->visible.tri = expr_calc_value(prop->visible.expr);
 		if (prop->visible.tri == no)
 			continue;
@@ -263,99 +291,48 @@ struct symbol *sym_choice_default(struct menu *choice)
 	}
 
 	/* just get the first visible value */
-	menu_for_each_sub_entry(menu, choice)
-		if (menu->sym && menu->sym->visible != no)
-			return menu->sym;
+	prop = sym_get_choice_prop(sym);
+	expr_list_for_each_sym(prop->expr, e, def_sym)
+		if (def_sym->visible != no)
+			return def_sym;
 
 	/* failed to locate any defaults */
 	return NULL;
 }
 
-/*
- * sym_calc_choice - calculate symbol values in a choice
- *
- * @choice: a menu of the choice
- *
- * Return: a chosen symbol
- */
-struct symbol *sym_calc_choice(struct menu *choice)
+static struct symbol *sym_calc_choice(struct symbol *sym)
 {
-	struct symbol *res = NULL;
-	struct symbol *sym;
-	struct menu *menu;
+	struct symbol *def_sym;
+	struct property *prop;
+	struct expr *e;
+	int flags;
 
-	/* Traverse the list of choice members in the priority order. */
-	list_for_each_entry(sym, &choice->choice_members, choice_link) {
-		sym_calc_visibility(sym);
-		if (sym->visible == no)
-			continue;
-
-		/* The first visible symble with the user value 'y'. */
-		if (sym_has_value(sym) && sym->def[S_DEF_USER].tri == yes) {
-			res = sym;
-			break;
-		}
+	/* first calculate all choice values' visibilities */
+	flags = sym->flags;
+	prop = sym_get_choice_prop(sym);
+	expr_list_for_each_sym(prop->expr, e, def_sym) {
+		sym_calc_visibility(def_sym);
+		if (def_sym->visible != no)
+			flags &= def_sym->flags;
 	}
 
-	/*
-	 * If 'y' is not found in the user input, use the default, unless it is
-	 * explicitly set to 'n'.
-	 */
-	if (!res) {
-		res = sym_choice_default(choice);
-		if (res && sym_has_value(res) && res->def[S_DEF_USER].tri == no)
-			res = NULL;
-	}
+	sym->flags &= flags | ~SYMBOL_DEF_USER;
 
-	/* Still not found. Pick up the first visible, user-unspecified symbol. */
-	if (!res) {
-		menu_for_each_sub_entry(menu, choice) {
-			sym = menu->sym;
+	/* is the user choice visible? */
+	def_sym = sym->def[S_DEF_USER].val;
+	if (def_sym && def_sym->visible != no)
+		return def_sym;
 
-			if (!sym || sym->visible == no || sym_has_value(sym))
-				continue;
+	def_sym = sym_choice_default(sym);
 
-			res = sym;
-			break;
-		}
-	}
+	if (def_sym == NULL)
+		/* no choice? reset tristate value */
+		sym->curr.tri = no;
 
-	/*
-	 * Still not found. Traverse the linked list in the _reverse_ order to
-	 * pick up the least prioritized 'n'.
-	 */
-	if (!res) {
-		list_for_each_entry_reverse(sym, &choice->choice_members,
-					    choice_link) {
-			if (sym->visible == no)
-				continue;
-
-			res = sym;
-			break;
-		}
-	}
-
-	menu_for_each_sub_entry(menu, choice) {
-		tristate val;
-
-		sym = menu->sym;
-
-		if (!sym || sym->visible == no)
-			continue;
-
-		val = sym == res ? yes : no;
-
-		if (sym->curr.tri != val)
-			sym_set_changed(sym);
-
-		sym->curr.tri = val;
-		sym->flags |= SYMBOL_VALID | SYMBOL_WRITE;
-	}
-
-	return res;
+	return def_sym;
 }
 
-static void sym_warn_unmet_dep(const struct symbol *sym)
+static void sym_warn_unmet_dep(struct symbol *sym)
 {
 	struct gstr gs = str_new();
 
@@ -388,13 +365,20 @@ void sym_calc_value(struct symbol *sym)
 {
 	struct symbol_value newval, oldval;
 	struct property *prop;
-	struct menu *choice_menu;
+	struct expr *e;
 
 	if (!sym)
 		return;
 
 	if (sym->flags & SYMBOL_VALID)
 		return;
+
+	if (sym_is_choice_value(sym) &&
+	    sym->flags & SYMBOL_NEED_SET_CHOICE_VALUES) {
+		sym->flags &= ~SYMBOL_NEED_SET_CHOICE_VALUES;
+		prop = sym_get_choice_prop(sym);
+		sym_calc_value(prop_get_symbol(prop));
+	}
 
 	sym->flags |= SYMBOL_VALID;
 
@@ -434,11 +418,9 @@ void sym_calc_value(struct symbol *sym)
 	switch (sym_get_type(sym)) {
 	case S_BOOLEAN:
 	case S_TRISTATE:
-		choice_menu = sym_get_choice_menu(sym);
-
-		if (choice_menu) {
-			sym_calc_choice(choice_menu);
-			newval.tri = sym->curr.tri;
+		if (sym_is_choice_value(sym) && sym->visible == yes) {
+			prop = sym_get_choice_prop(sym);
+			newval.tri = (prop_get_symbol(prop)->curr.val == sym) ? yes : no;
 		} else {
 			if (sym->visible != no) {
 				/* if the symbol is visible use the user value
@@ -497,6 +479,8 @@ void sym_calc_value(struct symbol *sym)
 	}
 
 	sym->curr = newval;
+	if (sym_is_choice(sym) && newval.tri == yes)
+		sym->curr.val = sym_calc_choice(sym);
 	sym_validate_range(sym);
 
 	if (memcmp(&oldval, &sym->curr, sizeof(oldval))) {
@@ -507,8 +491,23 @@ void sym_calc_value(struct symbol *sym)
 		}
 	}
 
-	if (sym_is_choice(sym))
+	if (sym_is_choice(sym)) {
+		struct symbol *choice_sym;
+
+		prop = sym_get_choice_prop(sym);
+		expr_list_for_each_sym(prop->expr, e, choice_sym) {
+			if ((sym->flags & SYMBOL_WRITE) &&
+			    choice_sym->visible != no)
+				choice_sym->flags |= SYMBOL_WRITE;
+			if (sym->flags & SYMBOL_CHANGED)
+				sym_set_changed(choice_sym);
+		}
+
 		sym->flags &= ~SYMBOL_WRITE;
+	}
+
+	if (sym->flags & SYMBOL_NEED_SET_CHOICE_VALUES)
+		set_all_choice_values(sym);
 }
 
 void sym_clear_all_valid(void)
@@ -521,7 +520,7 @@ void sym_clear_all_valid(void)
 	sym_calc_value(modules_sym);
 }
 
-bool sym_tristate_within_range(const struct symbol *sym, tristate val)
+bool sym_tristate_within_range(struct symbol *sym, tristate val)
 {
 	int type = sym_get_type(sym);
 
@@ -535,6 +534,8 @@ bool sym_tristate_within_range(const struct symbol *sym, tristate val)
 		return false;
 	if (sym->visible <= sym->rev_dep.tri)
 		return false;
+	if (sym_is_choice_value(sym) && sym->visible == yes)
+		return val == yes;
 	return val >= sym->rev_dep.tri && val <= sym->visible;
 }
 
@@ -542,74 +543,41 @@ bool sym_set_tristate_value(struct symbol *sym, tristate val)
 {
 	tristate oldval = sym_get_tristate_value(sym);
 
-	if (!sym_tristate_within_range(sym, val))
+	if (oldval != val && !sym_tristate_within_range(sym, val))
 		return false;
 
-	if (!(sym->flags & SYMBOL_DEF_USER) || sym->def[S_DEF_USER].tri != val) {
-		sym->def[S_DEF_USER].tri = val;
+	if (!(sym->flags & SYMBOL_DEF_USER)) {
 		sym->flags |= SYMBOL_DEF_USER;
 		sym_set_changed(sym);
 	}
+	/*
+	 * setting a choice value also resets the new flag of the choice
+	 * symbol and all other choice values.
+	 */
+	if (sym_is_choice_value(sym) && val == yes) {
+		struct symbol *cs = prop_get_symbol(sym_get_choice_prop(sym));
+		struct property *prop;
+		struct expr *e;
 
+		cs->def[S_DEF_USER].val = sym;
+		cs->flags |= SYMBOL_DEF_USER;
+		prop = sym_get_choice_prop(cs);
+		for (e = prop->expr; e; e = e->left.expr) {
+			if (e->right.sym->visible != no)
+				e->right.sym->flags |= SYMBOL_DEF_USER;
+		}
+	}
+
+	sym->def[S_DEF_USER].tri = val;
 	if (oldval != val)
 		sym_clear_all_valid();
 
 	return true;
 }
 
-/**
- * choice_set_value - set the user input to a choice
- *
- * @choice: menu entry for the choice
- * @sym: selected symbol
- */
-void choice_set_value(struct menu *choice, struct symbol *sym)
-{
-	struct menu *menu;
-	bool changed = false;
-
-	menu_for_each_sub_entry(menu, choice) {
-		tristate val;
-
-		if (!menu->sym)
-			continue;
-
-		if (menu->sym->visible == no)
-			continue;
-
-		val = menu->sym == sym ? yes : no;
-
-		if (menu->sym->curr.tri != val)
-			changed = true;
-
-		menu->sym->def[S_DEF_USER].tri = val;
-		menu->sym->flags |= SYMBOL_DEF_USER;
-
-		/*
-		 * Now, the user has explicitly enabled or disabled this symbol,
-		 * it should be given the highest priority. We are possibly
-		 * setting multiple symbols to 'n', where the first symbol is
-		 * given the least prioritized 'n'. This works well when the
-		 * choice block ends up with selecting 'n' symbol.
-		 * (see sym_calc_choice())
-		 */
-		list_move(&menu->sym->choice_link, &choice->choice_members);
-	}
-
-	if (changed)
-		sym_clear_all_valid();
-}
-
 tristate sym_toggle_tristate_value(struct symbol *sym)
 {
-	struct menu *choice;
 	tristate oldval, newval;
-
-	choice = sym_get_choice_menu(sym);
-	if (choice) {
-		choice_set_value(choice, sym);
-		return yes;
-	}
 
 	oldval = newval = sym_get_tristate_value(sym);
 	do {
@@ -866,14 +834,9 @@ const char *sym_get_string_value(struct symbol *sym)
 	return (const char *)sym->curr.val;
 }
 
-bool sym_is_changeable(const struct symbol *sym)
+bool sym_is_changeable(struct symbol *sym)
 {
-	return !sym_is_choice(sym) && sym->visible > sym->rev_dep.tri;
-}
-
-bool sym_is_choice_value(const struct symbol *sym)
-{
-	return !list_empty(&sym->choice_link);
+	return sym->visible > sym->rev_dep.tri;
 }
 
 HASHTABLE_DEFINE(sym_hashtable, SYMBOL_HASHSIZE);
@@ -913,7 +876,6 @@ struct symbol *sym_lookup(const char *name, int flags)
 	symbol->type = S_UNKNOWN;
 	symbol->flags = flags;
 	INIT_LIST_HEAD(&symbol->menus);
-	INIT_LIST_HEAD(&symbol->choice_link);
 
 	hash_add(sym_hashtable, &symbol->node, hash);
 
@@ -1074,14 +1036,13 @@ static void sym_check_print_recursive(struct symbol *last_sym)
 {
 	struct dep_stack *stack;
 	struct symbol *sym, *next_sym;
-	struct menu *choice;
+	struct menu *menu = NULL;
+	struct property *prop;
 	struct dep_stack cv_stack;
-	enum prop_type type;
 
-	choice = sym_get_choice_menu(last_sym);
-	if (choice) {
+	if (sym_is_choice_value(last_sym)) {
 		dep_stack_insert(&cv_stack, last_sym);
-		last_sym = choice->sym;
+		last_sym = prop_get_symbol(sym_get_choice_prop(last_sym));
 	}
 
 	for (stack = check_top; stack != NULL; stack = stack->prev)
@@ -1095,37 +1056,59 @@ static void sym_check_print_recursive(struct symbol *last_sym)
 	for (; stack; stack = stack->next) {
 		sym = stack->sym;
 		next_sym = stack->next ? stack->next->sym : last_sym;
-		type = stack->prop ? stack->prop->type : P_UNKNOWN;
+		prop = stack->prop;
+		if (prop == NULL)
+			prop = stack->sym->prop;
 
+		/* for choice values find the menu entry (used below) */
+		if (sym_is_choice(sym) || sym_is_choice_value(sym)) {
+			for (prop = sym->prop; prop; prop = prop->next) {
+				menu = prop->menu;
+				if (prop->menu)
+					break;
+			}
+		}
 		if (stack->sym == last_sym)
-			fprintf(stderr, "error: recursive dependency detected!\n");
+			fprintf(stderr, "%s:%d:error: recursive dependency detected!\n",
+				prop->filename, prop->lineno);
 
-		if (sym_is_choice(next_sym)) {
-			choice = list_first_entry(&next_sym->menus, struct menu, link);
-
-			fprintf(stderr, "\tsymbol %s is part of choice block at %s:%d\n",
+		if (sym_is_choice(sym)) {
+			fprintf(stderr, "%s:%d:\tchoice %s contains symbol %s\n",
+				menu->filename, menu->lineno,
 				sym->name ? sym->name : "<choice>",
-				choice->filename, choice->lineno);
+				next_sym->name ? next_sym->name : "<choice>");
+		} else if (sym_is_choice_value(sym)) {
+			fprintf(stderr, "%s:%d:\tsymbol %s is part of choice %s\n",
+				menu->filename, menu->lineno,
+				sym->name ? sym->name : "<choice>",
+				next_sym->name ? next_sym->name : "<choice>");
 		} else if (stack->expr == &sym->dir_dep.expr) {
-			fprintf(stderr, "\tsymbol %s depends on %s\n",
+			fprintf(stderr, "%s:%d:\tsymbol %s depends on %s\n",
+				prop->filename, prop->lineno,
 				sym->name ? sym->name : "<choice>",
-				next_sym->name);
+				next_sym->name ? next_sym->name : "<choice>");
 		} else if (stack->expr == &sym->rev_dep.expr) {
-			fprintf(stderr, "\tsymbol %s is selected by %s\n",
-				sym->name, next_sym->name);
+			fprintf(stderr, "%s:%d:\tsymbol %s is selected by %s\n",
+				prop->filename, prop->lineno,
+				sym->name ? sym->name : "<choice>",
+				next_sym->name ? next_sym->name : "<choice>");
 		} else if (stack->expr == &sym->implied.expr) {
-			fprintf(stderr, "\tsymbol %s is implied by %s\n",
-				sym->name, next_sym->name);
+			fprintf(stderr, "%s:%d:\tsymbol %s is implied by %s\n",
+				prop->filename, prop->lineno,
+				sym->name ? sym->name : "<choice>",
+				next_sym->name ? next_sym->name : "<choice>");
 		} else if (stack->expr) {
-			fprintf(stderr, "\tsymbol %s %s value contains %s\n",
+			fprintf(stderr, "%s:%d:\tsymbol %s %s value contains %s\n",
+				prop->filename, prop->lineno,
 				sym->name ? sym->name : "<choice>",
-				prop_get_type_name(type),
-				next_sym->name);
+				prop_get_type_name(prop->type),
+				next_sym->name ? next_sym->name : "<choice>");
 		} else {
-			fprintf(stderr, "\tsymbol %s %s is visible depending on %s\n",
+			fprintf(stderr, "%s:%d:\tsymbol %s %s is visible depending on %s\n",
+				prop->filename, prop->lineno,
 				sym->name ? sym->name : "<choice>",
-				prop_get_type_name(type),
-				next_sym->name);
+				prop_get_type_name(prop->type),
+				next_sym->name ? next_sym->name : "<choice>");
 		}
 	}
 
@@ -1138,7 +1121,7 @@ static void sym_check_print_recursive(struct symbol *last_sym)
 		dep_stack_remove();
 }
 
-static struct symbol *sym_check_expr_deps(const struct expr *e)
+static struct symbol *sym_check_expr_deps(struct expr *e)
 {
 	struct symbol *sym;
 
@@ -1199,7 +1182,8 @@ static struct symbol *sym_check_sym_deps(struct symbol *sym)
 	stack.expr = NULL;
 
 	for (prop = sym->prop; prop; prop = prop->next) {
-		if (prop->type == P_SELECT || prop->type == P_IMPLY)
+		if (prop->type == P_CHOICE || prop->type == P_SELECT ||
+		    prop->type == P_IMPLY)
 			continue;
 		stack.prop = prop;
 		sym2 = sym_check_expr_deps(prop->visible.expr);
@@ -1253,13 +1237,9 @@ out:
 		if (menu->sym)
 			menu->sym->flags &= ~SYMBOL_CHECK;
 
-	if (sym2) {
-		struct menu *choice_menu2;
-
-		choice_menu2 = sym_get_choice_menu(sym2);
-		if (choice_menu2 == choice_menu)
-			sym2 = choice;
-	}
+	if (sym2 && sym_is_choice_value(sym2) &&
+	    prop_get_symbol(sym_get_choice_prop(sym2)) == choice)
+		sym2 = choice;
 
 	dep_stack_remove();
 
@@ -1268,8 +1248,8 @@ out:
 
 struct symbol *sym_check_deps(struct symbol *sym)
 {
-	struct menu *choice;
 	struct symbol *sym2;
+	struct property *prop;
 
 	if (sym->flags & SYMBOL_CHECK) {
 		sym_check_print_recursive(sym);
@@ -1278,13 +1258,13 @@ struct symbol *sym_check_deps(struct symbol *sym)
 	if (sym->flags & SYMBOL_CHECKED)
 		return NULL;
 
-	choice = sym_get_choice_menu(sym);
-	if (choice) {
+	if (sym_is_choice_value(sym)) {
 		struct dep_stack stack;
 
 		/* for choice groups start the check with main choice symbol */
 		dep_stack_insert(&stack, sym);
-		sym2 = sym_check_deps(choice->sym);
+		prop = sym_get_choice_prop(sym);
+		sym2 = sym_check_deps(prop_get_symbol(prop));
 		dep_stack_remove();
 	} else if (sym_is_choice(sym)) {
 		sym2 = sym_check_choice_deps(sym);
@@ -1297,9 +1277,10 @@ struct symbol *sym_check_deps(struct symbol *sym)
 	return sym2;
 }
 
-struct symbol *prop_get_symbol(const struct property *prop)
+struct symbol *prop_get_symbol(struct property *prop)
 {
-	if (prop->expr && prop->expr->type == E_SYMBOL)
+	if (prop->expr && (prop->expr->type == E_SYMBOL ||
+			   prop->expr->type == E_LIST))
 		return prop->expr->left.sym;
 	return NULL;
 }
@@ -1315,6 +1296,8 @@ const char *prop_get_type_name(enum prop_type type)
 		return "menu";
 	case P_DEFAULT:
 		return "default";
+	case P_CHOICE:
+		return "choice";
 	case P_SELECT:
 		return "select";
 	case P_IMPLY:

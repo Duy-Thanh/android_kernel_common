@@ -960,8 +960,7 @@ config CMDLINE
 	  line here and choose how the kernel should use it later on.
 
 choice
-	prompt "Built-in command line usage"
-	depends on CMDLINE != ""
+	prompt "Built-in command line usage" if CMDLINE != ""
 	default CMDLINE_FALLBACK
 	help
 	  Choose how the kernel will handle the provided built-in command

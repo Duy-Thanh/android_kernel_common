@@ -221,7 +221,6 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
 						const char *name)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
-	struct f2fs_inode_info *fi;
 	nid_t ino;
 	struct inode *inode;
 	bool nid_free = false;
@@ -242,15 +241,14 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
 
 	inode_init_owner(idmap, inode, dir, mode);
 
-	fi = F2FS_I(inode);
 	inode->i_ino = ino;
 	inode->i_blocks = 0;
 	simple_inode_init_ts(inode);
-	fi->i_crtime = inode_get_mtime(inode);
+	F2FS_I(inode)->i_crtime = inode_get_mtime(inode);
 	inode->i_generation = get_random_u32();
 
 	if (S_ISDIR(inode->i_mode))
-		fi->i_current_depth = 1;
+		F2FS_I(inode)->i_current_depth = 1;
 
 	err = insert_inode_locked(inode);
 	if (err) {
@@ -260,9 +258,9 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
 
 	if (f2fs_sb_has_project_quota(sbi) &&
 		(F2FS_I(dir)->i_flags & F2FS_PROJINHERIT_FL))
-		fi->i_projid = F2FS_I(dir)->i_projid;
+		F2FS_I(inode)->i_projid = F2FS_I(dir)->i_projid;
 	else
-		fi->i_projid = make_kprojid(&init_user_ns,
+		F2FS_I(inode)->i_projid = make_kprojid(&init_user_ns,
 							F2FS_DEF_PROJID);
 
 	err = fscrypt_prepare_new_inode(dir, inode, &encrypt);
@@ -280,7 +278,7 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
 
 	if (f2fs_sb_has_extra_attr(sbi)) {
 		set_inode_flag(inode, FI_EXTRA_ATTR);
-		fi->i_extra_isize = F2FS_TOTAL_EXTRA_ATTR_SIZE;
+		F2FS_I(inode)->i_extra_isize = F2FS_TOTAL_EXTRA_ATTR_SIZE;
 	}
 
 	if (test_opt(sbi, INLINE_XATTR))
@@ -298,15 +296,15 @@ static struct inode *f2fs_new_inode(struct mnt_idmap *idmap,
 				f2fs_has_inline_dentry(inode)) {
 		xattr_size = DEFAULT_INLINE_XATTR_ADDRS;
 	}
-	fi->i_inline_xattr_size = xattr_size;
+	F2FS_I(inode)->i_inline_xattr_size = xattr_size;
 
-	fi->i_flags =
+	F2FS_I(inode)->i_flags =
 		f2fs_mask_flags(mode, F2FS_I(dir)->i_flags & F2FS_FL_INHERITED);
 
 	if (S_ISDIR(inode->i_mode))
-		fi->i_flags |= F2FS_INDEX_FL;
+		F2FS_I(inode)->i_flags |= F2FS_INDEX_FL;
 
-	if (fi->i_flags & F2FS_PROJINHERIT_FL)
+	if (F2FS_I(inode)->i_flags & F2FS_PROJINHERIT_FL)
 		set_inode_flag(inode, FI_PROJ_INHERIT);
 
 	/* Check compression first. */

@@ -19,7 +19,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include <list.h>
+#include "list.h"
 #include "lkc.h"
 #include "lxdialog/dialog.h"
 #include "mnconf-common.h"
@@ -514,7 +514,7 @@ static void build_conf(struct menu *menu)
 
 	type = sym_get_type(sym);
 	if (sym_is_choice(sym)) {
-		struct symbol *def_sym = sym_calc_choice(menu);
+		struct symbol *def_sym = sym_get_choice_value(sym);
 		struct menu *def_menu = NULL;
 
 		child_count++;
@@ -523,14 +523,28 @@ static void build_conf(struct menu *menu)
 				def_menu = child;
 		}
 
-		item_make("   ");
-		item_set_tag(def_menu ? 't' : ':');
-		item_set_data(menu);
+		val = sym_get_tristate_value(sym);
+		if (sym_is_changeable(sym)) {
+			switch (val) {
+			case yes: ch = '*'; break;
+			case mod: ch = 'M'; break;
+			default:  ch = ' '; break;
+			}
+			item_make("<%c>", ch);
+			item_set_tag('t');
+			item_set_data(menu);
+		} else {
+			item_make("   ");
+			item_set_tag(def_menu ? 't' : ':');
+			item_set_data(menu);
+		}
 
 		item_add_str("%*c%s", indent + 1, ' ', menu_get_prompt(menu));
-		if (def_menu)
-			item_add_str(" (%s)  --->", menu_get_prompt(def_menu));
-		return;
+		if (val == yes) {
+			if (def_menu)
+				item_add_str(" (%s)  --->", menu_get_prompt(def_menu));
+			return;
+		}
 	} else {
 		if (menu == current_menu) {
 			item_make("---%*c%s", indent + 1, ' ', menu_get_prompt(menu));
@@ -600,7 +614,7 @@ static void conf_choice(struct menu *menu)
 	struct menu *child;
 	struct symbol *active;
 
-	active = sym_calc_choice(menu);
+	active = sym_get_choice_value(menu->sym);
 	while (1) {
 		int res;
 		int selected;
@@ -619,7 +633,7 @@ static void conf_choice(struct menu *menu)
 			item_set_data(child);
 			if (child->sym == active)
 				item_set_selected(1);
-			if (child->sym == sym_calc_choice(menu))
+			if (child->sym == sym_get_choice_value(menu->sym))
 				item_set_tag('X');
 		}
 		dialog_clear();
@@ -636,7 +650,7 @@ static void conf_choice(struct menu *menu)
 				if (!child->sym)
 					break;
 
-				choice_set_value(menu, child->sym);
+				sym_set_tristate_value(child->sym, yes);
 			}
 			return;
 		case 1:
@@ -800,7 +814,7 @@ static void conf(struct menu *menu, struct menu *active_menu)
 					conf(submenu, NULL);
 				break;
 			case 't':
-				if (sym_is_choice(sym))
+				if (sym_is_choice(sym) && sym_get_tristate_value(sym) == yes)
 					conf_choice(submenu);
 				else if (submenu->prompt->type == P_MENU)
 					conf(submenu, NULL);

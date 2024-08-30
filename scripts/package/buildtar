@@ -11,7 +11,7 @@
 # Wichert Akkerman <wichert@wiggy.net>.
 #
 
-set -eu
+set -e
 
 #
 # Some variables and settings used throughout the script

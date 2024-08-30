@@ -239,7 +239,7 @@ class ConfigMainWindow : public QMainWindow {
 
 	char *configname;
 	static QAction *saveAction;
-	static void conf_changed(bool);
+	static void conf_changed(void);
 public:
 	ConfigMainWindow(void);
 public slots:
