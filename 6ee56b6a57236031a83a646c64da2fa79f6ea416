@@ -16,6 +16,29 @@
       "message": "This needs a follow on patch that adds the new hook to the KMI symbols list",
       "revId": "6ee56b6a57236031a83a646c64da2fa79f6ea416",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00efff55_db1d256c",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3853,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-09-02T10:39:43Z",
+      "side": 1,
+      "message": "Why not attaching to this existing tracepoint instead?",
+      "range": {
+        "startLine": 3853,
+        "startChar": 1,
+        "endLine": 3853,
+        "endChar": 19
+      },
+      "revId": "6ee56b6a57236031a83a646c64da2fa79f6ea416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
