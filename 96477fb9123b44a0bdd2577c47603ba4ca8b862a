@@ -16,6 +16,23 @@
       "message": "Looks good.  Thanks, Avri",
       "revId": "96477fb9123b44a0bdd2577c47603ba4ca8b862a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e93db8b_7807a16a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2024-09-02T06:53:33Z",
+      "side": 1,
+      "message": "Tested-by: Avri Altman \u003cavri.altman@wdc.com\u003e",
+      "revId": "96477fb9123b44a0bdd2577c47603ba4ca8b862a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
