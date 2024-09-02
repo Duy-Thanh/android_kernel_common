@@ -1673,13 +1673,19 @@
 		};
 
 		mmsys: syscon@14000000 {
-			compatible = "mediatek,mt8183-mmsys", "syscon";
+			compatible = "mediatek,mt8183-mmsys", "syscon",
+				     "mediatek,mt8183-mdp3-dl1",
+				     "mediatek,mt8183-mdp3-dl2";
 			reg = <0 0x14000000 0 0x1000>;
 			#clock-cells = <1>;
 			#reset-cells = <1>;
 			mboxes = <&gce 0 CMDQ_THR_PRIO_HIGHEST>,
 				 <&gce 1 CMDQ_THR_PRIO_HIGHEST>;
 			mediatek,gce-client-reg = <&gce SUBSYS_1400XXXX 0 0x1000>;
+			clocks = <&mmsys CLK_MM_MDP_DL_TXCK>,
+				 <&mmsys CLK_MM_MDP_DL_RX>,
+				 <&mmsys CLK_MM_IPU_DL_TXCK>,
+				 <&mmsys CLK_MM_IPU_DL_RX>;
 		};
 
 		mdp3_rdma0: dma-controller0@14001000 {
@@ -1907,8 +1913,11 @@
 		};
 
 		imgsys: syscon@15020000 {
-			compatible = "mediatek,mt8183-imgsys", "syscon";
+			compatible = "mediatek,mt8183-imgsys", "syscon",
+				     "mediatek,mt8183-mdp3-imgi",
+				     "mediatek,mt8183-mdp3-exto";
 			reg = <0 0x15020000 0 0x1000>;
+			mediatek,gce-client-reg = <&gce SUBSYS_1502XXXX 0x0000 0x1000>;
 			#clock-cells = <1>;
 		};
 
