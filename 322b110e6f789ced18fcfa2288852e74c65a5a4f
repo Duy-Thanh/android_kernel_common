@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3bdafe_995fd5a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-09-03T04:52:56Z",
+      "side": 1,
+      "message": "please do your own merge, not a cherry-pick of a different merge, otherwise this is going to get really complicated over time...",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "322b110e6f789ced18fcfa2288852e74c65a5a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
