@@ -383,6 +383,9 @@ DECLARE_HOOK(android_vh_filemap_add_to_page_cache,
 	TP_PROTO(struct address_space *mapping, struct page *page,
 		pgoff_t offset),
 	TP_ARGS(mapping, page, offset));
+DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
+	TP_PROTO(struct zone *zone, u64 interval),
+	TP_ARGS(zone, interval));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
