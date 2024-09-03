@@ -534,6 +534,33 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_create_worker);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
+<<<<<<< HEAD   (61539e1b9df7e9b6ba80c612d81be2e5dc341b40 ANDROID: GKI: Update the ABI symbol list)
+||||||| BASE   (17b41c3753e02a95f4c254b325857a19a1064efe UPSTREAM: xfrm: esp: avoid in-place decrypt on shared skb fr)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_end);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_group_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_end);
+>>>>>>> CHANGE (f58bdcdd1b4b35f71007954bf8708607b8a126f7 ANDROID: vendor_hooks: add hook for boost free pages mapped )
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_read_swap_cache_async_timeout);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru_folio_activate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);

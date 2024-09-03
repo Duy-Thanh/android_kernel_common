@@ -380,6 +380,87 @@ DECLARE_HOOK(android_vh_pcp_alloc_factor_adjust,
 		struct per_cpu_pages *pcp, struct page *page, int migratetype,
 		unsigned int order),
 	TP_ARGS(zone, pad, pcp, page, migratetype, order));
+<<<<<<< HEAD   (61539e1b9df7e9b6ba80c612d81be2e5dc341b40 ANDROID: GKI: Update the ABI symbol list)
+||||||| BASE   (17b41c3753e02a95f4c254b325857a19a1064efe UPSTREAM: xfrm: esp: avoid in-place decrypt on shared skb fr)
+DECLARE_HOOK(android_vh_swapin_start,
+	TP_PROTO(unsigned long *swapin_start),
+	TP_ARGS(swapin_start));
+DECLARE_HOOK(android_vh_swapin_end,
+	TP_PROTO(struct folio *folio, unsigned long swapin_start, int result),
+	TP_ARGS(folio, swapin_start, result));
+DECLARE_HOOK(android_vh_swap_writepage_start,
+	TP_PROTO(unsigned long *swap_writepage_start),
+	TP_ARGS(swap_writepage_start));
+DECLARE_HOOK(android_vh_swap_writepage_end,
+	TP_PROTO(struct page *page, struct writeback_control *wbc,
+		unsigned long swap_writepage_start, int result),
+	TP_ARGS(page, wbc, swap_writepage_start, result));
+DECLARE_HOOK(android_vh_task_mem,
+	TP_PROTO(struct seq_file *m, struct mm_struct *mm),
+	TP_ARGS(m, mm));
+DECLARE_HOOK(android_vh_mm_free,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_mm_init,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_alloc_pages_start,
+	TP_PROTO(u64 *stime),
+	TP_ARGS(stime));
+DECLARE_HOOK(android_vh_alloc_pages_end,
+	TP_PROTO(unsigned int order, gfp_t alloc_gfp, u64 stime),
+	TP_ARGS(order, alloc_gfp, stime));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_start,
+	TP_PROTO(u64 *stime),
+	TP_ARGS(stime));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_end,
+	TP_PROTO(gfp_t *gfp_mask, unsigned int order, unsigned long alloc_start,
+		u64 stime, unsigned long did_some_progress,
+		unsigned long pages_reclaimed, int retry_loop_count),
+	TP_ARGS(gfp_mask, order, alloc_start, stime, did_some_progress,
+		pages_reclaimed, retry_loop_count));
+=======
+DECLARE_HOOK(android_vh_swapin_start,
+	TP_PROTO(unsigned long *swapin_start),
+	TP_ARGS(swapin_start));
+DECLARE_HOOK(android_vh_swapin_end,
+	TP_PROTO(struct folio *folio, unsigned long swapin_start, int result),
+	TP_ARGS(folio, swapin_start, result));
+DECLARE_HOOK(android_vh_swap_writepage_start,
+	TP_PROTO(unsigned long *swap_writepage_start),
+	TP_ARGS(swap_writepage_start));
+DECLARE_HOOK(android_vh_swap_writepage_end,
+	TP_PROTO(struct page *page, struct writeback_control *wbc,
+		unsigned long swap_writepage_start, int result),
+	TP_ARGS(page, wbc, swap_writepage_start, result));
+DECLARE_HOOK(android_vh_task_mem,
+	TP_PROTO(struct seq_file *m, struct mm_struct *mm),
+	TP_ARGS(m, mm));
+DECLARE_HOOK(android_vh_mm_free,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_mm_init,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_alloc_pages_start,
+	TP_PROTO(u64 *stime),
+	TP_ARGS(stime));
+DECLARE_HOOK(android_vh_alloc_pages_end,
+	TP_PROTO(unsigned int order, gfp_t alloc_gfp, u64 stime),
+	TP_ARGS(order, alloc_gfp, stime));
+DECLARE_HOOK(android_vh_do_group_exit,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_start,
+	TP_PROTO(u64 *stime),
+	TP_ARGS(stime));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_end,
+	TP_PROTO(gfp_t *gfp_mask, unsigned int order, unsigned long alloc_start,
+		u64 stime, unsigned long did_some_progress,
+		unsigned long pages_reclaimed, int retry_loop_count),
+	TP_ARGS(gfp_mask, order, alloc_start, stime, did_some_progress,
+		pages_reclaimed, retry_loop_count));
+>>>>>>> CHANGE (f58bdcdd1b4b35f71007954bf8708607b8a126f7 ANDROID: vendor_hooks: add hook for boost free pages mapped )
 DECLARE_RESTRICTED_HOOK(android_rvh_read_swap_cache_async_timeout,
 	TP_PROTO(size_t *count, bool *skip),
 	TP_ARGS(count, skip), 2);
