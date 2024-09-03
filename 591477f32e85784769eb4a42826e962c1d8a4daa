@@ -195,6 +195,24 @@
       "parentUuid": "8b04844c_7b4eaf39",
       "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de95eb96_259ced5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3599834
+      },
+      "writtenOn": "2024-09-03T07:45:17Z",
+      "side": 1,
+      "message": "To aviod the reverted commit influence,we will make ufs probe first then sd probe to avoid the race condition. I will give up the commit. Thank you for your support.",
+      "parentUuid": "811d926a_ee7d296c",
+      "revId": "591477f32e85784769eb4a42826e962c1d8a4daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
