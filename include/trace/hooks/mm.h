@@ -293,6 +293,33 @@ DECLARE_HOOK(android_vh_filemap_update_page,
 		struct file *file),
 	TP_ARGS(mapping, folio, file));
 
+<<<<<<< HEAD   (f42ab3 UPSTREAM: net: sched: sch_multiq: fix possible OOB write in )
+=======
+DECLARE_HOOK(android_vh_cma_alloc_set_max_retries,
+	TP_PROTO(int *max_retries),
+	TP_ARGS(max_retries));
+DECLARE_HOOK(android_vh_compact_finished,
+	TP_PROTO(bool *abort_compact),
+	TP_ARGS(abort_compact));
+DECLARE_HOOK(android_vh_madvise_cold_or_pageout_abort,
+	TP_PROTO(struct vm_area_struct *vma, bool *abort_madvise),
+	TP_ARGS(vma, abort_madvise));
+DECLARE_HOOK(android_vh_zs_shrinker_adjust,
+	TP_PROTO(unsigned long *pages_to_free),
+	TP_ARGS(pages_to_free));
+DECLARE_HOOK(android_vh_zs_shrinker_bypass,
+	TP_PROTO(bool *bypass),
+	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_customize_thp_pcp_order,
+	TP_PROTO(unsigned int *order),
+	TP_ARGS(order));
+DECLARE_HOOK(android_vh_customize_thp_gfp_orders,
+	TP_PROTO(gfp_t *gfp_mask, unsigned long *orders, int *order),
+	TP_ARGS(gfp_mask, orders, order));
+DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
+	TP_PROTO(struct zone *zone, u64 interval),
+	TP_ARGS(zone, interval));
+>>>>>>> CHANGE (fdf9c0 ANDROID: vendor_hooks: add hook for adjusting a more suitabl)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
