@@ -115,6 +115,7 @@
   __traceiter_android_vh_binder_special_task
   __traceiter_android_vh_binder_wait_for_work
   __traceiter_android_vh_blk_fill_rwbs
+  __traceiter_android_vh_boost_free_mm
   __traceiter_android_vh_build_skb_around
   __traceiter_android_vh_cgroup_attach
   __traceiter_android_vh_check_folio_look_around_ref
@@ -234,6 +235,7 @@
   __tracepoint_android_vh_binder_special_task
   __tracepoint_android_vh_binder_wait_for_work
   __tracepoint_android_vh_blk_fill_rwbs
+  __tracepoint_android_vh_boost_free_mm
   __tracepoint_android_vh_build_skb_around
   __tracepoint_android_vh_cgroup_attach
   __tracepoint_android_vh_check_folio_look_around_ref
