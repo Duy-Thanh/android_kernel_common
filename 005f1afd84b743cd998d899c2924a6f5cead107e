@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4081f9cd_92675b17",
+        "filename": "mm/page_io.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-03T12:14:16Z",
+      "side": 1,
+      "message": "If this is racy already, should you not actually be grabbing the flags right before passing them to the hook then?",
+      "range": {
+        "startLine": 378,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 38
+      },
+      "revId": "005f1afd84b743cd998d899c2924a6f5cead107e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0939dd75_cd7f3216",
+        "filename": "mm/page_io.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-03T12:14:16Z",
+      "side": 1,
+      "message": "```\nWARNING:DATA_RACE: data_race without comment\n#68: FILE: mm/page_io.c:387:\n```\n\nThe comment block needs to stay with the `data_race` line.",
+      "range": {
+        "startLine": 381,
+        "startChar": 0,
+        "endLine": 385,
+        "endChar": 4
+      },
+      "revId": "005f1afd84b743cd998d899c2924a6f5cead107e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
