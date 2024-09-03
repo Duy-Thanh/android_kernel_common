@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "14683b92_b027443a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-09-03T04:13:19Z",
+      "side": 1,
+      "message": "It looks like this patch has been merged to maintainer\u0027s tree.\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?id\u003da4d7f2b3238f\n\nPlease fix the commit message.",
+      "revId": "32c854e440ebfb080059cd59b74468f74727d2a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e63fb156_a2cfb92e",
