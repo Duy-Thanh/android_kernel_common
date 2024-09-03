@@ -329,9 +329,16 @@ DECLARE_HOOK(android_vh_split_large_folio_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
 
+<<<<<<< HEAD   (791020 UPSTREAM: block: fix lost bio for plug enabled bio based dev)
 DECLARE_HOOK(android_vh_cma_alloc_set_max_retries,
 	TP_PROTO(int *max_retries),
 	TP_ARGS(max_retries));
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
+	TP_PROTO(struct zone *zone, u64 interval),
+	TP_ARGS(zone, interval));
+>>>>>>> CHANGE (99a599 ANDROID: vendor_hooks: add hook for adjusting a more suitabl)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
