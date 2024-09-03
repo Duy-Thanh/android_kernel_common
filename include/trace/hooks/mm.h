@@ -332,6 +332,9 @@ DECLARE_HOOK(android_vh_split_large_folio_bypass,
 DECLARE_HOOK(android_vh_cma_alloc_set_max_retries,
 	TP_PROTO(int *max_retries),
 	TP_ARGS(max_retries));
+DECLARE_HOOK(android_vh_do_group_exit,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
