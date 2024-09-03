@@ -514,6 +514,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fsnotify_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_adjust_zone_wmark);
+<<<<<<< HEAD   (ea51b1 ANDROID: 16K: Remove ELF padding entry from map_file ranges)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_update_page);
@@ -536,3 +537,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_may_oom_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calculate_totalreserve_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_pageout_skip);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_pcplist_override_batch);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ksys_umount);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ksys_umount);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_group_exit);
+>>>>>>> CHANGE (1a958c ANDROID: vendor_hooks: add hook for boost free pages mapped )

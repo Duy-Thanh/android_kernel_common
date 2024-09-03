@@ -439,6 +439,7 @@ DECLARE_HOOK(android_vh_kmalloc_slab,
 DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
 	TP_PROTO(struct zone *zone, u64 interval),
 	TP_ARGS(zone, interval));
+<<<<<<< HEAD   (ea51b1 ANDROID: 16K: Remove ELF padding entry from map_file ranges)
 
 DECLARE_HOOK(android_vh_lock_folio_drop_mmap_start,
 	TP_PROTO(struct task_struct **tsk, struct vm_fault *vmf,
@@ -484,6 +485,12 @@ DECLARE_HOOK(android_vh_lruvec_del_folio,
 DECLARE_HOOK(android_vh_rmqueue_pcplist_override_batch,
 	TP_PROTO(int *batch),
 	TP_ARGS(batch));
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_do_group_exit,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
+>>>>>>> CHANGE (1a958c ANDROID: vendor_hooks: add hook for boost free pages mapped )
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
