@@ -47,30 +47,14 @@ static unsigned short int prof_shift;
 int prof_on __read_mostly;
 EXPORT_SYMBOL_GPL(prof_on);
 
-static cpumask_var_t prof_cpu_mask;
-#if defined(CONFIG_SMP) && defined(CONFIG_PROC_FS)
-static DEFINE_PER_CPU(struct profile_hit *[2], cpu_profile_hits);
-static DEFINE_PER_CPU(int, cpu_profile_flip);
-static DEFINE_MUTEX(profile_flip_mutex);
-#endif /* CONFIG_SMP */
-
 int profile_setup(char *str)
 {
 	static const char schedstr[] = "schedule";
-	static const char sleepstr[] = "sleep";
 	static const char kvmstr[] = "kvm";
 	const char *select = NULL;
 	int par;
 
-	if (!strncmp(str, sleepstr, strlen(sleepstr))) {
-#ifdef CONFIG_SCHEDSTATS
-		force_schedstat_enabled();
-		prof_on = SLEEP_PROFILING;
-		select = sleepstr;
-#else
-		pr_warn("kernel sleep profiling requires CONFIG_SCHEDSTATS\n");
-#endif /* CONFIG_SCHEDSTATS */
-	} else if (!strncmp(str, schedstr, strlen(schedstr))) {
+	if (!strncmp(str, schedstr, strlen(schedstr))) {
 		prof_on = SCHED_PROFILING;
 		select = schedstr;
 	} else if (!strncmp(str, kvmstr, strlen(kvmstr))) {
@@ -114,11 +98,6 @@ int __ref profile_init(void)
 
 	buffer_bytes = prof_len*sizeof(atomic_t);
 
-	if (!alloc_cpumask_var(&prof_cpu_mask, GFP_KERNEL))
-		return -ENOMEM;
-
-	cpumask_copy(prof_cpu_mask, cpu_possible_mask);
-
 	prof_buffer = kzalloc(buffer_bytes, GFP_KERNEL|__GFP_NOWARN);
 	if (prof_buffer)
 		return 0;
@@ -132,10 +111,10 @@ int __ref profile_init(void)
 	if (prof_buffer)
 		return 0;
 
-	free_cpumask_var(prof_cpu_mask);
 	return -ENOMEM;
 }
 
+<<<<<<< HEAD   (bc7af8 ANDROID: db845c: Enable sm8450-hdk and sm8650-hdk DTBs)
 /* Profile event notifications */
 
 static BLOCKING_NOTIFIER_HEAD(task_exit_notifier);
@@ -367,13 +346,15 @@ static int profile_online_cpu(unsigned int cpu)
 #define profile_flip_buffers()		do { } while (0)
 #define profile_discard_flip_buffers()	do { } while (0)
 
+=======
+>>>>>>> BRANCH (d5d547 Merge tag 'random-6.11-rc6-for-linus' of git://git.kernel.or)
 static void do_profile_hits(int type, void *__pc, unsigned int nr_hits)
 {
 	unsigned long pc;
 	pc = ((unsigned long)__pc - (unsigned long)_stext) >> prof_shift;
-	atomic_add(nr_hits, &prof_buffer[min(pc, prof_len - 1)]);
+	if (pc < prof_len)
+		atomic_add(nr_hits, &prof_buffer[pc]);
 }
-#endif /* !CONFIG_SMP */
 
 void profile_hits(int type, void *__pc, unsigned int nr_hits)
 {
@@ -387,8 +368,8 @@ void profile_tick(int type)
 {
 	struct pt_regs *regs = get_irq_regs();
 
-	if (!user_mode(regs) && cpumask_available(prof_cpu_mask) &&
-	    cpumask_test_cpu(smp_processor_id(), prof_cpu_mask))
+	/* This is the old kernel-only legacy profiling */
+	if (!user_mode(regs))
 		profile_hit(type, (void *)profile_pc(regs));
 }
 
@@ -411,7 +392,6 @@ read_profile(struct file *file, char __user *buf, size_t count, loff_t *ppos)
 	char *pnt;
 	unsigned long sample_step = 1UL << prof_shift;
 
-	profile_flip_buffers();
 	if (p >= (prof_len+1)*sizeof(unsigned int))
 		return 0;
 	if (count > (prof_len+1)*sizeof(unsigned int) - p)
@@ -457,7 +437,6 @@ static ssize_t write_profile(struct file *file, const char __user *buf,
 			return -EINVAL;
 	}
 #endif
-	profile_discard_flip_buffers();
 	memset(prof_buffer, 0, prof_len * sizeof(atomic_t));
 	return count;
 }
@@ -471,40 +450,14 @@ static const struct proc_ops profile_proc_ops = {
 int __ref create_proc_profile(void)
 {
 	struct proc_dir_entry *entry;
-#ifdef CONFIG_SMP
-	enum cpuhp_state online_state;
-#endif
-
 	int err = 0;
 
 	if (!prof_on)
 		return 0;
-#ifdef CONFIG_SMP
-	err = cpuhp_setup_state(CPUHP_PROFILE_PREPARE, "PROFILE_PREPARE",
-				profile_prepare_cpu, profile_dead_cpu);
-	if (err)
-		return err;
-
-	err = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "AP_PROFILE_ONLINE",
-				profile_online_cpu, NULL);
-	if (err < 0)
-		goto err_state_prep;
-	online_state = err;
-	err = 0;
-#endif
 	entry = proc_create("profile", S_IWUSR | S_IRUGO,
 			    NULL, &profile_proc_ops);
-	if (!entry)
-		goto err_state_onl;
-	proc_set_size(entry, (1 + prof_len) * sizeof(atomic_t));
-
-	return err;
-err_state_onl:
-#ifdef CONFIG_SMP
-	cpuhp_remove_state(online_state);
-err_state_prep:
-	cpuhp_remove_state(CPUHP_PROFILE_PREPARE);
-#endif
+	if (entry)
+		proc_set_size(entry, (1 + prof_len) * sizeof(atomic_t));
 	return err;
 }
 subsys_initcall(create_proc_profile);
