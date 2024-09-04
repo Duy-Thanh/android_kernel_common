@@ -200,12 +200,16 @@ void f2fs_abort_atomic_write(struct inode *inode, bool clean)
 	clear_inode_flag(inode, FI_ATOMIC_FILE);
 	if (is_inode_flag_set(inode, FI_ATOMIC_DIRTIED)) {
 		clear_inode_flag(inode, FI_ATOMIC_DIRTIED);
+<<<<<<< HEAD   (ba953bf03c1b3d71c95f2526a91e679fc3400ce8 BACKPORT: FROMGIT: f2fs: add sysfs entry for effective looku)
 		/*
 		 * The vfs inode keeps clean during commit, but the f2fs inode
 		 * doesn't. So clear the dirty state after commit and let
 		 * f2fs_mark_inode_dirty_sync ensure a consistent dirty state.
 		 */
 		f2fs_inode_synced(inode);
+||||||| BASE   (6e5b92a6a1511b6e888519d9f4360f044d2e90b8 ANDROID: GKI: Add symbol list for exynosauto)
+=======
+>>>>>>> CHANGE (d1f3a046a65db6416f9db0df03c6c1ca5916ac21 FROMGIT: f2fs: prevent atomic file from being dirtied before)
 		f2fs_mark_inode_dirty_sync(inode, true);
 	}
 	stat_dec_atomic_inode(inode);
