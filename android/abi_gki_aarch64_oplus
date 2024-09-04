@@ -519,6 +519,10 @@
   xt_register_match
   xt_unregister_match
   zero_pfn
+  contpte_ptep_clear_flush_young
+  contpte_wrprotect_ptes
+  contpte_clear_young_dirty_ptes
+  contpte_ptep_set_access_flags
   crypto_register_scomp
   crypto_unregister_scomp
   zstd_get_params
