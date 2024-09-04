@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a67a137c_7633cdde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-09-04T08:18:54Z",
+      "side": 1,
+      "message": "Needs a `Bug: ` line in the changelog please.",
+      "parentUuid": "529cca6a_7e11acac",
+      "revId": "27bde00b263b89c376989bf6570fe400452635b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04fddc1f_3bc56b3b",
         "filename": "android/abi_gki_aarch64_hikey",
         "patchSetId": 3
