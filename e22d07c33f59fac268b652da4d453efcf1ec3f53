@@ -16,6 +16,24 @@
       "message": "I definitely would like Suren to review and chime in as he better knows the lifetime rules for resources. I\u0027m a little worried that from your description there would be the potential for use-after-free if you\u0027re freeing memory early. But I myself don\u0027t know the assumptions that might make this safe.",
       "revId": "e22d07c33f59fac268b652da4d453efcf1ec3f53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2021411b_5792e473",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-04T06:19:52Z",
+      "side": 1,
+      "message": "The hook interface is only used to release the the physical pages mapped by the exiting process\u0027s vma in advance, and will not release the mm structure information. We have tested it on the products and have not reported any problems.",
+      "parentUuid": "a6949b2c_45e0f5ed",
+      "revId": "e22d07c33f59fac268b652da4d453efcf1ec3f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
