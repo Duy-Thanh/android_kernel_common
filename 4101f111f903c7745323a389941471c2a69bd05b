@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f105ed3b_254aef45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-09-04T05:19:54Z",
+      "side": 1,
+      "message": "This extra detail would be good to have in the commit message.",
+      "parentUuid": "13a5f78c_b2a7b4cf",
+      "revId": "4101f111f903c7745323a389941471c2a69bd05b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf43c782_03e93064",
         "filename": "kernel/exit.c",
         "patchSetId": 4
