@@ -869,6 +869,12 @@ static int pkvm_map_module_section(struct pkvm_mod_sec_mapping *sec_map, void *h
 	int ret;
 	u64 pfn;
 
+	/*
+	 * Exclude EL2 module sections from kmemleak before making them
+	 * inaccessible.
+	 */
+	kmemleak_free_part(sec_map->sec->start, size);
+
 	for (offset = 0; offset < size; offset += PAGE_SIZE) {
 		pfn = vmalloc_to_pfn(sec_map->sec->start + offset);
 		ret = kvm_call_hyp_nvhe(__pkvm_map_module_page, pfn,
@@ -971,12 +977,6 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 
 	endrel = (void *)mod->relocs + mod->nr_relocs * sizeof(*endrel);
 	kvm_apply_hyp_module_relocations(start, hyp_va, mod->relocs, endrel);
-
-	/*
-	 * Exclude EL2 module sections from kmemleak before making them
-	 * inaccessible.
-	 */
-	kmemleak_free_part(start, size);
 
 	ret = hyp_trace_init_mod_events(mod->hyp_events,
 					mod->event_ids.start,
