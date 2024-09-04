@@ -16,6 +16,23 @@
       "message": "Could you provide some more detail as to what the problem you\u0027re seeing is and how the vendorhook helps remedy it?\n\n\"boost free existing process\u0027 mm\" isn\u0027t very clear.",
       "revId": "4101f111f903c7745323a389941471c2a69bd05b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf43c782_03e93064",
+        "filename": "kernel/exit.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-09-04T04:22:16Z",
+      "side": 1,
+      "message": "Would this hook be better named: trace_android_vh_do_group_exit?",
+      "revId": "4101f111f903c7745323a389941471c2a69bd05b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
