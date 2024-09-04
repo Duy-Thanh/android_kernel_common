@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a5f78c_b2a7b4cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-04T05:00:27Z",
+      "side": 1,
+      "message": "When the system is under high memory pressure, we observed by trace that the execution of the exiting process will have a large number of runnables, which will result in the inability to release its mm resources to other apps for use in the system timely. Therefore, we hope to use this hook interface to release the mm resources of the exiting process in advance, in order to achieve earlier release of its mm resources and alleviate the tight system memory resources issues.",
+      "parentUuid": "82d5d989_9f2e990a",
+      "revId": "4101f111f903c7745323a389941471c2a69bd05b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf43c782_03e93064",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-04T04:22:16Z",
       "side": 1,
       "message": "Would this hook be better named: trace_android_vh_do_group_exit?",
+      "revId": "4101f111f903c7745323a389941471c2a69bd05b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc6bab1_d5a388c1",
+        "filename": "kernel/exit.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-04T05:00:27Z",
+      "side": 1,
+      "message": "You are right, it has been modified.\nhttps://android-review.googlesource.com/c/kernel/common/+/3252293\nhttps://android-review.googlesource.com/c/kernel/common/+/3252294\n\nThanks",
+      "parentUuid": "bf43c782_03e93064",
       "revId": "4101f111f903c7745323a389941471c2a69bd05b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
