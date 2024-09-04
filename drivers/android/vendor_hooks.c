@@ -436,3 +436,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_reader_owned);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_writer_owned);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_writer_owned);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pr_set_vma_name_bypass);
+<<<<<<< HEAD   (fac869 UPSTREAM: net: sched: sch_multiq: fix possible OOB write in )
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_folio_trylock);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_folio_trylock_result);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_clear);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_set);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_trylock_failed_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+>>>>>>> CHANGE (9eca87 ANDROID: vendor_hooks: add hooks for exting task's swp_entry)
