@@ -2737,11 +2737,18 @@ got_it:
 out_unlock:
 	spin_unlock(&free_i->segmap_lock);
 
+<<<<<<< HEAD   (0475cf Revert "cgroup: Make operations on the cgroup root_list RCU )
 	if (ret == -ENOSPC) {
 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_NO_SEGMENT);
 		f2fs_bug_on(sbi, 1);
 	}
 	return ret;
+=======
+	if (ret) {
+		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_NO_SEGMENT);
+		f2fs_bug_on(sbi, 1);
+	}
+>>>>>>> BRANCH (c77dee Linux 6.6.48)
 }
 
 static void reset_curseg(struct f2fs_sb_info *sbi, int type, int modified)
