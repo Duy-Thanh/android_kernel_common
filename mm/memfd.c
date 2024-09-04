@@ -7,6 +7,7 @@
  * This file is released under the GPL.
  */
 
+#include <linux/ashmem_compat.h>
 #include <linux/fs.h>
 #include <linux/vfs.h>
 #include <linux/pagemap.h>
@@ -365,6 +366,9 @@ SYSCALL_DEFINE2(memfd_create,
 		error = PTR_ERR(file);
 		goto err_fd;
 	}
+
+	setup_ashmem_compat_ioctl(file);
+
 	file->f_mode |= FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE;
 	file->f_flags |= O_LARGEFILE;
 
