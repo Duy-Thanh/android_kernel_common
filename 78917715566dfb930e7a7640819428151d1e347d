@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b483c7b_d49cd595",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-09-04T08:20:10Z",
+      "side": 1,
+      "message": "All of the changelogs need to be fixed up in this series, you are showing all of the symbols for the series as being added in each commit, which obviously is not the case.",
+      "revId": "78917715566dfb930e7a7640819428151d1e347d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
