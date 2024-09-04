@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9684e35_70b12fe7",
+        "filename": "mm/memfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-09-04T18:41:39Z",
+      "side": 1,
+      "message": "I think we should explicitly check them? \n\ni.e the inverse of what they ask is what we want to seal\n\nWe also need to check the personality if read implies exec etc ...\n\n```\n// TODO: Add the implied permission to prot \n\nprot_seals \u003d ~prot\n\nif (prot_seals \u0026 PROT_EXEC) seals |\u003d F_SEAL_EXEC \nif (prot_seals \u0026 PROT_WRITE) seals |\u003d F_SEAL_FUTURE_WRITE\n```",
+      "range": {
+        "startLine": 354,
+        "startChar": 1,
+        "endLine": 354,
+        "endChar": 8
+      },
+      "revId": "8e8dcadef26ba1c0d3dcba9fc3e290091d14e29d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05514bde_d6194d76",
         "filename": "mm/memfd.c",
         "patchSetId": 3
