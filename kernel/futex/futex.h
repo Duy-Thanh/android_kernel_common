@@ -272,6 +272,8 @@ extern int futex_wait(u32 __user *uaddr, unsigned int flags, u32 val,
 extern int futex_swap(u32 __user *uaddr, unsigned int flags, u32 val,
 		      ktime_t *abs_time, u32 __user *uaddr2);
 
+extern int futex_wake_yield(u32 __user *uaddr, unsigned int flags);
+
 /**
  * struct futex_vector - Auxiliary struct for futex_waitv()
  * @w: Userspace provided data

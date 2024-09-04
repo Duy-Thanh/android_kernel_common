@@ -23,6 +23,7 @@
 #define FUTEX_CMP_REQUEUE_PI	12
 #define FUTEX_LOCK_PI2		13
 #define FUTEX_SWAP		14
+#define FUTEX_WAKE_YIELD	15
 
 #define FUTEX_PRIVATE_FLAG	128
 #define FUTEX_CLOCK_REALTIME	256
@@ -44,6 +45,7 @@
 #define FUTEX_CMP_REQUEUE_PI_PRIVATE	(FUTEX_CMP_REQUEUE_PI | \
 					 FUTEX_PRIVATE_FLAG)
 #define FUTEX_SWAP_PRIVATE		(FUTEX_SWAP | FUTEX_PRIVATE_FLAG)
+#define FUTEX_WAKE_YIELD_PRIVATE	(FUTEX_WAKE_YIELD | FUTEX_PRIVATE_FLAG)
 
 /*
  * Flags to specify the bit length of the futex word for futex2 syscalls.

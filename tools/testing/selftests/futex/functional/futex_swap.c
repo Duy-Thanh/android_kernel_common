@@ -28,6 +28,7 @@ static int cfg_validate = 1;
 /* How to swap threads. */
 #define SWAP_WAKE_WAIT 1
 #define SWAP_SWAP 2
+#define SWAP_WAKE_YIELD_WAIT 3
 
 /* Futex values. */
 #define FUTEX_WAITING 0
@@ -62,6 +63,17 @@ void futex_swap_op(int mode, futex_t *futex_this, futex_t *futex_that)
 			perror("futex_swap");
 			exit(1);
 		}
+		if (*futex_this != FUTEX_WAKEUP) {
+			fprintf(stderr, "unexpected futex_this value on wakeup\n");
+			exit(1);
+		}
+		break;
+
+	case SWAP_WAKE_YIELD_WAIT:
+		futex_set(futex_this, FUTEX_WAITING);
+		futex_set(futex_that, FUTEX_WAKEUP);
+		futex_wake_yield(futex_that, FUTEX_PRIVATE_FLAG);
+		futex_wait(futex_this, FUTEX_WAITING, NULL, FUTEX_PRIVATE_FLAG);
 		if (*futex_this != FUTEX_WAKEUP) {
 			fprintf(stderr, "unexpected futex_this value on wakeup\n");
 			exit(1);
@@ -199,6 +211,10 @@ int main(int argc, char *argv[])
 
 	printf("\n\n------- running SWAP_WAKE_WAIT -----------\n\n");
 	run_test(SWAP_WAKE_WAIT);
+	printf("PASS\n");
+
+	printf("\n\n------- running SWAP_WAKE_YIELD_WAIT -----------\n\n");
+	run_test(SWAP_WAKE_YIELD_WAIT);
 	printf("PASS\n");
 
 	printf("\n\n------- running SWAP_SWAP -----------\n\n");

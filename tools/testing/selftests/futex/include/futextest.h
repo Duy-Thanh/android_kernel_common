@@ -41,6 +41,9 @@ typedef volatile u_int32_t futex_t;
 #ifndef FUTEX_SWAP
 #define FUTEX_SWAP			14
 #endif
+#ifndef FUTEX_WAKE_YIELD
+#define FUTEX_WAKE_YIELD		15
+#endif
 #ifndef FUTEX_WAIT_REQUEUE_PI_PRIVATE
 #define FUTEX_WAIT_REQUEUE_PI_PRIVATE	(FUTEX_WAIT_REQUEUE_PI | \
 					 FUTEX_PRIVATE_FLAG)
@@ -50,7 +53,10 @@ typedef volatile u_int32_t futex_t;
 					 FUTEX_PRIVATE_FLAG)
 #endif
 #ifndef FUTEX_SWAP_PRIVATE
-#define FUTEX_SWAP_PRIVATE		(FUTEX_WAIT_WAKE | FUTEX_PRIVATE_FLAG)
+#define FUTEX_SWAP_PRIVATE		(FUTEX_SWAP | FUTEX_PRIVATE_FLAG)
+#endif
+#ifndef FUTEX_WAKE_YIELD_PRIVATE
+#define FUTEX_WAKE_YIELD_PRIVATE	(FUTEX_WAKE_YIELD | FUTEX_PRIVATE_FLAG)
 #endif
 
 /**
@@ -94,6 +100,15 @@ static inline int
 futex_wake(futex_t *uaddr, int nr_wake, int opflags)
 {
 	return futex(uaddr, FUTEX_WAKE, nr_wake, NULL, NULL, 0, opflags);
+}
+
+/**
+ * futex_wake_yield() - wake one task blocked on uaddr and yield to it
+ */
+static inline int
+futex_wake_yield(futex_t *uaddr, int opflags)
+{
+	return futex(uaddr, FUTEX_WAKE_YIELD, 1, NULL, NULL, 0, opflags);
 }
 
 /**

@@ -134,6 +134,8 @@ long do_futex(u32 __user *uaddr, int op, u32 val, ktime_t *timeout,
 		return futex_requeue(uaddr, flags, uaddr2, val, val2, &val3, 1);
 	case FUTEX_SWAP:
 		return futex_swap(uaddr, flags, val, timeout, uaddr2);
+	case FUTEX_WAKE_YIELD:
+		return futex_wake_yield(uaddr, flags);
 	}
 	return -ENOSYS;
 }

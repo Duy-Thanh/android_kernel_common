@@ -769,3 +769,29 @@ int futex_swap(u32 __user *uaddr, unsigned int flags, u32 val,
 	return futex_wait(uaddr, flags, val, abs_time, bitset, next);
 }
 
+int futex_wake_yield(u32 __user *uaddr, unsigned int flags)
+{
+	u32 bitset = FUTEX_BITSET_MATCH_ANY;
+	struct task_struct *next = NULL;
+	DEFINE_WAKE_Q(wake_q);
+	int ret;
+
+	ret = prepare_wake_q(uaddr, flags, 1, bitset, &wake_q);
+	if (ret < 0)
+		return ret;
+
+	if (!wake_q_empty(&wake_q)) {
+		next = container_of(wake_q.first, struct task_struct, wake_q);
+		next->wake_q.next = NULL;
+
+#ifdef CONFIG_SMP
+		wake_up_process_prefer_current_cpu(next);
+#else
+		wake_up_process(next);
+#endif
+		put_task_struct(next);
+		yield_to(next, true);
+	}
+
+	return ret;
+}
