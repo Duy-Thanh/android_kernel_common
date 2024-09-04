@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d5d989_9f2e990a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-09-04T04:20:46Z",
+      "side": 1,
+      "message": "Could you provide some more detail as to what the problem you\u0027re seeing is and how the vendorhook helps remedy it?\n\n\"boost free existing process\u0027 mm\" isn\u0027t very clear.",
+      "revId": "4101f111f903c7745323a389941471c2a69bd05b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
