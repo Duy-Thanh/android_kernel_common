@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba03f79_cc5448e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-04T18:40:36Z",
+      "side": 1,
+      "message": "Need to fix of the CRC issue:\n```\nfunction symbol \u0027int __traceiter_binder_transaction_received(void*, struct binder_transaction*)\u0027 changed\n  CRC changed from 0x74e9c98b to 0x1530f738\n```",
+      "revId": "17388e1b084fd6dbabd3f72f486adbd96bd40c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
