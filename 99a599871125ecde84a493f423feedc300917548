@@ -16,6 +16,24 @@
       "message": "Hi reviewers,\n\nMay I ask if the \"kernelcommit, Cherry pick is not clean.\" info needs to be resolved? How to resolve it?\n\nThanks\nZhiguo",
       "revId": "99a599871125ecde84a493f423feedc300917548",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbce6338_8a244c3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-09-04T03:04:49Z",
+      "side": 1,
+      "message": "Looks like its due to some divergence between what was backported to the release branch and what\u0027s in the main branch. I don\u0027t see any problem right off with your cherry-pick",
+      "parentUuid": "49a82313_07e841de",
+      "revId": "99a599871125ecde84a493f423feedc300917548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
