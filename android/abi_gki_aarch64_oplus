@@ -513,6 +513,10 @@
   __vmalloc_array
   wait_for_completion_io_timeout
   wait_for_completion_killable_timeout
+  __tracepoint_mm_vmscan_direct_reclaim_begin
+  __traceiter_mm_vmscan_direct_reclaim_begin
+  __tracepoint_mm_vmscan_direct_reclaim_end
+  __traceiter_mm_vmscan_direct_reclaim_end
   wakeup_source_remove
   wake_up_state
   wq_worker_comm
