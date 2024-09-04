@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7051053a_728811cd",
+        "filename": "kernel/exit.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-09-04T17:06:34Z",
+      "side": 1,
+      "message": "Inside `do_exit()` we already have `trace_android_vh_exit_check(current)` hook. Can you simply reuse it?\n\nFrom your description sounds like you are trying to free up more memory in the vendor hook. If so, `exit_mm()` that is called in the same `do_exit()` path calls `trace_android_vh_exit_mm(mm)` which might be even more appropriate for this.",
+      "range": {
+        "startLine": 1028,
+        "startChar": 1,
+        "endLine": 1028,
+        "endChar": 31
+      },
+      "revId": "14ae0a6951d63d6b16055895fb702c321b35f005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
