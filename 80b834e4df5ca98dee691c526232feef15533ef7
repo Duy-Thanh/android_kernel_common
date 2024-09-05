@@ -51,6 +51,24 @@
       "parentUuid": "e455a2c3_7838e6ba",
       "revId": "80b834e4df5ca98dee691c526232feef15533ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a260294c_34dae01f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2024-09-05T21:36:06Z",
+      "side": 1,
+      "message": "Done\n\nsubmit to android14-5.15 branch, please review.\nhttps://android-review.googlesource.com/c/kernel/common/+/3255901",
+      "parentUuid": "14493101_b97f2048",
+      "revId": "80b834e4df5ca98dee691c526232feef15533ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
