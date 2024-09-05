@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83613aeb_5362cc3c",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-09-05T12:35:23Z",
+      "side": 1,
+      "message": "Sorry, I think our discussion about aliasing added some confusion here. Since you\u0027re using sync_icache_aliases() at EL1, I think you can bury this call in kvm_apply_hyp_module_relocations() instead.",
+      "range": {
+        "startLine": 999,
+        "startChar": 1,
+        "endLine": 999,
+        "endChar": 20
+      },
+      "revId": "e9d979e7cb8997f4e2263452b847f556312c4b23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
