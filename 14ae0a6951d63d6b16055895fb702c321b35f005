@@ -22,6 +22,30 @@
       },
       "revId": "14ae0a6951d63d6b16055895fb702c321b35f005",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc00404d_fcc32c04",
+        "filename": "kernel/exit.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-05T01:41:33Z",
+      "side": 1,
+      "message": "No,We need to release the memory mapped by the exiting process as early as possible in advance. The positions of trace_android_vh_exit_check(current) and trace_android_vh_exit_mm(mm) are a bit backward, and we have tried to do so, but executing the earlier part will result in a large number of runnables, which will also affect the release of memory.",
+      "parentUuid": "7051053a_728811cd",
+      "range": {
+        "startLine": 1028,
+        "startChar": 1,
+        "endLine": 1028,
+        "endChar": 31
+      },
+      "revId": "14ae0a6951d63d6b16055895fb702c321b35f005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
