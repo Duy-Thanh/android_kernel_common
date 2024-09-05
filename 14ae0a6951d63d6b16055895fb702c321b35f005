@@ -46,6 +46,30 @@
       },
       "revId": "14ae0a6951d63d6b16055895fb702c321b35f005",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "352a92c7_66b715e3",
+        "filename": "kernel/exit.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-05T03:18:50Z",
+      "side": 1,
+      "message": "In trace_android_vh_do_group_exit(current) we can also adjust the exiting process\u0027s priority to accelerate",
+      "parentUuid": "dc00404d_fcc32c04",
+      "range": {
+        "startLine": 1028,
+        "startChar": 1,
+        "endLine": 1028,
+        "endChar": 31
+      },
+      "revId": "14ae0a6951d63d6b16055895fb702c321b35f005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
