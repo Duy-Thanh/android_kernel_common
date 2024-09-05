@@ -33,6 +33,24 @@
       "message": "This needs to go to android14-5.15 directly, not into the -lts branch.\n\nThe -lts branches _only_ receive LTS updates and get merged back and forth with the non -lts branches.",
       "revId": "80b834e4df5ca98dee691c526232feef15533ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14493101_b97f2048",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2024-09-05T21:19:40Z",
+      "side": 1,
+      "message": "Got it, will do it.",
+      "parentUuid": "e455a2c3_7838e6ba",
+      "revId": "80b834e4df5ca98dee691c526232feef15533ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
