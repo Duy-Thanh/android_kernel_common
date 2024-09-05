@@ -16,6 +16,23 @@
       "message": "Needs a follow-up patch updating symbols list and ABI.",
       "revId": "92a10c02a4561b4f3f867bff131bf9fd85e0e0ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e1f6f4b_ee87ee0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-05T21:53:56Z",
+      "side": 1,
+      "message": "rebase to resolve merge conflict",
+      "revId": "92a10c02a4561b4f3f867bff131bf9fd85e0e0ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
