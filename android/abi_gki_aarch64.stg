@@ -258935,6 +258935,20 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x33865753
+  name: "profile_type"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "PROFILE_TASK_EXIT"
+    }
+    enumerator {
+      name: "PROFILE_MUNMAP"
+      value: 1
+    }
+  }
+}
+enumeration {
   id: 0x39d36c32
   name: "ptp_pin_function"
   definition {
@@ -280776,6 +280790,12 @@ function {
   parameter_id: 0xf435685e
   parameter_id: 0xf435685e
   parameter_id: 0x0ab1f084
+}
+function {
+  id: 0x910fac6a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x33865753
+  parameter_id: 0x1bb6a471
 }
 function {
   id: 0x910fbd4c
@@ -347312,6 +347332,15 @@ elf_symbol {
   full_name: "proc_symlink"
 }
 elf_symbol {
+  id: 0x34a73ce1
+  name: "profile_event_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa389a49a
+  type_id: 0x910fac6a
+  full_name: "profile_event_register"
+}
+elf_symbol {
   id: 0x2197c0b9
   name: "proto_register"
   is_defined: true
@@ -357176,6 +357205,15 @@ elf_symbol {
   crc: 0x0cfbdafb
   type_id: 0xac273de0
   full_name: "task_active_pid_ns"
+}
+elf_symbol {
+  id: 0x9891b743
+  name: "task_cputime_adjusted"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf7301e19
+  type_id: 0x176dde0e
+  full_name: "task_cputime_adjusted"
 }
 elf_symbol {
   id: 0x535d6bb4
@@ -370284,6 +370322,7 @@ interface {
   symbol_id: 0x1561afad
   symbol_id: 0x7ba3baed
   symbol_id: 0xceb41cae
+  symbol_id: 0x34a73ce1
   symbol_id: 0x2197c0b9
   symbol_id: 0x830bfa0f
   symbol_id: 0x5a85390c
@@ -371380,6 +371419,7 @@ interface {
   symbol_id: 0xbf6d0a0f
   symbol_id: 0x5a86c789
   symbol_id: 0x2eda3aae
+  symbol_id: 0x9891b743
   symbol_id: 0x535d6bb4
   symbol_id: 0x51f65372
   symbol_id: 0xd32463bc
