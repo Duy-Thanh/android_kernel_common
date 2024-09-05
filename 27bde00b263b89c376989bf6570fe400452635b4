@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77049bf0_a4889767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-09-05T09:40:33Z",
+      "side": 1,
+      "message": "Added the Bug: line and updated the commit message for every change accordingly now, could you please help to check again? If it looks good, will add the reviewers for each change to review more on the details.",
+      "parentUuid": "a67a137c_7633cdde",
+      "revId": "27bde00b263b89c376989bf6570fe400452635b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04fddc1f_3bc56b3b",
         "filename": "android/abi_gki_aarch64_hikey",
         "patchSetId": 3
