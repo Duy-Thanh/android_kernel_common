@@ -992,6 +992,13 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 		return ret;
 	}
 
+	/*
+	 * Now the hyp has a mapping to the text section, sync caches to ensure
+	 * it sees the relocations.
+	 */
+	sync_icache_aliases((unsigned long)mod->text.start,
+			    (unsigned long)mod->text.end);
+
 	offset = (size_t)((void *)mod->init - start);
 	ret = kvm_call_hyp_nvhe(__pkvm_init_module, hyp_va + offset);
 	if (ret) {
