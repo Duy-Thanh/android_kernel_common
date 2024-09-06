@@ -79,8 +79,8 @@ int mtk_dip_hw_working_buf_pool_init(struct mtk_dip_dev *dip_dev)
 		int offset;
 
 		/*
-		 * Total: 0 ~ 72 KB
-		 * SubFrame: 0 ~ 16 KB
+		 * Total: 0 ~ 176 KB
+		 * SubFrame: 0 ~ 20 KB
 		 */
 		offset = i * working_buf_size;
 		buf->buffer.scp_daddr =
@@ -91,7 +91,7 @@ int mtk_dip_hw_working_buf_pool_init(struct mtk_dip_dev *dip_dev)
 			dip_dev->working_buf_mem_isp_daddr + offset;
 		buf->size = working_buf_size;
 
-		/* Tuning: 16 ~ 48 KB */
+		/* Tuning: 20 ~ 52 KB */
 		buf->tuning_buf.scp_daddr =
 			buf->buffer.scp_daddr + DIP_TUNING_OFFSET;
 		buf->tuning_buf.vaddr =
@@ -99,16 +99,22 @@ int mtk_dip_hw_working_buf_pool_init(struct mtk_dip_dev *dip_dev)
 		buf->tuning_buf.isp_daddr =
 			buf->buffer.isp_daddr + DIP_TUNING_OFFSET;
 
-		/* Config_data: 48 ~ 72 KB */
+		/* Config_data: 52 ~ 96 KB */
 		buf->config_data.scp_daddr =
 			buf->buffer.scp_daddr + DIP_COMP_OFFSET;
 		buf->config_data.vaddr = buf->buffer.vaddr + DIP_COMP_OFFSET;
 
-		/* Frame parameters: 72 ~ 76 KB */
+		/* Frame parameters: 96 ~ 100 KB */
 		buf->frameparam.scp_daddr =
 			buf->buffer.scp_daddr + DIP_FRAMEPARAM_OFFSET;
 		buf->frameparam.vaddr =
 			buf->buffer.vaddr + DIP_FRAMEPARAM_OFFSET;
+
+		/* Mdp work: 100 ~ 176 KB */
+                buf->mdp_work.scp_daddr =
+                        buf->buffer.scp_daddr + DIP_MDP_WORK_OFFSET;
+                buf->mdp_work.vaddr =
+                        buf->buffer.vaddr + DIP_MDP_WORK_OFFSET;
 
 		list_add_tail(&buf->list_entry,
 			      &dip_dev->dip_freebufferlist.list);
@@ -388,7 +394,8 @@ static void dip_composer_workfunc(struct work_struct *work)
 	}
 
 	mtk_dip_wbuf_to_ipi_img_sw_addr(&req->img_fparam.frameparam.self_data,
-					&buf->frameparam);
+					&buf->mdp_work);
+	memset(buf->mdp_work.vaddr, 0, DIP_MDP_WORK_SZ);
 	memcpy(buf->frameparam.vaddr, &req->img_fparam.frameparam,
 	       sizeof(req->img_fparam.frameparam));
 	ipi_param.usage = IMG_IPI_FRAME;
