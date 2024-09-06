@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e43d3306_8d01d22f",
+        "filename": "arch/arm64/include/asm/module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-09-06T11:24:40Z",
+      "side": 1,
+      "message": "I feared this might be an ABI break and, sure enough, presubmit is failing. I think we\u0027ll have to save the refactoring for another day.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3abeeaeb_53e24f95",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/module.h",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "154a3977031af6c7a1d56dc883c89ad2b130a8e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
