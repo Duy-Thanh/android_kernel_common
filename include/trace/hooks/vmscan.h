@@ -58,9 +58,40 @@ DECLARE_HOOK(android_vh_should_continue_reclaim,
 DECLARE_HOOK(android_vh_file_is_tiny_bypass,
 	TP_PROTO(bool file_is_tiny, bool *bypass),
 	TP_ARGS(file_is_tiny, bypass));
+<<<<<<< HEAD   (c6f528 FROMGIT: mm: shrink skip folio mapped by an exiting process)
 DECLARE_HOOK(android_vh_shrink_node_memcgs,
 	TP_PROTO(struct mem_cgroup *memcg, bool *skip),
 	TP_ARGS(memcg, skip));
+=======
+DECLARE_HOOK(android_vh_mglru_should_abort_scan,
+	TP_PROTO(u64 *ext, bool *bypass),
+	TP_ARGS(ext, bypass));
+DECLARE_HOOK(android_vh_rebalance_anon_lru_bypass,
+	TP_PROTO(bool *bypass),
+	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_use_vm_swappiness,
+	TP_PROTO(bool *use_vm_swappiness),
+	TP_ARGS(use_vm_swappiness));
+DECLARE_HOOK(android_vh_tune_scan_control,
+	TP_PROTO(bool *skip_swap),
+	TP_ARGS(skip_swap));
+DECLARE_HOOK(android_vh_handle_trylock_failed_folio,
+	TP_PROTO(struct list_head *folio_list),
+	TP_ARGS(folio_list));
+DECLARE_HOOK(android_vh_folio_trylock_set,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_trylock_clear,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_get_folio_trylock_result,
+	TP_PROTO(struct folio *folio, bool *trylock_failed),
+	TP_ARGS(folio, trylock_failed));
+DECLARE_HOOK(android_vh_do_folio_trylock,
+	TP_PROTO(struct folio *folio, struct rw_semaphore *sem,
+		bool *got_lock, bool *skip),
+	TP_ARGS(folio, sem, got_lock, skip));
+>>>>>>> CHANGE (410554 ANDROID: mm: add vendor_hook for mglru shrink)
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
