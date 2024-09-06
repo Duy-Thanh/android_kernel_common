@@ -40,6 +40,30 @@
       ],
       "revId": "154a3977031af6c7a1d56dc883c89ad2b130a8e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5483a47_8e70aa99",
+        "filename": "arch/arm64/include/asm/module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-09-06T12:03:25Z",
+      "side": 1,
+      "message": "Haaaaa of course!",
+      "parentUuid": "e43d3306_8d01d22f",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "154a3977031af6c7a1d56dc883c89ad2b130a8e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
