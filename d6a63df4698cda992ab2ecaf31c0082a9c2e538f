@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d66ae47c_5fc1e8a1",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-06T16:50:28Z",
+      "side": 1,
+      "message": "Wrap this in `#ifndef __GENKSYMS__`:\n```\n#ifndef __GENKSYMS__\n#include \"../host/xhci.h\"\n#endif\n```\nThis inclusion changes the visibility of one or more fields of `struct dwc3` leading to the CRC error.",
+      "revId": "d6a63df4698cda992ab2ecaf31c0082a9c2e538f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01b5dad9_a1ae3fa1",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-06T16:50:28Z",
+      "side": 1,
+      "message": "move this block of code up to line 43 (some other changes in this file also affect visibility of `struct dwc3` fields)",
+      "range": {
+        "startLine": 2386,
+        "startChar": 0,
+        "endLine": 2390,
+        "endChar": 43
+      },
+      "revId": "d6a63df4698cda992ab2ecaf31c0082a9c2e538f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
