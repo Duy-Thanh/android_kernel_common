@@ -16,15 +16,17 @@
 #define MTK_DIP_CLK_NUM			2
 
 #define DIP_COMPOSING_MAX_NUM		3
-#define DIP_FRM_SZ			(100 * 1024)
+#define DIP_FRM_SZ			(176 * 1024)
 #define DIP_SUB_FRM_SZ			(20 * 1024)
 #define DIP_TUNING_SZ			(32 * 1024)
 #define DIP_COMP_SZ			(44 * 1024)
 #define DIP_FRAMEPARAM_SZ		(4 * 1024)
+#define DIP_MDP_WORK_SZ                 (76 * 1024)
 
 #define DIP_TUNING_OFFSET		DIP_SUB_FRM_SZ
 #define DIP_COMP_OFFSET			(DIP_TUNING_OFFSET + DIP_TUNING_SZ)
 #define DIP_FRAMEPARAM_OFFSET		(DIP_COMP_OFFSET + DIP_COMP_SZ)
+#define DIP_MDP_WORK_OFFSET             (DIP_FRAMEPARAM_OFFSET + DIP_FRAMEPARAM_SZ)
 #define DIP_SUB_FRM_DATA_NUM		32
 
 /*
@@ -143,6 +145,7 @@ struct mtk_dip_hw_subframe {
 	struct mtk_dip_hw_working_buf config_data;
 	struct mtk_dip_hw_working_buf tuning_buf;
 	struct mtk_dip_hw_working_buf frameparam;
+	struct mtk_dip_hw_working_buf mdp_work;
 	struct list_head list_entry;
 };
 
