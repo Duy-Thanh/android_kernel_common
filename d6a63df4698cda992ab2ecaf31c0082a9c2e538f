@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a32ea6_3ce927e8",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2024-09-07T17:30:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d66ae47c_5fc1e8a1",
+      "revId": "d6a63df4698cda992ab2ecaf31c0082a9c2e538f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01b5dad9_a1ae3fa1",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-09-06T16:50:28Z",
       "side": 1,
       "message": "move this block of code up to line 43 (some other changes in this file also affect visibility of `struct dwc3` fields)",
+      "range": {
+        "startLine": 2386,
+        "startChar": 0,
+        "endLine": 2390,
+        "endChar": 43
+      },
+      "revId": "d6a63df4698cda992ab2ecaf31c0082a9c2e538f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a029be_22202ec1",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2024-09-07T17:30:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "01b5dad9_a1ae3fa1",
       "range": {
         "startLine": 2386,
         "startChar": 0,
