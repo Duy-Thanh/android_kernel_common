@@ -1,4 +1,5 @@
 [abi_symbol_list]
+<<<<<<< HEAD   (f12435 UPSTREAM: dma-buf: heaps: Fix off-by-one in CMA heap fault h)
   __traceiter_android_rvh_dma_buf_stats_teardown
   __traceiter_android_vh_alter_mutex_list_add
   __traceiter_android_vh_alter_rwsem_list_add
@@ -30,3 +31,55 @@
   next_arg
   netdev_get_name
   tcp_send_active_reset
+||||||| BASE
+ __tracepoint_android_vh_get_page_wmark
+ __tracepoint_android_vh_page_add_new_anon_rmap
+ __tracepoint_android_vh_do_shrink_slab
+ __tracepoint_android_vh_shrink_slab_bypass
+ __tracepoint_android_vh_mutex_init
+ __tracepoint_android_vh_file_is_tiny_bypass
+ __tracepoint_android_vh_modify_scan_control
+ __tracepoint_android_vh_should_continue_reclaim
+ __tracepoint_android_vh_tune_fault_around_bytes
+ __traceiter_android_vh_get_page_wmark
+ __traceiter_android_vh_page_add_new_anon_rmap
+ __traceiter_android_vh_do_shrink_slab
+ __traceiter_android_vh_shrink_slab_bypass
+ __traceiter_android_vh_mutex_init
+ __traceiter_android_vh_file_is_tiny_bypass
+ __traceiter_android_vh_modify_scan_control
+ __traceiter_android_vh_should_continue_reclaim
+ __traceiter_android_vh_tune_fault_around_bytes
+=======
+ __tracepoint_android_vh_get_page_wmark
+ __tracepoint_android_vh_page_add_new_anon_rmap
+ __tracepoint_android_vh_do_shrink_slab
+ __tracepoint_android_vh_shrink_slab_bypass
+ __tracepoint_android_vh_mutex_init
+ __tracepoint_android_vh_file_is_tiny_bypass
+ __tracepoint_android_vh_modify_scan_control
+ __tracepoint_android_vh_should_continue_reclaim
+ __tracepoint_android_vh_tune_fault_around_bytes
+ __traceiter_android_vh_get_page_wmark
+ __traceiter_android_vh_page_add_new_anon_rmap
+ __traceiter_android_vh_do_shrink_slab
+ __traceiter_android_vh_shrink_slab_bypass
+ __traceiter_android_vh_mutex_init
+ __traceiter_android_vh_file_is_tiny_bypass
+ __traceiter_android_vh_modify_scan_control
+ __traceiter_android_vh_should_continue_reclaim
+ __traceiter_android_vh_tune_fault_around_bytes
+ kfree
+ __kmalloc
+ mod_node_page_state
+ page_cache_sync_ra
+ proc_create
+ profile_event_register
+ profile_event_unregister
+ drop_super
+ si_swapinfo
+ single_open
+ sock_from_file
+ task_cputime_adjusted
+ tcp_sync_mss
+>>>>>>> CHANGE (04212a ANDROID: GKI: Add initial symbol list for honor)
