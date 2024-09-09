@@ -1188,6 +1188,16 @@ config IO_MAPPING
 config MEMFD_CREATE
 	bool "Enable memfd_create() system call" if EXPERT
 
+config MEMFD_ASHMEM_COMPAT
+	bool "Memfd ashmem ioctl compatibility"
+	help
+	  This provides compatibility support for ashmem ioctls against
+	  memfd file descriptors. This is useful for compatibility on
+	  Android for older applications that may use the ashmem ioctls
+	  on the now-memfds passed to them.
+
+	  Unless you're running Android, say N.
+
 config SECRETMEM
 	default y
 	bool "Enable memfd_secret() system call" if EXPERT
