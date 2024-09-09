@@ -30,3 +30,16 @@
   next_arg
   netdev_get_name
   tcp_send_active_reset
+  kfree
+  __kmalloc
+  mod_node_page_state
+  page_cache_sync_ra
+  proc_create
+  profile_event_register
+  profile_event_unregister
+  drop_super
+  si_swapinfo
+  single_open
+  sock_from_file
+  task_cputime_adjusted
+  tcp_sync_mss
