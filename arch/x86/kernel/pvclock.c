@@ -110,6 +110,8 @@ u64 pvclock_clocksource_read(struct pvclock_vcpu_time_info *src)
 	return ret;
 }
 
+EXPORT_SYMBOL_GPL(pvclock_clocksource_read);
+
 void pvclock_read_wallclock(struct pvclock_wall_clock *wall_clock,
 			    struct pvclock_vcpu_time_info *vcpu_time,
 			    struct timespec64 *ts)
@@ -148,6 +150,7 @@ void pvclock_set_pvti_cpu0_va(struct pvclock_vsyscall_time_info *pvti)
 	WARN_ON(vclock_was_used(VDSO_CLOCKMODE_PVCLOCK));
 	pvti_cpu0_va = pvti;
 }
+EXPORT_SYMBOL_GPL(pvclock_set_pvti_cpu0_va);
 
 struct pvclock_vsyscall_time_info *pvclock_get_pvti_cpu0_va(void)
 {
