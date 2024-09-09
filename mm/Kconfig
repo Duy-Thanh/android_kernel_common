@@ -1206,6 +1206,17 @@ config IO_MAPPING
 config MEMFD_CREATE
 	bool "Enable memfd_create() system call" if EXPERT
 
+config MEMFD_ASHMEM_COMPAT
+	bool "Memfd ashmem ioctl compatibility"
+	default y
+	help
+	  This provides compatibility support for ashmem ioctls against
+	  memfd file descriptors. This is useful for compatibility on
+	  Android for older applications that may use the ashmem ioctls
+	  on the now-memfds passed to them.
+
+	  Unless you're running Android, say N.
+
 # Some architectures want callbacks for all IO mappings in order to
 # track the physical addresses that get used as devices.
 config ARCH_HAS_IOREMAP_PHYS_HOOKS
