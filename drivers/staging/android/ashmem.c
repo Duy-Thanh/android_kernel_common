@@ -10,6 +10,7 @@
 
 #define pr_fmt(fmt) "ashmem: " fmt
 
+#include <linux/ashmem_compat.h>
 #include <linux/init.h>
 #include <linux/export.h>
 #include <linux/file.h>
@@ -25,6 +26,8 @@
 #include <linux/bitops.h>
 #include <linux/mutex.h>
 #include <linux/shmem_fs.h>
+#include <uapi/linux/memfd.h>
+
 #include "ashmem.h"
 
 #define ASHMEM_NAME_PREFIX "dev/ashmem/"
@@ -949,9 +952,37 @@ EXPORT_SYMBOL_GPL(is_ashmem_file);
 
 static struct miscdevice ashmem_misc = {
 	.minor = MISC_DYNAMIC_MINOR,
-	.name = "ashmem",
+	.name = "ashmem-memfd",
 	.fops = &ashmem_fops,
 };
+
+/* Fake ashmem-memfd for testing */
+
+static int ashmem_memfd_open(struct inode *inode, struct file *file)
+{
+	const char *name = "none";
+	int fd;
+
+	fd = do_memfd_create(name, MFD_CLOEXEC | MFD_ALLOW_SEALING, true);
+	if (fd < 0)
+		return fd;
+	file->private_data = (void *) (intptr_t) fd;
+
+	return 0;
+}
+
+static const struct file_operations ashmem_memfd_fops = {
+	.owner = THIS_MODULE,
+	.open = ashmem_memfd_open,
+};
+
+static struct miscdevice ashmem_memfd_misc = {
+	.minor = MISC_DYNAMIC_MINOR,
+	.name = "ashmem",
+	.fops = &ashmem_memfd_fops,
+};
+
+/* End of ashmem-memfd */
 
 static int __init ashmem_init(void)
 {
@@ -982,6 +1013,12 @@ static int __init ashmem_init(void)
 	ret = register_shrinker(&ashmem_shrinker, "android-ashmem");
 	if (ret) {
 		pr_err("failed to register shrinker!\n");
+		goto out_demisc;
+	}
+
+	ret = misc_register(&ashmem_memfd_misc);
+	if (ret) {
+		pr_err("failed to register ashmem-memfd device");
 		goto out_demisc;
 	}
 

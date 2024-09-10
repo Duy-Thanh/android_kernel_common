@@ -1429,6 +1429,7 @@ static long do_sys_openat2(int dfd, const char __user *filename,
 	struct open_flags op;
 	int fd = build_open_flags(how, &op);
 	struct filename *tmp;
+	bool is_ashmem;
 
 	if (fd)
 		return fd;
@@ -1436,6 +1437,17 @@ static long do_sys_openat2(int dfd, const char __user *filename,
 	tmp = getname(filename);
 	if (IS_ERR(tmp))
 		return PTR_ERR(tmp);
+
+	is_ashmem = !strcmp(tmp->name, "/dev/ashmem");
+	if (is_ashmem) {
+		struct file *f = do_filp_open(dfd, tmp, &op);
+		if (IS_ERR(f)) {
+			fd = PTR_ERR(f);
+		} else {
+			putname(tmp);
+			return (int) (intptr_t)f->private_data;
+		}
+	}
 
 	fd = get_unused_fd_flags(how->flags);
 	if (fd >= 0) {
