@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fbbb1bf_706e3539",
+        "filename": "mm/memfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-09-10T18:57:49Z",
+      "side": 0,
+      "message": "We only need to if case this bit:\n\n```\nif (ashmem_compat_enabled)\n    len \u003d strnlen(uname, MFD_NAME_MAX_LEN + 1);\nelse\n    len \u003d strnlen_user(uname, MFD_NAME_MAX_LEN + 1);\n```",
+      "range": {
+        "startLine": 329,
+        "startChar": 1,
+        "endLine": 329,
+        "endChar": 49
+      },
+      "revId": "7a02a85cbd5e3140b99b78b044dab5b8aa7fa549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8369fb41_8522cf81",
+        "filename": "mm/memfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-09-10T18:57:49Z",
+      "side": 0,
+      "message": "and this part:\n\n```\nif (ashmem_compat_enabled) {\n\tstrncpy(\u0026name[MFD_NAME_PREFIX_LEN], uname, len);\n} else {\n\tif (copy_from_user(\u0026name[MFD_NAME_PREFIX_LEN], uname, len)) {\n\t\terror \u003d -EFAULT;\n\t\tgoto err_name;\n\t}\n}\n```",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 2
+      },
+      "revId": "7a02a85cbd5e3140b99b78b044dab5b8aa7fa549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
