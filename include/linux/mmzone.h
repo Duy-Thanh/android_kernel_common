@@ -1939,8 +1939,13 @@ static inline int subsection_map_index(unsigned long pfn)
 static inline int pfn_section_valid(struct mem_section *ms, unsigned long pfn)
 {
 	int idx = subsection_map_index(pfn);
+	struct mem_section_usage *usage = READ_ONCE(ms->usage);
 
+<<<<<<< HEAD   (12f9bc Merge 6.1.99 into android14-6.1-lts)
 	return test_bit(idx, ms->usage->subsection_map);
+=======
+	return usage ? test_bit(idx, usage->subsection_map) : 0;
+>>>>>>> BRANCH (9b3f9a Linux 6.1.100)
 }
 #else
 static inline int pfn_section_valid(struct mem_section *ms, unsigned long pfn)
