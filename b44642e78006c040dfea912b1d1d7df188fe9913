@@ -33,6 +33,42 @@
       "message": "Is there a respin request for this? See https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
       "revId": "b44642e78006c040dfea912b1d1d7df188fe9913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "196a2cfe_d8b13910",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-10T13:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8bb7d6c_1393fde3",
+      "revId": "b44642e78006c040dfea912b1d1d7df188fe9913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eae8aa1_2b1d27d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-10T13:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac945eaa_5dfdc6ed",
+      "revId": "b44642e78006c040dfea912b1d1d7df188fe9913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

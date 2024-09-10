@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/365680605",
       "revId": "cb0da4a5ba6a0fcdc0589308c64b17712dd1f53e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7cd69c_3e5fb6be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-10T13:12:48Z",
+      "side": 1,
+      "message": "Please Ack you have seen my comment on the original change: https://android-review.googlesource.com/c/kernel/common/+/3256397/comment/2414916e_3c4813ad/",
+      "revId": "cb0da4a5ba6a0fcdc0589308c64b17712dd1f53e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
