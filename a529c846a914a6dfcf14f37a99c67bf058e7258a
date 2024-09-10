@@ -33,6 +33,24 @@
       "message": "Just noticed that `CONFIG_TCP_CONG_BBR\u003dy` is set for 6.6 but not for mainline. It was enabled 8 days ago, so I believe it will be cherry-picked to mainline soon.",
       "revId": "a529c846a914a6dfcf14f37a99c67bf058e7258a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83f39f18_5f2e565a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1299283
+      },
+      "writtenOn": "2024-09-10T15:39:39Z",
+      "side": 1,
+      "message": "That wasn\u0027t one of the problematic ones, but it was a difference I noticed in the TCP configs between the GKI defconfig and our defconfig so I updated it to match.\n\nI can revert that specific line if we need to, but from what you said it sounds like that won\u0027t be necessary.",
+      "parentUuid": "f48da5b1_2bc494fe",
+      "revId": "a529c846a914a6dfcf14f37a99c67bf058e7258a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
