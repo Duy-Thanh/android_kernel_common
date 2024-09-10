@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "43210338_259514c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-10T16:11:57Z",
+      "side": 1,
+      "message": "This is not a respin bug. Use the process documented at https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin to file one and cite it here.",
+      "revId": "f985bc6636857cb0096c68fb6e9b32e05128e556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "72d0ea0c_bd5d12c8",
