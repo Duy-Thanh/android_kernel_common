@@ -16,6 +16,24 @@
       "message": "Adding TJ who is working on memcg reclaim efficiency issues.",
       "revId": "4105548575e4049000a7ac8243e3bf3a0c97062b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f403f4e_9e2427c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-09-10T18:26:06Z",
+      "side": 1,
+      "message": "The current `root_reclaim` check in `should_abort_scan` is slightly different than the original check that was removed, in that `sc-\u003enr_to_reclaim` was checked before root reclaim. The opposite is now true. I\u0027ll talk to Yu about this, because it might make sense to restore the original order that avoids scanning after reaching `nr_to_reclaim`, especially with recent changes to memcg iteration.",
+      "parentUuid": "e57e46e8_5a46fe83",
+      "revId": "4105548575e4049000a7ac8243e3bf3a0c97062b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
