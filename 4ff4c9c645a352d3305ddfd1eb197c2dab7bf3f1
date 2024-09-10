@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "98ea2a80_0eaed84e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-09-10T18:36:18Z",
+      "side": 1,
+      "message": "Can you please add info that this change is inline with gki_defconfig and there will be no divergence when switching to new kernel config files in future (gki_defconfig)?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "4ff4c9c645a352d3305ddfd1eb197c2dab7bf3f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f35e8856_16f81368",
