@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "a529c846a914a6dfcf14f37a99c67bf058e7258a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f48da5b1_2bc494fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2024-09-10T15:34:11Z",
+      "side": 1,
+      "message": "Just noticed that `CONFIG_TCP_CONG_BBR\u003dy` is set for 6.6 but not for mainline. It was enabled 8 days ago, so I believe it will be cherry-picked to mainline soon.",
+      "revId": "a529c846a914a6dfcf14f37a99c67bf058e7258a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
