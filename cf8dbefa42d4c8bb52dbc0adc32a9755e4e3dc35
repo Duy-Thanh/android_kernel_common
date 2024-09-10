@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2414916e_3c4813ad",
+        "filename": "android/abi_gki_aarch64_hisense",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-10T13:11:49Z",
+      "side": 1,
+      "message": "Note, partners are encouraged to send the _full_ list of symbols as part of the symbol list. This looks like the list of symbols that are needed in addition to existing symbols.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 24
+      },
+      "revId": "cf8dbefa42d4c8bb52dbc0adc32a9755e4e3dc35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
