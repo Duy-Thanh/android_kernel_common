@@ -52,6 +52,24 @@
       "parentUuid": "1face9a7_9d092a33",
       "revId": "ab52c7b2fab9e6a87e7398a715c5579167bf2c16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e2a9c90_c16e199c",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-09-11T16:21:15Z",
+      "side": 1,
+      "message": "Do we want any other owners here: Joe/Noah or any rollback only owners. Otherwise the current set will do.",
+      "parentUuid": "d989c442_8c2660c3",
+      "revId": "ab52c7b2fab9e6a87e7398a715c5579167bf2c16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
