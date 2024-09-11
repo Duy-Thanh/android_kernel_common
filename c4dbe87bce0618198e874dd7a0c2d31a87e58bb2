@@ -33,6 +33,24 @@
       "message": "This does not correspond to the patch that is posted with the `Link` mentioned. Also, there are upstream concerns about his patch.",
       "revId": "c4dbe87bce0618198e874dd7a0c2d31a87e58bb2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22f4c276_b1410da2",
+        "filename": "Documentation/devicetree/bindings/firmware/arm,scmi.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-09-11T05:50:53Z",
+      "side": 1,
+      "message": "I have updated the link of the last patch. and this patch has been accepted by the scm maintainer.",
+      "parentUuid": "5b76cc72_e47d09b9",
+      "revId": "c4dbe87bce0618198e874dd7a0c2d31a87e58bb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
