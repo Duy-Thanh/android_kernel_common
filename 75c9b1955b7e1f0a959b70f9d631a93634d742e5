@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad416ab4_73341882",
+        "filename": "android/abi_gki_aarch64_bcmstb",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-11T23:05:13Z",
+      "side": 0,
+      "message": "since we cannot remove symbols that are KMI frozen, `serial8250_handle_irq` needs to stay somewhere since this was the last reference to it (the rest are referenced from other symbol files.\n\nPlease add `serial8250_handle_irq` to `android/abi_gki_aarch64_type_visibility` with a comment that it is no longer needed.",
+      "revId": "75c9b1955b7e1f0a959b70f9d631a93634d742e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
