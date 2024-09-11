@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad21471_31325b6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-09-11T03:45:44Z",
+      "side": 1,
+      "message": "This and the following ABI symbol update changes should be submitted together I think, should we add the topic for this change again, or remove the topic for all the other changes?",
+      "revId": "058d4231d91c47651be979f0dd656f85a4d14cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
