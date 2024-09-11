@@ -16,6 +16,24 @@
       "message": "Please add\nvnagarnaik@google.com\nsrichman@google.com\nHere as well.\n\nTom: It seems \nudam@google.com\nadelva@google.com\n\nare no longer on the team. Do we want to add them.\n\nThis is the old file for reference.\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android12-kiwi-5.10/OWNERS\n\nDo we want to add more people here?",
       "revId": "ab52c7b2fab9e6a87e7398a715c5579167bf2c16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a8f1a7_e671433e",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-09-11T16:03:17Z",
+      "side": 1,
+      "message": "you don\u0027t need to add me. I have special privileges on kernel/common.",
+      "parentUuid": "1face9a7_9d092a33",
+      "revId": "ab52c7b2fab9e6a87e7398a715c5579167bf2c16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
