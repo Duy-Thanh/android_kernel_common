@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f869d1_0316a126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-11T15:14:37Z",
+      "side": 1,
+      "message": "Failed to fetch commits for cherry pick check. Is the \"cherry picked from\" commit ID valid?\n\"cherry picked from\" commit ID: c495b97624d0c059b0403e26dadb166d69918409",
+      "revId": "6a11a04ce3fa79050e39b7996afe6feea2f33c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
