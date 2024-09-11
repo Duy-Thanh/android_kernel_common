@@ -70,6 +70,24 @@
       "parentUuid": "d989c442_8c2660c3",
       "revId": "ab52c7b2fab9e6a87e7398a715c5579167bf2c16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e067f955_262cba81",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2024-09-11T16:25:15Z",
+      "side": 1,
+      "message": "I think this is sufficient. The volume of the kernel branch is quite low and rollbacks aren\u0027t super urgent since there\u0027s multiple steps from when a change lands in this branch until it\u0027s visible in CI.",
+      "parentUuid": "9e2a9c90_c16e199c",
+      "revId": "ab52c7b2fab9e6a87e7398a715c5579167bf2c16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
