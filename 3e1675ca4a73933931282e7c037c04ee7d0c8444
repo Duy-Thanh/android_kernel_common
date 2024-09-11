@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e27a80b_fafefbd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3566687
+      },
+      "writtenOn": "2024-09-11T21:40:49Z",
+      "side": 1,
+      "message": "This is required to access HWID, FWID, GPIO info as exported through ACPI table. This information will be used by crossystem as well as for metrics collection.",
+      "revId": "3e1675ca4a73933931282e7c037c04ee7d0c8444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
