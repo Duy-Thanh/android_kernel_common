@@ -33,6 +33,24 @@
       "message": "Adding Jaegeuk, as this series seems to pick three patches from a 22 patch series and I\u0027m not sure whether or not that\u0027s a good idea.",
       "revId": "c14844a3897b560b82e038161c70bbf5f894b9a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2d2740_bddf213d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-09-11T16:41:33Z",
+      "side": 1,
+      "message": "No response, so I guess we go ahead given that we have PV+2",
+      "parentUuid": "27d94943_bc44e1e1",
+      "revId": "c14844a3897b560b82e038161c70bbf5f894b9a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
