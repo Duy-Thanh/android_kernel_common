@@ -663,7 +663,11 @@ static int svc_alloc_arg(struct svc_rqst *rqstp)
 					set_current_state(TASK_RUNNING);
 					return -EINTR;
 				}
+<<<<<<< HEAD   (50f182 Revert "sched/fair: set_load_weight() must also call reweigh)
 				schedule_timeout(msecs_to_jiffies(500));
+=======
+				freezable_schedule_timeout(msecs_to_jiffies(500));
+>>>>>>> BRANCH (b57d01 Linux 5.10.225)
 			}
 			rqstp->rq_pages[i] = p;
 		}
