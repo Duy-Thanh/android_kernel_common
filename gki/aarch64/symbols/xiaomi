@@ -152,3 +152,7 @@
 # required by sched-walt.ko
  __traceiter_android_rvh_should_honor_rt_sync
  __tracepoint_android_rvh_should_honor_rt_sync
+
+# required by printk_hook.ko
+  __traceiter_android_rvh_logbuf
+  __tracepoint_android_rvh_logbuf
