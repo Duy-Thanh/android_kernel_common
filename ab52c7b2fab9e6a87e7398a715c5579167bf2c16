@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1face9a7_9d092a33",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-09-11T13:27:30Z",
+      "side": 1,
+      "message": "Please add\nvnagarnaik@google.com\nsrichman@google.com\nHere as well.\n\nTom: It seems \nudam@google.com\nadelva@google.com\n\nare no longer on the team. Do we want to add them.\n\nThis is the old file for reference.\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android12-kiwi-5.10/OWNERS\n\nDo we want to add more people here?",
+      "revId": "ab52c7b2fab9e6a87e7398a715c5579167bf2c16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
