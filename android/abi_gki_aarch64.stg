@@ -347461,6 +347461,37 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_is_cpu_allowed"
 }
 elf_symbol {
+<<<<<<< HEAD   (09d40a ANDROID: GKI: update symbol list for xiaomi)
+||||||| BASE
+  id: 0x7fcabbe6
+  name: "__traceiter_android_rvh_ksys_umount"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34f7fac0
+  type_id: 0x9ba47dcc
+  full_name: "__traceiter_android_rvh_ksys_umount"
+}
+elf_symbol {
+=======
+  id: 0x7fcabbe6
+  name: "__traceiter_android_rvh_ksys_umount"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34f7fac0
+  type_id: 0x9ba47dcc
+  full_name: "__traceiter_android_rvh_ksys_umount"
+}
+elf_symbol {
+  id: 0x3444c3ba
+  name: "__traceiter_android_rvh_logbuf"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3613a672
+  type_id: 0x9b50addb
+  full_name: "__traceiter_android_rvh_logbuf"
+}
+elf_symbol {
+>>>>>>> CHANGE (72c0d0 ANDROID: GKI: update symbol list file for xiaomi)
   id: 0x1ea5d323
   name: "__traceiter_android_rvh_migrate_queued_task"
   is_defined: true
@@ -352654,6 +352685,37 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_is_cpu_allowed"
 }
 elf_symbol {
+<<<<<<< HEAD   (09d40a ANDROID: GKI: update symbol list for xiaomi)
+||||||| BASE
+  id: 0x26d3bcc4
+  name: "__tracepoint_android_rvh_ksys_umount"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa7d39f15
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_ksys_umount"
+}
+elf_symbol {
+=======
+  id: 0x26d3bcc4
+  name: "__tracepoint_android_rvh_ksys_umount"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa7d39f15
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_ksys_umount"
+}
+elf_symbol {
+  id: 0x8efb0ca4
+  name: "__tracepoint_android_rvh_logbuf"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x4e31587b
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_logbuf"
+}
+elf_symbol {
+>>>>>>> CHANGE (72c0d0 ANDROID: GKI: update symbol list file for xiaomi)
   id: 0x3cb4db49
   name: "__tracepoint_android_rvh_migrate_queued_task"
   is_defined: true
@@ -416095,6 +416157,13 @@ interface {
   symbol_id: 0xfc83b254
   symbol_id: 0x7e99bc71
   symbol_id: 0x7c212080
+<<<<<<< HEAD   (09d40a ANDROID: GKI: update symbol list for xiaomi)
+||||||| BASE
+  symbol_id: 0x7fcabbe6
+=======
+  symbol_id: 0x7fcabbe6
+  symbol_id: 0x3444c3ba
+>>>>>>> CHANGE (72c0d0 ANDROID: GKI: update symbol list file for xiaomi)
   symbol_id: 0x1ea5d323
   symbol_id: 0x0d22882d
   symbol_id: 0xb51338de
@@ -416672,6 +416741,13 @@ interface {
   symbol_id: 0x4fd98142
   symbol_id: 0x695c4baf
   symbol_id: 0x99d57c12
+<<<<<<< HEAD   (09d40a ANDROID: GKI: update symbol list for xiaomi)
+||||||| BASE
+  symbol_id: 0x26d3bcc4
+=======
+  symbol_id: 0x26d3bcc4
+  symbol_id: 0x8efb0ca4
+>>>>>>> CHANGE (72c0d0 ANDROID: GKI: update symbol list file for xiaomi)
   symbol_id: 0x3cb4db49
   symbol_id: 0x62726c6f
   symbol_id: 0xdf21a7cc
