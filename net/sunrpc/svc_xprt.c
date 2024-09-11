@@ -663,7 +663,11 @@ static int svc_alloc_arg(struct svc_rqst *rqstp)
 					set_current_state(TASK_RUNNING);
 					return -EINTR;
 				}
+<<<<<<< HEAD   (5b8123 Merge 5.10.224 into android13-5.10-lts)
 				schedule_timeout(msecs_to_jiffies(500));
+=======
+				freezable_schedule_timeout(msecs_to_jiffies(500));
+>>>>>>> BRANCH (b57d01 Linux 5.10.225)
 			}
 			rqstp->rq_pages[i] = p;
 		}
