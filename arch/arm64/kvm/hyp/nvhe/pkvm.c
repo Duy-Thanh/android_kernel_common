@@ -1660,6 +1660,45 @@ static bool pkvm_forward_trng(struct kvm_vcpu *vcpu)
 }
 
 /*
+ * Dummy stub TRNG implementation in order to unblock development.
+ */
+static bool pkvm_handle_trng(struct kvm_vcpu *vcpu)
+{
+/* Values based on: arch/arm64/kvm/trng.c */
+#define TRNG_SUCCESS			0UL
+#define TRNG_NOT_SUPPORTED		((unsigned long)-1)
+#define ARM_SMCCC_TRNG_VERSION_1_0	0x10000UL
+	unsigned long res[4] = { TRNG_NOT_SUPPORTED, 0, 0, 0, };
+	u32 fn = smccc_get_function(vcpu);
+
+	switch (fn) {
+	case ARM_SMCCC_TRNG_VERSION:
+		res[0] = ARM_SMCCC_TRNG_VERSION_1_0;
+		break;
+	case ARM_SMCCC_TRNG_FEATURES:
+		switch (smccc_get_arg1(vcpu)) {
+		case ARM_SMCCC_TRNG_VERSION:
+		case ARM_SMCCC_TRNG_FEATURES:
+		case ARM_SMCCC_TRNG_GET_UUID:
+		case ARM_SMCCC_TRNG_RND64:
+			res[0] = TRNG_SUCCESS;
+		}
+		break;
+	case ARM_SMCCC_TRNG_GET_UUID:
+		smccc_set_retval(vcpu, 0xdeadbeef, 0xdeadbeef, 0xdeadbeef,
+				 0xdeadbeef);
+		return 1;
+	case ARM_SMCCC_TRNG_RND64:
+		res[0] = TRNG_SUCCESS;
+		memset(&res[1], 0xaa, 3 * sizeof(unsigned long));
+		break;
+	}
+
+	smccc_set_retval(vcpu, res[0], res[1], res[2], res[3]);
+	return true;
+}
+
+/*
  * Handler for protected VM HVC calls.
  *
  * Returns true if the hypervisor has handled the exit, and control should go
@@ -1720,7 +1759,8 @@ bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 	case ARM_SMCCC_TRNG_RND64:
 		if (smccc_trng_available)
 			return pkvm_forward_trng(vcpu);
-		break;
+		else
+			return pkvm_handle_trng(vcpu);
 	default:
 		return pkvm_handle_psci(hyp_vcpu);
 	}
