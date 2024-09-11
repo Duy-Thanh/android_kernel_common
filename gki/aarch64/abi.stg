@@ -371951,6 +371951,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_lock_folio_drop_mmap_start"
 }
 elf_symbol {
+  id: 0x3444c3ba
+  name: "__traceiter_android_rvh_logbuf"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3613a672
+  type_id: 0x9b50addb
+  full_name: "__traceiter_android_rvh_logbuf"
+}
+elf_symbol {
   id: 0x66cefe64
   name: "__traceiter_android_vh_logbuf"
   is_defined: true
@@ -377736,6 +377745,15 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_lock_folio_drop_mmap_start"
+}
+elf_symbol {
+  id: 0x8efb0ca4
+  name: "__tracepoint_android_rvh_logbuf"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x4e31587b
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_logbuf"
 }
 elf_symbol {
   id: 0x39d42312
@@ -441279,6 +441297,7 @@ interface {
   symbol_id: 0x0992491b
   symbol_id: 0xf56758ea
   symbol_id: 0x95b7ecea
+  symbol_id: 0x3444c3ba
   symbol_id: 0x66cefe64
   symbol_id: 0x57087e9e
   symbol_id: 0xe19d2bf8
@@ -441922,6 +441941,7 @@ interface {
   symbol_id: 0x8bd577fd
   symbol_id: 0xb1ce9338
   symbol_id: 0xeb8159ac
+  symbol_id: 0x8efb0ca4
   symbol_id: 0x39d42312
   symbol_id: 0x94ddd62c
   symbol_id: 0xda2d53f2
