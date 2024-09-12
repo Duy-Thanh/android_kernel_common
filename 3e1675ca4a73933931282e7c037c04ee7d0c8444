@@ -16,6 +16,23 @@
       "message": "This is required to access HWID, FWID, GPIO info as exported through ACPI table. This information will be used by crossystem as well as for metrics collection.",
       "revId": "3e1675ca4a73933931282e7c037c04ee7d0c8444",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c078ff4_a8a74922",
+        "filename": "arch/x86/configs/android-x86_64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2024-09-12T16:31:00Z",
+      "side": 1,
+      "message": "Do we want/need this in ARM also?\n\nIf ARM doesn\u0027t need it, how do those devices get the necessary information?",
+      "revId": "3e1675ca4a73933931282e7c037c04ee7d0c8444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
