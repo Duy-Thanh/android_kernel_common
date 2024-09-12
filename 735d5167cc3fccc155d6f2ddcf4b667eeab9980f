@@ -70,6 +70,24 @@
       "parentUuid": "ca1a9610_471c505a",
       "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f9e9f0_2108b830",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-09-12T10:51:33Z",
+      "side": 1,
+      "message": "Please submit your changes to the scheduler upstream, they should not require a hook.  If upstream rejects the changes, then we will be glad to revisit this.",
+      "parentUuid": "c6f1dcf1_6bf2ac4c",
+      "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
