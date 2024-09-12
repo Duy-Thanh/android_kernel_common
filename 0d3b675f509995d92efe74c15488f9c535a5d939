@@ -52,6 +52,24 @@
       "parentUuid": "bb149f3e_06b858ed",
       "revId": "0d3b675f509995d92efe74c15488f9c535a5d939",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd7ea0d_c9ab2135",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020578
+      },
+      "writtenOn": "2024-09-12T06:47:09Z",
+      "side": 1,
+      "message": "btw if all the kernel changes are not yet prepared, it may not be able to boot kiwivm. in which case there should be a note in this commit, preferably with a bug linked to track balloon feature testing.",
+      "parentUuid": "c2c72da8_4025ff55",
+      "revId": "0d3b675f509995d92efe74c15488f9c535a5d939",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
