@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0560b38c_8f62e6e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3566687
+      },
+      "writtenOn": "2024-09-12T17:54:41Z",
+      "side": 1,
+      "message": "This is the output:\n```\nbrya:/ # ls /sys/devices/platform/GOOG0016\\:00/                                                                                              \nBINF.2  CHSW  FRID  GPIO.0  GPIO.2  GPIO.4  GPIO.6  HWID  VBNV.0  VDAT    driver_override  modalias  subsystem\nBINF.3  FMAP  FWID  GPIO.1  GPIO.3  GPIO.5  GPIO.7  MECK  VBNV.1  driver  firmware_node    power     uevent\nbrya:/ #\n```",
+      "parentUuid": "394b6d88_01960dba",
+      "revId": "3e1675ca4a73933931282e7c037c04ee7d0c8444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1e27a80b_fafefbd5",
