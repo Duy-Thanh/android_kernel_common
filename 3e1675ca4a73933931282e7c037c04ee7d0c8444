@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "034f4323_44e46395",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2024-09-12T17:33:28Z",
+      "side": 1,
+      "message": "Did you need to `modprobe` before this worked?\n\nOr is that being attempted (and failing) on x86 devices already?",
+      "revId": "3e1675ca4a73933931282e7c037c04ee7d0c8444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1e27a80b_fafefbd5",
