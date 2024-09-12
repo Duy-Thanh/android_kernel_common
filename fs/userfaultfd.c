@@ -1523,6 +1523,31 @@ out:
 	return ret;
 }
 
+#define vma_merge_err(fmt, ...) \
+	pr_err("DEBUG: vma_merge failure: [%i (%s)]: " fmt, task_pid_nr(current), \
+		current->comm, ## __VA_ARGS__)
+
+static inline void __debug_vma_merge_failed(struct mm_struct *mm, struct vm_area_struct *vma)
+{
+	struct vm_area_struct *curr = vma;
+
+	/*
+	 * For ART's case the first part of the original VMA is registered with UFFD.
+	 * So we need to check that the merge happens with the VMA immediately after
+	 * the one from which UFFD is beign unregistered.
+	 */
+	struct vm_area_struct *next = vma_lookup(mm, curr->vm_end);
+
+	if (!next) return;
+
+	vma_merge_err("In uffd_unregister: "
+			"curr_range: [%08lx-%08lx], next_range:[%08lx-%08lx], "
+			"curr_vm_flags: %08lx, next_vm_flags: %08lx, "
+			"curr_anon_vma: %p, next_anon_vma: %p",
+			curr->vm_start, curr->vm_end, next->vm_start, next->vm_end,
+			curr->vm_flags, next->vm_flags, curr->anon_vma, next->anon_vma);
+}
+
 static int userfaultfd_unregister(struct userfaultfd_ctx *ctx,
 				  unsigned long arg)
 {
@@ -1646,7 +1671,9 @@ static int userfaultfd_unregister(struct userfaultfd_ctx *ctx,
 		if (prev) {
 			vma = prev;
 			goto next;
-		}
+		} else
+			__debug_vma_merge_failed(mm, vma);
+
 		if (vma->vm_start < start) {
 			ret = split_vma(&vmi, vma, start, 1);
 			if (ret)
