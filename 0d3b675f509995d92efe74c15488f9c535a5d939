@@ -34,6 +34,24 @@
       "parentUuid": "7dcc8d48_c60c7441",
       "revId": "0d3b675f509995d92efe74c15488f9c535a5d939",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c72da8_4025ff55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020578
+      },
+      "writtenOn": "2024-09-12T06:44:42Z",
+      "side": 1,
+      "message": "to test this, you will need to build the new kernel into an image, then copy that image to the right folder for latest kiwivm. just booting with the image can confirm if the balloon changes are working, since the balloon inflates as the boot progresses.\n\nkeep in mind, you also need some patches to the mm/ code (https://r.android.com/2269069, https://r.android.com/2265843, https://r.android.com/2366648) that enable changes to support balloon changes.",
+      "parentUuid": "bb149f3e_06b858ed",
+      "revId": "0d3b675f509995d92efe74c15488f9c535a5d939",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
