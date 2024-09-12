@@ -52,6 +52,24 @@
       "parentUuid": "7ece6e19_0d809c8e",
       "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f1dcf1_6bf2ac4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2024-09-12T08:41:11Z",
+      "side": 1,
+      "message": "We change the method, no need to change initial value,\nwe add new_ilb to record ilb_cpu of vendor, avoid to affect original logic.\n\nThis hook is only use for our products.\nOriginal code logic is no problem.\nSo it is not suitable for upstream.\n\nWe hope that the new version of kernel will default include this hook point,\nso we need it at android-mainline.",
+      "parentUuid": "ca1a9610_471c505a",
+      "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
