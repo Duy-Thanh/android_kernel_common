@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a28d36_b161c072",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-12T04:27:13Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "59f00562_48b65281",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "6a11a04ce3fa79050e39b7996afe6feea2f33c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b669c83f_467d3a9d",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-11T15:30:06Z",
       "side": 1,
       "message": "(cherry picked from commit c495b97624d0c059b0403e26dadb166d69918409 https: //git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-unstable)",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 68
+      },
+      "revId": "6a11a04ce3fa79050e39b7996afe6feea2f33c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d10063_6d4313ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-12T04:27:13Z",
+      "side": 1,
+      "message": "Update, thanks.",
+      "parentUuid": "b669c83f_467d3a9d",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -78,6 +126,24 @@
       "side": 1,
       "message": "Yes, this patch is in mm-unstable, so not UPSTREAM yet.",
       "parentUuid": "a5f869d1_0316a126",
+      "revId": "6a11a04ce3fa79050e39b7996afe6feea2f33c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34c97ae2_dd9d4adc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-12T04:27:13Z",
+      "side": 1,
+      "message": "Yes, resolved.",
+      "parentUuid": "25418dd9_96ba7213",
       "revId": "6a11a04ce3fa79050e39b7996afe6feea2f33c18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
