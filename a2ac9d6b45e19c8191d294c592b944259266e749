@@ -22,6 +22,30 @@
       },
       "revId": "a2ac9d6b45e19c8191d294c592b944259266e749",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5da8d33_8abb30b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3562669
+      },
+      "writtenOn": "2024-09-12T05:14:51Z",
+      "side": 1,
+      "message": "I don\u0027t see any of the mentioned tags that is suitable to this change since this is an OWNERS file change. Please let me know if you would like this to be submitted with \"ANDROID:\" :)",
+      "parentUuid": "ed1992af_d4448ee8",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "a2ac9d6b45e19c8191d294c592b944259266e749",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
