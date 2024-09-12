@@ -206,6 +206,8 @@
   __tracepoint_android_rvh_ogki_hievent_destroy
   __traceiter_android_vh_ogki_hievent_to_jank
   __tracepoint_android_vh_ogki_hievent_to_jank
+  __traceiter_android_vh_ogki_keysinfo_c_show
+  __tracepoint_android_vh_ogki_keysinfo_c_show
   __tracepoint_android_vh_ogki_set_wifi_state_connect
   __traceiter_android_vh_ogki_set_wifi_state_connect
   __tracepoint_android_vh_ogki_set_wifi_state_disconnect

@@ -334256,6 +334256,13 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9b550cb0
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x38dfb9f9
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9b555e72
   return_type_id: 0x6720d32f
   parameter_id: 0x1b55a8f2
@@ -356424,6 +356431,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_ogki_hievent_to_jank"
 }
 elf_symbol {
+  id: 0x82f32adf
+  name: "__traceiter_android_vh_ogki_keysinfo_c_show"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe354e0d7
+  type_id: 0x9b550cb0
+  full_name: "__traceiter_android_vh_ogki_keysinfo_c_show"
+}
+elf_symbol {
   id: 0xfbaaa7e4
   name: "__traceiter_android_vh_ogki_kmem_cache_create_usercopy"
   is_defined: true
@@ -362200,6 +362216,15 @@ elf_symbol {
   crc: 0xc12c59aa
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_ogki_hievent_to_jank"
+}
+elf_symbol {
+  id: 0x95016d09
+  name: "__tracepoint_android_vh_ogki_keysinfo_c_show"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe24643a4
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_ogki_keysinfo_c_show"
 }
 elf_symbol {
   id: 0x90dcde6e
@@ -424167,6 +424192,7 @@ interface {
   symbol_id: 0x910aba6d
   symbol_id: 0xdf18f975
   symbol_id: 0xa86939b3
+  symbol_id: 0x82f32adf
   symbol_id: 0xfbaaa7e4
   symbol_id: 0x1b51fe53
   symbol_id: 0xcd7341e4
@@ -424809,6 +424835,7 @@ interface {
   symbol_id: 0x4be59f2f
   symbol_id: 0xa9eb9293
   symbol_id: 0x5363abe5
+  symbol_id: 0x95016d09
   symbol_id: 0x90dcde6e
   symbol_id: 0x58026979
   symbol_id: 0xdce225e2
