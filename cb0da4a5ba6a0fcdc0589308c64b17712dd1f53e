@@ -33,6 +33,24 @@
       "message": "Please Ack you have seen my comment on the original change: https://android-review.googlesource.com/c/kernel/common/+/3256397/comment/2414916e_3c4813ad/",
       "revId": "cb0da4a5ba6a0fcdc0589308c64b17712dd1f53e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10be9ac_8e3ffdb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3604131
+      },
+      "writtenOn": "2024-09-12T06:03:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0b7cd69c_3e5fb6be",
+      "revId": "cb0da4a5ba6a0fcdc0589308c64b17712dd1f53e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
