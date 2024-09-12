@@ -16,6 +16,24 @@
       "message": "should we drop the topic for the remaining changes and merge them one by one?",
       "revId": "02b1f38d520333faf5e33cfe95960fe5ff292ed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10f7087d_f5f0290f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-09-12T17:54:05Z",
+      "side": 1,
+      "message": "Yeah, I think that might be easiest. Though it looks like the set collides and needs a rebase.",
+      "parentUuid": "c2ba2d7b_4504f159",
+      "revId": "02b1f38d520333faf5e33cfe95960fe5ff292ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
