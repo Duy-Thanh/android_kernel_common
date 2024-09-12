@@ -22,6 +22,30 @@
       },
       "revId": "cf8dbefa42d4c8bb52dbc0adc32a9755e4e3dc35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d8d2a3_fba8342e",
+        "filename": "android/abi_gki_aarch64_hisense",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 3604131
+      },
+      "writtenOn": "2024-09-12T06:02:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2414916e_3c4813ad",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 24
+      },
+      "revId": "cf8dbefa42d4c8bb52dbc0adc32a9755e4e3dc35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
