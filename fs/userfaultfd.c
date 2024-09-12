@@ -1523,11 +1523,23 @@ out:
 	return ret;
 }
 
+#define vma_merge_err(fmt, ...) \
+	pr_err("DEBUG: vma_merge failure: [%i (%s)]: " fmt, task_pid_nr(current), current->comm, ## __VA_ARGS__)
+
+static inline void __debug_vma_merge_failed(struct vm_area_struct *prev, struct vm_area_struct *curr) {
+	vma_merge_err("In uffd_unregister: "
+			"prev_range: [%08lx-%08lx], curr_range:[%08lx-%08lx], "
+			"prev_vm_flags: %08lx, curr_vm_flags: %08lx, "
+			"prev_anon_vma: %p, curr_anon_vma: %p",
+			prev->vm_start, prev->vm_end, curr->vm_start, curr->vm_end,
+			prev->vm_flags, curr->vm_flags, prev->anon_vma, curr->anon_vma);
+}
+
 static int userfaultfd_unregister(struct userfaultfd_ctx *ctx,
 				  unsigned long arg)
 {
 	struct mm_struct *mm = ctx->mm;
-	struct vm_area_struct *vma, *prev, *cur;
+	struct vm_area_struct *vma, *prev, *cur, *old_prev;
 	int ret;
 	struct uffdio_range uffdio_unregister;
 	unsigned long new_flags;
@@ -1639,6 +1651,7 @@ static int userfaultfd_unregister(struct userfaultfd_ctx *ctx,
 
 		new_flags = vma->vm_flags & ~__VM_UFFD_FLAGS;
 		pgoff = vma->vm_pgoff + ((start - vma->vm_start) >> PAGE_SHIFT);
+		old_prev = prev;
 		prev = vma_merge(&vmi, mm, prev, start, vma_end, new_flags,
 				 vma->anon_vma, vma->vm_file, pgoff,
 				 vma_policy(vma),
@@ -1646,7 +1659,9 @@ static int userfaultfd_unregister(struct userfaultfd_ctx *ctx,
 		if (prev) {
 			vma = prev;
 			goto next;
-		}
+		} else
+			__debug_vma_merge_failed(old_prev, vma);
+
 		if (vma->vm_start < start) {
 			ret = split_vma(&vmi, vma, start, 1);
 			if (ret)
