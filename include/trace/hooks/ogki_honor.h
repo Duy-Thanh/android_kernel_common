@@ -117,6 +117,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_ogki_vfree_bypass,
 DECLARE_HOOK(android_vh_ogki_kmem_cache_create_usercopy,
 	TP_PROTO(unsigned int flags),
 	TP_ARGS(flags));
+DECLARE_HOOK(android_vh_ogki_keysinfo_c_show,
+	TP_PROTO(unsigned short *code, int state),
+	TP_ARGS(code, state));
 #endif /* _TRACE_HOOK_OGKI_ogki_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
