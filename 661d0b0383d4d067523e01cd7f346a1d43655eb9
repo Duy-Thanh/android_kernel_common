@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e270ad_e7a97e47",
+        "filename": "drivers/opp/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1935,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-09-12T21:20:26Z",
+      "side": 1,
+      "message": "hoping this doesn\u0027t have KABI impact",
+      "revId": "661d0b0383d4d067523e01cd7f346a1d43655eb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
