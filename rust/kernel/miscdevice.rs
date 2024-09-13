@@ -482,7 +482,7 @@ unsafe extern "C" fn fops_ioctl<T: MiscDevice>(
     // * There is no active fdget_pos region on the file on this thread.
     let file = unsafe { File::from_raw_file(file) };
 
-    match T::ioctl(device, file, cmd, arg as usize) {
+    match T::ioctl(device, file, cmd, arg) {
         Ok(ret) => ret as c_long,
         Err(err) => err.to_errno() as c_long,
     }
@@ -507,7 +507,7 @@ unsafe extern "C" fn fops_compat_ioctl<T: MiscDevice>(
     // * There is no active fdget_pos region on the file on this thread.
     let file = unsafe { File::from_raw_file(file) };
 
-    match T::compat_ioctl(device, file, cmd, arg as usize) {
+    match T::compat_ioctl(device, file, cmd, arg) {
         Ok(ret) => ret as c_long,
         Err(err) => err.to_errno() as c_long,
     }
