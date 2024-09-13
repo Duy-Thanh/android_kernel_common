@@ -26,6 +26,7 @@ pub(crate) struct Range {
     lru: ListLinks<0>,
     #[pin]
     unpinned: ListLinks<1>,
+    file: ShmemFile,
     pub(crate) inner: LockedByAshmem<RangeInner>,
 }
 
@@ -36,6 +37,10 @@ pub(crate) struct RangeInner {
 }
 
 impl Range {
+    pub(crate) fn set_purged(&self, guard: &mut AshmemGuard) {
+        self.inner.as_mut(guard).purged = true;
+    }
+
     pub(crate) fn purged(&self, guard: &AshmemGuard) -> bool {
         self.inner.as_ref(guard).purged
     }
@@ -267,8 +272,31 @@ impl Area {
     }
 }
 
+impl AshmemGuard {
+    pub(crate) fn free_lru(&mut self, stop_after: usize) -> usize {
+        let mut freed = 0;
+        while let Some(range) = self.lru_list.pop_back() {
+            let start = range.pgstart(self) * PAGE_SIZE;
+            let end = (range.pgend(self) + 1) * PAGE_SIZE;
+            range.set_purged(self);
+            self.remove_lru(&range);
+            freed += range.size(self);
+
+            // C ashmem releases the mutex and uses a different mechanism to ensure mutual
+            // exclusion with `pin_unpin` operations, but we only hold `ASHMEM_MUTEX` here and in
+            // `pin_unpin`, so we don't need to release the mutex. A different mutex is used for
+            // all of the other ashmem operations.
+            range.file.punch_hole(start, end - start);
+
+            if freed >= stop_after {
+                break;
+            }
+        }
+        freed
+    }
+}
+
 pub(crate) struct NewRange<'a> {
-    #[allow(dead_code)]
     pub(crate) file: &'a ShmemFile,
     pub(crate) alloc: UniqueArc<MaybeUninit<Range>>,
 }
@@ -278,6 +306,7 @@ impl<'a> NewRange<'a> {
         let new_range = self.alloc.pin_init_with(pin_init!(Range {
             lru <- ListLinks::new(),
             unpinned <- ListLinks::new(),
+            file: self.file.clone(),
             inner: LockedByAshmem::new(inner),
         }));
 

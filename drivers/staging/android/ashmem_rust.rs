@@ -62,6 +62,12 @@ fn calc_vm_prot_bits(prot: usize, pkey: usize) -> usize {
     unsafe { bindings::calc_vm_prot_bits(prot as _, pkey as _) as usize }
 }
 
+/// Calls `capable(CAP_SYS_ADMIN)`.
+pub fn has_cap_sys_admin() -> bool {
+    use kernel::bindings::CAP_SYS_ADMIN;
+    unsafe { bindings::capable(CAP_SYS_ADMIN as c_int) }
+}
+
 struct AshmemLru {
     lru_list: List<ashmem_range::Range, 0>,
     lru_count: usize,
@@ -286,6 +292,7 @@ impl MiscDevice for Ashmem {
             ASHMEM_PIN | ASHMEM_UNPIN | ASHMEM_GET_PIN_STATUS => {
                 me.pin_unpin(cmd, UserSlice::new(arg, size).reader())
             }
+            bindings::ASHMEM_PURGE_ALL_CACHES => me.purge_all_caches(),
             _ => Err(EINVAL),
         }
     }
@@ -460,6 +467,14 @@ impl Ashmem {
             }
             _ => unreachable!(),
         }
+    }
+
+    fn purge_all_caches(&self) -> Result<c_long> {
+        if !has_cap_sys_admin() {
+            return Err(EPERM);
+        }
+        let freed = ASHMEM_MUTEX.lock().free_lru(usize::MAX);
+        Ok(c_long::try_from(freed).unwrap_or(c_long::MAX))
     }
 }
 
