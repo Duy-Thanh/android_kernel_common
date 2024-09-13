@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43cbd1c_8c302adf",
+        "filename": "mm/memfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2024-09-13T08:46:39Z",
+      "side": 1,
+      "message": "Acknowledged. Will add this in aosp/3261373.",
+      "parentUuid": "a9684e35_70b12fe7",
+      "range": {
+        "startLine": 354,
+        "startChar": 1,
+        "endLine": 354,
+        "endChar": 8
+      },
+      "revId": "8e8dcadef26ba1c0d3dcba9fc3e290091d14e29d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05514bde_d6194d76",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-04T18:34:04Z",
       "side": 1,
       "message": "I would separate out all the ashmem compat stuff into it\u0027s own file, only exposing necessary interaces to memfd. So that we don\u0027t have conflicts with upstream merges.\n\nTake a look at aosp/2967709 for an example.",
+      "range": {
+        "startLine": 295,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 0
+      },
+      "revId": "8e8dcadef26ba1c0d3dcba9fc3e290091d14e29d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "404ca534_43ed3600",
+        "filename": "mm/memfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2024-09-13T08:46:39Z",
+      "side": 1,
+      "message": "Done, created aosp/3261373.",
+      "parentUuid": "05514bde_d6194d76",
       "range": {
         "startLine": 295,
         "startChar": 0,
