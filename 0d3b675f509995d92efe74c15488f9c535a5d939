@@ -70,6 +70,24 @@
       "parentUuid": "c2c72da8_4025ff55",
       "revId": "0d3b675f509995d92efe74c15488f9c535a5d939",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e144f7ed_a6eac617",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3562669
+      },
+      "writtenOn": "2024-09-13T09:30:05Z",
+      "side": 1,
+      "message": "Updated the test tag. I could see balloon success logs when I attempted booting kiwivm. I will update the test bug linked with this change.",
+      "parentUuid": "8dd7ea0d_c9ab2135",
+      "revId": "0d3b675f509995d92efe74c15488f9c535a5d939",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
