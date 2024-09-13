@@ -16,6 +16,23 @@
       "message": "I have made the changes to the patch. Can you please review it?",
       "revId": "7f27f65e8e634a54638adbc5e5b8c75607f5cf8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89bbb7c_570049ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-13T15:55:42Z",
+      "side": 1,
+      "message": "Please fix this in the patch that introduces the bug. Then you will also need a new patch to add the symbols to your symbol list.",
+      "revId": "7f27f65e8e634a54638adbc5e5b8c75607f5cf8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
