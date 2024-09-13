@@ -34,6 +34,24 @@
       "parentUuid": "c2ba2d7b_4504f159",
       "revId": "02b1f38d520333faf5e33cfe95960fe5ff292ed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a2c183_43ed03e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-09-13T04:41:23Z",
+      "side": 1,
+      "message": "OK, just rebased all the changes, and dropped the topics of them as well.\nPlease help check again.",
+      "parentUuid": "10f7087d_f5f0290f",
+      "revId": "02b1f38d520333faf5e33cfe95960fe5ff292ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
