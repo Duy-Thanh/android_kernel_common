@@ -1034,6 +1034,25 @@ static void __init set_max_threads(unsigned int max_threads_suggested)
 #ifdef CONFIG_ARCH_WANTS_DYNAMIC_TASK_STRUCT
 /* Initialized by the architecture: */
 int arch_task_struct_size __read_mostly;
+
+#define ARCH_TASK_STRUCT_SIZE_MAX 1024
+static int __init arch_task_struct_size_setup(char *str)
+{
+	u64 size;
+
+	if (!str)
+		return -EINVAL;
+
+	size = memparse(str, &str);
+
+	if (size < 0 || size > ARCH_TASK_STRUCT_SIZE_MAX)
+		return -EINVAL;
+
+	arch_task_struct_size = sizeof(struct task_struct) + size;
+
+	return 0;
+}
+early_param("arch_task_struct_size", arch_task_struct_size_setup);
 #endif
 
 static void __init task_struct_whitelist(unsigned long *offset, unsigned long *size)
