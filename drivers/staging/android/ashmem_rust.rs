@@ -74,6 +74,12 @@ fn read_implies_exec(task: &Task) -> bool {
 // Only updated with ASHMEM_MUTEX held, but the shrinker will read it without the mutex.
 static LRU_COUNT: AtomicUsize = AtomicUsize::new(0);
 
+/// Calls `capable(CAP_SYS_ADMIN)`.
+pub fn has_cap_sys_admin() -> bool {
+    use kernel::bindings::CAP_SYS_ADMIN;
+    unsafe { bindings::capable(CAP_SYS_ADMIN as c_int) }
+}
+
 struct AshmemLru {
     lru_list: List<ashmem_range::Range, 0>,
 }
@@ -332,6 +338,7 @@ impl MiscDevice for Ashmem {
             ASHMEM_PIN | ASHMEM_UNPIN | ASHMEM_GET_PIN_STATUS => {
                 me.pin_unpin(cmd, UserSlice::new(arg, size).reader())
             }
+            bindings::ASHMEM_PURGE_ALL_CACHES => me.purge_all_caches(),
             _ => Err(EINVAL),
         }
     }
@@ -511,6 +518,16 @@ impl Ashmem {
             }
             _ => unreachable!(),
         }
+    }
+
+    fn purge_all_caches(&self) -> Result<c_long> {
+        if !has_cap_sys_admin() {
+            return Err(EPERM);
+        }
+        let mut guard = AshmemGuard(ASHMEM_MUTEX.lock());
+        let ret = LRU_COUNT.load(Ordering::Relaxed);
+        let _did_stop_early = guard.free_lru(usize::MAX, &mut 0);
+        Ok(c_long::try_from(ret).unwrap_or(c_long::MAX))
     }
 }
 
