@@ -14,6 +14,7 @@ use kernel::{
     error::Result,
     fs::{File, LocalFile},
     ioctl::_IOC_SIZE,
+    list::{List, ListArc},
     miscdevice::{declare_static_miscdev, loff_t, IovIter, Kiocb, MiscDevice, MiscDeviceOptions},
     mm::virt::{flags as vma_flags, VmArea},
     page::{page_align, PAGE_MASK, PAGE_SIZE},
@@ -61,13 +62,47 @@ fn calc_vm_prot_bits(prot: usize, pkey: usize) -> usize {
     unsafe { bindings::calc_vm_prot_bits(prot as _, pkey as _) as usize }
 }
 
-struct AshmemLru {}
+struct AshmemLru {
+    lru_list: List<ashmem_range::Range, 0>,
+    lru_count: usize,
+}
 
 impl AshmemGuard {
     fn shrink_range(&mut self, range: &ashmem_range::Range, pgstart: usize, pgend: usize) {
-        let inner = range.inner.as_mut(self);
-        inner.pgstart = pgstart;
-        inner.pgend = pgend;
+        let old_size = range.size(self);
+        {
+            let inner = range.inner.as_mut(self);
+            inner.pgstart = pgstart;
+            inner.pgend = pgend;
+        }
+        let new_size = range.size(self);
+
+        // Only change the counter if the range is on the lru list.
+        if !range.purged(self) {
+            self.lru_count += new_size;
+            self.lru_count -= old_size;
+        }
+    }
+
+    fn insert_lru(&mut self, range: ListArc<ashmem_range::Range>) {
+        // Don't insert the range if it's already purged.
+        if !range.purged(self) {
+            self.lru_count += range.size(self);
+            self.lru_list.push_front(range);
+        }
+    }
+
+    fn remove_lru(&mut self, range: &ashmem_range::Range) -> Option<ListArc<ashmem_range::Range>> {
+        // SAFETY: The only list with ID 0 is this list, so the range can't be in some other list
+        // with the same ID.
+        let ret = unsafe { self.lru_list.remove(range) };
+
+        // Only decrement lru_count if the range was actually in the list.
+        if ret.is_some() {
+            self.lru_count -= range.size(self);
+        }
+
+        ret
     }
 }
 
@@ -75,7 +110,7 @@ kernel::sync::global_lock! {
     // SAFETY: We call `init` as the very first thing in the initialization of this module, so
     // there are no calls to `lock` before `init` is called.
     static ASHMEM_MUTEX: Mutex<AshmemLru> = unsafe { uninit };
-    value: AshmemLru {};
+    value: AshmemLru { lru_list: List::new(), lru_count: 0 };
     wrapper: AshmemMutex;
     guard: AshmemGuard;
     locked_by: LockedByAshmem;
