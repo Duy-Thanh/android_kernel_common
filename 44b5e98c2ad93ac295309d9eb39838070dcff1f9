@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f941965e_911c7943",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-09-13T05:15:48Z",
+      "side": 1,
+      "message": "Yongqin: Looks like the xml file needs to be updated as well in each of these files to pass presubmit. Could you review the documentation here: https://source.android.com/docs/core/architecture/kernel/howto-abi-monitor#android_13_and_lower\n\nI think you need to use the command with the --update argument.",
+      "revId": "44b5e98c2ad93ac295309d9eb39838070dcff1f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
