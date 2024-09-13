@@ -3278,4 +3278,30 @@ static inline void update_current_exec_runtime(struct task_struct *curr,
 }
 
 extern bool cpu_busy_with_softirqs(int cpu);
+<<<<<<< HEAD   (69e1e941dbe1f38e288a4bbec9c3627248161081 ANDROID: GKI: Update xiaomi symbol list)
+||||||| BASE   (29aa7dd50eb5ac1d8688837026ef4aa52e2919a1 ANDROID: GKI: Add padding after init_task structure)
+#else
+static inline bool cpu_busy_with_softirqs(int cpu)
+{
+	return false;
+}
+#endif /* CONFIG_RT_SOFTIRQ_AWARE_SCHED */
+
+=======
+#else
+static inline bool cpu_busy_with_softirqs(int cpu)
+{
+	return false;
+}
+#endif /* CONFIG_RT_SOFTIRQ_AWARE_SCHED */
+
+static inline void *android_task_vendor_data(struct task_struct *p)
+{
+	if (p == &init_task)
+		return &vendor_data_pad[0];
+
+	return p + 1;
+}
+
+>>>>>>> CHANGE (24886b585520c852b4c9c8df772f430b764a112d ANDROID: GKI: Add to task_struct size via cmdline)
 #endif /* _KERNEL_SCHED_SCHED_H */
