@@ -7,6 +7,7 @@
 use core::{
     ffi::{c_int, c_long},
     pin::Pin,
+    sync::atomic::{AtomicUsize, Ordering},
 };
 use kernel::{
     bindings::{self, ASHMEM_GET_PIN_STATUS, ASHMEM_PIN, ASHMEM_UNPIN},
@@ -21,6 +22,7 @@ use kernel::{
     prelude::*,
     seq_file::SeqFile,
     seq_print,
+    shrinker::{self, RegisteredShrinker, UnregisteredShrinker},
     sync::{new_mutex, Mutex, UniqueArc},
     uaccess::{UserSlice, UserSliceReader, UserSliceWriter},
 };
@@ -68,9 +70,11 @@ pub fn has_cap_sys_admin() -> bool {
     unsafe { bindings::capable(CAP_SYS_ADMIN as c_int) }
 }
 
+// Only updated with ASHMEM_MUTEX held, but the shrinker will read it without the mutex.
+static LRU_COUNT: AtomicUsize = AtomicUsize::new(0);
+
 struct AshmemLru {
     lru_list: List<ashmem_range::Range, 0>,
-    lru_count: usize,
 }
 
 impl AshmemGuard {
@@ -85,15 +89,19 @@ impl AshmemGuard {
 
         // Only change the counter if the range is on the lru list.
         if !range.purged(self) {
-            self.lru_count += new_size;
-            self.lru_count -= old_size;
+            let mut lru_count = LRU_COUNT.load(Ordering::Relaxed);
+            lru_count += new_size;
+            lru_count -= old_size;
+            LRU_COUNT.store(lru_count, Ordering::Relaxed);
         }
     }
 
     fn insert_lru(&mut self, range: ListArc<ashmem_range::Range>) {
         // Don't insert the range if it's already purged.
         if !range.purged(self) {
-            self.lru_count += range.size(self);
+            let mut lru_count = LRU_COUNT.load(Ordering::Relaxed);
+            lru_count += range.size(self);
+            LRU_COUNT.store(lru_count, Ordering::Relaxed);
             self.lru_list.push_front(range);
         }
     }
@@ -105,7 +113,9 @@ impl AshmemGuard {
 
         // Only decrement lru_count if the range was actually in the list.
         if ret.is_some() {
-            self.lru_count -= range.size(self);
+            let mut lru_count = LRU_COUNT.load(Ordering::Relaxed);
+            lru_count -= range.size(self);
+            LRU_COUNT.store(lru_count, Ordering::Relaxed);
         }
 
         ret
@@ -116,7 +126,7 @@ kernel::sync::global_lock! {
     // SAFETY: We call `init` as the very first thing in the initialization of this module, so
     // there are no calls to `lock` before `init` is called.
     static ASHMEM_MUTEX: Mutex<AshmemLru> = unsafe { uninit };
-    value: AshmemLru { lru_list: List::new(), lru_count: 0 };
+    value: AshmemLru { lru_list: List::new() };
     wrapper: AshmemMutex;
     guard: AshmemGuard;
     locked_by: LockedByAshmem;
@@ -132,6 +142,7 @@ module! {
 
 struct AshmemModule {
     _misc: AshmemMiscdevRegistration,
+    _shrinker: RegisteredShrinker<Self>,
 }
 
 impl kernel::Module for AshmemModule {
@@ -143,10 +154,14 @@ impl kernel::Module for AshmemModule {
 
         pr_warn!("Ashmem Rust initialized.");
 
+        let mut shrinker = UnregisteredShrinker::alloc(c_str!("android-ashmem"))?;
+        shrinker.set_seeks(4 * shrinker::DEFAULT_SEEKS);
+
         Ok(Self {
             // SAFETY: There is no previous call to `register` on `ASHMEM_MISCDEV` since this is
             // the module initializer.
             _misc: unsafe { ASHMEM_MISCDEV.register() }?,
+            _shrinker: shrinker.register(()),
         })
     }
 }

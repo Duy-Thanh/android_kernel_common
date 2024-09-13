@@ -296,6 +296,29 @@ impl AshmemGuard {
     }
 }
 
+impl Shrinker for super::AshmemModule {
+    // Our shrinker data is in a global, so we don't need to set the private data.
+    type Ptr = ();
+
+    fn count_objects(_: (), _sc: ShrinkControl<'_>) -> CountObjects {
+        CountObjects::from_count(super::LRU_COUNT.load(super::Ordering::Relaxed))
+    }
+
+    fn scan_objects(_: (), mut sc: ShrinkControl<'_>) -> ScanObjects {
+        if !sc.gfp_fs() {
+            return ScanObjects::STOP;
+        }
+
+        let Some(mut guard) = super::ASHMEM_MUTEX.trylock() else {
+            return ScanObjects::STOP;
+        };
+
+        let freed = guard.free_lru(sc.nr_to_scan());
+        sc.set_nr_scanned(freed);
+        ScanObjects::from_count(freed)
+    }
+}
+
 pub(crate) struct NewRange<'a> {
     pub(crate) file: &'a ShmemFile,
     pub(crate) alloc: UniqueArc<MaybeUninit<Range>>,
