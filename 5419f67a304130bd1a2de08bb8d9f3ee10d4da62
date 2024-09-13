@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "482ebe50_28c0585b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-09-13T18:28:15Z",
+      "side": 1,
+      "message": "I\u0027m uploading an early WIP patch but I\u0027d still appreciate some feedback if there is any.",
+      "revId": "5419f67a304130bd1a2de08bb8d9f3ee10d4da62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ae5737_ba9e7779",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-09-13T18:28:15Z",
+      "side": 1,
+      "message": "I tried looking for a helper function like this. However, mm/ doesn\u0027t provide one and perhaps it should?",
+      "range": {
+        "startLine": 221,
+        "startChar": 30,
+        "endLine": 221,
+        "endChar": 47
+      },
+      "revId": "5419f67a304130bd1a2de08bb8d9f3ee10d4da62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48db3b63_71c16a5f",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-09-13T18:28:15Z",
+      "side": 1,
+      "message": "...as with the shrinker callback, I\u0027m not sure this is even possible to happen. However, we have the check already there so might as well add it here too.",
+      "range": {
+        "startLine": 236,
+        "startChar": 13,
+        "endLine": 236,
+        "endChar": 30
+      },
+      "revId": "5419f67a304130bd1a2de08bb8d9f3ee10d4da62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3dc5813_e2557989",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-09-13T18:28:15Z",
+      "side": 1,
+      "message": "Now that we are allocating pages without a lock, it might be interesting to figure out exactly how many we are dropping because of races.",
+      "range": {
+        "startLine": 258,
+        "startChar": 1,
+        "endLine": 258,
+        "endChar": 5
+      },
+      "revId": "5419f67a304130bd1a2de08bb8d9f3ee10d4da62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8b6127d_2058b8df",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-09-13T18:28:15Z",
+      "side": 1,
+      "message": "Not sure this is appropriate. It works but I have to still figure out if there is a better alternative and/or what kind of flags I should provide.",
+      "range": {
+        "startLine": 277,
+        "startChar": 9,
+        "endLine": 277,
+        "endChar": 34
+      },
+      "revId": "5419f67a304130bd1a2de08bb8d9f3ee10d4da62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
