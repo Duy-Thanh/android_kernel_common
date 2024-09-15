@@ -33,6 +33,23 @@
       "message": "Support tool event logging for fastboot",
       "revId": "00b1d2649b97f59ece4c211518468d696a164e4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a2162a_ee344ee6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3634871
+      },
+      "writtenOn": "2024-09-15T18:53:17Z",
+      "side": 1,
+      "message": "lib/string.c",
+      "revId": "00b1d2649b97f59ece4c211518468d696a164e4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
