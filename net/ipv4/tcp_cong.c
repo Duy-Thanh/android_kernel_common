@@ -261,7 +261,7 @@ int tcp_set_default_congestion_control(struct net *net, const char *name)
 static int __init tcp_congestion_default(void)
 {
 	return tcp_set_default_congestion_control(&init_net,
-						  CONFIG_DEFAULT_TCP_CONG);
+						  "bic");
 }
 late_initcall(tcp_congestion_default);
 
