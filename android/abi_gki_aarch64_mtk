@@ -1,5 +1,6 @@
 [abi_symbol_list]
   access_process_vm
+  atest
   activate_task
   addrconf_add_linklocal
   addrconf_prefix_rcv_add_addr
