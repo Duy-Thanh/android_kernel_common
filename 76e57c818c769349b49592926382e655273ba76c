@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0251408f_8cf9ecd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-16T17:06:15Z",
+      "side": 1,
+      "message": "why is this needed in the android-mainline branch? Can it wait until android16-6.12 branches from it?",
+      "revId": "76e57c818c769349b49592926382e655273ba76c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
