@@ -46,6 +46,30 @@
       },
       "revId": "efbeefd2fc7aedac25b6871c39725491c665dd8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c2f379_e6dbadcc",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-09-18T17:04:05Z",
+      "side": 1,
+      "message": "Is it acceptable to make `dma_map_sg()` fail if not enough memory is available? As one can see in `__dwc3_ep0_do_control_data()`, it does not expect `dma_map_sg()` to fail. If DMA mapping fails, the following code is triggered and the error is not propagated:\n```\n\t\tif (ret)\n\t\t\treturn;\n```",
+      "parentUuid": "7395f127_a8db72f6",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 10
+      },
+      "revId": "efbeefd2fc7aedac25b6871c39725491c665dd8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
