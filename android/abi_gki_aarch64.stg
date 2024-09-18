@@ -315455,6 +315455,15 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x925fc6da
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3ec65828
+  parameter_id: 0x18bd6530
+  parameter_id: 0x38b368bf
+  parameter_id: 0x95ef30d6
+  parameter_id: 0xf435685e
+}
+function {
   id: 0x925fddc4
   return_type_id: 0xf435685e
   parameter_id: 0x11cffa09
@@ -355218,6 +355227,15 @@ elf_symbol {
   crc: 0xd45cc6ca
   type_id: 0x3fc78978
   full_name: "bin2hex"
+}
+elf_symbol {
+  id: 0x154309df
+  name: "binder_alloc_copy_from_buffer"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6ced1f12
+  type_id: 0x925fc6da
+  full_name: "binder_alloc_copy_from_buffer"
 }
 elf_symbol {
   id: 0x49201db3
@@ -415404,6 +415422,7 @@ interface {
   symbol_id: 0xcdba3a55
   symbol_id: 0x7f80f1f5
   symbol_id: 0x977cc973
+  symbol_id: 0x154309df
   symbol_id: 0x49201db3
   symbol_id: 0xacc709b0
   symbol_id: 0x2b2698f0
