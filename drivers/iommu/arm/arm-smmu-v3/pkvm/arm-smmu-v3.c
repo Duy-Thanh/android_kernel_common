@@ -61,6 +61,8 @@ struct hyp_arm_smmu_v3_domain {
 	hyp_rwlock_t			lock; /* Protects iommu_list. */
 	hyp_spinlock_t			pgt_lock; /* protects page table. */
 	struct io_pgtable		*pgtable;
+	void *				cdptr;
+	u32				nr_entries;
 };
 
 struct kvm_iommu_walk_data {
@@ -818,43 +820,59 @@ int smmu_domain_config_s1(struct hyp_arm_smmu_v3_device *smmu,
 	struct io_pgtable_cfg *cfg;
 	struct hyp_arm_smmu_v3_domain *smmu_domain = domain->priv;
 
+	hyp_assert_write_lock_held(&smmu_domain->lock);
+
 	cfg = &smmu_domain->pgtable->cfg;
 	ste = smmu_get_ste_ptr(smmu, sid);
 	val = le64_to_cpu(ste[0]);
+
+	*update_ste = false;
 
 	/* The host trying to attach stage-1 domain to an already stage-2 attached device. */
 	if (FIELD_GET(STRTAB_STE_0_CFG, val) == STRTAB_STE_0_CFG_S2_TRANS)
 		return -EBUSY;
 
-	cd_table = (u64 *)(FIELD_GET(STRTAB_STE_0_S1CTXPTR_MASK, val) << 6);
-	nr_entries = 1 << FIELD_GET(STRTAB_STE_0_S1CDMAX, val);
-	*update_ste = false;
-	/* This is the first pasid attached to this device. */
-	if (!cd_table) {
-		cd_table = smmu_alloc_cd(pasid_bits);
+	if (pasid) {
+		cd_table = (u64 *)(FIELD_GET(STRTAB_STE_0_S1CTXPTR_MASK, val) << 6);
+		nr_entries = 1 << FIELD_GET(STRTAB_STE_0_S1CDMAX, val);
+		if (pasid >= nr_entries)
+			return -E2BIG;
+		/* Device (pasid =0) must be attached first.  */
 		if (!cd_table)
-			return -ENOMEM;
-		nr_entries = 1 << pasid_bits;
+			return -ENODEV;
+	} else {
+		/* The domain already have a CD table. */
+		if (smmu_domain->cdptr) {
+			cd_table = smmu_domain->cdptr;
+			nr_entries = smmu_domain->nr_entries;
+		} else {
+			cd_table = smmu_alloc_cd(pasid_bits);
+			if (!cd_table)
+				return -ENOMEM;
+			nr_entries = 1 << pasid_bits;
+			smmu_domain->cdptr = cd_table;
+			smmu_domain->nr_entries = nr_entries;
+		}
 		ent[1] = FIELD_PREP(STRTAB_STE_1_S1DSS, STRTAB_STE_1_S1DSS_SSID0) |
-			 FIELD_PREP(STRTAB_STE_1_S1CIR, STRTAB_STE_1_S1C_CACHE_WBRA) |
-			 FIELD_PREP(STRTAB_STE_1_S1COR, STRTAB_STE_1_S1C_CACHE_WBRA) |
-			 FIELD_PREP(STRTAB_STE_1_S1CSH, ARM_SMMU_SH_ISH);
+			FIELD_PREP(STRTAB_STE_1_S1CIR, STRTAB_STE_1_S1C_CACHE_WBRA) |
+			FIELD_PREP(STRTAB_STE_1_S1COR, STRTAB_STE_1_S1C_CACHE_WBRA) |
+			FIELD_PREP(STRTAB_STE_1_S1CSH, ARM_SMMU_SH_ISH);
 		ent[0] = ((u64)cd_table & STRTAB_STE_0_S1CTXPTR_MASK) |
-			 FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S1_TRANS) |
-			 FIELD_PREP(STRTAB_STE_0_S1CDMAX, pasid_bits) |
-			 FIELD_PREP(STRTAB_STE_0_S1FMT, STRTAB_STE_0_S1FMT_LINEAR) |
-			 STRTAB_STE_0_V;
+			FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S1_TRANS) |
+			FIELD_PREP(STRTAB_STE_0_S1CDMAX, pasid_bits) |
+			FIELD_PREP(STRTAB_STE_0_S1FMT, STRTAB_STE_0_S1FMT_LINEAR) |
+			STRTAB_STE_0_V;
 		*update_ste = true;
 	}
 
-	if (pasid >= nr_entries)
-		return -E2BIG;
 	/* Write CD. */
 	cd_entry = smmu_get_cd_ptr(hyp_phys_to_virt((u64)cd_table), pasid);
 
-	/* CD already used by another device. */
-	if (cd_entry[0])
-		return -EBUSY;
+	if (cd_entry[0]) {
+		/* CD already used attached to a different domain. */
+		if (cfg->arm_lpae_s1_cfg.ttbr != le64_to_cpu(cd_entry[1] & CTXDESC_CD_1_TTB0_MASK))
+			return -EBUSY;
+	}
 
 	cd_entry[1] = cpu_to_le64(cfg->arm_lpae_s1_cfg.ttbr & CTXDESC_CD_1_TTB0_MASK);
 	cd_entry[2] = 0;
@@ -1139,9 +1157,10 @@ static int smmu_detach_dev(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_dom
 		cd[2] = 0;
 		cd[3] = 0;
 		ret = smmu_sync_cd(smmu, cd, sid, pasid);
-	} else {
-		/* Don't clear CD ptr, as it would leak memory. */
-		dst[0] &= STRTAB_STE_0_S1CTXPTR_MASK;
+	}
+	/* For stage-2 and pasid = 0 clear the CD. */
+	if (!pasid) {
+		dst[0] = 0;
 		ret = smmu_sync_ste(smmu, dst, sid);
 		if (ret)
 			goto out_unlock;
@@ -1187,13 +1206,18 @@ int smmu_alloc_domain(struct kvm_hyp_iommu_domain *domain, u32 type)
 void smmu_free_domain(struct kvm_hyp_iommu_domain *domain)
 {
 	struct hyp_arm_smmu_v3_domain *smmu_domain = domain->priv;
+	u32 cd_order;
+
 	/*
 	 * As page table allocation is decoupled from alloc_domain, free_domain can
 	 * be called with a domain that have never been attached.
 	 */
 	if (smmu_domain->pgtable)
 		kvm_arm_io_pgtable_free(smmu_domain->pgtable);
-
+	if (smmu_domain->cdptr) {
+		cd_order = get_order((smmu_domain->nr_entries) * (CTXDESC_CD_DWORDS << 3));
+		kvm_iommu_reclaim_pages(smmu_domain->cdptr, cd_order);
+	}
 	hyp_free(smmu_domain);
 }
 
