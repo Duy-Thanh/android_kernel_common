@@ -148,6 +148,12 @@
   __tracepoint_android_vh_sk_clone_lock
   __traceiter_android_vh_cma_alloc_retry
   __tracepoint_android_vh_cma_alloc_retry
+  __tracepoint_f2fs_write_begin
+  __traceiter_f2fs_write_begin
+  __tracepoint_f2fs_submit_page_write
+  __traceiter_f2fs_submit_page_write
+  __tracepoint_scsi_dispatch_cmd_start
+  __traceiter_scsi_dispatch_cmd_start
   __traceiter_android_rvh_ogki_vfree_bypass
   __traceiter_android_rvh_ogki_vmalloc_node_bypass
   __traceiter_android_vh_ogki_async_psi_bypass
