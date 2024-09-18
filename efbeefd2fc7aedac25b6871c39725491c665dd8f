@@ -22,6 +22,30 @@
       },
       "revId": "efbeefd2fc7aedac25b6871c39725491c665dd8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7395f127_a8db72f6",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-09-18T16:54:42Z",
+      "side": 1,
+      "message": "If `__topup_hyp_memcache` fails with `ENOMEM` (which is unlikely and means the system is in very bad state already) `__pkvm_topup_hyp_alloc_mgt_flags` would fail which makes `kvm_arm_smmu_topup_memcache` to fail,  which should eventually fail the `iommu_map_sg`, that should be the expected or am I missing something?\n\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android15-6.6/drivers/iommu/iommu.c#2636",
+      "parentUuid": "0fc022fb_98892619",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 10
+      },
+      "revId": "efbeefd2fc7aedac25b6871c39725491c665dd8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
