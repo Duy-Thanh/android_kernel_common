@@ -90,6 +90,9 @@ DECLARE_HOOK(android_vh_cma_drain_all_pages_bypass,
 DECLARE_HOOK(android_vh_pcplist_add_cma_pages_bypass,
 	TP_PROTO(int migratetype, bool *bypass),
 	TP_ARGS(migratetype, bypass));
+DECLARE_HOOK(android_vh_mm_kcompactd_cpu_online,
+	TP_PROTO(int cpu),
+	TP_ARGS(cpu));
 DECLARE_HOOK(android_vh_free_unref_page_bypass,
 	TP_PROTO(struct page *page, int order, int migratetype, bool *bypass),
 	TP_ARGS(page, order, migratetype, bypass));
