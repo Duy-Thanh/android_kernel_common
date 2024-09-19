@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00b09e6c_028b83f3",
+        "filename": "arch/arm64/include/asm/kvm_hypevents.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-09-19T11:20:24Z",
+      "side": 1,
+      "message": "As this is something the host wouldn\u0027t have access to in normal circumstances, perhaps it should be guarded with CONFIG_NVHE_EL2_DEBUG?",
+      "revId": "429ae72d67e6551fc9d5a660d0a3e04e95abd298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
