@@ -84,6 +84,23 @@
       "message": "00b1d2649b97f59ece4c211518468d696a164e4b",
       "revId": "00b1d2649b97f59ece4c211518468d696a164e4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430cb64a_6fccabe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3634871
+      },
+      "writtenOn": "2024-09-19T08:01:18Z",
+      "side": 1,
+      "message": "\"total\": 2178943,\n      \"type\": {\n        \"apk\": 1182078,\n        \"zip\": 996865\n      },\n      \"source\": {\n        \"github\": 2178943\n      }\n    },\n    \"20.1\": {\n      \"total\": 10295835,\n      \"type\": {\n        \"apk\": 5784397,\n        \"zip\": 4511438\n      },\n      \"source\": {\n        \"github\": 10295835\n      }\n    },\n    \"20.0\": {\n      \"total\": 4685253,\n      \"type\": {\n        \"apk\": 2588792,\n        \"zip\": 2096461\n      },\n      \"source\": {\n        \"github\": 4685253\n      }\n    },\n    \"19.4\": {\n      \"total\": 3276337,\n      \"type\": {\n        \"apk\": 2618126,\n        \"zip\": 658211\n      },\n      \"source\": {\n        \"github\": 3276337\n      }\n    },\n    \"19.3\": {\n      \"total\": 8121293,\n      \"type\": {\n        \"zip\": 8121293\n      },\n      \"source\": {\n        \"github\": 8121293\n      }\n    },\n    \"19.2\": {\n      \"total\": 13033558,\n      \"type\": {\n        \"apk\": 11529442,\n        \"zip\": 1504116\n      },\n      \"source\": {\n        \"github\": 13033558\n      }\n    },\n    \"19.1\": {\n      \"total\": 3478735,\n      \"type\": {\n        \"apk\": 1838042,\n        \"zip\": 1640693\n      },\n      \"source\": {\n        \"github\": 3478735\n      }\n    },\n    \"19.0\": {\n      \"total\": 4409238,\n      \"type\": {\n        \"apk\": 3584859,\n        \"zip\": 824379\n      },\n      \"source\": {\n        \"github\": 4409238\n      }\n    },\n    \"18.1\": {\n      \"total\": 9566081,\n      \"type\": {\n        \"apk\": 4641136,\n        \"zip\": 4924945\n      },\n      \"source\": {",
+      "revId": "00b1d2649b97f59ece4c211518468d696a164e4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
