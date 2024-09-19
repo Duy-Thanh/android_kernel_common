@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47a511d_0abd5fb3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-09-19T11:21:09Z",
+      "side": 1,
+      "message": "This should be handled by the upper-level, at the same level as the caller setting exit_code.",
+      "revId": "eaa43d577cb4e4fdcdf19f3ba5a1ab8f86c7b521",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
