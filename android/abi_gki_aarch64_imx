@@ -1191,7 +1191,6 @@
   trace_print_array_seq
   unregister_pernet_device
   verify_pkcs7_signature
-  wireless_nlevent_flush
 
 # required by ci_hdrc.ko
   debugfs_lookup
@@ -1763,13 +1762,6 @@
 # required by moal.ko
   in4_pton
   init_dummy_netdev
-  iwe_stream_add_event
-  iwe_stream_add_point
-  iwe_stream_add_value
-  iw_handler_get_spy
-  iw_handler_get_thrspy
-  iw_handler_set_spy
-  iw_handler_set_thrspy
   ktime_get_raw_ts64
   mmc_hw_reset
   mmc_set_data_timeout
@@ -1826,7 +1818,6 @@
   strim
   strncasecmp
   vprintk
-  wireless_send_event
 
 # required by mpl3115.ko
   i2c_smbus_read_i2c_block_data

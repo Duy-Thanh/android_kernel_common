@@ -2357,7 +2357,6 @@
   watchdog_register_device
   watchdog_set_restart_priority
   watchdog_unregister_device
-  wireless_nlevent_flush
   work_busy
   ww_mutex_lock
   ww_mutex_lock_interruptible

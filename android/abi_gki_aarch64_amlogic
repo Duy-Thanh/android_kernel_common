@@ -1003,9 +1003,6 @@
   is_bad_inode
   is_vmalloc_addr
   iter_file_splice_write
-  iwe_stream_add_event
-  iwe_stream_add_point
-  iwe_stream_add_value
   jiffies
   jiffies_64
   jiffies_to_msecs
@@ -2308,8 +2305,6 @@
   wakeup_source_unregister
   __wake_up_sync
   __warn_printk
-  wireless_nlevent_flush
-  wireless_send_event
   work_busy
   write_inode_now
   xdp_convert_zc_to_xdp_frame

@@ -660,8 +660,6 @@
   ir_raw_handler_unregister
   is_console_locked
   is_vmalloc_addr
-  iwe_stream_add_event
-  iwe_stream_add_point
   jiffies
   jiffies_to_msecs
   jiffies_to_usecs
@@ -1687,7 +1685,6 @@
   __warn_printk
   watchdog_init_timeout
   watchdog_set_restart_priority
-  wireless_nlevent_flush
   __xa_alloc
   xa_erase
   xa_load

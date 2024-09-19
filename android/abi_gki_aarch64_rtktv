@@ -1045,7 +1045,6 @@
   wakeup_source_register
   wakeup_source_unregister
   __warn_printk
-  wireless_nlevent_flush
   xhci_gen_setup
   xhci_init_driver
   xhci_resume

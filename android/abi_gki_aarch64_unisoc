@@ -1400,7 +1400,6 @@
   wakeup_source_register
   wakeup_source_remove
   wakeup_source_unregister
-  wireless_nlevent_flush
   xa_destroy
   xa_erase
   xa_find

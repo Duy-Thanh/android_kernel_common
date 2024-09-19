@@ -441,9 +441,6 @@
   gpiod_direction_output_raw
   gpio_free
   gpio_to_desc
-  iwe_stream_add_event
-  iwe_stream_add_point
-  iwe_stream_add_value
   __kfifo_free
   __kfifo_in
   __kfifo_init
@@ -519,7 +516,6 @@
   vprintk
   wakeup_source_register
   wakeup_source_unregister
-  wireless_send_event
   work_busy
 
 # required by cfg80211.ko
@@ -586,7 +582,6 @@
   system_power_efficient_wq
   unregister_pernet_device
   verify_pkcs7_signature
-  wireless_nlevent_flush
 
 # required by ci700.ko
   __arm_smccc_smc

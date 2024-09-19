@@ -1877,8 +1877,6 @@
   watchdog_register_device
   watchdog_set_restart_priority
   watchdog_unregister_device
-  wireless_nlevent_flush
-  wireless_send_event
   woken_wake_function
   ww_mutex_lock
   ww_mutex_unlock

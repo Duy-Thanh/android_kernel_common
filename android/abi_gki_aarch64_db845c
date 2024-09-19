@@ -878,7 +878,6 @@
   trace_print_array_seq
   unregister_pernet_device
   verify_pkcs7_signature
-  wireless_nlevent_flush
 
 # required by clk-qcom.ko
   __clk_determine_rate

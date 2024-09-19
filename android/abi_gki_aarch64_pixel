@@ -2232,7 +2232,6 @@
   watchdog_register_device
   watchdog_set_restart_priority
   watchdog_unregister_device
-  wireless_nlevent_flush
   woken_wake_function
   work_busy
   __xfrm_state_destroy

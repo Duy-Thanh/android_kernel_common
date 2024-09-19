@@ -1676,7 +1676,6 @@
   watchdog_register_device
   watchdog_set_restart_priority
   watchdog_unregister_device
-  wireless_nlevent_flush
   work_busy
   write_dirty_buffer
   xhci_gen_setup

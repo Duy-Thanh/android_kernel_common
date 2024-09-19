@@ -2816,7 +2816,6 @@
   wakeup_source_remove
   wakeup_source_unregister
   __warn_printk
-  wireless_send_event
   woken_wake_function
   work_busy
   ww_mutex_lock

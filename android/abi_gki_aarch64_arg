@@ -2499,7 +2499,6 @@
   wakeup_source_unregister
   __wake_up_sync
   __warn_printk
-  wireless_nlevent_flush
   woken_wake_function
   work_busy
   ww_mutex_lock

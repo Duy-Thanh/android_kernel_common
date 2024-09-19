@@ -1425,7 +1425,6 @@
   system_power_efficient_wq
   trace_print_array_seq
   verify_pkcs7_signature
-  wireless_nlevent_flush
 
 # required by virtio_snd.ko
   snd_card_free
