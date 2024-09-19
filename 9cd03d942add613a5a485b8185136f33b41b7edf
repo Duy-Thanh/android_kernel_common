@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5385beff_9baace84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-09-19T05:03:09Z",
+      "side": 1,
+      "message": "This should be \u0027FROMGIT\u0027 as it was cherry picked from a \n maintainer\u0027s tree. Is there a reason we can\u0027t wait until it is merged upstream?\n\nSee https://android.googlesource.com/kernel/common/+/android-mainline/README.md#common-kernel-patch-requirements",
+      "revId": "9cd03d942add613a5a485b8185136f33b41b7edf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
