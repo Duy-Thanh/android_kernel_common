@@ -135,7 +135,9 @@ static int guest_share_with_cb(struct kvm_cpu_context *ctxt, struct arm_smccc_re
 
 	ret = cb(pkvm_vcpu, ipa, out_pa);
 	if (ret == -ENOMEM) {
-		if (!pkvm_handle_empty_memcache(pkvm_vcpu, &exit_code))
+		if (!pkvm_handle_empty_memcache(pkvm_vcpu, &exit_code,
+						REQ_MEM_DEST_VCPU_MEMCACHE,
+						kvm_mmu_cache_min_pages(pkvm_vcpu->vcpu.kvm)))
 			res->a3 = exit_code;
 
 		return FFA_RET_NO_MEMORY;
@@ -242,7 +244,8 @@ static void *ffa_alloc(size_t size, struct kvm_cpu_context *ctxt, struct arm_smc
 	p = hyp_alloc(size);
 	if (!p) {
 		BUG_ON(hyp_alloc_errno() != -ENOMEM);
-		ret = pkvm_handle_empty_memcache(pkvm_vcpu, &exit_code);
+		ret = pkvm_handle_empty_memcache(pkvm_vcpu, &exit_code, REQ_MEM_DEST_HYP_ALLOC,
+						 hyp_alloc_missing_donations());
 		if (!ret)
 			res->a3 = exit_code;
 	}

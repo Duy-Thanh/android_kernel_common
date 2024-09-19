@@ -1420,7 +1420,8 @@ static bool pkvm_handle_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 	return pvm_psci_not_supported(hyp_vcpu);
 }
 
-int pkvm_handle_empty_memcache(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
+int pkvm_handle_empty_memcache(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code,
+			       u8 dest, int nr_pages)
 {
 	struct kvm_hyp_req *req;
 
@@ -1428,8 +1429,8 @@ int pkvm_handle_empty_memcache(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	if (!req)
 		return -ENOMEM;
 
-	req->mem.dest = REQ_MEM_DEST_VCPU_MEMCACHE;
-	req->mem.nr_pages = kvm_mmu_cache_min_pages(hyp_vcpu->vcpu.kvm);
+	req->mem.dest = dest;
+	req->mem.nr_pages = nr_pages;
 
 	write_sysreg_el2(read_sysreg_el2(SYS_ELR) - 4, SYS_ELR);
 
@@ -1478,7 +1479,9 @@ static bool pkvm_memshare_call(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 		 */
 		fallthrough;
 	case -ENOMEM:
-		if (pkvm_handle_empty_memcache(hyp_vcpu, exit_code))
+		if (pkvm_handle_empty_memcache(hyp_vcpu, exit_code,
+					       REQ_MEM_DEST_VCPU_MEMCACHE,
+					       kvm_mmu_cache_min_pages(hyp_vcpu->vcpu.kvm)))
 			goto out_guest_err;
 
 		goto out_host;
@@ -1540,7 +1543,9 @@ static bool pkvm_install_ioguard_page(struct pkvm_hyp_vcpu *hyp_vcpu,
 		goto out_guest_err;
 
 	ret = __pkvm_install_ioguard_page(hyp_vcpu, ipa, nr_pages, &nr_guarded);
-	if (ret == -ENOMEM && !pkvm_handle_empty_memcache(hyp_vcpu, exit_code))
+	if (ret == -ENOMEM && !pkvm_handle_empty_memcache(hyp_vcpu, exit_code,
+							  REQ_MEM_DEST_VCPU_MEMCACHE,
+							  kvm_mmu_cache_min_pages(hyp_vcpu->vcpu.kvm)))
 		return false;
 
 out_guest_err:
@@ -1610,7 +1615,8 @@ static bool pkvm_memrelinquish_call(struct pkvm_hyp_vcpu *hyp_vcpu,
 
 	ret = __pkvm_guest_relinquish_to_host(hyp_vcpu, ipa, &pa);
 	if (ret == -ENOMEM) {
-		if (pkvm_handle_empty_memcache(hyp_vcpu, exit_code))
+		if (pkvm_handle_empty_memcache(hyp_vcpu, exit_code, REQ_MEM_DEST_VCPU_MEMCACHE,
+					       kvm_mmu_cache_min_pages(hyp_vcpu->vcpu.kvm)))
 			goto out_guest_err;
 
 		return false;
