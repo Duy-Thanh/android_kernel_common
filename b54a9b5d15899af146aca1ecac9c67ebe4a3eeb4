@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a80f587_2ccb5af9",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2024-09-20T15:44:49Z",
+      "side": 1,
+      "message": "This probably needs to be `GFP_ATOMIC`. Compare with `__arm_lpae_alloc_pages` call in `arm_lpae_split_blk_unmap` where they use `__arm_lpae_alloc_pages(tablesz, GFP_ATOMIC, cfg);`.\nYou have to assume that this is called from atomic context.",
+      "range": {
+        "startLine": 435,
+        "startChar": 51,
+        "endLine": 435,
+        "endChar": 61
+      },
+      "revId": "b54a9b5d15899af146aca1ecac9c67ebe4a3eeb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
