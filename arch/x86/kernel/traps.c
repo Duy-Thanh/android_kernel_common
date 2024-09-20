@@ -181,8 +181,8 @@ static void do_error_trap(struct pt_regs *regs, long error_code, char *str,
 {
 	if (unlikely(kiwi_fault_logging)) {
 	    printk(KERN_ALERT "%s[%d]: do_error_trap for %s at %lx trapnr %lx signr %lx sicode %lx ip %px sp %px error %lx",
-			current->comm, task_pid_nr(current), str, addr, trapnr, signr,
-			sicode, (void *)regs->ip, (void *)regs->sp, error_code);
+			current->comm, task_pid_nr(current), str, (unsigned long) addr, trapnr, (unsigned long) signr,
+			(unsigned long) sicode, (void *)regs->ip, (void *)regs->sp, error_code);
 	}
 	RCU_LOCKDEP_WARN(!rcu_is_watching(), "entry code didn't wake RCU");
 
