@@ -16,6 +16,23 @@
       "message": "why is this needed in the android-mainline branch? Can it wait until android16-6.12 branches from it?",
       "revId": "76e57c818c769349b49592926382e655273ba76c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89e5ff86_fefab5c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-09-20T07:02:43Z",
+      "side": 1,
+      "message": "Peter: Still waiting for a response to Todd\u0027s question. Feel free to discuss in the bug if needed.",
+      "revId": "76e57c818c769349b49592926382e655273ba76c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
