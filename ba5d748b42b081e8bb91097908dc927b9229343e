@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0136ffca_7b33d531",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-09-20T01:20:21Z",
+      "side": 1,
+      "message": "As discussed offline, please add the new symbol list to `BUILD.bazel`",
+      "revId": "ba5d748b42b081e8bb91097908dc927b9229343e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
