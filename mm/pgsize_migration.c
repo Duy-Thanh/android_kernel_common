@@ -414,7 +414,7 @@ void split_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *new,
 	nr_vma2_pages = vma_pages(second);
 
 	if (nr_vma2_pages >= nr_pad_pages) { 			/* Case 1 & 3*/
-		vm_flags_clear(first, VM_PAD_MASK);
+		vma_set_pad_pages(first, 0);
 		vma_set_pad_pages(second, nr_pad_pages);
 	} else {						/* Case 2 */
 		vma_set_pad_pages(first, nr_pad_pages - nr_vma2_pages);
@@ -423,7 +423,11 @@ void split_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *new,
 }
 
 /*
- * Sets the correct padding bits / flags for a VMA split.
+ * Sets the correct padding bits / flags; when the original
+ * VMA's flags are modified/overwritten after a split.
+ *
+ * __split_vma() handles modifying the padding bits on splits,
+ * so copy the padding bits from the split vma to newflags.
  */
 unsigned long vma_pad_fixup_flags(struct vm_area_struct *vma,
 				  unsigned long newflags)
