@@ -88,6 +88,24 @@
       "parentUuid": "c6f1dcf1_6bf2ac4c",
       "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f68b88_8458f008",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-23T20:18:57Z",
+      "side": 1,
+      "message": "will let this go in since it is used by nearly all SoC vendors",
+      "parentUuid": "19f9e9f0_2108b830",
+      "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
