@@ -123,6 +123,24 @@
       "parentUuid": "b548a363_e24318f6",
       "revId": "9cd03d942add613a5a485b8185136f33b41b7edf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "754185fb_4750039e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-23T22:28:07Z",
+      "side": 1,
+      "message": "That is not a fix. It is an override that accepts the broken ABI. We cannot do that.",
+      "parentUuid": "db072b41_7e32ab45",
+      "revId": "9cd03d942add613a5a485b8185136f33b41b7edf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
