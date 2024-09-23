@@ -2463,6 +2463,14 @@ static int tcpm_register_sink_caps(struct tcpm_port *port)
 	memcpy(caps.pdo, port->sink_caps, sizeof(u32) * port->nr_sink_caps);
 	caps.role = TYPEC_SINK;
 
+<<<<<<< HEAD   (3b95e5 ANDROID: Update the ABI symbol list)
+=======
+	if (cap) {
+		usb_power_delivery_unregister_capabilities(cap);
+		port->partner_source_caps = NULL;
+	}
+
+>>>>>>> BRANCH (12f9bc Merge 6.1.99 into android14-6.1-lts)
 	cap = usb_power_delivery_register_capabilities(port->partner_pd, &caps);
 	if (IS_ERR(cap))
 		return PTR_ERR(cap);
