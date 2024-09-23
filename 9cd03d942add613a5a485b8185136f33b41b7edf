@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3708ce2b_0a466e0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2002535
+      },
+      "writtenOn": "2024-09-23T22:20:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5385beff_9baace84",
+      "revId": "9cd03d942add613a5a485b8185136f33b41b7edf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f027006_86b0d540",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "It fails all the ABI tests:\n```\ntype \u0027struct usb_configuration\u0027 changed\n  byte size changed from 224 to 352\n  member changed from \u0027struct usb_function * interface[16]\u0027 to \u0027struct usb_function * interface[32]\u0027\n    type changed from \u0027struct usb_function *[16]\u0027 to \u0027struct usb_function *[32]\u0027\n      number of elements changed from 16 to 32\n```\nYou cannot change `struct usb_configuration` since it is part of the KMI",
       "parentUuid": "0db0d83b_f50fd7b7",
+      "revId": "9cd03d942add613a5a485b8185136f33b41b7edf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b548a363_e24318f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2002535
+      },
+      "writtenOn": "2024-09-23T22:20:52Z",
+      "side": 1,
+      "message": "added ABI fix for KMI issue\nhttps://android-review.googlesource.com/c/kernel/common/+/3277871",
+      "parentUuid": "182a15e0_6444a8b8",
       "revId": "9cd03d942add613a5a485b8185136f33b41b7edf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
