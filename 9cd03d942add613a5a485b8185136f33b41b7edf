@@ -33,6 +33,24 @@
       "message": "This appears to break the kmi for struct usb_configuration.",
       "revId": "9cd03d942add613a5a485b8185136f33b41b7edf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0db0d83b_f50fd7b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2002535
+      },
+      "writtenOn": "2024-09-23T20:21:43Z",
+      "side": 1,
+      "message": "Can you please explain, what makes you come to this conclusion?",
+      "parentUuid": "3f027006_86b0d540",
+      "revId": "9cd03d942add613a5a485b8185136f33b41b7edf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
