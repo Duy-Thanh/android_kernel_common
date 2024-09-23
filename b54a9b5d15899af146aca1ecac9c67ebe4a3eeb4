@@ -22,6 +22,30 @@
       },
       "revId": "b54a9b5d15899af146aca1ecac9c67ebe4a3eeb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7aaf96_24f73ba1",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-09-23T10:29:07Z",
+      "side": 1,
+      "message": "Makes sense.",
+      "parentUuid": "9a80f587_2ccb5af9",
+      "range": {
+        "startLine": 435,
+        "startChar": 51,
+        "endLine": 435,
+        "endChar": 61
+      },
+      "revId": "b54a9b5d15899af146aca1ecac9c67ebe4a3eeb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
