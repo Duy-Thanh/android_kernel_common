@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a86fdc2_4db72fd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2024-09-23T10:51:50Z",
+      "side": 1,
+      "message": "For better compatibility with the latest Android kernel, we use the android-mainline branch to prepare for development.，\nsome of the vendor hooks are need to our modules, is it possible to commit them to the android-mainline branch?",
+      "revId": "0b906a84107f1eec39259ed30480a4004b92ed9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
