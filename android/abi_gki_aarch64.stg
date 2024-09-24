@@ -310122,6 +310122,16 @@ function {
   parameter_id: 0x054f691a
 }
 function {
+  id: 0x6cfb5677
+  return_type_id: 0x1d44326e
+  parameter_id: 0x0ca27481
+  parameter_id: 0xe276adef
+  parameter_id: 0x7584e7da
+  parameter_id: 0xe276adef
+  parameter_id: 0x7584e7da
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x6d9955d1
   return_type_id: 0x054f691a
   parameter_id: 0x1dc3d428
@@ -310283,6 +310293,16 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x0ac23bc5
   parameter_id: 0x054f691a
+}
+function {
+  id: 0x6f9cf071
+  return_type_id: 0x1d44326e
+  parameter_id: 0x0ca27481
+  parameter_id: 0x3b461cc8
+  parameter_id: 0x7584e7da
+  parameter_id: 0x3b461cc8
+  parameter_id: 0x7584e7da
+  parameter_id: 0x6720d32f
 }
 function {
   id: 0x6fa775f5
@@ -403900,6 +403920,15 @@ elf_symbol {
   full_name: "tcf_unregister_action"
 }
 elf_symbol {
+  id: 0xb4592621
+  name: "tcp_done"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x00b1358f
+  type_id: 0x17c95d08
+  full_name: "tcp_done"
+}
+elf_symbol {
   id: 0xeb0e3e9b
   name: "tcp_hashinfo"
   is_defined: true
@@ -406472,6 +406501,24 @@ elf_symbol {
   crc: 0xa1b5298e
   type_id: 0x127accc9
   full_name: "udp4_hwcsum"
+}
+elf_symbol {
+  id: 0x7764a4dc
+  name: "udp4_lib_lookup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xafe8b903
+  type_id: 0x6cfb5677
+  full_name: "udp4_lib_lookup"
+}
+elf_symbol {
+  id: 0xec561477
+  name: "udp6_lib_lookup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xabc1da1b
+  type_id: 0x6f9cf071
+  full_name: "udp6_lib_lookup"
 }
 elf_symbol {
   id: 0x93e3a105
@@ -421044,6 +421091,7 @@ interface {
   symbol_id: 0xcc386657
   symbol_id: 0x529a9e72
   symbol_id: 0x99d5bf98
+  symbol_id: 0xb4592621
   symbol_id: 0xeb0e3e9b
   symbol_id: 0x5f96413a
   symbol_id: 0x34a062e9
@@ -421330,6 +421378,8 @@ interface {
   symbol_id: 0xe750d0b7
   symbol_id: 0x9cefccb0
   symbol_id: 0xef1a96f5
+  symbol_id: 0x7764a4dc
+  symbol_id: 0xec561477
   symbol_id: 0x93e3a105
   symbol_id: 0xf946dfdd
   symbol_id: 0xa7d65bf5
