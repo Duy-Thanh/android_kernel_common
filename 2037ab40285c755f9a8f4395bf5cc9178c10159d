@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66926b51_6f4ea495",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-24T19:26:09Z",
+      "side": 1,
+      "message": "If this is UPSTREAM, then the patch will merge into android-mainline soon. Why is it so urgent that we can\u0027t wait for the merge. We normally don\u0027t cherry-pick UPSTREAM patches into android-mainline.",
+      "revId": "2037ab40285c755f9a8f4395bf5cc9178c10159d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
