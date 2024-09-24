@@ -6,12 +6,19 @@
 //! spinlocks, raw spinlocks) to be provided with minimal effort.
 
 use super::LockClassKey;
-use crate::{init::PinInit, pin_init, str::CStr, types::Opaque, types::ScopeGuard};
-use core::{cell::UnsafeCell, marker::PhantomData, marker::PhantomPinned};
+use crate::{
+    init::PinInit,
+    pin_init,
+    str::CStr,
+    types::{NotThreadSafe, Opaque, ScopeGuard},
+};
+use core::{cell::UnsafeCell, marker::PhantomPinned, pin::Pin};
 use macros::pin_data;
 
 pub mod mutex;
 pub mod spinlock;
+
+pub(super) mod global;
 
 /// The "backend" of a lock.
 ///
@@ -57,6 +64,13 @@ pub unsafe trait Backend {
     /// Callers must ensure that [`Backend::init`] has been previously called.
     #[must_use]
     unsafe fn lock(ptr: *mut Self::State) -> Self::GuardState;
+
+    /// Tries to acquire the lock.
+    ///
+    /// # Safety
+    ///
+    /// Callers must ensure that [`Backend::init`] has been previously called.
+    unsafe fn try_lock(ptr: *mut Self::State) -> Option<Self::GuardState>;
 
     /// Releases the lock, giving up its ownership.
     ///
@@ -117,6 +131,33 @@ impl<T, B: Backend> Lock<T, B> {
             }),
         })
     }
+
+    /// # Safety
+    ///
+    /// Before any other method on this lock is called, `global_lock_helper_init` must be called.
+    #[doc(hidden)]
+    pub const unsafe fn global_lock_helper_new(state: Opaque<B::State>, data: T) -> Self {
+        Self {
+            state,
+            data: UnsafeCell::new(data),
+            _pin: PhantomPinned,
+        }
+    }
+
+    /// # Safety
+    ///
+    /// * This lock must have been created using `global_lock_helper_new`.
+    /// * Must only be called once for each lock.
+    #[doc(hidden)]
+    pub unsafe fn global_lock_helper_init(
+        self: Pin<&Self>,
+        name: &'static CStr,
+        key: &'static LockClassKey,
+    ) {
+        // SAFETY: The pointer to `state` is valid for the duration of this call, and both `name`
+        // and `key` are valid indefinitely.
+        unsafe { B::init(self.state.get(), name.as_char_ptr(), key.as_ptr()) }
+    }
 }
 
 impl<T: ?Sized, B: Backend> Lock<T, B> {
@@ -127,6 +168,15 @@ impl<T: ?Sized, B: Backend> Lock<T, B> {
         let state = unsafe { B::lock(self.state.get()) };
         // SAFETY: The lock was just acquired.
         unsafe { Guard::new(self, state) }
+    }
+
+    /// Tries to acquire the lock.
+    ///
+    /// Returns a guard that can be used to access the data protected by the lock if successful.
+    pub fn try_lock(&self) -> Option<Guard<'_, T, B>> {
+        // SAFETY: The constructor of the type calls `init`, so the existence of the object proves
+        // that `init` was called.
+        unsafe { B::try_lock(self.state.get()).map(|state| Guard::new(self, state)) }
     }
 }
 
@@ -139,7 +189,7 @@ impl<T: ?Sized, B: Backend> Lock<T, B> {
 pub struct Guard<'a, T: ?Sized, B: Backend> {
     pub(crate) lock: &'a Lock<T, B>,
     pub(crate) state: B::GuardState,
-    _not_send: PhantomData<*mut ()>,
+    _not_send: NotThreadSafe,
 }
 
 // SAFETY: `Guard` is sync when the data protected by the lock is also sync.
@@ -191,7 +241,7 @@ impl<'a, T: ?Sized, B: Backend> Guard<'a, T, B> {
         Self {
             lock,
             state,
-            _not_send: PhantomData,
+            _not_send: NotThreadSafe,
         }
     }
 }
