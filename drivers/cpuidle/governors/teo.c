@@ -214,6 +214,12 @@ void teo_cpu_set_util_threshold(int cpu, unsigned long util)
 	cpu_data->util_threshold = util;
 }
 EXPORT_SYMBOL_GPL(teo_cpu_set_util_threshold);
+unsigned long teo_cpu_get_predicted_sleep_length(int cpu)
+{
+	struct teo_cpu *cpu_data = per_cpu_ptr(&teo_cpus, cpu);
+	return cpu_data->sleep_length_ns;
+}
+EXPORT_SYMBOL_GPL(teo_cpu_get_predicted_sleep_length);
 
 /**
  * teo_cpu_is_utilized - Check if the CPU's util is above the threshold

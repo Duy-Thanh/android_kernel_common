@@ -40,6 +40,33 @@ DEFINE_EVENT(cpu, cpu_idle,
 	TP_ARGS(state, cpu_id)
 );
 
+
+TRACE_EVENT(cpu_idle_predicted_sleep_length,
+
+	TP_PROTO(unsigned int cpu_id, unsigned int state, unsigned long predicted_sleep_length_ns, 
+			 unsigned long actual_sleep_length_ns),
+
+	TP_ARGS(cpu_id, state, predicted_sleep_length_ns, actual_sleep_length_ns),
+
+	TP_STRUCT__entry(
+		__field(u32,		cpu_id)
+		__field(u32,		state)
+		__field(u64,		predicted_sleep_length_ns)
+		__field(u64,		actual_sleep_length_ns)
+	),
+
+	TP_fast_assign(
+		__entry->cpu_id = cpu_id;
+		__entry->state = state;
+		__entry->predicted_sleep_length_ns = predicted_sleep_length_ns;
+		__entry->actual_sleep_length_ns = actual_sleep_length_ns;
+	),
+
+	TP_printk("cpu=%lu state=%lu predicted_sleep_length_ns=%lu actual_sleep_length_ns=%lu",
+		__entry->cpu_id, __entry->state, __entry->predicted_sleep_length_ns, __entry->actual_sleep_length_ns)
+);
+
+
 TRACE_EVENT(cpu_idle_miss,
 
 	TP_PROTO(unsigned int cpu_id, unsigned int state, bool below),

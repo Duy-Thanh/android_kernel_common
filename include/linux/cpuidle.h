@@ -317,9 +317,11 @@ extern s64 cpuidle_governor_latency_req(unsigned int cpu);
 #ifdef CONFIG_CPU_IDLE_GOV_TEO
 unsigned long teo_cpu_get_util_threshold(int cpu);
 void teo_cpu_set_util_threshold(int cpu, unsigned long util);
+unsigned long teo_cpu_get_predicted_sleep_length(int cpu);
 #else
 static inline unsigned long teo_cpu_get_util_threshold(int cpu) {return -1;}
 static inline void teo_cpu_set_util_threshold(int cpu, unsigned long util) {}
+unsigned long teo_cpu_get_predicted_sleep_length(int cpu) {return -1;};
 #endif
 
 #endif /* _LINUX_CPUIDLE_H */
