@@ -34,6 +34,24 @@
       "parentUuid": "0891143f_564c413c",
       "revId": "dfa27d3c321f6a58f204536ed11a6a0769b57c1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "887ce6ca_effb4d4b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5828,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-25T02:57:01Z",
+      "side": 1,
+      "message": "So it is. Sorry about the noise.",
+      "parentUuid": "c0ed19e1_eeec1aca",
+      "revId": "dfa27d3c321f6a58f204536ed11a6a0769b57c1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
