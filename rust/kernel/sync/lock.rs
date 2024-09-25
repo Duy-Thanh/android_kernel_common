@@ -6,8 +6,13 @@
 //! spinlocks, raw spinlocks) to be provided with minimal effort.
 
 use super::LockClassKey;
-use crate::{init::PinInit, pin_init, str::CStr, types::Opaque, types::ScopeGuard};
-use core::{cell::UnsafeCell, marker::PhantomData, marker::PhantomPinned};
+use crate::{
+    init::PinInit,
+    pin_init,
+    str::CStr,
+    types::{NotThreadSafe, Opaque, ScopeGuard},
+};
+use core::{cell::UnsafeCell, marker::PhantomPinned};
 use macros::pin_data;
 
 pub mod mutex;
@@ -57,6 +62,14 @@ pub unsafe trait Backend {
     /// Callers must ensure that [`Backend::init`] has been previously called.
     #[must_use]
     unsafe fn lock(ptr: *mut Self::State) -> Self::GuardState;
+
+    /// Tries to acquire the lock, making the caller its owner.
+    ///
+    /// # Safety
+    ///
+    /// Callers must ensure that [`Backend::init`] has been previously called.
+    #[must_use]
+    unsafe fn trylock(ptr: *mut Self::State) -> Option<Self::GuardState>;
 
     /// Releases the lock, giving up its ownership.
     ///
@@ -128,6 +141,22 @@ impl<T: ?Sized, B: Backend> Lock<T, B> {
         // SAFETY: The lock was just acquired.
         unsafe { Guard::new(self, state) }
     }
+
+    /// Acquires the lock and gives the caller access to the data protected by it.
+    pub fn trylock(&self) -> Option<Guard<'_, T, B>> {
+        // SAFETY: The constructor of the type calls `init`, so the existence of the object proves
+        // that `init` was called.
+        let state = unsafe { B::trylock(self.state.get())? };
+        // SAFETY: The lock was just acquired.
+        unsafe { Some(Guard::new(self, state)) }
+    }
+
+    /// Get a raw pointer to the data without touching the lock.
+    ///
+    /// It is up to the user to make sure that the pointer is used correctly.
+    pub fn get_ptr(&self) -> *mut T {
+        self.data.get()
+    }
 }
 
 /// A lock guard.
@@ -139,13 +168,18 @@ impl<T: ?Sized, B: Backend> Lock<T, B> {
 pub struct Guard<'a, T: ?Sized, B: Backend> {
     pub(crate) lock: &'a Lock<T, B>,
     pub(crate) state: B::GuardState,
-    _not_send: PhantomData<*mut ()>,
+    _not_send: NotThreadSafe,
 }
 
 // SAFETY: `Guard` is sync when the data protected by the lock is also sync.
 unsafe impl<T: Sync + ?Sized, B: Backend> Sync for Guard<'_, T, B> {}
 
-impl<T: ?Sized, B: Backend> Guard<'_, T, B> {
+impl<'a, T: ?Sized, B: Backend> Guard<'a, T, B> {
+    /// Returns the lock that this guard originates from.
+    pub fn lock(&self) -> &'a Lock<T, B> {
+        self.lock
+    }
+
     pub(crate) fn do_unlocked<U>(&mut self, cb: impl FnOnce() -> U) -> U {
         // SAFETY: The caller owns the lock, so it is safe to unlock it.
         unsafe { B::unlock(self.lock.state.get(), &self.state) };
@@ -191,7 +225,7 @@ impl<'a, T: ?Sized, B: Backend> Guard<'a, T, B> {
         Self {
             lock,
             state,
-            _not_send: PhantomData,
+            _not_send: NotThreadSafe,
         }
     }
 }
