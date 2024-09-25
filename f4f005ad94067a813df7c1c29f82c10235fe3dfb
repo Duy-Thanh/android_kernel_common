@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58b08c8_1f4ef274",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-09-25T23:28:19Z",
+      "side": 1,
+      "message": "Looks like this needs to depend on kselftest_headers_lib too",
+      "revId": "f4f005ad94067a813df7c1c29f82c10235fe3dfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
