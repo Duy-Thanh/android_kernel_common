@@ -16,6 +16,24 @@
       "message": "don\u0027t we need to set `prev \u003d NULL;` here? Otherwise, if this was the last iteration of the loop, we could `continue` at line 5840 and then put the node again at line 5860.",
       "revId": "dfa27d3c321f6a58f204536ed11a6a0769b57c1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0ed19e1_eeec1aca",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5828,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-09-25T02:38:44Z",
+      "side": 1,
+      "message": "The `continue` at line 5840 is for the `hlist_for_each_entry()` though so it won\u0027t skip the `prev \u003d node` from line 5854.",
+      "parentUuid": "0891143f_564c413c",
+      "revId": "dfa27d3c321f6a58f204536ed11a6a0769b57c1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
