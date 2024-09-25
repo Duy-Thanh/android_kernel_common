@@ -16,6 +16,24 @@
       "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream",
       "revId": "71236b7af6ad4689afb5d51eaf303637fdec9aeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da4bb670_429e9f87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3123981
+      },
+      "writtenOn": "2024-09-25T07:21:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "614b3113_4bad86c4",
+      "revId": "71236b7af6ad4689afb5d51eaf303637fdec9aeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
