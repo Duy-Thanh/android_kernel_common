@@ -1,3 +1,5 @@
+/* SPDX-License-Identifier: GPL-2.0 */
+
 #ifndef __BIONIC_COMPAT_H
 #define __BIONIC_COMPAT_H
 
