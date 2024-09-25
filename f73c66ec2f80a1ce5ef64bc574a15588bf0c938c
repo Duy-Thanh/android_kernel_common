@@ -205,7 +205,7 @@
         "value": {"expression":{"expressionString":"-branch:refs/meta/config"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["branch:refs/meta/config"]}
       },
       "submittabilityExpressionResult": {
-        "value": {"expression":{"expressionString":"-label:Lint=MIN AND (label:Lint=+2 OR -label:Lint=-1)"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Lint=MIN","label:Lint=+2","label:Lint=-1"]}
+        "value": {"expression":{"expressionString":"-label:Lint=MIN AND (label:Lint=+2 OR -label:Lint=-1)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":["label:Lint=-1"],"failingAtoms":["label:Lint=MIN","label:Lint=+2"]}
       },
       "overrideExpressionResult": {
         "value": {"expression":{"expressionString":"is:android_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","ownerin:mdb/android-triage-xwf-extended-access-team-policy"]}
