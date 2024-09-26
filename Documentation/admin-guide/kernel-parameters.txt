@@ -1514,6 +1514,22 @@
 			might take longer, especially on systems with a lot of
 			memory. Available with CONFIG_PAGE_EXTENSION=y.
 
+       exec.seal_nx_stack = [KNL]
+                       Format: { never | always }
+                       Seal NX STACK
+                       This overwrites KCONFIG CONFIG_SEAL_NX_STACK*
+                       - 'never':  never NX Stack.
+                       - 'always': always seal NX Stack.
+                       If not specified or invalid, default is the KCONFIG value.
+
+	exec.seal_system_mappings = [KNL]
+			Format: { never | always }
+			Seal system mappings such as vdso, vvar, sigpage, uprobes
+			This overwrites KCONFIG CONFIG_SEAL_SYSTEM_MAPPINGS_*
+			- 'never':  never seal system mappings.
+			- 'always': always seal system mappings.
+			If not specified or invalid, default is the KCONFIG value.
+
 	failslab=
 	fail_usercopy=
 	fail_page_alloc=

@@ -7,6 +7,50 @@ menu "Security options"
 
 source "security/keys/Kconfig"
 
+choice
+	prompt "Seal NX Stack"
+	default SEAL_NX_STACK_NEVER
+	help
+	  Seal NX STACK so it never become executable.
+	  Note: kernel command line exec.seal_nx_stack overwrites this.
+
+config SEAL_NX_STACK_NEVER
+	bool "Traditional behavior - not sealed"
+	help
+	  Do not NX Stack.
+	  This is default.
+
+config SEAL_NX_STACK_ALWAYS
+	bool "Always seal system mappings"
+	depends on 64BIT
+	help
+	  Seal NX Stack.
+endchoice
+
+choice
+	prompt "Seal system mappings"
+	default SEAL_SYSTEM_MAPPINGS_NEVER
+	help
+	  Seal system mappings such as vdso, vvar, sigpage, uprobes.
+	  Note: kernel command line exec.seal_system_mappings overwrite this.
+
+config SEAL_SYSTEM_MAPPINGS_NEVER
+	bool "Traditional behavior - not sealed"
+	help
+	  Do not seal system mappings.
+	  This is default.
+
+config SEAL_SYSTEM_MAPPINGS_ALWAYS
+	bool "Always seal system mappings"
+	depends on 64BIT
+	depends on !CHECKPOINT_RESTORE
+	help
+	  Seal system mappings such as vdso, vvar, sigpage, uprobes.
+	  Note: CHECKPOINT_RESTORE might relocate vdso mapping during restore,
+	  and remap will fail if the mapping is sealed, therefore
+	  !CHECKPOINT_RESTORE is added as dependency.
+endchoice
+
 config SECURITY_DMESG_RESTRICT
 	bool "Restrict unprivileged access to the kernel syslog"
 	default n

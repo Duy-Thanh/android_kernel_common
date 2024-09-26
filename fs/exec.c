@@ -67,7 +67,7 @@
 #include <linux/time_namespace.h>
 #include <linux/user_events.h>
 #include <linux/page_size_compat.h>
-
+#include <linux/fs_parser.h>
 #include <linux/uaccess.h>
 #include <asm/mmu_context.h>
 #include <asm/tlb.h>
@@ -114,6 +114,103 @@ bool path_noexec(const struct path *path)
 	return (path->mnt->mnt_flags & MNT_NOEXEC) ||
 	       (path->mnt->mnt_sb->s_iflags & SB_I_NOEXEC);
 }
+
+#ifdef CONFIG_64BIT
+/*
+ * Kernel cmdline overwrite for CONFIG_SEAL_NX_STACK_
+ */
+enum seal_nx_stack_type {
+	SEAL_NX_STACK_NEVER,
+	SEAL_NX_STACK_ALWAYS
+};
+
+static enum seal_nx_stack_type seal_nx_stack __ro_after_init =
+	IS_ENABLED(CONFIG_SEAL_NX_STACK_ALWAYS) ? SEAL_NX_STACK_ALWAYS :
+	SEAL_NX_STACK_NEVER;
+
+static const struct constant_table value_table_nx_stack[] __initconst = {
+	{ "never", SEAL_NX_STACK_NEVER},
+	{ "always", SEAL_NX_STACK_ALWAYS},
+	{ }
+};
+
+static int __init early_seal_nx_stack_override(char *buf)
+{
+	if (!buf)
+		return -EINVAL;
+
+	seal_nx_stack = lookup_constant(value_table_nx_stack,
+			buf, seal_nx_stack);
+
+	return 0;
+}
+
+early_param("exec.seal_nx_stack", early_seal_nx_stack_override);
+
+static inline bool seal_nx_stack_enabled(void)
+{
+	return true;
+}
+
+static inline void update_seal_nx_stack(unsigned long *vm_flags)
+{
+	if (seal_nx_stack_enabled())
+		*vm_flags |= VM_SEALED;
+}
+#else
+static inline void update_seal_nx_stack(unsigned long *vm_flags)
+{
+}
+#endif /* CONFIG_64BIT */
+
+#ifdef CONFIG_64BIT
+/*
+ * Kernel cmdline overwrite for CONFIG_SEAL_SYSTEM_MAPPINGS_X
+ */
+enum seal_system_mappings_type {
+	SEAL_SYSTEM_MAPPINGS_NEVER,
+	SEAL_SYSTEM_MAPPINGS_ALWAYS
+};
+
+static enum seal_system_mappings_type seal_system_mappings __ro_after_init =
+	IS_ENABLED(CONFIG_SEAL_SYSTEM_MAPPINGS_ALWAYS) ? SEAL_SYSTEM_MAPPINGS_ALWAYS :
+	SEAL_SYSTEM_MAPPINGS_NEVER;
+
+static const struct constant_table value_table_sys_mapping[] __initconst = {
+	{ "never", SEAL_SYSTEM_MAPPINGS_NEVER},
+	{ "always", SEAL_SYSTEM_MAPPINGS_ALWAYS},
+	{ }
+};
+
+static int __init early_seal_system_mappings_override(char *buf)
+{
+	if (!buf)
+		return -EINVAL;
+
+	seal_system_mappings = lookup_constant(value_table_sys_mapping,
+			buf, seal_system_mappings);
+
+	return 0;
+}
+
+early_param("exec.seal_system_mappings", early_seal_system_mappings_override);
+
+static bool seal_system_mappings_enabled(void)
+{
+	return true;
+}
+
+void update_seal_exec_system_mappings(unsigned long *vm_flags)
+{
+	if (seal_system_mappings_enabled())
+		*vm_flags |= VM_SEALED;
+
+}
+#else
+void update_seal_exec_system_mappings(unsigned long *vm_flags)
+{
+}
+#endif /* CONFIG_64BIT */
 
 #ifdef CONFIG_USELIB
 /*
@@ -813,8 +910,10 @@ int setup_arg_pages(struct linux_binprm *bprm,
 	 */
 	if (unlikely(executable_stack == EXSTACK_ENABLE_X))
 		vm_flags |= VM_EXEC;
-	else if (executable_stack == EXSTACK_DISABLE_X)
+	else if (executable_stack == EXSTACK_DISABLE_X) {
 		vm_flags &= ~VM_EXEC;
+		update_seal_nx_stack(&vm_flags);
+	}
 	vm_flags |= mm->def_flags;
 	vm_flags |= VM_STACK_INCOMPLETE_SETUP;
 
