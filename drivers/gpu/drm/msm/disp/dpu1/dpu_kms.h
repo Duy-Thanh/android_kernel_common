@@ -30,13 +30,39 @@
  * DPU_DEBUG - macro for kms/plane/crtc/encoder/connector logs
  * @fmt: Pointer to format string
  */
+<<<<<<< HEAD   (a103b6 Merge branch 'android15-6.6' into android15-6.6-desktop)
 #define DPU_DEBUG(fmt, ...) DRM_DEBUG_KMS(fmt, ##__VA_ARGS__)
+||||||| BASE
+#define DPU_DEBUG(fmt, ...)                                                \
+	do {                                                               \
+		if (drm_debug_enabled(DRM_UT_KMS))                         \
+			DRM_DEBUG(fmt, ##__VA_ARGS__); \
+		else                                                       \
+			pr_debug(fmt, ##__VA_ARGS__);                      \
+	} while (0)
+=======
+#define DPU_DEBUG(fmt, ...)                                                \
+	DRM_DEBUG_DRIVER(fmt, ##__VA_ARGS__)
+>>>>>>> BRANCH (e7a4f5 Revert "perf/aux: Fix AUX buffer serialization")
 
 /**
  * DPU_DEBUG_DRIVER - macro for hardware driver logging
  * @fmt: Pointer to format string
  */
+<<<<<<< HEAD   (a103b6 Merge branch 'android15-6.6' into android15-6.6-desktop)
 #define DPU_DEBUG_DRIVER(fmt, ...) DRM_DEBUG_DRIVER(fmt, ##__VA_ARGS__)
+||||||| BASE
+#define DPU_DEBUG_DRIVER(fmt, ...)                                         \
+	do {                                                               \
+		if (drm_debug_enabled(DRM_UT_DRIVER))                      \
+			DRM_ERROR(fmt, ##__VA_ARGS__); \
+		else                                                       \
+			pr_debug(fmt, ##__VA_ARGS__);                      \
+	} while (0)
+=======
+#define DPU_DEBUG_DRIVER(fmt, ...)                                         \
+	DRM_DEBUG_DRIVER(fmt, ##__VA_ARGS__)
+>>>>>>> BRANCH (e7a4f5 Revert "perf/aux: Fix AUX buffer serialization")
 
 #define DPU_ERROR(fmt, ...) DRM_ERROR(fmt, ##__VA_ARGS__)
 #define DPU_ERROR_RATELIMITED(fmt, ...) DRM_ERROR_RATELIMITED(fmt, ##__VA_ARGS__)
