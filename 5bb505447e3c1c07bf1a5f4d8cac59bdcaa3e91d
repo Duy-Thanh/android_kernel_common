@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "775054d9_3e66b32a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2024-09-26T02:31:57Z",
+      "side": 1,
+      "message": "The patch 3275873 will only be submitted to the OGKI branch. Please merge this patch.Thanks.",
+      "revId": "5bb505447e3c1c07bf1a5f4d8cac59bdcaa3e91d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
