@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a22f7150_de1a7a1c",
+        "filename": "tools/testing/selftests/android/include/bionic-compat.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-09-26T19:46:36Z",
+      "side": 1,
+      "message": "WARNING:SPDX_LICENSE_TAG: Missing or malformed SPDX-License-Identifier tag in line 1\n#25: FILE: tools/testing/selftests/android/include/bionic-compat.h:1:",
+      "revId": "6a91c7d8c5c9176402e7183164f8643887dd8579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
