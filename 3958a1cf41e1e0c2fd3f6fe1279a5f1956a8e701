@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9a4bd6_d464ac95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-26T19:38:25Z",
+      "side": 1,
+      "message": "Fix checkpatch issue:\n```\nWARNING:BAD_FIXES_TAG: Please use correct Fixes: style \u0027Fixes: \u003c12 chars of sha1\u003e (\"\u003ctitle line\u003e\")\u0027 - ie: \u0027Fixes: adf41f47375e (\"BACKPORT: OPP: Add dev_pm_opp_add_dynamic() to allow more flexibility\")\u0027\n```",
+      "revId": "3958a1cf41e1e0c2fd3f6fe1279a5f1956a8e701",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e08cd893_2f3b4a63",
