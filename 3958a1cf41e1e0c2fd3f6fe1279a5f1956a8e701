@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8bc95698_e4a3ae4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3298792
+      },
+      "writtenOn": "2024-09-26T19:57:46Z",
+      "side": 1,
+      "message": "Thanks for pointing that out. It should be fixed now.",
+      "parentUuid": "4d9a4bd6_d464ac95",
+      "revId": "3958a1cf41e1e0c2fd3f6fe1279a5f1956a8e701",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e08cd893_2f3b4a63",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
