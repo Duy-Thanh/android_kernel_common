@@ -40,6 +40,13 @@ static void blk_mq_update_wake_batch(struct blk_mq_tags *tags,
 void __blk_mq_tag_busy(struct blk_mq_hw_ctx *hctx)
 {
 	unsigned int users;
+<<<<<<< HEAD   (4786da Merge 6.1.106 into android14-6.1-lts)
+||||||| BASE
+	struct blk_mq_tags *tags = hctx->tags;
+=======
+	unsigned long flags;
+	struct blk_mq_tags *tags = hctx->tags;
+>>>>>>> BRANCH (311d85 Linux 6.1.107)
 
 	/*
 	 * calling test_bit() prior to test_and_set_bit() is intentional,
@@ -57,9 +64,23 @@ void __blk_mq_tag_busy(struct blk_mq_hw_ctx *hctx)
 			return;
 	}
 
+<<<<<<< HEAD   (4786da Merge 6.1.106 into android14-6.1-lts)
 	users = atomic_inc_return(&hctx->tags->active_queues);
 
 	blk_mq_update_wake_batch(hctx->tags, users);
+||||||| BASE
+	spin_lock_irq(&tags->lock);
+	users = tags->active_queues + 1;
+	WRITE_ONCE(tags->active_queues, users);
+	blk_mq_update_wake_batch(tags, users);
+	spin_unlock_irq(&tags->lock);
+=======
+	spin_lock_irqsave(&tags->lock, flags);
+	users = tags->active_queues + 1;
+	WRITE_ONCE(tags->active_queues, users);
+	blk_mq_update_wake_batch(tags, users);
+	spin_unlock_irqrestore(&tags->lock, flags);
+>>>>>>> BRANCH (311d85 Linux 6.1.107)
 }
 
 /*
