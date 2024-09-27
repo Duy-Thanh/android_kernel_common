@@ -22,6 +22,29 @@
       },
       "revId": "46452cc3f5fe46ee915efe1540595d5b6391509c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e56bca7_3ab18c14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-09-27T23:37:45Z",
+      "side": 1,
+      "message": "You can remove this extra Change-Id line",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 52
+      },
+      "revId": "46452cc3f5fe46ee915efe1540595d5b6391509c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
