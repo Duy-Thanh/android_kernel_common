@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e4fb588_6e6dd697",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-27T15:20:50Z",
+      "side": 1,
+      "message": "If this is an upstream change, it should have the `UPSTREAM` or `BACKPORT` prefix.",
+      "revId": "d5aa49054cf4683e930bdf4f7c05b6c18c26bfcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
