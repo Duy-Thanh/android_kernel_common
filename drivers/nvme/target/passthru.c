@@ -226,13 +226,13 @@ static void nvmet_passthru_execute_cmd_work(struct work_struct *w)
 	    req->cmd->common.opcode == nvme_admin_identify) {
 		switch (req->cmd->identify.cns) {
 		case NVME_ID_CNS_CTRL:
-			status = nvmet_passthru_override_id_ctrl(req);
+			nvmet_passthru_override_id_ctrl(req);
 			break;
 		case NVME_ID_CNS_NS:
-			status = nvmet_passthru_override_id_ns(req);
+			nvmet_passthru_override_id_ns(req);
 			break;
 		case NVME_ID_CNS_NS_DESC_LIST:
-			status = nvmet_passthru_override_id_descs(req);
+			nvmet_passthru_override_id_descs(req);
 			break;
 		}
 	} else if (status < 0)

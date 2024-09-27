@@ -88,13 +88,9 @@ static int mlx5_lag_create_port_sel_table(struct mlx5_lag *ldev,
 								      &dest, 1);
 			if (IS_ERR(lag_definer->rules[idx])) {
 				err = PTR_ERR(lag_definer->rules[idx]);
-				do {
-					while (j--) {
-						idx = i * ldev->buckets + j;
+				while (i--)
+					while (j--)
 						mlx5_del_flow_rules(lag_definer->rules[idx]);
-					}
-					j = ldev->buckets;
-				} while (i--);
 				goto destroy_fg;
 			}
 		}

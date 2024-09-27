@@ -73,10 +73,11 @@ int br_mst_get_state(const struct net_device *dev, u16 msti, u8 *state)
 }
 EXPORT_SYMBOL_GPL(br_mst_get_state);
 
-static void br_mst_vlan_set_state(struct net_bridge_vlan_group *vg,
-				  struct net_bridge_vlan *v,
+static void br_mst_vlan_set_state(struct net_bridge_port *p, struct net_bridge_vlan *v,
 				  u8 state)
 {
+	struct net_bridge_vlan_group *vg = nbp_vlan_group(p);
+
 	if (br_vlan_get_state(v) == state)
 		return;
 
@@ -102,7 +103,7 @@ int br_mst_set_state(struct net_bridge_port *p, u16 msti, u8 state,
 	int err = 0;
 
 	rcu_read_lock();
-	vg = nbp_vlan_group_rcu(p);
+	vg = nbp_vlan_group(p);
 	if (!vg)
 		goto out;
 
@@ -120,7 +121,7 @@ int br_mst_set_state(struct net_bridge_port *p, u16 msti, u8 state,
 		if (v->brvlan->msti != msti)
 			continue;
 
-		br_mst_vlan_set_state(vg, v, state);
+		br_mst_vlan_set_state(p, v, state);
 	}
 
 out:
@@ -139,13 +140,13 @@ static void br_mst_vlan_sync_state(struct net_bridge_vlan *pv, u16 msti)
 		 * it.
 		 */
 		if (v != pv && v->brvlan->msti == msti) {
-			br_mst_vlan_set_state(vg, pv, v->state);
+			br_mst_vlan_set_state(pv->port, pv, v->state);
 			return;
 		}
 	}
 
 	/* Otherwise, start out in a new MSTI with all ports disabled. */
-	return br_mst_vlan_set_state(vg, pv, BR_STATE_DISABLED);
+	return br_mst_vlan_set_state(pv->port, pv, BR_STATE_DISABLED);
 }
 
 int br_mst_vlan_set_msti(struct net_bridge_vlan *mv, u16 msti)

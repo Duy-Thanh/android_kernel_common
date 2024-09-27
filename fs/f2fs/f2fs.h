@@ -70,7 +70,7 @@ enum {
 
 struct f2fs_fault_info {
 	atomic_t inject_ops;
-	int inject_rate;
+	unsigned int inject_rate;
 	unsigned int inject_type;
 };
 
@@ -4538,14 +4538,10 @@ static inline bool f2fs_need_verity(const struct inode *inode, pgoff_t idx)
 }
 
 #ifdef CONFIG_F2FS_FAULT_INJECTION
-extern int f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned long rate,
-							unsigned long type);
+extern void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
+							unsigned int type);
 #else
-static inline int f2fs_build_fault_attr(struct f2fs_sb_info *sbi,
-					unsigned long rate, unsigned long type)
-{
-	return 0;
-}
+#define f2fs_build_fault_attr(sbi, rate, type)		do { } while (0)
 #endif
 
 static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)

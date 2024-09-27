@@ -127,6 +127,7 @@ struct Qdisc {
 
 	struct rcu_head		rcu;
 	netdevice_tracker	dev_tracker;
+
 	ANDROID_KABI_RESERVE(1);
 
 	/* private data */
