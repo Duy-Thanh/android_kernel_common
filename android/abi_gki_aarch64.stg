@@ -184,6 +184,11 @@ pointer_reference {
   pointee_type_id: 0x28e34a3d
 }
 pointer_reference {
+  id: 0x00abf683
+  kind: POINTER
+  pointee_type_id: 0x28ef3c91
+}
+pointer_reference {
   id: 0x00b27c00
   kind: POINTER
   pointee_type_id: 0x2889169c
@@ -2907,6 +2912,11 @@ pointer_reference {
   id: 0x0ab9fa4c
   kind: POINTER
   pointee_type_id: 0x00a70faf
+}
+pointer_reference {
+  id: 0x0abac407
+  kind: POINTER
+  pointee_type_id: 0x00abf683
 }
 pointer_reference {
   id: 0x0ac23bc5
@@ -31484,6 +31494,11 @@ typedef {
   referred_type_id: 0x0b8d77a1
 }
 typedef {
+  id: 0x28ef3c91
+  name: "pg_data_t"
+  referred_type_id: 0x264eeece
+}
+typedef {
   id: 0xaf12ea2c
   name: "pgd_t"
   referred_type_id: 0x1496620e
@@ -36506,6 +36521,11 @@ array {
   id: 0x2637f572
   number_of_elements: 3
   element_type_id: 0xd3c80119
+}
+array {
+  id: 0x2658a263
+  number_of_elements: 3
+  element_type_id: 0xd2755d5f
 }
 array {
   id: 0x273ad3f4
@@ -299512,6 +299532,15 @@ function {
   parameter_id: 0x06835e9c
 }
 function {
+  id: 0x16f8db1d
+  return_type_id: 0x48b5725f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x13580d6c
+  parameter_id: 0x0abac407
+  parameter_id: 0x064d6086
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x16fd178e
   return_type_id: 0x3015c47d
   parameter_id: 0x3015c47d
@@ -382537,6 +382566,15 @@ elf_symbol {
   full_name: "lowpan_unregister_netdevice"
 }
 elf_symbol {
+  id: 0xf2af3ba0
+  name: "lru_gen_caps"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xc393fa71
+  type_id: 0x2658a263
+  full_name: "lru_gen_caps"
+}
+elf_symbol {
   id: 0x7bd17841
   name: "mac_pton"
   is_defined: true
@@ -407200,6 +407238,15 @@ elf_symbol {
   full_name: "unmap_mapping_range"
 }
 elf_symbol {
+  id: 0xa86562be
+  name: "unpack_shadow"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x78412280
+  type_id: 0x16f8db1d
+  full_name: "unpack_shadow"
+}
+elf_symbol {
   id: 0x60ffe144
   name: "unpin_user_page"
   is_defined: true
@@ -418841,6 +418888,7 @@ interface {
   symbol_id: 0xbc74f02a
   symbol_id: 0x01bea327
   symbol_id: 0x4f31c756
+  symbol_id: 0xf2af3ba0
   symbol_id: 0x7bd17841
   symbol_id: 0xf4530070
   symbol_id: 0x7ee18475
@@ -421582,6 +421630,7 @@ interface {
   symbol_id: 0x11fd8c82
   symbol_id: 0x3cace439
   symbol_id: 0xe41b8f90
+  symbol_id: 0xa86562be
   symbol_id: 0x60ffe144
   symbol_id: 0xffd70606
   symbol_id: 0xe19f4159
