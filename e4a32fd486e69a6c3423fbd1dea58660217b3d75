@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1d4040_dacd5f1c",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T19:10:37Z",
+      "side": 1,
+      "message": "Style nit - what about\n\n```\nlet asma_file \u003d {\n  let asma \u003d me.inner.lock();\n  // ...\n  if let Some(asma_file) \u003d asma.file {\n    asma_file.clone()\n  } else {\n    return Err(EBADF);\n  }\n};\n```\n\n? I don\u0027t know if we have an official Rust-for-Linux style guide yet, but usually I recommend avoiding explicit drops because it obfuscates what scopes things are valid over.",
+      "revId": "e4a32fd486e69a6c3423fbd1dea58660217b3d75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9533a486_2b8cec26",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T19:10:37Z",
+      "side": 1,
+      "message": "If this being safe requires the `ShmemFile` to be wrapped in an `AshmemInner`, and the fpos lock on *that* to be held, then shouldn\u0027t the function itself be unsafe, because it is only safe when called from that context?",
+      "revId": "e4a32fd486e69a6c3423fbd1dea58660217b3d75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08accf67_c2020e9a",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T19:10:37Z",
+      "side": 1,
+      "message": "We should probably extend `to_result` to handle other common integer types like `ssize_t`...",
+      "revId": "e4a32fd486e69a6c3423fbd1dea58660217b3d75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
