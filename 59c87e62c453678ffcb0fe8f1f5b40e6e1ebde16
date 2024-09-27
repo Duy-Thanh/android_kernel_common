@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bccd2636_23f87995",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-09-27T17:22:13Z",
+      "side": 1,
+      "message": "Can\u0027t we use gcov flag to build kernel_aarch64 including the gcov files needed for kunit instead having to define a separate target? For line 1144, you can use select to enable gcov files when gcov is enabled. Please see https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/BUILD.bazel;drc\u003d1281c3ccca87bd38b88cca87b64d813d9cd11c16;l\u003d810 select as example",
+      "range": {
+        "startLine": 1106,
+        "startChar": 12,
+        "endLine": 1106,
+        "endChar": 31
+      },
+      "revId": "59c87e62c453678ffcb0fe8f1f5b40e6e1ebde16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
