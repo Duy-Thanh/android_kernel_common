@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750642f2_6b9c95d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-09-27T23:39:15Z",
+      "side": 1,
+      "message": "Author should be \"Pierre-Louis Bossart \u003cpierre-louis.bossart@linux.intel.com\u003e\". See first change on details of how to retain that when you cherry-pick a patch.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 40
+      },
+      "revId": "10e9098be7888e5af6f037a7ba6244f6f8e79cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eae4003_27753685",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-09-27T23:39:15Z",
+      "side": 1,
+      "message": "Remove extra change-id",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "10e9098be7888e5af6f037a7ba6244f6f8e79cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
