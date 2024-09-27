@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "970b726d_6827f119",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-09-27T23:35:49Z",
+      "side": 1,
+      "message": "The author should be \"Pierre-Louis Bossart \u003cpierre-louis.bossart@linux.intel.com\u003e\". You can update that with the command:\n\n```\ngit commit --amend --author \"Pierre-Louis Bossart \u003cpierre-louis.bossart@linux.intel.com\u003e\"\n```\nTo avoid having to manually set the author, you can instead just directly cherry-pick the patch like this:\n\n```\ngit cherry-pick -x -s \u003cupstream commit sha1\u003e\n```",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 40
+      },
+      "revId": "46452cc3f5fe46ee915efe1540595d5b6391509c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
