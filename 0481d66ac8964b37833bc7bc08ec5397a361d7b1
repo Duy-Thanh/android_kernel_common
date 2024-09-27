@@ -52,6 +52,24 @@
       "parentUuid": "30ade5ac_1d01dc8d",
       "revId": "0481d66ac8964b37833bc7bc08ec5397a361d7b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acce2045_fa64132f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1044503
+      },
+      "writtenOn": "2024-09-27T18:56:31Z",
+      "side": 1,
+      "message": "I am likely to rebase at -rc1. It is better to make it FROMLIST until then. Once I respond as applied officially, SHA is finalised.",
+      "parentUuid": "7fab24bb_fd4b5d4f",
+      "revId": "0481d66ac8964b37833bc7bc08ec5397a361d7b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
