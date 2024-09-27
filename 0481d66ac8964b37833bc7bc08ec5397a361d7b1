@@ -16,6 +16,24 @@
       "message": "this sha1 is not in upstream mainline. Should this be FROMGIT and cite a maintainer tree?",
       "revId": "0481d66ac8964b37833bc7bc08ec5397a361d7b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ade5ac_1d01dc8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1896910
+      },
+      "writtenOn": "2024-09-27T18:03:17Z",
+      "side": 1,
+      "message": "The commit is in linux-next/master for now in the SCMI tree.",
+      "parentUuid": "eb5085c3_fbf261b2",
+      "revId": "0481d66ac8964b37833bc7bc08ec5397a361d7b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
