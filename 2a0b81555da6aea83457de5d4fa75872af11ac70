@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67e05408_af62a49b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T22:34:57Z",
+      "side": 1,
+      "message": "Are we sure that unbounded blocking of a pin/unpin operation is OK performance-wise? Normally, resource reclaiming code needs to be able to get out of the way of active processing.",
+      "revId": "2a0b81555da6aea83457de5d4fa75872af11ac70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cfecc19_0d34c395",
+        "filename": "drivers/staging/android/ashmem_range.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T22:34:57Z",
+      "side": 1,
+      "message": "This is much more aggressive blocking behavior than the existing ashmem shrinker has - the existing one has bounded waiting for any pin/unpin calls - note the `mutex_trylock()` it uses at the end of each loop iteration - if someone else is trying to do a pin/unpin operation, and a shrink is in progress, it will only ever process one item before letting the `pin`/`unpin` proceed.",
+      "revId": "2a0b81555da6aea83457de5d4fa75872af11ac70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d838e7f_62dc6f8b",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T22:34:57Z",
+      "side": 1,
+      "message": "This may be the right choice, but this is different behavior than the shrinker in existing ashmem - it limits the scan to LONG_MAX.",
+      "range": {
+        "startLine": 476,
+        "startChar": 49,
+        "endLine": 476,
+        "endChar": 59
+      },
+      "revId": "2a0b81555da6aea83457de5d4fa75872af11ac70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
