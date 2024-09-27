@@ -34,6 +34,24 @@
       "parentUuid": "918daa23_413722a2",
       "revId": "259ac8fb507adc23cb2d6ed892318ddfd04687e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5db0b995_3a74d767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896910
+      },
+      "writtenOn": "2024-09-27T21:03:00Z",
+      "side": 1,
+      "message": "This is already in a maintainers tree, otherwise it would not be in linux-next:\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/sudeep.holla/linux.git/log/?h\u003dfor-next/scmi/updates",
+      "parentUuid": "cc4f4cb2_ccb275dd",
+      "revId": "259ac8fb507adc23cb2d6ed892318ddfd04687e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
