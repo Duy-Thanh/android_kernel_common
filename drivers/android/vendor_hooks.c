@@ -535,6 +535,30 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_group_exit);
+<<<<<<< HEAD   (1ac3023317a04c496fad1ba0311db8f65d0e23ee ANDROID: vendor_hooks: add hook for boost free pages mapped )
+||||||| BASE   (f58bdcdd1b4b35f71007954bf8708607b8a126f7 ANDROID: vendor_hooks: add hook for boost free pages mapped )
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_end);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_begin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_end);
+>>>>>>> CHANGE (8addb8f1e2eeb9cca9ac5c874d7cafd8c7431551 ANDROID: mm: add vendor hook for direct reclaim)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_read_swap_cache_async_timeout);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru_folio_activate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
