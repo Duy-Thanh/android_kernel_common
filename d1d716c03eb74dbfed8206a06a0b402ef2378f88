@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1cfed0b_5ded097f",
+        "filename": "drivers/staging/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T17:16:24Z",
+      "side": 1,
+      "message": "This seems wrong - this says that `android/` needs to be examined regardless of whether `CONFIG_ASHMEM` or `CONFIG_ASHMEM_RUST` are enabled.",
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "762ed063_4bbdec6d",
+        "filename": "drivers/staging/android/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T17:16:24Z",
+      "side": 1,
+      "message": "Should this be exclusive with `ASHMEM`?",
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31125253_0cff488e",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T17:16:24Z",
+      "side": 1,
+      "message": "The `pr_` family of functions normally prefix the module name onto the log message - no need to declare our module name in the message if it\u0027s already there.",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f52b673_16daaf32",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T17:16:24Z",
+      "side": 1,
+      "message": "`_info` ? Nothing\u0027s wrong here",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
