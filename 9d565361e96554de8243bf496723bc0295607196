@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47fce16f_a62b6486",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-09-27T11:04:21Z",
+      "side": 1,
+      "message": "This depends on https://android-review.googlesource.com/c/kernel/build/+/3285438",
+      "revId": "9d565361e96554de8243bf496723bc0295607196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
