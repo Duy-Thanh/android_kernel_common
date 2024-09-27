@@ -49,6 +49,7 @@ DECLARE_HOOK(android_vh_use_vm_swappiness,
 DECLARE_HOOK(android_vh_tune_scan_control,
 	TP_PROTO(bool *skip_swap),
 	TP_ARGS(skip_swap));
+<<<<<<< HEAD   (4e4406 ANDROID: ABI: update symbol list for amlogic)
 DECLARE_HOOK(android_vh_page_referenced_check_bypass,
 	TP_PROTO(struct folio *folio, unsigned long nr_to_scan, int lru, bool *bypass),
 	TP_ARGS(folio, nr_to_scan, lru, bypass));
@@ -56,6 +57,59 @@ enum scan_balance;
 DECLARE_HOOK(android_vh_tune_scan_type,
 	TP_PROTO(enum scan_balance *scan_type),
 	TP_ARGS(scan_type));
+||||||| BASE
+DECLARE_HOOK(android_vh_handle_trylock_failed_folio,
+	TP_PROTO(struct list_head *folio_list),
+	TP_ARGS(folio_list));
+DECLARE_HOOK(android_vh_folio_trylock_set,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_trylock_clear,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_get_folio_trylock_result,
+	TP_PROTO(struct folio *folio, bool *trylock_failed),
+	TP_ARGS(folio, trylock_failed));
+DECLARE_HOOK(android_vh_do_folio_trylock,
+	TP_PROTO(struct folio *folio, struct rw_semaphore *sem,
+		bool *got_lock, bool *skip),
+	TP_ARGS(folio, sem, got_lock, skip));
+DECLARE_HOOK(android_vh_shrink_node_memcgs,
+	TP_PROTO(struct mem_cgroup *memcg, bool *skip),
+	TP_ARGS(memcg, skip));
+DECLARE_HOOK(android_vh_should_memcg_bypass,
+	TP_PROTO(struct mem_cgroup *memcg, int priority, bool *bypass),
+	TP_ARGS(memcg, priority, bypass));
+=======
+DECLARE_HOOK(android_vh_handle_trylock_failed_folio,
+	TP_PROTO(struct list_head *folio_list),
+	TP_ARGS(folio_list));
+DECLARE_HOOK(android_vh_folio_trylock_set,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_trylock_clear,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_get_folio_trylock_result,
+	TP_PROTO(struct folio *folio, bool *trylock_failed),
+	TP_ARGS(folio, trylock_failed));
+DECLARE_HOOK(android_vh_do_folio_trylock,
+	TP_PROTO(struct folio *folio, struct rw_semaphore *sem,
+		bool *got_lock, bool *skip),
+	TP_ARGS(folio, sem, got_lock, skip));
+DECLARE_HOOK(android_vh_shrink_node_memcgs,
+	TP_PROTO(struct mem_cgroup *memcg, bool *skip),
+	TP_ARGS(memcg, skip));
+DECLARE_HOOK(android_vh_should_memcg_bypass,
+	TP_PROTO(struct mem_cgroup *memcg, int priority, bool *bypass),
+	TP_ARGS(memcg, priority, bypass));
+DECLARE_HOOK(android_vh_direct_reclaim_begin,
+	TP_PROTO(int *prio),
+	TP_ARGS(prio));
+DECLARE_HOOK(android_vh_direct_reclaim_end,
+	TP_PROTO(int prio),
+	TP_ARGS(prio));
+>>>>>>> CHANGE (650800 ANDROID: mm: add vendor hook for direct reclaim)
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
