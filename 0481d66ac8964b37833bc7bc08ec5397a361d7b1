@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5085c3_fbf261b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-27T17:56:52Z",
+      "side": 1,
+      "message": "this sha1 is not in upstream mainline. Should this be FROMGIT and cite a maintainer tree?",
+      "revId": "0481d66ac8964b37833bc7bc08ec5397a361d7b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
