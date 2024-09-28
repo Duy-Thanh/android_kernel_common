@@ -798,8 +798,13 @@ enum {
 	FI_ALIGNED_WRITE,	/* enable aligned write */
 	FI_COW_FILE,		/* indicate COW file */
 	FI_ATOMIC_COMMITTED,	/* indicate atomic commit completed except disk sync */
+<<<<<<< HEAD   (9571a8 Merge 6.1.108 into android14-6.1-lts)
 	FI_ATOMIC_DIRTIED,	/* indicate atomic file is dirtied */
 	FI_ATOMIC_REPLACE,	/* indicate atomic replace */
+||||||| BASE
+=======
+	FI_OPENED_FILE,         /* indicate file has been opened */
+>>>>>>> BRANCH (5ca5b3 Linux 6.1.109)
 	FI_MAX,			/* max flag, never be used */
 };
 
