@@ -417,9 +417,9 @@ free_info:
 }
 
 static int vmsg_find_vqs(struct virtio_device *vdev, unsigned int nvqs,
-		       struct virtqueue *vqs[],
-		       struct virtqueue_info vqs_info[],
-		       struct irq_affinity *desc)
+                        struct virtqueue *vqs[], vq_callback_t *callbacks[],
+                        const char * const names[], const bool *ctx,
+                        struct irq_affinity *desc)
 {
 	struct virtio_msg_device *vmdev = to_virtio_msg_device(vdev);
 	int i, ret, queue_idx = 0;
@@ -429,15 +429,14 @@ static int vmsg_find_vqs(struct virtio_device *vdev, unsigned int nvqs,
 		return ret;
 
 	for (i = 0; i < nvqs; ++i) {
-		struct virtqueue_info *vqi = &vqs_info[i];
 
-		if (!vqi->name) {
+		if (!names[i]) {
 			vqs[i] = NULL;
 			continue;
 		}
 
-		vqs[i] = vmsg_setup_vq(vmdev, queue_idx++, vqi->callback,
-				     vqi->name, vqi->ctx);
+		vqs[i] = vmsg_setup_vq(vmdev, queue_idx++, callbacks[i],
+				     names[i], ctx[i]);
 		if (IS_ERR(vqs[i])) {
 			vmsg_del_vqs(vdev);
 			return PTR_ERR(vqs[i]);
