@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc564e8_e23e5724",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-09-30T15:18:13Z",
+      "side": 1,
+      "message": "no, please NEVER use this code in ANY Android system AT ALL.\n\nIt is not designed for any system with any external or local users at all, and is full of known security issues and can ONLY be used in locked-down systems that are fully under your control in an industrial-type system.  Odds are you do NOT have this hardware, and if you do, please build this on your own and then you will be responsible for it.",
+      "range": {
+        "startLine": 9,
+        "startChar": 16,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "5588f2d40f723ee9129386e8486cf5f7ec335822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
