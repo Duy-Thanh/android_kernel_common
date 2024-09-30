@@ -52,6 +52,24 @@
       "parentUuid": "cc4f4cb2_ccb275dd",
       "revId": "259ac8fb507adc23cb2d6ed892318ddfd04687e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f80df009_a1a3fead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-30T17:41:42Z",
+      "side": 1,
+      "message": "In that case, please change to FROMGIT and cite the patch in the maintainer tree (not linux-next). See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "5db0b995_3a74d767",
+      "revId": "259ac8fb507adc23cb2d6ed892318ddfd04687e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
