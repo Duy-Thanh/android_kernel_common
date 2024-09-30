@@ -206,7 +206,7 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
 	cma->order_per_bit = order_per_bit;
 	*res_cma = cma;
 	cma_area_count++;
-	totalcma_pages += (size / PAGE_SIZE);
+	totalcma_pages += cma->count;
 
 	return 0;
 }
@@ -407,6 +407,7 @@ static void cma_debug_show_areas(struct cma *cma)
 	spin_unlock_irq(&cma->lock);
 }
 
+<<<<<<< HEAD   (e663f2 Merge 1868f9d0260e ("Merge tag 'for-linux-6.12-ofs1' of git:)
 /**
  * __cma_alloc() - allocate pages from contiguous area
  * @cma:   Contiguous memory region for which the allocation is performed.
@@ -420,6 +421,23 @@ static void cma_debug_show_areas(struct cma *cma)
  */
 struct page *__cma_alloc(struct cma *cma, unsigned long count,
 		       unsigned int align, gfp_t gfp_mask)
+||||||| BASE
+/**
+ * cma_alloc() - allocate pages from contiguous area
+ * @cma:   Contiguous memory region for which the allocation is performed.
+ * @count: Requested number of pages.
+ * @align: Requested alignment of pages (in PAGE_SIZE order).
+ * @no_warn: Avoid printing message about failed allocation
+ *
+ * This function allocates part of contiguous memory on specific
+ * contiguous memory area.
+ */
+struct page *cma_alloc(struct cma *cma, unsigned long count,
+		       unsigned int align, bool no_warn)
+=======
+static struct page *__cma_alloc(struct cma *cma, unsigned long count,
+				unsigned int align, gfp_t gfp)
+>>>>>>> BRANCH (7856a5 Merge tag 'mm-nonmm-stable-2024-09-21-07-52' of git://git.ke)
 {
 	unsigned long mask, offset;
 	unsigned long pfn = -1;
@@ -495,7 +513,14 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 
 		pfn = cma->base_pfn + (bitmap_no << cma->order_per_bit);
 		mutex_lock(&cma_mutex);
+<<<<<<< HEAD   (e663f2 Merge 1868f9d0260e ("Merge tag 'for-linux-6.12-ofs1' of git:)
 		ret = alloc_contig_range(pfn, pfn + count, MIGRATE_CMA, gfp_mask);
+||||||| BASE
+		ret = alloc_contig_range(pfn, pfn + count, MIGRATE_CMA,
+				     GFP_KERNEL | (no_warn ? __GFP_NOWARN : 0));
+=======
+		ret = alloc_contig_range(pfn, pfn + count, MIGRATE_CMA, gfp);
+>>>>>>> BRANCH (7856a5 Merge tag 'mm-nonmm-stable-2024-09-21-07-52' of git://git.ke)
 		mutex_unlock(&cma_mutex);
 		if (ret == 0) {
 			page = pfn_to_page(pfn);
@@ -525,7 +550,13 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 			page_kasan_tag_reset(nth_page(page, i));
 	}
 
+<<<<<<< HEAD   (e663f2 Merge 1868f9d0260e ("Merge tag 'for-linux-6.12-ofs1' of git:)
 	if (ret && !(gfp_mask & __GFP_NOWARN)) {
+||||||| BASE
+	if (ret && !no_warn) {
+=======
+	if (ret && !(gfp & __GFP_NOWARN)) {
+>>>>>>> BRANCH (7856a5 Merge tag 'mm-nonmm-stable-2024-09-21-07-52' of git://git.ke)
 		pr_err_ratelimited("%s: %s: alloc failed, req-size: %lu pages, ret: %d\n",
 				   __func__, cma->name, count, ret);
 		cma_debug_show_areas(cma);
@@ -562,6 +593,34 @@ struct page *cma_alloc(struct cma *cma, unsigned long count,
 				(no_warn ? __GFP_NOWARN : 0));
 }
 EXPORT_SYMBOL_GPL(cma_alloc);
+
+/**
+ * cma_alloc() - allocate pages from contiguous area
+ * @cma:   Contiguous memory region for which the allocation is performed.
+ * @count: Requested number of pages.
+ * @align: Requested alignment of pages (in PAGE_SIZE order).
+ * @no_warn: Avoid printing message about failed allocation
+ *
+ * This function allocates part of contiguous memory on specific
+ * contiguous memory area.
+ */
+struct page *cma_alloc(struct cma *cma, unsigned long count,
+		       unsigned int align, bool no_warn)
+{
+	return __cma_alloc(cma, count, align, GFP_KERNEL | (no_warn ? __GFP_NOWARN : 0));
+}
+
+struct folio *cma_alloc_folio(struct cma *cma, int order, gfp_t gfp)
+{
+	struct page *page;
+
+	if (WARN_ON(!order || !(gfp & __GFP_COMP)))
+		return NULL;
+
+	page = __cma_alloc(cma, 1 << order, order, gfp);
+
+	return page ? page_folio(page) : NULL;
+}
 
 bool cma_pages_valid(struct cma *cma, const struct page *pages,
 		     unsigned long count)
@@ -614,6 +673,14 @@ bool cma_release(struct cma *cma, const struct page *pages,
 	return true;
 }
 EXPORT_SYMBOL_GPL(cma_release);
+
+bool cma_free_folio(struct cma *cma, const struct folio *folio)
+{
+	if (WARN_ON(!folio_test_large(folio)))
+		return false;
+
+	return cma_release(cma, &folio->page, folio_nr_pages(folio));
+}
 
 int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
 {
