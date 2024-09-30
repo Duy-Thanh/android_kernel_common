@@ -16,6 +16,24 @@
       "message": "Redefinition of `UVC_QUIRK_DISABLE_AUTOSUSPEND` from line #81.",
       "revId": "a103b671358d588f0e7defac4642a60cd3d5e945",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "198097d4_e1d94288",
+        "filename": "drivers/media/usb/uvc/uvcvideo.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-09-30T17:01:26Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "0bd884d1_4b333871",
+      "revId": "a103b671358d588f0e7defac4642a60cd3d5e945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
