@@ -315562,6 +315562,12 @@ function {
   parameter_id: 0x9fe5c5a6
 }
 function {
+  id: 0x3766a595
+  return_type_id: 0x33756485
+  parameter_id: 0x1d5bae2a
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x37677261
   return_type_id: 0x33756485
   parameter_id: 0x14abdd00
@@ -395134,6 +395140,15 @@ elf_symbol {
   full_name: "memcg_kmem_online_key"
 }
 elf_symbol {
+  id: 0x79d24533
+  name: "memcg_page_state"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6c98e5c3
+  type_id: 0x3766a595
+  full_name: "memcg_page_state"
+}
+elf_symbol {
   id: 0xbf158d63
   name: "memcg_sockets_enabled_key"
   is_defined: true
@@ -430401,6 +430416,7 @@ interface {
   symbol_id: 0x01e78001
   symbol_id: 0x746374fa
   symbol_id: 0x73553ac1
+  symbol_id: 0x79d24533
   symbol_id: 0xbf158d63
   symbol_id: 0xaa97e158
   symbol_id: 0x0b518e04
