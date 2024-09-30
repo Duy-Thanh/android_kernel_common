@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/370263554",
       "revId": "0cec32344ba6346837c0b10b830f7ef8e38066ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e392b4c0_8734cfcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-09-30T09:42:51Z",
+      "side": 1,
+      "message": "The base change has no corresponding change in android15-6.6",
+      "revId": "0cec32344ba6346837c0b10b830f7ef8e38066ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
