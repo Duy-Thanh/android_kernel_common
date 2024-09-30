@@ -79,7 +79,10 @@
 #include <linux/vmalloc.h>
 #include <linux/sched/sysctl.h>
 #include <linux/set_memory.h>
+#include <linux/proc_fs.h>
 
+#include <linux/hashtable.h>
+#include <linux/sort.h>
 #include <trace/events/kmem.h>
 #include <trace/hooks/mm.h>
 
@@ -3817,6 +3820,38 @@ static vm_fault_t handle_pte_marker(struct vm_fault *vmf)
 	return VM_FAULT_SIGBUS;
 }
 
+static pid_t swap_tracked_pid = -1;
+
+// spin lock to protect the hash-table holding the swapped pages info
+static DEFINE_SPINLOCK(swapped_pages_lock);
+
+#define SWAP_TRACK_HASH_BITS 8
+static DEFINE_HASHTABLE(swapped_pages_ht, SWAP_TRACK_HASH_BITS);
+
+// Data structure to store swapped-in pages for a process
+struct swapped_page_info {
+    unsigned long vaddr;   // Virtual address of swapped-in page
+    struct hlist_node node;
+};
+
+static void track_swapped_in_page(struct vm_fault *vmf)
+{
+    struct swapped_page_info *info;
+
+    // Allocate a new node for the swapped page
+    info = kmalloc(sizeof(*info), GFP_KERNEL);
+    if (!info)
+        return;
+
+    info->vaddr = vmf->address;
+    spin_lock(&swapped_pages_lock);
+
+    // Insert into the hash table
+    hash_add(swapped_pages_ht, &info->node, info->vaddr);
+
+    spin_unlock(&swapped_pages_lock);
+}
+
 /*
  * We enter with non-exclusive mmap_lock (to exclude vma changes,
  * but allow concurrent faults), and pte mapped but not yet locked.
@@ -3969,6 +4004,10 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 		ret = VM_FAULT_MAJOR;
 		count_vm_event(PGMAJFAULT);
 		count_memcg_event_mm(vma->vm_mm, PGMAJFAULT);
+		if (vmf->vma->vm_mm->owner->pid == swap_tracked_pid) {
+			// This is a swap-in for the process we are tracking
+			track_swapped_in_page(vmf);
+		}
 	} else if (PageHWPoison(page)) {
 		/*
 		 * hwpoisoned dirty swapcache pages are kept for killing
@@ -6250,3 +6289,181 @@ int set_direct_map_range_uncached(unsigned long addr, unsigned long numpages)
 #endif
 }
 EXPORT_SYMBOL_GPL(set_direct_map_range_uncached);
+
+static ssize_t pid_store(struct kobject *kobj, struct kobj_attribute *attr,
+			 const char *buf, size_t count)
+{
+	if (kstrtoint(buf, 10, &swap_tracked_pid)) {
+		return -EINVAL;
+	}
+	pr_info("swapped-in page tracking pid for %u\n", (unsigned int)swap_tracked_pid);
+	return count;
+}
+
+static struct kobj_attribute swap_tracked_pid_attribute =
+__ATTR(swap_tracked_pid, 0220, NULL, pid_store);
+
+// Temporary array for storing sorted addresses
+static unsigned long *sorted_addrs;
+static int sorted_addrs_count;
+static struct proc_dir_entry *proc_entry;
+
+/* This function is a helper function to show the swapped-in
+ * page addresses in a formatted manner.
+ */
+static int collect_swapped_page_addresses(void)
+{
+	struct swapped_page_info *info;
+	int bkt, idx = 0;
+
+	// First, determine the total number of entries to allocate space for sorting
+	sorted_addrs_count = 0;
+	hash_for_each(swapped_pages_ht, bkt, info, node) {
+		sorted_addrs_count++;
+	}
+
+	// If no swapped pages are tracked, return early
+	if (sorted_addrs_count == 0)
+		return 0;
+
+	// Allocate space for the sorted addresses
+	sorted_addrs = kmalloc_array(sorted_addrs_count, sizeof(*sorted_addrs),
+				     GFP_KERNEL);
+	if (!sorted_addrs)
+		return -ENOMEM;
+
+	// Collect the addresses into the array
+	hash_for_each(swapped_pages_ht, bkt, info, node) {
+		sorted_addrs[idx++] = info->vaddr;
+	}
+
+	return sorted_addrs_count;
+}
+
+// Comparator function for sorting
+static int addr_compare(const void *a, const void *b)
+{
+	unsigned long addr_a = *(unsigned long *)a;
+	unsigned long addr_b = *(unsigned long *)b;
+
+	if (addr_a < addr_b)
+		return -1;
+	else if (addr_a > addr_b)
+		return 1;
+	return 0;
+}
+
+// Function to sort addresses
+static void sort_swapped_page_addresses(void)
+{
+	sort(sorted_addrs, sorted_addrs_count, sizeof(unsigned long),
+	     addr_compare, NULL);
+}
+
+static size_t calculate_output_size(void)
+{
+	size_t size = 0;
+
+	// Fixed header size
+	size += 32; // For "Tracked swapped-in pages (sorted):\n"
+
+	// Add space for each swapped page
+	size += sorted_addrs_count *
+		40; // Each address: "Virtual Address: 0xXXXXXXXXX\n"
+
+	// Summary section
+	size += 64; // For summary: "\nSummary:\nTotal swapped-in pages tracked: X\n"
+
+	return size;
+}
+
+// Function to format the output into the procfs buffer
+static ssize_t format_swapped_pages_output(char **output_buffer)
+{
+	ssize_t len = 0;
+	int i;
+	size_t total_size = calculate_output_size();
+
+	// Allocate buffer dynamically
+	*output_buffer = kmalloc(total_size, GFP_KERNEL);
+	if (!*output_buffer)
+		return -ENOMEM;
+
+	// Start filling the buffer
+	len += snprintf(*output_buffer + len, total_size - len,
+			"Tracked swapped-in pages (sorted):\n");
+
+	// Iterate through the sorted array and add the addresses to the buffer
+	for (i = 0; i < sorted_addrs_count; i++) {
+		len += snprintf(*output_buffer + len, total_size - len,
+				"Virtual Address: 0x%lx\n", sorted_addrs[i]);
+	}
+
+	// Add the summary
+	len += snprintf(*output_buffer + len, total_size - len,
+			"\nSummary:\nTotal swapped-in pages tracked: %d\n",
+			sorted_addrs_count);
+
+	return len;
+}
+
+// Function to read from the proc file
+static ssize_t swapped_pages_read(struct file *file, char __user *buffer,
+				  size_t count, loff_t *ppos)
+{
+	ssize_t len = 0;
+	char *output_buffer = NULL;
+	int ret;
+	// Protect hash table access with spinlock
+	spin_lock(&swapped_pages_lock);
+
+	// Collect and sort addresses
+	if (collect_swapped_page_addresses() > 0) {
+		sort_swapped_page_addresses();
+		len = format_swapped_pages_output(&output_buffer);
+		kfree(sorted_addrs); // Free the sorted array
+	} else {
+		// If no swapped pages are tracked
+		const char *empty_msg =
+			"No swapped-in pages are currently tracked.\n";
+		len = strlen(empty_msg);
+		output_buffer = kstrdup(empty_msg, GFP_KERNEL);
+		if (!output_buffer) {
+			spin_unlock(&swapped_pages_lock);
+			return -ENOMEM;
+		}
+	}
+
+	spin_unlock(&swapped_pages_lock);
+
+	if (!output_buffer)
+		pr_info("output_buffer is null\n");
+
+	ret = simple_read_from_buffer(buffer, count, ppos, output_buffer, len);
+	kfree(output_buffer);
+	return ret;
+}
+
+// Define proc_ops for the proc file
+static const struct proc_ops swapped_pages_ops = {
+	.proc_read = swapped_pages_read,
+};
+
+// Initialize procfs entry at kernel boot
+static int __init init_proc_track_swap_usage(void) {
+	// Create a sysfs entry
+	int retval = sysfs_create_file(kernel_kobj, &swap_tracked_pid_attribute.attr);
+	if (retval)
+		pr_err("Failed to create sysfs file\n");
+
+	// Create proc entry
+	proc_entry = proc_create("swapped_in_for_tracked_pid", 0444, NULL, &swapped_pages_ops);
+	if (!proc_entry) {
+		pr_err("Failed to create /proc/swapped_in_for_tracked_pid\n");
+		return -ENOMEM;
+	}
+
+	pr_info("/proc/swapped_in_for_tracked_pid created\n");
+	return retval;
+}
+fs_initcall(init_proc_track_swap_usage);
