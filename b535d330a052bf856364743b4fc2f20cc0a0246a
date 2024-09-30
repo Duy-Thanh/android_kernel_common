@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd9162d0_c77c92ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-09-30T14:16:06Z",
+      "side": 1,
+      "message": "It is a surprise to me that the FUA flag is not compatible with zoned storage since the following CL is present on this branch: \"blk-mq: use the I/O scheduler for writes from the flush state machine\".",
+      "revId": "b535d330a052bf856364743b4fc2f20cc0a0246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
