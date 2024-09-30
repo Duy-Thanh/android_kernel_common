@@ -25819,6 +25819,11 @@ pointer_reference {
   pointee_type_id: 0xf87eb23d
 }
 pointer_reference {
+  id: 0x348fecbf
+  kind: POINTER
+  pointee_type_id: 0xf87f5460
+}
+pointer_reference {
   id: 0x3490b2d2
   kind: POINTER
   pointee_type_id: 0xf8022dd7
@@ -37457,6 +37462,11 @@ qualified {
   id: 0xf87d1d57
   qualifier: CONST
   qualified_type_id: 0x91b3c3d5
+}
+qualified {
+  id: 0xf87f5460
+  qualifier: CONST
+  qualified_type_id: 0x91bae70a
 }
 qualified {
   id: 0xf8992146
@@ -307459,6 +307469,12 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x16a7bffa
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1a1051a0
+  parameter_id: 0x2efe8065
+}
+function {
   id: 0x16a99695
   return_type_id: 0x48b5725f
   parameter_id: 0x18e64f74
@@ -344384,6 +344400,11 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9f67ec8c
+  return_type_id: 0x3e10b518
+  parameter_id: 0x348fecbf
+}
+function {
   id: 0x9f6a0f7c
   return_type_id: 0x6720d32f
   parameter_id: 0x0930c6d9
@@ -345239,6 +345260,13 @@ function {
   id: 0xa02dcb2f
   return_type_id: 0x0258f96e
   parameter_id: 0x340bec45
+}
+function {
+  id: 0xa040d060
+  return_type_id: 0x0258f96e
+  parameter_id: 0x31e58fe0
+  parameter_id: 0x4585663f
+  parameter_id: 0x0258f96e
 }
 function {
   id: 0xa0742625
@@ -417061,6 +417089,15 @@ elf_symbol {
   full_name: "tty_hangup"
 }
 elf_symbol {
+  id: 0xfdbc073c
+  name: "tty_hung_up_p"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1f8ea59c
+  type_id: 0x9bba7997
+  full_name: "tty_hung_up_p"
+}
+elf_symbol {
   id: 0xdeb902aa
   name: "tty_kclose"
   is_defined: true
@@ -417124,6 +417161,24 @@ elf_symbol {
   full_name: "tty_mode_ioctl"
 }
 elf_symbol {
+  id: 0xe5875746
+  name: "tty_name"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0a257bb3
+  type_id: 0x9f67ec8c
+  full_name: "tty_name"
+}
+elf_symbol {
+  id: 0x44728108
+  name: "tty_port_block_til_ready"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf28ef500
+  type_id: 0x9bb937dc
+  full_name: "tty_port_block_til_ready"
+}
+elf_symbol {
   id: 0x2a899db0
   name: "tty_port_close"
   is_defined: true
@@ -417131,6 +417186,24 @@ elf_symbol {
   crc: 0x12959354
   type_id: 0x16a18560
   full_name: "tty_port_close"
+}
+elf_symbol {
+  id: 0x41fc53b5
+  name: "tty_port_close_end"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc19f7bcf
+  type_id: 0x16a7bffa
+  full_name: "tty_port_close_end"
+}
+elf_symbol {
+  id: 0xb7985539
+  name: "tty_port_close_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x130a38d5
+  type_id: 0x9bb937dc
+  full_name: "tty_port_close_start"
 }
 elf_symbol {
   id: 0x954d57e8
@@ -417178,6 +417251,15 @@ elf_symbol {
   full_name: "tty_port_link_device"
 }
 elf_symbol {
+  id: 0x8c3087ea
+  name: "tty_port_lower_dtr_rts"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd4d2e99a
+  type_id: 0x161c45fb
+  full_name: "tty_port_lower_dtr_rts"
+}
+elf_symbol {
   id: 0x4e9dfcab
   name: "tty_port_open"
   is_defined: true
@@ -417223,6 +417305,15 @@ elf_symbol {
   full_name: "tty_port_tty_hangup"
 }
 elf_symbol {
+  id: 0x99f6096a
+  name: "tty_port_tty_set"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4a772310
+  type_id: 0x16a7bffa
+  full_name: "tty_port_tty_set"
+}
+elf_symbol {
   id: 0x1f87b736
   name: "tty_port_tty_wakeup"
   is_defined: true
@@ -417239,6 +417330,15 @@ elf_symbol {
   crc: 0xbfdb0393
   type_id: 0x97494660
   full_name: "tty_put_char"
+}
+elf_symbol {
+  id: 0x74487c98
+  name: "tty_register_device"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4d20a7bd
+  type_id: 0xa040d060
+  full_name: "tty_register_device"
 }
 elf_symbol {
   id: 0x727ea003
@@ -432836,6 +432936,7 @@ interface {
   symbol_id: 0x000b201f
   symbol_id: 0x0b032f8d
   symbol_id: 0xeafeba4a
+  symbol_id: 0xfdbc073c
   symbol_id: 0xdeb902aa
   symbol_id: 0x43145b7f
   symbol_id: 0x30f9f63f
@@ -432843,19 +432944,26 @@ interface {
   symbol_id: 0xbf8f4498
   symbol_id: 0x0b050f75
   symbol_id: 0x8a712bc6
+  symbol_id: 0xe5875746
+  symbol_id: 0x44728108
   symbol_id: 0x2a899db0
+  symbol_id: 0x41fc53b5
+  symbol_id: 0xb7985539
   symbol_id: 0x954d57e8
   symbol_id: 0x604f0f0b
   symbol_id: 0x5b997ef3
   symbol_id: 0x6a405f9b
   symbol_id: 0x3ed74db1
+  symbol_id: 0x8c3087ea
   symbol_id: 0x4e9dfcab
   symbol_id: 0x4a92dfd1
   symbol_id: 0xb958a87a
   symbol_id: 0xdcd44915
   symbol_id: 0xca491b5d
+  symbol_id: 0x99f6096a
   symbol_id: 0x1f87b736
   symbol_id: 0x1ebf9ca2
+  symbol_id: 0x74487c98
   symbol_id: 0x727ea003
   symbol_id: 0x2aefba25
   symbol_id: 0xc2ec2319
