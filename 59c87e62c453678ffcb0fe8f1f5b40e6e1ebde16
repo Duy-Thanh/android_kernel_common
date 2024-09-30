@@ -22,6 +22,30 @@
       },
       "revId": "59c87e62c453678ffcb0fe8f1f5b40e6e1ebde16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40dd61b9_e5ccdb8f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-09-30T04:18:23Z",
+      "side": 1,
+      "message": "kernel_aarch64 includes the gcov files, the tests zip, and many unused files.\nDoes bazel support filtering out the unused files?",
+      "parentUuid": "bccd2636_23f87995",
+      "range": {
+        "startLine": 1106,
+        "startChar": 12,
+        "endLine": 1106,
+        "endChar": 31
+      },
+      "revId": "59c87e62c453678ffcb0fe8f1f5b40e6e1ebde16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
