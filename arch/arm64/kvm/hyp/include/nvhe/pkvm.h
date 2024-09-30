@@ -48,6 +48,7 @@ struct kvm_ffa_buffers {
 	void *rx;
 	u64 rx_ipa;
 	struct list_head xfer_list;
+	u64 vm_avail_bitmap;
 };
 
 /*
@@ -85,6 +86,11 @@ struct pkvm_hyp_vm {
 	 */
 	bool is_dying;
 
+	/*
+	 * True when all the SPs have been notified of the VM's creation.
+	 */
+	bool is_create_notified;
+
 	struct kvm_ffa_buffers ffa_buf;
 	struct list_head vm_list;
 
@@ -119,6 +125,7 @@ struct kvm_hyp_req *
 pkvm_hyp_req_reserve(struct pkvm_hyp_vcpu *hyp_vcpu, u8 type);
 
 int __pkvm_init_vm(struct kvm *host_kvm, unsigned long pgd_hva);
+int __pkvm_notify_vm_creation(pkvm_handle_t handle);
 int __pkvm_init_vcpu(pkvm_handle_t handle, struct kvm_vcpu *host_vcpu);
 int __pkvm_start_teardown_vm(pkvm_handle_t handle);
 int __pkvm_finalize_teardown_vm(pkvm_handle_t handle);

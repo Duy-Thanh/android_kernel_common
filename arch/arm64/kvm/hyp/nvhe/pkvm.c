@@ -324,7 +324,7 @@ struct pkvm_hyp_vm *get_pkvm_hyp_vm(pkvm_handle_t handle)
 	hyp_vm = get_vm_by_handle(handle);
 	if (!hyp_vm)
 		goto unlock;
-	if (hyp_vm->is_dying)
+	if (hyp_vm->is_dying || !hyp_vm->is_create_notified)
 		hyp_vm = NULL;
 	else
 		hyp_refcount_inc(hyp_vm->refcount);
@@ -385,7 +385,8 @@ struct pkvm_hyp_vcpu *pkvm_load_hyp_vcpu(pkvm_handle_t handle,
 
 	hyp_read_lock(&vm_table_lock);
 	hyp_vm = get_vm_by_handle(handle);
-	if (!hyp_vm || hyp_vm->is_dying || hyp_vm->kvm.created_vcpus <= vcpu_idx)
+	if (!hyp_vm || hyp_vm->is_dying || hyp_vm->kvm.created_vcpus <= vcpu_idx ||
+	    !hyp_vm->is_create_notified)
 		goto unlock;
 
 	/*
@@ -861,6 +862,35 @@ unlock:
 	return transfer;
 }
 
+int __pkvm_notify_vm_creation(pkvm_handle_t handle)
+{
+	struct pkvm_hyp_vm *hyp_vm;
+	int ret = 0;
+
+	if (!handle)
+		return kvm_ffa_notify_vm_creation(NULL, 0);
+
+	hyp_write_lock(&vm_table_lock);
+
+	hyp_vm = get_vm_by_handle(handle);
+	if (!hyp_vm || hyp_vm->is_dying) {
+		ret = -ENOENT;
+		goto unlock;
+	}
+
+	hyp_refcount_inc(hyp_vm->refcount);
+	ret = kvm_ffa_notify_vm_creation(hyp_vm, handle);
+	put_pkvm_hyp_vm(hyp_vm);
+
+	if (!ret)
+		hyp_vm->is_create_notified = true;
+
+unlock:
+	hyp_write_unlock(&vm_table_lock);
+
+	return ret;
+}
+
 /*
  * Initialize the hypervisor copy of the protected vCPU state using the
  * memory donated by the host.
@@ -882,6 +912,9 @@ int __pkvm_init_vcpu(pkvm_handle_t handle, struct kvm_vcpu *host_vcpu)
 	hyp_vm = get_vm_by_handle(handle);
 	if (!hyp_vm) {
 		ret = -ENOENT;
+		goto unlock_vm;
+	} else if (!hyp_vm->is_create_notified) {
+		ret = -EBUSY;
 		goto unlock_vm;
 	}
 
@@ -935,6 +968,8 @@ int __pkvm_start_teardown_vm(pkvm_handle_t handle)
 	if (!hyp_vm)
 		ret = -ENOENT;
 	else if (WARN_ON(hyp_refcount_get(hyp_vm->refcount)))
+		ret = -EBUSY;
+	else if (!hyp_vm->is_create_notified)
 		ret = -EBUSY;
 	else if (!hyp_vm->is_dying)
 		hyp_vm->is_dying = true;
