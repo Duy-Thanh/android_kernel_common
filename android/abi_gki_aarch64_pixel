@@ -2496,6 +2496,7 @@
   usb_gadget_set_state
   usb_hcd_is_primary_hcd
   usb_hcd_platform_shutdown
+  usb_hcd_setup_local_mem
   usb_hub_find_child
   usb_interface_id
   usb_otg_state_string
