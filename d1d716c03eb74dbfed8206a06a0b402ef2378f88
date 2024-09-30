@@ -79,6 +79,23 @@
       },
       "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0444d5a_8a5eff0f",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T13:31:54Z",
+      "side": 1,
+      "message": "Needs to be just \"ashmem\". Otherwise userspace will not be able to find the device.",
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
