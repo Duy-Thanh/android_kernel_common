@@ -468,8 +468,12 @@ static int panel_edp_prepare_once(struct panel_edp *p)
 
 	gpiod_set_value_cansleep(p->enable_gpio, 1);
 	drm_dp_dpcd_set_powered(p->aux, true);
+<<<<<<< HEAD   (ad8dac Revert "CHROMIUM: Revert "printk: handle blank console argum)
 
 	p->powered_on_time = ktime_get_boottime();
+||||||| BASE
+=======
+>>>>>>> BRANCH (071d0e UPSTREAM: mseal: fix is_madv_discard())
 
 	delay = p->desc->delay.hpd_reliable;
 	if (p->no_hpd)

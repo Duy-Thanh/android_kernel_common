@@ -58,6 +58,7 @@ int mtk_vcodec_init_enc_clk(struct mtk_vcodec_enc_dev *mtkdev)
 	return 0;
 }
 
+<<<<<<< HEAD   (ad8dac Revert "CHROMIUM: Revert "printk: handle blank console argum)
 void mtk_vcodec_enc_pw_on(struct mtk_vcodec_pm *pm)
 {
 	int ret;
@@ -65,6 +66,18 @@ void mtk_vcodec_enc_pw_on(struct mtk_vcodec_pm *pm)
 	ret = pm_runtime_resume_and_get(pm->dev);
 	if (ret)
 		dev_err(pm->dev, "pm_runtime_resume_and_get fail: %d", ret);
+||||||| BASE
+=======
+int mtk_vcodec_enc_pw_on(struct mtk_vcodec_pm *pm)
+{
+	int ret;
+
+	ret = pm_runtime_resume_and_get(pm->dev);
+	if (ret)
+		dev_err(pm->dev, "pm_runtime_resume_and_get fail: %d", ret);
+
+	return ret;
+>>>>>>> BRANCH (071d0e UPSTREAM: mseal: fix is_madv_discard())
 }
 
 void mtk_vcodec_enc_pw_off(struct mtk_vcodec_pm *pm)

@@ -433,7 +433,12 @@ bool amdgpu_res_cpu_visible(struct amdgpu_device *adev,
 
 	amdgpu_res_first(res, 0, res->size, &cursor);
 	while (cursor.remaining) {
+<<<<<<< HEAD   (ad8dac Revert "CHROMIUM: Revert "printk: handle blank console argum)
 		if ((cursor.start + cursor.size) >= adev->gmc.visible_vram_size)
+||||||| BASE
+=======
+		if ((cursor.start + cursor.size) > adev->gmc.visible_vram_size)
+>>>>>>> BRANCH (071d0e UPSTREAM: mseal: fix is_madv_discard())
 			return false;
 		amdgpu_res_next(&cursor, cursor.size);
 	}

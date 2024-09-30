@@ -1,7 +1,12 @@
 /* SPDX-License-Identifier: BSD-3-Clause-Clear */
 /*
  * Copyright (c) 2018-2019 The Linux Foundation. All rights reserved.
+<<<<<<< HEAD   (ad8dac Revert "CHROMIUM: Revert "printk: handle blank console argum)
  * Copyright (c) 2021-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+||||||| BASE
+=======
+ * Copyright (c) 2021-2022 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> BRANCH (071d0e UPSTREAM: mseal: fix is_madv_discard())
  */
 
 #ifndef ATH11K_MAC_H

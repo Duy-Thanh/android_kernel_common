@@ -2085,7 +2085,12 @@ static const struct hid_device_id mt_devices[] = {
 			   USB_DEVICE_ID_LENOVO_X12_TAB) },
 
 	/* Logitech devices */
+<<<<<<< HEAD   (ad8dac Revert "CHROMIUM: Revert "printk: handle blank console argum)
 	{ .driver_data = MT_CLS_WIN_8_FORCE_MULTI_INPUT_NSMU,
+||||||| BASE
+=======
+	{ .driver_data = MT_CLS_NSMU,
+>>>>>>> BRANCH (071d0e UPSTREAM: mseal: fix is_madv_discard())
 		HID_DEVICE(BUS_BLUETOOTH, HID_GROUP_MULTITOUCH_WIN_8,
 			USB_VENDOR_ID_LOGITECH,
 			USB_DEVICE_ID_LOGITECH_CASA_TOUCHPAD) },

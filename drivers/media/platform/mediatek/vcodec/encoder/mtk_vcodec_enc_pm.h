@@ -10,7 +10,12 @@
 #include "mtk_vcodec_enc_drv.h"
 
 int mtk_vcodec_init_enc_clk(struct mtk_vcodec_enc_dev *dev);
+<<<<<<< HEAD   (ad8dac Revert "CHROMIUM: Revert "printk: handle blank console argum)
 void mtk_vcodec_enc_pw_on(struct mtk_vcodec_pm *pm);
+||||||| BASE
+=======
+int mtk_vcodec_enc_pw_on(struct mtk_vcodec_pm *pm);
+>>>>>>> BRANCH (071d0e UPSTREAM: mseal: fix is_madv_discard())
 void mtk_vcodec_enc_pw_off(struct mtk_vcodec_pm *pm);
 void mtk_vcodec_enc_clock_on(struct mtk_vcodec_pm *pm);
 void mtk_vcodec_enc_clock_off(struct mtk_vcodec_pm *pm);

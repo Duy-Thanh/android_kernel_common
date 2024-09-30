@@ -10,6 +10,7 @@ set noparent
 # https://android.googlesource.com/kernel/common/+/android-mainline/OWNERS_DrNo
 
 include kernel/common:android-mainline:/OWNERS_DrNo
+<<<<<<< HEAD   (ad8dac Revert "CHROMIUM: Revert "printk: handle blank console argum)
 
 # Owners for the -desktop branch
 allenwebb@google.com
@@ -22,3 +23,10 @@ timvp@google.com
 tnowicki@google.com
 wmacek@google.com
 zland@google.com
+||||||| BASE
+per-file */TEST_MAPPING = *
+
+# Test config xml can be made by anyone
+per-file */*.xml = *
+=======
+>>>>>>> BRANCH (071d0e UPSTREAM: mseal: fix is_madv_discard())
