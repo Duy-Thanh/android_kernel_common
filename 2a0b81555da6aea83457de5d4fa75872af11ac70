@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b7a351_44a78e47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T09:18:21Z",
+      "side": 1,
+      "message": "I added logic for this in aosp/3267330.",
+      "parentUuid": "67e05408_af62a49b",
+      "revId": "2a0b81555da6aea83457de5d4fa75872af11ac70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cfecc19_0d34c395",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b3a12b3_5cbe8cd7",
+        "filename": "drivers/staging/android/ashmem_range.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T09:18:21Z",
+      "side": 1,
+      "message": "I added logic to exit early.",
+      "parentUuid": "5cfecc19_0d34c395",
+      "revId": "2a0b81555da6aea83457de5d4fa75872af11ac70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d838e7f_62dc6f8b",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-09-27T22:34:57Z",
       "side": 1,
       "message": "This may be the right choice, but this is different behavior than the shrinker in existing ashmem - it limits the scan to LONG_MAX.",
+      "range": {
+        "startLine": 476,
+        "startChar": 49,
+        "endLine": 476,
+        "endChar": 59
+      },
+      "revId": "2a0b81555da6aea83457de5d4fa75872af11ac70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf15ae74_ca4a1405",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T09:18:21Z",
+      "side": 1,
+      "message": "Both numbers are effectively infinity. Whether we limit it to 2^63 or 2^64 pages is not important. We\u0027re never going to have that many pages allocated.",
+      "parentUuid": "9d838e7f_62dc6f8b",
       "range": {
         "startLine": 476,
         "startChar": 49,
