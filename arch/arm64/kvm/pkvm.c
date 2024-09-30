@@ -376,6 +376,14 @@ static void __pkvm_destroy_hyp_vm(struct kvm *host_kvm)
 
 	WARN_ON(kvm_call_hyp_nvhe(__pkvm_start_teardown_vm, host_kvm->arch.pkvm.handle));
 
+	do {
+		ret = kvm_call_hyp_nvhe(__pkvm_notify_dying_guest_vm_avail,
+					host_kvm->arch.pkvm.handle);
+		WARN_ON(ret && ret != -EAGAIN && ret != -EINTR);
+		cond_resched();
+	} while (ret == -EAGAIN || ret == -EINTR);
+	WARN_ON(ret);
+
 retry:
 	pages = 0;
 	nr_busy = 0;

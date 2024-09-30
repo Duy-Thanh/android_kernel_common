@@ -395,6 +395,20 @@ int __pkvm_reclaim_dying_guest_ffa_resources(pkvm_handle_t handle)
 	return ret;
 }
 
+int __pkvm_notify_dying_guest_vm_avail(pkvm_handle_t handle)
+{
+	struct pkvm_hyp_vm *hyp_vm;
+	int ret = -EINVAL;
+
+	hyp_read_lock(&vm_table_lock);
+	hyp_vm = get_vm_by_handle(handle);
+	if (hyp_vm && hyp_vm->is_dying)
+		ret = kvm_dying_guest_notify(hyp_vm);
+	hyp_read_unlock(&vm_table_lock);
+
+	return ret;
+}
+
 struct pkvm_hyp_vcpu *pkvm_load_hyp_vcpu(pkvm_handle_t handle,
 					 unsigned int vcpu_idx)
 {

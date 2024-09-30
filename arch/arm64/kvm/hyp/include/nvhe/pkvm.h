@@ -48,6 +48,7 @@ struct kvm_ffa_buffers {
 	void *rx;
 	u64 rx_ipa;
 	struct list_head xfer_list;
+	u64 vm_avail_bitmap;
 };
 
 /*
@@ -122,6 +123,7 @@ int __pkvm_start_teardown_vm(pkvm_handle_t handle);
 int __pkvm_finalize_teardown_vm(pkvm_handle_t handle);
 int __pkvm_reclaim_dying_guest_page(pkvm_handle_t handle, u64 pfn, u64 gfn, u8 order);
 int __pkvm_reclaim_dying_guest_ffa_resources(pkvm_handle_t handle);
+int __pkvm_notify_dying_guest_vm_avail(pkvm_handle_t handle);
 
 struct pkvm_hyp_vcpu *pkvm_load_hyp_vcpu(pkvm_handle_t handle,
 					 unsigned int vcpu_idx);
