@@ -48,6 +48,7 @@ struct kvm_ffa_buffers {
 	void *rx;
 	u64 rx_ipa;
 	struct list_head xfer_list;
+	u64 vm_avail_bitmap;
 };
 
 /*

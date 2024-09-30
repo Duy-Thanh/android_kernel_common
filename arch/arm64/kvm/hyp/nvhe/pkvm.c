@@ -952,6 +952,10 @@ int __pkvm_start_teardown_vm(pkvm_handle_t handle)
 		goto unlock;
 	}
 
+	ret = kvm_dying_guest_notify(hyp_vm);
+	if (ret)
+		goto unlock;
+
 	hyp_vm->is_dying = true;
 
 unlock:
