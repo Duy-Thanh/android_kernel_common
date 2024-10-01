@@ -41,7 +41,12 @@ SECTIONS {
 		. = ALIGN(PAGE_SIZE);
 	}
 	.hyp.event_ids : ALIGN(PAGE_SIZE) {
+		/*
+		 * Somehow ld ignores the following ALIGN if we only have the
+		 * wildcard version
+		 */
 		*(.hyp.event_ids)
+		*(SORT(.hyp.event_ids.*))
 		*(.hyp.printk_fmt_offset)
 		. = ALIGN(PAGE_SIZE);
 	}
@@ -50,5 +55,6 @@ SECTIONS {
 		. = ALIGN(PAGE_SIZE);
 	}
 	.hyp.reloc : ALIGN(4) {	*(.hyp.reloc) }
+	_hyp_events : { *(SORT(_hyp_events.*)) }
 #endif
 }
