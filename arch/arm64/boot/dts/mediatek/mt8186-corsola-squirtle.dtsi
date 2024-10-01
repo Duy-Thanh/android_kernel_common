@@ -56,7 +56,10 @@
 };
 
 &i2c2 {
-	/delete-node/ touchpad@2c;
+	touchpad@2c {
+		status = "disabled";
+	};
+
 	touchpad@68 {
 		compatible = "hid-over-i2c";
 		reg = <0x68>;
