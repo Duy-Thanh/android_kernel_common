@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6fe27bd_23d3680a",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-01T11:52:15Z",
+      "side": 1,
+      "message": "I\u0027ll change this, but I don\u0027t think using explicit drop is a problem",
+      "parentUuid": "da1d4040_dacd5f1c",
+      "revId": "e4a32fd486e69a6c3423fbd1dea58660217b3d75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9533a486_2b8cec26",
