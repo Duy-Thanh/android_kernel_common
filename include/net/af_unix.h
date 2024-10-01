@@ -66,6 +66,7 @@ struct unix_sock {
 #if IS_ENABLED(CONFIG_AF_UNIX_OOB)
 	struct sk_buff		*oob_skb;
 #endif
+	bool			sync;
 };
 
 #define unix_sk(ptr) container_of_const(ptr, struct unix_sock, sk)
