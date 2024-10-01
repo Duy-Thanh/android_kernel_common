@@ -30,10 +30,18 @@ $(MODLIB)/modules.order: modules.order FORCE
 quiet_cmd_install_modorder = INSTALL $@
       cmd_install_modorder = sed 's:^\(.*\)\.o$$:kernel/\1.ko:' $< > $@
 
-# Install modules.builtin(.modinfo) even when CONFIG_MODULES is disabled.
+# Install modules.builtin(.modinfo,.ranges) even when CONFIG_MODULES is disabled.
 install-y += $(addprefix $(MODLIB)/, modules.builtin modules.builtin.modinfo)
 
+<<<<<<< HEAD   (5e3586 Merge 7f8de2bf0725 ("Merge tag 'linux-cpupower-6.12-rc1-fixe)
 $(addprefix $(MODLIB)/, modules.builtin modules.builtin.modinfo): $(MODLIB)/%: $(mixed-build-prefix)% FORCE
+||||||| BASE
+$(addprefix $(MODLIB)/, modules.builtin modules.builtin.modinfo): $(MODLIB)/%: % FORCE
+=======
+install-$(CONFIG_BUILTIN_MODULE_RANGES) += $(MODLIB)/modules.builtin.ranges
+
+$(addprefix $(MODLIB)/, modules.builtin modules.builtin.modinfo modules.builtin.ranges): $(MODLIB)/%: % FORCE
+>>>>>>> BRANCH (68e5c7 Merge tag 'kbuild-v6.12' of git://git.kernel.org/pub/scm/lin)
 	$(call cmd,install)
 
 endif
@@ -158,7 +166,7 @@ quiet_cmd_gzip = GZIP    $@
 quiet_cmd_xz = XZ      $@
       cmd_xz = $(XZ) --check=crc32 --lzma2=dict=1MiB -f $<
 quiet_cmd_zstd = ZSTD    $@
-      cmd_zstd = $(ZSTD) -T0 --rm -f -q $<
+      cmd_zstd = $(ZSTD) --rm -f -q $<
 
 $(dst)/%.ko.gz: $(dst)/%.ko FORCE
 	$(call cmd,gzip)
