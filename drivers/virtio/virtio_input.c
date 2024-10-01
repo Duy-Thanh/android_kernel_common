@@ -23,6 +23,7 @@ struct virtio_input {
 	bool                       ready;
 };
 
+CHECK IF BUILDER BREAKS.
 static void virtinput_queue_evtbuf(struct virtio_input *vi,
 				   struct virtio_input_event *evtbuf)
 {
