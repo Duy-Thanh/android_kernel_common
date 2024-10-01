@@ -1130,6 +1130,7 @@ int mtk_dip_pipe_v4l2_register(struct mtk_dip_pipe *pipe,
 		 pipe->desc->name);
 	v4l2_set_subdevdata(&pipe->subdev, pipe);
 
+	v4l2_subdev_init_finalize(&pipe->subdev);
 	ret = v4l2_device_register_subdev(&pipe->dip_dev->v4l2_dev,
 					  &pipe->subdev);
 	if (ret) {
@@ -1150,6 +1151,7 @@ int mtk_dip_pipe_v4l2_register(struct mtk_dip_pipe *pipe,
 
 err_unregister_subdev:
 	v4l2_device_unregister_subdev(&pipe->subdev);
+	v4l2_subdev_cleanup(&pipe->subdev);
 
 err_media_entity_cleanup:
 	media_entity_cleanup(&pipe->subdev.entity);
@@ -1175,6 +1177,7 @@ void mtk_dip_pipe_v4l2_unregister(struct mtk_dip_pipe *pipe)
 	}
 
 	v4l2_device_unregister_subdev(&pipe->subdev);
+	v4l2_subdev_cleanup(&pipe->subdev);
 	media_entity_cleanup(&pipe->subdev.entity);
 	mtk_dip_pipe_v4l2_ctrl_release(pipe);
 }
