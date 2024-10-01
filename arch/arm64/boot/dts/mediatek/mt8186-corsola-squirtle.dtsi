@@ -6,10 +6,13 @@
 /dts-v1/;
 #include "mt8186-corsola-voltorb.dtsi"
 
-/delete-node/ &rt1019p;
-/delete-node/ &max98360a;
-/delete-node/ &rt5682s;
-/delete-node/ &touchscreen;
+&max98360a {
+	status = "disabled";
+};
+
+&rt5682s {
+	status = "disabled";
+};
 
 &i2c1 {
 	pinctrl-names = "default";
@@ -72,13 +75,28 @@
 	status = "okay";
 
 	compatible = "mediatek,mt8186-mt6366-rt5650-sound";
-	mediatek,adsp = <&adsp>;
+	model = "mt8186_rt5650";
 
-	playback-codecs {
-		sound-dai = <&it6505dptx>;
+	audio-routing =
+		"Headphone", "HPOL",
+		"Headphone", "HPOR",
+		"HDMI1", "TX";
+
+	hs-playback-dai-link {
+		codec {
+			sound-dai = <&rt5650>;
+		};
 	};
 
-	headset-codec {
-		sound-dai = <&rt5650>;
+	hs-capture-dai-link {
+		codec {
+			sound-dai = <&rt5650>;
+		};
+	};
+
+	spk-hdmi-playback-dai-link {
+		codec {
+			sound-dai = <&it6505dptx>;
+		};
 	};
 };
