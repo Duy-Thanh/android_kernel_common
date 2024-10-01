@@ -16,6 +16,23 @@
       "message": "Let me comment on the ABI situation.",
       "revId": "7af46bb010c480a7e7fad519fd2ffd9590255a97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2296088_c2b175aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-01T09:45:12Z",
+      "side": 1,
+      "message": "Don\u0027t put these two merges in the same topic. It makes it impossible to check the impact of the first change alone.",
+      "revId": "7af46bb010c480a7e7fad519fd2ffd9590255a97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
