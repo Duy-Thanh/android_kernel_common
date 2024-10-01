@@ -1066,8 +1066,10 @@ static int smmu_attach_dev(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_dom
 	hyp_write_lock(&smmu_domain->lock);
 	kvm_iommu_lock(iommu);
 	dst = smmu_get_ste_ptr(smmu, sid);
-	if (!dst)
+	if (!dst) {
+		ret = -ENOMEM;
 		goto out_unlock;
+	}
 
 	/* Map domain type to an SMMUv3 stage. */
 	ret = smmu_fix_up_domains(smmu, smmu_domain);
