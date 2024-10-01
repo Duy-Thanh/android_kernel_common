@@ -20,24 +20,38 @@
 
 	touchscreen@16 {
 		status = "okay";
-		compatible = "hid-over-i2c";
+		compatible = "elan,ekth6a12nay";
 		reg = <0x16>;
 		interrupts-extended = <&pio 12 IRQ_TYPE_LEVEL_LOW>;
-		reset-gpios = <&pio 60 GPIO_ACTIVE_LOW>;
-		vdd-supply = <&pp3300_s3>;
-		post-power-on-delay-ms = <450>;
-		hid-descr-addr = <0x0001>;
+		/*
+		 * Squirtle has a second source touchscreen using the same
+		 * GPIO pin. This causes both devices to fail probe, so
+		 * `reset-gpios` are commented. Not using `reset-gpios`
+		 * does not change the operation of the touchscreen,
+		 * because this pin is pulled high in pinctrl. This property
+		 * will be commented out until the correct solution
+		 * is merged into upstream.
+		 * reset-gpios = <&pio 60 GPIO_ACTIVE_LOW>;
+		 */
+		vcc33-supply = <&pp3300_s3>;
 	};
 
 	touchscreen@10 {
 		status = "okay";
-		compatible = "hid-over-i2c";
+		compatible = "elan,ekth6a12nay";
 		reg = <0x10>;
 		interrupts-extended = <&pio 12 IRQ_TYPE_LEVEL_LOW>;
-		reset-gpios = <&pio 60 GPIO_ACTIVE_LOW>;
-		vdd-supply = <&pp3300_s3>;
-		post-power-on-delay-ms = <450>;
-		hid-descr-addr = <0x0001>;
+		/*
+		 * Squirtle has a second source touchscreen using the same
+		 * GPIO pin. This causes both devices to fail probe, so
+		 * `reset-gpios` are commented. Not using `reset-gpios`
+		 * does not change the operation of the touchscreen,
+		 * because this pin is pulled high in pinctrl. This property
+		 * will be commented out until the correct solution
+		 * is merged into upstream.
+		 * reset-gpios = <&pio 60 GPIO_ACTIVE_LOW>;
+		 */
+		vcc33-supply = <&pp3300_s3>;
 	};
 };
 
