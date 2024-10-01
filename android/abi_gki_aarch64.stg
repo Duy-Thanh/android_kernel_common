@@ -291115,6 +291115,10 @@ enumeration {
       name: "DUMP_ORIG"
       value: 2
     }
+    enumerator {
+      name: "DUMP_PARAM"
+      value: 3
+    }
   }
 }
 enumeration {
@@ -384903,7 +384907,7 @@ elf_symbol {
   name: "ftrace_dump"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaaa918c9
+  crc: 0x17fb15ac
   type_id: 0x376120fa
   full_name: "ftrace_dump"
 }
