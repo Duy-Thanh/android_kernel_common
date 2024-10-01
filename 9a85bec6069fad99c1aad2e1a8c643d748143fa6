@@ -16,6 +16,24 @@
       "message": "Is there anything else we can do here, other than silently ignore if there are too many partitions?",
       "revId": "9a85bec6069fad99c1aad2e1a8c643d748143fa6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2927bfb0_22600f38",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-10-01T09:12:16Z",
+      "side": 1,
+      "message": "Do you know if there is any upper bound limit that I can pre-reserve in that `sp_ids` array ? In practice I don\u0027t expect to be a large number.",
+      "parentUuid": "64d0c388_c0ef6864",
+      "revId": "9a85bec6069fad99c1aad2e1a8c643d748143fa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
