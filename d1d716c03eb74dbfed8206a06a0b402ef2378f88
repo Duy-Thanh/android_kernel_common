@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6aa5f3e_41dfacf5",
+        "filename": "drivers/staging/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-01T11:49:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1cfed0b_5ded097f",
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "762ed063_4bbdec6d",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-27T17:16:24Z",
       "side": 1,
       "message": "Should this be exclusive with `ASHMEM`?",
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6ec276_5ca7ab93",
+        "filename": "drivers/staging/android/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-01T11:49:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "762ed063_4bbdec6d",
       "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -81,6 +117,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f27d54cc_bf8f36e9",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-01T11:49:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f52b673_16daaf32",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa34ced4_8dc5a9db",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-01T11:49:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31125253_0cff488e",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0444d5a_8a5eff0f",
@@ -94,6 +178,24 @@
       "writtenOn": "2024-09-30T13:31:54Z",
       "side": 1,
       "message": "Needs to be just \"ashmem\". Otherwise userspace will not be able to find the device.",
+      "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "355ba88b_3c708f8c",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-01T11:49:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0444d5a_8a5eff0f",
       "revId": "d1d716c03eb74dbfed8206a06a0b402ef2378f88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
