@@ -116,6 +116,9 @@
 #include <linux/freezer.h>
 #include <linux/file.h>
 #include <linux/btf_ids.h>
+#include <trace/events/sock.h>
+#include <trace/hooks/sched.h>
+
 
 #include "scm.h"
 
@@ -523,6 +526,37 @@ static int unix_dgram_peer_wake_me(struct sock *sk, struct sock *other)
 		unix_dgram_peer_wake_disconnect(sk, other);
 
 	return 0;
+}
+
+void unix_sock_readable(struct sock *sk)
+{
+	struct socket_wq *wq;
+
+	trace_sk_data_ready(sk);
+
+	rcu_read_lock();
+	wq = rcu_dereference(sk->sk_wq);
+
+	if (skwq_has_sleeper(wq)) {
+		int done = 0;
+
+		trace_android_vh_do_wake_up_sync(&wq->wait, &done, sk);
+		if (done)
+			goto out;
+
+		if (unix_sk(sk)->sync) {
+			unix_sk(sk)->sync = false;
+			wake_up_interruptible_sync_poll(&wq->wait, EPOLLIN |
+					EPOLLPRI | EPOLLRDNORM | EPOLLRDBAND);
+		} else {
+			wake_up_interruptible_poll(&wq->wait, EPOLLIN |
+					EPOLLPRI | EPOLLRDNORM | EPOLLRDBAND);
+		}
+	}
+
+out:
+	sk_wake_async(sk, SOCK_WAKE_WAITD, POLL_IN);
+	rcu_read_unlock();
 }
 
 static int unix_writable(const struct sock *sk, unsigned char state)
@@ -976,6 +1010,7 @@ static struct sock *unix_create1(struct net *net, struct socket *sock, int kern,
 
 	sk->sk_hash		= unix_unbound_hash(sk);
 	sk->sk_allocation	= GFP_KERNEL_ACCOUNT;
+	sk->sk_data_ready	= unix_sock_readable;
 	sk->sk_write_space	= unix_write_space;
 	sk->sk_max_ack_backlog	= READ_ONCE(net->unx.sysctl_max_dgram_qlen);
 	sk->sk_destruct		= unix_sock_destructor;
@@ -983,6 +1018,7 @@ static struct sock *unix_create1(struct net *net, struct socket *sock, int kern,
 	u->inflight = 0;
 	u->path.dentry = NULL;
 	u->path.mnt = NULL;
+	u->sync = false;
 	spin_lock_init(&u->lock);
 	INIT_LIST_HEAD(&u->link);
 	mutex_init(&u->iolock); /* single task reading lock */
@@ -2248,6 +2284,8 @@ static int unix_stream_sendmsg(struct socket *sock, struct msghdr *msg,
 		scm_stat_add(other, skb);
 		skb_queue_tail(&other->sk_receive_queue, skb);
 		unix_state_unlock(other);
+		if (msg->msg_flags & MSG_SYNC)
+			unix_sk(sk)->sync = true;
 		other->sk_data_ready(other);
 		sent += size;
 	}
