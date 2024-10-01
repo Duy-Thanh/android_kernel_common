@@ -16,6 +16,24 @@
       "message": "This breaks the kernel ABI, you need to do it in an abi-safe way.",
       "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e42f1fb_bd5148d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-01T16:50:00Z",
+      "side": 1,
+      "message": "abi is still broken with this commit, it needs to be fixed up properly as we did in the -lts branch.",
+      "parentUuid": "2551a549_513a2cc4",
+      "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
