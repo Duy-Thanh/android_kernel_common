@@ -403,13 +403,30 @@ static int nfsd_startup_net(int nrservs, struct net *net, const struct cred *cre
 	ret = nfsd_file_cache_start_net(net);
 	if (ret)
 		goto out_lockd;
-	ret = nfs4_state_start_net(net);
+
+	ret = nfsd_reply_cache_init(nn);
 	if (ret)
 		goto out_filecache;
 
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
+||||||| BASE
+#ifdef CONFIG_NFSD_V4_2_INTER_SSC
+	nfsd4_ssc_init_umount_work(nn);
+#endif
+=======
+	ret = nfs4_state_start_net(net);
+	if (ret)
+		goto out_reply_cache;
+
+#ifdef CONFIG_NFSD_V4_2_INTER_SSC
+	nfsd4_ssc_init_umount_work(nn);
+#endif
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 	nn->nfsd_net_up = true;
 	return 0;
 
+out_reply_cache:
+	nfsd_reply_cache_shutdown(nn);
 out_filecache:
 	nfsd_file_cache_shutdown_net(net);
 out_lockd:
@@ -427,6 +444,7 @@ static void nfsd_shutdown_net(struct net *net)
 	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
 
 	nfs4_state_shutdown_net(net);
+	nfsd_reply_cache_shutdown(nn);
 	nfsd_file_cache_shutdown_net(net);
 	if (nn->lockd_up) {
 		lockd_down(net);
@@ -527,7 +545,6 @@ static void nfsd_last_thread(struct svc_serv *serv, struct net *net)
 		return;
 
 	nfsd_shutdown_net(net);
-	pr_info("nfsd: last server has exited, flushing export cache\n");
 	nfsd_export_flush(net);
 }
 
@@ -773,7 +790,6 @@ int
 nfsd_svc(int nrservs, struct net *net, const struct cred *cred)
 {
 	int	error;
-	bool	nfsd_up_before;
 	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
 
 	mutex_lock(&nfsd_mutex);
@@ -792,8 +808,16 @@ nfsd_svc(int nrservs, struct net *net, const struct cred *cred)
 	error = nfsd_create_serv(net);
 	if (error)
 		goto out;
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
 
 	nfsd_up_before = nn->nfsd_net_up;
+||||||| BASE
+
+	nfsd_up_before = nn->nfsd_net_up;
+	serv = nn->nfsd_serv;
+=======
+	serv = nn->nfsd_serv;
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 
 	error = nfsd_startup_net(nrservs, net, cred);
 	if (error)
@@ -801,6 +825,7 @@ nfsd_svc(int nrservs, struct net *net, const struct cred *cred)
 	error = nn->nfsd_serv->sv_ops->svo_setup(nn->nfsd_serv,
 			NULL, nrservs);
 	if (error)
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
 		goto out_shutdown;
 	/* We are holding a reference to nn->nfsd_serv which
 	 * we don't want to count in the return value,
@@ -812,6 +837,31 @@ out_shutdown:
 		nfsd_shutdown_net(net);
 out_destroy:
 	nfsd_destroy(net);		/* Release server */
+||||||| BASE
+		goto out_shutdown;
+	error = serv->sv_nrthreads;
+	if (error == 0)
+		nfsd_last_thread(net);
+out_shutdown:
+	if (error < 0 && !nfsd_up_before)
+		nfsd_shutdown_net(net);
+out_put:
+	/* Threads now hold service active */
+	if (xchg(&nn->keep_active, 0))
+		svc_put(serv);
+	svc_put(serv);
+=======
+		goto out_put;
+	error = serv->sv_nrthreads;
+out_put:
+	/* Threads now hold service active */
+	if (xchg(&nn->keep_active, 0))
+		svc_put(serv);
+
+	if (serv->sv_nrthreads == 0)
+		nfsd_last_thread(net);
+	svc_put(serv);
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 out:
 	mutex_unlock(&nfsd_mutex);
 	return error;

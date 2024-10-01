@@ -1466,8 +1466,12 @@ static __net_init int nfsd_init_net(struct net *net)
 	retval = nfsd_idmap_init(net);
 	if (retval)
 		goto out_idmap_error;
+	retval = nfsd_net_reply_cache_init(nn);
+	if (retval)
+		goto out_repcache_error;
 	nn->nfsd_versions = NULL;
 	nn->nfsd4_minorversions = NULL;
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
 	retval = nfsd_reply_cache_init(nn);
 	if (retval)
 		goto out_drc_error;
@@ -1483,10 +1487,28 @@ static __net_init int nfsd_init_net(struct net *net)
 	atomic_set(&nn->ntf_refcnt, 0);
 	init_waitqueue_head(&nn->ntf_wq);
 	seqlock_init(&nn->boot_lock);
+||||||| BASE
+	nfsd4_init_leases_net(nn);
+	retval = nfsd_reply_cache_init(nn);
+	if (retval)
+		goto out_cache_error;
+	get_random_bytes(&nn->siphash_key, sizeof(nn->siphash_key));
+	seqlock_init(&nn->writeverf_lock);
+=======
+	nfsd4_init_leases_net(nn);
+	get_random_bytes(&nn->siphash_key, sizeof(nn->siphash_key));
+	seqlock_init(&nn->writeverf_lock);
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 
 	return 0;
 
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
 out_drc_error:
+||||||| BASE
+out_cache_error:
+=======
+out_repcache_error:
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 	nfsd_idmap_shutdown(net);
 out_idmap_error:
 	nfsd_export_shutdown(net);
@@ -1498,10 +1520,10 @@ static __net_exit void nfsd_exit_net(struct net *net)
 {
 	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
 
-	nfsd_reply_cache_shutdown(nn);
+	nfsd_net_reply_cache_destroy(nn);
 	nfsd_idmap_shutdown(net);
 	nfsd_export_shutdown(net);
-	nfsd_netns_free_versions(net_generic(net, nfsd_net_id));
+	nfsd_netns_free_versions(nn);
 }
 
 static struct pernet_operations nfsd_net_ops = {

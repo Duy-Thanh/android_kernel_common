@@ -79,7 +79,17 @@ static int nfsd_proc_show(struct seq_file *seq, void *v)
 	return 0;
 }
 
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
 static int nfsd_proc_open(struct inode *inode, struct file *file)
+||||||| BASE
+DEFINE_PROC_SHOW_ATTRIBUTE(nfsd);
+
+int nfsd_percpu_counters_init(struct percpu_counter counters[], int num)
+=======
+DEFINE_PROC_SHOW_ATTRIBUTE(nfsd);
+
+int nfsd_percpu_counters_init(struct percpu_counter *counters, int num)
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 {
 	return single_open(file, nfsd_proc_show, NULL);
 }

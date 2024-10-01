@@ -331,12 +331,59 @@ static void nfsd4_fslocs_free(struct nfsd4_fs_locations *fsloc)
 	fsloc->locations = NULL;
 }
 
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
+||||||| BASE
+static int export_stats_init(struct export_stats *stats)
+{
+	stats->start_time = ktime_get_seconds();
+	return nfsd_percpu_counters_init(stats->counter, EXP_STATS_COUNTERS_NUM);
+}
+
+static void export_stats_reset(struct export_stats *stats)
+{
+	nfsd_percpu_counters_reset(stats->counter, EXP_STATS_COUNTERS_NUM);
+}
+
+static void export_stats_destroy(struct export_stats *stats)
+{
+	nfsd_percpu_counters_destroy(stats->counter, EXP_STATS_COUNTERS_NUM);
+}
+
+=======
+static int export_stats_init(struct export_stats *stats)
+{
+	stats->start_time = ktime_get_seconds();
+	return nfsd_percpu_counters_init(stats->counter, EXP_STATS_COUNTERS_NUM);
+}
+
+static void export_stats_reset(struct export_stats *stats)
+{
+	if (stats)
+		nfsd_percpu_counters_reset(stats->counter,
+					   EXP_STATS_COUNTERS_NUM);
+}
+
+static void export_stats_destroy(struct export_stats *stats)
+{
+	if (stats)
+		nfsd_percpu_counters_destroy(stats->counter,
+					     EXP_STATS_COUNTERS_NUM);
+}
+
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 static void svc_export_put(struct kref *ref)
 {
 	struct svc_export *exp = container_of(ref, struct svc_export, h.ref);
 	path_put(&exp->ex_path);
 	auth_domain_put(exp->ex_client);
 	nfsd4_fslocs_free(&exp->ex_fslocs);
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
+||||||| BASE
+	export_stats_destroy(&exp->ex_stats);
+=======
+	export_stats_destroy(exp->ex_stats);
+	kfree(exp->ex_stats);
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 	kfree(exp->ex_uuid);
 	kfree_rcu(exp, ex_rcu);
 }
@@ -700,6 +747,34 @@ static int svc_export_show(struct seq_file *m,
 	seq_path(m, &exp->ex_path, " \t\n\\");
 	seq_putc(m, '\t');
 	seq_escape(m, exp->ex_client->name, " \t\n\\");
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
+||||||| BASE
+	if (export_stats) {
+		seq_printf(m, "\t%lld\n", exp->ex_stats.start_time);
+		seq_printf(m, "\tfh_stale: %lld\n",
+			   percpu_counter_sum_positive(&exp->ex_stats.counter[EXP_STATS_FH_STALE]));
+		seq_printf(m, "\tio_read: %lld\n",
+			   percpu_counter_sum_positive(&exp->ex_stats.counter[EXP_STATS_IO_READ]));
+		seq_printf(m, "\tio_write: %lld\n",
+			   percpu_counter_sum_positive(&exp->ex_stats.counter[EXP_STATS_IO_WRITE]));
+		seq_putc(m, '\n');
+		return 0;
+	}
+=======
+	if (export_stats) {
+		struct percpu_counter *counter = exp->ex_stats->counter;
+
+		seq_printf(m, "\t%lld\n", exp->ex_stats->start_time);
+		seq_printf(m, "\tfh_stale: %lld\n",
+			   percpu_counter_sum_positive(&counter[EXP_STATS_FH_STALE]));
+		seq_printf(m, "\tio_read: %lld\n",
+			   percpu_counter_sum_positive(&counter[EXP_STATS_IO_READ]));
+		seq_printf(m, "\tio_write: %lld\n",
+			   percpu_counter_sum_positive(&counter[EXP_STATS_IO_WRITE]));
+		seq_putc(m, '\n');
+		return 0;
+	}
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 	seq_putc(m, '(');
 	if (test_bit(CACHE_VALID, &h->flags) && 
 	    !test_bit(CACHE_NEGATIVE, &h->flags)) {
@@ -742,6 +817,12 @@ static void svc_export_init(struct cache_head *cnew, struct cache_head *citem)
 	new->ex_layout_types = 0;
 	new->ex_uuid = NULL;
 	new->cd = item->cd;
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
+||||||| BASE
+	export_stats_reset(&new->ex_stats);
+=======
+	export_stats_reset(new->ex_stats);
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 }
 
 static void export_update(struct cache_head *cnew, struct cache_head *citem)
@@ -778,6 +859,31 @@ static struct cache_head *svc_export_alloc(void)
 		return &i->h;
 	else
 		return NULL;
+<<<<<<< HEAD   (63626f Revert "hwspinlock: Introduce hwspin_lock_bust()")
+||||||| BASE
+
+	if (export_stats_init(&i->ex_stats)) {
+		kfree(i);
+		return NULL;
+	}
+
+	return &i->h;
+=======
+
+	i->ex_stats = kmalloc(sizeof(*(i->ex_stats)), GFP_KERNEL);
+	if (!i->ex_stats) {
+		kfree(i);
+		return NULL;
+	}
+
+	if (export_stats_init(i->ex_stats)) {
+		kfree(i->ex_stats);
+		kfree(i);
+		return NULL;
+	}
+
+	return &i->h;
+>>>>>>> BRANCH (2197b2 sunrpc: don't change ->sv_stats if it doesn't exist)
 }
 
 static const struct cache_detail svc_export_cache_template = {
