@@ -175,7 +175,7 @@ static void truncate_cleanup_folio(struct folio *folio)
 	if (folio_mapped(folio))
 		unmap_mapping_folio(folio);
 
-	if (folio_has_private(folio))
+	if (folio_needs_release(folio))
 		folio_invalidate(folio, 0, folio_size(folio));
 
 	/*
@@ -236,8 +236,14 @@ bool truncate_inode_partial_folio(struct folio *folio, loff_t start, loff_t end)
 	 */
 	folio_zero_range(folio, offset, length);
 
+<<<<<<< HEAD   (db06d2 Revert "posix-timers: Ensure timer ID search-loop limit is v)
 	cleancache_invalidate_page(folio->mapping, &folio->page);
 	if (folio_has_private(folio))
+||||||| BASE
+	if (folio_has_private(folio))
+=======
+	if (folio_needs_release(folio))
+>>>>>>> BRANCH (699506 Linux 6.1.108)
 		folio_invalidate(folio, offset, length);
 	if (!folio_test_large(folio))
 		return true;
