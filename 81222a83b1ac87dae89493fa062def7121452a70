@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02fb8456_bf60fa26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-10-01T14:31:46Z",
+      "side": 1,
+      "message": "Since this hasn\u0027t landed yet, should it maybe be squashed as a fixup into the original change where you set it rather than having a change that sets the flag and a change where you stop setting it?",
+      "revId": "81222a83b1ac87dae89493fa062def7121452a70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
