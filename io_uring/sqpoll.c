@@ -237,9 +237,14 @@ static int io_sq_thread(void *data)
 		set_cpus_allowed_ptr(current, cpumask_of(sqd->sq_cpu));
 	} else {
 		set_cpus_allowed_ptr(current, cpu_online_mask);
+<<<<<<< HEAD   (a8d720 Merge ae7b2bd3d458 ("mmc: cqhci: Fix checking of CQHCI_HALT )
 		sqd->sq_cpu = raw_smp_processor_id();
 	}
 	current->flags |= PF_NO_SETAFFINITY;
+||||||| BASE
+	current->flags |= PF_NO_SETAFFINITY;
+=======
+>>>>>>> BRANCH (9dc7ad perf/aux: Fix AUX buffer serialization)
 
 	/*
 	 * Force audit context to get setup, in case we do prep side async
