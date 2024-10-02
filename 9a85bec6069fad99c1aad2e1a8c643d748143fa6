@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "063444e4_2757ba12",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-02T04:07:01Z",
+      "side": 1,
+      "message": "There are a couple of errors we should handle here:\n* `INTERRUPTED` which means a non-secure interrupt occurred so the SP exited\n* `RETRY` meaning the SP was busy in some other way. Trusty will return this if it\u0027s in the middle of handling another std call. Can the hypervisor retry the call?\n\nThe Trusty SPD will return the first error, and IMHO it makes sense for it to return the second one too (after I update https://r.android.com/2741127).",
+      "revId": "9a85bec6069fad99c1aad2e1a8c643d748143fa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64d0c388_c0ef6864",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 3
