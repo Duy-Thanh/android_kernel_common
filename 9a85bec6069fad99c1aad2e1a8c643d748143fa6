@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "594ec5c2_e773e186",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-10-02T09:32:31Z",
+      "side": 1,
+      "message": "Yes, I was thinking that this might be a problem. Unfortunately there is no clear way of doing the retry in the hypervisor or failing the VM request because of this. IMO this request (VM_CREATE) should be driven by the driver inside the guest which can retry on failure. The hypervisor can append the vmid of the guest before sending it to TZ. Wdyth ?",
+      "parentUuid": "063444e4_2757ba12",
+      "revId": "9a85bec6069fad99c1aad2e1a8c643d748143fa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64d0c388_c0ef6864",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 3
