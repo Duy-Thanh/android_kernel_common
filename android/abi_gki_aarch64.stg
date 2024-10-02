@@ -45847,12 +45847,6 @@ member {
   type_id: 0x6df98672
 }
 member {
-  id: 0x22e9c7ff
-  name: "ahb_clks"
-  type_id: 0x5f9de25a
-  offset: 128
-}
-member {
   id: 0xadeefc03
   name: "ahit"
   type_id: 0xc9082b19
@@ -63412,6 +63406,12 @@ member {
   name: "clks"
   type_id: 0x5e8dc7f4
   offset: 1728
+}
+member {
+  id: 0x08f5b5b5
+  name: "clks"
+  type_id: 0x5f9de25a
+  offset: 128
 }
 member {
   id: 0x5f036ab2
@@ -140443,6 +140443,12 @@ member {
   name: "num_clk_levels"
   type_id: 0x4585663f
   offset: 256
+}
+member {
+  id: 0xf14cac21
+  name: "num_clks"
+  type_id: 0x4585663f
+  offset: 384
 }
 member {
   id: 0xdd3030e0
@@ -236420,10 +236426,11 @@ struct_union {
   kind: STRUCT
   name: "geni_wrapper"
   definition {
-    bytesize: 48
+    bytesize: 56
     member_id: 0xce3bbab3
     member_id: 0x85c2570f
-    member_id: 0x22e9c7ff
+    member_id: 0x08f5b5b5
+    member_id: 0xf14cac21
   }
 }
 struct_union {
