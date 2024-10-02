@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db8e3b0_dc56f64a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-10-02T16:14:43Z",
+      "side": 1,
+      "message": "As this is memory allocated for a VM, it would be good of accounting it with hyp_alloc_account()/hyp_free_account()",
+      "revId": "9004703b416e4f75eb145fd8784aa54bebcd115e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369f8409_5b982b4f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-10-02T16:14:43Z",
+      "side": 1,
+      "message": "Can\u0027t we end-up in a lock up loop here, perhaps we should check for a2 and see if that\u0027s busy to return -EAGAIN otherwise return something else?",
+      "revId": "9004703b416e4f75eb145fd8784aa54bebcd115e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
