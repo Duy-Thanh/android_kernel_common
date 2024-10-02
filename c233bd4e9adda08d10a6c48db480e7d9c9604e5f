@@ -16,6 +16,23 @@
       "message": "The .stg file was updated, so I\u0027m bypassing the linter vote.",
       "revId": "c233bd4e9adda08d10a6c48db480e7d9c9604e5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "839f4fad_1d6c9741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2024-10-02T17:01:25Z",
+      "side": 1,
+      "message": "You might need another sync to the latest gki 2024.9 build, there are known issue on 2024.8, e.g. https://b.corp.google.com/issues/364734938",
+      "revId": "c233bd4e9adda08d10a6c48db480e7d9c9604e5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
