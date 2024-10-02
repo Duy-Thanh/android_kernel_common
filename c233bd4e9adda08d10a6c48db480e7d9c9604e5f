@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce9f57f2_7ba047ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-10-02T08:48:23Z",
+      "side": 1,
+      "message": "The .stg file was updated, so I\u0027m bypassing the linter vote.",
+      "revId": "c233bd4e9adda08d10a6c48db480e7d9c9604e5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
