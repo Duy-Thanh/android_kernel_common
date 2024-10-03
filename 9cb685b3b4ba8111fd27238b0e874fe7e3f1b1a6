@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab748ec_7b79689d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-10-03T00:35:35Z",
+      "side": 1,
+      "message": "please don\u0027t forget to cherry pick to android16-6.12 and android15-6.6",
+      "revId": "9cb685b3b4ba8111fd27238b0e874fe7e3f1b1a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
