@@ -16,6 +16,24 @@
       "message": "ffa_map_hyp_buffers caller is already using a spinlock. \n\nThere\u0027s no need to use atomic here. A simple int will be enough (and also more difficult to overflow)",
       "revId": "91ec9bc4cd0795597aeaa9184e96a6952283720a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67005c85_f40cf6f0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-10-03T11:26:25Z",
+      "side": 1,
+      "message": "Ack. I think I used it to make it clear that this is used for reference counting.",
+      "parentUuid": "84378add_2ae9921d",
+      "revId": "91ec9bc4cd0795597aeaa9184e96a6952283720a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
