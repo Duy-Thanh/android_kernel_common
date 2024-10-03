@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "329a8dc0_a8502416",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-10-03T11:22:37Z",
+      "side": 1,
+      "message": "Yes, that\u0027s a good ideea. Let me do this",
+      "parentUuid": "3db8e3b0_dc56f64a",
+      "revId": "9004703b416e4f75eb145fd8784aa54bebcd115e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "369f8409_5b982b4f",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-02T16:14:43Z",
       "side": 1,
       "message": "Can\u0027t we end-up in a lock up loop here, perhaps we should check for a2 and see if that\u0027s busy to return -EAGAIN otherwise return something else?",
+      "revId": "9004703b416e4f75eb145fd8784aa54bebcd115e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac1c7e33_d6b1b6f6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-10-03T11:22:37Z",
+      "side": 1,
+      "message": "The thing is we rely on this to give back our memory at some point in future. I would probably assert if this returns invalid paramters through w2 because it shows a corrupt handle that the hyp is tracking and keep the same logic in all other cases (eg. retry). We should probably have a counter to retry a number of times before giving up and asserting. Wdyth ?",
+      "parentUuid": "369f8409_5b982b4f",
       "revId": "9004703b416e4f75eb145fd8784aa54bebcd115e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
