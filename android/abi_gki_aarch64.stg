@@ -392254,6 +392254,15 @@ elf_symbol {
   full_name: "power_supply_register"
 }
 elf_symbol {
+  id: 0xdef6235b
+  name: "power_supply_register_no_ws"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x08d6aa98
+  type_id: 0x3bb8868a
+  full_name: "power_supply_register_no_ws"
+}
+elf_symbol {
   id: 0xa3012e88
   name: "power_supply_set_property"
   is_defined: true
@@ -420252,6 +420261,7 @@ interface {
   symbol_id: 0xdb34fc88
   symbol_id: 0xb0eab20a
   symbol_id: 0x8229d43c
+  symbol_id: 0xdef6235b
   symbol_id: 0xa3012e88
   symbol_id: 0x8900d981
   symbol_id: 0x9d05e78b
