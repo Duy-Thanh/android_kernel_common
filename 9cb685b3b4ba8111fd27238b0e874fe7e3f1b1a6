@@ -16,6 +16,24 @@
       "message": "please don\u0027t forget to cherry pick to android16-6.12 and android15-6.6",
       "revId": "9cb685b3b4ba8111fd27238b0e874fe7e3f1b1a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a39f5707_68b00e71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-10-03T15:02:31Z",
+      "side": 1,
+      "message": "It has been automerged to android16-6.12.\nThe gcno mapping files in android15-6.6 does not include goldfish modules. Some patches may be missing.",
+      "parentUuid": "2ab748ec_7b79689d",
+      "revId": "9cb685b3b4ba8111fd27238b0e874fe7e3f1b1a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
