@@ -1042,6 +1042,13 @@ static void __init print_kernel_cmdline(const char *cmdline)
 		pr_notice("%s%s\n", KERNEL_CMDLINE_PREFIX, cmdline);
 }
 
+#ifdef CONFIG_ARCH_WANTS_DYNAMIC_TASK_STRUCT
+static void __init setup_arch_task_struct_size(void)
+{
+	arch_task_struct_size = sizeof(struct task_struct);
+}
+#endif
+
 asmlinkage __visible void __init __no_sanitize_address start_kernel(void)
 {
 	char *command_line;
@@ -1064,6 +1071,9 @@ asmlinkage __visible void __init __no_sanitize_address start_kernel(void)
 	boot_cpu_init();
 	page_address_init();
 	pr_notice("%s", linux_banner);
+#ifdef CONFIG_ARCH_WANTS_DYNAMIC_TASK_STRUCT
+	setup_arch_task_struct_size();
+#endif
 	early_security_init();
 	setup_arch(&command_line);
 	setup_boot_config();
