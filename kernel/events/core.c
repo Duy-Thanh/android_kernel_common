@@ -2379,6 +2379,39 @@ event_sched_out(struct perf_event *event,
 		perf_cgroup_event_disable(event, ctx);
 		state = PERF_EVENT_STATE_OFF;
 	}
+<<<<<<< HEAD   (42009a Merge cde43031df53 ("scsi: qla2xxx: validate nvme_local_port)
+||||||| BASE
+
+	if (event->pending_sigtrap) {
+		bool dec = true;
+
+		event->pending_sigtrap = 0;
+		if (state != PERF_EVENT_STATE_OFF &&
+		    !event->pending_work) {
+			event->pending_work = 1;
+			dec = false;
+			WARN_ON_ONCE(!atomic_long_inc_not_zero(&event->refcount));
+			task_work_add(current, &event->pending_task, TWA_RESUME);
+		}
+		if (dec)
+			local_dec(&event->ctx->nr_pending);
+	}
+
+=======
+
+	if (event->pending_sigtrap) {
+		event->pending_sigtrap = 0;
+		if (state != PERF_EVENT_STATE_OFF &&
+		    !event->pending_work &&
+		    !task_work_add(current, &event->pending_task, TWA_RESUME)) {
+			WARN_ON_ONCE(!atomic_long_inc_not_zero(&event->refcount));
+			event->pending_work = 1;
+		} else {
+			local_dec(&event->ctx->nr_pending);
+		}
+	}
+
+>>>>>>> BRANCH (67fad7 perf: Fix event leak upon exit)
 	perf_event_set_state(event, state);
 
 	if (!is_software_event(event))
