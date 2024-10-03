@@ -730,7 +730,18 @@ struct perf_event {
 	int				pending_kill;
 	int				pending_disable;
 	unsigned long			pending_addr;	/* SIGTRAP */
+<<<<<<< HEAD   (dce0d2 Merge 67fad724f1b5 ("perf: Fix event leak upon exit") into a)
 	struct irq_work			pending;
+||||||| BASE
+	struct irq_work			pending_irq;
+	struct callback_head		pending_task;
+	unsigned int			pending_work;
+=======
+	struct irq_work			pending_irq;
+	struct callback_head		pending_task;
+	unsigned int			pending_work;
+	struct rcuwait			pending_work_wait;
+>>>>>>> BRANCH (9ad46f perf: Fix event leak upon exec and file release)
 
 	atomic_t			event_limit;
 
