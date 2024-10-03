@@ -1687,8 +1687,15 @@ static inline int subsection_map_index(unsigned long pfn)
 static inline int pfn_section_valid(struct mem_section *ms, unsigned long pfn)
 {
 	int idx = subsection_map_index(pfn);
+	struct mem_section_usage *usage = READ_ONCE(ms->usage);
 
+<<<<<<< HEAD   (d68227 Revert "net: inline sock_prot_inuse_add()")
 	return test_bit(idx, ms->usage->subsection_map);
+||||||| BASE
+	return test_bit(idx, READ_ONCE(ms->usage)->subsection_map);
+=======
+	return usage ? test_bit(idx, usage->subsection_map) : 0;
+>>>>>>> BRANCH (7c6d66 Linux 5.15.163)
 }
 #else
 static inline int pfn_section_valid(struct mem_section *ms, unsigned long pfn)
