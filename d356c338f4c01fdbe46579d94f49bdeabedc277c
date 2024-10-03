@@ -34,6 +34,24 @@
       "parentUuid": "e6a22987_30937dff",
       "revId": "d356c338f4c01fdbe46579d94f49bdeabedc277c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ff32a86_07861ac8",
+        "filename": "drivers/staging/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-03T08:45:54Z",
+      "side": 1,
+      "message": "I think we should just keep `obj-y`. Yes, it\u0027s a bit wasteful when building a configuration without ashmem because make has to inspect the directory always. But it\u0027s not going upstream, so this code will only exist in branches that actually do enable ashmem.",
+      "parentUuid": "809e2b54_f8a860a5",
+      "revId": "d356c338f4c01fdbe46579d94f49bdeabedc277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
