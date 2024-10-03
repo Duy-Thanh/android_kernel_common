@@ -398,7 +398,7 @@ extern unsigned int kobjsize(const void *objp);
 
 #ifdef CONFIG_64BIT
 /* VM is sealed, in vm_flags */
-#define VM_SEALED	_BITUL(63)
+#define VM_SEALED	_BITUL(38)
 #endif
 
 /* Bits set in the VMA until the stack is in its final location */
