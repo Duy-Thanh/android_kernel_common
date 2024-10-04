@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc44c7de_1c0351ae",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-04T15:07:04Z",
+      "side": 1,
+      "message": "why not `\u003dm`?",
+      "range": {
+        "startLine": 398,
+        "startChar": 23,
+        "endLine": 398,
+        "endChar": 25
+      },
+      "revId": "25beffeff1e6175c42b115a5383ac96b4ee40b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
