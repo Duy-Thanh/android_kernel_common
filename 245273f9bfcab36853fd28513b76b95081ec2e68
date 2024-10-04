@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44912395_c4e900f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-04T22:26:21Z",
+      "side": 1,
+      "message": "FTR: It is actually\n\nhttps://android.googlesource.com/kernel/common/+/e7e2941300d258d551dda6ca9a370e29e085fa73\n\nI think",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "245273f9bfcab36853fd28513b76b95081ec2e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
