@@ -823,10 +823,8 @@ merged_kernel_uapi_headers(
     kernel_build = ":db845c",
 )
 
-kernel_images(
-    name = "db845c_images",
-    build_initramfs = True,
-    kernel_build = ":db845c",
+initramfs(
+    name = "db845c_initramfs",
     kernel_modules_install = ":db845c_modules_install",
 )
 
@@ -834,7 +832,7 @@ pkg_files(
     name = "db845c_dist_files",
     srcs = [
         ":db845c",
-        ":db845c_images",
+        ":db845c_initramfs",
         ":db845c_modules_install",
         ":db845c_merged_kernel_uapi_headers",
         # Mixed build: Additional GKI artifacts.
