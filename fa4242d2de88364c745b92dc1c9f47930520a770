@@ -16,6 +16,91 @@
       "message": "Applied lint suggestions",
       "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65daaaac_843f631f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-07T19:28:09Z",
+      "side": 1,
+      "message": "Thank you!\n\nBTW do you build this in automation / continuous intetegration?",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb807557_d83bfe44",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-07T19:28:09Z",
+      "side": 1,
+      "message": "//visibility:private, maybe?",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6584c4f6_3b2a7507",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-07T19:28:09Z",
+      "side": 1,
+      "message": "//visibility:private",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31ffeeaa_77b0b93e",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-07T19:28:09Z",
+      "side": 1,
+      "message": "Please add //visibility:private to all added targets unless you need them public somewhere.\n\nIt is unfortunately necessary here because the package has default_visibility\u003dpublic. It is too late to change it now, so we have to manually add private to new targets.",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3254edec_6930de81",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-07T19:28:09Z",
+      "side": 1,
+      "message": "//visibility:private, maybe?",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
