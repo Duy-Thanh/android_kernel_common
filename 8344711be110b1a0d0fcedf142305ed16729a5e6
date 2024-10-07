@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b1f9a2_c7d3712c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970076
+      },
+      "writtenOn": "2024-10-07T07:49:56Z",
+      "side": 1,
+      "message": "This CL depends on aosp/3295852",
+      "revId": "8344711be110b1a0d0fcedf142305ed16729a5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
