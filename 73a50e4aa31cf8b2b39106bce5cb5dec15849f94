@@ -22,6 +22,30 @@
       },
       "revId": "73a50e4aa31cf8b2b39106bce5cb5dec15849f94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ccad92f_e1ea7da1",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-07T18:36:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "486cbdd6_696468b2",
+      "range": {
+        "startLine": 43,
+        "startChar": 41,
+        "endLine": 43,
+        "endChar": 46
+      },
+      "revId": "73a50e4aa31cf8b2b39106bce5cb5dec15849f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
