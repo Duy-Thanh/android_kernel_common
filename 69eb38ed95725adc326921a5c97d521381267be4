@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "771e47e0_3d09ba69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2024-10-07T16:39:21Z",
+      "side": 1,
+      "message": "I am curious why the modules directory needs to be flattened since the kernel normally has a hierarchy. I can\u0027t see that it\u0027ll be a real problem but just wondering...",
+      "revId": "69eb38ed95725adc326921a5c97d521381267be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c96d989_37cf5011",
+        "filename": "build-kernel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2024-10-07T16:39:21Z",
+      "side": 1,
+      "message": "Perhaps I\u0027m paranoid, but please quote this. AKA:\n```\nrf -f \"${OUTPUT}/vendor_dlkm/\"*\n```\n\nI\u0027m just worried that if `OUTPUT` had a space in it that badness would happen.\n\n```\n# mkdir -p \"/tmp/test with space\"\n# cd \"/tmp/test with space\"\n# touch foo bar gaz\n\n# ls -al $OUTPUT/*\nls: cannot access \u0027/tmp/test\u0027: No such file or directory\nls: cannot access \u0027with\u0027: No such file or directory\nls: cannot access \u0027space/*\u0027: No such file or directory\n\n# ls -al \"$OUTPUT/\"*\n-rw-r--r--. 1 root root 0 Oct  7 09:32 \u0027/tmp/test with space/bar\u0027\n-rw-r--r--. 1 root root 0 Oct  7 09:32 \u0027/tmp/test with space/foo\u0027\n-rw-r--r--. 1 root root 0 Oct  7 09:32 \u0027/tmp/test with space/gaz\u0027\n```\n\n...but here you\u0027re doing it with `rm -f` and so the implications of not quoting are much, much worse.",
+      "range": {
+        "startLine": 131,
+        "startChar": 6,
+        "endLine": 131,
+        "endChar": 27
+      },
+      "revId": "69eb38ed95725adc326921a5c97d521381267be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5001e62b_f4a6bd62",
+        "filename": "build-kernel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2024-10-07T16:39:21Z",
+      "side": 1,
+      "message": "Does this still work now that you\u0027re not grouping the commands above?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 2
+      },
+      "revId": "69eb38ed95725adc326921a5c97d521381267be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
