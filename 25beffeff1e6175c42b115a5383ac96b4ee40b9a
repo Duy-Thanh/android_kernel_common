@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a40deebc_aba60702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3671663
+      },
+      "writtenOn": "2024-10-07T09:13:26Z",
+      "side": 1,
+      "message": "repo download -c kernel/common 3290284",
+      "revId": "25beffeff1e6175c42b115a5383ac96b4ee40b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc44c7de_1c0351ae",
