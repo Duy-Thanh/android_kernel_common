@@ -33,8 +33,11 @@ static inline void set_vma_sealed(struct vm_area_struct *vma)
  */
 static bool can_modify_vma(struct vm_area_struct *vma)
 {
-	if (unlikely(vma_is_sealed(vma)))
+	if (unlikely(vma_is_sealed(vma))) {
+		pr_info("can_modify_vma fail:vma_is_stack=%d,vm_flags=%lx pid=%d comm=%s", vma_is_initial_stack(vma), vma->vm_flags, current->pid, current->comm);
+		dump_stack();
 		return false;
+	}
 
 	return true;
 }
@@ -109,9 +112,16 @@ bool can_modify_mm_madv(struct mm_struct *mm, unsigned long start, unsigned long
 
 	/* going through each vma to check. */
 	for_each_vma_range(vmi, vma, end)
-		if (unlikely(is_ro_anon(vma) && !can_modify_vma(vma)))
-			return false;
+		if (unlikely(is_ro_anon(vma) && !can_modify_vma(vma))) {
+			if((vma->vm_flags & (VM_READ|VM_WRITE|VM_EXEC)) == VM_NONE) {
 
+				pr_info("seal:allow madvise on PROT_NONE vma_is_stack=%d,vm_flags=%lx pid=%d comm=%s", vma_is_initial_stack(vma), vma->vm_flags, current->pid, current->comm);
+			}
+			else {
+				pr_info("seal:reject madvise vma_is_stack=%d,vm_flags=%lx pid=%d comm=%s", vma_is_initial_stack(vma), vma->vm_flags, current->pid, current->comm);
+				return false;
+			}
+		}
 	/* Allow by default. */
 	return true;
 }
@@ -290,6 +300,7 @@ static int do_mseal(unsigned long start, size_t len_in, unsigned long flags)
 	ret = can_do_mseal(flags);
 	if (ret)
 		return ret;
+	pr_info("do_mseal range=%lx-%lx,pid=%d comm=%s", start, start + len_in, current->pid, current->comm);
 
 	start = untagged_addr(start);
 	if (!__PAGE_ALIGNED(start))

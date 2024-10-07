@@ -67,7 +67,7 @@
 #include <linux/time_namespace.h>
 #include <linux/user_events.h>
 #include <linux/page_size_compat.h>
-
+#include <linux/fs_parser.h>
 #include <linux/uaccess.h>
 #include <asm/mmu_context.h>
 #include <asm/tlb.h>
@@ -114,6 +114,23 @@ bool path_noexec(const struct path *path)
 	return (path->mnt->mnt_flags & MNT_NOEXEC) ||
 	       (path->mnt->mnt_sb->s_iflags & SB_I_NOEXEC);
 }
+
+#ifdef CONFIG_64BIT
+static inline bool seal_nx_stack_enabled(void)
+{
+	return true;
+}
+
+static inline void update_seal_nx_stack(unsigned long *vm_flags)
+{
+	if (seal_nx_stack_enabled())
+		*vm_flags |= VM_SEALED;
+}
+#else
+static inline void update_seal_nx_stack(unsigned long *vm_flags)
+{
+}
+#endif /* CONFIG_64BIT */
 
 #ifdef CONFIG_USELIB
 /*
@@ -817,6 +834,13 @@ int setup_arg_pages(struct linux_binprm *bprm,
 		vm_flags &= ~VM_EXEC;
 	vm_flags |= mm->def_flags;
 	vm_flags |= VM_STACK_INCOMPLETE_SETUP;
+
+	if (!(vm_flags & VM_EXEC)) {
+		update_seal_nx_stack(&vm_flags);
+		pr_info("nx_stack pid=%d comm=%s",current->pid, current->comm);
+	} else {
+		pr_info("xx_stack pid=%d comm=%s",current->pid, current->comm);
+	}
 
 	vma_iter_init(&vmi, mm, vma->vm_start);
 

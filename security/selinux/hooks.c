@@ -3850,6 +3850,7 @@ static int selinux_file_mprotect(struct vm_area_struct *vma,
 					  PROCESS__EXECHEAP, NULL);
 		} else if (!vma->vm_file && (vma_is_initial_stack(vma) ||
 			    vma_is_stack_for_current(vma))) {
+			pr_info("mprotect nx_stack=>xx_stack pid=%d comm=%s", current->pid, current->comm);
 			rc = avc_has_perm(sid, sid, SECCLASS_PROCESS,
 					  PROCESS__EXECSTACK, NULL);
 		} else if (vma->vm_file && vma->anon_vma) {

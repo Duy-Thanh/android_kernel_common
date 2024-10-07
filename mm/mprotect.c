@@ -761,8 +761,14 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
 	 * can_modify_mm assumes we have acquired the lock on MM.
 	 */
 	if (unlikely(!can_modify_mm(current->mm, start, end))) {
-		error = -EPERM;
-		goto out;
+		if (!vma_is_initial_stack(vma) || (prot & PROT_EXEC)) {
+			pr_info("seal:mprotect can_modify_mm failed, is_stack=%d,vm_falgs(%lx) new_prot=%lx pid=%d", vma_is_initial_stack(vma), vma->vm_flags,prot,current->pid);
+			error = -EPERM;
+			goto out;
+		}
+		else {
+			pr_info("seal:mprotect allow modify sealed vma is_stack=%d,vm_falgs(%lx) new_prot=%lx pid=%d", vma_is_initial_stack(vma), vma->vm_flags, prot, current->pid);
+		}
 	}
 
 	prev = vma_prev(&vmi);
