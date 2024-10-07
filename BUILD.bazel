@@ -1054,6 +1054,37 @@ kernel_build(
     visibility = ["//visibility:private"],
 )
 
+# uml
+kernel_build(
+    name = "kernel_x86_64_uml",
+    # srcs = [":kernel_x86_64_sources"],
+    outs = [
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    arch = "x86_64",
+    build_config = "build.config.uml.x86_64",
+    make_goals = [
+        "vmlinux",
+    ],
+    makefile = ":Makefile",
+)
+
+pkg_files(
+    name = "kernel_x86_64_uml_dist_files",
+    srcs = [
+        ":kernel_x86_64_uml",
+    ],
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "kernel_x86_64_uml_dist",
+    srcs = ["kernel_x86_64_uml_dist_files"],
+    destdir = "out/kernel_x86_64_uml/dist",
+)
+
 # KUnit test targets
 _KUNIT_DIR = "testcases/kunit"
 

@@ -1,0 +1,11 @@
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+
+ARCH=um
+MAKE_GOALS="
+vmlinux
+"
+
+DEFCONFIG=x86_64_defconfig
+
+# No modules
+IN_KERNEL_MODULES=
