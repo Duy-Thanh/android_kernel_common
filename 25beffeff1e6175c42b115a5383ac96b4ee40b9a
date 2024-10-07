@@ -22,6 +22,30 @@
       },
       "revId": "25beffeff1e6175c42b115a5383ac96b4ee40b9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca7930f_45db9a0a",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2024-10-07T09:11:14Z",
+      "side": 1,
+      "message": "Unlike the other Intel platforms the Baytrail GPIO is a `bool`:\n```\ndrivers/pinctrl/intel/Kconfig:config PINCTRL_BAYTRAIL\ndrivers/pinctrl/intel/Kconfig-  bool \"Intel Baytrail GPIO pin control\"\ndrivers/pinctrl/intel/Kconfig-  select PINCTRL_INTEL\n```\nYeah, it would be better to have it in the vendor space, but IMO changing config type to `tristate` (if we decide to do that) should go to the upstream not ACK. With such change in the upstream we probably can `select PINCTRL_INTEL` as GKI hidden and than GPIO drivers for all Intel platforms can be moved to the vendor.",
+      "parentUuid": "bc44c7de_1c0351ae",
+      "range": {
+        "startLine": 398,
+        "startChar": 23,
+        "endLine": 398,
+        "endChar": 25
+      },
+      "revId": "25beffeff1e6175c42b115a5383ac96b4ee40b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
