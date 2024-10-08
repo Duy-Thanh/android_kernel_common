@@ -86,6 +86,30 @@
       },
       "revId": "69eb38ed95725adc326921a5c97d521381267be4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39efb1cb_a7dbd145",
+        "filename": "build-kernel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2024-10-08T08:52:57Z",
+      "side": 1,
+      "message": "The \"$?\" will be 0 if both commands were executed properly - the first one, `rm -f` should not really fail - we don\u0027t expect it. If it did the error will propagate to \"$?\" into our check. So far it is good.\nThe result of the next command after the `\u0026\u0026` clause depends on the `xargs` command exit status. The `xargs` can fail if the executed command fails, i.e. cp. So up to now it looks correct - If `cp` fails the `if` clause will fire so the check works fine. So to sum up, we don\u0027t need to group these with parenthesis, it would work as expected.",
+      "parentUuid": "5001e62b_f4a6bd62",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 2
+      },
+      "revId": "69eb38ed95725adc326921a5c97d521381267be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
