@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8d3925c_4d29eaf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2024-10-08T09:45:36Z",
+      "side": 1,
+      "message": "It is beneficial for ueventd which searches for loadable kernel modules in the paths: /vendor/lib/modules and /system/lib/modules. In case we have a tree module structure, i.e. the legacy way, the modules won\u0027t be found, as ueventd does not have the logic for recursive search. Flat structure does the trick. I believe that this is the biggest motivation for us to introduce a flat module structure.",
+      "parentUuid": "771e47e0_3d09ba69",
+      "revId": "69eb38ed95725adc326921a5c97d521381267be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c96d989_37cf5011",
