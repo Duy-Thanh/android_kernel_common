@@ -16,6 +16,24 @@
       "message": "basefile like `abi_gki_aarch64` was empty except hardcoded symbols for every symbollist. That was the reason it was omitted. Is it changing/changed now?",
       "revId": "ca53fea695c54973b46a115f6f87bf0e5a0d6036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbad06e7_3733e5e3",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-08T07:10:21Z",
+      "side": 1,
+      "message": "THe file represents artificial type dependencies. `struct task` is there because of some register magic on some architectures (including ARM64, I suppose). The module structure is there is because it is used by the module loader and must remain stable for load-link to actually work.\n\nBoth symbols could be called \"paranoia\" and there may be other symbols in the ABI that would pull them in anyway. It doesn\u0027t hurt to keep them.",
+      "parentUuid": "61d6550b_1779e4cc",
+      "revId": "ca53fea695c54973b46a115f6f87bf0e5a0d6036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
