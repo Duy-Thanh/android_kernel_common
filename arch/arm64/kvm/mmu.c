@@ -1624,16 +1624,6 @@ find_ppage_or_above(struct kvm *kvm, phys_addr_t ipa)
 	return NULL;
 }
 
-static int insert_ppage(struct kvm *kvm, struct kvm_pinned_page *ppage)
-{
-	size_t size = PAGE_SIZE << ppage->order;
-	unsigned long start = ppage->ipa;
-	unsigned long end = start + size - 1;
-
-	return mtree_insert_range(&kvm->arch.pkvm.pinned_pages, start, end,
-				  ppage, GFP_KERNEL);
-}
-
 static struct kvm_pinned_page *find_ppage(struct kvm *kvm, u64 ipa)
 {
 	unsigned long index = ipa;
@@ -1694,6 +1684,7 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t *fault_ipa,
 	struct mm_struct *mm = current->mm;
 	struct kvm_pinned_page *ppage;
 	struct kvm *kvm = vcpu->kvm;
+	MA_STATE(mas, &kvm->arch.pkvm.pinned_pages, 0, 0);
 	int ret, nr_pages;
 	struct page *page;
 	u64 pfn;
@@ -1756,13 +1747,25 @@ retry:
 	if (ret)
 		goto unpin;
 
+	index = *fault_ipa;
+	mas_set_range(&mas, index, index + PAGE_SIZE - 1);
+	/*
+	 * Pre-allocate the mtree nodes (as GFP_KERNEL) outside of the critical
+	 * section. This is safe since the worst-case number of nodes needed for
+	 * a single ma_store() insertion below doesn't depend on the actual
+	 * mtree topology, but only on mt->ma_flags which is guaranteed stable
+	 * by construction.
+	 */
+	ret = mas_expected_entries(&mas, 1);
+	if (ret)
+		goto dec_account;
+
 	write_lock(&kvm->mmu_lock);
 	/*
 	 * If we already have a mapping in the middle of the THP, we have no
 	 * other choice than enforcing PAGE_SIZE for pkvm_host_map_guest() to
 	 * succeed.
 	 */
-	index = *fault_ipa;
 	if (page_size > PAGE_SIZE &&
 	    mt_find(&kvm->arch.pkvm.pinned_pages, &index, index + page_size - 1)) {
 		write_unlock(&kvm->mmu_lock);
@@ -1780,25 +1783,30 @@ retry:
 		if (ret == -EAGAIN)
 			ret = 0;
 
-		goto dec_account;
+		goto err_unlock;
 	}
 
 	ppage->page = page;
 	ppage->ipa = *fault_ipa;
 	ppage->order = get_order(page_size);
 	ppage->pins = 1 << ppage->order;
-	WARN_ON(insert_ppage(kvm, ppage));
+	mas_store(&mas, ppage);
 
 	write_unlock(&kvm->mmu_lock);
+
+	/* XXX: make @mas per-vCPU to allow re-use? */
+	mas_destroy(&mas);
 
 	return 0;
 
-dec_account:
+err_unlock:
 	write_unlock(&kvm->mmu_lock);
+dec_account:
 	account_locked_vm(mm, page_size >> PAGE_SHIFT, false);
 unpin:
 	unpin_user_pages(&page, 1);
 free_ppage:
+	mas_destroy(&mas);
 	kfree(ppage);
 
 	return ret;
