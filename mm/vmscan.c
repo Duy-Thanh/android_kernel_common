@@ -1561,6 +1561,15 @@ static enum folio_references folio_check_references(struct folio *folio,
 	if (trylock_failed)
 		return FOLIOREF_KEEP;
 
+	if (lru_gen_enabled()) {
+		int gen = lru_raw_gen_from_flags(READ_ONCE(folio->flags));
+
+		VM_WARN_ON_ONCE_FOLIO(gen < ISOLATED_FOLIO_MIN, folio);
+
+		if (gen > ISOLATED_FOLIO_MIN)
+			referenced_ptes += gen - ISOLATED_FOLIO_MIN;
+	}
+
 	/*
 	 * The supposedly reclaimable folio was found to be in a VM_LOCKED vma.
 	 * Let the folio, now marked Mlocked, be moved to the unevictable list.
@@ -1782,11 +1791,6 @@ retry:
 			goto activate_locked;
 
 		if (!sc->may_unmap && folio_mapped(folio))
-			goto keep_locked;
-
-		/* folio_update_gen() tried to promote this page? */
-		if (lru_gen_enabled() && !ignore_references &&
-		    folio_mapped(folio) && folio_test_referenced(folio))
 			goto keep_locked;
 
 		/*
@@ -3924,23 +3928,41 @@ static bool positive_ctrl_err(struct ctrl_pos *sp, struct ctrl_pos *pv)
 static int folio_update_gen(struct folio *folio, int gen)
 {
 	unsigned long new_flags, old_flags = READ_ONCE(folio->flags);
+	int old_gen;
 
-	VM_WARN_ON_ONCE(gen >= MAX_NR_GENS);
+	VM_WARN_ON_ONCE(gen >= (int) MAX_NR_GENS);
 	VM_WARN_ON_ONCE(!rcu_read_lock_held());
 
 	do {
+		old_gen = lru_raw_gen_from_flags(old_flags);
+		/*
+		 * ptes are created before pages are added to the lru, so we can
+		 * come across a page with no generation when walking page
+		 * tables. Newly added pages are marked active by folio_add_lru(),
+		 * so they will already be inserted into the newest generation.
+		 */
+		if (old_gen == -1)
+			break;
+
 		/* lru_gen_del_folio() has isolated this page? */
-		if (!(old_flags & LRU_GEN_MASK)) {
-			/* for shrink_folio_list() */
-			new_flags = old_flags | BIT(PG_referenced);
+		if (old_gen >= ISOLATED_FOLIO_MIN) {
+			unsigned long new_gen = min(old_gen + 1, (int) ISOLATED_FOLIO_MAX);
+
+			/* for folio_check_references() */
+			new_flags = old_flags & ~LRU_GEN_MASK;
+			new_flags |= (new_gen + 1) << LRU_GEN_PGOFF;
+			old_gen = -1;
 			continue;
 		}
+
+		if (gen < 0)
+			break;
 
 		new_flags = old_flags & ~(LRU_GEN_MASK | LRU_REFS_MASK | LRU_REFS_FLAGS);
 		new_flags |= (gen + 1UL) << LRU_GEN_PGOFF;
 	} while (!try_cmpxchg(&folio->flags, &old_flags, new_flags));
 
-	return ((old_flags & LRU_GEN_MASK) >> LRU_GEN_PGOFF) - 1;
+	return old_gen;
 }
 
 /* protect pages accessed multiple times through file descriptors */
@@ -3951,7 +3973,7 @@ static int folio_inc_gen(struct lruvec *lruvec, struct folio *folio, bool reclai
 	int new_gen, old_gen = lru_gen_from_seq(lrugen->min_seq[type]);
 	unsigned long new_flags, old_flags = READ_ONCE(folio->flags);
 
-	VM_WARN_ON_ONCE_FOLIO(!(old_flags & LRU_GEN_MASK), folio);
+	VM_WARN_ON_ONCE_FOLIO(folio_lru_gen(folio) == -1, folio);
 
 	do {
 		new_gen = ((old_flags & LRU_GEN_MASK) >> LRU_GEN_PGOFF) - 1;
@@ -4924,10 +4946,8 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 			continue;
 		}
 
-		old_gen = folio_lru_gen(folio);
-		if (old_gen < 0)
-			folio_set_referenced(folio);
-		else if (old_gen != new_gen)
+		old_gen = folio_update_gen(folio, -1);
+		if (old_gen != new_gen)
 			folio_activate(folio);
 	}
 
@@ -5101,7 +5121,7 @@ static bool sort_folio(struct lruvec *lruvec, struct folio *folio, struct scan_c
 	int tier = lru_tier_from_refs(refs);
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 
-	VM_WARN_ON_ONCE_FOLIO(gen >= MAX_NR_GENS, folio);
+	VM_WARN_ON_ONCE_FOLIO(gen == -1, folio);
 
 	/* unevictable */
 	if (!folio_evictable(folio)) {
@@ -5184,7 +5204,6 @@ static bool isolate_folio(struct lruvec *lruvec, struct folio *folio, struct sca
 
 	/* for shrink_folio_list() */
 	folio_clear_reclaim(folio);
-	folio_clear_referenced(folio);
 
 	success = lru_gen_del_folio(lruvec, folio, true);
 	VM_WARN_ON_ONCE_FOLIO(!success, folio);
@@ -5402,14 +5421,6 @@ retry:
 		if (!folio_evictable(folio)) {
 			list_del(&folio->lru);
 			folio_putback_lru(folio);
-			continue;
-		}
-
-		if (folio_test_reclaim(folio) &&
-		    (folio_test_dirty(folio) || folio_test_writeback(folio))) {
-			/* restore LRU_REFS_FLAGS cleared by isolate_folio() */
-			if (folio_test_workingset(folio))
-				folio_set_referenced(folio);
 			continue;
 		}
 
