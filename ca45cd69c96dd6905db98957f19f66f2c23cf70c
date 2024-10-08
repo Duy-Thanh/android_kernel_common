@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9a85d5b_d4aab55f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-08T23:39:10Z",
+      "side": 1,
+      "message": "This version is a bit confusing, why was the indirection added?\n\nAlso, you still need to include a patch that adds the symbols to the symbols file on top of this change.",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f899e82b_e1f9aa9b",
+        "filename": "fs/f2fs/checkpoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-08T23:39:10Z",
+      "side": 1,
+      "message": "Why the indirection here with `_trace_android_rvh_f2fs_down_read`?",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
