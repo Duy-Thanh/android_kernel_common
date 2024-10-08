@@ -158,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f884d3cc_8f51c411",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-08T19:38:15Z",
+      "side": 1,
+      "message": "Yes, everything can be set to private and your command will still work. Making it private prevents dependencies from other packages, not when your target is requested explicitly in the command line.\n\nhttps://bazel.build/concepts/visibility#target-visibility",
+      "parentUuid": "5931ef27_a4baf55c",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3254edec_6930de81",
