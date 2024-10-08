@@ -52,6 +52,24 @@
       "parentUuid": "8e42f1fb_bd5148d3",
       "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8015ff6c_71186ae9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-08T11:58:29Z",
+      "side": 1,
+      "message": "No, you can not break the abi like that by just updating the signature files, please fix this properly.\n\nLook how it was done on many other commits for this same time of change.",
+      "parentUuid": "986cee0d_da3fa3eb",
+      "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
