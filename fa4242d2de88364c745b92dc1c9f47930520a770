@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb18eb67_8a2fbec9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-08T17:19:50Z",
+      "side": 1,
+      "message": "We typically mostly test dessert release kernels (such as `android15-6.6`) in our CI.\n\nFor `android-mainline`, I can add support for build-test (and probably boot test)  in our CI once a week.\n\nRight now, nothing public is available. I will update here if I manage to make this public.",
+      "parentUuid": "65daaaac_843f631f",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb807557_d83bfe44",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-10-07T19:28:09Z",
       "side": 1,
       "message": "//visibility:private, maybe?",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da404059_feb5ae09",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-08T17:19:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fb807557_d83bfe44",
       "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "616beb40_05f04ac3",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-08T17:19:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6584c4f6_3b2a7507",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31ffeeaa_77b0b93e",
@@ -86,6 +140,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5931ef27_a4baf55c",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-08T17:19:50Z",
+      "side": 1,
+      "message": "Honestly, I don\u0027t know enough about bazel to determine if I need the target to be public. As long as I can build with:\n\n```\n$ tools/bazel run //common:yukawa_dist -- --destdir /home/mkorpershoek/work/amlogic/src/aosp-main/device/amlogic/yukawa-kernel/android-mainline\n```\n\nI will add the suggested private visibility here.",
+      "parentUuid": "31ffeeaa_77b0b93e",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3254edec_6930de81",
@@ -99,6 +171,24 @@
       "writtenOn": "2024-10-07T19:28:09Z",
       "side": 1,
       "message": "//visibility:private, maybe?",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2723db7c_31978950",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-08T17:19:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3254edec_6930de81",
       "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
