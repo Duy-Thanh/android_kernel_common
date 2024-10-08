@@ -34,6 +34,24 @@
       "parentUuid": "2551a549_513a2cc4",
       "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "986cee0d_da3fa3eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2024-10-08T10:00:06Z",
+      "side": 1,
+      "message": "This only CRC change, and it should update android/abi_gki_aarch64.stg, we upload android/abi_gki_aarch64_mtk only and abi_gki_aarch64.stg gen by google, could you help update abi_gki_aarch64.stg again?\nout\\bazel\\output_user_root\\16b3093220f00fcaad252c95c6212048\\execroot\\__main__\\bazel-out\\k8-fastbuild\\bin\\common\\kernel_aarch64_abi_diff\\abi_stgdiff\\abi.report.short\nvariable symbol \u0027unsigned long cpu_hwcaps[2]\u0027 changed\n  CRC changed from 0x79e4c52b to 0xa0986969",
+      "parentUuid": "8e42f1fb_bd5148d3",
+      "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
