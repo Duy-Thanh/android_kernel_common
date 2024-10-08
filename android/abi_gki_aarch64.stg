@@ -294973,7 +294973,7 @@ enumeration {
       value: 8
     }
     enumerator {
-      name: "KVM_PGTABLE_PROT_NC"
+      name: "KVM_PGTABLE_PROT_NORMAL_NC"
       value: 16
     }
     enumerator {
