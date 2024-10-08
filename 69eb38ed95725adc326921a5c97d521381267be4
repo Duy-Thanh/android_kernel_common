@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99f46c80_355f3f25",
+        "filename": "build-kernel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-10-08T07:41:24Z",
+      "side": 1,
+      "message": "good point, will fix it.",
+      "parentUuid": "8c96d989_37cf5011",
+      "range": {
+        "startLine": 131,
+        "startChar": 6,
+        "endLine": 131,
+        "endChar": 27
+      },
+      "revId": "69eb38ed95725adc326921a5c97d521381267be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5001e62b_f4a6bd62",
         "filename": "build-kernel.sh",
         "patchSetId": 2
