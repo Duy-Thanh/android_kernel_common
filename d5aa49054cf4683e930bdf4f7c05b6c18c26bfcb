@@ -16,6 +16,24 @@
       "message": "If this is an upstream change, it should have the `UPSTREAM` or `BACKPORT` prefix.",
       "revId": "d5aa49054cf4683e930bdf4f7c05b6c18c26bfcb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9092866_8ad1343d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3123981
+      },
+      "writtenOn": "2024-10-08T02:58:11Z",
+      "side": 1,
+      "message": "Since shutdown is not implemented on k515, this patch cannot be directly backported. We can achieve the same goal through other means. Do we still need to add a BACKPORT tag? It seems that after adding it, it cannot pass the check.",
+      "parentUuid": "8e4fb588_6e6dd697",
+      "revId": "d5aa49054cf4683e930bdf4f7c05b6c18c26bfcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
