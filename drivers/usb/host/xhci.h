@@ -18,7 +18,11 @@
 #include <linux/usb/hcd.h>
 #include <linux/io-64-nonatomic-lo-hi.h>
 #include <linux/io-64-nonatomic-hi-lo.h>
+<<<<<<< HEAD   (5611cd Merge 6.6.53 into android15-6.6-lts)
 #include <linux/android_kabi.h>
+||||||| BASE
+=======
+>>>>>>> BRANCH (63a574 Linux 6.6.54)
 
 /* Code sharing between pci-quirks and xhci hcd */
 #include	"xhci-ext-caps.h"
@@ -1935,6 +1939,11 @@ struct xhci_hcd {
 #define XHCI_ZHAOXIN_TRB_FETCH	BIT_ULL(45)
 #define XHCI_ZHAOXIN_HOST	BIT_ULL(46)
 #define XHCI_WRITE_64_HI_LO	BIT_ULL(47)
+<<<<<<< HEAD   (5611cd Merge 6.6.53 into android15-6.6-lts)
+||||||| BASE
+=======
+#define XHCI_CDNS_SCTX_QUIRK	BIT_ULL(48)
+>>>>>>> BRANCH (63a574 Linux 6.6.54)
 
 	unsigned int		num_active_eps;
 	unsigned int		limit_active_eps;

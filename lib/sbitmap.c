@@ -64,8 +64,50 @@ static inline bool sbitmap_deferred_clear(struct sbitmap_word *map)
 {
 	unsigned long mask;
 
+<<<<<<< HEAD   (5611cd Merge 6.6.53 into android15-6.6-lts)
 	if (!READ_ONCE(map->cleared))
 		return false;
+||||||| BASE
+	guard(spinlock_irqsave)(&map->swap_lock);
+
+	if (!map->cleared) {
+		if (depth == 0)
+			return false;
+
+		word_mask = (~0UL) >> (BITS_PER_LONG - depth);
+		/*
+		 * The current behavior is to always retry after moving
+		 * ->cleared to word, and we change it to retry in case
+		 * of any free bits. To avoid an infinite loop, we need
+		 * to take wrap & alloc_hint into account, otherwise a
+		 * soft lockup may occur.
+		 */
+		if (!wrap && alloc_hint)
+			word_mask &= ~((1UL << alloc_hint) - 1);
+
+		return (READ_ONCE(map->word) & word_mask) != word_mask;
+	}
+=======
+	guard(raw_spinlock_irqsave)(&map->swap_lock);
+
+	if (!map->cleared) {
+		if (depth == 0)
+			return false;
+
+		word_mask = (~0UL) >> (BITS_PER_LONG - depth);
+		/*
+		 * The current behavior is to always retry after moving
+		 * ->cleared to word, and we change it to retry in case
+		 * of any free bits. To avoid an infinite loop, we need
+		 * to take wrap & alloc_hint into account, otherwise a
+		 * soft lockup may occur.
+		 */
+		if (!wrap && alloc_hint)
+			word_mask &= ~((1UL << alloc_hint) - 1);
+
+		return (READ_ONCE(map->word) & word_mask) != word_mask;
+	}
+>>>>>>> BRANCH (63a574 Linux 6.6.54)
 
 	/*
 	 * First get a stable cleared mask, setting the old mask to 0.
@@ -116,6 +158,16 @@ int sbitmap_init_node(struct sbitmap *sb, unsigned int depth, int shift,
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD   (5611cd Merge 6.6.53 into android15-6.6-lts)
+||||||| BASE
+	for (i = 0; i < sb->map_nr; i++)
+		spin_lock_init(&sb->map[i].swap_lock);
+
+=======
+	for (i = 0; i < sb->map_nr; i++)
+		raw_spin_lock_init(&sb->map[i].swap_lock);
+
+>>>>>>> BRANCH (63a574 Linux 6.6.54)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(sbitmap_init_node);

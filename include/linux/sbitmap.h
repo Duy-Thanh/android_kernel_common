@@ -36,6 +36,20 @@ struct sbitmap_word {
 	 * @cleared: word holding cleared bits
 	 */
 	unsigned long cleared ____cacheline_aligned_in_smp;
+<<<<<<< HEAD   (5611cd Merge 6.6.53 into android15-6.6-lts)
+||||||| BASE
+
+	/**
+	 * @swap_lock: serializes simultaneous updates of ->word and ->cleared
+	 */
+	spinlock_t swap_lock;
+=======
+
+	/**
+	 * @swap_lock: serializes simultaneous updates of ->word and ->cleared
+	 */
+	raw_spinlock_t swap_lock;
+>>>>>>> BRANCH (63a574 Linux 6.6.54)
 } ____cacheline_aligned_in_smp;
 
 /**

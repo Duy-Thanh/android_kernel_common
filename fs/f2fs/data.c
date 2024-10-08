@@ -2688,7 +2688,12 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
 
 	/* Use COW inode to make dnode_of_data for atomic write */
 	atomic_commit = f2fs_is_atomic_file(inode) &&
+<<<<<<< HEAD   (5611cd Merge 6.6.53 into android15-6.6-lts)
 				page_private_atomic(folio_page(folio, 0));
+||||||| BASE
+=======
+				page_private_atomic(fio->page);
+>>>>>>> BRANCH (63a574 Linux 6.6.54)
 	if (atomic_commit)
 		set_new_dnode(&dn, F2FS_I(inode)->cow_inode, NULL, NULL, 0);
 	else
@@ -2789,7 +2794,12 @@ got_it:
 	trace_f2fs_do_write_data_page(folio, OPU);
 	set_inode_flag(inode, FI_APPEND_WRITE);
 	if (atomic_commit)
+<<<<<<< HEAD   (5611cd Merge 6.6.53 into android15-6.6-lts)
 		clear_page_private_atomic(folio_page(folio, 0));
+||||||| BASE
+=======
+		clear_page_private_atomic(page);
+>>>>>>> BRANCH (63a574 Linux 6.6.54)
 out_writepage:
 	f2fs_put_dnode(&dn);
 out:
@@ -3766,6 +3776,9 @@ static int f2fs_write_end(struct file *file,
 
 	if (f2fs_is_atomic_file(inode))
 		set_page_private_atomic(folio_page(folio, 0));
+
+	if (f2fs_is_atomic_file(inode))
+		set_page_private_atomic(page);
 
 	if (pos + copied > i_size_read(inode) &&
 	    !f2fs_verity_in_progress(inode)) {
