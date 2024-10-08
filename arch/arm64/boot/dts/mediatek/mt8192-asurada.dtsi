@@ -331,14 +331,12 @@
 	clock-frequency = <400000>;
 	clock-stretch-ns = <12600>;
 	pinctrl-names = "default";
-	pinctrl-0 = <&i2c2_pins>;
+	pinctrl-0 = <&i2c2_pins>, <&trackpad_pins>;
 
 	trackpad@15 {
 		compatible = "elan,ekth3000";
 		reg = <0x15>;
 		interrupts-extended = <&pio 15 IRQ_TYPE_LEVEL_LOW>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&trackpad_pins>;
 		vcc-supply = <&pp3300_u>;
 		wakeup-source;
 	};
@@ -446,16 +444,9 @@
 				reg = <0>;
 				mode-switch;
 
-				ports {
-					#address-cells = <1>;
-					#size-cells = <0>;
-
-					port@0 {
-						reg = <0>;
-
-						anx_typec0: endpoint {
-							remote-endpoint = <&typec_port0>;
-						};
+				port {
+					anx_typec0: endpoint {
+						remote-endpoint = <&typec_port0>;
 					};
 				};
 			};
@@ -465,16 +456,9 @@
 				reg = <1>;
 				mode-switch;
 
-				ports {
-					#address-cells = <1>;
-					#size-cells = <0>;
-
-					port@0 {
-						reg = <0>;
-
-						anx_typec1: endpoint {
-							remote-endpoint = <&typec_port1>;
-						};
+				port {
+					anx_typec1: endpoint {
+						remote-endpoint = <&typec_port1>;
 					};
 				};
 			};
