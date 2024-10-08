@@ -16,6 +16,29 @@
       "message": "Applied lint suggestions again.",
       "revId": "c561ebfff5475a92e4d8359eb36f43785ded7707",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09c4cc9_12034ce1",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-08T19:46:01Z",
+      "side": 1,
+      "message": "Hi, \n\nSorry you might have to edit the patch a bit. I recently deprecated kernel_images and that causes a build breakage for your patch. \n\nInstead, just use `initramfs` directly instead. See rockpi above for an example.",
+      "range": {
+        "startLine": 1194,
+        "startChar": 0,
+        "endLine": 1194,
+        "endChar": 13
+      },
+      "revId": "c561ebfff5475a92e4d8359eb36f43785ded7707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
