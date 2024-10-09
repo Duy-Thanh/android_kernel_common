@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce95d97_8159a0e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-09T17:06:18Z",
+      "side": 1,
+      "message": "This patch looks unnecessary.",
+      "revId": "ebbc37d18bca7e28adb89a92476224fa2fd04712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd77a6ac_583105bb",
+        "filename": "include/linux/init.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-09T17:06:18Z",
+      "side": 1,
+      "message": "why? Why not delete this and use CONFIG_TASK_STRUCT_VENDOR_SIZE_MAX directly.",
+      "fixSuggestions": [
+        {
+          "fixId": "348cdec9_fb9d1d4b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/init.h",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": "#define TASK_STRUCT_VENDOR_SIZE_MAX CONFIG_TASK_SIZE_MAX\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ebbc37d18bca7e28adb89a92476224fa2fd04712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
