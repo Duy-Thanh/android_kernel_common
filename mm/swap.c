@@ -71,6 +71,7 @@ struct cpu_fbatches {
 	struct folio_batch lru_lazyfree;
 #ifdef CONFIG_SMP
 	struct folio_batch activate;
+	struct folio_batch promote;
 #endif
 };
 static DEFINE_PER_CPU(struct cpu_fbatches, cpu_fbatches) = {
@@ -343,13 +344,26 @@ static void folio_activate_fn(struct lruvec *lruvec, struct folio *folio)
 	}
 }
 
+static void folio_promote_fn(struct lruvec *lruvec, struct folio *folio)
+{
+	if (!folio_test_unevictable(folio)) {
+		lruvec_del_folio(lruvec, folio);
+		lruvec_add_folio(lruvec, folio);
+	}
+}
+
 #ifdef CONFIG_SMP
-static void folio_activate_drain(int cpu)
+static void folio_update_drain(int cpu)
 {
 	struct folio_batch *fbatch = &per_cpu(cpu_fbatches.activate, cpu);
 
 	if (folio_batch_count(fbatch))
 		folio_batch_move_lru(fbatch, folio_activate_fn);
+
+	fbatch = &per_cpu(cpu_fbatches.promote, cpu);
+
+	if (folio_batch_count(fbatch))
+		folio_batch_move_lru(fbatch, folio_promote_fn);
 }
 
 void folio_activate(struct folio *folio)
@@ -366,6 +380,19 @@ void folio_activate(struct folio *folio)
 	}
 }
 
+void folio_promote(struct folio *folio)
+{
+	if (folio_test_lru(folio) && !folio_test_unevictable(folio)) {
+		struct folio_batch *fbatch;
+
+		folio_get(folio);
+		local_lock(&cpu_fbatches.lock);
+		fbatch = this_cpu_ptr(&cpu_fbatches.promote);
+		folio_batch_add_and_move(fbatch, folio, folio_promote_fn);
+		local_unlock(&cpu_fbatches.lock);
+	}
+}
+
 #else
 static inline void folio_activate_drain(int cpu)
 {
@@ -378,6 +405,18 @@ void folio_activate(struct folio *folio)
 	if (folio_test_clear_lru(folio)) {
 		lruvec = folio_lruvec_lock_irq(folio);
 		folio_activate_fn(lruvec, folio);
+		unlock_page_lruvec_irq(lruvec);
+		folio_set_lru(folio);
+	}
+}
+
+void folio_promote(struct folio *folio)
+{
+	struct lruvec *lruvec;
+
+	if (folio_test_clear_lru(folio)) {
+		lruvec = folio_lruvec_lock_irq(folio);
+		folio_promote_fn(lruvec, folio);
 		unlock_page_lruvec_irq(lruvec);
 		folio_set_lru(folio);
 	}
@@ -512,7 +551,8 @@ void folio_add_lru(struct folio *folio)
 
 	/* see the comment in lru_gen_add_folio() */
 	if (lru_gen_enabled() && !folio_test_unevictable(folio) &&
-	    lru_gen_in_fault() && !(current->flags & PF_MEMALLOC))
+	    lru_gen_in_fault() && !(current->flags & PF_MEMALLOC) &&
+	    lru_gen_aggressive_mm())
 		folio_set_active(folio);
 
 	folio_get(folio);
@@ -679,7 +719,7 @@ void lru_add_drain_cpu(int cpu)
 	if (folio_batch_count(fbatch))
 		folio_batch_move_lru(fbatch, lru_lazyfree_fn);
 
-	folio_activate_drain(cpu);
+	folio_update_drain(cpu);
 }
 
 /**
@@ -803,6 +843,7 @@ static bool cpu_needs_drain(unsigned int cpu)
 		folio_batch_count(&fbatches->lru_deactivate) ||
 		folio_batch_count(&fbatches->lru_lazyfree) ||
 		folio_batch_count(&fbatches->activate) ||
+		folio_batch_count(&fbatches->promote) ||
 		need_mlock_drain(cpu) ||
 		has_bh_in_lru(cpu, NULL);
 }

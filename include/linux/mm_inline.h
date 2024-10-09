@@ -111,12 +111,27 @@ static inline bool lru_gen_enabled(void)
 
 	return static_branch_likely(&lru_gen_caps[LRU_GEN_CORE]);
 }
+
+static inline bool lru_gen_aggressive_mm(void)
+{
+	DECLARE_STATIC_KEY_TRUE(lru_gen_caps[NR_LRU_GEN_CAPS]);
+
+	return static_branch_likely(&lru_gen_caps[LRU_GEN_AGGRESSIVE_MM]);
+}
+
 #else
 static inline bool lru_gen_enabled(void)
 {
 	DECLARE_STATIC_KEY_FALSE(lru_gen_caps[NR_LRU_GEN_CAPS]);
 
 	return static_branch_unlikely(&lru_gen_caps[LRU_GEN_CORE]);
+}
+
+static inline bool lru_gen_aggressive_mm(void)
+{
+	DECLARE_STATIC_KEY_FALSE(lru_gen_caps[NR_LRU_GEN_CAPS]);
+
+	return static_branch_likely(&lru_gen_caps[LRU_GEN_AGGRESSIVE_MM]);
 }
 #endif
 
@@ -279,7 +294,8 @@ static inline bool lru_gen_add_folio(struct lruvec *lruvec, struct folio *folio,
 	 */
 	if (folio_test_active(folio))
 		seq = lrugen->max_seq[type];
-	else if ((type == LRU_GEN_ANON && !folio_test_swapcache(folio)) ||
+	else if ((lru_gen_aggressive_mm() &&
+		  type == LRU_GEN_ANON && !folio_test_swapcache(folio)) ||
 		 (folio_test_reclaim(folio) &&
 		  (folio_test_dirty(folio) || folio_test_writeback(folio))))
 		seq = lrugen->max_seq[type] - 1;
@@ -336,6 +352,11 @@ static inline void folio_migrate_refs(struct folio *new, struct folio *old)
 #else /* !CONFIG_LRU_GEN */
 
 static inline bool lru_gen_enabled(void)
+{
+	return false;
+}
+
+static inline bool lru_gen_aggressive_mm(void)
 {
 	return false;
 }
