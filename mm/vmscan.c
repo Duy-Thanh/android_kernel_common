@@ -3925,7 +3925,7 @@ static bool positive_ctrl_err(struct ctrl_pos *sp, struct ctrl_pos *pv)
  ******************************************************************************/
 
 /* promote pages accessed through page tables */
-static int folio_update_gen(struct folio *folio, int gen)
+static int folio_update_gen_active(struct folio *folio, int gen)
 {
 	unsigned long new_flags, old_flags = READ_ONCE(folio->flags);
 	int old_gen;
@@ -3962,6 +3962,79 @@ static int folio_update_gen(struct folio *folio, int gen)
 		new_flags |= (gen + 1UL) << LRU_GEN_PGOFF;
 	} while (!try_cmpxchg(&folio->flags, &old_flags, new_flags));
 
+	return old_gen;
+}
+
+/* promote pages accessed through page tables */
+static int folio_update_gen(struct folio *folio, int active_gen,
+			    int *new_gen, bool *activate_out)
+{
+	unsigned long new_flags, old_flags = READ_ONCE(folio->flags);
+	int old_gen;
+	bool activate;
+
+	if (lru_gen_aggressive_mm()) {
+		*new_gen = active_gen;
+		if (activate_out)
+			*activate_out = true;
+		return folio_update_gen_active(folio, active_gen);
+	}
+
+	VM_WARN_ON_ONCE(active_gen >= (int) MAX_NR_GENS);
+	VM_WARN_ON_ONCE(!rcu_read_lock_held());
+
+	do {
+		old_gen = lru_raw_gen_from_flags(old_flags);
+
+		/* lru_gen_del_folio() has isolated this page? */
+		if (old_gen >= (int) ISOLATED_FOLIO_MIN) {
+			unsigned long new_gen = min(old_gen + 1, (int) ISOLATED_FOLIO_MAX);
+
+			/* for folio_check_references() */
+			new_flags = old_flags & ~LRU_GEN_MASK;
+			new_flags |= (new_gen + 1UL) << LRU_GEN_PGOFF;
+			old_gen = -1;
+			continue;
+		}
+
+		activate = old_flags & BIT(PG_referenced);
+
+		if (activate)
+			new_flags = old_flags & ~BIT(PG_referenced);
+		else
+			new_flags = old_flags | BIT(PG_referenced);
+
+		/*
+		 * ptes are created before pages are added to the lru, so we can
+		 * come across a page with no generation when walking page
+		 * tables. Set the active flag if necessary so they get inserted
+		 * into the newest generation.
+		 */
+		if (old_gen == -1) {
+			if (activate)
+				new_flags |= BIT(PG_active);
+		} else if (active_gen >= 0) {
+			int new_gen;
+
+			if (activate) {
+				new_gen = active_gen;
+			} else if (old_gen == active_gen) {
+				new_gen = old_gen;
+			} else {
+				new_gen = (old_gen + 1) % MAX_NR_GENS;
+				if (new_gen == active_gen)
+					new_gen = old_gen;
+			}
+
+			new_flags &= ~(LRU_GEN_MASK | LRU_REFS_MASK | BIT(PG_workingset));
+			new_flags |= (new_gen + 1UL) << LRU_GEN_PGOFF;
+		}
+	} while (!try_cmpxchg(&folio->flags, &old_flags, new_flags));
+
+	if (activate_out)
+		*activate_out = activate;
+
+	*new_gen = lru_raw_gen_from_flags(new_flags);
 	return old_gen;
 }
 
@@ -4185,7 +4258,7 @@ static bool walk_pte_range(pmd_t *pmd, unsigned long start, unsigned long end,
 	struct lru_gen_mm_walk *walk = args->private;
 	struct mem_cgroup *memcg = lruvec_memcg(walk->lruvec);
 	struct pglist_data *pgdat = lruvec_pgdat(walk->lruvec);
-	int old_gen, new_gen;
+	int old_gen, new_gen, active_gen;
 
 	pte = pte_offset_map_nolock(args->mm, pmd, start & PMD_MASK, &ptl);
 	if (!pte)
@@ -4229,8 +4302,8 @@ restart:
 		      !folio_test_swapcache(folio)))
 			folio_mark_dirty(folio);
 
-		new_gen = lru_gen_from_seq(walk->max_seq[folio_is_file_lru(folio)]);
-		old_gen = folio_update_gen(folio, new_gen);
+		active_gen = lru_gen_from_seq(walk->max_seq[folio_is_file_lru(folio)]);
+		old_gen = folio_update_gen(folio, active_gen, &new_gen, NULL);
 		if (old_gen >= 0 && old_gen != new_gen)
 			update_batch_size(walk, folio, old_gen, new_gen);
 	}
@@ -4254,7 +4327,7 @@ static void walk_pmd_range_locked(pud_t *pud, unsigned long addr, struct vm_area
 	struct lru_gen_mm_walk *walk = args->private;
 	struct mem_cgroup *memcg = lruvec_memcg(walk->lruvec);
 	struct pglist_data *pgdat = lruvec_pgdat(walk->lruvec);
-	int old_gen, new_gen;
+	int old_gen, new_gen, active_gen;
 
 	VM_WARN_ON_ONCE(pud_leaf(*pud));
 
@@ -4310,8 +4383,8 @@ static void walk_pmd_range_locked(pud_t *pud, unsigned long addr, struct vm_area
 		      !folio_test_swapcache(folio)))
 			folio_mark_dirty(folio);
 
-		new_gen = lru_gen_from_seq(walk->max_seq[folio_is_file_lru(folio)]);
-		old_gen = folio_update_gen(folio, new_gen);
+		active_gen = lru_gen_from_seq(walk->max_seq[folio_is_file_lru(folio)]);
+		old_gen = folio_update_gen(folio, active_gen, &new_gen, NULL);
 		if (old_gen >= 0 && old_gen != new_gen)
 			update_batch_size(walk, folio, old_gen, new_gen);
 next:
@@ -4876,7 +4949,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 	unsigned long scan_seq = READ_ONCE(lruvec->mm_state.scan_seq);
 	DEFINE_MAX_SEQ(lruvec);
 	int type = folio_is_file_lru(folio);
-	int old_gen, new_gen = lru_gen_from_seq(max_seq[type]);
+	int old_gen, new_gen, active_gen = lru_gen_from_seq(max_seq[type]);
 
 	lockdep_assert_held(pvmw->ptl);
 	VM_WARN_ON_ONCE_FOLIO(folio_test_lru(folio), folio);
@@ -4915,6 +4988,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 
 	for (i = 0, addr = start; addr != end; i++, addr += PAGE_SIZE) {
 		unsigned long pfn;
+		bool activate;
 		pte_t ptent = ptep_get(pte + i);
 
 		pfn = get_pte_pfn(ptent, vma, addr);
@@ -4939,16 +5013,20 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 			folio_mark_dirty(folio);
 
 		if (walk) {
-			old_gen = folio_update_gen(folio, new_gen);
+			old_gen = folio_update_gen(folio, active_gen, &new_gen, NULL);
 			if (old_gen >= 0 && old_gen != new_gen)
 				update_batch_size(walk, folio, old_gen, new_gen);
 
 			continue;
 		}
 
-		old_gen = folio_update_gen(folio, -1);
-		if (old_gen != new_gen)
-			folio_activate(folio);
+		old_gen = folio_update_gen(folio, -1, &new_gen, &activate);
+		if (old_gen != active_gen) {
+			if (activate)
+				folio_activate(folio);
+			else
+				folio_promote(folio);
+		}
 	}
 
 	arch_leave_lazy_mmu_mode();
@@ -6031,6 +6109,9 @@ static ssize_t enabled_show(struct kobject *kobj, struct kobj_attribute *attr, c
 
 	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP))
 		caps |= BIT(LRU_GEN_ADVANCE_IN_LOCKSTEP);
+
+	if (get_cap(LRU_GEN_AGGRESSIVE_MM))
+		caps |= BIT(LRU_GEN_AGGRESSIVE_MM);
 
 	return sysfs_emit(buf, "0x%04x\n", caps);
 }
