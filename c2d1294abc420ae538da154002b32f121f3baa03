@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6b9f9f1_26cd74c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-09T19:48:06Z",
+      "side": 1,
+      "message": "I think that\u0027s fine for android16-6.12, but if we\u0027re putting it in mainline it\u0027s going to merge conflict every time we change it upstream. Let me know what you all prefer.",
+      "parentUuid": "55ed0714_60014626",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
