@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd5f18cc_e1008589",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-09T08:35:06Z",
+      "side": 1,
+      "message": "Change in v5:\n- Rebased onto latest android-mainline\n- Use `initramfs()` macro instead of `kernel_images()`",
+      "revId": "6a8dff3cc798c8c3621d45ff2d592f31b6737691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
