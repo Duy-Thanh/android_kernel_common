@@ -16,6 +16,24 @@
       "message": "rc3",
       "revId": "12c824a9384055c9220315be1d491e0a736c33c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8fbe486_3c216f76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-09T08:39:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7ecd9a17_8916e21b",
+      "revId": "12c824a9384055c9220315be1d491e0a736c33c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
