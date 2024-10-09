@@ -63,6 +63,30 @@
       },
       "revId": "c561ebfff5475a92e4d8359eb36f43785ded7707",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc46865_ea9d61a6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-10-09T08:16:08Z",
+      "side": 1,
+      "message": "Sorry I did not rebase before re-submitting. I will rebase and fix.",
+      "parentUuid": "fec4f4d0_ba7c3858",
+      "range": {
+        "startLine": 1194,
+        "startChar": 0,
+        "endLine": 1194,
+        "endChar": 13
+      },
+      "revId": "c561ebfff5475a92e4d8359eb36f43785ded7707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
