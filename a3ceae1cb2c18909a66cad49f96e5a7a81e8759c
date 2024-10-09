@@ -16,6 +16,24 @@
       "message": "This needs a comment to explain why we set the last element to 1. I think you said somewhere that this is to guarantee that this is allocated contiguously with `init_task`. Even with this, is it guaranteed in a durable way or does that just happen to be how the compiler works today? If this is really guaranteed, then please add comments explaining it and warning folks to never add a global between init_task and vendor_data_pad.\n\nI would prefer a function/macro to get the vendor data that can explicitly check for this. Something like:\n```\n#define android_task_vendor_data(_p) \\\n  (_p \u003d\u003d \u0026init_task ? \u0026vendor_data_pad[0] : (u64)_p[1])\n```",
       "revId": "a3ceae1cb2c18909a66cad49f96e5a7a81e8759c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "739531d4_07602315",
+        "filename": "init/init_task.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-09T22:57:49Z",
+      "side": 1,
+      "message": "I see the inline function has been added in a later patch...so it could be:\n```\nstatic inline void *android_task_vendor_data(struct task_struct *p)\n{\n        if (p \u003d\u003d \u0026init_task)\n            return \u0026vendor_data_pad[0];\n\treturn p + 1;\n}\n```\n\nThen you can get rid of the initialization of the last entry and reduce this to:\n```\nu64 vendor_data_pad[CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX / sizeof(u64)];\n```",
+      "parentUuid": "50767a17_77ae6677",
+      "revId": "a3ceae1cb2c18909a66cad49f96e5a7a81e8759c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
