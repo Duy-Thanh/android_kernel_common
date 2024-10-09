@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "958d4344_95d9e367",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-09T19:51:10Z",
+      "side": 1,
+      "message": "Isn\u0027t it going to merge conflict regardless of whether it is labeled ANDROID or FROMLIST? Maybe it shouldn\u0027t go into android-mainline until it settles upstream.",
+      "parentUuid": "e6b9f9f1_26cd74c0",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
