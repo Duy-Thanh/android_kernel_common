@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c89e6eb0_2bbb738f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-09T09:15:23Z",
+      "side": 1,
+      "message": "1, \"indirection added\" is used to solve compile errors;\n2, Sorry, your suggetion is adding “\\_\\_traceiter_android_rvh_f2fs_down_read” and “__tracepoint_android_rvh_f2fs_down_read” into our file android/abi_gki_aarch64_honor?",
+      "parentUuid": "c9a85d5b_d4aab55f",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f899e82b_e1f9aa9b",
         "filename": "fs/f2fs/checkpoint.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-08T23:39:10Z",
       "side": 1,
       "message": "Why the indirection here with `_trace_android_rvh_f2fs_down_read`?",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d06960_bb960c0f",
+        "filename": "fs/f2fs/checkpoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-09T09:15:23Z",
+      "side": 1,
+      "message": "There are compile errors while the “trace_android_rvh_f2fs_down_read” and “#include \u003ctrace/hooks/fs.h\u003e” is placed in file “fs/f2fs/f2fs.h”.\nThen it is indirection added followed other patches merged，such as：\nhttps://android-review.googlesource.com/c/kernel/common/+/2579595/5/include/linux/percpu-rwsem.h\n\ncompile errors are attached here (file trace/hooks/f2fs.h will be generated but does not exist):\n\nIn file included from /tmp/bazel-working-directory/_main/common/fs/f2fs/super.c:43:\nIn file included from /tmp/bazel-working-directory/_main/common/include/trace/events/f2fs.h:2561:\n/tmp/bazel-working-directory/_main/common/include/trace/define_trace.h:95:10: fatal error: \u0027trace/hooks/f2fs.h\u0027 file not found\n   95 | #include TRACE_INCLUDE(TRACE_INCLUDE_FILE)\n/tmp/bazel-working-directory/_main/common/include/trace/define_trace.h:90:32: note: expanded from macro TRACE_INCLUDE\n   90 | # define TRACE_INCLUDE(system) __TRACE_INCLUDE(system)\n/tmp/bazel-working-directory/_main/common/include/trace/define_trace.h:87:34: note: expanded from macro __TRACE_INCLUDE\n   87 | # define __TRACE_INCLUDE(system) __stringify(TRACE_INCLUDE_PATH/system.h)\n/tmp/bazel-working-directory/_main/common/include/linux/stringify.h:10:27: note: expanded from macro __stringify\n   10 | #define __stringify(x...)       __stringify_1(x)\n/tmp/bazel-working-directory/_main/common/include/linux/stringify.h:9:29: note: expanded from macro __stringify_1\n    9 | #define __stringify_1(x...)     #x\n\u003cscratch space\u003e:69:1: note: expanded from here\n   69 | \"trace/hooks/f2fs.h\"\n1 error generated.",
+      "parentUuid": "f899e82b_e1f9aa9b",
       "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
