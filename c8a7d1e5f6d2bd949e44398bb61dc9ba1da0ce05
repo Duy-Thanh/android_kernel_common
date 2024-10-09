@@ -34,6 +34,24 @@
       "parentUuid": "7ea8e226_e908b242",
       "revId": "c8a7d1e5f6d2bd949e44398bb61dc9ba1da0ce05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "486c46bc_26f683db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-09T13:02:02Z",
+      "side": 1,
+      "message": "When I discussed this with some Android folks at LPC we didn\u0027t think that was necessary since the driver is so much simpler than Binder. I wrote a bit about the justification for it (and also why we should make it built-in rather than a module) in http://go/rust-kernel. But I can definitely add a boot-time flag if we decide that it is necessary.",
+      "parentUuid": "3d0ee752_2690cc5b",
+      "revId": "c8a7d1e5f6d2bd949e44398bb61dc9ba1da0ce05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
