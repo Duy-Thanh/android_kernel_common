@@ -16,6 +16,24 @@
       "message": "Can we delete the ashmem c code now?",
       "revId": "c8a7d1e5f6d2bd949e44398bb61dc9ba1da0ce05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0ee752_2690cc5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-09T12:57:49Z",
+      "side": 1,
+      "message": "deleting code aside, I think we need the same ability the rust binder code has, which is to be able to switch at boot between the two.  Can you do the same here?",
+      "parentUuid": "7ea8e226_e908b242",
+      "revId": "c8a7d1e5f6d2bd949e44398bb61dc9ba1da0ce05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
