@@ -397,6 +397,7 @@ enum {
 	LRU_GEN_NONLEAF_YOUNG,
 	// Skip 3 to present ABI consistent with 5.15
 	LRU_GEN_ADVANCE_IN_LOCKSTEP = 4,
+	LRU_GEN_AGGRESSIVE_MM,
 	NR_LRU_GEN_CAPS
 };
 
