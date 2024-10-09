@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6969f941_1bbf89b2",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-09T10:01:23Z",
+      "side": 1,
+      "message": "\"Build with\"",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 17
+      },
+      "revId": "16ee1578d725776a1caae2bd6ea6752b9c94b17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
