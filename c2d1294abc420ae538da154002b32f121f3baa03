@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2beace3_3375aecd",
+        "filename": "rust/kernel/types.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-09T10:27:51Z",
+      "side": 1,
+      "message": "This part just landed in char-misc-testing, and could be pulled out as a FROMGIT change.",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 5
+      },
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
