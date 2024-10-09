@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55ed0714_60014626",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-09T19:42:01Z",
+      "side": 1,
+      "message": "can\u0027t we do the upstream series with ANDROID patches on top?",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
