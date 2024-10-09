@@ -69,6 +69,24 @@
       "parentUuid": "a007e230_59c0e281",
       "revId": "548ee401b33753c075a04a6849a57c5ea2289d7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0990293_44b946b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-09T09:53:55Z",
+      "side": 1,
+      "message": "Did this come via LTS? What is the LTS commit SHA?",
+      "parentUuid": "f076ed26_7f337d23",
+      "revId": "548ee401b33753c075a04a6849a57c5ea2289d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
