@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92fa3b32_a574255d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-09T22:33:21Z",
+      "side": 1,
+      "message": "This patch is needed as it adds padding to init_task structure. In your previous comment, you mentioned that it needs to be in a separate patch (https://android-review.googlesource.com/c/kernel/common/+/3292854/comment/85f471d7_0abb9b22/). Hence, I added it here.",
+      "parentUuid": "1ce95d97_8159a0e4",
+      "revId": "ebbc37d18bca7e28adb89a92476224fa2fd04712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd77a6ac_583105bb",
         "filename": "include/linux/init.h",
         "patchSetId": 2
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "ebbc37d18bca7e28adb89a92476224fa2fd04712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "015a8f33_98d99df0",
+        "filename": "include/linux/init.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-09T22:33:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd77a6ac_583105bb",
       "revId": "ebbc37d18bca7e28adb89a92476224fa2fd04712",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
