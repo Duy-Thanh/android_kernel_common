@@ -87,6 +87,24 @@
       "parentUuid": "f076ed26_7f337d23",
       "revId": "548ee401b33753c075a04a6849a57c5ea2289d7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f62f654d_f70acf74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2032918
+      },
+      "writtenOn": "2024-10-10T06:57:07Z",
+      "side": 1,
+      "message": "here is LTS CL:https://android.googlesource.com/kernel/common/+/d2a2a4714d80d09b0f8eb6438ab4224690b7121e, pls help reivew",
+      "parentUuid": "f0990293_44b946b8",
+      "revId": "548ee401b33753c075a04a6849a57c5ea2289d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
