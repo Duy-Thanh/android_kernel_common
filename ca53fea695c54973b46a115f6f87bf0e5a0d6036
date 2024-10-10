@@ -34,6 +34,24 @@
       "parentUuid": "61d6550b_1779e4cc",
       "revId": "ca53fea695c54973b46a115f6f87bf0e5a0d6036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e0c02d_15c87f50",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-10T14:28:35Z",
+      "side": 1,
+      "message": "I discussed this in more detail with @umendez@google.com.\n\nFor GKI, the base symbol list is like a synthetic module dependency. The question is then: is it a GKI module or a vendor module?\n\n* vendor module - this is the easiest and simplest interpretation, the symbols are available to vendors, they are in the ABI and so stability is guaranteed\n* GKI module - doesn\u0027t really make sense, we need these symbols to be ABI stable\n\nIt seems quite odd to put something in a symbol list and the ABI and then not allow it to be used. This is what this change is fixing.\n\n---\n\nThe symbols cannot be used for any mischief.",
+      "parentUuid": "dbad06e7_3733e5e3",
+      "revId": "ca53fea695c54973b46a115f6f87bf0e5a0d6036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
