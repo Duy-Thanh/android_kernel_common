@@ -590,3 +590,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_wake_idle_worker);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_device_shutdown);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_synchronize_irq_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_synchronize_irq_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bad_stack_info);

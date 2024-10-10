@@ -933,6 +933,8 @@ void __noreturn panic_bad_stack(struct pt_regs *regs, unsigned long esr, unsigne
 	unsigned long irq_stk = (unsigned long)this_cpu_read(irq_stack_ptr);
 	unsigned long ovf_stk = (unsigned long)this_cpu_ptr(overflow_stack);
 
+	trace_android_rvh_bad_stack_info(irq_stk, ovf_stk);
+
 	console_verbose();
 	pr_emerg("Insufficient stack space to handle exception!");
 
