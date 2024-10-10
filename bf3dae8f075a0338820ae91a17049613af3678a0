@@ -88,6 +88,24 @@
       "parentUuid": "8015ff6c_71186ae9",
       "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be4ed13b_aacc6a90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-10T12:19:09Z",
+      "side": 1,
+      "message": "Here is the exact commit you should cherry-pick to solve this issue as it has already been fixed in the -lts branch: https://android-review.git.corp.google.com/c/kernel/common/+/3266973",
+      "parentUuid": "02d9fb40_b88dbf8c",
+      "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
