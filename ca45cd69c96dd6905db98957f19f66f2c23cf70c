@@ -69,6 +69,41 @@
       "parentUuid": "f899e82b_e1f9aa9b",
       "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee67284_68a9ade7",
+        "filename": "fs/f2fs/checkpoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-10T19:42:51Z",
+      "side": 1,
+      "message": "Yes, the trace macros don\u0027t behave well for static inline cases.",
+      "parentUuid": "e4d06960_bb960c0f",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab447d79_f1c9be66",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-10T19:42:51Z",
+      "side": 1,
+      "message": "presumably this is a _static inline_ to avoid function calls in a sensitive performance path, so doing this call kinda defeats the purpose. How about we only do this call if there is an attached handler:\n```\n   if (trace_android_rvh_f2fs_down_read_enabled())\n       _trace_android_rvh_f2fs_down_read(\u0026sem-\u003eread_waiters, \u0026sem-\u003einternal_rwsem, \u0026skip);\n```\nthe _enabled test is done inline so this eliminates any function call in the case where no handler is attached.",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
