@@ -70,6 +70,24 @@
       "parentUuid": "9ff32a86_07861ac8",
       "revId": "d356c338f4c01fdbe46579d94f49bdeabedc277c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "342ae2ec_91ed9a53",
+        "filename": "drivers/staging/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-10T00:30:33Z",
+      "side": 1,
+      "message": "Looks fine, unless you are going to create another CONFIG_ that is set if either ASHMEM || ASHMEM_RUST is set, then you can depend on this CONFIG_ instead.\n\nAnd yeah this does look like a ANDROID: change; the last time it is modified is in CL:2185557",
+      "parentUuid": "e0057cad_9d550daf",
+      "revId": "d356c338f4c01fdbe46579d94f49bdeabedc277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
