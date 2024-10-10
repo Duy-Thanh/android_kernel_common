@@ -27,6 +27,10 @@
 #include "lapic.h"
 #include "pci.h"
 
+bool pvmfw_present;
+phys_addr_t pvmfw_base;
+phys_addr_t pvmfw_size;
+
 void *pkvm_mmu_pgt_base;
 void *pkvm_vmemmap_base;
 void *host_ept_pgt_base;
@@ -181,6 +185,14 @@ static int create_mmu_mapping(const struct pkvm_section sections[],
 	if (ret)
 		return ret;
 
+	if (pvmfw_present) {
+		ret = pkvm_mmu_map((unsigned long)__pkvm_va(pvmfw_base),
+				   pvmfw_base, pvmfw_size, 0,
+				   (u64)pgprot_val(PAGE_KERNEL_RO));
+		if (ret)
+			return ret;
+	}
+
 	/* Switch the mmu pgtable to enable pkvm_vmemmap */
 	native_write_cr3(pkvm_hyp->mmu->root_pa);
 
@@ -254,6 +266,14 @@ static int protect_pkvm_pages(const struct pkvm_section sections[],
 	if (ret) {
 		pkvm_err("%s: failed to protect reserved memory\n", __func__);
 		return ret;
+	}
+
+	if (pvmfw_present) {
+		ret = pkvm_host_ept_unmap(pvmfw_base, pvmfw_base, pvmfw_size);
+		if (ret) {
+			pkvm_err("%s: failed to protect pvmfw memory\n", __func__);
+			return ret;
+		}
 	}
 
 	return 0;
