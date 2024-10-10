@@ -16,6 +16,23 @@
       "message": "For not same author date as original commit, due to original patch can\u0027t apply for lts-6.1, so we can apply the Cherry pick patch only.\n\nOriginal author date: Wed May 8 09:14:00 2024 +0100\nhttps://git.kernel.org/pub/scm/linux/kernel/git/mark/linux.git/commit/?h\u003darm64/ssbs-erratum\u0026id\u003d7187bb7d0b5c7dfa18ca82e9e5c75e13861b1d88\n\nCherry pick author date: Fri Aug 9 11:02:15 2024 +0100\nhttps://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?h\u003dv6.1.106\u0026id\u003d286c8ca924b220212fdeab81cb652fdaa77e38fe",
       "revId": "9f55b138ae3042a52792d5593488c4aa28c6cd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2580948f_e6ae2dd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-10T12:19:42Z",
+      "side": 1,
+      "message": "Why not wait a week for the -lts branch to be merged into here if you want this merged?  is there a rush?",
+      "revId": "9f55b138ae3042a52792d5593488c4aa28c6cd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
