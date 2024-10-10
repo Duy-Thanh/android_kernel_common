@@ -70,6 +70,24 @@
       "parentUuid": "986cee0d_da3fa3eb",
       "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d9fb40_b88dbf8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2024-10-10T06:25:40Z",
+      "side": 1,
+      "message": "I find cpu_hwcaps type no change, I provide abi_gki_aarch64.stg patch, if incorrect, could you please show how to fix it? Thanks a lot\nhttps://android-review.googlesource.com/c/kernel/common/+/3304175\n\nbuild vmlinux and compare cpu_hwcaps type with gdb\n//before patch\n(gdb) ptype cpu_hwcaps\ntype \u003d unsigned long [2]\n(gdb) p cpu_hwcaps\n$3 \u003d {0, 0}\n(gdb) p \u0026cpu_hwcaps\n$4 \u003d (unsigned long (*)[2]) 0xffffffc00a1a0640 \u003ccpu_hwcaps\u003e\n\n//after patch\n(gdb) ptype cpu_hwcaps\ntype \u003d unsigned long [2]\n(gdb) p cpu_hwcaps\n$1 \u003d {0, 0}\n(gdb) p \u0026cpu_hwcaps\n$2 \u003d (unsigned long (*)[2]) 0xffffffc00a3b5648 \u003ccpu_hwcaps\u003e",
+      "parentUuid": "8015ff6c_71186ae9",
+      "revId": "bf3dae8f075a0338820ae91a17049613af3678a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
