@@ -67,6 +67,7 @@
   swp_swapcount
   __kfree_skb
   __traceiter_android_rvh_arm64_serror_panic
+  __traceiter_android_rvh_bad_stack_info
   __traceiter_android_rvh_die_kernel_fault
   __traceiter_android_rvh_do_el1_bti
   __traceiter_android_rvh_do_el1_fpac
@@ -85,6 +86,7 @@
   __traceiter_android_vh_cache_show
   __traceiter_android_vh_cma_alloc_set_max_retries
   __traceiter_android_vh_cma_debug_show_areas
+  __traceiter_android_vh_device_shutdown
   __traceiter_android_vh_dma_heap_buffer_alloc_start
   __traceiter_android_vh_dma_heap_buffer_alloc_end
   __traceiter_android_vh_dmabuf_page_pool_free_bypass
@@ -131,9 +133,12 @@
   __traceiter_android_vh_split_large_folio_bypass
   __traceiter_android_vh_sync_irq_wait_finish
   __traceiter_android_vh_sync_irq_wait_start
+  __traceiter_android_vh_synchronize_irq_finish
+  __traceiter_android_vh_synchronize_irq_start
   __traceiter_android_vh_try_to_freeze_todo
   __traceiter_android_vh_try_to_freeze_todo_unfrozen
   __traceiter_android_vh_tune_scan_control
+  __traceiter_android_vh_unfrozen_task
   __traceiter_android_vh_use_vm_swappiness
   __traceiter_android_vh_warn_alloc_tune_ratelimit
   __traceiter_android_vh_warn_alloc_show_mem_bypass
@@ -148,6 +153,7 @@
   __traceiter_workqueue_execute_start
   __traceiter_kfree_skb
   __tracepoint_android_rvh_arm64_serror_panic
+  __tracepoint_android_rvh_bad_stack_info
   __tracepoint_android_rvh_die_kernel_fault
   __tracepoint_android_rvh_do_el1_bti
   __tracepoint_android_rvh_do_el1_fpac
@@ -166,6 +172,7 @@
   __tracepoint_android_vh_cache_show
   __tracepoint_android_vh_cma_alloc_set_max_retries
   __tracepoint_android_vh_cma_debug_show_areas
+  __tracepoint_android_vh_device_shutdown
   __tracepoint_android_vh_dma_heap_buffer_alloc_start
   __tracepoint_android_vh_dma_heap_buffer_alloc_end
   __tracepoint_android_vh_dmabuf_page_pool_free_bypass
@@ -212,9 +219,12 @@
   __tracepoint_android_vh_suitable_migration_target_bypass
   __tracepoint_android_vh_sync_irq_wait_finish
   __tracepoint_android_vh_sync_irq_wait_start
+  __tracepoint_android_vh_synchronize_irq_finish
+  __tracepoint_android_vh_synchronize_irq_start
   __tracepoint_android_vh_try_to_freeze_todo
   __tracepoint_android_vh_try_to_freeze_todo_unfrozen
   __tracepoint_android_vh_tune_scan_control
+  __tracepoint_android_vh_unfrozen_task
   __tracepoint_android_vh_use_vm_swappiness
   __tracepoint_android_vh_warn_alloc_tune_ratelimit
   __tracepoint_android_vh_warn_alloc_show_mem_bypass
