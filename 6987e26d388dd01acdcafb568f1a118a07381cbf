@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb155337_8c266cb9",
+        "filename": "android/abi_gki_aarch64_honor",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-11T18:04:19Z",
+      "side": 1,
+      "message": "need the __traceiter version of the symbol too",
+      "revId": "6987e26d388dd01acdcafb568f1a118a07381cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
