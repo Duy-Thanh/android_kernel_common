@@ -1193,9 +1193,10 @@ static s64 update_curr_se(struct rq *rq, struct sched_entity *curr)
 	return delta_exec;
 }
 
-static inline void update_curr_task(struct task_struct *p, s64 delta_exec)
+static inline void update_curr_task(struct task_struct *p, s64 delta_exec,
+					u64 vruntime)
 {
-	trace_sched_stat_runtime(p, delta_exec);
+	trace_sched_stat_runtime(p, delta_exec, vruntime);
 	account_group_exec_runtime(p, delta_exec);
 	cgroup_account_cputime(p, delta_exec);
 	if (p->dl_server)
@@ -1244,7 +1245,7 @@ s64 update_curr_common(struct rq *rq)
 
 	delta_exec = update_curr_se(rq, &donor->se);
 	if (likely(delta_exec > 0))
-		update_curr_task(donor, delta_exec);
+		update_curr_task(donor, delta_exec, 0);
 
 	return delta_exec;
 }
@@ -1273,7 +1274,7 @@ static void update_curr(struct cfs_rq *cfs_rq)
 	if (entity_is_task(curr)) {
 		struct task_struct *p = task_of(curr);
 
-		update_curr_task(p, delta_exec);
+		update_curr_task(p, delta_exec, curr->vruntime);
 
 		/*
 		 * Any fair task that runs outside of fair_server should
