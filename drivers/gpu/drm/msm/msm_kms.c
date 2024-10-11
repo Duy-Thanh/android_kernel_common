@@ -168,10 +168,7 @@ static int msm_kms_fault_handler(void *arg, unsigned long iova, int flags, void 
 {
 	struct msm_kms *kms = arg;
 
-	if (!kms->fault_snapshot_capture) {
-		msm_disp_snapshot_state(kms->dev);
-		kms->fault_snapshot_capture++;
-	}
+	msm_disp_snapshot_state(kms->dev);
 
 	return -ENOSYS;
 }
@@ -211,7 +208,6 @@ struct msm_gem_address_space *msm_kms_init_aspace(struct drm_device *dev)
 		mmu->funcs->destroy(mmu);
 	}
 
-	kms->fault_snapshot_capture = 0;
 	msm_mmu_set_fault_handler(aspace->mmu, kms, msm_kms_fault_handler);
 
 	return aspace;
