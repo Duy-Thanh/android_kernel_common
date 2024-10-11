@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63d464c5_93caf645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-11T10:05:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c89e6eb0_2bbb738f",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f899e82b_e1f9aa9b",
@@ -89,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd973be9_e8ee359e",
+        "filename": "fs/f2fs/checkpoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-11T10:05:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fee67284_68a9ade7",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab447d79_f1c9be66",
@@ -102,6 +138,24 @@
       "writtenOn": "2024-10-10T19:42:51Z",
       "side": 1,
       "message": "presumably this is a _static inline_ to avoid function calls in a sensitive performance path, so doing this call kinda defeats the purpose. How about we only do this call if there is an attached handler:\n```\n   if (trace_android_rvh_f2fs_down_read_enabled())\n       _trace_android_rvh_f2fs_down_read(\u0026sem-\u003eread_waiters, \u0026sem-\u003einternal_rwsem, \u0026skip);\n```\nthe _enabled test is done inline so this eliminates any function call in the case where no handler is attached.",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5297fa4a_a7206bc4",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-11T10:05:56Z",
+      "side": 1,
+      "message": "Yes, this patch sacrifices the original performance of \"static inline\",\nbut \u0027trace_android_rvh_f2fs_down_read_enabled\u0027 is not placed here for the same compiling issue.",
+      "parentUuid": "ab447d79_f1c9be66",
       "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
