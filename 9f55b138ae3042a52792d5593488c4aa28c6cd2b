@@ -33,6 +33,24 @@
       "message": "Why not wait a week for the -lts branch to be merged into here if you want this merged?  is there a rush?",
       "revId": "9f55b138ae3042a52792d5593488c4aa28c6cd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d04c536e_5017a66a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2024-10-11T02:06:17Z",
+      "side": 1,
+      "message": "Really? google will merge the lts patch in 1 week? I can wait\n\nI can\u0027t access this link, maybe this is google internal link\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3266973",
+      "parentUuid": "2580948f_e6ae2dd9",
+      "revId": "9f55b138ae3042a52792d5593488c4aa28c6cd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
