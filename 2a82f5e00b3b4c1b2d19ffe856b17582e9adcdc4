@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbf6a427_05de5443",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2024-10-11T12:00:02Z",
+      "side": 1,
+      "message": "fix abi break reference aosp/3266973, also change from UPSTREAM to BACKPORT.",
+      "revId": "2a82f5e00b3b4c1b2d19ffe856b17582e9adcdc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
