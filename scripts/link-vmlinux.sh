@@ -107,7 +107,19 @@ vmlinux_link()
 # ${1} - vmlinux image
 gen_btf()
 {
+	local pahole_ver
 	local btf_data=${1}.btf.o
+
+	if ! [ -x "$(command -v ${PAHOLE})" ]; then
+		echo >&2 "BTF: ${1}: pahole (${PAHOLE}) is not available"
+		return 1
+	fi
+
+	pahole_ver=$(${PAHOLE} --version | sed -E 's/v([0-9]+)\.([0-9]+)/\1\2/')
+	if [ "${pahole_ver}" -lt "116" ]; then
+		echo >&2 "BTF: ${1}: pahole version $(${PAHOLE} --version) is too old, need at least v1.16"
+		return 1
+	fi
 
 	info BTF "${btf_data}"
 	LLVM_OBJCOPY="${OBJCOPY}" ${PAHOLE} -J ${PAHOLE_FLAGS} ${1}
@@ -272,7 +284,7 @@ strip_debug=
 vmlinux_link vmlinux
 
 # fill in BTF IDs
-if is_enabled CONFIG_DEBUG_INFO_BTF; then
+if is_enabled CONFIG_DEBUG_INFO_BTF && is_enabled CONFIG_BPF; then
 	info BTFIDS vmlinux
 	${RESOLVE_BTFIDS} vmlinux
 fi

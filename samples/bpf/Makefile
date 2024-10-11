@@ -13,6 +13,7 @@ tprogs-y += sockex1
 tprogs-y += sockex2
 tprogs-y += sockex3
 tprogs-y += tracex1
+tprogs-y += tracex2
 tprogs-y += tracex3
 tprogs-y += tracex4
 tprogs-y += tracex5
@@ -62,6 +63,7 @@ sockex1-objs := sockex1_user.o
 sockex2-objs := sockex2_user.o
 sockex3-objs := sockex3_user.o
 tracex1-objs := tracex1_user.o $(TRACE_HELPERS)
+tracex2-objs := tracex2_user.o
 tracex3-objs := tracex3_user.o
 tracex4-objs := tracex4_user.o
 tracex5-objs := tracex5_user.o $(TRACE_HELPERS)
@@ -103,6 +105,7 @@ always-y += sockex1_kern.o
 always-y += sockex2_kern.o
 always-y += sockex3_kern.o
 always-y += tracex1.bpf.o
+always-y += tracex2.bpf.o
 always-y += tracex3.bpf.o
 always-y += tracex4.bpf.o
 always-y += tracex5.bpf.o
@@ -164,10 +167,6 @@ ifdef CONFIG_MACH_LOONGSON64
 BPF_EXTRA_CFLAGS += -I$(srctree)/arch/mips/include/asm/mach-loongson64
 BPF_EXTRA_CFLAGS += -I$(srctree)/arch/mips/include/asm/mach-generic
 endif
-endif
-
-ifeq ($(ARCH), x86)
-BPF_EXTRA_CFLAGS += -fcf-protection
 endif
 
 TPROGS_CFLAGS += -Wall -O2
@@ -406,7 +405,7 @@ $(obj)/%.o: $(src)/%.c
 		-Wno-gnu-variable-sized-type-not-at-end \
 		-Wno-address-of-packed-member -Wno-tautological-compare \
 		-Wno-unknown-warning-option $(CLANG_ARCH_ARGS) \
-		-fno-asynchronous-unwind-tables \
+		-fno-asynchronous-unwind-tables -fcf-protection \
 		-I$(srctree)/samples/bpf/ -include asm_goto_workaround.h \
 		-O2 -emit-llvm -Xclang -disable-llvm-passes -c $< -o - | \
 		$(OPT) -O2 -mtriple=bpf-pc-linux | $(LLVM_DIS) | \

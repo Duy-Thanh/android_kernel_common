@@ -709,10 +709,10 @@ static void seq_print_delegate_opts(struct seq_file *m,
 			msk = 1ULL << e->val;
 			if (delegate_msk & msk) {
 				/* emit lower-case name without prefix */
-				seq_putc(m, first ? '=' : ':');
+				seq_printf(m, "%c", first ? '=' : ':');
 				name += pfx_len;
 				while (*name) {
-					seq_putc(m, tolower(*name));
+					seq_printf(m, "%c", tolower(*name));
 					name++;
 				}
 

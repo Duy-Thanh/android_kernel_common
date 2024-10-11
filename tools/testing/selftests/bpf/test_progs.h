@@ -74,9 +74,8 @@ struct subtest_state {
 	int error_cnt;
 	bool skipped;
 	bool filtered;
-	bool should_tmon;
 
-	FILE *stdout_saved;
+	FILE *stdout;
 };
 
 struct test_state {
@@ -93,15 +92,12 @@ struct test_state {
 	size_t log_cnt;
 	char *log_buf;
 
-	FILE *stdout_saved;
+	FILE *stdout;
 };
-
-extern int env_verbosity;
 
 struct test_env {
 	struct test_selector test_selector;
 	struct test_selector subtest_selector;
-	struct test_selector tmon_selector;
 	bool verifier_stats;
 	bool debug;
 	enum verbosity verbosity;
@@ -115,8 +111,8 @@ struct test_env {
 	struct test_state *test_state; /* current running test state */
 	struct subtest_state *subtest_state; /* current running subtest state */
 
-	FILE *stdout_saved;
-	FILE *stderr_saved;
+	FILE *stdout;
+	FILE *stderr;
 	int nr_cpus;
 	FILE *json;
 
@@ -432,10 +428,6 @@ int write_sysctl(const char *sysctl, const char *value);
 int get_bpf_max_tramp_links_from(struct btf *btf);
 int get_bpf_max_tramp_links(void);
 
-struct netns_obj;
-struct netns_obj *netns_new(const char *name, bool open);
-void netns_free(struct netns_obj *netns);
-
 #ifdef __x86_64__
 #define SYS_NANOSLEEP_KPROBE_NAME "__x64_sys_nanosleep"
 #elif defined(__s390x__)
@@ -455,6 +447,7 @@ typedef int (*pre_execution_cb)(struct bpf_object *obj);
 struct test_loader {
 	char *log_buf;
 	size_t log_buf_sz;
+	size_t next_match_pos;
 	pre_execution_cb pre_execution_cb;
 
 	struct bpf_object *obj;

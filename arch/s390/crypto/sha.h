@@ -25,7 +25,6 @@ struct s390_sha_ctx {
 	u32 state[CPACF_MAX_PARMBLOCK_SIZE / sizeof(u32)];
 	u8 buf[SHA_MAX_BLOCK_SIZE];
 	int func;		/* KIMD function to use */
-	int first_message_part;
 };
 
 struct shash_desc;

@@ -47,7 +47,6 @@ enum interruption_class {
 	IRQEXT_CMS,
 	IRQEXT_CMC,
 	IRQEXT_FTP,
-	IRQEXT_WTI,
 	IRQIO_CIO,
 	IRQIO_DAS,
 	IRQIO_C15,
@@ -100,7 +99,6 @@ int unregister_external_irq(u16 code, ext_int_handler_t handler);
 enum irq_subclass {
 	IRQ_SUBCLASS_MEASUREMENT_ALERT = 5,
 	IRQ_SUBCLASS_SERVICE_SIGNAL = 9,
-	IRQ_SUBCLASS_WARNING_TRACK = 33,
 };
 
 #define CR0_IRQ_SUBCLASS_MASK					  \

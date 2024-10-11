@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <net/if.h>
+#include <linux/in6.h>
 #include <linux/if_alg.h>
 
 #include "test_progs.h"

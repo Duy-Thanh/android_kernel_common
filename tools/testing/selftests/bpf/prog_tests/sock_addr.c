@@ -2642,7 +2642,6 @@ void test_sock_addr(void)
 			break;
 		default:
 			ASSERT_TRUE(false, "Unknown sock addr test type");
-			err = -EINVAL;
 			break;
 		}
 
