@@ -2554,6 +2554,8 @@ retry:
 
 	filemap_get_read_batch(mapping, index, last_index - 1, fbatch);
 	if (!folio_batch_count(fbatch)) {
+		trace_android_vh_page_cache_miss(filp, index,
+				last_index - index, true);
 		if (iocb->ki_flags & IOCB_NOIO)
 			return -EAGAIN;
 		if (iocb->ki_flags & IOCB_NOWAIT)
@@ -3346,6 +3348,7 @@ vm_fault_t filemap_fault(struct vm_fault *vmf)
 			mapping_locked = true;
 		}
 	} else {
+		trace_android_vh_page_cache_miss(file, index, 1, false);
 		ret = filemap_fault_recheck_pte_none(vmf);
 		if (unlikely(ret))
 			return ret;

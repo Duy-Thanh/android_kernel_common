@@ -167,6 +167,10 @@ DECLARE_HOOK(android_vh_show_smap,
 		unsigned long swap_shared, unsigned long writeback,
 		unsigned long same, unsigned long huge),
 	TP_ARGS(m, swap_shared, writeback, same, huge));
+DECLARE_HOOK(android_vh_page_cache_miss,
+	TP_PROTO(struct file *file, pgoff_t start,
+		pgoff_t len, bool buffered_read),
+	TP_ARGS(file, start, len, buffered_read));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
