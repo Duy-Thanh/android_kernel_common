@@ -51,6 +51,24 @@
       "parentUuid": "2580948f_e6ae2dd9",
       "revId": "9f55b138ae3042a52792d5593488c4aa28c6cd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "952ce21a_4f4ac000",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2024-10-11T03:44:21Z",
+      "side": 1,
+      "message": "update patch to fix abi break reference 3235612, also change from UPSTREAM to BACKPORT.\nhttps://android-review.googlesource.com/c/kernel/common/+/3266973",
+      "parentUuid": "d04c536e_5017a66a",
+      "revId": "9f55b138ae3042a52792d5593488c4aa28c6cd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
