@@ -22,6 +22,30 @@
       },
       "revId": "b06979b00ee2dcc7d67db878807d8e7f114a06fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaef4feb_95682e6c",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7287,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-10-11T00:01:59Z",
+      "side": 1,
+      "message": "New value \"prio\" is used to save \u0026 restore sched priority of current process.\nThis will be stored in begin vendor hook and restored in end vendor hook.",
+      "parentUuid": "01c8be45_11529160",
+      "range": {
+        "startLine": 7287,
+        "startChar": 1,
+        "endLine": 7287,
+        "endChar": 46
+      },
+      "revId": "b06979b00ee2dcc7d67db878807d8e7f114a06fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
