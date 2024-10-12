@@ -1721,6 +1721,7 @@
   __traceiter_android_rvh_wake_up_new_task
   __traceiter_android_vh_account_task_time
   __traceiter_android_vh_allow_domain_state
+  __traceiter_android_vh_binder_proc_transaction_entry
   __traceiter_android_vh_binder_restore_priority
   __traceiter_android_vh_binder_set_priority
   __traceiter_android_vh_binder_trans
@@ -1848,6 +1849,7 @@
   __tracepoint_android_rvh_wake_up_new_task
   __tracepoint_android_vh_account_task_time
   __tracepoint_android_vh_allow_domain_state
+  __tracepoint_android_vh_binder_proc_transaction_entry
   __tracepoint_android_vh_binder_restore_priority
   __tracepoint_android_vh_binder_set_priority
   __tracepoint_android_vh_binder_trans
