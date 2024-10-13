@@ -16,6 +16,24 @@
       "message": "Cool!\nAny way we could also check if `CONFIG_KSM` so that this is only enabled for those kernels? At the very least to reduce risk.",
       "revId": "7be1785e05364b94fafac9d16e30d4067503399e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b56e35_bb28703e",
+        "filename": "mm/mmap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1482,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2024-10-13T18:54:16Z",
+      "side": 1,
+      "message": "Thanks Shai. This is for the quick prototype; for real production we wanted to do this but I don\u0027t think this change as it is acceptable anywhere as I am fooling the locking. This is just my idea to match Illiyan\u0027s this change http://ag/163554 to replicate experiment.",
+      "parentUuid": "c18cf43e_79cdd847",
+      "revId": "7be1785e05364b94fafac9d16e30d4067503399e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
