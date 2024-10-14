@@ -10,6 +10,22 @@
 #include <linux/tracepoint.h>
 #include <linux/binfmts.h>
 
+TRACE_EVENT(sched_try_to_wake_up,
+        TP_PROTO(int ee),
+
+        TP_ARGS(ee),
+
+        TP_STRUCT__entry(
+                __field(int, ee)
+        ),
+
+        TP_fast_assign(
+                __entry->ee = ee;
+        ),
+
+        TP_printk("%s", __entry->ee? "ENTER":"EXIT")
+);
+
 /*
  * Tracepoint for calling kthread_stop, performed to end a kthread:
  */

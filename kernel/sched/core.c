@@ -82,6 +82,8 @@
 #include <trace/events/sched.h>
 #undef CREATE_TRACE_POINTS
 
+#include <trace/events/power.h>
+
 #include "sched.h"
 #include "stats.h"
 #include "autogroup.h"
@@ -4222,6 +4224,7 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	unsigned long flags;
 	int cpu, success = 0;
 
+        trace_sched_try_to_wake_up(1);
 	preempt_disable();
 	if (p == current) {
 		/*
@@ -4380,6 +4383,7 @@ out:
 		ttwu_stat(p, task_cpu(p), wake_flags);
 	}
 	preempt_enable();
+        trace_sched_try_to_wake_up(0);
 
 	return success;
 }
@@ -4414,7 +4418,7 @@ static bool __task_needs_rq_lock(struct task_struct *p)
 	smp_rmb();
 	smp_cond_load_acquire(&p->on_cpu, !VAL);
 #endif
-
+        BUG();
 	return false;
 }
 
