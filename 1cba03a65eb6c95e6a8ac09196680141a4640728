@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ffa374_3ab4dd18",
+        "filename": "fs/exfat/inode.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-14T15:18:37Z",
+      "side": 1,
+      "message": "nit: this line is not part of the upstream patch.",
+      "revId": "1cba03a65eb6c95e6a8ac09196680141a4640728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
