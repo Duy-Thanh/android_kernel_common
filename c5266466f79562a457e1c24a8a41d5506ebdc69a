@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa705c5c_11634d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-14T23:36:10Z",
+      "side": 1,
+      "message": "wait on this until vendors have a chance to switch to the dynamic task_struct size.",
+      "revId": "c5266466f79562a457e1c24a8a41d5506ebdc69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
