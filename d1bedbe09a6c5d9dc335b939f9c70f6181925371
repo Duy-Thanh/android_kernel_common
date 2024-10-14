@@ -16,6 +16,41 @@
       "message": "Breaks the abi :(",
       "revId": "d1bedbe09a6c5d9dc335b939f9c70f6181925371",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e341c5_f1b591a2",
+        "filename": "include/linux/android_debug_symbols.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-14T17:32:40Z",
+      "side": 1,
+      "message": "breaks KMI. You can suppress the CRC change by wrapping the new values in `#ifndef __GENKSYMS__`",
+      "fixSuggestions": [
+        {
+          "fixId": "4b95b14e_0f24310f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/android_debug_symbols.h",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "\tADS_START_RO_AFTER_INIT, /* for debugging rodata */\n\tADS_END_RO_AFTER_INIT, /* for debugging rodata */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d1bedbe09a6c5d9dc335b939f9c70f6181925371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
