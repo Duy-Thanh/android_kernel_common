@@ -22,6 +22,8 @@ enum android_debug_symbol {
 	ADS_TOTAL_CMA, /* for debugging total cma pages */
 	ADS_SLAB_CACHES, /* for debugging slab */
 	ADS_SLAB_MUTEX, /* for debugging slab */
+	ADS_START_RO_AFTER_INIT,
+	ADS_END_RO_AFTER_INIT,
 	ADS_END
 };
 
