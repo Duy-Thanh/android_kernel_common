@@ -16,6 +16,23 @@
       "message": "```\ncommon/net/ipv4/udp_offload.c:287:17: error: implicit declaration of function \u0027udp_v6_check\u0027 [-Werror,-Wimplicit-function-declaration]\n                        uh-\u003echeck \u003d ~udp_v6_check(gso_skb-\u003elen,\n                                     ^\ncommon/net/ipv4/udp_offload.c:287:17: note: did you mean \u0027udp_v4_check\u0027?\ncommon/include/net/udp.h:149:23: note: \u0027udp_v4_check\u0027 declared here\nstatic inline __sum16 udp_v4_check(int len, __be32 saddr,\n                      ^\n1 error generated.\n```",
       "revId": "8759f801bad88b573432ba339a566621dcdd9a5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af40a003_1a13a0c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-14T17:26:22Z",
+      "side": 1,
+      "message": "breaks the build. Please build and test before uploading broken patches!",
+      "revId": "8759f801bad88b573432ba339a566621dcdd9a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
