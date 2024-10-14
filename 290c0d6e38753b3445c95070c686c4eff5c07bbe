@@ -46,6 +46,30 @@
       },
       "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322d15ea_761e1801",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-10-14T19:58:29Z",
+      "side": 1,
+      "message": "Can you clarify what you mean by \u0027trying to create a duplicate\u0027? This driver is designed/limited to be a singleton, due to the userspace compatibility requirements.\n\nCan you point me to the 6.1 discussion?\n\nHow are you reproducing this? The acquisition of acc_dev_instance_lock at line 1259 should prevent multiple instances of this driver.",
+      "parentUuid": "3a7684a6_b8a55970",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
