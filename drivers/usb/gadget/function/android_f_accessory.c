@@ -1291,6 +1291,14 @@ static int acc_init(void)
 
 err_free_dev:
 	kfree(dev);
+	/*
+	 * Multiple threads might try to access the acc_dev_instance
+	 * therefore protect the failure path with spinlock to avoid race
+	 * conditions.
+	 */
+	spin_lock_irqsave(&acc_dev_instance_lock, flags);
+	acc_dev_instance = NULL;
+	spin_unlock_irqrestore(&acc_dev_instance_lock, flags);
 	pr_err("USB accessory gadget driver failed to initialize\n");
 	return ret;
 }
