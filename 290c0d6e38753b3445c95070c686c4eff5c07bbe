@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf008762_8d4430d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-14T16:14:49Z",
+      "side": 1,
+      "message": "wait, why?  Shouldn\u0027t we fix that first?  that\u0027s the root cause here.",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
