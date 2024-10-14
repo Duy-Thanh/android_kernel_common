@@ -67,7 +67,7 @@
 #include <linux/time_namespace.h>
 #include <linux/user_events.h>
 #include <linux/page_size_compat.h>
-
+#include <linux/fs_parser.h>
 #include <linux/uaccess.h>
 #include <asm/mmu_context.h>
 #include <asm/tlb.h>
@@ -114,6 +114,24 @@ bool path_noexec(const struct path *path)
 	return (path->mnt->mnt_flags & MNT_NOEXEC) ||
 	       (path->mnt->mnt_sb->s_iflags & SB_I_NOEXEC);
 }
+
+#ifdef CONFIG_64BIT
+static bool seal_system_mappings_enabled(void)
+{
+	return true;
+}
+
+void update_seal_exec_system_mappings(unsigned long *vm_flags)
+{
+	if (!(*vm_flags & VM_SEALED) && seal_system_mappings_enabled())
+		*vm_flags |= VM_SEALED;
+
+}
+#else
+void update_seal_exec_system_mappings(unsigned long *vm_flags)
+{
+}
+#endif /* CONFIG_64BIT */
 
 #ifdef CONFIG_USELIB
 /*
