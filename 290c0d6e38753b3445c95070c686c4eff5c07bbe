@@ -22,6 +22,30 @@
       },
       "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a7684a6_b8a55970",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-10-14T16:24:18Z",
+      "side": 1,
+      "message": "Hi Greg, based on what we had in 6.1 it\u0027s very similar to it.\n\nalthough the error seems to be while trying to create a duplicate :\n\n\u003c4\u003e[64.038821] [pid:   329] sysfs: cannot create duplicate filename \u0027/dev/char/10:113\u0027\n\u003c6\u003e[64.038829] [pid:   329] CPU: 3 PID: 329 Comm: init Tainted: G        W  OE      6.6.30-android15-8-o-gb138eec428c5-4k #1 71ba446e664016e7b2a165e6a24fd90bab0fcc5e\n\u003c6\u003e[64.038842] [pid:   329] Hardware name: Qualcomm Technologies, Inc. Sun MTP,zhufeng (DT)\n\u003c6\u003e[64.038847] [pid:   329] Call trace:\n\u003c6\u003e[64.038851] [pid:   329]  dump_backtrace+0x178/0x1a8\n\u003c6\u003e[64.038862] [pid:   329]  show_stack+0x2c/0x3c\n\u003c6\u003e[64.038870] [pid:   329]  dump_stack_lvl+0x7c/0x9c\n\u003c6\u003e[64.038882] [pid:   329]  dump_stack+0x1c/0x28\n\u003c6\u003e[64.038892] [pid:   329]  sysfs_warn_dup+0x80/0xa0\n\u003c6\u003e[64.038905] [pid:   329]  sysfs_do_create_link_sd+0xb0/0x10c\n\u003c6\u003e[64.038917] [pid:   329]  sysfs_create_link+0x60/0x84\n\u003c6\u003e[64.038928] [pid:   329]  device_create_sys_dev_entry+0xf0/0x144\n\u003c6\u003e[64.038940] [pid:   329]  device_add+0x590/0x7b4\n\u003c6\u003e[64.038950] [pid:   329]  device_create_groups_vargs+0x17c/0x200\n\u003c6\u003e[64.038962] [pid:   329]  device_create_with_groups+0x100/0x158\n\u003c6\u003e[64.038973] [pid:   329]  misc_register+0x1a4/0x318\n\u003c6\u003e[64.038983] [pid:   329]  acc_alloc_inst+0x2ac/0x378\n\u003c6\u003e[64.038996] [pid:   329]  usb_get_function_instance+0xbc/0x254\n\u003c6\u003e[64.039006] [pid:   329]  function_make+0x100/0x2bc\n\u003c6\u003e[64.039016] [pid:   329]  configfs_mkdir+0x2ec/0x664\n\u003c6\u003e[64.039024] [pid:   329]  vfs_mkdir+0x2f4/0x3f8\n\u003c6\u003e[64.039034] [pid:   329]  do_mkdirat+0x154/0x304\n\u003c6\u003e[64.039043] [pid:   329]  __arm64_sys_mkdirat+0x60/0x7c\n\u003c6\u003e[64.039052] [pid:   329]  invoke_syscall+0x9c/0x21c\n\nIt would be great if we can get some advice though to fix it in correct way.",
+      "parentUuid": "bf008762_8d4430d0",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
