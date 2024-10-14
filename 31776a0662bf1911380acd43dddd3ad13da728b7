@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45ab4518_7c8703cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-14T16:21:07Z",
+      "side": 1,
+      "message": "Please abandon this and cherry-pick the upstream commit instead (e8c2af660ba0790afd14d5cbc2fd05c6dc85e207)",
+      "revId": "31776a0662bf1911380acd43dddd3ad13da728b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
