@@ -33,6 +33,24 @@
       "message": "Seems to have the following build issue:\n```\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/net/ipv4/udp_offload.c:287:17: error: implicit declaration of function \u0027udp_v6_check\u0027 [-Werror,-Wimplicit-function-declaration]\n                        uh-\u003echeck \u003d ~udp_v6_check(gso_skb-\u003elen,\n                                     ^\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/net/ipv4/udp_offload.c:287:17: note: did you mean \u0027udp_v4_check\u0027?\n/mnt/disks/build-disk/src/android/common-android13-5.15/common/include/net/udp.h:149:23: note: \u0027udp_v4_check\u0027 declared here\nstatic inline __sum16 udp_v4_check(int len, __be32 saddr,\n                      ^\n1 error generated.\n```",
       "revId": "52c673cf935a8322b67b1249fc5c6ea892d795ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eabf822_df38ccf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892811
+      },
+      "writtenOn": "2024-10-15T06:14:25Z",
+      "side": 1,
+      "message": "As lack of patches in include/net/gro.h, it is hard to merge in.\nIs it OK to just fix the build error (add #include \u003cnet/ip6_checksum.h\u003e in udp_offload.c)?",
+      "parentUuid": "b228ae22_ef79e2e6",
+      "revId": "52c673cf935a8322b67b1249fc5c6ea892d795ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
