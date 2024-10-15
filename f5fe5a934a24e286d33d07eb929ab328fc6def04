@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6048d76d_3a4af962",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-15T16:16:45Z",
+      "side": 1,
+      "message": "Same issue as the previous change, need to preserve the original patch author even with a backport.",
+      "revId": "f5fe5a934a24e286d33d07eb929ab328fc6def04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
