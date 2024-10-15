@@ -371,10 +371,18 @@ enum objext_flags {
 
 static inline bool folio_memcg_kmem(struct folio *folio);
 
+<<<<<<< HEAD   (bdad3f ANDROID: qcom: Update the ABI symbol list)
 void do_traversal_all_lruvec(int (*callback)(struct mem_cgroup *memcg,
 					     struct lruvec *lruvec,
 					     void *private),
 			     void *private);
+||||||| BASE
+=======
+int mem_cgroup_move_account(struct page *page,
+			    bool compound,
+			    struct mem_cgroup *from,
+			    struct mem_cgroup *to);
+>>>>>>> CHANGE (c0b27c ANDROID: mm: export mem_cgroup_move_account)
 
 /*
  * After the initialization objcg->memcg is always pointing at
@@ -1144,6 +1152,14 @@ static inline bool folio_memcg_kmem(struct folio *folio)
 static inline bool PageMemcgKmem(struct page *page)
 {
 	return false;
+}
+
+static inline int mem_cgroup_move_account(struct page *page,
+					  bool compound,
+					  struct mem_cgroup *from,
+					  struct mem_cgroup *to)
+{
+	return 0;
 }
 
 static inline bool mem_cgroup_is_root(struct mem_cgroup *memcg)

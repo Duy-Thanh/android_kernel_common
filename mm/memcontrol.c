@@ -3898,10 +3898,406 @@ static void mem_cgroup_css_rstat_flush(struct cgroup_subsys_state *css, int cpu)
 			if (delta_cpu)
 				lstats->state_local[i] += delta_cpu;
 
+<<<<<<< HEAD   (bdad3f ANDROID: qcom: Update the ABI symbol list)
 			if (delta) {
 				lstats->state[i] += delta;
 				if (plstats)
 					plstats->state_pending[i] += delta;
+||||||| BASE
+			pn->lruvec_stats.state[i] += delta;
+			if (ppn)
+				ppn->lruvec_stats.state_pending[i] += delta;
+		}
+	}
+}
+
+#ifdef CONFIG_MMU
+/* Handlers for move charge at task migration. */
+static int mem_cgroup_do_precharge(unsigned long count)
+{
+	int ret;
+
+	/* Try a single bulk charge without reclaim first, kswapd may wake */
+	ret = try_charge(mc.to, GFP_KERNEL & ~__GFP_DIRECT_RECLAIM, count);
+	if (!ret) {
+		mc.precharge += count;
+		return ret;
+	}
+
+	/* Try charges one by one with reclaim, but do not retry */
+	while (count--) {
+		ret = try_charge(mc.to, GFP_KERNEL | __GFP_NORETRY, 1);
+		if (ret)
+			return ret;
+		mc.precharge++;
+		cond_resched();
+	}
+	return 0;
+}
+
+union mc_target {
+	struct page	*page;
+	swp_entry_t	ent;
+};
+
+enum mc_target_type {
+	MC_TARGET_NONE = 0,
+	MC_TARGET_PAGE,
+	MC_TARGET_SWAP,
+	MC_TARGET_DEVICE,
+};
+
+static struct page *mc_handle_present_pte(struct vm_area_struct *vma,
+						unsigned long addr, pte_t ptent)
+{
+	struct page *page = vm_normal_page(vma, addr, ptent);
+
+	if (!page || !page_mapped(page))
+		return NULL;
+	if (PageAnon(page)) {
+		if (!(mc.flags & MOVE_ANON))
+			return NULL;
+	} else {
+		if (!(mc.flags & MOVE_FILE))
+			return NULL;
+	}
+	if (!get_page_unless_zero(page))
+		return NULL;
+
+	return page;
+}
+
+#if defined(CONFIG_SWAP) || defined(CONFIG_DEVICE_PRIVATE)
+static struct page *mc_handle_swap_pte(struct vm_area_struct *vma,
+			pte_t ptent, swp_entry_t *entry)
+{
+	struct page *page = NULL;
+	swp_entry_t ent = pte_to_swp_entry(ptent);
+
+	if (!(mc.flags & MOVE_ANON))
+		return NULL;
+
+	/*
+	 * Handle device private pages that are not accessible by the CPU, but
+	 * stored as special swap entries in the page table.
+	 */
+	if (is_device_private_entry(ent)) {
+		page = pfn_swap_entry_to_page(ent);
+		if (!get_page_unless_zero(page))
+			return NULL;
+		return page;
+	}
+
+	if (non_swap_entry(ent))
+		return NULL;
+
+	/*
+	 * Because swap_cache_get_folio() updates some statistics counter,
+	 * we call find_get_page() with swapper_space directly.
+	 */
+	page = find_get_page(swap_address_space(ent), swp_offset(ent));
+	entry->val = ent.val;
+
+	return page;
+}
+#else
+static struct page *mc_handle_swap_pte(struct vm_area_struct *vma,
+			pte_t ptent, swp_entry_t *entry)
+{
+	return NULL;
+}
+#endif
+
+static struct page *mc_handle_file_pte(struct vm_area_struct *vma,
+			unsigned long addr, pte_t ptent)
+{
+	if (!vma->vm_file) /* anonymous vma */
+		return NULL;
+	if (!(mc.flags & MOVE_FILE))
+		return NULL;
+
+	/* page is moved even if it's not RSS of this task(page-faulted). */
+	/* shmem/tmpfs may report page out on swap: account for that too. */
+	return find_get_incore_page(vma->vm_file->f_mapping,
+			linear_page_index(vma, addr));
+}
+
+/**
+ * mem_cgroup_move_account - move account of the page
+ * @page: the page
+ * @compound: charge the page as compound or small page
+ * @from: mem_cgroup which the page is moved from.
+ * @to:	mem_cgroup which the page is moved to. @from != @to.
+ *
+ * The caller must make sure the page is not on LRU (isolate_page() is useful.)
+ *
+ * This function doesn't do "charge" to new cgroup and doesn't do "uncharge"
+ * from old cgroup.
+ */
+static int mem_cgroup_move_account(struct page *page,
+				   bool compound,
+				   struct mem_cgroup *from,
+				   struct mem_cgroup *to)
+{
+	struct folio *folio = page_folio(page);
+	struct lruvec *from_vec, *to_vec;
+	struct pglist_data *pgdat;
+	unsigned int nr_pages = compound ? folio_nr_pages(folio) : 1;
+	int nid, ret;
+
+	VM_BUG_ON(from == to);
+	VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
+	VM_BUG_ON(compound && !folio_test_large(folio));
+
+	/*
+	 * Prevent mem_cgroup_migrate() from looking at
+	 * page's memory cgroup of its source page while we change it.
+	 */
+	ret = -EBUSY;
+	if (!folio_trylock(folio))
+		goto out;
+
+	ret = -EINVAL;
+	if (folio_memcg(folio) != from)
+		goto out_unlock;
+
+	pgdat = folio_pgdat(folio);
+	from_vec = mem_cgroup_lruvec(from, pgdat);
+	to_vec = mem_cgroup_lruvec(to, pgdat);
+
+	folio_memcg_lock(folio);
+
+	if (folio_test_anon(folio)) {
+		if (folio_mapped(folio)) {
+			__mod_lruvec_state(from_vec, NR_ANON_MAPPED, -nr_pages);
+			__mod_lruvec_state(to_vec, NR_ANON_MAPPED, nr_pages);
+			if (folio_test_transhuge(folio)) {
+				__mod_lruvec_state(from_vec, NR_ANON_THPS,
+						   -nr_pages);
+				__mod_lruvec_state(to_vec, NR_ANON_THPS,
+						   nr_pages);
+			}
+		}
+	} else {
+		__mod_lruvec_state(from_vec, NR_FILE_PAGES, -nr_pages);
+		__mod_lruvec_state(to_vec, NR_FILE_PAGES, nr_pages);
+
+		if (folio_test_swapbacked(folio)) {
+			__mod_lruvec_state(from_vec, NR_SHMEM, -nr_pages);
+			__mod_lruvec_state(to_vec, NR_SHMEM, nr_pages);
+		}
+
+		if (folio_mapped(folio)) {
+			__mod_lruvec_state(from_vec, NR_FILE_MAPPED, -nr_pages);
+			__mod_lruvec_state(to_vec, NR_FILE_MAPPED, nr_pages);
+		}
+
+		if (folio_test_dirty(folio)) {
+			struct address_space *mapping = folio_mapping(folio);
+
+			if (mapping_can_writeback(mapping)) {
+				__mod_lruvec_state(from_vec, NR_FILE_DIRTY,
+						   -nr_pages);
+				__mod_lruvec_state(to_vec, NR_FILE_DIRTY,
+						   nr_pages);
+=======
+			pn->lruvec_stats.state[i] += delta;
+			if (ppn)
+				ppn->lruvec_stats.state_pending[i] += delta;
+		}
+	}
+}
+
+#ifdef CONFIG_MMU
+/* Handlers for move charge at task migration. */
+static int mem_cgroup_do_precharge(unsigned long count)
+{
+	int ret;
+
+	/* Try a single bulk charge without reclaim first, kswapd may wake */
+	ret = try_charge(mc.to, GFP_KERNEL & ~__GFP_DIRECT_RECLAIM, count);
+	if (!ret) {
+		mc.precharge += count;
+		return ret;
+	}
+
+	/* Try charges one by one with reclaim, but do not retry */
+	while (count--) {
+		ret = try_charge(mc.to, GFP_KERNEL | __GFP_NORETRY, 1);
+		if (ret)
+			return ret;
+		mc.precharge++;
+		cond_resched();
+	}
+	return 0;
+}
+
+union mc_target {
+	struct page	*page;
+	swp_entry_t	ent;
+};
+
+enum mc_target_type {
+	MC_TARGET_NONE = 0,
+	MC_TARGET_PAGE,
+	MC_TARGET_SWAP,
+	MC_TARGET_DEVICE,
+};
+
+static struct page *mc_handle_present_pte(struct vm_area_struct *vma,
+						unsigned long addr, pte_t ptent)
+{
+	struct page *page = vm_normal_page(vma, addr, ptent);
+
+	if (!page || !page_mapped(page))
+		return NULL;
+	if (PageAnon(page)) {
+		if (!(mc.flags & MOVE_ANON))
+			return NULL;
+	} else {
+		if (!(mc.flags & MOVE_FILE))
+			return NULL;
+	}
+	if (!get_page_unless_zero(page))
+		return NULL;
+
+	return page;
+}
+
+#if defined(CONFIG_SWAP) || defined(CONFIG_DEVICE_PRIVATE)
+static struct page *mc_handle_swap_pte(struct vm_area_struct *vma,
+			pte_t ptent, swp_entry_t *entry)
+{
+	struct page *page = NULL;
+	swp_entry_t ent = pte_to_swp_entry(ptent);
+
+	if (!(mc.flags & MOVE_ANON))
+		return NULL;
+
+	/*
+	 * Handle device private pages that are not accessible by the CPU, but
+	 * stored as special swap entries in the page table.
+	 */
+	if (is_device_private_entry(ent)) {
+		page = pfn_swap_entry_to_page(ent);
+		if (!get_page_unless_zero(page))
+			return NULL;
+		return page;
+	}
+
+	if (non_swap_entry(ent))
+		return NULL;
+
+	/*
+	 * Because swap_cache_get_folio() updates some statistics counter,
+	 * we call find_get_page() with swapper_space directly.
+	 */
+	page = find_get_page(swap_address_space(ent), swp_offset(ent));
+	entry->val = ent.val;
+
+	return page;
+}
+#else
+static struct page *mc_handle_swap_pte(struct vm_area_struct *vma,
+			pte_t ptent, swp_entry_t *entry)
+{
+	return NULL;
+}
+#endif
+
+static struct page *mc_handle_file_pte(struct vm_area_struct *vma,
+			unsigned long addr, pte_t ptent)
+{
+	if (!vma->vm_file) /* anonymous vma */
+		return NULL;
+	if (!(mc.flags & MOVE_FILE))
+		return NULL;
+
+	/* page is moved even if it's not RSS of this task(page-faulted). */
+	/* shmem/tmpfs may report page out on swap: account for that too. */
+	return find_get_incore_page(vma->vm_file->f_mapping,
+			linear_page_index(vma, addr));
+}
+
+/**
+ * mem_cgroup_move_account - move account of the page
+ * @page: the page
+ * @compound: charge the page as compound or small page
+ * @from: mem_cgroup which the page is moved from.
+ * @to:	mem_cgroup which the page is moved to. @from != @to.
+ *
+ * The caller must make sure the page is not on LRU (isolate_page() is useful.)
+ *
+ * This function doesn't do "charge" to new cgroup and doesn't do "uncharge"
+ * from old cgroup.
+ */
+int mem_cgroup_move_account(struct page *page,
+				   bool compound,
+				   struct mem_cgroup *from,
+				   struct mem_cgroup *to)
+{
+	struct folio *folio = page_folio(page);
+	struct lruvec *from_vec, *to_vec;
+	struct pglist_data *pgdat;
+	unsigned int nr_pages = compound ? folio_nr_pages(folio) : 1;
+	int nid, ret;
+
+	VM_BUG_ON(from == to);
+	VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
+	VM_BUG_ON(compound && !folio_test_large(folio));
+
+	/*
+	 * Prevent mem_cgroup_migrate() from looking at
+	 * page's memory cgroup of its source page while we change it.
+	 */
+	ret = -EBUSY;
+	if (!folio_trylock(folio))
+		goto out;
+
+	ret = -EINVAL;
+	if (folio_memcg(folio) != from)
+		goto out_unlock;
+
+	pgdat = folio_pgdat(folio);
+	from_vec = mem_cgroup_lruvec(from, pgdat);
+	to_vec = mem_cgroup_lruvec(to, pgdat);
+
+	folio_memcg_lock(folio);
+
+	if (folio_test_anon(folio)) {
+		if (folio_mapped(folio)) {
+			__mod_lruvec_state(from_vec, NR_ANON_MAPPED, -nr_pages);
+			__mod_lruvec_state(to_vec, NR_ANON_MAPPED, nr_pages);
+			if (folio_test_transhuge(folio)) {
+				__mod_lruvec_state(from_vec, NR_ANON_THPS,
+						   -nr_pages);
+				__mod_lruvec_state(to_vec, NR_ANON_THPS,
+						   nr_pages);
+			}
+		}
+	} else {
+		__mod_lruvec_state(from_vec, NR_FILE_PAGES, -nr_pages);
+		__mod_lruvec_state(to_vec, NR_FILE_PAGES, nr_pages);
+
+		if (folio_test_swapbacked(folio)) {
+			__mod_lruvec_state(from_vec, NR_SHMEM, -nr_pages);
+			__mod_lruvec_state(to_vec, NR_SHMEM, nr_pages);
+		}
+
+		if (folio_mapped(folio)) {
+			__mod_lruvec_state(from_vec, NR_FILE_MAPPED, -nr_pages);
+			__mod_lruvec_state(to_vec, NR_FILE_MAPPED, nr_pages);
+		}
+
+		if (folio_test_dirty(folio)) {
+			struct address_space *mapping = folio_mapping(folio);
+
+			if (mapping_can_writeback(mapping)) {
+				__mod_lruvec_state(from_vec, NR_FILE_DIRTY,
+						   -nr_pages);
+				__mod_lruvec_state(to_vec, NR_FILE_DIRTY,
+						   nr_pages);
+>>>>>>> CHANGE (c0b27c ANDROID: mm: export mem_cgroup_move_account)
 			}
 		}
 	}
@@ -3938,6 +4334,7 @@ static void mem_cgroup_exit(struct task_struct *task)
 	 */
 	task->objcg = NULL;
 }
+EXPORT_SYMBOL_GPL(mem_cgroup_move_account);
 
 #ifdef CONFIG_LRU_GEN
 static void mem_cgroup_lru_gen_attach(struct cgroup_taskset *tset)
