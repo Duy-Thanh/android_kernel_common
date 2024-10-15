@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993e4387_de746dbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-15T16:16:12Z",
+      "side": 1,
+      "message": "Need to preserve the author of the original patch even when you backport. \n\nThis can be fixed by `git commit --amend --author\u003d\"[name]\u003c[email]\u003e\"`",
+      "revId": "38e5cc0e2a000c4574373b740b442fc97955491b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
