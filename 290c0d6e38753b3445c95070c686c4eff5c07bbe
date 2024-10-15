@@ -94,6 +94,30 @@
       },
       "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e358ee7_45146a0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-10-15T15:59:15Z",
+      "side": 1,
+      "message": "I see, thanks. I do not understand how flashing and rebooting would cause this, its like something is not getting cleaned up. I do think setting the NULL is appropriate, and therefore have +2\u0027d this, but we should root cause this issue.",
+      "parentUuid": "8fc78d5c_28c0d118",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
