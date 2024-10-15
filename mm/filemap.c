@@ -974,8 +974,13 @@ int filemap_add_folio(struct address_space *mapping, struct folio *folio,
 	struct mem_cgroup *tmp;
 	bool kernel_file = test_bit(AS_KERNEL_FILE, &mapping->flags);
 
+<<<<<<< HEAD   (c375448ca4c34cb24d61fefcdd04e293397f87e1 ANDROID: rust_binder: use target_proc prio for oneway calls)
 	if (kernel_file)
 		tmp = set_active_memcg(root_mem_cgroup);
+||||||| BASE   (8d0690eed76a66fd3b5d3ad2447e82a4d2f3921e ANDROID: CRC / ABI fixups for sched_dl_entity bitfield addit)
+=======
+	trace_android_vh_filemap_add_folio(mapping, folio, index);
+>>>>>>> CHANGE (02b91393cf063af87d5413776144587f73531b3b ANDROID: mm: add vendor hook to add folio to specific memcg)
 	ret = mem_cgroup_charge(folio, NULL, gfp);
 	if (kernel_file)
 		set_active_memcg(tmp);
