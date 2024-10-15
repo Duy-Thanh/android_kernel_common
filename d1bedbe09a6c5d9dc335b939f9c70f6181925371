@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bf7c179_268936ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3398417
+      },
+      "writtenOn": "2024-10-15T03:41:51Z",
+      "side": 1,
+      "message": "The new values have been wrapped in \u0027#ifndef __GENKSYMS__\u0027",
+      "parentUuid": "97495dd3_234e77df",
+      "revId": "d1bedbe09a6c5d9dc335b939f9c70f6181925371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9e341c5_f1b591a2",
         "filename": "include/linux/android_debug_symbols.h",
         "patchSetId": 1
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "d1bedbe09a6c5d9dc335b939f9c70f6181925371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "469b1ab5_3f158438",
+        "filename": "include/linux/android_debug_symbols.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3398417
+      },
+      "writtenOn": "2024-10-15T03:41:51Z",
+      "side": 1,
+      "message": "\"#ifndef __GENKSYMS__\" has been added, thank you very much",
+      "parentUuid": "c9e341c5_f1b591a2",
       "revId": "d1bedbe09a6c5d9dc335b939f9c70f6181925371",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
