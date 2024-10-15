@@ -194,6 +194,24 @@
       "parentUuid": "7f7eade6_e0703933",
       "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3eb9c1e_2ca1559a",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-15T16:15:23Z",
+      "side": 1,
+      "message": "The CONFIG_F2FS_UNFAIR_RWSEM still goes to the down_read_trylock() case, so those hooks are exercised and can cause wait_event() to return control to f2fs_down_read().\n\nPlease explain why \"existing hooks cannot satisfy\". Could a hook be added in the \"normal\" path somewhere to avoid adding it in the inline function here?",
+      "parentUuid": "bc539959_5e5c6702",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
