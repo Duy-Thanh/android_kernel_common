@@ -70,6 +70,30 @@
       },
       "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc78d5c_28c0d118",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-10-15T09:57:38Z",
+      "side": 1,
+      "message": "Hi Neil, \n\napologies for the confusion i meant in 6.1 I see the NULL assignment was there I was trying to make it similar in this patch.\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android14-6.1/drivers/usb/gadget/function/f_accessory.c#1434\n\nI referred to the callstack over here because it looked like a duplicate warning. Please correct me if i\u0027m wrong here.\n\u003c4\u003e[64.038821] [pid: 329] sysfs: cannot create duplicate filename \u0027/dev/char/10:113\u0027\n\nI Agree there must have been something to limit the function from proceeding.\n\nthe steps is keep re-flashing device  again and again\n   adb reboot edl\n   flash device\n\nKeeping the device\u0027s default composition in accessory,adb  mode.\nHowever it\u0027s a corner case and is hard to reproduce.\n \nreproduce rate: 1/60",
+      "parentUuid": "322d15ea_761e1801",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
