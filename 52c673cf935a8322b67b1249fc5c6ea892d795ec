@@ -51,6 +51,24 @@
       "parentUuid": "b228ae22_ef79e2e6",
       "revId": "52c673cf935a8322b67b1249fc5c6ea892d795ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d183c4_392e7b64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-15T15:39:30Z",
+      "side": 1,
+      "message": "Yes, that works - as long as you build *and test* the change. It should then be labeled BACKPORT with an annotation of what needed to be changed. see https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "4eabf822_df38ccf2",
+      "revId": "52c673cf935a8322b67b1249fc5c6ea892d795ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
