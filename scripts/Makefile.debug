@@ -40,7 +40,9 @@ KBUILD_AFLAGS	+= -gz=zlib
 KBUILD_LDFLAGS	+= --compress-debug-sections=zlib
 else ifdef CONFIG_DEBUG_INFO_COMPRESSED_ZSTD
 DEBUG_CFLAGS	+= -gz=zstd
-DEBUG_RUSTFLAGS	+= -Zdebuginfo-compression=zstd
+# TODO(b/364327306): Turn this flag back on when Android's rustc has
+# working zstd debuginfo compression.
+# DEBUG_RUSTFLAGS	+= -Zdebuginfo-compression=zstd
 KBUILD_AFLAGS	+= -gz=zstd
 KBUILD_LDFLAGS	+= --compress-debug-sections=zstd
 endif
