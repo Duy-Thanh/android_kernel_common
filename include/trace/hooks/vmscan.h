@@ -105,7 +105,9 @@ DECLARE_HOOK(android_vh_direct_reclaim_end,
 DECLARE_HOOK(android_vh_throttle_direct_reclaim_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
-
+DECLARE_HOOK(android_vh_shrink_node,
+	TP_PROTO(pg_data_t *pgdat, struct mem_cgroup *memcg),
+	TP_ARGS(pgdat, memcg));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
