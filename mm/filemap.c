@@ -889,10 +889,33 @@ noinline int __filemap_add_folio(struct address_space *mapping,
 			folio);
 	mapping_set_update(&xas, mapping);
 
+<<<<<<< HEAD   (bfd0a3 ANDROID: Allow spinlock, trap_handler and iommu for DDK pKVM)
 	VM_BUG_ON_FOLIO(index & (folio_nr_pages(folio) - 1), folio);
 	xas_set_order(&xas, index, folio_order(folio));
 	huge = folio_test_hugetlb(folio);
 	nr = folio_nr_pages(folio);
+||||||| BASE
+	if (!huge) {
+		int error = mem_cgroup_charge(folio, NULL, gfp);
+		VM_BUG_ON_FOLIO(index & (folio_nr_pages(folio) - 1), folio);
+		if (error)
+			return error;
+		charged = true;
+		xas_set_order(&xas, index, folio_order(folio));
+		nr = folio_nr_pages(folio);
+	}
+=======
+	trace_android_vh_filemap_add_folio(mapping, folio, index);
+	if (!huge) {
+		int error = mem_cgroup_charge(folio, NULL, gfp);
+		VM_BUG_ON_FOLIO(index & (folio_nr_pages(folio) - 1), folio);
+		if (error)
+			return error;
+		charged = true;
+		xas_set_order(&xas, index, folio_order(folio));
+		nr = folio_nr_pages(folio);
+	}
+>>>>>>> CHANGE (f2a18f ANDROID: mm: add vendor hook to add folio to specific memcg)
 
 	gfp &= GFP_RECLAIM_MASK;
 	folio_ref_add(folio, nr);
