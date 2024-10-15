@@ -16,6 +16,24 @@
       "message": "nit: this line is not part of the upstream patch.",
       "revId": "1cba03a65eb6c95e6a8ac09196680141a4640728",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3c95ae8_0c135f43",
+        "filename": "fs/exfat/inode.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 3123981
+      },
+      "writtenOn": "2024-10-15T05:30:48Z",
+      "side": 1,
+      "message": "Sorry for not noticing.\nI see that the review has already been +2, does this area need to be modified?",
+      "parentUuid": "f3ffa374_3ab4dd18",
+      "revId": "1cba03a65eb6c95e6a8ac09196680141a4640728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
