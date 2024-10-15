@@ -176,6 +176,24 @@
       "parentUuid": "5297fa4a_a7206bc4",
       "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc539959_5e5c6702",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-15T11:22:48Z",
+      "side": 1,
+      "message": "1, For new hook is added here to handle more issues on slowpath, while the existing hooks in __down_read_trylock() can not satisfy;\n2, f2fs_down_read has special logic than other rwsem locks.\nFor macro \u0027CONFIG_F2FS_UNFAIR_RWSEM\u003dy\u0027, f2fs_down_read() will enter slowpath with wait_event where has no hooks anymore.",
+      "parentUuid": "7f7eade6_e0703933",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
