@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2f455b_416e94ff",
+        "filename": "fs/exfat/inode.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 3123981
+      },
+      "writtenOn": "2024-10-15T05:26:34Z",
+      "side": 1,
+      "message": "When the disk is ejected, the following process will be triggered:\n\ndel_gendisk\n|_bdi_unregister\n  |_bdi-\u003edev\u003dNULL\n  \nWe can use this value to determine whether the disk has been ejected.\nIt seems that it is not affected by a refcount, because when the device is ejected, del_gendisk is always triggered.",
+      "parentUuid": "ec5b77be_17df8ffa",
+      "revId": "1fab0a96b5a6209fae3f97c6ec4f7a7ee75c73f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06bc3f85_facc3672",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-10-14T19:54:12Z",
       "side": 1,
       "message": "What happens when device is ejected after the check is passed?",
+      "revId": "1fab0a96b5a6209fae3f97c6ec4f7a7ee75c73f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f80fbd08_6377ca98",
+        "filename": "fs/exfat/inode.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 3123981
+      },
+      "writtenOn": "2024-10-15T05:26:34Z",
+      "side": 1,
+      "message": "It will immediately return an IO error, notifying the user to stop continuing writing.\n\nBecause exfat is likely to only mark inode dirty when writing large files, without accessing the disk directly, the write back operation is executed by the write_back process.\n\nAfter the disk is ejected, if you continue to access the disk, the driver will return an IO error. However, since the write back is performe by the write_back porcess, the error will only be returned to the write_back process. The exfat process cannot receive the error, and will continue to write.",
+      "parentUuid": "06bc3f85_facc3672",
       "revId": "1fab0a96b5a6209fae3f97c6ec4f7a7ee75c73f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
