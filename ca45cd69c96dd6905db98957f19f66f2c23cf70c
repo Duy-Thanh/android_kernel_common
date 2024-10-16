@@ -230,6 +230,24 @@
       "parentUuid": "f3eb9c1e_2ca1559a",
       "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8babc51e_0b412791",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-16T17:24:10Z",
+      "side": 1,
+      "message": "\u003e The rwsem source is difficult to be identified as the \"f2fs_rwsem\"\n\nWhy is that important? Isn\u0027t the point to avoid prio inversion? Why does it matter that this particular rwsem case is f2fs? Do you have different priority schemes for f2fs than other paths in the kernel? Why?\n\nI don\u0027t understand why f2fs needs special casing like this when there are hooks for the same purpose (prio inversion) in all of the locking primitives. Please give a detailed explanation why this kind of prio inversion is different than what can be handled with the many hooks that already exist in the rwsem primitives.",
+      "parentUuid": "87dd8676_5fe96e79",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
