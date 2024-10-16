@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "348c6441_0a4a1490",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-10-16T05:29:47Z",
+      "side": 1,
+      "message": "This part of the patch seems unrelated to the description. We should either move it to a separate patch or expand the changelog to explain it.",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 44
+      },
+      "revId": "27dfe9950f897c4e53216837967e6509d37512e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
