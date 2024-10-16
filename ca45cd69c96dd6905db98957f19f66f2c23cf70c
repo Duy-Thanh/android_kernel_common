@@ -212,6 +212,24 @@
       "parentUuid": "bc539959_5e5c6702",
       "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87dd8676_5fe96e79",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-16T03:26:24Z",
+      "side": 1,
+      "message": "It cannot be added in the \"normal\" path.\nreasons here:\n1, The rwsem source is difficult to be identified as the \"f2fs_rwsem\" in existing hooks of down_read_trylock; \n2, It doesn\u0027t always has a slowpath while down_read_trylock returns failed.\n\neg: down_read_trylock of f2fs_down_read_trylock just has a try, and priority policy is unnecessary here -- the key thread may not be blocked here; Once the rwsem owner\u0027s priority is changed, it is difficult to choose a chance to restore it later.\n\nThe priority policy is needed to change the f2fs rwsem owner\u0027s priority while key thread enters \u0027sleep\u0027 before, then restore the owner\u0027s priority until the key thread holds the lock successfully.\n\nThe new hook can cover the whole slowpath that the key thread hold f2fs lock.",
+      "parentUuid": "f3eb9c1e_2ca1559a",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
