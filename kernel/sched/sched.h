@@ -3278,4 +3278,40 @@ static inline void update_current_exec_runtime(struct task_struct *curr,
 }
 
 extern bool cpu_busy_with_softirqs(int cpu);
+<<<<<<< HEAD   (69e1e941dbe1f38e288a4bbec9c3627248161081 ANDROID: GKI: Update xiaomi symbol list)
+||||||| BASE   (24886b585520c852b4c9c8df772f430b764a112d ANDROID: GKI: Add to task_struct size via cmdline)
+#else
+static inline bool cpu_busy_with_softirqs(int cpu)
+{
+	return false;
+}
+#endif /* CONFIG_RT_SOFTIRQ_AWARE_SCHED */
+
+static inline void *android_task_vendor_data(struct task_struct *p)
+{
+	if (p == &init_task)
+		return &vendor_data_pad[0];
+
+	return p + 1;
+}
+
+=======
+#else
+static inline bool cpu_busy_with_softirqs(int cpu)
+{
+	return false;
+}
+#endif /* CONFIG_RT_SOFTIRQ_AWARE_SCHED */
+
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+static inline void *android_task_vendor_data(struct task_struct *p)
+{
+	if (p == &init_task)
+		return &vendor_data_pad[0];
+
+	return p + 1;
+}
+#endif
+
+>>>>>>> CHANGE (a43d5451ea751ef80da623619ed32592c571d520 ANDROID: GKI: Put vendor_data_pad behind CONFIG_GKI_DYNAMIC_)
 #endif /* _KERNEL_SCHED_SCHED_H */

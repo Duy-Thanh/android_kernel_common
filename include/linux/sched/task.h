@@ -51,6 +51,14 @@ extern spinlock_t mmlist_lock;
 
 extern union thread_union init_thread_union;
 extern struct task_struct init_task;
+<<<<<<< HEAD   (69e1e941dbe1f38e288a4bbec9c3627248161081 ANDROID: GKI: Update xiaomi symbol list)
+||||||| BASE   (24886b585520c852b4c9c8df772f430b764a112d ANDROID: GKI: Add to task_struct size via cmdline)
+extern u64 vendor_data_pad[CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX / sizeof(u64)];
+=======
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+extern u64 vendor_data_pad[CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX / sizeof(u64)];
+#endif
+>>>>>>> CHANGE (a43d5451ea751ef80da623619ed32592c571d520 ANDROID: GKI: Put vendor_data_pad behind CONFIG_GKI_DYNAMIC_)
 
 extern int lockdep_tasklist_lock_is_held(void);
 
