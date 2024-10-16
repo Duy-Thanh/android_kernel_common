@@ -65,6 +65,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/module.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/module.h>
+
 /*
  * Mutex protects:
  * 1) List of modules (also safely readable with preempt_disable),
@@ -1306,6 +1309,7 @@ static void module_memory_free(struct module *mod, enum mod_mem_type type)
 
 static void free_mod_mem(struct module *mod)
 {
+	trace_android_vh_free_mod_mem(mod);
 	for_each_mod_mem_type(type) {
 		struct module_memory *mod_mem = &mod->mem[type];
 
@@ -3030,12 +3034,19 @@ static noinline int do_init_module(struct module *mod)
 	/* Switch to core kallsyms now init is done: kallsyms may be walking! */
 	rcu_assign_pointer(mod->kallsyms, &mod->core_kallsyms);
 #endif
+<<<<<<< HEAD   (cbb0a15dcc1e73dbac44e679650711638f54754b FROMGIT: netlink: specs: binder: replace underscores with da)
 	ret = module_enable_rodata_ro(mod, true);
 	if (ret)
 		pr_warn("%s: module_enable_rodata_ro_after_init() returned %d, "
 			"ro_after_init data might still be writable\n",
 			mod->name, ret);
 
+||||||| BASE   (b346d6beb493288449297f3bbd85c37b15890bc7 BACKPORT: mm/thp: fix deferred split unqueue naming and lock)
+	module_enable_ro(mod, true);
+=======
+	module_enable_ro(mod, true);
+	trace_android_vh_set_mod_perm_after_init(mod);
+>>>>>>> CHANGE (6bc6743e622d4e615f120d5e363922c608501d87 ANDROID: module: Add vendor hooks)
 	mod_tree_remove_init(mod);
 	module_arch_freeing_init(mod);
 	for_class_mod_mem_type(type, init) {
@@ -3201,6 +3212,7 @@ static int complete_formation(struct module *mod, struct load_info *info)
 	module_bug_finalize(info->hdr, info->sechdrs, mod);
 	module_cfi_finalize(info->hdr, info->sechdrs, mod);
 
+<<<<<<< HEAD   (cbb0a15dcc1e73dbac44e679650711638f54754b FROMGIT: netlink: specs: binder: replace underscores with da)
 	err = module_enable_rodata_ro(mod, false);
 	if (err)
 		goto out_strict_rwx;
@@ -3210,6 +3222,16 @@ static int complete_formation(struct module *mod, struct load_info *info)
 	err = module_enable_text_rox(mod);
 	if (err)
 		goto out_strict_rwx;
+||||||| BASE   (b346d6beb493288449297f3bbd85c37b15890bc7 BACKPORT: mm/thp: fix deferred split unqueue naming and lock)
+	module_enable_ro(mod, false);
+	module_enable_nx(mod);
+	module_enable_x(mod);
+=======
+	module_enable_ro(mod, false);
+	module_enable_nx(mod);
+	module_enable_x(mod);
+	trace_android_vh_set_mod_perm_before_init(mod);
+>>>>>>> CHANGE (6bc6743e622d4e615f120d5e363922c608501d87 ANDROID: module: Add vendor hooks)
 
 	/*
 	 * Mark state as coming so strong_try_module_get() ignores us,
