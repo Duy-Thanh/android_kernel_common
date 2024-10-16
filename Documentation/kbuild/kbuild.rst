@@ -96,6 +96,11 @@ HOSTRUSTFLAGS
 -------------
 Additional flags to be passed to $(HOSTRUSTC) when building host programs.
 
+HOSTRUSTTOOLCHAINLDFLAGS
+-------------
+Additional flags to be passed when linking host artifacts that is loaded by
+the Rust toolchain. If unset, it defaults to $(HOSTLDFLAGS).
+
 HOSTLDFLAGS
 -----------
 Additional flags to be passed when linking host programs.
