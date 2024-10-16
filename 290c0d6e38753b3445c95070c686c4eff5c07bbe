@@ -159,6 +159,24 @@
       "message": "Do we need to hold acc_dev_instance_lock for this? Line 1259 suggests that multiple threads could be trying to setup acc_dev_instance.",
       "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d882d685_d39e154d",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-10-16T18:55:58Z",
+      "side": 1,
+      "message": "Yes, I believe that is appropriate to prevent issues elsewhere. Thanks for pointing this out.",
+      "parentUuid": "622cd5b5_79d97397",
+      "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
