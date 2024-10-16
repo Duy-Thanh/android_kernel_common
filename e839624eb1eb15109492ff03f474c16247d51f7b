@@ -16,6 +16,24 @@
       "message": "Please fix to preserve original patch author",
       "revId": "e839624eb1eb15109492ff03f474c16247d51f7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8782e3c3_11a78895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3662039
+      },
+      "writtenOn": "2024-10-16T09:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b3080f0_d8ba324b",
+      "revId": "e839624eb1eb15109492ff03f474c16247d51f7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
