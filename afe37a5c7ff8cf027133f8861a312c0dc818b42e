@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d577954_931690e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-10-16T08:29:37Z",
+      "side": 1,
+      "message": "These patches should also be added to `kernel/common-patches/android-mainline`",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "afe37a5c7ff8cf027133f8861a312c0dc818b42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
