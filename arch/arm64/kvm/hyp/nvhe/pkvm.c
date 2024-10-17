@@ -551,6 +551,7 @@ static int pkvm_vcpu_init_ptrauth(struct pkvm_hyp_vcpu *hyp_vcpu)
 	return ret;
 }
 
+
 static int pkvm_vcpu_init_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	struct vcpu_reset_state *reset_state = &hyp_vcpu->vcpu.arch.reset_state;
