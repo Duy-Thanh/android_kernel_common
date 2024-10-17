@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4530796e_5c4ad8f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-17T22:30:13Z",
+      "side": 1,
+      "message": "Actually, I can\u0027t find the commit upstream. Should this be a FROMGIT or FROMLIST change?",
+      "revId": "5df5383134d6f75d48725ec4e85a94fe53e9e5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
