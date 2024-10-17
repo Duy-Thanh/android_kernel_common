@@ -16,6 +16,24 @@
       "message": "This commit message needs to be expanded to be more specific.",
       "revId": "0a677ca44da6353e94fa35c901854f392557a8a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c12d6ea_fb44aaee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-17T19:51:11Z",
+      "side": 1,
+      "message": "...yes, should include description of feature it enables, why the underlying feature can\u0027t be submitted upstream etc.",
+      "parentUuid": "bf1e7b17_7c91ead6",
+      "revId": "0a677ca44da6353e94fa35c901854f392557a8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
