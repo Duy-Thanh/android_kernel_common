@@ -928,6 +928,13 @@ static struct kvm_vcpu *__get_host_hyp_vcpus(struct kvm_vcpu *arg,
 		__get_host_hyp_vcpus(__vcpu, hyp_vcpup);			\
 	})
 
+static bool is_vcpu_runnable(struct pkvm_hyp_vcpu *hyp_vcpu)
+{
+	return (!pkvm_hyp_vcpu_is_protected(hyp_vcpu) ||
+		hyp_vcpu->vcpu.arch.mp_state.mp_state == KVM_MP_STATE_RUNNABLE ||
+		hyp_vcpu->power_state == PSCI_0_2_AFFINITY_LEVEL_ON_PENDING);
+}
+
 static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 {
 	struct pkvm_hyp_vcpu *hyp_vcpu;
@@ -951,6 +958,11 @@ static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 	}
 
 	if (unlikely(hyp_vcpu)) {
+		if (!is_vcpu_runnable(hyp_vcpu)) {
+			ret = -EPERM;
+			goto out;
+		}
+
 		flush_hyp_vcpu(hyp_vcpu);
 
 		ret = __kvm_vcpu_run(&hyp_vcpu->vcpu);
