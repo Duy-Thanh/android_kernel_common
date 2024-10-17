@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1b27b0_b02d757a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-10-17T14:11:19Z",
+      "side": 1,
+      "message": "As the commit which reverted this says, you need a symbol list update along with this export.",
+      "revId": "5800223ddb4583b0e0764322ab2e840c0b15aa00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
