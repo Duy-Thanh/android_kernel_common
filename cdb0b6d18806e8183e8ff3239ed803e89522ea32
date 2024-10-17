@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b25f8c7b_e752ace4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-17T16:01:37Z",
+      "side": 1,
+      "message": "Just a note, the odd corruption here where the trailing \"\u003e\" on the emails were dropped, which Lint is upset about, is something that comes from the upstream commit.",
+      "revId": "cdb0b6d18806e8183e8ff3239ed803e89522ea32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
