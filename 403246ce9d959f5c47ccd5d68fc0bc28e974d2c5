@@ -33,6 +33,41 @@
       "message": "What about on low-end devices, the increased buffer sizes could slow things down overall, with longer latency, right?  What are the results in testing on those systems?",
       "revId": "403246ce9d959f5c47ccd5d68fc0bc28e974d2c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca76ceaf_6cf4ea84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2024-10-17T09:02:20Z",
+      "side": 1,
+      "message": "We tested the low-end platform demo phone of qcom \u0026 mtk, and found that the peak rate of USB3.0 is about 380Mbps, which has little impact. In addition, our research shows that the low-end platforms on the market only support USB2.0 function.",
+      "parentUuid": "29b0a4e8_3204b53d",
+      "revId": "403246ce9d959f5c47ccd5d68fc0bc28e974d2c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dbcab4c_da327461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2024-10-17T09:02:20Z",
+      "side": 1,
+      "message": "We tested the low-end platform demo phone of qcom \u0026 mtk, and found that the peak rate of USB3.0 is about 380Mbps, which has little impact. In addition, our research shows that the low-end platforms on the market only support USB2.0 function.",
+      "revId": "403246ce9d959f5c47ccd5d68fc0bc28e974d2c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
