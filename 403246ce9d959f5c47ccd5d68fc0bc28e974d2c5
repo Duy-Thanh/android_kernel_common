@@ -68,6 +68,23 @@
       "message": "We tested the low-end platform demo phone of qcom \u0026 mtk, and found that the peak rate of USB3.0 is about 380Mbps, which has little impact. In addition, our research shows that the low-end platforms on the market only support USB2.0 function.",
       "revId": "403246ce9d959f5c47ccd5d68fc0bc28e974d2c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "634ecbf4_220f5e28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-10-17T15:14:40Z",
+      "side": 1,
+      "message": "What about other branches?",
+      "revId": "403246ce9d959f5c47ccd5d68fc0bc28e974d2c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
