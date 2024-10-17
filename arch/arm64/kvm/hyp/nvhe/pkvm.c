@@ -237,12 +237,6 @@ static int pkvm_vcpu_init_traps(struct pkvm_hyp_vcpu *hyp_vcpu)
 	return 0;
 }
 
-/*
- * Start the VM table handle at the offset defined instead of at 0.
- * Mainly for sanity checking and debugging.
- */
-#define HANDLE_OFFSET 0x1000
-
 static unsigned int vm_handle_to_idx(pkvm_handle_t handle)
 {
 	return handle - HANDLE_OFFSET;
@@ -1345,7 +1339,7 @@ static bool pkvm_handle_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 	return pvm_psci_not_supported(hyp_vcpu);
 }
 
-static u64 __pkvm_memshare_page_req(struct pkvm_hyp_vcpu *hyp_vcpu, u64 ipa)
+u64 __pkvm_memshare_page_req(struct pkvm_hyp_vcpu *hyp_vcpu, u64 ipa)
 {
 	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
 	u64 elr;
@@ -1369,8 +1363,7 @@ static u64 __pkvm_memshare_page_req(struct pkvm_hyp_vcpu *hyp_vcpu, u64 ipa)
 	return ARM_EXCEPTION_TRAP;
 }
 
-static int pkvm_handle_empty_memcache(struct pkvm_hyp_vcpu *hyp_vcpu,
-				      u64 *exit_code)
+int pkvm_handle_empty_memcache(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 {
 	struct kvm_hyp_req *req;
 
