@@ -248,6 +248,24 @@
       "parentUuid": "87dd8676_5fe96e79",
       "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "292f8c63_cd017e49",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-17T04:35:59Z",
+      "side": 1,
+      "message": "This is important for our prio policy, we want to limit the policy to work when key thread is blocked on f2fs rwsem.\n\nAs f2fs_down_read() chooses this way in our latest version:\n\u0027\u0027\u0027wait_event(sem-\u003eread_waiters, down_read_trylock(\u0026sem-\u003einternal_rwsem));\u0027\u0027\u0027\nand thread blocked here is decided by wait_event() and down_read_trylock(), so the new hook is designed to cover the whole slowpath, eg:f2fs_down_read will follow this way with new hook:\n‘‘\u0027\nif (down_read_trylock) return;\nimprove prio;\nwhile(1) {\n....   if (down_read_trylock) break;\n....  schedule;\n}\nrestore prio;\n’‘\u0027\nwe need to bypass wait_event in one new hook with the logic above, this is different with priority policy in normal rwsem;\neg: policy may need two hooks in rwsem_down_read_slowpath：\n’‘\u0027\nif (down_read_trylock) return;\nimprove prio; ------------ the first hook\nwhile(1) {\n....     if (smp_load_acquire) break;\n....     schedule;\n}\nrestore prio; ------------ the second hook\n’‘\u0027\nbut f2fs_down_read() doesn\u0027t enter rwsem_down_read_slowpath() for CONFIG_F2FS_UNFAIR_RWSEM is \u0027y\u0027;\n \nmore:\ndown_read_trylock() doesn\u0027t always need a priority policy, even it tries lock failed;\nthis is why the hooks in down_read_trylock() cannot be used in our policy.",
+      "parentUuid": "8babc51e_0b412791",
+      "revId": "ca45cd69c96dd6905db98957f19f66f2c23cf70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
