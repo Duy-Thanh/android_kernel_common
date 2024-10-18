@@ -16,6 +16,24 @@
       "message": "Per the lint error:\n```\n\u0027linux-next\u0027 is not an acceptable maintainer tree as commit hashes are not stable there.\nPlease refer to a different maintainer tree or use FROMLIST instead.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n```",
       "revId": "73313d142f9d46aeb6d60e233362a0da1168971f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e45788f_44acfec8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943000
+      },
+      "writtenOn": "2024-10-18T09:10:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45ba5ff1_d7e95b33",
+      "revId": "73313d142f9d46aeb6d60e233362a0da1168971f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
