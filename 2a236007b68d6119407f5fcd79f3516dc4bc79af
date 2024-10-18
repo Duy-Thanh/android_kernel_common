@@ -16,6 +16,29 @@
       "message": "This is to review/run presubmit on code meant for Android 16.",
       "revId": "2a236007b68d6119407f5fcd79f3516dc4bc79af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b6ef9c_75d8a79c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-10-18T07:36:25Z",
+      "side": 1,
+      "message": "We\u0027ve already got that check here, do we need to replicate it in pkvm_vcpu_init_psci()?",
+      "range": {
+        "startLine": 728,
+        "startChar": 1,
+        "endLine": 728,
+        "endChar": 77
+      },
+      "revId": "2a236007b68d6119407f5fcd79f3516dc4bc79af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
