@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8106067_049c5b41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-18T05:26:54Z",
+      "side": 1,
+      "message": "Ideally, having the details in the commit message are best, but if it is sensitive, feel free to describe these details in the bug linked from this commit.",
+      "parentUuid": "9bd4d49c_ca961c65",
+      "revId": "775e820e48d41620510c8fa31ac3f10e1992c9be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "255a97a5_bc2e6bc1",
