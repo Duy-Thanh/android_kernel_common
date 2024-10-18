@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5b9b1b6_5f135b17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-10-18T07:26:10Z",
+      "side": 1,
+      "message": "This is to review/run presubmit on code meant for Android 16.",
+      "revId": "fd1b1b2f7a7a6d44c38f15900aa56cdb56e65d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
