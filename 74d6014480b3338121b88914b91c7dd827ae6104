@@ -22,6 +22,30 @@
       },
       "revId": "74d6014480b3338121b88914b91c7dd827ae6104",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6bcf51b_d6eb26c9",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-18T14:23:26Z",
+      "side": 0,
+      "message": "Good catch.\n\nI spotted `aarch64_trim_and_check` and thought \"that will stop things\", but it is based on other things which are *also* defaulted.",
+      "parentUuid": "e791f39a_11812729",
+      "range": {
+        "startLine": 140,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 9
+      },
+      "revId": "74d6014480b3338121b88914b91c7dd827ae6104",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

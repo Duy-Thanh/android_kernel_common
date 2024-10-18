@@ -22,6 +22,30 @@
       },
       "revId": "2fcc48bef965d89b7848dc2684dd3dcaf68b8532",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a7fc10f_8cc8a9af",
+        "filename": "android/abi_gki_x86_64.stg",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-18T14:23:26Z",
+      "side": 1,
+      "message": "The idea is to not break merges with lots of conflict.",
+      "parentUuid": "4cbcf930_077f64e6",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2fcc48bef965d89b7848dc2684dd3dcaf68b8532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
