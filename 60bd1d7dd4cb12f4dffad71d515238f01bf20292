@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b45a9413_b204a09b",
+        "filename": "net/ipv4/tcp_input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-18T17:55:32Z",
+      "side": 1,
+      "message": "if this is just to \"To record the rtt and its update time\", why can\u0027t you use the existing hook at line 859?",
+      "revId": "60bd1d7dd4cb12f4dffad71d515238f01bf20292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
