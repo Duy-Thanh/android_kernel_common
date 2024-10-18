@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd4d49c_ca961c65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-18T05:26:07Z",
+      "side": 1,
+      "message": "This still feels pretty vague. If you could better describe:\n1) What is the problem you see without these changes?\n2) What is the benefit you get from adding this vendor hook?\n3) What upstream behavior changes might solve the need for this vendorhooks? (So that it wouldn\u0027t be needed in the future)",
+      "revId": "775e820e48d41620510c8fa31ac3f10e1992c9be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "255a97a5_bc2e6bc1",
