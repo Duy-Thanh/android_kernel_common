@@ -34,6 +34,24 @@
       "parentUuid": "4530796e_5c4ad8f5",
       "revId": "5df5383134d6f75d48725ec4e85a94fe53e9e5b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb9cea14_cc156bb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-10-18T01:54:14Z",
+      "side": 1,
+      "message": "Same comment here: I don\u0027t see any changes in the \"cherry picked from\" line?",
+      "parentUuid": "0cec083d_af6061fe",
+      "revId": "5df5383134d6f75d48725ec4e85a94fe53e9e5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
