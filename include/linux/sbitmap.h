@@ -36,6 +36,20 @@ struct sbitmap_word {
 	 * @cleared: word holding cleared bits
 	 */
 	unsigned long cleared ____cacheline_aligned_in_smp;
+<<<<<<< HEAD   (086571 Merge 5ac73f8191f3 ("RDMA/rtrs-clt: Reset cid to con_num - 1)
+||||||| BASE
+
+	/**
+	 * @swap_lock: serializes simultaneous updates of ->word and ->cleared
+	 */
+	spinlock_t swap_lock;
+=======
+
+	/**
+	 * @swap_lock: serializes simultaneous updates of ->word and ->cleared
+	 */
+	raw_spinlock_t swap_lock;
+>>>>>>> BRANCH (bdefb8 tty: rp2: Fix reset with non forgiving PCIe host bridges)
 } ____cacheline_aligned_in_smp;
 
 /**

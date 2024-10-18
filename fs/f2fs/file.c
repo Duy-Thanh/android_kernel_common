@@ -215,6 +215,9 @@ static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)
 		f2fs_exist_written_data(sbi, F2FS_I(inode)->i_pino,
 							TRANS_DIR_INO))
 		cp_reason = CP_RECOVER_DIR;
+	else if (f2fs_exist_written_data(sbi, F2FS_I(inode)->i_pino,
+							XATTR_DIR_INO))
+		cp_reason = CP_XATTR_DIR;
 
 	return cp_reason;
 }
@@ -2159,6 +2162,10 @@ static int f2fs_ioc_start_atomic_write(struct file *filp, bool truncate)
 		clear_inode_flag(fi->cow_inode, FI_INLINE_DATA);
 	} else {
 		/* Reuse the already created COW inode */
+		f2fs_bug_on(sbi, get_dirty_pages(fi->cow_inode));
+
+		invalidate_mapping_pages(fi->cow_inode->i_mapping, 0, -1);
+
 		ret = f2fs_do_truncate_blocks(fi->cow_inode, 0, true);
 		if (ret) {
 			f2fs_up_write(&fi->i_gc_rwsem[WRITE]);
@@ -2743,6 +2750,8 @@ do_map:
 				err = PTR_ERR(page);
 				goto clear_out;
 			}
+
+			f2fs_wait_on_page_writeback(page, DATA, true, true);
 
 			set_page_dirty(page);
 			set_page_private_gcing(page);
@@ -4089,6 +4098,8 @@ static int redirty_blocks(struct inode *inode, pgoff_t page_idx, int len)
 		/* It will never fail, when page has pinned above */
 		f2fs_bug_on(F2FS_I_SB(inode), !page);
 
+		f2fs_wait_on_page_writeback(page, DATA, true, true);
+
 		set_page_dirty(page);
 		f2fs_put_page(page, 1);
 		f2fs_put_page(page, 0);
@@ -4454,6 +4465,7 @@ static void f2fs_trace_rw_file_path(struct kiocb *iocb, size_t count, int rw)
 	struct inode *inode = file_inode(iocb->ki_filp);
 	char *buf, *path;
 
+<<<<<<< HEAD   (086571 Merge 5ac73f8191f3 ("RDMA/rtrs-clt: Reset cid to con_num - 1)
 	buf = f2fs_getname(F2FS_I_SB(inode));
 	if (!buf)
 		return;
@@ -4468,6 +4480,23 @@ static void f2fs_trace_rw_file_path(struct kiocb *iocb, size_t count, int rw)
 				current->pid, path, current->comm);
 free_buf:
 	f2fs_putname(buf);
+||||||| BASE
+=======
+	buf = f2fs_kmalloc(F2FS_I_SB(inode), PATH_MAX, GFP_KERNEL);
+	if (!buf)
+		return;
+	path = dentry_path_raw(file_dentry(iocb->ki_filp), buf, PATH_MAX);
+	if (IS_ERR(path))
+		goto free_buf;
+	if (rw == WRITE)
+		trace_f2fs_datawrite_start(inode, iocb->ki_pos, count,
+				current->pid, path, current->comm);
+	else
+		trace_f2fs_dataread_start(inode, iocb->ki_pos, count,
+				current->pid, path, current->comm);
+free_buf:
+	kfree(buf);
+>>>>>>> BRANCH (bdefb8 tty: rp2: Fix reset with non forgiving PCIe host bridges)
 }
 
 static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
@@ -4482,6 +4511,28 @@ static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
 	if (trace_f2fs_dataread_start_enabled())
 		f2fs_trace_rw_file_path(iocb, iov_iter_count(to), READ);
 
+<<<<<<< HEAD   (086571 Merge 5ac73f8191f3 ("RDMA/rtrs-clt: Reset cid to con_num - 1)
+||||||| BASE
+		if (!p)
+			goto skip_read_trace;
+
+		path = dentry_path_raw(file_dentry(iocb->ki_filp), p, PATH_MAX);
+		if (IS_ERR(path)) {
+			kfree(p);
+			goto skip_read_trace;
+		}
+
+		trace_f2fs_dataread_start(inode, pos, iov_iter_count(to),
+					current->pid, path, current->comm);
+		kfree(p);
+	}
+skip_read_trace:
+=======
+	/* In LFS mode, if there is inflight dio, wait for its completion */
+	if (f2fs_lfs_mode(F2FS_I_SB(inode)))
+		inode_dio_wait(inode);
+
+>>>>>>> BRANCH (bdefb8 tty: rp2: Fix reset with non forgiving PCIe host bridges)
 	if (f2fs_should_use_dio(inode, iocb, to)) {
 		ret = f2fs_dio_read_iter(iocb, to);
 	} else {
