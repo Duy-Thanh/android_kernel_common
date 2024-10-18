@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e791f39a_11812729",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-10-18T09:31:23Z",
+      "side": 0,
+      "message": "Unfortunately I think deleting won\u0027t be enough, and instead explicitly disabling the values `trim_nonlisted_kmi: False`, `kmi_enforced: False`, `abi_definition_stg: None`, etc. would be needed, this is due to the logic in this branch (recently removed in `mainline`) [0] which try to deduce defaults when the information is not provided.\n\n[0] https://cs.android.com/android/kernel/superproject/+/common-android15-6.6:build/kernel/kleaf/common_kernels.bzl;l\u003d80-158",
+      "range": {
+        "startLine": 140,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 9
+      },
+      "revId": "74d6014480b3338121b88914b91c7dd827ae6104",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
