@@ -71,7 +71,16 @@
   blk_mq_quiesce_tagset
   blk_mq_unquiesce_tagset
   memblock_free
+<<<<<<< PATCH SET (2e5610 ANDROID: GKI: update symbol list for xiaomi)
+  __mem_cgroup_charge
+  __mem_cgroup_uncharge
+  __mod_memcg_lruvec_state
+  unpack_shadow
+  bucket_order
+||||||| BASE
+=======
   mem_cgroup_move_account
+>>>>>>> BASE      (4390b9 ANDROID: mm: export some symbols)
   __traceiter_android_vh_anon_vma_name_recog
   __traceiter_android_vh_restore_mm_flags
   __traceiter_android_vh_update_vma_flags
@@ -88,12 +97,18 @@
   __tracepoint_android_vh_customize_thp_pcp_order
   __traceiter_android_vh_customize_thp_gfp_orders
   __tracepoint_android_vh_customize_thp_gfp_orders
+<<<<<<< PATCH SET (2e5610 ANDROID: GKI: update symbol list for xiaomi)
+  __traceiter_android_vh_refault_filemap_add_folio
+  __tracepoint_android_vh_refault_filemap_add_folio
+||||||| BASE
+=======
   __traceiter_android_vh_mem_cgroup_charge
   __traceiter_android_vh_filemap_add_folio
   __traceiter_android_vh_shrink_node
   __tracepoint_android_vh_mem_cgroup_charge
   __tracepoint_android_vh_filemap_add_folio
   __tracepoint_android_vh_shrink_node
+>>>>>>> BASE      (4390b9 ANDROID: mm: export some symbols)
 
 #required by metis.ko module
   __traceiter_android_vh_rwsem_read_wait_start
