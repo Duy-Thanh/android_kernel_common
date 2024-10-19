@@ -17,7 +17,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -29,7 +29,7 @@
         "value": {"expression":{"expressionString":"label:AIDL-API-Review AND -label:AIDL-API-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -54,7 +54,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -66,7 +66,7 @@
         "value": {"expression":{"expressionString":"label:API-Review=MAX AND -label:API-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -91,7 +91,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -103,7 +103,7 @@
         "value": {"expression":{"expressionString":"label:Build-Team-Review=MAX AND -label:Build-Team-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -124,7 +124,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers)"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -134,7 +134,7 @@
         "value": {"expression":{"expressionString":"-label:Code-Review=MIN AND (-is:android-cherry-pick_exemptedusers AND label:Code-Review=MAX,user=non_uploader OR (is:android-cherry-pick_exemptedusers AND label:Code-Review=MAX,count>=2) OR (label:Code-Review=MAX AND (label:Exempt=+1 OR (uploader:1474732 AND (project:platform/developers/docs OR project:platform/frameworks/support)))))"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Code-Review=MIN","is:android-cherry-pick_exemptedusers","label:Code-Review=MAX,user=non_uploader","is:android-cherry-pick_exemptedusers","label:Code-Review=MAX,count>=2","label:Code-Review=MAX","label:Exempt=+1","uploader:1474732","project:platform/developers/docs","project:platform/frameworks/support"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","uploader:1587862","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers"]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","is:pure-revert","ownerin:mdb/android-triage-xwf-extended-access-team-policy"]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -151,7 +151,7 @@
         },
         "applicabilityExpression": {
           "value": {
-            "expressionString": "branch:refs/heads/oreo-cts-dev OR branch:refs/heads/oreo-mr1-cts-dev OR branch:refs/heads/oreo-vts-dev OR branch:refs/heads/oreo-mr1-vts-dev OR branch:refs/heads/nougat-cts-dev OR branch:refs/heads/nougat-mr1-cts-dev OR branch:refs/heads/pie-cts-dev OR branch:refs/heads/pie-vts-dev OR branch:refs/heads/android10-tests-dev OR branch:refs/heads/android11-tests-dev OR branch:refs/heads/android12-tests-dev OR branch:refs/heads/android12L-tests-dev OR branch:refs/heads/android13-tests-dev OR branch:refs/heads/android14-tests-dev OR branch:^refs/heads/.*-gsi OR branch:refs/heads/emu-32-dev OR branch:refs/heads/emu-33-dev OR (branch:refs/heads/main AND (project:device/google/redbull))"
+            "expressionString": "branch:refs/heads/oreo-cts-dev OR branch:refs/heads/oreo-mr1-cts-dev OR branch:refs/heads/oreo-vts-dev OR branch:refs/heads/oreo-mr1-vts-dev OR branch:refs/heads/nougat-cts-dev OR branch:refs/heads/nougat-mr1-cts-dev OR branch:refs/heads/pie-cts-dev OR branch:refs/heads/pie-vts-dev OR branch:refs/heads/android10-tests-dev OR branch:refs/heads/android11-tests-dev OR branch:refs/heads/android12-tests-dev OR branch:refs/heads/android12L-tests-dev OR branch:refs/heads/android13-tests-dev OR branch:refs/heads/android14-tests-dev OR branch:refs/heads/android15-tests-dev OR branch:^refs/heads/.*-gsi OR branch:refs/heads/emu-32-dev OR branch:refs/heads/emu-33-dev OR branch:refs/heads/emu-34-2-dev OR branch:refs/heads/emu-35-1-dev OR branch:refs/heads/emu-35-2-dev OR branch:refs/heads/emu-35-3-dev OR (branch:refs/heads/main AND (project:device/google/redbull OR project:platform/packages/modules/Bluetooth))"
           }
         },
         "submittabilityExpression": {
@@ -159,19 +159,19 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
           }
         },
         "allowOverrideInChildProjects": true
       },
       "applicabilityExpressionResult": {
-        "value": {"expression":{"expressionString":"branch:refs/heads/oreo-cts-dev OR branch:refs/heads/oreo-mr1-cts-dev OR branch:refs/heads/oreo-vts-dev OR branch:refs/heads/oreo-mr1-vts-dev OR branch:refs/heads/nougat-cts-dev OR branch:refs/heads/nougat-mr1-cts-dev OR branch:refs/heads/pie-cts-dev OR branch:refs/heads/pie-vts-dev OR branch:refs/heads/android10-tests-dev OR branch:refs/heads/android11-tests-dev OR branch:refs/heads/android12-tests-dev OR branch:refs/heads/android12L-tests-dev OR branch:refs/heads/android13-tests-dev OR branch:refs/heads/android14-tests-dev OR branch:^refs/heads/.*-gsi OR branch:refs/heads/emu-32-dev OR branch:refs/heads/emu-33-dev OR (branch:refs/heads/main AND (project:device/google/redbull))"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["branch:refs/heads/oreo-cts-dev","branch:refs/heads/oreo-mr1-cts-dev","branch:refs/heads/oreo-vts-dev","branch:refs/heads/oreo-mr1-vts-dev","branch:refs/heads/nougat-cts-dev","branch:refs/heads/nougat-mr1-cts-dev","branch:refs/heads/pie-cts-dev","branch:refs/heads/pie-vts-dev","branch:refs/heads/android10-tests-dev","branch:refs/heads/android11-tests-dev","branch:refs/heads/android12-tests-dev","branch:refs/heads/android12L-tests-dev","branch:refs/heads/android13-tests-dev","branch:refs/heads/android14-tests-dev","branch:^refs/heads/.*-gsi","branch:refs/heads/emu-32-dev","branch:refs/heads/emu-33-dev","branch:refs/heads/main","project:device/google/redbull"]}
+        "value": {"expression":{"expressionString":"branch:refs/heads/oreo-cts-dev OR branch:refs/heads/oreo-mr1-cts-dev OR branch:refs/heads/oreo-vts-dev OR branch:refs/heads/oreo-mr1-vts-dev OR branch:refs/heads/nougat-cts-dev OR branch:refs/heads/nougat-mr1-cts-dev OR branch:refs/heads/pie-cts-dev OR branch:refs/heads/pie-vts-dev OR branch:refs/heads/android10-tests-dev OR branch:refs/heads/android11-tests-dev OR branch:refs/heads/android12-tests-dev OR branch:refs/heads/android12L-tests-dev OR branch:refs/heads/android13-tests-dev OR branch:refs/heads/android14-tests-dev OR branch:refs/heads/android15-tests-dev OR branch:^refs/heads/.*-gsi OR branch:refs/heads/emu-32-dev OR branch:refs/heads/emu-33-dev OR branch:refs/heads/emu-34-2-dev OR branch:refs/heads/emu-35-1-dev OR branch:refs/heads/emu-35-2-dev OR branch:refs/heads/emu-35-3-dev OR (branch:refs/heads/main AND (project:device/google/redbull OR project:platform/packages/modules/Bluetooth))"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["branch:refs/heads/oreo-cts-dev","branch:refs/heads/oreo-mr1-cts-dev","branch:refs/heads/oreo-vts-dev","branch:refs/heads/oreo-mr1-vts-dev","branch:refs/heads/nougat-cts-dev","branch:refs/heads/nougat-mr1-cts-dev","branch:refs/heads/pie-cts-dev","branch:refs/heads/pie-vts-dev","branch:refs/heads/android10-tests-dev","branch:refs/heads/android11-tests-dev","branch:refs/heads/android12-tests-dev","branch:refs/heads/android12L-tests-dev","branch:refs/heads/android13-tests-dev","branch:refs/heads/android14-tests-dev","branch:refs/heads/android15-tests-dev","branch:^refs/heads/.*-gsi","branch:refs/heads/emu-32-dev","branch:refs/heads/emu-33-dev","branch:refs/heads/emu-34-2-dev","branch:refs/heads/emu-35-1-dev","branch:refs/heads/emu-35-2-dev","branch:refs/heads/emu-35-3-dev","branch:refs/heads/main","project:device/google/redbull","project:platform/packages/modules/Bluetooth"]}
       },
       "submittabilityExpressionResult": {
         "value": {"expression":{"expressionString":"label:DrNo-Review=MAX AND -label:DrNo-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -196,7 +196,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -208,7 +208,7 @@
         "value": {"expression":{"expressionString":"-label:Lint=MIN AND (label:Lint=+2 OR -label:Lint=-1)"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Lint=MIN","label:Lint=+2","label:Lint=-1"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1"]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","ownerin:mdb/android-triage-xwf-extended-access-team-policy"]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -225,7 +225,7 @@
         },
         "applicabilityExpression": {
           "value": {
-            "expressionString": "file:\"^.*\\\\.map\\\\.txt$\""
+            "expressionString": "file:\"^.*\\\\.map\\\\.txt$\" AND -project:platform/prebuilts/clang/host/linux-x86"
           }
         },
         "submittabilityExpression": {
@@ -233,19 +233,56 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
       },
       "applicabilityExpressionResult": {
-        "value": {"expression":{"expressionString":"file:\"^.*\\\\.map\\\\.txt$\""},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["file:\"^.*\\\\.map\\\\.txt$\""]}
+        "value": {"expression":{"expressionString":"file:\"^.*\\\\.map\\\\.txt$\" AND -project:platform/prebuilts/clang/host/linux-x86"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["file:\"^.*\\\\.map\\\\.txt$\"","project:platform/prebuilts/clang/host/linux-x86"]}
       },
       "submittabilityExpressionResult": {
         "value": {"expression":{"expressionString":"label:NDK-API-Review=MAX AND -label:NDK-API-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+      },
+      "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
+        "name": "No-Unresolved-Comments",
+        "description": {
+          "value": "Changes that have unresolved comments are not submittable. Unless overridden with Unresolved-Comment-Reason: \u003creason\u003e line in change message."
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "has:unresolved"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "-has:unresolved"
+        },
+        "overrideExpression": {
+          "value": {
+            "expressionString": "message:\"^.*Unresolved-Comment-Reason:.*\""
+          }
+        },
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"has:unresolved"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["has:unresolved"]}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"-has:unresolved"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+      },
+      "overrideExpressionResult": {
+        "value": {"expression":{"expressionString":"message:\"^.*Unresolved-Comment-Reason:.*\""},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -270,7 +307,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -282,7 +319,44 @@
         "value": {"expression":{"expressionString":"label:Open-Source-Licensing=0 OR (-label:Open-Source-Licensing=MIN AND ((label:Open-Source-Licensing=MAX AND label:Open-Source-Licensing=-1) OR -label:Open-Source-Licensing=-1))"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["label:Open-Source-Licensing=0"],"failingAtoms":["label:Open-Source-Licensing=MIN","label:Open-Source-Licensing=MAX","label:Open-Source-Licensing=-1","label:Open-Source-Licensing=-1"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","uploader:1587862","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1"]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","ownerin:mdb/android-triage-xwf-extended-access-team-policy"]}
+      },
+      "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
+        "name": "Performance",
+        "description": {
+          "value": "Submit requirement for Android Performance Presubmit"
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "-(branch:refs/meta/config OR branch:refs/heads/androidx-main)"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "-label:Performance\u003dMIN,android-crystalball-crystalball-presubmit AND -label:Performance\u003d0"
+        },
+        "overrideExpression": {
+          "value": {
+            "expressionString": "(-label:Performance\u003e0,android-crystalball-crystalball-presubmit AND label:Performance\u003e0) OR is:android-but-lint_exemptedusers OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override\u003d+1 AND is:pure-revert) OR label:Bypass-Presubmit\u003e0 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
+          }
+        },
+        "allowOverrideInChildProjects": true
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"-(branch:refs/meta/config OR branch:refs/heads/androidx-main)"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["branch:refs/meta/config","branch:refs/heads/androidx-main"]}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"-label:Performance=MIN,android-crystalball-crystalball-presubmit AND -label:Performance=0"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":["label:Performance=0"],"failingAtoms":["label:Performance=MIN,android-crystalball-crystalball-presubmit"]}
+      },
+      "overrideExpressionResult": {
+        "value": {"expression":{"expressionString":"(-label:Performance>0,android-crystalball-crystalball-presubmit AND label:Performance>0) OR is:android-but-lint_exemptedusers OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override=+1 AND is:pure-revert) OR label:Bypass-Presubmit>0 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Performance>0,android-crystalball-crystalball-presubmit","label:Performance>0","is:android-but-lint_exemptedusers","is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","label:Bypass-Presubmit>0","is:pure-revert","ownerin:mdb/android-triage-xwf-extended-access-team-policy"]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -303,7 +377,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "label:Bypass-Presubmit\u003d+2 OR is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override\u003d+1 AND is:pure-revert AND -label:Presubmit-Verified\u003d-2)"
+            "expressionString": "label:Bypass-Presubmit\u003d+2 OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override\u003d+1 AND is:pure-revert AND -label:Presubmit-Verified\u003d-2) OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -313,7 +387,7 @@
         "value": {"expression":{"expressionString":"-label:Presubmit-Verified=-2 AND (label:Bypass-Presubmit=+1 OR label:Presubmit-Verified-Together=+1 OR (-label:Presubmit-Verified=-1 AND (label:Presubmit-Verified=+2 OR label:Presubmit-Verified=+1)))"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Presubmit-Verified=-2","label:Bypass-Presubmit=+1","label:Presubmit-Verified-Together=+1","label:Presubmit-Verified=-1","label:Presubmit-Verified=+2","label:Presubmit-Verified=+1"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"label:Bypass-Presubmit=+2 OR is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override=+1 AND is:pure-revert AND -label:Presubmit-Verified=-2)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Bypass-Presubmit=+2","is:android_exemptedusers","uploader:1587862","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","label:Presubmit-Verified=-2"]}
+        "value": {"expression":{"expressionString":"label:Bypass-Presubmit=+2 OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override=+1 AND is:pure-revert AND -label:Presubmit-Verified=-2) OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Bypass-Presubmit=+2","is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","label:Presubmit-Verified=-2","is:pure-revert","ownerin:mdb/android-triage-xwf-extended-access-team-policy"]}
       },
       "patchSetCommitId": "bbca9b08afa482bb0a187f7f0fa9935e155b293c",
       "legacy": {
@@ -357,7 +431,7 @@
       "submitRequirement": {
         "name": "Review-Enforcement",
         "description": {
-          "value": "Two Google employees must approve the change. Uploading the change or voting positively on Code-Review count as approval."
+          "value": "Two Google employees must approve the change. Uploading the change or voting positively on Code-Review count as approval. Using a trusted device is required, see go/gerrit-onboarding#review-enforcement."
         },
         "applicabilityExpression": {
           "value": {
