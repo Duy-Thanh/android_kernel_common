@@ -16,6 +16,24 @@
       "message": "Could you help review again? Thanks!\n1, The patch come from kernel-5.15: https://android-review.googlesource.com/c/kernel/common/+/2211927\n2, In some scene interactive task in big-group not repspond in time, so optimize this part in vendor hook just for TV/BOX product",
       "revId": "51f007d49768913c89773341c532395ad6637136",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "412685b4_167f66cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-21T17:56:44Z",
+      "side": 1,
+      "message": "As I mentioned before, please expand in the commit message to describe:\n1) What is the problem you see without these changes?\n2) What is the benefit you get from adding this vendor hook?\n3) What upstream behavior changes might solve the need for these vendorhooks? (So that it wouldn\u0027t be needed in the future)\n\n\nThe commit you linked to (from 5.15) is moving existing vendorhooks around, so I\u0027m not sure how it applies to your addition here?",
+      "parentUuid": "005ccacc_a3773f17",
+      "revId": "51f007d49768913c89773341c532395ad6637136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
