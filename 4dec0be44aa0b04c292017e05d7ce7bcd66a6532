@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6526f89a_409b3ee6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2024-10-21T08:25:09Z",
+      "side": 1,
+      "message": "Cherry-pick to android13-5.15 branch, please review.\n\nThanks",
+      "revId": "4dec0be44aa0b04c292017e05d7ce7bcd66a6532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
