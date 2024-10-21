@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "005ccacc_a3773f17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2024-10-21T12:54:23Z",
+      "side": 1,
+      "message": "Could you help review again? Thanks!\n1, The patch come from kernel-5.15: https://android-review.googlesource.com/c/kernel/common/+/2211927\n2, In some scene interactive task in big-group not repspond in time, so optimize this part in vendor hook just for TV/BOX product",
+      "revId": "51f007d49768913c89773341c532395ad6637136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
