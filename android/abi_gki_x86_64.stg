@@ -24931,6 +24931,12 @@ member {
   type_id: 0x4585663f
 }
 member {
+  id: 0xc4ac76b9
+  name: "bogon"
+  type_id: 0x4585663f
+  offset: 1920
+}
+member {
   id: 0xa9b46c97
   name: "boolean"
   type_id: 0x6d7f5ff6
@@ -119446,7 +119452,7 @@ struct_union {
   kind: STRUCT
   name: "sk_buff"
   definition {
-    bytesize: 240
+    bytesize: 248
     member_id: 0x34366909
     member_id: 0x828c817c
     member_id: 0x318fd08b
@@ -119475,6 +119481,7 @@ struct_union {
     member_id: 0xfafe750f
     member_id: 0x850ad9b6
     member_id: 0x409707ea
+    member_id: 0xc4ac76b9
   }
 }
 struct_union {
