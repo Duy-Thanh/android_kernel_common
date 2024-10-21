@@ -16,6 +16,24 @@
       "message": "As the commit which reverted this says, you need a symbol list update along with this export.",
       "revId": "5800223ddb4583b0e0764322ab2e840c0b15aa00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa92a78a_9eb13ae3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005551
+      },
+      "writtenOn": "2024-10-21T00:51:17Z",
+      "side": 1,
+      "message": "Dear Mercier.\n\nThank you for reviewing.\n\nThis commit is merged to android15-6.6 branch with below link\nhttps://android-review.googlesource.com/c/kernel/common/+/3305736\n\nSo, I\u0027ll abandon this change and I\u0027ll update a symbol list.\n\nThank you.\nDooHyun Hwang.",
+      "parentUuid": "de1b27b0_b02d757a",
+      "revId": "5800223ddb4583b0e0764322ab2e840c0b15aa00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
