@@ -69,6 +69,24 @@
       "parentUuid": "4eabf822_df38ccf2",
       "revId": "52c673cf935a8322b67b1249fc5c6ea892d795ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "277dfb0f_40c4915b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892811
+      },
+      "writtenOn": "2024-10-21T07:03:35Z",
+      "side": 1,
+      "message": "@Todd, We have verified the patch on kernel 5.15. It could resolve the udp fraglist KE.",
+      "parentUuid": "84d183c4_392e7b64",
+      "revId": "52c673cf935a8322b67b1249fc5c6ea892d795ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
