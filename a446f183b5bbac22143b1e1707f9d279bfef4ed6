@@ -45,6 +45,30 @@
       },
       "revId": "a446f183b5bbac22143b1e1707f9d279bfef4ed6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "972c64e0_2b855671",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-10-21T15:59:58Z",
+      "side": 1,
+      "message": "Actually ok, this bug seems like an umbrella for mTHP features. I think it\u0027s ok to keep it as is then.",
+      "parentUuid": "c5f3a3f2_2de4c23a",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "a446f183b5bbac22143b1e1707f9d279bfef4ed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
