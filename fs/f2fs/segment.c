@@ -2726,9 +2726,16 @@ static int change_curseg(struct f2fs_sb_info *sbi, int type, bool flush)
 	struct f2fs_summary_block *sum_node;
 	struct page *sum_page;
 
+<<<<<<< HEAD   (004b75b32942ee2b68e2c4b06f814d6dc62d614e ANDROID: GKI: Update symbol list for vivo)
 	if (flush)
 		write_sum_page(sbi, curseg->sum_blk,
 					GET_SUM_BLOCK(sbi, curseg->segno));
+||||||| BASE   (4355d46a9a4a3ade9083e3bf6a2f4dd912c71756 BACKPORT: f2fs: remove the unused flush argument to change_c)
+	write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, curseg->segno));
+=======
+	if (curseg->inited)
+		write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, curseg->segno));
+>>>>>>> CHANGE (ccfdd99e2b0dbfdd0c46d922e9ecc4cf2975b8fc UPSTREAM: f2fs: check curseg->inited before write_sum_page i)
 
 	__set_test_and_inuse(sbi, new_segno);
 
