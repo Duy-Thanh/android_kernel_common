@@ -16,6 +16,24 @@
       "message": "Please abandon all of these and cherry-pick the corresponding patches from android15-6.6 to preserve the Change-Id.",
       "revId": "391c7f1f06279d265f05110430103e8052395a26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e170fd2_d467f4dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-21T17:27:49Z",
+      "side": 1,
+      "message": "Oh, sorry, this patch was cherry-picked... the comment was really intended for aosp/3310848 which doesn\u0027t appear to have been cherry-picked.",
+      "parentUuid": "4668b6ab_57b32381",
+      "revId": "391c7f1f06279d265f05110430103e8052395a26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
