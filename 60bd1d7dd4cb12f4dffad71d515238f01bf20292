@@ -16,6 +16,24 @@
       "message": "if this is just to \"To record the rtt and its update time\", why can\u0027t you use the existing hook at line 859?",
       "revId": "60bd1d7dd4cb12f4dffad71d515238f01bf20292",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44132be7_7cd1d96a",
+        "filename": "net/ipv4/tcp_input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 3616649
+      },
+      "writtenOn": "2024-10-21T03:10:01Z",
+      "side": 1,
+      "message": "We want to record the latest rtt.\nAfter analysis, we can use the existing hook at line 859 and calculate the latest rtt in the hook.\nSo this hook is not necessary, we will abandon this change.",
+      "parentUuid": "b45a9413_b204a09b",
+      "revId": "60bd1d7dd4cb12f4dffad71d515238f01bf20292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
