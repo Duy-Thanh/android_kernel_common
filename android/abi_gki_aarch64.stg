@@ -389425,6 +389425,15 @@ elf_symbol {
   full_name: "pci_disable_sriov"
 }
 elf_symbol {
+  id: 0x0872d05c
+  name: "pci_ecam_map_bus"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x45dd6fbb
+  type_id: 0x5f5b0712
+  full_name: "pci_ecam_map_bus"
+}
+elf_symbol {
   id: 0x96b46225
   name: "pci_enable_atomic_ops_to_root"
   is_defined: true
@@ -389675,6 +389684,15 @@ elf_symbol {
   crc: 0xe843a108
   type_id: 0x8e8c9c93
   full_name: "pci_get_slot"
+}
+elf_symbol {
+  id: 0x73a57836
+  name: "pci_host_common_probe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcea8ff41
+  type_id: 0x924d155a
+  full_name: "pci_host_common_probe"
 }
 elf_symbol {
   id: 0xbe6406c3
@@ -420729,6 +420747,7 @@ interface {
   symbol_id: 0x01a00013
   symbol_id: 0xc3f9d559
   symbol_id: 0xb9d0b3a8
+  symbol_id: 0x0872d05c
   symbol_id: 0x96b46225
   symbol_id: 0x35a3d772
   symbol_id: 0x86bcc4a0
@@ -420757,6 +420776,7 @@ interface {
   symbol_id: 0x37d02bbe
   symbol_id: 0x9ac8ef20
   symbol_id: 0x35c96922
+  symbol_id: 0x73a57836
   symbol_id: 0xbe6406c3
   symbol_id: 0xec0d5441
   symbol_id: 0x9c6c58ea
