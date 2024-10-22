@@ -177,6 +177,24 @@
       "parentUuid": "622cd5b5_79d97397",
       "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5343ec2_1e807b7a",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-10-22T08:55:20Z",
+      "side": 1,
+      "message": "Hi Todd, Neil, \n\nso should I secure this operation under spin_lock_irqsave(\u0026acc_dev_instance_lock, flags) ?",
+      "parentUuid": "d882d685_d39e154d",
+      "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
