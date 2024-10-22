@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "033c843f_3a9749b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-22T11:07:57Z",
+      "side": 1,
+      "message": "Due to the upcoming deprecation of ashmem, it has not been the plan to send this upstream. Do you have a preference for how to move forward here?",
+      "parentUuid": "fc7f1fc5_bf8f627f",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
