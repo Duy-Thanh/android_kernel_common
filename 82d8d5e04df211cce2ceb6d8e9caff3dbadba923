@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a46d790_b47a811d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1299283
+      },
+      "writtenOn": "2024-10-22T14:39:02Z",
+      "side": 1,
+      "message": "There are still some schemes built in for gki, that aren\u0027t enabled here we might need to add.",
+      "revId": "82d8d5e04df211cce2ceb6d8e9caff3dbadba923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
