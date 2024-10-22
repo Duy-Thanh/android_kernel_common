@@ -16,6 +16,24 @@
       "message": "There are still some schemes built in for gki, that aren\u0027t enabled here we might need to add.",
       "revId": "82d8d5e04df211cce2ceb6d8e9caff3dbadba923",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd2db84d_e649c824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-10-22T19:08:13Z",
+      "side": 1,
+      "message": "Yes. Although the effort behind selecting a solid list seems to be bigger than moving to gki_defconfig. Slawek is close to enabled Kleaf, please see aosp/3296675",
+      "parentUuid": "4a46d790_b47a811d",
+      "revId": "82d8d5e04df211cce2ceb6d8e9caff3dbadba923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
