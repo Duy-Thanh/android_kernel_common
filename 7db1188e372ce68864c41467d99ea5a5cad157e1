@@ -16,6 +16,24 @@
       "message": "No blank line after the \"Bug: \" line please.",
       "revId": "7db1188e372ce68864c41467d99ea5a5cad157e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de174c7e_edc4bd5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3445866
+      },
+      "writtenOn": "2024-10-22T02:41:04Z",
+      "side": 1,
+      "message": "Thank you for your opinion. I will remove blank line after bug.",
+      "parentUuid": "c35ce4c6_7fa187f5",
+      "revId": "7db1188e372ce68864c41467d99ea5a5cad157e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
