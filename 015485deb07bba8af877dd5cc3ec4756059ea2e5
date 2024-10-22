@@ -22,6 +22,29 @@
       },
       "revId": "015485deb07bba8af877dd5cc3ec4756059ea2e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d264e4c6_4b96206b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-22T12:11:49Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Please **attach the following Buganizer ID(s)** to the commit message: 340744332.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nPlease **attach the following Buganizer ID(s)** to the commit message: 340744332.\nThese IDs were found in the original change with number [3088346](https://android-review.googlesource.com/c/3088346) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "015485deb07bba8af877dd5cc3ec4756059ea2e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
