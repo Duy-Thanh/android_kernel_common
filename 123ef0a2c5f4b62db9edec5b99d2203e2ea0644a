@@ -16,6 +16,23 @@
       "message": "No, sorry, use the in-kernel apis for this information if you really need this.  A hook in the driver core is not allowed.",
       "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2731923_e9b7ea40",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4778,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-22T23:46:25Z",
+      "side": 1,
+      "message": "why is this needed? If you have a ramdump, then you can look at devices_kset-\u003elist and see which dev is causing the hang-during-shutdown case you describe. This hook seems unnecessary.",
+      "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
