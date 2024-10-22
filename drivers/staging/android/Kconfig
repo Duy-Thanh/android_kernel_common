@@ -12,4 +12,10 @@ config ASHMEM
 	  It is, in theory, a good memory allocator for low-memory devices,
 	  because it can discard shared memory units when under memory pressure.
 
+config ASHMEM_MEMFD
+	bool "Enable memfd backed Anonymous Shared Memory Subsystem"
+	depends on ASHMEM
+	help
+	  Implements Ashmem support, but backed by memfd.
+
 endmenu
