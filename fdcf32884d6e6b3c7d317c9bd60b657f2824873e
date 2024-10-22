@@ -16,6 +16,24 @@
       "message": "Build failures seem to start at this change:\n```\n\nINFO: Analyzed target //common:db845c_dist (55 packages loaded, 93884 targets configured).\nINFO: Found 1 target...\nINFO: From Creating kernel config (lto\u003ddefault;notrim) @//common:db845c_no_kgdb_config:\nINFO: From Building GKI artifacts @//common:kernel_aarch64_gki_artifacts:\nINFO: From Building system_dlkm @//common:kernel_aarch64_images_system_dlkm_image:\n...l (lto\u003ddefault;notrim) @//common:db845c_no_kgdb failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:db845c_no_kgdb) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nERROR: modpost: \"geni_se_rx_init_dma\" [drivers/spi/spi-geni-qcom.ko] undefined!\nERROR: modpost: \"geni_se_tx_init_dma\" [drivers/spi/spi-geni-qcom.ko] undefined!\n...c/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/33/execroot/__main__/common/scripts/Makefile.modpost:187: modules-only.symvers] Error 1\n...** [/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/33/execroot/__main__/common/Makefile:2004: modpost] Error 2\nmake: *** [Makefile:256: __sub-make] Error 2\nTarget //common:db845c_dist failed to build\nUse --verbose_failures to see the command lines of failed build steps.\n...dleman _middlemen/common_Sdb845c_Udist-runfiles failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:db845c_no_kgdb) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nINFO: Elapsed time: 313.563s, Critical Path: 279.44s\nINFO: 431 processes: 398 internal, 32 linux-sandbox, 1 local.\nERROR: Build did NOT complete successfully\nERROR: Build failed. Not running target\n```\n\nPlease resolve and resubmit",
       "revId": "fdcf32884d6e6b3c7d317c9bd60b657f2824873e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a81ab2c8_1733a1da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3662039
+      },
+      "writtenOn": "2024-10-22T10:33:21Z",
+      "side": 1,
+      "message": "Dependency gerrit already merged\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3305642",
+      "parentUuid": "4efdcb27_bc1ef244",
+      "revId": "fdcf32884d6e6b3c7d317c9bd60b657f2824873e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
