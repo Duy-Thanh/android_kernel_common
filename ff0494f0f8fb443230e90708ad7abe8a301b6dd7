@@ -39,6 +39,30 @@
       },
       "revId": "ff0494f0f8fb443230e90708ad7abe8a301b6dd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "168f722a_2382f35a",
+        "filename": "include/trace/hooks/dev_shutdown.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-10-22T07:43:01Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "192ad614_6ce83822",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 1
+      },
+      "revId": "ff0494f0f8fb443230e90708ad7abe8a301b6dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
