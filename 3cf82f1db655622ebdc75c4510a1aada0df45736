@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "680ef400_04b28f56",
+        "filename": "mm/memfd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-22T23:19:21Z",
+      "side": 1,
+      "message": "Why make ashmem_compat_enable conditional?\n\nAlso, dropping the __user annotations seems like a bad idea.",
+      "revId": "3cf82f1db655622ebdc75c4510a1aada0df45736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a320c3_37c0f2ad",
+        "filename": "mm/memfd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-22T23:19:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure I\u0027m sold on multiplexing userland and internal interfaces on the same logic here. \n\nA cleaner solution would be to have the internal interface use kernel pointers, and the external interface do the copy-from-user to a kernel pointer, and then pass that to the internal interface.",
+      "revId": "3cf82f1db655622ebdc75c4510a1aada0df45736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08bd81b7_b7a831dc",
+        "filename": "mm/memfd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-22T23:19:21Z",
+      "side": 1,
+      "message": "Again, why not always setup ashmem compat?\n\nalso This `file-\u003eprivate_data \u003d fd` needs some explanation (or should be added in a later patch).",
+      "revId": "3cf82f1db655622ebdc75c4510a1aada0df45736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
