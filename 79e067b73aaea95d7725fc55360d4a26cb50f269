@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ff1370_6b3a725c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-22T23:42:52Z",
+      "side": 1,
+      "message": "why is this hook needed when there is plenty of debugging info about this case going to the log via printk? This hook really doesn\u0027t seem necessary. Can you say more about what extra information this hook provides that isn\u0027t available otherwise?",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
