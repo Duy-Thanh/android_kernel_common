@@ -16,6 +16,24 @@
       "message": "The KMI is frozen so you cannot change `struct pci_dev`. Please refactor the series to avoid breaking KMI.\n```\nfunction symbol \u0027int __pci_register_driver(struct pci_driver*, struct module*, const char*)\u0027 changed\n  CRC changed from 0x7bfe59a4 to 0xfbe86020\n\nfunction symbol \u0027int blk_mq_pci_map_queues(struct blk_mq_queue_map*, struct pci_dev*, int)\u0027 changed\n  CRC changed from 0x233010e7 to 0xb25a40ac\n\nfunction symbol \u0027struct pci_host_bridge* devm_pci_alloc_host_bridge(struct device*, size_t)\u0027 changed\n  CRC changed from 0x9618c53d to 0x6c68a5ed\n\n... 137 omitted; 140 symbols have only CRC changes\n\ntype \u0027struct pci_dev\u0027 changed\n  byte size changed from 3280 to 3272\n  member \u0027u16 l1ss\u0027 changed\n    offset changed by -112\n  2 members (\u0027unsigned int pasid_no_tlp\u0027 .. \u0027unsigned int eetlp_prefix_path\u0027) changed\n    offset changed by -31\n  member \u0027pci_channel_state_t error_state\u0027 changed\n    offset changed by -32\n  62 members (\u0027struct device dev\u0027 .. \u0027u64 android_kabi_reserved4\u0027) changed\n    offset changed by -64\n```",
       "revId": "bb950479c8d8468abc7d1d70fbfe5d1af6cc5d0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a662338_a8d75f7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3640356
+      },
+      "writtenOn": "2024-10-22T11:31:19Z",
+      "side": 1,
+      "message": "Refactored all changes to avoid changes to struct pci_dev. L1ss save/restore is only enabled when CONFIG_PCIEASPM is set",
+      "parentUuid": "61774650_5549740b",
+      "revId": "bb950479c8d8468abc7d1d70fbfe5d1af6cc5d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
