@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edefda63_188aa3e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303325
+      },
+      "writtenOn": "2024-10-22T22:29:00Z",
+      "side": 1,
+      "message": "Is modifying OWNERS on a branch the preferred strategy for granting +2 code review permissions? I know adding a branch regex `refs/meta/config` is an alternative option; lmk what is preferred.\n\nAdditionally, do kernel manifests inherit OWNERS perms from `kernel/common`? AFAICT, that seems to be the case for other -desktop branches, but I may be missing some context.",
+      "revId": "3b8a10736a8230bd21a18862f17367d0a378d567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
