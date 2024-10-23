@@ -16,6 +16,24 @@
       "message": "why is this hook needed when there is plenty of debugging info about this case going to the log via printk? This hook really doesn\u0027t seem necessary. Can you say more about what extra information this hook provides that isn\u0027t available otherwise?",
       "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f09bad5_ba7a6dc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-10-23T07:59:33Z",
+      "side": 1,
+      "message": "The printk message from panic_bad_stack() is helpful in analyzing bad_stack issues.\nHowever, it often does not appear in the kernel log, so I would like to get help with this hook.\nThis usually happens when an exception occurs during printk() processing, which may be a hardware malfunction.",
+      "parentUuid": "66ff1370_6b3a725c",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
