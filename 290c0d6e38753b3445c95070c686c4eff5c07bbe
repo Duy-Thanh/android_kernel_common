@@ -213,6 +213,24 @@
       "parentUuid": "c5343ec2_1e807b7a",
       "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b7292f_6b0e7cf2",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-10-23T04:33:30Z",
+      "side": 1,
+      "message": "thanks, thought should protect the kfree under it as well, therefore look the spinlock before kfree and released after acc_dev_instance is NULL.\nAdded comments on the code and updated the commit message as well.",
+      "parentUuid": "f23e58e8_1e426add",
+      "revId": "290c0d6e38753b3445c95070c686c4eff5c07bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
