@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80e97388_4727b6c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-23T16:45:46Z",
+      "side": 1,
+      "message": "Well, if these configs are necessary, then it\u0027s ok to change the ABI (the x86 ABI is not \"frozen\" and this just effects x86). But on the arm64 side we\u0027ve asked partners to break-up some configs (CONFIG_ARCH_QCOM) so they aren\u0027t needlessly selecting unwanted configs.\n\nAre all of these selected configs needed for the desktop config?",
+      "parentUuid": "e6e7971b_1e780f12",
+      "revId": "4b2a6cb9e55f1fdd50151c829797528101e07bfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb5c68d1_32fd51d7",
         "filename": "arch/x86/configs/gki_defconfig",
         "patchSetId": 6
