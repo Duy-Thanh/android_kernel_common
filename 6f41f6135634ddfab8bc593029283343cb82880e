@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "930770f1_773586bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2024-10-23T17:56:50Z",
+      "side": 1,
+      "message": "Please update the commit message to follow guidelines. There needs to be blank line after the 1st line of summary. Also better wording. See previous submission by honor https://r.android.com/3285496",
+      "revId": "6f41f6135634ddfab8bc593029283343cb82880e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0fa44863_15a82f18",
@@ -14,6 +31,23 @@
       "writtenOn": "2024-10-23T03:30:36Z",
       "side": 1,
       "message": "Please Code-Review +2 for merge, thank.",
+      "revId": "6f41f6135634ddfab8bc593029283343cb82880e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d7e5e3e_c507e238",
+        "filename": "fs/direct-io.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2024-10-23T17:56:50Z",
+      "side": 1,
+      "message": "Because of adding this header, crc of functions  `__blockdev_direct_IO` and `__iomap_dio_rw` is changing which will break the KMI. So can you please try by wrapping up this include under `#ifndef __GENKSYMS__` ? Have a look at the change at https://r.android.com/c/kernel/common/+/2648505/6/mm/compaction.c for example.\n\nDo the same for including header in fs/iomap/direct-io.c",
       "revId": "6f41f6135634ddfab8bc593029283343cb82880e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
