@@ -159,6 +159,24 @@
       "parentUuid": "a17b4dfd_e11d3d00",
       "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e531bcef_818e3993",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4778,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-10-23T23:52:42Z",
+      "side": 1,
+      "message": "The information saved here is used by the bootloader, not for RAM dump analysis.\nThe bootloader cannot find local variables in the stack frame.\n\nSo, if a reset occurs, the bootloader will generate a report using this information on the device. If the reset occurred during shutdown, it will include the device name in the report.",
+      "parentUuid": "6b2de1e9_4f01716d",
+      "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
