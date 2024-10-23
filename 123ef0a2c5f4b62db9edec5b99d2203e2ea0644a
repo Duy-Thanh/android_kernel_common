@@ -141,6 +141,24 @@
       "parentUuid": "7e959205_e5c257aa",
       "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2de1e9_4f01716d",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4778,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-23T17:42:48Z",
+      "side": 1,
+      "message": "\u003e The device doing a shutdown is already deleted from the devices_kset-\u003elist\n\nFair enough, but you can still get the _dev_ local out of the stack frame in the ramdump.\n\nIs this such a common occurrence that this special casing for rampdumps are needed? Why is this so common? Can we work on fixing the underlying issue instead?",
+      "parentUuid": "a17b4dfd_e11d3d00",
+      "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
