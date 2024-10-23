@@ -16,6 +16,24 @@
       "message": "Is modifying OWNERS on a branch the preferred strategy for granting +2 code review permissions? I know adding a branch regex `refs/meta/config` is an alternative option; lmk what is preferred.\n\nAdditionally, do kernel manifests inherit OWNERS perms from `kernel/common`? AFAICT, that seems to be the case for other -desktop branches, but I may be missing some context.",
       "revId": "3b8a10736a8230bd21a18862f17367d0a378d567",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2b0d5f5_7cb6644b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-23T16:22:23Z",
+      "side": 1,
+      "message": "The commit message doesn\u0027t specify the purpose of this change.\n\nOWNERS do get used for suggestion of reviewers and I don\u0027t see an issue with you having ownership of the branch!\n\nWhether this affects the submission requirements in the way you intend is probably a question for @maennich@google.com.",
+      "parentUuid": "edefda63_188aa3e5",
+      "revId": "3b8a10736a8230bd21a18862f17367d0a378d567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
