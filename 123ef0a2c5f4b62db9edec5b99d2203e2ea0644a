@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39913d64_a2e75681",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-10-23T11:38:45Z",
+      "side": 1,
+      "message": "We want to have two pieces of information about a specific device: `dev_driver_string(dev)` and `dev_name(dev)`.\n\nDuring the operation of `device_shutdown()`, if a watchdog reset occurs, we can determine which device\u0027s shutdown was being performed.",
+      "parentUuid": "b5de2d52_2d641e59",
+      "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2731923_e9b7ea40",
         "filename": "drivers/base/core.c",
         "patchSetId": 2
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "Passing in a \"raw\" device pointer is not going to provide you any real information as you have no context or knowledge of what that pointer really is.  This isn\u0027t going to give you any real information.",
       "parentUuid": "b1c4f79b_efd3830e",
+      "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a17b4dfd_e11d3d00",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4778,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-10-23T11:38:45Z",
+      "side": 1,
+      "message": "We want to know which device was being shutdown when a watchdog reset occurred during device_shutdown().\nTo do this, We will store two information: `dev_driver_string(dev)` and `dev_name(dev)`.",
+      "parentUuid": "7e959205_e5c257aa",
       "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
