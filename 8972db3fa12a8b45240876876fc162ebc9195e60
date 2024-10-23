@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b34467c_eea0341a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-23T16:09:55Z",
+      "side": 1,
+      "message": "I created a stub `_desktop` ABI file for your use.\n\nSee also pa/2970564 and comments.",
+      "revId": "8972db3fa12a8b45240876876fc162ebc9195e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
