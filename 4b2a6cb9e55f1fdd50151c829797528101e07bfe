@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6e7971b_1e780f12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-23T13:12:23Z",
+      "side": 1,
+      "message": "@tkjos@google.com Todd, the `X86_INTEL_LPSS` addition has the following impact on kernel configuration and the consequent ABI changes. Is this OK?\n\n```\n@@ -224,0 +225 @@\n+CONFIG_X86_INTEL_LPSS\u003dy\n@@ -346,0 +348 @@\n+CONFIG_PM_CLK\u003dy\n@@ -1336,0 +1339,7 @@\n+CONFIG_PINCTRL\u003dy\n+CONFIG_GENERIC_PINCTRL_GROUPS\u003dy\n+CONFIG_PINMUX\u003dy\n+CONFIG_GENERIC_PINMUX_FUNCTIONS\u003dy\n+CONFIG_PINCONF\u003dy\n+CONFIG_GENERIC_PINCONF\u003dy\n+CONFIG_PINCTRL_SINGLE\u003dy\n@@ -1518,0 +1528 @@\n+CONFIG_USB_DWC3_OF_SIMPLE\u003dy\n@@ -1607,0 +1618 @@\n+CONFIG_DW_DMAC_PCI\u003dy\n@@ -1630,0 +1642,3 @@\n+CONFIG_HAVE_CLK\u003dy\n+CONFIG_HAVE_CLK_PREPARE\u003dy\n+CONFIG_COMMON_CLK\u003dy\n```",
+      "revId": "4b2a6cb9e55f1fdd50151c829797528101e07bfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb5c68d1_32fd51d7",
         "filename": "arch/x86/configs/gki_defconfig",
         "patchSetId": 6
