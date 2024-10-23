@@ -53,7 +53,7 @@ static int bic_scale __read_mostly = 41;
 static int tcp_friendliness __read_mostly = 1;
 
 static int hystart __read_mostly = 1;
-static int hystart_detect __read_mostly = HYSTART_ACK_TRAIN | HYSTART_DELAY;
+static int hystart_detect __read_mostly = HYSTART_DELAY;
 static int hystart_low_window __read_mostly = 16;
 static int hystart_ack_delta_us __read_mostly = 2000;
 
