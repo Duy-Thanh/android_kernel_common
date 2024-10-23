@@ -34,6 +34,24 @@
       "parentUuid": "4efdcb27_bc1ef244",
       "revId": "fdcf32884d6e6b3c7d317c9bd60b657f2824873e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d53891_a85c6351",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3662039
+      },
+      "writtenOn": "2024-10-23T09:14:01Z",
+      "side": 1,
+      "message": "Why we are seeing issue even if dependent gerrit has already merged",
+      "parentUuid": "a81ab2c8_1733a1da",
+      "revId": "fdcf32884d6e6b3c7d317c9bd60b657f2824873e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
