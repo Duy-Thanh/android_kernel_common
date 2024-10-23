@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b633173_eb47df7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-10-23T00:48:19Z",
+      "side": 1,
+      "message": "Please indicate that this is a partial cherry-pick of the original patch and you dropped android_vh_rmqueue_cma_fallback() part (preferably with explanation why).",
+      "revId": "e3eb143e4fe217e0f7e034a0c9118fab7effecd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb77f78_849f71ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-10-23T00:48:19Z",
+      "side": 1,
+      "message": "Please add a follow-up patch to update ABI, similar to https://android-review.googlesource.com/c/kernel/common/+/2661615",
+      "revId": "e3eb143e4fe217e0f7e034a0c9118fab7effecd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
