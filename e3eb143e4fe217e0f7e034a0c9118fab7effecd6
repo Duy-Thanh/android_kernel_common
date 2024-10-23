@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36078c19_84df16bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-10-23T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b633173_eb47df7e",
+      "revId": "e3eb143e4fe217e0f7e034a0c9118fab7effecd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9eb77f78_849f71ef",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-23T00:48:19Z",
       "side": 1,
       "message": "Please add a follow-up patch to update ABI, similar to https://android-review.googlesource.com/c/kernel/common/+/2661615",
+      "revId": "e3eb143e4fe217e0f7e034a0c9118fab7effecd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c239c8ec_ad5ecadb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-10-23T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9eb77f78_849f71ef",
       "revId": "e3eb143e4fe217e0f7e034a0c9118fab7effecd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
