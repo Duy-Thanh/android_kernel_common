@@ -34,6 +34,24 @@
       "parentUuid": "66ff1370_6b3a725c",
       "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45068be4_70d28c22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-23T17:56:39Z",
+      "side": 1,
+      "message": "is a hardware malfunction that leads to lost kernel messages during handling of bad_stack really such a common occurrence that it requires this kind of kernel change to make ramdump debugging easier? This seems like it would be a very rare case so this change is really not very useful.",
+      "parentUuid": "3f09bad5_ba7a6dc1",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
