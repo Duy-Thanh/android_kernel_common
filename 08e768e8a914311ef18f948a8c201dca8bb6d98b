@@ -16,6 +16,23 @@
       "message": "+Febin FYI",
       "revId": "08e768e8a914311ef18f948a8c201dca8bb6d98b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42ba62cf_de05c542",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-23T17:11:26Z",
+      "side": 1,
+      "message": "This is safe, but I would put the _kfree()_ after the _spin_unlock_irqrestore()_ just to minimize the critical section. The lock is protecting the _acc_dev_instance_lock_ global - no need to protect _dev_. Probably doesn\u0027t matter much since this is unlikely to be a highly contented lock.",
+      "revId": "08e768e8a914311ef18f948a8c201dca8bb6d98b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
