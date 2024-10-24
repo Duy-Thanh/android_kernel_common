@@ -51,6 +51,24 @@
       "parentUuid": "e3b764d4_323c9b71",
       "revId": "417f21e980afab83ac1d1ad541bdaeab4cc83d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2827f81a_6bef39ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-10-24T06:42:58Z",
+      "side": 1,
+      "message": "Thanks for the information! Added one comment there, not sure if Praveen Talari\n would help cherry-pick this commit in that series as well.",
+      "parentUuid": "0a4e62b1_0c4f3bc9",
+      "revId": "417f21e980afab83ac1d1ad541bdaeab4cc83d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
