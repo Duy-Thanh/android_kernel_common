@@ -51,6 +51,24 @@
       ],
       "revId": "fbcda4a3138517cccc56136ac7d5109f8fea9ee1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "926d4196_9db14bb7",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-24T21:54:49Z",
+      "side": 1,
+      "message": "missing forward decl. If you add `struct cma;` at line 30, does it fix it?",
+      "parentUuid": "913385e4_fe77999f",
+      "revId": "fbcda4a3138517cccc56136ac7d5109f8fea9ee1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
