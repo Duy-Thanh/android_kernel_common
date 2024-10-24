@@ -34,6 +34,24 @@
       "parentUuid": "edefda63_188aa3e5",
       "revId": "3b8a10736a8230bd21a18862f17367d0a378d567",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26f5abcf_068958c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-24T12:46:34Z",
+      "side": 1,
+      "message": "OWNERS approval !\u003d Code-Review+2 permission.\n\nOwners are configured in OWNERS files and, if active, a submit requirement. As @gprocida@google.com mentioned, they will also be taken into consideration when suggesting reviewers.\n\nCode-Review+2 is a permission that is to be configured in the project hierarchy.\nhttps://android-review.git.corp.google.com/admin/repos/kernel/common,access reveals that CR+2 is granted to desktop folks on refs matching `^refs/heads/android.*-desktop`.",
+      "parentUuid": "d2b0d5f5_7cb6644b",
+      "revId": "3b8a10736a8230bd21a18862f17367d0a378d567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
