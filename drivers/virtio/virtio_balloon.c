@@ -889,6 +889,30 @@ static int virtio_balloon_register_shrinker(struct virtio_balloon *vb)
 	return register_shrinker(&vb->shrinker, "virtio-balloon");
 }
 
+static inline u64 _read_msr_helper(unsigned int reg)
+{
+	u64 value;
+	pr_warn("#### rdmsrl_read: 0x%x\n", reg);
+	rdmsrl(reg, value);
+	return value;
+}
+
+static long _debug_hyperv_msr_cpu(void * unused) {
+#define HV_X64_MSR_VP_INDEX 0x40000002
+	int cpu_id = smp_processor_id();
+	u64 vp_index = _read_msr_helper(HV_X64_MSR_VP_INDEX);
+	pr_warn("#### Hyper-V vp index: %llu for cpu: %d\n", vp_index, cpu_id);
+	return 0;
+}
+
+static int _debug_hyperv_msr(void) {
+	int cpu_id;
+	for_each_possible_cpu(cpu_id) {
+		work_on_cpu(cpu_id, &_debug_hyperv_msr_cpu, NULL);
+	}
+	return 0;
+}
+
 static int virtballoon_probe(struct virtio_device *vdev)
 {
 	struct virtio_balloon *vb;
@@ -899,6 +923,7 @@ static int virtballoon_probe(struct virtio_device *vdev)
 			__func__);
 		return -EINVAL;
 	}
+        _debug_hyperv_msr();
 
 	vdev->priv = vb = kzalloc(sizeof(*vb), GFP_KERNEL);
 	if (!vb) {
