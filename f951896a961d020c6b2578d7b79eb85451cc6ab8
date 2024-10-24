@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36ebbed9_5bd9dac4",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-10-24T15:46:45Z",
+      "side": 1,
+      "message": "This kfree should be moved after acc_dev_instance is set to NULL, otherwise it may result in a UAF if someone else grabs the lock.",
+      "revId": "f951896a961d020c6b2578d7b79eb85451cc6ab8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
