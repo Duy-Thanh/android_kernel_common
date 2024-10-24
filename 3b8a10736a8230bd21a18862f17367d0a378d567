@@ -52,6 +52,24 @@
       "parentUuid": "d2b0d5f5_7cb6644b",
       "revId": "3b8a10736a8230bd21a18862f17367d0a378d567",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98c10782_283fae02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303325
+      },
+      "writtenOn": "2024-10-24T21:40:43Z",
+      "side": 1,
+      "message": "Okay, thanks for the clarification! I have a follow-up question, but it\u0027s about our corresponding manifests, so I\u0027ll tag folks in the relevant CL.",
+      "parentUuid": "26f5abcf_068958c4",
+      "revId": "3b8a10736a8230bd21a18862f17367d0a378d567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
