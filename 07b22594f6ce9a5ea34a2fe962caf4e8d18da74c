@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a46121_23665a17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-10-24T06:41:41Z",
+      "side": 1,
+      "message": "Hi, Praveen Talari\n\nThis commit causes serial issue for devices like db845c, which is fixed by the commit here:\nhttps://lore.kernel.org/all/20241009145110.16847-6-johan+linaro@kernel.org/\n\nCould you please cherry-pick that as well in this series, to avoid any breakages?",
+      "revId": "07b22594f6ce9a5ea34a2fe962caf4e8d18da74c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
