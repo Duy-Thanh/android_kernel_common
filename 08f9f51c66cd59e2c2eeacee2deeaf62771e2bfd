@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e961eaa5_f8f7be00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3228010
+      },
+      "writtenOn": "2024-10-24T10:50:10Z",
+      "side": 1,
+      "message": "Bypassing checkpatch. This commit is just an enabler and will be removed soon when the proper fix is ready.",
+      "revId": "08f9f51c66cd59e2c2eeacee2deeaf62771e2bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
