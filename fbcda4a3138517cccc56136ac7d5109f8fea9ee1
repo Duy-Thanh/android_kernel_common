@@ -16,6 +16,41 @@
       "message": "Could you help to review this patch again? Thanks!",
       "revId": "fbcda4a3138517cccc56136ac7d5109f8fea9ee1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "913385e4_fe77999f",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-24T21:49:24Z",
+      "side": 1,
+      "message": "This causes the following error:\n\n```\nIn file included from \u003c...\u003e/common/mm/oom_kill.c:57:\n\u003c...\u003e/common/include/trace/hooks/mm.h:32:18: error: declaration of \u0027struct cma\u0027 will not be visible outside of this function [-Werror,-Wvisibility]\n   32 |         TP_PROTO(struct cma *cma, unsigned long count, unsigned int align,\n      |                         ^\n1 error generated.\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "b80b6410_d639dc79",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "\tTP_PROTO(struct cma *cma, unsigned long count, unsigned long align,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fbcda4a3138517cccc56136ac7d5109f8fea9ee1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
