@@ -13,6 +13,7 @@
 #include <linux/writeback.h>
 #include <linux/pagevec.h>
 #include <linux/prefetch.h>
+#include <linux/cleancache.h>
 #include <linux/fsverity.h>
 #include "extent_io.h"
 #include "extent-io-tree.h"
@@ -960,6 +961,14 @@ static int btrfs_do_readpage(struct folio *folio, struct extent_map **em_cached,
 	if (ret < 0) {
 		folio_unlock(folio);
 		return ret;
+	}
+
+	if (!folio_test_uptodate(folio)) {
+		if (cleancache_get_page(&folio->page) == 0) {
+			BUG_ON(blocksize != folio_size(folio));
+			folio_unlock(folio);
+			goto out;
+		}
 	}
 
 	if (folio->index == last_byte >> folio_shift(folio)) {
