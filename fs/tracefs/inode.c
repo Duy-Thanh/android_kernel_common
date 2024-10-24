@@ -327,6 +327,15 @@ static int tracefs_parse_param(struct fs_context *fc, struct fs_parameter *param
 
 	opts->opts |= BIT(opt);
 
+	if (opts->opts) {
+		struct tracefs_fs_info *sb_opts = tracefs_mount->mnt_sb->s_fs_info;
+		struct tracefs_fs_info *new_opts = fc->s_fs_info;
+
+		/* structure copy of new mount options to sb */
+		if (sb_opts != new_opts)
+			*sb_opts = *new_opts;
+	}
+
 	return 0;
 }
 
@@ -356,7 +365,6 @@ static int tracefs_apply_options(struct super_block *sb, bool remount)
 		inode->i_gid = fsi->gid;
 
 	if (remount && (fsi->opts & BIT(Opt_uid) || fsi->opts & BIT(Opt_gid))) {
-
 		update_uid = fsi->opts & BIT(Opt_uid);
 		update_gid = fsi->opts & BIT(Opt_gid);
 
@@ -478,14 +486,16 @@ static int tracefs_fill_super(struct super_block *sb, struct fs_context *fc)
 	sb->s_op = &tracefs_super_operations;
 	sb->s_d_op = &tracefs_dentry_operations;
 
-	tracefs_apply_options(sb, false);
-
 	return 0;
 }
 
 static int tracefs_get_tree(struct fs_context *fc)
 {
-	return get_tree_single(fc, tracefs_fill_super);
+	int err = get_tree_single(fc, tracefs_fill_super);
+	if (err)
+		return err;
+
+	return tracefs_apply_options(fc->root->d_sb, true);
 }
 
 static void tracefs_free_fc(struct fs_context *fc)
