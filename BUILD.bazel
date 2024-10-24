@@ -153,6 +153,7 @@ write_file(
     content = [
         ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.common",
         ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64",
+        "CLANG_AUTOFDO_PROFILE=${ROOT_DIR}/${KERNEL_DIR}/6.1.93.llvm_profdata",
         "",  # keep new line at the end
     ],
     visibility = ["//visibility:private"],
@@ -254,6 +255,7 @@ write_file(
     content = [
         ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.common",
         ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64",
+        "CLANG_AUTOFDO_PROFILE=${ROOT_DIR}/${KERNEL_DIR}/6.1.93.llvm_profdata",
         "",  # keep new line at the end
     ],
     visibility = ["//visibility:private"],
