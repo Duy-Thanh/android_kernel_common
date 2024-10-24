@@ -142,6 +142,7 @@ int hv_common_cpu_init(unsigned int cpu)
 	msr_vp_index = hv_get_register(HV_REGISTER_VP_INDEX);
 
 	hv_vp_index[cpu] = msr_vp_index;
+	pr_warn("#### hv_common_cpu_init: cpu:  %lu, msr_vp_index: %lu\n", cpu, msr_vp_index);
 
 	if (msr_vp_index > hv_max_vp_index)
 		hv_max_vp_index = msr_vp_index;

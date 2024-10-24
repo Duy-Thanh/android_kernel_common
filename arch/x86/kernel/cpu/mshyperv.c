@@ -282,7 +282,7 @@ static void __init ms_hyperv_init_platform(void)
 	ms_hyperv.max_vp_index = cpuid_eax(HYPERV_CPUID_IMPLEMENT_LIMITS);
 	ms_hyperv.max_lp_index = cpuid_ebx(HYPERV_CPUID_IMPLEMENT_LIMITS);
 
-	pr_debug("Hyper-V: max %u virtual processors, %u logical processors\n",
+	pr_warn("Hyper-V: max %u virtual processors, %u logical processors\n",
 		 ms_hyperv.max_vp_index, ms_hyperv.max_lp_index);
 
 	/*
@@ -461,6 +461,7 @@ static void __init ms_hyperv_init_platform(void)
 	 */
 	if (!(ms_hyperv.features & HV_ACCESS_TSC_INVARIANT))
 		mark_tsc_unstable("running on Hyper-V");
+	pr_info("#### Hyper-V init complete.\n");
 
 	hardlockup_detector_disable();
 }

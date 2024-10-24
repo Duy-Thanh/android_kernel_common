@@ -1138,6 +1138,8 @@ asmlinkage __visible void __init __no_sanitize_address start_kernel(void)
 	arch_call_rest_init();
 
 	prevent_tail_call_optimization();
+
+	pr_warn("##### setup::Kernel end\n");
 }
 
 /* Call all constructor functions linked into the kernel. */

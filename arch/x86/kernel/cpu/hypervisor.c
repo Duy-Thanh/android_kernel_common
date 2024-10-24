@@ -95,6 +95,7 @@ static void __init copy_array(const void *src, void *target, unsigned int size)
 void __init init_hypervisor_platform(void)
 {
 	const struct hypervisor_x86 *h;
+	pr_warn("####Entering Hypervisor init.\n");
 
 	h = detect_hypervisor_vendor();
 
@@ -106,4 +107,5 @@ void __init init_hypervisor_platform(void)
 
 	x86_hyper_type = h->type;
 	x86_init.hyper.init_platform();
+	pr_warn("####Hypervisor init done: %s\n", h->name);
 }
