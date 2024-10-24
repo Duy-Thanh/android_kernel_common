@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc9a8ca3_1378098e",
+        "filename": "drivers/pci/pci.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-24T23:10:58Z",
+      "side": 1,
+      "message": "Sigh. The semicolon before the `{ }` breaks the builds if !CONFIG_PCIEASPM",
+      "revId": "eaddd7157d019ff9415b6f65ae506f169a5d54c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
