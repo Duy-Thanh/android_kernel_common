@@ -52,6 +52,24 @@
       "parentUuid": "3f09bad5_ba7a6dc1",
       "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bcb5c6b_50866341",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1895335
+      },
+      "writtenOn": "2024-10-24T00:03:09Z",
+      "side": 1,
+      "message": "Although the problem may be rare, it doesn’t mean we can ignore it. In production, we must address even these rare issues. This patch is one of the solutions we’ve successfully used in manufacturing. I hope you understand.",
+      "parentUuid": "45068be4_70d28c22",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
