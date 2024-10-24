@@ -16,6 +16,41 @@
       "message": "Hi, All\n\nThe issue fixed by this commit kinds breaking the LKFT tests, which depends on the serial console working stably, and I don\u0027t see any merge of 6.12-rc4 submitted for the android16-6.12 branch on gerrit, so submitting the fix here as UPSTREAM to avoid the breakage for the tests.\n\nBTW, the issue affects the android-mainline branch too, but the merge of\u0027v6.12-rc4 is submitted here https://android-review.googlesource.com/c/kernel/common/+/3316951, guess it will be merged soon, let\u0027s wait for it.",
       "revId": "417f21e980afab83ac1d1ad541bdaeab4cc83d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a4e62b1_0c4f3bc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-24T05:30:33Z",
+      "side": 1,
+      "message": "Be aware, the problematic patch is being submitted to android14-6.1:\nhttps://r.android.com/3309463\n\nSo this patch will probably need to be cherry-picked/backported to android14-6.1 as well.",
+      "revId": "417f21e980afab83ac1d1ad541bdaeab4cc83d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "830afe49_d0e6a086",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-24T05:30:33Z",
+      "side": 1,
+      "message": "Yeah. android16-6.12 will get updated from android-mainline after -rc4 is merged in. I don\u0027t think it should take too long, but we can re-evaluate this patch after a few days.",
+      "parentUuid": "e3b764d4_323c9b71",
+      "revId": "417f21e980afab83ac1d1ad541bdaeab4cc83d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
