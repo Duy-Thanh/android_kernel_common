@@ -177,6 +177,24 @@
       "parentUuid": "6b2de1e9_4f01716d",
       "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "324ebc5d_a9247400",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4778,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-24T17:57:51Z",
+      "side": 1,
+      "message": "continue this conversation on aosp/3305640",
+      "parentUuid": "e531bcef_818e3993",
+      "revId": "123ef0a2c5f4b62db9edec5b99d2203e2ea0644a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
