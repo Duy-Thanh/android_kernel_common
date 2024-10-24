@@ -70,6 +70,24 @@
       "parentUuid": "45068be4_70d28c22",
       "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd58d5c2_71da95f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-24T17:56:11Z",
+      "side": 1,
+      "message": "This is exactly what I\u0027m afraid of. These patches make me think there are 100s more patches like this coming to provide extra information about many other uncommon issues. Why does this rare case need a special hook but some other failure in sched or mm  (that is possible but unlikely) doesn\u0027t need a hook like this? How are you deciding which rare events are worthy of all this extra effort? We can\u0027t accept 100s of hooks for this kind of offline event analysis. What is so special about this particular case? (and the other similar cases in this patch series)\n\nPlease convince me that these 4 patches are not the beginning of a storm of patches to add hooks purely for the benefit of bootloader crash triage capabilities.",
+      "parentUuid": "9bcb5c6b_50866341",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
