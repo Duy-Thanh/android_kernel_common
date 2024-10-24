@@ -166,14 +166,30 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+# Temp target to fork form build.config.gki.aarch64 which may potentially be
+# used elsewhere.
+# TODO(b/236012223): Delete this once we have build-config-less builds for GKI.
+write_file(
+    name = "build.config.gki.aarch64_generated",
+    out = "build.config.gki.aarch64.generated",
+    content = [
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.common",
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64",
+        "",  # keep new line at the end
+    ],
+    visibility = ["//visibility:private"],
+)
+
 common_kernel(
     name = "kernel_aarch64",
     outs = DEFAULT_GKI_OUTS,
     arch = "arm64",
-    build_config = "build.config.gki.aarch64",
+    build_config = ":build.config.gki.aarch64_generated",
     build_gki_artifacts = True,
+    check_defconfig_minimized = True,
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
+    defconfig = "arch/arm64/configs/gki_defconfig",
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_arm64",
@@ -202,10 +218,12 @@ common_kernel(
     name = "kernel_aarch64_16k",
     outs = DEFAULT_GKI_OUTS,
     arch = "arm64",
-    build_config = "build.config.gki.aarch64",
+    build_config = ":build.config.gki.aarch64_generated",
     build_gki_artifacts = True,
+    check_defconfig_minimized = True,
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
+    defconfig = "arch/arm64/configs/gki_defconfig",
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_arm64",
@@ -232,9 +250,11 @@ common_kernel(
     name = "kernel_aarch64_interceptor",
     outs = DEFAULT_GKI_OUTS,
     arch = "arm64",
-    build_config = "build.config.gki.aarch64",
+    build_config = ":build.config.gki.aarch64_generated",
+    check_defconfig_minimized = True,
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
+    defconfig = "arch/arm64/configs/gki_defconfig",
     enable_interceptor = True,
     extra_dist = [
         ":test_mappings_zip",
@@ -247,6 +267,7 @@ common_kernel(
     visibility = ["//visibility:public"],
 )
 
+<<<<<<< HEAD   (d5651b ANDROID: sched/rt: Add support for rt sync wakeups am: 0a753)
 common_kernel(
     name = "kernel_riscv64",
     outs = DEFAULT_GKI_OUTS,
@@ -261,6 +282,21 @@ common_kernel(
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("riscv64"),
     visibility = ["//visibility:public"],
+||||||| BASE
+=======
+# Temp target to fork form build.config.gki.x86_64 which may potentially be
+# used elsewhere.
+# TODO(b/236012223): Delete this once we have build-config-less builds for GKI.
+write_file(
+    name = "build.config.gki.x86_64_generated",
+    out = "build.config.gki.x86_64.generated",
+    content = [
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.common",
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64",
+        "",  # keep new line at the end
+    ],
+    visibility = ["//visibility:private"],
+>>>>>>> BRANCH (ee2881 ANDROID: GKI targets sets common_kernel.defconfig.)
 )
 
 fail_rule(
@@ -276,9 +312,11 @@ common_kernel(
     name = "kernel_x86_64",
     outs = X86_64_OUTS,
     arch = "x86_64",
-    build_config = "build.config.gki.x86_64",
+    build_config = "build.config.gki.x86_64_generated",
     build_gki_artifacts = True,
+    check_defconfig_minimized = True,
     ddk_module_headers = [":all_headers_x86_64"],
+    defconfig = "arch/x86/configs/gki_defconfig",
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_x86_64",
