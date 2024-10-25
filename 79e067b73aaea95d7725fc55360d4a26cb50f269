@@ -124,6 +124,24 @@
       "parentUuid": "9137c51c_f34d133b",
       "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0575873_39daea10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-25T17:00:33Z",
+      "side": 1,
+      "message": "\u003e ...repeatedly over the years...\n\nI don\u0027t see these hooks in android14-6.1 or previous kernels - how did you implement this in past releases?",
+      "parentUuid": "77923236_0225ce02",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
