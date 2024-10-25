@@ -265708,6 +265708,13 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x12448959
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0dc9e98b
+  parameter_id: 0x6d7f5ff6
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x1247424a
   return_type_id: 0x48b5725f
   parameter_id: 0x0b7c4f67
@@ -362399,6 +362406,15 @@ elf_symbol {
   full_name: "usbnet_generic_cdc_bind"
 }
 elf_symbol {
+  id: 0x8f0c866d
+  name: "usbnet_get_drvinfo"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6d5a4e0f
+  type_id: 0x1cc68e0f
+  full_name: "usbnet_get_drvinfo"
+}
+elf_symbol {
   id: 0x52816b1c
   name: "usbnet_get_endpoints"
   is_defined: true
@@ -362406,6 +362422,69 @@ elf_symbol {
   crc: 0x9db1c63d
   type_id: 0x9e768332
   full_name: "usbnet_get_endpoints"
+}
+elf_symbol {
+  id: 0xf8fbc253
+  name: "usbnet_get_ethernet_addr"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x47e2a647
+  type_id: 0x9f6e1a01
+  full_name: "usbnet_get_ethernet_addr"
+}
+elf_symbol {
+  id: 0x4f4e9353
+  name: "usbnet_get_link"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1b1b9d3d
+  type_id: 0x4951a397
+  full_name: "usbnet_get_link"
+}
+elf_symbol {
+  id: 0xaf94ae5a
+  name: "usbnet_get_link_ksettings_internal"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfc6d573e
+  type_id: 0x914dbe16
+  full_name: "usbnet_get_link_ksettings_internal"
+}
+elf_symbol {
+  id: 0x6515c416
+  name: "usbnet_get_msglevel"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xff004c70
+  type_id: 0x4951a397
+  full_name: "usbnet_get_msglevel"
+}
+elf_symbol {
+  id: 0x19d80976
+  name: "usbnet_link_change"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb9c65cc2
+  type_id: 0x12448959
+  full_name: "usbnet_link_change"
+}
+elf_symbol {
+  id: 0x4a16e4d8
+  name: "usbnet_manage_power"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x641cdf19
+  type_id: 0x9f6e1a01
+  full_name: "usbnet_manage_power"
+}
+elf_symbol {
+  id: 0x6c854cb3
+  name: "usbnet_nway_reset"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x63d56971
+  type_id: 0x91296bda
+  full_name: "usbnet_nway_reset"
 }
 elf_symbol {
   id: 0xcd021e80
@@ -362433,6 +362512,15 @@ elf_symbol {
   crc: 0xaeff268d
   type_id: 0x95c144d5
   full_name: "usbnet_resume"
+}
+elf_symbol {
+  id: 0x99cb2edf
+  name: "usbnet_set_msglevel"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x52623047
+  type_id: 0x1f15f9ca
+  full_name: "usbnet_set_msglevel"
 }
 elf_symbol {
   id: 0x2325cd65
@@ -372391,10 +372479,19 @@ interface {
   symbol_id: 0x1227900d
   symbol_id: 0x580c56b8
   symbol_id: 0xe395160a
+  symbol_id: 0x8f0c866d
   symbol_id: 0x52816b1c
+  symbol_id: 0xf8fbc253
+  symbol_id: 0x4f4e9353
+  symbol_id: 0xaf94ae5a
+  symbol_id: 0x6515c416
+  symbol_id: 0x19d80976
+  symbol_id: 0x4a16e4d8
+  symbol_id: 0x6c854cb3
   symbol_id: 0xcd021e80
   symbol_id: 0x147e4ad2
   symbol_id: 0x3be16591
+  symbol_id: 0x99cb2edf
   symbol_id: 0x2325cd65
   symbol_id: 0x9cf79f8d
   symbol_id: 0x2f365f93
