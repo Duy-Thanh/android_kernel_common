@@ -3764,6 +3764,11 @@ pointer_reference {
   pointee_type_id: 0x1b77cf3e
 }
 pointer_reference {
+  id: 0x0c5168e8
+  kind: POINTER
+  pointee_type_id: 0x1b05453e
+}
+pointer_reference {
   id: 0x0c55d62d
   kind: POINTER
   pointee_type_id: 0x1b17be29
@@ -13857,6 +13862,11 @@ pointer_reference {
   id: 0x28a1c669
   kind: POINTER
   pointee_type_id: 0x88c7ff3b
+}
+pointer_reference {
+  id: 0x28a3a74b
+  kind: POINTER
+  pointee_type_id: 0x88ce7bb2
 }
 pointer_reference {
   id: 0x28ac1164
@@ -32042,6 +32052,11 @@ typedef {
   id: 0x7b64642a
   name: "blk_opf_t"
   referred_type_id: 0xe62ebf07
+}
+typedef {
+  id: 0x1684c624
+  name: "blk_plug_cb_fn"
+  referred_type_id: 0x0c5168e8
 }
 typedef {
   id: 0x3cc4e4dd
@@ -61951,6 +61966,12 @@ member {
   id: 0x56eb2a22
   name: "callback"
   type_id: 0x0ed1d747
+}
+member {
+  id: 0x56f376f1
+  name: "callback"
+  type_id: 0x1684c624
+  offset: 128
 }
 member {
   id: 0x3b021d6c
@@ -229015,6 +229036,17 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x88ce7bb2
+  kind: STRUCT
+  name: "blk_plug_cb"
+  definition {
+    bytesize: 32
+    member_id: 0x7c00ef52
+    member_id: 0x56f376f1
+    member_id: 0xff8a91c0
+  }
+}
+struct_union {
   id: 0x54a4079a
   kind: STRUCT
   name: "blk_queue_stats"
@@ -310369,6 +310401,12 @@ function {
   parameter_id: 0x2e60a6b2
 }
 function {
+  id: 0x1b05453e
+  return_type_id: 0x48b5725f
+  parameter_id: 0x28a3a74b
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x1b0758a9
   return_type_id: 0x48b5725f
   parameter_id: 0x2d9d2fbb
@@ -318809,6 +318847,13 @@ function {
   return_type_id: 0x054f691a
   parameter_id: 0x380c33d1
   parameter_id: 0x054f691a
+}
+function {
+  id: 0x66cc4765
+  return_type_id: 0x28a3a74b
+  parameter_id: 0x1684c624
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
 }
 function {
   id: 0x66e18f45
@@ -368627,6 +368672,7 @@ elf_symbol {
   full_name: "blk_bio_list_merge"
 }
 elf_symbol {
+<<<<<<< HEAD   (2d2851 ANDROID: ABI: Update oplus symbol list)
   id: 0x72fb1937
   name: "blk_crypto_derive_sw_secret"
   is_defined: true
@@ -368643,6 +368689,16 @@ elf_symbol {
   crc: 0xac2d25cb
   type_id: 0x137c4474
   full_name: "blk_crypto_evict_key"
+||||||| BASE
+=======
+  id: 0x650319ec
+  name: "blk_check_plugged"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd27b25dd
+  type_id: 0x66cc4765
+  full_name: "blk_check_plugged"
+>>>>>>> CHANGE (02b19d ANDROID: ABI: Update pixel symbol list)
 }
 elf_symbol {
   id: 0x4ffac461
@@ -428497,8 +428553,13 @@ interface {
   symbol_id: 0xb5b2d835
   symbol_id: 0x226328f4
   symbol_id: 0x1516f6b7
+<<<<<<< HEAD   (2d2851 ANDROID: ABI: Update oplus symbol list)
   symbol_id: 0x72fb1937
   symbol_id: 0x59a87a04
+||||||| BASE
+=======
+  symbol_id: 0x650319ec
+>>>>>>> CHANGE (02b19d ANDROID: ABI: Update pixel symbol list)
   symbol_id: 0x4ffac461
   symbol_id: 0xad8bab96
   symbol_id: 0x528ef002
