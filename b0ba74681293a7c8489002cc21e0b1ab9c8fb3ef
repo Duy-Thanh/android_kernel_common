@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae4dd80f_dd722aa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-25T18:07:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad789661_d76af692",
+      "revId": "b0ba74681293a7c8489002cc21e0b1ab9c8fb3ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f961feb1_95179286",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4571c37_5a2f2104",
+        "filename": "BUILD.bazel",
+        "patchSetId": 12
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-25T18:07:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f961feb1_95179286",
+      "range": {
+        "startLine": 1262,
+        "startChar": 38,
+        "endLine": 1262,
+        "endChar": 41
+      },
+      "revId": "b0ba74681293a7c8489002cc21e0b1ab9c8fb3ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6be6a5b5_7e36cbbd",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-10-25T18:04:27Z",
       "side": 1,
       "message": "path: x86 or x86_64?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 29
+      },
+      "revId": "b0ba74681293a7c8489002cc21e0b1ab9c8fb3ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c830d3f_39e7d815",
+        "filename": "kmi/x86/defconfig/allmodconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-25T18:07:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6be6a5b5_7e36cbbd",
       "range": {
         "startLine": 1,
         "startChar": 0,
