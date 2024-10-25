@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bcd35d0c_a178028c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2024-10-25T03:19:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "930770f1_773586bf",
+      "revId": "6f41f6135634ddfab8bc593029283343cb82880e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0fa44863_15a82f18",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2024-10-23T17:56:50Z",
       "side": 1,
       "message": "Because of adding this header, crc of functions  `__blockdev_direct_IO` and `__iomap_dio_rw` is changing which will break the KMI. So can you please try by wrapping up this include under `#ifndef __GENKSYMS__` ? Have a look at the change at https://r.android.com/c/kernel/common/+/2648505/6/mm/compaction.c for example.\n\nDo the same for including header in fs/iomap/direct-io.c",
+      "revId": "6f41f6135634ddfab8bc593029283343cb82880e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb5ddc2e_e3cc3e5f",
+        "filename": "fs/direct-io.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2024-10-25T03:19:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d7e5e3e_c507e238",
       "revId": "6f41f6135634ddfab8bc593029283343cb82880e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
