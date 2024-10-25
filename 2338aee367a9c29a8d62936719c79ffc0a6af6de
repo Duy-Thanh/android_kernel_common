@@ -16,6 +16,24 @@
       "message": "Wait for resolution in CL:3312074",
       "revId": "2338aee367a9c29a8d62936719c79ffc0a6af6de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "200d51e5_88705111",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-25T17:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e20d1455_1fb345b7",
+      "revId": "2338aee367a9c29a8d62936719c79ffc0a6af6de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
