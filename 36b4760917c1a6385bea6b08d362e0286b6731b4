@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b667960_f99eb13e",
+        "filename": "fs/f2fs/checkpoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-25T18:31:35Z",
+      "side": 1,
+      "message": "If skip_restore gets set, how does the priority ever come back down? Seems like it \"leaks\" priority which could then go on to cause other problems. How is that safe?",
+      "revId": "36b4760917c1a6385bea6b08d362e0286b6731b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
