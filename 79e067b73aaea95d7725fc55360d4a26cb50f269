@@ -106,6 +106,24 @@
       "parentUuid": "bd58d5c2_71da95f0",
       "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77923236_0225ce02",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-10-25T09:20:48Z",
+      "side": 1,
+      "message": "And in the case of the current patch, I will consider whether we can use `trace_android_rvh_handle_bad_stack` instead of adding a new hook to `panic_bad_stack()`.",
+      "parentUuid": "9137c51c_f34d133b",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
