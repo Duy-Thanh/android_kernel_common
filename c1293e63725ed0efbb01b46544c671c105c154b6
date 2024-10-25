@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eed204b_9e84ebdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2024-10-25T09:23:22Z",
+      "side": 1,
+      "message": "Hi,Todd Kjos\n\nwe need to add arm64_serror_panic and do_sea vendor hooks in kernel6.12，in order to gather data of kernel fault and unsual aborts and summarize it with other information.\n\nplease review it, thanks!",
+      "revId": "c1293e63725ed0efbb01b46544c671c105c154b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
