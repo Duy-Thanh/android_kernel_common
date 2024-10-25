@@ -2381,6 +2381,8 @@ extern const u32		sched_prio_to_wmult[40];
 #define ENQUEUE_DELAYED		0x200
 #define ENQUEUE_RQ_SELECTED	0x400
 
+#define ENQUEUE_WAKEUP_SYNC	0x80
+
 #define RETRY_TASK		((void *)-1UL)
 
 struct affinity_context {
@@ -3865,6 +3867,7 @@ void sched_enq_and_set_task(struct sched_enq_and_set_ctx *ctx);
 
 #include "ext.h"
 
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
 static inline void *android_task_vendor_data(struct task_struct *p)
 {
 	if (p == &init_task)
@@ -3872,5 +3875,6 @@ static inline void *android_task_vendor_data(struct task_struct *p)
 
 	return p + 1;
 }
+#endif
 
 #endif /* _KERNEL_SCHED_SCHED_H */

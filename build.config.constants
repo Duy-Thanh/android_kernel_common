@@ -1,5 +1,11 @@
+<<<<<<< HEAD   (7fc5d9 ANDROID: rust_binder: use DescriptorState in range_alloc::ar)
 BRANCH=android-mainline-rust
 CLANG_VERSION=r522817
+||||||| BASE
+CLANG_VERSION=r522817
+=======
+CLANG_VERSION=r536225
+>>>>>>> BRANCH (6c455c ANDROID: Check arch before running kunit)
 RUSTC_VERSION=1.81.0.u1
 AARCH64_NDK_TRIPLE=aarch64-linux-android31
 X86_64_NDK_TRIPLE=x86_64-linux-android31
