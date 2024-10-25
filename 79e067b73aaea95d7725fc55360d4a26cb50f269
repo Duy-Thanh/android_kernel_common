@@ -88,6 +88,24 @@
       "parentUuid": "9bcb5c6b_50866341",
       "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9137c51c_f34d133b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-10-25T02:04:05Z",
+      "side": 1,
+      "message": "These problems occur as a result of watchdog resets and do not leave direct clues in the kernel logs.\nWe need to first identify which device driver is causing the problem or what task is causing it, then we can perform a practical analysis for resolving the issue.\nWe don\u0027t have much time to spend on initial analysis.\n\nThese patches are codes for problems that we have met repeatedly over the years while working on many projects.\nI don\u0027t think they suddenly increased to dozens.",
+      "parentUuid": "bd58d5c2_71da95f0",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
