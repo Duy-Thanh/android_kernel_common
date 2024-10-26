@@ -17,26 +17,9 @@
 #include <linux/sched.h>
 #include "internal.h"
 
-static inline bool vma_is_sealed(struct vm_area_struct *vma)
-{
-	return (vma->vm_flags & VM_SEALED);
-}
-
 static inline void set_vma_sealed(struct vm_area_struct *vma)
 {
 	vm_flags_set(vma, VM_SEALED);
-}
-
-/*
- * check if a vma is sealed for modification.
- * return true, if modification is allowed.
- */
-static bool can_modify_vma(struct vm_area_struct *vma)
-{
-	if (unlikely(vma_is_sealed(vma)))
-		return false;
-
-	return true;
 }
 
 static bool is_madv_discard(int behavior)
@@ -50,6 +33,14 @@ static bool is_madv_discard(int behavior)
 	case MADV_WIPEONFORK:
 		return true;
 	}
+
+	return false;
+}
+
+static bool vma_is_prot_none(struct vm_area_struct *vma)
+{
+	if ((vma->vm_flags & VM_ACCESS_FLAGS) == VM_NONE)
+		return true;
 
 	return false;
 }
@@ -93,24 +84,25 @@ bool can_modify_mm(struct mm_struct *mm, unsigned long start, unsigned long end)
 }
 
 /*
- * Check if the vmas of a memory range are allowed to be modified by madvise.
- * the memory ranger can have a gap (unallocated memory).
- * return true, if it is allowed.
+ * Check if a vma is allowed to be modified by madvise.
  */
-bool can_modify_mm_madv(struct mm_struct *mm, unsigned long start, unsigned long end,
-		int behavior)
+bool can_modify_vma_madv(struct vm_area_struct *vma, int behavior)
 {
-	struct vm_area_struct *vma;
-
-	VMA_ITERATOR(vmi, mm, start);
-
 	if (!is_madv_discard(behavior))
 		return true;
 
-	/* going through each vma to check. */
-	for_each_vma_range(vmi, vma, end)
-		if (unlikely(is_ro_anon(vma) && !can_modify_vma(vma)))
-			return false;
+	if (vma_is_prot_none(vma))
+		return true;
+
+
+	if (vma->vm_file && !(vma->vm_flags & VM_SHARED) &&
+			!(vma->vm_flags & VM_WRITE)) {
+		pr_info("madv_dontneed on private ro file mapping pid=%d",current->pid);
+		panic("madv_dontneed on private ro file mapping");
+	}
+
+	if (unlikely(!can_modify_vma(vma) && is_ro_anon(vma)))
+		return false;
 
 	/* Allow by default. */
 	return true;
