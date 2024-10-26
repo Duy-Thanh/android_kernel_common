@@ -1466,8 +1466,25 @@ static inline int can_do_mseal(unsigned long flags)
 
 bool can_modify_mm(struct mm_struct *mm, unsigned long start,
 		unsigned long end);
-bool can_modify_mm_madv(struct mm_struct *mm, unsigned long start,
-		unsigned long end, int behavior);
+static inline bool vma_is_sealed(struct vm_area_struct *vma)
+{
+	return (vma->vm_flags & VM_SEALED);
+}
+
+/*
+ * check if a vma is sealed for modification.
+ * return true, if modification is allowed.
+ */
+static inline bool can_modify_vma(struct vm_area_struct *vma)
+{
+	if (unlikely(vma_is_sealed(vma)))
+		return false;
+
+	return true;
+}
+
+bool can_modify_vma_madv(struct vm_area_struct *vma, int behavior);
+
 #else
 static inline int can_do_mseal(unsigned long flags)
 {
@@ -1480,10 +1497,15 @@ static inline bool can_modify_mm(struct mm_struct *mm, unsigned long start,
 	return true;
 }
 
-static inline bool can_modify_mm_madv(struct mm_struct *mm, unsigned long start,
-		unsigned long end, int behavior)
+static inline bool can_modify_vma(struct vm_area_struct *vma)
 {
 	return true;
 }
+
+static inline bool can_modify_vma_madv(struct vm_area_struct *vma, int behavior)
+{
+	return true;
+}
+
 #endif
 #endif	/* __MM_INTERNAL_H */
