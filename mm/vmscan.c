@@ -2567,8 +2567,7 @@ static unsigned int move_folios_to_lru(struct lruvec *lruvec,
 		}
 
 		/*
-		 * The folio_set_lru needs to be kept here for list integrity.
-		 * Otherwise:
+		 * The folio_set_lru needs to be kept here for list integrity. Otherwise:
 		 *   #0 move_folios_to_lru             #1 release_pages
 		 *   if (!folio_put_testzero())
 		 *				      if (folio_put_testzero())

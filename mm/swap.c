@@ -127,7 +127,7 @@ void __folio_put(struct folio *folio)
 
 	page_cache_release(folio);
 	if (folio_test_large(folio) && folio_test_large_rmappable(folio))
-		folio_undo_large_rmappable(folio);
+		folio_unqueue_deferred_split(folio);
 	mem_cgroup_uncharge(folio);
 	free_unref_page(&folio->page, folio_order(folio));
 }

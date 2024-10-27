@@ -623,7 +623,7 @@ static inline void folio_set_order(struct folio *folio, unsigned int order)
 #endif
 }
 
-void folio_undo_large_rmappable(struct folio *folio);
+bool folio_unqueue_deferred_split(struct folio *folio);
 
 static inline struct folio *page_rmappable_folio(struct page *page)
 {
