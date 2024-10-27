@@ -142,6 +142,24 @@
       "parentUuid": "77923236_0225ce02",
       "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fea52b47_dd807e7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-10-27T08:47:02Z",
+      "side": 1,
+      "message": "In the android14-6.1, instead of using a vendor hook, we directly modified the built-in kernel code to obtain the desired information.\nIf there is a vendor hook, we can do this work within the module driver, so we are trying to replace it.",
+      "parentUuid": "d0575873_39daea10",
+      "revId": "79e067b73aaea95d7725fc55360d4a26cb50f269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
