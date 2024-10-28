@@ -1061,7 +1061,10 @@ static int mmc_blk_reset(struct mmc_blk_data *md, struct mmc_host *host,
 		return -EEXIST;
 
 	md->reset_done |= type;
-	err = mmc_hw_reset(host->card);
+	if (err) {
+		trace_android_vh_mmc_blk_reset(host, err);
+		return err;
+	}
 	/*
 	 * A successful reset will leave the card in the main partition, but
 	 * upon failure it might not be, so set it to MMC_BLK_PART_INVALID
