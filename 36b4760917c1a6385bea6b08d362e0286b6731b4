@@ -16,6 +16,24 @@
       "message": "If skip_restore gets set, how does the priority ever come back down? Seems like it \"leaks\" priority which could then go on to cause other problems. How is that safe?",
       "revId": "36b4760917c1a6385bea6b08d362e0286b6731b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c65f8dec_112e814b",
+        "filename": "fs/f2fs/checkpoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-28T08:21:17Z",
+      "side": 1,
+      "message": "In a general way, priority of improved task is recorded, and then it can be restored later -- this is fixed in the new patch here.",
+      "parentUuid": "8b667960_f99eb13e",
+      "revId": "36b4760917c1a6385bea6b08d362e0286b6731b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
