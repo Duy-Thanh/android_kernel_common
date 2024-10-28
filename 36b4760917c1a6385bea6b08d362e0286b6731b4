@@ -34,6 +34,24 @@
       "parentUuid": "8b667960_f99eb13e",
       "revId": "36b4760917c1a6385bea6b08d362e0286b6731b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b89ec4eb_3b62ccbd",
+        "filename": "fs/f2fs/checkpoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-28T18:21:37Z",
+      "side": 1,
+      "message": "Ok, apologies, I had misread the earlier patch and I see now that skip_restore is just an optimization for the case where no adjustment was made (is that correct?). Not that it would be used in cases where the vendor hook would intentionally leave the priority boosted.  Naming it something like \"prio_changed\" instead of \"skip_restore\" might make this more clear.",
+      "parentUuid": "c65f8dec_112e814b",
+      "revId": "36b4760917c1a6385bea6b08d362e0286b6731b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
