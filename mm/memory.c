@@ -117,12 +117,11 @@ EXPORT_SYMBOL(mem_map);
 
 static vm_fault_t do_fault(struct vm_fault *vmf);
 
-#define PAGE_BUCKETS 4
-#define BUCKET_SIZE (PAGE_SIZE / PAGE_BUCKETS)
+static unsigned int num_buckets_in_page = 4; // Default value
 
 struct page_access_count {
     unsigned long base_addr;
-    unsigned int buckets[PAGE_BUCKETS];
+    unsigned int buckets[128];
     struct hlist_node hnode;
 };
 
@@ -161,7 +160,8 @@ static void clear_af_worker(struct work_struct *work) {
 	p4d_t *p4d;
 	pmd_t *pmd;
 	unsigned long base_addr = address & PAGE_MASK;
-	unsigned int bucket = (address & ~PAGE_MASK) / BUCKET_SIZE;
+	unsigned int bucket_size = PAGE_SIZE / num_buckets_in_page;
+	unsigned int bucket = (address & ~PAGE_MASK) / bucket_size;
 	struct page_access_count *entry;
 	bool found = false;
 
@@ -6422,14 +6422,22 @@ EXPORT_SYMBOL_GPL(set_direct_map_range_uncached);
 static int page_access_show(struct seq_file *m, void *v) {
 	struct page_access_count *entry;
 	int i;
+	unsigned long start_address;
+	unsigned long end_address;
+	unsigned long bucket_size = PAGE_SIZE / num_buckets_in_page;
 
 	spin_lock(&page_access_ht_lock);
+
 	hash_for_each(page_access_ht, i, entry, hnode) {
 		seq_printf(m, "Base Address: 0x%lx\n", entry->base_addr);
-		seq_printf(m, "Bucket 0 (0-1K): %u\n", entry->buckets[0]);
-		seq_printf(m, "Bucket 1 (1K-2K): %u\n", entry->buckets[1]);
-		seq_printf(m, "Bucket 2 (2K-3K): %u\n", entry->buckets[2]);
-		seq_printf(m, "Bucket 3 (3K-4K): %u\n\n", entry->buckets[3]);
+		for (int j = 0; j < num_buckets_in_page; j++) {
+			start_address =  entry->base_addr + j*bucket_size;
+			end_address = entry->base_addr + (j+1)* bucket_size - 1;
+			seq_printf(m, "Bucket[%d] (%lx - %lx): %u\n",
+				   j, start_address, end_address, entry->buckets[j]);
+		}
+
+		seq_printf(m, "\n");
 	}
 
 	seq_printf(m, "Tracked count: 0x%llx\n", tracked_count);
@@ -6457,7 +6465,7 @@ static ssize_t pid_store(struct kobject *kobj, struct kobj_attribute *attr,
 		return -EINVAL;
 	}
 	pr_info("swapped-in page tracking pid for %u\n", (unsigned int)swap_tracked_pid);
-	pr_info("page size: %lu number of buckets: %lu\n", PAGE_SIZE, BUCKET_SIZE);
+	pr_info("page size: %lu number of buckets: %u\n", PAGE_SIZE, num_buckets_in_page);
 	return count;
 }
 
@@ -6641,3 +6649,34 @@ static int __init init_proc_track_swap_usage(void) {
 	return 0;
 }
 fs_initcall(init_proc_track_swap_usage);
+
+static ssize_t num_buckets_in_page_show(struct kobject *kobj,
+					struct kobj_attribute *attr, char *buf) {
+	return sprintf(buf, "%u\n", num_buckets_in_page);
+}
+
+static ssize_t num_buckets_in_page_store(struct kobject *kobj,
+					 struct kobj_attribute *attr, const char *buf,
+					 size_t count) {
+	unsigned int new_buckets;
+	if (kstrtouint(buf, 10, &new_buckets) || new_buckets < 1 ||
+	    new_buckets > 128) {
+		return -EINVAL;
+	}
+
+	num_buckets_in_page = new_buckets;
+	return count;
+}
+
+static struct kobj_attribute num_buckets_in_page_attr =
+__ATTR(num_buckets_in_page, 0644, num_buckets_in_page_show, num_buckets_in_page_store);
+
+static int __init memory_init(void) {
+	int retval = sysfs_create_file(kernel_kobj, &num_buckets_in_page_attr.attr);
+	if (retval)
+		pr_err("Failed to create sysfs file\n");
+
+	return 0;
+}
+
+late_initcall(memory_init);
