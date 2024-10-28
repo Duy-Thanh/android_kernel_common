@@ -947,6 +947,8 @@ struct zone {
 
 	int initialized;
 
+	unsigned long nr_free_highatomic;
+
 	/* Write-intensive fields used from the page allocator */
 	CACHELINE_PADDING(_pad1_);
 
