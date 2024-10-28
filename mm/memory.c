@@ -6617,12 +6617,65 @@ static const struct proc_ops swapped_pages_ops = {
 	.proc_read = swapped_pages_read,
 };
 
+static ssize_t reset_page_access_tracker_store(struct kobject *kobj,
+					       struct kobj_attribute *attr,
+					       const char *buf, size_t count) {
+	struct page_access_count *entry;
+	struct hlist_node *tmp;
+	unsigned int i;
+	// Reset page_access_ht
+	spin_lock(&page_access_ht_lock);
+	hash_for_each_safe(page_access_ht, i, tmp, entry, hnode) {
+		hash_del(&entry->hnode);
+		kfree(entry);
+	}
+
+	tracked_count = 0;
+	spin_unlock(&page_access_ht_lock);
+
+	return count;
+}
+
+static ssize_t reset_swapped_in_page_tracker_store(struct kobject *kobj,
+						   struct kobj_attribute *attr,
+						   const char *buf, size_t count) {
+	struct swapped_page_info *swap_entry;
+	struct hlist_node *tmp;
+	unsigned int i;
+
+
+	// Reset swapped_pages_ht
+	spin_lock(&swapped_pages_lock);
+	hash_for_each_safe(swapped_pages_ht, i, tmp, swap_entry, node) {
+		hash_del(&swap_entry->node);
+		kfree(swap_entry);
+	}
+
+	spin_unlock(&swapped_pages_lock);
+
+	return count;
+}
+
+static struct kobj_attribute reset_swapped_in_page_tracker_attr =
+__ATTR(reset_swapped_in_page_tracker, 0200, NULL, reset_swapped_in_page_tracker_store); // Write-only
+
+static struct kobj_attribute reset_page_access_tracker_attr =
+__ATTR(reset_page_access_tracker, 0200, NULL, reset_page_access_tracker_store); // Write-only
+
 // Initialize procfs entry at kernel boot
 static int __init init_proc_track_swap_usage(void) {
 	// Create a sysfs entry
 	int retval = sysfs_create_file(kernel_kobj, &swap_tracked_pid_attribute.attr);
 	if (retval)
 		pr_err("Failed to create sysfs file\n");
+
+	retval = sysfs_create_file(kernel_kobj, &reset_swapped_in_page_tracker_attr.attr);
+	if (retval)
+		pr_err("Failed to create sysfs file for reset_swapped_in_page_tracker\n");
+
+	retval = sysfs_create_file(kernel_kobj, &reset_page_access_tracker_attr.attr);
+	if (retval)
+		pr_err("Failed to create sysfs file for reset_page_access_tracker\n");
 
 	// Create proc entry
 	proc_entry = proc_create("swapped_in_for_tracked_pid", 0444, NULL, &swapped_pages_ops);
