@@ -80,9 +80,12 @@
 #include <linux/sched/sysctl.h>
 #include <linux/set_memory.h>
 #include <linux/proc_fs.h>
-
 #include <linux/hashtable.h>
 #include <linux/sort.h>
+#include <linux/kthread.h>
+#include <linux/delay.h>
+#include <linux/workqueue.h>
+
 #include <trace/events/kmem.h>
 
 #undef CREATE_TRACE_POINTS
@@ -114,6 +117,20 @@ EXPORT_SYMBOL(mem_map);
 
 static vm_fault_t do_fault(struct vm_fault *vmf);
 
+#define PAGE_BUCKETS 4
+#define BUCKET_SIZE (PAGE_SIZE / PAGE_BUCKETS)
+
+struct page_access_count {
+    unsigned long base_addr;
+    unsigned int buckets[PAGE_BUCKETS];
+    struct hlist_node hnode;
+};
+
+uint64_t tracked_count = 0;
+// Hash table and spinlock for synchronization
+DEFINE_HASHTABLE(page_access_ht, 10);
+static DEFINE_SPINLOCK(page_access_ht_lock);
+
 /*
  * A number of key systems in x86 including ioremap() rely on the assumption
  * that high_memory defines the upper bound on direct map memory, then end
@@ -123,6 +140,89 @@ static vm_fault_t do_fault(struct vm_fault *vmf);
  */
 void *high_memory;
 EXPORT_SYMBOL(high_memory);
+
+struct clear_af_work {
+       struct work_struct work;
+       struct vm_area_struct *vma;
+       unsigned long address;
+};
+
+static struct workqueue_struct *clear_af_wq;
+
+static void clear_af_worker(struct work_struct *work) {
+	struct clear_af_work *af_work = container_of(work, struct clear_af_work, work);
+	struct vm_area_struct *vma = af_work->vma;
+	unsigned long address = af_work->address;
+	struct mm_struct *mm = vma->vm_mm;
+	pte_t *pte;
+	spinlock_t *ptl;
+	pgd_t *pgd;
+	pud_t *pud;
+	p4d_t *p4d;
+	pmd_t *pmd;
+	unsigned long base_addr = address & PAGE_MASK;
+	unsigned int bucket = (address & ~PAGE_MASK) / BUCKET_SIZE;
+	struct page_access_count *entry;
+	bool found = false;
+
+	usleep_range(2, 4);  // Sleep for 2 microsecond
+
+	// Traverse the page tables to get to the PTE
+	pgd = pgd_offset(mm, address);
+	if (!pgd_present(*pgd))
+		goto out;
+
+	// Traverse the p4d level (ARM64 usually has this level)
+	p4d = p4d_offset(pgd, address);
+	if (!p4d_present(*p4d))
+		goto out;
+
+	pud = pud_offset(p4d, address);
+	if (!pud_present(*pud))
+		goto out;
+
+	pmd = pmd_offset(pud, address);
+	if (!pmd_present(*pmd))
+		goto out;
+
+	pte = pte_offset_map_lock(mm, pmd, address, &ptl);
+	if (pte && pte_present(*pte)) {
+		// Clear the AF (Access Flag)
+		pte_val(*pte) &= ~PTE_AF;
+		set_pte_at(mm, address, pte, *pte);  // Update the PTE
+		// TODO: flush TLB here if needed.
+	}
+	pte_unmap_unlock(pte, ptl);
+
+	flush_tlb_page(vma, address);
+
+	spin_lock(&page_access_ht_lock);
+	// Look for the base address in the hash table
+	hash_for_each_possible(page_access_ht, entry, hnode, base_addr) {
+		if (entry->base_addr == base_addr) {
+			entry->buckets[bucket]++;
+			found = true;
+			break;
+		}
+	}
+
+	// If not found, create a new entry
+	if (!found) {
+		entry = kzalloc(sizeof(struct page_access_count), GFP_KERNEL);
+		if (entry) {
+			entry->base_addr = base_addr;
+			entry->buckets[bucket]++;
+			hash_add(page_access_ht, &entry->hnode, base_addr);
+		}
+	}
+
+	tracked_count++;
+	spin_unlock(&page_access_ht_lock);
+
+out:
+	kfree(af_work);  // Free the work item
+}
+
 
 /*
  * Randomize the address space (stacks, mmaps, brk, etc.).
@@ -3846,6 +3946,25 @@ static void track_swapped_in_page(struct vm_fault *vmf)
     spin_unlock(&swapped_pages_lock);
 }
 
+static bool is_vaddr_in_swapped_pages(unsigned long vaddr) {
+    struct swapped_page_info *info;
+    bool found = false;
+
+    spin_lock(&swapped_pages_lock);
+
+    // Check if the vaddr exists in the hash table
+    hash_for_each_possible(swapped_pages_ht, info, node, vaddr) {
+        if (info->vaddr == vaddr) {
+            found = true;
+            break;
+        }
+    }
+
+    spin_unlock(&swapped_pages_lock);
+
+    return found;
+}
+
 /*
  * We enter with non-exclusive mmap_lock (to exclude vma changes,
  * but allow concurrent faults), and pte mapped but not yet locked.
@@ -3867,6 +3986,7 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 	pte_t pte;
 	vm_fault_t ret = 0;
 	void *shadow = NULL;
+	bool clear_af = false;
 
 	if (!pte_unmap_same(vmf))
 		goto out;
@@ -3999,8 +4119,8 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 		count_vm_event(PGMAJFAULT);
 		count_memcg_event_mm(vma->vm_mm, PGMAJFAULT);
 		if (vmf->vma->vm_mm->owner->pid == swap_tracked_pid) {
-			// This is a swap-in for the process we are tracking
 			track_swapped_in_page(vmf);
+			clear_af = true;
 		}
 	} else if (PageHWPoison(page)) {
 		/*
@@ -4171,6 +4291,9 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 
 	VM_BUG_ON(!folio_test_anon(folio) ||
 			(pte_write(pte) && !PageAnonExclusive(page)));
+
+	if (clear_af)
+		pte_val(pte) &= ~PTE_AF;
 	set_pte_at(vma->vm_mm, vmf->address, vmf->pte, pte);
 	arch_do_swap_page(vma->vm_mm, vma, vmf->address, pte, vmf->orig_pte);
 
@@ -5109,6 +5232,7 @@ split:
 static vm_fault_t handle_pte_fault(struct vm_fault *vmf)
 {
 	pte_t entry;
+	struct clear_af_work *af_work;
 
 	if (unlikely(pmd_none(*vmf->pmd))) {
 		/*
@@ -5189,6 +5313,23 @@ static vm_fault_t handle_pte_fault(struct vm_fault *vmf)
 	if (ptep_set_access_flags(vmf->vma, vmf->address, vmf->pte, entry,
 				vmf->flags & FAULT_FLAG_WRITE)) {
 		update_mmu_cache(vmf->vma, vmf->address, vmf->pte);
+		// Check if the VMA belongs to the target PID
+		if (vmf->vma->vm_mm && vmf->vma->vm_mm->owner->pid == swap_tracked_pid) {
+			if (is_vaddr_in_swapped_pages(vmf->address)) {
+				// Allocate and initialize the work item
+				af_work = kmalloc(sizeof(struct clear_af_work), GFP_KERNEL);
+				if (!af_work)
+					return -ENOMEM;
+
+				INIT_WORK(&af_work->work, clear_af_worker);
+				af_work->vma = vmf->vma;
+				af_work->address = vmf->real_address;
+
+				// Queue the work to the workqueue
+				queue_work(clear_af_wq, &af_work->work);
+			}
+		}
+
 	} else {
 		/* Skip spurious TLB flush for retried page fault */
 		if (vmf->flags & FAULT_FLAG_TRIED)
@@ -6277,6 +6418,37 @@ int set_direct_map_range_uncached(unsigned long addr, unsigned long numpages)
 }
 EXPORT_SYMBOL_GPL(set_direct_map_range_uncached);
 
+static int page_access_show(struct seq_file *m, void *v) {
+	struct page_access_count *entry;
+	int i;
+
+	spin_lock(&page_access_ht_lock);
+	hash_for_each(page_access_ht, i, entry, hnode) {
+		seq_printf(m, "Base Address: 0x%lx\n", entry->base_addr);
+		seq_printf(m, "Bucket 0 (0-1K): %u\n", entry->buckets[0]);
+		seq_printf(m, "Bucket 1 (1K-2K): %u\n", entry->buckets[1]);
+		seq_printf(m, "Bucket 2 (2K-3K): %u\n", entry->buckets[2]);
+		seq_printf(m, "Bucket 3 (3K-4K): %u\n\n", entry->buckets[3]);
+	}
+
+	seq_printf(m, "Tracked count: 0x%llx\n", tracked_count);
+
+	spin_unlock(&page_access_ht_lock);
+
+	return 0;
+}
+
+static int page_access_open(struct inode *inode, struct file *file) {
+	return single_open(file, page_access_show, NULL);
+}
+
+static const struct proc_ops page_access_fops = {
+	.proc_open    = page_access_open,
+	.proc_read    = seq_read,
+	.proc_lseek   = seq_lseek,
+	.proc_release = single_release,
+};
+
 static ssize_t pid_store(struct kobject *kobj, struct kobj_attribute *attr,
 			 const char *buf, size_t count)
 {
@@ -6284,6 +6456,7 @@ static ssize_t pid_store(struct kobject *kobj, struct kobj_attribute *attr,
 		return -EINVAL;
 	}
 	pr_info("swapped-in page tracking pid for %u\n", (unsigned int)swap_tracked_pid);
+	pr_info("page size: %lu number of buckets: %lu\n", PAGE_SIZE, BUCKET_SIZE);
 	return count;
 }
 
@@ -6451,6 +6624,19 @@ static int __init init_proc_track_swap_usage(void) {
 	}
 
 	pr_info("/proc/swapped_in_for_tracked_pid created\n");
-	return retval;
+
+	clear_af_wq = create_workqueue("clear_af_wq");
+	if (!clear_af_wq)
+		return -ENOMEM;
+
+	proc_entry = proc_create("page_access_count", 0, NULL, &page_access_fops);
+	if (!proc_entry) {
+		pr_err("Failed to create /proc/page_access_count\n");
+		return -ENOMEM;
+	}
+
+	pr_info("/proc/page_access_count created\n");
+
+	return 0;
 }
 fs_initcall(init_proc_track_swap_usage);
