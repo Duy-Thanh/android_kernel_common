@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a69d85_94aa1964",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-28T11:04:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "815c8325_5fec7680",
+      "revId": "b0ba74681293a7c8489002cc21e0b1ab9c8fb3ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac730e3f_99c39f59",
@@ -67,6 +85,30 @@
       "writtenOn": "2024-10-28T11:02:45Z",
       "side": 1,
       "message": "aarch64",
+      "range": {
+        "startLine": 1243,
+        "startChar": 38,
+        "endLine": 1243,
+        "endChar": 43
+      },
+      "revId": "b0ba74681293a7c8489002cc21e0b1ab9c8fb3ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5cc119d_2b078872",
+        "filename": "BUILD.bazel",
+        "patchSetId": 12
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-10-28T11:04:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac730e3f_99c39f59",
       "range": {
         "startLine": 1243,
         "startChar": 38,
