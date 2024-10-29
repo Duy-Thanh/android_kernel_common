@@ -16,6 +16,24 @@
       "message": "There\u0027s something fishy going on here; has this already been merged?",
       "revId": "ffbd4d5438e61b7b02f9d495945c46b73dbcf5d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f8ce917_803596a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-10-29T11:15:34Z",
+      "side": 1,
+      "message": "I think Gerrit has gone wonky here: somehow the contents of the patch were reverted between Patchset 4 and Patchset 6. I\u0027ve uploaded a new version.",
+      "parentUuid": "716e30de_8325223d",
+      "revId": "ffbd4d5438e61b7b02f9d495945c46b73dbcf5d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
