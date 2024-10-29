@@ -16,6 +16,24 @@
       "message": "Please file a bug with explanation why you need this, refer to that but from this CL using `Bug: \u003cbug number\u003e` tag and post a follow-up patch to add the newly exported symbol into the symbols list and update the ABI.",
       "revId": "feafb1425991fefc180d176137333e6feec34028",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbb8a846_7de85213",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-29T20:21:36Z",
+      "side": 1,
+      "message": "No symbol enforcing yet on android16-6.12, so I think this is resolved.",
+      "parentUuid": "346b3da3_d9ad9daf",
+      "revId": "feafb1425991fefc180d176137333e6feec34028",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
