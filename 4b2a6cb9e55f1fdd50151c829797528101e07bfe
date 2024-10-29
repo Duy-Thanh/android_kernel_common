@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb9ebf6_f46273ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2024-10-29T15:47:11Z",
+      "side": 1,
+      "message": "Just for now this change is going to be merged as-is into `android15-6.6-desktop` branch only. All related issues and proposed rework are going to be tracked and resolved before merge to `android-mainline`. Thanks.",
+      "parentUuid": "80e97388_4727b6c3",
+      "revId": "4b2a6cb9e55f1fdd50151c829797528101e07bfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb5c68d1_32fd51d7",
@@ -49,6 +67,30 @@
       "writtenOn": "2024-10-23T10:33:00Z",
       "side": 1,
       "message": "This single config introduces significant changes which break ABI compatibility. The LPSS seems to be a critical configuration for x86 platform but wider review is needed.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "4b2a6cb9e55f1fdd50151c829797528101e07bfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15757d99_dcd8b2ce",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2024-10-29T15:47:11Z",
+      "side": 1,
+      "message": "Just for now this change is going to be merged as-is into `android15-6.6-desktop` branch only. All related issues and proposed rework are going to be tracked and resolved before merge to `android-mainline`. Thanks.",
+      "parentUuid": "cb5c68d1_32fd51d7",
       "range": {
         "startLine": 58,
         "startChar": 0,
