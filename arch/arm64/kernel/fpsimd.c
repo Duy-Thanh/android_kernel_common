@@ -384,6 +384,7 @@ static void task_fpsimd_load(void)
 
 	WARN_ON(!system_supports_fpsimd());
 	WARN_ON(!have_cpu_fpsimd_context());
+	WARN_ON(test_thread_flag(TIF_KERNEL_FPSTATE));
 
 	if (system_supports_sve() || system_supports_sme()) {
 		switch (current->thread.fp_type) {
@@ -1576,6 +1577,27 @@ void do_fpsimd_exc(unsigned long esr, struct pt_regs *regs)
 		       current);
 }
 
+/*
+ * Invalidate any task's FPSIMD state that is present on this cpu.
+ * The FPSIMD context should be acquired with get_cpu_fpsimd_context()
+ * before calling this function.
+ */
+static void fpsimd_flush_cpu_state(void)
+{
+	WARN_ON(!system_supports_fpsimd());
+	__this_cpu_write(fpsimd_last_state.st, NULL);
+
+	/*
+	 * Leaving streaming mode enabled will cause issues for any kernel
+	 * NEON and leaving streaming mode or ZA enabled may increase power
+	 * consumption.
+	 */
+	if (system_supports_sme())
+		sme_smstop();
+
+	set_thread_flag(TIF_FOREIGN_FPSTATE);
+}
+
 void fpsimd_thread_switch(struct task_struct *next)
 {
 	bool wrong_task, wrong_cpu;
@@ -1586,19 +1608,28 @@ void fpsimd_thread_switch(struct task_struct *next)
 	__get_cpu_fpsimd_context();
 
 	/* Save unsaved fpsimd state, if any: */
-	fpsimd_save();
+	if (test_thread_flag(TIF_KERNEL_FPSTATE))
+		fpsimd_save_state(&current->thread.kernel_fpsimd_state);
+	else
+		fpsimd_save();
 
-	/*
-	 * Fix up TIF_FOREIGN_FPSTATE to correctly describe next's
-	 * state.  For kernel threads, FPSIMD registers are never loaded
-	 * and wrong_task and wrong_cpu will always be true.
-	 */
-	wrong_task = __this_cpu_read(fpsimd_last_state.st) !=
-					&next->thread.uw.fpsimd_state;
-	wrong_cpu = next->thread.fpsimd_cpu != smp_processor_id();
+	if (test_tsk_thread_flag(next, TIF_KERNEL_FPSTATE)) {
+		fpsimd_load_state(&next->thread.kernel_fpsimd_state);
+		fpsimd_flush_cpu_state();
+	} else {
+		/*
+		 * Fix up TIF_FOREIGN_FPSTATE to correctly describe next's
+		 * state.  For kernel threads, FPSIMD registers are never
+		 * loaded with user mode FPSIMD state and so wrong_task and
+		 * wrong_cpu will always be true.
+		 */
+		wrong_task = __this_cpu_read(fpsimd_last_state.st) !=
+			&next->thread.uw.fpsimd_state;
+		wrong_cpu = next->thread.fpsimd_cpu != smp_processor_id();
 
-	update_tsk_thread_flag(next, TIF_FOREIGN_FPSTATE,
-			       wrong_task || wrong_cpu);
+		update_tsk_thread_flag(next, TIF_FOREIGN_FPSTATE,
+				       wrong_task || wrong_cpu);
+	}
 
 	__put_cpu_fpsimd_context();
 }
@@ -1866,27 +1897,6 @@ void fpsimd_flush_task_state(struct task_struct *t)
 }
 
 /*
- * Invalidate any task's FPSIMD state that is present on this cpu.
- * The FPSIMD context should be acquired with get_cpu_fpsimd_context()
- * before calling this function.
- */
-static void fpsimd_flush_cpu_state(void)
-{
-	WARN_ON(!system_supports_fpsimd());
-	__this_cpu_write(fpsimd_last_state.st, NULL);
-
-	/*
-	 * Leaving streaming mode enabled will cause issues for any kernel
-	 * NEON and leaving streaming mode or ZA enabled may increase power
-	 * consumption.
-	 */
-	if (system_supports_sme())
-		sme_smstop();
-
-	set_thread_flag(TIF_FOREIGN_FPSTATE);
-}
-
-/*
  * Save the FPSIMD state to memory and invalidate cpu view.
  * This function must be called with preemption disabled.
  */
@@ -1930,10 +1940,37 @@ void kernel_neon_begin(void)
 	get_cpu_fpsimd_context();
 
 	/* Save unsaved fpsimd state, if any: */
-	fpsimd_save();
+	if (test_thread_flag(TIF_KERNEL_FPSTATE)) {
+		BUG_ON(IS_ENABLED(CONFIG_PREEMPT_RT) || !in_serving_softirq());
+		fpsimd_save_state(&current->thread.kernel_fpsimd_state);
+	} else {
+		fpsimd_save();
+
+		/*
+		 * Set the thread flag so that the kernel mode FPSIMD state
+		 * will be context switched along with the rest of the task
+		 * state.
+		 *
+		 * On non-PREEMPT_RT, softirqs may interrupt task level kernel
+		 * mode FPSIMD, but the task will not be preemptible so setting
+		 * TIF_KERNEL_FPSTATE for those would be both wrong (as it
+		 * would mark the task context FPSIMD state as requiring a
+		 * context switch) and unnecessary.
+		 *
+		 * On PREEMPT_RT, softirqs are serviced from a separate thread,
+		 * which is scheduled as usual, and this guarantees that these
+		 * softirqs are not interrupting use of the FPSIMD in kernel
+		 * mode in task context. So in this case, setting the flag here
+		 * is always appropriate.
+		 */
+		if (IS_ENABLED(CONFIG_PREEMPT_RT) || !in_serving_softirq())
+			set_thread_flag(TIF_KERNEL_FPSTATE);
+	}
 
 	/* Invalidate any task state remaining in the fpsimd regs: */
 	fpsimd_flush_cpu_state();
+
+	put_cpu_fpsimd_context();
 }
 EXPORT_SYMBOL_GPL(kernel_neon_begin);
 
@@ -1951,7 +1988,16 @@ void kernel_neon_end(void)
 	if (!system_supports_fpsimd())
 		return;
 
-	put_cpu_fpsimd_context();
+	/*
+	 * If we are returning from a nested use of kernel mode FPSIMD, restore
+	 * the task context kernel mode FPSIMD state. This can only happen when
+	 * running in softirq context on non-PREEMPT_RT.
+	 */
+	if (!IS_ENABLED(CONFIG_PREEMPT_RT) && in_serving_softirq() &&
+	    test_thread_flag(TIF_KERNEL_FPSTATE))
+		fpsimd_load_state(&current->thread.kernel_fpsimd_state);
+	else
+		clear_thread_flag(TIF_KERNEL_FPSTATE);
 }
 EXPORT_SYMBOL_GPL(kernel_neon_end);
 
