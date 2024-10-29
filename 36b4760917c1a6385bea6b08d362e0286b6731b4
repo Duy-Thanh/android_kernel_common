@@ -52,6 +52,24 @@
       "parentUuid": "c65f8dec_112e814b",
       "revId": "36b4760917c1a6385bea6b08d362e0286b6731b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4e63ef1_c83abe5f",
+        "filename": "fs/f2fs/checkpoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2024-10-29T01:54:45Z",
+      "side": 1,
+      "message": "Yeah, \"prio_changed\" is more clear, if prio is not changed(the value of prio_changed keeps false in new patch), then no restore later.",
+      "parentUuid": "b89ec4eb_3b62ccbd",
+      "revId": "36b4760917c1a6385bea6b08d362e0286b6731b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
