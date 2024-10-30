@@ -14,7 +14,6 @@
 #include <linux/interrupt.h>
 #include <linux/module.h>
 #include <linux/of.h>
-#include <linux/of_gpio.h>
 #include <linux/of_irq.h>
 #include <linux/regmap.h>
 #include <linux/slab.h>
@@ -406,8 +405,15 @@ EXPORT_SYMBOL_GPL(tasdevice_dsp_remove);
 
 void tasdevice_remove(struct tasdevice_priv *tas_priv)
 {
+<<<<<<< HEAD   (2298bc Merge branch 'android15-6.6-gf46818bb7ef3' into android15-6.)
 	if (gpio_is_valid(tas_priv->irq_info.irq_gpio))
 		gpio_free(tas_priv->irq_info.irq_gpio);
+||||||| BASE
+	if (gpio_is_valid(tas_priv->irq_info.irq_gpio))
+		gpio_free(tas_priv->irq_info.irq_gpio);
+	kfree(tas_priv->acpi_subsystem_id);
+=======
+>>>>>>> BRANCH (d93035 Merge 6.6.54 into android15-6.6-lts)
 	mutex_destroy(&tas_priv->codec_lock);
 }
 EXPORT_SYMBOL_GPL(tasdevice_remove);
