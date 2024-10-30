@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce966baf_e96030cd",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-30T21:52:44Z",
+      "side": 0,
+      "message": "Note: This is not a valid config in arm64",
+      "revId": "3fdb51797f32ae623c8781e055749debcf27fa37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b05780fa_b62ddbc3",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-30T21:52:44Z",
+      "side": 0,
+      "message": "AFAIK this is a choice:\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/lib/Kconfig.debug;l\u003d317;drc\u003d68e5c7d4cefb66de3953a874e670ec8f1ce86a24",
+      "revId": "3fdb51797f32ae623c8781e055749debcf27fa37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2a675c_4aedc3a9",
+        "filename": "arch/x86/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-30T21:52:44Z",
+      "side": 0,
+      "message": "This is not a valid config",
+      "revId": "3fdb51797f32ae623c8781e055749debcf27fa37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
