@@ -16,6 +16,24 @@
       "message": "@willdeacon@google.com, can you please take a look at this backport? This is quite a different patch compared to the upstream version.",
       "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ac5661_847a8e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-10-30T12:23:53Z",
+      "side": 1,
+      "message": "This commit has:\n\n```\nFixes: aefbab8e77eb (\"arm64: fpsimd: Preserve/restore kernel mode NEON at context switch\")\n```\n\nBut that patch doesn\u0027t appear to be in `android15-6.6`, so this fix should not be needed.",
+      "parentUuid": "6d6d096a_f8032521",
+      "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
