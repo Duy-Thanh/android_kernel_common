@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a6ccab9_d27f192b",
+        "filename": "arch/x86/configs/android-x86_64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-10-30T10:34:03Z",
+      "side": 1,
+      "message": "make sure to incorporate these changes after @srosek@google.com provides kleaf (ie. using of gki_defconfig + fragments instead)",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 20
+      },
+      "revId": "2375d4665c26c34a88def2674c7605b2139f4fb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
