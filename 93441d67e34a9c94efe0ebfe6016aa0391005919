@@ -34,6 +34,24 @@
       "parentUuid": "6d6d096a_f8032521",
       "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d2f6b4c_ff898d1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3704047
+      },
+      "writtenOn": "2024-10-31T02:07:35Z",
+      "side": 1,
+      "message": "We need to fix the bug 376370641 according to the commit aefbab8e77eb, but the commit aefbab8e77eb also has a bug, so we submitted this commit (arm64/fpsimd: Avoid erroneous elide of user state reload).",
+      "parentUuid": "d7ac5661_847a8e7e",
+      "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
