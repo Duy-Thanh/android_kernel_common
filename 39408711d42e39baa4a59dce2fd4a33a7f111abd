@@ -34,6 +34,24 @@
       "parentUuid": "0ece5fdf_c5219dba",
       "revId": "39408711d42e39baa4a59dce2fd4a33a7f111abd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99442727_1128781d",
+        "filename": "modules.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-31T15:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2226a09c_afd8093c",
+      "revId": "39408711d42e39baa4a59dce2fd4a33a7f111abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
