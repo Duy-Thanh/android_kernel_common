@@ -16,6 +16,24 @@
       "message": "This patch needs to be upstreamed or submitted to the android-mainline. @srosek@google.com - do you mind creating a new bug which will trace this technical debt? And please link it to the current patch. Thanks!",
       "revId": "28f1e00bd9623e5900f30435fb30b34bb1d1f24e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a6d6d4_b9f5833e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2024-10-31T11:52:06Z",
+      "side": 1,
+      "message": "Just for now this change is merged as-is into the `android15-6.6-desktop`\nbranch only. All related issues and proposed rework required for the\n`android-mainline` branch are tracked under b/376641924.",
+      "parentUuid": "eae2edfe_0591b900",
+      "revId": "28f1e00bd9623e5900f30435fb30b34bb1d1f24e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
