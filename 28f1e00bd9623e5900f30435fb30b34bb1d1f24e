@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eae2edfe_0591b900",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-10-31T10:28:05Z",
+      "side": 1,
+      "message": "This patch needs to be upstreamed or submitted to the android-mainline. @srosek@google.com - do you mind creating a new bug which will trace this technical debt? And please link it to the current patch. Thanks!",
+      "revId": "28f1e00bd9623e5900f30435fb30b34bb1d1f24e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
