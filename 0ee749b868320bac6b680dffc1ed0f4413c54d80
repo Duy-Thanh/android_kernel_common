@@ -22,6 +22,30 @@
       },
       "revId": "0ee749b868320bac6b680dffc1ed0f4413c54d80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357f83ff_70930e6a",
+        "filename": "mm/memory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2024-10-31T17:50:26Z",
+      "side": 1,
+      "message": "As I reduce the sleep interval here, app performance slows down visibly(even in perf mode) possibly due to a larger number of memory accesses having to go through the fault handler as well as CPU load spikes. The 5us sleep allows Youtube to play a video and simultaneously scroll through videos without visible jank and allows the data to be gathered for a few hours. We might be able to reduce it slightly if needed.",
+      "parentUuid": "6757c499_b867715f",
+      "range": {
+        "startLine": 168,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 50
+      },
+      "revId": "0ee749b868320bac6b680dffc1ed0f4413c54d80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
