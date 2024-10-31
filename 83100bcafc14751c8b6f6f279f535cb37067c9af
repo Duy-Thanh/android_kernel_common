@@ -16,6 +16,23 @@
       "message": "This and the rest of the series after needs a rebase.",
       "revId": "83100bcafc14751c8b6f6f279f535cb37067c9af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52309d7c_43bad045",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-10-31T20:38:45Z",
+      "side": 1,
+      "message": "Prevent: Whats the status of this and the following patches in this chain? Do they need to be rebased and resubmitted?",
+      "revId": "83100bcafc14751c8b6f6f279f535cb37067c9af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
