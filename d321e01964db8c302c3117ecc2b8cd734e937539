@@ -16,6 +16,24 @@
       "message": "While the history here is good, it is often helpful to re-iterate *why* this change is helpful and wanted. It is useful when folks are using `git blame` to understand why changes were made, and having to link to the rationale in the history makes this sort of logical excavation slow.\n\nI recognize this is a cherry pick as well, but it would still be nice to always include the why with the code change.",
       "revId": "d321e01964db8c302c3117ecc2b8cd734e937539",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0fe405b_db6bca59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-10-31T02:36:21Z",
+      "side": 1,
+      "message": "I have add the original commit ont the commit message.\n\nThanks!",
+      "parentUuid": "fcc791a8_b4109655",
+      "revId": "d321e01964db8c302c3117ecc2b8cd734e937539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
