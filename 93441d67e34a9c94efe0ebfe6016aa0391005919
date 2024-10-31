@@ -52,6 +52,24 @@
       "parentUuid": "d7ac5661_847a8e7e",
       "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2204d657_9a35fa19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-10-31T09:07:49Z",
+      "side": 1,
+      "message": "aefbab8e77eb isn\u0027t a fix, so you need to justify in the bug why you need that backporting.",
+      "parentUuid": "3d2f6b4c_ff898d1d",
+      "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
