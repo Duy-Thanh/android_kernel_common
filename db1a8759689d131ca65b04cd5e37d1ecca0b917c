@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a87ab48b_cb05dd70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2024-10-31T08:58:36Z",
+      "side": 1,
+      "message": "The x86 ABI is under construction and it is expected to have incompatible updates on the `android15-6.6-desktop` branch.",
+      "revId": "db1a8759689d131ca65b04cd5e37d1ecca0b917c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
