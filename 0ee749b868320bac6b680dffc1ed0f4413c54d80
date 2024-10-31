@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6757c499_b867715f",
+        "filename": "mm/memory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1010465
+      },
+      "writtenOn": "2024-10-31T17:31:23Z",
+      "side": 1,
+      "message": "why sleep here?",
+      "range": {
+        "startLine": 168,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 50
+      },
+      "revId": "0ee749b868320bac6b680dffc1ed0f4413c54d80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
