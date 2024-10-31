@@ -4718,6 +4718,11 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
 	case KVM_CAP_X86_NOTIFY_VMEXIT:
 		r = kvm_caps.has_notify_vmexit;
 		break;
+	case KVM_CAP_VM_TYPES:
+		r = BIT(KVM_X86_DEFAULT_VM);
+		if (static_call(kvm_x86_is_vm_type_supported)(KVM_X86_PROTECTED_VM))
+			r |= BIT(KVM_X86_PROTECTED_VM);
+		break;
 	default:
 		break;
 	}
@@ -9583,6 +9588,11 @@ static int __kvm_x86_vendor_init(struct kvm_x86_init_ops *ops)
 		return -EEXIST;
 	}
 
+	if (ops->pkvm_init && ops->pkvm_init()) {
+		pr_err_ratelimited("kvm: pkvm init fail\n");
+		return -EOPNOTSUPP;
+	}
+
 	/*
 	 * KVM explicitly assumes that the guest has an FPU and
 	 * FXSAVE/FXRSTOR. For example, the KVM_GET_FPU explicitly casts the
@@ -9941,10 +9951,52 @@ static int complete_hypercall_exit(struct kvm_vcpu *vcpu)
 	return kvm_skip_emulated_instruction(vcpu);
 }
 
+int kvm_pkvm_hypercall(struct kvm_vcpu *vcpu)
+{
+	unsigned long val, nr;
+	int size;
+	gpa_t gpa;
+	int ret;
+
+	nr = kvm_rax_read(vcpu);
+	gpa = kvm_rbx_read(vcpu);
+	size = kvm_rcx_read(vcpu);
+	val = kvm_rdx_read(vcpu);
+
+	/*
+	 * Reuse the sev_es handler to emulate the mmio.
+	 */
+	switch (nr) {
+	case PKVM_GHC_IOREAD:
+		vcpu->mmio_is_write = 0;
+		ret = kvm_sev_es_mmio_read(vcpu, gpa, size,
+				&vcpu->arch.regs[VCPU_REGS_RAX]);
+		break;
+	case PKVM_GHC_IOWRITE:
+		vcpu->mmio_is_write = 1;
+		ret = kvm_sev_es_mmio_write(vcpu, gpa, size, &val);
+		break;
+	default:
+		ret = 1;
+		break;
+	}
+
+	/*
+	 * We assume calling this function will always success which will update
+	 * the GUEST_RIP to skip the current instruction.
+	 */
+	static_call(kvm_x86_skip_emulated_instruction)(vcpu);
+
+	return ret;
+}
+
 int kvm_emulate_hypercall(struct kvm_vcpu *vcpu)
 {
 	unsigned long nr, a0, a1, a2, a3, ret;
 	int op_64_bit;
+
+	if (vcpu->kvm->arch.vm_type == KVM_X86_PROTECTED_VM)
+		return kvm_pkvm_hypercall(vcpu);
 
 	if (kvm_xen_hypercall_enabled(vcpu->kvm))
 		return kvm_xen_hypercall(vcpu);
@@ -12683,8 +12735,10 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
 	int ret;
 	unsigned long flags;
 
-	if (type)
+	if (!static_call(kvm_x86_is_vm_type_supported)(type))
 		return -EINVAL;
+
+	kvm->arch.vm_type = type;
 
 	ret = kvm_page_track_init(kvm);
 	if (ret)
@@ -12878,6 +12932,7 @@ void kvm_arch_destroy_vm(struct kvm *kvm)
 	kvm_page_track_cleanup(kvm);
 	kvm_xen_destroy_vm(kvm);
 	kvm_hv_destroy_vm(kvm);
+	static_call_cond(kvm_x86_vm_free)(kvm);
 }
 
 static void memslot_rmap_free(struct kvm_memory_slot *slot)
