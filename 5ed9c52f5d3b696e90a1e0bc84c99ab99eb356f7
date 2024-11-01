@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f394c01_06d5b560",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-01T15:57:13Z",
+      "side": 1,
+      "message": "Is there a respon bug for this?\n\nThis patch has not been submitted to android15-6.6, so it cannot be merged here. Patches to release branches must be a cherry-pick from the main development branch.",
+      "revId": "5ed9c52f5d3b696e90a1e0bc84c99ab99eb356f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a6f5cd_3c7517a9",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-01T15:57:13Z",
+      "side": 1,
+      "message": "why was this called \"ogki\" if it is used for GKI? Can\u0027t you just use the existing trace_f2fs_submit_page_write()?",
+      "revId": "5ed9c52f5d3b696e90a1e0bc84c99ab99eb356f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
