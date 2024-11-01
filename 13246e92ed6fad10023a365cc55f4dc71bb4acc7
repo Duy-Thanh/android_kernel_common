@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be311dc8_3957f82f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-01T15:51:43Z",
+      "side": 1,
+      "message": "please abandon this patch and cherry-pick the patch that added these hooks to android13-5.15 so the Change-Id is preserved.",
+      "revId": "13246e92ed6fad10023a365cc55f4dc71bb4acc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
