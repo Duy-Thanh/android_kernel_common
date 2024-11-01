@@ -16,6 +16,24 @@
       "message": "The test failure seems totally related to this change:\n\n```\ninit: Failed to insmod \u0027/lib/modules/6.6.56-android15-8-gbc52f362301a-abP83842336/kernel/drivers/virtio/virtio_pci_modern_dev.ko\u0027 with args \u0027\u0027: Permission denied\n```",
       "revId": "6bb0147b16c98b6dc3553cefc73da00ccac94a56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05eac5cc_92221b95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-11-01T13:12:05Z",
+      "side": 1,
+      "message": "Solved in the base (parent) changes by not overriding the newly marked protected module `virtio_pci_modern_dev.ko`, and updating the corresponding symbol list.",
+      "parentUuid": "0db44bbb_e84e0558",
+      "revId": "6bb0147b16c98b6dc3553cefc73da00ccac94a56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
