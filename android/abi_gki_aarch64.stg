@@ -5519,6 +5519,11 @@ pointer_reference {
   pointee_type_id: 0x13317cfe
 }
 pointer_reference {
+  id: 0x0e5e6153
+  kind: POINTER
+  pointee_type_id: 0x133963d3
+}
+pointer_reference {
   id: 0x0e5eb556
   kind: POINTER
   pointee_type_id: 0x133a33c5
@@ -34275,6 +34280,11 @@ array {
   id: 0xa4a6d75b
   number_of_elements: 200
   element_type_id: 0xb3e7bac9
+}
+array {
+  id: 0xa4b7a249
+  number_of_elements: 9
+  element_type_id: 0x3e10b518
 }
 array {
   id: 0xa4db0bd5
@@ -153595,6 +153605,11 @@ member {
   offset: 544
 }
 member {
+  id: 0x46b31b12
+  name: "rotation"
+  type_id: 0xa4b7a249
+}
+member {
   id: 0x310d45cf
   name: "rotation_property"
   type_id: 0x2a670b41
@@ -215374,6 +215389,15 @@ struct_union {
     member_id: 0x4a7d6661
     member_id: 0xc36ed4fb
     member_id: 0x712b765b
+  }
+}
+struct_union {
+  id: 0x133963d3
+  kind: STRUCT
+  name: "iio_mount_matrix"
+  definition {
+    bytesize: 72
+    member_id: 0x46b31b12
   }
 }
 struct_union {
@@ -296091,6 +296115,12 @@ function {
   parameter_id: 0x02b8ad1f
 }
 function {
+  id: 0x9d2fa4f1
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x0e5e6153
+}
+function {
   id: 0x9d300afb
   return_type_id: 0x6720d32f
   parameter_id: 0x01c5a749
@@ -335106,6 +335136,24 @@ elf_symbol {
   full_name: "iio_read_const_attr"
 }
 elf_symbol {
+  id: 0x5ed0ce65
+  name: "iio_read_mount_matrix"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd5989738
+  type_id: 0x9d2fa4f1
+  full_name: "iio_read_mount_matrix"
+}
+elf_symbol {
+  id: 0xfc17cb5d
+  name: "iio_show_mount_matrix"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe569fdae
+  type_id: 0x13641115
+  full_name: "iio_show_mount_matrix"
+}
+elf_symbol {
   id: 0x9005a719
   name: "iio_trigger_alloc"
   is_defined: true
@@ -335140,6 +335188,15 @@ elf_symbol {
   crc: 0xa0584262
   type_id: 0x16dc304e
   full_name: "iio_trigger_poll"
+}
+elf_symbol {
+  id: 0x7551a60b
+  name: "iio_trigger_poll_chained"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5c043710
+  type_id: 0x16dc304e
+  full_name: "iio_trigger_poll_chained"
 }
 elf_symbol {
   id: 0xc6d8f246
@@ -338895,6 +338952,15 @@ elf_symbol {
   crc: 0xc2f6078d
   type_id: 0x1d3cefc2
   full_name: "led_set_brightness"
+}
+elf_symbol {
+  id: 0xbea2c272
+  name: "led_set_brightness_nosleep"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1c94bdd0
+  type_id: 0x1d3cefc2
+  full_name: "led_set_brightness_nosleep"
 }
 elf_symbol {
   id: 0xd10c895a
@@ -369449,10 +369515,13 @@ interface {
   symbol_id: 0x350d9a11
   symbol_id: 0xbf4818d4
   symbol_id: 0xb1548c88
+  symbol_id: 0x5ed0ce65
+  symbol_id: 0xfc17cb5d
   symbol_id: 0x9005a719
   symbol_id: 0xcc1f3656
   symbol_id: 0x613f6d1f
   symbol_id: 0x83c94241
+  symbol_id: 0x7551a60b
   symbol_id: 0xc6d8f246
   symbol_id: 0xdf3e8655
   symbol_id: 0x23b7b896
@@ -369869,6 +369938,7 @@ interface {
   symbol_id: 0x5569d19c
   symbol_id: 0xda95494e
   symbol_id: 0xa5be7046
+  symbol_id: 0xbea2c272
   symbol_id: 0xd10c895a
   symbol_id: 0x678fcec9
   symbol_id: 0x73ea3871
