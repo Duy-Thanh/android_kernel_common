@@ -398,6 +398,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.common",
     defconfig = "arch/arm64/configs/microdroid_defconfig",
     make_goals = [
@@ -432,6 +433,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.common",
     defconfig = "arch/arm64/configs/microdroid_defconfig",
     make_goals = [
@@ -492,6 +494,7 @@ kernel_build(
     outs = [
         "Image",
     ],
+    arch = "arm64",
     build_config = "build.config.common",
     defconfig = "arch/arm64/configs/crashdump_defconfig",
     make_goals = [
@@ -795,6 +798,7 @@ kernel_build(
         "arch/arm64/boot/dts/qcom/sm8650-hdk.dtb",
         "arch/arm64/boot/dts/qcom/sm8650-qrd.dtb",
     ],
+    arch = "arm64",
     # Enable mixed build.
     base_kernel = ":kernel_aarch64",
     build_config = "build.config.db845c",
@@ -827,6 +831,7 @@ kernel_build(
         "arch/arm64/boot/dts/qcom/sm8650-hdk.dtb",
         "arch/arm64/boot/dts/qcom/sm8650-qrd.dtb",
     ],
+    arch = "arm64",
     # Enable mixed build.
     base_kernel = ":kernel_aarch64",
     build_config = "build.config.db845c",
@@ -963,6 +968,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.rockpi4",
     defconfig = "arch/arm64/configs/gki_defconfig",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
@@ -990,6 +996,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.rockpi4",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
     make_goals = [
@@ -1175,6 +1182,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.amlogic",
     make_goals = [
         "Image",
@@ -1204,6 +1212,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.amlogic",
     make_goals = [
         "Image",
@@ -1270,6 +1279,7 @@ kernel_build(
     # Hack to actually check the build.
     # Otherwise, Bazel thinks that there are no output files, and skip building.
     outs = [".config"],
+    arch = "arm64",
     build_config = "build.config.common",
     defconfig = "//build/kernel/kleaf:allmodconfig",
     make_goals = [
