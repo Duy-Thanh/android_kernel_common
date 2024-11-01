@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "243e52eb_807201cd",
+        "filename": "android/abi_gki_aarch64_honor",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-11-01T11:49:58Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 13,
+        "startChar": 40,
+        "endLine": 13,
+        "endChar": 41
+      },
+      "revId": "acb6447b40b64d396dbc5dd362680b651117a620",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
