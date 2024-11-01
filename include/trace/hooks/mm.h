@@ -299,6 +299,11 @@ DECLARE_HOOK(android_vh_uprobes_replace_page,
 DECLARE_HOOK(android_vh_shmem_swapin_page,
 	TP_PROTO(struct page *page),
 	TP_ARGS(page));
+DECLARE_HOOK(android_vh_page_cache_miss,
+	TP_PROTO(struct file *file,
+		pgoff_t start, pgoff_t len,
+		pgoff_t index, bool buffer),
+	TP_ARGS(file, start, len, index, buffer));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
