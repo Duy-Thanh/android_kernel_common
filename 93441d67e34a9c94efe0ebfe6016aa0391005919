@@ -70,6 +70,24 @@
       "parentUuid": "3d2f6b4c_ff898d1d",
       "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954af7a7_abb81f46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3704047
+      },
+      "writtenOn": "2024-11-01T03:19:15Z",
+      "side": 1,
+      "message": "When we perform sensor data collection and background Geekbench concurrent stress testing, we do not disable preemption based on performance requirements. The fpsimd register state is not saved when the thread switches, and the kernel panics due to the null pointer of sve_state.",
+      "parentUuid": "2204d657_9a35fa19",
+      "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
