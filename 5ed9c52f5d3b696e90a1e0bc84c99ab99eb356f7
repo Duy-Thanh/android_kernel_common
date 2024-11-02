@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a37f634_233b28bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-02T18:50:09Z",
+      "side": 1,
+      "message": "If you need this patch (which you actually don\u0027t), then it needs to be in android15-6.6. first and there needs to be a respin.",
+      "parentUuid": "416d83b3_2bcabe73",
+      "revId": "5ed9c52f5d3b696e90a1e0bc84c99ab99eb356f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39a6f5cd_3c7517a9",
         "filename": "fs/f2fs/data.c",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Because trace_f2fs_submit_page_write is not exported in KMI.\ntrace_android_vh_ogki_f2fs_submit_write_page is used only for OGKI.",
       "parentUuid": "39a6f5cd_3c7517a9",
+      "revId": "5ed9c52f5d3b696e90a1e0bc84c99ab99eb356f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "801bee4c_f82b7318",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-02T18:50:09Z",
+      "side": 1,
+      "message": "If this is used only for OGKI, then this whole patch is unnecesary. Just add these uses of the hook in your OGKI kernel and abandon this patch.",
+      "parentUuid": "035ea8ae_8d1310bc",
       "revId": "5ed9c52f5d3b696e90a1e0bc84c99ab99eb356f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
