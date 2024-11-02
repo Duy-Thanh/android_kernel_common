@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade5ff52_065da21a",
+        "filename": "drivers/input/keyboard/gpio_keys.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-11-02T16:52:16Z",
+      "side": 1,
+      "message": "The result of this function is only ever used if `device_may_wakeup()` returns true and that will unconditionally be executed. Move the trace_android_vh_wakeup_bypass() call inside the if() block to avoid calling more often than required.",
+      "range": {
+        "startLine": 1003,
+        "startChar": 0,
+        "endLine": 1003,
+        "endChar": 56
+      },
+      "revId": "0253d4340c919993f1a1a27c0a2b338332286118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165b2e13_35e48c59",
+        "filename": "drivers/input/keyboard/gpio_keys.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-11-02T16:52:16Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "0253d4340c919993f1a1a27c0a2b338332286118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7fa630e_a7d1a62b",
+        "filename": "include/trace/hooks/wakeupbypass.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-11-02T16:52:16Z",
+      "side": 1,
+      "message": "The function parameter names are different here compared to the parameters used at the call site: `wakeup_bypass_enabled` vs `is_wakeup_bypassed`. Consider consolidating to avoid confusion. While at it, perhaps more precisely name the parameter and variable `should_bypass_wakeup` or stick to at most one of the existing variants?",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "0253d4340c919993f1a1a27c0a2b338332286118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
