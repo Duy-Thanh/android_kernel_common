@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "416d83b3_2bcabe73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2024-11-02T06:51:35Z",
+      "side": 1,
+      "message": "The vendor hook and symbol have already been merged into android15-6.6 and android15-6.6-2024-07.\nandroid15-6.6:\n1: https://android-review.googlesource.com/c/kernel/common/+/3271639\n2: https://android-review.googlesource.com/c/kernel/common/+/3271641\n\nandroid15-6.6-2024-07:\n1: https://android-review.googlesource.com/c/kernel/common/+/3285436\n2: https://android-review.googlesource.com/c/kernel/common/+/3283113",
+      "parentUuid": "8f394c01_06d5b560",
+      "revId": "5ed9c52f5d3b696e90a1e0bc84c99ab99eb356f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39a6f5cd_3c7517a9",
         "filename": "fs/f2fs/data.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-11-01T15:57:13Z",
       "side": 1,
       "message": "why was this called \"ogki\" if it is used for GKI? Can\u0027t you just use the existing trace_f2fs_submit_page_write()?",
+      "revId": "5ed9c52f5d3b696e90a1e0bc84c99ab99eb356f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035ea8ae_8d1310bc",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2024-11-02T06:51:35Z",
+      "side": 1,
+      "message": "Because trace_f2fs_submit_page_write is not exported in KMI.\ntrace_android_vh_ogki_f2fs_submit_write_page is used only for OGKI.",
+      "parentUuid": "39a6f5cd_3c7517a9",
       "revId": "5ed9c52f5d3b696e90a1e0bc84c99ab99eb356f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
