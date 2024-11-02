@@ -451,6 +451,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.common",
     defconfig = "arch/arm64/configs/microdroid_defconfig",
     make_goals = [
@@ -485,6 +486,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.common",
     defconfig = "arch/arm64/configs/microdroid_defconfig",
     make_goals = [
@@ -1014,6 +1016,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.rockpi4",
     defconfig = "arch/arm64/configs/gki_defconfig",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
@@ -1041,6 +1044,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.rockpi4",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
     make_goals = [
@@ -1321,6 +1325,7 @@ kernel_build(
     # Hack to actually check the build.
     # Otherwise, Bazel thinks that there are no output files, and skip building.
     outs = [".config"],
+    arch = "arm64",
     build_config = "build.config.common",
     defconfig = "//build/kernel/kleaf:allmodconfig",
     make_goals = [
