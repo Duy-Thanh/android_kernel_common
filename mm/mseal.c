@@ -37,6 +37,11 @@ static bool is_madv_discard(int behavior)
 	return false;
 }
 
+static inline bool has_pkey_write_access(struct vm_area_struct *vma)
+{
+	return arch_vma_access_permitted(vma, true, false, false);
+}
+
 static bool is_ro_anon(struct vm_area_struct *vma)
 {
 	/* check anonymous mapping. */
@@ -83,11 +88,49 @@ bool can_modify_vma_madv(struct vm_area_struct *vma, int behavior)
 	if (!is_madv_discard(behavior))
 		return true;
 
+	/* If VMA is PROT_NONE, allow discard */
+	if ((vma->vm_flags & VM_ACCESS_FLAGS) == VM_NONE)
+		return true;
+
 	if (unlikely(!can_modify_vma(vma) && is_ro_anon(vma)))
 		return false;
 
 	/* Allow by default. */
 	return true;
+}
+
+/*
+ * Check if mprotect is blocked by VM_SEAL_PROT_NX.
+ *
+ * Block PROT_EXEC.
+ * Allow updating prot bits and pkey if the thread has
+ * write permission to the PKEY of the vma.
+ */
+static inline bool can_modify_vma_nx(struct vm_area_struct *vma,
+	unsigned long newflags)
+{
+	if (newflags & PROT_EXEC)
+		return false;
+
+	if (!has_pkey_write_access(vma))
+		return false;
+
+	return true;
+}
+
+/*
+ * Check if a vma is allowed to be modified by mprotect.
+ */
+bool can_modify_vma_mprotect(struct vm_area_struct *vma,
+	unsigned long newflags)
+{
+	if (can_modify_vma(vma))
+		return true;
+
+	if (newflags & VM_SEAL_PROT_NX)
+		return can_modify_vma_nx(vma, newflags);
+
+	return false;
 }
 
 /*

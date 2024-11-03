@@ -115,6 +115,23 @@ bool path_noexec(const struct path *path)
 	       (path->mnt->mnt_sb->s_iflags & SB_I_NOEXEC);
 }
 
+#ifdef CONFIG_64BIT
+static inline bool seal_nx_stack_enabled(void)
+{
+	return true;
+}
+
+static inline void update_seal_nx_stack(unsigned long *vm_flags)
+{
+	if (seal_nx_stack_enabled())
+		*vm_flags |= VM_SEALED | VM_SEAL_PROT_NX;
+}
+#else
+static inline void update_seal_nx_stack(unsigned long *vm_flags)
+{
+}
+#endif /* CONFIG_64BIT */
+
 #ifdef CONFIG_USELIB
 /*
  * Note that a shared library must be both readable and executable due to
@@ -818,6 +835,14 @@ int setup_arg_pages(struct linux_binprm *bprm,
 		vm_flags &= ~VM_EXEC;
 	vm_flags |= mm->def_flags;
 	vm_flags |= VM_STACK_INCOMPLETE_SETUP;
+
+	if (!(vm_flags & VM_EXEC)) {
+		update_seal_nx_stack(&vm_flags);
+		pr_info("nx_stack pid=%d comm=%s",
+				current->pid, current->comm);
+	} else
+		pr_info("xx_stack pid=%d comm=%s",
+				current->pid, current->comm);
 
 	vma_iter_init(&vmi, mm, vma->vm_start);
 
