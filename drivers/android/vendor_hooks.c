@@ -58,6 +58,7 @@
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/psi.h>
 #include <trace/hooks/bl_hib.h>
+<<<<<<< HEAD   (d73a8ddf419e5ee819fff624cf35bfedd85b5609 BACKPORT: FROMGIT: f2fs: fix to freeze GC and discard thread)
 #include <trace/hooks/futex.h>
 #include <trace/hooks/bug.h>
 #include <trace/hooks/logbuf.h>
@@ -85,6 +86,10 @@
 #include <trace/hooks/dwc3.h>
 #include <trace/hooks/typec.h>
 
+||||||| BASE   (35fae63593135636e7f80a3570e0ee45e63b6b19 UPSTREAM: dma-buf: heaps: Fix off-by-one in CMA heap fault h)
+=======
+#include <trace/hooks/cdc_ether.h>
+>>>>>>> CHANGE (bd4dfcd275f371e3d65b7896148151aed16a6c80 ANDROID: vendor_hooks: Add hooks to support rndis_host)
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
@@ -365,6 +370,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_encrypt_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_aes_encrypt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_swap_map_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_post_image_save);
+<<<<<<< HEAD   (d73a8ddf419e5ee819fff624cf35bfedd85b5609 BACKPORT: FROMGIT: f2fs: fix to freeze GC and discard thread)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_futex_plist_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_futex);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_futex_wait_start);
@@ -734,3 +740,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_cma);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_delay_schedule);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
+||||||| BASE   (35fae63593135636e7f80a3570e0ee45e63b6b19 UPSTREAM: dma-buf: heaps: Fix off-by-one in CMA heap fault h)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_end_madvise);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_end_madvise);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_rndis_enabled);
+>>>>>>> CHANGE (bd4dfcd275f371e3d65b7896148151aed16a6c80 ANDROID: vendor_hooks: Add hooks to support rndis_host)
