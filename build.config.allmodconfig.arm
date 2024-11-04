@@ -1,3 +1,11 @@
+<<<<<<< HEAD   (b8ea47 ANDROID: sched: Add vendor hooks for find_energy_efficient_c)
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.arm
 
+||||||| BASE
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.arm
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.allmodconfig
+
+=======
+>>>>>>> BRANCH (6e7e04 ANDROID: rockpi4 move build configs to Bazel.)
