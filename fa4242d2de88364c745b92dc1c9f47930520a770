@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba548bd_6cd239cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-11-05T13:05:31Z",
+      "side": 1,
+      "message": "To follow up on this, here is a public CI build of building `android-mainline` for the yukawa target:\n\nhttps://concourse.baylibre.com/teams/amlogic/pipelines/kernel-android-mainline/jobs/build/builds/1\n\nThis will be build once a week (or manually triggered)\n\nPipeline overview is here:\nhttps://concourse.baylibre.com/teams/amlogic/pipelines/kernel-android-mainline",
+      "parentUuid": "3d6babd6_4908856b",
+      "revId": "fa4242d2de88364c745b92dc1c9f47930520a770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb807557_d83bfe44",
