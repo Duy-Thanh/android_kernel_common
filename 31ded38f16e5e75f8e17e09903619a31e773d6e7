@@ -16,6 +16,29 @@
       "message": "Please help review this CL.",
       "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a90eef_3284d9dc",
+        "filename": "block/blk-zoned.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-11-05T13:19:43Z",
+      "side": 1,
+      "message": "Does this even compile? I think that you need `bdev_offset_from_zone_start()` instead of `bio_offset_from_zone_start()`.",
+      "range": {
+        "startLine": 540,
+        "startChar": 21,
+        "endLine": 540,
+        "endChar": 47
+      },
+      "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
