@@ -39,6 +39,30 @@
       },
       "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703ed522_4de7579f",
+        "filename": "block/blk-zoned.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-11-05T13:56:27Z",
+      "side": 1,
+      "message": "https://android.googlesource.com/kernel/common/+/05e1912555d471e1c2fae2a42b3caf5ed74821ab/block/blk-zoned.c#598",
+      "parentUuid": "87a90eef_3284d9dc",
+      "range": {
+        "startLine": 540,
+        "startChar": 21,
+        "endLine": 540,
+        "endChar": 47
+      },
+      "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
