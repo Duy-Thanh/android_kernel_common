@@ -1295,6 +1295,7 @@ enum kvm_apicv_inhibit {
 };
 
 struct kvm_arch {
+	unsigned long vm_type;
 	unsigned long n_used_mmu_pages;
 	unsigned long n_requested_mmu_pages;
 	unsigned long n_max_mmu_pages;
@@ -1611,10 +1612,12 @@ struct kvm_x86_ops {
 	void (*hardware_unsetup)(void);
 	bool (*has_emulated_msr)(struct kvm *kvm, u32 index);
 	void (*vcpu_after_set_cpuid)(struct kvm_vcpu *vcpu);
+	bool (*is_vm_type_supported)(unsigned long vm_type);
 
 	unsigned int vm_size;
 	int (*vm_init)(struct kvm *kvm);
 	void (*vm_destroy)(struct kvm *kvm);
+	void (*vm_free)(struct kvm *kvm);
 
 	/* Create, but do not attach this VCPU */
 	int (*vcpu_precreate)(struct kvm *kvm);
@@ -1829,6 +1832,7 @@ struct kvm_x86_nested_ops {
 };
 
 struct kvm_x86_init_ops {
+	int (*pkvm_init)(void);
 	int (*hardware_setup)(void);
 	unsigned int (*handle_intel_pt_intr)(void);
 
@@ -1841,6 +1845,18 @@ struct kvm_arch_async_pf {
 	gfn_t gfn;
 	unsigned long cr3;
 	bool direct_map;
+};
+
+struct kvm_pinned_page {
+	struct list_head list;
+	struct page *page;
+};
+
+struct kvm_protected_vm {
+	int shadow_vm_handle;
+
+	struct list_head pinned_pages;
+	spinlock_t pinned_page_lock;
 };
 
 extern u32 __read_mostly kvm_nr_uret_msrs;

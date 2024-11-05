@@ -433,8 +433,10 @@ EXPORT_SYMBOL_GPL(kvm_flush_remote_tlbs);
 
 void kvm_flush_remote_tlbs_range(struct kvm *kvm, gfn_t gfn, u64 nr_pages)
 {
-	if (!kvm_arch_flush_remote_tlbs_range(kvm, gfn, nr_pages))
+	if (!kvm_arch_flush_remote_tlbs_range(kvm, gfn, nr_pages)) {
+		++kvm->stat.generic.remote_tlb_flush_with_range;
 		return;
+	}
 
 	/*
 	 * Fall back to a flushing entire TLBs if the architecture range-based
@@ -442,6 +444,17 @@ void kvm_flush_remote_tlbs_range(struct kvm *kvm, gfn_t gfn, u64 nr_pages)
 	 * reason.
 	 */
 	kvm_flush_remote_tlbs(kvm);
+}
+
+static bool kvm_try_flush_remote_tlbs_range(struct kvm *kvm,
+	struct kvm_gfn_range *gfn_range)
+{
+#ifdef CONFIG_PKVM_INTEL
+	return !!kvm_arch_flush_remote_tlbs_range(kvm, gfn_range->start,
+						  gfn_range->end - gfn_range->start);
+#else
+	return true;
+#endif
 }
 
 void kvm_flush_remote_tlbs_memslot(struct kvm *kvm,
@@ -653,7 +666,7 @@ static const union kvm_mmu_notifier_arg KVM_MMU_NOTIFIER_NO_ARG;
 static __always_inline int __kvm_handle_hva_range(struct kvm *kvm,
 						  const struct kvm_hva_range *range)
 {
-	bool ret = false, locked = false;
+	bool ret = false, locked = false, need_global_flush = false;
 	struct kvm_gfn_range gfn_range;
 	struct kvm_memory_slot *slot;
 	struct kvm_memslots *slots;
@@ -708,10 +721,13 @@ static __always_inline int __kvm_handle_hva_range(struct kvm *kvm,
 					break;
 			}
 			ret |= range->handler(kvm, &gfn_range);
+			if (range->flush_on_ret && ret)
+				need_global_flush |=
+					kvm_try_flush_remote_tlbs_range(kvm, &gfn_range);
 		}
 	}
 
-	if (range->flush_on_ret && ret)
+	if (range->flush_on_ret && ret && need_global_flush)
 		kvm_flush_remote_tlbs(kvm);
 
 	if (locked) {
