@@ -762,6 +762,7 @@ static int watchpoint_handler(unsigned long addr, unsigned long esr,
 	struct debug_info *debug_info;
 	struct arch_hw_breakpoint_ctrl ctrl;
 
+	trace_printk("hv %lx\n", addr);
 	slots = this_cpu_ptr(wp_on_reg);
 	debug_info = &current->thread.debug;
 
