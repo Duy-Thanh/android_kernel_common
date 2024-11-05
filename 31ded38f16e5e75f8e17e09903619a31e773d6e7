@@ -87,6 +87,30 @@
       },
       "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942c9118_6d0aeca2",
+        "filename": "block/blk-zoned.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-11-05T14:33:16Z",
+      "side": 1,
+      "message": "Sorry, I made a mistake.",
+      "parentUuid": "afbef9ea_b8a7f5db",
+      "range": {
+        "startLine": 540,
+        "startChar": 21,
+        "endLine": 540,
+        "endChar": 47
+      },
+      "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
