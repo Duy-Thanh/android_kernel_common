@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6427124_66286a84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-05T09:21:48Z",
+      "side": 1,
+      "message": "This patch changes the mode of abi_gki_aarch64_amlogic to executable. Please restore it to 100644",
+      "revId": "60f077ceb2e64d870fd1a60d0d277dc3e43fd6e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
