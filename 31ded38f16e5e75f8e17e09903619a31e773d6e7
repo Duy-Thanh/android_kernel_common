@@ -63,6 +63,30 @@
       },
       "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afbef9ea_b8a7f5db",
+        "filename": "block/blk-zoned.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-11-05T14:03:48Z",
+      "side": 1,
+      "message": "https://android.googlesource.com/kernel/common/+/05e1912555d471e1c2fae2a42b3caf5ed74821ab/include/linux/blkdev.h#1367\n\n```c\nstatic inline sector_t bio_offset_from_zone_start(struct bio *bio)\n{\n\treturn bdev_offset_from_zone_start(bio-\u003ebi_bdev,\n\t\t\t\t\t   bio-\u003ebi_iter.bi_sector);\n}\n```",
+      "parentUuid": "703ed522_4de7579f",
+      "range": {
+        "startLine": 540,
+        "startChar": 21,
+        "endLine": 540,
+        "endChar": 47
+      },
+      "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
