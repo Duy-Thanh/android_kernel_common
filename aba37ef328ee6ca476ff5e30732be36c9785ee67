@@ -51,6 +51,24 @@
       "message": "This is a terrible hack. We can\u0027t just ignore all timer. If we ignore this, it\u0027s never going to wake up and whoever set the timer will just randomly miss the timer.\n\nAlso, what product is supporting battery swap while the device is booted up? Seems like quite the corner case. Also, why not just hiberate to disk during battery swap?\n\nFigure out a better way to do this please.",
       "revId": "aba37ef328ee6ca476ff5e30732be36c9785ee67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8db2e6d5_07acf8c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022258
+      },
+      "writtenOn": "2024-11-05T07:41:29Z",
+      "side": 1,
+      "message": "@saravanak@google.com We have a feature on our device which allows battery to be swapped while the device is still switched on. Our devices have a backup power source which immediately kicks in when the main battery is removed. Since this backup power source is quite small, it requires the device to go into deep sleep and remain in that state as long as the battery is out.  To make this possible, we need to block all possible wakeups during this period which includes RTC alarm timer wakeups. We do understand that with this method some timer events can be missed during suspended phase only when battery is being swapped but for our use case its more important to keep the device on while battery is being swapped. This change is present even in kernel 5.10 https://android-review.googlesource.com/c/kernel/common/+/2655900 and is currently used on devices which are deployed in the field.",
+      "parentUuid": "03b286d5_be4f1814",
+      "revId": "aba37ef328ee6ca476ff5e30732be36c9785ee67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
