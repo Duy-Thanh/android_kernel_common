@@ -34,6 +34,23 @@
       "parentUuid": "81222c18_4419f4d2",
       "revId": "aba37ef328ee6ca476ff5e30732be36c9785ee67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b286d5_be4f1814",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-11-05T01:45:57Z",
+      "side": 1,
+      "message": "This is a terrible hack. We can\u0027t just ignore all timer. If we ignore this, it\u0027s never going to wake up and whoever set the timer will just randomly miss the timer.\n\nAlso, what product is supporting battery swap while the device is booted up? Seems like quite the corner case. Also, why not just hiberate to disk during battery swap?\n\nFigure out a better way to do this please.",
+      "revId": "aba37ef328ee6ca476ff5e30732be36c9785ee67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
