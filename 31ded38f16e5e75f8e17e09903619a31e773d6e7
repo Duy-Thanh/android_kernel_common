@@ -111,6 +111,30 @@
       },
       "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9205ac36_ef650b07",
+        "filename": "block/blk-zoned.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-11-05T14:41:25Z",
+      "side": 1,
+      "message": "How about `zwplug-\u003ewp_offset \u003d sector % disk-\u003equeue-\u003elimits.chunk_sectors;`?\n\nbdev_offset_from_zone_start need `bdev` that blk_zone_wplug_bio_work doesn\u0027t have.",
+      "parentUuid": "942c9118_6d0aeca2",
+      "range": {
+        "startLine": 540,
+        "startChar": 21,
+        "endLine": 540,
+        "endChar": 47
+      },
+      "revId": "31ded38f16e5e75f8e17e09903619a31e773d6e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
