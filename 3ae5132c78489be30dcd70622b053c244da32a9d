@@ -16,6 +16,24 @@
       "message": "Hi Yifan,\n\nThanks for the patch. FYI I\u0027ve boot tested this on Khadas VIM3.",
       "revId": "3ae5132c78489be30dcd70622b053c244da32a9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d4cf1a9_e73c3e70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-11-05T20:05:38Z",
+      "side": 1,
+      "message": "Thanks for checking!",
+      "parentUuid": "cc40decd_e1fe6dc5",
+      "revId": "3ae5132c78489be30dcd70622b053c244da32a9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
