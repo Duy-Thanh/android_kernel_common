@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a99d04_5ad0bd74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3438683
+      },
+      "writtenOn": "2024-11-06T14:41:46Z",
+      "side": 1,
+      "message": "This landed in 6.7, so no need to add it to our GKI backlog.\nLGTM.",
+      "revId": "7512cc0f698957f27942abcacb60ac27fe48d563",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
