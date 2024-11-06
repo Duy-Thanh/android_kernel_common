@@ -1,0 +1,145 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a4c9b61_9ef198e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-06T17:49:32Z",
+      "side": 1,
+      "message": "I posted several comments but can you make a this cherry-pick as clean as possible (keeping it the same as the original https://android-review.googlesource.com/c/kernel/common/+/2974160 and only fixing things which fail to build because of the changes since 6.6). Then if you need additional APIs like cleancache_get_folio(), cleancache_fs_enabled_folio(), etc., post them as a follow-up patch.",
+      "revId": "da86bb71f58e1f99e14279181407094418c5ac21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2b7a592_411cd966",
+        "filename": "fs/btrfs/extent_io.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-06T17:49:32Z",
+      "side": 1,
+      "message": "This should have also `unlock_extent(tree, start, end, NULL);` see: https://android-review.googlesource.com/c/kernel/common/+/2974160/4/fs/btrfs/extent_io.c#1001",
+      "revId": "da86bb71f58e1f99e14279181407094418c5ac21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "515525b2_531fec26",
+        "filename": "include/linux/cleancache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-06T17:49:32Z",
+      "side": 1,
+      "message": "Can the called do `cleancache_fs_enabled_mapping(folio-\u003epage.mapping)` instead of introducing new API?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "02cfdb27_d9d6bfa6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/cleancache.h",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/cleancache.h",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 71,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/cleancache.h",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "\tif (cleancache_enabled \u0026\u0026 cleancache_fs_enabled_mapping(folio-\u003emapping))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "da86bb71f58e1f99e14279181407094418c5ac21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84686000_1c71220a",
+        "filename": "mm/cleancache.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-06T17:49:32Z",
+      "side": 1,
+      "message": "Why can\u0027t you just do `__cleancache_get_page(\u0026folio-\u003epage)` or even better, do that at the caller side and avoid adding new functions in this out-of-tree API?",
+      "range": {
+        "startLine": 207,
+        "startChar": 8,
+        "endLine": 230,
+        "endChar": 19
+      },
+      "revId": "da86bb71f58e1f99e14279181407094418c5ac21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4da1868f_3b4627fa",
+        "filename": "mm/truncate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-06T17:49:32Z",
+      "side": 1,
+      "message": "Why did you change condition from `folio_needs_release` to `folio_has_private`?",
+      "range": {
+        "startLine": 224,
+        "startChar": 5,
+        "endLine": 224,
+        "endChar": 22
+      },
+      "revId": "da86bb71f58e1f99e14279181407094418c5ac21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
