@@ -14,6 +14,7 @@
     <!-- Modules that leave the OS in an unstable state have been temporarily commented out. -->
     <test class="com.android.tradefed.testtype.binary.KUnitModuleTest" >
         <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
         <!-- <option name='binary' key='drivers/base/regmap/regmap-kunit' value='/data/kunit/x86_64/egmap-kunit.ko' /> -->
         <!-- <option name='binary' key='drivers/base/regmap/regmap-ram' value='/data/kunit/x86_64/regmap-ram.ko' /> -->
         <!-- <option name='binary' key='drivers/base/regmap/regmap-raw-ram' value='/data/kunit/x86_64/regmap-raw-ram.ko' /> -->
