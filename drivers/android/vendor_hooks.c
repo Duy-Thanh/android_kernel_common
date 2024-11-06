@@ -72,10 +72,11 @@
 #include <trace/hooks/traps.h>
 #include <trace/hooks/ttm_pool.h>
 #include <trace/hooks/ufshcd.h>
+#include <trace/hooks/usb.h>
 #include <trace/hooks/user.h>
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/wqlockup.h>
-#include <trace/hooks/usb.h>
+#include <trace/hooks/xhci.h>
 /* keep-sorted end */
 
 /*
@@ -753,6 +754,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wbt_wait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_workingset_active);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wp_page_reuse);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_suspend);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
 /* keep-sorted end */
