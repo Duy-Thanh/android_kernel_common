@@ -1531,6 +1531,15 @@
 			See Documentation/admin-guide/blockdev/floppy.rst.
 
 	force_pal_cache_flush
+	exec.seal_system_mappings = [KNL]
+			Format: { no | yes }
+			Seal system mappings: vdso, vvar, sigpage, vsyscall.
+			This overwrites KCONFIG CONFIG_SEAL_SYSTEM_MAPPINGS
+			- 'no':  do not seal system mappings.
+			- 'yes': seal system mappings.
+			If not specified or invalid, default is the KCONFIG value.
+			This option has no effect if CONFIG_64BIT=n
+
 			[IA-64] Avoid check_sal_cache_flush which may hang on
 			buggy SAL_CACHE_FLUSH implementations. Using this
 			parameter will force ia64_sal_cache_flush to call
