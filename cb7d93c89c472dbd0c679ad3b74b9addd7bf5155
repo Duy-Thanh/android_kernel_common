@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a95ab4_814db110",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2024-11-06T19:15:54Z",
+      "side": 1,
+      "message": "Lore link for reference: https://lore.kernel.org/all/20241106000216.1633346-1-weilongping@oppo.com/",
+      "revId": "cb7d93c89c472dbd0c679ad3b74b9addd7bf5155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
