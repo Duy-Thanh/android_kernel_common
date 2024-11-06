@@ -4141,4 +4141,15 @@ void prep_new_hpage(struct page *page, gfp_t gfp_flags, unsigned int alloc_flags
 void prep_compound_page(struct page *page, unsigned int order);
 #endif
 
+#ifdef CONFIG_64BIT
+static inline void add_vm_sealed(unsigned long *vm_flags)
+{
+	*vm_flags |= VM_SEALED;
+}
+#else
+static inline void add_vm_sealed(unsigned long *vm_flags)
+{
+}
+#endif
+
 #endif /* _LINUX_MM_H */

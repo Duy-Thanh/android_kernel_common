@@ -32,7 +32,7 @@
 #include <linux/mm_types.h>
 #include <linux/syscalls.h>
 #include <linux/ratelimit.h>
-#include <linux/page_size_compat.h>
+#include <linux/fs.h>
 
 #include <asm/vsyscall.h>
 #include <asm/unistd.h>
@@ -367,8 +367,14 @@ void __init map_vsyscall(void)
 		set_vsyscall_pgtable_user_bits(swapper_pg_dir);
 	}
 
-	if (vsyscall_mode == XONLY)
-		vm_flags_init(&gate_vma, VM_EXEC);
+	if (vsyscall_mode == XONLY) {
+		unsigned long vm_flags = VM_EXEC;
+
+		if (seal_system_mappings_enabled())
+			add_vm_sealed(&vm_flags);
+
+		vm_flags_init(&gate_vma, vm_flags);
+	}
 
 	BUILD_BUG_ON((unsigned long)__fix_to_virt(VSYSCALL_PAGE) !=
 		     (unsigned long)VSYSCALL_ADDR);

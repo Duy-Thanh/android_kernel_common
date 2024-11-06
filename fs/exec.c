@@ -62,6 +62,9 @@
 #include <linux/compat.h>
 #include <linux/vmalloc.h>
 #include <linux/io_uring.h>
+#ifndef __GENKSYMS__
+#include <linux/fs_parser.h>
+#endif
 #include <linux/syscall_user_dispatch.h>
 #include <linux/coredump.h>
 #include <linux/time_namespace.h>
@@ -2160,6 +2163,61 @@ COMPAT_SYSCALL_DEFINE5(execveat, int, fd,
 				  argv, envp, flags);
 }
 #endif
+
+#ifdef CONFIG_64BIT
+/*
+ * Kernel cmdline overwrite for CONFIG_SEAL_SYSTEM_MAPPINGS_X
+ */
+enum seal_system_mappings_type {
+	SEAL_SYSTEM_MAPPINGS_DISABLED,
+	SEAL_SYSTEM_MAPPINGS_ENABLED
+};
+
+static enum seal_system_mappings_type seal_system_mappings __ro_after_init =
+	IS_ENABLED(CONFIG_SEAL_SYSTEM_MAPPINGS) ? SEAL_SYSTEM_MAPPINGS_ENABLED :
+	SEAL_SYSTEM_MAPPINGS_DISABLED;
+
+static const struct constant_table value_table_sys_mapping[] __initconst = {
+	{ "no", SEAL_SYSTEM_MAPPINGS_DISABLED},
+	{ "yes", SEAL_SYSTEM_MAPPINGS_ENABLED},
+	{ }
+};
+
+static int __init early_seal_system_mappings_override(char *buf)
+{
+	if (!buf)
+		return -EINVAL;
+
+	seal_system_mappings = lookup_constant(value_table_sys_mapping,
+			buf, seal_system_mappings);
+
+	return 0;
+}
+
+early_param("exec.seal_system_mappings", early_seal_system_mappings_override);
+
+/*
+bool seal_system_mappings_enabled(void)
+{
+	if (seal_system_mappings == SEAL_SYSTEM_MAPPINGS_ENABLED)
+		return true;
+
+	return false;
+}
+*/
+bool seal_system_mappings_enabled(void)
+{
+	return true;
+}
+
+#else
+
+bool seal_system_mappings_enabled(void)
+{
+	return false;
+}
+
+#endif /* CONFIG_64BIT */
 
 #ifdef CONFIG_SYSCTL
 
