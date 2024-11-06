@@ -146,10 +146,18 @@
 
 #define OFFSET_STRIDE		(9)
 
-#define dmar_readq(a) readq(a)
-#define dmar_writeq(a,v) writeq(v,a)
-#define dmar_readl(a) readl(a)
-#define dmar_writel(a, v) writel(v, a)
+#ifdef CONFIG_PKVM_INTEL
+#include <asm/pkvm.h>
+#define dmar_readq(iommu, o)		pkvm_readq((iommu)->reg, (iommu)->reg_phys, o)
+#define dmar_writeq(iommu, o, v)	pkvm_writeq((iommu)->reg, (iommu)->reg_phys, o, v)
+#define dmar_readl(iommu, o)		pkvm_readl((iommu)->reg, (iommu)->reg_phys, o)
+#define dmar_writel(iommu, o, v)	pkvm_writel((iommu)->reg, (iommu)->reg_phys, o, v)
+#else
+#define dmar_readq(iommu, o) readq((iommu)->reg + o)
+#define dmar_writeq(iommu, o, v) writeq(v, (iommu)->reg + o)
+#define dmar_readl(iommu, o) readl((iommu)->reg + o)
+#define dmar_writel(iommu, o, v) writel(v, (iommu)->reg + o)
+#endif
 
 #define DMAR_VER_MAJOR(v)		(((v) & 0xf0) >> 4)
 #define DMAR_VER_MINOR(v)		((v) & 0x0f)
@@ -364,7 +372,7 @@
 do {									\
 	cycles_t start_time = get_cycles();				\
 	while (1) {							\
-		sts = op(iommu->reg + offset);				\
+		sts = op(iommu, offset);				\
 		if (cond)						\
 			break;						\
 		if (DMAR_OPERATION_TIMEOUT < (get_cycles() - start_time))\

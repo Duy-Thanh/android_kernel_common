@@ -48,6 +48,7 @@
 #include <asm/mwait.h>
 #include <asm/spec-ctrl.h>
 #include <asm/vmx.h>
+#include <asm/kvm_pkvm.h>
 
 #include "capabilities.h"
 #include "cpuid.h"
@@ -2576,8 +2577,9 @@ static u64 adjust_vmx_controls64(u64 ctl_opt, u32 msr)
 	return  ctl_opt & allowed;
 }
 
-static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
-			     struct vmx_capability *vmx_cap)
+int setup_vmcs_config_common(struct vmcs_config *vmcs_conf,
+			     struct vmx_capability *vmx_cap,
+			     struct vmcs_config_setting *setting)
 {
 	u32 vmx_msr_low, vmx_msr_high;
 	u32 _pin_based_exec_control = 0;
@@ -2587,34 +2589,17 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
 	u32 _vmexit_control = 0;
 	u32 _vmentry_control = 0;
 	u64 misc_msr;
-	int i;
-
-	/*
-	 * LOAD/SAVE_DEBUG_CONTROLS are absent because both are mandatory.
-	 * SAVE_IA32_PAT and SAVE_IA32_EFER are absent because KVM always
-	 * intercepts writes to PAT and EFER, i.e. never enables those controls.
-	 */
-	struct {
-		u32 entry_control;
-		u32 exit_control;
-	} const vmcs_entry_exit_pairs[] = {
-		{ VM_ENTRY_LOAD_IA32_PERF_GLOBAL_CTRL,	VM_EXIT_LOAD_IA32_PERF_GLOBAL_CTRL },
-		{ VM_ENTRY_LOAD_IA32_PAT,		VM_EXIT_LOAD_IA32_PAT },
-		{ VM_ENTRY_LOAD_IA32_EFER,		VM_EXIT_LOAD_IA32_EFER },
-		{ VM_ENTRY_LOAD_BNDCFGS,		VM_EXIT_CLEAR_BNDCFGS },
-		{ VM_ENTRY_LOAD_IA32_RTIT_CTL,		VM_EXIT_CLEAR_IA32_RTIT_CTL },
-	};
 
 	memset(vmcs_conf, 0, sizeof(*vmcs_conf));
 
-	if (adjust_vmx_controls(KVM_REQUIRED_VMX_CPU_BASED_VM_EXEC_CONTROL,
-				KVM_OPTIONAL_VMX_CPU_BASED_VM_EXEC_CONTROL,
+	if (adjust_vmx_controls(setting->cpu_based_vm_exec_ctrl_req,
+				setting->cpu_based_vm_exec_ctrl_opt,
 				MSR_IA32_VMX_PROCBASED_CTLS,
 				&_cpu_based_exec_control))
 		return -EIO;
 	if (_cpu_based_exec_control & CPU_BASED_ACTIVATE_SECONDARY_CONTROLS) {
-		if (adjust_vmx_controls(KVM_REQUIRED_VMX_SECONDARY_VM_EXEC_CONTROL,
-					KVM_OPTIONAL_VMX_SECONDARY_VM_EXEC_CONTROL,
+		if (adjust_vmx_controls(setting->secondary_vm_exec_ctrl_req,
+					setting->secondary_vm_exec_ctrl_opt,
 					MSR_IA32_VMX_PROCBASED_CTLS2,
 					&_cpu_based_2nd_exec_control))
 			return -EIO;
@@ -2660,17 +2645,17 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
 
 	if (_cpu_based_exec_control & CPU_BASED_ACTIVATE_TERTIARY_CONTROLS)
 		_cpu_based_3rd_exec_control =
-			adjust_vmx_controls64(KVM_OPTIONAL_VMX_TERTIARY_VM_EXEC_CONTROL,
+			adjust_vmx_controls64(setting->tertiary_vm_exec_ctrl_opt,
 					      MSR_IA32_VMX_PROCBASED_CTLS3);
 
-	if (adjust_vmx_controls(KVM_REQUIRED_VMX_VM_EXIT_CONTROLS,
-				KVM_OPTIONAL_VMX_VM_EXIT_CONTROLS,
+	if (adjust_vmx_controls(setting->vmexit_ctrl_req,
+				setting->vmexit_ctrl_opt,
 				MSR_IA32_VMX_EXIT_CTLS,
 				&_vmexit_control))
 		return -EIO;
 
-	if (adjust_vmx_controls(KVM_REQUIRED_VMX_PIN_BASED_VM_EXEC_CONTROL,
-				KVM_OPTIONAL_VMX_PIN_BASED_VM_EXEC_CONTROL,
+	if (adjust_vmx_controls(setting->pin_based_vm_exec_ctrl_req,
+				setting->pin_based_vm_exec_ctrl_opt,
 				MSR_IA32_VMX_PINBASED_CTLS,
 				&_pin_based_exec_control))
 		return -EIO;
@@ -2681,28 +2666,11 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
 		SECONDARY_EXEC_VIRTUAL_INTR_DELIVERY))
 		_pin_based_exec_control &= ~PIN_BASED_POSTED_INTR;
 
-	if (adjust_vmx_controls(KVM_REQUIRED_VMX_VM_ENTRY_CONTROLS,
-				KVM_OPTIONAL_VMX_VM_ENTRY_CONTROLS,
+	if (adjust_vmx_controls(setting->vmentry_ctrl_req,
+				setting->vmentry_ctrl_opt,
 				MSR_IA32_VMX_ENTRY_CTLS,
 				&_vmentry_control))
 		return -EIO;
-
-	for (i = 0; i < ARRAY_SIZE(vmcs_entry_exit_pairs); i++) {
-		u32 n_ctrl = vmcs_entry_exit_pairs[i].entry_control;
-		u32 x_ctrl = vmcs_entry_exit_pairs[i].exit_control;
-
-		if (!(_vmentry_control & n_ctrl) == !(_vmexit_control & x_ctrl))
-			continue;
-
-		pr_warn_once("Inconsistent VM-Entry/VM-Exit pair, entry = %x, exit = %x\n",
-			     _vmentry_control & n_ctrl, _vmexit_control & x_ctrl);
-
-		if (error_on_inconsistent_vmcs_config)
-			return -EIO;
-
-		_vmentry_control &= ~n_ctrl;
-		_vmexit_control &= ~x_ctrl;
-	}
 
 	rdmsr(MSR_IA32_VMX_BASIC, vmx_msr_low, vmx_msr_high);
 
@@ -2741,6 +2709,64 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
 #endif
 
 	return 0;
+}
+
+static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
+			     struct vmx_capability *vmx_cap)
+{
+	int i, ret;
+	struct vmcs_config_setting setting = {
+		.cpu_based_vm_exec_ctrl_req = KVM_REQUIRED_VMX_CPU_BASED_VM_EXEC_CONTROL,
+		.cpu_based_vm_exec_ctrl_opt = KVM_OPTIONAL_VMX_CPU_BASED_VM_EXEC_CONTROL,
+		.secondary_vm_exec_ctrl_req = KVM_REQUIRED_VMX_SECONDARY_VM_EXEC_CONTROL,
+		.secondary_vm_exec_ctrl_opt = KVM_OPTIONAL_VMX_SECONDARY_VM_EXEC_CONTROL,
+		.tertiary_vm_exec_ctrl_opt = KVM_OPTIONAL_VMX_TERTIARY_VM_EXEC_CONTROL,
+		.pin_based_vm_exec_ctrl_req = KVM_REQUIRED_VMX_PIN_BASED_VM_EXEC_CONTROL,
+		.pin_based_vm_exec_ctrl_opt = KVM_OPTIONAL_VMX_PIN_BASED_VM_EXEC_CONTROL,
+		.vmexit_ctrl_req = KVM_REQUIRED_VMX_VM_EXIT_CONTROLS,
+		.vmexit_ctrl_opt = KVM_OPTIONAL_VMX_VM_EXIT_CONTROLS,
+		.vmentry_ctrl_req = KVM_REQUIRED_VMX_VM_ENTRY_CONTROLS,
+		.vmentry_ctrl_opt = KVM_OPTIONAL_VMX_VM_ENTRY_CONTROLS,
+	};
+
+	/*
+	 * LOAD/SAVE_DEBUG_CONTROLS are absent because both are mandatory.
+	 * SAVE_IA32_PAT and SAVE_IA32_EFER are absent because KVM always
+	 * intercepts writes to PAT and EFER, i.e. never enables those controls.
+	 */
+	struct {
+		u32 entry_control;
+		u32 exit_control;
+	} const vmcs_entry_exit_pairs[] = {
+		{ VM_ENTRY_LOAD_IA32_PERF_GLOBAL_CTRL,	VM_EXIT_LOAD_IA32_PERF_GLOBAL_CTRL },
+		{ VM_ENTRY_LOAD_IA32_PAT,		VM_EXIT_LOAD_IA32_PAT },
+		{ VM_ENTRY_LOAD_IA32_EFER,		VM_EXIT_LOAD_IA32_EFER },
+		{ VM_ENTRY_LOAD_BNDCFGS,		VM_EXIT_CLEAR_BNDCFGS },
+		{ VM_ENTRY_LOAD_IA32_RTIT_CTL,		VM_EXIT_CLEAR_IA32_RTIT_CTL },
+	};
+
+	ret =  setup_vmcs_config_common(vmcs_conf, vmx_cap, &setting);
+	if (ret)
+		return ret;
+
+	for (i = 0; i < ARRAY_SIZE(vmcs_entry_exit_pairs); i++) {
+		u32 n_ctrl = vmcs_entry_exit_pairs[i].entry_control;
+		u32 x_ctrl = vmcs_entry_exit_pairs[i].exit_control;
+
+		if (!(vmcs_conf->vmentry_ctrl & n_ctrl) == !(vmcs_conf->vmexit_ctrl & x_ctrl))
+			continue;
+
+		pr_warn_once("Inconsistent VM-Entry/VM-Exit pair, entry = %x, exit = %x\n",
+				vmcs_conf->vmentry_ctrl & n_ctrl, vmcs_conf->vmexit_ctrl & x_ctrl);
+
+		if (error_on_inconsistent_vmcs_config)
+			return -EIO;
+
+		vmcs_conf->vmentry_ctrl &= ~n_ctrl;
+		vmcs_conf->vmexit_ctrl &= ~x_ctrl;
+	}
+
+	return ret;
 }
 
 static bool __kvm_is_vmx_supported(void)
@@ -7454,6 +7480,8 @@ static void vmx_vcpu_free(struct kvm_vcpu *vcpu)
 	free_vpid(vmx->vpid);
 	nested_vmx_free_vcpu(vcpu);
 	free_loaded_vmcs(vmx->loaded_vmcs);
+
+	pkvm_teardown_shadow_vcpu(vcpu);
 }
 
 static int vmx_vcpu_create(struct kvm_vcpu *vcpu)
@@ -7551,7 +7579,7 @@ static int vmx_vcpu_create(struct kvm_vcpu *vcpu)
 		WRITE_ONCE(to_kvm_vmx(vcpu->kvm)->pid_table[vcpu->vcpu_id],
 			   __pa(&vmx->pi_desc) | PID_TABLE_ENTRY_VALID);
 
-	return 0;
+	return pkvm_init_shadow_vcpu(vcpu);
 
 free_vmcs:
 	free_loaded_vmcs(vmx->loaded_vmcs);
@@ -7560,6 +7588,15 @@ free_pml:
 free_vpid:
 	free_vpid(vmx->vpid);
 	return err;
+}
+
+static bool vmx_is_vm_type_supported(unsigned long type)
+{
+#ifdef CONFIG_PKVM_INTEL
+	if (type == KVM_X86_PROTECTED_VM)
+		return enable_pkvm;
+#endif
+	return type == KVM_X86_DEFAULT_VM;
 }
 
 #define L1TF_MSG_SMT "L1TF CPU bug present and SMT on, data leak possible. See CVE-2018-3646 and https://www.kernel.org/doc/html/latest/admin-guide/hw-vuln/l1tf.html for details.\n"
@@ -7593,7 +7630,13 @@ static int vmx_vm_init(struct kvm *kvm)
 			break;
 		}
 	}
-	return 0;
+
+	return pkvm_init_shadow_vm(kvm);
+}
+
+static void vmx_vm_free(struct kvm *kvm)
+{
+	pkvm_teardown_shadow_vm(kvm);
 }
 
 static u8 vmx_get_mt_mask(struct kvm_vcpu *vcpu, gfn_t gfn, bool is_mmio,
@@ -8263,9 +8306,11 @@ static struct kvm_x86_ops vmx_x86_ops __initdata = {
 	.hardware_disable = vmx_hardware_disable,
 	.has_emulated_msr = vmx_has_emulated_msr,
 
+	.is_vm_type_supported = vmx_is_vm_type_supported,
 	.vm_size = sizeof(struct kvm_vmx),
 	.vm_init = vmx_vm_init,
 	.vm_destroy = vmx_vm_destroy,
+	.vm_free = vmx_vm_free,
 
 	.vcpu_precreate = vmx_vcpu_precreate,
 	.vcpu_create = vmx_vcpu_create,
@@ -8543,6 +8588,19 @@ static __init int hardware_setup(void)
 	}
 #endif
 
+#if IS_ENABLED(CONFIG_PKVM_INTEL)
+	if (enable_pkvm) {
+		if (!enable_ept || vmx_x86_ops.flush_remote_tlbs ||
+				vmx_x86_ops.flush_remote_tlbs_range) {
+			pr_err_ratelimited("kvm: EPT or flush_remote_tlbs ops not available to pKVM-IA\n");
+			return -EOPNOTSUPP;
+		}
+		vmx_x86_ops.flush_remote_tlbs = pkvm_tlb_remote_flush;
+		vmx_x86_ops.flush_remote_tlbs_range =
+				pkvm_tlb_remote_flush_with_range;
+	}
+#endif
+
 	if (!cpu_has_vmx_ple()) {
 		ple_gap = 0;
 		ple_window = 0;
@@ -8654,6 +8712,9 @@ static __init int hardware_setup(void)
 }
 
 static struct kvm_x86_init_ops vmx_init_ops __initdata = {
+#ifdef CONFIG_PKVM_INTEL
+	.pkvm_init = pkvm_init,
+#endif
 	.hardware_setup = hardware_setup,
 	.handle_intel_pt_intr = NULL,
 
