@@ -80,6 +80,7 @@
 #include <trace/hooks/usb.h>
 #include <trace/hooks/kasan.h>
 #include <trace/hooks/dmv_debug.h>
+#include <trace/hooks/xhci.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -615,6 +616,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gzvm_handle_demand_page_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gzvm_destroy_vm_post_process);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_new_device_added);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_suspend);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_bio_charge);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_alloc_anon_thp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_ac);
