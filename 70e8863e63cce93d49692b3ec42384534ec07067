@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f829dc7_dd5edd44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-11-06T01:15:41Z",
+      "side": 1,
+      "message": "Since this can be a tricky change, we are waiting for 2 weeks to see if anyone reports an issue in linux-next before we merge this.",
+      "revId": "70e8863e63cce93d49692b3ec42384534ec07067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
