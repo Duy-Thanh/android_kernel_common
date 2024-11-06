@@ -63,6 +63,7 @@
 #include <trace/hooks/signal.h>
 #include <trace/hooks/softlockup.h>
 #include <trace/hooks/suspend.h>
+<<<<<<< HEAD   (403760a58ef72b72f3aec57113b4f1c12f3787a2 ANDROID: GKI: update symbol list for exynos)
 #include <trace/hooks/sys.h>
 #include <trace/hooks/syscall_check.h>
 #include <trace/hooks/sysrqcrash.h>
@@ -84,6 +85,16 @@
  * due TRACE_INCLUDE_PATH is being redefined.
  */
 #include <trace/events/android_vendor_lmk.h>
+||||||| BASE   (5dc82090ccc0ec6118c0c09565932afb7c4e2e5e FROMGIT: wifi: cfg80211: Do not create BSS entries for unsup)
+#include <trace/hooks/fsnotify.h>
+#include <trace/hooks/perf.h>
+#include <trace/hooks/dmabuf.h>
+=======
+#include <trace/hooks/fsnotify.h>
+#include <trace/hooks/perf.h>
+#include <trace/hooks/dmabuf.h>
+#include <trace/hooks/xhci.h>
+>>>>>>> CHANGE (1586d3cdc925ae9352529763ac1eabc69c09a15d ANDROID: USB: add vendor hook functions for USB)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -716,6 +727,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_enqueue_schedule_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_unicast_rcv_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_v4_connect);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_v6_connect);
+<<<<<<< HEAD   (403760a58ef72b72f3aec57113b4f1c12f3787a2 ANDROID: GKI: update symbol list for exynos)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_check_int_errors);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_compl_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_dev_cmd_completion);
@@ -738,7 +750,37 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_percpu_swap_cluster_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_uid_stats);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uplink_send_msg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_uprobe_write);
+<<<<<<< PATCH SET (b6f7b6719ec57d84aa74c728faf49b8afc766884 ANDROID: USB: add vendor hook functions for USB)
+||||||| BASE   (5dc82090ccc0ec6118c0c09565932afb7c4e2e5e FROMGIT: wifi: cfg80211: Do not create BSS entries for unsup)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_read_lazy_flag);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bd_link_disk_holder);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_new_mount_fc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_fill_rwbs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_delay_run_hw_queue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_kick_requeue_list);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_ra_op_flags);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_read_lazy_flag);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_new_device_added);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_suspend);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bd_link_disk_holder);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_new_mount_fc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_fill_rwbs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_delay_run_hw_queue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_kick_requeue_list);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_ra_op_flags);
+>>>>>>> CHANGE (1586d3cdc925ae9352529763ac1eabc69c09a15d ANDROID: USB: add vendor hook functions for USB)
+||||||| BASE      (403760a58ef72b72f3aec57113b4f1c12f3787a2 ANDROID: GKI: update symbol list for exynos)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
+>>>>>>> BASE      (be26bc61874165519a8886bd01b399d9e1301925 ANDROID: usb: Add vendor hook for usb suspend and resume)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vfs_fsync_range);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmalloc_node_range_end);
