@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "231bffa6_82a30cb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2024-11-07T00:02:02Z",
+      "side": 1,
+      "message": "I event don\u0027t understand why we needed this vendor hook. https://r.android.com/3283164\n\nWhy couldn\u0027t they fix that by using CONFIG_F2FS_UNFAIR_RWSEM, which was supposed to address the exact same issue?\n\nIf there\u0027s any other reason, can we remove this vendor hook?",
+      "revId": "4ec6a9c3f19d629a4f2e0df446a263003868a0f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
