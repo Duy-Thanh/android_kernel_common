@@ -11,7 +11,6 @@ use core::{
     sync::atomic::{AtomicUsize, Ordering},
 };
 use kernel::{
-    alloc::AllocError,
     c_str,
     list::{List, ListArc, ListLinks},
     page::PAGE_SIZE,
@@ -458,13 +457,34 @@ kernel::sync::global_lock! {
     pub(crate) unsafe(uninit) static ASHMEM_SHRINKER: Mutex<Option<ShrinkerRegistration<AshmemModule>>> = None;
 }
 
-pub(crate) fn register_shrinker() -> Result<(), AllocError> {
-    let mut lock = ASHMEM_SHRINKER.lock();
-    if lock.is_none() {
-        let mut shrinker = ShrinkerBuilder::new(c_str!("android-ashmem"))?;
-        shrinker.set_seeks(4 * shrinker::DEFAULT_SEEKS);
+/// Sets the behavior of the UNPIN ioctl.
+pub(crate) fn unpin_set(value: &[u8]) -> Result<()> {
+    let mut shrinker = ASHMEM_SHRINKER.lock();
 
-        *lock = Some(shrinker.register(()));
+    match value.trim_ascii() {
+        b"shrinker" => {
+            if shrinker.is_none() {
+                let mut builder = ShrinkerBuilder::new(c_str!("android-ashmem"))?;
+                builder.set_seeks(4 * shrinker::DEFAULT_SEEKS);
+                *shrinker = Some(builder.register(()));
+            }
+            Ok(())
+        }
+        b"ignore" => {
+            *shrinker = None;
+            Ok(())
+        }
+        _ => Err(EINVAL),
     }
-    Ok(())
+}
+
+/// Gets the behavior of the UNPIN ioctl.
+pub(crate) fn unpin_get() -> &'static CStr {
+    let shrinker = ASHMEM_SHRINKER.lock();
+
+    if shrinker.is_some() {
+        c_str!("shrinker\n")
+    } else {
+        c_str!("ignore\n")
+    }
 }
