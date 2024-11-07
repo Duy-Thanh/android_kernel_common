@@ -33,6 +33,24 @@
       "message": "Patch was merged into `android15-6.6` with LTS.",
       "revId": "9c32563940bd5ad5b980504e72e0f442c250f83c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93906fa6_2b1f1b28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-07T01:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9f1af3c_26680bb3",
+      "revId": "9c32563940bd5ad5b980504e72e0f442c250f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
