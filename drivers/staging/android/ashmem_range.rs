@@ -4,7 +4,7 @@
 
 //! Keeps track of unpinned ranges in an ashmem file.
 
-use crate::{shmem::ShmemFile, AshmemModule};
+use crate::{shmem::ShmemFile, AshmemModule, UNPIN_IMMEDIATELY};
 use core::{
     mem::MaybeUninit,
     pin::Pin,
@@ -468,10 +468,17 @@ pub(crate) fn unpin_set(value: &[u8]) -> Result<()> {
                 builder.set_seeks(4 * shrinker::DEFAULT_SEEKS);
                 *shrinker = Some(builder.register(()));
             }
+            UNPIN_IMMEDIATELY.store(false, Ordering::Relaxed);
+            Ok(())
+        }
+        b"immediately" => {
+            *shrinker = None;
+            UNPIN_IMMEDIATELY.store(true, Ordering::Relaxed);
             Ok(())
         }
         b"ignore" => {
             *shrinker = None;
+            UNPIN_IMMEDIATELY.store(false, Ordering::Relaxed);
             Ok(())
         }
         _ => Err(EINVAL),
@@ -484,6 +491,8 @@ pub(crate) fn unpin_get() -> &'static CStr {
 
     if shrinker.is_some() {
         c_str!("shrinker\n")
+    } else if UNPIN_IMMEDIATELY.load(Ordering::Relaxed) {
+        c_str!("immediately\n")
     } else {
         c_str!("ignore\n")
     }
