@@ -773,6 +773,15 @@ retry:
 	if (index == F2FS_XATTR_INDEX_ENCRYPTION &&
 			!strcmp(name, F2FS_XATTR_NAME_ENCRYPTION_CONTEXT))
 		f2fs_set_encrypted_inode(inode);
+<<<<<<< HEAD   (8221be ANDROID: add __pskb_copy_fclone to db845c symbol list)
+||||||| BASE
+	f2fs_mark_inode_dirty_sync(inode, true);
+	if (!error && S_ISDIR(inode->i_mode))
+		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
+=======
+	if (!error && S_ISDIR(inode->i_mode))
+		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
+>>>>>>> BRANCH (976b05 UPSTREAM: HID: Use kvzalloc instead of kzalloc in hid_regist)
 
 	if (!S_ISDIR(inode->i_mode))
 		goto same;
