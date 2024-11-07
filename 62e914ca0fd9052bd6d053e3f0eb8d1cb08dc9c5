@@ -16,6 +16,24 @@
       "message": "This requires a GKI Newsletter entry.",
       "revId": "62e914ca0fd9052bd6d053e3f0eb8d1cb08dc9c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad4c4ac_7bd5563b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-11-07T11:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "002adfe9_1f2488b9",
+      "revId": "62e914ca0fd9052bd6d053e3f0eb8d1cb08dc9c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
