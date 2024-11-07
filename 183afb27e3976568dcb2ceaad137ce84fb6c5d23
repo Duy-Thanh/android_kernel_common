@@ -16,6 +16,23 @@
       "message": "How about we pull @ttritton\u0027s fix instead? https://lore.kernel.org/all/20241011195808.2201-1-terry.tritton@linaro.org/",
       "revId": "183afb27e3976568dcb2ceaad137ce84fb6c5d23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c49377d_485f4712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2024-11-07T23:15:24Z",
+      "side": 1,
+      "message": "cmllamas comment about pulling the fix seems better",
+      "revId": "183afb27e3976568dcb2ceaad137ce84fb6c5d23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
