@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86819a3e_32611346",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2024-11-07T14:57:27Z",
+      "side": 1,
+      "message": "Thanks, I will send it upstream tomorrow to get feedback.",
+      "parentUuid": "5b98cc14_cd9a00d7",
+      "revId": "3215c089ca8be3c7b24c6e0930f43ef5fefff5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57c9155a_a798881f",
@@ -63,6 +81,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de0bd70b_3ee5a588",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2024-11-07T14:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57c9155a_a798881f",
+      "revId": "3215c089ca8be3c7b24c6e0930f43ef5fefff5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bae1bcf9_88a52d83",
@@ -86,6 +122,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "949f2383_b5b28d9f",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2024-11-07T14:57:27Z",
+      "side": 1,
+      "message": "I plan to submit v4 and v6 in separate patches, they are similar but different. \n\nI also mentioned the IGMP in the commit message.\n\nFor v6, I will create a patches that mentions MLD.\n\nFor quick reference, I have sth. WIP here for both v4/v6:\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3333555\n\nThe WIP kernel UML test is here:\n\nhttps://android-review.git.corp.google.com/c/kernel/tests/+/3335661",
+      "parentUuid": "bae1bcf9_88a52d83",
+      "range": {
+        "startLine": 782,
+        "startChar": 27,
+        "endLine": 782,
+        "endChar": 45
+      },
+      "revId": "3215c089ca8be3c7b24c6e0930f43ef5fefff5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00f02876_104907d8",
@@ -99,6 +159,30 @@
       "writtenOn": "2024-11-07T14:13:30Z",
       "side": 1,
       "message": "extra space",
+      "range": {
+        "startLine": 1435,
+        "startChar": 9,
+        "endLine": 1435,
+        "endChar": 10
+      },
+      "revId": "3215c089ca8be3c7b24c6e0930f43ef5fefff5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a912bf70_83b4f633",
+        "filename": "net/ipv4/igmp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1435,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2024-11-07T14:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00f02876_104907d8",
       "range": {
         "startLine": 1435,
         "startChar": 9,
