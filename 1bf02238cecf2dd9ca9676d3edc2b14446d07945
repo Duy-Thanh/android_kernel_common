@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a5d420_f0276466",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-11-07T19:06:25Z",
+      "side": 1,
+      "message": "Bypassing failure due to test timeout issue: b/338329603",
+      "revId": "1bf02238cecf2dd9ca9676d3edc2b14446d07945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
