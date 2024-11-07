@@ -294,6 +294,7 @@ struct kvm_protected_vm {
 	struct rb_root_cached pinned_pages;
 	gpa_t pvmfw_load_addr;
 	bool enabled;
+	bool ffa_support;
 };
 
 struct kvm_mpidr_data {

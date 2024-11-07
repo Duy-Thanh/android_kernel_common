@@ -941,6 +941,7 @@ struct kvm_enable_cap {
 #define KVM_CAP_X86_GUEST_MODE 238
 
 #define KVM_CAP_ARM_PROTECTED_VM 0xffbadab1
+#define KVM_CAP_ARM_FFA_SUPPORT 0xffbadab2
 
 struct kvm_irq_routing_irqchip {
 	__u32 irqchip;
