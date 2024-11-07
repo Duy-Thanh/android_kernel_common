@@ -416,3 +416,15 @@ __tracepoint_android_vh_get_folio_trylock_result
 __traceiter_android_vh_do_folio_trylock
 __tracepoint_android_vh_do_folio_trylock
 reclaim_pages
+<<<<<<< HEAD   (12ed65 FROMGIT: thermal: gov_power_allocator: Granted power set to )
+||||||| BASE
+__tracepoint_android_vh_alloc_flags_cma_adjust
+__traceiter_android_vh_alloc_flags_cma_adjust
+=======
+__tracepoint_android_vh_alloc_flags_cma_adjust
+__traceiter_android_vh_alloc_flags_cma_adjust
+
+# required by xr-qi.ko
+__tracepoint_android_vh_futex_wait_queue_start
+__traceiter_android_vh_futex_wait_queue_start
+>>>>>>> CHANGE (329bde ANDROID: GKI: update symbol list file for xiaomi)
