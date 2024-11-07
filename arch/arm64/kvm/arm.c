@@ -83,6 +83,8 @@ int kvm_vm_ioctl_enable_cap(struct kvm *kvm,
 	switch (cap->cap) {
 	case KVM_CAP_ARM_PROTECTED_VM:
 		return pkvm_vm_ioctl_enable_cap(kvm, cap);
+	case KVM_CAP_ARM_FFA_SUPPORT:
+		return pkvm_vm_ioctl_ffa_support(kvm, cap);
 	default:
 		if (cap->flags)
 			return -EINVAL;

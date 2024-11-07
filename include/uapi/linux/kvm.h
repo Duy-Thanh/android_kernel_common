@@ -1200,6 +1200,7 @@ struct kvm_ppc_resize_hpt {
 #define KVM_CAP_ARM_SUPPORTED_BLOCK_SIZES 229
 
 #define KVM_CAP_ARM_PROTECTED_VM 0xffbadab1
+#define KVM_CAP_ARM_FFA_SUPPORT 0xffbadab2
 
 #ifdef KVM_CAP_IRQ_ROUTING
 

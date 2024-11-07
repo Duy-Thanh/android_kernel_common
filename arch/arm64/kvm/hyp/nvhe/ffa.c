@@ -47,6 +47,8 @@
 /* FF-A VM handle - 0 is reserved for the host */
 #define VM_FFA_HANDLE_FROM_VCPU(vcpu)	(((vcpu)->kvm->arch.pkvm.handle) - HANDLE_OFFSET + 1)
 
+#define VM_FFA_SUPPORTED(vcpu)		((vcpu)->kvm->arch.pkvm.ffa_support)
+
 /* The maximum number of secure partitions that can register for VM availability */
 #define FFA_MAX_REGISTERED_SP_IDS	(8)
 
@@ -1265,6 +1267,9 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 
 	DECLARE_REG(u64, func_id, ctxt, 0);
 
+	if (!VM_FFA_SUPPORTED(&hyp_vcpu->vcpu))
+		return true;
+
 	vm_handle = VM_FFA_HANDLE_FROM_VCPU(vcpu);
 	WARN_ON(vm_handle >= KVM_MAX_PVMS);
 
@@ -1339,6 +1344,9 @@ int kvm_reclaim_ffa_guest_pages(struct pkvm_hyp_vm *vm, pkvm_handle_t handle)
 	struct ffa_mem_transfer *transfer, *tmp;
 	struct arm_smccc_res res;
 	struct pkvm_hyp_vcpu *hyp_vcpu = vm->vcpus[0];
+
+	if (!VM_FFA_SUPPORTED(&hyp_vcpu->vcpu))
+		return 0;
 
 	vm_handle = VM_FFA_HANDLE_FROM_VCPU(&hyp_vcpu->vcpu);
 	WARN_ON(vm_handle >= KVM_MAX_PVMS);

@@ -858,6 +858,28 @@ int pkvm_vm_ioctl_enable_cap(struct kvm *kvm, struct kvm_enable_cap *cap)
 	return 0;
 }
 
+int pkvm_vm_ioctl_ffa_support(struct kvm *kvm, struct kvm_enable_cap *cap)
+{
+	int ret = 0;
+
+	if (!kvm_vm_is_protected(kvm))
+		return -EINVAL;
+
+	if (cap->args[1] || cap->args[2] || cap->args[3])
+		return -EINVAL;
+
+	mutex_lock(&kvm->lock);
+	if (kvm->arch.pkvm.handle) {
+		ret = -EBUSY;
+		goto out_unlock;
+	}
+
+	kvm->arch.pkvm.ffa_support = true;
+out_unlock:
+	mutex_unlock(&kvm->lock);
+	return ret;
+}
+
 #ifdef CONFIG_MODULES
 static char early_pkvm_modules[COMMAND_LINE_SIZE] __initdata;
 
