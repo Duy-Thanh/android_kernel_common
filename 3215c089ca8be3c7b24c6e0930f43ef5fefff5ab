@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b98cc14_cd9a00d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-11-07T14:13:30Z",
+      "side": 1,
+      "message": "But in general send it upstream, that\u0027s where the experts are.",
+      "revId": "3215c089ca8be3c7b24c6e0930f43ef5fefff5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c9155a_a798881f",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-11-07T14:13:30Z",
+      "side": 1,
+      "message": "style seems to suggest that \u003d57, and \u003d58, should be removed?",
+      "fixSuggestions": [
+        {
+          "fixId": "1020441e_422f69d5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/uapi/linux/rtnetlink.h",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "\tRTM_DELMULTICAST,\n"
+            },
+            {
+              "path": "include/uapi/linux/rtnetlink.h",
+              "range": {
+                "startLine": 100,
+                "startChar": 0,
+                "endLine": 101,
+                "endChar": 0
+              },
+              "replacement": "\tRTM_GETMULTICAST,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3215c089ca8be3c7b24c6e0930f43ef5fefff5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bae1bcf9_88a52d83",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-11-07T14:13:30Z",
+      "side": 1,
+      "message": "what about v6?",
+      "range": {
+        "startLine": 782,
+        "startChar": 27,
+        "endLine": 782,
+        "endChar": 45
+      },
+      "revId": "3215c089ca8be3c7b24c6e0930f43ef5fefff5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f02876_104907d8",
+        "filename": "net/ipv4/igmp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1435,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-11-07T14:13:30Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 1435,
+        "startChar": 9,
+        "endLine": 1435,
+        "endChar": 10
+      },
+      "revId": "3215c089ca8be3c7b24c6e0930f43ef5fefff5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
