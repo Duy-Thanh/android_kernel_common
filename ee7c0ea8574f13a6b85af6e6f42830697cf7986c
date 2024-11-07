@@ -16,6 +16,24 @@
       "message": "create a patch to add the new symbols to your symbol list",
       "revId": "ee7c0ea8574f13a6b85af6e6f42830697cf7986c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2faf92_2ddb428b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-07T23:35:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "295eb036_42489855",
+      "revId": "ee7c0ea8574f13a6b85af6e6f42830697cf7986c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
