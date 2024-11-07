@@ -7,7 +7,7 @@
 use core::{
     ffi::{c_int, c_long},
     pin::Pin,
-    sync::atomic::{AtomicUsize, Ordering},
+    sync::atomic::{AtomicBool, AtomicUsize, Ordering},
 };
 use kernel::{
     bindings::{self, ASHMEM_GET_PIN_STATUS, ASHMEM_PIN, ASHMEM_UNPIN},
@@ -78,6 +78,7 @@ fn has_cap_sys_admin() -> bool {
 }
 
 static NUM_PIN_IOCTLS_WAITING: AtomicUsize = AtomicUsize::new(0);
+static UNPIN_IMMEDIATELY: AtomicBool = AtomicBool::new(false);
 
 fn shrinker_should_stop() -> bool {
     NUM_PIN_IOCTLS_WAITING.load(Ordering::Relaxed) > 0
@@ -427,6 +428,10 @@ impl Ashmem {
             }
             ASHMEM_UNPIN => {
                 asma.area.unpin(pgstart, pgend, &mut new_range, &mut guard);
+
+                if UNPIN_IMMEDIATELY.load(Ordering::Relaxed) {
+                    guard.free_lru(usize::MAX, &mut 0);
+                }
                 Ok(0)
             }
             ASHMEM_GET_PIN_STATUS => {
