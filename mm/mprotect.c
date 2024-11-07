@@ -587,14 +587,13 @@ mprotect_fixup(struct vma_iterator *vmi, struct mmu_gather *tlb,
 	pgoff_t pgoff;
 	int error;
 
-	if (!can_modify_vma(vma))
-		return -EPERM;
-
 	if (newflags == oldflags) {
 		*pprev = vma;
 		return 0;
 	}
 
+	if (!can_modify_vma_mprotect(vma, newflags))
+		return -EPERM;
 	/*
 	 * Do PROT_NONE PFN permission checks here when we can still
 	 * bail out without undoing a lot of state. This is a rather
