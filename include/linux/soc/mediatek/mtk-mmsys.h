@@ -84,6 +84,12 @@ enum mtk_ddp_comp_id {
 	DDP_COMPONENT_ID_MAX,
 };
 
+enum mtk_isp_ctrl {
+	ISP_CTRL_CAM1,
+	ISP_CTRL_CAM2,
+	ISP_CTRL_MAX
+};
+
 void mtk_mmsys_ddp_connect(struct device *dev,
 			   enum mtk_ddp_comp_id cur,
 			   enum mtk_ddp_comp_id next);
@@ -111,5 +117,12 @@ void mtk_mmsys_vpp_rsz_merge_config(struct device *dev, u32 id, bool enable,
 
 void mtk_mmsys_vpp_rsz_dcm_config(struct device *dev, bool enable,
 				  struct cmdq_pkt *cmdq_pkt);
+
+void mtk_mmsys_mdp_isp_ctrl(struct device *dev, struct cmdq_pkt *cmdq_pkt,
+			    enum mtk_isp_ctrl idx);
+
+void mtk_mmsys_mdp_camin_ctrl(struct device *dev, struct cmdq_pkt *cmdq_pkt,
+			      enum mtk_isp_ctrl idx,
+			      u32 camin_w, u32 camin_h);
 
 #endif /* __MTK_MMSYS_H */

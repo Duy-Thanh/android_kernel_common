@@ -287,6 +287,8 @@ static void lru_gen_refault(struct folio *folio, void *shadow)
 	struct lru_gen_folio *lrugen;
 	int type = folio_is_file_lru(folio);
 	int delta = folio_nr_pages(folio);
+	unsigned long opposite_min_seq;
+	unsigned long victim_seq;
 
 	rcu_read_lock();
 
@@ -294,12 +296,19 @@ static void lru_gen_refault(struct folio *folio, void *shadow)
 	if (lruvec != folio_lruvec(folio))
 		goto unlock;
 
+	lrugen = &lruvec->lrugen;
+
 	mod_lruvec_state(lruvec, WORKINGSET_REFAULT_BASE + type, delta);
+
+	opposite_min_seq = READ_ONCE(lrugen->min_seq[!type]);
+	hist = lru_hist_from_seq(opposite_min_seq);
+	victim_seq = READ_ONCE(lrugen->victim_seq[hist][!type]);
+
+	if ((token >> LRU_REFS_WIDTH) >= (victim_seq & (EVICTION_MASK >> LRU_REFS_WIDTH)))
+		atomic_long_add(delta, &lrugen->refaulted_victims[hist][!type]);
 
 	if (!recent)
 		goto unlock;
-
-	lrugen = &lruvec->lrugen;
 
 	hist = lru_hist_from_seq(READ_ONCE(lrugen->min_seq[type]));
 	/* see the comment in folio_lru_refs() */
