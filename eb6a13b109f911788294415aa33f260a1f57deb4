@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c859870_5fa03dc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-08T02:27:36Z",
+      "side": 1,
+      "message": "Please fix the checkpatch issues:\n```\nSummary:\n\nWARNING:COMMIT_LOG_USE_LINK: Unknown link reference \u0027cite:\u0027, use \u0027Link:\u0027 or \u0027Closes:\u0027 instead\n#10: \n--\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: guilongfu \u003cguilong.fu@transsion.com\u003e\u0027 !\u003d \u0027Signed-off-by: Guilong Fu \u003cguilong.fu@transsion.com\u003e\u0027\n\n\nSee /tmp/.tmp.checkpatch.log.iNwtJd for complete output.\nErrors were reported from checkpatch.pl.\n\nSummary:\n\nWARNING:COMMIT_LOG_USE_LINK: Unknown link reference \u0027cite:\u0027, use \u0027Link:\u0027 or \u0027Closes:\u0027 instead\n#10: \n--\nWARNING:COMMIT_LOG_LONG_LINE: Prefer a maximum 75 chars per line (possible unwrapped commit description?)\n#12: \n--\nERROR:GERRIT_CHANGE_ID: Remove Gerrit Change-Id\u0027s before submitting upstream\n#15: \n--\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: guilongfu \u003cguilong.fu@transsion.com\u003e\u0027 !\u003d \u0027Signed-off-by: Guilong Fu \u003cguilong.fu@transsion.com\u003e\u0027\n\n```",
+      "revId": "eb6a13b109f911788294415aa33f260a1f57deb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
