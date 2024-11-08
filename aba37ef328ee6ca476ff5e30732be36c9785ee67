@@ -87,6 +87,24 @@
       "parentUuid": "03b286d5_be4f1814",
       "revId": "aba37ef328ee6ca476ff5e30732be36c9785ee67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a2c656_7dd13fc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022258
+      },
+      "writtenOn": "2024-11-08T01:55:26Z",
+      "side": 1,
+      "message": "@saravanak@google.com can you please review the comments updated in the partner issue case.",
+      "parentUuid": "ac5d23b9_c08b1ad1",
+      "revId": "aba37ef328ee6ca476ff5e30732be36c9785ee67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
