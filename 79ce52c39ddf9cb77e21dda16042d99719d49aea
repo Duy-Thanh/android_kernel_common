@@ -16,6 +16,24 @@
       "message": "Please make sure that we\u0027re tracking this for android16 too!",
       "revId": "79ce52c39ddf9cb77e21dda16042d99719d49aea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "536b45ee_4bdd6c4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-11-08T15:52:36Z",
+      "side": 1,
+      "message": "Tagged the CL with the hypervisor bringup meta ticket and stored the information into our internal doc. Folded the fix in the for-upstream/pkvm-allocator in \"KVM: arm64: Add a heap allocator for the pKVM hyp \"",
+      "parentUuid": "1986d274_f3c055da",
+      "revId": "79ce52c39ddf9cb77e21dda16042d99719d49aea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
