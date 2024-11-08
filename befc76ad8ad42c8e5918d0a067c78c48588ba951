@@ -16,6 +16,24 @@
       "message": "This is not a (clean) cherry-pick.\n\nIt is adding more symbols than were adding in those initial symbol list.\n\nAlso:\n\n* it has bad syntax at the `kfree` line (inconsistent indentation)\n* it duplicates `sock_from_file`\n\nI will fix these issues.",
       "revId": "befc76ad8ad42c8e5918d0a067c78c48588ba951",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb38ec4a_f3a9b354",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-11-08T12:09:53Z",
+      "side": 1,
+      "message": "I have:\n\n* rewritten the commit message including removing the cherry-pick tags from the commit message \n* removed the duplicate symbol\n* fixed the indentation\n* ordered the symbols as the automated tooling (as `build_abi.sh --update` or the Kleaf equivalent) would do\n\nIf you are happy with this, that\u0027s great. If not, please upload a new patchset for review.",
+      "parentUuid": "82a989f1_529b91b1",
+      "revId": "befc76ad8ad42c8e5918d0a067c78c48588ba951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
