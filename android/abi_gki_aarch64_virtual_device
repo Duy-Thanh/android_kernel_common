@@ -303,8 +303,11 @@
   param_ops_uint
   passthru_features_check
   pci_bus_type
+  pci_iomap_range
   pci_release_region
+  pci_release_selected_regions
   pci_request_region
+  pci_request_selected_regions
   __per_cpu_offset
   perf_trace_buf_alloc
   perf_trace_run_bpf_submit
@@ -692,7 +695,7 @@
   memremap
   memunmap
   pci_disable_device
-  pci_enable_device
+  pci_iomap_range
   pci_read_config_byte
   __pci_register_driver
   pci_unregister_driver
