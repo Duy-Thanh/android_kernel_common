@@ -951,7 +951,14 @@ static void z_erofs_pcluster_end(struct z_erofs_decompress_frontend *fe)
 static int z_erofs_read_fragment(struct super_block *sb, struct page *page,
 			unsigned int cur, unsigned int end, erofs_off_t pos)
 {
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	struct inode *packed_inode = EROFS_SB(sb)->packed_inode;
+||||||| BASE
+	struct inode *packed_inode = EROFS_I_SB(inode)->packed_inode;
+=======
+	struct super_block *sb = inode->i_sb;
+	struct inode *packed_inode = EROFS_I_SB(inode)->packed_inode;
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 	struct erofs_buf buf = __EROFS_BUF_INITIALIZER;
 	unsigned int cnt;
 	u8 *src;
@@ -959,8 +966,18 @@ static int z_erofs_read_fragment(struct super_block *sb, struct page *page,
 	if (!packed_inode)
 		return -EFSCORRUPTED;
 
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	for (; cur < end; cur += cnt, pos += cnt) {
 		cnt = min_t(unsigned int, end - cur,
+||||||| BASE
+	pos += EROFS_I(inode)->z_fragmentoff;
+	for (i = 0; i < len; i += cnt) {
+		cnt = min_t(unsigned int, len - i,
+=======
+	pos += EROFS_I(inode)->z_fragmentoff;
+	for (i = 0; i < len; i += cnt) {
+		cnt = min_t(unsigned int, len - i,
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 			    sb->s_blocksize - erofs_blkoff(sb, pos));
 		src = erofs_bread(&buf, packed_inode,
 				  erofs_blknr(sb, pos), EROFS_KMAP);
@@ -968,7 +985,21 @@ static int z_erofs_read_fragment(struct super_block *sb, struct page *page,
 			erofs_put_metabuf(&buf);
 			return PTR_ERR(src);
 		}
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 		memcpy_to_page(page, cur, src + erofs_blkoff(sb, pos), cnt);
+||||||| BASE
+
+		dst = kmap_local_page(page);
+		memcpy(dst + pageofs + i, src + erofs_blkoff(pos), cnt);
+		kunmap_local(dst);
+		pos += cnt;
+=======
+
+		dst = kmap_local_page(page);
+		memcpy(dst + pageofs + i, src + erofs_blkoff(sb, pos), cnt);
+		kunmap_local(dst);
+		pos += cnt;
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 	}
 	erofs_put_metabuf(&buf);
 	return 0;
@@ -1013,10 +1044,27 @@ repeat:
 	if (map->m_flags & EROFS_MAP_FRAGMENT) {
 		erofs_off_t fpos = offset + cur - map->m_la;
 
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 		len = min_t(unsigned int, map->m_llen - fpos, end - cur);
 		err = z_erofs_read_fragment(inode->i_sb, page, cur, cur + len,
 				EROFS_I(inode)->z_fragmentoff + fpos);
 		if (err)
+||||||| BASE
+		mp = erofs_read_metabuf(&fe->map.buf, inode->i_sb,
+					erofs_blknr(map->m_pa), EROFS_NO_KMAP);
+		if (IS_ERR(mp)) {
+			err = PTR_ERR(mp);
+			erofs_err(inode->i_sb,
+				  "failed to get inline page, err %d", err);
+=======
+		mp = erofs_read_metabuf(&fe->map.buf, inode->i_sb,
+					erofs_blknr(inode->i_sb, map->m_pa),
+					EROFS_NO_KMAP);
+		if (IS_ERR(mp)) {
+			err = PTR_ERR(mp);
+			erofs_err(inode->i_sb,
+				  "failed to get inline page, err %d", err);
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 			goto out;
 		tight = false;
 		goto next_part;
@@ -1684,8 +1732,18 @@ static void z_erofs_submit_queue(struct z_erofs_decompress_frontend *f,
 		};
 		(void)erofs_map_dev(sb, &mdev);
 
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 		cur = mdev.m_pa;
 		end = cur + pcl->pclustersize;
+||||||| BASE
+		cur = erofs_blknr(mdev.m_pa);
+		end = cur + pcl->pclusterpages;
+
+=======
+		cur = erofs_blknr(sb, mdev.m_pa);
+		end = cur + pcl->pclusterpages;
+
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 		do {
 			z_erofs_fill_bio_vec(&bvec, f, pcl, i++, mc);
 			if (!bvec.bv_page)
@@ -1711,8 +1769,22 @@ submit_bio_retry:
 			if (!bio) {
 				bio = bio_alloc(mdev.m_bdev, BIO_MAX_VECS,
 						REQ_OP_READ, GFP_NOIO);
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 				bio->bi_end_io = z_erofs_submissionqueue_endio;
 				bio->bi_iter.bi_sector = cur >> 9;
+||||||| BASE
+				bio->bi_end_io = z_erofs_decompressqueue_endio;
+
+				last_bdev = mdev.m_bdev;
+				bio->bi_iter.bi_sector = (sector_t)cur <<
+					LOG_SECTORS_PER_BLOCK;
+=======
+				bio->bi_end_io = z_erofs_decompressqueue_endio;
+
+				last_bdev = mdev.m_bdev;
+				bio->bi_iter.bi_sector = (sector_t)cur <<
+					(sb->s_blocksize_bits - 9);
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 				bio->bi_private = q[JQ_SUBMIT];
 				if (readahead)
 					bio->bi_opf |= REQ_RAHEAD;

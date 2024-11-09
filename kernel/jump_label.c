@@ -134,19 +134,41 @@ void static_key_slow_inc_cpuslocked(struct static_key *key)
 		if (likely(atomic_try_cmpxchg(&key->enabled, &v, v + 1)))
 			return;
 
-	jump_label_lock();
-	if (atomic_read(&key->enabled) == 0) {
-		atomic_set(&key->enabled, -1);
+	guard(mutex)(&jump_label_mutex);
+	/* Try to mark it as 'enabling in progress. */
+	if (!atomic_cmpxchg(&key->enabled, 0, -1)) {
 		jump_label_update(key);
 		/*
-		 * Ensure that if the above cmpxchg loop observes our positive
-		 * value, it must also observe all the text changes.
+		 * Ensure that when static_key_fast_inc_not_disabled() or
+		 * static_key_dec_not_one() observe the positive value,
+		 * they must also observe all the text changes.
 		 */
 		atomic_set_release(&key->enabled, 1);
 	} else {
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 		atomic_inc(&key->enabled);
+||||||| BASE
+		if (WARN_ON_ONCE(!static_key_fast_inc_not_disabled(key))) {
+			jump_label_unlock();
+			return false;
+		}
+=======
+		/*
+		 * While holding the mutex this should never observe
+		 * anything else than a value >= 1 and succeed
+		 */
+		if (WARN_ON_ONCE(!static_key_fast_inc_not_disabled(key)))
+			return false;
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 	}
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	jump_label_unlock();
+||||||| BASE
+	jump_label_unlock();
+	return true;
+=======
+	return true;
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 }
 
 void static_key_slow_inc(struct static_key *key)
@@ -213,7 +235,7 @@ void static_key_disable(struct static_key *key)
 }
 EXPORT_SYMBOL_GPL(static_key_disable);
 
-static bool static_key_slow_try_dec(struct static_key *key)
+static bool static_key_dec_not_one(struct static_key *key)
 {
 	int val;
 
@@ -228,21 +250,85 @@ static bool static_key_slow_try_dec(struct static_key *key)
 	 * returns is unbalanced, because all other static_key_slow_inc()
 	 * instances block while the update is in progress.
 	 */
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	WARN(val < 0, "jump label: negative count!\n");
+||||||| BASE
+	v = atomic_read(&key->enabled);
+	do {
+		/*
+		 * Warn about the '-1' case though; since that means a
+		 * decrement is concurrent with a first (0->1) increment. IOW
+		 * people are trying to disable something that wasn't yet fully
+		 * enabled. This suggests an ordering problem on the user side.
+		 */
+		WARN_ON_ONCE(v < 0);
+		if (v <= 1)
+			return false;
+	} while (!likely(atomic_try_cmpxchg(&key->enabled, &v, v - 1)));
+
+=======
+	v = atomic_read(&key->enabled);
+	do {
+		/*
+		 * Warn about the '-1' case though; since that means a
+		 * decrement is concurrent with a first (0->1) increment. IOW
+		 * people are trying to disable something that wasn't yet fully
+		 * enabled. This suggests an ordering problem on the user side.
+		 */
+		WARN_ON_ONCE(v < 0);
+
+		/*
+		 * Warn about underflow, and lie about success in an attempt to
+		 * not make things worse.
+		 */
+		if (WARN_ON_ONCE(v == 0))
+			return true;
+
+		if (v <= 1)
+			return false;
+	} while (!likely(atomic_try_cmpxchg(&key->enabled, &v, v - 1)));
+
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 	return true;
 }
 
 static void __static_key_slow_dec_cpuslocked(struct static_key *key)
 {
 	lockdep_assert_cpus_held();
+	int val;
 
-	if (static_key_slow_try_dec(key))
+	if (static_key_dec_not_one(key))
 		return;
 
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	jump_label_lock();
+||||||| BASE
+	guard(mutex)(&jump_label_mutex);
+=======
+	guard(mutex)(&jump_label_mutex);
+	val = atomic_read(&key->enabled);
+	/*
+	 * It should be impossible to observe -1 with jump_label_mutex held,
+	 * see static_key_slow_inc_cpuslocked().
+	 */
+	if (WARN_ON_ONCE(val == -1))
+		return;
+	/*
+	 * Cannot already be 0, something went sideways.
+	 */
+	if (WARN_ON_ONCE(val == 0))
+		return;
+
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 	if (atomic_dec_and_test(&key->enabled))
 		jump_label_update(key);
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	jump_label_unlock();
+||||||| BASE
+	else
+		WARN_ON_ONCE(!static_key_slow_try_dec(key));
+=======
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 }
 
 static void __static_key_slow_dec(struct static_key *key)
@@ -279,7 +365,7 @@ void __static_key_slow_dec_deferred(struct static_key *key,
 {
 	STATIC_KEY_CHECK_USE(key);
 
-	if (static_key_slow_try_dec(key))
+	if (static_key_dec_not_one(key))
 		return;
 
 	schedule_delayed_work(work, timeout);

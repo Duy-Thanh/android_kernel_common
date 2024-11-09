@@ -212,12 +212,29 @@ static int erofs_fill_symlink(struct inode *inode, void *kaddr,
 			      unsigned int m_pofs)
 {
 	struct erofs_inode *vi = EROFS_I(inode);
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	unsigned int bsz = i_blocksize(inode);
+||||||| BASE
+=======
+	loff_t off;
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 	char *lnk;
 
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	/* if it cannot be handled with fast symlink scheme */
 	if (vi->datalayout != EROFS_INODE_FLAT_INLINE ||
 	    inode->i_size >= bsz || inode->i_size < 0) {
+||||||| BASE
+	/* if it cannot be handled with fast symlink scheme */
+	if (vi->datalayout != EROFS_INODE_FLAT_INLINE ||
+	    inode->i_size >= EROFS_BLKSIZ || inode->i_size < 0) {
+=======
+	m_pofs += vi->xattr_isize;
+	/* check if it cannot be handled with fast symlink scheme */
+	if (vi->datalayout != EROFS_INODE_FLAT_INLINE || inode->i_size < 0 ||
+	    check_add_overflow(m_pofs, inode->i_size, &off) ||
+	    off > i_blocksize(inode)) {
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 		inode->i_op = &erofs_symlink_iops;
 		return 0;
 	}
@@ -226,6 +243,7 @@ static int erofs_fill_symlink(struct inode *inode, void *kaddr,
 	if (!lnk)
 		return -ENOMEM;
 
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 	m_pofs += vi->xattr_isize;
 	/* inline symlink data shouldn't cross block boundary */
 	if (m_pofs + inode->i_size > bsz) {
@@ -236,6 +254,19 @@ static int erofs_fill_symlink(struct inode *inode, void *kaddr,
 		DBG_BUGON(1);
 		return -EFSCORRUPTED;
 	}
+||||||| BASE
+	m_pofs += vi->xattr_isize;
+	/* inline symlink data shouldn't cross block boundary */
+	if (m_pofs + inode->i_size > EROFS_BLKSIZ) {
+		kfree(lnk);
+		erofs_err(inode->i_sb,
+			  "inline data cross block boundary @ nid %llu",
+			  vi->nid);
+		DBG_BUGON(1);
+		return -EFSCORRUPTED;
+	}
+=======
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 	memcpy(lnk, kaddr + m_pofs, inode->i_size);
 	lnk[inode->i_size] = '\0';
 
@@ -291,10 +322,17 @@ static int erofs_fill_inode(struct inode *inode)
 	}
 
 	if (erofs_inode_is_data_compressed(vi->datalayout)) {
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
 		if (!erofs_is_fscache_mode(inode->i_sb)) {
 			DO_ONCE_LITE_IF(inode->i_sb->s_blocksize != PAGE_SIZE,
 				  erofs_info, inode->i_sb,
 				  "EXPERIMENTAL EROFS subpage compressed block support in use. Use at your own risk!");
+||||||| BASE
+		if (!erofs_is_fscache_mode(inode->i_sb))
+=======
+		if (!erofs_is_fscache_mode(inode->i_sb) &&
+		    inode->i_sb->s_blocksize_bits == PAGE_SHIFT)
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 			err = z_erofs_fill_inode(inode);
                 }
 		else

@@ -333,6 +333,14 @@ static int erofs_fscache_read_folio(struct file *file, struct folio *folio)
 	bool unlock;
 	int ret;
 
+<<<<<<< HEAD   (fe72cb Merge branch 'android14-6.1' into android14-6.1-lts)
+||||||| BASE
+	DBG_BUGON(folio_size(folio) != EROFS_BLKSIZ);
+
+=======
+	DBG_BUGON(folio_size(folio) != PAGE_SIZE);
+
+>>>>>>> BRANCH (54d90d Linux 6.1.113)
 	ret = erofs_fscache_data_read(folio_mapping(folio), folio_pos(folio),
 				      folio_size(folio), &unlock);
 	if (unlock) {
@@ -527,6 +535,7 @@ struct erofs_fscache *erofs_fscache_acquire_cookie(struct super_block *sb,
 		set_nlink(inode, 1);
 		inode->i_size = OFFSET_MAX;
 		inode->i_mapping->a_ops = &erofs_fscache_meta_aops;
+		inode->i_blkbits = EROFS_SB(sb)->blkszbits;
 		mapping_set_gfp_mask(inode->i_mapping, GFP_NOFS);
 		inode->i_blkbits = EROFS_SB(sb)->blkszbits;
 
