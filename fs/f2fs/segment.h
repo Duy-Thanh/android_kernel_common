@@ -695,7 +695,11 @@ enum {
 	F2FS_IPU_ASYNC,
 	F2FS_IPU_NOCACHE,
 	F2FS_IPU_HONOR_OPU_WRITE,
+<<<<<<< HEAD   (6cec6a Merge b7b7a8df41ef ("nfsd: return -EINVAL when namelen is 0")
 	F2FS_IPU_MAX,
+||||||| BASE
+=======
+>>>>>>> BRANCH (e8d64f f2fs: get rid of online repaire on corrupted directory)
 };
 
 static inline bool IS_F2FS_IPU_DISABLE(struct f2fs_sb_info *sbi)

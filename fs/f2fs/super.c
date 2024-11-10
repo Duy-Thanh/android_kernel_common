@@ -4171,11 +4171,20 @@ static void f2fs_tuning_parameters(struct f2fs_sb_info *sbi)
 	/* adjust parameters according to the volume size */
 	if (MAIN_SEGS(sbi) <= SMALL_VOLUME_SEGMENTS) {
 		if (f2fs_block_unit_discard(sbi))
+<<<<<<< HEAD   (6cec6a Merge b7b7a8df41ef ("nfsd: return -EINVAL when namelen is 0")
 			SM_I(sbi)->dcc_info->discard_granularity =
 						MIN_DISCARD_GRANULARITY;
 		if (!f2fs_lfs_mode(sbi))
 			SM_I(sbi)->ipu_policy = BIT(F2FS_IPU_FORCE) |
 						BIT(F2FS_IPU_HONOR_OPU_WRITE);
+||||||| BASE
+			sm_i->dcc_info->discard_granularity = 1;
+		sm_i->ipu_policy = 1 << F2FS_IPU_FORCE;
+=======
+			sm_i->dcc_info->discard_granularity = 1;
+		sm_i->ipu_policy = 1 << F2FS_IPU_FORCE |
+					1 << F2FS_IPU_HONOR_OPU_WRITE;
+>>>>>>> BRANCH (e8d64f f2fs: get rid of online repaire on corrupted directory)
 	}
 
 	sbi->readdir_ra = true;

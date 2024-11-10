@@ -2565,10 +2565,19 @@ static inline bool check_inplace_update_policy(struct inode *inode,
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 
+<<<<<<< HEAD   (6cec6a Merge b7b7a8df41ef ("nfsd: return -EINVAL when namelen is 0")
 	if (IS_F2FS_IPU_HONOR_OPU_WRITE(sbi) &&
 	    is_inode_flag_set(inode, FI_OPU_WRITE))
 		return false;
 	if (IS_F2FS_IPU_FORCE(sbi))
+||||||| BASE
+	if (policy & (0x1 << F2FS_IPU_FORCE))
+=======
+	if (policy & (0x1 << F2FS_IPU_HONOR_OPU_WRITE) &&
+			is_inode_flag_set(inode, FI_OPU_WRITE))
+		return false;
+	if (policy & (0x1 << F2FS_IPU_FORCE))
+>>>>>>> BRANCH (e8d64f f2fs: get rid of online repaire on corrupted directory)
 		return true;
 	if (IS_F2FS_IPU_SSR(sbi) && f2fs_need_SSR(sbi))
 		return true;
