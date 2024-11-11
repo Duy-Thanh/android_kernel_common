@@ -116,3 +116,10 @@ config USB_AUTOSUSPEND_DELAY
 	  The default value Linux has always had is 2 seconds.  Change
 	  this value if you want a different delay and cannot modify
 	  the command line or module parameter.
+
+config USB_NOTIFY_ENUM_FAIL
+	bool "Enable USB enumeration failure notification"
+	depends on USB
+	default y
+	help
+	  This option enables USB enumeration failure notification
