@@ -5373,6 +5373,29 @@ static int descriptors_changed(struct usb_device *udev,
 	return changed;
 }
 
+#ifdef CONFIG_USB_NOTIFY_ENUM_FAIL
+static void unrecognized_usb_device_notify(struct usb_port *port_dev)
+{
+	char *envp[] = { NULL, NULL };
+	struct device *hub_dev;
+
+
+	hub_dev = port_dev->dev.parent;
+
+	if (!hub_dev)
+		return;
+
+	envp[0] = kasprintf(GFP_KERNEL, "UNRECOGNIZED_USB_DEVICE_ON_PORT=%s",
+				kobject_name(&port_dev->dev.kobj));
+	if (!envp[0])
+		return;
+
+	kobject_uevent_env(&hub_dev->kobj, KOBJ_CHANGE, envp);
+
+	kfree(envp[0]);
+}
+#endif
+
 static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
 		u16 portchange)
 {
@@ -5600,9 +5623,13 @@ loop:
 	if (hub->hdev->parent ||
 			!hcd->driver->port_handed_over ||
 			!(hcd->driver->port_handed_over)(hcd, port1)) {
-		if (status != -ENOTCONN && status != -ENODEV)
+		if (status != -ENOTCONN && status != -ENODEV) {
 			dev_err(&port_dev->dev,
 					"unable to enumerate USB device\n");
+#ifdef CONFIG_USB_NOTIFY_ENUM_FAIL
+			unrecognized_usb_device_notify(port_dev);
+#endif
+                }
 	}
 
 done:
