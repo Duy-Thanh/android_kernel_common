@@ -6676,12 +6676,14 @@ void zone_pcp_disable(struct zone *zone)
 	__zone_set_pageset_high_and_batch(zone, 0, 1);
 	__drain_all_pages(zone, true);
 }
+EXPORT_SYMBOL(zone_pcp_disable);
 
 void zone_pcp_enable(struct zone *zone)
 {
 	__zone_set_pageset_high_and_batch(zone, zone->pageset_high, zone->pageset_batch);
 	mutex_unlock(&pcp_batch_high_lock);
 }
+EXPORT_SYMBOL(zone_pcp_enable);
 
 void zone_pcp_reset(struct zone *zone)
 {
