@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a5dd818_b42716a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-11T19:06:46Z",
+      "side": 1,
+      "message": "If this patch is in linux-next, then it should be FROMGIT (not FROMLIST). Please cite the patch in the maintainer tree (not linux-next). See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bda9af13864a2f6f7c373a2f165d61850cc9aa36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
