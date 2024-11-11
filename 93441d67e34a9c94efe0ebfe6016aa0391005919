@@ -88,6 +88,24 @@
       "parentUuid": "2204d657_9a35fa19",
       "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ada1a4_9b5261bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3732767
+      },
+      "writtenOn": "2024-11-11T10:11:47Z",
+      "side": 1,
+      "message": "We have uploaded the bug report, please check if it is reasonable.",
+      "parentUuid": "954af7a7_abb81f46",
+      "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
