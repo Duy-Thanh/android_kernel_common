@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eeac2f6_ea9682e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2024-11-12T11:17:58Z",
+      "side": 1,
+      "message": "Thanks for pointing it out. I added this information.",
+      "parentUuid": "fe030e58_c55bc29c",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 47
+      },
+      "revId": "4ec6a9c3f19d629a4f2e0df446a263003868a0f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "231bffa6_82a30cb1",
