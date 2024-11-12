@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a9ee0e_5f26473c",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2024-11-12T17:35:25Z",
+      "side": 1,
+      "message": "```\n#ifdef CONFIG_F2FS_UNFAIR_RWSEM\n    bool skip \u003d false;\n    _trace_android_rvh_f2fs_down_read();\n    if (skip)\n        return;\n    wait_event();\n#else\n    down_read();\n#endif\n```",
+      "range": {
+        "startLine": 2183,
+        "startChar": 0,
+        "endLine": 2193,
+        "endChar": 6
+      },
+      "revId": "9da5c9726db82623d4d49e83973a73f0b11237bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
