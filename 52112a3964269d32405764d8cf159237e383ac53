@@ -69,6 +69,24 @@
       "parentUuid": "a7f8a805_eb380ee9",
       "revId": "52112a3964269d32405764d8cf159237e383ac53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e16f5a_831f41e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-11-12T18:19:45Z",
+      "side": 1,
+      "message": "The other 15-6.6 branches have the mseal() patches only 07 is missing it. I pulled in those here for consistency",
+      "parentUuid": "2aaaedda_25e6e34d",
+      "revId": "52112a3964269d32405764d8cf159237e383ac53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
