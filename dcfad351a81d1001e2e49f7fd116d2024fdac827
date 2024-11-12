@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "000c6aa0_de4ea601",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-11-12T23:30:55Z",
+      "side": 1,
+      "message": "The failures blocking presubmit is an existing issue tracked in http://b/338329603",
+      "revId": "dcfad351a81d1001e2e49f7fd116d2024fdac827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
