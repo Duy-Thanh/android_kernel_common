@@ -2970,3 +2970,42 @@ pkg_zip(
 exports_files([
     "Makefile",
 ])
+
+ddk_module(
+    name = "mtk_t7xx",
+    srcs = [
+        "drivers/net/wwan/t7xx/t7xx_cldma.c",
+        "drivers/net/wwan/t7xx/t7xx_cldma.h",
+        "drivers/net/wwan/t7xx/t7xx_dpmaif.c",
+        "drivers/net/wwan/t7xx/t7xx_dpmaif.h",
+        "drivers/net/wwan/t7xx/t7xx_hif_cldma.c",
+        "drivers/net/wwan/t7xx/t7xx_hif_cldma.h",
+        "drivers/net/wwan/t7xx/t7xx_hif_dpmaif.c",
+        "drivers/net/wwan/t7xx/t7xx_hif_dpmaif.h",
+        "drivers/net/wwan/t7xx/t7xx_hif_dpmaif_rx.c",
+        "drivers/net/wwan/t7xx/t7xx_hif_dpmaif_rx.h",
+        "drivers/net/wwan/t7xx/t7xx_hif_dpmaif_tx.c",
+        "drivers/net/wwan/t7xx/t7xx_hif_dpmaif_tx.h",
+        "drivers/net/wwan/t7xx/t7xx_mhccif.c",
+        "drivers/net/wwan/t7xx/t7xx_mhccif.h",
+        "drivers/net/wwan/t7xx/t7xx_modem_ops.c",
+        "drivers/net/wwan/t7xx/t7xx_modem_ops.h",
+        "drivers/net/wwan/t7xx/t7xx_netdev.c",
+        "drivers/net/wwan/t7xx/t7xx_netdev.h",
+        "drivers/net/wwan/t7xx/t7xx_pci.c",
+        "drivers/net/wwan/t7xx/t7xx_pci.h",
+        "drivers/net/wwan/t7xx/t7xx_pcie_mac.c",
+        "drivers/net/wwan/t7xx/t7xx_pcie_mac.h",
+        "drivers/net/wwan/t7xx/t7xx_port_ctrl_msg.c",
+        "drivers/net/wwan/t7xx/t7xx_port_proxy.c",
+        "drivers/net/wwan/t7xx/t7xx_port_proxy.h",
+        "drivers/net/wwan/t7xx/t7xx_port_wwan.c",
+        "drivers/net/wwan/t7xx/t7xx_state_monitor.c",
+        "drivers/net/wwan/t7xx/t7xx_state_monitor.h",
+        # included header-only files
+        "drivers/net/wwan/t7xx/t7xx_port.h",
+        "drivers/net/wwan/t7xx/t7xx_reg.h",
+    ],
+    out = "drivers/net/wwan/t7xx/mtk_t7xx.ko",
+    kernel_build = "//private/google-modules/linux/brya:brya_device_x86_64",
+)
