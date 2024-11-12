@@ -180,7 +180,12 @@
 #define DWC3_OEVTEN		0xcc0C
 #define DWC3_OSTS		0xcc10
 
-#define DWC3_LLUCTL		0xd024
+#define DWC3_LLUCTL		0xd024/* Original definition for ABI compatibility */
+
+/* VDWC3_LLUCTL is defined to maintain ABI compatibility for Android
+ * with port-specific handing.
+ */
+#define VDWC3_LLUCTL(n)		(DWC3_LLUCTL + ((n) * 0x80))
 
 /* Bit fields */
 

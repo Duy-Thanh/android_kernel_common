@@ -1427,6 +1427,18 @@ static int dwc3_core_init(struct dwc3 *dwc)
 		reg = dwc3_readl(dwc->regs, DWC3_LLUCTL);
 		reg |= DWC3_LLUCTL_FORCE_GEN1;
 		dwc3_writel(dwc->regs, DWC3_LLUCTL, reg);
+
+		/*
+		 * VDWC3_LLUCTL is used to maintain ABI compatibility for Android.
+		 * This ensures that existing code using DWC3_LLUCTL remains functional
+		 * while allowing port-specific LLUCTL handling.
+		 */
+		int i;
+		for (i = 1; i < vdwc->num_usb3_ports; i++) {
+			reg = dwc3_readl(dwc->regs, VDWC3_LLUCTL(i));
+			reg |= DWC3_LLUCTL_FORCE_GEN1;
+			dwc3_writel(dwc->regs, VDWC3_LLUCTL(i), reg);
+		}
 	}
 
 	return 0;
