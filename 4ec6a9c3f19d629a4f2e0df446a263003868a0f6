@@ -39,6 +39,24 @@
       "message": "I event don\u0027t understand why we needed this vendor hook. https://r.android.com/3283164\n\nWhy couldn\u0027t they fix that by using CONFIG_F2FS_UNFAIR_RWSEM, which was supposed to address the exact same issue?\n\nIf there\u0027s any other reason, can we remove this vendor hook?",
       "revId": "4ec6a9c3f19d629a4f2e0df446a263003868a0f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55143845_b955ad58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2024-11-12T11:13:04Z",
+      "side": 1,
+      "message": "I have no objections to removing this vendor hook - I didn\u0027t author it, nor took part in its creation. I just uploaded this fix as the branch failed to build on x86 targets with compilation error.",
+      "parentUuid": "231bffa6_82a30cb1",
+      "revId": "4ec6a9c3f19d629a4f2e0df446a263003868a0f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
