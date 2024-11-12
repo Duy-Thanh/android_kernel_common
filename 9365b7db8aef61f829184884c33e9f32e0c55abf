@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87eddd31_ef9c8d32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-11-12T18:18:12Z",
+      "side": 1,
+      "message": "Bypass Lint: Chromeos Missing patches bot originally applied this change no 15-6.6 branch",
+      "revId": "9365b7db8aef61f829184884c33e9f32e0c55abf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
