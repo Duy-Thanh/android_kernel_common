@@ -124,6 +124,24 @@
       "parentUuid": "49ada1a4_9b5261bc",
       "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea08b083_6ddb806b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3704047
+      },
+      "writtenOn": "2024-11-12T03:11:21Z",
+      "side": 1,
+      "message": "We have resubmitted the relevant patches, including:\nIc4e9019c943d1cb7037c6995c5585081e9b5d3d3\nI5c6bbb3016181bd8b8fbe207a6a9e7582a1208c5\nIa7b0db042ff6d267cdf2cc1ccea69a489b1a6fcd\nIc596c3791ac7900b89ea85c37bcab435691e364a\nI230d0058f9fbab3ba5918a5e606bf9cfa7460edb\nPlease review them. Thanks.",
+      "parentUuid": "3884164e_2708bd77",
+      "revId": "93441d67e34a9c94efe0ebfe6016aa0391005919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
