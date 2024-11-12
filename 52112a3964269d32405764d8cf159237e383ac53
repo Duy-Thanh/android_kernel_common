@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/378595499",
       "revId": "52112a3964269d32405764d8cf159237e383ac53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c19411b2_497ccb1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-11-12T11:16:39Z",
+      "side": 1,
+      "message": "This doesn\u0027t look like a clean cherry-pick. Please pick all of the dependencies as parents of this change.",
+      "revId": "52112a3964269d32405764d8cf159237e383ac53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
