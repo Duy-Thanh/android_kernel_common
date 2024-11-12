@@ -4141,4 +4141,16 @@ void prep_new_hpage(struct page *page, gfp_t gfp_flags, unsigned int alloc_flags
 void prep_compound_page(struct page *page, unsigned int order);
 #endif
 
+#ifdef CONFIG_64BIT
+/*
+ * return VM_SEALED if seal system mapping is enabled.
+ */
+unsigned long seal_system_mappings(void);
+#else
+static inline unsigned long seal_system_mappings(void)
+{
+	return 0;
+}
+#endif
+
 #endif /* _LINUX_MM_H */
