@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf34f40_09ffbc88",
+        "filename": "arch/arm64/kvm/hyp/nvhe/clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-12T22:32:59Z",
+      "side": 1,
+      "message": "I am less familiar with the KVM side, but it seems like you potentially might want some serialization against parallel updates occurring? If trace_clock_update() isn\u0027t particularly hot, a simple spin lock here could work.",
+      "revId": "1f5695a21e82bada4dad49f64c2db9e9acd52589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
