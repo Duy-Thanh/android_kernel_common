@@ -52,6 +52,24 @@
       "parentUuid": "f3fd32b2_ce56ef39",
       "revId": "1f5695a21e82bada4dad49f64c2db9e9acd52589",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e055ac2_59606126",
+        "filename": "arch/arm64/kvm/hyp/nvhe/clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-13T19:29:30Z",
+      "side": 1,
+      "message": "\u003e  It looks like you raised this on list when the patch was originally posted\n\nHa! Apologies, I\u0027m very forgetful! \n\n\u003e I believe that trace_clock_update is already serialised at its caller\n\nYeah, I mostly just want to see it explicitly called out, since code changes over time, and the serialization is not immediately obvious. But not a blocker to me here.",
+      "parentUuid": "864b09d7_c1a917f3",
+      "revId": "1f5695a21e82bada4dad49f64c2db9e9acd52589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
