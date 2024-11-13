@@ -19,6 +19,7 @@
 #include <linux/reboot.h>
 #include <linux/slab.h>
 #include <linux/suspend.h>
+#include <trace/events/power.h>
 
 #include <uapi/linux/psci.h>
 
@@ -487,7 +488,9 @@ int psci_cpu_suspend_enter(u32 state)
 
 		ct_cpuidle_enter();
 		arm_cpuidle_save_irq_context(&context);
+		trace_cpu_idle(state, smp_processor_id());
 		ret = psci_ops.cpu_suspend(state, 0);
+		trace_cpu_idle(PWR_EVENT_EXIT, smp_processor_id());
 		arm_cpuidle_restore_irq_context(&context);
 		ct_cpuidle_exit();
 	} else {
@@ -496,9 +499,9 @@ int psci_cpu_suspend_enter(u32 state)
 		 */
 		if (!IS_ENABLED(CONFIG_ARM64))
 			ct_cpuidle_enter();
-
+		trace_cpu_idle(state, smp_processor_id());
 		ret = cpu_suspend(state, psci_suspend_finisher);
-
+		trace_cpu_idle(PWR_EVENT_EXIT, smp_processor_id());
 		if (!IS_ENABLED(CONFIG_ARM64))
 			ct_cpuidle_exit();
 	}
