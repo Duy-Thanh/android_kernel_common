@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65a33ca7_248dc968",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-11-13T22:15:22Z",
+      "side": 1,
+      "message": "Is this a conservative approach or would split dwarf never be supported?",
+      "range": {
+        "startLine": 175,
+        "startChar": 46,
+        "endLine": 175,
+        "endChar": 51
+      },
+      "revId": "090f8a9148fb9deb91fd801716199f992bcbbacb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
