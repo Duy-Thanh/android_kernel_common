@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a256f8_f8ed4974",
+        "filename": "kernel/sched/syscalls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1414,
+      "author": {
+        "id": 1902100
+      },
+      "writtenOn": "2024-11-13T10:14:42Z",
+      "side": 1,
+      "message": "https://keystone-qcom-review.googlesource.com/c/kernel/common/+/2044286\nhttps://lore.kernel.org/all/20240407084319.1462211-2-mingo@kernel.org/",
+      "revId": "3a9552f264e9afa7194ca79629f20614c3cd882f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
