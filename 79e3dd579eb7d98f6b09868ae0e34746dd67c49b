@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f8b217_d0d13b95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-13T23:10:26Z",
+      "side": 1,
+      "message": "Let\u0027s not revert reverts. It makes the history needlessly confusing for things like git blame.  Instead, include the commit message rationale for the original change, and explain the patch is re-applying the original change.",
+      "revId": "79e3dd579eb7d98f6b09868ae0e34746dd67c49b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
