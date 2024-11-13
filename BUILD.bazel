@@ -19,6 +19,7 @@ load(
     "checkpatch",
     "ddk_headers",
     "ddk_headers_archive",
+    "ddk_module",
     "initramfs",
     "kernel_build",
     "kernel_compile_commands",
@@ -2970,3 +2971,26 @@ pkg_zip(
 exports_files([
     "Makefile",
 ])
+
+ddk_module(
+    name = "tpm",
+    srcs = [
+        "drivers/char/tpm/eventlog/common.c",
+        "drivers/char/tpm/eventlog/common.h",
+        "drivers/char/tpm/eventlog/tpm1.c",
+        "drivers/char/tpm/eventlog/tpm2.c",
+        "drivers/char/tpm/tpm-chip.c",
+        "drivers/char/tpm/tpm-dev-common.c",
+        "drivers/char/tpm/tpm-dev.c",
+        "drivers/char/tpm/tpm-dev.h",
+        "drivers/char/tpm/tpm-interface.c",
+        "drivers/char/tpm/tpm-sysfs.c",
+        "drivers/char/tpm/tpm.h",
+        "drivers/char/tpm/tpm1-cmd.c",
+        "drivers/char/tpm/tpm2-cmd.c",
+        "drivers/char/tpm/tpm2-space.c",
+        "drivers/char/tpm/tpmrm-dev.c",
+    ],
+    out = "drivers/char/tpm/tpm.ko",
+    kernel_build = "//private/google-modules/linux/brya:brya_device_x86_64",
+)
