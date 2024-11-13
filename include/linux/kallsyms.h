@@ -72,6 +72,18 @@ static inline void *dereference_symbol_descriptor(void *ptr)
 }
 
 #ifdef CONFIG_KALLSYMS
+<<<<<<< HEAD   (da5751 Revert "device property: Add const qualifier to device_get_m)
+||||||| BASE
+				      unsigned long),
+			    void *data);
+
+#ifdef CONFIG_KALLSYMS
+=======
+int kallsyms_on_each_symbol(int (*fn)(void *, const char *, struct module *,
+				      unsigned long),
+			    void *data);
+
+>>>>>>> BRANCH (a7564b Revert "usb: yurex: Replace snprintf() with the safer scnpri)
 /* Lookup the address for a symbol. Returns 0 if not found. */
 unsigned long kallsyms_lookup_name(const char *name);
 
@@ -164,6 +176,11 @@ static inline bool kallsyms_show_value(const struct cred *cred)
 	return false;
 }
 
+static inline int kallsyms_on_each_symbol(int (*fn)(void *, const char *, struct module *,
+					  unsigned long), void *data)
+{
+	return -EOPNOTSUPP;
+}
 #endif /*CONFIG_KALLSYMS*/
 
 static inline void print_ip_sym(const char *loglvl, unsigned long ip)

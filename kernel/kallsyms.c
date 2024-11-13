@@ -200,6 +200,19 @@ unsigned long kallsyms_lookup_name(const char *name)
 	return module_kallsyms_lookup_name(name);
 }
 
+<<<<<<< HEAD   (da5751 Revert "device property: Add const qualifier to device_get_m)
+||||||| BASE
+#ifdef CONFIG_LIVEPATCH
+/*
+ * Iterate over all symbols in vmlinux.  For symbols from modules use
+ * module_kallsyms_on_each_symbol instead.
+ */
+=======
+/*
+ * Iterate over all symbols in vmlinux.  For symbols from modules use
+ * module_kallsyms_on_each_symbol instead.
+ */
+>>>>>>> BRANCH (a7564b Revert "usb: yurex: Replace snprintf() with the safer scnpri)
 int kallsyms_on_each_symbol(int (*fn)(void *, const char *, struct module *,
 				      unsigned long),
 			    void *data)

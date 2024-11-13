@@ -636,6 +636,20 @@ nfsd_file_cache_init(void)
 	if (nfsd_file_hashtbl)
 		return 0;
 
+<<<<<<< HEAD   (da5751 Revert "device property: Add const qualifier to device_get_m)
+||||||| BASE
+	ret = rhltable_init(&nfsd_file_rhltable, &nfsd_file_rhash_params);
+	if (ret)
+		return ret;
+
+	ret = -ENOMEM;
+=======
+	ret = rhltable_init(&nfsd_file_rhltable, &nfsd_file_rhash_params);
+	if (ret)
+		goto out;
+
+	ret = -ENOMEM;
+>>>>>>> BRANCH (a7564b Revert "usb: yurex: Replace snprintf() with the safer scnpri)
 	nfsd_filecache_wq = alloc_workqueue("nfsd_filecache", 0, 0);
 	if (!nfsd_filecache_wq)
 		goto out;
@@ -695,6 +709,8 @@ nfsd_file_cache_init(void)
 
 	INIT_DELAYED_WORK(&nfsd_filecache_laundrette, nfsd_file_gc_worker);
 out:
+	if (ret)
+		clear_bit(NFSD_FILE_CACHE_UP, &nfsd_file_flags);
 	return ret;
 out_notifier:
 	lease_unregister_notifier(&nfsd_file_lease_notifier);
@@ -970,8 +986,22 @@ retry:
 	nf = nfsd_file_find_locked(inode, may_flags, hashval, net);
 	if (nf == NULL)
 		goto open_file;
+<<<<<<< HEAD   (da5751 Revert "device property: Add const qualifier to device_get_m)
 	spin_unlock(&nfsd_file_hashtbl[hashval].nfb_lock);
 	nfsd_file_slab_free(&new->nf_rcu);
+||||||| BASE
+
+	if (ret == -EEXIST)
+		goto retry;
+	trace_nfsd_file_insert_err(rqstp, inode, may_flags, ret);
+	status = nfserr_jukebox;
+	goto construction_err;
+=======
+
+	trace_nfsd_file_insert_err(rqstp, inode, may_flags, ret);
+	status = nfserr_jukebox;
+	goto construction_err;
+>>>>>>> BRANCH (a7564b Revert "usb: yurex: Replace snprintf() with the safer scnpri)
 
 wait_for_construction:
 	wait_on_bit(&nf->nf_flags, NFSD_FILE_PENDING, TASK_UNINTERRUPTIBLE);
@@ -982,8 +1012,15 @@ wait_for_construction:
 			status = nfserr_jukebox;
 			goto out;
 		}
+<<<<<<< HEAD   (da5751 Revert "device property: Add const qualifier to device_get_m)
 		retry = false;
 		nfsd_file_put_noref(nf);
+||||||| BASE
+		open_retry = false;
+=======
+		nfsd_file_put(nf);
+		open_retry = false;
+>>>>>>> BRANCH (a7564b Revert "usb: yurex: Replace snprintf() with the safer scnpri)
 		goto retry;
 	}
 
