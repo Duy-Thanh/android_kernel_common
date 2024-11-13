@@ -59,7 +59,7 @@ EXPORT_SYMBOL(scsi_bios_ptable);
  */
 bool scsi_partsize(struct block_device *bdev, sector_t capacity, int geom[3])
 {
-	int cyl, ext_cyl, end_head, end_cyl, end_sector;
+	unsigned int cyl, ext_cyl, end_head, end_cyl, end_sector;
 	unsigned int logical_end, physical_end, ext_physical_end;
 	struct msdos_partition *p, *largest = NULL;
 	void *buf;
@@ -70,7 +70,8 @@ bool scsi_partsize(struct block_device *bdev, sector_t capacity, int geom[3])
 		return false;
 
 	if (*(unsigned short *) (buf + 64) == 0xAA55) {
-		int largest_cyl = -1, i;
+		unsigned int largest_cyl;
+		int  i;
 
 		for (i = 0, p = buf; i < 4; i++, p++) {
 			if (!p->sys_ind)
@@ -80,7 +81,7 @@ bool scsi_partsize(struct block_device *bdev, sector_t capacity, int geom[3])
 			       i);
 #endif
 			cyl = p->cyl + ((p->sector & 0xc0) << 2);
-			if (cyl > largest_cyl) {
+			if ((largest == NULL) || (cyl > largest_cyl)) {
 				largest_cyl = cyl;
 				largest = p;
 			}
