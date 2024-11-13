@@ -34,6 +34,24 @@
       "parentUuid": "1bf34f40_09ffbc88",
       "revId": "1f5695a21e82bada4dad49f64c2db9e9acd52589",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "864b09d7_c1a917f3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2024-11-13T12:27:58Z",
+      "side": 1,
+      "message": "I took a closer look since Vincent\u0027s spinlock answer didn\u0027t convince me at all! I believe that trace_clock_update *is* already serialised at its caller, which unhelpfully is in a later patch in this series (aosp/3343946):\n1. That later patch hooks trace_clock_update() into a hypercall named __pkvm_update_clock_tracing. This is the sole caller of this function.\n2. The hypercall is called only from a periodic work item, __hyp_clock_work(). This periodically runs itself via workqueue, and thus is implicitly non-reentrant.",
+      "parentUuid": "f3fd32b2_ce56ef39",
+      "revId": "1f5695a21e82bada4dad49f64c2db9e9acd52589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
