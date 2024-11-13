@@ -314208,6 +314208,12 @@ function {
   parameter_id: 0x21003da7
 }
 function {
+  id: 0x91548c51
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3054f2d7
+  parameter_id: 0x3054f2d7
+}
+function {
   id: 0x9155593a
   return_type_id: 0x6720d32f
   parameter_id: 0x31b5a66f
@@ -399688,6 +399694,15 @@ elf_symbol {
   full_name: "serdev_device_write_wakeup"
 }
 elf_symbol {
+  id: 0x0746da0a
+  name: "serial8250_clear_and_reinit_fifos"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcb533d4d
+  type_id: 0x17abf19b
+  full_name: "serial8250_clear_and_reinit_fifos"
+}
+elf_symbol {
   id: 0x98b882af
   name: "serial8250_do_pm"
   is_defined: true
@@ -399695,6 +399710,24 @@ elf_symbol {
   crc: 0x15a6f758
   type_id: 0x11b2c04d
   full_name: "serial8250_do_pm"
+}
+elf_symbol {
+  id: 0x45ffec2b
+  name: "serial8250_do_set_divisor"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x726dc873
+  type_id: 0x11b3d658
+  full_name: "serial8250_do_set_divisor"
+}
+elf_symbol {
+  id: 0x5b9376b0
+  name: "serial8250_do_set_ldisc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x20ab23ea
+  type_id: 0x1043ff6b
+  full_name: "serial8250_do_set_ldisc"
 }
 elf_symbol {
   id: 0x2bb7ad6a
@@ -399722,6 +399755,42 @@ elf_symbol {
   crc: 0xece68f9d
   type_id: 0x9dad0630
   full_name: "serial8250_do_startup"
+}
+elf_symbol {
+  id: 0xec4fe037
+  name: "serial8250_em485_config"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x73907d61
+  type_id: 0x9d5ada98
+  full_name: "serial8250_em485_config"
+}
+elf_symbol {
+  id: 0xb90d3326
+  name: "serial8250_em485_start_tx"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x566a89b6
+  type_id: 0x17abf19b
+  full_name: "serial8250_em485_start_tx"
+}
+elf_symbol {
+  id: 0xb09b6acb
+  name: "serial8250_em485_stop_tx"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbb8bc3ff
+  type_id: 0x17abf19b
+  full_name: "serial8250_em485_stop_tx"
+}
+elf_symbol {
+  id: 0xcc28e994
+  name: "serial8250_em485_supported"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xf2ff4bc2
+  type_id: 0x33341885
+  full_name: "serial8250_em485_supported"
 }
 elf_symbol {
   id: 0x3e462ca5
@@ -399794,6 +399863,15 @@ elf_symbol {
   crc: 0xcefcd99a
   type_id: 0x09506558
   full_name: "serial8250_unregister_port"
+}
+elf_symbol {
+  id: 0xfa4a7632
+  name: "serial8250_update_uartclk"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x577d8145
+  type_id: 0x11a3a114
+  full_name: "serial8250_update_uartclk"
 }
 elf_symbol {
   id: 0x4e412a59
@@ -407709,6 +407787,15 @@ elf_symbol {
   crc: 0x5641485b
   type_id: 0x1d825cc4
   full_name: "tty_termios_encode_baud_rate"
+}
+elf_symbol {
+  id: 0xacb09a3e
+  name: "tty_termios_hw_change"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6c257ac0
+  type_id: 0x91548c51
+  full_name: "tty_termios_hw_change"
 }
 elf_symbol {
   id: 0xfd34f897
@@ -422460,10 +422547,17 @@ interface {
   symbol_id: 0x6e10178a
   symbol_id: 0x5d6a93ff
   symbol_id: 0x826ffe72
+  symbol_id: 0x0746da0a
   symbol_id: 0x98b882af
+  symbol_id: 0x45ffec2b
+  symbol_id: 0x5b9376b0
   symbol_id: 0x2bb7ad6a
   symbol_id: 0x4bb58367
   symbol_id: 0x63762e51
+  symbol_id: 0xec4fe037
+  symbol_id: 0xb90d3326
+  symbol_id: 0xb09b6acb
+  symbol_id: 0xcc28e994
   symbol_id: 0x3e462ca5
   symbol_id: 0x53281d0f
   symbol_id: 0x970aca32
@@ -422472,6 +422566,7 @@ interface {
   symbol_id: 0xf8889a4c
   symbol_id: 0x89ed643c
   symbol_id: 0x620f0859
+  symbol_id: 0xfa4a7632
   symbol_id: 0x4e412a59
   symbol_id: 0xaf2bd97c
   symbol_id: 0x5b1dd2cc
@@ -423352,6 +423447,7 @@ interface {
   symbol_id: 0x40ef0583
   symbol_id: 0x66974d1b
   symbol_id: 0x4cc18d95
+  symbol_id: 0xacb09a3e
   symbol_id: 0xfd34f897
   symbol_id: 0x6eee841a
   symbol_id: 0x0c2de3ab
