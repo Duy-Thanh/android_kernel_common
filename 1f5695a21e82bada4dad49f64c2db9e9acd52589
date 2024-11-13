@@ -16,6 +16,24 @@
       "message": "I am less familiar with the KVM side, but it seems like you potentially might want some serialization against parallel updates occurring? If trace_clock_update() isn\u0027t particularly hot, a simple spin lock here could work.",
       "revId": "1f5695a21e82bada4dad49f64c2db9e9acd52589",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3fd32b2_ce56ef39",
+        "filename": "arch/arm64/kvm/hyp/nvhe/clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2024-11-13T11:42:49Z",
+      "side": 1,
+      "message": "Thanks for taking a look, and your review. It looks like you raised this on list when the patch was originally posted, and Vincent thinks that this is protected by a spinlock. We\u0027d really like to get this into android16-6.12 now as part of our pKVM merge, and Vincent is OOO for the next few weeks. Would you be okay with that, and if there are later changes/improvements here, we can merge those into android16-6.12 as and when?",
+      "parentUuid": "1bf34f40_09ffbc88",
+      "revId": "1f5695a21e82bada4dad49f64c2db9e9acd52589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
