@@ -1877,6 +1877,7 @@ void hda_unregister_clients(struct snd_sof_dev *sdev)
 	hda_probes_unregister(sdev);
 }
 
+MODULE_SOFTDEP("pre: snd-hda-codec-hdmi");
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_IMPORT_NS(SND_SOC_SOF_PCI_DEV);
 MODULE_IMPORT_NS(SND_SOC_SOF_HDA_AUDIO_CODEC);
