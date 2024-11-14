@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9485317a_99615275",
+        "filename": "drivers/gpu/drm/drm_atomic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1377251
+      },
+      "writtenOn": "2024-11-14T20:07:38Z",
+      "side": 1,
+      "message": "Should this be min_requested_bpc?",
+      "range": {
+        "startLine": 474,
+        "startChar": 26,
+        "endLine": 474,
+        "endChar": 43
+      },
+      "revId": "f3c516fcc68d2d00f8dcb3e596c709aa7e5ee4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a3f9bc_441fe404",
+        "filename": "drivers/gpu/drm/drm_connector.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1394,
+      "author": {
+        "id": 1377251
+      },
+      "writtenOn": "2024-11-14T20:07:38Z",
+      "side": 1,
+      "message": "\"limit\" implies setting a maximum, which makes sense for `max bpc`. For `min bpc` should this be rephrased to clarify that this property ensures that bandwidth for a minumum bit depth will be reserved?",
+      "range": {
+        "startLine": 1394,
+        "startChar": 47,
+        "endLine": 1394,
+        "endChar": 52
+      },
+      "revId": "f3c516fcc68d2d00f8dcb3e596c709aa7e5ee4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d48e8ce1_9447b2a2",
+        "filename": "drivers/gpu/drm/i915/display/intel_dp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1377251
+      },
+      "writtenOn": "2024-11-14T20:07:38Z",
+      "side": 1,
+      "message": "min_bpc?",
+      "range": {
+        "startLine": 1108,
+        "startChar": 19,
+        "endLine": 1108,
+        "endChar": 26
+      },
+      "revId": "f3c516fcc68d2d00f8dcb3e596c709aa7e5ee4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
