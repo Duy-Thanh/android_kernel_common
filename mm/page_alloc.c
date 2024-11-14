@@ -277,6 +277,33 @@ static int __init early_init_on_free(char *buf)
 early_param("init_on_free", early_init_on_free);
 
 /*
+ * See the comment in __rmqueue() function. The purpose is to
+ * prevent CMA depleting. Some hardware, like modem or GPU, might
+ * require a direct access to a physical memory so if an allocation
+ * fails for them(no CMA pages) during a driver probing, such HW
+ * might stuck not being initialized, thus not functional.
+ *
+ * By default it is OFF.
+ */
+DEFINE_STATIC_KEY_FALSE(balance_cma_allocation);
+
+static int __init balance_cma_allocation_setup(char *str)
+{
+#ifdef CONFIG_CMA
+	static_branch_enable(&balance_cma_allocation);
+#else
+	pr_warn("CONFIG_CMA not set. Ignoring balance_cma_allocation option\n");
+#endif
+	return 1;
+}
+__setup("balance_cma_allocation", balance_cma_allocation_setup);
+
+static inline bool cma_balance_allocation(void)
+{
+	return static_key_enabled(&balance_cma_allocation);
+}
+
+/*
  * A cached value of the page's pageblock's migratetype, used when the page is
  * put on a pcplist. Used to avoid the pageblock migratetype lookup when
  * freeing from pcplists in most cases, at the cost of possibly becoming stale.
@@ -3148,36 +3175,6 @@ do_steal:
 
 }
 
-/*
- * Do the hard work of removing an element from the buddy allocator.
- * Call me with the zone->lock already held.
- */
-static __always_inline struct page *
-__rmqueue(struct zone *zone, unsigned int order, int migratetype,
-						unsigned int alloc_flags)
-{
-	struct page *page = NULL;
-
-	trace_android_vh_rmqueue_smallest_bypass(&page, zone, order, migratetype);
-	if (page)
-		return page;
-
-retry:
-	page = __rmqueue_smallest(zone, order, migratetype);
-
-	/*
-	 * let normal GFP_MOVABLE has chance to try MIGRATE_CMA
-	 */
-	if (unlikely(!page) && (migratetype == MIGRATE_MOVABLE))
-		trace_android_vh_rmqueue_cma_fallback(zone, order, &page);
-
-	if (unlikely(!page) && __rmqueue_fallback(zone, order, migratetype,
-						  alloc_flags))
-		goto retry;
-
-	return page;
-}
-
 #ifdef CONFIG_CMA
 static struct page *__rmqueue_cma(struct zone *zone, unsigned int order,
 				  int migratetype,
@@ -3201,6 +3198,63 @@ static inline struct page *__rmqueue_cma(struct zone *zone, unsigned int order,
 #endif
 
 /*
+ * Do the hard work of removing an element from the buddy allocator.
+ * Call me with the zone->lock already held.
+ */
+static __always_inline struct page *
+__rmqueue(struct zone *zone, unsigned int order, int migratetype,
+						unsigned int alloc_flags)
+{
+	struct page *page = NULL;
+
+	trace_android_vh_rmqueue_smallest_bypass(&page, zone, order, migratetype);
+	if (page)
+		return page;
+
+	if (IS_ENABLED(CONFIG_CMA)) {
+		if (is_migrate_cma(migratetype) ||
+			(migratetype == MIGRATE_MOVABLE && (alloc_flags & ALLOC_CMA))) {
+
+			if (cma_balance_allocation()) {
+				/*
+				 * Balance movable allocations between regular and CMA areas by
+				 * allocating from CMA when over half of the zone's free memory
+				 * is in the CMA area.
+				 */
+				if (zone_page_state(zone, NR_FREE_CMA_PAGES) >
+					zone_page_state(zone, NR_FREE_PAGES) / 2) {
+					page = __rmqueue_cma(zone, order, migratetype, alloc_flags);
+					if (page)
+						return page;
+				}
+			} else {
+				return __rmqueue_cma(zone, order, migratetype, alloc_flags);
+			}
+		}
+	}
+
+retry:
+	page = __rmqueue_smallest(zone, order, migratetype);
+
+	/*
+	 * let normal GFP_MOVABLE has chance to try MIGRATE_CMA
+	 */
+	if (unlikely(!page) && (migratetype == MIGRATE_MOVABLE))
+		trace_android_vh_rmqueue_cma_fallback(zone, order, &page);
+
+	if (unlikely(!page)) {
+		if (cma_balance_allocation() && alloc_flags & ALLOC_CMA)
+			page = __rmqueue_cma(zone, order, migratetype, alloc_flags);
+
+		if (!page && __rmqueue_fallback(zone, order, migratetype,
+						alloc_flags))
+			goto retry;
+	}
+
+	return page;
+}
+
+/*
  * Obtain a specified number of elements from the buddy allocator, all under
  * a single hold of the lock, for efficiency.  Add them to the supplied list.
  * Returns the number of new pages which were placed at *list.
@@ -3216,11 +3270,7 @@ static int rmqueue_bulk(struct zone *zone, unsigned int order,
 	for (i = 0; i < count; ++i) {
 		struct page *page;
 
-		if (is_migrate_cma(migratetype))
-			page = __rmqueue_cma(zone, order, migratetype,
-					     alloc_flags);
-		else
-			page = __rmqueue(zone, order, migratetype, alloc_flags);
+		page = __rmqueue(zone, order, migratetype, alloc_flags);
 
 		if (unlikely(page == NULL))
 			break;
@@ -3865,10 +3915,6 @@ struct page *rmqueue_buddy(struct zone *preferred_zone, struct zone *zone,
 		if (alloc_flags & ALLOC_HIGHATOMIC)
 			page = __rmqueue_smallest(zone, order, MIGRATE_HIGHATOMIC);
 		if (!page) {
-			if (alloc_flags & ALLOC_CMA && migratetype == MIGRATE_MOVABLE)
-				page = __rmqueue_cma(zone, order, migratetype,
-						     alloc_flags);
-			else
 				page = __rmqueue(zone, order, migratetype,
 						 alloc_flags);
 
@@ -3909,7 +3955,7 @@ struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
 
 	do {
 		/* First try to get CMA pages */
-		if (migratetype == MIGRATE_MOVABLE && alloc_flags & ALLOC_CMA)
+		if (!cma_balance_allocation() && migratetype == MIGRATE_MOVABLE && alloc_flags & ALLOC_CMA)
 			list = get_populated_pcp_list(zone, order, pcp, get_cma_migrate_type(),
 						      alloc_flags);
 		if (list == NULL) {
