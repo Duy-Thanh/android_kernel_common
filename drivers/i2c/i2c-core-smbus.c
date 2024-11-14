@@ -704,10 +704,22 @@ EXPORT_SYMBOL_GPL(i2c_new_smbus_alert_device);
 #if IS_ENABLED(CONFIG_I2C_SMBUS) && IS_ENABLED(CONFIG_OF)
 int of_i2c_setup_smbus_alert(struct i2c_adapter *adapter)
 {
+	struct device *parent = adapter->dev.parent;
 	int irq;
 
+<<<<<<< HEAD   (194623 Revert "net: Add l3mdev index to flow struct and avoid oif r)
 	irq = of_property_match_string(adapter->dev.of_node, "interrupt-names",
 				       "smbus_alert");
+||||||| BASE
+	irq = device_property_match_string(adapter->dev.parent, "interrupt-names",
+					   "smbus_alert");
+=======
+	/* Adapter instantiated without parent, skip the SMBus alert setup */
+	if (!parent)
+		return 0;
+
+	irq = device_property_match_string(parent, "interrupt-names", "smbus_alert");
+>>>>>>> BRANCH (7db54f i2c: smbus: Check for parent device before dereference)
 	if (irq == -EINVAL || irq == -ENODATA)
 		return 0;
 	else if (irq < 0)
