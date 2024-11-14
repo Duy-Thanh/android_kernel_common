@@ -402,6 +402,12 @@ struct kvm_vcpu {
 	 */
 	struct kvm_memory_slot *last_used_slot;
 	u64 last_used_slot_gen;
+
+	/*
+	 * Save the handle returned from the pkvm when init a shadow vcpu. This
+	 * will be used when teardown this shadow vcpu.
+	 */
+	s64 pkvm_shadow_vcpu_handle;
 };
 
 /*
@@ -828,6 +834,8 @@ struct kvm {
 #ifdef CONFIG_PARAVIRT_SCHED_KVM
 	bool pv_sched_enabled;
 #endif
+
+	struct kvm_protected_vm pkvm;
 };
 
 #define kvm_err(fmt, ...) \
@@ -1945,7 +1953,8 @@ struct _kvm_stats_desc {
 
 #define KVM_GENERIC_VM_STATS()						       \
 	STATS_DESC_COUNTER(VM_GENERIC, remote_tlb_flush),		       \
-	STATS_DESC_COUNTER(VM_GENERIC, remote_tlb_flush_requests)
+	STATS_DESC_COUNTER(VM_GENERIC, remote_tlb_flush_requests),	       \
+	STATS_DESC_COUNTER(VM_GENERIC, remote_tlb_flush_with_range)
 
 #define KVM_GENERIC_VCPU_STATS()					       \
 	STATS_DESC_COUNTER(VCPU_GENERIC, halt_successful_poll),		       \
@@ -2385,6 +2394,8 @@ static inline void kvm_account_pgtable_pages(void *virt, int nr)
 
 /* Max number of entries allowed for each kvm dirty ring */
 #define  KVM_DIRTY_RING_MAX_ENTRIES  65536
+
+int kvm_arch_add_device_to_pkvm(struct kvm *kvm, struct iommu_group *grp);
 
 #ifdef CONFIG_KVM_VIRT_SUSPEND_TIMING
 bool virt_suspend_time_enabled(struct kvm *kvm);
