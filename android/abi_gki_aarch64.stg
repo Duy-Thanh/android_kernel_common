@@ -319550,6 +319550,12 @@ function {
   parameter_id: 0x1bf16028
 }
 function {
+  id: 0x957b3cbb
+  return_type_id: 0x6720d32f
+  parameter_id: 0x21003da7
+  parameter_id: 0x2ef43f67
+}
+function {
   id: 0x957cc422
   return_type_id: 0x6720d32f
   parameter_id: 0x23f09c34
@@ -368378,6 +368384,15 @@ elf_symbol {
   crc: 0xaa301513
   type_id: 0x950581be
   full_name: "drm_atomic_add_affected_planes"
+}
+elf_symbol {
+  id: 0xe0cc985d
+  name: "drm_atomic_add_encoder_bridges"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x43791087
+  type_id: 0x957b3cbb
+  full_name: "drm_atomic_add_encoder_bridges"
 }
 elf_symbol {
   id: 0x27bb2715
@@ -419253,6 +419268,7 @@ interface {
   symbol_id: 0x588ab3fd
   symbol_id: 0x1389094c
   symbol_id: 0x098d4189
+  symbol_id: 0xe0cc985d
   symbol_id: 0x27bb2715
   symbol_id: 0xa7187ebf
   symbol_id: 0xff22568f
