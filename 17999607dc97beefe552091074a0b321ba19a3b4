@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f49d8845_88601b60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-11-14T09:37:07Z",
+      "side": 1,
+      "message": "Please remove \u0027ABI DIFFERENCES HAVE BEEN DETECTED\u0027 line from the commit message. Instead only list the changes.",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "17999607dc97beefe552091074a0b321ba19a3b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
