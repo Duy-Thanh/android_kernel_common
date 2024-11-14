@@ -87,6 +87,24 @@
       "parentUuid": "2aaaedda_25e6e34d",
       "revId": "52112a3964269d32405764d8cf159237e383ac53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "228f88d0_ebd45b3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3450567
+      },
+      "writtenOn": "2024-11-14T02:29:58Z",
+      "side": 1,
+      "message": "\u003e The other part of this change was pulled in from another resolution on this 2024-07 branch.\n\n\u003e https://r.android.com/c/kernel/common/+/3345340/2/include/linux/pgsize_migration_inline.h (See Line 44)\n\nThe correct CL should be: https://r.android.com/c/kernel/common/+/3316535/7/include/linux/pgsize_migration_inline.h (Line 44)\n\n\"ANDROID: 16K: Fix vm_flags conflicts from mseal\" changed 2 files.\n1. Changes in include/linux/pgsize_migration.h have been merged into 24-07 by the above CL (this part of code has been moved from pgsize_migration.h to pgsize_migration_inline.h by the above CL).\n2. Changes in include/linux/page_size_compat.h are waiting for review in this CL.\n\nSo, the above CL (https://r.android.com/c/kernel/common/+/3316535) is not a clean CP, the current CL is a fix for above CL. \n\nWithout this fix, a lot of bank app crashes were reported. So, we need this CL urgently.",
+      "parentUuid": "d8e16f5a_831f41e4",
+      "revId": "52112a3964269d32405764d8cf159237e383ac53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
