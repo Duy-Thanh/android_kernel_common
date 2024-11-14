@@ -579,6 +579,24 @@ static inline u8 vmx_get_rvi(void)
 #define KVM_OPTIONAL_VMX_TERTIARY_VM_EXEC_CONTROL			\
 	(TERTIARY_EXEC_IPI_VIRT)
 
+struct vmcs_config_setting {
+	u32 cpu_based_vm_exec_ctrl_req;
+	u32 cpu_based_vm_exec_ctrl_opt;
+	u32 secondary_vm_exec_ctrl_req;
+	u32 secondary_vm_exec_ctrl_opt;
+	u64 tertiary_vm_exec_ctrl_opt;
+	u32 pin_based_vm_exec_ctrl_req;
+	u32 pin_based_vm_exec_ctrl_opt;
+	u32 vmexit_ctrl_req;
+	u32 vmexit_ctrl_opt;
+	u32 vmentry_ctrl_req;
+	u32 vmentry_ctrl_opt;
+};
+
+int setup_vmcs_config_common(struct vmcs_config *vmcs_conf,
+				struct vmx_capability *vmx_cap,
+				struct vmcs_config_setting *setting);
+
 #define BUILD_CONTROLS_SHADOW(lname, uname, bits)						\
 static inline void lname##_controls_set(struct vcpu_vmx *vmx, u##bits val)			\
 {												\
@@ -755,5 +773,9 @@ static inline bool guest_cpuid_has_evmcs(struct kvm_vcpu *vcpu)
 	return vcpu->arch.hyperv_enabled &&
 	       to_vmx(vcpu)->nested.enlightened_vmcs_enabled;
 }
+
+#ifdef CONFIG_PKVM_INTEL
+int __init pkvm_init(void);
+#endif
 
 #endif /* __KVM_X86_VMX_H */
