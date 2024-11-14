@@ -636,6 +636,20 @@ nfsd_file_cache_init(void)
 	if (nfsd_file_hashtbl)
 		return 0;
 
+<<<<<<< HEAD   (08280f Merge de5a059e3665 ("RDMA/rxe: Fix seg fault in rxe_comp_que)
+||||||| BASE
+	ret = rhltable_init(&nfsd_file_rhltable, &nfsd_file_rhash_params);
+	if (ret)
+		return ret;
+
+	ret = -ENOMEM;
+=======
+	ret = rhltable_init(&nfsd_file_rhltable, &nfsd_file_rhash_params);
+	if (ret)
+		goto out;
+
+	ret = -ENOMEM;
+>>>>>>> BRANCH (a7564b Revert "usb: yurex: Replace snprintf() with the safer scnpri)
 	nfsd_filecache_wq = alloc_workqueue("nfsd_filecache", 0, 0);
 	if (!nfsd_filecache_wq)
 		goto out;
@@ -695,6 +709,8 @@ nfsd_file_cache_init(void)
 
 	INIT_DELAYED_WORK(&nfsd_filecache_laundrette, nfsd_file_gc_worker);
 out:
+	if (ret)
+		clear_bit(NFSD_FILE_CACHE_UP, &nfsd_file_flags);
 	return ret;
 out_notifier:
 	lease_unregister_notifier(&nfsd_file_lease_notifier);
