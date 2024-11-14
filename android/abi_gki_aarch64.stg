@@ -390261,6 +390261,15 @@ elf_symbol {
   full_name: "pm_wakeup_dev_event"
 }
 elf_symbol {
+  id: 0x914856be
+  name: "pm_wakeup_irq"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe1321db2
+  type_id: 0xcedb7efb
+  full_name: "pm_wakeup_irq"
+}
+elf_symbol {
   id: 0x58b605c8
   name: "pm_wakeup_ws_event"
   is_defined: true
@@ -417953,6 +417962,7 @@ interface {
   symbol_id: 0x2e13b831
   symbol_id: 0x57ba6430
   symbol_id: 0x131272a2
+  symbol_id: 0x914856be
   symbol_id: 0x58b605c8
   symbol_id: 0xf06ef566
   symbol_id: 0xe1d2f463
