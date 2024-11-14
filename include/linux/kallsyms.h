@@ -72,6 +72,18 @@ static inline void *dereference_symbol_descriptor(void *ptr)
 }
 
 #ifdef CONFIG_KALLSYMS
+<<<<<<< HEAD   (509ddb Merge f976d964a64c ("Input: adp5589-keys - fix adp5589_gpio_)
+||||||| BASE
+				      unsigned long),
+			    void *data);
+
+#ifdef CONFIG_KALLSYMS
+=======
+int kallsyms_on_each_symbol(int (*fn)(void *, const char *, struct module *,
+				      unsigned long),
+			    void *data);
+
+>>>>>>> BRANCH (2622c8 kallsyms: Make module_kallsyms_on_each_symbol generally avai)
 /* Lookup the address for a symbol. Returns 0 if not found. */
 unsigned long kallsyms_lookup_name(const char *name);
 
@@ -164,6 +176,11 @@ static inline bool kallsyms_show_value(const struct cred *cred)
 	return false;
 }
 
+static inline int kallsyms_on_each_symbol(int (*fn)(void *, const char *, struct module *,
+					  unsigned long), void *data)
+{
+	return -EOPNOTSUPP;
+}
 #endif /*CONFIG_KALLSYMS*/
 
 static inline void print_ip_sym(const char *loglvl, unsigned long ip)
