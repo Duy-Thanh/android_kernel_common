@@ -395,6 +395,9 @@ enum {
 	LRU_GEN_CORE,
 	LRU_GEN_MM_WALK,
 	LRU_GEN_NONLEAF_YOUNG,
+	// Skip 3 to present ABI consistent with 5.15
+	LRU_GEN_ADVANCE_IN_LOCKSTEP = 4,
+	LRU_GEN_AGGRESSIVE_MM,
 	NR_LRU_GEN_CAPS
 };
 
@@ -409,25 +412,19 @@ enum {
 #endif
 
 /*
- * The youngest generation number is stored in max_seq for both anon and file
- * types as they are aged on an equal footing. The oldest generation numbers are
- * stored in min_seq[] separately for anon and file types as clean file pages
- * can be evicted regardless of swap constraints.
- *
- * Normally anon and file min_seq are in sync. But if swapping is constrained,
- * e.g., out of swap space, file min_seq is allowed to advance and leave anon
- * min_seq behind.
+ * The youngest generation numbers are stored in max_seq[], and the oldest
+ * generation numbers are stored in min_seq[].
  *
  * The number of pages in each generation is eventually consistent and therefore
  * can be transiently negative when reset_batch_size() is pending.
  */
 struct lru_gen_folio {
 	/* the aging increments the youngest generation number */
-	unsigned long max_seq;
+	unsigned long max_seq[ANON_AND_FILE];
 	/* the eviction increments the oldest generation numbers */
 	unsigned long min_seq[ANON_AND_FILE];
 	/* the birth time of each generation in jiffies */
-	unsigned long timestamps[MAX_NR_GENS];
+	unsigned long timestamps[MAX_NR_GENS][ANON_AND_FILE];
 	/* the multi-gen LRU lists, lazily sorted on eviction */
 	struct list_head folios[MAX_NR_GENS][ANON_AND_FILE][MAX_NR_ZONES];
 	/* the multi-gen LRU sizes, eventually consistent */
@@ -438,9 +435,26 @@ struct lru_gen_folio {
 	unsigned long avg_total[ANON_AND_FILE][MAX_NR_TIERS];
 	/* the first tier doesn't need protection, hence the minus one */
 	unsigned long protected[NR_HIST_GENS][ANON_AND_FILE][MAX_NR_TIERS - 1];
+	/*
+	 * When min_seq is incremented, records the min_seq of the opposite
+	 * type. Used for tracking refaulted_victims.
+	 */
+	unsigned long victim_seq[NR_HIST_GENS][ANON_AND_FILE];
+	/* the approximate size of the new oldest generation when min_seq is incremented */
+	unsigned long oldest_gen_size[NR_HIST_GENS][ANON_AND_FILE];
+
 	/* can be modified without holding the LRU lock */
 	atomic_long_t evicted[NR_HIST_GENS][ANON_AND_FILE][MAX_NR_TIERS];
 	atomic_long_t refaulted[NR_HIST_GENS][ANON_AND_FILE][MAX_NR_TIERS];
+	/*
+	 * A refaulted victim of a given page is a page that was evicted
+	 * to save the given page, but which later gets refaulted. This
+	 * indicates an incorrect decision by the eviction logic. For the
+	 * oldest generation of a given type, refautled_victims estimate
+	 * the number of refaulted victims of the opposite type.
+	 */
+	atomic_long_t refaulted_victims[NR_HIST_GENS][ANON_AND_FILE];
+
 	/* whether the multi-gen LRU is enabled */
 	bool enabled;
 #ifdef CONFIG_MEMCG
@@ -470,8 +484,8 @@ enum {
 #define NR_BLOOM_FILTERS	2
 
 struct lru_gen_mm_state {
-	/* set to max_seq after each iteration */
-	unsigned long seq;
+	/* the current scan's seqno, incremented after each iteration */
+	unsigned long scan_seq;
 	/* where the current iteration continues after */
 	struct list_head *head;
 	/* where the last iteration ended before */
@@ -488,7 +502,9 @@ struct lru_gen_mm_walk {
 	/* the lruvec under reclaim */
 	struct lruvec *lruvec;
 	/* unstable max_seq from lru_gen_folio */
-	unsigned long max_seq;
+	unsigned long max_seq[ANON_AND_FILE];
+	/* scan_seq of the scan this walk is part of */
+	unsigned long scan_seq;
 	/* the next address within an mm to scan */
 	unsigned long next_addr;
 	/* to batch promoted pages */

@@ -63,6 +63,8 @@ struct mtk_mdp_driver_data {
 	const struct mdp_limit *def_limit;
 	const struct mdp_pipe_info *pipe_info;
 	unsigned int pipe_info_len;
+	const struct mdp_dip_cq_data *dip_cq_data;
+	unsigned int dip_cq_len;
 };
 
 struct mdp_dev {
@@ -97,6 +99,11 @@ struct mdp_dev {
 struct mdp_pipe_info {
 	enum mdp_pipe_id pipe_id;
 	u32 mutex_id;
+};
+
+struct mdp_dip_cq_data {
+	u32 event_id;
+	u32 frm_ofst;
 };
 
 int mdp_vpu_get_locked(struct mdp_dev *mdp);
