@@ -20,6 +20,7 @@
 #include <linux/memfd.h>
 #include <linux/pid_namespace.h>
 #include <uapi/linux/memfd.h>
+#include <linux/ashmem_compat.h>
 
 /*
  * We need a tag: a new tag would expand every xa_node by 8 bytes,
@@ -452,6 +453,7 @@ static struct file *alloc_file(const char *name, unsigned int flags)
 			*file_seals &= ~F_SEAL_SEAL;
 	}
 
+	install_ashmem_compat_fops(file);
 	return file;
 }
 
