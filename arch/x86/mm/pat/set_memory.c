@@ -34,6 +34,7 @@
 #include <asm/memtype.h>
 #include <asm/hyperv-tlfs.h>
 #include <asm/mshyperv.h>
+#include <asm/pkvm.h>
 
 #include "../mm_internal.h"
 
@@ -2217,6 +2218,9 @@ static int __set_memory_enc_pgtable(unsigned long addr, int numpages, bool enc)
 
 static int __set_memory_enc_dec(unsigned long addr, int numpages, bool enc)
 {
+	if (pkvm_is_protected_guest())
+		return pkvm_set_mem_host_visibility(addr, numpages, enc);
+
 	if (cc_platform_has(CC_ATTR_MEM_ENCRYPT))
 		return __set_memory_enc_pgtable(addr, numpages, enc);
 
