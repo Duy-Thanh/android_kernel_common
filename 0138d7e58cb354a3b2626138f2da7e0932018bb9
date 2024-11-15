@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0cdebcc_491b74f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-15T17:56:13Z",
+      "side": 1,
+      "message": "we don\u0027t take patches for what venders _may want_ to do. If this is not actually required, then please abandon it. If it is required, then please explain why in much more detail - either here or in the associated bug.",
+      "revId": "0138d7e58cb354a3b2626138f2da7e0932018bb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
