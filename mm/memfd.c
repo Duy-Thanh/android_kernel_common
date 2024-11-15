@@ -327,11 +327,46 @@ static int check_sysctl_memfd_noexec(unsigned int *flags)
 	return 0;
 }
 
+static struct file *memfd_filp_create(const char *name, unsigned int flags)
+{
+	unsigned int *file_seals;
+	struct file *file;
+
+	if (flags & MFD_HUGETLB) {
+		file = hugetlb_file_setup(name, 0, VM_NORESERVE,
+					HUGETLB_ANONHUGE_INODE,
+					(flags >> MFD_HUGE_SHIFT) &
+					MFD_HUGE_MASK);
+	} else
+		file = shmem_file_setup(name, 0, VM_NORESERVE);
+	if (IS_ERR(file))
+		return file;
+	file->f_mode |= FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE;
+	file->f_flags |= O_LARGEFILE;
+
+	if (flags & MFD_NOEXEC_SEAL) {
+		struct inode *inode = file_inode(file);
+
+		inode->i_mode &= ~0111;
+		file_seals = memfd_file_seals_ptr(file);
+		if (file_seals) {
+			*file_seals &= ~F_SEAL_SEAL;
+			*file_seals |= F_SEAL_EXEC;
+		}
+	} else if (flags & MFD_ALLOW_SEALING) {
+		/* MFD_EXEC and MFD_ALLOW_SEALING are set */
+		file_seals = memfd_file_seals_ptr(file);
+		if (file_seals)
+			*file_seals &= ~F_SEAL_SEAL;
+	}
+
+	return file;
+}
+
 SYSCALL_DEFINE2(memfd_create,
 		const char __user *, uname,
 		unsigned int, flags)
 {
-	unsigned int *file_seals;
 	struct file *file;
 	int fd, error;
 	char *name;
@@ -384,34 +419,10 @@ SYSCALL_DEFINE2(memfd_create,
 		goto err_name;
 	}
 
-	if (flags & MFD_HUGETLB) {
-		file = hugetlb_file_setup(name, 0, VM_NORESERVE,
-					HUGETLB_ANONHUGE_INODE,
-					(flags >> MFD_HUGE_SHIFT) &
-					MFD_HUGE_MASK);
-	} else
-		file = shmem_file_setup(name, 0, VM_NORESERVE);
+	file = memfd_filp_create(name, flags);
 	if (IS_ERR(file)) {
 		error = PTR_ERR(file);
 		goto err_fd;
-	}
-	file->f_mode |= FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE;
-	file->f_flags |= O_LARGEFILE;
-
-	if (flags & MFD_NOEXEC_SEAL) {
-		struct inode *inode = file_inode(file);
-
-		inode->i_mode &= ~0111;
-		file_seals = memfd_file_seals_ptr(file);
-		if (file_seals) {
-			*file_seals &= ~F_SEAL_SEAL;
-			*file_seals |= F_SEAL_EXEC;
-		}
-	} else if (flags & MFD_ALLOW_SEALING) {
-		/* MFD_EXEC and MFD_ALLOW_SEALING are set */
-		file_seals = memfd_file_seals_ptr(file);
-		if (file_seals)
-			*file_seals &= ~F_SEAL_SEAL;
 	}
 
 	fd_install(fd, file);
