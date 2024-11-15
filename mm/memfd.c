@@ -21,6 +21,8 @@
 #include <linux/pid_namespace.h>
 #include <uapi/linux/memfd.h>
 
+#include "ashmem_compat.h"
+
 /*
  * We need a tag: a new tag would expand every xa_node by 8 bytes,
  * so reuse a tag which we firmly believe is never set or cleared on tmpfs
@@ -327,7 +329,7 @@ static int check_sysctl_memfd_noexec(unsigned int *flags)
 	return 0;
 }
 
-static struct file *memfd_filp_create(const char *name, unsigned int flags)
+struct file *memfd_filp_create(const char *name, unsigned int flags, bool ashmem_compatible)
 {
 	unsigned int *file_seals;
 	struct file *file;
@@ -360,6 +362,7 @@ static struct file *memfd_filp_create(const char *name, unsigned int flags)
 			*file_seals &= ~F_SEAL_SEAL;
 	}
 
+	install_ashmem_compat_fops(file, ashmem_compatible);
 	return file;
 }
 
@@ -419,7 +422,7 @@ SYSCALL_DEFINE2(memfd_create,
 		goto err_name;
 	}
 
-	file = memfd_filp_create(name, flags);
+	file = memfd_filp_create(name, flags, false);
 	if (IS_ERR(file)) {
 		error = PTR_ERR(file);
 		goto err_fd;
