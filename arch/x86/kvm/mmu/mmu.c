@@ -3055,6 +3055,9 @@ static void direct_pte_prefetch(struct kvm_vcpu *vcpu, u64 *sptep)
 	if (unlikely(vcpu->kvm->mmu_invalidate_in_progress))
 		return;
 
+	if (vcpu->kvm->arch.vm_type == KVM_X86_PROTECTED_VM)
+		return;
+
 	__direct_pte_prefetch(vcpu, sp, sptep);
 }
 
@@ -4516,6 +4519,10 @@ out_unlock:
 
 int kvm_tdp_page_fault(struct kvm_vcpu *vcpu, struct kvm_page_fault *fault)
 {
+	struct kvm_pinned_page *ppage = NULL;
+	struct page *page;
+	int r;
+
 	/*
 	 * If the guest's MTRRs may be used to compute the "real" memtype,
 	 * restrict the mapping level to ensure KVM uses a consistent memtype
@@ -4539,12 +4546,34 @@ int kvm_tdp_page_fault(struct kvm_vcpu *vcpu, struct kvm_page_fault *fault)
 		}
 	}
 
+	if (vcpu->kvm->arch.vm_type == KVM_X86_PROTECTED_VM) {
+		ppage = kmalloc(sizeof(*ppage), GFP_KERNEL_ACCOUNT);
+		if (!ppage)
+			return -ENOMEM;
+	}
+
 #ifdef CONFIG_X86_64
 	if (tdp_mmu_enabled)
-		return kvm_tdp_mmu_page_fault(vcpu, fault);
+		r = kvm_tdp_mmu_page_fault(vcpu, fault);
+	else
+		r = direct_page_fault(vcpu, fault);
+#else
+	r = direct_page_fault(vcpu, fault);
 #endif
 
-	return direct_page_fault(vcpu, fault);
+	if (ppage) {
+		if (r == RET_PF_FIXED && (page = kvm_pfn_to_refcounted_page(fault->pfn))) {
+			ppage->page = page;
+			get_page(page);
+			spin_lock(&vcpu->kvm->pkvm.pinned_page_lock);
+			list_add(&ppage->list, &vcpu->kvm->pkvm.pinned_pages);
+			spin_unlock(&vcpu->kvm->pkvm.pinned_page_lock);
+		} else {
+			kfree(ppage);
+		}
+	}
+
+	return r;
 }
 
 static void nonpaging_init_context(struct kvm_mmu *context)

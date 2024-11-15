@@ -880,7 +880,7 @@ static int __ref
 dmar_validate_one_drhd(struct acpi_dmar_header *entry, void *arg)
 {
 	struct acpi_dmar_hardware_unit *drhd;
-	void __iomem *addr;
+	struct intel_iommu iommu;
 	u64 cap, ecap;
 
 	drhd = (void *)entry;
@@ -889,22 +889,23 @@ dmar_validate_one_drhd(struct acpi_dmar_header *entry, void *arg)
 		return -EINVAL;
 	}
 
+	iommu.reg_phys = drhd->address;
 	if (arg)
-		addr = ioremap(drhd->address, VTD_PAGE_SIZE);
+		iommu.reg = ioremap(drhd->address, VTD_PAGE_SIZE);
 	else
-		addr = early_ioremap(drhd->address, VTD_PAGE_SIZE);
-	if (!addr) {
+		iommu.reg = early_ioremap(drhd->address, VTD_PAGE_SIZE);
+	if (!iommu.reg) {
 		pr_warn("Can't validate DRHD address: %llx\n", drhd->address);
 		return -EINVAL;
 	}
 
-	cap = dmar_readq(addr + DMAR_CAP_REG);
-	ecap = dmar_readq(addr + DMAR_ECAP_REG);
+	cap = dmar_readq(&iommu, DMAR_CAP_REG);
+	ecap = dmar_readq(&iommu, DMAR_ECAP_REG);
 
 	if (arg)
-		iounmap(addr);
+		iounmap(iommu.reg);
 	else
-		early_iounmap(addr, VTD_PAGE_SIZE);
+		early_iounmap(iommu.reg, VTD_PAGE_SIZE);
 
 	if (cap == (uint64_t)-1 && ecap == (uint64_t)-1) {
 		warn_invalid_dmar(drhd->address, " returns all ones");
@@ -984,14 +985,17 @@ static int map_iommu(struct intel_iommu *iommu, struct dmar_drhd_unit *drhd)
 		goto release;
 	}
 
-	iommu->cap = dmar_readq(iommu->reg + DMAR_CAP_REG);
-	iommu->ecap = dmar_readq(iommu->reg + DMAR_ECAP_REG);
+	iommu->cap = dmar_readq(iommu, DMAR_CAP_REG);
+	iommu->ecap = dmar_readq(iommu, DMAR_ECAP_REG);
 
 	if (iommu->cap == (uint64_t)-1 && iommu->ecap == (uint64_t)-1) {
 		err = -EINVAL;
 		warn_invalid_dmar(phys_addr, " returns all ones");
 		goto unmap;
 	}
+#ifdef CONFIG_PKVM_INTEL
+	pkvm_update_iommu_virtual_caps(&iommu->cap, &iommu->ecap);
+#endif
 
 	/* the registers might be more than one page */
 	map_size = max_t(int, ecap_max_iotlb_offset(iommu->ecap),
@@ -1019,7 +1023,7 @@ static int map_iommu(struct intel_iommu *iommu, struct dmar_drhd_unit *drhd)
 		int i;
 
 		for (i = 0; i < DMA_MAX_NUM_ECMDCAP; i++) {
-			iommu->ecmdcap[i] = dmar_readq(iommu->reg + DMAR_ECCAP_REG +
+			iommu->ecmdcap[i] = dmar_readq(iommu, DMAR_ECCAP_REG +
 						       i * DMA_ECMD_REG_STEP);
 		}
 	}
@@ -1098,7 +1102,7 @@ static int alloc_iommu(struct dmar_drhd_unit *drhd)
 
 	iommu->node = NUMA_NO_NODE;
 
-	ver = readl(iommu->reg + DMAR_VER_REG);
+	ver = dmar_readl(iommu, DMAR_VER_REG);
 	pr_info("%s: reg_base_addr %llx ver %d:%d cap %llx ecap %llx\n",
 		iommu->name,
 		(unsigned long long)drhd->reg_base_addr,
@@ -1107,7 +1111,7 @@ static int alloc_iommu(struct dmar_drhd_unit *drhd)
 		(unsigned long long)iommu->ecap);
 
 	/* Reflect status in gcmd */
-	sts = readl(iommu->reg + DMAR_GSTS_REG);
+	sts = dmar_readl(iommu, DMAR_GSTS_REG);
 	if (sts & DMA_GSTS_IRES)
 		iommu->gcmd |= DMA_GCMD_IRE;
 	if (sts & DMA_GSTS_TES)
@@ -1236,8 +1240,8 @@ static const char *qi_type_string(u8 type)
 
 static void qi_dump_fault(struct intel_iommu *iommu, u32 fault)
 {
-	unsigned int head = dmar_readl(iommu->reg + DMAR_IQH_REG);
-	u64 iqe_err = dmar_readq(iommu->reg + DMAR_IQER_REG);
+	unsigned int head = dmar_readl(iommu, DMAR_IQH_REG);
+	u64 iqe_err = dmar_readq(iommu, DMAR_IQER_REG);
 	struct qi_desc *desc = iommu->qi->desc + head;
 
 	if (fault & DMA_FSTS_IQE)
@@ -1275,7 +1279,7 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 	if (qi->desc_status[wait_index] == QI_ABORT)
 		return -EAGAIN;
 
-	fault = readl(iommu->reg + DMAR_FSTS_REG);
+	fault = dmar_readl(iommu, DMAR_FSTS_REG);
 	if (fault & (DMA_FSTS_IQE | DMA_FSTS_ITE | DMA_FSTS_ICE))
 		qi_dump_fault(iommu, fault);
 
@@ -1285,7 +1289,7 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 	 * is cleared.
 	 */
 	if (fault & DMA_FSTS_IQE) {
-		head = readl(iommu->reg + DMAR_IQH_REG);
+		head = dmar_readl(iommu, DMAR_IQH_REG);
 		if ((head >> shift) == index) {
 			struct qi_desc *desc = qi->desc + head;
 
@@ -1296,7 +1300,7 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 			 */
 			memcpy(desc, qi->desc + (wait_index << shift),
 			       1 << shift);
-			writel(DMA_FSTS_IQE, iommu->reg + DMAR_FSTS_REG);
+			dmar_writel(iommu, DMAR_FSTS_REG, DMA_FSTS_IQE);
 			pr_info("Invalidation Queue Error (IQE) cleared\n");
 			return -EINVAL;
 		}
@@ -1307,13 +1311,13 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 	 * No new descriptors are fetched until the ITE is cleared.
 	 */
 	if (fault & DMA_FSTS_ITE) {
-		head = readl(iommu->reg + DMAR_IQH_REG);
+		head = dmar_readl(iommu, DMAR_IQH_REG);
 		head = ((head >> shift) - 1 + QI_LENGTH) % QI_LENGTH;
 		head |= 1;
-		tail = readl(iommu->reg + DMAR_IQT_REG);
+		tail = dmar_readl(iommu, DMAR_IQT_REG);
 		tail = ((tail >> shift) - 1 + QI_LENGTH) % QI_LENGTH;
 
-		writel(DMA_FSTS_ITE, iommu->reg + DMAR_FSTS_REG);
+		dmar_writel(iommu, DMAR_FSTS_REG, DMA_FSTS_ITE);
 		pr_info("Invalidation Time-out Error (ITE) cleared\n");
 
 		do {
@@ -1327,7 +1331,7 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 	}
 
 	if (fault & DMA_FSTS_ICE) {
-		writel(DMA_FSTS_ICE, iommu->reg + DMAR_FSTS_REG);
+		dmar_writel(iommu, DMAR_FSTS_REG, DMA_FSTS_ICE);
 		pr_info("Invalidation Completion Error (ICE) cleared\n");
 	}
 
@@ -1418,7 +1422,7 @@ restart:
 	 * update the HW tail register indicating the presence of
 	 * new descriptors.
 	 */
-	writel(qi->free_head << shift, iommu->reg + DMAR_IQT_REG);
+	dmar_writel(iommu, DMAR_IQT_REG, qi->free_head << shift);
 
 	while (READ_ONCE(qi->desc_status[wait_index]) != QI_DONE) {
 		/*
@@ -1672,22 +1676,22 @@ void dmar_disable_qi(struct intel_iommu *iommu)
 
 	raw_spin_lock_irqsave(&iommu->register_lock, flags);
 
-	sts =  readl(iommu->reg + DMAR_GSTS_REG);
+	sts =  dmar_readl(iommu, DMAR_GSTS_REG);
 	if (!(sts & DMA_GSTS_QIES))
 		goto end;
 
 	/*
 	 * Give a chance to HW to complete the pending invalidation requests.
 	 */
-	while ((readl(iommu->reg + DMAR_IQT_REG) !=
-		readl(iommu->reg + DMAR_IQH_REG)) &&
+	while ((dmar_readl(iommu, DMAR_IQT_REG) !=
+		dmar_readl(iommu, DMAR_IQH_REG)) &&
 		(DMAR_OPERATION_TIMEOUT > (get_cycles() - start_time)))
 		cpu_relax();
 
 	iommu->gcmd &= ~DMA_GCMD_QIE;
-	writel(iommu->gcmd, iommu->reg + DMAR_GCMD_REG);
+	dmar_writel(iommu, DMAR_GCMD_REG, iommu->gcmd);
 
-	IOMMU_WAIT_OP(iommu, DMAR_GSTS_REG, readl,
+	IOMMU_WAIT_OP(iommu, DMAR_GSTS_REG, dmar_readl,
 		      !(sts & DMA_GSTS_QIES), sts);
 end:
 	raw_spin_unlock_irqrestore(&iommu->register_lock, flags);
@@ -1716,15 +1720,15 @@ static void __dmar_enable_qi(struct intel_iommu *iommu)
 	raw_spin_lock_irqsave(&iommu->register_lock, flags);
 
 	/* write zero to the tail reg */
-	writel(0, iommu->reg + DMAR_IQT_REG);
+	dmar_writel(iommu, DMAR_IQT_REG, 0);
 
-	dmar_writeq(iommu->reg + DMAR_IQA_REG, val);
+	dmar_writeq(iommu, DMAR_IQA_REG, val);
 
 	iommu->gcmd |= DMA_GCMD_QIE;
-	writel(iommu->gcmd, iommu->reg + DMAR_GCMD_REG);
+	dmar_writel(iommu, DMAR_GCMD_REG, iommu->gcmd);
 
 	/* Make sure hardware complete it */
-	IOMMU_WAIT_OP(iommu, DMAR_GSTS_REG, readl, (sts & DMA_GSTS_QIES), sts);
+	IOMMU_WAIT_OP(iommu, DMAR_GSTS_REG, dmar_readl, (sts & DMA_GSTS_QIES), sts);
 
 	raw_spin_unlock_irqrestore(&iommu->register_lock, flags);
 }
@@ -1918,9 +1922,9 @@ void dmar_msi_unmask(struct irq_data *data)
 
 	/* unmask it */
 	raw_spin_lock_irqsave(&iommu->register_lock, flag);
-	writel(0, iommu->reg + reg);
+	dmar_writel(iommu, reg, 0);
 	/* Read a reg to force flush the post write */
-	readl(iommu->reg + reg);
+	dmar_readl(iommu, reg);
 	raw_spin_unlock_irqrestore(&iommu->register_lock, flag);
 }
 
@@ -1932,9 +1936,9 @@ void dmar_msi_mask(struct irq_data *data)
 
 	/* mask it */
 	raw_spin_lock_irqsave(&iommu->register_lock, flag);
-	writel(DMA_FECTL_IM, iommu->reg + reg);
+	dmar_writel(iommu, reg, DMA_FECTL_IM);
 	/* Read a reg to force flush the post write */
-	readl(iommu->reg + reg);
+	dmar_readl(iommu, reg);
 	raw_spin_unlock_irqrestore(&iommu->register_lock, flag);
 }
 
@@ -1945,9 +1949,9 @@ void dmar_msi_write(int irq, struct msi_msg *msg)
 	unsigned long flag;
 
 	raw_spin_lock_irqsave(&iommu->register_lock, flag);
-	writel(msg->data, iommu->reg + reg + 4);
-	writel(msg->address_lo, iommu->reg + reg + 8);
-	writel(msg->address_hi, iommu->reg + reg + 12);
+	dmar_writel(iommu, reg + 4, msg->data);
+	dmar_writel(iommu, reg + 8, msg->address_lo);
+	dmar_writel(iommu, reg + 12, msg->address_hi);
 	raw_spin_unlock_irqrestore(&iommu->register_lock, flag);
 }
 
@@ -1958,9 +1962,9 @@ void dmar_msi_read(int irq, struct msi_msg *msg)
 	unsigned long flag;
 
 	raw_spin_lock_irqsave(&iommu->register_lock, flag);
-	msg->data = readl(iommu->reg + reg + 4);
-	msg->address_lo = readl(iommu->reg + reg + 8);
-	msg->address_hi = readl(iommu->reg + reg + 12);
+	msg->data = dmar_readl(iommu, reg + 4);
+	msg->address_lo = dmar_readl(iommu, reg + 8);
+	msg->address_hi = dmar_readl(iommu, reg + 12);
 	raw_spin_unlock_irqrestore(&iommu->register_lock, flag);
 }
 
@@ -2012,7 +2016,7 @@ irqreturn_t dmar_fault(int irq, void *dev_id)
 				      DEFAULT_RATELIMIT_BURST);
 
 	raw_spin_lock_irqsave(&iommu->register_lock, flag);
-	fault_status = readl(iommu->reg + DMAR_FSTS_REG);
+	fault_status = dmar_readl(iommu, DMAR_FSTS_REG);
 	if (fault_status && __ratelimit(&rs))
 		pr_err("DRHD: handling fault status reg %x\n", fault_status);
 
@@ -2034,7 +2038,7 @@ irqreturn_t dmar_fault(int irq, void *dev_id)
 		bool pasid_present;
 
 		/* highest 32 bits */
-		data = readl(iommu->reg + reg +
+		data = dmar_readl(iommu, reg +
 				fault_index * PRIMARY_FAULT_REG_LEN + 12);
 		if (!(data & DMA_FRCD_F))
 			break;
@@ -2044,19 +2048,19 @@ irqreturn_t dmar_fault(int irq, void *dev_id)
 			type = dma_frcd_type(data);
 
 			pasid = dma_frcd_pasid_value(data);
-			data = readl(iommu->reg + reg +
+			data = dmar_readl(iommu, reg +
 				     fault_index * PRIMARY_FAULT_REG_LEN + 8);
 			source_id = dma_frcd_source_id(data);
 
 			pasid_present = dma_frcd_pasid_present(data);
-			guest_addr = dmar_readq(iommu->reg + reg +
+			guest_addr = dmar_readq(iommu, reg +
 					fault_index * PRIMARY_FAULT_REG_LEN);
 			guest_addr = dma_frcd_page_addr(guest_addr);
 		}
 
 		/* clear the fault */
-		writel(DMA_FRCD_F, iommu->reg + reg +
-			fault_index * PRIMARY_FAULT_REG_LEN + 12);
+		dmar_writel(iommu, reg +
+			fault_index * PRIMARY_FAULT_REG_LEN + 12, DMA_FRCD_F);
 
 		raw_spin_unlock_irqrestore(&iommu->register_lock, flag);
 
@@ -2072,8 +2076,8 @@ irqreturn_t dmar_fault(int irq, void *dev_id)
 		raw_spin_lock_irqsave(&iommu->register_lock, flag);
 	}
 
-	writel(DMA_FSTS_PFO | DMA_FSTS_PPF | DMA_FSTS_PRO,
-	       iommu->reg + DMAR_FSTS_REG);
+	dmar_writel(iommu, DMAR_FSTS_REG,
+		DMA_FSTS_PFO | DMA_FSTS_PPF | DMA_FSTS_PRO);
 
 unlock_exit:
 	raw_spin_unlock_irqrestore(&iommu->register_lock, flag);
@@ -2126,8 +2130,8 @@ int __init enable_drhd_fault_handling(void)
 		 * Clear any previous faults.
 		 */
 		dmar_fault(iommu->irq, iommu);
-		fault_status = readl(iommu->reg + DMAR_FSTS_REG);
-		writel(fault_status, iommu->reg + DMAR_FSTS_REG);
+		fault_status = dmar_readl(iommu, DMAR_FSTS_REG);
+		dmar_writel(iommu, DMAR_FSTS_REG, fault_status);
 	}
 
 	return 0;
