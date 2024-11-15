@@ -738,12 +738,181 @@ static const struct mdp_comp_ops ccorr_ops = {
 	.config_subfrm = config_ccorr_subfrm,
 };
 
+static int init_isp(struct mdp_comp_ctx *ctx, struct mdp_cmdq_cmd *cmd)
+{
+	struct device *dev = ctx->comp->mdp_dev->mdp_mmsys;
+	u32 c_id, c1, c2;
+
+	if (CFG_CHECK(MT8183, p_id))
+		c_id = CFG_COMP(MT8183, ctx->param, isp.dl_flags);
+	else
+		return 0;
+
+	c1 = mdp_cfg_get_id_inner(ctx->comp->mdp_dev, MDP_COMP_CAMIN);
+	c2 = mdp_cfg_get_id_inner(ctx->comp->mdp_dev, MDP_COMP_CAMIN2);
+
+	/* Direct link */
+	if (c_id & BIT(c1)) {
+		dev_dbg(dev, "SW_RST ASYNC CAMIN %d", ISP_CTRL_CAM1);
+		mtk_mmsys_mdp_isp_ctrl(dev, &cmd->pkt, ISP_CTRL_CAM1);
+	}
+	if (c_id & BIT(c2)) {
+		dev_dbg(dev, "SW_RST ASYNC CAMIN %d", ISP_CTRL_CAM2);
+		mtk_mmsys_mdp_isp_ctrl(dev, &cmd->pkt, ISP_CTRL_CAM2);
+	}
+
+	return 0;
+}
+
+static int config_isp_frame(struct mdp_comp_ctx *ctx,
+			    struct mdp_cmdq_cmd *cmd,
+			    const struct v4l2_rect *compose)
+{
+	struct device *dev = &ctx->comp->mdp_dev->pdev->dev;
+	struct mdp_dev *m_dev = ctx->comp->mdp_dev;
+	const struct mdp_dip_cq_data *dip_cq = m_dev->mdp_data->dip_cq_data;
+	phys_addr_t base = ctx->comp->reg_base;
+	u8 subsys_id = ctx->comp->subsys_id;
+	u32 idx;
+	u32 reg = 0, ofst = 0;
+
+	if (!CFG_CHECK(MT8183, p_id))
+		return 0;
+
+	/* DIP_X_SMX1I_BASE_ADDR, DIP_X_SMX1O_BASE_ADDR */
+	reg = CFG_COMP(MT8183, ctx->param, isp.smxi_iova[0]);
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x2890, reg, 0xFFFFFFFF);
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x27D0, reg, 0xFFFFFFFF);
+
+	/* DIP_X_SMX2I_BASE_ADDR, DIP_X_SMX2O_BASE_ADDR */
+	reg = CFG_COMP(MT8183, ctx->param, isp.smxi_iova[1]);
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x28C0, reg, 0xFFFFFFFF);
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x2800, reg, 0xFFFFFFFF);
+
+	/* DIP_X_SMX3I_BASE_ADDR, DIP_X_SMX3O_BASE_ADDR */
+	reg = CFG_COMP(MT8183, ctx->param, isp.smxi_iova[2]);
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x28F0, reg, 0xFFFFFFFF);
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x2830, reg, 0xFFFFFFFF);
+
+	/* DIP_X_SMX4I_BASE_ADDR, DIP_X_SMX4O_BASE_ADDR */
+	reg = CFG_COMP(MT8183, ctx->param, isp.smxi_iova[3]);
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x2920, reg, 0xFFFFFFFF);
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x2860, reg, 0xFFFFFFFF);
+
+	idx = CFG_COMP(MT8183, ctx->param, isp.cq_idx);
+	if (idx >= m_dev->mdp_data->dip_cq_len) {
+		dev_err(dev, "Do not support this cq (%d)", idx);
+		return -EINVAL;
+	}
+
+	reg = CFG_COMP(MT8183, ctx->param, isp.cq_iova);
+	ofst = dip_cq[idx].frm_ofst;
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, ofst, reg, 0xFFFFFFFF);
+
+	return 0;
+}
+
+static int config_isp_subfrm(struct mdp_comp_ctx *ctx,
+			     struct mdp_cmdq_cmd *cmd, u32 index)
+{
+	phys_addr_t base = ctx->comp->reg_base;
+	u8 subsys_id = ctx->comp->subsys_id;
+	u32 reg;
+
+	if (CFG_CHECK(MT8183, p_id))
+		reg = CFG_COMP(MT8183, ctx->param, isp.tpipe_iova[index]);
+	else
+		return 0;
+
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x2304, reg, 0xFFFFFFFF);
+
+	return 0;
+}
+
+static int wait_isp_event(struct mdp_comp_ctx *ctx, struct mdp_cmdq_cmd *cmd)
+{
+	struct device *dev = &ctx->comp->mdp_dev->pdev->dev;
+	struct mdp_dev *m_dev = ctx->comp->mdp_dev;
+	const struct mdp_dip_cq_data *dip_cq = m_dev->mdp_data->dip_cq_data;
+	phys_addr_t base = ctx->comp->reg_base;
+	u8 subsys_id = ctx->comp->subsys_id;
+	u32 c_id, c1, c2;
+	u32 idx, evt;
+
+	if (CFG_CHECK(MT8183, p_id))
+		c_id = CFG_COMP(MT8183, ctx->param, isp.dl_flags);
+	else
+		return 0;
+
+	c1 = mdp_cfg_get_id_inner(ctx->comp->mdp_dev, MDP_COMP_CAMIN);
+	c2 = mdp_cfg_get_id_inner(ctx->comp->mdp_dev, MDP_COMP_CAMIN2);
+
+	/* MDP_DL_SEL: select MDP_CROP */
+	if (c_id & BIT(c1))
+		MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x30, 0x0,
+				  BIT(9));
+	if (c_id & BIT(c2))
+		MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x30, 0x0,
+				  BIT(10) | BIT(11));
+
+	idx = CFG_COMP(MT8183, ctx->param, isp.cq_idx);
+	if (idx >= m_dev->mdp_data->dip_cq_len) {
+		dev_err(dev, "Do not support this cq (%d)", idx);
+		return -EINVAL;
+	}
+	evt = dip_cq[idx].event_id;
+
+	MM_REG_WRITE_MASK(cmd, subsys_id, base, 0x2000, BIT(idx), BIT(idx));
+	MM_REG_WAIT(cmd, evt);
+
+	return 0;
+}
+
+static const struct mdp_comp_ops imgi_ops = {
+	.get_comp_flag = get_comp_flag,
+	.init_comp = init_isp,
+	.config_frame = config_isp_frame,
+	.config_subfrm = config_isp_subfrm,
+	.wait_comp_event = wait_isp_event,
+};
+
+static int config_camin_subfrm(struct mdp_comp_ctx *ctx,
+			       struct mdp_cmdq_cmd *cmd, u32 index)
+{
+	struct device *dev = ctx->comp->mdp_dev->mdp_mmsys;
+	u32 csf_l = 0, csf_r = 0;
+	u32 csf_t = 0, csf_b = 0;
+	u32 camin_w, camin_h;
+	u32 idx;
+
+	csf_l = CFG_COMP(MT8183, ctx->param, subfrms[index].in.left);
+	csf_r = CFG_COMP(MT8183, ctx->param, subfrms[index].in.right);
+	csf_t = CFG_COMP(MT8183, ctx->param, subfrms[index].in.top);
+	csf_b = CFG_COMP(MT8183, ctx->param, subfrms[index].in.bottom);
+
+	camin_w = csf_r - csf_l + 1;
+	camin_h = csf_b - csf_t + 1;
+
+	/* Config for direct link */
+	idx = ctx->comp->alias_id;
+	mtk_mmsys_mdp_camin_ctrl(dev, &cmd->pkt, idx, camin_w, camin_h);
+
+	return 0;
+}
+
+static const struct mdp_comp_ops camin_ops = {
+	.get_comp_flag = get_comp_flag,
+	.config_subfrm = config_camin_subfrm,
+};
+
 static const struct mdp_comp_ops *mdp_comp_ops[MDP_COMP_TYPE_COUNT] = {
 	[MDP_COMP_TYPE_RDMA] =		&rdma_ops,
 	[MDP_COMP_TYPE_RSZ] =		&rsz_ops,
 	[MDP_COMP_TYPE_WROT] =		&wrot_ops,
 	[MDP_COMP_TYPE_WDMA] =		&wdma_ops,
 	[MDP_COMP_TYPE_CCORR] =		&ccorr_ops,
+	[MDP_COMP_TYPE_IMGI] =		&imgi_ops,
+	[MDP_COMP_TYPE_DL_PATH] =	&camin_ops,
 };
 
 static const struct of_device_id mdp_comp_dt_ids[] __maybe_unused = {
@@ -779,7 +948,10 @@ static inline bool is_bypass_gce_event(const enum mdp_comp_type type)
 	 * Subcomponent PATH is only used for the direction of data flow and
 	 * dose not need to wait for GCE event.
 	 */
-	return (type == MDP_COMP_TYPE_PATH);
+	return (type == MDP_COMP_TYPE_PATH ||
+		type == MDP_COMP_TYPE_IMGI ||
+		type == MDP_COMP_TYPE_EXTO ||
+		type == MDP_COMP_TYPE_DL_PATH);
 }
 
 static int mdp_comp_get_id(struct mdp_dev *mdp, enum mdp_comp_type type, u32 alias_id)

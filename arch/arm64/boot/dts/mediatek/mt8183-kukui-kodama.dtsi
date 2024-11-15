@@ -69,6 +69,7 @@
 		reg = <0x58>;
 		pagesize = <32>;
 		vcc-supply = <&mt6358_vcamio_reg>;
+		device-id = <0>;
 	};
 
 	camera_main_af: camera_main_af@c {
@@ -92,6 +93,7 @@
 		reg = <0x50>;
 		pagesize = <32>;
 		vcc-supply = <&mt6358_vcn18_reg>;
+		device-id = <0>;
 	};
 
 	sensor_sub: sensor_sub@3d {
