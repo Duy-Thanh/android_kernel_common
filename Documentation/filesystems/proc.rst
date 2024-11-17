@@ -572,6 +572,7 @@ encoded manner. The codes are the following:
     uw    userfaultfd wr-protect tracking
     ss    shadow stack page
     sl    sealed
+    nx    sealed for non-execute
     ==    =======================================
 
 Note that there is no guarantee that every flag and associated mnemonic will

@@ -55,4 +55,9 @@ struct cachestat {
 	__u64 nr_recently_evicted;
 };
 
+/*
+ * used by the flags field of mseal syscall.
+ */
+#define MSEAL_NX	1
+
 #endif /* _UAPI_LINUX_MMAN_H */

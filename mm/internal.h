@@ -1456,14 +1456,6 @@ static inline struct page *folio_dst_page(struct folio *src, int i)
 }
 
 #ifdef CONFIG_64BIT
-static inline int can_do_mseal(unsigned long flags)
-{
-	if (flags)
-		return -EINVAL;
-
-	return 0;
-}
-
 bool can_modify_mm(struct mm_struct *mm, unsigned long start,
 		unsigned long end);
 bool can_modify_mm_madv(struct mm_struct *mm, unsigned long start,
@@ -1488,12 +1480,10 @@ static inline bool can_modify_vma(struct vm_area_struct *vma)
 
 bool can_modify_vma_madv(struct vm_area_struct *vma, int behavior);
 
-#else
-static inline int can_do_mseal(unsigned long flags)
-{
-	return -EPERM;
-}
+bool can_modify_vma_mprotect(struct vm_area_struct *vma,
+	unsigned long newflags);
 
+#else
 static inline bool can_modify_mm(struct mm_struct *mm, unsigned long start,
 		unsigned long end)
 {
@@ -1512,6 +1502,12 @@ static inline bool can_modify_vma(struct vm_area_struct *vma)
 }
 
 static inline bool can_modify_vma_madv(struct vm_area_struct *vma, int behavior)
+{
+	return true;
+}
+
+static inline bool can_modify_vma_mprotect(struct vm_area_struct *vma,
+	unsigned long newflags)
 {
 	return true;
 }
