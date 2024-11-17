@@ -200,6 +200,19 @@ unsigned long kallsyms_lookup_name(const char *name)
 	return module_kallsyms_lookup_name(name);
 }
 
+<<<<<<< HEAD   (96a513 Merge 570e257621be ("drm/rockchip: vop: clear DMA stop bit o)
+||||||| BASE
+#ifdef CONFIG_LIVEPATCH
+/*
+ * Iterate over all symbols in vmlinux.  For symbols from modules use
+ * module_kallsyms_on_each_symbol instead.
+ */
+=======
+/*
+ * Iterate over all symbols in vmlinux.  For symbols from modules use
+ * module_kallsyms_on_each_symbol instead.
+ */
+>>>>>>> BRANCH (2622c8 kallsyms: Make module_kallsyms_on_each_symbol generally avai)
 int kallsyms_on_each_symbol(int (*fn)(void *, const char *, struct module *,
 				      unsigned long),
 			    void *data)

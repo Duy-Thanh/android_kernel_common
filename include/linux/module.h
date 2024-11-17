@@ -904,4 +904,25 @@ static inline bool module_sig_ok(struct module *module)
 }
 #endif	/* CONFIG_MODULE_SIG */
 
+<<<<<<< HEAD   (96a513 Merge 570e257621be ("drm/rockchip: vop: clear DMA stop bit o)
+||||||| BASE
+int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
+					     struct module *, unsigned long),
+				   void *data);
+
+=======
+#if defined(CONFIG_MODULES) && defined(CONFIG_KALLSYMS)
+int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
+					     struct module *, unsigned long),
+				   void *data);
+#else
+static inline int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
+						 struct module *, unsigned long),
+						 void *data)
+{
+	return -EOPNOTSUPP;
+}
+#endif  /* CONFIG_MODULES && CONFIG_KALLSYMS */
+
+>>>>>>> BRANCH (2622c8 kallsyms: Make module_kallsyms_on_each_symbol generally avai)
 #endif /* _LINUX_MODULE_H */
