@@ -1231,7 +1231,20 @@ static void _cfg80211_unregister_wdev(struct wireless_dev *wdev,
 	kfree_sensitive(wdev->wext.keys);
 	wdev->wext.keys = NULL;
 #endif
+<<<<<<< HEAD   (0df5dc Merge bdbc96c23197 ("fsdax: dax_unshare_iter needs to copy e)
 	cfg80211_cqm_config_free(wdev);
+||||||| BASE
+	wiphy_work_cancel(wdev->wiphy, &wdev->cqm_rssi_work);
+	/* deleted from the list, so can't be found from nl80211 any more */
+	cqm_config = rcu_access_pointer(wdev->cqm_config);
+	kfree_rcu(cqm_config, rcu_head);
+=======
+	wiphy_work_cancel(wdev->wiphy, &wdev->cqm_rssi_work);
+	/* deleted from the list, so can't be found from nl80211 any more */
+	cqm_config = rcu_access_pointer(wdev->cqm_config);
+	kfree_rcu(cqm_config, rcu_head);
+	RCU_INIT_POINTER(wdev->cqm_config, NULL);
+>>>>>>> BRANCH (b5dc5b cxl/port: Fix cxl_bus_rescan() vs bus_rescan_devices())
 
 	/*
 	 * Ensure that all events have been processed and
