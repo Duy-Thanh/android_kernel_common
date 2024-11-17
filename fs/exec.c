@@ -817,6 +817,9 @@ int setup_arg_pages(struct linux_binprm *bprm,
 	vm_flags |= mm->def_flags;
 	vm_flags |= VM_STACK_INCOMPLETE_SETUP;
 
+	if (!(vm_flags & VM_EXEC))
+		vm_flags |= seal_nx_stack();
+
 	vma_iter_init(&vmi, mm, vma->vm_start);
 
 	tlb_gather_mmu(&tlb, mm);

@@ -17,9 +17,13 @@
 #include <linux/sched.h>
 #include "internal.h"
 
-static inline void set_vma_sealed(struct vm_area_struct *vma)
+static inline void set_vma_sealed(struct vm_area_struct *vma,
+	unsigned long seal_flags)
 {
-	vm_flags_set(vma, VM_SEALED);
+	if (seal_flags & VM_SEAL_NX)
+		vm_flags_set(vma, VM_SEALED | VM_SEAL_NX);
+	else
+		vm_flags_set(vma, VM_SEALED);
 }
 
 static bool is_madv_discard(int behavior)
@@ -83,7 +87,14 @@ bool can_modify_vma_madv(struct vm_area_struct *vma, int behavior)
 	if (!is_madv_discard(behavior))
 		return true;
 
-	if (unlikely(!can_modify_vma(vma) && is_ro_anon(vma)))
+	if (can_modify_vma(vma))
+		return true;
+
+	/* If VMA is PROT_NONE, allow discard */
+	if ((vma->vm_flags & VM_ACCESS_FLAGS) == VM_NONE)
+		return true;
+
+	if (is_ro_anon(vma))
 		return false;
 
 	/* Allow by default. */
@@ -127,13 +138,67 @@ static int mseal_fixup(struct vma_iterator *vmi, struct vm_area_struct *vma,
 	}
 
 success:
-	set_vma_sealed(vma);
+	set_vma_sealed(vma, newflags);
 
 out:
 	*prev = vma;
 	return ret;
 }
 
+/*
+ * Check if mprotect is blocked when VM_SEAL_NX is set.
+ */
+static inline bool can_modify_vma_nx(struct vm_area_struct *vma,
+	unsigned long newflags)
+{
+	/* reject PROT_EXEC */
+	if (newflags & PROT_EXEC)
+		return false;
+
+	/* no write access to the pkey of vma */
+	if (!arch_vma_access_permitted(vma, true, false, false))
+		return false;
+
+	return true;
+}
+
+/*
+ * Check if a vma is allowed to be modified by mprotect.
+ */
+bool can_modify_vma_mprotect(struct vm_area_struct *vma,
+	unsigned long newflags)
+{
+	/* VMA is not sealed, allow */
+	if (can_modify_vma(vma))
+		return true;
+
+	/* vma is sealed with NX */
+	if (vma->vm_flags & VM_SEAL_NX)
+		return can_modify_vma_nx(vma, newflags);
+
+	return false;
+}
+
+static bool can_add_vma_seals(struct vm_area_struct *vma,
+	unsigned long seal_flags)
+{
+	bool vmaSealed = vma->vm_flags & VM_SEALED;
+	bool vmaSealNx = vma->vm_flags & VM_SEAL_NX;
+
+	if (seal_flags & VM_SEAL_NX) {
+		/* adding NX to a sealed but no NX VMA is not allowed */
+		if (vmaSealed && !vmaSealNx)
+			return false;
+
+		return true;
+	}
+
+	/* remove NX is not allowed */
+	if (vmaSealNx)
+		return false;
+
+	return true;
+}
 
 /*
  * Check for do_mseal:
@@ -142,7 +207,8 @@ out:
  * 3> No gap (unallocated address) between start and end.
  * 4> map is sealable.
  */
-static int check_mm_seal(unsigned long start, unsigned long end)
+static int check_mm_seal(unsigned long start, unsigned long end,
+	unsigned long seal_flags)
 {
 	struct vm_area_struct *vma;
 	unsigned long nstart = start;
@@ -154,6 +220,9 @@ static int check_mm_seal(unsigned long start, unsigned long end)
 		if (vma->vm_start > nstart)
 			/* unallocated memory found. */
 			return -ENOMEM;
+
+		if (!can_add_vma_seals(vma, seal_flags))
+			return -EACCES;
 
 		if (vma->vm_end >= end)
 			return 0;
@@ -167,7 +236,8 @@ static int check_mm_seal(unsigned long start, unsigned long end)
 /*
  * Apply sealing.
  */
-static int apply_mm_seal(unsigned long start, unsigned long end)
+static int apply_mm_seal(unsigned long start, unsigned long end,
+	unsigned long seal_flags)
 {
 	unsigned long nstart;
 	struct vm_area_struct *vma, *prev;
@@ -189,7 +259,8 @@ static int apply_mm_seal(unsigned long start, unsigned long end)
 		unsigned long tmp;
 		vm_flags_t newflags;
 
-		newflags = vma->vm_flags | VM_SEALED;
+		newflags = vma->vm_flags | seal_flags;
+
 		tmp = vma->vm_end;
 		if (tmp > end)
 			tmp = end;
@@ -198,6 +269,14 @@ static int apply_mm_seal(unsigned long start, unsigned long end)
 			return error;
 		nstart = vma_iter_end(&vmi);
 	}
+
+	return 0;
+}
+
+static inline int can_do_mseal(unsigned long flags)
+{
+	if (flags & ~MSEAL_NX)
+		return -EINVAL;
 
 	return 0;
 }
@@ -260,10 +339,14 @@ static int do_mseal(unsigned long start, size_t len_in, unsigned long flags)
 	int ret = 0;
 	unsigned long end;
 	struct mm_struct *mm = current->mm;
+	unsigned long seal_flags = VM_SEALED;
 
 	ret = can_do_mseal(flags);
 	if (ret)
 		return ret;
+
+	if (flags & MSEAL_NX)
+		seal_flags |= VM_SEAL_NX;
 
 	start = untagged_addr(start);
 	if (!__PAGE_ALIGNED(start))
@@ -289,7 +372,7 @@ static int do_mseal(unsigned long start, size_t len_in, unsigned long flags)
 	 * partial sealing in case of error in input address range,
 	 * e.g. ENOMEM error.
 	 */
-	ret = check_mm_seal(start, end);
+	ret = check_mm_seal(start, end, seal_flags);
 	if (ret)
 		goto out;
 
@@ -299,7 +382,7 @@ static int do_mseal(unsigned long start, size_t len_in, unsigned long flags)
 	 * reaching the max supported VMAs, however, those cases shall
 	 * be rare.
 	 */
-	ret = apply_mm_seal(start, end);
+	ret = apply_mm_seal(start, end, seal_flags);
 
 out:
 	mmap_write_unlock(current->mm);
