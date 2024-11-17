@@ -402,7 +402,9 @@ extern unsigned int kobjsize(const void *objp);
 
 #ifdef CONFIG_64BIT
 /* VM is sealed, in vm_flags */
-#define VM_SEALED	_BITUL(63)
+#define VM_SEALED	_BITUL(39)
+/* VM is sealed for NX, in vm_flags */
+#define VM_SEAL_NX	_BITUL(40)
 #endif
 
 /* Bits set in the VMA until the stack is in its final location */
@@ -4139,6 +4141,18 @@ static inline void accept_memory(phys_addr_t start, phys_addr_t end)
 void free_hpage(struct page *page, int __bitwise fpi_flags);
 void prep_new_hpage(struct page *page, gfp_t gfp_flags, unsigned int alloc_flags);
 void prep_compound_page(struct page *page, unsigned int order);
+#endif
+
+#ifdef CONFIG_64BIT
+static inline unsigned long seal_nx_stack(void)
+{
+	return VM_SEALED | VM_SEAL_NX;
+}
+#else
+static inline unsigned long seal_nx_stack(void)
+{
+	return 0;
+}
 #endif
 
 #endif /* _LINUX_MM_H */
