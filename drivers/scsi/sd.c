@@ -3983,11 +3983,18 @@ static int sd_resume_common(struct device *dev, bool runtime)
 		return 0;
 	}
 
+<<<<<<< HEAD   (e83e87 Merge 7994a4849c8b ("scsi: ufs: Use pre-calculated offsets i)
 	if (!sdkp->device->no_start_on_resume) {
 		sd_printk(KERN_NOTICE, sdkp, "Starting disk\n");
 		ret = sd_start_stop_device(sdkp, 1);
 	}
 
+||||||| BASE
+	ret = sd_start_stop_device(sdkp, 1);
+=======
+	sd_printk(KERN_NOTICE, sdkp, "Starting disk\n");
+	ret = sd_start_stop_device(sdkp, 1);
+>>>>>>> BRANCH (e9448e Linux 6.6.57)
 	if (!ret) {
 		sd_resume(dev);
 		sdkp->suspended = false;
