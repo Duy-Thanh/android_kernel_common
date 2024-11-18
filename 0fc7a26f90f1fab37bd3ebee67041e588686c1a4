@@ -16,6 +16,23 @@
       "message": "Please see the bug for context. PTAL, thanks!",
       "revId": "0fc7a26f90f1fab37bd3ebee67041e588686c1a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e533508_d5dca0c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2024-11-18T17:29:36Z",
+      "side": 1,
+      "message": "Please check if the corsola config needs this as well",
+      "revId": "0fc7a26f90f1fab37bd3ebee67041e588686c1a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
