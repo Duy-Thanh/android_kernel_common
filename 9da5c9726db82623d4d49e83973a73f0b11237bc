@@ -22,6 +22,30 @@
       },
       "revId": "9da5c9726db82623d4d49e83973a73f0b11237bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e279620_85a2c19b",
+        "filename": "fs/f2fs/f2fs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2024-11-18T06:09:05Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. Indeed, the code would be much clearer. I updated the patch.",
+      "parentUuid": "40a9ee0e_5f26473c",
+      "range": {
+        "startLine": 2183,
+        "startChar": 0,
+        "endLine": 2193,
+        "endChar": 6
+      },
+      "revId": "9da5c9726db82623d4d49e83973a73f0b11237bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
