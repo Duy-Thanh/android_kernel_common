@@ -16,6 +16,24 @@
       "message": "Please add these configs for x86 too so that they are in sync.",
       "revId": "4dcd01af1d62996394c41e2ad68ace1135f5029a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f89f9679_5f30a8cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2024-11-18T05:20:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9783d36_6fa80439",
+      "revId": "4dcd01af1d62996394c41e2ad68ace1135f5029a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
