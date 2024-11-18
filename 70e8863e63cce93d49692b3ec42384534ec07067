@@ -16,6 +16,24 @@
       "message": "Since this can be a tricky change, we are waiting for 2 weeks to see if anyone reports an issue in linux-next before we merge this.",
       "revId": "70e8863e63cce93d49692b3ec42384534ec07067",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a96853b4_8498c747",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-11-18T18:58:31Z",
+      "side": 1,
+      "message": "We are now two weeks further and I haven\u0027t noticed any reports of issues related to this patch.",
+      "parentUuid": "6f829dc7_dd5edd44",
+      "revId": "70e8863e63cce93d49692b3ec42384534ec07067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
