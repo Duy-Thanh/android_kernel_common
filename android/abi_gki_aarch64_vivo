@@ -23,6 +23,7 @@
   end_buffer_read_sync
   end_buffer_write_sync
   filp_close
+  first_online_pgdat
   free_workqueue_attrs
   __getblk_gfp
   get_dup_sched_clock
@@ -33,12 +34,20 @@
   kblockd_mod_delayed_work_on
   kernfs_path_from_node
   __kmalloc_node
+  list_lru_add
+  list_lru_count_node
+  list_lru_del
+  list_lru_destroy
+  __list_lru_init
+  list_lru_walk_node
   __lock_buffer
   mipi_dsi_dcs_write
   __neigh_create
   netdev_is_rx_handler_busy
+  next_online_pgdat
   noop_qdisc
   of_css
+  ovl_inode_lower
   pfifo_qdisc_ops
   pfn_to_online_page
   proc_mkdir_mode
