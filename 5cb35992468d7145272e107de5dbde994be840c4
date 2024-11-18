@@ -37,6 +37,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d31f9f8_8fb0d61a",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-18T20:48:44Z",
+      "side": 1,
+      "message": "No! `unpack_shadow` should stay here. Only `bucket_order` should have been moved to https://r.android.com/c/kernel/common/+/3313100",
+      "range": {
+        "startLine": 371,
+        "startChar": 5,
+        "endLine": 371,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "091d3d81_1de511f2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/memcontrol.h",
+              "range": {
+                "startLine": 371,
+                "startChar": 0,
+                "endLine": 372,
+                "endChar": 0
+              },
+              "replacement": "void unpack_shadow(void *shadow, int *memcgidp, pg_data_t **pgdat,\n\t\t   unsigned long *evictionp, bool *workingsetp);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5cb35992468d7145272e107de5dbde994be840c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7194607d_69bba6f1",
         "filename": "mm/workingset.c",
         "patchSetId": 3
