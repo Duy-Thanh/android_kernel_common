@@ -614,7 +614,13 @@ int drm_gem_shmem_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
 		return ret;
 	}
 
+<<<<<<< HEAD   (bc390e Merge 5.15.168 into android13-5.15-lts)
 	shmem = to_drm_gem_shmem_obj(obj);
+||||||| BASE
+=======
+	if (is_cow_mapping(vma->vm_flags))
+		return -EINVAL;
+>>>>>>> BRANCH (74cdd6 Linux 5.15.169)
 
 	ret = drm_gem_shmem_get_pages(shmem);
 	if (ret)
