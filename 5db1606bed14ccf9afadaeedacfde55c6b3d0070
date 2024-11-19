@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b87681c2_2a5dc3ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-11-19T15:18:46Z",
+      "side": 1,
+      "message": "These symbols are not for modules to use at all, sorry.  Please use the in-kernel code for this instead.",
+      "revId": "5db1606bed14ccf9afadaeedacfde55c6b3d0070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
