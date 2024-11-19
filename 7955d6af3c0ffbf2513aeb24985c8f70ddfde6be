@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e4efb4_57e3affe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-11-19T17:34:54Z",
+      "side": 1,
+      "message": "Don\u0027t other dm targets have this same issue too?  For example dm-crypt and dm-linear.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 78
+      },
+      "revId": "7955d6af3c0ffbf2513aeb24985c8f70ddfde6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9afcccab_91316b39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-11-19T17:34:54Z",
+      "side": 1,
+      "message": "The code actually uses chunk_sectors, not max_sectors.  Why?",
+      "range": {
+        "startLine": 14,
+        "startChar": 67,
+        "endLine": 14,
+        "endChar": 78
+      },
+      "revId": "7955d6af3c0ffbf2513aeb24985c8f70ddfde6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "92a97bbb_c83a507e",
