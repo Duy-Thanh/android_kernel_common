@@ -442,6 +442,8 @@ config FRAME_WARN
 	default 1280 if KASAN && !64BIT
 	default 1024 if !64BIT
 	default 2048 if 64BIT
+	default 2048 if IOMMU_IO_PGTABLE_LPAE_SELFTEST
+
 	help
 	  Tell the compiler to warn at build time for stack frames larger than this.
 	  Setting this too low will cause a lot of warnings.
