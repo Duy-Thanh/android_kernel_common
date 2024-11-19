@@ -16,6 +16,24 @@
       "message": "This was revert by ACK , but restore by us, need commit to ACK;\n\t\nhttps://android-review.googlesource.com/c/kernel/common/+/2466131\nhttps://keystone-qcom-review.googlesource.com/c/kernel/common/+/1456293",
       "revId": "d32dae7d25bacf8a6263621979181c090f5a948a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a51946a_d10dc024",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-19T20:41:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "96f48e03_d486e6c1",
+      "revId": "d32dae7d25bacf8a6263621979181c090f5a948a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
