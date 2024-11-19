@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd0c7913_7969e4a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-11-19T15:18:21Z",
+      "side": 1,
+      "message": "No, they are not for modules to use, and the build should break.",
+      "parentUuid": "93950db7_f323ea5e",
+      "revId": "b161e386658cfe33fe10f64831990566064fed38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1427f27_d0bed19b",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
