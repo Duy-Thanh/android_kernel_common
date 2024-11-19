@@ -10,6 +10,7 @@
 
 #define pr_fmt(fmt) "ashmem: " fmt
 
+#include <linux/ashmem_compat.h>
 #include <linux/init.h>
 #include <linux/export.h>
 #include <linux/file.h>
@@ -17,6 +18,7 @@
 #include <linux/falloc.h>
 #include <linux/miscdevice.h>
 #include <linux/security.h>
+#include <linux/memfd.h>
 #include <linux/mm.h>
 #include <linux/mman.h>
 #include <linux/uaccess.h>
@@ -24,6 +26,7 @@
 #include <linux/bitops.h>
 #include <linux/mutex.h>
 #include <linux/shmem_fs.h>
+#include <uapi/linux/memfd.h>
 #include "ashmem.h"
 
 #define ASHMEM_NAME_PREFIX "dev/ashmem/"
@@ -94,6 +97,13 @@ static DEFINE_MUTEX(ashmem_mutex);
 
 static struct kmem_cache *ashmem_area_cachep __read_mostly;
 static struct kmem_cache *ashmem_range_cachep __read_mostly;
+
+/*
+ * Indicates if at least one ashmem buffer has been allocated. If so, the driver can no longer
+ * switch into memfd-compatibility mode.
+ */
+static bool ashmem_buffers_alloc;
+static bool ashmem_memfd_compat_enable;
 
 /*
  * A separate lockdep class for the backing shmem inodes to resolve the lockdep
@@ -251,22 +261,55 @@ static inline void range_shrink(struct ashmem_range *range,
 static int ashmem_open(struct inode *inode, struct file *file)
 {
 	struct ashmem_area *asma;
+	struct file *memfd_file;
 	int ret;
 
 	ret = generic_file_open(inode, file);
 	if (ret)
 		return ret;
 
-	asma = kmem_cache_zalloc(ashmem_area_cachep, GFP_KERNEL);
-	if (!asma)
-		return -ENOMEM;
+	mutex_lock(&ashmem_mutex);
+	if (ashmem_memfd_compat_enable) {
+		/*
+		 * There is no point in using MFD_CLOEXEC (O_CLOEXEC), as it
+		 * only applies to file descriptors, and not file structures.
+		 *
+		 * It is the responsibility of the process that invoked open
+		 * on the ashmem device file to set O_CLOEXEC. This will close
+		 * the ashmem device file on exec, and drop the reference
+		 * to the memfd file from ashmem_compat_create_memfd_file().
+		 *
+		 * Similarly, there's no point in using MFD_NOEXEC_SEAL, since
+		 * that prevents execve() and friends from being called on a
+		 * memfd file descriptor or path. But in either case, the file
+		 * descriptor and path will both point to the ashmem device
+		 * file, which is not executable.
+		 */
+		memfd_file = ashmem_compat_create_memfd_file("ashmem", 0);
+		if (IS_ERR(memfd_file)) {
+			ret = PTR_ERR(memfd_file);
+			goto out;
+		}
 
-	INIT_LIST_HEAD(&asma->unpinned_list);
-	memcpy(asma->name, ASHMEM_NAME_PREFIX, ASHMEM_NAME_PREFIX_LEN);
-	asma->prot_mask = PROT_MASK;
-	file->private_data = asma;
+		file->private_data = memfd_file;
+	} else {
+		asma = kmem_cache_zalloc(ashmem_area_cachep, GFP_KERNEL);
+		if (!asma) {
+			ret = -ENOMEM;
+			goto out;
+		}
 
-	return 0;
+		INIT_LIST_HEAD(&asma->unpinned_list);
+		memcpy(asma->name, ASHMEM_NAME_PREFIX, ASHMEM_NAME_PREFIX_LEN);
+		asma->prot_mask = PROT_MASK;
+		file->private_data = asma;
+	}
+
+	if (!ashmem_buffers_alloc)
+		ashmem_buffers_alloc = true;
+out:
+	mutex_unlock(&ashmem_mutex);
+	return ret;
 }
 
 /**
@@ -279,9 +322,13 @@ static int ashmem_open(struct inode *inode, struct file *file)
  */
 static int ashmem_release(struct inode *ignored, struct file *file)
 {
-	struct ashmem_area *asma = file->private_data;
+	struct ashmem_area *asma;
 	struct ashmem_range *range, *next;
 
+	if (ashmem_memfd_compat_enable)
+		return ashmem_compat_put_memfd_file(file->private_data);
+
+	asma = file->private_data;
 	mutex_lock(&ashmem_mutex);
 	list_for_each_entry_safe(range, next, &asma->unpinned_list, unpinned)
 		range_del(range);
@@ -296,8 +343,13 @@ static int ashmem_release(struct inode *ignored, struct file *file)
 
 static ssize_t ashmem_read_iter(struct kiocb *iocb, struct iov_iter *iter)
 {
-	struct ashmem_area *asma = iocb->ki_filp->private_data;
+	struct ashmem_area *asma;
 	int ret = 0;
+
+	if (ashmem_memfd_compat_enable)
+		return ashmem_compat_read_iter(iocb->ki_filp->private_data, iocb, iter);
+
+	asma = iocb->ki_filp->private_data;
 
 	mutex_lock(&ashmem_mutex);
 
@@ -328,8 +380,19 @@ out_unlock:
 
 static loff_t ashmem_llseek(struct file *file, loff_t offset, int origin)
 {
-	struct ashmem_area *asma = file->private_data;
+	struct ashmem_area *asma;
+	struct file *memfd_file;
 	loff_t ret;
+
+	if (ashmem_memfd_compat_enable) {
+		memfd_file = file->private_data;
+		ret = ashmem_compat_llseek(memfd_file, offset, origin);
+		if (ret >= 0)
+			file->f_pos = memfd_file->f_pos;
+		return ret;
+	}
+
+	asma = file->private_data;
 
 	mutex_lock(&ashmem_mutex);
 
@@ -378,8 +441,22 @@ ashmem_vmfile_get_unmapped_area(struct file *file, unsigned long addr,
 static int ashmem_mmap(struct file *file, struct vm_area_struct *vma)
 {
 	static struct file_operations vmfile_fops;
-	struct ashmem_area *asma = file->private_data;
+	struct ashmem_area *asma;
 	int ret = 0;
+
+	if (ashmem_memfd_compat_enable) {
+		ret = ashmem_compat_mmap(file->private_data, vma);
+		if (!ret) {
+			if (vma->vm_flags & VM_SHARED)
+				vma_set_file(vma, file->private_data);
+			else
+				vma_set_anonymous(vma);
+		}
+
+		return ret;
+	}
+
+	asma = file->private_data;
 
 	mutex_lock(&ashmem_mutex);
 
@@ -830,9 +907,14 @@ out_unlock:
 
 static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
-	struct ashmem_area *asma = file->private_data;
+	struct ashmem_area *asma;
 	unsigned long ino;
 	long ret = -ENOTTY;
+
+	if (ashmem_memfd_compat_enable)
+		return ashmem_compat_ioctl(file->private_data, cmd, arg);
+
+	asma = file->private_data;
 
 	switch (cmd) {
 	case ASHMEM_SET_NAME:
@@ -902,6 +984,9 @@ static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 static long compat_ashmem_ioctl(struct file *file, unsigned int cmd,
 				unsigned long arg)
 {
+	if (ashmem_memfd_compat_enable)
+		return ashmem_compat_ioctl_compat(file, cmd, arg);
+
 	switch (cmd) {
 	case COMPAT_ASHMEM_SET_SIZE:
 		cmd = ASHMEM_SET_SIZE;
@@ -917,6 +1002,11 @@ static long compat_ashmem_ioctl(struct file *file, unsigned int cmd,
 static void ashmem_show_fdinfo(struct seq_file *m, struct file *file)
 {
 	struct ashmem_area *asma = file->private_data;
+
+	if (ashmem_memfd_compat_enable) {
+		ashmem_compat_show_fdinfo(m, file->private_data);
+		return;
+	}
 
 	mutex_lock(&ashmem_mutex);
 
@@ -954,6 +1044,60 @@ static struct miscdevice ashmem_misc = {
 	.fops = &ashmem_fops,
 };
 
+#if IS_ENABLED(CONFIG_MEMFD_ASHMEM_COMPAT)
+static ssize_t memfd_compat_enable_show(struct kobject *kobj, struct kobj_attribute *attr,
+					char *buf)
+{
+	return sysfs_emit(buf, "%d\n", ashmem_memfd_compat_enable);
+}
+
+static ssize_t memfd_compat_enable_store(struct kobject *kobj, struct kobj_attribute *attr,
+					 const char *buf, size_t count)
+{
+	ssize_t ret = count;
+	bool enable;
+
+	if (kstrtobool(buf, &enable))
+		return -EINVAL;
+
+	mutex_lock(&ashmem_mutex);
+
+	if (ashmem_buffers_alloc) {
+		ret = -EINVAL;
+		pr_err_ratelimited("ashmem-memfd compat mode must be enabled before first allocation\n");
+		goto out;
+	}
+
+	ashmem_memfd_compat_enable = enable;
+out:
+	mutex_unlock(&ashmem_mutex);
+	return ret;
+}
+
+static struct kobj_attribute ashmem_memfd_compat_enable_attr = __ATTR_RW(memfd_compat_enable);
+static struct kobject *ashmem_kobj_root;
+
+static int ashmem_sysfs_create(void)
+{
+	int ret;
+
+	ashmem_kobj_root = kobject_create_and_add("ashmem", mm_kobj);
+	if (!ashmem_kobj_root)
+		return -ENOMEM;
+
+	ret = sysfs_create_file(ashmem_kobj_root, &ashmem_memfd_compat_enable_attr.attr);
+	if (ret)
+		kobject_put(ashmem_kobj_root);
+
+	return ret;
+}
+#else
+static int ashmem_sysfs_create(void)
+{
+	return 0;
+}
+#endif
+
 static int __init ashmem_init(void)
 {
 	int ret = -ENOMEM;
@@ -986,10 +1130,16 @@ static int __init ashmem_init(void)
 		goto out_demisc;
 	}
 
+	ret = ashmem_sysfs_create();
+	if (ret)
+		goto out_shrinker_free;
+
 	pr_info("initialized\n");
 
 	return 0;
 
+out_shrinker_free:
+	shrinker_free(ashmem_shrinker);
 out_demisc:
 	misc_deregister(&ashmem_misc);
 out_free2:

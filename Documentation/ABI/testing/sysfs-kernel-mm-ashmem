@@ -1,0 +1,27 @@
+What:		/sys/kernel/mm/ashmem/
+Date:		Nov 2024
+Contact:	Isaac J. Manjarres <isaacmanjarres@google.com>
+Description:
+		/sys/kernel/mm/ashmem/ contains a single node that can be used
+		to enable memfd compatibility mode for the ashmem driver.
+
+		This causes the ashmem driver to allocate memfds and act as a
+		thin wrapper around them.
+
+What:		/sys/kernel/mm/ashmem/memfd_compat_enable
+Date:		Nov 2024
+Contact:	Isaac J. Manjarres <isaacmanjarres@google.com>
+Description:
+		Can be read to determine what mode the ashmem driver is
+		operating in.
+
+		A value of 0 indicates that the driver is operating in legacy
+		mode.
+
+		A value of 1 indicates that the driver is operating in memfd
+		compatible mode, which causes it to allocate memfds each time
+		/dev/ashmem is opened.
+
+		Writing a value of 1 to the node enables memfd compatible mode.
+		The write will only take effect if no ashmem buffers have been
+		allocated beforehand.
