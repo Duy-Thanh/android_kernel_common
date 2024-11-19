@@ -17,6 +17,7 @@
 #include <linux/falloc.h>
 #include <linux/miscdevice.h>
 #include <linux/security.h>
+#include <linux/memfd.h>
 #include <linux/mm.h>
 #include <linux/mman.h>
 #include <linux/uaccess.h>
@@ -24,6 +25,7 @@
 #include <linux/bitops.h>
 #include <linux/mutex.h>
 #include <linux/shmem_fs.h>
+#include <uapi/linux/memfd.h>
 #include "ashmem.h"
 
 #define ASHMEM_NAME_PREFIX "dev/ashmem/"
@@ -948,13 +950,126 @@ static const struct file_operations ashmem_fops = {
 #endif
 };
 
+static int ashmem_memfd_open(struct inode *inode, struct file *file)
+{
+	struct file *memfd_file = memfd_filp_create("ashmem", MFD_CLOEXEC | MFD_ALLOW_SEALING,
+						    true);
+
+	if (IS_ERR(memfd_file))
+		return PTR_ERR(memfd_file);
+
+	file->private_data = memfd_file;
+	return 0;
+}
+
+static int ashmem_memfd_release(struct inode *inode, struct file *file)
+{
+	fput(file->private_data);
+	return 0;
+}
+
+static int ashmem_memfd_mmap(struct file *file, struct vm_area_struct *vma)
+{
+	struct file *memfd_file = file->private_data;
+	int ret;
+
+	ret = call_mmap(memfd_file, vma);
+	if (!ret) {
+		if (vma->vm_flags & VM_SHARED)
+			vma_set_file(vma, memfd_file);
+		else
+			vma_set_anonymous(vma);
+	}
+
+	return ret;
+}
+
+static ssize_t ashmem_memfd_read_iter(struct kiocb *iocb, struct iov_iter *iter)
+{
+	struct file *memfd_file = iocb->ki_filp->private_data;
+	ssize_t ret = vfs_iter_read(memfd_file, iter, &iocb->ki_pos, 0);
+
+	if (ret > 0)
+		memfd_file->f_pos = iocb->ki_pos;
+
+	return ret;
+}
+
+static loff_t ashmem_memfd_llseek(struct file *file, loff_t offset, int origin)
+{
+	struct file *memfd_file = file->private_data;
+	loff_t ret = vfs_llseek(memfd_file, offset, origin);
+
+	if (ret < 0)
+		return ret;
+
+	mutex_lock(&ashmem_mutex);
+	file->f_pos = memfd_file->f_pos;
+	mutex_unlock(&ashmem_mutex);
+
+	return ret;
+}
+
+static long ashmem_memfd_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	struct file *memfd_file = file->private_data;
+
+	return memfd_file->f_op->unlocked_ioctl(memfd_file, cmd, arg);
+}
+
+#ifdef CONFIG_COMPAT
+static long ashmem_memfd_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	struct file *memfd_file = file->private_data;
+
+	return memfd_file->f_op->compat_ioctl(memfd_file, cmd, arg);
+}
+#endif
+
+#ifdef CONFIG_PROC_FS
+static void ashmem_memfd_show_fdinfo(struct seq_file *m, struct file *file)
+{
+	struct file *memfd_file = file->private_data;
+	struct inode *inode = file_inode(memfd_file);
+	char *name;
+
+	inode_lock_shared(inode);
+
+	seq_printf(m, "inode:\t%ld\n", inode->i_ino);
+
+	name = memfd_file->f_path.dentry->d_fsdata;
+	if (name)
+		seq_printf(m, "name:\t%s\n", name + strlen("memfd:"));
+
+	seq_printf(m, "size:\t%lld\n", i_size_read(inode));
+
+	inode_unlock_shared(inode);
+}
+#endif
+
+static const struct file_operations ashmem_memfd_fops = {
+	.owner = THIS_MODULE,
+	.open = ashmem_memfd_open,
+	.release = ashmem_memfd_release,
+	.mmap = ashmem_memfd_mmap,
+	.read_iter = ashmem_memfd_read_iter,
+	.llseek = ashmem_memfd_llseek,
+	.unlocked_ioctl = ashmem_memfd_ioctl,
+#ifdef CONFIG_COMPAT
+	.compat_ioctl = ashmem_memfd_compat_ioctl,
+#endif
+#ifdef CONFIG_PROC_FS
+	.show_fdinfo = ashmem_memfd_show_fdinfo
+#endif
+};
+
 static struct miscdevice ashmem_misc = {
 	.minor = MISC_DYNAMIC_MINOR,
 	.name = "ashmem",
-	.fops = &ashmem_fops,
+	.fops = IS_ENABLED(CONFIG_MEMFD_ASHMEM_COMPAT) ? &ashmem_memfd_fops : &ashmem_fops,
 };
 
-static int __init ashmem_init(void)
+static int __init ashmem_legacy_init(void)
 {
 	int ret = -ENOMEM;
 
@@ -971,32 +1086,56 @@ static int __init ashmem_init(void)
 						0, SLAB_RECLAIM_ACCOUNT, NULL);
 	if (!ashmem_range_cachep) {
 		pr_err("failed to create slab cache\n");
-		goto out_free1;
-	}
-
-	ret = misc_register(&ashmem_misc);
-	if (ret) {
-		pr_err("failed to register misc device!\n");
-		goto out_free2;
+		goto out_free_area_cache;
 	}
 
 	ret = ashmem_init_shrinker();
 	if (ret) {
 		pr_err("failed to register shrinker!\n");
-		goto out_demisc;
+		goto out_free_range_cache;
 	}
-
-	pr_info("initialized\n");
 
 	return 0;
 
-out_demisc:
-	misc_deregister(&ashmem_misc);
-out_free2:
+out_free_range_cache:
 	kmem_cache_destroy(ashmem_range_cachep);
-out_free1:
+out_free_area_cache:
 	kmem_cache_destroy(ashmem_area_cachep);
 out:
+	return ret;
+}
+
+static void ashmem_legacy_destroy(void)
+{
+	shrinker_free(ashmem_shrinker);
+	kmem_cache_destroy(ashmem_range_cachep);
+	kmem_cache_destroy(ashmem_area_cachep);
+}
+
+static int __init ashmem_init(void)
+{
+	int ret;
+
+	if (!IS_ENABLED(CONFIG_MEMFD_ASHMEM_COMPAT)) {
+		ret = ashmem_legacy_init();
+		if (ret)
+			return ret;
+	}
+
+	ret = misc_register(&ashmem_misc);
+	if (ret) {
+		pr_err("failed to register misc device!\n");
+		goto out_destroy;
+	}
+
+	pr_info("initialized ashmem driver in %s mode\n",
+		IS_ENABLED(CONFIG_MEMFD_ASHMEM_COMPAT) ? "memfd-compat" : "legacy");
+
+	return 0;
+
+out_destroy:
+	if (!IS_ENABLED(CONFIG_MEMFD_ASHMEM_COMPAT))
+		ashmem_legacy_destroy();
 	return ret;
 }
 device_initcall(ashmem_init);
