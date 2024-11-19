@@ -16,6 +16,47 @@
       "message": "Done",
       "revId": "3371472684df8bcf32b5abe4ea0d45c683fbc3f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b5041e_7fdceafd",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-19T02:56:58Z",
+      "side": 1,
+      "message": "Please keep the line at max 80 chars.",
+      "range": {
+        "startLine": 370,
+        "startChar": 0,
+        "endLine": 370,
+        "endChar": 112
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5145cf75_b36954dc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/memcontrol.h",
+              "range": {
+                "startLine": 370,
+                "startChar": 0,
+                "endLine": 371,
+                "endChar": 0
+              },
+              "replacement": "void unpack_shadow(void *shadow, int *memcgidp, pg_data_t **pgdat,\n\t\t   unsigned long *evictionp, bool *workingsetp);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3371472684df8bcf32b5abe4ea0d45c683fbc3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
