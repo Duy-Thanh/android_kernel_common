@@ -16,6 +16,46 @@
       "message": "@gregkh@google.com, you okay with these symbols?",
       "revId": "b161e386658cfe33fe10f64831990566064fed38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38bd2a40_af5a6df8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-11-19T15:17:55Z",
+      "side": 1,
+      "message": "These symbols are not exported for anyone to use, this will fail the build.\n\nHow was this tested?",
+      "revId": "b161e386658cfe33fe10f64831990566064fed38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1427f27_d0bed19b",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-11-19T15:17:55Z",
+      "side": 1,
+      "message": "this is not exported, so how can it be added to the symbol list?",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 17
+      },
+      "revId": "b161e386658cfe33fe10f64831990566064fed38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
