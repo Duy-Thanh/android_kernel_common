@@ -17,6 +17,7 @@
 #include <linux/falloc.h>
 #include <linux/miscdevice.h>
 #include <linux/security.h>
+#include <linux/memfd.h>
 #include <linux/mm.h>
 #include <linux/mman.h>
 #include <linux/uaccess.h>
@@ -24,6 +25,7 @@
 #include <linux/bitops.h>
 #include <linux/mutex.h>
 #include <linux/shmem_fs.h>
+#include <uapi/linux/memfd.h>
 #include "ashmem.h"
 
 #define ASHMEM_NAME_PREFIX "dev/ashmem/"
@@ -94,6 +96,13 @@ static DEFINE_MUTEX(ashmem_mutex);
 
 static struct kmem_cache *ashmem_area_cachep __read_mostly;
 static struct kmem_cache *ashmem_range_cachep __read_mostly;
+
+/*
+ * Indicates if at least one ashmem buffer has been allocated. If so, the driver can no longer
+ * switch into memfd-compatibility mode.
+ */
+static bool ashmem_buffers_alloc;
+static bool ashmem_memfd_compat_enable;
 
 /*
  * A separate lockdep class for the backing shmem inodes to resolve the lockdep
@@ -248,7 +257,7 @@ static inline void range_shrink(struct ashmem_range *range,
  *
  * Return: 0 if successful, or another code if unsuccessful.
  */
-static int ashmem_open(struct inode *inode, struct file *file)
+static int ashmem_legacy_open(struct inode *inode, struct file *file)
 {
 	struct ashmem_area *asma;
 	int ret;
@@ -277,7 +286,7 @@ static int ashmem_open(struct inode *inode, struct file *file)
  * Return: 0 if successful. If it is anything else, go have a coffee and
  * try again.
  */
-static int ashmem_release(struct inode *ignored, struct file *file)
+static int ashmem_legacy_release(struct inode *ignored, struct file *file)
 {
 	struct ashmem_area *asma = file->private_data;
 	struct ashmem_range *range, *next;
@@ -294,7 +303,7 @@ static int ashmem_release(struct inode *ignored, struct file *file)
 	return 0;
 }
 
-static ssize_t ashmem_read_iter(struct kiocb *iocb, struct iov_iter *iter)
+static ssize_t ashmem_legacy_read_iter(struct kiocb *iocb, struct iov_iter *iter)
 {
 	struct ashmem_area *asma = iocb->ki_filp->private_data;
 	int ret = 0;
@@ -326,7 +335,7 @@ out_unlock:
 	return ret;
 }
 
-static loff_t ashmem_llseek(struct file *file, loff_t offset, int origin)
+static loff_t ashmem_legacy_llseek(struct file *file, loff_t offset, int origin)
 {
 	struct ashmem_area *asma = file->private_data;
 	loff_t ret;
@@ -375,7 +384,7 @@ ashmem_vmfile_get_unmapped_area(struct file *file, unsigned long addr,
 	return mm_get_unmapped_area(current->mm, file, addr, len, pgoff, flags);
 }
 
-static int ashmem_mmap(struct file *file, struct vm_area_struct *vma)
+static int ashmem_legacy_mmap(struct file *file, struct vm_area_struct *vma)
 {
 	static struct file_operations vmfile_fops;
 	struct ashmem_area *asma = file->private_data;
@@ -828,7 +837,7 @@ out_unlock:
 	return ret;
 }
 
-static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+static long ashmem_legacy_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 	struct ashmem_area *asma = file->private_data;
 	unsigned long ino;
@@ -899,7 +908,7 @@ static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 
 /* support of 32bit userspace on 64bit platforms */
 #ifdef CONFIG_COMPAT
-static long compat_ashmem_ioctl(struct file *file, unsigned int cmd,
+static long compat_ashmem_legacy_ioctl(struct file *file, unsigned int cmd,
 				unsigned long arg)
 {
 	switch (cmd) {
@@ -910,11 +919,26 @@ static long compat_ashmem_ioctl(struct file *file, unsigned int cmd,
 		cmd = ASHMEM_SET_PROT_MASK;
 		break;
 	}
-	return ashmem_ioctl(file, cmd, arg);
+	return ashmem_legacy_ioctl(file, cmd, arg);
+}
+
+static long ashmem_memfd_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	struct file *memfd_file = file->private_data;
+
+	return memfd_file->f_op->compat_ioctl(memfd_file, cmd, arg);
+}
+
+static long compat_ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	if (ashmem_memfd_compat_enable)
+		return ashmem_memfd_compat_ioctl(file, cmd, arg);
+
+	return compat_ashmem_legacy_ioctl(file, cmd, arg);
 }
 #endif
 #ifdef CONFIG_PROC_FS
-static void ashmem_show_fdinfo(struct seq_file *m, struct file *file)
+static void ashmem_legacy_show_fdinfo(struct seq_file *m, struct file *file)
 {
 	struct ashmem_area *asma = file->private_data;
 
@@ -931,7 +955,198 @@ static void ashmem_show_fdinfo(struct seq_file *m, struct file *file)
 
 	mutex_unlock(&ashmem_mutex);
 }
+
+static void ashmem_memfd_show_fdinfo(struct seq_file *m, struct file *file)
+{
+	struct file *memfd_file = file->private_data;
+	struct inode *inode = file_inode(memfd_file);
+	char *name;
+
+	inode_lock_shared(inode);
+
+	seq_printf(m, "inode:\t%ld\n", inode->i_ino);
+
+	name = memfd_file->f_path.dentry->d_fsdata;
+	if (name)
+		seq_printf(m, "name:\t%s\n", name + strlen("memfd:"));
+
+	seq_printf(m, "size:\t%lld\n", i_size_read(inode));
+
+	inode_unlock_shared(inode);
+}
+
+static void ashmem_show_fdinfo(struct seq_file *m, struct file *file)
+{
+	if (ashmem_memfd_compat_enable)
+		return ashmem_memfd_show_fdinfo(m, file);
+
+	return ashmem_legacy_show_fdinfo(m, file);
+}
 #endif
+
+static int ashmem_memfd_open(struct inode *inode, struct file *file)
+{
+	struct file *memfd_file = memfd_filp_create("ashmem", MFD_CLOEXEC | MFD_ALLOW_SEALING);
+
+	if (IS_ERR(memfd_file))
+		return PTR_ERR(memfd_file);
+
+	file->private_data = memfd_file;
+	return 0;
+}
+
+static int ashmem_memfd_release(struct inode *inode, struct file *file)
+{
+	fput(file->private_data);
+	return 0;
+}
+
+static int ashmem_memfd_mmap(struct file *file, struct vm_area_struct *vma)
+{
+	struct file *memfd_file = file->private_data;
+	int ret;
+
+	ret = call_mmap(memfd_file, vma);
+	if (!ret) {
+		if (vma->vm_flags & VM_SHARED)
+			vma_set_file(vma, memfd_file);
+		else
+			vma_set_anonymous(vma);
+	}
+
+	return ret;
+}
+
+static ssize_t ashmem_memfd_read_iter(struct kiocb *iocb, struct iov_iter *iter)
+{
+	struct file *memfd_file = iocb->ki_filp->private_data;
+	ssize_t ret = vfs_iter_read(memfd_file, iter, &iocb->ki_pos, 0);
+
+	if (ret > 0)
+		memfd_file->f_pos = iocb->ki_pos;
+
+	return ret;
+}
+
+static loff_t ashmem_memfd_llseek(struct file *file, loff_t offset, int origin)
+{
+	struct file *memfd_file = file->private_data;
+	loff_t ret = vfs_llseek(memfd_file, offset, origin);
+
+	if (ret < 0)
+		return ret;
+
+	mutex_lock(&ashmem_mutex);
+	file->f_pos = memfd_file->f_pos;
+	mutex_unlock(&ashmem_mutex);
+
+	return ret;
+}
+
+static long ashmem_memfd_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	struct file *memfd_file = file->private_data;
+
+	return memfd_file->f_op->unlocked_ioctl(memfd_file, cmd, arg);
+}
+
+static int ashmem_open(struct inode *inode, struct file *file)
+{
+	int ret;
+
+	/*
+	 * We only have to take the lock here to ensure that ashmem_memfd_compat_enable doesn't
+	 * change while an allocation is happening. None of the other functions can be invoked
+	 * without having opened an fd first, and after the first fd has been successfully created,
+	 * ashmem_memfd_compat_enable cannot be changed, so there is no need to take the lock in
+	 * the rest of the functions when checking ashmem_memfd_compat_enable.
+	 */
+	mutex_lock(&ashmem_mutex);
+
+	if (ashmem_memfd_compat_enable)
+		ret = ashmem_memfd_open(inode, file);
+	else
+		ret = ashmem_legacy_open(inode, file);
+
+	if (!ret && !ashmem_buffers_alloc)
+		ashmem_buffers_alloc = true;
+
+	mutex_unlock(&ashmem_mutex);
+	return ret;
+}
+
+static int ashmem_release(struct inode *inode, struct file *file)
+{
+	if (ashmem_memfd_compat_enable)
+		return ashmem_memfd_release(inode, file);
+
+	return ashmem_legacy_release(inode, file);
+}
+
+static ssize_t ashmem_read_iter(struct kiocb *iocb, struct iov_iter *iter)
+{
+	if (ashmem_memfd_compat_enable)
+		return ashmem_memfd_read_iter(iocb, iter);
+
+	return ashmem_legacy_read_iter(iocb, iter);
+}
+
+static loff_t ashmem_llseek(struct file *file, loff_t offset, int origin)
+{
+	if (ashmem_memfd_compat_enable)
+		return ashmem_memfd_llseek(file, offset, origin);
+
+	return ashmem_legacy_llseek(file, offset, origin);
+}
+
+static int ashmem_mmap(struct file *file, struct vm_area_struct *vma)
+{
+	if (ashmem_memfd_compat_enable)
+		return ashmem_memfd_mmap(file, vma);
+
+	return ashmem_legacy_mmap(file, vma);
+}
+
+static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	if (ashmem_memfd_compat_enable)
+		return ashmem_memfd_ioctl(file, cmd, arg);
+
+	return ashmem_legacy_ioctl(file, cmd, arg);
+}
+
+static ssize_t memfd_compat_enable_show(struct kobject *kobj, struct kobj_attribute *attr,
+					char *buf)
+{
+	return sysfs_emit(buf, "%d\n", ashmem_memfd_compat_enable);
+}
+
+static ssize_t memfd_compat_enable_store(struct kobject *kobj, struct kobj_attribute *attr,
+					 const char *buf, size_t count)
+{
+	ssize_t ret = count;
+	bool enable;
+
+	if (kstrtobool(buf, &enable))
+		return -EINVAL;
+
+	mutex_lock(&ashmem_mutex);
+
+	if (ashmem_buffers_alloc || (enable && !IS_ENABLED(CONFIG_MEMFD_ASHMEM_COMPAT))) {
+		ret = -EINVAL;
+		goto out;
+	}
+
+	ashmem_memfd_compat_enable = enable;
+out:
+	mutex_unlock(&ashmem_mutex);
+	return ret;
+}
+
+static struct kobj_attribute ashmem_memfd_compat_enable_attr = __ATTR_RW(memfd_compat_enable);
+
+static struct kobject *ashmem_kobj_root;
+
 static const struct file_operations ashmem_fops = {
 	.owner = THIS_MODULE,
 	.open = ashmem_open,
@@ -986,10 +1201,24 @@ static int __init ashmem_init(void)
 		goto out_demisc;
 	}
 
+	ashmem_kobj_root = kobject_create_and_add("ashmem", mm_kobj);
+	if (!ashmem_kobj_root) {
+		ret = -ENOMEM;
+		goto out_shrinker_free;
+	}
+
+	ret = sysfs_create_file(ashmem_kobj_root, &ashmem_memfd_compat_enable_attr.attr);
+	if (ret)
+		goto out_kobj_put;
+
 	pr_info("initialized\n");
 
 	return 0;
 
+out_kobj_put:
+	kobject_put(ashmem_kobj_root);
+out_shrinker_free:
+	shrinker_free(ashmem_shrinker);
 out_demisc:
 	misc_deregister(&ashmem_misc);
 out_free2:
