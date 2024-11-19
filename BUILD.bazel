@@ -19,6 +19,7 @@ load(
     "checkpatch",
     "ddk_headers",
     "ddk_headers_archive",
+    "ddk_module",
     "initramfs",
     "kernel_build",
     "kernel_compile_commands",
@@ -2972,3 +2973,15 @@ pkg_zip(
 exports_files([
     "Makefile",
 ])
+
+ddk_module(
+    name = "snd-soc-da7219",
+    srcs = [
+        "sound/soc/codecs/da7219.c",
+        "sound/soc/codecs/da7219.h",
+        "sound/soc/codecs/da7219-aad.c",
+        "sound/soc/codecs/da7219-aad.h",
+    ],
+    out = "sound/soc/codecs/snd-soc-da7219.ko",
+    kernel_build = "//private/google-modules/linux/brya:brya_device_x86_64",
+)
