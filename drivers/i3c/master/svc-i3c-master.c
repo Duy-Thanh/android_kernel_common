@@ -1051,7 +1051,12 @@ static int svc_i3c_master_xfer(struct svc_i3c_master *master,
 		       SVC_I3C_MCTRL_ADDR(addr) |
 		       SVC_I3C_MCTRL_RDTERM(*read_len),
 		       master->regs + SVC_I3C_MCTRL);
-
+#if 0
+		ret = readl_poll_timeout(master->regs + SVC_I3C_MSTATUS, reg,
+				 SVC_I3C_MSTATUS_MCTRLDONE(reg), 0, 1000);
+		if (ret)
+			goto emit_stop;
+#endif
 		if (readl(master->regs + SVC_I3C_MERRWARN) & SVC_I3C_MERRWARN_NACK) {
 			/*
 			 * According to I3C Spec 1.1.1, 11-Jun-2021, section: 5.1.2.2.3.
