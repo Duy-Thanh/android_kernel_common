@@ -33,6 +33,24 @@
       "message": "Please check if the corsola config needs this as well",
       "revId": "0fc7a26f90f1fab37bd3ebee67041e588686c1a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6974893b_d2a76718",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951675
+      },
+      "writtenOn": "2024-11-19T02:32:00Z",
+      "side": 1,
+      "message": "arch/arm64/configs/android-arm64_defconfig already has `CONFIG_UNICODE\u003dy` and I checked that corsola has CONFIG_UNICODE enabled:\n```\ncorsola:/ $ cat /proc/config.gz | gunzip | grep CONFIG_UNICODE\nCONFIG_UNICODE\u003dy\n# CONFIG_UNICODE_NORMALIZATION_SELFTEST is not set\n```",
+      "parentUuid": "0e533508_d5dca0c4",
+      "revId": "0fc7a26f90f1fab37bd3ebee67041e588686c1a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
