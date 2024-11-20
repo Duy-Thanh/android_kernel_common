@@ -16,6 +16,24 @@
       "message": "These symbols are not for modules to use at all, sorry.  Please use the in-kernel code for this instead.",
       "revId": "5db1606bed14ccf9afadaeedacfde55c6b3d0070",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ddbeb8f_7abd669e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2024-11-20T10:03:51Z",
+      "side": 1,
+      "message": "1630 #define for_each_online_pgdat(pgdat)            \\\n1631     for (pgdat \u003d first_online_pgdat();      \\\n1632          pgdat;                 \\\n1633          pgdat \u003d next_online_pgdat(pgdat))\n\nWe are attempting to use for_each_online_pgdat() to initialize ANDROID_OEM_DATA(1) of struct pglist_data. However, we have not found any in-kernel code that can achieve this. Do you have any suggestions?",
+      "parentUuid": "b87681c2_2a5dc3ff",
+      "revId": "5db1606bed14ccf9afadaeedacfde55c6b3d0070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
