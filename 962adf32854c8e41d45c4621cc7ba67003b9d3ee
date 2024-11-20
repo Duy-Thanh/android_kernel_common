@@ -46,6 +46,30 @@
       },
       "revId": "962adf32854c8e41d45c4621cc7ba67003b9d3ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d66d5b9_9059c1d6",
+        "filename": "lib/Kconfig.debug",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-20T16:52:36Z",
+      "side": 1,
+      "message": "sorry, meant 32-bit arm builds (not x86)",
+      "parentUuid": "978b94a8_cc5e99ad",
+      "range": {
+        "startLine": 443,
+        "startChar": 9,
+        "endLine": 443,
+        "endChar": 13
+      },
+      "revId": "962adf32854c8e41d45c4621cc7ba67003b9d3ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
