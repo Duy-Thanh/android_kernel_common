@@ -235,10 +235,16 @@ DECLARE_RESTRICTED_HOOK(android_rvh_check_preempt_wakeup_fair,
 	TP_PROTO(struct rq *rq, struct task_struct *p, bool *preempt, bool *nopreempt,
 			int wake_flags, struct sched_entity *se, struct sched_entity *pse),
 	TP_ARGS(rq, p, preempt, nopreempt, wake_flags, se, pse), 1);
+<<<<<<< HEAD   (bbb3f0 Reapply "usb: dwc3: core: Fix system suspend on TI AM62 plat)
 
 DECLARE_RESTRICTED_HOOK(android_rvh_update_deadline,
 	TP_PROTO(struct cfs_rq *cfs_rq, struct sched_entity *se, bool *skip_preempt),
 	TP_ARGS(cfs_rq, se, skip_preempt), 1);
+||||||| BASE
+	TP_ARGS(rq, p, preempt, nopreempt, wake_flags, se, pse, next_buddy_marked,
+			granularity), 1);
+=======
+>>>>>>> BRANCH (a53bb4 ANDROID: Update kunit README on test_dir)
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_cpus_allowed_by_task,
 	TP_PROTO(const struct cpumask *cpu_valid_mask, const struct cpumask *new_mask,

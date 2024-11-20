@@ -1,16 +1,19 @@
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.constants
 
+<<<<<<< HEAD   (bbb3f0 Reapply "usb: dwc3: core: Fix system suspend on TI AM62 plat)
 KMI_GENERATION=0
 
 BRANCH=android16-6.12
 LLVM=1
 DEPMOD=depmod
 DTC=$(command -v dtc)
+||||||| BASE
+BRANCH=android-mainline
+LLVM=1
+DEPMOD=depmod
+DTC=$(command -v dtc)
+=======
+BRANCH=android-mainline
+>>>>>>> BRANCH (a53bb4 ANDROID: Update kunit README on test_dir)
 
 KCFLAGS="${KCFLAGS} -D__ANDROID_COMMON_KERNEL__"
-EXTRA_CMDS=''
-STOP_SHIP_TRACEPRINTK=1
-IN_KERNEL_MODULES=1
-DO_NOT_STRIP_MODULES=1
-
-HERMETIC_TOOLCHAIN=${HERMETIC_TOOLCHAIN:-1}

@@ -94,7 +94,11 @@ _ARM_GKI_MODULES_LIST = [
 
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
+<<<<<<< HEAD   (bbb3f0 Reapply "usb: dwc3: core: Fix system suspend on TI AM62 plat)
     "arch/arm64/geniezone/gzvm.ko",
+||||||| BASE
+=======
+>>>>>>> BRANCH (a53bb4 ANDROID: Update kunit README on test_dir)
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",

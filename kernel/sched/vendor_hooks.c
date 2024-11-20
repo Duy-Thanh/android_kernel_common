@@ -41,7 +41,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_wakeup_ignore);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_replace_next_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_balance_rt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_wakeup_fair);
+<<<<<<< HEAD   (bbb3f0 Reapply "usb: dwc3: core: Fix system suspend on TI AM62 plat)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_deadline);
+||||||| BASE
+=======
+>>>>>>> BRANCH (a53bb4 ANDROID: Update kunit README on test_dir)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_by_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_get);
