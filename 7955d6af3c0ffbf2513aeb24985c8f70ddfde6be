@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f654a16d_9b97d788",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-11-20T00:01:53Z",
+      "side": 1,
+      "message": "Other dm targets have this same issue too, but we only use `dm-default-key` for the zoned block device now. \nIf other targets need to be modified, it seems that the change need to be upstreamed at first. `dm-default-key` is on ACK only now.",
+      "parentUuid": "70e4efb4_57e3affe",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 78
+      },
+      "revId": "7955d6af3c0ffbf2513aeb24985c8f70ddfde6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9afcccab_91316b39",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-19T17:34:54Z",
       "side": 1,
       "message": "The code actually uses chunk_sectors, not max_sectors.  Why?",
+      "range": {
+        "startLine": 14,
+        "startChar": 67,
+        "endLine": 14,
+        "endChar": 78
+      },
+      "revId": "7955d6af3c0ffbf2513aeb24985c8f70ddfde6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe7e44e_8ab6298c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-11-20T00:01:53Z",
+      "side": 1,
+      "message": "https://android.googlesource.com/kernel/common/+/7955d6af3c0ffbf2513aeb24985c8f70ddfde6be/drivers/md/dm.c#1161\n\n```c\nstatic sector_t __max_io_len(struct dm_target *ti, sector_t sector,\n\t\t\t     unsigned int max_granularity,\n\t\t\t     unsigned int max_sectors)\n{\n\tsector_t target_offset \u003d dm_target_offset(ti, sector);\n\tsector_t len \u003d max_io_len_target_boundary(ti, target_offset);\n\t/*\n\t * Does the target need to split IO even further?\n\t * - varied (per target) IO splitting is a tenet of DM; this\n\t *   explains why stacked chunk_sectors based splitting via\n\t *   bio_split_to_limits() isn\u0027t possible here.\n\t */\n\tif (!max_granularity)\n\t\treturn len;\n\treturn min_t(sector_t, len,\n\t\tmin(max_sectors ? : queue_max_sectors(ti-\u003etable-\u003emd-\u003equeue),\n\t\t    blk_chunk_sectors_left(target_offset, max_granularity)));\n}\nstatic inline sector_t max_io_len(struct dm_target *ti, sector_t sector)\n{\n\treturn __max_io_len(ti, sector, ti-\u003emax_io_len, 0);\n}\n```\n\n`chunk_sectors` and `max_sectors` are two different limits.\n\n`max_sectors` limit the maximum size of one single bio.\n\n`chunk_sectors`(max_granularity in __max_io_len) make sure that the range of the bio won\u0027t cross the boundary of two zones.",
+      "parentUuid": "9afcccab_91316b39",
       "range": {
         "startLine": 14,
         "startChar": 67,
