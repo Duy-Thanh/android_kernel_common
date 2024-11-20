@@ -16,6 +16,24 @@
       "message": "we don\u0027t take patches for what venders _may want_ to do. If this is not actually required, then please abandon it. If it is required, then please explain why in much more detail - either here or in the associated bug.",
       "revId": "0138d7e58cb354a3b2626138f2da7e0932018bb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60420648_925fe091",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3178523
+      },
+      "writtenOn": "2024-11-20T15:43:37Z",
+      "side": 1,
+      "message": "Sorry for using ambiguous word \"may\", I will remove it. The way we use HW signal to fine-tune PELT value",
+      "parentUuid": "d0cdebcc_491b74f1",
+      "revId": "0138d7e58cb354a3b2626138f2da7e0932018bb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
