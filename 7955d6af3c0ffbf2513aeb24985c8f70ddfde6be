@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b797495_c54f48a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-11-20T01:01:44Z",
+      "side": 1,
+      "message": "I will try to upstream a patch for dm-crypt.\nZWL was replaced by ZWP on linux-6.12. ZWP is based on bio only, ZWP should compat with the case even if blk_mq_submit_bio split the bio into several ones as it will insert the bios into a list of zone.\n\nZWL of dm will block the submitting of the next bio before the current bio completed. ZWL of scsi block device will do same work for request but not bio.\n\n\nA potential case is:\nf2fs submit a bio to zoned device with 1024KiB size, and the max sectors is 1024(512KiB).\n\nZWL of dm will just re-submit it to the lower device, then the bios will be splited into two bios.\n\nThey would be submitted to differect software queue as the context may run on different cpus.\n\nIf the previous one is on CPU0 and the later one is on CPU1, then the software queue of CPU1 dispatch the request before CPU0, the issue will be triggered.\n\n```\nCPU0:                     CPU1:\nf2fs_submit_bio[task x]\ndm_submit_bio[task x]\nblk_mq_split_bios[task x]\nsubmit_bio_noacct[task x]\n                          submit_bio_noacct[task x]\n                          dispatch requrest in queue[kworker1]\ndispatch requrest in queue[kworker0]\n```",
+      "parentUuid": "8ca0fa68_0a1c9bc4",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 78
+      },
+      "revId": "7955d6af3c0ffbf2513aeb24985c8f70ddfde6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9afcccab_91316b39",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
