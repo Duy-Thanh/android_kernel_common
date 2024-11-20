@@ -55,6 +55,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5555e82e_6f893758",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2024-11-20T10:31:20Z",
+      "side": 1,
+      "message": "These symbols are exported by the following:\nhttps://android-review.googlesource.com/c/kernel/common/+/3358629/1",
+      "parentUuid": "38bd2a40_af5a6df8",
+      "revId": "b161e386658cfe33fe10f64831990566064fed38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78533c20_d1164179",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2024-11-20T10:31:20Z",
+      "side": 1,
+      "message": "This patch rely on the following:\nhttps://android-review.googlesource.com/c/kernel/common/+/3358629/1\n\nWe are currently seeking to add a new LRU list, using the list_lru_add() and list_lru_del() functions, the binder driver already use these to manage the private LRU list.\n\nDo you object to all of the symbols, or just some of these symbols?",
+      "parentUuid": "cd0c7913_7969e4a5",
+      "revId": "b161e386658cfe33fe10f64831990566064fed38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1427f27_d0bed19b",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
@@ -66,6 +102,30 @@
       "writtenOn": "2024-11-19T15:17:55Z",
       "side": 1,
       "message": "this is not exported, so how can it be added to the symbol list?",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 17
+      },
+      "revId": "b161e386658cfe33fe10f64831990566064fed38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7a52a06_91fd8db0",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2024-11-20T10:31:20Z",
+      "side": 1,
+      "message": "These symbols are exported by the following:\nhttps://android-review.googlesource.com/c/kernel/common/+/3358629/1",
+      "parentUuid": "f1427f27_d0bed19b",
       "range": {
         "startLine": 50,
         "startChar": 2,
