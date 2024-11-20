@@ -21,9 +21,7 @@
  *  License.  See the file COPYING in the main directory of the Linux
  *  distribution for more details.
  */
-#ifndef __GENKSYMS__
 #include "cgroup-internal.h"
-#endif
 
 #include <linux/cpu.h>
 #include <linux/cpumask.h>
