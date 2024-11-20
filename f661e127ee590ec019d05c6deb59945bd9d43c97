@@ -22,6 +22,30 @@
       },
       "revId": "f661e127ee590ec019d05c6deb59945bd9d43c97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f9adb7_ae016b1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-11-20T15:21:37Z",
+      "side": 1,
+      "message": "I believe we fall into this category: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md#requirements-for-android_specific-patches\n\nso we miss this footer:\n`Fixes: 1234abcd2468 (\"foobar: add cool feature\")`",
+      "parentUuid": "2736eacb_6a6a9866",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "f661e127ee590ec019d05c6deb59945bd9d43c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
