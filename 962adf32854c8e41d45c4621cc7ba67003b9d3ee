@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9967d51_38964702",
+        "filename": "lib/Kconfig.debug",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-11-20T08:09:17Z",
+      "side": 1,
+      "message": "Few things:\n\n1. Why is this only showing up now?  What changed recently?\n2. Why isn\u0027t this seen and been subsequently fixed in Mainline?\n3. The hammer being used here is too big - how about:\n\ndiff --git a/drivers/iommu/Makefile b/drivers/iommu/Makefile\nindex 542760d963ec..7085813eba13 100644\n--- a/drivers/iommu/Makefile\n+++ b/drivers/iommu/Makefile\n@@ -10,2 +10,3 @@ obj-$(CONFIG_IOMMU_IO_PGTABLE_ARMV7S) +\u003d io-pgtable-arm-v7s.o\n obj-$(CONFIG_IOMMU_IO_PGTABLE_LPAE) +\u003d io-pgtable-arm.o\n+CFLAGS_io-pgtable-arm.o :\u003d -Wframe-larger-than\u003d2048\n obj-$(CONFIG_IOMMU_IO_PGTABLE_DART) +\u003d io-pgtable-dart.o",
+      "range": {
+        "startLine": 443,
+        "startChar": 9,
+        "endLine": 443,
+        "endChar": 13
+      },
+      "revId": "962adf32854c8e41d45c4621cc7ba67003b9d3ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
