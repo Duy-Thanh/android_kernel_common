@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2736eacb_6a6a9866",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2025056
+      },
+      "writtenOn": "2024-11-20T13:41:18Z",
+      "side": 1,
+      "message": "This was originally \"FIXUP: CHROMIUM: mt8195: backport legacy SOC_LVTS_TEMP as the out-of-tree driver\". Perhaps it would be better to leave the original title? \"FIXUP: ANDROID: ...\" seems a bit misleading, so I reworded the title a little, but maybe it was unnecessary.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "f661e127ee590ec019d05c6deb59945bd9d43c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
