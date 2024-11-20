@@ -22,6 +22,30 @@
       },
       "revId": "962adf32854c8e41d45c4621cc7ba67003b9d3ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978b94a8_cc5e99ad",
+        "filename": "lib/Kconfig.debug",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-20T16:47:05Z",
+      "side": 1,
+      "message": "\u003e Why is this only showing up now? What changed recently?\n\nNot sure, but an obscure error on a 32-bit x86 selftest is not worth the effort to figure it out. I just want the build to work.\n\n\u003e Why isn\u0027t this seen and been subsequently fixed in Mainline?\n\nI suspect no one is running (or cares about) 32-bit x86 allmodconfig builds\n\n\u003e The hammer being used here is too big - how about:\n\nI think the hammer is fine (since we don\u0027t care at all about 32-bit x86 stack frame sizes), but I agree that your fix is better.\n\nI\u0027ll upload your suggested change",
+      "parentUuid": "c9967d51_38964702",
+      "range": {
+        "startLine": 443,
+        "startChar": 9,
+        "endLine": 443,
+        "endChar": 13
+      },
+      "revId": "962adf32854c8e41d45c4621cc7ba67003b9d3ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
