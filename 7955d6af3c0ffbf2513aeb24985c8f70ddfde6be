@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ca0fa68_0a1c9bc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-11-20T00:13:00Z",
+      "side": 1,
+      "message": "The upstream developers are the people who best know the device-mapper and block layers.  To make sure this change is correct, it would be preferable to have a reviewed change in dm-crypt and/or dm-linear to base the change on.",
+      "parentUuid": "f654a16d_9b97d788",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 78
+      },
+      "revId": "7955d6af3c0ffbf2513aeb24985c8f70ddfde6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9afcccab_91316b39",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
