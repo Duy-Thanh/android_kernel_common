@@ -46,6 +46,30 @@
       },
       "revId": "f661e127ee590ec019d05c6deb59945bd9d43c97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96be8c97_1821911e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2025056
+      },
+      "writtenOn": "2024-11-20T15:39:39Z",
+      "side": 1,
+      "message": "Please let me know if the updated commit message is OK.",
+      "parentUuid": "d7f9adb7_ae016b1d",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "f661e127ee590ec019d05c6deb59945bd9d43c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
