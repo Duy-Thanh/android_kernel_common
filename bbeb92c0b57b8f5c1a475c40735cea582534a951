@@ -16,6 +16,24 @@
       "message": "If accepted, this need to go to `android16-6.12` as well.",
       "revId": "bbeb92c0b57b8f5c1a475c40735cea582534a951",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fff1797_c87a7755",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-11-21T19:56:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3676510f_22283084",
+      "revId": "bbeb92c0b57b8f5c1a475c40735cea582534a951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
