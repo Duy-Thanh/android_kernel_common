@@ -614,7 +614,13 @@ int drm_gem_shmem_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
 		return ret;
 	}
 
+<<<<<<< HEAD   (101e66 UPSTREAM: netfilter: xtables: fix typo causing some targets )
 	shmem = to_drm_gem_shmem_obj(obj);
+||||||| BASE
+=======
+	if (is_cow_mapping(vma->vm_flags))
+		return -EINVAL;
+>>>>>>> BRANCH (74cdd6 Linux 5.15.169)
 
 	ret = drm_gem_shmem_get_pages(shmem);
 	if (ret)
