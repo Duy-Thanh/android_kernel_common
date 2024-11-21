@@ -34,6 +34,24 @@
       "parentUuid": "b87681c2_2a5dc3ff",
       "revId": "5db1606bed14ccf9afadaeedacfde55c6b3d0070",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efc36b0e_00908238",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-11-21T21:55:05Z",
+      "side": 1,
+      "message": "Why do you need to do it this way?  Why not the first time you see the structure, initialize it there and not attempt to do it for all of them?",
+      "parentUuid": "3ddbeb8f_7abd669e",
+      "revId": "5db1606bed14ccf9afadaeedacfde55c6b3d0070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
