@@ -95,6 +95,7 @@ bcachefs-y		:=	\
 	varint.o		\
 	xattr.o
 
+CFLAGS_chardev.o += -Wframe-larger-than=2048
 obj-$(CONFIG_MEAN_AND_VARIANCE_UNIT_TEST)   += mean_and_variance_test.o
 
 # Silence "note: xyz changed in GCC X.X" messages
