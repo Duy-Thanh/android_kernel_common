@@ -17,8 +17,14 @@ bool map_shared;
 bool test_uffdio_wp = true;
 unsigned long long *count_verify;
 uffd_test_ops_t *uffd_test_ops;
+<<<<<<< HEAD   (987f81 Merge 6.6.57 into android15-6.6-lts)
 uffd_test_case_ops_t *uffd_test_case_ops;
 atomic_bool ready_for_fork;
+||||||| BASE
+atomic_bool ready_for_fork;
+=======
+pthread_barrier_t ready_for_fork;
+>>>>>>> BRANCH (bed2b9 mm/swapfile: skip HugeTLB pages for unuse_vma)
 
 static int uffd_mem_fd_create(off_t mem_size, bool hugetlb)
 {
@@ -519,7 +525,8 @@ void *uffd_poll_thread(void *arg)
 	pollfd[1].fd = pipefd[cpu*2];
 	pollfd[1].events = POLLIN;
 
-	ready_for_fork = true;
+	/* Ready for parent thread to fork */
+	pthread_barrier_wait(&ready_for_fork);
 
 	for (;;) {
 		ret = poll(pollfd, 2, -1);
