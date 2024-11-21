@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/380183474",
       "revId": "af1fccfe76ad6cd6c2c8e9572db8530554ad23fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee8215d_67438ae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-11-21T16:13:51Z",
+      "side": 1,
+      "message": "This commit is part of a larger set that may need backporting to more GKI branches in its entirety.  The concern is that simply cherry-picking 1 commit to 1 branch my cause excessive conflicts down the line ,thus I\u0027m -1\u0027ing this for the time being until we can formulate a plan that encompasses all of the fixes across all of the branches.  Please bear with us, this shouldn\u0027t take long.",
+      "revId": "af1fccfe76ad6cd6c2c8e9572db8530554ad23fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
