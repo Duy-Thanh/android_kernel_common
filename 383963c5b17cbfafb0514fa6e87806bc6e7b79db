@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5af5024_4be2a155",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-21T02:58:09Z",
+      "side": 1,
+      "message": "Apologies, the commit description is still not very clear (it specifies what your doing, not why your doing it).\n\nCan you provide the following either here in the commit message (ideal) or in the bug if necessary.\n\n1) What is the actual problem you are seeing that requires these vendor hooks? (ie: if this wasn\u0027t merged, what would be the resulting consequence)\n\n2) What benefit do you see with these hooks?\n\n3) What functionality upstream would enable these to be deprecated in the future?",
+      "revId": "383963c5b17cbfafb0514fa6e87806bc6e7b79db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
