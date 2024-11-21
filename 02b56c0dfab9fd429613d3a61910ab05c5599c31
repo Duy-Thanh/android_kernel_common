@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "481953bd_342c2d74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-11-21T07:49:49Z",
+      "side": 1,
+      "message": "Got a few q:\n\nIs this patch already in the ChromeOS 6.6 kernel?\n\nWhat is the plan for the 6.12, will we need to keep it as an out of tree driver?",
+      "revId": "02b56c0dfab9fd429613d3a61910ab05c5599c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
