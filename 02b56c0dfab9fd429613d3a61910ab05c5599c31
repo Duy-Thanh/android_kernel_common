@@ -16,6 +16,24 @@
       "message": "Got a few q:\n\nIs this patch already in the ChromeOS 6.6 kernel?\n\nWhat is the plan for the 6.12, will we need to keep it as an out of tree driver?",
       "revId": "02b56c0dfab9fd429613d3a61910ab05c5599c31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "295476cc_7f2d864c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-11-21T08:31:25Z",
+      "side": 1,
+      "message": "Synced offline with @skardach@google.com.\n\nMost likely this will be released as an out-of-tree module for 6.12. Please create a tracking bug to make sure this happen for 6.12 (and that this driver can be loaded as a vendor module on 6.12 - if some KMI will be missing, it should be added there before KMI freeze).",
+      "parentUuid": "481953bd_342c2d74",
+      "revId": "02b56c0dfab9fd429613d3a61910ab05c5599c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
