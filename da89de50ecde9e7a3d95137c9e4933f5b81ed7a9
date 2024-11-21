@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b5f0c91_22401fe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-11-21T00:00:39Z",
+      "side": 1,
+      "message": "This sha does not appear to be upstream. Should this be a \"FROMGIT:\" instead? If so, is there a reason we can\u0027t wait for it to be accepted upstream?\n\nPlease see the contribution guidelines at https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "da89de50ecde9e7a3d95137c9e4933f5b81ed7a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
