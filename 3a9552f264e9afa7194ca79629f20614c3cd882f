@@ -16,6 +16,24 @@
       "message": "https://keystone-qcom-review.googlesource.com/c/kernel/common/+/2044286\nhttps://lore.kernel.org/all/20240407084319.1462211-2-mingo@kernel.org/",
       "revId": "3a9552f264e9afa7194ca79629f20614c3cd882f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "badca739_c6ba8604",
+        "filename": "kernel/sched/syscalls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1414,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-21T04:33:43Z",
+      "side": 1,
+      "message": "Sorry, the first link I don\u0027t have access to, and I\u0027m not sure I understand the relevance of the second. Could you explain this a bit more?",
+      "parentUuid": "79a256f8_f8ed4974",
+      "revId": "3a9552f264e9afa7194ca79629f20614c3cd882f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

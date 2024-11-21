@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3101f3c4_168d3d19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-21T04:33:43Z",
+      "side": 1,
+      "message": "Probably should have your signed-off-by here as well?",
+      "revId": "f3286967ccbca04fb138d2b11f4ad41ada94bc60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21348c2c_b6926c39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-21T04:33:43Z",
+      "side": 1,
+      "message": "Thanks for rebasing a few quick questions and suggestions.",
+      "revId": "f3286967ccbca04fb138d2b11f4ad41ada94bc60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b365659d_6f556f52",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-21T04:33:43Z",
+      "side": 1,
+      "message": "Is \"unused\" correct here? Should it be \"skip_yield\" or something instead?",
+      "revId": "f3286967ccbca04fb138d2b11f4ad41ada94bc60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
