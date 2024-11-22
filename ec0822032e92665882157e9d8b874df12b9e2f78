@@ -16,6 +16,24 @@
       "message": "I\u0027d like to see a design proposal covering the alternatives:\n\n1. genksyms\n2. gendwarfksyms\n3. just rely on STG DWARF type extraction\n\n# ABI monitoring\n\nIf we are switching to DWARF-based symbol CRCs, we may as well just drop them.\n\nIn particular, there needs to be a cross-check of options 2 and 3.\n\nWe could even decide 2 is better than 3, for the kernel, and switch to a much simpler ABI format (symbol name, DWARF-based CRC), but it would be pretty unlikely.\n\n---\n\n# module loader checks\n\n2 may be strictly worse than 1 if it is hard to achieve identical CRCs in vendor builds or if they cover much less (recursive) type information.",
       "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d5ffd45_7a37ea56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-11-22T18:50:33Z",
+      "side": 1,
+      "message": "This is not being proposed as a monitoring replacement, it\u0027s a switch to how MODVERSIONS, the module-load-time check works.\n\nThis is being done because option #1 is incompatible with Rust, and we were told that MODVERSIONS was considered required. #3 would be a proposal to disable MODVERSIONS entirely. Option #2 is the only model we have for enabling Rust modules and keeping the module load-time checks alive.\n\nRe: 2 v 1, if you look at https://github.com/samitolvanen/linux/tree/android15-6.6-2024-11-gendwarfksyms (backtesting of maintaining MODVERSIONS for the 6.6 series) you can see that this actually has *more* information than genksyms does. genksysms sometimes gets confused when parsing types and just places \"invalid\" in the string in places where the DWARF generator makes its way through, which means we detected a couple additional changes that genksyms didn\u0027t.",
+      "parentUuid": "155783eb_e1e3ed6e",
+      "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
