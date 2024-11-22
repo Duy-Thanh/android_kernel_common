@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155783eb_e1e3ed6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-11-22T12:08:19Z",
+      "side": 1,
+      "message": "I\u0027d like to see a design proposal covering the alternatives:\n\n1. genksyms\n2. gendwarfksyms\n3. just rely on STG DWARF type extraction\n\n# ABI monitoring\n\nIf we are switching to DWARF-based symbol CRCs, we may as well just drop them.\n\nIn particular, there needs to be a cross-check of options 2 and 3.\n\nWe could even decide 2 is better than 3, for the kernel, and switch to a much simpler ABI format (symbol name, DWARF-based CRC), but it would be pretty unlikely.\n\n---\n\n# module loader checks\n\n2 may be strictly worse than 1 if it is hard to achieve identical CRCs in vendor builds or if they cover much less (recursive) type information.",
+      "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
