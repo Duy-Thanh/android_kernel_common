@@ -16,6 +16,74 @@
       "message": "revert and and restore\nhttps://android-review.googlesource.com/c/kernel/common/+/3285538\nhttps://android-review.googlesource.com/c/kernel/common/+/1881405",
       "revId": "e142f6e4f9cccbd32b333a62ceb589dd084c9fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e67fbc8_55532e83",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7974,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-22T19:59:38Z",
+      "side": 1,
+      "message": "This also probably needs a header comment to clearly explain its use. What prerequisites are needed prior to calling this, and what fixups are needed after calling it? Maybe even a link to public vendor hook logic that uses it?\n\nInteractions with newer calls like `prev_balance()` might be useful to clarify.",
+      "revId": "e142f6e4f9cccbd32b333a62ceb589dd084c9fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8eaf655_c529c538",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7975,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-22T19:59:38Z",
+      "side": 1,
+      "message": "For what this task does, it might need a better name?  Intuiting its use, maybe `pick_first_task_for_migration()` might be more clear?",
+      "revId": "e142f6e4f9cccbd32b333a62ceb589dd084c9fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0241471f_ebc418f0",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7979,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-22T19:59:38Z",
+      "side": 1,
+      "message": "Probably should have `lockdep_assert_rq_held(rq);` here",
+      "revId": "e142f6e4f9cccbd32b333a62ceb589dd084c9fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d9e90a_16157dfc",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7981,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-22T19:59:38Z",
+      "side": 1,
+      "message": "Is passing NULL for prev safe here? `pick_next_task_fair()` dereferences `prev-\u003esched_class` pretty early.",
+      "revId": "e142f6e4f9cccbd32b333a62ceb589dd084c9fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
