@@ -50571,10 +50571,10 @@ member {
   type_id: 0xb94e10c7
 }
 member {
-  id: 0x79d316b1
+  id: 0x79d31bf4
   name: "app_clks"
   type_id: 0x21f1578d
-  offset: 10688
+  offset: 10752
 }
 member {
   id: 0x4bc4550c
@@ -50589,10 +50589,10 @@ member {
   offset: 13472
 }
 member {
-  id: 0x422c438d
+  id: 0x422c4c5c
   name: "app_rsts"
   type_id: 0x3b8fd288
-  offset: 11584
+  offset: 11648
 }
 member {
   id: 0x4d0f7cba
@@ -61260,10 +61260,10 @@ member {
   offset: 256
 }
 member {
-  id: 0x081cfba8
+  id: 0x081cf07f
   name: "caps"
   type_id: 0x33756485
-  offset: 3840
+  offset: 3904
 }
 member {
   id: 0x08377305
@@ -68922,10 +68922,10 @@ member {
   offset: 64
 }
 member {
-  id: 0x0d74256b
+  id: 0x0d74239d
   name: "core_clks"
   type_id: 0xbf79b1a3
-  offset: 11072
+  offset: 11136
 }
 member {
   id: 0x72471939
@@ -68976,10 +68976,10 @@ member {
   offset: 1024
 }
 member {
-  id: 0xde5a9ac1
+  id: 0xde5a90b6
   name: "core_rsts"
   type_id: 0x4184bf8d
-  offset: 11968
+  offset: 12032
 }
 member {
   id: 0xf33b87c9
@@ -84930,10 +84930,10 @@ member {
   offset: 1344
 }
 member {
-  id: 0xe78d6078
+  id: 0xe78d6aa1
   name: "edma"
   type_id: 0xbface33b
-  offset: 4032
+  offset: 4096
 }
 member {
   id: 0x61c1eafd
@@ -87329,10 +87329,10 @@ member {
   offset: 64
 }
 member {
-  id: 0xb573567d
+  id: 0xb5735326
   name: "ep"
   type_id: 0xd55131a8
-  offset: 2496
+  offset: 2560
 }
 member {
   id: 0xb5a5932b
@@ -130577,10 +130577,10 @@ member {
   offset: 32
 }
 member {
-  id: 0x258c306e
+  id: 0x258c37d1
   name: "max_link_speed"
   type_id: 0x6720d32f
-  offset: 3936
+  offset: 4000
 }
 member {
   id: 0xb855a94b
@@ -138371,10 +138371,10 @@ member {
   offset: 64
 }
 member {
-  id: 0xdf0cc9dd
+  id: 0xdf0cca27
   name: "n_fts"
   type_id: 0x66fe5c63
-  offset: 3968
+  offset: 4032
 }
 member {
   id: 0xfb4e2519
@@ -146625,16 +146625,16 @@ member {
   offset: 7520
 }
 member {
-  id: 0x8f706921
-  name: "num_lanes"
-  type_id: 0x6720d32f
-  offset: 3904
-}
-member {
   id: 0x8f706a63
   name: "num_lanes"
   type_id: 0x6720d32f
   offset: 384
+}
+member {
+  id: 0x8f706ef9
+  name: "num_lanes"
+  type_id: 0x6720d32f
+  offset: 3968
 }
 member {
   id: 0xe792adb8
@@ -149895,16 +149895,16 @@ member {
   offset: 6784
 }
 member {
-  id: 0xafb486ac
-  name: "ops"
-  type_id: 0x3f86a385
-  offset: 3712
-}
-member {
   id: 0xafb48884
   name: "ops"
   type_id: 0x3f80d49e
   offset: 960
+}
+member {
+  id: 0xafb48bd1
+  name: "ops"
+  type_id: 0x3f86a385
+  offset: 3776
 }
 member {
   id: 0xafb54acd
@@ -154993,10 +154993,10 @@ member {
   offset: 256
 }
 member {
-  id: 0xb07364f3
+  id: 0xb07368bc
   name: "pe_rst"
   type_id: 0x2560a232
-  offset: 12864
+  offset: 12928
 }
 member {
   id: 0x6ec785ce
@@ -196721,10 +196721,10 @@ member {
   offset: 2976
 }
 member {
-  id: 0xff7659d1
+  id: 0xff765755
   name: "suspended"
   type_id: 0x6d7f5ff6
-  offset: 12928
+  offset: 12992
 }
 member {
   id: 0xff765c8c
@@ -207198,12 +207198,6 @@ member {
   offset: 160
 }
 member {
-  id: 0x5c9fd463
-  name: "type"
-  type_id: 0xc9082b19
-  offset: 3808
-}
-member {
   id: 0x5c9fd497
   name: "type"
   type_id: 0xc9082b19
@@ -207225,6 +207219,12 @@ member {
   id: 0x5c9fdd55
   name: "type"
   type_id: 0xc9082b19
+}
+member {
+  id: 0x5c9fdeeb
+  name: "type"
+  type_id: 0xc9082b19
+  offset: 3872
 }
 member {
   id: 0x5c9feb7f
@@ -210904,6 +210904,12 @@ member {
   offset: 2216
 }
 member {
+  id: 0x83ae5335
+  name: "use_linkup_irq"
+  type_id: 0x6d7f5ff6
+  offset: 1856
+}
+member {
   id: 0x234ad519
   name: "use_memdelay"
   type_id: 0x4585663f
@@ -213857,10 +213863,10 @@ member {
   offset: 1560
 }
 member {
-  id: 0xa6a83180
+  id: 0xa6a83556
   name: "version"
   type_id: 0xc9082b19
-  offset: 3776
+  offset: 3840
 }
 member {
   id: 0xa6d2d29c
@@ -241209,7 +241215,7 @@ struct_union {
   kind: STRUCT
   name: "dw_pcie"
   definition {
-    bytesize: 1624
+    bytesize: 1632
     member_id: 0xce3bbab3
     member_id: 0x24017197
     member_id: 0xd62109b8
@@ -241222,21 +241228,21 @@ struct_union {
     member_id: 0x8a649345
     member_id: 0x50b4a5ed
     member_id: 0x7ec1c723
-    member_id: 0xb573567d
-    member_id: 0xafb486ac
-    member_id: 0xa6a83180
-    member_id: 0x5c9fd463
-    member_id: 0x081cfba8
-    member_id: 0x8f706921
-    member_id: 0x258c306e
-    member_id: 0xdf0cc9dd
-    member_id: 0xe78d6078
-    member_id: 0x79d316b1
-    member_id: 0x0d74256b
-    member_id: 0x422c438d
-    member_id: 0xde5a9ac1
-    member_id: 0xb07364f3
-    member_id: 0xff7659d1
+    member_id: 0xb5735326
+    member_id: 0xafb48bd1
+    member_id: 0xa6a83556
+    member_id: 0x5c9fdeeb
+    member_id: 0x081cf07f
+    member_id: 0x8f706ef9
+    member_id: 0x258c37d1
+    member_id: 0xdf0cca27
+    member_id: 0xe78d6aa1
+    member_id: 0x79d31bf4
+    member_id: 0x0d74239d
+    member_id: 0x422c4c5c
+    member_id: 0xde5a90b6
+    member_id: 0xb07368bc
+    member_id: 0xff765755
   }
 }
 struct_union {
@@ -241308,7 +241314,7 @@ struct_union {
   kind: STRUCT
   name: "dw_pcie_rp"
   definition {
-    bytesize: 232
+    bytesize: 240
     member_id: 0x59400335
     member_id: 0xff4e46f9
     member_id: 0x2463b959
@@ -241332,6 +241338,7 @@ struct_union {
     member_id: 0x94f3ad1e
     member_id: 0xb9d2dd42
     member_id: 0xd2473139
+    member_id: 0x83ae5335
   }
 }
 struct_union {
@@ -378446,7 +378453,7 @@ elf_symbol {
   name: "dw_handle_msi_irq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0b7dcf9b
+  crc: 0x6c68b2e4
   type_id: 0x2ba2f0cc
   full_name: "dw_handle_msi_irq"
 }
@@ -378500,7 +378507,7 @@ elf_symbol {
   name: "dw_pcie_ep_reset_bar"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb3312ae8
+  crc: 0xd7d87200
   type_id: 0x1e32c371
   full_name: "dw_pcie_ep_reset_bar"
 }
@@ -378509,7 +378516,7 @@ elf_symbol {
   name: "dw_pcie_find_capability"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4decff05
+  crc: 0xdf93f51b
   type_id: 0x5ca118ca
   full_name: "dw_pcie_find_capability"
 }
@@ -378518,7 +378525,7 @@ elf_symbol {
   name: "dw_pcie_find_ext_capability"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbc5dd92d
+  crc: 0x46c09b44
   type_id: 0x0ec08f0d
   full_name: "dw_pcie_find_ext_capability"
 }
@@ -378527,7 +378534,7 @@ elf_symbol {
   name: "dw_pcie_host_deinit"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2f32d872
+  crc: 0xefefa1a2
   type_id: 0x19fe25be
   full_name: "dw_pcie_host_deinit"
 }
@@ -378536,7 +378543,7 @@ elf_symbol {
   name: "dw_pcie_host_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe8ee094e
+  crc: 0x79bb6a61
   type_id: 0x94e69702
   full_name: "dw_pcie_host_init"
 }
@@ -378545,7 +378552,7 @@ elf_symbol {
   name: "dw_pcie_link_up"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe0262605
+  crc: 0x5e81811b
   type_id: 0x92ce345a
   full_name: "dw_pcie_link_up"
 }
@@ -378572,7 +378579,7 @@ elf_symbol {
   name: "dw_pcie_read_dbi"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xded19ca6
+  crc: 0x6253496f
   type_id: 0x49afd1e1
   full_name: "dw_pcie_read_dbi"
 }
@@ -378581,7 +378588,7 @@ elf_symbol {
   name: "dw_pcie_resume_noirq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1ff2d461
+  crc: 0x93f991fa
   type_id: 0x92ce345a
   full_name: "dw_pcie_resume_noirq"
 }
@@ -378590,7 +378597,7 @@ elf_symbol {
   name: "dw_pcie_setup_rc"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe8ee094e
+  crc: 0x79bb6a61
   type_id: 0x94e69702
   full_name: "dw_pcie_setup_rc"
 }
@@ -378599,7 +378606,7 @@ elf_symbol {
   name: "dw_pcie_suspend_noirq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1ff2d461
+  crc: 0x93f991fa
   type_id: 0x92ce345a
   full_name: "dw_pcie_suspend_noirq"
 }
@@ -378608,7 +378615,7 @@ elf_symbol {
   name: "dw_pcie_wait_for_link"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe0262605
+  crc: 0x5e81811b
   type_id: 0x92ce345a
   full_name: "dw_pcie_wait_for_link"
 }
@@ -378626,7 +378633,7 @@ elf_symbol {
   name: "dw_pcie_write_dbi"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7f504879
+  crc: 0x3df13279
   type_id: 0x1ccc8f30
   full_name: "dw_pcie_write_dbi"
 }
