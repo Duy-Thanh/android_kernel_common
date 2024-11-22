@@ -94,6 +94,7 @@ static inline bool mmap_lock_speculate_retry(struct mm_struct *mm, unsigned int 
 	return unlikely(READ_ONCE(mm->mm_lock_seq) != seq);
 }
 
+<<<<<<< HEAD   (1f977b26d2615d83bc93c0b5500c7010d68ffcf4 UPSTREAM: binder: fix UAF in binder_free_transaction())
 /*
  * Locks next vma pointed by the iterator. Confirms the locked vma has not
  * been modified and will retry under mmap_lock protection if modification
@@ -105,6 +106,9 @@ struct vm_area_struct *lock_next_vma(struct mm_struct *mm,
 				     struct vma_iterator *iter,
 				     unsigned long address);
 
+||||||| BASE   (de6599b4455987adbc19e4d5a7269aaf015a4d6b ANDROID: GKI: arm64 Enable SafeSetID to limit CAP_SET{U/G}ID)
+=======
+>>>>>>> CHANGE (dce64fea7df5823e065dd73a4b88886c73e9e827 BACKPORT: mm: introduce mmap_lock_speculate_{try_begin|retry)
 /*
  * Drop all currently-held per-VMA locks.
  * This is called from the mmap_lock implementation directly before releasing
