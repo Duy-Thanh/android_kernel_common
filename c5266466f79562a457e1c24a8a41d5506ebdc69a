@@ -16,6 +16,24 @@
       "message": "wait on this until vendors have a chance to switch to the dynamic task_struct size.",
       "revId": "c5266466f79562a457e1c24a8a41d5506ebdc69a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1677930c_f144da56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-22T15:55:36Z",
+      "side": 1,
+      "message": "Merging now since date indicated in _whatsnew_ posting has passed. https://docs.partner.android.com/partners/guides/gki/whatsnew#2024-november-8",
+      "parentUuid": "fa705c5c_11634d5d",
+      "revId": "c5266466f79562a457e1c24a8a41d5506ebdc69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
