@@ -34,6 +34,24 @@
       "parentUuid": "155783eb_e1e3ed6e",
       "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0207eec_4d971831",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-11-22T19:14:58Z",
+      "side": 1,
+      "message": "I realized I might have oversimplified my response to #3 a bit - if what you meant by that is \"We could turn on `gendwarfksyms`, but not monitor CRCs for ABI stability where they were being ingested before\"\n\n1. That seems valid for purposes of \"does the actual kernel ABI match safely\"\n2. It *won\u0027t* work if we want to maintain load-time-checking - even with gendwarfksyms, additional directives in source are sometimes needed to make a structure opaque or make it clear that a newly added struct member is not to be considered when computing the hash. We need to get an error if we\u0027re changing the CRC, because we need to know to add those directives",
+      "parentUuid": "9d5ffd45_7a37ea56",
+      "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
