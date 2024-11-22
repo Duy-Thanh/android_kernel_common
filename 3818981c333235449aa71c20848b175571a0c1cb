@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11d36a43_57cec21e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-22T19:28:26Z",
+      "side": 1,
+      "message": "The only failure is a checkpatch warning on the \"Fixes\" sha1 which is a valid sha1 in android11-5.4 where this was cherry-picked from.",
+      "revId": "3818981c333235449aa71c20848b175571a0c1cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
