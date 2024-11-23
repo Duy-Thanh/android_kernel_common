@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b57492b_fdda7ef2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-11-23T15:07:07Z",
+      "side": 1,
+      "message": "oh sorry I\u0027m definitely not against it. I was just making sure that it was intentional.",
+      "parentUuid": "6e7d25d2_3f77c9dd",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "ccd8a7ba141b6824575e9bbe8074fb5f2dd90954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f44fa06_113f9504",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Not yet, that\u0027s why this isn\u0027t FROMLIST right now. I\u0027m drafting the cover letter to maybe send out tonight or Monday.",
       "parentUuid": "5f44fa06_113f9504",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 3
+      },
+      "revId": "ccd8a7ba141b6824575e9bbe8074fb5f2dd90954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "620330b0_3b8a785a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-11-23T15:07:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "519cb0bc_12089df4",
       "range": {
         "startLine": 53,
         "startChar": 0,
