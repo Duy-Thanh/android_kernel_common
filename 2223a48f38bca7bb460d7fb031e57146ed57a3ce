@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a173e329_1c2322e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-23T00:16:31Z",
+      "side": 1,
+      "message": "Just an ordering nit: I\u0027d probably apply the memfd_create refactor patch before this one so you have two small memfd tweaks/cleanups before adding new code.",
+      "revId": "2223a48f38bca7bb460d7fb031e57146ed57a3ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c90d4412_cf1b8eba",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-23T00:16:31Z",
+      "side": 1,
+      "message": "Might be worth duplicating the needed values from ashmem.h so that you aren\u0027t referencing something in staging (not allowed upstream, as staging is somewhat ephemeral).",
+      "revId": "2223a48f38bca7bb460d7fb031e57146ed57a3ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
