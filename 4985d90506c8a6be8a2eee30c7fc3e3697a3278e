@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13351514_47885105",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-23T00:28:15Z",
+      "side": 1,
+      "message": "Might be worth adding some more detail about the transition plan (being able to switch /dev/ashmem to providing memfd\u0027s via sysfs knobs, then switching the global use_memfd system flag, then deprecating the /dev/ashmem logic in libcutils and finally dropping /dev/ashmem itself)",
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
