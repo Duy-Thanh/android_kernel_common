@@ -16,6 +16,24 @@
       "message": "I\u0027m not entirely sure what happened. But it seems like your editor might have eaten the line starting with #:\n\n```\n    Pass the flags directly and let psi parse them. For that to work, the\n    #include \"stats.h\" (which has the psi callback implementations) needs\n    to be below the flag definitions in \"sched.h\". Move that section\n```",
       "revId": "3609218570b6a602d09fadbcb79bb646c45395f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e91318f5_27c58912",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-23T00:29:35Z",
+      "side": 1,
+      "message": "oh! ha, I think git rebase ate that as a comment. thanks for the heads up!",
+      "parentUuid": "9ff694be_f257eafe",
+      "revId": "3609218570b6a602d09fadbcb79bb646c45395f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
