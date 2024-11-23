@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e7d25d2_3f77c9dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-23T03:13:59Z",
+      "side": 1,
+      "message": "I\u0027m ambivalent for android trees. If you feel strongly I can remove them, but I don\u0027t see much downside to longer commit messages even if it is historical details. The up side for ANDROID patches is that it helps document the version of the patch in the tree (at least from the last change to it). Makes it easier to compare with later versions from the list.",
+      "parentUuid": "c84ff7c1_b0a471a6",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "ccd8a7ba141b6824575e9bbe8074fb5f2dd90954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f44fa06_113f9504",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-23T00:46:01Z",
       "side": 1,
       "message": "v14 hasn\u0027t been sent yet correct?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 3
+      },
+      "revId": "ccd8a7ba141b6824575e9bbe8074fb5f2dd90954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "519cb0bc_12089df4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-23T03:13:59Z",
+      "side": 1,
+      "message": "Not yet, that\u0027s why this isn\u0027t FROMLIST right now. I\u0027m drafting the cover letter to maybe send out tonight or Monday.",
+      "parentUuid": "5f44fa06_113f9504",
       "range": {
         "startLine": 53,
         "startChar": 0,
