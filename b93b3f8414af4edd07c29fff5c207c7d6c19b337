@@ -16,6 +16,24 @@
       "message": "I was about to update the doc and realized this hasn\u0027t landed for the ACK branches yet just -desktip. Do you mind to update this https://source.android.com/docs/core/architecture/kernel/convert-or-add#protected-unprotected when this land?",
       "revId": "b93b3f8414af4edd07c29fff5c207c7d6c19b337",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610cae0e_bd944a6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-11-25T17:48:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "af45a321_25702d79",
+      "revId": "b93b3f8414af4edd07c29fff5c207c7d6c19b337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
