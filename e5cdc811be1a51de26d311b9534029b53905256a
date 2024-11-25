@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71862a2_4bf3ae12",
+        "filename": "arch/arm64/include/asm/alternative-macros.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2024-11-25T12:15:41Z",
+      "side": 1,
+      "message": "I hadn\u0027t spotted this addition before, and I am struggling to understand what the intent is here.\n\nThe capabilities listed above are ones that can safely be assumed to be absent: LDAPR is just an optimization that we can live without, and VHE is always disabled in Android because we boot either at EL1, or at EL2 only when using pKVM, which runs in nVHE or hVHE mode, where the host kernel runs at EL1 too.\n\nThe GIC priority masking can be ignored too, because we can fall back to ordinary interrupt masking instead. This does impact pseudo-NMI, which will not work when any of the FIPS140 code disables interrupts, but this is also something that can we can live with.\n\nSo why should alternative_has_cap_likely() ever return true for any of these? If an implementation of alternative_has_cap_likely() is needed for any other C code that gets pulled in, I\u0027d like to understand which those are, and whether it is safe to return false here.",
+      "revId": "e5cdc811be1a51de26d311b9534029b53905256a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
