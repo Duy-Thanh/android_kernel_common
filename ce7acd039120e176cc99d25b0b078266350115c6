@@ -45,6 +45,54 @@
       },
       "revId": "ce7acd039120e176cc99d25b0b078266350115c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af98b99d_185bc7e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-25T20:25:40Z",
+      "side": 1,
+      "message": "Reworked to FROMLIST (now that v14 is out)",
+      "parentUuid": "921ee072_282c0ffd",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "ce7acd039120e176cc99d25b0b078266350115c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "035c1bb5_32148845",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-11-25T20:25:40Z",
+      "side": 1,
+      "message": "In going to the split scheduler/execution context in earlier patches (already merged) we need to properly change how we account process time when the two aren\u0027t the same. Thus cpu-time goes against the actually running task, but vruntime goes against the donor (so it can\u0027t infinitely boost) the lock owner.\n\nFix is maybe not the best word choice, as at this point in the series the donor and current are always the same, but this is so we properly handle it in the future (later in the series).",
+      "parentUuid": "b36d5352_3e090f53",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "ce7acd039120e176cc99d25b0b078266350115c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
