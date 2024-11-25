@@ -16,6 +16,23 @@
       "message": "Is there a respin request for this?",
       "revId": "ee2fb2ac24face2942c8797e5e44c6f8fb335971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00296645_29ed1044",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-25T21:36:01Z",
+      "side": 1,
+      "message": "Looks fine but needs respin request with the bug number referenced from this patch.",
+      "revId": "ee2fb2ac24face2942c8797e5e44c6f8fb335971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
