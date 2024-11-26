@@ -28,7 +28,12 @@ load(
     "merged_kernel_uapi_headers",
 )
 load(":abi.bzl", "cc_binary_with_abi")
-load(":modules.bzl", "get_gki_modules_list", "get_kunit_modules_list")
+load(
+    ":modules.bzl",
+    "get_gki_modules_list",
+    "get_gki_protected_modules_list",
+    "get_kunit_modules_list",
+)
 
 package(
     default_visibility = [
@@ -105,6 +110,15 @@ write_file(
     ],
 )
 
+# Not enforced in android-mainline.
+write_file(
+    name = "gki_aarch64_protected_modules",
+    out = "gki/aarch64/protected_modules",
+    content = get_gki_protected_modules_list("arm64") + [
+        "",  # Ensure new line at the end.
+    ],
+)
+
 write_file(
     name = "gki_system_dlkm_modules_x86_64",
     out = "gki/x86_64/system_dlkm_modules",
@@ -115,12 +129,21 @@ write_file(
     ],
 )
 
+<<<<<<< TARGET BRANCH (e7de27 ANDROID: Update path of generated files am: 037a98242b)
 write_file(
     name = "gki_system_dlkm_modules_riscv64",
     out = "android/gki_system_dlkm_modules_riscv64",
     content = get_gki_modules_list("riscv64") + [
         # Ensure new line at the end.
         "",
+=======
+# Not enforced in android-mainline.
+write_file(
+    name = "gki_x86_64_protected_modules",
+    out = "gki/x86_64/protected_modules",
+    content = get_gki_protected_modules_list("x86_64") + [
+        "",  # Ensure new line at the end.
+>>>>>>> SOURCE BRANCH (315ff4 ANDROID: Add protected modules list)
     ],
 )
 
