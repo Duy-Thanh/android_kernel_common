@@ -70,6 +70,24 @@
       "parentUuid": "4c14bace_9c1bc7c5",
       "revId": "e5cdc811be1a51de26d311b9534029b53905256a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c0528a_186ec801",
+        "filename": "arch/arm64/include/asm/alternative-macros.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-11-26T18:07:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd38ab2c_64838f7a",
+      "revId": "e5cdc811be1a51de26d311b9534029b53905256a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
