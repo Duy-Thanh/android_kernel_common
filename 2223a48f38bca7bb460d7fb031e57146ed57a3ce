@@ -33,6 +33,29 @@
       "message": "Might be worth duplicating the needed values from ashmem.h so that you aren\u0027t referencing something in staging (not allowed upstream, as staging is somewhat ephemeral).",
       "revId": "2223a48f38bca7bb460d7fb031e57146ed57a3ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05c1bd8_5ad63859",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-26T19:17:48Z",
+      "side": 1,
+      "message": "A comment for each of these commands about why ignoring it is fine would be helpful.",
+      "range": {
+        "startLine": 267,
+        "startChar": 1,
+        "endLine": 278,
+        "endChar": 8
+      },
+      "revId": "2223a48f38bca7bb460d7fb031e57146ed57a3ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
