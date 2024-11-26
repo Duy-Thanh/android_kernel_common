@@ -34,6 +34,24 @@
       "parentUuid": "e71862a2_4bf3ae12",
       "revId": "e5cdc811be1a51de26d311b9534029b53905256a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c14bace_9c1bc7c5",
+        "filename": "arch/arm64/include/asm/alternative-macros.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2024-11-26T12:18:17Z",
+      "side": 1,
+      "message": "Could we try the below please? That way, we don\u0027t risk breaking stuff: for instance, `cpus_have_final_cap()` will `BUG()` if the `ARM64_ALWAYS_SYSTEM` capability is missing. Given that we only care about code patching, returning truthful information here should not complicate the integrity check in the FIPS module.\n\n```diff\n--- a/arch/arm64/include/asm/alternative-macros.h\n+++ b/arch/arm64/include/asm/alternative-macros.h\n@@ -298,11 +298,19 @@ alternative_has_cap_unlikely(const unsigned long cpucap)\n \n #include \u003clinux/types.h\u003e\n \n-static __always_inline bool\n-alternative_has_cap_likely(const unsigned long cpucap)\n-{\n-       return false;\n-}\n+static bool cpus_have_cap(unsigned int num);\n+\n+/*\n+ * Return \u0027false\u0027 for all capabilities listed above, and use the slow path for\n+ * the remaining ones. This ensures that the FIPS140 module is consistent with\n+ * itself for all capabilities, and with the rest of the kernel at least for\n+ * the ones not listed.\n+ */\n+#define __alternative_has_cap(cpucap, altcap)  \\\n+       __take_second_arg(altcap false, cpus_have_cap(cpucap))\n+\n+#define alternative_has_cap_likely(cpucap)     \\\n+       __alternative_has_cap(cpucap, __ALT_ ## cpucap)\n \n #define alternative_has_cap_unlikely alternative_has_cap_likely\n \n```",
+      "parentUuid": "cbbddacd_880ef58e",
+      "revId": "e5cdc811be1a51de26d311b9534029b53905256a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
