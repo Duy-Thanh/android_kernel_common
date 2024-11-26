@@ -16,6 +16,24 @@
       "message": "All the changes in this file which are removing definitions look unrelated. The change should be only about adding a new vendor hook.",
       "revId": "bdb67312ded79a523f7397fb21c0a6bd641c5517",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5707f8_14f362e8",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 66705,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-26T19:44:40Z",
+      "side": 0,
+      "message": "The XML looks bad. Please recreate it and update the CL",
+      "parentUuid": "aa939d3f_7f57ef0a",
+      "revId": "bdb67312ded79a523f7397fb21c0a6bd641c5517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
