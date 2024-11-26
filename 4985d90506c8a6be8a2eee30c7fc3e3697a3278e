@@ -16,6 +16,52 @@
       "message": "Might be worth adding some more detail about the transition plan (being able to switch /dev/ashmem to providing memfd\u0027s via sysfs knobs, then switching the global use_memfd system flag, then deprecating the /dev/ashmem logic in libcutils and finally dropping /dev/ashmem itself)",
       "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8c9719_03600f71",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-26T19:33:52Z",
+      "side": 1,
+      "message": "Instead of renaming all these functions into *_legacy, can we simply add a condition right here:\n\n```\n\tif (ashmem_memfd_compat_enable)\n\t\treturn ashmem_memfd_open(inode, file);\n```\n\nThis seems to create less churn.",
+      "range": {
+        "startLine": 260,
+        "startChar": 11,
+        "endLine": 260,
+        "endChar": 29
+      },
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74fce7b0_489746b7",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-11-26T19:33:52Z",
+      "side": 1,
+      "message": "I think it would be better to move all `ashmem_memfd_*` functions into mm/ashmem_compat.{h|c}",
+      "range": {
+        "startLine": 925,
+        "startChar": 12,
+        "endLine": 925,
+        "endChar": 37
+      },
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
