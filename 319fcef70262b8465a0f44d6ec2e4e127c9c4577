@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d268b6c_de459015",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-11-26T13:47:40Z",
+      "side": 1,
+      "message": "Note on the presubmit errors:\n\n* This seems to be an ongoing issue http://b/381044110#comment2 and are not related to this change.",
+      "revId": "319fcef70262b8465a0f44d6ec2e4e127c9c4577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
