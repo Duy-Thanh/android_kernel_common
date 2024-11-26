@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ddba61_12ce0bc0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-11-26T10:39:02Z",
+      "side": 1,
+      "message": "When a feature isn\u0027t enabled for protected vms, kvm_has_feature() returns false. This allows us to enable it by setting/allowing the feature for pKVM without hardcoding the check there.",
+      "parentUuid": "c483a138_7a58efda",
+      "range": {
+        "startLine": 137,
+        "startChar": 14,
+        "endLine": 137,
+        "endChar": 29
+      },
+      "revId": "b64b1929efffd12172294dafa11d2aeedb6dd689",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdcb4457_f6a5a93a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-26T10:34:57Z",
       "side": 1,
       "message": "MAYBE: I think we still need disabled because we might still want to trap the accesses to the FPMR if a guest plays weird games with its fp state.",
+      "range": {
+        "startLine": 140,
+        "startChar": 14,
+        "endLine": 140,
+        "endChar": 28
+      },
+      "revId": "b64b1929efffd12172294dafa11d2aeedb6dd689",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a2dec9_8f4c0ae1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-11-26T10:39:02Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "bdcb4457_f6a5a93a",
       "range": {
         "startLine": 140,
         "startChar": 14,
