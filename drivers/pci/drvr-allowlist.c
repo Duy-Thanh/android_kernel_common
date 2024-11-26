@@ -12,7 +12,7 @@
  * Parameter to essentially disable allowlist code (thus allow all drivers to
  * connect to any external PCI devices).
  */
-static bool trust_external_pci_devices;
+static bool trust_external_pci_devices = 1;
 core_param(trust_external_pci_devices, trust_external_pci_devices, bool, 0444);
 
 /* Driver allowlist */
