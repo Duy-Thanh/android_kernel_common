@@ -4085,6 +4085,11 @@ static inline bool is_write_sealed(int seals)
 	return seals & (F_SEAL_WRITE | F_SEAL_FUTURE_WRITE);
 }
 
+static inline bool is_exec_sealed(int seals)
+{
+	return seals & F_SEAL_FUTURE_EXEC_MAPPING;
+}
+
 /**
  * is_readonly_sealed - Checks whether write-sealed but mapped read-only,
  *                      in which case writes should be disallowing moving
