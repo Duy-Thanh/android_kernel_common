@@ -55,6 +55,7 @@ struct swap_info_ext {
 					/* list of cluster that are fragmented or contented */
 	unsigned int frag_cluster_nr[SWAP_NR_ORDERS];
 	struct list_head full_clusters; /* full clusters list */
+	struct work_struct reclaim_work; /* reclaim worker */
 	/* Keep swap info at the end since it has a trailing dynamically sized array */
 	struct swap_info_struct si;
 };
@@ -795,9 +796,11 @@ static void swap_reclaim_full_clusters(struct swap_info_struct *si, bool force)
 
 static void swap_reclaim_work(struct work_struct *work)
 {
+	struct swap_info_ext *sie;
 	struct swap_info_struct *si;
 
-	si = container_of(work, struct swap_info_struct, reclaim_work);
+	sie = container_of(work, struct swap_info_ext, reclaim_work);
+	si = to_swap_info_struct(sie);
 
 	spin_lock(&si->lock);
 	swap_reclaim_full_clusters(si, true);
@@ -942,6 +945,7 @@ static void del_from_avail_list(struct swap_info_struct *p)
 static void swap_range_alloc(struct swap_info_struct *si, unsigned long offset,
 			     unsigned int nr_entries)
 {
+	struct swap_info_ext *sie = to_swap_info_ext(si);
 	unsigned int end = offset + nr_entries - 1;
 
 	if (offset == si->lowest_bit)
@@ -955,7 +959,7 @@ static void swap_range_alloc(struct swap_info_struct *si, unsigned long offset,
 		del_from_avail_list(si);
 
 		if (vm_swap_full())
-			schedule_work(&si->reclaim_work);
+			schedule_work(&sie->reclaim_work);
 	}
 }
 
@@ -2832,7 +2836,7 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 	wait_for_completion(&p->comp);
 
 	flush_work(&p->discard_work);
-	flush_work(&p->reclaim_work);
+	flush_work(&(to_swap_info_ext(p)->reclaim_work));
 
 	destroy_swap_extents(p);
 	if (p->flags & SWP_CONTINUED)
@@ -3397,7 +3401,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 	p = to_swap_info_struct(sie);
 
 	INIT_WORK(&p->discard_work, swap_discard_work);
-	INIT_WORK(&p->reclaim_work, swap_reclaim_work);
+	INIT_WORK(&sie->reclaim_work, swap_reclaim_work);
 
 	name = getname(specialfile);
 	if (IS_ERR(name)) {
