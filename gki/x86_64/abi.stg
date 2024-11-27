@@ -226196,7 +226196,7 @@ elf_symbol {
   name: "pci_disable_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdfb9dcfb
+  crc: 0x37f2fd47
   type_id: 0x14e1f000
   full_name: "pci_disable_device"
 }
@@ -226214,7 +226214,7 @@ elf_symbol {
   name: "pci_enable_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x238b29c7
+  crc: 0xf30f4d3c
   type_id: 0x99f942bc
   full_name: "pci_enable_device"
 }
@@ -226241,7 +226241,7 @@ elf_symbol {
   name: "pci_release_region"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0917a8c5
+  crc: 0x3354591e
   type_id: 0x157d734c
   full_name: "pci_release_region"
 }
@@ -226250,7 +226250,7 @@ elf_symbol {
   name: "pci_request_region"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa692150a
+  crc: 0x5e17c186
   type_id: 0x986a45dd
   full_name: "pci_request_region"
 }
