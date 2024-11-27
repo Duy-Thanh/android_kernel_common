@@ -16,6 +16,24 @@
       "message": "We have completed and passed the test related to reporting bugs locally. Is the report \"Presubmit-Verified -1\" due to the platform?",
       "revId": "3dbbc62cf5e8954a9d440e028bf33d6284e731b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a48a78_a8774377",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-11-27T09:56:21Z",
+      "side": 1,
+      "message": "I have provided more details on the bug",
+      "parentUuid": "af458138_95bb6ece",
+      "revId": "3dbbc62cf5e8954a9d440e028bf33d6284e731b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
