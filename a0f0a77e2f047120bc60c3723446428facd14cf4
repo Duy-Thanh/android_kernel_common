@@ -34,6 +34,24 @@
       "parentUuid": "ebd63102_c172cb58",
       "revId": "a0f0a77e2f047120bc60c3723446428facd14cf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b0e912_89141251",
+        "filename": "arch/arm64/configs/android-arm64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 2028281
+      },
+      "writtenOn": "2024-11-27T14:44:44Z",
+      "side": 0,
+      "message": "I don\u0027t have objections, just wanted to be sure we are not regressing by chance.",
+      "parentUuid": "6fe04b49_bf78e3c2",
+      "revId": "a0f0a77e2f047120bc60c3723446428facd14cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
