@@ -32,6 +32,9 @@
 #include <linux/bitfield.h>
 #include "pci.h"
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/pci.h>
+
 DEFINE_MUTEX(pci_slot_mutex);
 
 const char *pci_power_names[] = {
@@ -1123,65 +1126,109 @@ static void pci_restore_bars(struct pci_dev *dev)
 
 static inline bool platform_pci_power_manageable(struct pci_dev *dev)
 {
-	if (pci_use_mid_pm())
-		return true;
+	bool ret;
 
-	return acpi_pci_power_manageable(dev);
+	if (pci_use_mid_pm())
+		ret = true;
+	else
+		ret = acpi_pci_power_manageable(dev);
+
+	trace_android_vh_platform_pci_power_manageable(dev, &ret);
+
+	return ret;
 }
 
 static inline int platform_pci_set_power_state(struct pci_dev *dev,
 					       pci_power_t t)
 {
-	if (pci_use_mid_pm())
-		return mid_pci_set_power_state(dev, t);
+	int ret;
 
-	return acpi_pci_set_power_state(dev, t);
+	if (pci_use_mid_pm())
+		ret = mid_pci_set_power_state(dev, t);
+	else
+		ret = acpi_pci_set_power_state(dev, t);
+
+	trace_android_vh_platform_pci_set_power_state(dev, t, &ret);
+
+	return ret;
 }
 
 static inline pci_power_t platform_pci_get_power_state(struct pci_dev *dev)
 {
-	if (pci_use_mid_pm())
-		return mid_pci_get_power_state(dev);
+	pci_power_t state;
 
-	return acpi_pci_get_power_state(dev);
+	if (pci_use_mid_pm())
+		state = mid_pci_get_power_state(dev);
+	else
+		state = acpi_pci_get_power_state(dev);
+
+	trace_android_vh_platform_pci_get_power_state(dev, &state);
+
+	return state;
 }
 
 static inline void platform_pci_refresh_power_state(struct pci_dev *dev)
 {
 	if (!pci_use_mid_pm())
 		acpi_pci_refresh_power_state(dev);
+
+	trace_android_vh_platform_pci_refresh_power_state(dev);
 }
 
 static inline pci_power_t platform_pci_choose_state(struct pci_dev *dev)
 {
-	if (pci_use_mid_pm())
-		return PCI_POWER_ERROR;
+	pci_power_t state;
 
-	return acpi_pci_choose_state(dev);
+	if (pci_use_mid_pm())
+		state = PCI_POWER_ERROR;
+	else
+		state = acpi_pci_choose_state(dev);
+
+	trace_android_vh_platform_pci_choose_state(dev, &state);
+
+	return state;
 }
 
 static inline int platform_pci_set_wakeup(struct pci_dev *dev, bool enable)
 {
-	if (pci_use_mid_pm())
-		return PCI_POWER_ERROR;
+	int ret;
 
-	return acpi_pci_wakeup(dev, enable);
+	if (pci_use_mid_pm())
+		ret = PCI_POWER_ERROR;
+	else
+		ret = acpi_pci_wakeup(dev, enable);
+
+	trace_android_vh_platform_pci_set_wakeup(dev, enable, &ret);
+
+	return ret;
 }
 
 static inline bool platform_pci_need_resume(struct pci_dev *dev)
 {
+	bool need_resume;
+
 	if (pci_use_mid_pm())
 		return false;
 
-	return acpi_pci_need_resume(dev);
+	need_resume = acpi_pci_need_resume(dev);
+
+	trace_android_vh_platform_pci_need_resume(dev, &need_resume);
+
+	return need_resume;
 }
 
 static inline bool platform_pci_bridge_d3(struct pci_dev *dev)
 {
-	if (pci_use_mid_pm())
-		return false;
+	bool d3;
 
-	return acpi_pci_bridge_d3(dev);
+	if (pci_use_mid_pm())
+		d3 = false;
+	else
+		d3 = acpi_pci_bridge_d3(dev);
+
+	trace_android_vh_platform_pci_bridge_d3(dev, &d3);
+
+	return d3;
 }
 
 /**

@@ -31,6 +31,7 @@
 #include <trace/hooks/syscall_check.h>
 #include <trace/hooks/gic.h>
 #include <trace/hooks/gic_v3.h>
+#include <trace/hooks/pci.h>
 #include <trace/hooks/remoteproc.h>
 #include <trace/hooks/timer.h>
 #include <trace/hooks/fpsimd.h>
@@ -69,6 +70,14 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_iovad_alloc_iova);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_iovad_free_iova);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_power_manageable);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_set_power_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_get_power_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_refresh_power_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_choose_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_set_wakeup);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_need_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_bridge_d3);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptype_head);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_allow_domain_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpuidle_psci_enter);
