@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af458138_95bb6ece",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3704047
+      },
+      "writtenOn": "2024-11-27T08:33:03Z",
+      "side": 1,
+      "message": "We have completed and passed the test related to reporting bugs locally. Is the report \"Presubmit-Verified -1\" due to the platform?",
+      "revId": "3dbbc62cf5e8954a9d440e028bf33d6284e731b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
