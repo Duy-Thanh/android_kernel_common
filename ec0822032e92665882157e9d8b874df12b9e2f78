@@ -70,6 +70,24 @@
       "parentUuid": "d0207eec_4d971831",
       "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e341ebb_df85dfdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-11-27T14:19:37Z",
+      "side": 1,
+      "message": "To continue the last point:\n\n```\nstruct foo {\n  int x;\n  short y;\n#ifndef __GENDWARFKSYMS__\n  char z;\n#endif\n};\n```\n\nAnd compile the code twice: once for the binary and once for the DWARF processor. This may be the only reliable and safe way of ensuring the CRC stability that (some) people want. It extends to larger changes than single member additions but might impose a terrible burden (updating all points of usage of `z`). There is also a reviewed and audited change that shows how `char z` has been hidden from the DWARF processor. And we could on...\n\nSuch changes will be picked up by ABI monitoring anyway. We have separate processes (and now mechanisms) for allowing such breaks over time. The difference is that ABI (type) monitoring will detect one type change. But the blast radius in terms of CRCs is generally more than 1 symbol, sometimes 1000s.",
+      "parentUuid": "bf6446de_4bae1b6e",
+      "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
