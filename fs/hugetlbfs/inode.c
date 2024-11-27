@@ -117,6 +117,10 @@ static int hugetlbfs_file_mmap(struct file *file, struct vm_area_struct *vma)
 	if (ret)
 		return ret;
 
+	ret = seal_check_exec_mapping(info->seals, vma);
+	if (ret)
+		return ret;
+
 	/*
 	 * page based offset in vm_pgoff could be sufficiently large to
 	 * overflow a loff_t when converted to byte offset.  This can

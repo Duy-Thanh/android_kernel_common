@@ -2732,6 +2732,10 @@ static int shmem_mmap(struct file *file, struct vm_area_struct *vma)
 	if (ret)
 		return ret;
 
+	ret = seal_check_exec_mapping(info->seals, vma);
+	if (ret)
+		return ret;
+
 	file_accessed(file);
 	/* This is anonymous shared memory if it is unlinked at the time of mmap */
 	if (inode->i_nlink)
