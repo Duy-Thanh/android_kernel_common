@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b41e8e_ef44e3a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-11-27T17:47:51Z",
+      "side": 1,
+      "message": "rndis is known to have significant security vulnerabilities and we encourage you not to enable this.",
+      "range": {
+        "startLine": 14,
+        "startChar": 67,
+        "endLine": 14,
+        "endChar": 78
+      },
+      "revId": "e8f7b07e07937f40e13f47dbef53ceab432b3644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a2b244_afc09ba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-11-27T17:47:51Z",
+      "side": 1,
+      "message": "We would like to make it clear that the headers being exposed in this cl are subject to change, and we can not guarantee that they will not break your build.",
+      "revId": "e8f7b07e07937f40e13f47dbef53ceab432b3644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
