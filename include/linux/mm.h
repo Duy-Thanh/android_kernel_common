@@ -4113,6 +4113,31 @@ static inline int seal_check_write(int seals, struct vm_area_struct *vma)
 	return 0;
 }
 
+/**
+ * seal_check_exec_mapping - Check for F_SEAL_EXEC_MAPPING and handle it.
+ * @seals: the seals to check
+ * @vma: the vma to operate on
+ *
+ * Check if F_SEAL_EXEC_MAPPING is set; if so, do proper check/handling on the
+ * vma flags. Return 0 if check passes, or < 0 for errors.
+ */
+static inline int seal_check_exec_mapping(int seals, struct vm_area_struct *vma)
+{
+	if (seals & F_SEAL_EXEC_MAPPING) {
+		/*
+		 * New PROT_EXEC and MAP_SHARED mappings are not allowed while
+		 * exec seal is active.
+		 */
+		if ((vma->vm_flags & VM_SHARED) && (vma->vm_flags & VM_EXEC))
+			return -EPERM;
+
+		/* Do not allow mprotect() to change the mapping to executable. */
+		vm_flags_clear(vma, VM_MAYEXEC);
+	}
+
+	return 0;
+}
+
 #ifdef CONFIG_ANON_VMA_NAME
 int madvise_set_anon_name(struct mm_struct *mm, unsigned long start,
 			  unsigned long len_in,
