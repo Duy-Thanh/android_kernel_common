@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd63102_c172cb58",
+        "filename": "arch/arm64/configs/android-arm64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 2028281
+      },
+      "writtenOn": "2024-11-27T13:32:31Z",
+      "side": 0,
+      "message": "Just to make sure, I guess we are not regressing any functionality on existing arm platforms, this is not used at all right?",
+      "revId": "a0f0a77e2f047120bc60c3723446428facd14cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
