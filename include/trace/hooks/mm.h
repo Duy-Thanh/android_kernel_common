@@ -305,6 +305,17 @@ DECLARE_HOOK(android_vh_mem_cgroup_charge,
 DECLARE_HOOK(android_vh_should_fault_around,
 	TP_PROTO(struct vm_fault *vmf, bool *should_around),
 	TP_ARGS(vmf, should_around));
+
+DECLARE_HOOK(android_vh_lruvec_add_folio,
+	TP_PROTO(struct lruvec *lruvec, struct page *page, enum lru_list lru,
+		bool tail, bool *skip),
+	TP_ARGS(lruvec, page, lru, tail, skip));
+
+DECLARE_HOOK(android_vh_lruvec_del_folio,
+	TP_PROTO(struct lruvec *lruvec, struct page *page, enum lru_list lru,
+		bool *skip),
+	TP_ARGS(lruvec, page, lru, skip));
+
 DECLARE_HOOK(android_vh_do_read_fault,
 	TP_PROTO(struct vm_fault *vmf, unsigned long fault_around_bytes),
 	TP_ARGS(vmf, fault_around_bytes));
