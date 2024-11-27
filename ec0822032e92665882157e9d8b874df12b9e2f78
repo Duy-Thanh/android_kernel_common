@@ -52,6 +52,24 @@
       "parentUuid": "9d5ffd45_7a37ea56",
       "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf6446de_4bae1b6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-11-27T14:06:26Z",
+      "side": 1,
+      "message": "I don\u0027t think I can persuade people to give up CRCs just yet.\n\nThere are a few things to say / ask about the series.\n\n* upstream review - what is the current status?\n* decoupling symbol CRC generation and allowing alternatives seems like a good idea\n* yet another DWARF processor (I know of: libabigail, libbtf, libctf, STG) - why? (for example, why not leverage pahole -J / libbtf and all the work already sunk into that?)\n* has this been tested for stability with multiple compilers, compiler versions, optimisation levels, debug levels and DWARF standard levels?\n* what were the design decisions around things like typedefs and type qualifiers, what about special attributes, const arrays, detecting unused padding etc.?\n* are there are any existing design proposals (covering the why) or design documents (covering the how) to read?\n\n---\n\n\u003e make it clear that a newly added struct member is not to be considered when computing the hash\n\nI saw the change in the series for this.\n\nAdding a member to a struct in part of the padding won\u0027t update CRCs (with the right flags etc.).\n\nSo neither will a reversion of that change. This is not a good idea.\n\nIn general, *all* clever ideas about sneaking things past a strict definition of type equality are bad to some degree, given the endless inventiveness of the real world.",
+      "parentUuid": "d0207eec_4d971831",
+      "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
