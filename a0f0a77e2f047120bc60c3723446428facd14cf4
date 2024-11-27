@@ -52,6 +52,24 @@
       "parentUuid": "6fe04b49_bf78e3c2",
       "revId": "a0f0a77e2f047120bc60c3723446428facd14cf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f56dbe49_10e7c28c",
+        "filename": "arch/arm64/configs/android-arm64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 2031040
+      },
+      "writtenOn": "2024-11-27T19:11:17Z",
+      "side": 0,
+      "message": "I\u0027ll try those changes on corsola tomorrow to make sure, good point.\n\nAdding @wmacek@google.com for any additional comments, as I believe he re-run `./build-kernel.sh` with various configs for corsola and may provide a relevant corsola-related info.",
+      "parentUuid": "33b0e912_89141251",
+      "revId": "a0f0a77e2f047120bc60c3723446428facd14cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
