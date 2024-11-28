@@ -16,6 +16,24 @@
       "message": "Consider `\u003dm` (to not overwhelm GKI split in near future).",
       "revId": "291e30cb00053eabe85711fd64198eb8c36334a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8fd442b_e10945be",
+        "filename": "arch/arm64/configs/android-arm64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 3228010
+      },
+      "writtenOn": "2024-11-28T13:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feb5a664_d3840c2b",
+      "revId": "291e30cb00053eabe85711fd64198eb8c36334a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
