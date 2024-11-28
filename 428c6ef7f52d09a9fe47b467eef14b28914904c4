@@ -33,6 +33,24 @@
       "message": "Please land this change on the base branch (`android15-6.6`) first.",
       "revId": "428c6ef7f52d09a9fe47b467eef14b28914904c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ab2173_b7183d2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-11-28T10:11:42Z",
+      "side": 1,
+      "message": "My mistake, it\u0027s on the base branch via -stable as `ec96bcf5f96a`",
+      "parentUuid": "b6346c53_ccb9c5aa",
+      "revId": "428c6ef7f52d09a9fe47b467eef14b28914904c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

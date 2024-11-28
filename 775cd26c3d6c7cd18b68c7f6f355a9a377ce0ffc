@@ -16,6 +16,24 @@
       "message": "Needs to cite a respin bug for 2024-08.",
       "revId": "775cd26c3d6c7cd18b68c7f6f355a9a377ce0ffc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d9d6883_56eea971",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-11-28T10:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8266b935_d8d905e1",
+      "revId": "775cd26c3d6c7cd18b68c7f6f355a9a377ce0ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
