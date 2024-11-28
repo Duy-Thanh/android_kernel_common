@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/381323361",
       "revId": "428c6ef7f52d09a9fe47b467eef14b28914904c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6346c53_ccb9c5aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-11-28T10:04:59Z",
+      "side": 1,
+      "message": "Please land this change on the base branch (`android15-6.6`) first.",
+      "revId": "428c6ef7f52d09a9fe47b467eef14b28914904c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
