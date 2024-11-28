@@ -485,6 +485,9 @@ static inline int sched_qos_validate(struct task_struct *p,
 static void __setscheduler_sched_qos(struct task_struct *p,
 				     const struct sched_attr *attr)
 {
+	if (!(attr->sched_flags & SCHED_FLAG_QOS))
+		return;
+
 	switch (attr->sched_qos_type) {
 	case SCHED_QOS_RAMPUP_MULTIPLIER:
 		set_bit(SCHED_QOS_RAMPUP_MULTIPLIER, p->sched_qos.user_defined);

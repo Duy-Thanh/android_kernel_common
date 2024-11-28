@@ -9101,7 +9101,7 @@ again:
 		__set_next_task_fair(rq, p, true);
 	}
 
-	if (prev->on_rq)
+	if (prev->on_rq && !prev->se.sched_delayed)
 		util_est_update_running(&rq->cfs, prev);
 
 	return p;
