@@ -39,6 +39,29 @@
       },
       "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee8baf65_8474f50d",
+        "filename": "include/linux/usb/typec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2024-11-28T12:43:58Z",
+      "side": 1,
+      "message": "FYI: This is a new member in the structure which is a part of ABI, so it will require ABI update after rebase. There are more such changes in this relation chain. Please rebase on ToT so I can help with that if you want. Thanks.",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 21
+      },
+      "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
