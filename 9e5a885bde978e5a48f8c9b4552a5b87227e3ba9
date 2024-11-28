@@ -16,6 +16,24 @@
       "message": "This breaks the KMI. `struct pci_dev` must not be changed. Please refactor to avoid breaking the KMI\n```\nERROR: ABI DIFFERENCES HAVE BEEN DETECTED!\nERROR: Report summary:\n\nfunction symbol \u0027int __pci_register_driver(struct pci_driver*, struct module*, const char*)\u0027 changed\n  CRC changed from 0x44bc59d6 to 0x8249fbfb\n\nfunction symbol \u0027void blk_mq_pci_map_queues(struct blk_mq_queue_map*, struct pci_dev*, int)\u0027 changed\n  CRC changed from 0xa4de8b18 to 0x45630eb7\n\nfunction symbol \u0027struct pci_host_bridge* devm_pci_alloc_host_bridge(struct device*, size_t)\u0027 changed\n  CRC changed from 0x81a39129 to 0x1ffc26dd\n\n... 133 omitted; 136 symbols have only CRC changes\n\ntype \u0027struct pci_dev\u0027 changed\n  byte size changed from 3384 to 3392\n  member \u0027unsigned int broken_cmd_compl:1\u0027 was added\n  16 members (\u0027void* msix_base\u0027 .. \u0027u64 android_kabi_reserved4\u0027) changed\n    offset changed by 64\n\nWARNING: difference above is ignored.\nWARNING: Use \u0027tools/bazel run @@//common:kernel_aarch64_abi_dist\u0027 to fail on ABI difference.\nERROR: Found 16 unexpected lines in stderr, the first one is:\n    ERROR: ABI DIFFERENCES HAVE BEEN DETECTED!\n```",
       "revId": "9e5a885bde978e5a48f8c9b4552a5b87227e3ba9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e7bc662_b0be030a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3576164
+      },
+      "writtenOn": "2024-11-28T06:17:28Z",
+      "side": 1,
+      "message": "I checked what you said, and it seems difficult to modify this part without breaking KMI because there is a change in the pci_dev structure while enabling gki_defconfig.  The patch will be abandoned.",
+      "parentUuid": "1f04cd57_26fc492e",
+      "revId": "9e5a885bde978e5a48f8c9b4552a5b87227e3ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
