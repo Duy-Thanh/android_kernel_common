@@ -282,11 +282,27 @@ static void uart_shutdown(struct tty_struct *tty, struct uart_state *state)
 		/*
 		 * Turn off DTR and RTS early.
 		 */
+<<<<<<< HEAD   (9e7d65 Merge 9f95de15904a ("xfrm: respect ip protocols rules criter)
 		if (uport && uart_console(uport) && tty)
 			uport->cons->cflag = tty->termios.c_cflag;
+||||||| BASE
+		if (uport && uart_console(uport) && tty) {
+			uport->cons->cflag = tty->termios.c_cflag;
+			uport->cons->ispeed = tty->termios.c_ispeed;
+			uport->cons->ospeed = tty->termios.c_ospeed;
+		}
+=======
+		if (uport) {
+			if (uart_console(uport) && tty) {
+				uport->cons->cflag = tty->termios.c_cflag;
+				uport->cons->ispeed = tty->termios.c_ispeed;
+				uport->cons->ospeed = tty->termios.c_ospeed;
+			}
+>>>>>>> BRANCH (b874a7 Linux 5.10.229)
 
-		if (!tty || C_HUPCL(tty))
-			uart_port_dtr_rts(uport, 0);
+			if (!tty || C_HUPCL(tty))
+				uart_port_dtr_rts(uport, 0);
+		}
 
 		uart_port_shutdown(port);
 	}

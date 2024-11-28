@@ -244,7 +244,25 @@ static inline void ip_tunnel_init_flow(struct flowi4 *fl4,
 				       __u32 mark, __u32 tun_inner_hash)
 {
 	memset(fl4, 0, sizeof(*fl4));
+<<<<<<< HEAD   (9e7d65 Merge 9f95de15904a ("xfrm: respect ip protocols rules criter)
 	fl4->flowi4_oif = oif;
+||||||| BASE
+
+	if (oif) {
+		fl4->flowi4_l3mdev = l3mdev_master_upper_ifindex_by_index_rcu(net, oif);
+		/* Legacy VRF/l3mdev use case */
+		fl4->flowi4_oif = fl4->flowi4_l3mdev ? 0 : oif;
+	}
+
+=======
+
+	if (oif) {
+		fl4->flowi4_l3mdev = l3mdev_master_upper_ifindex_by_index(net, oif);
+		/* Legacy VRF/l3mdev use case */
+		fl4->flowi4_oif = fl4->flowi4_l3mdev ? 0 : oif;
+	}
+
+>>>>>>> BRANCH (b874a7 Linux 5.10.229)
 	fl4->daddr = daddr;
 	fl4->saddr = saddr;
 	fl4->flowi4_tos = tos;
