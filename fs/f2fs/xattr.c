@@ -623,6 +623,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
 			const char *name, const void *value, size_t size,
 			struct page *ipage, int flags)
 {
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct f2fs_xattr_entry *here, *last;
 	void *base_addr, *last_base_addr;
 	int found, newsize;
@@ -759,7 +760,27 @@ retry:
 	if (index == F2FS_XATTR_INDEX_ENCRYPTION &&
 			!strcmp(name, F2FS_XATTR_NAME_ENCRYPTION_CONTEXT))
 		f2fs_set_encrypted_inode(inode);
+
+	if (!S_ISDIR(inode->i_mode))
+		goto same;
+	/*
+	 * In restrict mode, fsync() always try to trigger checkpoint for all
+	 * metadata consistency, in other mode, it triggers checkpoint when
+	 * parent's xattr metadata was updated.
+	 */
+	if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT)
+		set_sbi_flag(sbi, SBI_NEED_CP);
+	else
+		f2fs_add_ino_entry(sbi, inode->i_ino, XATTR_DIR_INO);
+same:
+	if (is_inode_flag_set(inode, FI_ACL_MODE)) {
+		inode->i_mode = F2FS_I(inode)->i_acl_mode;
+		clear_inode_flag(inode, FI_ACL_MODE);
+	}
+
+	inode->i_ctime = current_time(inode);
 	f2fs_mark_inode_dirty_sync(inode, true);
+<<<<<<< HEAD   (139a6b Revert "bareudp: Pull inner IP header in bareudp_udp_encap_r)
 	if (!error && S_ISDIR(inode->i_mode))
 		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
 
@@ -770,6 +791,11 @@ same:
 		clear_inode_flag(inode, FI_ACL_MODE);
 	}
 
+||||||| BASE
+	if (!error && S_ISDIR(inode->i_mode))
+		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_CP);
+=======
+>>>>>>> BRANCH (892620 x86/mm: Switch to new Intel CPU model defines)
 exit:
 	kfree(base_addr);
 	return error;
