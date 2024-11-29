@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c509362b_e6a7430d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-11-29T11:03:25Z",
+      "side": 1,
+      "message": "The upstream version appears to be quite different. Should this be BACKPORT instead?",
+      "revId": "8f876925816f2f207d7c91b521d43b22cc10863d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
