@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bde40c64_cd814d79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2024-11-30T07:27:24Z",
+      "side": 1,
+      "message": "NCM is also available, but RNDIS is used due to our customer\u0027s requirements.",
+      "parentUuid": "40b41e8e_ef44e3a8",
+      "range": {
+        "startLine": 14,
+        "startChar": 67,
+        "endLine": 14,
+        "endChar": 78
+      },
+      "revId": "e8f7b07e07937f40e13f47dbef53ceab432b3644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "47a2b244_afc09ba9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -37,6 +61,24 @@
       "writtenOn": "2024-11-27T17:47:51Z",
       "side": 1,
       "message": "We would like to make it clear that the headers being exposed in this cl are subject to change, and we can not guarantee that they will not break your build.",
+      "revId": "e8f7b07e07937f40e13f47dbef53ceab432b3644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "045e1cc2_d503aa32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2024-11-30T07:27:24Z",
+      "side": 1,
+      "message": "We fully understand what you comment and keep an eye on the headers change.",
+      "parentUuid": "47a2b244_afc09ba9",
       "revId": "e8f7b07e07937f40e13f47dbef53ceab432b3644",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
