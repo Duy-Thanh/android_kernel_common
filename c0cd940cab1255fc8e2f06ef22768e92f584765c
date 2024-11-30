@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bac4dd78_45e33796",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2024-11-30T09:38:51Z",
+      "side": 1,
+      "message": "It seems that the latest abi.xml is unmatched with current code snapshot of this branch, I have to checkout to an older commit(e733b347fbf8) to generate correct abi.xml by compiling, please review this commit and merge, thanks.",
+      "revId": "c0cd940cab1255fc8e2f06ef22768e92f584765c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
