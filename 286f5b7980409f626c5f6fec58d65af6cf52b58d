@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a36b7c_ca9aab46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-02T14:22:17Z",
+      "side": 1,
+      "message": "This needs a respin request and also it should be cherry-picked along with the corresponding ABI update in https://r.android.com/3369094.",
+      "revId": "286f5b7980409f626c5f6fec58d65af6cf52b58d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
