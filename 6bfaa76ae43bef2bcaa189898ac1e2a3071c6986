@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e79d3463_25d9b388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-12-02T10:26:45Z",
+      "side": 1,
+      "message": "Please sent this upstream first as it looks like a fix to the generic networking code.",
+      "revId": "6bfaa76ae43bef2bcaa189898ac1e2a3071c6986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
