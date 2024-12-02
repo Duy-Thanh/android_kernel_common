@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d55eb665_2abdb444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-02T20:49:55Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick this patch from android15-6.6 to preserve the Change-Id. If there is some reason this can\u0027t be done, explain in the commit message.",
+      "revId": "0acc9323ee9e52a042dd2b262976566f16fc3d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
