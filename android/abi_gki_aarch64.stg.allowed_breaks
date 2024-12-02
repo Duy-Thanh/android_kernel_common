@@ -101,3 +101,25 @@ type 'struct cgroup_root' changed
   'struct tracepoint __tracepoint_android_vh_mutex_unlock_slowpath_before_wakeq'
   'struct tracepoint __tracepoint_android_vh_suitable_migration_target_bypass'
 
+function symbol 'irqreturn_t dw_handle_msi_irq(struct dw_pcie_rp*)' changed
+  CRC changed from 0xbffc4c61 to 0x51a8151c
+
+function symbol 'void dw_pcie_ep_reset_bar(struct dw_pcie*, enum pci_barno)' changed
+  CRC changed from 0x11836520 to 0x6b8260f9
+
+function symbol 'u8 dw_pcie_find_capability(struct dw_pcie*, u8)' changed
+  CRC changed from 0xae98e8ea to 0xad70f823
+
+... 7 omitted; 10 symbols have only CRC changes
+
+type 'struct dw_pcie_rp' changed
+  byte size changed from 216 to 280
+  member 'struct cpumask msi_ctrl_to_cpu[8]' was added
+  3 members ('struct pci_host_bridge* bridge' .. 'unsigned long msi_irq_in_use[4]') changed
+    offset changed by 512
+
+type 'struct dw_pcie' changed
+  byte size changed from 1592 to 1656
+  15 members ('struct dw_pcie_ep ep' .. 'bool suspended') changed
+    offset changed by 512
+

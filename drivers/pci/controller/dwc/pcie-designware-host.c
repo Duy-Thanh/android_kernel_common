@@ -10,6 +10,7 @@
 
 #include <linux/iopoll.h>
 #include <linux/irqchip/chained_irq.h>
+#include <linux/irq.h>
 #include <linux/irqdomain.h>
 #include <linux/msi.h>
 #include <linux/of_address.h>
@@ -53,10 +54,44 @@ static struct msi_domain_info dw_pcie_msi_domain_info = {
 	.chip	= &dw_pcie_msi_irq_chip,
 };
 
+/*
+ * Some chips are configured for edge-triggered interrupts,
+ * but the underlying signal is level-based. So with multiple
+ * msi interrupts come in back to back, there is possibility
+ * that the interrupt signal didn't goes low to high to create
+ * edge for each and every incoming msi to allow GIC layer to
+ * detect. To avoid that, we have this workaround to set irqchip
+ * state to PENDING if necessary.
+ */
+static int dw_pci_check_if_need_retrigger(int msi_ctrl, struct dw_pcie_rp *pp)
+{
+	int err = 0, virq;
+	unsigned long flags;
+	u32 status, mask, irq_type;
+	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
+
+	raw_spin_lock_irqsave(&pp->lock, flags);
+	virq = pp->msi_irq[msi_ctrl];
+	irq_type = irq_get_trigger_type(virq);
+	if (!(irq_type & IRQ_TYPE_EDGE_BOTH))
+		goto unlock;
+	status = dw_pcie_readl_dbi(pci, PCIE_MSI_INTR0_STATUS +
+					   (msi_ctrl * MSI_REG_CTRL_BLOCK_SIZE));
+	mask = pp->irq_mask[msi_ctrl];
+
+	status &= ~mask;
+	if (!status)
+		goto unlock;
+	err = irq_set_irqchip_state(virq, IRQCHIP_STATE_PENDING, true);
+unlock:
+	raw_spin_unlock_irqrestore(&pp->lock, flags);
+	return err;
+}
+
 /* MSI int handler */
 irqreturn_t dw_handle_msi_irq(struct dw_pcie_rp *pp)
 {
-	int i, pos;
+	int i, pos, err;
 	unsigned long val;
 	u32 status, num_ctrls;
 	irqreturn_t ret = IRQ_NONE;
@@ -80,6 +115,10 @@ irqreturn_t dw_handle_msi_irq(struct dw_pcie_rp *pp)
 						  pos);
 			pos++;
 		}
+
+		err = dw_pci_check_if_need_retrigger(i, pp);
+		if (err)
+			dev_err(pci->dev, "Failed to set irqchip state %d\n", err);
 	}
 
 	return ret;
