@@ -16,6 +16,23 @@
       "message": "It is the same patch as gki_defconfig enable patch reflected in Android mainline. Could you give me a review for merge?  Thanks.",
       "revId": "e348318df01a3a8bcd98f18cb85acba7a2746525",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77102243_dd1366ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-12-02T10:26:55Z",
+      "side": 1,
+      "message": "Please use the same Change-Id that was in the mainline branch.",
+      "revId": "e348318df01a3a8bcd98f18cb85acba7a2746525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
