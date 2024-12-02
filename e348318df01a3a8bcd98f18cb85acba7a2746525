@@ -33,6 +33,24 @@
       "message": "Please use the same Change-Id that was in the mainline branch.",
       "revId": "e348318df01a3a8bcd98f18cb85acba7a2746525",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "831a82b3_d7fb0c4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3564363
+      },
+      "writtenOn": "2024-12-02T10:32:07Z",
+      "side": 1,
+      "message": "I have written a new patch with a different change-id below, and please review it in the patch below.\nhttps://android-review.googlesource.com/c/kernel/common/+/3385921 \n\nWe will change the current patch to abandon processing.\nThanks.",
+      "parentUuid": "77102243_dd1366ae",
+      "revId": "e348318df01a3a8bcd98f18cb85acba7a2746525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
