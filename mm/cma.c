@@ -538,6 +538,7 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 	}
 
 	trace_cma_alloc_finish(cma->name, pfn, page, count, align, ret);
+	trace_android_vh_cma_alloc(cma->name, pfn, page, bitmap_count, align, ret);
 
 	/*
 	 * CMA can allocate multiple page blocks, which results in different
@@ -634,6 +635,7 @@ bool cma_release(struct cma *cma, const struct page *pages,
 	free_contig_range(pfn, count);
 	cma_clear_bitmap(cma, pfn, count);
 	trace_cma_release(cma->name, pfn, pages, count);
+	trace_android_vh_cma_release(cma->name, pfn, pages, cma_bitmap_pages_to_bits(cma, count));
 
 	return true;
 }
