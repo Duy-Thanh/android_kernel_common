@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/381788344",
       "revId": "c26f1032e8cc843df0f51a8347827ec1f0889ec2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88e11ef_f0cd1905",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-12-02T10:24:10Z",
+      "side": 1,
+      "message": "Patch is not on the base branch (`android15-6.6`).",
+      "revId": "c26f1032e8cc843df0f51a8347827ec1f0889ec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
