@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/381955402",
       "revId": "1cea65260a3f5c34958387ba63e4b504a1380880",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8e4fe5_3c65738e",
+        "filename": "mm/madvise.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-03T05:50:23Z",
+      "side": 1,
+      "message": "Hrm. It feels like the new vendorhook is duplicative of the one already here (added by Change-Id: Idbdcdf196cb10bbf7f92775fbc539137ca961c54)?\n\nThough I\u0027m the one that missed this issue earlier with the android15-6.6 submission, so probably too late to object here.",
+      "revId": "1cea65260a3f5c34958387ba63e4b504a1380880",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
