@@ -16,6 +16,24 @@
       "message": "@Carlos,\nI uploaded the commit w/ conflict.\n\nIt seems like there\u0027re 2 CLs between android15-6.6 and October monthly branch.\nhttps://r.android.com/3347208 and https://r.android.com/3350266\n\nShould I cherry-pick them too?",
       "revId": "bfe1c31f511cdc89465c571851ccab7d62009b1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15fa2fa0_11b1d27f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-03T01:06:38Z",
+      "side": 1,
+      "message": "Please open a respin request first as this is required.",
+      "parentUuid": "2d27f2f0_78474bb7",
+      "revId": "bfe1c31f511cdc89465c571851ccab7d62009b1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
