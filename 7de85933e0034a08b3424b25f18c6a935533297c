@@ -39,6 +39,23 @@
       "message": "Add Andrew and Sajid for code review",
       "revId": "7de85933e0034a08b3424b25f18c6a935533297c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d04f1b96_6617b48f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2024-12-03T06:15:11Z",
+      "side": 1,
+      "message": "Hi Samiksha,\n\nWe need this change to merge before device IC, would you please help to process this as soon as possible ? \n\nMany thanks",
+      "revId": "7de85933e0034a08b3424b25f18c6a935533297c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
