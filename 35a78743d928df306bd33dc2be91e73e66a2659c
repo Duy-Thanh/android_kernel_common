@@ -62,6 +62,30 @@
       },
       "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86a050e_69435599",
+        "filename": "include/linux/usb/typec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-12-03T10:45:13Z",
+      "side": 1,
+      "message": "The ABI can be updated with:\n\n```\ntools/bazel run //common:kernel_x86_64_abi_update\n```\n\nThen, the update to the .stg file should be submited with this CL. Please resolve that",
+      "parentUuid": "ee8baf65_8474f50d",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 21
+      },
+      "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
