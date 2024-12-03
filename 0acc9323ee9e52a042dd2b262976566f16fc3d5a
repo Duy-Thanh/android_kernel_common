@@ -16,6 +16,24 @@
       "message": "Please abandon this patch and cherry-pick this patch from android15-6.6 to preserve the Change-Id. If there is some reason this can\u0027t be done, explain in the commit message.",
       "revId": "0acc9323ee9e52a042dd2b262976566f16fc3d5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb71e2ce_0b0e2226",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981965
+      },
+      "writtenOn": "2024-12-03T02:46:12Z",
+      "side": 1,
+      "message": "The former patch (1396230) includes 5 vendor hooks, and this patch includes only 1 vendor hook. It\u0027s not the same.\nDo I need to cherry-pick from the former patch?",
+      "parentUuid": "d55eb665_2abdb444",
+      "revId": "0acc9323ee9e52a042dd2b262976566f16fc3d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
