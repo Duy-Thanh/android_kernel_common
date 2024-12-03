@@ -16,6 +16,24 @@
       "message": "Our CI tests a simple `ARCH\u003darm defconfig + CONFIG_THUMB2_KERNEL\u003dy`, which breaks after this change because this configuration has `CONFIG_CGROUPS\u003dy` but no subsystems enabled, so `CGROUP_SUBSYS_COUNT` is 0, which breaks the `_Static_assert()` in `__ANDROID_KABI_CHECK_SIZE_ALIGN()`:\n\n```\ninclude/linux/cgroup-defs.h:588:2: error: static assertion failed due to requirement \u0027sizeof(struct cgroup_root::(unnamed at include/linux/cgroup-defs.h:588:2)) \u003c\u003d sizeof(struct cgroup_root::(unnamed at include/linux/cgroup-defs.h:588:2))\u0027: include/linux/cgroup-defs.h:589: struct callback_head rcu is larger than u8 __attribute__((__aligned__(8))) android_backport_reserved1[CGROUP_SUBSYS_COUNT * sizeof(atomic_t)]\n  588 |         ANDROID_BACKPORT_USE_ARRAY(1, CGROUP_SUBSYS_COUNT * sizeof(atomic_t),\n      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  589 |                                    struct rcu_head rcu);\n      |                                    ~~~~~~~~~~~~~~~~~~~~\ninclude/linux/android_kabi.h:157:2: note: expanded from macro \u0027ANDROID_BACKPORT_USE_ARRAY\u0027\n  157 |         _ANDROID_KABI_REPLACE(_ANDROID_BACKPORT_RESERVE_ARRAY(number, bytes), _new)\n      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ninclude/linux/android_kabi.h:67:3: note: expanded from macro \u0027_ANDROID_KABI_REPLACE\u0027\n   67 |                 __ANDROID_KABI_CHECK_SIZE_ALIGN(_orig, _new);   \\\n      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ninclude/linux/android_kabi.h:43:18: note: expanded from macro \u0027__ANDROID_KABI_CHECK_SIZE_ALIGN\u0027\n   43 |                 _Static_assert(sizeof(struct{_new;}) \u003c\u003d sizeof(struct{_orig;}), \\\n      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ninclude/linux/cgroup-defs.h:588:2: note: expression evaluates to \u00278 \u003c\u003d 0\u0027\n  588 |         ANDROID_BACKPORT_USE_ARRAY(1, CGROUP_SUBSYS_COUNT * sizeof(atomic_t),\n      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  589 |                                    struct rcu_head rcu);\n      |                                    ~~~~~~~~~~~~~~~~~~~~\ninclude/linux/android_kabi.h:157:2: note: expanded from macro \u0027ANDROID_BACKPORT_USE_ARRAY\u0027\n  157 |         _ANDROID_KABI_REPLACE(_ANDROID_BACKPORT_RESERVE_ARRAY(number, bytes), _new)\n      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ninclude/linux/android_kabi.h:67:3: note: expanded from macro \u0027_ANDROID_KABI_REPLACE\u0027\n   67 |                 __ANDROID_KABI_CHECK_SIZE_ALIGN(_orig, _new);   \\\n      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ninclude/linux/android_kabi.h:43:40: note: expanded from macro \u0027__ANDROID_KABI_CHECK_SIZE_ALIGN\u0027\n   43 |                 _Static_assert(sizeof(struct{_new;}) \u003c\u003d sizeof(struct{_orig;}), \\\n      |                                ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~\n```\n\nhttps://storage.tuxsuite.com/public/clangbuiltlinux/continuous-integration2/builds/2peItIplrIhPR8T1HILlGrRJ8VZ/build.log\n\nIs there a way to make this a little more robust?",
       "revId": "d66e9166bfa175691dd2d0ad7f65c9fec54aa520",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00023c62_3350034b",
+        "filename": "include/linux/cgroup-defs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-03T00:42:58Z",
+      "side": 1,
+      "message": "oh, sorry about that. Todd is fixing this issue in change 3387484.",
+      "parentUuid": "02ca5019_4b3679a2",
+      "revId": "d66e9166bfa175691dd2d0ad7f65c9fec54aa520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
