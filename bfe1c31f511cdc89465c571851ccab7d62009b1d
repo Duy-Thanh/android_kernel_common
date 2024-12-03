@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d27f2f0_78474bb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2024-12-03T01:03:01Z",
+      "side": 1,
+      "message": "@Carlos,\nI uploaded the commit w/ conflict.\n\nIt seems like there\u0027re 2 CLs between android15-6.6 and October monthly branch.\nhttps://r.android.com/3347208 and https://r.android.com/3350266\n\nShould I cherry-pick them too?",
+      "revId": "bfe1c31f511cdc89465c571851ccab7d62009b1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
