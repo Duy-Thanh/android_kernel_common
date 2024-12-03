@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7bf870a_b0b16888",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1949210
+      },
+      "writtenOn": "2024-12-03T10:50:44Z",
+      "side": 1,
+      "message": "We can remove this. The patch is now in Linux mainline: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id\u003d7447990137bf06b2aeecad9c6081e01a9f47f2aa\n\nAccordingly, change the commit IDs and git link below",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "e7fad17cadb9ddd0468509688a171eb3cfc784f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
