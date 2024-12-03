@@ -34,6 +34,24 @@
       "parentUuid": "d55eb665_2abdb444",
       "revId": "0acc9323ee9e52a042dd2b262976566f16fc3d5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e652470c_3feaebae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-03T02:52:41Z",
+      "side": 1,
+      "message": "Ok, then cite the original patch from the commit message so it is obvious where the hooks originated.",
+      "parentUuid": "fb71e2ce_0b0e2226",
+      "revId": "0acc9323ee9e52a042dd2b262976566f16fc3d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
