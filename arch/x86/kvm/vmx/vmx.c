@@ -674,7 +674,7 @@ static inline bool cpu_has_broken_vmx_preemption_timer(void)
 
 static inline bool cpu_need_virtualize_apic_accesses(struct kvm_vcpu *vcpu)
 {
-	return flexpriority_enabled && lapic_in_kernel(vcpu);
+	return flexpriority_enabled && lapic_in_kernel(vcpu) && !pkvm_is_protected_vcpu(vcpu);
 }
 
 static int possible_passthrough_msr_slot(u32 msr)
