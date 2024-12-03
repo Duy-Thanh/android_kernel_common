@@ -22,6 +22,30 @@
       },
       "revId": "fb967bd545473a512f012e6469d169a5d5453317",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc3bf57_3025e377",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-12-03T00:10:30Z",
+      "side": 1,
+      "message": "I would prefer this to be moved out of //common. See reason in CL:3382731",
+      "parentUuid": "32fe374b_2129e448",
+      "range": {
+        "startLine": 1448,
+        "startChar": 0,
+        "endLine": 1448,
+        "endChar": 26
+      },
+      "revId": "fb967bd545473a512f012e6469d169a5d5453317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
