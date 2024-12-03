@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8af8bfc_d3c43fc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-03T05:19:39Z",
+      "side": 1,
+      "message": "I tweaked the commit message, as the commits referenced weren\u0027t commit shas but we\u0027re Gerrit URL numbers.",
+      "revId": "b100dc161385e02a61f66ecd466ab88edbe93e08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
