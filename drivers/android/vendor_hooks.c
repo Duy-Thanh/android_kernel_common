@@ -603,3 +603,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_queue_work);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_wake_idle_worker);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_copy_page_to_iter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_copy_page_from_iter_atomic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_destroy_inode);

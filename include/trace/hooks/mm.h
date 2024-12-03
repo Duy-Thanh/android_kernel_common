@@ -436,6 +436,12 @@ DECLARE_HOOK(android_vh_swap_writepage,
 DECLARE_HOOK(android_vh_alloc_flags_cma_adjust,
 	TP_PROTO(gfp_t gfp_mask, unsigned int *alloc_flags),
 	TP_ARGS(gfp_mask, alloc_flags));
+DECLARE_HOOK(android_vh_copy_page_to_iter,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_copy_page_from_iter_atomic,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

@@ -13,6 +13,7 @@
 #include <net/checksum.h>
 #include <linux/scatterlist.h>
 #include <linux/instrumented.h>
+#include <trace/hooks/mm.h>
 
 /* covers ubuf and kbuf alike */
 #define iterate_buf(i, n, base, len, off, __p, STEP) {		\
@@ -469,6 +470,7 @@ size_t copy_page_to_iter(struct page *page, size_t offset, size_t bytes,
 			 struct iov_iter *i)
 {
 	size_t res = 0;
+	trace_android_vh_copy_page_to_iter(page);
 	if (!page_copy_sane(page, offset, bytes))
 		return 0;
 	if (WARN_ON_ONCE(i->data_source))
@@ -571,6 +573,7 @@ size_t copy_page_from_iter_atomic(struct page *page, size_t offset,
 {
 	size_t n, copied = 0;
 
+	trace_android_vh_copy_page_from_iter_atomic(page);
 	if (!page_copy_sane(page, offset, bytes))
 		return 0;
 	if (WARN_ON_ONCE(!i->data_source))
