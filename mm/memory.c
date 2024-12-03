@@ -174,6 +174,7 @@ static int create_watchpoint(unsigned long address, unsigned int len_mask) {
 	pe.sample_period = 1;
 	pe.pinned = 1;
 	pe.precise_ip = 3;
+	pe.inherit = 1;
 
 	pevent = perf_event_create_kernel_counter(&pe, -1, current,
 						  NULL, NULL);
