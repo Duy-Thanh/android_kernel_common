@@ -46,6 +46,30 @@
       },
       "revId": "fb967bd545473a512f012e6469d169a5d5453317",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024f0ee3_cdf36373",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-12-03T00:14:08Z",
+      "side": 1,
+      "message": "If the source code themselves stays in //common, then the `ddk_kunit_test` targets probably needs to have a `deps \u003d [\"//common:kunit_parser\"]` explicitly, instead of having them implicitly depended on in the macro/rule itself..",
+      "parentUuid": "7cc3bf57_3025e377",
+      "range": {
+        "startLine": 1448,
+        "startChar": 0,
+        "endLine": 1448,
+        "endChar": 26
+      },
+      "revId": "fb967bd545473a512f012e6469d169a5d5453317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
