@@ -16,6 +16,24 @@
       "message": "This needs a respin request and also it should be cherry-picked along with the corresponding ABI update in https://r.android.com/3369094.",
       "revId": "286f5b7980409f626c5f6fec58d65af6cf52b58d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7381340c_6505aa20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2024-12-03T00:27:05Z",
+      "side": 1,
+      "message": "@Carlos,\nWhen I cherry-picked https://r.android.com/3369094, there\u0027s conflict.\ndiff in stg, and no android/abi_gki_aarch64.stg.allowed_breaks.",
+      "parentUuid": "c8a36b7c_ca9aab46",
+      "revId": "286f5b7980409f626c5f6fec58d65af6cf52b58d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
