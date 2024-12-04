@@ -16,6 +16,23 @@
       "message": "stll neeed and restore the one:\nhttps://android-review.googlesource.com/c/kernel/common/+/1814087",
       "revId": "397d643a7b07ebd391b9d036d48b326f3f23acd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9dff7e7_975de85a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-04T21:35:34Z",
+      "side": 1,
+      "message": "Needs \"Bug: \" tag",
+      "revId": "397d643a7b07ebd391b9d036d48b326f3f23acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
