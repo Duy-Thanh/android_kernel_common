@@ -276507,6 +276507,12 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x5415be16
+  return_type_id: 0x18bd6530
+  parameter_id: 0x054f691a
+  parameter_id: 0xf435685e
+}
+function {
   id: 0x54171e33
   return_type_id: 0x18bd6530
   parameter_id: 0x0bbe1c3e
@@ -353635,6 +353641,15 @@ elf_symbol {
   full_name: "skb_pull"
 }
 elf_symbol {
+  id: 0x859796a9
+  name: "skb_pull_data"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8505cb22
+  type_id: 0x5415be16
+  full_name: "skb_pull_data"
+}
+elf_symbol {
   id: 0x3f4150a5
   name: "skb_pull_rcsum"
   is_defined: true
@@ -371319,6 +371334,7 @@ interface {
   symbol_id: 0x778992cc
   symbol_id: 0x0e0dc50e
   symbol_id: 0x90d072a5
+  symbol_id: 0x859796a9
   symbol_id: 0x3f4150a5
   symbol_id: 0xae246c18
   symbol_id: 0x9d194bee
