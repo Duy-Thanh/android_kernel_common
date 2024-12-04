@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "572978a2_5f893bc8",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-12-04T17:38:05Z",
+      "side": 1,
+      "message": "I think we should probably increment the fallback stats here too. @kaleshsingh@google.com WDYT?\n```\ncount_vm_event(THP_FAULT_FALLBACK);\ncount_mthp_stat(HPAGE_PMD_ORDER, MTHP_STAT_ANON_FAULT_FALLBACK);\n```",
+      "revId": "75ebbe86f3317436a11b4df1bbd01bff27ff51a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
