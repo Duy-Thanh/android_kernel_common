@@ -70,6 +70,30 @@
       },
       "revId": "b1a2ec10d64942d9bc70adda5333c1120b06ed50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a9c7506_c5bbf2e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1447332
+      },
+      "writtenOn": "2024-12-04T22:49:29Z",
+      "side": 1,
+      "message": "I can generate it arbitrarily and register the kernel log of the corresponding bug.\n(You can -\u003e I can)",
+      "parentUuid": "96dbf85b_6c8d99dd",
+      "range": {
+        "startLine": 17,
+        "startChar": 5,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "b1a2ec10d64942d9bc70adda5333c1120b06ed50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
