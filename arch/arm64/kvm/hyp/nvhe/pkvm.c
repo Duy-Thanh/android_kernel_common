@@ -1780,6 +1780,20 @@ bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 		return pkvm_device_request_mmio(hyp_vcpu, exit_code);
 	case ARM_SMCCC_VENDOR_HYP_KVM_DEV_REQ_DMA_FUNC_ID:
 		return pkvm_device_request_dma(hyp_vcpu, exit_code);
+
+	case FFA_FEATURES:
+	case FFA_VERSION:
+	case FFA_FN64_RXTX_MAP:
+	case FFA_RXTX_UNMAP:
+	case FFA_MEM_SHARE:
+	case FFA_FN64_MEM_SHARE:
+	case FFA_MEM_RECLAIM:
+	case FFA_MEM_LEND:
+	case FFA_FN64_MEM_LEND:
+	case FFA_ID_GET:
+	case FFA_PARTITION_INFO_GET:
+		return kvm_guest_ffa_handler(hyp_vcpu, exit_code);
+
 	default:
 		return pkvm_handle_psci(hyp_vcpu);
 	}
@@ -1809,6 +1823,18 @@ bool kvm_hyp_handle_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 	case ARM_SMCCC_VENDOR_HYP_KVM_IOMMU_MAP_FUNC_ID ...
 	     ARM_SMCCC_VENDOR_HYP_KVM_IOMMU_FREE_DOMAIN_FUNC_ID:
 		return kvm_handle_pviommu_hvc(vcpu, exit_code);
+	case FFA_FEATURES:
+	case FFA_VERSION:
+	case FFA_FN64_RXTX_MAP:
+	case FFA_RXTX_UNMAP:
+	case FFA_MEM_SHARE:
+	case FFA_FN64_MEM_SHARE:
+	case FFA_MEM_RECLAIM:
+	case FFA_MEM_LEND:
+	case FFA_FN64_MEM_LEND:
+	case FFA_ID_GET:
+	case FFA_PARTITION_INFO_GET:
+		return kvm_guest_ffa_handler(hyp_vcpu, exit_code);
 	}
 
 	return false;
