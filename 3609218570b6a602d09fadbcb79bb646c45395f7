@@ -52,6 +52,24 @@
       "parentUuid": "e91318f5_27c58912",
       "revId": "3609218570b6a602d09fadbcb79bb646c45395f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b40d9c4_8a1b52be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-04T19:53:05Z",
+      "side": 1,
+      "message": "I had to look this up and apparently you can pass `--cleanup\u003dwhitespace` to avoid commentary cleanup.",
+      "parentUuid": "7e81b86e_2f9c3851",
+      "revId": "3609218570b6a602d09fadbcb79bb646c45395f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
