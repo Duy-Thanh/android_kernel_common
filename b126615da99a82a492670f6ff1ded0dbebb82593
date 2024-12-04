@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b88cb1de_96c7d633",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-12-04T08:49:58Z",
+      "side": 1,
+      "message": "Bypassing the linter check - the ABI was updated in this commit, but the linter fails because of KMI freeze (there are modifications of the ABI, not just additions)",
+      "revId": "b126615da99a82a492670f6ff1ded0dbebb82593",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
