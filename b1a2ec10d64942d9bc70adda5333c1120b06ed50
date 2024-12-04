@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c861f5a_4b4929b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-12-04T08:57:45Z",
+      "side": 1,
+      "message": "Are you sure this is the correct bug number? If so, how is it related to the problem at hand?",
+      "range": {
+        "startLine": 17,
+        "startChar": 5,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "b1a2ec10d64942d9bc70adda5333c1120b06ed50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
