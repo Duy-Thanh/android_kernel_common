@@ -11,6 +11,7 @@
 #include <linux/cpuidle.h>
 #include <linux/cpumask.h>
 #include <linux/ktime.h>
+#include <trace/hooks/domain_governor.h>
 
 static int dev_update_qos_constraint(struct device *dev, void *data)
 {
@@ -50,7 +51,7 @@ static int dev_update_qos_constraint(struct device *dev, void *data)
  * default_suspend_ok - Default PM domain governor routine to suspend devices.
  * @dev: Device to check.
  */
-static bool default_suspend_ok(struct device *dev)
+static bool _default_suspend_ok(struct device *dev)
 {
 	struct gpd_timing_data *td = dev_gpd_data(dev)->td;
 	unsigned long flags;
@@ -118,6 +119,15 @@ static bool default_suspend_ok(struct device *dev)
 	 * their suspend latencies into account here.
 	 */
 	return td->cached_suspend_ok;
+}
+static bool default_suspend_ok(struct device *dev)
+{
+	bool suspend_ok = 0, override = 0;
+	trace_android_vh_domain_default_suspend_ok(dev, &suspend_ok, &override);
+	if (override)
+		return suspend_ok;
+	suspend_ok = _default_suspend_ok(dev);
+	return suspend_ok;
 }
 
 static void update_domain_next_wakeup(struct generic_pm_domain *genpd, ktime_t now)
@@ -339,7 +349,8 @@ static bool default_power_down_ok(struct dev_pm_domain *pd)
 }
 
 #ifdef CONFIG_CPU_IDLE
-static bool cpu_power_down_ok(struct dev_pm_domain *pd)
+
+static bool _cpu_power_down_ok(struct dev_pm_domain *pd)
 {
 	struct generic_pm_domain *genpd = pd_to_genpd(pd);
 	struct cpuidle_device *dev;
@@ -393,6 +404,16 @@ static bool cpu_power_down_ok(struct dev_pm_domain *pd)
 	} while (--i >= 0);
 
 	return false;
+}
+
+static bool cpu_power_down_ok(struct dev_pm_domain *pd)
+{
+	bool power_down_ok = 0, override = 0;
+	trace_android_vh_domain_cpu_power_down_ok(pd, &power_down_ok, &override);
+	if (override)
+		return power_down_ok;
+	power_down_ok = _cpu_power_down_ok(pd);
+	return power_down_ok;
 }
 
 struct dev_power_governor pm_domain_cpu_gov = {
