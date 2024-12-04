@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44318f6f_ae149eaa",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-04T00:56:15Z",
+      "side": 1,
+      "message": "should all these p-e specific fields be under `#ifdef CONFIG_SCHED_PROXY_EXEC`?",
+      "fixSuggestions": [
+        {
+          "fixId": "c6829983_b103eeb9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/sched.h",
+              "range": {
+                "startLine": 1212,
+                "startChar": 0,
+                "endLine": 1212,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_SCHED_PROXY_EXEC\n"
+            },
+            {
+              "path": "include/linux/sched.h",
+              "range": {
+                "startLine": 1222,
+                "startChar": 0,
+                "endLine": 1222,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f6609ac14d4e408c4f0db1e2e037870bad0c1bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
