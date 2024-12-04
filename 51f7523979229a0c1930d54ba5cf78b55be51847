@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8cd88de_9d711d57",
+        "filename": "drivers/base/power/domain_governor.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2024-12-04T07:25:50Z",
+      "side": 1,
+      "message": "did we think about put the hook in the beginning of the function? I guess, vendor can duplicate this fuction in their hooked implementation anyway, right?",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 357,
+        "endChar": 12
+      },
+      "revId": "51f7523979229a0c1930d54ba5cf78b55be51847",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
