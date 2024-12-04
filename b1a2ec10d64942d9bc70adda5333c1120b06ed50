@@ -22,6 +22,30 @@
       },
       "revId": "b1a2ec10d64942d9bc70adda5333c1120b06ed50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd11c08_937e0667",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3478289
+      },
+      "writtenOn": "2024-12-04T22:45:15Z",
+      "side": 1,
+      "message": "This is not the actual number where the bug occurred. I may have made a mistake because I don\u0027t know the trend well.\n\nThis bug number is the number that requested to reflect this patch.\n\nActual cases are not registered. Is it necessary to register the bug where the actual issue occurred? You can generate it arbitrarily and register the kernel log of the corresponding bug.",
+      "parentUuid": "5c861f5a_4b4929b3",
+      "range": {
+        "startLine": 17,
+        "startChar": 5,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "b1a2ec10d64942d9bc70adda5333c1120b06ed50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
