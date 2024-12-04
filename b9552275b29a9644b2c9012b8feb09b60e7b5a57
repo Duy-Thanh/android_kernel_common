@@ -52,6 +52,24 @@
       "parentUuid": "a71e636d_eda924f9",
       "revId": "b9552275b29a9644b2c9012b8feb09b60e7b5a57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c01437_6838d4e6",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-04T18:33:00Z",
+      "side": 1,
+      "message": "In that case we will keep this CL as is without any conditional behavior. I don\u0027t know who will address the userspace support but most likely it will not be a VMM (eg. crosvm component) but a VirtualizationManager change.",
+      "parentUuid": "fe1be760_9e7d676a",
+      "revId": "b9552275b29a9644b2c9012b8feb09b60e7b5a57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
