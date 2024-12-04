@@ -34,6 +34,24 @@
       "parentUuid": "023ccd86_e28523ff",
       "revId": "b9552275b29a9644b2c9012b8feb09b60e7b5a57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1be760_9e7d676a",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-12-04T16:52:42Z",
+      "side": 1,
+      "message": "It\u0027s generally bad practice to have UAPI change based on cmdline arguments, so I don\u0027t think we should do that in ACK.\n\nWhat\u0027s holding up the userspace support?",
+      "parentUuid": "a71e636d_eda924f9",
+      "revId": "b9552275b29a9644b2c9012b8feb09b60e7b5a57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
