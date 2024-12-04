@@ -636,6 +636,20 @@ nfsd_file_cache_init(void)
 	if (nfsd_file_hashtbl)
 		return 0;
 
+<<<<<<< HEAD   (144b70 Revert "clk: qcom: clk-rpmh: Fix overflow in BCM vote")
+||||||| BASE
+	ret = rhltable_init(&nfsd_file_rhltable, &nfsd_file_rhash_params);
+	if (ret)
+		return ret;
+
+	ret = -ENOMEM;
+=======
+	ret = rhltable_init(&nfsd_file_rhltable, &nfsd_file_rhash_params);
+	if (ret)
+		goto out;
+
+	ret = -ENOMEM;
+>>>>>>> BRANCH (eac1c5 Linux 5.10.227)
 	nfsd_filecache_wq = alloc_workqueue("nfsd_filecache", 0, 0);
 	if (!nfsd_filecache_wq)
 		goto out;
@@ -695,6 +709,8 @@ nfsd_file_cache_init(void)
 
 	INIT_DELAYED_WORK(&nfsd_filecache_laundrette, nfsd_file_gc_worker);
 out:
+	if (ret)
+		clear_bit(NFSD_FILE_CACHE_UP, &nfsd_file_flags);
 	return ret;
 out_notifier:
 	lease_unregister_notifier(&nfsd_file_lease_notifier);
