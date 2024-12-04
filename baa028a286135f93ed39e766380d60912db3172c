@@ -16,6 +16,23 @@
       "message": "Could you respin this using the latest version of the patch (assuming it works properly for you)?\n\nhttps://lore.kernel.org/linux-usb/20241106193413.1730413-25-quic_wcheng@quicinc.com/",
       "revId": "baa028a286135f93ed39e766380d60912db3172c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71891d07_7c41af08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-12-04T16:58:03Z",
+      "side": 1,
+      "message": "Please update to the latest version",
+      "revId": "baa028a286135f93ed39e766380d60912db3172c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
