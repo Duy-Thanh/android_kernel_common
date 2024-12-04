@@ -45,6 +45,7 @@
 #include <trace/hooks/remoteproc.h>
 #include <trace/hooks/reboot.h>
 #include <trace/hooks/psci.h>
+#include <trace/hooks/domain_governor.h>
 #include <trace/hooks/timer.h>
 #include <trace/hooks/fpsimd.h>
 #include <trace/hooks/preemptirq.h>
@@ -191,6 +192,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpuidle_psci_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpufreq_transition);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_select_special_worklist);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_domain_cpu_power_down_ok);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_domain_default_suspend_ok);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_txn_recvd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_add_request);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_update_request);
