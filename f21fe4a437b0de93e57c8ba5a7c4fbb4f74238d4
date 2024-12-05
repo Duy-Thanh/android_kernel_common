@@ -34,6 +34,24 @@
       "parentUuid": "1abea613_1dcab533",
       "revId": "f21fe4a437b0de93e57c8ba5a7c4fbb4f74238d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "422dd508_75a85689",
+        "filename": "kernel/sched/deadline.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2515,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-05T21:20:04Z",
+      "side": 1,
+      "message": "patch submitted upstream: https://lore.kernel.org/lkml/20241205211632.1181715-1-jstultz@google.com/",
+      "parentUuid": "2878b6b7_b8b31525",
+      "revId": "f21fe4a437b0de93e57c8ba5a7c4fbb4f74238d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
