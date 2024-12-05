@@ -16,6 +16,24 @@
       "message": "Please abandon this version and cherry-pick the patch from android15-6.6 so the Change-Id is preserved.",
       "revId": "29252b4f293b0496176501359e3168cb72fc2f02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf23cdca_bfb936ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-12-05T00:05:52Z",
+      "side": 1,
+      "message": "In patch https://lore.kernel.org/all/20240407084319.1462211-2-mingo@kernel.org/, available_idle_cpu has been moved to syscalls.c from core.c\nThis is not present in the android15-6.6 kernel, where available_idle_cpu is exported in core.c itself (ref: https://android-review.googlesource.com/c/kernel/common/+/1814087)\nThis needs to be a fresh patch for the android16-6.12 branch",
+      "parentUuid": "1f29dc5e_d640a01f",
+      "revId": "29252b4f293b0496176501359e3168cb72fc2f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
