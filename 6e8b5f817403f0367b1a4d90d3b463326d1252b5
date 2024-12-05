@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b21464f_bf518f69",
+        "filename": "drivers/android/binder/page_range.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-05T18:19:12Z",
+      "side": 1,
+      "message": "We probably want to fix this before landing it?",
+      "revId": "6e8b5f817403f0367b1a4d90d3b463326d1252b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
