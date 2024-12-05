@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2a8a02f_4e0a7577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-05T19:11:49Z",
+      "side": 1,
+      "message": "Bypass lint: `Fixes:` or `Bug:` tags aren\u0027t needed in this case.",
+      "revId": "8ad9aa94e7afed1bbe0b94211accc882a54f8e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
