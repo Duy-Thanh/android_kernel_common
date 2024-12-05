@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8a1bff_70b9bcc3",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3792,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-05T17:23:01Z",
+      "side": 1,
+      "message": "nit: I would have expected the `do_something()` call to be under `something()` and not the other way around. Is the naming here correct?",
+      "range": {
+        "startLine": 3792,
+        "startChar": 12,
+        "endLine": 3792,
+        "endChar": 28
+      },
+      "revId": "2cfc8f0e8e2f50f9d129689152ff24dbf5b15719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
