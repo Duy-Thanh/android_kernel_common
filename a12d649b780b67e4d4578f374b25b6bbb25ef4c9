@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e50a7c2a_de5c8f07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-05T16:20:52Z",
+      "side": 1,
+      "message": "curious, what does this save us? would the donor have been selected as the new lock owner anyway? is this simply a short-cut?",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "a12d649b780b67e4d4578f374b25b6bbb25ef4c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "492865c4_23fdc8ba",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-05T16:20:52Z",
+      "side": 1,
+      "message": "I assume this has no usage under !SCHED_PROXY_EXEC? Would an #ifdef complicate the code too much or the memory overhead is not worth it?",
+      "range": {
+        "startLine": 1214,
+        "startChar": 22,
+        "endLine": 1214,
+        "endChar": 35
+      },
+      "revId": "a12d649b780b67e4d4578f374b25b6bbb25ef4c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
