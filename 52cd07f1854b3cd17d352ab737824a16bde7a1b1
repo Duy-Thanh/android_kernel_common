@@ -22,6 +22,30 @@
       },
       "revId": "52cd07f1854b3cd17d352ab737824a16bde7a1b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb8aea4f_f5081af7",
+        "filename": "scripts/gendwarfksyms/dwarf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2024-12-05T15:53:42Z",
+      "side": 1,
+      "message": "Correct. Upstream prefers a space before the comma.",
+      "parentUuid": "0d0ce84e_81fc816d",
+      "range": {
+        "startLine": 281,
+        "startChar": 17,
+        "endLine": 281,
+        "endChar": 21
+      },
+      "revId": "52cd07f1854b3cd17d352ab737824a16bde7a1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
