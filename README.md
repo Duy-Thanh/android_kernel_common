@@ -34,6 +34,8 @@ Additional requirements are listed below based on patch type
     - tag the patch subject with `UPSTREAM:`.
     - add upstream commit information with a `(cherry picked from commit ...)` line
     - if applicable, prefer to cherry-pick the commit from the corresponding LTS branch.
+    - append new signature tags (e.g. `Bug:`, `Change-Id:`, etc.) at the end to keep the
+      chronological order.
     - Example:
         - if the upstream commit message is
 ```
