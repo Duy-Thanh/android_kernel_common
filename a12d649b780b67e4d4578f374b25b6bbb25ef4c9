@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa0373d_30271f3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-05T19:46:30Z",
+      "side": 1,
+      "message": "So, multiple tasks can be waiting on a held lock. We want to make sure on release the lock owner passes the lock to the donor task that was boosting it at that moment. This avoids handing the lock off to a \"less important\" task.",
+      "parentUuid": "e50a7c2a_de5c8f07",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "a12d649b780b67e4d4578f374b25b6bbb25ef4c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "492865c4_23fdc8ba",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-05T16:20:52Z",
       "side": 1,
       "message": "I assume this has no usage under !SCHED_PROXY_EXEC? Would an #ifdef complicate the code too much or the memory overhead is not worth it?",
+      "range": {
+        "startLine": 1214,
+        "startChar": 22,
+        "endLine": 1214,
+        "endChar": 35
+      },
+      "revId": "a12d649b780b67e4d4578f374b25b6bbb25ef4c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aab6f1c_30c95adc",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-05T19:46:30Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve been hesitant to #ifdef up the code as it gets used in both sched_core and mutex logic in SCHED_PROXY_EXEC unconditionalized areas.\n\nTodd pointed a similar out for another patch, and there I was able to conditionalized it pretty easily, but this might need a bit more thought. I might defer this to the v15 submission, as for andorid16-6.12 we want SCHED_PROXY_EXEC to be on (though runtime disabled), so it will be moot here.\n\nThat sound ok?",
+      "parentUuid": "492865c4_23fdc8ba",
       "range": {
         "startLine": 1214,
         "startChar": 22,
