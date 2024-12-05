@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "092f0db1_e6d25fab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-05T16:10:22Z",
+      "side": 1,
+      "message": "nit: this was probably meant to be `CONFIG_SCHED_PROXY_EXEC`",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "bd95f75a7b0c8895fa233f476ff02391406be826",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
