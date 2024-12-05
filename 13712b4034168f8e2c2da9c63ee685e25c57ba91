@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d3b1133_38864b57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-05T17:52:28Z",
+      "side": 1,
+      "message": "This cherry-pick is clean. The tool reports a \"false-positive\" due to \"context\" diff.",
+      "revId": "13712b4034168f8e2c2da9c63ee685e25c57ba91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
