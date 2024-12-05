@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1abea613_1dcab533",
+        "filename": "kernel/sched/deadline.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2515,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-05T18:26:48Z",
+      "side": 1,
+      "message": "why the if..goto construct instead of while(next_node) when they are equivalent?",
+      "revId": "f21fe4a437b0de93e57c8ba5a7c4fbb4f74238d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
