@@ -93,6 +93,30 @@
       },
       "revId": "a12d649b780b67e4d4578f374b25b6bbb25ef4c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbbbbc24_c42eee00",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-05T19:48:48Z",
+      "side": 1,
+      "message": "Yeap, SGTM.",
+      "parentUuid": "1aab6f1c_30c95adc",
+      "range": {
+        "startLine": 1214,
+        "startChar": 22,
+        "endLine": 1214,
+        "endChar": 35
+      },
+      "revId": "a12d649b780b67e4d4578f374b25b6bbb25ef4c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
