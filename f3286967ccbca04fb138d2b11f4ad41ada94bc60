@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb301bd0_4ce23730",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-12-06T00:39:58Z",
+      "side": 1,
+      "message": "I added mine because I addressed your comment: https://android-review.googlesource.com/c/kernel/common/+/3345979/comment/b365659d_6f556f52/",
+      "parentUuid": "3101f3c4_168d3d19",
+      "revId": "f3286967ccbca04fb138d2b11f4ad41ada94bc60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "21348c2c_b6926c39",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-11-21T04:33:43Z",
       "side": 1,
       "message": "Is \"unused\" correct here? Should it be \"skip_yield\" or something instead?",
+      "revId": "f3286967ccbca04fb138d2b11f4ad41ada94bc60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2300dc7_6c5f0bb1",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-12-06T00:39:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b365659d_6f556f52",
       "revId": "f3286967ccbca04fb138d2b11f4ad41ada94bc60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
