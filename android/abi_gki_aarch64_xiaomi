@@ -91,10 +91,26 @@
   __tracepoint_android_vh_mem_cgroup_charge
   __tracepoint_android_vh_filemap_add_folio
   __tracepoint_android_vh_shrink_node
+<<<<<<< HEAD   (fbef2c ANDROID: GKI: update symbol list file for xiaomi)
   __traceiter_android_vh_madvise_cold_or_pageout_abort
   __traceiter_android_vh_compact_finished
   __tracepoint_android_vh_madvise_cold_or_pageout_abort
   __tracepoint_android_vh_compact_finished
+||||||| BASE
+  mmc_set_blocklen
+  nr_free_buffer_pages
+=======
+  __tracepoint_cma_alloc_start
+  __tracepoint_cma_alloc_busy_retry
+  __tracepoint_cma_alloc_finish
+  __tracepoint_cma_release
+  __traceiter_cma_alloc_start
+  __traceiter_cma_alloc_busy_retry
+  __traceiter_cma_alloc_finish
+  __traceiter_cma_release
+  mmc_set_blocklen
+  nr_free_buffer_pages
+>>>>>>> CHANGE (af5721 ANDROID: GKI: update symbol list file for xiaomi)
 
 #required by metis.ko module
   __traceiter_android_vh_rwsem_read_wait_start
