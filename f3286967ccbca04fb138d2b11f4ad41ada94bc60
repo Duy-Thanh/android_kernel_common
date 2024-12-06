@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "02de1048_fa76a0da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-06T19:57:54Z",
+      "side": 1,
+      "message": "Thanks. Though note it is important/convention to sign off on all contributions even if you don\u0027t modify them, as the DCO provides assurance the person submitting the change has the proper right to do so. \n\nSee: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/submitting-patches.rst?h\u003dv6.12#n396\n\nParticularly section (C) in that statement.   \n\nI\u0027m not a lawyer and there are edge cases, but you usually can\u0027t go wrong adding your signoff when contributing or distributing a patch(assuming you have the right to do so :)",
+      "parentUuid": "cb301bd0_4ce23730",
+      "revId": "f3286967ccbca04fb138d2b11f4ad41ada94bc60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "21348c2c_b6926c39",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
