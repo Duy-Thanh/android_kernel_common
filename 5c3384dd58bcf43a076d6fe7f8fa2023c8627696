@@ -22,6 +22,30 @@
       },
       "revId": "5c3384dd58bcf43a076d6fe7f8fa2023c8627696",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6035cce_e4a8aed6",
+        "filename": "drivers/gpu/drm/i915/display/intel_hdmi.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2654,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2024-12-06T22:01:19Z",
+      "side": 1,
+      "message": "Userspace specifies a single value for `min bpc` and (iiuc) cannot specify a value outside of the range defined here. Are you suggesting we add a check inside `drm_connector_attach_min_bpc_property` to ensure the range provided is valid?",
+      "parentUuid": "99da0bd1_44d96c1b",
+      "range": {
+        "startLine": 2653,
+        "startChar": 2,
+        "endLine": 2654,
+        "endChar": 58
+      },
+      "revId": "5c3384dd58bcf43a076d6fe7f8fa2023c8627696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

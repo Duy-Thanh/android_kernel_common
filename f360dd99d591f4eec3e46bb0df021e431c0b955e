@@ -22,6 +22,30 @@
       },
       "revId": "f360dd99d591f4eec3e46bb0df021e431c0b955e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9125e7b0_a9432574",
+        "filename": "drivers/gpu/drm/i915/display/intel_display_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1873,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2024-12-06T22:01:19Z",
+      "side": 1,
+      "message": "The value is initialized when we call `drm_connector_attach_min_bpc_property` in `intel_hdmi.c` and `intep_dp.c`",
+      "parentUuid": "a5310239_56cf1297",
+      "range": {
+        "startLine": 1873,
+        "startChar": 5,
+        "endLine": 1873,
+        "endChar": 12
+      },
+      "revId": "f360dd99d591f4eec3e46bb0df021e431c0b955e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
