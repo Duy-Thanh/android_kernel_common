@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99da0bd1_44d96c1b",
+        "filename": "drivers/gpu/drm/i915/display/intel_hdmi.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2654,
+      "author": {
+        "id": 1377251
+      },
+      "writtenOn": "2024-12-06T21:06:47Z",
+      "side": 1,
+      "message": "Should the values passed in from userspace be validated somewhere to ensure that min \u003c\u003d max?",
+      "range": {
+        "startLine": 2653,
+        "startChar": 2,
+        "endLine": 2654,
+        "endChar": 58
+      },
+      "revId": "5c3384dd58bcf43a076d6fe7f8fa2023c8627696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
