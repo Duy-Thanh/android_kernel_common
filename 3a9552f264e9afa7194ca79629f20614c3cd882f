@@ -34,6 +34,24 @@
       "parentUuid": "79a256f8_f8ed4974",
       "revId": "3a9552f264e9afa7194ca79629f20614c3cd882f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f90f99ac_4b5800ae",
+        "filename": "kernel/sched/syscalls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1414,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-12-06T23:23:56Z",
+      "side": 1,
+      "message": "The first link is just an internal to Qualcomm link of the same change.\nThe second one, Jian included to let you know that the do_sched_yield method was moved from core.c to syscalls.c because of it.",
+      "parentUuid": "badca739_c6ba8604",
+      "revId": "3a9552f264e9afa7194ca79629f20614c3cd882f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

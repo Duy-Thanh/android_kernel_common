@@ -56,6 +56,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "84e6b62e_64a2adf2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-12-06T23:23:56Z",
+      "side": 1,
+      "message": "Understood. Thanks for pointing to the info.",
+      "parentUuid": "02de1048_fa76a0da",
+      "revId": "f3286967ccbca04fb138d2b11f4ad41ada94bc60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "21348c2c_b6926c39",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
