@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70d0b5a8_27dc79ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-12-06T13:11:01Z",
+      "side": 1,
+      "message": "I couldn\u0027t digest this. How is this fair to the donor which didn\u0027t execute any of its own code? The donor\u0027s time slice could be completely consumed and context switched out if the lock holder doesn\u0027t release the lock. Which means the donor could have helped another task to get faster access to the lock and this task will still suffer a delay to run without being blocked. I think this is still an improvement as the overall contention and progress on the lock acquisition will be faster. But who will get to actually make progress is still problematic and I think a tough problem to fix even with proxy execution.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
