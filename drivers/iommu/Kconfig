@@ -507,4 +507,14 @@ config SPRD_IOMMU
 
 	  Say Y here if you want to use the multimedia devices listed above.
 
+config KVM_IOMMU_STUB
+	tristate "KVM IOMMU stub module"
+	default n
+	depends on ARM64 && KVM
+	select IOMMU_API
+	help
+	  Stub KVM IOMMU driver with a fake driver. This module prevents pKVM from
+	  clearing linux,pkvm-guest-firmware-memory. Do not run confidential
+	  workloads in virtual machines with this enabled.
+
 endif # IOMMU_SUPPORT
