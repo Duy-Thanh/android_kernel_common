@@ -46,6 +46,30 @@
       },
       "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02430b45_a4746d18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-07T02:44:02Z",
+      "side": 1,
+      "message": "Ah, draft, there\u0027s no edit. :) I realized after submitting the spinlock example isn\u0027t quite right, as it runs with preempt disabled, so it won\u0027t exhaust its timeslice until after it gets the lock. :P   So not a great example.  The rest of the comment holds I think.",
+      "parentUuid": "6c3290ec_cdf7dd01",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
