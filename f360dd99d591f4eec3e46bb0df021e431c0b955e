@@ -46,6 +46,30 @@
       },
       "revId": "f360dd99d591f4eec3e46bb0df021e431c0b955e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c19102_bc93b6b3",
+        "filename": "drivers/gpu/drm/i915/display/intel_display_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1873,
+      "author": {
+        "id": 1377251
+      },
+      "writtenOn": "2024-12-07T03:35:14Z",
+      "side": 1,
+      "message": "In `drm_connector_attach_min_bpc_property`, `drm_connector_state::min_bpc` is initialized, but I don\u0027t see how the value of `drm_connector_state::min_bpc` makes its way here (`intel_dp::dpf::min_bpc`).",
+      "parentUuid": "9125e7b0_a9432574",
+      "range": {
+        "startLine": 1873,
+        "startChar": 5,
+        "endLine": 1873,
+        "endChar": 12
+      },
+      "revId": "f360dd99d591f4eec3e46bb0df021e431c0b955e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

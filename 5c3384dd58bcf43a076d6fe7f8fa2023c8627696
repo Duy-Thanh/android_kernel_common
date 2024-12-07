@@ -46,6 +46,30 @@
       },
       "revId": "5c3384dd58bcf43a076d6fe7f8fa2023c8627696",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e8ae3f_73b45d35",
+        "filename": "drivers/gpu/drm/i915/display/intel_hdmi.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2654,
+      "author": {
+        "id": 1377251
+      },
+      "writtenOn": "2024-12-07T03:35:14Z",
+      "side": 1,
+      "message": "I\u0027m referring to the case where the range for these properties are as specified here, but userspace provides a nonsensical combination such as a value of `min_bpc :\u003d 10` and `max_bpc :\u003d 8`. Each of these values are valid with respect to the range, but not valid when set together.",
+      "parentUuid": "c6035cce_e4a8aed6",
+      "range": {
+        "startLine": 2653,
+        "startChar": 2,
+        "endLine": 2654,
+        "endChar": 58
+      },
+      "revId": "5c3384dd58bcf43a076d6fe7f8fa2023c8627696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
