@@ -22,6 +22,30 @@
       },
       "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c3290ec_cdf7dd01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-07T02:40:00Z",
+      "side": 1,
+      "message": "So consider a spinlock. The exact same behavior exists in that case. A task could spin and consume all of its timeslice, only the have the lock released and another task to grab it. \n\nWith proxy it donates its time to have the lock released, and if it runs out of its timeslice, that\u0027s just the sacrifice it makes for progress to benefit the system as a whole.  We do make a point to hand the lock off to the boosting donor, but it is possible that may rotate around the waiting tasks for very long lock hold times.\n\nI get that the example you give can feel unfair, but accounting against the donor is also important because the donor is effectively controlling the cpu (even if its running a proxy on its behalf), so we have to account that time against it so other tasks on the rq can have time to fairly run as well.\n\nIn the paper there is the concept of the \"sum of the waits\" being applied to the lock release. This is sort of imagining a contrived case where the lock is held for a very long time and all the tasks rotate donating time, so that unimportant task effectively becomes *very* important as there are more waiters waiting for it.\n\nBut potentially one could imagine a solution where we distribute the vruntime accounting across all the mutex waiting threads, so they each pay an even fraction of the donated time? That might be a better approach to \"sum of the waits\", and avoid the unfairness you highlight, but I\u0027m not sure how to address the unfairness it would create for non-blocked tasks on the runqueue behind the currently most important blocked task if that one task got more time.\n\nSo I think this is a good topic for discussion on the list, and I do understand your sense of unfairness, but I think system-wide this is the most fair solution, as we don\u0027t want to let a task effectively control the cpu and not have to account for that time.\n\nLet me know if that seems agreeable and we can mark this resolved.",
+      "parentUuid": "70d0b5a8_27dc79ec",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
