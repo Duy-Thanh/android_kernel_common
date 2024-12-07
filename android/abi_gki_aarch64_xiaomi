@@ -95,6 +95,8 @@
   __tracepoint_android_vh_mem_cgroup_charge
   __tracepoint_android_vh_filemap_add_folio
   __tracepoint_android_vh_shrink_node
+  __traceiter_android_vh_dma_buf_release
+  __tracepoint_android_vh_dma_buf_release
 
 #required by metis.ko module
   __traceiter_android_vh_rwsem_read_wait_start
