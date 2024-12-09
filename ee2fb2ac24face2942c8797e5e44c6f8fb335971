@@ -33,6 +33,42 @@
       "message": "Looks fine but needs respin request with the bug number referenced from this patch.",
       "revId": "ee2fb2ac24face2942c8797e5e44c6f8fb335971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "debf6355_ab98ed6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3750862
+      },
+      "writtenOn": "2024-12-09T02:05:45Z",
+      "side": 1,
+      "message": "Thanks for the wait.\nRespin has been attached.",
+      "parentUuid": "029887e7_7083219f",
+      "revId": "ee2fb2ac24face2942c8797e5e44c6f8fb335971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54f25e22_646738ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3750862
+      },
+      "writtenOn": "2024-12-09T02:05:45Z",
+      "side": 1,
+      "message": "Thanks for the wait.\nRespin has been attached.",
+      "parentUuid": "00296645_29ed1044",
+      "revId": "ee2fb2ac24face2942c8797e5e44c6f8fb335971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
