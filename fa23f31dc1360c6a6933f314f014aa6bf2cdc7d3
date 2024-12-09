@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a2f6ad_7d5d9f3f",
+        "filename": "drivers/staging/Makefile",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-09T00:11:20Z",
+      "side": 1,
+      "message": "So, we will be building this folder even when !CONFIG_ASHMEM \u0026\u0026 !CONFIG_ASHMEM_RUST ?\n\nHow about something like this instead:\n```\nconfig ANDROID_STAGING\n\tbool\n\nconfig ASHMEM\n\tbool \"Enable the Anonymous Shared Memory Subsystem in Rust\"\n\tselects ANDROID_STAGING\n\nconfig ASHMEM_RUST\n\tbool \"Enable the Anonymous Shared Memory Subsystem in Rust\"\n\tselects ANDROID_STAGING\n```\nand then change this line to `obj-$(CONFIG_ANDROID_STAGING)\t+\u003d android/`",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 17,
+        "endChar": 5
+      },
+      "revId": "fa23f31dc1360c6a6933f314f014aa6bf2cdc7d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
