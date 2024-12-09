@@ -22,6 +22,30 @@
       },
       "revId": "fa23f31dc1360c6a6933f314f014aa6bf2cdc7d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3b61ce7_3952d1e1",
+        "filename": "drivers/staging/Makefile",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-09T07:59:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2a2f6ad_7d5d9f3f",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 17,
+        "endChar": 5
+      },
+      "revId": "fa23f31dc1360c6a6933f314f014aa6bf2cdc7d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
