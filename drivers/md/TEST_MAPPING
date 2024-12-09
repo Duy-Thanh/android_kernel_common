@@ -295,6 +295,12 @@
     },
     {
       "name": "VtsBootconfigTest"
+    },
+    {
+      "name": "VtsHalBluetoothAudioTargetTest"
+    },
+    {
+      "name": "CtsBionicTestCases"
     }
   ]
 }
