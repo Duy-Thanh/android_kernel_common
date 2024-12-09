@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58cc999e_546bd79b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4137,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-12-09T13:28:14Z",
+      "side": 1,
+      "message": "is this necessary or just an optimization to avoid hogging the lock?",
+      "range": {
+        "startLine": 4137,
+        "startChar": 2,
+        "endLine": 4137,
+        "endChar": 21
+      },
+      "revId": "17f01fe69b5e8feff59e575f9bcf34a57f6d9828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76b521f_033b8c90",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4138,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-12-09T13:28:14Z",
+      "side": 1,
+      "message": "have you looked at the overhead of this function? The double loops in interrupt context could be an issue. Is it viable to do this from softirq context?",
+      "range": {
+        "startLine": 4138,
+        "startChar": 2,
+        "endLine": 4138,
+        "endChar": 46
+      },
+      "revId": "17f01fe69b5e8feff59e575f9bcf34a57f6d9828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
