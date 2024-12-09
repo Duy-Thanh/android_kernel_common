@@ -1091,9 +1091,7 @@ static int shmem_getattr(struct user_namespace *mnt_userns,
 	stat->attributes_mask |= (STATX_ATTR_APPEND |
 			STATX_ATTR_IMMUTABLE |
 			STATX_ATTR_NODUMP);
-	inode_lock_shared(inode);
 	generic_fillattr(&init_user_ns, inode, stat);
-	inode_unlock_shared(inode);
 
 	if (shmem_is_huge(NULL, inode, 0, false))
 		stat->blksize = HPAGE_PMD_SIZE;
@@ -2318,9 +2316,16 @@ static int shmem_mmap(struct file *file, struct vm_area_struct *vma)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD   (2f2512 Merge 6.1.118 into android14-6.1-lts)
 	/* arm64 - allow memory tagging on RAM-based files */
 	vm_flags_set(vma, VM_MTE_ALLOWED);
 
+||||||| BASE
+	/* arm64 - allow memory tagging on RAM-based files */
+	vma->vm_flags |= VM_MTE_ALLOWED;
+
+=======
+>>>>>>> BRANCH (e4d90d Linux 6.1.119)
 	file_accessed(file);
 	vma->vm_ops = &shmem_vm_ops;
 	return 0;
