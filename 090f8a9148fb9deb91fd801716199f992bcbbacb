@@ -22,6 +22,30 @@
       },
       "revId": "090f8a9148fb9deb91fd801716199f992bcbbacb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba5d636_2b073687",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-09T18:46:27Z",
+      "side": 1,
+      "message": "This is a conservative approach - my understanding is that splitdwarf could be supported with additional build system work.\n\n\n!DEBUG_INFO_REDUCED is load bearing however, and will remain load bearing.\n\nLTO could theoretically supported, but would require additional work for acceptable performance, and might require additional work to ensure a maintainable set of hashes.",
+      "parentUuid": "65a33ca7_248dc968",
+      "range": {
+        "startLine": 175,
+        "startChar": 46,
+        "endLine": 175,
+        "endChar": 51
+      },
+      "revId": "090f8a9148fb9deb91fd801716199f992bcbbacb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
