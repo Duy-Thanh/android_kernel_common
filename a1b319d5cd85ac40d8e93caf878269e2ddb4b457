@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "898e3f2a_be6e4ae9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-12-09T16:33:18Z",
+      "side": 1,
+      "message": "Why is this needed on android-mainline? We usually try not to add vendor hooks to android-mainline...",
+      "revId": "a1b319d5cd85ac40d8e93caf878269e2ddb4b457",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
