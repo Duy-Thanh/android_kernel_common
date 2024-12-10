@@ -1077,22 +1077,61 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 	struct vm_area_struct *vma;
 	struct page *page_to_free;
 	unsigned long page_addr;
+	int mm_locked = 0;
 	size_t index;
 
 	if (!mmget_not_zero(mm))
 		goto err_mmget;
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	if (!mmap_read_trylock(mm))
 		goto err_mmap_read_lock_failed;
 	if (!spin_trylock(&alloc->lock))
 		goto err_get_alloc_lock_failed;
 	if (!page->page_ptr)
 		goto err_page_already_freed;
+||||||| BASE   (f4df7c643fc320ea45426bcc1ce22c7b0199e291 BACKPORT: binder: propagate vm_insert_page() errors)
+	if (!mmap_read_trylock(mm))
+		goto err_mmap_read_lock_failed;
+	if (!mutex_trylock(&alloc->mutex))
+		goto err_get_alloc_mutex_failed;
+=======
+>>>>>>> CHANGE (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
 
 	index = page - alloc->pages;
 	page_addr = alloc->buffer + index * PAGE_SIZE;
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	vma = vma_lookup(mm, page_addr);
 	if (vma && vma != binder_alloc_get_vma(alloc))
+||||||| BASE   (f4df7c643fc320ea45426bcc1ce22c7b0199e291 BACKPORT: binder: propagate vm_insert_page() errors)
+	vma = vma_lookup(mm, page_addr);
+	/*
+	 * Since a binder_alloc can only be mapped once, we ensure
+	 * the vma corresponds to this mapping by checking whether
+	 * the binder_alloc is still mapped.
+	 */
+	if (vma && !binder_alloc_is_mapped(alloc))
+=======
+	/* attempt per-vma lock first */
+	vma = lock_vma_under_rcu(mm, page_addr);
+	if (!vma) {
+		/* fall back to mmap_lock */
+		if (!mmap_read_trylock(mm))
+			goto err_mmap_read_lock_failed;
+		mm_locked = 1;
+		vma = vma_lookup(mm, page_addr);
+	}
+
+	if (!mutex_trylock(&alloc->mutex))
+		goto err_get_alloc_mutex_failed;
+
+	/*
+	 * Since a binder_alloc can only be mapped once, we ensure
+	 * the vma corresponds to this mapping by checking whether
+	 * the binder_alloc is still mapped.
+	 */
+	if (vma && !binder_alloc_is_mapped(alloc))
+>>>>>>> CHANGE (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
 		goto err_invalid_vma;
 
 	trace_binder_unmap_kernel_start(alloc, index);
@@ -1114,7 +1153,18 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 		trace_binder_unmap_user_end(alloc, index);
 	}
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	mmap_read_unlock(mm);
+||||||| BASE   (f4df7c643fc320ea45426bcc1ce22c7b0199e291 BACKPORT: binder: propagate vm_insert_page() errors)
+	mutex_unlock(&alloc->mutex);
+	mmap_read_unlock(mm);
+=======
+	mutex_unlock(&alloc->mutex);
+	if (mm_locked)
+		mmap_read_unlock(mm);
+	else
+		vma_end_read(vma);
+>>>>>>> CHANGE (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
 	mmput_async(mm);
 	__free_page(page_to_free);
 
@@ -1122,10 +1172,23 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 	return LRU_REMOVED_RETRY;
 
 err_invalid_vma:
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 err_page_already_freed:
 	spin_unlock(&alloc->lock);
 err_get_alloc_lock_failed:
 	mmap_read_unlock(mm);
+||||||| BASE   (f4df7c643fc320ea45426bcc1ce22c7b0199e291 BACKPORT: binder: propagate vm_insert_page() errors)
+	mutex_unlock(&alloc->mutex);
+err_get_alloc_mutex_failed:
+	mmap_read_unlock(mm);
+=======
+	mutex_unlock(&alloc->mutex);
+err_get_alloc_mutex_failed:
+	if (mm_locked)
+		mmap_read_unlock(mm);
+	else
+		vma_end_read(vma);
+>>>>>>> CHANGE (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
 err_mmap_read_lock_failed:
 	mmput_async(mm);
 err_mmget:
