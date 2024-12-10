@@ -52,7 +52,8 @@ impl Drop for AshmemObj {
 struct AshmemSysfsAttrs {
     group: bindings::attribute_group,
     attr_unpin: bindings::kobj_attribute,
-    attr_array: [*mut bindings::attribute; 2],
+    attr_prot_read: bindings::kobj_attribute,
+    attr_array: [*mut bindings::attribute; 3],
 }
 
 // SAFETY: This lets us put this struct in the `ATTRS` global, which is only used in ways that are
@@ -65,7 +66,12 @@ static ATTRS: AshmemSysfsAttrs = AshmemSysfsAttrs {
         ..unsafe { mem::zeroed() }
     },
     attr_unpin: attribute(c_str!("unpin"), 0o644, unpin_show, unpin_store),
-    attr_array: [addr_of!(ATTRS.attr_unpin.attr).cast_mut(), ptr::null_mut()],
+    attr_prot_read: attribute(c_str!("prot_read"), 0o644, prot_read_show, prot_read_store),
+    attr_array: [
+        addr_of!(ATTRS.attr_unpin.attr).cast_mut(),
+        addr_of!(ATTRS.attr_prot_read.attr).cast_mut(),
+        ptr::null_mut(),
+    ],
 };
 
 // export names make CFI failures easier to read.
@@ -92,6 +98,37 @@ unsafe extern "C" fn unpin_show(
     buf: *mut u8,
 ) -> isize {
     let value = crate::ashmem_range::unpin_get();
+
+    // SAFETY: `buf` fits up to `PAGE_SIZE` bytes, so this write is not out of bounds.
+    unsafe { bindings::sized_strscpy(buf.cast(), value.as_char_ptr(), PAGE_SIZE) };
+
+    // SAFETY: strscpy always writes a nul-terminator.
+    unsafe { bindings::strlen(buf.cast()) as isize }
+}
+
+#[export_name = "ashmem_prot_read_store"]
+unsafe extern "C" fn prot_read_store(
+    _kobj: *mut bindings::kobject,
+    _attr: *mut bindings::kobj_attribute,
+    buf: *const u8,
+    count: usize,
+) -> isize {
+    // SAFETY: The caller provides a valid buffer of size `count`.
+    let buf = unsafe { core::slice::from_raw_parts(buf.cast::<u8>(), count) };
+
+    match crate::prot_read_set(buf) {
+        Ok(()) => count as isize,
+        Err(err) => err.to_errno() as isize,
+    }
+}
+
+#[export_name = "ashmem_prot_read_show"]
+unsafe extern "C" fn prot_read_show(
+    _kobj: *mut bindings::kobject,
+    _attr: *mut bindings::kobj_attribute,
+    buf: *mut u8,
+) -> isize {
+    let value = crate::prot_read_get();
 
     // SAFETY: `buf` fits up to `PAGE_SIZE` bytes, so this write is not out of bounds.
     unsafe { bindings::sized_strscpy(buf.cast(), value.as_char_ptr(), PAGE_SIZE) };

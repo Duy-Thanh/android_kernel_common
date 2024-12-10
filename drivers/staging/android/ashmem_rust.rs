@@ -64,6 +64,7 @@ fn has_cap_sys_admin() -> bool {
 
 static NUM_PIN_IOCTLS_WAITING: AtomicUsize = AtomicUsize::new(0);
 static UNPIN_IMMEDIATELY: AtomicBool = AtomicBool::new(false);
+static BLOCK_UNSET_PROT_READ: AtomicBool = AtomicBool::new(false);
 
 fn shrinker_should_stop() -> bool {
     NUM_PIN_IOCTLS_WAITING.load(Ordering::Relaxed) > 0
@@ -104,6 +105,29 @@ impl kernel::Module for AshmemModule {
                 GFP_KERNEL,
             )?,
         })
+    }
+}
+
+/// Sets whether we can unset PROT_READ.
+pub(crate) fn prot_read_set(value: &[u8]) -> Result<()> {
+    match value.trim_ascii() {
+        b"ashmem" => {
+            BLOCK_UNSET_PROT_READ.store(false, Ordering::Relaxed);
+            Ok(())
+        }
+        b"memfd" => {
+            BLOCK_UNSET_PROT_READ.store(true, Ordering::Relaxed);
+            Ok(())
+        }
+        _ => Err(EINVAL),
+    }
+}
+
+pub(crate) fn prot_read_get() -> &'static CStr {
+    if BLOCK_UNSET_PROT_READ.load(Ordering::Relaxed) {
+        c_str!("memfd\n")
+    } else {
+        c_str!("ashmem\n")
     }
 }
 
@@ -343,6 +367,11 @@ impl Ashmem {
             prot |= PROT_EXEC;
         }
 
+        if BLOCK_UNSET_PROT_READ.load(Ordering::Relaxed) {
+            // Add back PROT_READ if asma.prot_mask has it.
+            prot |= asma.prot_mask & PROT_READ;
+        }
+
         asma.prot_mask = prot;
         Ok(0)
     }
@@ -557,11 +586,16 @@ fn ashmem_memfd_ioctl_inner(file: &File, cmd: u32, arg: usize) -> Result<isize> 
             let seals = unsafe { get_seals(file) }?;
             let mut prot = arg;
 
+            if prot & PROT_READ == 0 {
+                // Ignore requests to unset PROT_READ.
+                prot |= PROT_READ;
+            }
             if (prot & PROT_READ != 0) && read_implies_exec(current!()) {
                 prot |= PROT_EXEC;
             }
-            if prot & PROT_READ == 0 || prot & PROT_EXEC == 0 {
-                // We can't unset these right now.
+
+            if prot & PROT_EXEC == 0 {
+                // We can't unset PROT_EXEC right now.
                 return Err(EINVAL);
             }
 
