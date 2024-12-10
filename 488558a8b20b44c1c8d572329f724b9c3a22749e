@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4457b60a_bcf231a1",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-12-10T18:29:18Z",
+      "side": 1,
+      "message": "why do we need the \u0027 ?",
+      "range": {
+        "startLine": 29,
+        "startChar": 22,
+        "endLine": 29,
+        "endChar": 23
+      },
+      "revId": "488558a8b20b44c1c8d572329f724b9c3a22749e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe86081_994d5229",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-12-10T18:29:18Z",
+      "side": 1,
+      "message": "Could we add the rust equivalent to \n\n```\n#define pr_fmt(fmt)  \"%s: \" fmt, __func__\n```\n\nso the function names is printed in the logs.",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 41
+      },
+      "revId": "488558a8b20b44c1c8d572329f724b9c3a22749e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
