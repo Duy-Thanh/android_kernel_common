@@ -24,8 +24,12 @@ SYSCALL_DEFINE6(mmap, unsigned long, addr, unsigned long, len,
 {
 	if (offset_in_page(off) != 0)
 		return -EINVAL;
-
-	return ksys_mmap_pgoff(addr, len, prot, flags, fd, off >> PAGE_SHIFT);
+	unsigned long ret = ksys_mmap_pgoff(addr, len, prot, flags, fd, off >> PAGE_SHIFT);
+	if (len % 16384 != 0) {
+		printk(KERN_ERR "VILAS: Unaligned mmap: len=%lu, addr=%lu, prot=%lu, flags=%lu, fd=%lu, off=%lu, ret=%lu\n", len, addr, prot, flags, fd, off, ret);
+		dump_user_stack("mmap_16k");
+	}
+	return ret;
 }
 
 SYSCALL_DEFINE1(arm64_personality, unsigned int, personality)
