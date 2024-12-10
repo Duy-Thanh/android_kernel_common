@@ -68,6 +68,24 @@
       "message": "Hi, Todd Kjos:\nHope get some reposnse as we need this intreface in our 6.12 LTS.",
       "revId": "29252b4f293b0496176501359e3168cb72fc2f02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee58a816_635d8598",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-10T18:29:16Z",
+      "side": 1,
+      "message": "Patches don\u0027t have to be identical to preserve the same Change-Id.\n\nHowever, by cherry-picking you preserve the original authorship and signed-off-by lines. \n\nCould you utilize the changelog and change Id from the android15-6.6 version and resubmit this change? (You can also add an annotation that you modified the earlier work to adapt it to the new upstream changes).",
+      "parentUuid": "cf23cdca_bfb936ee",
+      "revId": "29252b4f293b0496176501359e3168cb72fc2f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
