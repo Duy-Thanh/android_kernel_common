@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f064ca5a_b254427c",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2024-12-10T06:49:58Z",
+      "side": 1,
+      "message": "I\u0027m not an expert in this matter, but shouldn\u0027t this land in fragment file? that is: \n\nhttps://partner-android.googlesource.com/kernel-desktop/private/google-modules/linux/brya/+/refs/heads/android15-6.6-desktop/brya_device.fragment\n\nbut for android15-6.6-desktop. We don\u0027t have the fragments file merged yet for 6.12-desktop, here is a WIP relation chain: pa/2990524.",
+      "revId": "cc37ce5ef5c207b5060fe1ca795cebb92dfcf4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
