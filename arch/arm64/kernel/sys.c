@@ -14,6 +14,7 @@
 #include <linux/sched.h>
 #include <linux/slab.h>
 #include <linux/syscalls.h>
+#include <unistd.h>
 
 #include <asm/cpufeature.h>
 #include <asm/syscall.h>
@@ -22,10 +23,34 @@ SYSCALL_DEFINE6(mmap, unsigned long, addr, unsigned long, len,
 		unsigned long, prot, unsigned long, flags,
 		unsigned long, fd, unsigned long, off)
 {
+	char file_name[1024];
+	size_t file_len = -1;
+	char fd_path[128];
+
 	if (offset_in_page(off) != 0)
 		return -EINVAL;
+	unsigned long ret = ksys_mmap_pgoff(addr, len, prot, flags, fd, off >> PAGE_SHIFT);
+	if (len % 16384 != 0) {
+		kstrlcpy(fd_path, "/proc/", sizeof(fd_path));
+		kstrlcat(fd_path, task_pid_nr(current), sizeof(fd_path));
+		kstrlcat(fd_path, "/fd/", sizeof(fd_path));
+		kstrlcat(fd_path, fd, sizeof(fd_path));
 
-	return ksys_mmap_pgoff(addr, len, prot, flags, fd, off >> PAGE_SHIFT);
+		file_len = readlink(fd_path, file_name, sizeof(file_name) - 1);
+		if (file_len == -1)
+			printk(KERN_ERR
+			       "VILAS: readlink failed for path %s fd %ld",
+			       fd_path, fd);
+		else {
+			file_name[file_len] = '\0';
+			printk(KERN_ERR "VILAS: Mapping file: %s\n", file_name);
+		}
+		printk(KERN_ERR
+		       "VILAS: Unaligned mmap: len=%lu, addr=%lu, prot=%lu, flags=%lu, fd=%ld, off=%lu, ret=%lu\n",
+		       len, addr, prot, flags, fd, off, ret);
+		dump_user_stack("mmap_16k");
+	}
+	return ret;
 }
 
 SYSCALL_DEFINE1(arm64_personality, unsigned int, personality)
