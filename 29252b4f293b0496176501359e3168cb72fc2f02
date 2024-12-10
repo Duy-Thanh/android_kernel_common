@@ -86,6 +86,24 @@
       "parentUuid": "cf23cdca_bfb936ee",
       "revId": "29252b4f293b0496176501359e3168cb72fc2f02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "180b6b19_b52dcacb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-12-10T19:26:09Z",
+      "side": 1,
+      "message": "Thanks John and Todd. I\u0027ve followed the instructions and uploaded a new change in lieu of this one: https://android-review.googlesource.com/c/kernel/common/+/3402540\nCould you please review that one and merge if it looks alright to you?\nThanks",
+      "parentUuid": "ee58a816_635d8598",
+      "revId": "29252b4f293b0496176501359e3168cb72fc2f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
