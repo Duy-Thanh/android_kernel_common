@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ebf6a0e_4a4c7706",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-10T17:51:59Z",
+      "side": 1,
+      "message": "nit: with",
+      "range": {
+        "startLine": 28,
+        "startChar": 37,
+        "endLine": 28,
+        "endChar": 40
+      },
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03188d74_c88c9dba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-10T17:51:59Z",
+      "side": 1,
+      "message": "The drift from the original patch is substantial. It seems we need some dependencies to be cherry-picked separately to reduce the diff between the original patch too.",
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936ba2ad_565d8440",
+        "filename": "drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4744,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-10T17:51:59Z",
+      "side": 1,
+      "message": "This is not part of the original patch. Are you somehow folding in parts of `ce1fa3adc007 (\"wifi: iwlwifi: mvm: refactor duplicate chanctx condition\")` without mention?  Was there a reason not to cherry-pick that one separately instead?",
+      "range": {
+        "startLine": 4744,
+        "startChar": 5,
+        "endLine": 4744,
+        "endChar": 37
+      },
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bde98fb_c474f002",
+        "filename": "include/linux/ieee80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3147,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-10T17:51:59Z",
+      "side": 1,
+      "message": "again, this part seems to have been extracted from commit `c478db84c854 (\"wifi: mac80211: refactor puncturing bitmap extraction\")` and folded into this commit with no explanation. Why wasn\u0027t this cherry-picked separately?",
+      "range": {
+        "startLine": 3147,
+        "startChar": 0,
+        "endLine": 3147,
+        "endChar": 37
+      },
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6363321_43d07680",
+        "filename": "include/net/mac80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-10T17:51:59Z",
+      "side": 1,
+      "message": "Why isn\u0027t this the original `BIT(6)`? What happens if we every packport `IEEE80211_CHANCTX_CHANGE_AP`? Wouldn\u0027t external modules have access to this? That would be a problem for them if you swap the bits.",
+      "range": {
+        "startLine": 227,
+        "startChar": 39,
+        "endLine": 227,
+        "endChar": 45
+      },
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa94f496_f09de551",
+        "filename": "net/mac80211/mlme.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-10T17:51:59Z",
+      "side": 1,
+      "message": "there seeems to be some chunk missing here from the original patch due to some conflict too I suppose (missing dependency) but this resolution isn\u0027t mentioned either.",
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
