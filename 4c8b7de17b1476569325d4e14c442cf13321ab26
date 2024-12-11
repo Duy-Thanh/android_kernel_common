@@ -70,6 +70,24 @@
       "parentUuid": "eafaf1ee_30497195",
       "revId": "4c8b7de17b1476569325d4e14c442cf13321ab26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb51afaf_ce3c2548",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-11T16:57:12Z",
+      "side": 1,
+      "message": "I think it is OK to bring this along with `d66e9166bfa1 (\"ANDROID: fix ABI-break in struct cgroup_root\")`. Which the ultimate purpose is to reapply upstream commit `dd9542ae7c7c (\"cgroup: Make operations on the\ncgroup root_list RCU safe\")` which was reverted due to ABI issues.\n\nIIUC, not having the usptream commit was generating WARNs such as:\n```\nWARNING: CPU: 7 PID: 25471 at kernel/cgroup/cgroup.c:1452 cset_cgroup_from_root+0xe4/0x108\n```\n... However, I don\u0027t know to what extend this was a problem.",
+      "parentUuid": "578a7f16_7c053b97",
+      "revId": "4c8b7de17b1476569325d4e14c442cf13321ab26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
