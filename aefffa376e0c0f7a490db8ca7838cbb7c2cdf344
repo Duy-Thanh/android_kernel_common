@@ -118,6 +118,30 @@
       },
       "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81a680e9_f8469bf6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-11T18:25:23Z",
+      "side": 1,
+      "message": "Ah. That\u0027s a good point about the comment\u0027s wording. I\u0027ll reword it for v15 to try to avoid bringing in an academic sense of fairness there.",
+      "parentUuid": "e27f5bf2_fd4306e6",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
