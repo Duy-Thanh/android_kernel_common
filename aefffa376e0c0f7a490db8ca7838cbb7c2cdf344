@@ -94,6 +94,30 @@
       },
       "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e27f5bf2_fd4306e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-12-11T13:26:08Z",
+      "side": 1,
+      "message": "Yeah I already +1 so I don\u0027t see a problem. Proper fairness stopped me as I think there\u0027s inherent unfairness still and couldn\u0027t see how we get proper fairness. But I think at this point this seems a lingual issue.\n\nI am not sure we want to do proper fairness. It is inherit problem and generally from what we see a completely fair system is not best practical behavior. We just need to ensure people\u0027s expectation are real and when I read \u0027proper\u0027, that got me to stop to ask :-)",
+      "parentUuid": "bbe9d20e_fbf9d0ec",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "aefffa376e0c0f7a490db8ca7838cbb7c2cdf344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
