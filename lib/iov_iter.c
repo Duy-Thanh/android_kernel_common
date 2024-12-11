@@ -12,6 +12,7 @@
 #include <linux/scatterlist.h>
 #include <linux/instrumented.h>
 #include <linux/iov_iter.h>
+#include <trace/hooks/mm.h>
 
 static __always_inline
 size_t copy_to_user_iter(void __user *iter_to, size_t progress,
@@ -350,6 +351,7 @@ size_t copy_page_to_iter(struct page *page, size_t offset, size_t bytes,
 			 struct iov_iter *i)
 {
 	size_t res = 0;
+	trace_android_vh_copy_page_to_iter(page);
 	if (!page_copy_sane(page, offset, bytes))
 		return 0;
 	if (WARN_ON_ONCE(i->data_source))
@@ -464,6 +466,7 @@ size_t copy_page_from_iter_atomic(struct page *page, size_t offset,
 	bool uses_kmap = IS_ENABLED(CONFIG_DEBUG_KMAP_LOCAL_FORCE_MAP) ||
 			 PageHighMem(page);
 
+	trace_android_vh_copy_page_from_iter_atomic(page);
 	if (!page_copy_sane(page, offset, bytes))
 		return 0;
 	if (WARN_ON_ONCE(!i->data_source))

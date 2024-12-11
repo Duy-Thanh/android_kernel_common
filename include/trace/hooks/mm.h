@@ -68,6 +68,13 @@ DECLARE_HOOK(android_vh_calc_alloc_flags,
 	TP_PROTO(gfp_t gfp_mask, unsigned int *alloc_flags,
 		bool *bypass),
 	TP_ARGS(gfp_mask, alloc_flags, bypass));
+
+DECLARE_HOOK(android_vh_copy_page_to_iter,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_copy_page_from_iter_atomic,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
