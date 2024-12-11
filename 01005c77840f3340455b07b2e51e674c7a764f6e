@@ -16,6 +16,24 @@
       "message": "Hey, just a general question about this patch:\n\n- Do you plan to upstream this change?\n- Will it be needed for the next kernel (6.12)?",
       "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9f4e4ba_d52a06b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2024-12-11T15:21:23Z",
+      "side": 1,
+      "message": "Yes, we plan to upstream. I\u0027m not familiar with the desktop kernel upgrade plan, but likely we will need in 6.12.",
+      "parentUuid": "727a1421_bd973c48",
+      "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
