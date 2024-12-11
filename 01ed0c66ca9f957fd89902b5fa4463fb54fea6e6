@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d7cdfa1_64c519ee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2192,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-12-11T14:44:13Z",
+      "side": 1,
+      "message": "hyp_ack_unshare() needs to be updated -- it only checks the elevated refcount for a page that was shared by the host.",
+      "range": {
+        "startLine": 2192,
+        "startChar": 1,
+        "endLine": 2192,
+        "endChar": 43
+      },
+      "revId": "01ed0c66ca9f957fd89902b5fa4463fb54fea6e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
