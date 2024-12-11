@@ -16,6 +16,24 @@
       "message": "Could this get called incorrectly with a 0 refcount? Would that underflow?",
       "revId": "7f88e03b81a8b080163f8ab8db49bd34ca9e4ccd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15047d17_493b5ce4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-11T14:17:15Z",
+      "side": 1,
+      "message": "I think it will BUG_ON so no I don\u0027t think it will underflow.",
+      "parentUuid": "921a4a0d_5a0f2342",
+      "revId": "7f88e03b81a8b080163f8ab8db49bd34ca9e4ccd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
