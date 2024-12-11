@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c71a47b_5a7c42f4",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4137,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-12-11T13:20:45Z",
+      "side": 1,
+      "message": "I see. I didn\u0027t see that lock hold inside the function.",
+      "parentUuid": "bb199e13_4f6a43a5",
+      "range": {
+        "startLine": 4137,
+        "startChar": 2,
+        "endLine": 4137,
+        "endChar": 21
+      },
+      "revId": "17f01fe69b5e8feff59e575f9bcf34a57f6d9828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d76b521f_033b8c90",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Yeah. Its messy. Doing it in SOFTIRQ is an interesting thought. Though if it\u0027s a problem in irq context, it will probably cause trouble in softirq as well.\n\nPart of what makes it so messy is there\u0027s potentially a tree of blocked tasks hanging off the task being woken up.  But the lock juggling required to \"recurse\" (note, its no longer recursive, breadth-first iterating) down the tree to activate everything is costly.\n\nI was pondering if something like a task work would be ideal, since the task would activate its immediate dependents only once it ran, but that actually goes against the intent of proxy exec because the blocked leaves of the tree may be the important task waiting for the lock chain to resolve. So we really want to quickly wake and activate them all on the rq of the waking lock owner, so the \"weight of their waits\" can be immediately used to boost the lock owner.\n\nThat said, I\u0027d hope sleeping while holding a contended mutex is rare, as it obviously will incur some serious contention with its own overhead.\n\nBut again, the blocked waiters activation is probably the hairiest part of this series, and I\u0027d love to hear fresh ideas on how to handle it differently.",
       "parentUuid": "d76b521f_033b8c90",
+      "range": {
+        "startLine": 4138,
+        "startChar": 2,
+        "endLine": 4138,
+        "endChar": 46
+      },
+      "revId": "17f01fe69b5e8feff59e575f9bcf34a57f6d9828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a52e98_a884f492",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4138,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-12-11T13:20:45Z",
+      "side": 1,
+      "message": "\u003e Though if it\u0027s a problem in irq context, it will probably cause trouble in softirq as well.\n\nirq context means no interrupt can trigger. softirq means other tasks can\u0027t run but interrupts can still trigger.",
+      "parentUuid": "5b2034ac_9831437b",
       "range": {
         "startLine": 4138,
         "startChar": 2,
