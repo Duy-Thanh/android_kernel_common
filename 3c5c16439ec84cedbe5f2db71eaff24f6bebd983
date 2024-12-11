@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc66206a_75d45322",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-12-11T16:11:17Z",
+      "side": 1,
+      "message": "Any reason why we can\u0027t shove one kvm_ffa_buffers struct directly into struct pkvm_hyp_vm instead? And then all the ffa functions down here take a kvm_ffa_buffer pointer directly, no need to have any limitation on the number of VMs from here.",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 29
+      },
+      "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
