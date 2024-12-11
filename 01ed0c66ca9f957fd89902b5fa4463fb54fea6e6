@@ -46,6 +46,30 @@
       },
       "revId": "01ed0c66ca9f957fd89902b5fa4463fb54fea6e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21c4e691_e9f630f9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2192,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-11T16:27:51Z",
+      "side": 1,
+      "message": "That\u0027s a good point, we don\u0027t need it as there is no way to guest_unshare_hyp atm. I will remove this, thanks !",
+      "parentUuid": "a47a2513_0651a43b",
+      "range": {
+        "startLine": 2192,
+        "startChar": 1,
+        "endLine": 2192,
+        "endChar": 43
+      },
+      "revId": "01ed0c66ca9f957fd89902b5fa4463fb54fea6e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
