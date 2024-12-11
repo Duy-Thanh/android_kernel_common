@@ -52,6 +52,24 @@
       "parentUuid": "32a4ab3e_c326cefb",
       "revId": "4c8b7de17b1476569325d4e14c442cf13321ab26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578a7f16_7c053b97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2024-12-11T10:06:54Z",
+      "side": 1,
+      "message": "I mean this patch is present on android15-6.6-2024-10 but not on android15-6.6-2024-11 so we propagated",
+      "parentUuid": "eafaf1ee_30497195",
+      "revId": "4c8b7de17b1476569325d4e14c442cf13321ab26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
