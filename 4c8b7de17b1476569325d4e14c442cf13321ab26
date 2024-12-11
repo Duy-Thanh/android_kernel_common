@@ -16,6 +16,24 @@
       "message": "why do you urgently need a fix for 32-bit builds?",
       "revId": "4c8b7de17b1476569325d4e14c442cf13321ab26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a4ab3e_c326cefb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2024-12-11T06:00:16Z",
+      "side": 1,
+      "message": "We are picking all changes which are missed in November branch from October branch , this exists in that list.",
+      "parentUuid": "a531a17a_8c077d56",
+      "revId": "4c8b7de17b1476569325d4e14c442cf13321ab26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
