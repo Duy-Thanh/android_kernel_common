@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e070ea44_592d6ebb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-12-11T16:13:20Z",
+      "side": 1,
+      "message": "Actually, as mentioned in an earlier patch, by hiding the ffa_member directly in pkvm_hyp_vm we might not need any indexing into a static table from ffa.c, so possibly this goes away.",
+      "parentUuid": "0082fc5f_84df2beb",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 91
+      },
+      "revId": "a35d02da1c92c64208e87c3225ceab2969a0163c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d009946_83845125",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 1
