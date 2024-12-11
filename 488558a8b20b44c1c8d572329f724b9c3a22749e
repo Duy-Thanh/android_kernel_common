@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bf19a6b_fc49d21f",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-11T09:11:13Z",
+      "side": 1,
+      "message": "That\u0027s the Rust syntax for a lifetime. In this case, the reference is annotated with the `\u0027static` lifetime, which means that this reference can only point at values that live forever.",
+      "parentUuid": "4457b60a_bcf231a1",
+      "range": {
+        "startLine": 29,
+        "startChar": 22,
+        "endLine": 29,
+        "endChar": 23
+      },
+      "revId": "488558a8b20b44c1c8d572329f724b9c3a22749e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbe86081_994d5229",
         "filename": "drivers/staging/android/ashmem_rust.rs",
         "patchSetId": 13
@@ -60,6 +84,30 @@
       "writtenOn": "2024-12-10T18:29:18Z",
       "side": 1,
       "message": "Could we add the rust equivalent to \n\n```\n#define pr_fmt(fmt)  \"%s: \" fmt, __func__\n```\n\nso the function names is printed in the logs.",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 41
+      },
+      "revId": "488558a8b20b44c1c8d572329f724b9c3a22749e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d32120e_7a1479fa",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-11T09:11:13Z",
+      "side": 1,
+      "message": "The Rust `pr_info!` macro already includes the name of the driver, so I think that should be enough to differentiate log statements?\n```\n[    3.899522] ashmem_rust: Using Rust implementation.\n```",
+      "parentUuid": "fbe86081_994d5229",
       "range": {
         "startLine": 30,
         "startChar": 8,
