@@ -521,3 +521,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_queue_work);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_wake_idle_worker);
+<<<<<<< HEAD   (0261db Revert "UPSTREAM: unicode: Don't special case ignorable code)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_send_signal_locked);
+>>>>>>> CHANGE (3bdcda ANDROID: add hook for send signal debug)
