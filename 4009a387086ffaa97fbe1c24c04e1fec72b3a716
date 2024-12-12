@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1af4b8bb_15cdef48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961338
+      },
+      "writtenOn": "2024-12-12T09:49:05Z",
+      "side": 1,
+      "message": "the whitelist already exist",
+      "revId": "4009a387086ffaa97fbe1c24c04e1fec72b3a716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
