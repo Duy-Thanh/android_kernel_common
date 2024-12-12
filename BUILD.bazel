@@ -28,7 +28,12 @@ load(
     "merged_kernel_uapi_headers",
 )
 load(":abi.bzl", "cc_binary_with_abi")
-load(":modules.bzl", "get_gki_modules_list", "get_kunit_modules_list")
+load(
+    ":modules.bzl",
+    "get_gki_modules_list",
+    "get_gki_protected_modules_list",
+    "get_kunit_modules_list",
+)
 
 package(
     default_visibility = [
@@ -84,7 +89,7 @@ fail_rule(
 
 write_file(
     name = "gki_system_dlkm_modules_arm64",
-    out = "android/gki_system_dlkm_modules_arm64",
+    out = "gki/aarch64/system_dlkm_modules",
     # Do not built kunit modules into system_dlkm
     content = get_gki_modules_list("arm64") + [
         # Ensure new line at the end.
@@ -93,12 +98,28 @@ write_file(
 )
 
 write_file(
+    name = "gki_aarch64_protected_modules",
+    out = "gki/aarch64/protected_modules",
+    content = get_gki_protected_modules_list("arm64") + [
+        "",  # Ensure new line at the end.
+    ],
+)
+
+write_file(
     name = "gki_system_dlkm_modules_x86_64",
-    out = "android/gki_system_dlkm_modules_x86_64",
+    out = "gki/x86_64/system_dlkm_modules",
     # Do not built kunit modules into system_dlkm
     content = get_gki_modules_list("x86_64") + [
         # Ensure new line at the end.
         "",
+    ],
+)
+
+write_file(
+    name = "gki_x86_64_protected_modules",
+    out = "gki/x86_64/protected_modules",
+    content = get_gki_protected_modules_list("x86_64") + [
+        "",  # Ensure new line at the end.
     ],
 )
 
@@ -144,20 +165,35 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+# Temp target to fork form build.config.gki.aarch64 which may potentially be
+# used elsewhere.
+# TODO(b/236012223): Delete this once we have build-config-less builds for GKI.
+write_file(
+    name = "build.config.gki.aarch64_generated",
+    out = "build.config.gki.aarch64.generated",
+    content = [
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.common",
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64",
+        "",  # keep new line at the end
+    ],
+    visibility = ["//visibility:private"],
+)
+
 common_kernel(
     name = "kernel_aarch64",
     outs = DEFAULT_GKI_OUTS,
     arch = "arm64",
-    build_config = "build.config.gki.aarch64",
+    build_config = ":build.config.gki.aarch64_generated",
     build_gki_artifacts = True,
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
+    defconfig = "arch/arm64/configs/gki_defconfig",
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_arm64",
     ],
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
-    gki_system_dlkm_modules = "android/gki_system_dlkm_modules_arm64",
+    gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
@@ -180,16 +216,17 @@ common_kernel(
     name = "kernel_aarch64_16k",
     outs = DEFAULT_GKI_OUTS,
     arch = "arm64",
-    build_config = "build.config.gki.aarch64",
+    build_config = ":build.config.gki.aarch64_generated",
     build_gki_artifacts = True,
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
+    defconfig = "arch/arm64/configs/gki_defconfig",
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_arm64",
     ],
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
-    gki_system_dlkm_modules = "android/gki_system_dlkm_modules_arm64",
+    gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
@@ -210,19 +247,34 @@ common_kernel(
     name = "kernel_aarch64_interceptor",
     outs = DEFAULT_GKI_OUTS,
     arch = "arm64",
-    build_config = "build.config.gki.aarch64",
+    build_config = ":build.config.gki.aarch64_generated",
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
+    defconfig = "arch/arm64/configs/gki_defconfig",
     enable_interceptor = True,
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_arm64",
     ],
-    gki_system_dlkm_modules = "android/gki_system_dlkm_modules_arm64",
+    gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     visibility = ["//visibility:public"],
+)
+
+# Temp target to fork form build.config.gki.x86_64 which may potentially be
+# used elsewhere.
+# TODO(b/236012223): Delete this once we have build-config-less builds for GKI.
+write_file(
+    name = "build.config.gki.x86_64_generated",
+    out = "build.config.gki.x86_64.generated",
+    content = [
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.common",
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64",
+        "",  # keep new line at the end
+    ],
+    visibility = ["//visibility:private"],
 )
 
 fail_rule(
@@ -238,15 +290,16 @@ common_kernel(
     name = "kernel_x86_64",
     outs = X86_64_OUTS,
     arch = "x86_64",
-    build_config = "build.config.gki.x86_64",
+    build_config = "build.config.gki.x86_64_generated",
     build_gki_artifacts = True,
     ddk_module_headers = [":all_headers_x86_64"],
+    defconfig = "arch/x86/configs/gki_defconfig",
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_x86_64",
     ],
     gki_boot_img_sizes = _GKI_X86_64_BOOT_IMAGE_SIZES,
-    gki_system_dlkm_modules = "android/gki_system_dlkm_modules_x86_64",
+    gki_system_dlkm_modules = ":gki_system_dlkm_modules_x86_64",
     make_goals = _GKI_X86_64_MAKE_GOALS,
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
@@ -366,7 +419,9 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
-    build_config = "build.config.microdroid.aarch64",
+    arch = "arm64",
+    build_config = "build.config.common",
+    defconfig = "arch/arm64/configs/microdroid_defconfig",
     make_goals = [
         "Image",
     ],
@@ -388,6 +443,42 @@ pkg_install(
     destdir = "out/kernel_aarch64_microdroid/dist",
 )
 
+kernel_build(
+    name = "kernel_aarch64_microdroid_16k",
+    srcs = [":kernel_aarch64_sources"],
+    outs = [
+        "Image",
+        "System.map",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    arch = "arm64",
+    build_config = "build.config.common",
+    defconfig = "arch/arm64/configs/microdroid_defconfig",
+    make_goals = [
+        "Image",
+    ],
+    makefile = ":Makefile",
+    page_size = "16k",
+)
+
+pkg_files(
+    name = "kernel_aarch64_microdroid_16k_dist_files",
+    srcs = [
+        ":kernel_aarch64_microdroid_16k",
+    ],
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "kernel_aarch64_microdroid_16k_dist",
+    srcs = ["kernel_aarch64_microdroid_16k_dist_files"],
+    destdir = "out/kernel_aarch64_microdroid_16k/dist",
+)
+
 # Microdroid is not a real device. The kernel image is built with special
 #  configs to reduce the size. Hence, not using mixed build.
 kernel_build(
@@ -395,7 +486,8 @@ kernel_build(
     srcs = [":kernel_x86_64_sources"],
     outs = X86_64_OUTS,
     arch = "x86_64",
-    build_config = "build.config.microdroid.x86_64",
+    build_config = "build.config.common",
+    defconfig = "arch/x86/configs/microdroid_defconfig",
     make_goals = [
         "bzImage",
     ],
@@ -423,7 +515,9 @@ kernel_build(
     outs = [
         "Image",
     ],
-    build_config = "build.config.crashdump.aarch64",
+    arch = "arm64",
+    build_config = "build.config.common",
+    defconfig = "arch/arm64/configs/crashdump_defconfig",
     make_goals = [
         "Image",
     ],
@@ -450,7 +544,8 @@ kernel_build(
     srcs = [":kernel_x86_64_sources"],
     outs = X86_64_OUTS,
     arch = "x86_64",
-    build_config = "build.config.crashdump.x86_64",
+    build_config = "build.config.common",
+    defconfig = "arch/x86/configs/crashdump_defconfig",
     make_goals = [
         "bzImage",
     ],
@@ -724,9 +819,11 @@ kernel_build(
         "arch/arm64/boot/dts/qcom/sm8650-hdk.dtb",
         "arch/arm64/boot/dts/qcom/sm8650-qrd.dtb",
     ],
+    arch = "arm64",
     # Enable mixed build.
     base_kernel = ":kernel_aarch64",
     build_config = "build.config.db845c",
+    defconfig = "arch/arm64/configs/gki_defconfig",
     make_goals = [
         "modules",
         "qcom/qrb5165-rb5.dtb",
@@ -740,6 +837,7 @@ kernel_build(
     ],
     makefile = ":Makefile",
     module_outs = _DB845C_MODULE_OUTS + _DB845C_WATCHDOG_MODULE_OUTS,
+    pre_defconfig_fragments = ["arch/arm64/configs/db845c_gki.fragment"],
     strip_modules = True,
 )
 
@@ -756,9 +854,11 @@ kernel_build(
         "arch/arm64/boot/dts/qcom/sm8650-hdk.dtb",
         "arch/arm64/boot/dts/qcom/sm8650-qrd.dtb",
     ],
+    arch = "arm64",
     # Enable mixed build.
     base_kernel = ":kernel_aarch64",
     build_config = "build.config.db845c",
+    defconfig = "arch/arm64/configs/gki_defconfig",
     make_goals = [
         "modules",
         "qcom/qrb5165-rb5.dtb",
@@ -772,6 +872,7 @@ kernel_build(
     ],
     makefile = ":Makefile",
     module_outs = _DB845C_MODULE_OUTS,
+    pre_defconfig_fragments = ["arch/arm64/configs/db845c_gki.fragment"],
     strip_modules = True,
 )
 
@@ -823,7 +924,6 @@ pkg_install(
 
 _ROCKPI4_MODULE_OUTS = [
     # keep sorted
-    "drivers/block/virtio_blk.ko",
     "drivers/char/hw_random/virtio-rng.ko",
     "drivers/clk/clk-rk808.ko",
     "drivers/cpufreq/cpufreq-dt.ko",
@@ -868,9 +968,6 @@ _ROCKPI4_MODULE_OUTS = [
     "drivers/thermal/rockchip_thermal.ko",
     "drivers/usb/host/ohci-hcd.ko",
     "drivers/usb/host/ohci-platform.ko",
-    "drivers/virtio/virtio_pci.ko",
-    "drivers/virtio/virtio_pci_legacy_dev.ko",
-    "drivers/virtio/virtio_pci_modern_dev.ko",
     "net/core/failover.ko",
 ]
 
@@ -892,8 +989,11 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.rockpi4",
+    defconfig = "arch/arm64/configs/gki_defconfig",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
+    kmi_symbol_list_strict_mode = False,
     make_goals = [
         "Image",
         "modules",
@@ -901,6 +1001,8 @@ kernel_build(
     ],
     makefile = ":Makefile",
     module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,
+    pre_defconfig_fragments = ["arch/arm64/configs/rockpi4_gki.fragment"],
+    trim_nonlisted_kmi = False,
     visibility = ["//visibility:private"],
 )
 
@@ -917,8 +1019,10 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "arm64",
     build_config = "build.config.rockpi4",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
+    kmi_symbol_list_strict_mode = False,
     make_goals = [
         "Image",
         "modules",
@@ -926,6 +1030,7 @@ kernel_build(
     ],
     makefile = ":Makefile",
     module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS,
+    trim_nonlisted_kmi = False,
     visibility = ["//visibility:private"],
 )
 
@@ -945,6 +1050,7 @@ kernel_modules_install(
 initramfs(
     name = "rockpi4_initramfs",
     kernel_modules_install = ":rockpi4_modules_install",
+    ramdisk_compression = "lz4",
     visibility = ["//visibility:private"],
 )
 
@@ -1102,7 +1208,9 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
-    build_config = "build.config.amlogic",
+    arch = "arm64",
+    build_config = "build.config.common",
+    defconfig = "arch/arm64/configs/gki_defconfig",
     make_goals = [
         "Image",
         "modules",
@@ -1113,6 +1221,7 @@ kernel_build(
     ],
     makefile = ":Makefile",
     module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _AMLOGIC_MODULE_OUTS + _AMLOGIC_WATCHDOG_MODULE_OUTS,
+    pre_defconfig_fragments = ["arch/arm64/configs/amlogic_gki.fragment"],
     visibility = ["//visibility:private"],
 )
 
@@ -1131,7 +1240,9 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
-    build_config = "build.config.amlogic",
+    arch = "arm64",
+    build_config = "build.config.common",
+    defconfig = "arch/arm64/configs/gki_defconfig",
     make_goals = [
         "Image",
         "modules",
@@ -1142,6 +1253,7 @@ kernel_build(
     ],
     makefile = ":Makefile",
     module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _AMLOGIC_MODULE_OUTS,
+    pre_defconfig_fragments = ["arch/arm64/configs/amlogic_gki.fragment"],
     visibility = ["//visibility:private"],
 )
 
@@ -1184,6 +1296,31 @@ pkg_install(
     destdir = "out/yukawa/dist",
 )
 
+kernel_build(
+    name = "fips140",
+    outs = [],
+    base_kernel = ":kernel_aarch64",
+    build_config = "build.config.common",
+    defconfig = "arch/arm64/configs/gki_defconfig",
+    make_goals = ["modules"],
+    makefile = ":Makefile",
+    module_outs = ["crypto/fips140.ko"],
+    post_defconfig_fragments = ["arch/arm64/configs/fips140_gki.fragment"],
+)
+
+pkg_files(
+    name = "fips140_dist_files",
+    srcs = [":fips140"],
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "fips140_dist",
+    srcs = ["fips140_dist_files"],
+    destdir = "out/fips140/dist",
+)
+
 # allmodconfig build tests.
 # These are build tests only, so:
 # - outs are intentionally set to empty to not copy anything to DIST_DIR
@@ -1197,12 +1334,15 @@ kernel_build(
     # Hack to actually check the build.
     # Otherwise, Bazel thinks that there are no output files, and skip building.
     outs = [".config"],
-    build_config = "build.config.allmodconfig.aarch64",
+    arch = "arm64",
+    build_config = "build.config.common",
+    defconfig = "//build/kernel/kleaf:allmodconfig",
     make_goals = [
         "Image",
         "modules",
     ],
     makefile = ":Makefile",
+    post_defconfig_fragments = [":gki/aarch64/defconfig/allmodconfig"],
     visibility = ["//visibility:private"],
 )
 
@@ -1214,12 +1354,14 @@ kernel_build(
     # Otherwise, Bazel thinks that there are no output files, and skip building.
     outs = [".config"],
     arch = "x86_64",
-    build_config = "build.config.allmodconfig.x86_64",
+    build_config = "build.config.common",
+    defconfig = "//build/kernel/kleaf:allmodconfig",
     make_goals = [
         "bzImage",
         "modules",
     ],
     makefile = ":Makefile",
+    post_defconfig_fragments = [":gki/x86_64/defconfig/allmodconfig"],
     visibility = ["//visibility:private"],
 )
 
@@ -1232,12 +1374,14 @@ kernel_build(
     # Otherwise, Bazel thinks that there are no output files, and skip building.
     outs = [".config"],
     arch = "arm",
-    build_config = "build.config.allmodconfig.arm",
+    build_config = "build.config.common",
+    defconfig = "//build/kernel/kleaf:allmodconfig",
     make_goals = [
         "zImage",
         "modules",
     ],
     makefile = ":Makefile",
+    post_defconfig_fragments = [":gki/arm/defconfig/allmodconfig"],
     visibility = ["//visibility:private"],
 )
 
@@ -1368,13 +1512,38 @@ ddk_headers(
 # Implementation details for DDK headers. The targets below cannot be directly
 # depended on by DDK modules.
 
+# Headers needed to include drivers/usb/host/xhci.h.
+ddk_headers(
+    name = "xhci_headers",
+    hdrs = [
+        "drivers/usb/core/hub.h",
+        "drivers/usb/core/usb.h",
+        "drivers/usb/host/pci-quirks.h",
+        "drivers/usb/host/xhci.h",
+        "drivers/usb/host/xhci-caps.h",
+        "drivers/usb/host/xhci-ext-caps.h",
+        "drivers/usb/host/xhci-plat.h",
+        "drivers/usb/host/xhci-port.h",
+    ],
+    linux_includes = [
+        "drivers/usb",
+        "drivers/usb/host",
+    ],
+    visibility = ["//visibility:private"],
+)
+
 # DDK headers allowlist. This is the list of all headers and include
 # directories that are safe to use in DDK modules.
 ddk_headers(
     name = "all_headers_allowlist_aarch64",
     hdrs = [
+        "drivers/thermal/thermal_core.h",
+        "drivers/thermal/thermal_netlink.h",
+        "sound/usb/card.h",
+        "sound/usb/usbaudio.h",
         ":all_headers_allowlist_aarch64_globs",
         ":all_headers_allowlist_common_globs",
+        ":xhci_headers",
     ],
     # The list of include directories where source files can #include headers
     # from. In other words, these are the `-I` option to the C compiler.
@@ -1382,6 +1551,8 @@ ddk_headers(
     linux_includes = [
         "arch/arm64/include",
         "arch/arm64/include/uapi",
+        "drivers/thermal",
+        "sound/usb",
         "include",
         "include/uapi",
     ],
@@ -1467,12 +1638,38 @@ filegroup(
 ddk_headers(
     name = "all_headers_unsafe",
     hdrs = [
-        "drivers/gpu/drm/virtio/virtgpu_trace.h",
+        "drivers/devfreq/governor.h",
+        "drivers/pinctrl/core.h",
+        "drivers/ufs/host/ufshcd-pltfrm.h",
+        "drivers/usb/dwc3/core.h",
+        "drivers/usb/dwc3/debug.h",
+        "drivers/usb/dwc3/gadget.h",
+        "drivers/usb/dwc3/io.h",
+        "drivers/usb/dwc3/trace.h",
+        "drivers/usb/gadget/configfs.h",
+        "drivers/usb/gadget/function/ndis.h",
+        "drivers/usb/gadget/function/u_ether.h",
+        "drivers/usb/gadget/function/u_rndis.h",
+        "drivers/usb/gadget/function/u_serial.h",
+        "drivers/usb/host/pci-quirks.h",
+        "drivers/usb/host/xhci.h",
+        "drivers/usb/host/xhci-caps.h",
+        "drivers/usb/host/xhci-ext-caps.h",
+        "drivers/usb/host/xhci-port.h",
+        "//build/kernel/kleaf:user_ddk_unsafe_headers",
     ],
     # The list of include directories where source files can #include headers
     # from. In other words, these are the `-I` option to the C compiler.
     # Unsafe include directories are appended to ccflags-y.
-    includes = [],
+    includes = [
+        "drivers/devfreq",
+        "drivers/pinctrl",
+        "drivers/ufs/host",
+        "drivers/usb/dwc3",
+        "drivers/usb/gadget",
+        "drivers/usb/gadget/function",
+        "drivers/usb/host",
+    ],
     visibility = ["//visibility:private"],
 )
 
@@ -1489,33 +1686,9 @@ _KSELFTEST_COPTS = [
         "tools/testing/selftests/android/include/bionic-compat.h",
     ),
 ] + select({
-    ":arm": ["-mcpu=cortex-a8"],
+    "//build/kernel/kleaf/platforms/config_settings:android_arm": ["-mcpu=cortex-a8"],
     "//conditions:default": [],
 })
-
-config_setting(
-    name = "x86_64",
-    values = {"platforms": "//build/kernel/kleaf/impl:android_x86_64"},
-    visibility = ["//visibility:private"],
-)
-
-config_setting(
-    name = "i386",
-    values = {"platforms": "//build/kernel/kleaf/impl:android_i386"},
-    visibility = ["//visibility:private"],
-)
-
-config_setting(
-    name = "arm64",
-    values = {"platforms": "//build/kernel/kleaf/impl:android_arm64"},
-    visibility = ["//visibility:private"],
-)
-
-config_setting(
-    name = "arm",
-    values = {"platforms": "//build/kernel/kleaf/impl:android_arm"},
-    visibility = ["//visibility:private"],
-)
 
 cc_library(
     name = "kselftest_headers_lib",
@@ -1542,9 +1715,9 @@ cc_binary_with_abi(
 cc_binary_with_abi(
     name = "kselftest_breakpoints_breakpoint_test",
     srcs = select({
-        ":x86_64": ["tools/testing/selftests/breakpoints/breakpoint_test.c"],
-        ":i386": ["tools/testing/selftests/breakpoints/breakpoint_test.c"],
-        ":arm64": ["tools/testing/selftests/breakpoints/breakpoint_test_arm64.c"],
+        "//build/kernel/kleaf/platforms/config_settings:android_x86_64": ["tools/testing/selftests/breakpoints/breakpoint_test.c"],
+        "//build/kernel/kleaf/platforms/config_settings:android_i386": ["tools/testing/selftests/breakpoints/breakpoint_test.c"],
+        "//build/kernel/kleaf/platforms/config_settings:android_arm64": ["tools/testing/selftests/breakpoints/breakpoint_test_arm64.c"],
         "//conditions:default": [],
     }),
     copts = _KSELFTEST_COPTS,
@@ -1816,6 +1989,28 @@ cc_binary_with_abi(
     ],
 )
 
+cc_library(
+    name = "kselftest_memfd",
+    srcs = ["tools/testing/selftests/memfd/common.c"],
+    hdrs = ["tools/testing/selftests/memfd/common.h"],
+    copts = _KSELFTEST_COPTS,
+    visibility = ["//visibility:private"],
+    deps = [
+        ":kselftest_headers_lib",
+    ],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_memfd_test",
+    srcs = ["tools/testing/selftests/memfd/memfd_test.c"],
+    copts = _KSELFTEST_COPTS,
+    includes = ["tools/testing/selftests"],
+    path_prefix = _KSELFTEST_DIR,
+    target_compatible_with = ["@platforms//os:android"],
+    visibility = ["//visibility:private"],
+    deps = [":kselftest_memfd"],
+)
+
 cc_binary_with_abi(
     name = "kselftest_mm_compaction_test",
     srcs = ["tools/testing/selftests/mm/compaction_test.c"],
@@ -2058,7 +2253,7 @@ cc_binary_with_abi(
     name = "kselftest_size_test_get_size",
     srcs = ["tools/testing/selftests/size/get_size.c"],
     copts = _KSELFTEST_COPTS + select({
-        ":x86_64": ["-mstackrealign"],
+        "//build/kernel/kleaf/platforms/config_settings:android_x86_64": ["-mstackrealign"],
         "//conditions:default": [],
     }),
     includes = [
@@ -2526,6 +2721,7 @@ pkg_filegroup(
         ":kselftest_futex_futex_wait_wouldblock_x86_64",
         ":kselftest_futex_futex_wait_x86_64",
         ":kselftest_kcmp_kcmp_test_x86_64",
+        ":kselftest_memfd_test_x86_64",
         ":kselftest_mm_compaction_test_x86_64",
         ":kselftest_mm_hugepage_mmap_x86_64",
         ":kselftest_mm_hugepage_shm_x86_64",
@@ -2726,6 +2922,7 @@ pkg_filegroup(
         ":kselftest_futex_futex_wait_uninitialized_heap_arm64",
         ":kselftest_futex_futex_wait_wouldblock_arm64",
         ":kselftest_kcmp_kcmp_test_arm64",
+        ":kselftest_memfd_test_arm64",
         ":kselftest_mm_compaction_test_arm64",
         ":kselftest_mm_hugepage_mmap_arm64",
         ":kselftest_mm_hugepage_shm_arm64",

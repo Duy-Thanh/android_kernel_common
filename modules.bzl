@@ -8,11 +8,15 @@ This module contains a full list of kernel modules
 
 _COMMON_GKI_MODULES_LIST = [
     # keep sorted
+    "drivers/block/virtio_blk.ko",
     "drivers/block/zram/zram.ko",
     "drivers/bluetooth/btbcm.ko",
     "drivers/bluetooth/btqca.ko",
     "drivers/bluetooth/btsdio.ko",
     "drivers/bluetooth/hci_uart.ko",
+    "drivers/char/virtio_console.ko",
+    "drivers/gnss/gnss.ko",
+    "drivers/misc/vcpu_stall_detector.ko",
     "drivers/net/can/dev/can-dev.ko",
     "drivers/net/can/slcan/slcan.ko",
     "drivers/net/can/vcan.ko",
@@ -43,6 +47,10 @@ _COMMON_GKI_MODULES_LIST = [
     "drivers/usb/mon/usbmon.ko",
     "drivers/usb/serial/ftdi_sio.ko",
     "drivers/usb/serial/usbserial.ko",
+    "drivers/virtio/virtio_balloon.ko",
+    "drivers/virtio/virtio_pci.ko",
+    "drivers/virtio/virtio_pci_legacy_dev.ko",
+    "drivers/virtio/virtio_pci_modern_dev.ko",
     "fs/netfs/netfs.ko",
     "kernel/kheaders.ko",
     "lib/crypto/libarc4.ko",
@@ -75,6 +83,7 @@ _COMMON_GKI_MODULES_LIST = [
     "net/rfkill/rfkill.ko",
     "net/tipc/tipc.ko",
     "net/tipc/tipc_diag.ko",
+    "net/vmw_vsock/vmw_vsock_virtio_transport.ko",
 ]
 
 # Deprecated - Use `get_gki_modules_list` function instead.
@@ -87,6 +96,9 @@ _ARM_GKI_MODULES_LIST = [
 
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
+    "arch/arm64/geniezone/gzvm.ko",
+    "drivers/char/hw_random/cctrng.ko",
+    "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
 ]
 
@@ -157,7 +169,7 @@ _KUNIT_COMMON_MODULES_LIST = [
 # Modules defined by tools/testing/kunit/configs/android/kunit_clk_defconfig
 _KUNIT_CLK_MODULES_LIST = [
     "drivers/clk/clk-gate_test.ko",
-    "drivers/clk/clk_test.ko",
+    "drivers/clk/clk-test.ko",
     "drivers/clk/clk_kunit_helpers.ko",
 ]
 
@@ -187,3 +199,12 @@ def get_kunit_modules_list(arch = None):
         ))
 
     return kunit_modules_list
+
+_COMMON_UNPROTECTED_MODULES_LIST = []
+
+# buildifier: disable=unnamed-macro
+def get_gki_protected_modules_list(arch = None):
+    all_gki_modules = get_gki_modules_list(arch) + get_kunit_modules_list(arch)
+    unprotected_modules = _COMMON_UNPROTECTED_MODULES_LIST
+    protected_modules = [mod for mod in all_gki_modules if mod not in unprotected_modules]
+    return protected_modules

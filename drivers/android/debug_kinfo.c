@@ -20,7 +20,6 @@
  * These will be re-linked against their real values
  * during the second link stage.
  */
-extern const unsigned long kallsyms_addresses[] __weak;
 extern const int kallsyms_offsets[] __weak;
 extern const u8 kallsyms_names[] __weak;
 extern const u8 kallsyms_seqs_of_names[] __weak;
@@ -134,7 +133,6 @@ static int debug_kinfo_probe(struct platform_device *pdev)
 	all_info = (struct kernel_all_info *)all_info_addr;
 	info = &(all_info->info);
 	info->enabled_all = IS_ENABLED(CONFIG_KALLSYMS_ALL);
-	info->enabled_base_relative = IS_ENABLED(CONFIG_KALLSYMS_BASE_RELATIVE);
 	info->enabled_absolute_percpu = IS_ENABLED(CONFIG_KALLSYMS_ABSOLUTE_PERCPU);
 	info->enabled_cfi_clang = IS_ENABLED(CONFIG_CFI_CLANG);
 	info->num_syms = kallsyms_num_syms;
@@ -142,12 +140,9 @@ static int debug_kinfo_probe(struct platform_device *pdev)
 	info->bit_per_long = BITS_PER_LONG;
 	info->module_name_len = MODULE_NAME_LEN;
 	info->symbol_len = KSYM_SYMBOL_LEN;
-	if (!info->enabled_base_relative)
-		info->_addresses_pa = (u64)__pa_symbol((volatile void *)kallsyms_addresses);
-	else {
-		info->_relative_pa = (u64)__pa_symbol((volatile void *)kallsyms_relative_base);
-		info->_offsets_pa = (u64)__pa_symbol((volatile void *)kallsyms_offsets);
-	}
+	info->_relative_pa = (u64)__pa_symbol((volatile void *)kallsyms_relative_base);
+	info->_offsets_pa = (u64)__pa_symbol((volatile void *)kallsyms_offsets);
+	info->_text_pa = (u64)__pa_symbol(_text);
 	info->_stext_pa = (u64)__pa_symbol(_stext);
 	info->_etext_pa = (u64)__pa_symbol(_etext);
 	info->_sinittext_pa = (u64)__pa_symbol(_sinittext);

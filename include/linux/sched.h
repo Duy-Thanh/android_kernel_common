@@ -328,6 +328,7 @@ extern void io_schedule_finish(int token);
 extern long io_schedule_timeout(long timeout);
 extern void io_schedule(void);
 extern int select_fallback_rq(int cpu, struct task_struct *p);
+extern struct task_struct *pick_task(struct rq *rq);
 
 /**
  * struct prev_cputime - snapshot of system and user cputime
@@ -1567,7 +1568,7 @@ struct task_struct {
 	struct callback_head		mce_kill_me;
 	int				mce_count;
 #endif
-	ANDROID_VENDOR_DATA_ARRAY(1, 64);
+	ANDROID_VENDOR_DATA_ARRAY(1, 6);
 	ANDROID_OEM_DATA_ARRAY(1, 6);
 
 #ifdef CONFIG_KRETPROBES
@@ -2141,6 +2142,11 @@ static inline void set_task_cpu(struct task_struct *p, unsigned int cpu)
 }
 
 #endif /* CONFIG_SMP */
+
+static inline bool task_is_runnable(struct task_struct *p)
+{
+	return p->on_rq && !p->se.sched_delayed;
+}
 
 extern bool sched_task_on_rq(struct task_struct *p);
 extern unsigned long get_wchan(struct task_struct *p);

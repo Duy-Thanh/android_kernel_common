@@ -27,6 +27,7 @@
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/sched.h>
+#include <trace/hooks/topology.h>
 
 static DEFINE_PER_CPU(struct scale_freq_data __rcu *, sft_data);
 static struct cpumask scale_freq_counters_mask;
@@ -152,6 +153,8 @@ void topology_set_freq_scale(const struct cpumask *cpus, unsigned long cur_freq,
 
 	scale = (cur_freq << SCHED_CAPACITY_SHIFT) / max_freq;
 
+	trace_android_vh_arch_set_freq_scale(cpus, cur_freq, max_freq, &scale);
+
 	for_each_cpu(i, cpus)
 		per_cpu(arch_freq_scale, i) = scale;
 }
@@ -217,8 +220,10 @@ static ssize_t cpu_capacity_show(struct device *dev,
 				 char *buf)
 {
 	struct cpu *cpu = container_of(dev, struct cpu, dev);
+	unsigned long capacity = topology_get_cpu_scale(cpu->dev.id);
 
-	return sysfs_emit(buf, "%lu\n", topology_get_cpu_scale(cpu->dev.id));
+	trace_android_rvh_cpu_capacity_show(&capacity, cpu->dev.id);
+	return sysfs_emit(buf, "%lu\n", capacity);
 }
 
 static void update_topology_flags_workfn(struct work_struct *work);
@@ -376,7 +381,7 @@ void __weak freq_inv_set_max_ratio(int cpu, u64 max_rate)
 #ifdef CONFIG_ACPI_CPPC_LIB
 #include <acpi/cppc_acpi.h>
 
-void topology_init_cpu_capacity_cppc(void)
+static inline void topology_init_cpu_capacity_cppc(void)
 {
 	u64 capacity, capacity_scale = 0;
 	struct cppc_perf_caps perf_caps;
@@ -426,6 +431,10 @@ void topology_init_cpu_capacity_cppc(void)
 
 exit:
 	free_raw_capacity();
+}
+void acpi_processor_init_invariance_cppc(void)
+{
+	topology_init_cpu_capacity_cppc();
 }
 #endif
 
