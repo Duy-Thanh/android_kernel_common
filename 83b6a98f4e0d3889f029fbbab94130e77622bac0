@@ -34,6 +34,24 @@
       "parentUuid": "db543958_dcb25a41",
       "revId": "83b6a98f4e0d3889f029fbbab94130e77622bac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c28ec10c_333d3bfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-12-12T14:42:29Z",
+      "side": 1,
+      "message": "Please format the changelog correctly as per the documentation.",
+      "parentUuid": "0d26ad9a_1dbed222",
+      "revId": "83b6a98f4e0d3889f029fbbab94130e77622bac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
