@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "44b8692a_dddf8fc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-12T20:12:59Z",
+      "side": 1,
+      "message": "Looks like a duplicate Signed-off-by was added here (its not in the original patch)? Important to remember not to add Signed-off-by lines for others, just add it from yourself.\n\nPlease drop this line and ideally add your own Signed-off-by line.",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "43f68af7_c99658cd",
