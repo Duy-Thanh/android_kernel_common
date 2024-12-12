@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8784dd99_a64ce928",
+        "filename": "include/linux/irqdesc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-12T01:34:10Z",
+      "side": 1,
+      "message": "please fix alignment",
+      "fixSuggestions": [
+        {
+          "fixId": "26ce22fb_f2d88469",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/irqdesc.h",
+              "range": {
+                "startLine": 121,
+                "startChar": 0,
+                "endLine": 122,
+                "endChar": 0
+              },
+              "replacement": "\tANDROID_VENDOR_DATA(1);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "44dba489e747b95ba662b715dc49a9b6cf7c0270",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
