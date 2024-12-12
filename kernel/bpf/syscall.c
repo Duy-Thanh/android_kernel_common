@@ -5663,7 +5663,15 @@ static const struct bpf_func_proto bpf_kallsyms_lookup_name_proto = {
 	.arg1_type	= ARG_PTR_TO_MEM,
 	.arg2_type	= ARG_CONST_SIZE_OR_ZERO,
 	.arg3_type	= ARG_ANYTHING,
+<<<<<<< HEAD   (2bcd28 Merge d1100acab464 ("bpf: Simplify checking size of helper a)
 	.arg4_type	= ARG_PTR_TO_LONG,
+||||||| BASE
+	.arg4_type	= ARG_PTR_TO_FIXED_SIZE_MEM | MEM_UNINIT | MEM_ALIGNED,
+	.arg4_size	= sizeof(u64),
+=======
+	.arg4_type	= ARG_PTR_TO_FIXED_SIZE_MEM | MEM_UNINIT | MEM_WRITE | MEM_ALIGNED,
+	.arg4_size	= sizeof(u64),
+>>>>>>> BRANCH (8a33a0 bpf: Add MEM_WRITE attribute)
 };
 
 static const struct bpf_func_proto *
