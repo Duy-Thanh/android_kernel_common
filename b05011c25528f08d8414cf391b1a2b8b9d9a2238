@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd50388_133500f6",
+        "filename": "Documentation/virt/kvm/arm/hypercalls.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-12T14:57:04Z",
+      "side": 1,
+      "message": "NIT: Remove \u0027a\u0027",
+      "range": {
+        "startLine": 211,
+        "startChar": 11,
+        "endLine": 211,
+        "endChar": 12
+      },
+      "revId": "b05011c25528f08d8414cf391b1a2b8b9d9a2238",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752368be_f4bc2982",
+        "filename": "Documentation/virt/kvm/arm/hypercalls.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-12T14:57:04Z",
+      "side": 1,
+      "message": "Q: How do you diferentiate between the case when you detect that the range is not contiguous and the interruption because of too much time spent at EL2 ? Do you return an error in R1 when the range is not contiguous ?",
+      "range": {
+        "startLine": 210,
+        "startChar": 31,
+        "endLine": 211,
+        "endChar": 6
+      },
+      "revId": "b05011c25528f08d8414cf391b1a2b8b9d9a2238",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e4678dc_4e68debf",
+        "filename": "Documentation/virt/kvm/arm/hypercalls.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-12T14:57:04Z",
+      "side": 1,
+      "message": "Q: This will WARN_ON. Why don\u0027t you let the caller decide this ?",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 4
+      },
+      "revId": "b05011c25528f08d8414cf391b1a2b8b9d9a2238",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
