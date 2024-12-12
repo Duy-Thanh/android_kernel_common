@@ -601,3 +601,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_queue_work);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_wake_idle_worker);
+<<<<<<< HEAD   (9dfb2b Revert "UPSTREAM: scsi: ufs: ufs-sysfs: Expose UFS power inf)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_send_signal_locked);
+>>>>>>> CHANGE (3bdcda ANDROID: add hook for send signal debug)
