@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c29e070e_788c85a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-12T01:39:23Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick it from aosp/2870746 so the Change-Id is preserved",
+      "revId": "44dba489e747b95ba662b715dc49a9b6cf7c0270",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8784dd99_a64ce928",
         "filename": "include/linux/irqdesc.h",
         "patchSetId": 1
