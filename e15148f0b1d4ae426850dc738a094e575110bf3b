@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "437f318d_8c5ed4f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-12-12T02:02:51Z",
+      "side": 1,
+      "message": "Ha... I wasn\u0027t aware that there were multiple patchsets tagged with the same topic. No wonder why presubmit was not allowed to run. I\u0027ll temporarily remove the topic here.",
+      "revId": "e15148f0b1d4ae426850dc738a094e575110bf3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
