@@ -1656,6 +1656,11 @@ ddk_headers(
         "drivers/usb/host/xhci-caps.h",
         "drivers/usb/host/xhci-ext-caps.h",
         "drivers/usb/host/xhci-port.h",
+        "sound/usb/card.h",
+        "sound/usb/helper.h",
+        "sound/usb/power.h",
+        "sound/usb/quirks.h",
+        "sound/usb/usbaudio.h",
         "//build/kernel/kleaf:user_ddk_unsafe_headers",
     ],
     # The list of include directories where source files can #include headers
@@ -1669,6 +1674,7 @@ ddk_headers(
         "drivers/usb/gadget",
         "drivers/usb/gadget/function",
         "drivers/usb/host",
+        "sound/usb",
     ],
     visibility = ["//visibility:private"],
 )
