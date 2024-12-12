@@ -33,6 +33,24 @@
       "message": "Please update to the latest version",
       "revId": "baa028a286135f93ed39e766380d60912db3172c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2d48755_af46e490",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2024-12-12T10:49:13Z",
+      "side": 1,
+      "message": "- the patch updated w/[v30,24/30] ALSA: usb-audio: Introduce USB SND platform op callbacks (patch set #2)\n- verified the patch set #2 works properly on our environment.",
+      "parentUuid": "cc93a5a2_86beb031",
+      "revId": "baa028a286135f93ed39e766380d60912db3172c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
