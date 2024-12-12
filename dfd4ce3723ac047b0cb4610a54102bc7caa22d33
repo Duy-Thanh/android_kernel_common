@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b87e84b_1c2c1a0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3232272
+      },
+      "writtenOn": "2024-12-12T06:29:03Z",
+      "side": 1,
+      "message": "@maennich@google.com, Hi Matthias, please help review/submit the same, there is no KMI break in this patch.\nThis patch is essential for Thermal stability issue.\nThanks,",
+      "revId": "dfd4ce3723ac047b0cb4610a54102bc7caa22d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
