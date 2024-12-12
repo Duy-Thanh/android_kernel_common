@@ -33,6 +33,24 @@
       "message": "Did you build this before uploading?\n\n```\nfs/f2fs/segment.h:645:27: error: implicit declaration of function \u0027get_available_block_count\u0027 [-Werror,-Wimplicit-function-declaration]\n        avail_user_block_count \u003d get_available_block_count(sbi, NULL, true);\n                                 ^\n```",
       "revId": "106922bf2a933c099331ae430507abd29b0ad7fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f6f4077_b690d763",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3493330
+      },
+      "writtenOn": "2024-12-12T01:47:40Z",
+      "side": 1,
+      "message": "Hi, the get_available_block_count function define is at this commit https://android-review.googlesource.com/c/kernel/common/+/3404859\nand this commit is merged",
+      "parentUuid": "9a15c117_5291edb5",
+      "revId": "106922bf2a933c099331ae430507abd29b0ad7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
