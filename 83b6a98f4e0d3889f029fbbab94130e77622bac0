@@ -16,6 +16,24 @@
       "message": "Please submit upstream first.",
       "revId": "83b6a98f4e0d3889f029fbbab94130e77622bac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d26ad9a_1dbed222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3596924
+      },
+      "writtenOn": "2024-12-12T14:14:22Z",
+      "side": 1,
+      "message": "changes are already available in kernel.org\n\nPlease let us know next steps \n\nchanges https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?h\u003dlinux-6.10.y\u0026id\u003d2f550553e23c889b54440bf05e2484d84105e48d",
+      "parentUuid": "db543958_dcb25a41",
+      "revId": "83b6a98f4e0d3889f029fbbab94130e77622bac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
