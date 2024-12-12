@@ -88,6 +88,24 @@
       "parentUuid": "578a7f16_7c053b97",
       "revId": "4c8b7de17b1476569325d4e14c442cf13321ab26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28da7373_f9a5d8ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-12T01:57:28Z",
+      "side": 1,
+      "message": "Please do not just propagate patches needlessly. If it is not needed, please drop it.",
+      "parentUuid": "eb51afaf_ce3c2548",
+      "revId": "4c8b7de17b1476569325d4e14c442cf13321ab26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
