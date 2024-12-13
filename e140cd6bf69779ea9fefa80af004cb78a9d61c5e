@@ -16,6 +16,23 @@
       "message": "Respin Bug: 383917985",
       "revId": "e140cd6bf69779ea9fefa80af004cb78a9d61c5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63054f6e_73c05bc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3572101
+      },
+      "writtenOn": "2024-12-13T02:51:19Z",
+      "side": 1,
+      "message": "This change is cherry-picked from: https://android-review.googlesource.com/c/kernel/common/+/3131793, which is a merge change containning the commit: \u0027a10c3d5f pwm: Rename pwm_apply_state() to pwm_apply_might_sleep()\u0027",
+      "revId": "e140cd6bf69779ea9fefa80af004cb78a9d61c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
