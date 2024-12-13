@@ -367,6 +367,9 @@ DECLARE_HOOK(android_vh_customize_thp_gfp_orders,
 DECLARE_HOOK(android_vh_customize_pmd_gfp_bypass,
 	TP_PROTO(gfp_t *gfp_mask, bool *bypass),
 	TP_ARGS(gfp_mask, bypass));
+DECLARE_HOOK(android_vh_tune_fault_around_pages,
+	TP_PROTO(unsigned long *fault_around_pages),
+	TP_ARGS(fault_around_pages));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
