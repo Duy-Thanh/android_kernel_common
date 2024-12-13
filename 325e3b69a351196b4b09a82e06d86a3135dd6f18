@@ -16,6 +16,23 @@
       "message": "Hello. Greg kroah-hartman. \nIt was changed from pre-submission confirmation status to Active after 2 days. Is there any additional work I need to do for the merge?\nThanks.",
       "revId": "325e3b69a351196b4b09a82e06d86a3135dd6f18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1acb65c_a1ad1a5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3564363
+      },
+      "writtenOn": "2024-12-13T07:01:24Z",
+      "side": 1,
+      "message": "Hello, Greg.  I\u0027m sorry to bother you because I keep making comments.\nI think it is necessary to prepare for automatic submission and pre-submission to merge the patch given +2 points.\nMaybe it\u0027s because I don\u0027t have related permissions, I can\u0027t see related buttons in UI. Can you enable Auto submit and pre-submit ready to proceed with patch merge?\nThank you.",
+      "revId": "325e3b69a351196b4b09a82e06d86a3135dd6f18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
