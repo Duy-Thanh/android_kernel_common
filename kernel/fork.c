@@ -1116,7 +1116,9 @@ static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
 {
 	struct task_struct *tsk;
 	int err;
-
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+	void *task_vendor_data;
+#endif
 	if (node == NUMA_NO_NODE)
 		node = tsk_fork_get_node(orig);
 	tsk = alloc_task_struct_node(node);
@@ -1212,6 +1214,12 @@ static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
 	android_init_vendor_data(tsk, 1);
 	android_init_oem_data(tsk, 1);
 
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+	if (arch_task_struct_size - sizeof(struct task_struct) > 0) {
+		task_vendor_data = android_task_vendor_data(tsk);
+		memset(task_vendor_data, 0x0, arch_task_struct_size - sizeof(struct task_struct));
+	}
+#endif
 	trace_android_vh_dup_task_struct(tsk, orig);
 	return tsk;
 
