@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49eefd43_e194b857",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-13T18:13:03Z",
+      "side": 1,
+      "message": "Thanks so much for analyzing and creating this patch!\n\nIt looks ok to me, but I have a few minor thoughts that might make the code cleaner.",
+      "revId": "fc691bbc9c127120519f7979ebaba3478980b8e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d97ebff_62e40bf4",
+        "filename": "kernel/fork.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-13T18:13:03Z",
+      "side": 1,
+      "message": "The could be scoped more locally in the newly added conditional below.",
+      "revId": "fc691bbc9c127120519f7979ebaba3478980b8e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d2caba4_134861ed",
+        "filename": "kernel/fork.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-13T18:13:03Z",
+      "side": 1,
+      "message": "I wonder if it would make sense to rework android_init_vendor_data to a inline function which included this logic as well?",
+      "revId": "fc691bbc9c127120519f7979ebaba3478980b8e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
