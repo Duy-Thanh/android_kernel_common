@@ -17,6 +17,7 @@
 #include "autogroup.h"
 
 #include <trace/hooks/sched.h>
+#undef TRACE_INCLUDE_PATH
 
 static inline int __normal_prio(int policy, int rt_prio, int nice)
 {
@@ -70,6 +71,7 @@ void set_user_nice(struct task_struct *p, long nice)
 	struct rq *rq;
 	int old_prio;
 
+	trace_android_rvh_set_user_nice(p, &nice);
 	if (task_nice(p) == nice || nice < MIN_NICE || nice > MAX_NICE)
 		return;
 	/*
@@ -235,6 +237,7 @@ int available_idle_cpu(int cpu)
 
 	return 1;
 }
+EXPORT_SYMBOL_GPL(available_idle_cpu);
 
 /**
  * idle_task - return the idle task for a given CPU.
@@ -717,7 +720,7 @@ change:
 	}
 
 	prev_class = p->sched_class;
-	next_class = __setscheduler_class(p, newprio);
+	next_class = __setscheduler_class(policy, newprio);
 
 	if (prev_class != next_class && p->se.sched_delayed)
 		dequeue_task(rq, p, DEQUEUE_SLEEP | DEQUEUE_DELAYED | DEQUEUE_NOCLOCK);
@@ -733,6 +736,7 @@ change:
 		__setscheduler_params(p, attr);
 		p->sched_class = next_class;
 		p->prio = newprio;
+		trace_android_rvh_setscheduler(p);
 	}
 	__setscheduler_uclamp(p, attr);
 	check_class_changing(rq, p, prev_class);
@@ -820,6 +824,7 @@ int sched_setattr(struct task_struct *p, const struct sched_attr *attr)
 {
 	return __sched_setscheduler(p, attr, true, true);
 }
+EXPORT_SYMBOL_GPL(sched_setattr);
 
 int sched_setattr_nocheck(struct task_struct *p, const struct sched_attr *attr)
 {
@@ -1406,6 +1411,11 @@ static void do_sched_yield(void)
 {
 	struct rq_flags rf;
 	struct rq *rq;
+	long skip = 0;
+
+	trace_android_rvh_before_do_sched_yield(&skip);
+	if (skip)
+		return;
 
 	rq = this_rq_lock_irq(&rf);
 
