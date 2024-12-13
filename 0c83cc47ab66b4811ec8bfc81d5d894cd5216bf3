@@ -87,6 +87,24 @@
       "parentUuid": "cc0d9fdc_e7eba74e",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02a4b17a_ee0e1096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2024-12-13T06:22:46Z",
+      "side": 1,
+      "message": "Sooner or later, I\u0027m going ot add the sideband change, as well.",
+      "parentUuid": "08ff1be8_6269d5d3",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
