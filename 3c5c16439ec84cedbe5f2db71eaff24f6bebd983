@@ -22,6 +22,40 @@
       },
       "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b57478b_7ed9de1f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-12-13T06:07:26Z",
+      "side": 1,
+      "message": "You can only do this once, right? If you have host + multiple guests, are you calling this multiple times?",
+      "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dbf6c68_ebce0acf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-12-13T06:07:26Z",
+      "side": 1,
+      "message": "I think you need an `FFA_RX_RELEASE` after this (the kernel driver does it too).",
+      "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
