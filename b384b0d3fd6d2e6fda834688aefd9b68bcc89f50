@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcdf9afb_639c4e29",
+        "filename": "modules.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-12-13T09:29:30Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Buildifier: Prefer using \".append()\" to adding a single element list. http://go/buildifier-warnings#list-append\n\nAnalyzer Description: Check formats of Bazel definitions.\nOwner: kleaf@google.com\n\nPrefer using \".append()\" to adding a single element list. http://go/buildifier-warnings#list-append",
+      "range": {
+        "startLine": 182,
+        "startChar": 8,
+        "endLine": 184,
+        "endChar": 9
+      },
+      "revId": "b384b0d3fd6d2e6fda834688aefd9b68bcc89f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
