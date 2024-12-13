@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3c547a54_20c77251",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2024-12-13T06:06:12Z",
+      "side": 1,
+      "message": "Thanks for checking. This is my mistake, definitely. \nI\u0027ve replaced the signed-off-by with mine in patch set #3",
+      "parentUuid": "44b8692a_dddf8fc1",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "43f68af7_c99658cd",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
