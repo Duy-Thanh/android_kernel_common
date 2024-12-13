@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "426cc936_0ccfcb31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-12-13T07:44:13Z",
+      "side": 1,
+      "message": "No issue from the Kleaf side. From the USB side, @nkapron@google.com are these headers okay to be in the unsafe DDK header list?",
+      "revId": "53fc36d1d97ec46fe299732a75ff8722698abce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
