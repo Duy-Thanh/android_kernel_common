@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597154f2_48c6fe73",
+        "filename": "drivers/gpu/drm/drm_atomic.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1377251
+      },
+      "writtenOn": "2024-12-13T18:41:52Z",
+      "side": 1,
+      "message": "Please also add an appropriate drm_dbg_atomic error log, like is done for the checks below.",
+      "range": {
+        "startLine": 477,
+        "startChar": 2,
+        "endLine": 477,
+        "endChar": 17
+      },
+      "revId": "a7125aa70f57cff9bf742d1869b69fc78440dc3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

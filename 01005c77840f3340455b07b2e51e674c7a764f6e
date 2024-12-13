@@ -34,6 +34,23 @@
       "parentUuid": "727a1421_bd973c48",
       "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbb8c32_88d8dd81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1377251
+      },
+      "writtenOn": "2024-12-13T18:41:52Z",
+      "side": 1,
+      "message": "Manasi, could you please review this as well? In particular, please take a look at how min_bpc eventually gets plumbed down to the link configuration.",
+      "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
