@@ -68,6 +68,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_get_nohz_timer_target,
 	TP_PROTO(int *cpu, bool *done),
 	TP_ARGS(cpu, done), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_set_user_nice,
+	TP_PROTO(struct task_struct *p, long *nice),
+	TP_ARGS(p, nice), 1);
+
 DECLARE_RESTRICTED_HOOK(android_rvh_set_user_nice_locked,
 	TP_PROTO(struct task_struct *p, long *nice, bool *allowed),
 	TP_ARGS(p, nice, allowed), 1);
@@ -249,6 +253,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_do_sched_yield,
 	TP_PROTO(struct rq *rq),
 	TP_ARGS(rq), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_before_do_sched_yield,
+	TP_PROTO(long *skip),
+	TP_ARGS(skip), 1);
+
 DECLARE_HOOK(android_vh_free_task,
 	TP_PROTO(struct task_struct *p),
 	TP_ARGS(p));
@@ -338,6 +346,40 @@ DECLARE_HOOK(android_vh_sched_pelt_multiplier,
 DECLARE_RESTRICTED_HOOK(android_rvh_post_init_entity_util_avg,
 	TP_PROTO(struct sched_entity *se),
 	TP_ARGS(se), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_attach_entity_load_avg,
+	TP_PROTO(struct cfs_rq *cfs_rq, struct sched_entity *se),
+	TP_ARGS(cfs_rq, se), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_detach_entity_load_avg,
+	TP_PROTO(struct cfs_rq *cfs_rq, struct sched_entity *se),
+	TP_ARGS(cfs_rq, se), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_update_load_avg,
+	TP_PROTO(u64 now, struct cfs_rq *cfs_rq, struct sched_entity *se),
+	TP_ARGS(now, cfs_rq, se), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_remove_entity_load_avg,
+	TP_PROTO(struct cfs_rq *cfs_rq, struct sched_entity *se),
+	TP_ARGS(cfs_rq, se), 1);
+
+struct affinity_context;
+DECLARE_RESTRICTED_HOOK(android_rvh_set_cpus_allowed_ptr,
+	TP_PROTO(struct task_struct *p, struct affinity_context *ctx, bool *skip_user_ptr),
+	TP_ARGS(p, ctx, skip_user_ptr), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_update_blocked_fair,
+	TP_PROTO(struct rq *rq),
+	TP_ARGS(rq), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_set_task_comm,
+	TP_PROTO(struct task_struct *tsk, bool exec),
+	TP_ARGS(tsk, exec), 1);
+
+struct sugov_policy;
+DECLARE_RESTRICTED_HOOK(android_rvh_set_sugov_update,
+	TP_PROTO(struct sugov_policy *sg_policy, unsigned int next_freq, bool *should_update),
+	TP_ARGS(sg_policy, next_freq, should_update), 1);
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
