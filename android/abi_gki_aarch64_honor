@@ -242,3 +242,5 @@
   __traceiter_android_vh_wq_wake_idle_worker
   __tracepoint_android_vh_wq_queue_work
   __tracepoint_android_vh_wq_wake_idle_worker
+  __tracepoint_android_vh_tune_fault_around_bytes
+  __traceiter_android_vh_tune_fault_around_bytes
