@@ -4864,6 +4864,8 @@ vm_fault_t finish_fault(struct vm_fault *vmf)
 
 static unsigned long fault_around_pages __read_mostly =
 	65536 >> PAGE_SHIFT;
+static unsigned long fault_around_bytes __read_mostly =
+	65536 >> PAGE_SHIFT;
 
 #ifdef CONFIG_DEBUG_FS
 static int fault_around_bytes_get(void *data, u64 *val)
@@ -4977,6 +4979,7 @@ static vm_fault_t do_read_fault(struct vm_fault *vmf)
 	vm_fault_t ret = 0;
 	struct folio *folio;
 
+	trace_android_vh_tune_fault_around_bytes(&fault_around_bytes);
 	/*
 	 * Let's call ->map_pages() first and use ->fault() as fallback
 	 * if page by the offset is not ready to be mapped (cold cache or
