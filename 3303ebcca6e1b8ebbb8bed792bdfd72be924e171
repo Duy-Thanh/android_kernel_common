@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd19fc5c_118abad1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-12-15T11:47:13Z",
+      "side": 1,
+      "message": "checkpatch can be ignored for reverts.",
+      "revId": "3303ebcca6e1b8ebbb8bed792bdfd72be924e171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
