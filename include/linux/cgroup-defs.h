@@ -523,6 +523,11 @@ struct cgroup_root {
 
 	/* A list running through the active hierarchies */
 	struct list_head root_list;
+<<<<<<< HEAD   (387164 Revert "spi: Fix deadlock when adding SPI controllers on SPI)
+||||||| BASE
+=======
+	struct rcu_head rcu;
+>>>>>>> CHANGE (90730c Revert "cgroup: Move rcu_head up near the top of cgroup_root)
 
 	/* Hierarchy-specific flags */
 	unsigned int flags;
