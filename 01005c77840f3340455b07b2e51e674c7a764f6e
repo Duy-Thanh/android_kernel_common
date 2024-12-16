@@ -51,6 +51,24 @@
       "message": "Manasi, could you please review this as well? In particular, please take a look at how min_bpc eventually gets plumbed down to the link configuration.",
       "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f360258e_9098ffd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-12-16T14:34:35Z",
+      "side": 1,
+      "message": "After you will be happy with the internal review, please submit the patch to the upstream and modify the current CL to include the FROMLIST tag. Later on we\u0027ll be tracing such patches in the buganizer to make sure we had resolved all the technical debt and use the upstream version of the patches where it\u0027s possible.",
+      "parentUuid": "e9f4e4ba_d52a06b4",
+      "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
