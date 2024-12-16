@@ -177,6 +177,24 @@
       "parentUuid": "deb7a4d5_0c0cba4d",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bafa4c01_c3f1ae2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2024-12-16T19:41:32Z",
+      "side": 1,
+      "message": "I\u0027m fine with that.  @Daehwan/@Hongseock, let me know if you need any help with updating this series w/ the XHCI changes.",
+      "parentUuid": "92566e6e_710003bb",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
