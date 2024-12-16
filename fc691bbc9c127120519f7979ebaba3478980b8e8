@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab90e46c_615b0685",
+        "filename": "kernel/fork.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2024-12-16T07:22:59Z",
+      "side": 1,
+      "message": "update to patchset#6, please help to review.",
+      "parentUuid": "3d97ebff_62e40bf4",
+      "revId": "fc691bbc9c127120519f7979ebaba3478980b8e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d2caba4_134861ed",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-12-13T18:13:03Z",
       "side": 1,
       "message": "I wonder if it would make sense to rework android_init_vendor_data to a inline function which included this logic as well?",
+      "revId": "fc691bbc9c127120519f7979ebaba3478980b8e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e62e85a_b7d25522",
+        "filename": "kernel/fork.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2024-12-16T07:22:59Z",
+      "side": 1,
+      "message": "update to patchset#6, please help to review.",
+      "parentUuid": "8d2caba4_134861ed",
       "revId": "fc691bbc9c127120519f7979ebaba3478980b8e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
