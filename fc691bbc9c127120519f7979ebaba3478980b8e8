@@ -86,6 +86,24 @@
       "parentUuid": "8d2caba4_134861ed",
       "revId": "fc691bbc9c127120519f7979ebaba3478980b8e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8839e0_0648378e",
+        "filename": "kernel/fork.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1222,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-16T18:37:45Z",
+      "side": 1,
+      "message": "Usually we want to avoid #ifdefs within functions, so I made a minor tweak to your patch to do that.",
+      "parentUuid": "6e62e85a_b7d25522",
+      "revId": "fc691bbc9c127120519f7979ebaba3478980b8e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
