@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ee16d14_5267577f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-16T19:49:30Z",
+      "side": 1,
+      "message": "please abandon this patch and chrry-pick the android15-6.6 version so the Change-Id is preserved.",
+      "revId": "69edce147859b15abd339c2734fb7b0a0129b5c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
