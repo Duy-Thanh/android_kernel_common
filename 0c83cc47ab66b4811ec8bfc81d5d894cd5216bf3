@@ -141,6 +141,24 @@
       "parentUuid": "02a4b17a_ee0e1096",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb7a4d5_0c0cba4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2024-12-16T19:28:30Z",
+      "side": 1,
+      "message": "probably not...the series was meant for USB audio offload, and both QC and Google use the ALSA changes here in addition to the xhci-sideband changes to get it working.",
+      "parentUuid": "b65be69c_844949e6",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
