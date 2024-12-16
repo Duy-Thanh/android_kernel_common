@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d586f4a_72d0e43b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967749
+      },
+      "writtenOn": "2024-12-16T15:21:49Z",
+      "side": 1,
+      "message": "To clarify, this CL is cherry picked from aosp/3081250, which says the API is used for sysfs formating but actually it\u0027s used for formating output under procfs to print vendor customized meminfo value. We want to make each line correctly align for metrics parsing. IMHO although seq_puts can do similar things but there is no need to reinvent the wheel. Hope that make sense.",
+      "revId": "5cecc7b575dc283fc15b6da5f761f411411e4bdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
