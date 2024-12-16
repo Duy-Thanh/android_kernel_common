@@ -159,6 +159,24 @@
       "parentUuid": "b65be69c_844949e6",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92566e6e_710003bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-16T19:38:44Z",
+      "side": 1,
+      "message": "Ok, it sounds like we should then wait to merge these until the xhci-sideband changes are included in the series.  Let me know if I\u0027m misunderstanding your.",
+      "parentUuid": "deb7a4d5_0c0cba4d",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
