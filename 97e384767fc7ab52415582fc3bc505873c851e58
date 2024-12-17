@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff666737_53c1583a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-17T18:38:13Z",
+      "side": 1,
+      "message": "Looks like in 6.6 version of this patch (aosp/3133448) you needed only 2 functions: \n\ndma_direct_alloc\ndma_direct_free\n\nDid something change in 6.12 which requires these functions again?",
+      "revId": "97e384767fc7ab52415582fc3bc505873c851e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
