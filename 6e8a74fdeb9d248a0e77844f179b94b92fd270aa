@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "655636ab_5fdbdaaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2024-12-17T19:28:33Z",
+      "side": 1,
+      "message": "Confirmed with enh that shadowstack is not enabled by bionic by default. So having this enabled in gki is the first step.\n\n(please check in this change to GKI main directly also, and backport to 6.6)",
+      "revId": "6e8a74fdeb9d248a0e77844f179b94b92fd270aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
