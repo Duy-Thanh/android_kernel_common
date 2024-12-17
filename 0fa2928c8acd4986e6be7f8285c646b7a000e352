@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "664dfa89_f7a304e7",
+        "filename": "mm/kasan/hw_tags.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-17T20:45:21Z",
+      "side": 1,
+      "message": "chosen",
+      "range": {
+        "startLine": 82,
+        "startChar": 24,
+        "endLine": 82,
+        "endChar": 30
+      },
+      "revId": "0fa2928c8acd4986e6be7f8285c646b7a000e352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
