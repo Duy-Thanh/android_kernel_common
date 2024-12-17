@@ -195,6 +195,24 @@
       "parentUuid": "92566e6e_710003bb",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6deef687_dd812352",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2024-12-17T01:06:14Z",
+      "side": 1,
+      "message": "OK, I\u0027m going to finish xhci-sideband work first and then return to this patch set.",
+      "parentUuid": "bafa4c01_c3f1ae2b",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
