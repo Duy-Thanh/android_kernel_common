@@ -69,6 +69,41 @@
       "parentUuid": "e9f4e4ba_d52a06b4",
       "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a08bdf54_c052ef04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-12-17T14:08:21Z",
+      "side": 1,
+      "message": "Outvoting linter, as the .stg was updated. It fails because of parent vs current ABI difference which is OK for the desktop.",
+      "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff67787_0fd5c315",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2024-12-17T14:08:21Z",
+      "side": 1,
+      "message": "We synced offline and it looks like it\u0027s not upstream-ready and will need to be held as a new technical debt for now.",
+      "parentUuid": "f360258e_9098ffd5",
+      "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
