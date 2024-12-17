@@ -185,6 +185,7 @@ common_kernel(
     arch = "arm64",
     build_config = ":build.config.gki.aarch64_generated",
     build_gki_artifacts = True,
+    clang_autofdo_profile = "//toolchain/pgo-profiles/kernel:6_12_0.llvm_profdata",
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
     defconfig = "arch/arm64/configs/gki_defconfig",
