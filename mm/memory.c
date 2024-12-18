@@ -5070,13 +5070,13 @@ vm_fault_t finish_fault(struct vm_fault *vmf)
 	return ret;
 }
 
-static unsigned long fault_around_pages __read_mostly =
-	65536 >> PAGE_SHIFT;
+static unsigned long fault_around_bytes __read_mostly =
+	rounddown_pow_of_two(65536);;
 
 #ifdef CONFIG_DEBUG_FS
 static int fault_around_bytes_get(void *data, u64 *val)
 {
-	*val = fault_around_pages << PAGE_SHIFT;
+	*val = fault_around_bytes;
 	return 0;
 }
 
@@ -5093,7 +5093,7 @@ static int fault_around_bytes_set(void *data, u64 val)
 	 * The minimum value is 1 page, however this results in no fault-around
 	 * at all. See should_fault_around().
 	 */
-	fault_around_pages = max(rounddown_pow_of_two(val) >> PAGE_SHIFT, 1UL);
+	fault_around_bytes = max(rounddown_pow_of_two(val), 1UL);
 
 	return 0;
 }
@@ -5131,7 +5131,7 @@ late_initcall(fault_around_debugfs);
  */
 static vm_fault_t do_fault_around(struct vm_fault *vmf)
 {
-	pgoff_t nr_pages = READ_ONCE(fault_around_pages);
+	pgoff_t nr_pages = READ_ONCE(fault_around_bytes) >> PAGE_SHIFT;
 	pgoff_t pte_off = pte_index(vmf->address);
 	/* The page offset of vmf->address within the VMA. */
 	pgoff_t vma_off = vmf->pgoff - vmf->vma->vm_pgoff;
@@ -5177,7 +5177,7 @@ static inline bool should_fault_around(struct vm_fault *vmf)
 		return false;
 
 	/* A single page implies no faulting 'around' at all. */
-	return fault_around_pages > 1;
+	return fault_around_bytes >> PAGE_SHIFT > 1;
 }
 
 static vm_fault_t do_read_fault(struct vm_fault *vmf)
@@ -5185,6 +5185,7 @@ static vm_fault_t do_read_fault(struct vm_fault *vmf)
 	vm_fault_t ret = 0;
 	struct folio *folio;
 
+	trace_android_vh_tune_fault_around_bytes(&fault_around_bytes);
 	/*
 	 * Let's call ->map_pages() first and use ->fault() as fallback
 	 * if page by the offset is not ready to be mapped (cold cache or
@@ -5195,7 +5196,7 @@ static vm_fault_t do_read_fault(struct vm_fault *vmf)
 		if (ret)
 			return ret;
 	} else {
-		trace_android_vh_do_read_fault(vmf, fault_around_pages);
+		trace_android_vh_do_read_fault(vmf, fault_around_bytes);
 	}
 
 	ret = vmf_can_call_fault(vmf);
