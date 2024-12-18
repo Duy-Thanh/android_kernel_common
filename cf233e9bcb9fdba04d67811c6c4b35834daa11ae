@@ -22,6 +22,30 @@
       },
       "revId": "cf233e9bcb9fdba04d67811c6c4b35834daa11ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd1ec99_b9077fa7",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-12-18T17:11:44Z",
+      "side": 1,
+      "message": "I actually meant phys + numpages * PAGE_SIZE is excluded. But probably should have been \")\" instead",
+      "parentUuid": "afb7d9c9_7fefcfbd",
+      "range": {
+        "startLine": 55,
+        "startChar": 65,
+        "endLine": 55,
+        "endChar": 66
+      },
+      "revId": "cf233e9bcb9fdba04d67811c6c4b35834daa11ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
