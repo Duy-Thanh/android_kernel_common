@@ -74,14 +74,26 @@ static int arm_smccc_do_range(u32 func_id, phys_addr_t phys, int numpages,
 
 static int pkvm_set_memory_encrypted(unsigned long addr, int numpages)
 {
+	phys_addr_t p_addr = virt_to_phys((void *)addr);
+
+	if (!IS_ALIGNED(addr, pkvm_granule) ||
+	    !IS_ALIGNED(numpages * PAGE_SIZE, pkvm_granule))
+		return -EINVAL;
+
 	return arm_smccc_do_range(ARM_SMCCC_VENDOR_HYP_KVM_MEM_UNSHARE_FUNC_ID,
-				  virt_to_phys((void *)addr), numpages, pkvm_func_range);
+				  p_addr, numpages, pkvm_func_range);
 }
 
 static int pkvm_set_memory_decrypted(unsigned long addr, int numpages)
 {
+	phys_addr_t p_addr = virt_to_phys((void *)addr);
+
+	if (!IS_ALIGNED(addr, pkvm_granule) ||
+	    !IS_ALIGNED(numpages * PAGE_SIZE, pkvm_granule))
+		return -EINVAL;
+
 	return arm_smccc_do_range(ARM_SMCCC_VENDOR_HYP_KVM_MEM_SHARE_FUNC_ID,
-				  virt_to_phys((void *)addr), numpages, pkvm_func_range);
+				  p_addr, numpages, pkvm_func_range);
 }
 
 static const struct arm64_mem_crypt_ops pkvm_crypt_ops = {
@@ -147,7 +159,7 @@ void pkvm_init_hyp_services(void)
 
 	arm_smccc_1_1_invoke(ARM_SMCCC_VENDOR_HYP_KVM_HYP_MEMINFO_FUNC_ID,
 			     0, 0, 0, &res);
-	if (res.a0 > PAGE_SIZE) /* Includes error codes */
+	if ((long)res.a0 < 0)
 		return;
 
 	pkvm_granule = res.a0;
