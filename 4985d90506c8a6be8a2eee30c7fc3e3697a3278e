@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3444315_24a3f3d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-18T00:13:09Z",
+      "side": 1,
+      "message": "If so, maybe it\u0027s better to enable this mode using kernel command line option and make the sysfs node read-only? That would prevent someone from enabling it too late. Or maybe you made it this way to that we can switch it on/off from userspace when conducting experiments? Although I\u0027m not sure if experiment flags are available early enough. If that\u0027s the goal, please check with TJ and Kalesh about that.",
+      "range": {
+        "startLine": 10,
+        "startChar": 59,
+        "endLine": 12,
+        "endChar": 7
+      },
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13351514_47885105",
         "filename": "/COMMIT_MSG",
         "patchSetId": 12
@@ -59,6 +82,29 @@
         "startChar": 12,
         "endLine": 925,
         "endChar": 37
+      },
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63b8baa0_716b13cb",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-18T00:13:09Z",
+      "side": 1,
+      "message": "This sysfs node and all the new functions should be compiled only if CONFIG_MEMFD_ASHMEM_COMPAT is defined, correct? If so I think you are missing some $ifdefs here, which is another reason to move most of this code into mm/ashmem_compat.{h|c}",
+      "range": {
+        "startLine": 1204,
+        "startChar": 20,
+        "endLine": 1204,
+        "endChar": 42
       },
       "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
