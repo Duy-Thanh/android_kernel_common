@@ -396905,7 +396905,7 @@ elf_symbol {
   name: "kvm_iommu_register_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xeaeb9887
+  crc: 0xd0dfcb12
   type_id: 0x9bab2f7e
   full_name: "kvm_iommu_register_driver"
 }
@@ -405910,7 +405910,7 @@ elf_symbol {
   name: "pkvm_iommu_resume"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xfaa5c82e
+  crc: 0xf1970144
   type_id: 0x9d16dd74
   full_name: "pkvm_iommu_resume"
 }
@@ -405919,7 +405919,7 @@ elf_symbol {
   name: "pkvm_iommu_suspend"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdaf6403e
+  crc: 0xb8c56c9c
   type_id: 0x9d16dd74
   full_name: "pkvm_iommu_suspend"
 }

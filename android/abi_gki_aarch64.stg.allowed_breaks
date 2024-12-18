@@ -101,3 +101,12 @@ type 'struct cgroup_root' changed
   'struct tracepoint __tracepoint_android_vh_mutex_unlock_slowpath_before_wakeq'
   'struct tracepoint __tracepoint_android_vh_suitable_migration_target_bypass'
 
+function symbol 'int kvm_iommu_register_driver(struct kvm_iommu_driver*)' changed
+  CRC changed from 0xeaeb9887 to 0xd0dfcb12
+
+function symbol 'int pkvm_iommu_resume(struct device*)' changed
+  CRC changed from 0xfaa5c82e to 0xf1970144
+
+function symbol 'int pkvm_iommu_suspend(struct device*)' changed
+  CRC changed from 0xdaf6403e to 0xb8c56c9c
+
