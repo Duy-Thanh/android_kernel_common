@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9d9c76e_1a70e6e5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-18T13:29:37Z",
+      "side": 1,
+      "message": "I think this would be more elegant and we will not have to keep this static array. The only downside would be that not all the pVMs will be talking FF-A and it will probably be a bit harder to mainain (currently most of the code is in this file)",
+      "parentUuid": "cc66206a_75d45322",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 29
+      },
+      "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b57478b_7ed9de1f",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2024-12-13T06:07:26Z",
       "side": 1,
       "message": "You can only do this once, right? If you have host + multiple guests, are you calling this multiple times?",
+      "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5824ebc6_c23dab59",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-18T13:29:37Z",
+      "side": 1,
+      "message": "I am calling it multipple time but it should be fine because of `ANDROID: KVM: arm64: Use refcounting for the hypervisor FF-A buffers`",
+      "parentUuid": "7b57478b_7ed9de1f",
       "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +96,24 @@
       "writtenOn": "2024-12-13T06:07:26Z",
       "side": 1,
       "message": "I think you need an `FFA_RX_RELEASE` after this (the kernel driver does it too).",
+      "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47547e5_f96a55a0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-18T13:29:37Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "9dbf6c68_ebce0acf",
       "revId": "3c5c16439ec84cedbe5f2db71eaff24f6bebd983",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
