@@ -69,6 +69,30 @@
       },
       "revId": "a35d02da1c92c64208e87c3225ceab2969a0163c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3513f90d_7dfd6a80",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-18T12:44:40Z",
+      "side": 1,
+      "message": "Removed this since we no longer pin for the guest share.",
+      "parentUuid": "2d009946_83845125",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 46
+      },
+      "revId": "a35d02da1c92c64208e87c3225ceab2969a0163c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
