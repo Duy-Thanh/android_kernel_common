@@ -2131,7 +2131,17 @@ static void zram_destroy_comps(struct zram *zram)
 		zram->num_active_comps--;
 	}
 
+<<<<<<< HEAD   (e988ff ANDROID: arm64: dts: mt8186: Add unprovisioned Starmie SKUs)
 	zram_comp_params_reset(zram);
+||||||| BASE
+=======
+	for (prio = ZRAM_PRIMARY_COMP; prio < ZRAM_MAX_COMPS; prio++) {
+		/* Do not free statically defined compression algorithms */
+		if (zram->comp_algs[prio] != default_compressor)
+			kfree(zram->comp_algs[prio]);
+		zram->comp_algs[prio] = NULL;
+	}
+>>>>>>> BRANCH (d92a21 ANDROID: mthp: Fixup ABI for reclaim_work)
 }
 
 static void zram_reset_device(struct zram *zram)

@@ -305,8 +305,28 @@
   param_ops_uint
   passthru_features_check
   pci_bus_type
+<<<<<<< HEAD   (e988ff ANDROID: arm64: dts: mt8186: Add unprovisioned Starmie SKUs)
+||||||| BASE
+  pci_disable_device
+  pci_enable_device
+  pci_find_capability
+  pci_find_next_capability
+  pci_iounmap
+  pci_read_config_byte
+  pci_read_config_dword
+  __pci_register_driver
+=======
+  pci_iomap_range
+>>>>>>> BRANCH (d92a21 ANDROID: mthp: Fixup ABI for reclaim_work)
   pci_release_region
+  pci_release_selected_regions
   pci_request_region
+<<<<<<< HEAD   (e988ff ANDROID: arm64: dts: mt8186: Add unprovisioned Starmie SKUs)
+||||||| BASE
+  pci_unregister_driver
+=======
+  pci_request_selected_regions
+>>>>>>> BRANCH (d92a21 ANDROID: mthp: Fixup ABI for reclaim_work)
   __per_cpu_offset
   perf_trace_buf_alloc
   perf_trace_run_bpf_submit
@@ -1097,6 +1117,11 @@
   kthread_stop_put
   platform_bus
   sockfd_lookup
+<<<<<<< HEAD   (e988ff ANDROID: arm64: dts: mt8186: Add unprovisioned Starmie SKUs)
+||||||| BASE
+=======
+  strchr
+>>>>>>> BRANCH (d92a21 ANDROID: mthp: Fixup ABI for reclaim_work)
   sysfs_create_group
   sysfs_remove_group
   usb_speed_string
@@ -1329,6 +1354,7 @@
 # required by virtio_snd.ko
   snd_card_free
   snd_card_new
+<<<<<<< HEAD   (e988ff ANDROID: arm64: dts: mt8186: Add unprovisioned Starmie SKUs)
   snd_jack_new
   snd_jack_report
   snd_pcm_add_chmap_ctls
@@ -1465,6 +1491,300 @@
   page_relinquish
   page_reporting_register
   page_reporting_unregister
+||||||| BASE
+  device_for_each_child
+  device_register
+  memparse
+
+# required by virtio_net.ko
+  bpf_dispatcher_xdp_func
+  bpf_master_redirect_enabled_key
+  bpf_prog_add
+  bpf_prog_put
+  bpf_prog_sub
+  bpf_stats_enabled_key
+  bpf_warn_invalid_xdp_action
+  __cpuhp_remove_state
+  __cpuhp_setup_state
+  __cpuhp_state_add_instance
+  __cpuhp_state_remove_instance
+  cpumask_next_wrap
+  cpus_read_lock
+  cpus_read_unlock
+  eth_commit_mac_addr_change
+  eth_prepare_mac_addr_change
+  ethtool_sprintf
+  ethtool_virtdev_set_link_ksettings
+  flow_keys_basic_dissector
+  jiffies_to_usecs
+  __napi_alloc_skb
+  napi_consume_skb
+  netdev_notify_peers
+  netdev_rss_key_fill
+  netdev_warn
+  netif_device_attach
+  netif_set_real_num_rx_queues
+  netif_set_real_num_tx_queues
+  __netif_set_xps_queue
+  netif_tx_lock
+  netif_tx_unlock
+  __num_online_cpus
+  sched_clock
+  skb_coalesce_rx_frag
+  __skb_flow_dissect
+  skb_page_frag_refill
+  skb_partial_csum_set
+  skb_tstamp_tx
+  softnet_data
+  __traceiter_xdp_exception
+  __tracepoint_xdp_exception
+  virtqueue_add_inbuf_ctx
+  virtqueue_dma_mapping_error
+  virtqueue_dma_map_single_attrs
+  virtqueue_dma_need_sync
+  virtqueue_dma_sync_single_range_for_cpu
+  virtqueue_dma_unmap_single_attrs
+  virtqueue_enable_cb_delayed
+  virtqueue_enable_cb_prepare
+  virtqueue_get_buf_ctx
+  virtqueue_poll
+  virtqueue_resize
+  virtqueue_set_dma_premapped
+  xdp_convert_zc_to_xdp_frame
+  xdp_do_flush
+  xdp_do_redirect
+  xdp_features_clear_redirect_target
+  xdp_features_set_redirect_target
+  xdp_master_redirect
+  xdp_return_frame
+  xdp_return_frame_rx_napi
+  __xdp_rxq_info_reg
+  xdp_rxq_info_reg_mem_model
+  xdp_rxq_info_unreg
+  xdp_warn
+
+# required by virtio_pci.ko
+  __irq_apply_affinity_hint
+  pci_alloc_irq_vectors_affinity
+  pci_device_is_present
+  pci_disable_sriov
+  pci_enable_sriov
+  pci_find_ext_capability
+  pci_free_irq_vectors
+  pci_irq_get_affinity
+  pci_irq_vector
+  pci_read_config_word
+  pci_set_master
+  pci_vfs_assigned
+
+# required by virtio_pci_legacy_dev.ko
+  pci_iomap
+
+# required by virtio_pci_modern_dev.ko
+  pci_iomap_range
+  pci_release_selected_regions
+  pci_request_selected_regions
+
+# required by virtio_pmem.ko
+  nvdimm_bus_register
+  nvdimm_bus_unregister
+  nvdimm_pmem_region_create
+
+# required by virtio_snd.ko
+  snd_card_free
+  snd_card_new
+  snd_card_register
+  snd_ctl_add
+  snd_ctl_new1
+  snd_ctl_notify
+  snd_jack_new
+  snd_jack_report
+  snd_pcm_add_chmap_ctls
+  snd_pcm_format_physical_width
+  snd_pcm_hw_constraint_integer
+  snd_pcm_lib_ioctl
+  snd_pcm_new
+  snd_pcm_period_elapsed
+  snd_pcm_set_managed_buffer_all
+  snd_pcm_set_ops
+  wait_for_completion_interruptible_timeout
+
+# required by virtual-cpufreq.ko
+  arch_freq_scale
+  cpufreq_freq_transition_begin
+  cpufreq_freq_transition_end
+  cpufreq_frequency_table_verify
+  cpufreq_get_hw_max_freq
+  get_cpu_device
+  topology_clear_scale_freq_source
+  topology_set_scale_freq_source
+
+# required by vkms.ko
+  __devm_drm_dev_alloc
+  devres_open_group
+  devres_release_group
+  drm_atomic_add_affected_planes
+  drm_atomic_helper_check_wb_encoder_state
+  drm_atomic_helper_cleanup_planes
+  drm_atomic_helper_commit_hw_done
+  drm_atomic_helper_commit_modeset_disables
+  drm_atomic_helper_commit_modeset_enables
+  drm_atomic_helper_commit_planes
+  __drm_atomic_helper_crtc_destroy_state
+  __drm_atomic_helper_crtc_duplicate_state
+  __drm_atomic_helper_crtc_reset
+  drm_atomic_helper_fake_vblank
+=======
+  snd_card_register
+  snd_ctl_add
+  snd_ctl_new1
+  snd_ctl_notify
+  snd_jack_new
+  snd_jack_report
+  snd_pcm_add_chmap_ctls
+  snd_pcm_format_physical_width
+  snd_pcm_hw_constraint_integer
+  snd_pcm_lib_ioctl
+  snd_pcm_new
+  snd_pcm_period_elapsed
+  snd_pcm_set_managed_buffer_all
+  snd_pcm_set_ops
+  wait_for_completion_interruptible_timeout
+
+# required by virtual-cpufreq.ko
+  arch_freq_scale
+  cpufreq_freq_transition_begin
+  cpufreq_freq_transition_end
+  cpufreq_frequency_table_verify
+  cpufreq_get_hw_max_freq
+  get_cpu_device
+  topology_clear_scale_freq_source
+  topology_set_scale_freq_source
+
+# required by vkms.ko
+  __devm_drm_dev_alloc
+  devres_open_group
+  devres_release_group
+  drm_atomic_add_affected_planes
+  drm_atomic_helper_check_wb_encoder_state
+  drm_atomic_helper_cleanup_planes
+  drm_atomic_helper_commit_hw_done
+  drm_atomic_helper_commit_modeset_disables
+  drm_atomic_helper_commit_modeset_enables
+  drm_atomic_helper_commit_planes
+  __drm_atomic_helper_crtc_destroy_state
+  __drm_atomic_helper_crtc_duplicate_state
+  __drm_atomic_helper_crtc_reset
+  drm_atomic_helper_fake_vblank
+  drm_atomic_helper_wait_for_flip_done
+  drm_calc_timestamping_constants
+  drm_crtc_accurate_vblank_count
+  drm_crtc_add_crc_entry
+  drm_crtc_enable_color_mgmt
+  drm_crtc_vblank_put
+  drm_debugfs_add_files
+  drm_encoder_cleanup
+  drm_encoder_init
+  __drm_gem_destroy_shadow_plane_state
+  __drm_gem_duplicate_shadow_plane_state
+  drm_gem_fb_vmap
+  drm_gem_fb_vunmap
+  drm_gem_plane_helper_prepare_fb
+  __drm_gem_reset_shadow_plane
+  drm_gem_shmem_dumb_create
+  drm_gem_shmem_prime_import_sg_table
+  drmm_crtc_init_with_planes
+  drm_mode_crtc_set_gamma_size
+  drm_mode_object_get
+  drm_mode_object_put
+  drm_plane_create_rotation_property
+  drm_rect_rotate
+  drm_rotation_simplify
+  drm_writeback_connector_init
+  drm_writeback_queue_job
+  drm_writeback_signal_completion
+
+# preserved by --additions-only
+  adjust_managed_page_count
+  all_vm_events
+  balloon_mops
+  balloon_page_alloc
+  balloon_page_dequeue
+  balloon_page_enqueue
+  blk_execute_rq
+  __blk_mq_alloc_disk
+  blk_mq_alloc_request
+  blk_mq_alloc_tag_set
+  blk_mq_complete_request
+  blk_mq_complete_request_remote
+  blk_mq_end_request
+  blk_mq_end_request_batch
+  blk_mq_free_request
+  blk_mq_free_tag_set
+  blk_mq_freeze_queue
+  blk_mq_map_queues
+  blk_mq_quiesce_queue
+  blk_mq_requeue_request
+  blk_mq_start_request
+  blk_mq_start_stopped_hw_queues
+  blk_mq_stop_hw_queue
+  blk_mq_unfreeze_queue
+  blk_mq_unquiesce_queue
+  blk_mq_virtio_map_queues
+  blk_queue_alignment_offset
+  blk_queue_chunk_sectors
+  blk_queue_flag_set
+  blk_queue_io_min
+  blk_queue_io_opt
+  blk_queue_logical_block_size
+  blk_queue_max_discard_sectors
+  blk_queue_max_discard_segments
+  blk_queue_max_hw_sectors
+  blk_queue_max_secure_erase_sectors
+  blk_queue_max_segments
+  blk_queue_max_segment_size
+  blk_queue_max_write_zeroes_sectors
+  blk_queue_max_zone_append_sectors
+  blk_queue_physical_block_size
+  blk_queue_write_cache
+  blk_revalidate_disk_zones
+  blk_rq_map_kern
+  __blk_rq_map_sg
+  blk_status_to_errno
+  cdev_add
+  cdev_alloc
+  cdev_del
+  __ClearPageMovable
+  cpufreq_cpu_get
+  cpufreq_cpu_put
+  cpu_scale
+  del_gendisk
+  device_add_disk
+  device_destroy
+  dev_pm_opp_free_cpufreq_table
+  dev_pm_opp_get_opp_count
+  dev_pm_opp_init_cpufreq_table
+  dev_pm_opp_of_add_table
+  disk_set_zoned
+  fasync_helper
+  get_device
+  hvc_alloc
+  hvc_instantiate
+  hvc_kick
+  hvc_poll
+  hvc_remove
+  __hvc_resize
+  init_on_free
+  __irq_apply_affinity_hint
+  kill_fasync
+  kobject_uevent
+  mutex_trylock
+  page_relinquish
+  page_reporting_register
+  page_reporting_unregister
+  page_shift_compat
+  page_shift_compat_enabled
+>>>>>>> BRANCH (d92a21 ANDROID: mthp: Fixup ABI for reclaim_work)
   pci_alloc_irq_vectors_affinity
   pci_device_is_present
   pci_disable_sriov
@@ -1498,6 +1818,11 @@
   __splice_from_pipe
   string_get_size
   __sysfs_match_string
+<<<<<<< HEAD   (e988ff ANDROID: arm64: dts: mt8186: Add unprovisioned Starmie SKUs)
+||||||| BASE
+=======
+  topology_update_thermal_pressure
+>>>>>>> BRANCH (d92a21 ANDROID: mthp: Fixup ABI for reclaim_work)
   unlock_page
   unregister_blkdev
   __unregister_chrdev
