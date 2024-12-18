@@ -12,9 +12,13 @@
 #define FFA_MIN_FUNC_NUM 0x60
 #define FFA_MAX_FUNC_NUM 0xFF
 
-/* FF-A VM handle - 0 is reserved for the host */
-#define FFA_HANDLE_FROM_HYP_VCPU(hyp_vcpu)	((hyp_vcpu) == NULL ? 0 :\
-	((((hyp_vcpu)->vcpu).kvm->arch.pkvm.handle) - HANDLE_OFFSET + 1))
+#define HYP_FFA_ID	0
+#define HOST_FFA_ID	1
+#define IS_HOST_HANDLE(handle)		((handle) == HOST_FFA_ID)
+
+/* FF-A VM handle 1 is reserved for the host */
+#define FFA_HANDLE_FROM_HYP_VCPU(hyp_vcpu)	((hyp_vcpu) == NULL ? HOST_FFA_ID :\
+	((((hyp_vcpu)->vcpu).kvm->arch.pkvm.handle) - HANDLE_OFFSET + HOST_FFA_ID + 1))
 
 struct ffa_mem_transfer {
 	struct list_head node;
