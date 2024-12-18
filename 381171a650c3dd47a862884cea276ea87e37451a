@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18e9ce52_d5a6283d",
+        "filename": "arch/arm64/coco/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2024-12-18T09:40:33Z",
+      "side": 1,
+      "message": "Make this dependent on CONFIG_HARDENED_GUEST",
+      "revId": "381171a650c3dd47a862884cea276ea87e37451a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
