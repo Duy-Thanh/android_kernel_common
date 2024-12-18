@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12629e8d_2dd84bad",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5190,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-18T19:42:49Z",
+      "side": 1,
+      "message": "How would that work? You might be changing `fault_around_bytes` but that is not used. Instead the system is using `fault_around_pages` and you are not changing that. So, what exactly did you achieve?",
+      "range": {
+        "startLine": 5190,
+        "startChar": 43,
+        "endLine": 5190,
+        "endChar": 61
+      },
+      "revId": "0bbe17404b52fcb36b99d6d07cbd398b3b510032",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
