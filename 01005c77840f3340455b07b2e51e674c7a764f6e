@@ -198,6 +198,30 @@
       },
       "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae755b9a_f84593a8",
+        "filename": "drivers/gpu/drm/i915/display/intel_dp.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 3515397
+      },
+      "writtenOn": "2024-12-18T20:47:46Z",
+      "side": 1,
+      "message": "limits-\u003epipe.max_bpp does not need to look at the max_requested_bpc , it derives it from crtc_state-\u003epipe_bpp and that is computed in compute_pipe_sink_bpp that makes sure that its within the conn_state-\u003emax_bpc range. Whereas limits-\u003epipe.min_bpp is computed using intel_dp_min_bpp so thats where we should check for conn_state--\u003erequested_min_bpc and ensure the min is that. Since limits-\u003epipe.min_bpp will then be used in intel_dp_compute_link_config_wide() to determine link rate lane count by reducing the bpc to min of limits-\u003epipe.min_bpp.  This will determine if for that min requested bpp are the link rate/lane count enough or does it need dsc, if it does then it will check the min bpp and max bpp with DSC in intel_dp_dsc_compute_config .",
+      "parentUuid": "c8295296_86bbc5a4",
+      "range": {
+        "startLine": 1108,
+        "startChar": 1,
+        "endLine": 1108,
+        "endChar": 27
+      },
+      "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
