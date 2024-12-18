@@ -16,6 +16,24 @@
       "message": "The problem we\u0027re having in the Trusty driver is that we\u0027re passing in the value of the guests\u0027s `smp_processor_id()` here, which is the vcpu id which doesn\u0027t match the physical cpu number (0 vs 2 in our case). Is there a way for a guest to get the current physical processor, or should we map it here?\n\nWe should probably stop using `smp_processor_id`, but then we still have the problem of \"which endpoint id does Trusty pass to FFA_RUN?\"",
       "revId": "8833ddb62568582afa6fb320cdd1169746c3babd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ccf6021_9e4153b6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-12-18T21:05:04Z",
+      "side": 1,
+      "message": "Update from an internal Trusty discussion: we decided guests that talk to Trusty will never call `FFA_RUN`. They will just send direct messages instead, and then TZ will raise an interrupt (SRI or another one) to ask the host for more cycles.",
+      "parentUuid": "4221d830_2b217a2e",
+      "revId": "8833ddb62568582afa6fb320cdd1169746c3babd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
