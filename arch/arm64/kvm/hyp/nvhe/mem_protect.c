@@ -2426,11 +2426,8 @@ int __pkvm_host_unshare_ffa(u64 pfn, u64 nr_pages)
 
 static int __pkvm_host_use_dma_page(phys_addr_t phys_addr)
 {
-	int ret;
 	struct hyp_page *p = hyp_phys_to_page(phys_addr);
 	enum pkvm_page_state state;
-	kvm_pte_t pte;
-	enum kvm_pgtable_prot prot;
 
 	hyp_assert_lock_held(&host_mmu.lock);
 
@@ -2444,49 +2441,13 @@ static int __pkvm_host_use_dma_page(phys_addr_t phys_addr)
 	 *   moment which can be improved with more infrastructure to track MMIO
 	 *   pages that ideally comes with device assignment support.
 	 */
-	if (!addr_is_memory(phys_addr)) {
-		ret = kvm_pgtable_get_leaf(&host_mmu.pgt, phys_addr, &pte, NULL);
-		if (ret)
-			return ret;
-		state = host_get_mmio_page_state(pte, phys_addr);
-		if (state == PKVM_PAGE_MMIO_DMA)
-			return 0;
-		if (state != PKVM_PAGE_OWNED)
-			return -EPERM;
-		prot = pkvm_mkstate(PKVM_HOST_MMIO_PROT, PKVM_PAGE_MMIO_DMA);
-		return host_stage2_idmap_locked(phys_addr, PAGE_SIZE, prot, false);
-	}
 
 	state = hyp_phys_to_page(phys_addr)->host_state;
 
-	if (state & (PKVM_NOPAGE | PKVM_MODULE_OWNED_PAGE))
+	if (state != PKVM_PAGE_OWNED)
 		return -EPERM;
 
-	/*
-	 * Technically, this page is accessible by the host, however it seems strange,
-	 * so we don't allow DMA to be mapped to pages accessible from hyp even if the
-	 * host shared the page.
-	 */
-	if (state & PKVM_PAGE_SHARED_BORROWED || state & PKVM_PAGE_SHARED_OWNED) {
-		ret = __hyp_check_page_state_range((u64)hyp_phys_to_virt(phys_addr),
-						   PAGE_SIZE, PKVM_NOPAGE);
-		if (ret)
-			return ret;
-	}
-
 	hyp_page_ref_inc(p);
-
-	return 0;
-}
-
-static int __pkvm_host_unuse_dma_page(phys_addr_t phys_addr)
-{
-	struct hyp_page *p = hyp_phys_to_page(phys_addr);
-
-	if (!addr_is_memory(phys_addr))
-		return 0;
-
-	hyp_page_ref_dec(p);
 
 	return 0;
 }
@@ -2513,18 +2474,24 @@ int __pkvm_host_use_dma(phys_addr_t phys_addr, size_t size)
 
 	host_lock_component();
 	hyp_lock_component();
+	if (!range_is_memory(phys_addr, phys_addr + size)) {
+		enum kvm_pgtable_prot prot;
 
-	for (i = 0; i < nr_pages; i++) {
-		ret = __pkvm_host_use_dma_page(phys_addr + i * PAGE_SIZE);
+		ret = __host_check_page_state_range(phys_addr, phys_addr + size, PKVM_PAGE_MMIO_DMA);
+		if (ret == 0)
+			goto out_ret;
+		ret = __host_check_page_state_range(phys_addr, phys_addr + size, PKVM_PAGE_OWNED);
 		if (ret)
-			break;
+			goto out_ret;
+
+		prot = pkvm_mkstate(PKVM_HOST_MMIO_PROT, PKVM_PAGE_MMIO_DMA);
+		return host_stage2_idmap_locked(phys_addr, phys_addr + size, prot, false);
 	}
 
-	if (ret) {
-		for (--i; i >= 0; --i)
-			__pkvm_host_unuse_dma_page(phys_addr + i * PAGE_SIZE);
-	}
+	for (i = 0; i < nr_pages; i++)
+		WARN_ON(__pkvm_host_use_dma_page(phys_addr + i * PAGE_SIZE));
 
+out_ret:
 	hyp_unlock_component();
 	host_unlock_component();
 
@@ -2534,8 +2501,10 @@ int __pkvm_host_use_dma(phys_addr_t phys_addr, size_t size)
 int __pkvm_host_unuse_dma(phys_addr_t phys_addr, size_t size)
 {
 	int i;
-	int ret = 0;
 	size_t nr_pages = size >> PAGE_SHIFT;
+
+	if (!range_is_memory(phys_addr, phys_addr + size))
+		return 0;
 
 	/*
 	 * We end up here after the caller successfully unmapped the page from
@@ -2543,12 +2512,12 @@ int __pkvm_host_unuse_dma(phys_addr_t phys_addr, size_t size)
 	 * in the host s2, there can be no failure.
 	 */
 	for (i = 0; i < nr_pages; i++) {
-		ret = __pkvm_host_unuse_dma_page(phys_addr + i * PAGE_SIZE);
-		if (ret)
-			break;
+		struct hyp_page *p = hyp_phys_to_page(phys_addr + i * PAGE_SIZE);
+
+		hyp_page_ref_dec(p);
 	}
 
-	return ret;
+	return 0;
 }
 
 int __pkvm_host_share_guest(struct pkvm_hyp_vcpu *vcpu, u64 pfn, u64 gfn,
