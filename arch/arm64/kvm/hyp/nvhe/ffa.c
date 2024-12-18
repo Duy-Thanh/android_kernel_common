@@ -1182,6 +1182,22 @@ static void do_ffa_direct_msg(struct arm_smccc_res *res,
 			  res);
 }
 
+static void do_ffa_run(struct arm_smccc_res *res, struct kvm_cpu_context *ctxt,
+		       u64 vm_handle)
+{
+	DECLARE_REG(u32, func_id, ctxt, 0);
+	DECLARE_REG(u32, endp, ctxt, 1);
+
+	if (FIELD_GET(FFA_SRC_ENDPOINT_MASK, endp) != vm_handle) {
+		ffa_to_smccc_res(res, FFA_RET_INVALID_PARAMETERS);
+		return;
+	}
+
+	arm_smccc_1_1_smc(func_id, endp, 0, 0,
+			  0, 0, 0, 0,
+			  res);
+}
+
 bool kvm_host_ffa_handler(struct kvm_cpu_context *host_ctxt, u32 func_id)
 {
 	struct arm_smccc_res res;
@@ -1245,6 +1261,9 @@ bool kvm_host_ffa_handler(struct kvm_cpu_context *host_ctxt, u32 func_id)
 	case FFA_MSG_SEND_DIRECT_REQ:
 	case FFA_FN64_MSG_SEND_DIRECT_REQ:
 		do_ffa_direct_msg(&res, host_ctxt, HOST_FFA_ID);
+		goto out_handled;
+	case FFA_RUN:
+		do_ffa_run(&res, host_ctxt, HOST_FFA_ID);
 		goto out_handled;
 	}
 
@@ -1316,6 +1335,9 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	case FFA_MSG_SEND_DIRECT_REQ:
 	case FFA_FN64_MSG_SEND_DIRECT_REQ:
 		do_ffa_direct_msg(&res, ctxt, vm_handle);
+		break;
+	case FFA_RUN:
+		do_ffa_run(&res, ctxt, vm_handle);
 		break;
 	default:
 		if (ffa_call_supported(func_id))
