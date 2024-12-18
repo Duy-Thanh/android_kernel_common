@@ -129,6 +129,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a1f689_dc9ddd02",
+        "filename": "drivers/gpu/drm/drm_connector.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2024-12-18T18:27:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "377931f0_5f11f465",
+      "range": {
+        "startLine": 1395,
+        "startChar": 24,
+        "endLine": 1395,
+        "endChar": 50
+      },
+      "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de791be6_f8fda6f6",
@@ -142,6 +166,30 @@
       "writtenOn": "2024-12-17T20:36:58Z",
       "side": 1,
       "message": "Why dont we account for the conn_state-\u003emin_requested_bpc here?, dfp.min_bpc is set to 0, does it get updated to conn_state-\u003emin_requested_bpc somewhere? This is what gets propagated to limits-\u003epipe.min_bpp so we need to account for the minbpc somewhere so that it gets reflected in the limits-\u003epipe.min_bpp",
+      "range": {
+        "startLine": 1108,
+        "startChar": 1,
+        "endLine": 1108,
+        "endChar": 27
+      },
+      "revId": "01005c77840f3340455b07b2e51e674c7a764f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8295296_86bbc5a4",
+        "filename": "drivers/gpu/drm/i915/display/intel_dp.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2024-12-18T18:27:50Z",
+      "side": 1,
+      "message": "We account for `conn_state-\u003emin_requested_bpc` in `intel_dp_dsc_mst_compute_link_config` when we check `limits-\u003epipe.min_bpp`.\n\n`limits-\u003epipe.max_bpp` does not seem to use `conn_state-\u003emax_requested_bpc` either?",
+      "parentUuid": "de791be6_f8fda6f6",
       "range": {
         "startLine": 1108,
         "startChar": 1,
