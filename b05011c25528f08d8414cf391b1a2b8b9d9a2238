@@ -116,6 +116,30 @@
       },
       "revId": "b05011c25528f08d8414cf391b1a2b8b9d9a2238",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8b94106_74b81eaa",
+        "filename": "Documentation/virt/kvm/arm/hypercalls.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-18T17:35:45Z",
+      "side": 1,
+      "message": "Ignore me, I was thinking of invoking the interface through `kvm_call_hyp_nvhe`",
+      "parentUuid": "ffd8fafe_725a9162",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 4
+      },
+      "revId": "b05011c25528f08d8414cf391b1a2b8b9d9a2238",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
