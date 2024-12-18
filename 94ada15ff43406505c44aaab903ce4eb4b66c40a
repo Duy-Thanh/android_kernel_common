@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb74bad_766bb3f0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-12-18T15:34:41Z",
+      "side": 1,
+      "message": "This is the same for all vcpus in the same VM, right?",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "488cfc93_c7983c32",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1179,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-12-18T15:34:41Z",
+      "side": 1,
+      "message": "Do you support FF-A 1.2, or only up to 1.1? On 1.2 the 64-bit SMCs can use 18 registers (up to x17).",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
