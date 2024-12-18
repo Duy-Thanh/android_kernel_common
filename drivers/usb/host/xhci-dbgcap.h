@@ -108,7 +108,7 @@ struct dbc_port {
 	struct tasklet_struct		push;
 
 	struct list_head		write_pool;
-	unsigned int			tx_boundary;
+	struct kfifo			write_fifo;
 
 	bool				registered;
 };

@@ -293,15 +293,13 @@ unsigned long stack_top(void)
 {
 	unsigned long top = TASK_SIZE & PAGE_MASK;
 
-	if (current->thread.vdso) {
-		/* Space for the VDSO & data page */
-		top -= PAGE_ALIGN(current->thread.vdso->size);
-		top -= VVAR_SIZE;
+	/* Space for the VDSO & data page */
+	top -= PAGE_ALIGN(current->thread.vdso->size);
+	top -= VVAR_SIZE;
 
-		/* Space to randomize the VDSO base */
-		if (current->flags & PF_RANDOMIZE)
-			top -= VDSO_RANDOMIZE_SIZE;
-	}
+	/* Space to randomize the VDSO base */
+	if (current->flags & PF_RANDOMIZE)
+		top -= VDSO_RANDOMIZE_SIZE;
 
 	return top;
 }
