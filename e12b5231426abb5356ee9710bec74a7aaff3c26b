@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "661ab783_8ff19d83",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-12-18T17:26:40Z",
+      "side": 1,
+      "message": "This is important if we later extend the HVC to add arguments. We had the problem before, see the line above \"arg|arg3 might be garbage\".",
+      "parentUuid": "75a95f85_3d5bd439",
+      "range": {
+        "startLine": 1471,
+        "startChar": 10,
+        "endLine": 1471,
+        "endChar": 41
+      },
+      "revId": "e12b5231426abb5356ee9710bec74a7aaff3c26b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fef6ed88_fbce2e7f",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-12T15:51:35Z",
       "side": 1,
       "message": "Not necessarily part of this but this seems odd. Why do we get back to the guest when we don\u0027t have memory and we create a memory topup request ? We should return `false` and go back to the host.",
+      "range": {
+        "startLine": 1475,
+        "startChar": 0,
+        "endLine": 1476,
+        "endChar": 14
+      },
+      "revId": "e12b5231426abb5356ee9710bec74a7aaff3c26b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a2fab1_de12172c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-12-18T17:26:40Z",
+      "side": 1,
+      "message": "Arg, I let a patch slip: aosp/2984731 \n\nGood catch!",
+      "parentUuid": "fef6ed88_fbce2e7f",
       "range": {
         "startLine": 1475,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f7f4e09_d905b0ca",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-12-18T17:26:40Z",
+      "side": 1,
+      "message": "Yep, I\u0027ll simplify.",
+      "parentUuid": "b5036a90_e7116de0",
+      "range": {
+        "startLine": 1493,
+        "startChar": 1,
+        "endLine": 1493,
+        "endChar": 19
+      },
+      "revId": "e12b5231426abb5356ee9710bec74a7aaff3c26b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3262240_26d6069d",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2024-12-12T15:51:35Z",
       "side": 1,
       "message": "MAYBE: We should also clean the defconfigs to remove ioguard kernel cmdline as we no longer need it. Can you spin a separate CL for this ?",
+      "range": {
+        "startLine": 1512,
+        "startChar": 3,
+        "endLine": 1512,
+        "endChar": 66
+      },
+      "revId": "e12b5231426abb5356ee9710bec74a7aaff3c26b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "236f617e_8ab544a2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1512,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-12-18T17:26:40Z",
+      "side": 1,
+      "message": "Ha yeah, good point I\u0027ll do something.",
+      "parentUuid": "a3262240_26d6069d",
       "range": {
         "startLine": 1512,
         "startChar": 3,
