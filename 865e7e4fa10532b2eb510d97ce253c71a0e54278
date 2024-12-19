@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e35a1da_4bc5ae65",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-12-19T16:57:00Z",
+      "side": 1,
+      "message": "I\u0027m guessing that this include is no longer required. Right?",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "865e7e4fa10532b2eb510d97ce253c71a0e54278",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
