@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78b0db47_d9e254b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-12-19T16:18:18Z",
+      "side": 1,
+      "message": "Updated the description",
+      "parentUuid": "d19e9576_7bf2de79",
+      "revId": "c22400fb416353b7a5eb6fcc1d57e92637f87401",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f18ec42b_fb4a38cf",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-12-19T16:11:16Z",
       "side": 1,
       "message": "Are you sure this disabling logic will be limited to x86_64?",
+      "range": {
+        "startLine": 2276,
+        "startChar": 29,
+        "endLine": 2276,
+        "endChar": 54
+      },
+      "revId": "c22400fb416353b7a5eb6fcc1d57e92637f87401",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ea3bbe_53323688",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-12-19T16:18:18Z",
+      "side": 1,
+      "message": "Yes and only to 16KB x86_64 which is only the emulators for Android Studio and cuttlefish for CI.\n\nI can change it to PAGE_SIZE !\u003d __PAGE_SIZE if we want to be more sure that this will never be set accidentally even if someone inadvertently specify page_shift\u003d... for arm64 kernels.\n\nhttps://android.googlesource.com/kernel/common/+/efb52cd9204331ad36bf9c815e513f0c1adfa7d4/include/linux/page_size_compat.h#60\n\nhttps://android.googlesource.com/kernel/common/+/efb52cd9204331ad36bf9c815e513f0c1adfa7d4/include/linux/page_size_compat.h#63",
+      "parentUuid": "f18ec42b_fb4a38cf",
       "range": {
         "startLine": 2276,
         "startChar": 29,
