@@ -34,6 +34,24 @@
       "parentUuid": "c509362b_e6a7430d",
       "revId": "8f876925816f2f207d7c91b521d43b22cc10863d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10036c3c_40d78865",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-19T17:02:45Z",
+      "side": 1,
+      "message": "If you change it, then it isn\u0027t UPSTREAM and sould at minimum be BACKPORT. If the changes are functional (not just refactoring for a backport), then you should split it into two patches:\n1) the unmodified upstream patch (either UPSTREAM or BACKPORT)\n2) your Android-specific changes on top of that patch",
+      "parentUuid": "34bf032e_76f0f603",
+      "revId": "8f876925816f2f207d7c91b521d43b22cc10863d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
