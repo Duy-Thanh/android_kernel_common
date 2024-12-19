@@ -16,6 +16,29 @@
       "message": "Could you please include how it was tested?",
       "revId": "c22400fb416353b7a5eb6fcc1d57e92637f87401",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18ec42b_fb4a38cf",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-12-19T16:11:16Z",
+      "side": 1,
+      "message": "Are you sure this disabling logic will be limited to x86_64?",
+      "range": {
+        "startLine": 2276,
+        "startChar": 29,
+        "endLine": 2276,
+        "endChar": 54
+      },
+      "revId": "c22400fb416353b7a5eb6fcc1d57e92637f87401",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
