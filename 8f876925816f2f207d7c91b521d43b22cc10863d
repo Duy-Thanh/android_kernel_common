@@ -16,6 +16,24 @@
       "message": "The upstream version appears to be quite different. Should this be BACKPORT instead?",
       "revId": "8f876925816f2f207d7c91b521d43b22cc10863d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34bf032e_76f0f603",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956079
+      },
+      "writtenOn": "2024-12-19T06:46:38Z",
+      "side": 1,
+      "message": "Yes, we discovered that some apps (like TikTok) were pinning a block of a file, which is not permitted and caused OTA failures. This patch prevents the issue.",
+      "parentUuid": "c509362b_e6a7430d",
+      "revId": "8f876925816f2f207d7c91b521d43b22cc10863d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
