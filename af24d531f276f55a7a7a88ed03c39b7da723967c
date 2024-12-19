@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd90cf93_0d73c4a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3596924
+      },
+      "writtenOn": "2024-12-19T09:09:51Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Cherry pick is clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/2f550553e23c889b54440bf05e2484d84105e48d) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d2f550553e23c889b54440bf05e2484d84105e48d).\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "af24d531f276f55a7a7a88ed03c39b7da723967c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2246bea2_168d5376",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3596924
+      },
+      "writtenOn": "2024-12-19T09:09:51Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Cherry pick is clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/2f550553e23c889b54440bf05e2484d84105e48d) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d2f550553e23c889b54440bf05e2484d84105e48d).\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "af24d531f276f55a7a7a88ed03c39b7da723967c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
