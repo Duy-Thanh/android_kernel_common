@@ -34,6 +34,24 @@
       "parentUuid": "4221d830_2b217a2e",
       "revId": "8833ddb62568582afa6fb320cdd1169746c3babd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f5c3068_1ffa9ace",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-19T10:22:23Z",
+      "side": 1,
+      "message": "Thanks for the update, I think the patch still makes sense even though is not tailored to Trusty (secure OS client). This request should be validated by the hypervisor and I am doing it as the spec suggests.",
+      "parentUuid": "0ccf6021_9e4153b6",
+      "revId": "8833ddb62568582afa6fb320cdd1169746c3babd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
