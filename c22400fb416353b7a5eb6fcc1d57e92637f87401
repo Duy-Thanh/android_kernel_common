@@ -105,6 +105,30 @@
       },
       "revId": "c22400fb416353b7a5eb6fcc1d57e92637f87401",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e3a55d_bb5dc882",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-12-19T16:30:33Z",
+      "side": 1,
+      "message": "That\u0027ll be great. Stricter the condition, better it is. This would have serious ramifications if we go wrong.\n\nIn fact, isn\u0027t it possible to disable it in the userspace instead? We have a build-time soong flag to control the GC type. Can\u0027t we use that instead of this change in the kernel?",
+      "parentUuid": "2a372806_ecd6b28d",
+      "range": {
+        "startLine": 2276,
+        "startChar": 29,
+        "endLine": 2276,
+        "endChar": 54
+      },
+      "revId": "c22400fb416353b7a5eb6fcc1d57e92637f87401",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

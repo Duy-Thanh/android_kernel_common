@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1698092_24e9ab02",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-12-19T16:30:33Z",
+      "side": 1,
+      "message": "I thought you wanted it to be `__PAGE_SIZE`",
+      "range": {
+        "startLine": 2276,
+        "startChar": 5,
+        "endLine": 2276,
+        "endChar": 17
+      },
+      "revId": "0dff497f67944a6f4d885aa71424bbc95f083785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
