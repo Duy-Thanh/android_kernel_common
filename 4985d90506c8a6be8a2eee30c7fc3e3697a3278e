@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79595d8d_e42a1c86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-20T01:36:30Z",
+      "side": 1,
+      "message": "Thanks for the improvement!",
+      "parentUuid": "ca09bbd7_2c2735c3",
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b8c9719_03600f71",
         "filename": "drivers/staging/android/ashmem.c",
         "patchSetId": 12
