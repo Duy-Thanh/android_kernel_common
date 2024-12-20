@@ -110,6 +110,30 @@
       },
       "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe828bc_66d69bf7",
+        "filename": "include/linux/usb/typec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2024-12-20T18:17:27Z",
+      "side": 1,
+      "message": "Fixed on top of chain: aosp/3424148",
+      "parentUuid": "b261a0db_869a837b",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 21
+      },
+      "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
