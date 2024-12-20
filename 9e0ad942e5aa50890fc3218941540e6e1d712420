@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be84499b_c3f4fc76",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-12-20T10:16:34Z",
+      "side": 1,
+      "message": "Can we optimize this for when only the system pool is used? Most existing users should fall in that category and probably don\u0027t want that overhead.",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 38
+      },
+      "revId": "9e0ad942e5aa50890fc3218941540e6e1d712420",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
