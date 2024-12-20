@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "130fa0eb_e39bdbe8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-20T01:27:30Z",
+      "side": 1,
+      "message": "Right. I did this so that we could switch it early during boot for experiments. I\u0027ll double check about when experiment flags are available.",
+      "parentUuid": "a3444315_24a3f3d7",
+      "range": {
+        "startLine": 10,
+        "startChar": 59,
+        "endLine": 12,
+        "endChar": 7
+      },
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13351514_47885105",
         "filename": "/COMMIT_MSG",
         "patchSetId": 12
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca09bbd7_2c2735c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-20T01:27:30Z",
+      "side": 1,
+      "message": "I added a bit more to the commit message, but it is not yet complete.",
+      "parentUuid": "13351514_47885105",
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b8c9719_03600f71",
         "filename": "drivers/staging/android/ashmem.c",
         "patchSetId": 12
@@ -54,6 +96,30 @@
       "writtenOn": "2024-11-26T19:33:52Z",
       "side": 1,
       "message": "Instead of renaming all these functions into *_legacy, can we simply add a condition right here:\n\n```\n\tif (ashmem_memfd_compat_enable)\n\t\treturn ashmem_memfd_open(inode, file);\n```\n\nThis seems to create less churn.",
+      "range": {
+        "startLine": 260,
+        "startChar": 11,
+        "endLine": 260,
+        "endChar": 29
+      },
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f51bc69_5fb4b789",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-20T01:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b8c9719_03600f71",
       "range": {
         "startLine": 260,
         "startChar": 11,
@@ -87,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee6f2981_2a63dac5",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-20T01:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74fce7b0_489746b7",
+      "range": {
+        "startLine": 925,
+        "startChar": 12,
+        "endLine": 925,
+        "endChar": 37
+      },
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63b8baa0_716b13cb",
@@ -100,6 +190,30 @@
       "writtenOn": "2024-12-18T00:13:09Z",
       "side": 1,
       "message": "This sysfs node and all the new functions should be compiled only if CONFIG_MEMFD_ASHMEM_COMPAT is defined, correct? If so I think you are missing some $ifdefs here, which is another reason to move most of this code into mm/ashmem_compat.{h|c}",
+      "range": {
+        "startLine": 1204,
+        "startChar": 20,
+        "endLine": 1204,
+        "endChar": 42
+      },
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00640e24_04c74aa0",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-20T01:27:30Z",
+      "side": 1,
+      "message": "Done. I only left the sysfs bits here, since the driver is the only one that is concerned with that information; mm/ashmem_compat.c shouldn\u0027t have to implement that.",
+      "parentUuid": "63b8baa0_716b13cb",
       "range": {
         "startLine": 1204,
         "startChar": 20,
