@@ -856,7 +856,11 @@ static bool f2fs_force_buffered_io(struct inode *inode, int rw)
 		return true;
 	if (f2fs_compressed_file(inode))
 		return true;
-	if (f2fs_has_inline_data(inode))
+	/*
+	 * only force direct read to use buffered IO, for direct write,
+	 * it expects inline data conversion before committing IO.
+	 */
+	if (f2fs_has_inline_data(inode) && rw == READ)
 		return true;
 
 	/* disallow direct IO if any of devices has unaligned blksize */
@@ -3695,7 +3699,15 @@ static int reserve_compress_blocks(struct dnode_of_data *dn, pgoff_t count,
 		reserved = cluster_size - compr_blocks;
 
 		/* for the case all blocks in cluster were reserved */
+<<<<<<< HEAD   (c80fef Revert "sock_diag: add module pointer to "struct sock_diag_h)
 		if (reserved == 1)
+||||||| BASE
+		if (to_reserved == 1) {
+			dn->ofs_in_node += cluster_size;
+=======
+		if (reserved && to_reserved == 1) {
+			dn->ofs_in_node += cluster_size;
+>>>>>>> BRANCH (749a91 usb: dwc3: ep0: Don't clear ep0 DWC3_EP_TRANSFER_STARTED)
 			goto next;
 
 		ret = inc_valid_block_count(sbi, dn->inode, &reserved, false);
