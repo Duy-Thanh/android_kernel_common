@@ -16,6 +16,24 @@
       "message": "Will upload symbol update but stuck",
       "revId": "29cf3ed6433c4f4f09c8fcd21ac08dca5f0fb04e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8cf50d1_99b2ad46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2024-12-20T19:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecc5545e_5fe9743f",
+      "revId": "29cf3ed6433c4f4f09c8fcd21ac08dca5f0fb04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
