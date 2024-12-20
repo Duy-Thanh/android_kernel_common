@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f9c768_924753ce",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-20T01:28:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c90d4412_cf1b8eba",
+      "revId": "2223a48f38bca7bb460d7fb031e57146ed57a3ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b05c1bd8_5ad63859",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-11-26T19:17:48Z",
       "side": 1,
       "message": "A comment for each of these commands about why ignoring it is fine would be helpful.",
+      "range": {
+        "startLine": 267,
+        "startChar": 1,
+        "endLine": 278,
+        "endChar": 8
+      },
+      "revId": "2223a48f38bca7bb460d7fb031e57146ed57a3ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ce13894_2f4b283d",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-20T01:28:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b05c1bd8_5ad63859",
       "range": {
         "startLine": 267,
         "startChar": 1,
