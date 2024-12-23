@@ -16,6 +16,24 @@
       "message": "If you want to enable gcma, perhaps erofs should also enable cleancache.",
       "revId": "86596cf8418e23bfa93fd9977390983fc1ca1aef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "179af01d_442f9c5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-23T02:07:02Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.\n\nGCMA is not upstream yet, so we are not planning to include it in GKI.",
+      "parentUuid": "f7e3c7a7_66fd95ef",
+      "revId": "86596cf8418e23bfa93fd9977390983fc1ca1aef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
