@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a51741e2_a871795f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-23T17:58:01Z",
+      "side": 1,
+      "message": "Needs a \"Bug:\" tag with rationale for reversion. Please include a line here describing the issue. \"for test\" is not sufficient.",
+      "revId": "c0823653903f2c66992c9ee240665afcdeb259ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
