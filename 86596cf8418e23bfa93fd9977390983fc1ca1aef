@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7e3c7a7_66fd95ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2024-12-23T01:37:26Z",
+      "side": 1,
+      "message": "If you want to enable gcma, perhaps erofs should also enable cleancache.",
+      "revId": "86596cf8418e23bfa93fd9977390983fc1ca1aef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
