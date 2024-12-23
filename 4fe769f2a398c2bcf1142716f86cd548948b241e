@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/385677718",
       "revId": "4fe769f2a398c2bcf1142716f86cd548948b241e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a008d63_5cf30afc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-23T18:10:10Z",
+      "side": 1,
+      "message": "KernelCommit issue is a bug in the tool. The FROMGIT annotation is present, but the tool is confused by the cherry-pick annotation from the android15-6.6.",
+      "revId": "4fe769f2a398c2bcf1142716f86cd548948b241e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
