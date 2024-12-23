@@ -16,6 +16,24 @@
       "message": "Needs a \"Bug:\" tag with rationale for reversion. Please include a line here describing the issue. \"for test\" is not sufficient.",
       "revId": "c0823653903f2c66992c9ee240665afcdeb259ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90be19e8_8163809e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2024-12-23T18:46:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a51741e2_a871795f",
+      "revId": "c0823653903f2c66992c9ee240665afcdeb259ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
