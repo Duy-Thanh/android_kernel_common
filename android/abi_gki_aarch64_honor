@@ -244,3 +244,5 @@
   __tracepoint_android_vh_wq_wake_idle_worker
   __traceiter_android_vh_mutex_unlock_slowpath_bf_wakeq
   __tracepoint_android_vh_mutex_unlock_slowpath_bf_wakeq
+  __tracepoint_android_vh_tune_fault_around_pages
+  __traceiter_android_vh_tune_fault_around_pages
