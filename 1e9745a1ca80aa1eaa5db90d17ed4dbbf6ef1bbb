@@ -16,6 +16,23 @@
       "message": "Delete please",
       "revId": "1e9745a1ca80aa1eaa5db90d17ed4dbbf6ef1bbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "219deed6_b34dfc19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3804031
+      },
+      "writtenOn": "2024-12-24T06:09:01Z",
+      "side": 1,
+      "message": "Disable",
+      "revId": "1e9745a1ca80aa1eaa5db90d17ed4dbbf6ef1bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
