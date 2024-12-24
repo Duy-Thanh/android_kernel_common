@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2fa7ee4_e0f346a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-12-24T20:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ebf6a0e_4a4c7706",
+      "range": {
+        "startLine": 28,
+        "startChar": 37,
+        "endLine": 28,
+        "endChar": 40
+      },
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03188d74_c88c9dba",
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00e0cf54_6881c685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-12-24T20:12:41Z",
+      "side": 1,
+      "message": "To backport this change with minimal diff, we need to backport huge number of other commits due to there are significant changes in multiple core structures and functions which are not relevant to the feature we wanted to backport. Bringing those many changes is very risky now and increases the maintenance work as well, as we need to monitor the bug/regression fixes of the all the backported changes.\n\nWe have carefully reviewed and refactored the actual commit changes for current code base and validated internally. Adding Mahesh from Google\u0027s Wi-Fi team also to review the changes to review the changes.",
+      "parentUuid": "03188d74_c88c9dba",
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "936ba2ad_565d8440",
         "filename": "drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c",
         "patchSetId": 2
@@ -54,6 +96,30 @@
       "writtenOn": "2024-12-10T17:51:59Z",
       "side": 1,
       "message": "This is not part of the original patch. Are you somehow folding in parts of `ce1fa3adc007 (\"wifi: iwlwifi: mvm: refactor duplicate chanctx condition\")` without mention?  Was there a reason not to cherry-pick that one separately instead?",
+      "range": {
+        "startLine": 4744,
+        "startChar": 5,
+        "endLine": 4744,
+        "endChar": 37
+      },
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e20aee3_a953190f",
+        "filename": "drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4744,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-12-24T20:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "936ba2ad_565d8440",
       "range": {
         "startLine": 4744,
         "startChar": 5,
@@ -87,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f10cc8ef_5dc22546",
+        "filename": "include/linux/ieee80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3147,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-12-24T20:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bde98fb_c474f002",
+      "range": {
+        "startLine": 3147,
+        "startChar": 0,
+        "endLine": 3147,
+        "endChar": 37
+      },
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6363321_43d07680",
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cac9b1b_4d8003d6",
+        "filename": "include/net/mac80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-12-24T20:12:41Z",
+      "side": 1,
+      "message": "I think there shouldn\u0027t be any issue as long as there is no reuse of same bit number for multiple entries. \nAnyways, I don\u0027t see any issue using BIT(6) and skip BIT(5) assigment. I will correct this.",
+      "parentUuid": "a6363321_43d07680",
+      "range": {
+        "startLine": 227,
+        "startChar": 39,
+        "endLine": 227,
+        "endChar": 45
+      },
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa94f496_f09de551",
@@ -123,6 +237,24 @@
       "writtenOn": "2024-12-10T17:51:59Z",
       "side": 1,
       "message": "there seeems to be some chunk missing here from the original patch due to some conflict too I suppose (missing dependency) but this resolution isn\u0027t mentioned either.",
+      "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5979940f_dc227b66",
+        "filename": "net/mac80211/mlme.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-12-24T20:12:41Z",
+      "side": 1,
+      "message": "This is due to those changes not applicable to android15-6.6 code base. the commits which introduced base code it self is not present in  android15-6.6",
+      "parentUuid": "fa94f496_f09de551",
       "revId": "e74d013c795bf0d1b00ca6547964928f89facea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
