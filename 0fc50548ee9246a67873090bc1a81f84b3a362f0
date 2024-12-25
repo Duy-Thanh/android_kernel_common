@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f54445a9_0ca5840d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2024-12-25T09:05:43Z",
+      "side": 1,
+      "message": "There is no `deferred-free-helper.h` on `android16-6.12`",
+      "revId": "0fc50548ee9246a67873090bc1a81f84b3a362f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e97cd310_a8bfc07e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2024-12-25T09:05:43Z",
+      "side": 1,
+      "message": "There is no `deferred-free-helper.h` on android16-6.12",
+      "revId": "0fc50548ee9246a67873090bc1a81f84b3a362f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
