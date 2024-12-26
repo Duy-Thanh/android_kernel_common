@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2310e1d4_72b3a85d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-12-26T20:19:02Z",
+      "side": 1,
+      "message": "Adding the AOA usb patch set to Android16-6.12 kernel as the userspace function_fs migration will not be ready until 25q4. \n\nandroid_f_midi.c has been removed as Android has pivoted to using upstream functionality (see aosp/3273531) for the midi patch.",
+      "revId": "d490e51424b6f52023f75c3aff1b0a23bdce9e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
