@@ -430,6 +430,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_aes_encrypt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inode_io_list_del);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inode_lru_isolate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_invalidate_mapping_pagevec);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_iovad_alloc_iova);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_iovad_free_iova);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ipi_stop);
@@ -465,6 +466,14 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_offline);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_online);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_id_remove);
+<<<<<<< HEAD   (c8256bd06dc53dcb6425adeaeec91639d274187b ANDROID: ABI: add allowed list for galaxy)
+||||||| BASE   (1c86cd5c39452049ce86298942c99e7da54aa62d ANDROID: gki/x86: update abi.stg + symbols/desktop)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_over_high_reclaim);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_over_high_penalty);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_over_high_penalty);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_over_high_reclaim);
+>>>>>>> CHANGE (233c28c7d9d962c3bf01b0b5719006bd8a187f42 ANDROID: fs: add vendor hook to collect IO statistics)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_meminfo_cache_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_meminfo_proc_show);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mglru_aging_bypass);
