@@ -62,6 +62,7 @@
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
 
+<<<<<<< HEAD   (9331e8caf0b91bc59e1c69068a59bf93d5e8a31a ANDROID: Update kernel.afdo to 6.18.32)
 /*
  * trace_android_vh_unlock_mmap_bypass is called in mm/internal.h
  * by including trace/hooks/mm.h directly, which will result in build-err.
@@ -73,6 +74,9 @@ void _trace_android_vh_unlock_mmap_bypass(struct vm_fault *vmf,
 	trace_android_vh_unlock_mmap_bypass(vmf, fpin, bypass);
 }
 
+||||||| BASE   (905751c077aa64c6ae6e96168242c3e7c5fa9742 Merge 6.12.9 into android16-6.12)
+=======
+>>>>>>> CHANGE (74ae8d16a99681b567aa84d6ed643110ab4c3a76 ANDROID: fs: add vendor hook to collect IO statistics)
 /*
  * FIXME: remove all knowledge of the buffer layer from the core VM
  */
@@ -4426,6 +4430,7 @@ retry:
 			if (unlikely(status < 0))
 				break;
 		}
+		trace_android_vh_io_statistics(mapping, folio->index, 1, false, false);
 		cond_resched();
 
 		if (unlikely(status == 0)) {

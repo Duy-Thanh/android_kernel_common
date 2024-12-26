@@ -100,6 +100,7 @@ DECLARE_HOOK(android_vh_mem_cgroup_alloc,
 DECLARE_HOOK(android_vh_mem_cgroup_free,
 	TP_PROTO(struct mem_cgroup *memcg),
 	TP_ARGS(memcg));
+<<<<<<< HEAD   (9331e8caf0b91bc59e1c69068a59bf93d5e8a31a ANDROID: Update kernel.afdo to 6.18.32)
 DECLARE_HOOK(android_vh_mem_cgroup_id_remove,
 	TP_PROTO(struct mem_cgroup *memcg),
 	TP_ARGS(memcg));
@@ -384,6 +385,47 @@ DECLARE_HOOK(android_vh_page_add_new_anon_rmap,
 	TP_PROTO(struct page *page, struct vm_area_struct *vma,
 		unsigned long address),
 	TP_ARGS(page, vma, address));
+||||||| BASE   (905751c077aa64c6ae6e96168242c3e7c5fa9742 Merge 6.12.9 into android16-6.12)
+
+struct cma;
+DECLARE_HOOK(android_vh_cma_alloc_bypass,
+	TP_PROTO(struct cma *cma, unsigned long count, unsigned int align,
+		gfp_t gfp_mask, struct page **page, bool *bypass),
+	TP_ARGS(cma, count, align, gfp_mask, page, bypass));
+
+struct compact_control;
+DECLARE_HOOK(android_vh_isolate_freepages,
+	TP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),
+	TP_ARGS(cc, page, bypass));
+
+struct oom_control;
+DECLARE_HOOK(android_vh_oom_check_panic,
+	TP_PROTO(struct oom_control *oc, int *ret),
+	TP_ARGS(oc, ret));
+
+=======
+DECLARE_HOOK(android_vh_io_statistics,
+	TP_PROTO(struct address_space *mapping, unsigned int index,
+		unsigned int nr_page, bool read, bool direct),
+	TP_ARGS(mapping, index, nr_page, read, direct));
+
+struct cma;
+DECLARE_HOOK(android_vh_cma_alloc_bypass,
+	TP_PROTO(struct cma *cma, unsigned long count, unsigned int align,
+		gfp_t gfp_mask, struct page **page, bool *bypass),
+	TP_ARGS(cma, count, align, gfp_mask, page, bypass));
+
+struct compact_control;
+DECLARE_HOOK(android_vh_isolate_freepages,
+	TP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),
+	TP_ARGS(cc, page, bypass));
+
+struct oom_control;
+DECLARE_HOOK(android_vh_oom_check_panic,
+	TP_PROTO(struct oom_control *oc, int *ret),
+	TP_ARGS(oc, ret));
+
+>>>>>>> CHANGE (74ae8d16a99681b567aa84d6ed643110ab4c3a76 ANDROID: fs: add vendor hook to collect IO statistics)
 struct page_vma_mapped_walk;
 DECLARE_HOOK(android_vh_test_clear_look_around_ref,
 	TP_PROTO(struct page *page),

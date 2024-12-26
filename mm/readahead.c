@@ -128,6 +128,7 @@
 #include <linux/blk-cgroup.h>
 #include <linux/fadvise.h>
 #include <linux/sched/mm.h>
+#include <trace/hooks/mm.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/readahead.h>
@@ -295,8 +296,17 @@ void page_cache_ra_unbounded(struct readahead_control *ractl,
 			continue;
 		}
 
+<<<<<<< HEAD   (9331e8caf0b91bc59e1c69068a59bf93d5e8a31a ANDROID: Update kernel.afdo to 6.18.32)
 		folio = ractl_alloc_folio(ractl, gfp_mask,
 					mapping_min_folio_order(mapping));
+||||||| BASE   (905751c077aa64c6ae6e96168242c3e7c5fa9742 Merge 6.12.9 into android16-6.12)
+		folio = filemap_alloc_folio(gfp_mask,
+					    mapping_min_folio_order(mapping));
+=======
+		trace_android_vh_io_statistics(mapping, index + i, 1, true, false);
+		folio = filemap_alloc_folio(gfp_mask,
+					    mapping_min_folio_order(mapping));
+>>>>>>> CHANGE (74ae8d16a99681b567aa84d6ed643110ab4c3a76 ANDROID: fs: add vendor hook to collect IO statistics)
 		if (!folio)
 			break;
 

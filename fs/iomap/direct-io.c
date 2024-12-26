@@ -7,7 +7,12 @@
 #include <linux/pagemap.h>
 #include <linux/iomap.h>
 #include <linux/task_io_accounting_ops.h>
+<<<<<<< HEAD   (9331e8caf0b91bc59e1c69068a59bf93d5e8a31a ANDROID: Update kernel.afdo to 6.18.32)
 #include "internal.h"
+||||||| BASE   (905751c077aa64c6ae6e96168242c3e7c5fa9742 Merge 6.12.9 into android16-6.12)
+=======
+#include <trace/hooks/mm.h>
+>>>>>>> CHANGE (74ae8d16a99681b567aa84d6ed643110ab4c3a76 ANDROID: fs: add vendor hook to collect IO statistics)
 #include "trace.h"
 
 #include "../internal.h"
@@ -439,6 +444,8 @@ static int iomap_dio_bio_iter(struct iomap_iter *iter, struct iomap_dio *dio)
 			goto out;
 		}
 
+		trace_android_vh_io_statistics(inode->i_mapping, pos >> inode->i_blkbits,
+					nr_pages, !(dio->flags & IOMAP_DIO_WRITE), true);
 		bio = iomap_dio_alloc_bio(iter, dio, nr_pages, bio_opf);
 		fscrypt_set_bio_crypt_ctx(bio, inode, pos >> inode->i_blkbits,
 					  GFP_KERNEL);
