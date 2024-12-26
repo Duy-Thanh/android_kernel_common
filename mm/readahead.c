@@ -128,6 +128,7 @@
 #include <linux/blk-cgroup.h>
 #include <linux/fadvise.h>
 #include <linux/sched/mm.h>
+#include <trace/hooks/mm.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/readahead.h>
@@ -297,6 +298,9 @@ void page_cache_ra_unbounded(struct readahead_control *ractl,
 
 		folio = ractl_alloc_folio(ractl, gfp_mask,
 					mapping_min_folio_order(mapping));
+		trace_android_vh_io_statistics(mapping, index + i, 1, true, false);
+		folio = filemap_alloc_folio(gfp_mask,
+					    mapping_min_folio_order(mapping));
 		if (!folio)
 			break;
 
