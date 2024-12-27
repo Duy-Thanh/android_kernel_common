@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d971e5_0fd8f3d9",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-27T23:35:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41a36f4c_73cead7c",
+      "range": {
+        "startLine": 96,
+        "startChar": 1,
+        "endLine": 96,
+        "endChar": 30
+      },
+      "revId": "1b2663eeff237c36427dc807af4dfb90abcfff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b23552a8_b68fe234",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-27T23:29:05Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 175,
+        "startChar": 5,
+        "endLine": 175,
+        "endChar": 21
+      },
+      "revId": "1b2663eeff237c36427dc807af4dfb90abcfff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbd63b5a_40f6ab4d",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-27T23:35:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b23552a8_b68fe234",
       "range": {
         "startLine": 175,
         "startChar": 5,
