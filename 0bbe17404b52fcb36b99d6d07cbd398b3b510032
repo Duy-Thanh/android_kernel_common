@@ -22,6 +22,30 @@
       },
       "revId": "0bbe17404b52fcb36b99d6d07cbd398b3b510032",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0fe697c_a4367b2e",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5190,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2024-12-27T08:51:47Z",
+      "side": 1,
+      "message": "I got it; the new patch has been submitted; our goal is to adapt the old solution to the new kernel, with this vendor_hook, oem can dynamically adjust fault_around_pages to\nbalance memory usage and performance。",
+      "parentUuid": "12629e8d_2dd84bad",
+      "range": {
+        "startLine": 5190,
+        "startChar": 43,
+        "endLine": 5190,
+        "endChar": 61
+      },
+      "revId": "0bbe17404b52fcb36b99d6d07cbd398b3b510032",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
