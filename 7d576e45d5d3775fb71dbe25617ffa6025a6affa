@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08fadc3_d476fde4",
+        "filename": "drivers/staging/android/ashmem_range.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-27T21:15:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a6049ab7_34a268d9",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 29
+      },
+      "revId": "7d576e45d5d3775fb71dbe25617ffa6025a6affa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf1bc7c6_4b840da8",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "That was not the intent ...",
       "parentUuid": "bf1bc7c6_4b840da8",
+      "range": {
+        "startLine": 161,
+        "startChar": 15,
+        "endLine": 161,
+        "endChar": 44
+      },
+      "revId": "7d576e45d5d3775fb71dbe25617ffa6025a6affa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15508cba_45ce2de6",
+        "filename": "drivers/staging/android/ashmem_range.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-27T21:15:58Z",
+      "side": 1,
+      "message": "Hmm. Then how does that work? We loop and stop once the range is before the specified page address. That means ranges should start at a higher address and move down until we pass the specified page, no?",
+      "parentUuid": "dd303394_f243c2de",
       "range": {
         "startLine": 161,
         "startChar": 15,
