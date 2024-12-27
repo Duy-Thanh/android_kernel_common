@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6049ab7_34a268d9",
+        "filename": "drivers/staging/android/ashmem_range.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-27T19:37:03Z",
+      "side": 1,
+      "message": "Yeah, I believe so.",
+      "parentUuid": "8ece150d_1f32f23b",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 29
+      },
+      "revId": "7d576e45d5d3775fb71dbe25617ffa6025a6affa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf1bc7c6_4b840da8",
         "filename": "drivers/staging/android/ashmem_range.rs",
         "patchSetId": 14
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-26T23:03:09Z",
       "side": 1,
       "message": "Are ranges ordered from higher-address to lower-address ones?",
+      "range": {
+        "startLine": 161,
+        "startChar": 15,
+        "endLine": 161,
+        "endChar": 44
+      },
+      "revId": "7d576e45d5d3775fb71dbe25617ffa6025a6affa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd303394_f243c2de",
+        "filename": "drivers/staging/android/ashmem_range.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-27T19:37:03Z",
+      "side": 1,
+      "message": "That was not the intent ...",
+      "parentUuid": "bf1bc7c6_4b840da8",
       "range": {
         "startLine": 161,
         "startChar": 15,
