@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a1d44f8_a5b6d5ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2024-12-27T18:26:10Z",
+      "side": 1,
+      "message": "Is this not the same as aosp/3217623 but without the actual code-change?",
+      "revId": "312a7aac963f5416652f10d345305705f6f68135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
