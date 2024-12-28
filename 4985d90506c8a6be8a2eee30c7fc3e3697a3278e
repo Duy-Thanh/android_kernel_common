@@ -101,6 +101,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f57671d_1597d949",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-28T02:15:07Z",
+      "side": 1,
+      "message": "Added more info. Should be good now!",
+      "parentUuid": "79595d8d_e42a1c86",
+      "revId": "4985d90506c8a6be8a2eee30c7fc3e3697a3278e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b8c9719_03600f71",
