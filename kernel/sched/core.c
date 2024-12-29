@@ -4186,9 +4186,6 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	if (READ_ONCE(p->on_rq) && ttwu_runnable(p, wake_flags))
 		goto unlock;
 
-	if (READ_ONCE(p->__state) & TASK_UNINTERRUPTIBLE)
-		trace_sched_blocked_reason(p);
-
 #ifdef CONFIG_SMP
 	/*
 	 * Ensure we load p->on_cpu _after_ p->on_rq, otherwise it would be
@@ -6415,6 +6412,7 @@ pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 static void __sched notrace __schedule(unsigned int sched_mode)
 {
 	struct task_struct *prev, *next;
+	bool block = false;
 	unsigned long *switch_count;
 	unsigned long prev_state;
 	struct rq_flags rf;
@@ -6496,6 +6494,7 @@ static void __sched notrace __schedule(unsigned int sched_mode)
 			}
 		}
 		switch_count = &prev->nvcsw;
+		block = true;
 	}
 
 	next = pick_next_task(rq, prev, &rf);
@@ -6533,6 +6532,14 @@ static void __sched notrace __schedule(unsigned int sched_mode)
 		psi_sched_switch(prev, next, !task_on_rq_queued(prev));
 
 		trace_sched_switch(sched_mode & SM_MASK_PREEMPT, prev, next);
+
+		if (block && (prev_state & TASK_UNINTERRUPTIBLE)
+			&& trace_sched_blocked_reason_enabled()) {
+			unsigned long blocked_func = 0;
+
+			stack_trace_save_tsk(prev, &blocked_func, 1, 0);
+			trace_sched_blocked_reason(prev, (void *)blocked_func);
+		}
 
 		/* Also unlocks the rq: */
 		rq = context_switch(rq, prev, next, &rf);
