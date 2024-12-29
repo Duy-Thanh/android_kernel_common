@@ -4186,9 +4186,6 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	if (READ_ONCE(p->on_rq) && ttwu_runnable(p, wake_flags))
 		goto unlock;
 
-	if (READ_ONCE(p->__state) & TASK_UNINTERRUPTIBLE)
-		trace_sched_blocked_reason(p);
-
 #ifdef CONFIG_SMP
 	/*
 	 * Ensure we load p->on_cpu _after_ p->on_rq, otherwise it would be
@@ -6415,6 +6412,21 @@ pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 static void __sched notrace __schedule(unsigned int sched_mode)
 {
 	struct task_struct *prev, *next;
+<<<<<<< HEAD   (757ec6fbfcf9797b300759b2398984c207875288 ANDROID: dm-bow: Fix Use-After-free in dm_bow_dtr())
+||||||| BASE   (5301f9b4728c51fb024ae2cf51beff4ba6414986 UPSTREAM: arm64: mm: Test for pmd_sect() in vmemmap_check_pm)
+	/*
+	 * On PREEMPT_RT kernel, SM_RTLOCK_WAIT is noted
+	 * as a preemption by schedule_debug() and RCU.
+	 */
+	bool preempt = sched_mode > SM_NONE;
+=======
+	/*
+	 * On PREEMPT_RT kernel, SM_RTLOCK_WAIT is noted
+	 * as a preemption by schedule_debug() and RCU.
+	 */
+	bool preempt = sched_mode > SM_NONE;
+	bool block = false;
+>>>>>>> CHANGE (b24c1517d9cc137d7ad4d356cc68fd94680ab998 ANDROID: Fix invalid caller output in trace_sched_blocked_re)
 	unsigned long *switch_count;
 	unsigned long prev_state;
 	struct rq_flags rf;
@@ -6495,6 +6507,14 @@ static void __sched notrace __schedule(unsigned int sched_mode)
 				delayacct_blkio_start();
 			}
 		}
+<<<<<<< HEAD   (757ec6fbfcf9797b300759b2398984c207875288 ANDROID: dm-bow: Fix Use-After-free in dm_bow_dtr())
+||||||| BASE   (5301f9b4728c51fb024ae2cf51beff4ba6414986 UPSTREAM: arm64: mm: Test for pmd_sect() in vmemmap_check_pm)
+	} else if (!preempt && prev_state) {
+		try_to_block_task(rq, prev, prev_state, !task_is_blocked(prev));
+=======
+	} else if (!preempt && prev_state) {
+		block = try_to_block_task(rq, prev, prev_state, !task_is_blocked(prev));
+>>>>>>> CHANGE (b24c1517d9cc137d7ad4d356cc68fd94680ab998 ANDROID: Fix invalid caller output in trace_sched_blocked_re)
 		switch_count = &prev->nvcsw;
 	}
 
@@ -6533,6 +6553,14 @@ static void __sched notrace __schedule(unsigned int sched_mode)
 		psi_sched_switch(prev, next, !task_on_rq_queued(prev));
 
 		trace_sched_switch(sched_mode & SM_MASK_PREEMPT, prev, next);
+
+		if (block && (prev_state & TASK_UNINTERRUPTIBLE)
+			&& trace_sched_blocked_reason_enabled()) {
+			unsigned long blocked_func = 0;
+
+			stack_trace_save_tsk(prev, &blocked_func, 1, 0);
+			trace_sched_blocked_reason(prev, (void *)blocked_func);
+		}
 
 		/* Also unlocks the rq: */
 		rq = context_switch(rq, prev, next, &rf);
