@@ -593,6 +593,7 @@ nfsd4_access(struct svc_rqst *rqstp, struct nfsd4_compound_state *cstate,
 			   &access->ac_supported);
 }
 
+<<<<<<< HEAD   (0d8c2e Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
 static void gen_boot_verifier(nfs4_verifier *verifier, struct net *net)
 {
 	__be32 *verf = (__be32 *)verifier->data;
@@ -602,6 +603,18 @@ static void gen_boot_verifier(nfs4_verifier *verifier, struct net *net)
 	nfsd_copy_boot_verifier(verf, net_generic(net, nfsd_net_id));
 }
 
+||||||| BASE
+static void gen_boot_verifier(nfs4_verifier *verifier, struct net *net)
+{
+	__be32 *verf = (__be32 *)verifier->data;
+
+	BUILD_BUG_ON(2*sizeof(*verf) != sizeof(verifier->data));
+
+	nfsd_copy_write_verifier(verf, net_generic(net, nfsd_net_id));
+}
+
+=======
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 static __be32
 nfsd4_commit(struct svc_rqst *rqstp, struct nfsd4_compound_state *cstate,
 	     union nfsd4_op_u *u)
@@ -1123,6 +1136,13 @@ void nfs4_put_copy(struct nfsd4_copy *copy)
 {
 	if (!refcount_dec_and_test(&copy->refcount))
 		return;
+<<<<<<< HEAD   (0d8c2e Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
+||||||| BASE
+	kfree(copy->cp_src);
+=======
+	atomic_dec(&copy->cp_nn->pending_async_copies);
+	kfree(copy->cp_src);
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 	kfree(copy);
 }
 
@@ -1500,9 +1520,20 @@ static const struct nfsd4_callback_ops nfsd4_cb_offload_ops = {
 static void nfsd4_init_copy_res(struct nfsd4_copy *copy, bool sync)
 {
 	copy->cp_res.wr_stable_how =
+<<<<<<< HEAD   (0d8c2e Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
 		copy->committed ? NFS_FILE_SYNC : NFS_UNSTABLE;
 	copy->cp_synchronous = sync;
 	gen_boot_verifier(&copy->cp_res.wr_verifier, copy->cp_clp->net);
+||||||| BASE
+		test_bit(NFSD4_COPY_F_COMMITTED, &copy->cp_flags) ?
+			NFS_FILE_SYNC : NFS_UNSTABLE;
+	nfsd4_copy_set_sync(copy, sync);
+	gen_boot_verifier(&copy->cp_res.wr_verifier, copy->cp_clp->net);
+=======
+		test_bit(NFSD4_COPY_F_COMMITTED, &copy->cp_flags) ?
+			NFS_FILE_SYNC : NFS_UNSTABLE;
+	nfsd4_copy_set_sync(copy, sync);
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 }
 
 static ssize_t _nfsd_copy_file_range(struct nfsd4_copy *copy)
@@ -1650,12 +1681,26 @@ static __be32
 nfsd4_copy(struct svc_rqst *rqstp, struct nfsd4_compound_state *cstate,
 		union nfsd4_op_u *u)
 {
-	struct nfsd4_copy *copy = &u->copy;
-	__be32 status;
+	struct nfsd_net *nn = net_generic(SVC_NET(rqstp), nfsd_net_id);
 	struct nfsd4_copy *async_copy = NULL;
+	struct nfsd4_copy *copy = &u->copy;
+	struct nfsd42_write_res *result;
+	__be32 status;
 
+<<<<<<< HEAD   (0d8c2e Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
 	if (!copy->cp_intra) { /* Inter server SSC */
 		if (!inter_copy_offload_enable || copy->cp_synchronous) {
+||||||| BASE
+	if (nfsd4_ssc_is_inter(copy)) {
+		if (!inter_copy_offload_enable || nfsd4_copy_is_sync(copy)) {
+=======
+	result = &copy->cp_res;
+	nfsd_copy_write_verifier((__be32 *)&result->wr_verifier.data, nn);
+
+	copy->cp_clp = cstate->clp;
+	if (nfsd4_ssc_is_inter(copy)) {
+		if (!inter_copy_offload_enable || nfsd4_copy_is_sync(copy)) {
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 			status = nfserr_notsupp;
 			goto out;
 		}
@@ -1669,21 +1714,56 @@ nfsd4_copy(struct svc_rqst *rqstp, struct nfsd4_compound_state *cstate,
 			return status;
 	}
 
-	copy->cp_clp = cstate->clp;
 	memcpy(&copy->fh, &cstate->current_fh.fh_handle,
 		sizeof(struct knfsd_fh));
+<<<<<<< HEAD   (0d8c2e Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
 	if (!copy->cp_synchronous) {
 		struct nfsd_net *nn = net_generic(SVC_NET(rqstp), nfsd_net_id);
 
 		status = nfserrno(-ENOMEM);
+||||||| BASE
+	if (nfsd4_copy_is_async(copy)) {
+		struct nfsd_net *nn = net_generic(SVC_NET(rqstp), nfsd_net_id);
+
+		status = nfserrno(-ENOMEM);
+=======
+	if (nfsd4_copy_is_async(copy)) {
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 		async_copy = kzalloc(sizeof(struct nfsd4_copy), GFP_KERNEL);
 		if (!async_copy)
 			goto out_err;
+<<<<<<< HEAD   (0d8c2e Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
+||||||| BASE
+		INIT_LIST_HEAD(&async_copy->copies);
+		refcount_set(&async_copy->refcount, 1);
+		async_copy->cp_src = kmalloc(sizeof(*async_copy->cp_src), GFP_KERNEL);
+		if (!async_copy->cp_src)
+			goto out_err;
+=======
+		async_copy->cp_nn = nn;
+		INIT_LIST_HEAD(&async_copy->copies);
+		refcount_set(&async_copy->refcount, 1);
+		/* Arbitrary cap on number of pending async copy operations */
+		if (atomic_inc_return(&nn->pending_async_copies) >
+				(int)rqstp->rq_pool->sp_nrthreads)
+			goto out_err;
+		async_copy->cp_src = kmalloc(sizeof(*async_copy->cp_src), GFP_KERNEL);
+		if (!async_copy->cp_src)
+			goto out_err;
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 		if (!nfs4_init_copy_state(nn, copy))
 			goto out_err;
+<<<<<<< HEAD   (0d8c2e Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
 		refcount_set(&async_copy->refcount, 1);
 		memcpy(&copy->cp_res.cb_stateid, &copy->cp_stateid.stid,
 			sizeof(copy->cp_res.cb_stateid));
+||||||| BASE
+		memcpy(&copy->cp_res.cb_stateid, &copy->cp_stateid.cs_stid,
+			sizeof(copy->cp_res.cb_stateid));
+=======
+		memcpy(&result->cb_stateid, &copy->cp_stateid.cs_stid,
+			sizeof(result->cb_stateid));
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 		dup_copy_fields(copy, async_copy);
 		async_copy->copy_task = kthread_create(nfsd4_do_async_copy,
 				async_copy, "%s", "copy thread");
@@ -1703,11 +1783,17 @@ out:
 out_err:
 	if (async_copy)
 		cleanup_async_copy(async_copy);
+<<<<<<< HEAD   (0d8c2e Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
 	status = nfserrno(-ENOMEM);
 	/*
 	 * source's vfsmount of inter-copy will be unmounted
 	 * by the laundromat
 	 */
+||||||| BASE
+	status = nfserrno(-ENOMEM);
+=======
+	status = nfserr_jukebox;
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 	goto out;
 }
 
