@@ -16,7 +16,16 @@ static u32 smccc_version = ARM_SMCCC_VERSION_1_0;
 static enum arm_smccc_conduit smccc_conduit = SMCCC_CONDUIT_NONE;
 
 bool __ro_after_init smccc_trng_available = false;
+<<<<<<< HEAD   (0bc7ce Merge 4118bd1834a9 ("KVM: x86/mmu: Ensure that kvm_release_p)
 u64 __ro_after_init smccc_has_sve_hint = false;
+||||||| BASE
+u64 __ro_after_init smccc_has_sve_hint = false;
+s32 __ro_after_init smccc_soc_id_version = SMCCC_RET_NOT_SUPPORTED;
+s32 __ro_after_init smccc_soc_id_revision = SMCCC_RET_NOT_SUPPORTED;
+=======
+s32 __ro_after_init smccc_soc_id_version = SMCCC_RET_NOT_SUPPORTED;
+s32 __ro_after_init smccc_soc_id_revision = SMCCC_RET_NOT_SUPPORTED;
+>>>>>>> BRANCH (52f863 Linux 6.1.120)
 
 void __init arm_smccc_version_init(u32 version, enum arm_smccc_conduit conduit)
 {
@@ -24,9 +33,40 @@ void __init arm_smccc_version_init(u32 version, enum arm_smccc_conduit conduit)
 	smccc_conduit = conduit;
 
 	smccc_trng_available = smccc_probe_trng();
+<<<<<<< HEAD   (0bc7ce Merge 4118bd1834a9 ("KVM: x86/mmu: Ensure that kvm_release_p)
 	if (IS_ENABLED(CONFIG_ARM64_SVE) &&
 	    smccc_version >= ARM_SMCCC_VERSION_1_3)
 		smccc_has_sve_hint = true;
+||||||| BASE
+	if (IS_ENABLED(CONFIG_ARM64_SVE) &&
+	    smccc_version >= ARM_SMCCC_VERSION_1_3)
+		smccc_has_sve_hint = true;
+
+	if ((smccc_version >= ARM_SMCCC_VERSION_1_2) &&
+	    (smccc_conduit != SMCCC_CONDUIT_NONE)) {
+		arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_FEATURES_FUNC_ID,
+				     ARM_SMCCC_ARCH_SOC_ID, &res);
+		if ((s32)res.a0 >= 0) {
+			arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_SOC_ID, 0, &res);
+			smccc_soc_id_version = (s32)res.a0;
+			arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_SOC_ID, 1, &res);
+			smccc_soc_id_revision = (s32)res.a0;
+		}
+	}
+=======
+
+	if ((smccc_version >= ARM_SMCCC_VERSION_1_2) &&
+	    (smccc_conduit != SMCCC_CONDUIT_NONE)) {
+		arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_FEATURES_FUNC_ID,
+				     ARM_SMCCC_ARCH_SOC_ID, &res);
+		if ((s32)res.a0 >= 0) {
+			arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_SOC_ID, 0, &res);
+			smccc_soc_id_version = (s32)res.a0;
+			arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_SOC_ID, 1, &res);
+			smccc_soc_id_revision = (s32)res.a0;
+		}
+	}
+>>>>>>> BRANCH (52f863 Linux 6.1.120)
 }
 
 enum arm_smccc_conduit arm_smccc_1_1_get_conduit(void)
