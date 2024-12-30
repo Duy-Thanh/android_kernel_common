@@ -567,7 +567,12 @@ struct nfsd4_copy {
 	struct vfsmount		*ss_mnt;
 	struct nfs_fh		c_fh;
 	nfs4_stateid		stateid;
+<<<<<<< HEAD   (11b1ad Merge ef1e1954d784 ("media: dvbdev: fix the logic when DVB_D)
 	bool			committed;
+||||||| BASE
+=======
+	struct nfsd_net		*cp_nn;
+>>>>>>> BRANCH (9467c4 NFSD: Never decrement pending_async_copies on error)
 };
 
 struct nfsd4_seek {
