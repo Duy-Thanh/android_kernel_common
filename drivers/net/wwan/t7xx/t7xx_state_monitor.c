@@ -293,15 +293,17 @@ static void fsm_routine_stopping(struct t7xx_fsm_ctl *ctl, struct t7xx_fsm_comma
 		return;
 	}
 
-	md_ctrl = ctl->md->md_ctrl[CLDMA_ID_MD];
+
 	t7xx_dev = ctl->md->t7xx_dev;
 
-	ctl->curr_state = FSM_STATE_STOPPING;
-	t7xx_fsm_broadcast_state(ctl, MD_STATE_WAITING_TO_STOP);
-	t7xx_cldma_stop(md_ctrl);
-
-	if (t7xx_devlink_param_get_fastboot(t7xx_dev->dl->ctx))
+	if (t7xx_devlink_param_get_fastboot(t7xx_dev->dl->ctx)) {
 		t7xx_host_event_notify(ctl->md, FASTBOOT_DL_NOTIFY);
+	} else {
+		md_ctrl = ctl->md->md_ctrl[CLDMA_ID_MD];
+		ctl->curr_state = FSM_STATE_STOPPING;
+		t7xx_fsm_broadcast_state(ctl, MD_STATE_WAITING_TO_STOP);
+		t7xx_cldma_stop(md_ctrl);
+	}
 
 	t7xx_mhccif_h2d_swint_trigger(t7xx_dev, H2D_CH_DRM_DISABLE_AP);
 	/* Wait for the DRM disable to take effect */

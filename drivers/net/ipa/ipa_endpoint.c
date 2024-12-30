@@ -1427,7 +1427,10 @@ static bool ipa_endpoint_skb_build(struct ipa_endpoint *endpoint,
 	if (!endpoint->netdev)
 		return false;
 
-	WARN_ON(len > SKB_WITH_OVERHEAD(buffer_size - NET_SKB_PAD));
+	if (WARN_ON(len > SKB_WITH_OVERHEAD(buffer_size - NET_SKB_PAD)))
+		pr_emerg("endpoint %u SKB overrun, size %u len %u limit %zu\n",
+			 endpoint->endpoint_id, buffer_size, len,
+			 SKB_WITH_OVERHEAD(buffer_size - NET_SKB_PAD));
 
 	skb = build_skb(page_address(page), buffer_size);
 	if (skb) {

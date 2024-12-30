@@ -123,21 +123,6 @@ static __always_inline unsigned __page_shift(void)
 #define __COMPAT_PAGE_ALIGN(size, flags) \
 	(flags & __MAP_NO_COMPAT) ? PAGE_ALIGN(size) : __PAGE_ALIGN(size)
 
-/*
- * Combines the mmap "flags" argument into "vm_flags"
- *
- * If page size emulation is enabled, adds translation of the no-compat flag.
- */
-static __always_inline unsigned long calc_vm_flag_bits(unsigned long flags)
-{
-	unsigned long flag_bits = __calc_vm_flag_bits(flags);
-
-	if (static_branch_unlikely(&page_shift_compat_enabled))
-		flag_bits |= _calc_vm_trans(flags, __MAP_NO_COMPAT,  __VM_NO_COMPAT );
-
-	return flag_bits;
-}
-
 extern unsigned long ___filemap_len(struct inode *inode, unsigned long pgoff,
 				    unsigned long len, unsigned long flags);
 
