@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0379158e_14045a12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-30T17:45:52Z",
+      "side": 1,
+      "message": "Actually there is a very similar hook here: https://android-review.git.corp.google.com/c/kernel/common/+/3426642. If we merge it, can you reuse it?",
+      "revId": "a82918599436d1c913e31917d2286711a279d6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
