@@ -157,6 +157,9 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 DECLARE_HOOK(android_vh_vmpressure,
 	TP_PROTO(struct mem_cgroup *memcg, bool *bypass),
 	TP_ARGS(memcg, bypass));
+DECLARE_HOOK(android_vh_do_async_mmap_readahead,
+	TP_PROTO(struct vm_fault *vmf, struct page *page, bool *skip),
+	TP_ARGS(vmf, page, skip));
 DECLARE_HOOK(android_vh_do_page_trylock,
 	TP_PROTO(struct page *page, struct rw_semaphore *sem,
 		bool *got_lock, bool *success),
