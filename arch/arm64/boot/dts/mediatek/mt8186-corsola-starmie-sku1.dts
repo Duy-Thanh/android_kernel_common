@@ -8,8 +8,7 @@
 
 / {
 	model = "Google Starmie sku1 board";
-	compatible = "google,starmie-sku2147483642",
-		     "google,starmie-sku1", "google,starmie-sku4",
+	compatible = "google,starmie-sku1", "google,starmie-sku4",
 		     "google,starmie", "mediatek,mt8186";
 };
 

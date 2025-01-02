@@ -3098,6 +3098,7 @@ static int btintel_setup_combined(struct hci_dev *hdev)
 					&hdev->quirks);
 
 			err = btintel_legacy_rom_setup(hdev, &ver);
+			hdev->wbs_pkt_len = 24;
 			break;
 		case 0x0b:      /* SfP */
 			/* Apply the device specific controller quirk
@@ -3128,7 +3129,8 @@ static int btintel_setup_combined(struct hci_dev *hdev)
 
 			err = btintel_bootloader_setup(hdev, &ver);
 			btintel_register_devcoredump_support(hdev);
-			hdev->wbs_pkt_len = 24;
+			if (ver.hw_variant == 0x0c)
+				hdev->wbs_pkt_len = 24;
 			break;
 		default:
 			bt_dev_err(hdev, "Unsupported Intel hw variant (%u)",
@@ -3317,13 +3319,12 @@ static int btintel_diagnostics(struct hci_dev *hdev, struct sk_buff *skb)
 	case INTEL_TLV_TEST_EXCEPTION:
 		/* Generate devcoredump from exception */
 		if (!hci_devcd_init(hdev, skb->len)) {
-			hci_devcd_append(hdev, skb);
+			hci_devcd_append(hdev, skb_clone(skb, GFP_ATOMIC));
 			hci_devcd_complete(hdev);
 		} else {
 			bt_dev_err(hdev, "Failed to generate devcoredump");
-			kfree_skb(skb);
 		}
-		return 0;
+	break;
 	default:
 		bt_dev_err(hdev, "Invalid exception type %02X", tlv->val[0]);
 	}
