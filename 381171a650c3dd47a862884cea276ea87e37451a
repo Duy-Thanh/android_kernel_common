@@ -16,6 +16,24 @@
       "message": "Make this dependent on CONFIG_HARDENED_GUEST",
       "revId": "381171a650c3dd47a862884cea276ea87e37451a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a95fa326_73a2671e",
+        "filename": "arch/arm64/coco/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2025-01-02T07:53:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "18e9ce52_d5a6283d",
+      "revId": "381171a650c3dd47a862884cea276ea87e37451a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
