@@ -118,8 +118,7 @@ DECLARE_STATIC_KEY_MAYBE(CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT,
 
 static inline bool mem_alloc_profiling_enabled(void)
 {
-	return static_branch_maybe(CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT,
-				   &mem_alloc_profiling_key);
+	return false;
 }
 
 static inline struct alloc_tag_counters alloc_tag_read(struct alloc_tag *tag)
