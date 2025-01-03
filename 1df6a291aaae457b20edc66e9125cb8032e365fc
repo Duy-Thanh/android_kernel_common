@@ -22,6 +22,30 @@
       },
       "revId": "1df6a291aaae457b20edc66e9125cb8032e365fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a3b82b1_89c8c746",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3284,
+      "author": {
+        "id": 1952910
+      },
+      "writtenOn": "2025-01-03T06:18:41Z",
+      "side": 1,
+      "message": "I initially intended to access struct file, but I suddenly realized that I could obtain struct file_ra_state using container_of(), and subsequently retrieve struct file in the same manner. Therefore, the new hook is not needed. Thank you.",
+      "parentUuid": "bb5eee4f_fb7af556",
+      "range": {
+        "startLine": 3284,
+        "startChar": 1,
+        "endLine": 3284,
+        "endChar": 40
+      },
+      "revId": "1df6a291aaae457b20edc66e9125cb8032e365fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
