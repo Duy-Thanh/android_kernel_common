@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "777865ce_24610224",
+        "filename": "drivers/iommu/kvm-iommu-stub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-01-03T14:35:30Z",
+      "side": 1,
+      "message": "How about keeping `enabled` var initialization in one place as `#elif` condition of first change above ^^^ ?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 6
+      },
+      "revId": "8d3069bb89312cff576b9091f70078a14a28b017",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
