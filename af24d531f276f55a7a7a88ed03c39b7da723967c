@@ -45,6 +45,23 @@
       },
       "revId": "af24d531f276f55a7a7a88ed03c39b7da723967c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca610405_4b8f5a0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3596924
+      },
+      "writtenOn": "2025-01-03T13:28:50Z",
+      "side": 1,
+      "message": "@Greg Kroah-hartman: Could you let me know why the presubmit verified is getting failed.\n\nThanks",
+      "revId": "af24d531f276f55a7a7a88ed03c39b7da723967c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
