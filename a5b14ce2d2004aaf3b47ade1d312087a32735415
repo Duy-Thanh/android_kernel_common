@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81dd967_98bac624",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-03T03:01:06Z",
+      "side": 1,
+      "message": "We have a similar patch in older kernels: aosp/2369252. I would suggest cherry-picking it and keeping the same SHA (I5c8dc58a5d195d2e1b2e25628545f7d2a9c3b7df)",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "a5b14ce2d2004aaf3b47ade1d312087a32735415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
