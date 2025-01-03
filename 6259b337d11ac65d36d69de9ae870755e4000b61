@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad53d3c_075eac4d",
+        "filename": "kernel/gen_kheaders.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-03T00:38:36Z",
+      "side": 1,
+      "message": "Note: This diverges from the upstream patch.\n\nShould I add it here, or put up a separate ANDROID: patch instead?",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 29
+      },
+      "revId": "6259b337d11ac65d36d69de9ae870755e4000b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
