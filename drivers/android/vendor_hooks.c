@@ -575,6 +575,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timerfd_create);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_fixup_sea);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo_unfrozen);
+<<<<<<< HEAD   (af4e49a6226710f438f012380bb2dc2304a704b8 ANDROID: 16K: Fix padding calculation during VMA split)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ttm_pool_alloc_max_page_order);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ttm_pool_alloc_page_flags);
@@ -621,3 +622,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
 /* keep-sorted end */
+
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_entry);

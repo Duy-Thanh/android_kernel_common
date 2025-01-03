@@ -504,6 +504,7 @@ DECLARE_HOOK(android_vh_calc_alloc_flags,
 	TP_PROTO(gfp_t gfp_mask, unsigned int *alloc_flags,
 		bool *bypass),
 	TP_ARGS(gfp_mask, alloc_flags, bypass));
+<<<<<<< HEAD   (af4e49a6226710f438f012380bb2dc2304a704b8 ANDROID: 16K: Fix padding calculation during VMA split)
 DECLARE_HOOK(android_vh_task_mem,
 	TP_PROTO(struct seq_file *m, struct mm_struct *mm),
 	TP_ARGS(m, mm));
@@ -635,6 +636,34 @@ struct oom_control;
 DECLARE_HOOK(android_vh_mm_may_oom_exit,
 	TP_PROTO(struct oom_control *oc, unsigned long did_some_progress),
 	TP_ARGS(oc, did_some_progress));
+||||||| BASE   (bae0ccccfb4f012d9be5f09aab6bf2304dbc4e1c FROMGIT: usb: gadget: f_fs: Remove WARN_ON in functionfs_bin)
+
+DECLARE_HOOK(android_vh_slab_folio_alloced,
+	TP_PROTO(unsigned int order, gfp_t flags),
+	TP_ARGS(order, flags));
+DECLARE_HOOK(android_vh_kmalloc_large_alloced,
+	TP_PROTO(struct folio *folio, unsigned int order, gfp_t flags),
+	TP_ARGS(folio, order, flags));
+DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
+	TP_PROTO(struct inode *inode),
+	TP_ARGS(inode), 1);
+=======
+
+DECLARE_HOOK(android_vh_slab_folio_alloced,
+	TP_PROTO(unsigned int order, gfp_t flags),
+	TP_ARGS(order, flags));
+DECLARE_HOOK(android_vh_kmalloc_large_alloced,
+	TP_PROTO(struct folio *folio, unsigned int order, gfp_t flags),
+	TP_ARGS(folio, order, flags));
+DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
+	TP_PROTO(struct inode *inode),
+	TP_ARGS(inode), 1);
+
+DECLARE_HOOK(android_vh_alloc_pages_entry,
+	TP_PROTO(gfp_t *gfp, unsigned int order, int preferred_nid,
+		nodemask_t *nodemask),
+	TP_ARGS(gfp, order, preferred_nid, nodemask));
+>>>>>>> CHANGE (5c06e6f0f8166dc95a38edc3999598644df34624 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
