@@ -22,6 +22,30 @@
       },
       "revId": "a5b14ce2d2004aaf3b47ade1d312087a32735415",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b3e824_bbd7abc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-03T17:52:53Z",
+      "side": 1,
+      "message": "Thanks for pointing that out. I\u0027ll go ahead and cherry-pick it.",
+      "parentUuid": "d81dd967_98bac624",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "a5b14ce2d2004aaf3b47ade1d312087a32735415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
