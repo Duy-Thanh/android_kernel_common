@@ -132,6 +132,7 @@ static inline bool vgic_irq_is_multi_sgi(struct vgic_irq *irq)
 	return vgic_irq_get_lr_count(irq) > 1;
 }
 
+<<<<<<< HEAD   (73293d Revert "modpost: Include '.text.*' in TEXT_SECTIONS")
 static inline int vgic_write_guest_lock(struct kvm *kvm, gpa_t gpa,
 					const void *data, unsigned long len)
 {
@@ -140,6 +141,30 @@ static inline int vgic_write_guest_lock(struct kvm *kvm, gpa_t gpa,
 	ret = kvm_write_guest_lock(kvm, gpa, data, len);
 
 	return ret;
+||||||| BASE
+=======
+static inline int vgic_its_read_entry_lock(struct vgic_its *its, gpa_t eaddr,
+					   u64 *eval, unsigned long esize)
+{
+	struct kvm *kvm = its->dev->kvm;
+
+	if (KVM_BUG_ON(esize != sizeof(*eval), kvm))
+		return -EINVAL;
+
+	return kvm_read_guest_lock(kvm, eaddr, eval, esize);
+
+}
+
+static inline int vgic_its_write_entry_lock(struct vgic_its *its, gpa_t eaddr,
+					    u64 eval, unsigned long esize)
+{
+	struct kvm *kvm = its->dev->kvm;
+
+	if (KVM_BUG_ON(esize != sizeof(eval), kvm))
+		return -EINVAL;
+
+	return kvm_write_guest_lock(kvm, eaddr, &eval, esize);
+>>>>>>> BRANCH (065e07 KVM: arm64: vgic-its: Add a data length check in vgic_its_sa)
 }
 
 /*
