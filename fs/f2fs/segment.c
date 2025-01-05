@@ -2751,7 +2751,16 @@ static void change_curseg(struct f2fs_sb_info *sbi, int type)
 	struct f2fs_summary_block *sum_node;
 	struct page *sum_page;
 
+<<<<<<< HEAD   (0f6c88 ANDROID: fix up crc problems 5.15.174)
 	write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, curseg->segno));
+||||||| BASE
+	if (flush)
+		write_sum_page(sbi, curseg->sum_blk,
+					GET_SUM_BLOCK(sbi, curseg->segno));
+=======
+	if (curseg->inited)
+		write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, curseg->segno));
+>>>>>>> BRANCH (4bd3d7 f2fs: check curseg->inited before write_sum_page in change_c)
 
 	__set_test_and_inuse(sbi, new_segno);
 
@@ -2993,6 +3002,21 @@ static void __allocate_new_segment(struct f2fs_sb_info *sbi, int type,
 	    !get_valid_blocks(sbi, curseg->segno, new_sec) &&
 	    !get_ckpt_valid_blocks(sbi, curseg->segno, new_sec))
 		return;
+<<<<<<< HEAD   (0f6c88 ANDROID: fix up crc problems 5.15.174)
+||||||| BASE
+alloc:
+	old_segno = curseg->segno;
+	SIT_I(sbi)->s_ops->allocate_segment(sbi, type, true);
+	locate_dirty_segment(sbi, old_segno);
+}
+=======
+alloc:
+	old_segno = curseg->segno;
+	new_curseg(sbi, type, true);
+	stat_inc_seg_type(sbi, curseg);
+	locate_dirty_segment(sbi, old_segno);
+}
+>>>>>>> BRANCH (4bd3d7 f2fs: check curseg->inited before write_sum_page in change_c)
 
 	old_segno = curseg->segno;
 	new_curseg(sbi, type, true);
@@ -3368,11 +3392,20 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
 	update_sit_entry(sbi, *new_blkaddr, 1);
 	update_sit_entry(sbi, old_blkaddr, -1);
 
+<<<<<<< HEAD   (0f6c88 ANDROID: fix up crc problems 5.15.174)
 	/*
 	 * If the current segment is full, flush it out and replace it with a
 	 * new segment.
 	 */
 	if (segment_full) {
+||||||| BASE
+	if (!__has_curseg_space(sbi, curseg)) {
+=======
+	if (!__has_curseg_space(sbi, curseg)) {
+		/*
+		 * Flush out current segment and replace it with new segment.
+		 */
+>>>>>>> BRANCH (4bd3d7 f2fs: check curseg->inited before write_sum_page in change_c)
 		if (from_gc) {
 			get_atssr_segment(sbi, type, se->type,
 						AT_SSR, se->mtime);
@@ -3383,9 +3416,13 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
 				change_curseg(sbi, type);
 			stat_inc_seg_type(sbi, curseg);
 		}
+<<<<<<< HEAD   (0f6c88 ANDROID: fix up crc problems 5.15.174)
 
 		if (curseg->segno == NULL_SEGNO)
 			goto out_err;
+||||||| BASE
+=======
+>>>>>>> BRANCH (4bd3d7 f2fs: check curseg->inited before write_sum_page in change_c)
 	}
 	/*
 	 * segment dirty status should be updated after segment allocation,
@@ -3653,8 +3690,8 @@ void f2fs_do_replace_block(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
 		}
 	}
 
-	f2fs_bug_on(sbi, !IS_DATASEG(type));
 	curseg = CURSEG_I(sbi, type);
+	f2fs_bug_on(sbi, !IS_DATASEG(curseg->seg_type));
 
 	mutex_lock(&curseg->curseg_mutex);
 	down_write(&sit_i->sentry_lock);
