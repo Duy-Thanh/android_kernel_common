@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cbc32c8_dbfe0b33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2025-01-06T09:55:12Z",
+      "side": 1,
+      "message": "I cherry-picked this patch directly from android15-6.6, but it’s showing\n the message: \"Please refer to the contribution guidelines for details.\"\n What do I need to do?",
+      "revId": "7ff8a406755f6d7f8f09e07a0858156566383409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
