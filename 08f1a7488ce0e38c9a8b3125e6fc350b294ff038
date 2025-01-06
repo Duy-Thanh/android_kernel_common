@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea6f471_7b53a75f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3515397
+      },
+      "writtenOn": "2025-01-06T23:06:41Z",
+      "side": 1,
+      "message": "The computation of min bpp change accounting the requested min bpc looks good to me. Code Review + 2 for me after fixing the kernel checkpatch warning",
+      "revId": "08f1a7488ce0e38c9a8b3125e6fc350b294ff038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf7c002_fbda4587",
+        "filename": "drivers/gpu/drm/i915/display/intel_dp.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 3515397
+      },
+      "writtenOn": "2025-01-06T23:06:41Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LINE_SPACING: Missing a blank line after declarations\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:LINE_SPACING: Missing a blank line after declarations",
+      "range": {
+        "startLine": 1112,
+        "startChar": 0,
+        "endLine": 1112,
+        "endChar": 0
+      },
+      "revId": "08f1a7488ce0e38c9a8b3125e6fc350b294ff038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
