@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb0a7e9_6a709691",
+        "filename": "net/mac80211/mlme.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-01-06T23:58:45Z",
+      "side": 1,
+      "message": "I\u0027m looking closer at this... doesn\u0027t the original patch replace this call with a new static `ieee80211_chandef_usable()` which takes chandef-\u003epunctured and `ieee80211_hw_check()` into account? How is this addressed in this patch? Why is it not applicable?",
+      "revId": "be7783f0f267d19c9d62bd40a8b48d84626216b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
