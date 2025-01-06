@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b84d3628_7bfc5845",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-01-06T21:48:47Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/ce1fa3adc007ce3fd6beb8f4d733e00daa64c6c0) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dce1fa3adc007ce3fd6beb8f4d733e00daa64c6c0).\n\n```\n      ## drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c ##\n     @@ drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c: static void iwl_mvm_ftm_responder_chanctx_iter(void *_data, u8 *mac,\n      \t\tdata-\u003eresponder \u003d true;\n    @@ drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c: void iwl_mvm_change_chanctx(s\n      \t\t      (changed \u0026 ~(IEEE80211_CHANCTX_CHANGE_WIDTH |\n     \n      ## drivers/net/wireless/intel/iwlwifi/mvm/mvm.h ##\n    -@@ drivers/net/wireless/intel/iwlwifi/mvm/mvm.h: void iwl_mvm_mld_select_links(struct iwl_mvm *mvm, struct ieee80211_vif *vif,\n    - int iwl_mvm_mld_get_primary_link(struct iwl_mvm *mvm,\n    - \t\t\t\t struct ieee80211_vif *vif,\n    - \t\t\t\t unsigned long usable_links);\n    +@@ drivers/net/wireless/intel/iwlwifi/mvm/mvm.h: int iwl_mvm_set_hw_timestamp(struct ieee80211_hw *hw,\n    + int iwl_mvm_update_mu_groups(struct iwl_mvm *mvm, struct ieee80211_vif *vif);\n    + bool iwl_mvm_enable_fils(struct iwl_mvm *mvm,\n    + \t\t\t struct ieee80211_chanctx_conf *ctx);\n     +\n     +bool iwl_mvm_is_ftm_responder_chanctx(struct iwl_mvm *mvm,\n     +\t\t\t\t      struct ieee80211_chanctx_conf *ctx);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "5ca58a85ea97d90d945b9d636071f7b8095642da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "232ee081_9b1dcd09",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
