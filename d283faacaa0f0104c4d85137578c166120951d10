@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1d3273_64a0fb09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1961338
+      },
+      "writtenOn": "2025-01-06T02:21:50Z",
+      "side": 1,
+      "message": "author 配置应该用 Quanjie Wang\n不要用域账号作为name， 使用git config 重新配置author，Signed-off-by",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 24
+      },
+      "revId": "d283faacaa0f0104c4d85137578c166120951d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
