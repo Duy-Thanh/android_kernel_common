@@ -6635,6 +6635,9 @@ again:
 	 * check if power mode restore is needed.
 	 */
 	if (hba->saved_uic_err & UFSHCD_UIC_PA_GENERIC_ERROR) {
+		ufshcd_vops_dbg_register_dump(hba);
+	}
+	if (hba->saved_uic_err & UFSHCD_UIC_PA_GENERIC_ERROR) {
 		hba->saved_uic_err &= ~UFSHCD_UIC_PA_GENERIC_ERROR;
 		if (!hba->saved_uic_err)
 			hba->saved_err &= ~UIC_ERROR;
