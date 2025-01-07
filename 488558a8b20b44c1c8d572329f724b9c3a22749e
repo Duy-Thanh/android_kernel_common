@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a0a1537_2bbf3a3e",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-07T12:33:45Z",
+      "side": 1,
+      "message": "For now, I grabbed the text from the Kconfig file.",
+      "parentUuid": "d83a8c8b_a6dc57f2",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 50
+      },
+      "revId": "488558a8b20b44c1c8d572329f724b9c3a22749e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4457b60a_bcf231a1",
