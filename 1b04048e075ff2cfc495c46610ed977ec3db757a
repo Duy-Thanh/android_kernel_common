@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f96c58f_bff659c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-01-07T19:49:20Z",
+      "side": 1,
+      "message": "I recognize this is a cherry-pick of a previously included patch, but the explanation here needs a bit more detail for us to carry this forward. Could you please expand this a bit:\n\nIts good to include the following points in your description:\n\n1) What problem/issue do you see that drove you to submit this patch (ie: *why* is this hook usful)\n\n2) What quantifiable benefit do you achieve when using these hooks (doesn\u0027t have to be exact, but some relative or % improvement so we have a sense of the impact)\n\n3) What change to upstream might make this hook unnecessary?",
+      "revId": "1b04048e075ff2cfc495c46610ed977ec3db757a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab0bca6f_19dd4d91",
+        "filename": "kernel/cgroup/freezer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-01-07T19:49:20Z",
+      "side": 1,
+      "message": "I think this would read better if the variable was skip_wake (inverted) and the hook was trace_android_vh_freeze_skip_wake() ?",
+      "revId": "1b04048e075ff2cfc495c46610ed977ec3db757a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b0984d_33ae1893",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5908,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-01-07T19:49:20Z",
+      "side": 1,
+      "message": "These exports should probably be in a separate patch with some additional detail as to why they are needed.",
+      "revId": "1b04048e075ff2cfc495c46610ed977ec3db757a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da09941e_ab1b5ff7",
+        "filename": "kernel/signal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-01-07T19:49:20Z",
+      "side": 1,
+      "message": "Again, I might suggest rewording this to vh_exit_signal_skip_wake() and skip_wake for the variable name.",
+      "revId": "1b04048e075ff2cfc495c46610ed977ec3db757a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
