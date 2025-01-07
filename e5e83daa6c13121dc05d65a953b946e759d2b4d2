@@ -34,6 +34,161 @@
       "parentUuid": "ed1154db_57811c36",
       "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03036c66_f8144391",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-07T05:20:28Z",
+      "side": 1,
+      "message": "it feels off to share the length derived from the string constant, but not the string constant itself. maybe calculate the lengths locally?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 73
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8d29ab_d1e1f6c6",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-07T05:20:28Z",
+      "side": 1,
+      "message": "should this also clear the \"pkey\" flags? the C impl seems to. i know nothing about them though",
+      "range": {
+        "startLine": 120,
+        "startChar": 1,
+        "endLine": 128,
+        "endChar": 9
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7757b0db_2ef420a1",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-07T05:20:28Z",
+      "side": 1,
+      "message": "could you return the a `\u0026CStr` directly?\n\nthat could also help remove the manual `strlen` implementation at the end, because you could use `CStr::from_bytes_until_nul`",
+      "range": {
+        "startLine": 248,
+        "startChar": 66,
+        "endLine": 248,
+        "endChar": 71
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc3de9e_9d805133",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-07T05:20:28Z",
+      "side": 1,
+      "message": "why is that? is there no risk of concurrent access? i don\u0027t see any docs on the type that make that clear. if the `MiscDevice::mmap` caller is making this gaurentee, could it pass a `\u0026mut VmAreaNew` instead?\n\nsame for the other unsafe `VmAreaNew` blocks below",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 53
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c83e9451_21b36dc6",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-07T05:20:28Z",
+      "side": 1,
+      "message": "FWIW, `loff_t` is 64 bits even on a 32 bit build, so this truncates, but it seems like ashmem already has that issue",
+      "range": {
+        "startLine": 41,
+        "startChar": 59,
+        "endLine": 41,
+        "endChar": 68
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0ab5fb_0860cba4",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-07T05:20:28Z",
+      "side": 1,
+      "message": "is the `struct file` \u003c-\u003e `File` pointer compatability part of an API gaurentee?",
+      "range": {
+        "startLine": 46,
+        "startChar": 76,
+        "endLine": 46,
+        "endChar": 89
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1eaf2f1_302e7084",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-07T05:20:28Z",
+      "side": 1,
+      "message": "looks like you have to lock this mutex every time, so i wonder if it would hurt to have a static `Mutex\u003cOption\u003cBox\u003cbindings::file_operations\u003e\u003e\u003e` instead so that you need fewer statics + can skip the `UnsafeCell` stuff? if you lock it and see `None`, then you initialize it to `Some` and grab a pointer. if you lock it and see `Some`, then you just grab a pointer",
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
