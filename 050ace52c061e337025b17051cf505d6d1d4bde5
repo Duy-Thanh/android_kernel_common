@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7010420d_0c804da3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-07T20:59:42Z",
+      "side": 1,
+      "message": "Can you please add the output from the ABI analyzer that says which symbols were added?\n\n```\n4 function symbol(s) added\n  \u0027ssize_t iio_enum_available_read(struct iio_dev*, uintptr_t, const struct iio_chan_spec*, char*)\u0027\n  \u0027ssize_t iio_enum_read(struct iio_dev*, uintptr_t, const struct iio_chan_spec*, char*)\u0027\n  \u0027ssize_t iio_enum_write(struct iio_dev*, uintptr_t, const struct iio_chan_spec*, const char*, size_t)\u0027\n  \u0027irqreturn_t iio_pollfunc_store_time(int, void*)\u0027\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "050ace52c061e337025b17051cf505d6d1d4bde5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
