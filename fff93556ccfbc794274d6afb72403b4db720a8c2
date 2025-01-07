@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0a4c51_291bdbe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-01-07T13:22:02Z",
+      "side": 1,
+      "message": "I guess this can be dropped as there is https://r.android.com/c/kernel/common/+/3390558/3-change ?",
+      "revId": "fff93556ccfbc794274d6afb72403b4db720a8c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
