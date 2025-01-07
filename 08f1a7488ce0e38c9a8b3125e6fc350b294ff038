@@ -39,6 +39,30 @@
       },
       "revId": "08f1a7488ce0e38c9a8b3125e6fc350b294ff038",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ab1eebe_2bee61bf",
+        "filename": "drivers/gpu/drm/i915/display/intel_dp.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2025-01-07T16:37:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daf7c002_fbda4587",
+      "range": {
+        "startLine": 1112,
+        "startChar": 0,
+        "endLine": 1112,
+        "endChar": 0
+      },
+      "revId": "08f1a7488ce0e38c9a8b3125e6fc350b294ff038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
