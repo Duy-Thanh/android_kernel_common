@@ -16,6 +16,29 @@
       "message": "LGTM, but I\u0027ll wait for smostafa@ to have a look at.",
       "revId": "a36d5de93f7d6ef085a87ad353adc9601750d502",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cd47583_471463fd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-07T18:11:53Z",
+      "side": 1,
+      "message": "This looks a bit fragile to me, as the state is indeed `PKVM_PAGE_OWNED` but just refcounted, I can\u0027t find a way to break that, but we have to be careful with any new users of this function, maybe add a comment at top?",
+      "range": {
+        "startLine": 981,
+        "startChar": 0,
+        "endLine": 981,
+        "endChar": 64
+      },
+      "revId": "a36d5de93f7d6ef085a87ad353adc9601750d502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
