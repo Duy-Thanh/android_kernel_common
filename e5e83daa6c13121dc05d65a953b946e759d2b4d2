@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfd93d1e_f3c1b410",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-07T12:34:04Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s possible to share the string itself, unfortunatly. Note that the code will fail to compile if `ASHMEM_NAME_PREFIX_LEN` is not the length of `dev/ashmem/`.",
+      "parentUuid": "03036c66_f8144391",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 73
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c8d29ab_d1e1f6c6",
         "filename": "drivers/staging/android/ashmem_rust.rs",
         "patchSetId": 14
@@ -72,6 +96,30 @@
       "writtenOn": "2025-01-07T05:20:28Z",
       "side": 1,
       "message": "should this also clear the \"pkey\" flags? the C impl seems to. i know nothing about them though",
+      "range": {
+        "startLine": 120,
+        "startChar": 1,
+        "endLine": 128,
+        "endChar": 9
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "765d4ab7_3b0895fe",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-07T12:34:04Z",
+      "side": 1,
+      "message": "I\u0027ll look into this ...",
+      "parentUuid": "6c8d29ab_d1e1f6c6",
       "range": {
         "startLine": 120,
         "startChar": 1,
@@ -107,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a141074_afac807d",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-07T12:34:04Z",
+      "side": 1,
+      "message": "Good idea. Unfortunately, the kernel `CStr` doesn\u0027t yet have `from_bytes_until_nul`.\n\nhttps://rust.docs.kernel.org/kernel/str/struct.CStr.html",
+      "parentUuid": "7757b0db_2ef420a1",
+      "range": {
+        "startLine": 248,
+        "startChar": 66,
+        "endLine": 248,
+        "endChar": 71
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2cc3de9e_9d805133",
         "filename": "drivers/staging/android/shmem.rs",
         "patchSetId": 14
@@ -118,6 +190,30 @@
       "writtenOn": "2025-01-07T05:20:28Z",
       "side": 1,
       "message": "why is that? is there no risk of concurrent access? i don\u0027t see any docs on the type that make that clear. if the `MiscDevice::mmap` caller is making this gaurentee, could it pass a `\u0026mut VmAreaNew` instead?\n\nsame for the other unsafe `VmAreaNew` blocks below",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 53
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a2b6768_1fff05b2",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-07T12:34:04Z",
+      "side": 1,
+      "message": "The `VmAreaNew` type is not `Sync` and must only be created during initial vma setup before the vma is shared with the rest of the kernel, so concurrent access is not a risk.\n\nUsing `\u0026mut VmAreaNew` would not work because using `std::mem::swap` on it would cause mayhem.\n\nI updated the safety comment, ptal.",
+      "parentUuid": "2cc3de9e_9d805133",
       "range": {
         "startLine": 24,
         "startChar": 4,
@@ -151,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f0503e8_c58c64fd",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-07T12:34:04Z",
+      "side": 1,
+      "message": "This isn\u0027t truncation. It\u0027s casting from a small integer type to a large integer type.",
+      "parentUuid": "c83e9451_21b36dc6",
+      "range": {
+        "startLine": 41,
+        "startChar": 59,
+        "endLine": 41,
+        "endChar": 68
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0ab5fb_0860cba4",
@@ -174,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c743d7b3_a15e1968",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-07T12:34:04Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "0e0ab5fb_0860cba4",
+      "range": {
+        "startLine": 46,
+        "startChar": 76,
+        "endLine": 46,
+        "endChar": 89
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1eaf2f1_302e7084",
@@ -187,6 +331,24 @@
       "writtenOn": "2025-01-07T05:20:28Z",
       "side": 1,
       "message": "looks like you have to lock this mutex every time, so i wonder if it would hurt to have a static `Mutex\u003cOption\u003cBox\u003cbindings::file_operations\u003e\u003e\u003e` instead so that you need fewer statics + can skip the `UnsafeCell` stuff? if you lock it and see `None`, then you initialize it to `Some` and grab a pointer. if you lock it and see `Some`, then you just grab a pointer",
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac746469_e8daba48",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-07T12:34:04Z",
+      "side": 1,
+      "message": "A `Box` inside a mutex can only be accessed while the mutex is held, but I need the pointer to remain valid even if I release the mutex. If we had a `OnceCell`, I could use that, but we don\u0027t have that in the kernel yet.\n\nI don\u0027t think it\u0027s a problem to lock the mutex for every `mmap` call; `mmap` is not a hot path.",
+      "parentUuid": "f1eaf2f1_302e7084",
       "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
