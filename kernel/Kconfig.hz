@@ -64,5 +64,15 @@ config DYN_HZ
 	 build time configured HZ value.
 	 If you are unsure, say no.
 
+config DYN_HZ_DEFAULT
+	int "Default DynHZ value (valid range: 100-CONFIG_HZ)"
+	depends on DYN_HZ
+	default HZ
+        range 100 HZ
+	help
+	 Default value for dynhz. This allows ticks to be configured
+	 to arrive at slower than HZ rates. This is useful when you
+	 want to allow boot-time configurable tick rates.
+
 config SCHED_HRTICK
 	def_bool HIGH_RES_TIMERS

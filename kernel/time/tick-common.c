@@ -82,7 +82,7 @@ int tick_is_oneshot_available(void)
 }
 
 #ifdef CONFIG_DYN_HZ
-long long dyn_tick_nsec = TICK_NSEC;
+long long dyn_tick_nsec = TICK_NSEC * HZ / CONFIG_DYN_HZ_DEFAULT;
 
 static int __init set_dyn_hz(char *str)
 {
