@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6763a436_f10874df",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-08T18:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "661ab783_8ff19d83",
+      "range": {
+        "startLine": 1471,
+        "startChar": 10,
+        "endLine": 1471,
+        "endChar": 41
+      },
+      "revId": "e12b5231426abb5356ee9710bec74a7aaff3c26b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fef6ed88_fbce2e7f",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Arg, I let a patch slip: aosp/2984731 \n\nGood catch!",
       "parentUuid": "fef6ed88_fbce2e7f",
+      "range": {
+        "startLine": 1475,
+        "startChar": 0,
+        "endLine": 1476,
+        "endChar": 14
+      },
+      "revId": "e12b5231426abb5356ee9710bec74a7aaff3c26b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edaaba7a_258eeddf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-08T18:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13a2fab1_de12172c",
       "range": {
         "startLine": 1475,
         "startChar": 0,
@@ -142,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f0f7aee_f77c1d6d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-08T18:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f7f4e09_d905b0ca",
+      "range": {
+        "startLine": 1493,
+        "startChar": 1,
+        "endLine": 1493,
+        "endChar": 19
+      },
+      "revId": "e12b5231426abb5356ee9710bec74a7aaff3c26b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3262240_26d6069d",
@@ -179,6 +251,30 @@
       "side": 1,
       "message": "Ha yeah, good point I\u0027ll do something.",
       "parentUuid": "a3262240_26d6069d",
+      "range": {
+        "startLine": 1512,
+        "startChar": 3,
+        "endLine": 1512,
+        "endChar": 66
+      },
+      "revId": "e12b5231426abb5356ee9710bec74a7aaff3c26b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e509ac81_f1807bf3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1512,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-08T18:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "236f617e_8ab544a2",
       "range": {
         "startLine": 1512,
         "startChar": 3,
