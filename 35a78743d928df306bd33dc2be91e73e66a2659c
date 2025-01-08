@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82f64c0b_356eb954",
+        "filename": "drivers/usb/typec/altmodes/thunderbolt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1064639
+      },
+      "writtenOn": "2025-01-08T02:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e822c0_e2b71879",
+      "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d80197b_de752a62",
@@ -131,6 +149,30 @@
         "startChar": 0,
         "endLine": 143,
         "endChar": 21
+      },
+      "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68b510f9_e4781833",
+        "filename": "include/linux/usb/typec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1064639
+      },
+      "writtenOn": "2025-01-08T02:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d80197b_de752a62",
+      "range": {
+        "startLine": 143,
+        "startChar": 1,
+        "endLine": 143,
+        "endChar": 20
       },
       "revId": "35a78743d928df306bd33dc2be91e73e66a2659c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
