@@ -22,6 +22,30 @@
       },
       "revId": "4cfbf6cb98ca387a584bc0016c168ea90a3ce4e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a64233c_ae447567",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-08T18:21:20Z",
+      "side": 1,
+      "message": "As discussed offline, I\u0027ll rework this in a separated patch to not block all those patches for too long!",
+      "parentUuid": "792520d7_8c8a9bce",
+      "range": {
+        "startLine": 1767,
+        "startChar": 1,
+        "endLine": 1767,
+        "endChar": 43
+      },
+      "revId": "4cfbf6cb98ca387a584bc0016c168ea90a3ce4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
