@@ -16,6 +16,24 @@
       "message": "Please add the \"BACKPORT\" tag as it contains extra modifications",
       "revId": "63ebac339fa7ca59245f80a74f13798a5d8004ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b78088d_0264f3f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1064639
+      },
+      "writtenOn": "2025-01-08T22:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa9f3f1_726e880b",
+      "revId": "63ebac339fa7ca59245f80a74f13798a5d8004ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
