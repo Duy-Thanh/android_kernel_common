@@ -63,6 +63,30 @@
       },
       "revId": "a36d5de93f7d6ef085a87ad353adc9601750d502",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981d5b90_ddf970eb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-08T10:04:33Z",
+      "side": 1,
+      "message": "Hang on, that is actually broken. __pkvm_host_use_dma() does __host_check_page_state_range(phys_addr, size, PKVM_PAGE_OWNED) which will now fail if the refcount is elevated. Urgh.\n\nLet me redo this.",
+      "parentUuid": "936c6c10_b8628b04",
+      "range": {
+        "startLine": 981,
+        "startChar": 0,
+        "endLine": 981,
+        "endChar": 64
+      },
+      "revId": "a36d5de93f7d6ef085a87ad353adc9601750d502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
