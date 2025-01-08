@@ -16,6 +16,23 @@
       "message": "We have modified the commit message.",
       "revId": "ebf311cfefe93133549129a7dfd254e38376e732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d93b7681_94ddcc04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046051
+      },
+      "writtenOn": "2025-01-08T10:15:47Z",
+      "side": 1,
+      "message": "Respin bug:b/387229345",
+      "revId": "ebf311cfefe93133549129a7dfd254e38376e732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
