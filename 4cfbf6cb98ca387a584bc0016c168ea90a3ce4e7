@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "792520d7_8c8a9bce",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-08T13:45:26Z",
+      "side": 1,
+      "message": "pin_user_pages() takes a number of pages as an argument, it\u0027s a shame we don\u0027t make use of that infrastructure here. Could we pass a number of pages to pkvm_mem_abort() instead? That number of pages would be the min(distance to end of the current memslot, distance to the end of the range being faulted in) or something?",
+      "range": {
+        "startLine": 1767,
+        "startChar": 1,
+        "endLine": 1767,
+        "endChar": 43
+      },
+      "revId": "4cfbf6cb98ca387a584bc0016c168ea90a3ce4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
