@@ -16,6 +16,23 @@
       "message": "Feel free to add anybody I\u0027ve missed from Reviewer/CC.",
       "revId": "951894def51cfcb8c7ac23e7a8252979372034c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "941c2954_ec586dfa",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-01-08T21:16:09Z",
+      "side": 1,
+      "message": "Should this have ` if (X86)`?",
+      "revId": "951894def51cfcb8c7ac23e7a8252979372034c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
