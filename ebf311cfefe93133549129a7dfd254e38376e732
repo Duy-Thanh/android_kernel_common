@@ -33,6 +33,23 @@
       "message": "Respin bug:b/387229345",
       "revId": "ebf311cfefe93133549129a7dfd254e38376e732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62afd18c_5c356c47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-01-08T10:30:05Z",
+      "side": 1,
+      "message": "cited bug is for 2024-12",
+      "revId": "ebf311cfefe93133549129a7dfd254e38376e732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
