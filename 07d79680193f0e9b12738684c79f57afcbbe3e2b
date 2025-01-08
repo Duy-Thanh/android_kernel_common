@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fcd4b29_ed95e7f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-08T12:35:34Z",
+      "side": 1,
+      "message": "I\u0027ve now said the same things upstream, please fix there and make this a patch series with the required fixup as well.",
+      "revId": "07d79680193f0e9b12738684c79f57afcbbe3e2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5962f77d_de595bc0",
         "filename": "drivers/bluetooth/btusb.c",
         "patchSetId": 1
