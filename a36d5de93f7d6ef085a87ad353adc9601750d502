@@ -39,6 +39,30 @@
       },
       "revId": "a36d5de93f7d6ef085a87ad353adc9601750d502",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936c6c10_b8628b04",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-08T10:00:51Z",
+      "side": 1,
+      "message": "Yep, in my mind checking PKVM_PAGE_OWNED here is semantically equivalent to what we had before where we check the refcount only from host_request_owned_transition() where, well, we really want PKVM_PAGE_OWNED.\n\nBut yes, a comment can\u0027t hurt, I\u0027ll add something.",
+      "parentUuid": "8cd47583_471463fd",
+      "range": {
+        "startLine": 981,
+        "startChar": 0,
+        "endLine": 981,
+        "endChar": 64
+      },
+      "revId": "a36d5de93f7d6ef085a87ad353adc9601750d502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
