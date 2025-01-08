@@ -87,6 +87,30 @@
       },
       "revId": "a36d5de93f7d6ef085a87ad353adc9601750d502",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f46708a0_e2af3a12",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-08T10:39:02Z",
+      "side": 1,
+      "message": "Done. It\u0027s a little more complicated, but should be a nice micro-optimization overall (the cost of walking the memblock list and vmemmap multiple times was visible in the host_mod_prot path, so it might be here too).",
+      "parentUuid": "981d5b90_ddf970eb",
+      "range": {
+        "startLine": 981,
+        "startChar": 0,
+        "endLine": 981,
+        "endChar": 64
+      },
+      "revId": "a36d5de93f7d6ef085a87ad353adc9601750d502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
