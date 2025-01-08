@@ -22,6 +22,30 @@
       },
       "revId": "5f6a30f2ba37e051776f5c47e65ffea395f5f4c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b238bb0_2b22d984",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-01-08T10:00:40Z",
+      "side": 1,
+      "message": "We have modified the commit message",
+      "parentUuid": "fc5426fe_d4a7fe43",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "5f6a30f2ba37e051776f5c47e65ffea395f5f4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
