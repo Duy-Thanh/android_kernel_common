@@ -16,6 +16,29 @@
       "message": "Where is the Documentation/ABI update for this new custom sysfs api?",
       "revId": "07d79680193f0e9b12738684c79f57afcbbe3e2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5962f77d_de595bc0",
+        "filename": "drivers/bluetooth/btusb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4032,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-08T12:33:01Z",
+      "side": 1,
+      "message": "raced with userspace and lost, please do not do this.",
+      "range": {
+        "startLine": 4032,
+        "startChar": 0,
+        "endLine": 4032,
+        "endChar": 59
+      },
+      "revId": "07d79680193f0e9b12738684c79f57afcbbe3e2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
