@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332922d8_ac37fc8d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-09T01:19:29Z",
+      "side": 1,
+      "message": "@mkorpershoek@baylibre.com Please let me know if you use `-D__ANDROID_COMMON_KERNEL__` in your drivers. If so, I\u0027ll keep this line; otherwise I\u0027ll delete it.\n\nIf you are not sure, I\u0027ll keep this line for maximum backwards compatibility.",
+      "revId": "f9e151550ee8e0b844a6b013d65bbc9a6393a662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
