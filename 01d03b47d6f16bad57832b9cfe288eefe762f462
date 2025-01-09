@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106b24c6_4f25bc20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-09T01:21:16Z",
+      "side": 1,
+      "message": "Hello Amit,\n\nDo you use `-D__ANDROID_COMMON_KERNEL__`? If so, I\u0027ll update this change to put it back. Otherwise I\u0027ll delete it from db845c related builds. Thanks!",
+      "revId": "01d03b47d6f16bad57832b9cfe288eefe762f462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
