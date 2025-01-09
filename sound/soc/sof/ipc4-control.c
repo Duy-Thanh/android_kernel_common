@@ -240,6 +240,7 @@ sof_ipc4_set_generic_control_data(struct snd_sof_dev *sdev,
 	return ret;
 }
 
+<<<<<<< HEAD   (57fdd3 Merge branch 'android15-6.6-lts-4c172ac04990' into android15)
 static void sof_ipc4_refresh_generic_control(struct snd_sof_control *scontrol)
 {
 	struct sof_ipc4_control_data *cdata = scontrol->ipc_control_data;
@@ -394,6 +395,115 @@ static int sof_ipc4_enum_get(struct snd_sof_control *scontrol,
 	unsigned int i;
 
 	sof_ipc4_refresh_generic_control(scontrol);
+||||||| BASE
+=======
+static bool sof_ipc4_switch_put(struct snd_sof_control *scontrol,
+				struct snd_ctl_elem_value *ucontrol)
+{
+	struct sof_ipc4_control_data *cdata = scontrol->ipc_control_data;
+	struct snd_soc_component *scomp = scontrol->scomp;
+	struct snd_sof_dev *sdev = snd_soc_component_get_drvdata(scomp);
+	struct snd_sof_widget *swidget;
+	bool widget_found = false;
+	bool change = false;
+	unsigned int i;
+	u32 value;
+	int ret;
+
+	/* update each channel */
+	for (i = 0; i < scontrol->num_channels; i++) {
+		value = ucontrol->value.integer.value[i];
+		change = change || (value != cdata->chanv[i].value);
+		cdata->chanv[i].channel = i;
+		cdata->chanv[i].value = value;
+	}
+
+	if (!pm_runtime_active(scomp->dev))
+		return change;
+
+	/* find widget associated with the control */
+	list_for_each_entry(swidget, &sdev->widget_list, list) {
+		if (swidget->comp_id == scontrol->comp_id) {
+			widget_found = true;
+			break;
+		}
+	}
+
+	if (!widget_found) {
+		dev_err(scomp->dev, "Failed to find widget for kcontrol %s\n", scontrol->name);
+		return false;
+	}
+
+	ret = sof_ipc4_set_generic_control_data(sdev, swidget, scontrol, true);
+	if (ret < 0)
+		return false;
+
+	return change;
+}
+
+static int sof_ipc4_switch_get(struct snd_sof_control *scontrol,
+			       struct snd_ctl_elem_value *ucontrol)
+{
+	struct sof_ipc4_control_data *cdata = scontrol->ipc_control_data;
+	unsigned int i;
+
+	/* read back each channel */
+	for (i = 0; i < scontrol->num_channels; i++)
+		ucontrol->value.integer.value[i] = cdata->chanv[i].value;
+
+	return 0;
+}
+
+static bool sof_ipc4_enum_put(struct snd_sof_control *scontrol,
+			      struct snd_ctl_elem_value *ucontrol)
+{
+	struct sof_ipc4_control_data *cdata = scontrol->ipc_control_data;
+	struct snd_soc_component *scomp = scontrol->scomp;
+	struct snd_sof_dev *sdev = snd_soc_component_get_drvdata(scomp);
+	struct snd_sof_widget *swidget;
+	bool widget_found = false;
+	bool change = false;
+	unsigned int i;
+	u32 value;
+	int ret;
+
+	/* update each channel */
+	for (i = 0; i < scontrol->num_channels; i++) {
+		value = ucontrol->value.enumerated.item[i];
+		change = change || (value != cdata->chanv[i].value);
+		cdata->chanv[i].channel = i;
+		cdata->chanv[i].value = value;
+	}
+
+	if (!pm_runtime_active(scomp->dev))
+		return change;
+
+	/* find widget associated with the control */
+	list_for_each_entry(swidget, &sdev->widget_list, list) {
+		if (swidget->comp_id == scontrol->comp_id) {
+			widget_found = true;
+			break;
+		}
+	}
+
+	if (!widget_found) {
+		dev_err(scomp->dev, "Failed to find widget for kcontrol %s\n", scontrol->name);
+		return false;
+	}
+
+	ret = sof_ipc4_set_generic_control_data(sdev, swidget, scontrol, true);
+	if (ret < 0)
+		return false;
+
+	return change;
+}
+
+static int sof_ipc4_enum_get(struct snd_sof_control *scontrol,
+			     struct snd_ctl_elem_value *ucontrol)
+{
+	struct sof_ipc4_control_data *cdata = scontrol->ipc_control_data;
+	unsigned int i;
+>>>>>>> BRANCH (952ca5 Merge 6.6.62 into android15-6.6-lts)
 
 	/* read back each channel */
 	for (i = 0; i < scontrol->num_channels; i++)
@@ -649,6 +759,7 @@ sof_ipc4_volsw_setup(struct snd_sof_dev *sdev, struct snd_sof_widget *swidget,
 	return sof_ipc4_set_volume_data(sdev, swidget, scontrol, false);
 }
 
+<<<<<<< HEAD   (57fdd3 Merge branch 'android15-6.6-lts-4c172ac04990' into android15)
 #define PARAM_ID_FROM_EXTENSION(_ext)	(((_ext) & SOF_IPC4_MOD_EXT_MSG_PARAM_ID_MASK)	\
 					 >> SOF_IPC4_MOD_EXT_MSG_PARAM_ID_SHIFT)
 
@@ -779,6 +890,9 @@ static void sof_ipc4_control_update(struct snd_sof_dev *sdev, void *ipc_message)
 			   SNDRV_CTL_EVENT_MASK_VALUE, kc, 0);
 }
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (952ca5 Merge 6.6.62 into android15-6.6-lts)
 /* set up all controls for the widget */
 static int sof_ipc4_widget_kcontrol_setup(struct snd_sof_dev *sdev, struct snd_sof_widget *swidget)
 {
