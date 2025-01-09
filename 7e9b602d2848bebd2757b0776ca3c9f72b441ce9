@@ -16,6 +16,24 @@
       "message": "@jiyong@google.com please confirm that `__ANDROID_COMMON_KERNEL__` is not used anywhere in microdroid\u0027s code. If you can\u0027t confirm, I\u0027ll add `__ANDROID_COMMON_KERNEL__` back to maintain the old behavior.",
       "revId": "7e9b602d2848bebd2757b0776ca3c9f72b441ce9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "131a1305_2c002723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-09T00:53:38Z",
+      "side": 1,
+      "message": "(See CL:3443844 for how I would add `__ANDROID_COMMON_KERNEL__` back if it is needed.)",
+      "parentUuid": "16bbfaa9_6480d4de",
+      "revId": "7e9b602d2848bebd2757b0776ca3c9f72b441ce9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
