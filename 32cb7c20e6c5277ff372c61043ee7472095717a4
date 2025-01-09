@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0994b3_7f4d57c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-09T16:57:34Z",
+      "side": 1,
+      "message": "\"Bug: 384815694\" should also be here. When you cherry-pick, don\u0027t remove content from the commit message. This commit message should be exactly like the cherry-pick source with the respin bug added.",
+      "revId": "32cb7c20e6c5277ff372c61043ee7472095717a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c187b0f3_e4abb42a",

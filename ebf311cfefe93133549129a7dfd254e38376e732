@@ -50,6 +50,24 @@
       "message": "cited bug is for 2024-12",
       "revId": "ebf311cfefe93133549129a7dfd254e38376e732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74c3f59f_1ae0f33b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-09T16:57:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62afd18c_5c356c47",
+      "revId": "ebf311cfefe93133549129a7dfd254e38376e732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
