@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b53429_e97f74a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-01-09T05:33:46Z",
+      "side": 1,
+      "message": "Thank you for sharing this fix! It looks very interesting, and I need to think more about its impact, but it is likely to cause a collision with upstream soon, so it might be best to re-base and resubmit this after 6.13-rc1 lands in android-mainline",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a317f9_a3c27042",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6734,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-01-09T05:33:46Z",
+      "side": 1,
+      "message": "This is targeting android-mainline, but unfortunately this change will collide with changes that are in 6.13-rc1 once android-mainline syncs with upstream.\n\nSo I wonder if it might be better to rebase and apply this after that sync lands, as a collision will make the sync with upstream more difficult?",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b88df147_cc21206c",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-01-09T05:33:46Z",
+      "side": 1,
+      "message": "Hrm. I never fully understood why the blocked reason tracepoint was in ttwu instead of near the code that dequeues the blocked task - so initially this makes more sense.  But I also wonder if the cost of stack walk here might be more problematic here when we hold the rqlock?\n\nThis change looks intreaging but I need to probably dig a bit more to better understand the impact of the change properly (also its a bummer having it effectively duplicate the sched_switch tracepoint).",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
