@@ -34,6 +34,23 @@
       "parentUuid": "16bbfaa9_6480d4de",
       "revId": "7e9b602d2848bebd2757b0776ca3c9f72b441ce9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9bfb1c2_028677e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-09T03:25:57Z",
+      "side": 1,
+      "message": "LGTM, but I can\u0027t +2 here.",
+      "revId": "7e9b602d2848bebd2757b0776ca3c9f72b441ce9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
