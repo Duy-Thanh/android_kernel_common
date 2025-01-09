@@ -16,6 +16,24 @@
       "message": "This commit message is incomplete, see https://source.android.com/docs/core/architecture/kernel/howto-symbol-lists#send-list\n\nAlso take a look at the note regarding \"updating the reference ABI representation\" in that section.",
       "revId": "7b269b44fbacbea3069fbdaa0adda5337d5c583e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6550dcc_b8d6e462",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-01-09T09:48:50Z",
+      "side": 1,
+      "message": "Symbols of interfaces which were not present previously has been updated manually into commit description.",
+      "parentUuid": "70e2afb9_0b63284c",
+      "revId": "7b269b44fbacbea3069fbdaa0adda5337d5c583e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
