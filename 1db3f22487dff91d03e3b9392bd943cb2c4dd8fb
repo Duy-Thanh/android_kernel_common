@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3de185e_b9d92318",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-01-09T08:41:38Z",
+      "side": 1,
+      "message": "The same bug has been linked twice",
+      "revId": "1db3f22487dff91d03e3b9392bd943cb2c4dd8fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b738ff_04667c05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-01-09T08:41:38Z",
+      "side": 1,
+      "message": "@srosek@google.com - do we need to create a special tracing bug for that kind of change (to make sure it will land upstream)?",
+      "revId": "1db3f22487dff91d03e3b9392bd943cb2c4dd8fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
