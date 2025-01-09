@@ -22,6 +22,30 @@
       },
       "revId": "6259b337d11ac65d36d69de9ae870755e4000b61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7a01afa_9b2b4c01",
+        "filename": "kernel/gen_kheaders.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-09T19:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cad53d3c_075eac4d",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 29
+      },
+      "revId": "6259b337d11ac65d36d69de9ae870755e4000b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
