@@ -34,6 +34,24 @@
       "parentUuid": "106b24c6_4f25bc20",
       "revId": "01d03b47d6f16bad57832b9cfe288eefe762f462",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b61bd8_44be31e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2025-01-09T14:56:37Z",
+      "side": 1,
+      "message": "I don\u0027t think there is any db845c specifc code that uses __ANDROID_COMMON_KERNEL__, and I did not find it being used in the kernel tree.\n\nBut just see BRANCH is defined in build.config.common, and it seems used in the build repositories, if changed to use build.config.constants here, BRANCH would be not defined I guess, will that not cause any issue?",
+      "parentUuid": "6699cd71_8cc3b38a",
+      "revId": "01d03b47d6f16bad57832b9cfe288eefe762f462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
