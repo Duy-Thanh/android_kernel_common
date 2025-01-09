@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b93c27_c91d756d",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-09T17:56:31Z",
+      "side": 1,
+      "message": "This can\u0027t be inline anymore, please remove.",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e5a84819_dd4e5c86",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mm_types.h",
+              "range": {
+                "startLine": 519,
+                "startChar": 0,
+                "endLine": 520,
+                "endChar": 0
+              },
+              "replacement": "void set_page_private(struct page *page, unsigned long private);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bbd3a7a279af4683166af20029776aa9fc43e912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6844b108_c02de2bd",
+        "filename": "mm/mmzone.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-09T17:56:31Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 6
+      },
+      "revId": "bbd3a7a279af4683166af20029776aa9fc43e912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
