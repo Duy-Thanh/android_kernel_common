@@ -52,6 +52,24 @@
       "parentUuid": "15d24564_30b99ca4",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55aab5f4_5faa79ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-01-10T13:44:44Z",
+      "side": 1,
+      "message": "The problem was the missing newline at the end of the symbol list file.",
+      "parentUuid": "08cff0a4_9a84d690",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
