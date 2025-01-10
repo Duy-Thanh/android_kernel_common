@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "583b9ed7_0108bfe7",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-10T13:10:34Z",
+      "side": 1,
+      "message": "The C implmenetation does not clear the pkey flags. The flags are only modified by the\n```\nvm_flags_clear(vma, calc_vm_may_flags(~asma-\u003eprot_mask));\n```\nline, and `calc_vm_may_flags` returns a bitflag where only `VM_MAY{READ,WRITE,EXEC}` can be set, so this can never result in the pkey flags being modified.",
+      "parentUuid": "765d4ab7_3b0895fe",
+      "range": {
+        "startLine": 120,
+        "startChar": 1,
+        "endLine": 128,
+        "endChar": 9
+      },
+      "revId": "e5e83daa6c13121dc05d65a953b946e759d2b4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7757b0db_2ef420a1",
         "filename": "drivers/staging/android/ashmem_rust.rs",
         "patchSetId": 14
