@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "773ad9c1_9a6a7558",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-10T16:52:44Z",
+      "side": 1,
+      "message": "Do you really care that `smmu` is used by `smmu_domain` or actually that it\u0027s used by _any_ domain? If it\u0027s the latter, you could just check the `smmu-\u003elist` instead of iterating.",
+      "range": {
+        "startLine": 1125,
+        "startChar": 12,
+        "endLine": 1125,
+        "endChar": 35
+      },
+      "revId": "057d43a67b975d1b1873c55b96d61903e29b455e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd1fc585_d2868fdb",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-10T16:52:44Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 1173,
+        "startChar": 27,
+        "endLine": 1173,
+        "endChar": 35
+      },
+      "revId": "057d43a67b975d1b1873c55b96d61903e29b455e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d868e64_301dd6ad",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1264,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-10T16:52:44Z",
+      "side": 1,
+      "message": "Maybe:\n\n```\nif (iommu_node) {\n\tif (ret)\n\t\thyp_free(iommu_node);\n\telse\n\t\tlist_add_tail(...);\n}\n```\n\nAlso, are you sure you don\u0027t need any invalidation on the failure path?",
+      "range": {
+        "startLine": 1261,
+        "startChar": 0,
+        "endLine": 1264,
+        "endChar": 0
+      },
+      "revId": "057d43a67b975d1b1873c55b96d61903e29b455e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
