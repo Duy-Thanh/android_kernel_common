@@ -46,6 +46,30 @@
       },
       "revId": "8d3069bb89312cff576b9091f70078a14a28b017",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe0c24c2_f709bd3b",
+        "filename": "drivers/iommu/kvm-iommu-stub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-01-10T10:13:32Z",
+      "side": 1,
+      "message": "I was rather suggesting to enforce `static bool enabled \u003d true` in `#else`, because for module case we need extra `kvm-arm.protected_modules\u003dkvm-iommu-stub` anyway.",
+      "parentUuid": "6819c758_534f3608",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 6
+      },
+      "revId": "8d3069bb89312cff576b9091f70078a14a28b017",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
