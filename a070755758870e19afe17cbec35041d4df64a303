@@ -16,6 +16,24 @@
       "message": "Is there a test case for this change. Please highlight that in TEST: clause in the commit message.",
       "revId": "a070755758870e19afe17cbec35041d4df64a303",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ac90030_9359e321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983825
+      },
+      "writtenOn": "2025-01-10T19:11:24Z",
+      "side": 1,
+      "message": "There is no test case associated with this particular change, unfortunately.",
+      "parentUuid": "0109386d_540c82d3",
+      "revId": "a070755758870e19afe17cbec35041d4df64a303",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
