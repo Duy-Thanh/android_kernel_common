@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ba143ab_96187d6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3389098
+      },
+      "writtenOn": "2025-01-10T02:05:04Z",
+      "side": 1,
+      "message": "While this patch is for SCO data, some thoughts for setting USB interface with device_gruop:\n\nCertain btusb devices have an extra USB interface (e.g. iso_alt for LE audio ISO data). If we\u0027d like to manage the extra USB interface configuration in the same way (in user space), we\u0027d better make new attribute (e.g. iso_alt) only available for these devices.",
+      "parentUuid": "c7c7fe58_ea5dd21a",
+      "revId": "07d79680193f0e9b12738684c79f57afcbbe3e2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5962f77d_de595bc0",
