@@ -34,6 +34,23 @@
       "parentUuid": "0109386d_540c82d3",
       "revId": "a070755758870e19afe17cbec35041d4df64a303",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6489cc92_c43981f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1143404
+      },
+      "writtenOn": "2025-01-10T23:13:38Z",
+      "side": 1,
+      "message": "thanks, how did you make sure it works, probably you did some manual tests. You can still say in commit message\n\nTest: Manual Test\n\nalso, please note, I don\u0027t have +2 on this",
+      "revId": "a070755758870e19afe17cbec35041d4df64a303",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
