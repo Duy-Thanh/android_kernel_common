@@ -34,6 +34,24 @@
       "parentUuid": "6b8acca7_1c3cb05d",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08cff0a4_9a84d690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-01-10T11:18:35Z",
+      "side": 1,
+      "message": "The kernel_aarch64 build fails claiming the symbol is not in the symtab:\n\n```\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - gpiod_export\n```\n\nI took a quick look and when I read this correctly, then this symbol is conditional on `CONFIG_GPIO_SYSFS\u003dy` but the `gki_defconfig` does not define that.\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android13-5.15:common/drivers/gpio/Makefile;l\u003d11\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android13-5.15:common/arch/arm64/configs/gki_defconfig\n\nDoes your local build succeed?",
+      "parentUuid": "15d24564_30b99ca4",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
