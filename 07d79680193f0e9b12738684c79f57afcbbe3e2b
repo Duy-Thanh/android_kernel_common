@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df77fb9f_155d19ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-01-10T07:39:15Z",
+      "side": 1,
+      "message": "Bluetooth audio will be using this interface if the controller transport is USB and if we prefer software audio data path (our project is probably the first one with this HW configuration).\n\nAndroid Bluetooth stack is entirely in userspace. Before this patch there\u0027s no way to inform kernel of the audio state or decide the preferred alternative settings.",
+      "parentUuid": "8ad1d030_a8d4af36",
+      "revId": "07d79680193f0e9b12738684c79f57afcbbe3e2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5962f77d_de595bc0",
         "filename": "drivers/bluetooth/btusb.c",
         "patchSetId": 1
