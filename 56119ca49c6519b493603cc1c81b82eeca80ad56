@@ -16,6 +16,24 @@
       "message": "`gpiod_export` seems not to be a valid symbol?",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d24564_30b99ca4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-01-10T09:26:31Z",
+      "side": 1,
+      "message": "It was valid symbol, which was discovered during development phase that it is required. Why you think so?",
+      "parentUuid": "6b8acca7_1c3cb05d",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
