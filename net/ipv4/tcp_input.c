@@ -7055,9 +7055,32 @@ int tcp_conn_request(struct request_sock_ops *rsk_ops,
 		sock_put(fastopen_sk);
 	} else {
 		tcp_rsk(req)->tfo_listener = false;
+<<<<<<< HEAD   (961ad9 Merge 5.15.175 into android14-5.15-lts)
 		if (!want_cookie)
 			inet_csk_reqsk_queue_hash_add(sk, req,
 				tcp_timeout_init((struct sock *)req));
+||||||| BASE
+		if (!want_cookie) {
+			req->timeout = tcp_timeout_init((struct sock *)req);
+			if (unlikely(!inet_csk_reqsk_queue_hash_add(sk, req,
+								    req->timeout))) {
+				reqsk_free(req);
+				return 0;
+			}
+
+		}
+=======
+		if (!want_cookie) {
+			req->timeout = tcp_timeout_init((struct sock *)req);
+			if (unlikely(!inet_csk_reqsk_queue_hash_add(sk, req,
+								    req->timeout))) {
+				reqsk_free(req);
+				dst_release(dst);
+				return 0;
+			}
+
+		}
+>>>>>>> BRANCH (473558 Linux 5.15.176)
 		af_ops->send_synack(sk, dst, &fl, req, &foc,
 				    !want_cookie ? TCP_SYNACK_NORMAL :
 						   TCP_SYNACK_COOKIE,
