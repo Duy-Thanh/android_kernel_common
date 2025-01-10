@@ -70,6 +70,24 @@
       "parentUuid": "08cff0a4_9a84d690",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e5d9bc6_bc602537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-01-10T15:11:02Z",
+      "side": 1,
+      "message": "In any case, we don\u0027t have `gpiod_export` because we don\u0027t have `CONFIG_GPIO_SYSFS`.\n\nPlease remove this symbol.",
+      "parentUuid": "55aab5f4_5faa79ed",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
