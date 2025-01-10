@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ad1d030_a8d4af36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-10T07:27:08Z",
+      "side": 1,
+      "message": "What userspace portion of Android is now going to properly access this new sysfs file and how will it know to do this?  Why can\u0027t the kernel just do it automaically instead?",
+      "parentUuid": "8ba143ab_96187d6e",
+      "revId": "07d79680193f0e9b12738684c79f57afcbbe3e2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5962f77d_de595bc0",
         "filename": "drivers/bluetooth/btusb.c",
         "patchSetId": 1
