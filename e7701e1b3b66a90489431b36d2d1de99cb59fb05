@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfeed5bf_70b1fd14",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-10T18:02:59Z",
+      "side": 1,
+      "message": "How come we don\u0027t need to `unuse_dma` on failure for the previous entries that succeeded?",
+      "range": {
+        "startLine": 494,
+        "startChar": 8,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "e7701e1b3b66a90489431b36d2d1de99cb59fb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
