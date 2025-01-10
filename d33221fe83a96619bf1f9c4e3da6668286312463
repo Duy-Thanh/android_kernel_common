@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "248fce33_4fc47bde",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-10T17:22:38Z",
+      "side": 1,
+      "message": "Why is this part of this patch?",
+      "range": {
+        "startLine": 1001,
+        "startChar": 0,
+        "endLine": 1001,
+        "endChar": 40
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71cbc97c_e01caf1b",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-10T17:22:38Z",
+      "side": 1,
+      "message": "I think this is fragile with the domain lock held, as you\u0027re relying on the snapshot operation not going near the TLB invalidation ops...",
+      "range": {
+        "startLine": 1106,
+        "startChar": 8,
+        "endLine": 1106,
+        "endChar": 38
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de2dfaa4_fef6b480",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-10T17:22:38Z",
+      "side": 1,
+      "message": "tbh, I think you can just hardcode the Arm block sizes here, e.g.:\n\n```\nswitch (PAGE_SIZE) {\ncase SZ_4K:\n\tpgsize_bitmask \u003d SZ_4K | SZ_2M | SZ_1G;\n\tbreak;\n...\n}\n```",
+      "range": {
+        "startLine": 1547,
+        "startChar": 0,
+        "endLine": 1552,
+        "endChar": 0
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff9d62e_df81f373",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-10T17:22:38Z",
+      "side": 1,
+      "message": "hmm. It\u0027s not really related to the coherency of the walker though, is it?\n\nWe should probably use `IOMMU_CACHE` unconditionally and let the stage-1 override it, like we do for the CPU. What do you think?",
+      "range": {
+        "startLine": 1580,
+        "startChar": 43,
+        "endLine": 1580,
+        "endChar": 56
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
