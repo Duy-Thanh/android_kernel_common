@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21d08671_be45e4cb",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 3591248
+      },
+      "writtenOn": "2025-01-10T02:37:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7b93c27_c91d756d",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 6
+      },
+      "revId": "bbd3a7a279af4683166af20029776aa9fc43e912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6844b108_c02de2bd",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7287462_c3ece6cb",
+        "filename": "mm/mmzone.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3591248
+      },
+      "writtenOn": "2025-01-10T02:37:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6844b108_c02de2bd",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 6
+      },
+      "revId": "bbd3a7a279af4683166af20029776aa9fc43e912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea62bd74_a894772c",
@@ -78,6 +126,30 @@
       "writtenOn": "2025-01-09T17:58:12Z",
       "side": 1,
       "message": "IIUC you are trying to change the value of `private` in this hook. But you are passing it by value instead of by reference. How would this work?",
+      "range": {
+        "startLine": 16,
+        "startChar": 41,
+        "endLine": 16,
+        "endChar": 48
+      },
+      "revId": "bbd3a7a279af4683166af20029776aa9fc43e912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b8f2b4_6ffb6359",
+        "filename": "mm/mmzone.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3591248
+      },
+      "writtenOn": "2025-01-10T02:37:34Z",
+      "side": 1,
+      "message": "This hook only records, not modifies. Just like \"__page_ref_mod\". See issue for details.",
+      "parentUuid": "ea62bd74_a894772c",
       "range": {
         "startLine": 16,
         "startChar": 41,
