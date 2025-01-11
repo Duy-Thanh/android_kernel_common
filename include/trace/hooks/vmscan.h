@@ -111,6 +111,7 @@ DECLARE_HOOK(android_vh_vmscan_kswapd_done,
 	TP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order,
 		unsigned int reclaim_order),
 	TP_ARGS(node_id, highest_zoneidx, alloc_order, reclaim_order));
+<<<<<<< HEAD   (42ab2c618ff1c956ec994d575536c84aa9ceb1b3 FROMGIT: drm/ttm/pool: back up at native page order)
 DECLARE_HOOK(android_vh_remove_mapping,
 	TP_PROTO(struct address_space *mapping, struct folio *folio, bool reclaimed),
 	TP_ARGS(mapping, folio, reclaimed));
@@ -164,6 +165,18 @@ DECLARE_HOOK(android_vh_mm_customize_pgdat_balanced,
 DECLARE_HOOK(android_vh_mm_customize_reclaim_idx,
 	TP_PROTO(int order, gfp_t gfp, s8 *reclaim_idx, enum zone_type *highest_zoneidx),
 	TP_ARGS(order, gfp, reclaim_idx, highest_zoneidx));
+||||||| BASE   (3b2b74ff687d2f38fcf1481a36dc2c68b406ffe0 ANDROID: add vendor hook for mapping_shrinkable)
+
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_vmscan_kswapd_wake,
+	TP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order),
+	TP_ARGS(node_id, highest_zoneidx, alloc_order), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_vmscan_kswapd_done,
+	TP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order,
+			unsigned int reclaim_order),
+	TP_ARGS(node_id, highest_zoneidx, alloc_order, reclaim_order), 1);
+
+>>>>>>> CHANGE (cc522873e0bda9dabf64075efbe2189beaf63d01 ANDROID: mm: add kswapd wake/done rvh)
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
