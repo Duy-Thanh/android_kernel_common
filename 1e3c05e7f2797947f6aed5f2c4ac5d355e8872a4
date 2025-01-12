@@ -104,6 +104,24 @@
       "parentUuid": "b88df147_cc21206c",
       "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f20b49_155a571f",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-12T14:50:27Z",
+      "side": 1,
+      "message": "Hmm, I thought my original purpose was pertty naive. Try to catch a waking a process where it\u0027s blocked at D state and I wan\u0027t aware get_wchan() equires the\nthread to be blocking in cpu_switch_to(). I might miss something there. Please feel free to fix it. \n\nBTW, get_wchan will skip any scheduler functions, does stack_trace_save_tsk() in this cases put in to __schedule that can achieve the same goal? Probably, you have done the whole study:) Thanks.\n\n```\nTRACE_EVENT(sched_blocked_reason,\n\n\tTP_PROTO(struct task_struct *tsk),\n\n\tTP_ARGS(tsk),\n\n\tTP_STRUCT__entry(\n\t\t__field( pid_t,\tpid\t)\n\t\t__field( void*, caller\t)\n\t\t__field( bool, io_wait\t)\n\t),\n\n\tTP_fast_assign(\n\t\t__entry-\u003epid\t\u003d tsk-\u003epid;\n\t\t__entry-\u003ecaller \u003d (void *)get_wchan(tsk);\n\t\t__entry-\u003eio_wait \u003d tsk-\u003ein_iowait;\n\t),\n\n\tTP_printk(\"pid\u003d%d iowait\u003d%d caller\u003d%pS\", __entry-\u003epid, __entry-\u003eio_wait, __entry-\u003ecaller)\n); \n\nunsigned long get_wchan(struct task_struct *p)\n{\n\tstruct wchan_info wchan_info \u003d {\n\t\t.pc \u003d 0,\n\t\t.count \u003d 0,\n\t};\n\n\tif (!p || p \u003d\u003d current || task_is_running(p))\n\t\treturn 0;\n\n\tif (!try_get_task_stack(p))\n\t\treturn 0;\n\n\tarch_stack_walk(get_wchan_cb, \u0026wchan_info, p, NULL);\n\n\tput_task_stack(p);\n\n\treturn wchan_info.pc;\n}\nEXPORT_SYMBOL_GPL(get_wchan);\n\nstatic bool get_wchan_cb(void *arg, unsigned long pc)\n{\n\tstruct wchan_info *wchan_info \u003d arg;\n\n\tif (!in_sched_functions(pc)) {\n\t\twchan_info-\u003epc \u003d pc;\n\t\treturn false;\n\t}\n\treturn wchan_info-\u003ecount++ \u003c 16;\n}\n```",
+      "parentUuid": "af1ac5f5_9ef9f24d",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
