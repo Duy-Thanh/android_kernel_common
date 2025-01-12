@@ -122,6 +122,24 @@
       "parentUuid": "af1ac5f5_9ef9f24d",
       "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809a03f5_0209b423",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-12T15:26:55Z",
+      "side": 1,
+      "message": "Thank you. The stack_trace_save_tsk() can achieve the same goal as __getwhan().\nHowever, we cannot use __getwhan() here because it traces the current process, \nand the address returned by __getwhan() would be __getwhan + 0xXX. In contrast, stack_trace_save_tsk() handles this issue.\n\nI also found that placing stack_trace_save_tsk() inside the sched_blocked_reason\ntracepoint might interfere with the inline attribute, so I moved it outside.\n\nstack_trace_save_tsk() is more flexible, as it allows us to specify the number\nof return addresses to skip and store. It also invokes in_sched_functions() to\nskip any scheduler functions.\n```\nunsigned int stack_trace_save_tsk(struct task_struct *tsk, unsigned long *store,\n\t\t\t\t  unsigned int size, unsigned int skipnr)\n{\n\tstack_trace_consume_fn consume_entry \u003d stack_trace_consume_entry_nosched;\n\tstruct stacktrace_cookie c \u003d {\n\t\t.store\t\u003d store,\n\t\t.size\t\u003d size,\n\t\t/* skip this function if they are tracing us */\n\t\t.skip\t\u003d skipnr + (current \u003d\u003d tsk),\n\t};\n\n\tif (!try_get_task_stack(tsk))\n\t\treturn 0;\n\n\tarch_stack_walk(consume_entry, \u0026c, tsk, NULL);\n\tput_task_stack(tsk);\n\treturn c.len;\n}\n\nstatic bool stack_trace_consume_entry_nosched(void *cookie, unsigned long addr)\n{\n\tif (in_sched_functions(addr))\n\t\treturn true;\n\treturn stack_trace_consume_entry(cookie, addr);\n}\n```",
+      "parentUuid": "e6f20b49_155a571f",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
