@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c262869_3e891fc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-12T13:53:39Z",
+      "side": 1,
+      "message": "Okay.",
+      "parentUuid": "69b53429_e97f74a2",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31a317f9_a3c27042",
         "filename": "kernel/sched/core.c",
         "patchSetId": 5
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "719815d8_2b3ce477",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6734,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-12T13:53:39Z",
+      "side": 1,
+      "message": "Okay.",
+      "parentUuid": "31a317f9_a3c27042",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b88df147_cc21206c",
         "filename": "kernel/sched/core.c",
         "patchSetId": 5
@@ -48,6 +84,24 @@
       "writtenOn": "2025-01-09T05:33:46Z",
       "side": 1,
       "message": "Hrm. I never fully understood why the blocked reason tracepoint was in ttwu instead of near the code that dequeues the blocked task - so initially this makes more sense.  But I also wonder if the cost of stack walk here might be more problematic here when we hold the rqlock?\n\nThis change looks intreaging but I need to probably dig a bit more to better understand the impact of the change properly (also its a bummer having it effectively duplicate the sched_switch tracepoint).",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af1ac5f5_9ef9f24d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-12T13:53:39Z",
+      "side": 1,
+      "message": "Sorry, I am not entirely sure of the reason either; it was committed by @Martin.\n\nI conducted a test on the little core running at 1.5GHz, and the average time consumption introduced by stack_trace_save_tsk is less than 2us. This is because it does not require a full stack walk. And the tracepoint is typically disabled.\n\nThe reason I placed the tracepoint after sched_switch is that Perfetto relies on the sequence of events; otherwise, the blocked reason will not be displayed.",
+      "parentUuid": "b88df147_cc21206c",
       "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
