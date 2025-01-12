@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "b563082b_8d180409",
         "filename": "/COMMIT_MSG",
@@ -14,8 +15,25 @@
       "side": 1,
       "message": "Need a signed-off-by :(",
       "revId": "0ef6da688307dbd84ae471e91c4d36bbfd114126",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee24297_ec17ce9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3818175
+      },
+      "writtenOn": "2025-01-12T04:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b563082b_8d180409",
+      "revId": "0ef6da688307dbd84ae471e91c4d36bbfd114126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
