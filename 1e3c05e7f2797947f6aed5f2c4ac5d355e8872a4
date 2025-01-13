@@ -248,6 +248,24 @@
       "parentUuid": "50d30013_9aeb3e0f",
       "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157153cf_5a41091b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-13T16:20:51Z",
+      "side": 1,
+      "message": "Thanks. Then, we might need to go for this way. It\u0027 better to check with Perfetto expert to see if this could break the parser.",
+      "parentUuid": "2fbfbb32_d456d260",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
