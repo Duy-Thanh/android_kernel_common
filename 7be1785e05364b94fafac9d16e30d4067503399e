@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "203e6481_ad8b1acf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-13T19:41:10Z",
+      "side": 1,
+      "message": "What are the performance implications? What are the benefits?\nI thought earlier experiments with KSM showed only marginal improvements.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "7be1785e05364b94fafac9d16e30d4067503399e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c18cf43e_79cdd847",
         "filename": "mm/mmap.c",
         "patchSetId": 2
@@ -50,6 +73,29 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "71b56e35_bb28703e",
+      "revId": "7be1785e05364b94fafac9d16e30d4067503399e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d1ef84_e416ada7",
+        "filename": "mm/mmap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1482,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-13T19:41:10Z",
+      "side": 1,
+      "message": "IIUC this will yield true if the mapping is MAP_PRIVATE for both anonymous and file-backed mappings. Is that the goal here? If you want to apply this only to private anonymous mappings, you have to use `(flags \u0026 (MAP_PRIVATE | MAP_ANONYMOUS)) \u003d\u003d (MAP_PRIVATE | MAP_ANONYMOUS)`",
+      "range": {
+        "startLine": 1482,
+        "startChar": 28,
+        "endLine": 1482,
+        "endChar": 67
+      },
       "revId": "7be1785e05364b94fafac9d16e30d4067503399e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
