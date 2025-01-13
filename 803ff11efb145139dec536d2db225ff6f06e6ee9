@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adf033df_e92e3de6",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-13T15:40:41Z",
+      "side": 1,
+      "message": "Please fix this ridiculous ERROR reported by KernelCheckPatch: ERROR:SPACING: space prohibited before that \u0027,\u0027 (ctx:WxE)\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nERROR:SPACING: space prohibited before that \u0027,\u0027 (ctx:WxE)\n\n\n\nIt looks like you can add \"/* empty */\" there -- see `mm/interval_tree.c`",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 0
+      },
+      "revId": "803ff11efb145139dec536d2db225ff6f06e6ee9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
