@@ -22,6 +22,30 @@
       },
       "revId": "e7701e1b3b66a90489431b36d2d1de99cb59fb05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd36c795_c757d102",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-13T12:15:57Z",
+      "side": 1,
+      "message": "Yes, that\u0027 broken, I will fix it.",
+      "parentUuid": "dfeed5bf_70b1fd14",
+      "range": {
+        "startLine": 494,
+        "startChar": 8,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "e7701e1b3b66a90489431b36d2d1de99cb59fb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
