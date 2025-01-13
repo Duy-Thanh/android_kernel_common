@@ -158,6 +158,24 @@
       "parentUuid": "809a03f5_0209b423",
       "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3588094d_7217ca43",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-13T05:06:04Z",
+      "side": 1,
+      "message": "I apologize for the lack of clarity in my previous explanation.\n\nIn the scenario where try_to_wake_up() invokes __get_wchan(), it traces another process. However, if we invoke __get_wchan() within the __schedule(), it traces the current process, causing __get_wchan() to return an address that is not what we want.",
+      "parentUuid": "f82a9c11_54d072c1",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
