@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d9ae47_e504d000",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-01-13T10:01:30Z",
+      "side": 1,
+      "message": "Please include notes about the backport as asked for in our guidelines\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md#requirements-for-backports-from-mainline-linux",
+      "revId": "5970f44e5f350bbad75d798385c38abfd7c75ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
