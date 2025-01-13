@@ -34,6 +34,7 @@
 #include "iostat.h"
 #include <trace/events/f2fs.h>
 #include <uapi/linux/f2fs.h>
+#include <trace/hooks/fs.h>
 
 static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
 {
@@ -3767,6 +3768,7 @@ out:
 	} else if (released_blocks &&
 			atomic_read(&fi->i_compr_blocks)) {
 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+		trace_android_vh_f2fs_set_sbi_flag(sbi, SBI_NEED_FSCK, __func__, __LINE__);
 		f2fs_warn(sbi, "%s: partial blocks were released i_ino=%lx "
 			"iblocks=%llu, released=%u, compr_blocks=%u, "
 			"run fsck to fix.",
@@ -3949,6 +3951,7 @@ unlock_inode:
 	} else if (reserved_blocks &&
 			atomic_read(&fi->i_compr_blocks)) {
 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+		trace_android_vh_f2fs_set_sbi_flag(sbi, SBI_NEED_FSCK, __func__, __LINE__);
 		f2fs_warn(sbi, "%s: partial blocks were reserved i_ino=%lx "
 			"iblocks=%llu, reserved=%u, compr_blocks=%u, "
 			"run fsck to fix.",
