@@ -16,6 +16,24 @@
       "message": "It\u0027s a little odd that we don\u0027t have `pvm_read_id_reg()` here. Are there other patches that we should backport too?",
       "revId": "69e1b8cec305ef8c4dd5f330f38bd07e64da76bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13281783_1779bb3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-01-13T19:42:05Z",
+      "side": 1,
+      "message": "I had removed that in an earlier patch that is already in Android. It gets removed later in the upstream series in a patch that I didn\u0027t need to backport.",
+      "parentUuid": "6104321d_292aac43",
+      "revId": "69e1b8cec305ef8c4dd5f330f38bd07e64da76bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
