@@ -124,6 +124,24 @@
       "parentUuid": "92fcbfea_0b2ff76d",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a1a4fb1_b2a50468",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-01-13T10:05:33Z",
+      "side": 1,
+      "message": "What you define for your vendor image only applies to your kernel modules, but does not apply to the GKI kernel. So, as it stands the `gki_defconfig` does not define that symbol as `CONFIG_GPIO_SYSFS` is not set and as such the symbol can\u0027t be allowlisted.\n\nYou would need to add `CONFIG_GPIO_SYSFS\u003dy` to the GKI defconfig (in AOSP) to make the symbol available. I am not too familiar with the feature and its side effects (including any side effects affecting the KMI). I can\u0027t judge right now whether adding the configuration to GKI is a good idea.",
+      "parentUuid": "3030f5b2_8e39ce0c",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
