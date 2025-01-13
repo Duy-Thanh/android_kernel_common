@@ -353,6 +353,17 @@ static __init int setup_hyp_event_early(char *str)
 }
 __setup("hyp_event=", setup_hyp_event_early);
 
+void __turn_on_hyp_printk(void)
+{
+	struct hyp_event *event = hyp_trace_find_event_name("__hyp_printk");
+
+	if (!event)
+		pr_warn("FAILED TO FIND __hyp_printk\n");
+
+	if (enable_hyp_event(event, true))
+		pr_warn("FAILED TO ENABLE __hyp_printk\n");
+}
+
 bool hyp_event_early_probe(void)
 {
 	char *token, *buf = early_events;

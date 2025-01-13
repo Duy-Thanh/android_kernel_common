@@ -53,7 +53,7 @@ static struct hyp_trace_buffer {
 	.lock		= __MUTEX_INITIALIZER(hyp_trace_buffer.lock),
 };
 
-static size_t hyp_trace_buffer_size = 7 << 10;
+static size_t hyp_trace_buffer_size = 7 << 20;
 
 /* Number of pages the ring-buffer requires to accommodate for size */
 #define NR_PAGES(size) \
@@ -429,6 +429,8 @@ static void hyp_trace_stop(void)
 {
 	struct hyp_trace_buffer *hyp_buffer = &hyp_trace_buffer;
 	int ret;
+
+	return;
 
 	mutex_lock(&hyp_buffer->lock);
 
@@ -957,8 +959,13 @@ static void hyp_trace_buffer_printk(struct hyp_trace_buffer *hyp_buffer)
 	}
 }
 
+extern void __turn_on_hyp_printk(void);
+
 void hyp_trace_enable_event_early(void)
 {
+	__turn_on_hyp_printk();
+	hyp_trace_start();
+
 	if (hyp_event_early_probe()) {
 		int err = hyp_trace_start();
 
@@ -1029,6 +1036,8 @@ int hyp_trace_init_tracefs(void)
 	hyp_trace_enable_event_early();
 
 	hyp_trace_init_testing_tracefs(root);
+
+	hyp_trace_buffer.printk_on = true;
 
 	if (hyp_trace_buffer.printk_on &&
 	    hyp_trace_buffer_printk_init(&hyp_trace_buffer))

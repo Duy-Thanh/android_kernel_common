@@ -11,6 +11,7 @@
 #include <kvm/arm_psci.h>
 
 #include <asm/kvm_emulate.h>
+#include <asm/kvm_hypevents.h>
 
 #include <nvhe/alloc.h>
 #include <nvhe/mem_protect.h>
@@ -1371,6 +1372,9 @@ static bool pkvm_memshare_call(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	struct kvm_hyp_req *req;
 	u64 nr_shared;
 	int err;
+
+	trace_hyp_printk("pkvm_memshare_call: ipa=0x%llx nr_pages=%llu",
+			 ipa, nr_pages);
 
 	/* Legacy guests have arg2 set to 0 */
 	if (nr_pages == 0)

@@ -529,14 +529,34 @@ static bool range_is_allowed_memory(u64 start, u64 end)
 	struct memblock_region *reg;
 	struct kvm_mem_range range;
 
+	trace_hyp_printk("range_is_allowed_memory start=0x%llx end=0x%llx...",
+			 start, end);
+
 	reg = find_mem_range(start, &range);
-	if (!reg)
-		return false;
+	while (reg) {
+		trace_hyp_printk("range_is_allowed_memory reg=0x%llx:0x%llx flags=%u",
+				 reg->base, reg->base + reg->size, reg->flags);
 
-	if (!is_in_mem_range(end - 1, &range))
-		return false;
+		if (reg->flags & MEMBLOCK_NOMAP)
+			break;
 
-	return !(reg->flags & MEMBLOCK_NOMAP);
+		start = reg->base + reg->size;
+		if (start >= end)
+			return true;
+
+		reg++;
+		if (reg >= &hyp_memory[hyp_memblock_nr]) {
+			trace_hyp_printk("range_is_allowed_memory: last memblock...")
+			break;
+		}
+
+		trace_hyp_printk("range_is_allowed_memory reg=0x%llx:0x%llx flags=%u",
+				 reg->base, reg->base + reg->size, reg->flags);
+		if (reg->base != start)
+			break;
+	}
+
+	return false;
 }
 
 static inline int __host_stage2_idmap(u64 start, u64 end,
@@ -1076,6 +1096,7 @@ static int guest_request_walker(const struct kvm_pgtable_visit_ctx *ctx,
 	u32 level = ctx->level;
 
 	state = guest_get_page_state(pte, 0);
+
 	if (data->desired_state != state)
 		return (state & PKVM_NOPAGE) ? -EFAULT : -EPERM;
 
@@ -1083,14 +1104,22 @@ static int guest_request_walker(const struct kvm_pgtable_visit_ctx *ctx,
 
 	if (!data->size) {
 		size_t size_orig = ctx->end - ctx->start;
-
-		if (kvm_pte_valid(pte) &&
-		    !range_is_allowed_memory(phys, phys + size_orig))
-			return -EINVAL;
+		phys_addr_t phys_orig;
 
 		data->pte_start = pte;
 		data->size = kvm_granule_size(level);
 		data->ipa_start = ctx->addr & ~(kvm_granule_size(level) - 1);
+
+		phys_orig = ctx->addr - data->ipa_start + phys;
+
+		trace_hyp_printk("guest_request_walker: ipa_start=0x%llx phys=0x%llx size_orig=%lu allowed=%d",
+				data->ipa_start, phys_orig, size_orig,
+				range_is_allowed_memory(phys_orig, phys_orig + size_orig));
+
+		if (kvm_pte_valid(pte) &&
+		    !range_is_allowed_memory(phys_orig, phys_orig + size_orig))
+			return -EINVAL;
+
 		goto end;
 	}
 
@@ -1249,6 +1278,9 @@ int __pkvm_guest_share_host(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 nr_pages,
 unlock:
 	guest_unlock_component(vm);
 	host_unlock_component();
+
+	trace_hyp_printk("__pkvm_guest_share_host: ipa=0x%llx nr_pages=%llu ret=%d nr_shared=%llu",
+			 ipa, nr_pages, ret, *nr_shared);
 
 	return ret;
 }

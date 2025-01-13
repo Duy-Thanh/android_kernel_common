@@ -1829,6 +1829,8 @@ int pkvm_mem_abort_range(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa, size_t si
 	struct kvm_pinned_page *ppage;
 	int err = 0, idx;
 
+	printk("%s: fault_ipa=0x%llx size=%ld\n", __func__, fault_ipa, size);
+
 	if (!PAGE_ALIGNED(size) || !PAGE_ALIGNED(fault_ipa))
 		return -EINVAL;
 
