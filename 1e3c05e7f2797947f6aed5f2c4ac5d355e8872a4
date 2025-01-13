@@ -230,6 +230,24 @@
       "parentUuid": "d370b935_0c2b0693",
       "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fbfbb32_d456d260",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2025-01-13T16:00:08Z",
+      "side": 1,
+      "message": "It seems the task state will be changed to TASK_WAKING before enqueue, so we could not use it unfortunately.",
+      "parentUuid": "50d30013_9aeb3e0f",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
