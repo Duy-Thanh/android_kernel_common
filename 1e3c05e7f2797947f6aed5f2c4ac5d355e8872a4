@@ -140,6 +140,24 @@
       "parentUuid": "e6f20b49_155a571f",
       "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82a9c11_54d072c1",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-13T02:13:25Z",
+      "side": 1,
+      "message": "May I know why \"getwhan() here because it traces the current process,\"? I thought p is the task being waken up instead of the current process. Also, get_wchan() will return 0 if p is current process. \n```\nint try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)\n{\n....\n\tif (p \u003d\u003d current) {\n\t\t * We\u0027re waking current, this means \u0027p-\u003eon_rq\u0027 and \u0027task_cpu(p)\n\t\t * \u003d\u003d smp_processor_id()\u0027. Together this means we can special\n\t\t * case the whole \u0027p-\u003eon_rq \u0026\u0026 ttwu_runnable()\u0027 case below\n\t\t * without taking any locks.\n\t\t *\n\t\t * Specifically, given current runs ttwu() we must be before\n\t\t * schedule()\u0027s block_task(), as such this must not observe\n\t\t * sched_delayed.\n\t\t *\n\t\t * In particular:\n\t\t *  - we rely on Program-Order guarantees for all the ordering,\n\t\t *  - we\u0027re serialized against set_special_state() by virtue of\n\t\t *    it disabling IRQs (this allows not taking -\u003epi_lock).\n\t\t */\n\t\tSCHED_WARN_ON(p-\u003ese.sched_delayed);\n\t\tif (!ttwu_state_match(p, state, \u0026success))\n\t\t\tgoto out;\n\n\t\ttrace_sched_waking(p);\n\t\tttwu_do_wakeup(p);\n\t\tgoto out;\n\t}\n\t\n\tif (READ_ONCE(p-\u003e__state) \u0026 TASK_UNINTERRUPTIBLE)\n\t\ttrace_sched_blocked_reason(p);\n\t....\n}\n\n\nunsigned long get_wchan(struct task_struct *p)\n{\n    struct wchan_info wchan_info \u003d {\n        .pc \u003d 0,\n        .count \u003d 0,\n    };\n\n    if (!p || p \u003d\u003d current || task_is_running(p))\n        return 0;\n```",
+      "parentUuid": "809a03f5_0209b423",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
