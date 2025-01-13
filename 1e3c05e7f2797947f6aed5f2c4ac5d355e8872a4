@@ -194,6 +194,24 @@
       "parentUuid": "3588094d_7217ca43",
       "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d370b935_0c2b0693",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6803,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-13T08:51:58Z",
+      "side": 1,
+      "message": "\u003e I see. I thought that makes sense. I was discussing with Rick if we can find another place(ex. enqueun_task() which was where original CFS sched_blocked_reason put) to reuse current get_wchan() format. Otherwise, this change in sched_blocked_reason() might break current Perfetto format.\n\nI took a rough look at the implementation of Perfetto. As long as sched_blocked_reason is after sched_switch, it will not affect Perfetto\u0027s parsing. This still needs to be reviewed by an expert responsible for Perfetto.\n\n\u003e \n\u003e Hi Rick,\n\u003e Do you think if using enqueun_task is fine for this?",
+      "parentUuid": "17f8ab3b_37727dab",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
