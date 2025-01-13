@@ -160,6 +160,24 @@
       "parentUuid": "1a1a4fb1_b2a50468",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c692e35_9e26091f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-01-13T10:14:41Z",
+      "side": 1,
+      "message": "\u003e Without those changes it is not possible to build GKI image at all.\n\nI am not sure what you are saying? The GKI image builds quite fine and SOCs/OEMs are supposed to use the certified and signed GKI image we are releasing.\n\nAssuming what you meant is that \"the GKI image is not useful for you without that config option\", consider uploading a patch to AOSP that enables that option and we can take it from there. Feel free to add me to the review.",
+      "parentUuid": "df3c1456_52029c19",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
