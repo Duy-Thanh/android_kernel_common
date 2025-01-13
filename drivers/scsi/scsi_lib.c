@@ -41,6 +41,9 @@
 #include "scsi_priv.h"
 #include "scsi_logging.h"
 
+EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_dispatch_cmd_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_dispatch_cmd_done);
+
 /*
  * Size of integrity metadata is usually small, 1 inline sg should
  * cover normal cases.
