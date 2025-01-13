@@ -178,6 +178,24 @@
       "parentUuid": "df3c1456_52029c19",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194d190b_4ea9b381",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-01-13T10:15:57Z",
+      "side": 1,
+      "message": "I would add, please audit your configuration for other items you have that are not in GKI.",
+      "parentUuid": "7c692e35_9e26091f",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
