@@ -142,6 +142,24 @@
       "parentUuid": "3030f5b2_8e39ce0c",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3c1456_52029c19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-01-13T10:11:11Z",
+      "side": 1,
+      "message": "Who else can we involve here?\nWithout those changes it is not possible to build GKI image at all.",
+      "parentUuid": "1a1a4fb1_b2a50468",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
