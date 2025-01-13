@@ -150,20 +150,6 @@ enum drm_driver_feature {
 	 * not use.
 	 */
 	DRIVER_SG			= BIT(28),
-
-	/**
-	 * @DRIVER_HAVE_DMA:
-	 *
-	 * Driver supports DMA, the userspace DMA API will be supported. Only
-	 * for legacy drivers. Do not use.
-	 */
-	DRIVER_HAVE_DMA			= BIT(29),
-	/**
-	 * @DRIVER_HAVE_IRQ:
-	 *
-	 * Legacy irq support. Only for legacy drivers. Do not use.
-	 */
-	DRIVER_HAVE_IRQ			= BIT(30),
 };
 
 /**
