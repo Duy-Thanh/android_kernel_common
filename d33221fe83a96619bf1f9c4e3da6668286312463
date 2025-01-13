@@ -163,6 +163,30 @@
       },
       "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69831d7e_beba0398",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-13T15:01:49Z",
+      "side": 1,
+      "message": "\u003e the upstream driver does assume that coherent_walk implies the master is coherent also.\n\nDoes it? I don\u0027t think it does -- `IOMMU_CACHE` should be driven by the `dma-coherent` property on the device.",
+      "parentUuid": "ee663323_65e22776",
+      "range": {
+        "startLine": 1580,
+        "startChar": 43,
+        "endLine": 1580,
+        "endChar": 56
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
