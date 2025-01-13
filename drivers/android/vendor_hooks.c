@@ -56,6 +56,7 @@
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/softlockup.h>
 #include <trace/hooks/power.h>
+#include <trace/hooks/fs.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -108,6 +109,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_check_int_errors);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sdev);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_submit_write_page);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_set_sbi_flag);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_alloc_insert_iova);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_iovad_alloc_iova);
