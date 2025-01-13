@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00b730a_ad897167",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-13T12:19:15Z",
+      "side": 1,
+      "message": "Agh, may bad, that\u0027s propably a bad squash.",
+      "parentUuid": "248fce33_4fc47bde",
+      "range": {
+        "startLine": 1001,
+        "startChar": 0,
+        "endLine": 1001,
+        "endChar": 40
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71cbc97c_e01caf1b",
@@ -70,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee0f8359_2f4e11e6",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-13T12:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de2dfaa4_fef6b480",
+      "range": {
+        "startLine": 1547,
+        "startChar": 0,
+        "endLine": 1552,
+        "endChar": 0
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ff9d62e_df81f373",
@@ -83,6 +131,30 @@
       "writtenOn": "2025-01-10T17:22:38Z",
       "side": 1,
       "message": "hmm. It\u0027s not really related to the coherency of the walker though, is it?\n\nWe should probably use `IOMMU_CACHE` unconditionally and let the stage-1 override it, like we do for the CPU. What do you think?",
+      "range": {
+        "startLine": 1580,
+        "startChar": 43,
+        "endLine": 1580,
+        "endChar": 56
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee663323_65e22776",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-13T12:19:15Z",
+      "side": 1,
+      "message": "The problem is that we don\u0027t have nested here, it\u0027s only stage-2, but we can unconditionally set `IOMMU_CACHE` and that would be combined with the transacation attributes.\nHowever, the upstream driver does assume that `coherent_walk` implies the master is coherent also.",
+      "parentUuid": "5ff9d62e_df81f373",
       "range": {
         "startLine": 1580,
         "startChar": 43,
