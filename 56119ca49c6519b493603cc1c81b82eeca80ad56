@@ -196,6 +196,24 @@
       "parentUuid": "7c692e35_9e26091f",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "352183fd_6e6c1d12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-01-13T10:21:36Z",
+      "side": 1,
+      "message": "Note also that the KMI / defconfig for android13-5.15 was frozen in June 2022. This is 2.5 years ago.",
+      "parentUuid": "194d190b_4ea9b381",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
