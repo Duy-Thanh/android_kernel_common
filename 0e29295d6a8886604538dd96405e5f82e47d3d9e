@@ -16,6 +16,24 @@
       "message": "Curious, but why isn\u0027t this upstream?",
       "revId": "0e29295d6a8886604538dd96405e5f82e47d3d9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc0d2fc_cd6461be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-01-13T17:12:05Z",
+      "side": 1,
+      "message": "The reset code for protected VM\u0027s isn\u0027t upstream, hence nothing to split.",
+      "parentUuid": "0cf3c951_dd06d19c",
+      "revId": "0e29295d6a8886604538dd96405e5f82e47d3d9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
