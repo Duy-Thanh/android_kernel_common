@@ -187,6 +187,30 @@
       },
       "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd4625c_1bf184b3",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-13T15:41:22Z",
+      "side": 1,
+      "message": "Yes, `IOMMU_CACHE` is driven by `dma-coherent` (were this information is not available at EL2, I was thinking about adding flags to attach to pass such per-device information)\n\nBut, my vague memory was we rely on TCU cohereny to check if device traffic is coherent from as `dma-coherent` was not sufficent in that case (maybe something to do with snooping, I can dig more on the list for that)\nhttps://elixir.bootlin.com/linux/v6.12.6/source/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c#L2294",
+      "parentUuid": "69831d7e_beba0398",
+      "range": {
+        "startLine": 1580,
+        "startChar": 43,
+        "endLine": 1580,
+        "endChar": 56
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
