@@ -88,6 +88,24 @@
       "parentUuid": "55aab5f4_5faa79ed",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92fcbfea_0b2ff76d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-01-13T08:45:34Z",
+      "side": 1,
+      "message": "Actually in our aosp build this is one of crutial parameters, without which - some of drivers won\u0027t work properly, therefore our device will have no audio at all. \nCould you support me with adding this \u0027gpiod_export\u0027 so it is compliant with google rules, but still avialable in our Aptiv config?",
+      "parentUuid": "6e5d9bc6_bc602537",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
