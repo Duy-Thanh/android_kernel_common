@@ -31,10 +31,11 @@
 
 struct acpi_fde_info {
 	u32 floppy0;
-	u32 floppy1;
+	u16 floppy1;
 	u32 floppy2;
 	u32 floppy3;
 	u32 tape;
+	u32 tape2;
 };
 
 /*

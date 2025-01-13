@@ -159,6 +159,7 @@ struct hop_jumbo_hdr {
 	u8	hdrlen;
 	u8	tlv_type;	/* IPV6_TLV_JUMBO, 0xC2 */
 	u8	tlv_len;	/* 4 */
+	u8	new_field;
 	__be32	jumbo_payload_len;
 };
 
@@ -195,6 +196,7 @@ struct ip6_frag_state {
 	unsigned int	mtu;
 	unsigned int	left;
 	int		offset;
+	int		offset2;
 	int		ptr;
 	int		hroom;
 	int		troom;
