@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "597bb2d2_a7489a10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-01-13T23:38:14Z",
+      "side": 1,
+      "message": "We plan to wait for this patch to be approved upstream first, to avoid any potential issues or reworks. After that we will merge it as a BACKPORT.",
+      "revId": "d76e32fa1e165addef5baeff6d5d854caa2d5a2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
