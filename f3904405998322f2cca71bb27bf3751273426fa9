@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c92b45f_80c613ef",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-14T15:36:01Z",
+      "side": 1,
+      "message": "We can probably enforce the phys to be always part of swiotlb when we do sharing. This will prevent oversharing. Wdyth ?",
+      "parentUuid": "05ae5865_c24f0e52",
+      "range": {
+        "startLine": 33,
+        "startChar": 10,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef9b3e70_b00d97d5",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 5
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47c5e789_b3d80017",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-14T15:36:01Z",
+      "side": 1,
+      "message": "I think this should be summed up with the hyp granule. Otherwise it will WARN_ON_ONCE which generates:\n\n` WARNING: CPU: 0 PID: 0 at drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c:108 mmio_guard_ioremap_hook+0x90/0xa0 `",
+      "parentUuid": "ef9b3e70_b00d97d5",
+      "range": {
+        "startLine": 93,
+        "startChar": 10,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4bbe130_4d9d4f86",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 5
@@ -77,6 +125,30 @@
       "writtenOn": "2025-01-06T10:38:16Z",
       "side": 1,
       "message": "I think this means we can relinquish more than a single page if the granule is larger than PAGE_SIZE.",
+      "range": {
+        "startLine": 120,
+        "startChar": 10,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d520ed7_f5512253",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-14T15:36:01Z",
+      "side": 1,
+      "message": "I don\u0027t necessarily see an issue with this but maybe I am missing something ?",
+      "parentUuid": "d4bbe130_4d9d4f86",
       "range": {
         "startLine": 120,
         "startChar": 10,
