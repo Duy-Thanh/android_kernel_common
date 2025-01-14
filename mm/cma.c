@@ -522,7 +522,14 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 			page_kasan_tag_reset(nth_page(page, i));
 	}
 
+<<<<<<< HEAD   (01d298 ANDROID: vendor_hooks: add hook before batch free into pcp)
 	if (ret && !(gfp & __GFP_NOWARN)) {
+||||||| BASE
+	if (ret && !(gfp_mask & __GFP_NOWARN)) {
+=======
+	if (ret && !(gfp_mask & __GFP_NOWARN)) {
+		trace_android_vh_cma_alloc_fail(cma->name, cma->count, count);
+>>>>>>> CHANGE (f7a814 ANDROID: mm/cma: add vendor_hook in cma_alloc to record info)
 		pr_err_ratelimited("%s: %s: alloc failed, req-size: %lu pages, ret: %d\n",
 				   __func__, cma->name, count, ret);
 		cma_debug_show_areas(cma);
