@@ -16,6 +16,23 @@
       "message": "https://android.googlesource.com/kernel/build/+/refs/heads/main/kleaf/docs/kernel_config.md#modify-defconfig",
       "revId": "fba3e30b6d4d62c56753bb05b3cb526c9558555e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b232ec84_83c166b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-14T11:59:34Z",
+      "side": 1,
+      "message": "No, please make these a module in your builds.",
+      "revId": "fba3e30b6d4d62c56753bb05b3cb526c9558555e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
