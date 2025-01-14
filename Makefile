@@ -476,7 +476,10 @@ export rust_common_flags := --edition=2021 \
 			    -Wclippy::needless_continue \
 			    -Aclippy::needless_lifetimes \
 			    -Wclippy::no_mangle_with_rust_abi \
-			    -Wclippy::dbg_macro
+			    -Wclippy::dbg_macro \
+			    --remap-path-prefix=$(abs_srctree)=src/ \
+			    --remap-path-prefix=$(abs_objtree)=obj/
+
 
 KBUILD_HOSTCFLAGS   := $(KBUILD_USERHOSTCFLAGS) $(HOST_LFS_CFLAGS) \
 		       $(HOSTCFLAGS) -I $(srctree)/scripts/include
