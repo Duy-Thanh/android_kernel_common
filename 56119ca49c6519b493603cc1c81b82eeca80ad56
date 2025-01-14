@@ -304,6 +304,24 @@
       "parentUuid": "f9b8eebd_ec103159",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ab3ccc_05e90773",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-01-14T11:36:27Z",
+      "side": 1,
+      "message": "You don\u0027t need to abandon, just rebase / cherry-pick and repush.\n\nGerrit identifies changes by Change ID.",
+      "parentUuid": "2a5112fb_eae11507",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
