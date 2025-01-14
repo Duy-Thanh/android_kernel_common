@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e22b565f_2631184c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-14T08:07:44Z",
+      "side": 1,
+      "message": "\u003e This could definitely affect our parsing logic and I\u0027m quite concerned about this change as sched_blocked_reason is a load bearing event that a lot of people care about.\n\u003e \n\u003e Could you please provide a more detailed example with the fields of each event? It\u0027s not clear to me by just the event names whether the thread the sched_blocked_reason event is being emitted for is switching in or out.\n\nYes, here is a trace log showing the state transitions of dd-636 from Running to Uninterruptible, then to Runnable, and finally back to Running.\n\n```\n1. \u003cidle\u003e-0  [003] .... 725.002694: sched_switch: prev_comm\u003dswapper prev_pid\u003d0 prev_prio\u003d120 prev_state\u003dR \u003d\u003d\u003e next_comm\u003ddd next_pid\u003d636 next_prio\u003d120\n2.   dd-636  [003] .... 725.002790: sched_switch: prev_comm\u003ddd prev_pid\u003d636 prev_prio\u003d120 prev_state\u003dD \u003d\u003d\u003e next_comm\u003dswapper/3 next_pid\u003d0 next_prio\u003d120\n3.   dd-636  [003] .... 725.002792: sched_blocked_reason: pid\u003d636 io_wait\u003d1 caller\u003d__iomap_dio_rw\n4. \u003cidle\u003e-0  [003] .... 725.003506: sched_waking: comm\u003ddd pid\u003d636 prio\u003d120 target_cpu\u003d3\n5. \u003cidle\u003e-0  [003] .... 725.003510: sched_wakeup: comm\u003ddd pid\u003d636 prio\u003d120 target_cpu\u003d003\n6. \u003cidle\u003e-0  [003] .... 725.003520: sched_switch: prev_comm\u003dswapper prev_pid\u003d0 prev_prio\u003d120 prev_state\u003dR \u003d\u003d\u003e next_comm\u003ddd next_pid\u003d636 next_prio\u003d120\n```\n\nAnd here is the explanation:\n\n```\n1. The swapper is preempted by dd-636, triggering a process context switch, and dd-636 starts running on CPU3\n2. dd-636 enters an uninterruptible state, triggering a context switch, and swapper/3 starts running on CPU3\n3. sched_blocked_reason explains that dd-636 entered the uninterruptible state due to invoking __iomap_dio_rw and waiting for an I/O operation to complete.\n4. dd-636 is being woken up by try_to_wake_up but has not entered any CPU’s runqueue. Perfetto assumes dd-636 has entered the runnable state.\n5. dd-636 is woken up and placed in the runqueue of CPU3.\n6. The swapper is preempted by dd-636 again, triggering a process context switch, and dd-636 resumes running on CPU3. And Perfetto assumes dd-636 has entered the running state.\n```\n\n\u003e \n\u003e https://cs.android.com/android/platform/superproject/+/android14-qpr3-release:external/perfetto/src/trace_processor/importers/common/thread_state_tracker.cc contains the logic for us parsing schedblockreason.\n\nIt seems that it would be fine if the sched_blocked_reason occurs after the sched_switch.",
+      "parentUuid": "c10a4167_7b21b6dd",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31a317f9_a3c27042",
         "filename": "kernel/sched/core.c",
         "patchSetId": 5
