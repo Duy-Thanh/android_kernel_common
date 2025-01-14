@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c10a4167_7b21b6dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080238
+      },
+      "writtenOn": "2025-01-14T02:35:08Z",
+      "side": 1,
+      "message": "This could definitely affect our parsing logic and I\u0027m quite concerned about this change as sched_blocked_reason is a load bearing event that a lot of people care about.\n\nCould you please provide a more detailed example with the fields of each event? It\u0027s not clear to me by just the event names whether the thread the sched_blocked_reason event is being emitted for is switching in or out.\n\nhttps://cs.android.com/android/platform/superproject/+/android14-qpr3-release:external/perfetto/src/trace_processor/importers/common/thread_state_tracker.cc contains the logic for us parsing schedblockreason.",
+      "parentUuid": "ef04bf04_83177052",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31a317f9_a3c27042",
         "filename": "kernel/sched/core.c",
         "patchSetId": 5
