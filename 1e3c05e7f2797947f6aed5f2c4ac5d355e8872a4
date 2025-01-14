@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39fd09b9_3feb4de6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-14T11:38:11Z",
+      "side": 1,
+      "message": "Yes, here is a trace log:\n\n```\n1. statsd.writer-4400 ( 1741)   [001] .... 49.180289: sched_switch: prev_comm\u003dstatsd.writer prev_pid\u003d4400 prev_prio\u003d120 prev_state\u003dS \u003d\u003d\u003e next_comm\u003ddhd_watchdog_th next_pid\u003d1168 next_prio\u003d120\n2. binder:2960_4-4056 ( 2960)   [004] .... 49.180316: sched_waking: comm\u003ddhd_watchdog_th pid\u003d1168 prio\u003d120 target_cpu\u003d1\n3. dhd_watchdog_th-1168 ( 1168) [001] .... 49.180317: sched_switch: prev_comm\u003ddhd_watchdog_th prev_pid\u003d1168 prev_prio\u003d120 prev_state\u003dD \u003d\u003d\u003e next_comm\u003dstatsd.writer next_pid\u003d4400 next_prio\u003d120\n4. dhd_watchdog_th-1168 ( 1168) [001] .... 49.180320: sched_blocked_reason: pid\u003d1168 io_wait\u003d0 caller\u003dmmc_wait_for_req\n5. binder:2960_4-4056 ( 2960)   [004] .... 49.180330: sched_wakeup: comm\u003ddhd_watchdog_th pid\u003d1168 prio\u003d120 target_cpu\u003d003\n6. binder:1741_2-1752 ( 1741)   [003] .... 49.180784: sched_switch: prev_comm\u003dbinder:1741_2 prev_pid\u003d1752 prev_prio\u003d120 prev_state\u003dS \u003d\u003d\u003e next_comm\u003ddhd_watchdog_th next_pid\u003d1168 next_prio\u003d120\n```",
+      "parentUuid": "20af7698_d8434919",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31a317f9_a3c27042",
         "filename": "kernel/sched/core.c",
         "patchSetId": 5
