@@ -33,6 +33,23 @@
       "message": "No, please make these a module in your builds.",
       "revId": "fba3e30b6d4d62c56753bb05b3cb526c9558555e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f62506_00fef310",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-14T12:54:56Z",
+      "side": 1,
+      "message": "all config options must be enabled for all arches.\n\n\nAlso, these options are not in the correct location, it breaks the build.  Please at least build this on your side first before submitting a change for us to review.",
+      "revId": "fba3e30b6d4d62c56753bb05b3cb526c9558555e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
