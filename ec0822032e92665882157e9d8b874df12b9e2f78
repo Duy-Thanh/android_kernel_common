@@ -124,6 +124,24 @@
       "parentUuid": "9a256c69_f1328dc5",
       "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3d83968_c614289a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-01-14T08:20:13Z",
+      "side": 1,
+      "message": "Resolving the question of preventing the mixing of incompatible binary material (via some mechanism whether its CRCs, KMI generation number plus other attributes or paired ABI information) is separate from the issue of replacing `genksyms` with `gendwarfksyms`.\n\n---\n\nI have already followed up privately on suspected performance issues with the current implementation. They are not blockers.\n\n---\n\nWhat is implied by `gendwarfksyms` is that Android Linux DWARF information is gaining a growing KABI dialect that interpretive tools like STG should handle transparently. I will make sure that happens.",
+      "parentUuid": "018ad9c3_58dbf05c",
+      "revId": "ec0822032e92665882157e9d8b874df12b9e2f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
