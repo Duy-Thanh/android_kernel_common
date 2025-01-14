@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28cf5847_cfd0b3ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-14T12:55:48Z",
+      "side": 1,
+      "message": "\"usb-serial\", not \"serial\".\n\nAlso, you need a changelog text of why this is happening, not just what is happening.",
+      "range": {
+        "startLine": 7,
+        "startChar": 36,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "fba3e30b6d4d62c56753bb05b3cb526c9558555e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fc052e0_f3bdb721",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-14T12:55:48Z",
+      "side": 1,
+      "message": "this bug has nothing to do with usb-serial devices.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "fba3e30b6d4d62c56753bb05b3cb526c9558555e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "151422d3_1657dbfe",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
