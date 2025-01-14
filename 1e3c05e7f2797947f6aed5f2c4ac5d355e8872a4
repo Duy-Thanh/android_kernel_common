@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83c3d8c7_caeb665f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-14T11:50:36Z",
+      "side": 1,
+      "message": "We observe the state transitions of dhd_watchdog_th: Running -\u003e Uninterruptible (non-IO) -\u003e Running. There is no Runnable state, as sched_waking occurs before sched_switch.",
+      "parentUuid": "39fd09b9_3feb4de6",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31a317f9_a3c27042",
         "filename": "kernel/sched/core.c",
         "patchSetId": 5
