@@ -36,6 +36,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef04bf04_83177052",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3383046
+      },
+      "writtenOn": "2025-01-14T02:20:08Z",
+      "side": 1,
+      "message": "This patch will alter the sequence of the following events:\n\n**Before:**\n1. `sched_switch`\n2. `sched_waking`\n3. `sched_blocked_reason`\n4. `sched_wakeup`\n\nor\n\n1. `sched_waking`\n2. `sched_blocked_reason`\n3. `sched_switch`\n4. `sched_wakeup`\n\n**After:**\n1. `sched_switch`\n2. `sched_blocked_reason`\n3. `sched_waking`\n4. `sched_wakeup`\n\nor\n\n1. `sched_waking`\n2. `sched_switch`\n3. `sched_blocked_reason`\n4. `sched_wakeup`\n\nI am unsure whether this will affect Perfetto\u0027s parser, so it is necessary for Perfetto experts to review it.",
+      "revId": "1e3c05e7f2797947f6aed5f2c4ac5d355e8872a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31a317f9_a3c27042",
