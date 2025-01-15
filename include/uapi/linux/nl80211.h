@@ -1318,6 +1318,10 @@
  *	The number of peers that HW timestamping can be enabled for concurrently
  *	is indicated by %NL80211_ATTR_MAX_HW_TIMESTAMP_PEERS.
  *
+ * @NL80211_CMD_LINKS_REMOVED: Notify userspace about the removal of STA MLD
+ *     setup links due to AP MLD removing the corresponding affiliated APs with
+ *     Multi-Link reconfiguration. %NL80211_ATTR_MLO_LINKS is used to provide
+ *     information about the removed STA MLD setup links.
  * @NL80211_CMD_MAX: highest used command number
  * @__NL80211_CMD_AFTER_LAST: internal use
  */
@@ -1571,7 +1575,8 @@ enum nl80211_commands {
 
 	NL80211_CMD_SET_HW_TIMESTAMP,
 
-	NL80211_CMD_ANDROID_KABI_RESERVED_2,
+	NL80211_CMD_LINKS_REMOVED,
+
 	NL80211_CMD_ANDROID_KABI_RESERVED_3,
 	NL80211_CMD_ANDROID_KABI_RESERVED_4,
 	NL80211_CMD_ANDROID_KABI_RESERVED_5,
