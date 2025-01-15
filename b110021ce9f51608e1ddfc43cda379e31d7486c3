@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e9eed5_cf4d5a7e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-15T16:13:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you update `last_block_pool` fbefore releasing the lock here?",
+      "range": {
+        "startLine": 83,
+        "startChar": 3,
+        "endLine": 83,
+        "endChar": 40
+      },
+      "revId": "b110021ce9f51608e1ddfc43cda379e31d7486c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb6ad495_e54a3362",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-15T16:13:41Z",
+      "side": 1,
+      "message": "Not your fault here as that follows the existing code, but I wonder if we need to check the alignment with the order here too.",
+      "range": {
+        "startLine": 247,
+        "startChar": 35,
+        "endLine": 247,
+        "endChar": 40
+      },
+      "revId": "b110021ce9f51608e1ddfc43cda379e31d7486c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9334215d_7d3259df",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-15T16:13:41Z",
+      "side": 1,
+      "message": "I wonder if we should just call it \"pkvm,cma\" in case we want to allocate other things than IOMMU pgt from this region in the future?",
+      "range": {
+        "startLine": 64,
+        "startChar": 45,
+        "endLine": 64,
+        "endChar": 51
+      },
+      "revId": "b110021ce9f51608e1ddfc43cda379e31d7486c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
