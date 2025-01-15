@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c799477_46b60d92",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3771,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-01-15T01:12:38Z",
+      "side": 1,
+      "message": "These are debugging features that can easily change as other patches get merged, so no logic should rely on them. What are they being used for here?",
+      "range": {
+        "startLine": 3771,
+        "startChar": 57,
+        "endLine": 3771,
+        "endChar": 75
+      },
+      "revId": "9e208c968327e442910b5b039c5df1e7906accf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
