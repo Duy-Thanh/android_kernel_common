@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb29dd79_06d4d0e8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-15T16:46:06Z",
+      "side": 1,
+      "message": "Yes! And also set i \u003d last_block_pool within the lock! 😢",
+      "parentUuid": "e6e9eed5_cf4d5a7e",
+      "range": {
+        "startLine": 83,
+        "startChar": 3,
+        "endLine": 83,
+        "endChar": 40
+      },
+      "revId": "b110021ce9f51608e1ddfc43cda379e31d7486c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fb6ad495_e54a3362",
@@ -60,6 +84,30 @@
       "writtenOn": "2025-01-15T16:13:41Z",
       "side": 1,
       "message": "I wonder if we should just call it \"pkvm,cma\" in case we want to allocate other things than IOMMU pgt from this region in the future?",
+      "range": {
+        "startLine": 64,
+        "startChar": 45,
+        "endLine": 64,
+        "endChar": 51
+      },
+      "revId": "b110021ce9f51608e1ddfc43cda379e31d7486c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0153986c_8bc1f7e7",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-15T16:46:06Z",
+      "side": 1,
+      "message": "It\u0027s definitely in my todo-list to generalize this system!",
+      "parentUuid": "9334215d_7d3259df",
       "range": {
         "startLine": 64,
         "startChar": 45,
