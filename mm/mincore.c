@@ -18,6 +18,7 @@
 #include <linux/shmem_fs.h>
 #include <linux/hugetlb.h>
 #include <linux/pgtable.h>
+#include <linux/page_size_compat.h>
 
 #include <linux/uaccess.h>
 #include "swap.h"
@@ -205,6 +206,15 @@ static long do_mincore(unsigned long addr, unsigned long pages, unsigned char *v
 	return (end - addr) >> PAGE_SHIFT;
 }
 
+static inline void collapse_mincore_result(unsigned char *emulated_vec, unsigned char *res_vec,
+					    unsigned long pages, unsigned long nr_sub_pages)
+{
+	unsigned long i;
+
+	for (i = 0; i < pages; i++)
+		res_vec[i / nr_sub_pages] |= emulated_vec[i];
+}
+
 /*
  * The mincore(2) system call.
  *
@@ -234,12 +244,16 @@ SYSCALL_DEFINE3(mincore, unsigned long, start, size_t, len,
 {
 	long retval;
 	unsigned long pages;
+	unsigned long copied;
 	unsigned char *tmp;
+	unsigned char *user_vec = vec;
+	unsigned char *result_vec = NULL;
+	unsigned long nr_sub_pages = (__PAGE_SIZE / PAGE_SIZE);
 
 	start = untagged_addr(start);
 
 	/* Check the start address: needs to be page-aligned.. */
-	if (start & ~PAGE_MASK)
+	if (start & ~__PAGE_MASK)
 		return -EINVAL;
 
 	/* ..and we need to be passed a valid user-space range */
@@ -250,6 +264,18 @@ SYSCALL_DEFINE3(mincore, unsigned long, start, size_t, len,
 	pages = len >> PAGE_SHIFT;
 	pages += (offset_in_page(len)) != 0;
 
+	if (unlikely(nr_sub_pages > 1)) {
+		vec = kzalloc(sizeof(char) * pages, GFP_KERNEL);
+		if (!vec)
+			return -ENOMEM;
+
+		result_vec = kzalloc(sizeof(char) * pages / nr_sub_pages, GFP_KERNEL);
+		if (!result_vec) {
+			kfree(vec);
+			return -ENOMEM;
+		}
+	}
+
 	if (!access_ok(vec, pages))
 		return -EFAULT;
 
@@ -258,6 +284,7 @@ SYSCALL_DEFINE3(mincore, unsigned long, start, size_t, len,
 		return -EAGAIN;
 
 	retval = 0;
+	copied = 0;
 	while (pages) {
 		/*
 		 * Do at most PAGE_SIZE entries per iteration, due to
@@ -269,15 +296,31 @@ SYSCALL_DEFINE3(mincore, unsigned long, start, size_t, len,
 
 		if (retval <= 0)
 			break;
-		if (copy_to_user(vec, tmp, retval)) {
+
+		if (unlikely(nr_sub_pages > 1))
+			memcpy(vec, tmp, retval);
+		else if (copy_to_user(vec, tmp, retval)) {
 			retval = -EFAULT;
 			break;
 		}
+
 		pages -= retval;
+		copied += retval;
 		vec += retval;
 		start += retval << PAGE_SHIFT;
 		retval = 0;
 	}
 	free_page((unsigned long) tmp);
+
+	if (unlikely(nr_sub_pages > 1)) {
+		collapse_mincore_result(vec - copied, result_vec, copied, nr_sub_pages);
+
+		if (copy_to_user(user_vec, result_vec, copied / nr_sub_pages))
+			retval = -EFAULT;
+
+		kfree(vec);
+		kfree(result_vec);
+	}
+
 	return retval;
 }
