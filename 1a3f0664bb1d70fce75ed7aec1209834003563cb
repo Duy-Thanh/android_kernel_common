@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e046ae1_d25dd2bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2025-01-16T18:21:29Z",
+      "side": 1,
+      "message": "Rebased due to conflict in .stg file. PTAL",
+      "revId": "1a3f0664bb1d70fce75ed7aec1209834003563cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
