@@ -22,6 +22,30 @@
       },
       "revId": "e595969dbb5928bcfa60b6f8edb79946f5a62ce9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ee74eef_5bcbe1c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-01-17T02:35:33Z",
+      "side": 1,
+      "message": "Synchronize memory reclaim has a direct impact on foreground applications and requires our focused attention, while Asynchronous memory reclamation only has an indirect impact. Handling both Synchronize and Asynchronous memory reclamation can lead to excessive memory reclaim, resulting in high refault rates and cold starts due to process termination.\nTo avoid such issues, we hope to ignore asynchronous PSI.",
+      "parentUuid": "8acb0bf6_daf7ed2e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "e595969dbb5928bcfa60b6f8edb79946f5a62ce9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
