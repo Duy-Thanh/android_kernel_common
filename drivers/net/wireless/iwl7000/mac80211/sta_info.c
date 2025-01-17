@@ -338,7 +338,7 @@ struct sta_info *sta_info_get_by_idx(struct ieee80211_sub_if_data *sdata,
 	int i = 0;
 
 	list_for_each_entry_rcu(sta, &local->sta_list, list,
-				lockdep_is_wiphy_held(local->hw.wiphy)) {
+				lockdep_is_held(&local->hw.wiphy->mtx)) {
 		if (sdata != sta->sdata)
 			continue;
 		if (i < idx) {
@@ -648,7 +648,7 @@ __sta_info_alloc(struct ieee80211_sub_if_data *sdata,
 		if (!hw->wiphy->bands[i])
 			continue;
 
-		switch((int)i) {
+		switch (i) {
 		case NL80211_BAND_2GHZ:
 		case NL80211_BAND_LC:
 			/*
@@ -887,7 +887,7 @@ static int sta_info_insert_finish(struct sta_info *sta) __acquires(RCU)
 			struct link_sta_info *link_sta;
 
 			link_sta = rcu_dereference_protected(sta->link[i],
-							     lockdep_is_wiphy_held(local->hw.wiphy));
+							     lockdep_is_held(&local->hw.wiphy->mtx));
 
 			if (!link_sta)
 				continue;
@@ -1245,7 +1245,7 @@ static int __must_check __sta_info_destroy_part1(struct sta_info *sta)
 			continue;
 
 		link_sta = rcu_dereference_protected(sta->link[i],
-						     lockdep_is_wiphy_held(local->hw.wiphy));
+						     lockdep_is_held(&local->hw.wiphy->mtx));
 
 		link_sta_info_hash_del(local, link_sta);
 	}
@@ -1566,7 +1566,8 @@ void sta_info_stop(struct ieee80211_local *local)
 }
 
 
-int __sta_info_flush(struct ieee80211_sub_if_data *sdata, bool vlans)
+int __sta_info_flush(struct ieee80211_sub_if_data *sdata, bool vlans,
+		     int link_id)
 {
 	struct ieee80211_local *local = sdata->local;
 	struct sta_info *sta, *tmp;
@@ -1580,12 +1581,18 @@ int __sta_info_flush(struct ieee80211_sub_if_data *sdata, bool vlans)
 	WARN_ON(vlans && !sdata->bss);
 
 	list_for_each_entry_safe(sta, tmp, &local->sta_list, list) {
-		if (sdata == sta->sdata ||
-		    (vlans && sdata->bss == sta->sdata->bss)) {
-			if (!WARN_ON(__sta_info_destroy_part1(sta)))
-				list_add(&sta->free_list, &free_list);
-			ret++;
-		}
+		if (sdata != sta->sdata &&
+		    (!vlans || sdata->bss != sta->sdata->bss))
+			continue;
+
+		if (link_id >= 0 && sta->sta.valid_links &&
+		    !(sta->sta.valid_links & BIT(link_id)))
+			continue;
+
+		if (!WARN_ON(__sta_info_destroy_part1(sta)))
+			list_add(&sta->free_list, &free_list);
+
+		ret++;
 	}
 
 	if (!list_empty(&free_list)) {
@@ -1717,7 +1724,7 @@ void ieee80211_sta_ps_deliver_wakeup(struct sta_info *sta)
 	skb_queue_head_init(&pending);
 
 	/* sync with ieee80211_tx_h_unicast_ps_buf */
-	spin_lock(&sta->ps_lock);
+	spin_lock_bh(&sta->ps_lock);
 	/* Send all buffered frames to the station */
 	for (ac = 0; ac < IEEE80211_NUM_ACS; ac++) {
 		int count = skb_queue_len(&pending), tmp;
@@ -1746,7 +1753,7 @@ void ieee80211_sta_ps_deliver_wakeup(struct sta_info *sta)
 	 */
 	clear_sta_flag(sta, WLAN_STA_PSPOLL);
 	clear_sta_flag(sta, WLAN_STA_UAPSD);
-	spin_unlock(&sta->ps_lock);
+	spin_unlock_bh(&sta->ps_lock);
 
 	atomic_dec(&ps->num_sta_ps);
 
@@ -2446,27 +2453,19 @@ static void sta_stats_decode_rate(struct ieee80211_local *local, u32 rate,
 		break;
 		}
 	case STA_STATS_RATE_TYPE_HE:
-#if CFG80211_VERSION >= KERNEL_VERSION(4,19,0)
 		rinfo->flags = RATE_INFO_FLAGS_HE_MCS;
 		rinfo->mcs = STA_STATS_GET(HE_MCS, rate);
 		rinfo->nss = STA_STATS_GET(HE_NSS, rate);
 		rinfo->he_gi = STA_STATS_GET(HE_GI, rate);
 		rinfo->he_ru_alloc = STA_STATS_GET(HE_RU, rate);
 		rinfo->he_dcm = STA_STATS_GET(HE_DCM, rate);
-#else
-		WARN_ONCE(1, "HE not supported on this cfg80211 version\n");
-#endif
 		break;
-#if CFG80211_VERSION >= KERNEL_VERSION(5,18,0)
 	case STA_STATS_RATE_TYPE_EHT:
 		rinfo->flags = RATE_INFO_FLAGS_EHT_MCS;
 		rinfo->mcs = STA_STATS_GET(EHT_MCS, rate);
 		rinfo->nss = STA_STATS_GET(EHT_NSS, rate);
 		rinfo->eht_gi = STA_STATS_GET(EHT_GI, rate);
 		rinfo->eht_ru_alloc = STA_STATS_GET(EHT_RU, rate);
-#else
-		WARN_ONCE(1, "EHT not supported on this cfg80211 version\n");
-#endif
 		break;
 	}
 }
@@ -2538,7 +2537,6 @@ static void sta_set_tidstats(struct sta_info *sta,
 		tidstats->tx_msdu_failed = sta->deflink.status_stats.msdu_failed[tid];
 	}
 
-#if CFG80211_VERSION >= KERNEL_VERSION(4,18,0)
 	if (tid < IEEE80211_NUM_TIDS) {
 		spin_lock_bh(&local->fq.lock);
 		rcu_read_lock();
@@ -2550,7 +2548,6 @@ static void sta_set_tidstats(struct sta_info *sta,
 		rcu_read_unlock();
 		spin_unlock_bh(&local->fq.lock);
 	}
-#endif /* CFG80211_VERSION >= KERNEL_VERSION(4,18,0) */
 }
 
 static inline u64 sta_get_stats_bytes(struct ieee80211_sta_rx_stats *rxstats)
@@ -2661,7 +2658,6 @@ void sta_set_sinfo(struct sta_info *sta, struct station_info *sinfo,
 		sinfo->filled |= BIT_ULL(NL80211_STA_INFO_TX_FAILED);
 	}
 
-#if CFG80211_VERSION >= KERNEL_VERSION(5,1,0)
 	if (!(sinfo->filled & BIT_ULL(NL80211_STA_INFO_RX_DURATION))) {
 		for (ac = 0; ac < IEEE80211_NUM_ACS; ac++)
 			sinfo->rx_duration += sta->airtime[ac].rx_airtime;
@@ -2678,7 +2674,6 @@ void sta_set_sinfo(struct sta_info *sta, struct station_info *sinfo,
 		sinfo->airtime_weight = sta->airtime_weight;
 		sinfo->filled |= BIT_ULL(NL80211_STA_INFO_AIRTIME_WEIGHT);
 	}
-#endif
 
 	sinfo->rx_dropped_misc = sta->deflink.rx_stats.dropped;
 	if (sta->deflink.pcpu_rx_stats) {
@@ -2818,15 +2813,12 @@ void sta_set_sinfo(struct sta_info *sta, struct station_info *sinfo,
 		sinfo->expected_throughput = thr;
 	}
 
-#if CFG80211_VERSION >= KERNEL_VERSION(4,17,0)
 	if (!(sinfo->filled & BIT_ULL(NL80211_STA_INFO_ACK_SIGNAL)) &&
 	    sta->deflink.status_stats.ack_signal_filled) {
 		sinfo->ack_signal = sta->deflink.status_stats.last_ack_signal;
 		sinfo->filled |= BIT_ULL(NL80211_STA_INFO_ACK_SIGNAL);
 	}
-#endif
 
-#if CFG80211_VERSION >= KERNEL_VERSION(4,20,0)
 	if (!(sinfo->filled & BIT_ULL(NL80211_STA_INFO_ACK_SIGNAL_AVG)) &&
 	    sta->deflink.status_stats.ack_signal_filled) {
 		sinfo->avg_ack_signal =
@@ -2835,15 +2827,12 @@ void sta_set_sinfo(struct sta_info *sta, struct station_info *sinfo,
 		sinfo->filled |=
 			BIT_ULL(NL80211_STA_INFO_ACK_SIGNAL_AVG);
 	}
-#endif
 
-#if CFG80211_VERSION >= KERNEL_VERSION(5,2,0)
 	if (ieee80211_vif_is_mesh(&sdata->vif)) {
 		sinfo->filled |= BIT_ULL(NL80211_STA_INFO_AIRTIME_LINK_METRIC);
 		sinfo->airtime_link_metric =
 			airtime_link_metric_get(local, sta);
 	}
-#endif
 }
 
 u32 sta_get_expected_throughput(struct sta_info *sta)
@@ -2949,7 +2938,7 @@ int ieee80211_sta_activate_link(struct sta_info *sta, unsigned int link_id)
 	int ret;
 
 	link_sta = rcu_dereference_protected(sta->link[link_id],
-					     lockdep_is_wiphy_held(sdata->local->hw.wiphy));
+					     lockdep_is_held(&sdata->local->hw.wiphy->mtx));
 
 	if (WARN_ON(old_links == new_links || !link_sta))
 		return -EINVAL;
@@ -3032,7 +3021,7 @@ bool lockdep_sta_mutex_held(struct ieee80211_sta *pubsta)
 {
 	struct sta_info *sta = container_of(pubsta, struct sta_info, sta);
 
-	return lockdep_is_wiphy_held(sta->local->hw.wiphy);
+	return lockdep_is_held(&sta->local->hw.wiphy->mtx);
 }
 EXPORT_SYMBOL(lockdep_sta_mutex_held);
 #endif

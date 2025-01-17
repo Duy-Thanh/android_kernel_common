@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
 /*
  * Copyright (C) 2015-2017 Intel Deutschland GmbH
- * Copyright (C) 2018-2023 Intel Corporation
+ * Copyright (C) 2018-2024 Intel Corporation
  */
 #include <linux/module.h>
 #include <linux/stringify.h>
@@ -13,7 +13,7 @@
 #define IWL_22000_UCODE_API_MAX	77
 
 /* Lowest firmware API version supported */
-#define IWL_22000_UCODE_API_MIN	50
+#define IWL_22000_UCODE_API_MIN	77
 
 /* NVM versions */
 #define IWL_22000_NVM_VERSION		0x0a1d
@@ -62,12 +62,8 @@ static const struct iwl_base_params iwl_22000_base_params = {
 const struct iwl_ht_params iwl_22000_ht_params = {
 	.stbc = true,
 	.ldpc = true,
-#if CFG80211_VERSION >= KERNEL_VERSION(5,10,0)
 	.ht40_bands = BIT(NL80211_BAND_2GHZ) | BIT(NL80211_BAND_5GHZ) |
 		      BIT(NL80211_BAND_6GHZ),
-#else
-	.ht40_bands = BIT(NL80211_BAND_2GHZ) | BIT(NL80211_BAND_5GHZ),
-#endif
 };
 
 #define IWL_DEVICE_22000_COMMON						\

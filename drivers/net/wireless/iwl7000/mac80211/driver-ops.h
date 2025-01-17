@@ -88,7 +88,7 @@ static inline int drv_get_et_sset_count(struct ieee80211_sub_if_data *sdata,
 }
 
 int drv_start(struct ieee80211_local *local);
-void drv_stop(struct ieee80211_local *local);
+void drv_stop(struct ieee80211_local *local, bool suspend);
 
 #ifdef CONFIG_PM
 static inline int drv_suspend(struct ieee80211_local *local,
@@ -122,10 +122,6 @@ static inline void drv_set_wakeup(struct ieee80211_local *local,
 				  bool enabled)
 {
 	might_sleep();
-	/* this doesn't really matter - nothing interesting happens here */
-#if CFG80211_VERSION >= KERNEL_VERSION(6,7,0)
-	lockdep_assert_wiphy(local->hw.wiphy);
-#endif
 
 	if (!local->ops->set_wakeup)
 		return;
@@ -763,6 +759,7 @@ static inline int drv_get_antenna(struct ieee80211_local *local,
 {
 	int ret = -EOPNOTSUPP;
 	might_sleep();
+	lockdep_assert_wiphy(local->hw.wiphy);
 	if (local->ops->get_antenna)
 		ret = local->ops->get_antenna(&local->hw, tx_ant, rx_ant);
 	trace_drv_get_antenna(local, *tx_ant, *rx_ant, ret);
@@ -1730,4 +1727,16 @@ drv_can_neg_ttlm(struct ieee80211_local *local,
 
 	return res;
 }
+
+static inline void
+drv_prep_add_interface(struct ieee80211_local *local,
+		       enum nl80211_iftype type)
+{
+	trace_drv_prep_add_interface(local, type);
+	if (local->ops->prep_add_interface)
+		local->ops->prep_add_interface(&local->hw, type);
+
+	trace_drv_return_void(local);
+}
+
 #endif /* __MAC80211_DRIVER_OPS */

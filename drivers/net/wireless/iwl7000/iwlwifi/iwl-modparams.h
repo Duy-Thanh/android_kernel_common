@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
 /*
- * Copyright (C) 2005-2014, 2018-2022 Intel Corporation
+ * Copyright (C) 2005-2014, 2018-2022, 2024 Intel Corporation
  */
 #ifndef __iwl_modparams_h__
 #define __iwl_modparams_h__
@@ -65,6 +65,7 @@ enum iwl_uapsd_disable {
  * @remove_when_gone: remove an inaccessible device from the PCIe bus.
  * @enable_ini: enable new FW debug infratructure (INI TLVs)
  * @disable_11be: disable EHT capabilities, default = false.
+ * @mld_op_mode: Load the MLD operation mode. Default = false.
  */
 struct iwl_mod_params {
 	int swcrypto;
@@ -92,6 +93,9 @@ struct iwl_mod_params {
 	bool remove_when_gone;
 	u32 enable_ini;
 	bool disable_11be;
+#if IS_ENABLED(CPTCFG_IWLMLD)
+	bool mld_op_mode;
+#endif
 
 };
 
@@ -111,6 +115,25 @@ static inline bool iwl_enable_tx_ampdu(void)
 
 	/* enabled by default */
 	return true;
+}
+
+/* Verify amsdu_size module parameter and convert it to a rxb size */
+static inline enum iwl_amsdu_size
+iwl_amsdu_size_to_rxb_size(void)
+{
+	switch (iwlwifi_mod_params.amsdu_size) {
+	case IWL_AMSDU_8K:
+		return IWL_AMSDU_8K;
+	case IWL_AMSDU_12K:
+		return IWL_AMSDU_12K;
+	default:
+		pr_err("%s: Unsupported amsdu_size: %d\n", KBUILD_MODNAME,
+		       iwlwifi_mod_params.amsdu_size);
+		fallthrough;
+	case IWL_AMSDU_DEF:
+	case IWL_AMSDU_4K:
+		return IWL_AMSDU_4K;
+	}
 }
 
 #endif /* #__iwl_modparams_h__ */

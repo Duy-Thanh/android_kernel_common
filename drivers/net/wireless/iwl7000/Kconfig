@@ -15,6 +15,7 @@ config IWL7000
 	select CRYPTO
 	select CRYPTO_AES
 	select CRYPTO_CCM
+	select CRYPTO_LIB_ARC4
 	select CRC32
 	select AVERAGE
 
@@ -64,3 +65,8 @@ config IWL7000_VENDOR_CMDS
 
 	  This option mostly exists for non-upstream tagging, so best
 	  leave it set to Y.
+
+config IWL7000_MLD
+	tristate "Enable IWL7000 MLD operation mode"
+	default m
+	depends on IWL7000

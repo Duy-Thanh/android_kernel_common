@@ -120,7 +120,7 @@ static void iwl_mvm_fill_sf_command(struct iwl_mvm *mvm,
 
 			if (link_sta->ht_cap.ht_supported ||
 			    link_sta->vht_cap.vht_supported ||
-			    cfg_eht_cap_has_eht(link_sta) ||
+			    link_sta->eht_cap.has_eht ||
 			    link_sta->he_cap.has_he) {
 				is_legacy = false;
 				max_rx_nss = max(max_rx_nss, link_sta->rx_nss);

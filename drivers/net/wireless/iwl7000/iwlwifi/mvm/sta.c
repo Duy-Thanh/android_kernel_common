@@ -29,7 +29,7 @@ int iwl_mvm_find_free_sta_id(struct iwl_mvm *mvm, enum nl80211_iftype iftype)
 	int sta_id;
 	u32 reserved_ids = 0;
 
-	BUILD_BUG_ON(IWL_MVM_STATION_COUNT_MAX > 32);
+	BUILD_BUG_ON(IWL_STATION_COUNT_MAX > 32);
 	WARN_ON_ONCE(test_bit(IWL_MVM_STATUS_IN_HW_RESTART, &mvm->status));
 
 	lockdep_assert_held(&mvm->mutex);
@@ -96,8 +96,8 @@ u32 iwl_mvm_get_sta_ampdu_dens(struct ieee80211_link_sta *link_sta,
 			u8_get_bits(link_sta->he_cap.he_cap_elem.mac_cap_info[3],
 				    IEEE80211_HE_MAC_CAP3_MAX_AMPDU_LEN_EXP_MASK);
 
-	if (cfg_eht_cap_has_eht(link_sta))
-		agg_size += u8_get_bits(cfg_eht_cap(link_sta)->eht_cap_elem.mac_cap_info[1],
+	if (link_sta->eht_cap.has_eht)
+		agg_size += u8_get_bits(link_sta->eht_cap.eht_cap_elem.mac_cap_info[1],
 					IEEE80211_EHT_MAC_CAP1_MAX_AMPDU_LEN_MASK);
 
 	/* Limit to max A-MPDU supported by FW */
@@ -828,7 +828,7 @@ static int iwl_mvm_get_queue_size(struct ieee80211_sta *sta)
 			continue;
 
 		/* support for 512 ba size */
-		if (cfg_eht_cap_has_eht(link) &&
+		if (link->eht_cap.has_eht &&
 		    max_size < IWL_DEFAULT_QUEUE_SIZE_EHT)
 			max_size = IWL_DEFAULT_QUEUE_SIZE_EHT;
 
@@ -857,12 +857,6 @@ int iwl_mvm_tvqm_enable_txq(struct iwl_mvm *mvm,
 		size = iwl_mvm_get_queue_size(sta);
 	}
 
-	/* take the min with bc tbl entries allowed */
-	size = min_t(u32, size, mvm->trans->txqs.bc_tbl_size / sizeof(u16));
-
-	/* size needs to be power of 2 values for calculating read/write pointers */
-	size = rounddown_pow_of_two(size);
-
 	if (sta) {
 		struct iwl_mvm_sta *mvmsta = iwl_mvm_sta_from_mac80211(sta);
 		struct ieee80211_link_sta *link_sta;
@@ -887,22 +881,13 @@ int iwl_mvm_tvqm_enable_txq(struct iwl_mvm *mvm,
 	if (!sta_mask)
 		return -EINVAL;
 
-	do {
-		queue = iwl_trans_txq_alloc(mvm->trans, 0, sta_mask,
-					    tid, size, timeout);
+	queue = iwl_trans_txq_alloc(mvm->trans, 0, sta_mask,
+				    tid, size, timeout);
 
-		if (queue < 0)
-			IWL_DEBUG_TX_QUEUES(mvm,
-					    "Failed allocating TXQ of size %d for sta mask %x tid %d, ret: %d\n",
-					    size, sta_mask, tid, queue);
-		size /= 2;
-	} while (queue < 0 && size >= 16);
-
-	if (queue < 0)
-		return queue;
-
-	IWL_DEBUG_TX_QUEUES(mvm, "Enabling TXQ #%d for sta mask 0x%x tid %d\n",
-			    queue, sta_mask, tid);
+	if (queue >= 0)
+		IWL_DEBUG_TX_QUEUES(mvm,
+				    "Enabling TXQ #%d for sta mask 0x%x tid %d\n",
+				    queue, sta_mask, tid);
 
 	return queue;
 }
@@ -915,7 +900,7 @@ static int iwl_mvm_sta_alloc_queue_tvqm(struct iwl_mvm *mvm,
 	struct iwl_mvm_txq *mvmtxq =
 		iwl_mvm_txq_from_tid(sta, tid);
 	unsigned int wdg_timeout =
-		iwl_mvm_get_wd_timeout(mvm, mvmsta->vif, false, false);
+		iwl_mvm_get_wd_timeout(mvm, mvmsta->vif);
 	int queue = -1;
 
 	lockdep_assert_held(&mvm->mutex);
@@ -1095,7 +1080,7 @@ static void iwl_mvm_unshare_queue(struct iwl_mvm *mvm, int queue)
 		return;
 
 	mvmsta = iwl_mvm_sta_from_mac80211(sta);
-	wdg_timeout = iwl_mvm_get_wd_timeout(mvm, mvmsta->vif, false, false);
+	wdg_timeout = iwl_mvm_get_wd_timeout(mvm, mvmsta->vif);
 
 	ssn = IEEE80211_SEQ_TO_SN(mvmsta->tid_data[tid].seq_number);
 
@@ -1345,7 +1330,7 @@ static int iwl_mvm_sta_alloc_queue(struct iwl_mvm *mvm,
 		.frame_limit = IWL_FRAME_LIMIT,
 	};
 	unsigned int wdg_timeout =
-		iwl_mvm_get_wd_timeout(mvm, mvmsta->vif, false, false);
+		iwl_mvm_get_wd_timeout(mvm, mvmsta->vif);
 	int queue = -1;
 	u16 queue_tmp;
 	unsigned long disable_agg_tids = 0;
@@ -1637,7 +1622,7 @@ void iwl_mvm_realloc_queues_after_restart(struct iwl_mvm *mvm,
 {
 	struct iwl_mvm_sta *mvm_sta = iwl_mvm_sta_from_mac80211(sta);
 	unsigned int wdg =
-		iwl_mvm_get_wd_timeout(mvm, mvm_sta->vif, false, false);
+		iwl_mvm_get_wd_timeout(mvm, mvm_sta->vif);
 	int i;
 	struct iwl_trans_txq_scd_cfg cfg = {
 		.sta_id = mvm_sta->deflink.sta_id,
@@ -2373,7 +2358,7 @@ int iwl_mvm_send_add_bcast_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 	int queue;
 	int ret;
 	unsigned int wdg_timeout =
-		iwl_mvm_get_wd_timeout(mvm, vif, false, false);
+		iwl_mvm_get_wd_timeout(mvm, vif);
 	struct iwl_trans_txq_scd_cfg cfg = {
 		.fifo = IWL_MVM_TX_FIFO_VO,
 		.sta_id = mvmvif->deflink.bcast_sta.sta_id,
@@ -2582,7 +2567,7 @@ int iwl_mvm_add_mcast_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 		.aggregate = false,
 		.frame_limit = IWL_FRAME_LIMIT,
 	};
-	unsigned int timeout = iwl_mvm_get_wd_timeout(mvm, vif, false, false);
+	unsigned int timeout = iwl_mvm_get_wd_timeout(mvm, vif);
 	int ret;
 
 	lockdep_assert_held(&mvm->mutex);
@@ -2757,7 +2742,7 @@ static void iwl_mvm_free_reorder(struct iwl_mvm *mvm,
 		 */
 		WARN_ON(1);
 
-		for (j = 0; j < reorder_buf->buf_size; j++)
+		for (j = 0; j < data->buf_size; j++)
 			__skb_queue_purge(&entries[j].frames);
 
 		spin_unlock_bh(&reorder_buf->lock);
@@ -2766,7 +2751,7 @@ static void iwl_mvm_free_reorder(struct iwl_mvm *mvm,
 
 static void iwl_mvm_init_reorder_buffer(struct iwl_mvm *mvm,
 					struct iwl_mvm_baid_data *data,
-					u16 ssn, u16 buf_size)
+					u16 ssn)
 {
 	int i;
 
@@ -2779,12 +2764,10 @@ static void iwl_mvm_init_reorder_buffer(struct iwl_mvm *mvm,
 
 		reorder_buf->num_stored = 0;
 		reorder_buf->head_sn = ssn;
-		reorder_buf->buf_size = buf_size;
 		spin_lock_init(&reorder_buf->lock);
-		reorder_buf->mvm = mvm;
 		reorder_buf->queue = i;
 		reorder_buf->valid = false;
-		for (j = 0; j < reorder_buf->buf_size; j++)
+		for (j = 0; j < data->buf_size; j++)
 			__skb_queue_head_init(&entries[j].frames);
 	}
 }
@@ -2847,7 +2830,12 @@ static int iwl_mvm_fw_baid_op_cmd(struct iwl_mvm *mvm,
 		.action = start ? cpu_to_le32(IWL_RX_BAID_ACTION_ADD) :
 				  cpu_to_le32(IWL_RX_BAID_ACTION_REMOVE),
 	};
-	u32 cmd_id = WIDE_ID(DATA_PATH_GROUP, RX_BAID_ALLOCATION_CONFIG_CMD);
+	struct iwl_host_cmd hcmd = {
+		.id = WIDE_ID(DATA_PATH_GROUP, RX_BAID_ALLOCATION_CONFIG_CMD),
+		.flags = CMD_SEND_IN_RFKILL,
+		.len[0] = sizeof(cmd),
+		.data[0] = &cmd,
+	};
 	int ret;
 
 	BUILD_BUG_ON(sizeof(struct iwl_rx_baid_cfg_resp) != sizeof(baid));
@@ -2859,7 +2847,7 @@ static int iwl_mvm_fw_baid_op_cmd(struct iwl_mvm *mvm,
 		cmd.alloc.ssn = cpu_to_le16(ssn);
 		cmd.alloc.win_size = cpu_to_le16(buf_size);
 		baid = -EIO;
-	} else if (iwl_fw_lookup_cmd_ver(mvm->fw, cmd_id, 1) == 1) {
+	} else if (iwl_fw_lookup_cmd_ver(mvm->fw, hcmd.id, 1) == 1) {
 		cmd.remove_v1.baid = cpu_to_le32(baid);
 		BUILD_BUG_ON(sizeof(cmd.remove_v1) > sizeof(cmd.remove));
 	} else {
@@ -2868,8 +2856,7 @@ static int iwl_mvm_fw_baid_op_cmd(struct iwl_mvm *mvm,
 		cmd.remove.tid = cpu_to_le32(tid);
 	}
 
-	ret = iwl_mvm_send_cmd_pdu_status(mvm, cmd_id, sizeof(cmd),
-					  &cmd, &baid);
+	ret = iwl_mvm_send_cmd_status(mvm, &hcmd, &baid);
 	if (ret)
 		return ret;
 
@@ -2989,13 +2976,14 @@ int iwl_mvm_sta_rx_agg(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		baid_data->mvm = mvm;
 		baid_data->tid = tid;
 		baid_data->sta_mask = iwl_mvm_sta_fw_id_mask(mvm, sta, -1);
+		baid_data->buf_size = buf_size;
 
 		mvm_sta->tid_to_baid[tid] = baid;
 		if (timeout)
 			mod_timer(&baid_data->session_timer,
 				  TU_TO_EXP_TIME(timeout * 2));
 
-		iwl_mvm_init_reorder_buffer(mvm, baid_data, ssn, buf_size);
+		iwl_mvm_init_reorder_buffer(mvm, baid_data, ssn);
 		/*
 		 * protect the BA data with RCU to cover a case where our
 		 * internal RX sync mechanism will timeout (not that it's
@@ -3218,7 +3206,7 @@ int iwl_mvm_sta_tx_agg_oper(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 	struct iwl_mvm_sta *mvmsta = iwl_mvm_sta_from_mac80211(sta);
 	struct iwl_mvm_tid_data *tid_data = &mvmsta->tid_data[tid];
 	unsigned int wdg_timeout =
-		iwl_mvm_get_wd_timeout(mvm, vif, sta->tdls, false);
+		iwl_mvm_get_wd_timeout(mvm, vif);
 	int queue, ret;
 	bool alloc_queue = true;
 	enum iwl_mvm_queue_status queue_status;
@@ -4346,7 +4334,7 @@ int iwl_mvm_add_pasn_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 	u16 queue;
 	struct iwl_mvm_vif *mvmvif = iwl_mvm_vif_from_mac80211(vif);
 	unsigned int wdg_timeout =
-		iwl_mvm_get_wd_timeout(mvm, vif, false, false);
+		iwl_mvm_get_wd_timeout(mvm, vif);
 	bool mld = iwl_mvm_has_mld_api(mvm->fw);
 	u32 type = mld ? STATION_TYPE_PEER : IWL_STA_LINK;
 
@@ -4474,9 +4462,11 @@ void iwl_mvm_count_mpdu(struct iwl_mvm_sta *mvm_sta, u8 fw_sta_id, u32 count,
 		memset(queue_counter->per_link, 0,
 		       sizeof(queue_counter->per_link));
 		queue_counter->window_start = jiffies;
+
+		IWL_DEBUG_INFO(mvm, "MPDU counters are cleared\n");
 	}
 
-	for (int i = 0; i < IWL_MVM_FW_MAX_LINK_ID; i++)
+	for (int i = 0; i < IWL_FW_MAX_LINK_ID; i++)
 		total_mpdus += tx ? queue_counter->per_link[i].tx :
 				    queue_counter->per_link[i].rx;
 
