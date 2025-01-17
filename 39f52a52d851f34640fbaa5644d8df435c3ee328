@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbf70e7d_58d38889",
+        "filename": "mm/memfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-01-17T21:11:10Z",
+      "side": 1,
+      "message": "Typo upstream",
+      "range": {
+        "startLine": 340,
+        "startChar": 17,
+        "endLine": 340,
+        "endChar": 24
+      },
+      "revId": "39f52a52d851f34640fbaa5644d8df435c3ee328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
