@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "495d58f7_79ce6d1b",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-17T22:12:18Z",
+      "side": 1,
+      "message": "Right, and the handling still upholds the part about only allowing the name to change before the file is mapped. If someone is using this ioctl command, then `ASHMEM_GET_NAME` should return what they used for `ASHMEM_SET_NAME`, which is why I saved it in `d_fsdata`.",
+      "parentUuid": "757889fa_e5e4966d",
+      "range": {
+        "startLine": 125,
+        "startChar": 1,
+        "endLine": 126,
+        "endChar": 44
+      },
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fb7baa4_29c1dbdf",
         "filename": "mm/ashmem_compat.c",
         "patchSetId": 22
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-17T21:57:47Z",
       "side": 1,
       "message": "Does it mean the size can only be set once?",
+      "range": {
+        "startLine": 202,
+        "startChar": 1,
+        "endLine": 202,
+        "endChar": 48
+      },
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "190b2328_289522bf",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-17T22:12:18Z",
+      "side": 1,
+      "message": "Yes, I did this here--as opposed to in mmap--because I don\u0027t know if other usecases that use memfd for non-ashmem related purposes would need to change the file size (perhaps increase) after it has been mmap\u0027ed, since the mmap handler in this file will be invoked for all memfds, not just the ones used for ashmem.",
+      "parentUuid": "9fb7baa4_29c1dbdf",
       "range": {
         "startLine": 202,
         "startChar": 1,
