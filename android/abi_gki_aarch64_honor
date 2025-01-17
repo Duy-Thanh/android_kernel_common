@@ -1,4 +1,19 @@
 [abi_symbol_list]
+<<<<<<< HEAD   (af9200 UPSTREAM: vsock/virtio: Initialization of the dangling point)
+||||||| BASE
+  arch_vma_name
+  _vm_normal_page
+  pmd_clear_bad
+  __pmd_trans_huge_lock
+=======
+  profile_event_register
+  profile_event_unregister
+  task_cputime_adjusted
+  arch_vma_name
+  _vm_normal_page
+  pmd_clear_bad
+  __pmd_trans_huge_lock
+>>>>>>> CHANGE (3cefb2 ANDROID: GKI: Add additional symbols for honor)
   __traceiter_android_rvh_dma_buf_stats_teardown
   __traceiter_android_vh_tune_fault_around_bytes
   __traceiter_android_vh_do_swap_page_spf
