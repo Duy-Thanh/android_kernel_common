@@ -411,16 +411,26 @@ static void *sock_map_lookup_sys(struct bpf_map *map, void *key)
 static int __sock_map_delete(struct bpf_stab *stab, struct sock *sk_test,
 			     struct sock **psk)
 {
-	struct sock *sk;
+	struct sock *sk = NULL;
 	int err = 0;
 	unsigned long flags;
 
 	if (irqs_disabled())
 		return -EOPNOTSUPP; /* locks here are hardirq-unsafe */
 
+<<<<<<< HEAD   (e280ed Revert "Bluetooth: hci_core: Fix sleeping function called fr)
 	raw_spin_lock_irqsave(&stab->lock, flags);
 	sk = *psk;
 	if (!sk_test || sk_test == sk)
+||||||| BASE
+	raw_spin_lock_bh(&stab->lock);
+	sk = *psk;
+	if (!sk_test || sk_test == sk)
+=======
+	raw_spin_lock_bh(&stab->lock);
+
+	if (!sk_test || sk_test == *psk)
+>>>>>>> BRANCH (c0dde4 dm-ebs: don't set the flag DM_TARGET_PASSES_INTEGRITY)
 		sk = xchg(psk, NULL);
 
 	if (likely(sk))
