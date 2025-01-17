@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "757889fa_e5e4966d",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-01-17T21:57:47Z",
+      "side": 1,
+      "message": "Hi Isaac,\n\nDo we need to save a name in d_fsdata? \n\nWith ashmem IIRC the name could only be set before the shmem file was allocated (before the buffer was mapped).",
+      "range": {
+        "startLine": 125,
+        "startChar": 1,
+        "endLine": 126,
+        "endChar": 44
+      },
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb7baa4_29c1dbdf",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-01-17T21:57:47Z",
+      "side": 1,
+      "message": "Does it mean the size can only be set once?",
+      "range": {
+        "startLine": 202,
+        "startChar": 1,
+        "endLine": 202,
+        "endChar": 48
+      },
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
