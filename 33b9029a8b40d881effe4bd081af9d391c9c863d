@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebf388c1_cc030c9d",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-17T01:11:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7815f927_dac5797f",
+      "revId": "33b9029a8b40d881effe4bd081af9d391c9c863d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc6bc147_a568fd1b",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91b833d_d271f874",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-17T01:11:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc6bc147_a568fd1b",
+      "revId": "33b9029a8b40d881effe4bd081af9d391c9c863d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "157d182a_0c41b116",
@@ -48,6 +84,30 @@
       "writtenOn": "2025-01-16T21:15:03Z",
       "side": 1,
       "message": "This seems weird... Do you expect someone constantly writing?",
+      "range": {
+        "startLine": 1069,
+        "startChar": 2,
+        "endLine": 1069,
+        "endChar": 20
+      },
+      "revId": "33b9029a8b40d881effe4bd081af9d391c9c863d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d012ca_0da5a275",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-17T01:11:53Z",
+      "side": 1,
+      "message": "Not under normal circumstances, but I\u0027ve seen fuzzers before that just spam sysfs nodes with incorrect inputs so my thought was to not flood `dmesg` in that case.\n\nIs this something we should keep?",
+      "parentUuid": "157d182a_0c41b116",
       "range": {
         "startLine": 1069,
         "startChar": 2,
