@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f00eb47d_84b16dec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2025-01-17T10:06:26Z",
+      "side": 1,
+      "message": "change on base branch (android12-5.10) is https://android-review.googlesource.com/c/kernel/common/+/3449589. Sorry for this mistake, it seems impossible to change changeID of this commit to that one\u0027s, should I push another commit with the same changeID?",
+      "parentUuid": "b8b2fdb1_a5a610a1",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "4c080e810e3da393fa446c6ea1ce105e3204b152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0cb2560e_97860bbc",

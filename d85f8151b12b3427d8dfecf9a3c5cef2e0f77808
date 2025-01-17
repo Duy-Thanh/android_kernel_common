@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb82c03_f35f3e56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2025-01-17T10:06:26Z",
+      "side": 1,
+      "message": "change on base branch (android12-5.10) is https://android-review.googlesource.com/c/kernel/common/+/3449589.\n Sorry for this mistake, it seems impossible to change changeID of this \ncommit to that one\u0027s, should I push another commit with the same \nchangeID?(may lost track of relation chain)",
+      "revId": "d85f8151b12b3427d8dfecf9a3c5cef2e0f77808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
