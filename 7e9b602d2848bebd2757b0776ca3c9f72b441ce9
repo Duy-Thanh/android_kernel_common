@@ -51,6 +51,24 @@
       "message": "LGTM, but I can\u0027t +2 here.",
       "revId": "7e9b602d2848bebd2757b0776ca3c9f72b441ce9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "559fd1d7_fe9a58da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-17T20:27:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "131a1305_2c002723",
+      "revId": "7e9b602d2848bebd2757b0776ca3c9f72b441ce9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
