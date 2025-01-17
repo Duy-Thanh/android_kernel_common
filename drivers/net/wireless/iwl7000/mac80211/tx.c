@@ -144,7 +144,7 @@ static __le16 ieee80211_duration(struct ieee80211_tx_data *tx,
 		if (tx->sdata->vif.bss_conf.basic_rates & BIT(i))
 			rate = r->bitrate;
 
-		switch((int)sband->band) {
+		switch (sband->band) {
 		case NL80211_BAND_2GHZ:
 		case NL80211_BAND_LC:
 			if (tx->sdata->deflink.operating_11g_mode)
@@ -698,11 +698,16 @@ ieee80211_tx_h_rate_ctrl(struct ieee80211_tx_data *tx)
 	txrc.bss_conf = &tx->sdata->vif.bss_conf;
 	txrc.skb = tx->skb;
 	txrc.reported_rate.idx = -1;
-	txrc.rate_idx_mask = tx->sdata->rc_rateidx_mask[info->band];
 
-	if (tx->sdata->rc_has_mcs_mask[info->band])
-		txrc.rate_idx_mcs_mask =
-			tx->sdata->rc_rateidx_mcs_mask[info->band];
+	if (unlikely(info->control.flags & IEEE80211_TX_CTRL_SCAN_TX)) {
+		txrc.rate_idx_mask = ~0;
+	} else {
+		txrc.rate_idx_mask = tx->sdata->rc_rateidx_mask[info->band];
+
+		if (tx->sdata->rc_has_mcs_mask[info->band])
+			txrc.rate_idx_mcs_mask =
+				tx->sdata->rc_rateidx_mcs_mask[info->band];
+	}
 
 	txrc.bss = (tx->sdata->vif.type == NL80211_IFTYPE_AP ||
 		    tx->sdata->vif.type == NL80211_IFTYPE_MESH_POINT ||
@@ -1552,7 +1557,6 @@ void ieee80211_txq_purge(struct ieee80211_local *local,
 	spin_unlock_bh(&local->active_txq_lock[txqi->txq.ac]);
 }
 
-#if CFG80211_VERSION >= KERNEL_VERSION(4,18,0)
 void ieee80211_txq_set_params(struct ieee80211_local *local)
 {
 	if (local->hw.wiphy->txq_limit)
@@ -1570,7 +1574,6 @@ void ieee80211_txq_set_params(struct ieee80211_local *local)
 	else
 		local->hw.wiphy->txq_quantum = local->fq.quantum;
 }
-#endif /* CFG80211_VERSION >= KERNEL_VERSION(4,18,0) */
 
 int ieee80211_txq_setup_flows(struct ieee80211_local *local)
 {
@@ -1606,8 +1609,8 @@ int ieee80211_txq_setup_flows(struct ieee80211_local *local)
 	local->cparams.target = MS2TIME(20);
 	local->cparams.ecn = true;
 
-	local->cvars = kcalloc(fq->flows_cnt, sizeof(local->cvars[0]),
-			       GFP_KERNEL);
+	local->cvars = kvcalloc(fq->flows_cnt, sizeof(local->cvars[0]),
+				GFP_KERNEL);
 	if (!local->cvars) {
 		spin_lock_bh(&fq->lock);
 		fq_reset(fq, fq_skb_free_func);
@@ -1618,9 +1621,7 @@ int ieee80211_txq_setup_flows(struct ieee80211_local *local)
 	for (i = 0; i < fq->flows_cnt; i++)
 		codel_vars_init(&local->cvars[i]);
 
-#if CFG80211_VERSION >= KERNEL_VERSION(4,18,0)
 	ieee80211_txq_set_params(local);
-#endif
 
 	return 0;
 }
@@ -1629,7 +1630,7 @@ void ieee80211_txq_teardown_flows(struct ieee80211_local *local)
 {
 	struct fq *fq = &local->fq;
 
-	kfree(local->cvars);
+	kvfree(local->cvars);
 	local->cvars = NULL;
 
 	spin_lock_bh(&fq->lock);
@@ -1767,7 +1768,7 @@ static bool __ieee80211_tx(struct ieee80211_local *local,
 			break;
 		}
 		sdata = rcu_dereference(local->monitor_sdata);
-		if (sdata) {
+		if (sdata && ieee80211_hw_check(&local->hw, WANT_MONITOR_VIF)) {
 			vif = &sdata->vif;
 			info->hw_queue =
 				vif->hw_queue[skb_get_queue_mapping(skb)];
@@ -2796,8 +2797,7 @@ static struct sk_buff *ieee80211_build_hdr(struct ieee80211_sub_if_data *sdata,
 
 		if (tdls_peer) {
 			/* For TDLS only one link can be valid with peer STA */
-			int tdls_link_id = sta->sta.valid_links ?
-					   __ffs(sta->sta.valid_links) : 0;
+			int tdls_link_id = ieee80211_tdls_sta_link_id(sta);
 			struct ieee80211_link_data *link;
 
 			/* DA SA BSSID */
@@ -3123,8 +3123,7 @@ void ieee80211_check_fast_xmit(struct sta_info *sta)
 	case NL80211_IFTYPE_STATION:
 		if (test_sta_flag(sta, WLAN_STA_TDLS_PEER)) {
 			/* For TDLS only one link can be valid with peer STA */
-			int tdls_link_id = sta->sta.valid_links ?
-					   __ffs(sta->sta.valid_links) : 0;
+			int tdls_link_id = ieee80211_tdls_sta_link_id(sta);
 			struct ieee80211_link_data *link;
 
 			/* DA SA BSSID */
@@ -3981,7 +3980,8 @@ begin:
 			break;
 		}
 		tx.sdata = rcu_dereference(local->monitor_sdata);
-		if (tx.sdata) {
+		if (tx.sdata &&
+		    ieee80211_hw_check(&local->hw, WANT_MONITOR_VIF)) {
 			vif = &tx.sdata->vif;
 			info->hw_queue =
 				vif->hw_queue[skb_get_queue_mapping(skb)];
@@ -3989,7 +3989,8 @@ begin:
 			ieee80211_free_txskb(&local->hw, skb);
 			goto begin;
 		} else {
-			vif = NULL;
+			info->control.vif = NULL;
+			return skb;
 		}
 		break;
 	case NL80211_IFTYPE_AP_VLAN:
@@ -5125,9 +5126,11 @@ unlock:
 }
 EXPORT_SYMBOL(ieee80211_beacon_set_cntdwn);
 
-bool ieee80211_beacon_cntdwn_is_complete(struct ieee80211_vif *vif)
+bool ieee80211_beacon_cntdwn_is_complete(struct ieee80211_vif *vif,
+					 unsigned int link_id)
 {
 	struct ieee80211_sub_if_data *sdata = vif_to_sdata(vif);
+	struct ieee80211_link_data *link;
 	struct beacon_data *beacon = NULL;
 	u8 *beacon_data;
 	size_t beacon_data_len;
@@ -5136,9 +5139,17 @@ bool ieee80211_beacon_cntdwn_is_complete(struct ieee80211_vif *vif)
 	if (!ieee80211_sdata_running(sdata))
 		return false;
 
+	if (WARN_ON(link_id >= IEEE80211_MLD_MAX_NUM_LINKS))
+		return 0;
+
 	rcu_read_lock();
+
+	link = rcu_dereference(sdata->link[link_id]);
+	if (!link)
+		goto out;
+
 	if (vif->type == NL80211_IFTYPE_AP) {
-		beacon = rcu_dereference(sdata->deflink.u.ap.beacon);
+		beacon = rcu_dereference(link->u.ap.beacon);
 		if (WARN_ON(!beacon || !beacon->tail))
 			goto out;
 		beacon_data = beacon->tail;
@@ -5276,7 +5287,6 @@ ieee80211_beacon_get_finish(struct ieee80211_hw *hw,
 		       IEEE80211_TX_CTL_FIRST_FRAGMENT;
 }
 
-#if CFG80211_VERSION >= KERNEL_VERSION(5,18,0)
 static void
 ieee80211_beacon_add_mbssid(struct sk_buff *skb, struct beacon_data *beacon,
 			    u8 i)
@@ -5289,7 +5299,6 @@ ieee80211_beacon_add_mbssid(struct sk_buff *skb, struct beacon_data *beacon,
 		skb_put_data(skb, beacon->mbssid_ies->elem[i].data,
 			     beacon->mbssid_ies->elem[i].len);
 
-#if CFG80211_VERSION >= KERNEL_VERSION(6,4,0)
 		if (beacon->rnr_ies && beacon->rnr_ies->cnt) {
 			skb_put_data(skb, beacon->rnr_ies->elem[i].data,
 				     beacon->rnr_ies->elem[i].len);
@@ -5298,7 +5307,6 @@ ieee80211_beacon_add_mbssid(struct sk_buff *skb, struct beacon_data *beacon,
 				skb_put_data(skb, beacon->rnr_ies->elem[i].data,
 					     beacon->rnr_ies->elem[i].len);
 		}
-#endif
 		return;
 	}
 
@@ -5307,7 +5315,6 @@ ieee80211_beacon_add_mbssid(struct sk_buff *skb, struct beacon_data *beacon,
 		skb_put_data(skb, beacon->mbssid_ies->elem[i].data,
 			     beacon->mbssid_ies->elem[i].len);
 }
-#endif
 
 static struct sk_buff *
 ieee80211_beacon_get_ap(struct ieee80211_hw *hw,
@@ -5336,14 +5343,9 @@ ieee80211_beacon_get_ap(struct ieee80211_hw *hw,
 	/* headroom, head length,
 	 * tail length, maximum TIM length and multiple BSSID length
 	 */
-#if CFG80211_VERSION >= KERNEL_VERSION(6,4,0)
 	mbssid_len = ieee80211_get_mbssid_beacon_len(beacon->mbssid_ies,
 						     beacon->rnr_ies,
 						     ema_index);
-#else
-	mbssid_len = ieee80211_get_mbssid_beacon_len(beacon->mbssid_ies,
-						     ema_index);
-#endif
 
 	skb = dev_alloc_skb(local->tx_headroom + beacon->head_len +
 			    beacon->tail_len + 256 +
@@ -5361,12 +5363,10 @@ ieee80211_beacon_get_ap(struct ieee80211_hw *hw,
 		offs->tim_length = skb->len - beacon->head_len;
 		offs->cntdwn_counter_offs[0] = beacon->cntdwn_counter_offsets[0];
 
-#if CFG80211_VERSION >= KERNEL_VERSION(5,18,0)
 		if (mbssid_len) {
 			ieee80211_beacon_add_mbssid(skb, beacon, ema_index);
 			offs->mbssid_off = skb->len - mbssid_len;
 		}
-#endif
 
 		/* for AP the csa offsets are from tail */
 		csa_off_base = skb->len;
@@ -5383,7 +5383,6 @@ ieee80211_beacon_get_ap(struct ieee80211_hw *hw,
 	return skb;
 }
 
-#if CFG80211_VERSION >= KERNEL_VERSION(5,18,0)
 static struct ieee80211_ema_beacons *
 ieee80211_beacon_get_ap_ema_list(struct ieee80211_hw *hw,
 				 struct ieee80211_vif *vif,
@@ -5418,7 +5417,6 @@ ieee80211_beacon_get_ap_ema_list(struct ieee80211_hw *hw,
 	ieee80211_beacon_free_ema_list(ema);
 	return NULL;
 }
-#endif
 
 #define IEEE80211_INCLUDE_ALL_MBSSID_ELEMS -1
 
@@ -5466,7 +5464,6 @@ __ieee80211_beacon_get(struct ieee80211_hw *hw,
 								 beacon,
 								 chanctx_conf);
 		} else {
-#if CFG80211_VERSION >= KERNEL_VERSION(5,18,0)
 			if (beacon->mbssid_ies && beacon->mbssid_ies->cnt) {
 				if (ema_index >= beacon->mbssid_ies->cnt)
 					goto out; /* End of MBSSID elements */
@@ -5474,11 +5471,8 @@ __ieee80211_beacon_get(struct ieee80211_hw *hw,
 				if (ema_index <= IEEE80211_INCLUDE_ALL_MBSSID_ELEMS)
 					ema_index = beacon->mbssid_ies->cnt;
 			} else {
-#endif
 				ema_index = 0;
-#if CFG80211_VERSION >= KERNEL_VERSION(5,18,0)
 			}
-#endif
 
 			skb = ieee80211_beacon_get_ap(hw, vif, link, offs,
 						      is_template, beacon,

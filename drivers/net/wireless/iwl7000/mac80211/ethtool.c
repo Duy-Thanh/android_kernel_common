@@ -28,17 +28,9 @@ static int ieee80211_set_ringparam(struct net_device *dev,
 	if (rp->rx_mini_pending != 0 || rp->rx_jumbo_pending != 0)
 		return -EINVAL;
 
-#if CFG80211_VERSION >= KERNEL_VERSION(5,12,0)
 	wiphy_lock(local->hw.wiphy);
-#else
-	rtnl_lock();
-#endif
 	ret = drv_set_ringparam(local, rp->tx_pending, rp->rx_pending);
-#if CFG80211_VERSION >= KERNEL_VERSION(5,12,0)
 	wiphy_unlock(local->hw.wiphy);
-#else
-	rtnl_unlock();
-#endif
 
 	return ret;
 }
@@ -56,18 +48,10 @@ static void ieee80211_get_ringparam(struct net_device *dev,
 
 	memset(rp, 0, sizeof(*rp));
 
-#if CFG80211_VERSION >= KERNEL_VERSION(5,12,0)
 	wiphy_lock(local->hw.wiphy);
-#else
-	rtnl_lock();
-#endif
 	drv_get_ringparam(local, &rp->tx_pending, &rp->tx_max_pending,
 			  &rp->rx_pending, &rp->rx_max_pending);
-#if CFG80211_VERSION >= KERNEL_VERSION(5,12,0)
 	wiphy_unlock(local->hw.wiphy);
-#else
-	rtnl_unlock();
-#endif
 }
 
 static const char ieee80211_gstrings_sta_stats[][ETH_GSTRING_LEN] = {
@@ -133,9 +117,7 @@ static void ieee80211_get_stats(struct net_device *dev,
 	 * network device.
 	 */
 
-#if CFG80211_VERSION >= KERNEL_VERSION(5,12,0)
 	wiphy_lock(local->hw.wiphy);
-#endif
 
 	if (sdata->vif.type == NL80211_IFTYPE_STATION) {
 		sta = sta_info_get_bss(sdata, sdata->deflink.u.mgd.bssid);
@@ -232,16 +214,12 @@ do_survey:
 		data[i++] = -1LL;
 
 	if (WARN_ON(i != STA_STATS_LEN)) {
-#if CFG80211_VERSION >= KERNEL_VERSION(5,12,0)
 		wiphy_unlock(local->hw.wiphy);
-#endif
 		return;
 	}
 
 	drv_get_et_stats(sdata, stats, &(data[STA_STATS_LEN]));
-#if CFG80211_VERSION >= KERNEL_VERSION(5,12,0)
 	wiphy_unlock(local->hw.wiphy);
-#endif
 }
 
 static void ieee80211_get_strings(struct net_device *dev, u32 sset, u8 *data)

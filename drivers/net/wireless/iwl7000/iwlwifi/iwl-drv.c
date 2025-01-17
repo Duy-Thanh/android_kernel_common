@@ -86,6 +86,9 @@ struct iwl_drv {
 enum {
 	DVM_OP_MODE,
 	MVM_OP_MODE,
+#if IS_ENABLED(CPTCFG_IWLMLD)
+	MLD_OP_MODE,
+#endif
 #if IS_ENABLED(CPTCFG_IWLXVT)
 	XVT_OP_MODE,
 #endif
@@ -100,6 +103,9 @@ static struct iwlwifi_opmode_table {
 } iwlwifi_opmode_table[] = {		/* ops set when driver is initialized */
 	[DVM_OP_MODE] = { .name = "iwldvm", .ops = NULL },
 	[MVM_OP_MODE] = { .name = "iwlmvm", .ops = NULL },
+#if IS_ENABLED(CPTCFG_IWLMLD)
+	[MLD_OP_MODE] = { .name = "iwlmld", .ops = NULL },
+#endif
 #if IS_ENABLED(CPTCFG_IWLXVT)
 	[XVT_OP_MODE] = { .name = "iwlxvt", .ops = NULL },
 #endif
@@ -402,12 +408,6 @@ const char *iwl_drv_get_fwname_pre(struct iwl_trans *trans, char *buf)
 		break;
 	case IWL_CFG_RF_TYPE_GF:
 		rf = "gf";
-		break;
-	case IWL_CFG_RF_TYPE_MR:
-		rf = "mr";
-		break;
-	case IWL_CFG_RF_TYPE_MS:
-		rf = "ms";
 		break;
 	case IWL_CFG_RF_TYPE_FM:
 		rf = "fm";
@@ -1493,7 +1493,7 @@ fw_dbg_conf:
 			if (tlv_len != sizeof(u32))
 				goto invalid_tlv_len;
 			if (le32_to_cpup((const __le32 *)tlv_data) >
-			    IWL_MVM_STATION_COUNT_MAX) {
+			    IWL_STATION_COUNT_MAX) {
 				IWL_ERR(drv,
 					"%d is an invalid number of station\n",
 					le32_to_cpup((const __le32 *)tlv_data));
@@ -1701,25 +1701,35 @@ _iwl_op_mode_start(struct iwl_drv *drv, struct iwlwifi_opmode_table *op)
 	const struct iwl_op_mode_ops *ops = op->ops;
 	struct dentry *dbgfs_dir = NULL;
 	struct iwl_op_mode *op_mode = NULL;
+	int retry, max_retry = !!iwlwifi_mod_params.fw_restart * IWL_MAX_INIT_RETRY;
 
 	/* also protects start/stop from racing against each other */
 	lockdep_assert_held(&iwlwifi_opmode_table_mtx);
 
-#ifdef CPTCFG_IWLWIFI_DEBUGFS
-	drv->dbgfs_op_mode = debugfs_create_dir(op->name,
-						drv->dbgfs_drv);
-	dbgfs_dir = drv->dbgfs_op_mode;
-#endif
-
-	op_mode = ops->start(drv->trans, drv->trans->cfg,
-			     &drv->fw, dbgfs_dir);
-	if (op_mode)
-		return op_mode;
+	for (retry = 0; retry <= max_retry; retry++) {
 
 #ifdef CPTCFG_IWLWIFI_DEBUGFS
-	debugfs_remove_recursive(drv->dbgfs_op_mode);
-	drv->dbgfs_op_mode = NULL;
+		drv->dbgfs_op_mode = debugfs_create_dir(op->name,
+							drv->dbgfs_drv);
+		dbgfs_dir = drv->dbgfs_op_mode;
 #endif
+
+		op_mode = ops->start(drv->trans, drv->trans->cfg,
+				     &drv->fw, dbgfs_dir);
+
+		if (op_mode)
+			return op_mode;
+
+		if (test_bit(STATUS_TRANS_DEAD, &drv->trans->status))
+			break;
+
+		IWL_ERR(drv, "retry init count %d\n", retry);
+
+#ifdef CPTCFG_IWLWIFI_DEBUGFS
+		debugfs_remove_recursive(drv->dbgfs_op_mode);
+		drv->dbgfs_op_mode = NULL;
+#endif
+	}
 
 	return NULL;
 }
@@ -1760,7 +1770,6 @@ static void iwl_req_fw_callback(const struct firmware *ucode_raw, void *context)
 	size_t trigger_tlv_sz[FW_DBG_TRIGGER_MAX];
 	u32 api_ver;
 	int i;
-	bool load_module = false;
 	bool usniffer_images = false;
 	bool failure = true;
 #ifdef CPTCFG_IWLWIFI_SUPPORT_DEBUG_OVERRIDES
@@ -1772,7 +1781,7 @@ static void iwl_req_fw_callback(const struct firmware *ucode_raw, void *context)
 	fw->ucode_capa.standard_phy_calibration_size =
 			IWL_DEFAULT_STANDARD_PHY_CALIBRATE_TBL_SIZE;
 	fw->ucode_capa.n_scan_channels = IWL_DEFAULT_SCAN_CHANNELS;
-	fw->ucode_capa.num_stations = IWL_MVM_STATION_COUNT_MAX;
+	fw->ucode_capa.num_stations = IWL_STATION_COUNT_MAX;
 	fw->ucode_capa.num_beacons = 1;
 	/* dump all fw memory areas by default */
 	fw->dbg.dump_mask = 0xffffffff;
@@ -2019,6 +2028,10 @@ static void iwl_req_fw_callback(const struct firmware *ucode_raw, void *context)
 		op = &iwlwifi_opmode_table[MVM_OP_MODE];
 		break;
 	}
+#if IS_ENABLED(CPTCFG_IWLMLD)
+	if (iwlwifi_mod_params.mld_op_mode && drv->fw.type == IWL_FW_MVM)
+		op = &iwlwifi_opmode_table[MLD_OP_MODE];
+#endif
 
 #if IS_ENABLED(CPTCFG_IWLXVT)
 	if (iwlwifi_mod_params.xvt_default_mode && drv->fw.type == IWL_FW_MVM)
@@ -2041,19 +2054,12 @@ static void iwl_req_fw_callback(const struct firmware *ucode_raw, void *context)
 			goto out_unbind;
 		}
 	} else {
-		load_module = true;
+		request_module_nowait("%s", op->name);
 	}
 	mutex_unlock(&iwlwifi_opmode_table_mtx);
 
 	complete(&drv->request_firmware_complete);
 
-	/*
-	 * Load the module last so we don't block anything
-	 * else from proceeding if the module fails to load
-	 * or hangs loading.
-	 */
-	if (load_module)
-		request_module("%s", op->name);
 	failure = false;
 	goto free;
 
@@ -2185,7 +2191,7 @@ void iwl_drv_stop(struct iwl_drv *drv)
 	mutex_unlock(&iwlwifi_opmode_table_mtx);
 
 #ifdef CPTCFG_IWLWIFI_DEBUGFS
-	drv->trans->ops->debugfs_cleanup(drv->trans);
+	iwl_trans_debugfs_cleanup(drv->trans);
 
 	debugfs_remove_recursive(drv->dbgfs_drv);
 #endif
@@ -2416,3 +2422,10 @@ MODULE_PARM_DESC(disable_msix, "Disable MSI-X and use MSI instead (default: fals
 module_param_named(disable_11be, iwlwifi_mod_params.disable_11be, bool, 0444);
 MODULE_PARM_DESC(disable_11be, "Disable EHT capabilities (default: false)");
 
+#if IS_ENABLED(CPTCFG_IWLMLD)
+#ifdef CPTCFG_IWLWIFI_SUPPORT_DEBUG_OVERRIDES
+module_param_named(mld_op_mode, iwlwifi_mod_params.mld_op_mode,
+		   bool, 0444);
+MODULE_PARM_DESC(mld_op_mode, "Load iwlwifi using the MLD operation mode (default: false)");
+#endif
+#endif

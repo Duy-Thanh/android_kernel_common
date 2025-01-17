@@ -58,7 +58,6 @@ mac80211-$(CPTCFG_MAC80211_MESH) += \
 	mesh_ps.o
 
 mac80211-$(CONFIG_PM) += pm.o
-mac80211-y += arc4.o
 
 CFLAGS_trace.o := -I$(srctree)/$(src)
 
@@ -79,6 +78,6 @@ mac80211-y += wbrf.o
 
 ccflags-y += -DDEBUG
 
-mac80211-y += backports.o cfg-utils.o
+mac80211-y += backports.o
 
 iwl7000_mac80211-objs := $(mac80211-objs) $(mac80211-y)

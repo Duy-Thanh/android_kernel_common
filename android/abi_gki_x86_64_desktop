@@ -1696,6 +1696,7 @@
   kvfree
   kvfree_call_rcu
   kvmalloc_node
+  kvmemdup
   led_add_lookup
   led_classdev_register_ext
   led_classdev_resume
@@ -2017,6 +2018,7 @@
   pat_enabled
   pci_add_dynid
   pci_alloc_irq_vectors
+  pci_assign_resource
   pci_assign_unassigned_bus_resources
   pci_ats_supported
   pcibios_align_resource
@@ -2518,11 +2520,13 @@
   seq_escape_mem
   seq_lseek
   seq_open
+  __seq_open_private
   seq_printf
   seq_putc
   seq_puts
   seq_read
   seq_release
+  seq_release_private
   seq_write
   serio_interrupt
   __serio_register_port
@@ -2600,6 +2604,7 @@
   skb_queue_tail
   skb_realloc_headroom
   skb_set_owner_w
+  skb_to_sgvec
   skb_to_sgvec_nomark
   skb_trim
   skb_tstamp_tx
@@ -2901,6 +2906,7 @@
   strrchr
   strreplace
   strscpy
+  strscpy_pad
   strsep
   strstr
   submit_bio
@@ -3008,6 +3014,7 @@
   timecounter_read
   timer_delete
   timer_delete_sync
+  timer_shutdown
   timer_shutdown_sync
   to_software_node
   _totalram_pages

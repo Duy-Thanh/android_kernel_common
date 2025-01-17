@@ -529,7 +529,7 @@ static bool ieee80211_fill_rate_info(struct ieee80211_hw *hw,
 	if (ri->flags & RATE_INFO_FLAGS_SHORT_GI)
 		stat->enc_flags |= RX_ENC_FLAG_SHORT_GI;
 
-	stat->he_gi = cfg80211_he_gi(ri);
+	stat->he_gi = ri->he_gi;
 
 	if (stat->encoding != RX_ENC_LEGACY)
 		return true;

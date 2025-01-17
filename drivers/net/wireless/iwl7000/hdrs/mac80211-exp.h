@@ -11,17 +11,6 @@
 #define ieee80211_stop_tx_ba_cb_irqsafe __iwl7000_ieee80211_stop_tx_ba_cb_irqsafe
 #define ieee80211_calc_rx_airtime __iwl7000_ieee80211_calc_rx_airtime
 #define ieee80211_calc_tx_airtime __iwl7000_ieee80211_calc_tx_airtime
-#define arc4_setkey __iwl7000_arc4_setkey
-#define arc4_crypt __iwl7000_arc4_crypt
-#ifdef CONFIG_THERMAL
-#if CFG80211_VERSION < KERNEL_VERSION(6,0,0)
-#define thermal_zone_device_register_with_trips __iwl7000_thermal_zone_device_register_with_trips
-#endif
-#if CFG80211_VERSION < KERNEL_VERSION(6,4,0)
-#define thermal_zone_device_priv __iwl7000_thermal_zone_device_priv
-#endif /* < 6.4 */
-#endif
-#if CFG80211_VERSION < KERNEL_VERSION(6,7,0)
 #define wiphy_work_flush __iwl7000_wiphy_work_flush
 #define wiphy_delayed_work_flush __iwl7000_wiphy_delayed_work_flush
 #define wiphy_work_queue __iwl7000_wiphy_work_queue
@@ -29,19 +18,9 @@
 #define wiphy_delayed_work_timer __iwl7000_wiphy_delayed_work_timer
 #define wiphy_delayed_work_queue __iwl7000_wiphy_delayed_work_queue
 #define wiphy_delayed_work_cancel __iwl7000_wiphy_delayed_work_cancel
-#endif /* CFG80211_VERSION < KERNEL_VERSION(6,5,0) */
-#if CFG80211_VERSION < KERNEL_VERSION(6,8,0)
-#define nl80211_chan_width_to_mhz __iwl7000_nl80211_chan_width_to_mhz
-#endif /* cfg < 6.8 */
-#if CFG80211_VERSION < KERNEL_VERSION(5,6,0)
-#define ieee80211_get_vht_max_nss __iwl7000_ieee80211_get_vht_max_nss
-#endif
-#if CFG80211_VERSION < KERNEL_VERSION(6,9,0)
-#define cfg80211_defragment_element __iwl7000_cfg80211_defragment_element
-#endif
-#if CFG80211_VERSION < KERNEL_VERSION(6,7,0)
 #define ieee80211_fragment_element __iwl7000_ieee80211_fragment_element
-#endif
+#define nl80211_chan_width_to_mhz __iwl7000_nl80211_chan_width_to_mhz
+#define cfg80211_defragment_element __iwl7000_cfg80211_defragment_element
 #define ieee80211_csa_finish __iwl7000_ieee80211_csa_finish
 #define ieee80211_channel_switch_disconnect __iwl7000_ieee80211_channel_switch_disconnect
 #define ieee80211_nan_func_terminated __iwl7000_ieee80211_nan_func_terminated
@@ -75,17 +54,21 @@
 #define ieee80211_register_hw __iwl7000_ieee80211_register_hw
 #define ieee80211_unregister_hw __iwl7000_ieee80211_unregister_hw
 #define ieee80211_free_hw __iwl7000_ieee80211_free_hw
+#define ieee80211_calc_chandef_subchan_offset __iwl7000_ieee80211_calc_chandef_subchan_offset
+#define ieee80211_rearrange_tpe_psd __iwl7000_ieee80211_rearrange_tpe_psd
 #define ieee80211_chswitch_done __iwl7000_ieee80211_chswitch_done
 #define ieee80211_ap_probereq_get __iwl7000_ieee80211_ap_probereq_get
 #define ieee80211_beacon_loss __iwl7000_ieee80211_beacon_loss
 #define ieee80211_connection_loss __iwl7000_ieee80211_connection_loss
 #define ieee80211_disconnect __iwl7000_ieee80211_disconnect
+#define ieee80211_send_teardown_neg_ttlm __iwl7000_ieee80211_send_teardown_neg_ttlm
 #define ieee80211_cqm_rssi_notify __iwl7000_ieee80211_cqm_rssi_notify
 #define ieee80211_cqm_beacon_loss_notify __iwl7000_ieee80211_cqm_beacon_loss_notify
 #define ieee80211_enable_rssi_reports __iwl7000_ieee80211_enable_rssi_reports
 #define ieee80211_disable_rssi_reports __iwl7000_ieee80211_disable_rssi_reports
 #define ieee80211_ready_on_channel __iwl7000_ieee80211_ready_on_channel
 #define ieee80211_remain_on_channel_expired __iwl7000_ieee80211_remain_on_channel_expired
+#define ieee802_11_parse_elems_full __iwl7000_ieee802_11_parse_elems_full
 #define ieee80211_report_wowlan_wakeup __iwl7000_ieee80211_report_wowlan_wakeup
 #define ieee80211_rate_control_register __iwl7000_ieee80211_rate_control_register
 #define ieee80211_rate_control_unregister __iwl7000_ieee80211_rate_control_unregister
@@ -94,6 +77,7 @@
 #define ieee80211_sta_ps_transition __iwl7000_ieee80211_sta_ps_transition
 #define ieee80211_sta_pspoll __iwl7000_ieee80211_sta_pspoll
 #define ieee80211_sta_uapsd_trigger __iwl7000_ieee80211_sta_uapsd_trigger
+#define ieee80211_drop_unencrypted_mgmt __iwl7000_ieee80211_drop_unencrypted_mgmt
 #define ieee80211_mark_rx_ba_filtered_frames __iwl7000_ieee80211_mark_rx_ba_filtered_frames
 #define ieee80211_rx_list __iwl7000_ieee80211_rx_list
 #define ieee80211_rx_napi __iwl7000_ieee80211_rx_napi

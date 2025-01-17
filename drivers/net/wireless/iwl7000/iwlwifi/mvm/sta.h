@@ -12,7 +12,7 @@
 #include <linux/wait.h>
 
 #include "iwl-trans.h" /* for IWL_MAX_TID_COUNT */
-#include "fw-api.h" /* IWL_MVM_STATION_COUNT_MAX */
+#include "fw-api.h" /* IWL_STATION_COUNT_MAX */
 #include "rs.h"
 
 struct iwl_mvm;
@@ -361,7 +361,7 @@ struct iwl_mvm_mpdu_counter {
  */
 struct iwl_mvm_tpt_counter {
 	spinlock_t lock;
-	struct iwl_mvm_mpdu_counter per_link[IWL_MVM_FW_MAX_LINK_ID];
+	struct iwl_mvm_mpdu_counter per_link[IWL_FW_MAX_LINK_ID];
 	unsigned long window_start;
 } ____cacheline_aligned_in_smp;
 
@@ -477,7 +477,7 @@ struct iwl_mvm_int_sta {
 };
 
 /**
- * Send the STA info to the FW.
+ * iwl_mvm_sta_send_to_fw - Send the STA info to the FW.
  *
  * @mvm: the iwl_mvm* to use
  * @sta: the STA
@@ -661,6 +661,11 @@ int iwl_mvm_mld_update_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 			   struct ieee80211_sta *sta);
 int iwl_mvm_mld_rm_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 		       struct ieee80211_sta *sta);
+void iwl_mvm_mld_free_sta_link(struct iwl_mvm *mvm,
+			       struct iwl_mvm_sta *mvm_sta,
+			       struct iwl_mvm_link_sta *mvm_sta_link,
+			       unsigned int link_id,
+			       bool is_in_fw);
 int iwl_mvm_mld_rm_sta_id(struct iwl_mvm *mvm, u8 sta_id);
 int iwl_mvm_mld_update_sta_links(struct iwl_mvm *mvm,
 				 struct ieee80211_vif *vif,

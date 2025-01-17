@@ -5,7 +5,7 @@
  * Copyright 2006-2007	Jiri Benc <jbenc@suse.cz>
  * Copyright 2008-2010	Johannes Berg <johannes@sipsolutions.net>
  * Copyright 2013-2015  Intel Mobile Communications GmbH
- * Copyright 2018-2019, 2021 - 2023 Intel Corporation
+ * Copyright 2018-2019, 2021 - 2024 Intel Corporation
  */
 
 #include <linux/export.h>
@@ -395,9 +395,6 @@ ieee80211_add_tx_radiotap_header(struct ieee80211_local *local,
 	} else if (status_rate && (status_rate->rate_idx.flags &
 					RATE_INFO_FLAGS_HE_MCS))
 	{
-#if CFG80211_VERSION < KERNEL_VERSION(4,19,0)
-		WARN_ON_ONCE(1);
-#else
 		struct ieee80211_radiotap_he *he;
 
 		rthdr->it_present |= cpu_to_le32(BIT(IEEE80211_RADIOTAP_HE));
@@ -468,7 +465,6 @@ ieee80211_add_tx_radiotap_header(struct ieee80211_local *local,
 		}
 
 		pos += sizeof(struct ieee80211_radiotap_he);
-#endif
 	}
 
 	if (status_rate || info->status.rates[0].idx < 0)
@@ -639,19 +635,12 @@ static void ieee80211_report_ack_skb(struct ieee80211_local *local,
 								skb->len,
 								acked,
 								GFP_ATOMIC);
-			else if (ieee80211_is_any_nullfunc(hdr->frame_control)) {
-#if CFG80211_VERSION >= KERNEL_VERSION(4,17,0)
+			else if (ieee80211_is_any_nullfunc(hdr->frame_control))
 				cfg80211_probe_status(sdata->dev, hdr->addr1,
 						      cookie, acked,
 						      info->status.ack_signal,
 						      is_valid_ack_signal,
 						      GFP_ATOMIC);
-#else
-				cfg80211_probe_status(sdata->dev, hdr->addr1,
-						      cookie, acked,
-						      GFP_ATOMIC);
-#endif
-			}
 			else if (ieee80211_is_mgmt(hdr->frame_control))
 				cfg80211_mgmt_tx_status_ext(&sdata->wdev,
 							    &status,
@@ -705,6 +694,23 @@ static void ieee80211_handle_smps_status(struct ieee80211_sub_if_data *sdata,
 	 */
 	link->smps_mode = smps_mode;
 	wiphy_work_queue(sdata->local->hw.wiphy, &link->u.mgd.recalc_smps);
+}
+
+static void
+ieee80211_handle_teardown_ttlm_status(struct ieee80211_sub_if_data *sdata,
+				      bool acked)
+{
+	if (!sdata || !ieee80211_sdata_running(sdata))
+		return;
+
+	if (!acked)
+		return;
+
+	if (sdata->vif.type != NL80211_IFTYPE_STATION)
+		return;
+
+	wiphy_work_queue(sdata->local->hw.wiphy,
+			 &sdata->u.mgd.teardown_ttlm_work);
 }
 
 static void ieee80211_report_used_skb(struct ieee80211_local *local,
@@ -783,6 +789,9 @@ static void ieee80211_report_used_skb(struct ieee80211_local *local,
 		case IEEE80211_STATUS_TYPE_SMPS:
 			ieee80211_handle_smps_status(sdata, acked,
 						     info->status_data);
+			break;
+		case IEEE80211_STATUS_TYPE_NEG_TTLM:
+			ieee80211_handle_teardown_ttlm_status(sdata, acked);
 			break;
 		}
 		rcu_read_unlock();

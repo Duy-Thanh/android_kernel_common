@@ -6,12 +6,16 @@ export CPTCFG_IWLWIFI_OPMODE_MODULAR=y
 export CPTCFG_IWLWIFI_DEBUG=y
 export CPTCFG_IWLWIFI_SUPPORT_DEBUG_OVERRIDES=y
 
+ifeq ($(CONFIG_IWL7000_MLD),m)
+export CPTCFG_IWLMLD=m
+endif
+
 ifeq ($(CONFIG_IWL7000_TESTMODE),y)
 export CPTCFG_IWLWIFI_DEVICE_TESTMODE=y
 endif
 
 ifeq ($(CONFIG_IWL7000_VENDOR_CMDS),y)
-export CPTCFG_IWLMVM_VENDOR_CMDS=y
+export CPTCFG_IWL_VENDOR_CMDS=y
 endif
 
 ifeq ($(CONFIG_IWL7000_DEBUGFS),y)
@@ -45,7 +49,7 @@ subdir-ccflags-y += $(call cc-option,-Wno-unused-variable)
 # variable declarations in for loops
 subdir-ccflags-y += -std=gnu11
 # and these are then also done in correspondence by upstream
-subdir-ccflags=y += $(call cc-option,-Wdeclaration-after-statement)
+subdir-ccflags-y += $(call cc-option,-Wno-declaration-after-statement)
 subdir-ccflags-y += $(call cc-option,-Wno-shift-negative-value)
 
 obj-$(CONFIG_IWL7000) += mac80211/

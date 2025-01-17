@@ -9,7 +9,7 @@
  * Copyright 2009, Johannes Berg <johannes@sipsolutions.net>
  * Copyright 2013-2014  Intel Mobile Communications GmbH
  * Copyright(c) 2016 Intel Deutschland GmbH
- * Copyright(c) 2018-2023 Intel Corporation
+ * Copyright(c) 2018-2024 Intel Corporation
  */
 
 #include <linux/delay.h>
@@ -237,7 +237,7 @@ static void __ieee80211_sta_join_ibss(struct ieee80211_sub_if_data *sdata,
 	drv_reset_tsf(local, sdata);
 
 	if (!ether_addr_equal(ifibss->bssid, bssid))
-		sta_info_flush(sdata);
+		sta_info_flush(sdata, -1);
 
 	/* if merging, indicate to driver that we leave the old IBSS */
 	if (sdata->vif.cfg.ibss_joined) {
@@ -533,12 +533,12 @@ int ieee80211_ibss_finish_csa(struct ieee80211_sub_if_data *sdata, u64 *changed)
 					IEEE80211_PRIVACY(ifibss->privacy));
 		/* XXX: should not really modify cfg80211 data */
 		if (cbss) {
-			cbss->channel = sdata->deflink.csa_chanreq.oper.chan;
+			cbss->channel = sdata->deflink.csa.chanreq.oper.chan;
 			cfg80211_put_bss(sdata->local->hw.wiphy, cbss);
 		}
 	}
 
-	ifibss->chandef = sdata->deflink.csa_chanreq.oper;
+	ifibss->chandef = sdata->deflink.csa.chanreq.oper;
 
 	/* generate the beacon */
 	return ieee80211_ibss_csa_beacon(sdata, NULL, changed);
@@ -682,7 +682,7 @@ static void ieee80211_ibss_disconnect(struct ieee80211_sub_if_data *sdata)
 
 	ifibss->state = IEEE80211_IBSS_MLME_SEARCH;
 
-	sta_info_flush(sdata);
+	sta_info_flush(sdata, -1);
 
 	spin_lock_bh(&ifibss->incomplete_lock);
 	while (!list_empty(&ifibss->incomplete_stations)) {
@@ -785,7 +785,8 @@ ieee80211_ibss_process_chanswitch(struct ieee80211_sub_if_data *sdata,
 	err = ieee80211_parse_ch_switch_ie(sdata, elems,
 					   ifibss->chandef.chan->band,
 					   vht_cap_info, &conn,
-					   ifibss->bssid, &csa_ie);
+					   ifibss->bssid, false,
+					   &csa_ie);
 	/* can't switch to destination channel, fail */
 	if (err < 0)
 		goto disconnect;
@@ -1640,9 +1641,9 @@ static void _ieee80211_ibss_rx_queued_mgmt(struct ieee80211_sub_if_data *sdata,
 void ieee80211_ibss_rx_queued_mgmt(struct ieee80211_sub_if_data *sdata,
 				   struct sk_buff *skb)
 {
-	sdata_lock_old_cfg80211(sdata);
+	mutex_lock(&(sdata)->wdev.mtx);
 	_ieee80211_ibss_rx_queued_mgmt(sdata, skb);
-	sdata_unlock_old_cfg80211(sdata);
+	mutex_unlock(&(sdata)->wdev.mtx);
 }
 
 void ieee80211_ibss_work(struct ieee80211_sub_if_data *sdata)
@@ -1733,7 +1734,7 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 
 	lockdep_assert_wiphy(local->hw.wiphy);
 
-	if (cfg80211_chan_freq_offset(params->chandef.chan)) {
+	if (params->chandef.chan->freq_offset) {
 		/* this may work, but is untested */
 		return -EOPNOTSUPP;
 	}
@@ -1754,7 +1755,7 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 		IEEE80211_CHANCTX_SHARED : IEEE80211_CHANCTX_EXCLUSIVE;
 
 	ret = ieee80211_check_combinations(sdata, &params->chandef, chanmode,
-					   radar_detect_width);
+					   radar_detect_width, -1);
 	if (ret < 0)
 		return ret;
 
@@ -1822,7 +1823,7 @@ int ieee80211_ibss_join(struct ieee80211_sub_if_data *sdata,
 
 	sdata->deflink.smps_mode = IEEE80211_SMPS_OFF;
 	sdata->deflink.needed_rx_chains = local->rx_chains;
-	sdata->control_port_over_nl80211 = cfg_control_port_over_nl80211(params);
+	sdata->control_port_over_nl80211 = params->control_port_over_nl80211;
 
 	wiphy_work_queue(local->hw.wiphy, &sdata->work);
 

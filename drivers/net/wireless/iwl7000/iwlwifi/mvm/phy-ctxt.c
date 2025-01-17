@@ -11,7 +11,7 @@
 /* Maps the driver specific channel width definition to the fw values */
 u8 iwl_mvm_get_channel_width(const struct cfg80211_chan_def *chandef)
 {
-	switch((int)chandef->width) {
+	switch (chandef->width) {
 	case NL80211_CHAN_WIDTH_20_NOHT:
 	case NL80211_CHAN_WIDTH_20:
 		return IWL_PHY_CHANNEL_MODE20;
@@ -147,8 +147,7 @@ static void iwl_mvm_phy_ctxt_cmd_data(struct iwl_mvm *mvm,
 	iwl_mvm_set_chan_info_chandef(mvm, &cmd->ci, chandef);
 
 	/* we only support RLC command version 2 */
-	if (iwl_fw_lookup_cmd_ver(mvm->fw, WIDE_ID(DATA_PATH_GROUP,
-						   RLC_CONFIG_CMD), 0) < 2)
+	if (iwl_fw_lookup_cmd_ver(mvm->fw, WIDE_ID(DATA_PATH_GROUP, RLC_CONFIG_CMD), 0) < 2)
 		iwl_mvm_phy_ctxt_set_rxchain(mvm, ctxt, &cmd->rxchain_info,
 					     chains_static, chains_dynamic);
 }
@@ -160,7 +159,11 @@ int iwl_mvm_phy_send_rlc(struct iwl_mvm *mvm, struct iwl_mvm_phy_ctxt *ctxt,
 		.phy_id = cpu_to_le32(ctxt->id),
 	};
 
-	if (ctxt->rlc_disabled)
+	/* From version 3, RLC is offloaded to firmware, so the driver no
+	 * longer needs to send cmd.rlc, note that we are not using any
+	 * other fields in the command - don't send it.
+	 */
+	if (iwl_mvm_has_rlc_offload(mvm) || ctxt->rlc_disabled)
 		return 0;
 
 	if (iwl_fw_lookup_cmd_ver(mvm->fw, WIDE_ID(DATA_PATH_GROUP,
@@ -226,7 +229,7 @@ static int iwl_mvm_phy_ctxt_apply(struct iwl_mvm *mvm,
 		}
 
 		if (ver == 6)
-			cmd.puncture_mask = cpu_to_le16(chandef_punctured(chandef));
+			cmd.puncture_mask = cpu_to_le16(0);
 
 		ret = iwl_mvm_send_cmd_pdu(mvm, PHY_CONTEXT_CMD,
 					   0, sizeof(cmd), &cmd);

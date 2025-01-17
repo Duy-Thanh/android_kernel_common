@@ -262516,6 +262516,13 @@ function {
   parameter_id: 0x1b55a8f2
 }
 function {
+  id: 0x5048b42f
+  return_type_id: 0x18bd6530
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x3f55d498
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x50675791
   return_type_id: 0x18bd6530
   parameter_id: 0x1d44326e
@@ -285209,6 +285216,15 @@ elf_symbol {
   full_name: "__root_device_register"
 }
 elf_symbol {
+  id: 0x44371196
+  name: "__seq_open_private"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb4a7504f
+  type_id: 0x5048b42f
+  full_name: "__seq_open_private"
+}
+elf_symbol {
   id: 0x257c4bb9
   name: "__serio_register_driver"
   is_defined: true
@@ -301061,6 +301077,15 @@ elf_symbol {
   full_name: "kvmalloc_node"
 }
 elf_symbol {
+  id: 0xbbe14755
+  name: "kvmemdup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf88ecec4
+  type_id: 0x5b3dc89d
+  full_name: "kvmemdup"
+}
+elf_symbol {
   id: 0x5326383d
   name: "led_add_lookup"
   is_defined: true
@@ -303823,6 +303848,15 @@ elf_symbol {
   crc: 0x203df21b
   type_id: 0x98ff2068
   full_name: "pci_alloc_irq_vectors"
+}
+elf_symbol {
+  id: 0xbab6c772
+  name: "pci_assign_resource"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4aba6de3
+  type_id: 0x9865c1f0
+  full_name: "pci_assign_resource"
 }
 elf_symbol {
   id: 0x66f0c8cd
@@ -307877,6 +307911,15 @@ elf_symbol {
   full_name: "seq_release"
 }
 elf_symbol {
+  id: 0x2cc9ecc6
+  name: "seq_release_private"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb00dbe92
+  type_id: 0x9b022eae
+  full_name: "seq_release_private"
+}
+elf_symbol {
   id: 0x331ad54e
   name: "seq_write"
   is_defined: true
@@ -311348,6 +311391,15 @@ elf_symbol {
   full_name: "strscpy"
 }
 elf_symbol {
+  id: 0xe7f214f1
+  name: "strscpy_pad"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfbb8a761
+  type_id: 0x151457b1
+  full_name: "strscpy_pad"
+}
+elf_symbol {
   id: 0x22209cb5
   name: "strsep"
   is_defined: true
@@ -312240,6 +312292,15 @@ elf_symbol {
   crc: 0x8d586478
   type_id: 0x920d63ce
   full_name: "timer_delete_sync"
+}
+elf_symbol {
+  id: 0x0672fb60
+  name: "timer_shutdown"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaa8ea0aa
+  type_id: 0x920d63ce
+  full_name: "timer_shutdown"
 }
 elf_symbol {
   id: 0x1e3cacea
@@ -317607,6 +317668,7 @@ interface {
   symbol_id: 0xf263b97f
   symbol_id: 0x2b453adc
   symbol_id: 0xd5276fa4
+  symbol_id: 0x44371196
   symbol_id: 0x257c4bb9
   symbol_id: 0x8aca43ec
   symbol_id: 0x29a11d8a
@@ -319363,6 +319425,7 @@ interface {
   symbol_id: 0x15a3f41a
   symbol_id: 0x6e8c6baf
   symbol_id: 0x3ae24a16
+  symbol_id: 0xbbe14755
   symbol_id: 0x5326383d
   symbol_id: 0xfe24eb71
   symbol_id: 0xf54b7eaa
@@ -319670,6 +319733,7 @@ interface {
   symbol_id: 0xcbea3bfb
   symbol_id: 0x41c6ab36
   symbol_id: 0xe6a5eac0
+  symbol_id: 0xbab6c772
   symbol_id: 0x66f0c8cd
   symbol_id: 0xb10958e7
   symbol_id: 0xc2baec30
@@ -320121,6 +320185,7 @@ interface {
   symbol_id: 0x59b4ca07
   symbol_id: 0xba8007cd
   symbol_id: 0x91763ae6
+  symbol_id: 0x2cc9ecc6
   symbol_id: 0x331ad54e
   symbol_id: 0x4e412a59
   symbol_id: 0xaf2bd97c
@@ -320506,6 +320571,7 @@ interface {
   symbol_id: 0x123ab6a2
   symbol_id: 0x747f8310
   symbol_id: 0x7bd225a5
+  symbol_id: 0xe7f214f1
   symbol_id: 0x22209cb5
   symbol_id: 0x563982aa
   symbol_id: 0x5577d5a8
@@ -320605,6 +320671,7 @@ interface {
   symbol_id: 0x4063e8a2
   symbol_id: 0xed1344b7
   symbol_id: 0x905af507
+  symbol_id: 0x0672fb60
   symbol_id: 0x1e3cacea
   symbol_id: 0xf057cf19
   symbol_id: 0x3217f3a4
