@@ -16,6 +16,24 @@
       "message": "Must cite an open respin request bug with a \"Bug:\" tag",
       "revId": "c282b43831c48caaabfb0de26e6ed4532f0392a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99764d42_c38d5905",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3821256
+      },
+      "writtenOn": "2025-01-17T07:27:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f54801a8_0c86ac68",
+      "revId": "c282b43831c48caaabfb0de26e6ed4532f0392a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
