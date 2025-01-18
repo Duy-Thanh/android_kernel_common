@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804b5e8e_3f08d424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-18T08:14:56Z",
+      "side": 1,
+      "message": "Let\u0027s wait for the latest release to be merged here to prevent merge conflicts again.\n\nAnd why is this really needed?  Who uses this?",
+      "revId": "b5c1a78c003e3a545bb5d9affc5bf7c6626e0792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69ae2518_f94fd893",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-18T08:14:56Z",
+      "side": 1,
+      "message": "Let\u0027s wait for the latest release to be merged here to prevent merge conflicts again.\n\nAnd why is this really needed?  Who uses this?",
+      "revId": "b5c1a78c003e3a545bb5d9affc5bf7c6626e0792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
