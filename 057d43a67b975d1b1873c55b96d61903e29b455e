@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae60b47d_b3149d84",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-20T14:37:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5a31c4eb_637d3c94",
+      "range": {
+        "startLine": 1125,
+        "startChar": 12,
+        "endLine": 1125,
+        "endChar": 35
+      },
+      "revId": "057d43a67b975d1b1873c55b96d61903e29b455e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd1fc585_d2868fdb",
@@ -228,6 +252,30 @@
       "side": 1,
       "message": "For pasid CD is enabled in the last step in `smmu_domain_config_s1` and there can be no failure after this point, so we never touch the STE/CD after that.\n\nSimilary, for non-pasid domains, STE is enabled in the last step so no failure can happen after that requires to disable the STE.",
       "parentUuid": "00f0d1cc_ff954093",
+      "range": {
+        "startLine": 1261,
+        "startChar": 0,
+        "endLine": 1264,
+        "endChar": 0
+      },
+      "revId": "057d43a67b975d1b1873c55b96d61903e29b455e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef1a3c3e_b222c7f0",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1264,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-20T14:37:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "45a966b8_c32ef8f8",
       "range": {
         "startLine": 1261,
         "startChar": 0,
