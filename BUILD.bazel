@@ -26,6 +26,7 @@ load(
     "kernel_modules_install",
     "merge_kzip",
     "merged_kernel_uapi_headers",
+    "modinfo_summary_report",
 )
 load(":abi.bzl", "cc_binary_with_abi")
 load(
@@ -1346,6 +1347,14 @@ kernel_build(
     visibility = ["//visibility:private"],
 )
 
+# tools/bazel build //common:aarch64_allmodconfig_modinfo_summary --allow_undeclared_modules
+modinfo_summary_report(
+    name = "aarch64_allmodconfig_modinfo_summary",
+    arch = "arm64",
+    branch = "android16-6.12",
+    kernel_build = "//common:kernel_aarch64_allmodconfig",
+)
+
 # tools/bazel build --allow_undeclared_modules //common:kernel_x86_64_allmodconfig
 kernel_build(
     name = "kernel_x86_64_allmodconfig",
@@ -1363,6 +1372,24 @@ kernel_build(
     makefile = ":Makefile",
     post_defconfig_fragments = [":gki/x86_64/defconfig/allmodconfig"],
     visibility = ["//visibility:private"],
+)
+
+# tools/bazel build //common:x86_64_allmodconfig_modinfo_summary --allow_undeclared_modules
+modinfo_summary_report(
+    name = "x86_64_allmodconfig_modinfo_summary",
+    arch = "x86_64",
+    branch = "android16-6.12",
+    kernel_build = "//common:kernel_x86_64_allmodconfig",
+)
+
+# tools/bazel build //common:allmodconfig_modinfo_summaries --allow_undeclared_modules
+# TODO: b/374932907 - Merge these in a single file.
+filegroup(
+    name = "allmodconfig_modinfo_summaries",
+    srcs = [
+        "aarch64_allmodconfig_modinfo_summary",
+        "x86_64_allmodconfig_modinfo_summary",
+    ],
 )
 
 # tools/bazel build --allow_undeclared_modules //common:kernel_arm_allmodconfig
