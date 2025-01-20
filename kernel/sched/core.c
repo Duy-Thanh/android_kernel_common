@@ -4667,8 +4667,11 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 			 * continue on to ttwu_runnable check to force
 			 * proxy_needs_return evaluation
 			 */
-			if (!(READ_ONCE(p->__state) == TASK_RUNNING &&
+			if (sched_proxy_exec() &&
+			    !(READ_ONCE(p->__state) == TASK_RUNNING &&
 			      READ_ONCE(p->blocked_on_state) == BO_WAKING))
+				break;
+			else
 				break;
 		}
 
