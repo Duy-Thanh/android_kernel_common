@@ -141,6 +141,23 @@
       },
       "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a45197d_4ebdadef",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-20T10:08:06Z",
+      "side": 1,
+      "message": "The extra checks don\u0027t really seem necessary to me? The only check that is important is the permission check, but that\u0027s handled by the file seal. And if you get rid of the custom `mmap`, then that simplifies a lot of things since the only additional ops operation you need is `ioctl`. You can insert `ioctl` directly into the shmem fops since shmem has no ioctl function today.",
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
