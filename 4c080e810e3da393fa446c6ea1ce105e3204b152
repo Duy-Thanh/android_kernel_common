@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "194d4bf8_9d527421",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-01-20T10:59:51Z",
+      "side": 1,
+      "message": "you can abandon _this_ change and instead push again with changed Change-Id. It will create a new change with correct relation chain.",
+      "parentUuid": "f00eb47d_84b16dec",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "4c080e810e3da393fa446c6ea1ce105e3204b152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0cb2560e_97860bbc",
