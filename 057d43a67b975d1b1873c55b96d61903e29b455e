@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a31c4eb_637d3c94",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-20T12:55:14Z",
+      "side": 1,
+      "message": "Yes, we can, but I don\u0027t think its worth it as `attach_dev` is not in the hot path.",
+      "parentUuid": "0de5a933_4ee43da5",
+      "range": {
+        "startLine": 1125,
+        "startChar": 12,
+        "endLine": 1125,
+        "endChar": 35
+      },
+      "revId": "057d43a67b975d1b1873c55b96d61903e29b455e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd1fc585_d2868fdb",
         "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
         "patchSetId": 1
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "\u003e This was the code in Android15, but I thought, we can avoid nested ifs, but no strong opionion.\n\nSince this isn\u0027t a cherry-pick from android15 (different Change-ID), I think you can tidy stuff up.\n\n\u003e every failure before the STE is enabled won\u0027t have any valid enteries, and if the enablement fail, it\u0027s fatal.\n\nIs that also true for PASID domains?",
       "parentUuid": "d9db8feb_2943bae4",
+      "range": {
+        "startLine": 1261,
+        "startChar": 0,
+        "endLine": 1264,
+        "endChar": 0
+      },
+      "revId": "057d43a67b975d1b1873c55b96d61903e29b455e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45a966b8_c32ef8f8",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1264,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-20T12:55:14Z",
+      "side": 1,
+      "message": "For pasid CD is enabled in the last step in `smmu_domain_config_s1` and there can be no failure after this point, so we never touch the STE/CD after that.\n\nSimilary, for non-pasid domains, STE is enabled in the last step so no failure can happen after that requires to disable the STE.",
+      "parentUuid": "00f0d1cc_ff954093",
       "range": {
         "startLine": 1261,
         "startChar": 0,
