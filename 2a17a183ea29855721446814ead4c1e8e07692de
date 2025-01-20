@@ -46,6 +46,30 @@
       },
       "revId": "2a17a183ea29855721446814ead4c1e8e07692de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a87cfe4_33bdab2d",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-20T16:40:37Z",
+      "side": 1,
+      "message": "But isn\u0027t it over-aligned? If I call `ioremap()` on a 4KiB mapping, I don\u0027t think we should quietly call `MMIO_GUARD` for a 16KiB region.\n\nHaving the checks inside `arm_smccc_do_range()` would catch all of this in one place.",
+      "parentUuid": "e431b85f_6a49afb5",
+      "range": {
+        "startLine": 119,
+        "startChar": 67,
+        "endLine": 119,
+        "endChar": 76
+      },
+      "revId": "2a17a183ea29855721446814ead4c1e8e07692de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

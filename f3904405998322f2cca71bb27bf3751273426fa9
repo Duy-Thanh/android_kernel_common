@@ -319,6 +319,30 @@
       },
       "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa004b6_9d0e934a",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-20T16:40:37Z",
+      "side": 1,
+      "message": "If we don\u0027t support it, then we shouldn\u0027t be setting `mem_relinquish_available \u003d true`",
+      "parentUuid": "2d26951a_1e853ca9",
+      "range": {
+        "startLine": 120,
+        "startChar": 10,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
