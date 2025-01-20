@@ -145,6 +145,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08aa5c15_30adf652",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-20T10:21:07Z",
+      "side": 1,
+      "message": "Why not use `memfd_fcntl` with `F_ADD_SEALS`? Then you don\u0027t have to modify memfd to expose `memfd_file_seals_ptr`.",
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a45197d_4ebdadef",
         "filename": "mm/ashmem_compat.c",
         "patchSetId": 22
