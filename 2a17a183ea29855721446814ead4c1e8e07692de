@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a40d344a_d30c81b9",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-20T16:14:54Z",
+      "side": 1,
+      "message": "This should probably be the S2 granule as well, since the MMIO guard may be larger than PAGE_SIZE. Maybe the checks you added to `pkvm_set_memory_X()` should be pushed into `arm_smccc_do_range()`? That way, we can prevent the dangerous \"overshooting\" that the comment talks about.",
+      "range": {
+        "startLine": 119,
+        "startChar": 67,
+        "endLine": 119,
+        "endChar": 76
+      },
+      "revId": "2a17a183ea29855721446814ead4c1e8e07692de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

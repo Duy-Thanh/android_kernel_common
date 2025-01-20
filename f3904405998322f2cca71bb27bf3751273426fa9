@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e6a7168_26e9d8af",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-20T16:14:54Z",
+      "side": 1,
+      "message": "Right, we shouldn\u0027t try to reason about the underlying allocation as that feels pretty fragile.",
+      "parentUuid": "483002ee_62415b92",
+      "range": {
+        "startLine": 33,
+        "startChar": 10,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef9b3e70_b00d97d5",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 5
@@ -173,6 +197,30 @@
       "side": 1,
       "message": "I don\u0027t necessarily see an issue with this but maybe I am missing something ?",
       "parentUuid": "d4bbe130_4d9d4f86",
+      "range": {
+        "startLine": 120,
+        "startChar": 10,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3babcb50_b861eb67",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-20T16:14:54Z",
+      "side": 1,
+      "message": "Imagine that we have a 4k guest running on a 16k host. If the guest wants to relinquish a single 4k page to the host, it will call `page_relinquish(page)`. We\u0027ll then relinquish a 16k region, so 3 additional 4k pages will be relininquished which will result in data loss when they are poisoned by the hypervisor.",
+      "parentUuid": "4d520ed7_f5512253",
       "range": {
         "startLine": 120,
         "startChar": 10,
