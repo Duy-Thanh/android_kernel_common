@@ -70,6 +70,30 @@
       },
       "revId": "2a17a183ea29855721446814ead4c1e8e07692de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2737950_2cc2b7c0",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-20T18:12:18Z",
+      "side": 1,
+      "message": "I think we need more than check because we simply cannot reject the folllowing mmio guard requests:\n\n```\n[    0.263708][    T1] NOT ALIGNED 0x2000000 sz 1000\n[    0.264749][    T1] NOT ALIGNED 0x2001000 sz 1000\n[    0.265793][    T1] NOT ALIGNED 0x2003000 sz 1000\n[    0.266817][    T1] NOT ALIGNED 0x2002000 sz 1000\n[    0.311209][    T1] NOT ALIGNED 0x3000 sz 1000\n[    0.318642][    T1] NOT ALIGNED 0x2000 sz 1000\n```\n\nInstead we should try and cover `0x2000000` for example with only one page(of hyp granule) and from 0x0",
+      "parentUuid": "6a87cfe4_33bdab2d",
+      "range": {
+        "startLine": 119,
+        "startChar": 67,
+        "endLine": 119,
+        "endChar": 76
+      },
+      "revId": "2a17a183ea29855721446814ead4c1e8e07692de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
