@@ -16,6 +16,24 @@
       "message": "We plan to wait for this patch to be approved upstream first, to avoid any potential issues or reworks. After that we will merge it as a BACKPORT.",
       "revId": "d76e32fa1e165addef5baeff6d5d854caa2d5a2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bb49388_8b37f0b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3486811
+      },
+      "writtenOn": "2025-01-20T03:34:31Z",
+      "side": 1,
+      "message": "Please help to push this patch merging ASAP, otherwise some third-part apps cannot be reinstalled after unstalling or some files lost in this kernel version.",
+      "parentUuid": "597bb2d2_a7489a10",
+      "revId": "d76e32fa1e165addef5baeff6d5d854caa2d5a2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
