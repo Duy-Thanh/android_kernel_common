@@ -213,6 +213,24 @@
       "parentUuid": "bafa4c01_c3f1ae2b",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b739851a_2d746852",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475437
+      },
+      "writtenOn": "2025-01-20T07:55:13Z",
+      "side": 1,
+      "message": "@Wesley\nI can see you upstreamed version 33. Do you have a plan to push ACK?\nhttps://patchwork.kernel.org/project/linux-usb/cover/20250116232824.3748438-1-quic_wcheng@quicinc.com/\n\nCan we push some patches of this series. Maybe it includes all xhci things and 2 sound things(platform ops)\nFROMLIST: ALSA: usb-audio: Export USB SND APIs for modules\nFROMLIST: ALSA: usb-audio: Introduce USB SND platform op callbacks",
+      "parentUuid": "6deef687_dd812352",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
