@@ -94,6 +94,30 @@
       },
       "revId": "2a17a183ea29855721446814ead4c1e8e07692de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442eb8e9_3abbe0b4",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-20T18:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2737950_2cc2b7c0",
+      "range": {
+        "startLine": 119,
+        "startChar": 67,
+        "endLine": 119,
+        "endChar": 76
+      },
+      "revId": "2a17a183ea29855721446814ead4c1e8e07692de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
