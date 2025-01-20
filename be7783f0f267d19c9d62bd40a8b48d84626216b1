@@ -16,6 +16,24 @@
       "message": "I\u0027m looking closer at this... doesn\u0027t the original patch replace this call with a new static `ieee80211_chandef_usable()` which takes chandef-\u003epunctured and `ieee80211_hw_check()` into account? How is this addressed in this patch? Why is it not applicable?",
       "revId": "be7783f0f267d19c9d62bd40a8b48d84626216b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed738749_d7d7518a",
+        "filename": "net/mac80211/mlme.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2025-01-20T19:34:10Z",
+      "side": 1,
+      "message": "Current code base of this branch doesn\u0027t have the changes which are adding support for \"DISALLOW_PUNCTURING\" hardware flag hence the ieee80211_hw_check() is not applicable here.\n\nWithout ieee80211_hw_check() code, ieee80211_chandef_usable() only checking cfg80211_chandef_usable() so didn\u0027t move this to seperate function.",
+      "parentUuid": "abb0a7e9_6a709691",
+      "revId": "be7783f0f267d19c9d62bd40a8b48d84626216b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
