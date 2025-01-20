@@ -391,6 +391,30 @@
       },
       "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88113462_be587336",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-20T18:25:29Z",
+      "side": 1,
+      "message": "I don\u0027t think balooning plays well with different granules size so I would tend to keep it disabled.",
+      "parentUuid": "0d1bb9ef_0ea8fcc8",
+      "range": {
+        "startLine": 120,
+        "startChar": 10,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
