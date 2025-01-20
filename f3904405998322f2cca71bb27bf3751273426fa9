@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3e8a80f_3ee4875b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-20T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51ea0037_04f071c8",
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05ae5865_c24f0e52",
@@ -113,6 +131,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c93ab20_56c15bd5",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-20T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e6a7168_26e9d8af",
+      "range": {
+        "startLine": 33,
+        "startChar": 10,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef9b3e70_b00d97d5",
@@ -150,6 +192,30 @@
       "side": 1,
       "message": "I think this should be summed up with the hyp granule. Otherwise it will WARN_ON_ONCE which generates:\n\n` WARNING: CPU: 0 PID: 0 at drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c:108 mmio_guard_ioremap_hook+0x90/0xa0 `",
       "parentUuid": "ef9b3e70_b00d97d5",
+      "range": {
+        "startLine": 93,
+        "startChar": 10,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94dacca6_9b738915",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-20T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47c5e789_b3d80017",
       "range": {
         "startLine": 93,
         "startChar": 10,
@@ -221,6 +287,30 @@
       "side": 1,
       "message": "Imagine that we have a 4k guest running on a 16k host. If the guest wants to relinquish a single 4k page to the host, it will call `page_relinquish(page)`. We\u0027ll then relinquish a 16k region, so 3 additional 4k pages will be relininquished which will result in data loss when they are poisoned by the hypervisor.",
       "parentUuid": "4d520ed7_f5512253",
+      "range": {
+        "startLine": 120,
+        "startChar": 10,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d26951a_1e853ca9",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-20T16:35:27Z",
+      "side": 1,
+      "message": "Page relinquish is called only by balooning and we didn\u0027t support ballooning in this configuration.",
+      "parentUuid": "3babcb50_b861eb67",
       "range": {
         "startLine": 120,
         "startChar": 10,
