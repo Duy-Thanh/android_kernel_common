@@ -94,6 +94,30 @@
       },
       "revId": "e7701e1b3b66a90489431b36d2d1de99cb59fb05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c360b7_ace2f29f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-20T16:33:05Z",
+      "side": 1,
+      "message": "Fixed it, now the core code will unmap in case of error.",
+      "parentUuid": "c64b55f7_289deb78",
+      "range": {
+        "startLine": 494,
+        "startChar": 8,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "e7701e1b3b66a90489431b36d2d1de99cb59fb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
