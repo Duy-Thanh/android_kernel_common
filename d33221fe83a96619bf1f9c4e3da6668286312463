@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5130a9ec_68a21ffa",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-20T14:17:24Z",
+      "side": 1,
+      "message": "The semantis here is that the page table MUST be empty, and then `kvm_iommu_snapshot_host_stage2` should idmap the host, which doesn\u0027t need TLB invalidations.\n\nHowever, I will change that to avoid the lock, incase the io-pgtable-arm changes.",
+      "parentUuid": "71cbc97c_e01caf1b",
+      "range": {
+        "startLine": 1106,
+        "startChar": 8,
+        "endLine": 1106,
+        "endChar": 38
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de2dfaa4_fef6b480",
         "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
         "patchSetId": 1
@@ -227,6 +251,30 @@
       "side": 1,
       "message": "Ah, you might be thinking of VFIO (which always sets IOMMU_CACHE iirc).",
       "parentUuid": "4cd4625c_1bf184b3",
+      "range": {
+        "startLine": 1580,
+        "startChar": 43,
+        "endLine": 1580,
+        "endChar": 56
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d8d1aed_edff8422",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-20T14:17:24Z",
+      "side": 1,
+      "message": "As the IDMAP domain must be stage-2, IOMMU_CACHE should be enough as it is combined with the transaction.",
+      "parentUuid": "b1b3cb2c_126b8844",
       "range": {
         "startLine": 1580,
         "startChar": 43,
