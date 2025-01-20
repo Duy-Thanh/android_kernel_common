@@ -367,6 +367,30 @@
       },
       "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1bb9ef_0ea8fcc8",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-20T18:19:19Z",
+      "side": 1,
+      "message": "If the guest page size is larger, is there any harm in enabling it there?",
+      "parentUuid": "704cd3ae_aa9ff836",
+      "range": {
+        "startLine": 120,
+        "startChar": 10,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "f3904405998322f2cca71bb27bf3751273426fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
