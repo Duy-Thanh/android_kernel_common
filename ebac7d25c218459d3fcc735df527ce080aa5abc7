@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d40a782_beda703b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-21T17:23:18Z",
+      "side": 1,
+      "message": "only list the \"new\" symbols you add.  No need to list the ones already exported.\n\nIn fact, just make the first patch of the series be \"here\u0027s the list of symbols that are already supported\" which should make the rest of the patch series much simpler and easier to review.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "ebac7d25c218459d3fcc735df527ce080aa5abc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c08a8713_d3aafbae",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
