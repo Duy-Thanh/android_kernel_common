@@ -31,6 +31,7 @@
 #include <linux/usb/tcpm.h>
 #include <linux/usb/typec_altmode.h>
 
+#include <trace/hooks/typec.h>
 #include <uapi/linux/sched/types.h>
 
 #define FOREACH_STATE(S)			\
@@ -2348,6 +2349,19 @@ static int tcpm_set_auto_vbus_discharge_threshold(struct tcpm_port *port,
 						  u32 requested_vbus_voltage)
 {
 	int ret;
+
+	if (mode == TYPEC_PWR_MODE_PD && pps_active && requested_vbus_voltage) {
+		bool bypass = false;
+		trace_android_vh_typec_pps_vbus_disc_thresh(port->tcpc, port->pps_data.min_volt,
+							    &ret, &bypass);
+		if (bypass) {
+			tcpm_log_force(port,
+				       "VH: set_auto_vbus_discharge_threshold vbus:%u pps_apdo_min_volt:%u ret:%d",
+				       requested_vbus_voltage, port->pps_data.min_volt, ret);
+			return ret;
+		}
+	}
+
 
 	if (!port->tcpc->set_auto_vbus_discharge_threshold)
 		return 0;

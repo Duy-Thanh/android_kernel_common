@@ -81,6 +81,7 @@
 #include <trace/hooks/perf.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/xhci.h>
+#include <trace/hooks/typec.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -626,3 +627,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_private_mod);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_pps_vbus_disc_thresh);
