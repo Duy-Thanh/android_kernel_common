@@ -164,6 +164,30 @@
       },
       "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4002d86_94973056",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-21T11:37:52Z",
+      "side": 1,
+      "message": "I don\u0027t know if we should rely on that, and also it disables reclaim for all VMs, not just 4k ones. In any case the patch hunk here is currently misleading: It looks like it fixes mismatched granule size, but it doesn\u0027t. In that sense it\u0027s worse than no patch at all...",
+      "parentUuid": "ed872f92_25b2ba46",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 31
+      },
+      "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
