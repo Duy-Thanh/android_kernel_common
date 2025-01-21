@@ -65,6 +65,7 @@ fn has_cap_sys_admin() -> bool {
 static NUM_PIN_IOCTLS_WAITING: AtomicUsize = AtomicUsize::new(0);
 static UNPIN_IMMEDIATELY: AtomicBool = AtomicBool::new(false);
 static BLOCK_UNSET_PROT_READ: AtomicBool = AtomicBool::new(false);
+static BLOCK_UNSET_PROT_EXEC: AtomicBool = AtomicBool::new(false);
 
 fn shrinker_should_stop() -> bool {
     NUM_PIN_IOCTLS_WAITING.load(Ordering::Relaxed) > 0
@@ -125,6 +126,29 @@ pub(crate) fn prot_read_set(value: &[u8]) -> Result<()> {
 
 pub(crate) fn prot_read_get() -> &'static CStr {
     if BLOCK_UNSET_PROT_READ.load(Ordering::Relaxed) {
+        c_str!("memfd\n")
+    } else {
+        c_str!("ashmem\n")
+    }
+}
+
+/// Sets whether we can unset PROT_EXEC.
+pub(crate) fn prot_exec_set(value: &[u8]) -> Result<()> {
+    match value.trim_ascii() {
+        b"ashmem" => {
+            BLOCK_UNSET_PROT_EXEC.store(false, Ordering::Relaxed);
+            Ok(())
+        }
+        b"memfd" => {
+            BLOCK_UNSET_PROT_EXEC.store(true, Ordering::Relaxed);
+            Ok(())
+        }
+        _ => Err(EINVAL),
+    }
+}
+
+pub(crate) fn prot_exec_get() -> &'static CStr {
+    if BLOCK_UNSET_PROT_EXEC.load(Ordering::Relaxed) {
         c_str!("memfd\n")
     } else {
         c_str!("ashmem\n")
@@ -365,6 +389,11 @@ impl Ashmem {
         if BLOCK_UNSET_PROT_READ.load(Ordering::Relaxed) {
             // Add back PROT_READ if asma.prot_mask has it.
             prot |= asma.prot_mask & PROT_READ;
+        }
+
+        if BLOCK_UNSET_PROT_EXEC.load(Ordering::Relaxed) {
+            // Add back PROT_EXEC if asma.prot_mask has it.
+            prot |= asma.prot_mask & PROT_EXEC;
         }
 
         // The user can only remove, not add, protection bits.
