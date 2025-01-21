@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "addd6090_fc23f74c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-21T23:53:29Z",
+      "side": 1,
+      "message": "What is the state of this patch upstream? Has folks given up on it? (in which case we should reclassify it as ANDROID instead of FROMLIST).",
+      "revId": "0cf8b8546a6117c1c40b379735508d63a738768d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
