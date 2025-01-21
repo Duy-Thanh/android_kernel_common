@@ -2080,6 +2080,14 @@ int pkvm_mem_abort_range(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa, size_t si
 	return err;
 }
 
+static u16 pkvm_prefault;
+
+static int __init early_pkvm_prefault_cfg(char *buf)
+{
+	return kstrtou16(buf, 10, &pkvm_prefault);
+}
+early_param("kvm-arm.prefault", early_pkvm_prefault_cfg);
+
 static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 			  struct kvm_s2_trans *nested,
 			  struct kvm_memory_slot *memslot,
@@ -2567,7 +2575,8 @@ int kvm_handle_guest_abort(struct kvm_vcpu *vcpu)
 	}
 
 	if (is_protected_kvm_enabled() && !esr_fsc_is_permission_fault(esr))
-		ret = pkvm_mem_abort(vcpu, fault_ipa, PAGE_SIZE, memslot);
+		ret = pkvm_mem_abort(vcpu, fault_ipa, PAGE_SIZE + (pkvm_prefault << PAGE_SHIFT),
+				     memslot);
 	else
 		ret = user_mem_abort(vcpu, fault_ipa, nested, memslot,
 
