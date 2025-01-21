@@ -1688,6 +1688,7 @@ static int pagetypeinfo_show(struct seq_file *m, void *arg)
 	seq_printf(m, "Pages per block:  %lu\n", pageblock_nr_pages);
 	seq_putc(m, '\n');
 	pagetypeinfo_showfree(m, pgdat);
+	trace_android_vh_pagetypeinfo_show(m);
 	pagetypeinfo_showblockcount(m, pgdat);
 	pagetypeinfo_showmixedcount(m, pgdat);
 
