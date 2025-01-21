@@ -140,6 +140,30 @@
       },
       "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed872f92_25b2ba46",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-21T11:30:09Z",
+      "side": 1,
+      "message": "Yes, there is an easy way to do this `adb shell setprop hypervisor.memory_reclaim.supported 0` and the 16K target should set this property to 0",
+      "parentUuid": "432f1837_687f0cab",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 31
+      },
+      "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
