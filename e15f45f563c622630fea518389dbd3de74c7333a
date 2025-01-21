@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71826c00_b7a6a67f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-21T15:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71865821_42c65329",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 4
+      },
+      "revId": "e15f45f563c622630fea518389dbd3de74c7333a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00190bfb_3b4f5060",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-21T11:33:14Z",
       "side": 1,
       "message": "I guess you could avoid the lock by using cmpxchg(), but since this isn\u0027t a fast-path I\u0027m happy either way.",
+      "range": {
+        "startLine": 130,
+        "startChar": 1,
+        "endLine": 130,
+        "endChar": 14
+      },
+      "revId": "e15f45f563c622630fea518389dbd3de74c7333a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8445ca_94e21595",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-21T15:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00190bfb_3b4f5060",
       "range": {
         "startLine": 130,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "825c0f24_b6266940",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-21T15:14:50Z",
+      "side": 1,
+      "message": "Nope and if I get rid of that spinlock I can even simply that function by returning 0 early.",
+      "parentUuid": "28137995_cdb7ebd6",
+      "range": {
+        "startLine": 141,
+        "startChar": 10,
+        "endLine": 141,
+        "endChar": 11
+      },
+      "revId": "e15f45f563c622630fea518389dbd3de74c7333a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2c3cfe5_91d99cf0",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1120ce1c_a1713265",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-21T15:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2c3cfe5_91d99cf0",
+      "range": {
+        "startLine": 148,
+        "startChar": 1,
+        "endLine": 149,
+        "endChar": 14
+      },
+      "revId": "e15f45f563c622630fea518389dbd3de74c7333a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fdb237e_aea696c1",
@@ -106,6 +202,30 @@
       "writtenOn": "2025-01-21T11:33:14Z",
       "side": 1,
       "message": "Ugly macro alert!\n\nCan you rewrite this to put more of it into the loop declaration?",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 12
+      },
+      "revId": "e15f45f563c622630fea518389dbd3de74c7333a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41c90b8c_a117cac1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-21T15:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fdb237e_aea696c1",
       "range": {
         "startLine": 155,
         "startChar": 0,
