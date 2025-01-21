@@ -231,6 +231,24 @@
       "parentUuid": "6deef687_dd812352",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca65ef3_eeaf9945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2025-01-21T22:48:50Z",
+      "side": 1,
+      "message": "Hi Daehwan,\n\nI think it will be better just to push all the patches in one chain, so that its easier to keep track.  I was under the assumption you were working on the xHCI changes, so I did not plan to push any part of my series.  If this is not the case, I can prepare the series to include xHCI + USB SND changes.  I just pushed v34, which just has some kernel doc fixups, so I hope Greg will pull these in officially.",
+      "parentUuid": "b739851a_2d746852",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
