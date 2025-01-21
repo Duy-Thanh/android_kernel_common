@@ -212,6 +212,30 @@
       },
       "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc112a5_467765e3",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-21T13:54:05Z",
+      "side": 1,
+      "message": "Thanks for putting that CL up, I will drop this change.",
+      "parentUuid": "2d503b48_10707601",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 31
+      },
+      "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
