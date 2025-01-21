@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c2877c1_2737db9d",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-21T11:02:10Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this part any more, as the PA is checked in `arm_smccc_do_range()`.",
+      "range": {
+        "startLine": 82,
+        "startChar": 5,
+        "endLine": 82,
+        "endChar": 37
+      },
+      "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f2a15f2_789848d4",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-21T11:02:10Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 94,
+        "startChar": 5,
+        "endLine": 94,
+        "endChar": 36
+      },
+      "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e664bf15_8ee2914c",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-21T11:02:10Z",
+      "side": 1,
+      "message": "Hmm, I wonder whether this is sufficient.\n\nIf the balloon calls `page_relinquish(page)` then we won\u0027t issue the hypercall, but the page will still be published back to the VMM in the virtio ring buffer. At that point, the VMM will drop its reference to the page but the GUP pin will persist and I think we can lose coherency.\n\nI\u0027m still not sure why ballooning doesn\u0027t work if the guest PAGE_SIZE is larger than the granule but I\u0027m thinking we should at least `WARN` if the granule is larger than the PAGE_SIZE.\n\n+Keir in case he has better any other ideas.",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 31
+      },
+      "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
