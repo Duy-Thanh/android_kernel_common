@@ -784,6 +784,11 @@ static inline void __free_one_page(struct page *page,
 	unsigned long combined_pfn;
 	struct page *buddy;
 	bool to_tail;
+	bool bypass = false;
+
+	trace_android_vh_free_one_page_bypass(page, zone, order, (int)fpi_flags, &bypass);
+	if (bypass)
+		return;
 
 	VM_BUG_ON(!zone_is_initialized(zone));
 	VM_BUG_ON_PAGE(page->flags & PAGE_FLAGS_CHECK_AT_PREP, page);
@@ -2043,6 +2048,7 @@ static void reserve_highatomic_pageblock(struct page *page, int order,
 {
 	int mt;
 	unsigned long max_managed, flags;
+	bool bypass = false;
 
 	/*
 	 * The number reserved as: minimum is 1 pageblock, maximum is
@@ -2054,6 +2060,9 @@ static void reserve_highatomic_pageblock(struct page *page, int order,
 		return;
 	max_managed = ALIGN((zone_managed_pages(zone) / 100), pageblock_nr_pages);
 	if (zone->nr_reserved_highatomic >= max_managed)
+		return;
+	trace_android_vh_reserve_highatomic_bypass(page, &bypass);
+	if (bypass)
 		return;
 
 	spin_lock_irqsave(&zone->lock, flags);
@@ -2272,7 +2281,11 @@ static __always_inline struct page *
 __rmqueue(struct zone *zone, unsigned int order, int migratetype,
 						unsigned int alloc_flags)
 {
-	struct page *page;
+	struct page *page = NULL;
+
+	trace_android_vh_rmqueue_smallest_bypass(&page, zone, order, migratetype);
+	if (page)
+		return page;
 
 	if (IS_ENABLED(CONFIG_CMA)) {
 		/*
@@ -3140,6 +3153,7 @@ bool __zone_watermark_ok(struct zone *z, unsigned int order, unsigned long mark,
 {
 	long min = mark;
 	int o;
+	bool is_watermark_ok = false;
 
 	/* free_pages may go negative - that's OK */
 	free_pages -= __zone_watermark_unusable_free(z, order, alloc_flags);
@@ -3183,6 +3197,10 @@ bool __zone_watermark_ok(struct zone *z, unsigned int order, unsigned long mark,
 
 	/* If this is an order-0 request then the watermark is fine */
 	if (!order)
+		return true;
+
+	trace_android_vh_watermark_ok(order, alloc_flags, &is_watermark_ok);
+	if (is_watermark_ok)
 		return true;
 
 	/* For a high-order request, check at least one suitable page is free */
@@ -4055,6 +4073,7 @@ gfp_to_alloc_flags(gfp_t gfp_mask, unsigned int order)
 		alloc_flags |= ALLOC_MIN_RESERVE;
 
 	alloc_flags = gfp_to_alloc_flags_cma(gfp_mask, alloc_flags);
+	trace_android_vh_gfp_to_alloc_flags(gfp_mask, order, &alloc_flags);
 
 	return alloc_flags;
 }
