@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0376d57_f4c93952",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-01-21T19:19:16Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: h00013079 \u003chuangdezhi@hihonor.com\u003e\u0027 !\u003d \u0027Signed-off-by: Dezhi Huang \u003chuangdezhi@hihonor.com\u003e\u0027\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: h00013079 \u003chuangdezhi@hihonor.com\u003e\u0027 !\u003d \u0027Signed-off-by: Dezhi Huang \u003chuangdezhi@hihonor.com\u003e\u0027",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "c8272fa8472162b3367f3a128eb2cb689fe29e87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2b4d73a4_a2d10627",
