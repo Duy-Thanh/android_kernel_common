@@ -67,6 +67,7 @@ fn has_cap_sys_admin() -> bool {
 static NUM_PIN_IOCTLS_WAITING: AtomicUsize = AtomicUsize::new(0);
 static UNPIN_IMMEDIATELY: AtomicBool = AtomicBool::new(false);
 static IGNORE_UNSET_PROT_READ: AtomicBool = AtomicBool::new(false);
+static IGNORE_UNSET_PROT_EXEC: AtomicBool = AtomicBool::new(false);
 
 fn shrinker_should_stop() -> bool {
     NUM_PIN_IOCTLS_WAITING.load(Ordering::Relaxed) > 0
@@ -344,6 +345,11 @@ impl Ashmem {
         if IGNORE_UNSET_PROT_READ.load(Ordering::Relaxed) {
             // Add back PROT_READ if asma.prot_mask has it.
             prot |= asma.prot_mask & PROT_READ;
+        }
+
+        if IGNORE_UNSET_PROT_EXEC.load(Ordering::Relaxed) {
+            // Add back PROT_EXEC if asma.prot_mask has it.
+            prot |= asma.prot_mask & PROT_EXEC;
         }
 
         // The user can only remove, not add, protection bits.

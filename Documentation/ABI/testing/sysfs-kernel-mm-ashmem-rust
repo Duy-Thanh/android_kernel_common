@@ -30,3 +30,13 @@ Description:
 
 		This is a boolean option. When the value is 1, calls to
 		SET_PROT_MASK ignore the PROT_READ bit given by userspace.
+
+What:		/sys/kernel/ashmem/ignore_unset_prot_exec
+Date:		Feb 2025
+Contact:	Alice Ryhl <aliceryhl@google.com>
+Description:
+		Determines whether the SET_PROT_MASK ioctl should ignore
+		attempts to unset the PROT_EXEC bit.
+
+		This is a boolean option. When the value is 1, calls to
+		SET_PROT_MASK ignore the PROT_EXEC bit given by userspace.
