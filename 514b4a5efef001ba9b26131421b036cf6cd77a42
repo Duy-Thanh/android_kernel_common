@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50f49755_f40e0f02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2025-01-21T02:58:47Z",
+      "side": 1,
+      "message": "Unfortunately, we cannot just revert these changes until the new policy lands (reverting without the new policy would re-introduce the whole family of security vulnerabilities related to leaking mac-addresses). Because of b/381754752, we had to backport a compatibility change for existing kernels. Until this compatibility change lands on supported devices, we cannot land the policy change and therefore not remove this android-specific patch (tracked at b/353255679).\n\nGreg, how can I help updating this patch (and aosp/3457142)?",
+      "revId": "514b4a5efef001ba9b26131421b036cf6cd77a42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
