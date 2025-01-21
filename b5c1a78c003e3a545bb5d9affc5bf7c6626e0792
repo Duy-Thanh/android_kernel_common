@@ -33,6 +33,24 @@
       "message": "Let\u0027s wait for the latest release to be merged here to prevent merge conflicts again.\n\nAnd why is this really needed?  Who uses this?",
       "revId": "b5c1a78c003e3a545bb5d9affc5bf7c6626e0792",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c077a395_c2a797c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-01-21T23:15:51Z",
+      "side": 1,
+      "message": "Sounds good. That should be around late March, right? \n\nTo answer your question, this is needed for healthd system statistics to function correctly. This metric is also monitored by Android Automotive. We would want this working in android-mainline for two reasons: 1. to keep mainline in as close to a \"shippable\" state as possible, and 2. in order to perform regression testing when we replace this implementation with BPF",
+      "parentUuid": "804b5e8e_3f08d424",
+      "revId": "b5c1a78c003e3a545bb5d9affc5bf7c6626e0792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
