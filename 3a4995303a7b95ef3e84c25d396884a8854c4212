@@ -68,6 +68,30 @@
       },
       "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432f1837_687f0cab",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-21T11:08:54Z",
+      "side": 1,
+      "message": "Yes this needs more thought. In the case that granule \u003e PAGE_SIZE we basically need to disable ballooning, or modify the balloon to allocate at granule order.",
+      "parentUuid": "e664bf15_8ee2914c",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 31
+      },
+      "revId": "3a4995303a7b95ef3e84c25d396884a8854c4212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
