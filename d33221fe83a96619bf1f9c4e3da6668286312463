@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b2c85a_adc1a239",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-21T11:41:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5130a9ec_68a21ffa",
+      "range": {
+        "startLine": 1106,
+        "startChar": 8,
+        "endLine": 1106,
+        "endChar": 38
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de2dfaa4_fef6b480",
@@ -275,6 +299,30 @@
       "side": 1,
       "message": "As the IDMAP domain must be stage-2, IOMMU_CACHE should be enough as it is combined with the transaction.",
       "parentUuid": "b1b3cb2c_126b8844",
+      "range": {
+        "startLine": 1580,
+        "startChar": 43,
+        "endLine": 1580,
+        "endChar": 56
+      },
+      "revId": "d33221fe83a96619bf1f9c4e3da6668286312463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1447ac9a_a766623f",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-21T11:41:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d8d1aed_edff8422",
       "range": {
         "startLine": 1580,
         "startChar": 43,
