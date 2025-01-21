@@ -467,6 +467,7 @@ int host_stage2_unmap_reg_locked(phys_addr_t start, u64 size)
 		return ret;
 
 	kvm_iommu_host_stage2_idmap(start, start + size, 0);
+	kvm_iommu_host_stage2_idmap_complete(false);
 
 	return 0;
 }
@@ -615,8 +616,11 @@ static inline int __host_stage2_idmap(u64 start, u64 end,
 	if (ret)
 		return ret;
 
-	if (update_iommu)
+	if (update_iommu) {
 		kvm_iommu_host_stage2_idmap(start, end, prot);
+		kvm_iommu_host_stage2_idmap_complete(!!prot);
+	}
+
 	return 0;
 }
 
@@ -727,6 +731,7 @@ static int __host_stage2_set_owner_locked(phys_addr_t addr, u64 size, u8 owner_i
 	if (update_iommu) {
 		prot = owner_id == PKVM_ID_HOST ? PKVM_HOST_MEM_PROT : 0;
 		kvm_iommu_host_stage2_idmap(addr, addr + size, prot);
+		kvm_iommu_host_stage2_idmap_complete(!!prot);
 	}
 
 	if (!is_memory)
@@ -2037,14 +2042,16 @@ kvm_pte_t __pkvm_host_mkyoung_guest(u64 gfn, struct pkvm_hyp_vcpu *vcpu)
 	return pte;
 }
 
-static int __host_donate_guest(struct pkvm_hyp_vcpu *vcpu, u64 phys, u64 ipa, size_t size)
+static int __host_set_owner_guest(struct pkvm_hyp_vcpu *vcpu, u64 phys, u64 ipa,
+			       size_t size, bool is_memory)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	u64 nr_pages = size >> PAGE_SHIFT;
-	enum kvm_pgtable_prot prot;
 	int ret;
 
-	WARN_ON(host_stage2_set_owner_locked(phys, size, PKVM_ID_GUEST));
+	/* update_iommu=false, we expect the caller to do the job */
+	WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_GUEST,
+					       is_memory, 0, false));
 	psci_mem_protect_inc(nr_pages);
 	if (pkvm_ipa_range_has_pvmfw(vm, ipa, ipa + size)) {
 		ret = pkvm_load_pvmfw_pages(vm, ipa, phys, size);
@@ -2054,10 +2061,6 @@ static int __host_donate_guest(struct pkvm_hyp_vcpu *vcpu, u64 phys, u64 ipa, si
 		}
 	}
 
-	prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED);
-	WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys, prot,
-				       &vcpu->vcpu.arch.stage2_mc, 0));
-
 	return 0;
 }
 
@@ -2066,6 +2069,8 @@ int __pkvm_host_donate_guest(u64 pfn, u64 gfn, struct pkvm_hyp_vcpu *vcpu, u64 n
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	u64 phys = hyp_pfn_to_phys(pfn);
 	u64 ipa = hyp_pfn_to_phys(gfn);
+	enum kvm_pgtable_prot prot;
+	bool is_memory;
 	size_t size;
 	int ret;
 
@@ -2082,7 +2087,16 @@ int __pkvm_host_donate_guest(u64 pfn, u64 gfn, struct pkvm_hyp_vcpu *vcpu, u64 n
 	if (ret)
 		goto unlock;
 
-	WARN_ON(__host_donate_guest(vcpu, phys, ipa, size));
+	is_memory = addr_is_memory(phys);
+	WARN_ON(__host_set_owner_guest(vcpu, phys, ipa, size, is_memory));
+	if (is_memory) {
+		kvm_iommu_host_stage2_idmap(phys, phys + size, 0);
+		kvm_iommu_host_stage2_idmap_complete(false);
+	}
+
+	prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED);
+	WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys, prot,
+				       &vcpu->vcpu.arch.stage2_mc, 0));
 
 unlock:
 	guest_unlock_component(vm);
@@ -2164,7 +2178,27 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 		u64 phys = hyp_pfn_to_phys(ppage->pfn);
 		u64 ipa = hyp_pfn_to_phys(ppage->gfn);
 
-		WARN_ON(__host_donate_guest(vcpu, phys, ipa, size));
+		WARN_ON(__host_set_owner_guest(vcpu, phys, ipa, size, is_memory));
+		if (is_memory)
+			kvm_iommu_host_stage2_idmap(phys, phys + size, 0);
+	}
+
+	if (is_memory)
+		kvm_iommu_host_stage2_idmap_complete(false);
+
+	/*
+	 * Now the sglist is unmapped from the host and the IOMMUs we can map
+	 * it in the guest.
+	 */
+	for_each_hyp_ppage(ppage) {
+		size_t size = PAGE_SIZE << ppage->order;
+		u64 phys = hyp_pfn_to_phys(ppage->pfn);
+		u64 ipa = hyp_pfn_to_phys(ppage->gfn);
+		enum kvm_pgtable_prot prot;
+
+		prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED);
+		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys, prot,
+				       &vcpu->vcpu.arch.stage2_mc, 0));
 	}
 
 unlock:
