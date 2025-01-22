@@ -22,6 +22,30 @@
       },
       "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df55ced_d4ffcc9d",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-01-22T18:19:21Z",
+      "side": 0,
+      "message": "SHA-1 is insecure and not allowed by the CDD.  You need to be using SHA-256, and you almost certainly are already.\n\nAnd the previous CL enabled SHA-256 acceleration, which was missing.\n\nIf you\u0027re somehow still using SHA-1, that would be a bug that would need to be fixed.",
+      "parentUuid": "a55c590d_5910e1fb",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 18
+      },
+      "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

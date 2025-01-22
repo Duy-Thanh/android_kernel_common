@@ -22,6 +22,30 @@
       },
       "revId": "c0546202428b991a7b4cab0b83cddccd4a4e59a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8618a38b_38f4a5f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-01-22T18:19:21Z",
+      "side": 1,
+      "message": "ioffe@ is working on this, I think.  Let me know if you need me to help.",
+      "parentUuid": "52fcc4b2_23812947",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 54
+      },
+      "revId": "c0546202428b991a7b4cab0b83cddccd4a4e59a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
