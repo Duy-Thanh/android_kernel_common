@@ -52,6 +52,24 @@
       "parentUuid": "0c745812_016c24b6",
       "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e108d10_dc954d63",
+        "filename": "android/abi_gki_x86_64.stg.allowed_breaks",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-01-22T17:59:07Z",
+      "side": 1,
+      "message": "Ok, I will remove allowance and use Lint+2. Thanks for explanation.",
+      "parentUuid": "ad17fe4f_9ef9ff79",
+      "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
