@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5302e963_c37e111e",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-22T02:28:24Z",
+      "side": 1,
+      "message": "It would deadlock since `memfd_fcntl(..., F_ADD_SEALS)` tries to acquire the inode_lock, but that is held at the start of this function. I did that to ensure atomicity with respect to mmap() since that\u0027s where the permissions were checked prior to Lorenzo\u0027s rework for the file seal handling. However, that atomicity is no longer guaranteed by design now. I don\u0027t think it might be a problem but I\u0027ll think about it some more.",
+      "parentUuid": "08aa5c15_30adf652",
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a45197d_4ebdadef",
         "filename": "mm/ashmem_compat.c",
         "patchSetId": 22
@@ -173,6 +191,24 @@
       "writtenOn": "2025-01-20T10:08:06Z",
       "side": 1,
       "message": "The extra checks don\u0027t really seem necessary to me? The only check that is important is the permission check, but that\u0027s handled by the file seal. And if you get rid of the custom `mmap`, then that simplifies a lot of things since the only additional ops operation you need is `ioctl`. You can insert `ioctl` directly into the shmem fops since shmem has no ioctl function today.",
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d3d51c8_0cb29929",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-22T02:28:24Z",
+      "side": 1,
+      "message": "I do agree that not having a custom `mmap()` handler would simplify things a bit. I\u0027ll dig into why that check for the VMA range was added in the ashmem driver and get back to you.",
+      "parentUuid": "7a45197d_4ebdadef",
       "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
