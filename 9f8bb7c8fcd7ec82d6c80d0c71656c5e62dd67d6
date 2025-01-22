@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7481e28c_a8d15a33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-22T06:19:53Z",
+      "side": 1,
+      "message": "This wasn\u0027t originally in the commit message that is upstream. You also removed Joerg\u0027s signature. I think it would be best if you cherrypicked the patch from upstream using `git cherry-pick -x -s $UPSTREAM_SHA` and keep the same Change-Id that you have here.\n\nAlso, please note what merge conflict resolution you had to do, since this patch is tagged as `BACKPORT` but there\u0027s no mention in the commit message as to why.\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/README.md#requirements-for-backports-from-mainline-linux-upstream-backport",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 65
+      },
+      "revId": "9f8bb7c8fcd7ec82d6c80d0c71656c5e62dd67d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7ada6ff_ce45b21f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-22T06:19:53Z",
+      "side": 1,
+      "message": "This is confusing. I think we should only retain one sha, which is the upstream sha below.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 68
+      },
+      "revId": "9f8bb7c8fcd7ec82d6c80d0c71656c5e62dd67d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
