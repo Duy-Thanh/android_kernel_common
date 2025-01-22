@@ -23,11 +23,13 @@
 #include <linux/ptrace.h>	/* user_enable_single_step */
 #include <linux/kdebug.h>	/* notifier mechanism */
 #include <linux/percpu-rwsem.h>
+#include <linux/process.h>
 #include <linux/task_work.h>
 #include <linux/shmem_fs.h>
 #include <linux/khugepaged.h>
 
 #include <linux/uprobes.h>
+#include <linux/process.h>
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
@@ -1442,6 +1444,7 @@ static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 {
 	struct vm_area_struct *vma;
 	int ret;
+	unsigned long vm_flags;
 
 	if (mmap_write_lock_killable(mm))
 		return -EINTR;
@@ -1461,8 +1464,10 @@ static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 		}
 	}
 
+	vm_flags = VM_EXEC|VM_MAYEXEC|VM_DONTCOPY|VM_IO;
+	vm_flags |= mseal_system_mappings();
 	vma = _install_special_mapping(mm, area->vaddr, PAGE_SIZE,
-				VM_EXEC|VM_MAYEXEC|VM_DONTCOPY|VM_IO,
+				vm_flags,
 				&area->xol_mapping);
 	if (IS_ERR(vma)) {
 		ret = PTR_ERR(vma);
