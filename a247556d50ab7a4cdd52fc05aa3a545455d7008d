@@ -22,6 +22,30 @@
       },
       "revId": "a247556d50ab7a4cdd52fc05aa3a545455d7008d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfc395fc_9bf7d695",
+        "filename": "android/abi_gki_aarch64_paragon",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3832304
+      },
+      "writtenOn": "2025-01-22T15:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6fa92f6_9c64ff7b",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "a247556d50ab7a4cdd52fc05aa3a545455d7008d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
