@@ -34,6 +34,24 @@
       "parentUuid": "749fae92_913e8180",
       "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad17fe4f_9ef9ff79",
+        "filename": "android/abi_gki_x86_64.stg.allowed_breaks",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-01-22T17:53:11Z",
+      "side": 1,
+      "message": "Yes, please remove `allowed_breaks` for this break.\n\nUsually we approve only ABI changes that would not impact any vendor, even if they don\u0027t recompile their modules. For example, aosp/3369094 is ok because it replaces reserved ABI field with an actual use. Even if tool says \"it is break\", human reviewer can see that it is not. And we use this file to record examples, where tooling was wrong, so that it don\u0027t treat it as break next time. In go/approve-abi-break we have few other types of ABI changes that are allowed.\n\nThe break in this change will impact almost any module, because it changes most of CRCs, which are checked during module loading. Module will simply refuse to load after this change until it is recompiled. Tooling is right: this is a real break. So we shouldn\u0027t teach tooling that this is not a break, so we shouldn\u0027t update \"allowed_breaks\".",
+      "parentUuid": "0c745812_016c24b6",
+      "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
