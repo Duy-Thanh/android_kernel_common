@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "404aba4c_1092268b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-01-22T20:56:39Z",
+      "side": 1,
+      "message": "Re-worked the generator to have only a single list (see CL:3461165).",
+      "parentUuid": "1e83459f_58ea5197",
+      "range": {
+        "startLine": 1354,
+        "startChar": 13,
+        "endLine": 1354,
+        "endChar": 29
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b93924ec_20055900",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24eb2607_93d9b396",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-01-22T20:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b93924ec_20055900",
+      "range": {
+        "startLine": 1355,
+        "startChar": 20,
+        "endLine": 1355,
+        "endChar": 28
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94427b3f_bee7b05d",
@@ -84,6 +132,30 @@
       "writtenOn": "2025-01-22T00:35:43Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 1382,
+        "startChar": 20,
+        "endLine": 1382,
+        "endChar": 28
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5d01df2_0e91d0de",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-01-22T20:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94427b3f_bee7b05d",
       "range": {
         "startLine": 1382,
         "startChar": 20,
@@ -155,6 +227,30 @@
       "side": 1,
       "message": "This would be just a convenient way to keep all the info in a single source of truth, but if it easier I can keep both files, and let the test decide which file to load, that way I don\u0027t even need to worry about creating a custom rule to merge them.",
       "parentUuid": "3f7f7ba0_fc2ad25a",
+      "range": {
+        "startLine": 1386,
+        "startChar": 0,
+        "endLine": 1386,
+        "endChar": 51
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "005dab62_5c63ed16",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-01-22T20:56:39Z",
+      "side": 1,
+      "message": "Re-worked the generator to have only a single list (see CL:3461165).",
+      "parentUuid": "cde3d8cf_a3300e18",
       "range": {
         "startLine": 1386,
         "startChar": 0,
