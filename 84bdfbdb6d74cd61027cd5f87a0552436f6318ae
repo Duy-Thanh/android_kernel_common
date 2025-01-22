@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95296c3_8cd46927",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-22T21:53:26Z",
+      "side": 1,
+      "message": "Build break. Please build and test your changes _BEFORE_ uploading",
+      "revId": "84bdfbdb6d74cd61027cd5f87a0552436f6318ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
