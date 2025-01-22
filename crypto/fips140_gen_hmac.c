@@ -4,7 +4,7 @@
  * Author: Ard Biesheuvel <ardb@google.com>
  *
  * This is a host tool that is intended to be used to take the HMAC digest of
- * the .text and .rodata sections of the fips140.ko module, and store it inside
+ * the text and rodata sections of the fips140.ko module, and store it inside
  * the module. The module will perform an integrity selfcheck at module_init()
  * time, by recalculating the digest and comparing it with the value calculated
  * here.
@@ -186,6 +186,8 @@ int main(int argc, char **argv)
 
 	hmac_section(hmac, "__fips140_text_start", "__fips140_text_end");
 	hmac_section(hmac, "__fips140_rodata_start", "__fips140_rodata_end");
+	hmac_section(hmac, "__fips140_init_text_start", "__fips140_init_text_end");
+	hmac_section(hmac, "__fips140_init_rodata_start", "__fips140_init_rodata_end");
 
 	HMAC_Final(hmac, dg, &dglen);
 

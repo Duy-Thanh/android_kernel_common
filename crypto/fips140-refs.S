@@ -18,7 +18,7 @@
 #include <linux/linkage.h>
 #include <asm/assembler.h>
 
-	.section	".init.rodata", "a"
+	.section	".init.rela_refs", "a"
 
 	.align	2
 	.globl	fips140_rela_text
@@ -31,4 +31,16 @@ fips140_rela_text:
 fips140_rela_rodata:
 	.weak	__sec_rela_rodata
 	.long	__sec_rela_rodata - .
+	.long	0
+
+	.globl	fips140_rela_init_text
+fips140_rela_init_text:
+	.weak	__sec_rela_init_text
+	.long	__sec_rela_init_text - .
+	.long	0
+
+	.globl	fips140_rela_init_rodata
+fips140_rela_init_rodata:
+	.weak	__sec_rela_init_rodata
+	.long	__sec_rela_init_rodata - .
 	.long	0

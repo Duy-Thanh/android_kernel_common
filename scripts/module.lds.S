@@ -95,6 +95,19 @@ SECTIONS {
 		*(.text.._end)
 		*(.text.._fips140_unchecked)
 	}
+
+	.init.rodata : {
+		*(.init.rodata.._start)
+		*(.init.rodata .init.rodata.[0-9a-zA-Z_]*)
+		*(.init.rodata..L*)
+		*(.init.rodata.._end)
+	}
+
+	.init.text : {
+		*(.init.text.._start)
+		*(.init.text .init.text.[0-9a-zA-Z_]*)
+		*(.init.text.._end)
+	}
 #else
 	.data : {
 		CODETAG_SECTIONS()

@@ -53,14 +53,61 @@ const u8 __fips140_text_end __section(".text.._end");
 const u8 __fips140_rodata_start __section(".rodata.._start");
 const u8 __fips140_rodata_end __section(".rodata.._end");
 
+const u8 __fips140_init_text_start __section(".init.text.._start");
+const u8 __fips140_init_text_end __section(".init.text.._end");
+
+const u8 __fips140_init_rodata_start __section(".init.rodata.._start");
+const u8 __fips140_init_rodata_end __section(".init.rodata.._end");
+
 /*
  * We need this little detour to prevent Clang from detecting out of bounds
  * accesses to the above *_start symbols, which exist only to delineate the
  * corresponding sections, and so their sizes are not relevant to us.
  */
 const initcall_entry_t *fips140_initcalls_start = &__fips140_initcalls_start;
-const u8 *fips140_text_start = &__fips140_text_start;
-const u8 *fips140_rodata_start = &__fips140_rodata_start;
+
+extern struct fips140_rela_info {
+	u32	offset;
+	u32	count;
+} fips140_rela_text, fips140_rela_rodata,
+  fips140_rela_init_text, fips140_rela_init_rodata;
+
+static const struct fips140_checked_section {
+	const u8 *start;
+	const u8 *end;
+	bool is_text;
+	const char *name;
+	struct fips140_rela_info *rela_info;
+} fips140_checked_sections[] __initconst = {
+	{
+		.start = &__fips140_text_start,
+		.end = &__fips140_text_end,
+		.is_text = true,
+		.name = ".text",
+		.rela_info = &fips140_rela_text,
+	},
+	{
+		.start = &__fips140_rodata_start,
+		.end = &__fips140_rodata_end,
+		.is_text = false,
+		.name = ".rodata",
+		.rela_info = &fips140_rela_rodata,
+	},
+	{
+		.start = &__fips140_init_text_start,
+		.end = &__fips140_init_text_end,
+		.is_text = true,
+		.name = ".init.text",
+		.rela_info = &fips140_rela_init_text,
+	},
+	{
+		.start = &__fips140_init_rodata_start,
+		.end = &__fips140_init_rodata_end,
+		.is_text = false,
+		.name = ".init.rodata",
+		.rela_info = &fips140_rela_init_rodata,
+	},
+};
 
 /*
  * fips140_algs[] lists the algorithms that this module unregisters from the
@@ -501,113 +548,64 @@ static void __init unapply_scs_patch(void *section, int section_size)
 }
 
 #ifdef CONFIG_CRYPTO_FIPS140_MOD_DEBUG_INTEGRITY_CHECK
-static struct {
-	const void *text;
-	int textsize;
-	const void *rodata;
-	int rodatasize;
-} saved_integrity_check_info;
+static struct dentry *fips140_debugfs_dir;
 
-static ssize_t fips140_text_read(struct file *file, char __user *to,
-				 size_t count, loff_t *ppos)
-{
-	return simple_read_from_buffer(to, count, ppos,
-				       saved_integrity_check_info.text,
-				       saved_integrity_check_info.textsize);
-}
-
-static ssize_t fips140_rodata_read(struct file *file, char __user *to,
-				   size_t count, loff_t *ppos)
-{
-	return simple_read_from_buffer(to, count, ppos,
-				       saved_integrity_check_info.rodata,
-				       saved_integrity_check_info.rodatasize);
-}
-
-static const struct file_operations fips140_text_fops = {
-	.read = fips140_text_read,
+struct fips140_debugfs_file {
+	const void *data;
+	size_t size;
 };
 
-static const struct file_operations fips140_rodata_fops = {
-	.read = fips140_rodata_read,
+static ssize_t fips140_section_read(struct file *file, char __user *to,
+				    size_t count, loff_t *ppos)
+{
+	const struct fips140_debugfs_file *f = file_inode(file)->i_private;
+
+	return simple_read_from_buffer(to, count, ppos, f->data, f->size);
+}
+
+static const struct file_operations fips140_section_fops = {
+	.read = fips140_section_read,
 };
 
-static void fips140_init_integrity_debug_files(const void *text, int textsize,
-					       const void *rodata,
-					       int rodatasize)
+static void __init fips140_init_debugfs_dir(void)
 {
-	struct dentry *dir;
+	fips140_debugfs_dir = debugfs_create_dir("fips140", NULL);
+}
 
-	dir = debugfs_create_dir("fips140", NULL);
+static void __init fips140_init_debugfs_file(const char *name, const void *data,
+					     size_t size)
+{
+	struct fips140_debugfs_file *f;
 
-	saved_integrity_check_info.text = kmemdup(text, textsize, GFP_KERNEL);
-	saved_integrity_check_info.textsize = textsize;
-	if (saved_integrity_check_info.text)
-		debugfs_create_file("text", 0400, dir, NULL,
-				    &fips140_text_fops);
+	f = kmalloc(sizeof(*f), GFP_KERNEL);
+	if (!f)
+		return;
+	f->data = kmemdup(data, size, GFP_KERNEL);
+	f->size = size;
+	if (!f->data)
+		return;
 
-	saved_integrity_check_info.rodata = kmemdup(rodata, rodatasize,
-						    GFP_KERNEL);
-	saved_integrity_check_info.rodatasize = rodatasize;
-	if (saved_integrity_check_info.rodata)
-		debugfs_create_file("rodata", 0400, dir, NULL,
-				    &fips140_rodata_fops);
+	debugfs_create_file(name, 0400, fips140_debugfs_dir, f,
+			    &fips140_section_fops);
 }
 #else /* CONFIG_CRYPTO_FIPS140_MOD_DEBUG_INTEGRITY_CHECK */
-static void fips140_init_integrity_debug_files(const void *text, int textsize,
-					       const void *rodata,
-					       int rodatasize)
+static void __init fips140_init_debugfs_dir(void)
+{
+}
+static void __init fips140_init_debugfs_file(const char *name, const void *data,
+					     size_t size)
 {
 }
 #endif /* !CONFIG_CRYPTO_FIPS140_MOD_DEBUG_INTEGRITY_CHECK */
 
-extern struct {
-	u32	offset;
-	u32	count;
-} fips140_rela_text, fips140_rela_rodata;
-
 static bool __init check_fips140_module_hmac(void)
 {
-	struct crypto_shash *tfm = NULL;
+	struct crypto_shash *tfm;
 	SHASH_DESC_ON_STACK(desc, dontcare);
 	u8 digest[SHA256_DIGEST_SIZE];
-	void *textcopy, *rodatacopy;
-	int textsize, rodatasize;
+	int i;
 	bool ok = false;
 	int err;
-
-	textsize	= &__fips140_text_end - &__fips140_text_start;
-	rodatasize	= &__fips140_rodata_end - &__fips140_rodata_start;
-
-	pr_info("text size  : 0x%x\n", textsize);
-	pr_info("rodata size: 0x%x\n", rodatasize);
-
-	textcopy = kmalloc(textsize + rodatasize, GFP_KERNEL);
-	if (!textcopy) {
-		pr_err("Failed to allocate memory for copy of .text\n");
-		goto out;
-	}
-
-	rodatacopy = textcopy + textsize;
-
-	memcpy(textcopy, fips140_text_start, textsize);
-	memcpy(rodatacopy, fips140_rodata_start, rodatasize);
-
-	// apply the relocations in reverse on the copies of .text  and .rodata
-	unapply_text_relocations(textcopy, textsize,
-				 offset_to_ptr(&fips140_rela_text.offset),
-				 fips140_rela_text.count);
-
-	unapply_rodata_relocations(rodatacopy, rodatasize,
-				  offset_to_ptr(&fips140_rela_rodata.offset),
-				  fips140_rela_rodata.count);
-
-	unapply_scs_patch(textcopy, textsize);
-
-	fips140_init_integrity_debug_files(textcopy, textsize,
-					   rodatacopy, rodatasize);
-
-	fips140_inject_integrity_failure(textcopy);
 
 	tfm = crypto_alloc_shash("hmac(sha256)", 0, 0);
 	if (IS_ERR(tfm)) {
@@ -621,10 +619,69 @@ static bool __init check_fips140_module_hmac(void)
 		crypto_shash_driver_name(tfm));
 
 	err = crypto_shash_setkey(tfm, fips140_integ_hmac_key,
-				  strlen(fips140_integ_hmac_key)) ?:
-	      crypto_shash_init(desc) ?:
-	      crypto_shash_update(desc, textcopy, textsize) ?:
-	      crypto_shash_finup(desc, rodatacopy, rodatasize, digest);
+				  strlen(fips140_integ_hmac_key));
+	if (err) {
+		pr_err("shash_setkey failed: %d\n", err);
+		goto out;
+	}
+	err = crypto_shash_init(desc);
+	if (err) {
+		pr_err("shash_init failed: %d\n", err);
+		goto out;
+	}
+
+	fips140_init_debugfs_dir();
+
+	for (i = 0; i < ARRAY_SIZE(fips140_checked_sections); i++) {
+		const struct fips140_checked_section *sec =
+			&fips140_checked_sections[i];
+		size_t sec_size = sec->end - sec->start;
+		void *sec_copy;
+		const Elf64_Rela *rela;
+		int numrels;
+
+		pr_info("%s size: %zu\n", sec->name, sec_size);
+
+		if (sec_size <= 0) {
+			pr_err("%s section is empty!\n", sec->name);
+			goto out;
+		}
+
+		sec_copy = kmemdup(sec->start, sec_size, GFP_KERNEL);
+		if (!sec_copy) {
+			pr_err("Failed to allocate memory for copy of %s\n",
+			       sec->name);
+			goto out;
+		}
+
+		rela = offset_to_ptr(&sec->rela_info->offset);
+		numrels = sec->rela_info->count;
+		// Apply relocations and code patches in reverse on the copy.
+		if (sec->is_text) {
+			unapply_text_relocations(sec_copy, sec_size, rela, numrels);
+			unapply_scs_patch(sec_copy, sec_size);
+		} else {
+			unapply_rodata_relocations(sec_copy, sec_size, rela, numrels);
+		}
+
+		fips140_inject_integrity_failure(sec_copy);
+		fips140_init_debugfs_file(sec->name, sec_copy, sec_size);
+		err = crypto_shash_update(desc, sec_copy, sec_size);
+
+		/* Zeroizing this is important; see the comment below. */
+		kfree_sensitive(sec_copy);
+
+		if (err) {
+			pr_err("shash_update error: %d", err);
+			goto out;
+		}
+	}
+
+	err = crypto_shash_final(desc, digest);
+	if (err) {
+		pr_err("shash_final error: %d", err);
+		goto out;
+	}
 
 	/* Zeroizing this is important; see the comment below. */
 	shash_desc_zero(desc);
@@ -652,7 +709,6 @@ out:
 	 */
 	crypto_free_shash(tfm);
 	memzero_explicit(digest, sizeof(digest));
-	kfree_sensitive(textcopy);
 	return ok;
 }
 
