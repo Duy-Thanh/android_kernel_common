@@ -16,6 +16,24 @@
       "message": "What is the state of this patch upstream? Has folks given up on it? (in which case we should reclassify it as ANDROID instead of FROMLIST).",
       "revId": "0cf8b8546a6117c1c40b379735508d63a738768d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e2a6a6_e4515b6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-22T02:36:54Z",
+      "side": 1,
+      "message": "It looks like it made it upstream sometime between 6.6 and 6.12: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/iommu/iommu.c?h\u003dv6.13\u0026id\u003da2e7e59a94269484a83386972ca07c22fd188854",
+      "parentUuid": "addd6090_fc23f74c",
+      "revId": "0cf8b8546a6117c1c40b379735508d63a738768d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
