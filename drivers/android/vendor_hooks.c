@@ -82,6 +82,7 @@
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/xhci.h>
 #include <trace/hooks/typec.h>
+
 #include <trace/events/android_vendor_lmk.h>
 
 /*
@@ -639,4 +640,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_fail);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_store_partner_src_caps);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_modify_src_caps);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_proactive_compact_wmark_high);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);

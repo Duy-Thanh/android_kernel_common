@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (f5f3d8 BACKPORT: mm/thp: fix deferred split unqueue naming and lock)
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM compaction
 
@@ -15,6 +16,23 @@ enum compact_result;
 DECLARE_HOOK(android_vh_compaction_try_to_compact_exit,
         TP_PROTO(enum compact_result *compact_result),
         TP_ARGS(compact_result));
+||||||| BASE
+=======
+/* SPDX-License-Identifier: GPL-2.0 */
+#undef TRACE_SYSTEM
+#define TRACE_SYSTEM compaction
+
+#define TRACE_INCLUDE_PATH trace/hooks
+
+#if !defined(_TRACE_HOOK_COMPACTION_H) || defined(TRACE_HEADER_MULTI_READ)
+#define _TRACE_HOOK_COMPACTION_H
+
+#include <trace/hooks/vendor_hooks.h>
+
+DECLARE_HOOK(android_vh_proactive_compact_wmark_high,
+	TP_PROTO(int *wmark_high),
+	TP_ARGS(wmark_high));
+>>>>>>> CHANGE (891189 ANDROID: mm: create vendor hooks for mm  proactive compact)
 #endif /* _TRACE_HOOK_COMPACTION_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
