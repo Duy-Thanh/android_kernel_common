@@ -34,6 +34,24 @@
       "parentUuid": "addd6090_fc23f74c",
       "revId": "0cf8b8546a6117c1c40b379735508d63a738768d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c6c523_0b34fd3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2025-01-22T02:37:41Z",
+      "side": 1,
+      "message": "Change title to BACKPORT and add upstream commit information. This commit can be cherry-picked from Linux mainline with conflict resolution in drivers/iommu/iommu.c.",
+      "parentUuid": "addd6090_fc23f74c",
+      "revId": "0cf8b8546a6117c1c40b379735508d63a738768d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
