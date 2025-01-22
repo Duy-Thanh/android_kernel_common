@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d561e72_d0cdfc33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2025-01-22T07:21:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7481e28c_a8d15a33",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 65
+      },
+      "revId": "9f8bb7c8fcd7ec82d6c80d0c71656c5e62dd67d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7ada6ff_ce45b21f",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-22T06:19:53Z",
       "side": 1,
       "message": "This is confusing. I think we should only retain one sha, which is the upstream sha below.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 68
+      },
+      "revId": "9f8bb7c8fcd7ec82d6c80d0c71656c5e62dd67d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a4a1e78_6a0dde50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2025-01-22T07:21:55Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "a7ada6ff_ce45b21f",
       "range": {
         "startLine": 27,
         "startChar": 0,
