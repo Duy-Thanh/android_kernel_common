@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3576d0b0_a0f7c00e",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-22T00:35:43Z",
+      "side": 1,
+      "message": "This probably deserves the same comment from the autofdo patch. CL:3417782\n\nYou could load BRANCH from https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/tests/kernel_build_test/kernel_toolchain_test.bzl;l\u003d19;drc\u003dcc7d090878395200613fe86f029484964ba299ec, but I don\u0027t know if it is the correct thing to do.\n\nWhy do we need the branch string BTW?",
+      "range": {
+        "startLine": 1354,
+        "startChar": 13,
+        "endLine": 1354,
+        "endChar": 29
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b93924ec_20055900",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-22T00:35:43Z",
+      "side": 1,
+      "message": "drop",
+      "range": {
+        "startLine": 1355,
+        "startChar": 20,
+        "endLine": 1355,
+        "endChar": 28
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94427b3f_bee7b05d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-22T00:35:43Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1382,
+        "startChar": 20,
+        "endLine": 1382,
+        "endChar": 28
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ab3e620_7af5b3e0",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-22T00:35:43Z",
+      "side": 1,
+      "message": "why merge? I think you do want to use a different list for different architectures",
+      "range": {
+        "startLine": 1386,
+        "startChar": 0,
+        "endLine": 1386,
+        "endChar": 51
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
