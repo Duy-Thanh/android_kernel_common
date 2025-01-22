@@ -70,6 +70,24 @@
       "parentUuid": "ad17fe4f_9ef9ff79",
       "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b44c4761_f36473fd",
+        "filename": "android/abi_gki_x86_64.stg.allowed_breaks",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-01-22T18:04:43Z",
+      "side": 1,
+      "message": "Done. Thanks",
+      "parentUuid": "6e108d10_dc954d63",
+      "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
