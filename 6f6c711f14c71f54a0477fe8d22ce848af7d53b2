@@ -16,6 +16,24 @@
       "message": "Please fix the checkpatch issue:\n```\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: h00013079 \u003chuangdezhi@hihonor.com\u003e\u0027 !\u003d \u0027Signed-off-by: Dezhi Huang \u003chuangdezhi@hihonor.com\u003e\u0027\n```",
       "revId": "6f6c711f14c71f54a0477fe8d22ce848af7d53b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f5bf4ef_c06c9833",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3809205
+      },
+      "writtenOn": "2025-01-22T02:13:37Z",
+      "side": 1,
+      "message": "Please help check if this format meets the requirements.",
+      "parentUuid": "795e2612_b46d0659",
+      "revId": "6f6c711f14c71f54a0477fe8d22ce848af7d53b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
