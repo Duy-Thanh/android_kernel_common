@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c602f91_1d61465b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-22T16:11:08Z",
+      "side": 1,
+      "message": "Why don\u0027t we stop as soon as it has been handled?",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "153a968a99841ca788153f97d53e06637854a1b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
