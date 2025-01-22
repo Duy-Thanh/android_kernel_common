@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52fcc4b2_23812947",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-22T05:24:20Z",
+      "side": 1,
+      "message": "These numbers are great! But we need to make sure the updated kernel passes AVF tests.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 54
+      },
+      "revId": "c0546202428b991a7b4cab0b83cddccd4a4e59a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

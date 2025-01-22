@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a55c590d_5910e1fb",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-22T05:24:20Z",
+      "side": 0,
+      "message": "Don\u0027t we use sha1 for dm-verity? We use dm-verity also in Microdroid.",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 18
+      },
+      "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
