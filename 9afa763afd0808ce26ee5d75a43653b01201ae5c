@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e83459f_58ea5197",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-01-22T10:00:09Z",
+      "side": 1,
+      "message": "This is needed because at the end (unless stated otherwise from CL:3457479) there will be only one source of truth with info for combinations of (branch, architecture).",
+      "parentUuid": "3576d0b0_a0f7c00e",
+      "range": {
+        "startLine": 1354,
+        "startChar": 13,
+        "endLine": 1354,
+        "endChar": 29
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b93924ec_20055900",
         "filename": "BUILD.bazel",
         "patchSetId": 1
@@ -107,6 +131,30 @@
       "side": 1,
       "message": "but let me know if I understand incorrectly",
       "parentUuid": "9ab3e620_7af5b3e0",
+      "range": {
+        "startLine": 1386,
+        "startChar": 0,
+        "endLine": 1386,
+        "endChar": 51
+      },
+      "revId": "9afa763afd0808ce26ee5d75a43653b01201ae5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde3d8cf_a3300e18",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-01-22T10:00:09Z",
+      "side": 1,
+      "message": "This would be just a convenient way to keep all the info in a single source of truth, but if it easier I can keep both files, and let the test decide which file to load, that way I don\u0027t even need to worry about creating a custom rule to merge them.",
+      "parentUuid": "3f7f7ba0_fc2ad25a",
       "range": {
         "startLine": 1386,
         "startChar": 0,
