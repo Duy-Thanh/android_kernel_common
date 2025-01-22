@@ -60,6 +60,7 @@
 #include <trace/hooks/power.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/signal.h>
+#include <trace/hooks/compaction.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -270,5 +271,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vmalloc_node_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vfree_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_scan_control);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_continue_reclaim);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_proactive_compact_wmark_high);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_async_psi_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
