@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "525be9cc_db0bfa2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-01-22T03:04:13Z",
+      "side": 1,
+      "message": "The Author metadata is incorrect on this commit, not the `Signed-off-by:` line.",
+      "parentUuid": "df3b36ff_938b235d",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "c8272fa8472162b3367f3a128eb2cb689fe29e87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2b4d73a4_a2d10627",
