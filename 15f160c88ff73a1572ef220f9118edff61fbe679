@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749fae92_913e8180",
+        "filename": "android/abi_gki_x86_64.stg.allowed_breaks",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-01-22T16:52:00Z",
+      "side": 1,
+      "message": "This kind of break should not be unconditionally allowed. If we keep this in \"allowed_breaks\" file and eventually merge it to `android15-6.6`, we may miss real ABI break. Please remove `allowed_breaks` and use Lint+2 bypass instead, if you are intended to break ABI. Or rework this change to not break ABI, if you aim for this change to be merged to `android15-6.6` eventually.",
+      "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
