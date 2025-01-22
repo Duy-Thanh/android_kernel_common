@@ -16,6 +16,24 @@
       "message": "Description BUG ID will be update when after Issue tracker register,\n Now requested on issuetracker account state",
       "revId": "00f148d43e6578f293ef0509ca06b41ea8b624c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "402b8718_4974e031",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3838015
+      },
+      "writtenOn": "2025-01-22T09:12:44Z",
+      "side": 1,
+      "message": "\u003e Description BUG ID will be update when after Issue tracker register,\n\u003e  Now requested on issuetracker account state",
+      "parentUuid": "d6329b24_26168f7b",
+      "revId": "00f148d43e6578f293ef0509ca06b41ea8b624c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

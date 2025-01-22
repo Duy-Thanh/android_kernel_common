@@ -16,6 +16,24 @@
       "message": "Platform name needed and proper bug id is missing.",
       "revId": "7462d4f8e653f7ed43ca22644ea54082e373bcf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2504ea58_de576530",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3838015
+      },
+      "writtenOn": "2025-01-22T09:12:44Z",
+      "side": 1,
+      "message": "Issuetracker Account requested,\n Bug ID will be update when after register account.",
+      "parentUuid": "ce8cd2f3_4160ce2a",
+      "revId": "7462d4f8e653f7ed43ca22644ea54082e373bcf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
