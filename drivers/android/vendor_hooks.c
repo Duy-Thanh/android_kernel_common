@@ -588,4 +588,41 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_queue_work);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_wake_idle_worker);
+<<<<<<< HEAD   (98a36b ANDROID: vendor_hooks: Add hook for futex)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages_range);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_send_signal_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_copy_page_to_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_copy_page_from_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_destroy_inode);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_begin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_private_mod);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_fail);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_store_partner_src_caps);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_modify_src_caps);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_send_signal_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_copy_page_to_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_copy_page_from_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_destroy_inode);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_begin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_private_mod);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_fail);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_store_partner_src_caps);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_modify_src_caps);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_proactive_compact_wmark_high);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
+>>>>>>> CHANGE (5b45df ANDROID: mm: create vendor hooks for mm  proactive compact)
