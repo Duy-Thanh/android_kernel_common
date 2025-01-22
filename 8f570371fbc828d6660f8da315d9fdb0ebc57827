@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "226709bc_88e31792",
+        "filename": "mm/ashmem_compat.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-22T08:33:04Z",
+      "side": 1,
+      "message": "Although I don\u0027t think you need atomicity in this case since seals can\u0027t be removed, you can actually get atomicity like this:\n\n1. If `prot \u0026 PROT_WRITE`, then call `fcntl(F_GET_SEALS)` and return `EINVAL` if a write seal is set.\n2. If `!(prot \u0026 PROT_WRITE)`, then call `fcntl(F_ADD_SEALS, F_FUTURE_WRITE)`.\n\nYou don\u0027t need to call `fcntl(F_GET_SEALS)` in the latter case, since `fcntl` is happy to accept seals that are already applied.",
+      "parentUuid": "5302e963_c37e111e",
+      "revId": "8f570371fbc828d6660f8da315d9fdb0ebc57827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a45197d_4ebdadef",
         "filename": "mm/ashmem_compat.c",
         "patchSetId": 22
