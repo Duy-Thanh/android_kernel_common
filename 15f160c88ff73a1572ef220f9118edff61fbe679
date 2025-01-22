@@ -16,6 +16,24 @@
       "message": "This kind of break should not be unconditionally allowed. If we keep this in \"allowed_breaks\" file and eventually merge it to `android15-6.6`, we may miss real ABI break. Please remove `allowed_breaks` and use Lint+2 bypass instead, if you are intended to break ABI. Or rework this change to not break ABI, if you aim for this change to be merged to `android15-6.6` eventually.",
       "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c745812_016c24b6",
+        "filename": "android/abi_gki_x86_64.stg.allowed_breaks",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-01-22T17:39:35Z",
+      "side": 1,
+      "message": "This is for 6.6-desktop branch only and further upstream is planned for android-mainline. Should I remove the `allowed_breaks` file anyway? I am not sure what do you mean by \"this kind of break\" and how this change can be applied without abi break? SUre, I can use Lint+2, just thought it\u0027s not the proper way so I am confused.",
+      "parentUuid": "749fae92_913e8180",
+      "revId": "15f160c88ff73a1572ef220f9118edff61fbe679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
