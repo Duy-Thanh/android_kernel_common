@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa447bdc_95d90319",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-23T21:25:59Z",
+      "side": 1,
+      "message": "Please fix the checkpatch issue:\n```\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: jiangxinpei \u003chuangdezhi@hihonor.com\u003e\u0027 !\u003d \u0027Signed-off-by: Dezhi Huang \u003chuangdezhi@hihonor.com\u003e\u0027\n```",
+      "revId": "ccce19680bf35bb88b6d6800c66b64b95df624fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
