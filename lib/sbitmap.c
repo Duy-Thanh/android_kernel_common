@@ -57,15 +57,61 @@ static inline void update_alloc_hint_after_get(struct sbitmap *sb,
 	}
 }
 
+/**
+ * @this lock: serializes simultaneous updates of ->word and ->cleared.
+ * sbitmap_spinlock is for checking on on ->cleared and updating on both
+ * ->cleared and ->word need to be done atomically.
+ *  Prevent the following situations from causing block:
+ * Configuration for sbq:
+ * depth=64, wake_batch=6, shift=6, map_nr=1
+ *
+ * 1. There are 64 requests in progress:
+ * map->word = 0xFFFFFFFFFFFFFFFF
+ * 2. After all the 64 requests complete, and no more requests come:
+ * map->word = 0xFFFFFFFFFFFFFFFF, map->cleared = 0xFFFFFFFFFFFFFFFF
+ * 3. Now two tasks try to allocate requests:
+ * T1:                                       T2:
+ * __blk_mq_get_tag                          .
+ * __sbitmap_queue_get                       .
+ * sbitmap_get                               .
+ * sbitmap_find_bit                          .
+ * sbitmap_find_bit_in_word                  .
+ * sbitmap_get_word  -> nr=-1              __blk_mq_get_tag
+ * sbitmap_deferred_clear                    __sbitmap_queue_get
+ * //map->cleared=0xFFFFFFFFFFFFFFFF         sbitmap_find_bit
+ *   if (!READ_ONCE(map->cleared))           sbitmap_find_bit_in_word
+ *     return false;                         __sbitmap_get_word -> nr=-1
+ * mask = xchg(&map->cleared, 0)             sbitmap_deferred_clear
+ * atomic_long_andnot()                      // map->cleared=0
+ *                                             if (!(map->cleared))
+ *                                               return false;
+ *
+ *                                    // map->cleared is cleared by T1
+ *                                    // T2 fail to acquire the tag
+ *
+ * 4. T2 is the sole tag waiter. When T1 puts the tag, T2 cannot be woken
+ * up due to the wake_batch being set at 6. If no more requests come, T1
+ * will wait here indefinitely.
+ */
+static spinlock_t *sbitmap_spinlock(struct sbitmap_word *base,
+		unsigned int map_nr, unsigned int index)
+{
+	spinlock_t *base_lock = (spinlock_t *)(&base[map_nr]);
+
+	return &base_lock[index];
+}
+
 /*
  * See if we have deferred clears that we can batch move
  */
 static inline bool sbitmap_deferred_clear(struct sbitmap_word *map,
-		unsigned int depth, unsigned int alloc_hint, bool wrap)
+		unsigned int depth, unsigned int alloc_hint, bool wrap,
+		unsigned int map_nr, unsigned int index)
 {
 	unsigned long mask, word_mask;
+	spinlock_t *swap_lock = sbitmap_spinlock(map, map_nr, index);
 
-	guard(spinlock_irqsave)(&map->swap_lock);
+	guard(spinlock_irqsave)(swap_lock);
 
 	if (!map->cleared) {
 		if (depth == 0)
@@ -129,14 +175,34 @@ int sbitmap_init_node(struct sbitmap *sb, unsigned int depth, int shift,
 		sb->alloc_hint = NULL;
 	}
 
-	sb->map = kvzalloc_node(sb->map_nr * sizeof(*sb->map), flags, node);
+	/*Due to the original patch directly adding spinlock_t swap_1ock to
+	 * struct sbitmap_word in sbitmap.h, KMI was damaged. In order to achieve
+	 * functionality without damaging KMI, we can only apply for a block of
+	 * memory with a size of map_nr * (sizeof (* sb ->map)+sizeof (spinlock_t))
+	 * to ensure that each struct sbitmap-word receives protection from spinlock.
+	 * The actual memory distribution used is as follows:
+	 * ----------------------
+	 * struct sbitmap_word[0]
+	 * ......................
+	 * struct sbitmap_word[n]
+	 * -----------------------
+	 * spinlock_t swap_lock[0]
+	 * .......................
+	 * spinlock_t swap_lock[n]
+	 * ----------------------
+	 *  sbitmap_word[0] corresponds to swap_lock[0], and sbitmap_word[n]
+	 *  corresponds to swap_lock[n], and so on
+	 */
+	sb->map = kvzalloc_node(sb->map_nr * (sizeof(*sb->map) + sizeof(spinlock_t)), flags, node);
 	if (!sb->map) {
 		free_percpu(sb->alloc_hint);
 		return -ENOMEM;
 	}
 
-	for (i = 0; i < sb->map_nr; i++)
-		spin_lock_init(&sb->map[i].swap_lock);
+	for (i = 0; i < sb->map_nr; i++) {
+		spinlock_t *swap_lock = sbitmap_spinlock(sb->map, sb->map_nr, i);
+		spin_lock_init(swap_lock);
+	}
 
 	return 0;
 }
@@ -148,7 +214,7 @@ void sbitmap_resize(struct sbitmap *sb, unsigned int depth)
 	unsigned int i;
 
 	for (i = 0; i < sb->map_nr; i++)
-		sbitmap_deferred_clear(&sb->map[i], 0, 0, 0);
+		sbitmap_deferred_clear(&sb->map[i], 0, 0, 0, sb->map_nr, i);
 
 	sb->depth = depth;
 	sb->map_nr = DIV_ROUND_UP(sb->depth, bits_per_word);
@@ -192,7 +258,9 @@ static int __sbitmap_get_word(unsigned long *word, unsigned long depth,
 static int sbitmap_find_bit_in_word(struct sbitmap_word *map,
 				    unsigned int depth,
 				    unsigned int alloc_hint,
-				    bool wrap)
+				    bool wrap,
+				    unsigned int map_nr,
+				    unsigned int index)
 {
 	int nr;
 
@@ -201,7 +269,7 @@ static int sbitmap_find_bit_in_word(struct sbitmap_word *map,
 					alloc_hint, wrap);
 		if (nr != -1)
 			break;
-		if (!sbitmap_deferred_clear(map, depth, alloc_hint, wrap))
+		if (!sbitmap_deferred_clear(map, depth, alloc_hint, wrap, map_nr, index))
 			break;
 	} while (1);
 
@@ -222,7 +290,8 @@ static int sbitmap_find_bit(struct sbitmap *sb,
 					      min_t(unsigned int,
 						    __map_depth(sb, index),
 						    depth),
-					      alloc_hint, wrap);
+					      alloc_hint, wrap,
+					      sb->map_nr, index);
 
 		if (nr != -1) {
 			nr += index << sb->shift;
@@ -523,7 +592,7 @@ unsigned long __sbitmap_queue_get_batch(struct sbitmap_queue *sbq, int nr_tags,
 		unsigned int map_depth = __map_depth(sb, index);
 		unsigned long val;
 
-		sbitmap_deferred_clear(map, 0, 0, 0);
+		sbitmap_deferred_clear(map, 0, 0, 0, sb->map_nr, index);
 		val = READ_ONCE(map->word);
 		if (val == (1UL << (map_depth - 1)) - 1)
 			goto next;
