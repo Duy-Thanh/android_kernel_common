@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3d611f2_698ae961",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-23T11:08:28Z",
+      "side": 1,
+      "message": "NIT: Update this comment",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9eb74bad_766bb3f0",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 2
@@ -32,6 +55,29 @@
       "side": 1,
       "message": "yes",
       "parentUuid": "9eb74bad_766bb3f0",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24305cf6_10e9993a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-23T11:08:28Z",
+      "side": 1,
+      "message": "Bug: Update this as the host handle is no longer `0`",
+      "range": {
+        "startLine": 381,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 16
+      },
       "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
