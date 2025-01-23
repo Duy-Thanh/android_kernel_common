@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91cea951_6e7dfd90",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-01-23T23:27:33Z",
+      "side": 1,
+      "message": "Hi Martin, \n\nIs there any other reasons why we can\u0027t emit `trace_trigger_vendor_lmk_kill` directly?\n\nCOuld we move these validations to the bpfprog? and that save us vendor_lmk.o",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "cbaf3ce2618fd0cee222e2c0fa34a112aba2bd91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
