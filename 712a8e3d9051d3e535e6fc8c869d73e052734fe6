@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061d1ac3_04d0a53a",
+        "filename": "mm/compaction.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1523,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-23T19:25:41Z",
+      "side": 1,
+      "message": "You should not be reusing a hook for bypassing migration in the page isolation patch. This is a sign that your original hook is probably in the wrong place.\n\nPlease rethink what you actually are trying to bypass and place the hook in the correct location. If you indeed neet two hooks then rename this hook appropriately and introduce it in a separate patch with explanation why it\u0027s needed.",
+      "range": {
+        "startLine": 1523,
+        "startChar": 1,
+        "endLine": 1523,
+        "endChar": 41
+      },
+      "revId": "712a8e3d9051d3e535e6fc8c869d73e052734fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
