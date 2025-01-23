@@ -218,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ddebde2b_e5cb1440",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-23T20:59:22Z",
+      "side": 1,
+      "message": "I was talking about upstreaming this patch which adds generic pieces, not really specific to ashmem. Or did I misunderstand the goal of this patch?\n\nI also thought that in the long term we wanted to upstream rust version of the ashmem driver or the driver implementing ashmem compatibility layer, no?",
+      "parentUuid": "b4a6a6bf_c160258a",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
