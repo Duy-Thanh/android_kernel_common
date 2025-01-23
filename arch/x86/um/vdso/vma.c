@@ -6,6 +6,7 @@
 #include <linux/slab.h>
 #include <linux/sched.h>
 #include <linux/mm.h>
+#include <linux/userprocess.h>
 #include <asm/page.h>
 #include <asm/elf.h>
 #include <linux/init.h>
@@ -54,6 +55,7 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 {
 	int err;
 	struct mm_struct *mm = current->mm;
+	unsigned long vm_flags;
 
 	if (!vdso_enabled)
 		return 0;
@@ -61,9 +63,10 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 	if (mmap_write_lock_killable(mm))
 		return -EINTR;
 
+	vm_flags = VM_READ|VM_EXEC|VM_MAYREAD|VM_MAYWRITE|VM_MAYEXEC;
+	vm_flags |= mseal_system_mappings();
 	err = install_special_mapping(mm, um_vdso_addr, PAGE_SIZE,
-		VM_READ|VM_EXEC|
-		VM_MAYREAD|VM_MAYWRITE|VM_MAYEXEC,
+		vm_flags,
 		vdsop);
 
 	mmap_write_unlock(mm);
