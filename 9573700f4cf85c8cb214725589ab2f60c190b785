@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19870b90_0fe51da8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-23T17:31:06Z",
+      "side": 1,
+      "message": "...and add some description for why these symbols are needed. What feature does this enable? Is it for a vendor hook handler? Which ones?",
+      "parentUuid": "9a65db14_7460df80",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "9573700f4cf85c8cb214725589ab2f60c190b785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b88dfb0_bc46d9cd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-22T09:54:16Z",
       "side": 1,
       "message": "please use your name, not your email alias.",
+      "range": {
+        "startLine": 15,
+        "startChar": 15,
+        "endLine": 15,
+        "endChar": 26
+      },
+      "revId": "9573700f4cf85c8cb214725589ab2f60c190b785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbd981e5_2b62f463",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-23T17:31:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b88dfb0_bc46d9cd",
       "range": {
         "startLine": 15,
         "startChar": 15,
