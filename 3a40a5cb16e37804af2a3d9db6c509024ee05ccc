@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "840fc834_76408cba",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-23T11:37:26Z",
+      "side": 0,
+      "message": "BUG: fix this",
+      "revId": "3a40a5cb16e37804af2a3d9db6c509024ee05ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -84,6 +84,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4d1df9a_61d756a8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-23T11:37:26Z",
+      "side": 1,
+      "message": "BUG: fix this",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "133feb89_fc7e37ee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-23T11:37:26Z",
+      "side": 1,
+      "message": "BUG: fix this",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99396afc_bd105400",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-23T11:37:26Z",
+      "side": 1,
+      "message": "BUG: fix this",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e38916_d7cbd5c2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-23T11:37:26Z",
+      "side": 1,
+      "message": "BUG: Fix this",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd2f976_34104a28",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-23T11:37:26Z",
+      "side": 1,
+      "message": "BUG: fix this",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "488cfc93_c7983c32",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 2
