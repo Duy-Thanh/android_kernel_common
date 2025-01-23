@@ -70,6 +70,30 @@
       },
       "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6449f7f0_8a4274a9",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-01-23T01:01:32Z",
+      "side": 0,
+      "message": "SHA-256 support (CONFIG_CRYPTO_SHA256) was already enabled, due to being selected by IPsec support (CONFIG_XFRM_ESP).  SHA-256 *acceleration* using ARMv8 CE (CONFIG_CRYPTO_SHA2_ARM64_CE) was not enabled, so SHA-256 performance was about 10x slower than necessary.  Please check the previous CL, which I just added you to Cc on.\n \nBy the way, I doubt that microdroid needs IPsec support.  Probably it doesn\u0027t even need networking support?  Disabling all (or at least most of) the networking support would provide a large savings too.\n\nI could have used menuconfig, but I just edited it manually and then used savedefconfig and verified that nothing else needed to be changed.  Please note that the file already was not clean when doing through a savedefconfig cycle, though.  It would be a good idea to enforce that, like is already done for gki_defconfig.",
+      "parentUuid": "105ba9c2_0df87247",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 18
+      },
+      "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
