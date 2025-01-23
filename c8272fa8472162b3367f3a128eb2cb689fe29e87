@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe5ad05_21f5ddf6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-23T18:25:50Z",
+      "side": 1,
+      "message": "`git commit --amend --author\u003d\"New Author Name \u003cnew.author@example.com\u003e\"` and then push the patch again.",
+      "parentUuid": "02c1df6e_efc0df2b",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "c8272fa8472162b3367f3a128eb2cb689fe29e87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2b4d73a4_a2d10627",
