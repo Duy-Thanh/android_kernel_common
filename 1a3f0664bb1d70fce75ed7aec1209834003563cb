@@ -16,6 +16,23 @@
       "message": "Rebased due to conflict in .stg file. PTAL",
       "revId": "1a3f0664bb1d70fce75ed7aec1209834003563cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c20aa650_b0f96741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-01-23T07:16:26Z",
+      "side": 1,
+      "message": "And bypassing the linter check (it\u0027s just a parent vs current change, which is OK)",
+      "revId": "1a3f0664bb1d70fce75ed7aec1209834003563cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
