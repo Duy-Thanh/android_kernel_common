@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af3c9e65_300be1d4",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3223,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-23T16:49:21Z",
+      "side": 1,
+      "message": "I think it would be more logical to add a vendor hook inside should_proactive_compact_node() that could be used to customize wmark_high. Something like this:\n\n```\nstatic bool should_proactive_compact_node(pg_data_t *pgdat)\n{\n\tint wmark_high;\n\n\tif (!sysctl_compaction_proactiveness || kswapd_is_running(pgdat))\n\t\treturn false;\n\n\twmark_high \u003d fragmentation_score_wmark(false);\n\ttrace_android_vh_proactive_compact_wmark_high(\u0026wmark_high);\n\treturn fragmentation_score_node(pgdat) \u003e wmark_high;\n}\n```\n\nThis way you are using existing kernel mechanism and all you need to do is to define the level of fragmentation you consider too low to compact.",
+      "range": {
+        "startLine": 3223,
+        "startChar": 3,
+        "endLine": 3223,
+        "endChar": 44
+      },
+      "revId": "5ab88665cbec9ca283acdeea263bb66dcce65de5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
