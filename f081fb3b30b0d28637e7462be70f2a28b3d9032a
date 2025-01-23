@@ -94,6 +94,30 @@
       },
       "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92f1eb5f_fa946a9b",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-23T01:30:20Z",
+      "side": 0,
+      "message": "Thank you! And no, we don\u0027t need IPsec support.\n\n\u003e Probably it doesn\u0027t even need networking support? Disabling all (or at least most of) the networking support would provide a large savings too.\n\nCorrect, it doesn\u0027t need networking (TCP/IP). I actually tried to remove it (b/231106934 and some others), but couldn\u0027t. I don\u0027t remember correctly why.\n\n\u003e It would be a good idea to enforce that, like is already done for gki_defconfig.\n\nI didn\u0027t know about savedefconfig. Yeah, definitely.",
+      "parentUuid": "6449f7f0_8a4274a9",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 18
+      },
+      "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
