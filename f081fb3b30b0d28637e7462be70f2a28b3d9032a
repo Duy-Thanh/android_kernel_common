@@ -46,6 +46,30 @@
       },
       "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "105ba9c2_0df87247",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-23T00:48:32Z",
+      "side": 0,
+      "message": "Sorry. You were right. We have been using sha256 also in Microdroid. Not sure how it has worked without the parent patch. Perhaps it was automatically added by the dependencies?\n\nDid you use menuconfig to edit the config?",
+      "parentUuid": "9df55ced_d4ffcc9d",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 18
+      },
+      "revId": "f081fb3b30b0d28637e7462be70f2a28b3d9032a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
