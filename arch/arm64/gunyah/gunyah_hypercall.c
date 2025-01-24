@@ -34,12 +34,39 @@ EXPORT_SYMBOL_GPL(arch_is_gh_guest);
 						   ARM_SMCCC_OWNER_VENDOR_HYP, \
 						   fn)
 
+<<<<<<< HEAD   (c750dc582629811994978507b7055b679be149f0 ANDROID: gunyah: Fix use-after-free in gunyah_vm_clean_resou)
 #define GH_HYPERCALL_HYP_IDENTIFY		GH_HYPERCALL(0x8000)
 #define GH_HYPERCALL_BELL_SEND			GH_HYPERCALL(0x8012)
 #define GH_HYPERCALL_BELL_SET_MASK		GH_HYPERCALL(0x8015)
 #define GH_HYPERCALL_MSGQ_SEND			GH_HYPERCALL(0x801B)
 #define GH_HYPERCALL_MSGQ_RECV			GH_HYPERCALL(0x801C)
 #define GH_HYPERCALL_VCPU_RUN			GH_HYPERCALL(0x8065)
+||||||| BASE   (aecad329969210d7b7c2c8205a7770a45c941528 ANDROID: virt: gunyah: Separate the gunyah_hypercall config )
+/* clang-format off */
+#define GUNYAH_HYPERCALL_HYP_IDENTIFY		GUNYAH_HYPERCALL(0x8000)
+#define GUNYAH_HYPERCALL_BELL_SEND		GUNYAH_HYPERCALL(0x8012)
+#define GUNYAH_HYPERCALL_BELL_SET_MASK		GUNYAH_HYPERCALL(0x8015)
+#define GUNYAH_HYPERCALL_MSGQ_SEND		GUNYAH_HYPERCALL(0x801B)
+#define GUNYAH_HYPERCALL_MSGQ_RECV		GUNYAH_HYPERCALL(0x801C)
+#define GUNYAH_HYPERCALL_ADDRSPACE_MAP		GUNYAH_HYPERCALL(0x802B)
+#define GUNYAH_HYPERCALL_ADDRSPACE_UNMAP	GUNYAH_HYPERCALL(0x802C)
+#define GUNYAH_HYPERCALL_MEMEXTENT_DONATE	GUNYAH_HYPERCALL(0x8061)
+#define GUNYAH_HYPERCALL_VCPU_RUN		GUNYAH_HYPERCALL(0x8065)
+/* clang-format on */
+=======
+/* clang-format off */
+#define GUNYAH_HYPERCALL_HYP_IDENTIFY		GUNYAH_HYPERCALL(0x8000)
+#define GUNYAH_HYPERCALL_BELL_SEND		GUNYAH_HYPERCALL(0x8012)
+#define GUNYAH_HYPERCALL_BELL_SET_MASK		GUNYAH_HYPERCALL(0x8015)
+#define GUNYAH_HYPERCALL_MSGQ_SEND		GUNYAH_HYPERCALL(0x801B)
+#define GUNYAH_HYPERCALL_MSGQ_RECV		GUNYAH_HYPERCALL(0x801C)
+#define GUNYAH_HYPERCALL_ADDRSPACE_MAP		GUNYAH_HYPERCALL(0x802B)
+#define GUNYAH_HYPERCALL_ADDRSPACE_UNMAP	GUNYAH_HYPERCALL(0x802C)
+#define GUNYAH_HYPERCALL_MEMEXTENT_DONATE	GUNYAH_HYPERCALL(0x8061)
+#define GUNYAH_HYPERCALL_VCPU_RUN		GUNYAH_HYPERCALL(0x8065)
+#define GUNYAH_HYPERCALL_ADDRSPACE_FIND_INFO_AREA	GUNYAH_HYPERCALL(0x806a)
+/* clang-format on */
+>>>>>>> CHANGE (ae558bb0944a6219098a07f58de365668aff2efd ANDROID: virt: gunyah: Add addrspace_find_info_area hypercal)
 
 /**
  * gh_hypercall_hyp_identify() - Returns build information and feature flags
@@ -137,6 +164,29 @@ enum gh_error gh_hypercall_vcpu_run(u64 capid, u64 *resume_data,
 	return res.a0;
 }
 EXPORT_SYMBOL_GPL(gh_hypercall_vcpu_run);
+
+/**
+ * gunyah_hypercall_addrspace_find_info_area() - Find the IPA and size of the info area
+ * @ipa: Filled with the IPA of the info area
+ * @size: Filled with the size of the info area
+ *
+ * See also:
+ * https://github.com/quic/gunyah-hypervisor/blob/develop/docs/api/gunyah_api.md#address-space-management
+ */
+enum gunyah_error
+gunyah_hypercall_addrspace_find_info_area(unsigned long *ipa, unsigned long *size)
+{
+	struct arm_smccc_res res;
+
+	arm_smccc_1_1_hvc(GUNYAH_HYPERCALL_ADDRSPACE_FIND_INFO_AREA, 0, &res);
+	if (res.a0 == GUNYAH_ERROR_OK) {
+		*ipa = res.a1;
+		*size = res.a2;
+	}
+
+	return res.a0;
+}
+EXPORT_SYMBOL_GPL(gunyah_hypercall_addrspace_find_info_area);
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Gunyah Hypervisor Hypercalls");
