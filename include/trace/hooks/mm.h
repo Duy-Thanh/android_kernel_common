@@ -73,6 +73,9 @@ DECLARE_HOOK(android_vh_reserve_highatomic_bypass,
 DECLARE_HOOK(android_vh_pagetypeinfo_show,
 	TP_PROTO(struct seq_file *m),
 	TP_ARGS(m));
+DECLARE_HOOK(android_vh_watermark_fast_ok,
+	TP_PROTO(unsigned int order, gfp_t gfp_mask, bool *is_watermark_ok),
+	TP_ARGS(order, gfp_mask, is_watermark_ok));
 
 struct page_vma_mapped_walk;
 DECLARE_HOOK(android_vh_slab_alloc_node,
