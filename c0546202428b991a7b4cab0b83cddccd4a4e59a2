@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6da5f894_ad49da1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-24T13:55:12Z",
+      "side": 1,
+      "message": "Tested the android15-6.6 cherry-pick of this patch. MicrodroidTests passed",
+      "parentUuid": "8618a38b_38f4a5f7",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 54
+      },
+      "revId": "c0546202428b991a7b4cab0b83cddccd4a4e59a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b50736a9_51bfb964",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -61,6 +85,23 @@
       "writtenOn": "2025-01-23T01:30:30Z",
       "side": 1,
       "message": "I can\u0027t +2 here.",
+      "revId": "c0546202428b991a7b4cab0b83cddccd4a4e59a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6978cd1_6ad6d784",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-24T13:55:12Z",
+      "side": 1,
+      "message": "Please also cherry-pick into android16-6.12 branch",
       "revId": "c0546202428b991a7b4cab0b83cddccd4a4e59a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
