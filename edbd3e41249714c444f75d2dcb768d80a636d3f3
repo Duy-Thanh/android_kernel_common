@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06696810_db443c9b",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-24T15:36:27Z",
+      "side": 1,
+      "message": "needs a copyright line.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "edbd3e41249714c444f75d2dcb768d80a636d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752fc6ae_c1de6a73",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-24T15:36:27Z",
+      "side": 1,
+      "message": "for android-global-symbols prefix it with a \u0027android\u0027 name",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "edbd3e41249714c444f75d2dcb768d80a636d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
