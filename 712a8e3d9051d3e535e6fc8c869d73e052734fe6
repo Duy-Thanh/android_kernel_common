@@ -22,6 +22,30 @@
       },
       "revId": "712a8e3d9051d3e535e6fc8c869d73e052734fe6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3932e80e_7da4264e",
+        "filename": "mm/compaction.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1523,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-01-24T01:44:11Z",
+      "side": 1,
+      "message": "These hooks were originally merged at android-15-6.6 via\nhttps://android-review.googlesource.com/c/kernel/common/+/3253173\nhttps://android-review.googlesource.com/c/kernel/common/+/3271834\nhttps://android-review.googlesource.com/c/kernel/common/+/3350265.\n\nAs described, the purpose of thess hooks is to prevent certain pageblocks to be selected as migration targets.\nSo I located them before calling isolate_freepages_block().\nI think they are located at correct places.",
+      "parentUuid": "061d1ac3_04d0a53a",
+      "range": {
+        "startLine": 1523,
+        "startChar": 1,
+        "endLine": 1523,
+        "endChar": 41
+      },
+      "revId": "712a8e3d9051d3e535e6fc8c869d73e052734fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
