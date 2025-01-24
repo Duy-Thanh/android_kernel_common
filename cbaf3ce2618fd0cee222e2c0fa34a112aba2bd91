@@ -46,6 +46,30 @@
       },
       "revId": "cbaf3ce2618fd0cee222e2c0fa34a112aba2bd91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa27816_f5d267a7",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-01-24T19:25:03Z",
+      "side": 1,
+      "message": "Ahh I missed that we would need the create trace point and include. Ok lets keep is as it then. Thanks Martin",
+      "parentUuid": "91cea951_6e7dfd90",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "cbaf3ce2618fd0cee222e2c0fa34a112aba2bd91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
