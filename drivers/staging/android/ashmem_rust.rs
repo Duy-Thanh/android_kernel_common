@@ -10,11 +10,7 @@
 //! It is, in theory, a good memory allocator for low-memory devices, because it can discard shared
 //! memory units when under memory pressure.
 
-use core::{
-    ffi::c_int,
-    pin::Pin,
-    sync::atomic::{AtomicBool, AtomicUsize, Ordering},
-};
+use core::{ffi::c_int, pin::Pin};
 use kernel::{
     bindings::{self, ASHMEM_GET_PIN_STATUS, ASHMEM_PIN, ASHMEM_UNPIN},
     c_str,
@@ -23,10 +19,10 @@ use kernel::{
     ioctl::_IOC_SIZE,
     miscdevice::{loff_t, IovIter, Kiocb, MiscDevice, MiscDeviceOptions, MiscDeviceRegistration},
     mm::virt::{flags as vma_flags, VmAreaNew},
-    page::{page_align, PAGE_MASK, PAGE_SIZE},
+    page::page_align,
     prelude::*,
     seq_file::{seq_print, SeqFile},
-    sync::{new_mutex, Mutex, UniqueArc},
+    sync::{new_mutex, Mutex},
     task::Task,
     uaccess::{UserSlice, UserSliceReader, UserSliceWriter},
 };
@@ -41,15 +37,8 @@ const PROT_EXEC: usize = bindings::PROT_EXEC as usize;
 const PROT_WRITE: usize = bindings::PROT_WRITE as usize;
 const PROT_MASK: usize = PROT_EXEC | PROT_READ | PROT_WRITE;
 
-mod ashmem_shrinker;
-
-mod ashmem_range;
-use ashmem_range::{Area, AshmemGuard, NewRange, ASHMEM_MUTEX, LRU_COUNT};
-
 mod shmem;
 use shmem::ShmemFile;
-
-mod ashmem_toggle;
 
 /// Does PROT_READ imply PROT_EXEC for this task?
 fn read_implies_exec(task: &Task) -> bool {
@@ -64,15 +53,6 @@ fn has_cap_sys_admin() -> bool {
     unsafe { bindings::capable(CAP_SYS_ADMIN as c_int) }
 }
 
-static NUM_PIN_IOCTLS_WAITING: AtomicUsize = AtomicUsize::new(0);
-static UNPIN_IMMEDIATELY: AtomicBool = AtomicBool::new(false);
-static BLOCK_UNSET_PROT_READ: AtomicBool = AtomicBool::new(false);
-static BLOCK_UNSET_PROT_EXEC: AtomicBool = AtomicBool::new(false);
-
-fn shrinker_should_stop() -> bool {
-    NUM_PIN_IOCTLS_WAITING.load(Ordering::Relaxed) > 0
-}
-
 module! {
     type: AshmemModule,
     name: "ashmem_rust",
@@ -83,24 +63,16 @@ module! {
 
 struct AshmemModule {
     _misc: Pin<Box<MiscDeviceRegistration<Ashmem>>>,
-    _kobj: ashmem_toggle::AshmemObj,
 }
 
 impl kernel::Module for AshmemModule {
     fn init(_module: &'static kernel::ThisModule) -> Result<Self> {
         // SAFETY: Called once since this is the module initializer.
         unsafe { shmem::SHMEM_FOPS_ONCE.init() };
-        // SAFETY: Called once since this is the module initializer.
-        unsafe { ASHMEM_MUTEX.init() };
-        // SAFETY: Called once since this is the module initializer.
-        unsafe { ashmem_range::ASHMEM_SHRINKER.init() };
 
         pr_info!("Using Rust implementation.");
 
-        ashmem_range::unpin_set(b"shrinker")?;
-
         Ok(Self {
-            _kobj: ashmem_toggle::AshmemObj::new()?,
             _misc: Box::pin_init(
                 MiscDeviceRegistration::register(MiscDeviceOptions {
                     name: c_str!("ashmem"),
@@ -108,52 +80,6 @@ impl kernel::Module for AshmemModule {
                 GFP_KERNEL,
             )?,
         })
-    }
-}
-
-/// Sets whether we can unset PROT_READ.
-pub(crate) fn prot_read_set(value: &[u8]) -> Result<()> {
-    match value.trim_ascii() {
-        b"ashmem" => {
-            BLOCK_UNSET_PROT_READ.store(false, Ordering::Relaxed);
-            Ok(())
-        }
-        b"memfd" => {
-            BLOCK_UNSET_PROT_READ.store(true, Ordering::Relaxed);
-            Ok(())
-        }
-        _ => Err(EINVAL),
-    }
-}
-
-pub(crate) fn prot_read_get() -> &'static CStr {
-    if BLOCK_UNSET_PROT_READ.load(Ordering::Relaxed) {
-        c_str!("memfd\n")
-    } else {
-        c_str!("ashmem\n")
-    }
-}
-
-/// Sets whether we can unset PROT_EXEC.
-pub(crate) fn prot_exec_set(value: &[u8]) -> Result<()> {
-    match value.trim_ascii() {
-        b"ashmem" => {
-            BLOCK_UNSET_PROT_EXEC.store(false, Ordering::Relaxed);
-            Ok(())
-        }
-        b"memfd" => {
-            BLOCK_UNSET_PROT_EXEC.store(true, Ordering::Relaxed);
-            Ok(())
-        }
-        _ => Err(EINVAL),
-    }
-}
-
-pub(crate) fn prot_exec_get() -> &'static CStr {
-    if BLOCK_UNSET_PROT_EXEC.load(Ordering::Relaxed) {
-        c_str!("memfd\n")
-    } else {
-        c_str!("ashmem\n")
     }
 }
 
@@ -170,7 +96,6 @@ struct AshmemInner {
     /// If set, then this holds the ashmem name without the dev/ashmem/ prefix. No zero terminator.
     name: Option<Vec<u8>>,
     file: Option<ShmemFile>,
-    area: Area,
 }
 
 #[vtable]
@@ -186,7 +111,6 @@ impl MiscDevice for Ashmem {
                         prot_mask: PROT_MASK,
                         name: None,
                         file: None,
-                        area: Area::new(),
                     }),
                 }
             },
@@ -293,9 +217,9 @@ impl MiscDevice for Ashmem {
             bindings::ASHMEM_SET_PROT_MASK => me.set_prot_mask(arg),
             bindings::ASHMEM_GET_PROT_MASK => me.get_prot_mask(),
             bindings::ASHMEM_GET_FILE_ID => me.get_file_id(UserSlice::new(arg, size).writer()),
-            ASHMEM_PIN | ASHMEM_UNPIN | ASHMEM_GET_PIN_STATUS => {
-                me.pin_unpin(cmd, UserSlice::new(arg, size).reader())
-            }
+            ASHMEM_PIN => Ok(bindings::ASHMEM_NOT_PURGED as isize),
+            ASHMEM_UNPIN => Ok(0),
+            ASHMEM_GET_PIN_STATUS => Ok(bindings::ASHMEM_IS_PINNED as isize),
             bindings::ASHMEM_PURGE_ALL_CACHES => me.purge_all_caches(),
             _ => Err(EINVAL),
         }
@@ -388,15 +312,8 @@ impl Ashmem {
             prot |= PROT_EXEC;
         }
 
-        if BLOCK_UNSET_PROT_READ.load(Ordering::Relaxed) {
-            // Add back PROT_READ if asma.prot_mask has it.
-            prot |= asma.prot_mask & PROT_READ;
-        }
-
-        if BLOCK_UNSET_PROT_EXEC.load(Ordering::Relaxed) {
-            // Add back PROT_EXEC if asma.prot_mask has it.
-            prot |= asma.prot_mask & PROT_EXEC;
-        }
+        prot |= asma.prot_mask & PROT_READ;
+        prot |= asma.prot_mask & PROT_EXEC;
 
         // The user can only remove, not add, protection bits.
         if (asma.prot_mask & prot) != prot {
@@ -423,95 +340,11 @@ impl Ashmem {
         Ok(0)
     }
 
-    fn pin_unpin(&self, cmd: u32, mut reader: UserSliceReader) -> Result<isize> {
-        let (offset, cmd_len) = {
-            #[allow(dead_code)] // spurious warning because it is never explicitly constructed
-            #[repr(transparent)]
-            struct AshmemPin(bindings::ashmem_pin);
-            // SAFETY: All bit-patterns are valid for `ashmem_pin`.
-            unsafe impl kernel::types::FromBytes for AshmemPin {}
-            let AshmemPin(pin) = reader.read()?;
-            (pin.offset as usize, pin.len as usize)
-        };
-
-        // If `pin`/`unpin` needs a new range, they will take it from this `Option`. Otherwise,
-        // they will leave it here, and it gets dropped after the mutexes are released.
-        let new_range = if cmd == ASHMEM_GET_PIN_STATUS {
-            None
-        } else {
-            Some(UniqueArc::new_uninit(GFP_KERNEL)?)
-        };
-
-        NUM_PIN_IOCTLS_WAITING.fetch_add(1, Ordering::Relaxed);
-        let mut guard = AshmemGuard(ASHMEM_MUTEX.lock());
-        NUM_PIN_IOCTLS_WAITING.fetch_sub(1, Ordering::Relaxed);
-
-        // C ashmem waits for in-flight shrinkers here using a separate mechanism, but we don't
-        // release the lock when calling `punch_hole` in the shrinker, so we don't need to do that.
-
-        let asma = &mut *self.inner.lock();
-        let mut new_range = match asma.file.as_ref() {
-            Some(file) => new_range.map(|alloc| NewRange { file, alloc }),
-            None => return Err(EINVAL),
-        };
-
-        // Per custom, you can pass zero for len to mean "everything onward".
-        let len = if cmd_len == 0 {
-            page_align(asma.size) - offset
-        } else {
-            cmd_len
-        };
-
-        if (offset | len) & !PAGE_MASK != 0 {
-            return Err(EINVAL);
-        }
-        let len_plus_offset = offset.checked_add(len).ok_or(EINVAL)?;
-        if page_align(asma.size) < len_plus_offset {
-            return Err(EINVAL);
-        }
-
-        let pgstart = offset / PAGE_SIZE;
-        let pgend = pgstart + (len / PAGE_SIZE) - 1;
-
-        match cmd {
-            ASHMEM_PIN => {
-                if asma.area.pin(pgstart, pgend, &mut new_range, &mut guard) {
-                    Ok(bindings::ASHMEM_WAS_PURGED as isize)
-                } else {
-                    Ok(bindings::ASHMEM_NOT_PURGED as isize)
-                }
-            }
-            ASHMEM_UNPIN => {
-                asma.area.unpin(pgstart, pgend, &mut new_range, &mut guard);
-
-                if UNPIN_IMMEDIATELY.load(Ordering::Relaxed) {
-                    guard.free_lru(usize::MAX);
-                }
-                Ok(0)
-            }
-            ASHMEM_GET_PIN_STATUS => {
-                if asma
-                    .area
-                    .range_has_unpinned_page(pgstart, pgend, &mut guard)
-                {
-                    Ok(bindings::ASHMEM_IS_UNPINNED as isize)
-                } else {
-                    Ok(bindings::ASHMEM_IS_PINNED as isize)
-                }
-            }
-            _ => unreachable!(),
-        }
-    }
-
     fn purge_all_caches(&self) -> Result<isize> {
         if !has_cap_sys_admin() {
             return Err(EPERM);
         }
-        let mut guard = AshmemGuard(ASHMEM_MUTEX.lock());
-        let total_num_pages = LRU_COUNT.load(Ordering::Relaxed);
-        let _num_freed = guard.free_lru(usize::MAX);
-        // ASHMEM_PURGE_ALL_CACHES returns the total number of pages even if we stopped early.
-        Ok(isize::try_from(total_num_pages).unwrap_or(isize::MAX))
+        Ok(0)
     }
 }
 
@@ -565,6 +398,10 @@ unsafe extern "C" fn ashmem_memfd_ioctl(file: *mut bindings::file, cmd: u32, arg
     }
 }
 
+/// This function implements the ioctls called when you attempt to use an ashmem ioctl on a file
+/// created using memfd_create.
+///
+/// They do not apply when the file is created by directly opening /dev/ashmem.
 fn ashmem_memfd_ioctl_inner(file: &File, cmd: u32, arg: usize) -> Result<isize> {
     use kernel::bindings::{F_ADD_SEALS, F_GET_SEALS, F_SEAL_FUTURE_WRITE, F_SEAL_WRITE};
     const WRITE_SEALS_MASK: u64 = (F_SEAL_WRITE | F_SEAL_FUTURE_WRITE) as u64;
