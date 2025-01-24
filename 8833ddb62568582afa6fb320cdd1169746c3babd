@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8747189c_c9d37bf8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-01-24T01:35:52Z",
+      "side": 1,
+      "message": "This assumes that the endpoint is an SP, and you\u0027re forwarding the call to the SPMC.\n\nDoes this need to check for VM IDs, and either reject or handle it here?",
+      "revId": "8833ddb62568582afa6fb320cdd1169746c3babd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4221d830_2b217a2e",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 1
