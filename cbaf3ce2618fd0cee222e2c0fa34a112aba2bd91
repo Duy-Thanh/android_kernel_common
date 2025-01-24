@@ -22,6 +22,30 @@
       },
       "revId": "cbaf3ce2618fd0cee222e2c0fa34a112aba2bd91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817c06ec_91860b11",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-24T14:11:29Z",
+      "side": 1,
+      "message": "Yup, we can put the validation in BPF. I just thought it would be easier for drivers to check the early return fail from the kernel source code. If we put them into the BPF file, I guess it would be hard to achieve the same goal?  BTW, is it common to use BPF to validate API\u0027s parameters and return fail to let the caller to be aware of the fail return?\n\nDo you want to remove vendor_lmk.c ? If so, do you have a recommendation where I should define the tracepoint(#define CREATE_TRACE_POINTS) and include drivers/android/vendor_lmk_trace.h? or other common practices I can refer to?\n\nIf we can find somewhere to put the definition and also make the users easy to use/ready, I thought removing vendor_lmk.o would be fine 😊",
+      "parentUuid": "91cea951_6e7dfd90",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "cbaf3ce2618fd0cee222e2c0fa34a112aba2bd91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
