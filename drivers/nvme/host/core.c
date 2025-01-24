@@ -4893,9 +4893,17 @@ void nvme_unfreeze(struct nvme_ctrl *ctrl)
 	int srcu_idx;
 
 	srcu_idx = srcu_read_lock(&ctrl->srcu);
+<<<<<<< HEAD   (b2f86c Merge 8acdd0e7bfad ("blk-mq: add non_owner variant of start_)
 	list_for_each_entry_srcu(ns, &ctrl->namespaces, list,
 				 srcu_read_lock_held(&ctrl->srcu))
 		blk_mq_unfreeze_queue(ns->queue);
+||||||| BASE
+	list_for_each_entry_rcu(ns, &ctrl->namespaces, list)
+		blk_mq_unfreeze_queue(ns->queue);
+=======
+	list_for_each_entry_rcu(ns, &ctrl->namespaces, list)
+		blk_mq_unfreeze_queue_non_owner(ns->queue);
+>>>>>>> BRANCH (6b6f6c nvme: core: switch to non_owner variant of start_freeze/unfr)
 	srcu_read_unlock(&ctrl->srcu, srcu_idx);
 	clear_bit(NVME_CTRL_FROZEN, &ctrl->flags);
 }
@@ -4938,9 +4946,22 @@ void nvme_start_freeze(struct nvme_ctrl *ctrl)
 
 	set_bit(NVME_CTRL_FROZEN, &ctrl->flags);
 	srcu_idx = srcu_read_lock(&ctrl->srcu);
+<<<<<<< HEAD   (b2f86c Merge 8acdd0e7bfad ("blk-mq: add non_owner variant of start_)
 	list_for_each_entry_srcu(ns, &ctrl->namespaces, list,
 				 srcu_read_lock_held(&ctrl->srcu))
 		blk_freeze_queue_start(ns->queue);
+||||||| BASE
+	list_for_each_entry_rcu(ns, &ctrl->namespaces, list)
+		blk_freeze_queue_start(ns->queue);
+=======
+	list_for_each_entry_rcu(ns, &ctrl->namespaces, list)
+		/*
+		 * Typical non_owner use case is from pci driver, in which
+		 * start_freeze is called from timeout work function, but
+		 * unfreeze is done in reset work context
+		 */
+		blk_freeze_queue_start_non_owner(ns->queue);
+>>>>>>> BRANCH (6b6f6c nvme: core: switch to non_owner variant of start_freeze/unfr)
 	srcu_read_unlock(&ctrl->srcu, srcu_idx);
 }
 EXPORT_SYMBOL_GPL(nvme_start_freeze);
