@@ -34,6 +34,23 @@
       "parentUuid": "01370127_912c3cf2",
       "revId": "992c6b98712dbe49c07306b5058660bf020611ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27031462_ec2b55de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-01-24T08:23:04Z",
+      "side": 1,
+      "message": "cc @zyta (such changes should be traced by the defconfig divergence tracing as well, PTAL)",
+      "revId": "992c6b98712dbe49c07306b5058660bf020611ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
