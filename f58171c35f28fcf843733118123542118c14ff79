@@ -16,6 +16,24 @@
       "message": "Even though we don\u0027t need the artifact for mainline, should we still cp this to mainline so that when we branch out for android17-?.?, we automatically gets this XML properly built?",
       "revId": "f58171c35f28fcf843733118123542118c14ff79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d67aaf23_7dac3c96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-01-24T11:49:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f83b616c_9ad70252",
+      "revId": "f58171c35f28fcf843733118123542118c14ff79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
