@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65517f4e_42e5d777",
+        "filename": "drivers/android/android_vendor_lmk.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-25T16:12:07Z",
+      "side": 1,
+      "message": "where are these assigned?",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 16,
+        "endChar": 8
+      },
+      "revId": "a2207281b819908ad44ad1b9dd0523bc6f3f471a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
