@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22e7d305_e8967f2a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:52:45Z",
+      "side": 1,
+      "message": "We don\u0027t give another VM cycles through FFA_RUN api. For the moment it is safe to assume that we only use this with spmc",
+      "parentUuid": "8747189c_c9d37bf8",
+      "revId": "8833ddb62568582afa6fb320cdd1169746c3babd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4221d830_2b217a2e",
