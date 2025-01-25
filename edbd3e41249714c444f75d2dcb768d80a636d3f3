@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bb6f0b3_dac7bf3a",
+        "filename": "drivers/android/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-25T06:46:19Z",
+      "side": 1,
+      "message": "I thought the parent\u0027s folder alread has android/. Do we still need android prefix for this case? Please let me know and then I can update again. Thanks.",
+      "parentUuid": "929103c9_da13a5c5",
+      "range": {
+        "startLine": 9,
+        "startChar": 42,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "edbd3e41249714c444f75d2dcb768d80a636d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06696810_db443c9b",
         "filename": "drivers/android/vendor_lmk.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-24T15:36:27Z",
       "side": 1,
       "message": "needs a copyright line.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "edbd3e41249714c444f75d2dcb768d80a636d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df6e954_a6e18e8e",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-25T06:46:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "06696810_db443c9b",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b006c705_73607cd7",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-25T06:46:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "752fc6ae_c1de6a73",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "edbd3e41249714c444f75d2dcb768d80a636d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48a07547_c6576bdf",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-01-24T15:37:11Z",
       "side": 1,
       "message": "copyright line needed for all new files.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "edbd3e41249714c444f75d2dcb768d80a636d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "495c5e1d_f975e5ad",
+        "filename": "include/linux/android_vendor_lmk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-25T06:46:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "48a07547_c6576bdf",
       "range": {
         "startLine": 1,
         "startChar": 0,
