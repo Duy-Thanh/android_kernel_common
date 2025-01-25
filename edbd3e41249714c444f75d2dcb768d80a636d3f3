@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b6dbda_c8984b25",
+        "filename": "drivers/android/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-25T15:46:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4c7012d9_1cd51efb",
+      "range": {
+        "startLine": 9,
+        "startChar": 42,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "edbd3e41249714c444f75d2dcb768d80a636d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06696810_db443c9b",
