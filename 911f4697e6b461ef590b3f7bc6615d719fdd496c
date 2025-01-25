@@ -90,6 +90,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6081a1de_3b274358",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-25T16:11:27Z",
+      "side": 1,
+      "message": "\"all vendors\" use the release branches, not android-mainline.  Put it only in the specific branch that you need it for, not in this one as this requires US to maintain it over time for forever, which is not ok for out-of-tree features (i.e. you need extra paperwork for that...)",
+      "parentUuid": "72b50f4a_b43df461",
+      "revId": "911f4697e6b461ef590b3f7bc6615d719fdd496c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f035d08_67f02ef9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-25T16:11:27Z",
+      "side": 1,
+      "message": "No, that\u0027s not the issue.  If this is something that drivers need, why is the existing LMK api not sufficient?  Fix that upstream so that no out-of-tree code is needed at all.",
+      "parentUuid": "9c54f3e0_f3420935",
+      "revId": "911f4697e6b461ef590b3f7bc6615d719fdd496c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ff722ea_dcb02cb9",
         "filename": "drivers/android/vendor_lmk.c",
         "patchSetId": 3
