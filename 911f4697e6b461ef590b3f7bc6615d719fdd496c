@@ -50,6 +50,69 @@
       "message": "Why this branch and not a device-specific branch?  `android-mainline` should not be used for out-of-tree stuff if at all possible, as it can get into merge conflicts very easily.",
       "revId": "911f4697e6b461ef590b3f7bc6615d719fdd496c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff722ea_dcb02cb9",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-25T10:16:34Z",
+      "side": 1,
+      "message": "filename not needed.",
+      "range": {
+        "startLine": 2,
+        "startChar": 4,
+        "endLine": 2,
+        "endChar": 12
+      },
+      "revId": "911f4697e6b461ef590b3f7bc6615d719fdd496c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6c8983d_2d75762c",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-25T10:16:34Z",
+      "side": 1,
+      "message": "spell out what \"LMK\" is so that we all know?",
+      "range": {
+        "startLine": 4,
+        "startChar": 18,
+        "endLine": 4,
+        "endChar": 21
+      },
+      "revId": "911f4697e6b461ef590b3f7bc6615d719fdd496c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed2cefb6_503ea32d",
+        "filename": "drivers/android/vendor_lmk.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-25T10:16:34Z",
+      "side": 1,
+      "message": "what is this magic number from?  Why is it this value?  What is the units?",
+      "revId": "911f4697e6b461ef590b3f7bc6615d719fdd496c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
