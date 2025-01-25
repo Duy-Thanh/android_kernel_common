@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c7012d9_1cd51efb",
+        "filename": "drivers/android/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-25T10:13:53Z",
+      "side": 1,
+      "message": "It will be the module name, should be obvious this is an android-out-of-tree-only thing, right?",
+      "parentUuid": "7bb6f0b3_dac7bf3a",
+      "range": {
+        "startLine": 9,
+        "startChar": 42,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "edbd3e41249714c444f75d2dcb768d80a636d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06696810_db443c9b",
         "filename": "drivers/android/vendor_lmk.c",
         "patchSetId": 2
