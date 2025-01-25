@@ -16,6 +16,7 @@
 #include <linux/export.h>
 #include <linux/syscalls.h>
 #include <linux/pagemap.h>
+#include <linux/page_size_compat.h>
 #include <linux/splice.h>
 #include <linux/compat.h>
 #include <linux/mount.h>
@@ -672,6 +673,8 @@ ssize_t ksys_pread64(unsigned int fd, char __user *buf, size_t count,
 SYSCALL_DEFINE4(pread64, unsigned int, fd, char __user *, buf,
 			size_t, count, loff_t, pos)
 {
+	__pagemap_pread(&fd, &pos);
+
 	return ksys_pread64(fd, buf, count, pos);
 }
 

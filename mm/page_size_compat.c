@@ -357,3 +357,60 @@ static int __init init_sysctl_perf_event_mlock(void)
 }
 core_initcall(init_sysctl_perf_event_mlock);
 #endif
+
+/*
+ * Adjusts @pos if emulating the page since and the target file path
+ * matches a proc pagemap file.
+ *
+ * Returns true if this was an emulated pagemap read and @pos was updated;
+ * returns false otherwise.
+ */
+bool __pagemap_pread(unsigned int* fd, loff_t* pos) {
+	int nr_subpages = __PAGE_SIZE / PAGE_SIZE;
+	bool is_pagemap = false;
+	struct file *file;
+	struct fd f;
+	char *path;
+	char *buf;
+
+	if (likely(nr_subpages == 1))
+		return is_pagemap;
+
+	buf = kmalloc(PATH_MAX, GFP_KERNEL);
+	if (!buf)
+		return is_pagemap;
+
+	f = fdget(*fd);
+	if (!f.file)
+		goto free_buf;
+
+	file = f.file;
+
+	path = d_path(&file->f_path, buf, PATH_MAX);
+	if (IS_ERR(path))
+		goto put_file;
+
+	/* Check if the path starts with "/proc/" and ends with "/pagemap" */
+	is_pagemap = !strncmp(path, "/proc/", 6) &&
+			!strcmp(path + strlen(path) - 8, "/pagemap");
+
+	if (!is_pagemap)
+		goto put_file;
+
+	/*
+	* Userspace thinks the pages are larger than they actually are, so adjust
+	* the offset and count to compensate.
+	*
+	* NOTE: We only need to adjust the position here since pagemap_read()
+	* handles updating the count.
+	*/
+	*pos *= nr_subpages;
+
+put_file:
+	fdput(f);
+
+free_buf:
+	kfree(buf);
+
+	return is_pagemap;
+}

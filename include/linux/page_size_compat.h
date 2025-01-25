@@ -165,6 +165,8 @@ extern void __fold_filemap_fixup_entry(struct vma_iterator *iter, unsigned long 
 
 extern int __fixup_swap_header(struct file *swap_file, struct address_space *mapping);
 
+extern bool __pagemap_pread(unsigned int* fd, loff_t* pos);
+
 #endif /* !__ASSEMBLY__ */
 
 #endif /* __LINUX_PAGE_SIZE_COMPAT_H */
