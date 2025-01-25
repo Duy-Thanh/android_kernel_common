@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3a751a_46108e4d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3d611f2_698ae961",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9eb74bad_766bb3f0",
@@ -82,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "550feaba_a5fd239a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24305cf6_10e9993a",
+      "range": {
+        "startLine": 381,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 16
+      },
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4d1df9a_61d756a8",
@@ -95,6 +143,24 @@
       "writtenOn": "2025-01-23T11:37:26Z",
       "side": 1,
       "message": "BUG: fix this",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c5acac9_de451e8e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d1df9a_61d756a8",
       "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -116,6 +182,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c807c5d_134babf3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "133feb89_fc7e37ee",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99396afc_bd105400",
@@ -129,6 +213,24 @@
       "writtenOn": "2025-01-23T11:37:26Z",
       "side": 1,
       "message": "BUG: fix this",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e790df55_30e02895",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99396afc_bd105400",
       "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -150,6 +252,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2c8132_73e026c6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49e38916_d7cbd5c2",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfd2f976_34104a28",
@@ -167,6 +287,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bd51813_38ab8dbb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd2f976_34104a28",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14f67645_26394151",
@@ -180,6 +318,24 @@
       "writtenOn": "2025-01-24T01:36:50Z",
       "side": 1,
       "message": "Same comment as for FFA_RUN: do you want to check here for VM-to-VM messages?",
+      "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed6f294_a7a365a3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-25T12:22:30Z",
+      "side": 1,
+      "message": "We don\u0027t support vm to vm dirrect message atm.",
+      "parentUuid": "14f67645_26394151",
       "revId": "94ada15ff43406505c44aaab903ce4eb4b66c40a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
