@@ -70,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72b50f4a_b43df461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2025-01-25T15:51:54Z",
+      "side": 1,
+      "message": "This can be used by all vendors so I uploaded it to android-mainline instead of deviec-specific branch.",
+      "parentUuid": "e64e2d31_7fceedf6",
+      "revId": "911f4697e6b461ef590b3f7bc6615d719fdd496c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ff722ea_dcb02cb9",
