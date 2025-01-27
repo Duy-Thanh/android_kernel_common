@@ -16,6 +16,24 @@
       "message": "Unfortunately, we cannot just revert these changes until the new policy lands (reverting without the new policy would re-introduce the whole family of security vulnerabilities related to leaking mac-addresses). Because of b/381754752, we had to backport a compatibility change for existing kernels. Until this compatibility change lands on supported devices, we cannot land the policy change and therefore not remove this android-specific patch (tracked at b/353255679).\n\nGreg, how can I help updating this patch (and aosp/3457142)?",
       "revId": "514b4a5efef001ba9b26131421b036cf6cd77a42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf7cf8e_244de5f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-27T12:28:46Z",
+      "side": 1,
+      "message": "If you provide a \"clean\" version of it on top of the 6.13-rc1, that would be great, as I can add it back in after this merge point and then merge everything all at once",
+      "parentUuid": "50f49755_f40e0f02",
+      "revId": "514b4a5efef001ba9b26131421b036cf6cd77a42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
