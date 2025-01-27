@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15a0234_ff7e003f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-27T13:35:05Z",
+      "side": 1,
+      "message": "I like this as a cleanup!",
+      "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b77d8c_ee184024",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1745,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-27T13:35:05Z",
+      "side": 1,
+      "message": "If ret was \u003e 0 then you need to unpin_user_pages() to undo the ret pages that were pinned.",
+      "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "700c9811_96e0264c",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1782,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-27T13:35:05Z",
+      "side": 1,
+      "message": "Maybe a function comment here as `pages_to_ppages` is a bit of a terse (but good) name. Along the lines of \"It creates a list of kvm_pinned_page structures, one for each specified struct page, in prep for passing to EL2.\" I think would be useful.",
+      "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8597e1b2_536b0563",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-27T13:35:05Z",
+      "side": 1,
+      "message": "Here, or in a function comment for `__pkvm_host_map_guest` please make it clear that mapped pages get removed from `ppages`. It took me a little while to see that in the normal case `pppages` will be empty here.",
+      "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
