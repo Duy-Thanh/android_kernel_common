@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893d61f3_9c736232",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-27T19:36:28Z",
+      "side": 1,
+      "message": "w1 only contains target information. It should not be compared with the source id.\n\n```\nuint32 Target information w1 • Information to identify target SP/VM.\n– Bits[31:16]: ID of SP/VM.\n– Bits[15:0]: ID of vCPU of SP/VM to run.\n```",
+      "revId": "121364a6f0f0008dcffa7dbbce7989387374f799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
