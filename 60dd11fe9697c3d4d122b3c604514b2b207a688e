@@ -33,6 +33,24 @@
       "message": "Not yet merged on base branch",
       "revId": "60dd11fe9697c3d4d122b3c604514b2b207a688e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3eaa826_853873c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-27T11:42:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f3a0bbe_7c45ac21",
+      "revId": "60dd11fe9697c3d4d122b3c604514b2b207a688e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
