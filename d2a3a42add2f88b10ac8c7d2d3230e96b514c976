@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d80de0_8a7e69ab",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T14:49:05Z",
+      "side": 1,
+      "message": "It would be cleaner to introduce a local variable for this:\n\n```\nstruct kvm_ffa_buffers *buffers \u003d \u0026endp_buffers[vm_handle];\n```\n\nand then use that consistently.",
+      "range": {
+        "startLine": 295,
+        "startChar": 6,
+        "endLine": 295,
+        "endChar": 29
+      },
+      "revId": "d2a3a42add2f88b10ac8c7d2d3230e96b514c976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9057e51_c85227d6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T14:49:05Z",
+      "side": 1,
+      "message": "This is a functional change that isn\u0027t described in the commit message. What is it doing?",
+      "range": {
+        "startLine": 808,
+        "startChar": 1,
+        "endLine": 808,
+        "endChar": 15
+      },
+      "revId": "d2a3a42add2f88b10ac8c7d2d3230e96b514c976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
