@@ -16,6 +16,24 @@
       "message": "I plan to land this first here in android13-5.15, then the other GKI dev branches and android-mainline",
       "revId": "63d598bce2b108ce4f28e76618879b9c180e4a0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4687f16a_5fcb9ab3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-28T17:08:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f89acb6e_2f3fe2c9",
+      "revId": "63d598bce2b108ce4f28e76618879b9c180e4a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
