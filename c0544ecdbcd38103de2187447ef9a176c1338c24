@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae1e05c2_9f842634",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-28T14:49:50Z",
+      "side": 1,
+      "message": "Replaced it with :\n```\nif (hyp_va)\n\t*hyp_va \u003d virt\n```\n\nat the end of the page transition",
+      "parentUuid": "dfb54960_a2330d9d",
+      "range": {
+        "startLine": 1329,
+        "startChar": 5,
+        "endLine": 1329,
+        "endChar": 12
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f0b4722_d850ce2c",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2025-01-28T13:35:26Z",
       "side": 1,
       "message": "This violates the locking order (see comment above `enum pkvm_component_id`)",
+      "range": {
+        "startLine": 1332,
+        "startChar": 0,
+        "endLine": 1334,
+        "endChar": 0
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8986e607_fc82be23",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-28T14:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f0b4722_d850ce2c",
       "range": {
         "startLine": 1332,
         "startChar": 0,
@@ -110,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73888d9c_0e61e2ce",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-28T14:49:50Z",
+      "side": 1,
+      "message": "I butchered it when I rebase to the new mem_protect.c",
+      "parentUuid": "14a8d6e3_80108188",
+      "range": {
+        "startLine": 1353,
+        "startChar": 1,
+        "endLine": 1353,
+        "endChar": 15
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "560082d8_28a5512f",
@@ -123,6 +195,30 @@
       "writtenOn": "2025-01-28T13:35:26Z",
       "side": 1,
       "message": "Same lock ordering issue here.",
+      "range": {
+        "startLine": 1369,
+        "startChar": 1,
+        "endLine": 1369,
+        "endChar": 21
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a484e1_de8bbc27",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-28T14:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "560082d8_28a5512f",
       "range": {
         "startLine": 1369,
         "startChar": 1,
