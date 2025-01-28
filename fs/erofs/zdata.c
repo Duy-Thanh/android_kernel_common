@@ -1482,6 +1482,7 @@ repeat:
 	}
 
 	lock_page(page);
+<<<<<<< HEAD   (640d94 Merge 6.6.71 into android15-6.6-lts)
 	/* only true if page reclaim goes wrong, should never happen */
 	DBG_BUGON(justfound && PagePrivate(page));
 
@@ -1490,6 +1491,22 @@ repeat:
 		/*
 		 * The cached page is still available but without a valid
 		 * `->private` pcluster hint.  Let's reconnect them.
+||||||| BASE
+
+	/* only true if page reclaim goes wrong, should never happen */
+	DBG_BUGON(justfound && PagePrivate(page));
+
+	/* the page is still in manage cache */
+	if (page->mapping == mc) {
+		WRITE_ONCE(pcl->compressed_bvecs[nr].page, page);
+=======
+	if (likely(page->mapping == mc)) {
+		WRITE_ONCE(pcl->compressed_bvecs[nr].page, page);
+
+		/*
+		 * The cached folio is still in managed cache but without
+		 * a valid `->private` pcluster hint.  Let's reconnect them.
+>>>>>>> BRANCH (c2e420 Linux 6.6.72)
 		 */
 		if (!PagePrivate(page)) {
 			DBG_BUGON(!justfound);
@@ -1498,13 +1515,43 @@ repeat:
 			put_page(page);
 		}
 
+<<<<<<< HEAD   (640d94 Merge 6.6.71 into android15-6.6-lts)
 		/* no need to submit if it is already up-to-date */
 		if (PageUptodate(page)) {
 			unlock_page(page);
 			bvec->bv_page = NULL;
+||||||| BASE
+		/* no need to submit io if it is already up-to-date */
+		if (PageUptodate(page)) {
+			unlock_page(page);
+			page = NULL;
+=======
+		if (likely(page->private == (unsigned long)pcl)) {
+			/* don't submit cache I/Os again if already uptodate */
+			if (PageUptodate(page)) {
+				unlock_page(page);
+				page = NULL;
+
+			}
+			goto out;
+>>>>>>> BRANCH (c2e420 Linux 6.6.72)
 		}
+<<<<<<< HEAD   (640d94 Merge 6.6.71 into android15-6.6-lts)
 		return;
+||||||| BASE
+		goto out;
+=======
+		/*
+		 * Already linked with another pcluster, which only appears in
+		 * crafted images by fuzzers for now.  But handle this anyway.
+		 */
+		tocache = false;	/* use temporary short-lived pages */
+	} else {
+		DBG_BUGON(1); /* referenced managed folios can't be truncated */
+		tocache = true;
+>>>>>>> BRANCH (c2e420 Linux 6.6.72)
 	}
+<<<<<<< HEAD   (640d94 Merge 6.6.71 into android15-6.6-lts)
 
 	/*
 	 * It has been truncated, so it's unsafe to reuse this one. Let's
@@ -1514,6 +1561,18 @@ repeat:
 	DBG_BUGON(!justfound);
 
 	tocache = true;
+||||||| BASE
+
+	/*
+	 * the managed page has been truncated, it's unsafe to
+	 * reuse this one, let's allocate a new cache-managed page.
+	 */
+	DBG_BUGON(page->mapping);
+	DBG_BUGON(!justfound);
+
+	tocache = true;
+=======
+>>>>>>> BRANCH (c2e420 Linux 6.6.72)
 	unlock_page(page);
 	put_page(page);
 out_allocpage:
@@ -1669,13 +1728,24 @@ static void z_erofs_submit_queue(struct z_erofs_decompress_frontend *f,
 		cur = mdev.m_pa;
 		end = cur + pcl->pclustersize;
 		do {
+<<<<<<< HEAD   (640d94 Merge 6.6.71 into android15-6.6-lts)
 			z_erofs_fill_bio_vec(&bvec, f, pcl, i++, mc);
 			if (!bvec.bv_page)
 				continue;
+||||||| BASE
+			struct page *page;
+
+			page = pickup_page_for_submission(pcl, i++,
+					&f->pagepool, mc);
+			if (!page)
+				continue;
+=======
+			struct page *page = NULL;
+>>>>>>> BRANCH (c2e420 Linux 6.6.72)
 
 			if (bio && (cur != last_pa ||
 				    last_bdev != mdev.m_bdev)) {
-submit_bio_retry:
+drain_io:
 				submit_bio(bio);
 				if (memstall) {
 					psi_memstall_leave(&pflags);
@@ -1684,8 +1754,21 @@ submit_bio_retry:
 				bio = NULL;
 			}
 
+<<<<<<< HEAD   (640d94 Merge 6.6.71 into android15-6.6-lts)
 			if (unlikely(PageWorkingset(bvec.bv_page)) &&
 			    !memstall) {
+||||||| BASE
+			if (unlikely(PageWorkingset(page)) && !memstall) {
+=======
+			if (!page) {
+				page = pickup_page_for_submission(pcl, i++,
+						&f->pagepool, mc);
+				if (!page)
+					continue;
+			}
+
+			if (unlikely(PageWorkingset(page)) && !memstall) {
+>>>>>>> BRANCH (c2e420 Linux 6.6.72)
 				psi_memstall_enter(&pflags);
 				memstall = 1;
 			}
@@ -1702,12 +1785,20 @@ submit_bio_retry:
 				last_bdev = mdev.m_bdev;
 			}
 
+<<<<<<< HEAD   (640d94 Merge 6.6.71 into android15-6.6-lts)
 			if (cur + bvec.bv_len > end)
 				bvec.bv_len = end - cur;
 			DBG_BUGON(bvec.bv_len < sb->s_blocksize);
 			if (!bio_add_page(bio, bvec.bv_page, bvec.bv_len,
 					  bvec.bv_offset))
 				goto submit_bio_retry;
+||||||| BASE
+			if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE)
+				goto submit_bio_retry;
+=======
+			if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE)
+				goto drain_io;
+>>>>>>> BRANCH (c2e420 Linux 6.6.72)
 
 			last_pa = cur + bvec.bv_len;
 			bypass = false;
@@ -1719,11 +1810,10 @@ submit_bio_retry:
 			move_to_bypass_jobqueue(pcl, qtail, owned_head);
 	} while (owned_head != Z_EROFS_PCLUSTER_TAIL);
 
-	if (bio) {
+	if (bio)
 		submit_bio(bio);
-		if (memstall)
-			psi_memstall_leave(&pflags);
-	}
+	if (memstall)
+		psi_memstall_leave(&pflags);
 
 	/*
 	 * although background is preferred, no one is pending for submission.
