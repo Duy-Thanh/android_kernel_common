@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03a264a3_e0120009",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T14:08:52Z",
+      "side": 1,
+      "message": "Given we hold the `hyp_buffers.lock` why do we need to use atomics here?",
+      "range": {
+        "startLine": 119,
+        "startChar": 5,
+        "endLine": 119,
+        "endChar": 21
+      },
+      "revId": "c9296b22cd338a9efbeca2d16edbfa0d85895b40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
