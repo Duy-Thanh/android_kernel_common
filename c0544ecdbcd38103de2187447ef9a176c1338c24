@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb1715a4_cfbc84bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:35:26Z",
+      "side": 1,
+      "message": "What happens if a guest dies when some of its pages are shared with the hypervisor? The logic in `__pkvm_host_reclaim_page` doesn\u0027t look like it will handle the page poisoning or the PSCI `mem_protect` counter properly in that case, as it only looks at the page state.",
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfb54960_a2330d9d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:35:26Z",
+      "side": 1,
+      "message": "Why is NULL special?",
+      "range": {
+        "startLine": 1329,
+        "startChar": 5,
+        "endLine": 1329,
+        "endChar": 12
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f0b4722_d850ce2c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:35:26Z",
+      "side": 1,
+      "message": "This violates the locking order (see comment above `enum pkvm_component_id`)",
+      "range": {
+        "startLine": 1332,
+        "startChar": 0,
+        "endLine": 1334,
+        "endChar": 0
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a6edb8e_005d5590",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1340,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:35:26Z",
+      "side": 1,
+      "message": "This can overflow, but it seems like we have the same anti-pattern in the tree already @vdonnefort@google.com. We should fix the existing cases first (ideally, everything would operate on `nr_pages`).",
+      "range": {
+        "startLine": 1340,
+        "startChar": 0,
+        "endLine": 1340,
+        "endChar": 31
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a8d6e3_80108188",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:35:26Z",
+      "side": 1,
+      "message": "I don\u0027t understand this -- it feels like `hyp_va` should be `u64 **` and this should be `*hyp_va \u003d virt`. What am I missing?",
+      "range": {
+        "startLine": 1353,
+        "startChar": 1,
+        "endLine": 1353,
+        "endChar": 15
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560082d8_28a5512f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:35:26Z",
+      "side": 1,
+      "message": "Same lock ordering issue here.",
+      "range": {
+        "startLine": 1369,
+        "startChar": 1,
+        "endLine": 1369,
+        "endChar": 21
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5fbe7d_df38a13b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:35:26Z",
+      "side": 1,
+      "message": "We\u0027re not handling the `-E2BIG` case at all here, so does it actually make sense to take `nr_pages !\u003d 1` for this function instead? Perhaps we should just rename it to `__pkvm_guest_unshare_hyp_page` and reject `nr_pages !\u003d 1` outright? (the same applies to `__pkvm_guest_share_hyp()`)",
+      "range": {
+        "startLine": 1372,
+        "startChar": 7,
+        "endLine": 1372,
+        "endChar": 38
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5af12508_923d1c93",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1377,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:35:26Z",
+      "side": 1,
+      "message": "Same overflow issue here.",
+      "range": {
+        "startLine": 1377,
+        "startChar": 1,
+        "endLine": 1377,
+        "endChar": 31
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
