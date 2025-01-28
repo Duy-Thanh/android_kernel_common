@@ -174,7 +174,12 @@ filegroup(
     srcs = [
         # keep sorted
         "gki/aarch64/symbols/db845c",
+<<<<<<< PATCH SET (146efb ANDROID: GKI: Add initial QCOM symbol list)
+        "gki/aarch64/symbols/qcom",
+||||||| BASE
+=======
         "gki/aarch64/symbols/pixel",
+>>>>>>> BASE      (a896c5 ANDROID: vendor_hooks: add hooks in cpu_cgroup subsystem)
         "gki/aarch64/symbols/virtual_device",
     ],
     visibility = ["//visibility:public"],
