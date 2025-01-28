@@ -34,6 +34,24 @@
       "parentUuid": "50f49755_f40e0f02",
       "revId": "514b4a5efef001ba9b26131421b036cf6cd77a42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1296db_f115643f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-28T09:21:23Z",
+      "side": 1,
+      "message": "Please submit a patch series for this after this is merged.  As always, for stuff that is not upstream, we reserve the right to rip it out of android-mainline in order to handle upstream merges properly.  That puts the maintaince burden on the group submitting the out-of-tree code, not us attempting to do merges 😊",
+      "parentUuid": "4cf7cf8e_244de5f9",
+      "revId": "514b4a5efef001ba9b26131421b036cf6cd77a42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
