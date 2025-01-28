@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02265388_38cc356d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T16:49:16Z",
+      "side": 1,
+      "message": "Are you sure you want to hard-code this as a single cell forever?",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08709b73_aeb41ef1",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T16:49:16Z",
+      "side": 1,
+      "message": "`of_address_count()`?\n\nThat said, I\u0027m not enytirely sure why you need to compute this up-front. Can\u0027t you just rework the following loop as `while (of_address_to_resource(np, idx, \u0026res)) {` and bail if you hit `PKVM_DEVICE_MAX_RESOURCE`?",
+      "range": {
+        "startLine": 492,
+        "startChar": 0,
+        "endLine": 492,
+        "endChar": 44
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4adfcf3_65eff0fb",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T16:49:16Z",
+      "side": 1,
+      "message": "Don\u0027t you need this in the error cases too?",
+      "range": {
+        "startLine": 532,
+        "startChar": 2,
+        "endLine": 532,
+        "endChar": 13
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d332745_ccb97413",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T16:49:16Z",
+      "side": 1,
+      "message": "I think you should only do this if `!ret`",
+      "range": {
+        "startLine": 577,
+        "startChar": 3,
+        "endLine": 577,
+        "endChar": 14
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206b8496_752a2bcd",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T16:49:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `args-\u003enp`?",
+      "range": {
+        "startLine": 577,
+        "startChar": 15,
+        "endLine": 577,
+        "endChar": 17
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a50fadaf_66acf7d0",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T16:49:16Z",
+      "side": 1,
+      "message": "`registered_devices_nr` has been initialised at this point. Should we defer that until we\u0027ve successfully registered all the devices?",
+      "range": {
+        "startLine": 579,
+        "startChar": 9,
+        "endLine": 579,
+        "endChar": 17
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b227ba88_96827b65",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T16:49:16Z",
+      "side": 1,
+      "message": "Doesn\u0027t this leave us in a funny state where we haven\u0027t deprivileged yet pvmfw hasn\u0027t been cleared?",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 13
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
