@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b55769_6c97fcf8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:58:55Z",
+      "side": 1,
+      "message": "This appears to be unused",
+      "range": {
+        "startLine": 1393,
+        "startChar": 91,
+        "endLine": 1393,
+        "endChar": 99
+      },
+      "revId": "ad3c0b8332c4557a8d301290a5b1bc618c07bf82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c2211b0_f41e1283",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1399,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:58:55Z",
+      "side": 1,
+      "message": "Why is NULL special?",
+      "range": {
+        "startLine": 1399,
+        "startChar": 6,
+        "endLine": 1399,
+        "endChar": 14
+      },
+      "revId": "ad3c0b8332c4557a8d301290a5b1bc618c07bf82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a839021b_8766d0af",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1403,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:58:55Z",
+      "side": 1,
+      "message": "Again, we\u0027re not handling `-E2BIG` so I don\u0027t think it makes sense to accept `nr_pages !\u003d 1`",
+      "range": {
+        "startLine": 1403,
+        "startChar": 7,
+        "endLine": 1403,
+        "endChar": 38
+      },
+      "revId": "ad3c0b8332c4557a8d301290a5b1bc618c07bf82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1685eed5_33b09eff",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T13:58:55Z",
+      "side": 1,
+      "message": "It might be worth a comment here to say that the caller is responsible for tracking the FFA state and that this function should only be called for IPAs that have previously been shared with FFA.",
+      "range": {
+        "startLine": 1412,
+        "startChar": 4,
+        "endLine": 1412,
+        "endChar": 28
+      },
+      "revId": "ad3c0b8332c4557a8d301290a5b1bc618c07bf82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
