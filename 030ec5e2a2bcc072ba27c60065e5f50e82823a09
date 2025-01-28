@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3475d7e_45713b41",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T15:45:06Z",
+      "side": 1,
+      "message": "nit: `switch (ret)` is cleaner?",
+      "range": {
+        "startLine": 212,
+        "startChar": 5,
+        "endLine": 212,
+        "endChar": 8
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca108995_9d04613f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T15:45:06Z",
+      "side": 1,
+      "message": "This can also return `-ENOMEM`",
+      "range": {
+        "startLine": 215,
+        "startChar": 2,
+        "endLine": 215,
+        "endChar": 28
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e77e02e_4ae36f49",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T15:45:06Z",
+      "side": 1,
+      "message": "`do_ffa_rxtx_map()` already pulled these out of the context. Why not pass them in as arguments (along with the vcpu) and avoid passing the context down directly. The context is full of raw guest data, so I\u0027d prefer to parse that early and not propagate it any further than necessary.",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 0
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f97c4aa_e817a971",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T15:45:06Z",
+      "side": 1,
+      "message": "Can we explode if we get `-ENOMEM` back here?",
+      "range": {
+        "startLine": 239,
+        "startChar": 9,
+        "endLine": 239,
+        "endChar": 33
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c023b922_c39ad0cb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T15:45:06Z",
+      "side": 1,
+      "message": "Why can\u0027t the caller do this itself?",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 33
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc566ad_e398cba1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T15:45:06Z",
+      "side": 1,
+      "message": "Why do we need to return `ret` when we already set the return value in `res`?",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 12
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b4ee842_b117e409",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T15:45:06Z",
+      "side": 1,
+      "message": "Why do we need this? The memshare hypercall handling uses `KVM_HYP_REQ_TYPE_MAP` for handling `-EFAULT`. Can we not do the same thing?",
+      "range": {
+        "startLine": 1344,
+        "startChar": 0,
+        "endLine": 1344,
+        "endChar": 64
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdfd2aeb_b0b4a8db",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1360,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T15:45:06Z",
+      "side": 1,
+      "message": "It would be better to be consistent with `pkvm_handle_empty_memcache` and take the `exit_code` pointer as an argument.",
+      "range": {
+        "startLine": 1360,
+        "startChar": 8,
+        "endLine": 1360,
+        "endChar": 26
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
