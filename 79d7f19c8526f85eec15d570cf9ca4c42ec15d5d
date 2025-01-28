@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b79e7d32_4637ac2b",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T16:22:14Z",
+      "side": 1,
+      "message": "If we have this, doesn\u0027t the existing `get_iommu_id(dev)` just become a wrapper along the lines of `get_iommu_id_by_of(dev_of_node(dev));`?",
+      "range": {
+        "startLine": 1672,
+        "startChar": 17,
+        "endLine": 1672,
+        "endChar": 35
+      },
+      "revId": "79d7f19c8526f85eec15d570cf9ca4c42ec15d5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
