@@ -93,6 +93,30 @@
       },
       "revId": "98f0f3128549700730c13f14e965e5c20c578702",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33eb7e4a_2d94f1be",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-28T16:36:37Z",
+      "side": 1,
+      "message": "I didn\u0027t mean to call `kvm_iommu_ops`\n\nI meant just call `kvm_iommu_host_stage2_idmap_complete` after `kvm_iommu_host_stage2_idmap` in all calls, except `__host_donate_guest` which can use sg, and this one would would pass `update_iommu \u003d false` and then call  those 2 function over the loop",
+      "parentUuid": "ef859d10_38068654",
+      "range": {
+        "startLine": 751,
+        "startChar": 7,
+        "endLine": 751,
+        "endChar": 37
+      },
+      "revId": "98f0f3128549700730c13f14e965e5c20c578702",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
