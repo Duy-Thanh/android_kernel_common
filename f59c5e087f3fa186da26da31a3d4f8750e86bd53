@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0060562d_470ccc12",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1745,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-28T11:21:36Z",
+      "side": 1,
+      "message": "Ha yes! I guess it\u0027s very much unlikely but this should be handled properly anyway!",
+      "parentUuid": "33b77d8c_ee184024",
+      "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "700c9811_96e0264c",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-01-27T13:35:05Z",
       "side": 1,
       "message": "Maybe a function comment here as `pages_to_ppages` is a bit of a terse (but good) name. Along the lines of \"It creates a list of kvm_pinned_page structures, one for each specified struct page, in prep for passing to EL2.\" I think would be useful.",
+      "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04aeb70f_5167ddc6",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1782,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-28T11:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "700c9811_96e0264c",
       "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39f8d423_4a1a3c20",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-28T11:21:36Z",
+      "side": 1,
+      "message": "Ha yes! I should do something like I have done for the _sglist version!",
+      "parentUuid": "4a469459_d9a2a0ee",
+      "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8597e1b2_536b0563",
         "filename": "arch/arm64/kvm/mmu.c",
         "patchSetId": 4
@@ -82,6 +136,24 @@
       "writtenOn": "2025-01-27T13:35:05Z",
       "side": 1,
       "message": "Here, or in a function comment for `__pkvm_host_map_guest` please make it clear that mapped pages get removed from `ppages`. It took me a little while to see that in the normal case `pppages` will be empty here.",
+      "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a13951e_354b9722",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-28T11:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8597e1b2_536b0563",
       "revId": "f59c5e087f3fa186da26da31a3d4f8750e86bd53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
