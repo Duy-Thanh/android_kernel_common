@@ -32,6 +32,22 @@
 
 #define BITSSET		0x1c0	/* for identifying LDCW */
 
+// Trace function entry
+#define ATRACE_BEGIN(func_name) \
+  do { \
+    char buf[128]; \
+    snprintf(buf, sizeof(buf), "B|%d|%s", current->tgid, func_name); \
+    trace_printk(buf); \
+  } while (0)
+
+// Trace function exit
+#define ATRACE_END() \
+  do { \
+    char buf[128]; \
+    snprintf(buf, sizeof(buf), "E|%d", current->tgid); \
+    trace_printk(buf); \
+  } while (0)
+
 
 int show_unhandled_signals = 1;
 
@@ -267,6 +283,7 @@ show_signal_msg(struct pt_regs *regs, unsigned long code,
 void do_page_fault(struct pt_regs *regs, unsigned long code,
 			      unsigned long address)
 {
+  ATRACE_BEGIN(__func__);
 	struct vm_area_struct *vma, *prev_vma;
 	struct task_struct *tsk;
 	struct mm_struct *mm;
@@ -317,12 +334,16 @@ retry:
 
 	fault = handle_mm_fault(vma, address, flags, regs);
 
-	if (fault_signal_pending(fault, regs))
-		return;
+	if (fault_signal_pending(fault, regs)) {
+    ATRACE_END();
+    return;
+  }
 
 	/* The fault is fully completed (including releasing mmap lock) */
-	if (fault & VM_FAULT_COMPLETED)
+	if (fault & VM_FAULT_COMPLETED) {
+    ATRACE_END();
 		return;
+  }
 
 	if (unlikely(fault & VM_FAULT_ERROR)) {
 		/*
@@ -349,6 +370,7 @@ retry:
 		goto retry;
 	}
 	mmap_read_unlock(mm);
+  ATRACE_END();
 	return;
 
 /*
@@ -410,12 +432,14 @@ bad_area_nosemaphore:
 
 			force_sig_mceerr(BUS_MCEERR_AR, (void __user *) address,
 					 lsb);
+      ATRACE_END();
 			return;
 		}
 #endif
 		show_signal_msg(regs, code, address, tsk, vma);
 
 		force_sig_fault(signo, si_code, (void __user *) address);
+    ATRACE_END();
 		return;
 	}
 	msg = "Page fault: bad address";
@@ -423,6 +447,7 @@ bad_area_nosemaphore:
 no_context:
 
 	if (!user_mode(regs) && fixup_exception(regs)) {
+    ATRACE_END();
 		return;
 	}
 
