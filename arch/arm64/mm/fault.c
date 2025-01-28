@@ -47,6 +47,22 @@
 
 #include <trace/hooks/fault.h>
 
+// Trace function entry
+#define ATRACE_BEGIN(func_name) \
+  do { \
+    char buf[128]; \
+    snprintf(buf, sizeof(buf), "B|%d|%s", current->tgid, func_name); \
+    trace_printk(buf); \
+  } while (0)
+
+// Trace function exit
+#define ATRACE_END() \
+  do { \
+    char buf[128]; \
+    snprintf(buf, sizeof(buf), "E|%d", current->tgid); \
+    trace_printk(buf); \
+  } while (0)
+
 struct fault_info {
 	int	(*fn)(unsigned long far, unsigned long esr,
 		      struct pt_regs *regs);
@@ -535,6 +551,7 @@ static bool is_write_abort(unsigned long esr)
 static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 				   struct pt_regs *regs)
 {
+  ATRACE_BEGIN(__func__);
 	const struct fault_info *inf;
 	struct mm_struct *mm = current->mm;
 	vm_fault_t fault;
@@ -543,8 +560,10 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 	unsigned long addr = untagged_addr(far);
 	struct vm_area_struct *vma;
 
-	if (kprobe_page_fault(regs, esr))
+	if (kprobe_page_fault(regs, esr)) {
+    ATRACE_END();
 		return 0;
+  }
 
 	/*
 	 * If we're in an interrupt or have no user context, we must not take
@@ -594,6 +613,7 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 		if (!user_mode(regs))
 			goto no_context;
 		arm64_force_sig_fault(SIGSEGV, SEGV_ACCERR, far, "stage-2 fault");
+    ATRACE_END();
 		return 0;
 	}
 
@@ -626,6 +646,7 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 	if (fault_signal_pending(fault, regs)) {
 		if (!user_mode(regs))
 			goto no_context;
+    ATRACE_END();
 		return 0;
 	}
 lock_mmap:
@@ -643,12 +664,15 @@ retry:
 	if (fault_signal_pending(fault, regs)) {
 		if (!user_mode(regs))
 			goto no_context;
+    ATRACE_END();
 		return 0;
 	}
 
 	/* The fault is fully completed (including releasing mmap lock) */
-	if (fault & VM_FAULT_COMPLETED)
+	if (fault & VM_FAULT_COMPLETED) {
+    ATRACE_END();
 		return 0;
+  }
 
 	if (fault & VM_FAULT_RETRY) {
 		mm_flags |= FAULT_FLAG_TRIED;
@@ -661,8 +685,10 @@ done:
 	 * Handle the "normal" (no error) case first.
 	 */
 	if (likely(!(fault & (VM_FAULT_ERROR | VM_FAULT_BADMAP |
-			      VM_FAULT_BADACCESS))))
+			      VM_FAULT_BADACCESS)))) {
+    ATRACE_END();
 		return 0;
+  }
 
 	/*
 	 * If we are in kernel mode at this point, we have no context to
@@ -678,6 +704,7 @@ done:
 		 * oom-killed).
 		 */
 		pagefault_out_of_memory();
+    ATRACE_END();
 		return 0;
 	}
 
@@ -706,11 +733,12 @@ done:
 				      fault == VM_FAULT_BADACCESS ? SEGV_ACCERR : SEGV_MAPERR,
 				      far, inf->name);
 	}
-
+  ATRACE_END();
 	return 0;
 
 no_context:
 	__do_kernel_fault(addr, esr, regs);
+  ATRACE_END();
 	return 0;
 }
 
