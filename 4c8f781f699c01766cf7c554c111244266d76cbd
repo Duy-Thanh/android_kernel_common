@@ -22,6 +22,30 @@
       },
       "revId": "4c8f781f699c01766cf7c554c111244266d76cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6df1d592_c572ac71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-28T21:24:55Z",
+      "side": 1,
+      "message": "This still needs to be fixed.",
+      "parentUuid": "2d4816ee_265f64cd",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "4c8f781f699c01766cf7c554c111244266d76cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
