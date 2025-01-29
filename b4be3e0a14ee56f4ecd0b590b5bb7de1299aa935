@@ -16,6 +16,24 @@
       "message": "Breaks the abi 😞",
       "revId": "b4be3e0a14ee56f4ecd0b590b5bb7de1299aa935",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f219b7cd_9dcd4c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2025-01-29T15:49:32Z",
+      "side": 1,
+      "message": "This is because symbol change is not reverted.\nRaised change https://android-review.googlesource.com/c/kernel/common/+/3469170 for same",
+      "parentUuid": "28342ddb_13818ff7",
+      "revId": "b4be3e0a14ee56f4ecd0b590b5bb7de1299aa935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
