@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d3fb25_8b7f124f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T16:41:46Z",
+      "side": 1,
+      "message": "Hmm. I wonder whether this is something that should be virtualised? For example, should the UAPI allow the VMM to control which partitions are exposed to the guest?",
+      "range": {
+        "startLine": 1103,
+        "startChar": 2,
+        "endLine": 1103,
+        "endChar": 17
+      },
+      "revId": "fad352f1afb1ab5fa053e64db219d7654728ed5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
