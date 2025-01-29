@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89e3bcf_e92e27fe",
+        "filename": "include/trace/hooks/compaction.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-29T00:02:38Z",
+      "side": 1,
+      "message": "Please add `/* SPDX-License-Identifier: GPL-2.0 */` as the first line in this file to fix the chechpatch warning.",
+      "fixSuggestions": [
+        {
+          "fixId": "8c528061_5506adf2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/compaction.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "/* SPDX-License-Identifier: GPL-2.0 */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "801d94669464c094ce731e26cee0bd413ab596f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
