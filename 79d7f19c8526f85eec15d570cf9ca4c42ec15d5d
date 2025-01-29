@@ -46,6 +46,30 @@
       },
       "revId": "79d7f19c8526f85eec15d570cf9ca4c42ec15d5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce562b89_a792e1fe",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-29T10:30:22Z",
+      "side": 1,
+      "message": "Actually looking again, that was wrong, this is about the IOMMU which we only support dt for now, so I can converge to `get_iommu_id_by_of`",
+      "parentUuid": "8431f213_d4dd1773",
+      "range": {
+        "startLine": 1672,
+        "startChar": 17,
+        "endLine": 1672,
+        "endChar": 35
+      },
+      "revId": "79d7f19c8526f85eec15d570cf9ca4c42ec15d5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
