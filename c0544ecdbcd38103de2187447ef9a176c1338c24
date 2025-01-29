@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d926329e_9868da8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-29T16:14:11Z",
+      "side": 1,
+      "message": "I introduce `kvm_reclaim_ffa_guest_pages` later on this series which is called from the `pvm_start_teardown` hvc. This function gives the pages back to the guest owned state so that the host reclaim can do its thing.\n\nThe link can be found here: 3365082: ANDROID: KVM: On guest exit ask Trustzone to relinquish the borrowed pages | https://android-review.git.corp.google.com/c/kernel/common/+/3365082",
+      "parentUuid": "bb1715a4_cfbc84bf",
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfb54960_a2330d9d",
@@ -159,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef84315e_5dafd9db",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1340,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-29T16:14:11Z",
+      "side": 1,
+      "message": "I am only calling it with `nr_pages \u003d\u003d 1` so it won\u0027t overflow. I will drop `nr_pages` argument all together and replace the function name with `__pkvm_guest_[share|unshare]_hyp_page`",
+      "parentUuid": "7a6edb8e_005d5590",
+      "range": {
+        "startLine": 1340,
+        "startChar": 0,
+        "endLine": 1340,
+        "endChar": 31
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14a8d6e3_80108188",
@@ -276,6 +318,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d18d49c_e2dcd8ae",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-29T16:14:11Z",
+      "side": 1,
+      "message": "I will drop nr_pages all together and replace the function name with `__pkvm_guest_[share|unshare]_hyp_page`",
+      "parentUuid": "fc5fbe7d_df38a13b",
+      "range": {
+        "startLine": 1372,
+        "startChar": 7,
+        "endLine": 1372,
+        "endChar": 38
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5af12508_923d1c93",
@@ -289,6 +355,30 @@
       "writtenOn": "2025-01-28T13:35:26Z",
       "side": 1,
       "message": "Same overflow issue here.",
+      "range": {
+        "startLine": 1377,
+        "startChar": 1,
+        "endLine": 1377,
+        "endChar": 31
+      },
+      "revId": "c0544ecdbcd38103de2187447ef9a176c1338c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d27c0da_40684896",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1377,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-29T16:14:11Z",
+      "side": 1,
+      "message": "dropped nr_pages",
+      "parentUuid": "5af12508_923d1c93",
       "range": {
         "startLine": 1377,
         "startChar": 1,
