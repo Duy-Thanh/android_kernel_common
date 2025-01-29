@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa275cc_92ff2c62",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1928,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-29T13:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95225a01_ab0a94e2",
+      "revId": "12b0f4554921fac4e578d65932eb5eaaa7808428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b9dab22_d7ae9112",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82545d01_4b63437d",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1969,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-29T13:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b9dab22_d7ae9112",
+      "revId": "12b0f4554921fac4e578d65932eb5eaaa7808428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45edafcf_e197cd05",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-01-27T14:29:04Z",
       "side": 1,
       "message": "This looks opposite way round to the singleton page case at line 2003.",
+      "revId": "12b0f4554921fac4e578d65932eb5eaaa7808428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "226d1e63_ecd82881",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1973,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-29T13:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45edafcf_e197cd05",
       "revId": "12b0f4554921fac4e578d65932eb5eaaa7808428",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
