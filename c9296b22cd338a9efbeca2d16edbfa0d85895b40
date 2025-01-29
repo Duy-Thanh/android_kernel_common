@@ -22,6 +22,30 @@
       },
       "revId": "c9296b22cd338a9efbeca2d16edbfa0d85895b40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c46c134e_e3b49249",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-29T19:11:57Z",
+      "side": 1,
+      "message": "Right it is probably not needed. Let me do the following:\n1. Name the function `%s/ffa_map_hyp_buffers/ffa_map_hyp_buffers_locked` and\n`%s/ffa_unmap_hyp_buffers/ffa_unmap_hyp_buffers_locked/g`\n\n2. Use an unsigned integer and make sure it doesn\u0027t ovverrun.\n3. make sure we don\u0027t increment the refount if we cannot map.\n4. make sure we don\u0027t decrement the refcount if we cannot unmap.",
+      "parentUuid": "03a264a3_e0120009",
+      "range": {
+        "startLine": 119,
+        "startChar": 5,
+        "endLine": 119,
+        "endChar": 21
+      },
+      "revId": "c9296b22cd338a9efbeca2d16edbfa0d85895b40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
