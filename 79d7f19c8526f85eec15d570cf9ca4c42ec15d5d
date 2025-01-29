@@ -22,6 +22,30 @@
       },
       "revId": "79d7f19c8526f85eec15d570cf9ca4c42ec15d5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8431f213_d4dd1773",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-29T09:34:48Z",
+      "side": 1,
+      "message": "Not really, as not all devices handled by IOMMU are from the device tree.",
+      "parentUuid": "b79e7d32_4637ac2b",
+      "range": {
+        "startLine": 1672,
+        "startChar": 17,
+        "endLine": 1672,
+        "endChar": 35
+      },
+      "revId": "79d7f19c8526f85eec15d570cf9ca4c42ec15d5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
