@@ -267,6 +267,24 @@
       "parentUuid": "aca65ef3_eeaf9945",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c26c754b_edf9c962",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-01-29T17:24:41Z",
+      "side": 1,
+      "message": "Hi Hongseock, Wesley has pushed his patchset under the topic \u0027usb-offload-6.12\u0027 here: https://android-review.git.corp.google.com/q/topic:%22usb-offload-6.12%22\n\nAbandoning this change for clarity.",
+      "parentUuid": "2b64d808_2bab3488",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
