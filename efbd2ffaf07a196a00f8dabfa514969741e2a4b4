@@ -22,6 +22,30 @@
       },
       "revId": "efbd2ffaf07a196a00f8dabfa514969741e2a4b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2b05c8_0c95d323",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-01-29T03:00:30Z",
+      "side": 1,
+      "message": "If there\u0027s no specific reason, I\u0027d like to remove them to get upstream change (https://r.android.com/c/3468400/2). See also https://r.android.com/3468481",
+      "parentUuid": "0bb0f539_55ed795d",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "efbd2ffaf07a196a00f8dabfa514969741e2a4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
