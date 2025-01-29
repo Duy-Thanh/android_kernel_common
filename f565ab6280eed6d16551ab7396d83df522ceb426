@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78cd8ebc_cc154dca",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T13:44:46Z",
+      "side": 1,
+      "message": "Do we need to check the start address as well?",
+      "range": {
+        "startLine": 1456,
+        "startChar": 19,
+        "endLine": 1456,
+        "endChar": 32
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5656e48e_92c028c5",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T13:44:46Z",
+      "side": 1,
+      "message": "The hypervisor knows about the device resources, so why isn\u0027t this a single hypercall to donate a resource rather than a page?",
+      "range": {
+        "startLine": 1460,
+        "startChar": 8,
+        "endLine": 1460,
+        "endChar": 25
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb5f4a2_7bb42d2b",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1469,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T13:44:46Z",
+      "side": 1,
+      "message": "```\nwhile (off) {\n   ...\n   off -\u003d PAGE_SIZE;\n}\n```",
+      "range": {
+        "startLine": 1469,
+        "startChar": 2,
+        "endLine": 1469,
+        "endChar": 40
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e40c21d_eec9f833",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T13:44:46Z",
+      "side": 1,
+      "message": "Yell if this fails? Otherwise there will presumably be fireworks if/when a host driver tries to probe donated MMIO regions.",
+      "range": {
+        "startLine": 1470,
+        "startChar": 3,
+        "endLine": 1470,
+        "endChar": 20
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2bfaac_290b1de7",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T13:44:46Z",
+      "side": 1,
+      "message": "(my comments for donation apply here too)",
+      "range": {
+        "startLine": 1480,
+        "startChar": 0,
+        "endLine": 1485,
+        "endChar": 0
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f726165_1885f048",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T13:44:46Z",
+      "side": 1,
+      "message": "Can you just call `__pkvm_arch_reclaim_device` instead, or will the hypervisor explode?",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1517,
+        "endChar": 0
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ffa3b15_3ed8ebe6",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T13:44:46Z",
+      "side": 1,
+      "message": "`while (r \u003d platform_get...)`",
+      "range": {
+        "startLine": 1528,
+        "startChar": 1,
+        "endLine": 1528,
+        "endChar": 5
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f414903_6a4f83c5",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T13:44:46Z",
+      "side": 1,
+      "message": "What prevents the group from changing between the two calls to `iommu_group_for_each_dev()`?",
+      "range": {
+        "startLine": 1557,
+        "startChar": 2,
+        "endLine": 1557,
+        "endChar": 26
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
