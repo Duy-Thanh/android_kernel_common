@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e00a36f8_46045db4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T22:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c77fbb2_b1e0654a",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 25
+      },
+      "revId": "c462796382e78a0d5280acf1a7a18937020d549a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82f4166a_bea7ed32",
@@ -70,6 +94,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3822679d_2eb9fe3f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1734,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T22:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a4ad083_45bfb0b8",
+      "range": {
+        "startLine": 1734,
+        "startChar": 20,
+        "endLine": 1734,
+        "endChar": 29
+      },
+      "revId": "c462796382e78a0d5280acf1a7a18937020d549a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05188cf_59ebbbfe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1734,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T22:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82f4166a_bea7ed32",
+      "range": {
+        "startLine": 1734,
+        "startChar": 57,
+        "endLine": 1734,
+        "endChar": 66
+      },
+      "revId": "c462796382e78a0d5280acf1a7a18937020d549a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e78e05c3_270bf039",
@@ -111,6 +183,54 @@
         "startChar": 20,
         "endLine": 1735,
         "endChar": 27
+      },
+      "revId": "c462796382e78a0d5280acf1a7a18937020d549a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b46006b1_d47c605c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T22:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ac45c73_93972952",
+      "range": {
+        "startLine": 1735,
+        "startChar": 20,
+        "endLine": 1735,
+        "endChar": 27
+      },
+      "revId": "c462796382e78a0d5280acf1a7a18937020d549a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "026fb998_718d6162",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T22:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e78e05c3_270bf039",
+      "range": {
+        "startLine": 1735,
+        "startChar": 41,
+        "endLine": 1735,
+        "endChar": 51
       },
       "revId": "c462796382e78a0d5280acf1a7a18937020d549a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
