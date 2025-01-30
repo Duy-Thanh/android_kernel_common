@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdadcca5_ab7c01e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T22:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9e1c065_16d82870",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 37
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e04add2_4ad9d034",
@@ -108,6 +132,30 @@
       "writtenOn": "2025-01-30T12:54:00Z",
       "side": 1,
       "message": "-EBUSY might be better? (similarly in `__pkvm_group_assign()`)",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 14
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a16182_6705808a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T22:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e04add2_4ad9d034",
       "range": {
         "startLine": 196,
         "startChar": 9,
@@ -202,6 +250,30 @@
       "side": 1,
       "message": "I will make this protected only now, I had some patches for np, which relied on normal share calls.",
       "parentUuid": "974451d9_f9259e86",
+      "range": {
+        "startLine": 1786,
+        "startChar": 7,
+        "endLine": 1786,
+        "endChar": 31
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b086ba_28a1cc1c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T22:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c614109_99fa5c70",
       "range": {
         "startLine": 1786,
         "startChar": 7,
