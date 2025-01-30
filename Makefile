@@ -1548,7 +1548,15 @@ CLEAN_FILES += vmlinux.symvers modules-only.symvers \
 	       modules.builtin modules.builtin.modinfo modules.nsdeps \
 	       modules.builtin.ranges vmlinux.o.map \
 	       compile_commands.json rust/test \
+<<<<<<< HEAD   (71ddb8 ANDROID: compile and link protected-exports.o into vmlinux)
 	       rust-project.json .vmlinux.objs .vmlinux.export.c
+||||||| BASE
+	       rust-project.json .vmlinux.objs .vmlinux.export.c \
+               .builtin-dtbs-list .builtin-dtb.S
+=======
+	       rust-project.json .vmlinux.objs .vmlinux.export.c \
+               .vmlinux.protected-exports.c .builtin-dtbs-list .builtin-dtb.S
+>>>>>>> CHANGE (dc96cd ANDROID: remove protected-export.c with `make clean`)
 
 # Directories & files removed with 'make mrproper'
 MRPROPER_FILES += include/config include/generated          \
