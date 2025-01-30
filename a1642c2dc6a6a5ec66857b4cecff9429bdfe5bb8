@@ -88,6 +88,24 @@
       "parentUuid": "14037cbc_444d3866",
       "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b0461c_2bbe165b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-30T16:17:26Z",
+      "side": 1,
+      "message": "I would like to understand your reason why you think is counter intutitive. Can you say that PSCI and trng are counter intutive ? I am doing what the spec recommands which is supporting both and as we both now this not the worst part from the spec.",
+      "parentUuid": "9d3dabd1_52f03464",
+      "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
