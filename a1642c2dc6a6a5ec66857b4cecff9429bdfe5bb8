@@ -70,6 +70,24 @@
       "parentUuid": "c0e45572_8da60e99",
       "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d3dabd1_52f03464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-30T15:35:04Z",
+      "side": 1,
+      "message": "\u003e After speaking to Seb, I\u0027ve completely changed my mind 😊\n\u003e We should expose only the HVC conduit to guests, not the SMC one.\n\nFor the record, what was the gist of this discussion? Using the HVC conduit does seem counter-intuitive to the innocent bystander 😊",
+      "parentUuid": "14037cbc_444d3866",
+      "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
