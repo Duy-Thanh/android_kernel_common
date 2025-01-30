@@ -201,7 +201,7 @@ common_kernel(
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     protected_exports_list = "gki/aarch64/protected_exports",
     protected_modules_list = ":gki_aarch64_protected_modules",
-    trim_nonlisted_kmi = False,
+    trim_nonlisted_kmi = True,
     visibility = ["//visibility:public"],
 
     # ABI
