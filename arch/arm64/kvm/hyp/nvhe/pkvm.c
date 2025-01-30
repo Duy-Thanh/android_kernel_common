@@ -287,6 +287,8 @@ static void pkvm_vcpu_init_traps(struct pkvm_hyp_vcpu *hyp_vcpu)
 		return;
 	}
 
+	BUG();
+
 	pvm_init_trap_regs(&hyp_vcpu->vcpu);
 	pvm_init_traps_aa64pfr0(&hyp_vcpu->vcpu);
 	pvm_init_traps_aa64pfr1(&hyp_vcpu->vcpu);
