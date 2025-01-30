@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8eb51ba_1998e8b9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T14:34:41Z",
+      "side": 1,
+      "message": "Because the guest is not enrolled, which means the assumption that the guard there is wrong, it\u0027s up to the caller to decide what to do, in my usage, it\u0027s important to fail.",
+      "parentUuid": "081e67eb_a161655f",
+      "range": {
+        "startLine": 2150,
+        "startChar": 9,
+        "endLine": 2150,
+        "endChar": 16
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bc200cf_9045e3f4",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 3
@@ -65,6 +89,54 @@
         "startChar": 27,
         "endLine": 2152,
         "endChar": 46
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71eba01d_6636e5a0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2152,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T14:34:41Z",
+      "side": 1,
+      "message": "For device assignemnet, the hypervisor will call this function with the correct alignement.\nHowever, this is function is copy-paste from `Android15-6.6` https://android.googlesource.com/kernel/common/+/refs/heads/android15-6.6/arch/arm64/kvm/hyp/nvhe/mem_protect.c#2931\n\nWhich this can be directly triggered from guests, I thought the extra checks won\u0027t hurt, specially if there are new users for this, but I can remove it for now.",
+      "parentUuid": "f032325f_98f3cb30",
+      "range": {
+        "startLine": 2152,
+        "startChar": 27,
+        "endLine": 2152,
+        "endChar": 46
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd0d7afe_5dadc4f0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2152,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T14:34:41Z",
+      "side": 1,
+      "message": "We issue an empty table walk in that case, but again, at the moment the input should be trusted, so I can remove it.",
+      "parentUuid": "0bc200cf_9045e3f4",
+      "range": {
+        "startLine": 2152,
+        "startChar": 50,
+        "endLine": 2152,
+        "endChar": 55
       },
       "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -118,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60610849_41e0b9cd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2168,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T14:34:41Z",
+      "side": 1,
+      "message": "Yes, if the range was not guarded and mapped as block.",
+      "parentUuid": "b6564589_ec2086c2",
+      "range": {
+        "startLine": 2168,
+        "startChar": 0,
+        "endLine": 2168,
+        "endChar": 32
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a433e0cf_3a581ef6",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 3
@@ -129,6 +225,30 @@
       "writtenOn": "2025-01-30T13:45:18Z",
       "side": 1,
       "message": "How can that happen?",
+      "range": {
+        "startLine": 2169,
+        "startChar": 0,
+        "endLine": 2169,
+        "endChar": 27
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0166e025_62c0e3e6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T14:34:41Z",
+      "side": 1,
+      "message": "In case of blocks, the address can be aligned to block.",
+      "parentUuid": "a433e0cf_3a581ef6",
       "range": {
         "startLine": 2169,
         "startChar": 0,
