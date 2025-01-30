@@ -491,6 +491,8 @@ static void kvm_nvhe_report_cfi_failure(u64 panic_addr)
 		kvm_err(" (CONFIG_CFI_PERMISSIVE ignored for hyp failures)\n");
 }
 
+extern bool __hyp_lm_size_mb;
+
 void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
 					      u64 elr_virt, u64 elr_phys,
 					      u64 par, uintptr_t vcpu,
@@ -544,6 +546,9 @@ void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
 	 * hyp VAs to vmlinux addresses.
 	 */
 	kvm_err("Hyp Offset: 0x%llx\n", hyp_offset);
+
+	if (__hyp_lm_size_mb)
+		kvm_err("kvm-arm.hyp_lm_size_mb is set, is it big enough?");
 
 	panic("HYP panic:\nPS:%08llx PC:%016llx ESR:%016llx\nFAR:%016llx HPFAR:%016llx PAR:%016llx\nVCPU:%016lx\n",
 	      spsr, elr_virt, esr, far, hpfar, par, vcpu);

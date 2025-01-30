@@ -174,6 +174,19 @@ static int __init register_moveable_regions(void)
 	return 0;
 }
 
+bool __hyp_lm_size_mb;
+
+static int __init early_hyp_lm_size_mb_cfg(char *arg)
+{
+	int ret = kstrtoull(arg, 10, &kvm_nvhe_sym(hyp_lm_size_mb));
+
+	if (!ret)
+		__hyp_lm_size_mb = true;
+
+	return ret;
+}
+early_param("kvm-arm.hyp_lm_size_mb", early_hyp_lm_size_mb_cfg);
+
 void __init kvm_hyp_reserve(void)
 {
 	u64 hyp_mem_pages = 0;
