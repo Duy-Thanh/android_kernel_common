@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e331184_a1b5ad16",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-01-30T12:32:10Z",
+      "side": 1,
+      "message": "I\u0027ve created b/393322606 to track this issue, in the meantime could you please check if adding a `# Do not sort: Keep the proposed order` before the rule instantiation works?\n\nThank you.\n\nPlease fix this ERROR reported by Buildifier: File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.\n\nAnalyzer Description: Check formats of Bazel definitions.\nOwner: kleaf@google.com\n\nFile is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "9aa478564a50e16832d5f1057727cba54bbd88c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
