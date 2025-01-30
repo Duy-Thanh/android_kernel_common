@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "081e67eb_a161655f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T13:45:18Z",
+      "side": 1,
+      "message": "Why wouldn\u0027t we return 0 in this case?",
+      "range": {
+        "startLine": 2150,
+        "startChar": 9,
+        "endLine": 2150,
+        "endChar": 16
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc200cf_9045e3f4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2152,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T13:45:18Z",
+      "side": 1,
+      "message": "Do we care?",
+      "range": {
+        "startLine": 2152,
+        "startChar": 50,
+        "endLine": 2152,
+        "endChar": 55
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f032325f_98f3cb30",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2152,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T13:45:18Z",
+      "side": 1,
+      "message": "How can that be true?",
+      "range": {
+        "startLine": 2152,
+        "startChar": 27,
+        "endLine": 2152,
+        "endChar": 46
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94718816_f50c9fa5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T13:45:18Z",
+      "side": 1,
+      "message": "```\nif (ret \u0026\u0026 ret !\u003d -E2BIG)\n    goto unlock;\n```",
+      "range": {
+        "startLine": 2159,
+        "startChar": 0,
+        "endLine": 2163,
+        "endChar": 0
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6564589_ec2086c2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2168,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T13:45:18Z",
+      "side": 1,
+      "message": "I haven\u0027t looked ahead to see how this is used, but if this is plumbed via a hypercall then is this triggerable by a guest passing a non-guarded IPA which is mapped using a block?",
+      "range": {
+        "startLine": 2168,
+        "startChar": 0,
+        "endLine": 2168,
+        "endChar": 32
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a433e0cf_3a581ef6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T13:45:18Z",
+      "side": 1,
+      "message": "How can that happen?",
+      "range": {
+        "startLine": 2169,
+        "startChar": 0,
+        "endLine": 2169,
+        "endChar": 27
+      },
+      "revId": "5f95ac30bf87f81ab8f387a94261b36d0908f048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
