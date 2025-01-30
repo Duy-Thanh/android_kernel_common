@@ -34,6 +34,24 @@
       "parentUuid": "761cb1eb_efba9279",
       "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e45572_8da60e99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-30T13:23:03Z",
+      "side": 1,
+      "message": "I am afraid that we will have to support both if we want to follow the spec guidance. One practical reason for doing this is that we have vendors that don\u0027t make use of the ARM FF-A driver (we have an example with Pixel atm), and write their own thing which ignores the conduit from the DT.",
+      "parentUuid": "776a54bd_c31652ca",
+      "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
