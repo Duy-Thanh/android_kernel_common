@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03bf73fd_e75cbe2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-01-30T22:02:59Z",
+      "side": 1,
+      "message": "Looking into this, it appears Greg\u0027s request to submit an updated patchset upstream was, for lack of a better term, ignored, or at least de-prioritiezed. I\u0027m not opposed to merging this for this kernel, but before doing so, would like to align on what the best approach for upstreaming would be. Guenter seems to have delegated the decision.\n\nThe feedback from the lore link you\u0027ve provided seems to be that both the \u0027non-wrapped\u0027 and \u0027wrapped\u0027 cases have validity. I agree with the idea of a debugfs node to select wrapped or non wrapped at runtime, and think it would be prudent to have a config option which could select the build time default for this setting.\n\n@gregkh@google.com, would this be an acceptable approach in your eyes? Would you be willing to drop your -2 if there is commitment to upstream this approach this year?\n\n@badhri@google.com, thoughts?",
+      "revId": "3ad7454492dfdf5a2292a756725ee0b7f1bde1e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
