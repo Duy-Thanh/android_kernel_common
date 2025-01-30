@@ -1757,7 +1757,7 @@ static void fw_devlink_relax_link(struct device_link *link)
 
 	pm_runtime_drop_link(link);
 	link->flags = DL_FLAG_MANAGED | FW_DEVLINK_FLAGS_PERMISSIVE;
-	dev_dbg(link->consumer, "Relaxing link with %s\n",
+	dev_info(link->consumer, "IJM Relaxing link with %s\n",
 		dev_name(link->supplier));
 }
 
@@ -2016,7 +2016,7 @@ static bool __fw_devlink_relax_cycles(struct fwnode_handle *con_handle,
 
 		if (__fw_devlink_relax_cycles(con_handle,
 					      dev_link->supplier->fwnode)) {
-			pr_debug("%pfwf: cycle: depends on %pfwf\n", sup_handle,
+			pr_info("IJM %pfwf: cycle: depends on %pfwf\n", sup_handle,
 				 dev_link->supplier->fwnode);
 			fw_devlink_relax_link(dev_link);
 			dev_link->flags |= DL_FLAG_CYCLE;

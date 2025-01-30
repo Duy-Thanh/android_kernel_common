@@ -272,6 +272,18 @@ static int __init deferred_probe_timeout_setup(char *str)
 }
 __setup("deferred_probe_timeout=", deferred_probe_timeout_setup);
 
+static bool debug_probe_calls;
+static int __init debug_probe_calls_setup(char *str)
+{
+	bool enable;
+
+	if (!kstrtobool(str, &enable))
+		debug_probe_calls = enable;
+
+	return 1;
+}
+__setup("debug_probe_calls", debug_probe_calls_setup);
+
 /**
  * driver_deferred_probe_check_state() - Check deferred probe state
  * @dev: device to check
@@ -305,6 +317,7 @@ static void deferred_probe_timeout_work_func(struct work_struct *work)
 {
 	struct device_private *p;
 
+	pr_info("IJM deferred probe timeout expired, relaxing supplier links\n");
 	fw_devlink_drivers_done();
 
 	driver_deferred_probe_timeout = 0;
@@ -742,7 +755,7 @@ static int really_probe_debug(struct device *dev, struct device_driver *drv)
 	 * CONFIG_DYNAMIC_DEBUG and we want a simple 'initcall_debug' on the
 	 * kernel commandline to print this all the time at the debug level.
 	 */
-	printk(KERN_DEBUG "probe of %s returned %d after %lld usecs\n",
+	printk(KERN_INFO "IJM probe of %s returned %d after %lld usecs\n",
 		 dev_name(dev), ret, ktime_us_delta(rettime, calltime));
 	return ret;
 }
@@ -817,7 +830,7 @@ static int __driver_probe_device(struct device_driver *drv, struct device *dev)
 		pm_runtime_get_sync(dev->parent);
 
 	pm_runtime_barrier(dev);
-	if (initcall_debug)
+	if (initcall_debug || debug_probe_calls)
 		ret = really_probe_debug(dev, drv);
 	else
 		ret = really_probe(dev, drv);
