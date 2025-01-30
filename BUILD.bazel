@@ -230,8 +230,14 @@ common_kernel(
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     protected_exports_list = "gki/aarch64/protected_exports",
     protected_modules_list = ":gki_aarch64_protected_modules",
+<<<<<<< PATCH SET (158de0 ANDROID: GKI: activate aarch64 symbol import protection)
+    trim_nonlisted_kmi = True,
+||||||| BASE
+    trim_nonlisted_kmi = False,
+=======
     system_dlkm_extra_archive_files = [":generate_gki_module_info_arm64"],
     trim_nonlisted_kmi = False,
+>>>>>>> BASE      (a614d4 ANDROID: GKI: Add 6.12 QCOM symbols for various drivers)
     visibility = ["//visibility:public"],
 
     # ABI
