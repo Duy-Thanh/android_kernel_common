@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e42ea2_1d591c2f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T12:54:00Z",
+      "side": 1,
+      "message": "If the host-\u003ehyp MMIO donation was per-device instead of per-page, I think you could avoid this walk entirely and track the state in the `pkvm_device` instead. As it stands, the locking is a little clunky because the device_spinlock is doing all the work and hyp_lock_component() in here is probably (?) not needed",
+      "range": {
+        "startLine": 135,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 29
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ba4e52_a2f58aad",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T12:54:00Z",
+      "side": 1,
+      "message": "Are you sure about this? What about devices that didn\u0027t match the group_id?",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 37
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e04add2_4ad9d034",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T12:54:00Z",
+      "side": 1,
+      "message": "-EBUSY might be better? (similarly in `__pkvm_group_assign()`)",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 14
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b787ff_976d4fe0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1774,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T12:54:00Z",
+      "side": 1,
+      "message": "Should this check be copied until some of the other new hypercalls as well?",
+      "range": {
+        "startLine": 1774,
+        "startChar": 6,
+        "endLine": 1774,
+        "endChar": 30
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "974451d9_f9259e86",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-30T12:54:00Z",
+      "side": 1,
+      "message": "Hmm, this is reachable for a non-protected vCPU. Is that intentional? I\u0027m not really sure how device assignment should work in that case. e.g. is donating the MMIO regions correct or should they be shared?",
+      "range": {
+        "startLine": 1786,
+        "startChar": 7,
+        "endLine": 1786,
+        "endChar": 31
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
