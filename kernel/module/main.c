@@ -60,6 +60,7 @@
 #include <linux/debugfs.h>
 #include <linux/execmem.h>
 #include <uapi/linux/module.h>
+#include <misc/protected-exports.h>
 #include "internal.h"
 
 #define CREATE_TRACE_POINTS
@@ -1339,6 +1340,17 @@ fail:
 }
 EXPORT_SYMBOL_GPL(__symbol_get);
 
+static int cmp_string(const void *a, const void *b)
+{
+	return strcmp(*(const char **)a, *(const char **)b);
+}
+
+static bool is_protected_symbol_export(const char *name)
+{
+	return bsearch(name, protected_symbol_exports,
+								 NR_PROTECTED_SYMBOL_EXPORTS, 1, cmp_string) != NULL;
+}
+
 /*
  * Ensure that an exported symbol [global namespace] does not already exist
  * in the kernel or in some other module's exported symbol table.
@@ -1370,6 +1382,13 @@ static int verify_exported_symbols(struct module *mod)
 				       module_name(fsa.owner));
 				return -ENOEXEC;
 			}
+#ifdef CONFIG_MODULE_SIG_PROTECT
+			if (!mod->sig_ok && is_protected_symbol_export(kernel_symbol_name(s))) {
+				pr_err("%s: exports protected symbol %s\n",
+							mod->name, kernel_symbol_name(s));
+				return -EACCES;
+			}
+#endif
 		}
 	}
 	return 0;
