@@ -71,7 +71,6 @@ void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa);
  *	etc...
  * - SVE
  * - RAS (v1)
- *	Supported by KVM
  */
 #define PVM_ID_AA64PFR0_ALLOW (\
 	ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_FP) | \
