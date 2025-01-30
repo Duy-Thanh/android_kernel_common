@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34a6ffe9_e9774249",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T15:43:11Z",
+      "side": 1,
+      "message": "The problem is that the device can have multiple ranges which can\u0027t be donated in a single call, and also for simplicity reasons there is no way to enumrate devices between host/hyp.\n\nI agree that this is overlocked and it\u0027s only safe because `device_spinlock`, but I opted in for simplicity over efficiency here as this new, already complicated and not in any hot paths as MMIO regions are small, but I can have another think to improve it.",
+      "parentUuid": "34e42ea2_1d591c2f",
+      "range": {
+        "startLine": 135,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 29
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07ba4e52_a2f58aad",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-30T12:54:00Z",
       "side": 1,
       "message": "Are you sure about this? What about devices that didn\u0027t match the group_id?",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 37
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e1c065_16d82870",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T15:43:11Z",
+      "side": 1,
+      "message": "Ouch, I will fix it.",
+      "parentUuid": "07ba4e52_a2f58aad",
       "range": {
         "startLine": 172,
         "startChar": 0,
@@ -95,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b2f15c4_eff342f2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1774,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T15:43:11Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t understand, copied to where?",
+      "parentUuid": "c2b787ff_976d4fe0",
+      "range": {
+        "startLine": 1774,
+        "startChar": 6,
+        "endLine": 1774,
+        "endChar": 30
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "974451d9_f9259e86",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 3
@@ -106,6 +178,30 @@
       "writtenOn": "2025-01-30T12:54:00Z",
       "side": 1,
       "message": "Hmm, this is reachable for a non-protected vCPU. Is that intentional? I\u0027m not really sure how device assignment should work in that case. e.g. is donating the MMIO regions correct or should they be shared?",
+      "range": {
+        "startLine": 1786,
+        "startChar": 7,
+        "endLine": 1786,
+        "endChar": 31
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c614109_99fa5c70",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T15:43:11Z",
+      "side": 1,
+      "message": "I will make this protected only now, I had some patches for np, which relied on normal share calls.",
+      "parentUuid": "974451d9_f9259e86",
       "range": {
         "startLine": 1786,
         "startChar": 7,
