@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41c0538e_925739b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2025-01-31T07:06:34Z",
+      "side": 1,
+      "message": "builds just fine locally and with abtd. Running presubmit again ...",
+      "revId": "c03326ab76e4c32249702dad656b117568193c54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
