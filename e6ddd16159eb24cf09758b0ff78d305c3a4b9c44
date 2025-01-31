@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9491c9df_ee40dbcd",
+        "filename": "include/misc/protected-exports.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-01-31T10:48:18Z",
+      "side": 1,
+      "message": "```suggestion\n * Copyright 2025 Google LLC\n```\n\nhttps://opensource.google/documentation/reference/copyright",
+      "parentUuid": "68b1a50b_2fc8f9db",
+      "range": {
+        "startLine": 6,
+        "startChar": 22,
+        "endLine": 6,
+        "endChar": 61
+      },
+      "revId": "e6ddd16159eb24cf09758b0ff78d305c3a4b9c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca06871d_bedd815e",
         "filename": "include/misc/protected-exports.h",
         "patchSetId": 4
