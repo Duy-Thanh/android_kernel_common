@@ -16,6 +16,24 @@
       "message": "Did you test multi-sharing?",
       "revId": "2fbda4c21b3b58582dab3a0b3fcf7252f022786b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "081478f5_46cc0866",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-31T13:22:52Z",
+      "side": 1,
+      "message": "I did run 200 np guests in parallel that are not GUP pinned and nothing exploded, which _probably_ means yes 😊\n\nI\u0027ll try to instrument the code to confirm, though",
+      "parentUuid": "0a4fc758_b026f27c",
+      "revId": "2fbda4c21b3b58582dab3a0b3fcf7252f022786b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
