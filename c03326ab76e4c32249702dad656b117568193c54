@@ -16,6 +16,23 @@
       "message": "builds just fine locally and with abtd. Running presubmit again ...",
       "revId": "c03326ab76e4c32249702dad656b117568193c54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c2b504_55a0faa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2025-01-31T08:27:54Z",
+      "side": 1,
+      "message": "seems that the build does not get the latest pixel modules. TH complains about: private/google-modules/soc/gs/drivers/thermal/samsung/gs_tmu_v2.c:752:56: error: no member named \u0027tz_node\u0027 in \u0027struct thermal_instance\u0027, but this was fixed and merged in pa/3066127. I re-triggered run presubmit on the next merge.",
+      "revId": "c03326ab76e4c32249702dad656b117568193c54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
