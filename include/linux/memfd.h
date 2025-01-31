@@ -17,6 +17,7 @@ struct folio *memfd_alloc_folio(struct file *memfd, pgoff_t idx);
 int memfd_check_seals_mmap(struct file *file, unsigned long *vm_flags_ptr);
 struct file *memfd_alloc_file(const char *name, unsigned int flags);
 unsigned int *memfd_file_seals_ptr(struct file *file);
+int memfd_create_kernel(const char *name, unsigned int flags);
 #else
 static inline long memfd_fcntl(struct file *f, unsigned int c, unsigned int a)
 {
@@ -38,6 +39,10 @@ static inline struct file *memfd_alloc_file(const char *name, unsigned int flags
 static inline unsigned int *memfd_file_seals_ptr(struct file *file)
 {
 	return NULL;
+}
+static inline int memfd_create_kernel(const char *name, unsigned int flags)
+{
+	return -EINVAL;
 }
 #endif
 
