@@ -16,6 +16,24 @@
       "message": "I believe this also affects the private range too? Also, the hypervisor will certainly map non contiguous memory range so it seems a bit difficult to interpret this way. Finally IIUC, you could end-up in the situation where you lack of memory, you think \"I\u0027ll add 1MiB more\" but then it might not change anything due to the ROUND(PTR_PER_PTE) in __hyp_pgtable_max_pages() (or will it?)\n\nI wonder if that wouldn\u0027t be easier to reason with \"the number of pages we can map in the hyp stage-1\" but then computing the worst case is a bit annoying and I do sympathize this is a \"temporary\" solution. So wouldn\u0027t that be easier to just define that as the size of the hyp stage-1 memory directly?\n\nWDYS?",
       "revId": "ecbbb97e9d60784fd2766dfb537e2c3c87ae4065",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f796c5d_288a2d79",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-31T13:18:51Z",
+      "side": 1,
+      "message": "\u003e I believe this also affects the private range too?\n\nWell actually it doesn\u0027t, see how `hyp_s1_pgtable_pages()`\u0027s behaviour only differs for the memblock parsing part, but we still do a normal reservation for a 1G private range. I thought we\u0027d want to keep that, to avoid confusing a hyp s1 mapping failure with the hyp_alloc ENOMEM case for ex.\n\n\u003e I wonder if that wouldn\u0027t be easier to reason with \"the number of pages we can map in the hyp stage-1\" but then computing the worst case is a bit annoying and I do sympathize this is a \"temporary\" solution. So wouldn\u0027t that be easier to just define that as the size of the hyp stage-1 memory directly?\n\nYeah I totally agree that the value as-is is a bit difficult to define precisely, I just couldn\u0027t find anything simple that was much better :( I did consider just making this \u0027the size of the hyp stage-1 reservation\u0027, but I thought that was even harder to reason about, because it\u0027s even further away from what you\u0027d really want to express. I find it difficult (intuitively at least) to reason about how much memory can be mapped with a page-table of size X. So `hyp_lm_size_mb` is kind of a proxy for the max size of the linear map, which is equally dodgy, but fits a little better my mental model.\n\nFor all options I could think of, the only way to set it \u0027properly\u0027 was through trial and error, so it probably doesn\u0027t matter all that much?",
+      "parentUuid": "74944f5c_92a41c04",
+      "revId": "ecbbb97e9d60784fd2766dfb537e2c3c87ae4065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
