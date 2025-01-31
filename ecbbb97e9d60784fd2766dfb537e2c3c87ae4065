@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74944f5c_92a41c04",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-31T09:44:36Z",
+      "side": 1,
+      "message": "I believe this also affects the private range too? Also, the hypervisor will certainly map non contiguous memory range so it seems a bit difficult to interpret this way. Finally IIUC, you could end-up in the situation where you lack of memory, you think \"I\u0027ll add 1MiB more\" but then it might not change anything due to the ROUND(PTR_PER_PTE) in __hyp_pgtable_max_pages() (or will it?)\n\nI wonder if that wouldn\u0027t be easier to reason with \"the number of pages we can map in the hyp stage-1\" but then computing the worst case is a bit annoying and I do sympathize this is a \"temporary\" solution. So wouldn\u0027t that be easier to just define that as the size of the hyp stage-1 memory directly?\n\nWDYS?",
+      "revId": "ecbbb97e9d60784fd2766dfb537e2c3c87ae4065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
