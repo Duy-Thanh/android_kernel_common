@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68b1a50b_2fc8f9db",
+        "filename": "include/misc/protected-exports.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-31T10:26:43Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the proper copyright line for stuff here...",
+      "range": {
+        "startLine": 6,
+        "startChar": 22,
+        "endLine": 6,
+        "endChar": 61
+      },
+      "revId": "e6ddd16159eb24cf09758b0ff78d305c3a4b9c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca06871d_bedd815e",
+        "filename": "include/misc/protected-exports.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-31T10:26:43Z",
+      "side": 1,
+      "message": "why is this in include/misc/ ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "e6ddd16159eb24cf09758b0ff78d305c3a4b9c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
