@@ -52,6 +52,24 @@
       "parentUuid": "0f796c5d_288a2d79",
       "revId": "ecbbb97e9d60784fd2766dfb537e2c3c87ae4065",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11e651d0_9f5eaa55",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-31T14:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cc1dd3b_9e818da8",
+      "revId": "ecbbb97e9d60784fd2766dfb537e2c3c87ae4065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
