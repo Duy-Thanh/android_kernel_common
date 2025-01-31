@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fff3a1c4_06f68019",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-31T16:13:17Z",
+      "side": 1,
+      "message": "Maybe document the return value as well? i.e. what does pKVM do if the reset returns an error?",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7d32c710_36d72a8b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_pkvm_module.h",
+              "range": {
+                "startLine": 182,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": " * \t\t\t\tReturns 0 on success, -EEXIST if a callback is already\n * \t\t\t\tregistered for the device.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0499882f_686c2771",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-31T16:13:17Z",
+      "side": 1,
+      "message": "host_to_guest parameter\n\nThat said, I\u0027m curious to know what the reset handler is likely to do with this information.",
+      "range": {
+        "startLine": 175,
+        "startChar": 21,
+        "endLine": 175,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "af2a759f_4b2158b7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_pkvm_module.h",
+              "range": {
+                "startLine": 175,
+                "startChar": 0,
+                "endLine": 177,
+                "endChar": 0
+              },
+              "replacement": " * \t\t\t\tpassed in the host_to_guest parameter. Only one\n * \t\t\t\tcallback can be registered per device.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abee51b4_d12383ad",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-31T16:13:17Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 179,
+        "startChar": 44,
+        "endLine": 179,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d25fb05b_381f413d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_pkvm_module.h",
+              "range": {
+                "startLine": 179,
+                "startChar": 0,
+                "endLine": 180,
+                "endChar": 0
+              },
+              "replacement": " * \t\t\t\tReset is expected to clear any state/secrets on the\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac758c43_2c9f3906",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-31T16:13:17Z",
+      "side": 1,
+      "message": "Why is this a `phys` not a `pkvm_device`? The callback takes the latter, so the module already knows about them.",
+      "range": {
+        "startLine": 193,
+        "startChar": 31,
+        "endLine": 193,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8349466b_7f19e13b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+              "range": {
+                "startLine": 193,
+                "startChar": 0,
+                "endLine": 195,
+                "endChar": 0
+              },
+              "replacement": "int pkvm_device_register_reset(struct pkvm_device *dev,\n\t\t\t\tint (*cb)(struct pkvm_device *dev, bool host_to_guest));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9b108ef_fb996e6a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-31T16:13:17Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 130,
+        "startChar": 10,
+        "endLine": 130,
+        "endChar": 12
+      },
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
