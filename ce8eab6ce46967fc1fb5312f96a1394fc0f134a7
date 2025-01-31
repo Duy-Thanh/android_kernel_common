@@ -16,6 +16,24 @@
       "message": "To match the original behaviour still need to launder all errors into -EFAULT on this path. Is that best behaviour, I don\u0027t know. Probably though!",
       "revId": "ce8eab6ce46967fc1fb5312f96a1394fc0f134a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5e6bff_fb962582",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-31T09:58:23Z",
+      "side": 1,
+      "message": "Yes, let\u0027s not change that! I\u0027ll get this error path right at some point 😕",
+      "parentUuid": "e032fbab_7e0b9af5",
+      "revId": "ce8eab6ce46967fc1fb5312f96a1394fc0f134a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
