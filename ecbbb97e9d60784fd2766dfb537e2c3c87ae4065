@@ -34,6 +34,24 @@
       "parentUuid": "74944f5c_92a41c04",
       "revId": "ecbbb97e9d60784fd2766dfb537e2c3c87ae4065",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc1dd3b_9e818da8",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-31T14:04:58Z",
+      "side": 1,
+      "message": "Haaa you\u0027re right for the private range, all good there.\n\n\u003e  I thought we\u0027d want to keep that, to avoid confusing a hyp s1 mapping failure with the hyp_alloc ENOMEM case for ex.\n\nSo I thought about that case too, but I think it\u0027s ok, there is no confusion. On -ENOMEM from hyp_alloc() we would go back to the host, which would try to refill and then that the refill that would -ENOMEM, allowing the host to bailout. No infinite loop possible!\n\n\u003e because it\u0027s even further away from what you\u0027d really want to express. \n\nFair enough, also in the case of the \"hyp-stage1\", you might have to add a specific value to be able to map a single page more, so not so useful either.",
+      "parentUuid": "0f796c5d_288a2d79",
+      "revId": "ecbbb97e9d60784fd2766dfb537e2c3c87ae4065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
