@@ -1102,6 +1102,7 @@ static int __init ashmem_init(void)
 {
 	int ret = -ENOMEM;
 
+	return 0;
 	ashmem_area_cachep = kmem_cache_create("ashmem_area_cache",
 					       sizeof(struct ashmem_area),
 					       0, 0, NULL);

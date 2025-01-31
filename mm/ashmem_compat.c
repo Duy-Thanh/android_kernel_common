@@ -13,6 +13,7 @@
 #include <linux/fcntl.h>
 #include <linux/fs.h>
 #include <linux/memfd.h>
+#include <linux/miscdevice.h>
 #include <linux/mm_types.h>
 #include <linux/mman.h>
 #include <linux/shmem_fs.h>
@@ -600,3 +601,29 @@ void install_ashmem_compat_fops(struct file *file)
 	file->f_op = &ashmem_compat_fops;
 	file->f_path.dentry->d_op = &ashmem_compat_dentry_ops;
 }
+
+static struct file_operations ashmem_shim_fops = {
+	.open = simple_open,
+};
+
+bool is_ashmem_shim_file(struct file *file)
+{
+	return file->f_op == &ashmem_shim_fops;
+}
+
+static struct miscdevice ashmem_shim_misc = {
+	.minor = MISC_DYNAMIC_MINOR,
+	.name = "ashmem",
+	.fops = &ashmem_shim_fops,
+};
+
+static int ashmem_shim_init(void)
+{
+	int ret = misc_register(&ashmem_shim_misc);
+
+	if (ret < 0)
+		pr_err("failed to register ashmem misc device\n");
+
+	return ret;
+}
+device_initcall(ashmem_shim_init);

@@ -28,6 +28,7 @@ long ashmem_compat_ioctl_compat(struct file *file, unsigned int cmd, unsigned lo
 int ashmem_compat_mmap(struct file *file, struct vm_area_struct *vma);
 void ashmem_compat_show_fdinfo(struct seq_file *m, struct file *file);
 void install_ashmem_compat_fops(struct file *file);
+bool is_ashmem_shim_file(struct file *file);
 #else
 static inline struct file *ashmem_compat_create_memfd_file(const char *name, unsigned int flags)
 {
@@ -64,6 +65,10 @@ static inline void ashmem_compat_show_fdinfo(struct seq_file *m, struct file *fi
 }
 static inline void install_ashmem_compat_fops(struct file *file)
 {
+}
+static inline bool is_ashmem_shim_file(struct file *file)
+{
+	return false;
 }
 #endif
 #endif /* __LINUX_ASHMEM_COMPAT_H */

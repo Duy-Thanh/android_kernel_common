@@ -5,6 +5,8 @@
  *  Copyright (C) 1991, 1992  Linus Torvalds
  */
 
+#include <linux/ashmem_compat.h>
+#include <linux/memfd.h>
 #include <linux/string.h>
 #include <linux/mm.h>
 #include <linux/file.h>
@@ -33,6 +35,8 @@
 #include <linux/compat.h>
 #include <linux/mnt_idmapping.h>
 #include <linux/filelock.h>
+
+#include <uapi/linux/memfd.h>
 
 #include "internal.h"
 #include <trace/hooks/syscall_check.h>
@@ -1439,6 +1443,14 @@ static long do_sys_openat2(int dfd, const char __user *filename,
 		if (IS_ERR(f)) {
 			put_unused_fd(fd);
 			fd = PTR_ERR(f);
+		} else if (is_ashmem_shim_file(f)) {
+			unsigned int memfd_flags = MFD_ALLOW_SEALING;
+			memfd_flags |= how->flags & O_CLOEXEC ? MFD_CLOEXEC : 0;
+
+			fput(f);
+			put_unused_fd(fd);
+
+			fd = memfd_create_kernel("ashmem", memfd_flags);
 		} else {
 			fd_install(fd, f);
 		}

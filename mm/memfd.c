@@ -477,6 +477,24 @@ struct file *memfd_alloc_file(const char *name, unsigned int flags)
 	return alloc_file(filename, flags);
 }
 
+int memfd_create_kernel(const char *name, unsigned int flags)
+{
+	struct file *file;
+	int fd = get_unused_fd_flags((flags & MFD_CLOEXEC) ? O_CLOEXEC : 0);
+
+	if (fd < 0)
+		return fd;
+
+	file = memfd_alloc_file(name, flags);
+	if (IS_ERR(file)) {
+		put_unused_fd(fd);
+		return PTR_ERR(file);
+	}
+
+	fd_install(fd, file);
+	return fd;
+}
+
 SYSCALL_DEFINE2(memfd_create,
 		const char __user *, uname,
 		unsigned int, flags)
