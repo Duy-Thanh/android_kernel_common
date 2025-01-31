@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3930180_3e765d78",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-01-31T18:12:44Z",
+      "side": 1,
+      "message": "this breaks the KMI:\n```\ntype \u0027struct cfg80211_chan_def\u0027 changed\n  member \u0027u16 punctured\u0027 was added\n```",
+      "range": {
+        "startLine": 774,
+        "startChar": 1,
+        "endLine": 774,
+        "endChar": 15
+      },
+      "revId": "466a957434427d52584227d913164288e7914aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
