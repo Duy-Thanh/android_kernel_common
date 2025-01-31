@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b365a8d_94e6b3cc",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-01-31T10:25:15Z",
+      "side": 1,
+      "message": "relative to what directory?  The source or output directory (they can be different as you know.)",
+      "range": {
+        "startLine": 260,
+        "startChar": 42,
+        "endLine": 260,
+        "endChar": 51
+      },
+      "revId": "83d4c3f9e1d75b1f5139b22df60d3b4634e0009c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
