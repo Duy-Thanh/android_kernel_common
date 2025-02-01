@@ -1334,19 +1334,6 @@ config SCHEDSTATS
 
 endmenu
 
-config DEBUG_TIMEKEEPING
-	bool "Enable extra timekeeping sanity checking"
-	help
-	  This option will enable additional timekeeping sanity checks
-	  which may be helpful when diagnosing issues where timekeeping
-	  problems are suspected.
-
-	  This may include checks in the timekeeping hotpaths, so this
-	  option may have a (very small) performance impact to some
-	  workloads.
-
-	  If unsure, say N.
-
 config DEBUG_PREEMPT
 	bool "Debug preemptible kernel"
 	depends on DEBUG_KERNEL && PREEMPTION && TRACE_IRQFLAGS_SUPPORT
@@ -2112,6 +2099,16 @@ config FAIL_SUNRPC
 	help
 	  Provide fault-injection capability for SunRPC and
 	  its consumers.
+
+config FAIL_SKB_REALLOC
+	bool "Fault-injection capability forcing skb to reallocate"
+	depends on FAULT_INJECTION_DEBUG_FS
+	help
+	  Provide fault-injection capability that forces the skb to be
+	  reallocated, catching possible invalid pointers to the skb.
+
+	  For more information, check
+	  Documentation/dev-tools/fault-injection/fault-injection.rst
 
 config FAULT_INJECTION_CONFIGFS
 	bool "Configfs interface for fault-injection capabilities"
