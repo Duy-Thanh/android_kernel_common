@@ -46,6 +46,30 @@
       },
       "revId": "4acec638d8dbfb8930077aff93d98d2a11238162",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e901a05f_386e3929",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-02-03T07:10:28Z",
+      "side": 1,
+      "message": "It should be okay just to fix the lint issue.",
+      "parentUuid": "f1ccdcc1_02293bff",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "4acec638d8dbfb8930077aff93d98d2a11238162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
