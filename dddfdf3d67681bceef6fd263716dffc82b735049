@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97aae131_5363fb69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279898
+      },
+      "writtenOn": "2025-02-03T18:39:40Z",
+      "side": 1,
+      "message": "I\u0027m slowly working through some issues in this branch, so the presubmits may fail until all the patches are resolved:\n\nhttps://android-build.corp.google.com/abtd/run/L94800030009290355/\n\nThe above ABTD run confirms this patch solves the issue introduced on 12/19.",
+      "revId": "dddfdf3d67681bceef6fd263716dffc82b735049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
