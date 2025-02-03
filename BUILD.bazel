@@ -1552,7 +1552,12 @@ ddk_headers(
         "drivers/thermal/thermal_core.h",
         "drivers/thermal/thermal_debugfs.h",
         "drivers/thermal/thermal_netlink.h",
+<<<<<<< HEAD   (508b0d ANDROID: fix kernelci build-break due to GCC plugin issue)
         "drivers/usb/dwc3/core.h",
+||||||| BASE
+=======
+        "drivers/thermal/thermal_thresholds.h",
+>>>>>>> CHANGE (7e540d ANDROID: Add thermal_thresholds.h to aarch64 allowlist)
         "sound/usb/card.h",
         "sound/usb/usbaudio.h",
         ":all_headers_allowlist_aarch64_globs",
