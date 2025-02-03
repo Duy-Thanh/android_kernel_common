@@ -306,31 +306,17 @@ common_kernel(
     visibility = ["//visibility:public"],
 )
 
-# Temp target to fork form build.config.gki.riscv64 which may potentially be
-# used elsewhere.
-# TODO(b/236012223): Delete this once we have build-config-less builds for GKI.
-write_file(
-    name = "build.config.gki.riscv64_generated",
-    out = "build.config.gki.riscv64.generated",
-    content = [
-        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.common",
-        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.riscv64",
-        "",  # keep new line at the end
-    ],
-    visibility = ["//visibility:private"],
-)
-
 common_kernel(
     name = "kernel_riscv64",
     outs = DEFAULT_GKI_OUTS,
     arch = "riscv64",
-    build_config = ":build.config.gki.riscv64_generated",
     build_gki_artifacts = True,
     ddk_module_headers = [":all_headers_riscv64"],
     defconfig = "arch/riscv/configs/gki_defconfig",
     extra_dist = [":test_mappings_zip"],
     gki_boot_img_sizes = _GKI_RISCV64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_riscv64",
+    kcflags = COMMON_KCFLAGS,
     make_goals = _GKI_RISCV64_MAKE_GOALS,
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("riscv64"),
