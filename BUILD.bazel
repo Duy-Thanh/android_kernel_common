@@ -12,6 +12,7 @@ load(
     "strip_prefix",
 )
 load("@rules_pkg//pkg:pkg.bzl", "pkg_zip")
+load("@rules_python//python:defs.bzl", "py_library")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels")
 load("//build/kernel/kleaf:constants.bzl", "X86_64_OUTS")
@@ -902,6 +903,16 @@ pkg_install(
         ":kunit_tests_x86_64_pkg_files",
     ],
     visibility = ["//visibility:private"],
+)
+
+py_library(
+    name = "kunit_parser",
+    srcs = [
+        "tools/testing/kunit/kunit_parser.py",
+        "tools/testing/kunit/kunit_printer.py",
+    ],
+    imports = ["tools/testing/kunit"],
+    visibility = ["//visibility:public"],
 )
 
 # DDK Headers
