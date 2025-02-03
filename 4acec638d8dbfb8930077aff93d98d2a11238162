@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152ac4e6_dc9fc28a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-02-03T06:57:36Z",
+      "side": 1,
+      "message": "You should use the same change-id as https://r.android.com/c/3449057 to address the KernelCommit lint failure.",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 52
+      },
+      "revId": "4acec638d8dbfb8930077aff93d98d2a11238162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
