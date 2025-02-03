@@ -1398,7 +1398,7 @@ int smmu_map_pages(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
 		return -EINVAL;
 
 	hyp_spin_lock(&smmu_domain->pgt_lock);
-	while (pgcount && !ret) {
+	while (pgcount) {
 		mapped = 0;
 		ret = smmu_domain->pgtable->ops.map_pages(&smmu_domain->pgtable->ops, iova,
 							  paddr, pgsize, pgcount, prot, 0, &mapped);
