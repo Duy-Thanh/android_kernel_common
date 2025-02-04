@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "708eae38_b92dbbfb",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-04T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fff3a1c4_06f68019",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 25
+      },
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0499882f_686c2771",
@@ -83,6 +107,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1da77ea1_7734233c",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-04T16:32:43Z",
+      "side": 1,
+      "message": "Removed the handler, as the this can be deduced from the context of the device.",
+      "parentUuid": "0499882f_686c2771",
+      "range": {
+        "startLine": 175,
+        "startChar": 21,
+        "endLine": 175,
+        "endChar": 43
+      },
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abee51b4_d12383ad",
@@ -120,6 +168,30 @@
           ]
         }
       ],
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0677089d_67faecda",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-04T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abee51b4_d12383ad",
+      "range": {
+        "startLine": 179,
+        "startChar": 44,
+        "endLine": 179,
+        "endChar": 52
+      },
       "revId": "1f8d306496e23b5e1533411753693a846096892b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -167,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e127cbf_6d556255",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-04T16:32:43Z",
+      "side": 1,
+      "message": "Modules doesn\u0027t have a handle to the device (at least at time the reset module is loaded as there in nothing like `probe_device`) so they use the base address of the device to register reset handlers.\nWhile at reset we can pass the whole device as modules can save some context in private pointers for reset before/after.",
+      "parentUuid": "ac758c43_2c9f3906",
+      "range": {
+        "startLine": 193,
+        "startChar": 31,
+        "endLine": 193,
+        "endChar": 39
+      },
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9b108ef_fb996e6a",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 4
@@ -178,6 +274,30 @@
       "writtenOn": "2025-01-31T16:13:17Z",
       "side": 1,
       "message": "is",
+      "range": {
+        "startLine": 130,
+        "startChar": 10,
+        "endLine": 130,
+        "endChar": 12
+      },
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "384f389b_f0f62520",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-04T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9b108ef_fb996e6a",
       "range": {
         "startLine": 130,
         "startChar": 10,
