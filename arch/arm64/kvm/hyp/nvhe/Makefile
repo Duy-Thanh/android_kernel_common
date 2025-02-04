@@ -16,6 +16,7 @@ hyp-obj-$(CONFIG_TRACING) += clock.o events.o trace.o
 hyp-obj-$(CONFIG_PROTECTED_NVHE_FTRACE) += ftrace.o
 hyp-obj-$(CONFIG_MODULES) += modules.o
 hyp-obj-y += $(lib-objs)
+hyp-obj-y += ../../../kernel/smccc-call.o
 
 #Only for built-in, not modules
 ifeq ($(CONFIG_ARM_SMMU_V3_PKVM),y)
