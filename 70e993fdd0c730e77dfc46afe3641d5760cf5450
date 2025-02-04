@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a7321a_566437fd",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-02-04T17:41:16Z",
+      "side": 1,
+      "message": "The current plan is to deprecate memcg v1 in Android 17. V2 has no memcg swappiness. Please prepare to move away from memcg v1 swappiness.\nIf this is for in-kernel proactive reclaim, we can probably get tracepoints working on v2 by using https://lore.kernel.org/all/20240103164841.2800183-1-schatzberg.dan@gmail.com/ to adjust swappiness.",
+      "range": {
+        "startLine": 624,
+        "startChar": 18,
+        "endLine": 624,
+        "endChar": 39
+      },
+      "revId": "70e993fdd0c730e77dfc46afe3641d5760cf5450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
