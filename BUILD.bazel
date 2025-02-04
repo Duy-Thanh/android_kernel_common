@@ -309,6 +309,7 @@ common_kernel(
     visibility = ["//visibility:public"],
 )
 
+<<<<<<< HEAD   (b28ce0 ANDROID: Add README file to system_dlkm_archive for GKI. am:)
 common_kernel(
     name = "kernel_riscv64",
     outs = DEFAULT_GKI_OUTS,
@@ -326,6 +327,23 @@ common_kernel(
     visibility = ["//visibility:public"],
 )
 
+||||||| BASE
+# Temp target to fork form build.config.gki.x86_64 which may potentially be
+# used elsewhere.
+# TODO(b/236012223): Delete this once we have build-config-less builds for GKI.
+write_file(
+    name = "build.config.gki.x86_64_generated",
+    out = "build.config.gki.x86_64.generated",
+    content = [
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.common",
+        ". ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64",
+        "",  # keep new line at the end
+    ],
+    visibility = ["//visibility:private"],
+)
+
+=======
+>>>>>>> BRANCH (f611fd Revert "Revert "ANDROID: ACK adds kcflags & drops build_conf)
 fail_rule(
     name = "kernel_x86_64_debug",
     message = """\
