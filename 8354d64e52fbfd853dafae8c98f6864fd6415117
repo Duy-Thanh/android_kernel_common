@@ -33,6 +33,24 @@
       "message": "Is it typical to create a file this way (vs having a plaintext README file and including it)?",
       "revId": "8354d64e52fbfd853dafae8c98f6864fd6415117",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04fca116_b9505876",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-02-04T19:09:03Z",
+      "side": 1,
+      "message": "+1; @bettyzhou@google.com what do you prefer? You can totally get the README file (it is right below this package) and concatenate with the modules list. Or you can keep this file short by putting a link here.",
+      "parentUuid": "99af0826_9633ece1",
+      "revId": "8354d64e52fbfd853dafae8c98f6864fd6415117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
