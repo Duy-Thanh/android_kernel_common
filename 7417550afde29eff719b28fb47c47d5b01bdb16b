@@ -33,6 +33,24 @@
       "message": "Dependency upstream commit a769154c7cac037914ba375ae88aae55b2c853e0 can\u0027t be backported. The dependency commit amends the xhci_address_device, which is used from hooks, and is introduced in ACK( in this commit 6496f6cfbbd3bf241c6f16c7621db32088a1f073). For targets which are not yet upstream, changing this might brick those drivers.",
       "revId": "7417550afde29eff719b28fb47c47d5b01bdb16b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4e5e5a8_b68fba69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3259775
+      },
+      "writtenOn": "2025-02-04T09:09:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1900f5e9_2f5f0c01",
+      "revId": "7417550afde29eff719b28fb47c47d5b01bdb16b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
