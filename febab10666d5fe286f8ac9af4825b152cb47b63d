@@ -16,6 +16,24 @@
       "message": "Please help review, thanks.",
       "revId": "febab10666d5fe286f8ac9af4825b152cb47b63d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4df6f0_5765b28e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-02-04T04:45:56Z",
+      "side": 1,
+      "message": "Can you please respond to the questions in the bug?",
+      "parentUuid": "02b72a24_c0563a31",
+      "revId": "febab10666d5fe286f8ac9af4825b152cb47b63d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
