@@ -70,6 +70,30 @@
       },
       "revId": "4c8f781f699c01766cf7c554c111244266d76cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "470c922c_b7fa8db0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-02-05T07:54:24Z",
+      "side": 1,
+      "message": "The new submission is\nhttps://android-review.googlesource.com/c/kernel/common/+/3475721",
+      "parentUuid": "23fb94f7_c84a95de",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "4c8f781f699c01766cf7c554c111244266d76cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
