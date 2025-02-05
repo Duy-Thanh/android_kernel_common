@@ -46,6 +46,30 @@
       },
       "revId": "466a957434427d52584227d913164288e7914aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1338db_cd15090f",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-05T17:25:43Z",
+      "side": 1,
+      "message": "I believe the problem is that adding the `u16` to `struct cfg80211_chan_def` impacts the KMI of `struct wireless_dev` and subsequently `struct net_device`. Exported symbols currently monitored such as `wireless_send_event()` use this struct which ultimately breaks the KMI.",
+      "parentUuid": "9b861781_cd802d76",
+      "range": {
+        "startLine": 774,
+        "startChar": 1,
+        "endLine": 774,
+        "endChar": 15
+      },
+      "revId": "466a957434427d52584227d913164288e7914aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
