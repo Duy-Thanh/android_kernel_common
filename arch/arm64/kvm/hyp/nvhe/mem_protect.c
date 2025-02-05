@@ -1110,26 +1110,27 @@ static int __host_set_page_state_range(u64 addr, u64 size,
 }
 
 static int host_request_owned_transition(u64 *completer_addr,
-					 const struct pkvm_mem_transition *tx)
+					 const struct pkvm_mem_transition *tx,
+					 bool check_count)
 {
 	u64 size = tx->nr_pages * PAGE_SIZE;
 	u64 addr = tx->initiator.addr;
 
-	if (range_is_memory(addr, addr + size) && is_range_refcounted(addr, tx->nr_pages))
+	if (check_count && range_is_memory(addr, addr + size) && is_range_refcounted(addr, tx->nr_pages))
 		return -EINVAL;
 
 	*completer_addr = tx->initiator.host.completer_addr;
 	return __host_check_page_state_range(addr, size, PKVM_PAGE_OWNED);
 }
 
-static int host_request_unshare(struct pkvm_checked_mem_transition *checked_tx)
+static int host_request_unshare(struct pkvm_checked_mem_transition *checked_tx, bool check_count)
 {
 	const struct pkvm_mem_transition *tx = checked_tx->tx;
 	u64 size = tx->nr_pages * PAGE_SIZE;
 	u64 addr = tx->initiator.addr;
 
 
-	if (is_range_refcounted(addr, tx->nr_pages))
+	if (check_count && is_range_refcounted(addr, tx->nr_pages))
 		return -EINVAL;
 
 	checked_tx->completer_addr = tx->initiator.host.completer_addr;
@@ -1681,7 +1682,8 @@ static int check_share(struct pkvm_checked_mem_transition *checked_tx)
 
 	switch (tx->initiator.id) {
 	case PKVM_ID_HOST:
-		ret = host_request_owned_transition(&checked_tx->completer_addr, tx);
+		ret = host_request_owned_transition(&checked_tx->completer_addr, tx,
+						    tx->completer.id == PKVM_ID_HYP);
 		checked_tx->nr_pages = tx->nr_pages;
 		break;
 	case PKVM_ID_GUEST:
@@ -1802,7 +1804,7 @@ static int check_unshare(struct pkvm_checked_mem_transition *checked_tx)
 
 	switch (tx->initiator.id) {
 	case PKVM_ID_HOST:
-		ret = host_request_unshare(checked_tx);
+		ret = host_request_unshare(checked_tx, tx->completer.id == PKVM_ID_HYP);
 		break;
 	case PKVM_ID_GUEST:
 		ret = guest_request_unshare(checked_tx);
@@ -1913,7 +1915,7 @@ static int check_donation(struct pkvm_mem_transition *tx)
 
 	switch (tx->initiator.id) {
 	case PKVM_ID_HOST:
-		ret = host_request_owned_transition(&completer_addr, tx);
+		ret = host_request_owned_transition(&completer_addr, tx, true);
 		break;
 	case PKVM_ID_HYP:
 		ret = hyp_request_donation(&completer_addr, tx);
