@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa583351_3a2a45d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2028475
+      },
+      "writtenOn": "2025-02-05T17:55:12Z",
+      "side": 1,
+      "message": "Hi Michal,\n\nAfter this lands, do we want to consider upstreaming this patch (or a variant using skb_copy_bits instead) for partner validation on different trees/projects?",
+      "revId": "20b7481a2f5dc66f6acdf23bec9cd5c701bb5486",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
