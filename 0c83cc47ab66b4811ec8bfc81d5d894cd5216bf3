@@ -285,6 +285,24 @@
       "parentUuid": "2b64d808_2bab3488",
       "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a2b5450_5224ba06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-02-05T01:51:35Z",
+      "side": 1,
+      "message": "Hi Neill, \nI got it. Thanks for your update.",
+      "parentUuid": "c26c754b_edf9c962",
+      "revId": "0c83cc47ab66b4811ec8bfc81d5d894cd5216bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
