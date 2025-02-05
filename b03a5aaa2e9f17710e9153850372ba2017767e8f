@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f71ea86_fc5122ef",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1774,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-05T14:43:24Z",
+      "side": 1,
+      "message": "Ah, I see, I can add the same check for other hypercalls, although for donate/reclaim MMIO this check is added in the kernel.",
+      "parentUuid": "6ce29ee7_979d338a",
+      "range": {
+        "startLine": 1774,
+        "startChar": 6,
+        "endLine": 1774,
+        "endChar": 30
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "974451d9_f9259e86",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 3
