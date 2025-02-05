@@ -29,6 +29,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_readahead_gfp_mask,
 			TP_ARGS(flags), 1);
 
 */
+
+DECLARE_HOOK(android_vh_reserve_highatomic_bypass,
+	TP_PROTO(struct page *page, bool *bypass),
+	TP_ARGS(page, bypass));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
