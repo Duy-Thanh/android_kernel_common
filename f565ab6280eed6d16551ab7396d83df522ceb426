@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2121bbc2_54c20115",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-05T14:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e38b59a_05c5d0a2",
+      "range": {
+        "startLine": 1460,
+        "startChar": 8,
+        "endLine": 1460,
+        "endChar": 25
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3eb5f4a2_7bb42d2b",
@@ -250,6 +274,30 @@
       "side": 1,
       "message": "Also make this per resource",
       "parentUuid": "550bebaa_aa16160b",
+      "range": {
+        "startLine": 1480,
+        "startChar": 0,
+        "endLine": 1485,
+        "endChar": 0
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94800d5f_9569a548",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-05T14:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f39b4ff_7d4ddee0",
       "range": {
         "startLine": 1480,
         "startChar": 0,
