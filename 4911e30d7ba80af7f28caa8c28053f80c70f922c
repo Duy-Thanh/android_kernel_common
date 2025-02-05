@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b702e78_fa9dc1ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-02-05T04:13:05Z",
+      "side": 1,
+      "message": "This patch does not include the three hooks from the original patch:\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_id_remove);\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_offline);\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_online);\n\nCould you kindly inform me of the reason for discarding these three hooks?",
+      "revId": "4911e30d7ba80af7f28caa8c28053f80c70f922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
