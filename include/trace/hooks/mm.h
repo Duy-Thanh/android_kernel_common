@@ -29,6 +29,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_readahead_gfp_mask,
 			TP_ARGS(flags), 1);
 
 */
+
+DECLARE_HOOK(android_vh_watermark_fast_ok,
+	TP_PROTO(unsigned int order, gfp_t gfp_mask, bool *is_watermark_ok),
+	TP_ARGS(order, gfp_mask, is_watermark_ok));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
