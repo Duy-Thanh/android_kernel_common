@@ -357,6 +357,23 @@
       "message": "Super",
       "revId": "f73aa0eab7d955d782cf623b8d358af4dbaf5b71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8cd697b_5ea24caa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3855204
+      },
+      "writtenOn": "2025-02-05T15:00:33Z",
+      "side": 1,
+      "message": "\n            \n              کد خطا: 403\n              \n            \n            time\u003d1738767614\u0026user\u003dunauthenticated-corp-loas-proxy\u0026srcip\u003d5.115.146.35\u0026url\u003dhttps://login.corp.google.com/request%3Fs%3Dcolumbo403.corp.google.com:443/uberdcolumbo%D/ 03.corp.google.com/up403%253Ftime%253D1738767610%2526user%253Dunauthenticated-corp-loas-prox y%2526srcip%253D5.115.146.35%2526url%253Dhttps://login.corp.google.com/request%25253Fs%25253D columbo403.corp.google.com:443/uberproxy/%252526d%25253Dhttps://columbo403.corp.google.com/u p403%2525253Ftime%2525253D1738767606%25252526user%2525253Dunauthenticated-corp-loas-proxy%25 252526srcip%2525253D5.115.146.35%25252526url%2525253Dhttps://login.corp.google.com/request%2 52525253Fs%252525253Dandroid-build.corp.google.com:443/uberproxy/%2525252526d%252525253Dhttps ://android-build.corp.google.com/automerger_merge_path%25252525253Fhost%25252525253Dandroid% 252525252526branch%25252525253Dandroid-3.18%252525252526project%25252525253Dkernel/common%25 2525252526numeric_change_id%25252525253D158491%252525252526موضوع%25252525253Dinitramfs:%25 252525252BAdd%25252525252Bskip_initramfs%25252525252Bcommand%25252525252Bline%25252525252Bopt ion%2525252525250A%2525252525250AAdd%25252525252Ba%25252525252Bskip_initramfs%25252525252Bop tion%25252525252Bto%25252525252Ballow%25252525252Bانتخاب%25252525252Bآیا%25252525252Bt o%25252525252Bboot%25252525252Busing%2525252525250Athe%25252525252Binitramfs%25252525252Bor% 25252525252Bnot%25252525252Bat%25252525252Buntime.%2525252525250A%2525252525250ACchange-ID:%2 5252525252BIf30428fa748c1d4d3d7b9d97c1f781de5e4558c3%2525252525250Asigned-off-by:%2525252525 2BRom%25252525252BLemarchand%25252525252B%2525252525253Cromlem%252525252540google.com%252525 2525253E%2525252525250A%252525252526upxsrf%25252525253DAOWonpOO-nwy3M4Z91VytM8jUNLLlPfiieN3E zruu11foLWheA:1738767606573%2525252526maxAge%252525253D1200%2525252526authLevel%252525253D200 0000%2525252526keyIds%252525253DDU5,2O9,Ju3,A_Z%2525252526c%252525253D1%25252526uuid%2525253 DTUIN-55N5-VBWO-57DS-YT42-NUFV%25252526user_agent%2525253DMozilla/5.0%2525252B(Linux%2525252 53B%2525252BAndroid%2525252B10%252525253B%2525252BK)%2525252BAppleWebKit/537.36%2525252B(KHT ML،%2525252Blike%2525252BGecko)%2525252BCchrome/132.0.0.0%2525252BMobile%2525252BSafari/537.36 %25252526upxsrf%2525253DAOWonpNWYvTr_62OOc-SyItjQvy0jl4Ys_MSlAZsI-5yTL9spA:1738767610592%252 526maxAge%25253D1200%252526authLevel%25253D2000000%252526keyIds%25253DDU5,2O9,Ju3,A_Z%252526 c%25253D1%2526uuid%253DII65-PY2O-AGJU-M25A-FUYJ-SZO3%2526user_agent%253DMozilla/5.0%252B(Lin ux%25253B%252BAndroid%252B10%25253B%252BK)%252BAppleWebKit/537.36%252B(KHTML،%252Blike%252BGe cko)%252BCchrom/132.0.0.0%252BMobile%252BSafari/537.36%2526upxsrf%253DAOWonpMHjmIG_wVB3XQ1CQ eYqNpqtl7rKn2lb-EObrX8fQHThw:1738767614299%26maxAge%3D1200%26authLevel%3D2000000%26keyIds%3DD U5,2O9,Ju3,A_Z%26c%3D1\u0026uuid\u003dX4I4-KSRT-FHNR-RKUT-MLXU-PQCX\u0026user_agent\u003dMozilla/5.0+(Linux%3B+A ndroid+10%3B+K)+AppleWebKit/537.36+(KHTML،+مانند+Gecko)+Chrome/132.0.0.0+Mobile+Safari/537.36\u0026",
+      "revId": "f73aa0eab7d955d782cf623b8d358af4dbaf5b71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
