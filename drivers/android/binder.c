@@ -7157,7 +7157,7 @@ const struct binder_debugfs_entry binder_debugfs_entries[] = {
 	{} /* terminator */
 };
 
-bool binder_use_rust;
+bool binder_use_rust = IS_ENABLED(CONFIG_X86_64);
 EXPORT_SYMBOL_GPL(binder_use_rust);
 
 static int binder_impl_param_set(const char *buffer, const struct kernel_param *kp)
