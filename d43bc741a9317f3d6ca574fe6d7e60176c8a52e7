@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "052c3937_3f272037",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-05T12:42:31Z",
+      "side": 1,
+      "message": "Looks like we need to update aosp/3433527 to use a different ioctl.",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 15
+      },
+      "revId": "d43bc741a9317f3d6ca574fe6d7e60176c8a52e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
