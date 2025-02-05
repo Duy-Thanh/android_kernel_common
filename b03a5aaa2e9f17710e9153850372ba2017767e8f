@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2939c8c3_bdd2fbec",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-05T13:49:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "34a6ffe9_e9774249",
+      "range": {
+        "startLine": 135,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 29
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07ba4e52_a2f58aad",
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "Sorry, I don\u0027t understand, copied to where?",
       "parentUuid": "c2b787ff_976d4fe0",
+      "range": {
+        "startLine": 1774,
+        "startChar": 6,
+        "endLine": 1774,
+        "endChar": 30
+      },
+      "revId": "b03a5aaa2e9f17710e9153850372ba2017767e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce29ee7_979d338a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1774,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-05T13:49:02Z",
+      "side": 1,
+      "message": "Sorry, my comment doesn\u0027t appear to be in English!\n\nThe point I was trying to make is that you\u0027ve got an `is_protected_kvm_enabled()` check here, but other hypercalls added in this series (e.g. the one above -- `handle___pkvm_host_reclaim_hyp_mmio`) don\u0027t have that check. Maybe they\u0027re not needed, but I\u0027m not sure how device assignment interacts with non-protected VMs under pKVM and what the behaviour should be there.",
+      "parentUuid": "1b2f15c4_eff342f2",
       "range": {
         "startLine": 1774,
         "startChar": 6,
