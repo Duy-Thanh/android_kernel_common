@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e893396_240444f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2025-02-05T08:52:04Z",
+      "side": 1,
+      "message": "Note, I suspect that the kernel folks prefer that you keep the subject unmodified, and then include notes on how you resolved the merge conflict below. There might even be tooling that relies on the correct formatting (although I don\u0027t know for certain).",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "3a6a5cffd5dcec54caf2c6f66505d65856db39c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
