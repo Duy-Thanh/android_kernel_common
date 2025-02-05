@@ -22,6 +22,30 @@
       },
       "revId": "466a957434427d52584227d913164288e7914aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b861781_cd802d76",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2025-02-05T05:29:32Z",
+      "side": 1,
+      "message": "cfg80211 made as vendor modules with b/274416891.\nI think this file changes shouldn\u0027t cause KMI breakage.",
+      "parentUuid": "f3930180_3e765d78",
+      "range": {
+        "startLine": 774,
+        "startChar": 1,
+        "endLine": 774,
+        "endChar": 15
+      },
+      "revId": "466a957434427d52584227d913164288e7914aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
