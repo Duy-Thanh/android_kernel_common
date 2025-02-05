@@ -16,6 +16,24 @@
       "message": "This patch does not include the three hooks from the original patch:\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_id_remove);\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_offline);\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_online);\n\nCould you kindly inform me of the reason for discarding these three hooks?",
       "revId": "4911e30d7ba80af7f28caa8c28053f80c70f922c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e17eca3_a6b37cdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-02-05T16:58:12Z",
+      "side": 1,
+      "message": "No problem adding those to 6.12 if you need them. I assume Oppo does not currently use them.",
+      "parentUuid": "4b702e78_fa9dc1ff",
+      "revId": "4911e30d7ba80af7f28caa8c28053f80c70f922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
