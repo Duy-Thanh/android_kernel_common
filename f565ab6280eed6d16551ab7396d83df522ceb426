@@ -283,6 +283,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c07c8e6_19d476b8",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-05T13:16:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4dbbc8d8_814bff2b",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1517,
+        "endChar": 0
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ffa3b15_3ed8ebe6",
@@ -367,6 +391,30 @@
       "side": 1,
       "message": "In case a device was added that shouldn\u0027t really be a problem as the call will just fail. But when a device is removed it won\u0027t be accessible anymore. Although, I guess that shouldn\u0027t typicaly happen for platform devices as it means the device was in dtbo that was removed, which contradicts with the point that the device has to be existing at boot and trusted.\nSo I guess only a malicous/mis-behaving code will do that.",
       "parentUuid": "5f414903_6a4f83c5",
+      "range": {
+        "startLine": 1557,
+        "startChar": 2,
+        "endLine": 1557,
+        "endChar": 26
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1d7176_9567e2bb",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-05T13:16:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "99408330_3a1f16bb",
       "range": {
         "startLine": 1557,
         "startChar": 2,
