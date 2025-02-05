@@ -22,6 +22,30 @@
       },
       "revId": "d43bc741a9317f3d6ca574fe6d7e60176c8a52e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad82d77_b1921497",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-05T17:40:54Z",
+      "side": 1,
+      "message": "Right, I have the following WIP CL for that: aosp/3476616",
+      "parentUuid": "052c3937_3f272037",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 15
+      },
+      "revId": "d43bc741a9317f3d6ca574fe6d7e60176c8a52e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
