@@ -3176,6 +3176,7 @@ static inline bool zone_watermark_fast(struct zone *z, unsigned int order,
 				unsigned int alloc_flags, gfp_t gfp_mask)
 {
 	long free_pages;
+	bool is_watermark_ok = false;
 
 	if (!zone_is_suitable(z, order))
 		return false;
@@ -3198,6 +3199,10 @@ static inline bool zone_watermark_fast(struct zone *z, unsigned int order,
 		if (usable_free > mark + z->lowmem_reserve[highest_zoneidx])
 			return true;
 	}
+
+	trace_android_vh_watermark_fast_ok(order, gfp_mask, &is_watermark_ok);
+	if (is_watermark_ok)
+		return true;
 
 	if (__zone_watermark_ok(z, order, mark, highest_zoneidx, alloc_flags,
 					free_pages))
