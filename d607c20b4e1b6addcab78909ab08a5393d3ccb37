@@ -81,6 +81,30 @@
       },
       "revId": "d607c20b4e1b6addcab78909ab08a5393d3ccb37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d6f65d4_9d64c85d",
+        "filename": "Documentation/virt/kvm/arm/hypercalls.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-05T17:14:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c60c8eb9_a43f0eeb",
+      "range": {
+        "startLine": 218,
+        "startChar": 2,
+        "endLine": 218,
+        "endChar": 33
+      },
+      "revId": "d607c20b4e1b6addcab78909ab08a5393d3ccb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
