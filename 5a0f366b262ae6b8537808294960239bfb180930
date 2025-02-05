@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef552a89_8a0fff7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-05T14:16:18Z",
+      "side": 1,
+      "message": "I see, but as those are not iommu, we can use something as `#group-cells`?\n\nI don\u0027t think it\u0027s a big deal for now, as we only support one id, any change requires a hypervisor change, so if we need in the future, we can use `#group-cells` and default it to 1 if not exisiting",
+      "parentUuid": "5c4cd345_c6b86a8c",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08709b73_aeb41ef1",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 2
