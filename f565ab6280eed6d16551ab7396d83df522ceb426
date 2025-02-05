@@ -238,6 +238,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f39b4ff_7d4ddee0",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-05T13:18:10Z",
+      "side": 1,
+      "message": "Also make this per resource",
+      "parentUuid": "550bebaa_aa16160b",
+      "range": {
+        "startLine": 1480,
+        "startChar": 0,
+        "endLine": 1485,
+        "endChar": 0
+      },
+      "revId": "f565ab6280eed6d16551ab7396d83df522ceb426",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f726165_1885f048",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 3
