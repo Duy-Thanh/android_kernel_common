@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7aaa2079_02898b27",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-05T17:42:11Z",
+      "side": 1,
+      "message": "Thanks. Maybe we shouldn\u0027t expose `struct pkvm_device` to modules at all, then? Instead, we could take a `void *cookie` during registration and pass that back to the handler. That would replace the `priv field` in the device. WDYT?",
+      "parentUuid": "1e127cbf_6d556255",
+      "range": {
+        "startLine": 193,
+        "startChar": 31,
+        "endLine": 193,
+        "endChar": 39
+      },
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9b108ef_fb996e6a",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 4
