@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c12dd7ce_fba81801",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-06T09:23:48Z",
+      "side": 1,
+      "message": "checkpatch can be ignored on reverts",
+      "revId": "ce66276ad576094bc4beb3cf25e3aceecdd46e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
