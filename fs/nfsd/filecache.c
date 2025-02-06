@@ -176,6 +176,7 @@ nfsd_file_alloc(struct inode *inode, unsigned int may, unsigned int hashval,
 	struct nfsd_file *nf;
 
 	nf = kmem_cache_alloc(nfsd_file_slab, GFP_KERNEL);
+<<<<<<< HEAD   (55bef3 Merge branch 'android12-5.10' into android12-5.10-lts)
 	if (nf) {
 		INIT_HLIST_NODE(&nf->nf_node);
 		INIT_LIST_HEAD(&nf->nf_lru);
@@ -196,6 +197,40 @@ nfsd_file_alloc(struct inode *inode, unsigned int may, unsigned int hashval,
 		nf->nf_mark = NULL;
 		trace_nfsd_file_alloc(nf);
 	}
+||||||| BASE
+	if (unlikely(!nf))
+		return NULL;
+
+	INIT_LIST_HEAD(&nf->nf_lru);
+	nf->nf_birthtime = ktime_get();
+	nf->nf_file = NULL;
+	nf->nf_cred = get_current_cred();
+	nf->nf_net = net;
+	nf->nf_flags = want_gc ?
+		BIT(NFSD_FILE_HASHED) | BIT(NFSD_FILE_PENDING) | BIT(NFSD_FILE_GC) :
+		BIT(NFSD_FILE_HASHED) | BIT(NFSD_FILE_PENDING);
+	nf->nf_inode = inode;
+	refcount_set(&nf->nf_ref, 1);
+	nf->nf_may = need;
+	nf->nf_mark = NULL;
+=======
+	if (unlikely(!nf))
+		return NULL;
+
+	INIT_LIST_HEAD(&nf->nf_lru);
+	INIT_LIST_HEAD(&nf->nf_gc);
+	nf->nf_birthtime = ktime_get();
+	nf->nf_file = NULL;
+	nf->nf_cred = get_current_cred();
+	nf->nf_net = net;
+	nf->nf_flags = want_gc ?
+		BIT(NFSD_FILE_HASHED) | BIT(NFSD_FILE_PENDING) | BIT(NFSD_FILE_GC) :
+		BIT(NFSD_FILE_HASHED) | BIT(NFSD_FILE_PENDING);
+	nf->nf_inode = inode;
+	refcount_set(&nf->nf_ref, 1);
+	nf->nf_may = need;
+	nf->nf_mark = NULL;
+>>>>>>> BRANCH (f0a533 Linux 5.10.234)
 	return nf;
 }
 
@@ -329,10 +364,22 @@ nfsd_file_dispose_list(struct list_head *dispose)
 {
 	struct nfsd_file *nf;
 
+<<<<<<< HEAD   (55bef3 Merge branch 'android12-5.10' into android12-5.10-lts)
 	while(!list_empty(dispose)) {
 		nf = list_first_entry(dispose, struct nfsd_file, nf_lru);
 		list_del(&nf->nf_lru);
 		nfsd_file_put_noref(nf);
+||||||| BASE
+	while (!list_empty(dispose)) {
+		nf = list_first_entry(dispose, struct nfsd_file, nf_lru);
+		list_del_init(&nf->nf_lru);
+		nfsd_file_free(nf);
+=======
+	while (!list_empty(dispose)) {
+		nf = list_first_entry(dispose, struct nfsd_file, nf_gc);
+		list_del_init(&nf->nf_gc);
+		nfsd_file_free(nf);
+>>>>>>> BRANCH (f0a533 Linux 5.10.234)
 	}
 }
 
@@ -396,13 +443,39 @@ nfsd_file_list_add_pernet(struct list_head *dst, struct list_head *src,
 static void
 nfsd_file_dispose_list_delayed(struct list_head *dispose)
 {
+<<<<<<< HEAD   (55bef3 Merge branch 'android12-5.10' into android12-5.10-lts)
 	LIST_HEAD(list);
 	struct nfsd_file *nf;
+||||||| BASE
+	while(!list_empty(dispose)) {
+		struct nfsd_file *nf = list_first_entry(dispose,
+						struct nfsd_file, nf_lru);
+		struct nfsd_net *nn = net_generic(nf->nf_net, nfsd_net_id);
+		struct nfsd_fcache_disposal *l = nn->fcache_disposal;
+=======
+	while(!list_empty(dispose)) {
+		struct nfsd_file *nf = list_first_entry(dispose,
+						struct nfsd_file, nf_gc);
+		struct nfsd_net *nn = net_generic(nf->nf_net, nfsd_net_id);
+		struct nfsd_fcache_disposal *l = nn->fcache_disposal;
+>>>>>>> BRANCH (f0a533 Linux 5.10.234)
 
+<<<<<<< HEAD   (55bef3 Merge branch 'android12-5.10' into android12-5.10-lts)
 	while(!list_empty(dispose)) {
 		nf = list_first_entry(dispose, struct nfsd_file, nf_lru);
 		nfsd_file_list_add_pernet(&list, dispose, nf->nf_net);
 		nfsd_file_list_add_disposal(&list, nf->nf_net);
+||||||| BASE
+		spin_lock(&l->lock);
+		list_move_tail(&nf->nf_lru, &l->freeme);
+		spin_unlock(&l->lock);
+		queue_work(nfsd_filecache_wq, &l->work);
+=======
+		spin_lock(&l->lock);
+		list_move_tail(&nf->nf_gc, &l->freeme);
+		spin_unlock(&l->lock);
+		queue_work(nfsd_filecache_wq, &l->work);
+>>>>>>> BRANCH (f0a533 Linux 5.10.234)
 	}
 }
 
@@ -444,7 +517,22 @@ nfsd_file_lru_cb(struct list_head *item, struct list_lru_one *lru,
 	if (!test_and_clear_bit(NFSD_FILE_HASHED, &nf->nf_flags))
 		goto out_skip;
 
+<<<<<<< HEAD   (55bef3 Merge branch 'android12-5.10' into android12-5.10-lts)
 	list_lru_isolate_move(lru, &nf->nf_lru, head);
+||||||| BASE
+	/* Refcount went to zero. Unhash it and queue it to the dispose list */
+	nfsd_file_unhash(nf);
+	list_lru_isolate_move(lru, &nf->nf_lru, head);
+	this_cpu_inc(nfsd_file_evictions);
+	trace_nfsd_file_gc_disposed(nf);
+=======
+	/* Refcount went to zero. Unhash it and queue it to the dispose list */
+	nfsd_file_unhash(nf);
+	list_lru_isolate(lru, &nf->nf_lru);
+	list_add(&nf->nf_gc, head);
+	this_cpu_inc(nfsd_file_evictions);
+	trace_nfsd_file_gc_disposed(nf);
+>>>>>>> BRANCH (f0a533 Linux 5.10.234)
 	return LRU_REMOVED;
 out_skip:
 	return LRU_SKIP;
@@ -511,10 +599,46 @@ __nfsd_file_close_inode(struct inode *inode, unsigned int hashval,
 	struct nfsd_file	*nf;
 	struct hlist_node	*tmp;
 
+<<<<<<< HEAD   (55bef3 Merge branch 'android12-5.10' into android12-5.10-lts)
 	spin_lock(&nfsd_file_hashtbl[hashval].nfb_lock);
 	hlist_for_each_entry_safe(nf, tmp, &nfsd_file_hashtbl[hashval].nfb_head, nf_node) {
 		if (inode == nf->nf_inode)
 			nfsd_file_unhash_and_release_locked(nf, dispose);
+||||||| BASE
+	/* If we raced with someone else unhashing, ignore it */
+	if (!nfsd_file_unhash(nf))
+		return;
+
+	/* If we can't get a reference, ignore it */
+	if (!nfsd_file_get(nf))
+		return;
+
+	/* Extra decrement if we remove from the LRU */
+	if (nfsd_file_lru_remove(nf))
+		++decrement;
+
+	/* If refcount goes to 0, then put on the dispose list */
+	if (refcount_sub_and_test(decrement, &nf->nf_ref)) {
+		list_add(&nf->nf_lru, dispose);
+		trace_nfsd_file_closing(nf);
+=======
+	/* If we raced with someone else unhashing, ignore it */
+	if (!nfsd_file_unhash(nf))
+		return;
+
+	/* If we can't get a reference, ignore it */
+	if (!nfsd_file_get(nf))
+		return;
+
+	/* Extra decrement if we remove from the LRU */
+	if (nfsd_file_lru_remove(nf))
+		++decrement;
+
+	/* If refcount goes to 0, then put on the dispose list */
+	if (refcount_sub_and_test(decrement, &nf->nf_ref)) {
+		list_add(&nf->nf_gc, dispose);
+		trace_nfsd_file_closing(nf);
+>>>>>>> BRANCH (f0a533 Linux 5.10.234)
 	}
 	spin_unlock(&nfsd_file_hashtbl[hashval].nfb_lock);
 }
@@ -540,6 +664,7 @@ nfsd_file_close_inode_sync(struct inode *inode)
 	nfsd_file_dispose_list_sync(&dispose);
 }
 
+<<<<<<< HEAD   (55bef3 Merge branch 'android12-5.10' into android12-5.10-lts)
 /**
  * nfsd_file_close_inode_sync - attempt to forcibly close a nfsd_file
  * @inode: inode of the file to attempt to remove
@@ -558,6 +683,23 @@ nfsd_file_close_inode(struct inode *inode)
 	__nfsd_file_close_inode(inode, hashval, &dispose);
 	trace_nfsd_file_close_inode(inode, hashval, !list_empty(&dispose));
 	nfsd_file_dispose_list_delayed(&dispose);
+||||||| BASE
+	nfsd_file_queue_for_close(inode, &dispose);
+	while (!list_empty(&dispose)) {
+		nf = list_first_entry(&dispose, struct nfsd_file, nf_lru);
+		list_del_init(&nf->nf_lru);
+		nfsd_file_free(nf);
+	}
+	flush_delayed_fput();
+=======
+	nfsd_file_queue_for_close(inode, &dispose);
+	while (!list_empty(&dispose)) {
+		nf = list_first_entry(&dispose, struct nfsd_file, nf_gc);
+		list_del_init(&nf->nf_gc);
+		nfsd_file_free(nf);
+	}
+	flush_delayed_fput();
+>>>>>>> BRANCH (f0a533 Linux 5.10.234)
 }
 
 /**

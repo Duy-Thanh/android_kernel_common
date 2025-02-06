@@ -1973,6 +1973,22 @@ static struct cpuhp_step cpuhp_hp_states[] = {
 		.startup.single		= NULL,
 		.teardown.single	= smpcfd_dying_cpu,
 	},
+<<<<<<< HEAD   (55bef3 Merge branch 'android12-5.10' into android12-5.10-lts)
+||||||| BASE
+	[CPUHP_AP_HRTIMERS_DYING] = {
+		.name			= "hrtimers:dying",
+		.startup.single		= NULL,
+		.teardown.single	= hrtimers_cpu_dying,
+	},
+
+=======
+	[CPUHP_AP_HRTIMERS_DYING] = {
+		.name			= "hrtimers:dying",
+		.startup.single		= hrtimers_cpu_starting,
+		.teardown.single	= hrtimers_cpu_dying,
+	},
+
+>>>>>>> BRANCH (f0a533 Linux 5.10.234)
 	/* Entry state on starting. Interrupts enabled from here on. Transient
 	 * state for synchronsization */
 	[CPUHP_AP_ONLINE] = {
