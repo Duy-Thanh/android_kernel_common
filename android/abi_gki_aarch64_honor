@@ -281,3 +281,5 @@
   __tracepoint_android_vh_mutex_unlock_slowpath_bf_wakeq
   __traceiter_android_vh_io_statistics
   __tracepoint_android_vh_io_statistics
+  __traceiter_android_vh_page_cache_miss
+  __tracepoint_android_vh_page_cache_miss
