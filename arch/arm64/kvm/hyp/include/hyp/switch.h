@@ -275,6 +275,8 @@ static inline void __activate_traps_hcrx(struct kvm_vcpu *vcpu)
 		hcrx &= ~clr;
 	}
 
+	BUG_ON((hcrx & (HCRX_EL2_MSCEn | HCRX_EL2_MCE2)) != (HCRX_EL2_MSCEn | HCRX_EL2_MCE2));
+
 	write_sysreg_s(hcrx, SYS_HCRX_EL2);
 	__activate_traps_mpam(vcpu);
 }
