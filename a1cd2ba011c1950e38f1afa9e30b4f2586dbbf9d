@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e5c9822_b21fe8f1",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-06T12:14:36Z",
+      "side": 1,
+      "message": "Please add a null check to this `strstr` call. Let\u0027s not deref a null ptr just because the suffix is missing for some reason.",
+      "revId": "a1cd2ba011c1950e38f1afa9e30b4f2586dbbf9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36f294c8_3f7daaec",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-06T12:14:36Z",
+      "side": 1,
+      "message": "The length is `MAX_FILE_PATH_SIZE`, so why talk about this other max length?",
+      "revId": "a1cd2ba011c1950e38f1afa9e30b4f2586dbbf9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
