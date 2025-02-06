@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "775d4f16_29f755e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2025-02-06T09:38:47Z",
+      "side": 1,
+      "message": "According to @joneslee@google.com, in ~7 months we can expect all devices to have [the bug fix](https://lore.kernel.org/all/20241205010919.1419288-1-tweek@google.com/\n) that is currently blocking. At that point, we\u0027ll update policy, revert this change, and finally be rid of this old ANDROID hack.",
+      "parentUuid": "b3689eec_5cb5b7fa",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 51
+      },
+      "revId": "7e288698161905847f267088df906254f9afb8c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0a71ec2_b5f4badf",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2025-02-06T06:18:29Z",
       "side": 1,
       "message": "Why is this needed in `android-mainline` at all?",
+      "revId": "7e288698161905847f267088df906254f9afb8c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a586fb3e_03c360bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2025-02-06T09:38:47Z",
+      "side": 1,
+      "message": "It\u0027s needed to pass CTS.  https://cs.android.com/android/platform/superproject/main/+/main:cts/tests/tests/selinux/selinuxTargetSdk29/src/android/security/SELinuxTargetSdkTest.java;l\u003d45?q\u003dtestNoNetlinkRouteGetlink",
+      "parentUuid": "c0a71ec2_b5f4badf",
       "revId": "7e288698161905847f267088df906254f9afb8c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
