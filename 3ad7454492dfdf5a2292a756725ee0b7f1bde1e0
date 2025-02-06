@@ -16,6 +16,24 @@
       "message": "Looking into this, it appears Greg\u0027s request to submit an updated patchset upstream was, for lack of a better term, ignored, or at least de-prioritiezed. I\u0027m not opposed to merging this for this kernel, but before doing so, would like to align on what the best approach for upstreaming would be. Guenter seems to have delegated the decision.\n\nThe feedback from the lore link you\u0027ve provided seems to be that both the \u0027non-wrapped\u0027 and \u0027wrapped\u0027 cases have validity. I agree with the idea of a debugfs node to select wrapped or non wrapped at runtime, and think it would be prudent to have a config option which could select the build time default for this setting.\n\n@gregkh@google.com, would this be an acceptable approach in your eyes? Would you be willing to drop your -2 if there is commitment to upstream this approach this year?\n\n@badhri@google.com, thoughts?",
       "revId": "3ad7454492dfdf5a2292a756725ee0b7f1bde1e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8877932a_d9613f19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2025-02-06T16:05:10Z",
+      "side": 1,
+      "message": "To be very honest, Greg\u0027s feedback was not ignored. Its just that we werent able to accommodate upstreaming all the patches in https://android-review.git.corp.google.com/q/topic:%22typec_vendor_hooks_6_1%22 and we just ran out of time. Also, pretty much all the new feature development (for ex.enabling DisplayPort amongst many others, landing fixes for interop issues across all dimensions: Charging, data, DisplayPort etc) was done without introducing additional vendor hook burden. We have always been diligent here.\n\nI can definitely commit to revisiting the patch to evaluate at the debugfs node option which had been proposed and see if this can be made to work with the build time default for this setting.",
+      "parentUuid": "03bf73fd_e75cbe2c",
+      "revId": "3ad7454492dfdf5a2292a756725ee0b7f1bde1e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
