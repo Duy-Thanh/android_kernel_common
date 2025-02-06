@@ -44,6 +44,17 @@ struct nfsd_file {
 	refcount_t		nf_ref;
 	unsigned char		nf_may;
 	struct nfsd_file_mark	*nf_mark;
+<<<<<<< HEAD   (d0c0d1 Merge branch 'android14-5.15' into android14-5.15-lts)
+||||||| BASE
+	struct list_head	nf_lru;
+	struct rcu_head		nf_rcu;
+	ktime_t			nf_birthtime;
+=======
+	struct list_head	nf_lru;
+	struct list_head	nf_gc;
+	struct rcu_head		nf_rcu;
+	ktime_t			nf_birthtime;
+>>>>>>> BRANCH (003148 Linux 5.15.177)
 };
 
 int nfsd_file_cache_init(void);
