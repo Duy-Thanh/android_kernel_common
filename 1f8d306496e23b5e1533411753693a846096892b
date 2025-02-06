@@ -285,6 +285,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "581e0dee_4269138a",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-06T16:12:19Z",
+      "side": 1,
+      "message": "Done (also needed to bring back the host_to_guest stuff as now there is no way to tell)",
+      "parentUuid": "7aaa2079_02898b27",
+      "range": {
+        "startLine": 193,
+        "startChar": 31,
+        "endLine": 193,
+        "endChar": 39
+      },
+      "revId": "1f8d306496e23b5e1533411753693a846096892b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9b108ef_fb996e6a",
