@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e877eecd_46aec785",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-06T10:19:51Z",
+      "side": 1,
+      "message": "Fair enough, and it looks like you can use `of_parse_phandle_with_optional_args()` to save the day in that case.",
+      "parentUuid": "ef552a89_8a0fff7a",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "5a0f366b262ae6b8537808294960239bfb180930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08709b73_aeb41ef1",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 2
