@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "431c4ea0_b122c335",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-06T09:42:32Z",
+      "side": 1,
+      "message": "no real devices run `android-mainline` so just remove the test for that in CTS now.  devices work on a device-specific branch, not here, so this should not be needed for mainline testing.",
+      "parentUuid": "775d4f16_29f755e6",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 51
+      },
+      "revId": "7e288698161905847f267088df906254f9afb8c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0a71ec2_b5f4badf",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
