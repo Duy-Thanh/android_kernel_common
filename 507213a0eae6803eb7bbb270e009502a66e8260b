@@ -16,6 +16,24 @@
       "message": "can we soak a bit longer to at least get this reviewed on the list? this holds true for the entire series actually and a FROMGIT would be preferred.",
       "revId": "507213a0eae6803eb7bbb270e009502a66e8260b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33fae9e2_d8348ec1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-06T13:34:54Z",
+      "side": 1,
+      "message": "The first two should become FROMGIT this week.\n\nOh, also, the FROMLIST portion of the ashmem CL stack (aosp/3389883) is also a Binder dependency.",
+      "parentUuid": "3d80aeb3_d0277bdd",
+      "revId": "507213a0eae6803eb7bbb270e009502a66e8260b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
