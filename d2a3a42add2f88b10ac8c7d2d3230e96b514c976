@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37ac7387_f05b4304",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-06T11:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60d80de0_8a7e69ab",
+      "range": {
+        "startLine": 295,
+        "startChar": 6,
+        "endLine": 295,
+        "endChar": 29
+      },
+      "revId": "d2a3a42add2f88b10ac8c7d2d3230e96b514c976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9057e51_c85227d6",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "Right, it was suggested in a previous comment on this CL (https://android-review.git.corp.google.com/c/kernel/common/+/3365073/comment/9dbf6c68_ebce0acf/), and this moves the ownership of the hypervisor RX buffer back to EL3. Looking at this CL it doesn\u0027t seem to belong here this change, we should probably have it separetely.",
       "parentUuid": "b9057e51_c85227d6",
+      "range": {
+        "startLine": 808,
+        "startChar": 1,
+        "endLine": 808,
+        "endChar": 15
+      },
+      "revId": "d2a3a42add2f88b10ac8c7d2d3230e96b514c976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dda705e_9370403b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-06T11:05:20Z",
+      "side": 1,
+      "message": "Created a separate change for this: https://android-review.git.corp.google.com/c/kernel/common/+/3477933",
+      "parentUuid": "364e0716_98507d51",
       "range": {
         "startLine": 808,
         "startChar": 1,
