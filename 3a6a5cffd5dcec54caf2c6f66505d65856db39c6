@@ -22,6 +22,54 @@
       },
       "revId": "3a6a5cffd5dcec54caf2c6f66505d65856db39c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c660cc_873bc0ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2025-02-06T02:26:04Z",
+      "side": 1,
+      "message": "Done. I changed",
+      "parentUuid": "1e893396_240444f0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "3a6a5cffd5dcec54caf2c6f66505d65856db39c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f2e902f_63b1a755",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2025-02-06T02:26:04Z",
+      "side": 1,
+      "message": "Done. I ended up modifying the original patch by:\n- Using READ_ONCE in selinux_android_nlroute_getlink (similarly to the other functions reading the policy state.)\n- Using WRITE_ONCE in security_load_policycaps.\n- Introducing nlmsg_set_perm_for_type in this patch (instead of the following), as well as swapping its arguments.\n- Removing the else-block in selinux_nlmsg_init (as this was a no-op).\n\nPTAL, thanks.",
+      "parentUuid": "1e893396_240444f0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "3a6a5cffd5dcec54caf2c6f66505d65856db39c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
