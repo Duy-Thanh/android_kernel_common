@@ -22,6 +22,30 @@
       },
       "revId": "17657aae7ce4f8b963f5ddda1d5fa525336831cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60262cb5_93252074",
+        "filename": "net/mac80211/chan.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-07T20:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac9c0f07_af365849",
+      "range": {
+        "startLine": 512,
+        "startChar": 2,
+        "endLine": 512,
+        "endChar": 9
+      },
+      "revId": "17657aae7ce4f8b963f5ddda1d5fa525336831cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
