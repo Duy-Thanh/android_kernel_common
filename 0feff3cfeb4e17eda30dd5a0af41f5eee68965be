@@ -22,6 +22,30 @@
       },
       "revId": "0feff3cfeb4e17eda30dd5a0af41f5eee68965be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e298cf95_4d46d342",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1426,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-07T11:55:50Z",
+      "side": 1,
+      "message": "Sorry, I meant the _hyp_ lock there, not the host lock!",
+      "parentUuid": "60a598ff_4ad4deec",
+      "range": {
+        "startLine": 1426,
+        "startChar": 1,
+        "endLine": 1426,
+        "endChar": 19
+      },
+      "revId": "0feff3cfeb4e17eda30dd5a0af41f5eee68965be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
