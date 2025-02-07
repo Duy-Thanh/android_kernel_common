@@ -272,6 +272,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d04797fd_4c13b9f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-07T22:10:21Z",
+      "side": 1,
+      "message": "Ok. `re: Lee Jones was looking at read_iter support`. Any update on that? Is this patch ANDROID due to timing restrictions or it\u0027s not upstreamable for some reason?",
+      "parentUuid": "2cba93b8_db015e01",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
