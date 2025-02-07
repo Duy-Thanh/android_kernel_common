@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57e99d89_8c4745cf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-07T18:05:39Z",
+      "side": 1,
+      "message": "I will apply in the main patch",
+      "parentUuid": "d3475d7e_45713b41",
+      "range": {
+        "startLine": 212,
+        "startChar": 5,
+        "endLine": 212,
+        "endChar": 8
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca108995_9d04613f",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-28T15:45:06Z",
       "side": 1,
       "message": "This can also return `-ENOMEM`",
+      "range": {
+        "startLine": 215,
+        "startChar": 2,
+        "endLine": 215,
+        "endChar": 28
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "449f2f98_67c453ab",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-07T18:05:39Z",
+      "side": 1,
+      "message": "I left it intentionally without ret code check because I don\u0027t want to override ret on success.",
+      "parentUuid": "ca108995_9d04613f",
       "range": {
         "startLine": 215,
         "startChar": 2,
@@ -95,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "644a3157_9e755912",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-07T18:05:39Z",
+      "side": 1,
+      "message": "I don\u0027t think this should fail. In what case would it return -ENOMEM because it\u0027s just an unmap from hyp and a transition from shared_owned for the guest ?",
+      "parentUuid": "3f97c4aa_e817a971",
+      "range": {
+        "startLine": 239,
+        "startChar": 9,
+        "endLine": 239,
+        "endChar": 33
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c023b922_c39ad0cb",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 6
@@ -129,6 +201,30 @@
       "writtenOn": "2025-01-28T15:45:06Z",
       "side": 1,
       "message": "Why do we need to return `ret` when we already set the return value in `res`?",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 12
+      },
+      "revId": "030ec5e2a2bcc072ba27c60065e5f50e82823a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73f2ac5f_b1caea41",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-07T18:05:39Z",
+      "side": 1,
+      "message": "While most of the ff-a ret codes are positive integers now we can also return negative values (eg. when we have no memory) that have no meaning for the use of `ffa_to_smccc_res`.",
+      "parentUuid": "acc566ad_e398cba1",
       "range": {
         "startLine": 331,
         "startChar": 0,
