@@ -53,6 +53,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21e2bced_4601e053",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3303003
+      },
+      "writtenOn": "2025-02-07T19:40:30Z",
+      "side": 1,
+      "message": "Added in https://android-review.git.corp.google.com/c/kernel/common/+/3483291/1",
+      "parentUuid": "10ec60e7_4805bd2e",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15e4c637_6f77093c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3303003
+      },
+      "writtenOn": "2025-02-07T19:40:30Z",
+      "side": 1,
+      "message": "Updated in https://android-review.git.corp.google.com/c/kernel/common/+/3483291/1",
+      "parentUuid": "d906cedf_b9c310f0",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b6d2d9c_6c5e60fc",
@@ -66,6 +102,24 @@
       "writtenOn": "2025-02-07T01:22:46Z",
       "side": 1,
       "message": "Test:",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5081194_33cdcce6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3303003
+      },
+      "writtenOn": "2025-02-07T19:40:30Z",
+      "side": 1,
+      "message": "Thanks for the head up. I\u0027ll follow this formatting on the android16-6.12 series.",
+      "parentUuid": "9b6d2d9c_6c5e60fc",
       "revId": "407911b720aa2418d0dba135986f8e61760727c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -118,6 +172,24 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "547d373e_20cba75c",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c30d432c_e3eea3dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303003
+      },
+      "writtenOn": "2025-02-07T19:40:30Z",
+      "side": 1,
+      "message": "Moved to https://android-review.git.corp.google.com/c/kernel/common/+/3483291/1\n\nIf I understand the branches correctly, anything from android16-6.12 will be automerged to android16-6.12-desktop. Should I abandon this change?",
+      "parentUuid": "7fea4803_d9f0dba4",
       "revId": "407911b720aa2418d0dba135986f8e61760727c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
