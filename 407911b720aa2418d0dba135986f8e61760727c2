@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ec60e7_4805bd2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2025-02-07T01:22:46Z",
+      "side": 1,
+      "message": "381479318 too.",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170e6cdb_d9a8e3a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2025-02-07T01:22:46Z",
+      "side": 1,
+      "message": "Android uses \"Bug: 381479678\" instead of \"BUG\u003d\".",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6d2d9c_6c5e60fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2025-02-07T01:22:46Z",
+      "side": 1,
+      "message": "Test:",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b6af59d0_ccee9c20",
@@ -14,6 +65,23 @@
       "writtenOn": "2025-02-07T01:22:27Z",
       "side": 1,
       "message": "Hey everyone, UCSI support is missing from the 6.12 desktop kernel. Can you take a look at this series to add cros_ec_ucsi,",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "547d373e_20cba75c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2025-02-07T01:22:46Z",
+      "side": 1,
+      "message": "I guess the series should send to android16-6.12 branch?",
       "revId": "407911b720aa2418d0dba135986f8e61760727c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
