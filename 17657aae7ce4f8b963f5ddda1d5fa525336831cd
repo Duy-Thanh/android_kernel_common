@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac9c0f07_af365849",
+        "filename": "net/mac80211/chan.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-07T20:05:22Z",
+      "side": 1,
+      "message": "/tmp/bazel-working-directory/_main/common/net/mac80211/chan.c:510:3: error: variable \u0027changed\u0027 is uninitialized when used here [-Werror,-Wuninitialized]\n  510 |                 changed |\u003d IEEE80211_CHANCTX_CHANGE_WIDTH;\n      |                 ^~~~~~~\n/tmp/bazel-working-directory/_main/common/net/mac80211/chan.c:480:13: note: initialize the variable \u0027changed\u0027 to silence this warning\n  480 |         u32 changed;\n      |                    ^\n      |                     \u003d 0",
+      "range": {
+        "startLine": 512,
+        "startChar": 2,
+        "endLine": 512,
+        "endChar": 9
+      },
+      "revId": "17657aae7ce4f8b963f5ddda1d5fa525336831cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
