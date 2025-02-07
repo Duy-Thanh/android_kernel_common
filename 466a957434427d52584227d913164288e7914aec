@@ -70,6 +70,30 @@
       },
       "revId": "466a957434427d52584227d913164288e7914aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b98789a_d5570fa5",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-07T19:41:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce1338db_cd15090f",
+      "range": {
+        "startLine": 774,
+        "startChar": 1,
+        "endLine": 774,
+        "endChar": 15
+      },
+      "revId": "466a957434427d52584227d913164288e7914aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
