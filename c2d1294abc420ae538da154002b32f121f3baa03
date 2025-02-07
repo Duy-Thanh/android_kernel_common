@@ -236,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e56676e_382deeab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-07T18:09:41Z",
+      "side": 1,
+      "message": "Alice, you mentioned that we can get rid of this patch if we switch over to https://lore.kernel.org/all/20241025-cursor-between-v1-1-08913714aae5@google.com/ which seems to be present is this series at aosp/3295150.\nSo, any conlcusion on this patch? Do we need it?",
+      "parentUuid": "ddebde2b_e5cb1440",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
