@@ -192,6 +192,24 @@
       "parentUuid": "7fea4803_d9f0dba4",
       "revId": "407911b720aa2418d0dba135986f8e61760727c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96b4448_f1e9318f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-02-07T19:50:45Z",
+      "side": 1,
+      "message": "That is right! should get in automatically once it lands on 16-6.12. we can abandon -desktop series",
+      "parentUuid": "c30d432c_e3eea3dc",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
