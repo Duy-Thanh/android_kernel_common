@@ -4349,14 +4349,32 @@ EXPORT_SYMBOL_GPL(ufshcd_link_recovery);
 
 int ufshcd_uic_hibern8_enter(struct ufs_hba *hba)
 {
-	int ret;
+	int ret = -EOPNOTSUPP;
 	struct uic_command uic_cmd = {0};
 	ktime_t start = ktime_get();
 
 	ufshcd_vops_hibern8_notify(hba, UIC_CMD_DME_HIBER_ENTER, PRE_CHANGE);
 
 	uic_cmd.command = UIC_CMD_DME_HIBER_ENTER;
-	ret = ufshcd_uic_pwr_ctrl(hba, &uic_cmd);
+	trace_android_rvh_ufs_execute_hibern8_cmd(hba, &uic_cmd, &ret);
+	if (ret == -EOPNOTSUPP) {
+		ret = ufshcd_uic_pwr_ctrl(hba, &uic_cmd);
+	} else if (ret) {
+		unsigned long flags;
+
+		/*
+		 * Invoke error handling akin to what is performed in
+		 * ufshcd_uic_pwr_ctrl(), as the vendor doesn't have access
+		 * due to static linkage.
+		 */
+		ufshcd_print_host_state(hba);
+		ufshcd_print_pwr_info(hba);
+		ufshcd_print_evt_hist(hba);
+		spin_lock_irqsave(hba->host->host_lock, flags);
+		hba->force_reset = true;
+		ufshcd_schedule_eh_work(hba);
+		spin_unlock_irqrestore(hba->host->host_lock, flags);
+	}
 	trace_ufshcd_profile_hibern8(dev_name(hba->dev), "enter",
 			     ktime_to_us(ktime_sub(ktime_get(), start)), ret);
 
@@ -4374,13 +4392,31 @@ EXPORT_SYMBOL_GPL(ufshcd_uic_hibern8_enter);
 int ufshcd_uic_hibern8_exit(struct ufs_hba *hba)
 {
 	struct uic_command uic_cmd = {0};
-	int ret;
+	int ret = -EOPNOTSUPP;
 	ktime_t start = ktime_get();
 
 	ufshcd_vops_hibern8_notify(hba, UIC_CMD_DME_HIBER_EXIT, PRE_CHANGE);
 
 	uic_cmd.command = UIC_CMD_DME_HIBER_EXIT;
-	ret = ufshcd_uic_pwr_ctrl(hba, &uic_cmd);
+	trace_android_rvh_ufs_execute_hibern8_cmd(hba, &uic_cmd, &ret);
+	if (ret == -EOPNOTSUPP) {
+		ret = ufshcd_uic_pwr_ctrl(hba, &uic_cmd);
+	} else if (ret) {
+		unsigned long flags;
+
+		/*
+		 * Invoke error handling akin to what is performed in
+		 * ufshcd_uic_pwr_ctrl(), as the vendor doesn't have access
+		 * due to static linkage.
+		 */
+		ufshcd_print_host_state(hba);
+		ufshcd_print_pwr_info(hba);
+		ufshcd_print_evt_hist(hba);
+		spin_lock_irqsave(hba->host->host_lock, flags);
+		hba->force_reset = true;
+		ufshcd_schedule_eh_work(hba);
+		spin_unlock_irqrestore(hba->host->host_lock, flags);
+	}
 	trace_ufshcd_profile_hibern8(dev_name(hba->dev), "exit",
 			     ktime_to_us(ktime_sub(ktime_get(), start)), ret);
 

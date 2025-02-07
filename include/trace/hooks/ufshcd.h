@@ -12,6 +12,7 @@
 struct ufs_hba;
 struct request;
 struct ufshcd_lrb;
+struct uic_command;
 
 DECLARE_HOOK(android_vh_ufs_fill_prdt,
 	TP_PROTO(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
@@ -25,6 +26,11 @@ DECLARE_RESTRICTED_HOOK(android_rvh_ufs_reprogram_all_keys,
 DECLARE_RESTRICTED_HOOK(android_rvh_ufs_complete_init,
 			TP_PROTO(struct ufs_hba *hba),
 			TP_ARGS(hba), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_ufs_execute_hibern8_cmd,
+			TP_PROTO(struct ufs_hba *hba, struct uic_command *cmd,
+				 int *err),
+			TP_ARGS(hba, cmd, err), 1);
 
 DECLARE_HOOK(android_vh_ufs_prepare_command,
 	TP_PROTO(struct ufs_hba *hba, struct request *rq,
