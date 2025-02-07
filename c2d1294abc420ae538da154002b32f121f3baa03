@@ -254,6 +254,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cba93b8_db015e01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-07T21:43:09Z",
+      "side": 1,
+      "message": "That was referring to another ANDROID patch, which is now gone. I posted that comment on the wrong CL. This patch is needed, it\u0027s the one I brought up on chat Wednesday.",
+      "parentUuid": "7e56676e_382deeab",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
