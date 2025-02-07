@@ -16,6 +16,24 @@
       "message": "UML backed run_net_test.sh now builds... but something still seems wrong:\n\nAdding 370839552 bytes to physical memory to account for exec-shield gap\n\nWarning: UML exited with 23 instead of zero.\n\n(it *should* have printed \u0027Linux version\u0027 string directly after Adding line.)\n\n23 is ENFILE",
       "revId": "46275116c1b181508dd05145d9a314db08fc4c41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb8a880c_b9be8ba1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2025-02-07T23:21:28Z",
+      "side": 1,
+      "message": "This appears to be a problem with UML\u0027s con\u003dnull,fd:1 handling.\nTests pass without that.",
+      "parentUuid": "be9169c5_94e8732e",
+      "revId": "46275116c1b181508dd05145d9a314db08fc4c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
