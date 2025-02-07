@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d906cedf_b9c310f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-02-07T10:01:37Z",
+      "side": 1,
+      "message": "Oh looks like we don\u0027t have checkpatch configured on this branch. I\u0027ll handle that",
+      "parentUuid": "170e6cdb_d9a8e3a7",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b6d2d9c_6c5e60fc",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -82,6 +100,24 @@
       "writtenOn": "2025-02-07T01:22:46Z",
       "side": 1,
       "message": "I guess the series should send to android16-6.12 branch?",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fea4803_d9f0dba4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-02-07T10:01:37Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "547d373e_20cba75c",
       "revId": "407911b720aa2418d0dba135986f8e61760727c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
