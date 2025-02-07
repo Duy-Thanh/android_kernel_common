@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6af59d0_ccee9c20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303003
+      },
+      "writtenOn": "2025-02-07T01:22:27Z",
+      "side": 1,
+      "message": "Hey everyone, UCSI support is missing from the 6.12 desktop kernel. Can you take a look at this series to add cros_ec_ucsi,",
+      "revId": "407911b720aa2418d0dba135986f8e61760727c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
