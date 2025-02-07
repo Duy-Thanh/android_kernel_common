@@ -308,6 +308,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "538514c0_d5fee586",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-07T22:22:48Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll wait for the update on this one then. If merging it is urgent then plz let me know.",
+      "parentUuid": "0856bdc6_df39e227",
+      "revId": "c2d1294abc420ae538da154002b32f121f3baa03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19acbb_c63eb2a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
