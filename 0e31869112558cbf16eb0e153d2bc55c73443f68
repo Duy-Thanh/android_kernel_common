@@ -16,6 +16,41 @@
       "message": "`INTERRUPTED` and `RETRY` should be handled by retrying the message. Should you do that here?",
       "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "727e68d9_1097aec0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-08T02:14:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74cde934_2e25ae5e",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9ff779_f397d435",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-08T02:14:25Z",
+      "side": 1,
+      "message": "In case of `INTERRUPTED` and/or `RETRY`, should this set `ret` to `-EAGAIN`?",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
