@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "050529f5_c6d975aa",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-08T04:18:26Z",
+      "side": 1,
+      "message": "SPs can ask for one of the two messages but not the other, e.g., Trusty only cares about VM destruction. The check could be `!\u003d 0` to support that case.",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b9ff779_f397d435",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
