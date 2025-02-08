@@ -51,6 +51,24 @@
       "message": "In case of `INTERRUPTED` and/or `RETRY`, should this set `ret` to `-EAGAIN`?",
       "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76bd1e2e_44abd243",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-08T02:16:47Z",
+      "side": 1,
+      "message": "In the general sense, is `ret` here a kernel error code or an FF-A one? This function seems to mix them up.",
+      "parentUuid": "6b9ff779_f397d435",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
