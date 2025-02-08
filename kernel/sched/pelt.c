@@ -24,8 +24,7 @@
  *  Author: Vincent Guittot <vincent.guittot@linaro.org>
  */
 
-static __read_mostly unsigned int sched_pelt_lshift;
-static unsigned int sched_pelt_multiplier = 1;
+static unsigned int qos_sched_pelt_multiplier = 1;
 
 /*
  * Approximate:
@@ -529,14 +528,14 @@ static int set_sched_pelt_multiplier(const char *val, const struct kernel_param 
 	if (ret)
 		goto error;
 
-	switch (sched_pelt_multiplier)  {
+	switch (qos_sched_pelt_multiplier)  {
 	case 1:
 		fallthrough;
 	case 2:
 		fallthrough;
 	case 4:
 		WRITE_ONCE(sched_pelt_lshift,
-			   sched_pelt_multiplier >> 1);
+			   qos_sched_pelt_multiplier >> 1);
 		break;
 	default:
 		ret = -EINVAL;
@@ -546,7 +545,7 @@ static int set_sched_pelt_multiplier(const char *val, const struct kernel_param 
 	return 0;
 
 error:
-	sched_pelt_multiplier = 1;
+	qos_sched_pelt_multiplier = 1;
 	return ret;
 }
 
@@ -560,11 +559,11 @@ static const struct kernel_param_ops sched_pelt_multiplier_ops = {
 #endif
 /* XXX: should we use sched as prefix? */
 #define MODULE_PARAM_PREFIX "kernel."
-module_param_cb(sched_pelt_multiplier, &sched_pelt_multiplier_ops, &sched_pelt_multiplier, 0444);
-MODULE_PARM_DESC(sched_pelt_multiplier, "PELT HALFLIFE helps control the responsiveness of the system.");
-MODULE_PARM_DESC(sched_pelt_multiplier, "Accepted value: 1 32ms PELT HALIFE - roughly 200ms to go from 0 to max performance point (default).");
-MODULE_PARM_DESC(sched_pelt_multiplier, "                2 16ms PELT HALIFE - roughly 100ms to go from 0 to max performance point.");
-MODULE_PARM_DESC(sched_pelt_multiplier, "                4  8ms PELT HALIFE - roughly  50ms to go from 0 to max performance point.");
+module_param_cb(qos_sched_pelt_multiplier, &sched_pelt_multiplier_ops, &qos_sched_pelt_multiplier, 0444);
+MODULE_PARM_DESC(qos_sched_pelt_multiplier, "PELT HALFLIFE helps control the responsiveness of the system.");
+MODULE_PARM_DESC(qos_sched_pelt_multiplier, "Accepted value: 1 32ms PELT HALIFE - roughly 200ms to go from 0 to max performance point (default).");
+MODULE_PARM_DESC(qos_sched_pelt_multiplier, "                2 16ms PELT HALIFE - roughly 100ms to go from 0 to max performance point.");
+MODULE_PARM_DESC(qos_sched_pelt_multiplier, "                4  8ms PELT HALIFE - roughly  50ms to go from 0 to max performance point.");
 
 /*
  * Approximate the new util_avg value assuming an entity has continued to run
