@@ -198,6 +198,9 @@ const_debug unsigned int sysctl_sched_nr_migrate = SCHED_NR_MIGRATE_BREAK;
 
 __read_mostly int scheduler_running;
 
+static __always_inline void
+__update_cpufreq_ctx_switch(struct rq *rq, struct task_struct *prev);
+
 #ifdef CONFIG_SCHED_CORE
 
 DEFINE_STATIC_KEY_FALSE(__sched_core_enabled);
@@ -2261,17 +2264,24 @@ void check_class_changing(struct rq *rq, struct task_struct *p,
  * this means any call to check_class_changed() must be followed by a call to
  * balance_callback().
  */
-void check_class_changed(struct rq *rq, struct task_struct *p,
+bool check_class_changed(struct rq *rq, struct task_struct *p,
 			 const struct sched_class *prev_class,
 			 int oldprio)
 {
+	bool class_changed = false;
+
 	if (prev_class != p->sched_class) {
 		if (prev_class->switched_from)
 			prev_class->switched_from(rq, p);
 
 		p->sched_class->switched_to(rq, p);
-	} else if (oldprio != p->prio || dl_task(p))
+
+		class_changed = true;
+	} else if (oldprio != p->prio || dl_task(p)) {
 		p->sched_class->prio_changed(rq, p, oldprio);
+	}
+
+	return class_changed;
 }
 
 void wakeup_preempt(struct rq *rq, struct task_struct *p, int flags)
@@ -5668,6 +5678,97 @@ static inline void __balance_callbacks(struct rq *rq)
 
 #endif
 
+static __always_inline void
+__update_cpufreq_ctx_switch(struct rq *rq, struct task_struct *prev)
+{
+#ifdef CONFIG_CPU_FREQ
+	int should_iowait_boost;
+
+	if (prev && prev->dl.flags & SCHED_FLAG_SUGOV) {
+		/* Sugov just did an update, don't be too aggressive */
+		return;
+	}
+
+	/*
+	 * RT and DL should always send a freq update. But we can do some
+	 * simple checks to avoid it when we know it's not necessary.
+	 *
+	 * iowait_boost will always trigger a freq update too.
+	 *
+	 * Fair tasks will only trigger an update if the root cfs_rq has
+	 * decayed.
+	 *
+	 * Everything else should do nothing.
+	 */
+	switch (current->policy) {
+	case SCHED_NORMAL:
+	case SCHED_BATCH:
+	case SCHED_IDLE:
+		should_iowait_boost = current->in_iowait;
+		trace_android_rvh_set_iowait(current, rq, &should_iowait_boost);
+		if (unlikely(should_iowait_boost)) {
+			cpufreq_update_util(rq, SCHED_CPUFREQ_IOWAIT | SCHED_CPUFREQ_FORCE_UPDATE);
+			return;
+		}
+
+#ifdef CONFIG_SMP
+		/*
+		 * Send an update if we switched from RT or DL as they tend to
+		 * boost the CPU and we are likely able to reduce the freq now.
+		 */
+		rq->cfs.decayed |= prev && (rt_policy(prev->policy) || dl_policy(prev->policy));
+
+		if (unlikely(rq->cfs.decayed)) {
+			rq->cfs.decayed = false;
+			cpufreq_update_util(rq, 0);
+			return;
+		}
+#else
+		cpufreq_update_util(rq, 0);
+#endif
+		return;
+	case SCHED_FIFO:
+	case SCHED_RR:
+		if (prev && rt_policy(prev->policy)) {
+#ifdef CONFIG_UCLAMP_TASK
+			unsigned long curr_uclamp_min = uclamp_eff_value(current, UCLAMP_MIN);
+			unsigned long prev_uclamp_min = uclamp_eff_value(prev, UCLAMP_MIN);
+
+			if (curr_uclamp_min == prev_uclamp_min)
+#endif
+				return;
+		}
+#ifdef CONFIG_SMP
+		/* Stopper task masquerades as RT */
+		if (unlikely(current->sched_class == &stop_sched_class))
+			return;
+#endif
+		cpufreq_update_util(rq, SCHED_CPUFREQ_FORCE_UPDATE);
+		return;
+	case SCHED_DEADLINE:
+		/*
+		 * This is handled at enqueue to avoid breaking DL bandwidth
+		 * rules when multiple DL tasks are running on the same CPU.
+		 * Deferring till context switch here could mean the bandwidth
+		 * calculations would be broken to ensure all the DL tasks meet
+		 * their deadlines.
+		 */
+		return;
+	default:
+		return;
+	}
+#endif
+}
+
+/*
+ * Call when currently running task had an attribute change that requires
+ * an immediate cpufreq update.
+ */
+void update_cpufreq_current(struct rq *rq)
+{
+	__update_cpufreq_ctx_switch(rq, NULL);
+}
+
 static inline void
 prepare_lock_switch(struct rq *rq, struct task_struct *next, struct rq_flags *rf)
 {
@@ -5685,7 +5786,7 @@ prepare_lock_switch(struct rq *rq, struct task_struct *next, struct rq_flags *rf
 #endif
 }
 
-static inline void finish_lock_switch(struct rq *rq)
+static inline void finish_lock_switch(struct rq *rq, struct task_struct *prev)
 {
 	/*
 	 * If we are tracking spinlock dependencies then we have to
@@ -5694,6 +5795,11 @@ static inline void finish_lock_switch(struct rq *rq)
 	 */
 	spin_acquire(&__rq_lockp(rq)->dep_map, 0, 0, _THIS_IP_);
 	__balance_callbacks(rq);
+	/*
+	 * Request freq update after __balance_callbacks to take into account
+	 * any changes to rq.
+	 */
+	__update_cpufreq_ctx_switch(rq, prev);
 	raw_spin_rq_unlock_irq(rq);
 }
 
@@ -5812,7 +5918,7 @@ static struct rq *finish_task_switch(struct task_struct *prev)
 	perf_event_task_sched_in(prev, current);
 	finish_task(prev);
 	tick_nohz_task_switch();
-	finish_lock_switch(rq);
+	finish_lock_switch(rq, prev);
 	finish_arch_post_lock_switch();
 	kcov_finish_switch(current);
 	/*
@@ -8199,6 +8305,7 @@ void rt_mutex_setprio(struct task_struct *p, struct task_struct *pi_task)
 	int prio, oldprio, queued, running, queue_flag =
 		DEQUEUE_SAVE | DEQUEUE_MOVE | DEQUEUE_NOCLOCK;
 	const struct sched_class *prev_class, *next_class;
+	bool class_changed;
 	struct rq_flags rf;
 	struct rq *rq;
 
@@ -8317,7 +8424,10 @@ void rt_mutex_setprio(struct task_struct *p, struct task_struct *pi_task)
 	if (running)
 		set_next_task(rq, p);
 
-	check_class_changed(rq, p, prev_class, oldprio);
+	class_changed = check_class_changed(rq, p, prev_class, oldprio);
+	if (class_changed && running)
+		update_cpufreq_current(rq);
+
 out_unlock:
 	/* Avoid rq from going away on us: */
 	preempt_disable();

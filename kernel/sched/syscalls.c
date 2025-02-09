@@ -425,7 +425,7 @@ static bool uclamp_reset(const struct sched_attr *attr,
 	return false;
 }
 
-static void __setscheduler_uclamp(struct task_struct *p,
+static bool __setscheduler_uclamp(struct task_struct *p,
 				  const struct sched_attr *attr)
 {
 	enum uclamp_id clamp_id;
@@ -451,7 +451,7 @@ static void __setscheduler_uclamp(struct task_struct *p,
 	}
 
 	if (likely(!(attr->sched_flags & SCHED_FLAG_UTIL_CLAMP)))
-		return;
+		return false;
 
 	if (attr->sched_flags & SCHED_FLAG_UTIL_CLAMP_MIN &&
 	    attr->sched_util_min != -1) {
@@ -466,6 +466,8 @@ static void __setscheduler_uclamp(struct task_struct *p,
 			      attr->sched_util_max, true);
 		trace_android_vh_setscheduler_uclamp(p, UCLAMP_MAX, attr->sched_util_max);
 	}
+
+	return true;
 }
 
 #else /* !CONFIG_UCLAMP_TASK: */
@@ -475,8 +477,11 @@ static inline int uclamp_validate(struct task_struct *p,
 {
 	return -EOPNOTSUPP;
 }
-static void __setscheduler_uclamp(struct task_struct *p,
-				  const struct sched_attr *attr) { }
+static bool __setscheduler_uclamp(struct task_struct *p,
+				  const struct sched_attr *attr)
+{
+	return false;
+}
 #endif
 
 /*
@@ -556,6 +561,7 @@ int __sched_setscheduler(struct task_struct *p,
 	int retval, oldprio, newprio, queued, running;
 	const struct sched_class *prev_class, *next_class;
 	struct balance_callback *head;
+	bool update_cpufreq;
 	struct rq_flags rf;
 	int reset_on_fork;
 	int queue_flags = DEQUEUE_SAVE | DEQUEUE_MOVE | DEQUEUE_NOCLOCK;
@@ -750,7 +756,8 @@ change:
 		p->prio = newprio;
 		trace_android_rvh_setscheduler(p);
 	}
-	__setscheduler_uclamp(p, attr);
+
+	update_cpufreq = __setscheduler_uclamp(p, attr);
 	check_class_changing(rq, p, prev_class);
 
 	if (queued) {
@@ -766,7 +773,18 @@ change:
 	if (running)
 		set_next_task(rq, p);
 
-	check_class_changed(rq, p, prev_class, oldprio);
+	update_cpufreq |= check_class_changed(rq, p, prev_class, oldprio);
+
+	/*
+	 * Changing class or uclamp value implies requiring to send cpufreq
+	 * update.
+	 */
+	if (update_cpufreq) {
+		if (running)
+			update_cpufreq_current(rq);
+		else if (queued)
+			cpufreq_update_util(rq, SCHED_CPUFREQ_TASK_ENQUEUED);
+	}
 
 	/* Avoid rq from going away on us: */
 	preempt_disable();
