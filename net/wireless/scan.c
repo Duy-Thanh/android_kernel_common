@@ -896,9 +896,14 @@ static int cfg80211_scan_6ghz(struct cfg80211_registered_device *rdev)
 			if (ret)
 				continue;
 
+<<<<<<< HEAD   (31e1e0 Merge 6.6.75 into android15-6.6-lts)
 			entry = kzalloc(sizeof(*entry) + IEEE80211_MAX_SSID_LEN,
 					GFP_ATOMIC);
 
+||||||| BASE
+=======
+			entry = kzalloc(sizeof(*entry), GFP_ATOMIC);
+>>>>>>> BRANCH (ef3ce4 Linux 6.6.76)
 			if (!entry)
 				continue;
 
