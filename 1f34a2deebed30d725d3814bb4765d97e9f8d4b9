@@ -33,6 +33,23 @@
       "message": "This change has not been merged, how to deal with the Presubmit-Verified -1 and Lint -1?",
       "revId": "1f34a2deebed30d725d3814bb4765d97e9f8d4b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b599ff99_f7961f01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-10T21:10:53Z",
+      "side": 1,
+      "message": "please fix checkpatch issue:\n```\nWARNING:MACRO_ARG_UNUSED: Argument \u0027_name\u0027 is not used in function-like macro\n#47: FILE: include/trace/events/mmflags.h:164:\n```",
+      "revId": "1f34a2deebed30d725d3814bb4765d97e9f8d4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
