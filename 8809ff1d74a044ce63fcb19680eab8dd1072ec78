@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04aa3f0b_e7de4711",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-02-10T02:42:14Z",
+      "side": 1,
+      "message": "So I think we don\u0027t need to merge this patch in 6.12 :) \nThis can be verified by checking that corresponding compiler flags (e.g. `-fsanitize\u003dkernel-address` for kasan) are not present in `arch/x86/kvm/vmx/pkvm/hyp/.*.o.cmd` files, while present in `.*.o.cmd` files of the rest of the kernel.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "8809ff1d74a044ce63fcb19680eab8dd1072ec78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
