@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d218525_1793d2c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3838015
+      },
+      "writtenOn": "2025-02-10T02:29:33Z",
+      "side": 1,
+      "message": "Done, Update use case. it is using it audio amp driver vendor",
+      "parentUuid": "9a65db14_7460df80",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "9573700f4cf85c8cb214725589ab2f60c190b785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b88dfb0_bc46d9cd",
@@ -82,6 +106,30 @@
         "id": 1069543
       },
       "writtenOn": "2025-01-23T17:31:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b88dfb0_bc46d9cd",
+      "range": {
+        "startLine": 15,
+        "startChar": 15,
+        "endLine": 15,
+        "endChar": 26
+      },
+      "revId": "9573700f4cf85c8cb214725589ab2f60c190b785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a782e5a_4ca52822",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3838015
+      },
+      "writtenOn": "2025-02-10T02:29:33Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "4b88dfb0_bc46d9cd",
