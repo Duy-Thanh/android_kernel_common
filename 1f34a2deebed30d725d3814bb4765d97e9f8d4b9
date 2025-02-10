@@ -16,6 +16,23 @@
       "message": "In order to remove the warning \"Cherry pick is not clean. Checked against Android commit.\", I deleted the old change and resubmitted a new change. Please review it again. Thank you.",
       "revId": "1f34a2deebed30d725d3814bb4765d97e9f8d4b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc912949_9629b81f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-02-10T07:00:04Z",
+      "side": 1,
+      "message": "This change has not been merged, how to deal with the Presubmit-Verified -1 and Lint -1?",
+      "revId": "1f34a2deebed30d725d3814bb4765d97e9f8d4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
