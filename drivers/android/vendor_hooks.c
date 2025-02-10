@@ -177,8 +177,31 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_uic_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_tm_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_check_int_errors);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sdev);
+<<<<<<< HEAD   (bcd736 ANDROID: GKI: Update symbol list for Pixel Watch)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_f2fs_create);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_f2fs_submit_write_page);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_eh_timed_out);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_link_startup);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_dev_cmd_completion);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_wait_for_uic_cmd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_transfer_rsp_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_f2fs_down_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_improve_priority);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_restore_priority);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_eh_timed_out);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_link_startup);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_dev_cmd_completion);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_wait_for_uic_cmd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_transfer_rsp_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_f2fs_down_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_improve_priority);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_restore_priority);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_printk);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
+>>>>>>> CHANGE (3444d6 ANDROID: vendor_hooks: add hooks for f2fs_printk)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_alloc_insert_iova);

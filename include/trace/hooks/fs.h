@@ -8,6 +8,8 @@
 #define _TRACE_HOOK_FS_H
 
 #include <trace/hooks/vendor_hooks.h>
+struct f2fs_sb_info;
+struct va_format;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_ksys_umount,
 		TP_PROTO(char __user *name, int flags),
@@ -27,6 +29,10 @@ DECLARE_HOOK(android_vh_f2fs_improve_priority,
 DECLARE_HOOK(android_vh_f2fs_restore_priority,
 	TP_PROTO(struct task_struct *p, int saved_prio),
 	TP_ARGS(p, saved_prio));
+
+DECLARE_HOOK(android_vh_f2fs_printk,
+	TP_PROTO(struct f2fs_sb_info *sbi, struct va_format *vaf, int level, bool limit_rate),
+	TP_ARGS(sbi, vaf, level, limit_rate));
 
 #endif /* _TRACE_HOOK_FS_H */
 
