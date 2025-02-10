@@ -138,6 +138,14 @@ static inline void psi_enqueue(struct task_struct *p, int flags)
 	if (flags & ENQUEUE_RESTORE)
 		return;
 
+<<<<<<< HEAD   (fc99bc UPSTREAM: mfd: cros_ec: Don't load charger with UCSI)
+||||||| BASE
+=======
+	/* psi_sched_switch() will handle the flags */
+	if (task_on_cpu(task_rq(p), p))
+		return;
+
+>>>>>>> BRANCH (4b07fe Linux 6.12.13)
 	if (p->se.sched_delayed) {
 		/* CPU migration of "sleeping" task */
 		SCHED_WARN_ON(!(flags & ENQUEUE_MIGRATED));
@@ -181,7 +189,12 @@ static inline void psi_dequeue(struct task_struct *p, int flags)
 	 * TSK_ONCPU is set to ensure the task switch is imminent.
 	 * Otherwise clear the flags as usual.
 	 */
+<<<<<<< HEAD   (fc99bc UPSTREAM: mfd: cros_ec: Don't load charger with UCSI)
 	if ((flags & DEQUEUE_SLEEP) && (p->psi_flags & TSK_ONCPU))
+||||||| BASE
+=======
+	if (flags & DEQUEUE_SLEEP)
+>>>>>>> BRANCH (4b07fe Linux 6.12.13)
 		return;
 
 	/*
