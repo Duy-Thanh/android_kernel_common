@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d5d6e7_19bd0126",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2414,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-02-10T15:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d64dba8c_5d9c18db",
+      "range": {
+        "startLine": 2409,
+        "startChar": 0,
+        "endLine": 2414,
+        "endChar": 0
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57a1350a_551a345c",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Ack, but I can actually simplify even more. The loop can start at i \u003d 0 and I skip pages with a non-null refcount. Should be pretty robust like that.",
       "parentUuid": "57a1350a_551a345c",
+      "range": {
+        "startLine": 2417,
+        "startChar": 12,
+        "endLine": 2417,
+        "endChar": 34
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf00015_f0ddd9c0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-02-10T15:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f2d9e3f_787c2618",
       "range": {
         "startLine": 2417,
         "startChar": 12,
@@ -142,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac40c38f_8c36da10",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2426,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-02-10T15:13:39Z",
+      "side": 1,
+      "message": "Let me know if you\u0027d prefer that we allocate those pages from somewhere else!",
+      "parentUuid": "23d5f085_e578bcad",
+      "range": {
+        "startLine": 2426,
+        "startChar": 1,
+        "endLine": 2426,
+        "endChar": 19
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e262a88_367a00bb",
@@ -179,6 +251,30 @@
       "side": 1,
       "message": "Right, perhaps the simplest way is to just have a hardcoded IPA rather than make it an offest from phys. I guess something like BIT(pgt-\u003eia_bits - 1) or something?",
       "parentUuid": "9e262a88_367a00bb",
+      "range": {
+        "startLine": 2431,
+        "startChar": 35,
+        "endLine": 2431,
+        "endChar": 38
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6770f91_10b8756e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2431,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-02-10T15:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1c93eb7_9942d0de",
       "range": {
         "startLine": 2431,
         "startChar": 35,
