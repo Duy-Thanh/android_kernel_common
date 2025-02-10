@@ -58,6 +58,7 @@
   gov_attr_set_get
   gpiod_to_chip
   have_governor_per_policy
+  __icmp_send
   i2c_smbus_read_word_data
   i2c_smbus_write_word_data
   igrab
