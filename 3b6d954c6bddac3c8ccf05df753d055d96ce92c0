@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40df813d_a21b5b0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1051383
+      },
+      "writtenOn": "2025-02-10T23:06:26Z",
+      "side": 1,
+      "message": "Why MFS and linker scirpt changes are abandoned? Or they will be moved to another patch series?",
+      "revId": "3b6d954c6bddac3c8ccf05df753d055d96ce92c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
