@@ -16,6 +16,24 @@
       "message": "are we concerned about breaking any scripts that might be parsing this? could put the code at the end.",
       "revId": "c9a656db70d83d1af360f382e03ede01304e6872",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0081ab_d3f54ac8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4022,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-10T23:32:40Z",
+      "side": 1,
+      "message": "This is a good point. I should have added the code at the end when I sent the patch upstream. I\u0027m not aware of any scripts parsing these logs though. The only parsing that I\u0027m aware of is through the binderfs files e.g. `/dev/binderfs/binder_logs/failed_transactions`.\n\nIn the past we\u0027ve changed this log without complains, so I think we\u0027ll be fine. Moving forward though I\u0027ll keep this in mind of appending new items at the end instead.",
+      "parentUuid": "703765e9_a90404f5",
+      "revId": "c9a656db70d83d1af360f382e03ede01304e6872",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
