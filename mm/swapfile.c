@@ -3691,6 +3691,8 @@ static int __swap_duplicate(swp_entry_t entry, unsigned char usage, int nr)
 	int err, i;
 
 	p = swp_swap_info(entry);
+	if (!p)
+		return -EINVAL;
 
 	offset = swp_offset(entry);
 	VM_WARN_ON(nr > SWAPFILE_CLUSTER - offset % SWAPFILE_CLUSTER);
