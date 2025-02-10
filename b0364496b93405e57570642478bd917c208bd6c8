@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d6b452_8acabce9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303355
+      },
+      "writtenOn": "2025-02-10T21:14:16Z",
+      "side": 1,
+      "message": "This fixes up config changes from https://android-review.git.corp.google.com/c/kernel/common/+/3328448 and https://android-review.git.corp.google.com/c/kernel/common/+/3356490 (authors CCd for viz)",
+      "revId": "b0364496b93405e57570642478bd917c208bd6c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
