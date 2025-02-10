@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15a21b0d_cbccf72f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2414,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-10T13:06:51Z",
+      "side": 1,
+      "message": "Can you initialise some (all?) of this in a static initialiser for `selftest_vm`?",
+      "range": {
+        "startLine": 2409,
+        "startChar": 0,
+        "endLine": 2414,
+        "endChar": 0
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a1350a_551a345c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-10T13:06:51Z",
+      "side": 1,
+      "message": "Redundant?",
+      "range": {
+        "startLine": 2417,
+        "startChar": 12,
+        "endLine": 2417,
+        "endChar": 34
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d615199_a4a17cc5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2426,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-10T13:06:51Z",
+      "side": 1,
+      "message": "Can we teardown `selftest_vm.pool` and free the pages back to the host as well?",
+      "range": {
+        "startLine": 2426,
+        "startChar": 1,
+        "endLine": 2426,
+        "endChar": 19
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e262a88_367a00bb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2431,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-10T13:06:51Z",
+      "side": 1,
+      "message": "Do we need to take the maximum IPA size into account here?",
+      "range": {
+        "startLine": 2431,
+        "startChar": 35,
+        "endLine": 2431,
+        "endChar": 38
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddaebd8f_a48e865d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-10T13:06:51Z",
+      "side": 1,
+      "message": "If `nr_pages !\u003d 0` and the allocation fails for some bizarre reason, we should probably bail with `-ENOMEM` here rather than let the selftest go and corrupt memory in weird ways.",
+      "range": {
+        "startLine": 50,
+        "startChar": 1,
+        "endLine": 50,
+        "endChar": 14
+      },
+      "revId": "ad8f60ee35f1fc2721fe5703c55e572c286f2e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
