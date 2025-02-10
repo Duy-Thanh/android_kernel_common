@@ -34,6 +34,24 @@
       "parentUuid": "3d80aeb3_d0277bdd",
       "revId": "507213a0eae6803eb7bbb270e009502a66e8260b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba834f67_7b859314",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-10T10:20:53Z",
+      "side": 1,
+      "message": "This CL and its parent have now landed as FROMGIT in Boqun\u0027s tree.",
+      "parentUuid": "33fae9e2_d8348ec1",
+      "revId": "507213a0eae6803eb7bbb270e009502a66e8260b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
