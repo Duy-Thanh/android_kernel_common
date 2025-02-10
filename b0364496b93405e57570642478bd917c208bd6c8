@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "919c53cc_e8650e60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303355
+      },
+      "writtenOn": "2025-02-10T21:23:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf70c50f_b1ffb527",
+      "revId": "b0364496b93405e57570642478bd917c208bd6c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f353aec_0a8d9bbe",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-02-10T21:19:00Z",
       "side": 1,
       "message": "Why the [TEMP] prefix?",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "b0364496b93405e57570642478bd917c208bd6c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1ab9106_b3dcb620",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3303355
+      },
+      "writtenOn": "2025-02-10T21:23:32Z",
+      "side": 1,
+      "message": "The instructions under \"Kernel miscellany\" in the care \u0026 feeding doc say to do this.",
+      "parentUuid": "9f353aec_0a8d9bbe",
       "range": {
         "startLine": 7,
         "startChar": 17,
