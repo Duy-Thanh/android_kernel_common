@@ -16,6 +16,23 @@
       "message": "please review this application for adding vendor hooks, thanks for your effort.",
       "revId": "3f6c85e136d664c58d9b17fcb85fd121819dbba9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8385862_5ba23e77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-11T18:45:20Z",
+      "side": 1,
+      "message": "This is a dup of https://android-review.googlesource.com/c/kernel/common/+/3192232 with a wrong Change-Id.",
+      "revId": "3f6c85e136d664c58d9b17fcb85fd121819dbba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
