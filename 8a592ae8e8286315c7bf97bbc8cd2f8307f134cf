@@ -22,6 +22,30 @@
       },
       "revId": "8a592ae8e8286315c7bf97bbc8cd2f8307f134cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b9f9a8_6e359916",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-11T17:06:50Z",
+      "side": 1,
+      "message": "From version 1.1 to 1.2 the smccc spec requires the SVE state to be preserved across smc/hvc calls according to `Table 13-1 SMCCC Changelog`. This is something that we already have so this is a justification.",
+      "parentUuid": "6c7c29c7_4893dcce",
+      "range": {
+        "startLine": 18,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "8a592ae8e8286315c7bf97bbc8cd2f8307f134cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
