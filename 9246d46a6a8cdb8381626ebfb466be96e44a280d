@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee341a87_ee2fb05a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:54:33Z",
+      "side": 1,
+      "message": "Are there crosvm changes that enable support for this in userspace?",
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
