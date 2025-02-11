@@ -68,6 +68,24 @@
       "parentUuid": "99af0826_9633ece1",
       "revId": "8354d64e52fbfd853dafae8c98f6864fd6415117",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5825aab9_63275f6d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2025-02-11T22:33:52Z",
+      "side": 1,
+      "message": "We want to keey the list of kunit test modules generated dynamically as the link to the list is not easy to maintain for so many different kernel branches.",
+      "parentUuid": "04fca116_b9505876",
+      "revId": "8354d64e52fbfd853dafae8c98f6864fd6415117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
