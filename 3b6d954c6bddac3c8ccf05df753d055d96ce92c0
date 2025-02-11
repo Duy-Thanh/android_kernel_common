@@ -16,6 +16,24 @@
       "message": "Why MFS and linker scirpt changes are abandoned? Or they will be moved to another patch series?",
       "revId": "3b6d954c6bddac3c8ccf05df753d055d96ce92c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e8cc3b_638b484f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2025-02-11T00:01:51Z",
+      "side": 1,
+      "message": "They are not backported to android15-6.6 branch. Because android15-6.6 branch has already been released, and maennich@ is concerned about the change to .text layout in the linker script, see https://buganizer.corp.google.com/issues/392184315#comment8. I am also interested in seeing the performance impact of not having MFS.",
+      "parentUuid": "40df813d_a21b5b0d",
+      "revId": "3b6d954c6bddac3c8ccf05df753d055d96ce92c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
