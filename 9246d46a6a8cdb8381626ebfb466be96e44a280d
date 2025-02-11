@@ -16,6 +16,126 @@
       "message": "Are there crosvm changes that enable support for this in userspace?",
       "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c93cc486_3308130d",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T16:07:55Z",
+      "side": 1,
+      "message": "I think we\u0027re better off making this a capability on the PROTECTED_VM ioctl -- i.e. add it to the `switch (cap-\u003eflags)` in `pkvm_vm_ioctl_enable_cap`.\n\nPerhaps we could advertise the supported FFA version in `kvm_protected_vm_info` too?",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 29
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00840d4d_9f532c26",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T16:07:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this take the vm as an argument rather than the vcpu?",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 24
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f2312c_1cad193b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T16:07:55Z",
+      "side": 1,
+      "message": "In this case, why wouldn\u0027t we return `SMCCC_RET_NOT_SUPPORTED`? i.e. change the previous check to be:\n\n```\nif (!VM_FFA_SUPPORTED(vcpu) || !is_ffa_call(func_id)) {\n\t...\n```",
+      "range": {
+        "startLine": 1266,
+        "startChar": 6,
+        "endLine": 1266,
+        "endChar": 22
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f9b36f0_afba9fc8",
+        "filename": "include/uapi/linux/kvm.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T16:07:55Z",
+      "side": 1,
+      "message": "We won\u0027t need this if we move this under `KVM_CAP_ARM_PROTECTED_VM` (and you missed adding it to `kvm_vm_ioctl_check_extension` anyway, so it saves you adding that 😊)",
+      "range": {
+        "startLine": 944,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "72008ce5_eaa092f5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/uapi/linux/kvm.h",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "#define KVM_API_VERSION 13\n"
+            },
+            {
+              "path": "include/uapi/linux/kvm.h",
+              "range": {
+                "startLine": 944,
+                "startChar": 0,
+                "endLine": 945,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
