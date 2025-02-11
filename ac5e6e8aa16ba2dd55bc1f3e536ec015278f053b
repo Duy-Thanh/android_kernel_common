@@ -46,6 +46,30 @@
       },
       "revId": "ac5e6e8aa16ba2dd55bc1f3e536ec015278f053b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d96f9149_5e4ca426",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-02-11T02:07:10Z",
+      "side": 1,
+      "message": "Thanks, almost... could you please add a line with `DISABLE_TOPIC_PROTECTOR` after the `cherry picked from` line to fix the Lint -1 issue.",
+      "parentUuid": "8cf07454_aca02b25",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 68
+      },
+      "revId": "ac5e6e8aa16ba2dd55bc1f3e536ec015278f053b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
