@@ -50,6 +50,24 @@
       "message": "please fix checkpatch issue:\n```\nWARNING:MACRO_ARG_UNUSED: Argument \u0027_name\u0027 is not used in function-like macro\n#47: FILE: include/trace/events/mmflags.h:164:\n```",
       "revId": "1f34a2deebed30d725d3814bb4765d97e9f8d4b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f42d64_f93da4d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-02-11T06:42:15Z",
+      "side": 1,
+      "message": "when CONFIG_64BIT is disable, it warns MACRO_ARG_UNUSED on line 164. But the definition of IF_HAVE_PG_OEM_RESERVED follows IF_HAVE_PG_ARCH_3, it is common in include/trace/events/mmflags.h, so could this warning be ignored?",
+      "parentUuid": "b599ff99_f7961f01",
+      "revId": "1f34a2deebed30d725d3814bb4765d97e9f8d4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
