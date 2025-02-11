@@ -73,6 +73,7 @@
   memblock_free
   mem_cgroup_move_account
   sum_mthp_stat
+  scsi_device_set_state
   __traceiter_android_vh_anon_vma_name_recog
   __traceiter_android_vh_restore_mm_flags
   __traceiter_android_vh_update_vma_flags
