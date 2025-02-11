@@ -16,6 +16,24 @@
       "message": "This patch needs a rebase.",
       "revId": "ab599dc68e787b91e40395b823ce25148aecdb82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19669ddc_183b829d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-11T23:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42491369_9b64f801",
+      "revId": "ab599dc68e787b91e40395b823ce25148aecdb82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
