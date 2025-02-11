@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eeeadd6_0bb72b76",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:10:53Z",
+      "side": 1,
+      "message": "This is a strange change in behaviour: before, we would return `-EINVAL` if `hyp_vm-\u003eis_dying` was already set. Why is that now allowed and doesn\u0027t it mean that we can race on the reclaim?",
+      "range": {
+        "startLine": 890,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 28
+      },
+      "revId": "73ec7f1f4a610a5cd9a207ef0ab038b3af1158c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "103e8e02_0865d112",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:10:53Z",
+      "side": 1,
+      "message": "Erm, can we really not do better than this? Although we might be preemptible here, the guest memory remains pinned so we\u0027d be better off unpinning pages that we know have not been shared with FFA instead of spinning on TZ.",
+      "range": {
+        "startLine": 361,
+        "startChar": 7,
+        "endLine": 361,
+        "endChar": 12
+      },
+      "revId": "73ec7f1f4a610a5cd9a207ef0ab038b3af1158c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
