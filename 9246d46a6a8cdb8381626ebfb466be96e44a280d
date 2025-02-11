@@ -89,6 +89,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57de2fda_a083540e",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T16:17:41Z",
+      "side": 1,
+      "message": "This is opening up TZ to any host userspace application with `/dev/kvm` permissions. Should we limit the availability of this feature to e.g. `CAP_IPC_OWNER`?",
+      "range": {
+        "startLine": 853,
+        "startChar": 0,
+        "endLine": 853,
+        "endChar": 35
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f9b36f0_afba9fc8",
         "filename": "include/uapi/linux/kvm.h",
         "patchSetId": 12
