@@ -33,6 +33,24 @@
       "message": "Is it working with THPs? (happy to help with testing if you need)\n\nIf you share something in the middle of a block, I believe you would get nr_pages \u003e 1 here.",
       "revId": "a691adb1958ffc279907c91252809bf349f4b1f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db34e46_1b5b89dc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1433,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-11T16:35:06Z",
+      "side": 1,
+      "message": "I haven\u0027t tested with THP, in this case it will warn_on here.",
+      "parentUuid": "9d3b6a58_e25a87db",
+      "revId": "a691adb1958ffc279907c91252809bf349f4b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
