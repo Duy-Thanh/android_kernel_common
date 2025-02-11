@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc1816a_967843af",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-11T15:00:51Z",
+      "side": 1,
+      "message": "On `Host -\u003e (share) Guest` we will open the possiblity to share mmio with a guest. Is this intended ?",
+      "range": {
+        "startLine": 1119,
+        "startChar": 5,
+        "endLine": 1119,
+        "endChar": 16
+      },
+      "revId": "90eb4b1f7d1deb7752bf590892acb3cb9d7ed3fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
