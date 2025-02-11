@@ -331634,6 +331634,7 @@ function {
   parameter_id: 0x35f82503
 }
 function {
+<<<<<<< HEAD   (52fb2e ANDROID: KVM: arm64: Fix missing poison for huge-mapping)
   id: 0x97a0d8a7
   return_type_id: 0x15a30023
   parameter_id: 0x15a30023
@@ -331642,6 +331643,9 @@ function {
   parameter_id: 0x0292b875
 }
 function {
+||||||| BASE
+=======
+>>>>>>> CHANGE (e0a8ce ANDROID: GKI: update symbol list file for xiaomi)
   id: 0x97a1ddd3
   return_type_id: 0x6720d32f
   parameter_id: 0x257d12af
