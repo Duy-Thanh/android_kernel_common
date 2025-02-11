@@ -16,6 +16,23 @@
       "message": "@tkjos@google.com\nHi, Todd, Please review this commit and help merge it. Thanks.",
       "revId": "4fd80b8d97b5902e09a39080c0b1a48c9f9ac0b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af5302e3_1afe27ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-11T20:49:25Z",
+      "side": 1,
+      "message": "Please rebase to resolve the merge conflicts",
+      "revId": "4fd80b8d97b5902e09a39080c0b1a48c9f9ac0b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
