@@ -22,6 +22,30 @@
       },
       "revId": "90eb4b1f7d1deb7752bf590892acb3cb9d7ed3fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e533b280_acf6d0a5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T17:09:11Z",
+      "side": 1,
+      "message": "I _think_ the `guest_ack_{share,donation}` functions reject MMIO, so we should be ok.\n\nIn any case, the `range_is_memory()` check here will fail for MMIO, so I think this `if` condition is false regardless of `check_count` when handling MMIO.\n\nDo you agree?",
+      "parentUuid": "fbc1816a_967843af",
+      "range": {
+        "startLine": 1119,
+        "startChar": 5,
+        "endLine": 1119,
+        "endChar": 16
+      },
+      "revId": "90eb4b1f7d1deb7752bf590892acb3cb9d7ed3fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
