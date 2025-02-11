@@ -22,6 +22,30 @@
       },
       "revId": "ac5e6e8aa16ba2dd55bc1f3e536ec015278f053b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf07454_aca02b25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-02-11T01:48:48Z",
+      "side": 1,
+      "message": "(cherry picked from commit 887c3350714645dd407326106b525a309531ee36)\nThis was included in the original patch, and I executed a cherry-pick that automatically brought it into the new commit. I edited the commit message and removed this change-id. Is this modification acceptable?",
+      "parentUuid": "059cc552_68c87152",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 68
+      },
+      "revId": "ac5e6e8aa16ba2dd55bc1f3e536ec015278f053b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
