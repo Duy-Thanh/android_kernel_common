@@ -115,6 +115,9 @@ DEFINE_PER_CPU(struct hrtimer_cpu_base, hrtimer_bases) =
 	}
 };
 
+DEFINE_PER_CPU(call_single_data_t, hrtimer_base_csd) =
+	CSD_INIT(retrigger_next_event, NULL);
+
 static const int hrtimer_clock_to_base_table[MAX_CLOCKS] = {
 	/* Make sure we catch unsupported clockids */
 	[0 ... MAX_CLOCKS - 1]	= HRTIMER_MAX_CLOCK_BASES,
@@ -1264,6 +1267,19 @@ static int __hrtimer_start_range_ns(struct hrtimer *timer, ktime_t tim,
 	first = enqueue_hrtimer(timer, new_base, mode);
 	if (!force_local)
 		return first;
+
+	if (!force_local) {
+		if (hrtimer_base_is_online(this_cpu_base))
+			return first;
+
+		if (first) {
+			struct hrtimer_cpu_base *new_cpu_base = new_base->cpu_base;
+			call_single_data_t *csd = per_cpu_ptr(&hrtimer_base_csd, new_cpu_base->cpu);
+
+			smp_call_function_single_async(new_cpu_base->cpu, csd);
+		}
+		return 0;
+	}
 
 	/*
 	 * Timer was forced to stay on the current CPU to avoid
