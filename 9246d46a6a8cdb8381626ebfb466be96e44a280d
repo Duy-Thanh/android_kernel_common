@@ -20,6 +20,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97e4d655_85570e69",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T16:40:29Z",
+      "side": 1,
+      "message": "Come to think of it, I wonder if having a single boolean is too coarse-grained. Is there any merit to e.g. restricting the set of FFA calls that can be made or limiting the set of SPs that can be reached?",
+      "range": {
+        "startLine": 297,
+        "startChar": 6,
+        "endLine": 297,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c6a0b2c1_be3ae8de",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 297,
+                "startChar": 0,
+                "endLine": 298,
+                "endChar": 0
+              },
+              "replacement": "\tbool ffa_sp_reclaim_support;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c93cc486_3308130d",
         "filename": "arch/arm64/kvm/arm.c",
         "patchSetId": 12
