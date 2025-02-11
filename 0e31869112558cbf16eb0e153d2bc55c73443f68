@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15272273_5aaa20cc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "Why 8?",
+      "range": {
+        "startLine": 51,
+        "startChar": 35,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f2afc2a_43bc85ff",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "afaict this should reference the \"invalid memory region handle\" which might be -1?",
+      "range": {
+        "startLine": 352,
+        "startChar": 6,
+        "endLine": 352,
+        "endChar": 10
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a895668a_d109d47a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "How should we handle the SPs which we _did_ successfully notify and also those that we didn\u0027t get around to notifying?",
+      "range": {
+        "startLine": 354,
+        "startChar": 3,
+        "endLine": 354,
+        "endChar": 9
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74cde934_2e25ae5e",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
@@ -38,6 +107,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e488f176_8cae2aee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "What if this identifies the host?\n\nAddituionally, do we need to prevent the host from spoofing these messages?",
+      "range": {
+        "startLine": 382,
+        "startChar": 34,
+        "endLine": 382,
+        "endChar": 43
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feec5b27_002c75a5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "Hrm, maybe we should only send the notification if the rxtx_map operation actually succeeds?",
+      "range": {
+        "startLine": 384,
+        "startChar": 7,
+        "endLine": 384,
+        "endChar": 10
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68666200_b1f956bf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we hold this during the notification so that concurrent FFA_PARTITION_INFO_GET doesn\u0027t mess with the `sp_ids` array?",
+      "range": {
+        "startLine": 386,
+        "startChar": 1,
+        "endLine": 386,
+        "endChar": 14
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194ffc19_3f94a322",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "Why is it safe to truncate? Presumably there will be SPs that expect to be notified but which won\u0027t be.",
+      "range": {
+        "startLine": 1170,
+        "startChar": 53,
+        "endLine": 1170,
+        "endChar": 78
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "050529f5_c6d975aa",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
@@ -67,6 +228,47 @@
       "side": 1,
       "message": "I will relax this check to `!\u003d0`.",
       "parentUuid": "050529f5_c6d975aa",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f44b200e_05a0ef0d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "I think it\u0027s stronger than that: we should only send the creation message if an SP has asked for it and we should only send the destruction message has asked for it too. So you may need to store a couple of bits per SP.",
+      "parentUuid": "ea7cc69e_ef9a638e",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46f849d6_a153b9fd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-11T15:43:20Z",
+      "side": 1,
+      "message": "Hmm. This is called in a loop, so I wouldn\u0027t be surprised if we get stuck in a loop if we ever see an error.\n\nIt would be better to avoid notifying an SP more than once about the destruction of a given VM.",
+      "range": {
+        "startLine": 1343,
+        "startChar": 7,
+        "endLine": 1343,
+        "endChar": 33
+      },
       "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
