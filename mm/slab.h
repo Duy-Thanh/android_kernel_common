@@ -11,6 +11,7 @@
 #include <linux/memcontrol.h>
 #include <linux/kfence.h>
 #include <linux/kasan.h>
+#include <linux/stackdepot.h>
 
 /*
  * Internal slab definitions
@@ -523,6 +524,11 @@ DECLARE_STATIC_KEY_FALSE(slub_debug_enabled);
 #endif
 extern void print_tracking(struct kmem_cache *s, void *object);
 long validate_slab_cache(struct kmem_cache *s);
+extern unsigned long get_each_kmemcache_node_track(struct kmem_cache *s,
+		int (*fn)(const struct kmem_cache *, const void *,
+		unsigned long, const depot_stack_handle_t, void *),
+		void *private);
+
 static inline bool __slub_debug_enabled(void)
 {
 	return static_branch_unlikely(&slub_debug_enabled);

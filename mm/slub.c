@@ -27,7 +27,6 @@
 #include <linux/cpuset.h>
 #include <linux/mempolicy.h>
 #include <linux/ctype.h>
-#include <linux/stackdepot.h>
 #include <linux/debugobjects.h>
 #include <linux/kallsyms.h>
 #include <linux/kfence.h>
@@ -934,6 +933,80 @@ static struct track *get_track(struct kmem_cache *s, void *object,
 
 	return kasan_reset_tag(p + alloc);
 }
+
+/*
+ * This function will be used to loop through all the slab objects in
+ * a page to give track structure for each object, the function fn will
+ * be using this track data to extract required info into the private
+ * data.
+ * This function retruns the value gotten from the fn function.
+ */
+static unsigned long get_each_object_track(struct kmem_cache *s,
+		struct slab *slab, enum track_item alloc,
+		int (*fn)(const struct kmem_cache *, const void *,
+		unsigned long, const depot_stack_handle_t, void *),
+		void *private)
+{
+	void *p;
+	struct track *t;
+	int ret = 0;
+	depot_stack_handle_t handle __maybe_unused;
+
+#ifdef CONFIG_STACKDEPOT
+	for_each_object(p, s, slab_address(slab), slab->objects) {
+		t = get_track(s, p, alloc);
+		handle = READ_ONCE(t->handle);
+		ret = fn(s, p, t->addr, handle, private);
+		if (ret)
+			break;
+	}
+#endif
+	return ret;
+}
+
+static inline unsigned long node_nr_slabs(struct kmem_cache_node *n);
+
+unsigned long get_each_kmemcache_node_track(struct kmem_cache *s,
+		int (*fn)(const struct kmem_cache *, const void *,
+		unsigned long, const depot_stack_handle_t, void *),
+		void *private)
+{
+	int node;
+	unsigned long ret = 0;
+	struct kmem_cache_node *n;
+
+	if (!slub_debug || !(s->flags & SLAB_STORE_USER))
+		return 0;
+
+	for_each_kmem_cache_node(s, node, n) {
+		unsigned long flags;
+		struct slab *slab;
+
+		if (!node_nr_slabs(n))
+			continue;
+
+		spin_lock_irqsave(&n->list_lock, flags);
+		list_for_each_entry(slab, &n->partial, slab_list) {
+			ret = get_each_object_track(s, slab, TRACK_ALLOC, fn, private);
+			if (ret) {
+				spin_unlock_irqrestore(&n->list_lock, flags);
+				return ret;
+			}
+		}
+#ifdef CONFIG_SLUB_DEBUG
+		list_for_each_entry(slab, &n->full, slab_list) {
+			ret = get_each_object_track(s, slab, TRACK_ALLOC, fn, private);
+			if (ret) {
+				spin_unlock_irqrestore(&n->list_lock, flags);
+				return ret;
+			}
+		}
+#endif
+		spin_unlock_irqrestore(&n->list_lock, flags);
+	}
+	return ret;
+}
+EXPORT_SYMBOL_NS_GPL(get_each_kmemcache_node_track, MINIDUMP);
 
 #ifdef CONFIG_STACKDEPOT
 static noinline depot_stack_handle_t set_track_prepare(void)
