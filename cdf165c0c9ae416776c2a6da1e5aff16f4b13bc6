@@ -16,6 +16,24 @@
       "message": "Build error: ```/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/543/execroot/_main/common/drivers/android/vendor_hooks.c:314:1: error: use of undeclared identifier \u0027__traceiter_android_rvh_process_madvise_bypass\u0027; did you mean \u0027__tracepoint_android_rvh_process_madvise_bypass\u0027?\n  314 | EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_process_madvise_bypass);```\n\nYou should add `#include \u003ctrace/hooks/madvise.h\u003e`",
       "revId": "cdf165c0c9ae416776c2a6da1e5aff16f4b13bc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5d73afa_7bf9dd3e",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-02-12T01:49:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3a09a653_5533762a",
+      "revId": "cdf165c0c9ae416776c2a6da1e5aff16f4b13bc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
