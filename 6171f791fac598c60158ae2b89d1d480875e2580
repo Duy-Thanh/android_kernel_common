@@ -16,6 +16,24 @@
       "message": "Please fix the Git Author Name and Signed-off-by line inconsistency:\n\nFrom:/Signed-off-by: email name mismatch: \u0027From: maoshenshen \u003cmaoshenshen@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: shenshen mao \u003cmaoshenshen@oppo.com\u003e\u0027\n\nAlso looks like the change needs a rebase.",
       "revId": "6171f791fac598c60158ae2b89d1d480875e2580",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "962c6314_8c300a1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-12T07:00:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a24206db_3e0204fb",
+      "revId": "6171f791fac598c60158ae2b89d1d480875e2580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
