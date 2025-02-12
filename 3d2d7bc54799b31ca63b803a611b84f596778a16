@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58984164_c4fec0f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-02-12T08:53:32Z",
+      "side": 1,
+      "message": "To keep it working, IMO we should have revert CL and upstream varison submitted in one chain.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "3d2d7bc54799b31ca63b803a611b84f596778a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
