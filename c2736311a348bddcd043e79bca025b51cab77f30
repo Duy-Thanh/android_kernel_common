@@ -16,6 +16,24 @@
       "message": "Fix checkpatch issue:\n```\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: maoshenshen \u003cmaoshenshen@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: shenshen mao \u003cmaoshenshen@oppo.com\u003e\u0027\n```",
       "revId": "c2736311a348bddcd043e79bca025b51cab77f30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12ec429b_648ec05c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-12T19:28:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "42331d0f_17b71bc0",
+      "revId": "c2736311a348bddcd043e79bca025b51cab77f30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
