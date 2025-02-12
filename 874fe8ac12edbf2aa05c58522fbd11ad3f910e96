@@ -16,6 +16,24 @@
       "message": "Hi John\nI have changed commit message and rebased.",
       "revId": "874fe8ac12edbf2aa05c58522fbd11ad3f910e96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c8fc97c_05266d85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334410
+      },
+      "writtenOn": "2025-02-12T03:09:17Z",
+      "side": 1,
+      "message": "\u003e Hi John\n\u003e I have changed commit message and rebased. Please review again.",
+      "parentUuid": "caee562e_f3514fa1",
+      "revId": "874fe8ac12edbf2aa05c58522fbd11ad3f910e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
