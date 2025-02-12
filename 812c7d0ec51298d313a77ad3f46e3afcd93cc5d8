@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a898921_2d75fa72",
+        "filename": "mm/migrate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-12T18:11:04Z",
+      "side": 0,
+      "message": "is it ok to lose these conditions?",
+      "range": {
+        "startLine": 464,
+        "startChar": 1,
+        "endLine": 464,
+        "endChar": 66
+      },
+      "revId": "812c7d0ec51298d313a77ad3f46e3afcd93cc5d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

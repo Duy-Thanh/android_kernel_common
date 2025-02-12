@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c2ad9a_87a79148",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-12T18:11:04Z",
+      "side": 1,
+      "message": "Changes in swap.c and vmscan.c are also skipped",
+      "range": {
+        "startLine": 97,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 77
+      },
+      "revId": "d7694a7e5b705232c2952d6cd70de71726be906d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
