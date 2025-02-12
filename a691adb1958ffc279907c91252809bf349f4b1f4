@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32843aaa_c0151c04",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T10:30:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99437396_11f20753",
+      "revId": "a691adb1958ffc279907c91252809bf349f4b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d3b6a58_e25a87db",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "I haven\u0027t tested with THP, in this case it will warn_on here.",
       "parentUuid": "9d3b6a58_e25a87db",
+      "revId": "a691adb1958ffc279907c91252809bf349f4b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c234ae7_6c3d9ed7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1433,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T10:30:27Z",
+      "side": 1,
+      "message": "dropped the warn_on in case we only get one page.",
+      "parentUuid": "1db34e46_1b5b89dc",
       "revId": "a691adb1958ffc279907c91252809bf349f4b1f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
