@@ -39,6 +39,30 @@
       },
       "revId": "c760e23aaa74fc4f8fee20cd08a2640f7309f226",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0d65c6a_5cdfcb61",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-12T23:54:36Z",
+      "side": 1,
+      "message": "Note that `puncture` is taking an existing padding as explained in the comment.",
+      "parentUuid": "49bccb83_383f20de",
+      "range": {
+        "startLine": 774,
+        "startChar": 0,
+        "endLine": 778,
+        "endChar": 0
+      },
+      "revId": "c760e23aaa74fc4f8fee20cd08a2640f7309f226",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
