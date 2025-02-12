@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbda841f_f2c69522",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1427,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-02-12T23:24:24Z",
+      "side": 0,
+      "message": "Same here. Many partners are using cfg80211 and mac80211 from the ACK tree. So we can\u0027t just break their devices by making these changes.",
+      "range": {
+        "startLine": 1427,
+        "startChar": 0,
+        "endLine": 1427,
+        "endChar": 18
+      },
+      "revId": "856167367e9a2326a4be4e644eb901aaee4d7350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4592b741_f33e0474",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-02-12T23:24:24Z",
+      "side": 0,
+      "message": "and here again.",
+      "range": {
+        "startLine": 1462,
+        "startChar": 0,
+        "endLine": 1462,
+        "endChar": 18
+      },
+      "revId": "856167367e9a2326a4be4e644eb901aaee4d7350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

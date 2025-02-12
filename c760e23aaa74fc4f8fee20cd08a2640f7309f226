@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a889e336_1e519d5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-02-12T23:24:24Z",
+      "side": 1,
+      "message": "You can\u0027t break everyone\u0027s devices on a KMI frozen kernel branch.",
+      "revId": "c760e23aaa74fc4f8fee20cd08a2640f7309f226",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49bccb83_383f20de",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-02-12T23:24:24Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right. Why are we allowing this ABI break and then attempting to hide it? Usually we only use the `GENKSYMS` hack when a change is made but doesn\u0027t actually break the ABI.",
+      "range": {
+        "startLine": 774,
+        "startChar": 0,
+        "endLine": 778,
+        "endChar": 0
+      },
+      "revId": "c760e23aaa74fc4f8fee20cd08a2640f7309f226",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
