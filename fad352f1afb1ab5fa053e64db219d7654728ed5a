@@ -22,6 +22,30 @@
       },
       "revId": "fad352f1afb1ab5fa053e64db219d7654728ed5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7534da08_987ca4f1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T16:55:42Z",
+      "side": 1,
+      "message": "I had a thought of this and I don\u0027t think we should do that because ultimately it should be TZ responsibility to decide what to expose to whom. I am afraid that we will polute the uapi with uuid bits that have no meaning to kvm.",
+      "parentUuid": "c0d3fb25_8b7f124f",
+      "range": {
+        "startLine": 1103,
+        "startChar": 2,
+        "endLine": 1103,
+        "endChar": 17
+      },
+      "revId": "fad352f1afb1ab5fa053e64db219d7654728ed5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
