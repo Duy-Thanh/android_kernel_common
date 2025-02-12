@@ -16,6 +16,24 @@
       "message": "nit: as we don\u0027t have a \"non locked\" version and the function is static, probably that rename is not necessary. \n\nHowever, I understand now the function is using that common hyp_buff_refcnt that needs protection, so you could `hyp_assert_lock_held()` if you want to be on the safe side.",
       "revId": "5fb8b435153146fc9d5ed15ca78bc158c355e619",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cf7a091_49a46307",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T12:39:22Z",
+      "side": 1,
+      "message": "I added `hyp_assert_lock_held(\u0026host_buffers.lock);`",
+      "parentUuid": "5d06708c_1bd6e4c8",
+      "revId": "5fb8b435153146fc9d5ed15ca78bc158c355e619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
