@@ -130,6 +130,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ea7019b_23d7b2d0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-12T04:22:24Z",
+      "side": 1,
+      "message": "The Linux driver first calls `RXTX_MAP`, then `PARTITION_INFO_GET` (which makes sense because the information goes in the RX buffer), including on the host.\n\nThis means that we\u0027ll never see the host here because `sp_ids` will be empty here. Is that intended?",
+      "parentUuid": "e488f176_8cae2aee",
+      "range": {
+        "startLine": 382,
+        "startChar": 34,
+        "endLine": 382,
+        "endChar": 43
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feec5b27_002c75a5",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
