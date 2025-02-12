@@ -16,6 +16,24 @@
       "message": "With Quentin\u0027s upcoming change to limit the hyp stage-1, this function here could now fail.\n\nIt would be great to handle this nicely. We haven\u0027t modified the guest stage-2 yet, so it should be straight forward: see https://android-review.git.corp.google.com/c/kernel/common/+/3470013/1/arch/arm64/kvm/hyp/nvhe/mem_protect.c",
       "revId": "b297dff67833a122029acea48ac8491f3bcbf30c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfef5443_2918613e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T10:30:39Z",
+      "side": 1,
+      "message": "Thanks for pointing out. In that case I will WARN_ON only when `ret !\u003d ENOMEM` because we don\u0027t have the case where we can fall halfaway through (we are only sharing a page).",
+      "parentUuid": "029f65f0_a73437ae",
+      "revId": "b297dff67833a122029acea48ac8491f3bcbf30c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
