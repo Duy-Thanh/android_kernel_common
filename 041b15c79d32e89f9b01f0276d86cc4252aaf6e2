@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff5a1b9_a5463704",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334410
+      },
+      "writtenOn": "2025-02-13T09:50:03Z",
+      "side": 1,
+      "message": "As discussed in issue 395750628, we no longer need hook account_process_tick_gran. It is replaced by this cherry-pick.",
+      "revId": "041b15c79d32e89f9b01f0276d86cc4252aaf6e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
