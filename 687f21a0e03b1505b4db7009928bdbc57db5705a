@@ -46,6 +46,30 @@
       },
       "revId": "687f21a0e03b1505b4db7009928bdbc57db5705a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48500ea1_ad668d79",
+        "filename": "kernel/time/hrtimer.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-13T12:02:27Z",
+      "side": 1,
+      "message": "Fair enough, and I guess it\u0027s needed for `housekeeping_cpumask()`?",
+      "parentUuid": "963fc516_6b97a666",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "687f21a0e03b1505b4db7009928bdbc57db5705a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
