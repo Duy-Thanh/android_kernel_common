@@ -22,6 +22,30 @@
       },
       "revId": "3d2d7bc54799b31ca63b803a611b84f596778a16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17fc2a8b_e919b2e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3266585
+      },
+      "writtenOn": "2025-02-13T09:23:50Z",
+      "side": 1,
+      "message": "I added the CL with a circular dependency. Thanks for checking.",
+      "parentUuid": "58984164_c4fec0f3",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "3d2d7bc54799b31ca63b803a611b84f596778a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
