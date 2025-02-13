@@ -22,6 +22,30 @@
       },
       "revId": "d7694a7e5b705232c2952d6cd70de71726be906d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2b1e2c_3cb3f5ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 3357480
+      },
+      "writtenOn": "2025-02-13T02:10:41Z",
+      "side": 1,
+      "message": "Function folio_undo_large_rmappable() is called by function destroy_large_folio() in file swap.c and vmscan.c, so no modification is required.",
+      "parentUuid": "87c2ad9a_87a79148",
+      "range": {
+        "startLine": 97,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 77
+      },
+      "revId": "d7694a7e5b705232c2952d6cd70de71726be906d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
