@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3e4291c_43302b45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-02-13T02:23:00Z",
+      "side": 1,
+      "message": "This should be a BACKPORT, as it has changes from the upstream patch, which should be noted in the commit message.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "e833b78d2a76e762595cb29aa1c53be3f15f2d85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
