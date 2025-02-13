@@ -33,6 +33,23 @@
       "message": "Please review again. Thanks.",
       "revId": "6775eaaf6daae71c13de31c1ab784d5a9b98c280",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337964da_22204514",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-13T20:07:00Z",
+      "side": 1,
+      "message": "Please fix checkpatch issue:\n```\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: xieliujie \u003cxieliujie@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: Liujie Xie \u003cxieliujie@oppo.com\u003e\u0027\n```",
+      "revId": "6775eaaf6daae71c13de31c1ab784d5a9b98c280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
