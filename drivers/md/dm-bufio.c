@@ -20,6 +20,7 @@
 #include <linux/rbtree.h>
 #include <linux/stacktrace.h>
 #include <linux/jump_label.h>
+#include <trace/hooks/mm.h>
 
 #include "dm.h"
 
@@ -2431,6 +2432,13 @@ static void shrink_work(struct work_struct *w)
 static unsigned long dm_bufio_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 {
 	struct dm_bufio_client *c;
+	bool bypass = false;
+
+	trace_android_vh_dm_bufio_shrink_scan_bypass(
+			dm_bufio_current_allocated,
+			&bypass);
+	if (bypass)
+		return 0;
 
 	c = shrink->private_data;
 	atomic_long_add(sc->nr_to_scan, &c->need_shrink);
@@ -2767,6 +2775,14 @@ static void cleanup_old_buffers(void)
 {
 	unsigned long max_age_hz = get_max_age_hz();
 	struct dm_bufio_client *c;
+	bool bypass = false;
+
+	trace_android_vh_cleanup_old_buffers_bypass(
+				dm_bufio_current_allocated,
+				&max_age_hz,
+				&bypass);
+	if (bypass)
+		return;
 
 	mutex_lock(&dm_bufio_clients_lock);
 
