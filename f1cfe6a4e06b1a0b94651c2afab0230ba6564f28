@@ -16,6 +16,23 @@
       "message": "@tkjos@google.com Hi,Todd, Please review this commit and help merge it if there is no problem. Thanks",
       "revId": "f1cfe6a4e06b1a0b94651c2afab0230ba6564f28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4b4a53c_c0349627",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-13T18:21:17Z",
+      "side": 1,
+      "message": "```\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027lipeifeng@oppo.com\nCherry pick author: \u0027xieliujie@oppo.com\n\nPlease cherry-pick using: git cherry-pick -s -x f7294947672eb6b786f3c16b49e71e6a239101ad.\n```",
+      "revId": "f1cfe6a4e06b1a0b94651c2afab0230ba6564f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
