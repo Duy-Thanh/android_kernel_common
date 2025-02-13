@@ -22,6 +22,30 @@
       },
       "revId": "687f21a0e03b1505b4db7009928bdbc57db5705a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "963fc516_6b97a666",
+        "filename": "kernel/time/hrtimer.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2025-02-13T11:08:44Z",
+      "side": 1,
+      "message": "GKI has included the isolation.h already, so it\u0027s not there",
+      "parentUuid": "7758a6e2_e8ee247c",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "687f21a0e03b1505b4db7009928bdbc57db5705a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
