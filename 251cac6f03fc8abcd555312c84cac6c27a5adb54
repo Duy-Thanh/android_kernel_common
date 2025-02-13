@@ -16,6 +16,23 @@
       "message": "I\u0027m not aware of any problems from the Rust side of things.",
       "revId": "251cac6f03fc8abcd555312c84cac6c27a5adb54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f266f8f_77524557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-02-13T10:31:51Z",
+      "side": 1,
+      "message": "Looks like one new `-Wall`/`-Werror` warning being upset: `-Werror,-Wmissing-include-dirs`\n\nhttps://android-build.corp.google.com/build_explorer/artifact_viewer/P90091656/kernel_raviole/logs/build.log",
+      "revId": "251cac6f03fc8abcd555312c84cac6c27a5adb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
