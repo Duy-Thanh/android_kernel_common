@@ -22,6 +22,30 @@
       },
       "revId": "4df14425784f76e74af87f51798ddab9239a0446",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ce70a9_f3704198",
+        "filename": "modules.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-14T11:13:07Z",
+      "side": 1,
+      "message": "Don\u0027t think it\u0027s needed for x86 targets based on the Kconfig options, but I could be wrong.",
+      "parentUuid": "3a0db8a8_39253578",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "4df14425784f76e74af87f51798ddab9239a0446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
