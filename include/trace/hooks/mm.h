@@ -388,7 +388,9 @@ DECLARE_HOOK(android_vh_lruvec_del_folio,
 	TP_PROTO(struct lruvec *lruvec, struct folio *folio, enum lru_list lru,
 		bool *skip),
 	TP_ARGS(lruvec, folio, lru, skip));
-
+DECLARE_HOOK(android_vh_add_lazyfree_bypass,
+	TP_PROTO(struct lruvec *lruvec, struct folio *folio, bool *bypass),
+	TP_ARGS(lruvec, folio, bypass));
 DECLARE_HOOK(android_vh_cma_debug_show_areas,
 	TP_PROTO(bool *show),
 	TP_ARGS(show));
