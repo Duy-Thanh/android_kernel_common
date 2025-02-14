@@ -46,6 +46,30 @@
       },
       "revId": "4df14425784f76e74af87f51798ddab9239a0446",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d397d2d4_aca13506",
+        "filename": "modules.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-02-14T11:56:12Z",
+      "side": 1,
+      "message": "Got it.\n\nLooking at the generated config for `kernel_aarch64`, I don\u0027t see `CONFIG_PTP_1588_CLOCK_VMCLOCK ` enabled, and that could be the reason the module (`ptp_vmclock.ko`) is not being generated (hence the build failure).\n\n```\nCONFIG_NET_PTP_CLASSIFY\u003dy\nCONFIG_PTP_1588_CLOCK\u003dm\nCONFIG_PTP_1588_CLOCK_OPTIONAL\u003dm\nCONFIG_PTP_1588_CLOCK_KVM\u003dm\n# CONFIG_PTP_1588_CLOCK_IDT82P33 is not set\n# CONFIG_PTP_1588_CLOCK_IDTCM is not set\n# CONFIG_PTP_1588_CLOCK_FC3W is not set\n# CONFIG_PTP_1588_CLOCK_MOCK is not set\n```",
+      "parentUuid": "60ce70a9_f3704198",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "4df14425784f76e74af87f51798ddab9239a0446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
