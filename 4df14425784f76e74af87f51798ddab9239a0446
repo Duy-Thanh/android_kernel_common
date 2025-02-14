@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a0db8a8_39253578",
+        "filename": "modules.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-02-14T11:12:11Z",
+      "side": 1,
+      "message": "nit: if this will be available for all targets, it might be better to add it to `_COMMON_GKI_MODULES_LIST` (L9) instead?",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "4df14425784f76e74af87f51798ddab9239a0446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
