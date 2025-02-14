@@ -613,6 +613,7 @@ static void lru_deactivate(struct lruvec *lruvec, struct folio *folio)
 static void lru_lazyfree(struct lruvec *lruvec, struct folio *folio)
 {
 	long nr_pages = folio_nr_pages(folio);
+	bool bypass = false;
 
 	if (!folio_test_anon(folio) || !folio_test_swapbacked(folio) ||
 	    folio_test_swapcache(folio) || folio_test_unevictable(folio))
@@ -627,7 +628,9 @@ static void lru_lazyfree(struct lruvec *lruvec, struct folio *folio)
 	 * anonymous folios
 	 */
 	folio_clear_swapbacked(folio);
-	lruvec_add_folio(lruvec, folio);
+	trace_android_vh_add_lazyfree_bypass(lruvec, folio, &bypass);
+	if (!bypass)
+		lruvec_add_folio(lruvec, folio);
 
 	__count_vm_events(PGLAZYFREE, nr_pages);
 	__count_memcg_events(lruvec_memcg(lruvec), PGLAZYFREE, nr_pages);
