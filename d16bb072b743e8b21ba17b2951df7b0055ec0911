@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "250f866e_ce47b085",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-02-14T07:38:50Z",
+      "side": 1,
+      "message": "Should we remove the definition of IF_HAVE_PG_OEM_RESERVED when CONFIG_64BIT is disabled?",
+      "revId": "d16bb072b743e8b21ba17b2951df7b0055ec0911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
