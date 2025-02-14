@@ -363,6 +363,7 @@ DECLARE_HOOK(android_vh_oom_swapmem_gather_init,
 DECLARE_HOOK(android_vh_oom_swapmem_gather_finish,
 	TP_PROTO(struct mm_struct *mm),
 	TP_ARGS(mm));
+<<<<<<< HEAD   (0bb006856b8d8b803fde48d026d89a5fafcd5263 UPSTREAM: eventpoll: fix ep_remove struct eventpoll / struct)
 DECLARE_HOOK(android_vh_do_anonymous_page,
 	TP_PROTO(struct vm_area_struct *vma, struct page *page),
 	TP_ARGS(vma, page));
@@ -441,6 +442,45 @@ DECLARE_HOOK(android_vh_filemap_update_page,
 		struct file *file),
 	TP_ARGS(mapping, page, file));
 
+||||||| BASE   (fa3cc11118de1205fea828af1c754a76c711096b ANDROID: GKI: Enable CONFIG_MEMFD_ASHMEM_SHIM)
+DECLARE_HOOK(android_vh_do_read_fault,
+	TP_PROTO(struct vm_fault *vmf, unsigned long fault_around_bytes),
+	TP_ARGS(vmf, fault_around_bytes));
+DECLARE_HOOK(android_vh_filemap_read,
+	TP_PROTO(struct file *file, loff_t pos, size_t size),
+	TP_ARGS(file, pos, size));
+DECLARE_HOOK(android_vh_filemap_map_pages,
+	TP_PROTO(struct file *file, pgoff_t first_pgoff,
+		pgoff_t last_pgoff, vm_fault_t ret),
+	TP_ARGS(file, first_pgoff, last_pgoff, ret));
+DECLARE_HOOK(android_vh_alloc_flags_cma_adjust,
+	TP_PROTO(gfp_t gfp_mask, unsigned int *alloc_flags),
+	TP_ARGS(gfp_mask, alloc_flags));
+DECLARE_HOOK(android_vh_rmqueue_cma_fallback,
+	TP_PROTO(struct zone *zone, unsigned int order, struct page **page),
+	TP_ARGS(zone, order, page));
+=======
+DECLARE_HOOK(android_vh_do_read_fault,
+	TP_PROTO(struct vm_fault *vmf, unsigned long fault_around_bytes),
+	TP_ARGS(vmf, fault_around_bytes));
+DECLARE_HOOK(android_vh_filemap_read,
+	TP_PROTO(struct file *file, loff_t pos, size_t size),
+	TP_ARGS(file, pos, size));
+DECLARE_HOOK(android_vh_filemap_map_pages,
+	TP_PROTO(struct file *file, pgoff_t first_pgoff,
+		pgoff_t last_pgoff, vm_fault_t ret),
+	TP_ARGS(file, first_pgoff, last_pgoff, ret));
+DECLARE_HOOK(android_vh_alloc_flags_cma_adjust,
+	TP_PROTO(gfp_t gfp_mask, unsigned int *alloc_flags),
+	TP_ARGS(gfp_mask, alloc_flags));
+DECLARE_HOOK(android_vh_rmqueue_cma_fallback,
+	TP_PROTO(struct zone *zone, unsigned int order, struct page **page),
+	TP_ARGS(zone, order, page));
+DECLARE_HOOK(android_vh_filemap_map_pages_range,
+	TP_PROTO(struct file *file, pgoff_t orig_start_pgoff,
+		pgoff_t last_pgoff, vm_fault_t ret),
+	TP_ARGS(file, orig_start_pgoff, last_pgoff, ret));
+>>>>>>> CHANGE (eaffa3e34155d13c4a2df6d44e46d8a046c2ea4c ANDROID: mm: add a new vendor hook in filemap_map_pages)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

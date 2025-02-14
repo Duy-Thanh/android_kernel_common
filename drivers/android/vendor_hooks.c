@@ -588,6 +588,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_read_fault);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_new_mount_fc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_read);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
+<<<<<<< HEAD   (0bb006856b8d8b803fde48d026d89a5fafcd5263 UPSTREAM: eventpoll: fix ep_remove struct eventpoll / struct)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_update_page);
@@ -598,3 +599,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_create_worker);
+||||||| BASE   (fa3cc11118de1205fea828af1c754a76c711096b ANDROID: GKI: Enable CONFIG_MEMFD_ASHMEM_SHIM)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages_range);
+>>>>>>> CHANGE (eaffa3e34155d13c4a2df6d44e46d8a046c2ea4c ANDROID: mm: add a new vendor hook in filemap_map_pages)
