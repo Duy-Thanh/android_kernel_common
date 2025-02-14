@@ -82990,6 +82990,12 @@ member {
   offset: 64
 }
 member {
+  id: 0x8df6fd01
+  name: "flag_cells"
+  type_id: 0x6720d32f
+  offset: 384
+}
+member {
   id: 0xf0176218
   name: "flag_changed"
   type_id: 0x2d4051be
@@ -91368,12 +91374,6 @@ member {
   type_id: 0x4585663f
   offset: 9252
   bitsize: 1
-}
-member {
-  id: 0xd0066583
-  name: "has_flags"
-  type_id: 0x6d7f5ff6
-  offset: 384
 }
 member {
   id: 0x534977b7
@@ -226143,7 +226143,7 @@ struct_union {
     member_id: 0xf5928f7e
     member_id: 0x8dea02a8
     member_id: 0xff7f1dc6
-    member_id: 0xd0066583
+    member_id: 0x8df6fd01
     member_id: 0xbb300b64
   }
 }
