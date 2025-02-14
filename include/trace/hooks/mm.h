@@ -420,6 +420,7 @@ DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
 	TP_PROTO(struct zone *zone, u64 interval),
 	TP_ARGS(zone, interval));
 
+<<<<<<< HEAD   (5f0aee UPSTREAM: xhci: dbgtty: Improve performance by handling rece)
 DECLARE_HOOK(android_vh_lock_folio_drop_mmap_start,
 	TP_PROTO(struct task_struct **tsk, struct vm_fault *vmf,
 		struct folio *folio, struct file *file),
@@ -447,6 +448,37 @@ DECLARE_HOOK(android_vh_mm_may_oom_exit,
 DECLARE_HOOK(android_vh_calculate_totalreserve_pages,
 	TP_PROTO(bool *skip),
 	TP_ARGS(skip));
+||||||| BASE
+DECLARE_HOOK(android_vh_copy_page_to_user,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_copy_page_from_user,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_page_private_mod,
+	TP_PROTO(struct page *page, unsigned long private),
+	TP_ARGS(page, private));
+DECLARE_HOOK(android_vh_cma_alloc_fail,
+	TP_PROTO(char *name, unsigned long count, unsigned long req_count),
+	TP_ARGS(name, count, req_count));
+=======
+DECLARE_HOOK(android_vh_copy_page_to_user,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_copy_page_from_user,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_page_private_mod,
+	TP_PROTO(struct page *page, unsigned long private),
+	TP_ARGS(page, private));
+DECLARE_HOOK(android_vh_cma_alloc_fail,
+	TP_PROTO(char *name, unsigned long count, unsigned long req_count),
+	TP_ARGS(name, count, req_count));
+DECLARE_HOOK(android_vh_filemap_map_pages_range,
+	TP_PROTO(struct file *file, pgoff_t orig_start_pgoff,
+		pgoff_t last_pgoff, vm_fault_t ret),
+	TP_ARGS(file, orig_start_pgoff, last_pgoff, ret));
+>>>>>>> CHANGE (2a0173 ANDROID: mm: add a new vendor hook in filemap_map_pages)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
