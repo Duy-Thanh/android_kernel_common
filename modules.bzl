@@ -100,6 +100,7 @@ _ARM64_GKI_MODULES_LIST = [
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
+    "drivers/ptp/ptp_vmclock.ko",
 ]
 
 _X86_GKI_MODULES_LIST = [
