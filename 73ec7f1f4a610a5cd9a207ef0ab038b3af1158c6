@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa66e74e_04145147",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-14T07:17:51Z",
+      "side": 1,
+      "message": "I need to go back to the host and give back control to the scheduler until Trustzone gives back the memory.\nkvm_reclaim_ffa_guest_pages is protected by it\u0027s own lock so I don\u0027t see how this would become racy with this change. Neither the VM teardown page by page reclaim shouldn\u0027t be affected.",
+      "parentUuid": "0eeeadd6_0bb72b76",
+      "range": {
+        "startLine": 890,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 28
+      },
+      "revId": "73ec7f1f4a610a5cd9a207ef0ab038b3af1158c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "103e8e02_0865d112",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-11T15:10:53Z",
       "side": 1,
       "message": "Erm, can we really not do better than this? Although we might be preemptible here, the guest memory remains pinned so we\u0027d be better off unpinning pages that we know have not been shared with FFA instead of spinning on TZ.",
+      "range": {
+        "startLine": 361,
+        "startChar": 7,
+        "endLine": 361,
+        "endChar": 12
+      },
+      "revId": "73ec7f1f4a610a5cd9a207ef0ab038b3af1158c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1241fa6a_5ea9135f",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-14T07:17:51Z",
+      "side": 1,
+      "message": "In a previous implementation I was using SW2 SW3 bits in the PTE to track who is the page shared with. This was allowing us to reclaim the pages that were guest owned up until the point where we found a page shared from the guest either with ff-a or with hyp. I was suggested to abandon this idea in favor of the current implementation (https://android-review.git.corp.google.com/c/kernel/common/+/3221244/comment/3c3cf4b2_f422ddae/)",
+      "parentUuid": "103e8e02_0865d112",
       "range": {
         "startLine": 361,
         "startChar": 7,
