@@ -33,6 +33,24 @@
       "message": "```\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027lipeifeng@oppo.com\nCherry pick author: \u0027xieliujie@oppo.com\n\nPlease cherry-pick using: git cherry-pick -s -x f7294947672eb6b786f3c16b49e71e6a239101ad.\n```",
       "revId": "f1cfe6a4e06b1a0b94651c2afab0230ba6564f28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12dae31_869900f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2025-02-14T07:33:15Z",
+      "side": 1,
+      "message": "Hi,Todd,\nI just removed the sentence \u003ccherry picked xxx\u003e from commit message. And now there are no errors or warnings. Please help review and merge the code.\n\nLet me explain a bit more.\nThese hooks are originally added by \u003clipeifeng@oppo.com\u003e in \u003ccommit f7294947672eb6b786f3c16b49e71e6a239101ad\u003e. But later we modified these hooks in multiple commits.\nLast year, on branch android15-6.6, I combined these commits into one \u003chttps://android-review.googlesource.com/c/kernel/common/+/3039512\u003e. So actually this commit can be regarded as a cherry-pick from branch android15-6.6. But it\u0027s not necessary to add a sentence like \u003ccherry picked xxx\u003e, because with the \u003cChange-Id: If91859f558bf20c3297353bea8aadaa3ab4765e9\u003e in commit message, we can already track all the commits.",
+      "parentUuid": "f4b4a53c_c0349627",
+      "revId": "f1cfe6a4e06b1a0b94651c2afab0230ba6564f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
