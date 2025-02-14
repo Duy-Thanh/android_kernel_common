@@ -473,6 +473,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_update_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_add_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_del_folio);
+<<<<<<< HEAD   (b3cfc3 UPSTREAM: usb: gadget: core: flush gadget workqueue after de)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_async_mmap_readahead);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_lazyfree_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_async_mmap_readahead);
+>>>>>>> CHANGE (bc87c4 ANDROID: mm: create vendor hooks for mm lru_lazyfree)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_page_mapcount);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_page_to_lrulist);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_del_page_from_lrulist);

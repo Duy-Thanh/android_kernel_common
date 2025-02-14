@@ -388,6 +388,20 @@ DECLARE_HOOK(android_vh_lruvec_del_folio,
 	TP_PROTO(struct lruvec *lruvec, struct folio *folio, enum lru_list lru,
 		bool *skip),
 	TP_ARGS(lruvec, folio, lru, skip));
+<<<<<<< HEAD   (b3cfc3 UPSTREAM: usb: gadget: core: flush gadget workqueue after de)
+||||||| BASE
+
+DECLARE_HOOK(android_vh_do_async_mmap_readahead,
+	TP_PROTO(struct vm_fault *vmf, struct folio *folio, bool *skip),
+	TP_ARGS(vmf, folio, skip));
+=======
+DECLARE_HOOK(android_vh_add_lazyfree_bypass,
+	TP_PROTO(struct lruvec *lruvec, struct folio *folio, bool *bypass),
+	TP_ARGS(lruvec, folio, bypass));
+DECLARE_HOOK(android_vh_do_async_mmap_readahead,
+	TP_PROTO(struct vm_fault *vmf, struct folio *folio, bool *skip),
+	TP_ARGS(vmf, folio, skip));
+>>>>>>> CHANGE (bc87c4 ANDROID: mm: create vendor hooks for mm lru_lazyfree)
 
 DECLARE_HOOK(android_vh_cma_debug_show_areas,
 	TP_PROTO(bool *show),
