@@ -3400,12 +3400,14 @@ vm_fault_t filemap_map_pages(struct vm_fault *vmf,
 	vm_fault_t ret = (vmf->flags & FAULT_FLAG_SPECULATIVE) ?
 		VM_FAULT_RETRY : 0;
 	pgoff_t first_pgoff = 0;
+	pgoff_t orig_start_pgoff = start_pgoff;
 
 	/* filemap_map_pages() is called within an rcu read lock already. */
 	head = first_map_page(mapping, &xas, end_pgoff);
 	if (!head)
 		return ret;
 	first_pgoff = xas.xa_index;
+	orig_start_pgoff = xas.xa_index;
 
 	if (!(vmf->flags & FAULT_FLAG_SPECULATIVE) &&
 	    filemap_map_pmd(vmf, head))
@@ -3453,6 +3455,13 @@ unlock:
 	vmf->pte = NULL;
 	WRITE_ONCE(file->f_ra.mmap_miss, mmap_miss);
 	trace_android_vh_filemap_map_pages(file, first_pgoff, last_pgoff, ret);
+<<<<<<< HEAD   (0bb006856b8d8b803fde48d026d89a5fafcd5263 UPSTREAM: eventpoll: fix ep_remove struct eventpoll / struct)
+||||||| BASE   (fa3cc11118de1205fea828af1c754a76c711096b ANDROID: GKI: Enable CONFIG_MEMFD_ASHMEM_SHIM)
+
+=======
+	trace_android_vh_filemap_map_pages_range(file, orig_start_pgoff, last_pgoff, ret);
+
+>>>>>>> CHANGE (eaffa3e34155d13c4a2df6d44e46d8a046c2ea4c ANDROID: mm: add a new vendor hook in filemap_map_pages)
 	return ret;
 }
 EXPORT_SYMBOL(filemap_map_pages);
