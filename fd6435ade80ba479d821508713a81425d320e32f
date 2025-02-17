@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40b03016_433058f8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-17T10:41:15Z",
+      "side": 1,
+      "message": "Something I had not realized is in host_share_hyp(), only the hyp can fail with ENOMEM.\n\nHere, in guest_share_hyp(), both guest and hypervisor mappings can fail with ENOMEM. If the hypervisor mapping fails, we can\u0027t do anything. However if the guest mapping fails, we can go back to the host to ask for more memory.\n\nHence the need to distinguish between the guest stage-2\u0027s ENOMEM and the hyp stage-1\u0027s ENOMEM.",
+      "parentUuid": "9a00d075_5ac51420",
+      "range": {
+        "startLine": 1375,
+        "startChar": 0,
+        "endLine": 1378,
+        "endChar": 2
+      },
+      "revId": "fd6435ade80ba479d821508713a81425d320e32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47ace053_997b522c",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 8
