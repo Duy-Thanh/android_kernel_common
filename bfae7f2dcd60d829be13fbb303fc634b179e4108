@@ -22,6 +22,30 @@
       },
       "revId": "bfae7f2dcd60d829be13fbb303fc634b179e4108",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc24948e_6b28aaaa",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-02-17T13:46:33Z",
+      "side": 1,
+      "message": "Nothing. Nothing did prevent it from doing that before either. Before and after the change, if the host tries to do something like that, we catch it after the fact and return an error. The difference is that before the error was on vm creation, now it\u0027s on vcpu creation.",
+      "parentUuid": "7c85a8fa_1476253c",
+      "range": {
+        "startLine": 867,
+        "startChar": 19,
+        "endLine": 867,
+        "endChar": 22
+      },
+      "revId": "bfae7f2dcd60d829be13fbb303fc634b179e4108",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
