@@ -5245,8 +5245,6 @@ static bool rb_read_writer_meta_page(struct ring_buffer_per_cpu *cpu_buffer)
 static struct buffer_page *
 __rb_get_reader_page_from_writer(struct ring_buffer_per_cpu *cpu_buffer)
 {
-	u32 prev_reader;
-
 	if (!rb_read_writer_meta_page(cpu_buffer))
 		return NULL;
 
@@ -5257,9 +5255,12 @@ __rb_get_reader_page_from_writer(struct ring_buffer_per_cpu *cpu_buffer)
 		return cpu_buffer->reader_page;
 	}
 
-	prev_reader = cpu_buffer->meta_page->reader.id;
+	if (cpu_buffer->meta_page->reader.id != cpu_buffer->reader_page->id)
+		goto update;
 
 	WARN_ON(cpu_buffer->writer->get_reader_page(cpu_buffer->cpu));
+
+update:
 	/* nr_pages doesn't include the reader page */
 	if (cpu_buffer->meta_page->reader.id > cpu_buffer->nr_pages) {
 		WARN_ON(1);
@@ -5272,8 +5273,6 @@ __rb_get_reader_page_from_writer(struct ring_buffer_per_cpu *cpu_buffer)
 	cpu_buffer->reader_page->read = 0;
 	cpu_buffer->read_stamp = cpu_buffer->reader_page->page->time_stamp;
 	cpu_buffer->lost_events = cpu_buffer->meta_page->reader.lost_events;
-
-	WARN_ON(prev_reader == cpu_buffer->meta_page->reader.id);
 
 	if (!rb_page_size(cpu_buffer->reader_page))
 		return NULL;
