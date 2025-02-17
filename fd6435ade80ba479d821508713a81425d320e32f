@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8bb01d6_e05ed3e5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-17T09:19:35Z",
+      "side": 1,
+      "message": "__guest_request_page_transition() above can return -ENOMEM if the stage-2 mc is empty as of the guest is ENOMEM. We can raise an hyp_req to get back to the host and ask for more memory.\n\nBut here that\u0027s the hyp which is ENOMEM, and there\u0027s nothing we can do about it. \n\nWe need to distinguish both. Perhaps the hyp ENOMEM should be repainted as something else?",
+      "range": {
+        "startLine": 1375,
+        "startChar": 0,
+        "endLine": 1378,
+        "endChar": 2
+      },
+      "revId": "fd6435ade80ba479d821508713a81425d320e32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
