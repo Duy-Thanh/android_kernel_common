@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b181b5eb_fcc0fe0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-17T12:02:16Z",
+      "side": 1,
+      "message": "@smostafa@google.com, could you check the __pkvm_mem_abort_device() part?",
+      "revId": "4bba8615d094ac8a699f35a397fb41f545acb576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
