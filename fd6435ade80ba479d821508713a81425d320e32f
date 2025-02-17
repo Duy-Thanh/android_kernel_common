@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a00d075_5ac51420",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-17T10:00:47Z",
+      "side": 1,
+      "message": "Wait this is the same as your suggestionin https://android-review.git.corp.google.com/c/kernel/common/+/3470013/1/arch/arm64/kvm/hyp/nvhe/mem_protect.c . Why we should have a different behaviour, I am not following ?",
+      "parentUuid": "e8bb01d6_e05ed3e5",
+      "range": {
+        "startLine": 1375,
+        "startChar": 0,
+        "endLine": 1378,
+        "endChar": 2
+      },
+      "revId": "fd6435ade80ba479d821508713a81425d320e32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47ace053_997b522c",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 8
@@ -37,6 +61,24 @@
       "writtenOn": "2025-02-17T09:24:23Z",
       "side": 1,
       "message": "I don\u0027t have a strong opinion about the usage of WARNs. But it\u0027s a bit strange it is used here for the unshare version while the share version does not use it.",
+      "revId": "fd6435ade80ba479d821508713a81425d320e32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5891df91_723eba84",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-17T10:00:47Z",
+      "side": 1,
+      "message": "This is true let me drop this.",
+      "parentUuid": "47ace053_997b522c",
       "revId": "fd6435ade80ba479d821508713a81425d320e32f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
