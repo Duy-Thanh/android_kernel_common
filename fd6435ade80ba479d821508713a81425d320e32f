@@ -22,6 +22,23 @@
       },
       "revId": "fd6435ade80ba479d821508713a81425d320e32f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ace053_997b522c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-17T09:24:23Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion about the usage of WARNs. But it\u0027s a bit strange it is used here for the unshare version while the share version does not use it.",
+      "revId": "fd6435ade80ba479d821508713a81425d320e32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
