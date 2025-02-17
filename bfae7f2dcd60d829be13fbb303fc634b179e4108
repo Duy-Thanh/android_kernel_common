@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c85a8fa_1476253c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-17T13:44:56Z",
+      "side": 1,
+      "message": "What prevents the host from creating multiple vCPUs with the same `vcpu_idx`?",
+      "range": {
+        "startLine": 867,
+        "startChar": 19,
+        "endLine": 867,
+        "endChar": 22
+      },
+      "revId": "bfae7f2dcd60d829be13fbb303fc634b179e4108",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
