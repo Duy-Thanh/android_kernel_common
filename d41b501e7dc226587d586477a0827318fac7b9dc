@@ -62,6 +62,52 @@
       },
       "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a696022a_690666b7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 820,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:21:41Z",
+      "side": 1,
+      "message": "The spec is really unclear about whether or not we need to release the rx buffer if count \u003d\u003d 0 but flags[0] is clear :/",
+      "range": {
+        "startLine": 820,
+        "startChar": 0,
+        "endLine": 820,
+        "endChar": 12
+      },
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24459da3_e392d6e5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:21:41Z",
+      "side": 1,
+      "message": "Don\u0027t we also need to release the RX buffer in this case?",
+      "range": {
+        "startLine": 836,
+        "startChar": 0,
+        "endLine": 836,
+        "endChar": 41
+      },
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
