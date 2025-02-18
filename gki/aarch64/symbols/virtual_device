@@ -224,8 +224,10 @@
   __kmalloc_noprof
   kmemdup_noprof
   kstrndup
+  kstrtobool
   kstrtobool_from_user
   kstrtoint
+  kstrtouint
   kthread_create_on_node
   kthread_park
   kthread_should_stop
@@ -344,6 +346,8 @@
   _raw_spin_unlock_bh
   _raw_spin_unlock_irq
   _raw_spin_unlock_irqrestore
+  rb_erase
+  rb_insert_color
   __rcu_read_lock
   __rcu_read_unlock
   refcount_warn_saturate
@@ -368,8 +372,10 @@
   schedule
   schedule_timeout
   scnprintf
+  seq_lseek
   seq_printf
   seq_putc
+  seq_read
   seq_write
   serio_close
   serio_interrupt
@@ -390,6 +396,8 @@
   simple_attr_release
   simple_open
   simple_read_from_buffer
+  single_open
+  single_release
   sized_strscpy
   skb_add_rx_frag_netmem
   skb_clone
@@ -513,6 +521,7 @@
   vmalloc_noprof
   vmalloc_to_page
   vm_get_page_prot
+  vm_insert_page
   vzalloc_noprof
   wait_for_completion_timeout
   __wake_up
@@ -649,8 +658,6 @@
   __nla_validate
   of_prop_next_u32
   __put_net
-  rb_erase
-  rb_insert_color
   request_firmware_nowait
   rfkill_alloc
   rfkill_blocked
@@ -897,10 +904,6 @@
 # required by mt76x02-lib.ko
   debugfs_create_bool
   __kfifo_init
-  seq_lseek
-  seq_read
-  single_open
-  single_release
 
 # required by mt76x02-usb.ko
   hrtimer_active
@@ -977,9 +980,7 @@
   input_mt_report_slot_state
   input_mt_sync_frame
   input_set_capability
-  kstrtobool
   kstrtou8
-  kstrtouint
   ps2_begin_command
   ps2_command
   ps2_drain
@@ -1012,6 +1013,179 @@
   rtc_time64_to_tm
   rtc_tm_to_time64
   rtc_update_irq
+
+# required by rust-binder.ko
+  alloc_chrdev_region
+  __audit_inode_child
+  binder_use_rust
+  capable
+  clear_inode
+  _copy_from_user
+  _copy_to_user
+  d_add
+  d_alloc_name
+  d_delete
+  d_instantiate
+  d_make_root
+  dput
+  fget
+  file_close_fd
+  filp_close
+  fsnotify
+  fs_param_is_enum
+  fs_param_is_u32
+  __fs_parse
+  get_tree_nodev
+  inc_nlink
+  init_special_inode
+  iput
+  iunique
+  kill_litter_super
+  list_lru_add_obj
+  list_lru_del_obj
+  list_lru_destroy
+  __list_lru_init
+  list_lru_isolate
+  lockref_get
+  logfc
+  lookup_one_len
+  new_inode
+  prepare_to_wait_exclusive
+  rb_first
+  rb_first_postorder
+  rb_next
+  rb_next_postorder
+  rb_prev
+  rb_replace_node
+  register_filesystem
+  _RNvMNtCs2T9Dodn8vEz_6kernel5errorNtB2_5Error10from_errno
+  _RNvMNtCs2T9Dodn8vEz_6kernel7uaccessNtB2_9UserSlice8read_all
+  _RNvMNtCs2T9Dodn8vEz_6kernel8securityNtB2_11SecurityCtx10from_secid
+  _RNvMNtCs2T9Dodn8vEz_6kernel8seq_fileNtB2_7SeqFile11call_printf
+  _RNvMNtNtCs2T9Dodn8vEz_6kernel4sync4pollNtB2_9PollTable13register_wait
+  _RNvMs0_NtCs2T9Dodn8vEz_6kernel4credNtB5_10Credential9get_secid
+  _RNvMs0_NtCs2T9Dodn8vEz_6kernel4pageNtB5_4Page10alloc_page
+  _RNvMs0_NtCs2T9Dodn8vEz_6kernel4pageNtB5_4Page13fill_zero_raw
+  _RNvMs0_NtCs2T9Dodn8vEz_6kernel4pageNtB5_4Page24copy_from_user_slice_raw
+  _RNvMs0_NtCs2T9Dodn8vEz_6kernel4pageNtB5_4Page8read_raw
+  _RNvMs0_NtCs2T9Dodn8vEz_6kernel4pageNtB5_4Page9write_raw
+  _RNvMs0_NtNtCs2T9Dodn8vEz_6kernel4sync7condvarNtB5_7CondVar10notify_all
+  _RNvMs0_NtNtCs2T9Dodn8vEz_6kernel4sync7condvarNtB5_7CondVar10notify_one
+  _RNvMs0_NtNtCs2T9Dodn8vEz_6kernel4sync7condvarNtB5_7CondVar11notify_sync
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task11normal_prio
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task11rlimit_nice
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task13rlimit_rtprio
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task13set_user_nice
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task14signal_pending
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task17pid_in_current_ns
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task22has_capability_noaudit
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task26sched_setscheduler_nocheck
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task4euid
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task6policy
+  _RNvMs1_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4Task7current
+  _RNvMs1_NtNtCscKZuwGeZtqh_4core3fmt8buildersNtB5_11DebugStruct5field
+  _RNvMs1_NtNtCscKZuwGeZtqh_4core3fmt8buildersNtB5_11DebugStruct6finish
+  _RNvMs5_NtNtCs2T9Dodn8vEz_6kernel2fs4fileNtB5_25FileDescriptorReservation10fd_install
+  _RNvMs5_NtNtCs2T9Dodn8vEz_6kernel2fs4fileNtB5_25FileDescriptorReservation19get_unused_fd_flags
+  _RNvMs7_NtCscKZuwGeZtqh_4core3fmtNtB5_9Formatter12debug_struct
+  _RNvMs7_NtCscKZuwGeZtqh_4core3fmtNtB5_9Formatter25debug_tuple_field1_finish
+  _RNvMs7_NtCscKZuwGeZtqh_4core3fmtNtB5_9Formatter3pad
+  _RNvMs7_NtCscKZuwGeZtqh_4core3fmtNtB5_9Formatter9write_str
+  _RNvMs_NtCs2T9Dodn8vEz_6kernel7uaccessNtB4_15UserSliceReader10read_slice
+  _RNvNtCs2T9Dodn8vEz_6kernel5error9to_result
+  _RNvNtCs2T9Dodn8vEz_6kernel5print11call_printk
+  _RNvNtCs2T9Dodn8vEz_6kernel8security18binder_transaction
+  _RNvNtCs2T9Dodn8vEz_6kernel8security20binder_transfer_file
+  _RNvNtCs2T9Dodn8vEz_6kernel8security22binder_set_context_mgr
+  _RNvNtCs2T9Dodn8vEz_6kernel8security22binder_transfer_binder
+  _RNvNtCscKZuwGeZtqh_4core6option13unwrap_failed
+  _RNvNtCscKZuwGeZtqh_4core6result13unwrap_failed
+  _RNvNtCscKZuwGeZtqh_4core9panicking14panic_explicit
+  _RNvNtCscKZuwGeZtqh_4core9panicking18panic_bounds_check
+  _RNvNtCscKZuwGeZtqh_4core9panicking5panic
+  _RNvNtCscKZuwGeZtqh_4core9panicking9panic_fmt
+  _RNvNtNtCs2T9Dodn8vEz_6kernel5alloc9allocator16krealloc_aligned
+  _RNvNtNtCs2T9Dodn8vEz_6kernel5print14format_strings3ERR
+  _RNvNtNtCs2T9Dodn8vEz_6kernel5print14format_strings7WARNING
+  _RNvNtNtCscKZuwGeZtqh_4core5slice5index24slice_end_index_len_fail
+  _RNvNtNtCscKZuwGeZtqh_4core9panicking11panic_const24panic_const_add_overflow
+  _RNvNtNtCscKZuwGeZtqh_4core9panicking11panic_const24panic_const_mul_overflow
+  _RNvNtNtCscKZuwGeZtqh_4core9panicking11panic_const24panic_const_sub_overflow
+  _RNvNvMs_NtCshGTzrjO2YYN_5alloc3vecINtB6_3VecppE6remove13assert_failed
+  _RNvXNtNtNtCs2T9Dodn8vEz_6kernel4sync4lock5mutexNtB2_12MutexBackendNtB4_7Backend4init
+  _RNvXNtNtNtCs2T9Dodn8vEz_6kernel4sync4lock5mutexNtB2_12MutexBackendNtB4_7Backend4lock
+  _RNvXNtNtNtCs2T9Dodn8vEz_6kernel4sync4lock5mutexNtB2_12MutexBackendNtB4_7Backend6unlock
+  _RNvXNtNtNtCs2T9Dodn8vEz_6kernel4sync4lock5mutexNtB2_12MutexBackendNtB4_7Backend8try_lock
+  _RNvXNtNtNtCs2T9Dodn8vEz_6kernel4sync4lock8spinlockNtB2_15SpinLockBackendNtB4_7Backend4init
+  _RNvXNtNtNtCs2T9Dodn8vEz_6kernel4sync4lock8spinlockNtB2_15SpinLockBackendNtB4_7Backend4lock
+  _RNvXNtNtNtCs2T9Dodn8vEz_6kernel4sync4lock8spinlockNtB2_15SpinLockBackendNtB4_7Backend6unlock
+  _RNvXNtNtNtCs2T9Dodn8vEz_6kernel4sync4lock8spinlockNtB2_15SpinLockBackendNtB4_7Backend8try_lock
+  _RNvXs14_NtNtCscKZuwGeZtqh_4core3fmt3numyNtB8_8LowerHex3fmt
+  _RNvXs1M_NtCs1ltoFyQsbvC_8bindings12bindings_rawNtB6_7rb_nodeNtNtCscKZuwGeZtqh_4core7default7Default7default
+  _RNvXs1N_NtCs1ltoFyQsbvC_8bindings12bindings_rawNtB6_7rb_rootNtNtCscKZuwGeZtqh_4core7default7Default7default
+  _RNvXs1_NtCs2T9Dodn8vEz_6kernel4credNtB5_10CredentialNtNtB7_5types16AlwaysRefCounted7dec_ref
+  _RNvXs1_NtCs2T9Dodn8vEz_6kernel4credNtB5_10CredentialNtNtB7_5types16AlwaysRefCounted7inc_ref
+  _RNvXs1_NtCs2T9Dodn8vEz_6kernel4pageNtB5_4PageNtNtNtCscKZuwGeZtqh_4core3ops4drop4Drop4drop
+  _RNvXs2_NtNtNtCscKZuwGeZtqh_4core3fmt3num3implNtB9_7Display3fmt
+  _RNvXs3_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4TaskNtNtB7_5types16AlwaysRefCounted7dec_ref
+  _RNvXs3_NtCs2T9Dodn8vEz_6kernel4taskNtB5_4TaskNtNtB7_5types16AlwaysRefCounted7inc_ref
+  _RNvXs3_NtNtNtCscKZuwGeZtqh_4core3fmt3num3impmNtB9_7Display3fmt
+  _RNvXs4_NtCs2T9Dodn8vEz_6kernel3strNtB5_4CStrNtNtCscKZuwGeZtqh_4core3fmt7Display3fmt
+  _RNvXs4_NtNtNtCscKZuwGeZtqh_4core3fmt3num3impxNtB9_7Display3fmt
+  _RNvXs4_NvNtNtCs2T9Dodn8vEz_6kernel4sync4poll1__NtB7_11PollCondVarNtNtNtCscKZuwGeZtqh_4core3ops4drop4Drop4drop
+  _RNvXs6_NtNtCs2T9Dodn8vEz_6kernel2fs4fileNtB5_25FileDescriptorReservationNtNtNtCscKZuwGeZtqh_4core3ops4drop4Drop4drop
+  _RNvXs6_NtNtNtCscKZuwGeZtqh_4core3fmt3num3impjNtB9_7Display3fmt
+  _RNvXs7_NtCs2T9Dodn8vEz_6kernel2mmNtB5_15MmWithUserAsyncNtNtB7_5types16AlwaysRefCounted7dec_ref
+  _RNvXsd_NtCscKZuwGeZtqh_4core3fmtbNtB5_7Display3fmt
+  _RNvXsf_NtCscKZuwGeZtqh_4core3fmteNtB5_7Display3fmt
+  _RNvXsj_NtCs2T9Dodn8vEz_6kernel3strNtB5_7CStringINtNtCscKZuwGeZtqh_4core7convert7TryFromRNtB5_4CStrE8try_from
+  _RNvXs_NtCs2T9Dodn8vEz_6kernel5errorNtB4_5ErrorNtNtCscKZuwGeZtqh_4core3fmt5Debug3fmt
+  _RNvXs_NtCs2T9Dodn8vEz_6kernel8securityNtB4_11SecurityCtxNtNtNtCscKZuwGeZtqh_4core3ops4drop4Drop4drop
+  _RNvXsW_NtNtCscKZuwGeZtqh_4core3fmt3nummNtB7_8LowerHex3fmt
+  _RNvXsX_NtNtCscKZuwGeZtqh_4core3fmt3nummNtB7_8UpperHex3fmt
+  _RNvXsy_NtNtCscKZuwGeZtqh_4core3fmt3numjNtB7_8LowerHex3fmt
+  __rust_alloc
+  __rust_dealloc
+  rust_helper_current_euid
+  rust_helper_current_user_ns
+  rust_helper_from_kuid
+  rust_helper_get_file
+  rust_helper_init_task_work
+  rust_helper_init_wait
+  rust_helper_init_work_with_key
+  rust_helper_IS_ERR
+  rust_helper_list_lru_count
+  rust_helper_list_lru_walk
+  rust_helper_mmap_read_lock
+  rust_helper_mmap_read_trylock
+  rust_helper_mmap_read_unlock
+  rust_helper_mmdrop
+  rust_helper_mmget_not_zero
+  rust_helper_mmgrab
+  rust_helper_PTR_ERR
+  rust_helper_rb_link_node
+  rust_helper_refcount_dec_and_test
+  rust_helper_refcount_inc
+  rust_helper_REFCOUNT_INIT
+  rust_helper_spin_lock
+  rust_helper_spin_unlock
+  rust_helper_uid_eq
+  rust_helper_vma_lookup
+  __rust_no_alloc_shim_is_unstable
+  set_nlink
+  shrinker_alloc
+  shrinker_register
+  simple_dir_inode_operations
+  simple_dir_operations
+  simple_inode_init_ts
+  simple_lookup
+  simple_rename
+  simple_statfs
+  simple_unlink
+  strcspn
+  task_work_add
+  unregister_chrdev_region
+  zap_page_range_single
 
 # required by scmi_iio.ko
   dev_err_probe
@@ -1081,7 +1255,6 @@
   v4l2_format_info
   video_device_alloc
   video_device_release
-  vm_insert_page
 
 # required by vexpress-config.ko
   of_find_compatible_node
@@ -1368,6 +1541,10 @@
   topology_set_scale_freq_source
 
 # required by vkms.ko
+  configfs_register_subsystem
+  configfs_unregister_subsystem
+  config_group_init
+  config_group_init_type_name
   __devm_drm_dev_alloc
   devres_open_group
   devres_release_group
@@ -1410,6 +1587,13 @@
   drm_rect_rotate_inv
   drm_writeback_queue_job
   drm_writeback_signal_completion
+  kfree_const
+  kstrdup_const
+  __xa_alloc
+  xa_destroy
+  xa_erase
+  xa_find
+  xa_find_after
 
 # preserved by --additions-only
   drm_calc_timestamping_constants
