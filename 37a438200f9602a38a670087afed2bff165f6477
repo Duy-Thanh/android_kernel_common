@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c429c0_ccafb910",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2025-02-18T04:12:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "37a438200f9602a38a670087afed2bff165f6477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dde5c19_51164369",
+        "filename": "arch/arm64/gunyah/gunyah_hypercall.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2025-02-18T04:12:04Z",
+      "side": 1,
+      "message": "This comment needs update or dropped",
+      "revId": "37a438200f9602a38a670087afed2bff165f6477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
