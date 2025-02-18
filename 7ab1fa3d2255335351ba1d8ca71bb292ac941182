@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886aca1c_77d91e83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:50:45Z",
+      "side": 1,
+      "message": "typo: multiple",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 9
+      },
+      "revId": "7ab1fa3d2255335351ba1d8ca71bb292ac941182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d740b21_cd8e33a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:50:45Z",
+      "side": 1,
+      "message": "typo: keeping",
+      "range": {
+        "startLine": 10,
+        "startChar": 49,
+        "endLine": 10,
+        "endChar": 57
+      },
+      "revId": "7ab1fa3d2255335351ba1d8ca71bb292ac941182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11cd7f2a_5b1dcd5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:50:45Z",
+      "side": 1,
+      "message": "As discussed offline, I think we\u0027re probably better-off leaving the hyp buffers mapped at all times. That way we can avoid refcounting them and decouple the guests from the host.\n\nFurthermore, we shouldn\u0027t depend on the host having an FF-A driver in order for the guests to use FF-A. Specifically, that probably means that when the host does _not_ have an FF-A client driver, we should prevent a guest from negotiating the version directly with TZ. Instead, the hypervisor should fix the version at that point.\n\nIf we need to support per-client versioning, we can consider that in future, but I\u0027d prefer to avoid implementing data marshalling right now unless it\u0027s _really_ necessary.",
+      "revId": "7ab1fa3d2255335351ba1d8ca71bb292ac941182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c95d6c_62f252c8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:50:45Z",
+      "side": 1,
+      "message": "This isn\u0027t listed as a valid error code for `RXTX_MAP` afaict",
+      "range": {
+        "startLine": 122,
+        "startChar": 9,
+        "endLine": 122,
+        "endChar": 21
+      },
+      "revId": "7ab1fa3d2255335351ba1d8ca71bb292ac941182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
