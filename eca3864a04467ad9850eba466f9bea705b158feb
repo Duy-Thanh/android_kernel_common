@@ -16,6 +16,23 @@
       "message": "please help to review this patch",
       "revId": "eca3864a04467ad9850eba466f9bea705b158feb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ff0c9e_f9071782",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-18T08:47:43Z",
+      "side": 1,
+      "message": "When is the real functionality going to be submitted upstream?  We can\u0027t keep taking a vendor hook for forever.",
+      "revId": "eca3864a04467ad9850eba466f9bea705b158feb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
