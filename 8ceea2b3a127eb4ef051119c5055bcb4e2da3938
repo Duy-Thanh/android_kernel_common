@@ -16,6 +16,23 @@
       "message": "Taking the vendor hook path might be a better alternative till we get to the bottom of it. https://android-review.git.corp.google.com/c/kernel/common/+/3311119 states that 3p OEMs are relying on this.",
       "revId": "8ceea2b3a127eb4ef051119c5055bcb4e2da3938",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01193d42_9d0ce198",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-18T08:46:27Z",
+      "side": 1,
+      "message": "Needs to also be reverted on all branches, not just this one, right?",
+      "revId": "8ceea2b3a127eb4ef051119c5055bcb4e2da3938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
