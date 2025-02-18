@@ -94,6 +94,30 @@
       },
       "revId": "90eb4b1f7d1deb7752bf590892acb3cb9d7ed3fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "458f53e5_e077a479",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-18T10:23:48Z",
+      "side": 1,
+      "message": "Yes, with this change, host can now share pages that are **OWNED** and **REFCOUNTED** to guests. However, this can only to non-protected VM, as host can\u0027t share with pVMs.\nThis means that host can share DMA pages with non-protected guests, which is a valid case I beleive.",
+      "parentUuid": "a4434232_338e5a3d",
+      "range": {
+        "startLine": 1119,
+        "startChar": 5,
+        "endLine": 1119,
+        "endChar": 16
+      },
+      "revId": "90eb4b1f7d1deb7752bf590892acb3cb9d7ed3fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
