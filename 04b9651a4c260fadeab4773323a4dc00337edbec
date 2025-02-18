@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28b82bc4_1f45bdbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-02-18T20:24:45Z",
+      "side": 1,
+      "message": "This is blocked by aosp/3475774. Have reached out to Samsung in b/394470945",
+      "revId": "04b9651a4c260fadeab4773323a4dc00337edbec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
