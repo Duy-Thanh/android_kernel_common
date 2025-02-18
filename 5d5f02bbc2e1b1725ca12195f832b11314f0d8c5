@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c201b1_5a014db1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-18T11:32:34Z",
+      "side": 1,
+      "message": "nit: could probably drop the _page even though you do not have a nr_pages argument. This isn\u0027t the only one that doesn\u0027t use a range I believe.",
+      "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dddacf8f_1d3d57ff",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-18T11:32:34Z",
+      "side": 1,
+      "message": "checkpatch will probably complain the format isn\u0027t \n```\n/*\n * foobar\n */\n ```",
+      "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
