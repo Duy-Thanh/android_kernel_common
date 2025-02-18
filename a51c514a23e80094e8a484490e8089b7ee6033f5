@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0abe7347_5fa8d0ed",
+        "filename": "drivers/virt/gunyah/gunyah.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2025-02-18T04:35:32Z",
+      "side": 1,
+      "message": "A comment around barrier help. is smp_rmb() sufficient here since we only care about memory ordering here?",
+      "range": {
+        "startLine": 34,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 2
+      },
+      "revId": "a51c514a23e80094e8a484490e8089b7ee6033f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6122eea4_9870f019",
+        "filename": "drivers/virt/gunyah/gunyah.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2025-02-18T04:35:32Z",
+      "side": 1,
+      "message": "should this be wrapped around READ_ONCE()? we read desc-\u003eoffset already (for loop condition) which might have been re-used here by compiler. we want to see desc-\u003eoffset value only after flags is marked as VALID, no?",
+      "revId": "a51c514a23e80094e8a484490e8089b7ee6033f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
