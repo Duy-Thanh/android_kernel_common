@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d7dac364_68204e8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-18T16:08:10Z",
+      "side": 1,
+      "message": "I think they were merged as part of LTS merge here: https://android-review.googlesource.com/c/kernel/common/+/3455567",
+      "parentUuid": "02e0d2b2_0fe01897",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "c1de85ed4c738b763f97957236679e2076b1974d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0107879e_905ca4e3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
