@@ -16,6 +16,57 @@
       "message": "WARNING:MACRO_ARG_UNUSED: Argument \u0027_name\u0027 is not used in function-like macro\n#47: FILE: include/trace/events/mmflags.h:164:\n\nWARNING has been fixed, please review again.",
       "revId": "611c118608e51af89dca20a04767b5d7133a89fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d0dd7db_54ca39e5",
+        "filename": "include/trace/events/mmflags.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-18T19:16:03Z",
+      "side": 1,
+      "message": "Please put these at the end of the definition.",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1f07b9f4_0766f7f3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/events/mmflags.h",
+              "range": {
+                "startLine": 188,
+                "startChar": 0,
+                "endLine": 194,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/trace/events/mmflags.h",
+              "range": {
+                "startLine": 199,
+                "startChar": 0,
+                "endLine": 200,
+                "endChar": 0
+              },
+              "replacement": "IF_HAVE_PG_ARCH_3(arch_3)\t\t\t\t\t\t\\\n#ifdef CONFIG_64BIT\nIF_HAVE_PG_OEM_RESERVED(oem_reserved_1)\t\t\t\t\t\\\nIF_HAVE_PG_OEM_RESERVED(oem_reserved_2)\t\t\t\t\t\\\nIF_HAVE_PG_OEM_RESERVED(oem_reserved_3)\t\t\t\t\t\\\nIF_HAVE_PG_OEM_RESERVED(oem_reserved_4)\n#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "611c118608e51af89dca20a04767b5d7133a89fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
