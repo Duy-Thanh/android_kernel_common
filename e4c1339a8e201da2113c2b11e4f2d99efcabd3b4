@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3663cb79_54176ee5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-18T16:24:37Z",
+      "side": 1,
+      "message": "see below",
+      "parentUuid": "8dfd9cf0_644109ef",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 47
+      },
+      "revId": "e4c1339a8e201da2113c2b11e4f2d99efcabd3b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30064b12_260bfe43",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-18T16:08:10Z",
       "side": 1,
       "message": "Where did this SHA come from?",
+      "range": {
+        "startLine": 39,
+        "startChar": 27,
+        "endLine": 39,
+        "endChar": 67
+      },
+      "revId": "e4c1339a8e201da2113c2b11e4f2d99efcabd3b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3263145c_7cfbea6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-18T16:24:37Z",
+      "side": 1,
+      "message": "Ah, I see now. It\u0027s the SHA from `android15-6.6` branch. I think there should be some indication where this came from. Maybe:\n`\n(cherry picked from commit bc8990235fb5b553c0c20b6185fde74ec9f5923c https://android.googlesource.com/kernel/common android15-6.6)\n`\n@Matthias, WDYT?",
+      "parentUuid": "30064b12_260bfe43",
       "range": {
         "startLine": 39,
         "startChar": 27,
