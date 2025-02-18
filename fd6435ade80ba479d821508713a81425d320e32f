@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ac1ab8_6eecf75e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-18T10:52:33Z",
+      "side": 1,
+      "message": "The `guest_share_hyp` can also fail when the page is not faulted in inside the guest and then it is the caller responsibility to decide the next step. From what you are saying it seems like the ENOMEM from the hypervisor should just bail out in which it makes sense to repaint the `ret` code to something like `-EBUSY`. I will add a note to describe why we are doing this.",
+      "parentUuid": "40b03016_433058f8",
+      "range": {
+        "startLine": 1375,
+        "startChar": 0,
+        "endLine": 1378,
+        "endChar": 2
+      },
+      "revId": "fd6435ade80ba479d821508713a81425d320e32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47ace053_997b522c",
@@ -103,6 +127,24 @@
       "side": 1,
       "message": "This is true let me drop this.",
       "parentUuid": "47ace053_997b522c",
+      "revId": "fd6435ade80ba479d821508713a81425d320e32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10dd638f_dd5f06d4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-18T10:52:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5891df91_723eba84",
       "revId": "fd6435ade80ba479d821508713a81425d320e32f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
