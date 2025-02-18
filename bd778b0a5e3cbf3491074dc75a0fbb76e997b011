@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41084cc7_48cf75c8",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T14:58:04Z",
+      "side": 1,
+      "message": "typo: the",
+      "range": {
+        "startLine": 44,
+        "startChar": 9,
+        "endLine": 44,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "75757551_515a6262",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "/* Holds the hyp address of the mapped RX/TX buffers inside the hypervisor */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5fab745_810a493c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T14:58:04Z",
+      "side": 1,
+      "message": "Isn\u0027t this always the same as `pkvm_get_loaded_hyp_vcpu()`?\n\nIn fact, this function is a little odd as it means we have three different VM identifiers:\n\n (1) `pkvm_get_loaded_hyp_vcpu()` \u003d\u003e the currently loaded vCPU\n (2) The `vm_handle`\n (3) The `kvm_cpu_context`\n \nFurthermore, `kvm_guest_ffa_handler()` actually takes the vCPU as an argument, so we\u0027re probably better off propagating that instead of going via the handle.\n\nIn other words:\n\n```\nstatic struct kvm_ffa_buffers *ffa_get_buffers(struct pkvm_hyp_vcpu *hyp_vcpu)\n{\t\n\tif (!hyp_vcpu)\n\t\treturn \u0026host_buffers;\n\n\treturn \u0026pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu)-\u003effa_buf;\n}\n```",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
