@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9493426d_97c4c4a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:00:32Z",
+      "side": 1,
+      "message": "typo: Trustzone",
+      "range": {
+        "startLine": 10,
+        "startChar": 58,
+        "endLine": 10,
+        "endChar": 66
+      },
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11172868_f225ca70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:00:32Z",
+      "side": 1,
+      "message": "Is this an upstreamable fix?",
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efff8b9b_a19f3db5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T15:00:32Z",
+      "side": 1,
+      "message": "Why is this called \"res1\"? In Arm architecture terminology, that means it has to be set to 1!",
+      "range": {
+        "startLine": 803,
+        "startChar": 22,
+        "endLine": 803,
+        "endChar": 26
+      },
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
