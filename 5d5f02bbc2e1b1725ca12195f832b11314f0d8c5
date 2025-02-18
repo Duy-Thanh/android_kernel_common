@@ -33,6 +33,29 @@
       "message": "checkpatch will probably complain the format isn\u0027t \n```\n/*\n * foobar\n */\n ```",
       "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ef4ccb_53ce25d3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-18T13:54:32Z",
+      "side": 1,
+      "message": "Is this ever `NULL`?",
+      "range": {
+        "startLine": 1387,
+        "startChar": 0,
+        "endLine": 1387,
+        "endChar": 12
+      },
+      "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
