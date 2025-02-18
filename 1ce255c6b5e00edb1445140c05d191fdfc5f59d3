@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0245045_70bab1b9",
+        "filename": "kernel/time/timer.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-18T12:50:13Z",
+      "side": 1,
+      "message": "no driver should ever need this.\n\nAlso, it MUST be a GPL export if you really want this.",
+      "range": {
+        "startLine": 2114,
+        "startChar": 0,
+        "endLine": 2114,
+        "endChar": 13
+      },
+      "revId": "1ce255c6b5e00edb1445140c05d191fdfc5f59d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
