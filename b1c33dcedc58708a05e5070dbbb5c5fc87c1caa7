@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3359e32_9a6ac88c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-19T03:38:00Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: \"Takashi.Toida\" \u003cTakashi.Toida@sony.com\u003e\u0027 !\u003d \u0027Signed-off-by: Toida, Takashi \u003cTakashi.Toida@sony.com\u003e\u0027\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: \"Takashi.Toida\" \u003cTakashi.Toida@sony.com\u003e\u0027 !\u003d \u0027Signed-off-by: Toida, Takashi \u003cTakashi.Toida@sony.com\u003e\u0027",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "b1c33dcedc58708a05e5070dbbb5c5fc87c1caa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e7fb9be_6948ad1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-19T03:38:00Z",
+      "side": 1,
+      "message": "Generally the commit message for vendorhook needs to answer a few things:\n\n1) What was the issue seen that created the need for the vendorhook\n\n2) What specific benefit does having the vendorhook bring\n\n3) What functionality, if it landed upstream, would remove the need for this vendorhook.\n\n\nFrom reading the bug and the context I\u0027d guess it would be something like:\n\n\"After system crashes, the console-ramoops from pstore would often be missing important message lines due to the console log level being lower then the message, which makes it difficult to debug these crashes.",
+      "revId": "b1c33dcedc58708a05e5070dbbb5c5fc87c1caa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe0a4ee7_bd30207a",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2725,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-19T03:38:00Z",
+      "side": 1,
+      "message": "I\u0027m trying to better understand the use here to make sure the vendorhook is properly general and placed properly. \n\nWhat would the vendorhook implementation do at this point? Would it modify the printk record r? Or would it directly write the message to pstore?",
+      "revId": "b1c33dcedc58708a05e5070dbbb5c5fc87c1caa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
