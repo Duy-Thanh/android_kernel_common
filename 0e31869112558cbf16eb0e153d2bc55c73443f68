@@ -390,6 +390,24 @@
       "parentUuid": "76bd1e2e_44abd243",
       "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32da4dfb_9f08a441",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-19T02:39:29Z",
+      "side": 1,
+      "message": "\u003e do we have a guarantee that this will complete in the near future in x us if we retry ?\n\nNo, but afaik you don\u0027t have that guarantee if `FFA_VM_DESTRUCTION_MSG` is synchronous.\n\nRe the error code: I think `RETRY` makes more sense for regular asynchronous calls, `INTERRUPTED` usually means non-secure interrupts specifically.",
+      "parentUuid": "b28ab055_2591ac5d",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
