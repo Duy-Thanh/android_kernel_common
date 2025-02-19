@@ -94,6 +94,30 @@
       },
       "revId": "1ce255c6b5e00edb1445140c05d191fdfc5f59d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd2b79f6_e98198ca",
+        "filename": "kernel/time/timer.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-02-19T17:55:23Z",
+      "side": 1,
+      "message": "This symbol is also exported in upstream kernel. And modules are using it throug `fsleep`, which is static inline and calls `usleep_range_state`. So I don\u0027t see why this change can\u0027t go in Android 12.",
+      "parentUuid": "34dffed1_10a4303c",
+      "range": {
+        "startLine": 2114,
+        "startChar": 0,
+        "endLine": 2114,
+        "endChar": 13
+      },
+      "revId": "1ce255c6b5e00edb1445140c05d191fdfc5f59d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
