@@ -412,6 +412,7 @@ bool xen_virtio_restricted_mem_acc(struct virtio_device *dev)
 
 	return false;
 }
+EXPORT_SYMBOL_GPL(xen_virtio_restricted_mem_acc);
 
 MODULE_DESCRIPTION("Xen grant DMA-mapping layer");
 MODULE_AUTHOR("Juergen Gross <jgross@suse.com>");

@@ -171,6 +171,28 @@ config VIRTIO_MMIO_CMDLINE_DEVICES
 
 	 If unsure, say 'N'.
 
+config VIRTIO_MSG
+	tristate
+	select VIRTIO
+	help
+	  This option is selected by any driver which implements the virtio
+	  message bus, such as CONFIG_VIRTIO_MSG_FFA.
+
+config VIRTIO_MSG_FFA
+	tristate "FFA bus driver for virtio message devices"
+	depends on ARM_FFA_TRANSPORT
+	select VIRTIO_MSG
+	help
+	 This provides support for FFA based virtio message driver.
+
+	 If unsure, say N.
+
+config VIRTIO_MSG_FFA_DMA_OPS
+	bool "virtio message FFA DMA OPS support"
+	depends on VIRTIO_MSG_FFA
+	help
+	  Enables DMA FFA OPS support for Virtio message.
+
 config VIRTIO_DMA_SHARED_BUFFER
 	tristate "Virtio DMA shared buffer support"
 	depends on DMA_SHARED_BUFFER

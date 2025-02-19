@@ -7,6 +7,8 @@
 
 #include <linux/arm_ffa.h>
 #include <linux/device.h>
+#include <linux/of.h>
+#include <linux/of_device.h>
 #include <linux/fs.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -15,7 +17,7 @@
 
 #include "common.h"
 
-#define SCMI_UEVENT_MODALIAS_FMT	"arm_ffa:%04x:%pUb"
+#define FFA_UEVENT_MODALIAS_FMT	"arm_ffa:%04x:%pUb"
 
 static DEFINE_IDA(ffa_bus_id);
 
@@ -68,7 +70,7 @@ static int ffa_device_uevent(const struct device *dev, struct kobj_uevent_env *e
 {
 	const struct ffa_device *ffa_dev = to_ffa_dev(dev);
 
-	return add_uevent_var(env, "MODALIAS=" SCMI_UEVENT_MODALIAS_FMT,
+	return add_uevent_var(env, "MODALIAS=" FFA_UEVENT_MODALIAS_FMT,
 			      ffa_dev->vm_id, &ffa_dev->uuid);
 }
 
@@ -77,7 +79,7 @@ static ssize_t modalias_show(struct device *dev,
 {
 	struct ffa_device *ffa_dev = to_ffa_dev(dev);
 
-	return sysfs_emit(buf, SCMI_UEVENT_MODALIAS_FMT, ffa_dev->vm_id,
+	return sysfs_emit(buf, FFA_UEVENT_MODALIAS_FMT, ffa_dev->vm_id,
 			  &ffa_dev->uuid);
 }
 static DEVICE_ATTR_RO(modalias);
@@ -108,12 +110,21 @@ static struct attribute *ffa_device_attributes_attrs[] = {
 };
 ATTRIBUTE_GROUPS(ffa_device_attributes);
 
+static int ffa_Device_dma_configure(struct device *dev)
+{
+	if (dev->of_node)
+		return of_dma_configure(dev, dev->of_node, true);
+
+	return 0;
+}
+
 const struct bus_type ffa_bus_type = {
 	.name		= "arm_ffa",
 	.match		= ffa_device_match,
 	.probe		= ffa_device_probe,
 	.remove		= ffa_device_remove,
 	.uevent		= ffa_device_uevent,
+	.dma_configure	= ffa_Device_dma_configure,
 	.dev_groups	= ffa_device_attributes_groups,
 };
 EXPORT_SYMBOL_GPL(ffa_bus_type);
@@ -160,11 +171,12 @@ static int __ffa_devices_unregister(struct device *dev, void *data)
 	return 0;
 }
 
-static void ffa_devices_unregister(void)
+void ffa_devices_unregister(void)
 {
 	bus_for_each_dev(&ffa_bus_type, NULL, NULL,
 			 __ffa_devices_unregister);
 }
+EXPORT_SYMBOL_GPL(ffa_devices_unregister);
 
 bool ffa_device_is_valid(struct ffa_device *ffa_dev)
 {
@@ -187,12 +199,37 @@ bool ffa_device_is_valid(struct ffa_device *ffa_dev)
 	return valid;
 }
 
+static void ffa_device_of_setup(struct ffa_device *ffa_dev)
+{
+	struct device_node *np;
+	uuid_t uuid;
+	u32 val;
+
+	/* vm-id and UUID must match */
+	for_each_compatible_node(np, NULL, "arm,ffa") {
+		if (of_property_read_u32(np, "vm-id", &val))
+			continue;
+
+		if (ffa_dev->vm_id != val)
+			continue;
+
+		if (of_property_read_u32_array(np, "uuid", (u32 *)&uuid,
+					       sizeof(uuid) / sizeof(u32)))
+			continue;
+
+		if (!uuid_equal(&ffa_dev->uuid, &uuid))
+			continue;
+
+		device_set_node(&ffa_dev->dev, of_fwnode_handle(np));
+		break;
+	}
+}
+
 struct ffa_device *
 ffa_device_register(const struct ffa_partition_info *part_info,
 		    const struct ffa_ops *ops)
 {
 	int id, ret;
-	uuid_t uuid;
 	struct device *dev;
 	struct ffa_device *ffa_dev;
 
@@ -212,14 +249,16 @@ ffa_device_register(const struct ffa_partition_info *part_info,
 	dev = &ffa_dev->dev;
 	dev->bus = &ffa_bus_type;
 	dev->release = ffa_release_device;
+	dev->dma_mask = &dev->coherent_dma_mask;
 	dev_set_name(&ffa_dev->dev, "arm-ffa-%d", id);
 
 	ffa_dev->id = id;
 	ffa_dev->vm_id = part_info->id;
 	ffa_dev->properties = part_info->properties;
 	ffa_dev->ops = ops;
-	import_uuid(&uuid, (u8 *)part_info->uuid);
-	uuid_copy(&ffa_dev->uuid, &uuid);
+	uuid_copy(&ffa_dev->uuid, &part_info->uuid);
+
+	ffa_device_of_setup(ffa_dev);
 
 	ret = device_register(&ffa_dev->dev);
 	if (ret) {

@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+# Copyright 2021 ARM Ltd.
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/firmware/arm,ffa.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Arm Firmware Framework for A-class
+
+maintainers:
+  - Viresh Kumar <viresh.kumar@linaro.org>
+
+description: |
+  ARM FFA (Arm Firmware Framework for A-class) is a framework designed to
+  facilitate communication and resource sharing between various software
+  components in an Arm system, such as operating systems, hypervisors, and
+  trusted execution environments (TEEs). It's particularly used in systems
+  leveraging the Armv8-A architecture and later.
+
+  This binding is intended to define the interface the firmware implementing the
+  FFA provide in the device tree.
+
+  https://developer.arm.com/documentation/den0077/
+
+properties:
+  $nodename:
+    pattern: '^ffa(-[a-z0-9]+)?$'
+
+  compatible:
+    const: arm,ffa
+
+  vm-id:
+    description: Virtual machine identifier.
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  uuid:
+    description: Universally Unique Identifier.
+    $ref: /schemas/types.yaml#/definitions/uint32-matrix
+    minItems: 4
+    maxItems: 4
+
+  memory-region:
+    maxItems: 1
+    description:
+      Reserved memory allocated for sharing with other software components.
+
+additionalProperties: false
+
+required:
+  - compatible
+  - vm-id
+  - uuid
+
+examples:
+  - |
+    reserved-memory {
+        #address-cells = <1>;
+        #size-cells = <1>;
+        ranges;
+
+        ffa_2_mem: ffamem@81000000 {
+            compatible = "restricted-dma-pool";
+            reg = <0x81000000 0x00800000>;
+        };
+    };
+
+    firmware {
+        ffa {
+            compatible = "arm,ffa";
+            vm-id = <2>;
+            uuid = <0xc5b82091 0x48bbd4fe 0x244de7b7 0xbe28bb6e>;
+            memory-region = <&ffa_2_mem>;
+        };
+    };
+...
