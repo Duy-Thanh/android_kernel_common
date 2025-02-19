@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57737f60_904c4921",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3636632
+      },
+      "writtenOn": "2025-02-19T07:37:12Z",
+      "side": 1,
+      "message": "We also need these for the updated gyro driver:\n__devm_iio_trigger_register\ndevm_iio_trigger_alloc\ndisable_hardirq",
+      "revId": "f17b84574fd884235fdcaecb578f0b5f113e5aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
