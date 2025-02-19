@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b29b30_d9e68f3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-19T08:41:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "431c4ea0_b122c335",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 51
+      },
+      "revId": "7e288698161905847f267088df906254f9afb8c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0a71ec2_b5f4badf",
@@ -103,6 +127,24 @@
       "side": 1,
       "message": "It\u0027s needed to pass CTS.  https://cs.android.com/android/platform/superproject/main/+/main:cts/tests/tests/selinux/selinuxTargetSdk29/src/android/security/SELinuxTargetSdkTest.java;l\u003d45?q\u003dtestNoNetlinkRouteGetlink",
       "parentUuid": "c0a71ec2_b5f4badf",
+      "revId": "7e288698161905847f267088df906254f9afb8c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe3692f_d7786798",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-19T08:41:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a586fb3e_03c360bf",
       "revId": "7e288698161905847f267088df906254f9afb8c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
