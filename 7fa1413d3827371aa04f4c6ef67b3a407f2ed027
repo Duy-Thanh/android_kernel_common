@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c7b5875_54da5d1d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-19T16:13:38Z",
+      "side": 1,
+      "message": "I added this check because this is a public function and the caller might not necessarily want to save the physical adress in it. (on my path I never call it with NULL throughout this series).",
+      "parentUuid": "4cd0d62b_cd55f7ab",
+      "range": {
+        "startLine": 1477,
+        "startChar": 13,
+        "endLine": 1477,
+        "endChar": 17
+      },
+      "revId": "7fa1413d3827371aa04f4c6ef67b3a407f2ed027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "778a56dd_f3549deb",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-18T14:00:37Z",
       "side": 1,
       "message": "```suggestion\n * The caller is responsible for tracking the FFA state and this function\n```",
+      "range": {
+        "startLine": 1486,
+        "startChar": 60,
+        "endLine": 1486,
+        "endChar": 64
+      },
+      "revId": "7fa1413d3827371aa04f4c6ef67b3a407f2ed027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4b0ec87_ef6bda26",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1486,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-19T16:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "778a56dd_f3549deb",
       "range": {
         "startLine": 1486,
         "startChar": 60,
