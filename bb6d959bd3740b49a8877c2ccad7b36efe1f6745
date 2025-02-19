@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3ea03d_2289dad4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-19T19:00:14Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this be better off done by the caller?\n\nIf `pkvm_remap_range()` is supposed to preserve the buffer contents across different memory attributes, then we\u0027d also need to do maintenance when converting from non-cacheable to cacheable (to invalidate stale clean lines). However, I don\u0027t think the IOMMU reclaim path requires that, so I reckon it\u0027s probably best to defer the CMOs to the caller, who knows whether or not the buffer contents needs to be preserved.\n\nWDYT?",
+      "range": {
+        "startLine": 680,
+        "startChar": 2,
+        "endLine": 680,
+        "endChar": 25
+      },
+      "revId": "bb6d959bd3740b49a8877c2ccad7b36efe1f6745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
