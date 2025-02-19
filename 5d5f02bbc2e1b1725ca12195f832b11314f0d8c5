@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b98b4b7_e7dcfe60",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-19T16:13:29Z",
+      "side": 1,
+      "message": "I will keep it like this if this is fine with you as this is Will\u0027s suggestion from here https://android-review.git.corp.google.com/c/kernel/common/+/3365067/comment/fc5fbe7d_df38a13b/",
+      "parentUuid": "90c201b1_5a014db1",
+      "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dddacf8f_1d3d57ff",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ec13fe_f73b34e1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-19T16:13:29Z",
+      "side": 1,
+      "message": "Fixed it although it only complained about the gerrit tag.",
+      "parentUuid": "dddacf8f_1d3d57ff",
+      "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1ef4ccb_53ce25d3",
@@ -48,6 +84,30 @@
       "writtenOn": "2025-02-18T13:54:32Z",
       "side": 1,
       "message": "Is this ever `NULL`?",
+      "range": {
+        "startLine": 1387,
+        "startChar": 0,
+        "endLine": 1387,
+        "endChar": 12
+      },
+      "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e7be1d1_0cf5cc8d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-19T16:13:29Z",
+      "side": 1,
+      "message": "I am not calling this function with NULL argument but since it\u0027s a public method it is worth a check.",
+      "parentUuid": "c1ef4ccb_53ce25d3",
       "range": {
         "startLine": 1387,
         "startChar": 0,
