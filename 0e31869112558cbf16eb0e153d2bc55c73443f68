@@ -177,6 +177,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "146325ce_277ba84d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-02-19T00:42:20Z",
+      "side": 1,
+      "message": "I think the VM creation message needs to be sent long before this point. The VM creation message has response status codes that tells the caller it needs to resend the message. RXTX_MAP does not have that, so I don\u0027t think you can handle this in this context. Also, if you delay sending the VM creation message until RXTX_MAP is called, then you need to make sure no other FFA call from this VM can reach the SP before the VM creation message. Note that supporting the VM destruction message is more urgent than supporting the VM creation message so It might be useful to split this CL in two and handle the destruction case first.",
+      "parentUuid": "feec5b27_002c75a5",
+      "range": {
+        "startLine": 384,
+        "startChar": 7,
+        "endLine": 384,
+        "endChar": 10
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68666200_b1f956bf",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
