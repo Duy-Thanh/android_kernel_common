@@ -16,6 +16,23 @@
       "message": "Respin bug:b/397386756",
       "revId": "2bc6cae72c8b70f1a5ab2085b3e69fbb980248b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ab62de_bd2e4037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3821538
+      },
+      "writtenOn": "2025-02-19T01:42:20Z",
+      "side": 1,
+      "message": "please review and merge this cherry-pick, thanks for your effort.",
+      "revId": "2bc6cae72c8b70f1a5ab2085b3e69fbb980248b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
