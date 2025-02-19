@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12770a26_802fbfaf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-19T03:43:54Z",
+      "side": 1,
+      "message": "Sorry, I got distracted and didn\u0027t finish my thoguht here:\n\n\"After system crashes, the console-ramoops from pstore would often be missing important message lines due to the console log level being lower then the message, which makes it difficult to debug these crashes.\n\nSo add a vendorhook in the console_unlock path so \u003cmore details here\u003e such that all of the printk messages will be included in the console-ramoops after a crash\n\nWe might be able to aovid using a vendorhook here if upstream has a capability to do \u003cmore detail here\u003e\n\"",
+      "parentUuid": "7e7fb9be_6948ad1d",
+      "revId": "b1c33dcedc58708a05e5070dbbb5c5fc87c1caa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe0a4ee7_bd30207a",
         "filename": "kernel/printk/printk.c",
         "patchSetId": 1
