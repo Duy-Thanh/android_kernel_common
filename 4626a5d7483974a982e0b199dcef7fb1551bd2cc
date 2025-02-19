@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa06cad2_6c6f4be7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-02-19T13:45:06Z",
+      "side": 1,
+      "message": "You cannot preemptively protect the ABI from CRC changes like this because it\u0027s too late, those types are *already* part of the CRC calculation (whether as full definitions or just as forward declarations).\n\nIf / when changes to those type land *and* those type changes are audited to be ABI safe, then you can use macros to hide the changes from `genksyms`. Similarly, if new includes are needed which pull definitions into new source files, affecting CRCs, they too can be hidden.",
+      "revId": "4626a5d7483974a982e0b199dcef7fb1551bd2cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
