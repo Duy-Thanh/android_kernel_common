@@ -408,6 +408,24 @@
       "parentUuid": "b28ab055_2591ac5d",
       "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f856b3a_2e6b3cbe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-19T03:52:29Z",
+      "side": 1,
+      "message": "Update: I added code in Trusty to return `RETRY` at https://r.android.com/c/trusty/lk/trusty/+/3484326/13/lib/sm/sm.c#435, you can enable it locally for testing.",
+      "parentUuid": "32da4dfb_9f08a441",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
