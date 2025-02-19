@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fba3abf_f0dcd2a8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-19T14:21:41Z",
+      "side": 1,
+      "message": "nit: maybe use consistant method for this (previously `!!prot` was used)",
+      "range": {
+        "startLine": 734,
+        "startChar": 39,
+        "endLine": 734,
+        "endChar": 48
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b10a3a_15dfffbd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-19T14:21:41Z",
+      "side": 1,
+      "message": "Doesn\u0027t `__host_stage2_set_owner_locked` already call `kvm_iommu_host_stage2_idmap_complete`?",
+      "range": {
+        "startLine": 759,
+        "startChar": 2,
+        "endLine": 759,
+        "endChar": 38
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f348eca3_cb2f2bbf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2084,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-19T14:21:41Z",
+      "side": 1,
+      "message": "I think that should be called before, otherwise it\u0027s not safe if multiple vcpus access this address, or maybe called inside `__host_donate_guest`",
+      "range": {
+        "startLine": 2084,
+        "startChar": 2,
+        "endLine": 2084,
+        "endChar": 29
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073e3749_ab2b3688",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-19T14:21:41Z",
+      "side": 1,
+      "message": "Same as previous comment",
+      "range": {
+        "startLine": 2156,
+        "startChar": 2,
+        "endLine": 2156,
+        "endChar": 29
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
