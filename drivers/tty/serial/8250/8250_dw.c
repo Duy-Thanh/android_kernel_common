@@ -74,6 +74,7 @@ struct dw8250_data {
 	struct notifier_block	clk_notifier;
 	struct work_struct	clk_work;
 	struct reset_control	*rst;
+	unsigned int		saved_mctrl;
 
 	unsigned int		skip_autocfg:1;
 	unsigned int		uart_16550_compatible:1;
@@ -723,7 +724,10 @@ static int dw8250_remove(struct platform_device *pdev)
 static int dw8250_suspend(struct device *dev)
 {
 	struct dw8250_data *data = dev_get_drvdata(dev);
+	struct uart_8250_port *up = serial8250_get_port(data->data.line);
 
+	data->saved_mctrl = up->port.mctrl;
+	up->port.mctrl &= ~TIOCM_RTS;
 	serial8250_suspend_port(data->data.line);
 
 	return 0;
@@ -732,8 +736,15 @@ static int dw8250_suspend(struct device *dev)
 static int dw8250_resume(struct device *dev)
 {
 	struct dw8250_data *data = dev_get_drvdata(dev);
+	struct uart_8250_port *up = serial8250_get_port(data->data.line);
+	struct uart_port *port = &up->port;
 
 	serial8250_resume_port(data->data.line);
+	if (data->saved_mctrl & TIOCM_RTS) {
+		/* Restore RTS */
+		port->mctrl |= TIOCM_RTS;
+		port->ops->set_mctrl(port, port->mctrl);
+	}
 
 	return 0;
 }
