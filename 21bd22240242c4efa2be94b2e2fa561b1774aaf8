@@ -16,6 +16,29 @@
       "message": "Again, this toggle isn\u0027t in the C version, why add it here?",
       "revId": "21bd22240242c4efa2be94b2e2fa561b1774aaf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f5b52b_ccdec152",
+        "filename": "drivers/staging/android/ashmem_toggle.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-19T12:41:49Z",
+      "side": 1,
+      "message": "there is a built-in C helper that allows many more values for Y/N toggles in sysfs.  Not to say you should use it here, just a hint for future stuff...",
+      "range": {
+        "startLine": 218,
+        "startChar": 1,
+        "endLine": 219,
+        "endChar": 31
+      },
+      "revId": "21bd22240242c4efa2be94b2e2fa561b1774aaf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
