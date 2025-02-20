@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67039f8e_d9435568",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2084,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T16:21:23Z",
+      "side": 1,
+      "message": "Hum, and actually the same apply with the _sglist version.\n\nShould do \n\nunmap_host\niommu_complete\nmap_guest",
+      "parentUuid": "f348eca3_cb2f2bbf",
+      "range": {
+        "startLine": 2084,
+        "startChar": 2,
+        "endLine": 2084,
+        "endChar": 29
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "073e3749_ab2b3688",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 14
