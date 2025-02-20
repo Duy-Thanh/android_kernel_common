@@ -16,6 +16,23 @@
       "message": "We also need these for the updated gyro driver:\n__devm_iio_trigger_register\ndevm_iio_trigger_alloc\ndisable_hardirq",
       "revId": "f17b84574fd884235fdcaecb578f0b5f113e5aa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "829289a5_baf4af0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3636632
+      },
+      "writtenOn": "2025-02-20T08:00:03Z",
+      "side": 1,
+      "message": "A couple of hours after my comment here, we managed to get the backup plan working, meaning we patched the driver so we dont need to add the symbols I mentioned here. (they are already added in later kernel lists too)",
+      "revId": "f17b84574fd884235fdcaecb578f0b5f113e5aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
