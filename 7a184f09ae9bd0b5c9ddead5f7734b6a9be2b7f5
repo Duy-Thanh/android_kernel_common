@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ae7d30_c681dba2",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-02-20T02:27:40Z",
+      "side": 1,
+      "message": "we want to add lazyfree folio to lru tail, refer to the patch：\nhttps://lore.kernel.org/linux-mm/f29f64e29c08427b95e3df30a5770056@honor.com/",
+      "parentUuid": "536ebea1_681e2da8",
+      "range": {
+        "startLine": 630,
+        "startChar": 2,
+        "endLine": 630,
+        "endChar": 38
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e89f5c0_a1785627",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-19T19:51:11Z",
       "side": 1,
       "message": "If you bypass lazyfree these counters should not be modified. I think this should be:\n```\ntrace_android_vh_lazyfree_bypass(lruvec, folio, \u0026bypass);\nif (bypass)\n    return;\n\nlruvec_add_folio(lruvec, folio);\n\n__count_vm_events(PGLAZYFREE, nr_pages);\n__count_memcg_events(lruvec_memcg(lruvec), PGLAZYFREE,\n\t\t     nr_pages);\n```",
+      "range": {
+        "startLine": 634,
+        "startChar": 2,
+        "endLine": 636,
+        "endChar": 19
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "161ea1af_4d95e33d",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-02-20T02:27:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8e89f5c0_a1785627",
       "range": {
         "startLine": 634,
         "startChar": 2,
