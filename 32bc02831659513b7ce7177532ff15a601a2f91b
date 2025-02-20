@@ -79,6 +79,23 @@
       "message": "Looks like this patch implements exactly the same functionality as https://android-review.googlesource.com/c/kernel/common/+/3451869 in android16-6.12. Please change the title of the patch to match the original and change the Change-Id to be the same (I0b5023e2362fed54a56513f695da1b45ffee4339).",
       "revId": "32bc02831659513b7ce7177532ff15a601a2f91b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54964a1_3df910ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-20T04:16:47Z",
+      "side": 1,
+      "message": "You should also post a follow-up patch updating symbols list and ABI.",
+      "revId": "32bc02831659513b7ce7177532ff15a601a2f91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
