@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e7fac44_5ffa9395",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1553,
+      "author": {
+        "id": 1897817
+      },
+      "writtenOn": "2025-02-20T01:56:34Z",
+      "side": 1,
+      "message": "Renaming to trace_android_vh_gic_v3_resume ?",
+      "revId": "eea6f7a3afe8fdf2949122be4a2605c6a7d58fd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
