@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56c2dd5e_162639c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-20T22:26:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3359e32_9a6ac88c",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "b1c33dcedc58708a05e5070dbbb5c5fc87c1caa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e7fb9be_6948ad1d",
@@ -73,6 +97,24 @@
       "side": 1,
       "message": "Thank you for pointing this out.\nI updated the commit message, please check it.",
       "parentUuid": "12770a26_802fbfaf",
+      "revId": "b1c33dcedc58708a05e5070dbbb5c5fc87c1caa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf3992c8_e2be2fc9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-20T22:26:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e714bb22_1357d79f",
       "revId": "b1c33dcedc58708a05e5070dbbb5c5fc87c1caa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
