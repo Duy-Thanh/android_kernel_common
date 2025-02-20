@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb8a0e1f_8f181cd7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T17:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fba3abf_f0dcd2a8",
+      "range": {
+        "startLine": 734,
+        "startChar": 39,
+        "endLine": 734,
+        "endChar": 48
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62b10a3a_15dfffbd",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-19T14:21:41Z",
       "side": 1,
       "message": "Doesn\u0027t `__host_stage2_set_owner_locked` already call `kvm_iommu_host_stage2_idmap_complete`?",
+      "range": {
+        "startLine": 759,
+        "startChar": 2,
+        "endLine": 759,
+        "endChar": 38
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f7650e4_2c765005",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T17:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62b10a3a_15dfffbd",
       "range": {
         "startLine": 759,
         "startChar": 2,
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b07f319_77d87066",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2084,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T17:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67039f8e_d9435568",
+      "range": {
+        "startLine": 2084,
+        "startChar": 2,
+        "endLine": 2084,
+        "endChar": 29
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "073e3749_ab2b3688",
@@ -107,6 +179,30 @@
       "writtenOn": "2025-02-19T14:21:41Z",
       "side": 1,
       "message": "Same as previous comment",
+      "range": {
+        "startLine": 2156,
+        "startChar": 2,
+        "endLine": 2156,
+        "endChar": 29
+      },
+      "revId": "36204ee8a533662c56944b425fb57b8ea450facd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "927d8025_a0323fab",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T17:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "073e3749_ab2b3688",
       "range": {
         "startLine": 2156,
         "startChar": 2,
