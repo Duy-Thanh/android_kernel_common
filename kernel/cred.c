@@ -489,7 +489,7 @@ EXPORT_SYMBOL(abort_creds);
  */
 const struct cred *override_creds(const struct cred *new)
 {
-	const struct cred *old = current->cred;
+	const struct cred *old;
 
 	kdebug("override_creds(%p{%ld})", new,
 	       atomic_long_read(&new->usage));
@@ -503,8 +503,14 @@ const struct cred *override_creds(const struct cred *new)
 	 * visible to other threads under RCU.
 	 */
 	get_new_cred((struct cred *)new);
+<<<<<<< HEAD   (d56eee Merge 060fc106b685 ("Merge tag 'unicode-next-6.13' of git://)
 	rcu_assign_pointer(current->cred, new);
 	trace_android_rvh_override_creds(current, new);
+||||||| BASE
+	rcu_assign_pointer(current->cred, new);
+=======
+	old = override_creds_light(new);
+>>>>>>> BRANCH (e76752 Merge tag 'ovl-update-6.13' of git://git.kernel.org/pub/scm/)
 
 	kdebug("override_creds() = %p{%ld}", old,
 	       atomic_long_read(&old->usage));
@@ -526,8 +532,14 @@ void revert_creds(const struct cred *old)
 	kdebug("revert_creds(%p{%ld})", old,
 	       atomic_long_read(&old->usage));
 
+<<<<<<< HEAD   (d56eee Merge 060fc106b685 ("Merge tag 'unicode-next-6.13' of git://)
 	rcu_assign_pointer(current->cred, old);
 	trace_android_rvh_revert_creds(current, old);
+||||||| BASE
+	rcu_assign_pointer(current->cred, old);
+=======
+	revert_creds_light(old);
+>>>>>>> BRANCH (e76752 Merge tag 'ovl-update-6.13' of git://git.kernel.org/pub/scm/)
 	put_cred(override);
 }
 EXPORT_SYMBOL(revert_creds);
