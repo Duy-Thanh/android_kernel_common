@@ -61,6 +61,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e714bb22_1357d79f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3845079
+      },
+      "writtenOn": "2025-02-20T02:53:30Z",
+      "side": 1,
+      "message": "Thank you for pointing this out.\nI updated the commit message, please check it.",
+      "parentUuid": "12770a26_802fbfaf",
+      "revId": "b1c33dcedc58708a05e5070dbbb5c5fc87c1caa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe0a4ee7_bd30207a",
         "filename": "kernel/printk/printk.c",
         "patchSetId": 1
