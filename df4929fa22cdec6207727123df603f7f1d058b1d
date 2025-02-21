@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/398137864",
       "revId": "df4929fa22cdec6207727123df603f7f1d058b1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2547d462_db99cec2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-02-21T13:07:24Z",
+      "side": 1,
+      "message": "those symbols are not in the tree in this commit",
+      "revId": "df4929fa22cdec6207727123df603f7f1d058b1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
