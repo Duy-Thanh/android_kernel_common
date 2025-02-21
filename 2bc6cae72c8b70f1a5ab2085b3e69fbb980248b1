@@ -50,6 +50,23 @@
       "message": "please review and merge this cherry-pick, thanks for your effort.",
       "revId": "2bc6cae72c8b70f1a5ab2085b3e69fbb980248b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02a870ca_be49a281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3821538
+      },
+      "writtenOn": "2025-02-21T07:04:59Z",
+      "side": 1,
+      "message": "Hi Matthias, how can I locate and solve the problem leads to Presubmit verify -1? Presubmit explainer shows few information in checks tab. We normally examine and verify by build abi_dist with bazel locally before pushing commits, and ensure there is no error reported.",
+      "revId": "2bc6cae72c8b70f1a5ab2085b3e69fbb980248b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
