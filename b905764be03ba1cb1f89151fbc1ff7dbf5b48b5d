@@ -50,6 +50,24 @@
       "message": "Do we select ARCH configs like this? usually platforms/arch select this no?",
       "revId": "b905764be03ba1cb1f89151fbc1ff7dbf5b48b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba40cf3_21fe35a5",
+        "filename": "drivers/virt/coco/gunyah-guest/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2025-02-21T22:37:26Z",
+      "side": 1,
+      "message": "Yes, see drivers/virt/coco/pkvm-guest/Kconfig",
+      "parentUuid": "f26a4523_7874af22",
+      "revId": "b905764be03ba1cb1f89151fbc1ff7dbf5b48b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
