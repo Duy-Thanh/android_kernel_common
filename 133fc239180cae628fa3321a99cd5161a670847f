@@ -16,6 +16,24 @@
       "message": "Please fix this INFO reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/dc1460fe1b2dc883195d21759676d55b183fd495) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003ddc1460fe1b2dc883195d21759676d55b183fd495).\n\n```\n      ## drivers/of/fdt.c ##\n    -@@ drivers/of/fdt.c: bool __init early_init_dt_scan(void *params)\n    +@@ drivers/of/fdt.c: bool __init early_init_dt_scan(void *dt_virt, phys_addr_t dt_phys)\n      \treturn true;\n      }\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "133fc239180cae628fa3321a99cd5161a670847f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f122957_9d08d742",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-02-21T19:40:53Z",
+      "side": 1,
+      "message": "oh sorry, this one is right.",
+      "parentUuid": "38007474_5944db99",
+      "revId": "133fc239180cae628fa3321a99cd5161a670847f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
