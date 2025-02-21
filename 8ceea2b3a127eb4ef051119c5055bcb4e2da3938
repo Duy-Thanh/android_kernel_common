@@ -51,6 +51,24 @@
       "parentUuid": "01193d42_9d0ce198",
       "revId": "8ceea2b3a127eb4ef051119c5055bcb4e2da3938",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8cd944_38937c03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-21T07:56:52Z",
+      "side": 1,
+      "message": "We should always fix the regression first (that\u0027s the most important thing) and then add the proper fix back after the issue has been found.",
+      "parentUuid": "9a7d4570_4ed6877d",
+      "revId": "8ceea2b3a127eb4ef051119c5055bcb4e2da3938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
