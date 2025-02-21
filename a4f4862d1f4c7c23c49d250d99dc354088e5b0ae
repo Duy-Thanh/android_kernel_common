@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2072f4f8_9130eb0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-02-21T00:07:22Z",
+      "side": 1,
+      "message": "I don\u0027t follow this arguemnt. Who is putting the hvc conduit into the device tree? If the smc conduit is in the device tree instead, would that not require support for the smc conduit here for a linux guest as well?",
+      "revId": "a4f4862d1f4c7c23c49d250d99dc354088e5b0ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

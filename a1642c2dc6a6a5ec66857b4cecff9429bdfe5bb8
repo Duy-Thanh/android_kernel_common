@@ -142,6 +142,24 @@
       "parentUuid": "1d20d896_e93f18c6",
       "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e60d3c6_5aedeac3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-02-21T00:07:22Z",
+      "side": 1,
+      "message": "I think you should support FF-A calls over the smc conduit. I don\u0027t care if you also support the hvc conduit or not. If you are exposing the same functions for both hvc and smc calls, the attack surface does not materially change. The reason I want smc support is that the smc conduit can be used everwhere. The hvc conduit cannot be used when there is no hypervisor. Trusty has no support for the hvc conduit today and other guests that originate in tz might not either. I think it would have been better if the hvc conduit was not even an option in the FF-A spec as it was unneccerary. Every context where HVC is listed as a valid conduit also lists SMC as a valid conduit (the reverse is not true).",
+      "parentUuid": "3ea025dd_74913142",
+      "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
