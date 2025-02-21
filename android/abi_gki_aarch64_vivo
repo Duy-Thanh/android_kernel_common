@@ -348,5 +348,15 @@
   ufshcd_query_descriptor_retry
   unlock_buffer
   __wait_on_buffer
+  xhci_sideband_add_endpoint
+  xhci_sideband_create_interrupter
+  xhci_sideband_register
+  xhci_sideband_remove_endpoint
+  xhci_sideband_remove_interrupter
+  xhci_sideband_unregister
+  xhci_sideband_enable_interrupt
+  xhci_sideband_get_endpoint_buffer
+  xhci_sideband_get_event_buffer
+  xhci_sideband_stop_endpoint
   zs_lookup_class_index
   utf8_data_table_new
