@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5393ae_43f4b602",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3369378
+      },
+      "writtenOn": "2025-02-21T01:20:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dde27a7_95c5c471",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "32bc02831659513b7ce7177532ff15a601a2f91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56edf6d0_07b51ea1",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-20T04:15:43Z",
       "side": 1,
       "message": "Should be `I0b5023e2362fed54a56513f695da1b45ffee4339`",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 52
+      },
+      "revId": "32bc02831659513b7ce7177532ff15a601a2f91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae9efdf1_f3e0a69e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3369378
+      },
+      "writtenOn": "2025-02-21T01:20:03Z",
+      "side": 1,
+      "message": "Weird that when I changed it into I0b5023e2362fed54a56513f695da1b45ffee4339, it report Endpoint: /changes/*~*/message Trace Id: 1740032364404-e176ebce to me.",
+      "parentUuid": "56edf6d0_07b51ea1",
       "range": {
         "startLine": 16,
         "startChar": 11,
@@ -94,6 +142,24 @@
       "writtenOn": "2025-02-20T04:16:47Z",
       "side": 1,
       "message": "You should also post a follow-up patch updating symbols list and ABI.",
+      "revId": "32bc02831659513b7ce7177532ff15a601a2f91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "094c3769_29b90521",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3369378
+      },
+      "writtenOn": "2025-02-21T01:20:03Z",
+      "side": 1,
+      "message": "My project init by:repo init -u https://android.googlesource.com/kernel/manifest -b common-android15-6.6\n\nThen apply this patch, and build by:\ntools/bazel run //common:kernel_aarch64_abi_dist -- --dist_dir\u003dout/dist\nWhen build done, I into out/dist and grep android_vh_free_unref_page_list_bypass got:\nBinary file boot.img matches\nBinary file Image matches\nBinary file vmlinux matches\nSystem.map:47556:ffffffc080cc6b18 T __traceiter_android_vh_free_unref_page_list_bypass\nSystem.map:47557:ffffffc080cc6b90 T __probestub_android_vh_free_unref_page_list_bypass\nSystem.map:70864:ffffffc08166087a d __tpstrtab_android_vh_free_unref_page_list_bypass\nSystem.map:99226:ffffffc082222930 D __SCK__tp_func_android_vh_free_unref_page_list_bypass\nSystem.map:103601:ffffffc08226d180 D __tracepoint_android_vh_free_unref_page_list_bypass\n\nWeird that I can\u0027t find abi.dist changed, so can\u0027t upload it. Did something I missed? Please correct me, thank you",
+      "parentUuid": "b54964a1_3df910ea",
       "revId": "32bc02831659513b7ce7177532ff15a601a2f91b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
