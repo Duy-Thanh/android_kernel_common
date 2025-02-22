@@ -2080,8 +2080,15 @@ static long check_and_migrate_movable_pages(unsigned long nr_pages,
 {
 	LIST_HEAD(movable_page_list);
 
+<<<<<<< HEAD   (8e76d5 Merge branch 'android15-6.6' into android15-6.6-lts)
 	collect_longterm_unpinnable_pages(&movable_page_list,
 						nr_pages, pages);
+||||||| BASE
+	collected = collect_longterm_unpinnable_pages(&movable_page_list,
+						nr_pages, pages);
+=======
+	collect_longterm_unpinnable_pages(&movable_page_list, nr_pages, pages);
+>>>>>>> BRANCH (c0249d Linux 6.6.79)
 	if (list_empty(&movable_page_list))
 		return 0;
 
