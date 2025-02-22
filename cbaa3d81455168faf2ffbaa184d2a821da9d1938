@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "443106da_6180c138",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3596924
+      },
+      "writtenOn": "2025-02-22T07:42:27Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/382b6eabb0316b7334d97afbdcf33a4e20b0ecd8) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d382b6eabb0316b7334d97afbdcf33a4e20b0ecd8).\n\n```\n      ## drivers/usb/gadget/function/f_fs.c ##\n     @@ drivers/usb/gadget/function/f_fs.c: static int ffs_func_set_alt(struct usb_function *f,\n    - \tstruct ffs_data *ffs \u003d func-\u003effs;\n      \tint ret \u003d 0, intf;\n      \n    --\tif (alt \u003e MAX_ALT_SETTINGS)\n    --\t\treturn -EINVAL;\n    --\n      \tif (alt !\u003d (unsigned)-1) {\n     +\t\tif (alt \u003e MAX_ALT_SETTINGS)\n     +\t\t\treturn -EINVAL;\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "cbaa3d81455168faf2ffbaa184d2a821da9d1938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
