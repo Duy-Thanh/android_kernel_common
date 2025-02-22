@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "595f45d6_03ab4a8c",
+        "filename": "drivers/virt/gunyah/gunyah.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2025-02-22T00:41:18Z",
+      "side": 1,
+      "message": "Gunyah docs mention to do a full memory barrier",
+      "parentUuid": "0abe7347_5fa8d0ed",
+      "range": {
+        "startLine": 34,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 2
+      },
+      "revId": "a51c514a23e80094e8a484490e8089b7ee6033f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6122eea4_9870f019",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-02-18T04:35:32Z",
       "side": 1,
       "message": "should this be wrapped around READ_ONCE()? we read desc-\u003eoffset already (for loop condition) which might have been re-used here by compiler. we want to see desc-\u003eoffset value only after flags is marked as VALID, no?",
+      "revId": "a51c514a23e80094e8a484490e8089b7ee6033f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a980ce_cee5a0e1",
+        "filename": "drivers/virt/gunyah/gunyah.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2025-02-22T00:41:18Z",
+      "side": 1,
+      "message": "\u003e we want to see desc-\u003eoffset value only after flags is marked as VALID, no?\n\nThe docs mention to check -\u003eoffset first. The page will currently always be set up before the virtual machine starts. The careful barriers here are, in my opinion, optimistic future-proofing.",
+      "parentUuid": "6122eea4_9870f019",
       "revId": "a51c514a23e80094e8a484490e8089b7ee6033f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
