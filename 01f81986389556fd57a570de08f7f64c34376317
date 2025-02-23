@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a51d81fb_e3773ac6",
+        "filename": "drivers/android/experiments-sample.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-23T13:40:41Z",
+      "side": 1,
+      "message": "static kobjects will not work properly, please never do this.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4f281b6_0f0d2014",
+        "filename": "drivers/android/experiments-sample.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-23T13:40:41Z",
+      "side": 1,
+      "message": "please never mess with raw kobjects, that is not how they are to be used.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 61
+      },
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
