@@ -16,6 +16,23 @@
       "message": "checkpatch can be ignored here.",
       "revId": "8ae119f6f253112e56358951304e43150628fa27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b209f8a_2991d96a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2021533
+      },
+      "writtenOn": "2025-02-23T04:00:40Z",
+      "side": 1,
+      "message": "\u0027android12-5.10.234_r00\u0027 and \u0027android13-5.15.178_r00\u0027 also require this patch, please backport it.",
+      "revId": "8ae119f6f253112e56358951304e43150628fa27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
