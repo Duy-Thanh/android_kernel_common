@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41e40b51_3ecfa08c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-23T03:07:41Z",
+      "side": 1,
+      "message": "If you\u0027re masking this, why not exactly `0x3`?",
+      "revId": "d97409799fc8e55349d5d18d6a096982c3527757",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
