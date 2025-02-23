@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0154fc53_ce1501cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3735354
+      },
+      "writtenOn": "2025-02-23T14:55:05Z",
+      "side": 1,
+      "message": "Thanks for the review.\n\nThis is an in-progress patch. I haven\u0027t finished all the coding yet. But, I will take care of the things you pointed out.",
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a51d81fb_e3773ac6",
@@ -26,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af352757_937299fc",
+        "filename": "drivers/android/experiments-sample.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3735354
+      },
+      "writtenOn": "2025-02-23T14:55:05Z",
+      "side": 1,
+      "message": "What do you mean it will not work properly? is it refernce counting we are worried about?",
+      "parentUuid": "a51d81fb_e3773ac6",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4f281b6_0f0d2014",
         "filename": "drivers/android/experiments-sample.c",
         "patchSetId": 2
@@ -37,6 +78,30 @@
       "writtenOn": "2025-02-23T13:40:41Z",
       "side": 1,
       "message": "please never mess with raw kobjects, that is not how they are to be used.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 61
+      },
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4451b98_0bd1a409",
+        "filename": "drivers/android/experiments-sample.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 3735354
+      },
+      "writtenOn": "2025-02-23T14:55:05Z",
+      "side": 1,
+      "message": "I was trying to follow the example of klp_root_kobj: https://elixir.bootlin.com/linux/v6.13.2/source/kernel/livepatch/core.c#L47.\n\nI can make this into an exp_kobj.",
+      "parentUuid": "b4f281b6_0f0d2014",
       "range": {
         "startLine": 60,
         "startChar": 0,
