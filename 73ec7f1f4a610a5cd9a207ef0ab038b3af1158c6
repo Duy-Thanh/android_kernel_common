@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47bcd8da_48969386",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-23T02:28:51Z",
+      "side": 1,
+      "message": "The possible error codes returned here are:\n* `INVALID_PARAMETERS`\n* `DENIED`\n* `NO_MEMORY`\n* `ABORTED`\n\nI think the only value where TZ hasn\u0027t relinquished the pages is `DENIED`; the others are legitimate errors that we should handle as such.",
+      "revId": "73ec7f1f4a610a5cd9a207ef0ab038b3af1158c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0eeeadd6_0bb72b76",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 12
