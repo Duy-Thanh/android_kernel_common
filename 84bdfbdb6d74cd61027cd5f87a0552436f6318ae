@@ -16,6 +16,24 @@
       "message": "Build break. Please build and test your changes _BEFORE_ uploading",
       "revId": "84bdfbdb6d74cd61027cd5f87a0552436f6318ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06531481_69474f25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3526701
+      },
+      "writtenOn": "2025-02-24T16:41:11Z",
+      "side": 1,
+      "message": "Have raised the next patch with the Export gerrit. and veriifed the compilation of ACK kernel.",
+      "parentUuid": "e95296c3_8cd46927",
+      "revId": "84bdfbdb6d74cd61027cd5f87a0552436f6318ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
