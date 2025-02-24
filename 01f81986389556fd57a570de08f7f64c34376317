@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d7886cf_0d3c17be",
+        "filename": "drivers/android/experiments-sample.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-24T06:25:42Z",
+      "side": 1,
+      "message": "Yes.  kobjects are always dynamic, you should never make static versions of them.",
+      "parentUuid": "af352757_937299fc",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4f281b6_0f0d2014",
         "filename": "drivers/android/experiments-sample.c",
         "patchSetId": 2
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "I was trying to follow the example of klp_root_kobj: https://elixir.bootlin.com/linux/v6.13.2/source/kernel/livepatch/core.c#L47.\n\nI can make this into an exp_kobj.",
       "parentUuid": "b4f281b6_0f0d2014",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 61
+      },
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b919ebd7_29e965bd",
+        "filename": "drivers/android/experiments-sample.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-24T06:25:42Z",
+      "side": 1,
+      "message": "why are you using sysfs, and kobjects, at all?  That\u0027s not what sysfs is for.\n\nWhat problem are you trying to solve here?",
+      "parentUuid": "f4451b98_0bd1a409",
       "range": {
         "startLine": 60,
         "startChar": 0,
