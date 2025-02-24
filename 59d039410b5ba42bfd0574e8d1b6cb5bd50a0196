@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43548602_dc70f9d4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-24T22:59:39Z",
+      "side": 1,
+      "message": "This fails as invalid in the next check.",
+      "parentUuid": "539b5e65_1649d856",
+      "range": {
+        "startLine": 1744,
+        "startChar": 31,
+        "endLine": 1744,
+        "endChar": 45
+      },
+      "revId": "59d039410b5ba42bfd0574e8d1b6cb5bd50a0196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2d20613_e09f29a4",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-24T21:54:38Z",
       "side": 1,
       "message": "Hmm. If the memory was previously shared with the guest, why is it safe to return here? When the guest is torn down, won\u0027t the reclaim logic transition the page back to host-owned?",
+      "range": {
+        "startLine": 1765,
+        "startChar": 8,
+        "endLine": 1765,
+        "endChar": 15
+      },
+      "revId": "59d039410b5ba42bfd0574e8d1b6cb5bd50a0196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b08330c_f5ee5068",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1765,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-24T22:59:39Z",
+      "side": 1,
+      "message": "This is a bit strange for borrowed.\n\nSo, MMIO can\u0027t be shared from guest to host (the HVC will fail) so it\u0027s impossible to have an MMIO borrowed in the host state, and this relies on re-using that instead of adding new state for DMA_MMIO.\nWhere basically pages that have been mapped in the IOMMU page table, gets tained by marking them as borrowed and that can never change.",
+      "parentUuid": "d2d20613_e09f29a4",
       "range": {
         "startLine": 1765,
         "startChar": 8,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a54cbfe2_45ae2b6f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-24T22:59:39Z",
+      "side": 1,
+      "message": "This will not be allowed at the moment, as the host can\u0027t share MMIO with a guest.",
+      "parentUuid": "ab5ae324_b3ab61f2",
+      "range": {
+        "startLine": 1767,
+        "startChar": 11,
+        "endLine": 1767,
+        "endChar": 26
+      },
+      "revId": "59d039410b5ba42bfd0574e8d1b6cb5bd50a0196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c5cbf92_c13b81d0",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 3
@@ -83,6 +155,30 @@
       "writtenOn": "2025-02-24T21:54:38Z",
       "side": 1,
       "message": "Use an `} else {` to avoid this `goto`?",
+      "range": {
+        "startLine": 1773,
+        "startChar": 7,
+        "endLine": 1773,
+        "endChar": 14
+      },
+      "revId": "59d039410b5ba42bfd0574e8d1b6cb5bd50a0196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee0fcc0b_e5843640",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-24T22:59:39Z",
+      "side": 1,
+      "message": "`out_ret` already exists, but no strong opinion.",
+      "parentUuid": "8c5cbf92_c13b81d0",
       "range": {
         "startLine": 1773,
         "startChar": 7,
