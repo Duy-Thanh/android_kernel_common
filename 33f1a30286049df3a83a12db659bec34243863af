@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74508eb5_f85b85e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-02-24T08:05:23Z",
+      "side": 1,
+      "message": "LGTM. For kleaf it\u0027s already part of the vendor defconfig fragment",
+      "revId": "33f1a30286049df3a83a12db659bec34243863af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
