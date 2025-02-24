@@ -815,9 +815,17 @@ static void tcp_rcv_rtt_update(struct tcp_sock *tp, u32 sample, int win_dep)
 	u32 new_sample, old_sample = tp->rcv_rtt_est.rtt_us;
 	long m = sample << 3;
 
+<<<<<<< HEAD   (c818542ead502009bd003c189fcc86795005133e ANDROID: ABI update for ProxyExec)
 	if (old_sample == 0 || m < old_sample) {
 		new_sample = m;
 	} else {
+||||||| BASE   (7bac2bddbe696df027fa2b30132fde96cd559748 ANDROID: GKI: Add ANDROID_OEM_DATA() in struct ufs_hba)
+	if (new_sample != 0) {
+=======
+	trace_android_vh_tcp_rcv_rtt_update(tp, sample, win_dep);
+
+	if (new_sample != 0) {
+>>>>>>> CHANGE (0ebf9a330d5324a59010618d94402b1a93321cb3 ANDROID: GKI: net: add vendor hook for network quality estim)
 		/* If we sample in larger samples in the non-timestamp
 		 * case, we could grossly overestimate the RTT especially
 		 * with chatty applications or bulk transfer apps which
