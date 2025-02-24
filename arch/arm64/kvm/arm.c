@@ -2026,11 +2026,18 @@ static int kvm_init_vector_slots(void)
 static void __init cpu_prepare_hyp_mode(int cpu)
 {
 	struct kvm_nvhe_init_params *params = per_cpu_ptr_nvhe_sym(kvm_init_params, cpu);
+<<<<<<< HEAD   (578bcc ANDROID: cgroup: Add trace_android_vh_cgroup_set_task parame)
 	u64 mmfr0 = read_sanitised_ftr_reg(SYS_ID_AA64MMFR0_EL1);
 	unsigned long tcr;
 	int *hyp_cpu_number_ptr = per_cpu_ptr_nvhe_sym(hyp_cpu_number, cpu);
 
 	*hyp_cpu_number_ptr = cpu;
+||||||| BASE
+	u64 mmfr0 = read_sanitised_ftr_reg(SYS_ID_AA64MMFR0_EL1);
+	unsigned long tcr;
+=======
+	unsigned long tcr, ips;
+>>>>>>> BRANCH (6b8aa7 Linux 6.12.14)
 
 	/*
 	 * Calculate the raw per-cpu offset without a translation from the
@@ -2044,6 +2051,7 @@ static void __init cpu_prepare_hyp_mode(int cpu)
 	params->mair_el2 = read_sysreg(mair_el1);
 
 	tcr = read_sysreg(tcr_el1);
+	ips = FIELD_GET(TCR_IPS_MASK, tcr);
 	if (cpus_have_final_cap(ARM64_KVM_HVHE)) {
 		tcr &= ~(TCR_HD | TCR_HA | TCR_A1 | TCR_T0SZ_MASK);
 		tcr |= TCR_EPD1_MASK;
@@ -2055,6 +2063,18 @@ static void __init cpu_prepare_hyp_mode(int cpu)
 			tcr |= TCR_EL2_DS;
 	}
 	tcr |= TCR_T0SZ(hyp_va_bits);
+<<<<<<< HEAD   (578bcc ANDROID: cgroup: Add trace_android_vh_cgroup_set_task parame)
+||||||| BASE
+	tcr &= ~TCR_EL2_PS_MASK;
+	tcr |= FIELD_PREP(TCR_EL2_PS_MASK, kvm_get_parange(mmfr0));
+	if (kvm_lpa2_is_enabled())
+		tcr |= TCR_EL2_DS;
+=======
+	tcr &= ~TCR_EL2_PS_MASK;
+	tcr |= FIELD_PREP(TCR_EL2_PS_MASK, ips);
+	if (lpa2_is_enabled())
+		tcr |= TCR_EL2_DS;
+>>>>>>> BRANCH (6b8aa7 Linux 6.12.14)
 	params->tcr_el2 = tcr;
 
 	params->pgd_pa = kvm_mmu_get_httbr();
