@@ -16,6 +16,23 @@
       "message": "Hi, Todd",
       "revId": "4f3d36cfdf2b2a45190928d36e16823ca9229738",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76128c44_63a05fc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2025-02-24T07:27:54Z",
+      "side": 1,
+      "message": "Hi, Todd\n\nPlease help review this change.\nLinux-6.6 [removed fat_writepage and exfat_writepage](https://lore.kernel.org/all/20221202102644.770505-3-hch@lst.de/T/#u) and sdcardfs_mmap couldn\u0027t work when lower fs is fat or exfat now.\n\nSo, we want to refactor sdcardfs_mmap just like ovl_mmap and we need add vma_set_file into abi list.\n```c\nstatic int ovl_mmap(struct file *file, struct vm_area_struct *vma)\n{\n\tstruct file *realfile \u003d file-\u003eprivate_data;\n\tconst struct cred *old_cred;\n\tint ret;\n\n\tif (!realfile-\u003ef_op-\u003emmap)\n\t\treturn -ENODEV;\n\n\tif (WARN_ON(file !\u003d vma-\u003evm_file))\n\t\treturn -EIO;\n\n\tvma_set_file(vma, realfile);\n\n\told_cred \u003d ovl_override_creds(file_inode(file)-\u003ei_sb);\n\tret \u003d call_mmap(vma-\u003evm_file, vma);\n\tovl_revert_creds(file_inode(file)-\u003ei_sb, old_cred);\n\tovl_file_accessed(file);\n\n\treturn ret;\n}\n```\n\nThanks",
+      "revId": "4f3d36cfdf2b2a45190928d36e16823ca9229738",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
