@@ -676,6 +676,7 @@ static int cmdq_probe(struct platform_device *pdev)
 		return err;
 	}
 
+<<<<<<< HEAD   (7549fa ANDROID: x86_64: [TEMP] Enable tpm_tis module)
 	/* If Runtime PM is not available enable the clocks now. */
 	if (!IS_ENABLED(CONFIG_PM)) {
 		err = cmdq_runtime_resume(dev);
@@ -690,6 +691,9 @@ static int cmdq_probe(struct platform_device *pdev)
 	pm_runtime_set_autosuspend_delay(dev, CMDQ_MBOX_AUTOSUSPEND_DELAY_MS);
 	pm_runtime_use_autosuspend(dev);
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (2aa57d FROMGIT: usb: typec: tcpm: Add new AMS for Get_Revision resp)
 	err = devm_mbox_controller_register(dev, &cmdq->mbox);
 	if (err < 0) {
 		dev_err(dev, "failed to register mailbox: %d\n", err);
