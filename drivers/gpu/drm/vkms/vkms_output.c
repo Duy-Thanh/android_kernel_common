@@ -177,7 +177,13 @@ int vkms_output_init_default(struct vkms_device *vkmsdev)
 	connector = vkms_connector_init(vkmsdev);
 	if (IS_ERR(connector)) {
 		DRM_ERROR("Failed to init connector\n");
+<<<<<<< HEAD   (7549fa ANDROID: x86_64: [TEMP] Enable tpm_tis module)
 		return PTR_ERR(connector);
+||||||| BASE
+		goto err_connector;
+=======
+		return ret;
+>>>>>>> BRANCH (2aa57d FROMGIT: usb: typec: tcpm: Add new AMS for Get_Revision resp)
 	}
 
 	encoder = vkms_encoder_init(vkmsdev, "encoder-default");
@@ -225,6 +231,7 @@ validate_vkms_configfs_no_dangling_objects(struct vkms_device *vkmsdev)
 	struct vkms_configfs *configfs = vkmsdev->configfs;
 	struct config_item *item;
 
+<<<<<<< HEAD   (7549fa ANDROID: x86_64: [TEMP] Enable tpm_tis module)
 	// 1. Planes
 	list_for_each_entry(item, &configfs->planes_group.cg_children,
 			    ci_entry) {
@@ -433,4 +440,12 @@ int vkms_output_init(struct vkms_device *vkmsdev)
 	drm_mode_config_reset(dev);
 
 	return 0;
+||||||| BASE
+err_connector:
+	drm_crtc_cleanup(crtc);
+
+	return ret;
+=======
+	return ret;
+>>>>>>> BRANCH (2aa57d FROMGIT: usb: typec: tcpm: Add new AMS for Get_Revision resp)
 }

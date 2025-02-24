@@ -777,6 +777,7 @@ out_gpte_changed:
 static int FNAME(page_fault)(struct kvm_vcpu *vcpu, struct kvm_page_fault *fault)
 {
 	struct guest_walker walker;
+	kvm_pfn_t orig_pfn;
 	int r;
 
 	WARN_ON_ONCE(fault->is_tdp);
@@ -835,6 +836,8 @@ static int FNAME(page_fault)(struct kvm_vcpu *vcpu, struct kvm_page_fault *fault
 			walker.pte_access &= ~ACC_EXEC_MASK;
 	}
 
+	orig_pfn = fault->pfn;
+
 	r = RET_PF_RETRY;
 	write_lock(&vcpu->kvm->mmu_lock);
 
@@ -849,6 +852,12 @@ static int FNAME(page_fault)(struct kvm_vcpu *vcpu, struct kvm_page_fault *fault
 out_unlock:
 	kvm_set_page_accessed(fault->accessed_page);
 	write_unlock(&vcpu->kvm->mmu_lock);
+<<<<<<< HEAD   (7549fa ANDROID: x86_64: [TEMP] Enable tpm_tis module)
+||||||| BASE
+	kvm_release_pfn_clean(fault->pfn);
+=======
+	kvm_release_pfn_clean(orig_pfn);
+>>>>>>> BRANCH (2aa57d FROMGIT: usb: typec: tcpm: Add new AMS for Get_Revision resp)
 	return r;
 }
 
