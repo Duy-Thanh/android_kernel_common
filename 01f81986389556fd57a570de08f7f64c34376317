@@ -182,6 +182,30 @@
       },
       "revId": "01f81986389556fd57a570de08f7f64c34376317",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66bc6a4d_59e8a5b0",
+        "filename": "drivers/android/experiments-sample.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-24T09:36:03Z",
+      "side": 1,
+      "message": "Thanks for the document.  sysfs is NOT the place to do stuff like this, and never with static kobjects either.  Please use the proper kernel apis instead.  More comments in the document.",
+      "parentUuid": "8ed2e31d_2fdb1597",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 61
+      },
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
