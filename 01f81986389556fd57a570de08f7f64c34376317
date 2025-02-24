@@ -158,6 +158,30 @@
       },
       "revId": "01f81986389556fd57a570de08f7f64c34376317",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed2e31d_2fdb1597",
+        "filename": "drivers/android/experiments-sample.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 3735354
+      },
+      "writtenOn": "2025-02-24T08:09:26Z",
+      "side": 1,
+      "message": "Here, sysfs will be used to enable experimental code in the kernel at runtime. The experimental code in the kernel will be flag guarded based on sysfs node\u0027s value. This is a mechanism used in the ChromeOS for quite sometime to deploy experimental code before releasing to mainline.\n\n\n\n I\u0027ve shared a more detailed design document with you.",
+      "parentUuid": "b919ebd7_29e965bd",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 61
+      },
+      "revId": "01f81986389556fd57a570de08f7f64c34376317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
