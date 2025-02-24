@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9ed586c_29e24ce9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-24T22:59:22Z",
+      "side": 1,
+      "message": "We shouldn\u0027t defer upstream fixes, so I really think we should have fixes on the list which we can take as `FROMLIST` if we are in a hurry.",
+      "parentUuid": "d280afb6_cfb39dc8",
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efff8b9b_a19f3db5",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 6
