@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7d96ac4_3dc1375e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T22:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9493426d_97c4c4a0",
+      "range": {
+        "startLine": 10,
+        "startChar": 58,
+        "endLine": 10,
+        "endChar": 66
+      },
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11172868_f225ca70",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d280afb6_cfb39dc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T22:49:43Z",
+      "side": 1,
+      "message": "I think it can be put together with some more things such as the get version fix for upstream, but for the moment I will keep it like this if it\u0027s ok with you.",
+      "parentUuid": "11172868_f225ca70",
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efff8b9b_a19f3db5",
@@ -54,6 +96,30 @@
       "writtenOn": "2025-02-18T15:00:32Z",
       "side": 1,
       "message": "Why is this called \"res1\"? In Arm architecture terminology, that means it has to be set to 1!",
+      "range": {
+        "startLine": 803,
+        "startChar": 22,
+        "endLine": 803,
+        "endChar": 26
+      },
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bc580ff_3b9e0485",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T22:49:43Z",
+      "side": 1,
+      "message": "Renamed it to `_res`",
+      "parentUuid": "efff8b9b_a19f3db5",
       "range": {
         "startLine": 803,
         "startChar": 22,
@@ -87,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d71dec_247059a1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 820,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T22:49:43Z",
+      "side": 1,
+      "message": "I think we need to do it to notify that we are not using the shared buffer anymore.",
+      "parentUuid": "a696022a_690666b7",
+      "range": {
+        "startLine": 820,
+        "startChar": 0,
+        "endLine": 820,
+        "endChar": 12
+      },
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24459da3_e392d6e5",
@@ -100,6 +190,30 @@
       "writtenOn": "2025-02-18T15:21:41Z",
       "side": 1,
       "message": "Don\u0027t we also need to release the RX buffer in this case?",
+      "range": {
+        "startLine": 836,
+        "startChar": 0,
+        "endLine": 836,
+        "endChar": 41
+      },
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cdd45fe_b4f86198",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T22:49:43Z",
+      "side": 1,
+      "message": "I added a jump to the rx_release",
+      "parentUuid": "24459da3_e392d6e5",
       "range": {
         "startLine": 836,
         "startChar": 0,
