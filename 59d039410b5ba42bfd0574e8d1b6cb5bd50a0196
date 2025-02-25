@@ -190,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ff28db_8f3cb357",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-25T01:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a54cbfe2_45ae2b6f",
+      "range": {
+        "startLine": 1767,
+        "startChar": 11,
+        "endLine": 1767,
+        "endChar": 26
+      },
+      "revId": "59d039410b5ba42bfd0574e8d1b6cb5bd50a0196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c5cbf92_c13b81d0",
@@ -251,6 +275,30 @@
       "side": 1,
       "message": "I think it\u0027s worth cleaning it up now that the jump is unconditional on the MMIO path.",
       "parentUuid": "ee0fcc0b_e5843640",
+      "range": {
+        "startLine": 1773,
+        "startChar": 7,
+        "endLine": 1773,
+        "endChar": 14
+      },
+      "revId": "59d039410b5ba42bfd0574e8d1b6cb5bd50a0196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53e99871_c4ad71ab",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-25T01:51:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "298b9e61_f5b6c14b",
       "range": {
         "startLine": 1773,
         "startChar": 7,
