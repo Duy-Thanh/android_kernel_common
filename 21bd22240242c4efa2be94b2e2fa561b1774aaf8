@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbd82394_f205de6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-25T13:03:32Z",
+      "side": 1,
+      "message": "Please see discussion in aosp/3342376",
+      "parentUuid": "38c97ea4_01e1362f",
+      "revId": "21bd22240242c4efa2be94b2e2fa561b1774aaf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6f5b52b_ccdec152",
@@ -49,6 +67,30 @@
       "writtenOn": "2025-02-19T12:41:49Z",
       "side": 1,
       "message": "there is a built-in C helper that allows many more values for Y/N toggles in sysfs.  Not to say you should use it here, just a hint for future stuff...",
+      "range": {
+        "startLine": 218,
+        "startChar": 1,
+        "endLine": 219,
+        "endChar": 31
+      },
+      "revId": "21bd22240242c4efa2be94b2e2fa561b1774aaf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f925ad_91e68353",
+        "filename": "drivers/staging/android/ashmem_toggle.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-25T13:03:32Z",
+      "side": 1,
+      "message": "Resolving",
+      "parentUuid": "e6f5b52b_ccdec152",
       "range": {
         "startLine": 218,
         "startChar": 1,
