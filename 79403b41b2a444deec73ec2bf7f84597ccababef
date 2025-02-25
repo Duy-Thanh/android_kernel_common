@@ -16,6 +16,24 @@
       "message": "why? What feature does this enable? Please be much more descriptive",
       "revId": "79403b41b2a444deec73ec2bf7f84597ccababef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a22a20ed_baa65b1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3616649
+      },
+      "writtenOn": "2025-02-25T06:43:23Z",
+      "side": 1,
+      "message": "We use \"srtt_us\" in tcp_sock struct to judge the network quality.\nBut sometimes, an uplink request is sent, and downlink data is received for a long time.\nDuring this period, the \"srtt_us\" is not updated, but the \"rcv_rtt_est\" may be updated.\nSo in this case, we may choose to use rcv rtt instead of rtt to judge the network quality.",
+      "parentUuid": "eef1eea0_f2311ba3",
+      "revId": "79403b41b2a444deec73ec2bf7f84597ccababef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
