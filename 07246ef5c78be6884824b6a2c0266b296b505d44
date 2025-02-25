@@ -16,6 +16,23 @@
       "message": "Hi, Merge conflicts have been resolved. Please help to check again.",
       "revId": "07246ef5c78be6884824b6a2c0266b296b505d44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67430e7d_5037e662",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-25T20:09:37Z",
+      "side": 1,
+      "message": "still a merge conflict. Your patches are all conflicting with each other. To avoid this, you should uploaded your patches together as a single patchset instead of as separate individual patches.",
+      "revId": "07246ef5c78be6884824b6a2c0266b296b505d44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
