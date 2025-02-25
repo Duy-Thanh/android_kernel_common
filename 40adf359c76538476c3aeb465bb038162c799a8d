@@ -16,6 +16,24 @@
       "message": "Time to revive this?",
       "revId": "40adf359c76538476c3aeb465bb038162c799a8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25e0e3b8_4410291b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-02-25T20:06:10Z",
+      "side": 1,
+      "message": "merged.",
+      "parentUuid": "0aba4be9_deca4819",
+      "revId": "40adf359c76538476c3aeb465bb038162c799a8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
