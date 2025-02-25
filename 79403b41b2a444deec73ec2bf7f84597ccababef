@@ -34,6 +34,24 @@
       "parentUuid": "eef1eea0_f2311ba3",
       "revId": "79403b41b2a444deec73ec2bf7f84597ccababef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f9719b_6fdc67cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-25T20:15:28Z",
+      "side": 1,
+      "message": "Please put all of this into the commit message",
+      "parentUuid": "a22a20ed_baa65b1b",
+      "revId": "79403b41b2a444deec73ec2bf7f84597ccababef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
