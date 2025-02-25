@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "128b6203_cd655f3b",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-25T21:14:15Z",
+      "side": 1,
+      "message": "This looks a little dodgy, as it appears to assume that the cache writes back with 64-bit single-copy atomicity. Strictly, I think you\u0027d need to clean the l2ptr first and only then set and clean the span.\n\nOf course, using a non-cacheable mapping in the first place would remove the need for CMOs entirely.",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 79
+      },
+      "revId": "789280eaeca3d1c0614884ddc9d63dc4aa0902c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
