@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f914a992_8dee02ae",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-25T01:57:06Z",
+      "side": 1,
+      "message": "Can this ever return `NULL`? If so, should we add a `WARN_ON`?",
+      "revId": "01de8b46585e644b6b1877e681f96bca408a8a60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
