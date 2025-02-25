@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e54ae4ea_e969fff5",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-25T21:12:15Z",
+      "side": 1,
+      "message": "`MAX_FILE_PATH_SIZE` is the sum of the following terms:\n\n1 \u003d\u003d\u003e \"/\" which is added by `file_path()` in `get_memfd_file_name()`\n6 \u003d\u003d\u003e string length of `memfd:` which is added in [1]\n249 \u003d\u003d\u003e max string length of the name provided by userspace [2]\n10 \u003d\u003d\u003e string length of ` (deleted)` \n1 \u003d\u003d\u003e NUL terminating character\n\nWhich all adds up to 267. However, the part of interest here is the name that was supplied during `memfd_create()`, which is 249, which is than ASHMEM_NAME_LEN, so the statement is true, and I don\u0027t think it is necessary to have logic to truncate the string. \n\nmemfd also enforces that the string be under 249 characters in [3]\n\n\n[1] https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/mm/memfd.c;l\u003d369\n[2] https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/mm/memfd.c;l\u003d303\n[3] https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/mm/memfd.c;l\u003d362-363",
+      "parentUuid": "44ccdf1a_6a2ce397",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 28
+      },
+      "revId": "650099dc0247eff9c077bfb46b11fbdc0f54f62e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e25992e5_8128dd0b",
         "filename": "mm/memfd-ashmem-shim.c",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-25T13:26:46Z",
       "side": 1,
       "message": "This adds the seal even if `prot \u003d\u003d curr_prot \u003d\u003d PROT_READ|PROT_EXEC`.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 0
+      },
+      "revId": "650099dc0247eff9c077bfb46b11fbdc0f54f62e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623cc7a9_26f17d2c",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-25T21:12:15Z",
+      "side": 1,
+      "message": "If `curr_prot \u003d\u003d PROT_READ | PROT_EXEC` then the write seal has already been applied on the file. However, `memfd_fcntl()` doesn\u0027t treat applying the seal multiple times as an error. Are you saying that we should check to ensure we don\u0027t apply the seal multiple times?",
+      "parentUuid": "e25992e5_8128dd0b",
       "range": {
         "startLine": 114,
         "startChar": 0,
