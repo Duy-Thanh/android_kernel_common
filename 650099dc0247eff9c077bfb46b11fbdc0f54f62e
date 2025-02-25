@@ -93,6 +93,30 @@
       },
       "revId": "650099dc0247eff9c077bfb46b11fbdc0f54f62e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4256fcd_335dc5d0",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-25T21:31:26Z",
+      "side": 1,
+      "message": "The logic I had in previous patchsets applied the seal unconditionally, even when `PROT_WRITE` was in `prot`. I\u0027ve updated the logic to only apply the seal if `PROT_WRITE` is not in `prot`. Thanks for catching that!",
+      "parentUuid": "623cc7a9_26f17d2c",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 0
+      },
+      "revId": "650099dc0247eff9c077bfb46b11fbdc0f54f62e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
