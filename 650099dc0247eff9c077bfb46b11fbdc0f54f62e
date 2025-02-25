@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ccdf1a_6a2ce397",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-25T13:26:46Z",
+      "side": 1,
+      "message": "The value of `MAX_FILE_PATH_SIZE` is 266 whereas `ASHMEM_NAME_LEN` is 256, so this seems false? We probably want a truncation step here if the name is long.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 28
+      },
+      "revId": "650099dc0247eff9c077bfb46b11fbdc0f54f62e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e25992e5_8128dd0b",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-25T13:26:46Z",
+      "side": 1,
+      "message": "This adds the seal even if `prot \u003d\u003d curr_prot \u003d\u003d PROT_READ|PROT_EXEC`.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 0
+      },
+      "revId": "650099dc0247eff9c077bfb46b11fbdc0f54f62e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
