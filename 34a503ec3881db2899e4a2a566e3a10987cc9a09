@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a118179e_198c80a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-26T16:55:43Z",
+      "side": 1,
+      "message": "Updated ABI file should be included.\nAlso please rebase the patch.",
+      "revId": "34a503ec3881db2899e4a2a566e3a10987cc9a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
