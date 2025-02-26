@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eed7568f_35414180",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-26T23:35:01Z",
+      "side": 1,
+      "message": "Ok, I see what you are doing now. I think it would be clearer if you had something like this:\n```\nbool folio_added \u003d false;\n...\ntrace_android_vh_add_lazyfree_folio(lruvec, folio, \u0026folio_added);\nif (!folio_added)\n\tlruvec_add_folio(lruvec, folio);\n__count_vm_events(PGLAZYFREE, nr_pages);\n__count_memcg_events(lruvec_memcg(lruvec), PGLAZYFREE,\n\t\t     nr_pages);\t\n```",
+      "parentUuid": "01ae7d30_c681dba2",
+      "range": {
+        "startLine": 630,
+        "startChar": 2,
+        "endLine": 630,
+        "endChar": 38
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e89f5c0_a1785627",
         "filename": "mm/swap.c",
         "patchSetId": 1
