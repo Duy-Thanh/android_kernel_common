@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "841e4142_7e7c5db6",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-02-26T03:51:33Z",
+      "side": 1,
+      "message": "Does this need to take a pointer to the bool? So if `trace_android_rvh_after_dequeue_task()` changes the behavior, the result will be changed as well?",
+      "revId": "d34019e9d76977b4b9b2cde80b49d33ccc0e867d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
