@@ -16,6 +16,24 @@
       "message": "Should we split this into a separate CL? We could even try to upstream it.",
       "revId": "fb6f485fbe7b5fb9fd4c16b91377a6ddcd40f123",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "870aba44_c9c9a626",
+        "filename": "drivers/firmware/arm_ffa/driver.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-26T16:59:45Z",
+      "side": 0,
+      "message": "yes, I think we should do that, but I would not split it as it make sense to keep it self contained. I can send it on the list",
+      "parentUuid": "2847144a_853dd7b3",
+      "revId": "fb6f485fbe7b5fb9fd4c16b91377a6ddcd40f123",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
