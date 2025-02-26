@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa05f48_9ab8c845",
+        "filename": "android/abi_gki_aarch64_aptiv",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2025-02-26T18:01:57Z",
+      "side": 1,
+      "message": "Can we rename the file to abi_gki_aarch64_volvo?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "3e7c9457ba5aeaa28fe9eec45505270d17ad3a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
