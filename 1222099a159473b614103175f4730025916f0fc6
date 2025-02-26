@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a79a412d_3709b34d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2025-02-26T18:04:51Z",
+      "side": 1,
+      "message": "You are adding a whole new symbol list.\nWhy do you only highlight these symbols? Are they dependent on any gki_defconfig changes? If yes, they need to be separated to different CLs.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "1222099a159473b614103175f4730025916f0fc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04cbe3d2_945471bd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 10
