@@ -16,6 +16,24 @@
       "message": "Can this ever return `NULL`? If so, should we add a `WARN_ON`?",
       "revId": "01de8b46585e644b6b1877e681f96bca408a8a60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e90f0e08_44db24f4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-26T17:01:48Z",
+      "side": 1,
+      "message": "Only when we run the hyp code coming from host, yes let me add that.",
+      "parentUuid": "f914a992_8dee02ae",
+      "revId": "01de8b46585e644b6b1877e681f96bca408a8a60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
