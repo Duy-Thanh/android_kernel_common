@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "877c4f76_8bf4e434",
+        "filename": "android/abi_gki_aarch64.stg.allowed_breaks",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-26T20:19:35Z",
+      "side": 1,
+      "message": "I think you don\u0027t have to show this, you are removing the symbols, that\u0027s the real issue, this is just a \"warning\"",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 0
+      },
+      "revId": "1dab4a29e4c2e7279c7c0132fec1c669aba8ff60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
