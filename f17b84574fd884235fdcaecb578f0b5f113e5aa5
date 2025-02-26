@@ -33,6 +33,24 @@
       "message": "A couple of hours after my comment here, we managed to get the backup plan working, meaning we patched the driver so we dont need to add the symbols I mentioned here. (they are already added in later kernel lists too)",
       "revId": "f17b84574fd884235fdcaecb578f0b5f113e5aa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe8134e_4153a6bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-02-26T09:30:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "57737f60_904c4921",
+      "revId": "f17b84574fd884235fdcaecb578f0b5f113e5aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

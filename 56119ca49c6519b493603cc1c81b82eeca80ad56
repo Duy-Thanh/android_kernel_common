@@ -322,6 +322,24 @@
       "parentUuid": "2a5112fb_eae11507",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82985476_a6a33161",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-02-26T09:30:02Z",
+      "side": 1,
+      "message": "As discussed on Yesterday\u0027s meeting with Bruno, i have removed gpio_export from those symbols list. therefore we could proceed here with current list.",
+      "parentUuid": "21ab3ccc_05e90773",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
