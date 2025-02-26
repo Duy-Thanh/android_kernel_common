@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc5839f6_3e836c78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-02-26T08:40:59Z",
+      "side": 1,
+      "message": "As per yestedays discussion with google, i have excluded from this commit gpio_export line. So we can proceed with this part of symbols.",
+      "revId": "169a1a58ae76f32d0b3189bc11c64cf4a99a5e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
