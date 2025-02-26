@@ -22,6 +22,30 @@
       },
       "revId": "1dab4a29e4c2e7279c7c0132fec1c669aba8ff60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a29c46c_91edda01",
+        "filename": "android/abi_gki_aarch64.stg.allowed_breaks",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-26T21:46:33Z",
+      "side": 1,
+      "message": "good point, I don\u0027t know if this \"fully defined\" -\u003e \"declared\" change should be added to the allowed_breaks file. Maybe @vvvvvv@google.com can confirm.",
+      "parentUuid": "877c4f76_8bf4e434",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 0
+      },
+      "revId": "1dab4a29e4c2e7279c7c0132fec1c669aba8ff60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
