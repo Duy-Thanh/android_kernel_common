@@ -340,6 +340,24 @@
       "parentUuid": "21ab3ccc_05e90773",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217b3cf4_9a0c5d3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2025-02-26T17:36:27Z",
+      "side": 1,
+      "message": "Kamil, could you stack your CLs?\nThis CL should be in the bottom (assuming it\u0027s not depending on any gki_defconfig changes). And please ensure each bug link is relevant to your CL.",
+      "parentUuid": "82985476_a6a33161",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
