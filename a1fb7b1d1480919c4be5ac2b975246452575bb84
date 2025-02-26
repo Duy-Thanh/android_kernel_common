@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41241382_e3085f61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-26T19:45:23Z",
+      "side": 1,
+      "message": "nit: s/tirvial/trivial",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 13
+      },
+      "revId": "a1fb7b1d1480919c4be5ac2b975246452575bb84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
