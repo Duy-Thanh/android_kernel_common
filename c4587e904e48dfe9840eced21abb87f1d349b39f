@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f556c7f_be992386",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-02-26T15:42:22Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not refer to the upstream commit.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCommit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003cfull-sha1\u003e)\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "c4587e904e48dfe9840eced21abb87f1d349b39f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
