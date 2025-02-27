@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a8a102d_42224a70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2041020
+      },
+      "writtenOn": "2025-02-27T06:49:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feb7d1d0_3d49dbef",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "e7beba5c97a6a30d8d94928ed7d5b8f93d5c7913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c318631a_a83cfa02",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-02-26T18:13:49Z",
       "side": 1,
       "message": "Hi Tangquan, \n\nPlease add the symbols to the symbol list and update the abi in a patch at the end of the series.",
+      "revId": "e7beba5c97a6a30d8d94928ed7d5b8f93d5c7913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04913578_cdb387da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2041020
+      },
+      "writtenOn": "2025-02-27T06:49:04Z",
+      "side": 1,
+      "message": "pdate oplus symbol list:\nhttps://android-review.googlesource.com/c/kernel/common/+/3512931",
+      "parentUuid": "c318631a_a83cfa02",
       "revId": "e7beba5c97a6a30d8d94928ed7d5b8f93d5c7913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
