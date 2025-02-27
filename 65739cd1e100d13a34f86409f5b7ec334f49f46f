@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfec6b51_71d8402b",
+        "filename": "include/linux/gfp.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-02-27T04:03:29Z",
+      "side": 1,
+      "message": "I think the linter is complaining because the return is double indented",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 25
+      },
+      "revId": "65739cd1e100d13a34f86409f5b7ec334f49f46f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
