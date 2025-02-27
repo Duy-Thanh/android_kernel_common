@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9444d0c6_6df131e3",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 6
+      },
+      "lineNbr": 2578,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-02-27T00:28:53Z",
+      "side": 0,
+      "message": "I think this one needs to remain.",
+      "range": {
+        "startLine": 2578,
+        "startChar": 2,
+        "endLine": 2578,
+        "endChar": 30
+      },
+      "revId": "bff5536735b74f484e61e70d1e1ec481d3d58872",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
