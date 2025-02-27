@@ -33,6 +33,24 @@
       "message": "Shouldn\u0027t this be a cherry-pick of I96cec738b6b4da05c76132e7b6c71ff9c4c63daf?",
       "revId": "f58796bb98ea45bec04e3f23b8fa094542a8c585",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af3e3f9b_e5938973",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1974145
+      },
+      "writtenOn": "2025-02-27T01:17:43Z",
+      "side": 1,
+      "message": "182b090f35f30b78f9c830496d755c5f63fc40a0 and I96cec738b6b4da05c76132e7b6c71ff9c4c63daf the content of the two submissions to modify the same, need to be re-submitted from the mainline android15-6.6 cherry-pick?",
+      "parentUuid": "62fcc87f_c28ec8ae",
+      "revId": "f58796bb98ea45bec04e3f23b8fa094542a8c585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
