@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31d0d616_aeac8ead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-02-27T22:38:16Z",
+      "side": 1,
+      "message": "I\u0027ve update ABI file, because renamed field was ABI monitored. This change is ok until we freeze ABI, however it needs to be submitted with Lint+2.",
+      "revId": "c4f24f21d3692108bff2fba6c9ed2f753511f462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
