@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/399286590",
       "revId": "46cb47715aff56b617277811ab95144c8daa8357",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f03772_71b54b17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-27T03:44:28Z",
+      "side": 1,
+      "message": "Lint+2 since the patch is in android15-6.6, but with a different Change-Id: c3fe4328199a (\"UPSTREAM: f2fs: modify f2fs_is_checkpoint_ready logic to allow more data to be written with the CP disable\")",
+      "revId": "46cb47715aff56b617277811ab95144c8daa8357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
