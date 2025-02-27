@@ -34,6 +34,24 @@
       "parentUuid": "412b5548_e7e7e95c",
       "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e16dccf_28ea0358",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3907204
+      },
+      "writtenOn": "2025-02-27T07:32:55Z",
+      "side": 1,
+      "message": "Lokesh, yes. currently, it is a android-specific problem and exactly the one I reported here:\nhttps://lore.kernel.org/linux-mm/CAGsJ_4yx1\u003djaQmDG_9rMqHFFkoXqMJw941eYvtby28OqDq+S7g@mail.gmail.com/\n\nsplit_folio() will migrate mTHP from TAO\u0027s virtual zones to new small folios instead of splitting the original mTHP into small folios  which are still the original memory. The benefit is that we don\u0027t get buddy/memory fragmented and ensure the success ratio of mTHP allocation. but it has some conflicts with userfaultfd_move().\n\nthe fix only makes sure kernel won\u0027t crash but we are losing all the performanc benefits of userfaultfd_move().\n\nI\u0027d say there is nothing wrong with either TAO or userfaultfd_move(). but when they meet each other and if we have to do split, UFFDIO_MOVE will be absolutely worse than UFFDIO_COPY.\n\nI guess we can also resolve the performance issue once we enable batched moving in both kernel and userspace art. For this moment, we at least need to fix the kernel panic.",
+      "parentUuid": "bff635a8_95552057",
+      "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
