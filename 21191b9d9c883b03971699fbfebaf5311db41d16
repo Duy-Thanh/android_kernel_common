@@ -16,6 +16,24 @@
       "message": "https://android.googlesource.com/kernel/common/+/789280eaeca3d1c0614884ddc9d63dc4aa0902c5/mm/huge_memory.c#3463",
       "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff635a8_95552057",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2025-02-27T05:05:42Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused. While this patch seems safe, I couldn\u0027t fine on upstream kernels any possibility where `split_huge_page_to_list` can return a value `\u003e 0`. This link that you shared seems to be doing so. Is it because of some Android-specific patch?",
+      "parentUuid": "412b5548_e7e7e95c",
+      "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
