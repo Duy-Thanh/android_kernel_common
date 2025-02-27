@@ -1466,7 +1466,9 @@
   of_usb_host_tpl_support
   __page_frag_alloc_align
   __page_frag_cache_drain
+  __page_pinner_put_page
   page_frag_free
+  page_pinner_inited
   panic
   panic_notifier_list
   param_array_ops
