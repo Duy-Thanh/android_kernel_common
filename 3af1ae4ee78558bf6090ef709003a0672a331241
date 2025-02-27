@@ -16,6 +16,24 @@
       "message": "This is still in linux-next, but should be fine for a FROMGIT.",
       "revId": "3af1ae4ee78558bf6090ef709003a0672a331241",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c42e5998_fc5e01f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-02-27T15:26:30Z",
+      "side": 1,
+      "message": "This is in a maintainer tree.",
+      "parentUuid": "8713d2f0_4e3651c6",
+      "revId": "3af1ae4ee78558bf6090ef709003a0672a331241",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
