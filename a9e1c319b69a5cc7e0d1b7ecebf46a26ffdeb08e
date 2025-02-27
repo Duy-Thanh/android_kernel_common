@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09a719a7_9b6ca726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2025-02-27T12:24:46Z",
+      "side": 1,
+      "message": "previously it failed because it again used an old reference: \n```                \"name\": \"kernel/google-modules/raviole-device\",\n                \"path\": \"private/google-modules/soc/gs\",\n                \"remote\": {\n                    \"fetch\": \"https://android.googlesource.com/\",\n                    \"name\": \"aosp\",\n                    \"review\": \"https://android.googlesource.com/\"\n                },\n                \"revision\": \"8ccbfc5f9a299d3b6bf25e232593a018d8f0cec2\"\n            },",
+      "revId": "a9e1c319b69a5cc7e0d1b7ecebf46a26ffdeb08e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
