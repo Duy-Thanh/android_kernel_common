@@ -16,6 +16,24 @@
       "message": "Pixel presubmit tests are expectedly failing on this chain of changes, because current binaries are still using `xhci_sideband_` symbols. And switching to vendor module will probably fail tests as well on the Pixel side until this change is submitted. @willmcvicker@google.com, do you have plan on how to resolve this circular dependency problem?",
       "revId": "f78809c263de5737d29111dd70185ece2082007a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44e2f02_07386b4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-02-27T16:47:33Z",
+      "side": 1,
+      "message": "I think I figured this out and we need to bypass presubmit for this change. As soon as we have postsubmit builds without `xhci_sideband_` symbols the test should work again.",
+      "parentUuid": "c0723060_fb66849c",
+      "revId": "f78809c263de5737d29111dd70185ece2082007a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
