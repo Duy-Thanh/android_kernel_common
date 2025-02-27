@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "feb7d1d0_3d49dbef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-02-27T04:05:04Z",
+      "side": 1,
+      "message": "Please fix the name in the your signoff:\n\nTangquan Zheng \u003czhengtangquan@oppo.com\u003e",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 53
+      },
+      "revId": "e7beba5c97a6a30d8d94928ed7d5b8f93d5c7913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c318631a_a83cfa02",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
