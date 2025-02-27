@@ -88,6 +88,24 @@
       "parentUuid": "0e119925_82c55fad",
       "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "062f02df_272e602f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3907204
+      },
+      "writtenOn": "2025-02-27T20:37:56Z",
+      "side": 1,
+      "message": "My understanding is that 6.1 hasn\u0027t Yu Zhao\u0027s TAO. So it doesn\u0027t need this fix. For kernel after 6.6, if TAO is integrated, we will need this fix. Our test on 6.6 shows TAO shows better performance than the original buddy for the mTHP-enabled case.",
+      "parentUuid": "4e1af8ab_a789016a",
+      "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
