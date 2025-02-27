@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba90717_5327ab7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-02-27T00:04:55Z",
+      "side": 1,
+      "message": "Looks like Andrew rebased it: c02b578eceb79f02d1bda2928558f61fed207b71",
+      "range": {
+        "startLine": 100,
+        "startChar": 27,
+        "endLine": 100,
+        "endChar": 67
+      },
+      "revId": "abc7dc41c619fe375903041e39dc67fc7033e5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5797486b_3514aa79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-02-27T00:04:55Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "range": {
+        "startLine": 101,
+        "startChar": 6,
+        "endLine": 101,
+        "endChar": 7
+      },
+      "revId": "abc7dc41c619fe375903041e39dc67fc7033e5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
