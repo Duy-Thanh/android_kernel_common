@@ -22,6 +22,30 @@
       },
       "revId": "3e7c9457ba5aeaa28fe9eec45505270d17ad3a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a53c9d_73aab78f",
+        "filename": "android/abi_gki_aarch64_aptiv",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-02-27T08:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caa05f48_9ab8c845",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "3e7c9457ba5aeaa28fe9eec45505270d17ad3a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
