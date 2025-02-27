@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f80dbd_cbf239fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-27T00:41:58Z",
+      "side": 1,
+      "message": "```\nThese symbols are missing from the symbol list and are not available at runtime for unsigned modules:\n  __page_pinner_put_page required by [\u0027virtio_net.ko\u0027]\n  page_pinner_inited required by [\u0027virtio_net.ko\u0027]\n```\n\nApparently symbol list check is done in android16-6.12. You need to add them in `gki/aarch64/symbols/pixel` symbols list.",
+      "revId": "556441e52ee4ae1b41903075ab9b1b91e81385a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
