@@ -34,6 +34,24 @@
       "parentUuid": "c0723060_fb66849c",
       "revId": "f78809c263de5737d29111dd70185ece2082007a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d485ee83_56749638",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-27T16:50:01Z",
+      "side": 1,
+      "message": "Yes we are planning on resolving this. These test are expected to be broken as of now. Note that the top change 3511759 are the symbols needed by this corresponding xhci-sideband vendor module.",
+      "parentUuid": "c44e2f02_07386b4a",
+      "revId": "f78809c263de5737d29111dd70185ece2082007a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
