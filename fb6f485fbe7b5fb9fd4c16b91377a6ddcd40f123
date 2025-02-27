@@ -34,6 +34,24 @@
       "parentUuid": "2847144a_853dd7b3",
       "revId": "fb6f485fbe7b5fb9fd4c16b91377a6ddcd40f123",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "683cd5a2_587dcc28",
+        "filename": "drivers/firmware/arm_ffa/driver.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-27T18:43:04Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "870aba44_c9c9a626",
+      "revId": "fb6f485fbe7b5fb9fd4c16b91377a6ddcd40f123",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
