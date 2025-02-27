@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e2721a7_d3ff7ffc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-02-27T08:14:52Z",
+      "side": 1,
+      "message": "Previous *symbols",
+      "parentUuid": "7f97cd90_6caceec6",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "1222099a159473b614103175f4730025916f0fc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04cbe3d2_945471bd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 10
