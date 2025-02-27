@@ -16,6 +16,24 @@
       "message": "ACK on merging it there, but please note that this config file is no longer used for developing the kernel, as we\u0027ve switched to kleaf. This has few implications:\n\n1. The `arch/(x86|arm64)/configs/gki_defconfig` should be updated instead (both of them)\n2. The change will **have to be upstream** to `android-mainline` or otherwise we won\u0027t be able to apply this change.\n\nWe can accept this divergence for `android15-6.6-desktop` for `gki_defconfig` files, but I would recommend with attempting to upstream this change first, and then backport it to this branch (and to `android16-6.12`) from the `android-mainline`. That will show us if this kind of config change will be accepted by the Android team for arms, and if not, find alternative, upstreamable solution.",
       "revId": "49a0462a388ceddd89c0bd7175f3916d71e8779b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72467f0a_f2264a44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-02-27T13:07:11Z",
+      "side": 1,
+      "message": "Please mark this comment as resolved if you\u0027re ok with temporarely merging this divergence and let me know which approach for upstreaming you choose.",
+      "parentUuid": "04cc4816_63ff7993",
+      "revId": "49a0462a388ceddd89c0bd7175f3916d71e8779b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
