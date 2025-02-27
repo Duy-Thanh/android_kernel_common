@@ -33,6 +33,23 @@
       "message": "Hi gin ago, do you still need this commit? We are switching to this branch and need this cherry-pick to be merged in this branch, could you please abandon or delete this change so that we can finish our work? thanks a lot.",
       "revId": "4002c4c76c79baa9e99a7fb55fe3cb9f014f62c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ca6d61b_51f3ddea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3821538
+      },
+      "writtenOn": "2025-02-27T13:26:20Z",
+      "side": 1,
+      "message": "Hi Todd, some of honor\u0027s products are switching to kernel of this monthly branch, thus we need this cherry-pick to be merged in a hurry, but the change-ID on this branch has been occupied by this commit which is in merge-conflict status. We have tried to get in touch with the owner but get no response till now. Could you please help us abandon or delete this change so that we can cherry-pick and solve merging issues on our own? Thank you very much.",
+      "revId": "4002c4c76c79baa9e99a7fb55fe3cb9f014f62c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
