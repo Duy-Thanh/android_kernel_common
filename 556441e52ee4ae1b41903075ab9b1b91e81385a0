@@ -16,6 +16,24 @@
       "message": "```\nThese symbols are missing from the symbol list and are not available at runtime for unsigned modules:\n  __page_pinner_put_page required by [\u0027virtio_net.ko\u0027]\n  page_pinner_inited required by [\u0027virtio_net.ko\u0027]\n```\n\nApparently symbol list check is done in android16-6.12. You need to add them in `gki/aarch64/symbols/pixel` symbols list.",
       "revId": "556441e52ee4ae1b41903075ab9b1b91e81385a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dabf0a27_709e41db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-02-27T11:52:10Z",
+      "side": 1,
+      "message": "My 2p: The build failure is reported for the virtual device build, so I\u0027d suggest to use `gki/aarch64/symbols/virtual_device` instead.\n\nYou can update the list by running:\n* `tools/bazel run //common-modules/virtual-device:virtual_device_aarch64_abi_update_symbol_list` \n\n, on an up-to date checkout.",
+      "parentUuid": "45f80dbd_cbf239fe",
+      "revId": "556441e52ee4ae1b41903075ab9b1b91e81385a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
