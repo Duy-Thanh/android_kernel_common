@@ -16,6 +16,23 @@
       "message": "Please see comments on the bug",
       "revId": "c7203c941bf2cff59cbd2789e98b6162a3855642",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a85a23_3df85131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1692443
+      },
+      "writtenOn": "2025-02-27T01:45:55Z",
+      "side": 1,
+      "message": "Is there any issue with the merge of this patch? We also need this patch. Please share the progress here. Thanks.",
+      "revId": "c7203c941bf2cff59cbd2789e98b6162a3855642",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
