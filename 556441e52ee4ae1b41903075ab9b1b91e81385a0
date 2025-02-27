@@ -34,6 +34,24 @@
       "parentUuid": "45f80dbd_cbf239fe",
       "revId": "556441e52ee4ae1b41903075ab9b1b91e81385a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b3695e0_1bc40172",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1874171
+      },
+      "writtenOn": "2025-02-27T17:55:22Z",
+      "side": 1,
+      "message": "Thanks! Now added the symbols in virtual_device with a separate patch on top. Let\u0027s see if this would be enough.",
+      "parentUuid": "dabf0a27_709e41db",
+      "revId": "556441e52ee4ae1b41903075ab9b1b91e81385a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
