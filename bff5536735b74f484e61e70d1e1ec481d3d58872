@@ -22,6 +22,30 @@
       },
       "revId": "bff5536735b74f484e61e70d1e1ec481d3d58872",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51fcc5a2_a8190a06",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 6
+      },
+      "lineNbr": 2578,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-27T04:52:18Z",
+      "side": 0,
+      "message": "definitely needs to stay. I was playing around regenerating the symbol list after all these changes and this kept getting re-added.",
+      "parentUuid": "9444d0c6_6df131e3",
+      "range": {
+        "startLine": 2578,
+        "startChar": 2,
+        "endLine": 2578,
+        "endChar": 30
+      },
+      "revId": "bff5536735b74f484e61e70d1e1ec481d3d58872",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
