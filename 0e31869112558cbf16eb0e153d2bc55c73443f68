@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2631f8d_2daf49ed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-27T07:18:56Z",
+      "side": 1,
+      "message": "I made an attempt at that in https://r.android.com/3509864, maybe we could squash it here.",
+      "parentUuid": "a895668a_d109d47a",
+      "range": {
+        "startLine": 354,
+        "startChar": 3,
+        "endLine": 354,
+        "endChar": 9
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74cde934_2e25ae5e",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
@@ -424,6 +448,24 @@
       "side": 1,
       "message": "Update: I added code in Trusty to return `RETRY` at https://r.android.com/c/trusty/lk/trusty/+/3484326/13/lib/sm/sm.c#435, you can enable it locally for testing.",
       "parentUuid": "32da4dfb_9f08a441",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c1ebdb_990b61e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-27T07:18:56Z",
+      "side": 1,
+      "message": "I made https://r.android.com/3509866 for my own testing, feel free to squash it here.",
+      "parentUuid": "3f856b3a_2e6b3cbe",
       "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
