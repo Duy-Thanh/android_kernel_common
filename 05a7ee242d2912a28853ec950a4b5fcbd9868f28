@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85502dd0_d401e944",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-27T19:38:39Z",
+      "side": 1,
+      "message": "Matthias, the ABI check complains about CSC change but this is a new hook. Could you please take a look and advise?",
+      "revId": "05a7ee242d2912a28853ec950a4b5fcbd9868f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
