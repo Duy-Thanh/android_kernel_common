@@ -46,6 +46,30 @@
       },
       "revId": "1dab4a29e4c2e7279c7c0132fec1c669aba8ff60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f311261_6ffd8eba",
+        "filename": "android/abi_gki_aarch64.stg.allowed_breaks",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-02-27T13:57:13Z",
+      "side": 1,
+      "message": "TL;DR: this change is needed in `android/abi_gki_aarch64.stg.allowed_breaks` \n\nThis is indeed ABI break: after disabling config option this type definition disappears from kernel, because its definition is accessed only in `drivers/usb/host/xhci-sideband.c`, which is not compiled in after config change. After this change ABI tools will stop monitoring this type and in normal circumstances this is considered a break.",
+      "parentUuid": "9a29c46c_91edda01",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 0
+      },
+      "revId": "1dab4a29e4c2e7279c7c0132fec1c669aba8ff60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
