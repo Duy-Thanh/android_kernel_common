@@ -52,6 +52,24 @@
       "parentUuid": "bff635a8_95552057",
       "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e119925_82c55fad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2025-02-27T19:30:34Z",
+      "side": 1,
+      "message": "Would this need to be fixed in 6.1 and future android kernels as well? I had cherry-picked MOVE ioctl to all \u003e6.1 Android kernels.\n\nThanks for clarifying, Barry. For this patch, I think we are good to go. I do have some other thoughts about mTHP+MOVE, which we can discuss over an email thread.",
+      "parentUuid": "8e16dccf_28ea0358",
+      "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
