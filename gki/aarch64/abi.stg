@@ -312915,7 +312915,7 @@ elf_symbol {
   name: "__page_pinner_put_page"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3d53700f
+  crc: 0xd17166df
   type_id: 0x11388634
   full_name: "__page_pinner_put_page"
 }
