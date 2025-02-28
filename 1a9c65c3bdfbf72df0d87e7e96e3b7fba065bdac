@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1f741b_036c7e5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-02-28T02:31:39Z",
+      "side": 1,
+      "message": "Note: This fixes b16b327edb4d but I\u0027m not cherry-picking b16b327edb4d because it\u0027s gonna reverted. The reason is that 980d6e2904df is a better solution and we don\u0027t need to keep b16b327edb4d anymore.\n\nSee also https://patchwork.kernel.org/project/bluetooth/patch/20250227171417.4023415-1-chharry@google.com/",
+      "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
