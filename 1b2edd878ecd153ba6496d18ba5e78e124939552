@@ -16,6 +16,24 @@
       "message": "I think it makes more sense to make the author surenb.\n\nUnless Charan is happy to add a signed-off-by line.",
       "revId": "1b2edd878ecd153ba6496d18ba5e78e124939552",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81f9e01_4c995898",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-02-28T14:34:49Z",
+      "side": 1,
+      "message": "Just to clarify: Lint-1 is caused by checkpatch:\n\n```\nCommit is not signed off by the author!\n\nMissing tag: Signed-off-by: Charan Teja Kalla \u003cquic_charante@quicinc.com\u003e\n```\n\nPlease change the author of this change or add additional `Signed-off-by` tag.",
+      "parentUuid": "ac51c3a2_a2b3295d",
+      "revId": "1b2edd878ecd153ba6496d18ba5e78e124939552",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
