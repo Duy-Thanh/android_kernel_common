@@ -33,6 +33,24 @@
       "message": "Is there any issue with the merge of this patch? We also need this patch. Please share the progress here. Thanks.",
       "revId": "c7203c941bf2cff59cbd2789e98b6162a3855642",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b776da_0173076c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-02-28T17:49:12Z",
+      "side": 1,
+      "message": "We found that vendors were making copies of the page pool and deferred freeing code with slight tweaks, and not actually using the ACK versions.\n\nAlso while the page pool and deferred free helper were left in ACK as available libraries in 15-6.6, their use was removed from the ACK system heap due to some performance issues and questionable efficacy, since the pools were often empty because of constant memory pressure on Android. So they\u0027ve been used in only some external vendor heap implementations since then. (Actually since 5.15 for `deferred_free`)\n\nIt\u0027s not clear that having a common centralized helper in ACK is widely helpful, and it isn\u0027t currently tested by our CI since there is no longer an in-tree user. So if you would like to continue using the deferred free helper could you please include it as part of your vendor module?",
+      "parentUuid": "48a85a23_3df85131",
+      "revId": "c7203c941bf2cff59cbd2789e98b6162a3855642",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
