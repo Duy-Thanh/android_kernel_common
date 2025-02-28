@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f9e368_a63d3f76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-28T16:29:23Z",
+      "side": 1,
+      "message": "Please create a patch on top of this one to add the new symbols to your symbol list. Note that the symbol lists are moved to gki/aarch64/symbols/ for android16-6.12",
+      "revId": "5dee5095a05de0575d0fe43873ebdebd287a17b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
