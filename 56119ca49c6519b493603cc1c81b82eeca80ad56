@@ -358,6 +358,24 @@
       "parentUuid": "82985476_a6a33161",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438560a5_2fb7a876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-02-28T12:50:54Z",
+      "side": 1,
+      "message": "Shall be already ok, since we can consider that this repo\nhttps://android-review.googlesource.com/c/kernel/common/+/3450449\nwon\u0027t be accepted by google. So this one is actually the first one. Shall i do anything else here?",
+      "parentUuid": "217b3cf4_9a0c5d3d",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
