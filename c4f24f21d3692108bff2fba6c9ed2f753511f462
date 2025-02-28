@@ -33,6 +33,23 @@
       "message": "Is there a reason we can\u0027t wait for this to land in a maintainer tree and take it as FROMGIT?",
       "revId": "c4f24f21d3692108bff2fba6c9ed2f753511f462",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35480236_cba20a3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-28T18:43:44Z",
+      "side": 1,
+      "message": "please rebase the series to resolve the merge confict",
+      "revId": "c4f24f21d3692108bff2fba6c9ed2f753511f462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
