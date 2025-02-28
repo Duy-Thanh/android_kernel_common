@@ -50,6 +50,42 @@
       "message": "please rebase the series to resolve the merge confict",
       "revId": "c4f24f21d3692108bff2fba6c9ed2f753511f462",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e955dadd_b68ce05e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-28T19:52:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "858dfd2f_02f8f1de",
+      "revId": "c4f24f21d3692108bff2fba6c9ed2f753511f462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55e98e43_6a87fa24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-28T19:52:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35480236_cba20a3f",
+      "revId": "c4f24f21d3692108bff2fba6c9ed2f753511f462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
