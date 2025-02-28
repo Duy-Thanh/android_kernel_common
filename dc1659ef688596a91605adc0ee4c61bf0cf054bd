@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c3eccd0_166ca309",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 2485,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-02-28T15:13:41Z",
+      "side": 0,
+      "message": "I think we can skip this one.",
+      "range": {
+        "startLine": 2485,
+        "startChar": 2,
+        "endLine": 2485,
+        "endChar": 33
+      },
+      "revId": "dc1659ef688596a91605adc0ee4c61bf0cf054bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
