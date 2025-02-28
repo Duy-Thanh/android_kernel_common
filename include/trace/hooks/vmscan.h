@@ -24,6 +24,10 @@ DECLARE_HOOK(android_vh_do_shrink_slab,
 DECLARE_HOOK(android_vh_shrink_node_memcgs,
 	TP_PROTO(struct mem_cgroup *memcg, bool *skip),
 	TP_ARGS(memcg, skip));
+DECLARE_HOOK(android_vh_do_shrink_slab_ex,
+	TP_PROTO(struct shrink_control *shrinkctl, struct shrinker *shrinker,
+		long *freeable, int priority),
+	TP_ARGS(shrinkctl, shrinker, freeable, priority));
 DECLARE_HOOK(android_vh_modify_scan_control,
 	TP_PROTO(u64 *ext, unsigned long *nr_to_reclaim,
 	struct mem_cgroup *target_mem_cgroup,
