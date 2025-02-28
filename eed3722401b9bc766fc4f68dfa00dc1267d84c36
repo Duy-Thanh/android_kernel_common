@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46898892_33acf029",
+        "filename": "mm/memory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3666,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-28T16:08:52Z",
+      "side": 1,
+      "message": "missing space",
+      "range": {
+        "startLine": 3666,
+        "startChar": 1,
+        "endLine": 3666,
+        "endChar": 4
+      },
+      "revId": "eed3722401b9bc766fc4f68dfa00dc1267d84c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
