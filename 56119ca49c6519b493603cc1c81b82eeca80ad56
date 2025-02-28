@@ -376,6 +376,24 @@
       "parentUuid": "217b3cf4_9a0c5d3d",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9afa24d5_bd82e2a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2025-02-28T18:09:50Z",
+      "side": 1,
+      "message": "See presubmit results - you need to update reference ABI following https://source.android.com/docs/core/architecture/kernel/howto-abi-monitor#update-abi\n\nABI DIFFERENCES HAVE BEEN DETECTED!\n\n12 function symbol(s) added\n  \u0027int __serdev_device_driver_register(struct serdev_device_driver *, struct module *)\u0027\n  \u0027int genphy_c45_pma_resume(struct phy_device *)\u0027\n  \u0027int genphy_c45_pma_suspend(struct phy_device *)\u0027\n  \u0027int schedule_hrtimeout_range(ktime_t *, u64, const enum hrtimer_mode)\u0027\n  \u0027void serdev_device_close(struct serdev_device *)\u0027\n  \u0027int serdev_device_open(struct serdev_device *)\u0027\n  \u0027unsigned int serdev_device_set_baudrate(struct serdev_device *, unsigned int)\u0027\n  \u0027void serdev_device_set_flow_control(struct serdev_device *, bool)\u0027\n  \u0027int serdev_device_set_parity(struct serdev_device *, enum serdev_parity)\u0027\n  \u0027int serdev_device_write(struct serdev_device *, const unsigned char *, size_t, long int)\u0027\n  \u0027void serdev_device_write_wakeup(struct serdev_device *)\u0027\n  \u0027void skb_complete_tx_timestamp(struct sk_buff *, struct skb_shared_hwtstamps *)\u0027",
+      "parentUuid": "438560a5_2fb7a876",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
