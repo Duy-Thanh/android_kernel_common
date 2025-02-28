@@ -106,6 +106,24 @@
       "parentUuid": "4e1af8ab_a789016a",
       "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ccfee2_62cfca2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-28T16:14:07Z",
+      "side": 1,
+      "message": "Barry, your fix is already in Andrew\u0027s hotfixes branch. Should we take it as FROMGIT instead of implementing a different solution here?",
+      "parentUuid": "062f02df_272e602f",
+      "revId": "21191b9d9c883b03971699fbfebaf5311db41d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
