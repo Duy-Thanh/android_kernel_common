@@ -837,6 +837,24 @@ err_unpin_kvm:
 	return ret;
 }
 
+int __pkvm_notify_vm_creation(pkvm_handle_t handle)
+{
+	struct pkvm_hyp_vm *hyp_vm;
+	int ret = 0;
+
+	if (!handle)
+		return kvm_ffa_notify_vm_creation(NULL, 0);
+
+	hyp_vm = get_pkvm_hyp_vm(handle);
+	if (!hyp_vm)
+		return -ENOENT;
+
+	ret = kvm_ffa_notify_vm_creation(hyp_vm, handle);
+	put_pkvm_hyp_vm(hyp_vm);
+
+	return ret;
+}
+
 /*
  * Initialize the hypervisor copy of the protected vCPU state using the
  * memory donated by the host.
