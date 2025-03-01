@@ -465,6 +465,13 @@ static int __pkvm_create_hyp_vm(struct kvm *host_kvm)
 
 	kvm_account_pgtable_pages(pgd, pgd_sz >> PAGE_SHIFT);
 
+retry:
+	ret = kvm_call_hyp_nvhe(__pkvm_notify_vm_creation, host_kvm->arch.pkvm.handle);
+	if (ret == -EAGAIN) {
+		cond_resched();
+		goto retry;
+	}
+
 	return 0;
 free_pgd:
 	free_pages_exact(pgd, pgd_sz);

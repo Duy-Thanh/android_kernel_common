@@ -1491,6 +1491,13 @@ static void handle___pkvm_init_vm(struct kvm_cpu_context *host_ctxt)
 	cpu_reg(host_ctxt, 3) = hyp_alloc_missing_donations();
 }
 
+static void handle___pkvm_notify_vm_creation(struct kvm_cpu_context *host_ctxt)
+{
+	DECLARE_REG(pkvm_handle_t, handle, host_ctxt, 1);
+
+	cpu_reg(host_ctxt, 1) = __pkvm_notify_vm_creation(handle);
+}
+
 static void handle___pkvm_init_vcpu(struct kvm_cpu_context *host_ctxt)
 {
 	DECLARE_REG(pkvm_handle_t, handle, host_ctxt, 1);
@@ -1895,6 +1902,7 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__vgic_v3_save_vmcr_aprs),
 	HANDLE_FUNC(__vgic_v3_restore_vmcr_aprs),
 	HANDLE_FUNC(__pkvm_init_vm),
+	HANDLE_FUNC(__pkvm_notify_vm_creation),
 	HANDLE_FUNC(__pkvm_init_vcpu),
 	HANDLE_FUNC(__pkvm_start_teardown_vm),
 	HANDLE_FUNC(__pkvm_finalize_teardown_vm),
