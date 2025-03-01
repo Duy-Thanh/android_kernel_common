@@ -15,6 +15,7 @@
 int hyp_ffa_init(void *pages);
 bool kvm_host_ffa_handler(struct kvm_cpu_context *host_ctxt, u32 func_id);
 bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code);
+int kvm_ffa_notify_vm_creation(struct pkvm_hyp_vm *vm, pkvm_handle_t handle);
 int kvm_reclaim_ffa_guest_pages(struct pkvm_hyp_vm *vm, pkvm_handle_t handle);
 
 static inline bool is_ffa_call(u64 func_id)
