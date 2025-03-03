@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d556a12_0cf7f792",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-03-03T12:24:19Z",
+      "side": 1,
+      "message": "For the record, this change uses a respin bug from another partner on another branch and hence does not trigger the release process.",
+      "revId": "223461f63a7a393d7b73fa29d37de7c48b2c9b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
