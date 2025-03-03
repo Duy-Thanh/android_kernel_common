@@ -394,6 +394,24 @@
       "parentUuid": "438560a5_2fb7a876",
       "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1865682_d53643d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-03-03T06:47:22Z",
+      "side": 1,
+      "message": "After adding android/abi_gki_aarch64_volvo into build.config.gki.aarch64 shall be now correct.",
+      "parentUuid": "9afa24d5_bd82e2a3",
+      "revId": "56119ca49c6519b493603cc1c81b82eeca80ad56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

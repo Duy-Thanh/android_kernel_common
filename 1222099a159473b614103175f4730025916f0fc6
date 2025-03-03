@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d6f599_87eb4392",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-03-03T06:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2721a7_d3ff7ffc",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "1222099a159473b614103175f4730025916f0fc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04cbe3d2_945471bd",
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "I have no longer access to this ticket, so i have re-assigned it to this one 380095412 and updated name to be more generic as mentioned above\n\u0027create Volvo symbol list for GKI\u0027",
       "parentUuid": "04cbe3d2_945471bd",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 14
+      },
+      "revId": "1222099a159473b614103175f4730025916f0fc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d14820fb_891bf87a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-03-03T06:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6a18cd5_6d849d13",
       "range": {
         "startLine": 23,
         "startChar": 0,
