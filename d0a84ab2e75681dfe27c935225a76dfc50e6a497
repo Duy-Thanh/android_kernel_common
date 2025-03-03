@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b387f34c_f57b0d72",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-03-03T09:48:49Z",
+      "side": 1,
+      "message": "`nr_pages \u003d ret` has disappeared from here since Patchset 7. Is that right? It doesn\u0027t make sense to me.",
+      "revId": "d0a84ab2e75681dfe27c935225a76dfc50e6a497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
