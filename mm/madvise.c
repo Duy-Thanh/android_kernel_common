@@ -1089,7 +1089,7 @@ static long madvise_remove(struct vm_area_struct *vma,
  * will handle splitting a vm area into separate areas, each area with its own
  * behavior.
  */
-static int madvise_vma_behavior(struct vm_area_struct *vma,
+int madvise_vma_behavior(struct vm_area_struct *vma,
 				struct vm_area_struct **prev,
 				unsigned long start, unsigned long end,
 				unsigned long behavior)
@@ -1182,6 +1182,7 @@ out:
 		error = -EAGAIN;
 	return error;
 }
+EXPORT_SYMBOL_GPL(madvise_vma_behavior);
 
 #ifdef CONFIG_MEMORY_FAILURE
 /*
@@ -1534,6 +1535,14 @@ int do_madvise(struct mm_struct *mm, unsigned long start, size_t len_in, int beh
 
 SYSCALL_DEFINE3(madvise, unsigned long, start, size_t, len_in, int, behavior)
 {
+	bool bypass = false;
+	int ret;
+
+	trace_android_rvh_do_madvise_bypass(current->mm, start,
+			len_in, behavior, &ret, &bypass);
+	if (bypass)
+		return ret;
+
 	return do_madvise(current->mm, start, len_in, behavior);
 }
 
