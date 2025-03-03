@@ -16,6 +16,24 @@
       "message": "Any reason why this was changed to \"depends on\" instead of \"select\"? Will you be posting another patch to enable CLEANCACHE in gki?",
       "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fbd2d61_a7e3fceb",
+        "filename": "mm/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1979760
+      },
+      "writtenOn": "2025-03-03T06:44:44Z",
+      "side": 1,
+      "message": "Ok I wasn\u0027t aware of https://android-review.googlesource.com/c/kernel/common/+/3517396Can you please include this change in the same topic? Would be helpful to keep track. Thanks",
+      "parentUuid": "382e84df_f9f386dd",
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
