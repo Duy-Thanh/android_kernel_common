@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31dae73e_4db38cfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-03T22:16:55Z",
+      "side": 1,
+      "message": "please change the title to something more specific than `ANDROID: vendor_hooks: vendor hook for MM`. We already have a patch called that which adds a different hook: https://android-review.googlesource.com/c/kernel/common/+/2620229.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "ba2203d314e2f55cf9b2a8e34992425b702e04dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a038b35_0973fd2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-03T22:16:55Z",
+      "side": 1,
+      "message": "This description is too vague. Please explain here or in the bug what you are trying to accomplish with this hook.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 46
+      },
+      "revId": "ba2203d314e2f55cf9b2a8e34992425b702e04dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd62632f_c4df1bb6",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-03T22:16:55Z",
+      "side": 1,
+      "message": "This tracepoint seems very similar to the above trace_android_vh_do_shrink_slab() one, it only adds additional parameters. We will need to consolidate them in the next version but for now please change this to:\n```\n\ttrace_android_vh_do_shrink_slab(shrinker, \u0026freeable);\n+\ttrace_android_vh_do_shrink_slab_ex(shrinkctl, shrinker, \u0026freeable, priority);\n\tif (freeable \u003d\u003d 0 || freeable \u003d\u003d SHRINK_EMPTY)\n\t\treturn freeable;\n```\nThis way you can hook to trace_android_vh_do_shrink_slab_ex() and set `freeable\u003d0` to skip shrinking the slab.",
+      "range": {
+        "startLine": 868,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 0
+      },
+      "revId": "ba2203d314e2f55cf9b2a8e34992425b702e04dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
