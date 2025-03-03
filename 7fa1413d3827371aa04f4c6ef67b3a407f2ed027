@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc142be9_24a71a08",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-03T23:03:18Z",
+      "side": 1,
+      "message": "We can make it optional when we have a need for it, similar to the preceding patch.",
+      "parentUuid": "7c7b5875_54da5d1d",
+      "range": {
+        "startLine": 1477,
+        "startChar": 13,
+        "endLine": 1477,
+        "endChar": 17
+      },
+      "revId": "7fa1413d3827371aa04f4c6ef67b3a407f2ed027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "778a56dd_f3549deb",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 8
