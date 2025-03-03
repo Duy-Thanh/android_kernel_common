@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "382e84df_f9f386dd",
+        "filename": "mm/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1979760
+      },
+      "writtenOn": "2025-03-03T06:37:59Z",
+      "side": 1,
+      "message": "Any reason why this was changed to \"depends on\" instead of \"select\"? Will you be posting another patch to enable CLEANCACHE in gki?",
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
