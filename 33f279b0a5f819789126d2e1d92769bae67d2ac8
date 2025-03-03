@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "341475db_5e921e8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3450567
+      },
+      "writtenOn": "2025-03-03T09:55:25Z",
+      "side": 1,
+      "message": "Hello, the Presubmit-Verify failed, could you please help to re-trigger it?",
+      "revId": "33f279b0a5f819789126d2e1d92769bae67d2ac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
