@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ede269a8_ab44958e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-03-03T14:02:37Z",
+      "side": 1,
+      "message": "This change is `Presubmit-Verified-Together+1`, so `Presubmit-Verified-2` should not block submit of this change.",
+      "revId": "85921a4aa1bb38f5d55276c9295a89dae8e41509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
