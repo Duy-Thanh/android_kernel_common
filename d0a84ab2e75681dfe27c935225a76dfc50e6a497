@@ -16,6 +16,24 @@
       "message": "`nr_pages \u003d ret` has disappeared from here since Patchset 7. Is that right? It doesn\u0027t make sense to me.",
       "revId": "d0a84ab2e75681dfe27c935225a76dfc50e6a497",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7e14a1e_e6674aa4",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-03-03T10:20:22Z",
+      "side": 1,
+      "message": "So now __pkvm_pin_user_pages() returns an error code and not nr_pages since we always return an error if we don\u0027t pin nr_pages... but then I broke that error path... again",
+      "parentUuid": "b387f34c_f57b0d72",
+      "revId": "d0a84ab2e75681dfe27c935225a76dfc50e6a497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
