@@ -121,6 +121,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c532a3f6_7323179f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-03T23:36:28Z",
+      "side": 1,
+      "message": "Thanks. We should take these as FROMLIST: at the start of the series, then (and I\u0027ll go reply on the `ffa_init()` patch about the buffer setup)",
+      "parentUuid": "d910502b_70bc3009",
+      "revId": "d41b501e7dc226587d586477a0827318fac7b9dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efff8b9b_a19f3db5",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 6
