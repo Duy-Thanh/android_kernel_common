@@ -111,6 +111,30 @@
       },
       "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76182a3d_2a818cd8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-03T23:34:31Z",
+      "side": 1,
+      "message": "Hmm, but you still have two identifiers for the VM in that case: the handle and the loaded vCPU. That\u0027s why I would prefer to pass the vCPU pointer, so there\u0027s no room for discrepancy.",
+      "parentUuid": "9e34bde4_25ba8197",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
