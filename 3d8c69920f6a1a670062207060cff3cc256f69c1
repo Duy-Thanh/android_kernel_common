@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d04e48_2dc33f2f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-03-04T21:37:21Z",
+      "side": 1,
+      "message": "why did this change to a signed number? When it is negative?",
+      "revId": "3d8c69920f6a1a670062207060cff3cc256f69c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24e55679_fbb2c6fb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-03-04T21:37:21Z",
+      "side": 1,
+      "message": "I think you need a state similar to is_dying to prevent other calls to get_pkvm_hyp_vm from succeeding until kvm_ffa_notify_vm_creation has succeeded. A malicious host should not be able to start a vm and bypass the vm creation messages.",
+      "revId": "3d8c69920f6a1a670062207060cff3cc256f69c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
