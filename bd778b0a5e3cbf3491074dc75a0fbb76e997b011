@@ -159,6 +159,30 @@
       },
       "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023e2031_73970d93",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-04T01:20:40Z",
+      "side": 1,
+      "message": "Passing a NULL CPU is really no different to passing a vm_handle of 0.\nUsing internal pKVM knowledge is absolutely fine when you\u0027re in the internals of pKVM ;)",
+      "parentUuid": "43be04a5_76c8d793",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
