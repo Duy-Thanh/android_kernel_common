@@ -69,6 +69,24 @@
       "parentUuid": "354f20f8_7207a3cc",
       "revId": "c74eeba5508bc00477392fdebb21f0d29520d978",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "571e97af_c08539f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-03-04T11:59:34Z",
+      "side": 1,
+      "message": "You will also have merge conflicts to resolve. This is why I suggested `repo sync`. Resolve the conflicts locally (by running the ABI update rule) and repush.",
+      "parentUuid": "46fd95fe_b63bd55a",
+      "revId": "c74eeba5508bc00477392fdebb21f0d29520d978",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
