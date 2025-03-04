@@ -1,2 +1,20 @@
 [abi_symbol_list]
-
+  blkdev_issue_flush
+  file_bdev
+  file_ra_state_init
+  file_write_and_wait_range
+  fixed_size_llseek
+  generic_file_read_iter
+  generic_perform_write
+  gpio_device_find
+  gpio_device_get_chip
+  I_BDEV
+  param_set_uint
+  proc_set_size
+  __traceiter_android_vh_logbuf
+  __traceiter_android_vh_logbuf_pr_cont
+  __traceiter_console
+  __tracepoint_android_vh_logbuf
+  __tracepoint_android_vh_logbuf_pr_cont
+  __tracepoint_console
+  yield
