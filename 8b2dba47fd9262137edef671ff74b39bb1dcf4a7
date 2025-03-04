@@ -34,6 +34,24 @@
       "parentUuid": "382e84df_f9f386dd",
       "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61afa90b_a1b49ee4",
+        "filename": "mm/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-04T18:10:40Z",
+      "side": 1,
+      "message": "Thanks for the comment. I can\u0027t include it in the same topic because it was already merged but I\u0027ll keep track of these patches to keep them together when it\u0027s time for the next release.",
+      "parentUuid": "6fbd2d61_a7e3fceb",
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
