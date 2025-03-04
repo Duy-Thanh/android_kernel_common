@@ -140,6 +140,30 @@
       },
       "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c360844a_8863d390",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-04T17:45:45Z",
+      "side": 1,
+      "message": "IMO that is a design choice but this is exactly why I added it: `to prevent crashing if dereferenced`.\n\nIf I want to write a fuzzer which will exercise these public functions automaticaly, all of these crashing cases will have to be manually patched to avoid the fuzzer from being stuck.\nAnother reason would be if you want later to expose this functions to pkvm EL2 mod ops, you would have to check the arg from the caller callback if not done from here.",
+      "parentUuid": "a548232e_46f29b02",
+      "range": {
+        "startLine": 1387,
+        "startChar": 0,
+        "endLine": 1387,
+        "endChar": 12
+      },
+      "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
