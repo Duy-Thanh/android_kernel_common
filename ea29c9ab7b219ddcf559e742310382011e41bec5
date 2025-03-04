@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac8de0a_d54286fa",
+        "filename": "include/linux/vmalloc.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-04T18:15:00Z",
+      "side": 1,
+      "message": "This breaks the KMI so it will need to wait for the next KMI update on March 19.",
+      "fixSuggestions": [
+        {
+          "fixId": "22664600_a636f760",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/vmalloc.h",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/vmalloc.h",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "ea29c9ab7b219ddcf559e742310382011e41bec5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
