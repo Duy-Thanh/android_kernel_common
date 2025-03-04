@@ -16,6 +16,24 @@
       "message": "create a patch on top of this one to add the symbols to your symbol list",
       "revId": "53096fb9f04c04d1e4ca654dc6821aabb070ae75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb06c84e_9faebcac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2025-03-04T09:39:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe67db02_0edb42f0",
+      "revId": "53096fb9f04c04d1e4ca654dc6821aabb070ae75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
