@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b57239ab_2d1346fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-04T01:04:11Z",
+      "side": 1,
+      "message": "breaks KMI. Check with Giuliano whether this can make it into the 1st KMI or has to wait for 2 weeks until the next KMI update",
+      "revId": "e111e0061f31a268bf0099ba9419815eb9e224a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
