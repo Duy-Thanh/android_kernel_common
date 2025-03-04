@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b2093ac_6d9b39d9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-04T17:56:41Z",
+      "side": 1,
+      "message": "Similarly to my previous comment this is here to prevent the hyp from crashing if passed NULL accidentally. While not passed NULL as part of this series, it can be in the following scenarios:\n- trying to exercise the method with an automated test or fuzzer\n- exposing the method to be used by EL2 vendor modules",
+      "parentUuid": "dc142be9_24a71a08",
+      "range": {
+        "startLine": 1477,
+        "startChar": 13,
+        "endLine": 1477,
+        "endChar": 17
+      },
+      "revId": "7fa1413d3827371aa04f4c6ef67b3a407f2ed027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "778a56dd_f3549deb",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 8
