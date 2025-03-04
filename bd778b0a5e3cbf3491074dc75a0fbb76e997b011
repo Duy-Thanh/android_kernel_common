@@ -183,6 +183,30 @@
       },
       "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "618bc923_17bf73c3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-04T18:01:18Z",
+      "side": 1,
+      "message": "The handle `is` the only identifier as it is taken as an argument in the method. Do you expect `pkvm_get_loaded_hyp_vcpu` to change in behaviour over time or what is your concern ?",
+      "parentUuid": "023e2031_73970d93",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
