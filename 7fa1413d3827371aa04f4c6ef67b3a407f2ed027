@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9215392e_34ff326e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-04T23:44:50Z",
+      "side": 1,
+      "message": "A fuzzer could also pass 0x42 and we would crash, so the check is pointless. Please remove it. If we need it later, we can add it then.",
+      "parentUuid": "7c0ba782_f97c9c61",
+      "range": {
+        "startLine": 1477,
+        "startChar": 13,
+        "endLine": 1477,
+        "endChar": 17
+      },
+      "revId": "7fa1413d3827371aa04f4c6ef67b3a407f2ed027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "778a56dd_f3549deb",
