@@ -51,6 +51,24 @@
       "parentUuid": "520ce5fd_0b4e6ad5",
       "revId": "c74eeba5508bc00477392fdebb21f0d29520d978",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46fd95fe_b63bd55a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-03-04T11:58:09Z",
+      "side": 1,
+      "message": "It looks like you have rebased in Gerrit.\n\nTo rebase an entire series, you need to go the top change, rebase onto the branch tip, with all ancestors.\n\nI think this will still work now, because Gerrit is aware of the chain structure even if the Git parent relationship has been broken.",
+      "parentUuid": "354f20f8_7207a3cc",
+      "revId": "c74eeba5508bc00477392fdebb21f0d29520d978",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
