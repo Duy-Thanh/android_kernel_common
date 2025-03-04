@@ -16,6 +16,23 @@
       "message": "This would also be unnecessarily called on balloon deflation (aka leak)? Also I don\u0027t see that this is needed even for balloon inflation. Deflation/leak always notifies host (and waits for Ack) before reusing ballooned pages. That should (could?) provide the necessary interlock to be sure that the guest-side TLB is up to date?",
       "revId": "35e4778230a9cb9bcc3107ddec97db8f10b59e7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e86427c0_65a8b608",
+        "filename": "drivers/virtio/virtio_balloon.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-03-04T18:49:13Z",
+      "side": 1,
+      "message": "Even here: The pages being reported are received by the Host before returning from this function and being returned to their free lists. So the Host will have reclaimed these pages and again guest-side TLB should be up to date (invalidated as necessary) by the time the wait_event() below returns?",
+      "revId": "35e4778230a9cb9bcc3107ddec97db8f10b59e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
