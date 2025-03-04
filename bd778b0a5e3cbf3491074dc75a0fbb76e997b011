@@ -135,6 +135,30 @@
       },
       "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43be04a5_76c8d793",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-04T01:06:05Z",
+      "side": 1,
+      "message": "I am not comfortable with that suggestion because we can end up giving the host buffers if we accidentally pass a NULL ptr there. It also relies on the fact that only the VMs have hyp_vcpus which is internal pKVM knowledge about how this works.",
+      "parentUuid": "76182a3d_2a818cd8",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
