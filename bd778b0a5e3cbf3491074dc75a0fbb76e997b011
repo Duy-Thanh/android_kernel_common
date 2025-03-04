@@ -207,6 +207,30 @@
       },
       "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2850592_67b1f5db",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-04T18:28:39Z",
+      "side": 1,
+      "message": "You\u0027re implicitly relying on the loaded hyp vCPU having the same handle as `vm_handle`. I think this is unnecessary -- just take the vCPU as an argument as I suggested. The code is then much easier to read, easier to maintain (changes in `pkvm_get_loaded_hyp_vcpu()` don\u0027t affect this code) and probably marginally more efficient.",
+      "parentUuid": "618bc923_17bf73c3",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "bd778b0a5e3cbf3491074dc75a0fbb76e997b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
