@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f392b6d_0d4fc521",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2025-03-04T01:45:44Z",
+      "side": 1,
+      "message": "I submitted a review, but BUILD.bazel was updated in a patch afterward, so I rebased my changes. Please review these four patches again. Thank you.",
+      "revId": "e125b94da5c990fb939d5d057a7d643036963646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
