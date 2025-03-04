@@ -6,12 +6,12 @@
 
 use crate::{
     bindings,
+    ffi::{c_int, c_long, c_uint},
     pid_namespace::PidNamespace,
     types::{ARef, NotThreadSafe, Opaque},
 };
 use core::{
     cmp::{Eq, PartialEq},
-    ffi::{c_int, c_long, c_uint},
     ops::Deref,
     ptr,
 };
