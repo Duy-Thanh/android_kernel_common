@@ -16,6 +16,24 @@
       "message": "It makes sense from the code ofcourse, but should we add any documentation for this in cma bindings?",
       "revId": "0aaea4c90bcfc9dc593d39ba5f8657ab395400ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9f3f249_e615a590",
+        "filename": "kernel/dma/contiguous.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-04T18:11:13Z",
+      "side": 1,
+      "message": "Good point. I\u0027ll add documentation change.",
+      "parentUuid": "b32020d4_a0d48246",
+      "revId": "0aaea4c90bcfc9dc593d39ba5f8657ab395400ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
