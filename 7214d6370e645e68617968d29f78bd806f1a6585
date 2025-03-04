@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddedca4a_76bf557b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-03-04T13:53:28Z",
+      "side": 1,
+      "message": "This was not a (clean) cherry-pick before and it is not now. I will abandon this change and repush with a new Change ID.",
+      "revId": "7214d6370e645e68617968d29f78bd806f1a6585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
