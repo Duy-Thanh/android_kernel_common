@@ -87,6 +87,24 @@
       "parentUuid": "46fd95fe_b63bd55a",
       "revId": "c74eeba5508bc00477392fdebb21f0d29520d978",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c2fb849_bc3c7f10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2025-03-04T14:47:06Z",
+      "side": 1,
+      "message": "You are absolutely right. Following Todd\u0027s suggestion, I have merged another hook patch into this patchset. Following your suggestion, I have synced the repo locally and rebased my patch and updated my symbols based on this commit.\n\nsymbols commit at: https://android-review.googlesource.com/c/kernel/common/+/3522952\n\nI think the conflict is resolved. Thanks for your help.",
+      "parentUuid": "571e97af_c08539f5",
+      "revId": "c74eeba5508bc00477392fdebb21f0d29520d978",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
