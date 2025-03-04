@@ -349768,6 +349768,15 @@ elf_symbol {
   full_name: "drm_format_info_block_width"
 }
 elf_symbol {
+  id: 0xe946576f
+  name: "drm_format_info_bpp"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb4991eb4
+  type_id: 0xc21e59d8
+  full_name: "drm_format_info_bpp"
+}
+elf_symbol {
   id: 0x8ab89d74
   name: "drm_framebuffer_init"
   is_defined: true
@@ -383868,6 +383877,7 @@ interface {
   symbol_id: 0xaad93a6e
   symbol_id: 0x820af79e
   symbol_id: 0xf5a866d4
+  symbol_id: 0xe946576f
   symbol_id: 0x8ab89d74
   symbol_id: 0x717f2784
   symbol_id: 0x3bd21ada
