@@ -33,6 +33,24 @@
       "message": "This comment needs update or dropped",
       "revId": "37a438200f9602a38a670087afed2bff165f6477",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bed04db_89161c33",
+        "filename": "arch/arm64/gunyah/gunyah_hypercall.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2025-03-04T00:20:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dde5c19_51164369",
+      "revId": "37a438200f9602a38a670087afed2bff165f6477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
