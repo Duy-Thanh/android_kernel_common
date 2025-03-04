@@ -34,6 +34,24 @@
       "parentUuid": "ddedca4a_76bf557b",
       "revId": "7214d6370e645e68617968d29f78bd806f1a6585",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be32560b_583e34ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-03-04T14:05:52Z",
+      "side": 1,
+      "message": "This wasn\u0027t a good idea. :-)",
+      "parentUuid": "eb166dda_77f173fb",
+      "revId": "7214d6370e645e68617968d29f78bd806f1a6585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
