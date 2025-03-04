@@ -16,6 +16,24 @@
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: yanyuxuan3 \u003cyanyuxuan3@xiaomi.corp-partner.google.com\u003e\u0027 !\u003d \u0027Signed-off-by: Yuxuan Yan \u003cyanyuxuan3@xiaomi.corp-partner.google.com\u003e\u0027\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: yanyuxuan3 \u003cyanyuxuan3@xiaomi.corp-partner.google.com\u003e\u0027 !\u003d \u0027Signed-off-by: Yuxuan Yan \u003cyanyuxuan3@xiaomi.corp-partner.google.com\u003e\u0027",
       "revId": "016f8f68e2aa5b3027eef39d02c2a5ae2200754f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33ac58f4_279de4d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484059
+      },
+      "writtenOn": "2025-03-04T07:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69205130_62403a1c",
+      "revId": "016f8f68e2aa5b3027eef39d02c2a5ae2200754f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
