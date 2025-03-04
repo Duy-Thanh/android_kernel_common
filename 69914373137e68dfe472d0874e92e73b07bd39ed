@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "094d8cf5_b1a4d0e1",
+        "filename": "mm/madvise.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-04T16:36:32Z",
+      "side": 1,
+      "message": "Do not bundle exports with vendor hooks. The hook in this patch is ok but this export is not. madvise is a syscall and should be done from a userspace, not from a kernel module.\n\nIf you still need the vendor hook, please separate it from this export.",
+      "range": {
+        "startLine": 1186,
+        "startChar": 0,
+        "endLine": 1186,
+        "endChar": 40
+      },
+      "revId": "69914373137e68dfe472d0874e92e73b07bd39ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
