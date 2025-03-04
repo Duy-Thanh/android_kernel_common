@@ -67,6 +67,20 @@ struct dm_verity {
 	enum verity_mode mode;	/* mode for handling verification errors */
 	enum verity_mode error_mode;/* mode for handling I/O errors */
 	unsigned int corrupted_errs;/* Number of errors for corrupted blocks */
+	/* Size of block to verify in-line (in softirq context) if use_bh_wq is true.
+	 * The maximal value is 4MB.
+	 */
+	unsigned int max_inline_processing_size;
+	/* Max time to spend in softirq context, in microseconds, when
+	 * processing requests in-line (in softirq context). The maximal value
+	 * is 2 milliseconds.
+	 */
+	unsigned int max_inline_processing_time_usec;
+
+	/* When should we exit softirq context, or 0 if we're not in the
+	 * middle of processing blocks in softirq context.
+	 */
+	unsigned long end_softirq_proccessing_usec;
 
 	struct workqueue_struct *verify_wq;
 

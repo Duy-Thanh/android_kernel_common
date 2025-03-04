@@ -46,6 +46,18 @@
 #define DM_VERITY_OPTS_MAX		(5 + DM_VERITY_OPTS_FEC + \
 					 DM_VERITY_ROOT_HASH_VERIFICATION_OPTS)
 
+/* Upper bound for inline request verification size:
+ * Regardless of the value provided by userspace, do not process
+ * requests bigger than 4MB in-line.
+ */
+#define DM_VERITY_MAX_INLINE_VERIFICATION_SIZE (1<<22)
+/* Upper bound for inline request verification time:
+ * Regardless of the value provided by userspace, do not process
+ * requests for longer than 2ms. That is the upper bound defined in
+ * kernel/softirq.c for spending in softirq (MAX_SOFTIRQ_TIME).
+ */
+#define DM_VERITY_MAX_TIME_IN_SOFTIRQ_USEC (2000)
+
 static unsigned int dm_verity_prefetch_cluster = DM_VERITY_DEFAULT_PREFETCH_SIZE;
 
 module_param_named(prefetch_cluster, dm_verity_prefetch_cluster, uint, 0644);
@@ -728,6 +740,7 @@ static void verity_work(struct work_struct *w)
 	struct dm_verity_io *io = container_of(w, struct dm_verity_io, work);
 
 	io->in_bh = false;
+	io->v->end_softirq_proccessing_usec = 0;
 
 	verity_finish_io(io, errno_to_blk_status(verity_verify_io(io)));
 }
@@ -738,11 +751,20 @@ static void verity_bh_work(struct work_struct *w)
 	int err;
 
 	io->in_bh = true;
+	/* If not yet set for this request, determine the deadline for in-line
+	 * processing of this request.
+	 */
+	if (in_serving_softirq() && io->v->end_softirq_proccessing_usec == 0
+	    && io->v->max_inline_processing_time_usec > 0) {
+		io->v->end_softirq_proccessing_usec = (ktime_get_ns() / 1000) +
+				io->v->max_inline_processing_time_usec;
+	}
 	err = verity_verify_io(io);
 	if (err == -EAGAIN || err == -ENOMEM) {
 		/* fallback to retrying with work-queue */
 		INIT_WORK(&io->work, verity_work);
 		queue_work(io->v->verify_wq, &io->work);
+		io->v->end_softirq_proccessing_usec = 0;
 		return;
 	}
 
@@ -777,6 +799,35 @@ static void verity_end_io(struct bio *bio)
 		} else {
 			verity_bh_work(&io->bh_work);
 		}
+        /*
+	bool should_process_in_softirq_context = false;
+	if (static_branch_unlikely(&use_bh_wq_enabled) && io->v->use_bh_wq) {
+		const unsigned int block_size = 1 << io->v->data_dev_block_bits;
+		unsigned int total_bytes_to_process = block_size * io->n_blocks;
+		printk(KERN_INFO "use_bh_wq on, block size: %d total %d\n",
+		       block_size, total_bytes_to_process);
+		bool process_inline_due_to_size = io->v->max_inline_processing_size > 0 &&
+				total_bytes_to_process <= io->v->max_inline_processing_size;
+		printk(KERN_INFO "Timing info: in softirq %d max_inline_processing_time_usec %d end time %lu ktime_get_ns %llu",
+		       (in_serving_softirq() != 0), io->v->max_inline_processing_time_usec, io->v->end_softirq_proccessing_usec,
+		       ktime_get_ns());
+		bool process_inline_due_to_softirq_time =
+				// Not in softirq - no limit.
+				!in_serving_softirq() ||
+				// No time limit specified.
+				io->v->max_inline_processing_time_usec == 0 ||
+				// Not started a previous transaction in softirq context.
+				io->v->end_softirq_proccessing_usec == 0 ||
+				// Started a previous transaction but there's still time budget in
+				// softirq context.
+				io->v->end_softirq_proccessing_usec > (ktime_get_ns() / 1000);
+		should_process_in_softirq_context = process_inline_due_to_size &&
+				process_inline_due_to_softirq_time;
+	}
+	if (should_process_in_softirq_context) {
+		INIT_WORK(&io->bh_work, verity_bh_work);
+                */
+		verity_bh_work(&io->bh_work);
 	} else {
 		INIT_WORK(&io->work, verity_work);
 		queue_work(io->v->verify_wq, &io->work);
@@ -1334,11 +1385,39 @@ static int verity_parse_opt_args(struct dm_arg_set *as, struct dm_verity *v,
 				return r;
 			continue;
 
-		} else if (!strcasecmp(arg_name, DM_VERITY_OPT_TASKLET_VERIFY)) {
+		} else if (!strncasecmp(arg_name, DM_VERITY_OPT_TASKLET_VERIFY,
+                                        strlen(DM_VERITY_OPT_TASKLET_VERIFY))) {
 			v->use_bh_wq = true;
 			static_branch_inc(&use_bh_wq_enabled);
+			char *extra_verify_args = strchr(arg_name, '=');
+			if (extra_verify_args == NULL) {
+				printk(KERN_INFO "No extra arguments to try_verify_in_tasklet.\n");
+				continue;
+			}
+			
+			unsigned int max_inline_verify_block_size = 0;
+			unsigned int max_inline_processing_time_usec = 0;
+			int sscanf_res = sscanf(extra_verify_args, "=%u,%u",
+				   &max_inline_verify_block_size,
+				   &max_inline_processing_time_usec);
+			v->end_softirq_proccessing_usec = 0;
+			if (sscanf_res != 2) {
+				printk(KERN_WARNING "Failed parsing " DM_VERITY_OPT_TASKLET_VERIFY " arguments: %d", sscanf_res);
+				v->max_inline_processing_size = 4096;
+				v->max_inline_processing_time_usec = 500;
+			} else {
+				if ((max_inline_verify_block_size < 0) ||
+				    (max_inline_verify_block_size > DM_VERITY_MAX_INLINE_VERIFICATION_SIZE)) {
+					max_inline_verify_block_size = 4096;
+				}
+				if ((max_inline_processing_time_usec > DM_VERITY_MAX_TIME_IN_SOFTIRQ_USEC) ||
+				    (max_inline_processing_time_usec < 0)) {
+					max_inline_processing_time_usec = 500;
+				}
+				v->max_inline_processing_size = max_inline_verify_block_size;
+				v->max_inline_processing_time_usec = max_inline_processing_time_usec;
+			}
 			continue;
-
 		} else if (verity_is_fec_opt_arg(arg_name)) {
 			if (only_modifier_opts)
 				continue;
