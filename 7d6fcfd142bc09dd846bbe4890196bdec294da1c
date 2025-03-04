@@ -22,6 +22,23 @@
       },
       "revId": "7d6fcfd142bc09dd846bbe4890196bdec294da1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0645d41_4fc81780",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2025-03-04T23:20:16Z",
+      "side": 1,
+      "message": "The presubmit result says: \"Job has \u003e\u003d1 ALLOC FAIL test(s). You can get the detailed ALLOC FAIL info in the test level\"\n\nDoes ALLOC FAIL mean we don\u0027t have the HW units in the lab?\n\n@gregkh@google.com @maennich@google.com",
+      "revId": "7d6fcfd142bc09dd846bbe4890196bdec294da1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
