@@ -33,6 +33,24 @@
       "message": "Sorry, I\u0027m still seeing the following errors at presubmit:\n```\n\nSummary:\n\nERROR:CODE_INDENT: code indent should use tabs where possible\n#29: FILE: include/trace/hooks/sched.h:409:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#30: FILE: include/trace/hooks/sched.h:410:\n--\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: Liujie Xie \u003cxieliujie@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: xieliujie \u003cxieliujie@oppo.com\u003e\u0027\n```",
       "revId": "f66c4bcd53bf69f4457b2bc3757ab37ae3265d2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c414a2b8_946b1184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-04T21:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7b26fca_0265dfe5",
+      "revId": "f66c4bcd53bf69f4457b2bc3757ab37ae3265d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
