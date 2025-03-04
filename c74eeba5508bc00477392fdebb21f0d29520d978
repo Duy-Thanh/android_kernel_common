@@ -16,6 +16,23 @@
       "message": "Hi, Todd, I submitted the symbol list of these two patches. Please help review the commit, thanks. \nThe related submissions are as follows:\n1. hooks of android_vh_binder_proc_transaction etc. \nhttps://android-review.googlesource.com/c/kernel/common/+/3484712\n2. hooks of android_vh_binder_select_special_worklist etc. \nhttps://android-review.googlesource.com/c/kernel/common/+/3482670\n3. symbol list\nhttps://android-review.googlesource.com/c/kernel/common/+/3522952",
       "revId": "c74eeba5508bc00477392fdebb21f0d29520d978",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "520ce5fd_0b4e6ad5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-03-04T10:59:30Z",
+      "side": 1,
+      "message": "Please `repo sync` and repush, to rebase this entire chain past 5d4b8b5d5997ecc71314e6de55fd5ec3f3323288.",
+      "revId": "c74eeba5508bc00477392fdebb21f0d29520d978",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
