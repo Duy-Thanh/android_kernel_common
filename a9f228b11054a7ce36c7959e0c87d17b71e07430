@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9de3cb6d_de082ac5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-04T19:36:37Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: liangxiaosa \u003cliangxiaosa@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: xiaosa liang \u003cliangxiaosa@oppo.com\u003e\u0027\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: liangxiaosa \u003cliangxiaosa@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: xiaosa liang \u003cliangxiaosa@oppo.com\u003e\u0027",
+      "revId": "a9f228b11054a7ce36c7959e0c87d17b71e07430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
