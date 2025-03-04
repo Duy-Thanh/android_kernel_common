@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "158dcd7c_1007c143",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-04T18:04:53Z",
+      "side": 1,
+      "message": "Note the cherry-pick landed on the main dev branch via LTS merge. Bypass Lint warn.",
+      "revId": "1e8ee91ffc08625b874d1a27419b6473706876aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
