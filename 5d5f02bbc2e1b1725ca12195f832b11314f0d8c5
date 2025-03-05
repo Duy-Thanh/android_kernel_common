@@ -212,6 +212,30 @@
       },
       "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf69b755_94503a9e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-05T15:45:53Z",
+      "side": 1,
+      "message": "I removed it in the previous patch",
+      "parentUuid": "7db8be0b_76b47fca",
+      "range": {
+        "startLine": 1387,
+        "startChar": 0,
+        "endLine": 1387,
+        "endChar": 12
+      },
+      "revId": "5d5f02bbc2e1b1725ca12195f832b11314f0d8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
