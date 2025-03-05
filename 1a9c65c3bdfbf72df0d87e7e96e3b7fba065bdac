@@ -16,6 +16,40 @@
       "message": "Note: This fixes b16b327edb4d but I\u0027m not cherry-picking b16b327edb4d because it\u0027s gonna reverted. The reason is that 980d6e2904df is a better solution and we don\u0027t need to keep b16b327edb4d anymore.\n\nSee also https://patchwork.kernel.org/project/bluetooth/patch/20250227171417.4023415-1-chharry@google.com/",
       "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b0e6893_827b13a6",
+        "filename": "drivers/bluetooth/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-05T01:09:12Z",
+      "side": 1,
+      "message": "is GKI a chrome platform?\n\nIf this is needed for GKI, can this be reworked to be enabled at runtime if needed?",
+      "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9538e68f_3cfc3cc9",
+        "filename": "drivers/bluetooth/btusb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-05T01:09:12Z",
+      "side": 1,
+      "message": "should this be a command-line or other runtime enable feature instead?",
+      "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
