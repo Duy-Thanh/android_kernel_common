@@ -16,6 +16,24 @@
       "message": "Where did this patch come from? Is it FROMLIST, FROMGIT, UPSTREAM, BACKPORT? Need proper \"cherry picked from ...\" tag as well.",
       "revId": "2400055eb626029b9e1ab81e690e9aead6856637",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a2bdaa_ac1bf335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1692443
+      },
+      "writtenOn": "2025-03-05T23:57:30Z",
+      "side": 1,
+      "message": "That patch is cherry-picked from kernel 6.12 branch. Is it the UPSTREAM tag ?",
+      "parentUuid": "ca299dbd_286aefb3",
+      "revId": "2400055eb626029b9e1ab81e690e9aead6856637",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
