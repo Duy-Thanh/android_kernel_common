@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/400833332",
       "revId": "6cd5beea19224c0e8574ea7c42f5cecef576343f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ac4afe3_643fc436",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-03-05T23:22:26Z",
+      "side": 1,
+      "message": "Is there a reason why you cannot update `android/abi_gki_aarch64_mtk` instead? Instead here another vendor\u0027s symbol list is updated.",
+      "revId": "6cd5beea19224c0e8574ea7c42f5cecef576343f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
