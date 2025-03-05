@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b5bd325_134aebcb",
+        "filename": "drivers/virtio/virtio_balloon.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-03-05T10:23:18Z",
+      "side": 1,
+      "message": "This comment is in light of that comment. I suppose the question is: When does the Host do the reclaim (including necessary TLBI)? If it\u0027s before it Acks the virtio ring entries then you would be safe in all cases without guest TLBI.",
+      "parentUuid": "1166912b_92ca18b7",
+      "revId": "35e4778230a9cb9bcc3107ddec97db8f10b59e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e86427c0_65a8b608",
         "filename": "drivers/virtio/virtio_balloon.c",
         "patchSetId": 3
