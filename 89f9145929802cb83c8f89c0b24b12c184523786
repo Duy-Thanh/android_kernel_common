@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd661354_1c348d53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-05T19:00:27Z",
+      "side": 1,
+      "message": "Lint+2 given for \"Cherry pick does not have same author date as original commit.\" since this matches the original patch in android15-6.6",
+      "revId": "89f9145929802cb83c8f89c0b24b12c184523786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
