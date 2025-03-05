@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f28f3366_23939aac",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4739,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-03-05T16:45:05Z",
+      "side": 1,
+      "message": "FYI we recently merged into 16-6.12/arm64/pkvm the use of MMU notifiers for non-protected VMs. This lets us hook events like page ageing and swapping so that Hyp can update second-level page tables. This means we no longer pin non-protected pages, and also memory ballooning/reclaim can work with no patches needed on the guest side to force unpin. Of course these advantages are for non-p VMs only.",
+      "revId": "a6804b6928d58f332a6978ce40da083fd882a117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
