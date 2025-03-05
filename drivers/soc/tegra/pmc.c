@@ -58,6 +58,7 @@
 #include <dt-bindings/gpio/tegra186-gpio.h>
 #include <dt-bindings/gpio/tegra194-gpio.h>
 #include <dt-bindings/gpio/tegra234-gpio.h>
+#include <dt-bindings/gpio/nvidia,tegra238-gpio.h>
 #include <dt-bindings/soc/tegra-pmc.h>
 
 #define PMC_CNTRL			0x0
@@ -4455,14 +4456,24 @@ static const char * const tegra238_reset_sources[] = {
 };
 
 static const struct tegra_wake_event tegra238_wake_events[] = {
+	TEGRA_WAKE_GPIO("pcie", 1, 0, TEGRA238_MAIN_GPIO(X, 0)),
+	TEGRA_WAKE_GPIO("power_btn", 29, 1, TEGRA238_AON_GPIO(AA, 5)),
 	TEGRA_WAKE_IRQ("rtc", 73, 10),
+	TEGRA_WAKE_GPIO("wlan", 18, 0, TEGRA238_MAIN_GPIO(R, 4)),
 	TEGRA_WAKE_IRQ("pmu", 24, 209),
+	TEGRA_WAKE_IRQ("cec_wake", 72, 279),
 	TEGRA_WAKE_IRQ("usb3-port-0", 76, 167),
 	TEGRA_WAKE_IRQ("usb3-port-1", 77, 167),
 	TEGRA_WAKE_IRQ("usb3-port-2", 78, 167),
 	TEGRA_WAKE_IRQ("usb2-port-0", 79, 167),
 	TEGRA_WAKE_IRQ("usb2-port-1", 80, 167),
 	TEGRA_WAKE_IRQ("usb2-port-2", 81, 167),
+	TEGRA_WAKE_GPIO("bt_host_wake", 68, 1, TEGRA238_AON_GPIO(FF, 1)),
+	TEGRA_WAKE_GPIO("wake_on_wifi", 69, 1, TEGRA238_AON_GPIO(FF, 4)),
+	TEGRA_WAKE_GPIO("hot_word_det", 64, 0, TEGRA238_MAIN_GPIO(P, 2)),
+	TEGRA_WAKE_GPIO("wake_on_lan", 34, 0, TEGRA238_MAIN_GPIO(F, 2)),
+	TEGRA_WAKE_GPIO("eth_wol", 19, 0, TEGRA238_MAIN_GPIO(R, 6)),
+	TEGRA_WAKE_GPIO("hdmi_out_hpd", 51, 0, TEGRA238_MAIN_GPIO(X, 1)),
 };
 
 static const struct tegra_pmc_soc tegra238_pmc_soc = {
