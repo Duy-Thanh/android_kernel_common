@@ -22,6 +22,30 @@
       },
       "revId": "3ce818101223917460de11911a57f0a7c6ffdbd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a9e8a09_d8fc5503",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-05T19:54:23Z",
+      "side": 1,
+      "message": "Dropped this patch as we discussed.",
+      "parentUuid": "9cfca864_0a5523b7",
+      "range": {
+        "startLine": 891,
+        "startChar": 7,
+        "endLine": 891,
+        "endChar": 26
+      },
+      "revId": "3ce818101223917460de11911a57f0a7c6ffdbd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
