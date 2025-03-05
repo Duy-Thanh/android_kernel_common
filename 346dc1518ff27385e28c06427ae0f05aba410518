@@ -22,6 +22,30 @@
       },
       "revId": "346dc1518ff27385e28c06427ae0f05aba410518",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f1fecd_13e22049",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 3
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1969300
+      },
+      "writtenOn": "2025-03-05T01:35:31Z",
+      "side": 1,
+      "message": "Apologies for the oversight,I\u0027ve cherry picked related codes\nhttps://android-review.googlesource.com/c/kernel/common/+/3522230",
+      "parentUuid": "a9e3e60e_42af31d0",
+      "range": {
+        "startLine": 490,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 14
+      },
+      "revId": "346dc1518ff27385e28c06427ae0f05aba410518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
