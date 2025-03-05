@@ -50,6 +50,24 @@
       "message": "should this be a command-line or other runtime enable feature instead?",
       "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b05d684_cc0db528",
+        "filename": "drivers/bluetooth/btusb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-03-05T02:44:41Z",
+      "side": 1,
+      "message": "I made this configurable by command line arg but got pushed back* by Greg. While I believe this patch just works, we eventually put it behind Kconfig as a stopgap until proper test automation is introduced.\n\nCould we enable this Kconig on GKI? Is any android-fr or other review required?\n\n*: The main reason is that this should be either just work or be a device-specific option.\nhttps://patchwork.kernel.org/project/bluetooth/patch/20250224045237.1290971-1-chharry@google.com/#26259505",
+      "parentUuid": "9538e68f_3cfc3cc9",
+      "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
