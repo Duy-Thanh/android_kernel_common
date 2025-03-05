@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "414a0435_742ebdc5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-05T17:51:24Z",
+      "side": 1,
+      "message": "Once we\u0027re taking the vCPU pointer as an argument instead of the handle, we won\u0027t need this any more. We\u0027ll just need to use `VM_FFA_HANDLE_FROM_VCPU` to pull the handle back out when it\u0027s needed.",
+      "range": {
+        "startLine": 205,
+        "startChar": 27,
+        "endLine": 205,
+        "endChar": 51
+      },
+      "revId": "59ad569c178ab4548f4b308fd2a98bbf1dbd84d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
