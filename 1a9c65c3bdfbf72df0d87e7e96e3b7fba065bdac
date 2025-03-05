@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d62b7ee1_03ea3567",
+        "filename": "drivers/bluetooth/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-05T18:26:19Z",
+      "side": 1,
+      "message": "Right now, CHROME_PLATFORMS is not set for GKI builds and this config is not in gki_defconfig, so this patch will have no effect. Why is this needed in ACK kernels?",
+      "parentUuid": "3b0e6893_827b13a6",
+      "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9538e68f_3cfc3cc9",
         "filename": "drivers/bluetooth/btusb.c",
         "patchSetId": 1
