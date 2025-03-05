@@ -34,6 +34,24 @@
       "parentUuid": "212ecbe4_931c2868",
       "revId": "cf7a486eae55993e1de070542972eaee3425b6db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8abd37_dac78c50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-05T18:41:52Z",
+      "side": 1,
+      "message": "This is not fixed. The title of this patch is:\n_ANDROID: GKI: add vendor hooks android_vh_page_should_be_protected() and_\n\nThe title of the cherry-pick source is:\n_ANDROID: GKI: add vendor hooks android_vh_page_should_be_protected() and android_vh_modify_scan_control()_\n\nIf this is a cherry-pick, the new commit message must be a superset of the original patch.",
+      "parentUuid": "ab6683fb_bf84b1b4",
+      "revId": "cf7a486eae55993e1de070542972eaee3425b6db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
