@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42062d5a_5bb30cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-05T18:49:26Z",
+      "side": 1,
+      "message": "aren\u0027t there already mechanisms to persist the kernel log? Why do you need to invent a new mechnanism?",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
