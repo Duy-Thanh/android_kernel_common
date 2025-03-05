@@ -16,6 +16,24 @@
       "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin",
       "revId": "0422a7cce1b2ce6935e49e6bdf1288a075f0c1ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca74a9c_063d7463",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1989431
+      },
+      "writtenOn": "2025-03-05T01:35:27Z",
+      "side": 1,
+      "message": "Open respin request bug has been added.\nRespin Bug: b/400566736",
+      "parentUuid": "ac2fac95_118dd4cc",
+      "revId": "0422a7cce1b2ce6935e49e6bdf1288a075f0c1ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
