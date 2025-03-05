@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866e9ec2_b00786ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-05T23:49:31Z",
+      "side": 1,
+      "message": "What\u0027s the advantage of creating a new driver to allocate cma memory instead of using dmabuf cma heap?",
+      "revId": "31dcae769791c14068db45925c7973258daf8ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
