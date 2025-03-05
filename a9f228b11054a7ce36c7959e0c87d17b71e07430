@@ -16,6 +16,24 @@
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: liangxiaosa \u003cliangxiaosa@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: xiaosa liang \u003cliangxiaosa@oppo.com\u003e\u0027\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: liangxiaosa \u003cliangxiaosa@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: xiaosa liang \u003cliangxiaosa@oppo.com\u003e\u0027",
       "revId": "a9f228b11054a7ce36c7959e0c87d17b71e07430",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfec27c8_74c5e28f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2025-03-05T01:19:47Z",
+      "side": 1,
+      "message": "Hi, Todd. I changed my local git username to \"xiaosa liang\"(it was liangxiaosa before), performed a rebase operation locally, and repushed my patch. \nPlease review this commit again, Thanks you very much.",
+      "parentUuid": "9de3cb6d_de082ac5",
+      "revId": "a9f228b11054a7ce36c7959e0c87d17b71e07430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
