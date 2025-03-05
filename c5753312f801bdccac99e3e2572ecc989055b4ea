@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d5edae_ae43add8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-03-05T16:55:26Z",
+      "side": 1,
+      "message": "This is doing basically the same thing as a CMA dmabuf heap that has been hooked up to DT, such as Pixel\u0027s which is already on this branch: https://android.googlesource.com/kernel/google-modules/soc/gs/+/refs/heads/main-16k-gs-shusky-5.15/drivers/dma-buf/heaps/samsung/cma_heap.c\n\nIf you want additional carveouts, you could simply add additional DT entries for that existing CMA heap, and allocate however much you like from userspace.\n\nWhat do you hope to achieve by fully allocating from the 32MiB carveout, leaving the rest of the 192MiB of CMA available? That\u0027s kind of like reducing total memory.",
+      "revId": "c5753312f801bdccac99e3e2572ecc989055b4ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
