@@ -16,6 +16,24 @@
       "message": "FYI we recently merged into 16-6.12/arm64/pkvm the use of MMU notifiers for non-protected VMs. This lets us hook events like page ageing and swapping so that Hyp can update second-level page tables. This means we no longer pin non-protected pages, and also memory ballooning/reclaim can work with no patches needed on the guest side to force unpin. Of course these advantages are for non-p VMs only.",
       "revId": "a6804b6928d58f332a6978ce40da083fd882a117",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7fc4fe_281710c4",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4739,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-05T18:35:16Z",
+      "side": 1,
+      "message": "Yeah, I saw those changes. Hopefully it is quite doable on x86 as well. At least we need to add PV hooks for page unmapping and page ageing (not just for page mapping, as it is in this hacky PoC right now). IIUC it was kind of proof-of-concepted in Intel\u0027s PoC of PV MMU for KVM-on-KVM: https://github.com/intel-staging/pKVM-IA/commits/KPOP_RFC",
+      "parentUuid": "f28f3366_23939aac",
+      "revId": "a6804b6928d58f332a6978ce40da083fd882a117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
