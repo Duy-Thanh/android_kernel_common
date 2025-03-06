@@ -34,6 +34,24 @@
       "parentUuid": "ca299dbd_286aefb3",
       "revId": "2400055eb626029b9e1ab81e690e9aead6856637",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87debce1_a75e7c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-06T00:32:27Z",
+      "side": 1,
+      "message": "Yes, that patch was merged into 6.12 as part of a merge from upstream, so you can find it in the Linus\u0027 tree and post as upstream with the SHA from the official kernel tree (47d911b02cbe61494bb066ad84cc66d25091d506).",
+      "parentUuid": "32a2bdaa_ac1bf335",
+      "revId": "2400055eb626029b9e1ab81e690e9aead6856637",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
