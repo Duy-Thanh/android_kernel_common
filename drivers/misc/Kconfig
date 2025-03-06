@@ -627,6 +627,14 @@ config PKVM_SMC_FILTER
 
 	  Say N here unless you know what you are doing.
 
+config MISC_EXAMPLE
+        bool "My example"
+
+config MISC_EXAMPLE_TEST
+    tristate "Test for my example" if !KUNIT_ALL_TESTS
+    depends on MISC_EXAMPLE && KUNIT
+    default KUNIT_ALL_TESTS
+
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"

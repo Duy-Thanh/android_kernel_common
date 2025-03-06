@@ -74,3 +74,5 @@ obj-$(CONFIG_MARVELL_CN10K_DPI)	+= mrvl_cn10k_dpi.o
 obj-y				+= keba/
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
 obj-$(CONFIG_PKVM_SMC_FILTER)  += pkvm-smc/
+obj-$(CONFIG_MISC_EXAMPLE) += example.o
+obj-$(CONFIG_MISC_EXAMPLE_TEST) += example_test.o
