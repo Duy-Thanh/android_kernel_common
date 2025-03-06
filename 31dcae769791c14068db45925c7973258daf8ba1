@@ -16,6 +16,24 @@
       "message": "What\u0027s the advantage of creating a new driver to allocate cma memory instead of using dmabuf cma heap?",
       "revId": "31dcae769791c14068db45925c7973258daf8ba1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe2fff5_2c863d5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-03-06T02:37:33Z",
+      "side": 1,
+      "message": "The main advantage is that the driver allows to debug early on CMA allocations before init starts.\n\nIn the userspace, we can use dma cma heaps instead.\n\n\nNote: I don\u0027t intend to upstream the driver. It will only live in the `main-16k-gs-shusky-5.15` repo, which it is only for experiments.",
+      "parentUuid": "866e9ec2_b00786ff",
+      "revId": "31dcae769791c14068db45925c7973258daf8ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
