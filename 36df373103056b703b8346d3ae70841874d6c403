@@ -16,6 +16,24 @@
       "message": "@gregkh@google.com, is this one allowed?",
       "revId": "36df373103056b703b8346d3ae70841874d6c403",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f0dfe32_f3949456",
+        "filename": "gki/aarch64/symbols/imx",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2025-03-06T01:47:03Z",
+      "side": 1,
+      "message": "As I understand it, this symbol is not allowed. I sincerely apologize for not noticing it earlier. However, I have a question: would it be possible to add all disallowed symbols to build/kernel/abi/symbols.deny, similar to kernel_write, filp_open, etc.? This way, when I run tools/bazel run //common:kernel_aarch64_abi_update, it would trigger a build error, which could also help make your review process easier.",
+      "parentUuid": "575ff5a2_5c8365f7",
+      "revId": "36df373103056b703b8346d3ae70841874d6c403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
