@@ -50,6 +50,23 @@
       "message": "LGTM",
       "revId": "717e655841ffcd1c6bb6143cca5b6a30a3f77aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e81592_8ca195e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-03-06T07:37:04Z",
+      "side": 1,
+      "message": "+2 given that two domain experts already approved",
+      "revId": "717e655841ffcd1c6bb6143cca5b6a30a3f77aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
