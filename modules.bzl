@@ -173,6 +173,7 @@ _KUNIT_COMMON_MODULES_LIST = [
     "drivers/hid/hid-uclogic-test.ko",
     "drivers/iio/test/iio-test-format.ko",
     "drivers/input/tests/input_test.ko",
+    "drivers/misc/failing_test.ko",
     "drivers/of/of_kunit_helpers.ko",
     "drivers/rtc/lib_test.ko",
     "fs/ext4/ext4-inode-test.ko",
