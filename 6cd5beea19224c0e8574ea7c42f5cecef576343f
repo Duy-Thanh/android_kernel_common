@@ -51,6 +51,24 @@
       "parentUuid": "9ac4afe3_643fc436",
       "revId": "6cd5beea19224c0e8574ea7c42f5cecef576343f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b143ea4_d7a985ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2025-03-06T02:56:29Z",
+      "side": 1,
+      "message": "Next time we will update to android/abi_gki_aarch64_mtktv.",
+      "parentUuid": "373444db_8ad2373a",
+      "revId": "6cd5beea19224c0e8574ea7c42f5cecef576343f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
