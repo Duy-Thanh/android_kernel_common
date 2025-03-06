@@ -34,6 +34,24 @@
       "parentUuid": "575ff5a2_5c8365f7",
       "revId": "36df373103056b703b8346d3ae70841874d6c403",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85d806d3_865d6ee7",
+        "filename": "gki/aarch64/symbols/imx",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-06T02:08:35Z",
+      "side": 1,
+      "message": "thanks for the suggestion. I think filp_open could go into symbols.deny, but we do support some 3rd party filesystems which forces us to allow kernel_read/kernel_write and many more. For those, we move them to the ANDROID_GKI_VFS_EXPORT_ONLY namespace so filesystems must identify themselves to access them. This namespacing is not yet in the 6.12 kernel, but it will be before KMI freeze. When in place, these manifest as build-breaks so they are caught early.\n\nYou are right that it would be nice to have a definitative list like symbols.deny.",
+      "parentUuid": "7f0dfe32_f3949456",
+      "revId": "36df373103056b703b8346d3ae70841874d6c403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
