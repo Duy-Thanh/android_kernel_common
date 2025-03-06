@@ -34,6 +34,24 @@
       "parentUuid": "ad4ae1d7_f0f5c119",
       "revId": "37fa66fabda205007e224df9521e9e12a2d74cb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54eb5ffc_aacc9da6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-06T16:37:07Z",
+      "side": 1,
+      "message": "I see. The proper way to fix it is to provide a no-op version of `cma_get_first_virtzone_base()`, and I see it is actually already fixed in the latest android15-6.6: https://android.googlesource.com/kernel/common/+/3c4e8061031a5725d5ecd590f86d98926a0095c6%5E%21/\n\nBut it won\u0027t hurt to align android-x86_64_defconfig with gki_defconfig a bit more, so LGTM.",
+      "parentUuid": "b64467cb_a5db5951",
+      "revId": "37fa66fabda205007e224df9521e9e12a2d74cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
