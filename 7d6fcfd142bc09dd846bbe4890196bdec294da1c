@@ -117,6 +117,24 @@
       "parentUuid": "20dd9f98_5397f2a7",
       "revId": "7d6fcfd142bc09dd846bbe4890196bdec294da1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b53c0e8_3a6d0021",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2025-03-06T17:45:30Z",
+      "side": 1,
+      "message": "@Kamil - yes, it appears.",
+      "parentUuid": "41bbc6e8_a78bd077",
+      "revId": "7d6fcfd142bc09dd846bbe4890196bdec294da1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
