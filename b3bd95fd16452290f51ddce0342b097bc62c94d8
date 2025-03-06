@@ -16,6 +16,29 @@
       "message": "Thank you for the feedback. I have addressed the comments. Let me know if any additional changes are needed.",
       "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e8357eb_a5934c88",
+        "filename": "drivers/bluetooth/btintel_pcie.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-03-06T23:37:40Z",
+      "side": 1,
+      "message": "This portion is not in the patch upstream:\n\nhttps://patchwork.kernel.org/project/bluetooth/patch/20250225114311.9514-2-kiran.k@intel.com/\n\nWhy is this change included?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 65
+      },
+      "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
