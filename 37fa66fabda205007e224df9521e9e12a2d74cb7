@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad4ae1d7_f0f5c119",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-06T15:29:50Z",
+      "side": 1,
+      "message": "Same question as in aosp/3473761 (but this time about x86): what exactly fails?",
+      "revId": "37fa66fabda205007e224df9521e9e12a2d74cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
