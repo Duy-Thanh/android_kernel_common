@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a52abe9_b9185cbc",
+        "filename": "drivers/bluetooth/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-03-06T07:18:21Z",
+      "side": 1,
+      "message": "Thanks for the feedback and sorry that I\u0027m not so familiar with GKI process.\nI\u0027m raising a internal discussion to understand the process better and verify the next step.",
+      "parentUuid": "d62b7ee1_03ea3567",
+      "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9538e68f_3cfc3cc9",
         "filename": "drivers/bluetooth/btusb.c",
         "patchSetId": 1
