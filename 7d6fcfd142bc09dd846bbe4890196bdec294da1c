@@ -135,6 +135,24 @@
       "parentUuid": "41bbc6e8_a78bd077",
       "revId": "7d6fcfd142bc09dd846bbe4890196bdec294da1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db8590b1_74ee1f8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2025-03-06T17:46:48Z",
+      "side": 1,
+      "message": "@Kamil - sorry, one more thing, once this patch is merged, you may want to CP it to the GKI release branch you use.",
+      "parentUuid": "8b53c0e8_3a6d0021",
+      "revId": "7d6fcfd142bc09dd846bbe4890196bdec294da1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
