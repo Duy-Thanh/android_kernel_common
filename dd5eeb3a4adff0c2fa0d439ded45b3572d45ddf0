@@ -33,6 +33,23 @@
       "message": "LGTM but I don\u0027t have CR+2",
       "revId": "dd5eeb3a4adff0c2fa0d439ded45b3572d45ddf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e518870a_9fd81e02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-03-06T07:36:56Z",
+      "side": 1,
+      "message": "+2 given that two domain experts already approved",
+      "revId": "dd5eeb3a4adff0c2fa0d439ded45b3572d45ddf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
