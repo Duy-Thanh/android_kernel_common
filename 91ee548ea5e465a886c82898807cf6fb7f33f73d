@@ -16,6 +16,24 @@
       "message": "The signature needs to be fixed:\n```\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: liangxiaosa \u003cliangxiaosa@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: xiaosa liang \u003cliangxiaosa@oppo.com\u003e\u0027\n```",
       "revId": "91ee548ea5e465a886c82898807cf6fb7f33f73d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce323266_48c7c8a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-06T00:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c5f19a9_6ee53119",
+      "revId": "91ee548ea5e465a886c82898807cf6fb7f33f73d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
