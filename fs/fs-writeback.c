@@ -142,6 +142,7 @@ void wb_wakeup(struct bdi_writeback *wb)
 		mod_delayed_work(bdi_wq, &wb->dwork, 0);
 	spin_unlock_irq(&wb->work_lock);
 }
+EXPORT_SYMBOL_GPL(wb_wakeup);
 
 /*
  * This function is used when the first inode for this wb is marked dirty. It
@@ -1371,6 +1372,7 @@ void redirty_tail_locked(struct inode *inode, struct bdi_writeback *wb)
 	}
 	inode_io_list_move_locked(inode, wb, target_list);
 }
+EXPORT_SYMBOL_GPL(redirty_tail_locked);
 
 static void redirty_tail(struct inode *inode, struct bdi_writeback *wb)
 {
