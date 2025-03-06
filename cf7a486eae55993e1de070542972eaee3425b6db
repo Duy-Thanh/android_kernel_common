@@ -52,6 +52,24 @@
       "parentUuid": "ab6683fb_bf84b1b4",
       "revId": "cf7a486eae55993e1de070542972eaee3425b6db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a35787c_9fb30dbd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3484059
+      },
+      "writtenOn": "2025-03-06T02:18:11Z",
+      "side": 1,
+      "message": "Original title is wrong. Can i fix it here?",
+      "parentUuid": "5e8abd37_dac78c50",
+      "revId": "cf7a486eae55993e1de070542972eaee3425b6db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
