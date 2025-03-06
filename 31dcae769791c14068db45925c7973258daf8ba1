@@ -34,6 +34,24 @@
       "parentUuid": "866e9ec2_b00786ff",
       "revId": "31dcae769791c14068db45925c7973258daf8ba1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b7e011a_1ca4c854",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-06T18:21:50Z",
+      "side": 1,
+      "message": "re: the driver allows to debug early on CMA allocations before init starts\n\nWhy is it important to test these allocations before init starts? IIUC the only difference is that CMA will not be polluted at that time but is that important?",
+      "parentUuid": "0fe2fff5_2c863d5b",
+      "revId": "31dcae769791c14068db45925c7973258daf8ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
