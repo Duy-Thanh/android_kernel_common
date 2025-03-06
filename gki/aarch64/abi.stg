@@ -293240,6 +293240,13 @@ function {
   parameter_id: 0x368487be
 }
 function {
+  id: 0x0640c64e
+  return_type_id: 0x1bf395c9
+  parameter_id: 0x0258f96e
+  parameter_id: 0x6720d32f
+  parameter_id: 0xf1a6dfed
+}
+function {
   id: 0x0643b7f0
   return_type_id: 0x17fa285b
   parameter_id: 0x3e10b518
@@ -332640,6 +332647,12 @@ function {
   parameter_id: 0x26731c99
 }
 function {
+  id: 0xf7f2c60a
+  return_type_id: 0x3e77b2d8
+  parameter_id: 0x3a583251
+  parameter_id: 0x4faa9b63
+}
+function {
   id: 0xf7f4d3a0
   return_type_id: 0x3e77b2d8
   parameter_id: 0x3a583251
@@ -344102,6 +344115,15 @@ elf_symbol {
   full_name: "console_list_unlock"
 }
 elf_symbol {
+  id: 0x3d10b5b8
+  name: "console_lock"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd272d446
+  type_id: 0x10985193
+  full_name: "console_lock"
+}
+elf_symbol {
   id: 0x10e14b48
   name: "console_printk"
   is_defined: true
@@ -344145,6 +344167,15 @@ elf_symbol {
   crc: 0x3239fbdb
   type_id: 0x6d7f5ff6
   full_name: "console_suspend_enabled"
+}
+elf_symbol {
+  id: 0x5a70b6f0
+  name: "console_unlock"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd272d446
+  type_id: 0x10985193
+  full_name: "console_unlock"
 }
 elf_symbol {
   id: 0xca337eb1
@@ -349816,6 +349847,15 @@ elf_symbol {
   full_name: "dma_set_mask"
 }
 elf_symbol {
+  id: 0x63bf1796
+  name: "dma_sync_wait"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x92240aab
+  type_id: 0xf7f2c60a
+  full_name: "dma_sync_wait"
+}
+elf_symbol {
   id: 0x45690ea2
   name: "dma_unmap_page_attrs"
   is_defined: true
@@ -349841,6 +349881,15 @@ elf_symbol {
   crc: 0xbcebb2f4
   type_id: 0x1053a2da
   full_name: "dma_unmap_sg_attrs"
+}
+elf_symbol {
+  id: 0xcbd73832
+  name: "dmaengine_get_unmap_data"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x615589e2
+  type_id: 0x0640c64e
+  full_name: "dmaengine_get_unmap_data"
 }
 elf_symbol {
   id: 0x7a8e1c58
@@ -365670,6 +365719,15 @@ elf_symbol {
   crc: 0x1e8012fa
   type_id: 0xd865d5b5
   full_name: "param_array_ops"
+}
+elf_symbol {
+  id: 0xd883f01d
+  name: "param_get_bool"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x561eb812
+  type_id: 0x9c660c95
+  full_name: "param_get_bool"
 }
 elf_symbol {
   id: 0xe3ebf1bd
@@ -385267,11 +385325,13 @@ interface {
   symbol_id: 0x1b144a7e
   symbol_id: 0xfd8779b6
   symbol_id: 0x4c537c27
+  symbol_id: 0x3d10b5b8
   symbol_id: 0x10e14b48
   symbol_id: 0x406ac226
   symbol_id: 0x2f577372
   symbol_id: 0xe5567adc
   symbol_id: 0x85d79e5f
+  symbol_id: 0x5a70b6f0
   symbol_id: 0xca337eb1
   symbol_id: 0x9e7d8d76
   symbol_id: 0xfda11a25
@@ -385900,9 +385960,11 @@ interface {
   symbol_id: 0xc78eb5e4
   symbol_id: 0xf2e75ff5
   symbol_id: 0x7995e8e7
+  symbol_id: 0x63bf1796
   symbol_id: 0x45690ea2
   symbol_id: 0x0134874d
   symbol_id: 0xe5a171eb
+  symbol_id: 0xcbd73832
   symbol_id: 0x7a8e1c58
   symbol_id: 0x400fac71
   symbol_id: 0xdae2cdaf
@@ -387662,6 +387724,7 @@ interface {
   symbol_id: 0x32ecd828
   symbol_id: 0xe769f645
   symbol_id: 0x37c3807c
+  symbol_id: 0xd883f01d
   symbol_id: 0xe3ebf1bd
   symbol_id: 0x9a649861
   symbol_id: 0xced06429
