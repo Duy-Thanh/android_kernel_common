@@ -52,6 +52,24 @@
       "parentUuid": "7f0dfe32_f3949456",
       "revId": "36df373103056b703b8346d3ae70841874d6c403",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "746983b7_2bea3061",
+        "filename": "gki/aarch64/symbols/imx",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2025-03-06T02:31:31Z",
+      "side": 1,
+      "message": "I really appreciate your detailed explanation. I have removed file_open_root from the list. Could you please review it again?",
+      "parentUuid": "85d806d3_865d6ee7",
+      "revId": "36df373103056b703b8346d3ae70841874d6c403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
