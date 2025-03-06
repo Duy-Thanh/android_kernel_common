@@ -16,6 +16,24 @@
       "message": "Same question as in aosp/3473761 (but this time about x86): what exactly fails?",
       "revId": "37fa66fabda205007e224df9521e9e12a2d74cb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b64467cb_a5db5951",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-06T16:24:34Z",
+      "side": 1,
+      "message": "It is introduced in this commit: https://android.googlesource.com/kernel/common/+/cb268664c36e97586b7d5c3836c2027339dcc91f\n\nFails with:\n`ld.lld: error: undefined symbol: cma_get_first_virtzone_base`",
+      "parentUuid": "ad4ae1d7_f0f5c119",
+      "revId": "37fa66fabda205007e224df9521e9e12a2d74cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
