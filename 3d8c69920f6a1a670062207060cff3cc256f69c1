@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "467d21df_3681eced",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-03-06T00:36:38Z",
+      "side": 1,
+      "message": "I was setting it to -1 for uninitialized earlier, but that\u0027s not needed anymore.",
+      "parentUuid": "17d04e48_2dc33f2f",
+      "revId": "3d8c69920f6a1a670062207060cff3cc256f69c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24e55679_fbb2c6fb",
