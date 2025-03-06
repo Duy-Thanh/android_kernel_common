@@ -321,6 +321,11 @@ static void sym_warn_unmet_dep(struct symbol *sym)
 			       "  Selected by [m]:\n");
 
 	fputs(str_get(&gs), stderr);
+<<<<<<< HEAD   (b6e934 ANDROID: mm/swap.c: fix implicit-function-declaration error)
+||||||| BASE
+=======
+	str_free(&gs);
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 	sym_warnings++;
 }
 

@@ -394,6 +394,14 @@ struct pci_dev {
 	u16		l1ss;		/* L1SS Capability pointer */
 #ifdef CONFIG_PCIEASPM
 	struct pcie_link_state	*link_state;	/* ASPM link state */
+<<<<<<< HEAD   (b6e934 ANDROID: mm/swap.c: fix implicit-function-declaration error)
+||||||| BASE
+	u16		l1ss;		/* L1SS Capability pointer */
+=======
+#endif
+	u16		l1ss;		/* L1SS Capability pointer */
+#ifdef CONFIG_PCIEASPM
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 	unsigned int	ltr_path:1;	/* Latency Tolerance Reporting
 					   supported from root to here */
 #endif
