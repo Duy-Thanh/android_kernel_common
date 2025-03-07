@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c6f650b_c04b2e10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-07T23:09:43Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: xieliujie \u003cxieliujie@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: Liujie Xie \u003cxieliujie@oppo.com\u003e\u0027\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: xieliujie \u003cxieliujie@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: Liujie Xie \u003cxieliujie@oppo.com\u003e\u0027",
+      "revId": "f30668f09b1a29df3329ae3d5445d0b4a4ae6d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e57349d_6fddbadc",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
