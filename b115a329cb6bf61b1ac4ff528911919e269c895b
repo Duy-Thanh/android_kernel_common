@@ -46,6 +46,29 @@
       },
       "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efee9a0d_2a155f0c",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-03-07T17:08:01Z",
+      "side": 1,
+      "message": "Why is it now OK to do this outside the critical section? Don\u0027t we risk a race with e.g. ballooning ?",
+      "range": {
+        "startLine": 1816,
+        "startChar": 26,
+        "endLine": 1816,
+        "endChar": 50
+      },
+      "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
