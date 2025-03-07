@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e57349d_6fddbadc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-07T21:43:29Z",
+      "side": 1,
+      "message": "Might be good to clarify this change is needed for use of sched_ext in an OGKI build.",
+      "revId": "f30668f09b1a29df3329ae3d5445d0b4a4ae6d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
