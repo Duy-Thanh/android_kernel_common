@@ -16,6 +16,24 @@
       "message": "aren\u0027t there already mechanisms to persist the kernel log? Why do you need to invent a new mechnanism?",
       "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c86ee8_1ad83650",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3879141
+      },
+      "writtenOn": "2025-03-07T04:51:06Z",
+      "side": 1,
+      "message": "We do reboot system when there is an error during hibernation. And we need kernel log during hibernation, but kernel log will be reset after system rebooting.\nWe enable this funcion, copy kernel log, in PM_HIBERNATION_PREPARE callback, and disable in PM_POST_HIBERNATION.",
+      "parentUuid": "42062d5a_5bb30cc1",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
