@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7da39d99_b8c48bb3",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-03-07T17:34:57Z",
+      "side": 1,
+      "message": "Argh no, the size can\u0027t be a hint because of the range HVC stuff I guess? But maybe it\u0027s still OK? Let me think.",
+      "parentUuid": "6fca3746_add81d61",
+      "range": {
+        "startLine": 1726,
+        "startChar": 6,
+        "endLine": 1726,
+        "endChar": 11
+      },
+      "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b60ca60c_1009ba76",
         "filename": "arch/arm64/kvm/mmu.c",
         "patchSetId": 14
