@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2b2f6ef_5a269592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3596924
+      },
+      "writtenOn": "2025-03-07T11:44:04Z",
+      "side": 1,
+      "message": "Change 3395640 needs to be rebased on top of the latest version of its parent (Change 3503755). Please rebase your entire stack of patches to be up-to-date.\n\nGetting nothing to commit if we rebase 3395640 on top of 3503755 \nPlease find the below logs \n\nLogs:\n\nskrishnasamy@pfg-bld-svr-4:~/GKI/common$ git fetch https://android.googlesource.com/kernel/common refs/changes/55/3503755/4 \u0026\u0026 git cherry-pick FETCH_HEAD\nFrom https://android.googlesource.com/kernel/common\n * branch                      refs/changes/55/3503755/4 -\u003e FETCH_HEAD\n[detached HEAD d9f50d09fb6d] UPSTREAM: usb: gadget: f_fs: Add the missing get_alt callback\n Author: Hardik Gajjar \u003chgajjar@de.adit-jv.com\u003e\n Date: Fri Mar 1 13:47:08 2024 +0100\n 1 file changed, 39 insertions(+), 13 deletions(-)\nskrishnasamy@pfg-bld-svr-4:~/GKI/common$ git fetch https://android.googlesource.com/kernel/common refs/changes/40/3395640/9 \u0026\u0026 git cherry-pick FETCH_HEAD\nFrom https://android.googlesource.com/kernel/common\n * branch                      refs/changes/40/3395640/9 -\u003e FETCH_HEAD\nAuto-merging drivers/usb/gadget/function/f_fs.c\nHEAD detached from 471a10d3af3b\nYou are currently cherry-picking commit 43fe3d681771.\n  (all conflicts fixed: run \"git cherry-pick --continue\")\n  (use \"git cherry-pick --skip\" to skip this patch)\n  (use \"git cherry-pick --abort\" to cancel the cherry-pick operation)\n\nnothing to commit, working tree clean\nThe previous cherry-pick is now empty, possibly due to conflict resolution.\nIf you wish to commit it anyway, use:\n\n    git commit --allow-empty\n\nOtherwise, please use \u0027git cherry-pick --skip\u0027",
+      "revId": "43fe3d68177120f48802c93fd358a220fec645c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
