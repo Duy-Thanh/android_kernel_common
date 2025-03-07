@@ -1255,8 +1255,8 @@ static int kvm_arm_smmu_v3_post_init(void)
 
 static int kvm_arm_smmu_v3_init_drv(void)
 {
+	struct kvm_hyp_memcache atomic_mc = { 0 };
 	int ret;
-	struct kvm_hyp_memcache atomic_mc;
 
 	/*
 	 * Check whether any device owned by the host is behind an SMMU.
