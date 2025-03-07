@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba12a10_980c22d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2025-03-07T09:15:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fab9767_745fbea0",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 117
+      },
+      "revId": "8f4ebe91a439d6f0fe6edd187e4dca2e43b0b731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb3e8036_c51ef9f2",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e97cab80_3dd6a342",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2025-03-07T09:15:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb3e8036_c51ef9f2",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 3
+      },
+      "revId": "8f4ebe91a439d6f0fe6edd187e4dca2e43b0b731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d68905e0_3608228d",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-03-07T08:57:13Z",
       "side": 1,
       "message": "please use a name, not an email alias.",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "8f4ebe91a439d6f0fe6edd187e4dca2e43b0b731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33e5935_c8bb9c73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2025-03-07T09:15:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d68905e0_3608228d",
       "range": {
         "startLine": 13,
         "startChar": 15,
