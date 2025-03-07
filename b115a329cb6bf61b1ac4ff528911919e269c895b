@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7623e2a_6b9d9269",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-03-07T17:14:13Z",
+      "side": 1,
+      "message": "Now I have that list_head node in the pinned_page. I\u0027ll create in this function a list of preallocate pages.\n\nat the end I just have to make sure it is freed. That doesn\u0027t look so bad but yeah that path isn\u0027t simple.",
+      "parentUuid": "5fcd4dba_aff4d626",
+      "range": {
+        "startLine": 1735,
+        "startChar": 10,
+        "endLine": 1735,
+        "endChar": 53
+      },
+      "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efee9a0d_2a155f0c",
         "filename": "arch/arm64/kvm/mmu.c",
         "patchSetId": 14
