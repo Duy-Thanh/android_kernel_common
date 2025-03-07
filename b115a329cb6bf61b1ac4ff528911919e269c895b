@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fcd4dba_aff4d626",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-03-07T17:09:42Z",
+      "side": 1,
+      "message": "I have a gut feeling that we\u0027re doing a little too much allocation in the fault path now (the struct page array, all these list nodes, the sglist page, ...). Need to think about what we could do better, but perhaps some pre-allocation could help somehow ... 😊",
+      "parentUuid": "753b5168_54fc4251",
+      "range": {
+        "startLine": 1735,
+        "startChar": 10,
+        "endLine": 1735,
+        "endChar": 53
+      },
+      "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efee9a0d_2a155f0c",
         "filename": "arch/arm64/kvm/mmu.c",
         "patchSetId": 14
