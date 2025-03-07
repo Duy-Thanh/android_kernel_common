@@ -39,6 +39,30 @@
       },
       "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8d5435c_fd4c5876",
+        "filename": "drivers/bluetooth/btintel_pcie.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 2057970
+      },
+      "writtenOn": "2025-03-07T11:47:33Z",
+      "side": 1,
+      "message": "This change was not present in my original patch. After my patch was merged, the issue was reported when the code is compiled on 32bit system. The fix was amended to my patch with the reporter name in Signed-off-by tag. I think current patch on android was published before the amend of my patch. May be its a good idea to take what is there in the maintainer tree now ? Let know if I can cherry-pick the latest patch. \n\nPlease refer the fix provided in upstream.\n\nhttps://patchwork.kernel.org/project/bluetooth/patch/20250227132132.1171583-1-arnd@kernel.org/",
+      "parentUuid": "3e8357eb_a5934c88",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 65
+      },
+      "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
