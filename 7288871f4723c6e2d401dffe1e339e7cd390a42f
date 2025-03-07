@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56027d06_66f7fedf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-03-07T06:51:37Z",
+      "side": 1,
+      "message": "I found another problem here (see my TODO in https://r.android.com/c/3517063/11): FF-A allows multiple UUIDs per partition, and each `(SP, UUID)` pair shows up here as a separate entry so you\u0027ll have duplicates.",
+      "revId": "7288871f4723c6e2d401dffe1e339e7cd390a42f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
