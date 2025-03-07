@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c253efd0_26dc3ef6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684017
+      },
+      "writtenOn": "2025-03-07T06:55:21Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Buildifier: File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.\n\nAnalyzer Description: Check formats of Bazel definitions.\n\nFile is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "4a56f32531fde4366f892d711c75c9e197a37365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
