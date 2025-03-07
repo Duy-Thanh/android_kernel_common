@@ -337094,7 +337094,7 @@ elf_symbol {
   name: "I_BDEV"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x285e0777
+  crc: 0x00000000
   type_id: 0x2dfa71ba
   full_name: "I_BDEV"
 }
