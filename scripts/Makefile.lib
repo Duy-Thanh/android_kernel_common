@@ -461,10 +461,22 @@ quiet_cmd_lzo_with_size = LZO     $@
       cmd_lzo_with_size = { cat $(real-prereqs) | $(KLZOP) -9; $(size_append); } > $@
 
 quiet_cmd_lz4 = LZ4     $@
+<<<<<<< HEAD   (015c80 Merge ad8f71d64a67 ("tools/bootconfig: Fix the wrong format )
       cmd_lz4 = cat $(real-prereqs) | $(LZ4) -l -12 --favor-decSpeed stdin stdout > $@
+||||||| BASE
+      cmd_lz4 = cat $(real-prereqs) | $(LZ4) -l -c1 stdin stdout > $@
+=======
+      cmd_lz4 = cat $(real-prereqs) | $(LZ4) -l -9 - - > $@
+>>>>>>> BRANCH (e10b39 net: usb: rtl8150: enable basic endpoint checking)
 
 quiet_cmd_lz4_with_size = LZ4     $@
+<<<<<<< HEAD   (015c80 Merge ad8f71d64a67 ("tools/bootconfig: Fix the wrong format )
       cmd_lz4_with_size = { cat $(real-prereqs) | $(LZ4) -l -12 --favor-decSpeed stdin stdout; \
+||||||| BASE
+      cmd_lz4_with_size = { cat $(real-prereqs) | $(LZ4) -l -c1 stdin stdout; \
+=======
+      cmd_lz4_with_size = { cat $(real-prereqs) | $(LZ4) -l -9 - -; \
+>>>>>>> BRANCH (e10b39 net: usb: rtl8150: enable basic endpoint checking)
                   $(size_append); } > $@
 
 # U-Boot mkimage
