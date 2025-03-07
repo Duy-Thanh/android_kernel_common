@@ -281532,7 +281532,7 @@ enumeration {
     }
     enumerator {
       name: "ZSTD_ps_disable"
-      value: 2
+      value: 3
     }
   }
 }
