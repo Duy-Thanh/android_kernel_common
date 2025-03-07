@@ -52,6 +52,24 @@
       "parentUuid": "0fe2fff5_2c863d5b",
       "revId": "31dcae769791c14068db45925c7973258daf8ba1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c286ceb_2cdde528",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-03-07T01:37:45Z",
+      "side": 1,
+      "message": "\u003e Why is it important to test these allocations before init starts?\n\nThe main difference is that:\n\n- in userspace, the allocations comes from this CMA heap `dma_contiguous_default_area`:\nhttps://elixir.bootlin.com/linux/v6.13.5/source/kernel/dma/contiguous.c#L55\nand the default size is 4MiB in 4Kib kernels and 32MiB in 16KiB kernels. This can be overwritten by the cma\u003dsize kernel parameter.\nhttps://elixir.bootlin.com/linux/v6.13.5/source/kernel/dma/contiguous.c#L223\n\n- in the driver, the CMA allocations comes from the reserve memory in the device tree:\n\n```\n\t\tcma_test_reserve: cma_test_reserve {\n\t\t\tcompatible \u003d \"shared-dma-pool\";\n\t\t\treusable;\n\t\t\tsize \u003d \u003c0x0 0x2000000\u003e; /* 32 MiB */\n\t\t\talignment \u003d \u003c0x0 0x00001000\u003e;\n\t\t\talloc-ranges \u003d \u003c0x0 0x9 0x80000000 0x80000000\u003e,\n\t\t\t\t       \u003c0x0 0x9 0x00000000 0x80000000\u003e;\n\t\t};\n```\n\nThe dma heap allocations can\u0027t come from the reserve CMA allocations in DTS in vanilla kernels.",
+      "parentUuid": "8b7e011a_1ca4c854",
+      "revId": "31dcae769791c14068db45925c7973258daf8ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
