@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fca3746_add81d61",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-03-07T17:28:41Z",
+      "side": 1,
+      "message": "I get the feeling that there might be a fair amount of complexity coming from this logic. Is there a way we could simplify?\n\nPerhaps let\u0027s iterate over the size-aligned range in the interval tree, and if anything is already mapped in there we fallback to mapping the fauling ipa at page granularity? So you either fault in all the pages in the range or a single page. Does that make things any simpler?",
+      "range": {
+        "startLine": 1726,
+        "startChar": 6,
+        "endLine": 1726,
+        "endChar": 11
+      },
+      "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b60ca60c_1009ba76",
         "filename": "arch/arm64/kvm/mmu.c",
         "patchSetId": 14
