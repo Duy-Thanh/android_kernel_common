@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15d46f51_22935c9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3879141
+      },
+      "writtenOn": "2025-03-07T13:35:15Z",
+      "side": 1,
+      "message": "Yes, we want to store every log with all loglevel during hibernation.",
+      "parentUuid": "8b4d00a5_cfd9cc73",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "148c12a8_2a5b92f0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-07T06:47:04Z",
       "side": 1,
       "message": "A second clarification: Is this reserved memory something separate from pstore? If not, why is pstore not sufficient?",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "918b008f_da46fef6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3879141
+      },
+      "writtenOn": "2025-03-07T13:35:15Z",
+      "side": 1,
+      "message": "Yes, the reserved memory is separated from pstore.",
+      "parentUuid": "148c12a8_2a5b92f0",
       "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +119,24 @@
       "writtenOn": "2025-03-07T06:47:04Z",
       "side": 1,
       "message": "If you want to add a hook into vprintk_store(), it seems like it should be somewhat generic to the function, as it could be used for many purposes.  This naming seems far too narrow to how you intend to use it.  I\u0027d suggest something like trace_android_vh_vprintk_store() since it would make more sense to others using the hook for different purposes.",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13155917_a56e2f0e",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2251,
+      "author": {
+        "id": 3879141
+      },
+      "writtenOn": "2025-03-07T13:35:15Z",
+      "side": 1,
+      "message": "I agree with you. I will make new patchset with hook named trace_android_vh_vprintk_store().",
+      "parentUuid": "faad2153_42f8face",
       "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
