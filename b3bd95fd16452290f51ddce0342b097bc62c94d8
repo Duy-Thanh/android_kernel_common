@@ -63,6 +63,30 @@
       },
       "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d93c747_8b17eb6e",
+        "filename": "drivers/bluetooth/btintel_pcie.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1966830
+      },
+      "writtenOn": "2025-03-07T19:07:03Z",
+      "side": 1,
+      "message": "I am not sure how Android kernel want to handle this. In ChromeOS, I would cherry pick the patch from Arnd on top of mine. Either wait for his patch is landed on linux, or cherry pick as FROMLIST. Or if I made changes to my patch, it should be BACKPORT. I will keep this comment open, for Tim to decide.",
+      "parentUuid": "a8d5435c_fd4c5876",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 65
+      },
+      "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
