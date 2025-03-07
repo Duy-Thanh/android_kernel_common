@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b4d00a5_cfd9cc73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-07T06:47:04Z",
+      "side": 1,
+      "message": "If I recall, part of the issue here is the printk messages are at a loglevel too low to be stored into dmesg, resulting in them not being sent to the pstore dmesg buffer. Is that correct?\n\nI think Todd\u0027s request for clarification would be helped by expanding this commit message to clearly explain the reason why the regular printk-\u003edmsg-\u003epstore path doesn\u0027t work in this use case, so that the need for a hook is clear.",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "148c12a8_2a5b92f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-07T06:47:04Z",
+      "side": 1,
+      "message": "A second clarification: Is this reserved memory something separate from pstore? If not, why is pstore not sufficient?",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42062d5a_5bb30cc1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -32,6 +66,23 @@
       "side": 1,
       "message": "We do reboot system when there is an error during hibernation. And we need kernel log during hibernation, but kernel log will be reset after system rebooting.\nWe enable this funcion, copy kernel log, in PM_HIBERNATION_PREPARE callback, and disable in PM_POST_HIBERNATION.",
       "parentUuid": "42062d5a_5bb30cc1",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faad2153_42f8face",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2251,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-07T06:47:04Z",
+      "side": 1,
+      "message": "If you want to add a hook into vprintk_store(), it seems like it should be somewhat generic to the function, as it could be used for many purposes.  This naming seems far too narrow to how you intend to use it.  I\u0027d suggest something like trace_android_vh_vprintk_store() since it would make more sense to others using the hook for different purposes.",
       "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
