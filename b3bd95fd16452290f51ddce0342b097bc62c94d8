@@ -87,6 +87,30 @@
       },
       "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6de0fd_cf75f7b6",
+        "filename": "drivers/bluetooth/btintel_pcie.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-03-08T00:21:45Z",
+      "side": 1,
+      "message": "We\u0027ll never support any 32b x86 targets with this kernel branch, so we should be able to drop this portion of the patch.\n\nWe can cherrypick Arnd\u0027s patch in the future, if necessary.",
+      "parentUuid": "3d93c747_8b17eb6e",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 65
+      },
+      "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
