@@ -101,6 +101,24 @@
       "message": "Ok",
       "revId": "25c23a7347dcef96245e47c842d3aee073d4e5f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0dbd585_250a2f83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3799973
+      },
+      "writtenOn": "2025-03-09T10:08:36Z",
+      "side": 1,
+      "message": "repo download -b change-158491 kernel/common 158491",
+      "parentUuid": "a57cedc3_1cb03224",
+      "revId": "25c23a7347dcef96245e47c842d3aee073d4e5f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
