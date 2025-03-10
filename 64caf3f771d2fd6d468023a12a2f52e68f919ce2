@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cc6a017_993090ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3879141
+      },
+      "writtenOn": "2025-03-10T06:39:24Z",
+      "side": 1,
+      "message": "I pushed new commit. I explained more detail in commit message.",
+      "parentUuid": "cff68adf_28708b5f",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42062d5a_5bb30cc1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
