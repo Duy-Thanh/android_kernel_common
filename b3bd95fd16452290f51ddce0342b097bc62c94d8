@@ -111,6 +111,30 @@
       },
       "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "035880da_afa61168",
+        "filename": "drivers/bluetooth/btintel_pcie.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 3923891
+      },
+      "writtenOn": "2025-03-10T06:29:01Z",
+      "side": 1,
+      "message": "Made the necenssary change.",
+      "parentUuid": "3e6de0fd_cf75f7b6",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 65
+      },
+      "revId": "b3bd95fd16452290f51ddce0342b097bc62c94d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
