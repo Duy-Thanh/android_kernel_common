@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c43249c9_9bf72a76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-10T18:36:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "15d46f51_22935c9a",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "148c12a8_2a5b92f0",
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "I agree with you. I will make new patchset with hook named trace_android_vh_vprintk_store().",
       "parentUuid": "faad2153_42f8face",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ecd1e6_7f7b486a",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2251,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-10T18:36:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "13155917_a56e2f0e",
       "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
