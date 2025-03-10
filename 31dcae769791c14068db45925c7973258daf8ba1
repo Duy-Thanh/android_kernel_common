@@ -88,6 +88,24 @@
       "parentUuid": "0c286ceb_2cdde528",
       "revId": "31dcae769791c14068db45925c7973258daf8ba1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baf6cdd5_aedcc4f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-03-10T19:49:34Z",
+      "side": 1,
+      "message": "That is right, we can use dmabuf heaps to test CMA allocations after init, and it will be the same result.",
+      "parentUuid": "096a20e8_e1beb50e",
+      "revId": "31dcae769791c14068db45925c7973258daf8ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
