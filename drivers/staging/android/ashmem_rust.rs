@@ -82,10 +82,10 @@ module! {
 }
 
 struct AshmemModule {
-    _misc: Pin<Box<MiscDeviceRegistration<Ashmem>>>,
-    _toggle_unpin: Pin<Box<MiscDeviceRegistration<AshmemToggleMisc<AshmemToggleShrinker>>>>,
-    _toggle_read: Pin<Box<MiscDeviceRegistration<AshmemToggleMisc<AshmemToggleRead>>>>,
-    _toggle_exec: Pin<Box<MiscDeviceRegistration<AshmemToggleMisc<AshmemToggleExec>>>>,
+    _misc: Pin<KBox<MiscDeviceRegistration<Ashmem>>>,
+    _toggle_unpin: Pin<KBox<MiscDeviceRegistration<AshmemToggleMisc<AshmemToggleShrinker>>>>,
+    _toggle_read: Pin<KBox<MiscDeviceRegistration<AshmemToggleMisc<AshmemToggleRead>>>>,
+    _toggle_exec: Pin<KBox<MiscDeviceRegistration<AshmemToggleMisc<AshmemToggleExec>>>>,
 }
 
 impl kernel::Module for AshmemModule {
@@ -102,7 +102,7 @@ impl kernel::Module for AshmemModule {
         ashmem_range::set_shrinker_enabled(true)?;
 
         Ok(Self {
-            _misc: Box::pin_init(
+            _misc: KBox::pin_init(
                 MiscDeviceRegistration::register(MiscDeviceOptions {
                     name: c_str!("ashmem"),
                 }),
@@ -126,17 +126,17 @@ struct AshmemInner {
     size: usize,
     prot_mask: usize,
     /// If set, then this holds the ashmem name without the dev/ashmem/ prefix. No zero terminator.
-    name: Option<Vec<u8>>,
+    name: Option<KVec<u8>>,
     file: Option<ShmemFile>,
     area: Area,
 }
 
 #[vtable]
 impl MiscDevice for Ashmem {
-    type Ptr = Pin<Box<Self>>;
+    type Ptr = Pin<KBox<Self>>;
 
-    fn open(_: &File, _: &MiscDeviceRegistration<Ashmem>) -> Result<Pin<Box<Self>>> {
-        Box::try_pin_init(
+    fn open(_: &File, _: &MiscDeviceRegistration<Ashmem>) -> Result<Pin<KBox<Self>>> {
+        KBox::try_pin_init(
             try_pin_init! {
                 Ashmem {
                     inner <- new_mutex!(AshmemInner {
@@ -296,7 +296,7 @@ impl Ashmem {
             .position(|&c| c == 0)
             .unwrap_or(local_name.len() - 1);
 
-        let mut v = Vec::with_capacity(len, GFP_KERNEL)?;
+        let mut v = KVec::with_capacity(len, GFP_KERNEL)?;
         v.extend_from_slice(&local_name[..len], GFP_KERNEL)?;
 
         let mut asma = self.inner.lock();
@@ -521,17 +521,17 @@ unsafe extern "C" fn ashmem_memfd_ioctl(file: *mut bindings::file, cmd: u32, arg
 
 fn ashmem_memfd_ioctl_inner(file: &File, cmd: u32, arg: usize) -> Result<isize> {
     use kernel::bindings::{F_ADD_SEALS, F_GET_SEALS, F_SEAL_FUTURE_WRITE, F_SEAL_WRITE};
-    const WRITE_SEALS_MASK: u64 = (F_SEAL_WRITE | F_SEAL_FUTURE_WRITE) as u64;
+    const WRITE_SEALS_MASK: usize = (F_SEAL_WRITE | F_SEAL_FUTURE_WRITE) as usize;
 
     /// # Safety
     /// The file must be a memfd file.
-    unsafe fn get_seals(file: &File) -> Result<u64> {
+    unsafe fn get_seals(file: &File) -> Result<usize> {
         // SAFETY: This is a memfd file.
-        let seals: i64 = unsafe { bindings::memfd_fcntl(file.as_ptr(), F_GET_SEALS, 0) };
+        let seals: isize = unsafe { bindings::memfd_fcntl(file.as_ptr(), F_GET_SEALS, 0) };
         if seals < 0 {
             return Err(Error::from_errno(seals as i32));
         }
-        Ok(seals as u64)
+        Ok(seals as usize)
     }
 
     let size = _IOC_SIZE(cmd);

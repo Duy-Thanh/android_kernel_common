@@ -7,6 +7,7 @@
 use kernel::{
     bindings,
     error::{from_err_ptr, to_result, Result},
+    ffi::{c_int, c_ulong},
     fs::file::{File, LocalFile},
     miscdevice::{loff_t, IovIter},
     mm::virt::{vm_flags_t, VmAreaNew},
@@ -17,7 +18,6 @@ use kernel::{
 
 use core::{
     cell::UnsafeCell,
-    ffi::{c_int, c_ulong},
     ptr::{addr_of_mut, NonNull},
 };
 
@@ -56,7 +56,7 @@ impl ShmemFile {
     pub(crate) fn new(name: &CStr, size: usize, flags: vm_flags_t) -> Result<Self> {
         // SAFETY: The name is a nul-terminated string.
         let vmfile = from_err_ptr(unsafe {
-            bindings::shmem_file_setup(name.as_char_ptr(), size as _, flags)
+            bindings::shmem_file_setup(name.as_char_ptr(), size as i64, flags)
         })?;
 
         // SAFETY: The call to `shmem_file_setup` was successful, so `vmfile` is a valid pointer to
