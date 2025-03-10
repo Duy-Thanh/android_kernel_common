@@ -15,6 +15,7 @@ enum hci_devcoredump_pkt_type {
 	HCI_DEVCOREDUMP_PKT_PATTERN,
 	HCI_DEVCOREDUMP_PKT_COMPLETE,
 	HCI_DEVCOREDUMP_PKT_ABORT,
+	HCI_DEVCOREDUMP_PKT_ABORT_2,
 };
 
 struct hci_devcoredump_skb_cb {
