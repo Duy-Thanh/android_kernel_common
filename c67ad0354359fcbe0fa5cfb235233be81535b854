@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f3de64_c4489ca9",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3635,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-03-10T17:41:49Z",
+      "side": 1,
+      "message": "What happened to `cs-\u003ecss.cgroup-\u003enr_populated_csets` here?",
+      "range": {
+        "startLine": 3635,
+        "startChar": 1,
+        "endLine": 3635,
+        "endChar": 47
+      },
+      "revId": "c67ad0354359fcbe0fa5cfb235233be81535b854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
