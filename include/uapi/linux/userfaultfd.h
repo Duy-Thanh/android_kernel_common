@@ -41,7 +41,8 @@
 			   UFFD_FEATURE_WP_HUGETLBFS_SHMEM |	\
 			   UFFD_FEATURE_WP_UNPOPULATED |	\
 			   UFFD_FEATURE_POISON |		\
-			   UFFD_FEATURE_MOVE)
+			   UFFD_FEATURE_MOVE |			\
+			   UFFD_FEATURE_MOVE_FIXED)
 #define UFFD_API_IOCTLS				\
 	((__u64)1 << _UFFDIO_REGISTER |		\
 	 (__u64)1 << _UFFDIO_UNREGISTER |	\
@@ -224,6 +225,11 @@ struct uffdio_api {
 	 *
 	 * UFFD_FEATURE_MOVE indicates that the kernel supports moving an
 	 * existing page contents from userspace.
+	 *
+	 * UFFD_FEATURE_MOVE_FIXED indicates that the MOVE ioctl has been fixed
+	 * for handling swap-cache source folios. Also, the livelock situation
+	 * that arises when multiple threads attempt to move the same source
+	 * folio is fixed.
 	 */
 #define UFFD_FEATURE_PAGEFAULT_FLAG_WP		(1<<0)
 #define UFFD_FEATURE_EVENT_FORK			(1<<1)
@@ -241,6 +247,7 @@ struct uffdio_api {
 #define UFFD_FEATURE_WP_UNPOPULATED		(1<<13)
 #define UFFD_FEATURE_POISON			(1<<14)
 #define UFFD_FEATURE_MOVE			(1<<16)
+#define UFFD_FEATURE_MOVE_FIXED			(1<<63)
 	__u64 features;
 
 	__u64 ioctls;
