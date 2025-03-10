@@ -70,6 +70,24 @@
       "parentUuid": "8b7e011a_1ca4c854",
       "revId": "31dcae769791c14068db45925c7973258daf8ba1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "096a20e8_e1beb50e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-10T19:40:50Z",
+      "side": 1,
+      "message": "That wasn\u0027t my question though. I wanted to understand why your tests require CMA alocations before init starts. Sounds like without that requirement you could use dmabug heaps to get the same results (make CMA allocations).",
+      "parentUuid": "0c286ceb_2cdde528",
+      "revId": "31dcae769791c14068db45925c7973258daf8ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
