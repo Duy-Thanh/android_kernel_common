@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4bfc25b_4b437c35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969731
+      },
+      "writtenOn": "2025-03-10T22:52:17Z",
+      "side": 1,
+      "message": "Hello, while resending the series according to the (false positive)KMI change and rebasing, this losts the code review. Can the owners review it again? (this does not change anything)",
+      "revId": "6725a62652c441650bc6e42c2db1a98e54fb7c9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
