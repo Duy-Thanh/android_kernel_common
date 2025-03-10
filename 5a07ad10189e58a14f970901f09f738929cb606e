@@ -16,6 +16,24 @@
       "message": "Override checkpatch BUG failure as we want to fail if the refcount if corrupted",
       "revId": "5a07ad10189e58a14f970901f09f738929cb606e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cdf5a96_0101c261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-03-10T15:11:04Z",
+      "side": 1,
+      "message": "The BUG_ON here is compiled out",
+      "parentUuid": "a8001568_fd516a6e",
+      "revId": "5a07ad10189e58a14f970901f09f738929cb606e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
