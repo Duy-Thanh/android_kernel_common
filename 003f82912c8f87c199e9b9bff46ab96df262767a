@@ -33,6 +33,42 @@
       "message": "This branch is no longer respin eligible from 2025-03-01, unless for security patches cited in the Android Security Bulletin (ASB).",
       "revId": "003f82912c8f87c199e9b9bff46ab96df262767a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0db6ad80_a17ff682",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2025-03-10T13:34:25Z",
+      "side": 1,
+      "message": "It looks I can\u0027t create a respin request for the 2024-08 branch, I\u0027ve pasted the link in the rquest to 2024-11 branch anyway",
+      "parentUuid": "af78f6bf_19c6c515",
+      "revId": "003f82912c8f87c199e9b9bff46ab96df262767a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66660b93_025e0e50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2025-03-10T13:34:25Z",
+      "side": 1,
+      "message": "sorry for that, is it still possible to make a kernel fix?",
+      "parentUuid": "4ccc55a7_311d0800",
+      "revId": "003f82912c8f87c199e9b9bff46ab96df262767a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
