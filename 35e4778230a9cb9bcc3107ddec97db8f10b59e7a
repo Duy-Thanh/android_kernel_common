@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b997056c_836027b6",
+        "filename": "drivers/virtio/virtio_balloon.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2007406
+      },
+      "writtenOn": "2025-03-11T21:22:19Z",
+      "side": 1,
+      "message": "Here is the previous discussion we had - https://partnerissuetracker.corp.google.com/issues/315173520#comment46.\n\nHost reclaiming the page would initiate the TLBIs.\nThe reason we need this call in the guest is that we don\u0027t have to trust the host to do the reclaim.",
+      "parentUuid": "9b5bd325_134aebcb",
+      "revId": "35e4778230a9cb9bcc3107ddec97db8f10b59e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e86427c0_65a8b608",
         "filename": "drivers/virtio/virtio_balloon.c",
         "patchSetId": 3
