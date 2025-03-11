@@ -16,6 +16,24 @@
       "message": "I don\u0027t see why Lint provided -1, it is not visible from my side. Please provide feedback if anything is requested to change here.",
       "revId": "ccb7ff896a74e9c01d55627fcd72446903386689",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19a6de84_003be47e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-03-11T09:59:29Z",
+      "side": 1,
+      "message": "The XML file has conflict markers. I triggered an update for that file on our side.",
+      "parentUuid": "6c37b193_7b52475d",
+      "revId": "ccb7ff896a74e9c01d55627fcd72446903386689",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
