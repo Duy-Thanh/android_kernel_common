@@ -34,6 +34,24 @@
       "parentUuid": "443ed1fc_839d6664",
       "revId": "f646bd382f898e9364901b3f7a972d5aa1eaf7de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72e358bb_db1f711e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-11T01:36:01Z",
+      "side": 1,
+      "message": "thanks. Please abandon this patch.",
+      "parentUuid": "4a626b49_28cdcf12",
+      "revId": "f646bd382f898e9364901b3f7a972d5aa1eaf7de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
