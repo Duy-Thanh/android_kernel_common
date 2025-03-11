@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6ea203_d2233ebd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2091,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-03-11T12:06:22Z",
+      "side": 1,
+      "message": "I think as this function can load pvmfw, we should update the IOMMU first then call it (similary in `__pkvm_host_donate_sglist_guest`)",
+      "range": {
+        "startLine": 2091,
+        "startChar": 9,
+        "endLine": 2091,
+        "endChar": 31
+      },
+      "revId": "42997374b32a654d80c060b8937f01f034ee9418",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
