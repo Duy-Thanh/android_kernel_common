@@ -32,8 +32,16 @@ static void pps_tty_dcd_change(struct tty_struct *tty, unsigned int status)
 	pps_event(pps, &ts, status ? PPS_CAPTUREASSERT :
 			PPS_CAPTURECLEAR, NULL);
 
+<<<<<<< HEAD   (43908d Merge 09b288fb7f4e ("maple_tree: simplify split calculation")
 	dev_dbg(pps->dev, "PPS %s at %lu\n",
 			status ? "assert" : "clear", jiffies);
+||||||| BASE
+	dev_dbg(pps->dev, "PPS %s at %lu\n",
+			active ? "assert" : "clear", jiffies);
+=======
+	dev_dbg(&pps->dev, "PPS %s at %lu\n",
+			active ? "assert" : "clear", jiffies);
+>>>>>>> BRANCH (a298df usb: dwc3: Fix timeout issue during controller enter/exit fr)
 }
 
 static int (*alias_n_tty_open)(struct tty_struct *tty);
@@ -69,7 +77,7 @@ static int pps_tty_open(struct tty_struct *tty)
 		goto err_unregister;
 	}
 
-	dev_info(pps->dev, "source \"%s\" added\n", info.path);
+	dev_dbg(&pps->dev, "source \"%s\" added\n", info.path);
 
 	return 0;
 
@@ -89,7 +97,7 @@ static void pps_tty_close(struct tty_struct *tty)
 	if (WARN_ON(!pps))
 		return;
 
-	dev_info(pps->dev, "removed\n");
+	dev_info(&pps->dev, "removed\n");
 	pps_unregister_source(pps);
 }
 
