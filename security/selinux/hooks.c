@@ -92,6 +92,7 @@
 #include <linux/fsnotify.h>
 #include <linux/fanotify.h>
 #include <linux/io_uring.h>
+#include <linux/realpath.h>
 
 #include "avc.h"
 #include "objsec.h"
@@ -3813,16 +3814,25 @@ static int selinux_mmap_file(struct file *file,
 	int rc;
 
 	if (file) {
+		PR_INFO_FILE(file);
+
 		ad.type = LSM_AUDIT_DATA_FILE;
 		ad.u.file = file;
 		rc = inode_has_perm(current_cred(), file_inode(file),
 				    FILE__MAP, &ad);
-		if (rc)
+
+		if (!rc) {
+			pr_info("mmap_file: reject");
 			return rc;
+		}
 	}
 
-	return file_map_prot_check(file, prot,
+	rc = file_map_prot_check(file, prot,
 				   (flags & MAP_TYPE) == MAP_SHARED);
+
+	pr_info("file_map_prot_check, rc=%d, prot=%lx, shared=%d",rc, prot, (int) flags & MAP_TYPE);
+
+	return rc;
 }
 
 static int selinux_file_mprotect(struct vm_area_struct *vma,

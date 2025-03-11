@@ -8,6 +8,7 @@
 #include "common.h"
 #include <linux/magic.h>
 #include <linux/proc_fs.h>
+#include <linux/realpath.h>
 
 /**
  * tomoyo_encode2 - Encode binary string to ascii string.
@@ -91,7 +92,7 @@ char *tomoyo_encode(const char *str)
  *
  * If dentry is a directory, trailing '/' is appended.
  */
-static char *tomoyo_get_absolute_path(const struct path *path, char * const buffer,
+char *tomoyo_get_absolute_path(const struct path *path, char * const buffer,
 				      const int buflen)
 {
 	char *pos = ERR_PTR(-ENOMEM);
