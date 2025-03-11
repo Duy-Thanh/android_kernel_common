@@ -248,7 +248,7 @@ struct ufs_query {
 struct ufs_dev_cmd {
 	enum dev_cmd_type type;
 	struct mutex lock;
-	struct completion *complete;
+	struct completion *complete __attribute__((deprecated));
 	struct ufs_query query;
 };
 
