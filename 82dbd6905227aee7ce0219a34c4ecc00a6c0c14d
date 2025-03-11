@@ -16,6 +16,24 @@
       "message": "FYI, I would be careful when using this approach. Presubmit can mark individual changes as \"submittable\" incorrectly. Having a PV-2 with only ABI breaking targets would be preferred (or safer). Thanks.",
       "revId": "82dbd6905227aee7ce0219a34c4ecc00a6c0c14d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da16a087_82e53061",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-03-11T21:07:13Z",
+      "side": 1,
+      "message": "ok thanks, I will keep in mind.",
+      "parentUuid": "ce7ea247_f5d4db97",
+      "revId": "82dbd6905227aee7ce0219a34c4ecc00a6c0c14d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
