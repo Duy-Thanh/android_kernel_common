@@ -1511,8 +1511,13 @@ void usb_del_gadget(struct usb_gadget *gadget)
 
 	kobject_uevent(&udc->dev.kobj, KOBJ_REMOVE);
 	sysfs_remove_link(&udc->dev.kobj, "gadget");
+<<<<<<< HEAD   (e0db1e Merge 6.1.129 into android14-6.1-lts)
 	flush_work(&gadget->work);
+||||||| BASE
+=======
+>>>>>>> BRANCH (6ae7ac Linux 6.1.130)
 	device_del(&gadget->dev);
+	flush_work(&gadget->work);
 	ida_free(&gadget_id_numbers, gadget->id_number);
 	cancel_work_sync(&udc->vbus_work);
 	device_unregister(&udc->dev);
