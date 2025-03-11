@@ -406,7 +406,7 @@ EXPORT_SYMBOL(dma_fence_signal_timestamp);
  */
 int dma_fence_signal_locked(struct dma_fence *fence)
 {
-	return dma_fence_signal_timestamp_locked(fence, ktime_get());
+	return dma_fence_signal_timestamp_locked(fence, fence->timestamp);
 }
 EXPORT_SYMBOL(dma_fence_signal_locked);
 
@@ -435,7 +435,7 @@ int dma_fence_signal(struct dma_fence *fence)
 	tmp = dma_fence_begin_signalling();
 
 	spin_lock_irqsave(fence->lock, flags);
-	ret = dma_fence_signal_timestamp_locked(fence, ktime_get());
+	ret = dma_fence_signal_timestamp_locked(fence, fence->timestamp);
 	spin_unlock_irqrestore(fence->lock, flags);
 
 	dma_fence_end_signalling(tmp);
