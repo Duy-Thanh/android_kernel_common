@@ -26,6 +26,10 @@
 #include <linux/shmem_fs.h>
 #include "ashmem.h"
 
+#define CREATE_TRACE_POINTS
+#include <trace/events/ashmem.h>
+#undef CREATE_TRACE_POINTS
+
 #define ASHMEM_NAME_PREFIX "dev/ashmem/"
 #define ASHMEM_NAME_PREFIX_LEN (sizeof(ASHMEM_NAME_PREFIX) - 1)
 #define ASHMEM_FULL_NAME_LEN (ASHMEM_NAME_LEN + ASHMEM_NAME_PREFIX_LEN)
@@ -554,11 +558,29 @@ static struct shrinker ashmem_shrinker = {
 	.seeks = DEFAULT_SEEKS * 4,
 };
 
+/* Assumes that ashmem_mutex is held. */
+static char *get_buf_name(struct ashmem_area *asma)
+{
+	char *start = asma->name;
+
+	if (start[ASHMEM_NAME_PREFIX_LEN] != '\0')
+		start = &start[ASHMEM_NAME_PREFIX_LEN];
+
+	return start;
+}
+
 static int set_prot_mask(struct ashmem_area *asma, unsigned long prot)
 {
 	int ret = 0;
 
 	mutex_lock(&ashmem_mutex);
+
+	/* These cannot be unset when using memfd, so log any users here. */
+	if (!(prot & PROT_READ))
+		trace_unset_prot_read(get_buf_name(asma));
+
+	if (!(prot & PROT_EXEC))
+		trace_unset_prot_exec(get_buf_name(asma));
 
 	/* Ensure the buffer can only be mapped with PROT_READ iff it has that permission. */
 	if (ignore_unset_prot_read)
@@ -825,12 +847,15 @@ static int ashmem_pin_unpin(struct ashmem_area *asma, unsigned long cmd,
 	switch (cmd) {
 	case ASHMEM_PIN:
 		ret = ashmem_pin(asma, pgstart, pgend, &range);
+		trace_pin_range(get_buf_name(asma), ret);
 		break;
 	case ASHMEM_UNPIN:
 		ret = unpinning_enable ? ashmem_unpin(asma, pgstart, pgend, &range) : 0;
+		trace_unpin_range(get_buf_name(asma), ret);
 		break;
 	case ASHMEM_GET_PIN_STATUS:
 		ret = ashmem_get_pin_status(asma, pgstart, pgend);
+		trace_get_range_pin_status(get_buf_name(asma), ret);
 		break;
 	}
 
@@ -888,6 +913,7 @@ static long ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			ret = ashmem_shrink_count(&ashmem_shrinker, &sc);
 			ashmem_shrink_scan(&ashmem_shrinker, &sc);
 		}
+		trace_purge_all_caches(ret);
 		break;
 	case ASHMEM_GET_FILE_ID:
 		/* Lock around our check to avoid racing with ashmem_mmap(). */
@@ -1034,7 +1060,7 @@ static const struct file_operations ignore_unset_prot_read_fops = {
 static const struct file_operations ignore_unset_prot_exec_fops = {
 	.owner = THIS_MODULE,
 	.open = ignore_unset_prot_exec_open,
-	.read= attr_read,
+	.read = attr_read,
 	.write = attr_write,
 };
 
