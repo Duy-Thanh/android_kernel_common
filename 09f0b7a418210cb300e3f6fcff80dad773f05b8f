@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3627bd31_0674a2c3",
+        "filename": "Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-03-12T01:35:19Z",
+      "side": 1,
+      "message": "@willmcvicker@google.com\n\nI deleted this because they are now the same variable with CL:3533681.",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 5
+      },
+      "revId": "09f0b7a418210cb300e3f6fcff80dad773f05b8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
