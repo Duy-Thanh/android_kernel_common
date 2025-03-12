@@ -1262,7 +1262,7 @@ endif
 $(sort $(KBUILD_LDS) $(KBUILD_VMLINUX_OBJS) $(KBUILD_VMLINUX_LIBS)): . ;
 
 ifeq ($(origin KERNELRELEASE),file)
-filechk_kernel.release = $(srctree)/scripts/setlocalversion $(srctree)
+filechk_kernel.release = $(srctree)/scripts/setlocalversion $(srctree) $(objtree)
 else
 filechk_kernel.release = echo $(KERNELRELEASE)
 endif

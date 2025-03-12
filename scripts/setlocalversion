@@ -13,7 +13,7 @@
 set -e
 
 usage() {
-	echo "Usage: $0 [--no-local] [srctree]" >&2
+	echo "Usage: $0 [--no-local] [srctree] [objtree]" >&2
 	exit 1
 }
 
@@ -28,7 +28,20 @@ if test $# -gt 0; then
 	srctree=$1
 	shift
 fi
-if test $# -gt 0 -o ! -d "$srctree"; then
+if test ! -d "$srctree"; then
+	usage
+fi
+
+objtree=.
+if test $# -gt 0; then
+	objtree=$1
+	shift
+fi
+if test ! -d "$objtree"; then
+	usage
+fi
+
+if test $# -gt 0; then
 	usage
 fi
 
@@ -186,7 +199,7 @@ if ${no_local}; then
 	exit 0
 fi
 
-if ! test -e include/config/auto.conf; then
+if ! test -e ${objtree}/include/config/auto.conf; then
 	echo "Error: kernelrelease not valid - run 'make prepare' to update it" >&2
 	exit 1
 fi
