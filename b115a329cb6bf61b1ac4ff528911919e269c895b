@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "524ad4bc_f99ac9d6",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-03-12T16:02:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7da39d99_b8c48bb3",
+      "range": {
+        "startLine": 1726,
+        "startChar": 6,
+        "endLine": 1726,
+        "endChar": 11
+      },
+      "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b60ca60c_1009ba76",
@@ -167,6 +191,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92aedb3c_d4978c24",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-03-12T16:02:40Z",
+      "side": 1,
+      "message": "ppages are now preallocated!",
+      "parentUuid": "0bdaf570_4c616088",
+      "range": {
+        "startLine": 1735,
+        "startChar": 10,
+        "endLine": 1735,
+        "endChar": 53
+      },
+      "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efee9a0d_2a155f0c",
@@ -180,6 +228,30 @@
       "writtenOn": "2025-03-07T17:08:01Z",
       "side": 1,
       "message": "Why is it now OK to do this outside the critical section? Don\u0027t we risk a race with e.g. ballooning ?",
+      "range": {
+        "startLine": 1816,
+        "startChar": 26,
+        "endLine": 1816,
+        "endChar": 50
+      },
+      "revId": "b115a329cb6bf61b1ac4ff528911919e269c895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef6954dc_b0192fce",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-03-12T16:02:40Z",
+      "side": 1,
+      "message": "It is not! :-\\ \n\nI\u0027ve moved the lock!",
+      "parentUuid": "efee9a0d_2a155f0c",
       "range": {
         "startLine": 1816,
         "startChar": 26,
