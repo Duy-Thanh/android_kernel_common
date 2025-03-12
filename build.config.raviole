@@ -1,0 +1,18 @@
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.constants
+
+KERNEL_BINARY=Image.lz4
+TRIM_UNUSED_MODULES=1
+INITRAMFS_VENDOR_RAMDISK_FRAGMENT_NAME=dlkm
+LZ4_RAMDISK=1
+
+BOOT_IMAGE_HEADER_VERSION=4
+KERNEL_VENDOR_CMDLINE="ignore_loglevel earlycon clk_ignore_unused"
+KERNEL_VENDOR_CMDLINE+=" console=ttySAC0,3000000n8 androidboot.console=ttySAC0"
+KERNEL_VENDOR_CMDLINE+=" printk.devkmsg=on"
+KERNEL_VENDOR_CMDLINE+=" at24.write_timeout=100 buildvariant=userdebug"
+KERNEL_VENDOR_CMDLINE+=" log_buf_len=1024K"
+KERNEL_VENDOR_CMDLINE+=" firmware_class.path=/vendor/firmware"
+KERNEL_VENDOR_CMDLINE+=" androidboot.selinux=permissive"
+VENDOR_BOOTCONFIG=""
+VENDOR_BOOTCONFIG+=" androidboot.boot_devices=soc@0/14700000.ufs"
+VENDOR_BOOTCONFIG+=" androidboot.vh_sched_available=0"

@@ -24,6 +24,7 @@ load(
     "initramfs",
     "kernel_build",
     "kernel_compile_commands",
+    "kernel_images",
     "kernel_kythe",
     "kernel_modules_install",
     "merge_kzip",
@@ -1365,6 +1366,91 @@ kernel_build(
     makefile = ":Makefile",
     post_defconfig_fragments = [":gki/arm/defconfig/allmodconfig"],
     visibility = ["//visibility:private"],
+)
+
+_RAVIOLE_UPSTREAM_MODULES = [
+    "s3c2410_wdt.ko",
+    "arm_dsu_pmu.ko",
+    "dwc3-exynos.ko",
+    "tcpci_maxim.ko",
+    "ufs-exynos.ko",
+    "phy-exynos-ufs.ko",
+    "at24.ko",
+    "phy-exynos5-usbdrd.ko",
+    "i2c-exynos5.ko",
+]
+
+kernel_build(
+    name = "raviole_upstream",
+    srcs = [":kernel_aarch64_sources"],
+    outs = [
+        "Image.lz4",
+        "System.map",
+        "arch/arm64/boot/dts/exynos/google/gs101-oriole.dtb",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    arch = "arm64",
+    build_config = "build.config.raviole",
+    defconfig = "arch/arm64/configs/gki_defconfig",
+    make_goals = [
+        "Image.lz4",
+        "modules",
+        "exynos/google/gs101-oriole.dtb",
+    ],
+    makefile = ":Makefile",
+    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _RAVIOLE_UPSTREAM_MODULES,
+    pre_defconfig_fragments = ["arch/arm64/configs/raviole_gki.fragment"],
+    strip_modules = True,
+)
+
+kernel_modules_install(
+    name = "raviole_modules_install",
+    kernel_build = ":raviole_upstream",
+)
+
+write_file(
+    name = "raviole_upstream_vendor_boot_modules_list",
+    out = "raviole_upstream_vendor_boot_modules",
+    content = _RAVIOLE_UPSTREAM_MODULES,
+)
+
+kernel_images(
+    name = "raviole_upstream_images",
+    boot_image_outs = [
+        "boot.img",
+        "dtb.img",
+        "vendor_boot.img",
+        "vendor-bootconfig.img",
+    ],
+    build_boot = True,
+    build_dtbo = False,
+    build_initramfs = True,
+    build_vendor_boot = True,
+    build_vendor_dlkm = False,
+    kernel_build = ":raviole_upstream",
+    kernel_modules_install = ":raviole_modules_install",
+    modules_list = ":raviole_upstream_vendor_boot_modules_list",
+    vendor_ramdisk_binaries = [":vendor_ramdisk-debug-loglevel7.img"],
+)
+
+pkg_files(
+    name = "raviole_upstream_dist_files",
+    srcs = [
+        ":raviole_modules_install",
+        ":raviole_upstream",
+        ":raviole_upstream_images",
+    ],
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "raviole_upstream_dist",
+    srcs = [":raviole_upstream_dist_files"],
+    destdir = "out/raviole_upstream/dist",
 )
 
 # KUnit test targets
@@ -3079,4 +3165,5 @@ pkg_zip(
 
 exports_files([
     "Makefile",
+    "vendor_ramdisk-debug.img",
 ])
