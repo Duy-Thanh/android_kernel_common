@@ -11,6 +11,8 @@
 struct lruvec;
 struct scan_control;
 
+struct mem_cgroup_reclaim_cookie;
+
 DECLARE_RESTRICTED_HOOK(android_rvh_set_balance_anon_file_reclaim,
 			TP_PROTO(bool *balance_anon_file_reclaim),
 			TP_ARGS(balance_anon_file_reclaim), 1);
@@ -41,6 +43,7 @@ DECLARE_HOOK(android_vh_mglru_should_abort_scan,
 	TP_PROTO(unsigned long nr_reclaimed, unsigned long nr_to_reclaim,
 	unsigned int order, bool *bypass),
 	TP_ARGS(nr_to_reclaim, nr_reclaimed, order, bypass));
+<<<<<<< HEAD   (b4dbad984802ee8e6294296d3137b3ab2bad6334 ANDROID: qcom: Update the ABI symbol list)
 DECLARE_HOOK(android_vh_mglru_should_abort_scan_ex,
 	TP_PROTO(u64 *ext, bool *bypass),
 	TP_ARGS(ext, bypass));
@@ -52,6 +55,28 @@ DECLARE_HOOK(android_vh_tune_swappiness,
 	TP_PROTO(int *swappiness),
 	TP_ARGS(swappiness));
 DECLARE_HOOK(android_vh_async_psi_bypass,
+||||||| BASE   (c28a1fd1f378c1bb972298ccbe04eebb5576afd9 UPSTREAM: block: fix NULL pointer dereferenced within __blk_)
+DECLARE_HOOK(android_vh_should_memcg_bypass,
+	TP_PROTO(struct mem_cgroup *memcg, int priority, bool *bypass),
+	TP_ARGS(memcg, priority, bypass));
+DECLARE_HOOK(android_vh_do_shrink_slab,
+	TP_PROTO(struct shrinker *shrinker, long *freeable),
+	TP_ARGS(shrinker, freeable));
+DECLARE_HOOK(android_vh_rebalance_anon_lru_bypass,
+=======
+DECLARE_HOOK(android_vh_shrink_node_memcgs_bypass,
+	TP_PROTO(u64 *ext, struct mem_cgroup_reclaim_cookie *partial,
+	unsigned long nr_to_reclaim, unsigned long nr_reclaimed,
+	gfp_t gfp_mask, int order, bool *bypass),
+	TP_ARGS(ext, partial, nr_to_reclaim, nr_reclaimed, gfp_mask, order, bypass));
+DECLARE_HOOK(android_vh_should_memcg_bypass,
+	TP_PROTO(struct mem_cgroup *memcg, int priority, bool *bypass),
+	TP_ARGS(memcg, priority, bypass));
+DECLARE_HOOK(android_vh_do_shrink_slab,
+	TP_PROTO(struct shrinker *shrinker, long *freeable),
+	TP_ARGS(shrinker, freeable));
+DECLARE_HOOK(android_vh_rebalance_anon_lru_bypass,
+>>>>>>> CHANGE (081bb422e2d869d0bac6447839973b31a19f95c1 ANDROID: vendor hooks: Add hooks to abort scan memcgs)
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
 DECLARE_HOOK(android_vh_handle_folio_writeback,

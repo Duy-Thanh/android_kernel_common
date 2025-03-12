@@ -6170,7 +6170,12 @@ static void shrink_node_memcgs(pg_data_t *pgdat, struct scan_control *sc)
 		struct lruvec *lruvec = mem_cgroup_lruvec(memcg, pgdat);
 		unsigned long reclaimed;
 		unsigned long scanned;
+<<<<<<< HEAD   (b4dbad984802ee8e6294296d3137b3ab2bad6334 ANDROID: qcom: Update the ABI symbol list)
 		bool skip = false;
+||||||| BASE   (c28a1fd1f378c1bb972298ccbe04eebb5576afd9 UPSTREAM: block: fix NULL pointer dereferenced within __blk_)
+=======
+		bool bypass = false;
+>>>>>>> CHANGE (081bb422e2d869d0bac6447839973b31a19f95c1 ANDROID: vendor hooks: Add hooks to abort scan memcgs)
 
 		/*
 		 * This loop can become CPU-bound when target memcgs
@@ -6220,8 +6225,14 @@ static void shrink_node_memcgs(pg_data_t *pgdat, struct scan_control *sc)
 				   sc->nr_scanned - scanned,
 				   sc->nr_reclaimed - reclaimed);
 
+#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
+		trace_android_vh_shrink_node_memcgs_bypass(&sc->android_vendor_data1,
+				    partial, sc->nr_to_reclaim, sc->nr_reclaimed,
+				    sc->gfp_mask, sc->order, &bypass);
+#endif
+
 		/* If partial walks are allowed, bail once goal is reached */
-		if (partial && sc->nr_reclaimed >= sc->nr_to_reclaim) {
+		if (bypass || (partial && sc->nr_reclaimed >= sc->nr_to_reclaim)) {
 			mem_cgroup_iter_break(target_memcg, memcg);
 			break;
 		}
