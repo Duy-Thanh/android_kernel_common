@@ -500,7 +500,8 @@ int dw_pcie_host_init(struct dw_pcie_rp *pp)
 	}
 
 	/* Ignore errors, the link may come up later */
-	dw_pcie_wait_for_link(pci);
+	if (!dw_pcie_cap_is(pci, USE_LINKUP_IRQ))
+		dw_pcie_wait_for_link(pci);
 
 	bridge->sysdata = pp;
 
