@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "482bd109_626e8af0",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-03-12T00:45:03Z",
+      "side": 1,
+      "message": "I don\u0027t think this will work always. For example in `GetDmabufSysfsStats` failing to parse a size (because it\u0027s empty) will just return and not continue to iterate.\nhttps://cs.android.com/android/platform/superproject/main/+/main:system/memory/libmeminfo/libdmabufinfo/dmabuf_sysfs_stats.cpp;drc\u003dfeeaabff2282c7650c2adc5f2fc4abbc20bdd98a;l\u003d100\n\n\nWorse, it doesn\u0027t look like `ReadFileToString` will detect a failure if this happens, and will return an empty string.\nhttps://cs.android.com/android/platform/superproject/main/+/main:system/memory/libmeminfo/libdmabufinfo/dmabuf_sysfs_stats.cpp;drc\u003dfeeaabff2282c7650c2adc5f2fc4abbc20bdd98a;l\u003d91\n\nCould you please return an error code so userspace clearly knows something is wrong when this happens.",
+      "range": {
+        "startLine": 82,
+        "startChar": 41,
+        "endLine": 83,
+        "endChar": 72
+      },
+      "revId": "223dd8562a3d76c595191c59827aa7a342c2e97d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
