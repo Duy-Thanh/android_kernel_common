@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c069291_f2e57d41",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-13T15:49:06Z",
+      "side": 1,
+      "message": "Can you add a hook into `trace/hooks/mm.h` instead of adding a separate header file?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "ad4186d484c515584c0bc8c2ef3ac271b48bb56f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
