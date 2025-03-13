@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1464058_bc0569a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-13T18:50:41Z",
+      "side": 1,
+      "message": "The argument here seems reasonable to me, but I also don\u0027t know the network code well enough to +2 this. Tagging Greg as he might have more context for the revert/colision resolution.",
+      "revId": "6d49352f5ad22dc76a0cad6a493b7fea16c99052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
