@@ -22,6 +22,30 @@
       },
       "revId": "ad4186d484c515584c0bc8c2ef3ac271b48bb56f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197469d6_a96c8257",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1967623
+      },
+      "writtenOn": "2025-03-13T19:39:41Z",
+      "side": 1,
+      "message": "Acknowledged, It should not cause any conflict or trouble. Tried moving the hooks into exisiting trace/hooks/mm.h and functionally it worked the same. Will update this patch.",
+      "parentUuid": "7c069291_f2e57d41",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "ad4186d484c515584c0bc8c2ef3ac271b48bb56f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
