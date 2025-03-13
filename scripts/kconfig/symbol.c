@@ -321,6 +321,11 @@ static void sym_warn_unmet_dep(struct symbol *sym)
 			       "  Selected by [m]:\n");
 
 	fputs(str_get(&gs), stderr);
+<<<<<<< HEAD   (2df6ba ANDROID: android-x86_64_defconfig: Enable CONFIG_CMA)
+||||||| BASE
+=======
+	str_free(&gs);
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 	sym_warnings++;
 }
 

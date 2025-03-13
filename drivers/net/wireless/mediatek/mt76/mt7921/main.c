@@ -546,7 +546,12 @@ static int mt7921_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
 		 * reassociating. But we should trigger the deletion process
 		 * to avoid using incorrect cipher after disconnection,
 		 */
+<<<<<<< HEAD   (2df6ba ANDROID: android-x86_64_defconfig: Enable CONFIG_CMA)
 		if (vif->cfg.assoc)
+||||||| BASE
+=======
+		if (vif->type != NL80211_IFTYPE_STATION || vif->cfg.assoc)
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 			goto out;
 	}
 
