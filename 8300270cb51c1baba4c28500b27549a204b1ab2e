@@ -16,6 +16,24 @@
       "message": "I\u0027m still trying to figure out the correct behaviour on the list:\n\nhttps://lore.kernel.org/r/20250313121559.GB7356@willie-the-truck",
       "revId": "8300270cb51c1baba4c28500b27549a204b1ab2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073d1174_ca42ab67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-13T15:43:10Z",
+      "side": 1,
+      "message": "Sudeep replied confirming my understanding:\n\nhttps://lore.kernel.org/r/Z9Lk9QwAGhYxk8lC@bogus\n\n@sebastianene@google.com Please can you respin the upstream patch with the change I suggested?",
+      "parentUuid": "78d72a0a_75f37ec7",
+      "revId": "8300270cb51c1baba4c28500b27549a204b1ab2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
