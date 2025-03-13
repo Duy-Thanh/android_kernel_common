@@ -16,6 +16,23 @@
       "message": "The argument here seems reasonable to me, but I also don\u0027t know the network code well enough to +2 this. Tagging Greg as he might have more context for the revert/colision resolution.",
       "revId": "6d49352f5ad22dc76a0cad6a493b7fea16c99052",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d69cf9_cd89888b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2025-03-13T19:18:28Z",
+      "side": 1,
+      "message": "I don\u0027t understand why:\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2183436\nRevert \"ipv4/tcp: do not use per netns ctl sockets\"\n\nwas merged.  It says \"not needed for Android devices\" but not sure why??\nWe *do* use network namespaces - both for testing, and in some oem/vendor code.",
+      "revId": "6d49352f5ad22dc76a0cad6a493b7fea16c99052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
