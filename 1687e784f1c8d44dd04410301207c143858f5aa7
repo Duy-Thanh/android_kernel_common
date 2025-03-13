@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0041013e_4f7fb550",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-13T15:49:06Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Can not find the original change on base branch (android15-6.6) for this change.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCan not find the original change on base branch (android15-6.6) for this change.\nPlease ensure that the Change-Id of this change is same as the original change on the base branch.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nThe original change is 001d8a58c0f43a84c9e8df34d72c1f0319396cec on android15-6.6. Please abandon this patch and cherry-pick that one.",
+      "revId": "1687e784f1c8d44dd04410301207c143858f5aa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
