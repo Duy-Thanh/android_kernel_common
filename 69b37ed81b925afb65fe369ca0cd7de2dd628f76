@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cab6e28_4184545f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3910417
+      },
+      "writtenOn": "2025-03-13T08:56:27Z",
+      "side": 1,
+      "message": "We have fixed merge conflicts on abi.stg and symbols/honor for this series, please review again.",
+      "revId": "69b37ed81b925afb65fe369ca0cd7de2dd628f76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
