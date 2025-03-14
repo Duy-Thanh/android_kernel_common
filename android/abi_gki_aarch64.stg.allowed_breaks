@@ -113,3 +113,5 @@ type 'struct cgroup_root' changed
 type 'struct xhci_sideband' changed
   was fully defined, is now only declared
 
+variable symbol 'const struct dwc3* const ANDROID_GKI_struct_dwc3' changed
+  CRC changed from 0x231d8c6f to 0x540a136
