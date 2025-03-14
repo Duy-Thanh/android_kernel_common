@@ -16,6 +16,24 @@
       "message": "INSTALL_MOD_DIR was set to `extra/\u003cext_mod\u003e`, but it looks like this replacement does not work any more. This causes the build error on initramfs.",
       "revId": "b03981b6e7c05f22d291187b245b528a5a17bf99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d1159e_e9f56d04",
+        "filename": "scripts/Makefile.modinst",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-03-14T02:16:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a91f24b_22ee95da",
+      "revId": "b03981b6e7c05f22d291187b245b528a5a17bf99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
