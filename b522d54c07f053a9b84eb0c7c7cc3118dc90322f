@@ -16,6 +16,23 @@
       "message": "Changed commit title from \"FROMGIT\" to \"BACKPORT: FROMGIT:\" due to there is conflict during cherry-pick, thanks Sandeep to mention that.",
       "revId": "b522d54c07f053a9b84eb0c7c7cc3118dc90322f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abdc80c2_ad9b1fb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-14T15:25:12Z",
+      "side": 1,
+      "message": "What happend to the SoB from Jaegeuk on the original commit? Was `git cherry-pick -x 7261e28fe6e7` not used here? It sounds like the patch was applied manually instead. I\u0027ll try to fix this 1 sec.",
+      "revId": "b522d54c07f053a9b84eb0c7c7cc3118dc90322f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
