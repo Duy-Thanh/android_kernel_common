@@ -69,6 +69,42 @@
       "parentUuid": "4ccc55a7_311d0800",
       "revId": "003f82912c8f87c199e9b9bff46ab96df262767a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a8edc2_09c04f73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-03-14T10:01:34Z",
+      "side": 1,
+      "message": "This is intentional, because the ASB related respins are done automatically and so nobody should need to respin 2024-08 manually anymore. Please do not use this outdated branch anymore for new releases.",
+      "parentUuid": "0db6ad80_a17ff682",
+      "revId": "003f82912c8f87c199e9b9bff46ab96df262767a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fef9ff_061cc615",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-03-14T10:01:34Z",
+      "side": 1,
+      "message": "*Respin requests are accepted only for a given release branch for a maximum of six months after the initial public release. After six months, branches are eligible for respin only for security patches cited in an Android Security Bulletin.*\n\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
+      "parentUuid": "66660b93_025e0e50",
+      "revId": "003f82912c8f87c199e9b9bff46ab96df262767a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
