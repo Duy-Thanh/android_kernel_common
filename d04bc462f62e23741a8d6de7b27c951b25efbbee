@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2680a7fe_49d248a0",
+        "filename": "mm/cma.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-14T19:49:29Z",
+      "side": 1,
+      "message": "We usually add vendor fields at the end of the structures. Any specific reason this one should be in the middle?",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4758837b_b4e0e203",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/cma.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/cma.h",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "\tANDROID_VENDOR_DATA(1);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d04bc462f62e23741a8d6de7b27c951b25efbbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
