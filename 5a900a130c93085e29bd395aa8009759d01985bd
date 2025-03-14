@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "919c0147_0c7ad348",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-03-14T15:58:59Z",
+      "side": 1,
+      "message": "sbi-\u003epin_sem is broken. let us check what\u0027s going on.",
+      "revId": "5a900a130c93085e29bd395aa8009759d01985bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
