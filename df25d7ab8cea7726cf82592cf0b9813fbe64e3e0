@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "98f4e4be_f6418e4d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-14T23:12:48Z",
+      "side": 1,
+      "message": "The ABI change actually seems to be triggered not by this CL but by aosp/3544220 (which is already merged in android15-6.6): this is the cause:\n\n```\ntype \u0027struct device\u0027 changed\n  byte size changed from 920 to 928\n  member \u0027struct dma_coherent_mem* dma_mem\u0027 was added\n```\n\nand it is caused by enabling CONFIG_OF_EARLY_FLATTREE by default: https://android-review.git.corp.google.com/c/kernel/common/+/3544220/1/drivers/of/Kconfig#56 which selects CONFIG_DMA_DECLARE_COHERENT and thus adds `dma_mem` to `struct device`.",
+      "parentUuid": "39a29c3d_1f16d6d0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 64
+      },
+      "revId": "df25d7ab8cea7726cf82592cf0b9813fbe64e3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18b2f347_4ac384c4",
