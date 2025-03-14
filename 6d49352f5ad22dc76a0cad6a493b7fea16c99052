@@ -33,6 +33,24 @@
       "message": "I don\u0027t understand why:\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2183436\nRevert \"ipv4/tcp: do not use per netns ctl sockets\"\n\nwas merged.  It says \"not needed for Android devices\" but not sure why??\nWe *do* use network namespaces - both for testing, and in some oem/vendor code.",
       "revId": "6d49352f5ad22dc76a0cad6a493b7fea16c99052",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "092953d5_7f1bb63c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-03-14T07:49:14Z",
+      "side": 1,
+      "message": "It broke the abi, which is why it was reverted.  If it needs to come back, it can be done so in an abi-safe way.  I don\u0027t remember why I said we didn\u0027t need it, sorry.",
+      "parentUuid": "f6d69cf9_cd89888b",
+      "revId": "6d49352f5ad22dc76a0cad6a493b7fea16c99052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
