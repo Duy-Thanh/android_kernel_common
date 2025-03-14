@@ -16,6 +16,24 @@
       "message": "Why is this not submitted upstream?",
       "revId": "785bdbef00042bd1f6b686c8a152876da65027eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5183bc65_d158cb56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930676
+      },
+      "writtenOn": "2025-03-14T09:24:20Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/stable/20250314092446.852230-1-youngmin.nam@samsung.com/T/#t\n\nhttps://lore.kernel.org/stable/20250314092446.852230-2-youngmin.nam@samsung.com/T/#u",
+      "parentUuid": "000cae67_0bc89a97",
+      "revId": "785bdbef00042bd1f6b686c8a152876da65027eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
