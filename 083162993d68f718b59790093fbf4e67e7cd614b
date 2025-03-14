@@ -16,6 +16,24 @@
       "message": "comment to full chain: If this is an UPSTREAM backport, shouldn\u0027t it land on `android16-6.12`? (not -desktop)",
       "revId": "083162993d68f718b59790093fbf4e67e7cd614b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d4c11e4_690076ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-03-14T05:56:59Z",
+      "side": 1,
+      "message": "Discussed offline, conclusion:\n\n\u003eTim: we are specifically not landing in the official GKI branch, because it\u0027s unnecessary risk to this branch",
+      "parentUuid": "a2362d26_15f0534d",
+      "revId": "083162993d68f718b59790093fbf4e67e7cd614b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
