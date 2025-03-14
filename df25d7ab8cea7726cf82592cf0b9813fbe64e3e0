@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b2f347_4ac384c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-14T13:04:01Z",
+      "side": 1,
+      "message": "We should probably cherry-pick it to android15-6.6 as well.",
+      "revId": "df25d7ab8cea7726cf82592cf0b9813fbe64e3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
