@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15577e4_869b0e00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-03-14T21:10:43Z",
+      "side": 1,
+      "message": "just nits:",
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "382e84df_f9f386dd",
@@ -50,6 +67,98 @@
       "side": 1,
       "message": "Thanks for the comment. I can\u0027t include it in the same topic because it was already merged but I\u0027ll keep track of these patches to keep them together when it\u0027s time for the next release.",
       "parentUuid": "6fbd2d61_a7e3fceb",
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d3fe2e_c52c5efc",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-03-14T21:10:43Z",
+      "side": 1,
+      "message": "Need to add comment what\u0027s the gcma_lru \n\nSomething like this.\n\n\"\nThis list contains cache pages in LRU order.\n\"",
+      "range": {
+        "startLine": 75,
+        "startChar": 17,
+        "endLine": 75,
+        "endChar": 25
+      },
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e560cb6_281cf07d",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-03-14T21:10:43Z",
+      "side": 1,
+      "message": "Let\u0027s add comments \"both pfns are inclusive\" in the range if we want to go with the semantic or start with inclusive and end exclusive like others.",
+      "range": {
+        "startLine": 84,
+        "startChar": 15,
+        "endLine": 84,
+        "endChar": 24
+      },
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff01f80_d20729b0",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-03-14T21:10:43Z",
+      "side": 1,
+      "message": "Need to explain what\u0027s GCMAFree.\n\n\"\nPageGCMAFree means this page is currently free in the GCMA so it can be allocated for cache page\n\"",
+      "range": {
+        "startLine": 164,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 27
+      },
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc41bb78_7071e6ff",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-03-14T21:10:43Z",
+      "side": 1,
+      "message": "I used for the development and I think we are good to remove or just keep WARN_ONCE.",
+      "range": {
+        "startLine": 193,
+        "startChar": 1,
+        "endLine": 193,
+        "endChar": 53
+      },
       "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
