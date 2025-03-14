@@ -70,6 +70,23 @@
       "parentUuid": "37cd644b_9943ac5a",
       "revId": "827f3d786e12c35b12b6e242bf749c0174e1550b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a57c928_48239c30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930676
+      },
+      "writtenOn": "2025-03-14T09:23:34Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/stable/20250314092446.852230-1-youngmin.nam@samsung.com/T/#t\n\nhttps://lore.kernel.org/stable/20250314092446.852230-2-youngmin.nam@samsung.com/T/#u",
+      "revId": "827f3d786e12c35b12b6e242bf749c0174e1550b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
