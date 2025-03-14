@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f7fbc3e_2cc1e495",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-14T22:06:51Z",
+      "side": 1,
+      "message": "This doesn\u0027t hurt, but for future reference the `Link:` tag is only required in `FROMLIST:` patches, if this makes things easier.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 4
+      },
+      "revId": "517df9ca1f139cd7c2498474973e7041cd7a9913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3b5c1d1_850cd3ef",
