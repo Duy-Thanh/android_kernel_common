@@ -16,6 +16,24 @@
       "message": "Why is this series not submitted to the upstream stable kernels?",
       "revId": "827f3d786e12c35b12b6e242bf749c0174e1550b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4387b0a_ccf94924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930676
+      },
+      "writtenOn": "2025-03-14T07:52:55Z",
+      "side": 1,
+      "message": "Do you want me to submit this series to the upstream stable kernel ?",
+      "parentUuid": "bcaf5e94_80060ed8",
+      "revId": "827f3d786e12c35b12b6e242bf749c0174e1550b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
