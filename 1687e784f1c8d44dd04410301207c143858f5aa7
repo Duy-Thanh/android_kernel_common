@@ -34,6 +34,24 @@
       "parentUuid": "0041013e_4f7fb550",
       "revId": "1687e784f1c8d44dd04410301207c143858f5aa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34460002_955eb329",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-14T18:25:01Z",
+      "side": 1,
+      "message": "Sorry, for a respin, this MUST be a cherry-pick of the patch from android15-6.6 so the Change-Id matches. You cite the correct patch above, but you obviously did not cherry-pick it since the Change-Id does not match and you had to manually change some fields.\n```\n001d8a58c0f4 (\"UPSTREAM: mm: avoid unconditional one-tick sleep when swapcache_prepare fails\")\n```",
+      "parentUuid": "9decee16_cd2facf9",
+      "revId": "1687e784f1c8d44dd04410301207c143858f5aa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
