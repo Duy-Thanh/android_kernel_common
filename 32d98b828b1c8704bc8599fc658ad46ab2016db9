@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ab418aa_d7006f97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2025-03-14T06:35:47Z",
+      "side": 1,
+      "message": "Actually I don\u0027t know, I thought it would be merged. But it not actually merged. I was not informed at all.\n\nAFAIK there was a different opinion, https://lore.kernel.org/linux-mm/ZDenU98chAfH9jSj@dhcp22.suse.cz/.",
+      "parentUuid": "4b317c4e_a498d88f",
+      "revId": "32d98b828b1c8704bc8599fc658ad46ab2016db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca91eaf4_d95063c1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2025-03-14T06:29:21Z",
       "side": 1,
       "message": "I remember this patch on the list, but I\u0027m surprised to see it doesn\u0027t seem like we\u0027ve had this in our android 5.10-\u003e6.6 kernels. Curious why this is needed now for 6.12, and wasn\u0027t before over the last two years?",
+      "revId": "32d98b828b1c8704bc8599fc658ad46ab2016db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2c01154_a414223a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2025-03-14T06:35:47Z",
+      "side": 1,
+      "message": "It\u0027s because there were not that abnormal apps which request HUGE size. And we had our own sanity checks in some of our branches.",
+      "parentUuid": "ca91eaf4_d95063c1",
       "revId": "32d98b828b1c8704bc8599fc658ad46ab2016db9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
