@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: Can not find the original change on base branch (android15-6.6) for this change.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCan not find the original change on base branch (android15-6.6) for this change.\nPlease ensure that the Change-Id of this change is same as the original change on the base branch.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nThe original change is 001d8a58c0f43a84c9e8df34d72c1f0319396cec on android15-6.6. Please abandon this patch and cherry-pick that one.",
       "revId": "1687e784f1c8d44dd04410301207c143858f5aa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9decee16_cd2facf9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3686143
+      },
+      "writtenOn": "2025-03-14T02:18:13Z",
+      "side": 1,
+      "message": "Hi Todd Kjosvivo, because this problem has appeared many times, this patch is the solution. I refer to this https://android-review.googlesource.com/c/kernel/common/+/3383155. Because cherry picking directly to our branch android15-6.6-2024-12 will cause conflicts, I chose to submit manually. Is there any problem with this submission now? What other modifications need to be made?",
+      "parentUuid": "0041013e_4f7fb550",
+      "revId": "1687e784f1c8d44dd04410301207c143858f5aa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
