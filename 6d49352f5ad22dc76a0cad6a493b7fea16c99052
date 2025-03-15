@@ -51,6 +51,23 @@
       "parentUuid": "f6d69cf9_cd89888b",
       "revId": "6d49352f5ad22dc76a0cad6a493b7fea16c99052",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38f7692_b30b7e4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T00:49:42Z",
+      "side": 1,
+      "message": "@dennis.dast: So, the checkpatch step in presubmit is causing grief:\n\n```\nErrors were reported from checkpatch.pl.\n\nSummary:\n\nERROR:DIFF_IN_COMMIT_MSG: Avoid using diff content in the commit message - patch(1) might not work\n```\n\nIt might be good to rework your commit message? Its a pain, because I find the description and the 3-way diff delta helpful in understanding this.",
+      "revId": "6d49352f5ad22dc76a0cad6a493b7fea16c99052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
