@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18b6e3f_3d878fc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-15T15:15:11Z",
+      "side": 1,
+      "message": "This seems to be only symbol additions, why was this queued for the KMI update? I\u0027ll attempt to run presubmit again as is.",
+      "revId": "1c12361182ae97392fb146b297d2e4e00fb91699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
