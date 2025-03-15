@@ -16,6 +16,24 @@
       "message": "This seems to be only symbol additions, why was this queued for the KMI update? I\u0027ll attempt to run presubmit again as is.",
       "revId": "1c12361182ae97392fb146b297d2e4e00fb91699",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92f9be73_447e0854",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-15T15:17:40Z",
+      "side": 1,
+      "message": "hmmm, maybe the stg file updates are incorrect for these symbol additions.",
+      "parentUuid": "b18b6e3f_3d878fc2",
+      "revId": "1c12361182ae97392fb146b297d2e4e00fb91699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
