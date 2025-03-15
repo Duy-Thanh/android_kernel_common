@@ -34,6 +34,24 @@
       "parentUuid": "b18b6e3f_3d878fc2",
       "revId": "1c12361182ae97392fb146b297d2e4e00fb91699",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820c6e01_bc4f2b54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-15T15:30:20Z",
+      "side": 1,
+      "message": "Right, something is off with the STG file. I\u0027m not sure how it was generated. Let me try to fix it.",
+      "parentUuid": "92f9be73_447e0854",
+      "revId": "1c12361182ae97392fb146b297d2e4e00fb91699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
