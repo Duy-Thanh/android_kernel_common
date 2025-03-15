@@ -143,6 +143,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d0de06_fae54c80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff379ecf_6967bc4c",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42062d5a_5bb30cc1",
@@ -174,6 +192,24 @@
       "side": 1,
       "message": "We do reboot system when there is an error during hibernation. And we need kernel log during hibernation, but kernel log will be reset after system rebooting.\nWe enable this funcion, copy kernel log, in PM_HIBERNATION_PREPARE callback, and disable in PM_POST_HIBERNATION.",
       "parentUuid": "42062d5a_5bb30cc1",
+      "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda7a140_a2d81b28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:49:18Z",
+      "side": 1,
+      "message": "I think Todd\u0027s point is a good one that pstore should probably be what is used here. I\u0027m leaning towards taking this but I might nudge you to explore more on if you could utilize pstore better, or how pstore might be tweaked to better support your use case.\n\nIt is uncertain that these vendorhooks will be re-added to future kernels, so try to align your process with upstream or what\u0027s already in the android kernel.",
+      "parentUuid": "12c86ee8_1ad83650",
       "revId": "64caf3f771d2fd6d468023a12a2f52e68f919ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
