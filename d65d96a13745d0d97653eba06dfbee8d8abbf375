@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0608bd35_0065ace7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-16T05:08:46Z",
+      "side": 1,
+      "message": "I had to refactor due to conflicts with change 3472358, PTAL.",
+      "revId": "d65d96a13745d0d97653eba06dfbee8d8abbf375",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
