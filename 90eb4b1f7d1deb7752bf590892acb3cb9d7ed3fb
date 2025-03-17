@@ -213,6 +213,54 @@
       },
       "revId": "90eb4b1f7d1deb7752bf590892acb3cb9d7ed3fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4950eae_a167786e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-03-17T16:15:32Z",
+      "side": 1,
+      "message": "I don\u0027t think there is a use case for that + it get\u0027s intertwined with pin_pages logic, which makes it harder to reason about for the hypervsisor",
+      "parentUuid": "c2feed3c_6d0280cd",
+      "range": {
+        "startLine": 1119,
+        "startChar": 5,
+        "endLine": 1119,
+        "endChar": 16
+      },
+      "revId": "90eb4b1f7d1deb7752bf590892acb3cb9d7ed3fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c8e5723_1451dc5c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-03-17T16:15:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5823d19e_e7c6da33",
+      "range": {
+        "startLine": 1119,
+        "startChar": 0,
+        "endLine": 1119,
+        "endChar": 0
+      },
+      "revId": "90eb4b1f7d1deb7752bf590892acb3cb9d7ed3fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
