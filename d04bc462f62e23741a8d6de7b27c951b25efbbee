@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afc2df26_214c604d",
+        "filename": "mm/cma.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1904216
+      },
+      "writtenOn": "2025-03-17T05:42:57Z",
+      "side": 1,
+      "message": "Reference of vendor data field should be inside CONFIG_ANDROID_VENDOR_OEM_DATA check.",
+      "revId": "d04bc462f62e23741a8d6de7b27c951b25efbbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2680a7fe_49d248a0",
         "filename": "mm/cma.h",
         "patchSetId": 3
