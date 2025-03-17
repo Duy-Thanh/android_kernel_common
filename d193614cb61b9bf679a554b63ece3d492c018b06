@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c5f8d40_310782f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-17T13:27:59Z",
+      "side": 1,
+      "message": "Could you please expand further details on why the vendorhooks are needed and the impact of having them?\n\n1) What is the problem you are seeing that requires the vendorhooks\n\n2) What benefit do you get from having the vendorhooks (in other words, what would the cost be if they were not included)\n\n3) What functionality might be included upstream to resolve the need for these vendorhooks.",
+      "revId": "d193614cb61b9bf679a554b63ece3d492c018b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
