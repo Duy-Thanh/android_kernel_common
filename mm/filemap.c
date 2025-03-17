@@ -869,6 +869,7 @@ noinline int __filemap_add_folio(struct address_space *mapping,
 	VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
 	VM_BUG_ON_FOLIO(folio_test_swapbacked(folio), folio);
 	mapping_set_update(&xas, mapping);
+	trace_android_vh_filemap_add_folio(mapping, folio, index);
 
 	if (!huge) {
 		int error = mem_cgroup_charge(folio, NULL, gfp);
@@ -1573,7 +1574,7 @@ void folio_unlock(struct folio *folio)
 	if (clear_bit_unlock_is_negative_byte(PG_locked, folio_flags(folio, 0)))
 		folio_wake_bit(folio, PG_locked);
 }
-EXPORT_SYMBOL(folio_unlock);
+EXPORT_SYMBOL_GPL(folio_unlock);
 
 /**
  * folio_end_private_2 - Clear PG_private_2 and wake any waiters.
