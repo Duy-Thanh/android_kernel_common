@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84c8b600_7e29ca7f",
+        "filename": "mm/cma.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1967623
+      },
+      "writtenOn": "2025-03-17T08:45:21Z",
+      "side": 1,
+      "message": "CONFIG_ANDROID_VENDOR_OEM_DATA incase disabled, would make the vendor data fields nop. So should we still need to safeguard it with config ?",
+      "parentUuid": "afc2df26_214c604d",
+      "revId": "d04bc462f62e23741a8d6de7b27c951b25efbbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2680a7fe_49d248a0",
         "filename": "mm/cma.h",
         "patchSetId": 3
