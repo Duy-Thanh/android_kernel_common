@@ -174,9 +174,49 @@ void blk_freeze_queue_start(struct request_queue *q)
 }
 EXPORT_SYMBOL_GPL(blk_freeze_queue_start);
 
+static bool blk_mq_show_busy_rq(struct request *rq, void *data)
+{
+	const struct request_queue *q = data;
+
+	if (rq->q == q) {
+		enum { BUF_SIZE = 512 };
+		char *buf = kmalloc(BUF_SIZE, GFP_KERNEL);
+		struct seq_file m = { .size = BUF_SIZE, .buf = buf };
+
+		if (WARN_ON_ONCE(!buf))
+			return false;
+
+		__blk_mq_debugfs_rq_show(&m, rq);
+		/* 'buf' already includes a trailing newline. */
+		pr_info("Slow I/O: %.*s", (u32)m.count, m.buf);
+		kfree(buf);
+	}
+
+	return true;
+}
+
+const char *q_name(struct request_queue *q)
+{
+	return q->kobj.parent ? kobject_name(q->kobj.parent) : "(?)";
+}
+
 void blk_mq_freeze_queue_wait(struct request_queue *q)
 {
-	wait_event(q->mq_freeze_wq, percpu_ref_is_zero(&q->q_usage_counter));
+	long time_remaining;
+
+	for (;;) {
+		time_remaining = wait_event_timeout(
+			q->mq_freeze_wq,
+			percpu_ref_is_zero(&q->q_usage_counter),
+			msecs_to_jiffies(1));
+		WARN_ON_ONCE(time_remaining < 0);
+		if (time_remaining > 0)
+			break;
+
+		if (q->tag_set)
+			blk_mq_tagset_busy_iter(q->tag_set, blk_mq_show_busy_rq,
+						q);
+	}
 }
 EXPORT_SYMBOL_GPL(blk_mq_freeze_queue_wait);
 
