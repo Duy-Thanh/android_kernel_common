@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05359219_39676964",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-03-17T23:12:29Z",
+      "side": 1,
+      "message": "You don\u0027t need to disable the whole ARCH_SUNXI config. You can just disable the drivers that it\u0027s setting to \u003dy by default. They did this in https://r.android.com/1413343 but some new pinctrl drivers got enabled since we enabled the config.",
+      "revId": "3104ee0578c931a27569fa39e033f842ef4bdbde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5228faca_f94d2099",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-03-17T23:12:29Z",
+      "side": 1,
+      "message": "You don\u0027t need to disable the whole ARCH_SUNXI config. You can just disable the drivers that it\u0027s setting to \u003dy by default. They did this in https://r.android.com/1413343 but some new pinctrl drivers got enabled since we enabled the config.",
+      "revId": "3104ee0578c931a27569fa39e033f842ef4bdbde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
