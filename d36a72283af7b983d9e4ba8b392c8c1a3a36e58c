@@ -16,6 +16,24 @@
       "message": "Is it reasonable to use an index into process-local FD table as the global identifier for a pviommu at EL2? Might there be a kernel pointer (eg the \"struct file *\") that is in a kernel-wide namespace and therefore better suited?",
       "revId": "d36a72283af7b983d9e4ba8b392c8c1a3a36e58c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c89d08_9c56de58",
+        "filename": "virt/kvm/vfio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-03-17T11:13:45Z",
+      "side": 1,
+      "message": "Yes,It\u0027s not unique, the indentifier here is both the `fd` and `struct kvm`",
+      "parentUuid": "4eeaa74c_cf6aea35",
+      "revId": "d36a72283af7b983d9e4ba8b392c8c1a3a36e58c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
