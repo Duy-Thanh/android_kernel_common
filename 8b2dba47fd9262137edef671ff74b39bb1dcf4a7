@@ -94,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d0ff456_de3d0bab",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-17T21:26:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07d3fe2e_c52c5efc",
+      "range": {
+        "startLine": 75,
+        "startChar": 17,
+        "endLine": 75,
+        "endChar": 25
+      },
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e560cb6_281cf07d",
@@ -107,6 +131,30 @@
       "writtenOn": "2025-03-14T21:10:43Z",
       "side": 1,
       "message": "Let\u0027s add comments \"both pfns are inclusive\" in the range if we want to go with the semantic or start with inclusive and end exclusive like others.",
+      "range": {
+        "startLine": 84,
+        "startChar": 15,
+        "endLine": 84,
+        "endChar": 24
+      },
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b7c9997_230b09ea",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-17T21:26:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e560cb6_281cf07d",
       "range": {
         "startLine": 84,
         "startChar": 15,
@@ -140,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "615d5613_28660bba",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-17T21:26:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eff01f80_d20729b0",
+      "range": {
+        "startLine": 164,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 27
+      },
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc41bb78_7071e6ff",
@@ -153,6 +225,30 @@
       "writtenOn": "2025-03-14T21:10:43Z",
       "side": 1,
       "message": "I used for the development and I think we are good to remove or just keep WARN_ONCE.",
+      "range": {
+        "startLine": 193,
+        "startChar": 1,
+        "endLine": 193,
+        "endChar": 53
+      },
+      "revId": "8b2dba47fd9262137edef671ff74b39bb1dcf4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7990216f_699496b6",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-17T21:26:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc41bb78_7071e6ff",
       "range": {
         "startLine": 193,
         "startChar": 1,
