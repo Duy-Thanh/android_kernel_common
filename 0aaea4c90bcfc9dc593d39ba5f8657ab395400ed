@@ -34,6 +34,24 @@
       "parentUuid": "b32020d4_a0d48246",
       "revId": "0aaea4c90bcfc9dc593d39ba5f8657ab395400ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3021b459_e00b4f98",
+        "filename": "kernel/dma/contiguous.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-17T21:24:18Z",
+      "side": 1,
+      "message": "Hmm. I was looking for an appropriate place to document this new property but can\u0027t find any documentation specific to CMA dt. Any ideas for a good place to document this?",
+      "parentUuid": "c9f3f249_e615a590",
+      "revId": "0aaea4c90bcfc9dc593d39ba5f8657ab395400ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
