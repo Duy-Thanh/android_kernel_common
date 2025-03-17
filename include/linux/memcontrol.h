@@ -28,6 +28,11 @@ struct page;
 struct mm_struct;
 struct kmem_cache;
 
+int mem_cgroup_move_account(struct page *page,
+			    bool compound,
+			    struct mem_cgroup *from,
+			    struct mem_cgroup *to);
+
 /* Cgroup-specific page state, on top of universal node page state */
 enum memcg_stat_item {
 	MEMCG_SWAP = NR_VM_NODE_STAT_ITEMS,
