@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c43a40e9_4628c7b9",
+        "filename": "mm/cma.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1967623
+      },
+      "writtenOn": "2025-03-17T13:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84c8b600_7e29ca7f",
+      "revId": "d04bc462f62e23741a8d6de7b27c951b25efbbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2680a7fe_49d248a0",
@@ -101,6 +119,30 @@
       "side": 1,
       "message": "Ack, will move it to the end.\nSince it was a property of per CMA region derived from devicetree \u003clike name\u003e hence kept it just before the CMA_SYSFS structure members.",
       "parentUuid": "2680a7fe_49d248a0",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 24
+      },
+      "revId": "d04bc462f62e23741a8d6de7b27c951b25efbbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd93fe4_581920f1",
+        "filename": "mm/cma.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1967623
+      },
+      "writtenOn": "2025-03-17T13:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6479cb2_2739d9e8",
       "range": {
         "startLine": 26,
         "startChar": 1,
