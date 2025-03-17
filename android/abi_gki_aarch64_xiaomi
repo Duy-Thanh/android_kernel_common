@@ -355,6 +355,14 @@
   __alloc_pages_bulk
   __xa_cmpxchg
   lookup_user_key
+  mem_cgroup_move_account
+  cgroup_rm_cftypes
+  __traceiter_android_vh_mem_cgroup_charge
+  __traceiter_android_vh_filemap_add_folio
+  __traceiter_android_vh_shrink_node
+  __tracepoint_android_vh_mem_cgroup_charge
+  __tracepoint_android_vh_filemap_add_folio
+  __tracepoint_android_vh_shrink_node
 
 #required by mi_asap.ko
   __traceiter_android_vh_read_pages
