@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7323d7_f2e7d39d",
+        "filename": "drivers/bluetooth/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-03-18T12:37:30Z",
+      "side": 1,
+      "message": "Should be no risk as btusb was not even compiled in ACK. Done by enabling the config in gki_defconfig.",
+      "parentUuid": "a1a0aa64_51b3c1b8",
+      "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9538e68f_3cfc3cc9",
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Do you think there is any risk to enabling it? If so, we could create a runtime disable by using a vendor hook.",
       "parentUuid": "0b05d684_cc0db528",
+      "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e82611_5c04ea29",
+        "filename": "drivers/bluetooth/btusb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-03-18T12:37:30Z",
+      "side": 1,
+      "message": "Should be no risk as btusb was not even compiled in ACK. Done by enabling the config in gki_defconfig.",
+      "parentUuid": "9116ef31_48bf124e",
       "revId": "1a9c65c3bdfbf72df0d87e7e96e3b7fba065bdac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
