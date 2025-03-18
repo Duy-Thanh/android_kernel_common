@@ -52,6 +52,24 @@
       "parentUuid": "c9f3f249_e615a590",
       "revId": "0aaea4c90bcfc9dc593d39ba5f8657ab395400ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d07cff7_e661feb1",
+        "filename": "kernel/dma/contiguous.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1979760
+      },
+      "writtenOn": "2025-03-18T05:07:42Z",
+      "side": 1,
+      "message": "I was thinking perhaps this could be documented in reserved-memory.yaml but it seems it has been moved to dtschema repo instead. Do you think it\u0027d be good to write a new yaml file for this within reserved-memory bindings?",
+      "parentUuid": "3021b459_e00b4f98",
+      "revId": "0aaea4c90bcfc9dc593d39ba5f8657ab395400ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
