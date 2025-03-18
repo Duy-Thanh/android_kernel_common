@@ -16,6 +16,24 @@
       "message": "Please upload all of the patches for b/400883621 as a single patchset with the last patch being a symbol update to add the new symbols to your symbol list.",
       "revId": "f93bb1474eaf3a49fcee4ff8b915557b2dd2257c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b93aa13b_d22192a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-18T12:41:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cd92e09_60126e4c",
+      "revId": "f93bb1474eaf3a49fcee4ff8b915557b2dd2257c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
