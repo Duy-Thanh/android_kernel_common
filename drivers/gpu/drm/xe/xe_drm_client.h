@@ -12,6 +12,7 @@
 #include <linux/rcupdate.h>
 #include <linux/sched.h>
 #include <linux/spinlock.h>
+#include <linux/workqueue.h>
 
 struct drm_file;
 struct drm_printer;
@@ -32,6 +33,18 @@ struct xe_drm_client {
 	 */
 	struct list_head bos_list;
 #endif
+};
+
+struct xe_user {
+	struct kref refcount;
+	struct xe_device *xe;
+	struct mutex filelist_lock;
+	struct list_head filelist;
+	struct list_head entry;
+	struct work_struct work;
+	u32 uid;
+	u64 active_duration_ns;
+	u64 last_timestamp_ns;
 };
 
 	static inline struct xe_drm_client *
@@ -67,4 +80,20 @@ static inline void xe_drm_client_remove_bo(struct xe_bo *bo)
 {
 }
 #endif
+
+struct xe_user *xe_user_alloc(void);
+
+static inline struct xe_user *
+xe_user_get(struct xe_user *user)
+{
+	kref_get(&user->refcount);
+	return user;
+}
+
+void __xe_user_free(struct kref *kref);
+
+static inline void xe_user_put(struct xe_user *user)
+{
+	kref_put(&user->refcount, __xe_user_free);
+}
 #endif
