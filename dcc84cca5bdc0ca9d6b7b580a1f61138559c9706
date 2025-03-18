@@ -16,6 +16,24 @@
       "message": "Same patch is in android15-6.6.",
       "revId": "dcc84cca5bdc0ca9d6b7b580a1f61138559c9706",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c77f25_2c533343",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3480183
+      },
+      "writtenOn": "2025-03-18T01:00:45Z",
+      "side": 1,
+      "message": "Can anybody review this ? \nIt has been in active state for almost 2 weeks.\nThanks in advance 😊",
+      "parentUuid": "ae632c8a_f236c91f",
+      "revId": "dcc84cca5bdc0ca9d6b7b580a1f61138559c9706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
