@@ -46,6 +46,30 @@
       },
       "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3374dca_b311a957",
+        "filename": "mm/util.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-18T17:11:24Z",
+      "side": 1,
+      "message": "Right, it could be. The two vendor hooks have co-existed for some time in older branches and we would need confirmation that the change in order of operations here is not a problem either way.",
+      "parentUuid": "1270d4dd_33edc3a5",
+      "range": {
+        "startLine": 660,
+        "startChar": 1,
+        "endLine": 660,
+        "endChar": 39
+      },
+      "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
