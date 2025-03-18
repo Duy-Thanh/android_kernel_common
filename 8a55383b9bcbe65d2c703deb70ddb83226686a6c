@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f5b1467_175d341e",
+        "filename": "mm/util.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-18T16:13:12Z",
+      "side": 1,
+      "message": "Please confirm the placement of this vendor hook is still correct. Since upstream commit `590b9d576cae (\"mm: kvmalloc: align kvrealloc() with krealloc()\")` the logic that adjusted the flags was factored out into `kmalloc_gfp_adjust()` call. Your vendor hook had been historically placed _after_ this logic. However, in this version it comes _before_ this logic which I believe will have unintended consequences for you.",
+      "range": {
+        "startLine": 660,
+        "startChar": 1,
+        "endLine": 660,
+        "endChar": 39
+      },
+      "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
