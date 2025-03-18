@@ -293,7 +293,7 @@ err_unshare_tx:
 
 static int kvm_init_registered_sp_ids(void)
 {
-	int i, count, partition_sz;
+	int i, j, count, partition_sz;
 	struct arm_smccc_res res;
 
 	arm_smccc_1_1_smc(FFA_PARTITION_INFO_GET, 0, 0, 0, 0, 0, 0, 0,
@@ -313,12 +313,13 @@ static int kvm_init_registered_sp_ids(void)
 	for (i = 0; i < count; i++) {
 		struct ffa_partition_info *part = hyp_buffers.rx + i * partition_sz;
 		if ((part->properties & FFA_PART_VM_AVAIL_MASK) == FFA_PART_SUPPORTS_VM_AVAIL) {
-			/*
-			 * TODO: remove duplicates; FF-A v1.2 allows multiple
-			 * UUIDs per partition, and each (SP, UUID) pair shows
-			 * up as a separate entry in the partition info list
-			 */
-			sp_ids[num_registered_sp_ids++] = part->id;
+			/* Check for duplicate SP IDs */
+			for (j = 0; j < num_registered_sp_ids; j++)
+				if (sp_ids[j] == part->id)
+					break;
+
+			if (j == num_registered_sp_ids)
+				sp_ids[num_registered_sp_ids++] = part->id;
 		}
 	}
 
