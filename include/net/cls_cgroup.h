@@ -13,6 +13,7 @@
 #include <linux/rcupdate.h>
 #include <net/sock.h>
 #include <net/inet_sock.h>
+#include <trace/hooks/net.h>
 
 #ifdef CONFIG_CGROUP_NET_CLASSID
 struct cgroup_cls_state {
@@ -72,6 +73,8 @@ static inline u32 task_get_classid(const struct sk_buff *skb)
 
 		classid = sock_cgroup_classid(&sk->sk_cgrp_data);
 	}
+
+	trace_android_vh_task_get_classid(skb, &classid);
 
 	return classid;
 }
