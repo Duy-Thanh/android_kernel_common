@@ -342,6 +342,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "429d0e7b_d91483d2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-03-18T17:23:25Z",
+      "side": 1,
+      "message": "An update from the Trusty end: it now requires both creation and destruction messages, but IMHO the partial case should still be supported (for other TEEs).",
+      "parentUuid": "d41d5113_0c5d8ff1",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46f849d6_a153b9fd",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
