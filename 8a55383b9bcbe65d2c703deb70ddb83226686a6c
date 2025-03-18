@@ -22,6 +22,30 @@
       },
       "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1270d4dd_33edc3a5",
+        "filename": "mm/util.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-03-18T17:02:26Z",
+      "side": 1,
+      "message": "https://r.android.com/3477675 was merged recently that might be a substitute for this change.",
+      "parentUuid": "8f5b1467_175d341e",
+      "range": {
+        "startLine": 660,
+        "startChar": 1,
+        "endLine": 660,
+        "endChar": 39
+      },
+      "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
