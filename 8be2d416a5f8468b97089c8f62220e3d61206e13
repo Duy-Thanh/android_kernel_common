@@ -33,6 +33,23 @@
       "message": "Sounds like there\u0027s no way forward for this... :-(",
       "revId": "8be2d416a5f8468b97089c8f62220e3d61206e13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "439c2556_6f4fe18e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2025-03-18T10:57:37Z",
+      "side": 1,
+      "message": "Hmm, actually I\u0027ll leave it open, please merge if/when an abi break for a14-6.1 does happen.",
+      "revId": "8be2d416a5f8468b97089c8f62220e3d61206e13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
