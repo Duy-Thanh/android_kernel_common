@@ -33,6 +33,24 @@
       "message": "You don\u0027t need to disable the whole ARCH_SUNXI config. You can just disable the drivers that it\u0027s setting to \u003dy by default. They did this in https://r.android.com/1413343 but some new pinctrl drivers got enabled since we enabled the config.",
       "revId": "3104ee0578c931a27569fa39e033f842ef4bdbde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766818f1_ed7a270f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2025-03-18T20:37:55Z",
+      "side": 1,
+      "message": "Let\u0027s take the discussion to the bug. I am not able to see the configs you are referring to. Details are here: http://b/404337373#comment2",
+      "parentUuid": "5228faca_f94d2099",
+      "revId": "3104ee0578c931a27569fa39e033f842ef4bdbde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
