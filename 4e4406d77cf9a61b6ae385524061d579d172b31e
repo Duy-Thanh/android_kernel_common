@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70d2aee7_944eb71f",
+        "filename": "gki/aarch64/symbols/amlogic",
+        "patchSetId": 2
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-19T13:39:33Z",
+      "side": 1,
+      "message": "I\u0027ll need to remove this due to change 3543251.",
+      "range": {
+        "startLine": 1315,
+        "startChar": 2,
+        "endLine": 1315,
+        "endChar": 25
+      },
+      "revId": "4e4406d77cf9a61b6ae385524061d579d172b31e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
