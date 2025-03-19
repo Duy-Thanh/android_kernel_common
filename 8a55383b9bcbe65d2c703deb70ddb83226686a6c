@@ -70,6 +70,30 @@
       },
       "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52420cec_0228f077",
+        "filename": "mm/util.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 2028305
+      },
+      "writtenOn": "2025-03-19T08:41:46Z",
+      "side": 1,
+      "message": "Placing this hook here will not affect our previous functions. I just re-read the code and it is more reasonable to put it in kmalloc_gfp_adjust. If the code in this list is modified, how should it be done?",
+      "parentUuid": "c3374dca_b311a957",
+      "range": {
+        "startLine": 660,
+        "startChar": 1,
+        "endLine": 660,
+        "endChar": 39
+      },
+      "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
