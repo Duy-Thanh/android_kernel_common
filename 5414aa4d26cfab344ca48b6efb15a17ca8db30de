@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1eed786_9890e823",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-19T13:48:33Z",
+      "side": 1,
+      "message": "Needs to be rebased pass the KMI update to avoid abi races.",
+      "revId": "5414aa4d26cfab344ca48b6efb15a17ca8db30de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
