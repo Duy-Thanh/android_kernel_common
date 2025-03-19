@@ -94,6 +94,30 @@
       },
       "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f99c4be5_6016f950",
+        "filename": "mm/util.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-19T13:04:23Z",
+      "side": 1,
+      "message": "Note that `kmalloc_gfp_adjust()` is being called from other functions too.\n\nI don\u0027t think this patch breaks the KMI, since it is only a vendor hook addition. I\u0027ll drop it from this patch set so you can modify it.",
+      "parentUuid": "52420cec_0228f077",
+      "range": {
+        "startLine": 660,
+        "startChar": 1,
+        "endLine": 660,
+        "endChar": 39
+      },
+      "revId": "8a55383b9bcbe65d2c703deb70ddb83226686a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
