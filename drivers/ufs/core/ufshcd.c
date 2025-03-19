@@ -7353,6 +7353,7 @@ int ufshcd_exec_raw_upiu_cmd(struct ufs_hba *hba,
 
 	return err;
 }
+EXPORT_SYMBOL_GPL(ufshcd_exec_raw_upiu_cmd);
 
 /**
  * ufshcd_advanced_rpmb_req_handler - handle advanced RPMB request
