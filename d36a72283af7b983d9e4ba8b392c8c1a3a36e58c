@@ -34,6 +34,24 @@
       "parentUuid": "4eeaa74c_cf6aea35",
       "revId": "d36a72283af7b983d9e4ba8b392c8c1a3a36e58c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d8c078_001f1605",
+        "filename": "virt/kvm/vfio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-03-19T13:31:01Z",
+      "side": 1,
+      "message": "But is the `fd` unique for a given `struct kvm`? I suppose if it\u0027s all driven from the one crosvm process... Seems a bit restrictive maybe?",
+      "parentUuid": "48c89d08_9c56de58",
+      "revId": "d36a72283af7b983d9e4ba8b392c8c1a3a36e58c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
