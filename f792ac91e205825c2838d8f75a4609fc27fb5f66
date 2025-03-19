@@ -33,6 +33,24 @@
       "message": "Dear tkjos,\n\nIt seems that the patch detection failed, but we can\u0027t figure out the reason for the failure. Could you help explain why this happened? Thanks!",
       "revId": "f792ac91e205825c2838d8f75a4609fc27fb5f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "301487c3_c77df41b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-19T05:56:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf7650af_f4f467c8",
+      "revId": "f792ac91e205825c2838d8f75a4609fc27fb5f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
