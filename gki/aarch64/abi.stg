@@ -391402,6 +391402,24 @@ elf_symbol {
   full_name: "scsi_device_put"
 }
 elf_symbol {
+  id: 0x61df84bc
+  name: "scsi_device_quiesce"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x69ed44aa
+  type_id: 0x94dfa784
+  full_name: "scsi_device_quiesce"
+}
+elf_symbol {
+  id: 0x054c0bba
+  name: "scsi_device_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb3d6471f
+  type_id: 0x19c71538
+  full_name: "scsi_device_resume"
+}
+elf_symbol {
   id: 0x8ef5c221
   name: "scsi_execute_cmd"
   is_defined: true
@@ -410997,6 +411015,8 @@ interface {
   symbol_id: 0xd49d7abc
   symbol_id: 0x76dea2aa
   symbol_id: 0x474e9bcc
+  symbol_id: 0x61df84bc
+  symbol_id: 0x054c0bba
   symbol_id: 0x8ef5c221
   symbol_id: 0x7509c737
   symbol_id: 0xd8a616ba
