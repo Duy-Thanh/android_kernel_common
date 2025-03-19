@@ -551,6 +551,9 @@ DECLARE_HOOK(android_vh_update_unmapped_area_info,
 DECLARE_HOOK(android_vh_reuse_whole_anon_folio,
 	TP_PROTO(struct folio *folio, struct vm_fault *vmf, bool *can_reuse_whole_anon),
 	TP_ARGS(folio, vmf, can_reuse_whole_anon));
+DECLARE_HOOK(android_vh_free_swap_slot,
+	TP_PROTO(bool use_swap_slot_cache, void *cache, void *func),
+	TP_ARGS(use_swap_slot_cache, cache, func));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
