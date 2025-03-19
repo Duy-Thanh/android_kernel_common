@@ -16,6 +16,23 @@
       "message": "Dear Kjos,\nCould you please help review the patch of my symbol list? If there are any issues, please let me know and I will make the necessary modifications. Thanks!",
       "revId": "f792ac91e205825c2838d8f75a4609fc27fb5f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf7650af_f4f467c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2025-03-19T02:24:43Z",
+      "side": 1,
+      "message": "Dear tkjos,\n\nIt seems that the patch detection failed, but we can\u0027t figure out the reason for the failure. Could you help explain why this happened? Thanks!",
+      "revId": "f792ac91e205825c2838d8f75a4609fc27fb5f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
