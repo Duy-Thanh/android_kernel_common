@@ -16,6 +16,24 @@
       "message": "Marking as WIP: need to verify it more carefully.",
       "revId": "dcb01b64f3a1bee6115997965756d39be7d5ecd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8d86cb_be829bd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-19T14:04:58Z",
+      "side": 1,
+      "message": "With this patch, when running a Linux pVM with `nox2apic` in the guest kernel command line (i.e. to make it use APIC via MMIO instead of MSRs all the time, not just for a short time during APIC probe at bootup), if the pVM has more than one vCPU, the guest kernel crashes during SMP initialization, due to a MMIO instruction decoding error in the #VE handler.\n\nMaybe the problem is in the MMIO instruction decoder code (in upstream kernel), not in this patch itself. Anyway, we\u0027d need to investigate it before merging this patch.",
+      "parentUuid": "e006d120_b56313e8",
+      "revId": "dcb01b64f3a1bee6115997965756d39be7d5ecd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
