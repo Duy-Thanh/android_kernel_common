@@ -333545,6 +333545,13 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x9b5800b4
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3e6396e0
+  parameter_id: 0x38d23361
+}
+function {
   id: 0x9b5888dd
   return_type_id: 0x6720d32f
   parameter_id: 0x188b9e81
@@ -352912,6 +352919,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_rebalance_anon_lru_bypass"
 }
 elf_symbol {
+  id: 0x7334b2d0
+  name: "__traceiter_android_vh_receive_sock"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe05e71fc
+  type_id: 0x9bdaaaaa
+  full_name: "__traceiter_android_vh_receive_sock"
+}
+elf_symbol {
   id: 0x7d069e91
   name: "__traceiter_android_vh_record_mutex_lock_starttime"
   is_defined: true
@@ -353351,6 +353367,15 @@ elf_symbol {
   crc: 0x64a28f9a
   type_id: 0x9bcd4ff7
   full_name: "__traceiter_android_vh_sysrq_crash"
+}
+elf_symbol {
+  id: 0x3fd733a9
+  name: "__traceiter_android_vh_task_get_classid"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9ccda8b6
+  type_id: 0x9b5800b4
+  full_name: "__traceiter_android_vh_task_get_classid"
 }
 elf_symbol {
   id: 0x9f07e6cf
@@ -356107,6 +356132,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_rebalance_anon_lru_bypass"
 }
 elf_symbol {
+  id: 0x1a12ee26
+  name: "__tracepoint_android_vh_receive_sock"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_receive_sock"
+}
+elf_symbol {
   id: 0x761f292f
   name: "__tracepoint_android_vh_record_mutex_lock_starttime"
   is_defined: true
@@ -356546,6 +356580,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_sysrq_crash"
+}
+elf_symbol {
+  id: 0xe4592907
+  name: "__tracepoint_android_vh_task_get_classid"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_task_get_classid"
 }
 elf_symbol {
   id: 0x91d16419
@@ -392511,7 +392554,7 @@ elf_symbol {
   name: "put_cmsg"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe606175c
+  crc: 0x0ba0a32e
   type_id: 0x9732df25
   full_name: "put_cmsg"
 }
@@ -411991,6 +412034,7 @@ interface {
   symbol_id: 0x0954df44
   symbol_id: 0x354db2e1
   symbol_id: 0xb6218fbe
+  symbol_id: 0x7334b2d0
   symbol_id: 0x7d069e91
   symbol_id: 0x0fa39b81
   symbol_id: 0x92518ec5
@@ -412040,6 +412084,7 @@ interface {
   symbol_id: 0x58e7556b
   symbol_id: 0x2ecf85e9
   symbol_id: 0x34a01a22
+  symbol_id: 0x3fd733a9
   symbol_id: 0x9f07e6cf
   symbol_id: 0xf376df6b
   symbol_id: 0xa578d54c
@@ -412346,6 +412391,7 @@ interface {
   symbol_id: 0x8d3808ce
   symbol_id: 0x3ac6daa7
   symbol_id: 0x53ff9924
+  symbol_id: 0x1a12ee26
   symbol_id: 0x761f292f
   symbol_id: 0xef7ad117
   symbol_id: 0x4568ff8f
@@ -412395,6 +412441,7 @@ interface {
   symbol_id: 0x39e68fed
   symbol_id: 0xefb9e5a3
   symbol_id: 0x3fe0157c
+  symbol_id: 0xe4592907
   symbol_id: 0x91d16419
   symbol_id: 0x4e038641
   symbol_id: 0xcc46e666
