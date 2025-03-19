@@ -34,6 +34,23 @@
       "parentUuid": "621989d8_9fe55120",
       "revId": "e4e4099fc79a8bded13a776b1d4bc7ccf1ed9197",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbd9c95_25942079",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-19T01:21:45Z",
+      "side": 1,
+      "message": "change this to:\n```\n#ifndef __GENKSYMS__\n#include \u003clinux/pinctrl/devinfo.h\u003e\n#endif\n```\nThis will suppress the CRC change by forcing genksyms to ignore the changes in struct visibility introduced in this header",
+      "revId": "e4e4099fc79a8bded13a776b1d4bc7ccf1ed9197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
