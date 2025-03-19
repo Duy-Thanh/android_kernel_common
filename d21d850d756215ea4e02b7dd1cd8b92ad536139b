@@ -46,6 +46,30 @@
       },
       "revId": "d21d850d756215ea4e02b7dd1cd8b92ad536139b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2cde8f6_69a972e7",
+        "filename": "mm/util.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-19T13:23:47Z",
+      "side": 1,
+      "message": "Yes, it was added recently in https://r.android.com/3477675.",
+      "parentUuid": "dad8b0ca_19292e68",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 27
+      },
+      "revId": "d21d850d756215ea4e02b7dd1cd8b92ad536139b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
