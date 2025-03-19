@@ -16,6 +16,24 @@
       "message": "Is there a pressing reason why this can\u0027t wait to be accepted into a maintainer\u0027s tree? Being that there\u0027s some discussion on the upstream patch, I\u0027d prefer to wait for at least a FROMGIT version.",
       "revId": "e4e4099fc79a8bded13a776b1d4bc7ccf1ed9197",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc19a475_1112579c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-03-19T00:07:18Z",
+      "side": 1,
+      "message": "Addressed offline.",
+      "parentUuid": "621989d8_9fe55120",
+      "revId": "e4e4099fc79a8bded13a776b1d4bc7ccf1ed9197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
