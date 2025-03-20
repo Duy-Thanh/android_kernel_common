@@ -2,7 +2,7 @@
 /*
  * Gadget Function Driver for Android USB accessories
  *
- * Copyright 2011-2024 Google LLC
+ * Copyright 2011-2025 Google LLC
  *
  */
 
@@ -268,6 +268,15 @@ static struct acc_dev *acc_dev_instance;
 struct acc_instance {
 	struct usb_function_instance func_inst;
 	const char *name;
+	/*
+	 * Set via userspace when the in-kernel AOA functionality of this
+	 * driver should be disabled. This will be used to assist in the
+	 * transition to a userspace AOA implementation and deprecation of
+	 * this driver.
+	 */
+	bool functionality_disable;
+	// can we reuse acc_dev_instance_lock?
+	struct mutex lock;
 };
 
 static struct acc_dev *get_acc_dev(void)
@@ -1340,8 +1349,56 @@ static struct configfs_item_operations acc_item_ops = {
 	.release        = acc_attr_release,
 };
 
+static ssize_t acc_disable_show(struct config_item *item, char *page)
+{
+	struct acc_instance *fi_acc = to_acc_instance(item);
+	ssize_t result;
+
+	mutex_lock(&fi_acc->lock);
+	result = sprintf(page, "%d", fi_acc->functionality_disable);
+	mutex_unlock(&fi_acc->lock);
+
+	return result;
+}
+
+static ssize_t acc_disable_store(struct config_item *item, const char *page,
+					size_t len)
+{
+	struct acc_instance *fi_acc = to_acc_instance(item);
+	ssize_t result;
+	bool disable;
+	unsigned long flags;
+
+	// We want to prevent this flag from being set after the dev has
+	// been allocated
+	spin_lock_irqsave(&acc_dev_instance_lock, flags);
+	if (acc_dev_instance) {
+		spin_unlock_irqrestore(&acc_dev_instance_lock, flags);
+		return -EBUSY;
+	}
+	spin_unlock_irqrestore(&acc_dev_instance_lock, flags);
+
+	mutex_lock(&fi_acc->lock);
+	result = kstrtobool(page, &disable);
+	if (!result) {
+		fi_acc->functionality_disable = disable;
+		result = len;
+	}
+	mutex_unlock(&fi_acc->lock);
+
+	return result;
+}
+
+CONFIGFS_ATTR(acc_, disable);
+
+static struct configfs_attribute *acc_attrs[] = {
+	&acc_attr_disable,
+	NULL,
+};
+
 static struct config_item_type acc_func_type = {
 	.ct_item_ops    = &acc_item_ops,
+	.ct_attrs       = acc_attrs,
 	.ct_owner       = THIS_MODULE,
 };
 
@@ -1379,6 +1436,10 @@ static void acc_free_inst(struct usb_function_instance *fi)
 	acc_cleanup();
 }
 
+// This is called when the /config/usb_gadget/g1/functions/accessory.gs2
+// directory is created. By not creating the above directory, we do not
+// call acc_init(), and in turn do not allocate the struct acc_dev, and
+// therefore do not assign it it acc_dev_instance.
 static struct usb_function_instance *acc_alloc_inst(void)
 {
 	struct acc_instance *fi_acc;
@@ -1387,9 +1448,13 @@ static struct usb_function_instance *acc_alloc_inst(void)
 	fi_acc = kzalloc(sizeof(*fi_acc), GFP_KERNEL);
 	if (!fi_acc)
 		return ERR_PTR(-ENOMEM);
+	mutex_init(&fi_acc->lock);
 	fi_acc->func_inst.set_inst_name = acc_set_inst_name;
 	fi_acc->func_inst.free_func_inst = acc_free_inst;
-
+	fi_acc->functionality_disable = false;
+	// we really don't want this to happen here if we are attempting to disable.
+	// it would be better if this happened durring acc_alloc() which I believe is
+	// when the instance is linked into a config.
 	err = acc_init();
 	if (err) {
 		kfree(fi_acc);
@@ -1419,6 +1484,9 @@ bool __acc_req_match(const struct usb_ctrlrequest *ctrl)
 	 * If instance is not created which is the case in power off charging
 	 * mode, dev will be NULL. Hence return error if it is the case.
 	 */
+	// This check will fail if we haven't created the directory, whic will
+	// successfully allow the usb packets to be captured by the functionfs
+	// implementation, which is the whole goal of the disable switch.
 	if (!dev)
 		return false;
 
