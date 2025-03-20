@@ -133,8 +133,21 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_ptr);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_blocked_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_map_util_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reweight_entity);
+<<<<<<< HEAD   (7d5d77371fb5c506175662b6e79549a672828419 ANDROID: GKI: Update ABI and add symbols for Gunyah driver)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_iowait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_util_fits_cpu);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_task_comm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);
+||||||| BASE   (f337a38383da70453d0677351908340742d0d7e6 FROMGIT: KVM: arm64: Tear down vGIC on failed vCPU creation)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_move_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_alloc_early);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_free);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_move_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_alloc_early);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_entity_delayed);
+>>>>>>> CHANGE (f8508db700c865edb1b02b48140ec0f9f26acd22 ANDROID: GKI: add vendor hook android_rvh_dequeue_entity_del)

@@ -516,9 +516,17 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_task_comm,
 	TP_PROTO(struct task_struct *tsk, bool exec),
 	TP_ARGS(tsk, exec), 1);
 
+<<<<<<< HEAD   (7d5d77371fb5c506175662b6e79549a672828419 ANDROID: GKI: Update ABI and add symbols for Gunyah driver)
 DECLARE_HOOK(android_vh_tick_nohz_idle_stop_tick,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
+||||||| BASE   (f337a38383da70453d0677351908340742d0d7e6 FROMGIT: KVM: arm64: Tear down vGIC on failed vCPU creation)
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_dequeue_entity_delayed,
+	TP_PROTO(struct cfs_rq *cfs_rq, struct sched_entity *se, bool *delay),
+	TP_ARGS(cfs_rq, se, delay), 1);
+
+>>>>>>> CHANGE (f8508db700c865edb1b02b48140ec0f9f26acd22 ANDROID: GKI: add vendor hook android_rvh_dequeue_entity_del)
 /* macro versions of hooks are no longer required */
 
 DECLARE_HOOK(android_vh_task_cmdline_prio_restore,
