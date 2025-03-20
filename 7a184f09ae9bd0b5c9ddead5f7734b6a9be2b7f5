@@ -189,6 +189,30 @@
       },
       "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f5f116_59eea190",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-20T23:22:57Z",
+      "side": 1,
+      "message": "Not sure I understand your question correctly but if you want to add the page to the tail why can\u0027t you use lruvec_add_folio_tail() in the hook handled?",
+      "parentUuid": "8f4d464d_55a57eb9",
+      "range": {
+        "startLine": 634,
+        "startChar": 2,
+        "endLine": 636,
+        "endChar": 19
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
