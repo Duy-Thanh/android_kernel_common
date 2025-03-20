@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971152dc_55ad09f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-20T00:46:42Z",
+      "side": 1,
+      "message": "You\u0027ll also need to re-add android_vh_adjust_kvmalloc_flags to your symbol list because it was dropped during the rebase.",
+      "revId": "d6a4582d3be902bbbee09581cfd550d3b0cfee61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c94652c5_eedbe2f9",
+        "filename": "mm/util.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-20T00:46:42Z",
+      "side": 1,
+      "message": "remove extra line left over",
+      "revId": "d6a4582d3be902bbbee09581cfd550d3b0cfee61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
