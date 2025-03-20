@@ -14,7 +14,11 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&touchscreen_pins>;
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 		interrupt-parent = <&pio>;
+||||||| BASE
+=======
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 		interrupts-extended = <&pio 155 IRQ_TYPE_LEVEL_LOW>;
 
 		post-power-on-delay-ms = <70>;

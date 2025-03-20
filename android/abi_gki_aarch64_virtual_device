@@ -1417,6 +1417,13 @@
   blk_mq_free_tag_set
   blk_mq_freeze_queue
   blk_mq_map_queues
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
+||||||| BASE
+  blk_mq_quiesce_queue
+=======
+  blk_mq_quiesce_queue
+  blk_mq_quiesce_queue_nowait
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
   blk_mq_requeue_request
   blk_mq_start_request
   blk_mq_start_stopped_hw_queues

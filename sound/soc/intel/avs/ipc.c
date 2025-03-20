@@ -301,6 +301,161 @@ void avs_dsp_process_response(struct avs_dev *adev, u64 header)
 	complete(&ipc->busy_completion);
 }
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
+||||||| BASE
+irqreturn_t avs_dsp_irq_handler(int irq, void *dev_id)
+{
+	struct avs_dev *adev = dev_id;
+	struct avs_ipc *ipc = adev->ipc;
+	u32 adspis, hipc_rsp, hipc_ack;
+	irqreturn_t ret = IRQ_NONE;
+
+	adspis = snd_hdac_adsp_readl(adev, AVS_ADSP_REG_ADSPIS);
+	if (adspis == UINT_MAX || !(adspis & AVS_ADSP_ADSPIS_IPC))
+		return ret;
+
+	hipc_ack = snd_hdac_adsp_readl(adev, SKL_ADSP_REG_HIPCIE);
+	hipc_rsp = snd_hdac_adsp_readl(adev, SKL_ADSP_REG_HIPCT);
+
+	/* DSP acked host's request */
+	if (hipc_ack & SKL_ADSP_HIPCIE_DONE) {
+		/*
+		 * As an extra precaution, mask done interrupt. Code executed
+		 * due to complete() found below does not assume any masking.
+		 */
+		snd_hdac_adsp_updatel(adev, SKL_ADSP_REG_HIPCCTL,
+				      AVS_ADSP_HIPCCTL_DONE, 0);
+
+		complete(&ipc->done_completion);
+
+		/* tell DSP it has our attention */
+		snd_hdac_adsp_updatel(adev, SKL_ADSP_REG_HIPCIE,
+				      SKL_ADSP_HIPCIE_DONE,
+				      SKL_ADSP_HIPCIE_DONE);
+		/* unmask done interrupt */
+		snd_hdac_adsp_updatel(adev, SKL_ADSP_REG_HIPCCTL,
+				      AVS_ADSP_HIPCCTL_DONE,
+				      AVS_ADSP_HIPCCTL_DONE);
+		ret = IRQ_HANDLED;
+	}
+
+	/* DSP sent new response to process */
+	if (hipc_rsp & SKL_ADSP_HIPCT_BUSY) {
+		/* mask busy interrupt */
+		snd_hdac_adsp_updatel(adev, SKL_ADSP_REG_HIPCCTL,
+				      AVS_ADSP_HIPCCTL_BUSY, 0);
+
+		ret = IRQ_WAKE_THREAD;
+	}
+
+	return ret;
+}
+
+irqreturn_t avs_dsp_irq_thread(int irq, void *dev_id)
+{
+	struct avs_dev *adev = dev_id;
+	union avs_reply_msg msg;
+	u32 hipct, hipcte;
+
+	hipct = snd_hdac_adsp_readl(adev, SKL_ADSP_REG_HIPCT);
+	hipcte = snd_hdac_adsp_readl(adev, SKL_ADSP_REG_HIPCTE);
+
+	/* ensure DSP sent new response to process */
+	if (!(hipct & SKL_ADSP_HIPCT_BUSY))
+		return IRQ_NONE;
+
+	msg.primary = hipct;
+	msg.ext.val = hipcte;
+	avs_dsp_process_response(adev, msg.val);
+
+	/* tell DSP we accepted its message */
+	snd_hdac_adsp_updatel(adev, SKL_ADSP_REG_HIPCT,
+			      SKL_ADSP_HIPCT_BUSY, SKL_ADSP_HIPCT_BUSY);
+	/* unmask busy interrupt */
+	snd_hdac_adsp_updatel(adev, SKL_ADSP_REG_HIPCCTL,
+			      AVS_ADSP_HIPCCTL_BUSY, AVS_ADSP_HIPCCTL_BUSY);
+
+	return IRQ_HANDLED;
+}
+
+=======
+irqreturn_t avs_dsp_irq_handler(int irq, void *dev_id)
+{
+	struct avs_dev *adev = dev_id;
+	struct avs_ipc *ipc = adev->ipc;
+	const struct avs_spec *const spec = adev->spec;
+	u32 adspis, hipc_rsp, hipc_ack;
+	irqreturn_t ret = IRQ_NONE;
+
+	adspis = snd_hdac_adsp_readl(adev, AVS_ADSP_REG_ADSPIS);
+	if (adspis == UINT_MAX || !(adspis & AVS_ADSP_ADSPIS_IPC))
+		return ret;
+
+	hipc_ack = snd_hdac_adsp_readl(adev, spec->hipc->ack_offset);
+	hipc_rsp = snd_hdac_adsp_readl(adev, spec->hipc->rsp_offset);
+
+	/* DSP acked host's request */
+	if (hipc_ack & spec->hipc->ack_done_mask) {
+		/*
+		 * As an extra precaution, mask done interrupt. Code executed
+		 * due to complete() found below does not assume any masking.
+		 */
+		snd_hdac_adsp_updatel(adev, spec->hipc->ctl_offset,
+				      AVS_ADSP_HIPCCTL_DONE, 0);
+
+		complete(&ipc->done_completion);
+
+		/* tell DSP it has our attention */
+		snd_hdac_adsp_updatel(adev, spec->hipc->ack_offset,
+				      spec->hipc->ack_done_mask,
+				      spec->hipc->ack_done_mask);
+		/* unmask done interrupt */
+		snd_hdac_adsp_updatel(adev, spec->hipc->ctl_offset,
+				      AVS_ADSP_HIPCCTL_DONE,
+				      AVS_ADSP_HIPCCTL_DONE);
+		ret = IRQ_HANDLED;
+	}
+
+	/* DSP sent new response to process */
+	if (hipc_rsp & spec->hipc->rsp_busy_mask) {
+		/* mask busy interrupt */
+		snd_hdac_adsp_updatel(adev, spec->hipc->ctl_offset,
+				      AVS_ADSP_HIPCCTL_BUSY, 0);
+
+		ret = IRQ_WAKE_THREAD;
+	}
+
+	return ret;
+}
+
+irqreturn_t avs_dsp_irq_thread(int irq, void *dev_id)
+{
+	struct avs_dev *adev = dev_id;
+	union avs_reply_msg msg;
+	u32 hipct, hipcte;
+
+	hipct = snd_hdac_adsp_readl(adev, SKL_ADSP_REG_HIPCT);
+	hipcte = snd_hdac_adsp_readl(adev, SKL_ADSP_REG_HIPCTE);
+
+	/* ensure DSP sent new response to process */
+	if (!(hipct & SKL_ADSP_HIPCT_BUSY))
+		return IRQ_NONE;
+
+	msg.primary = hipct;
+	msg.ext.val = hipcte;
+	avs_dsp_process_response(adev, msg.val);
+
+	/* tell DSP we accepted its message */
+	snd_hdac_adsp_updatel(adev, SKL_ADSP_REG_HIPCT,
+			      SKL_ADSP_HIPCT_BUSY, SKL_ADSP_HIPCT_BUSY);
+	/* unmask busy interrupt */
+	snd_hdac_adsp_updatel(adev, SKL_ADSP_REG_HIPCCTL,
+			      AVS_ADSP_HIPCCTL_BUSY, AVS_ADSP_HIPCCTL_BUSY);
+
+	return IRQ_HANDLED;
+}
+
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 static bool avs_ipc_is_busy(struct avs_ipc *ipc)
 {
 	struct avs_dev *adev = to_avs_dev(ipc->dev);

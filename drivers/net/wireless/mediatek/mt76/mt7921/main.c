@@ -546,7 +546,12 @@ static int mt7921_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
 		 * reassociating. But we should trigger the deletion process
 		 * to avoid using incorrect cipher after disconnection,
 		 */
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 		if (vif->cfg.assoc)
+||||||| BASE
+=======
+		if (vif->type != NL80211_IFTYPE_STATION || vif->cfg.assoc)
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 			goto out;
 	}
 

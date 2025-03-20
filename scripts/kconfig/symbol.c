@@ -321,6 +321,11 @@ static void sym_warn_unmet_dep(struct symbol *sym)
 			       "  Selected by [m]:\n");
 
 	fputs(str_get(&gs), stderr);
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
+||||||| BASE
+=======
+	str_free(&gs);
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 	sym_warnings++;
 }
 

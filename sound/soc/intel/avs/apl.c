@@ -14,8 +14,19 @@
 #include "path.h"
 #include "topology.h"
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 static irqreturn_t avs_apl_dsp_interrupt(struct avs_dev *adev)
+||||||| BASE
+static int __maybe_unused
+apl_enable_logs(struct avs_dev *adev, enum avs_log_enable enable, u32 aging_period,
+		u32 fifo_full_period, unsigned long resource_mask, u32 *priorities)
+=======
+static int __maybe_unused
+avs_apl_enable_logs(struct avs_dev *adev, enum avs_log_enable enable, u32 aging_period,
+		    u32 fifo_full_period, unsigned long resource_mask, u32 *priorities)
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 {
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 	u32 adspis = snd_hdac_adsp_readl(adev, AVS_ADSP_REG_ADSPIS);
 	irqreturn_t ret = IRQ_NONE;
 
@@ -34,6 +45,9 @@ static irqreturn_t avs_apl_dsp_interrupt(struct avs_dev *adev)
 int avs_apl_enable_logs(struct avs_dev *adev, enum avs_log_enable enable, u32 aging_period,
 			u32 fifo_full_period, unsigned long resource_mask, u32 *priorities)
 {
+||||||| BASE
+=======
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 	struct avs_apl_log_state_info *info;
 	u32 size, num_cores = adev->hw_cfg.dsp_cores;
 	int ret, i;
@@ -66,7 +80,13 @@ int avs_apl_enable_logs(struct avs_dev *adev, enum avs_log_enable enable, u32 ag
 }
 #endif
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 int avs_apl_log_buffer_status(struct avs_dev *adev, union avs_notify_msg *msg)
+||||||| BASE
+static int apl_log_buffer_status(struct avs_dev *adev, union avs_notify_msg *msg)
+=======
+static int avs_apl_log_buffer_status(struct avs_dev *adev, union avs_notify_msg *msg)
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 {
 	struct avs_apl_log_buffer_layout layout;
 	void __iomem *addr, *buf;
@@ -120,12 +140,18 @@ static int avs_apl_wait_log_entry(struct avs_dev *adev, u32 core,
 /* reads log header and tests its type */
 #define avs_apl_is_entry_stackdump(addr) ((readl(addr) >> 30) & 0x1)
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 int avs_apl_coredump(struct avs_dev *adev, union avs_notify_msg *msg)
+||||||| BASE
+static int apl_coredump(struct avs_dev *adev, union avs_notify_msg *msg)
+=======
+static int avs_apl_coredump(struct avs_dev *adev, union avs_notify_msg *msg)
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 {
 	struct avs_apl_log_buffer_layout layout;
 	void __iomem *addr, *buf;
 	size_t dump_size;
-	u16 offset = 0;
+	u32 offset = 0;
 	u8 *dump, *pos;
 
 	dump_size = AVS_FW_REGS_SIZE + msg->ext.coredump.stack_dump_size;
@@ -220,7 +246,13 @@ static bool avs_apl_lp_streaming(struct avs_dev *adev)
 	return true;
 }
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 bool avs_apl_d0ix_toggle(struct avs_dev *adev, struct avs_ipc_msg *tx, bool wake)
+||||||| BASE
+static bool apl_d0ix_toggle(struct avs_dev *adev, struct avs_ipc_msg *tx, bool wake)
+=======
+static bool avs_apl_d0ix_toggle(struct avs_dev *adev, struct avs_ipc_msg *tx, bool wake)
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 {
 	/* wake in all cases */
 	if (wake)
@@ -237,7 +269,13 @@ bool avs_apl_d0ix_toggle(struct avs_dev *adev, struct avs_ipc_msg *tx, bool wake
 	return avs_apl_lp_streaming(adev);
 }
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 int avs_apl_set_d0ix(struct avs_dev *adev, bool enable)
+||||||| BASE
+static int apl_set_d0ix(struct avs_dev *adev, bool enable)
+=======
+static int avs_apl_set_d0ix(struct avs_dev *adev, bool enable)
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 {
 	bool streaming = false;
 	int ret;

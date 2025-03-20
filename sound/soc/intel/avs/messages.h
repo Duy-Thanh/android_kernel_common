@@ -378,6 +378,7 @@ struct avs_apl_log_state_info {
 	u32 fifo_full_timer_period;
 	u32 core_mask;
 	struct avs_skl_log_state logs_core[];
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 } __packed;
 
 enum avs_icl_log_priority {
@@ -402,6 +403,9 @@ struct avs_icl_log_state_info {
 	u32 fifo_full_timer_period;
 	u32 enable;
 	u32 logs_priorities_mask[];
+||||||| BASE
+=======
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 } __packed;
 
 int avs_ipc_set_enable_logs(struct avs_dev *adev, u8 *log_info, size_t size);

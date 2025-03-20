@@ -13,8 +13,19 @@
 #include "cldma.h"
 #include "messages.h"
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 void avs_skl_ipc_interrupt(struct avs_dev *adev)
+||||||| BASE
+static int __maybe_unused
+skl_enable_logs(struct avs_dev *adev, enum avs_log_enable enable, u32 aging_period,
+		u32 fifo_full_period, unsigned long resource_mask, u32 *priorities)
+=======
+static int __maybe_unused
+avs_skl_enable_logs(struct avs_dev *adev, enum avs_log_enable enable, u32 aging_period,
+		    u32 fifo_full_period, unsigned long resource_mask, u32 *priorities)
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 {
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 	const struct avs_spec *spec = adev->spec;
 	u32 hipc_ack, hipc_rsp;
 
@@ -77,6 +88,9 @@ static int __maybe_unused
 avs_skl_enable_logs(struct avs_dev *adev, enum avs_log_enable enable, u32 aging_period,
 		    u32 fifo_full_period, unsigned long resource_mask, u32 *priorities)
 {
+||||||| BASE
+=======
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 	struct avs_skl_log_state_info *info;
 	u32 size, num_cores = adev->hw_cfg.dsp_cores;
 	int ret, i;
