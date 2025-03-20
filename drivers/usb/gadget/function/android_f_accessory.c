@@ -2,7 +2,7 @@
 /*
  * Gadget Function Driver for Android USB accessories
  *
- * Copyright 2011-2024 Google LLC
+ * Copyright 2011-2025 Google LLC
  *
  */
 
@@ -264,10 +264,19 @@ static struct usb_gadget_strings *acc_strings[] = {
 
 static DEFINE_SPINLOCK(acc_dev_instance_lock);
 static struct acc_dev *acc_dev_instance;
-
+//NTK
 struct acc_instance {
 	struct usb_function_instance func_inst;
 	const char *name;
+	/*
+	 * Set via userspace when the in-kernel AOA functionality of this
+	 * driver should be disabled. This will be used to assist in the
+	 * transition to a userspace AOA implementation and deprecation of
+	 * this driver.
+	 */
+	bool functionality_disable;
+	// can we reuse acc_dev_instance_lock?
+	struct mutex lock;
 };
 
 static struct acc_dev *get_acc_dev(void)
@@ -1340,8 +1349,63 @@ static struct configfs_item_operations acc_item_ops = {
 	.release        = acc_attr_release,
 };
 
+static ssize_t acc_disable_show(struct config_item *item, char *page)
+{
+	struct acc_instance *fi_acc = to_acc_instance(item);
+	ssize_t result;
+
+	//NTK
+	mutex_lock(&fi_acc->lock);
+	result = sprintf(page, "%d", fi_acc->functionality_disable);
+	mutex_unlock(&fi_acc->lock);
+
+	return result;
+}
+
+static ssize_t acc_disable_store(struct config_item *item, const char *page,
+					size_t len)
+{
+	struct acc_instance *fi_acc = to_acc_instance(item);
+	ssize_t result;
+	bool disable;
+	unsigned long flags;
+
+	// We want to prevent this flag from being set after the dev has
+	// been allocated
+	spin_lock_irqsave(&acc_dev_instance_lock, flags);
+	if (acc_dev_instance) {
+		spin_unlock_irqrestore(&acc_dev_instance_lock, flags);
+		return -EBUSY;
+	}
+	spin_unlock_irqrestore(&acc_dev_instance_lock, flags);
+
+//	mutex_lock(&fi_acc->lock);
+//	if (fi_acc->refcnt) {
+//		mutex_unlock(&fi_acc->lock);
+//		return -EBUSY;
+//	}
+
+	mutex_lock(&fi_acc->lock);
+	result = kstrtobool(page, &disable);
+	if (!result) {
+		fi_acc->functionality_disable = disable;
+		result = len;
+	}
+	mutex_unlock(&fi_acc->lock);
+
+	return result;
+}
+
+CONFIGFS_ATTR(acc_, disable);
+
+static struct configfs_attribute *acc_attrs[] = {
+	&acc_attr_disable,
+	NULL,
+};
+
 static struct config_item_type acc_func_type = {
 	.ct_item_ops    = &acc_item_ops,
+	.ct_attrs       = acc_attrs,
 	.ct_owner       = THIS_MODULE,
 };
 
@@ -1387,9 +1451,10 @@ static struct usb_function_instance *acc_alloc_inst(void)
 	fi_acc = kzalloc(sizeof(*fi_acc), GFP_KERNEL);
 	if (!fi_acc)
 		return ERR_PTR(-ENOMEM);
+	mutex_init(&fi_acc->lock);
 	fi_acc->func_inst.set_inst_name = acc_set_inst_name;
 	fi_acc->func_inst.free_func_inst = acc_free_inst;
-
+	fi_acc->functionality_disable = false;
 	err = acc_init();
 	if (err) {
 		kfree(fi_acc);
