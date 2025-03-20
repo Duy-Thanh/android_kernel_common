@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa48633d_f4a80257",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-20T17:50:20Z",
+      "side": 1,
+      "message": "Sure, Nikita is about to push them.",
+      "parentUuid": "ee341a87_ee2fb05a",
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97e4d655_85570e69",
@@ -83,6 +101,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f6a824_c41de496",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-20T17:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6e4d58e_d1acdc8b",
+      "range": {
+        "startLine": 297,
+        "startChar": 6,
+        "endLine": 297,
+        "endChar": 17
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c93cc486_3308130d",
@@ -96,6 +138,30 @@
       "writtenOn": "2025-02-11T16:07:55Z",
       "side": 1,
       "message": "I think we\u0027re better off making this a capability on the PROTECTED_VM ioctl -- i.e. add it to the `switch (cap-\u003eflags)` in `pkvm_vm_ioctl_enable_cap`.\n\nPerhaps we could advertise the supported FFA version in `kvm_protected_vm_info` too?",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 29
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce907ac_b4cf3d7f",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-20T17:50:20Z",
+      "side": 1,
+      "message": "Fixed this as we discussed and returned an ffa version as well.",
+      "parentUuid": "c93cc486_3308130d",
       "range": {
         "startLine": 99,
         "startChar": 6,
@@ -129,6 +195,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77e64eec_d774ffa5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-20T17:50:20Z",
+      "side": 1,
+      "message": "I think passing a vcpu is fine as we pass a vcpu for the others as well.",
+      "parentUuid": "00840d4d_9f532c26",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 24
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2f2312c_1cad193b",
@@ -142,6 +232,30 @@
       "writtenOn": "2025-02-11T16:07:55Z",
       "side": 1,
       "message": "In this case, why wouldn\u0027t we return `SMCCC_RET_NOT_SUPPORTED`? i.e. change the previous check to be:\n\n```\nif (!VM_FFA_SUPPORTED(vcpu) || !is_ffa_call(func_id)) {\n\t...\n```",
+      "range": {
+        "startLine": 1266,
+        "startChar": 6,
+        "endLine": 1266,
+        "endChar": 22
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3e546f6_f9a38add",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-20T17:50:20Z",
+      "side": 1,
+      "message": "I would like to keep it as it is to distiguish between the two",
+      "parentUuid": "d2f2312c_1cad193b",
       "range": {
         "startLine": 1266,
         "startChar": 6,
@@ -199,6 +313,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "911fa38a_8f5ea162",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-20T17:50:20Z",
+      "side": 1,
+      "message": "Used `CAP_IPC_OWNER` as we discussed",
+      "parentUuid": "f6dd7d14_fe59e466",
+      "range": {
+        "startLine": 853,
+        "startChar": 0,
+        "endLine": 853,
+        "endChar": 35
+      },
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f9b36f0_afba9fc8",
@@ -246,6 +384,30 @@
           ]
         }
       ],
+      "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eff837b_0db360be",
+        "filename": "include/uapi/linux/kvm.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-20T17:50:20Z",
+      "side": 1,
+      "message": "dropped this",
+      "parentUuid": "4f9b36f0_afba9fc8",
+      "range": {
+        "startLine": 944,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 42
+      },
       "revId": "9246d46a6a8cdb8381626ebfb466be96e44a280d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
