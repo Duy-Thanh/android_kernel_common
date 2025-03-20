@@ -113,4 +113,8 @@
   __tracepoint_android_vh_udp_v6_connect
   __traceiter_android_vh_sock_create
   __tracepoint_android_vh_sock_create
+  __traceiter_android_vh_receive_sock
+  __tracepoint_android_vh_receive_sock
+  __traceiter_android_vh_task_get_classid
+  __tracepoint_android_vh_task_get_classid
 
