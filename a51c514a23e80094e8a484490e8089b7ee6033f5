@@ -81,6 +81,24 @@
       "parentUuid": "6122eea4_9870f019",
       "revId": "a51c514a23e80094e8a484490e8089b7ee6033f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46761616_b39ee5c9",
+        "filename": "drivers/virt/gunyah/gunyah.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-21T06:38:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6a980ce_cee5a0e1",
+      "revId": "a51c514a23e80094e8a484490e8089b7ee6033f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
