@@ -16,6 +16,24 @@
       "message": "You need to post a follow-up patch to add new hooks into symbols list and update ABI",
       "revId": "65b16a2f006c0d33c9e578a1dae2728b915efc56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "506ac809_f2427c04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-03-21T07:28:11Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/3556044",
+      "parentUuid": "e57d1335_309a2600",
+      "revId": "65b16a2f006c0d33c9e578a1dae2728b915efc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
