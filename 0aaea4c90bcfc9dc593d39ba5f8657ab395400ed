@@ -70,6 +70,24 @@
       "parentUuid": "3021b459_e00b4f98",
       "revId": "0aaea4c90bcfc9dc593d39ba5f8657ab395400ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2183fcc_5c5d5617",
+        "filename": "kernel/dma/contiguous.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-21T20:24:12Z",
+      "side": 1,
+      "message": "I\u0027m in the process of upstreaming this feature. I\u0027ll see where the documentation will end up upstream and will add documentation after it landed accordingly.",
+      "parentUuid": "4d07cff7_e661feb1",
+      "revId": "0aaea4c90bcfc9dc593d39ba5f8657ab395400ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
