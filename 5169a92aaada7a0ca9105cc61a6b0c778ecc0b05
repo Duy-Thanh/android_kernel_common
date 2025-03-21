@@ -33,6 +33,24 @@
       "message": "Hold on with this as seems we got special case which triger cross repo dependency with modules.bzl for Brya. We need to discuss this to find solution or override presubmit.\n\n\"The following kernel modules are built but not copied. Add these lines to the module_outs attribute of @@//private/google-modules/linux/brya:brya_device_x86_64\"\n\nCan you link CL to modules.bzl change as you add two additional ko objects here: https://android-review.git.corp.google.com/c/kernel/common/+/3547567",
       "revId": "5169a92aaada7a0ca9105cc61a6b0c778ecc0b05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2638a0f3_6bf85ac1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-03-21T16:41:05Z",
+      "side": 1,
+      "message": "Ah, ok, I think I\u0027ve found the issue here.\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3547569/1/sound/soc/intel/boards/Kconfig\n\n```\nconfig SND_SOC_INTEL_SOUNDWIRE_SOF_MACH\n...\n\tselect SND_SOC_RT721_SDCA_SDW\n```\n\n```\nbrya_device.fragment\n216:CONFIG_SND_SOC_INTEL_SOUNDWIRE_SOF_MACH\u003dm\n```\n\nIn the short term, I think we can fix the build errors by dropping that patch from this series. We may not need it at all in the `android16-6.12-desktop` branch, and just rely on setting `SND_SOC_RT721_SDCA_SDW\u003dm` explicitly in `private/google-modules/linux/brya` like any other module.\n\nI\u0027m not sure what the answer is in terms of cleanly landing that patch if we do need it though. Presumably there\u0027s a process which allows these types of patches, since this is unlikley to be the first, won\u0027t certainly won\u0027t be the last.",
+      "parentUuid": "5ea27400_c4549f9b",
+      "revId": "5169a92aaada7a0ca9105cc61a6b0c778ecc0b05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
