@@ -81,6 +81,24 @@
       "parentUuid": "fd71b03f_9bf2e44d",
       "revId": "e5ec15a54325d5a0023d174fa468b6c1e53e692c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "facc4f40_4469ef16",
+        "filename": "drivers/gpu/drm/scheduler/sched_fence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-03-21T19:13:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ac3473a9_c2820aee",
+      "revId": "e5ec15a54325d5a0023d174fa468b6c1e53e692c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
