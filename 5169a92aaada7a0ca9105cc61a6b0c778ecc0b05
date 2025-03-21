@@ -51,6 +51,24 @@
       "parentUuid": "5ea27400_c4549f9b",
       "revId": "5169a92aaada7a0ca9105cc61a6b0c778ecc0b05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9007e4a9_4bbd3e1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3659872
+      },
+      "writtenOn": "2025-03-21T16:48:43Z",
+      "side": 1,
+      "message": "\u003e won\u0027t certainly won\u0027t be the last.\n\nYes. This exist due split in core/vendor and config/bazel. Option is to addopt Cl-depend. Let\u0027s sync on this side channel.",
+      "parentUuid": "2638a0f3_6bf85ac1",
+      "revId": "5169a92aaada7a0ca9105cc61a6b0c778ecc0b05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
