@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3317e3a_6c96f3ea",
+        "filename": "arch/x86/kernel/e820.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-21T13:45:16Z",
+      "side": 1,
+      "message": "Can it be just \"Reserved\"? IOW does this code need to assume that any memblocks with MEMBLOCK_NOMAP are from DT? AFAICS this \"DT Reserved\" string is the only reason why this codes cares whether it is DT or something else?",
+      "fixSuggestions": [
+        {
+          "fixId": "2c9aae9a_4175dd41",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kernel/e820.c",
+              "range": {
+                "startLine": 1170,
+                "startChar": 0,
+                "endLine": 1171,
+                "endChar": 0
+              },
+              "replacement": "\trsv_res-\u003ename  \u003d \"Reserved\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4cec988fea52cc9bdd28f42ca71d825e6e0cf374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c666538_728191a5",
+        "filename": "arch/x86/kernel/e820.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-21T13:45:16Z",
+      "side": 1,
+      "message": "What about DT reserved-memory nodes without `no-map`? Shouldn\u0027t we insert resources for them as well? https://lore.kernel.org/lkml/20180723015732.24252-2-takahiro.akashi@linaro.org/\n\nCan we instead reuse `reserve_region_with_split()` somehow, like arm64 does?\n\nOr maybe what we should actually do is to update e820, before inserting resources, like we do in `e820__reserve_setup_data()`, for example?",
+      "fixSuggestions": [
+        {
+          "fixId": "2643cc4e_b68e8979",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kernel/e820.c",
+              "range": {
+                "startLine": 1204,
+                "startChar": 0,
+                "endLine": 1207,
+                "endChar": 0
+              },
+              "replacement": "\t\tstart \u003d __pfn_to_phys(memblock_region_reserved_base_pfn(region));\n\t\tend \u003d __pfn_to_phys(memblock_region_reserved_end_pfn(region)) - 1;\n"
+            },
+            {
+              "path": "arch/x86/kernel/e820.c",
+              "range": {
+                "startLine": 1208,
+                "startChar": 0,
+                "endLine": 1212,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* If overlaps with existing region, rearrange resources */\n\t\tif (start \u003c\u003d e820_res-\u003eend \u0026\u0026 end \u003e\u003d e820_res-\u003estart) {\n\t\t\tsplit_resource(e820_res, start, end);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4cec988fea52cc9bdd28f42ca71d825e6e0cf374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83567e8c_8bca16e6",
+        "filename": "arch/x86/kernel/e820.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-03-21T13:45:16Z",
+      "side": 1,
+      "message": "Per this comment, what about those resources inserted later?",
+      "revId": "4cec988fea52cc9bdd28f42ca71d825e6e0cf374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
