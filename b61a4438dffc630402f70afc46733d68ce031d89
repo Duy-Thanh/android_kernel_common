@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce08bf15_84d39cb4",
+        "filename": "arch/arm64/include/uapi/asm/kvm.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1fbe720_471482e3",
+      "range": {
+        "startLine": 487,
+        "startChar": 1,
+        "endLine": 487,
+        "endChar": 6
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b493a40_4f92643c",
@@ -79,6 +103,30 @@
           ]
         }
       ],
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4af100ad_cb31cc14",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b493a40_4f92643c",
+      "range": {
+        "startLine": 1347,
+        "startChar": 8,
+        "endLine": 1347,
+        "endChar": 23
+      },
       "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -164,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24274d77_5aed5bdb",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "930a7a51_c87d0fb4",
+      "range": {
+        "startLine": 818,
+        "startChar": 3,
+        "endLine": 818,
+        "endChar": 14
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c7be91b_62b74bfd",
@@ -201,6 +273,30 @@
           ]
         }
       ],
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6cb13e_daf320c9",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c7be91b_62b74bfd",
+      "range": {
+        "startLine": 829,
+        "startChar": 6,
+        "endLine": 829,
+        "endChar": 25
+      },
       "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -246,6 +342,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c756029e_fe817f26",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6f920a8_a4fa7a3b",
+      "range": {
+        "startLine": 832,
+        "startChar": 14,
+        "endLine": 832,
+        "endChar": 27
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0ed8990_3fff4211",
@@ -269,6 +389,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15a26125_8cbbb3c3",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "Dropped this.",
+      "parentUuid": "b0ed8990_3fff4211",
+      "range": {
+        "startLine": 835,
+        "startChar": 0,
+        "endLine": 835,
+        "endChar": 50
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6929051d_0ed53ee8",
@@ -282,6 +426,30 @@
       "writtenOn": "2025-03-21T12:29:03Z",
       "side": 1,
       "message": "You could use the helper I suggested here, too.",
+      "range": {
+        "startLine": 842,
+        "startChar": 0,
+        "endLine": 842,
+        "endChar": 62
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fff692bc_d1c74a7c",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "Fixed, thanks !",
+      "parentUuid": "6929051d_0ed53ee8",
       "range": {
         "startLine": 842,
         "startChar": 0,
@@ -373,6 +541,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f6b36a7_2c62b5d7",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "I took an enable argument in that function",
+      "parentUuid": "aebada2e_189913ab",
+      "range": {
+        "startLine": 852,
+        "startChar": 0,
+        "endLine": 852,
+        "endChar": 35
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a67ced7_672245b9",
@@ -386,6 +578,30 @@
       "writtenOn": "2025-03-21T12:29:03Z",
       "side": 1,
       "message": "The ABI update should be done as a separate patch.",
+      "range": {
+        "startLine": 92131,
+        "startChar": 0,
+        "endLine": 92137,
+        "endChar": 0
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b62cc0bf_766e1aef",
+        "filename": "gki/aarch64/abi.stg",
+        "patchSetId": 34
+      },
+      "lineNbr": 92137,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-21T13:00:34Z",
+      "side": 1,
+      "message": "I\u0027ll drop it for the moment.",
+      "parentUuid": "7a67ced7_672245b9",
       "range": {
         "startLine": 92131,
         "startChar": 0,
