@@ -1,0 +1,358 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1fbe720_471482e3",
+        "filename": "arch/arm64/include/uapi/asm/kvm.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-21T12:29:03Z",
+      "side": 1,
+      "message": "Make this a `__u32`?\n\n```\n\t__u32 ffa_version;\n\t__u32 pad;\n\t__u64 __reserved[6];\n```",
+      "range": {
+        "startLine": 487,
+        "startChar": 1,
+        "endLine": 487,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "900bcd20_cdb5c8f6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/uapi/asm/kvm.h",
+              "range": {
+                "startLine": 487,
+                "startChar": 0,
+                "endLine": 489,
+                "endChar": 0
+              },
+              "replacement": "\t__u32 ffa_version;\n\t__u32 pad;\n\t__u64 __reserved[5];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930a7a51_c87d0fb4",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-21T12:29:03Z",
+      "side": 1,
+      "message": "You could probably avoid the hypercall every time with something like:\n\n```\nstatic u32 pkvm_get_ffa_version(void)\n{\n\tstatic u32 ffa_version;\n\tu32 ret;\n\t\n\tret \u003d READ_ONCE(ffa_version);\n\tif (ret)\n\t\treturn ret;\n\t\n\tret \u003d kvm_call_hyp_nvhe(__pkvm_host_get_ffa_version);\n\tWRITE_ONCE(ffa_version, ret);\n\treturn ret;\n}\n\nstatic int pkvm_vm_ioctl_info(struct kvm *kvm,\n\t\t\t      struct kvm_protected_vm_info __user *info)\n{\n\n\tstruct kvm_protected_vm_info kinfo \u003d {\n\t\t.firmware_size \u003d pvmfw_size,\n\t\t.ffa_version \u003d pkvm_get_ffa_version(),\n\t};\n\t\n\t...\n\t\n}\n```",
+      "range": {
+        "startLine": 818,
+        "startChar": 3,
+        "endLine": 818,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c360a8c8_abf97122",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "static u32 ffa_version;\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": "\nstatic u32 __init pkvm_get_ffa_version(void)\n{\n\tu32 ret;\n\n\tret \u003d READ_ONCE(ffa_version);\n\tif (ret)\n\t\treturn ret;\n\n\tret \u003d kvm_call_hyp_nvhe(__pkvm_host_get_ffa_version);\n\tif (ret)\n\t\treturn ret;\n\n\tWRITE_ONCE(ffa_version, ret);\n\treturn ret;\n}\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 818,
+                "startChar": 0,
+                "endLine": 819,
+                "endChar": 0
+              },
+              "replacement": "\t\t.ffa_version \u003d pkvm_get_ffa_version(),\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 827,
+                "startChar": 0,
+                "endLine": 828,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 842,
+                "startChar": 0,
+                "endLine": 844,
+                "endChar": 0
+              },
+              "replacement": "\tif (!pkvm_get_ffa_version())\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c7be91b_62b74bfd",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-21T12:29:03Z",
+      "side": 1,
+      "message": "This is already checked by the caller, so we don\u0027t need to check it again here.",
+      "range": {
+        "startLine": 829,
+        "startChar": 6,
+        "endLine": 829,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "da33876d_b9794266",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 829,
+                "startChar": 0,
+                "endLine": 832,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f920a8_a4fa7a3b",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-21T12:29:03Z",
+      "side": 1,
+      "message": "Maybe add a comment to say why we\u0027re requiring this?",
+      "range": {
+        "startLine": 832,
+        "startChar": 14,
+        "endLine": 832,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7c68e125_5eeafe5d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 832,
+                "startChar": 0,
+                "endLine": 832,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The FF-A capability is only available to the IPC owner.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ed8990_3fff4211",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-21T12:29:03Z",
+      "side": 1,
+      "message": "Also checked by the caller.",
+      "range": {
+        "startLine": 835,
+        "startChar": 0,
+        "endLine": 835,
+        "endChar": 50
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6929051d_0ed53ee8",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-21T12:29:03Z",
+      "side": 1,
+      "message": "You could use the helper I suggested here, too.",
+      "range": {
+        "startLine": 842,
+        "startChar": 0,
+        "endLine": 842,
+        "endChar": 62
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aebada2e_189913ab",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-21T12:29:03Z",
+      "side": 1,
+      "message": "This is a bit weird, as it means that userspace can\u0027t disable the proxy after it\u0027s enabled it. Perhaps take a `u32 enable` argument in `cap-\u003eargs[0]` instead?",
+      "range": {
+        "startLine": 852,
+        "startChar": 0,
+        "endLine": 852,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "673c5417_ffc0d3a0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 824,
+                "startChar": 0,
+                "endLine": 825,
+                "endChar": 0
+              },
+              "replacement": "static int pkvm_vm_ioctl_set_ffa(struct kvm *kvm, struct kvm_enable_cap *cap)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 835,
+                "startChar": 0,
+                "endLine": 836,
+                "endChar": 0
+              },
+              "replacement": "\tif (cap-\u003eargs[1] || cap-\u003eargs[2])\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 852,
+                "startChar": 0,
+                "endLine": 853,
+                "endChar": 0
+              },
+              "replacement": "\tkvm-\u003earch.pkvm.ffa_support \u003d cap-\u003eargs[0];\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 863,
+                "startChar": 0,
+                "endLine": 864,
+                "endChar": 0
+              },
+              "replacement": "\tif (cap-\u003eargs[1] || cap-\u003eargs[2])\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 872,
+                "startChar": 0,
+                "endLine": 873,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn pkvm_vm_ioctl_set_ffa(kvm, cap);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a67ced7_672245b9",
+        "filename": "gki/aarch64/abi.stg",
+        "patchSetId": 34
+      },
+      "lineNbr": 92137,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-21T12:29:03Z",
+      "side": 1,
+      "message": "The ABI update should be done as a separate patch.",
+      "range": {
+        "startLine": 92131,
+        "startChar": 0,
+        "endLine": 92137,
+        "endChar": 0
+      },
+      "revId": "b61a4438dffc630402f70afc46733d68ce031d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
