@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e9cd34_0b1c22bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-03-21T15:59:07Z",
+      "side": 1,
+      "message": "nit: has been torn down",
+      "range": {
+        "startLine": 14,
+        "startChar": 56,
+        "endLine": 14,
+        "endChar": 71
+      },
+      "revId": "e5ec15a54325d5a0023d174fa468b6c1e53e692c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd71b03f_9bf2e44d",
+        "filename": "drivers/gpu/drm/scheduler/sched_fence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-03-21T15:59:07Z",
+      "side": 1,
+      "message": "I\u0027m far from an expert here, but it seems a little strange that `name` is the way to tell if the `drm_sched` still exists or not. This feels more like relying on hidden behavior rather than something explicit, since `name` isn\u0027t set to null in `drm_sched_fini()`.\n\nRather, I think checking `sched-\u003eready` is more appropriate:\n\n[src/third_party/kernel/v6.12/drivers/gpu/drm/scheduler/sched_main.c](https://source.corp.google.com/h/chrome-internal/chromeos/superproject/+/main:src/third_party/kernel/v6.12/drivers/gpu/drm/scheduler/sched_main.c;drc\u003d2da108b4b5fb7ec04d7e951418ed80e97f7c35ad;l\u003d1375)\n\n```\n/**\n * drm_sched_fini - Destroy a gpu scheduler\n *\n * @sched: scheduler instance\n *\n * Tears down and cleans up the scheduler.\n */\nvoid drm_sched_fini(struct drm_gpu_scheduler *sched)\n{\n...\n\tif (sched-\u003eown_submit_wq)\n\t\tdestroy_workqueue(sched-\u003esubmit_wq);\n\tsched-\u003eready \u003d false;         \u003c\u003c---- set to false here\n\tkfree(sched-\u003esched_rq);\n\tsched-\u003esched_rq \u003d NULL;       \u003c\u003c---- or could check this instead\n}\n```",
+      "revId": "e5ec15a54325d5a0023d174fa468b6c1e53e692c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
