@@ -1126,7 +1126,7 @@ static void do_ffa_part_get(struct arm_smccc_res *res,
 	if (hyp_ffa_version > FFA_VERSION_1_0) {
 		/* Get the number of partitions deployed in the system */
 		if (flags & 0x1)
-			goto out_unlock;
+			goto release_rx;
 
 		partition_sz  = res->a3;
 	} else {
