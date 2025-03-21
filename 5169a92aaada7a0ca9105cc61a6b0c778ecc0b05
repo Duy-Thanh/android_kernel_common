@@ -16,6 +16,23 @@
       "message": "delegating review",
       "revId": "5169a92aaada7a0ca9105cc61a6b0c778ecc0b05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea27400_c4549f9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3659872
+      },
+      "writtenOn": "2025-03-21T15:11:02Z",
+      "side": 1,
+      "message": "Hold on with this as seems we got special case which triger cross repo dependency with modules.bzl for Brya. We need to discuss this to find solution or override presubmit.\n\n\"The following kernel modules are built but not copied. Add these lines to the module_outs attribute of @@//private/google-modules/linux/brya:brya_device_x86_64\"\n\nCan you link CL to modules.bzl change as you add two additional ko objects here: https://android-review.git.corp.google.com/c/kernel/common/+/3547567",
+      "revId": "5169a92aaada7a0ca9105cc61a6b0c778ecc0b05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
