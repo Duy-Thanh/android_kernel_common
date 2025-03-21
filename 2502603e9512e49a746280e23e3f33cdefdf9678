@@ -16,6 +16,24 @@
       "message": "Hi.\n\nPlease read https://source.android.com/docs/core/architecture/kernel/howto-symbol-lists and note that you will want to set these options:\n\n* `module_grouping` \u003d `False`\n* `kmi_symbol_list_add_only` \u003d `True`\n\nIf you have configured things in line with the documentation, then an update command will maintain the list for you, in a \"sorted\" order.\n\n`tools/bazel run //.../..._aarch64_abi_update_symbol_list`\n\nThe exact target name will depend on how you have laid out your module sources.\n\n---\n\nThe `sort` order used in symbol lists files updated by Kleaf is currently not the same as `LANG\u003dC sort -u` which you may have used here. The code is in the `extract_symbols` script and is effectively (Python):\n\n```\n  sorted(set(symbols), key\u003dlambda s: (s.lower().replace(\"_\", \"\"), s))\n```\n\nThe `set` is there to eliminate duplicates.\n\n---\n\nYou can still manage and order the symbols as you like, but you will need to ensure that all Honor contributors stick to the same scheme. You will need to watch out for duplicates and other typos that can cause trouble at review time.\n\n---\n\nLet me know what you decide.",
       "revId": "2502603e9512e49a746280e23e3f33cdefdf9678",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae3c57f_7d914ba4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3450567
+      },
+      "writtenOn": "2025-03-21T09:30:40Z",
+      "side": 1,
+      "message": "\u003e You can still manage and order the symbols as you like, but you will need to ensure that all Honor contributors stick to the same scheme. You will need to watch out for duplicates and other typos that can cause trouble at review time.\n\nYes, this will be a problem, I will reconsider it. Thanks~",
+      "parentUuid": "f190dc44_b1030636",
+      "revId": "2502603e9512e49a746280e23e3f33cdefdf9678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
