@@ -27444,6 +27444,11 @@ pointer_reference {
   pointee_type_id: 0xf7eb80f9
 }
 pointer_reference {
+  id: 0x376c23c8
+  kind: POINTER
+  pointee_type_id: 0xf7f069bd
+}
+pointer_reference {
   id: 0x376c8705
   kind: POINTER
   pointee_type_id: 0xf7f2fa8a
@@ -37332,6 +37337,11 @@ qualified {
   id: 0xf7ab526a
   qualifier: CONST
   qualified_type_id: 0xaeeaff23
+}
+qualified {
+  id: 0xf7f069bd
+  qualifier: CONST
+  qualified_type_id: 0xaf86107e
 }
 qualified {
   id: 0xf7f2fa8a
@@ -307780,6 +307790,12 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x11163b5a
+  return_type_id: 0x48b5725f
+  parameter_id: 0x054f691a
+  parameter_id: 0x376c23c8
+}
+function {
   id: 0x111b6c97
   return_type_id: 0x48b5725f
   parameter_id: 0x060cf413
@@ -354738,6 +354754,15 @@ elf_symbol {
   namespace: "PWM"
   type_id: 0x94892dba
   full_name: "__pwmchip_add"
+}
+elf_symbol {
+  id: 0x1f2378cf
+  name: "__qdisc_calculate_pkt_len"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd2aff744
+  type_id: 0x11163b5a
+  full_name: "__qdisc_calculate_pkt_len"
 }
 elf_symbol {
   id: 0xf29639bc
@@ -417172,6 +417197,7 @@ interface {
   symbol_id: 0x36fb0a8e
   symbol_id: 0x45993ba3
   symbol_id: 0x80135535
+  symbol_id: 0x1f2378cf
   symbol_id: 0xf29639bc
   symbol_id: 0x431cc4ee
   symbol_id: 0x56eb7c27
