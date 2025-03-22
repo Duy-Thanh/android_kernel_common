@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f17b997_3921fae1",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-03-22T00:29:51Z",
+      "side": 1,
+      "message": "nit: I would suggest adding an explicit \"kmi_enforced \u003d False\" with a comment explaining why.",
+      "fixSuggestions": [
+        {
+          "fixId": "3869779d_b00ef4af",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 266,
+                "startChar": 0,
+                "endLine": 266,
+                "endChar": 0
+              },
+              "replacement": "    # AutoFDO is not enforced for 16k page size build.\n    kmi_enforced \u003d False,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f3bf87fc14c838948b7b6991f5fd79f12f91342d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
