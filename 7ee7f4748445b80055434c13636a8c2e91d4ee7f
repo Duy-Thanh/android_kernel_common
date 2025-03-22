@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "343516eb_e7e9be9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-22T01:28:06Z",
+      "side": 1,
+      "message": "All this is unnecessary. As long as the changes have the same `Change-Id` the tool will show where it was cherry-picked from.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 110
+      },
+      "revId": "7ee7f4748445b80055434c13636a8c2e91d4ee7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d9ec83_b92f2f6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-22T01:28:06Z",
+      "side": 1,
+      "message": "You need to post follow-up patch to update symbols list and ABI.",
+      "revId": "7ee7f4748445b80055434c13636a8c2e91d4ee7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
