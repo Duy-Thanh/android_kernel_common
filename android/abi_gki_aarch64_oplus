@@ -323,6 +323,7 @@
   __traceiter_android_vh_tune_swappiness
   __traceiter_android_vh_unreserve_highatomic_bypass
   __traceiter_android_vh_update_page_mapcount
+  __traceiter_android_vh_verity_use_tasklet
   __traceiter_android_vh_alloc_swap_folio_gfp
   __traceiter_android_vh_replace_anon_vma_name
   __traceiter_android_vh_get_swap_pages_bypass
@@ -478,6 +479,7 @@
   __tracepoint_android_vh_tune_swappiness
   __tracepoint_android_vh_unreserve_highatomic_bypass
   __tracepoint_android_vh_update_page_mapcount
+  __tracepoint_android_vh_verity_use_tasklet
   __tracepoint_android_vh_alloc_swap_folio_gfp
   __tracepoint_android_vh_replace_anon_vma_name
   __tracepoint_android_vh_get_swap_pages_bypass

@@ -342730,6 +342730,13 @@ function {
   parameter_id: 0x26e55184
 }
 function {
+  id: 0x9bfd4598
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x15a30023
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9bfdc334
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -364340,6 +364347,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_use_vm_swappiness"
 }
 elf_symbol {
+  id: 0x02620e5a
+  name: "__traceiter_android_vh_verity_use_tasklet"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8b958d39
+  type_id: 0x9bfd4598
+  full_name: "__traceiter_android_vh_verity_use_tasklet"
+}
+elf_symbol {
   id: 0xcbec9d66
   name: "__traceiter_android_vh_vmscan_kswapd_done"
   is_defined: true
@@ -371178,6 +371194,15 @@ elf_symbol {
   crc: 0x48e0e2d9
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_use_vm_swappiness"
+}
+elf_symbol {
+  id: 0x4dc082c8
+  name: "__tracepoint_android_vh_verity_use_tasklet"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x09d22273
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_verity_use_tasklet"
 }
 elf_symbol {
   id: 0x55476a7c
@@ -435708,6 +435733,7 @@ interface {
   symbol_id: 0x74d43d1f
   symbol_id: 0x08824ed3
   symbol_id: 0x297c974d
+  symbol_id: 0x02620e5a
   symbol_id: 0xcbec9d66
   symbol_id: 0x764ff27a
   symbol_id: 0xd0d675d3
@@ -436468,6 +436494,7 @@ interface {
   symbol_id: 0x51dcf351
   symbol_id: 0xe100c3ad
   symbol_id: 0x6440d1d7
+  symbol_id: 0x4dc082c8
   symbol_id: 0x55476a7c
   symbol_id: 0x89f309c0
   symbol_id: 0x4196f765
