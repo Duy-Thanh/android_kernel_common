@@ -29,6 +29,7 @@
 #define DM_VERITY_ENV_VAR_NAME		"DM_VERITY_ERR_BLOCK_NR"
 
 #define DM_VERITY_DEFAULT_PREFETCH_SIZE	262144
+#define DM_VERITY_USE_BH_DEFAULT_BLOCKS	UINT_MAX
 
 #define DM_VERITY_MAX_CORRUPTED_ERRS	100
 
@@ -45,6 +46,15 @@
 static unsigned int dm_verity_prefetch_cluster = DM_VERITY_DEFAULT_PREFETCH_SIZE;
 
 module_param_named(prefetch_cluster, dm_verity_prefetch_cluster, uint, 0644);
+
+static unsigned int dm_verity_use_bh_blocks[4] = {
+	DM_VERITY_USE_BH_DEFAULT_BLOCKS,	// IOPRIO_CLASS_NONE
+	DM_VERITY_USE_BH_DEFAULT_BLOCKS,	// IOPRIO_CLASS_RT
+	DM_VERITY_USE_BH_DEFAULT_BLOCKS,	// IOPRIO_CLASS_BE
+	DM_VERITY_USE_BH_DEFAULT_BLOCKS		// IOPRIO_CLASS_IDLE
+};
+
+module_param_array_named(use_bh_blocks, dm_verity_use_bh_blocks, uint, NULL, 0644);
 
 static DEFINE_STATIC_KEY_FALSE(use_tasklet_enabled);
 
@@ -696,6 +706,12 @@ static void verity_work(struct work_struct *w)
 	verity_finish_io(io, errno_to_blk_status(verity_verify_io(io)));
 }
 
+static inline bool verity_use_tasklet(struct dm_verity_io *io, unsigned short ioprio)
+{
+	return in_softirq() && ioprio <= IOPRIO_CLASS_IDLE &&
+		io->n_blocks <= READ_ONCE(dm_verity_use_bh_blocks[ioprio]);
+}
+
 static void verity_end_io(struct bio *bio)
 {
 	struct dm_verity_io *io = bio->bi_private;
@@ -706,6 +722,19 @@ static void verity_end_io(struct bio *bio)
 	     (bio->bi_opf & REQ_RAHEAD))) {
 		verity_finish_io(io, bio->bi_status);
 		return;
+	}
+
+
+	if (static_branch_unlikely(&use_tasklet_enabled) && io->v->use_tasklet) {
+		if (verity_use_tasklet(io, IOPRIO_PRIO_CLASS(bio->bi_ioprio))) {
+			int err;
+			io->in_tasklet = true;
+			err = verity_verify_io(io);
+			if (err == 0 || (err != -EAGAIN && err != -ENOMEM)) {
+				verity_finish_io(io, errno_to_blk_status(err));
+				return;
+			}
+		}
 	}
 
 	INIT_WORK(&io->work, verity_work);
