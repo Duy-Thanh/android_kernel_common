@@ -50259,6 +50259,12 @@ member {
   offset: 192
 }
 member {
+  id: 0xd671ce43
+  name: "android_oem_data1"
+  type_id: 0x92233392
+  offset: 768
+}
+member {
   id: 0xd68b5387
   name: "android_oem_data1"
   type_id: 0x68bb0e75
@@ -243006,7 +243012,7 @@ struct_union {
   kind: STRUCT
   name: "f2fs_gc_kthread"
   definition {
-    bytesize: 96
+    bytesize: 104
     member_id: 0xc8d61495
     member_id: 0x4cf1cb13
     member_id: 0xe01fb753
@@ -243018,6 +243024,7 @@ struct_union {
     member_id: 0x604e2358
     member_id: 0xf0b5a91f
     member_id: 0x63bd2b41
+    member_id: 0xd671ce43
   }
 }
 struct_union {
