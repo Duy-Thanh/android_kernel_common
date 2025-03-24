@@ -332503,6 +332503,13 @@ function {
   parameter_id: 0x1e20e7eb
 }
 function {
+  id: 0x9b5ad249
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3e6396e0
+  parameter_id: 0x3399c453
+}
+function {
   id: 0x9b5be873
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -333435,6 +333442,15 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
   parameter_id: 0x030b9acf
+}
+function {
+  id: 0x9ba3940a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x054f691a
+  parameter_id: 0x6720d32f
+  parameter_id: 0x32a623d7
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x9ba3bf47
@@ -353006,6 +353022,51 @@ elf_symbol {
   full_name: "__traceiter_mmap_lock_start_locking"
 }
 elf_symbol {
+  id: 0x16d7641f
+  name: "__traceiter_net_dev_queue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x49cd5fff
+  type_id: 0x9bba87c7
+  full_name: "__traceiter_net_dev_queue"
+}
+elf_symbol {
+  id: 0x8c363912
+  name: "__traceiter_net_dev_start_xmit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf2871471
+  type_id: 0x9b5ad249
+  full_name: "__traceiter_net_dev_start_xmit"
+}
+elf_symbol {
+  id: 0xc8ec671c
+  name: "__traceiter_net_dev_xmit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xec57e012
+  type_id: 0x9ba3940a
+  full_name: "__traceiter_net_dev_xmit"
+}
+elf_symbol {
+  id: 0x60c24c4f
+  name: "__traceiter_netif_receive_skb"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x49cd5fff
+  type_id: 0x9bba87c7
+  full_name: "__traceiter_netif_receive_skb"
+}
+elf_symbol {
+  id: 0xa7548418
+  name: "__traceiter_netif_rx"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x49cd5fff
+  type_id: 0x9bba87c7
+  full_name: "__traceiter_netif_rx"
+}
+elf_symbol {
   id: 0x2c11fea4
   name: "__traceiter_rwmmio_post_read"
   is_defined: true
@@ -356325,6 +356386,51 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_mmap_lock_start_locking"
+}
+elf_symbol {
+  id: 0xd21276a5
+  name: "__tracepoint_net_dev_queue"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_net_dev_queue"
+}
+elf_symbol {
+  id: 0x8073e898
+  name: "__tracepoint_net_dev_start_xmit"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_net_dev_start_xmit"
+}
+elf_symbol {
+  id: 0x4a43bdfe
+  name: "__tracepoint_net_dev_xmit"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_net_dev_xmit"
+}
+elf_symbol {
+  id: 0xd224caa5
+  name: "__tracepoint_netif_receive_skb"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_netif_receive_skb"
+}
+elf_symbol {
+  id: 0xcbc5fd52
+  name: "__tracepoint_netif_rx"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_netif_rx"
 }
 elf_symbol {
   id: 0x009c40ce
@@ -411248,6 +411354,11 @@ interface {
   symbol_id: 0x5c33446d
   symbol_id: 0x423dad0f
   symbol_id: 0xc630c439
+  symbol_id: 0x16d7641f
+  symbol_id: 0x8c363912
+  symbol_id: 0xc8ec671c
+  symbol_id: 0x60c24c4f
+  symbol_id: 0xa7548418
   symbol_id: 0x2c11fea4
   symbol_id: 0xe71ca6fa
   symbol_id: 0x45e62871
@@ -411617,6 +411728,11 @@ interface {
   symbol_id: 0x88a08d67
   symbol_id: 0xe2682879
   symbol_id: 0xdffbb8bf
+  symbol_id: 0xd21276a5
+  symbol_id: 0x8073e898
+  symbol_id: 0x4a43bdfe
+  symbol_id: 0xd224caa5
+  symbol_id: 0xcbc5fd52
   symbol_id: 0x009c40ce
   symbol_id: 0xb46bae90
   symbol_id: 0x02473ce7
