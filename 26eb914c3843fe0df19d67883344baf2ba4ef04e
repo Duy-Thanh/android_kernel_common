@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c3b9d81_aa1590c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1943561
+      },
+      "writtenOn": "2025-03-24T19:36:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b20971ff_27344c4e",
+      "revId": "26eb914c3843fe0df19d67883344baf2ba4ef04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1db5b47b_589effb0",
@@ -37,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fe29aa22_0aee7ed1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1943561
+      },
+      "writtenOn": "2025-03-24T19:36:16Z",
+      "side": 1,
+      "message": "Added some details. Let me know if it\u0027s not enough.",
+      "parentUuid": "1db5b47b_589effb0",
+      "revId": "26eb914c3843fe0df19d67883344baf2ba4ef04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f334add6_380711ae",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2025-03-24T14:29:19Z",
       "side": 1,
       "message": "It makes sense to be enable as GKI built-in. IMO meamory overhead isnt\u0027t significant and many devices use their own zram implementaiont anyway so adding few fields to the ABI structure doesn\u0027t seem to be a real blocker for upstream. But that\u0027s just my opinion.\n\nPlease make sure to upstream if you need these features to be enabled for 6.12 and beyond.",
+      "revId": "26eb914c3843fe0df19d67883344baf2ba4ef04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2d650d4_62e337f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943561
+      },
+      "writtenOn": "2025-03-24T19:36:16Z",
+      "side": 1,
+      "message": "Yeah we considered submitting the change to mainline. However, the memory overhead could be considered as significant for other OEMs. So we decided to test it out in Desktop and Pixel devices first for a good reason to propose it in mainline.",
+      "parentUuid": "f334add6_380711ae",
       "revId": "26eb914c3843fe0df19d67883344baf2ba4ef04e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
