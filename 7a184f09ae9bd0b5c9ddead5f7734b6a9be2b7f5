@@ -213,6 +213,30 @@
       },
       "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62d6e657_941f224e",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2025-03-24T15:57:37Z",
+      "side": 1,
+      "message": "static __always_inline\nvoid lruvec_add_folio_tail(struct lruvec *lruvec, struct folio *folio)\n\nEven though lruvec_add_folio_tail is set to static inline, the function exist in the mm_inline.h, I think mm_inline.h can be used only from the built-in mm core, not from kernel module which using the vendor hook.\n\nAnd the originally introduced code intended to put it othe tail. I thought the tail code should be defined in this swap.c file, not from the vendor hook.",
+      "parentUuid": "29f5f116_59eea190",
+      "range": {
+        "startLine": 634,
+        "startChar": 2,
+        "endLine": 636,
+        "endChar": 19
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
