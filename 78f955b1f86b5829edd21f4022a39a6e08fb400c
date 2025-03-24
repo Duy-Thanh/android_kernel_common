@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "117dcb69_1a95cfb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2025-03-24T21:11:02Z",
+      "side": 1,
+      "message": "Consider adding all the file system specific symbols to the ANDROID_GKI_VFS_EXPORT_ONLY domain? You\u0027ll need that anyway and it\u0027s tidier.",
+      "revId": "78f955b1f86b5829edd21f4022a39a6e08fb400c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
