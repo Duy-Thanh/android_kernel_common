@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b2f3bff_d90c68dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-03-24T19:39:37Z",
+      "side": 1,
+      "message": "Because this is a configurable option, it can go into `arch/*/configs/gki_defconfig`, rather than be treated as a hidden dep.\n\nWhen making this type of change to ACK, it should be enabled for both `x86` and `aarch64` archs, according to https://source.android.com/docs/core/architecture/kernel/convert-or-add. While this is not an _official_ GKI branch, it would be best to follow that expectation here.",
+      "revId": "c0632cd28ac0706b07081ff8a0f5e133b3f04873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
