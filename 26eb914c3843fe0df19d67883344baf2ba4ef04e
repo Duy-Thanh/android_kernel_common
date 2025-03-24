@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db5b47b_589effb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-03-24T15:02:20Z",
+      "side": 1,
+      "message": "You can also add more verbose explanation why it is temporary change and why it is enabled that way (eg. aosp/3412580).",
+      "revId": "26eb914c3843fe0df19d67883344baf2ba4ef04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f334add6_380711ae",
