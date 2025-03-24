@@ -355472,6 +355472,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_dequeue_entity"
 }
 elf_symbol {
+  id: 0xd0987daa
+  name: "__traceiter_android_rvh_dequeue_entity_delayed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc9a5c823
+  type_id: 0x9b969713
+  full_name: "__traceiter_android_rvh_dequeue_entity_delayed"
+}
+elf_symbol {
   id: 0xd6290b85
   name: "__traceiter_android_rvh_dequeue_task"
   is_defined: true
@@ -359097,6 +359106,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_dequeue_entity"
+}
+elf_symbol {
+  id: 0x22910e0c
+  name: "__tracepoint_android_rvh_dequeue_entity_delayed"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_dequeue_entity_delayed"
 }
 elf_symbol {
   id: 0x832ab9cf
@@ -417098,6 +417116,7 @@ interface {
   symbol_id: 0x4053abff
   symbol_id: 0x1baec33d
   symbol_id: 0x8f1b1c1e
+  symbol_id: 0xd0987daa
   symbol_id: 0xd6290b85
   symbol_id: 0x3e4ab4f6
   symbol_id: 0xa0a77bb8
@@ -417501,6 +417520,7 @@ interface {
   symbol_id: 0x05576f29
   symbol_id: 0x9f779ef7
   symbol_id: 0x3eb0f084
+  symbol_id: 0x22910e0c
   symbol_id: 0x832ab9cf
   symbol_id: 0xaa8affb8
   symbol_id: 0x5029bb46
