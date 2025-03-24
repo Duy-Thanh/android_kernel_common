@@ -325263,6 +325263,15 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x90fb7755
+  return_type_id: 0x6720d32f
+  parameter_id: 0x33f8b54b
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x3e10b518
+  parameter_id: 0x2849a9bf
+}
+function {
   id: 0x90fb83a9
   return_type_id: 0x6720d32f
   parameter_id: 0x397d00ab
@@ -325514,6 +325523,12 @@ function {
   parameter_id: 0x0258f96e
   parameter_id: 0x18bd6530
   parameter_id: 0x2dcd339f
+}
+function {
+  id: 0x9117d9d3
+  return_type_id: 0x6720d32f
+  parameter_id: 0x32fddfe5
+  parameter_id: 0x0a134144
 }
 function {
   id: 0x911879fc
@@ -404070,6 +404085,15 @@ elf_symbol {
   full_name: "snd_compr_stop_error"
 }
 elf_symbol {
+  id: 0xd2c5f178
+  name: "snd_compress_new"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x39ca3de6
+  type_id: 0x90fb7755
+  full_name: "snd_compress_new"
+}
+elf_symbol {
   id: 0x476ce3a0
   name: "snd_ctl_add"
   is_defined: true
@@ -404167,6 +404191,15 @@ elf_symbol {
   crc: 0x837db412
   type_id: 0x84710953
   full_name: "snd_dma_alloc_dir_pages"
+}
+elf_symbol {
+  id: 0xfe420118
+  name: "snd_dma_buffer_mmap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3dcef6f9
+  type_id: 0x9117d9d3
+  full_name: "snd_dma_buffer_mmap"
 }
 elf_symbol {
   id: 0x7983b6b1
@@ -422626,6 +422659,7 @@ interface {
   symbol_id: 0x50b069f6
   symbol_id: 0x62b259b4
   symbol_id: 0xa511d0ea
+  symbol_id: 0xd2c5f178
   symbol_id: 0x476ce3a0
   symbol_id: 0x83c5422c
   symbol_id: 0xff4bd5dc
@@ -422637,6 +422671,7 @@ interface {
   symbol_id: 0xe3942db0
   symbol_id: 0xcb68aa10
   symbol_id: 0x74d92df1
+  symbol_id: 0xfe420118
   symbol_id: 0x7983b6b1
   symbol_id: 0xafa6f89a
   symbol_id: 0x2e657b50
