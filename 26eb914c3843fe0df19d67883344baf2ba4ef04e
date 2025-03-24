@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b20971ff_27344c4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-03-24T14:42:28Z",
+      "side": 1,
+      "message": "Please use `ANDROID: [TEMP] ...` prefix to clearly state it\u0027s temporary commit which is going to be replaced by `UPSTREAM` version.",
+      "revId": "26eb914c3843fe0df19d67883344baf2ba4ef04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f334add6_380711ae",
