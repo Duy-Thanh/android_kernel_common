@@ -34,6 +34,24 @@
       ],
       "revId": "f3bf87fc14c838948b7b6991f5fd79f12f91342d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d451b6c_9490b5a2",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-03-24T21:04:13Z",
+      "side": 1,
+      "message": "Good idea, done.",
+      "parentUuid": "9f17b997_3921fae1",
+      "revId": "f3bf87fc14c838948b7b6991f5fd79f12f91342d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
