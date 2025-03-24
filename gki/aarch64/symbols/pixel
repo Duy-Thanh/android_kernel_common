@@ -17,7 +17,16 @@
   alloc_pages_exact_noprof
   __alloc_pages_noprof
   __alloc_skb
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
   alloc_workqueue_noprof
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+  alloc_skb_with_frags
+  alloc_workqueue
+=======
+  alloc_skb_with_frags
+  alloc_workqueue
+  all_vm_events
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   alt_cb_patch_nops
   amba_bustype
   __amba_driver_register
@@ -820,6 +829,7 @@
   __flush_workqueue
   __folio_lock
   __folio_put
+  folio_wait_writeback
   for_each_thermal_trip
   __fortify_panic
   fput
@@ -1489,6 +1499,7 @@
   pci_write_config_dword
   pci_write_config_word
   pcpu_alloc_noprof
+  pcpu_nr_pages
   percpu_counter_add_batch
   percpu_counter_batch
   __per_cpu_offset
@@ -1805,6 +1816,8 @@
   __seq_open_private
   seq_printf
   seq_putc
+  seq_put_decimal_ll
+  seq_put_decimal_ull_width
   __seq_puts
   seq_read
   seq_release
@@ -2082,11 +2095,38 @@
   trace_event_raw_init
   trace_event_reg
   trace_handle_return
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
   __traceiter_android_rvh_hw_protection_shutdown
   __traceiter_android_rvh_ufs_reprogram_all_keys
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+  __traceiter_android_rvh_iommu_alloc_insert_iova
+  __traceiter_android_rvh_iommu_iovad_init_alloc_algo
+  __traceiter_android_rvh_iommu_limit_align_shift
+=======
+  __traceiter_android_rvh_iommu_alloc_insert_iova
+  __traceiter_android_rvh_iommu_iovad_init_alloc_algo
+  __traceiter_android_rvh_iommu_limit_align_shift
+  __traceiter_android_rvh_madvise_pageout_begin
+  __traceiter_android_rvh_madvise_pageout_end
+  __traceiter_android_rvh_mapping_shrinkable
+  __traceiter_android_rvh_meminfo_proc_show
+  __traceiter_android_rvh_reclaim_folio_list
+  __traceiter_android_rvh_vmscan_kswapd_done
+  __traceiter_android_rvh_vmscan_kswapd_wake
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   __traceiter_android_vh_cpu_idle_enter
   __traceiter_android_vh_cpu_idle_exit
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+  __traceiter_android_vh_enable_thermal_genl_check
+=======
+  __traceiter_android_vh_enable_thermal_genl_check
+  __traceiter_android_vh_filemap_get_folio
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   __traceiter_android_vh_ipi_stop
+  __traceiter_android_vh_mm_compaction_begin
+  __traceiter_android_vh_mm_compaction_end
+  __traceiter_android_vh_rmqueue
   __traceiter_android_vh_scheduler_tick
   __traceiter_android_vh_sysrq_crash
   __traceiter_android_vh_ufs_check_int_errors
@@ -2097,25 +2137,66 @@
   __traceiter_android_vh_ufs_send_tm_command
   __traceiter_android_vh_ufs_send_uic_command
   __traceiter_android_vh_ufs_update_sysfs
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+  __traceiter_clock_set_rate
+=======
+  __traceiter_clock_set_rate
+  __traceiter_cma_alloc_finish
+  __traceiter_cma_alloc_start
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   __traceiter_device_pm_callback_end
   __traceiter_device_pm_callback_start
   __traceiter_gpu_mem_total
   __traceiter_mmap_lock_acquire_returned
   __traceiter_mmap_lock_released
   __traceiter_mmap_lock_start_locking
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
   __traceiter_rwmmio_post_read
   __traceiter_rwmmio_post_write
   __traceiter_rwmmio_read
   __traceiter_rwmmio_write
   __traceiter_sched_set_state_tp
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+=======
+  __traceiter_mm_vmscan_direct_reclaim_begin
+  __traceiter_mm_vmscan_direct_reclaim_end
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   __traceiter_sched_switch
   __traceiter_suspend_resume
   trace_output_call
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
   __tracepoint_android_rvh_hw_protection_shutdown
   __tracepoint_android_rvh_ufs_reprogram_all_keys
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+  __tracepoint_android_rvh_iommu_alloc_insert_iova
+  __tracepoint_android_rvh_iommu_iovad_init_alloc_algo
+  __tracepoint_android_rvh_iommu_limit_align_shift
+=======
+  __tracepoint_android_rvh_iommu_alloc_insert_iova
+  __tracepoint_android_rvh_iommu_iovad_init_alloc_algo
+  __tracepoint_android_rvh_iommu_limit_align_shift
+  __tracepoint_android_rvh_madvise_pageout_begin
+  __tracepoint_android_rvh_madvise_pageout_end
+  __tracepoint_android_rvh_mapping_shrinkable
+  __tracepoint_android_rvh_meminfo_proc_show
+  __tracepoint_android_rvh_reclaim_folio_list
+  __tracepoint_android_rvh_vmscan_kswapd_done
+  __tracepoint_android_rvh_vmscan_kswapd_wake
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+  __tracepoint_android_vh_enable_thermal_genl_check
+=======
+  __tracepoint_android_vh_enable_thermal_genl_check
+  __tracepoint_android_vh_filemap_get_folio
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   __tracepoint_android_vh_ipi_stop
+  __tracepoint_android_vh_mm_compaction_begin
+  __tracepoint_android_vh_mm_compaction_end
+  __tracepoint_android_vh_rmqueue
   __tracepoint_android_vh_scheduler_tick
   __tracepoint_android_vh_sysrq_crash
   __tracepoint_android_vh_ufs_check_int_errors
@@ -2126,12 +2207,22 @@
   __tracepoint_android_vh_ufs_send_tm_command
   __tracepoint_android_vh_ufs_send_uic_command
   __tracepoint_android_vh_ufs_update_sysfs
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+  __tracepoint_clock_set_rate
+=======
+  __tracepoint_clock_set_rate
+  __tracepoint_cma_alloc_finish
+  __tracepoint_cma_alloc_start
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   __tracepoint_device_pm_callback_end
   __tracepoint_device_pm_callback_start
   __tracepoint_gpu_mem_total
   __tracepoint_mmap_lock_acquire_returned
   __tracepoint_mmap_lock_released
   __tracepoint_mmap_lock_start_locking
+  __tracepoint_mm_vmscan_direct_reclaim_begin
+  __tracepoint_mm_vmscan_direct_reclaim_end
   tracepoint_probe_register
   tracepoint_probe_unregister
   __tracepoint_rwmmio_post_read
@@ -2331,11 +2422,23 @@
   virtqueue_kick_prepare
   virtqueue_notify
   vmalloc_noprof
+  vmalloc_nr_pages
   vmalloc_to_page
   vmalloc_user_noprof
   vmap
   __vma_start_write
   vmf_insert_pfn_prot
+<<<<<<< HEAD   (d36fd08818dc78f214d13bede4b8ae4d43848a08 Merge 6.18.18 into android17-6.18)
+||||||| BASE   (f3b0fdc8c702e710c3bc82ffb752d3ec068f98dd ANDROID: vendor_hooks: Export direct reclaim trace points)
+  vm_get_page_prot
+  vm_iomap_memory
+  vm_map_ram
+=======
+  vm_get_page_prot
+  vm_iomap_memory
+  vm_map_ram
+  vm_node_stat
+>>>>>>> CHANGE (ed5df7761d9a4ee3251157f67cff9d968ba9cda7 ANDROID: ABI: Update pixel symbol list)
   vm_unmapped_area
   vprintk
   vprintk_emit
