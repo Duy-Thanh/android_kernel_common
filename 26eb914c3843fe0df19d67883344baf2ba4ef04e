@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f334add6_380711ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-03-24T14:29:19Z",
+      "side": 1,
+      "message": "It makes sense to be enable as GKI built-in. IMO meamory overhead isnt\u0027t significant and many devices use their own zram implementaiont anyway so adding few fields to the ABI structure doesn\u0027t seem to be a real blocker for upstream. But that\u0027s just my opinion.\n\nPlease make sure to upstream if you need these features to be enabled for 6.12 and beyond.",
+      "revId": "26eb914c3843fe0df19d67883344baf2ba4ef04e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
