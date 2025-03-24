@@ -396381,6 +396381,24 @@ elf_symbol {
   full_name: "pktgen_xfrm_outer_mode_output"
 }
 elf_symbol {
+  id: 0x508c3717
+  name: "pkvm_iommu_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3044c8e7
+  type_id: 0x9d16dd74
+  full_name: "pkvm_iommu_resume"
+}
+elf_symbol {
+  id: 0xe5abcddf
+  name: "pkvm_iommu_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3044c8e7
+  type_id: 0x9d16dd74
+  full_name: "pkvm_iommu_suspend"
+}
+elf_symbol {
   id: 0xb30e2978
   name: "platform_bus"
   is_defined: true
@@ -421624,6 +421642,8 @@ interface {
   symbol_id: 0x50cfaca0
   symbol_id: 0xf5634793
   symbol_id: 0xac156dd0
+  symbol_id: 0x508c3717
+  symbol_id: 0xe5abcddf
   symbol_id: 0xb30e2978
   symbol_id: 0x49cc7bc6
   symbol_id: 0x13a3a596
