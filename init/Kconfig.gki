@@ -94,6 +94,7 @@ config GKI_HIDDEN_GPIO_CONFIGS
 	  These are normally selected implicitly when a module
 	  that relies on it is configured.
 
+<<<<<<< TARGET BRANCH (4541b2 Revert "ANDROID: suppress GKI configs for 32-bit builds" am:)
 config GKI_HIDDEN_I2C_CONFIGS
 	bool "Hidden I2C configs needed for GKI"
 	select P2SB if (X86)
@@ -103,11 +104,20 @@ config GKI_HIDDEN_I2C_CONFIGS
 	  These are normally selected implicitly when a module
 	  that relies on it is configured.
 
+||||||| BASE
+=======
+# If this file is included on a 32-bit allmodconfig build, the select for
+# IOMMU_IO_PGTABLE_LPAE will trigger an "unmet direct dependency" warning
+# because this option is incompatible with GENERIC_ATOMIC64, which is
+# required by CPU_V6 and implied by ARCH_BCM2835. ARCH_BCM2835 is enabled
+# in the ARM defconfig (multi_v7_defconfig) and implied by many BCM2835
+# drivers, so it is lower impact to disable IOMMU_IO_PGTABLE_LPAE here
+>>>>>>> SOURCE BRANCH (25e74c ANDROID: suppress IOMMU_IO_PGTABLE_LPAE on 32-bit)
 config GKI_HIDDEN_QCOM_CONFIGS
 	bool "Hidden QCOM configs needed for GKI"
 	select QCOM_SMEM_STATE
 	select QCOM_GDSC if (ARCH_QCOM)
-	select IOMMU_IO_PGTABLE_LPAE if (ARCH_QCOM)
+	select IOMMU_IO_PGTABLE_LPAE if (ARCH_QCOM && 64BIT)
 	select INTERCONNECT_QCOM if (ARCH_QCOM)
 	select AUXILIARY_BUS if (ARCH_QCOM)
 
