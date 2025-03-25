@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76162d95_1363843e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2006455
+      },
+      "writtenOn": "2025-03-25T02:30:10Z",
+      "side": 1,
+      "message": "The current code modification and Bug: 373540729 have the same purpose, so please refer to Bug: 373540729, thank you",
+      "parentUuid": "3c5f8d40_310782f4",
+      "revId": "d193614cb61b9bf679a554b63ece3d492c018b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28c74658_01bfc0e8",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-03-17T19:35:49Z",
       "side": 1,
       "message": "This bug references but titled `GKI: update symbol list file for xiaomi`, so does not correspond to what the patch is doing. Please update and explain in the bug why all this is needed.",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "d193614cb61b9bf679a554b63ece3d492c018b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a940f4_2a57acc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2006455
+      },
+      "writtenOn": "2025-03-25T02:30:10Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/3547801/4\n\nWe need to apply for some abi symbols, export some kernel functions, and add some hook points. The purpose is to optimize memory recycling for some specific scenes, which is more suitable for Xiaomi",
+      "parentUuid": "28c74658_01bfc0e8",
       "range": {
         "startLine": 11,
         "startChar": 5,
