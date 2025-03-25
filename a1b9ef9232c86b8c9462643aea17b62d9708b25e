@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6da97f99_bbe16650",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2025-03-25T00:10:59Z",
+      "side": 1,
+      "message": "This seems to be coming into 6.15 so I see no reason from stopping it from a fromgit backport to 6.12",
+      "revId": "a1b9ef9232c86b8c9462643aea17b62d9708b25e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
