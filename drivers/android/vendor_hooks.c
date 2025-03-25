@@ -600,4 +600,27 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_queue_work);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_wake_idle_worker);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages_range);
+<<<<<<< HEAD   (4cf536 UPSTREAM: vsock: Orphan socket after transport release)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_proactive_compact_wmark_high);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_swap_folio_gfp);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_replace_anon_vma_name);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_swap_pages_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_split_folio_to_list);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_skip_zone);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_unmapped_area_info);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reuse_whole_anon_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_swap_slot_cache);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calculate_totalreserve_pages);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_swap_folio_gfp);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_replace_anon_vma_name);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_swap_pages_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_split_folio_to_list);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_skip_zone);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_unmapped_area_info);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reuse_whole_anon_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_swap_slot_cache);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calculate_totalreserve_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_set_ioprio);
+>>>>>>> CHANGE (52e82f ANDROID: vendor_hook: add hooks for I/O priority)
