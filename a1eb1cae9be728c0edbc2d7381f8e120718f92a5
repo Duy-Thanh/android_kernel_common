@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12948faf_2308c5d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-25T16:43:48Z",
+      "side": 1,
+      "message": "This patch breaks KMI so it needs to wait for the 4/2 KMI update",
+      "revId": "a1eb1cae9be728c0edbc2d7381f8e120718f92a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
