@@ -53,6 +53,17 @@ void blk_queue_start_drain(struct request_queue *q);
 int __bio_queue_enter(struct request_queue *q, struct bio *bio);
 void submit_bio_noacct_nocheck(struct bio *bio);
 
+static inline void blk_mq_put_quc(struct request_queue *q, unsigned long nr)
+{
+	if (atomic_read(&q->report_last_put)) {
+		atomic_long_t *p = &q->q_usage_counter.data->count;
+
+		WARN_ON(((atomic_long_read(p) - nr) << 1) == 0);
+	}
+
+	percpu_ref_put_many(&q->q_usage_counter, nr);
+}
+
 static inline bool blk_try_enter_queue(struct request_queue *q, bool pm)
 {
 	rcu_read_lock();

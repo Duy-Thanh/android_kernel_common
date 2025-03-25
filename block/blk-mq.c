@@ -210,6 +210,7 @@ void blk_mq_freeze_queue_wait(struct request_queue *q)
 			percpu_ref_is_zero(&q->q_usage_counter),
 			msecs_to_jiffies(1000));
 		WARN_ON_ONCE(time_remaining < 0);
+		atomic_set(&q->report_last_put, 1);
 		if (time_remaining > 0)
 			break;
 
@@ -217,6 +218,7 @@ void blk_mq_freeze_queue_wait(struct request_queue *q)
 			blk_mq_tagset_busy_iter(q->tag_set, blk_mq_show_busy_rq,
 						q);
 	}
+	atomic_set(&q->report_last_put, 0);
 }
 EXPORT_SYMBOL_GPL(blk_mq_freeze_queue_wait);
 
@@ -1108,7 +1110,7 @@ static inline void blk_mq_flush_tag_batch(struct blk_mq_hw_ctx *hctx,
 		__blk_mq_sub_active_requests(hctx, nr_tags);
 
 	blk_mq_put_tags(hctx->tags, tag_array, nr_tags);
-	percpu_ref_put_many(&q->q_usage_counter, nr_tags);
+	blk_mq_put_quc(q, nr_tags);
 }
 
 void blk_mq_end_request_batch(struct io_comp_batch *iob)
@@ -3576,7 +3578,7 @@ static int blk_mq_hctx_notify_offline(unsigned int cpu, struct hlist_node *node)
 	if (percpu_ref_tryget(&hctx->queue->q_usage_counter)) {
 		while (blk_mq_hctx_has_requests(hctx))
 			msleep(5);
-		percpu_ref_put(&hctx->queue->q_usage_counter);
+		blk_mq_put_quc(hctx->queue, 1);
 	}
 
 	return 0;

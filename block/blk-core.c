@@ -361,7 +361,7 @@ dead:
 
 void blk_queue_exit(struct request_queue *q)
 {
-	percpu_ref_put(&q->q_usage_counter);
+	blk_mq_put_quc(q, 1);
 }
 
 static void blk_queue_usage_counter_release(struct percpu_ref *ref)
