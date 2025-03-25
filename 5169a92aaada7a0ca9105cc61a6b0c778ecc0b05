@@ -87,6 +87,23 @@
       "parentUuid": "9007e4a9_4bbd3e1f",
       "revId": "5169a92aaada7a0ca9105cc61a6b0c778ecc0b05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b6ab471_e0f4337a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3659872
+      },
+      "writtenOn": "2025-03-25T17:36:42Z",
+      "side": 1,
+      "message": "Just to make sure, the Makefile will be applied separately so we will have compilation broken just for a brief moment before we apply other series, correct?",
+      "revId": "5169a92aaada7a0ca9105cc61a6b0c778ecc0b05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
