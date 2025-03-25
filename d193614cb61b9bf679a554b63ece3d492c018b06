@@ -81,6 +81,30 @@
       },
       "revId": "d193614cb61b9bf679a554b63ece3d492c018b06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09eb78ee_523c0d48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-25T15:54:15Z",
+      "side": 1,
+      "message": "You have not addressed Suren\u0027s comment. The bug says nothing more than \"update symbol list file for xiaomi\", but here your are adding vendor hooks with little explanation for what they are for.\n\n1) As Suren suggested, rename the bug and update the description to include the new vendor hooks and what they are for.\n\n2) Provide more description in this commit message. Why are these hooks needed? What features do they enable? What is wrong with the current reclamation? Why are the improvements not being submitted upstream? what are the \"specific scenes\" that require these hooks?",
+      "parentUuid": "c2a940f4_2a57acc4",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "d193614cb61b9bf679a554b63ece3d492c018b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
