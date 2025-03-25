@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4b2b408_7b797693",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-25T16:57:43Z",
+      "side": 0,
+      "message": "This rename breaks KMI and is not allowed",
+      "revId": "226835913d2efef57ca5574cfc23e262a5f62f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
