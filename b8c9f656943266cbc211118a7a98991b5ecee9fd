@@ -34,6 +34,23 @@
       "parentUuid": "e1ee1a09_a4ee18b8",
       "revId": "b8c9f656943266cbc211118a7a98991b5ecee9fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41254ec3_7ca3f9c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-03-25T17:44:25Z",
+      "side": 1,
+      "message": "I would ask @gprocida@google.com to approve the directory structure here.",
+      "revId": "b8c9f656943266cbc211118a7a98991b5ecee9fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
