@@ -65,9 +65,13 @@ struct avs_dsp_ops {
 
 extern const struct avs_dsp_ops avs_skl_dsp_ops;
 extern const struct avs_dsp_ops avs_apl_dsp_ops;
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 extern const struct avs_dsp_ops avs_cnl_dsp_ops;
 extern const struct avs_dsp_ops avs_icl_dsp_ops;
 extern const struct avs_dsp_ops avs_tgl_dsp_ops;
+||||||| BASE
+=======
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 
 #define AVS_PLATATTR_CLDMA		BIT_ULL(0)
 #define AVS_PLATATTR_IMR		BIT_ULL(1)
@@ -265,6 +269,7 @@ void avs_ipc_block(struct avs_ipc *ipc);
 int avs_dsp_disable_d0ix(struct avs_dev *adev);
 int avs_dsp_enable_d0ix(struct avs_dev *adev);
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 void avs_skl_ipc_interrupt(struct avs_dev *adev);
 irqreturn_t avs_cnl_dsp_interrupt(struct avs_dev *adev);
 int avs_apl_enable_logs(struct avs_dev *adev, enum avs_log_enable enable, u32 aging_period,
@@ -279,6 +284,11 @@ bool avs_apl_d0ix_toggle(struct avs_dev *adev, struct avs_ipc_msg *tx, bool wake
 bool avs_icl_d0ix_toggle(struct avs_dev *adev, struct avs_ipc_msg *tx, bool wake);
 int avs_apl_set_d0ix(struct avs_dev *adev, bool enable);
 int avs_icl_set_d0ix(struct avs_dev *adev, bool enable);
+||||||| BASE
+int skl_log_buffer_offset(struct avs_dev *adev, u32 core);
+=======
+int avs_skl_log_buffer_offset(struct avs_dev *adev, u32 core);
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 
 /* Firmware resources management */
 

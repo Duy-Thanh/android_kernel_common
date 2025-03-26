@@ -763,6 +763,7 @@ static const struct avs_hipc_spec skl_hipc_spec = {
 	.ctl_offset = SKL_ADSP_REG_HIPCCTL,
 };
 
+<<<<<<< HEAD   (ed933e ANDROID: arm64: [TEMP] Add zram configs)
 static const struct avs_hipc_spec cnl_hipc_spec = {
 	.req_offset = CNL_ADSP_REG_HIPCIDR,
 	.req_ext_offset = CNL_ADSP_REG_HIPCIDD,
@@ -774,6 +775,9 @@ static const struct avs_hipc_spec cnl_hipc_spec = {
 	.ctl_offset = CNL_ADSP_REG_HIPCCTL,
 };
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (46d235 ANDROID: mm: Allow non-movable allocations to use virtual zo)
 static const struct avs_spec skl_desc = {
 	.name = "skl",
 	.min_fw_version = { 9, 21, 0, 4732 },
