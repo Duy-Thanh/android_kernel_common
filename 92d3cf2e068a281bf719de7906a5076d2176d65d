@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e6ab778_ce4fef11",
+        "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-kenzo.dts",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T12:24:32Z",
+      "side": 0,
+      "message": "ok, let\u0027s take 2nd path.",
+      "parentUuid": "b9357a08_6701a740",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11af46af_5c5495cc",
@@ -133,6 +157,30 @@
       "side": 0,
       "message": "As in the previous case:\nhttps://source.corp.google.com/h/chromium/chromiumos/codesearch/+/main:src/third_party/kernel/v6.6/arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-willow.dtsi;l\u003d17",
       "parentUuid": "11af46af_5c5495cc",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0a6895b_0cd3586d",
+        "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-willow.dtsi",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T12:24:32Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "5283f126_0598da59",
       "range": {
         "startLine": 18,
         "startChar": 2,
