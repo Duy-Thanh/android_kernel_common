@@ -33,6 +33,24 @@
       "message": "No hooks in usb code please, provide the needed changes upstream first.",
       "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fdf4efa_034f56f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-03-26T17:12:47Z",
+      "side": 1,
+      "message": "oops, not resolved.",
+      "parentUuid": "2765476f_ca5cd35a",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
