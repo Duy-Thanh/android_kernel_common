@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2dde21c_a82726b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1073148
+      },
+      "writtenOn": "2025-03-26T19:52:23Z",
+      "side": 1,
+      "message": "I kind of agree, but on the other hand all other cherry-picks have this boilerplate. I\u0027d prefer to keep it, just to be consistent.\n\nBut I can also remove it, if you feel strongly about it.",
+      "parentUuid": "343516eb_e7e9be9c",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 110
+      },
+      "revId": "7ee7f4748445b80055434c13636a8c2e91d4ee7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81d9ec83_b92f2f6c",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-03-22T01:28:06Z",
       "side": 1,
       "message": "You need to post follow-up patch to update symbols list and ABI.",
+      "revId": "7ee7f4748445b80055434c13636a8c2e91d4ee7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aed7c8d5_f8d7114c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1073148
+      },
+      "writtenOn": "2025-03-26T19:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81d9ec83_b92f2f6c",
       "revId": "7ee7f4748445b80055434c13636a8c2e91d4ee7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
