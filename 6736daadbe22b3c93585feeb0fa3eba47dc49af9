@@ -231,6 +231,54 @@
       },
       "revId": "6736daadbe22b3c93585feeb0fa3eba47dc49af9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e96aff1f_33a5076c",
+        "filename": "sound/soc/intel/avs/loader.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-26T12:04:09Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "58a64ba7_e9ce730b",
+      "range": {
+        "startLine": 309,
+        "startChar": 7,
+        "endLine": 309,
+        "endChar": 31
+      },
+      "revId": "6736daadbe22b3c93585feeb0fa3eba47dc49af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87537625_04061fbb",
+        "filename": "sound/soc/intel/avs/loader.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-26T12:04:09Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "58a64ba7_e9ce730b",
+      "range": {
+        "startLine": 309,
+        "startChar": 7,
+        "endLine": 309,
+        "endChar": 31
+      },
+      "revId": "6736daadbe22b3c93585feeb0fa3eba47dc49af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
