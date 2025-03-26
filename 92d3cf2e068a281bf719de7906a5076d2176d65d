@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5ceca24_14b610f5",
+        "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-kenzo.dts",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-26T10:41:56Z",
+      "side": 0,
+      "message": "ChromeOS has it removed: https://source.corp.google.com/h/chromium/chromiumos/codesearch/+/main:src/third_party/kernel/v6.6/arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-kenzo.dts;l\u003d23",
+      "parentUuid": "4829857a_a80657ee",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11af46af_5c5495cc",
         "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-willow.dtsi",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-26T09:52:17Z",
       "side": 0,
       "message": "same here",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5283f126_0598da59",
+        "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-willow.dtsi",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-26T10:41:56Z",
+      "side": 0,
+      "message": "As in the previous case:\nhttps://source.corp.google.com/h/chromium/chromiumos/codesearch/+/main:src/third_party/kernel/v6.6/arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-willow.dtsi;l\u003d17",
+      "parentUuid": "11af46af_5c5495cc",
       "range": {
         "startLine": 18,
         "startChar": 2,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1bacd24b_d6e76661",
+        "filename": "arch/x86/kernel/cpu/common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-26T10:41:56Z",
+      "side": 0,
+      "message": "ChromeOS has it removed completely: https://source.corp.google.com/h/chromium/chromiumos/codesearch/+/main:src/third_party/kernel/v6.6/arch/x86/kernel/cpu/common.c;l\u003d871\n\nAlso it is not used anywhere in the source code.",
+      "parentUuid": "b0cd40cc_9afebdc3",
+      "range": {
+        "startLine": 945,
+        "startChar": 0,
+        "endLine": 945,
+        "endChar": 37
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b59c422_215cf1c3",
         "filename": "sound/soc/intel/avs/ipc.c",
         "patchSetId": 3
@@ -83,6 +155,30 @@
       "writtenOn": "2025-03-26T09:52:17Z",
       "side": 0,
       "message": "Is it moved somewhere else by chromeos changes?",
+      "range": {
+        "startLine": 382,
+        "startChar": 12,
+        "endLine": 382,
+        "endChar": 31
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d98dd4_9dcbed3d",
+        "filename": "sound/soc/intel/avs/ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-26T10:41:56Z",
+      "side": 0,
+      "message": "Yes, it is moved to sound/soc/intel/avs/core.c: https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/third_party/kernel/v6.6/sound/soc/intel/avs/core.c;l\u003d313?q\u003davs_dsp_irq_handler\u0026ss\u003dchromiumos%2Fchromiumos%2Fcodesearch:src%2Fthird_party%2Fkernel%2Fv6.6%2Fsound%2Fsoc%2Fintel%2Favs%2F",
+      "parentUuid": "3b59c422_215cf1c3",
       "range": {
         "startLine": 382,
         "startChar": 12,
