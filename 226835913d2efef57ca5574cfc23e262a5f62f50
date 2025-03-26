@@ -16,6 +16,24 @@
       "message": "This rename breaks KMI and is not allowed",
       "revId": "226835913d2efef57ca5574cfc23e262a5f62f50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86bc6a8b_e49d1bc7",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-03-26T14:03:25Z",
+      "side": 0,
+      "message": "This was a too-long never-used symbol name.",
+      "parentUuid": "d4b2b408_7b797693",
+      "revId": "226835913d2efef57ca5574cfc23e262a5f62f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

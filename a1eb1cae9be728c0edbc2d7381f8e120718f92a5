@@ -16,6 +16,24 @@
       "message": "This patch breaks KMI so it needs to wait for the 4/2 KMI update",
       "revId": "a1eb1cae9be728c0edbc2d7381f8e120718f92a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2967fbf1_53e4cc54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-03-26T14:03:25Z",
+      "side": 1,
+      "message": "This is a `android15-6.6` release branch cherry pick.",
+      "parentUuid": "12948faf_2308c5d4",
+      "revId": "a1eb1cae9be728c0edbc2d7381f8e120718f92a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
