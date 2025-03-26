@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9357a08_6701a740",
+        "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-kenzo.dts",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-26T12:11:36Z",
+      "side": 0,
+      "message": "Ok, now I get the point. I think we could explore two paths - 1.: check whether this property is used anywhere and make a decision, or 2.: given mt8183 is not supported, and thus not used, removing it now shouldn\u0027t do any harm, i.e. leave as it is in the current state.",
+      "parentUuid": "bab8a6f8_7832292d",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11af46af_5c5495cc",
         "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-willow.dtsi",
         "patchSetId": 3
