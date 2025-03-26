@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d78ece5_b6de94ce",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-03-26T17:40:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t look correct unless all the update paths also use WRITE_ONCE(). \n\nI _think_ we could just take the version_lock instead here to guarantee atomicity w.r.t to the version update, especially since this is not a fast path at all based on the caching done by EL1.\n\n(Side note: the usage of has_version_negotiated w/o locking neither READ/WRITE_ONCE is equally suspicious, but it\u0027s a separate thing)",
+      "range": {
+        "startLine": 1347,
+        "startChar": 8,
+        "endLine": 1347,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "82b5562f_e717422f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1347,
+                "startChar": 0,
+                "endLine": 1348,
+                "endChar": 0
+              },
+              "replacement": "\thyp_spin_lock(\u0026version_lock);\n\tu32 version \u003d hyp_ffa_version;\n\thyp_spin_unlock(\u0026version_lock);\n\n\treturn version;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "778832cb8b86ef8dbe66498ebb0c60f89629ccb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
