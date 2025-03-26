@@ -34,6 +34,24 @@
       "parentUuid": "4f7df60a_483e5310",
       "revId": "e743baed960a2733aa095b35ec0fc1508357f7c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a2f1f0_f9f2c95f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-03-26T15:36:44Z",
+      "side": 1,
+      "message": "This is open source project. Couldn\u0027t it be upstreamed?",
+      "parentUuid": "91dead93_d79ade84",
+      "revId": "e743baed960a2733aa095b35ec0fc1508357f7c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
