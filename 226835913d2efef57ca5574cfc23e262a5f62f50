@@ -34,6 +34,24 @@
       "parentUuid": "d4b2b408_7b797693",
       "revId": "226835913d2efef57ca5574cfc23e262a5f62f50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2372a5d0_1d251ecd",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-26T17:02:22Z",
+      "side": 0,
+      "message": "Very annoying that symbols are added without ever being tested!",
+      "parentUuid": "86bc6a8b_e49d1bc7",
+      "revId": "226835913d2efef57ca5574cfc23e262a5f62f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
