@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81c5c4f7_4f2399fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930676
+      },
+      "writtenOn": "2025-03-26T01:15:44Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/tests/+/3561369 was merged. Please re run presubmit test.",
+      "revId": "37c4279cb0e4d56c875eae128f8004eae4acfd7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
