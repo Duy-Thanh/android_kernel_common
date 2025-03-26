@@ -33,6 +33,108 @@
       "message": "Ping for review.",
       "revId": "6736daadbe22b3c93585feeb0fa3eba47dc49af9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ddca5f7_4b853347",
+        "filename": "drivers/pci/pcie/aspm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T09:52:17Z",
+      "side": 1,
+      "message": "This is an old version of function, whereas merge comes with a different one, is it intentional to pick the old one?",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ab6b894_6fec4db8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/pci/pcie/aspm.c",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/pci/pcie/aspm.c",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * Save L1 substate configuration. The ASPM L0s/L1 configuration\n\t * in PCI_EXP_LNKCTL_ASPMC is saved by pci_save_pcie_state().\n\t */\n"
+            },
+            {
+              "path": "drivers/pci/pcie/aspm.c",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "\nvoid pci_configure_aspm_l1ss(struct pci_dev *pdev)\n{\n\tint rc;\n\n\tpdev-\u003el1ss \u003d pci_find_ext_capability(pdev, PCI_EXT_CAP_ID_L1SS);\n\n\trc \u003d pci_add_ext_cap_save_buffer(pdev, PCI_EXT_CAP_ID_L1SS,\n\t\t\t\t\t 2 * sizeof(u32));\n\tif (rc)\n\t\tpci_err(pdev, \"unable to allocate ASPM L1SS save buffer (%pe)\\n\",\n\t\t\tERR_PTR(rc));\n}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6736daadbe22b3c93585feeb0fa3eba47dc49af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5acfdbe8_f5f30435",
+        "filename": "sound/soc/intel/avs/loader.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T09:52:17Z",
+      "side": 1,
+      "message": "snd_hdac_adsp_readq_poll or snd_hdac_adsp_readl_poll ?",
+      "range": {
+        "startLine": 309,
+        "startChar": 7,
+        "endLine": 309,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "90f68058_d93a8b9f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "sound/soc/intel/avs/loader.c",
+              "range": {
+                "startLine": 309,
+                "startChar": 0,
+                "endLine": 310,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d snd_hdac_adsp_readl_poll(adev, spec-\u003esram-\u003erom_status_offset, reg,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6736daadbe22b3c93585feeb0fa3eba47dc49af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4829857a_a80657ee",
+        "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-kenzo.dts",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T09:52:17Z",
+      "side": 0,
+      "message": "No needed any more?",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11af46af_5c5495cc",
+        "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-willow.dtsi",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T09:52:17Z",
+      "side": 0,
+      "message": "same here",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0cd40cc_9afebdc3",
+        "filename": "arch/x86/kernel/cpu/common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T09:52:17Z",
+      "side": 0,
+      "message": "Is it dropped by chromeos changes before? or maybe refactored?",
+      "range": {
+        "startLine": 945,
+        "startChar": 0,
+        "endLine": 945,
+        "endChar": 37
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b59c422_215cf1c3",
+        "filename": "sound/soc/intel/avs/ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T09:52:17Z",
+      "side": 0,
+      "message": "Is it moved somewhere else by chromeos changes?",
+      "range": {
+        "startLine": 382,
+        "startChar": 12,
+        "endLine": 382,
+        "endChar": 31
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
