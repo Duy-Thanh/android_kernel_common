@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1759881_d934a8bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-03-26T16:39:26Z",
+      "side": 1,
+      "message": "Are these hooks accounted for in the upstream xhci_sideband patchset? We are really trying to focus efforts upstream to drive that patchset forward.",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
