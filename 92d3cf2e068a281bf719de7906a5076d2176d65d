@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bab8a6f8_7832292d",
+        "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-kenzo.dts",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T12:01:47Z",
+      "side": 0,
+      "message": "yes, but here we are merging `android15-6.6` and the question is if this is all about removeing `interrupt-parent` property? or we need to change some related code in drivers?\nTL;DR should we leave it as is and remove during chromeos-6.6 merge? because potentially we may need some extra code to safely drop `interrupt-parent` property",
+      "parentUuid": "d5ceca24_14b610f5",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11af46af_5c5495cc",
         "filename": "arch/arm64/boot/dts/mediatek/mt8183-kukui-jacuzzi-willow.dtsi",
         "patchSetId": 3
@@ -142,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d8d0b7_d5ab8552",
+        "filename": "arch/x86/kernel/cpu/common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T12:01:47Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "1bacd24b_d6e76661",
+      "range": {
+        "startLine": 945,
+        "startChar": 0,
+        "endLine": 945,
+        "endChar": 37
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b59c422_215cf1c3",
@@ -179,6 +227,30 @@
       "side": 0,
       "message": "Yes, it is moved to sound/soc/intel/avs/core.c: https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/third_party/kernel/v6.6/sound/soc/intel/avs/core.c;l\u003d313?q\u003davs_dsp_irq_handler\u0026ss\u003dchromiumos%2Fchromiumos%2Fcodesearch:src%2Fthird_party%2Fkernel%2Fv6.6%2Fsound%2Fsoc%2Fintel%2Favs%2F",
       "parentUuid": "3b59c422_215cf1c3",
+      "range": {
+        "startLine": 382,
+        "startChar": 12,
+        "endLine": 382,
+        "endChar": 31
+      },
+      "revId": "92d3cf2e068a281bf719de7906a5076d2176d65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f947362c_cd204794",
+        "filename": "sound/soc/intel/avs/ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T12:01:47Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "19d98dd4_9dcbed3d",
       "range": {
         "startLine": 382,
         "startChar": 12,

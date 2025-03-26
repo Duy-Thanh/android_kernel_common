@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af01f70d_d2d030ee",
+        "filename": "drivers/pci/pcie/aspm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T12:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93854f52_ae77ed84",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "6736daadbe22b3c93585feeb0fa3eba47dc49af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5acfdbe8_f5f30435",
@@ -175,6 +199,30 @@
       "side": 1,
       "message": "As for the time of creating the change, the `snd_hdac_adsp_readq_poll` was in chromeOS. Now there was a newer change and also in ChromeOS the `...readl...` is present. Givent that, here we should pick `snd_hdac_adsp_readl_poll`.\n\nFor reference in ChromeOS it looks like this: https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/third_party/kernel/v6.6/sound/soc/intel/avs/loader.c;l\u003d309",
       "parentUuid": "5acfdbe8_f5f30435",
+      "range": {
+        "startLine": 309,
+        "startChar": 7,
+        "endLine": 309,
+        "endChar": 31
+      },
+      "revId": "6736daadbe22b3c93585feeb0fa3eba47dc49af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58a64ba7_e9ce730b",
+        "filename": "sound/soc/intel/avs/loader.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-03-26T12:01:47Z",
+      "side": 1,
+      "message": "yes, but here you picked `snd_hdac_adsp_readq_poll`",
+      "parentUuid": "054df010_32135245",
       "range": {
         "startLine": 309,
         "startChar": 7,
