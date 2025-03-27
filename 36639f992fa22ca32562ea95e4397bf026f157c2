@@ -122,6 +122,24 @@
       "parentUuid": "2fdf4efa_034f56f0",
       "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e1b3d5_508d687c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-03-27T12:49:14Z",
+      "side": 1,
+      "message": "The upstream offload stuff should show up \"soon\" after the next release from the upstream developer and review.  So give it a few weeks.  In the meantime, again, no USB hooks should be added, work upstream first please.",
+      "parentUuid": "1c9d8f01_121a244e",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
