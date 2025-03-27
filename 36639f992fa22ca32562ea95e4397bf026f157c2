@@ -140,6 +140,24 @@
       "parentUuid": "1c9d8f01_121a244e",
       "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6befa0ab_7f0a3bdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-03-27T16:28:36Z",
+      "side": 1,
+      "message": "@guanyulin@google.com, can you carry the upstream patches in Pixel\u0027s `aosp-staging`  kernel until they are accepted? Then you can upload them here as FROMGIT and update `aosp-staging` accordingly.",
+      "parentUuid": "d1e1b3d5_508d687c",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
