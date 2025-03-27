@@ -411982,6 +411982,15 @@ elf_symbol {
   full_name: "tcp_sock_set_nodelay"
 }
 elf_symbol {
+  id: 0xef808179
+  name: "tcp_sync_mss"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x51d4b4bf
+  type_id: 0xcaae52cc
+  full_name: "tcp_sync_mss"
+}
+elf_symbol {
   id: 0x857e5dc9
   name: "tcpci_get_tcpm_port"
   is_defined: true
@@ -427254,6 +427263,7 @@ interface {
   symbol_id: 0x862e9de5
   symbol_id: 0xb56d0844
   symbol_id: 0x51ff5f80
+  symbol_id: 0xef808179
   symbol_id: 0x857e5dc9
   symbol_id: 0x85459353
   symbol_id: 0x1ecfd7d9
