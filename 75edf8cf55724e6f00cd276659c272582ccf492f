@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9922956_4e29b7a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-27T21:29:54Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: \"ziwei.dai\" \u003cziwei.dai@unisoc.com\u003e\u0027 !\u003d \u0027Signed-off-by: Ziwei Dai \u003cziwei.dai@unisoc.com\u003e\u0027\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: \"ziwei.dai\" \u003cziwei.dai@unisoc.com\u003e\u0027 !\u003d \u0027Signed-off-by: Ziwei Dai \u003cziwei.dai@unisoc.com\u003e\u0027",
+      "revId": "75edf8cf55724e6f00cd276659c272582ccf492f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
