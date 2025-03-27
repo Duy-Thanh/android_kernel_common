@@ -66,6 +66,22 @@ static unsigned long vb2_dc_get_contiguous_size(struct sg_table *sgt)
 	return size;
 }
 
+/**************************************************/
+/*   restricted mem scatterlist table functions   */
+/**************************************************/
+
+static unsigned long vb2_dc_get_res_mem_contiguous_size(struct sg_table *sgt)
+{
+	struct scatterlist *s;
+	unsigned int i;
+	unsigned long size = 0;
+
+	for_each_sgtable_dma_sg(sgt, s, i)
+		size += sg_dma_len(s);
+
+	return size;
+}
+
 /*********************************************/
 /*         callbacks for all buffers         */
 /*********************************************/
@@ -647,10 +663,13 @@ static void *vb2_dc_get_userptr(struct vb2_buffer *vb, struct device *dev,
 		goto fail_sgt_init;
 	}
 
-	contig_size = vb2_dc_get_contiguous_size(sgt);
+	if (buf->vb->vb2_queue->restricted_mem)
+		contig_size = vb2_dc_get_res_mem_contiguous_size(sgt);
+	else
+		contig_size = vb2_dc_get_contiguous_size(sgt);
 	if (contig_size < size) {
-		pr_err("contiguous mapping is too small %lu/%lu\n",
-			contig_size, size);
+		pr_err("contiguous mapping is too small %lu/%lu/%u\n",
+		       contig_size, size, buf->vb->vb2_queue->restricted_mem);
 		ret = -EFAULT;
 		goto fail_map_sg;
 	}
@@ -710,10 +729,13 @@ static int vb2_dc_map_dmabuf(void *mem_priv)
 	}
 
 	/* checking if dmabuf is big enough to store contiguous chunk */
-	contig_size = vb2_dc_get_contiguous_size(sgt);
+	if (buf->vb->vb2_queue->restricted_mem)
+		contig_size = vb2_dc_get_res_mem_contiguous_size(sgt);
+	else
+		contig_size = vb2_dc_get_contiguous_size(sgt);
 	if (contig_size < buf->size) {
-		pr_err("contiguous chunk is too small %lu/%lu\n",
-		       contig_size, buf->size);
+		pr_err("contiguous chunk is too small %lu/%lu/%u\n",
+		       contig_size, buf->size, buf->vb->vb2_queue->restricted_mem);
 		dma_buf_unmap_attachment_unlocked(buf->db_attach, sgt,
 						  buf->dma_dir);
 		return -EFAULT;
