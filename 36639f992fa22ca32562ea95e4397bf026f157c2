@@ -68,6 +68,60 @@
       "message": "How does this interact with the upstream submission of the USB \"bypass\" logic?  does that work properly for you?  If not, pleasat let upstream know as that is what will be used instead of any attempt at any other types of hooks.",
       "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c91eedd4_66c78602",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2025-03-27T00:29:44Z",
+      "side": 1,
+      "message": "No, these are not for xhci_sideband patchset. For this specific feature, we have upstream patchsets under development/review (https://patchwork.kernel.org/project/linux-usb/cover/20250117145145.3093352-1-guanyulin@google.com/). We are cooperating closely with QC to ensure our next submission aligns with QC\u0027s sideband design. Hence, before the sideband design has finalized, we\u0027d like to use vendor hooks first to meet the project timeline.",
+      "parentUuid": "e1759881_d934a8bf",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9d8f01_121a244e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2025-03-27T00:29:44Z",
+      "side": 1,
+      "message": "By \u0027the upstream submission of the USB \"bypass\" logic\u0027, I assume you\u0027re referring to https://patchwork.kernel.org/project/linux-usb/cover/20250117145145.3093352-1-guanyulin@google.com/. This vendor hook and the upstream patch are of the same purpose. This vendor hook will be replaced by the upstream patch once the patch has been accepted.",
+      "parentUuid": "7305969a_b7b2da08",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c395b916_29ae1f7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2025-03-27T00:29:44Z",
+      "side": 1,
+      "message": "We have upstream patchsets under development/review (https://patchwork.kernel.org/project/linux-usb/cover/20250117145145.3093352-1-guanyulin@google.com/). Right now we\u0027re cooperating with QC to ensure our next submission aligns with QC\u0027s lateset sideband design. However, we\u0027d like to use vendor hooks first before QC and us finish this feature in upstream.",
+      "parentUuid": "2fdf4efa_034f56f0",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
