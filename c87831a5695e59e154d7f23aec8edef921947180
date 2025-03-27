@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t the second branch name be *-lts?",
       "revId": "c87831a5695e59e154d7f23aec8edef921947180",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9253af42_ce097f36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-03-27T12:28:00Z",
+      "side": 1,
+      "message": "Unresolving until Greg has had a chance to review.",
+      "parentUuid": "10ba44f8_89272d30",
+      "revId": "c87831a5695e59e154d7f23aec8edef921947180",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
