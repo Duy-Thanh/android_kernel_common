@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6802a3a3_4f19eaae",
+        "filename": "build-kernel.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-03-28T07:41:54Z",
+      "side": 1,
+      "message": "I believe that you could also override `BUILD_FAMILY_NAME` when `staryu` is the target and set it to corsola just not to repeat the code, but this approach is also fine by me.",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 6
+      },
+      "revId": "2b85ac18a324016a8c37aa7822a8c92426a93bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
