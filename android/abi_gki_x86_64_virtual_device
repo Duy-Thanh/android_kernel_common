@@ -83,15 +83,16 @@
   drm_connector_attach_encoder
   drm_connector_cleanup
   drm_connector_init
+  drm_crtc_cleanup
   ___drm_dbg
   drm_dev_register
   __drm_err
   drm_gem_mmap
   drm_helper_probe_single_connector_modes
   drm_ioctl
-  drm_kms_helper_hotplug_event
   drmm_mode_config_init
   drm_mode_config_reset
+  __drmm_universal_plane_alloc
   drm_open
   drm_poll
   drm_read
@@ -850,6 +851,7 @@
   dma_map_sgtable
   dma_sync_sg_for_cpu
   dma_unmap_sg_attrs
+  sg_dup_table
   __sg_page_iter_next
   __sg_page_iter_start
   vmap
@@ -931,7 +933,6 @@
   drm_connector_register
   drm_connector_unregister
   drm_connector_update_edid_property
-  drm_crtc_cleanup
   drm_crtc_init_with_planes
   drm_cvt_mode
   drm_debugfs_create_files
@@ -980,6 +981,7 @@
   drm_gem_vm_open
   drm_helper_hpd_irq_event
   drm_helper_mode_fill_fb_struct
+  drm_kms_helper_hotplug_event
   drmm_kfree
   drmm_kmalloc
   drm_mm_init
@@ -988,7 +990,6 @@
   drm_mm_remove_node
   drm_mm_takedown
   drm_mode_probed_add
-  __drmm_universal_plane_alloc
   drm_plane_enable_fb_damage_clips
   __drm_printfn_seq_file
   __drm_puts_seq_file
@@ -1129,12 +1130,7 @@
   wait_for_completion_interruptible_timeout
 
 # required by vkms.ko
-  configfs_register_subsystem
-  configfs_unregister_subsystem
-  config_group_init
-  config_group_init_type_name
   __devm_drm_dev_alloc
-  devres_close_group
   devres_open_group
   devres_release_group
   drm_atomic_add_affected_planes
@@ -1177,14 +1173,10 @@
   drm_mode_crtc_set_gamma_size
   drm_mode_object_get
   drm_mode_object_put
-  drm_plane_cleanup
   drm_plane_create_rotation_property
   drm_rect_rotate
   drm_rotation_simplify
-  drm_universal_plane_init
   drm_vblank_init
   drm_writeback_connector_init
   drm_writeback_queue_job
   drm_writeback_signal_completion
-  kstrtouint
-  platform_find_device_by_driver

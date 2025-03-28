@@ -93,6 +93,7 @@
   acpi_unregister_gsi
   acpi_video_backlight_string
   acpi_walk_namespace
+  acpi_walk_resources
   add_device_randomness
   add_taint
   add_timer
@@ -2547,6 +2548,7 @@
   sg_alloc_table_from_pages_segment
   sg_copy_from_buffer
   sg_copy_to_buffer
+  sg_dup_table
   sget_dev
   sg_free_table
   sg_init_one
