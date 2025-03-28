@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72af7099_2475c91f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-03-28T16:55:12Z",
+      "side": 1,
+      "message": "Could you please synchronize this with the version of this patch in linux-dm/for-next?  https://web.git.kernel.org/pub/scm/linux/kernel/git/device-mapper/linux-dm.git/log/?h\u003dfor-next\n\nThe three patches have been merged together, for example.  So you only need one Gerrit change.\n\nThere\u0027s also a good chance this makes it upstream in the 6.15 merge window which is ongoing, i.e. by the end of next week.  So it might make sense to wait until then, then mark the Gerrit change as BACKPORT.  The kernel team is a lot more comfortable with UPSTREAM and BACKPORT changes than FROMLIST.",
+      "revId": "5b0f7a998b7a97869c09c77b736acf8d280501bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
