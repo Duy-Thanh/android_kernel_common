@@ -21,6 +21,7 @@
 
 #include <linux/usb/ch9.h>
 #include <linux/usb/gadget.h>
+#include <trace/hooks/usb.h>
 
 #include "debug.h"
 #include "core.h"
@@ -1184,6 +1185,7 @@ static void dwc3_gadget_ep_free_request(struct usb_ep *ep,
 
 	trace_dwc3_free_request(req);
 	kfree(req);
+	trace_android_vh_dwc3_gadget_set_req_null(req);
 }
 
 /**
