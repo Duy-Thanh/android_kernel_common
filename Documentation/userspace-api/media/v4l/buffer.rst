@@ -696,7 +696,7 @@ enum v4l2_memory
 
 .. _memory-flags:
 
-Memory Consistency Flags
+Memory Flags
 ------------------------
 
 .. raw:: latex
@@ -728,6 +728,14 @@ Memory Consistency Flags
 	only if the buffer is used for :ref:`memory mapping <mmap>` I/O and the
 	queue reports the :ref:`V4L2_BUF_CAP_SUPPORTS_MMAP_CACHE_HINTS
 	<V4L2-BUF-CAP-SUPPORTS-MMAP-CACHE-HINTS>` capability.
+    * .. _`V4L2-MEMORY-FLAG-RESTRICTED`:
+
+      - ``V4L2_MEMORY_FLAG_RESTRICTED``
+      - 0x00000002
+      - The queued buffers are expected to be in restricted memory. If not, an
+	error will be returned. This flag can only be used with ``V4L2_MEMORY_DMABUF``.
+	Typically restricted buffers are allocated using a restricted dma-heap. This flag
+	can only be specified if the :ref:`V4L2_BUF_CAP_SUPPORTS_RESTRICTED_MEM` is set.
 
 .. raw:: latex
 
