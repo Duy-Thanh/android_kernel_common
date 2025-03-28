@@ -288,6 +288,13 @@ please make a proposal on the linux-media mailing list.
       - 'MT2110R'
       - This format is two-planar 10-Bit raster mode and having similitude with
         ``V4L2_PIX_FMT_MM21`` in term of alignment and tiling. Used for AVC.
+    * .. _V4L2-PIX-FMT-MS21:
+
+      - ``V4L2_PIX_FMT_MS21``
+      - 'MS21'
+      - This format has single plane, luma and chroma are stored in a contiguous
+        memory. Luma pixels at the start, chroma pixel at the end. The image
+        height and width are aligned to 64.
 .. raw:: latex
 
     \normalsize

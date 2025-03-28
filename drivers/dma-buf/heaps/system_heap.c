@@ -11,14 +11,17 @@
  */
 
 #include <linux/dma-buf.h>
+#include <linux/dma-direct.h>
 #include <linux/dma-mapping.h>
 #include <linux/dma-heap.h>
 #include <linux/err.h>
 #include <linux/highmem.h>
+#include <linux/iommu.h>
 #include <linux/mm.h>
 #include <linux/module.h>
+#include <linux/printk.h>
 #include <linux/scatterlist.h>
-#include <linux/slab.h>
+#include <linux/swiotlb.h>
 #include <linux/vmalloc.h>
 
 static struct dma_heap *sys_heap;
@@ -59,29 +62,27 @@ static gfp_t order_flags[] = {HIGH_ORDER_GFP, HIGH_ORDER_GFP, LOW_ORDER_GFP};
 static const unsigned int orders[] = {8, 4, 0};
 #define NUM_ORDERS ARRAY_SIZE(orders)
 
-static struct sg_table *dup_sg_table(struct sg_table *table)
+static bool needs_swiotlb_bounce(struct device *dev, struct sg_table *table)
 {
-	struct sg_table *new_table;
-	int ret, i;
-	struct scatterlist *sg, *new_sg;
+	struct iommu_domain *domain = iommu_get_domain_for_dev(dev);
+	struct scatterlist *sg;
+	int i;
 
-	new_table = kzalloc(sizeof(*new_table), GFP_KERNEL);
-	if (!new_table)
-		return ERR_PTR(-ENOMEM);
-
-	ret = sg_alloc_table(new_table, table->orig_nents, GFP_KERNEL);
-	if (ret) {
-		kfree(new_table);
-		return ERR_PTR(-ENOMEM);
+	for_each_sgtable_dma_sg(table, sg, i) {
+		// SG_DMA_SWIOTLB is set only for dma-iommu, not for dma-direct
+		if (domain && IS_ENABLED(CONFIG_NEED_SG_DMA_FLAGS)) {
+			if (sg_dma_is_swiotlb(table->sgl))
+				return true;
+		} else {
+			phys_addr_t paddr =
+				domain ?
+					iommu_iova_to_phys(domain, sg_dma_address(sg)) :
+					dma_to_phys(dev, sg_dma_address(sg));
+			if (is_swiotlb_buffer(dev, paddr))
+				return true;
+		}
 	}
-
-	new_sg = new_table->sgl;
-	for_each_sgtable_sg(table, sg, i) {
-		sg_set_page(new_sg, sg_page(sg), sg->length, sg->offset);
-		new_sg = sg_next(new_sg);
-	}
-
-	return new_table;
+	return false;
 }
 
 static int system_heap_attach(struct dma_buf *dmabuf,
@@ -95,7 +96,7 @@ static int system_heap_attach(struct dma_buf *dmabuf,
 	if (!a)
 		return -ENOMEM;
 
-	table = dup_sg_table(&buffer->sg_table);
+	table = sg_dup_table(&buffer->sg_table);
 	if (IS_ERR(table)) {
 		kfree(a);
 		return -ENOMEM;
@@ -144,6 +145,13 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
 	ret = dma_map_sgtable(attachment->dev, table, direction, attr);
 	if (ret)
 		return ERR_PTR(ret);
+
+	if (a->uncached && needs_swiotlb_bounce(attachment->dev, table)) {
+		pr_err("Cannot map uncached system heap buffer for %s, as it requires SWIOTLB",
+		       dev_name(attachment->dev));
+		dma_unmap_sgtable(attachment->dev, table, direction, attr);
+		return ERR_PTR(-EINVAL);
+	}
 
 	a->mapped = true;
 	return table;
@@ -200,7 +208,8 @@ static int system_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
 		list_for_each_entry(a, &buffer->attachments, list) {
 			if (!a->mapped)
 				continue;
-			dma_sync_sgtable_for_device(a->dev, a->table, direction);
+			dma_sync_sgtable_for_device(a->dev, a->table,
+						    direction);
 		}
 	}
 	mutex_unlock(&buffer->lock);
@@ -356,8 +365,8 @@ static struct page *alloc_largest_available(unsigned long size,
 
 static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 					       unsigned long len,
-					       u32 fd_flags,
-					       u64 heap_flags,
+					       unsigned long fd_flags,
+					       unsigned long heap_flags,
 					       bool uncached)
 {
 	struct system_heap_buffer *buffer;
@@ -433,8 +442,10 @@ static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 	 * unmap it now so we don't get corruption later on.
 	 */
 	if (buffer->uncached) {
-		dma_map_sgtable(dma_heap_get_dev(heap), table, DMA_BIDIRECTIONAL, 0);
-		dma_unmap_sgtable(dma_heap_get_dev(heap), table, DMA_BIDIRECTIONAL, 0);
+		dma_map_sgtable(dma_heap_get_dev(heap), table,
+				DMA_BIDIRECTIONAL, 0);
+		dma_unmap_sgtable(dma_heap_get_dev(heap), table,
+				  DMA_BIDIRECTIONAL, 0);
 	}
 
 	return dmabuf;
@@ -456,8 +467,8 @@ free_buffer:
 
 static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 					    unsigned long len,
-					    u32 fd_flags,
-					    u64 heap_flags)
+					    unsigned long fd_flags,
+					    unsigned long heap_flags)
 {
 	return system_heap_do_allocate(heap, len, fd_flags, heap_flags, false);
 }
@@ -468,17 +479,17 @@ static const struct dma_heap_ops system_heap_ops = {
 
 static struct dma_buf *system_uncached_heap_allocate(struct dma_heap *heap,
 						     unsigned long len,
-						     u32 fd_flags,
-						     u64 heap_flags)
+						     unsigned long fd_flags,
+						     unsigned long heap_flags)
 {
 	return system_heap_do_allocate(heap, len, fd_flags, heap_flags, true);
 }
 
 /* Dummy function to be used until we can call coerce_mask_and_coherent */
-static struct dma_buf *system_uncached_heap_not_initialized(struct dma_heap *heap,
-							    unsigned long len,
-							    u32 fd_flags,
-							    u64 heap_flags)
+static struct dma_buf *
+system_uncached_heap_not_initialized(struct dma_heap *heap, unsigned long len,
+				     unsigned long fd_flags,
+				     unsigned long heap_flags)
 {
 	return ERR_PTR(-EBUSY);
 }
@@ -508,7 +519,8 @@ static int system_heap_create(void)
 	if (IS_ERR(sys_uncached_heap))
 		return PTR_ERR(sys_uncached_heap);
 
-	dma_coerce_mask_and_coherent(dma_heap_get_dev(sys_uncached_heap), DMA_BIT_MASK(64));
+	dma_coerce_mask_and_coherent(dma_heap_get_dev(sys_uncached_heap),
+				     DMA_BIT_MASK(64));
 	mb(); /* make sure we only set allocate after dma_mask is set */
 	system_uncached_heap_ops.allocate = system_uncached_heap_allocate;
 
