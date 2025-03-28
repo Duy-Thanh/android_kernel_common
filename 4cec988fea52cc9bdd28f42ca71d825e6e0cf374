@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fcb70f0_48c32446",
+        "filename": "arch/x86/kernel/e820.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-03-28T21:41:27Z",
+      "side": 1,
+      "message": "yes, but it probably doesn\u0027t matter (see below comment), probably I will drop this patch",
+      "parentUuid": "e3317e3a_6c96f3ea",
+      "revId": "4cec988fea52cc9bdd28f42ca71d825e6e0cf374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c666538_728191a5",
         "filename": "arch/x86/kernel/e820.c",
         "patchSetId": 1
@@ -95,6 +113,24 @@
       "side": 1,
       "message": "\u003e Or maybe what we should actually do is to update e820, before inserting resources, like we do in `e820__reserve_setup_data()`, for example?\n\nLooks like that is what we should actually do. See e.g. `e820__setup_pci_gap()`: it searches for a gap between e820 regions, to use it for PCI memory. So if our DT reserved region is not reflected in any e820 entry, it may result in PCI memory overlapping with our DT region?\n\n...BTW slightly offtopic: if `e820__setup_pci_gap()` guarantees that PCI memory will not overlap with e820 regions, why is it needed to postpone inserting resources for e820 reserved regions until `e820__reserve_resources_late()`? IIUC because kernel prefers not to reallocate initial BAR values unless necessary, in particular it keeps them even if they overlap with e820 reserved regions (but not if they overlap with e820 RAM regions). https://lore.kernel.org/all/alpine.LFD.1.10.0808281255200.3300@nehalem.linux-foundation.org/",
       "parentUuid": "7c666538_728191a5",
+      "revId": "4cec988fea52cc9bdd28f42ca71d825e6e0cf374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b39a3c70_641c4a48",
+        "filename": "arch/x86/kernel/e820.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-03-28T21:41:27Z",
+      "side": 1,
+      "message": "You are right. My initial assumption was that those reserved-memory regions are within RAM (within E820 RAM region) but it doesn\u0027t have to be true. Actually I\u0027ve compared how the microdroid on ARM behaves and it actually have description of resereved-memory (nomap) on region which is outside of the RAM (DT memory region), so in ARM, the e.g. open-dice reserved-memory nomap region is not added to resource tree via https://android.googlesource.com/kernel/common/+/refs/heads/android15-6.6-desktop/arch/arm64/kernel/setup.c#249 as I initially thought - it is just disjoint from system RAM so the `memremap` when checks if system intersects with system ram detects that REGION_DISJOINT.\n\nI also thought about updating e820 region before as you suggested (in e820__reserve_setup_data) but it has to happen later than `e820__reserve_setup_data` since we can\u0027t detect DT reserved memory at this stage: we need at least do it after `e820__memblock_setup` since e.g. `x86_flattree_get_config` relies on early memblock setup (which is build based on E820 entries, which is kind of chicken and egg problem). If we update e820 entries after `e820__reserve_setup_data` the memblock could be populated with e820 RAM regions which are reserved with no-map by DT but detected too late.\n\nIf I am not mistaken, without syncing DT reserved-memory nomap with e820 reserved, it will be not possible to guarantee that such DT region (if described as E820 RAM) will not be overwritten on early kernel setup.\n\nAfter all above I am leaning toward not messing up with the resource tree, memblock and so on in Linux kernel but instead make a requirement that FW has to add an e820 reserved region corresponding to DT reserved-memory region.",
+      "parentUuid": "6193f3c9_902570ac",
       "revId": "4cec988fea52cc9bdd28f42ca71d825e6e0cf374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
