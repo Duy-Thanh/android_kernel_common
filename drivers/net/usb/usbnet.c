@@ -30,6 +30,7 @@
 #include <linux/slab.h>
 #include <linux/kernel.h>
 #include <linux/pm_runtime.h>
+#include <trace/hooks/net.h>
 
 /*-------------------------------------------------------------------------*/
 
@@ -436,11 +437,14 @@ static enum skb_state defer_bh(struct usbnet *dev, struct sk_buff *skb,
 	unsigned long		flags;
 	enum skb_state 		old_state;
 	struct skb_data *entry = (struct skb_data *) skb->cb;
+	bool is_empty = false;
 
 	spin_lock_irqsave(&list->lock, flags);
 	old_state = entry->state;
 	entry->state = state;
-	__skb_unlink(skb, list);
+	trace_android_vh_check_skb_list_is_empty(list, &is_empty);
+	if (!is_empty)
+		__skb_unlink(skb, list);
 
 	/* defer_bh() is never called with list == &dev->done.
 	 * spin_lock_nested() tells lockdep that it is OK to take

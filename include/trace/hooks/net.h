@@ -124,6 +124,9 @@ DECLARE_HOOK(android_vh_tcp_rcv_established_fast_path,
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
 DECLARE_HOOK(android_vh_tcp_rcv_established_slow_path,
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_check_skb_list_is_empty,
+	TP_PROTO(void *list, bool *is_empty_p),
+	TP_ARGS(list, is_empty_p));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
