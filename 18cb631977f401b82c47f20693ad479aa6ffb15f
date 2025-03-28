@@ -16,6 +16,24 @@
       "message": "```\nfunction symbol \u0027void __icmp_send(struct sk_buff*, int, int, __be32, const struct ip_options*)\u0027 changed\n  CRC changed from 0x625216d1 to 0x1ee3ee5e\n```",
       "revId": "18cb631977f401b82c47f20693ad479aa6ffb15f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a4a1863_39f5bc2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-03-28T14:48:20Z",
+      "side": 1,
+      "message": "ugh, that\u0027s odd, let me dig...",
+      "parentUuid": "115560c2_63f8a7af",
+      "revId": "18cb631977f401b82c47f20693ad479aa6ffb15f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
