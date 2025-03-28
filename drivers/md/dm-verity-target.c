@@ -716,6 +716,7 @@ static void verity_end_io(struct bio *bio)
 {
 	struct dm_verity_io *io = bio->bi_private;
 	unsigned short ioprio = IOPRIO_PRIO_CLASS(bio->bi_ioprio);
+	unsigned int bytes = io->n_blocks << io->v->data_dev_block_bits;
 
 	if (bio->bi_status &&
 	    (!verity_fec_is_enabled(io->v) ||
@@ -726,7 +727,7 @@ static void verity_end_io(struct bio *bio)
 	}
 
 	if (static_branch_unlikely(&use_tasklet_enabled) && io->v->use_tasklet &&
-		verity_use_bh(bio->bi_iter.bi_size, ioprio)) {
+		verity_use_bh(bytes, ioprio)) {
 		if (!(in_hardirq() || irqs_disabled())) {
 			int err;
 			io->in_tasklet = true;
