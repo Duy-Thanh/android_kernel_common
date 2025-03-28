@@ -39,7 +39,12 @@ static int pfifo_tail_enqueue(struct sk_buff *skb, struct Qdisc *sch,
 {
 	unsigned int prev_backlog;
 
+<<<<<<< HEAD   (a54c40 Merge 6.1.130 into android14-6.1-lts)
 	if (unlikely(READ_ONCE(sch->limit) == 0))
+||||||| BASE
+=======
+	if (unlikely(sch->limit == 0))
+>>>>>>> BRANCH (1c9aeb Merge tag 'android14-6.1.129_r00' into android14-6.1)
 		return qdisc_drop(skb, sch, to_free);
 
 	if (likely(sch->q.qlen < sch->limit))
