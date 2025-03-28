@@ -158,6 +158,24 @@
       "parentUuid": "d1e1b3d5_508d687c",
       "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "149a5442_7668ff6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2025-03-28T08:18:15Z",
+      "side": 1,
+      "message": "The upstream playback in sleep patch is designed for latest sideband patch only. Given that we will not use the latest sideband in android-15-kernel-6.6, is it possible to use vendor hook in android-15-kernel-6.6?",
+      "parentUuid": "6befa0ab_7f0a3bdb",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
