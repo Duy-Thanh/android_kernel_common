@@ -28,6 +28,7 @@
 #include <linux/kthread.h>
 #include <linux/workqueue.h>
 #include <linux/kfifo.h>
+#include <trace/hooks/usb.h>
 
 #include "u_serial.h"
 
@@ -453,6 +454,11 @@ static void gs_rx_push(struct work_struct *work)
 static void gs_read_complete(struct usb_ep *ep, struct usb_request *req)
 {
 	struct gs_port	*port = ep->driver_data;
+	bool is_null = false;
+
+	trace_android_vh_gs_check_port(port, &is_null);
+	if (is_null)
+		return;
 
 	/* Queue all received data until the tty layer is ready for it. */
 	spin_lock(&port->port_lock);

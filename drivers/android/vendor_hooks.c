@@ -658,3 +658,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reuse_whole_anon_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_swap_slot_cache);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calculate_totalreserve_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_set_ioprio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gs_check_port);
