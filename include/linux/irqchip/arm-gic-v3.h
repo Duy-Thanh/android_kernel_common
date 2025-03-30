@@ -657,6 +657,9 @@ static inline bool gic_enable_sre(void)
 	return !!(val & ICC_SRE_EL1_SRE);
 }
 
+int its_save_disable(void *data);
+void its_restore_enable(void *data);
+
 #endif
 
 #endif
