@@ -305,7 +305,7 @@ static struct f2fs_xattr_entry *__find_inline_xattr(struct inode *inode,
 	return entry;
 }
 
-static int read_inline_xattr(struct inode *inode, struct page *ipage,
+static int read_inline_xattr(struct inode *inode, struct folio *ifolio,
 							void *txattr_addr)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
@@ -313,8 +313,8 @@ static int read_inline_xattr(struct inode *inode, struct page *ipage,
 	struct folio *folio = NULL;
 	void *inline_addr;
 
-	if (ipage) {
-		inline_addr = inline_xattr_addr(inode, ipage);
+	if (ifolio) {
+		inline_addr = inline_xattr_addr(inode, &ifolio->page);
 	} else {
 		folio = f2fs_get_inode_folio(sbi, inode->i_ino);
 		if (IS_ERR(folio))
@@ -372,7 +372,7 @@ static int lookup_all_xattrs(struct inode *inode, struct folio *ifolio,
 
 	/* read from inline xattr */
 	if (inline_size) {
-		err = read_inline_xattr(inode, &ifolio->page, txattr_addr);
+		err = read_inline_xattr(inode, ifolio, txattr_addr);
 		if (err)
 			goto out;
 
@@ -436,7 +436,7 @@ static int read_all_xattrs(struct inode *inode, struct folio *ifolio,
 
 	/* read from inline xattr */
 	if (inline_size) {
-		err = read_inline_xattr(inode, &ifolio->page, txattr_addr);
+		err = read_inline_xattr(inode, ifolio, txattr_addr);
 		if (err)
 			goto fail;
 	}
