@@ -3726,7 +3726,7 @@ restart:
 				set_page_private_inline(&ifolio->page);
 			goto out;
 		}
-		err = f2fs_convert_inline_page(&dn, folio_page(folio, 0));
+		err = f2fs_convert_inline_folio(&dn, folio);
 		if (err || dn.data_blkaddr != NULL_ADDR)
 			goto out;
 	}
