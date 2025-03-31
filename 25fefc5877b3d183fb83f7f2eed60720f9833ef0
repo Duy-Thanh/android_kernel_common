@@ -34,6 +34,24 @@
       "parentUuid": "e8ce62ed_698b160b",
       "revId": "25fefc5877b3d183fb83f7f2eed60720f9833ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bcbb5bc_d8f7f7e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-03-31T23:09:10Z",
+      "side": 1,
+      "message": "With that said, there is now a label for exfat-for-6.15-rc1 which includes it, so that may work.",
+      "parentUuid": "21be0580_e2db18f6",
+      "revId": "25fefc5877b3d183fb83f7f2eed60720f9833ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
