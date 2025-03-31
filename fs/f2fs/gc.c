@@ -1347,8 +1347,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
 	struct dnode_of_data dn;
 	struct f2fs_summary sum;
 	struct node_info ni;
-	struct page *page;
-	struct folio *mfolio;
+	struct folio *folio, *mfolio;
 	block_t newaddr;
 	int err = 0;
 	bool lfs_mode = f2fs_lfs_mode(fio.sbi);
@@ -1368,9 +1367,9 @@ static int move_data_block(struct inode *inode, block_t bidx,
 	f2fs_up_read(&F2FS_I(inode)->i_sem);
 
 	/* do not read out */
-	page = f2fs_grab_cache_page(mapping, bidx, false);
-	if (!page) {
-		err = -ENOMEM;
+	folio = f2fs_grab_cache_folio(mapping, bidx, false);
+	if (IS_ERR(folio)) {
+		err = PTR_ERR(folio);
 		goto out_iput;
 	}
 
@@ -1389,7 +1388,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
 		goto out;
 
 	if (unlikely(dn.data_blkaddr == NULL_ADDR)) {
-		ClearPageUptodate(page);
+		folio_clear_uptodate(folio);
 		err = -ENOENT;
 		goto put_out;
 	}
@@ -1398,7 +1397,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
 	 * don't cache encrypted data into meta inode until previous dirty
 	 * data were writebacked to avoid racing between GC and flush.
 	 */
-	f2fs_wait_on_page_writeback(page, DATA, true, true);
+	f2fs_folio_wait_writeback(folio, DATA, true, true);
 
 	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
 
@@ -1407,7 +1406,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
 		goto put_out;
 
 	/* read page */
-	fio.page = page;
+	fio.page = &folio->page;
 	fio.new_blkaddr = fio.old_blkaddr = dn.data_blkaddr;
 
 	if (lfs_mode)
@@ -1498,7 +1497,7 @@ up_out:
 put_out:
 	f2fs_put_dnode(&dn);
 out:
-	f2fs_put_page(page, 1);
+	f2fs_folio_put(folio, true);
 out_iput:
 	if (atomic_inode)
 		iput(atomic_inode);
