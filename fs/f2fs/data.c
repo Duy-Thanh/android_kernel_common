@@ -390,7 +390,7 @@ static void f2fs_write_end_io(struct bio *bio)
 		f2fs_bug_on(sbi, folio->mapping == NODE_MAPPING(sbi) &&
 				folio->index != nid_of_node(&folio->page));
 		if (f2fs_in_warm_node_list(sbi, folio))
-			f2fs_del_fsync_node_entry(sbi, &folio->page);
+			f2fs_del_fsync_node_entry(sbi, folio);
 
 		dec_page_count(sbi, type);
 
