@@ -16,6 +16,24 @@
       "message": "should this be FROMGIT? Maintainer response says the patch was applied to #dev.",
       "revId": "25fefc5877b3d183fb83f7f2eed60720f9833ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21be0580_e2db18f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-03-31T23:03:28Z",
+      "side": 1,
+      "message": "That dev branch is not stable. It\u0027s since been rebased, so until it\u0027s merged into the more stable branch of that maintainer branch I can\u0027t get a stable reference to use with FROMGIT. Otherwise definitely.",
+      "parentUuid": "e8ce62ed_698b160b",
+      "revId": "25fefc5877b3d183fb83f7f2eed60720f9833ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
