@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "006181c8_9a44a258",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-31T16:02:18Z",
+      "side": 1,
+      "message": "This is fixing a bug, please submit the actual fix. If the bug is in upstream code, then submit the fix upstream. Add a \"Fixes:\" tag indicating the patch that introduced the bug.",
+      "revId": "5ab626301beff3d868d9bccf23009aa74838c385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
