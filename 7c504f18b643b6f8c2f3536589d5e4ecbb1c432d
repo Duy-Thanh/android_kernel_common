@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "01af2fe5_f30e9469",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-31T21:50:44Z",
+      "side": 1,
+      "message": "Why do you need this patch for this? Couldn\u0027t you just obtain this info from the transaction itself?",
+      "range": {
+        "startLine": 11,
+        "startChar": 40,
+        "endLine": 12,
+        "endChar": 73
+      },
+      "revId": "7c504f18b643b6f8c2f3536589d5e4ecbb1c432d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "60705aa2_ff6f41e0",
@@ -14,6 +37,29 @@
       "writtenOn": "2025-03-31T06:08:28Z",
       "side": 1,
       "message": "Hi, Todd. I add two hooks in binder.c, Please review this patch, thank you.",
+      "revId": "7c504f18b643b6f8c2f3536589d5e4ecbb1c432d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e9c43f2_fae4d552",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1537,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-31T21:50:44Z",
+      "side": 1,
+      "message": "Could you pass `ref-\u003eproc` instead? There might be instances where different `ref-\u003eproc` would match the same task_struct and you won\u0027t be able to tell these apart. Same with the other hook above.",
+      "range": {
+        "startLine": 1537,
+        "startChar": 33,
+        "endLine": 1537,
+        "endChar": 66
+      },
       "revId": "7c504f18b643b6f8c2f3536589d5e4ecbb1c432d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
