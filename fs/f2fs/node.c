@@ -1418,7 +1418,7 @@ static int read_node_folio(struct folio *folio, blk_opf_t op_flags)
 	int err;
 
 	if (folio_test_uptodate(folio)) {
-		if (!f2fs_inode_chksum_verify(sbi, &folio->page)) {
+		if (!f2fs_inode_chksum_verify(sbi, folio)) {
 			folio_clear_uptodate(folio);
 			return -EFSBADCRC;
 		}
@@ -1530,7 +1530,7 @@ repeat:
 		goto out_err;
 	}
 
-	if (!f2fs_inode_chksum_verify(sbi, &folio->page)) {
+	if (!f2fs_inode_chksum_verify(sbi, folio)) {
 		err = -EFSBADCRC;
 		goto out_err;
 	}
