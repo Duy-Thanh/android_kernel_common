@@ -4521,7 +4521,7 @@ enum cluster_check_type {
 	CLUSTER_RAW_BLKS    /* return # of raw blocks in a cluster */
 };
 bool f2fs_is_compressed_page(struct page *page);
-struct page *f2fs_compress_control_page(struct page *page);
+struct folio *f2fs_compress_control_folio(struct folio *folio);
 int f2fs_prepare_compress_overwrite(struct inode *inode,
 			struct page **pagep, pgoff_t index, void **fsdata);
 bool f2fs_compress_write_end(struct inode *inode, void *fsdata,
@@ -4598,7 +4598,7 @@ static inline bool f2fs_is_compress_backend_ready(struct inode *inode)
 	return false;
 }
 static inline bool f2fs_is_compress_level_valid(int alg, int lvl) { return false; }
-static inline struct page *f2fs_compress_control_page(struct page *page)
+static inline struct folio *f2fs_compress_control_folio(struct folio *folio)
 {
 	WARN_ON_ONCE(1);
 	return ERR_PTR(-EINVAL);
