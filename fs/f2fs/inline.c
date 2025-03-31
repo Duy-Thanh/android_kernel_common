@@ -244,7 +244,7 @@ int f2fs_convert_inline_inode(struct inode *inode)
 		goto out;
 	}
 
-	set_new_dnode(&dn, inode, &ifolio->page, &ifolio->page, 0);
+	set_new_dnode(&dn, inode, ifolio, ifolio, 0);
 
 	if (f2fs_has_inline_data(inode))
 		err = f2fs_convert_inline_page(&dn, &folio->page);
@@ -423,7 +423,7 @@ static int f2fs_move_inline_dirents(struct inode *dir, struct folio *ifolio,
 		return PTR_ERR(folio);
 	}
 
-	set_new_dnode(&dn, dir, &ifolio->page, NULL, 0);
+	set_new_dnode(&dn, dir, ifolio, NULL, 0);
 	err = f2fs_reserve_block(&dn, 0);
 	if (err)
 		goto out;

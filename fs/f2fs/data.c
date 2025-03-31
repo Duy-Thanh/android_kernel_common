@@ -1420,7 +1420,7 @@ struct folio *f2fs_get_new_data_folio(struct inode *inode,
 		return ERR_PTR(-ENOMEM);
 	}
 
-	set_new_dnode(&dn, inode, &ifolio->page, NULL, 0);
+	set_new_dnode(&dn, inode, ifolio, NULL, 0);
 	err = f2fs_reserve_block(&dn, index);
 	if (err) {
 		f2fs_folio_put(folio, true);
@@ -3716,7 +3716,7 @@ restart:
 		goto unlock_out;
 	}
 
-	set_new_dnode(&dn, inode, &ifolio->page, &ifolio->page, 0);
+	set_new_dnode(&dn, inode, ifolio, ifolio, 0);
 
 	if (f2fs_has_inline_data(inode)) {
 		if (pos + len <= MAX_INLINE_DATA(inode)) {
@@ -3777,7 +3777,7 @@ static int __find_data_block(struct inode *inode, pgoff_t index,
 	if (IS_ERR(ifolio))
 		return PTR_ERR(ifolio);
 
-	set_new_dnode(&dn, inode, &ifolio->page, &ifolio->page, 0);
+	set_new_dnode(&dn, inode, ifolio, ifolio, 0);
 
 	if (!f2fs_lookup_read_extent_cache_block(inode, index,
 						 &dn.data_blkaddr)) {
@@ -3809,7 +3809,7 @@ static int __reserve_data_block(struct inode *inode, pgoff_t index,
 		err = PTR_ERR(ifolio);
 		goto unlock_out;
 	}
-	set_new_dnode(&dn, inode, &ifolio->page, &ifolio->page, 0);
+	set_new_dnode(&dn, inode, ifolio, ifolio, 0);
 
 	if (!f2fs_lookup_read_extent_cache_block(dn.inode, index,
 						&dn.data_blkaddr))
