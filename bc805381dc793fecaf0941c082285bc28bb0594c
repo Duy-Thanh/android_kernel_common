@@ -1,6 +1,75 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ff62fd_b5855460",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-31T16:51:24Z",
+      "side": 1,
+      "message": "I don\u0027t understand this statement. Please clarify what you are doing in more details. You can do that in the bug.",
+      "range": {
+        "startLine": 9,
+        "startChar": 214,
+        "endLine": 9,
+        "endChar": 318
+      },
+      "revId": "bc805381dc793fecaf0941c082285bc28bb0594c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45cec9ae_a3e4d934",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-31T16:51:24Z",
+      "side": 1,
+      "message": "what is your definition of \"important files\"?",
+      "range": {
+        "startLine": 9,
+        "startChar": 76,
+        "endLine": 9,
+        "endChar": 91
+      },
+      "revId": "bc805381dc793fecaf0941c082285bc28bb0594c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "548fc9df_d140340d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-31T16:51:24Z",
+      "side": 1,
+      "message": "What does memory recovery mean? do you mean \"memory reclaim\" or memory refaulting?",
+      "range": {
+        "startLine": 9,
+        "startChar": 12,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "bc805381dc793fecaf0941c082285bc28bb0594c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0ffcc4dd_0969dea3",
@@ -14,6 +83,120 @@
       "writtenOn": "2025-03-31T02:05:47Z",
       "side": 1,
       "message": "I have renamed the title of the bug, covered the matters related to change, and added a detailed explanation, thank you",
+      "revId": "bc805381dc793fecaf0941c082285bc28bb0594c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e71d2e6_459e10d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-31T16:51:24Z",
+      "side": 1,
+      "message": "This patch has a boilerplate or seemingly random exports and vendor hooks with no coherent description of the goal you are trying to achieve and how they are used together to accomplish that goal. Please provide detailed description of what you want to accomplish in the bug and we can discuss there a more acceptable way of achieving that.",
+      "revId": "bc805381dc793fecaf0941c082285bc28bb0594c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad6ebf0b_daf69364",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 4411,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-31T16:51:24Z",
+      "side": 1,
+      "message": "Why do you need to export this function? Modules have no business changing the set of cgroup control files.",
+      "range": {
+        "startLine": 4411,
+        "startChar": 0,
+        "endLine": 4411,
+        "endChar": 37
+      },
+      "revId": "bc805381dc793fecaf0941c082285bc28bb0594c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141feee0_6ee6c2ce",
+        "filename": "mm/filemap.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-31T16:51:24Z",
+      "side": 1,
+      "message": "Why `EXPORT_SYMBOL` is not enough?",
+      "range": {
+        "startLine": 1577,
+        "startChar": 0,
+        "endLine": 1577,
+        "endChar": 17
+      },
+      "revId": "bc805381dc793fecaf0941c082285bc28bb0594c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bb90295_98a6f270",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5864,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-31T16:51:24Z",
+      "side": 1,
+      "message": "Nope, this would allow vendor modules to charge pages in any arbitrary way and mess up memory accounting. No way we would allow exporting this.",
+      "range": {
+        "startLine": 5864,
+        "startChar": 0,
+        "endLine": 5864,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "85b01317_6856d93c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/memcontrol.c",
+              "range": {
+                "startLine": 5864,
+                "startChar": 0,
+                "endLine": 5865,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/memcontrol.c",
+              "range": {
+                "startLine": 6289,
+                "startChar": 0,
+                "endLine": 6289,
+                "endChar": 0
+              },
+              "replacement": "\nint mem_cgroup_move_account(struct page *page,\n\t\t\t\t   bool compound,\n\t\t\t\t   struct mem_cgroup *from,\n\t\t\t\t   struct mem_cgroup *to)\n{\n\treturn __mem_cgroup_move_account(page, compound, from, to);\n}\nEXPORT_SYMBOL_GPL(mem_cgroup_move_account);\n"
+            }
+          ]
+        }
+      ],
       "revId": "bc805381dc793fecaf0941c082285bc28bb0594c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
