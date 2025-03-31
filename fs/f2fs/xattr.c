@@ -348,7 +348,7 @@ static int read_xattr_block(struct inode *inode, void *txattr_addr)
 	return 0;
 }
 
-static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
+static int lookup_all_xattrs(struct inode *inode, struct folio *ifolio,
 				unsigned int index, unsigned int len,
 				const char *name, struct f2fs_xattr_entry **xe,
 				void **base_addr, int *base_size,
@@ -372,7 +372,7 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
 
 	/* read from inline xattr */
 	if (inline_size) {
-		err = read_inline_xattr(inode, ipage, txattr_addr);
+		err = read_inline_xattr(inode, &ifolio->page, txattr_addr);
 		if (err)
 			goto out;
 
@@ -546,7 +546,7 @@ in_page_out:
 }
 
 int f2fs_getxattr(struct inode *inode, int index, const char *name,
-		void *buffer, size_t buffer_size, struct page *ipage)
+		void *buffer, size_t buffer_size, struct folio *ifolio)
 {
 	struct f2fs_xattr_entry *entry = NULL;
 	int error;
@@ -562,11 +562,11 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
 	if (len > F2FS_NAME_LEN)
 		return -ERANGE;
 
-	if (!ipage)
+	if (!ifolio)
 		f2fs_down_read(&F2FS_I(inode)->i_xattr_sem);
-	error = lookup_all_xattrs(inode, ipage, index, len, name,
+	error = lookup_all_xattrs(inode, ifolio, index, len, name,
 				&entry, &base_addr, &base_size, &is_inline);
-	if (!ipage)
+	if (!ifolio)
 		f2fs_up_read(&F2FS_I(inode)->i_xattr_sem);
 	if (error)
 		return error;
