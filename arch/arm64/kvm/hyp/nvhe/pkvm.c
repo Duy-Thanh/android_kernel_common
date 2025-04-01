@@ -1738,8 +1738,10 @@ bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 	hyp_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
 	vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
 
-	if (is_standard_secure_service_call(func_id))
-		return false;
+	if (is_standard_secure_service_call(func_id)) {
+		handled = kvm_handle_pvm_hvc64(vcpu, exit_code);
+		goto out;
+	}
 
 	if (!vm->kvm.arch.pkvm.smc_forwarded)
 		return false;
@@ -1751,6 +1753,7 @@ bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 	else
 		ctxt->regs.regs[0] = -1;
 
+out:
 	__kvm_skip_instr(vcpu);
 
 	return handled;
