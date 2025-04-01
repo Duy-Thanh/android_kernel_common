@@ -10,6 +10,8 @@
 #include <trace/hooks/vendor_hooks.h>
 struct f2fs_sb_info;
 struct va_format;
+struct f2fs_io_info;
+enum log_type;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_f2fs_down_read,
 	TP_PROTO(wait_queue_head_t *read_waiters, struct rw_semaphore *rwsem, bool *skip),
@@ -26,6 +28,26 @@ DECLARE_HOOK(android_vh_f2fs_restore_priority,
 DECLARE_HOOK(android_vh_f2fs_printk,
 	TP_PROTO(struct f2fs_sb_info *sbi, struct va_format *vaf, int level, bool limit_rate),
 	TP_ARGS(sbi, vaf, level, limit_rate));
+
+DECLARE_HOOK(android_vh_f2fs_hc_manager_destroy,
+	TP_PROTO(struct f2fs_sb_info *sbi),
+	TP_ARGS(sbi));
+
+DECLARE_HOOK(android_vh_f2fs_hotness_decide,
+	TP_PROTO(struct f2fs_io_info *fio, enum log_type *type),
+	TP_ARGS(fio, type));
+
+DECLARE_HOOK(android_vh_f2fs_hotness_maintain,
+	TP_PROTO(struct f2fs_io_info *fio, enum log_type *type),
+	TP_ARGS(fio, type));
+
+DECLARE_HOOK(android_vh_f2fs_hc_manager_restart,
+	TP_PROTO(struct f2fs_sb_info *sbi),
+	TP_ARGS(sbi));
+
+DECLARE_HOOK(android_vh_f2fs_hc_manager_init,
+	TP_PROTO(struct f2fs_sb_info *sbi),
+	TP_ARGS(sbi));
 
 DECLARE_HOOK(android_vh_wb_dirty_limits,
 	TP_PROTO(unsigned long *thresh, struct bdi_writeback *wb),

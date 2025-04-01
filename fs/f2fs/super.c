@@ -1687,6 +1687,8 @@ static void f2fs_put_super(struct super_block *sb)
 	 */
 	f2fs_destroy_stats(sbi);
 
+	trace_android_vh_f2fs_hc_manager_destroy(sbi);
+
 	/* destroy f2fs internal modules */
 	f2fs_destroy_node_manager(sbi);
 	f2fs_destroy_segment_manager(sbi);
@@ -2545,6 +2547,8 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
 			goto restore_checkpoint;
 		}
 	}
+
+	trace_android_vh_f2fs_hc_manager_restart(sbi);
 
 skip:
 #ifdef CONFIG_QUOTA
@@ -4846,6 +4850,7 @@ reset_checkpoint:
 	clear_sbi_flag(sbi, SBI_CP_DISABLED_QUICK);
 
 	cleancache_init_fs(sb);
+	trace_android_vh_f2fs_hc_manager_init(sbi);
 	return 0;
 
 sync_free_meta:
