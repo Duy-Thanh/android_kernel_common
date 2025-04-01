@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "38c9383e_c5adf55e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2025-04-01T07:29:20Z",
+      "side": 1,
+      "message": "Thanks for pointing out the problem. Part of the commit message for Patchset1 is for another existing hook. I have removed the useless message.",
+      "parentUuid": "01af2fe5_f30e9469",
+      "range": {
+        "startLine": 11,
+        "startChar": 40,
+        "endLine": 12,
+        "endChar": 73
+      },
+      "revId": "7c504f18b643b6f8c2f3536589d5e4ecbb1c432d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "60705aa2_ff6f41e0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2025-03-31T21:50:44Z",
       "side": 1,
       "message": "Could you pass `ref-\u003eproc` instead? There might be instances where different `ref-\u003eproc` would match the same task_struct and you won\u0027t be able to tell these apart. Same with the other hook above.",
+      "range": {
+        "startLine": 1537,
+        "startChar": 33,
+        "endLine": 1537,
+        "endChar": 66
+      },
+      "revId": "7c504f18b643b6f8c2f3536589d5e4ecbb1c432d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf287b80_05be29a2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1537,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2025-04-01T07:29:20Z",
+      "side": 1,
+      "message": "Done. You are right, I have changed ref-\u003eproc-\u003etsk to ref-\u003eproc, which will make the hook more generic.",
+      "parentUuid": "2e9c43f2_fae4d552",
       "range": {
         "startLine": 1537,
         "startChar": 33,
