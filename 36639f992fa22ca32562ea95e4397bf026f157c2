@@ -194,6 +194,77 @@
       "parentUuid": "149a5442_7668ff6d",
       "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "657b8112_44ad416d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-04-01T16:57:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c91eedd4_66c78602",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a4f1efe_ef8f9ab0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-04-01T16:57:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c395b916_29ae1f7d",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5369741_8e22d8f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-04-01T16:57:10Z",
+      "side": 1,
+      "message": "While not ideal, I believe we should move forward with vendor hooks on this patchset for android15-6.6, as the upstream patches are significantly different than the patchset which is in the 15-6.6 kernel, and therefore would require significant rework and risk to backport them to this kernel.",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "592092b6_545b892c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-04-01T16:57:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "28df0211_fbf603b4",
+      "revId": "36639f992fa22ca32562ea95e4397bf026f157c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
