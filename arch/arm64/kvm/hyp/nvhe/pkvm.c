@@ -1783,3 +1783,31 @@ u32 hyp_vcpu_to_ffa_handle(struct pkvm_hyp_vcpu *hyp_vcpu)
 	vm_handle = hyp_vcpu->vcpu.kvm->arch.pkvm.handle;
 	return vm_handle_to_idx(vm_handle) + 1;
 }
+
+/*
+ * Handler for protected VM SMC calls.
+ *
+ * Returns true if the hypervisor has handled the exit, and control should go
+ * back to the guest, or false if it hasn't.
+ */
+bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
+{
+	bool res;
+
+	res = kvm_handle_pvm_hvc64(vcpu, exit_code);
+
+	/*
+	 * From the Architecture Reference Manual:
+	 *   If an SMC instruction executed at Non-secure EL1 is trapped to EL2
+	 *   because HCR_EL2.TSC is 1, the exception is a Trap exception, not
+	 *   a Secure Monitor Call exception, and so SPSR_ELx.SS is set to 1, not 0.
+	 *   [...] Exceptions whose preferred return address is the address of
+	 *   the instruction to be stepped.
+	 *
+	 * This means that the PC is on the SMC instruction, and we need to
+	 * advance it manually to the next instruction.
+	 */
+	__kvm_skip_instr(vcpu);
+
+	return res;
+}
