@@ -1206,6 +1206,7 @@
   get_cpu_idle_time_us
   get_device
   get_device_system_crosststamp
+  get_dmabuf_debugfs_data
   get_each_kmemcache_object
   get_free_pages_noprof
   get_governor_parent_kobj
