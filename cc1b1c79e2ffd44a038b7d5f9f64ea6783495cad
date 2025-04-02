@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a266658_fef1fe15",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4369,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-04-02T01:40:03Z",
+      "side": 1,
+      "message": "we can calculate this number once and used it in later calculations.",
+      "range": {
+        "startLine": 4369,
+        "startChar": 18,
+        "endLine": 4369,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3d7e06db_4192cb0b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 4278,
+                "startChar": 0,
+                "endLine": 4278,
+                "endChar": 0
+              },
+              "replacement": "\tconst unsigned int page_size_ratio \u003d __PAGE_SIZE / PAGE_SIZE;\n\n"
+            },
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 4368,
+                "startChar": 0,
+                "endLine": 4374,
+                "endChar": 0
+              },
+              "replacement": "\tif (page_size_ratio \u003e 1) {\n\t\tcs-\u003enr_cache /\u003d page_size_ratio;\n\t\tcs-\u003enr_dirty /\u003d page_size_ratio;\n\t\tcs-\u003enr_writeback /\u003d page_size_ratio;\n\t\tcs-\u003enr_evicted /\u003d page_size_ratio;\n\t\tcs-\u003enr_recently_evicted /\u003d page_size_ratio;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cc1b1c79e2ffd44a038b7d5f9f64ea6783495cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
