@@ -1424,6 +1424,28 @@ struct lruvec *folio_lruvec_lock_irqsave(struct folio *folio,
 	return lruvec;
 }
 
+void do_iter_mem_cgroups(int (*cb)(struct mem_cgroup *memcg,
+				   struct lruvec *lruvec, void *private),
+			 void *private)
+{
+	pg_data_t *pgdat;
+	int ret;
+
+	for_each_online_pgdat(pgdat) {
+		struct mem_cgroup *memcg = NULL;
+
+		memcg = mem_cgroup_iter(NULL, NULL, NULL);
+		do {
+			struct lruvec *lruvec = mem_cgroup_lruvec(memcg, pgdat);
+
+			ret = cb(memcg, lruvec, private);
+			if (ret)
+				mem_cgroup_iter_break(NULL, memcg);
+		} while ((memcg = mem_cgroup_iter(NULL, memcg, NULL)) != NULL);
+	}
+}
+EXPORT_SYMBOL_GPL(do_iter_mem_cgroups);
+
 void do_traversal_all_lruvec(void)
 {
 	pg_data_t *pgdat;
