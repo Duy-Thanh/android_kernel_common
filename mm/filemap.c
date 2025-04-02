@@ -43,6 +43,7 @@
 #include <linux/psi.h>
 #include <linux/ramfs.h>
 #include <linux/page_idle.h>
+#include <linux/page_size_compat.h>
 #include <linux/migrate.h>
 #include <linux/pipe_fs_i.h>
 #include <linux/splice.h>
@@ -4362,6 +4363,15 @@ resched:
 		}
 	}
 	rcu_read_unlock();
+
+	/* Adjust the counts if emulating the page size */
+	if (__PAGE_SIZE > PAGE_SIZE) {
+		cs->nr_cache /= __PAGE_SIZE / PAGE_SIZE;
+		cs->nr_dirty /= __PAGE_SIZE / PAGE_SIZE;
+		cs->nr_writeback /= __PAGE_SIZE / PAGE_SIZE;
+		cs->nr_evicted /= __PAGE_SIZE / PAGE_SIZE;
+		cs->nr_recently_evicted /= __PAGE_SIZE / PAGE_SIZE;
+	}
 }
 
 /*
