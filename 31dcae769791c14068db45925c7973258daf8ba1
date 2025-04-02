@@ -123,6 +123,24 @@
       "message": "`drivers/cma/` path is quite misleading. Can you please change it to cma_test ?",
       "revId": "31dcae769791c14068db45925c7973258daf8ba1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d5d944f_3bbe5d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-04-02T00:36:16Z",
+      "side": 1,
+      "message": "That is good point. Moved it to cma_test.",
+      "parentUuid": "c53d2618_98cc2dc7",
+      "revId": "31dcae769791c14068db45925c7973258daf8ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
