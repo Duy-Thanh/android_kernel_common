@@ -157,6 +157,7 @@ static unsigned int sysctl_numa_balancing_promote_rate_limit = 65536;
 #endif
 
 #ifdef CONFIG_SYSCTL
+<<<<<<< HEAD   (bb822d Merge cc8b10fa7068 ("Merge tag 'usb-6.14-rc1' of git://git.k)
 static struct ctl_table sched_fair_sysctls[] = {
 	{
 		.procname       = "sched_child_runs_first",
@@ -165,6 +166,11 @@ static struct ctl_table sched_fair_sysctls[] = {
 		.mode           = 0644,
 		.proc_handler   = proc_dointvec,
 	},
+||||||| BASE
+static struct ctl_table sched_fair_sysctls[] = {
+=======
+static const struct ctl_table sched_fair_sysctls[] = {
+>>>>>>> BRANCH (9f10e7 Merge tag 'phy-for-6.14' of git://git.kernel.org/pub/scm/lin)
 #ifdef CONFIG_CFS_BANDWIDTH
 	{
 		.procname       = "sched_cfs_bandwidth_slice_us",
