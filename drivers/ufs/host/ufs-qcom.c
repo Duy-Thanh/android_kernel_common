@@ -147,7 +147,11 @@ static int ufs_qcom_ice_init(struct ufs_qcom_host *host)
 
 	profile->ll_ops = ufs_qcom_crypto_ops;
 	profile->max_dun_bytes_supported = 8;
+<<<<<<< HEAD   (613276 ANDROID: gki_defconfig: manually select SHA1 module signing)
 	profile->key_types_supported = BLK_CRYPTO_KEY_TYPE_RAW;
+||||||| BASE
+=======
+>>>>>>> BRANCH (88e450 Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/)
 	profile->dev = dev;
 
 	/*
@@ -203,7 +207,12 @@ static int ufs_qcom_ice_keyslot_program(struct blk_crypto_profile *profile,
 	err = qcom_ice_program_key(host->ice,
 				   QCOM_ICE_CRYPTO_ALG_AES_XTS,
 				   QCOM_ICE_CRYPTO_KEY_SIZE_256,
+<<<<<<< HEAD   (613276 ANDROID: gki_defconfig: manually select SHA1 module signing)
 				   key->bytes,
+||||||| BASE
+=======
+				   key->raw,
+>>>>>>> BRANCH (88e450 Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/)
 				   key->crypto_cfg.data_unit_size / 512,
 				   slot);
 	ufshcd_release(hba);
