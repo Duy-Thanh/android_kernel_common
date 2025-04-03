@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d429a16f_3bc80a00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-04-03T22:06:06Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/b88cbaaa6fa109c2eb455d8fe2a318de0d197ea2) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003db88cbaaa6fa109c2eb455d8fe2a318de0d197ea2).\n\n```\n    + ## BUILD.bazel ##\n    +@@ BUILD.bazel: _DB845C_MODULE_OUTS \u003d [\n    +     \"drivers/net/wireless/ath/ath11k/ath11k_pci.ko\",\n    +     \"drivers/net/wireless/ath/ath12k/ath12k.ko\",\n    +     \"drivers/nvmem/nvmem_qfprom.ko\",\n    +-    \"drivers/pci/pwrctl/pci-pwrctl-core.ko\",\n    +-    \"drivers/pci/pwrctl/pci-pwrctl-pwrseq.ko\",\n    ++    \"drivers/pci/pwrctrl/pci-pwrctrl-core.ko\",\n    ++    \"drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.ko\",\n    +     \"drivers/phy/qualcomm/phy-qcom-eusb2-repeater.ko\",\n    +     \"drivers/phy/qualcomm/phy-qcom-qmp-combo.ko\",\n    +     \"drivers/phy/qualcomm/phy-qcom-qmp-pcie.ko\",\n     \n      ## MAINTAINERS ##\n     @@ MAINTAINERS: M:\tBartosz Golaszewski \u003cbrgl@bgdev.pl\u003e\n    @@ drivers/pci/pwrctl/core.c \u003d\u003e drivers/pci/pwrctrl/core.c\n     \n      ## drivers/pci/pwrctl/pci-pwrctl-pwrseq.c \u003d\u003e drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c ##\n     @@\n    + #include \u003clinux/device.h\u003e\n      #include \u003clinux/mod_devicetable.h\u003e\n      #include \u003clinux/module.h\u003e\n    - #include \u003clinux/of.h\u003e\n     -#include \u003clinux/pci-pwrctl.h\u003e\n     +#include \u003clinux/pci-pwrctrl.h\u003e\n      #include \u003clinux/platform_device.h\u003e\n    + #include \u003clinux/property.h\u003e\n      #include \u003clinux/pwrseq/consumer.h\u003e\n    - #include \u003clinux/slab.h\u003e\n    +\n    + ## gki/aarch64/symbols/db845c ##\n    +@@\n    +   mipi_dsi_driver_register_full\n    +   mipi_dsi_driver_unregister\n    + \n    +-# required by pci-pwrctl-core.ko\n    ++# required by pci-pwrctrl-core.ko\n    +   pci_lock_rescan_remove\n    +   pci_rescan_bus\n    +   pci_unlock_rescan_remove\n    + \n    +-# required by pci-pwrctl-pwrseq.ko\n    ++# required by pci-pwrctrl-pwrseq.ko\n    +   devm_pwrseq_get\n    +   pwrseq_power_off\n    +   pwrseq_power_on\n     \n      ## include/linux/pci-pwrctl.h \u003d\u003e include/linux/pci-pwrctrl.h ##\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "beb4774ac5ab7472fc7deed68a45d74bf87862a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42bba21b_73b2f065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-04-03T22:06:06Z",
+      "side": 1,
+      "message": "You need to split out the BUILD.bazel part from the upstream commit part.",
+      "revId": "beb4774ac5ab7472fc7deed68a45d74bf87862a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
