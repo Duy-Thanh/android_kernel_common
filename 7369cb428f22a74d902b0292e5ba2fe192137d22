@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f425df8a_4c097edf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2025-04-03T11:06:20Z",
+      "side": 1,
+      "message": "I ran the verity-compat-test test from the cryptsetup project and they pass, so LGTM.",
+      "revId": "7369cb428f22a74d902b0292e5ba2fe192137d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
