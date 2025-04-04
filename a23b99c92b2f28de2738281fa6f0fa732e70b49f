@@ -1,0 +1,263 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7232d42d_0f20202e",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-04T11:14:02Z",
+      "side": 1,
+      "message": "Do we have to burn so many hypercalls on this?",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "318c2c18_520489f2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 28,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": ".. _pviommu_hypercalls:\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e71657b_46771d87",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-04T11:14:02Z",
+      "side": 1,
+      "message": "What is this useful for? We can\u0027t break compatibility and the hypercalls are already discoverable.",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dce0024b_a0ab50c6",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-04T11:14:02Z",
+      "side": 1,
+      "message": "We\u0027ve used:\n\n```\nOptional; pKVM protected guests only.\n```\n\nelsewhere, so maybe stick with that phrasing for these new calls?",
+      "range": {
+        "startLine": 34,
+        "startChar": 24,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bb8e0340_5058242f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 58,
+                "startChar": 0,
+                "endLine": 59,
+                "endChar": 0
+              },
+              "replacement": "- ``PVIOMMU_REQUEST_FEATURE_PGSZ_BITMAP`` (0x1): Return the supported page size bitmap in R1.\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 88,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 114,
+                "startChar": 0,
+                "endLine": 115,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 137,
+                "startChar": 0,
+                "endLine": 138,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 164,
+                "startChar": 0,
+                "endLine": 165,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 199,
+                "startChar": 0,
+                "endLine": 200,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 230,
+                "startChar": 0,
+                "endLine": 231,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 269,
+                "startChar": 0,
+                "endLine": 270,
+                "endChar": 0
+              },
+              "replacement": "| Presence:           | Optional; pKVM protected guests only.                       |\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a44b0f68_761e2b98",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-04T11:14:02Z",
+      "side": 1,
+      "message": "Practically, isn\u0027t this going to the same as the granules supported by the CPU stage-2?\n\nA better interface would probably be for map/unmap to work on stage-2-granule-aligned ranges and figure out the mapping granularity themselves (like the range hypercalls we have for the CPU already).",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9794a9e4_e90e2aec",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 59,
+                "endChar": 0
+              },
+              "replacement": "  This bitmap is based on the granularity of the CPU stage-2 translation.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e36c9c1_72517c2e",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-04T11:14:02Z",
+      "side": 1,
+      "message": "This doesn\u0027t make sense",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
