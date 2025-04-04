@@ -180,7 +180,7 @@ static inline unsigned int __map_depth(const struct sbitmap *sb, int index)
 static inline void sbitmap_free(struct sbitmap *sb)
 {
 	free_percpu(sb->alloc_hint);
-	kvfree(sb->map);
+	kvfree(sb->map - 1);
 	sb->map = NULL;
 }
 
