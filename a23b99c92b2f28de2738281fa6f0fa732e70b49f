@@ -239,6 +239,77 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "061996e8_f73fde7a",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-04T11:18:03Z",
+      "side": 1,
+      "message": "Do we actually instantiate more than one pvIOMMU per guest (and, if so, why)?\n\nIt would be simpler to drop the \"pvIOMMU ID\" parameters from all of these calls and then we can add it back later if we need to support multiple interfaces.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 85
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ea5c5ede_9a650293",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "| Arguments:          | (uint64) | R1 | Reserved / Must be zero                     |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": "| Arguments:          | (uint64) | R1 | Reserved / Must be zero                     |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 170,
+                "startChar": 0,
+                "endLine": 171,
+                "endChar": 0
+              },
+              "replacement": "| Arguments:          | (uint64) | R1 | Reserved / Must be zero                     |\n"
+            },
+            {
+              "path": "Documentation/virt/kvm/arm/pviommu.rst",
+              "range": {
+                "startLine": 275,
+                "startChar": 0,
+                "endLine": 276,
+                "endChar": 0
+              },
+              "replacement": "| Arguments:          | (uint64) | R1 | Reserved / Must be zero                     |\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e36c9c1_72517c2e",
         "filename": "Documentation/virt/kvm/arm/pviommu.rst",
         "patchSetId": 4
