@@ -20484,6 +20484,11 @@ pointer_reference {
   pointee_type_id: 0x922075d2
 }
 pointer_reference {
+  id: 0x2e18982d
+  kind: POINTER
+  pointee_type_id: 0x92228628
+}
+pointer_reference {
   id: 0x2e18b2bb
   kind: POINTER
   pointee_type_id: 0x92222c71
@@ -31659,6 +31664,11 @@ pointer_reference {
   pointee_type_id: 0xd646f122
 }
 pointer_reference {
+  id: 0x3f02424f
+  kind: POINTER
+  pointee_type_id: 0xd649efa3
+}
+pointer_reference {
   id: 0x3f035b61
   kind: POINTER
   pointee_type_id: 0xd64d8b1a
@@ -36242,6 +36252,11 @@ qualified {
   id: 0xd646f122
   qualifier: CONST
   qualified_type_id: 0x295c7202
+}
+qualified {
+  id: 0xd649efa3
+  qualifier: CONST
+  qualified_type_id: 0x29600806
 }
 qualified {
   id: 0xd64d8b1a
@@ -333760,6 +333775,12 @@ function {
   parameter_id: 0x2078aea9
 }
 function {
+  id: 0x92228628
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3f02424f
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x922471e5
   return_type_id: 0x6720d32f
   parameter_id: 0x3c9a9fb2
@@ -338201,6 +338222,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x2efe8065
   parameter_id: 0x18ea6ae3
+}
+function {
+  id: 0x966430b0
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2e18982d
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x9666087d
@@ -390845,6 +390872,16 @@ elf_symbol {
   full_name: "get_device_system_crosststamp"
 }
 elf_symbol {
+  id: 0x53fa69e4
+  name: "get_dmabuf_debugfs_data"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3509e405
+  namespace: "DMA_BUF"
+  type_id: 0x966430b0
+  full_name: "get_dmabuf_debugfs_data"
+}
+elf_symbol {
   id: 0x6f713df1
   name: "get_each_kmemcache_object"
   is_defined: true
@@ -432787,6 +432824,7 @@ interface {
   symbol_id: 0xd9d90ad6
   symbol_id: 0xaf0c4e38
   symbol_id: 0x08e235b1
+  symbol_id: 0x53fa69e4
   symbol_id: 0x6f713df1
   symbol_id: 0xd98cefe6
   symbol_id: 0xd2727579
