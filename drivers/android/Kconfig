@@ -113,4 +113,10 @@ config ANDROID_VENDOR_OEM_DATA
 
 	  If even slightly unsure, say Y.
 
+config ANDROID_EXPERIMENTS
+	bool "Android kernel experiment selection"
+	default y
+	help
+	  Enable support of selection of Android kernel experiments
+
 endmenu
