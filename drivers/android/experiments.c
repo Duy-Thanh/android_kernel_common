@@ -52,11 +52,20 @@ static ssize_t exp_store(struct kobject *kobj, struct attribute *attr,
 #define EXPERIMENT(_name) { .attr = { .name = __stringify(_name), .mode = 0664 }, .enable = 0, }
 
 enum ExperimentTags {
+	EXPERIMENT_UNAME_TRACE,
 	EXPERIMENT_COUNT
 };
 
 static struct exp_attr experiments[] = {
+	EXPERIMENT(uname_trace),
 };
+
+void trace_android_vh_uname_trace(unsigned int n)
+{
+	if (!experiments[EXPERIMENT_UNAME_TRACE].enable)
+		return;
+        printk(KERN_WARNING "kernel example experiment value = %d\n", n);
+}
 
 static const struct sysfs_ops exp_ops = {
 	.show = exp_show,
