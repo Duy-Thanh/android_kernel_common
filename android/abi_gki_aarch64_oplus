@@ -557,3 +557,4 @@
   contpte_ptep_get
   contpte_ptep_set_access_flags
   __ptep_set_access_flags
+  kthread_blkcg
