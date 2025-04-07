@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91fbc169_1d8a539a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T15:27:11Z",
+      "side": 1,
+      "message": "I think you need to check `has_version_negotiated` here, otherwise you could return the FFA version set by `hyp_ffa_init()` prior to the host attempting a downgrade.\n\ne.g.\n\n```\nu32 version \u003d 0;\n\nhyp_spin_lock(\u0026version_lock);\nif (has_version_negotiated)\n\tversion \u003d hyp_ffa_version;\nhyp_spin_unlock(\u0026version_lock);\n\nreturn version;\n```",
+      "range": {
+        "startLine": 1385,
+        "startChar": 0,
+        "endLine": 1385,
+        "endChar": 27
+      },
+      "revId": "5d3c93bd51229d70b1e4f0e9d775bb71a6ef5c56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81db87e1_815e2b32",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 38
