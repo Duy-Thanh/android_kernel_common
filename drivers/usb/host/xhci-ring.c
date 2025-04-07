@@ -380,7 +380,14 @@ static void xhci_handle_stopped_cmd_ring(struct xhci_hcd *xhci,
 	if ((xhci->cmd_ring->dequeue != xhci->cmd_ring->enqueue) &&
 	    !(xhci->xhc_state & XHCI_STATE_DYING)) {
 		xhci->current_cmd = cur_cmd;
+<<<<<<< HEAD   (9a52b1 Revert "usb: xhci: Add timeout argument in address_device US)
 		xhci_mod_cmd_timer(xhci, XHCI_CMD_DEFAULT_TIMEOUT);
+||||||| BASE
+		xhci_mod_cmd_timer(xhci);
+=======
+		if (cur_cmd)
+			xhci_mod_cmd_timer(xhci);
+>>>>>>> BRANCH (cf3030 usb: xhci: Fix NULL pointer dereference on certain command a)
 		xhci_ring_cmd_db(xhci);
 	}
 }
