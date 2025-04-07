@@ -35,12 +35,7 @@
 
 #include "dma-buf-sysfs-stats.h"
 
-struct dma_buf_list {
-	struct list_head head;
-	struct mutex lock;
-};
-
-static struct dma_buf_list db_list;
+struct dma_buf_list db_list;
 
 /**
  * dma_buf_get_each - Helps in traversing the db_list and calls the

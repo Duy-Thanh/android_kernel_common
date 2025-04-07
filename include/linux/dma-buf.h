@@ -18,6 +18,7 @@
 #include <linux/err.h>
 #include <linux/scatterlist.h>
 #include <linux/list.h>
+#include <linux/mutex.h>
 #include <linux/dma-mapping.h>
 #include <linux/fs.h>
 #include <linux/dma-fence.h>
@@ -638,6 +639,12 @@ struct dma_buf_export_info {
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 };
+
+struct dma_buf_list {
+	struct list_head head;
+	struct mutex lock;
+};
+extern struct dma_buf_list db_list;
 
 /**
  * DEFINE_DMA_BUF_EXPORT_INFO - helper macro for exporters
