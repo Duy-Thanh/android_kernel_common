@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0797242_95bf955e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-07T12:24:04Z",
+      "side": 1,
+      "message": "Can we please split this down in multiple hypercalls instead to avoid spending too much time at EL2?\n\nIdeally we\u0027d have one hypercall to reclaim each \u0027transfer\u0027 one by one, separately from the start_teardown HVC. And that will also address Will\u0027s remark about making the start_teardown call re-executable.",
+      "range": {
+        "startLine": 1276,
+        "startChar": 4,
+        "endLine": 1276,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f4ab2da5_032921f3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1276,
+                "startChar": 0,
+                "endLine": 1277,
+                "endChar": 0
+              },
+              "replacement": "int kvm_reclaim_ffa_guest_pages(struct pkvm_hyp_vm *vm, pkvm_handle_t handle,\n\t\t\t\tbool force)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1286,
+                "startChar": 0,
+                "endLine": 1286,
+                "endChar": 0
+              },
+              "replacement": "\tif (!force \u0026\u0026 !vm-\u003evcpus[0]-\u003eexiting)\n\t\treturn 0;\n\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1294,
+                "startChar": 0,
+                "endLine": 1294,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * TODO: Split this into multiple hypercalls to avoid spending too\n\t * much time at EL2. Ideally we\u0027d have one hypercall to reclaim\n\t * each \u0027transfer\u0027 one by one, separately from the start_t.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "810bbbff4bd13eb925c74c12042a37bfec6c2888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "921cd84d_0e9e1f1f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-07T12:24:04Z",
+      "side": 1,
+      "message": "The inner portion of this loop looks very similar to what do_mem_reclaim() does, especially if we drop the part where we retrieve the descriptor form there. Could we re-express this loop using that? Similarly we could have a similar thing for rxtx_unmap.",
+      "range": {
+        "startLine": 1294,
+        "startChar": 1,
+        "endLine": 1294,
+        "endChar": 69
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0930424f_fa053c35",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 827,
+                "startChar": 0,
+                "endLine": 827,
+                "endChar": 0
+              },
+              "replacement": "\nstatic int ffa_reclaim_transfer(struct ffa_mem_transfer *transfer,\n\t\t\t\tstruct pkvm_hyp_vcpu *hyp_vcpu)\n{\n\tstruct arm_smccc_res res;\n\tint ret \u003d 0;\n\n\tffa_mem_reclaim(\u0026res,\n\t\t\tHANDLE_LOW(transfer-\u003effa_handle),\n\t\t\tHANDLE_HIGH(transfer-\u003effa_handle), 0);\n\tif (res.a0 !\u003d FFA_SUCCESS)\n\t\tret \u003d -EAGAIN;\n\n\tif (!ret)\n\t\tkvm_guest_clear_transfer(transfer, hyp_vcpu);\n\n\treturn ret;\n}\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1294,
+                "startChar": 0,
+                "endLine": 1294,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * TODO: Refactor this loop to use ffa_reclaim_transfer()\n\t */\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1295,
+                "startChar": 0,
+                "endLine": 1300,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d ffa_reclaim_transfer(transfer, hyp_vcpu);\n\t\tif (ret)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1301,
+                "startChar": 0,
+                "endLine": 1302,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1303,
+                "startChar": 0,
+                "endLine": 1304,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "810bbbff4bd13eb925c74c12042a37bfec6c2888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
