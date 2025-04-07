@@ -134,6 +134,30 @@
       },
       "revId": "73ec7f1f4a610a5cd9a207ef0ab038b3af1158c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01045a16_859a99f7",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T13:31:54Z",
+      "side": 1,
+      "message": "I still think we need a solution here; preventing reclaim of the rest of guest memory just because FF-A has a stuck reference doesn\u0027t feel like something that we can ship.",
+      "parentUuid": "1241fa6a_5ea9135f",
+      "range": {
+        "startLine": 361,
+        "startChar": 7,
+        "endLine": 361,
+        "endChar": 12
+      },
+      "revId": "73ec7f1f4a610a5cd9a207ef0ab038b3af1158c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
