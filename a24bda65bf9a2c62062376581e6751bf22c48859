@@ -16,6 +16,24 @@
       "message": "Is deleting the sample the right approach? Otherwise LGTM.",
       "revId": "a24bda65bf9a2c62062376581e6751bf22c48859",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f6155b2_7ab08b7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-04-07T15:46:30Z",
+      "side": 1,
+      "message": "sample was deleted upstream, I didn\u0027t do it by hand.",
+      "parentUuid": "70063cc8_4e3e1bc7",
+      "revId": "a24bda65bf9a2c62062376581e6751bf22c48859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
