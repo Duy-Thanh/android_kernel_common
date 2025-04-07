@@ -25,6 +25,9 @@
 #include "iostat.h"
 #include <trace/events/f2fs.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/fs.h>
+
 #define __reverse_ffz(x) __reverse_ffs(~(x))
 
 static struct kmem_cache *discard_entry_slab;
@@ -3912,6 +3915,8 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
 	if (keep_order)
 		f2fs_down_read(&fio->sbi->io_order_lock);
 
+	trace_android_vh_f2fs_hotness_decide(fio, &type);
+
 	if (f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
 			&fio->new_blkaddr, sum, type, fio)) {
 		if (fscrypt_inode_uses_fs_layer_crypto(folio->mapping->host))
@@ -3926,6 +3931,8 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
 
 	/* writeout dirty page into bdev */
 	f2fs_submit_page_write(fio);
+
+	trace_android_vh_f2fs_hotness_maintain(fio, &type);
 
 	f2fs_update_device_state(fio->sbi, fio->ino, fio->new_blkaddr, 1);
 out:
