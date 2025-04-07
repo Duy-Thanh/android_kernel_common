@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "459ffd75_60ed0a9b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T12:54:22Z",
+      "side": 1,
+      "message": "I still think this is dangerous (and Quentin\u0027s suggestion to move the FFA reclaim into its own hypercall goes some way to address this) but, as it stands, it looks like you can run concurrently with `finalize_teardown()` and then `kvm_reclaim_ffa_guest_pages()` may access VM data structures that are in the process of being freed.",
+      "parentUuid": "fa66e74e_04145147",
+      "range": {
+        "startLine": 890,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 28
+      },
+      "revId": "73ec7f1f4a610a5cd9a207ef0ab038b3af1158c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "103e8e02_0865d112",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 12
