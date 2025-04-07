@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17bca9c4_a33e8907",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-07T22:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7232d42d_0f20202e",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e71657b_46771d87",
@@ -55,6 +79,30 @@
       "writtenOn": "2025-04-04T11:14:02Z",
       "side": 1,
       "message": "What is this useful for? We can\u0027t break compatibility and the hypercalls are already discoverable.",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "129d3e02_bc49b257",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-07T22:10:56Z",
+      "side": 1,
+      "message": "I was thinking this can be used to discover which version of the API is implemented in case we add more features, I removed it for now, as this can be added later when needed.",
+      "parentUuid": "7e71657b_46771d87",
       "range": {
         "startLine": 28,
         "startChar": 2,
@@ -196,6 +244,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab774f8_754671ed",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-07T22:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dce0024b_a0ab50c6",
+      "range": {
+        "startLine": 34,
+        "startChar": 24,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a44b0f68_761e2b98",
@@ -233,6 +305,30 @@
           ]
         }
       ],
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5651bc51_11f42fc3",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-07T22:10:56Z",
+      "side": 1,
+      "message": "I removed it, now we only requires IPA/IOVA/SIZE to be aligned to `ARM_SMCCC_KVM_FUNC_HYP_MEMINFO`",
+      "parentUuid": "a44b0f68_761e2b98",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 39
+      },
       "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -310,6 +406,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61e217c1_57d5aa4e",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-07T22:10:56Z",
+      "side": 1,
+      "message": "I think we can limit that from the UAPI if needed, but I am inclined to have it here:\n- this doesn\u0027t add any complexity in the driver\n- the direction upstream for iommufd is to have multiple facing IOMMUs for guest (mostly to make virtual topology close to physical topology)\n- For example in case 2 IOMMUs are different and can\u0027t share domains, the code doesn\u0027t handle this complexity (by mapping one virtual domain to many physical domains and managing their life cycle...).",
+      "parentUuid": "061996e8_f73fde7a",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 85
+      },
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e36c9c1_72517c2e",
         "filename": "Documentation/virt/kvm/arm/pviommu.rst",
         "patchSetId": 4
@@ -321,6 +441,30 @@
       "writtenOn": "2025-04-04T11:14:02Z",
       "side": 1,
       "message": "This doesn\u0027t make sense",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "a23b99c92b2f28de2738281fa6f0fa732e70b49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc18a320_50634535",
+        "filename": "Documentation/virt/kvm/arm/pviommu.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-07T22:10:56Z",
+      "side": 1,
+      "message": "I re-wrote it.",
+      "parentUuid": "6e36c9c1_72517c2e",
       "range": {
         "startLine": 83,
         "startChar": 0,
