@@ -35,6 +35,9 @@
 #include <trace/events/f2fs.h>
 #include <uapi/linux/f2fs.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/fs.h>
+
 static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
 {
 	struct inode *inode = file_inode(vmf->vma->vm_file);
@@ -2410,6 +2413,8 @@ int f2fs_do_shutdown(struct f2fs_sb_info *sbi, unsigned int flag,
 	 */
 	if (need_lock)
 		down_write(&sbi->sb->s_umount);
+
+	trace_android_vh_f2fs_hc_manager_destroy(sbi);
 
 	f2fs_stop_gc_thread(sbi);
 	f2fs_stop_discard_thread(sbi);
