@@ -3,6 +3,12 @@
 config INTEL_MEI
 	tristate "Intel Management Engine Interface"
 	depends on X86 && PCI
+<<<<<<< HEAD   (80afa6 Revert "UPSTREAM: Revert "x86/module: prepare module loading)
+||||||| BASE
+	default GENERIC_CPU || MCORE2 || MATOM || X86_GENERIC
+=======
+	default X86_64 || MATOM
+>>>>>>> BRANCH (001a3a Merge tag 'x86-platform-2025-03-22' of git://git.kernel.org/)
 	help
 	  The Intel Management Engine (Intel ME) provides Manageability,
 	  Security and Media services for system containing Intel chipsets.
