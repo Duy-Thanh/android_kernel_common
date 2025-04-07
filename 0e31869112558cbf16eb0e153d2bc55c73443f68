@@ -225,6 +225,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89e660cc_928d36dd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T12:41:18Z",
+      "side": 1,
+      "message": "I see. So it sounds like this should be moved to the VM finalisation code (on first run?).",
+      "parentUuid": "146325ce_277ba84d",
+      "range": {
+        "startLine": 384,
+        "startChar": 7,
+        "endLine": 384,
+        "endChar": 10
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68666200_b1f956bf",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12

@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a7c13f2_8e7492da",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T12:41:18Z",
+      "side": 1,
+      "message": "This will send a notification even for the host. Can we restrict this to guests for the moment? (i.e. only send the notification when `hyp_vcpu` is not `NULL`)",
+      "range": {
+        "startLine": 366,
+        "startChar": 34,
+        "endLine": 366,
+        "endChar": 58
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f17f4dd2_6e1a5662",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 366,
+                "startChar": 0,
+                "endLine": 369,
+                "endChar": 0
+              },
+              "replacement": "\tif (hyp_vcpu) {\n\t\tret \u003d kvm_notify_vm_availability(FFA_HANDLE_FROM_HYP_VCPU(hyp_vcpu), FFA_VM_CREATION_MSG);\n\t\tif (ret !\u003d FFA_RET_SUCCESS)\n\t\t\tgoto out;\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4fb8da3e0366e45f24e43f4ec59177cf60c5a2fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
