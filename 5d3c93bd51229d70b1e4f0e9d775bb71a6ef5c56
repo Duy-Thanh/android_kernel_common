@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81db87e1_815e2b32",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-07T13:11:37Z",
+      "side": 1,
+      "message": "Could you please use the kvm-\u003earch.config lock here instead? I see the pvmfw code doesn\u0027t take it above, but that\u0027s a bug -- I\u0027ll fix it separately 😊",
+      "range": {
+        "startLine": 856,
+        "startChar": 13,
+        "endLine": 856,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "73f5885b_b6e609ee",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 856,
+                "startChar": 0,
+                "endLine": 857,
+                "endChar": 0
+              },
+              "replacement": "\tmutex_lock(\u0026kvm-\u003earch.config_lock);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 864,
+                "startChar": 0,
+                "endLine": 865,
+                "endChar": 0
+              },
+              "replacement": "\tmutex_unlock(\u0026kvm-\u003earch.config_lock);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5d3c93bd51229d70b1e4f0e9d775bb71a6ef5c56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
