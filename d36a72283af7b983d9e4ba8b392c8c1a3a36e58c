@@ -52,6 +52,24 @@
       "parentUuid": "48c89d08_9c56de58",
       "revId": "d36a72283af7b983d9e4ba8b392c8c1a3a36e58c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3038e067_447c0cbd",
+        "filename": "virt/kvm/vfio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-07T14:40:30Z",
+      "side": 1,
+      "message": "Yes, AFAICT, a VM would be tied to a process (as there is one vmfd), so having the fd of the IOMMU as the identifier for the hypervisor should be fine (along the vm).\n\nAs this is not an ABI, (host \u003c-\u003e hyp) we can always change that, my goal was to avoid having some sort of global id allocator for the driver.",
+      "parentUuid": "c2d8c078_001f1605",
+      "revId": "d36a72283af7b983d9e4ba8b392c8c1a3a36e58c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
