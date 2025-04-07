@@ -70,6 +70,24 @@
       "parentUuid": "c2d8c078_001f1605",
       "revId": "d36a72283af7b983d9e4ba8b392c8c1a3a36e58c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a8fecdb_268db1b6",
+        "filename": "virt/kvm/vfio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-04-07T14:42:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3038e067_447c0cbd",
+      "revId": "d36a72283af7b983d9e4ba8b392c8c1a3a36e58c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
