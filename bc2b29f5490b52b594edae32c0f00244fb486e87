@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dad84e63_550cac68",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T13:21:43Z",
+      "side": 1,
+      "message": "Is it possible to write this as a range case (like we have for the TRNG calls)?",
+      "range": {
+        "startLine": 1739,
+        "startChar": 6,
+        "endLine": 1739,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c28d1317_d9409701",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+              "range": {
+                "startLine": 1738,
+                "startChar": 0,
+                "endLine": 1738,
+                "endChar": 0
+              },
+              "replacement": "\tcase FFA_BASE ... FFA_MAX:\n\t\treturn kvm_guest_ffa_handler(hyp_vcpu, exit_code);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+              "range": {
+                "startLine": 1739,
+                "startChar": 0,
+                "endLine": 1743,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn pkvm_handle_psci(hyp_vcpu);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc2b29f5490b52b594edae32c0f00244fb486e87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
