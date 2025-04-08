@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044c4345_ac96cfa3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-08T17:43:34Z",
+      "side": 1,
+      "message": "Hmm. I\u0027m not sure about this; it feels like we shouldn\u0027t return to the guest with a pending hyp request. Can we instead handle map failure due to lack of memory by returning to the host to handle the hyp request, but with the guest register state updated with the return value for the hypercall (and the ELR *not* adjusted)?\n\nThat way, the guest will see the correct total_mapped value and issue the new hypercall, but the topup will have happened already. What am I missing?",
+      "range": {
+        "startLine": 224,
+        "startChar": 5,
+        "endLine": 224,
+        "endChar": 19
+      },
+      "revId": "67f05557e26e7063cdfa642e085413dba1fbed2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6c466b6_64b95f09",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-08T17:43:34Z",
+      "side": 1,
+      "message": "I don\u0027t grok this part -- this can fail with a pending hyp request and return `-ENOENT`, but then we\u0027ll call `smccc_set_retval()` and corrupt the vcpu registers after adjusting the ELR to reply the hypercall.",
+      "range": {
+        "startLine": 232,
+        "startChar": 8,
+        "endLine": 232,
+        "endChar": 41
+      },
+      "revId": "67f05557e26e7063cdfa642e085413dba1fbed2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "625ce263_c41d68ff",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-08T17:43:34Z",
+      "side": 1,
+      "message": "I think you can remove this part of the comment; it confused me as I was trying to work out why an irq would cause a problem, but you\u0027re just pointing out that it\u0027s ok.",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 0
+      },
+      "revId": "67f05557e26e7063cdfa642e085413dba1fbed2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
