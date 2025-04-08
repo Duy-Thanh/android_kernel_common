@@ -2484,6 +2484,11 @@ pointer_reference {
   pointee_type_id: 0x082ccdd1
 }
 pointer_reference {
+  id: 0x089c024c
+  kind: POINTER
+  pointee_type_id: 0x0830efae
+}
+pointer_reference {
   id: 0x08a8dfa4
   kind: POINTER
   pointee_type_id: 0x08e3980f
@@ -250346,6 +250351,11 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x0830efae
+  kind: STRUCT
+  name: "gic_chip_data"
+}
+struct_union {
   id: 0x5395485e
   kind: STRUCT
   name: "giveback_urb_bh"
@@ -345458,6 +345468,13 @@ function {
   parameter_id: 0xfc0e1dbd
 }
 function {
+  id: 0x9b891c69
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x089c024c
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9b89da18
   return_type_id: 0x6720d32f
   parameter_id: 0x18a2fb63
@@ -365223,6 +365240,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_get_page_wmark"
 }
 elf_symbol {
+  id: 0x88586647
+  name: "__traceiter_android_vh_gic_v3_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3cfb6251
+  type_id: 0x9b891c69
+  full_name: "__traceiter_android_vh_gic_v3_suspend"
+}
+elf_symbol {
   id: 0x2e323991
   name: "__traceiter_android_vh_inet_create"
   is_defined: true
@@ -369397,6 +369423,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_get_page_wmark"
+}
+elf_symbol {
+  id: 0xf18e312d
+  name: "__tracepoint_android_vh_gic_v3_suspend"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_gic_v3_suspend"
 }
 elf_symbol {
   id: 0xee2c17ff
@@ -430503,6 +430538,7 @@ interface {
   symbol_id: 0x7fef736f
   symbol_id: 0x9fe60f0c
   symbol_id: 0x83b45f32
+  symbol_id: 0x88586647
   symbol_id: 0x2e323991
   symbol_id: 0x3d32611b
   symbol_id: 0x3e758266
@@ -430967,6 +431003,7 @@ interface {
   symbol_id: 0x9b384a49
   symbol_id: 0x828646be
   symbol_id: 0x4756cfec
+  symbol_id: 0xf18e312d
   symbol_id: 0xee2c17ff
   symbol_id: 0xdab6baf5
   symbol_id: 0xcaffa1dc
