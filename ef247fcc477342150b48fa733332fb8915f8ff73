@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b192708_fc81edbe",
+        "filename": "lib/alloc_tag.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-08T17:49:54Z",
+      "side": 1,
+      "message": "see https://b.corp.google.com/issues/406099859#comment19. I think it\u0027s a simpler change.",
+      "range": {
+        "startLine": 420,
+        "startChar": 1,
+        "endLine": 444,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "205c5128_1776212c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "lib/alloc_tag.c",
+              "range": {
+                "startLine": 416,
+                "startChar": 0,
+                "endLine": 417,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long phys_end \u003d module_tags.start_addr +\n"
+            },
+            {
+              "path": "lib/alloc_tag.c",
+              "range": {
+                "startLine": 424,
+                "startChar": 0,
+                "endLine": 427,
+                "endChar": 0
+              },
+              "replacement": "\t\tunsigned long more_pages \u003d  ALIGN(new_end - phys_end, PAGE_SIZE) \u003e\u003e PAGE_SHIFT;\n"
+            },
+            {
+              "path": "lib/alloc_tag.c",
+              "range": {
+                "startLine": 454,
+                "startChar": 0,
+                "endLine": 458,
+                "endChar": 0
+              },
+              "replacement": "\t\tkasan_alloc_module_shadow((void *)phys_end,\n\t\t\t\t\t  ALIGN(new_end, MODULE_ALIGN) - ALIGN(phys_end, MODULE_ALIGN),\n\t\t\t\t\t  GFP_KERNEL);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ef247fcc477342150b48fa733332fb8915f8ff73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
