@@ -344036,6 +344036,14 @@ function {
   parameter_id: 0x3593bec8
 }
 function {
+  id: 0x9b3d7f52
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x257d12af
+  parameter_id: 0x1df06cce
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9b3db069
   return_type_id: 0x6720d32f
   parameter_id: 0x1ae38c59
@@ -344069,6 +344077,13 @@ function {
   parameter_id: 0x1b8590a8
   parameter_id: 0x18bd6530
   parameter_id: 0xf435685e
+}
+function {
+  id: 0x9b3e982a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x257d12af
+  parameter_id: 0x13580d6c
 }
 function {
   id: 0x9b3fbad6
@@ -344204,6 +344219,13 @@ function {
   parameter_id: 0x3e10b518
   parameter_id: 0x4585663f
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x9b482026
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3f949c69
+  parameter_id: 0x6720d32f
 }
 function {
   id: 0x9b4884ab
@@ -347519,6 +347541,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
   parameter_id: 0x1013df15
+}
+function {
+  id: 0x9bf0d094
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x17dabdcd
 }
 function {
   id: 0x9bf1e232
@@ -362460,7 +362488,7 @@ elf_symbol {
   name: "__scsi_add_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x11106efb
+  crc: 0x088b4671
   type_id: 0xa355db3b
   full_name: "__scsi_add_device"
 }
@@ -365678,6 +365706,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_scheduler_tick"
 }
 elf_symbol {
+  id: 0xe96d99d3
+  name: "__traceiter_android_vh_scsi_add_lun_done"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6f028c7d
+  type_id: 0x9b3d7f52
+  full_name: "__traceiter_android_vh_scsi_add_lun_done"
+}
+elf_symbol {
+  id: 0x52668f22
+  name: "__traceiter_android_vh_scsi_add_lun_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6f028c7d
+  type_id: 0x9b3d7f52
+  full_name: "__traceiter_android_vh_scsi_add_lun_start"
+}
+elf_symbol {
   id: 0x0c8a699d
   name: "__traceiter_android_vh_scx_enabled"
   is_defined: true
@@ -365730,6 +365776,15 @@ elf_symbol {
   crc: 0x000064e8
   type_id: 0x9bc214f0
   full_name: "__traceiter_android_vh_scx_task_switch_finish"
+}
+elf_symbol {
+  id: 0xb2358328
+  name: "__traceiter_android_vh_sd_probe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x83887116
+  type_id: 0x9b3e982a
+  full_name: "__traceiter_android_vh_sd_probe"
 }
 elf_symbol {
   id: 0xaa3f6a65
@@ -366965,6 +367020,15 @@ elf_symbol {
   full_name: "__traceiter_scsi_dispatch_cmd_done"
 }
 elf_symbol {
+  id: 0xd3f7c7b4
+  name: "__traceiter_scsi_dispatch_cmd_error"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdd81ad2a
+  type_id: 0x9b482026
+  full_name: "__traceiter_scsi_dispatch_cmd_error"
+}
+elf_symbol {
   id: 0x36d71264
   name: "__traceiter_scsi_dispatch_cmd_start"
   is_defined: true
@@ -366972,6 +367036,24 @@ elf_symbol {
   crc: 0x8c9c6eaa
   type_id: 0x9b51e812
   full_name: "__traceiter_scsi_dispatch_cmd_start"
+}
+elf_symbol {
+  id: 0x64f8cfd6
+  name: "__traceiter_scsi_dispatch_cmd_timeout"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8c9c6eaa
+  type_id: 0x9b51e812
+  full_name: "__traceiter_scsi_dispatch_cmd_timeout"
+}
+elf_symbol {
+  id: 0x1bcbf1b5
+  name: "__traceiter_scsi_eh_wakeup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x59c6cd29
+  type_id: 0x9bf0d094
+  full_name: "__traceiter_scsi_eh_wakeup"
 }
 elf_symbol {
   id: 0x4bc6a64f
@@ -369827,6 +369909,24 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_scheduler_tick"
 }
 elf_symbol {
+  id: 0x2769f805
+  name: "__tracepoint_android_vh_scsi_add_lun_done"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_scsi_add_lun_done"
+}
+elf_symbol {
+  id: 0x4e8a6744
+  name: "__tracepoint_android_vh_scsi_add_lun_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_scsi_add_lun_start"
+}
+elf_symbol {
   id: 0x04a09533
   name: "__tracepoint_android_vh_scx_enabled"
   is_defined: true
@@ -369879,6 +369979,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_scx_task_switch_finish"
+}
+elf_symbol {
+  id: 0x79bf5bde
+  name: "__tracepoint_android_vh_sd_probe"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sd_probe"
 }
 elf_symbol {
   id: 0xd7ceb15f
@@ -371114,6 +371223,15 @@ elf_symbol {
   full_name: "__tracepoint_scsi_dispatch_cmd_done"
 }
 elf_symbol {
+  id: 0xdeb02bc6
+  name: "__tracepoint_scsi_dispatch_cmd_error"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_scsi_dispatch_cmd_error"
+}
+elf_symbol {
   id: 0x6069ba16
   name: "__tracepoint_scsi_dispatch_cmd_start"
   is_defined: true
@@ -371121,6 +371239,24 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_scsi_dispatch_cmd_start"
+}
+elf_symbol {
+  id: 0xb2b238f8
+  name: "__tracepoint_scsi_dispatch_cmd_timeout"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_scsi_dispatch_cmd_timeout"
+}
+elf_symbol {
+  id: 0x2cfdfe7b
+  name: "__tracepoint_scsi_eh_wakeup"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_scsi_eh_wakeup"
 }
 elf_symbol {
   id: 0x61888c85
@@ -413073,7 +413209,7 @@ elf_symbol {
   name: "scsi_scan_host"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x73992e22
+  crc: 0x0a6ae258
   type_id: 0x156efee0
   full_name: "scsi_scan_host"
 }
@@ -430020,12 +430156,15 @@ interface {
   symbol_id: 0x237634b3
   symbol_id: 0xb5ed74f6
   symbol_id: 0xb841c45e
+  symbol_id: 0xe96d99d3
+  symbol_id: 0x52668f22
   symbol_id: 0x0c8a699d
   symbol_id: 0x39b3e607
   symbol_id: 0x59bde75a
   symbol_id: 0xf69f852d
   symbol_id: 0x26dcb47e
   symbol_id: 0xc4e90767
+  symbol_id: 0xb2358328
   symbol_id: 0xaa3f6a65
   symbol_id: 0xa2fe718f
   symbol_id: 0x98a943de
@@ -430163,7 +430302,10 @@ interface {
   symbol_id: 0x570f3032
   symbol_id: 0x20097074
   symbol_id: 0x23bf3397
+  symbol_id: 0xd3f7c7b4
   symbol_id: 0x36d71264
+  symbol_id: 0x64f8cfd6
+  symbol_id: 0x1bcbf1b5
   symbol_id: 0x4bc6a64f
   symbol_id: 0x8ce8e50d
   symbol_id: 0x863777a0
@@ -430481,12 +430623,15 @@ interface {
   symbol_id: 0x40d6a8c5
   symbol_id: 0x931fa088
   symbol_id: 0xff2bccb8
+  symbol_id: 0x2769f805
+  symbol_id: 0x4e8a6744
   symbol_id: 0x04a09533
   symbol_id: 0xf48c66e5
   symbol_id: 0x8b94484c
   symbol_id: 0x978bc797
   symbol_id: 0xfbb545c8
   symbol_id: 0xb5ce3771
+  symbol_id: 0x79bf5bde
   symbol_id: 0xd7ceb15f
   symbol_id: 0x923147c1
   symbol_id: 0x5cfdecb8
@@ -430624,7 +430769,10 @@ interface {
   symbol_id: 0xe10cee18
   symbol_id: 0xa70e8cd2
   symbol_id: 0x82a9a35d
+  symbol_id: 0xdeb02bc6
   symbol_id: 0x6069ba16
+  symbol_id: 0xb2b238f8
+  symbol_id: 0x2cfdfe7b
   symbol_id: 0x61888c85
   symbol_id: 0xf68d6127
   symbol_id: 0x5b327cd6
