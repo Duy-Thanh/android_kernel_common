@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abae6d9d_3edbb3cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-04-08T15:26:30Z",
+      "side": 1,
+      "message": "I need to update the path here, as this is using `android/` directory instead",
+      "revId": "8bca70100062f9f69fb4fbc7b2fa7fcbafbe60e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
