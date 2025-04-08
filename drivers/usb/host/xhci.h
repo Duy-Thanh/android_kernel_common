@@ -816,9 +816,15 @@ struct xhci_command {
 	struct completion		*completion;
 	union xhci_trb			*command_trb;
 	struct list_head		cmd_list;
+<<<<<<< HEAD   (8b377d Revert "mtd: hyperbus: hbmc-am654: Convert to platform remov)
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
+||||||| BASE
+=======
+	/* xHCI command response timeout in milliseconds */
+	unsigned int			timeout_ms;
+>>>>>>> BRANCH (b27f10 usb: xhci: Add timeout argument in address_device USB HCD ca)
 };
 
 /* drop context bitmasks */
@@ -1582,8 +1588,11 @@ struct xhci_td {
 	unsigned int		num_trbs;
 };
 
-/* xHCI command default timeout value */
-#define XHCI_CMD_DEFAULT_TIMEOUT	(5 * HZ)
+/*
+ * xHCI command default timeout value in milliseconds.
+ * USB 3.2 spec, section 9.2.6.1
+ */
+#define XHCI_CMD_DEFAULT_TIMEOUT	5000
 
 /* command descriptor */
 struct xhci_cd {
