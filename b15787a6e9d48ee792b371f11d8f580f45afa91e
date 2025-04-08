@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a48d7f4_b137ca6a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-08T16:57:13Z",
+      "side": 1,
+      "message": "Might be worth asserting that the host lock is held in this function (and also in the unuse function), as that\u0027s what provides serialisation with the guest relinquish path.",
+      "range": {
+        "startLine": 1842,
+        "startChar": 12,
+        "endLine": 1842,
+        "endChar": 31
+      },
+      "revId": "b15787a6e9d48ee792b371f11d8f580f45afa91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
