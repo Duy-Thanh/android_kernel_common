@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c550bf7e_654926f9",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-04-08T18:21:41Z",
+      "side": 1,
+      "message": "I want to point out that putting paths in CONFIG_* requires some annoying tricks in Kleaf (CL:3036032) to ensure reproducibility. Do you really need a CONFIG_*, or do environment variables work as well?",
+      "revId": "83d4c3f9e1d75b1f5139b22df60d3b4634e0009c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b365a8d_94e6b3cc",
         "filename": "kernel/module/Kconfig",
         "patchSetId": 5
