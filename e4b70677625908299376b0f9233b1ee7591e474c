@@ -16,6 +16,24 @@
       "message": "Nit: s/alllcation/allocation",
       "revId": "e4b70677625908299376b0f9233b1ee7591e474c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e31cc30_1edab62b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-08T22:51:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0146cd60_b88f64c8",
+      "revId": "e4b70677625908299376b0f9233b1ee7591e474c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
