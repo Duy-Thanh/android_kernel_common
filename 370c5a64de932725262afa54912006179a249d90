@@ -102,6 +102,85 @@
       "message": "@surenb@google.com, you mentioned that the functionality behind this vendor hook should be sent usptream, is this correct?",
       "revId": "370c5a64de932725262afa54912006179a249d90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae7ac9c_370b9482",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-08T16:32:34Z",
+      "side": 1,
+      "message": "My comment about upstreaming was relevant to the earlier version of this patch: https://android-review.git.corp.google.com/c/kernel/common/+/2897503/1 which was changing slabinfo output.\n\nHowever I don\u0027t see why partner needs `trace_android_vh_alloc_pages_slowpath` when `trace_android_vh_alloc_pages_slowpath_end` already has all the parameters. They can use existing `trace_android_vh_alloc_pages_slowpath_end` instead.",
+      "parentUuid": "667577d0_5a64f785",
+      "revId": "370c5a64de932725262afa54912006179a249d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83b6f4df_1ff6e249",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4846,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-08T16:32:34Z",
+      "side": 1,
+      "message": "why can\u0027t you use `trace_android_vh_alloc_pages_slowpath_end` instead of adding another hook?",
+      "range": {
+        "startLine": 4846,
+        "startChar": 1,
+        "endLine": 4846,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c8c3dcc4_adf1d713",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 4846,
+                "startChar": 0,
+                "endLine": 4847,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 5123,
+                "startChar": 0,
+                "endLine": 5123,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_customize_alloc_gfp(\u0026alloc_gfp, order);\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 5131,
+                "startChar": 0,
+                "endLine": 5132,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "370c5a64de932725262afa54912006179a249d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
