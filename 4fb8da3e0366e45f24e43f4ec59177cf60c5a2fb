@@ -40,6 +40,30 @@
       ],
       "revId": "4fb8da3e0366e45f24e43f4ec59177cf60c5a2fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6266250e_ddfd3414",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-04-08T20:07:54Z",
+      "side": 1,
+      "message": "We should not send anything here as discussed in a separate comment, but we do need the creation message for the host as well. The host is another client VM as far as the secure partition that requested these availability messages is concerned. If you don\u0027t send a creation message for the host, other requests from the host might get rejected since they would come from a non-existing VM.",
+      "parentUuid": "7a7c13f2_8e7492da",
+      "range": {
+        "startLine": 366,
+        "startChar": 34,
+        "endLine": 366,
+        "endChar": 58
+      },
+      "revId": "4fb8da3e0366e45f24e43f4ec59177cf60c5a2fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
