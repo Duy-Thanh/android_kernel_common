@@ -55,6 +55,9 @@
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_dispatch_cmd_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_dispatch_cmd_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_dispatch_cmd_error);
+EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_eh_wakeup);
+EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_dispatch_cmd_timeout);
 
 static struct kmem_cache *scsi_sense_cache;
 static DEFINE_MUTEX(scsi_sense_cache_mutex);
