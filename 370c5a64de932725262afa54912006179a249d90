@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33057775_6896015f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-08T16:16:10Z",
+      "side": 1,
+      "message": "this is not the original author",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 56
+      },
+      "revId": "370c5a64de932725262afa54912006179a249d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48fa7734_2184a453",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-08T16:16:10Z",
+      "side": 1,
+      "message": "There is a typo here and the commit doesn\u0027t make sense. This is branch android16-6.12. However, this information probably shouldn\u0027t be here in the first place so please remove the \"porting from a to b\" explanation.",
+      "range": {
+        "startLine": 10,
+        "startChar": 22,
+        "endLine": 10,
+        "endChar": 36
+      },
+      "revId": "370c5a64de932725262afa54912006179a249d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f29ac29_6a6755a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-08T16:16:10Z",
+      "side": 1,
+      "message": "Why are you quoting so many bugs here? Please just pick one that has the \"context\" of this change, keep adding new bugs for every cherry-pick is unsustainable.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "370c5a64de932725262afa54912006179a249d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97aec1c8_4c54a311",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-08T16:16:10Z",
+      "side": 1,
+      "message": "nit: please don\u0027t add empty lines between the tags.",
+      "revId": "370c5a64de932725262afa54912006179a249d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "667577d0_5a64f785",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-08T16:16:10Z",
+      "side": 1,
+      "message": "@surenb@google.com, you mentioned that the functionality behind this vendor hook should be sent usptream, is this correct?",
+      "revId": "370c5a64de932725262afa54912006179a249d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
