@@ -16,6 +16,24 @@
       "message": "I\u0027m still trying to fully understand the issue, but I\u0027m curious as the two commits you pointed to in this commit message are both upstream changes, so initially it seems this should be something that would need to be submitted to upstream as well?  Is there something ANDROID specific (ie: specific to the Android common tree) about this problem?",
       "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f49fa89d_8df3fbb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3983193
+      },
+      "writtenOn": "2025-04-08T02:51:00Z",
+      "side": 1,
+      "message": "Hi John, the upstream branch is fine, but the current branch android13-5.15.178 is missing some of the modifications.",
+      "parentUuid": "4deeb444_ebc0e6de",
+      "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
