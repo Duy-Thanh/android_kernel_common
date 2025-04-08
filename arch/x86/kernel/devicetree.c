@@ -18,6 +18,7 @@
 #include <linux/of_pci.h>
 #include <linux/initrd.h>
 
+#include <asm/e820/api.h>
 #include <asm/irqdomain.h>
 #include <asm/hpet.h>
 #include <asm/apic.h>
@@ -278,6 +279,16 @@ static void __init dtb_apic_setup(void)
 	dtb_ioapic_setup();
 }
 
+static bool __init x86_is_region_reserved(phys_addr_t base, phys_addr_t size)
+{
+	if (!e820__mapped_all(base, base + size - 1, E820_TYPE_RESERVED)) {
+		pr_debug("%s: 0x%llx-0x%llx not reserved\n", __func__, base, base + size);
+		return false;
+	}
+
+	return true;
+}
+
 void __init x86_flattree_get_config(void)
 {
 #ifdef CONFIG_OF_EARLY_FLATTREE
@@ -303,6 +314,7 @@ void __init x86_flattree_get_config(void)
 	if (initial_dtb) {
 		early_memunmap(dt, map_len);
 
+		early_init_set_rsv_region_verifier(x86_is_region_reserved);
 		early_init_dt_scan_root();
 		early_init_fdt_scan_reserved_mem();
 	}

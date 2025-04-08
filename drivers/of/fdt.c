@@ -480,6 +480,8 @@ int __initdata dt_root_size_cells;
 void *initial_boot_params __ro_after_init;
 phys_addr_t initial_boot_params_pa __ro_after_init;
 
+static bool __initdata (*arch_is_region_reserved)(phys_addr_t base, phys_addr_t size);
+
 #ifdef CONFIG_OF_EARLY_FLATTREE
 
 static u32 of_fdt_crc32;
@@ -487,6 +489,12 @@ static u32 of_fdt_crc32;
 static int __init early_init_dt_reserve_memory(phys_addr_t base,
 					       phys_addr_t size, bool nomap)
 {
+	if (arch_is_region_reserved && !arch_is_region_reserved(base, size)) {
+		pr_err("0x%llx-0x%llx not arch reserved\n", base, base + size);
+
+		return -EINVAL;
+	}
+
 	if (nomap) {
 		/*
 		 * If the memory is already reserved (by another region), we
@@ -576,6 +584,7 @@ static int __init __reserved_mem_check_root(unsigned long node)
  */
 static int __init fdt_scan_reserved_mem(void)
 {
+
 	int node, child;
 	const void *fdt = initial_boot_params;
 
@@ -628,6 +637,12 @@ static void __init fdt_reserve_elfcorehdr(void)
 
 	pr_info("Reserving %llu KiB of memory at 0x%llx for elfcorehdr\n",
 		elfcorehdr_size >> 10, elfcorehdr_addr);
+}
+
+void __init early_init_set_rsv_region_verifier(bool (*is_mem_reserved)(phys_addr_t base,
+								       phys_addr_t size))
+{
+	arch_is_region_reserved = is_mem_reserved;
 }
 
 /**
