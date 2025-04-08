@@ -33,6 +33,23 @@
       "message": "Please refer to https://android-review.googlesource.com/c/kernel/common/+/3309655/4, please help to review the code as soon as possible, thank you",
       "revId": "00290ca0a6d6870a3f01b5efe77eef8fe5720bcb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897acf04_831f342f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-04-08T15:58:36Z",
+      "side": 1,
+      "message": "This should be a cherrypick of aosp/3309655, with the same `Change-Id.`",
+      "revId": "00290ca0a6d6870a3f01b5efe77eef8fe5720bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
