@@ -259,7 +259,13 @@ $(obj)/%.lst: $(obj)/%.c FORCE
 # Compile Rust sources (.rs)
 # ---------------------------------------------------------------------------
 
+<<<<<<< HEAD   (0aa0e7 ANDROID: GKI: Add folio batch release to symbol list for qco)
 rust_allowed_features := arbitrary_self_types,asm_const,asm_goto,lint_reasons,new_uninit
+||||||| BASE
+rust_allowed_features := arbitrary_self_types,new_uninit
+=======
+rust_allowed_features := arbitrary_self_types,lint_reasons,new_uninit
+>>>>>>> BRANCH (1ef4cf rust: alloc: update module comment of alloc.rs)
 
 # `--out-dir` is required to avoid temporaries being created by `rustc` in the
 # current working directory, which may be not accessible in the out-of-tree
