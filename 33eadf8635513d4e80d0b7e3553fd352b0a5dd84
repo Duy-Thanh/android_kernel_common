@@ -52,6 +52,24 @@
       "parentUuid": "f49fa89d_8df3fbb2",
       "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74dc208b_da5bd332",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3983193
+      },
+      "writtenOn": "2025-04-08T06:54:34Z",
+      "side": 1,
+      "message": "Q: Just to clarify, the Linux LTS -stable release at 5.15.178 is missing the modifications? Or just the android-13-5.15 branch?\nA: android-13-5.15 branch\nQ: And are the changes you are submitting here matching what is present upstream?\nA: Yes, it\u0027s match with the upstream-linux-5.15.y, but I have found that actually this current submitted patch was merged before, while it was reverted because it would break Android Kernel abi, here is the relevant two commits:\nhttps://android.googlesource.com/kernel/common/+/6fcbcc6c8e52650749692c7613cbe71bf601670d\nhttps://android.googlesource.com/kernel/common/+/9a93c59edac394c175b29fcae3534d081f7f804e",
+      "parentUuid": "bcaeb9db_b0749391",
+      "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
