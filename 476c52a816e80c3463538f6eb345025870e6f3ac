@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83196aa1_1f0c167f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-08T20:17:50Z",
+      "side": 1,
+      "message": "should invoke arm_smccc_1_2_smc instead (for all 64bit opcodes or the ones which can have 64bits results)",
+      "fixSuggestions": [
+        {
+          "fixId": "7062aff4_46a21a59",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1030,
+                "startChar": 0,
+                "endLine": 1031,
+                "endChar": 0
+              },
+              "replacement": "\tarm_smccc_1_2_smc(FFA_FEATURES, FFA_FN64_RXTX_MAP,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
