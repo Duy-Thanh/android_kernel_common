@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4be5f981_b473adb8",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-04-08T15:11:07Z",
+      "side": 1,
+      "message": "is this a special value that is actually making sure that this var is not set? I thought it\u0027s just a comment",
+      "revId": "1b0777d96ba1e6b4185c124de716a79c8a96c1b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
