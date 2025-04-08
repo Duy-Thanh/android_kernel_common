@@ -78,6 +78,17 @@ DECLARE_HOOK(android_vh_ufs_transfer_rsp_status,
 	TP_PROTO(struct ufs_hba *hba, struct ufshcd_lrb *lrbp, struct cq_entry *cqe, int result),
 	TP_ARGS(hba, lrbp, cqe, result));
 
+DECLARE_HOOK(android_vh_sd_probe,
+        TP_PROTO(struct scsi_device *sdev, int *index),
+        TP_ARGS(sdev, index));
+
+DECLARE_HOOK(android_vh_scsi_add_lun_start,
+	TP_PROTO(struct scsi_device *sdev, unsigned char *inq_result, int *async),
+	TP_ARGS(sdev, inq_result, async));
+
+DECLARE_HOOK(android_vh_scsi_add_lun_done,
+        TP_PROTO(struct scsi_device *sdev, unsigned char *inq_result, int *async),
+        TP_ARGS(sdev, inq_result, async));
 #endif /* _TRACE_HOOK_UFSHCD_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

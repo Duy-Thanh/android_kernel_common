@@ -50,6 +50,9 @@
 #include "scsi_priv.h"
 #include "scsi_logging.h"
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/ufshcd.h>
+
 #define ALLOC_FAILURE_MSG	KERN_ERR "%s: Allocation failure during" \
 	" SCSI scanning, some SCSI devices might not be configured\n"
 
@@ -897,6 +900,7 @@ static int scsi_add_lun(struct scsi_device *sdev, unsigned char *inq_result,
 	 * nonetheless.  It doesn't matter if the device sent < 36 bytes
 	 * total, since scsi_probe_lun() initializes inq_result with 0s.
 	 */
+	trace_android_vh_scsi_add_lun_start(sdev, inq_result, &async);
 	sdev->inquiry = kmemdup(inq_result,
 				max_t(size_t, sdev->inquiry_len, 36),
 				GFP_KERNEL);
@@ -1122,6 +1126,7 @@ static int scsi_add_lun(struct scsi_device *sdev, unsigned char *inq_result,
 	if (!async && scsi_sysfs_add_sdev(sdev) != 0)
 		return SCSI_SCAN_NO_RESPONSE;
 
+	trace_android_vh_scsi_add_lun_done(sdev, inq_result, &async);
 	return SCSI_SCAN_LUN_PRESENT;
 }
 
