@@ -16,6 +16,24 @@
       "message": "I think you should split this into two CLs. Moving the host away from ID 0 is an important fix by itself.",
       "revId": "46a578a4e0d2d4318d96f29c80b00d7fe695d6b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecf6e38b_8ddf20d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-09T18:03:03Z",
+      "side": 1,
+      "message": "I did this in this CL do enforce the direct message `endp` verification.",
+      "parentUuid": "7abc8429_46f0867c",
+      "revId": "46a578a4e0d2d4318d96f29c80b00d7fe695d6b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

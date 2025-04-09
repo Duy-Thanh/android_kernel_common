@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52ce089f_3c6dab56",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-09T18:03:03Z",
+      "side": 1,
+      "message": "I can remove it, no hard feeling about it 😊",
+      "parentUuid": "d66bbb8c_95739856",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "c7520ca9066fbccb03e2ffeb96a338f8b54a0376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05283c90_704fb51f",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 11
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-11T16:46:18Z",
       "side": 1,
       "message": "Might be worth a BUILD_BUG_ON() to check that `KVM_MAX_PVMS` can\u0027t get large enough for this to overflow and wrap back to 0. iirc, the FFA IDs are 16 bits.",
+      "range": {
+        "startLine": 46,
+        "startChar": 90,
+        "endLine": 46,
+        "endChar": 91
+      },
+      "revId": "c7520ca9066fbccb03e2ffeb96a338f8b54a0376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2685df_90c2e2f5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-09T18:03:03Z",
+      "side": 1,
+      "message": "Good point, let me add this.",
+      "parentUuid": "05283c90_704fb51f",
       "range": {
         "startLine": 46,
         "startChar": 90,
