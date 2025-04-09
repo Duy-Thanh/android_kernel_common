@@ -16,6 +16,24 @@
       "message": "One simple fix for the missed host notification would be send the creation notification here (maybe with an assert that `vm_handle \u003d\u003d HOST_FFA_ID`).",
       "revId": "7a5f99f8411cece41b16b1793e0a9aff692120b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "917e3867_fed036bf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T00:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a718c209_0f094301",
+      "revId": "7a5f99f8411cece41b16b1793e0a9aff692120b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

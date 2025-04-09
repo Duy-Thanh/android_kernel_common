@@ -94,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b809bd8_e373449d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T00:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2631f8d_2daf49ed",
+      "range": {
+        "startLine": 354,
+        "startChar": 3,
+        "endLine": 354,
+        "endChar": 9
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74cde934_2e25ae5e",
@@ -237,6 +261,30 @@
       "side": 1,
       "message": "I see. So it sounds like this should be moved to the VM finalisation code (on first run?).",
       "parentUuid": "146325ce_277ba84d",
+      "range": {
+        "startLine": 384,
+        "startChar": 7,
+        "endLine": 384,
+        "endChar": 10
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ea267b_f5c16609",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T00:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89e660cc_928d36dd",
       "range": {
         "startLine": 384,
         "startChar": 7,
@@ -405,6 +453,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b41c9870_2981bb37",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T00:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46f849d6_a153b9fd",
+      "range": {
+        "startLine": 1343,
+        "startChar": 7,
+        "endLine": 1343,
+        "endChar": 33
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b9ff779_f397d435",
@@ -508,6 +580,24 @@
       "side": 1,
       "message": "I made https://r.android.com/3509866 for my own testing, feel free to squash it here.",
       "parentUuid": "3f856b3a_2e6b3cbe",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "886940e7_00609a1f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T00:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4c1ebdb_990b61e0",
       "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
