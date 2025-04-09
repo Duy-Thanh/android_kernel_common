@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a341eb2_28b3ca6f",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 3609906
+      },
+      "writtenOn": "2025-04-09T08:35:41Z",
+      "side": 1,
+      "message": "Yes, this is actually how you disable a symbol in a config file. NB: This was done by running menuconfig, disabling CFI_AUTO_DEFAULT, and saving the configuration.",
+      "parentUuid": "4be5f981_b473adb8",
+      "revId": "1b0777d96ba1e6b4185c124de716a79c8a96c1b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5450a073_19e96c52",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-08T15:11:41Z",
       "side": 1,
       "message": "pls address `Kernel Upstream Divergence Tracking` linter",
+      "revId": "1b0777d96ba1e6b4185c124de716a79c8a96c1b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e064c0f_adeb8975",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3609906
+      },
+      "writtenOn": "2025-04-09T08:35:41Z",
+      "side": 1,
+      "message": "I\u0027ve added the 6284861 hotlist to the tracking bug.",
+      "parentUuid": "5450a073_19e96c52",
       "revId": "1b0777d96ba1e6b4185c124de716a79c8a96c1b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
