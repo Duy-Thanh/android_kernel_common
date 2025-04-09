@@ -451,6 +451,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_kcompactd_cpu_online);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
+<<<<<<< PATCH SET (b03fd1 ANDROID: vendor_hooks: add hook to record binder transaction)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_init_binder_logs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_data_preset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_record);
+||||||| BASE
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_cycle_end);
+>>>>>>> BASE      (9ffdb9 UPSTREAM: bpf: support SKF_NET_OFF and SKF_LL_OFF on skb fra)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bd_link_disk_holder);
