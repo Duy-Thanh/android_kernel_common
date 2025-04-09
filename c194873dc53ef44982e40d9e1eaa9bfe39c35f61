@@ -16,6 +16,24 @@
       "message": "Symbol needs to be added to your symbol list",
       "revId": "c194873dc53ef44982e40d9e1eaa9bfe39c35f61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e930160e_29e4cf19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3440420
+      },
+      "writtenOn": "2025-04-09T00:52:10Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/3579914 Added the symbols change. Can you pls help review the change.",
+      "parentUuid": "2a6c5d8f_a0ec7892",
+      "revId": "c194873dc53ef44982e40d9e1eaa9bfe39c35f61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
