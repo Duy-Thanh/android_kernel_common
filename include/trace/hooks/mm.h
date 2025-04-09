@@ -225,6 +225,9 @@ DECLARE_HOOK(android_vh_filemap_fault_start,
 DECLARE_HOOK(android_vh_filemap_fault_end,
 	TP_PROTO(struct file *file, pgoff_t pgoff),
 	TP_ARGS(file, pgoff));
+DECLARE_HOOK(android_vh_adjust_swap_info_flags,
+	TP_PROTO(unsigned long *flags),
+	TP_ARGS(flags));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
