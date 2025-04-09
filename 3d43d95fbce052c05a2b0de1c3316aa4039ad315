@@ -16,6 +16,24 @@
       "message": "Here is one way we could get rid of this structure, as well as `vm_avail_bitmap`:\n* We call `FFA_PARTITION_INFO_GET` every time at the start of `kvm_notify_vm_availability`\n* Before iterating through the SPs, sort them by `sp_id`\n* Instead of `vm_avail_bitmap`, we keep track of `last_notified_sp_id` which is the ID of the highest notified SP (since we\u0027re iterating them in increasing order of ID)\n* When a notification gets interrupted, we store `last_notified_sp_id` and return; the next time the function gets called, we skip to where we last left off.\n\nWe can also use that same index for destruction notifications by going in reverse order (notify from highest to lowest), and stop when we get to zero.\n\nIt\u0027s a bit more complicated than what we currently have, and we\u0027d need a sorting function. Is it worth it?",
       "revId": "3d43d95fbce052c05a2b0de1c3316aa4039ad315",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efdb40cb_5aa6979c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 43
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T20:13:12Z",
+      "side": 1,
+      "message": "More ideas from discussion with @arve@android.com:\n* Even if we call `PARTITION_INFO_GET` from the notification function, we could still do it 8 at a time, and maybe cache it across calls\n* We could parallelize the process a bit: notify all pending SPs first, then return and retry if at least one of them was busy\n* Add a test (when we get Hafnium running) with more SPs (e.g. 9)",
+      "parentUuid": "6bafc8df_1f996b96",
+      "revId": "3d43d95fbce052c05a2b0de1c3316aa4039ad315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
