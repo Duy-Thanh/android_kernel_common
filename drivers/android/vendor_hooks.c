@@ -88,3 +88,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
+<<<<<<< PATCH SET (3d46a9a364bf272f946922990992780123ac2da8 ANDROID: mm: Add vendor hook in swapon())
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_swap_info_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_pcplist_override_batch);
+||||||| BASE      (6430a1bc6edd1d5e65fb1a09d6b36996ecfce076 ANDROID: mm: Add vendor hook before rmqueue_bulk)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_pcplist_override_batch);
+=======
+>>>>>>> BASE      (eb5e5c1f626e74ce56890b491edb90a1d11a7ea7 ANDROID: gki_defconfig: Enable Tegra SoCs)
