@@ -22,6 +22,30 @@
       },
       "revId": "204b2a6da42d03512c7c6f595a176d41c4157be5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b4c83a_96e8ea61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2025-04-09T07:27:25Z",
+      "side": 1,
+      "message": "Fixed(add missing signed off)",
+      "parentUuid": "075a1221_04894432",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 0
+      },
+      "revId": "204b2a6da42d03512c7c6f595a176d41c4157be5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
