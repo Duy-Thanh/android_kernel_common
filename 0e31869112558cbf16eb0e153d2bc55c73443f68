@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f69e01e_b19e1807",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T01:46:50Z",
+      "side": 1,
+      "message": "What do you mean here?",
+      "parentUuid": "5f2afc2a_43bc85ff",
+      "range": {
+        "startLine": 352,
+        "startChar": 6,
+        "endLine": 352,
+        "endChar": 10
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a895668a_d109d47a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
@@ -367,6 +391,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0163a976_ca9ced74",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T01:46:50Z",
+      "side": 1,
+      "message": "It\u0027s not safe, but I\u0027m not sure how to handle an arbitrary SP count. Can we allocate anything in the hypervisor?",
+      "parentUuid": "194ffc19_3f94a322",
+      "range": {
+        "startLine": 1170,
+        "startChar": 53,
+        "endLine": 1170,
+        "endChar": 78
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "050529f5_c6d975aa",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
@@ -450,6 +498,24 @@
       "side": 1,
       "message": "An update from the Trusty end: it now requires both creation and destruction messages, but IMHO the partial case should still be supported (for other TEEs).",
       "parentUuid": "d41d5113_0c5d8ff1",
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4816025e_8e323594",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T01:46:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "429d0e7b_d91483d2",
       "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
