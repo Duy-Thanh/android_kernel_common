@@ -160,6 +160,24 @@
       "parentUuid": "3ea025dd_74913142",
       "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0a6e184_b2f7f633",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-09T17:58:08Z",
+      "side": 1,
+      "message": "Originally I posted the series to support both(as the spec is confusingly guiding us) and the feedback that I received was to support only hvc. I suggest opening a ticket and adding Will, Quentin \u0026 me where we can debate and if we decide we need it we can land it as a bugfix later on.",
+      "parentUuid": "6e60d3c6_5aedeac3",
+      "revId": "a1642c2dc6a6a5ec66857b4cecff9429bdfe5bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

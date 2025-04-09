@@ -50,6 +50,30 @@
       ],
       "revId": "bc2b29f5490b52b594edae32c0f00244fb486e87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67ee9c49_dabb83fc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-09T17:58:08Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this with the new re-write, I\u0027ll close it but feel free to re-open if you need it.",
+      "parentUuid": "dad84e63_550cac68",
+      "range": {
+        "startLine": 1739,
+        "startChar": 6,
+        "endLine": 1739,
+        "endChar": 17
+      },
+      "revId": "bc2b29f5490b52b594edae32c0f00244fb486e87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

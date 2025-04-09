@@ -16,6 +16,24 @@
       "message": "I don\u0027t follow this arguemnt. Who is putting the hvc conduit into the device tree? If the smc conduit is in the device tree instead, would that not require support for the smc conduit here for a linux guest as well?",
       "revId": "a4f4862d1f4c7c23c49d250d99dc354088e5b0ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2de7ac50_a45939e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-09T17:58:08Z",
+      "side": 1,
+      "message": "the VMM when it creates the guest device tree, in our case crosvm.",
+      "parentUuid": "2072f4f8_9130eb0c",
+      "revId": "a4f4862d1f4c7c23c49d250d99dc354088e5b0ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
