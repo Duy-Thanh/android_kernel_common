@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af649349_ab284032",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-09T13:10:53Z",
+      "side": 1,
+      "message": "`pkvm_get_guest_pa_request()` already sets this so we should probably be consistent about whether or not it\u0027s done in the caller (i.e. here) or at the point of queuing \nthe request.\n\nPersonally, I prefer doing it here as you can then avoid propagating the `exit_code` pointer.",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 260,
+        "endChar": 35
+      },
+      "revId": "bfffc1d3b7e65fe2b66f4bf1d84060a0b1da7a86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
