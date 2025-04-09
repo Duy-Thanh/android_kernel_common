@@ -70,6 +70,30 @@
       },
       "revId": "8a592ae8e8286315c7bf97bbc8cd2f8307f134cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81dcdb45_6056478c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-09T17:51:12Z",
+      "side": 1,
+      "message": "We need this to be able to probe the ARM FF-A driver inside a Linux guest (eg. Microdroid). This setup is used currently in the CI to run the tipc-tests in qemu using trusty in the secure world and an aosp image in non-secure with AVF. With this I can test-run my entire guest-ffa stack series.",
+      "parentUuid": "f297cbbb_6e33a3ce",
+      "range": {
+        "startLine": 18,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "8a592ae8e8286315c7bf97bbc8cd2f8307f134cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
