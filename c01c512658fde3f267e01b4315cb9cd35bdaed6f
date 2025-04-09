@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f7d6fd2_8c55210a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-04-09T19:33:05Z",
+      "side": 1,
+      "message": "Yeah, please preserve the commit messages from the original patch, rather than combining and submitting them like this.\n\n(though you can still add extra context to the end of the original commit message, providing rationale and links to the bugs as you have done here)",
+      "revId": "c01c512658fde3f267e01b4315cb9cd35bdaed6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0bffd221_c9904410",
