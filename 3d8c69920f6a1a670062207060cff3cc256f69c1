@@ -51,6 +51,24 @@
       "message": "I think you need a state similar to is_dying to prevent other calls to get_pkvm_hyp_vm from succeeding until kvm_ffa_notify_vm_creation has succeeded. A malicious host should not be able to start a vm and bypass the vm creation messages.",
       "revId": "3d8c69920f6a1a670062207060cff3cc256f69c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15e7ba4_d8500700",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-09T02:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24e55679_fbb2c6fb",
+      "revId": "3d8c69920f6a1a670062207060cff3cc256f69c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
