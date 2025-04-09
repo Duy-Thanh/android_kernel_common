@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3def2d2b_8d739655",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-04-09T16:22:03Z",
+      "side": 1,
+      "message": "You\u0027ll need to all the `__tracepoint` and `__traceiter` symbols to your symbol list and update the abi to be able to use the vendor hook. \n\nPlease add it as a separate patch in this series.",
+      "revId": "0f8ae50e881d998fa8ac70d9b17958cdfaa7ea62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
