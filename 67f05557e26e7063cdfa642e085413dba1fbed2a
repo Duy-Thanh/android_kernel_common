@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fcbe928_d58e51ba",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-09T09:47:54Z",
+      "side": 1,
+      "message": "Ah, that\u0027s cleaner, I updated the patch.",
+      "parentUuid": "044c4345_ac96cfa3",
+      "range": {
+        "startLine": 224,
+        "startChar": 5,
+        "endLine": 224,
+        "endChar": 19
+      },
+      "revId": "67f05557e26e7063cdfa642e085413dba1fbed2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6c466b6_64b95f09",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "debd0d3c_1e6a777c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-09T09:47:54Z",
+      "side": 1,
+      "message": "I missed that, I removed the ELR reply part, and now return to the host with the an updated guest state.",
+      "parentUuid": "c6c466b6_64b95f09",
+      "range": {
+        "startLine": 232,
+        "startChar": 8,
+        "endLine": 232,
+        "endChar": 41
+      },
+      "revId": "67f05557e26e7063cdfa642e085413dba1fbed2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "625ce263_c41d68ff",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-04-08T17:43:34Z",
       "side": 1,
       "message": "I think you can remove this part of the comment; it confused me as I was trying to work out why an irq would cause a problem, but you\u0027re just pointing out that it\u0027s ok.",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 0
+      },
+      "revId": "67f05557e26e7063cdfa642e085413dba1fbed2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4715f58_ca29739a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-04-09T09:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "625ce263_c41d68ff",
       "range": {
         "startLine": 246,
         "startChar": 0,
