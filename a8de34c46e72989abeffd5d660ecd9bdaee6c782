@@ -16,6 +16,24 @@
       "message": "Hi kuyo,\n\nWhy not cherrypick the util_est? Dietmar has reviewed and there is no other discussion.\n\nThanks!",
       "revId": "a8de34c46e72989abeffd5d660ecd9bdaee6c782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e65362_9ca13e7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2025-04-09T13:37:58Z",
+      "side": 1,
+      "message": "Actually, we encountered the uclamp issue which caused a performance drop. \nBy just applying the uclamp patch, the performance improved. \nIn my opinion, maybe we should split the patch into two series: one for uclamp and another for util_est. It may be easier to review and address the problem. \nOr if you think it should be included in only one patch.\nBy the way, should we ping Dietmar for the upstream plan? \nAgain, thank you so much for this patch.",
+      "parentUuid": "5b743ea4_99490842",
+      "revId": "a8de34c46e72989abeffd5d660ecd9bdaee6c782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
