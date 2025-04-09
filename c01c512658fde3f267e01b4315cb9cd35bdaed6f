@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bffd221_c9904410",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-04-09T14:23:34Z",
+      "side": 1,
+      "message": "This should be properly formatted as a FROMLIST patch at the minimum, but please work upstream to add your \"tested by\" on the upstream patch to help the author get that patch merged.\n\nIdeally this patch gets merged into a maintainer\u0027s tree and can be submitted as a FROMGIT or UPSTREAM patchset.",
+      "revId": "c01c512658fde3f267e01b4315cb9cd35bdaed6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
