@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc7f9275_0be91123",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-04-09T19:35:43Z",
+      "side": 1,
+      "message": "As Will noted, this needs a bug entry for an open respin request bug.\n\nPlease fix this ERROR reported by KernelCommit: Please **attach an open respin request bug** to this change. Refer the following link for more information:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nPlease **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "d7cb1d49fc13fe3b621cfe0fe1aa63860e74b209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db06a5d1_410cbedd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
