@@ -70,6 +70,24 @@
       "parentUuid": "bcaeb9db_b0749391",
       "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66a08eff_3a61bede",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3983193
+      },
+      "writtenOn": "2025-04-09T05:23:29Z",
+      "side": 1,
+      "message": "Hi John, if the current submitted code would breaks the Android kernel ABI rules, then could we revert the changes made to the hrtimer module by android13-5.15-2025-03_r1, at least to esure that the stability issues involved do not occur? Or is there a better way?",
+      "parentUuid": "74dc208b_da5bd332",
+      "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
