@@ -50,6 +50,41 @@
       "message": "This should be a cherrypick of aosp/3309655, with the same `Change-Id.`",
       "revId": "00290ca0a6d6870a3f01b5efe77eef8fe5720bcb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d929d049_0b605650",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2006455
+      },
+      "writtenOn": "2025-04-09T02:47:49Z",
+      "side": 1,
+      "message": "done",
+      "revId": "00290ca0a6d6870a3f01b5efe77eef8fe5720bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "543dc55b_f55e6d86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2006455
+      },
+      "writtenOn": "2025-04-09T02:47:49Z",
+      "side": 1,
+      "message": "the cherrypick of aosp/3309655 with the same Change-Id is : https://android-review.googlesource.com/c/kernel/common/+/3581011",
+      "parentUuid": "897acf04_831f342f",
+      "revId": "00290ca0a6d6870a3f01b5efe77eef8fe5720bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
