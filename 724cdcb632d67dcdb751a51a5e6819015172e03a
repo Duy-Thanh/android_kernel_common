@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e882353c_e4b091df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-10T09:34:47Z",
+      "side": 1,
+      "message": "Please review the code submission guidelines.\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12/README.md\n\nThis should probably be an UPSTREAM tagged change.\n\nWhen you push a new version for review, please preserve the Change-Id line from this change.",
+      "revId": "724cdcb632d67dcdb751a51a5e6819015172e03a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
