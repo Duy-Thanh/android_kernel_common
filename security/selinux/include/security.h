@@ -204,6 +204,7 @@ static inline bool selinux_policycap_netlink_xperm(void)
 		selinux_state.policycap[POLICYDB_CAP_NETLINK_XPERM]);
 }
 
+<<<<<<< HEAD   (b76288 Merge 054570267d23 ("Merge tag 'lsm-pr-20250323' of git://gi)
 static inline bool selinux_android_nlroute_getlink(void)
 {
 	return READ_ONCE(selinux_state.android_netlink_route);
@@ -212,6 +213,13 @@ static inline bool selinux_android_nlroute_getlink(void)
 static inline bool selinux_android_nlroute_getneigh(void)
 {
 	return READ_ONCE(selinux_state.android_netlink_getneigh);
+||||||| BASE
+=======
+static inline bool selinux_policycap_netif_wildcard(void)
+{
+	return READ_ONCE(
+		selinux_state.policycap[POLICYDB_CAP_NETIF_WILDCARD]);
+>>>>>>> BRANCH (59c017 Merge tag 'selinux-pr-20250323' of git://git.kernel.org/pub/)
 }
 
 struct selinux_policy_convert_data;
@@ -313,7 +321,7 @@ int security_ib_pkey_sid(u64 subnet_prefix, u16 pkey_num, u32 *out_sid);
 
 int security_ib_endport_sid(const char *dev_name, u8 port_num, u32 *out_sid);
 
-int security_netif_sid(char *name, u32 *if_sid);
+int security_netif_sid(const char *name, u32 *if_sid);
 
 int security_node_sid(u16 domain, void *addr, u32 addrlen, u32 *out_sid);
 
