@@ -5425,7 +5425,7 @@ static int scx_ops_enable(struct sched_ext_ops *ops, struct bpf_link *link)
 	mutex_unlock(&scx_ops_enable_mutex);
 
 	atomic_long_inc(&scx_enable_seq);
-
+	add_taint(TAINT_GKI_UNSUPPORTED, LOCKDEP_STILL_OK);
 	return 0;
 
 err_del:
