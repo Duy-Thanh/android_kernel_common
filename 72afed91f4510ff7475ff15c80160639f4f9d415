@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17eeedac_0fa364c6",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-04-10T08:59:54Z",
+      "side": 1,
+      "message": "No, it should be enabled at hyp too. It is enabled explicitly actually (we take the mpstate from the host).",
+      "parentUuid": "aa9d6207_d290752b",
+      "range": {
+        "startLine": 1460,
+        "startChar": 1,
+        "endLine": 1460,
+        "endChar": 44
+      },
+      "revId": "72afed91f4510ff7475ff15c80160639f4f9d415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a9df7f6_3dc92580",
@@ -81,6 +105,30 @@
           ]
         }
       ],
+      "revId": "72afed91f4510ff7475ff15c80160639f4f9d415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3b83b2_e78ea4db",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-04-10T08:59:54Z",
+      "side": 1,
+      "message": "No, not intentional. The fix to both is not to duplicate code.",
+      "parentUuid": "6a9df7f6_3dc92580",
+      "range": {
+        "startLine": 1474,
+        "startChar": 1,
+        "endLine": 1478,
+        "endChar": 2
+      },
       "revId": "72afed91f4510ff7475ff15c80160639f4f9d415",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
