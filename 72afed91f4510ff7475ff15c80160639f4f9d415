@@ -1,0 +1,88 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9d6207_d290752b",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-10T07:50:34Z",
+      "side": 1,
+      "message": "I don\u0027t see this being enabled at EL2\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12/arch/arm64/kvm/hyp/nvhe/pkvm.c#443\n\nIs this expected?",
+      "range": {
+        "startLine": 1460,
+        "startChar": 1,
+        "endLine": 1460,
+        "endChar": 44
+      },
+      "revId": "72afed91f4510ff7475ff15c80160639f4f9d415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a9df7f6_3dc92580",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-10T07:50:34Z",
+      "side": 1,
+      "message": "EL2 seems to look at the two PTRAUTH caps separately, any reason to do it differently here?",
+      "range": {
+        "startLine": 1474,
+        "startChar": 1,
+        "endLine": 1478,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "16fc989c_94e6cede",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/arm.c",
+              "range": {
+                "startLine": 413,
+                "startChar": 0,
+                "endLine": 414,
+                "endChar": 0
+              },
+              "replacement": "\t\tr \u003d BIT(0); /* Only one range supported */\n"
+            },
+            {
+              "path": "arch/arm64/kvm/arm.c",
+              "range": {
+                "startLine": 1474,
+                "startChar": 0,
+                "endLine": 1474,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * EL2 looks at the KVM_CAP_ARM_PTRAUTH_ADDRESS and\n\t * KVM_CAP_ARM_PTRAUTH_GENERIC capabilities independently, so\n\t * we don\u0027t need to check both here.\n\t */\n"
+            },
+            {
+              "path": "arch/arm64/kvm/arm.c",
+              "range": {
+                "startLine": 1511,
+                "startChar": 0,
+                "endLine": 1511,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * EL2 looks at the KVM_CAP_ARM_PTRAUTH_ADDRESS and\n\t * KVM_CAP_ARM_PTRAUTH_GENERIC capabilities independently, so\n\t * we don\u0027t need to check both here.\n\t */\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "72afed91f4510ff7475ff15c80160639f4f9d415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
