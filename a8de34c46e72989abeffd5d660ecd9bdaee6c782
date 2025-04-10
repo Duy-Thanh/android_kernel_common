@@ -70,6 +70,24 @@
       "parentUuid": "e94ecac9_d7f9c6bf",
       "revId": "a8de34c46e72989abeffd5d660ecd9bdaee6c782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f533d53_b95cf91e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2025-04-10T04:15:40Z",
+      "side": 1,
+      "message": "Thanks for your suggestion. I have updated the patchset to version #3 and added a reviewer\nReviewed-by: Dietmar Eggemann \u003cdietmar.eggemann@arm.com\u003e",
+      "parentUuid": "159ce078_e8346ce6",
+      "revId": "a8de34c46e72989abeffd5d660ecd9bdaee6c782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
