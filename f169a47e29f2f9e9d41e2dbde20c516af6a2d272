@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beac83bc_3a93a111",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-10T22:57:48Z",
+      "side": 1,
+      "message": "Why is this function freeing the padding vma? show_map_pad_vma() should not be doing that. The caller which allocated it should free it.",
+      "range": {
+        "startLine": 349,
+        "startChar": 1,
+        "endLine": 349,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5f37d5ff_23850e79",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 314,
+                "startChar": 0,
+                "endLine": 316,
+                "endChar": 0
+              },
+              "replacement": " * Calls the show_pad_vma_fn on the @pad VMA.\n"
+            },
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 348,
+                "startChar": 0,
+                "endLine": 350,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f169a47e29f2f9e9d41e2dbde20c516af6a2d272",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
