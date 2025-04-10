@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b6e1676_a3871e08",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-04-10T18:16:55Z",
+      "side": 1,
+      "message": "why when there is not padding, it should be counted as shmem_swapped\n?",
+      "range": {
+        "startLine": 818,
+        "startChar": 5,
+        "endLine": 818,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "27673ed5_99ad174a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/task_mmu.c",
+              "range": {
+                "startLine": 816,
+                "startChar": 0,
+                "endLine": 816,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * If the VMA is not padded, then the whole VMA is covered by\n\t\t * the shmem object, so we can use the shmem_swap_usage()\n\t\t * directly.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "83b6a99889d7e9868d6c382698cb356c9db1a0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
