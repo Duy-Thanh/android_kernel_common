@@ -150,6 +150,8 @@ define_common_kernels(target_configs = {
         "kmi_symbol_list_strict_mode": True,
         "kmi_symbol_list": "android/abi_gki_aarch64",
         "additional_kmi_symbol_lists": [":aarch64_additional_kmi_symbol_lists"],
+        "clang_autofdo_profile": "//common:kernel.afdo",
+        "defconfig_fragments": ["arch/arm64/configs/autofdo_gki.fragment"],
         "trim_nonlisted_kmi": True,
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
         "protected_modules_list": ":gki_aarch64_protected_modules",
