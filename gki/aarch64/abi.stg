@@ -93878,6 +93878,12 @@ member {
   offset: 60800
 }
 member {
+  id: 0xd0c54128
+  name: "ffa_support"
+  type_id: 0xc9082b19
+  offset: 544
+}
+member {
   id: 0x94cea1dd
   name: "ffbit"
   type_id: 0x607419c2
@@ -259962,6 +259968,7 @@ struct_union {
     member_id: 0x0345f821
     member_id: 0x0f7f647b
     member_id: 0x3a2d35a4
+    member_id: 0xd0c54128
   }
 }
 struct_union {
