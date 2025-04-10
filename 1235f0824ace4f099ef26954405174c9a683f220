@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1131bd9_8fb143d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-04-10T09:17:58Z",
+      "side": 1,
+      "message": "This patch does change hyp behavior in theory, since the PAuth types\nmust both be supported, but the host was already enforcing that.\nAdditionally, hyp now explicitly allows KVM_ARM_VCPU_POWER_OFF, but that\nwas allowed in practice earlier.",
+      "revId": "1235f0824ace4f099ef26954405174c9a683f220",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
