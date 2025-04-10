@@ -16,6 +16,29 @@
       "message": "conflicts with change 3278991.",
       "revId": "b7bebb4a3445d810e187cae45e78b43ddf587d22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48527995_5e057180",
+        "filename": "tools/testing/selftests/timers/posix_timers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-10T04:50:53Z",
+      "side": 1,
+      "message": "this seems incorrect. Upstream seems to have added one more test 18 -\u003e 19. So we have to go from 14 -\u003e 15. As this is breaks the `kselftest_timers_posix_timers`:\n```\n# Testing posix timers. False negative may happen on CPU execution \n# based timers if other threads run on the CPU...\nok 1 check timer create exact\nok 2 ITIMER_VIRTUAL\nok 3 ITIMER_PROF\nok 4 ITIMER_REAL\nok 5 timer_create() per CLOCK_THREAD_CPUTIME_ID\nok 6 timer_create() per CLOCK_PROCESS_CPUTIME_ID\nok 7 check signal distribution\nok 8 check_sigev_none CLOCK_MONOTONIC\nok 9 check_sigev_none CLOCK_PROCESS_CPUTIME_ID\nok 10 check_gettime CLOCK_MONOTONIC\nok 11 check_gettime CLOCK_PROCESS_CPUTIME_ID\nok 12 check_gettime CLOCK_THREAD_CPUTIME_ID\nok 13 check_overrun CLOCK_MONOTONIC\nok 14 check_overrun CLOCK_PROCESS_CPUTIME_ID\nok 15 check_overrun CLOCK_THREAD_CPUTIME_ID\n# Planned tests !\u003d run tests (14 !\u003d 15)\n# Totals: pass:15 fail:0 xfail:0 xpass:0 skip:0 error:0\n```\n\nI\u0027ll fix this.",
+      "range": {
+        "startLine": 674,
+        "startChar": 17,
+        "endLine": 674,
+        "endChar": 18
+      },
+      "revId": "b7bebb4a3445d810e187cae45e78b43ddf587d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
