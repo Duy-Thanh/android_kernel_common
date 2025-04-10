@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6fa5763_6d5557e0",
+        "filename": "drivers/ufs/core/ufs_trace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-04-10T16:57:20Z",
+      "side": 1,
+      "message": "Hi Peter, I am seeing hba being passed and assigned but not used in this tracepoint. Is it necessary if we are getting dev_name from `sdev-\u003esdev_dev`?",
+      "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
