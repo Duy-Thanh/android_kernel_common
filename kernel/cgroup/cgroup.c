@@ -2345,6 +2345,7 @@ static struct file_system_type cgroup2_fs_type = {
 static const struct fs_context_operations cpuset_fs_context_ops = {
 	.get_tree	= cgroup1_get_tree,
 	.free		= cgroup_fs_context_free,
+	.parse_param	= cgroup1_parse_param,
 };
 
 /*
@@ -2381,6 +2382,7 @@ static int cpuset_init_fs_context(struct fs_context *fc)
 static struct file_system_type cpuset_fs_type = {
 	.name			= "cpuset",
 	.init_fs_context	= cpuset_init_fs_context,
+	.parameters		= cgroup1_fs_parameters,
 	.fs_flags		= FS_USERNS_MOUNT,
 };
 #endif
