@@ -70,6 +70,24 @@
       "parentUuid": "833493de_da2086bf",
       "revId": "3ea4e1b52d6b164e2c2b0ead7fd4c23f913ac616",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56325adb_aecb5f21",
+        "filename": "arch/x86/kernel/devicetree.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-04-10T20:25:50Z",
+      "side": 1,
+      "message": "Backport `of/fdt: Scan the root node properties earlier` as part of aosp/3583453",
+      "parentUuid": "ef15f0ac_bee8bd9d",
+      "revId": "3ea4e1b52d6b164e2c2b0ead7fd4c23f913ac616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
