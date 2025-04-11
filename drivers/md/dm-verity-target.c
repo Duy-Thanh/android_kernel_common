@@ -770,13 +770,11 @@ static void verity_end_io(struct bio *bio)
 	}
 
 	if (static_branch_unlikely(&use_bh_wq_enabled) && io->v->use_bh_wq &&
-		verity_use_bh(bytes, ioprio)) {
-		if (in_hardirq() || irqs_disabled()) {
-			INIT_WORK(&io->bh_work, verity_bh_work);
-			queue_work(system_bh_wq, &io->bh_work);
-		} else {
-			verity_bh_work(&io->bh_work);
-		}
+		verity_use_bh(bytes, ioprio) &&
+!		need_resched() &&
+!		in_hardirq() &&
+!		irqs_disabled()) {
+		verity_bh_work(&io->bh_work);
 	} else {
 		INIT_WORK(&io->work, verity_work);
 		queue_work(io->v->verify_wq, &io->work);
