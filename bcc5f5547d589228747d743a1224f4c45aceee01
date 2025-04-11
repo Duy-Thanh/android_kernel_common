@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46dd98e8_c56fb922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-11T02:01:37Z",
+      "side": 1,
+      "message": "why does this need to be \"\u003dy\"? You can build it as a vendor module.",
+      "revId": "bcc5f5547d589228747d743a1224f4c45aceee01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
