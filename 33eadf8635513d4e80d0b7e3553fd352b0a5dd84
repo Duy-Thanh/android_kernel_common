@@ -106,6 +106,24 @@
       "parentUuid": "66a08eff_3a61bede",
       "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b811d4_8a8b419a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-04-11T08:01:30Z",
+      "side": 1,
+      "message": "Please submit the needed commits that are upstream, in the proper format, in a series that does NOT break the ABI and we will be glad to review them.  Doing it this way, as an `ANDROID:` patch is not correct.\n\nI will mark this as abandoned, same for the other link you have above, as this is not the correct process to follow.",
+      "parentUuid": "fcf923dd_5ce0cbbf",
+      "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
