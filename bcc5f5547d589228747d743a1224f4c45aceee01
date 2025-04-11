@@ -16,6 +16,24 @@
       "message": "why does this need to be \"\u003dy\"? You can build it as a vendor module.",
       "revId": "bcc5f5547d589228747d743a1224f4c45aceee01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff07112_5fd48f96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3450567
+      },
+      "writtenOn": "2025-04-11T03:17:23Z",
+      "side": 1,
+      "message": "We see these CONFIG_NET_CLS_ config are all set to \"y\" in gki_defconfig, so we are trying to keep the same with them.\n\ngki_defconfig:266: CONFIG_NET_CLS_BASIC\u003dy\ngki_defconfig:267: CONFIG_NET_CLS_FW\u003dy\ngki_defconfig:268: CONFIG_NET_CLS_U32\u003dy\ngki_defconfig:270: CONFIG_NET_CLS_FLOW\u003dy\ngki_defconfig:271: CONFIG_NET_CLS_BPF\u003dy\ngki_defconfig:272: CONFIG_NET_CLS_MATCHALL\u003dy\ngki_defconfig:279: CONFIG_NET_CLS_ACT\u003dy",
+      "parentUuid": "46dd98e8_c56fb922",
+      "revId": "bcc5f5547d589228747d743a1224f4c45aceee01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
