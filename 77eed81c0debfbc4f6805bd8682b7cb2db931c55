@@ -93,6 +93,24 @@
       "parentUuid": "522f7884_acf36394",
       "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526cad99_42d1a832",
+        "filename": "drivers/ufs/core/ufs_trace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-04-11T16:10:35Z",
+      "side": 1,
+      "message": "Sandeep, feedback on the upstream code should be posted on the appropriate upstream mailing list (linux-scsi). I will mark this comment as resolved since as far as I can see this patch is a backport of what has been merged upstream.",
+      "parentUuid": "9eb0ba6f_249f856e",
+      "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
