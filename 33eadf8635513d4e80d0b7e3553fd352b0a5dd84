@@ -88,6 +88,24 @@
       "parentUuid": "74dc208b_da5bd332",
       "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf923dd_5ce0cbbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3983193
+      },
+      "writtenOn": "2025-04-11T06:42:39Z",
+      "side": 1,
+      "message": "Hi John, due to the current submitted code will break the KABI, we have reload a new submission for reverting the hrtimer module by android13-5.15-2025-03_r1 in commit 15b453db41d36184cf0ccc21e7df624014ab6a1a\nThe new submission link is:\nhttps://android-review.googlesource.com/c/kernel/common/+/3584091",
+      "parentUuid": "66a08eff_3a61bede",
+      "revId": "33eadf8635513d4e80d0b7e3553fd352b0a5dd84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
