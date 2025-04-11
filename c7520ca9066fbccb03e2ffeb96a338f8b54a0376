@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9747a6c0_317600f7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-11T14:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ce089f_3c6dab56",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "c7520ca9066fbccb03e2ffeb96a338f8b54a0376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05283c90_704fb51f",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Good point, let me add this.",
       "parentUuid": "05283c90_704fb51f",
+      "range": {
+        "startLine": 46,
+        "startChar": 90,
+        "endLine": 46,
+        "endChar": 91
+      },
+      "revId": "c7520ca9066fbccb03e2ffeb96a338f8b54a0376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "852fd74d_3b753bb5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-11T14:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f2685df_90c2e2f5",
       "range": {
         "startLine": 46,
         "startChar": 90,
