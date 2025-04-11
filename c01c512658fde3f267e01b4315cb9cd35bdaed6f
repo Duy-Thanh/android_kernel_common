@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "267858a0_f29ce343",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-04-11T18:20:06Z",
+      "side": 1,
+      "message": "As noted by Carlos already, please apply the patches from the list directly as separate patches.",
+      "parentUuid": "1c33ce74_1cbb5792",
+      "revId": "c01c512658fde3f267e01b4315cb9cd35bdaed6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0bffd221_c9904410",
