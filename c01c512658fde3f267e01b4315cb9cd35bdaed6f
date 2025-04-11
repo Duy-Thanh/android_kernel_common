@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c33ce74_1cbb5792",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3934747
+      },
+      "writtenOn": "2025-04-11T07:31:27Z",
+      "side": 1,
+      "message": "Please check whether this modification is appropriate.\nAs for the issue mentioned about adding \"Tested by\" and \"Reviewed-by\" to the origin maillist patch, we will try to do this, but, to be honest, we have no experience in interacting in the mainlist before, so it may take some time to get familiar with this process.",
+      "parentUuid": "5f7d6fd2_8c55210a",
+      "revId": "c01c512658fde3f267e01b4315cb9cd35bdaed6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0bffd221_c9904410",
