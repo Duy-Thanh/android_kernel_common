@@ -4,6 +4,7 @@
 //!
 //! C header: [`include/linux/sched.h`](srctree/include/linux/sched.h).
 
+<<<<<<< HEAD   (939e76 UPSTREAM: drivers: core: fix device leak in __fw_devlink_rel)
 use crate::{
     bindings,
     mm::MmWithUser,
@@ -15,6 +16,19 @@ use core::{
     ops::Deref,
     ptr,
 };
+||||||| BASE
+use crate::types::Opaque;
+use core::{
+    ffi::{c_int, c_long, c_uint},
+    marker::PhantomData,
+    ops::Deref,
+    ptr,
+};
+=======
+use crate::ffi::{c_int, c_long, c_uint};
+use crate::types::Opaque;
+use core::{marker::PhantomData, ops::Deref, ptr};
+>>>>>>> BRANCH (e9cc80 Linux 6.12.19)
 
 /// A sentinel value used for infinite timeouts.
 pub const MAX_SCHEDULE_TIMEOUT: c_long = c_long::MAX;

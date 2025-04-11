@@ -1270,8 +1270,16 @@ retry:
 			spin_unlock(src_ptl);
 
 			if (!locked) {
+<<<<<<< HEAD   (939e76 UPSTREAM: drivers: core: fix device leak in __fw_devlink_rel)
 				pte_unmap(src_pte);
 				pte_unmap(dst_pte);
+||||||| BASE
+				pte_unmap(&orig_src_pte);
+				pte_unmap(&orig_dst_pte);
+=======
+				pte_unmap(&orig_src_pte);
+				pte_unmap(&orig_dst_pte);
+>>>>>>> BRANCH (e9cc80 Linux 6.12.19)
 				src_pte = dst_pte = NULL;
 				/* now we can block and wait */
 				folio_lock(src_folio);
