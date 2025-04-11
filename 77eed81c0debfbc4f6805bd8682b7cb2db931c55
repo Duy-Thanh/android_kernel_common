@@ -34,6 +34,24 @@
       "parentUuid": "c6fa5763_6d5557e0",
       "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "522f7884_acf36394",
+        "filename": "drivers/ufs/core/ufs_trace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-04-11T06:09:28Z",
+      "side": 1,
+      "message": "I understand, but this hba is not being used in this tracepoint except the assignment on line 295. Is there any other reason hba is being passed to `trace_ufshcd_command` which maybe I missed?",
+      "parentUuid": "dbd1b521_d57964be",
+      "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
