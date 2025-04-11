@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a91d98c_1b00bf8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-11T13:12:20Z",
+      "side": 1,
+      "message": "who resolved these conflicts? Please preserve the chronological order of the SoB section. Looks like the order should be something like:\n\n```\nBACKPORT: scsi: ufs: core: Add hba parameter to trace events\n\nInclude the ufs_hba structure as a parameter in various trace events to\nprovide more context and improve debugging capabilities.  Also remove\ndev_name which can replace by dev_name(hba-\u003edev).\n\nSigned-off-by: Peter Wang \u003cpeter.wang@mediatek.com\u003e\nLink: https://lore.kernel.org/r/20250214083026.1177880-1-peter.wang@mediatek.com\nReviewed-by: Bart Van Assche \u003cbvanassche@acm.org\u003e\nSigned-off-by: Martin K. Petersen \u003cmartin.petersen@oracle.com\u003e\n\nBug: 409621353\nChange-Id: I66fc3d8af56d88d19b1b4267ede5f8692393e714\n(cherry picked from commit 583e518e7100362e3937b583976f9470c39d1db2)\n[ Resolved minor conflict in drivers/ufs/core/ufshcd.c ]\nSigned-off-by: Peter Wang \u003cpeter.wang@mediatek.com\u003e\n```\n\nThanks in advance.",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6fa5763_6d5557e0",
         "filename": "drivers/ufs/core/ufs_trace.h",
         "patchSetId": 2
