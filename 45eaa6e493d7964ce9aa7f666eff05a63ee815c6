@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31dd76fb_a1343acd",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-11T13:55:25Z",
+      "side": 1,
+      "message": "what is the intention of this? adding the enums to the ABI monitoring?",
+      "range": {
+        "startLine": 668,
+        "startChar": 0,
+        "endLine": 672,
+        "endChar": 47
+      },
+      "revId": "45eaa6e493d7964ce9aa7f666eff05a63ee815c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
