@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abe945fc_7ad79f8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-11T21:19:27Z",
+      "side": 1,
+      "message": "Please mention here that you skipped replacing add_to_free_list with __add_to_free_list because it was already that way.",
+      "revId": "ae4d0ba0428a65c6c0c22234f857fcc893b36fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
