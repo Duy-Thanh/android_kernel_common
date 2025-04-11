@@ -16,6 +16,24 @@
       "message": "Please work upstream to land the core pieces first.",
       "revId": "f9d9e981271e8ab0fc4d811b417a640fb0361557",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d5da12_278043f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-04-11T20:51:49Z",
+      "side": 1,
+      "message": "Patchset has landed upstream in usb-next, please update to the latest version FROMGIT:",
+      "parentUuid": "4dd36b50_70b1f4c2",
+      "revId": "f9d9e981271e8ab0fc4d811b417a640fb0361557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
