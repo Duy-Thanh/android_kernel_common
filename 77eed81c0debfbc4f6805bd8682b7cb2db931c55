@@ -52,6 +52,24 @@
       "parentUuid": "dbd1b521_d57964be",
       "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb0ba6f_249f856e",
+        "filename": "drivers/ufs/core/ufs_trace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1943000
+      },
+      "writtenOn": "2025-04-11T06:42:48Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right. hba is not used here; it is only utilized in the Mediatek debug code.",
+      "parentUuid": "522f7884_acf36394",
+      "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
