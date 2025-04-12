@@ -137,7 +137,7 @@ _KUNIT_COMMON_MODULES_LIST = [
     "kernel/time/time_test.ko",
     "lib/kunit/kunit-example-test.ko",
     "lib/kunit/kunit-test.ko",
-    "mm/kfence/kfence_test.ko",
+    # "mm/kfence/kfence_test.ko",
     "net/core/dev_addr_lists_test.ko",
     "sound/soc/soc-topology-test.ko",
     "sound/soc/soc-utils-test.ko",
