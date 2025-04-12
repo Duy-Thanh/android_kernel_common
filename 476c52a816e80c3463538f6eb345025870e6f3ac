@@ -34,6 +34,24 @@
       ],
       "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f00b077_7ae746e2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-12T03:28:58Z",
+      "side": 1,
+      "message": "That\u0027s going to be a slightly more complex change, because `arm_smccc_1_2_smc` takes two register structures.",
+      "parentUuid": "83196aa1_1f0c167f",
+      "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
