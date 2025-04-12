@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0df145d_2b121f8d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-12T03:58:57Z",
+      "side": 1,
+      "message": "I think this is one place where we want `arm_smccc_1_2_smc`.",
+      "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81243c56_aabd6a18",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-12T03:58:57Z",
+      "side": 1,
+      "message": "```suggestion\n\tarm_smccc_1_2_smc(FFA_FN64_MEM_RETRIEVE_REQ,\n```",
+      "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83196aa1_1f0c167f",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 8
