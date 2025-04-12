@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18c2f45b_ae6bce34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3990669
+      },
+      "writtenOn": "2025-04-12T21:52:25Z",
+      "side": 1,
+      "message": "  $ repo init -u https://android.googlesource.com/platform/manifest -b main --partial-clone --clone-filter\u003dblob:limit\u003d10M\n  \n  Please help by removing the clone",
+      "revId": "c2bf48fb13d9f2ecb6a0f52e9dcbbb72004ae77b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
