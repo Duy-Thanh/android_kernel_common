@@ -1,0 +1,435 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd201744_18c84ca3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cc54ebc_ece2c449",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d954a7ec_d40c1b70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6159c7b2_e945d9ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcc3d744_2e110c3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38299279_2e607d5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0111304_4e34fde0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c90a05fe_f129b7fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc13ec2_c645dbfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb0f8a07_e4d6227e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f73271ff_a192fb64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd9e7f2b_2fb37df3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de9ba527_4d1f8677",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f888af51_af58f650",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150ae9c9_0d3ffdb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58e5da5_edd7e082",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a730929_45fe50ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b227d363_644d435f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd2a5d0_d6639a8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7062a3b0_27d56094",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17289e1e_a5c9e529",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8f2e5b3_693d6259",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13abb23f_dce38fb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56525cf_ca290af6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Do Not Submit: Found DO NOT SUBMIT like text in the commit message\n\nAnalyzer Description: Validates that the commit message does not contain a DO_NOT_SUBMIT style message.\n\nFound DO NOT SUBMIT like text in the commit message",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46723ac3_5cac8e32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3978213
+      },
+      "writtenOn": "2025-04-14T18:45:36Z",
+      "side": 1,
+      "message": "T",
+      "revId": "bbce5950fb9d149709a77999ef028d70cfb476ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
