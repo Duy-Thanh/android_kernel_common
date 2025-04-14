@@ -16,6 +16,24 @@
       "message": "Can we just call it right after `early_init_dt_verify()`? (I already tried that, although on top of 6.12, and it worked for me.)",
       "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c5c280_f69f0620",
+        "filename": "arch/x86/kernel/devicetree.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-04-14T13:28:58Z",
+      "side": 1,
+      "message": "On android15-6.6-desktop it caused kernel panic later on in `of_reserved_mem_lookup` caused by page fault when accessing reserved_mem[i].name. Although I\u0027ve checked in mainline and indeed there is no issue with moving it after `early_init_dt_verify`. From this patch-set point of view there is no functional difference if it is called here or after early_init_dt_verify so I think we can keep it as is.",
+      "parentUuid": "b507e763_1c6edfbe",
+      "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
