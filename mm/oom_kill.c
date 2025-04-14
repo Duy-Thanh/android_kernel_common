@@ -45,6 +45,11 @@
 #include <linux/init.h>
 #include <linux/mmu_notifier.h>
 #include <linux/cred.h>
+<<<<<<< HEAD   (3557c9 Merge 1840fb92baf4 ("can: ems_pci: move ASIX AX99100 ids to )
+||||||| BASE
+=======
+#include <linux/nmi.h>
+>>>>>>> BRANCH (6847b3 powerpc/code-patching: Fix KASAN hit by not flagging text pa)
 
 #include <asm/tlb.h>
 #include "internal.h"
@@ -436,10 +441,15 @@ static void dump_tasks(struct oom_control *oc)
 		mem_cgroup_scan_tasks(oc->memcg, dump_task, oc);
 	else {
 		struct task_struct *p;
+		int i = 0;
 
 		rcu_read_lock();
-		for_each_process(p)
+		for_each_process(p) {
+			/* Avoid potential softlockup warning */
+			if ((++i & 1023) == 0)
+				touch_softlockup_watchdog();
 			dump_task(p, oc);
+		}
 		rcu_read_unlock();
 	}
 }
