@@ -113,3 +113,6 @@ type 'struct cgroup_root' changed
 type 'struct xhci_sideband' changed
   was fully defined, is now only declared
 
+type 'struct io_ring_ctx' changed
+  member 'struct hlist_head io_buf_list' was removed
+
