@@ -34,6 +34,24 @@
       "parentUuid": "b507e763_1c6edfbe",
       "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "236183c6_4946243e",
+        "filename": "arch/x86/kernel/devicetree.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-04-14T15:17:14Z",
+      "side": 1,
+      "message": "\u003e On android15-6.6-desktop it caused kernel panic later on in `of_reserved_mem_lookup` caused by page fault when accessing reserved_mem[i].name.\n\nDo we understand why?\n\nAre we sure that calling `early_init_fdt_scan_reserved_mem()` after `unflatten_and_copy_device_tree()` is a correct thing to do? AFAICS on arm64 `early_init_fdt_scan_reserved_mem()` is called before `unflatten_device_tree()`, not after, in both 6.6 and 6.12.",
+      "parentUuid": "79c5c280_f69f0620",
+      "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
