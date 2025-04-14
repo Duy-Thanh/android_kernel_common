@@ -16,6 +16,24 @@
       "message": "I think I rebased it on -rc1 before sending fixes pull request last week.\nThis is now 4567bdaaaaa1744da3d7da07d9aca2f941f5b4e5 matching the tag ffa-fix-6.15 now",
       "revId": "944d78684c4171cf8454350edc058ef8963a265c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9f532a_91cd8755",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-14T16:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e3fb319_fcbd0d87",
+      "revId": "944d78684c4171cf8454350edc058ef8963a265c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
