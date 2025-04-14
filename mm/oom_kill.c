@@ -45,6 +45,11 @@
 #include <linux/init.h>
 #include <linux/mmu_notifier.h>
 #include <linux/cred.h>
+<<<<<<< HEAD   (a8a88a Revert "usb: roles: set switch registered flag early on")
+||||||| BASE
+=======
+#include <linux/nmi.h>
+>>>>>>> BRANCH (3c0e0a batman-adv: Drop unmanaged ELP metric worker)
 
 #include <asm/tlb.h>
 #include "internal.h"
@@ -436,10 +441,15 @@ static void dump_tasks(struct oom_control *oc)
 		mem_cgroup_scan_tasks(oc->memcg, dump_task, oc);
 	else {
 		struct task_struct *p;
+		int i = 0;
 
 		rcu_read_lock();
-		for_each_process(p)
+		for_each_process(p) {
+			/* Avoid potential softlockup warning */
+			if ((++i & 1023) == 0)
+				touch_softlockup_watchdog();
 			dump_task(p, oc);
+		}
 		rcu_read_unlock();
 	}
 }
@@ -755,6 +765,11 @@ static void __mark_oom_victim(struct task_struct *tsk)
 static void mark_oom_victim(struct task_struct *tsk)
 {
 	const struct cred *cred;
+<<<<<<< HEAD   (a8a88a Revert "usb: roles: set switch registered flag early on")
+||||||| BASE
+=======
+	struct mm_struct *mm = tsk->mm;
+>>>>>>> BRANCH (3c0e0a batman-adv: Drop unmanaged ELP metric worker)
 
 	WARN_ON(oom_killer_disabled);
 	/* OOM killer might race with memcg OOM */
