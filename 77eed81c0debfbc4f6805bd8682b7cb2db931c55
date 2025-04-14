@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55ada357_14dd43ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1943000
+      },
+      "writtenOn": "2025-04-14T07:32:05Z",
+      "side": 1,
+      "message": "Okay, will update the commit message, thanks.",
+      "parentUuid": "2a91d98c_1b00bf8f",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "77eed81c0debfbc4f6805bd8682b7cb2db931c55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6fa5763_6d5557e0",
         "filename": "drivers/ufs/core/ufs_trace.h",
         "patchSetId": 2
