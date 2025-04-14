@@ -325645,6 +325645,13 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x3ec9e358
+  return_type_id: 0x33756485
+  parameter_id: 0x3e909b01
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+}
+function {
   id: 0x3ece9456
   return_type_id: 0x33756485
   parameter_id: 0x3d896417
@@ -391676,6 +391683,15 @@ elf_symbol {
   full_name: "get_page_owner_handle"
 }
 elf_symbol {
+  id: 0x7fafe916
+  name: "get_pfnblock_flags_mask"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x722efa53
+  type_id: 0x3ec9e358
+  full_name: "get_pfnblock_flags_mask"
+}
+elf_symbol {
   id: 0x475d45f1
   name: "get_pid_task"
   is_defined: true
@@ -433733,6 +433749,7 @@ interface {
   symbol_id: 0xb222bb33
   symbol_id: 0xb3083c09
   symbol_id: 0x3746f7a2
+  symbol_id: 0x7fafe916
   symbol_id: 0x475d45f1
   symbol_id: 0x8f644487
   symbol_id: 0xbc123b47
