@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42c06103_ef099e18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-14T23:15:13Z",
+      "side": 1,
+      "message": "- the patch has conflict markers, don\u0027t you build and test before uploading your patches?\n- the symbol file permissions were changed to  executable. Please restore the original mode",
+      "revId": "d48ca9c183b454d9a0abb275b9e9e8d786718e33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
