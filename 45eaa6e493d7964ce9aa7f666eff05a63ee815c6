@@ -94,6 +94,30 @@
       },
       "revId": "45eaa6e493d7964ce9aa7f666eff05a63ee815c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e91aaaba_39c71a94",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-04-14T14:45:27Z",
+      "side": 1,
+      "message": "Hm, yeah I think we might need the type_visibility change from here in the next patch:\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3286795/5/android/abi_gki_aarch64_type_visibility",
+      "parentUuid": "0cb08b1c_62ddf2c9",
+      "range": {
+        "startLine": 668,
+        "startChar": 0,
+        "endLine": 672,
+        "endChar": 47
+      },
+      "revId": "45eaa6e493d7964ce9aa7f666eff05a63ee815c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
