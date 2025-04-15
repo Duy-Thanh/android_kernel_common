@@ -302601,32 +302601,36 @@ enumeration {
       value: 1
     }
     enumerator {
-      name: "UFS_DEV_COMP"
+      name: "UFS_CMD_ERR"
       value: 2
     }
     enumerator {
-      name: "UFS_QUERY_SEND"
+      name: "UFS_DEV_COMP"
       value: 3
     }
     enumerator {
-      name: "UFS_QUERY_COMP"
+      name: "UFS_QUERY_SEND"
       value: 4
     }
     enumerator {
-      name: "UFS_QUERY_ERR"
+      name: "UFS_QUERY_COMP"
       value: 5
     }
     enumerator {
-      name: "UFS_TM_SEND"
+      name: "UFS_QUERY_ERR"
       value: 6
     }
     enumerator {
-      name: "UFS_TM_COMP"
+      name: "UFS_TM_SEND"
       value: 7
     }
     enumerator {
-      name: "UFS_TM_ERR"
+      name: "UFS_TM_COMP"
       value: 8
+    }
+    enumerator {
+      name: "UFS_TM_ERR"
+      value: 9
     }
   }
 }
@@ -365641,7 +365645,7 @@ elf_symbol {
   name: "__traceiter_ufshcd_command"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x846bfb5b
+  crc: 0xf25eb7ac
   type_id: 0x9b648028
   full_name: "__traceiter_ufshcd_command"
 }
