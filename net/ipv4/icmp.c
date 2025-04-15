@@ -571,7 +571,7 @@ static struct rtable *icmp_route_lookup(struct net *net,
 		err = PTR_ERR(rt2);
 		goto relookup_failed;
 	}
-	return rt;
+	return rt; //trying an edit
 
 relookup_failed:
 	if (rt)
