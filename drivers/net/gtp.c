@@ -1409,12 +1409,35 @@ static void __net_exit gtp_net_exit(struct net *net)
 	struct gtp_dev *gtp;
 	LIST_HEAD(list);
 
+<<<<<<< HEAD   (defdae Revert "pps: Fix a use-after-free")
 	rtnl_lock();
 	list_for_each_entry(gtp, &gn->gtp_dev_list, list)
 		gtp_dellink(gtp->dev, &list);
 
 	unregister_netdevice_many(&list);
 	rtnl_unlock();
+||||||| BASE
+	list_for_each_entry(net, net_list, exit_list) {
+		struct gtp_net *gn = net_generic(net, gtp_net_id);
+		struct gtp_dev *gtp, *gtp_next;
+		struct net_device *dev;
+
+		for_each_netdev(net, dev)
+			if (dev->rtnl_link_ops == &gtp_link_ops)
+				gtp_dellink(dev, dev_to_kill);
+
+		list_for_each_entry_safe(gtp, gtp_next, &gn->gtp_dev_list, list)
+			gtp_dellink(gtp->dev, dev_to_kill);
+	}
+=======
+	list_for_each_entry(net, net_list, exit_list) {
+		struct gtp_net *gn = net_generic(net, gtp_net_id);
+		struct gtp_dev *gtp, *gtp_next;
+
+		list_for_each_entry_safe(gtp, gtp_next, &gn->gtp_dev_list, list)
+			gtp_dellink(gtp->dev, dev_to_kill);
+	}
+>>>>>>> BRANCH (634710 net: ipv6: seg6_iptunnel: mitigate 2-realloc issue)
 }
 
 static struct pernet_operations gtp_net_ops = {
