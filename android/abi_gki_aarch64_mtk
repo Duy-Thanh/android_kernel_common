@@ -361,6 +361,7 @@
   del_gendisk
   del_timer
   del_timer_sync
+  dentry_open
   desc_to_gpio
   destroy_workqueue
   dev_add_pack
@@ -1394,7 +1395,9 @@
   kernfs_notify
   kernfs_path_from_node
   kernfs_put
-  key_create_or_update
+  kern_path
+  kern_path
+
   key_put
   keyring_alloc
   __kfifo_alloc
