@@ -16,6 +16,47 @@
       "message": "This patch does change hyp behavior in theory, since the PAuth types\nmust both be supported, but the host was already enforcing that.\nAdditionally, hyp now explicitly allows KVM_ARM_VCPU_POWER_OFF, but that\nwas allowed in practice earlier.",
       "revId": "389df94c73c0dcbdd0241dd55d5218aef3aca19d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc46996e_62650cf0",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-15T14:35:54Z",
+      "side": 1,
+      "message": "That wasn\u0027t enabled before no?",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f7080791_de46036b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_pkvm.h",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * KVM_ARM_VCPU_POWER_OFF is always supported, even if the\n\t * KVM_CAP_ARM_VCPU_POWER_OFF capability is not present.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "389df94c73c0dcbdd0241dd55d5218aef3aca19d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
