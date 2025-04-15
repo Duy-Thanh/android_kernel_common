@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a657b3dc_c84799db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-15T17:37:08Z",
+      "side": 1,
+      "message": "Bypass Lint, the failures from checkpatch are false positives in this case.",
+      "revId": "f11277c8d6a381c9ba80cf7f445f8af1c271841d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
