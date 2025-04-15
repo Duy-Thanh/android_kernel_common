@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c14b16d_b9449be3",
+        "filename": "gki/aarch64/abi.stg",
+        "patchSetId": 10
+      },
+      "lineNbr": 440430,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-15T16:06:23Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Conflict Markers: Complete set of diff3 style conflict markers found. If this is a false alarm, add IGNORE_MERGE_CONFLICT_CHECK\u003d\u003d\u003creason\u003e to your commit message.\n\nAnalyzer Description: Identifies when changes accidentally have leftover conflict markers.\nOwner: maennich@google.com\n\nComplete set of diff3 style conflict markers found. If this is a false alarm, add IGNORE_MERGE_CONFLICT_CHECK\u003d\u003d\u003creason\u003e to your commit message.",
+      "range": {
+        "startLine": 440419,
+        "startChar": 0,
+        "endLine": 440430,
+        "endChar": 0
+      },
+      "revId": "415fe66f7aef35c3b256ca3096dd44c518237e5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
