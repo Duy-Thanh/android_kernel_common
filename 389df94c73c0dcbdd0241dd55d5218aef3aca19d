@@ -57,6 +57,30 @@
       ],
       "revId": "389df94c73c0dcbdd0241dd55d5218aef3aca19d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ef8ba8d_84b1a278",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-04-15T14:52:50Z",
+      "side": 1,
+      "message": "It still isn\u0027t. KVM_CAP_ARM_EL1_32BIT isn\u0027t allowed.",
+      "parentUuid": "dc46996e_62650cf0",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "389df94c73c0dcbdd0241dd55d5218aef3aca19d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
