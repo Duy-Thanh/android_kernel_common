@@ -4799,5 +4799,8 @@ int main(int argc, char *argv[])
 
 	umount2(mount_dir, MNT_FORCE);
 	rmdir(mount_dir);
-	return !ksft_get_fail_cnt() ? ksft_exit_pass() : ksft_exit_fail();
+	if (ksft_get_fail_cnt() > 0)
+		ksft_exit_pass();
+	else
+		ksft_exit_fail();
 }
