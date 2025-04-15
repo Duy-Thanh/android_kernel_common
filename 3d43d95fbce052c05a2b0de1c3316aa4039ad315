@@ -34,6 +34,24 @@
       "parentUuid": "6bafc8df_1f996b96",
       "revId": "3d43d95fbce052c05a2b0de1c3316aa4039ad315",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2675689_42d998ab",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 43
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-15T06:32:24Z",
+      "side": 1,
+      "message": "After looking at the code some more, I\u0027m wondering: could we just allocate the array with `hyp_alloc`?",
+      "parentUuid": "efdb40cb_5aa6979c",
+      "revId": "3d43d95fbce052c05a2b0de1c3316aa4039ad315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
