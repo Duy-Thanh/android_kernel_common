@@ -16,6 +16,24 @@
       "message": "Please add those symbols as well:\n```\nANDROID_GKI_node_stat_item\nANDROID_GKI_memcg_stat_item\n```\nlike it is done in [aosp/3286795](https://android-review.googlesource.com/c/kernel/common/+/3286795).",
       "revId": "43ced70d42bfe9e2e5121ed5cba03e3d842adbfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3622f5_f82fa67c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-04-15T13:09:13Z",
+      "side": 1,
+      "message": "You can create `gki/aarch64/symbols/type_visibility` for these.",
+      "parentUuid": "013dbd5f_5ec2adcf",
+      "revId": "43ced70d42bfe9e2e5121ed5cba03e3d842adbfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
