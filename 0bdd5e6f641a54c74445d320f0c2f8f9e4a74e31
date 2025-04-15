@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d882a008_bfa1ce05",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 57
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-15T11:16:32Z",
+      "side": 1,
+      "message": "I think we will have to do this on the back of the host calling `FFA_PARTITION_INFO_GET` given the latest debate that I had in upstream.",
+      "range": {
+        "startLine": 1564,
+        "startChar": 7,
+        "endLine": 1564,
+        "endChar": 28
+      },
+      "revId": "0bdd5e6f641a54c74445d320f0c2f8f9e4a74e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ee6b28a_15647173",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 57
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-15T11:16:32Z",
+      "side": 1,
+      "message": "Why do we need to do this for the host ? We added this interface to be able to reclaim the memory for the guest VMs. The system might not even be supporting ff-a in which case we don\u0027t want to abort booting.",
+      "range": {
+        "startLine": 726,
+        "startChar": 0,
+        "endLine": 735,
+        "endChar": 2
+      },
+      "revId": "0bdd5e6f641a54c74445d320f0c2f8f9e4a74e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
