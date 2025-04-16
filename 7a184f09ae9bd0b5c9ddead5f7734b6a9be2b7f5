@@ -237,6 +237,54 @@
       },
       "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52d95538_a7e38811",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-04-16T11:37:55Z",
+      "side": 1,
+      "message": "I did not find any exceptions when using lruvec_add_folio_tail in the hook. The basic functionality is okay.\nI agree with your point of view, this may require modifying the mainline code of Linux.",
+      "parentUuid": "62d6e657_941f224e",
+      "range": {
+        "startLine": 634,
+        "startChar": 2,
+        "endLine": 636,
+        "endChar": 19
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d54d154_2725431c",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-04-16T11:37:55Z",
+      "side": 1,
+      "message": "I did not find any exceptions when using lruvec_add_folio_tail in the hook. The basic functionality is okay.\nI agree with your point of view, this may require modifying the mainline code of Linux.",
+      "parentUuid": "62d6e657_941f224e",
+      "range": {
+        "startLine": 634,
+        "startChar": 2,
+        "endLine": 636,
+        "endChar": 19
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
