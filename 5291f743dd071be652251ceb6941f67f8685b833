@@ -16,6 +16,23 @@
       "message": "Looks good to me.",
       "revId": "5291f743dd071be652251ceb6941f67f8685b833",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23cb76f_ab7c58fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-04-16T13:53:27Z",
+      "side": 1,
+      "message": "Please follow the \"upstream first\" policy.",
+      "revId": "5291f743dd071be652251ceb6941f67f8685b833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
