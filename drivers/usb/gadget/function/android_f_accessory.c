@@ -6,6 +6,8 @@
  *
  */
 
+#define DEBUG
+
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/poll.h>
@@ -44,6 +46,7 @@
 /* number of tx and rx requests to allocate */
 #define TX_REQ_MAX 4
 #define RX_REQ_MAX 2
+
 
 struct acc_hid_dev {
 	struct list_head list;
@@ -1383,7 +1386,8 @@ static struct usb_function_instance *acc_alloc_inst(void)
 {
 	struct acc_instance *fi_acc;
 	int err;
-
+	
+	pr_debug("NTK acc_alloc_inst\n");
 	fi_acc = kzalloc(sizeof(*fi_acc), GFP_KERNEL);
 	if (!fi_acc)
 		return ERR_PTR(-ENOMEM);
@@ -1414,13 +1418,15 @@ bool __acc_req_match(const struct usb_ctrlrequest *ctrl)
 	u8 bRequestType = ctrl->bRequestType;
 	u8 bRequest = ctrl->bRequest;
 	bool ret = false;
-
+	pr_debug("NTK req_match start\n");
 	/*
 	 * If instance is not created which is the case in power off charging
 	 * mode, dev will be NULL. Hence return error if it is the case.
 	 */
-	if (!dev)
+	if (!dev) {
+		pr_debug("NTK req_match returning false\n");
 		return false;
+	}
 
 	if (bRequestType == (USB_DIR_OUT | USB_TYPE_VENDOR)) {
 		switch (bRequest) {
@@ -1441,6 +1447,7 @@ bool __acc_req_match(const struct usb_ctrlrequest *ctrl)
 		ret = true;
 
 	put_acc_dev(dev);
+	pr_debug("NTK req_match end\n");
 	return ret;
 }
 
