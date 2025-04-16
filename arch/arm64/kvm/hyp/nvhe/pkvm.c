@@ -403,7 +403,7 @@ int __pkvm_notify_guest_vm_avail(pkvm_handle_t handle)
 
 	hyp_read_lock(&vm_table_lock);
 	hyp_vm = get_vm_by_handle(handle);
-	if (!hyp_vm || !hyp_vm->kvm.arch.pkvm.ffa_support) {
+	if (!hyp_vm) {
 		ret = -EBUSY;
 		goto unlock;
 	}
@@ -612,7 +612,6 @@ static void init_pkvm_hyp_vm(struct kvm *host_kvm, struct pkvm_hyp_vm *hyp_vm,
 		pvmfw_load_addr = READ_ONCE(host_kvm->arch.pkvm.pvmfw_load_addr);
 	hyp_vm->kvm.arch.pkvm.pvmfw_load_addr = pvmfw_load_addr;
 
-	hyp_vm->kvm.arch.pkvm.ffa_support = READ_ONCE(host_kvm->arch.pkvm.ffa_support);
 	hyp_vm->kvm.arch.pkvm.smc_forwarded = READ_ONCE(host_kvm->arch.pkvm.smc_forwarded);
 	hyp_vm->kvm.arch.mmu.last_vcpu_ran = (int __percpu *)last_ran;
 	memset(last_ran, -1, pkvm_get_last_ran_size());
@@ -792,8 +791,7 @@ static void remove_vm_table_entry(pkvm_handle_t handle)
 	 * If we didn't send the destruction message leak the vmid to
 	 * prevent others from using it.
 	 */
-	if (hyp_vm->kvm.arch.pkvm.ffa_support &&
-	    hyp_vm->ffa_buf.vm_avail_bitmap) {
+	if (hyp_vm->ffa_buf.vm_avail_bitmap) {
 		vm_table[vm_handle_to_idx(handle)] = (void *)0xdeadbeef;
 		list_del(&hyp_vm->vm_list);
 		return;
