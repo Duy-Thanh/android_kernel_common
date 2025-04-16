@@ -3108,6 +3108,13 @@
   vunmap
   vzalloc
   vzalloc_node
+  w1_read_8
+  w1_read_block
+  w1_register_family
+  w1_reset_select_slave
+  w1_unregister_family
+  w1_write_8
+  w1_write_block
   wait_for_completion
   wait_for_completion_interruptible
   wait_for_completion_interruptible_timeout

@@ -144,6 +144,7 @@ static int w1_gpio_probe(struct platform_device *pdev)
 	if (pdata->pullup_gpiod)
 		gpiod_set_value(pdata->pullup_gpiod, 1);
 
+	gpiod_set_value_cansleep(pdata->pullup_gpiod, 0);
 	platform_set_drvdata(pdev, master);
 
 	return 0;

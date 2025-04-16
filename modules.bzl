@@ -99,6 +99,8 @@ _ARM64_GKI_MODULES_LIST = [
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
+    "drivers/w1/wire.ko",
+    "drivers/w1/masters/w1-gpio.ko",
 ]
 # LINT.ThenChange(android/abi_gki_protected_exports_aarch64)
 
