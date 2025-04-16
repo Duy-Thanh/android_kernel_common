@@ -16,6 +16,23 @@
       "message": "host FFA id cannot be 0 (reserved for hypervisor)",
       "revId": "c0a33d0b506a0f6137e8773d82cd7a8208a69e96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc67048_bf1aaca9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 50
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-16T16:10:41Z",
+      "side": 1,
+      "message": "per offline conversation, we\u0027ll tackle the client-id FFA compliance in a subsequest CL.",
+      "revId": "c0a33d0b506a0f6137e8773d82cd7a8208a69e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
