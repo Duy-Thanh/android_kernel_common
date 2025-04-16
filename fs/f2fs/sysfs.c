@@ -1149,6 +1149,9 @@ F2FS_FEATURE_RO_ATTR(readonly);
 F2FS_FEATURE_RO_ATTR(compression);
 #endif
 F2FS_FEATURE_RO_ATTR(pin_file);
+#ifdef CONFIG_UNICODE
+F2FS_FEATURE_RO_ATTR(linear_lookup);
+#endif
 
 #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
 static struct attribute *f2fs_attrs[] = {
@@ -1296,6 +1299,9 @@ static struct attribute *f2fs_feat_attrs[] = {
 	ATTR_LIST(compression),
 #endif
 	ATTR_LIST(pin_file),
+#ifdef CONFIG_UNICODE
+	ATTR_LIST(linear_lookup),
+#endif
 	NULL,
 };
 ATTRIBUTE_GROUPS(f2fs_feat);
