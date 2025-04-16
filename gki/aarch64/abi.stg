@@ -412062,6 +412062,15 @@ elf_symbol {
   full_name: "phy_modify_paged_changed"
 }
 elf_symbol {
+  id: 0x858455d9
+  name: "phy_pm_runtime_get"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x97715f93
+  type_id: 0x9f7fc723
+  full_name: "phy_pm_runtime_get"
+}
+elf_symbol {
   id: 0xb37c1005
   name: "phy_pm_runtime_get_sync"
   is_defined: true
@@ -441482,6 +441491,7 @@ interface {
   symbol_id: 0x90818f05
   symbol_id: 0x49b0b3dc
   symbol_id: 0xe4264e80
+  symbol_id: 0x858455d9
   symbol_id: 0xb37c1005
   symbol_id: 0x793c34e6
   symbol_id: 0x87eb4a7b
