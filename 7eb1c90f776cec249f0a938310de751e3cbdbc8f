@@ -70,6 +70,24 @@
       "parentUuid": "236183c6_4946243e",
       "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ccd08f6_6d3735f0",
+        "filename": "arch/x86/kernel/devicetree.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-04-16T12:41:15Z",
+      "side": 1,
+      "message": "\u003e It is because calling `early_init_fdt_scan_reserved_mem` results with saving fdt node into `reserved_mem[]` array with pointer to name from the original `inital_dtb`, which is later on discarded due to `__initdata` stamping.\n\nWhy is it not causing a problem on arm64? `__fdt_pointer` is `__initdata` too?",
+      "parentUuid": "494b7354_59b5bf95",
+      "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
