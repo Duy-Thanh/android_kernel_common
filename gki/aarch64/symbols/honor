@@ -7,6 +7,13 @@
   pmd_clear_bad
   __pmd_trans_huge_lock
   __pte_offset_map_lock
+  binder_put_node
+  state_show
+  stats_show
+  transactions_show
+  print_binder_transaction_log_entry
+  binderfs_create_file
+  binderfs_create_dir
   __traceiter_android_vh_slab_alloc_node
   __tracepoint_android_vh_slab_alloc_node
   __traceiter_android_vh_slab_free
