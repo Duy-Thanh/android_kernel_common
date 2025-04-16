@@ -403,7 +403,7 @@ int __pkvm_notify_guest_vm_avail(pkvm_handle_t handle, u32 vm_availability)
 
 	hyp_read_lock(&vm_table_lock);
 	hyp_vm = get_vm_by_handle(handle);
-	if (!hyp_vm || !hyp_vm->kvm.arch.pkvm.ffa_support) {
+	if (!hyp_vm) {
 		ret = -EBUSY;
 		goto unlock;
 	}
@@ -616,7 +616,6 @@ static void init_pkvm_hyp_vm(struct kvm *host_kvm, struct pkvm_hyp_vm *hyp_vm,
 		pvmfw_load_addr = READ_ONCE(host_kvm->arch.pkvm.pvmfw_load_addr);
 	hyp_vm->kvm.arch.pkvm.pvmfw_load_addr = pvmfw_load_addr;
 
-	hyp_vm->kvm.arch.pkvm.ffa_support = READ_ONCE(host_kvm->arch.pkvm.ffa_support);
 	hyp_vm->kvm.arch.pkvm.smc_forwarded = READ_ONCE(host_kvm->arch.pkvm.smc_forwarded);
 	hyp_vm->kvm.arch.mmu.last_vcpu_ran = (int __percpu *)last_ran;
 	memset(last_ran, -1, pkvm_get_last_ran_size());
