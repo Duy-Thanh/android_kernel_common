@@ -2418,6 +2418,10 @@ static void __scan(struct dm_bufio_client *c)
 
 			atomic_long_dec(&c->need_shrink);
 			freed++;
+
+			if (static_branch_unlikely(&no_sleep_enabled) && c->no_sleep)
+				continue;
+
 			cond_resched();
 		}
 	}
