@@ -88,6 +88,24 @@
       "parentUuid": "494b7354_59b5bf95",
       "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a136ccf_04d1525b",
+        "filename": "arch/x86/kernel/devicetree.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-04-16T14:01:44Z",
+      "side": 1,
+      "message": "Sorry it is not about the pointer itself which is __initdata but the entire initial fdt region being discarded. Note that arm doesn\u0027t use\n`unflatten_and_copy_device_tree` but `unflatten_device_tree` and copying is omitted: arm seems to operate all the time on the same fdt while x86 switches to its copy.\n\nFor x86, see `x86_flattree_get_config`:\n- initial dtb is `early_memremap(initial_dtb, map_len)`\n- set to `initial_boot_params` via `early_init_dt_verify`\n- fdt is copied by `unflatten_and_copy_device_tree` and `initial_boot_params` is updated to point to new copy\n- initial dtb is discarded later on via `early_memunmap(dt, map_len);`",
+      "parentUuid": "6ccd08f6_6d3735f0",
+      "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
