@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77e4716a_813fcf70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2025-04-16T08:10:29Z",
+      "side": 1,
+      "message": "Respin",
+      "revId": "1b744a0368eb9226140facb5ed9d5b57b3be0b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ac1910_57b129b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2025-04-16T08:10:29Z",
+      "side": 1,
+      "message": "Respin Bug: b/410963749",
+      "revId": "1b744a0368eb9226140facb5ed9d5b57b3be0b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
