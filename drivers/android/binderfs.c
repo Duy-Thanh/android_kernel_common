@@ -544,8 +544,9 @@ out:
 	inode_unlock(parent_inode);
 	return dentry;
 }
+EXPORT_SYMBOL_GPL(binderfs_create_file);
 
-static struct dentry *binderfs_create_dir(struct dentry *parent,
+struct dentry *binderfs_create_dir(struct dentry *parent,
 					  const char *name)
 {
 	struct dentry *dentry;
@@ -579,6 +580,7 @@ out:
 	inode_unlock(parent_inode);
 	return dentry;
 }
+EXPORT_SYMBOL_GPL(binderfs_create_dir);
 
 static int binder_features_show(struct seq_file *m, void *unused)
 {

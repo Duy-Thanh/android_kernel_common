@@ -1193,10 +1193,11 @@ static void binder_dec_node_tmpref(struct binder_node *node)
 		binder_free_node(node);
 }
 
-static void binder_put_node(struct binder_node *node)
+void binder_put_node(struct binder_node *node)
 {
 	binder_dec_node_tmpref(node);
 }
+EXPORT_SYMBOL_GPL(binder_put_node);
 
 static struct binder_ref *binder_get_ref_olocked(struct binder_proc *proc,
 						 u32 desc, bool need_strong_ref)
@@ -7021,7 +7022,7 @@ static void print_binder_proc_stats(struct seq_file *m,
 	print_binder_stats(m, "  ", &proc->stats);
 }
 
-static int state_show(struct seq_file *m, void *unused)
+int state_show(struct seq_file *m, void *unused)
 {
 	struct binder_proc *proc;
 	struct binder_node *node;
@@ -7059,8 +7060,9 @@ static int state_show(struct seq_file *m, void *unused)
 
 	return 0;
 }
+EXPORT_SYMBOL_GPL(state_show);
 
-static int stats_show(struct seq_file *m, void *unused)
+int stats_show(struct seq_file *m, void *unused)
 {
 	struct binder_proc *proc;
 
@@ -7075,8 +7077,9 @@ static int stats_show(struct seq_file *m, void *unused)
 
 	return 0;
 }
+EXPORT_SYMBOL_GPL(stats_show);
 
-static int transactions_show(struct seq_file *m, void *unused)
+int transactions_show(struct seq_file *m, void *unused)
 {
 	struct binder_proc *proc;
 
@@ -7088,6 +7091,7 @@ static int transactions_show(struct seq_file *m, void *unused)
 
 	return 0;
 }
+EXPORT_SYMBOL_GPL(transactions_show);
 
 static int proc_show(struct seq_file *m, void *unused)
 {
@@ -7106,7 +7110,7 @@ static int proc_show(struct seq_file *m, void *unused)
 	return 0;
 }
 
-static void print_binder_transaction_log_entry(struct seq_file *m,
+void print_binder_transaction_log_entry(struct seq_file *m,
 					struct binder_transaction_log_entry *e)
 {
 	int debug_id = READ_ONCE(e->debug_id_done);
@@ -7131,6 +7135,7 @@ static void print_binder_transaction_log_entry(struct seq_file *m,
 	seq_printf(m, debug_id && debug_id == READ_ONCE(e->debug_id_done) ?
 			"\n" : " (incomplete)\n");
 }
+EXPORT_SYMBOL_GPL(print_binder_transaction_log_entry);
 
 static int transaction_log_show(struct seq_file *m, void *unused)
 {
