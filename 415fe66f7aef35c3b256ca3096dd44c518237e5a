@@ -22,6 +22,30 @@
       },
       "revId": "415fe66f7aef35c3b256ca3096dd44c518237e5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a3787b9_7e23453a",
+        "filename": "gki/aarch64/abi.stg",
+        "patchSetId": 10
+      },
+      "lineNbr": 440430,
+      "author": {
+        "id": 3887583
+      },
+      "writtenOn": "2025-04-16T00:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c14b16d_b9449be3",
+      "range": {
+        "startLine": 440419,
+        "startChar": 0,
+        "endLine": 440430,
+        "endChar": 0
+      },
+      "revId": "415fe66f7aef35c3b256ca3096dd44c518237e5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
