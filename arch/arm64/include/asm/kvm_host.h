@@ -300,7 +300,6 @@ struct kvm_protected_vm {
 	struct kvm_hyp_memcache teardown_iommu_mc;
 	gpa_t pvmfw_load_addr;
 	bool enabled;
-	u32 ffa_support;
 	bool smc_forwarded;
 };
 
