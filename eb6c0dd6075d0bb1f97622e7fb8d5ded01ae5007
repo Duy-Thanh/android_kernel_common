@@ -16,6 +16,23 @@
       "message": "This needs a rebase",
       "revId": "eb6c0dd6075d0bb1f97622e7fb8d5ded01ae5007",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff15d7c3_5fc94be8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-16T13:46:41Z",
+      "side": 1,
+      "message": "Temporary block until KMI update is complete. A rebase will be required afterwards.",
+      "revId": "eb6c0dd6075d0bb1f97622e7fb8d5ded01ae5007",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
