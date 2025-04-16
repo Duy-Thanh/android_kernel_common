@@ -103,7 +103,12 @@ static int linkstate_prepare_data(const struct ethnl_req_info *req_base,
 	struct phy_device *phydev;
 	int ret;
 
+<<<<<<< HEAD   (65ba53 ANDROID: 2025/04/16 KMI update)
 	phydev = ethnl_req_get_phydev(req_base, tb[ETHTOOL_A_LINKSTATE_HEADER],
+||||||| BASE
+=======
+	phydev = ethnl_req_get_phydev(req_base, tb, ETHTOOL_A_LINKSTATE_HEADER,
+>>>>>>> BRANCH (e9cc80 Linux 6.12.19)
 				      info->extack);
 	if (IS_ERR(phydev)) {
 		ret = PTR_ERR(phydev);

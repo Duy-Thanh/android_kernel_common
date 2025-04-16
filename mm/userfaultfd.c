@@ -1270,8 +1270,16 @@ retry:
 			spin_unlock(src_ptl);
 
 			if (!locked) {
+<<<<<<< HEAD   (65ba53 ANDROID: 2025/04/16 KMI update)
 				pte_unmap(src_pte);
 				pte_unmap(dst_pte);
+||||||| BASE
+				pte_unmap(&orig_src_pte);
+				pte_unmap(&orig_dst_pte);
+=======
+				pte_unmap(&orig_src_pte);
+				pte_unmap(&orig_dst_pte);
+>>>>>>> BRANCH (e9cc80 Linux 6.12.19)
 				src_pte = dst_pte = NULL;
 				/* now we can block and wait */
 				folio_lock(src_folio);
