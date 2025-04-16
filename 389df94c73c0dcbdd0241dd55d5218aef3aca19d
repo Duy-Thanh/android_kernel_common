@@ -105,6 +105,30 @@
       },
       "revId": "389df94c73c0dcbdd0241dd55d5218aef3aca19d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb8e790_8f724a5c",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-16T09:03:27Z",
+      "side": 1,
+      "message": "Ah I think I get it, it\u0027s not reported in the pvm-level helper above. And you have this here to be exhaustive about all vcpu-level features, which makes sense. So n/m, this LGTM 😊",
+      "parentUuid": "ea812d06_ffa61314",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "389df94c73c0dcbdd0241dd55d5218aef3aca19d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
