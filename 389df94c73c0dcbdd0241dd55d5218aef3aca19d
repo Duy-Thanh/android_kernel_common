@@ -81,6 +81,30 @@
       },
       "revId": "389df94c73c0dcbdd0241dd55d5218aef3aca19d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea812d06_ffa61314",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-16T09:01:08Z",
+      "side": 1,
+      "message": "Oh ok, but why reporting it as a \u0027supported pvm vcpu feature\u0027 here then? Where is it disallowed btw?",
+      "parentUuid": "0ef8ba8d_84b1a278",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "389df94c73c0dcbdd0241dd55d5218aef3aca19d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

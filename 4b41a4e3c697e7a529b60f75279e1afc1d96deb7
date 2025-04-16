@@ -46,6 +46,30 @@
       },
       "revId": "4b41a4e3c697e7a529b60f75279e1afc1d96deb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ccea12_73e9aebd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-16T09:01:08Z",
+      "side": 0,
+      "message": "Ah, gotcha, that makes sense. I don\u0027t mind doing it in the same patch, but a little mention in the commit message would be nice 😊",
+      "parentUuid": "379202fd_e6a405de",
+      "range": {
+        "startLine": 478,
+        "startChar": 2,
+        "endLine": 478,
+        "endChar": 45
+      },
+      "revId": "4b41a4e3c697e7a529b60f75279e1afc1d96deb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
