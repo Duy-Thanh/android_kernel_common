@@ -40,8 +40,6 @@
 #include <nvhe/trap_handler.h>
 #include <nvhe/spinlock.h>
 
-#define VM_FFA_SUPPORTED(vcpu)		((vcpu)->kvm->arch.pkvm.ffa_support)
-
 /* The maximum number of secure partitions that can register for VM availability */
 #define FFA_MAX_VM_AVAIL_SPS	(8)
 #define FFA_VM_AVAIL_SPS_OOM	(-2)
@@ -1442,12 +1440,6 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 		return true;
 	}
 
-	if (!VM_FFA_SUPPORTED(vcpu)) {
-		ffa_to_smccc_error(&res, FFA_RET_NOT_SUPPORTED);
-		ffa_set_retval(ctxt, &res);
-		return true;
-	}
-
 	switch (func_id) {
 	case FFA_FEATURES:
 		do_ffa_guest_features(&res, ctxt);
@@ -1558,9 +1550,6 @@ int kvm_dying_guest_reclaim_ffa_resources(struct pkvm_hyp_vm *vm)
 	struct ffa_mem_transfer *transfer;
 	int ret = 0;
 
-	if (!vm->kvm.arch.pkvm.ffa_support)
-		return 0;
-
 	hyp_spin_lock(&kvm_ffa_hyp_lock);
 	if (!ffa_buf->tx && !ffa_buf->rx)
 		goto unlock;
@@ -1600,18 +1589,6 @@ int kvm_guest_notify_availability(struct pkvm_hyp_vm *vm, u32 availability_msg)
 	hyp_spin_unlock(&kvm_ffa_hyp_lock);
 
 	return ret;
-}
-
-u32 ffa_get_hypervisor_version(void)
-{
-	u32 version = 0;
-
-	hyp_spin_lock(&version_lock);
-	if (has_version_negotiated)
-		version = hyp_ffa_version;
-	hyp_spin_unlock(&version_lock);
-
-	return version;
 }
 
 int hyp_ffa_init(void *pages)
