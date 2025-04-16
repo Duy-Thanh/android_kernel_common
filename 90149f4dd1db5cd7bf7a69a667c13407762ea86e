@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2bfdb7_04f834d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-16T13:46:15Z",
+      "side": 1,
+      "message": "Temporary block until KMI update is complete. A rebase will be required afterwards.",
+      "revId": "90149f4dd1db5cd7bf7a69a667c13407762ea86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
