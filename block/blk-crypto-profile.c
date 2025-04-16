@@ -501,7 +501,11 @@ int blk_crypto_derive_sw_secret(struct block_device *bdev,
 	blk_crypto_hw_exit(profile);
 	return err;
 }
+<<<<<<< HEAD   (4fa716 Merge 1e1ba8d23dae ("Merge tag 'timers-clocksource-2025-03-2)
 EXPORT_SYMBOL_GPL(blk_crypto_derive_sw_secret);
+||||||| BASE
+=======
+>>>>>>> BRANCH (2e3fcb Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/)
 
 int blk_crypto_import_key(struct blk_crypto_profile *profile,
 			  const u8 *raw_key, size_t raw_key_size,
