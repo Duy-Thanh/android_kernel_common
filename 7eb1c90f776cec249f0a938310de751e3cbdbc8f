@@ -52,6 +52,24 @@
       "parentUuid": "79c5c280_f69f0620",
       "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "494b7354_59b5bf95",
+        "filename": "arch/x86/kernel/devicetree.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-04-16T12:06:21Z",
+      "side": 1,
+      "message": "\u003e Do we understand why?\n\nIt is because calling `early_init_fdt_scan_reserved_mem` results with saving fdt node into `reserved_mem[]` array with pointer to name from the original `inital_dtb`, which is later on discarded due to `__initdata` stamping.\nIf it is called after `unflatten_and_copy_device_tree`, like in this patch, fdt node info saving is done after kernel switches from using inital dtb to copied one (see `unflatten_and_copy_device_tree`) and therefore saved name pointer is still valid later on e.g. in `of_reserved_mem_lookup`\n\nIn the newer kernel, there is a patch https://lore.kernel.org/all/20240906185400.3244416-2-quic_obabatun@quicinc.com/ (`of: reserved_mem: Restructure how the reserved memory regions are processed`) which change things a bit: it moves mentioned saving logic into `unflatten_device_tree`, by calling `fdt_scan_reserved_mem_reg_nodes` which performs saving based on copied and unflattened DT which is valid later on (and accessible by `of_reserved_mem_lookup`).\n\n\u003e AFAICS on arm64 early_init_fdt_scan_reserved_mem() is called before unflatten_device_tree(), not after, in both 6.6 and 6.12.\n\nIndeed but I think it is mostly because on arm, early memblock initialization, must take into account DT reserved regions, so later on e.g. `unflatten_device_tree` can safely alloc some memblocks. In x86 it is not so important since memblock initialization is performed based on e820 entries which, according to our assumption and sanitization, should be in sync with DT reserved memory and BTW the early memblock initialization on x86 happens before `x86_flattree_get_config`.\n\nAnyway, while checking all of that I\u0027ve backported locally some patches from mainline, which allows to call it before `unflatten_device_tree()` as done on other architecture but I am not sure that we should backport and merge additional patches just to allow moving this call in 6.6 kernel if it works as is.",
+      "parentUuid": "236183c6_4946243e",
+      "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
