@@ -501,7 +501,11 @@ int blk_crypto_derive_sw_secret(struct block_device *bdev,
 	blk_crypto_hw_exit(profile);
 	return err;
 }
+<<<<<<< HEAD   (16828c ANDROID: GKI: Enable CONFIG_IPV6_SUBTREES)
 EXPORT_SYMBOL_GPL(blk_crypto_derive_sw_secret);
+||||||| BASE
+=======
+>>>>>>> BRANCH (2e3fcb Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/)
 
 int blk_crypto_import_key(struct blk_crypto_profile *profile,
 			  const u8 *raw_key, size_t raw_key_size,
