@@ -106,6 +106,24 @@
       "parentUuid": "6ccd08f6_6d3735f0",
       "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd298472_b29db3e3",
+        "filename": "arch/x86/kernel/devicetree.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-04-16T14:23:22Z",
+      "side": 1,
+      "message": "Ok, got it.\n\nOk, I agree it makes no sense to backport extra patches just to be able to call `early_init_fdt_scan_reserved_mem()` before `unflatten_and_copy_device_tree()`.",
+      "parentUuid": "8a136ccf_04d1525b",
+      "revId": "7eb1c90f776cec249f0a938310de751e3cbdbc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
