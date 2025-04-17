@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/411251286",
       "revId": "29a9673622b32b4c59d6d29c45429f2ad7feca30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0fb4a06_558e3f16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-04-17T10:06:18Z",
+      "side": 1,
+      "message": "Cherry-pick is not clean.  The added line has been put in the wrong place.",
+      "revId": "29a9673622b32b4c59d6d29c45429f2ad7feca30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
