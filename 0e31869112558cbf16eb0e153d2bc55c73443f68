@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "728b3a45_b10475b5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-17T15:04:28Z",
+      "side": 1,
+      "message": "Afaict 8 was an arbitrary decision, but this number is as good as any (as long as it\u0027s 2 or more).",
+      "parentUuid": "15272273_5aaa20cc",
+      "range": {
+        "startLine": 51,
+        "startChar": 35,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f2afc2a_43bc85ff",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 12
@@ -451,6 +475,30 @@
       "side": 1,
       "message": "One option could be to call `FFA_PARTITION_INFO_GET` before every message, but then how would we keep track of which SPs we have already notified?",
       "parentUuid": "0163a976_ca9ced74",
+      "range": {
+        "startLine": 1170,
+        "startChar": 53,
+        "endLine": 1170,
+        "endChar": 78
+      },
+      "revId": "0e31869112558cbf16eb0e153d2bc55c73443f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be55e088_35062364",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-17T15:04:28Z",
+      "side": 1,
+      "message": "I updated it to return `FFA_RET_NO_MEMORY` if we overflow the array.",
+      "parentUuid": "be0dec8a_4dc50014",
       "range": {
         "startLine": 1170,
         "startChar": 53,

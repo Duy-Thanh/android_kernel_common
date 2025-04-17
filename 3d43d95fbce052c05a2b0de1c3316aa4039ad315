@@ -52,6 +52,24 @@
       "parentUuid": "efdb40cb_5aa6979c",
       "revId": "3d43d95fbce052c05a2b0de1c3316aa4039ad315",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3f7aa4a_e72edf92",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 43
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-17T15:04:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2675689_42d998ab",
+      "revId": "3d43d95fbce052c05a2b0de1c3316aa4039ad315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
