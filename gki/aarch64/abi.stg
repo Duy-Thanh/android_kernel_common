@@ -330014,6 +330014,13 @@ function {
   parameter_id: 0x19e66c71
 }
 function {
+  id: 0x708d0fa1
+  return_type_id: 0x18bd6530
+  parameter_id: 0x914dbfdc
+  parameter_id: 0x914dbfdc
+  parameter_id: 0x379d63b0
+}
+function {
   id: 0x70b96785
   return_type_id: 0x1d19a9d5
   parameter_id: 0x2e029f76
@@ -395153,6 +395160,15 @@ elf_symbol {
   full_name: "guid_null"
 }
 elf_symbol {
+  id: 0xd8b47243
+  name: "gunyah_get_info"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8534b449
+  type_id: 0x708d0fa1
+  full_name: "gunyah_get_info"
+}
+elf_symbol {
   id: 0x417a2fd7
   name: "gunyah_qtvm_register_notifier"
   is_defined: true
@@ -437485,6 +437501,7 @@ interface {
   symbol_id: 0x9388d1ae
   symbol_id: 0x8dfcda69
   symbol_id: 0x236ad020
+  symbol_id: 0xd8b47243
   symbol_id: 0x417a2fd7
   symbol_id: 0x2b2e3e72
   symbol_id: 0x4d0b0bed
