@@ -28,6 +28,8 @@
 #include <linux/rcupdate.h>
 #include <linux/time_namespace.h>
 
+#include <trace/hooks/fs.h>
+
 struct timerfd_ctx {
 	union {
 		struct hrtimer tmr;
@@ -411,7 +413,12 @@ SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)
 {
 	int ufd;
 	struct timerfd_ctx *ctx;
+<<<<<<< HEAD   (bb493f3fc3fe06cc5bf1b5d40345c8ad8507cd25 ANDROID: KVM: arm64: Allow pvmfw loading in the middle of a )
 	struct file *file;
+||||||| BASE   (f20ec6877fdf984b72b748551861d1407ca6fcbb UPSTREAM: exfat: call bh_read in get_block only when necessa)
+=======
+	char file_name_buf[32];
+>>>>>>> CHANGE (03396e4bfe3a698ebac790ce8f196ad2c4392333 ANDROID: fs: Add vendor hooks for ep_create_wakeup_source & )
 
 	/* Check the TFD_* constants for consistency.  */
 	BUILD_BUG_ON(TFD_CLOEXEC != O_CLOEXEC);
@@ -448,8 +455,20 @@ SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)
 
 	ctx->moffs = ktime_mono_to_real(0);
 
+<<<<<<< HEAD   (bb493f3fc3fe06cc5bf1b5d40345c8ad8507cd25 ANDROID: KVM: arm64: Allow pvmfw loading in the middle of a )
 	ufd = get_unused_fd_flags(flags & TFD_SHARED_FCNTL_FLAGS);
 	if (ufd < 0) {
+||||||| BASE   (f20ec6877fdf984b72b748551861d1407ca6fcbb UPSTREAM: exfat: call bh_read in get_block only when necessa)
+	ufd = anon_inode_getfd("[timerfd]", &timerfd_fops, ctx,
+			       O_RDWR | (flags & TFD_SHARED_FCNTL_FLAGS));
+	if (ufd < 0)
+=======
+	strscpy(file_name_buf, "[timerfd]", sizeof(file_name_buf));
+	trace_android_vh_timerfd_create(file_name_buf, sizeof(file_name_buf));
+	ufd = anon_inode_getfd(file_name_buf, &timerfd_fops, ctx,
+			       O_RDWR | (flags & TFD_SHARED_FCNTL_FLAGS));
+	if (ufd < 0)
+>>>>>>> CHANGE (03396e4bfe3a698ebac790ce8f196ad2c4392333 ANDROID: fs: Add vendor hooks for ep_create_wakeup_source & )
 		kfree(ctx);
 		return ufd;
 	}
@@ -467,7 +486,7 @@ SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)
 	return ufd;
 }
 
-static int do_timerfd_settime(int ufd, int flags, 
+static int do_timerfd_settime(int ufd, int flags,
 		const struct itimerspec64 *new,
 		struct itimerspec64 *old)
 {

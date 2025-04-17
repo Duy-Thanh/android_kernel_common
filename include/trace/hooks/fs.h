@@ -22,6 +22,7 @@ DECLARE_HOOK(android_vh_f2fs_restore_priority,
 	TP_PROTO(struct task_struct *p, int saved_prio),
 	TP_ARGS(p, saved_prio));
 
+<<<<<<< HEAD   (bb493f3fc3fe06cc5bf1b5d40345c8ad8507cd25 ANDROID: KVM: arm64: Allow pvmfw loading in the middle of a )
 DECLARE_HOOK(android_vh_f2fs_printk,
 	TP_PROTO(unsigned long s_flag, struct va_format *vaf, int level, bool limit_rate),
 	TP_ARGS(s_flag, vaf, level, limit_rate));
@@ -72,6 +73,16 @@ DECLARE_HOOK(android_vh_f2fs_file_open,
 	TP_PROTO(struct inode *inode, struct file *filp),
 	TP_ARGS(inode, filp));
 
+||||||| BASE   (f20ec6877fdf984b72b748551861d1407ca6fcbb UPSTREAM: exfat: call bh_read in get_block only when necessa)
+=======
+DECLARE_HOOK(android_vh_ep_create_wakeup_source,
+	TP_PROTO(char *name, int len),
+	TP_ARGS(name, len));
+
+DECLARE_HOOK(android_vh_timerfd_create,
+	TP_PROTO(char *name, int len),
+	TP_ARGS(name, len));
+>>>>>>> CHANGE (03396e4bfe3a698ebac790ce8f196ad2c4392333 ANDROID: fs: Add vendor hooks for ep_create_wakeup_source & )
 #endif /* _TRACE_HOOK_FS_H */
 
 /* This part must be outside protection */
