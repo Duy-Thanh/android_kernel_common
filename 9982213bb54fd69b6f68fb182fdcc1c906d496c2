@@ -1,0 +1,318 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8f5b60_f6e07921",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-17T19:26:20Z",
+      "side": 1,
+      "message": "this will break !ANDROID_VENDOR_OEM_DATA builds. Please use `#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA` to avoid undefined field \"android_oem_data1`",
+      "fixSuggestions": [
+        {
+          "fixId": "18d81bc4_0cbe6346",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 237,
+                "startChar": 0,
+                "endLine": 237,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 238,
+                "endChar": 0
+              },
+              "replacement": "#else\n\t\t\tu64 android_oem_data \u003d 0;\n#endif\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 499,
+                "startChar": 0,
+                "endLine": 499,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 501,
+                "startChar": 0,
+                "endLine": 501,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 535,
+                "startChar": 0,
+                "endLine": 535,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 537,
+                "startChar": 0,
+                "endLine": 537,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 552,
+                "startChar": 0,
+                "endLine": 552,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 554,
+                "startChar": 0,
+                "endLine": 554,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f99793_72590f62",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-17T19:26:20Z",
+      "side": 1,
+      "message": "same issue as above with ANDROID_VENDOR_OEM_DATA",
+      "fixSuggestions": [
+        {
+          "fixId": "6d31179e_f0a58c71",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "\tANDROID_VENDOR_OEM_DATA(1);\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 478,
+                "startChar": 0,
+                "endLine": 479,
+                "endChar": 0
+              },
+              "replacement": "\tANDROID_VENDOR_OEM_DATA(1);\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 499,
+                "startChar": 0,
+                "endLine": 501,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_update_uid_stats(\n\t\t\t\u0026uid_entry-\u003eandroid_vendor_oem_data1,\n\t\t\t\u0026usw-\u003eandroid_vendor_oem_data1, NULL, 0);\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 536,
+                "startChar": 0,
+                "endLine": 537,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\u0026usw-\u003eandroid_vendor_oem_data1, task, 1);\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 552,
+                "startChar": 0,
+                "endLine": 553,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_update_uid_stats(\u0026uid_entry-\u003eandroid_vendor_oem_data1,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "467f9f15_9b3cb723",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-17T19:26:20Z",
+      "side": 1,
+      "message": "same issue",
+      "fixSuggestions": [
+        {
+          "fixId": "c3770972_d34027c3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 536,
+                "startChar": 0,
+                "endLine": 537,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\u0026usw-\u003eandroid_oem_data1, task, 0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78648726_fcb28756",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-17T19:26:20Z",
+      "side": 1,
+      "message": "does trace_android_vh_update_uid_state() assume that usw-\u003eandroid_oem_data1 has been initialize to 0? Or does the hook handler do this initialization?",
+      "range": {
+        "startLine": 536,
+        "startChar": 10,
+        "endLine": 536,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "abcf5d03_d551fb16",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 534,
+                "startChar": 0,
+                "endLine": 534,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tusw-\u003eandroid_oem_data1 \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93580d11_c09a8667",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-17T19:26:20Z",
+      "side": 1,
+      "message": "same issue",
+      "fixSuggestions": [
+        {
+          "fixId": "59975448_8f1a3e17",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 552,
+                "startChar": 0,
+                "endLine": 554,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_update_uid_stats(\u0026uid_entry-\u003eandroid_oem_data1, NULL,\n\t\ttask, 2);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "992a0eb3_037e4cab",
+        "filename": "include/trace/hooks/power.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-17T19:26:20Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by GKI Guidelines: Please do not add #include statements to headers under include/trace/hooks/. These should only be getting forward decls and not new includes (to avoid CRC changes due to visibility).\\n\\n Refer to go/ack-contribution-guidelines and go/vendor...\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: gki-eng-team@google.com\n\nPlease do not add #include statements to headers under include/trace/hooks/. These should only be getting forward decls and not new includes (to avoid CRC changes due to visibility).\\n\\n Refer to go/ack-contribution-guidelines and go/vendor-hooks for details.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
