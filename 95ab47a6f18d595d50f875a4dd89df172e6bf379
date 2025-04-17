@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0c9e72_b42fe361",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2025-04-17T07:04:00Z",
+      "side": 1,
+      "message": "This patch is a transplant of the previous patch https://android-review.googlesource.com/c/kernel/common/+/3029432.\n\nI noticed that in the new kernel 6.12 code, the code we originally inserted into the hook was refactored.\nThe original hook cannot be cherry-picked directly, so a new patch needs to be submitted.",
+      "revId": "95ab47a6f18d595d50f875a4dd89df172e6bf379",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
