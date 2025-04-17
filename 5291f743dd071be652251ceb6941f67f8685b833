@@ -33,6 +33,24 @@
       "message": "Please follow the \"upstream first\" policy.",
       "revId": "5291f743dd071be652251ceb6941f67f8685b833",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "905700ed_4572467e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005551
+      },
+      "writtenOn": "2025-04-17T02:42:18Z",
+      "side": 1,
+      "message": "This patch has been registered as a patchwork for upstream as follows.\n\nhttps://patchwork.kernel.org/project/linux-scsi/cover/20250417023405.6954-1-dh0421.hwang@samsung.com/\n\nThank you.\nDooHyun Hwang.",
+      "parentUuid": "c23cb76f_ab7c58fe",
+      "revId": "5291f743dd071be652251ceb6941f67f8685b833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
