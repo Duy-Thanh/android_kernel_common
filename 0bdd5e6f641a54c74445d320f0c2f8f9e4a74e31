@@ -93,6 +93,30 @@
       },
       "revId": "0bdd5e6f641a54c74445d320f0c2f8f9e4a74e31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d260dd5_ed989cc0",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 57
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-17T15:15:56Z",
+      "side": 1,
+      "message": "Copying the response from elsewhere:\n\n\u003e The host is another client VM as far as the secure partition that requested these availability messages is concerned. If you don\u0027t send a creation message for the host, other requests from the host might get rejected since they would come from a non-existing VM.",
+      "parentUuid": "8ee6b28a_15647173",
+      "range": {
+        "startLine": 726,
+        "startChar": 0,
+        "endLine": 735,
+        "endChar": 2
+      },
+      "revId": "0bdd5e6f641a54c74445d320f0c2f8f9e4a74e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
