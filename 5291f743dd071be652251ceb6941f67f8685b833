@@ -51,6 +51,24 @@
       "parentUuid": "c23cb76f_ab7c58fe",
       "revId": "5291f743dd071be652251ceb6941f67f8685b833",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a3ae0b_dbf9b4d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005551
+      },
+      "writtenOn": "2025-04-17T04:47:30Z",
+      "side": 1,
+      "message": "In that patchwork, this patch is registered in two parts.\nIf this patch also needs to be divided into two parts, please let me know.\n\nThank you.\nDooHyun Hwang.",
+      "parentUuid": "905700ed_4572467e",
+      "revId": "5291f743dd071be652251ceb6941f67f8685b833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
