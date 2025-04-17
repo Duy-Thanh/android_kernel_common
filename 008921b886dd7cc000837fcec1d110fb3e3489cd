@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c18f86c_5a811456",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-04-17T07:46:48Z",
+      "side": 1,
+      "message": "Looks like there are still unresolved ABI compatibility issues. Also, maybe we could squash together this and the next ABI change adding protected exports? I\u0027ll give voice to @tnowicki@google.com as he is more familiar with workflow for 6.6",
+      "revId": "008921b886dd7cc000837fcec1d110fb3e3489cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
