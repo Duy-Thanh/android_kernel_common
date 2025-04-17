@@ -16,6 +16,24 @@
       "message": "Looks like there are still unresolved ABI compatibility issues. Also, maybe we could squash together this and the next ABI change adding protected exports? I\u0027ll give voice to @tnowicki@google.com as he is more familiar with workflow for 6.6",
       "revId": "008921b886dd7cc000837fcec1d110fb3e3489cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d0902f_4546ffc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-04-17T07:48:36Z",
+      "side": 1,
+      "message": "Thanks for the input. I thought the next CL would fix but it actually doesn\u0027t 😞",
+      "parentUuid": "1c18f86c_5a811456",
+      "revId": "008921b886dd7cc000837fcec1d110fb3e3489cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
