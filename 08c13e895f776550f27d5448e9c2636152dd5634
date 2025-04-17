@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd4561e5_423f92b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1722387
+      },
+      "writtenOn": "2025-04-17T11:52:23Z",
+      "side": 1,
+      "message": "Uploading this patch on mainline to remove the warnings/errors on defconfig checks.",
+      "revId": "08c13e895f776550f27d5448e9c2636152dd5634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
