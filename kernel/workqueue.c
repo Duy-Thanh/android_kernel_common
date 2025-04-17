@@ -372,6 +372,8 @@ struct workqueue_struct {
 	struct lockdep_map	__lockdep_map;
 	struct lockdep_map	*lockdep_map;
 #endif
+	raw_spinlock_t		delayed_lock;	/* protects pending_list */
+	struct list_head	delayed_list;	/* list of pending delayed jobs */
 	char			name[WQ_NAME_LEN]; /* I: workqueue name */
 
 	/*
@@ -2062,15 +2064,23 @@ static int try_to_grab_pending(struct work_struct *work, u32 cflags,
 
 	/* try to steal the timer if it exists */
 	if (cflags & WORK_CANCEL_DELAYED) {
+		int del_res;
 		struct delayed_work *dwork = to_delayed_work(work);
+		struct workqueue_struct *wq = dwork->wq;
 
-		/*
-		 * dwork->timer is irqsafe.  If del_timer() fails, it's
-		 * guaranteed that the timer is not queued anywhere and not
-		 * running on the local CPU.
-		 */
-		if (likely(del_timer(&dwork->timer)))
-			return 1;
+		if (wq) {
+			raw_spin_lock(&wq->delayed_lock);
+			del_res = try_to_del_timer_sync(&dwork->timer);
+			if (del_res == 1) {
+				list_del_init(&work->entry);
+				raw_spin_unlock(&wq->delayed_lock);
+				return 1;
+			}
+			raw_spin_unlock(&wq->delayed_lock);
+			if (del_res == -1) {
+				goto fail_no_rcu;
+			}
+		}
 	}
 
 	/* try to claim PENDING the normal way */
@@ -2137,6 +2147,7 @@ static int try_to_grab_pending(struct work_struct *work, u32 cflags,
 	raw_spin_unlock(&pool->lock);
 fail:
 	rcu_read_unlock();
+fail_no_rcu:
 	local_irq_restore(*irq_flags);
 	return -EAGAIN;
 }
@@ -2485,12 +2496,27 @@ bool queue_work_node(int node, struct workqueue_struct *wq,
 }
 EXPORT_SYMBOL_GPL(queue_work_node);
 
+/*
+ * Should be used instead of __queue_work right after removing a struct
+ * delayed_work from the timer (either by completion or timer_delete). Not
+ * needed if it was never added to the timer in the first place.
+ */
+static void __queue_delayed_work_now(struct delayed_work *dwork)
+{
+	struct workqueue_struct *wq = dwork->wq;
+
+	raw_spin_lock(&wq->delayed_lock);
+	list_del_init(&dwork->work.entry);
+	__queue_work(dwork->cpu, wq, &dwork->work);
+	raw_spin_unlock(&wq->delayed_lock);
+}
+
 void delayed_work_timer_fn(struct timer_list *t)
 {
 	struct delayed_work *dwork = from_timer(dwork, t, timer);
 
 	/* should have been called from irqsafe timer with irq already off */
-	__queue_work(dwork->cpu, dwork->wq, &dwork->work);
+	__queue_delayed_work_now(dwork);
 }
 EXPORT_SYMBOL(delayed_work_timer_fn);
 
@@ -2519,6 +2545,10 @@ static void __queue_delayed_work(int cpu, struct workqueue_struct *wq,
 	dwork->wq = wq;
 	dwork->cpu = cpu;
 	timer->expires = jiffies + delay;
+
+	raw_spin_lock(&wq->delayed_lock);
+	list_add_tail(&work->entry, &wq->delayed_list);
+	raw_spin_unlock(&wq->delayed_lock);
 
 	if (housekeeping_enabled(HK_TYPE_TIMER)) {
 		/* If the current cpu is a housekeeping cpu, use it. */
@@ -4272,7 +4302,7 @@ bool flush_delayed_work(struct delayed_work *dwork)
 {
 	local_irq_disable();
 	if (del_timer_sync(&dwork->timer))
-		__queue_work(dwork->cpu, dwork->wq, &dwork->work);
+		__queue_delayed_work_now(dwork);
 	local_irq_enable();
 	return flush_work(&dwork->work);
 }
@@ -5720,6 +5750,9 @@ static struct workqueue_struct *__alloc_workqueue(const char *fmt,
 	INIT_LIST_HEAD(&wq->flusher_overflow);
 	INIT_LIST_HEAD(&wq->maydays);
 
+	INIT_LIST_HEAD(&wq->delayed_list);
+	raw_spin_lock_init(&wq->delayed_lock);
+
 	INIT_LIST_HEAD(&wq->list);
 
 	if (flags & WQ_UNBOUND) {
@@ -5832,11 +5865,77 @@ static bool pwq_busy(struct pool_workqueue *pwq)
 	return false;
 }
 
+/*
+ * Helper function for destroy_workqueue() which ensures that all pending items
+ * are queued to the workqueue (that is, delayed_work an rcu_work jobs). This
+ * means that once the workqueue drains all jobs, it's guaranteed that no new
+ * jobs will be added.
+ *
+ * This assumes that the user will not call any variant of queue_work_on during
+ * the call to destroy_workqueue(). It's a user bug if that happens.
+ */
+static void enqueue_everything(struct workqueue_struct *wq)
+{
+	struct delayed_work *work;
+	/*
+	 * We can't use timer_delete_sync() to remove the timers because that
+	 * can deadlock on delayed_lock if delayed_work_timer_fn is currently
+	 * running. To handle that case, we instead move it to this temporary
+	 * list, then wait for the callback to remove itself from the list.
+	 *
+	 * Protected by wq->delayed_lock.
+	 */
+	LIST_HEAD(running_timers);
+
+	raw_spin_lock_irq(&wq->delayed_lock);
+	while ((work = list_first_entry_or_null(&wq->delayed_list,
+				struct delayed_work, work.entry))) {
+		list_del_init(&work->work.entry);
+		if (try_to_del_timer_sync(&work->timer) == -1)
+			list_add_tail(&work->work.entry, &running_timers);
+		else
+			__queue_work(work->cpu, wq, &work->work);
+
+		/* Give others a chance to use the lock. */
+		raw_spin_unlock_irq(&wq->delayed_lock);
+		raw_spin_lock_irq(&wq->delayed_lock);
+	}
+	raw_spin_unlock_irq(&wq->delayed_lock);
+
+	/*
+	 * We also need to ensure that all rcu_work items are queued. The
+	 * easiest way to do this is to wait for the rcu callbacks to finish,
+	 * so we call rcu_barrier(). The call to rcu_barrier() could happen
+	 * anywhere in this function, but right now we need to wait for timer
+	 * callbacks to remove themselves from running_timers and we have no
+	 * good way of waiting for that other than spinning, so this seems like
+	 * a good time to call rcu_barrier().
+	 */
+	rcu_barrier();
+
+	raw_spin_lock_irq(&wq->delayed_lock);
+	while (!list_empty(&running_timers)) {
+		raw_spin_unlock_irq(&wq->delayed_lock);
+		/*
+		 * The timers are irqsafe, so waiting for them by spinning
+		 * should be okay.
+		 */
+		cpu_relax();
+		raw_spin_lock_irq(&wq->delayed_lock);
+	}
+	raw_spin_unlock_irq(&wq->delayed_lock);
+}
+
 /**
  * destroy_workqueue - safely terminate a workqueue
  * @wq: target workqueue
  *
  * Safely destroy a workqueue. All work currently pending will be done first.
+ *
+ * Note that delayed work is executed *without* waiting for the delay. This
+ * means that delayed work may execute sooner than expected. This doesn't apply
+ * to rcu work, which is still guaranteed to be wait a grace period before
+ * executing (so this call may involve waiting an rcu grace period).
  */
 void destroy_workqueue(struct workqueue_struct *wq)
 {
@@ -5848,6 +5947,12 @@ void destroy_workqueue(struct workqueue_struct *wq)
 	 * lead to sysfs name conflicts.
 	 */
 	workqueue_sysfs_unregister(wq);
+
+	/*
+	 * Ensure that all work items are queued properly so that
+	 * drain_workqueue() will not miss any pending jobs.
+	 */
+	enqueue_everything(wq);
 
 	/* mark the workqueue destruction is in progress */
 	mutex_lock(&wq->mutex);
