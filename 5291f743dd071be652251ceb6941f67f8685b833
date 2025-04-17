@@ -69,6 +69,24 @@
       "parentUuid": "905700ed_4572467e",
       "revId": "5291f743dd071be652251ceb6941f67f8685b833",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc86ea78_32456b53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-04-17T20:07:52Z",
+      "side": 1,
+      "message": "Please wait with uploading a new version of this CL until the SCSI maintainer has confirmed that he will merge this patch.",
+      "parentUuid": "50a3ae0b_dbf9b4d7",
+      "revId": "5291f743dd071be652251ceb6941f67f8685b833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
