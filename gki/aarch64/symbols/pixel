@@ -989,6 +989,8 @@
   fwnode_typec_mux_get
   fwnode_typec_switch_get
   gcd
+  gcma_alloc_range
+  gcma_free_range
   generic_device_group
   generic_file_llseek
   generic_handle_domain_irq
@@ -1962,6 +1964,7 @@
   register_chrdev_region
   register_console
   register_die_notifier
+  register_gcma_area
   register_inet6addr_notifier
   register_inetaddr_notifier
   register_kernel_break_hook
@@ -2017,6 +2020,7 @@
   regulator_put
   regulator_set_active_discharge_regmap
   regulator_set_load
+  regulator_set_mode
   regulator_set_voltage
   regulator_set_voltage_sel_regmap
   regulator_set_voltage_time_sel
