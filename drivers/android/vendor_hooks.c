@@ -73,6 +73,14 @@
 #include <trace/hooks/blk.h>
 #include <trace/hooks/fsnotify.h>
 
+#include <linux/android_kabi.h>
+
+ANDROID_KABI_DECLONLY(net);
+ANDROID_KABI_DECLONLY(net_device);
+ANDROID_KABI_DECLONLY(packet_type);
+ANDROID_KABI_DECLONLY(sk_buff);
+ANDROID_KABI_DECLONLY(sockaddr_in6);
+
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
