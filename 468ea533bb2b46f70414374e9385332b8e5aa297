@@ -16,6 +16,24 @@
       "message": "Looks ok, but needs a rebase.\n\nAlso, I\u0027d be curious if experimenting with sched_proxy_exec\u003dtrue as a boot argument helps the priority inversion you\u0027re seeing? The proxy-exec functionality is present in android16-6.12 but disabled by default (as vendorhooks may need to be updated to recognize the split scheduling context: donor vs curr)",
       "revId": "468ea533bb2b46f70414374e9385332b8e5aa297",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "957fe4b7_63840f9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010822
+      },
+      "writtenOn": "2025-04-17T06:43:15Z",
+      "side": 1,
+      "message": "Rebase completed.\nWe currently have no plans to enable this feature on our projects. In the meantime, we are learning about this new feature.",
+      "parentUuid": "6838be51_ca0e6c8b",
+      "revId": "468ea533bb2b46f70414374e9385332b8e5aa297",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
