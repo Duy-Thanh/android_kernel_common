@@ -4488,7 +4488,7 @@ static int handle_exception_nmi(struct kvm_vcpu *vcpu)
 	 */
 	if (is_nm_fault(intr_info)) {
 		kvm_queue_exception(vcpu, NM_VECTOR);
-		return 0;
+		return 1;
 	}
 
 	ex_no = intr_info & INTR_INFO_VECTOR_MASK;
@@ -6442,6 +6442,63 @@ void vmx_load_eoi_exitmap(struct kvm_vcpu *vcpu, u64 *eoi_exit_bitmap)
 	vmcs_write64(EOI_EXIT_BITMAP3, eoi_exit_bitmap[3]);
 }
 
+static void handle_nm_fault_irqoff(struct kvm_vcpu *vcpu)
+{
+	/*
+	 * Save xfd_err to guest_fpu before interrupt is enabled, so the
+	 * MSR value is not clobbered by the host activity before the guest
+	 * has chance to consume it.
+	 *
+	 * Do not blindly read xfd_err here, since this exception might
+	 * be caused by L1 interception on a platform which doesn't
+	 * support xfd at all.
+	 *
+	 * Do it conditionally upon guest_fpu::xfd. xfd_err matters
+	 * only when xfd contains a non-zero value.
+	 *
+	 * Queuing exception is done in vmx_handle_exit. See comment there.
+	 */
+	if (vcpu->arch.guest_fpu.fpstate->xfd)
+		rdmsrl(MSR_IA32_XFD_ERR, vcpu->arch.guest_fpu.xfd_err);
+}
+
+static void handle_exception_irqoff(struct kvm_vcpu *vcpu, u32 intr_info)
+{
+#ifdef __PKVM_HYP__
+	/* if exit due to NM, handle before interrupts are enabled */
+	if (is_nm_fault(intr_info))
+		handle_nm_fault_irqoff(vcpu);
+#else
+	/* if exit due to PF check for async PF */
+	if (is_page_fault(intr_info))
+		vcpu->arch.apf.host_apf_flags = kvm_read_and_reset_apf_flags();
+	/* if exit due to NM, handle before interrupts are enabled */
+	else if (is_nm_fault(intr_info))
+		handle_nm_fault_irqoff(vcpu);
+	/* Handle machine checks before interrupts are enabled */
+	else if (is_machine_check(intr_info))
+		kvm_machine_check();
+#endif
+}
+
+void vmx_handle_exit_irqoff(struct kvm_vcpu *vcpu)
+{
+	struct vcpu_vmx *vmx = to_vmx(vcpu);
+
+	if (vmx->emulation_required)
+		return;
+
+#ifdef __PKVM_HYP__
+	if (vmx->exit_reason.basic == EXIT_REASON_EXCEPTION_NMI)
+		handle_exception_irqoff(vcpu, vmx_get_intr_info(vcpu));
+#else
+	if (vmx->exit_reason.basic == EXIT_REASON_EXTERNAL_INTERRUPT)
+		handle_external_interrupt_irqoff(vcpu, vmx_get_intr_info(vcpu));
+	else if (vmx->exit_reason.basic == EXIT_REASON_EXCEPTION_NMI)
+		handle_exception_irqoff(vcpu, vmx_get_intr_info(vcpu));
+#endif
+}
+
 static void vmx_recover_nmi_blocking(struct vcpu_vmx *vmx)
 {
 	u32 exit_intr_info;
@@ -8040,6 +8097,8 @@ struct kvm_x86_ops vt_x86_ops __initdata = {
 	.write_tsc_multiplier = vmx_write_tsc_multiplier,
 
 	.load_mmu_pgd = vmx_load_mmu_pgd,
+
+	.handle_exit_irqoff = vmx_handle_exit_irqoff,
 
 	.setup_mce = vmx_setup_mce,
 };
