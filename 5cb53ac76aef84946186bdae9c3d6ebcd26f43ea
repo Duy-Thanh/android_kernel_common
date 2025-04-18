@@ -122,6 +122,24 @@
       "parentUuid": "fb6d9799_79f39a0d",
       "revId": "5cb53ac76aef84946186bdae9c3d6ebcd26f43ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb18c8bb_9984a6bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2025-04-18T11:27:28Z",
+      "side": 1,
+      "message": "\u003e So these can\u0027t be exported then?\n\nthe original conference is here\nhttps://android-review.googlesource.com/c/kernel/common/+/2133126.\n\nIMO, our requirement is to iterate all the mem cgroups and don\u0027t break the core code. if more symbols exported, more issues would happen 😂",
+      "parentUuid": "8776aeb5_fb4f2d68",
+      "revId": "5cb53ac76aef84946186bdae9c3d6ebcd26f43ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
