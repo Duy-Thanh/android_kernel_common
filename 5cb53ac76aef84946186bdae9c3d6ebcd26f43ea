@@ -86,6 +86,24 @@
       "parentUuid": "ed2f2ae3_b2a16c60",
       "revId": "5cb53ac76aef84946186bdae9c3d6ebcd26f43ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb6d9799_79f39a0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-18T03:33:04Z",
+      "side": 1,
+      "message": "\u003e the mem_cgroup_iter_break, mem_cgroup_iter symbols cann\u0027t used by kernel modules.\n\nOk I see. So these can\u0027t be exported then? I\u0027m not sure where the restriction comes from.\n\n\u003e the prev version i https: //android-review.googlesource.com/c/kernel/common/+/3075627\n\nOk. Wouldn\u0027t it then make sense to keep the same Change-Id:?",
+      "parentUuid": "b3760b4b_f63e825e",
+      "revId": "5cb53ac76aef84946186bdae9c3d6ebcd26f43ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
