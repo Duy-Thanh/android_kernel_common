@@ -104,6 +104,24 @@
       "parentUuid": "b3760b4b_f63e825e",
       "revId": "5cb53ac76aef84946186bdae9c3d6ebcd26f43ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8776aeb5_fb4f2d68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2025-04-18T03:48:46Z",
+      "side": 1,
+      "message": "\u003e Ok. Wouldn\u0027t it then make sense to keep the same Change-Id:?\n\nThat make sense. This would generate a new link.we will update abi and symbol lists as suren suggested in the new change. \n\nThanks for review.",
+      "parentUuid": "fb6d9799_79f39a0d",
+      "revId": "5cb53ac76aef84946186bdae9c3d6ebcd26f43ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
