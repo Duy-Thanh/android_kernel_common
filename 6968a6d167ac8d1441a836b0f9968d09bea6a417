@@ -40,6 +40,30 @@
       ],
       "revId": "6968a6d167ac8d1441a836b0f9968d09bea6a417",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "142c3a0a_207d68fe",
+        "filename": "rust/kernel/uaccess.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-04-18T23:05:45Z",
+      "side": 1,
+      "message": "NUL is actually an acceptable variant when talking about bytes: https://en.wikipedia.org/wiki/Null_character",
+      "parentUuid": "227676d5_902a3a05",
+      "range": {
+        "startLine": 298,
+        "startChar": 16,
+        "endLine": 298,
+        "endChar": 19
+      },
+      "revId": "6968a6d167ac8d1441a836b0f9968d09bea6a417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
