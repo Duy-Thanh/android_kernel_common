@@ -487,3 +487,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_update_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernated_do_mem_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_save_cmp_len);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_uid_stats);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_append_total_power);
