@@ -33,6 +33,23 @@
       "message": "git submodule init",
       "revId": "144ef08156f779037471c8c14e2082abc8a91fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a58a2d_dfddc492",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4011484
+      },
+      "writtenOn": "2025-04-18T18:45:33Z",
+      "side": 1,
+      "message": "git submodule update",
+      "revId": "144ef08156f779037471c8c14e2082abc8a91fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
