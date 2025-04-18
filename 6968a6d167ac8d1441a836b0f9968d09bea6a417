@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "227676d5_902a3a05",
+        "filename": "rust/kernel/uaccess.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-04-18T22:56:57Z",
+      "side": 1,
+      "message": "s/nul/null",
+      "range": {
+        "startLine": 298,
+        "startChar": 16,
+        "endLine": 298,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a9bce755_7f074644",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "rust/kernel/uaccess.rs",
+              "range": {
+                "startLine": 298,
+                "startChar": 0,
+                "endLine": 299,
+                "endChar": 0
+              },
+              "replacement": "    /// Reads a null-terminated string into the provided buffer and returns the length.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6968a6d167ac8d1441a836b0f9968d09bea6a417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
