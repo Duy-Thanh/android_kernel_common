@@ -313,6 +313,30 @@
       },
       "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a5d2c2_229820d8",
+        "filename": "include/trace/hooks/power.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4002347
+      },
+      "writtenOn": "2025-04-18T01:16:35Z",
+      "side": 1,
+      "message": "This modification includes \"include\" because the original code contains \"enum freq_qos_req_type\", which causes a compilation error. This dependency was introduced by a historical modification. We tried to add #include \u003clinux/pm_qos.h\u003e to the C file. What is your suggestion?",
+      "parentUuid": "992a0eb3_037e4cab",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
