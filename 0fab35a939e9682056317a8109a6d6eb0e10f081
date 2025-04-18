@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d4e3ef_4eeb136b",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-04-18T21:00:12Z",
+      "side": 0,
+      "message": "interesting description on this one\n\n```\nThis option is deprecated and should sooner or later be removed.\nAndroid is the only user of this and it turned out that this resulted\nin quite some performance problems.\n ```",
+      "revId": "0fab35a939e9682056317a8109a6d6eb0e10f081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

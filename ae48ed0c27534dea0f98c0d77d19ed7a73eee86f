@@ -45,6 +45,46 @@
       },
       "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "650c41c4_b8fc4ee4",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-04-18T21:00:12Z",
+      "side": 1,
+      "message": "i agree with the comments in the bug that this one is going to be painful",
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdaf087d_5bdd96ea",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-04-18T21:00:12Z",
+      "side": 1,
+      "message": "I guess this is good enough for current phones and then we\u0027ll bump it when a phone comes along with more cores? I tried to find something with more than 8 cores in the market, but only found a discontinued mediatek soc",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
