@@ -379,6 +379,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abc17681_3387861b",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-18T17:12:03Z",
+      "side": 1,
+      "message": "Do the instances of `trace_android_vh_update_uid_stats()` at line 499 and 552 rely on a valid value in `android_oem_data1`? Or is this field always write-only to that hook?\n\nSince this is where `usw` is allocated, it seems safer to explicitly set android_oem_data1 to 0 here so the hook can rely on a stable value.",
+      "parentUuid": "a6dbe11b_516fef3e",
+      "range": {
+        "startLine": 536,
+        "startChar": 10,
+        "endLine": 536,
+        "endChar": 27
+      },
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93580d11_c09a8667",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 2
