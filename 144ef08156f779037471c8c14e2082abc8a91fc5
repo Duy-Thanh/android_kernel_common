@@ -16,6 +16,23 @@
       "message": "If this is a cherrypick from the base branch, can we use the same change ID please?",
       "revId": "144ef08156f779037471c8c14e2082abc8a91fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1560154a_b044151f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4011484
+      },
+      "writtenOn": "2025-04-18T18:43:10Z",
+      "side": 1,
+      "message": "git submodule init",
+      "revId": "144ef08156f779037471c8c14e2082abc8a91fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
