@@ -22,6 +22,30 @@
       },
       "revId": "caa6bad62eb73ac26f16c96fe91c52e6c0188d14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab3bce86_991414f3",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2665,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-04-18T03:40:01Z",
+      "side": 1,
+      "message": "I think there are three solutions for the migration of this code.\n1. Keep the original code intact;\n2. Synchronize the patches related to pcp_allowed_order(order);\n3. Directly remove this code block;\nI consider Option 1 to be the most secure approach, hence I\u0027ve opted for it.\nWhat do you think would be a better way to modify it?",
+      "parentUuid": "558aeeec_3d1e8f2e",
+      "range": {
+        "startLine": 2656,
+        "startChar": 2,
+        "endLine": 2665,
+        "endChar": 3
+      },
+      "revId": "caa6bad62eb73ac26f16c96fe91c52e6c0188d14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
