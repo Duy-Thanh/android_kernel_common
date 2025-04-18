@@ -106,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8157b67c_cbbb49b4",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-18T09:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c8f5b60_f6e07921",
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66f99793_72590f62",
@@ -177,6 +195,24 @@
           ]
         }
       ],
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d70baa4_70df604d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-18T09:38:10Z",
+      "side": 1,
+      "message": "This is an OEM patch, ANDROID_VENDOR_OEM_DATA is undefined",
+      "parentUuid": "66f99793_72590f62",
       "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -259,6 +295,48 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ae86747_db86ccc2",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-18T09:38:10Z",
+      "side": 1,
+      "message": "usw-\u003eandroid_oem_data1 is initialized in the module.",
+      "parentUuid": "78648726_fcb28756",
+      "range": {
+        "startLine": 536,
+        "startChar": 10,
+        "endLine": 536,
+        "endChar": 27
+      },
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63178552_5468fd74",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-18T09:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "467f9f15_9b3cb723",
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93580d11_c09a8667",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 2
@@ -288,6 +366,24 @@
           ]
         }
       ],
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d802f9fe_4d804056",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-18T09:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93580d11_c09a8667",
       "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -329,6 +425,30 @@
       "side": 1,
       "message": "This modification includes \"include\" because the original code contains \"enum freq_qos_req_type\", which causes a compilation error. This dependency was introduced by a historical modification. We tried to add #include \u003clinux/pm_qos.h\u003e to the C file. What is your suggestion?",
       "parentUuid": "992a0eb3_037e4cab",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ad5a8c9_950c29c6",
+        "filename": "include/trace/hooks/power.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-18T09:38:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49a5d2c2_229820d8",
       "range": {
         "startLine": 9,
         "startChar": 0,
