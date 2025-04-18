@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "641bb1c8_680d0c21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-04-18T09:32:00Z",
+      "side": 1,
+      "message": "It should specify the steps to actually test that the feature is functional, not just passing the build (build is tested as part of presubmit).",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "7026b6c18028b1bcd32c335043aafadb5c65cc66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
