@@ -1,0 +1,299 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7546da0d_0714ecfd",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-18T19:24:59Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "fixSuggestions": [
+        {
+          "fixId": "69c3febc_359a7347",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9aa2add_48c4fb19",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-18T19:24:59Z",
+      "side": 1,
+      "message": "actually, you don\u0027t need the #ifdef here since it is a passed-in parameter",
+      "fixSuggestions": [
+        {
+          "fixId": "9cf3a4e3_e408f152",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 217,
+                "startChar": 0,
+                "endLine": 218,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 220,
+                "startChar": 0,
+                "endLine": 221,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34977324_953fa034",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-18T19:24:59Z",
+      "side": 1,
+      "message": "I think it would be cleaner to add a macro above:\n```\n#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA\n#define OEM_DATA(x) x-\u003eandroid_oem_data1\n#else\n#define OEM_DATA(x) 0\n#endif\n```\nThen the code here would reduce to:\n```\nu64 android_oem_data \u003d OEM_DATA(uid_entry);\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "dbc3c048_03a1ba0f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 51,
+                "startChar": 0,
+                "endLine": 51,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA\n#define OEM_DATA(x) x-\u003eandroid_oem_data1\n#else\n#define OEM_DATA(x) 0\n#endif\n\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 240,
+                "startChar": 0,
+                "endLine": 245,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tu64 android_oem_data \u003d OEM_DATA(uid_entry);\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 509,
+                "startChar": 0,
+                "endLine": 510,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_update_uid_stats(\u0026OEM_DATA(uid_entry),\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 566,
+                "startChar": 0,
+                "endLine": 567,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_update_uid_stats(\u0026OEM_DATA(uid_entry), NULL,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2841eb0b_651e8a1c",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-18T19:24:59Z",
+      "side": 1,
+      "message": "#ifdef not needed here since you put in a local above",
+      "fixSuggestions": [
+        {
+          "fixId": "2c28ad62_3498b19e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 250,
+                "startChar": 0,
+                "endLine": 251,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 253,
+                "startChar": 0,
+                "endLine": 254,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9148acd3_f0caf505",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-18T19:24:59Z",
+      "side": 1,
+      "message": "you could use the same macro mentioned above and get rid of the #ifdef",
+      "fixSuggestions": [
+        {
+          "fixId": "02f2a9d1_0836e4ee",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 89,
+                "startChar": 0,
+                "endLine": 89,
+                "endChar": 0
+              },
+              "replacement": "#define UPDATE_ANDROID_OEM_DATA(target, source, task, type) \\\n\ttrace_android_vh_update_uid_stats(target, source, task, type)\n\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 217,
+                "startChar": 0,
+                "endLine": 221,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tUPDATE_ANDROID_OEM_DATA(android_oem_data, NULL, t, 3);\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 508,
+                "startChar": 0,
+                "endLine": 510,
+                "endChar": 0
+              },
+              "replacement": "\t\tUPDATE_ANDROID_OEM_DATA(\u0026uid_entry-\u003eandroid_oem_data1,\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 511,
+                "startChar": 0,
+                "endLine": 512,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 546,
+                "startChar": 0,
+                "endLine": 548,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tUPDATE_ANDROID_OEM_DATA(NULL,\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 549,
+                "startChar": 0,
+                "endLine": 550,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 565,
+                "startChar": 0,
+                "endLine": 567,
+                "endChar": 0
+              },
+              "replacement": "\tUPDATE_ANDROID_OEM_DATA(\u0026uid_entry-\u003eandroid_oem_data1, NULL,\n"
+            },
+            {
+              "path": "drivers/misc/uid_sys_stats.c",
+              "range": {
+                "startLine": 568,
+                "startChar": 0,
+                "endLine": 569,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
