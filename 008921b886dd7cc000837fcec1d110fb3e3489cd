@@ -51,6 +51,24 @@
       "message": "Sorry, I won\u0027t be a suitable reviewer as I don\u0027t know what this file does. I\u0027m taking myself out from the list of the reviewers...",
       "revId": "008921b886dd7cc000837fcec1d110fb3e3489cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf8b72d_c7651ad3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-04-18T04:47:56Z",
+      "side": 1,
+      "message": "I\u0027ve squashed them. Abandon this one",
+      "parentUuid": "d1d0902f_4546ffc6",
+      "revId": "008921b886dd7cc000837fcec1d110fb3e3489cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
