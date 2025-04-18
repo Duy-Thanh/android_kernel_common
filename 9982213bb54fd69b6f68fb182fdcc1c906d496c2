@@ -217,6 +217,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "510d9e1e_b386fd3c",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-18T09:38:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d70baa4_70df604d",
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "467f9f15_9b3cb723",
@@ -331,6 +349,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "467f9f15_9b3cb723",
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6dbe11b_516fef3e",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-18T09:38:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ae86747_db86ccc2",
+      "range": {
+        "startLine": 536,
+        "startChar": 10,
+        "endLine": 536,
+        "endChar": 27
+      },
       "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
