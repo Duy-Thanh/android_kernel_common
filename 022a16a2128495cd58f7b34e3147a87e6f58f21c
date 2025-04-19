@@ -33,6 +33,24 @@
       "message": "It looks like this patch series has been updated to v3:\nhttps://lore.kernel.org/all/20250417043457.10632-1-xuewen.yan@unisoc.com/\n\nCould this submission be updated as well?",
       "revId": "022a16a2128495cd58f7b34e3147a87e6f58f21c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a5481c_286b8359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2025-04-19T15:16:56Z",
+      "side": 1,
+      "message": "updated to v3 as below:\nSplit previous patch in 2 patches(3580293/3596432)",
+      "parentUuid": "2767d31a_14e733d0",
+      "revId": "022a16a2128495cd58f7b34e3147a87e6f58f21c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
