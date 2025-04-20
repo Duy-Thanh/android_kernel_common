@@ -42,6 +42,12 @@
 #define __PKVM_HC_REPRIVILEGE_VCPU	101
 
 /*
+ * Debug only hypercalls.
+ */
+#define PKVM_HC_DUMP_DMAR_TR_STRUCT	200
+#define PKVM_HC_DUMP_DOMAIN_PGT		201
+
+/*
  * 15bits for PASID, DO NOT change it, based on it,
  * the size of PASID DIR table can kept as one page
  */
@@ -122,6 +128,21 @@ static inline bool pkvm_enabled(void)
 }
 
 int pkvm_iommu_register_driver(const struct pkvm_iommu_driver *kern_ops);
+
+static inline long pkvm_dump_dmar_translation_struct(void)
+{
+	if (pkvm_enabled())
+		return kvm_hypercall0(PKVM_HC_DUMP_DMAR_TR_STRUCT);
+	return 0;
+}
+
+static inline long pkvm_dump_domain_translation_struct(
+		unsigned long phys, unsigned long bdf, unsigned long pasid)
+{
+	if (pkvm_enabled())
+		return kvm_hypercall3(PKVM_HC_DUMP_DOMAIN_PGT, phys, bdf, pasid);
+	return 0;
+}
 
 static inline u64 pkvm_readq(void __iomem *reg, unsigned long reg_phys,
 			     unsigned long offset)
