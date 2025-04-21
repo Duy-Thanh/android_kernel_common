@@ -16,6 +16,24 @@
       "message": "Lets explore an alternative first. This sounds like a bad idea to me. Please follow up on the bug.",
       "revId": "e8d96f077afe0925d37f4efe15e1fc2617c48bed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad7112f3_6196ad82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4002347
+      },
+      "writtenOn": "2025-04-21T12:33:16Z",
+      "side": 1,
+      "message": "We have already replied in the case.",
+      "parentUuid": "6173b262_9312a938",
+      "revId": "e8d96f077afe0925d37f4efe15e1fc2617c48bed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
