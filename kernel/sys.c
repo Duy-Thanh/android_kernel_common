@@ -78,6 +78,7 @@
 #include "uid16.h"
 
 #include <trace/hooks/sys.h>
+#include <trace/hooks/experiments.h>
 
 #ifndef SET_UNALIGN_CTL
 # define SET_UNALIGN_CTL(a, b)	(-EINVAL)
@@ -1319,6 +1320,9 @@ SYSCALL_DEFINE1(newuname, struct new_utsname __user *, name)
 		return -EFAULT;
 	if (override_architecture(name))
 		return -EFAULT;
+
+	trace_android_vh_uname_trace(1);
+
 	return 0;
 }
 

@@ -12,6 +12,10 @@
 
 #include <trace/hooks/vendor_hooks.h>
 
+DECLARE_HOOK(android_vh_uname_trace,
+        TP_PROTO(unsigned int n),
+        TP_ARGS(n));
+
 #endif /* _TRACE_HOOK_EXPERIMENTS_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

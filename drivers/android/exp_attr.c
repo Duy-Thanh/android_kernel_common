@@ -13,7 +13,15 @@
 
 #include <trace/hooks/experiments.h>
 
+static void android_vh_uname_trace(struct exp_attr *exp, unsigned int n)
+{
+	if (exp && exp->enable) {
+		printk(KERN_INFO pr_fmt("kernel uname_trace hook(%d)\n"), n);
+	}
+}
+
 struct exp_attr experiments[] = {
+	EXPERIMENT(uname_trace),
 };
 
 const size_t experiment_count = ARRAY_SIZE(experiments);
