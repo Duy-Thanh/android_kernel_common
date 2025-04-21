@@ -46,6 +46,30 @@
       },
       "revId": "caa6bad62eb73ac26f16c96fe91c52e6c0188d14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0b35ad5_c1eb6fa2",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2665,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-21T18:48:00Z",
+      "side": 1,
+      "message": "IIUC the whole point of this patch was to move handling of these isolated pages into the second loop. By leaving this part here, you make the second part of this change unnecessary because in the second loop there will be no isolated pages anymore. In that case I think it\u0027s better to skip this whole patch altogether.",
+      "parentUuid": "ab3bce86_991414f3",
+      "range": {
+        "startLine": 2656,
+        "startChar": 2,
+        "endLine": 2665,
+        "endChar": 3
+      },
+      "revId": "caa6bad62eb73ac26f16c96fe91c52e6c0188d14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
