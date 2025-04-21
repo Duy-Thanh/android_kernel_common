@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7107c22b_da9736f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-21T03:35:43Z",
+      "side": 1,
+      "message": "tracing anyway is a debugging feature. didn\u0027t Sandeep want to kill as much as possible?",
+      "parentUuid": "69f6fd9f_490fa476",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-04-18T18:15:15Z",
       "side": 1,
       "message": "how much does this save, because we may need it to test that microdroid has configs installed?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77940164_50feb9f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-21T03:35:43Z",
+      "side": 1,
+      "message": "Without these, the Image increases by 64 KB. We don\u0027t remove this for the \"ordinary\" Microdroid kernel. It\u0027s only for appsearch.",
+      "parentUuid": "73a5b41f_72b049c0",
       "range": {
         "startLine": 18,
         "startChar": 0,
@@ -77,6 +125,30 @@
       "writtenOn": "2025-04-18T21:00:12Z",
       "side": 1,
       "message": "I guess this is good enough for current phones and then we\u0027ll bump it when a phone comes along with more cores? I tried to find something with more than 8 cores in the market, but only found a discontinued mediatek soc",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e572ac_36270953",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-21T03:35:43Z",
+      "side": 1,
+      "message": "This in my understanding doesn\u0027t cause a catastrophic failure even when the number of CPUs are greater than 8. The excess CPUs will just be unused.",
+      "parentUuid": "bdaf087d_5bdd96ea",
       "range": {
         "startLine": 21,
         "startChar": 0,
