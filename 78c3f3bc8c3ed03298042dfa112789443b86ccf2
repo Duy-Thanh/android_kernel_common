@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ccdad79_80e02de2",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-21T01:58:24Z",
+      "side": 0,
+      "message": "This config doesn\u0027t exist, and therefore `savedefconf` automatically pruned it.",
+      "parentUuid": "0dc78446_c473519b",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 28
+      },
+      "revId": "78c3f3bc8c3ed03298042dfa112789443b86ccf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd498180_5cb1656e",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f3b50c_0b3cc599",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-21T01:58:24Z",
+      "side": 0,
+      "message": "This is still turned on automatically by the dependencies. `savedefconfig` just automatically dropped such an implicitly turned-on configs.\n\n```\nconfig UBSAN_LOCAL_BOUNDS\n    def_bool UBSAN_ARRAY_BOUNDS \u0026\u0026 UBSAN_TRAP\n```",
+      "parentUuid": "dd498180_5cb1656e",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 27
+      },
+      "revId": "78c3f3bc8c3ed03298042dfa112789443b86ccf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "204dd92a_f5bb8b80",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-04-18T18:20:13Z",
       "side": 0,
       "message": "we don\u0027t want this?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 31
+      },
+      "revId": "78c3f3bc8c3ed03298042dfa112789443b86ccf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f531c13_7d0b754a",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-21T01:58:24Z",
+      "side": 0,
+      "message": "This is not removed, but moved to L144 by `savedefconfig`",
+      "parentUuid": "204dd92a_f5bb8b80",
       "range": {
         "startLine": 178,
         "startChar": 0,
