@@ -3454,10 +3454,20 @@ static bool should_clear_pmd_young(void)
 		READ_ONCE((lruvec)->lrugen.min_seq[LRU_GEN_FILE]),	\
 	}
 
+/* Get the min/max evictable type based on swappiness */
+#define min_type(swappiness) (!(swappiness))
+#define max_type(swappiness) ((swappiness) < SWAPPINESS_ANON_ONLY)
+
+#define evictable_min_seq(min_seq, swappiness)				\
+	min((min_seq)[min_type(swappiness)], (min_seq)[max_type(swappiness)])
+
 #define for_each_gen_type_zone(gen, type, zone)				\
 	for ((gen) = 0; (gen) < MAX_NR_GENS; (gen)++)			\
 		for ((type) = 0; (type) < ANON_AND_FILE; (type)++)	\
 			for ((zone) = 0; (zone) < MAX_NR_ZONES; (zone)++)
+
+#define for_each_evictable_type(type, swappiness)			\
+	for ((type) = min_type(swappiness); (type) <= max_type(swappiness); (type)++)
 
 #define get_memcg_gen(seq)	((seq) % MEMCG_NR_GENS)
 #define get_memcg_bin(bin)	((bin) % MEMCG_NR_BINS)
@@ -3508,10 +3518,16 @@ static int get_nr_gens(struct lruvec *lruvec, int type)
 
 static bool __maybe_unused seq_is_valid(struct lruvec *lruvec)
 {
-	/* see the comment on lru_gen_folio */
-	return get_nr_gens(lruvec, LRU_GEN_FILE) >= MIN_NR_GENS &&
-	       get_nr_gens(lruvec, LRU_GEN_FILE) <= get_nr_gens(lruvec, LRU_GEN_ANON) &&
-	       get_nr_gens(lruvec, LRU_GEN_ANON) <= MAX_NR_GENS;
+	int type;
+
+	for (type = 0; type < ANON_AND_FILE; type++) {
+		int n = get_nr_gens(lruvec, type);
+
+		if (n < MIN_NR_GENS || n > MAX_NR_GENS)
+			return false;
+	}
+
+	return true;
 }
 
 /******************************************************************************
@@ -4547,14 +4563,19 @@ static void clear_mm_walk(void)
 		kfree(walk);
 }
 
-static bool inc_min_seq(struct lruvec *lruvec, int type, bool can_swap)
+static bool inc_min_seq(struct lruvec *lruvec, int type, int swappiness)
 {
 	int zone;
 	int remaining = MAX_LRU_BATCH;
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 	int new_gen, old_gen = lru_gen_from_seq(lrugen->min_seq[type]);
 
-	if (type == LRU_GEN_ANON && !can_swap)
+	/* For file type, skip the check if swappiness is anon only */
+	if (type && (swappiness == SWAPPINESS_ANON_ONLY))
+		goto done;
+
+	/* For anon type, skip the check if swappiness is zero (file only) */
+	if (!type && !swappiness)
 		goto done;
 
 	/* prevent cold/hot inversion if force_scan is true */
@@ -4583,7 +4604,7 @@ done:
 	return true;
 }
 
-static bool try_to_inc_min_seq(struct lruvec *lruvec, bool can_swap)
+static bool try_to_inc_min_seq(struct lruvec *lruvec, int swappiness)
 {
 	int gen, type, zone;
 	bool success = false;
@@ -4593,7 +4614,7 @@ static bool try_to_inc_min_seq(struct lruvec *lruvec, bool can_swap)
 	VM_WARN_ON_ONCE(!seq_is_valid(lruvec));
 
 	/* find the oldest populated generation */
-	for (type = !can_swap; type < ANON_AND_FILE; type++) {
+	for_each_evictable_type(type, swappiness) {
 		while (min_seq[type] + MIN_NR_GENS <= lrugen->max_seq) {
 			gen = lru_gen_from_seq(min_seq[type]);
 
@@ -4609,13 +4630,17 @@ next:
 	}
 
 	/* see the comment on lru_gen_folio */
-	if (can_swap) {
-		min_seq[LRU_GEN_ANON] = min(min_seq[LRU_GEN_ANON], min_seq[LRU_GEN_FILE]);
-		min_seq[LRU_GEN_FILE] = max(min_seq[LRU_GEN_ANON], lrugen->min_seq[LRU_GEN_FILE]);
+	if (swappiness && swappiness <= MAX_SWAPPINESS) {
+		unsigned long seq = lrugen->max_seq - MIN_NR_GENS;
+
+		if (min_seq[LRU_GEN_ANON] > seq && min_seq[LRU_GEN_FILE] < seq)
+			min_seq[LRU_GEN_ANON] = seq;
+		else if (min_seq[LRU_GEN_FILE] > seq && min_seq[LRU_GEN_ANON] < seq)
+			min_seq[LRU_GEN_FILE] = seq;
 	}
 
-	for (type = !can_swap; type < ANON_AND_FILE; type++) {
-		if (min_seq[type] == lrugen->min_seq[type])
+	for_each_evictable_type(type, swappiness) {
+		if (min_seq[type] <= lrugen->min_seq[type])
 			continue;
 
 		reset_ctrl_pos(lruvec, type, true);
@@ -4626,7 +4651,7 @@ next:
 	return success;
 }
 
-static void inc_max_seq(struct lruvec *lruvec, bool can_swap, bool force_scan)
+static void inc_max_seq(struct lruvec *lruvec, int swappiness, bool force_scan)
 {
 	int prev, next;
 	int type, zone;
@@ -4640,9 +4665,10 @@ restart:
 		if (get_nr_gens(lruvec, type) != MAX_NR_GENS)
 			continue;
 
-		VM_WARN_ON_ONCE(!force_scan && (type == LRU_GEN_FILE || can_swap));
+		VM_WARN_ON_ONCE(!force_scan && ((type == LRU_GEN_FILE && swappiness <= MAX_SWAPPINESS) ||
+						(type == LRU_GEN_ANON && swappiness)));
 
-		if (inc_min_seq(lruvec, type, can_swap))
+		if (inc_min_seq(lruvec, type, swappiness))
 			continue;
 
 		spin_unlock_irq(&lruvec->lru_lock);
@@ -4684,7 +4710,7 @@ restart:
 }
 
 static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
-			       struct scan_control *sc, bool can_swap, bool force_scan)
+			       struct scan_control *sc, int swappiness, bool force_scan)
 {
 	bool success;
 	struct lru_gen_mm_walk *walk;
@@ -4718,7 +4744,7 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
 
 	walk->lruvec = lruvec;
 	walk->max_seq = max_seq;
-	walk->can_swap = can_swap;
+	walk->can_swap = swappiness;
 	walk->force_scan = force_scan;
 
 	do {
@@ -4728,7 +4754,7 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
 	} while (mm);
 done:
 	if (success)
-		inc_max_seq(lruvec, can_swap, force_scan);
+		inc_max_seq(lruvec, swappiness, force_scan);
 
 	return success;
 }
@@ -4767,13 +4793,13 @@ static bool lruvec_is_sizable(struct lruvec *lruvec, struct scan_control *sc)
 {
 	int gen, type, zone;
 	unsigned long total = 0;
-	bool can_swap = get_swappiness(lruvec, sc);
+	int swappiness = get_swappiness(lruvec, sc);
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
 	DEFINE_MAX_SEQ(lruvec);
 	DEFINE_MIN_SEQ(lruvec);
 
-	for (type = !can_swap; type < ANON_AND_FILE; type++) {
+	for_each_evictable_type(type, swappiness) {
 		unsigned long seq;
 
 		for (seq = min_seq[type]; seq <= max_seq; seq++) {
@@ -4793,6 +4819,7 @@ static bool lruvec_is_reclaimable(struct lruvec *lruvec, struct scan_control *sc
 {
 	int gen;
 	unsigned long birth;
+	int swappiness = get_swappiness(lruvec, sc);
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
 	DEFINE_MIN_SEQ(lruvec);
 
@@ -4803,7 +4830,7 @@ static bool lruvec_is_reclaimable(struct lruvec *lruvec, struct scan_control *sc
 		return false;
 
 	/* see the comment on lru_gen_folio */
-	gen = lru_gen_from_seq(min_seq[LRU_GEN_FILE]);
+	gen = lru_gen_from_seq(evictable_min_seq(min_seq, swappiness));
 	birth = READ_ONCE(lruvec->lrugen.timestamps[gen]);
 
 	return time_is_before_jiffies(birth + min_ttl);
@@ -5360,7 +5387,7 @@ static int isolate_folios(struct lruvec *lruvec, struct scan_control *sc, int sw
 	int type;
 	int scanned;
 	int tier = -1;
-	int type_to_scan = ANON_AND_FILE;
+	int type_to_scan = max_type(swappiness) + 1;
 	DEFINE_MIN_SEQ(lruvec);
 
 	/*
@@ -5374,13 +5401,13 @@ static int isolate_folios(struct lruvec *lruvec, struct scan_control *sc, int sw
 		type = LRU_GEN_ANON;
 	else if (swappiness == 1)
 		type = LRU_GEN_FILE;
-	else if (swappiness == MAX_SWAPPINESS)
+	else if (swappiness >= MAX_SWAPPINESS)
 		type = LRU_GEN_ANON;
 	else
 		type = get_type_to_scan(lruvec, swappiness, &tier);
 
 	trace_android_vh_isolate_folio_type(swappiness, &type, &tier, &type_to_scan);
-	for (i = !swappiness; i < type_to_scan; i++) {
+	for (i = min_type(swappiness); i < type_to_scan; i++) {
 		if (tier < 0)
 			tier = get_tier_idx(lruvec, type);
 
@@ -5419,7 +5446,8 @@ static int evict_folios(struct lruvec *lruvec, struct scan_control *sc, int swap
 
 	scanned += try_to_inc_min_seq(lruvec, swappiness);
 
-	if (get_nr_gens(lruvec, !swappiness) == MIN_NR_GENS)
+	if (evictable_min_seq(lruvec->lrugen.min_seq, swappiness) + MIN_NR_GENS >
+	    lruvec->lrugen.max_seq)
 		scanned = 0;
 
 	spin_unlock_irq(&lruvec->lru_lock);
@@ -5499,7 +5527,7 @@ retry:
 }
 
 static bool should_run_aging(struct lruvec *lruvec, unsigned long max_seq,
-			     struct scan_control *sc, bool can_swap, unsigned long *nr_to_scan)
+			     struct scan_control *sc, int swappiness, unsigned long *nr_to_scan)
 {
 	int gen, type, zone;
 	unsigned long old = 0;
@@ -5510,12 +5538,12 @@ static bool should_run_aging(struct lruvec *lruvec, unsigned long max_seq,
 	DEFINE_MIN_SEQ(lruvec);
 
 	/* whether this lruvec is completely out of cold folios */
-	if (min_seq[!can_swap] + MIN_NR_GENS > max_seq) {
+	if (evictable_min_seq(min_seq, swappiness) + MIN_NR_GENS > max_seq) {
 		*nr_to_scan = 0;
 		return true;
 	}
 
-	for (type = !can_swap; type < ANON_AND_FILE; type++) {
+	for_each_evictable_type(type, swappiness) {
 		unsigned long seq;
 
 		for (seq = min_seq[type]; seq <= max_seq; seq++) {
@@ -5544,7 +5572,7 @@ static bool should_run_aging(struct lruvec *lruvec, unsigned long max_seq,
 	 * stalls when the number of generations reaches MIN_NR_GENS. Hence, the
 	 * ideal number of generations is MIN_NR_GENS+1.
 	 */
-	if (min_seq[!can_swap] + MIN_NR_GENS < max_seq)
+	if (evictable_min_seq(min_seq, swappiness) + MIN_NR_GENS < max_seq)
 		return false;
 
 	/*
@@ -5567,7 +5595,7 @@ static bool should_run_aging(struct lruvec *lruvec, unsigned long max_seq,
  * 1. Defer try_to_inc_max_seq() to workqueues to reduce latency for memcg
  *    reclaim.
  */
-static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, bool can_swap)
+static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, int swappiness)
 {
 	unsigned long nr_to_scan;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
@@ -5576,7 +5604,7 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, bool 
 	if (mem_cgroup_below_min(sc->target_mem_cgroup, memcg))
 		return -1;
 
-	if (!should_run_aging(lruvec, max_seq, sc, can_swap, &nr_to_scan))
+	if (!should_run_aging(lruvec, max_seq, sc, swappiness, &nr_to_scan))
 		return nr_to_scan;
 
 	/* skip the aging path at the default priority */
@@ -5584,7 +5612,7 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, bool 
 		return nr_to_scan;
 
 	/* skip this lruvec as it's low on cold folios */
-	return try_to_inc_max_seq(lruvec, max_seq, sc, can_swap, false) ? -1 : 0;
+	return try_to_inc_max_seq(lruvec, max_seq, sc, swappiness, false) ? -1 : 0;
 }
 
 static bool should_abort_scan(struct lruvec *lruvec, struct scan_control *sc)
@@ -6216,7 +6244,7 @@ static int lru_gen_seq_show(struct seq_file *m, void *v)
 	seq_printf(m, " node %5d\n", nid);
 
 	if (!full)
-		seq = min_seq[LRU_GEN_ANON];
+		seq = evictable_min_seq(min_seq, MAX_SWAPPINESS / 2);
 	else if (max_seq >= MAX_NR_GENS)
 		seq = max_seq - MAX_NR_GENS + 1;
 	else
@@ -6256,7 +6284,7 @@ static const struct seq_operations lru_gen_seq_ops = {
 };
 
 static int run_aging(struct lruvec *lruvec, unsigned long seq, struct scan_control *sc,
-		     bool can_swap, bool force_scan)
+		     int swappiness, bool force_scan)
 {
 	DEFINE_MAX_SEQ(lruvec);
 	DEFINE_MIN_SEQ(lruvec);
@@ -6267,10 +6295,10 @@ static int run_aging(struct lruvec *lruvec, unsigned long seq, struct scan_contr
 	if (seq > max_seq)
 		return -EINVAL;
 
-	if (!force_scan && min_seq[!can_swap] + MAX_NR_GENS - 1 <= max_seq)
+	if (!force_scan && evictable_min_seq(min_seq, swappiness) + MAX_NR_GENS - 1 <= max_seq)
 		return -ERANGE;
 
-	try_to_inc_max_seq(lruvec, max_seq, sc, can_swap, force_scan);
+	try_to_inc_max_seq(lruvec, max_seq, sc, swappiness, force_scan);
 
 	return 0;
 }
@@ -6288,7 +6316,7 @@ static int run_eviction(struct lruvec *lruvec, unsigned long seq, struct scan_co
 	while (!signal_pending(current)) {
 		DEFINE_MIN_SEQ(lruvec);
 
-		if (seq < min_seq[!swappiness])
+		if (seq < evictable_min_seq(min_seq, swappiness))
 			return 0;
 
 		if (sc->nr_reclaimed >= nr_to_reclaim)
@@ -6333,7 +6361,7 @@ static int run_cmd(char cmd, int memcg_id, int nid, unsigned long seq,
 
 	if (swappiness < MIN_SWAPPINESS)
 		swappiness = get_swappiness(lruvec, sc);
-	else if (swappiness > MAX_SWAPPINESS)
+	else if (swappiness > SWAPPINESS_ANON_ONLY)
 		goto done;
 
 	switch (cmd) {
