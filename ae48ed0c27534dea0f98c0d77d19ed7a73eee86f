@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77aaa26d_6dc20254",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-04-21T18:45:32Z",
+      "side": 1,
+      "message": "If we can\u0027t trace, we are going to be blocked. Can you confirm this is a debug kernel only feature?",
+      "parentUuid": "923432e9_a5279aa7",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -197,6 +221,30 @@
       "side": 1,
       "message": "Does this save you much space? Why not just leave it 32?",
       "parentUuid": "71e572ac_36270953",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54dc3751_33c5a72c",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-04-21T18:45:32Z",
+      "side": 1,
+      "message": "Reading online, it is O(KB). However, we are optimizing down to the KB at this point.",
+      "parentUuid": "b2bad755_6d01c993",
       "range": {
         "startLine": 21,
         "startChar": 0,
