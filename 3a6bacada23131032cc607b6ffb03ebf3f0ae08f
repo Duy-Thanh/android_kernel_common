@@ -16,6 +16,24 @@
       "message": "Please say more about this. It is set to 256 in all previous GKI kernels too. Why does this need to be increased in 6.12?",
       "revId": "3a6bacada23131032cc607b6ffb03ebf3f0ae08f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f1d7f3_0988deb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-21T23:38:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2af0a70_fe602a4f",
+      "revId": "3a6bacada23131032cc607b6ffb03ebf3f0ae08f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
