@@ -16,6 +16,24 @@
       "message": "Looks okay but I think it would be better to just delete the \"vendor hook\" that\u0027s causing the merge conflict here.  If someone still needs it, they\u0027ll add it back.",
       "revId": "280dbbf10b4987e67aea5f698e26f354d036d1ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfc5f673_4dee4dd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-21T18:31:39Z",
+      "side": 1,
+      "message": "I agree and I tried that, but Pixel is actually still using it and presubmit would fail.",
+      "parentUuid": "a57e5a71_1f2c5219",
+      "revId": "280dbbf10b4987e67aea5f698e26f354d036d1ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
