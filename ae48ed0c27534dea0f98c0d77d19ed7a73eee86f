@@ -157,6 +157,30 @@
       },
       "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2bad755_6d01c993",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-04-21T18:39:32Z",
+      "side": 1,
+      "message": "Does this save you much space? Why not just leave it 32?",
+      "parentUuid": "71e572ac_36270953",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
