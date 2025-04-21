@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: Please **attach an open respin request bug** to this change. Refer the following link for more information:\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nPlease **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "5b9d0e61cab4e9aecf603fed4e5ae96a8f382e23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a09fc31_eb724757",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-04-21T15:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c247f2c_14773a3e",
+      "revId": "5b9d0e61cab4e9aecf603fed4e5ae96a8f382e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
