@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e244f013_12b95071",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-21T15:26:55Z",
+      "side": 1,
+      "message": "This line should be *after* i2c_smbus_write_word_data",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f0ccf811_50fc598a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/abi_gki_aarch64_oplus",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/abi_gki_aarch64_oplus",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": "  __icmp_send\n"
+            }
+          ]
+        }
+      ],
+      "revId": "22009c5b92e3206c9498fb9ade7c5860384e8c9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
