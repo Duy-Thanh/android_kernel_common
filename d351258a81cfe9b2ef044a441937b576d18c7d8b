@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb4f914_abcf1cd4",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-21T12:47:42Z",
+      "side": 1,
+      "message": "This modification includes \"include\" because the original code of \u003ctrace/hooks/power.h\u003e contains \"enum freq_qos_req_type\", which causes a compilation error. This dependency was introduced by a historical modification. We tried to add #include \u003clinux/pm_qos.h\u003e to the C file.",
+      "parentUuid": "7546da0d_0714ecfd",
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9aa2add_48c4fb19",
@@ -77,6 +95,24 @@
           ]
         }
       ],
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80ba0dd7_dc63065d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-21T12:47:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9aa2add_48c4fb19",
       "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -146,6 +182,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b050a8ee_823c884d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-21T12:47:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34977324_953fa034",
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2841eb0b_651e8a1c",
@@ -187,6 +241,24 @@
           ]
         }
       ],
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c4bf81_5e5a6c4b",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-21T12:47:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2841eb0b_651e8a1c",
       "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -292,6 +364,24 @@
           ]
         }
       ],
+      "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9b09e7_4a2159d7",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-21T12:47:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9148acd3_f0caf505",
       "revId": "d351258a81cfe9b2ef044a441937b576d18c7d8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

@@ -401,6 +401,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af5f2863_5c927d3d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 3920801
+      },
+      "writtenOn": "2025-04-21T12:47:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abc17681_3387861b",
+      "range": {
+        "startLine": 536,
+        "startChar": 10,
+        "endLine": 536,
+        "endChar": 27
+      },
+      "revId": "9982213bb54fd69b6f68fb182fdcc1c906d496c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93580d11_c09a8667",
