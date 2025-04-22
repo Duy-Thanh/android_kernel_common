@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53b8e519_048f6d0f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-22T10:24:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0df145d_2b121f8d",
+      "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81243c56_aabd6a18",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-12T03:58:57Z",
       "side": 1,
       "message": "```suggestion\n\tarm_smccc_1_2_smc(FFA_FN64_MEM_RETRIEVE_REQ,\n```",
+      "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "472afda8_ea3b9aee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-22T10:24:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81243c56_aabd6a18",
       "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -84,6 +120,24 @@
       "side": 1,
       "message": "That\u0027s going to be a slightly more complex change, because `arm_smccc_1_2_smc` takes two register structures.",
       "parentUuid": "83196aa1_1f0c167f",
+      "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda86740_ac1654c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-22T10:24:30Z",
+      "side": 1,
+      "message": "We are calling `FFA_FEATURES` here. I think the place to use smccc 1.2 is where we  call `FFA_FN64_RXTX_MAP` and other 64-bit functions.",
+      "parentUuid": "0f00b077_7ae746e2",
       "revId": "476c52a816e80c3463538f6eb345025870e6f3ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
