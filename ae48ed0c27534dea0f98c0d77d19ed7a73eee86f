@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53b4b2b4_9afa4127",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-22T05:14:06Z",
+      "side": 1,
+      "message": "I\u0027ve introduced microdroid_nodebug (see aosp/3598830), and moved this change over to it.",
+      "parentUuid": "3688a27a_13a98ba6",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -269,6 +293,30 @@
       "side": 1,
       "message": "Reading online, it is O(KB). However, we are optimizing down to the KB at this point.",
       "parentUuid": "b2bad755_6d01c993",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91b5e85_10cb6dce",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-22T05:14:06Z",
+      "side": 1,
+      "message": "Right. Sandeep said that we need to turn a config off even if it can save 2 KB.",
+      "parentUuid": "54dc3751_33c5a72c",
       "range": {
         "startLine": 21,
         "startChar": 0,
