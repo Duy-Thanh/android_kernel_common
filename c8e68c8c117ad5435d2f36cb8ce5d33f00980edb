@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2acb13fb_c11384ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-04-22T22:42:43Z",
+      "side": 1,
+      "message": "Please respin this from the android15-6.6 branch (BACKPORT: FROMGIT: )once that lands.",
+      "revId": "c8e68c8c117ad5435d2f36cb8ce5d33f00980edb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
