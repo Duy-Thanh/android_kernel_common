@@ -16,6 +16,23 @@
       "message": "LGTM from the desktop perspective",
       "revId": "2d2ce8cde9260ab6a24be98d8383158a31181b27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bf58fe3_4ba35f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-04-22T11:28:33Z",
+      "side": 1,
+      "message": "As the -desktop branch is not merged here, why is this needed?\n\nAlso, please break this up into \"add the symbols that are not new\" and then \"here is a patch adding this class of symbols for reason YYY as a long patch series.  Adding them all here in one huge commit is impossible to review properly.",
+      "revId": "2d2ce8cde9260ab6a24be98d8383158a31181b27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
