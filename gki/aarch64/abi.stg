@@ -368902,6 +368902,12 @@ function {
   parameter_id: 0x3f063da2
 }
 function {
+  id: 0xfee76c7c
+  return_type_id: 0x1b2ca025
+  parameter_id: 0x3b04bead
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0xfeedb339
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x02ed0755
@@ -399711,6 +399717,15 @@ elf_symbol {
   crc: 0x0e82ac9c
   type_id: 0x1653799a
   full_name: "drm_plane_enable_fb_damage_clips"
+}
+elf_symbol {
+  id: 0xf06cd4b3
+  name: "drm_plane_from_index"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb0483217
+  type_id: 0xfee76c7c
+  full_name: "drm_plane_from_index"
 }
 elf_symbol {
   id: 0x8984b2e1
@@ -448736,6 +448751,7 @@ interface {
   symbol_id: 0xd08fdb4b
   symbol_id: 0x9082bb51
   symbol_id: 0x87ced39a
+  symbol_id: 0xf06cd4b3
   symbol_id: 0x8984b2e1
   symbol_id: 0x22bf134d
   symbol_id: 0xee902d0d
