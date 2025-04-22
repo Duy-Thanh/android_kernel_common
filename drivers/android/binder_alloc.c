@@ -23,10 +23,12 @@
 #include <linux/uaccess.h>
 #include <linux/highmem.h>
 #include <linux/sizes.h>
+#include <kunit/visibility.h>
 #include "binder_alloc.h"
 #include "binder_trace.h"
 
 struct list_lru binder_freelist;
+EXPORT_SYMBOL_IF_KUNIT(binder_freelist);
 
 static DEFINE_MUTEX(binder_alloc_mmap_lock);
 
@@ -210,7 +212,8 @@ static void binder_lru_freelist_add(struct binder_alloc *alloc,
 
 		trace_binder_free_lru_start(alloc, index);
 
-		ret = list_lru_add(&binder_freelist,
+
+		ret = list_lru_add(__binder_freelist_ptr,
 				   page_to_lru(page),
 				   page_to_nid(page),
 				   NULL);
@@ -409,7 +412,7 @@ static void binder_lru_freelist_del(struct binder_alloc *alloc,
 		if (page) {
 			trace_binder_alloc_lru_start(alloc, index);
 
-			on_lru = list_lru_del(&binder_freelist,
+			on_lru = list_lru_del(__binder_freelist_ptr,
 					      page_to_lru(page),
 					      page_to_nid(page),
 					      NULL);
@@ -699,6 +702,7 @@ struct binder_buffer *binder_alloc_new_buf(struct binder_alloc *alloc,
 out:
 	return buffer;
 }
+EXPORT_SYMBOL_IF_KUNIT(binder_alloc_new_buf);
 
 static unsigned long buffer_start_page(struct binder_buffer *buffer)
 {
@@ -877,6 +881,7 @@ void binder_alloc_free_buf(struct binder_alloc *alloc,
 	binder_free_buf_locked(alloc, buffer);
 	mutex_unlock(&alloc->mutex);
 }
+EXPORT_SYMBOL_IF_KUNIT(binder_alloc_free_buf);
 
 /**
  * binder_alloc_mmap_handler() - map virtual address space for proc
@@ -959,7 +964,7 @@ err_invalid_mm:
 			   failure_string, ret);
 	return ret;
 }
-
+EXPORT_SYMBOL_IF_KUNIT(binder_alloc_mmap_handler);
 
 void binder_alloc_deferred_release(struct binder_alloc *alloc)
 {
@@ -1007,7 +1012,7 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 			if (!page)
 				continue;
 
-			on_lru = list_lru_del(&binder_freelist,
+			on_lru = list_lru_del(__binder_freelist_ptr,
 					      page_to_lru(page),
 					      page_to_nid(page),
 					      NULL);
@@ -1028,6 +1033,7 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 		     "%s: %d buffers %d, pages %d\n",
 		     __func__, alloc->pid, buffers, page_count);
 }
+EXPORT_SYMBOL_IF_KUNIT(binder_alloc_deferred_release);
 
 /**
  * binder_alloc_print_allocated() - print buffer info
@@ -1122,6 +1128,7 @@ void binder_alloc_vma_close(struct binder_alloc *alloc)
 {
 	binder_alloc_set_mapped(alloc, false);
 }
+EXPORT_SYMBOL_IF_KUNIT(binder_alloc_vma_close);
 
 /**
  * binder_alloc_free_page() - shrinker callback to free pages
@@ -1213,6 +1220,7 @@ err_mmap_read_lock_failed:
 err_mmget:
 	return LRU_SKIP;
 }
+EXPORT_SYMBOL_IF_KUNIT(binder_alloc_free_page);
 
 static unsigned long
 binder_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
@@ -1244,6 +1252,7 @@ void binder_alloc_init(struct binder_alloc *alloc)
 	mutex_init(&alloc->mutex);
 	INIT_LIST_HEAD(&alloc->buffers);
 }
+EXPORT_SYMBOL_IF_KUNIT(binder_alloc_init);
 
 int binder_alloc_shrinker_init(void)
 {

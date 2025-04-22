@@ -47,6 +47,17 @@ config ANDROID_BINDER_IPC_SELFTEST
 	  exhaustively with combinations of various buffer sizes and
 	  alignments.
 
+config ANDROID_BINDER_ALLOC_KUNIT_TEST
+	tristate "KUnit Tests for Android Binder Alloc" if !KUNIT_ALL_TESTS
+	depends on ANDROID_BINDER_IPC && KUNIT
+	default KUNIT_ALL_TESTS
+	help
+	  This feature builds the binder alloc kunit tests.
+
+	  Binder alloc test checks the allocation and free of binder
+	  buffers exhaustively with combinations of various buffer
+	  sizes and alignments.
+
 config ANDROID_VENDOR_HOOKS
 	bool "Android Vendor Hooks"
 	depends on TRACEPOINTS

@@ -628,4 +628,8 @@ struct binder_object {
  */
 void binder_add_device(struct binder_device *device);
 
+#if IS_ENABLED(CONFIG_KUNIT)
+vm_fault_t binder_vm_fault(struct vm_fault *vmf);
+#endif
+
 #endif /* _LINUX_BINDER_INTERNAL_H */

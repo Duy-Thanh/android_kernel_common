@@ -16,6 +16,26 @@
 #include <uapi/linux/android/binder.h>
 
 extern struct list_lru binder_freelist;
+
+#if IS_ENABLED(CONFIG_ANDROID_BINDER_ALLOC_KUNIT_TEST)
+#define __binder_freelist_ptr ({                                      \
+		struct kunit_resource *res;                           \
+		struct list_lru *freelist = &binder_freelist;         \
+	        struct kunit *test = kunit_get_current_test();        \
+		if (test) {                                           \
+			res = kunit_find_named_resource(test, "binder_test_freelist");  \
+			freelist = res->data;                         \
+			kunit_put_resource(res);                      \
+		}                                                     \
+		freelist;                                             \
+	})
+
+#include <kunit/resource.h>   // for kunit_resource fns
+#include <kunit/test-bug.h>   // for get_current_test
+#else
+#define __binder_freelist_ptr (&binder_freelist);
+#endif /* CONFIG_ANDROID_BINDER_ALLOC_KUNIT_TEST */
+
 struct binder_transaction;
 
 /**
