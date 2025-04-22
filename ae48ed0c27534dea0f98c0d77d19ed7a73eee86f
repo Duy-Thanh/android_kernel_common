@@ -170,6 +170,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94e657e4_62f0afa1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-04-22T09:06:37Z",
+      "side": 1,
+      "message": "Previously Will was against having multiple separate microdroid kernels. If possible, I\u0027d prefer if we wait for him to come back from the vacation and share his thoughts on this",
+      "parentUuid": "05d0140a_78c98b96",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
