@@ -33,6 +33,24 @@
       "message": "Please rebase. You can drop the changes to abi.stg (which are causing the merge conglict). We can regenerate them easily.\n\nIf the protected_exports file is still showing a diff, we\u0027ll need to look into that.",
       "revId": "90149f4dd1db5cd7bf7a69a667c13407762ea86e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26b26707_738e1dbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-04-22T05:32:07Z",
+      "side": 1,
+      "message": "The patch is rebased. protected_exports show no diff. I missed the part with dropping .stg so it\u0027s here but I can remove it if it\u0027s how it should be.",
+      "parentUuid": "653dfee0_48c0b3ca",
+      "revId": "90149f4dd1db5cd7bf7a69a667c13407762ea86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
