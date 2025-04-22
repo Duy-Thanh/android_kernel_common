@@ -16,6 +16,24 @@
       "message": "Why only this branch and not also the androi12-5.10 branch as well?",
       "revId": "728a08c45ef37eabf970f3a0c5a00874b4d3ac52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d20f7b_15109e2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960825
+      },
+      "writtenOn": "2025-04-22T12:54:57Z",
+      "side": 1,
+      "message": "we only using the android13-5.10 branch for now, I check the code of android12-5.10 branch, it should have same problem, I will cherrypick this patch to android12-5.10 branch",
+      "parentUuid": "6ed4dab6_fad54ff2",
+      "revId": "728a08c45ef37eabf970f3a0c5a00874b4d3ac52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
