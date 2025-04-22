@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d36c82_ebc33e52",
+        "filename": "rust/kernel/uaccess.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-04-22T07:02:18Z",
+      "side": 1,
+      "message": "For cherry-pickers: If your tree doesn\u0027t have the 6.12.19 LTS yet, you will get a build failure here.\n\nYou can use this implementation of `strncpy_from_user` to work around that:\n```\n/// Reads a nul-terminated string into the provided buffer and returns the length.\npub fn strncpy_from_user(self, buf: \u0026mut [u8]) -\u003e Result\u003cusize\u003e {\n    let max \u003d usize::min(self.length, buf.len()) as isize;\n    // SAFETY: `buf` is valid for writing `buf.len()` bytes.\n    let res \u003d unsafe {\n    \tbindings::strncpy_from_user(\n            buf.as_mut_ptr().cast(),\n            self.ptr as *const _,\n            max as _,\n        )\n    };\n    if res \u003e\u003d 0 {\n        Ok(res as usize)\n    } else {\n        Err(Error::from_errno(res as i32))\n    }\n}\n```",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 5
+      },
+      "revId": "ba971cd36a98c0e5cd51d531e5d7d306a0ebae78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
