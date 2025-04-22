@@ -527,8 +527,6 @@ static void end_bbio_data_read(struct btrfs_bio *bbio)
 		u64 end;
 		u32 len;
 
-		/* For now only order 0 folios are supported for data. */
-		ASSERT(folio_order(folio) == 0);
 		btrfs_debug(fs_info,
 			"%s: bi_sector=%llu, err=%d, mirror=%u",
 			__func__, bio->bi_iter.bi_sector, bio->bi_status,
@@ -556,7 +554,6 @@ static void end_bbio_data_read(struct btrfs_bio *bbio)
 
 		if (likely(uptodate)) {
 			loff_t i_size = i_size_read(inode);
-			pgoff_t end_index = i_size >> folio_shift(folio);
 
 			/*
 			 * Zero out the remaining part if this range straddles
@@ -565,9 +562,11 @@ static void end_bbio_data_read(struct btrfs_bio *bbio)
 			 * Here we should only zero the range inside the folio,
 			 * not touch anything else.
 			 *
-			 * NOTE: i_size is exclusive while end is inclusive.
+			 * NOTE: i_size is exclusive while end is inclusive and
+			 * folio_contains() takes PAGE_SIZE units.
 			 */
-			if (folio_index(folio) == end_index && i_size <= end) {
+			if (folio_contains(folio, i_size >> PAGE_SHIFT) &&
+			    i_size <= end) {
 				u32 zero_start = max(offset_in_folio(folio, i_size),
 						     offset_in_folio(folio, start));
 				u32 zero_len = offset_in_folio(folio, end) + 1 -
@@ -962,6 +961,7 @@ static int btrfs_do_readpage(struct folio *folio, struct extent_map **em_cached,
 		return ret;
 	}
 
+<<<<<<< HEAD   (63a1fe Revert "Revert "Bluetooth: hci_core: Fix sleeping function c)
 	if (!folio_test_uptodate(folio)) {
 		if (cleancache_get_page(&folio->page) == 0) {
 			BUG_ON(blocksize != folio_size(folio));
@@ -972,6 +972,11 @@ static int btrfs_do_readpage(struct folio *folio, struct extent_map **em_cached,
 	}
 
 	if (folio->index == last_byte >> folio_shift(folio)) {
+||||||| BASE
+	if (folio->index == last_byte >> folio_shift(folio)) {
+=======
+	if (folio_contains(folio, last_byte >> PAGE_SHIFT)) {
+>>>>>>> BRANCH (d5ca39 btrfs: fix two misuses of folio_shift())
 		size_t zero_offset = offset_in_folio(folio, last_byte);
 
 		if (zero_offset) {
