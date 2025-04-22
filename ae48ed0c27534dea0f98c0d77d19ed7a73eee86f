@@ -218,6 +218,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c7e84ed_91ee1004",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-04-22T13:20:21Z",
+      "side": 1,
+      "message": "\u003e You were in the meeting with Sandeep, right?\n\nI had a meeting right after, so I guess I missed the part when this was decided.\n\nI am not going to block you, just voicing my opinion that this decision is influenced by a rush for small win immediately, and will bite us back (most likely in a very short term).",
+      "parentUuid": "8ffa76ef_9d23740c",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
