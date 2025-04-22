@@ -3944,6 +3944,11 @@ pointer_reference {
   pointee_type_id: 0x1b18f64e
 }
 pointer_reference {
+  id: 0x0c5653bc
+  kind: POINTER
+  pointee_type_id: 0x1b19a86f
+}
+pointer_reference {
   id: 0x0c56e1ee
   kind: POINTER
   pointee_type_id: 0x1b1b6127
@@ -7547,6 +7552,11 @@ pointer_reference {
   id: 0x0f0f3fa0
   kind: POINTER
   pointee_type_id: 0x167c181d
+}
+pointer_reference {
+  id: 0x0f10c7fa
+  kind: POINTER
+  pointee_type_id: 0x1603f977
 }
 pointer_reference {
   id: 0x0f12d1e7
@@ -29127,6 +29137,11 @@ pointer_reference {
   id: 0x381f3165
   kind: POINTER
   pointee_type_id: 0xca3c230a
+}
+pointer_reference {
+  id: 0x382382fb
+  kind: POINTER
+  pointee_type_id: 0xcaceed70
 }
 pointer_reference {
   id: 0x38264f07
@@ -70593,6 +70608,11 @@ member {
   offset: 2048
 }
 member {
+  id: 0x4433bbea
+  name: "connect_cb"
+  type_id: 0x0f10c7fa
+}
+member {
   id: 0xca99a403
   name: "connect_cfm"
   type_id: 0x0cb52986
@@ -84306,6 +84326,12 @@ member {
   name: "disconnect_bssid"
   type_id: 0xabf64f28
   offset: 1088
+}
+member {
+  id: 0x15cb4fd4
+  name: "disconnect_cb"
+  type_id: 0x0f10c7fa
+  offset: 64
 }
 member {
   id: 0x474defea
@@ -182312,6 +182338,12 @@ member {
   offset: 1024
 }
 member {
+  id: 0xdff0610b
+  name: "resume_cb"
+  type_id: 0x0ca6443d
+  offset: 192
+}
+member {
   id: 0x1f2177ef
   name: "resume_early"
   type_id: 0x2dd58efa
@@ -204479,6 +204511,12 @@ member {
   type_id: 0x4585663f
   offset: 2690
   bitsize: 1
+}
+member {
+  id: 0xb7122a91
+  name: "suspend_cb"
+  type_id: 0x0c5653bc
+  offset: 128
 }
 member {
   id: 0xdccb64ac
@@ -284549,6 +284587,18 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xcaceed70
+  kind: STRUCT
+  name: "snd_usb_platform_ops"
+  definition {
+    bytesize: 32
+    member_id: 0x4433bbea
+    member_id: 0x15cb4fd4
+    member_id: 0xb7122a91
+    member_id: 0xdff0610b
+  }
+}
+struct_union {
   id: 0x0cc547b2
   kind: STRUCT
   name: "snd_usb_power_domain"
@@ -326983,6 +327033,12 @@ function {
   parameter_id: 0x2e029f76
 }
 function {
+  id: 0x1b19a86f
+  return_type_id: 0x48b5725f
+  parameter_id: 0x21069feb
+  parameter_id: 0xf017819f
+}
+function {
   id: 0x1b1dadd0
   return_type_id: 0x48b5725f
   parameter_id: 0x2e327e9a
@@ -343657,6 +343713,11 @@ function {
   parameter_id: 0x3c087d20
   parameter_id: 0x6720d32f
   parameter_id: 0xc9082b19
+}
+function {
+  id: 0x93880391
+  return_type_id: 0x6720d32f
+  parameter_id: 0x382382fb
 }
 function {
   id: 0x93880e88
@@ -368509,6 +368570,11 @@ function {
   parameter_id: 0x1042c9d1
   parameter_id: 0x4585663f
   parameter_id: 0x6d7f5ff6
+}
+function {
+  id: 0xfbc4f1c5
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x1582ab06
 }
 function {
   id: 0xfbfd6476
@@ -429037,6 +429103,15 @@ elf_symbol {
   full_name: "shmem_file_setup"
 }
 elf_symbol {
+  id: 0x54b0eb86
+  name: "shmem_mapping"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaf5f229d
+  type_id: 0xfbc4f1c5
+  full_name: "shmem_mapping"
+}
+elf_symbol {
   id: 0x31cd38bb
   name: "shmem_read_folio_gfp"
   is_defined: true
@@ -432350,6 +432425,15 @@ elf_symbol {
   full_name: "snd_usb_lock_shutdown"
 }
 elf_symbol {
+  id: 0x64a22c55
+  name: "snd_usb_register_platform_ops"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x897b2810
+  type_id: 0x93880391
+  full_name: "snd_usb_register_platform_ops"
+}
+elf_symbol {
   id: 0x4e46ce01
   name: "snd_usb_unlock_shutdown"
   is_defined: true
@@ -432357,6 +432441,15 @@ elf_symbol {
   crc: 0x96c609f3
   type_id: 0x1603f977
   full_name: "snd_usb_unlock_shutdown"
+}
+elf_symbol {
+  id: 0x066a65a8
+  name: "snd_usb_unregister_platform_ops"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7851be11
+  type_id: 0x9d80e32f
+  full_name: "snd_usb_unregister_platform_ops"
 }
 elf_symbol {
   id: 0x32cae5ee
@@ -451993,6 +452086,7 @@ interface {
   symbol_id: 0x0ee720f8
   symbol_id: 0xc2e7cb56
   symbol_id: 0x7f3b48aa
+  symbol_id: 0x54b0eb86
   symbol_id: 0x31cd38bb
   symbol_id: 0xf47010e0
   symbol_id: 0x436ee92c
@@ -452361,7 +452455,9 @@ interface {
   symbol_id: 0xf1ce04f4
   symbol_id: 0x84891da6
   symbol_id: 0xea27fe54
+  symbol_id: 0x64a22c55
   symbol_id: 0x4e46ce01
+  symbol_id: 0x066a65a8
   symbol_id: 0x32cae5ee
   symbol_id: 0x0651ce31
   symbol_id: 0x194db723
