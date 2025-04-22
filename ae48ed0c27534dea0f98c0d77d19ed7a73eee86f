@@ -194,6 +194,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ffa76ef_9d23740c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-22T09:11:50Z",
+      "side": 1,
+      "message": "You were in the meeting with Sandeep, right? I am not happy with this either, but it was a product decision, wasn\u0027t it? I don\u0027t think it\u0027s wise to delay anything further at this moment. \n\nLet\u0027s land this first, and think about how we can handle this situation. Reverting it later is also in the options.",
+      "parentUuid": "94e657e4_62f0afa1",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
