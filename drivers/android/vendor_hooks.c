@@ -299,3 +299,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wb_dirty_limits);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vfs_fsync_range);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_fcntl);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_evict);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_uid_stats);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_append_total_power);
