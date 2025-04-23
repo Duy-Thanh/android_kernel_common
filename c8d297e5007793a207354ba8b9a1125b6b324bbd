@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6619d3c_095311c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1076784
+      },
+      "writtenOn": "2025-04-23T19:24:45Z",
+      "side": 1,
+      "message": "Question: can pvmfw handle mangling of e820 data to account for requirements passed in DT so that we do not need to adjust the kernel?",
+      "revId": "c8d297e5007793a207354ba8b9a1125b6b324bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
