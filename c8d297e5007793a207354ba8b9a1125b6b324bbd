@@ -16,6 +16,24 @@
       "message": "Question: can pvmfw handle mangling of e820 data to account for requirements passed in DT so that we do not need to adjust the kernel?",
       "revId": "c8d297e5007793a207354ba8b9a1125b6b324bbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee17dda9_03fd1f21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-04-23T23:12:33Z",
+      "side": 1,
+      "message": "It already does: http://ag/32890781 + http://ag/32923401\n\nThis kernel patch already assumes that the DT is consistent with e820, it doesn\u0027t try to adjust it. (The initial approach was to handle it fully in kernel, without changes in pvmfw: http://aosp/3553664 but we found out it would be quite tricky to implement correctly.)\n\nWe still need some kernel changes, since the existing DT support on x86 in the kernel is so limited that it doesn\u0027t support reserved-memory nodes at all, so we need to add it. The gist of this patch is the `early_init_fdt_scan_reserved_mem()` call, basically that\u0027s all we require. The rest is just for validation if it is actually consistent with e820.",
+      "parentUuid": "c6619d3c_095311c7",
+      "revId": "c8d297e5007793a207354ba8b9a1125b6b324bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
