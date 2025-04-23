@@ -134,6 +134,9 @@ static unsigned long handle_vmcall(struct kvm_vcpu *vcpu)
 	case PKVM_HC_IOMMU_UPDATE_CE:
 		ret = pkvm_iommu_update_ce(vcpu, a0, a1);
 		break;
+	case PKVM_HC_IOMMU_SET_IQA:
+		ret= pkvm_iommu_set_iqa(a0, a1);
+		break;
 	case PKVM_HC_IOMMU_MAP_PAGES:
 		ret = pkvm_iommu_domain_map(vcpu, a0);
 		break;

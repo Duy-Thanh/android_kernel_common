@@ -577,6 +577,7 @@ static void iommu_free_pv_root_entry(struct intel_iommu *iommu)
 static void iommu_set_pv_root_entry(struct intel_iommu *iommu)
 {
 	pkvm_set_iommu_root(iommu->reg_phys, virt_to_phys(iommu->root_entry));
+	pkvm_set_iommu_iqa(iommu->reg_phys, virt_to_phys(iommu->qi->desc));
 }
 
 void iommu_root_entry(struct intel_iommu *iommu, u8 bus, struct root_entry *re)

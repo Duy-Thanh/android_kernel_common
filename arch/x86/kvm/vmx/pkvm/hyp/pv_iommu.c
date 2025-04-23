@@ -183,3 +183,37 @@ unsigned long pkvm_iommu_update_ce(struct kvm_vcpu *hvcpu, unsigned long phys, u
 
 	return ret;
 }
+
+static inline void *iommu_zalloc_pages(size_t size)
+{
+	return hyp_alloc_pages(&iommu_pool, get_order(size));
+}
+
+unsigned long pkvm_iommu_set_iqa(unsigned long phys, unsigned long iqa_phys)
+{
+	struct pkvm_iommu *iommu = find_iommu_by_reg_phys(phys);
+	struct q_inval *qi = &iommu->qi;
+
+	pkvm_spin_lock(&iommu->lock);
+
+	pkvm_dbg("pkvm: %s: iqa_: %lx\n", __func__, iqa_phys);
+
+	/*
+	 * Host has the pages identity mapped. So not converting from host gpa to hpa.
+	 */
+	qi->desc = (void *) iqa_phys;
+	qi->desc_status = iommu_zalloc_pages(PKVM_QI_DESC_STATUS_ALIGNED_SIZE);
+	enable_qi(iommu);
+
+	pkvm_spin_unlock(&iommu->lock);
+
+	/*
+	 * Remove the mapping for the root table page so that host
+	 * will not be able to directly access it.
+	 */
+	pkvm_dbg("pkvm: %s: unmapping IQA page[0x%lx] from host\n",
+			__func__, iqa_phys);
+	__pkvm_host_donate_hyp(iqa_phys, 2 * PAGE_SIZE);
+
+	return 0;
+}

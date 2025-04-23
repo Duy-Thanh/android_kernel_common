@@ -122,7 +122,7 @@ int pkvm_init_iommu(unsigned long mem_base, unsigned long nr_pages)
 	return 0;
 }
 
-static void enable_qi(struct pkvm_iommu *iommu)
+void enable_qi(struct pkvm_iommu *iommu)
 {
 	void *desc = iommu->qi.desc;
 	int dw, qs;
@@ -212,6 +212,7 @@ static int create_qi_desc(struct pkvm_iommu *iommu)
 	}
 
 	qi->free_cnt = PKVM_QI_DESC_ALIGNED_SIZE / sizeof(struct qi_desc);
+#ifndef CONFIG_PKVM_INTEL_PVIOMMU
 	qi->desc = iommu_zalloc_pages(PKVM_QI_DESC_ALIGNED_SIZE);
 	if (!qi->desc)
 		return -ENOMEM;
@@ -223,6 +224,7 @@ static int create_qi_desc(struct pkvm_iommu *iommu)
 	}
 
 	enable_qi(iommu);
+#endif
 	return 0;
 }
 

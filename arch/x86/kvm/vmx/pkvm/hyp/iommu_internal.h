@@ -370,6 +370,7 @@ void flush_iotlb(struct pkvm_iommu *iommu, u16 did, u64 addr,
 			unsigned int size_order, u64 type);
 void flush_context_cache(struct pkvm_iommu *iommu, u16 did,
 				u16 sid, u8 fm, u64 type);
+void enable_qi(struct pkvm_iommu *iommu);
 
 #ifdef CONFIG_PKVM_INTEL_PVIOMMU
 static inline int handle_descriptor(struct pkvm_iommu *iommu, struct qi_desc *desc)
