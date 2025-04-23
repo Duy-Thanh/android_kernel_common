@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9446891_8336b761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-04-23T17:30:42Z",
+      "side": 1,
+      "message": "Should not be needed for this branch as nothing is using these hooks here.",
+      "revId": "dba8453d55732b5e56204db8266b945ce1906890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
