@@ -33,6 +33,24 @@
       "message": "As the -desktop branch is not merged here, why is this needed?\n\nAlso, please break this up into \"add the symbols that are not new\" and then \"here is a patch adding this class of symbols for reason YYY as a long patch series.  Adding them all here in one huge commit is impossible to review properly.",
       "revId": "2d2ce8cde9260ab6a24be98d8383158a31181b27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27ba65f_634004ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-04-23T19:42:24Z",
+      "side": 1,
+      "message": "Since android16-6.12) is merged into -desktop, we added this aosp/3575772 before and wanted to update it here in order not to diverge on this. It got so long corresponding to adding basic vendor fragment with mtk specific modules that are needed for booting. After internal discussion, we can keep it in -desktop for 6.12 and submit properly a symbol list in the future to 6.18.",
+      "parentUuid": "3bf58fe3_4ba35f82",
+      "revId": "2d2ce8cde9260ab6a24be98d8383158a31181b27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
