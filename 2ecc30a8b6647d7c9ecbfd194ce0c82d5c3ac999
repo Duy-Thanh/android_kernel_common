@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e6101fa_d47d9d08",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-23T01:03:20Z",
+      "side": 1,
+      "message": "We only need to do this for the 64-bit SMCs (the spec says otherwise, but that\u0027s getting fixed).",
+      "revId": "2ecc30a8b6647d7c9ecbfd194ce0c82d5c3ac999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e7122e_95bf99e6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-23T01:03:20Z",
+      "side": 1,
+      "message": "Can\u0027t we do this on 1.0 as well?",
+      "revId": "2ecc30a8b6647d7c9ecbfd194ce0c82d5c3ac999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
