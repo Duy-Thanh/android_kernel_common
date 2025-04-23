@@ -1,3 +1,6 @@
 type 'enum binder_work_type' changed
   enumerator 'BINDER_WORK_HARDER' (12) was added
 
+type 'struct binder_error' changed
+  member 'union { uint32_t and_conquer; unsigned char __kabi_ignored1; }' was added
+
