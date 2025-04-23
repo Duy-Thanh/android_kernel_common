@@ -71,6 +71,7 @@
 #include <trace/hooks/blk.h>
 #include <trace/hooks/fsnotify.h>
 #include <trace/hooks/fuse.h>
+#include <trace/hooks/ogki_honor.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -509,3 +510,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_try_to_compact_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_direct_reclaim_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_direct_reclaim_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_may_oom_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_check_vip_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_task_util);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_uclamp_task_util);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_get_task_tags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_get_task_rsum);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_check_task_tags);
