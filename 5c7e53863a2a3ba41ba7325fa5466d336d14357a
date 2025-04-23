@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7083bb_56a86f27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-04-23T07:54:44Z",
+      "side": 1,
+      "message": "Bypassing Kernel Upstream Divergence Tracker on a revert",
+      "revId": "5c7e53863a2a3ba41ba7325fa5466d336d14357a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
