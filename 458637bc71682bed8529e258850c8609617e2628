@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0f2f11_b658e796",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-23T03:57:41Z",
+      "side": 1,
+      "message": "Don\u0027t we also need a 64 check here? Or at least a `BUG_ON` that we\u0027re not using this on SMC32.",
+      "revId": "458637bc71682bed8529e258850c8609617e2628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95f7bbd_8596d0ef",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-23T03:57:41Z",
+      "side": 1,
+      "message": "Can this happen?",
+      "revId": "458637bc71682bed8529e258850c8609617e2628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
