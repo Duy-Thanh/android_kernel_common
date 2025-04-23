@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d19df21e_cddb19bd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-23T03:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e6101fa_d47d9d08",
+      "revId": "2ecc30a8b6647d7c9ecbfd194ce0c82d5c3ac999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50e7122e_95bf99e6",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-23T01:03:20Z",
       "side": 1,
       "message": "Can\u0027t we do this on 1.0 as well?",
+      "revId": "2ecc30a8b6647d7c9ecbfd194ce0c82d5c3ac999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f63d818_51150f80",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-23T03:50:04Z",
+      "side": 1,
+      "message": "Good point, I think we can.",
+      "parentUuid": "50e7122e_95bf99e6",
       "revId": "2ecc30a8b6647d7c9ecbfd194ce0c82d5c3ac999",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
