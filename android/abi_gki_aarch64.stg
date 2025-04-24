@@ -5899,6 +5899,11 @@ pointer_reference {
   pointee_type_id: 0x10985193
 }
 pointer_reference {
+  id: 0x0eb6d039
+  kind: POINTER
+  pointee_type_id: 0x109ba67a
+}
+pointer_reference {
   id: 0x0eb80ce3
   kind: POINTER
   pointee_type_id: 0x10a0d511
@@ -17234,6 +17239,11 @@ pointer_reference {
   pointee_type_id: 0x9d80e32f
 }
 pointer_reference {
+  id: 0x2df0fc96
+  kind: POINTER
+  pointee_type_id: 0x9d8314c6
+}
+pointer_reference {
   id: 0x2df10d7a
   kind: POINTER
   pointee_type_id: 0x9d84d375
@@ -20714,6 +20724,11 @@ pointer_reference {
   pointee_type_id: 0xebff9a8c
 }
 pointer_reference {
+  id: 0x3072a882
+  kind: POINTER
+  pointee_type_id: 0xeb8a4494
+}
+pointer_reference {
   id: 0x3074b701
   kind: POINTER
   pointee_type_id: 0xeb923a9b
@@ -24077,6 +24092,11 @@ pointer_reference {
   id: 0x38531dd4
   kind: POINTER
   pointee_type_id: 0xcb0c91cc
+}
+pointer_reference {
+  id: 0x38564622
+  kind: POINTER
+  pointee_type_id: 0xcb19fe14
 }
 pointer_reference {
   id: 0x385779d3
@@ -29417,6 +29437,11 @@ qualified {
   id: 0xcb0c91cc
   qualifier: CONST
   qualified_type_id: 0x5c75f1b8
+}
+qualified {
+  id: 0xcb19fe14
+  qualifier: CONST
+  qualified_type_id: 0x5c204eda
 }
 qualified {
   id: 0xcb1d01d1
@@ -141221,6 +141246,12 @@ member {
   offset: 512
 }
 member {
+  id: 0xd77bf4ee
+  name: "probe"
+  type_id: 0x2df0fc96
+  offset: 1728
+}
+member {
   id: 0x14050cd8
   name: "probe_active"
   type_id: 0x6720d32f
@@ -149243,6 +149274,12 @@ member {
   name: "remove"
   type_id: 0x2dd58efa
   offset: 576
+}
+member {
+  id: 0xb48e2635
+  name: "remove"
+  type_id: 0x2df0fc96
+  offset: 1792
 }
 member {
   id: 0xb48e707c
@@ -162150,6 +162187,12 @@ member {
   offset: 256
 }
 member {
+  id: 0x9efb8dea
+  name: "shutdown"
+  type_id: 0x0eb6d039
+  offset: 1856
+}
+member {
   id: 0x9efba1b8
   name: "shutdown"
   type_id: 0x0e93a255
@@ -165443,6 +165486,11 @@ member {
   name: "spi_sync_immediate"
   type_id: 0x33756485
   offset: 384
+}
+member {
+  id: 0xb4331c8b
+  name: "spidrv"
+  type_id: 0xe0860905
 }
 member {
   id: 0x835d74e5
@@ -236172,6 +236220,18 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xeb8a4494
+  kind: STRUCT
+  name: "spi_mem_driver"
+  definition {
+    bytesize: 240
+    member_id: 0xb4331c8b
+    member_id: 0xd77bf4ee
+    member_id: 0xb48e2635
+    member_id: 0x9efb8dea
+  }
+}
+struct_union {
   id: 0x4a4e49a4
   kind: STRUCT
   name: "spi_mem_op"
@@ -263712,6 +263772,11 @@ function {
   parameter_id: 0x20d23755
 }
 function {
+  id: 0x109ba67a
+  return_type_id: 0x48b5725f
+  parameter_id: 0x000fdfa4
+}
+function {
   id: 0x109bed40
   return_type_id: 0x48b5725f
   parameter_id: 0x0258f96e
@@ -270771,6 +270836,11 @@ function {
   parameter_id: 0x064d6086
 }
 function {
+  id: 0x1c84fbb3
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3072a882
+}
+function {
   id: 0x1c861e9d
   return_type_id: 0x48b5725f
   parameter_id: 0x3760766d
@@ -273867,6 +273937,13 @@ function {
   parameter_id: 0x27a7c613
   parameter_id: 0x27a7c613
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x2df3f088
+  return_type_id: 0x1084abd6
+  parameter_id: 0x0258f96e
+  parameter_id: 0x000fdfa4
+  parameter_id: 0x38564622
 }
 function {
   id: 0x2dfa71ba
@@ -280841,6 +280918,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x32a623d7
   parameter_id: 0x2124c9f1
+}
+function {
+  id: 0x91b0d67e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3072a882
+  parameter_id: 0x0b27dc43
 }
 function {
   id: 0x91b2f262
@@ -295665,6 +295748,11 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x0258f96e
   parameter_id: 0x25c97cc9
+}
+function {
+  id: 0x9d8314c6
+  return_type_id: 0x6720d32f
+  parameter_id: 0x000fdfa4
 }
 function {
   id: 0x9d834998
@@ -322769,6 +322857,15 @@ elf_symbol {
   crc: 0xea240d15
   type_id: 0x9dd808ae
   full_name: "devm_snd_soc_register_component"
+}
+elf_symbol {
+  id: 0xf3c9734f
+  name: "devm_spi_mem_dirmap_create"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd9d23484
+  type_id: 0x2df3f088
+  full_name: "devm_spi_mem_dirmap_create"
 }
 elf_symbol {
   id: 0x6c9a6915
@@ -354243,6 +354340,60 @@ elf_symbol {
   full_name: "spi_mem_default_supports_op"
 }
 elf_symbol {
+  id: 0x0e0941ba
+  name: "spi_mem_dirmap_read"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3da32d7b
+  type_id: 0x12a52815
+  full_name: "spi_mem_dirmap_read"
+}
+elf_symbol {
+  id: 0x3b461c8b
+  name: "spi_mem_dirmap_write"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbe8b8bc3
+  type_id: 0x12a5ae9c
+  full_name: "spi_mem_dirmap_write"
+}
+elf_symbol {
+  id: 0x393d4a00
+  name: "spi_mem_driver_register_with_owner"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xee8e7b75
+  type_id: 0x91b0d67e
+  full_name: "spi_mem_driver_register_with_owner"
+}
+elf_symbol {
+  id: 0x485ebef5
+  name: "spi_mem_driver_unregister"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa19a664d
+  type_id: 0x1c84fbb3
+  full_name: "spi_mem_driver_unregister"
+}
+elf_symbol {
+  id: 0x94f291e3
+  name: "spi_mem_exec_op"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x99791585
+  type_id: 0x9d67d65f
+  full_name: "spi_mem_exec_op"
+}
+elf_symbol {
+  id: 0x071b0cf7
+  name: "spi_mem_get_name"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc3cb0105
+  type_id: 0x9247e04a
+  full_name: "spi_mem_get_name"
+}
+elf_symbol {
   id: 0x680976a6
   name: "spi_mem_supports_op"
   is_defined: true
@@ -365945,6 +366096,7 @@ interface {
   symbol_id: 0xeb30d8ff
   symbol_id: 0x98e3d9f3
   symbol_id: 0xd1252dfa
+  symbol_id: 0xf3c9734f
   symbol_id: 0x6c9a6915
   symbol_id: 0x0dd13028
   symbol_id: 0x31ef5313
@@ -369437,6 +369589,12 @@ interface {
   symbol_id: 0x53ad82f3
   symbol_id: 0x9140558e
   symbol_id: 0xe3077a93
+  symbol_id: 0x0e0941ba
+  symbol_id: 0x3b461c8b
+  symbol_id: 0x393d4a00
+  symbol_id: 0x485ebef5
+  symbol_id: 0x94f291e3
+  symbol_id: 0x071b0cf7
   symbol_id: 0x680976a6
   symbol_id: 0x58e086db
   symbol_id: 0xc98f6928
