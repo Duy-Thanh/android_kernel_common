@@ -430,8 +430,13 @@ static irqreturn_t gpio_keys_gpio_isr(int irq, void *dev_id)
 			 * Simulate wakeup key press in case the key has
 			 * already released by the time we got interrupt
 			 * handler to run.
+			 * Without input_sync() call, the input event
+			 * may not be delivered to the user space
+			 * application before the system resumes.
 			 */
 			input_report_key(bdata->input, button->code, 1);
+			input_sync(bdata->input);
+			return IRQ_HANDLED;
 		}
 	}
 
