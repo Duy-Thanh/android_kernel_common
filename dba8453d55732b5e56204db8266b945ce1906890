@@ -16,6 +16,41 @@
       "message": "Should not be needed for this branch as nothing is using these hooks here.",
       "revId": "dba8453d55732b5e56204db8266b945ce1906890",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f85e910_1df3951d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-24T17:13:54Z",
+      "side": 1,
+      "message": "It is needed for KMI consistency with the downstream OGKI branch (OGKI requirement). When the OGKI feature converges, they will be used on this branch.",
+      "parentUuid": "e9446891_8336b761",
+      "revId": "dba8453d55732b5e56204db8266b945ce1906890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07b7ab9_04c78eaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-24T17:13:54Z",
+      "side": 1,
+      "message": "create a patch on top if this one to add the new symbols to the symbol list",
+      "revId": "dba8453d55732b5e56204db8266b945ce1906890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
