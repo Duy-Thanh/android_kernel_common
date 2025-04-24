@@ -97,3 +97,4 @@ obj-$(CONFIG_KGDB_SERIAL_CONSOLE) += kgdboc.o
 obj-$(CONFIG_SERIAL_NUVOTON_MA35D1) += ma35d1_serial.o
 
 obj-$(CONFIG_SERIAL_PKVM_PL011) += pkvm-pl011/
+obj-$(CONFIG_SERIAL_PKVM_8250) += pkvm-8250/

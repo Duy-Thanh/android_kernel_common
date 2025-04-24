@@ -1583,3 +1583,4 @@ config SERIAL_MCTRL_GPIO
 	tristate
 
 source "drivers/tty/serial/pkvm-pl011/Kconfig"
+source "drivers/tty/serial/pkvm-8250/Kconfig"

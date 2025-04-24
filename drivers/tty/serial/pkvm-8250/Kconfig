@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0
+
+config SERIAL_PKVM_8250
+	tristate "Protected KVM 8250 UART"
+	depends on ARM64
+	depends on KVM
+
+config SERIAL_PKVM_8250_BASE_PHYS
+	hex
+	depends on SERIAL_PKVM_8250
+	default 0x11002000
