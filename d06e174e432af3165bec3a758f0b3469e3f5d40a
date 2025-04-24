@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e48aab98_c6fcb5df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-04-24T08:09:08Z",
+      "side": 1,
+      "message": "Please add upstream task tag to satisfy the linter, beside that - LGTM",
+      "revId": "d06e174e432af3165bec3a758f0b3469e3f5d40a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
