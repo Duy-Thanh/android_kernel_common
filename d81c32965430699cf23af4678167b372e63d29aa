@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "952edf5a_d242c628",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-24T16:16:05Z",
+      "side": 1,
+      "message": "Why do you need hooks in gunyah code? Why not just add the code directly since QCOM is the maintainer of gunyah?",
+      "revId": "d81c32965430699cf23af4678167b372e63d29aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
