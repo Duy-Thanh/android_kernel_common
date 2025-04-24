@@ -40,6 +40,30 @@
       ],
       "revId": "4196b5290e745deac54a6df6a428c07580aeba06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28bfc14_9ffdb546",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-24T12:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "401cfbad_cc8eda98",
+      "range": {
+        "startLine": 5,
+        "startChar": 22,
+        "endLine": 5,
+        "endChar": 26
+      },
+      "revId": "4196b5290e745deac54a6df6a428c07580aeba06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
