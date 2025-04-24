@@ -106,6 +106,15 @@ filegroup(
         "android/abi_gki_aarch64_qcom",
         "android/abi_gki_aarch64_rtkstb",
         "android/abi_gki_aarch64_rtktv",
+<<<<<<< HEAD   (956d8c UPSTREAM: vsock: Orphan socket after transport release)
+||||||| BASE
+        "android/abi_gki_aarch64_sony",
+        "android/abi_gki_aarch64_syna",
+=======
+        "android/abi_gki_aarch64_sony",
+        "android/abi_gki_aarch64_syna",
+        "android/abi_gki_aarch64_tcl",
+>>>>>>> CHANGE (bea553 ANDROID: GKI: Add symbols to symbol list for tcl)
         "android/abi_gki_aarch64_transsion",
         "android/abi_gki_aarch64_tuxera",
         "android/abi_gki_aarch64_virtual_device",
