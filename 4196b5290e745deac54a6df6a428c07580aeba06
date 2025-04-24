@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401cfbad_cc8eda98",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-04-24T12:08:12Z",
+      "side": 1,
+      "message": "2025",
+      "range": {
+        "startLine": 5,
+        "startChar": 22,
+        "endLine": 5,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a18baf43_32e1c42f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/android_kabi.h",
+              "range": {
+                "startLine": 5,
+                "startChar": 0,
+                "endLine": 6,
+                "endChar": 0
+              },
+              "replacement": " * Copyright (C) 2020-2025 Google, Inc.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4196b5290e745deac54a6df6a428c07580aeba06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
