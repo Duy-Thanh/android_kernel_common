@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6b83b37_a10a89bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-04-25T18:09:37Z",
+      "side": 1,
+      "message": "Sorry, nothing in the bug or the commit message explains why this change is necessary?  Why not export sched_clock itself?",
+      "revId": "399d159ad415eea9824a1b82cbd303247bf45ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
