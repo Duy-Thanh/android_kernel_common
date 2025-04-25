@@ -43971,6 +43971,10 @@ member {
   type_id: 0x09fe2b42
 }
 member {
+  id: 0x21c53df9
+  type_id: 0x083a87f4
+}
+member {
   id: 0x21ff060a
   type_id: 0x08d2683b
 }
@@ -44783,6 +44787,11 @@ member {
   offset: 512
 }
 member {
+  id: 0x32e489a3
+  type_id: 0x44bc7afc
+  offset: 512
+}
+member {
   id: 0x32e76f79
   type_id: 0x44b3f918
   offset: 32
@@ -45343,6 +45352,10 @@ member {
   id: 0x364b4150
   type_id: 0x56037e9c
   offset: 1408
+}
+member {
+  id: 0x36752b74
+  type_id: 0x56faddc1
 }
 member {
   id: 0x3697c485
@@ -191380,6 +191393,11 @@ member {
   offset: 13504
 }
 member {
+  id: 0x493b6fbc
+  name: "sekret"
+  type_id: 0x18bd6530
+}
+member {
   id: 0x339d15e8
   name: "sel"
   type_id: 0x4585663f
@@ -231479,7 +231497,7 @@ struct_union {
     member_id: 0x2a829378
     member_id: 0x827a15cf
     member_id: 0xd61d5458
-    member_id: 0x415b07a4
+    member_id: 0x32e489a3
     member_id: 0xb116e33a
   }
 }
@@ -231726,6 +231744,14 @@ struct_union {
     member_id: 0x5f1b5e34
     member_id: 0x0d82b484
     member_id: 0x9ac15baf
+  }
+}
+struct_union {
+  id: 0x083a87f4
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x415b0cbc
   }
 }
 struct_union {
@@ -236694,6 +236720,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x44bc7afc
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x493b6fbc
+    member_id: 0x21c53df9
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x44cad962
   kind: UNION
   definition {
@@ -237749,6 +237785,12 @@ struct_union {
     bytesize: 4
     member_id: 0x032aedf1
     member_id: 0x0f4b9ba4
+  }
+}
+struct_union {
+  id: 0x56faddc1
+  kind: UNION
+  definition {
   }
 }
 struct_union {
@@ -391681,7 +391723,7 @@ elf_symbol {
   name: "cgroup_rm_cftypes"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8089f97f
+  crc: 0xd8e40b79
   type_id: 0x9b6aa399
   full_name: "cgroup_rm_cftypes"
 }
@@ -394898,7 +394940,7 @@ elf_symbol {
   name: "css_task_iter_end"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x63b67479
+  crc: 0x8c29b30b
   type_id: 0x121493f8
   full_name: "css_task_iter_end"
 }
@@ -394907,7 +394949,7 @@ elf_symbol {
   name: "css_task_iter_next"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbf6b07dc
+  crc: 0xc26c587e
   type_id: 0x79c16494
   full_name: "css_task_iter_next"
 }
@@ -394916,7 +394958,7 @@ elf_symbol {
   name: "css_task_iter_start"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd59ca654
+  crc: 0x988db2f3
   type_id: 0x1b4978c4
   full_name: "css_task_iter_start"
 }
@@ -407231,7 +407273,7 @@ elf_symbol {
   name: "fw_devlink_purge_absent_suppliers"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5d878594
+  crc: 0x14804172
   type_id: 0x11bc7f41
   full_name: "fw_devlink_purge_absent_suppliers"
 }
@@ -417632,7 +417674,7 @@ elf_symbol {
   name: "mdiobus_c45_modify"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaf45be97
+  crc: 0xd5830054
   type_id: 0x9173ee51
   full_name: "mdiobus_c45_modify"
 }
@@ -423081,7 +423123,7 @@ elf_symbol {
   name: "page_pool_put_unrefed_page"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaeec7c12
+  crc: 0xd756f79e
   type_id: 0x1443bd42
   full_name: "page_pool_put_unrefed_page"
 }
@@ -429416,7 +429458,7 @@ elf_symbol {
   name: "register_btf_kfunc_id_set"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x98c58a81
+  crc: 0x9b97345e
   type_id: 0xa299b4d3
   full_name: "register_btf_kfunc_id_set"
 }
@@ -450560,7 +450602,7 @@ elf_symbol {
   name: "xsk_tx_peek_release_desc_batch"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x24a7e519
+  crc: 0x107b530b
   type_id: 0x465db26a
   full_name: "xsk_tx_peek_release_desc_batch"
 }
