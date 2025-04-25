@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88028a11_b361ed08",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-25T21:37:29Z",
+      "side": 1,
+      "message": "The hypervisor buffers are not mapped in during `hyp_ffa_init`. There is a fix at https://lore.kernel.org/all/20250303234259.GA30749@willie-the-truck/, but AIUI from @sebastianene@google.com that patch isn\u0027t landing any time soon.\n\nShould we cherry-pick it anyway? Then I could move the SP initialization code.",
+      "parentUuid": "9b465408_66630568",
+      "range": {
+        "startLine": 1466,
+        "startChar": 4,
+        "endLine": 1466,
+        "endChar": 45
+      },
+      "revId": "95907eb39124b364bdbad89cedc36e4cf0044ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff92ed65_2db3aa2d",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 75
