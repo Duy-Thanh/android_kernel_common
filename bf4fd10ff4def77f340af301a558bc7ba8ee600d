@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaf0bf12_4390a236",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-25T15:40:32Z",
+      "side": 1,
+      "message": "As per the offline discussion, it would be nice to mention in this commit message all the new functions introduced by FF-A 1.2.",
+      "revId": "bf4fd10ff4def77f340af301a558bc7ba8ee600d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
