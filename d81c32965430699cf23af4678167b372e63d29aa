@@ -16,6 +16,24 @@
       "message": "Why do you need hooks in gunyah code? Why not just add the code directly since QCOM is the maintainer of gunyah?",
       "revId": "d81c32965430699cf23af4678167b372e63d29aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65709c9f_b0ddc5c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965279
+      },
+      "writtenOn": "2025-04-25T06:53:01Z",
+      "side": 1,
+      "message": "Here are few reasons why we want to use hooks instead of add the code:\n* The feature is not need by google VM, it\u0027s to ensure we won\u0027t break the flow for google VMs.\n* It is for specific scenario from customer without emulated any virtual devices. And it\u0027s experimental feature which we don\u0027t want to keep it in ACK because the turn around time for bug fixes will increase.",
+      "parentUuid": "952edf5a_d242c628",
+      "revId": "d81c32965430699cf23af4678167b372e63d29aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
