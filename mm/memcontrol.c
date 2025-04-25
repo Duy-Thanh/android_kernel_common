@@ -97,7 +97,11 @@ static bool cgroup_memory_nokmem __ro_after_init;
 static bool cgroup_memory_nobpf __ro_after_init;
 
 static struct kmem_cache *memcg_cachep;
+<<<<<<< HEAD   (e2e12b9743c33a990392c5b92923a3985d4a5d60 ANDROID: GKI: Update symbol list for Pixel Watch)
 static struct kmem_cache *memcg_pn_cachep;
+||||||| BASE   (b6bde4b64897521dea327c73636fcfc37358bdcd UPSTREAM: mm/memcg: move mem_cgroup_init() ahead of cgroup_i)
+=======
+>>>>>>> CHANGE (78e6a3d422dc2f9e62ec96c01fcc6ac05ca94a44 UPSTREAM: mm/memcg: use kmem_cache when alloc memcg)
 
 #ifdef CONFIG_CGROUP_WRITEBACK
 static DECLARE_WAIT_QUEUE_HEAD(memcg_cgwb_frn_waitq);
@@ -7629,9 +7633,13 @@ int __init mem_cgroup_init(void)
 	memcg_cachep = kmem_cache_create("mem_cgroup", memcg_size, 0,
 					 SLAB_PANIC | SLAB_HWCACHE_ALIGN, NULL);
 
+<<<<<<< HEAD   (e2e12b9743c33a990392c5b92923a3985d4a5d60 ANDROID: GKI: Update symbol list for Pixel Watch)
 	memcg_pn_cachep = KMEM_CACHE(mem_cgroup_per_node,
 				     SLAB_PANIC | SLAB_HWCACHE_ALIGN);
 
+||||||| BASE   (b6bde4b64897521dea327c73636fcfc37358bdcd UPSTREAM: mm/memcg: move mem_cgroup_init() ahead of cgroup_i)
+=======
+>>>>>>> CHANGE (78e6a3d422dc2f9e62ec96c01fcc6ac05ca94a44 UPSTREAM: mm/memcg: use kmem_cache when alloc memcg)
 	for_each_node(node) {
 		struct mem_cgroup_tree_per_node *rtpn;
 
