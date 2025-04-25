@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c893533_ace8e968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1887488
+      },
+      "writtenOn": "2025-04-25T15:15:16Z",
+      "side": 1,
+      "message": "Hey, just leave a note to remind that there are already almost identical tracepoints from Linux v6.12-rc1. Hopefully, in the next ACK, we won\u0027t need these kinds of vendor hooks anymore!\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d396b209e405a571ce8e06d3760ffc3e389a944f1",
+      "revId": "6e8c49bd14703d331cde0721ba097d3b236f2f29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
