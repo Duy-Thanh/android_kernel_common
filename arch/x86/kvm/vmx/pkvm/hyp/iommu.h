@@ -15,5 +15,6 @@ void pkvm_iommu_flush_iotlb(unsigned long pgd, unsigned long addr, unsigned long
 #ifdef CONFIG_PKVM_INTEL_PVIOMMU
 unsigned long pkvm_iommu_set_rta(unsigned long phys,unsigned long rta_phys);
 unsigned long pkvm_iommu_update_ce(struct kvm_vcpu *hvcpu, unsigned long phys, unsigned long param_gva);
+void pkvm_iommu_submit_qi(struct kvm_vcpu *hvcpu, unsigned long reg, unsigned long desc_base, int count);
 #endif
 #endif

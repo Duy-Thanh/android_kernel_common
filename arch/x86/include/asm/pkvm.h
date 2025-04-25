@@ -26,6 +26,7 @@
 #define PKVM_HC_TLB_REMOTE_FLUSH_RANGE	13
 #define PKVM_HC_SET_MMIO_VE		14
 #define PKVM_HC_ADD_PTDEV		15
+#define PKVM_HC_SUBMIT_QI       16
 
 #define PKVM_HC_DUMP_DMAR_TR_STRUCT	20
 #define PKVM_HC_DUMP_DOMAIN_PGT		21
@@ -119,6 +120,14 @@ static inline long pkvm_set_iommu_root(unsigned long reg_phys, unsigned long roo
 		ret = kvm_hypercall2(PKVM_HC_IOMMU_SET_RTA, reg_phys, root_addr);
 
 	return ret;
+}
+
+static inline int pkvm_qi_submit_sync(unsigned long reg_phys, unsigned long desc,
+		unsigned int count)
+{
+	if (likely(this_cpu_read(pkvm_enabled)))
+		kvm_hypercall3(PKVM_HC_SUBMIT_QI, reg_phys, desc, count);
+	return 0;
 }
 
 /*
