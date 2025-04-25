@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47caf2d3_ce065765",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-25T01:06:45Z",
+      "side": 1,
+      "message": "Right, I guess we need to account for the SMCCC spec saying we should preserve x8 to x30 like we do in `ffa_set_retval`.",
+      "parentUuid": "ff0f2f11_b658e796",
+      "revId": "458637bc71682bed8529e258850c8609617e2628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b95f7bbd_8596d0ef",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-23T03:57:41Z",
       "side": 1,
       "message": "Can this happen?",
+      "revId": "458637bc71682bed8529e258850c8609617e2628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abdc831c_30873b28",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-25T01:06:45Z",
+      "side": 1,
+      "message": "I think so if hyp_ffa_version is somehow set to (0, 0). I guess we can leave it out since it is initialized in `hyp_ffa_init` and other code in this file relies on it being properly initialized.",
+      "parentUuid": "b95f7bbd_8596d0ef",
       "revId": "458637bc71682bed8529e258850c8609617e2628",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
