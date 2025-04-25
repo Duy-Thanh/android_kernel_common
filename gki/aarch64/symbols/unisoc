@@ -307,7 +307,9 @@
   __regmap_init_i2c
 
 # required sensorhub.ko
+  devm_iio_kfifo_buffer_setup_ext
   iio_pollfunc_store_time
+  iio_kfifo_free
 
 # required sdhci_sprd.ko
   __sdhci_read_caps
