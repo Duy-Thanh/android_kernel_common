@@ -67,7 +67,6 @@
 #include <trace/hooks/signal.h>
 #include <trace/hooks/compaction.h>
 #include <trace/hooks/madvise.h>
-#include <trace/events/android_vendor_lmk.h>
 #include <trace/hooks/blk.h>
 #include <trace/hooks/fsnotify.h>
 #include <trace/hooks/fuse.h>
@@ -399,7 +398,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_smap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rebalance_anon_lru_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_swapin_walk_pmd_entry);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_process_madvise);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_contig_range_not_isolated);

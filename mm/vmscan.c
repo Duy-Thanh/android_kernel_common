@@ -70,6 +70,7 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/vmscan.h>
+#include <trace/events/android_vendor_lmk.h>
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/vmscan.h>
@@ -81,6 +82,7 @@
 EXPORT_TRACEPOINT_SYMBOL_GPL(mm_vmscan_direct_reclaim_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(mm_vmscan_direct_reclaim_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(mm_vmscan_kswapd_wake);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
 
 struct scan_control {
 	/* How many pages shrink_list() should reclaim */
@@ -6109,9 +6111,14 @@ static void shrink_node(pg_data_t *pgdat, struct scan_control *sc)
 	unsigned long nr_reclaimed, nr_scanned, nr_node_reclaimed;
 	struct lruvec *target_lruvec;
 	bool reclaimable = false;
+	bool vendor_kill = false;
 
 	if (lru_gen_enabled() && root_reclaim(sc)) {
 		common_file_is_tiny(pgdat, sc);
+
+		if (sc->file_is_tiny && vm_free_swap_low())
+			trace_android_trigger_vendor_lmk_kill(4, 900);
+
 		memset(&sc->nr, 0, sizeof(sc->nr));
 		lru_gen_shrink_node(pgdat, sc);
 		return;
@@ -6126,6 +6133,11 @@ again:
 	nr_scanned = sc->nr_scanned;
 
 	prepare_scan_control(pgdat, sc);
+
+	if (!vendor_kill && sc->file_is_tiny && vm_free_swap_low()) {
+		vendor_kill = true;
+		trace_android_trigger_vendor_lmk_kill(4, 900);
+	}
 
 	shrink_node_memcgs(pgdat, sc);
 
@@ -6690,6 +6702,8 @@ unsigned long try_to_free_pages(struct zonelist *zonelist, int order,
 	bool skip_swap = false;
 	int prio = 0;
 
+	common_file_is_tiny(NODE_DATA(0), &sc);
+
 	/*
 	 * scan_control uses s8 fields for order, priority, and reclaim_idx.
 	 * Confirm they are large enough for max values.
@@ -6712,6 +6726,9 @@ unsigned long try_to_free_pages(struct zonelist *zonelist, int order,
 	set_task_reclaim_state(current, &sc.reclaim_state);
 	trace_mm_vmscan_direct_reclaim_begin(order, sc.gfp_mask);
 	trace_android_vh_direct_reclaim_begin(&prio);
+
+	if (sc.file_is_tiny && vm_free_swap_low())
+		trace_android_trigger_vendor_lmk_kill(3, 900);
 
 	nr_reclaimed = do_try_to_free_pages(zonelist, &sc);
 

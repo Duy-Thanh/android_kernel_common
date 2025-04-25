@@ -481,6 +481,14 @@ static inline long get_nr_swap_pages(void)
 	return atomic_long_read(&nr_swap_pages);
 }
 
+static inline bool vm_free_swap_low(void)
+{
+	long nr_free_swap_pages = total_swap_pages - get_nr_swap_pages();
+
+	/* Are we less than 8% of swap space ? */
+	return 100 * nr_free_swap_pages < 8 * total_swap_pages;
+}
+
 extern void si_swapinfo(struct sysinfo *);
 swp_entry_t folio_alloc_swap(struct folio *folio);
 bool folio_free_swap(struct folio *folio);

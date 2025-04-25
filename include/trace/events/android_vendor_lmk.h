@@ -5,8 +5,7 @@
 
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM android_vendor_lmk
-#undef TRACE_INCLUDE_PATH
-#define TRACE_INCLUDE_PATH trace/events
+
 #if !defined(_ANDROID_VENDOR_LMK_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _ANDROID_VENDOR_LMK_H
 
