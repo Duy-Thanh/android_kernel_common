@@ -16,6 +16,23 @@
       "message": "what is not possible is the RE-negotiation. Once has_version_negotiated is true, the host asking a second time for a lower version shall be denied. The comment should be updated to reflect this.",
       "revId": "f897824c0724973cd56e30be1fd2367277861ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e5fbd13_b15d9178",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-25T16:42:30Z",
+      "side": 1,
+      "message": "the CL comment needs to be updated to explain that re-negotiation with the host is not supported.",
+      "revId": "f897824c0724973cd56e30be1fd2367277861ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
