@@ -362346,6 +362346,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9d7b5780
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x188b9e81
+  parameter_id: 0x3ee52b5e
+  parameter_id: 0x07712b14
+}
+function {
   id: 0x9d7d2035
   return_type_id: 0x6720d32f
   parameter_id: 0x03f70c68
@@ -397501,6 +397509,15 @@ elf_symbol {
   full_name: "devm_iio_device_alloc"
 }
 elf_symbol {
+  id: 0x4cc5c3be
+  name: "devm_iio_kfifo_buffer_setup_ext"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa55e216b
+  type_id: 0x9d7b5780
+  full_name: "devm_iio_kfifo_buffer_setup_ext"
+}
+elf_symbol {
   id: 0x93a520bf
   name: "devm_iio_trigger_register"
   is_defined: true
@@ -411235,6 +411252,15 @@ elf_symbol {
   crc: 0x2ec1e36b
   type_id: 0x884063ea
   full_name: "iio_get_time_ns"
+}
+elf_symbol {
+  id: 0x6bc45122
+  name: "iio_kfifo_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x97d3b6a7
+  type_id: 0x1b54f3ab
+  full_name: "iio_kfifo_free"
 }
 elf_symbol {
   id: 0x2c6f9f9a
@@ -453095,6 +453121,7 @@ interface {
   symbol_id: 0x35d98638
   symbol_id: 0xb5428827
   symbol_id: 0x4e9c460b
+  symbol_id: 0x4cc5c3be
   symbol_id: 0x93a520bf
   symbol_id: 0xc129555c
   symbol_id: 0x50344150
@@ -454618,6 +454645,7 @@ interface {
   symbol_id: 0xef661661
   symbol_id: 0x83815ff1
   symbol_id: 0x01f28688
+  symbol_id: 0x6bc45122
   symbol_id: 0x2c6f9f9a
   symbol_id: 0xa4bca904
   symbol_id: 0x2dd4437a

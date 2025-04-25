@@ -117,6 +117,7 @@ clk_hw_get_clk_prepared_enabled_kunit
 clk_hw_register_kunit
 clk_prepare_enable_kunit
 close_candev
+devm_iio_kfifo_buffer_setup_ext
 devm_pwrseq_device_register
 devm_pwrseq_get
 do_trace_9p_fid_get
@@ -193,6 +194,8 @@ ieee802154_unregister_hw
 ieee802154_xmit_complete
 ieee802154_xmit_error
 ieee802154_xmit_hw_error
+iio_kfifo_allocate
+iio_kfifo_free
 kunit_add_action
 kunit_add_action_or_reset
 kunit_assert_prologue
