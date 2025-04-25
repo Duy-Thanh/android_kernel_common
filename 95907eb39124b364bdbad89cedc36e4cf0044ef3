@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b465408_66630568",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-25T16:05:25Z",
+      "side": 1,
+      "message": "Any reason not to do this in hyp_ffa_init() instead?",
+      "range": {
+        "startLine": 1466,
+        "startChar": 4,
+        "endLine": 1466,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d68a75d5_a3bbcde6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1245,
+                "startChar": 0,
+                "endLine": 1245,
+                "endChar": 0
+              },
+              "replacement": "\nstatic int kvm_notify_host_vm_availability(void)\n{\n\tint ret;\n\n\tret \u003d kvm_init_vm_avail_sps();\n\tif (ret)\n\t\treturn ret;\n\n\tret \u003d kvm_notify_vm_availability(HOST_FFA_ID, \u0026host_buffers, FFA_VM_CREATION_MSG);\n\tif (ret)\n\t\treturn ret;\n\n\thost_avail_notified \u003d true;\n\treturn 0;\n}\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1460,
+                "startChar": 0,
+                "endLine": 1461,
+                "endChar": 0
+              },
+              "replacement": "\t    (!smp_load_acquire(\u0026has_version_negotiated) || !host_avail_notified)) {\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1464,
+                "startChar": 0,
+                "endLine": 1488,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1821,
+                "startChar": 0,
+                "endLine": 1821,
+                "endChar": 0
+              },
+              "replacement": "\tif (kvm_notify_host_vm_availability())\n\t\treturn -EAGAIN;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "95907eb39124b364bdbad89cedc36e4cf0044ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff92ed65_2db3aa2d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-25T16:05:25Z",
+      "side": 1,
+      "message": "Doesn\u0027t this call the creation message on _all_ guest FF-A calls? As for the destruction message stuff, it would be nicer to have a separate hypercall that the host can call right after creating the pVM instead.",
+      "range": {
+        "startLine": 1578,
+        "startChar": 11,
+        "endLine": 1578,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "af888f51_ccde8fd8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1554,
+                "startChar": 0,
+                "endLine": 1554,
+                "endChar": 0
+              },
+              "replacement": "\nstatic bool is_vm_avail_notified(struct pkvm_hyp_vcpu *hyp_vcpu)\n{\n\tstruct kvm_ffa_buffers *ffa_buf;\n\n\thyp_spin_lock(\u0026kvm_ffa_hyp_lock);\n\tffa_buf \u003d ffa_get_buffers(hyp_vcpu);\n\tbool notified \u003d ffa_buf-\u003evm_avail_bitmap !\u003d 0;\n\thyp_spin_unlock(\u0026kvm_ffa_hyp_lock);\n\n\treturn notified;\n}\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1578,
+                "startChar": 0,
+                "endLine": 1584,
+                "endChar": 0
+              },
+              "replacement": "\t/* On the first guest FFA call, notify TZ of VM availability */\t\n\tif (!is_vm_avail_notified(hyp_vcpu)) {\n\t\tret \u003d kvm_init_vm_avail_sps();\n\t\tif (ret) {\n\t\t\tffa_to_smccc_res(\u0026res, ret);\n\t\t\tgoto out_guest;\n\t\t}\n\n\t\thyp_spin_lock(\u0026kvm_ffa_hyp_lock);\n\t\tffa_buf \u003d ffa_get_buffers(hyp_vcpu);\n\t\tret \u003d kvm_notify_vm_availability(hyp_vcpu_to_ffa_handle(hyp_vcpu),\n\t\t\t\t\t\t ffa_buf, FFA_VM_CREATION_MSG);\n\t\thyp_spin_unlock(\u0026kvm_ffa_hyp_lock);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1585,
+                "startChar": 0,
+                "endLine": 1593,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (ret \u003d\u003d FFA_RET_INTERRUPTED || ret \u003d\u003d FFA_RET_RETRY) {\n\t\t\t/* Go back to the host and replay the last guest instruction */\n\t\t\twrite_sysreg_el2(read_sysreg_el2(SYS_ELR) - 4, SYS_ELR);\n\t\t\t*exit_code \u003d ARM_EXCEPTION_IRQ;\n\t\t\treturn false;\n\t\t} else if (ret) {\n\t\t\tffa_to_smccc_res(\u0026res, ret);\n\t\t\tgoto out_guest;\n\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "95907eb39124b364bdbad89cedc36e4cf0044ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf083d9a_50edbeaa",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 1587,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-25T16:05:25Z",
+      "side": 1,
+      "message": "Side note for the following patch: IIRC trapping an SMC does _not_ progress the PC, as opposed to an HVC. So this might be a bug when using the SMC conduit.",
+      "range": {
+        "startLine": 1587,
+        "startChar": 2,
+        "endLine": 1587,
+        "endChar": 58
+      },
+      "revId": "95907eb39124b364bdbad89cedc36e4cf0044ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f6bab9_72d82359",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-25T16:05:25Z",
+      "side": 1,
+      "message": "Please move this to a separate hypercall. Also, it seems that the creation message is only being sent when a guest has issued FF-A calls, but this seems to be called for _all_ guests, including non-FFA ones. Is that OK?",
+      "range": {
+        "startLine": 955,
+        "startChar": 0,
+        "endLine": 958,
+        "endChar": 0
+      },
+      "revId": "95907eb39124b364bdbad89cedc36e4cf0044ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
