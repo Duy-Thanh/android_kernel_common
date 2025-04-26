@@ -763,7 +763,12 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task)
 		ret = -EFSCORRUPTED;
 
 		/* Avoid f2fs_commit_super in irq context */
+<<<<<<< HEAD   (e59b2b ANDROID: Repurpose a reserved slot in ipv6_devconf for backp)
 		if (!in_task)
+||||||| BASE
+=======
+		if (in_task)
+>>>>>>> BRANCH (8034ec Revert "of: property: Increase NR_FWNODE_REFERENCE_ARGS")
 			f2fs_save_errors(sbi, ERROR_FAIL_DECOMPRESSION);
 		else
 			f2fs_handle_error(sbi, ERROR_FAIL_DECOMPRESSION);
