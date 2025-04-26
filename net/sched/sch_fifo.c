@@ -39,7 +39,12 @@ static int pfifo_tail_enqueue(struct sk_buff *skb, struct Qdisc *sch,
 {
 	unsigned int prev_backlog;
 
+<<<<<<< HEAD   (d634ca ANDROID: Repurpose a reserved slot in ipv6_devconf for backp)
 	if (unlikely(sch->limit == 0))
+||||||| BASE
+=======
+	if (unlikely(READ_ONCE(sch->limit) == 0))
+>>>>>>> BRANCH (1c578b Revert "netfilter: conntrack: convert to refcount_t api")
 		return qdisc_drop(skb, sch, to_free);
 
 	if (likely(sch->q.qlen < sch->limit))
