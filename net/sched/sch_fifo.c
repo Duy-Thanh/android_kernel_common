@@ -38,7 +38,12 @@ static int pfifo_tail_enqueue(struct sk_buff *skb, struct Qdisc *sch,
 {
 	unsigned int prev_backlog;
 
+<<<<<<< HEAD   (eb15b7 UPSTREAM: net_sched: Prevent creation of classes with TC_H_R)
 	if (unlikely(sch->limit == 0))
+||||||| BASE
+=======
+	if (unlikely(READ_ONCE(sch->limit) == 0))
+>>>>>>> BRANCH (9b78f0 Merge 5.4.292 into android11-5.4-lts)
 		return qdisc_drop(skb, sch, to_free);
 
 	if (likely(sch->q.qlen < sch->limit))
