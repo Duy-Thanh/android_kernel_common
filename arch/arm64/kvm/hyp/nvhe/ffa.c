@@ -1516,7 +1516,8 @@ static void do_ffa_guest_version(struct arm_smccc_1_2_regs *res,
 {
 	DECLARE_REG(u32, ffa_req_version, ctxt, 1);
 
-	if (FFA_MAJOR_VERSION(ffa_req_version) != 1) {
+	/* No backwards compatibility for you, please update your guest drivers */
+	if (FFA_MAJOR_VERSION(ffa_req_version) != 1 || FFA_MINOR_VERSION(ffa_req_version) < 2) {
 		res->a0 = FFA_RET_NOT_SUPPORTED;
 		return;
 	}
@@ -1528,8 +1529,7 @@ static void do_ffa_guest_version(struct arm_smccc_1_2_regs *res,
 		goto unlock;
 	}
 
-	/* No backwards compatibility for you, please update your guest drivers*/
-	if (FFA_MINOR_VERSION(ffa_req_version) < FFA_MINOR_VERSION(hyp_ffa_version)) {
+	if (FFA_MINOR_VERSION(hyp_ffa_version) < 2) {
 		res->a0 = FFA_RET_NOT_SUPPORTED;
 		goto unlock;
 	}
@@ -1931,6 +1931,7 @@ int hyp_ffa_init(void *pages)
 	if (FFA_MAJOR_VERSION(res.a0) != 1)
 		return -EOPNOTSUPP;
 
+	/* See do_ffa_guest_version before bumping maximum supported version. */
 	if (FFA_MINOR_VERSION(res.a0) < FFA_MINOR_VERSION(FFA_VERSION_1_2))
 		hyp_ffa_version = res.a0;
 	else

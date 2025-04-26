@@ -954,6 +954,14 @@ static int pkvm_vm_ioctl_ffa_support(struct kvm *kvm, u32 enable)
 	if (!ffa_version)
 		return -EINVAL;
 
+	/*
+	 * If the host negotiated a version which the guest doesn't support,
+	 * don't enable the FF-A capability.
+	 */
+	if (FFA_MAJOR_VERSION(ffa_version) != 1 || FFA_MINOR_VERSION(ffa_version) < 2) {
+		return -EINVAL;
+	}
+
 	mutex_lock(&kvm->arch.config_lock);
 	if (kvm->arch.pkvm.handle) {
 		ret = -EBUSY;
