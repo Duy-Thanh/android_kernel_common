@@ -61,6 +61,13 @@
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/suspend.h>
 #include <trace/hooks/fsnotify.h>
+<<<<<<< HEAD   (64cf6316d5971969833adacdd2a2515dee5e2f8e ANDROID: KVM: pVMX: Implement vcpu_free operation)
+||||||| BASE   (b85437b135fdaf10558f18973480432650d7f5f0 ANDROID: GKI: Update symbol list for vivo)
+#include <trace/hooks/fuse.h>
+=======
+#include <trace/hooks/fuse.h>
+#include <trace/hooks/ogki_honor.h>
+>>>>>>> CHANGE (394cfbc6f83e3fa29ebacdf76b7f203512c2b9e5 ANDROID: GKI: Add vendor hook define for Honor ogki)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -139,7 +146,18 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_wait_for_uic_cmd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_transfer_rsp_status);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_printk);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_create);
+<<<<<<< HEAD   (64cf6316d5971969833adacdd2a2515dee5e2f8e ANDROID: KVM: pVMX: Implement vcpu_free operation)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_set_bio_flag);
+||||||| BASE   (b85437b135fdaf10558f18973480432650d7f5f0 ANDROID: GKI: Update symbol list for vivo)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_check_vip_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_task_util);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_uclamp_task_util);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_get_task_tags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_get_task_rsum);
+>>>>>>> CHANGE (394cfbc6f83e3fa29ebacdf76b7f203512c2b9e5 ANDROID: GKI: Add vendor hook define for Honor ogki)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_alloc_insert_iova);
