@@ -15619,6 +15619,11 @@ pointer_reference {
   pointee_type_id: 0x9a2fc16a
 }
 pointer_reference {
+  id: 0x2c1d2871
+  kind: POINTER
+  pointee_type_id: 0x9a34475a
+}
+pointer_reference {
   id: 0x2c1d5295
   kind: POINTER
   pointee_type_id: 0x9a35acc8
@@ -327644,6 +327649,12 @@ function {
   parameter_id: 0x2502324f
 }
 function {
+  id: 0x1bfdee1b
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2c1d2871
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x1bfe630d
   return_type_id: 0x48b5725f
   parameter_id: 0x2b1ef221
@@ -350691,6 +350702,13 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x1d19a9d5
   parameter_id: 0x13580d6c
+}
+function {
+  id: 0x9a34475a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1d5bae2a
+  parameter_id: 0x39182992
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x9a347f45
@@ -396269,6 +396287,15 @@ elf_symbol {
   crc: 0xda1b44d0
   type_id: 0x1fd9024d
   full_name: "do_trace_rcu_torture_read"
+}
+elf_symbol {
+  id: 0x28bb5738
+  name: "do_traversal_all_lruvec"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x866b22ea
+  type_id: 0x1bfdee1b
+  full_name: "do_traversal_all_lruvec"
 }
 elf_symbol {
   id: 0x718fec30
@@ -448545,6 +448572,7 @@ interface {
   symbol_id: 0x9c1c9dfa
   symbol_id: 0xb50c088c
   symbol_id: 0xae435551
+  symbol_id: 0x28bb5738
   symbol_id: 0x718fec30
   symbol_id: 0x037d0335
   symbol_id: 0x1f647fed
