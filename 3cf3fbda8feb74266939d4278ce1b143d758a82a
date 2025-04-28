@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7103e998_cc2571c4",
+        "filename": "mm/filemap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3762,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-28T19:18:40Z",
+      "side": 1,
+      "message": "Can you simply add `orig_start_pgoff` into `trace_android_vh_filemap_map_pages(file, first_pgoff, last_pgoff, ret)` ?\nSince ABI on 6.12 is not yet frozen, we should take this opportunity to consolidate these hooks into one.",
+      "range": {
+        "startLine": 3761,
+        "startChar": 1,
+        "endLine": 3762,
+        "endChar": 83
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ba467bf3_a1d2d501",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3761,
+                "startChar": 0,
+                "endLine": 3763,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_filemap_map_pages(file, orig_start_pgoff,\n\t\t\t\t\tfirst_pgoff, last_pgoff, ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3cf3fbda8feb74266939d4278ce1b143d758a82a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
