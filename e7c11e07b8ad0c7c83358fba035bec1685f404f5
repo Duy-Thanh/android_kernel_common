@@ -45,6 +45,30 @@
       },
       "revId": "e7c11e07b8ad0c7c83358fba035bec1685f404f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc38ccc0_ea4d87e8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-28T14:56:37Z",
+      "side": 1,
+      "message": "agreed. But here the point is that when the callee returns its higher version, it also implicitly accept the lower requested version. Here the hypervisor tells the host it is ok to be on 1.1 but does not track it.",
+      "parentUuid": "56db00f0_c08dd258",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1089,
+        "endChar": 46
+      },
+      "revId": "e7c11e07b8ad0c7c83358fba035bec1685f404f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
