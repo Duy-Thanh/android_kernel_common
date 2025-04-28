@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56db00f0_c08dd258",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-28T14:24:49Z",
+      "side": 1,
+      "message": "After the host negotiates the FF-A version that remains locked in and we return the `hyp_ffa_version`.\n\nIf we negotiated 1.2 with the host and the host asks again requesting 1.1 the behaviour was that we return 1.2 because the version is locked in as per the FF-A spec. \n\nFrom the spec:\n\n`Once an FF-A version has been negotiated between a caller and a callee, the version may not be changed for the\nlifetime of the calling component. The callee must treat the negotiated version as the only supported version for\nany subsequent interactions with the caller.`",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1089,
+        "endChar": 46
+      },
+      "revId": "e7c11e07b8ad0c7c83358fba035bec1685f404f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
