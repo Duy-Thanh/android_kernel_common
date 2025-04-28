@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d974ca5_48882f7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-28T14:27:56Z",
+      "side": 1,
+      "message": "This is confusing me because renegotiation is not possible as the version remains locked in once the first negotiation phase completes.",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "e7c11e07b8ad0c7c83358fba035bec1685f404f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56db00f0_c08dd258",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 4
