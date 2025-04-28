@@ -16,6 +16,24 @@
       "message": "Isaac, where did you land the regression tests for `ASHMEM_SET_NAME`? I\u0027d like to verify that this doesn\u0027t break anything.",
       "revId": "f352c71f76dee25e142222d892de79dad6f981c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3f55cd_53d0021a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-04-28T23:15:00Z",
+      "side": 1,
+      "message": "Hey Alice, the tests haven\u0027t landed yet; they\u0027re still under review: ag/33260293 and ag/33260294.\n\nIf you have a local android build, you can cherrypick those CLs into your build and use\n\n`atest KernelLibcutilsTest` to execute the ashmem tests. The relevant tests that I added are the following:\n```\nAshmemTest#SetNameKernelAccessTest\nAshmemTest#GetLongNameAshmemTests\n```\n\nI noticed that the `GetLongNameAshmemTests` start failing with this CL applied",
+      "parentUuid": "44f804c2_1aeefd4d",
+      "revId": "f352c71f76dee25e142222d892de79dad6f981c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
