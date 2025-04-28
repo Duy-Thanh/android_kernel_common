@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ce99c5_25b1cb72",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-28T16:29:21Z",
+      "side": 1,
+      "message": "Discussed in the meeting: we\u0027ll skip the dependency and use what\u0027s in the current patch.",
+      "parentUuid": "88028a11_b361ed08",
+      "range": {
+        "startLine": 1466,
+        "startChar": 4,
+        "endLine": 1466,
+        "endChar": 45
+      },
+      "revId": "95907eb39124b364bdbad89cedc36e4cf0044ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff92ed65_2db3aa2d",
@@ -153,6 +177,30 @@
           ]
         }
       ],
+      "revId": "95907eb39124b364bdbad89cedc36e4cf0044ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbffedd1_aad52469",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-28T16:29:21Z",
+      "side": 1,
+      "message": "I added a special value to the bitmap and a check outside the hypervisor lock whether all SPs have been notified.",
+      "parentUuid": "ff92ed65_2db3aa2d",
+      "range": {
+        "startLine": 1578,
+        "startChar": 11,
+        "endLine": 1578,
+        "endChar": 16
+      },
       "revId": "95907eb39124b364bdbad89cedc36e4cf0044ef3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
