@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36dbbe49_60b3c999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-28T17:27:55Z",
+      "side": 1,
+      "message": "Bypassing. The code change has no effect for C builds and there is no C++ in the kernel.",
+      "revId": "2dce09306481194967cde461cf7353dd23de983d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
