@@ -16,6 +16,24 @@
       "message": "Sorry, nothing in the bug or the commit message explains why this change is necessary?  Why not export sched_clock itself?",
       "revId": "399d159ad415eea9824a1b82cbd303247bf45ac3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "011e5aaf_ad225a12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3589941
+      },
+      "writtenOn": "2025-04-28T03:47:23Z",
+      "side": 1,
+      "message": "https://partner-android-review.googlesource.com/c/kernel-oem/vivo/common/+/2925118\n\nWe made the commits in the previous ogki branch. The GKI commits were submitted to ensure symbol consistency. You may refer to the aforementioned commits for details. Thank you.",
+      "parentUuid": "c6b83b37_a10a89bc",
+      "revId": "399d159ad415eea9824a1b82cbd303247bf45ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
