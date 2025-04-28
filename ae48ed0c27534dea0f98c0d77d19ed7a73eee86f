@@ -242,6 +242,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0852c207_88b553c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-28T11:31:18Z",
+      "side": 1,
+      "message": "I think this is a really bad idea but as long as there\u0027s an understanding that we can ignore any bug reports from this config, then I can live with it (because I will simply ignore it). In other words, if you choose to use this config, you\u0027re on your own if it goes wrong. However, I don\u0027t understand what that means for CI and test coverage.\n\nWho will be responsible for maintaining kernel images built from this config?",
+      "parentUuid": "4c7e84ed_91ee1004",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
