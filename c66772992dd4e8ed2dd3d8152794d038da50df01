@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f080ed27_210a3577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-04-28T06:51:00Z",
+      "side": 1,
+      "message": "I believe this build error is due to merging in aosp/3584538 without the inclusion of aosp/3584256.",
+      "revId": "c66772992dd4e8ed2dd3d8152794d038da50df01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
