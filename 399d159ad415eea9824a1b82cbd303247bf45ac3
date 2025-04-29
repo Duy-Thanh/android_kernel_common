@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9abd08f_99c9b788",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-29T18:09:34Z",
+      "side": 1,
+      "message": "The function does nothing. There needs to be a lot more description here to justify it",
+      "revId": "399d159ad415eea9824a1b82cbd303247bf45ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6b83b37_a10a89bc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -50,6 +67,41 @@
       "side": 1,
       "message": "Such details really need to be in the commit message.\n(and while not preferred, if there is something sensitive, it can go into a bug, which you can refer to in the commit message).\n\nCommit messages really must provide the context for *why* the change is needed, as once the change lands, they are the only record one has in the git tree for why it has been done (expecting folks to search in Gerrit comments for links to partner Gerrit submissions isn\u0027t reasonable).\n\nFrom what you\u0027ve submitted here(even with the link to the private change), the reason this is needed isn\u0027t very clear, so the commit message needs improvement.\n\nFurther, the question Todd made in the link above about why a vendorhooks wasn\u0027t used, still seems to be outstanding.",
       "parentUuid": "011e5aaf_ad225a12",
+      "revId": "399d159ad415eea9824a1b82cbd303247bf45ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ad3529_b320d491",
+        "filename": "kernel/time/sched_clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-29T18:09:34Z",
+      "side": 1,
+      "message": "This function does nothing. Please just call `sched_clock()` from your vendor module.",
+      "fixSuggestions": [
+        {
+          "fixId": "c954d434_bd3970d9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/time/sched_clock.c",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 118,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
       "revId": "399d159ad415eea9824a1b82cbd303247bf45ac3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
