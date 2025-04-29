@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f811aae_3d61be30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-04-29T14:15:10Z",
+      "side": 1,
+      "message": "This issue has already been addressed in other branches:\n\nPlease cherry-pick this one instead:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3585530",
+      "revId": "d3c3fdcb509c404bdaf1882f79b17e2ae0aa83c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
