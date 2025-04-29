@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1830a1_1c8bb62e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-29T04:46:56Z",
+      "side": 1,
+      "message": "this is not specific to 1.2; the problem already exist with 1.1.\nthe hypervisor would not support a host at 1.0 when operating at 1.1.\nthis is an implementation limitation, totally acceptable by the FFA specification.\nSo I would recommend to have a generic comment, independent from the specific version.",
+      "fixSuggestions": [
+        {
+          "fixId": "9315ff49_ecb4103f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1014,
+                "startChar": 0,
+                "endLine": 1016,
+                "endChar": 0
+              },
+              "replacement": "\t\t * with earlier minor versions per DEN0077A 1.2 REL0 13.2.1. However,\n\t\t * the hypervisor may have implementation limitations that prevent\n\t\t * it from supporting earlier minor versions.\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1017,
+                "startChar": 0,
+                "endLine": 1018,
+                "endChar": 0
+              },
+              "replacement": "\t\t * For example, FF-A v1.2 updates the calling convention to SMCCC 1.2,\n\t\t * which is a breaking change from SMCCC 1.1. According to DEN0028\n\t\t * 1.6 G BET0 Appendix F:\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1024,
+                "startChar": 0,
+                "endLine": 1026,
+                "endChar": 0
+              },
+              "replacement": "\t\t * paths (e.g. to paper over the above-mentioned calling convention\n\t\t * changes), return NOT_SUPPORTED.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "faaeb85fb5506e7260f83dd33e7a4a47a1b14d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
