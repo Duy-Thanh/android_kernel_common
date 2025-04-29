@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "535f9a87_371a0483",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-29T18:05:26Z",
+      "side": 1,
+      "message": "The commit message talks about CONFIG_FINEIBT, but the actual change is to add `# CONFIG_CFI_AUTO_DEFAULT is not set`. Please also explain in the commit message why CFI_AUTO_DEFAULT is disabled and how that results in FINEIBT being disabled. Based on the Kconfig definition, CFI_AUTO_DEFAULT _depends on_ FINEIBT which means disabling it won\u0027t disable FINEIBT.",
+      "revId": "f4db7b417d7e3ecba53975a913ceeeaf1f10882d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "925dc4ca_b33ccde3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
