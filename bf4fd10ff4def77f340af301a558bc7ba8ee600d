@@ -51,6 +51,24 @@
       ],
       "revId": "bf4fd10ff4def77f340af301a558bc7ba8ee600d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a80376_862ee42d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-29T04:20:53Z",
+      "side": 1,
+      "message": "Done. \n\nNOTE: `FFA_NOTIFICATION_*` interfaces are from FF-A 1.1 so we could deny-list them in a separate CL.",
+      "parentUuid": "1f724b1c_0dc58e77",
+      "revId": "bf4fd10ff4def77f340af301a558bc7ba8ee600d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
