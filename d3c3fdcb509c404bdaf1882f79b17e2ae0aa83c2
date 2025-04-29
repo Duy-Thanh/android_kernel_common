@@ -16,6 +16,24 @@
       "message": "This issue has already been addressed in other branches:\n\nPlease cherry-pick this one instead:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3585530",
       "revId": "d3c3fdcb509c404bdaf1882f79b17e2ae0aa83c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "270fc732_7099be8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960825
+      },
+      "writtenOn": "2025-04-29T22:28:28Z",
+      "side": 1,
+      "message": "Done. please help to review. this path will be abandoned.",
+      "parentUuid": "6f811aae_3d61be30",
+      "revId": "d3c3fdcb509c404bdaf1882f79b17e2ae0aa83c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
