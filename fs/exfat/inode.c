@@ -323,14 +323,135 @@ static int exfat_get_block(struct inode *inode, sector_t iblock,
 	else
 		valid_blks = EXFAT_B_TO_BLK(ei->valid_size, sb);
 
+<<<<<<< HEAD   (a046a4 Merge ca8bed31edf7 ("ksmbd: fix null pointer dereference in )
 	/* The range has been fully written, map it */
 	if (iblock + max_blocks < valid_blks)
 		goto done;
+||||||| BASE
+		if (iblock + max_blocks < valid_blks) {
+			/* The range has been written, map it */
+			goto done;
+		} else if (iblock < valid_blks) {
+			/*
+			 * The area has been partially written,
+			 * map the written part.
+			 */
+			max_blocks = valid_blks - iblock;
+			goto done;
+		} else if (iblock == valid_blks &&
+			   (ei->valid_size & (sb->s_blocksize - 1))) {
+			/*
+			 * The block has been partially written,
+			 * zero the unwritten part and map the block.
+			 */
+			loff_t size, off, pos;
+=======
+		if (iblock + max_blocks < valid_blks) {
+			/* The range has been written, map it */
+			goto done;
+		} else if (iblock < valid_blks) {
+			/*
+			 * The area has been partially written,
+			 * map the written part.
+			 */
+			max_blocks = valid_blks - iblock;
+			goto done;
+		} else if (iblock == valid_blks &&
+			   (ei->valid_size & (sb->s_blocksize - 1))) {
+			/*
+			 * The block has been partially written,
+			 * zero the unwritten part and map the block.
+			 */
+			loff_t size, pos;
+			void *addr;
+>>>>>>> BRANCH (49b0a6 exfat: fix random stack corruption after get_block)
 
+<<<<<<< HEAD   (a046a4 Merge ca8bed31edf7 ("ksmbd: fix null pointer dereference in )
 	/* The range has been partially written, map the written part */
 	if (iblock < valid_blks) {
 		max_blocks = valid_blks - iblock;
 		goto done;
+||||||| BASE
+			max_blocks = 1;
+
+			/*
+			 * For direct read, the unwritten part will be zeroed in
+			 * exfat_direct_IO()
+			 */
+			if (!bh_result->b_folio)
+				goto done;
+
+			pos = EXFAT_BLK_TO_B(iblock, sb);
+			size = ei->valid_size - pos;
+			off = pos & (PAGE_SIZE - 1);
+
+			folio_set_bh(bh_result, bh_result->b_folio, off);
+			err = bh_read(bh_result, 0);
+			if (err < 0)
+				goto unlock_ret;
+
+			folio_zero_segment(bh_result->b_folio, off + size,
+					off + sb->s_blocksize);
+		} else {
+			/*
+			 * The range has not been written, clear the mapped flag
+			 * to only zero the cache and do not read from disk.
+			 */
+			clear_buffer_mapped(bh_result);
+		}
+=======
+			max_blocks = 1;
+
+			/*
+			 * For direct read, the unwritten part will be zeroed in
+			 * exfat_direct_IO()
+			 */
+			if (!bh_result->b_folio)
+				goto done;
+
+			/*
+			 * No buffer_head is allocated.
+			 * (1) bmap: It's enough to fill bh_result without I/O.
+			 * (2) read: The unwritten part should be filled with 0
+			 *           If a folio does not have any buffers,
+			 *           let's returns -EAGAIN to fallback to
+			 *           per-bh IO like block_read_full_folio().
+			 */
+			if (!folio_buffers(bh_result->b_folio)) {
+				err = -EAGAIN;
+				goto done;
+			}
+
+			pos = EXFAT_BLK_TO_B(iblock, sb);
+			size = ei->valid_size - pos;
+			addr = folio_address(bh_result->b_folio) +
+			       offset_in_folio(bh_result->b_folio, pos);
+
+			/* Check if bh->b_data points to proper addr in folio */
+			if (bh_result->b_data != addr) {
+				exfat_fs_error_ratelimit(sb,
+					"b_data(%p) != folio_addr(%p)",
+					bh_result->b_data, addr);
+				err = -EINVAL;
+				goto done;
+			}
+
+			/* Read a block */
+			err = bh_read(bh_result, 0);
+			if (err < 0)
+				goto done;
+
+			/* Zero unwritten part of a block */
+			memset(bh_result->b_data + size, 0,
+			       bh_result->b_size - size);
+		} else {
+			/*
+			 * The range has not been written, clear the mapped flag
+			 * to only zero the cache and do not read from disk.
+			 */
+			clear_buffer_mapped(bh_result);
+		}
+>>>>>>> BRANCH (49b0a6 exfat: fix random stack corruption after get_block)
 	}
 
 	/* The area has not been written, map and mark as new for create case */
