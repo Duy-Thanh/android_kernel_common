@@ -379,10 +379,15 @@ int xe_gt_init_early(struct xe_gt *gt)
 	if (err)
 		return err;
 
+<<<<<<< HEAD   (43d132 ANDROID: GKI: Update symbols list)
 	err = xe_tuning_init(gt);
 	if (err)
 		return err;
 
+||||||| BASE
+	xe_wa_process_gt(gt);
+=======
+>>>>>>> BRANCH (b3fb80 Merge 6.12.19 into android16-6.12)
 	xe_wa_process_oob(gt);
 
 	xe_force_wake_init_gt(gt, gt_to_fw(gt));
