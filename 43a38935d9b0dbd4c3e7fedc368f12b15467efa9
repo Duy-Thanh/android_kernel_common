@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a9d630c_3b325c7c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-29T05:36:16Z",
+      "side": 1,
+      "message": "let\u0027s add a comment that RESP2 is not meant to be invoked by the host or guest VM, because pKVM does not support FFA-based VM2VM.  Direct messages can only be sent from Non Secure Sender endpoint to Secure Receiver Endpoint. Only Receiver endpoint are expected to invoke DIRECT_RESP2.",
+      "fixSuggestions": [
+        {
+          "fixId": "072b5782_32fc2a52",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 969,
+                "startChar": 0,
+                "endLine": 969,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * FFA_MSG_SEND_DIRECT_RESP2 is not meant to be invoked by the host or\n\t * guest VM, because pKVM does not support FFA-based VM2VM. Direct\n\t * messages can only be sent from Non Secure Sender endpoint to S.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da5b8f0_72ea2356",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-29T05:36:16Z",
+      "side": 1,
+      "message": "FFA_CONSOLE_LOG is also reserved for Secure endpoints (table 13.53) and shall as such be denied.",
+      "fixSuggestions": [
+        {
+          "fixId": "059bb7c1_b17dbbac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 968,
+                "startChar": 0,
+                "endLine": 968,
+                "endChar": 0
+              },
+              "replacement": "\t/* Reserved for Secure endpoints */\n\tcase FFA_CONSOLE_LOG:\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 971,
+                "startChar": 0,
+                "endLine": 972,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3a8cd8_d6e29b94",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-29T05:36:16Z",
+      "side": 1,
+      "message": "FFA_CONSOLE_LOG is mandatory for Secure endpoints (section 13.1) and shall as such be denied.",
+      "fixSuggestions": [
+        {
+          "fixId": "1022cf58_b10d6754",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 971,
+                "startChar": 0,
+                "endLine": 972,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 974,
+                "startChar": 0,
+                "endLine": 974,
+                "endChar": 0
+              },
+              "replacement": "\t/* Mandatory for Secure endpoints */\n\tcase FFA_CONSOLE_LOG:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8514a0_ec7cf6df",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-04-29T05:36:16Z",
+      "side": 1,
+      "message": "also reserved for secure endpoint",
+      "fixSuggestions": [
+        {
+          "fixId": "b08ade5b_5e04bdc1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 973,
+                "startChar": 0,
+                "endLine": 973,
+                "endChar": 0
+              },
+              "replacement": "\t/* Reserved for secure endpoint */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
