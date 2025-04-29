@@ -26,6 +26,72 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0f674134_44f70fb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3609906
+      },
+      "writtenOn": "2025-04-29T12:55:31Z",
+      "side": 1,
+      "message": "Thanks, applied",
+      "parentUuid": "925dc4ca_b33ccde3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "revId": "f4db7b417d7e3ecba53975a913ceeeaf1f10882d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d2b5e8_b65845f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3609906
+      },
+      "writtenOn": "2025-04-29T12:55:31Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "925dc4ca_b33ccde3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "26afcfc7_76d55b67",
+          "description": "User suggestion",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 14
+              },
+              "replacement": "ANDROID: gki_defconfig: do not use FineIBT on x86\n\nThe kernel is currently configured to patch itself to use FineIBT\ninstead of the traditional kCFI implementation when the hardware\nsupports IBT. However, due to recent security concerns with the design\nof FineIBT [1], enabling FineIBT is currently considered a security\ndowngrade. Thus, disable this option and always use traditional kCFI.\n\nThis issue was discovered in relation to an issue with Rust drivers (see\nthe referenced bug). That issue has already been fixed [2][3][4].\n\nSince the FineIBT enablement happens during code patching on boot, and\nnot during compile-time with CONFIG_FINEIBT, this patch is not ABI\nbreaking.\n\nThis patch does not modify arch/arm64/configs/gki_defconfig because\nFineIBT does not exist on ARM, as it relies on the hardware feature IBT\nthat only exists on x86.\n\nLink: https://lore.kernel.org/linux-hardening/Z60NwR4w%2F28Z7XUa@ubun/ [1]\nLink: https://github.com/rust-lang/rust/issues/128728 [2]\nLink: https://r.android.com/3602350 [3]\nLink: https://lore.kernel.org/all/20250410115420.366349-1-panikiel@google.com [4]\nBug: 404795641"
+            }
+          ]
+        }
+      ],
+      "revId": "f4db7b417d7e3ecba53975a913ceeeaf1f10882d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "08bb4575_ec3c98c1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
