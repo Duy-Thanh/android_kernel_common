@@ -290,6 +290,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0acd0927_9835e5af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-04-29T21:26:47Z",
+      "side": 1,
+      "message": "(typo)\n\nWhat\u0027s the memory savings from the configs that make it hard to maintain? We as the AVF team need to be able to maintain this.",
+      "parentUuid": "764c2d6f_f018ab2f",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
