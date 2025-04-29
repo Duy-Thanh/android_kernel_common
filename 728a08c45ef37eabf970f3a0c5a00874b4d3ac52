@@ -52,6 +52,23 @@
       "parentUuid": "f7d20f7b_15109e2f",
       "revId": "728a08c45ef37eabf970f3a0c5a00874b4d3ac52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c6a7ef8_d609ca2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-04-29T14:15:19Z",
+      "side": 1,
+      "message": "This issue has already been addressed in other branches:\n\nPlease cherry-pick this one instead:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3585530",
+      "revId": "728a08c45ef37eabf970f3a0c5a00874b4d3ac52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
