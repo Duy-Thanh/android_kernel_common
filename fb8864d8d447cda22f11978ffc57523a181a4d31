@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f1d15d_05509fa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4030585
+      },
+      "writtenOn": "2025-04-29T03:40:12Z",
+      "side": 1,
+      "message": "If commit the log to the ringbuffer first, there may be a case\nwhere logcat fetches the log before the hook is called,\nwhich will cause the timestamp to be out of order.",
+      "revId": "fb8864d8d447cda22f11978ffc57523a181a4d31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
