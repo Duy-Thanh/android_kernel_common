@@ -68,6 +68,24 @@
       "parentUuid": "d42bfef3_9b6cd7f1",
       "revId": "d6a4bd4dd4d5f79c33c08999ebec37d0abb46745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "761afcee_847d76f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-04-29T11:36:59Z",
+      "side": 1,
+      "message": "It is in linux-next, which means it is in the linux-usb tree as the code has been accepted there already.  Please submit a patch against the usb-next branch of the usb.git tree on the linux-usb@vger.kernel.org mailing list and cc: the relevant maintainers and developers.\n\nThanks!",
+      "parentUuid": "37a007c5_9cf05cd4",
+      "revId": "d6a4bd4dd4d5f79c33c08999ebec37d0abb46745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
