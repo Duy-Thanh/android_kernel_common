@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be5f9652_dd06b8f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-29T07:29:11Z",
+      "side": 1,
+      "message": "I think Arve explained it well here https://android-review.git.corp.google.com/c/kernel/common/+/3605132/comment/56db00f0_c08dd258/\n\nIn essence, when the hypervisor returns the negotiated version (1.b), the host can rely on the compatibility rules to use any prior version (1.y) as long as y \u003c\u003d b.\n\nI\u0027ve updated the commit messages, feel free to reopen if it is still confusing.",
+      "parentUuid": "0d974ca5_48882f7c",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "e7c11e07b8ad0c7c83358fba035bec1685f404f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56db00f0_c08dd258",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Note that minor version and major version differences are not handled the same way.\n\n```\nIn an invocation of this function, the compatibility of the version number (x.y) of the caller with the version number\n(a.b) of the callee can also be as follows.\n1. If x !\u003d a, then the versions are incompatible.\n• The caller cannot inter-operate with the callee.\n2. If x \u003d\u003d a and y \u003e b, then the versions are incompatible.\n• The caller can inter-operate with the callee only if it downgrades its minor revision such that y \u003c\u003d b.\n3. If x \u003d\u003d a and y \u003c\u003d b, then the versions are compatible.\n```\n\nReturning a higher major version, a, than the caller passed in, x, means the versions are incompatible.\n\nHowever, the same is not true for minor versions. If only the minor version differ, them y \u003e  b still signals that the versions are compatible.\n\nSince the space also says this:\n```\n– If it supports a Firmware Framework implementation that is compatible with the version number specified\nby the caller, it must return the version number of the implementation.\n```\nthis is not just a theoretical difference. The higher minor version gets returned even when the minor version needs to trigger compatibility paths in the callee.",
       "parentUuid": "bc38ccc0_ea4d87e8",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1089,
+        "endChar": 46
+      },
+      "revId": "e7c11e07b8ad0c7c83358fba035bec1685f404f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d12adb6f_946a2a5d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-29T07:29:11Z",
+      "side": 1,
+      "message": "Logic updated to return `FFA_RET_NOT_SUPPORTED` whenever host requests version lower than negotiated hypervisor version because we currently lack the required compatibility paths. Comment updated to better explain the compatibility issues.",
+      "parentUuid": "f64225d9_4a5e9565",
       "range": {
         "startLine": 1088,
         "startChar": 0,
