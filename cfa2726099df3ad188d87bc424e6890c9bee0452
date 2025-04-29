@@ -16,6 +16,23 @@
       "message": "Temporary CR+2 to allow the CI to test the change.",
       "revId": "cfa2726099df3ad188d87bc424e6890c9bee0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9f0f0d_be5d8c08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-29T19:50:07Z",
+      "side": 1,
+      "message": "If SDEI is useful for non-ACPI systems, shouldn\u0027t this decoupling happen upstream?",
+      "revId": "cfa2726099df3ad188d87bc424e6890c9bee0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
