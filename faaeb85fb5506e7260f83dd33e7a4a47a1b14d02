@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "035d0702_aa4e749f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-29T14:24:04Z",
+      "side": 1,
+      "message": "We also need this fix in upstream, can you please send it on the list and then get it with FROMLIST ? If it requires conflict fixes add `BACKPORT: FROMLIST:` as is described here https://android.git.corp.google.com/kernel/common/",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "faaeb85fb5506e7260f83dd33e7a4a47a1b14d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da1830a1_1c8bb62e",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 5
