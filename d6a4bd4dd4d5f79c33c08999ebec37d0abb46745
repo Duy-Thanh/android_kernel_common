@@ -33,6 +33,41 @@
       "message": "Please submit upstream first.",
       "revId": "d6a4bd4dd4d5f79c33c08999ebec37d0abb46745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37a007c5_9cf05cd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2025-04-29T11:33:49Z",
+      "side": 1,
+      "message": "ls: 无法访问\u0027drivers/usb/host/xhci-sideband.c\u0027: 没有那个文件或目录\nroot@vivo-600-G6:~/linux_kernel/linux# git branch\n* master\n\nThere is no driver file in the Upstream code.",
+      "revId": "d6a4bd4dd4d5f79c33c08999ebec37d0abb46745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97173f16_2619ea67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2025-04-29T11:33:49Z",
+      "side": 1,
+      "message": "root@vivo-600-G6:~/linux_kernel/linux# ls drivers/usb/host/xhci-sideband.c -l\nls: 无法访问\u0027drivers/usb/host/xhci-sideband.c\u0027: 没有那个文件或目录\nroot@vivo-600-G6:~/linux_kernel/linux# git branch\n* master\n\nThere is no driver file in the Upstream code.",
+      "parentUuid": "d42bfef3_9b6cd7f1",
+      "revId": "d6a4bd4dd4d5f79c33c08999ebec37d0abb46745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
