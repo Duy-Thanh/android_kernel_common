@@ -16,6 +16,24 @@
       "message": "Please submit upstream first.",
       "revId": "f14f3db97187513c94369d6fc7ea5422a5cf99bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c3c9bb5_391d2074",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-04-29T13:51:59Z",
+      "side": 1,
+      "message": "Hi Greg - our strategy for this patch is to try to extract this functionality into a separate driver (if possible) and then upstream that.\n\nFor now, we need this feature for Android Desktop kernel before we move on to 6.12 version. See more details in this comment: b/393521538#comment5\n\nThis is why we would rather take this as-it is, and work our way towards eradicating that debt.\n\nWe have filed a bug to track the upstream process: b/414567861#comment2, which sits on a hotlist next to all the other changes needed to be upstreamed: b/hotlists/6284861\n\n**Mind that this change is not affecting Android - it\u0027s only to our own fork on `-desktop` branch**",
+      "parentUuid": "bc399ccd_23c671b6",
+      "revId": "f14f3db97187513c94369d6fc7ea5422a5cf99bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
