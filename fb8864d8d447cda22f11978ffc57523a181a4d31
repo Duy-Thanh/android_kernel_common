@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "248d5c1d_7667455c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-04-29T03:47:33Z",
+      "side": 1,
+      "message": "Might need a \"Fixes: \" tag referencing the original change that added the vendor hooks to the problematic location.",
+      "revId": "fb8864d8d447cda22f11978ffc57523a181a4d31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "32f1d15d_05509fa8",
