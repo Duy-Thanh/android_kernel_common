@@ -90,6 +90,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e17e94_1c3b8312",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-04-29T13:55:34Z",
+      "side": 1,
+      "message": "Did this get applied correctly?",
+      "parentUuid": "57d2b5e8_b65845f7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "revId": "f4db7b417d7e3ecba53975a913ceeeaf1f10882d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "08bb4575_ec3c98c1",
