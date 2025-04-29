@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fdca0bb_79b66b5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-04-29T18:29:25Z",
+      "side": 1,
+      "message": "CONFIG_FINEIBT is not something you can change. It\u0027s a computed value that represents whether the kernel has the *capability* to use FineIBT. Whether FineIBT is used depends on the `cfi\u003d` kernel command-line parameter, and setting `cfi\u003dfineibt` enables FineIBT via code patching on boot.\n\nWhat `CONFIG_CFI_AUTO_DEFAULT` does is that it changes the default value of the `cfi\u003d` kcmdline parameter so that it uses `cfi\u003dfineibt` when the hardware has support for IBT.\n\nThis should all go in the commit message, of course.",
+      "parentUuid": "535f9a87_371a0483",
+      "revId": "f4db7b417d7e3ecba53975a913ceeeaf1f10882d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "925dc4ca_b33ccde3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -121,6 +139,30 @@
       "side": 1,
       "message": "Did this get applied correctly?",
       "parentUuid": "57d2b5e8_b65845f7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "revId": "f4db7b417d7e3ecba53975a913ceeeaf1f10882d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d4f4bc_6f15e147",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-04-29T18:29:25Z",
+      "side": 1,
+      "message": "Sorry, this wording is inaccurate. CONFIG_FINEIBT doesn\u0027t enable it at compile-time. See my other comment.",
+      "parentUuid": "e1e17e94_1c3b8312",
       "range": {
         "startLine": 7,
         "startChar": 0,
