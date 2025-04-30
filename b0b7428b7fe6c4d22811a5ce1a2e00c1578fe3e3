@@ -34,6 +34,24 @@
       ],
       "revId": "b0b7428b7fe6c4d22811a5ce1a2e00c1578fe3e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdcc06f8_168cebfc",
+        "filename": "drivers/gpu/drm/xe/xe_bo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 3470500
+      },
+      "writtenOn": "2025-04-30T22:39:48Z",
+      "side": 1,
+      "message": "Whoops, good catch!",
+      "parentUuid": "92e985d3_90bd6498",
+      "revId": "b0b7428b7fe6c4d22811a5ce1a2e00c1578fe3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
