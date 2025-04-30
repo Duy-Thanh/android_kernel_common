@@ -204,6 +204,29 @@
       ],
       "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fc48b95_b3d888d9",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-30T09:39:37Z",
+      "side": 1,
+      "message": "I\u0027m guessing this could easily be eliminated altogether.",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 0
+      },
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
