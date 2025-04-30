@@ -1141,12 +1141,21 @@ static bool inherit_taint(struct module *mod, struct module *owner, const char *
 	return true;
 }
 
+static bool is_permitted_symbol_import(const char *name)
+{
+	return bsearch(name, permitted_symbol_imports,
+	               permitted_symbol_imports_count,
+	               sizeof(const char *), cmp_string) != NULL;
+}
+
 /* Resolve a symbol for this module.  I.e. if we find one, record usage. */
 static const struct kernel_symbol *resolve_symbol(struct module *mod,
 						  const struct load_info *info,
 						  const char *name,
 						  char ownername[])
 {
+	bool is_vendor_module;
+	bool is_vendor_exported_symbol;
 	struct find_symbol_arg fsa = {
 		.name	= name,
 		.gplok	= !(mod->taints & (1 << TAINT_PROPRIETARY_MODULE)),
@@ -1182,6 +1191,26 @@ static const struct kernel_symbol *resolve_symbol(struct module *mod,
 		fsa.sym = ERR_PTR(err);
 		goto getname;
 	}
+
+	/*
+	 * ANDROID GKI
+	 *
+	 * Vendor (i.e., unsigned) modules are only permitted to use:
+	 *
+	 * 1. symbols exported by other vendor (unsigned) modules
+	 * 2. symbols which are permitted explicitly
+	 */
+#ifdef TRIM_UNUSED_KSYMS
+	is_vendor_module = !mod->sig_ok;
+	is_vendor_exported_symbol = fsa.owner && !fsa.owner->sig_ok;
+
+	if (is_vendor_module &&
+	    !is_vendor_exported_symbol &&
+	    !is_permitted_symbol_import(name)) {
+		fsa.sym = ERR_PTR(-EACCES);
+		goto getname;
+	}
+#endif
 
 	err = ref_module(mod, fsa.owner);
 	if (err) {
@@ -1483,9 +1512,15 @@ static int simplify_symbols(struct module *mod, const struct load_info *info)
 			     ignore_undef_symbol(info->hdr->e_machine, name)))
 				break;
 
-			ret = PTR_ERR(ksym) ?: -ENOENT;
-			pr_warn("%s: Unknown symbol %s (err %d)\n",
-				mod->name, name, ret);
+			if (PTR_ERR(ksym) == -EACCES) {
+				ret = -EACCES;
+				pr_warn("%s: Protected symbol: %s (err %d)\n",
+					mod->name, name, ret);
+			} else {
+				ret = PTR_ERR(ksym) ?: -ENOENT;
+				pr_warn("%s: Unknown symbol %s (err %d)\n",
+					mod->name, name, ret);
+			}
 			break;
 
 		default:
