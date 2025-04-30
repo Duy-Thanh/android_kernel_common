@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69c7c8fa_714aa862",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-04-30T09:25:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d0a0da_0b38d835",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 372,
+        "endChar": 71
+      },
+      "revId": "8554875db30754724eebbd18dd5d1746c80242f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67d49cde_fd21c47f",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-31T10:33:25Z",
       "side": 1,
       "message": "don\u0027t you need \"misc\" here?",
+      "range": {
+        "startLine": 2173,
+        "startChar": 35,
+        "endLine": 2173,
+        "endChar": 44
+      },
+      "revId": "8554875db30754724eebbd18dd5d1746c80242f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58e46d59_aa7fa235",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2173,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-04-30T09:25:20Z",
+      "side": 1,
+      "message": "The header file has been changed now.",
+      "parentUuid": "67d49cde_fd21c47f",
       "range": {
         "startLine": 2173,
         "startChar": 35,
@@ -130,6 +178,30 @@
           ]
         }
       ],
+      "revId": "8554875db30754724eebbd18dd5d1746c80242f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7301763b_4065b86f",
+        "filename": "scripts/mod/modpost.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-04-30T09:25:20Z",
+      "side": 1,
+      "message": "Switched to `is_protected` for clarity.",
+      "parentUuid": "a7b18553_acb64664",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 69
+      },
       "revId": "8554875db30754724eebbd18dd5d1746c80242f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
