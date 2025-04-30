@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a47cfd3f_fb73b9db",
+        "filename": "kernel/module/internal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-30T12:57:00Z",
+      "side": 1,
+      "message": "I am guessing that kernel people would prefer something like:\n\n```\n#ifdef CONFIG_MODULE_SIG_PROTECT\nextern const char* *const protected_symbol_exports;\nextern size_t protected_symbol_exports_count;\n#else\n#defined protected_symbol_exports NULL\n#defined protected_symbol_exports_count 0UL\n#endif\n```\n\nor even\n\n```\n#ifdef CONFIG_MODULE_SIG_PROTECT\nextern bool is_protected_export(const char *symbol);\n#else\nstatic inline bool is_protected_export(const char *symbol) { return false; }\n#endif\n```\n\nBut then you have to emit a tiny bit of `bsearch` code from `modpost` along with the sorted array.\n\n---\n\nAt any rate, I don\u0027t think the function merits a leading underscore in the name.",
+      "range": {
+        "startLine": 414,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 0
+      },
+      "revId": "8f7b454179d1629cdfb0e005be63c8965800cdf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
