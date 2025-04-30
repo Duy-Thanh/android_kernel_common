@@ -199,6 +199,15 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "x86_64_additional_kmi_symbol_lists",
+    srcs = [
+        # keep sorted
+        "gki/aarch64/symbols/virtual_device",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 _KUNIT_COMMON_GUIDE = [
     "Modules for KUnit testing on Android devices only:",
     "(KUnit: Linux Kernel Unit Testing https://www.kernel.org/doc/html/latest/dev-tools/kunit/)",
@@ -367,6 +376,7 @@ Consider building @@//common:kernel_x86_64 with:
 common_kernel(
     name = "kernel_x86_64",
     outs = X86_64_OUTS,
+    additional_kmi_symbol_lists = [":x86_64_additional_kmi_symbol_lists"],
     arch = "x86_64",
     build_gki_artifacts = True,
     ddk_module_headers = [":all_headers_x86_64"],
@@ -378,10 +388,17 @@ common_kernel(
     gki_boot_img_sizes = _GKI_X86_64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_x86_64",
     kcflags = COMMON_KCFLAGS,
+    # For testing purposes
+    kmi_enforced = True,
+    kmi_symbol_list = "gki/x86_64/symbols/base",
+    kmi_symbol_list_strict_mode = True,
     make_goals = _GKI_X86_64_MAKE_GOALS,
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
+    protected_exports_list = "gki/x86_64/protected_exports",
+    protected_modules_list = ":gki_x86_64_protected_modules",
     system_dlkm_extra_archive_files = [":generate_gki_module_info_x86_64"],
+    trim_nonlisted_kmi = True,
     visibility = ["//visibility:public"],
 )
 
