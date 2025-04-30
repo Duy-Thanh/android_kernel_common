@@ -4,6 +4,13 @@ config DRM_NOUVEAU
 	depends on DRM && PCI && MMU
 	select IOMMU_API
 	select FW_LOADER
+<<<<<<< TARGET BRANCH (cfdace Revert "acpi: typec: ucsi: Introduce a ->poll_cci method" am)
+||||||| BASE
+	select FW_CACHE if PM_SLEEP
+	select DRM_CLIENT_SELECTION
+=======
+	select DRM_CLIENT_SELECTION
+>>>>>>> SOURCE BRANCH (44a271 Revert "drm/nouveau: select FW caching")
 	select DRM_DISPLAY_DP_HELPER
 	select DRM_DISPLAY_HDMI_HELPER
 	select DRM_DISPLAY_HELPER
