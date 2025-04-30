@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "691e33c7_3e316831",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-30T05:09:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a9d630c_3b325c7c",
+      "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2da5b8f0_72ea2356",
@@ -77,6 +95,24 @@
           ]
         }
       ],
+      "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de2119b8_eeee88ad",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-30T05:09:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2da5b8f0_72ea2356",
       "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -126,6 +162,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a393a696_6853d29a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-30T05:09:28Z",
+      "side": 1,
+      "message": "Done. (I think you meant `FFA_PARTITION_INFO_GET_REGS`).",
+      "parentUuid": "fa3a8cd8_d6e29b94",
+      "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df8514a0_ec7cf6df",
@@ -157,6 +211,24 @@
           ]
         }
       ],
+      "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed19653b_4fbd6459",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-04-30T05:09:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df8514a0_ec7cf6df",
       "revId": "43a38935d9b0dbd4c3e7fedc368f12b15467efa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
