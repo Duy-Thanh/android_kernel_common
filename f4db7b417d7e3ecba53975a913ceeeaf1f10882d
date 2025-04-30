@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5934643d_e6b69180",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3609906
+      },
+      "writtenOn": "2025-04-30T11:50:41Z",
+      "side": 1,
+      "message": "I updated the commit message with an explanation of cfi\u003d and why we\u0027re disabling CONFIG_CFI_AUTO_DEFAULT.\n\nClarification to Alice\u0027s comment: cfi\u003dfineibt always enables FineIBT regardless of the CPU support. cfi\u003dauto enables FineIBT if the CPU supports IBT. CONFIG_CFI_AUTO_DEFAULT sets cfi\u003dauto.\n\nPlease unresolve if you have further comments.",
+      "parentUuid": "9fdca0bb_79b66b5d",
+      "revId": "f4db7b417d7e3ecba53975a913ceeeaf1f10882d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "925dc4ca_b33ccde3",
@@ -163,6 +181,30 @@
       "side": 1,
       "message": "Sorry, this wording is inaccurate. CONFIG_FINEIBT doesn\u0027t enable it at compile-time. See my other comment.",
       "parentUuid": "e1e17e94_1c3b8312",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "revId": "f4db7b417d7e3ecba53975a913ceeeaf1f10882d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a478b17_d167cd28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3609906
+      },
+      "writtenOn": "2025-04-30T11:50:41Z",
+      "side": 1,
+      "message": "I updated this paragraph, see other comment.",
+      "parentUuid": "53d4f4bc_6f15e147",
       "range": {
         "startLine": 7,
         "startChar": 0,
