@@ -1,0 +1,209 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c040b7c6_b283ebbc",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-30T09:35:45Z",
+      "side": 1,
+      "message": "File listing paths of signed modules whose exported symbols are to be protected",
+      "range": {
+        "startLine": 301,
+        "startChar": 9,
+        "endLine": 301,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "508fbec3_073d3ddb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/module/Kconfig",
+              "range": {
+                "startLine": 301,
+                "startChar": 0,
+                "endLine": 302,
+                "endChar": 0
+              },
+              "replacement": "\tstring \"File listing paths of signed modules whose exported symbols are to be protected\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be220fd6_e853a331",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-30T09:35:45Z",
+      "side": 1,
+      "message": "for the listed",
+      "range": {
+        "startLine": 305,
+        "startChar": 43,
+        "endLine": 305,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "648c75f2_045f30f0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/module/Kconfig",
+              "range": {
+                "startLine": 305,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": "\t  Enables symbol export protection support for the listed signed modules.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12266ad4_ec4ba3f7",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-30T09:35:45Z",
+      "side": 1,
+      "message": "from exporting",
+      "range": {
+        "startLine": 306,
+        "startChar": 41,
+        "endLine": 306,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f0546e5c_fec049dd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/module/Kconfig",
+              "range": {
+                "startLine": 306,
+                "startChar": 0,
+                "endLine": 307,
+                "endChar": 0
+              },
+              "replacement": "\t  This option prevents unsigned modules from exporting symbols which are\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1702e4c_2fe65801",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-30T09:35:45Z",
+      "side": 1,
+      "message": "fail to load",
+      "range": {
+        "startLine": 308,
+        "startChar": 29,
+        "endLine": 308,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5e8c58b5_bfdc0636",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/module/Kconfig",
+              "range": {
+                "startLine": 308,
+                "startChar": 0,
+                "endLine": 309,
+                "endChar": 0
+              },
+              "replacement": "\t  export such a symbol will fail to load.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c050deb9_4247f604",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-04-30T09:35:45Z",
+      "side": 1,
+      "message": "modules (in the form foo/bar.ko)",
+      "range": {
+        "startLine": 311,
+        "startChar": 36,
+        "endLine": 311,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5c3531c0_bc883e78",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/module/Kconfig",
+              "range": {
+                "startLine": 311,
+                "startChar": 0,
+                "endLine": 313,
+                "endChar": 0
+              },
+              "replacement": "\t  directory containing the list of modules (in the form foo/bar.ko),\n\t  one per line. The path can be absolute, or relative to the kernel\n\t  source or obj tree.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
