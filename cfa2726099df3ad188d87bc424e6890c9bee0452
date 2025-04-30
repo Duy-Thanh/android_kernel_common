@@ -33,6 +33,24 @@
       "message": "If SDEI is useful for non-ACPI systems, shouldn\u0027t this decoupling happen upstream?",
       "revId": "cfa2726099df3ad188d87bc424e6890c9bee0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19df4b90_c35d95a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1893826
+      },
+      "writtenOn": "2025-04-30T03:26:20Z",
+      "side": 1,
+      "message": "yes, patch has also been sent to upstream, link:\nhttps://lore.kernel.org/all/20250428095623.3220369-1-quic_hyiwei@quicinc.com/\nThe dependency was incorrectly added in the previous patch, will let the fix change merge in upstream",
+      "parentUuid": "8c9f0f0d_be5d8c08",
+      "revId": "cfa2726099df3ad188d87bc424e6890c9bee0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
