@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffe996b0_63adbcc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-04-30T13:51:05Z",
+      "side": 1,
+      "message": "@haojianhua1@xiaomi.com please don\u0027t rebase the patches after they\u0027ve been queued for KMI update. This will require us to restart the process again.",
+      "revId": "ecc881d9ebdd6f1c11a7d36028a092a1c6fa200c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
