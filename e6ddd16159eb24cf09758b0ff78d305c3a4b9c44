@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d795ed24_f5c9621f",
+        "filename": "include/misc/protected-exports.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-04-30T09:25:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9491c9df_ee40dbcd",
+      "range": {
+        "startLine": 6,
+        "startChar": 22,
+        "endLine": 6,
+        "endChar": 61
+      },
+      "revId": "e6ddd16159eb24cf09758b0ff78d305c3a4b9c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca06871d_bedd815e",
@@ -61,6 +85,30 @@
       "writtenOn": "2025-01-31T10:26:43Z",
       "side": 1,
       "message": "why is this in include/misc/ ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "e6ddd16159eb24cf09758b0ff78d305c3a4b9c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48cc2016_cec7edce",
+        "filename": "include/misc/protected-exports.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-04-30T09:25:14Z",
+      "side": 1,
+      "message": "Moved to `kernel/module/internal.h`",
+      "parentUuid": "ca06871d_bedd815e",
       "range": {
         "startLine": 9,
         "startChar": 8,
