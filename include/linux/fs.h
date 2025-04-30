@@ -2107,6 +2107,8 @@ struct file_operations {
 	int (*uring_cmd)(struct io_uring_cmd *ioucmd, unsigned int issue_flags);
 	int (*uring_cmd_iopoll)(struct io_uring_cmd *, struct io_comp_batch *,
 				unsigned int poll_flags);
+
+	int random_variable_to_break_the_abi;
 } __randomize_layout;
 
 /* Supports async buffered reads */
