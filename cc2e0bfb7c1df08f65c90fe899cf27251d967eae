@@ -1,0 +1,86 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd65c678_f8695a76",
+        "filename": "arch/arm64/configs/microdroid_minimal.fragment",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-04-30T13:22:32Z",
+      "side": 1,
+      "message": "this should not affect the final binary size as debug info is stripped before deployment, right?",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8223dc66_f7578b44",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/configs/microdroid_minimal.fragment",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "cc2e0bfb7c1df08f65c90fe899cf27251d967eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88938bf5_42dfb79a",
+        "filename": "arch/arm64/configs/microdroid_minimal.fragment",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-04-30T13:22:32Z",
+      "side": 1,
+      "message": "as above, debug info should not be an issue for final deployment.",
+      "range": {
+        "startLine": 15,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "188be7c5_67d2cf89",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/configs/microdroid_minimal.fragment",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "cc2e0bfb7c1df08f65c90fe899cf27251d967eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
