@@ -1549,7 +1549,14 @@ CLEAN_FILES += vmlinux.symvers modules-only.symvers \
 	       modules.builtin.ranges vmlinux.o.map \
 	       compile_commands.json rust/test \
 	       rust-project.json .vmlinux.objs .vmlinux.export.c \
+<<<<<<< HEAD   (73623f ANDROID: compile and link permitted-imports.o into vmlinux)
 	       .vmlinux.protected-exports.c
+||||||| BASE
+               .vmlinux.protected-exports.c .builtin-dtbs-list .builtin-dtb.S
+=======
+               .vmlinux.protected-exports.c .vmlinux.permitted-imports.c \
+               .builtin-dtbs-list .builtin-dtb.S
+>>>>>>> CHANGE (4cad2b ANDROID: remove permitted-imports.c with `make clean`)
 
 # Directories & files removed with 'make mrproper'
 MRPROPER_FILES += include/config include/generated          \
