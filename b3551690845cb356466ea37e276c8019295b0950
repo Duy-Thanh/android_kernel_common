@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27bc4094_600c1e10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-04-30T20:46:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "113997f1_68a86c43",
+      "range": {
+        "startLine": 10,
+        "startChar": 58,
+        "endLine": 10,
+        "endChar": 70
+      },
+      "revId": "b3551690845cb356466ea37e276c8019295b0950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00cb9b0c_2f23e4d8",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-04-30T01:27:45Z",
       "side": 1,
       "message": "The read a bit off, should it be:\n\n\"since they don\u0027t fallback to\" ?",
+      "range": {
+        "startLine": 13,
+        "startChar": 32,
+        "endLine": 13,
+        "endChar": 61
+      },
+      "revId": "b3551690845cb356466ea37e276c8019295b0950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c0b1db_a9030195",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-04-30T20:46:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00cb9b0c_2f23e4d8",
       "range": {
         "startLine": 13,
         "startChar": 32,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "280f1cf7_6fdeb595",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-04-30T20:46:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88514ccb_9de39bc5",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 29
+      },
+      "revId": "b3551690845cb356466ea37e276c8019295b0950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7097a77_8090b77f",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-04-30T01:27:45Z",
       "side": 1,
       "message": "This line is too long?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 104
+      },
+      "revId": "b3551690845cb356466ea37e276c8019295b0950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9796b782_907e8eef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-04-30T20:46:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7097a77_8090b77f",
       "range": {
         "startLine": 94,
         "startChar": 0,
