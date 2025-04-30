@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92e985d3_90bd6498",
+        "filename": "drivers/gpu/drm/xe/xe_bo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-04-30T22:08:38Z",
+      "side": 1,
+      "message": "Need to use `rcu_dereference(file-\u003epid)` when accessing the pid.\n\nYou can compare to the direct example given by `update_ctx_mem()` in `drivers/gpu/drm/msm/msm_gem.c`.",
+      "fixSuggestions": [
+        {
+          "fixId": "7227ec7a_b397a482",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/xe/xe_bo.c",
+              "range": {
+                "startLine": 354,
+                "startChar": 0,
+                "endLine": 355,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_gpu_mem_total(0, pid_nr(rcu_dereference(file-\u003epid)), process_mem);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b0b7428b7fe6c4d22811a5ce1a2e00c1578fe3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
