@@ -314,6 +314,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39b81057_ff588c7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-05-01T11:24:43Z",
+      "side": 1,
+      "message": "One thing that comes to mind is - what population is going to use this config? We can\u0027t use it on droidfood / beta populations, since we definitely want to have metrics + traces from there to monitor rollouts. If we only use it in production, this means that we are running an untested microdroid kernel without any means to debug / investigate failures",
+      "parentUuid": "0acd0927_9835e5af",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
