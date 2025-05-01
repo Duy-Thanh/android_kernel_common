@@ -40,6 +40,11 @@ int kvm_arm_init_sve(void)
 	if (system_supports_sve()) {
 		kvm_sve_max_vl = sve_max_virtualisable_vl();
 		kvm_host_sve_max_vl = sve_max_vl();
+<<<<<<< HEAD   (d46f37 Merge dc7bdc1f2d9c ("io_uring/net: fix accept multishot hand)
+||||||| BASE
+=======
+		kvm_nvhe_sym(kvm_host_sve_max_vl) = kvm_host_sve_max_vl;
+>>>>>>> BRANCH (17c7f4 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 		/*
 		 * The get_sve_reg()/set_sve_reg() ioctl interface will need

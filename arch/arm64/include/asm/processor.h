@@ -123,6 +123,12 @@ enum vec_type {
 	ARM64_VEC_MAX,
 };
 
+enum fp_type {
+	FP_STATE_CURRENT,	/* Save based on current task state. */
+	FP_STATE_FPSIMD,
+	FP_STATE_SVE,
+};
+
 struct cpu_context {
 	unsigned long x19;
 	unsigned long x20;
@@ -153,8 +159,13 @@ struct thread_struct {
 		struct user_fpsimd_state fpsimd_state;
 	} uw;
 
+<<<<<<< HEAD   (d46f37 Merge dc7bdc1f2d9c ("io_uring/net: fix accept multishot hand)
 	ANDROID_VENDOR_DATA(1);
 
+||||||| BASE
+=======
+	enum fp_type		fp_type;	/* registers FPSIMD or SVE? */
+>>>>>>> BRANCH (17c7f4 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 	unsigned int		fpsimd_cpu;
 	void			*sve_state;	/* SVE registers, if any */
 	void			*za_state;	/* ZA register, if any */

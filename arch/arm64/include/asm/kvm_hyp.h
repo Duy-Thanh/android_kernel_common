@@ -131,7 +131,12 @@ extern u64 kvm_nvhe_sym(id_aa64isar2_el1_sys_val);
 extern u64 kvm_nvhe_sym(id_aa64mmfr0_el1_sys_val);
 extern u64 kvm_nvhe_sym(id_aa64mmfr1_el1_sys_val);
 extern u64 kvm_nvhe_sym(id_aa64mmfr2_el1_sys_val);
+<<<<<<< HEAD   (d46f37 Merge dc7bdc1f2d9c ("io_uring/net: fix accept multishot hand)
 extern u64 kvm_nvhe_sym(id_aa64smfr0_el1_sys_val);
+||||||| BASE
+=======
+extern unsigned int kvm_nvhe_sym(kvm_host_sve_max_vl);
+>>>>>>> BRANCH (17c7f4 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 extern unsigned long kvm_nvhe_sym(__icache_flags);
 extern unsigned int kvm_nvhe_sym(kvm_arm_vmid_bits);
