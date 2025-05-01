@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "587b287e_3752bdfa",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-05-01T10:44:14Z",
+      "side": 1,
+      "message": "Had to shorten the suggestion.",
+      "parentUuid": "c040b7c6_b283ebbc",
+      "range": {
+        "startLine": 301,
+        "startChar": 9,
+        "endLine": 301,
+        "endChar": 72
+      },
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be220fd6_e853a331",
@@ -79,6 +103,30 @@
           ]
         }
       ],
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6786bb2a_878dd823",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-05-01T10:44:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be220fd6_e853a331",
+      "range": {
+        "startLine": 305,
+        "startChar": 43,
+        "endLine": 305,
+        "endChar": 55
+      },
       "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -124,6 +172,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d3ab47a_c57d9113",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-05-01T10:44:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12266ad4_ec4ba3f7",
+      "range": {
+        "startLine": 306,
+        "startChar": 41,
+        "endLine": 306,
+        "endChar": 50
+      },
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1702e4c_2fe65801",
@@ -161,6 +233,30 @@
           ]
         }
       ],
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d5dbc69_2cf9f476",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-05-01T10:44:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1702e4c_2fe65801",
+      "range": {
+        "startLine": 308,
+        "startChar": 29,
+        "endLine": 308,
+        "endChar": 53
+      },
       "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -206,6 +302,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf68af5_362cee2b",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-05-01T10:44:14Z",
+      "side": 1,
+      "message": "I checked again, its actually module name not paths.",
+      "parentUuid": "c050deb9_4247f604",
+      "range": {
+        "startLine": 311,
+        "startChar": 36,
+        "endLine": 311,
+        "endChar": 43
+      },
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fc48b95_b3d888d9",
@@ -219,6 +339,30 @@
       "writtenOn": "2025-04-30T09:39:37Z",
       "side": 1,
       "message": "I\u0027m guessing this could easily be eliminated altogether.",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 0
+      },
+      "revId": "d57fface8a2b063df284e874d05e3856aca6b863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7ac79e_0272a5ab",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-05-01T10:44:14Z",
+      "side": 1,
+      "message": "As discussed offline, this is probably the best option we have.",
+      "parentUuid": "4fc48b95_b3d888d9",
       "range": {
         "startLine": 314,
         "startChar": 0,
