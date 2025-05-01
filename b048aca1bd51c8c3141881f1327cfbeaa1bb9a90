@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edef99f0_d424f4ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-01T22:03:56Z",
+      "side": 1,
+      "message": "I don\u0027t see any merge conflict in this file.\n\nSimilar to aosp/3615159, is this actually a backport, or a clean cherrypick?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 54
+      },
+      "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
