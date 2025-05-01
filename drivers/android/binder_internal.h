@@ -495,6 +495,86 @@ struct binder_proc {
 };
 
 /**
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+ * struct binder_proc_wrap - wrapper to preserve KMI in binder_proc
+ * @proc:                    binder_proc being wrapped
+ * @dmap                     dbitmap to manage available reference descriptors
+ *                           (protected by @proc.outer_lock)
+ * @delivered_freeze:        list of delivered freeze notification
+ *                           (protected by @inner_lock)
+ */
+struct binder_proc_wrap {
+	struct binder_proc proc;
+	struct dbitmap dmap;
+	struct list_head delivered_freeze;
+};
+
+static inline
+struct binder_proc_wrap *proc_wrapper(struct binder_proc *proc)
+{
+	return container_of(proc, struct binder_proc_wrap, proc);
+}
+
+/**
+=======
+ * struct binder_proc_wrap - wrapper to preserve KMI in binder_proc
+ * @proc:                    binder_proc being wrapped
+ * @dmap                     dbitmap to manage available reference descriptors
+ *                           (protected by @proc.outer_lock)
+ * @delivered_freeze:        list of delivered freeze notification
+ *                           (protected by @inner_lock)
+ * @mutex:                   protects binder_alloc fields
+ * @pages:                   array of struct page *
+ * @mapped:                  whether the vm area is mapped, each binderinstance
+ *                           is allowed a single mapping throughout its lifetime
+ */
+struct binder_proc_wrap {
+	struct binder_proc proc;
+	struct dbitmap dmap;
+	struct list_head delivered_freeze;
+	struct binder_alloc_wrap {
+		struct mutex mutex;
+		struct page **pages;
+		bool mapped;
+	} alloc;
+};
+
+static inline
+struct binder_proc_wrap *proc_wrapper(struct binder_proc *proc)
+{
+	return container_of(proc, struct binder_proc_wrap, proc);
+}
+
+static inline
+struct binder_alloc_wrap *alloc_to_wrap(struct binder_alloc *alloc)
+{
+	struct binder_proc *proc;
+
+	proc = container_of(alloc, struct binder_proc, alloc);
+
+	return &proc_wrapper(proc)->alloc;
+}
+
+/**
+ * binder_alloc_get_free_async_space() - get free space available for async
+ * @alloc:	binder_alloc for this proc
+ *
+ * Return:	the bytes remaining in the address-space for async transactions
+ */
+static inline size_t
+binder_alloc_get_free_async_space(struct binder_alloc *alloc)
+{
+	size_t free_async_space;
+
+	mutex_lock(&alloc_to_wrap(alloc)->mutex);
+	free_async_space = alloc->free_async_space;
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+	return free_async_space;
+}
+
+/**
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
  * struct binder_thread - binder thread bookkeeping
  * @proc:                 binder process for this thread
  *                        (invariant after initialization)

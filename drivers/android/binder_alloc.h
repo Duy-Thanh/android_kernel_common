@@ -10,6 +10,11 @@
 #include <linux/list.h>
 #include <linux/mm.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+=======
+#include <linux/rtmutex.h>
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
 #include <linux/list_lru.h>
@@ -70,6 +75,34 @@ struct binder_lru_page {
 	struct binder_alloc *alloc;
 };
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+static inline struct list_head *page_to_lru(struct page *p)
+{
+	struct binder_shrinker_mdata *mdata;
+
+	mdata = (struct binder_shrinker_mdata *)page_private(p);
+
+	return &mdata->lru;
+}
+
+=======
+struct binder_lru_page {
+	struct list_head lru;
+	struct page *page_ptr;
+	struct binder_alloc *alloc;
+};
+
+static inline struct list_head *page_to_lru(struct page *p)
+{
+	struct binder_shrinker_mdata *mdata;
+
+	mdata = (struct binder_shrinker_mdata *)page_private(p);
+
+	return &mdata->lru;
+}
+
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 /**
  * struct binder_alloc - per-binder proc state for binder allocator
  * @lock:               protects binder_alloc fields
@@ -143,6 +176,7 @@ void binder_alloc_print_allocated(struct seq_file *m,
 void binder_alloc_print_pages(struct seq_file *m,
 			      struct binder_alloc *alloc);
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 /**
  * binder_alloc_get_free_async_space() - get free space available for async
  * @alloc:	binder_alloc for this proc
@@ -160,6 +194,26 @@ binder_alloc_get_free_async_space(struct binder_alloc *alloc)
 	return free_async_space;
 }
 
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+/**
+ * binder_alloc_get_free_async_space() - get free space available for async
+ * @alloc:	binder_alloc for this proc
+ *
+ * Return:	the bytes remaining in the address-space for async transactions
+ */
+static inline size_t
+binder_alloc_get_free_async_space(struct binder_alloc *alloc)
+{
+	size_t free_async_space;
+
+	mutex_lock(&alloc->mutex);
+	free_async_space = alloc->free_async_space;
+	mutex_unlock(&alloc->mutex);
+	return free_async_space;
+}
+
+=======
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 unsigned long
 binder_alloc_copy_user_to_buffer(struct binder_alloc *alloc,
 				 struct binder_buffer *buffer,

@@ -23,7 +23,7 @@
 #include <linux/uaccess.h>
 #include <linux/highmem.h>
 #include <linux/sizes.h>
-#include "binder_alloc.h"
+#include "binder_internal.h"
 #include "binder_trace.h"
 #include <trace/hooks/binder.h>
 
@@ -170,9 +170,21 @@ struct binder_buffer *binder_alloc_prepare_to_free(struct binder_alloc *alloc,
 {
 	struct binder_buffer *buffer;
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_lock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_lock(&alloc->mutex);
+=======
+	mutex_lock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	buffer = binder_alloc_prepare_to_free_locked(alloc, user_ptr);
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_unlock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	return buffer;
 }
 
@@ -181,14 +193,26 @@ binder_set_installed_page(struct binder_lru_page *lru_page,
 			  struct page *page)
 {
 	/* Pairs with acquire in binder_get_installed_page() */
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	smp_store_release(&lru_page->page_ptr, page);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	smp_store_release(&alloc->pages[index], page);
+=======
+	smp_store_release(&alloc_to_wrap(alloc)->pages[index], page);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 }
 
 static inline struct page *
 binder_get_installed_page(struct binder_lru_page *lru_page)
 {
 	/* Pairs with release in binder_set_installed_page() */
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	return smp_load_acquire(&lru_page->page_ptr);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	return smp_load_acquire(&alloc->pages[index]);
+=======
+	return smp_load_acquire(&alloc_to_wrap(alloc)->pages[index]);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 }
 
 static void binder_lru_freelist_add(struct binder_alloc *alloc,
@@ -218,6 +242,192 @@ static void binder_lru_freelist_add(struct binder_alloc *alloc,
 	}
 }
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+static inline
+void binder_alloc_set_mapped(struct binder_alloc *alloc, bool state)
+{
+	/* pairs with smp_load_acquire in binder_alloc_is_mapped() */
+	smp_store_release(&alloc->mapped, state);
+}
+
+static inline bool binder_alloc_is_mapped(struct binder_alloc *alloc)
+{
+	/* pairs with smp_store_release in binder_alloc_set_mapped() */
+	return smp_load_acquire(&alloc->mapped);
+}
+
+static struct page *binder_page_lookup(struct binder_alloc *alloc,
+				       unsigned long addr)
+{
+	struct mm_struct *mm = alloc->mm;
+	struct page *page;
+	long npages = 0;
+
+	/*
+	 * Find an existing page in the remote mm. If missing,
+	 * don't attempt to fault-in just propagate an error.
+	 */
+	mmap_read_lock(mm);
+	if (binder_alloc_is_mapped(alloc))
+		npages = get_user_pages_remote(mm, addr, 1, FOLL_NOFAULT,
+					       &page, NULL);
+	mmap_read_unlock(mm);
+
+	return npages > 0 ? page : NULL;
+}
+
+static int binder_page_insert(struct binder_alloc *alloc,
+			      unsigned long addr,
+			      struct page *page)
+{
+	struct mm_struct *mm = alloc->mm;
+	struct vm_area_struct *vma;
+	int ret = -ESRCH;
+
+	/* attempt per-vma lock first */
+	vma = lock_vma_under_rcu(mm, addr);
+	if (vma) {
+		if (binder_alloc_is_mapped(alloc))
+			ret = vm_insert_page(vma, addr, page);
+		vma_end_read(vma);
+		return ret;
+	}
+
+	/* fall back to mmap_lock */
+	mmap_read_lock(mm);
+	vma = vma_lookup(mm, addr);
+	if (vma && binder_alloc_is_mapped(alloc))
+		ret = vm_insert_page(vma, addr, page);
+	mmap_read_unlock(mm);
+
+	return ret;
+}
+
+static struct page *binder_page_alloc(struct binder_alloc *alloc,
+				      unsigned long index)
+{
+	struct binder_shrinker_mdata *mdata;
+	struct page *page;
+
+	page = alloc_page(GFP_KERNEL | __GFP_HIGHMEM | __GFP_ZERO);
+	if (!page)
+		return NULL;
+
+	/* allocate and install shrinker metadata under page->private */
+	mdata = kzalloc(sizeof(*mdata), GFP_KERNEL);
+	if (!mdata) {
+		__free_page(page);
+		return NULL;
+	}
+
+	mdata->alloc = alloc;
+	mdata->page_index = index;
+	INIT_LIST_HEAD(&mdata->lru);
+	set_page_private(page, (unsigned long)mdata);
+
+	return page;
+}
+
+static void binder_free_page(struct page *page)
+{
+	kfree((struct binder_shrinker_mdata *)page_private(page));
+	__free_page(page);
+}
+
+=======
+static inline
+void binder_alloc_set_mapped(struct binder_alloc *alloc, bool state)
+{
+	/* pairs with smp_load_acquire in binder_alloc_is_mapped() */
+	smp_store_release(&alloc_to_wrap(alloc)->mapped, state);
+}
+
+static inline bool binder_alloc_is_mapped(struct binder_alloc *alloc)
+{
+	/* pairs with smp_store_release in binder_alloc_set_mapped() */
+	return smp_load_acquire(&alloc_to_wrap(alloc)->mapped);
+}
+
+static struct page *binder_page_lookup(struct binder_alloc *alloc,
+				       unsigned long addr)
+{
+	struct mm_struct *mm = alloc->mm;
+	struct page *page;
+	long npages = 0;
+
+	/*
+	 * Find an existing page in the remote mm. If missing,
+	 * don't attempt to fault-in just propagate an error.
+	 */
+	mmap_read_lock(mm);
+	if (binder_alloc_is_mapped(alloc))
+		npages = get_user_pages_remote(mm, addr, 1, FOLL_NOFAULT,
+					       &page, NULL);
+	mmap_read_unlock(mm);
+
+	return npages > 0 ? page : NULL;
+}
+
+static int binder_page_insert(struct binder_alloc *alloc,
+			      unsigned long addr,
+			      struct page *page)
+{
+	struct mm_struct *mm = alloc->mm;
+	struct vm_area_struct *vma;
+	int ret = -ESRCH;
+
+	/* attempt per-vma lock first */
+	vma = lock_vma_under_rcu(mm, addr);
+	if (vma) {
+		if (binder_alloc_is_mapped(alloc))
+			ret = vm_insert_page(vma, addr, page);
+		vma_end_read(vma);
+		return ret;
+	}
+
+	/* fall back to mmap_lock */
+	mmap_read_lock(mm);
+	vma = vma_lookup(mm, addr);
+	if (vma && binder_alloc_is_mapped(alloc))
+		ret = vm_insert_page(vma, addr, page);
+	mmap_read_unlock(mm);
+
+	return ret;
+}
+
+static struct page *binder_page_alloc(struct binder_alloc *alloc,
+				      unsigned long index)
+{
+	struct binder_shrinker_mdata *mdata;
+	struct page *page;
+
+	page = alloc_page(GFP_KERNEL | __GFP_HIGHMEM | __GFP_ZERO);
+	if (!page)
+		return NULL;
+
+	/* allocate and install shrinker metadata under page->private */
+	mdata = kzalloc(sizeof(*mdata), GFP_KERNEL);
+	if (!mdata) {
+		__free_page(page);
+		return NULL;
+	}
+
+	mdata->alloc = alloc;
+	mdata->page_index = index;
+	INIT_LIST_HEAD(&mdata->lru);
+	set_page_private(page, (unsigned long)mdata);
+
+	return page;
+}
+
+static void binder_free_page(struct page *page)
+{
+	kfree((struct binder_shrinker_mdata *)page_private(page));
+	__free_page(page);
+}
+
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 static int binder_install_single_page(struct binder_alloc *alloc,
 				      struct binder_lru_page *lru_page,
 				      unsigned long addr)
@@ -609,10 +819,22 @@ struct binder_buffer *binder_alloc_new_buf(struct binder_alloc *alloc,
 	if (!next)
 		return ERR_PTR(-ENOMEM);
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_lock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_lock(&alloc->mutex);
+=======
+	mutex_lock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	buffer = binder_alloc_new_buf_locked(alloc, next, size, is_async);
 	if (IS_ERR(buffer)) {
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 		spin_unlock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+		mutex_unlock(&alloc->mutex);
+=======
+		mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 		goto out;
 	}
 
@@ -620,7 +842,13 @@ struct binder_buffer *binder_alloc_new_buf(struct binder_alloc *alloc,
 	buffer->offsets_size = offsets_size;
 	buffer->extra_buffers_size = extra_buffers_size;
 	buffer->pid = current->tgid;
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_unlock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 
 	ret = binder_install_buffer_pages(alloc, buffer, size);
 	if (ret) {
@@ -753,7 +981,15 @@ static struct page *binder_alloc_get_page(struct binder_alloc *alloc,
 
 	lru_page = &alloc->pages[index];
 	*pgoffp = pgoff;
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	return lru_page->page_ptr;
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+
+	return alloc->pages[index];
+=======
+
+	return alloc_to_wrap(alloc)->pages[index];
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 }
 
 /**
@@ -805,9 +1041,21 @@ void binder_alloc_free_buf(struct binder_alloc *alloc,
 		binder_alloc_clear_buf(alloc, buffer);
 		buffer->clear_on_free = false;
 	}
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_lock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_lock(&alloc->mutex);
+=======
+	mutex_lock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	binder_free_buf_locked(alloc, buffer);
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_unlock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 }
 
 /**
@@ -848,10 +1096,16 @@ int binder_alloc_mmap_handler(struct binder_alloc *alloc,
 
 	alloc->buffer = vma->vm_start;
 
-	alloc->pages = kvcalloc(alloc->buffer_size / PAGE_SIZE,
-				sizeof(alloc->pages[0]),
+	alloc_to_wrap(alloc)->pages = kvcalloc(alloc->buffer_size / PAGE_SIZE,
+				sizeof(alloc_to_wrap(alloc)->pages[0]),
 				GFP_KERNEL);
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	if (alloc->pages == NULL) {
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	if (!alloc->pages) {
+=======
+	if (!alloc_to_wrap(alloc)->pages) {
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 		ret = -ENOMEM;
 		failure_string = "alloc page array";
 		goto err_alloc_pages_failed;
@@ -881,8 +1135,8 @@ int binder_alloc_mmap_handler(struct binder_alloc *alloc,
 	return 0;
 
 err_alloc_buf_struct_failed:
-	kvfree(alloc->pages);
-	alloc->pages = NULL;
+	kvfree(alloc_to_wrap(alloc)->pages);
+	alloc_to_wrap(alloc)->pages = NULL;
 err_alloc_pages_failed:
 	alloc->buffer = 0;
 	mutex_lock(&binder_alloc_mmap_lock);
@@ -905,8 +1159,16 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 	struct binder_buffer *buffer;
 
 	buffers = 0;
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_lock(&alloc->lock);
 	BUG_ON(alloc->vma);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_lock(&alloc->mutex);
+	BUG_ON(alloc->mapped);
+=======
+	mutex_lock(&alloc_to_wrap(alloc)->mutex);
+	BUG_ON(alloc_to_wrap(alloc)->mapped);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 
 	while ((n = rb_first(&alloc->allocated_buffers))) {
 		buffer = rb_entry(n, struct binder_buffer, rb_node);
@@ -933,7 +1195,7 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 	}
 
 	page_count = 0;
-	if (alloc->pages) {
+	if (alloc_to_wrap(alloc)->pages) {
 		int i;
 
 		for (i = 0; i < alloc->buffer_size / PAGE_SIZE; i++) {
@@ -952,8 +1214,16 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 			page_count++;
 		}
 	}
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_unlock(&alloc->lock);
 	kvfree(alloc->pages);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+	kvfree(alloc->pages);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+	kvfree(alloc_to_wrap(alloc)->pages);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	if (alloc->mm)
 		mmdrop(alloc->mm);
 
@@ -976,7 +1246,13 @@ void binder_alloc_print_allocated(struct seq_file *m,
 	struct binder_buffer *buffer;
 	struct rb_node *n;
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_lock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_lock(&alloc->mutex);
+=======
+	mutex_lock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	for (n = rb_first(&alloc->allocated_buffers); n; n = rb_next(n)) {
 		buffer = rb_entry(n, struct binder_buffer, rb_node);
 		seq_printf(m, "  buffer %d: %lx size %zd:%zd:%zd %s\n",
@@ -986,7 +1262,13 @@ void binder_alloc_print_allocated(struct seq_file *m,
 			   buffer->extra_buffers_size,
 			   buffer->transaction ? "active" : "delivered");
 	}
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_unlock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 }
 
 /**
@@ -1003,7 +1285,13 @@ void binder_alloc_print_pages(struct seq_file *m,
 	int lru = 0;
 	int free = 0;
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_lock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_lock(&alloc->mutex);
+=======
+	mutex_lock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	/*
 	 * Make sure the binder_alloc is fully initialized, otherwise we might
 	 * read inconsistent state.
@@ -1019,7 +1307,13 @@ void binder_alloc_print_pages(struct seq_file *m,
 				lru++;
 		}
 	}
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_unlock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	seq_printf(m, "  pages: %d:%d:%d\n", active, lru, free);
 	seq_printf(m, "  pages high watermark: %zu\n", alloc->pages_high);
 }
@@ -1035,10 +1329,22 @@ int binder_alloc_get_allocated_count(struct binder_alloc *alloc)
 	struct rb_node *n;
 	int count = 0;
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_lock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_lock(&alloc->mutex);
+=======
+	mutex_lock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	for (n = rb_first(&alloc->allocated_buffers); n != NULL; n = rb_next(n))
 		count++;
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_unlock(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	return count;
 }
 
@@ -1091,14 +1397,64 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 	index = page - alloc->pages;
 	page_addr = alloc->buffer + index * PAGE_SIZE;
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	vma = vma_lookup(mm, page_addr);
 	if (vma && vma != binder_alloc_get_vma(alloc))
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	/* attempt per-vma lock first */
+	vma = lock_vma_under_rcu(mm, page_addr);
+	if (!vma) {
+		/* fall back to mmap_lock */
+		if (!mmap_read_trylock(mm))
+			goto err_mmap_read_lock_failed;
+		mm_locked = 1;
+		vma = vma_lookup(mm, page_addr);
+	}
+
+	if (!mutex_trylock(&alloc->mutex))
+		goto err_get_alloc_mutex_failed;
+
+	/*
+	 * Since a binder_alloc can only be mapped once, we ensure
+	 * the vma corresponds to this mapping by checking whether
+	 * the binder_alloc is still mapped.
+	 */
+	if (vma && !binder_alloc_is_mapped(alloc))
+=======
+	/* attempt per-vma lock first */
+	vma = lock_vma_under_rcu(mm, page_addr);
+	if (!vma) {
+		/* fall back to mmap_lock */
+		if (!mmap_read_trylock(mm))
+			goto err_mmap_read_lock_failed;
+		mm_locked = 1;
+		vma = vma_lookup(mm, page_addr);
+	}
+
+	if (!mutex_trylock(&alloc_to_wrap(alloc)->mutex))
+		goto err_get_alloc_mutex_failed;
+
+	/*
+	 * Since a binder_alloc can only be mapped once, we ensure
+	 * the vma corresponds to this mapping by checking whether
+	 * the binder_alloc is still mapped.
+	 */
+	if (vma && !binder_alloc_is_mapped(alloc))
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 		goto err_invalid_vma;
 
 	trace_binder_unmap_kernel_start(alloc, index);
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	page_to_free = page->page_ptr;
 	page->page_ptr = NULL;
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	page_to_free = alloc->pages[index];
+	binder_set_installed_page(alloc, index, NULL);
+=======
+	page_to_free = alloc_to_wrap(alloc)->pages[index];
+	binder_set_installed_page(alloc, index, NULL);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 
 	trace_binder_unmap_kernel_end(alloc, index);
 
@@ -1114,7 +1470,21 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 		trace_binder_unmap_user_end(alloc, index);
 	}
 
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	mmap_read_unlock(mm);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+	if (mm_locked)
+		mmap_read_unlock(mm);
+	else
+		vma_end_read(vma);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+	if (mm_locked)
+		mmap_read_unlock(mm);
+	else
+		vma_end_read(vma);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	mmput_async(mm);
 	__free_page(page_to_free);
 
@@ -1122,10 +1492,26 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 	return LRU_REMOVED_RETRY;
 
 err_invalid_vma:
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 err_page_already_freed:
 	spin_unlock(&alloc->lock);
 err_get_alloc_lock_failed:
 	mmap_read_unlock(mm);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_unlock(&alloc->mutex);
+err_get_alloc_mutex_failed:
+	if (mm_locked)
+		mmap_read_unlock(mm);
+	else
+		vma_end_read(vma);
+=======
+	mutex_unlock(&alloc_to_wrap(alloc)->mutex);
+err_get_alloc_mutex_failed:
+	if (mm_locked)
+		mmap_read_unlock(mm);
+	else
+		vma_end_read(vma);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 err_mmap_read_lock_failed:
 	mmput_async(mm);
 err_mmget:
@@ -1159,7 +1545,13 @@ void binder_alloc_init(struct binder_alloc *alloc)
 	alloc->pid = current->group_leader->pid;
 	alloc->mm = current->mm;
 	mmgrab(alloc->mm);
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 	spin_lock_init(&alloc->lock);
+||||||| BASE   (addbef81389450f00b64584be16e1d762cd8fdf1 UPSTREAM: binder: use per-vma lock in page reclaiming)
+	mutex_init(&alloc->mutex);
+=======
+	mutex_init(&alloc_to_wrap(alloc)->mutex);
+>>>>>>> CHANGE (c9657998a396b8947624af33f27e0eb13980b709 ANDROID: binder: KMI-break workaround for binder_alloc)
 	INIT_LIST_HEAD(&alloc->buffers);
 }
 
