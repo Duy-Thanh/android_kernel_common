@@ -5557,6 +5557,7 @@ static struct binder_thread *binder_get_thread(struct binder_proc *proc)
 
 static void binder_free_proc(struct binder_proc *proc)
 {
+	struct binder_proc_wrap *proc_wrap;
 	struct binder_device *device;
 
 	BUG_ON(!list_empty(&proc->todo));
@@ -5575,7 +5576,8 @@ static void binder_free_proc(struct binder_proc *proc)
 	binder_stats_deleted(BINDER_STAT_PROC);
 	dbitmap_free(&proc->dmap);
 	trace_android_vh_binder_free_proc(proc);
-	kfree(proc);
+	proc_wrap = binder_proc_wrap_entry(proc);
+	kfree(proc_wrap);
 }
 
 static void binder_free_thread(struct binder_thread *thread)
@@ -6327,6 +6329,7 @@ static int binder_mmap(struct file *filp, struct vm_area_struct *vma)
 
 static int binder_open(struct inode *nodp, struct file *filp)
 {
+	struct binder_proc_wrap *proc_wrap;
 	struct binder_proc *proc, *itr;
 	struct binder_device *binder_dev;
 	struct binderfs_info *info;
@@ -6336,9 +6339,10 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	binder_debug(BINDER_DEBUG_OPEN_CLOSE, "%s: %d:%d\n", __func__,
 		     current->group_leader->pid, current->pid);
 
-	proc = kzalloc(sizeof(*proc), GFP_KERNEL);
-	if (proc == NULL)
+	proc_wrap = kzalloc(sizeof(*proc_wrap), GFP_KERNEL);
+	if (proc_wrap == NULL)
 		return -ENOMEM;
+	proc = &proc_wrap->proc;
 
 	dbitmap_init(&proc->dmap);
 	spin_lock_init(&proc->inner_lock);
