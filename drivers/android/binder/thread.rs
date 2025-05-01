@@ -1497,7 +1497,7 @@ impl Thread {
 
     fn read(self: &Arc<Self>, req: &mut BinderWriteRead, wait: bool) -> Result {
         let read_start = req.read_buffer.wrapping_add(req.read_consumed);
-        let read_len = req.read_size - req.read_consumed;
+        let read_len = req.read_size.saturating_sub(req.read_consumed);
         let mut writer = BinderReturnWriter::new(
             UserSlice::new(read_start as _, read_len as _).writer(),
             self,
