@@ -362,6 +362,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed3c3d3d_7d34f405",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-05-02T09:04:53Z",
+      "side": 1,
+      "message": "Right, but at least we run the same kernel in droifood which gives us some level of confidence. With this approach, we will be running a different untested kernel.\n\nAlso, on beta population we can use debug mode to switch subset of population to the debuggable version, can\u0027t we?",
+      "parentUuid": "ad702ad1_aa0568db",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
