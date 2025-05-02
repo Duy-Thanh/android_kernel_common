@@ -62,8 +62,10 @@ void kvm_arch_vcpu_load_fp(struct kvm_vcpu *vcpu)
 	 * When the host may use SME, fpsimd_save_and_flush_cpu_state() ensures
 	 * that PSTATE.{SM,ZA} == {0,0}.
 	 */
-	fpsimd_save_and_flush_cpu_state();
-	*host_data_ptr(fp_owner) = FP_STATE_FREE;
+	if (!is_protected_kvm_enabled()) {
+		fpsimd_save_and_flush_cpu_state();
+		*host_data_ptr(fp_owner) = FP_STATE_FREE;
+	}
 
 	/*
 	 * If normal guests gain SME support, maintain this behavior for pKVM
