@@ -188,6 +188,12 @@ static __always_inline void __adjust_cachestat_counters(struct cachestat *cs)
 	cs->nr_recently_evicted /= nr_sub_pages;
 }
 
+/*
+ * This version is only used for the rust binding,
+ * all other cases should use the inlined C version.
+ */
+extern unsigned ____page_shift(void);
+
 #endif /* !__ASSEMBLY__ */
 
 #endif /* __LINUX_PAGE_SIZE_COMPAT_H */

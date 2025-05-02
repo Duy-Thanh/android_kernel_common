@@ -355,3 +355,8 @@ static int __init init_sysctl_perf_event_mlock(void)
 }
 core_initcall(init_sysctl_perf_event_mlock);
 #endif
+
+unsigned ____page_shift(void)
+{
+	return __page_shift();
+}
