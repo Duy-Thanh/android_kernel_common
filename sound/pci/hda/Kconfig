@@ -94,6 +94,34 @@ config SND_HDA_PATCH_LOADER
 config SND_HDA_CIRRUS_SCODEC
 	tristate
 
+<<<<<<< HEAD   (657f6e Merge 6.12.24 into android16-6.12-lts)
+||||||| BASE
+config SND_HDA_CIRRUS_SCODEC_KUNIT_TEST
+	tristate "KUnit test for Cirrus side-codec library" if !KUNIT_ALL_TESTS
+	select SND_HDA_CIRRUS_SCODEC
+	select GPIOLIB
+	depends on KUNIT
+	default KUNIT_ALL_TESTS
+	help
+	  This builds KUnit tests for the cirrus side-codec library.
+	  For more information on KUnit and unit tests in general,
+	  please refer to the KUnit documentation in
+	  Documentation/dev-tools/kunit/.
+	  If in doubt, say "N".
+
+=======
+config SND_HDA_CIRRUS_SCODEC_KUNIT_TEST
+	tristate "KUnit test for Cirrus side-codec library" if !KUNIT_ALL_TESTS
+	depends on SND_HDA_CIRRUS_SCODEC && GPIOLIB && KUNIT
+	default KUNIT_ALL_TESTS
+	help
+	  This builds KUnit tests for the cirrus side-codec library.
+	  For more information on KUnit and unit tests in general,
+	  please refer to the KUnit documentation in
+	  Documentation/dev-tools/kunit/.
+	  If in doubt, say "N".
+
+>>>>>>> BRANCH (ef4999 Linux 6.12.25)
 config SND_HDA_SCODEC_CS35L41
 	tristate
 	select SND_HDA_GENERIC
