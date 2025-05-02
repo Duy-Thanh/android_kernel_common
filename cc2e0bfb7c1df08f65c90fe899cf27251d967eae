@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd833e5e_c30cc60d",
+        "filename": "arch/arm64/configs/microdroid_minimal.fragment",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-05-02T07:01:43Z",
+      "side": 1,
+      "message": "Right. These don\u0027t affect the kernel image size. Removed.",
+      "parentUuid": "fd65c678_f8695a76",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 26
+      },
+      "revId": "cc2e0bfb7c1df08f65c90fe899cf27251d967eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88938bf5_42dfb79a",
@@ -79,6 +103,30 @@
           ]
         }
       ],
+      "revId": "cc2e0bfb7c1df08f65c90fe899cf27251d967eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd60f668_e3ecd920",
+        "filename": "arch/arm64/configs/microdroid_minimal.fragment",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-05-02T07:01:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88938bf5_42dfb79a",
+      "range": {
+        "startLine": 15,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 27
+      },
       "revId": "cc2e0bfb7c1df08f65c90fe899cf27251d967eae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

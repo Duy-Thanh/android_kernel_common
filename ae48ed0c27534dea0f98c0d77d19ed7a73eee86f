@@ -336,6 +336,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad702ad1_aa0568db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-05-02T07:01:43Z",
+      "side": 1,
+      "message": "we anyway need to run the VM with `--debug none` for beta and also for production, which makes it impossible for us to retrieve those information (ex: no adb), regardless of which kernel we use.",
+      "parentUuid": "39b81057_ff588c7f",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73a5b41f_72b049c0",
@@ -373,6 +397,30 @@
       "side": 1,
       "message": "Without these, the Image increases by 64 KB. We don\u0027t remove this for the \"ordinary\" Microdroid kernel. It\u0027s only for appsearch.",
       "parentUuid": "73a5b41f_72b049c0",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7408bd7e_679373e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-05-02T07:01:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77940164_50feb9f5",
       "range": {
         "startLine": 18,
         "startChar": 0,
