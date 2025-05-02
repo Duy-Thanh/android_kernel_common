@@ -50,6 +50,7 @@ pub mod mm;
 #[cfg(CONFIG_NET)]
 pub mod net;
 pub mod page;
+pub mod page_size_compat;
 pub mod prelude;
 pub mod print;
 pub mod rbtree;
