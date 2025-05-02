@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6336b249_16ebe032",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-05-02T08:10:59Z",
+      "side": 1,
+      "message": "nit: commit message needs an update\n\n\n```suggestion\nCONFIG_PROFILING, CONFIG_KALLSYMS, CONFIG_DEBUG_MISC,\nCONFIG_DEBUG_STACK_USAGE, CONFIG_SCHEDSTATS, CONFIG_SCHED_DEBUG,\nCONFIG_FTRACE\n\n```",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "43652a65bb4e553f3dee50acce807ae82a6bfd7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
