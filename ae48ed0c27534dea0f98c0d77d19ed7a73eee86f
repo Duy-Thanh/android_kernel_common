@@ -410,6 +410,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd3fd15e_e0f11e37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-05-02T10:16:00Z",
+      "side": 1,
+      "message": "But I am not asking that :) I am just saying that if we keep different kernels for different populations, then we will lose some confidence in our releases.\n\nI just want to have an explicit acknowledgment from the leads that we are OK with losing this confidence, and have a clear plan on how new kernel is going to be maintained and released.",
+      "parentUuid": "f6d7c3d4_e6af5ca0",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
