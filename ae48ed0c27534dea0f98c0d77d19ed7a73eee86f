@@ -386,6 +386,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6d7c3d4_e6af5ca0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-05-02T10:06:58Z",
+      "side": 1,
+      "message": "You are asking an impossible.\n\n1) behavior of beta and release should be as close as possible // everybody agrees\n\n2) beta should be debuggable \n\n3) release should use minimal memory footprint // from sandeep\n\nWe can\u0027t satisfy these three at the same time. I thought we (actually sandeep) prefer #3 to #2, at least for the usecase we are talking about.",
+      "parentUuid": "ed3c3d3d_7d34f405",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "ae48ed0c27534dea0f98c0d77d19ed7a73eee86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73a5b41f_72b049c0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
