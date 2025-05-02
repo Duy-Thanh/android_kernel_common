@@ -852,6 +852,10 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 	unsigned long i;
 	const char *name = cma ? cma->name : NULL;
 
+	if (WARN_ON_ONCE((gfp & GFP_KERNEL) == 0 ||
+		(gfp & ~(GFP_KERNEL|__GFP_NOWARN|__GFP_NORETRY)) != 0))
+		return page;
+
 	trace_cma_alloc_start(name, count, align);
 
 	if (!cma || !cma->count)
