@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebfe72c8_364c6da2",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-05-02T15:39:05Z",
+      "side": 1,
+      "message": "`: error: use of undeclared identifier \u0027white_list\u0027`\n\nShould this be `fname`?",
+      "range": {
+        "startLine": 2220,
+        "startChar": 22,
+        "endLine": 2220,
+        "endChar": 32
+      },
+      "revId": "5530cd990ff8a3276bd78ca20b3f3895044d9f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
