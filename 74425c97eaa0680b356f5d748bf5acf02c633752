@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16076b11_7a25c4d0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-02T20:24:17Z",
+      "side": 1,
+      "message": "This is intentional, I\u0027ll add a comment explaining why it\u0027s like this. The host is the primary scheduler, so we need to return to it before retrying the current call. The host also handles any non-secure interrupts that might have interrupted TZ.",
+      "parentUuid": "0a5a4d6a_3be5b843",
+      "range": {
+        "startLine": 1640,
+        "startChar": 3,
+        "endLine": 1640,
+        "endChar": 66
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df3cf4cc_56b175d6",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 84
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-02T17:26:45Z",
       "side": 1,
       "message": "The exit code doesn\u0027t seem right, we can probably use `ARM_EXCEPTION_HYP_REQ`.",
+      "range": {
+        "startLine": 1642,
+        "startChar": 16,
+        "endLine": 1642,
+        "endChar": 33
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa1748f_c48a7f76",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1642,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-02T20:24:17Z",
+      "side": 1,
+      "message": "I looked at that, don\u0027t we need to fill in a request structure for it?\n\nI still think `ARM_EXCEPTION_IRQ` is the most fitting, because the most likely reason TZ returned was a non-secure interrupts that the host needs to handle.",
+      "parentUuid": "df3cf4cc_56b175d6",
       "range": {
         "startLine": 1642,
         "startChar": 16,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "351631f1_97a9de58",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1643,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-02T20:24:17Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "cff099e9_7c984c30",
+      "range": {
+        "startLine": 1643,
+        "startChar": 10,
+        "endLine": 1643,
+        "endChar": 15
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51a10c03_4e0d94a1",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-05-02T17:26:45Z",
       "side": 1,
       "message": "This is quite tricky because we can confuse the caller if it asked something and on the back of it we requested something else that failed with an unexpected error code.",
+      "range": {
+        "startLine": 1645,
+        "startChar": 3,
+        "endLine": 1645,
+        "endChar": 19
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6602d1cc_d14ad1fd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-02T20:24:17Z",
+      "side": 1,
+      "message": "I agree in principle, we should only return the error codes that are listed by the spec for this call. I\u0027m not sure what else to do here though.",
+      "parentUuid": "51a10c03_4e0d94a1",
       "range": {
         "startLine": 1645,
         "startChar": 3,
