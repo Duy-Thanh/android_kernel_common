@@ -1621,6 +1621,7 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
 	struct kvm_cpu_context *ctxt = &vcpu->arch.ctxt;
 	struct arm_smccc_res res;
+	struct arm_smccc_1_2_regs regs;
 	int ret, hyp_alloc_ret;
 	struct kvm_hyp_req *req;
 
@@ -1680,6 +1681,12 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	case FFA_FN64_MSG_SEND_DIRECT_REQ:
 		do_ffa_direct_msg(ctxt, hyp_vcpu_to_ffa_handle(hyp_vcpu));
 		return true;
+	case FFA_MSG_SEND_DIRECT_REQ2:
+		if (hyp_ffa_version >= FFA_VERSION_1_2) {
+			do_ffa_direct_msg2(&regs, ctxt, hyp_vcpu_to_ffa_handle(hyp_vcpu));
+			goto out_guest;
+		}
+		fallthrough;
 	default:
 		ret = -EOPNOTSUPP;
 		break;
@@ -1716,7 +1723,7 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 out_guest_with_ret:
 	ffa_to_smccc_res(&res, linux_errno_to_ffa(ret));
 out_guest:
-	ffa_set_retval(ctxt, &res);
+	ffa_set_retval_smccc_1_x(ctxt, &res, &regs);
 	return true;
 }
 
