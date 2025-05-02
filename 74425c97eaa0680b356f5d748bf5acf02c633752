@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a5a4d6a_3be5b843",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-02T17:26:45Z",
+      "side": 1,
+      "message": "Q: Why to the host and not to the guest ?",
+      "range": {
+        "startLine": 1640,
+        "startChar": 3,
+        "endLine": 1640,
+        "endChar": 66
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3cf4cc_56b175d6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1642,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-02T17:26:45Z",
+      "side": 1,
+      "message": "The exit code doesn\u0027t seem right, we can probably use `ARM_EXCEPTION_HYP_REQ`.",
+      "range": {
+        "startLine": 1642,
+        "startChar": 16,
+        "endLine": 1642,
+        "endChar": 33
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff099e9_7c984c30",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1643,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-02T17:26:45Z",
+      "side": 1,
+      "message": "I think we can return to the guest with return true",
+      "range": {
+        "startLine": 1643,
+        "startChar": 10,
+        "endLine": 1643,
+        "endChar": 15
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a10c03_4e0d94a1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-02T17:26:45Z",
+      "side": 1,
+      "message": "This is quite tricky because we can confuse the caller if it asked something and on the back of it we requested something else that failed with an unexpected error code.",
+      "range": {
+        "startLine": 1645,
+        "startChar": 3,
+        "endLine": 1645,
+        "endChar": 19
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f480c25d_2b88498c",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-02T17:26:45Z",
+      "side": 1,
+      "message": "I think we should move this to the `ret \u003d\u003d -EBUSY` block to allow the pages that have nothing to do with TZ to be freed.",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 0
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
