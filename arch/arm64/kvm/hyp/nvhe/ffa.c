@@ -227,7 +227,7 @@ static void arm_smccc_1_x_smc(u64 func_id, u64 a1, u64 a2, u64 a3,
 		hyp_ffa_version >= FFA_VERSION_1_2) {
 		args = (struct arm_smccc_1_2_regs) { func_id, a1, a2, a3, a4,
 						     a5, a6, a7 };
-		arm_smccc_1_2_smc(&args, &regs);
+		nvhe_arm_smccc_1_2_smc(&args, &regs);
 		*res = (struct arm_smccc_res) { .a0 = regs.a0, .a1 = regs.a1,
 						.a2 = regs.a2, .a3 = regs.a3 };
 		return;
@@ -1508,7 +1508,7 @@ static void do_ffa_direct_msg2(struct arm_smccc_1_2_regs *regs,
 		x11, x12, x13, x14, x15, x16, x17
 	};
 
-	arm_smccc_1_2_smc(&args, regs);
+	nvhe_arm_smccc_1_2_smc(&args, regs);
 }
 
 bool kvm_host_ffa_handler(struct kvm_cpu_context *host_ctxt, u32 func_id)
