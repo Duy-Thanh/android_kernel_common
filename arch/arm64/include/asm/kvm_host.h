@@ -1773,8 +1773,16 @@ static inline void kvm_iommu_sg_free(struct kvm_iommu_sg *sg, unsigned int nents
 int kvm_iommu_attach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 			 unsigned int endpoint, unsigned int pasid,
 			 unsigned int ssid_bits, unsigned long flags);
+int kvm_iommu_attach_dev_nested(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
+				u32 pasid, u32 pasid_bits, void *s1_desc_hva,
+				size_t s1_desc_size);
 int kvm_iommu_detach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 			 unsigned int endpoint, unsigned int pasid);
+int kvm_iommu_detach_dev_nested(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
+				u32 endpoint_id, u32 pasid);
+int kvm_iommu_iotlb_inv_range(pkvm_handle_t domain_id, unsigned long iova, size_t size,
+			      size_t granule, bool leaf);
+int kvm_iommu_iotlb_inv_domain(pkvm_handle_t domain_id);
 int kvm_iommu_alloc_domain(pkvm_handle_t domain_id, int type);
 int kvm_iommu_free_domain(pkvm_handle_t domain_id);
 int kvm_iommu_map_pages(pkvm_handle_t domain_id, unsigned long iova,

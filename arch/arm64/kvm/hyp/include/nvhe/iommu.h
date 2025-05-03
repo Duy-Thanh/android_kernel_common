@@ -20,13 +20,20 @@ int kvm_iommu_free_domain(pkvm_handle_t domain_id);
 int kvm_iommu_attach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 			 u32 endpoint_id, u32 pasid, u32 pasid_bits,
 			 unsigned long flags);
+int kvm_iommu_attach_dev_nested(pkvm_handle_t iommu_id, pkvm_handle_t domain_id, u32 endpoint_id,
+				u32 pasid, u32 pasid_bits, void *s1_desc_hva, size_t s1_desc_size);
 int kvm_iommu_detach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 			 u32 endpoint_id, u32 pasid);
+int kvm_iommu_detach_dev_nested(pkvm_handle_t iommu_id, pkvm_handle_t domain_id, u32 endpoint_id,
+				u32 pasid);
 size_t kvm_iommu_map_pages(pkvm_handle_t domain_id,
 			   unsigned long iova, phys_addr_t paddr, size_t pgsize,
 			   size_t pgcount, int prot, unsigned long *mapped);
 size_t kvm_iommu_unmap_pages(pkvm_handle_t domain_id, unsigned long iova,
 			     size_t pgsize, size_t pgcount);
+int kvm_iommu_iotlb_inv_range(pkvm_handle_t domain_id, unsigned long iova, size_t size,
+			      size_t granule, bool leaf);
+int kvm_iommu_iotlb_inv_domain(pkvm_handle_t domain_id);
 phys_addr_t kvm_iommu_iova_to_phys(pkvm_handle_t domain_id, unsigned long iova);
 bool kvm_iommu_host_dabt_handler(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr);
 size_t kvm_iommu_map_sg(pkvm_handle_t domain, unsigned long iova, struct kvm_iommu_sg *sg,
@@ -59,8 +66,17 @@ struct kvm_iommu_ops {
 	struct kvm_hyp_iommu *(*get_iommu_by_id)(pkvm_handle_t iommu_id);
 	int (*attach_dev)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *domain,
 			  u32 endpoint_id, u32 pasid, u32 pasid_bits, unsigned long flags);
+	int (*attach_dev_nested)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *domain,
+				 struct kvm_hyp_iommu_domain *s2_domain, u32 endpoint_id, u32 pasid,
+				 u32 pasid_bits, void *s1_desc_hva);
 	int (*detach_dev)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *domain,
 			  u32 endpoint_id, u32 pasid);
+	int (*detach_dev_nested)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *domain,
+				 struct kvm_hyp_iommu_domain *s2_domain, u32 endpoint_id,
+				 u32 pasid);
+	void (*iotlb_inv_range)(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
+				size_t size, size_t granule, bool leaf);
+	void (*iotlb_inv_domain)(struct kvm_hyp_iommu_domain *domain);
 	int (*map_pages)(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
 			 phys_addr_t paddr, size_t pgsize,
 			 size_t pgcount, int prot, size_t *total_mapped);
