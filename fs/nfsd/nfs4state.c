@@ -4697,7 +4697,19 @@ static void nfsd_break_one_deleg(struct nfs4_delegation *dp)
 	 * we know it's safe to take a reference.
 	 */
 	refcount_inc(&dp->dl_stid.sc_count);
+<<<<<<< HEAD   (ee8c09 Merge branch 'android14-5.15' into android14-5.15-lts)
 	nfsd4_run_cb(&dp->dl_recall);
+||||||| BASE
+	queued = nfsd4_run_cb(&dp->dl_recall);
+	WARN_ON_ONCE(!queued);
+	if (!queued)
+		nfs4_put_stid(&dp->dl_stid);
+=======
+	queued = nfsd4_run_cb(&dp->dl_recall);
+	WARN_ON_ONCE(!queued);
+	if (!queued)
+		refcount_dec(&dp->dl_stid.sc_count);
+>>>>>>> BRANCH (2f420d drm/sti: remove duplicate object names)
 }
 
 /* Called from break_lease() with i_lock held. */
