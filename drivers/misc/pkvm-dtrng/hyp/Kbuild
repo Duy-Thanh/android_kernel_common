@@ -1,0 +1,13 @@
+
+# NOTE: for some reason $(srctree) is set to local path and yet include works...
+__KROOT=../../../..
+
+subdir-ccflags-y += -I$(srctree)/arch/arm64/kvm/hyp/include/
+subdir-ccflags-y += -DMODULE
+
+hyp-obj-y := pkvm-dtrng.o
+hyp-obj-y += drbg.o
+hyp-obj-y += $(__KROOT)/lib/crypto/sha256.o
+#hyp-obj-y += $(__KROOT)/lib/crypto/aes.o
+
+include $(srctree)/arch/arm64/kvm/hyp/nvhe/Makefile.module

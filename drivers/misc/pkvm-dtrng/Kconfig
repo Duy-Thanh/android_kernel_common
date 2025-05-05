@@ -1,0 +1,5 @@
+
+config PKVM_DTRNG
+	tristate "DTRNG"
+	depends on ARM64
+	depends on KVM
