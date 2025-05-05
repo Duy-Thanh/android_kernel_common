@@ -46,6 +46,30 @@
       },
       "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b932d13c_d93e9980",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-05T20:32:28Z",
+      "side": 1,
+      "message": "I can\u0027t tell what\u0027s being added/removed or what the conflict here is.\n\nPlease use markdown code blocks to prevent the text from being formatted.\n\nhttps://gerrit.googlesource.com/gitiles/+/HEAD/Documentation/markdown.md#code-blocks",
+      "parentUuid": "05cde564_a9450119",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 54
+      },
+      "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
