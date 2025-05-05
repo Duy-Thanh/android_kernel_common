@@ -22,6 +22,30 @@
       },
       "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cde564_a9450119",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4043531
+      },
+      "writtenOn": "2025-05-05T04:07:54Z",
+      "side": 1,
+      "message": "Hi Tim,\nI can see still the below conflict \n\nkraj@cs2n3:~/aluminium-kernel/common$  git diff\ndiff --cc drivers/gpu/drm/i915/display/intel_display_device.h\nindex 34c52680d589,78a93c7193e4..000000000000\n--- a/drivers/gpu/drm/i915/display/intel_display_device.h\n+++ b/drivers/gpu/drm/i915/display/intel_display_device.h\n@@@ -149,7 -149,8 +149,12 @@@ struct intel_display_platforms\n  #define HAS_DDI(i915)                 (DISPLAY_INFO(i915)-\u003ehas_ddi)\n  #define HAS_DISPLAY(i915)             (DISPLAY_RUNTIME_INFO(i915)-\u003epipe_mask !\u003d 0)\n  #define HAS_DMC(i915)                 (DISPLAY_RUNTIME_INFO(i915)-\u003ehas_dmc)\n++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD\n +#define HAS_DOUBLE_BUFFERED_M_N(i915) (DISPLAY_VER(i915) \u003e\u003d 9 || IS_BROADWELL(i915))\n++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n+ #define HAS_DMC_WAKELOCK(i915)                (DISPLAY_VER(i915) \u003e\u003d 20)\n+ #define HAS_DOUBLE_BUFFERED_M_N(__display)    (DISPLAY_VER(__display) \u003e\u003d 9 || (__display)-\u003eplatform.broadwell)\n++\u003e\u003e\u003e\u003e\u003e\u003e\u003e b73b6c011753 (drm/i915/display: convert HAS_DOUBLE_BUFFERED_M_N() to struct intel_display)\n  #define HAS_DOUBLE_WIDE(i915)         (DISPLAY_VER(i915) \u003c 4)\n  #define HAS_DP_MST(i915)              (DISPLAY_INFO(i915)-\u003ehas_dp_mst)\n  #define HAS_DP20(i915)                        (IS_DG2(i915) || DISPLAY_VER(i915) \u003e\u003d 14)\nkraj@cs2n3:~/aluminium-kernel/common$",
+      "parentUuid": "edef99f0_d424f4ba",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 54
+      },
+      "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
