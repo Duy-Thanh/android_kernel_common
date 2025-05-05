@@ -373612,7 +373612,7 @@ elf_symbol {
   name: "__get_task_comm"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe5301374
+  crc: 0xaeefb77b
   type_id: 0x3cc96bbe
   full_name: "__get_task_comm"
 }
@@ -375359,7 +375359,7 @@ elf_symbol {
   name: "__set_task_comm"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf28017fe
+  crc: 0x6014f2c7
   type_id: 0x173d26e5
   full_name: "__set_task_comm"
 }
@@ -394901,7 +394901,7 @@ elf_symbol {
   name: "default_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe0570a68
+  crc: 0xbe1f41f3
   type_id: 0x2d64ae3e
   full_name: "default_llseek"
 }
@@ -399391,7 +399391,7 @@ elf_symbol {
   name: "dma_heap_add"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7549872b
+  crc: 0xb5345150
   type_id: 0x0a745291
   full_name: "dma_heap_add"
 }
@@ -399400,7 +399400,7 @@ elf_symbol {
   name: "dma_heap_buffer_alloc"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb5daedd5
+  crc: 0x03e2ab85
   type_id: 0x43c50d0f
   full_name: "dma_heap_buffer_alloc"
 }
@@ -399409,7 +399409,7 @@ elf_symbol {
   name: "dma_heap_buffer_free"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9936ec88
+  crc: 0xda0a40d0
   type_id: 0x10aa5f7a
   full_name: "dma_heap_buffer_free"
 }
@@ -399436,7 +399436,7 @@ elf_symbol {
   name: "dma_heap_get_dev"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x38121505
+  crc: 0x1a3cd11c
   type_id: 0xa726fe6e
   full_name: "dma_heap_get_dev"
 }
@@ -405745,7 +405745,7 @@ elf_symbol {
   name: "fixed_size_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8b22c2ad
+  crc: 0xe3a69479
   type_id: 0x2d6430a1
   full_name: "fixed_size_llseek"
 }
@@ -407087,7 +407087,7 @@ elf_symbol {
   name: "generic_file_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe0570a68
+  crc: 0xbe1f41f3
   type_id: 0x2d64ae3e
   full_name: "generic_file_llseek"
 }
@@ -407240,7 +407240,7 @@ elf_symbol {
   name: "generic_ro_fops"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x2ba07be1
+  crc: 0x94c1e89c
   type_id: 0xf10425d9
   full_name: "generic_ro_fops"
 }
@@ -407267,7 +407267,7 @@ elf_symbol {
   name: "generic_write_checks"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x831eccec
+  crc: 0xc0d3e1bf
   type_id: 0x16637235
   full_name: "generic_write_checks"
 }
@@ -420403,7 +420403,7 @@ elf_symbol {
   name: "noop_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe0570a68
+  crc: 0xbe1f41f3
   type_id: 0x2d64ae3e
   full_name: "noop_llseek"
 }
@@ -422418,6 +422418,24 @@ elf_symbol {
   crc: 0x63c84825
   type_id: 0x19658c89
   full_name: "page_reporting_unregister"
+}
+elf_symbol {
+  id: 0x89850bb1
+  name: "page_shift_compat"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7ec472ba
+  type_id: 0x6720d32f
+  full_name: "page_shift_compat"
+}
+elf_symbol {
+  id: 0xecb8da90
+  name: "page_shift_compat_enabled"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8ee1928d
+  type_id: 0x8e47c273
+  full_name: "page_shift_compat_enabled"
 }
 elf_symbol {
   id: 0x0fe80546
@@ -447172,7 +447190,7 @@ elf_symbol {
   name: "vfs_iter_read"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1120259d
+  crc: 0xa1ae44c6
   type_id: 0x1274496e
   full_name: "vfs_iter_read"
 }
@@ -447181,7 +447199,7 @@ elf_symbol {
   name: "vfs_iter_write"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1120259d
+  crc: 0xa1ae44c6
   type_id: 0x1274496e
   full_name: "vfs_iter_write"
 }
@@ -447190,7 +447208,7 @@ elf_symbol {
   name: "vfs_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe0570a68
+  crc: 0xbe1f41f3
   type_id: 0x2d64ae3e
   full_name: "vfs_llseek"
 }
@@ -447245,7 +447263,7 @@ elf_symbol {
   name: "vfs_setpos"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x95f79367
+  crc: 0x9e5e59f4
   type_id: 0x2d748ffb
   full_name: "vfs_setpos"
 }
@@ -455711,6 +455729,8 @@ interface {
   symbol_id: 0x6b23b266
   symbol_id: 0x1b814fa6
   symbol_id: 0x9ca2e070
+  symbol_id: 0x89850bb1
+  symbol_id: 0xecb8da90
   symbol_id: 0x0fe80546
   symbol_id: 0x37d86bb7
   symbol_id: 0x32ecd828
