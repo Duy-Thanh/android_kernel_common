@@ -70,6 +70,30 @@
       },
       "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e8a4e21_542fd0d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3845040
+      },
+      "writtenOn": "2025-05-06T12:54:20Z",
+      "side": 1,
+      "message": "Hi Tim,\nIf you refer the original patch for drivers/gpu/drm/i915/display/intel_display_device.h, https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/diff/drivers/gpu/drm/i915/display/intel_display_device.h?id\u003db73b6c0117531e6f24c277992da213a90763d3a1 , it expects lines to be changed below HAS_DMC_WAKELOCK(i915) , but this is not present in current tree but not related to this patch which changes i915 to __display in HAS_DOUBLE_BUFFERED_M_N macro.  So this patch is not cleanly applied on current tree , hence its a backport . Looks Lint is giving false results as this BACKPORT tag is expected .",
+      "parentUuid": "b932d13c_d93e9980",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 54
+      },
+      "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
