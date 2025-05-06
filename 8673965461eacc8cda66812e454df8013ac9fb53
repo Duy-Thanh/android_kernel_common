@@ -16,6 +16,24 @@
       "message": "how about your `FROMGIT:` instead: https://git.kernel.org/pub/scm/linux/kernel/git/device-mapper/linux-dm.git/commit/?h\u003ddm-6.15\u0026id\u003df1aff4bc199cb92c055668caed65505e3b4d2656",
       "revId": "8673965461eacc8cda66812e454df8013ac9fb53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a329d1f3_dcd9e109",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-05-06T16:16:40Z",
+      "side": 1,
+      "message": "I\u0027ll overwrite this revert with your own upstream patch if you don\u0027t mind.",
+      "parentUuid": "86dc1906_caa42eef",
+      "revId": "8673965461eacc8cda66812e454df8013ac9fb53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
