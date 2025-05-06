@@ -15,6 +15,7 @@
 #include <linux/arm-smccc.h>
 #include <linux/bitmap.h>
 #include <linux/types.h>
+#include <linux/iommu.h>
 #include <linux/jump_label.h>
 #include <linux/kvm_types.h>
 #include <linux/maple_tree.h>
@@ -2029,6 +2030,8 @@ int kvm_iommu_iotlb_inv_nested_domain(pkvm_handle_t domain_id, unsigned long iov
 				      size_t granule, bool leaf);
 int kvm_iommu_nested_cfg_sync(pkvm_handle_t drv_id, pkvm_handle_t iommu_id, void *cmd_desc_hva,
 			      size_t cmd_desc_size);
+int kvm_iommu_page_response(pkvm_handle_t drv_id, pkvm_handle_t iommu_id, unsigned int endpoint,
+			    void *page_response_desc_hva, size_t page_response_desc_size);
 #endif
 /*
  * Unlike previous android versions, where we supported 1 << 16 domains,
@@ -2049,6 +2052,33 @@ struct kvm_iommu_sg {
 	unsigned int pgcount;
 };
 
+enum kvm_hyp_iommu_page_response_code {
+	KVM_IOMMU_PAGE_RESP_SUCCESS = 0,
+	KVM_IOMMU_PAGE_RESP_INVALID,
+	KVM_IOMMU_PAGE_RESP_FAILURE,
+};
+
+static inline enum kvm_hyp_iommu_page_response_code
+map_iommu_page_response_code(enum iommu_page_response_code code)
+{
+	if (code == IOMMU_PAGE_RESP_SUCCESS)
+		return KVM_IOMMU_PAGE_RESP_SUCCESS;
+	else if (code == IOMMU_PAGE_RESP_INVALID)
+		return KVM_IOMMU_PAGE_RESP_INVALID;
+	return KVM_IOMMU_PAGE_RESP_FAILURE;
+}
+
+/**
+ * struct kvm_hyp_iommu_page_response - Generic page response information
+ * @pasid: Process Address Space ID
+ * @grpid: Page Request Group Index
+ * @code: response code from &enum kvm_hyp_iommu_page_response_code
+ */
+struct kvm_hyp_iommu_page_response {
+	u32 pasid;
+	u32 grpid;
+	u32 code;
+};
 
 #define kvm_iommu_sg_nents_size(n) (PAGE_ALIGN((n) * sizeof(struct kvm_iommu_sg)))
 
