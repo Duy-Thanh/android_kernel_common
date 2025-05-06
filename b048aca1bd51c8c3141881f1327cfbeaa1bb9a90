@@ -94,6 +94,30 @@
       },
       "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b13b18fd_0f40f78f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3845040
+      },
+      "writtenOn": "2025-05-06T15:53:16Z",
+      "side": 1,
+      "message": "Tim, also i am still using chromium helper script to cherrypick , which adds BACKPORT tag if conflicts is detected. So looks there is a bug in Lint https://chromium.googlesource.com/chromiumos/platform/dev-util/+/HEAD/contrib/fromupstream.py  \n        if ret !\u003d 0:\n            conflicts \u003d _get_conflicts()\n            if args[\"tag\"] \u003d\u003d \"UPSTREAM: \":\n                args[\"tag\"] \u003d \"BACKPORT: \"\n            else:\n                args[\"tag\"] \u003d \"BACKPORT: \" + args[\"tag\"]\n            _pause_for_merge(conflicts)\n        else:",
+      "parentUuid": "8e8a4e21_542fd0d6",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 54
+      },
+      "revId": "b048aca1bd51c8c3141881f1327cfbeaa1bb9a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
