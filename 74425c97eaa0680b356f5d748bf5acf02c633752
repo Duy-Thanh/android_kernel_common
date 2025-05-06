@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1741e949_c4464134",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-06T19:16:59Z",
+      "side": 1,
+      "message": "\u003e we can do it separately (not on the back of a guest call but on a different hvc as we do with kvm_call_hyp_nvhe(__pkvm_notify_dying_guest_vm_avail)\n\nThat sounds good, let\u0027s do it this way.",
+      "parentUuid": "34407696_f5bc5f5c",
+      "range": {
+        "startLine": 1645,
+        "startChar": 3,
+        "endLine": 1645,
+        "endChar": 19
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f480c25d_2b88498c",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 84
