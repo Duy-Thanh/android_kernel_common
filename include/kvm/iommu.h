@@ -50,6 +50,34 @@ struct kvm_hyp_iommu {
 	ANDROID_KABI_RESERVE(4);
 };
 
+enum kvm_hyp_iommu_page_response_code {
+	KVM_IOMMU_PAGE_RESP_SUCCESS = 0,
+	KVM_IOMMU_PAGE_RESP_INVALID,
+	KVM_IOMMU_PAGE_RESP_FAILURE,
+};
+
+static inline enum kvm_hyp_iommu_page_response_code
+map_iommu_page_response_code(enum iommu_page_response_code code)
+{
+	if (code == IOMMU_PAGE_RESP_SUCCESS)
+		return KVM_IOMMU_PAGE_RESP_SUCCESS;
+	else if (code == IOMMU_PAGE_RESP_INVALID)
+		return KVM_IOMMU_PAGE_RESP_INVALID;
+	return KVM_IOMMU_PAGE_RESP_FAILURE;
+}
+
+/**
+ * struct kvm_hyp_iommu_page_response - Generic page response information
+ * @pasid: Process Address Space ID
+ * @grpid: Page Request Group Index
+ * @code: response code from &enum kvm_hyp_iommu_page_response_code
+ */
+struct kvm_hyp_iommu_page_response {
+	u32 pasid;
+	u32 grpid;
+	u32 code;
+};
+
 extern void **kvm_nvhe_sym(kvm_hyp_iommu_domains);
 #define kvm_hyp_iommu_domains kvm_nvhe_sym(kvm_hyp_iommu_domains)
 

@@ -36,6 +36,9 @@ void kvm_iommu_reclaim_pages_atomic(void *p, u8 order);
 /* Hypercall handlers */
 int kvm_iommu_alloc_domain(pkvm_handle_t domain_id, u32 type);
 int kvm_iommu_free_domain(pkvm_handle_t domain_id);
+int kvm_iommu_block_sva_pasid(pkvm_handle_t iommu_id, pkvm_handle_t domain_id, u32 sid, u32 pasid);
+int kvm_iommu_sva_bind_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id, u32 sid, u32 pasid,
+			   void *sva_desc_hva, size_t sva_desc_size);
 int kvm_iommu_attach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 			 u32 endpoint_id, u32 pasid, u32 pasid_bits);
 int kvm_iommu_attach_dev_nested(pkvm_handle_t iommu_id, pkvm_handle_t domain_id, u32 endpoint_id,
@@ -44,6 +47,11 @@ int kvm_iommu_detach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 			 u32 endpoint_id, u32 pasid);
 int kvm_iommu_detach_dev_nested(pkvm_handle_t iommu_id, pkvm_handle_t domain_id, u32 endpoint_id,
 				u32 pasid);
+int kvm_iommu_iotlb_inv_range(pkvm_handle_t domain_id, unsigned long iova, size_t size,
+			      size_t granule, bool leaf);
+int kvm_iommu_iotlb_inv_domain(pkvm_handle_t domain_id);
+int kvm_iommu_page_response(pkvm_handle_t iommu_id, u32 endpoint_id,
+			    void *page_response_desc_hva, size_t page_response_desc_size);
 int kvm_iommu_map_pages(pkvm_handle_t domain_id, unsigned long iova,
 			phys_addr_t paddr, size_t pgsize,
 			size_t pgcount, int prot, unsigned long *mapped);
@@ -122,6 +130,11 @@ struct kvm_iommu_ops {
 	struct kvm_hyp_iommu *(*get_iommu_by_id)(pkvm_handle_t smmu_id);
 	int (*alloc_domain)(struct kvm_hyp_iommu_domain *domain, u32 type);
 	void (*free_domain)(struct kvm_hyp_iommu_domain *domain);
+	int (*block_sva_pasid)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *domain,
+			       u32 endpoint_id, u32 pasid);
+	int (*sva_bind_dev)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *s1_domain,
+			    struct kvm_hyp_iommu_domain *s2_domain, u32 endpoint_id, u32 pasid,
+			    void *sva_desc_hva);
 	int (*attach_dev)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *domain,
 			  u32 endpoint_id, u32 pasid, u32 pasid_bits);
 	int (*attach_dev_nested)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *domain,
@@ -132,6 +145,11 @@ struct kvm_iommu_ops {
 	int (*detach_dev_nested)(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_domain *domain,
 				 struct kvm_hyp_iommu_domain *s2_domain, u32 endpoint_id,
 				 u32 pasid);
+	void (*iotlb_inv_range)(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
+				size_t size, size_t granule, bool leaf);
+	void (*iotlb_inv_domain)(struct kvm_hyp_iommu_domain *domain);
+	void (*page_response)(struct kvm_hyp_iommu *iommu, u32 endpoint_id,
+			      void *page_response_desc_hva);
 
 	bool (*dabt_handler)(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr);
 	int (*suspend)(struct kvm_hyp_iommu *iommu);

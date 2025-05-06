@@ -1522,6 +1522,67 @@ static void handle___pkvm_host_iommu_free_domain(struct kvm_cpu_context *host_ct
 	hyp_reqs_smccc_encode(ret, host_ctxt, this_cpu_ptr(&host_hyp_reqs));
 }
 
+static void handle___pkvm_host_iommu_iotlb_inv_range(struct kvm_cpu_context *host_ctxt)
+{
+	int ret;
+	DECLARE_REG(pkvm_handle_t, domain, host_ctxt, 1);
+	DECLARE_REG(unsigned long, iova, host_ctxt, 2);
+	DECLARE_REG(size_t, size, host_ctxt, 3);
+	DECLARE_REG(size_t, granule, host_ctxt, 4);
+	DECLARE_REG(bool, leaf, host_ctxt, 5);
+
+	ret = kvm_iommu_iotlb_inv_range(domain, iova, size, granule, leaf);
+	hyp_reqs_smccc_encode(ret, host_ctxt, this_cpu_ptr(&host_hyp_reqs));
+}
+
+static void handle___pkvm_host_iommu_iotlb_inv_domain(struct kvm_cpu_context *host_ctxt)
+{
+	int ret;
+	DECLARE_REG(pkvm_handle_t, domain, host_ctxt, 1);
+
+	ret = kvm_iommu_iotlb_inv_domain(domain);
+	hyp_reqs_smccc_encode(ret, host_ctxt, this_cpu_ptr(&host_hyp_reqs));
+}
+
+static void handle___pkvm_host_iommu_page_response(struct kvm_cpu_context *host_ctxt)
+{
+	int ret;
+	DECLARE_REG(pkvm_handle_t, iommu, host_ctxt, 1);
+	DECLARE_REG(unsigned int, endpoint, host_ctxt, 2);
+	DECLARE_REG(void *, page_response_desc_hva, host_ctxt, 3);
+	DECLARE_REG(size_t, page_response_desc_size, host_ctxt, 4);
+
+	ret = kvm_iommu_page_response(iommu, endpoint, page_response_desc_hva,
+				      page_response_desc_size);
+	hyp_reqs_smccc_encode(ret, host_ctxt, this_cpu_ptr(&host_hyp_reqs));
+}
+
+static void handle___pkvm_host_iommu_block_sva_pasid(struct kvm_cpu_context *host_ctxt)
+{
+	int ret;
+	DECLARE_REG(pkvm_handle_t, iommu, host_ctxt, 1);
+	DECLARE_REG(pkvm_handle_t, domain, host_ctxt, 2);
+	DECLARE_REG(unsigned int, endpoint, host_ctxt, 3);
+	DECLARE_REG(unsigned int, pasid, host_ctxt, 4);
+
+	ret = kvm_iommu_block_sva_pasid(iommu, domain, endpoint, pasid);
+	hyp_reqs_smccc_encode(ret, host_ctxt, this_cpu_ptr(&host_hyp_reqs));
+}
+
+static void handle___pkvm_host_iommu_sva_bind_dev(struct kvm_cpu_context *host_ctxt)
+{
+	int ret;
+	DECLARE_REG(pkvm_handle_t, iommu, host_ctxt, 1);
+	DECLARE_REG(pkvm_handle_t, domain, host_ctxt, 2);
+	DECLARE_REG(unsigned int, endpoint, host_ctxt, 3);
+	DECLARE_REG(unsigned int, pasid, host_ctxt, 4);
+	DECLARE_REG(void *, sva_desc_hva, host_ctxt, 5);
+	DECLARE_REG(size_t, sva_desc_size, host_ctxt, 6);
+
+	ret = kvm_iommu_sva_bind_dev(iommu, domain, endpoint, pasid, sva_desc_hva, sva_desc_size);
+	hyp_reqs_smccc_encode(ret, host_ctxt, this_cpu_ptr(&host_hyp_reqs));
+}
+
 static void handle___pkvm_host_iommu_attach_dev(struct kvm_cpu_context *host_ctxt)
 {
 	int ret;
@@ -1701,10 +1762,15 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__pkvm_hyp_alloc_mgt_reclaim),
 	HANDLE_FUNC(__pkvm_host_iommu_alloc_domain),
 	HANDLE_FUNC(__pkvm_host_iommu_free_domain),
+	HANDLE_FUNC(__pkvm_host_iommu_block_sva_pasid),
+	HANDLE_FUNC(__pkvm_host_iommu_sva_bind_dev),
 	HANDLE_FUNC(__pkvm_host_iommu_attach_dev),
 	HANDLE_FUNC(__pkvm_host_iommu_attach_dev_nested),
 	HANDLE_FUNC(__pkvm_host_iommu_detach_dev),
 	HANDLE_FUNC(__pkvm_host_iommu_detach_dev_nested),
+	HANDLE_FUNC(__pkvm_host_iommu_iotlb_inv_range),
+	HANDLE_FUNC(__pkvm_host_iommu_iotlb_inv_domain),
+	HANDLE_FUNC(__pkvm_host_iommu_page_response),
 	HANDLE_FUNC(__pkvm_host_iommu_map_pages),
 	HANDLE_FUNC(__pkvm_host_iommu_unmap_pages),
 	HANDLE_FUNC(__pkvm_host_iommu_iova_to_phys),
