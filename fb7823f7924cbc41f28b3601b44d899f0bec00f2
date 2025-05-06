@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5286031_b6137dea",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 86
+      },
+      "lineNbr": 1635,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-06T12:37:22Z",
+      "side": 1,
+      "message": "`ret` is previously used as a linux error code but now we are returning an ffa error code.",
+      "range": {
+        "startLine": 1635,
+        "startChar": 2,
+        "endLine": 1635,
+        "endChar": 5
+      },
+      "revId": "fb7823f7924cbc41f28b3601b44d899f0bec00f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

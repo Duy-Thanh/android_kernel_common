@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "694a64d4_e3ef8a71",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-06T12:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16076b11_7a25c4d0",
+      "range": {
+        "startLine": 1640,
+        "startChar": 3,
+        "endLine": 1640,
+        "endChar": 66
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df3cf4cc_56b175d6",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I looked at that, don\u0027t we need to fill in a request structure for it?\n\nI still think `ARM_EXCEPTION_IRQ` is the most fitting, because the most likely reason TZ returned was a non-secure interrupts that the host needs to handle.",
       "parentUuid": "df3cf4cc_56b175d6",
+      "range": {
+        "startLine": 1642,
+        "startChar": 16,
+        "endLine": 1642,
+        "endChar": 33
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e36e643_04f382f7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1642,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-06T12:37:22Z",
+      "side": 1,
+      "message": "We will still exit to the host even though we don\u0027t have an explicit hyp request. I suggest we move the code that does :\n\n```\n\twrite_sysreg_el2(read_sysreg_el2(SYS_ELR) - 4, SYS_ELR);\n\t*exit_code \u003d ARM_EXCEPTION_HYP_REQ;\n```\n\nto a function `kvm_guest_replay_ffa_call` to avoid duplicating it.",
+      "parentUuid": "baa1748f_c48a7f76",
       "range": {
         "startLine": 1642,
         "startChar": 16,
