@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "caaa27ab_eb457608",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-06T20:28:39Z",
+      "side": 1,
+      "message": "... that don\u0027t specify other values like FFA_PARTITION_INFO_GET_REGS and FFA_MSG_SEND_DIRECT_RESP2 for instance.",
+      "revId": "ce811e50ab299346a86a4cb934a4dab398374097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16ec2df0_cded2e56",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 19
