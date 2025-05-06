@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e9d7a0f_d0e9aa40",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-05-06T22:04:42Z",
+      "side": 1,
+      "message": "default",
+      "range": {
+        "startLine": 315,
+        "startChar": 8,
+        "endLine": 315,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "39ad5f84_aacfcdc1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/module/Kconfig",
+              "range": {
+                "startLine": 315,
+                "startChar": 0,
+                "endLine": 316,
+                "endChar": 0
+              },
+              "replacement": "        default y\n"
+            }
+          ]
+        }
+      ],
+      "revId": "33e68cc59e3a2de34ce6a3161d6deae6f7382627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
