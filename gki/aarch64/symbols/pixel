@@ -2128,6 +2128,7 @@
   trace_handle_return
   __traceiter_android_rvh_gup_longterm_locked
   __traceiter_android_rvh_hw_protection_shutdown
+  __traceiter_android_rvh_mapping_shrinkable
   __traceiter_android_rvh_meminfo_proc_show
   __traceiter_android_rvh_task_fits_cpu
   __traceiter_android_rvh_ufs_reprogram_all_keys
@@ -2152,6 +2153,7 @@
   __traceiter_android_vh_platform_pci_set_power_state
   __traceiter_android_vh_post_alloc_hook
   __traceiter_android_vh_ra_alloc_retry
+  __traceiter_android_vh_rmqueue
   __traceiter_android_vh_rust_binder_restore_priority
   __traceiter_android_vh_rust_binder_set_priority
   __traceiter_android_vh_scheduler_tick
@@ -2186,6 +2188,7 @@
   trace_output_call
   __tracepoint_android_rvh_gup_longterm_locked
   __tracepoint_android_rvh_hw_protection_shutdown
+  __tracepoint_android_rvh_mapping_shrinkable
   __tracepoint_android_rvh_meminfo_proc_show
   __tracepoint_android_rvh_task_fits_cpu
   __tracepoint_android_rvh_ufs_reprogram_all_keys
@@ -2210,6 +2213,7 @@
   __tracepoint_android_vh_platform_pci_set_power_state
   __tracepoint_android_vh_post_alloc_hook
   __tracepoint_android_vh_ra_alloc_retry
+  __tracepoint_android_vh_rmqueue
   __tracepoint_android_vh_rust_binder_restore_priority
   __tracepoint_android_vh_rust_binder_set_priority
   __tracepoint_android_vh_scheduler_tick
