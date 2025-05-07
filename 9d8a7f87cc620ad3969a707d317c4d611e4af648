@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06153b23_e64fc052",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-07T15:42:51Z",
+      "side": 1,
+      "message": "This should also be updated otherwise it will error out on build (as ffa_set_retval function signature has changed).",
+      "range": {
+        "startLine": 1481,
+        "startChar": 2,
+        "endLine": 1481,
+        "endChar": 16
+      },
+      "revId": "9d8a7f87cc620ad3969a707d317c4d611e4af648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
