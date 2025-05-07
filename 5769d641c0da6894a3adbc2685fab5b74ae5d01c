@@ -22,6 +22,30 @@
       },
       "revId": "5769d641c0da6894a3adbc2685fab5b74ae5d01c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aede41bf_6a2f0b68",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1905,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-05-07T08:38:44Z",
+      "side": 1,
+      "message": "I just double checked, vmemmap covers all memory even no-map, so if find_mem_ranges returns a valid region, it would be backed by the vmemmap.\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12/arch/arm64/kvm/hyp/nvhe/mm.c#242",
+      "parentUuid": "0aa55717_b7df3e29",
+      "range": {
+        "startLine": 1905,
+        "startChar": 12,
+        "endLine": 1905,
+        "endChar": 28
+      },
+      "revId": "5769d641c0da6894a3adbc2685fab5b74ae5d01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
