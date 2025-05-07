@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cab3da5_3a5bb13a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-07T17:51:28Z",
+      "side": 1,
+      "message": "This should have a return code, so the host can retry this if TZ got interrupted (by a non-secure interrupt or just yielded).\n\nThe way Trusty currently works (other TEEs might do things differently, I think some of them support yielding direct messages):\n* The VM availability messages are non-yielding direct messages (handled with interrupts disabled). Since it can\u0027t block, the handler just queues up work to be done later (top-half/bottom-half-style).\n* Trusty still needs cycles to do actual work. The direct message is followed by an `FFA_RUN` which _can_ be interrupted, so we need to run it as many times as needed.\n* We poll in between `FFA_RUN` calls to check whether the VM availability message has completed.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "703e66f0_06921c0c",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
@@ -38,6 +55,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "713e1f7b_be7a3b85",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-07T17:51:28Z",
+      "side": 1,
+      "message": "This should return `-EINTR` or `-EAGAIN` if the VM availability notification needs a retry.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6646e06e_c75b3e7a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-07T17:51:28Z",
+      "side": 1,
+      "message": "This should also return a code.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809ad9a6_a0f42a66",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-07T17:51:28Z",
+      "side": 1,
+      "message": "Does this return to the host? If TZ got a non-secure interrupts, the host needs to handle that before retrying.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70509a0e_95d07f88",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-07T17:51:28Z",
+      "side": 1,
+      "message": "This should also be retried somehow.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0bb3487_ff71d3a7",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 87
@@ -49,6 +134,23 @@
       "writtenOn": "2025-05-07T17:34:15Z",
       "side": 1,
       "message": "Are you only doing the notification if the reclaim returned `-EBUSY`? That seems wrong, we should send the destruction message even if there are no pages to reclaim. The SP might have other resources to release, other than just the FF-A pages.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd97969b_9109fc64",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-07T17:51:28Z",
+      "side": 1,
+      "message": "We should also check the return code here and retry if TZ got interrupted.",
       "revId": "3f52acc51e52460793d729815c7525273e7a46de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
