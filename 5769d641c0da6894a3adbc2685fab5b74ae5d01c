@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa55717_b7df3e29",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1905,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-07T08:28:51Z",
+      "side": 1,
+      "message": "I don\u0027t recall whether or not we have valid vmemmap entries for no-map regions. Please can you check?",
+      "range": {
+        "startLine": 1905,
+        "startChar": 12,
+        "endLine": 1905,
+        "endChar": 28
+      },
+      "revId": "5769d641c0da6894a3adbc2685fab5b74ae5d01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
