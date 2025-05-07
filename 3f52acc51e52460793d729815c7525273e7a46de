@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703e66f0_06921c0c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-07T16:42:27Z",
+      "side": 1,
+      "message": "That smp_store_release does not look useful. This function is protected by a spinlock and no-one else is reading that vm_avail_bitmap.\n\nAlso we\u0027ve set already vm_avail_bitmap for all the SPs. Is there any point using that NOTIFIED_ALL?",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
