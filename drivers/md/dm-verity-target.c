@@ -30,7 +30,7 @@
 #define DM_VERITY_ENV_VAR_NAME		"DM_VERITY_ERR_BLOCK_NR"
 
 #define DM_VERITY_DEFAULT_PREFETCH_SIZE	262144
-#define DM_VERITY_USE_BH_DEFAULT_BYTES	8192
+#define DM_VERITY_VERIFY_IN_TASKLET_DEFAULT_BYTES	8192
 
 #define DM_VERITY_MAX_CORRUPTED_ERRS	100
 
@@ -50,16 +50,16 @@ static unsigned int dm_verity_prefetch_cluster = DM_VERITY_DEFAULT_PREFETCH_SIZE
 
 module_param_named(prefetch_cluster, dm_verity_prefetch_cluster, uint, 0644);
 
-static unsigned int dm_verity_use_bh_bytes[4] = {
-	DM_VERITY_USE_BH_DEFAULT_BYTES,	// IOPRIO_CLASS_NONE
-	DM_VERITY_USE_BH_DEFAULT_BYTES,	// IOPRIO_CLASS_RT
-	DM_VERITY_USE_BH_DEFAULT_BYTES,	// IOPRIO_CLASS_BE
+static unsigned int dm_verity_should_verify_in_tasklet_bytes[4] = {
+	DM_VERITY_VERIFY_IN_TASKLET_DEFAULT_BYTES,	// IOPRIO_CLASS_NONE
+	DM_VERITY_VERIFY_IN_TASKLET_DEFAULT_BYTES,	// IOPRIO_CLASS_RT
+	DM_VERITY_VERIFY_IN_TASKLET_DEFAULT_BYTES,	// IOPRIO_CLASS_BE
 	0				// IOPRIO_CLASS_IDLE
 };
 
-module_param_array_named(use_bh_bytes, dm_verity_use_bh_bytes, uint, NULL, 0644);
+module_param_array_named(use_bh_bytes, dm_verity_should_verify_in_tasklet_bytes, uint, NULL, 0644);
 
-static DEFINE_STATIC_KEY_FALSE(use_bh_wq_enabled);
+static DEFINE_STATIC_KEY_FALSE(verify_in_tasklet_enabled);
 
 /* Is at least one dm-verity instance using ahash_tfm instead of shash_tfm? */
 static DEFINE_STATIC_KEY_FALSE(ahash_enabled);
@@ -238,7 +238,7 @@ static int verity_hash_mb(struct dm_verity *v, struct dm_verity_io *io,
 		/* Note: in practice num_blocks is always 1 in this case. */
 		for (i = 0; i < num_blocks; i++) {
 			r = verity_ahash(v, io, data[i], len, digests[i],
-					 !io->in_bh);
+					 !io->in_tasklet);
 			if (r)
 				break;
 		}
@@ -353,7 +353,7 @@ static int verity_verify_level(struct dm_verity *v, struct dm_verity_io *io,
 
 	verity_hash_at_level(v, block, level, &hash_block, &offset);
 
-	if (static_branch_unlikely(&use_bh_wq_enabled) && io->in_bh) {
+	if (static_branch_unlikely(&verify_in_tasklet_enabled) && io->in_tasklet) {
 		data = dm_bufio_get(v->bufio, hash_block, &buf);
 		if (data == NULL) {
 			/*
@@ -380,14 +380,14 @@ static int verity_verify_level(struct dm_verity *v, struct dm_verity_io *io,
 		}
 
 		r = verity_hash(v, io, data, 1 << v->hash_dev_block_bits,
-				io->tmp_digest, !io->in_bh);
+				io->tmp_digest, !io->in_tasklet);
 		if (unlikely(r < 0))
 			goto release_ret_r;
 
 		if (likely(memcmp(io->tmp_digest, want_digest,
 				  v->digest_size) == 0))
 			aux->hash_verified = 1;
-		else if (static_branch_unlikely(&use_bh_wq_enabled) && io->in_bh) {
+		else if (static_branch_unlikely(&verify_in_tasklet_enabled) && io->in_tasklet) {
 			/*
 			 * Error handling code (FEC included) cannot be run in a
 			 * tasklet since it may sleep, so fallback to work-queue.
@@ -509,7 +509,7 @@ static int verity_handle_data_hash_mismatch(struct dm_verity *v,
 	sector_t blkno = block->blkno;
 	u8 *data = block->data;
 
-	if (static_branch_unlikely(&use_bh_wq_enabled) && io->in_bh) {
+	if (static_branch_unlikely(&verify_in_tasklet_enabled) && io->in_tasklet) {
 		/*
 		 * Error handling code (FEC included) cannot be run in the
 		 * BH workqueue, so fallback to a standard workqueue.
@@ -599,7 +599,7 @@ static int verity_verify_io(struct dm_verity_io *io)
 
 	io->num_pending = 0;
 
-	if (static_branch_unlikely(&use_bh_wq_enabled) && io->in_bh) {
+	if (static_branch_unlikely(&verify_in_tasklet_enabled) && io->in_tasklet) {
 		/*
 		 * Copy the iterator in case we need to restart
 		 * verification in a work-queue.
@@ -699,7 +699,7 @@ static void verity_finish_io(struct dm_verity_io *io, blk_status_t status)
 	bio->bi_end_io = io->orig_bi_end_io;
 	bio->bi_status = status;
 
-	if (!static_branch_unlikely(&use_bh_wq_enabled) || !io->in_bh)
+	if (!static_branch_unlikely(&verify_in_tasklet_enabled) || !io->in_tasklet)
 		verity_fec_finish_io(io);
 
 	if (unlikely(status != BLK_STS_OK) &&
@@ -727,17 +727,17 @@ static void verity_work(struct work_struct *w)
 {
 	struct dm_verity_io *io = container_of(w, struct dm_verity_io, work);
 
-	io->in_bh = false;
+	io->in_tasklet = false;
 
 	verity_finish_io(io, errno_to_blk_status(verity_verify_io(io)));
 }
 
-static void verity_bh_work(struct work_struct *w)
+static void verity_verify_in_tasklet(struct work_struct *w)
 {
-	struct dm_verity_io *io = container_of(w, struct dm_verity_io, bh_work);
+	struct dm_verity_io *io = container_of(w, struct dm_verity_io, tasklet_work);
 	int err;
 
-	io->in_bh = true;
+	io->in_tasklet = true;
 	err = verity_verify_io(io);
 	if (err == -EAGAIN || err == -ENOMEM) {
 		/* fallback to retrying with work-queue */
@@ -749,10 +749,10 @@ static void verity_bh_work(struct work_struct *w)
 	verity_finish_io(io, errno_to_blk_status(err));
 }
 
-static inline bool verity_use_bh(unsigned int bytes, unsigned short ioprio)
+static inline bool verity_should_verify_in_tasklet(unsigned int bytes, unsigned short ioprio)
 {
 	return ioprio <= IOPRIO_CLASS_IDLE &&
-		bytes <= READ_ONCE(dm_verity_use_bh_bytes[ioprio]);
+		bytes <= READ_ONCE(dm_verity_should_verify_in_tasklet_bytes[ioprio]);
 }
 
 static void verity_end_io(struct bio *bio)
@@ -769,14 +769,11 @@ static void verity_end_io(struct bio *bio)
 		return;
 	}
 
-	if (static_branch_unlikely(&use_bh_wq_enabled) && io->v->use_bh_wq &&
-		verity_use_bh(bytes, ioprio)) {
-		if (in_hardirq() || irqs_disabled()) {
-			INIT_WORK(&io->bh_work, verity_bh_work);
-			queue_work(system_bh_wq, &io->bh_work);
-		} else {
-			verity_bh_work(&io->bh_work);
-		}
+	if (static_branch_unlikely(&verify_in_tasklet_enabled) && io->v->verify_in_tasklet &&
+		verity_should_verify_in_tasklet(bytes, ioprio) &&
+		!need_resched() &&
+		!(in_hardirq() || irqs_disabled())) {
+		verity_verify_in_tasklet(&io->tasklet_work);
 	} else {
 		INIT_WORK(&io->work, verity_work);
 		queue_work(io->v->verify_wq, &io->work);
@@ -950,7 +947,7 @@ static void verity_status(struct dm_target *ti, status_type_t type,
 			args++;
 		if (v->validated_blocks)
 			args++;
-		if (v->use_bh_wq)
+		if (v->verify_in_tasklet)
 			args++;
 		if (v->signature_key_desc)
 			args += DM_VERITY_ROOT_HASH_VERIFICATION_OPTS;
@@ -990,7 +987,7 @@ static void verity_status(struct dm_target *ti, status_type_t type,
 			DMEMIT(" " DM_VERITY_OPT_IGN_ZEROES);
 		if (v->validated_blocks)
 			DMEMIT(" " DM_VERITY_OPT_AT_MOST_ONCE);
-		if (v->use_bh_wq)
+		if (v->verify_in_tasklet)
 			DMEMIT(" " DM_VERITY_OPT_TASKLET_VERIFY);
 		sz = verity_fec_status_table(v, sz, result, maxlen);
 		if (v->signature_key_desc)
@@ -1171,8 +1168,8 @@ static void verity_dtr(struct dm_target *ti)
 
 	kfree(v->signature_key_desc);
 
-	if (v->use_bh_wq)
-		static_branch_dec(&use_bh_wq_enabled);
+	if (v->verify_in_tasklet)
+		static_branch_dec(&verify_in_tasklet_enabled);
 
 	kfree(v);
 
@@ -1335,8 +1332,9 @@ static int verity_parse_opt_args(struct dm_arg_set *as, struct dm_verity *v,
 			continue;
 
 		} else if (!strcasecmp(arg_name, DM_VERITY_OPT_TASKLET_VERIFY)) {
-			v->use_bh_wq = true;
-			static_branch_inc(&use_bh_wq_enabled);
+			v->verify_in_tasklet = true;
+			static_branch_inc(&verify_in_tasklet_enabled);
+			DMINFO("dm-verity verify in tasklet ON");
 			continue;
 
 		} else if (verity_is_fec_opt_arg(arg_name)) {
@@ -1372,6 +1370,10 @@ static int verity_parse_opt_args(struct dm_arg_set *as, struct dm_verity *v,
 		return -EINVAL;
 	} while (argc && !r);
 
+	if (!v->verify_in_tasklet) {
+		DMINFO("dm-verity verify in tasklet OFF");
+	}
+
 	return r;
 }
 
@@ -1399,7 +1401,7 @@ static int verity_setup_hash_alg(struct dm_verity *v, const char *alg_name)
 	 * only needs to be handled in one place.
 	 */
 	ahash = crypto_alloc_ahash(alg_name, 0,
-				   v->use_bh_wq ? CRYPTO_ALG_ASYNC : 0);
+				   v->verify_in_tasklet ? CRYPTO_ALG_ASYNC : 0);
 	if (IS_ERR(ahash)) {
 		ti->error = "Cannot initialize hash function";
 		return PTR_ERR(ahash);
@@ -1710,7 +1712,7 @@ static int verity_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	v->bufio = dm_bufio_client_create(v->hash_dev->bdev,
 		1 << v->hash_dev_block_bits, 1, sizeof(struct buffer_aux),
 		dm_bufio_alloc_callback, NULL,
-		v->use_bh_wq ? DM_BUFIO_CLIENT_NO_SLEEP : 0);
+		v->verify_in_tasklet ? DM_BUFIO_CLIENT_NO_SLEEP : 0);
 	if (IS_ERR(v->bufio)) {
 		ti->error = "Cannot initialize dm-bufio";
 		r = PTR_ERR(v->bufio);
