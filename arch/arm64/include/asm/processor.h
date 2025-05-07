@@ -117,6 +117,12 @@ struct debug_info {
 #endif
 };
 
+enum fp_type {
+	FP_STATE_CURRENT,	/* Save based on current task state. */
+	FP_STATE_FPSIMD,
+	FP_STATE_SVE,
+};
+
 struct cpu_context {
 	unsigned long x19;
 	unsigned long x20;
@@ -147,8 +153,13 @@ struct thread_struct {
 		struct user_fpsimd_state fpsimd_state;
 	} uw;
 
+<<<<<<< HEAD   (9014c9 UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 	ANDROID_VENDOR_DATA(1);
 
+||||||| BASE
+=======
+	enum fp_type		fp_type;	/* registers FPSIMD or SVE? */
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 	unsigned int		fpsimd_cpu;
 	void			*sve_state;	/* SVE registers, if any */
 	unsigned int		sve_vl;		/* SVE vector length */

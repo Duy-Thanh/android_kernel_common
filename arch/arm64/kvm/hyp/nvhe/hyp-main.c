@@ -47,6 +47,8 @@ static DEFINE_PER_CPU(struct pkvm_loaded_state, loaded_state);
 
 DEFINE_PER_CPU(struct kvm_nvhe_init_params, kvm_init_params);
 
+unsigned int kvm_host_sve_max_vl;
+
 void __kvm_hyp_host_forward_smc(struct kvm_cpu_context *host_ctxt);
 
 typedef void (*shadow_entry_exit_handler_fn)(struct kvm_vcpu *, struct kvm_vcpu *);
@@ -744,6 +746,7 @@ static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 	struct kvm_vcpu *vcpu;
 	int ret = ARM_EXCEPTION_IL;
 
+<<<<<<< HEAD   (9014c9 UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 	vcpu = get_current_vcpu(host_ctxt, 1, &shadow_state);
 	if (!vcpu)
 		goto out;
@@ -811,6 +814,13 @@ static void handle___pkvm_host_donate_guest(struct kvm_cpu_context *host_ctxt)
 	}
 out:
 	cpu_reg(host_ctxt, 1) =  ret;
+||||||| BASE
+	cpu_reg(host_ctxt, 1) =  __kvm_vcpu_run(kern_hyp_va(vcpu));
+=======
+	fpsimd_lazy_switch_to_guest(kern_hyp_va(vcpu));
+	cpu_reg(host_ctxt, 1) =  __kvm_vcpu_run(kern_hyp_va(vcpu));
+	fpsimd_lazy_switch_to_host(kern_hyp_va(vcpu));
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 }
 
 static void handle___kvm_adjust_pc(struct kvm_cpu_context *host_ctxt)
@@ -1180,10 +1190,19 @@ void handle_trap(struct kvm_cpu_context *host_ctxt)
 	case ESR_ELx_EC_SMC64:
 		handle_host_smc(host_ctxt);
 		break;
+<<<<<<< HEAD   (9014c9 UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 	case ESR_ELx_EC_FP_ASIMD:
 	case ESR_ELx_EC_SVE:
 		fpsimd_host_restore();
 		break;
+||||||| BASE
+	case ESR_ELx_EC_SVE:
+		sysreg_clear_set(cptr_el2, CPTR_EL2_TZ, 0);
+		isb();
+		sve_cond_update_zcr_vq(ZCR_ELx_LEN_MASK, SYS_ZCR_EL2);
+		break;
+=======
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 	case ESR_ELx_EC_IABT_LOW:
 	case ESR_ELx_EC_DABT_LOW:
 		handle_host_mem_abort(host_ctxt);
