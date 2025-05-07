@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e005f0_d383bfa7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1642,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-07T15:16:17Z",
+      "side": 1,
+      "message": "dropped this part",
+      "parentUuid": "1e36e643_04f382f7",
+      "range": {
+        "startLine": 1642,
+        "startChar": 16,
+        "endLine": 1642,
+        "endChar": 33
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cff099e9_7c984c30",
@@ -285,6 +309,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aadc60d8_0fa27013",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-07T15:16:17Z",
+      "side": 1,
+      "message": "Now I do the call very early on from `init_pkvm_hyp_vm` for creation msg",
+      "parentUuid": "1741e949_c4464134",
+      "range": {
+        "startLine": 1645,
+        "startChar": 3,
+        "endLine": 1645,
+        "endChar": 19
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f480c25d_2b88498c",
@@ -322,6 +370,30 @@
       "side": 1,
       "message": "Sure, as long as you don\u0027t make it conditional on `nr_busy`. There was a bug earlier where the availability messages wouldn\u0027t get sent from `__pkvm_reclaim_dying_guest_ffa_resources` if `nr_busy \u003d\u003d 0`.\n\nThere is one argument in favor of doing it separately: we only need to send the availability messages once, not once per page in a loop.\n\nOne minor note: an earlier patchset had the call in `__pkvm_start_teardown_vm` but got some feedback to move it out into its own function.",
       "parentUuid": "f480c25d_2b88498c",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 0
+      },
+      "revId": "74425c97eaa0680b356f5d748bf5acf02c633752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d34b4d70_71d88b30",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-07T15:16:17Z",
+      "side": 1,
+      "message": "Yes, but your logic from kvm_notify_vm_availability prevents the destruction message from being sent multiple times if it was already sent with success. Feel free to open this again if needed.",
+      "parentUuid": "29b64365_12fcd198",
       "range": {
         "startLine": 379,
         "startChar": 0,
