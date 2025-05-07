@@ -57,6 +57,8 @@
   balance_push_callback
   base64_decode
   bcmp
+  bdev_end_io_acct
+  bdev_start_io_acct
   bin2hex
   __bio_add_page
   bio_add_page
@@ -99,6 +101,8 @@
   blk_mq_unfreeze_queue
   blk_mq_unquiesce_tagset
   blk_put_queue
+  blk_queue_enter
+  blk_queue_exit
   blk_queue_flag_clear
   blk_queue_flag_set
   blk_queue_io_min
@@ -156,6 +160,7 @@
   class_register
   class_unregister
   cleancache_register_ops
+  clean_page_buffers
   cleanup_srcu_struct
   clear_page
   __ClearPageMovable
@@ -975,6 +980,7 @@
   em_pd_get
   enable_irq
   enable_percpu_irq
+  end_page_writeback
   ether_setup
   eth_mac_addr
   ethtool_op_get_link
@@ -1020,6 +1026,7 @@
   flush_work
   __flush_workqueue
   folio_end_private_2
+  folio_end_writeback
   __folio_lock
   __folio_put
   folio_unlock
@@ -2274,6 +2281,7 @@
   set_page_dirty_lock
   __SetPageMovable
   set_page_private
+  set_page_writeback
   set_reclaim_params
   set_task_cpu
   set_user_nice
@@ -2508,6 +2516,7 @@
   subsys_system_register
   suspend_set_ops
   swapcache_mapping
+  swap_page_sector
   __sw_hweight16
   __sw_hweight32
   __sw_hweight64
@@ -2704,6 +2713,8 @@
   __traceiter_android_vh_setscheduler_uclamp
   __traceiter_android_vh_set_task_comm
   __traceiter_android_vh_si_meminfo_adjust
+  __traceiter_android_vh_swap_bdev_readpage
+  __traceiter_android_vh_swap_bdev_writepage
   __traceiter_android_vh_sysrq_crash
   __traceiter_android_vh_tune_swappiness
   __traceiter_android_vh_timerfd_create
@@ -2839,6 +2850,8 @@
   __tracepoint_android_vh_setscheduler_uclamp
   __tracepoint_android_vh_set_task_comm
   __tracepoint_android_vh_si_meminfo_adjust
+  __tracepoint_android_vh_swap_bdev_readpage
+  __tracepoint_android_vh_swap_bdev_writepage
   __tracepoint_android_vh_sysrq_crash
   __tracepoint_android_vh_tune_swappiness
   __tracepoint_android_vh_timerfd_create
