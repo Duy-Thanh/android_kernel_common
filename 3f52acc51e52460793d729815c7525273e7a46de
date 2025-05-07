@@ -34,6 +34,23 @@
       "parentUuid": "703e66f0_06921c0c",
       "revId": "3f52acc51e52460793d729815c7525273e7a46de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0bb3487_ff71d3a7",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-07T17:34:15Z",
+      "side": 1,
+      "message": "Are you only doing the notification if the reclaim returned `-EBUSY`? That seems wrong, we should send the destruction message even if there are no pages to reclaim. The SP might have other resources to release, other than just the FF-A pages.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
