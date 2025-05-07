@@ -16,6 +16,24 @@
       "message": "That smp_store_release does not look useful. This function is protected by a spinlock and no-one else is reading that vm_avail_bitmap.\n\nAlso we\u0027ve set already vm_avail_bitmap for all the SPs. Is there any point using that NOTIFIED_ALL?",
       "revId": "3f52acc51e52460793d729815c7525273e7a46de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75703b62_ec6aa5bf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-07T17:27:25Z",
+      "side": 1,
+      "message": "\u003e That smp_store_release does not look useful. This function is protected by a spinlock and no-one else is reading that vm_avail_bitmap.\n\nThere is one read of this variable that is not protected by the spinlock (or at least there was when I wrote it). If that\u0027s still there, do we not need the atomic store?\n\n\u003e Is there any point using that NOTIFIED_ALL?\n\nI figured using an exact value in a macro to set and check would be less error-prone than using `(1 \u003c\u003c num_vm_avail_sps) - 1` everywhere.",
+      "parentUuid": "703e66f0_06921c0c",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
