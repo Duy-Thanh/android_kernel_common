@@ -48,12 +48,13 @@ spinlock_t uid_lock[UID_HASH_NUMS];
 	hlist_for_each_entry_safe(uid_entry, tmp,\
 			&hash_table[bkt], hash)
 
+#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
 #define UPDATE_ANDROID_OEM_DATA(target, source, task, type) \
 	trace_android_vh_update_uid_stats(target, source, task, type)
 
-#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
 #define OEM_DATA(x) x->android_oem_data1
 #else
+#define UPDATE_ANDROID_OEM_DATA(target, source, task, type)
 #define OEM_DATA(x) 0
 #endif
 
