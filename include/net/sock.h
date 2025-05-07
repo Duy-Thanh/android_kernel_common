@@ -1470,13 +1470,47 @@ proto_memory_pressure(struct proto *prot)
 
 
 #ifdef CONFIG_PROC_FS
+<<<<<<< HEAD   (57b142 Merge 93cc7c7f9b83 ("KVM: arm64: Eagerly switch ZCR_EL{1,2}")
 /* Called with local bh disabled */
 void sock_prot_inuse_add(struct net *net, struct proto *prot, int inc);
+||||||| BASE
+#define PROTO_INUSE_NR	64	/* should be enough for the first time */
+struct prot_inuse {
+	int val[PROTO_INUSE_NR];
+};
+
+static inline void sock_prot_inuse_add(const struct net *net,
+				       const struct proto *prot, int val)
+{
+	this_cpu_add(net->core.prot_inuse->val[prot->inuse_idx], val);
+}
+=======
+#define PROTO_INUSE_NR	64	/* should be enough for the first time */
+struct prot_inuse {
+	int val[PROTO_INUSE_NR];
+};
+
+static inline void sock_prot_inuse_add(const struct net *net,
+				       const struct proto *prot, int val)
+{
+	this_cpu_add(net->core.prot_inuse->val[prot->inuse_idx], val);
+}
+
+static inline void sock_inuse_add(const struct net *net, int val)
+{
+	this_cpu_add(*net->core.sock_inuse, val);
+}
+
+>>>>>>> BRANCH (16fdf2 Linux 5.15.181)
 int sock_prot_inuse_get(struct net *net, struct proto *proto);
 int sock_inuse_get(struct net *net);
 #else
 static inline void sock_prot_inuse_add(struct net *net, struct proto *prot,
 		int inc)
+{
+}
+
+static inline void sock_inuse_add(const struct net *net, int val)
 {
 }
 #endif
