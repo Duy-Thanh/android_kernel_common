@@ -253,6 +253,19 @@ static inline unsigned long em_cpu_energy(struct em_perf_domain *pd,
 	 * max utilization to the allowed CPU capacity before calculating
 	 * effective performance.
 	 */
+<<<<<<< HEAD   (e7d23a Revert "sched/topology: Consolidate and clean up access to a)
+||||||| BASE
+	cpu = cpumask_first(to_cpumask(pd->cpus));
+	scale_cpu = arch_scale_cpu_capacity(cpu);
+	ps = &pd->table[pd->nr_perf_states - 1];
+
+	max_util = map_util_perf(max_util);
+=======
+	cpu = cpumask_first(to_cpumask(pd->cpus));
+	scale_cpu = arch_scale_cpu_capacity(cpu);
+	ps = &pd->table[pd->nr_perf_states - 1];
+
+>>>>>>> BRANCH (d70c07 cpufreq/sched: Explicitly synchronize limits_changed flag ha)
 	max_util = min(max_util, allowed_cpu_cap);
 
 	/*
