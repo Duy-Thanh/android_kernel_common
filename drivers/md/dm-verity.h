@@ -60,7 +60,7 @@ struct dm_verity {
 	unsigned char levels;	/* the number of tree levels */
 	unsigned char version;
 	bool hash_failed:1;	/* set if hash of any block failed */
-	bool use_bh_wq:1;	/* try to verify in BH wq before normal work-queue */
+	bool verify_inline:1;	/* try to verify inline before normal work-queue */
 	unsigned char mb_max_msgs; /* max multibuffer hashing interleaving factor */
 	unsigned int digest_size;	/* digest size for the current hash algorithm */
 	unsigned int hash_reqsize; /* the size of temporary space for crypto */
@@ -101,11 +101,17 @@ struct dm_verity_io {
 
 	sector_t block;
 	unsigned int n_blocks;
-	bool in_bh;
+	/*
+	 * True if verification is in a context where sleeping is not ok.
+	 * This is applicable to scenarios where some hashes are not in
+	 * the cache and verification cannot block until they are read
+	 * from disk.
+	 * */
+	bool in_atomic;
 	bool had_mismatch;
 
 	struct work_struct work;
-	struct work_struct bh_work;
+	struct work_struct inline_work;
 
 	u8 tmp_digest[HASH_MAX_DIGESTSIZE];
 

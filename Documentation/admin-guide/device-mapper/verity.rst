@@ -143,14 +143,19 @@ root_hash_sig_key_desc <key_description>
 
 try_verify_in_tasklet
     If verity hashes are in cache and the IO size does not exceed the limit,
-    verify data blocks in bottom half instead of workqueue. This option can
-    reduce IO latency. The size limits can be configured via
+    verify data blocks in an atomic context (in-line) instead of workqueue.
+    This option can reduce IO latency. The size limits can be configured via
     /sys/module/dm_verity/parameters/use_bh_bytes. The four parameters
     correspond to limits for IOPRIO_CLASS_NONE, IOPRIO_CLASS_RT,
     IOPRIO_CLASS_BE and IOPRIO_CLASS_IDLE in turn.
     For example:
     <none>,<rt>,<be>,<idle>
     4096,4096,4096,4096
+    Note that despite the name of the parameter, verification is not happening
+    in tasklets.
+
+try_verify_inline
+    An alias for try_verify_in_tasklet option.
 
 Theory of operation
 ===================
