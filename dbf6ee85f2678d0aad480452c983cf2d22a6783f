@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d70f41_17e0b23c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4043531
+      },
+      "writtenOn": "2025-05-07T04:52:15Z",
+      "side": 1,
+      "message": "merge commit details ( git cherry-pick will not work )\ncommit 6f0f335b73a9264050e031879ad04c551c05959c\nMerge: baad97ed29be d678c63534ed\nAuthor: Jani Nikula \u003cjani.nikula@intel.com\u003e\nDate:   Tue Jan 7 18:07:54 2025 +0200\n \n    Merge drm/drm-next into drm-intel-next\n \n    Backmerge to get the DRM DP payload and ACT helpers to drm-intel-next.\n \n    Signed-off-by: Jani Nikula \u003cjani.nikula@intel.com\u003e",
+      "revId": "dbf6ee85f2678d0aad480452c983cf2d22a6783f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
