@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/415696582",
       "revId": "66556eb7b31429df232e0a72a22ac333c86181f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e3c238_32cec6c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-07T19:45:58Z",
+      "side": 1,
+      "message": "Series needs rebase. New patch needed on top of series to add the new symbols to your symbol list.",
+      "revId": "66556eb7b31429df232e0a72a22ac333c86181f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
