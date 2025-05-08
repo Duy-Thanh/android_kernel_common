@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ee96c6_cee8d684",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-08T21:03:32Z",
+      "side": 1,
+      "message": "That merge commit is a collection of smaller patches.\n\nInstead, this should be a cherrypick of the original change that landed in `drm/drm-next` (or whichever branch was merged into `drm/drm-next`).\n\nThis (1) makes it clear the change is already upstream and (2) gives us context on what this change is/why it\u0027s necessary.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
