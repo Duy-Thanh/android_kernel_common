@@ -33,6 +33,24 @@
       "message": "Series needs rebase. New patch needed on top of series to add the new symbols to your symbol list.",
       "revId": "66556eb7b31429df232e0a72a22ac333c86181f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff3284e0_7e7e2c72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-05-08T02:34:23Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "b6e3c238_32cec6c3",
+      "revId": "66556eb7b31429df232e0a72a22ac333c86181f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
