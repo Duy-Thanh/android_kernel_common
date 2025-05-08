@@ -29,3 +29,22 @@ type 'enum gunyah_rm_vm_status' changed
   'struct tracepoint __tracepoint_f2fs_write_checkpoint'
   'struct tracepoint __tracepoint_ufshcd_command'
 
+
+function symbol 'struct pci_host_bridge* devm_pci_alloc_host_bridge(struct device*, size_t)' changed
+  CRC changed from 0x2b2f7eca to 0xd4be56ce
+
+function symbol 'irqreturn_t dw_handle_msi_irq(struct dw_pcie_rp*)' changed
+  CRC changed from 0x78bbb1f5 to 0xf8b66997
+
+function symbol 'void dw_pcie_ep_reset_bar(struct dw_pcie*, enum pci_barno)' changed
+  CRC changed from 0xd6a82295 to 0x2740bf1b
+
+... 13 omitted; 16 symbols have only CRC changes
+
+type 'struct pci_host_bridge' changed
+  member 'int(* enable_device)(struct pci_host_bridge*, struct pci_dev*)' was added
+  member 'void(* disable_device)(struct pci_host_bridge*, struct pci_dev*)' was added
+  member 'int(* reset_slot)(struct pci_host_bridge*, struct pci_dev*)' was added
+  17 members ('void* release_data' .. 'u64 __kabi_reserved2') changed
+    offset changed by 192
+
