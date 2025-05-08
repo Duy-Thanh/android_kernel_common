@@ -222,6 +222,10 @@ static struct power_supply_attr power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(MODEL_NAME),
 	POWER_SUPPLY_ATTR(MANUFACTURER),
 	POWER_SUPPLY_ATTR(SERIAL_NUMBER),
+	/* Properties of type `int` continued here to minimize ABI breakage */
+	POWER_SUPPLY_ATTR(USBIF_VENDOR_ID),
+	POWER_SUPPLY_ATTR(USBIF_PRODUCT_ID),
+
 };
 #define POWER_SUPPLY_ATTR_CNT ARRAY_SIZE(power_supply_attrs)
 
