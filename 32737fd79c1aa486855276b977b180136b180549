@@ -22,6 +22,29 @@
       },
       "revId": "32737fd79c1aa486855276b977b180136b180549",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18928793_f1243b3d",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-08T21:31:23Z",
+      "side": 1,
+      "message": "This doesn\u0027t make sense, since the code doesn\u0027t use tasklets anymore.  With this CL, it will not use the BH workqueue either.  It will still use BH (a.k.a. softirq) context, and the variable and method naming should reflect that.",
+      "range": {
+        "startLine": 702,
+        "startChar": 65,
+        "endLine": 702,
+        "endChar": 75
+      },
+      "revId": "32737fd79c1aa486855276b977b180136b180549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
