@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5c13bcc_22444816",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1637,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-05-08T07:51:12Z",
+      "side": 1,
+      "message": "add `hyp_spin_lock(\u0026version_lock);` before accessing `hyp_ffa_version`; unlock after.",
+      "range": {
+        "startLine": 1637,
+        "startChar": 6,
+        "endLine": 1637,
+        "endChar": 21
+      },
+      "revId": "0937e64f4a96e68b0a91eed9ce82f952b0e2b41b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
