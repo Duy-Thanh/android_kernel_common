@@ -3148,13 +3148,7 @@ write:
 		goto done;
 	}
 
-	if (!wbc->for_reclaim)
-		need_balance_fs = true;
-	else if (has_not_enough_free_secs(sbi, 0, 0))
-		goto redirty_out;
-	else
-		set_inode_flag(inode, FI_HOT_DATA);
-
+	need_balance_fs = true;
 	err = -EAGAIN;
 	if (f2fs_has_inline_data(inode)) {
 		err = f2fs_write_inline_data(inode, folio);
@@ -3190,13 +3184,6 @@ out:
 		folio_clear_uptodate(folio);
 		folio_clear_f2fs_gcing(folio);
 	}
-
-	if (wbc->for_reclaim) {
-		f2fs_submit_merged_write_cond(sbi, NULL, page, 0, DATA);
-		clear_inode_flag(inode, FI_HOT_DATA);
-		f2fs_remove_dirty_inode(inode);
-		submitted = NULL;
-	}
 	folio_unlock(folio);
 	if (!S_ISDIR(inode->i_mode) && !IS_NOQUOTA(inode) &&
 			!F2FS_I(inode)->wb_task && allow_balance)
@@ -3222,7 +3209,7 @@ redirty_out:
 	 * file_write_and_wait_range() will see EIO error, which is critical
 	 * to return value of fsync() followed by atomic_write failure to user.
 	 */
-	if (!err || wbc->for_reclaim)
+	if (!err)
 		return AOP_WRITEPAGE_ACTIVATE;
 	folio_unlock(folio);
 	return err;

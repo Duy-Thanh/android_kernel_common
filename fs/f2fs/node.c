@@ -1713,12 +1713,7 @@ static int __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
 	if (f2fs_get_node_info(sbi, nid, &ni, !do_balance))
 		goto redirty_out;
 
-	if (wbc->for_reclaim) {
-		if (!f2fs_down_read_trylock_trace(&sbi->node_write, &lc))
-			goto redirty_out;
-	} else {
-		f2fs_down_read_trace(&sbi->node_write, &lc);
-	}
+	f2fs_down_read_trace(&sbi->node_write, &lc);
 
 	/* This page is already truncated */
 	if (unlikely(ni.blk_addr == NULL_ADDR)) {
@@ -1759,11 +1754,6 @@ static int __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
 	dec_page_count(sbi, F2FS_DIRTY_NODES);
 	f2fs_up_read_trace(&sbi->node_write, &lc);
 
-	if (wbc->for_reclaim) {
-		f2fs_submit_merged_write_cond(sbi, NULL, &folio->page, 0, NODE);
-		submitted = NULL;
-	}
-
 	folio_unlock(folio);
 
 	if (unlikely(f2fs_cp_error(sbi))) {
@@ -1790,7 +1780,6 @@ int f2fs_move_node_folio(struct folio *node_folio, int gc_type)
 		struct writeback_control wbc = {
 			.sync_mode = WB_SYNC_ALL,
 			.nr_to_write = 1,
-			.for_reclaim = 0,
 		};
 
 		f2fs_folio_wait_writeback(node_folio, NODE, true, true);
