@@ -335979,6 +335979,12 @@ function {
   parameter_id: 0x2e18f543
 }
 function {
+  id: 0x465db26a
+  return_type_id: 0xc9082b19
+  parameter_id: 0x0206e690
+  parameter_id: 0xc9082b19
+}
+function {
   id: 0x4677b893
   return_type_id: 0x00a43052
   parameter_id: 0x1c2f6323
@@ -362730,6 +362736,13 @@ function {
   id: 0x9db78784
   return_type_id: 0x6720d32f
   parameter_id: 0x00dd92af
+}
+function {
+  id: 0x9db7d032
+  return_type_id: 0x6720d32f
+  parameter_id: 0x01c5a749
+  parameter_id: 0x12651688
+  parameter_id: 0x3f3a5436
 }
 function {
   id: 0x9db81ea7
@@ -416988,6 +417001,15 @@ elf_symbol {
   full_name: "mdiobus_alloc_size"
 }
 elf_symbol {
+  id: 0x78469c04
+  name: "mdiobus_c45_modify"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaf45be97
+  type_id: 0x9173ee51
+  full_name: "mdiobus_c45_modify"
+}
+elf_symbol {
   id: 0x9743346a
   name: "mdiobus_c45_modify_changed"
   is_defined: true
@@ -446509,6 +446531,15 @@ elf_symbol {
   full_name: "v4l2_subdev_s_stream_helper"
 }
 elf_symbol {
+  id: 0x19815769
+  name: "v4l2_subdev_set_routing"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8974a9b3
+  type_id: 0x9db7d032
+  full_name: "v4l2_subdev_set_routing"
+}
+elf_symbol {
   id: 0x5ba76bf9
   name: "v4l2_subdev_set_routing_with_fmt"
   is_defined: true
@@ -449824,6 +449855,15 @@ elf_symbol {
   crc: 0x0b744ed5
   type_id: 0xfec52a83
   full_name: "xsk_tx_peek_desc"
+}
+elf_symbol {
+  id: 0x13c70bc7
+  name: "xsk_tx_peek_release_desc_batch"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x24a7e519
+  type_id: 0x465db26a
+  full_name: "xsk_tx_peek_release_desc_batch"
 }
 elf_symbol {
   id: 0xb73c4905
@@ -455142,6 +455182,7 @@ interface {
   symbol_id: 0x769fa664
   symbol_id: 0xe93a46f5
   symbol_id: 0x97be343f
+  symbol_id: 0x78469c04
   symbol_id: 0x9743346a
   symbol_id: 0x80374a08
   symbol_id: 0x5ab31615
@@ -458421,6 +458462,7 @@ interface {
   symbol_id: 0x6ddb8360
   symbol_id: 0x5b5a6294
   symbol_id: 0x404c7f49
+  symbol_id: 0x19815769
   symbol_id: 0x5ba76bf9
   symbol_id: 0xecdd8832
   symbol_id: 0xae8bff1a
@@ -458789,6 +458831,7 @@ interface {
   symbol_id: 0xb951a4e5
   symbol_id: 0xaf80b2ca
   symbol_id: 0xe31eb78b
+  symbol_id: 0x13c70bc7
   symbol_id: 0xb73c4905
   symbol_id: 0xbb650596
   symbol_id: 0x7a3f2cd6
