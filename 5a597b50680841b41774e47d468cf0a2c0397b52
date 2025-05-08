@@ -22,6 +22,30 @@
       },
       "revId": "5a597b50680841b41774e47d468cf0a2c0397b52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef63b925_74e5ce07",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-05-08T18:48:11Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "148a8d08_21b9c220",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 58
+      },
+      "revId": "5a597b50680841b41774e47d468cf0a2c0397b52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
