@@ -16,6 +16,23 @@
       "message": "tkjos@google.com",
       "revId": "a6615dd75c466311de8c6bedf1474735b5bfe902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eaf57ca_054582ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-08T17:39:50Z",
+      "side": 1,
+      "message": "create a patch on top of this to add the new symbols to your symbol list",
+      "revId": "a6615dd75c466311de8c6bedf1474735b5bfe902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
