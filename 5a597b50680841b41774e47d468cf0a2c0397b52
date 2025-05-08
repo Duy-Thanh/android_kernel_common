@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "148a8d08_21b9c220",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-08T18:35:26Z",
+      "side": 0,
+      "message": "We need to keep this to avoid breaking the KMI (regrettably, `struct kvm_vcpu` is exported on `android15-6.6`). We can probably rename it to `___unused_1;` and add a comment.",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 58
+      },
+      "revId": "5a597b50680841b41774e47d468cf0a2c0397b52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
