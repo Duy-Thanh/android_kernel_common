@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c21523_3b46392c",
+        "filename": "kernel/module/internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-05-08T09:48:35Z",
+      "side": 1,
+      "message": "should this include the prefix `CONFIG_`?",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6b3a9f48_c0c986ea",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/module/internal.h",
+              "range": {
+                "startLine": 432,
+                "startChar": 0,
+                "endLine": 433,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_TRIM_UNUSED_KSYMS\n"
+            }
+          ]
+        }
+      ],
+      "revId": "219c1748d307f81b1e3c502982994b976d928a96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
