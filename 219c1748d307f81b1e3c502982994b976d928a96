@@ -40,6 +40,30 @@
       ],
       "revId": "219c1748d307f81b1e3c502982994b976d928a96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c093c1c5_b159c65c",
+        "filename": "kernel/module/internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-05-08T09:58:26Z",
+      "side": 1,
+      "message": "Ah right, my bad this should have the `CONFIG_` prefix.",
+      "parentUuid": "85c21523_3b46392c",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 8
+      },
+      "revId": "219c1748d307f81b1e3c502982994b976d928a96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
