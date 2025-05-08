@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e59ac67b_ec06d2cf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 4048445
+      },
+      "writtenOn": "2025-05-08T15:07:19Z",
+      "side": 0,
+      "message": "IIUC prior to this patch, sync_hyp_vcpu() would always restore the host state and set `*host_data_ptr(fp_owner) \u003d FP_STATE_HOST_OWNED`, such that `guest_owns_fp_regs()` would always be `false` here.\n\nIIUC that\u0027s always been the case since this logic was introduced in commit:\n\n```\nf800c72e6feaf672d926ca55113ad6515d4c5591 (\"ANDROID: KVM: arm64: Handle save/restore of fpsimd state in protected mode\")\n```\n\n... and all the other bits we remove here are effectively reverting additions in that patch.",
+      "range": {
+        "startLine": 1072,
+        "startChar": 1,
+        "endLine": 1074,
+        "endChar": 54
+      },
+      "revId": "46aa903098c6fecedccae50264ae2eedb7686512",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fc33be6_42255f86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4048445
+      },
+      "writtenOn": "2025-05-08T15:07:19Z",
+      "side": 1,
+      "message": "From a quick scan, I think that we might just be able to revert commit:\n\n```\nf800c72e6feaf672d926ca55113ad6515d4c5591 (\"ANDROID: KVM: arm64: Handle save/restore of fpsimd state in protected mode\")\n```\n\nAFAICT that was redundant at the time it was applied to the v6.12 tree.\n\nAside from that, this mostly looks fine, but I think the addition to `fpsimd_sve_sync()` isn\u0027t necessary.",
+      "revId": "1b63593acc5fc17bc02e109063b3afcd7fbc66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc5eb32_5d50e729",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 4048445
+      },
+      "writtenOn": "2025-05-08T15:07:19Z",
+      "side": 1,
+      "message": "I think this is redundant given that __hyp_sve_restore_host() above does:\n\n```\nwrite_sysreg_s(sve_vq_from_vl(kvm_host_sve_max_vl) - 1, SYS_ZCR_EL2);\n```\n\n... and it has to do that before calling `__sve_restore_state()` to restore the host\u0027s V/Z/P/FFR register state correctly.\n\nIIUC here sve_cond_update_zcr_vq() will read ZCR_EL2 and decide there\u0027s nothing to do, so it\u0027s redundant but benign.",
+      "range": {
+        "startLine": 553,
+        "startChar": 1,
+        "endLine": 556,
+        "endChar": 2
+      },
+      "revId": "1b63593acc5fc17bc02e109063b3afcd7fbc66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "569c5aae_90e12a9f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2049,
+      "author": {
+        "id": 4048445
+      },
+      "writtenOn": "2025-05-08T15:07:19Z",
+      "side": 1,
+      "message": "Upstream we didn\u0027t have the `system_supports_sve()` check here.",
+      "range": {
+        "startLine": 2046,
+        "startChar": 8,
+        "endLine": 2049,
+        "endChar": 25
+      },
+      "revId": "1b63593acc5fc17bc02e109063b3afcd7fbc66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
