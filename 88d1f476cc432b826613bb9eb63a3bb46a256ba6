@@ -16,6 +16,24 @@
       "message": "I think that you have accidentally removed DRM_CLIENT_SELECTION flag with this resolution.\n\nThe original change is not touching this flag, and it\u0027s selected on android-mainline:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/drivers/gpu/drm/nouveau/Kconfig#8",
       "revId": "88d1f476cc432b826613bb9eb63a3bb46a256ba6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0872f2bc_91e5ca9d",
+        "filename": "drivers/gpu/drm/nouveau/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-08T22:13:47Z",
+      "side": 0,
+      "message": "That flag was intentionally removed here:\n\n[Revert \"drm/nouveau: Run DRM default client setup\"](https://android-review.git.corp.google.com/c/kernel/common/+/3608234)",
+      "parentUuid": "bc6259a2_d522163f",
+      "revId": "88d1f476cc432b826613bb9eb63a3bb46a256ba6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
