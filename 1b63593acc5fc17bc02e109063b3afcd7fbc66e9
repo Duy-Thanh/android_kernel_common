@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "685e0ca9_45445274",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-05-08T15:21:27Z",
+      "side": 1,
+      "message": "You\u0027re right. This effectively does that. There was the code that came from upstream and the code that I had downstream in Android, and it didn\u0027t get merged well. This patch cleans up all that.",
+      "parentUuid": "5fc33be6_42255f86",
+      "revId": "1b63593acc5fc17bc02e109063b3afcd7fbc66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fc5eb32_5d50e729",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b0d0d3_9e2386c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-05-08T15:21:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8fc5eb32_5d50e729",
+      "range": {
+        "startLine": 553,
+        "startChar": 1,
+        "endLine": 556,
+        "endChar": 2
+      },
+      "revId": "1b63593acc5fc17bc02e109063b3afcd7fbc66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "569c5aae_90e12a9f",
@@ -54,6 +96,30 @@
       "writtenOn": "2025-05-08T15:07:19Z",
       "side": 1,
       "message": "Upstream we didn\u0027t have the `system_supports_sve()` check here.",
+      "range": {
+        "startLine": 2046,
+        "startChar": 8,
+        "endLine": 2049,
+        "endChar": 25
+      },
+      "revId": "1b63593acc5fc17bc02e109063b3afcd7fbc66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea6bf2c_b92b6426",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2049,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-05-08T15:21:27Z",
+      "side": 1,
+      "message": "It\u0027s redundant when the only case is SVE. I\u0027ll remove it.",
+      "parentUuid": "569c5aae_90e12a9f",
       "range": {
         "startLine": 2046,
         "startChar": 8,

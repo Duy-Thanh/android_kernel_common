@@ -22,6 +22,30 @@
       },
       "revId": "46aa903098c6fecedccae50264ae2eedb7686512",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fb5e0e_e8ba7784",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-05-08T15:21:27Z",
+      "side": 0,
+      "message": "That\u0027s right. Things got a bit muddled here between 6.12 and Android code.",
+      "parentUuid": "e59ac67b_ec06d2cf",
+      "range": {
+        "startLine": 1072,
+        "startChar": 1,
+        "endLine": 1074,
+        "endChar": 54
+      },
+      "revId": "46aa903098c6fecedccae50264ae2eedb7686512",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
