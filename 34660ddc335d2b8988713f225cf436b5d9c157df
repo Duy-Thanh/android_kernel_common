@@ -85,6 +85,24 @@
       "message": "In general while we can consider adding you to the OWNERS in 6.6, for 6.12 and further kernels it may not be the case at the very beginning.\n\nThe kernel/common repository since 6.12 is restricted in terms of patches which can be accepted and we want to keep monitoring them so only core or critical patches are being merged. People who are maintaining that are in the root OWNERS file.\n\nAs our goal is to reach GKI compatibility, we don\u0027t want to diverge too much from ACK. Plus we want people to slowly adapt the GKI model which is totally different from CrOS. That\u0027s the main reasons behind the OWNERS restrictions",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c79a5fc6_2391a426",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-05-09T08:30:16Z",
+      "side": 1,
+      "message": "If you are interested in the ownership in just 6.6, please let me know, however our main development is switching to 6.12.",
+      "parentUuid": "1f9230b5_100179ff",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
