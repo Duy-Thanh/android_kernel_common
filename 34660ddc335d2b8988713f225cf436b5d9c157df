@@ -103,6 +103,24 @@
       "parentUuid": "1f9230b5_100179ff",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406ebc8b_1581952f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-05-09T08:32:28Z",
+      "side": 1,
+      "message": "\u003eour main development is switching to 6.12.\n\nMore on that here: http://g/al-kernel-announce/sayTcUYbcaU",
+      "parentUuid": "c79a5fc6_2391a426",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
