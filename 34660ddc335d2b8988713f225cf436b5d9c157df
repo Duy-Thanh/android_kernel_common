@@ -121,6 +121,24 @@
       "parentUuid": "c79a5fc6_2391a426",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "599c0ac2_5f16b395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3659872
+      },
+      "writtenOn": "2025-05-09T11:54:04Z",
+      "side": 1,
+      "message": "Well this will end up with multiple files and their inclusion. Unfortunately we need to discuss this in ownership design before moving forward.\nAs this patch is for 6.6 I\u0027m rather leaning to drop it till we have clear guidance.",
+      "parentUuid": "71f4981d_5a86d584",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
