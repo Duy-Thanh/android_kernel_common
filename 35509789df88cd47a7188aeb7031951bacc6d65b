@@ -94,6 +94,30 @@
       },
       "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf3539b_51a0f86f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-09T17:14:55Z",
+      "side": 1,
+      "message": "The merge commit is a collection of smaller patches, not a single commit from a single author containing \u003e1,000 lines of change.\n\nThere is a specific patch that landed in `drm/drm-next` (or even upstream of that) which changed these lines.\n\nWhichever upstream patch that is needs to be cherrypicked here. Not pieces of a merge commit.",
+      "parentUuid": "31c7c81a_63138298",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
