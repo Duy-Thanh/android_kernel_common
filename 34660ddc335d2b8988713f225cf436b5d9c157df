@@ -33,6 +33,23 @@
       "message": "Adding Tomasz who has been working on kernel ownership model. From my side, please note this needs to be cherry-picked into the following branches as well:\n- android16-6.12-desktop\n- android-mainline-desktop",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f950cb0_924184b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2025-05-09T07:46:01Z",
+      "side": 1,
+      "message": "I\u0027d propose keeping just one OWNERS file at the root of the source tree. While for the sound subsystem it\u0027s probably not a big deal, because it\u0027s all under one sound/ directory, many subsystems are split across different directories and we would run into a lot of OWNERS files scattered around, often with duplicate contents.\n\nAlso I\u0027d recommend setting a managed google group for the team (easily doable on teams/) instead of listing individual ldaps here, because from the ChromeOS experience, we often ended up with half or more entries pointing to people no longer working on the areas in question.",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
