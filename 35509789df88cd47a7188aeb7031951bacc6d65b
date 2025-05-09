@@ -70,6 +70,30 @@
       },
       "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31c7c81a_63138298",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3845040
+      },
+      "writtenOn": "2025-05-09T02:14:39Z",
+      "side": 1,
+      "message": "Hi Tim, ideally git show of merge commit should not display code changes but here it shows code changes in MST  . Copy pasting git show 6f0f335b73a9264050e031879ad04c551c05959c  output for reference\n\ncommit 6f0f335b73a9264050e031879ad04c551c05959c\nMerge: baad97ed29be d678c63534ed\nAuthor: Jani Nikula \u003cjani.nikula@intel.com\u003e\nDate:   Tue Jan 7 18:07:54 2025 +0200\n\n    Merge drm/drm-next into drm-intel-next\n\n    Backmerge to get the DRM DP payload and ACT helpers to drm-intel-next.\n\n    Signed-off-by: Jani Nikula \u003cjani.nikula@intel.com\u003e\n\ndiff --cc drivers/gpu/drm/i915/display/intel_dp_mst.c\nindex 7d9a164a7556,56ca571e534c..0433f2ff77e1\n--- a/drivers/gpu/drm/i915/display/intel_dp_mst.c\n+++ b/drivers/gpu/drm/i915/display/intel_dp_mst.c\n@@@ -1695,7 -1715,9 +1695,9 @@@ mst_topology_add_connector(struct drm_d\n        if (!intel_connector)\n                return NULL;\n\n+       connector \u003d \u0026intel_connector-\u003ebase;\n+\n -      intel_connector-\u003eget_hw_state \u003d intel_dp_mst_get_hw_state;\n +      intel_connector-\u003eget_hw_state \u003d mst_connector_get_hw_state;\n        intel_connector-\u003esync_state \u003d intel_dp_connector_sync_state;\n        intel_connector-\u003emst_port \u003d intel_dp;\n        intel_connector-\u003eport \u003d port;\n@@@ -1703,33 -1725,22 +1705,22 @@@\n\n        intel_dp_init_modeset_retry_work(intel_connector);\n\n-       /*\n-        * TODO: The following drm_connector specific initialization belongs\n-        * to DRM core, however it happens atm too late in\n-        * drm_connector_init(). That function will also expose the connector\n-        * to in-kernel users, so it can\u0027t be called until the connector is\n-        * sufficiently initialized; init the device pointer used by the\n-        * following DSC setup, until a fix moving this to DRM core.\n-        */\n-       intel_connector-\u003ebase.dev \u003d mgr-\u003edev;\n-\n-       intel_connector-\u003edp.dsc_decompression_aux \u003d drm_dp_mst_dsc_aux_for_port(port);",
+      "parentUuid": "ad6badc5_bd058a68",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
