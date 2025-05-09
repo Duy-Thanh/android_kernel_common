@@ -16,6 +16,23 @@
       "message": "This makes sense to me, but adding Mateusz for approval because I\u0027m not sure if there are any special policies for adding subtree OWNERS files.",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc72a96d_03677e8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-05-09T07:45:11Z",
+      "side": 1,
+      "message": "Adding Tomasz who has been working on kernel ownership model. From my side, please note this needs to be cherry-picked into the following branches as well:\n- android16-6.12-desktop\n- android-mainline-desktop",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
