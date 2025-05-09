@@ -22,6 +22,30 @@
       },
       "revId": "be7816a453f2c2cb39a25268b5ffb73b62644939",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91aa17c7_a9c4c23a",
+        "filename": "kernel/signal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4018,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-09T23:05:50Z",
+      "side": 1,
+      "message": "It\u0027s actually the same as upstream: https://elixir.bootlin.com/linux/v6.15-rc5/source/kernel/signal.c#L4108",
+      "parentUuid": "31f88667_0014f5ed",
+      "range": {
+        "startLine": 4017,
+        "startChar": 0,
+        "endLine": 4018,
+        "endChar": 2
+      },
+      "revId": "be7816a453f2c2cb39a25268b5ffb73b62644939",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
