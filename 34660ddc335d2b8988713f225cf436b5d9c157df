@@ -50,6 +50,24 @@
       "message": "I\u0027d propose keeping just one OWNERS file at the root of the source tree. While for the sound subsystem it\u0027s probably not a big deal, because it\u0027s all under one sound/ directory, many subsystems are split across different directories and we would run into a lot of OWNERS files scattered around, often with duplicate contents.\n\nAlso I\u0027d recommend setting a managed google group for the team (easily doable on teams/) instead of listing individual ldaps here, because from the ChromeOS experience, we often ended up with half or more entries pointing to people no longer working on the areas in question.",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f4981d_5a86d584",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2025-05-09T08:22:03Z",
+      "side": 1,
+      "message": "Sorry, I just realized that Gerrit hasn\u0027t landed support for groups in OWNERS... The suggestion there seems to be to create a file with defined groups of individual emails and then include them in the OWNERS files. (Ref: https://android-review.googlesource.com/plugins/code-owners/Documentation/backend-find-owners.html#syntax:~:text\u003dis%20not%20possible.-,Groups,-Groups%20are%20not)",
+      "parentUuid": "6f950cb0_924184b6",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
