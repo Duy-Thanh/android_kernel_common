@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f88667_0014f5ed",
+        "filename": "kernel/signal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4018,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-09T22:11:35Z",
+      "side": 1,
+      "message": "Note: Was wondering why there is this block. It\u0027s because upstream moved the `struct fd f / CLASS(fd, f)(pidfd);` declaration into the default case\u0027s scope.",
+      "range": {
+        "startLine": 4017,
+        "startChar": 0,
+        "endLine": 4018,
+        "endChar": 2
+      },
+      "revId": "be7816a453f2c2cb39a25268b5ffb73b62644939",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
