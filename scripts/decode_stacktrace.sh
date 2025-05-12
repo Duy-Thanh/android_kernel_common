@@ -274,7 +274,7 @@ handle_line() {
 		fi
 
 		# Format timestamps with tabs
-		if [[ ${words[$i]} == \[ && ${words[$i+1]} == *\] ]]; then
+		if [[ ${words[$i]} == \[ && ${words[$i+1]} == *\]\[ ]]; then
 			unset words[$i]
 			words[$i+1]=$(printf "[%13s\n" "${words[$i+1]}")
 		fi
@@ -312,6 +312,18 @@ handle_line() {
 		fi
 		symbol=${words[$last-1]}
 		unset words[$last-1]
+	elif [[ ${words[$last]} =~ ^[0-9a-f]+\] ]] && [[ ${words[$last - 1]} =~ \[[^]+]  ]]; then
+		# [   36.766106][   T12]  qcom_swrm_set_channel_map+0x208/0x210 [soundwire_qcom 4d8feb3d6206fd376744d04d81e77d5f8e776d76] (P)'
+		module=${words[$last - 1 ]}
+		module=${module#\[}
+		modbuildid=${module#* }
+		module=${module% *}
+		if [[ $modbuildid == $module ]]; then
+			modbuildid=
+		fi
+		symbol=${words[$last-2]}
+		unset words[$last-1]
+		last=$(( $last - 1 ))
 	else
 		# The symbol is the last element, process it
 		symbol=${words[$last]}
