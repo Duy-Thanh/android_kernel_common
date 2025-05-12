@@ -118,6 +118,30 @@
       },
       "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a569d5d_ba7fe4d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4043531
+      },
+      "writtenOn": "2025-05-12T03:39:35Z",
+      "side": 1,
+      "message": "Hi Tim,\nThis change is not from any commit , if i do git blame , it shows merge commit only . you can refer https://github.com/torvalds/linux/blame/6f0f335b73a9264050e031879ad04c551c05959c/drivers/gpu/drm/i915/display/intel_dp_mst.c\n\nplease search \"ret \u003d drm_connector_dynamic_init(display-\u003edrm, connector, \u0026mst_connecto\"  , you can see specific line is changed by merge commit . These kind of unclean merge sometimes happen . If you have a better way of taking this change , please let me know so that i can abandon this patch and follow your way",
+      "parentUuid": "cbf3539b_51a0f86f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
