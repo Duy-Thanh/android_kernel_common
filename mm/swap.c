@@ -497,14 +497,18 @@ EXPORT_SYMBOL(folio_mark_accessed);
 void folio_add_lru(struct folio *folio)
 {
 	struct folio_batch *fbatch;
+	bool bypass = false;
 
 	VM_BUG_ON_FOLIO(folio_test_active(folio) &&
 			folio_test_unevictable(folio), folio);
 	VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
 
+	trace_android_vh_folio_add_lru_folio_activate(folio, &bypass);
+
 	/* see the comment in lru_gen_add_folio() */
 	if (lru_gen_enabled() && !folio_test_unevictable(folio) &&
-	    lru_gen_in_fault() && !(current->flags & PF_MEMALLOC))
+	    lru_gen_in_fault() && !(current->flags & PF_MEMALLOC) &&
+	    !bypass)
 		folio_set_active(folio);
 
 	folio_get(folio);
