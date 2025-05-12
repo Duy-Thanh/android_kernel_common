@@ -34,6 +34,24 @@
       "parentUuid": "b8b4b8f7_e32848e8",
       "revId": "f8487cd003bcd3c974cb758dc5bedc846429c204",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8600a72_f55e7f7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-12T11:52:14Z",
+      "side": 1,
+      "message": "Please ignore my previous comment, it\u0027s about another CL. This tristate should be set from the vendor fragment. Sorry for confusion",
+      "parentUuid": "966a300a_d5218f93",
+      "revId": "f8487cd003bcd3c974cb758dc5bedc846429c204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
