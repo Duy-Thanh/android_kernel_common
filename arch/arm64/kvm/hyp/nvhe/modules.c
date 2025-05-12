@@ -229,6 +229,7 @@ const struct pkvm_module_ops module_ops = {
 	.host_stage2_enable_lazy_pte = host_stage2_enable_lazy_pte,
 	.host_stage2_disable_lazy_pte = host_stage2_disable_lazy_pte,
 	.register_host_smc_handler = __register_host_smc_handler,
+	.register_guest_smc_handler = __pkvm_register_guest_smc_handler,
 	.register_default_trap_handler = __pkvm_register_default_trap_handler,
 	.register_illegal_abt_notifier = __pkvm_register_illegal_abt_notifier,
 	.register_psci_notifier = __pkvm_register_psci_notifier,

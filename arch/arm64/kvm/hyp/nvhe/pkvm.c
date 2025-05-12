@@ -35,6 +35,20 @@ unsigned int kvm_sve_max_vl;
 
 unsigned int kvm_host_sve_max_vl;
 
+
+#define MAX_VM_SMC_HANDLERS    (255)
+
+struct pvm_registered_handle {
+	u64 id;
+	bool (*cb)(struct arm_smccc_1_2_regs *, struct arm_smccc_res *res, pkvm_handle_t handle);
+};
+
+static struct pvm_registered_handle vm_smc_handlers[MAX_VM_SMC_HANDLERS];
+static u8 vm_smc_handler_idx;
+static DEFINE_HYP_SPINLOCK(vm_smc_handler_lock);
+
+static struct pvm_registered_handle vm_smc_handlers[MAX_VM_SMC_HANDLERS];
+static u8 vm_smc_handler_idx;
 /*
  * The currently loaded hyp vCPU for each physical CPU. Used only when
  * protected KVM is enabled, but for both protected and non-protected VMs.
@@ -1674,6 +1688,75 @@ static bool pkvm_forward_trng(struct kvm_vcpu *vcpu)
 	}
 
 	return true;
+}
+
+static bool is_standard_secure_service_call(u64 func_id)
+{
+	return (func_id >= PSCI_0_2_FN_BASE && func_id <= ARM_CCA_FUNC_END) ||
+	       (func_id >= PSCI_0_2_FN64_BASE && func_id <= ARM_CCA_64BIT_FUNC_END);
+}
+
+bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
+{
+	bool handled = false;
+	struct kvm_cpu_context *ctxt = &vcpu->arch.ctxt;
+	struct pkvm_hyp_vm *vm;
+	struct pkvm_hyp_vcpu *hyp_vcpu;
+	struct arm_smccc_1_2_regs regs;
+	struct arm_smccc_res res;
+	DECLARE_REG(u64, func_id, ctxt, 0);
+	int i;
+
+	hyp_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
+	vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
+
+	if (is_standard_secure_service_call(func_id))
+		return false;
+
+
+       hyp_spin_lock(&vm_smc_handler_lock);
+       for (i = 0; i < MAX_VM_SMC_HANDLERS; i++) {
+               if (kern_hyp_va(vm_smc_handlers[i].id) == (u64)&vm->host_kvm->arch.pkvm) {
+                       memcpy(&regs, &ctxt->regs, sizeof(regs));
+                       handled = vm_smc_handlers[i].cb(&regs, &res, vm->kvm.arch.pkvm.handle);
+                       /* Pass the return back to the calling guest */
+                       memcpy(&ctxt->regs.regs[0], &res, sizeof(res));
+                       break;
+               }
+        }
+       hyp_spin_unlock(&vm_smc_handler_lock);
+
+	__kvm_skip_instr(vcpu);
+
+        if (!handled) {
+            ctxt->regs.regs[0] = -1;
+        }
+	return handled;
+}
+
+int __pkvm_register_guest_smc_handler(bool (*cb)(struct arm_smccc_1_2_regs *,
+						 struct arm_smccc_res *res,
+						 pkvm_handle_t handle),
+				      u64 id)
+{
+
+	if (!cb)
+		return -EINVAL;
+
+       /*
+        * Note: calling the registration in a loop might overwrite previous
+        * registered callbacks.
+        */
+
+       hyp_spin_lock(&vm_smc_handler_lock);
+
+       vm_smc_handlers[vm_smc_handler_idx].id = id;
+       vm_smc_handlers[vm_smc_handler_idx].cb = cb;
+       ++vm_smc_handler_idx;
+
+       hyp_spin_unlock(&vm_smc_handler_lock);
+
+	return 0;
 }
 
 /*

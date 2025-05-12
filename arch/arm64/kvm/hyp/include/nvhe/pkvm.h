@@ -83,6 +83,8 @@ struct pkvm_hyp_vm {
 	 */
 	bool is_dying;
 
+	bool (*smc_handler)(struct arm_smccc_1_2_regs *,
+			    struct arm_smccc_res *res, pkvm_handle_t handle);
 	struct kvm_ffa_buffers ffa_buf;
 	struct list_head vm_list;
 
@@ -142,6 +144,8 @@ void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu);
 
 bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code);
 bool kvm_hyp_handle_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code);
+
+bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code);
 
 struct pkvm_hyp_vcpu *pkvm_mpidr_to_hyp_vcpu(struct pkvm_hyp_vm *vm, u64 mpidr);
 
