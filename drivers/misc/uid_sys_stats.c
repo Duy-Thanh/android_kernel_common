@@ -508,8 +508,10 @@ static void update_stats_workfn(struct work_struct *work)
 
 		uid_entry->utime += usw->utime;
 		uid_entry->stime += usw->stime;
+#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
 		UPDATE_ANDROID_OEM_DATA(OEM_DATA_PTR(uid_entry),
 					OEM_DATA_PTR(usw), NULL, 0);
+#endif
 
 		__add_uid_io_stats(uid_entry, &usw->ioac, UID_STATE_DEAD_TASKS);
 next:
@@ -546,8 +548,8 @@ static int process_notifier(struct notifier_block *self,
 			task_cputime_adjusted(task, &usw->utime, &usw->stime);
 #ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
 			usw->android_oem_data1 = 0;
-#endif
 			UPDATE_ANDROID_OEM_DATA(NULL, OEM_DATA_PTR(usw), task, 1);
+#endif
 			llist_add(&usw->node, &work_usw);
 			schedule_work(&update_stats_work);
 		}
@@ -563,8 +565,9 @@ static int process_notifier(struct notifier_block *self,
 	task_cputime_adjusted(task, &utime, &stime);
 	uid_entry->utime += utime;
 	uid_entry->stime += stime;
+#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
 	UPDATE_ANDROID_OEM_DATA(OEM_DATA_PTR(uid_entry), NULL, task, 2);
-
+#endif
 	add_uid_io_stats(uid_entry, task, UID_STATE_DEAD_TASKS);
 
 exit:
