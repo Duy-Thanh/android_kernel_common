@@ -16,6 +16,23 @@
       "message": "Respin bug:b/417172167",
       "revId": "a666ab99055f1899f7452cf312b634e552ee0087",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a37f11_fb0b03e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-12T19:05:31Z",
+      "side": 1,
+      "message": "The change breaks the ABI, so can\u0027t be accepted as is.",
+      "revId": "a666ab99055f1899f7452cf312b634e552ee0087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
