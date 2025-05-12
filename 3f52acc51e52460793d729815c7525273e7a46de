@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f64f407_bb821e53",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-12T23:24:35Z",
+      "side": 1,
+      "message": "From the perspective of the secure world, the host is a VM like any other.\n\nFor Trusty specifically, we only allow memory operations from VMs that we have seen a creation message. We reject operations from unknown VMs. That means we need a message for the host, unless we hard-code its ID as an exemption.",
+      "parentUuid": "9813a28f_19fae206",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "I don\u0027t think so. If we want to retry, I think we will need to do it from this place until we succeed. If we have another error code other than interrupted, there is nothing that we can do about it.",
       "parentUuid": "6646e06e_c75b3e7a",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0eb8da6_cdd82c9a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-12T23:24:35Z",
+      "side": 1,
+      "message": "How are non-secure interrupts handled then?",
+      "parentUuid": "95305f03_78938787",
       "revId": "3f52acc51e52460793d729815c7525273e7a46de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
