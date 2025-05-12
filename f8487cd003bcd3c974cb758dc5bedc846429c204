@@ -16,6 +16,24 @@
       "message": "It\u0027s tristate and probably should go to vendor fragment",
       "revId": "f8487cd003bcd3c974cb758dc5bedc846429c204",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "966a300a_d5218f93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-12T11:48:07Z",
+      "side": 1,
+      "message": "Just noticed the following dependecy in built-in drm:\n\n```\ndrivers/gpu/drm/Makefile:drm-$(CONFIG_DRM_ACCEL) +\u003d ../../accel/drm_accel.o\ndrivers/gpu/drm/drm_drv.c:#if IS_ENABLED(CONFIG_DRM_ACCEL)\ninclude/drm/drm_accel.h:#if IS_ENABLED(CONFIG_DRM_ACCEL)\ninclude/drm/drm_accel.h:#endif /* IS_ENABLED(CONFIG_DRM_ACCEL) */\n```\n\nso it looks like it cannot be enabled from the vendor. Please make sure that enabling `CONFIG_DRM_ACCEL` as built-in does not enable any additional module by default (I mean drivers from `drivers/accel/` subtree):\n\n```\ndrivers/Makefile:obj-$(CONFIG_DRM_ACCEL)                +\u003d accel/\n```\n\nIf anything is enabled, please add proper `# is not set` to gki_defconfig.",
+      "parentUuid": "b8b4b8f7_e32848e8",
+      "revId": "f8487cd003bcd3c974cb758dc5bedc846429c204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
