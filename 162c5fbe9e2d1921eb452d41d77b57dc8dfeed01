@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "010254d6_c92cdec5",
+        "filename": "include/linux/page_size_compat.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-05-12T18:07:43Z",
+      "side": 1,
+      "message": "shouldn\u0027t it be `nr_sub_pages \u003d\u003d 1`? is there a case where nr_sub_pages is going to be 0?",
+      "range": {
+        "startLine": 181,
+        "startChar": 18,
+        "endLine": 181,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7e11962a_edadcfb1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/page_size_compat.h",
+              "range": {
+                "startLine": 181,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": "\tif (nr_sub_pages \u003d\u003d 1)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "162c5fbe9e2d1921eb452d41d77b57dc8dfeed01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
