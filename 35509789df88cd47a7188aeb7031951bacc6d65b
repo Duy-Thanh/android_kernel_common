@@ -142,6 +142,30 @@
       },
       "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bfefa5a_e5fdbdac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-12T23:17:18Z",
+      "side": 1,
+      "message": "It looks like it came from here:\n\nhttps://www.spinics.net/lists/linux-next/msg78348.html\n\nThere are a few other lines that were changed, but this appears to be where the `drm_connector_dynamic_init()` call was brought in.\n\nAssuming I\u0027ve followed the trail correctly, and if it\u0027s possible, I think it would be best to pull in that patch, and then `BACKPORT` it to only include the `drm_connector_dynamic_init()` line you need.\n\nOtherwise, I think this should at least reference that patch in the commit message instead, since it explains it\u0027s resolving merge conflicts from `drm-intel`. The title of this patch \"taking changes from merge commit\" doesn\u0027t really mean anything, especially since a merge commit can contain just about anything. Further, it\u0027s not clear why this line is all that\u0027s desired from that merge out of the 1000+ files that were changed.\n\nIt would be best to know why it was changed from `drm_connector_init()` to `drm_connector_dynamic_init()` and include that in the commit message as well, but I\u0027m not sure if we know that or not. If it\u0027s just an API change, it would be good to state that.",
+      "parentUuid": "6a569d5d_ba7fe4d1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
