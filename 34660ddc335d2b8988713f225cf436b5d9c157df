@@ -157,6 +157,24 @@
       "parentUuid": "599c0ac2_5f16b395",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e461020_81d1fcc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3659872
+      },
+      "writtenOn": "2025-05-12T15:02:03Z",
+      "side": 1,
+      "message": "Definitively this should be done for mainline-desktop and 6.12 as 6.6 is not sustainable target.\nTomasz, Michał as you are ultimate owners of sustainability, can you suggest next step?",
+      "parentUuid": "dda28f5a_5d0079cd",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
