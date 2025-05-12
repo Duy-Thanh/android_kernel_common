@@ -16,6 +16,41 @@
       "message": "Oppo A16",
       "revId": "79345cc6f4aca07e7450da06f16799ed69eb1ce4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c186bb0_e4ce6e59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3905689
+      },
+      "writtenOn": "2025-05-12T09:10:36Z",
+      "side": 1,
+      "message": "\u003e Oppo A16https://android-review.googlesource.com/c/kernel/common/+/3625052/comments/3b37c8f7_de375bdd",
+      "parentUuid": "3b37c8f7_de375bdd",
+      "revId": "79345cc6f4aca07e7450da06f16799ed69eb1ce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a7e4e61_27e6c5cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3905689
+      },
+      "writtenOn": "2025-05-12T09:10:36Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/3625052/comments/3b37c8f7_de375bdd",
+      "revId": "79345cc6f4aca07e7450da06f16799ed69eb1ce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
