@@ -139,6 +139,24 @@
       "parentUuid": "71f4981d_5a86d584",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda28f5a_5d0079cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1543611
+      },
+      "writtenOn": "2025-05-12T07:48:31Z",
+      "side": 1,
+      "message": "Should we submit another CL to add audio team to OWNERS file at the root of the source tree?\n\nThanks!",
+      "parentUuid": "599c0ac2_5f16b395",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
