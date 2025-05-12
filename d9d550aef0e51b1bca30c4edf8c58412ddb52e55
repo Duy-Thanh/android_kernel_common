@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85c301d_92bbf9fc",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-12T17:16:44Z",
+      "side": 0,
+      "message": "There should be an explanation in the commit message and/or a code comment for this change to remove the use of the BH workqueue (and instead only support inline work).",
+      "range": {
+        "startLine": 773,
+        "startChar": 0,
+        "endLine": 780,
+        "endChar": 3
+      },
+      "revId": "d9d550aef0e51b1bca30c4edf8c58412ddb52e55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

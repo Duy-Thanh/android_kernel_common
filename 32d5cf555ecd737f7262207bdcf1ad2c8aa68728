@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51378ef2_c17f4a0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-12T17:16:44Z",
+      "side": 1,
+      "message": "The change doesn\u0027t do either of these things",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "32d5cf555ecd737f7262207bdcf1ad2c8aa68728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de863da9_d205a793",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-12T17:16:44Z",
+      "side": 1,
+      "message": "Maybe just use bh instead of softirq, since that\u0027s the term the code already uses?  It\u0027s only bh_wq (bh workqueue) that will no longer be correct.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 23
+      },
+      "revId": "32d5cf555ecd737f7262207bdcf1ad2c8aa68728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f74cf24_c8eb7cf4",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-12T17:16:44Z",
+      "side": 1,
+      "message": "Since this work will no longer be scheduled through a workqueue, it no longer needs to be encapsulated in a work_struct.",
+      "range": {
+        "startLine": 776,
+        "startChar": 32,
+        "endLine": 776,
+        "endChar": 44
+      },
+      "revId": "32d5cf555ecd737f7262207bdcf1ad2c8aa68728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbc940c0_8de11d3c",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-12T17:16:44Z",
+      "side": 1,
+      "message": "Shouldn\u0027t add this extra logging.  It would be too verbose.",
+      "range": {
+        "startLine": 1337,
+        "startChar": 0,
+        "endLine": 1337,
+        "endChar": 44
+      },
+      "revId": "32d5cf555ecd737f7262207bdcf1ad2c8aa68728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
