@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3345a91d_01dce3e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-12T14:27:09Z",
+      "side": 1,
+      "message": "I get your point, it is tricky to retry calling an SMC from the hypervisor (which runs in non-preemptible context) without going back to the linux host. Without having some guarantees that this will succeed in the future, we can end up spinning forever.",
+      "parentUuid": "6cab3da5_3a5bb13a",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "703e66f0_06921c0c",
@@ -70,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9813a28f_19fae206",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-12T14:27:09Z",
+      "side": 1,
+      "message": "Why do you require the VM availability (only creation msg) for the host ? What does Trusty do with it ? TBH I am in favor of dropping this to simplifying this code. Please feel free to re-open it.",
+      "parentUuid": "713e1f7b_be7a3b85",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6646e06e_c75b3e7a",
@@ -83,6 +119,24 @@
       "writtenOn": "2025-05-07T17:51:28Z",
       "side": 1,
       "message": "This should also return a code.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95305f03_78938787",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-12T14:27:09Z",
+      "side": 1,
+      "message": "I don\u0027t think so. If we want to retry, I think we will need to do it from this place until we succeed. If we have another error code other than interrupted, there is nothing that we can do about it.",
+      "parentUuid": "6646e06e_c75b3e7a",
       "revId": "3f52acc51e52460793d729815c7525273e7a46de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -104,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06009183_572153b1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-12T14:27:09Z",
+      "side": 1,
+      "message": "If TZ will get a non-secure interrupt the `smc` will return with interrupted and the destruction message wouldn\u0027t go through. We will then return to the host caller in `arch/arm64/kvm/pkvm.c` and we will handle the control to the host before retrying the next time.",
+      "parentUuid": "809ad9a6_a0f42a66",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70509a0e_95d07f88",
@@ -117,6 +189,24 @@
       "writtenOn": "2025-05-07T17:51:28Z",
       "side": 1,
       "message": "This should also be retried somehow.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c240ecc4_4b45e520",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-12T14:27:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70509a0e_95d07f88",
       "revId": "3f52acc51e52460793d729815c7525273e7a46de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -151,6 +241,42 @@
       "writtenOn": "2025-05-07T17:51:28Z",
       "side": 1,
       "message": "We should also check the return code here and retry if TZ got interrupted.",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f865a97_552f7212",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-12T14:27:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd97969b_9109fc64",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b13c98c9_8ac0f683",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-12T14:27:09Z",
+      "side": 1,
+      "message": "I reverted back to patch 86 on this specific change and we are only sending it when the guest VM uses ff-a.",
+      "parentUuid": "a0bb3487_ff71d3a7",
       "revId": "3f52acc51e52460793d729815c7525273e7a46de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
