@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d440c54d_eb67b40e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-13T17:37:28Z",
+      "side": 1,
+      "message": "This needs to be initialized to -1 which represents \"not initialized\", which is different from \"we know there are zero SPs that want the availability messages\".\n\nMaybe we should use a macro for this, e.g., `#define FFA_VM_AVAIL_UNINIT (-1)`.",
+      "revId": "6059f2dcf2e008384ced44bd16da424f1add43e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68296866_726e5d3b",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 91
