@@ -16,6 +16,24 @@
       "message": "This patch needs to be rebased on top of the patch that adds the symbols:\n  css_task_iter_end\n  css_task_iter_next\n  css_task_iter_start",
       "revId": "6c9f2b3a43877ce5327158255c56a631b5294a8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd818805_0fe1f0d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3823279
+      },
+      "writtenOn": "2025-05-13T16:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2466bf6d_4f2c973c",
+      "revId": "6c9f2b3a43877ce5327158255c56a631b5294a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
