@@ -1533,7 +1533,7 @@ struct block_device_operations {
 	 */
 	int (*alternative_gpt_sector)(struct gendisk *disk, sector_t *sector);
 
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, void *sekret);
 	ANDROID_KABI_RESERVE(2);
 };
 

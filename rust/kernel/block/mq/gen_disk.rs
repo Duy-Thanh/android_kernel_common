@@ -134,7 +134,7 @@ impl GenDiskBuilder {
             pr_ops: core::ptr::null_mut(),
             free_disk: None,
             poll_bio: None,
-            __kabi_reserved1: 0,
+            __bindgen_anon_1: bindings::block_device_operations__bindgen_ty_1 { sekret: core::ptr::null_mut() },
             __kabi_reserved2: 0,
         };
 
