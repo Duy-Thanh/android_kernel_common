@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0980b90_d26d19b2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 90
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-13T10:22:01Z",
+      "side": 1,
+      "message": "This has to be dropped, it is a leftover from previous patch version",
+      "parentUuid": "3408c597_182c416d",
+      "revId": "bbecfa4d1d066bbad61b3cf1f2de34fe80d2ffa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1730856f_807c3572",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 90
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-13T01:43:41Z",
       "side": 1,
       "message": "Should this also check for `-EAGAIN`? We get that for `FFA_RET_RETRY`.",
+      "revId": "bbecfa4d1d066bbad61b3cf1f2de34fe80d2ffa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c73cc9_cb3fb8d7",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 90
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-13T10:22:01Z",
+      "side": 1,
+      "message": "Yes, good point. Let me add that.",
+      "parentUuid": "1730856f_807c3572",
       "revId": "bbecfa4d1d066bbad61b3cf1f2de34fe80d2ffa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
