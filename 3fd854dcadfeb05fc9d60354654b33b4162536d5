@@ -16,6 +16,23 @@
       "message": "Rejected by upstream 😞",
       "revId": "3fd854dcadfeb05fc9d60354654b33b4162536d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52969263_83df86ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-05-13T04:18:20Z",
+      "side": 1,
+      "message": "Due to the broken DT change, upstream has not reviewed this patch series. Therefore this FROMLIST patchset is risky to accept so late in the game prior to KMI freeze. Please resolve the issues upstream and submit when it it either a FROMGIT or preferably UPSTREAM.",
+      "revId": "3fd854dcadfeb05fc9d60354654b33b4162536d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
