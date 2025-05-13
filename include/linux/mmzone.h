@@ -5,6 +5,7 @@
 #ifndef __ASSEMBLY__
 #ifndef __GENERATING_BOUNDS_H
 
+#include <linux/android_kabi.h>
 #include <linux/spinlock.h>
 #include <linux/list.h>
 #include <linux/list_nulls.h>
@@ -481,6 +482,7 @@ struct lru_gen_folio {
 	/* per-node lru_gen_folio list for global reclaim */
 	struct hlist_nulls_node list;
 
+	ANDROID_BACKPORT_RESERVE(1);
 	ANDROID_OEM_DATA_ARRAY(1, 6);
 };
 
@@ -662,6 +664,8 @@ struct lruvec {
 	struct pglist_data *pgdat;
 #endif
 	struct zswap_lruvec_state zswap_lruvec_state;
+
+	ANDROID_BACKPORT_RESERVE(1);
 };
 
 /* Isolate for asynchronous migration */
