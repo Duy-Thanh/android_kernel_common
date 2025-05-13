@@ -176,4 +176,19 @@ HYP_EVENT(iommu_idmap_complete,
 	),
 	HE_PRINTK("map=%d", __entry->map)
 );
+
+HYP_EVENT(guest_smc,
+	HE_PROTO(u64 id, u8 forwarded),
+	HE_STRUCT(
+		he_field(u64, id)
+		he_field(u8, forwarded)
+	),
+	HE_ASSIGN(
+		__entry->id = id;
+		__entry->forwarded = forwarded;
+	),
+	HE_PRINTK("id=%llu forwarded=%u",
+		  __entry->id, __entry->forwarded)
+);
+
 #endif /* __ARM64_KVM_HYPEVENTS_H_ */
