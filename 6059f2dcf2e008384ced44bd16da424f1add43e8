@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68296866_726e5d3b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-13T14:21:25Z",
+      "side": 1,
+      "message": "So nothing prevents a malicious host from sending a destruction message for a live VM no? That doesn\u0027t feel safe?",
+      "range": {
+        "startLine": 408,
+        "startChar": 5,
+        "endLine": 408,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "919029d3_ea90b59b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+              "range": {
+                "startLine": 408,
+                "startChar": 0,
+                "endLine": 409,
+                "endChar": 0
+              },
+              "replacement": "\tif ((hyp_vm-\u003eis_dying \u0026\u0026 vm_availability !\u003d FFA_VM_DESTRUCTION_MSG) ||\n\t    (!hyp_vm-\u003eis_dying \u0026\u0026 vm_availability \u003d\u003d FFA_VM_DESTRUCTION_MSG)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6059f2dcf2e008384ced44bd16da424f1add43e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
