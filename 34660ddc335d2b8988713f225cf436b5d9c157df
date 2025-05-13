@@ -193,6 +193,24 @@
       "parentUuid": "9e461020_81d1fcc6",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cc07b97_7034f2d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2025-05-13T03:25:07Z",
+      "side": 1,
+      "message": "Please refrain from adding OWNERS files to the kernel repositories for now. We\u0027re working on the right approach to handle it and will let you know once that is available.\n\nFor the time being, please add entries for the audio code to go/al-kernel-owners, which we\u0027ll use to populate the OWNERS file later.",
+      "parentUuid": "edc37c62_eed53195",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
