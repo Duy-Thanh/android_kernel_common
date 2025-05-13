@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec547022_e63bb480",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-13T10:20:11Z",
+      "side": 1,
+      "message": "`if you can guarantee and write a comment that no NS interrupts are enabled here (e.g. the GIC hasn\u0027t been configured yet),` - we cannot guarantee such a thing. The host can issue whenever it want the first FFA_VERSION call. \n\n`It might still be worthwhile to check and WARN_ON the return code.` - what\u0027s the behavior if this call is not implemented ? I don\u0027t want to get spurious `WARN_ON` on other devices.\n\n`On second thought, you should still check the result here and retry..` - yes I think we can retry this.",
+      "parentUuid": "6d8d19b4_07122e2f",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
