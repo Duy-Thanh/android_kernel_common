@@ -232,6 +232,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1e76ed_c951bd42",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-13T16:11:50Z",
+      "side": 1,
+      "message": "\u003e we cannot guarantee such a thing. The host can issue whenever it want the first FFA_VERSION call.\n\nRight, my mistake. I thought you were calling this code from `hyp_ffa_init`. When you\u0027re piggybacking on an existing FF-A call, interrupts are very likely enabled.\n\n\u003e  what\u0027s the behavior if this call is not implemented ?\n\nIf an SP doesn\u0027t implement the creation message, it wouldn\u0027t be in its manifest, right? SPs have to explicitly opt into receiving these, and then it\u0027s not likely they\u0027ll return \"unimplemented\".",
+      "parentUuid": "241cbd59_36d15c9f",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6646e06e_c75b3e7a",
