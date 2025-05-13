@@ -16,6 +16,24 @@
       "message": "The following symbols are not exported by the kernel and therefore cannot be added to your symbol list:\n - reset_control_rearm\n - scsi_build_sense\n - scsi_done\n - scsi_execute_cmd\n - system_entering_hibernation\n Rebase this patch on top of patch(s) that exports those symbols.",
       "revId": "bc0bfbf15ad0390d3f8353593c65cdf4c68a20a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a00b290_a63e8afc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294047
+      },
+      "writtenOn": "2025-05-13T02:55:55Z",
+      "side": 1,
+      "message": "Thanks for pointing this out, done",
+      "parentUuid": "0f78750c_927a1f0b",
+      "revId": "bc0bfbf15ad0390d3f8353593c65cdf4c68a20a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
