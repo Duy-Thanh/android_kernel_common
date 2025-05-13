@@ -214,6 +214,30 @@
       },
       "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d7b742_0ab7efc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-13T15:40:23Z",
+      "side": 1,
+      "message": "That permission is not enabled on any AOSP repos, nor is it enabled in Chromium `third_party/kernel` (as far as I can tell). Please coordinate with George to have a single owner for these patches.\n\nI\u0027m not sure if it would be easier, but if everything works correctly, feel free to break this into multiple relation chains as well.",
+      "parentUuid": "29dcc80b_83f74f30",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
