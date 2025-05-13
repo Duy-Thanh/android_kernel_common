@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d8d19b4_07122e2f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-13T02:42:56Z",
+      "side": 1,
+      "message": "On second thought, you should still check the result here and retry while it\u0027s `-EAGAIN` or `-EINTR`. Trusty will queue up the request and return `FFA_RET_RETRY` on the first attempt, so you always need to try at least a second time (with `FFA_RUN` in between).",
+      "parentUuid": "abb4e498_98c03a4f",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
