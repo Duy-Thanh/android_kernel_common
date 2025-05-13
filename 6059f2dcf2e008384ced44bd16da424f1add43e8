@@ -81,6 +81,30 @@
       },
       "revId": "6059f2dcf2e008384ced44bd16da424f1add43e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94906d48_403c833a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-13T21:09:40Z",
+      "side": 1,
+      "message": "That doesn\u0027t sound like the worst case to me. I could imagine TZ freeing some memory used to hold metadata about the live VM and then subsequently reallocating that for another VM in such a way that the two VMs could interfere with each other\u0027s TZ state.\n\nIt would be best to avoid this entirely so that we don\u0027t have to reason about it imo.",
+      "parentUuid": "4602ddb3_6aee0f93",
+      "range": {
+        "startLine": 408,
+        "startChar": 5,
+        "endLine": 408,
+        "endChar": 66
+      },
+      "revId": "6059f2dcf2e008384ced44bd16da424f1add43e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
