@@ -175,6 +175,24 @@
       "parentUuid": "dda28f5a_5d0079cd",
       "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc37c62_eed53195",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2025-05-13T03:22:51Z",
+      "side": 1,
+      "message": "And ignore the target branch 6.6. It\u0027s my mistake. Our goal is to add the audio team members as OWNERS.\n\nPlease advise whether we should upload the changes to mainline-desktop or 6.12, or both.",
+      "parentUuid": "9e461020_81d1fcc6",
+      "revId": "34660ddc335d2b8988713f225cf436b5d9c157df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
