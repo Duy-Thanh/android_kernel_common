@@ -16,6 +16,29 @@
       "message": "Please see comments on aosp/3623178",
       "revId": "b5e3ec2f21d493bd6346a435cff680e37749d7d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be185e69_262997fc",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-05-13T17:49:10Z",
+      "side": 1,
+      "message": "same thing about padding here for KMI updates post kmi-freeze",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 21
+      },
+      "revId": "b5e3ec2f21d493bd6346a435cff680e37749d7d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
