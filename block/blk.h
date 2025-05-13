@@ -404,6 +404,8 @@ static inline struct bio *__bio_split_to_limits(struct bio *bio,
 	}
 }
 
+unsigned get_max_io_size(struct bio *bio, const struct queue_limits *lim);
+
 int ll_back_merge_fn(struct request *req, struct bio *bio,
 		unsigned int nr_segs);
 bool blk_attempt_req_merge(struct request_queue *q, struct request *rq,
