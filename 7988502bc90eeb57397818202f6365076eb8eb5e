@@ -1,0 +1,177 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d091f69_e5d58609",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3441,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-13T20:31:34Z",
+      "side": 1,
+      "message": "The name of the hook should reflect the position and the logic of the call site, not how you use it. IIUC you call it `trace_android_vh_filemap_fault_folio_activate` because you use it to activate the folio but not everyone might be using this hook for the same reason, so name should be more generic. I would suggest simply `trace_android_vh_filemap_fault_folio(folio)`",
+      "range": {
+        "startLine": 3441,
+        "startChar": 1,
+        "endLine": 3441,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "971e7b84_18ff117f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3441,
+                "startChar": 0,
+                "endLine": 3442,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_filemap_fault_folio_locked(folio);\n"
+            },
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3744,
+                "startChar": 0,
+                "endLine": 3745,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_filemap_map_pages_folio_unlocked(folio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7988502bc90eeb57397818202f6365076eb8eb5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0355a631_4b59d996",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3744,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-13T20:31:34Z",
+      "side": 1,
+      "message": "This is not in the fault path, rather it\u0027s the result of the mapping. `trace_android_vh_filemap_folio_mapped(folio)` would be more appropriate.",
+      "range": {
+        "startLine": 3744,
+        "startChar": 2,
+        "endLine": 3744,
+        "endChar": 47
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "36e5767c_5896877a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3744,
+                "startChar": 0,
+                "endLine": 3745,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_filemap_folio_mapped(folio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7988502bc90eeb57397818202f6365076eb8eb5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf7f19e_bdc0c7e8",
+        "filename": "mm/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-13T20:31:34Z",
+      "side": 1,
+      "message": "You can localize the changes more by doing this instead:\n\n```\n\t/* see the comment in lru_gen_add_folio() */\n\tif (lru_gen_enabled() \u0026\u0026 !folio_test_unevictable(folio) \u0026\u0026\n\t    lru_gen_in_fault() \u0026\u0026 !(current-\u003eflags \u0026 PF_MEMALLOC) {\n\t\tbool bypass \u003d false;\n\n\t\ttrace_android_vh_folio_add_lru_folio_activate(folio, \u0026bypass);\n\t\tif (!bypass)\n\t\t\tfolio_set_active(folio);\n\t}\n```",
+      "range": {
+        "startLine": 509,
+        "startChar": 1,
+        "endLine": 513,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "781f0595_89bbc0e3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 500,
+                "startChar": 0,
+                "endLine": 501,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 506,
+                "startChar": 0,
+                "endLine": 507,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_folio_add_lru_folio_activate(folio);\n"
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 510,
+                "startChar": 0,
+                "endLine": 512,
+                "endChar": 0
+              },
+              "replacement": "\t    lru_gen_in_fault() \u0026\u0026 !(current-\u003eflags \u0026 PF_MEMALLOC))\n"
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 623,
+                "startChar": 0,
+                "endLine": 624,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 634,
+                "startChar": 0,
+                "endLine": 637,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_add_lazyfree_bypass(lruvec, folio);\n\t\tlruvec_add_folio(lruvec, folio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7988502bc90eeb57397818202f6365076eb8eb5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
