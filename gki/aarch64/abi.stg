@@ -424096,6 +424096,15 @@ elf_symbol {
   full_name: "pci_get_slot"
 }
 elf_symbol {
+  id: 0x73a57836
+  name: "pci_host_common_probe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6c243895
+  type_id: 0x924d155a
+  full_name: "pci_host_common_probe"
+}
+elf_symbol {
   id: 0xbe6406c3
   name: "pci_host_probe"
   is_defined: true
@@ -457120,6 +457129,7 @@ interface {
   symbol_id: 0x37d02bbe
   symbol_id: 0x9ac8ef20
   symbol_id: 0x35c96922
+  symbol_id: 0x73a57836
   symbol_id: 0xbe6406c3
   symbol_id: 0x9c6c58ea
   symbol_id: 0x2fefe933
