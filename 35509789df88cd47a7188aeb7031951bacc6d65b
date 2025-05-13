@@ -190,6 +190,30 @@
       },
       "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29dcc80b_83f74f30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4043531
+      },
+      "writtenOn": "2025-05-13T14:36:41Z",
+      "side": 1,
+      "message": "error : \n\nTo https://android.googlesource.com/kernel/common\n ! [remote rejected]           HEAD -\u003e refs/for/android16-6.12-desktop (cannot add patch set to 3614900.)\nerror: failed to push some refs to \u0027https://android.googlesource.com/kernel/common\u0027",
+      "parentUuid": "b9f1a0c1_8a4f16bf",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
