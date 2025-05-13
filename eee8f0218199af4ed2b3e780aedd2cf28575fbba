@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff2ea31_7d758fec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936870
+      },
+      "writtenOn": "2025-05-13T14:08:35Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/9a8b202f8cb7ebebc71f1f2a353a21c76d3063a8) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d9a8b202f8cb7ebebc71f1f2a353a21c76d3063a8).\n\n```\n      ## sound/soc/soc-compress.c ##\n     @@ sound/soc/soc-compress.c: static int soc_compr_set_params_fe(struct snd_compr_stream *cstream,\n      \n      \tfe-\u003edpcm[stream].runtime_update \u003d SND_SOC_DPCM_UPDATE_FE;\n      \n    -+\tsnd_soc_dpcm_mutex_lock(fe);\n    ++        snd_soc_dpcm_mutex_lock(fe);\n      \tret \u003d dpcm_be_dai_hw_params(fe, stream);\n    -+\tsnd_soc_dpcm_mutex_unlock(fe);\n    ++        snd_soc_dpcm_mutex_unlock(fe);\n      \tif (ret \u003c 0)\n      \t\tgoto out;\n      \n    -+\tsnd_soc_dpcm_mutex_lock(fe);\n    ++        snd_soc_dpcm_mutex_lock(fe);\n      \tret \u003d dpcm_be_dai_prepare(fe, stream);\n    -+\tsnd_soc_dpcm_mutex_unlock(fe);\n    ++        snd_soc_dpcm_mutex_unlock(fe);\n      \tif (ret \u003c 0)\n      \t\tgoto out;\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "eee8f0218199af4ed2b3e780aedd2cf28575fbba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
