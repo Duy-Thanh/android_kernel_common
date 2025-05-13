@@ -33,6 +33,42 @@
       "message": "Due to the broken DT change, upstream has not reviewed this patch series. Therefore this FROMLIST patchset is risky to accept so late in the game prior to KMI freeze. Please resolve the issues upstream and submit when it it either a FROMGIT or preferably UPSTREAM.",
       "revId": "3fd854dcadfeb05fc9d60354654b33b4162536d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ede00b3_01d0598e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2025-05-13T05:29:13Z",
+      "side": 1,
+      "message": "Hi Greg,\nI thought the review was still pending. While the DT bot did mark it a dt_binding check failure, however it seems like a false negative. I ran the tests manually and they seem to pass + the DT changes are trivial. Now that I realize that my DT review (and these FROMLIST changes) is blocked bcz of this, I have responded upstream now:\n\nhttps://lore.kernel.org/all/bae35813-74fc-4a7f-bbad-a4744826bcdf@google.com/",
+      "parentUuid": "974d6144_4dc09d04",
+      "revId": "3fd854dcadfeb05fc9d60354654b33b4162536d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd58809_2c0830f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2025-05-13T05:29:13Z",
+      "side": 1,
+      "message": "\u003e Due to the broken DT change, upstream has not reviewed this patch series\n\nI have responded to Greg\u0027s concerns and upstream (https://lore.kernel.org/all/bae35813-74fc-4a7f-bbad-a4744826bcdf@google.com/).\n\n\u003e Therefore this FROMLIST patchset is risky to accept so late in the game prior to KMI freeze. Please resolve the issues upstream and submit when it it either a FROMGIT or preferably UPSTREAM.\n\nThe issue is I would like these changes to intercept 6.12. As you can see these changes will cause ABI breakage, so I am not sure how will I be able to get in these change ever in 6.12 if I go via UPSTREAM or FROMGIT?",
+      "parentUuid": "52969263_83df86ab",
+      "revId": "3fd854dcadfeb05fc9d60354654b33b4162536d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
