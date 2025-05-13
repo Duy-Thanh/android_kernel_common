@@ -12,6 +12,7 @@
 #include <kvm/device.h>
 
 #include <asm/kvm_emulate.h>
+#include <asm/kvm_hypevents.h>
 #include <hyp/adjust_pc.h>
 
 #include <nvhe/alloc.h>
@@ -1710,6 +1711,7 @@ bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 	else
 		ctxt->regs.regs[0] = -1;
 
+	trace_guest_smc(func_id, handled);
 	__kvm_skip_instr(vcpu);
 
 	return handled;
