@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2466bf6d_4f2c973c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-13T14:27:07Z",
+      "side": 1,
+      "message": "This patch needs to be rebased on top of the patch that adds the symbols:\n  css_task_iter_end\n  css_task_iter_next\n  css_task_iter_start",
+      "revId": "6c9f2b3a43877ce5327158255c56a631b5294a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
