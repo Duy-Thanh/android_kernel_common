@@ -252,6 +252,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cf3acf6_07d8b178",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-13T17:51:34Z",
+      "side": 1,
+      "message": "After working around the `num_vm_avail_sps` issue locally, this call now goes into an infinite loop:\n```\nlong sm_ffa_handle_framework_msg(struct smc_ret18 *):585: Got VM creation message for 0\nlong sm_ffa_handle_framework_msg(struct smc_ret18 *):607: VM creation returning -7\nvoid sm_irq_return_ns(void):1020: got irq on cpu 3, stdcallcpu -1\nvoid sm_irq_return_ns(void):1028: got irq on cpu 3, return -14\nlong sm_ffa_handle_framework_msg(struct smc_ret18 *):585: Got VM creation message for 0\nlong sm_ffa_handle_framework_msg(struct smc_ret18 *):607: VM creation returning -7\nvoid sm_irq_return_ns(void):1020: got irq on cpu 3, stdcallcpu -1\nvoid sm_irq_return_ns(void):1028: got irq on cpu 3, return -14\nlong sm_ffa_handle_framework_msg(struct smc_ret18 *):585: Got VM creation message for 0\n[...]\n```\n\nWe need to either return all the way to the host so the NS interrupt can be handled, _or_ alternatively not send the message for the host. The latter comes with its own complications, so we should discuss this further.",
+      "parentUuid": "8e1e76ed_c951bd42",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
