@@ -16,6 +16,24 @@
       "message": "The change breaks the ABI, so can\u0027t be accepted as is.",
       "revId": "b56efb227e2d6d1c8077018faf9aa8be162b8abe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14aa2516_698c2343",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1854977
+      },
+      "writtenOn": "2025-05-13T08:02:58Z",
+      "side": 1,
+      "message": "A new vendor hook",
+      "parentUuid": "2fd9bcce_d3a2c45f",
+      "revId": "b56efb227e2d6d1c8077018faf9aa8be162b8abe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
