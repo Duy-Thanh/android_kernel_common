@@ -213,6 +213,7 @@ blk_crypto_fallback_alloc_cipher_req(struct blk_crypto_keyslot *slot,
 static bool blk_crypto_fallback_split_bio_if_needed(struct bio **bio_ptr)
 {
 	struct bio *bio = *bio_ptr;
+	const struct queue_limits *lim = &bdev_get_queue(bio->bi_bdev)->limits;
 	unsigned int i = 0;
 	unsigned int num_sectors = 0;
 	struct bio_vec bv;
@@ -223,6 +224,7 @@ static bool blk_crypto_fallback_split_bio_if_needed(struct bio **bio_ptr)
 		if (++i == BIO_MAX_VECS)
 			break;
 	}
+	num_sectors = min(num_sectors, get_max_io_size(bio, lim));
 	if (num_sectors < bio_sectors(bio)) {
 		struct bio *split_bio;
 

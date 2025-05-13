@@ -187,8 +187,7 @@ static inline unsigned int blk_boundary_sectors(const struct queue_limits *lim,
  * requests that are submitted to a block device if the start of a bio is not
  * aligned to a physical block boundary.
  */
-static inline unsigned get_max_io_size(struct bio *bio,
-				       const struct queue_limits *lim)
+unsigned get_max_io_size(struct bio *bio, const struct queue_limits *lim)
 {
 	unsigned pbs = lim->physical_block_size >> SECTOR_SHIFT;
 	unsigned lbs = lim->logical_block_size >> SECTOR_SHIFT;
