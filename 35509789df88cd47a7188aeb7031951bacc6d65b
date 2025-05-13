@@ -166,6 +166,30 @@
       },
       "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f1a0c1_8a4f16bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4043531
+      },
+      "writtenOn": "2025-05-13T14:35:07Z",
+      "side": 1,
+      "message": "Thanks Tim for reference .\n\n\"Today\u0027s linux-next merge of the drm-intel tree got a conflict in:\n\n  drivers/gpu/drm/i915/display/intel_dp_mst.c\n\nbetween commit:\n\n  6fe7b1d10cbd (\"drm/i915/dp_mst: Expose a connector to kernel users after it\u0027s properly initialized\")\n\nfrom the drm-misc tree and commits:\n\n  529798bd786a (\"drm/i915/mst: convert to struct intel_display\")\n  d58f65df2dcb (\"drm/i915/dp_mst: Fix connector initialization in intel_dp_add_mst_connector()\")\n  fdb65ede8a45 (\"drm/i915/mst: unify MST connector function naming to mst_connector_*\")\"\n  \nAs the original issue happened when \"dp_mst: Expose a connector to kernel users after it\u0027s properly initialized \" is not merging cleanly when drm-intel and drm-misc merging to linux-next  , done similar changes in patch \"dp_mst: Expose a connector to kernel users after it\u0027s properly initialized\" and i am abandoning this patch .\n\nNow i am hitting below error when pushing the new patchset( because of reorder my patches not applying on george\u0027s tree . Please help to change the gerrit setting (refer below link) so i can push rebased set\n\nhttps://stackoverflow.com/questions/43226755/push-patchset-to-gerrit-own-by-another-author",
+      "parentUuid": "9bfefa5a_e5fdbdac",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
