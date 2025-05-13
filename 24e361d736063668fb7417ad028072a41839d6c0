@@ -33,6 +33,24 @@
       "message": "the symbol of_find_gpio is not exported by the kernel. rebase this on top of a patch that exports the symbol.",
       "revId": "24e361d736063668fb7417ad028072a41839d6c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d03b50e7_1a7fa823",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2004176
+      },
+      "writtenOn": "2025-05-13T02:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5df63bac_1e57357d",
+      "revId": "24e361d736063668fb7417ad028072a41839d6c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
