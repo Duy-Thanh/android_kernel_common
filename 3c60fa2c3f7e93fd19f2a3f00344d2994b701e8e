@@ -50,6 +50,30 @@
       ],
       "revId": "3c60fa2c3f7e93fd19f2a3f00344d2994b701e8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae3242b7_9ebea483",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-05-13T15:21:35Z",
+      "side": 1,
+      "message": "Resolved offline, original checks take priority to keep the implementation as close as possible from upstream.",
+      "parentUuid": "4cc58285_042bceb2",
+      "range": {
+        "startLine": 1410,
+        "startChar": 0,
+        "endLine": 1416,
+        "endChar": 6
+      },
+      "revId": "3c60fa2c3f7e93fd19f2a3f00344d2994b701e8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
