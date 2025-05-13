@@ -325855,6 +325855,12 @@ function {
   parameter_id: 0x0f626ee5
 }
 function {
+  id: 0x17267b6f
+  return_type_id: 0xd5cc9c9a
+  parameter_id: 0x0cbf60eb
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x1726cb6c
   return_type_id: 0x48b5725f
   parameter_id: 0x1f73dead
@@ -426425,6 +426431,15 @@ elf_symbol {
   full_name: "read_cache_page_gfp"
 }
 elf_symbol {
+  id: 0x94f761df
+  name: "read_comp_algo_dictionary"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6c1ad8b0
+  type_id: 0x17267b6f
+  full_name: "read_comp_algo_dictionary"
+}
+elf_symbol {
   id: 0xfdbe6bc0
   name: "read_sanitised_ftr_reg"
   is_defined: true
@@ -454211,6 +454226,7 @@ interface {
   symbol_id: 0x87a9e1a0
   symbol_id: 0x5b227eda
   symbol_id: 0x5c3d4ca3
+  symbol_id: 0x94f761df
   symbol_id: 0xfdbe6bc0
   symbol_id: 0x68b1776b
   symbol_id: 0x46082c90
