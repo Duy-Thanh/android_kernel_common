@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90378527_9b3362b7",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-13T10:48:49Z",
+      "side": 1,
+      "message": "How do you intend to use this given the definition is in a C file so it is unavailable to any vendor module?",
+      "fixSuggestions": [
+        {
+          "fixId": "be1fb0cb_263e5a74",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 195,
+                "startChar": 0,
+                "endLine": 197,
+                "endChar": 0
+              },
+              "replacement": "\tANDROID_VENDOR_DATA(2);\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 911,
+                "startChar": 0,
+                "endLine": 913,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_page_should_be_protected(folio, sc-\u003enr_scanned, sc-\u003epriority,\n\t\t\u0026sc-\u003eandroid_vendor_data[0], \u0026ret);\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 2161,
+                "startChar": 0,
+                "endLine": 2163,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_page_should_be_protected(folio, sc-\u003enr_scanned, sc-\u003epriority,\n\t\t\t\u0026sc-\u003eandroid_vendor_data[1], \u0026should_protect);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ca560571825374ef216d16dd847039bc3bf9d750",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
