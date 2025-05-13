@@ -270,6 +270,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "091eb019_c1d78d48",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-13T17:56:32Z",
+      "side": 1,
+      "message": "I don\u0027t think _not_ sending the message for the host is spec compliant. How would the SP know that there is a host at vm-id 1 that don\u0027t get a creation message?",
+      "parentUuid": "8cf3acf6_07d8b178",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
