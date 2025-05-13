@@ -664,6 +664,26 @@ finish_plug:
 }
 
 /*
+ * Insert a bio in LBA order. If no bio for the same bdev with a higher LBA is
+ * found, append at the end.
+ */
+static void bio_list_insert_sorted(struct bio_list *bl, struct bio *bio)
+{
+	struct block_device *bdev = bio->bi_bdev;
+	struct bio **pprev = &bl->head, *next;
+	sector_t sector = bio->bi_iter.bi_sector;
+
+	for (next = *pprev; next; pprev = &next->bi_next, next = next->bi_next)
+		if (next->bi_bdev == bdev && sector < next->bi_iter.bi_sector)
+			break;
+
+	bio->bi_next = next;
+	*pprev = bio;
+	if (!next)
+		bl->tail = bio;
+}
+
+/*
  * The loop in this function may be a bit non-obvious, and so deserves some
  * explanation:
  *
@@ -720,7 +740,8 @@ static void __submit_bio_noacct(struct bio *bio)
 		 */
 		bio_list_merge(&bio_list_on_stack[0], &lower);
 		bio_list_merge(&bio_list_on_stack[0], &same);
-		bio_list_merge(&bio_list_on_stack[0], &bio_list_on_stack[1]);
+		while ((bio = bio_list_pop(&bio_list_on_stack[1])))
+			bio_list_insert_sorted(&bio_list_on_stack[0], bio);
 	} while ((bio = bio_list_pop(&bio_list_on_stack[0])));
 
 	current->bio_list = NULL;
@@ -760,7 +781,7 @@ void submit_bio_noacct_nocheck(struct bio *bio)
 	 * it is active, and then process them after it returned.
 	 */
 	if (current->bio_list)
-		bio_list_add(&current->bio_list[0], bio);
+		bio_list_insert_sorted(&current->bio_list[0], bio);
 	else if (!bdev_test_flag(bio->bi_bdev, BD_HAS_SUBMIT_BIO))
 		__submit_bio_noacct_mq(bio);
 	else
