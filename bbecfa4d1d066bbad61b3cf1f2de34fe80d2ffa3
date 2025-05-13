@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3408c597_182c416d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 90
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-13T01:17:29Z",
+      "side": 1,
+      "message": "Do you need this, now that you\u0027re also calling from `__pkvm_create_hyp_vm`?",
+      "revId": "bbecfa4d1d066bbad61b3cf1f2de34fe80d2ffa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

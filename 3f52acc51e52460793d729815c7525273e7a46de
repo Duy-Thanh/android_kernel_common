@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abb4e498_98c03a4f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-13T01:17:29Z",
+      "side": 1,
+      "message": "After taking another look at this: if you can guarantee and write a comment that no NS interrupts are enabled here (e.g. the GIC hasn\u0027t been configured yet), then it might be safe to not restart the call.\n\nIt might still be worthwhile to check and `WARN_ON` the return code.",
+      "parentUuid": "1f64f407_bb821e53",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "How are non-secure interrupts handled then?",
       "parentUuid": "95305f03_78938787",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33285842_8b802b64",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-13T01:17:29Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b0eb8da6_cdd82c9a",
       "revId": "3f52acc51e52460793d729815c7525273e7a46de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
