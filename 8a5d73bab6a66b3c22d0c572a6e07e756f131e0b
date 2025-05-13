@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffcd717f_e9a467d8",
+        "filename": "include/linux/power_supply.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-05-13T23:24:31Z",
+      "side": 1,
+      "message": "I was chatting with @cmllamas@google.com about this and we were wondering if we can get away with hiding these behind a `#ifdef __GENKSYMS` macro to see if we can add them later without breaking the KMI. Can you upload your original changes with this to see if there are any ABI breakages?",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8f552bcf_ec66d03d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/power_supply.h",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 183,
+                "endChar": 0
+              },
+              "replacement": "#ifdef __GENKSYMS__\n"
+            },
+            {
+              "path": "include/linux/power_supply.h",
+              "range": {
+                "startLine": 186,
+                "startChar": 0,
+                "endLine": 186,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8a5d73bab6a66b3c22d0c572a6e07e756f131e0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
