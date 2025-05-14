@@ -324,6 +324,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6441a4c_74d81150",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-14T10:17:12Z",
+      "side": 1,
+      "message": "Hmm, yes I guess it does, though if the host driver asks for a downgrade, the hypervisor could accept and convert the subsequent host calls on the fly. It is all a bit complicated though 😞",
+      "parentUuid": "c2a3ec18_c10aef51",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
