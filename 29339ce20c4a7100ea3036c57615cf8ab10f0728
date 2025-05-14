@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6c07520_515788df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-14T15:55:04Z",
+      "side": 1,
+      "message": "You need to mention in the patch description that you skipped changes in memory.c when porting to 6.12. See notes about 5.15 porting, so you need to add a similar description.",
+      "parentUuid": "82eb4055_d4ede86b",
+      "revId": "29339ce20c4a7100ea3036c57615cf8ab10f0728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97987b03_3e65889c",
         "filename": "include/linux/pagemap.h",
         "patchSetId": 1
