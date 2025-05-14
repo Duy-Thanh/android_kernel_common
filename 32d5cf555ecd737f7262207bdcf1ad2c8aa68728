@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "177094b3_68348948",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2025-05-14T17:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51378ef2_c17f4a0a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "32d5cf555ecd737f7262207bdcf1ad2c8aa68728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de863da9_d205a793",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-12T17:16:44Z",
       "side": 1,
       "message": "Maybe just use bh instead of softirq, since that\u0027s the term the code already uses?  It\u0027s only bh_wq (bh workqueue) that will no longer be correct.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 23
+      },
+      "revId": "32d5cf555ecd737f7262207bdcf1ad2c8aa68728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db92ca9e_df0b3685",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2025-05-14T17:24:23Z",
+      "side": 1,
+      "message": "Per our OOB discussion I renamed to \"verify_inline\" / \"inline verification\".",
+      "parentUuid": "de863da9_d205a793",
       "range": {
         "startLine": 241,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66b6d6aa_da5a1de5",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2025-05-14T17:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f74cf24_c8eb7cf4",
+      "range": {
+        "startLine": 776,
+        "startChar": 32,
+        "endLine": 776,
+        "endChar": 44
+      },
+      "revId": "32d5cf555ecd737f7262207bdcf1ad2c8aa68728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbc940c0_8de11d3c",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-05-12T17:16:44Z",
       "side": 1,
       "message": "Shouldn\u0027t add this extra logging.  It would be too verbose.",
+      "range": {
+        "startLine": 1337,
+        "startChar": 0,
+        "endLine": 1337,
+        "endChar": 44
+      },
+      "revId": "32d5cf555ecd737f7262207bdcf1ad2c8aa68728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecebadda_c2fa43fa",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2025-05-14T17:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbc940c0_8de11d3c",
       "range": {
         "startLine": 1337,
         "startChar": 0,
