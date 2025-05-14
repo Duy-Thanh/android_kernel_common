@@ -16,6 +16,24 @@
       "message": "No blank lines in the section with tags please.",
       "revId": "7f7471d33ff26d397ca93061ff3706aa923ee3ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63d448f3_5efed312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943000
+      },
+      "writtenOn": "2025-05-14T05:43:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fda7c5ab_56b29ae8",
+      "revId": "7f7471d33ff26d397ca93061ff3706aa923ee3ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
