@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79220548_46be8cc4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-14T13:46:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02a39f56_36a8cbd9",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 27
+      },
+      "revId": "15b4ea110e260d94a146107899caf87bf414ea4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "873d7439_36dd434a",
@@ -55,6 +79,30 @@
       "writtenOn": "2025-05-14T13:35:45Z",
       "side": 1,
       "message": "This is not used anymore",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 42,
+        "endChar": 28
+      },
+      "revId": "15b4ea110e260d94a146107899caf87bf414ea4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "820123b6_17b89c07",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-14T13:46:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "873d7439_36dd434a",
       "range": {
         "startLine": 42,
         "startChar": 7,
