@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cde39993_e16ca42f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-14T16:01:40Z",
+      "side": 1,
+      "message": "Also note that `alloc_swap_folio()` in 6.12 does not set __GFP_CMA, so by skipping https://android-review.git.corp.google.com/c/kernel/common/+/3009322/16/mm/memory.c#3819 you will cause swap not to use CMA anymore, which is a functional change. If that is intended you should document that in the patch description as well.",
+      "parentUuid": "e6c07520_515788df",
+      "revId": "29339ce20c4a7100ea3036c57615cf8ab10f0728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97987b03_3e65889c",
         "filename": "include/linux/pagemap.h",
         "patchSetId": 1
