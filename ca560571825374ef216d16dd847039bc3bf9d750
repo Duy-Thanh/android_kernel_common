@@ -54,6 +54,24 @@
       ],
       "revId": "ca560571825374ef216d16dd847039bc3bf9d750",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81ebf5f_34fdb888",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1770429
+      },
+      "writtenOn": "2025-05-14T02:29:12Z",
+      "side": 1,
+      "message": "Hi Todd,\nWe prefer to use the definition of ANDROID_OEM_DATA to avoid confusion with the vendor code. We plan to use this OEM data field in OGKI，which also needs to conform to KMI compatibility requirements.\n\nThanks",
+      "parentUuid": "90378527_9b3362b7",
+      "revId": "ca560571825374ef216d16dd847039bc3bf9d750",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
