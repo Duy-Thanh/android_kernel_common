@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cecd32f7_169b8dc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-14T18:34:24Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCheckPatch: WARNING:TYPO_SPELLING: \u0027beeing\u0027 may be misspelled - perhaps \u0027being\u0027?\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:TYPO_SPELLING: \u0027beeing\u0027 may be misspelled - perhaps \u0027being\u0027?",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 0
+      },
+      "revId": "6b3df8b32926baa58489ca57c22d593a074b3973",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
