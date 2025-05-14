@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f1a82a_349cfbb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-14T21:13:44Z",
+      "side": 1,
+      "message": "The code already did this.  Just it had an additional path where it used the BH workqueue when `in_hardirq() || irqs_disabled()`.  This change is removing that additional path, so what needs to be explained is why that additional path is not worthwhile.",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 11,
+        "endChar": 5
+      },
+      "revId": "0a9d23323faa17f8f6901ad2618a4764a5a3fee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b0fd76b6_ed1d0f78",
@@ -14,6 +37,144 @@
       "writtenOn": "2025-05-14T17:24:23Z",
       "side": 1,
       "message": "Eric, PTAL.",
+      "revId": "0a9d23323faa17f8f6901ad2618a4764a5a3fee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bf6191_f694102d",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-14T21:13:44Z",
+      "side": 1,
+      "message": "Maybe: DM_VERITY_DEFAULT_MAX_INLINE_SIZE?",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 49
+      },
+      "revId": "0a9d23323faa17f8f6901ad2618a4764a5a3fee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "707a877b_e58ed11f",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-14T21:13:44Z",
+      "side": 1,
+      "message": "dm_verity_max_inline_size?",
+      "range": {
+        "startLine": 55,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 61
+      },
+      "revId": "0a9d23323faa17f8f6901ad2618a4764a5a3fee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ad86106_84157653",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-14T21:13:44Z",
+      "side": 1,
+      "message": "Drop the \"verity_\" prefix?",
+      "range": {
+        "startLine": 64,
+        "startChar": 31,
+        "endLine": 64,
+        "endChar": 65
+      },
+      "revId": "0a9d23323faa17f8f6901ad2618a4764a5a3fee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce384ef9_315217d0",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-14T21:13:44Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 397,
+        "startChar": 29,
+        "endLine": 397,
+        "endChar": 35
+      },
+      "revId": "0a9d23323faa17f8f6901ad2618a4764a5a3fee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0720fe5d_520f6559",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-14T21:13:44Z",
+      "side": 1,
+      "message": "Maybe show the new option here?",
+      "range": {
+        "startLine": 998,
+        "startChar": 14,
+        "endLine": 998,
+        "endChar": 42
+      },
+      "revId": "0a9d23323faa17f8f6901ad2618a4764a5a3fee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fa6577_74e7086a",
+        "filename": "drivers/md/dm-verity.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-14T21:13:44Z",
+      "side": 1,
+      "message": "This field just controls whether sleeping is okay or not.  So in_bh is actually what we want (though in_atomic might be a better name).  It just should not be set to true in task context.",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 23
+      },
       "revId": "0a9d23323faa17f8f6901ad2618a4764a5a3fee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
