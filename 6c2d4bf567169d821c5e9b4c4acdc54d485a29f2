@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc787f30_821d3c79",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1725,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-14T08:25:14Z",
+      "side": 1,
+      "message": "I think that for an SMC using SMCCC1.2 (which seems to be what we\u0027re doing here based on `regs` being a `struct arm_smccc_1_2_regs`) the return registers are x0-x7, but `struct arm_smccc_res` only has x0-x3 (which is for SMCCC 1.1). For 1.2 the return regs should also be `struct arm_smccc_1_2_regs`:\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12/include/linux/arm-smccc.h#460",
+      "range": {
+        "startLine": 1725,
+        "startChar": 37,
+        "endLine": 1725,
+        "endChar": 48
+      },
+      "revId": "6c2d4bf567169d821c5e9b4c4acdc54d485a29f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455c9cd3_5a7b4d8d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-14T08:25:14Z",
+      "side": 1,
+      "message": "I\u0027d suggest using the existing infrastructure to register this stuff:\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12/arch/arm64/kvm/hyp/nvhe/modules.c#142\n\nThat should also allow you to drop the locking 😊",
+      "range": {
+        "startLine": 1739,
+        "startChar": 5,
+        "endLine": 1739,
+        "endChar": 37
+      },
+      "revId": "6c2d4bf567169d821c5e9b4c4acdc54d485a29f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
