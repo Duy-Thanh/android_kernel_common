@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82eb4055_d4ede86b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010822
+      },
+      "writtenOn": "2025-05-14T06:51:45Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/3382263\nOn android15-6.6 and android16-6.12, this part of the modification has been overwritten by the above commit, so I skipped this part of the modification.",
+      "parentUuid": "b4e81586_f9dc1453",
+      "revId": "29339ce20c4a7100ea3036c57615cf8ab10f0728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97987b03_3e65889c",
@@ -55,6 +73,30 @@
           ]
         }
       ],
+      "revId": "29339ce20c4a7100ea3036c57615cf8ab10f0728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26bb1580_feb21a78",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 2010822
+      },
+      "writtenOn": "2025-05-14T06:51:45Z",
+      "side": 1,
+      "message": "This was indeed a mistake and has been fixed.",
+      "parentUuid": "97987b03_3e65889c",
+      "range": {
+        "startLine": 686,
+        "startChar": 0,
+        "endLine": 690,
+        "endChar": 0
+      },
       "revId": "29339ce20c4a7100ea3036c57615cf8ab10f0728",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
