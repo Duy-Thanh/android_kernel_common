@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "247f86dc_682b1702",
+        "filename": "mm/filemap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3441,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-14T16:15:15Z",
+      "side": 1,
+      "message": "folio is not locked yet IIUC. If you really want this hook to be called after the folio is locked you should move it after lock_folio_maybe_drop_mmap() call.",
+      "range": {
+        "startLine": 3441,
+        "startChar": 1,
+        "endLine": 3441,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6155763f_3e956bcd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3440,
+                "startChar": 0,
+                "endLine": 3442,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3446,
+                "startChar": 0,
+                "endLine": 3446,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_filemap_fault_folio_locked(folio);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "588591f8b43037fd346232f2744da2f891663917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b78e3c0_ae6a04f7",
+        "filename": "mm/swap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-14T16:15:15Z",
+      "side": 1,
+      "message": "use tabs please",
+      "range": {
+        "startLine": 511,
+        "startChar": 1,
+        "endLine": 511,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b71b34ca_15d203a8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 511,
+                "startChar": 0,
+                "endLine": 514,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_folio_add_lru_folio_activate(folio, \u0026bypass);\n\tif (!bypass)\n\t\tfolio_set_active(folio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "588591f8b43037fd346232f2744da2f891663917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba2c4b1_8e5f85e6",
+        "filename": "mm/swap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-14T16:15:15Z",
+      "side": 1,
+      "message": "same here.",
+      "range": {
+        "startLine": 512,
+        "startChar": 0,
+        "endLine": 514,
+        "endChar": 0
+      },
+      "revId": "588591f8b43037fd346232f2744da2f891663917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
