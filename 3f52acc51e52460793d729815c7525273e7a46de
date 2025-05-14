@@ -340,6 +340,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea25df1a_7c60bb32",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-14T12:27:21Z",
+      "side": 1,
+      "message": "I moved the code that sends that availability message as part of the `kvm_host_ffa_handler` dispatcher. Closing this for the moment",
+      "parentUuid": "e6441a4c_74d81150",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6646e06e_c75b3e7a",
