@@ -123,6 +123,30 @@
       },
       "revId": "6059f2dcf2e008384ced44bd16da424f1add43e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e017117f_664334e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-14T12:26:10Z",
+      "side": 1,
+      "message": "The host cannot send a destruction message for a live VM because we sanitize the sender ID for that direct message.",
+      "parentUuid": "94906d48_403c833a",
+      "range": {
+        "startLine": 408,
+        "startChar": 5,
+        "endLine": 408,
+        "endChar": 66
+      },
+      "revId": "6059f2dcf2e008384ced44bd16da424f1add43e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
