@@ -16,6 +16,24 @@
       "message": "see comment on aosp/3589732",
       "revId": "6c73e57e2120747ca7c138386002df17f2db7f0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba3bf785_fd669642",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2025-05-14T11:37:14Z",
+      "side": 1,
+      "message": "Upstream link : https://lore.kernel.org/lkml/20250514111155.10896-3-quic_sartgarg@quicinc.com/",
+      "parentUuid": "3e30fb2d_ddb68133",
+      "revId": "6c73e57e2120747ca7c138386002df17f2db7f0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
