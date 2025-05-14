@@ -16,6 +16,24 @@
       "message": "1. You need to check exactly how this prefix change might break `gendwarfksyms`\n2. I removed this macro because I found very, very few uses for it. I suggested just sharing the macro in aosp/3593172 (and its `android-mainline cherry-pick).",
       "revId": "0a555f4eaeab74eb53928794cfb7a12e49d6ba08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "066645e2_595f3f9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-14T05:58:57Z",
+      "side": 1,
+      "message": "Alternative suggested:\n\n```\nANDROID_KABI_RESERVE(n); /* for vendor foo / backport bar */\n```",
+      "parentUuid": "c8c0ff09_ff9f54ab",
+      "revId": "0a555f4eaeab74eb53928794cfb7a12e49d6ba08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
