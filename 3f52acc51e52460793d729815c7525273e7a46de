@@ -306,6 +306,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2a3ec18_c10aef51",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-14T09:54:54Z",
+      "side": 1,
+      "message": "Won\u0027t that prevent the host from engaging in version negotiation later on?",
+      "parentUuid": "d34410b6_eebc12e2",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
