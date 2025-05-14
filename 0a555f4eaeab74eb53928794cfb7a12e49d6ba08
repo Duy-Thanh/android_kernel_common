@@ -34,6 +34,24 @@
       "parentUuid": "c8c0ff09_ff9f54ab",
       "revId": "0a555f4eaeab74eb53928794cfb7a12e49d6ba08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8a948b_eeaed5ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-05-14T17:54:18Z",
+      "side": 1,
+      "message": "This branch has your replaced version of `ANDROID_KABI_RESERVE`, but it has never had `ANDROID_BACKPORT_RESERVE` like older release branches.\n\nGreg doesn\u0027t want us using `ANDROID_KABI_RESERVE`, so this just adds a different name to make it clear who owns which reservations.",
+      "parentUuid": "066645e2_595f3f9f",
+      "revId": "0a555f4eaeab74eb53928794cfb7a12e49d6ba08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
