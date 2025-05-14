@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fefd6de5_568fa8d9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1725,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-14T13:26:52Z",
+      "side": 1,
+      "message": "fixed this",
+      "parentUuid": "bc787f30_821d3c79",
+      "range": {
+        "startLine": 1725,
+        "startChar": 37,
+        "endLine": 1725,
+        "endChar": 48
+      },
+      "revId": "6c2d4bf567169d821c5e9b4c4acdc54d485a29f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "455c9cd3_5a7b4d8d",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-14T08:25:14Z",
       "side": 1,
       "message": "I\u0027d suggest using the existing infrastructure to register this stuff:\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12/arch/arm64/kvm/hyp/nvhe/modules.c#142\n\nThat should also allow you to drop the locking 😊",
+      "range": {
+        "startLine": 1739,
+        "startChar": 5,
+        "endLine": 1739,
+        "endChar": 37
+      },
+      "revId": "6c2d4bf567169d821c5e9b4c4acdc54d485a29f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a7b04b0_5305f41a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-14T13:26:52Z",
+      "side": 1,
+      "message": "That\u0027s a good point. let me use this.",
+      "parentUuid": "455c9cd3_5a7b4d8d",
       "range": {
         "startLine": 1739,
         "startChar": 5,
