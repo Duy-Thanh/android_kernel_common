@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf47dd5_2a9f005f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-14T16:11:27Z",
+      "side": 1,
+      "message": "L+2 since it\u0027s a clean cherrypick and an upstream-task bug is unnecessary.",
+      "revId": "b6809106b72d81cd6f47ac92a87fe07f9c3322ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
