@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "761aa502_1c5b44e8",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-14T16:44:32Z",
+      "side": 1,
+      "message": "\"Name\" is ambiguous; is it the flat name or the name-with-path-and-extension?\n\nDoes this change with kernel version?",
+      "range": {
+        "startLine": 311,
+        "startChar": 43,
+        "endLine": 311,
+        "endChar": 48
+      },
+      "revId": "33e68cc59e3a2de34ce6a3161d6deae6f7382627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e9d7a0f_d0e9aa40",
         "filename": "kernel/module/Kconfig",
         "patchSetId": 1
