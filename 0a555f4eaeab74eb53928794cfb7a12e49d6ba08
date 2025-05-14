@@ -52,6 +52,24 @@
       "parentUuid": "066645e2_595f3f9f",
       "revId": "0a555f4eaeab74eb53928794cfb7a12e49d6ba08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10086c02_f41019f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-05-14T20:26:11Z",
+      "side": 1,
+      "message": "Spoke with Sami and addressed gendwarfksyms compatibility in patch set 2. Also manually tested with a `ANDROID_BACKPORT_USE()`",
+      "parentUuid": "7d8a948b_eeaed5ed",
+      "revId": "0a555f4eaeab74eb53928794cfb7a12e49d6ba08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
