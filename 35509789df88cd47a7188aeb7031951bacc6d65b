@@ -238,6 +238,30 @@
       },
       "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc454372_4c097e90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3845040
+      },
+      "writtenOn": "2025-05-14T04:07:32Z",
+      "side": 1,
+      "message": "worked with george. order of patches , i am not changing . the backported patch https://android-review.googlesource.com/c/kernel/common/+/3617275 is on DP2.1 ( george ) series . Abandoning this ANDROID patch",
+      "parentUuid": "75d7b742_0ab7efc4",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "35509789df88cd47a7188aeb7031951bacc6d65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
