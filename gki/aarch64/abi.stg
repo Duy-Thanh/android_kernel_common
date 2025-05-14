@@ -325290,10 +325290,20 @@ function {
   parameter_id: 0xcd84e3cd
 }
 function {
+<<<<<<< HEAD   (e9ec73 ANDROID: KVM: arm64: Fix pKVM alloc get_free_chunk am: c42b2)
   id: 0x13dedb1b
   return_type_id: 0x48b5725f
   parameter_id: 0x09427c40
   parameter_id: 0x4585663f
+||||||| BASE
+=======
+  id: 0x13dda576
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0258f96e
+  parameter_id: 0xf435685e
+  parameter_id: 0x00a43052
+  parameter_id: 0xcd84e3cd
+>>>>>>> BRANCH (f49bbf ANDROID: ABI: qcom: Update qcom ABI for DMA)
 }
 function {
   id: 0x13e0bf07
@@ -336673,6 +336683,15 @@ function {
 function {
   id: 0x418338e4
   return_type_id: 0x18ea2d6b
+}
+function {
+  id: 0x420a20df
+  return_type_id: 0x00a43052
+  parameter_id: 0x0258f96e
+  parameter_id: 0xf435685e
+  parameter_id: 0xcd84e3cd
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x33756485
 }
 function {
   id: 0x420fd9c2
@@ -400069,6 +400088,15 @@ elf_symbol {
   full_name: "dma_alloc_attrs"
 }
 elf_symbol {
+  id: 0x12eaf956
+  name: "dma_alloc_noncontiguous"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8572add6
+  type_id: 0x420a20df
+  full_name: "dma_alloc_noncontiguous"
+}
+elf_symbol {
   id: 0xac4ecea5
   name: "dma_alloc_pages"
   is_defined: true
@@ -400612,6 +400640,15 @@ elf_symbol {
   full_name: "dma_free_attrs"
 }
 elf_symbol {
+  id: 0x1d7e2299
+  name: "dma_free_noncontiguous"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x53de13e5
+  type_id: 0x13dda576
+  full_name: "dma_free_noncontiguous"
+}
+elf_symbol {
   id: 0x23e816b8
   name: "dma_free_pages"
   is_defined: true
@@ -401051,6 +401088,15 @@ elf_symbol {
   crc: 0x1d6fe8ee
   type_id: 0x55d07307
   full_name: "dma_vmap_noncontiguous"
+}
+elf_symbol {
+  id: 0xcb48db3d
+  name: "dma_vunmap_noncontiguous"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3f830c92
+  type_id: 0x106c9a5c
+  full_name: "dma_vunmap_noncontiguous"
 }
 elf_symbol {
   id: 0xcbd73832
@@ -454995,6 +455041,7 @@ interface {
   symbol_id: 0x76f0e551
   symbol_id: 0x8ca06f02
   symbol_id: 0x6cb15207
+  symbol_id: 0x12eaf956
   symbol_id: 0xac4ecea5
   symbol_id: 0xf907b0c3
   symbol_id: 0x3492f7a1
@@ -455053,6 +455100,7 @@ interface {
   symbol_id: 0xf18ac584
   symbol_id: 0x7ffe50b7
   symbol_id: 0x3b69b427
+  symbol_id: 0x1d7e2299
   symbol_id: 0x23e816b8
   symbol_id: 0x451c2c07
   symbol_id: 0x28fa142c
@@ -455102,6 +455150,7 @@ interface {
   symbol_id: 0x0134874d
   symbol_id: 0xe5a171eb
   symbol_id: 0xc4a6e691
+  symbol_id: 0xcb48db3d
   symbol_id: 0xcbd73832
   symbol_id: 0x7a8e1c58
   symbol_id: 0xbd678b0e
