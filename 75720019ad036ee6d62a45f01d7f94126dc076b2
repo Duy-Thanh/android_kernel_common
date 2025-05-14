@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4d2da5_430295e3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-14T16:11:16Z",
+      "side": 1,
+      "message": "This means we now return `NULL` if the buffer status was already `HYP_RB_WRITING` whereas before we\u0027d reserve some space. Is that ok?",
+      "range": {
+        "startLine": 258,
+        "startChar": 8,
+        "endLine": 258,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "195119f7_f6c6322b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/trace.c",
+              "range": {
+                "startLine": 257,
+                "startChar": 0,
+                "endLine": 259,
+                "endChar": 0
+              },
+              "replacement": "\tif (atomic_read(\u0026cpu_buffer-\u003estatus) !\u003d HYP_RB_READY \u0026\u0026\n\t    atomic_cmpxchg(\u0026cpu_buffer-\u003estatus, HYP_RB_READY, HYP_RB_WRITING)\n\t    !\u003d HYP_RB_READY) {\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/trace.c",
+              "range": {
+                "startLine": 260,
+                "startChar": 0,
+                "endLine": 260,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f8dfc35_d2af5811",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-14T16:11:16Z",
+      "side": 1,
+      "message": "How come we didn\u0027t need this check already?",
+      "range": {
+        "startLine": 333,
+        "startChar": 23,
+        "endLine": 333,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b767ee17_9e0e3e91",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/trace.c",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 333,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * If the previous status was HYP_RB_UNAVAILABLE, the buffer was\n\t * successfully enabled. Otherwise, it was already enabled or in\n\t * another state.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d89dd37_316a66e1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-14T16:11:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `!\u003d HYP_RB_READY` so we don\u0027t proceed if the buffer becomes unavailable?",
+      "range": {
+        "startLine": 639,
+        "startChar": 23,
+        "endLine": 639,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "62f07f10_f3537bcf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/trace.c",
+              "range": {
+                "startLine": 639,
+                "startChar": 0,
+                "endLine": 640,
+                "endChar": 0
+              },
+              "replacement": "\t\t} while (prev_status !\u003d HYP_RB_READY);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
