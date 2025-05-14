@@ -50,6 +50,30 @@
       ],
       "revId": "8a5d73bab6a66b3c22d0c572a6e07e756f131e0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a979492f_1fcf6014",
+        "filename": "include/linux/power_supply.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2025-05-14T02:17:33Z",
+      "side": 1,
+      "message": "This approach won\u0027t work because of the struct array in drivers/power/supply/power_supply_sysfs.c . In any case I have uploaded suggested changes in the original CL.",
+      "parentUuid": "ffcd717f_e9a467d8",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 0
+      },
+      "revId": "8a5d73bab6a66b3c22d0c572a6e07e756f131e0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
