@@ -288,6 +288,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d34410b6_eebc12e2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 87
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-14T08:54:37Z",
+      "side": 1,
+      "message": "I don\u0027t see a problem with returning to the host, but this shouldn\u0027t be done from this context IMO. Is there any reason to wait for the FFA_VERSION call to send the host availability message? If not, we could simply do that closer to hyp_ffa_init() when the FF-A proxy gets initialized, in a dedicated hypercall for simplicity.",
+      "parentUuid": "091eb019_c1d78d48",
+      "revId": "3f52acc51e52460793d729815c7525273e7a46de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6646e06e_c75b3e7a",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 87
