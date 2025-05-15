@@ -1110,6 +1110,13 @@
   ip_send_check
   iput
   __irq_alloc_descs
+<<<<<<< HEAD   (3f4e1ccba8ea288280e9e18be6edf9e9a070a761 UPSTREAM: af_unix: Update unix_sk(sk)->oob_skb under sk_rece)
+||||||| BASE   (218e2bd245875f4ad97f836cabf5970c044eee0f FROMGIT: perf/aux: Allocate non-contiguous AUX pages by defa)
+  __irq_apply_affinity_hint
+=======
+  __irq_apply_affinity_hint
+  irq_check_status_bit
+>>>>>>> CHANGE (a0fa2316cce1bc23e788603d7a6d0a3db7b100d3 ANDROID: ABI: Update pixel symbol list)
   irq_create_mapping_affinity
   irq_create_of_mapping
   __irq_domain_add
@@ -1120,6 +1127,7 @@
   irq_domain_xlate_twocell
   irq_force_affinity
   irq_get_irq_data
+  irq_get_percpu_devid_partition
   irq_modify_status
   irq_of_parse_and_map
   __irq_resolve_mapping
@@ -1132,6 +1140,7 @@
   irq_set_irq_wake
   irq_to_desc
   irq_work_queue
+  irq_work_run
   irq_work_sync
   is_vmalloc_addr
   jiffies
@@ -1507,6 +1516,7 @@
   perf_aux_output_begin
   perf_aux_output_end
   perf_aux_output_flag
+  perf_aux_output_skip
   perf_event_addr_filters_sync
   perf_event_create_kernel_counter
   perf_event_disable
@@ -2115,8 +2125,13 @@
   thermal_zone_device_update
   thermal_zone_get_temp
   thermal_zone_get_zone_by_name
+<<<<<<< HEAD   (3f4e1ccba8ea288280e9e18be6edf9e9a070a761 UPSTREAM: af_unix: Update unix_sk(sk)->oob_skb under sk_rece)
   thermal_zone_of_sensor_register
   thermal_zone_of_sensor_unregister
+||||||| BASE   (218e2bd245875f4ad97f836cabf5970c044eee0f FROMGIT: perf/aux: Allocate non-contiguous AUX pages by defa)
+=======
+  this_cpu_has_cap
+>>>>>>> CHANGE (a0fa2316cce1bc23e788603d7a6d0a3db7b100d3 ANDROID: ABI: Update pixel symbol list)
   thread_group_cputime_adjusted
   tick_nohz_get_idle_calls_cpu
   time64_to_tm

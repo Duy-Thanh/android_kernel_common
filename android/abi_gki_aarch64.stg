@@ -343868,7 +343868,12 @@ elf_symbol {
   name: "perf_aux_output_skip"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (3f4e1ccba8ea288280e9e18be6edf9e9a070a761 UPSTREAM: af_unix: Update unix_sk(sk)->oob_skb under sk_rece)
   crc: 0xa14ced1d
+||||||| BASE   (218e2bd245875f4ad97f836cabf5970c044eee0f FROMGIT: perf/aux: Allocate non-contiguous AUX pages by defa)
+=======
+  crc: 0x5a8de386
+>>>>>>> CHANGE (a0fa2316cce1bc23e788603d7a6d0a3db7b100d3 ANDROID: ABI: Update pixel symbol list)
   type_id: 0x9fe48d4f
   full_name: "perf_aux_output_skip"
 }
