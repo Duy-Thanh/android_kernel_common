@@ -16,6 +16,24 @@
       "message": "Patch has been picked up by the maintainer, can you please change both the patches to FROMGIT instead?",
       "revId": "3e2e99a085303baac40e28355af524c029646c09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ad7cc13_2ca1a5cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1943000
+      },
+      "writtenOn": "2025-05-15T01:44:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe78737b_3f08392a",
+      "revId": "3e2e99a085303baac40e28355af524c029646c09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
