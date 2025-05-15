@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e4be3ed_0f17de2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-15T15:55:44Z",
+      "side": 1,
+      "message": "+2 to be able to run presubmits but there is still a question about this patch being a partial cherry-pick and not allowing swap-in pages to be allocated from CMA.",
+      "revId": "6c5d942d2f3beaa84be34b4126e266aba3d5aab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
