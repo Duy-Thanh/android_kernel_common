@@ -381064,6 +381064,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_rmqueue_bulk_bypass"
 }
 elf_symbol {
+  id: 0x18614abb
+  name: "__traceiter_android_vh_rmqueue_pcplist_override_batch"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x232bae92
+  type_id: 0x9be2da56
+  full_name: "__traceiter_android_vh_rmqueue_pcplist_override_batch"
+}
+elf_symbol {
   id: 0x8d62858f
   name: "__traceiter_android_vh_rmqueue_smallest_bypass"
   is_defined: true
@@ -386615,6 +386624,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_rmqueue_bulk_bypass"
+}
+elf_symbol {
+  id: 0x4052a6bd
+  name: "__tracepoint_android_vh_rmqueue_pcplist_override_batch"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rmqueue_pcplist_override_batch"
 }
 elf_symbol {
   id: 0x04365139
@@ -453553,6 +453571,7 @@ interface {
   symbol_id: 0xdd585356
   symbol_id: 0xa8cef421
   symbol_id: 0xd6100bd9
+  symbol_id: 0x18614abb
   symbol_id: 0x8d62858f
   symbol_id: 0xcef5d79f
   symbol_id: 0x91384eff
@@ -454170,6 +454189,7 @@ interface {
   symbol_id: 0x3cdecaec
   symbol_id: 0xcad24ea3
   symbol_id: 0xfebada43
+  symbol_id: 0x4052a6bd
   symbol_id: 0x04365139
   symbol_id: 0xd94bc301
   symbol_id: 0x3fc5ffc9
