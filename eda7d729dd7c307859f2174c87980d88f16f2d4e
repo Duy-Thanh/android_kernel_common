@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c324e61f_3008f70d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ftrace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-15T10:23:53Z",
+      "side": 1,
+      "message": "Doesn\u0027t this mean this can now be NULL?",
+      "range": {
+        "startLine": 400,
+        "startChar": 18,
+        "endLine": 400,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3c56e867_ab452952",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ftrace.c",
+              "range": {
+                "startLine": 400,
+                "startChar": 0,
+                "endLine": 401,
+                "endChar": 0
+              },
+              "replacement": "\thyp_ftrace_patch(funcs ? funcs : __hyp_patchable_function_entries_start,\n\t\t\t funcs_end, 2 * AARCH64_INSN_SIZE,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eda7d729dd7c307859f2174c87980d88f16f2d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66e0cfdb_1a25c8e3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ftrace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-15T10:23:53Z",
+      "side": 1,
+      "message": "Same pattern here?",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78828058_854a53b4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ftrace.c",
+              "range": {
+                "startLine": 408,
+                "startChar": 0,
+                "endLine": 409,
+                "endChar": 0
+              },
+              "replacement": "\tif (!funcs)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ftrace.c",
+              "range": {
+                "startLine": 410,
+                "startChar": 0,
+                "endLine": 410,
+                "endChar": 0
+              },
+              "replacement": "\tif (!funcs_end)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ftrace.c",
+              "range": {
+                "startLine": 411,
+                "startChar": 0,
+                "endLine": 412,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "eda7d729dd7c307859f2174c87980d88f16f2d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
