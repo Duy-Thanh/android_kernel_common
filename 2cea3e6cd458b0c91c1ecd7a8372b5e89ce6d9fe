@@ -16,6 +16,24 @@
       "message": "Hi Chao, link looks incorrect, can you please fix it?",
       "revId": "2cea3e6cd458b0c91c1ecd7a8372b5e89ce6d9fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caaa939d_a7d3da0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3832128
+      },
+      "writtenOn": "2025-05-15T02:54:44Z",
+      "side": 1,
+      "message": "Sandeep, done, thanks for catching that!\n\nBTW, do we have any existing tools for checking consistency between Link and patch? or only can check manually?",
+      "parentUuid": "ea1cca65_fac8559f",
+      "revId": "2cea3e6cd458b0c91c1ecd7a8372b5e89ce6d9fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
