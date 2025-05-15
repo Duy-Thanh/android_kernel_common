@@ -33,6 +33,24 @@
       "message": "The change breaks the ABI, so can\u0027t be accepted as is.",
       "revId": "a666ab99055f1899f7452cf312b634e552ee0087",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ada543c1_643cadbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-15T11:07:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e2a37f11_fb0b03e1",
+      "revId": "a666ab99055f1899f7452cf312b634e552ee0087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
