@@ -54,6 +54,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3786bc15_d354dfc7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-15T17:24:34Z",
+      "side": 1,
+      "message": "Being per-cpu it is not possible to call reserve_entry() without the pair commit_entry().\n\nSo no conflict risk with HYP_RB_WRITING here.",
+      "parentUuid": "bd4d2da5_430295e3",
+      "range": {
+        "startLine": 258,
+        "startChar": 8,
+        "endLine": 258,
+        "endChar": 20
+      },
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f8dfc35_d2af5811",
         "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
         "patchSetId": 5
@@ -95,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f111d0f9_6d1b6b69",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-15T17:24:34Z",
+      "side": 1,
+      "message": "The other possibilities where if the status was already READY or WRITING. In both case, writing is already enabled.",
+      "parentUuid": "1f8dfc35_d2af5811",
+      "range": {
+        "startLine": 333,
+        "startChar": 23,
+        "endLine": 333,
+        "endChar": 41
+      },
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d89dd37_316a66e1",
         "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
         "patchSetId": 5
@@ -130,6 +178,30 @@
           ]
         }
       ],
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb115306_3193ea59",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-15T17:24:34Z",
+      "side": 1,
+      "message": "The buffer can\u0027t become unavailable as we check rb_cpu_loaded before and we have the spin_lock.",
+      "parentUuid": "5d89dd37_316a66e1",
+      "range": {
+        "startLine": 639,
+        "startChar": 23,
+        "endLine": 639,
+        "endChar": 40
+      },
       "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
