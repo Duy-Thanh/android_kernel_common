@@ -34,6 +34,24 @@
       "parentUuid": "ea1cca65_fac8559f",
       "revId": "2cea3e6cd458b0c91c1ecd7a8372b5e89ce6d9fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40903c7_371a7e47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-05-15T17:45:55Z",
+      "side": 1,
+      "message": "Hi Chao, I manually review the changes and link. We expect link for FROMLIST and FROMGIT patches so we preserve the context because sha is not reliable for rebased branches in maintainer\u0027s tree. For UPSTREAM commits, KernelCommit checker already works well to catch deviation from original patch.",
+      "parentUuid": "caaa939d_a7d3da0c",
+      "revId": "2cea3e6cd458b0c91c1ecd7a8372b5e89ce6d9fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
