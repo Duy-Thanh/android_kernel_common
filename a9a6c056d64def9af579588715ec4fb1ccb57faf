@@ -110,6 +110,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6199ac5c_5b95e78f",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-16T10:44:03Z",
+      "side": 1,
+      "message": "Yes, good point let me fix this.",
+      "parentUuid": "16856b5e_dca45126",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37051069_1a580841",
@@ -127,6 +145,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "234682ce_9d101769",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-16T10:44:03Z",
+      "side": 1,
+      "message": "nope, it is just a typo, let me fix it.",
+      "parentUuid": "37051069_1a580841",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "347e04a3_6038dd67",
@@ -140,6 +176,24 @@
       "writtenOn": "2025-05-16T00:41:55Z",
       "side": 1,
       "message": "Is this available yet? Trusty seems to be getting 0 here, has the vCPU been initialized?",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e92046d_98b4464e",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-16T10:44:03Z",
+      "side": 1,
+      "message": "The vCPU is not yet initialized here but the hypervisor view of the vm structure is. I fixes this.",
+      "parentUuid": "347e04a3_6038dd67",
       "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -175,6 +229,24 @@
       "side": 1,
       "message": "I\u0027m not sure we need it, but it can\u0027t hurt either.",
       "parentUuid": "170ebc84_f35c41ac",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c876fb4_a061572c",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-16T10:44:03Z",
+      "side": 1,
+      "message": "I added it.",
+      "parentUuid": "1f414d40_cafd9759",
       "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
