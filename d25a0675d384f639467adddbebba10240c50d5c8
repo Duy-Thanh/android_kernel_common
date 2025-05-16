@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2885dde9_3e9bb149",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 94
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-16T21:23:25Z",
+      "side": 1,
+      "message": "Tested patchset 94: host and guest booted successfully and all VM messages were processed. The guest started and shut down cleanly:\n```\n[   90.412569][   T85] trusty-log trusty-ffa:trusty-core:log: long sm_ffa_handle_framework_msg(struct smc_ret18 *):585: Got VM creation message for 2\n[   90.414057][   T85] trusty-log trusty-ffa:trusty-core:log: long sm_ffa_handle_framework_msg(struct smc_ret18 *):607: VM creation returning 0\n...\n[  261.189613][   T85] trusty-log trusty-ffa:trusty-core:log: long sm_ffa_handle_framework_msg(struct smc_ret18 *):613: Got VM destruction message for 2\n[  261.191526][   T85] trusty-log trusty-ffa:trusty-core:log: long sm_ffa_handle_framework_msg(struct smc_ret18 *):676: VM destruction returning 0\n```\nand in the guest log\n```\n[  125.695806][   T39] trusty_ipc virtio8: is online\n[  125.695806][   T39] trusty_ipc virtio8: is online\n[  125.810841][    T1] trusty-virtio trusty-virtio: initializing done\n[  125.810841][    T1] trusty-virtio trusty-virtio: initializing done\n```",
+      "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
