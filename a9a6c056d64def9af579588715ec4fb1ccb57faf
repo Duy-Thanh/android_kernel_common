@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d719c8_9c9b6db0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1341,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-16T10:51:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f0e93b_ec060d76",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e362d3e1_e831d4c5",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-05-16T09:43:03Z",
       "side": 1,
       "message": "As discussed offline, this is not safe -- the host is allowed to issue the FFA call with interrupts disabled, so this will simply loop for ever. So I\u0027m not sure this works.",
+      "range": {
+        "startLine": 1342,
+        "startChar": 3,
+        "endLine": 1342,
+        "endChar": 60
+      },
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f22fb9_28f0ea7c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-16T10:51:13Z",
+      "side": 1,
+      "message": "I agree to this we shouldn\u0027t make assumptions about the caller. I think the best thing to do is to assume that the host is always created.",
+      "parentUuid": "e362d3e1_e831d4c5",
       "range": {
         "startLine": 1342,
         "startChar": 3,
@@ -76,6 +118,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb245600_30a5e311",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-16T10:51:13Z",
+      "side": 1,
+      "message": "Fixed this by introducing another method that doesn\u0027t make use of the vcpu",
+      "parentUuid": "a1395455_19c97830",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7492993_3f96efd7",
@@ -89,6 +149,24 @@
       "writtenOn": "2025-05-16T00:31:50Z",
       "side": 1,
       "message": "Should `!hyp_vm` return an error?",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32b3cce1_b1618f61",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-16T10:51:13Z",
+      "side": 1,
+      "message": "added return -EBUSY",
+      "parentUuid": "e7492993_3f96efd7",
       "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
