@@ -22,6 +22,30 @@
       },
       "revId": "9d8a7f87cc620ad3969a707d317c4d611e4af648",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff3d7f7_6b5cd184",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-05-16T01:59:32Z",
+      "side": 1,
+      "message": "Ack. (No longer needed since the `ffa_set_retval` signature is now unchanged.)",
+      "parentUuid": "06153b23_e64fc052",
+      "range": {
+        "startLine": 1481,
+        "startChar": 2,
+        "endLine": 1481,
+        "endChar": 16
+      },
+      "revId": "9d8a7f87cc620ad3969a707d317c4d611e4af648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
