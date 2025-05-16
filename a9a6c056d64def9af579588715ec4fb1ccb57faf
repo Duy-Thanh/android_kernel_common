@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e362d3e1_e831d4c5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-16T09:43:03Z",
+      "side": 1,
+      "message": "As discussed offline, this is not safe -- the host is allowed to issue the FFA call with interrupts disabled, so this will simply loop for ever. So I\u0027m not sure this works.",
+      "range": {
+        "startLine": 1342,
+        "startChar": 3,
+        "endLine": 1342,
+        "endChar": 60
+      },
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3429cd6_5b615347",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 92
