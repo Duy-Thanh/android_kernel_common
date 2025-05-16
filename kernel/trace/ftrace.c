@@ -1297,6 +1297,8 @@ void ftrace_free_filter(struct ftrace_ops *ops)
 		return;
 	free_ftrace_hash(ops->func_hash->filter_hash);
 	free_ftrace_hash(ops->func_hash->notrace_hash);
+	ops->func_hash->filter_hash = EMPTY_HASH;
+	ops->func_hash->notrace_hash = EMPTY_HASH;
 }
 EXPORT_SYMBOL_GPL(ftrace_free_filter);
 
@@ -3427,6 +3429,186 @@ static int ftrace_update_ops(struct ftrace_ops *ops, struct ftrace_hash *filter_
 	return 0;
 }
 
+<<<<<<< HEAD   (b69514 ANDROID: Add pcie-designware.h and pci.h to aarch64 allowlis)
+||||||| BASE
+static int add_first_hash(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
+			  struct ftrace_ops_hash *func_hash)
+{
+	/* If the filter hash is not empty, simply remove the nohash from it */
+	if (!ftrace_hash_empty(func_hash->filter_hash)) {
+		*filter_hash = copy_hash(func_hash->filter_hash);
+		if (!*filter_hash)
+			return -ENOMEM;
+		remove_hash(*filter_hash, func_hash->notrace_hash);
+		*notrace_hash = EMPTY_HASH;
+
+	} else {
+		*notrace_hash = copy_hash(func_hash->notrace_hash);
+		if (!*notrace_hash)
+			return -ENOMEM;
+		*filter_hash = EMPTY_HASH;
+	}
+	return 0;
+}
+
+static int add_next_hash(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
+			 struct ftrace_ops_hash *ops_hash, struct ftrace_ops_hash *subops_hash)
+{
+	int size_bits;
+	int ret;
+
+	/* If the subops trace all functions so must the main ops */
+	if (ftrace_hash_empty(ops_hash->filter_hash) ||
+	    ftrace_hash_empty(subops_hash->filter_hash)) {
+		*filter_hash = EMPTY_HASH;
+	} else {
+		/*
+		 * The main ops filter hash is not empty, so its
+		 * notrace_hash had better be, as the notrace hash
+		 * is only used for empty main filter hashes.
+		 */
+		WARN_ON_ONCE(!ftrace_hash_empty(ops_hash->notrace_hash));
+
+		size_bits = max(ops_hash->filter_hash->size_bits,
+				subops_hash->filter_hash->size_bits);
+
+		/* Copy the subops hash */
+		*filter_hash = alloc_and_copy_ftrace_hash(size_bits, subops_hash->filter_hash);
+		if (!filter_hash)
+			return -ENOMEM;
+		/* Remove any notrace functions from the copy */
+		remove_hash(*filter_hash, subops_hash->notrace_hash);
+
+		ret = append_hash(filter_hash, ops_hash->filter_hash,
+				  size_bits);
+		if (ret < 0) {
+			free_ftrace_hash(*filter_hash);
+			return ret;
+		}
+	}
+
+	/*
+	 * Only process notrace hashes if the main filter hash is empty
+	 * (tracing all functions), otherwise the filter hash will just
+	 * remove the notrace hash functions, and the notrace hash is
+	 * not needed.
+	 */
+	if (ftrace_hash_empty(*filter_hash)) {
+		/*
+		 * Intersect the notrace functions. That is, if two
+		 * subops are not tracing a set of functions, the
+		 * main ops will only not trace the functions that are
+		 * in both subops, but has to trace the functions that
+		 * are only notrace in one of the subops, for the other
+		 * subops to be able to trace them.
+		 */
+		size_bits = max(ops_hash->notrace_hash->size_bits,
+				subops_hash->notrace_hash->size_bits);
+		*notrace_hash = alloc_ftrace_hash(size_bits);
+		if (!*notrace_hash)
+			return -ENOMEM;
+
+		ret = intersect_hash(notrace_hash, ops_hash->notrace_hash,
+				     subops_hash->notrace_hash);
+		if (ret < 0) {
+			free_ftrace_hash(*notrace_hash);
+			return ret;
+		}
+	}
+	return 0;
+}
+
+=======
+static int add_first_hash(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
+			  struct ftrace_ops_hash *func_hash)
+{
+	/* If the filter hash is not empty, simply remove the nohash from it */
+	if (!ftrace_hash_empty(func_hash->filter_hash)) {
+		*filter_hash = copy_hash(func_hash->filter_hash);
+		if (!*filter_hash)
+			return -ENOMEM;
+		remove_hash(*filter_hash, func_hash->notrace_hash);
+		*notrace_hash = EMPTY_HASH;
+
+	} else {
+		*notrace_hash = copy_hash(func_hash->notrace_hash);
+		if (!*notrace_hash)
+			return -ENOMEM;
+		*filter_hash = EMPTY_HASH;
+	}
+	return 0;
+}
+
+static int add_next_hash(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
+			 struct ftrace_ops_hash *ops_hash, struct ftrace_ops_hash *subops_hash)
+{
+	int size_bits;
+	int ret;
+
+	/* If the subops trace all functions so must the main ops */
+	if (ftrace_hash_empty(ops_hash->filter_hash) ||
+	    ftrace_hash_empty(subops_hash->filter_hash)) {
+		*filter_hash = EMPTY_HASH;
+	} else {
+		/*
+		 * The main ops filter hash is not empty, so its
+		 * notrace_hash had better be, as the notrace hash
+		 * is only used for empty main filter hashes.
+		 */
+		WARN_ON_ONCE(!ftrace_hash_empty(ops_hash->notrace_hash));
+
+		size_bits = max(ops_hash->filter_hash->size_bits,
+				subops_hash->filter_hash->size_bits);
+
+		/* Copy the subops hash */
+		*filter_hash = alloc_and_copy_ftrace_hash(size_bits, subops_hash->filter_hash);
+		if (!filter_hash)
+			return -ENOMEM;
+		/* Remove any notrace functions from the copy */
+		remove_hash(*filter_hash, subops_hash->notrace_hash);
+
+		ret = append_hash(filter_hash, ops_hash->filter_hash,
+				  size_bits);
+		if (ret < 0) {
+			free_ftrace_hash(*filter_hash);
+			*filter_hash = EMPTY_HASH;
+			return ret;
+		}
+	}
+
+	/*
+	 * Only process notrace hashes if the main filter hash is empty
+	 * (tracing all functions), otherwise the filter hash will just
+	 * remove the notrace hash functions, and the notrace hash is
+	 * not needed.
+	 */
+	if (ftrace_hash_empty(*filter_hash)) {
+		/*
+		 * Intersect the notrace functions. That is, if two
+		 * subops are not tracing a set of functions, the
+		 * main ops will only not trace the functions that are
+		 * in both subops, but has to trace the functions that
+		 * are only notrace in one of the subops, for the other
+		 * subops to be able to trace them.
+		 */
+		size_bits = max(ops_hash->notrace_hash->size_bits,
+				subops_hash->notrace_hash->size_bits);
+		*notrace_hash = alloc_ftrace_hash(size_bits);
+		if (!*notrace_hash)
+			return -ENOMEM;
+
+		ret = intersect_hash(notrace_hash, ops_hash->notrace_hash,
+				     subops_hash->notrace_hash);
+		if (ret < 0) {
+			free_ftrace_hash(*notrace_hash);
+			*notrace_hash = EMPTY_HASH;
+			return ret;
+		}
+	}
+	return 0;
+}
+
+>>>>>>> BRANCH (41cffb Merge v6.15-rc3 into android-mainline)
 /**
  * ftrace_startup_subops - enable tracing for subops of an ops
  * @ops: Manager ops (used to pick all the functions of its subops)
@@ -3439,8 +3621,8 @@ static int ftrace_update_ops(struct ftrace_ops *ops, struct ftrace_hash *filter_
  */
 int ftrace_startup_subops(struct ftrace_ops *ops, struct ftrace_ops *subops, int command)
 {
-	struct ftrace_hash *filter_hash;
-	struct ftrace_hash *notrace_hash;
+	struct ftrace_hash *filter_hash = EMPTY_HASH;
+	struct ftrace_hash *notrace_hash = EMPTY_HASH;
 	struct ftrace_hash *save_filter_hash;
 	struct ftrace_hash *save_notrace_hash;
 	int size_bits;
@@ -3557,6 +3739,85 @@ int ftrace_startup_subops(struct ftrace_ops *ops, struct ftrace_ops *subops, int
 	return ret;
 }
 
+<<<<<<< HEAD   (b69514 ANDROID: Add pcie-designware.h and pci.h to aarch64 allowlis)
+||||||| BASE
+static int rebuild_hashes(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
+			  struct ftrace_ops *ops)
+{
+	struct ftrace_ops_hash temp_hash;
+	struct ftrace_ops *subops;
+	bool first = true;
+	int ret;
+
+	temp_hash.filter_hash = EMPTY_HASH;
+	temp_hash.notrace_hash = EMPTY_HASH;
+
+	list_for_each_entry(subops, &ops->subop_list, list) {
+		*filter_hash = EMPTY_HASH;
+		*notrace_hash = EMPTY_HASH;
+
+		if (first) {
+			ret = add_first_hash(filter_hash, notrace_hash, subops->func_hash);
+			if (ret < 0)
+				return ret;
+			first = false;
+		} else {
+			ret = add_next_hash(filter_hash, notrace_hash,
+					    &temp_hash, subops->func_hash);
+			if (ret < 0) {
+				free_ftrace_hash(temp_hash.filter_hash);
+				free_ftrace_hash(temp_hash.notrace_hash);
+				return ret;
+			}
+		}
+
+		temp_hash.filter_hash = *filter_hash;
+		temp_hash.notrace_hash = *notrace_hash;
+	}
+	return 0;
+}
+
+=======
+static int rebuild_hashes(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
+			  struct ftrace_ops *ops)
+{
+	struct ftrace_ops_hash temp_hash;
+	struct ftrace_ops *subops;
+	bool first = true;
+	int ret;
+
+	temp_hash.filter_hash = EMPTY_HASH;
+	temp_hash.notrace_hash = EMPTY_HASH;
+
+	list_for_each_entry(subops, &ops->subop_list, list) {
+		*filter_hash = EMPTY_HASH;
+		*notrace_hash = EMPTY_HASH;
+
+		if (first) {
+			ret = add_first_hash(filter_hash, notrace_hash, subops->func_hash);
+			if (ret < 0)
+				return ret;
+			first = false;
+		} else {
+			ret = add_next_hash(filter_hash, notrace_hash,
+					    &temp_hash, subops->func_hash);
+			if (ret < 0) {
+				free_ftrace_hash(temp_hash.filter_hash);
+				free_ftrace_hash(temp_hash.notrace_hash);
+				return ret;
+			}
+		}
+
+		free_ftrace_hash(temp_hash.filter_hash);
+		free_ftrace_hash(temp_hash.notrace_hash);
+
+		temp_hash.filter_hash = *filter_hash;
+		temp_hash.notrace_hash = *notrace_hash;
+	}
+	return 0;
+}
+
+>>>>>>> BRANCH (41cffb Merge v6.15-rc3 into android-mainline)
 /**
  * ftrace_shutdown_subops - Remove a subops from a manager ops
  * @ops: A manager ops to remove @subops from
@@ -3571,8 +3832,8 @@ int ftrace_startup_subops(struct ftrace_ops *ops, struct ftrace_ops *subops, int
  */
 int ftrace_shutdown_subops(struct ftrace_ops *ops, struct ftrace_ops *subops, int command)
 {
-	struct ftrace_hash *filter_hash;
-	struct ftrace_hash *notrace_hash;
+	struct ftrace_hash *filter_hash = EMPTY_HASH;
+	struct ftrace_hash *notrace_hash = EMPTY_HASH;
 	int ret;
 
 	if (unlikely(ftrace_disabled))
@@ -3649,6 +3910,7 @@ static int ftrace_hash_move_and_update_subops(struct ftrace_ops *subops,
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD   (b69514 ANDROID: Add pcie-designware.h and pci.h to aarch64 allowlis)
 	/* Create a new_hash to hold the ops new functions */
 	if (enable) {
 		orig_hash = &ops->func_hash->filter_hash;
@@ -3662,6 +3924,18 @@ static int ftrace_hash_move_and_update_subops(struct ftrace_ops *subops,
 	ret = __ftrace_hash_move_and_update_ops(ops, orig_hash, new_hash, enable);
 
 	free_ftrace_hash(new_hash);
+||||||| BASE
+	ret = rebuild_hashes(&filter_hash, &notrace_hash, ops);
+	if (!ret)
+		ret = ftrace_update_ops(ops, filter_hash, notrace_hash);
+=======
+	ret = rebuild_hashes(&filter_hash, &notrace_hash, ops);
+	if (!ret) {
+		ret = ftrace_update_ops(ops, filter_hash, notrace_hash);
+		free_ftrace_hash(filter_hash);
+		free_ftrace_hash(notrace_hash);
+	}
+>>>>>>> BRANCH (41cffb Merge v6.15-rc3 into android-mainline)
 
 	if (ret) {
 		/* Put back the original hash */
@@ -5914,9 +6188,10 @@ int register_ftrace_direct(struct ftrace_ops *ops, unsigned long addr)
 
 	/* Make a copy hash to place the new and the old entries in */
 	size = hash->count + direct_functions->count;
-	if (size > 32)
-		size = 32;
-	new_hash = alloc_ftrace_hash(fls(size));
+	size = fls(size);
+	if (size > FTRACE_HASH_MAX_BITS)
+		size = FTRACE_HASH_MAX_BITS;
+	new_hash = alloc_ftrace_hash(size);
 	if (!new_hash)
 		goto out_unlock;
 
