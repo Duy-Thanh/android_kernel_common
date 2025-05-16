@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ba7326_5a371b00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-16T01:06:43Z",
+      "side": 1,
+      "message": "It would be helpful to include more details about how much overhead the BH workqueue has compared to doing the work inline, and also how the block softirq normally runs anyway so the value of code that is only executed in the case where it doesn\u0027t is (we think) fairly low.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daef2e7d_c000c722",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-16T01:06:43Z",
+      "side": 1,
+      "message": "I think adding \"try_verify_inline\" should be a separate patch.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72740f78_fd5d7f5f",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-16T01:06:43Z",
+      "side": 1,
+      "message": "Instead of a comment here, document both parameters properly in Documentation/admin-guide/device-mapper/verity.rst.",
+      "range": {
+        "startLine": 45,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 63
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffca8a46_449ff720",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-16T01:06:43Z",
+      "side": 1,
+      "message": "In atomic context",
+      "range": {
+        "startLine": 363,
+        "startChar": 6,
+        "endLine": 363,
+        "endChar": 25
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee6ddac9_29287b85",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-16T01:06:43Z",
+      "side": 1,
+      "message": "atomic context",
+      "range": {
+        "startLine": 397,
+        "startChar": 6,
+        "endLine": 397,
+        "endChar": 36
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636e852c_5f159cfd",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-16T01:06:43Z",
+      "side": 1,
+      "message": "in atomic context",
+      "range": {
+        "startLine": 520,
+        "startChar": 54,
+        "endLine": 520,
+        "endChar": 60
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bddb4ba_a83b47ba",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-16T01:06:43Z",
+      "side": 1,
+      "message": "I think you want either !in_task() here, or else a comment explaining that always setting in_atomic to true here is a simplification.",
+      "range": {
+        "startLine": 747,
+        "startChar": 0,
+        "endLine": 747,
+        "endChar": 22
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
