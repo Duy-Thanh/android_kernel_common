@@ -6264,6 +6264,11 @@ pointer_reference {
   pointee_type_id: 0x12000961
 }
 pointer_reference {
+  id: 0x0e12cbdd
+  kind: POINTER
+  pointee_type_id: 0x120bc9eb
+}
+pointer_reference {
   id: 0x0e136ffa
   kind: POINTER
   pointee_type_id: 0x120d5977
@@ -21084,6 +21089,11 @@ pointer_reference {
   pointee_type_id: 0x924d155a
 }
 pointer_reference {
+  id: 0x2e040715
+  kind: POINTER
+  pointee_type_id: 0x9250fac9
+}
+pointer_reference {
   id: 0x2e0761ed
   kind: POINTER
   pointee_type_id: 0x925d6128
@@ -30784,6 +30794,11 @@ pointer_reference {
   pointee_type_id: 0xc66dd4eb
 }
 pointer_reference {
+  id: 0x3b0bc1cb
+  kind: POINTER
+  pointee_type_id: 0xc66fe1b3
+}
+pointer_reference {
   id: 0x3b12c8e0
   kind: POINTER
   pointee_type_id: 0xc60bc51e
@@ -33999,6 +34014,11 @@ typedef {
   referred_type_id: 0x0f3dfb90
 }
 typedef {
+  id: 0x326de910
+  name: "btf_kfunc_filter_t"
+  referred_type_id: 0x2e040715
+}
+typedef {
   id: 0x17998b28
   name: "busy_tag_iter_fn"
   referred_type_id: 0xf9662ef4
@@ -36487,6 +36507,11 @@ qualified {
   id: 0xc6699c1e
   qualifier: CONST
   qualified_type_id: 0x69e1c6f0
+}
+qualified {
+  id: 0xc66fe1b3
+  qualifier: CONST
+  qualified_type_id: 0x69f83047
 }
 qualified {
   id: 0xc69a4eaf
@@ -43317,6 +43342,10 @@ array {
 array {
   id: 0xce6e9270
   element_type_id: 0x295c7202
+}
+array {
+  id: 0xceee2795
+  element_type_id: 0x2b5ea595
 }
 array {
   id: 0xceef9f74
@@ -98102,6 +98131,12 @@ member {
   name: "filter"
   type_id: 0x3d7f9785
   offset: 64
+}
+member {
+  id: 0xa339f1c9
+  name: "filter"
+  type_id: 0x326de910
+  offset: 128
 }
 member {
   id: 0xa33d2aa7
@@ -160631,6 +160666,12 @@ member {
   offset: 6768
 }
 member {
+  id: 0x4e37d0bb
+  name: "pairs"
+  type_id: 0xceee2795
+  offset: 64
+}
+member {
   id: 0xa30c0a0b
   name: "pan_coord"
   type_id: 0x6d7f5ff6
@@ -193003,6 +193044,12 @@ member {
   name: "set"
   type_id: 0x14518028
   offset: 384
+}
+member {
+  id: 0x3dd056db
+  name: "set"
+  type_id: 0x0e12cbdd
+  offset: 64
 }
 member {
   id: 0x3dd133e1
@@ -235618,6 +235665,15 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x2b5ea595
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0xcce624ba
+    member_id: 0x2da1814e
+  }
+}
+struct_union {
   id: 0x2b7aeec6
   kind: STRUCT
   definition {
@@ -245257,6 +245313,28 @@ struct_union {
     member_id: 0x1cc2c0f1
     member_id: 0xed873ce5
     member_id: 0x6581f7a8
+  }
+}
+struct_union {
+  id: 0x120bc9eb
+  kind: STRUCT
+  name: "btf_id_set8"
+  definition {
+    bytesize: 8
+    member_id: 0x823834d2
+    member_id: 0x2da1814e
+    member_id: 0x4e37d0bb
+  }
+}
+struct_union {
+  id: 0x69f83047
+  kind: STRUCT
+  name: "btf_kfunc_id_set"
+  definition {
+    bytesize: 24
+    member_id: 0x4a965250
+    member_id: 0x3dd056db
+    member_id: 0xa339f1c9
   }
 }
 struct_union {
@@ -345882,6 +345960,12 @@ function {
   parameter_id: 0xc607e025
 }
 function {
+  id: 0x9250fac9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x33d0e528
+  parameter_id: 0xc9082b19
+}
+function {
   id: 0x925622e7
   return_type_id: 0x6720d32f
   parameter_id: 0x3f0ff1b1
@@ -368254,6 +368338,12 @@ function {
   parameter_id: 0x3007ebd9
 }
 function {
+  id: 0xa299b4d3
+  return_type_id: 0x6720d32f
+  parameter_id: 0xffd5e3ef
+  parameter_id: 0x3b0bc1cb
+}
+function {
   id: 0xa2bae1db
   return_type_id: 0x297432f2
   parameter_id: 0x2efd5036
@@ -376974,6 +377064,7 @@ elf_symbol {
   full_name: "__scsi_print_sense"
 }
 elf_symbol {
+<<<<<<< HEAD   (88f4e1 ANDROID: Export the necessary symbols for the implementation)
   id: 0x7cb15ead
   name: "__scsi_register_driver"
   is_defined: true
@@ -376981,6 +377072,25 @@ elf_symbol {
   crc: 0x7c47fa25
   type_id: 0x913595bf
   full_name: "__scsi_register_driver"
+||||||| BASE
+=======
+  id: 0xe6c21b81
+  name: "__scx_ops_enabled"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8ee1928d
+  type_id: 0x8e47c273
+  full_name: "__scx_ops_enabled"
+}
+elf_symbol {
+  id: 0x0b4f6bff
+  name: "__scx_switched_all"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8ee1928d
+  type_id: 0x8e47c273
+  full_name: "__scx_switched_all"
+>>>>>>> BRANCH (c206f2 ANDROID: Update symbols to oplus symbol list.)
 }
 elf_symbol {
   id: 0x1d4d84d0
@@ -431166,6 +431276,15 @@ elf_symbol {
   full_name: "regcache_sync_region"
 }
 elf_symbol {
+  id: 0xceab3170
+  name: "register_btf_kfunc_id_set"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x98c58a81
+  type_id: 0xa299b4d3
+  full_name: "register_btf_kfunc_id_set"
+}
+elf_symbol {
   id: 0xeab63d27
   name: "register_candev"
   is_defined: true
@@ -453376,7 +453495,13 @@ interface {
   symbol_id: 0xe18b6ee8
   symbol_id: 0x0166be18
   symbol_id: 0xc5953732
+<<<<<<< HEAD   (88f4e1 ANDROID: Export the necessary symbols for the implementation)
   symbol_id: 0x7cb15ead
+||||||| BASE
+=======
+  symbol_id: 0xe6c21b81
+  symbol_id: 0x0b4f6bff
+>>>>>>> BRANCH (c206f2 ANDROID: Update symbols to oplus symbol list.)
   symbol_id: 0x1d4d84d0
   symbol_id: 0x24acfad9
   symbol_id: 0x07b6ac89
@@ -459393,6 +459518,7 @@ interface {
   symbol_id: 0x60b782b4
   symbol_id: 0x38aaa220
   symbol_id: 0xb34d0634
+  symbol_id: 0xceab3170
   symbol_id: 0xeab63d27
   symbol_id: 0x1bc307a0
   symbol_id: 0xab29122c
