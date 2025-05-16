@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3429cd6_5b615347",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-16T00:41:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure `hyp_vcpu_to_ffa_handle` is working correctly here, it seems to return 0 when called from `__pkvm_create_hyp_vm`.",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7492993_3f96efd7",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 92
@@ -65,6 +82,23 @@
       "writtenOn": "2025-05-16T00:29:15Z",
       "side": 1,
       "message": "Does this need to be a \"refill\" call? The availability code does not allocate.",
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "347e04a3_6038dd67",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-16T00:41:55Z",
+      "side": 1,
+      "message": "Is this available yet? Trusty seems to be getting 0 here, has the vCPU been initialized?",
       "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
