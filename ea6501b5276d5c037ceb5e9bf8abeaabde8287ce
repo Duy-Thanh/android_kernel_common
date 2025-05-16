@@ -16,6 +16,24 @@
       "message": "Temporarily block this patch until the KMI update has been completed.",
       "revId": "ea6501b5276d5c037ceb5e9bf8abeaabde8287ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06f41800_8efc74fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-05-16T18:31:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50c4a68a_a7fd41a8",
+      "revId": "ea6501b5276d5c037ceb5e9bf8abeaabde8287ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
