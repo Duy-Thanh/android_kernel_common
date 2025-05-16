@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c49fa7bb_8afe72a2",
+        "filename": "mm/swap.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-16T17:23:05Z",
+      "side": 1,
+      "message": "This is wrong. If vendor hook is not used this will lead to bypass being false all the time, even if condition at Line 507 is false. That\u0027s why please make this change very local, like I suggested before:\n```\nif (lru_gen_enabled() \u0026\u0026 !folio_test_unevictable(folio) \u0026\u0026\n    lru_gen_in_fault() \u0026\u0026 !(current-\u003eflags \u0026 PF_MEMALLOC)) {\n\tbool bypass \u003d false;\n\n\ttrace_android_vh_folio_add_lru_folio_activate(folio, \u0026bypass);\n\tif (!bypass)\n\t\tfolio_set_active(folio);\n}\n```",
+      "range": {
+        "startLine": 500,
+        "startChar": 6,
+        "endLine": 500,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b52b7d1f_732ed78f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 500,
+                "startChar": 0,
+                "endLine": 501,
+                "endChar": 0
+              },
+              "replacement": "\tbool bypass;\n"
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 509,
+                "startChar": 0,
+                "endLine": 509,
+                "endChar": 0
+              },
+              "replacement": "\t\tbypass \u003d true;\n\telse\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3d9bacde9518d60bc2bb9dc761966a504b222263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
