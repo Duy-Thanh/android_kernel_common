@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c634417_5f78514a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-19T23:03:32Z",
+      "side": 1,
+      "message": "These symbols are not exported by the kernel. This needs to be rebased on top of the patch that adds/exports the symbols",
+      "revId": "71eb5106d803c65d49521696c5941cad11e67b9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
