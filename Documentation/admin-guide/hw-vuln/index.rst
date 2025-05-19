@@ -22,4 +22,3 @@ are configurable at compile, boot or run time.
    srso
    gather_data_sampling
    reg-file-data-sampling
-   rsb

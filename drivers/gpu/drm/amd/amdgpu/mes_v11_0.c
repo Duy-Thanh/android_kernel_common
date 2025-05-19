@@ -894,10 +894,6 @@ static void mes_v11_0_get_fw_version(struct amdgpu_device *adev)
 {
 	int pipe;
 
-	/* return early if we have already fetched these */
-	if (adev->mes.sched_version && adev->mes.kiq_version)
-		return;
-
 	/* get MES scheduler/KIQ versions */
 	mutex_lock(&adev->srbm_mutex);
 

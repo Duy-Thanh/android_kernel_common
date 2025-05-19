@@ -17,20 +17,19 @@
 
 .pushsection .noinstr.text, "ax"
 
-/* Clobbers AX, CX, DX */
-SYM_FUNC_START(write_ibpb)
+SYM_FUNC_START(entry_ibpb)
 	ANNOTATE_NOENDBR
 	movl	$MSR_IA32_PRED_CMD, %ecx
-	movl	_ASM_RIP(x86_pred_cmd), %eax
+	movl	$PRED_CMD_IBPB, %eax
 	xorl	%edx, %edx
 	wrmsr
 
 	/* Make sure IBPB clears return stack preductions too. */
 	FILL_RETURN_BUFFER %rax, RSB_CLEAR_LOOPS, X86_BUG_IBPB_NO_RET
 	RET
-SYM_FUNC_END(write_ibpb)
+SYM_FUNC_END(entry_ibpb)
 /* For KVM */
-EXPORT_SYMBOL_GPL(write_ibpb);
+EXPORT_SYMBOL_GPL(entry_ibpb);
 
 .popsection
 

@@ -558,7 +558,6 @@ struct smu_context {
 
 	/* asic agnostic workload mask */
 	uint32_t workload_mask;
-	bool pause_workload;
 	/* default/user workload preference */
 	uint32_t power_profile_mode;
 	uint32_t workload_refcount[PP_SMC_POWER_PROFILE_COUNT];

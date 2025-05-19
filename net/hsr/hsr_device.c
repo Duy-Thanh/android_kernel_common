@@ -33,14 +33,14 @@ static void hsr_set_operstate(struct hsr_port *master, bool has_carrier)
 	struct net_device *dev = master->dev;
 
 	if (!is_admin_up(dev)) {
-		netif_set_operstate(dev, IF_OPER_DOWN);
+		netdev_set_operstate(dev, IF_OPER_DOWN);
 		return;
 	}
 
 	if (has_carrier)
-		netif_set_operstate(dev, IF_OPER_UP);
+		netdev_set_operstate(dev, IF_OPER_UP);
 	else
-		netif_set_operstate(dev, IF_OPER_LOWERLAYERDOWN);
+		netdev_set_operstate(dev, IF_OPER_LOWERLAYERDOWN);
 }
 
 static bool hsr_check_carrier(struct hsr_port *master)

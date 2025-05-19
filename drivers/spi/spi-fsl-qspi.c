@@ -949,13 +949,16 @@ static int fsl_qspi_probe(struct platform_device *pdev)
 
 	ret = devm_add_action_or_reset(dev, fsl_qspi_cleanup, q);
 	if (ret)
-		goto err_put_ctrl;
+		goto err_destroy_mutex;
 
 	ret = devm_spi_register_controller(dev, ctlr);
 	if (ret)
-		goto err_put_ctrl;
+		goto err_destroy_mutex;
 
 	return 0;
+
+err_destroy_mutex:
+	mutex_destroy(&q->lock);
 
 err_disable_clk:
 	fsl_qspi_clk_disable_unprep(q);
@@ -963,6 +966,7 @@ err_disable_clk:
 err_put_ctrl:
 	spi_controller_put(ctlr);
 
+	dev_err(dev, "Freescale QuadSPI probe failed\n");
 	return ret;
 }
 

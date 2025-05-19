@@ -3176,13 +3176,12 @@ int addrconf_add_ifaddr(struct net *net, void __user *arg)
 
 	rtnl_net_lock(net);
 	dev = __dev_get_by_index(net, ireq.ifr6_ifindex);
-	if (dev) {
-		netdev_lock_ops(dev);
+	netdev_lock_ops(dev);
+	if (dev)
 		err = inet6_addr_add(net, dev, &cfg, 0, 0, NULL);
-		netdev_unlock_ops(dev);
-	} else {
+	else
 		err = -ENODEV;
-	}
+	netdev_unlock_ops(dev);
 	rtnl_net_unlock(net);
 	return err;
 }

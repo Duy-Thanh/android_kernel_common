@@ -631,15 +631,6 @@ static int sfq_change(struct Qdisc *sch, struct nlattr *opt,
 	struct red_parms *p = NULL;
 	struct sk_buff *to_free = NULL;
 	struct sk_buff *tail = NULL;
-	unsigned int maxflows;
-	unsigned int quantum;
-	unsigned int divisor;
-	int perturb_period;
-	u8 headdrop;
-	u8 maxdepth;
-	int limit;
-	u8 flags;
-
 
 	if (opt->nla_len < nla_attr_size(sizeof(*ctl)))
 		return -EINVAL;
@@ -661,64 +652,39 @@ static int sfq_change(struct Qdisc *sch, struct nlattr *opt,
 		if (!p)
 			return -ENOMEM;
 	}
-
+	if (ctl->limit == 1) {
+		NL_SET_ERR_MSG_MOD(extack, "invalid limit");
+		return -EINVAL;
+	}
 	sch_tree_lock(sch);
-
-	limit = q->limit;
-	divisor = q->divisor;
-	headdrop = q->headdrop;
-	maxdepth = q->maxdepth;
-	maxflows = q->maxflows;
-	perturb_period = q->perturb_period;
-	quantum = q->quantum;
-	flags = q->flags;
-
-	/* update and validate configuration */
 	if (ctl->quantum)
-		quantum = ctl->quantum;
-	perturb_period = ctl->perturb_period * HZ;
+		q->quantum = ctl->quantum;
+	WRITE_ONCE(q->perturb_period, ctl->perturb_period * HZ);
 	if (ctl->flows)
-		maxflows = min_t(u32, ctl->flows, SFQ_MAX_FLOWS);
+		q->maxflows = min_t(u32, ctl->flows, SFQ_MAX_FLOWS);
 	if (ctl->divisor) {
-		divisor = ctl->divisor;
-		maxflows = min_t(u32, maxflows, divisor);
+		q->divisor = ctl->divisor;
+		q->maxflows = min_t(u32, q->maxflows, q->divisor);
 	}
 	if (ctl_v1) {
 		if (ctl_v1->depth)
-			maxdepth = min_t(u32, ctl_v1->depth, SFQ_MAX_DEPTH);
+			q->maxdepth = min_t(u32, ctl_v1->depth, SFQ_MAX_DEPTH);
 		if (p) {
-			red_set_parms(p,
+			swap(q->red_parms, p);
+			red_set_parms(q->red_parms,
 				      ctl_v1->qth_min, ctl_v1->qth_max,
 				      ctl_v1->Wlog,
 				      ctl_v1->Plog, ctl_v1->Scell_log,
 				      NULL,
 				      ctl_v1->max_P);
 		}
-		flags = ctl_v1->flags;
-		headdrop = ctl_v1->headdrop;
+		q->flags = ctl_v1->flags;
+		q->headdrop = ctl_v1->headdrop;
 	}
 	if (ctl->limit) {
-		limit = min_t(u32, ctl->limit, maxdepth * maxflows);
-		maxflows = min_t(u32, maxflows, limit);
+		q->limit = min_t(u32, ctl->limit, q->maxdepth * q->maxflows);
+		q->maxflows = min_t(u32, q->maxflows, q->limit);
 	}
-	if (limit == 1) {
-		sch_tree_unlock(sch);
-		kfree(p);
-		NL_SET_ERR_MSG_MOD(extack, "invalid limit");
-		return -EINVAL;
-	}
-
-	/* commit configuration */
-	q->limit = limit;
-	q->divisor = divisor;
-	q->headdrop = headdrop;
-	q->maxdepth = maxdepth;
-	q->maxflows = maxflows;
-	WRITE_ONCE(q->perturb_period, perturb_period);
-	q->quantum = quantum;
-	q->flags = flags;
-	if (p)
-		swap(q->red_parms, p);
 
 	qlen = sch->q.qlen;
 	while (sch->q.qlen > q->limit) {

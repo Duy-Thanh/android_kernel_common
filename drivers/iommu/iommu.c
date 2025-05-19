@@ -526,9 +526,6 @@ static void iommu_deinit_device(struct device *dev)
 	dev->iommu_group = NULL;
 	module_put(ops->owner);
 	dev_iommu_free(dev);
-#ifdef CONFIG_IOMMU_DMA
-	dev->dma_iommu = false;
-#endif
 }
 
 static struct iommu_domain *pasid_array_entry_to_domain(void *entry)
@@ -2708,8 +2705,7 @@ int report_iommu_fault(struct iommu_domain *domain, struct device *dev,
 	 * if upper layers showed interest and installed a fault handler,
 	 * invoke it.
 	 */
-	if (domain->cookie_type == IOMMU_COOKIE_FAULT_HANDLER &&
-	    domain->handler)
+	if (domain->handler)
 		ret = domain->handler(domain, dev, iova, flags,
 						domain->handler_token);
 
