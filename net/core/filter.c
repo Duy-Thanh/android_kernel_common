@@ -2499,6 +2499,13 @@ int skb_do_redirect(struct sk_buff *skb)
 			     net_eq(net, dev_net(dev))))
 			goto out_drop;
 		skb->dev = dev;
+<<<<<<< HEAD   (489454 Revert "cpufreq: Avoid using inconsistent policy->min and po)
+||||||| BASE
+		dev_sw_netstats_rx_add(dev, skb->len);
+=======
+		dev_sw_netstats_rx_add(dev, skb->len);
+		skb_scrub_packet(skb, false);
+>>>>>>> BRANCH (325285 Linux 6.1.139)
 		return -EAGAIN;
 	}
 	return flags & BPF_F_NEIGH ?
