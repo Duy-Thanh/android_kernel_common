@@ -920,7 +920,13 @@ static inline bool blk_mq_add_to_batch(struct request *req,
 	else if (iob->complete != complete)
 		return false;
 	iob->need_ts |= blk_mq_need_time_stamp(req);
+<<<<<<< HEAD   (72655c Merge branch 'android16-6.12' into branch 'android16-6.12-lt)
 	rq_list_add_tail(&iob->req_list, req);
+||||||| BASE
+	rq_list_add(&iob->req_list, req);
+=======
+	rq_list_add_head(&iob->req_list, req);
+>>>>>>> BRANCH (ef4999 Linux 6.12.25)
 	return true;
 }
 
@@ -957,6 +963,8 @@ void blk_mq_unfreeze_queue_non_owner(struct request_queue *q);
 void blk_freeze_queue_start_non_owner(struct request_queue *q);
 
 void blk_mq_map_queues(struct blk_mq_queue_map *qmap);
+void blk_mq_map_hw_queues(struct blk_mq_queue_map *qmap,
+			  struct device *dev, unsigned int offset);
 void blk_mq_update_nr_hw_queues(struct blk_mq_tag_set *set, int nr_hw_queues);
 
 void blk_mq_quiesce_queue_nowait(struct request_queue *q);

@@ -1028,6 +1028,11 @@ extern void blk_put_queue(struct request_queue *);
 
 void blk_mark_disk_dead(struct gendisk *disk);
 
+struct rq_list {
+	struct request *head;
+	struct request *tail;
+};
+
 #ifdef CONFIG_BLOCK
 struct rq_list {
 	struct request *head;
