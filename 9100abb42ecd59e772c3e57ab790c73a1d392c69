@@ -70,6 +70,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb8cd7d4_55f33435",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-19T23:00:41Z",
+      "side": 1,
+      "message": "__GFP_CMA exists in 6.12, however",
+      "parentUuid": "d352ebe3_c71f140d",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d31c0b0_e2dc730c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-19T23:00:41Z",
+      "side": 1,
+      "message": "__GFP_CMA exists in 6.12, however do_swap_page() in 6.12 changed and this change from previous version of this patch: https://android-review.git.corp.google.com/c/kernel/common/+/3009322/16/mm/memory.c#3796 is not ported into this patch. I think as a result, swap-in pages will not be allowed to use CMA for allocations. I don\u0027t know how big of a problem this would be, that\u0027s why I asked you to review this change.",
+      "parentUuid": "d352ebe3_c71f140d",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18220b14_09adf853",
