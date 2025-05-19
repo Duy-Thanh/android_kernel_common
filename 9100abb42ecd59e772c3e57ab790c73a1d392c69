@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "75bb3f5a_11d8ed11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-05-19T23:12:10Z",
+      "side": 1,
+      "message": "Thanks for clarification, Suren.\n\nWe should allow swap-in pages to be allocated to movable space(CMA or movable zones) since anonymous memory are top consumer in Android. Otherwise, more reclaim/compaction activity and premature OOM.",
+      "parentUuid": "fb8cd7d4_55f33435",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18220b14_09adf853",
