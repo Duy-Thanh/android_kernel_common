@@ -70,6 +70,7 @@
 #include <net/l3mdev.h>
 #include <uapi/linux/socket.h>
 #include <linux/android_vendor.h>
+#include <linux/android_kabi.h>
 
 /*
  * This structure really needs to be cleaned up.
@@ -548,10 +549,22 @@ struct sock {
 	netns_tracker		ns_tracker;
 	struct xarray		sk_user_frags;
 
+<<<<<<< HEAD   (a23d20 UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 #if IS_ENABLED(CONFIG_PROVE_LOCKING) && IS_ENABLED(CONFIG_MODULES)
 	struct module		*sk_owner;
 #endif
 
+||||||| BASE
+=======
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_RESERVE(5);
+	ANDROID_KABI_RESERVE(6);
+	ANDROID_KABI_RESERVE(7);
+	ANDROID_KABI_RESERVE(8);
+>>>>>>> BRANCH (147b27 ANDROID: nvmet: Use the bdev_is_zone_start() function)
 	ANDROID_OEM_DATA(1);
 };
 
