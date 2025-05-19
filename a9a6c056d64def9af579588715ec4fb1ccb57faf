@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "920e9289_bfa745dc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-19T22:40:12Z",
+      "side": 1,
+      "message": "There is another alternative: we could delay sending this message until the first cycle-granting FF-A call from the host into TZ. Those calls are `FFA_RUN`, `FFA_MSG_SEND_DIRECT_REQ`, and `FFA_MSG_SEND_DIRECT_REQ2` and all of them can receive `FFA_INTERRUPT` as a result and handle it by retrying the call. The hypervisor could return that fid when the VM creation asks for a retry.\n\nIt is still possible for other TEEs to use custom SMCs to give cycles to TZ (e.g. the custom Trusty SMCs on the old Linux module), but I think it\u0027s safe to assume that those TEEs would not opt into the VM availability messages anyway.",
+      "parentUuid": "e4f22fb9_28f0ea7c",
+      "range": {
+        "startLine": 1342,
+        "startChar": 3,
+        "endLine": 1342,
+        "endChar": 60
+      },
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3429cd6_5b615347",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 92
