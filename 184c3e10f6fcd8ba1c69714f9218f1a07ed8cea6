@@ -16,6 +16,23 @@
       "message": "Why not just wait for this to be merged here properly from upstream?",
       "revId": "184c3e10f6fcd8ba1c69714f9218f1a07ed8cea6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2ab9c6_86dc7efe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-19T22:56:21Z",
+      "side": 1,
+      "message": "why can\u0027t we just wait for this patch to land in android-mainline via upstream merge?",
+      "revId": "184c3e10f6fcd8ba1c69714f9218f1a07ed8cea6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
