@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1dff4b_34b0c277",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7224,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-19T20:17:11Z",
+      "side": 1,
+      "message": "My one concern here is by using an existing tracepoint, rather then introducing a new one, this might have side-effects for other vendor\u0027s tracehooks. I\u0027ll need to look a bit more.",
+      "revId": "7c2336814f657f93d2457adccd4937f872d2750b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
