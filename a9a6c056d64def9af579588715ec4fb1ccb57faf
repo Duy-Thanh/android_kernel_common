@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c61b9d22_567ed721",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-19T22:48:15Z",
+      "side": 1,
+      "message": "Note that the memory sharing api has platform hooks in el3 that are sometimes delegated to the SP. If the availability message is not sent before a lend or share request, the memory sharing request might get rejected.",
+      "parentUuid": "920e9289_bfa745dc",
+      "range": {
+        "startLine": 1342,
+        "startChar": 3,
+        "endLine": 1342,
+        "endChar": 60
+      },
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3429cd6_5b615347",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 92
