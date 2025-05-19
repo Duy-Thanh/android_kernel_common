@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d508114f_cf8347a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-05-19T20:55:51Z",
+      "side": 1,
+      "message": "Hi Chris,\n\ncgoldswo@codeaurora.org\n\n\nCould you elaborate what you are trying to do?\n\nI am a bit scary to add vendor hook in gfp_zone which would be very popular call so we might find a better place to add vendor hook after understanding of goal.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b11dcd61_ebd434c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-05-19T20:55:51Z",
+      "side": 1,
+      "message": "Didn\u0027t understand. What\u0027s the relationship between __GFP_CMA and skip_swapcache. Could you clarify a bit more?",
+      "range": {
+        "startLine": 18,
+        "startChar": 34,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d352ebe3_c71f140d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-05-19T20:55:51Z",
+      "side": 1,
+      "message": "Hmm, I didn\u0027t know that. Why __GFP_CMA is not existing in 6.12? Then, what\u0027s the idea not to put dirty pages in the CMA area? Maybe, is it question for surenb@google.com ?",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18220b14_09adf853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-05-19T20:55:51Z",
+      "side": 1,
+      "message": "I tried to review but it seems to understand Prerequisites first so asked several questions to Suren and Chris",
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
