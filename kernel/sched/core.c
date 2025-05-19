@@ -7327,6 +7327,7 @@ void rt_mutex_setprio(struct task_struct *p, struct task_struct *pi_task)
 	}
 
 	__setscheduler_prio(p, prio);
+	trace_android_rvh_setscheduler(p);
 
 	if (queued)
 		enqueue_task(rq, p, queue_flag);
