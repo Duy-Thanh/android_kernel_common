@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "60102f16_2198f9dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-19T23:35:10Z",
+      "side": 1,
+      "message": "Thanks Minchan!\n\nI think what this patch is missing is the __GFP_CMA flag here: https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/mm/memory.c;l\u003d4349 and here: https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/mm/memory.c;l\u003d4038",
+      "parentUuid": "75bb3f5a_11d8ed11",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18220b14_09adf853",
