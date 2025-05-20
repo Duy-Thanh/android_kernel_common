@@ -536,3 +536,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_may_oom_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calculate_totalreserve_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_pageout_skip);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_pcplist_override_batch);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_kernel_fault);
