@@ -190,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6a5658b_2bf7e0f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-05-20T16:42:02Z",
+      "side": 1,
+      "message": "Hi Ying,\n\nCould you please post the __GFP_CMA patch separately? \n\nThat shouldn\u0027t be part of skip_swapcache but more of \"Bug fix\" of \"BACKPORT: mm: support large folios swap-in for sync io devices\". It\u0027s worth to have separate CL and need to keep migrating this patch for upcoming new android kernel. \n\nThank you.",
+      "parentUuid": "42f46b82_fdc0ff8d",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18220b14_09adf853",
