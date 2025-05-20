@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35fab888_890527b5",
+        "filename": "drivers/firmware/arm_scmi/perf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-20T21:28:45Z",
+      "side": 1,
+      "message": "Not necessarily an issue with this patch, but it seems like to avoid similar problems on 32 bit (though don\u0027t know how realistic 32bit \u0026 4+ghz freqs are) it might be wise for freq to be `unsigned long long` and the multiplies here to be cast up.",
+      "revId": "c52777ecad5487b17d7fb689ef9a594f23133ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
