@@ -16,6 +16,24 @@
       "message": "This patch defines a hook, but doesn\u0027t use it anywhere. With 0 instances of the hook there is no way it can be registered with a handler. How is this supposed to work?",
       "revId": "9b2ac4f1b8518b9ebfc34cb9f9d800860637511c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5587a7_9db89368",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2025-05-20T06:17:16Z",
+      "side": 1,
+      "message": "This hook requires adding a new function to be used. The new function is intended to be modified in ogki.",
+      "parentUuid": "bb6a96a8_3e66f4ca",
+      "revId": "9b2ac4f1b8518b9ebfc34cb9f9d800860637511c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
