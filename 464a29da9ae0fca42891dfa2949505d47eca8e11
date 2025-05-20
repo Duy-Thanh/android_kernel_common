@@ -16,6 +16,24 @@
       "message": "Looks like this is the conflict. Should be safe since I don\u0027t believe we have any Arrow Lake devices.",
       "revId": "464a29da9ae0fca42891dfa2949505d47eca8e11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5590bc0b_1deed2e7",
+        "filename": "include/drm/intel/pciids.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-05-20T16:17:51Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "cf55402a_1a0043f1",
+      "revId": "464a29da9ae0fca42891dfa2949505d47eca8e11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
