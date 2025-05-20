@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45770d5e_e7ee83bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-20T16:05:30Z",
+      "side": 1,
+      "message": "Suggest folding this into the child change that has the other half of the protected export data.",
+      "revId": "e101116b229c89ef41c4da6845a56e561d43b934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
