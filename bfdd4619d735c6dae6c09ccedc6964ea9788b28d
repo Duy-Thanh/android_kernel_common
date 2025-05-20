@@ -22,6 +22,30 @@
       },
       "revId": "bfdd4619d735c6dae6c09ccedc6964ea9788b28d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa6940b6_2764a716",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-20T17:41:56Z",
+      "side": 1,
+      "message": "I\u0027m a little confused here. So this was already backported to 5.15 already, so why is this needed? Was the delta in this commit bits that were improperly backported in the original BACKPORT?",
+      "parentUuid": "1b1c409d_6b6aec7e",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "bfdd4619d735c6dae6c09ccedc6964ea9788b28d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
