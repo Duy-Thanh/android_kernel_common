@@ -34,6 +34,24 @@
       "parentUuid": "5c1dff4b_34b0c277",
       "revId": "7c2336814f657f93d2457adccd4937f872d2750b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae16de1_82a8bc85",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7224,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-20T03:02:40Z",
+      "side": 1,
+      "message": "So, that might be the safer approach. Though with newer kernels __setscheduler_prio has been removed and the logic integrated into the calling functions directly, so we may eventually have something similar to this patch later on.\n\nLooking at it, I think this likely is ok, but a new vendorhooks might be a more cautious approach for an older release kernel.",
+      "parentUuid": "8e8b1362_9fd24f57",
+      "revId": "7c2336814f657f93d2457adccd4937f872d2750b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
