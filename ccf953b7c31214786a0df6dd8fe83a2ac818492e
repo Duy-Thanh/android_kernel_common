@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa983902_4f63d510",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-20T12:45:28Z",
+      "side": 1,
+      "message": "New line is missing in `tools/testing/memblock/linux/mutex.h`, however, this is pure merge commit which matches the upstream version. Ignoring to not affect git history.",
+      "revId": "ccf953b7c31214786a0df6dd8fe83a2ac818492e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
