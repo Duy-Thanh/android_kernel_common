@@ -1440,7 +1440,7 @@ static void platform_shutdown(struct device *_dev)
 
 static int platform_dma_configure(struct device *dev)
 {
-	struct platform_driver *drv = to_platform_driver(dev->driver);
+	struct device_driver *drv = READ_ONCE(dev->driver);
 	struct fwnode_handle *fwnode = dev_fwnode(dev);
 	enum dev_dma_attr attr;
 	int ret = 0;
@@ -1451,7 +1451,15 @@ static int platform_dma_configure(struct device *dev)
 		attr = acpi_get_dma_attr(to_acpi_device_node(fwnode));
 		ret = acpi_dma_configure(dev, attr);
 	}
+<<<<<<< HEAD   (99935a Merge bec6f00f120e ("Merge tag 'usb-6.15-rc6' of git://git.k)
 	if (ret || drv->driver_managed_dma)
+||||||| BASE
+	/* @drv may not be valid when we're called from the IOMMU layer */
+	if (ret || !dev->driver || drv->driver_managed_dma)
+=======
+	/* @dev->driver may not be valid when we're called from the IOMMU layer */
+	if (ret || !drv || to_platform_driver(drv)->driver_managed_dma)
+>>>>>>> BRANCH (345030 Merge tag 'driver-core-6.15-rc6' of git://git.kernel.org/pub)
 		return ret;
 
 	ret = iommu_device_use_default_domain(dev);
