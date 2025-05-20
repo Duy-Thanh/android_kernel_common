@@ -5189,6 +5189,7 @@ static ssize_t __cgroup_procs_write(struct kernfs_open_file *of, char *buf,
 	const struct cred *saved_cred;
 	ssize_t ret;
 	bool threadgroup_locked;
+	bool can_skip = false;
 
 	dst_cgrp = cgroup_kn_lock_live(of->kn, false);
 	if (!dst_cgrp)
@@ -5198,6 +5199,13 @@ static ssize_t __cgroup_procs_write(struct kernfs_open_file *of, char *buf,
 	ret = PTR_ERR_OR_ZERO(task);
 	if (ret)
 		goto out_unlock;
+
+	trace_android_vh_check_freeze_task(task, &can_skip);
+	if (can_skip) {
+		put_task_struct(task);
+		cgroup_attach_unlock(threadgroup_locked);
+		goto out_unlock;
+	}
 
 	/* find the source cgroup */
 	spin_lock_irq(&css_set_lock);

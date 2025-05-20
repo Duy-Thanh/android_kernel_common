@@ -38,6 +38,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_online,
 	TP_PROTO(struct cgroup_subsys_state *css),
 	TP_ARGS(css), 1);
+
+DECLARE_HOOK(android_vh_check_freeze_task,
+	TP_PROTO(struct task_struct *task, bool *can_skip),
+	TP_ARGS(task, can_skip));
 #endif
 
 #include <trace/define_trace.h>
