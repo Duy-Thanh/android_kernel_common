@@ -799,6 +799,62 @@ copy_to_dist_dir(
     flat = True,
 )
 
+kernel_build(
+    name = "aw",
+    srcs = [":kernel_aarch64_sources"],
+    outs = [
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    base_kernel = ":kernel_aarch64",
+    build_config = "build.config.aw",
+    collect_unstripped_modules = True,
+    kmi_symbol_list = "android/abi_gki_aarch64_sunxi",
+    make_goals = [
+        "modules",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+kernel_abi(
+    name = "aw_abi",
+    kernel_build = ":aw",
+)
+
+kernel_modules_install(
+    name = "aw_modules_install",
+    kernel_build = ":aw",
+)
+
+merged_kernel_uapi_headers(
+    name = "aw_merged_kernel_uapi_headers",
+    kernel_build = ":aw",
+)
+
+kernel_images(
+    name = "aw_images",
+    build_initramfs = True,
+    kernel_build = ":aw",
+    kernel_modules_install = ":aw_modules_install",
+)
+
+copy_to_dist_dir(
+    name = "aw_dist",
+    data = [
+        ":aw",
+        ":aw_images",
+        ":aw_modules_install",
+        ":aw_merged_kernel_uapi_headers",
+        # Mixed build: Additional GKI artifacts.
+        ":kernel_aarch64",
+        ":kernel_aarch64_modules",
+        ":kernel_aarch64_additional_artifacts",
+    ],
+    dist_dir = "out/aw/dist",
+    flat = True,
+    log = "info",
+)
+
 # allmodconfig build tests.
 # These are build tests only, so:
 # - outs are intentionally set to empty to not copy anything to DIST_DIR
