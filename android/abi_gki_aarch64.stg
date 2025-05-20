@@ -361053,6 +361053,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_check_folio_look_around_ref"
 }
 elf_symbol {
+  id: 0x3b3930bf
+  name: "__traceiter_android_vh_check_freeze_task"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x47c789fe
+  type_id: 0x9bdfaf3f
+  full_name: "__traceiter_android_vh_check_freeze_task"
+}
+elf_symbol {
   id: 0x42428033
   name: "__traceiter_android_vh_check_mmap_file"
   is_defined: true
@@ -368062,6 +368071,15 @@ elf_symbol {
   crc: 0xa7ed008e
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_check_folio_look_around_ref"
+}
+elf_symbol {
+  id: 0xfa391d81
+  name: "__tracepoint_android_vh_check_freeze_task"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xaeef9c8e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_check_freeze_task"
 }
 elf_symbol {
   id: 0x9620eac1
@@ -436084,6 +436102,7 @@ interface {
   symbol_id: 0x5012fcd8
   symbol_id: 0x67bab494
   symbol_id: 0x6aac0cf8
+  symbol_id: 0x3b3930bf
   symbol_id: 0x42428033
   symbol_id: 0x23a3e1fa
   symbol_id: 0x17b6819f
@@ -436863,6 +436882,7 @@ interface {
   symbol_id: 0x678bb5ba
   symbol_id: 0xf1ec5ef2
   symbol_id: 0xca5cbc9a
+  symbol_id: 0xfa391d81
   symbol_id: 0x9620eac1
   symbol_id: 0xb436fd6c
   symbol_id: 0x9e7fa6cd

@@ -232,6 +232,7 @@
   __traceiter_android_vh_build_sched_domains
   __traceiter_android_vh_cgroup_set_task
   __traceiter_android_vh_check_folio_look_around_ref
+  __traceiter_android_vh_check_freeze_task
   __traceiter_android_vh_cleanup_old_buffers_bypass
   __traceiter_android_vh_copy_process
   __traceiter_android_vh_cpu_cgroup_css_alloc
@@ -396,6 +397,7 @@
   __tracepoint_android_vh_build_sched_domains
   __tracepoint_android_vh_cgroup_set_task
   __tracepoint_android_vh_check_folio_look_around_ref
+  __tracepoint_android_vh_check_freeze_task
   __tracepoint_android_vh_cleanup_old_buffers_bypass
   __tracepoint_android_vh_copy_process
   __tracepoint_android_vh_cpu_cgroup_css_alloc
