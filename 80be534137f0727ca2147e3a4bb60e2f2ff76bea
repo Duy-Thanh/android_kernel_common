@@ -16,6 +16,24 @@
       "message": "As mentioned in the other patch, I\u0027m worried that re-using an existing vendorhooks here might cause side-effects for other vendor\u0027s logic connected to this existing hook. Need to dig and discuss a bit.",
       "revId": "80be534137f0727ca2147e3a4bb60e2f2ff76bea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e38c7edf_3de9100c",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7330,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2025-05-20T05:30:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7b8fcd3_f707a74e",
+      "revId": "80be534137f0727ca2147e3a4bb60e2f2ff76bea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
