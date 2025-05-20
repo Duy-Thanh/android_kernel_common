@@ -16,6 +16,24 @@
       "message": "My one concern here is by using an existing tracepoint, rather then introducing a new one, this might have side-effects for other vendor\u0027s tracehooks. I\u0027ll need to look a bit more.",
       "revId": "7c2336814f657f93d2457adccd4937f872d2750b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e8b1362_9fd24f57",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7224,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2025-05-20T02:45:38Z",
+      "side": 1,
+      "message": "or can we add a new vendor hook in __setscheduler_prio instead?",
+      "parentUuid": "5c1dff4b_34b0c277",
+      "revId": "7c2336814f657f93d2457adccd4937f872d2750b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
