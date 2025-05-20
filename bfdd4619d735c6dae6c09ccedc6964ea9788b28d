@@ -46,6 +46,30 @@
       },
       "revId": "bfdd4619d735c6dae6c09ccedc6964ea9788b28d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7cb36f1_709b7853",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-20T17:46:40Z",
+      "side": 1,
+      "message": "Oh wait, you are referencing the commit in the commit message here. My apologies. At first glance the two commits appeared similar, so I thought this was a re-backport or some sort of incorrect BACKPORT fix.",
+      "parentUuid": "aa6940b6_2764a716",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "bfdd4619d735c6dae6c09ccedc6964ea9788b28d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
