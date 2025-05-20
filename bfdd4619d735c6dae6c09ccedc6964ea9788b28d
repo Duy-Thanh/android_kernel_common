@@ -70,6 +70,30 @@
       },
       "revId": "bfdd4619d735c6dae6c09ccedc6964ea9788b28d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b688357d_46e82837",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1096846
+      },
+      "writtenOn": "2025-05-20T17:47:35Z",
+      "side": 1,
+      "message": "\"This\" is the Fixes target, not the current CL. The current CL is only useful if we already have commit 17423360a27a.\n\nI\u0027m just pointing out that commit 17423360a27a was independently backported to different kernels, but I only ported this fix to one of them.\n\nThis is a clean, and useful backport. I was just surprised it was necessary.",
+      "parentUuid": "aa6940b6_2764a716",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "bfdd4619d735c6dae6c09ccedc6964ea9788b28d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
