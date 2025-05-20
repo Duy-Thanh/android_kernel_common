@@ -16,6 +16,24 @@
       "message": "minor nit: s/vcpu-\u003ekvm-\u003earch.pkvm./pkvm-\u003e/",
       "revId": "c0b7c2b1d05812783f89a95d2b4ad6de4ad6daa8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37f15b3_31dbd979",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1397,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-05-20T18:21:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "703039a2_2cadafc6",
+      "revId": "c0b7c2b1d05812783f89a95d2b4ad6de4ad6daa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
