@@ -388,6 +388,12 @@ static void __do_kernel_fault(unsigned long addr, unsigned long esr,
 {
 	const char *msg;
 
+	bool fault_handled = false;
+
+	trace_android_vh_handle_kernel_fault(addr, esr, regs, &fault_handled);
+	if (fault_handled)
+		return;
+
 	/*
 	 * Are we prepared to handle this kernel fault?
 	 * We are almost certainly not prepared to handle instruction faults.
