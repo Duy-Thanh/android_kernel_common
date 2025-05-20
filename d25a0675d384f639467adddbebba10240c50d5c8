@@ -16,6 +16,23 @@
       "message": "Tested patchset 94: host and guest booted successfully and all VM messages were processed. The guest started and shut down cleanly:\n```\n[   90.412569][   T85] trusty-log trusty-ffa:trusty-core:log: long sm_ffa_handle_framework_msg(struct smc_ret18 *):585: Got VM creation message for 2\n[   90.414057][   T85] trusty-log trusty-ffa:trusty-core:log: long sm_ffa_handle_framework_msg(struct smc_ret18 *):607: VM creation returning 0\n...\n[  261.189613][   T85] trusty-log trusty-ffa:trusty-core:log: long sm_ffa_handle_framework_msg(struct smc_ret18 *):613: Got VM destruction message for 2\n[  261.191526][   T85] trusty-log trusty-ffa:trusty-core:log: long sm_ffa_handle_framework_msg(struct smc_ret18 *):676: VM destruction returning 0\n```\nand in the guest log\n```\n[  125.695806][   T39] trusty_ipc virtio8: is online\n[  125.695806][   T39] trusty_ipc virtio8: is online\n[  125.810841][    T1] trusty-virtio trusty-virtio: initializing done\n[  125.810841][    T1] trusty-virtio trusty-virtio: initializing done\n```",
       "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184e872e_59bce4ee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 94
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-20T02:02:16Z",
+      "side": 1,
+      "message": "Trusty supports and needs this call, but other TEEs might not. In that case they\u0027d return `FFA_RET_NOT_SUPPORTED`, maybe we should ignore that error here.\n\nThe remaining errors that this call can return, per the spec:\n* `FFA_RET_INVALID_PARAMETERS`: _Unrecognized endpoint or vCPU ID_. The TEE could theoretically return this if it doesn\u0027t support `FFA_RUN` but it\u0027s unlikely. This would probably happen if we passed in a wrong `dest`, so we should report it as an actual error.\n* `FFA_RET_DENIED`: _Callee is not in a state to handle this request_ or _Caller is not allowed to invoke this ABI_. It means we\u0027re doing something wrong, so we should return an error.\n* `FFA_RET_BUSY`: _vCPU is busy and caller must retry later_. It makes sense to return `-EBUSY` here, but it sounds like the hypervisor should retry?\n* `FFA_RET_ABORTED`: the TEE aborted so the hypervisor probably should as well.\n\nWe can fix this in a separate CL if that\u0027s easier.",
+      "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
