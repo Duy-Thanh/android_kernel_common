@@ -34,6 +34,24 @@
       "parentUuid": "bb6a96a8_3e66f4ca",
       "revId": "9b2ac4f1b8518b9ebfc34cb9f9d800860637511c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6535926_0ca70740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-20T14:45:20Z",
+      "side": 1,
+      "message": "If this is intended only for OGKI, then you need to say that in the commit message. Please also provide a link to the OGKI patch that uses it (you can provide that in the associated bug if you prefer)",
+      "parentUuid": "8e5587a7_9db89368",
+      "revId": "9b2ac4f1b8518b9ebfc34cb9f9d800860637511c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
