@@ -137,8 +137,7 @@ emit_pipe_control(u32 *dw, int i, u32 bit_group_0, u32 bit_group_1, u32 offset, 
 static int emit_pipe_invalidate(u32 mask_flags, bool invalidate_tlb, u32 *dw,
 				int i)
 {
-	u32 flags0 = 0;
-	u32 flags1 = PIPE_CONTROL_CS_STALL |
+	u32 flags = PIPE_CONTROL_CS_STALL |
 		PIPE_CONTROL_COMMAND_CACHE_INVALIDATE |
 		PIPE_CONTROL_INSTRUCTION_CACHE_INVALIDATE |
 		PIPE_CONTROL_TEXTURE_CACHE_INVALIDATE |
@@ -149,15 +148,11 @@ static int emit_pipe_invalidate(u32 mask_flags, bool invalidate_tlb, u32 *dw,
 		PIPE_CONTROL_STORE_DATA_INDEX;
 
 	if (invalidate_tlb)
-		flags1 |= PIPE_CONTROL_TLB_INVALIDATE;
+		flags |= PIPE_CONTROL_TLB_INVALIDATE;
 
-	flags1 &= ~mask_flags;
+	flags &= ~mask_flags;
 
-	if (flags1 & PIPE_CONTROL_VF_CACHE_INVALIDATE)
-		flags0 |= PIPE_CONTROL0_L3_READ_ONLY_CACHE_INVALIDATE;
-
-	return emit_pipe_control(dw, i, flags0, flags1,
-				 LRC_PPHWSP_FLUSH_INVAL_SCRATCH_ADDR, 0);
+	return emit_pipe_control(dw, i, 0, flags, LRC_PPHWSP_FLUSH_INVAL_SCRATCH_ADDR, 0);
 }
 
 static int emit_store_imm_ppgtt_posted(u64 addr, u64 value,

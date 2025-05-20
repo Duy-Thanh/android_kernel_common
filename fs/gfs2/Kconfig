@@ -4,6 +4,7 @@ config GFS2_FS
 	select BUFFER_HEAD
 	select FS_POSIX_ACL
 	select CRC32
+	select LIBCRC32C
 	select QUOTACTL
 	select FS_IOMAP
 	help

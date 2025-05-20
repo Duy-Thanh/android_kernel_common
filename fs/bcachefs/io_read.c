@@ -977,8 +977,7 @@ retry_pick:
 		goto err;
 	}
 
-	if (unlikely(bch2_csum_type_is_encryption(pick.crc.csum_type)) &&
-	    !c->chacha20_key_set) {
+	if (unlikely(bch2_csum_type_is_encryption(pick.crc.csum_type)) && !c->chacha20) {
 		struct printbuf buf = PRINTBUF;
 		bch2_read_err_msg_trans(trans, &buf, orig, read_pos);
 		prt_printf(&buf, "attempting to read encrypted data without encryption key\n  ");

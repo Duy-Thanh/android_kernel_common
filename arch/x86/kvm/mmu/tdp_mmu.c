@@ -40,9 +40,7 @@ void kvm_mmu_uninit_tdp_mmu(struct kvm *kvm)
 	kvm_tdp_mmu_invalidate_roots(kvm, KVM_VALID_ROOTS);
 	kvm_tdp_mmu_zap_invalidated_roots(kvm, false);
 
-#ifdef CONFIG_KVM_PROVE_MMU
-	KVM_MMU_WARN_ON(atomic64_read(&kvm->arch.tdp_mmu_pages));
-#endif
+	WARN_ON(atomic64_read(&kvm->arch.tdp_mmu_pages));
 	WARN_ON(!list_empty(&kvm->arch.tdp_mmu_roots));
 
 	/*
@@ -327,17 +325,13 @@ static void handle_changed_spte(struct kvm *kvm, int as_id, gfn_t gfn,
 static void tdp_account_mmu_page(struct kvm *kvm, struct kvm_mmu_page *sp)
 {
 	kvm_account_pgtable_pages((void *)sp->spt, +1);
-#ifdef CONFIG_KVM_PROVE_MMU
 	atomic64_inc(&kvm->arch.tdp_mmu_pages);
-#endif
 }
 
 static void tdp_unaccount_mmu_page(struct kvm *kvm, struct kvm_mmu_page *sp)
 {
 	kvm_account_pgtable_pages((void *)sp->spt, -1);
-#ifdef CONFIG_KVM_PROVE_MMU
 	atomic64_dec(&kvm->arch.tdp_mmu_pages);
-#endif
 }
 
 /**

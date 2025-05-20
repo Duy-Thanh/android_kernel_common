@@ -1472,13 +1472,8 @@ struct kvm_arch {
 	struct once nx_once;
 
 #ifdef CONFIG_X86_64
-#ifdef CONFIG_KVM_PROVE_MMU
-	/*
-	 * The number of TDP MMU pages across all roots.  Used only to sanity
-	 * check that KVM isn't leaking TDP MMU pages.
-	 */
+	/* The number of TDP MMU pages across all roots. */
 	atomic64_t tdp_mmu_pages;
-#endif
 
 	/*
 	 * List of struct kvm_mmu_pages being used as roots.
