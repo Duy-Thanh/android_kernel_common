@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b1c409d_6b6aec7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1096846
+      },
+      "writtenOn": "2025-05-20T17:26:47Z",
+      "side": 1,
+      "message": "to answer my own question, apparently this *was* backported to 5.15:\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3314933\n\nBut I didn\u0027t notice that, and used a new change-id and slightly different backport here:\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3468472\n\nI\u0027m just posting this FYI.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "bfdd4619d735c6dae6c09ccedc6964ea9788b28d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
