@@ -25,6 +25,10 @@
   __traceiter_android_vh_do_shrink_slab
   __traceiter_android_vh_shrink_slab_bypass
 
+# required by lz4 decompress module
+  __tracepoint_android_vh_lz4_decompress_bypass
+  __traceiter_android_vh_lz4_decompress_bypass
+
 # required by health_report module
   __tracepoint_android_vh_health_report
   __traceiter_android_vh_health_report
