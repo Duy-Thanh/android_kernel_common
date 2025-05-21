@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: File is missing final newline\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nFile is missing final newline",
       "revId": "961e921090ea11d8f28dfca3b3f4000e1e4fe85c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27cedd57_39733c3b",
+        "filename": "android/abi_gki_protected_exports_aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2025-05-21T05:45:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d70311f1_42460e5e",
+      "revId": "961e921090ea11d8f28dfca3b3f4000e1e4fe85c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
