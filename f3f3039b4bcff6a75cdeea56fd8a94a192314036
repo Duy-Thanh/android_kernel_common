@@ -34,6 +34,24 @@
       "parentUuid": "24a835e4_6e24e5d1",
       "revId": "f3f3039b4bcff6a75cdeea56fd8a94a192314036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e3aedbf_b6194adf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-05-21T02:22:36Z",
+      "side": 1,
+      "message": "There are actually multiple reports:\nhttps://bugs.debian.org/1106070\nhttps://lore.kernel.org/all/20250519175640.2fcac001@leda.eworm.net/\n\nThere is a suggested fix that was just sent today:\nhttps://lore.kernel.org/all/aCx6QFZ1kiyB9ec0@infradead.org/\n\nWe\u0027ll probably get the actual fix in the next week or so. I\u0027ll add these links to the commit message.",
+      "parentUuid": "51501c29_6956f68d",
+      "revId": "f3f3039b4bcff6a75cdeea56fd8a94a192314036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
