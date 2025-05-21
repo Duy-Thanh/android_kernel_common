@@ -33,6 +33,42 @@
       "message": "why can\u0027t we just wait for this patch to land in android-mainline via upstream merge?",
       "revId": "184c3e10f6fcd8ba1c69714f9218f1a07ed8cea6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3171c61_f265981b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-21T13:12:05Z",
+      "side": 1,
+      "message": "Acknowledged.",
+      "parentUuid": "3f2ab9c6_86dc7efe",
+      "revId": "184c3e10f6fcd8ba1c69714f9218f1a07ed8cea6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43d10770_e746f75c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-21T13:12:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a2f89229_12f8fc6b",
+      "revId": "184c3e10f6fcd8ba1c69714f9218f1a07ed8cea6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
