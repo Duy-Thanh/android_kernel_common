@@ -67,6 +67,30 @@
       ],
       "revId": "37a58e672cd85d9e6725e388d725389079aee85c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a265d804_7022894e",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-21T18:09:45Z",
+      "side": 1,
+      "message": "Yeah this was done for `To comply with vendor hook guidlines, avoid including types.h in trace/hooks/mm.h and use unsigned int for gfp_t.`\nI think that should still work but the presubmit checks will tell us for sure.",
+      "parentUuid": "80b904e1_4cdded71",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 31
+      },
+      "revId": "37a58e672cd85d9e6725e388d725389079aee85c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
