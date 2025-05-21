@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e2171e_abad39f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-05-21T16:55:15Z",
+      "side": 1,
+      "message": "A comment: other than that, looks good to me.",
+      "revId": "37a58e672cd85d9e6725e388d725389079aee85c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80b904e1_4cdded71",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-05-21T16:55:15Z",
+      "side": 1,
+      "message": "defer to GKI team whether it\u0027s okay to change the type even though they are same in the end(Guess you already confirmed with Suren)",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1fc1d3a5_69dfa190",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tTP_PROTO(gfp_t *flags),\n"
+            },
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tTP_PROTO(gfp_t *flags),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37a58e672cd85d9e6725e388d725389079aee85c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
