@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d0f1c78_d8fbcce0",
+        "filename": "include/trace/hooks/madvise.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948395
+      },
+      "writtenOn": "2025-05-21T00:44:02Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: File is missing final newline\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nFile is missing final newline Androidx Overview Android.Developer.com",
+      "revId": "3b679eb75c87dbab5d83fae55a2739b8ed0ea580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48eaba04_0024e4b8",
         "filename": "include/trace/hooks/madvise.h",
         "patchSetId": 8
