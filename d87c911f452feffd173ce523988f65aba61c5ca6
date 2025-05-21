@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa436a4_cb6f783e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-21T03:17:52Z",
+      "side": 1,
+      "message": "I know this has been included in prior kernels, but can you provide a bit more detail as to why this is necessary to add?\n\n1) What is the problem you see without this change that is motivating this addition?\n\n2) What is the (qualitative) benefit gained from having it. This can be in % ?\n\n3) What might be done upstream to remove the need for this vendorhook?\n\nIf this info is sensitive, you can provide the details in the latest bug.",
+      "revId": "d87c911f452feffd173ce523988f65aba61c5ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3679b337_22148801",
+        "filename": "kernel/signal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-21T03:17:52Z",
+      "side": 1,
+      "message": "In the commit message, can you clearly specify why you cannot use the existing trace hook (trace_signal_generate)",
+      "revId": "d87c911f452feffd173ce523988f65aba61c5ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
