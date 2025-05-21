@@ -116,6 +116,7 @@ _X86_64_GKI_MODULES_LIST = [
     "drivers/acpi/fan.ko",
     "drivers/android/rust_binder.ko",
     "drivers/powercap/intel_rapl_common.ko",
+	 "drivers/powercap/intel_rapl_msr.ko",
     "drivers/ptp/ptp_kvm.ko",
     "drivers/thermal/intel/int340x_thermal/acpi_thermal_rel.ko",
     "drivers/thermal/intel/int340x_thermal/int3400_thermal.ko",
