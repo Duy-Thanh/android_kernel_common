@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e43c2e6_c4edc660",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-21T14:46:36Z",
+      "side": 1,
+      "message": "Add a \"Fixes:\" tag citing the patch that introduced the bug",
+      "revId": "c0bc0bbe73a0994a00d26311a1fb42da20f26f64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
