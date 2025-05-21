@@ -24049,6 +24049,11 @@ pointer_reference {
   pointee_type_id: 0xf43ed6df
 }
 pointer_reference {
+  id: 0x37a5cb14
+  kind: POINTER
+  pointee_type_id: 0xf4d7cace
+}
+pointer_reference {
   id: 0x37b42895
   kind: POINTER
   pointee_type_id: 0xf49044ca
@@ -31932,6 +31937,11 @@ qualified {
   id: 0xf4a306a1
   qualifier: CONST
   qualified_type_id: 0xa2cbac0e
+}
+qualified {
+  id: 0xf4d7cace
+  qualifier: CONST
+  qualified_type_id: 0xa3189db3
 }
 qualified {
   id: 0xf51fccb0
@@ -303694,6 +303704,11 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0xc3320c3e
+  return_type_id: 0x4585663f
+  parameter_id: 0x37a5cb14
+}
+function {
   id: 0xc33e01cf
   return_type_id: 0x4585663f
   parameter_id: 0x347303b4
@@ -353642,6 +353657,15 @@ elf_symbol {
   full_name: "sbitmap_init_node"
 }
 elf_symbol {
+  id: 0x56cb7a36
+  name: "sbitmap_weight"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa4eb5793
+  type_id: 0xc3320c3e
+  full_name: "sbitmap_weight"
+}
+elf_symbol {
   id: 0xe8c754b0
   name: "scatterwalk_ffwd"
   is_defined: true
@@ -373919,6 +373943,7 @@ interface {
   symbol_id: 0x75781cce
   symbol_id: 0xd3eab591
   symbol_id: 0x12f98f54
+  symbol_id: 0x56cb7a36
   symbol_id: 0xe8c754b0
   symbol_id: 0x12fb2fd6
   symbol_id: 0xac6ce0b0
