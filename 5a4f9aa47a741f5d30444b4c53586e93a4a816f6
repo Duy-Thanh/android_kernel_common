@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b48c65_1e2b2db1",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2254,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-21T14:06:22Z",
+      "side": 1,
+      "message": "You know the size, you may as well emit it.",
+      "range": {
+        "startLine": 2254,
+        "startChar": 61,
+        "endLine": 2254,
+        "endChar": 64
+      },
+      "revId": "5a4f9aa47a741f5d30444b4c53586e93a4a816f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
