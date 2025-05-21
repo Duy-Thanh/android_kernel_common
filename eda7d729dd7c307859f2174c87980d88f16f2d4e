@@ -66,6 +66,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daac79e6_8d7ffeed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ftrace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-21T10:37:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b942023d_d57d372d",
+      "range": {
+        "startLine": 400,
+        "startChar": 18,
+        "endLine": 400,
+        "endChar": 23
+      },
+      "revId": "eda7d729dd7c307859f2174c87980d88f16f2d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66e0cfdb_1a25c8e3",
@@ -141,6 +165,30 @@
       "side": 1,
       "message": "This one is ok a call to disable can be called with both NULL. In that case it means \"use the ELF section for core functions\" as opposed to \"use this module ELF section\"\n\nhyp_ftrace_sync() is different. Because the list is host provided, it is also limited to a single page. So you might have to sync from the middle of the array and not from the start. Hence why funcs is NOT optional for hyp_ftrace_sync() but it is for other functions.",
       "parentUuid": "66e0cfdb_1a25c8e3",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 28
+      },
+      "revId": "eda7d729dd7c307859f2174c87980d88f16f2d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44395954_3fd736d9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ftrace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-21T10:37:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1a02d87d_375b6c7c",
       "range": {
         "startLine": 408,
         "startChar": 0,
