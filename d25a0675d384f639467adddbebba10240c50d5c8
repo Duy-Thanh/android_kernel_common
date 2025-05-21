@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65189f8d_8d0aa959",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 94
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-21T15:20:37Z",
+      "side": 1,
+      "message": "Discussed in a meeting: we will add a killable sleep here and keep retrying, because user space should not restart this call.",
+      "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a521da0_128c9a81",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 94
