@@ -6,11 +6,16 @@
 # Rewritten to use lists instead of if-statements.
 # 
 
+<<<<<<< HEAD   (c37119 UPSTREAM: drm/i915/dp: Reject HBR3 when sink doesn't support)
 ifdef CONFIG_GKI_HACKS_TO_FIX
 subdir-ccflags-y += -DANDROID_GKI_VFS_EXPORT_ONLY=VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver
 else
 subdir-ccflags-y += -DANDROID_GKI_VFS_EXPORT_ONLY=""
 endif
+||||||| BASE
+=======
+subdir-ccflags-y += -DANDROID_GKI_VFS_EXPORT_ONLY=VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver
+>>>>>>> BRANCH (e2c81a ANDROID: Fix incorrect namespacing for ANDROID_GKI_VFS_EXPOR)
 
 obj-y :=	open.o read_write.o file_table.o super.o \
 		char_dev.o stat.o exec.o pipe.o namei.o fcntl.o \
