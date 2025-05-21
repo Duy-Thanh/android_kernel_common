@@ -16,6 +16,24 @@
       "message": "Can we get a link to a report of the problem on lkml, so the upstream thread can be followed?",
       "revId": "f3f3039b4bcff6a75cdeea56fd8a94a192314036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51501c29_6956f68d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-05-21T02:13:35Z",
+      "side": 1,
+      "message": "Sure, this is actually recently reported (I believe). However, I\u0027ll add it to the commit message.",
+      "parentUuid": "24a835e4_6e24e5d1",
+      "revId": "f3f3039b4bcff6a75cdeea56fd8a94a192314036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
