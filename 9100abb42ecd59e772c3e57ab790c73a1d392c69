@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d41a12_e89bfbb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-21T16:48:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d508114f_cf8347a9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b11dcd61_ebd434c1",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-19T20:55:51Z",
       "side": 1,
       "message": "Didn\u0027t understand. What\u0027s the relationship between __GFP_CMA and skip_swapcache. Could you clarify a bit more?",
+      "range": {
+        "startLine": 18,
+        "startChar": 34,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6251a1fa_ae145746",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-05-21T16:48:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b11dcd61_ebd434c1",
       "range": {
         "startLine": 18,
         "startChar": 34,
