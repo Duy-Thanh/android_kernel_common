@@ -214,6 +214,7 @@ static int open_file(const char *prefix, char *path)
 	return fd;
 }
 
+<<<<<<< HEAD   (c64805 [automerger skipped] UPSTREAM: selftests/mm: rename guard-pa)
 /* Establish a varying pattern in a buffer. */
 static void set_pattern(char *ptr, size_t num_pages, size_t page_size)
 {
@@ -266,6 +267,9 @@ static bool is_buf_eq(char *buf, size_t size, char chr)
 	return true;
 }
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (bc91eb UPSTREAM: tools/selftests: expand all guard region tests to )
 FIXTURE_SETUP(guard_regions)
 {
 	self->page_size = (unsigned long)sysconf(_SC_PAGESIZE);
