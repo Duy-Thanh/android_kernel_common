@@ -7684,7 +7684,7 @@ void __init set_pageblock_order(void)
 	if (HPAGE_SHIFT > PAGE_SHIFT)
 		order = HUGETLB_PAGE_ORDER;
 	else
-		order = MAX_ORDER - 1;
+		order = PAGE_BLOCK_ORDER - 1;
 
 	/*
 	 * Assume the largest contiguous order of interest is a huge page.
