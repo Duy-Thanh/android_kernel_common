@@ -216,6 +216,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "467a0d59_2af03b08",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2010822
+      },
+      "writtenOn": "2025-05-21T06:51:55Z",
+      "side": 1,
+      "message": "Hi Minchan,\n\nWe have resubmitted the changes and separated the __GFP_CMA patch. Please review them again.\n\nThanks.",
+      "parentUuid": "d6a5658b_2bf7e0f6",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "9100abb42ecd59e772c3e57ab790c73a1d392c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "18220b14_09adf853",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
