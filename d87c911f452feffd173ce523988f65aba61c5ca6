@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7ef374b_eca64522",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2025-05-21T08:03:29Z",
+      "side": 1,
+      "message": "We need to obtain system related state information at the time when the process was killed, in order to more accurately detect the system state and make corresponding improvement strategies.",
+      "parentUuid": "1fa436a4_cb6f783e",
+      "revId": "d87c911f452feffd173ce523988f65aba61c5ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3679b337_22148801",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-21T03:17:52Z",
       "side": 1,
       "message": "In the commit message, can you clearly specify why you cannot use the existing trace hook (trace_signal_generate)",
+      "revId": "d87c911f452feffd173ce523988f65aba61c5ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0225e857_f48d7720",
+        "filename": "kernel/signal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2025-05-21T08:03:29Z",
+      "side": 1,
+      "message": "We need to obtain the values of the newly added parameters ret and type to determine the corresponding information for debug printing, such as \nif (ret) \n    printk(...);",
+      "parentUuid": "3679b337_22148801",
       "revId": "d87c911f452feffd173ce523988f65aba61c5ca6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
