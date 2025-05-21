@@ -2025,6 +2025,7 @@ TEST_F(guard_regions, anon_zeropage)
 	ASSERT_EQ(munmap(ptr, 10 * page_size), 0);
 }
 
+<<<<<<< HEAD   (41fa23 [automerger skipped] UPSTREAM: tools/selftests: expand all g)
 /*
  * Assert that /proc/$pid/pagemap correctly identifies guard region ranges.
  */
@@ -2071,4 +2072,7 @@ TEST_F(guard_regions, pagemap)
 	ASSERT_EQ(munmap(ptr, 10 * page_size), 0);
 }
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (df3e84 UPSTREAM: tools/selftests: add file/shmem-backed mapping gua)
 TEST_HARNESS_MAIN
