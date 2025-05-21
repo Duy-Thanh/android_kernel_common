@@ -1086,7 +1086,18 @@ static bool is_valid_guard_vma(struct vm_area_struct *vma, bool allow_locked)
 	if (!allow_locked)
 		disallowed |= VM_LOCKED;
 
+<<<<<<< HEAD   (6e5568 UPSTREAM: mm: add PTE_MARKER_GUARD PTE marker am: c14f85307d)
 	return !(vma->vm_flags & disallowed);
+||||||| BASE
+=======
+	if (!vma_is_anonymous(vma))
+		return false;
+
+	if ((vma->vm_flags & (VM_MAYWRITE | disallowed)) != VM_MAYWRITE)
+		return false;
+
+	return true;
+>>>>>>> BRANCH (b9ee6d BACKPORT: mm: madvise: implement lightweight guard page mech)
 }
 
 static bool is_guard_pte_marker(pte_t ptent)
