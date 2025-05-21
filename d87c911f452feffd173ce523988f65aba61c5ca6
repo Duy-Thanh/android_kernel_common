@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8481a831_586ca04e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-21T08:44:54Z",
+      "side": 1,
+      "message": "please add these details to the commit message.",
+      "parentUuid": "b7ef374b_eca64522",
+      "revId": "d87c911f452feffd173ce523988f65aba61c5ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3679b337_22148801",
         "filename": "kernel/signal.c",
         "patchSetId": 3
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "We need to obtain the values of the newly added parameters ret and type to determine the corresponding information for debug printing, such as \nif (ret) \n    printk(...);",
       "parentUuid": "3679b337_22148801",
+      "revId": "d87c911f452feffd173ce523988f65aba61c5ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c3cf6f_ab00cb0b",
+        "filename": "kernel/signal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-21T08:44:54Z",
+      "side": 1,
+      "message": "please add these details to the commit message",
+      "parentUuid": "0225e857_f48d7720",
       "revId": "d87c911f452feffd173ce523988f65aba61c5ca6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
