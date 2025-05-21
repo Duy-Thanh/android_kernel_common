@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32dd3f39_f9f8f84a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-21T09:56:21Z",
+      "side": 1,
+      "message": "Linux kernel modules are not allowed to be \"proprietary\", sorry.  Please fix the license of your code to comply with the license of Linux.",
+      "range": {
+        "startLine": 13,
+        "startChar": 28,
+        "endLine": 13,
+        "endChar": 39
+      },
+      "revId": "6f8ba79e98626d75b3fafe93e9c6ecc3425d2673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
