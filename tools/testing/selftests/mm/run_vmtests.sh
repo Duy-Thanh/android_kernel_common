@@ -376,7 +376,12 @@ CATEGORY="mremap" run_test ./mremap_dontunmap
 CATEGORY="hmm" run_test bash ./test_hmm.sh smoke
 
 # MADV_GUARD_INSTALL and MADV_GUARD_REMOVE tests
+<<<<<<< HEAD   (69de07 [automerger skipped] BACKPORT: selftests/mm: add self tests )
 CATEGORY="madv_guard" run_test ./guard-regions
+||||||| BASE
+=======
+CATEGORY="madv_guard" run_test ./guard-pages
+>>>>>>> BRANCH (b00dca UPSTREAM: selftests/mm: add fork CoW guard page test)
 
 # MADV_POPULATE_READ and MADV_POPULATE_WRITE tests
 CATEGORY="madv_populate" run_test ./madv_populate
