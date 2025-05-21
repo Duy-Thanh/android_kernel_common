@@ -1208,6 +1208,7 @@ static phys_addr_t iommu_dma_map_swiotlb(struct device *dev, phys_addr_t phys,
 	return phys;
 }
 
+<<<<<<< TARGET BRANCH (8caadc [automerger skipped] FROMGIT: dma-mapping: Provide an interf)
 /*
  * Checks if a physical buffer has unaligned boundaries with respect to
  * the IOMMU granule. Returns non-zero if either the start or end
@@ -1219,6 +1220,9 @@ static inline size_t iova_unaligned(struct iova_domain *iovad, phys_addr_t phys,
 	return iova_offset(iovad, phys | size);
 }
 
+||||||| BASE
+=======
+>>>>>>> SOURCE BRANCH (59a15e FROMGIT: iommu/dma: Factor out a iommu_dma_map_swiotlb helpe)
 dma_addr_t iommu_dma_map_page(struct device *dev, struct page *page,
 	      unsigned long offset, size_t size, enum dma_data_direction dir,
 	      unsigned long attrs)
@@ -1236,7 +1240,13 @@ dma_addr_t iommu_dma_map_page(struct device *dev, struct page *page,
 	 * we don't need to use a bounce page.
 	 */
 	if (dev_use_swiotlb(dev, size, dir) &&
+<<<<<<< TARGET BRANCH (8caadc [automerger skipped] FROMGIT: dma-mapping: Provide an interf)
 	    iova_unaligned(iovad, phys, size)) {
+||||||| BASE
+	    iova_offset(iovad, phys | size)) {
+=======
+	    iova_offset(iovad, phys | size)) {
+>>>>>>> SOURCE BRANCH (59a15e FROMGIT: iommu/dma: Factor out a iommu_dma_map_swiotlb helpe)
 		phys = iommu_dma_map_swiotlb(dev, phys, size, dir, attrs);
 		if (phys == (phys_addr_t)DMA_MAPPING_ERROR)
 			return DMA_MAPPING_ERROR;
