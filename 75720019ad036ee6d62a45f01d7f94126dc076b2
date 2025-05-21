@@ -76,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c35fa54_027251e7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-21T10:46:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3786bc15_d354dfc7",
+      "range": {
+        "startLine": 258,
+        "startChar": 8,
+        "endLine": 258,
+        "endChar": 20
+      },
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f8dfc35_d2af5811",
@@ -141,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20668384_04c6d453",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-21T10:46:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f111d0f9_6d1b6b69",
+      "range": {
+        "startLine": 333,
+        "startChar": 23,
+        "endLine": 333,
+        "endChar": 41
+      },
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d89dd37_316a66e1",
@@ -196,6 +244,30 @@
       "side": 1,
       "message": "The buffer can\u0027t become unavailable as we check rb_cpu_loaded before and we have the spin_lock.",
       "parentUuid": "5d89dd37_316a66e1",
+      "range": {
+        "startLine": 639,
+        "startChar": 23,
+        "endLine": 639,
+        "endChar": 40
+      },
+      "revId": "75720019ad036ee6d62a45f01d7f94126dc076b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1dac60c_1dcaa311",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-21T10:46:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eb115306_3193ea59",
       "range": {
         "startLine": 639,
         "startChar": 23,
