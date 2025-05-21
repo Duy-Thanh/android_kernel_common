@@ -1601,6 +1601,18 @@ ddk_headers(
     visibility = ["//visibility:public"],
 )
 
+# Headers for building pKVM modules. They are for pKVM only so not added to
+# all_headers_aarch64.
+ddk_headers(
+    name = "pkvm_headers_aarch64",
+    hdrs = [
+        "arch/arm64/kvm/hyp/include/nvhe/trace/define_events.h",
+        "arch/arm64/kvm/hyp/include/nvhe/trace/trace.h",
+    ],
+    includes = ["arch/arm64/kvm/hyp/include"],
+    visibility = ["//visibility:public"],
+)
+
 # Implementation details for DDK headers. The targets below cannot be directly
 # depended on by DDK modules.
 
