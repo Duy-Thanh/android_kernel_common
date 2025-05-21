@@ -86,7 +86,12 @@ TEST_GEN_FILES += hugetlb_fault_after_madv
 TEST_GEN_FILES += hugetlb_madv_vs_map
 TEST_GEN_FILES += hugetlb_dio
 TEST_GEN_FILES += droppable
+<<<<<<< HEAD   (56a56c UPSTREAM: tools: testing: update tools UAPI header for mman-)
 TEST_GEN_FILES += guard-regions
+||||||| BASE
+=======
+TEST_GEN_FILES += guard-pages
+>>>>>>> BRANCH (5367c0 BACKPORT: selftests/mm: add self tests for guard page featur)
 
 ifneq ($(ARCH),arm64)
 TEST_GEN_FILES += soft-dirty
