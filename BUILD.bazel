@@ -1604,6 +1604,14 @@ ddk_headers(
 # Implementation details for DDK headers. The targets below cannot be directly
 # depended on by DDK modules.
 
+# Headers for building pKVM modules
+ddk_headers(
+    name = "pkvm_headers_aarch64",
+    hdrs = glob(["arch/arm64/kvm/hyp/include/nvhe/trace/*.h"]),
+    includes = ["arch/arm64/kvm/hyp/include"],
+    visibility = ["//visibility:private"],
+)
+
 # Headers needed to include drivers/usb/host/xhci.h.
 ddk_headers(
     name = "xhci_headers",
@@ -1641,6 +1649,7 @@ ddk_headers(
         "sound/usb/usbaudio.h",
         ":all_headers_allowlist_aarch64_globs",
         ":all_headers_allowlist_common_globs",
+        ":pkvm_headers_aarch64",
         ":xhci_headers",
     ],
     # The list of include directories where source files can #include headers
