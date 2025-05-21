@@ -1862,6 +1862,7 @@ void dma_iova_free(struct device *dev, struct dma_iova_state *state)
 }
 EXPORT_SYMBOL_GPL(dma_iova_free);
 
+<<<<<<< HEAD   (a742ca FROMGIT: iommu: add kernel-doc for iommu_unmap_fast am: c64f)
 static int __dma_iova_link(struct device *dev, dma_addr_t addr,
 		phys_addr_t phys, size_t size, enum dma_data_direction dir,
 		unsigned long attrs)
@@ -2124,6 +2125,9 @@ void dma_iova_destroy(struct device *dev, struct dma_iova_state *state,
 }
 EXPORT_SYMBOL_GPL(dma_iova_destroy);
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (0f2253 FROMGIT: dma-mapping: Provide an interface to allow allocate)
 void iommu_setup_dma_ops(struct device *dev)
 {
 	struct iommu_domain *domain = iommu_get_domain_for_dev(dev);
