@@ -67,6 +67,24 @@
       "message": "Can we return `-EINTR` to user space from here? Will the app just restart the syscall in that case?",
       "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4868a57_5abd2525",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 94
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-22T01:48:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5a521da0_128c9a81",
+      "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
