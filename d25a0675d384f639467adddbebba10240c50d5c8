@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ea03fa_e5800cf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 94
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-22T18:44:35Z",
+      "side": 1,
+      "message": "Tested patchset 95: everything is still working.",
+      "parentUuid": "2885dde9_3e9bb149",
+      "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "184e872e_59bce4ee",
