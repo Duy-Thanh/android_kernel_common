@@ -544,6 +544,7 @@ static ssize_t pin_assignment_show(struct device *dev,
 }
 static DEVICE_ATTR_RW(pin_assignment);
 
+<<<<<<< HEAD   (d2136f Merge 6.1.139 into android14-6.1-lts)
 static ssize_t hpd_show(struct device *dev, struct device_attribute *attr, char *buf)
 {
 	struct dp_altmode *dp = dev_get_drvdata(dev);
@@ -552,6 +553,9 @@ static ssize_t hpd_show(struct device *dev, struct device_attribute *attr, char 
 }
 static DEVICE_ATTR_RO(hpd);
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (da3c51 Linux 6.1.140)
 static struct attribute *displayport_attrs[] = {
 	&dev_attr_configuration.attr,
 	&dev_attr_pin_assignment.attr,
