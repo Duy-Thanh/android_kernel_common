@@ -41,6 +41,7 @@ static inline bool is_wrapfd_vma(struct vm_area_struct *vma)
  * On success returns mappable object. On error returns:
  * -EBADF: file is invalid.
  * -ENODEV: device is invalid.
+ * -EINVAL: mappable is invalid.
  * -EBUSY: buffer is owned by another device.
  * -ENOENT: wrap is empty (buffer got freed or moved)
  * -EOPNOTSUPP: wrapfd driver is not enabled
