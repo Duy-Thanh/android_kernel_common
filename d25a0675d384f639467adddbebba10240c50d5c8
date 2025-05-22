@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ef2fe6d_37ce4da3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 94
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-22T02:12:09Z",
+      "side": 1,
+      "message": "`FFA_RET_NOT_SUPPORTED` resolved in https://r.android.com/3637807, the rest should be fine as they are.",
+      "parentUuid": "184e872e_59bce4ee",
+      "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65189f8d_8d0aa959",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-05-21T15:20:37Z",
       "side": 1,
       "message": "Discussed in a meeting: we will add a killable sleep here and keep retrying, because user space should not restart this call.",
+      "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "831997bf_c6b606b2",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 94
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-22T02:12:09Z",
+      "side": 1,
+      "message": "Resolved in https://r.android.com/3637806.",
+      "parentUuid": "65189f8d_8d0aa959",
       "revId": "d25a0675d384f639467adddbebba10240c50d5c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
