@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47fdddcd_2cb58c7d",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-05-22T15:20:31Z",
+      "side": 1,
+      "message": "Module names means the module path (without extension) in the context of the Linux kernel, therefore this is not ambiguous.",
+      "parentUuid": "761aa502_1c5b44e8",
+      "range": {
+        "startLine": 311,
+        "startChar": 43,
+        "endLine": 311,
+        "endChar": 48
+      },
+      "revId": "33e68cc59e3a2de34ce6a3161d6deae6f7382627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e9d7a0f_d0e9aa40",
