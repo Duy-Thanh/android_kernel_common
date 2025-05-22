@@ -50,9 +50,22 @@ endif
 obj-$(CONFIG_BPF_PRELOAD) += preload/
 
 obj-$(CONFIG_BPF_SYSCALL) += relo_core.o
+<<<<<<< HEAD   (871fc10feba0af10aa92ed47a0fa61b3da983b9b BACKPORT: dma-buf: Rename debugfs symbols)
 obj-$(CONFIG_BPF_SYSCALL) += btf_iter.o
 obj-$(CONFIG_BPF_SYSCALL) += btf_relocate.o
 
+||||||| BASE   (23dc7cf0f77464173dc3173d55f6b731d54227f0 BACKPORT: dma-buf: Rename debugfs symbols)
+$(obj)/relo_core.o: $(srctree)/tools/lib/bpf/relo_core.c FORCE
+	$(call if_changed_rule,cc_o_c)
+=======
+
+ifeq ($(CONFIG_DMA_SHARED_BUFFER),y)
+obj-$(CONFIG_BPF_SYSCALL) += dmabuf_iter.o
+endif
+
+$(obj)/relo_core.o: $(srctree)/tools/lib/bpf/relo_core.c FORCE
+	$(call if_changed_rule,cc_o_c)
+>>>>>>> CHANGE (8817f19017d775f54c810ce66c7bb6682ed8cf61 BACKPORT: bpf: Add dmabuf iterator)
 ifeq ($(CONFIG_FUSE_BPF),y)
 obj-$(CONFIG_BPF_SYSCALL) += bpf_fuse.o
 endif
