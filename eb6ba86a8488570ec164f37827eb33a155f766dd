@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af371aef_2131d8c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-22T13:40:44Z",
+      "side": 1,
+      "message": "This change fixes a `ERROR: modpost: too long symbol \"android_vh_filemap_fault_before_folio_locked\"` error by changing the symbol name. No one can have a dependency on the old name.",
+      "revId": "eb6ba86a8488570ec164f37827eb33a155f766dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
