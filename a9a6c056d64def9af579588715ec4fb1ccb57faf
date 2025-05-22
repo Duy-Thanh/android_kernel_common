@@ -133,6 +133,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf9a4b93_fa85e76e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-05-22T17:58:55Z",
+      "side": 1,
+      "message": "@qperret@google.com are we ok to resolve this comment given the consensus recently reached:\n1- Risk of clients invoking the FFA_FEATURE ABI with interrupts disabled is deemed minimal and we can test on multiple TEEs. \n2- Replace this current approach with b/419570138",
+      "parentUuid": "c61b9d22_567ed721",
+      "range": {
+        "startLine": 1342,
+        "startChar": 3,
+        "endLine": 1342,
+        "endChar": 60
+      },
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3429cd6_5b615347",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 92
