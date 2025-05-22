@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c971b279_390e0a5f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-22T19:09:55Z",
+      "side": 1,
+      "message": "Making a follow-up CL.",
+      "parentUuid": "193a085a_180003b9",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeffc2b1_edef739b",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "confirming that we observe this bug when booting two Trusty VMs.",
       "parentUuid": "aeffc2b1_edef739b",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e790ce8_3f2f2659",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 1258,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-22T19:09:55Z",
+      "side": 1,
+      "message": "We\u0027ll make a follow-up CL that fixes this.",
+      "parentUuid": "e42dae21_7cf6c237",
       "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
