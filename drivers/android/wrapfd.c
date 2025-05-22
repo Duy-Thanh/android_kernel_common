@@ -1545,11 +1545,14 @@ int wrapfd_get_mappable(struct file *file, struct device *dev,
 	struct wrap_ctx *ctx;
 	int ret;
 
-	if (WARN_ON(!dev))
+	if (!dev)
 		return -ENODEV;
 
-	if (file->f_op != &wrap_fops)
+	if (!file || file->f_op != &wrap_fops)
 		return -EBADF;
+
+	if (!mappable)
+		return -EINVAL;
 
 	ctx = file->private_data;
 
@@ -1591,11 +1594,14 @@ int wrapfd_put_mappable(struct file *file, struct device *dev,
 {
 	struct wrap_ctx *ctx;
 
-	if (WARN_ON(!dev))
+	if (!dev)
 		return -ENODEV;
 
-	if (file->f_op != &wrap_fops)
+	if (!file || file->f_op != &wrap_fops)
 		return -EBADF;
+
+	if (!mappable)
+		return -EINVAL;
 
 	ctx = file->private_data;
 
@@ -1616,10 +1622,10 @@ int wrapfd_get_ownership(struct file *file, struct device *dev)
 	struct wrap_ctx *ctx;
 	int ret;
 
-	if (WARN_ON(!dev))
+	if (!dev)
 		return -ENODEV;
 
-	if (file->f_op != &wrap_fops)
+	if (!file || file->f_op != &wrap_fops)
 		return -EBADF;
 
 	ctx = file->private_data;
@@ -1659,10 +1665,10 @@ int wrapfd_put_ownership(struct file *file, struct device *dev)
 	struct wrap_ctx *ctx;
 	int ret;
 
-	if (WARN_ON(!dev))
+	if (!dev)
 		return -ENODEV;
 
-	if (file->f_op != &wrap_fops)
+	if (!file || file->f_op != &wrap_fops)
 		return -EBADF;
 
 	ctx = file->private_data;
