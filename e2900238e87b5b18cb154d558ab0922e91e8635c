@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d096f6a2_3ee64fc0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2025-05-22T10:41:33Z",
+      "side": 1,
+      "message": "Per OOB discussion, corrected the commit message.",
+      "parentUuid": "42e27f44_7c8089ee",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "daef2e7d_c000c722",
