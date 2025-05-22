@@ -16,6 +16,24 @@
       "message": "see comment on parent patch",
       "revId": "779e3f4c032bfc2a04ee394e6dfce57bfd5ea90d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f0cced3_ad495e13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2041020
+      },
+      "writtenOn": "2025-05-22T01:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67eec519_a80cdf7e",
+      "revId": "779e3f4c032bfc2a04ee394e6dfce57bfd5ea90d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

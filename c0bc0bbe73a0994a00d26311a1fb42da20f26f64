@@ -34,6 +34,24 @@
       "parentUuid": "1e43c2e6_c4edc660",
       "revId": "c0bc0bbe73a0994a00d26311a1fb42da20f26f64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3216eaab_a067b0f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2041020
+      },
+      "writtenOn": "2025-05-22T01:45:04Z",
+      "side": 1,
+      "message": "Yes, it was due to the symbol name being too long. The original symbol name was tested and worked fine, but during the submission, I felt that the symbol name was not appropriate, so I modified it without realizing there were character length restrictions.",
+      "parentUuid": "1e43c2e6_c4edc660",
+      "revId": "c0bc0bbe73a0994a00d26311a1fb42da20f26f64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
