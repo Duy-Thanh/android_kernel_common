@@ -16,6 +16,24 @@
       "message": "@tkjos@google.com Are we allowed to do this change now that the KMI is frozen? This disallow any pKVM in-tree modules to use `#include \u003ctrace.h\u003e`; they must use `#include \u003cnvhe/trace.h\u003e`. The ABI did not change.",
       "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610cc95c_26428ac3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-05-22T19:37:12Z",
+      "side": 1,
+      "message": "unresolving for viz",
+      "parentUuid": "d10ca4a5_44d9ef59",
+      "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
