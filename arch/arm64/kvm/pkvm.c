@@ -542,13 +542,23 @@ void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa)
 	u16 pins;
 
 	write_lock(&host_kvm->mmu_lock);
+<<<<<<< HEAD   (254c2b ANDROID: KVM: arm64: Add host_split_guest for pKVM)
 	ppage = mt_find(&host_kvm->arch.pkvm.pinned_pages, &index,
 			index + PAGE_SIZE - 1);
 	if (ppage && ppage != KVM_DUMMY_PPAGE) {
+||||||| BASE
+	ppage = kvm_pinned_pages_iter_first(&host_kvm->arch.pkvm.pinned_pages,
+					    ipa, ipa + PAGE_SIZE - 1);
+	if (ppage) {
+=======
+	ppage = kvm_pinned_pages_iter_first(&host_kvm->arch.pkvm.pinned_pages,
+					    ipa, ipa + PAGE_SIZE - 1);
+	if (ppage) {
+		WARN_ON_ONCE(ppage->pins != 1);
+
+>>>>>>> CHANGE (2d9dc3 ANDROID: KVM: arm64: Add hyp request SPLIT)
 		if (ppage->pins)
 			ppage->pins--;
-		else
-			WARN_ON(1);
 
 		pins = ppage->pins;
 		if (!pins)

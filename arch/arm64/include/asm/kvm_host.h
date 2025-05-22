@@ -224,6 +224,15 @@ struct kvm_smccc_features {
 };
 
 struct kvm_pinned_page {
+<<<<<<< HEAD   (254c2b ANDROID: KVM: arm64: Add host_split_guest for pKVM)
+||||||| BASE
+	struct rb_node		node;
+=======
+	union {
+		struct rb_node		node;
+		struct list_head	list_node;
+	};
+>>>>>>> CHANGE (2d9dc3 ANDROID: KVM: arm64: Add hyp request SPLIT)
 	struct page		*page;
 	u64			ipa;
 	u8			order;
@@ -525,6 +534,7 @@ struct kvm_hyp_req {
 #define KVM_HYP_LAST_REQ	0
 #define KVM_HYP_REQ_TYPE_MEM	1
 #define KVM_HYP_REQ_TYPE_MAP	2
+#define KVM_HYP_REQ_TYPE_SPLIT	3
 	u8 type;
 	union {
 		struct {
@@ -539,6 +549,12 @@ struct kvm_hyp_req {
 			unsigned long	guest_ipa;
 			size_t		size;
 		} map;
+#ifndef __GENKSYMS__
+		struct {
+			unsigned long	guest_ipa;
+			size_t		size;
+		} split;
+#endif
 	};
 };
 
