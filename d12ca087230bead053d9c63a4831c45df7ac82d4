@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "193a085a_180003b9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-22T08:02:50Z",
+      "side": 1,
+      "message": "I think we need an `ffa_rx_release` here, since we\u0027re holding a valid buffer.",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeffc2b1_edef739b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 1258,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-22T08:02:50Z",
+      "side": 1,
+      "message": "I think we need an `ffa_rx_release` here for the hypervisor\u0027s RX buffer.\n\nAlternatively, `do_ffa_part_get_response` could always take care of releasing that buffer (which I think would be less prone to mistakes).",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
