@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb66bfb3_8a27b805",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-22T18:34:30Z",
+      "side": 1,
+      "message": "I guess also check that the vCPU is protected? The split operation doesn\u0027t make much sense for NP I think -- ballooning works completely differenlty as we don\u0027t have a pin.",
+      "range": {
+        "startLine": 1231,
+        "startChar": 6,
+        "endLine": 1231,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "728b4ff7_9092f48c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+              "range": {
+                "startLine": 1231,
+                "startChar": 0,
+                "endLine": 1232,
+                "endChar": 0
+              },
+              "replacement": "\tif (!hyp_vcpu || !pkvm_hyp_vcpu_is_protected(hyp_vcpu))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "34ec25c71f3a8228a8b84f0581037c95bd0aed65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9538bf8c_d72f6b16",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1806,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-22T18:34:30Z",
+      "side": 1,
+      "message": "Should this also retrieve the software bits? Otherwise a malicious host could issue a split operation on a shared block and that would result in losing the sharing attribute no?",
+      "range": {
+        "startLine": 1806,
+        "startChar": 8,
+        "endLine": 1806,
+        "endChar": 35
+      },
+      "revId": "34ec25c71f3a8228a8b84f0581037c95bd0aed65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
