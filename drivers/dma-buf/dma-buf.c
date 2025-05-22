@@ -33,6 +33,7 @@
 
 #include "dma-buf-sysfs-stats.h"
 
+<<<<<<< HEAD   (15806a231d4180de148a02d6b04c6ef3bb113080 ANDROID: GKI: Update symbol list for Amlogic)
 #include <trace/hooks/dmabuf.h>
 #include <linux/android_kabi.h>
 ANDROID_KABI_DECLONLY(trace_eval_map);
@@ -40,7 +41,16 @@ ANDROID_KABI_DECLONLY(trace_eval_map);
 #if IS_ENABLED(CONFIG_DEBUG_FS)
 static DEFINE_MUTEX(debugfs_list_mutex);
 static LIST_HEAD(debugfs_list);
+||||||| BASE   (b06175e3a3df2e000d2e520fc066d6ae45ecacb7 BACKPORT: dma-buf: Do not build debugfs related code when !C)
+#if IS_ENABLED(CONFIG_DEBUG_FS)
+static DEFINE_MUTEX(debugfs_list_mutex);
+static LIST_HEAD(debugfs_list);
+=======
+static DEFINE_MUTEX(dmabuf_list_mutex);
+static LIST_HEAD(dmabuf_list);
+>>>>>>> CHANGE (23dc7cf0f77464173dc3173d55f6b731d54227f0 BACKPORT: dma-buf: Rename debugfs symbols)
 
+<<<<<<< HEAD   (15806a231d4180de148a02d6b04c6ef3bb113080 ANDROID: GKI: Update symbol list for Amlogic)
 int get_dmabuf_debugfs_data(int (*fn)(const struct dma_buf *, void *),
 			void *private)
 {
@@ -62,21 +72,27 @@ int get_dmabuf_debugfs_data(int (*fn)(const struct dma_buf *, void *),
 EXPORT_SYMBOL_NS_GPL(get_dmabuf_debugfs_data, DMA_BUF);
 
 static void __dma_buf_debugfs_list_add(struct dma_buf *dmabuf)
+||||||| BASE   (b06175e3a3df2e000d2e520fc066d6ae45ecacb7 BACKPORT: dma-buf: Do not build debugfs related code when !C)
+static void __dma_buf_debugfs_list_add(struct dma_buf *dmabuf)
+=======
+static void __dma_buf_list_add(struct dma_buf *dmabuf)
+>>>>>>> CHANGE (23dc7cf0f77464173dc3173d55f6b731d54227f0 BACKPORT: dma-buf: Rename debugfs symbols)
 {
-	mutex_lock(&debugfs_list_mutex);
-	list_add(&dmabuf->list_node, &debugfs_list);
-	mutex_unlock(&debugfs_list_mutex);
+	mutex_lock(&dmabuf_list_mutex);
+	list_add(&dmabuf->list_node, &dmabuf_list);
+	mutex_unlock(&dmabuf_list_mutex);
 }
 
-static void __dma_buf_debugfs_list_del(struct dma_buf *dmabuf)
+static void __dma_buf_list_del(struct dma_buf *dmabuf)
 {
 	if (!dmabuf)
 		return;
 
-	mutex_lock(&debugfs_list_mutex);
+	mutex_lock(&dmabuf_list_mutex);
 	list_del(&dmabuf->list_node);
-	mutex_unlock(&debugfs_list_mutex);
+	mutex_unlock(&dmabuf_list_mutex);
 }
+<<<<<<< HEAD   (15806a231d4180de148a02d6b04c6ef3bb113080 ANDROID: GKI: Update symbol list for Amlogic)
 #else
 int get_dmabuf_debugfs_data(int (*fn)(const struct dma_buf *, void *),
 			void *private)
@@ -93,6 +109,91 @@ static void __dma_buf_debugfs_list_del(struct dma_buf *dmabuf)
 {
 }
 #endif
+||||||| BASE   (b06175e3a3df2e000d2e520fc066d6ae45ecacb7 BACKPORT: dma-buf: Do not build debugfs related code when !C)
+
+/**
+ * dma_buf_get_each - Helps in traversing the db_list and calls the
+ * callback function which can extract required info out of each
+ * dmabuf.
+ * The db_list needs to be locked to prevent the db_list from being
+ * dynamically updated during the traversal process.
+ *
+ * @callback: [in]   Handle for each dmabuf buffer in db_list.
+ * @private:  [in]   User-defined, used to pass in when callback is
+ *                   called.
+ *
+ * Returns 0 on success, otherwise returns a non-zero value for
+ * mutex_lock_interruptible or callback.
+ */
+int dma_buf_get_each(int (*callback)(const struct dma_buf *dmabuf,
+		     void *private), void *private)
+{
+	struct dma_buf *buf;
+	int ret = mutex_lock_interruptible(&debugfs_list_mutex);
+
+	if (ret)
+		return ret;
+
+	list_for_each_entry(buf, &debugfs_list, list_node) {
+		ret = callback(buf, private);
+		if (ret)
+			break;
+	}
+	mutex_unlock(&debugfs_list_mutex);
+	return ret;
+}
+EXPORT_SYMBOL_NS_GPL(dma_buf_get_each, MINIDUMP);
+#else
+static void __dma_buf_debugfs_list_add(struct dma_buf *dmabuf)
+{
+}
+
+static void __dma_buf_debugfs_list_del(struct file *file)
+{
+}
+
+int dma_buf_get_each(int (*callback)(const struct dma_buf *dmabuf,
+		     void *private), void *private)
+{
+	return 0;
+}
+EXPORT_SYMBOL_NS_GPL(dma_buf_get_each, MINIDUMP);
+#endif
+=======
+
+/**
+ * dma_buf_get_each - Helps in traversing the db_list and calls the
+ * callback function which can extract required info out of each
+ * dmabuf.
+ * The db_list needs to be locked to prevent the db_list from being
+ * dynamically updated during the traversal process.
+ *
+ * @callback: [in]   Handle for each dmabuf buffer in db_list.
+ * @private:  [in]   User-defined, used to pass in when callback is
+ *                   called.
+ *
+ * Returns 0 on success, otherwise returns a non-zero value for
+ * mutex_lock_interruptible or callback.
+ */
+int dma_buf_get_each(int (*callback)(const struct dma_buf *dmabuf,
+		     void *private), void *private)
+{
+	struct dma_buf *buf;
+	int ret = mutex_lock_interruptible(&dmabuf_list_mutex);
+
+	if (ret)
+		return ret;
+
+	list_for_each_entry(buf, &dmabuf_list, list_node) {
+		ret = callback(buf, private);
+		if (ret)
+			break;
+	}
+	mutex_unlock(&dmabuf_list_mutex);
+	return ret;
+}
+EXPORT_SYMBOL_NS_GPL(dma_buf_get_each, MINIDUMP);
+>>>>>>> CHANGE (23dc7cf0f77464173dc3173d55f6b731d54227f0 BACKPORT: dma-buf: Rename debugfs symbols)
 
 static char *dmabuffs_dname(struct dentry *dentry, char *buffer, int buflen)
 {
@@ -145,7 +246,7 @@ static int dma_buf_file_release(struct inode *inode, struct file *file)
 	if (!is_dma_buf_file(file))
 		return -EINVAL;
 
-	__dma_buf_debugfs_list_del(file->private_data);
+	__dma_buf_list_del(file->private_data);
 
 	return 0;
 }
@@ -732,7 +833,7 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 	file->f_path.dentry->d_fsdata = dmabuf;
 	dmabuf->file = file;
 
-	__dma_buf_debugfs_list_add(dmabuf);
+	__dma_buf_list_add(dmabuf);
 
 	ret = dma_buf_stats_setup(dmabuf, file);
 	if (ret)
@@ -741,7 +842,17 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 	return dmabuf;
 
 err_sysfs:
+<<<<<<< HEAD   (15806a231d4180de148a02d6b04c6ef3bb113080 ANDROID: GKI: Update symbol list for Amlogic)
 	__dma_buf_debugfs_list_del(dmabuf);
+||||||| BASE   (b06175e3a3df2e000d2e520fc066d6ae45ecacb7 BACKPORT: dma-buf: Do not build debugfs related code when !C)
+	mutex_lock(&debugfs_list_mutex);
+	list_del(&dmabuf->list_node);
+	mutex_unlock(&debugfs_list_mutex);
+=======
+	mutex_lock(&dmabuf_list_mutex);
+	list_del(&dmabuf->list_node);
+	mutex_unlock(&dmabuf_list_mutex);
+>>>>>>> CHANGE (23dc7cf0f77464173dc3173d55f6b731d54227f0 BACKPORT: dma-buf: Rename debugfs symbols)
 	dmabuf->file = NULL;
 	file->f_path.dentry->d_fsdata = NULL;
 	file->private_data = NULL;
@@ -1730,7 +1841,7 @@ static int dma_buf_debug_show(struct seq_file *s, void *unused)
 	size_t size = 0;
 	int ret;
 
-	ret = mutex_lock_interruptible(&debugfs_list_mutex);
+	ret = mutex_lock_interruptible(&dmabuf_list_mutex);
 
 	if (ret)
 		return ret;
@@ -1739,7 +1850,7 @@ static int dma_buf_debug_show(struct seq_file *s, void *unused)
 	seq_printf(s, "%-8s\t%-8s\t%-8s\t%-8s\texp_name\t%-8s\tname\n",
 		   "size", "flags", "mode", "count", "ino");
 
-	list_for_each_entry(buf_obj, &debugfs_list, list_node) {
+	list_for_each_entry(buf_obj, &dmabuf_list, list_node) {
 
 		ret = dma_resv_lock_interruptible(buf_obj->resv, NULL);
 		if (ret)
@@ -1776,11 +1887,11 @@ static int dma_buf_debug_show(struct seq_file *s, void *unused)
 
 	seq_printf(s, "\nTotal %d objects, %zu bytes\n", count, size);
 
-	mutex_unlock(&debugfs_list_mutex);
+	mutex_unlock(&dmabuf_list_mutex);
 	return 0;
 
 error_unlock:
-	mutex_unlock(&debugfs_list_mutex);
+	mutex_unlock(&dmabuf_list_mutex);
 	return ret;
 }
 
