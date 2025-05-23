@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61c2e1c5_26d6c1cc",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-05-23T16:42:46Z",
+      "side": 1,
+      "message": "Addressed these questions in b/415059839#comment2, where I encourage discussion on this topic -- to avoid fragmenting across CL comments.",
+      "parentUuid": "087bd94a_2854f90b",
+      "revId": "01bc70f9705821d14cabdd38aabd1afe33f1be7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "314972fc_e92c2584",
         "filename": "arch/x86/configs/gki_defconfig",
         "patchSetId": 1
