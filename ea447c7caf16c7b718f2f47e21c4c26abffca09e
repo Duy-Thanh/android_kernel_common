@@ -88,6 +88,24 @@
       "parentUuid": "84c9ce37_3537c222",
       "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33ce8106_68a7f14a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-05-23T19:18:40Z",
+      "side": 1,
+      "message": "On the other hand, I think the effect of this change is minor because:\n\n- This header was only exposed to in-tree pKVM modules before CL:3637567, which have been fixed in this change already (pkvm-smc).\n- This header is exposed to out-of-tree DDK modules after CL:3637567, which will be submitted along with this change.\n\nThings that may break:\n\n- Downstream users that builds extra in-tree pKVM modules with their own sources. This is not allowed according to VSR, though our VTS tests can\u0027t detect this yet.\n- Downstream users that use legacy kernel_module() (not ddk_module()) to build pKVM. This is also not allowed according to VSR; out of tree modules must use DDK.\n\n... so I think this change is fine. @tkjos@google.com, is my understanding correct?",
+      "parentUuid": "ee478201_0e2b4f2a",
+      "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
