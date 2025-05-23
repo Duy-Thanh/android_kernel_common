@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c583dcb1_73e55209",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-23T20:43:27Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "206d9bfd_efbc06ab",
+      "revId": "8ea343b3184c11b8461bf9ef9095cb30e056db8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "040d92cc_9d97768f",
@@ -49,6 +67,24 @@
       "writtenOn": "2025-05-23T16:48:35Z",
       "side": 0,
       "message": "why removing CONFIG_SECURITY_FS?",
+      "revId": "8ea343b3184c11b8461bf9ef9095cb30e056db8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5640dfd7_7aef0480",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-23T20:43:27Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "040d92cc_9d97768f",
       "revId": "8ea343b3184c11b8461bf9ef9095cb30e056db8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

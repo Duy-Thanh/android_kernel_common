@@ -123,6 +123,24 @@
       "parentUuid": "1bd54f2a_711b3dca",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30408f35_3ceb5a34",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-23T20:43:27Z",
+      "side": 1,
+      "message": "if no policy exists for a UID, by default, it is allowed\n\nhttps://source.corp.google.com/h/android/kernel/common/+/android16-6.12-desktop:security/safesetid/lsm.c;drc\u003db1a867eeb8ab5e097178728b01cc504c6806acca;l\u003d196\n\nso we can develop policy later when needed.",
+      "parentUuid": "97b27182_27127f8a",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
