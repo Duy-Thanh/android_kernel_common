@@ -70,6 +70,24 @@
       "parentUuid": "e8f9798b_7d5ebc4f",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd54f2a_711b3dca",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2025-05-23T18:19:44Z",
+      "side": 1,
+      "message": "@maco@google.com was saying that he wanted this to replace how we limit UID transitions in app_zygote.",
+      "parentUuid": "7f3520f6_49bdc701",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

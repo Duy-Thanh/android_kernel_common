@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "206d9bfd_efbc06ab",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2025-05-23T18:19:44Z",
+      "side": 0,
+      "message": "IIUC, it doesn\u0027t need to be explicitly enabled, it\u0027s automatically enabled by enabling CONFIG_SECURITY_SAFESETID.\n\nSee: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/security/safesetid/Kconfig?h\u003dv6.14.8",
+      "parentUuid": "7b3395b9_c26d0f4f",
+      "revId": "8ea343b3184c11b8461bf9ef9095cb30e056db8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "040d92cc_9d97768f",
         "filename": "arch/x86/configs/gki_defconfig",
         "patchSetId": 1
