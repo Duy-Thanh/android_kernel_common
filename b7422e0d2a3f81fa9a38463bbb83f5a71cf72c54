@@ -16,6 +16,24 @@
       "message": "Please follow the \"upstream first\" policy and work on integration of this CL in the upstream kernel before requesting integration in the Android kernel.",
       "revId": "b7422e0d2a3f81fa9a38463bbb83f5a71cf72c54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407bc545_4c73c582",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-05-23T20:19:22Z",
+      "side": 1,
+      "message": "I have posted this patch myself on the linux-scsi mailing list. See also https://lore.kernel.org/linux-scsi/20250523201409.1676055-1-bvanassche@acm.org/.",
+      "parentUuid": "76de1a0b_6354768d",
+      "revId": "b7422e0d2a3f81fa9a38463bbb83f5a71cf72c54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
