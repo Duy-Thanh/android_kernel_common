@@ -88,6 +88,24 @@
       "parentUuid": "7f3520f6_49bdc701",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b27182_27127f8a",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-23T19:44:43Z",
+      "side": 1,
+      "message": "I just did a deep dive.\n\nChromeOS maintains a list of allowlist [1][2], and mount securityfs at startup [2] and populates the list [3].\n\nAL didn\u0027t do those, perhaps we should just keep it in x86 while testing it ?\n\naccording to the menu: \n\nSafeSetID is an LSM module that gates the setid family of syscalls to restrict UID/GID transitions from a given UID/GID to only those approved by a system-wide allowlist.\n\n\n[1] https://source.chromium.org/search?q\u003dsetuid_restrictions\u0026ss\u003dchromiumos%2Fchromiumos%2Fcodesearch\n[2] https://source.chromium.org/search?q\u003dsetgid_restrictions\u0026sq\u003d\u0026ss\u003dchromiumos%2Fchromiumos%2Fcodesearch\n[3] https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform2/init/startup/chromeos_startup.cc;drc\u003d3358d3d5811c7ceb6f847d177a9eee048d493fe6;l\u003d461\n[4] https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform2/init/startup/security_manager.cc;l\u003d142?q\u003dsecurity_manager.cc\u0026ss\u003dchromiumos%2Fchromiumos%2Fcodesearch",
+      "parentUuid": "1bd54f2a_711b3dca",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
