@@ -34,6 +34,24 @@
       "parentUuid": "d10ca4a5_44d9ef59",
       "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f6ff88c_9d4f8250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-23T13:55:51Z",
+      "side": 1,
+      "message": "Hmm, this is a source-compatibility break. Can we use \"-I\" magic to cause `#include \u003ctrace.h\u003e` to include the right one?",
+      "parentUuid": "610cc95c_26428ac3",
+      "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
