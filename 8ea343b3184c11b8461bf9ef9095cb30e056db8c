@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b3395b9_c26d0f4f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-23T16:48:35Z",
+      "side": 0,
+      "message": "Why remove CONFIG_SECURITYFS?",
+      "revId": "8ea343b3184c11b8461bf9ef9095cb30e056db8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040d92cc_9d97768f",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-23T16:48:35Z",
+      "side": 0,
+      "message": "why removing CONFIG_SECURITY_FS?",
+      "revId": "8ea343b3184c11b8461bf9ef9095cb30e056db8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
