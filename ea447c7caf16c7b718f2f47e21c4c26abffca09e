@@ -70,6 +70,24 @@
       "parentUuid": "9f6ff88c_9d4f8250",
       "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee478201_0e2b4f2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-05-23T18:14:41Z",
+      "side": 1,
+      "message": "In details, the `#include \u003ctrace.h\u003e` is the current way of doing things before this change. So, I\u0027ll just abandon this change so that for pKVM modules, they can use `#include \u003ctrace.h\u003e` to refer to this nvhe/trace.h file.",
+      "parentUuid": "84c9ce37_3537c222",
+      "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
