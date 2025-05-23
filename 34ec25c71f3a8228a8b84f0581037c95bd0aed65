@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29472dda_de4b9e52",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-23T13:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb66bfb3_8a27b805",
+      "range": {
+        "startLine": 1231,
+        "startChar": 6,
+        "endLine": 1231,
+        "endChar": 14
+      },
+      "revId": "34ec25c71f3a8228a8b84f0581037c95bd0aed65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9538bf8c_d72f6b16",
@@ -55,6 +79,30 @@
       "writtenOn": "2025-05-22T18:34:30Z",
       "side": 1,
       "message": "Should this also retrieve the software bits? Otherwise a malicious host could issue a split operation on a shared block and that would result in losing the sharing attribute no?",
+      "range": {
+        "startLine": 1806,
+        "startChar": 8,
+        "endLine": 1806,
+        "endChar": 35
+      },
+      "revId": "34ec25c71f3a8228a8b84f0581037c95bd0aed65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcaf04a2_4a762ff3",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1806,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-23T13:02:11Z",
+      "side": 1,
+      "message": "kvm_pgtable_stage2_pte_prot() does conserve the software bits",
+      "parentUuid": "9538bf8c_d72f6b16",
       "range": {
         "startLine": 1806,
         "startChar": 8,
