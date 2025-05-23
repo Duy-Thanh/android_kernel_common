@@ -52,6 +52,24 @@
       "parentUuid": "0f236984_114597c8",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3520f6_49bdc701",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-23T18:07:51Z",
+      "side": 1,
+      "message": "actually, let\u0027s drop this for arm64, till AL developed config and hardening case for it. I\u0027m ok with it in x86 so AL can try it.",
+      "parentUuid": "e8f9798b_7d5ebc4f",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
