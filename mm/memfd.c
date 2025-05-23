@@ -421,7 +421,10 @@ err_name:
 static struct file *alloc_file(const char *name, unsigned int flags)
 {
 	unsigned int *file_seals;
+	struct inode *inode;
 	struct file *file;
+	int err = 0;
+	const char *anon_name = "[memfd]";
 
 	if (flags & MFD_HUGETLB) {
 		file = hugetlb_file_setup(name, 0, VM_NORESERVE,
@@ -433,6 +436,15 @@ static struct file *alloc_file(const char *name, unsigned int flags)
 	}
 	if (IS_ERR(file))
 		return file;
+
+	inode = file_inode(file);
+	err = security_inode_init_security_anon(inode, &QSTR(anon_name), NULL);
+	if (err) {
+		fput(file);
+		file = ERR_PTR(err);
+		return file;
+	}
+
 	file->f_mode |= FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE;
 	file->f_flags |= O_LARGEFILE;
 
