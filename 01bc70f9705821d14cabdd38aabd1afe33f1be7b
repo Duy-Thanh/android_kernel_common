@@ -16,6 +16,151 @@
       "message": "This is a huge change which impacts all android devices. I am afraid it will never be accepted for android-mainline.",
       "revId": "01bc70f9705821d14cabdd38aabd1afe33f1be7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "087bd94a_2854f90b",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-23T13:04:18Z",
+      "side": 1,
+      "message": "We are generally in favor of GKI modules vs built-in, but why is it needed for x86. Should we do this for arm64 too? Please provide rationale for moving from built-in to GKI module.\n\nThis definitely can\u0027t be accepted for android16-6.12 GKI, but could be considered for android-mainline and android17-6.x",
+      "fixSuggestions": [
+        {
+          "fixId": "7f9af920_a25258ac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/configs/gki_defconfig",
+              "range": {
+                "startLine": 463,
+                "startChar": 0,
+                "endLine": 464,
+                "endChar": 0
+              },
+              "replacement": "CONFIG_DRM\u003dy\n"
+            }
+          ]
+        }
+      ],
+      "revId": "01bc70f9705821d14cabdd38aabd1afe33f1be7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "314972fc_e92c2584",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-23T13:04:18Z",
+      "side": 1,
+      "message": "rationale for these?",
+      "fixSuggestions": [
+        {
+          "fixId": "944ae300_c3a76f06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/configs/gki_defconfig",
+              "range": {
+                "startLine": 566,
+                "startChar": 0,
+                "endLine": 568,
+                "endChar": 0
+              },
+              "replacement": "# CONFIG_INTEL_IOMMU is not set\n# CONFIG_INTEL_IOMMU_SVM is not set\n"
+            }
+          ]
+        }
+      ],
+      "revId": "01bc70f9705821d14cabdd38aabd1afe33f1be7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e564d6_451e0129",
+        "filename": "modules.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-23T13:04:18Z",
+      "side": 1,
+      "message": "didn\u0027t you just make these \u003dm in the x86_64 gki_defconfig? Do you plan to make the same change for arm64?",
+      "fixSuggestions": [
+        {
+          "fixId": "bb1ae070_5865e27e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": "_ARM64_GKI_MODULES_LIST_DRM \u003d [\n    # keep sorted\n    \"drivers/gpu/drm/drm_panel_orientation_quirks.ko\",\n]\n\n"
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 119,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": "_X86_64_GKI_MODULES_LIST_DRM \u003d [\n    # keep sorted\n    \"drivers/gpu/drm/drm_panel_orientation_quirks.ko\",\n]\n\n"
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 158,
+                "startChar": 0,
+                "endLine": 159,
+                "endChar": 0
+              },
+              "replacement": "        gki_modules_list +\u003d _ARM64_GKI_MODULES_LIST + _ARM64_GKI_MODULES_LIST_DRM\n"
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 162,
+                "startChar": 0,
+                "endLine": 163,
+                "endChar": 0
+              },
+              "replacement": "        gki_modules_list +\u003d _X86_64_GKI_MODULES_LIST + _X86_64_GKI_MODULES_LIST_DRM\n"
+            }
+          ]
+        }
+      ],
+      "revId": "01bc70f9705821d14cabdd38aabd1afe33f1be7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
