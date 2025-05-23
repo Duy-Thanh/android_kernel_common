@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f236984_114597c8",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-23T16:37:37Z",
+      "side": 1,
+      "message": "how much does this add to the kernel\u0027s memory footprint for arm64?",
+      "fixSuggestions": [
+        {
+          "fixId": "1df908ce_06466251",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/configs/gki_defconfig",
+              "range": {
+                "startLine": 696,
+                "startChar": 0,
+                "endLine": 697,
+                "endChar": 0
+              },
+              "replacement": "# CONFIG_SECURITY_SAFESETID is not set\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
