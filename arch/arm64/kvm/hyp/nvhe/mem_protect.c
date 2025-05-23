@@ -331,6 +331,12 @@ static void invalidate_icache_guest_page(void *va, size_t size)
 	}
 }
 
+static void guest_s2_free_unlinked_table(void *addr, s8 level)
+{
+	kvm_pgtable_stage2_free_unlinked(&current_vm->mm_ops, current_vm->pgt.pte_ops,
+					 addr, level);
+}
+
 int kvm_guest_prepare_stage2(struct pkvm_hyp_vm *vm, void *pgd)
 {
 	struct kvm_s2_mmu *mmu = &vm->kvm.arch.mmu;
@@ -347,6 +353,7 @@ int kvm_guest_prepare_stage2(struct pkvm_hyp_vm *vm, void *pgd)
 		.zalloc_pages_exact	= guest_s2_zalloc_pages_exact,
 		.free_pages_exact	= guest_s2_free_pages_exact,
 		.zalloc_page		= guest_s2_zalloc_page,
+		.free_unlinked_table	= guest_s2_free_unlinked_table,
 		.phys_to_virt		= hyp_phys_to_virt,
 		.virt_to_phys		= hyp_virt_to_phys,
 		.page_count		= hyp_page_count,
