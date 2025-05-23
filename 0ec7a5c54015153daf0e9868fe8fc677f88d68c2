@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "947b5e14_df2dfd0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1076138
+      },
+      "writtenOn": "2025-05-23T20:04:28Z",
+      "side": 1,
+      "message": "We\u0027re likely to need safesetid on ARM as well per https://buganizer.corp.google.com/issues/414893665#comment10.",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f236984_114597c8",
