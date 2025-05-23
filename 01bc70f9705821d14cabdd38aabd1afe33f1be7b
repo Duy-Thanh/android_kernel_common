@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7eee200_fd52d1a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-23T06:58:41Z",
+      "side": 1,
+      "message": "This is a huge change which impacts all android devices. I am afraid it will never be accepted for android-mainline.",
+      "revId": "01bc70f9705821d14cabdd38aabd1afe33f1be7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
