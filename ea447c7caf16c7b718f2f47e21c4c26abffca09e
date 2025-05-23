@@ -52,6 +52,24 @@
       "parentUuid": "610cc95c_26428ac3",
       "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c9ce37_3537c222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-05-23T18:11:27Z",
+      "side": 1,
+      "message": "Yeah we can. In that case I\u0027ll drop this change and perhaps do this in mainline when pKVM is ported there.",
+      "parentUuid": "9f6ff88c_9d4f8250",
+      "revId": "ea447c7caf16c7b718f2f47e21c4c26abffca09e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
