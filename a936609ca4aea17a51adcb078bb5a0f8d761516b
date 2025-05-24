@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aacd295f_3a547d35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-05-24T17:04:53Z",
+      "side": 1,
+      "message": "These are upstream and were not backported here intentionally to avoid breaking the KMI.",
+      "revId": "a936609ca4aea17a51adcb078bb5a0f8d761516b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
