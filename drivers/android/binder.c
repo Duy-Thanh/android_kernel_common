@@ -1405,8 +1405,10 @@ static void binder_cleanup_ref_olocked(struct binder_ref *ref)
 		binder_stats_deleted(BINDER_STAT_DEATH);
 	}
 
-	if (ref->freeze)
+	if (ref->freeze) {
 		binder_dequeue_work(ref->proc, &ref->freeze->work);
+		binder_stats_deleted(BINDER_STAT_FREEZE);
+	}
 
 	binder_stats_deleted(BINDER_STAT_REF);
 }
@@ -4100,6 +4102,7 @@ binder_request_freeze_notification(struct binder_proc *proc,
 		return -EINVAL;
 	}
 
+	binder_stats_created(BINDER_STAT_FREEZE);
 	INIT_LIST_HEAD(&freeze->work.entry);
 	freeze->cookie = handle_cookie->cookie;
 	freeze->work.type = BINDER_WORK_FROZEN_BINDER;
@@ -5178,6 +5181,7 @@ skip:
 
 			binder_inner_proc_unlock(proc);
 			kfree(freeze);
+			binder_stats_deleted(BINDER_STAT_FREEZE);
 			if (put_user(BR_CLEAR_FREEZE_NOTIFICATION_DONE, (uint32_t __user *)ptr))
 				return -EFAULT;
 			ptr += sizeof(uint32_t);
@@ -5402,6 +5406,7 @@ static void binder_release_work(struct binder_proc *proc,
 				     "undelivered freeze notification, %016llx\n",
 				     (u64)freeze->cookie);
 			kfree(freeze);
+			binder_stats_deleted(BINDER_STAT_FREEZE);
 		} break;
 		default:
 			pr_err("unexpected work type, %d, not freed\n",
@@ -6867,6 +6872,8 @@ static const char * const binder_return_strings[] = {
 	"BR_FROZEN_REPLY",
 	"BR_ONEWAY_SPAM_SUSPECT",
 	"BR_TRANSACTION_PENDING_FROZEN",
+	"BR_FROZEN_BINDER",
+	"BR_CLEAR_FREEZE_NOTIFICATION_DONE",
 };
 
 static const char * const binder_command_strings[] = {
@@ -6889,6 +6896,9 @@ static const char * const binder_command_strings[] = {
 	"BC_DEAD_BINDER_DONE",
 	"BC_TRANSACTION_SG",
 	"BC_REPLY_SG",
+	"BC_REQUEST_FREEZE_NOTIFICATION",
+	"BC_CLEAR_FREEZE_NOTIFICATION",
+	"BC_FREEZE_NOTIFICATION_DONE",
 };
 
 static const char * const binder_objstat_strings[] = {
@@ -6899,6 +6909,7 @@ static const char * const binder_objstat_strings[] = {
 	"death",
 	"transaction",
 	"transaction_complete",
+	"freeze",
 };
 
 static void print_binder_stats(struct seq_file *m, const char *prefix,
