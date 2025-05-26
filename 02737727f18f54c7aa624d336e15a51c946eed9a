@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58622ba2_377c9412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-26T14:33:16Z",
+      "side": 1,
+      "message": "Pure revert. The CL will be merged again after properly resolved merge conflict.",
+      "revId": "02737727f18f54c7aa624d336e15a51c946eed9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
