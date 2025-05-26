@@ -159,6 +159,24 @@
       "parentUuid": "30408f35_3ceb5a34",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac39a45_d771cac6",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2025-05-26T06:52:03Z",
+      "side": 1,
+      "message": "\u003e AL didn\u0027t do those, perhaps we should just keep it in x86 while testing it ?\n\nAs @jeffv@google.com also said, the plan is for AL to start using this very soon, to replace the isolated UID allocator we use for isolated processes spawned from app zygote. But I don\u0027t think this should be an AL-only thing; ideally we just use SafeSetID for isolated UID allocation for all Android devices going forward, because it is just a much more hardened approach than the one we currently use.\n\nSo my preference would be to support this on all architectures, not just x86. Maybe initially for development this can be x86-only, if the AL folks working on this are ok with that.",
+      "parentUuid": "8ec96079_6007d7ec",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
