@@ -23,6 +23,7 @@
 #include <linux/string.h>
 #include <linux/jump_label.h>
 #include <linux/security.h>
+#include <trace/hooks/io_monitor.h>
 
 #define DM_MSG_PREFIX			"verity"
 
@@ -762,6 +763,7 @@ static void verity_end_io(struct bio *bio)
 	unsigned short ioprio = IOPRIO_PRIO_CLASS(bio->bi_ioprio);
 	unsigned int bytes = io->n_blocks << io->v->data_dev_block_bits;
 
+	trace_android_vh_verity_end_io(bio);
 	if (bio->bi_status &&
 	    (!verity_fec_is_enabled(io->v) ||
 	     verity_is_system_shutting_down() ||

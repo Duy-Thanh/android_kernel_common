@@ -33,6 +33,7 @@
 #include <trace/hooks/pm_domain.h>
 #include <trace/hooks/cpuidle_psci.h>
 #include <trace/hooks/vmscan.h>
+#include <trace/hooks/io_monitor.h>
 #include <trace/hooks/avc.h>
 #include <trace/hooks/creds.h>
 #include <trace/hooks/selinux.h>
@@ -190,6 +191,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_balance_anon_file_reclaim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_show_max_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_alloc_node);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iomap_dio_bio_end_io);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_verity_end_io);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_read_end_io);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_write_end_io);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_z_erofs_submissionqueue_endio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_unref_page_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kvmalloc_node_use_vmalloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_alloc_pages_retry);

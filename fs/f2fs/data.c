@@ -21,6 +21,7 @@
 #include <linux/sched/signal.h>
 #include <linux/fiemap.h>
 #include <linux/iomap.h>
+#include <trace/hooks/io_monitor.h>
 
 #include "f2fs.h"
 #include "node.h"
@@ -289,6 +290,7 @@ static void f2fs_read_end_io(struct bio *bio)
 	struct bio_post_read_ctx *ctx;
 	bool intask = in_task();
 
+	trace_android_vh_f2fs_read_end_io(bio);
 	iostat_update_and_unbind_ctx(bio);
 	ctx = bio->bi_private;
 
@@ -326,6 +328,7 @@ static void f2fs_write_end_io(struct bio *bio)
 	struct f2fs_sb_info *sbi;
 	struct folio_iter fi;
 
+	trace_android_vh_f2fs_write_end_io(bio);
 	iostat_update_and_unbind_ctx(bio);
 	sbi = bio->bi_private;
 

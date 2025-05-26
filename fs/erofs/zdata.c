@@ -8,6 +8,7 @@
 #include <linux/psi.h>
 #include <linux/cpuhotplug.h>
 #include <trace/events/erofs.h>
+#include <trace/hooks/io_monitor.h>
 
 #define Z_EROFS_PCLUSTER_MAX_PAGES	(Z_EROFS_PCLUSTER_MAX_SIZE / PAGE_SIZE)
 #define Z_EROFS_INLINE_BVECS		2
@@ -1632,6 +1633,8 @@ static void z_erofs_endio(struct bio *bio)
 	struct z_erofs_decompressqueue *q = bio->bi_private;
 	blk_status_t err = bio->bi_status;
 	struct folio_iter fi;
+
+	trace_android_vh_z_erofs_submissionqueue_endio(bio);
 
 	bio_for_each_folio_all(fi, bio) {
 		struct folio *folio = fi.folio;
