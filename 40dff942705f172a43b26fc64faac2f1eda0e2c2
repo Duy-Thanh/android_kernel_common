@@ -16,6 +16,24 @@
       "message": "v6.15?",
       "revId": "40dff942705f172a43b26fc64faac2f1eda0e2c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec19fa8f_1255a012",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-26T09:40:12Z",
+      "side": 1,
+      "message": "argh, too many version numbers in my head, sorry about that 😊",
+      "parentUuid": "54f98f82_26a72369",
+      "revId": "40dff942705f172a43b26fc64faac2f1eda0e2c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
