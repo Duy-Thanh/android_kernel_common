@@ -177,6 +177,24 @@
       "parentUuid": "8ec96079_6007d7ec",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281b263e_8a96382f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-26T16:52:13Z",
+      "side": 1,
+      "message": "I m ok with x86 only. consider we still need to figure out \nhttps://b.corp.google.com/issues/414893665#comment13",
+      "parentUuid": "1ac39a45_d771cac6",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
