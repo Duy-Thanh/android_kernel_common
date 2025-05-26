@@ -2842,16 +2842,6 @@ void free_unref_page_list(struct list_head *list)
 				pcp_trylock_finish(UP_flags);
 			}
 
-			/*
-			 * Free isolated pages directly to the
-			 * allocator, see comment in free_unref_page.
-			 */
-			if (is_migrate_isolate(migratetype)) {
-				free_one_page(zone, page, page_to_pfn(page),
-					      0,  FPI_NONE);
-				continue;
- 			}
-
 			batch_count = 0;
 
 			/*
