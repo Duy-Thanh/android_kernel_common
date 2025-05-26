@@ -27,6 +27,10 @@ DECLARE_HOOK(android_vh_try_fixup_sea,
 		 bool *can_fixup),
 	TP_ARGS(addr, esr, regs, can_fixup));
 
+DECLARE_HOOK(android_vh_handle_kernel_fault,
+	TP_PROTO(unsigned long addr, unsigned int esr, struct pt_regs *regs, bool *handled),
+	TP_ARGS(addr, esr, regs, handled));
+
 #endif /* _TRACE_HOOK_FAULT_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
