@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b7d6f8b_f5df4af8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-26T08:31:33Z",
+      "side": 1,
+      "message": "If the user does not call MADV_DONTNEED, then, after relinquish, the stage-2 can be using level3 while the stage-1 will still be using level2.\n\nSo it is possible to try to install a block mapping where we need a smaller granule.",
+      "revId": "f6076d653622538e5112eed6200d3e6dd2958ddb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
