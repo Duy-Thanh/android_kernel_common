@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f98f82_26a72369",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2025-05-26T09:35:26Z",
+      "side": 1,
+      "message": "v6.15?",
+      "revId": "40dff942705f172a43b26fc64faac2f1eda0e2c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
