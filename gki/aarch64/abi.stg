@@ -416884,6 +416884,24 @@ elf_symbol {
   full_name: "mempool_init_noprof"
 }
 elf_symbol {
+  id: 0xe2946e5d
+  name: "mempool_kfree"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5d728774
+  type_id: 0x16d5fd4b
+  full_name: "mempool_kfree"
+}
+elf_symbol {
+  id: 0xf946ac86
+  name: "mempool_kmalloc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdb3d8074
+  type_id: 0x6a9df39e
+  full_name: "mempool_kmalloc"
+}
+elf_symbol {
   id: 0x9a28516c
   name: "mempool_resize"
   is_defined: true
@@ -455289,6 +455307,8 @@ interface {
   symbol_id: 0xfa3d486a
   symbol_id: 0xfbb56638
   symbol_id: 0x0d8ea6e6
+  symbol_id: 0xe2946e5d
+  symbol_id: 0xf946ac86
   symbol_id: 0x9a28516c
   symbol_id: 0x7ad45055
   symbol_id: 0x67a278cb
