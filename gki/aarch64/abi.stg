@@ -427286,6 +427286,15 @@ elf_symbol {
   full_name: "queue_limits_commit_update"
 }
 elf_symbol {
+  id: 0xcb92cfbf
+  name: "queue_limits_commit_update_frozen"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x512cd8c5
+  type_id: 0x9f3f27d7
+  full_name: "queue_limits_commit_update_frozen"
+}
+elf_symbol {
   id: 0xf60ed3ec
   name: "queue_work_on"
   is_defined: true
@@ -456302,6 +456311,7 @@ interface {
   symbol_id: 0x7d9c9dda
   symbol_id: 0x2721b297
   symbol_id: 0x8f6b3754
+  symbol_id: 0xcb92cfbf
   symbol_id: 0xf60ed3ec
   symbol_id: 0x1f556538
   symbol_id: 0xb51f872d
