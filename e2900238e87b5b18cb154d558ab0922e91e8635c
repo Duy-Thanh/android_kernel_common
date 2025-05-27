@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab117581_13396186",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-05-27T20:32:43Z",
+      "side": 1,
+      "message": "The commit message in PS9 has:\n\n\u003e In cases where the block to be verified is bigger than the limit for\nin-line verification and the hashes needed for verification are not\ncached, the same block could be queued twice with the old code\n\nBut that\u0027s not correct, as I pointed out above.  The size limit applied to the BH workqueue too.\n\nAlso I don\u0027t think the comment that started this thread was really resolved:\n\n\u003e It would be helpful to include more details about how much overhead the BH workqueue has compared to doing the work inline, and also how the block softirq normally runs anyway so the value of code that is only executed in the case where it doesn\u0027t is (we think) fairly low.\n\nThere has to be a motivation for the change.  IMO, the motivation is that two things combined make the BH workqueue code path in dm-verity not very useful compared to the other two (inline and standard workqueue): (a) it is subject to the overhead of the BH workqueue (locking, enqueueing the work, running a separate softirq, etc.), and (b) it seems to be rarely executed anyway since BLOCK_SOFTIRQ runs anyway.\n\nNow, (b) is what I observed on a Pixel phone.  I think it\u0027s due to the number of hardware queues and/or the rq_affinity setting causing BLOCK_SOFTIRQ to run.  But I was hoping you\u0027d look into the details there to determine how widely applicable the observation that BLOCK_SOFTIRQ runs anyway is.",
+      "parentUuid": "d096f6a2_3ee64fc0",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daef2e7d_c000c722",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
