@@ -195,6 +195,24 @@
       "parentUuid": "1ac39a45_d771cac6",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b4e3b4_b09b4eb1",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2025-05-27T07:01:33Z",
+      "side": 1,
+      "message": "From an earlier chat with @jeffv@google.com, giving system_server CAP_MAC_ADMIN seemed reasonable, but added Jeff on the bug to discuss further if needed.",
+      "parentUuid": "281b263e_8a96382f",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
