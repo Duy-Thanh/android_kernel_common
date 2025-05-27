@@ -9,7 +9,6 @@ This module contains a full list of kernel modules
 # LINT.IfChange
 _COMMON_GKI_MODULES_LIST = [
     # keep sorted
-    "drivers/android/rust_binder.ko",
     "drivers/block/virtio_blk.ko",
     "drivers/block/zram/zram.ko",
     "drivers/bluetooth/btbcm.ko",
@@ -100,6 +99,7 @@ _ARM_GKI_MODULES_LIST = [
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "arch/arm64/geniezone/gzvm.ko",
+    "drivers/android/rust_binder.ko",
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
@@ -113,8 +113,13 @@ _X86_GKI_MODULES_LIST = [
 
 _X86_64_GKI_MODULES_LIST = [
     # keep sorted
+<<<<<<< HEAD   (0cf637 UPSTREAM: net_sched: sch_sfq: move the limit validation am: )
     "drivers/acpi/fan.ko",
     "drivers/powercap/intel_rapl_common.ko",
+||||||| BASE
+=======
+    "drivers/android/rust_binder.ko",
+>>>>>>> BRANCH (8b1cec ANDROID: Do not expect rust_binder.ko on ARM32)
     "drivers/ptp/ptp_kvm.ko",
     "drivers/thermal/intel/int340x_thermal/acpi_thermal_rel.ko",
     "drivers/thermal/intel/int340x_thermal/int3400_thermal.ko",
