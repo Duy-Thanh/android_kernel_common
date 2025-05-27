@@ -34,6 +34,24 @@
       "parentUuid": "464202c1_88aa3b7c",
       "revId": "df01ed581134258e0ada67103e31cd069ae5620f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2efaf09_f5b2de37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-05-27T12:03:00Z",
+      "side": 1,
+      "message": "Will this Gerrit be restored, or do I need to submit a new Gerrit to add android_vh_compact_finished?",
+      "parentUuid": "63b80db5_7fbe5205",
+      "revId": "df01ed581134258e0ada67103e31cd069ae5620f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
