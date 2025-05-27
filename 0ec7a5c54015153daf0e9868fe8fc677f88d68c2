@@ -213,6 +213,24 @@
       "parentUuid": "281b263e_8a96382f",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb1065f6_c2c34265",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2025-05-27T07:04:37Z",
+      "side": 1,
+      "message": "(And to be clear, I\u0027m totally fine with this being x86 only for now, just want to point out that if we do end up using this for x86, we should also use it for arm).",
+      "parentUuid": "e7b4e3b4_b09b4eb1",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
