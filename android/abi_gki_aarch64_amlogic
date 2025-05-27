@@ -374,6 +374,7 @@
   devm_gpiod_get_index
   devm_gpiod_get_optional
   devm_gpiod_put
+  devm_gpio_free
   devm_gpio_request
   devm_gpio_request_one
   devm_hwrng_register
@@ -2014,22 +2015,36 @@
   smpboot_register_percpu_thread
   smp_call_function
   smp_call_function_single
+  snd_card_ref
+  snd_card_register
+  snd_card_rw_proc_new
   snd_ctl_add
   snd_ctl_boolean_mono_info
   snd_ctl_enum_info
   snd_ctl_new1
+  snd_ctl_notify
+  snd_devm_card_new
   snd_dma_alloc_pages
   snd_dma_free_pages
+  snd_ecards_limit
+  snd_info_get_line
+  snd_interval_refine
+  snd_pcm_format_physical_width
+  snd_pcm_format_set_silence
   snd_pcm_format_width
   snd_pcm_hw_constraint_integer
+  snd_pcm_hw_rule_add
   snd_pcm_kernel_ioctl
   snd_pcm_lib_default_mmap
   snd_pcm_lib_free_pages
   snd_pcm_lib_ioctl
   snd_pcm_lib_malloc_pages
   snd_pcm_lib_preallocate_pages
+  snd_pcm_new
   snd_pcm_period_elapsed
   snd_pcm_rate_to_rate_bit
+  snd_pcm_set_managed_buffer_all
+  snd_pcm_set_ops
   snd_pcm_stop
   snd_pcm_stop_xrun
   _snd_pcm_stream_lock_irqsave
@@ -2071,6 +2086,12 @@
   snd_soc_register_component
   snd_soc_set_runtime_hwparams
   snd_soc_unregister_component
+  snd_timer_close
+  snd_timer_instance_free
+  snd_timer_instance_new
+  snd_timer_open
+  snd_timer_start
+  snd_timer_stop
   snprintf
   __sock_create
   sock_release
@@ -2126,6 +2147,7 @@
   strnstr
   strpbrk
   strrchr
+  strreplace
   strscpy
   strsep
   strspn
@@ -2157,6 +2179,7 @@
   sysfs_create_group
   sysfs_create_link
   sysfs_emit
+  sysfs_emit_at
   __sysfs_match_string
   sysfs_remove_bin_file
   sysfs_remove_file_ns
@@ -2168,6 +2191,7 @@
   system_freezable_wq
   system_freezing_cnt
   system_highpri_wq
+  system_long_wq
   system_power_efficient_wq
   system_unbound_wq
   system_wq
