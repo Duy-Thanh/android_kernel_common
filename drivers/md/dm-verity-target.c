@@ -23,6 +23,7 @@
 #include <linux/string.h>
 #include <linux/jump_label.h>
 #include <linux/security.h>
+#include <trace/hooks/io_monitor.h>
 
 #define DM_MSG_PREFIX			"verity"
 
@@ -720,6 +721,7 @@ static void verity_finish_io(struct dm_verity_io *io, blk_status_t status)
 		}
 	}
 
+	trace_android_vh_verity_finish_io(bio);
 	bio_endio(bio);
 }
 
