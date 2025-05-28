@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcaf8b8a_7b0ff6e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-28T13:34:39Z",
+      "side": 1,
+      "message": "The ARM host ff-a driver doesn\u0027t seem to be checking for these zeroes, so other than then following the spec correctness is there any practical reason for doing so ?",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 129,
+        "endChar": 22
+      },
+      "revId": "f60e0de02f91b6b23b0083be736ed1707740b871",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
