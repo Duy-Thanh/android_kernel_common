@@ -22,6 +22,30 @@
       },
       "revId": "5d9645423cb533d322c96c0f7fba8ed6cb5b0d10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "338f88e6_04e5503d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-28T11:20:44Z",
+      "side": 1,
+      "message": "haaaa you\u0027re right. I was somehow convinced it was necessary also with the unmap() but if I just revert the annotate back to unmap it won\u0027t be necessary.\n\n(actually I\u0027ve checked that the upstream support didn\u0027t have this problem. It should have lead me to that annotate())",
+      "parentUuid": "9bbe3370_7a311e75",
+      "range": {
+        "startLine": 10,
+        "startChar": 31,
+        "endLine": 10,
+        "endChar": 67
+      },
+      "revId": "5d9645423cb533d322c96c0f7fba8ed6cb5b0d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
