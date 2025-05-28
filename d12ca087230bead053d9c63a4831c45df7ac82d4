@@ -140,6 +140,24 @@
       "parentUuid": "69f62144_43027d02",
       "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01db1835_82603c8d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-28T15:56:07Z",
+      "side": 1,
+      "message": "I see what you mean. As the hypervisor allocates ids, I think there should be a mechanism to prevent the re-use of an id if:\n\nThe vm makes use of ff-a and the creation has been sent but not the destruction.",
+      "parentUuid": "25703229_34164e5c",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
