@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33445178_7b8aa197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-28T15:07:41Z",
+      "side": 1,
+      "message": "ABI looks OK.",
+      "revId": "9379868d757b44f3c60eaff4caf0c6656d884a0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e7062a_579be074",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-28T15:07:41Z",
+      "side": 1,
+      "message": "You have some odd embedded tabs here.\n\nA single `_` before `unused` is enough, I think.",
+      "range": {
+        "startLine": 253,
+        "startChar": 87,
+        "endLine": 254,
+        "endChar": 23
+      },
+      "revId": "9379868d757b44f3c60eaff4caf0c6656d884a0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc381493_71bcf24e",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-28T15:07:41Z",
+      "side": 1,
+      "message": "empty",
+      "range": {
+        "startLine": 305,
+        "startChar": 50,
+        "endLine": 305,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e0b60595_5e3d8735",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/mmu.c",
+              "range": {
+                "startLine": 305,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": "\t\t     __pinned_page_start, __pinned_page_end, /* empty */,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9379868d757b44f3c60eaff4caf0c6656d884a0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
