@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b4f6917_35857240",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-28T18:35:43Z",
+      "side": 1,
+      "message": "Ha yes I understand your comment about -\u003e before.\n\nIt\u0027s a common practice in the kernel to use double `_` actually, there are numerous places with `__unused`.",
+      "parentUuid": "06e7062a_579be074",
+      "range": {
+        "startLine": 253,
+        "startChar": 87,
+        "endLine": 254,
+        "endChar": 23
+      },
+      "revId": "9379868d757b44f3c60eaff4caf0c6656d884a0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc381493_71bcf24e",
@@ -78,6 +102,30 @@
           ]
         }
       ],
+      "revId": "9379868d757b44f3c60eaff4caf0c6656d884a0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef4d837a_d2e87b43",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-28T18:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc381493_71bcf24e",
+      "range": {
+        "startLine": 305,
+        "startChar": 50,
+        "endLine": 305,
+        "endChar": 55
+      },
       "revId": "9379868d757b44f3c60eaff4caf0c6656d884a0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
