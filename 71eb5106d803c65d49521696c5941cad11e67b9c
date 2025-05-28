@@ -16,6 +16,23 @@
       "message": "These symbols are not exported by the kernel. This needs to be rebased on top of the patch that adds/exports the symbols",
       "revId": "71eb5106d803c65d49521696c5941cad11e67b9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eaf409b_df15d1de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2025-05-28T09:53:10Z",
+      "side": 1,
+      "message": "Respin Bug: b/417083351",
+      "revId": "71eb5106d803c65d49521696c5941cad11e67b9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
