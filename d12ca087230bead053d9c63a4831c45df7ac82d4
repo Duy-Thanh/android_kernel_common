@@ -104,6 +104,24 @@
       "message": "I don\u0027t see any place where the hypervisor validates that this has succeeded before __pkvm_finalize_teardown_vm completes the destruction of this VM. The SP trusts that the hypervisor will not allow a new VM to start with the same vm-id until the destroy message has succeeded. It is important that the hypervisor ensures this even if the host has been compromised, so I think you need to save some state here when this call has succeeded.",
       "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f62144_43027d02",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-28T13:41:44Z",
+      "side": 1,
+      "message": "We call it in a loop from `__pkvm_destroy_hyp_vm` (arch/arm64/kvm/pkvm.c) until it succeeds.",
+      "parentUuid": "7452e615_e1c976b9",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
