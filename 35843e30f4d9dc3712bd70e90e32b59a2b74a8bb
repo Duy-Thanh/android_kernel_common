@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf3fd94_a726089a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-28T06:55:35Z",
+      "side": 1,
+      "message": "why are any of these needed?\n\nThis should be broken up into \"one patch per thing added\", as it\u0027s impossible to review all at once.\n\nAlso, all new hooks must come with full justification for their addition.",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "35843e30f4d9dc3712bd70e90e32b59a2b74a8bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4723cd3_eb05849f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-28T06:55:35Z",
+      "side": 1,
+      "message": "name, not email alias please.",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "35843e30f4d9dc3712bd70e90e32b59a2b74a8bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5193e82_24e9cccc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-28T06:55:35Z",
+      "side": 1,
+      "message": "Please break up into different patches.",
+      "revId": "35843e30f4d9dc3712bd70e90e32b59a2b74a8bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
