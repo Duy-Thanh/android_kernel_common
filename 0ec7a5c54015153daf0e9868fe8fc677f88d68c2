@@ -249,6 +249,24 @@
       "parentUuid": "eb1065f6_c2c34265",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a39bbe5f_6420093c",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 2022147
+      },
+      "writtenOn": "2025-05-28T12:48:39Z",
+      "side": 1,
+      "message": "Updates this patch for x86 only is fine to me.",
+      "parentUuid": "36cd1f6e_06eb3dca",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
