@@ -427,6 +427,7 @@ void *__init relocate_kernel(void)
 
 		/* Error may occur before, so keep it at last */
 		update_kaslr_offset(&__kaslr_offset, offset);
+		printk("[tag]: kaslr offset: 0x%pK\n", (void *)__kaslr_offset);
 	}
 out:
 	return kernel_entry;
