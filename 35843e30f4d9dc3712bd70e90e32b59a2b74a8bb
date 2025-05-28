@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5d3ed5_905c73b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-05-28T13:13:28Z",
+      "side": 1,
+      "message": "We want to measure the time taken from I/O completion to the scheduling of verity_work, as standard block layer statistics cannot cover this period.",
+      "parentUuid": "6cf3fd94_a726089a",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "35843e30f4d9dc3712bd70e90e32b59a2b74a8bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4723cd3_eb05849f",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-28T06:55:35Z",
       "side": 1,
       "message": "name, not email alias please.",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "35843e30f4d9dc3712bd70e90e32b59a2b74a8bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "231b511f_aeb4300b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-05-28T13:13:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4723cd3_eb05849f",
       "range": {
         "startLine": 18,
         "startChar": 15,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf57fd5_3a58c192",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-05-28T13:13:28Z",
+      "side": 1,
+      "message": "sorry， as your advice I upload another patch,we can discuss these vendor_hook issues on this follow patch\nhttps://android-review.googlesource.com/c/kernel/common/+/3643889\nand new bug:420848168 which I discribe the reason",
+      "parentUuid": "e5193e82_24e9cccc",
+      "revId": "35843e30f4d9dc3712bd70e90e32b59a2b74a8bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc000f4a_f2c5d906",
@@ -77,6 +143,30 @@
       "writtenOn": "2025-05-28T06:56:09Z",
       "side": 1,
       "message": "why doesn\u0027t the normal block layer tracing work instead?",
+      "range": {
+        "startLine": 766,
+        "startChar": 1,
+        "endLine": 766,
+        "endChar": 31
+      },
+      "revId": "35843e30f4d9dc3712bd70e90e32b59a2b74a8bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91dcc558_ea58ced0",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-05-28T13:13:28Z",
+      "side": 1,
+      "message": "We want to measure the time taken from I/O completion to the scheduling of verity_work, as standard block layer statistics cannot cover this period.",
+      "parentUuid": "cc000f4a_f2c5d906",
       "range": {
         "startLine": 766,
         "startChar": 1,
