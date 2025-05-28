@@ -33,6 +33,23 @@
       "message": "William, you are owners of this file. Please approve.",
       "revId": "b50c4e5c0b60ab672cba06bb0b1fa566c1b478a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba39bb76_f8cb9371",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-05-28T10:31:06Z",
+      "side": 1,
+      "message": "Looks like this is selected by `gki_defconfig` as a result of the module signing algorithm defaulting to `CONFIG_MODULE_SIG_SHA1` which selects `CONFIG_CRYPTO_SHA1`. So I think it\u0027s fine to select it here too.",
+      "revId": "b50c4e5c0b60ab672cba06bb0b1fa566c1b478a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
