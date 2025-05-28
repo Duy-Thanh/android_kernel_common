@@ -376104,6 +376104,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_f2fs_file_open"
 }
 elf_symbol {
+  id: 0xea243f10
+  name: "__traceiter_android_vh_f2fs_finish_read_bio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34c3293c
+  type_id: 0x9bf93663
+  full_name: "__traceiter_android_vh_f2fs_finish_read_bio"
+}
+elf_symbol {
   id: 0xcb0a2c01
   name: "__traceiter_android_vh_f2fs_improve_priority"
   is_defined: true
@@ -376138,6 +376147,15 @@ elf_symbol {
   crc: 0xbe8f2104
   type_id: 0x9bc214f0
   full_name: "__traceiter_android_vh_f2fs_restore_priority"
+}
+elf_symbol {
+  id: 0x2aaa5aaf
+  name: "__traceiter_android_vh_f2fs_write_end_io"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34c3293c
+  type_id: 0x9bf93663
+  full_name: "__traceiter_android_vh_f2fs_write_end_io"
 }
 elf_symbol {
   id: 0x19fc04e0
@@ -376516,6 +376534,15 @@ elf_symbol {
   crc: 0x58dfdb76
   type_id: 0x9be9dd69
   full_name: "__traceiter_android_vh_io_statistics"
+}
+elf_symbol {
+  id: 0xcf2200d3
+  name: "__traceiter_android_vh_iomap_dio_bio_end_io"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34c3293c
+  type_id: 0x9bf93663
+  full_name: "__traceiter_android_vh_iomap_dio_bio_end_io"
 }
 elf_symbol {
   id: 0x4b67a5dc
@@ -378471,6 +378498,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_use_vm_swappiness"
 }
 elf_symbol {
+  id: 0x26b8237e
+  name: "__traceiter_android_vh_verity_finish_io"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34c3293c
+  type_id: 0x9bf93663
+  full_name: "__traceiter_android_vh_verity_finish_io"
+}
+elf_symbol {
   id: 0x0002a5ea
   name: "__traceiter_android_vh_vfs_fsync_range"
   is_defined: true
@@ -378532,6 +378568,15 @@ elf_symbol {
   crc: 0x5338bdc3
   type_id: 0x9a3fe476
   full_name: "__traceiter_android_vh_wq_lockup_pool"
+}
+elf_symbol {
+  id: 0xbda9ca45
+  name: "__traceiter_android_vh_z_erofs_endio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34c3293c
+  type_id: 0x9bf93663
+  full_name: "__traceiter_android_vh_z_erofs_endio"
 }
 elf_symbol {
   id: 0x18619e65
@@ -381873,6 +381918,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_f2fs_file_open"
 }
 elf_symbol {
+  id: 0x5102ed3e
+  name: "__tracepoint_android_vh_f2fs_finish_read_bio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_f2fs_finish_read_bio"
+}
+elf_symbol {
   id: 0x34b6590b
   name: "__tracepoint_android_vh_f2fs_improve_priority"
   is_defined: true
@@ -381907,6 +381961,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_f2fs_restore_priority"
+}
+elf_symbol {
+  id: 0x933f1295
+  name: "__tracepoint_android_vh_f2fs_write_end_io"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_f2fs_write_end_io"
 }
 elf_symbol {
   id: 0x197d6be2
@@ -382285,6 +382348,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_io_statistics"
+}
+elf_symbol {
+  id: 0xc9a82909
+  name: "__tracepoint_android_vh_iomap_dio_bio_end_io"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_iomap_dio_bio_end_io"
 }
 elf_symbol {
   id: 0xbbfc3b7e
@@ -384240,6 +384312,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_use_vm_swappiness"
 }
 elf_symbol {
+  id: 0x45e03c70
+  name: "__tracepoint_android_vh_verity_finish_io"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_verity_finish_io"
+}
+elf_symbol {
   id: 0xaf3a3494
   name: "__tracepoint_android_vh_vfs_fsync_range"
   is_defined: true
@@ -384301,6 +384382,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_wq_lockup_pool"
+}
+elf_symbol {
+  id: 0xd9db3317
+  name: "__tracepoint_android_vh_z_erofs_endio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_z_erofs_endio"
 }
 elf_symbol {
   id: 0x85ad7f9f
@@ -450069,10 +450159,12 @@ interface {
   symbol_id: 0x1f554c2a
   symbol_id: 0xfb77f8d4
   symbol_id: 0x9c6911fb
+  symbol_id: 0xea243f10
   symbol_id: 0xcb0a2c01
   symbol_id: 0xe26122c3
   symbol_id: 0x377d134d
   symbol_id: 0x905272e6
+  symbol_id: 0x2aaa5aaf
   symbol_id: 0x19fc04e0
   symbol_id: 0x734973d4
   symbol_id: 0x49c69e22
@@ -450115,6 +450207,7 @@ interface {
   symbol_id: 0x2b3e4b23
   symbol_id: 0x7cd03d83
   symbol_id: 0x67c7aa4f
+  symbol_id: 0xcf2200d3
   symbol_id: 0x4b67a5dc
   symbol_id: 0x3684a257
   symbol_id: 0x7ee652cd
@@ -450332,6 +450425,7 @@ interface {
   symbol_id: 0x008832a3
   symbol_id: 0xc2a5e712
   symbol_id: 0x297c974d
+  symbol_id: 0x26b8237e
   symbol_id: 0x0002a5ea
   symbol_id: 0xcbec9d66
   symbol_id: 0x764ff27a
@@ -450339,6 +450433,7 @@ interface {
   symbol_id: 0x807c8f9a
   symbol_id: 0x892f6a60
   symbol_id: 0xae5e5469
+  symbol_id: 0xbda9ca45
   symbol_id: 0x18619e65
   symbol_id: 0xc4d6f652
   symbol_id: 0x6911084f
@@ -450710,10 +450805,12 @@ interface {
   symbol_id: 0x0d418d38
   symbol_id: 0xb45361fe
   symbol_id: 0x9ad783c1
+  symbol_id: 0x5102ed3e
   symbol_id: 0x34b6590b
   symbol_id: 0x07a41f19
   symbol_id: 0x26d15e93
   symbol_id: 0xbf5d713c
+  symbol_id: 0x933f1295
   symbol_id: 0x197d6be2
   symbol_id: 0xdac9a862
   symbol_id: 0x6d970e8c
@@ -450756,6 +450853,7 @@ interface {
   symbol_id: 0x52cc3d91
   symbol_id: 0xba330301
   symbol_id: 0x1975aef5
+  symbol_id: 0xc9a82909
   symbol_id: 0xbbfc3b7e
   symbol_id: 0xdb161c79
   symbol_id: 0x1d442b97
@@ -450973,6 +451071,7 @@ interface {
   symbol_id: 0x14b85591
   symbol_id: 0x56b11d7c
   symbol_id: 0x6440d1d7
+  symbol_id: 0x45e03c70
   symbol_id: 0xaf3a3494
   symbol_id: 0x55476a7c
   symbol_id: 0x89f309c0
@@ -450980,6 +451079,7 @@ interface {
   symbol_id: 0x0164dfc8
   symbol_id: 0x449c21a2
   symbol_id: 0xa13f65ff
+  symbol_id: 0xd9db3317
   symbol_id: 0x85ad7f9f
   symbol_id: 0x93f06708
   symbol_id: 0xf57e8f65

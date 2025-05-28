@@ -386,6 +386,18 @@
   blk_crypto_start_using_key
   cgroup_rm_cftypes
 
+#required by tracing more io info
+  __traceiter_android_vh_iomap_dio_bio_end_io
+  __tracepoint_android_vh_iomap_dio_bio_end_io
+  __traceiter_android_vh_verity_finish_io
+  __tracepoint_android_vh_verity_finish_io
+  __traceiter_android_vh_f2fs_finish_read_bio
+  __tracepoint_android_vh_f2fs_finish_read_bio
+  __traceiter_android_vh_f2fs_write_end_io
+  __tracepoint_android_vh_f2fs_write_end_io
+  __traceiter_android_vh_z_erofs_endio
+  __tracepoint_android_vh_z_erofs_endio
+
 #required by mem_reclaim_ctl.ko
 __traceiter_android_vh_page_should_be_protected
 __tracepoint_android_vh_page_should_be_protected
