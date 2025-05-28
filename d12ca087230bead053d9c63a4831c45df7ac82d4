@@ -122,6 +122,24 @@
       "parentUuid": "7452e615_e1c976b9",
       "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25703229_34164e5c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-28T15:18:29Z",
+      "side": 1,
+      "message": "That looks like host code to me, not hypervisor code, so unless I am missing something, this does not address my comment.",
+      "parentUuid": "69f62144_43027d02",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
