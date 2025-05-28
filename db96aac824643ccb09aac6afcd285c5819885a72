@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bbab940_a8e70184",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-28T12:47:38Z",
+      "side": 1,
+      "message": "Nit: given that relinquish_walker() returns 0 on blocks currently, this isn\u0027t quite right though it\u0027s fixed in the next patch. Maybe squash them together?",
+      "range": {
+        "startLine": 440,
+        "startChar": 1,
+        "endLine": 440,
+        "endChar": 58
+      },
+      "revId": "db96aac824643ccb09aac6afcd285c5819885a72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
