@@ -22,6 +22,30 @@
       },
       "revId": "f60e0de02f91b6b23b0083be736ed1707740b871",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a37432b3_04b2c90e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-05-28T19:53:41Z",
+      "side": 1,
+      "message": "This function is used by both the host and guest ffa handlers. Guests are not always Linux; we run Trusty as the guest for instance. \n\nI do not know how to audit all code that can interact with this code so, to me, it seems advantageous to follow the spec.",
+      "parentUuid": "bcaf8b8a_7b0ff6e0",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 129,
+        "endChar": 22
+      },
+      "revId": "f60e0de02f91b6b23b0083be736ed1707740b871",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
