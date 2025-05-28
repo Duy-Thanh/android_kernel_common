@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d101b5f7_e78075aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-28T06:52:16Z",
+      "side": 1,
+      "message": "are you sure this is going to be a stable symbol?  Are you prepared to deal with ABI changes going forward if needed with the proper padding in these tegra-specific structures?",
+      "range": {
+        "startLine": 22,
+        "startChar": 34,
+        "endLine": 22,
+        "endChar": 51
+      },
+      "revId": "3ba00ea87d87d6f5087f335d0f85e89288b218ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
