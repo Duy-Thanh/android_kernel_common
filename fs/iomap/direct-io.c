@@ -13,6 +13,7 @@
 #include <linux/uio.h>
 #include <linux/task_io_accounting_ops.h>
 #include <trace/hooks/mm.h>
+#include <trace/hooks/io_monitor.h>
 #include "trace.h"
 
 #include "../internal.h"
@@ -231,6 +232,7 @@ void iomap_dio_bio_end_io(struct bio *bio)
 	queue_work(file_inode(iocb->ki_filp)->i_sb->s_dio_done_wq,
 			&dio->aio.work);
 release_bio:
+	trace_android_vh_iomap_dio_bio_end_io(bio);
 	if (should_dirty) {
 		bio_check_pages_dirty(bio);
 	} else {
