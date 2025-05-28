@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a5ef94_50486951",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3266585
+      },
+      "writtenOn": "2025-05-28T07:21:33Z",
+      "side": 1,
+      "message": "The system don\u0027t like this.\n```suggestion\nSigned-off-by: Jairaj Arava \u003cjairaj.arava@intel.corp-partner.google.com\u003e\n```",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "d504739c8c2dc77c1a7cf2fea4e4319482e89077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
