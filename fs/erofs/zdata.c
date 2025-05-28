@@ -8,6 +8,7 @@
 #include <linux/psi.h>
 #include <linux/cpuhotplug.h>
 #include <trace/events/erofs.h>
+#include <trace/hooks/io_monitor.h>
 
 #define Z_EROFS_PCLUSTER_MAX_PAGES	(Z_EROFS_PCLUSTER_MAX_SIZE / PAGE_SIZE)
 #define Z_EROFS_INLINE_BVECS		2
@@ -1648,6 +1649,8 @@ static void z_erofs_endio(struct bio *bio)
 	if (err)
 		q->eio = true;
 	z_erofs_decompress_kickoff(q, -1);
+
+	trace_android_vh_z_erofs_endio(bio);
 	if (bio->bi_bdev)
 		bio_put(bio);
 }
