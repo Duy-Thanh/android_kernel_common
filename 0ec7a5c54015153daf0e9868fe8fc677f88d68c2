@@ -231,6 +231,24 @@
       "parentUuid": "e7b4e3b4_b09b4eb1",
       "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36cd1f6e_06eb3dca",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-28T12:19:39Z",
+      "side": 1,
+      "message": "Ok, so I can update this patch and temporarily enable SafeSetID for x86 only. Should it be explicitly marked as `TEMP` in the commit message headline (to be eventually reverted and replaced by another CL) or should it just enable SafeSetID for x86 and the second CL will do the same later for arm64?\n\nAlternatively we can keep this CL not merged until arm64 is ready and submit `TEMP` CL into android-mainline-desktop for x86 testing only.\n\nWhat do you think?",
+      "parentUuid": "eb1065f6_c2c34265",
+      "revId": "0ec7a5c54015153daf0e9868fe8fc677f88d68c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
