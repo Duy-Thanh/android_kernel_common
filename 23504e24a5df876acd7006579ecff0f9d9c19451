@@ -22,6 +22,30 @@
       },
       "revId": "23504e24a5df876acd7006579ecff0f9d9c19451",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68948280_ad215ac9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-29T16:11:11Z",
+      "side": 1,
+      "message": "We did send the initial create but it returned `RETRY`, which means Trusty (and possibly other TEEs) started the creation and have some in-flight state. For whatever reason, we stopped retrying until getting `SUCCESS`, which means the VM didn\u0027t get fully created.\n\nWe could just skip destroying it altogether, but that might leak the TZ resources for that VM. It\u0027s cleaner to try to finish the creation and then the destruction (if we can).",
+      "parentUuid": "f35ad26e_1cdafd89",
+      "range": {
+        "startLine": 320,
+        "startChar": 6,
+        "endLine": 323,
+        "endChar": 37
+      },
+      "revId": "23504e24a5df876acd7006579ecff0f9d9c19451",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
