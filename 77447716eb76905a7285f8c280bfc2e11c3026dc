@@ -22,6 +22,30 @@
       },
       "revId": "77447716eb76905a7285f8c280bfc2e11c3026dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7970137c_833d879a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-05-29T02:25:48Z",
+      "side": 1,
+      "message": "Our requirement is to directly capture the latency of each stage for an anomalous I/O when an issue occurs: Q-\u003eG-\u003eI-\u003eD-\u003eC-\u003eendio-\u003everity.\n\n1. First, the timestamps from these stages must correspond to the same I/O operation.\n\n2. Second, we need to record this information directly, rather than first capturing a trace and then parsing it.\n\nRegarding verity_end_io: Currently, we haven\u0027t found any relevant trace at this point.\n\nRegarding endio for direct I/O: If you are referring to trace hooks like trace_f2fs_direct_IO_exit(inode, pos, count, READ, ret), they also do not meet our requirement because they cannot be correlated with the same I/O. Therefore, we added trace_android_vh_iomap_dio_bio_end_io(bio), specifically to correlate stages using the bio structure.\n\nRegarding endio for buffer I/O: The traces trace_android_vh_f2fs_read_end_io(bio) and trace_android_vh_f2fs_write_end_io(bio) were added for the same reason.\n\nRegarding z_erofs_endio: Currently, we haven\u0027t found any relevant trace at this point.",
+      "parentUuid": "606cdc6a_65c13db3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "77447716eb76905a7285f8c280bfc2e11c3026dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
