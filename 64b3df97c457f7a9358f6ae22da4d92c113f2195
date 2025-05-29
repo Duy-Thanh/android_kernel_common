@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29bcdb62_b235674a",
+        "filename": "mm/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-05-29T21:37:17Z",
+      "side": 1,
+      "message": "I\u0027m concerned that this path no longer has a chance of invoking the vendor hook in `free_unref_page_list()`. Do we have any context on how that hook is used to know if losing this caller is going to be a problem?",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6189e34f_00e85ee7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 136,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "\tLIST_HEAD(pages_to_free);\n"
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 143,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 149,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!folio_put_testzero(folio))\n"
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "\t\tlist_add(\u0026folio-\u003elru, \u0026pages_to_free);\n"
+            },
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 153,
+                "startChar": 0,
+                "endLine": 155,
+                "endChar": 0
+              },
+              "replacement": "\tif (!list_empty(\u0026pages_to_free)) {\n\t\tmem_cgroup_uncharge_list(\u0026pages_to_free);\n\t\tfree_unref_page_list(\u0026pages_to_free);\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "64b3df97c457f7a9358f6ae22da4d92c113f2195",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
