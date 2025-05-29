@@ -46,6 +46,30 @@
       },
       "revId": "77447716eb76905a7285f8c280bfc2e11c3026dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbe83ca4_dc3400c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-29T05:52:20Z",
+      "side": 1,
+      "message": "What is \"Q-\u003eG-\u003eI-\u003eD-\u003eC-\u003eendio-\u003everity\" and why is it required to be detected within the kernel itself?",
+      "parentUuid": "7970137c_833d879a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "77447716eb76905a7285f8c280bfc2e11c3026dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
