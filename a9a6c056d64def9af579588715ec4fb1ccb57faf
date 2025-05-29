@@ -155,6 +155,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75190c64_b69e8dae",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-29T13:58:24Z",
+      "side": 1,
+      "message": "Closing this as it seems we reached an agreement from the previous meetings. Feel free to re-open as needed.",
+      "parentUuid": "bf9a4b93_fa85e76e",
+      "range": {
+        "startLine": 1342,
+        "startChar": 3,
+        "endLine": 1342,
+        "endChar": 60
+      },
+      "revId": "a9a6c056d64def9af579588715ec4fb1ccb57faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3429cd6_5b615347",
