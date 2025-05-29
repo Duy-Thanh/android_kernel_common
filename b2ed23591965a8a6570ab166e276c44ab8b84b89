@@ -16,6 +16,24 @@
       "message": "exports go next to the symbols themselves, not at the top of the file.",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67766604_9bd4aea7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-05-29T07:50:38Z",
+      "side": 1,
+      "message": "these are tracepoint symbols, what do you mean \"go next to the symbols themselves\"？\nI\u0027ve noticed that in the kernel code, the usage of EXPORT_TRACEPOINT_SYMBOL_GPL is typically placed near the top of files.",
+      "parentUuid": "7717b1c4_70e93962",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
