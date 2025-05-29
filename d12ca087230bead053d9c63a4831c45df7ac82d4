@@ -158,6 +158,24 @@
       "parentUuid": "25703229_34164e5c",
       "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6de877b_afd100fe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-29T00:58:44Z",
+      "side": 1,
+      "message": "I think I answered Arve\u0027s question offline: we have the `vm_avail_bitmap` which keeps track which SPs are in the \"VM Available\" state for the current VM (have received and acknowledged the VM creation message). If that bit is not set, we do not send the destruction message.",
+      "parentUuid": "01db1835_82603c8d",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
