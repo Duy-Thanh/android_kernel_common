@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4506d953_92509b13",
+        "filename": "sound/soc/sof/intel/hda.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-29T05:59:21Z",
+      "side": 1,
+      "message": "good luck!  softdep causes issues in the long-run, this is going to be hard to maintain...\n\nAlso, why not submit upstream first?",
+      "range": {
+        "startLine": 1470,
+        "startChar": 0,
+        "endLine": 1470,
+        "endChar": 14
+      },
+      "revId": "75c1035f1350889fcb710a55a6f8cbf4a3efef6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
