@@ -22,6 +22,30 @@
       },
       "revId": "75c1035f1350889fcb710a55a6f8cbf4a3efef6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "167417dd_c35e5afe",
+        "filename": "sound/soc/sof/intel/hda.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 3266585
+      },
+      "writtenOn": "2025-05-29T06:19:21Z",
+      "side": 1,
+      "message": "This is supposed to be a workaround until we find a solution to properly solve KMOD related issues in android system.",
+      "parentUuid": "4506d953_92509b13",
+      "range": {
+        "startLine": 1470,
+        "startChar": 0,
+        "endLine": 1470,
+        "endChar": 14
+      },
+      "revId": "75c1035f1350889fcb710a55a6f8cbf4a3efef6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
