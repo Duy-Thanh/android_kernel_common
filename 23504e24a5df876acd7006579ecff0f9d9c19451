@@ -46,6 +46,30 @@
       },
       "revId": "23504e24a5df876acd7006579ecff0f9d9c19451",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "768e2073_0a87c7d9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-29T20:15:52Z",
+      "side": 1,
+      "message": "Trusty will leak some memory in that case, other SP implementations could handle it differently and potentially fail to allow any other VM to be created.",
+      "parentUuid": "68948280_ad215ac9",
+      "range": {
+        "startLine": 320,
+        "startChar": 6,
+        "endLine": 323,
+        "endChar": 37
+      },
+      "revId": "23504e24a5df876acd7006579ecff0f9d9c19451",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
