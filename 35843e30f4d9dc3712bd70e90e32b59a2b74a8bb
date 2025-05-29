@@ -148,6 +148,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e84df9a_8c457d55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-05-29T02:14:14Z",
+      "side": 1,
+      "message": "oh,I mean vendor_hooks  related will discuss on the other patch, this export tracepoint symbols we also need too.",
+      "parentUuid": "ba3cafc4_c41313b6",
+      "revId": "35843e30f4d9dc3712bd70e90e32b59a2b74a8bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc000f4a_f2c5d906",
