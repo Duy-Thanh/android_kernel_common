@@ -52,6 +52,23 @@
       "parentUuid": "67766604_9bd4aea7",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036e1b23_3e09cf6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-29T10:38:07Z",
+      "side": 1,
+      "message": "Jaegeuk, should these be exported for others to use?",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
