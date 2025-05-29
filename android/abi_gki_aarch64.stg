@@ -376277,6 +376277,15 @@ elf_symbol {
   full_name: "blkg_rwstat_recursive_sum"
 }
 elf_symbol {
+  id: 0xcfdcd371
+  name: "block_class"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1db2b5be
+  type_id: 0x83714889
+  full_name: "block_class"
+}
+elf_symbol {
   id: 0xd289c43d
   name: "block_dirty_folio"
   is_defined: true
@@ -437978,6 +437987,7 @@ interface {
   symbol_id: 0xabd39b51
   symbol_id: 0x6dfac71b
   symbol_id: 0xb0184730
+  symbol_id: 0xcfdcd371
   symbol_id: 0xd289c43d
   symbol_id: 0x6efa206d
   symbol_id: 0x5cf37146
