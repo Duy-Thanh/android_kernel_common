@@ -176,6 +176,24 @@
       "parentUuid": "01db1835_82603c8d",
       "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb26806a_560d8303",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-29T20:01:13Z",
+      "side": 1,
+      "message": "That was a different question. Where, if anywhere, does the _hypervisor_ check that bitmap (or any other state) to make sure the destroy message has been completed before allowing the vm-id to be re-used. Only checking inside __pkvm_notify_guest_vm_avail is not sufficient, since the host can skip this call. PS#97 seems to make this more important since even a non-compromised host now might give up after 5 retries.",
+      "parentUuid": "a6de877b_afd100fe",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
