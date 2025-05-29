@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f35ad26e_1cdafd89",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-29T14:05:32Z",
+      "side": 1,
+      "message": "Why do we need to send destroy if create wasn\u0027t sent ?",
+      "range": {
+        "startLine": 320,
+        "startChar": 6,
+        "endLine": 323,
+        "endChar": 37
+      },
+      "revId": "23504e24a5df876acd7006579ecff0f9d9c19451",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
