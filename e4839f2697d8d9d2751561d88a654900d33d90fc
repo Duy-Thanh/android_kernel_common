@@ -1,0 +1,69 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22eb39c2_b95bf217",
+        "filename": "modules.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-29T17:34:41Z",
+      "side": 1,
+      "message": "why are these changes needed given this patch is not enabling any module builds? Please answer in the commit message",
+      "fixSuggestions": [
+        {
+          "fixId": "fa0332e0_9fc3680a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 177,
+                "endChar": 0
+              },
+              "replacement": "# Modules defined by tools/testing/kunit/configs/android/kunit_iommu_defconfig\n_KUNIT_IOMMU_MODULES_LIST \u003d [\n    \"drivers/iommu/iommu-test.ko\",\n]\n\n"
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": "        kunit_modules_list +\u003d _KUNIT_IOMMU_MODULES_LIST\n"
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "        kunit_modules_list +\u003d _KUNIT_IOMMU_MODULES_LIST\n"
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 196,
+                "startChar": 0,
+                "endLine": 196,
+                "endChar": 0
+              },
+              "replacement": "        kunit_modules_list +\u003d _KUNIT_IOMMU_MODULES_LIST\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e4839f2697d8d9d2751561d88a654900d33d90fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
