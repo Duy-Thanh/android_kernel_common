@@ -22,6 +22,30 @@
       },
       "revId": "3ba00ea87d87d6f5087f335d0f85e89288b218ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a9556b6_9de193ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 4048864
+      },
+      "writtenOn": "2025-05-29T05:34:17Z",
+      "side": 1,
+      "message": "Per discussions with the internal driver teams, these drivers are confirmed to have a stable ABI for Android 15-6.6. In the event that an ABI break becomes necessary, we would target the next LTS. Thanks.",
+      "parentUuid": "d101b5f7_e78075aa",
+      "range": {
+        "startLine": 22,
+        "startChar": 34,
+        "endLine": 22,
+        "endChar": 51
+      },
+      "revId": "3ba00ea87d87d6f5087f335d0f85e89288b218ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
