@@ -22,6 +22,30 @@
       },
       "revId": "56232d773f47c6b968cfe808de6a3e395d4bf03d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c53c6a_49bcb864",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2806,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-30T18:09:19Z",
+      "side": 0,
+      "message": "Ahh great catch\n\nYou are right none of the 6.6 callers do this:\n\n```c\n▾ free_unref_folios  \n     ▸ free_unref_page_list  \n     ▸ put_pages_list  \n```\n\nWe need to keep it. Thanks",
+      "parentUuid": "77d0197f_92796f03",
+      "range": {
+        "startLine": 2805,
+        "startChar": 2,
+        "endLine": 2806,
+        "endChar": 39
+      },
+      "revId": "56232d773f47c6b968cfe808de6a3e395d4bf03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
