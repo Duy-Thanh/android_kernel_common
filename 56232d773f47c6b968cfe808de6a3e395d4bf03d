@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d0197f_92796f03",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2806,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-05-30T06:48:04Z",
+      "side": 0,
+      "message": "I thought this could be omitted because every caller of `free_unref_folios()` already calls `folio_unqueue_deferred_split()`. However, that doesn\u0027t seeem to be true on 6.6, so should we delete this?",
+      "range": {
+        "startLine": 2805,
+        "startChar": 2,
+        "endLine": 2806,
+        "endChar": 39
+      },
+      "revId": "56232d773f47c6b968cfe808de6a3e395d4bf03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
