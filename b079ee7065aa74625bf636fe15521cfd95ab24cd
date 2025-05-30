@@ -16,6 +16,24 @@
       "message": "This CL was previously requested to be split into smaller parts: https://android-review.git.corp.google.com/c/kernel/common/+/3290143/comments/e6e7971b_1e780f12?tab\u003dcomments. IMO it doeas not make sense which I summarized here: b/376448559#comment5",
       "revId": "b079ee7065aa74625bf636fe15521cfd95ab24cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ae51cca_334639da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-05-30T13:17:51Z",
+      "side": 1,
+      "message": "Brief explanation is added to commit message",
+      "parentUuid": "00e4a9b6_23085d21",
+      "revId": "b079ee7065aa74625bf636fe15521cfd95ab24cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
