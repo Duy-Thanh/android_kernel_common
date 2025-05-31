@@ -9,7 +9,7 @@
 static u32 __init pkvm_detect(void)
 {
 	if (boot_cpu_has(X86_FEATURE_HYPERVISOR))
-		return hypervisor_cpuid_base("PKVMPKVMPKVM", 0);
+		return cpuid_base_hypervisor("PKVMPKVMPKVM", 0);
 
 	return 0;
 }
