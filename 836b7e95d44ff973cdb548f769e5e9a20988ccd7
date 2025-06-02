@@ -70,6 +70,24 @@
       "parentUuid": "a2522278_30e24cbc",
       "revId": "836b7e95d44ff973cdb548f769e5e9a20988ccd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d1d499_fd6161fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3266585
+      },
+      "writtenOn": "2025-06-02T09:30:55Z",
+      "side": 1,
+      "message": "I think this should land on upstream linux -\u003e android16-6.12-desktop since this is crucial for MTK-based boards to have correct HDMI audio detection (for now).",
+      "parentUuid": "7c127693_8b7e3bb6",
+      "revId": "836b7e95d44ff973cdb548f769e5e9a20988ccd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
