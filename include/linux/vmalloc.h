@@ -62,7 +62,12 @@ struct vm_struct {
 	unsigned int		nr_pages;
 	phys_addr_t		phys_addr;
 	const void		*caller;
+<<<<<<< HEAD   (75d972 ANDROID: GKI: add netdev_stat_queue_sum to the virtual symbo)
 	ANDROID_OEM_DATA(1);
+||||||| BASE
+=======
+	unsigned long		requested_size;
+>>>>>>> BRANCH (5be5db Linux 6.12.29)
 };
 
 struct vmap_area {
