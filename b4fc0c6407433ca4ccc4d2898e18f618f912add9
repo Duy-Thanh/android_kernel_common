@@ -50,6 +50,24 @@
       "message": "Question: is CONFIG_INTEL_IOMMU_SVM actually needed? From what I checked earlier, it should not have any effect on fatcat either (since none of the IOMMUs on PTL have PASID support).",
       "revId": "b4fc0c6407433ca4ccc4d2898e18f618f912add9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27940550_89014cb3",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 3522408
+      },
+      "writtenOn": "2025-06-02T23:10:58Z",
+      "side": 1,
+      "message": "Sure i will double check with CONFIG_INTEL_IOMMU_SVM removed",
+      "parentUuid": "28dde162_0ecb372e",
+      "revId": "b4fc0c6407433ca4ccc4d2898e18f618f912add9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
