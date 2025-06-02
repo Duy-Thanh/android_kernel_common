@@ -211,6 +211,7 @@ common_kernel(
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_arm64",
+        ":vts_tests_zip_arm64",
     ],
     generated_headers_for_module = _GENERATED_HEADERS_FOR_MODULE,
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
@@ -246,6 +247,7 @@ common_kernel(
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_arm64",
+        ":vts_tests_zip_arm64",
     ],
     generated_headers_for_module = _GENERATED_HEADERS_FOR_MODULE,
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
@@ -287,6 +289,7 @@ common_kernel(
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_x86_64",
+        ":vts_tests_zip_x86_64",
     ],
     generated_headers_for_module = _GENERATED_HEADERS_FOR_MODULE,
     gki_boot_img_sizes = _GKI_X86_64_BOOT_IMAGE_SIZES,
@@ -2725,9 +2728,23 @@ pkg_files(
 )
 
 pkg_files(
+    name = "vts_kselftest_config_x86_64",
+    srcs = ["tools/testing/selftests/android/vts_config_x86_64.xml"],
+    renames = {"tools/testing/selftests/android/vts_config_x86_64.xml": _KSELFTEST_DIR + "/vts_kselftests.config"},
+    visibility = ["//visibility:private"],
+)
+
+pkg_files(
     name = "kselftest_config_arm64",
     srcs = ["tools/testing/selftests/android/config_arm64.xml"],
     renames = {"tools/testing/selftests/android/config_arm64.xml": _KSELFTEST_DIR + "/selftests.config"},
+    visibility = ["//visibility:private"],
+)
+
+pkg_files(
+    name = "vts_kselftest_config_arm64",
+    srcs = ["tools/testing/selftests/android/vts_config_arm64.xml"],
+    renames = {"tools/testing/selftests/android/vts_config_arm64.xml": _KSELFTEST_DIR + "/vts_kselftests.config"},
     visibility = ["//visibility:private"],
 )
 
@@ -2802,6 +2819,14 @@ pkg_filegroup(
 )
 
 pkg_filegroup(
+    name = "vts_kselftest_tests_x86_64",
+    srcs = [
+        ":kselftest_binderfs_binderfs_test_x86_64",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+pkg_filegroup(
     name = "kselftest_tests_x86",
     srcs = [
         ":kselftest_binderfs_binderfs_test_x86",
@@ -2871,6 +2896,14 @@ pkg_filegroup(
 )
 
 pkg_filegroup(
+    name = "vts_kselftest_tests_x86",
+    srcs = [
+        ":kselftest_binderfs_binderfs_test_x86",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+pkg_filegroup(
     name = "kselftest_tests_arm",
     srcs = [
         ":kselftest_binderfs_binderfs_test_arm",
@@ -2928,6 +2961,14 @@ pkg_filegroup(
         ":kselftest_vdso_vdso_test_clock_getres_arm",
         ":kselftest_vdso_vdso_test_getcpu_arm",
         ":kselftest_vdso_vdso_test_gettimeofday_arm",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+pkg_filegroup(
+    name = "vts_kselftest_tests_arm",
+    srcs = [
+        ":kselftest_binderfs_binderfs_test_arm",
     ],
     visibility = ["//visibility:private"],
 )
@@ -2997,11 +3038,29 @@ pkg_filegroup(
 )
 
 pkg_filegroup(
+    name = "vts_kselftest_tests_arm64",
+    srcs = [
+        ":kselftest_binderfs_binderfs_test_arm64",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+pkg_filegroup(
     name = "kselftest_tests_x86_64_pkg_filegroup",
     srcs = [
         ":kselftest_config_x86_64",
         ":kselftest_tests_x86",
         ":kselftest_tests_x86_64",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+pkg_filegroup(
+    name = "vts_kselftest_tests_x86_64_pkg_filegroup",
+    srcs = [
+        ":vts_kselftest_config_x86_64",
+        ":vts_kselftest_tests_x86",
+        ":vts_kselftest_tests_x86_64",
     ],
     visibility = ["//visibility:private"],
 )
@@ -3016,6 +3075,16 @@ pkg_filegroup(
     visibility = ["//visibility:private"],
 )
 
+pkg_filegroup(
+    name = "vts_kselftest_tests_arm64_pkg_filegroup",
+    srcs = [
+        ":vts_kselftest_config_arm64",
+        ":vts_kselftest_tests_arm",
+        ":vts_kselftest_tests_arm64",
+    ],
+    visibility = ["//visibility:private"],
+)
+
 pkg_install(
     name = "kselftest_tests_x86_64_install",
     srcs = [":kselftest_tests_x86_64_pkg_filegroup"],
@@ -3023,8 +3092,20 @@ pkg_install(
 )
 
 pkg_install(
+    name = "vts_kselftest_tests_x86_64_install",
+    srcs = [":vts_kselftest_tests_x86_64_pkg_filegroup"],
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
     name = "kselftest_tests_arm64_install",
     srcs = [":kselftest_tests_arm64_pkg_filegroup"],
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "vts_kselftest_tests_arm64_install",
+    srcs = [":vts_kselftest_tests_arm64_pkg_filegroup"],
     visibility = ["//visibility:private"],
 )
 
@@ -3039,12 +3120,30 @@ pkg_zip(
 )
 
 pkg_zip(
+    name = "vts_tests_zip_x86_64",
+    srcs = [
+        ":vts_kselftest_tests_x86_64_pkg_filegroup",
+    ],
+    out = "x86_64/vts_tests.zip",
+    visibility = ["//visibility:public"],
+)
+
+pkg_zip(
     name = "tests_zip_arm64",
     srcs = [
         ":kselftest_tests_arm64_pkg_filegroup",
         ":kunit_tests_arm64_pkg_files",
     ],
     out = "arm64/tests.zip",
+    visibility = ["//visibility:public"],
+)
+
+pkg_zip(
+    name = "vts_tests_zip_arm64",
+    srcs = [
+        ":vts_kselftest_tests_arm64_pkg_filegroup",
+    ],
+    out = "arm64/vts_tests.zip",
     visibility = ["//visibility:public"],
 )
 
@@ -3055,9 +3154,18 @@ pkg_files(
     visibility = ["//visibility:private"],
 )
 
+pkg_files(
+    name = "vts_tests_zip_x86_64_files",
+    srcs = [":vts_tests_zip_x86_64"],
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
 pkg_install(
     name = "tests_zip_x86_64_dist",
-    srcs = [":tests_zip_x86_64_files"],
+    srcs = [
+        ":vts_tests_zip_x86_64_files",
+    ],
     destdir = "out/tests_x86_64/dist",
 )
 
@@ -3068,9 +3176,18 @@ pkg_files(
     visibility = ["//visibility:private"],
 )
 
+pkg_files(
+    name = "vts_tests_zip_arm64_files",
+    srcs = [":vts_tests_zip_arm64"],
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
 pkg_install(
     name = "tests_zip_arm64_dist",
-    srcs = [":tests_zip_arm64_files"],
+    srcs = [
+        ":vts_tests_zip_arm64_files",
+    ],
     destdir = "out/tests_arm64/dist",
 )
 
