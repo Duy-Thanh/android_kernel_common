@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "861aa1d0_8e5e7103",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-06-02T18:44:34Z",
+      "side": 1,
+      "message": "Hrm, the presubmit failure might be legit. Postsubmit history looks ok and this patch _is_ touching the EL2 boot path. CR-1 while I investigate...",
+      "revId": "1b7a20b004451e81c7d85485fbe031e3bb273c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
