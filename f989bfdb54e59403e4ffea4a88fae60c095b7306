@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a6001bc_8ef7c6ce",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-06-02T11:08:45Z",
+      "side": 1,
+      "message": "What happens in case we iterate over the CPU that panicked and the status was already `HYP_RB_WRITING`?",
+      "range": {
+        "startLine": 636,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 42
+      },
+      "revId": "f989bfdb54e59403e4ffea4a88fae60c095b7306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
