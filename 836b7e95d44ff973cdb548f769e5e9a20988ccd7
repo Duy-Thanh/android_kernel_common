@@ -52,6 +52,24 @@
       "parentUuid": "42138a25_09ed0b5b",
       "revId": "836b7e95d44ff973cdb548f769e5e9a20988ccd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c127693_8b7e3bb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882138
+      },
+      "writtenOn": "2025-06-02T09:28:35Z",
+      "side": 1,
+      "message": "Thank you Baili :)! Will (should?) this CL land on android16-6.12-desktop and/or android-mainline-desktop?",
+      "parentUuid": "a2522278_30e24cbc",
+      "revId": "836b7e95d44ff973cdb548f769e5e9a20988ccd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
