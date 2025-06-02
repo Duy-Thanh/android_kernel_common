@@ -194,6 +194,24 @@
       "parentUuid": "a6de877b_afd100fe",
       "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31872abc_6d1552c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 95
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-02T13:57:24Z",
+      "side": 1,
+      "message": "I made it (patch #99) so that we don\u0027t remove the vmid if the destruction message is not sent. This should prevent the rolling back issue that you are thinking of.",
+      "parentUuid": "cb26806a_560d8303",
+      "revId": "d12ca087230bead053d9c63a4831c45df7ac82d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
