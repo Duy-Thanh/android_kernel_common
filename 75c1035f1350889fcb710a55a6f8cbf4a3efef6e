@@ -46,6 +46,30 @@
       },
       "revId": "75c1035f1350889fcb710a55a6f8cbf4a3efef6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e2445e_b994d67d",
+        "filename": "sound/soc/sof/intel/hda.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 3569575
+      },
+      "writtenOn": "2025-06-02T04:18:07Z",
+      "side": 1,
+      "message": "We should resolve this one way or the other.",
+      "parentUuid": "167417dd_c35e5afe",
+      "range": {
+        "startLine": 1470,
+        "startChar": 0,
+        "endLine": 1470,
+        "endChar": 14
+      },
+      "revId": "75c1035f1350889fcb710a55a6f8cbf4a3efef6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
