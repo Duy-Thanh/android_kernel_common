@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6264d73_c7794f8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-02T23:04:27Z",
+      "side": 1,
+      "message": "Please add an appropriate prefix, e.g. `ANDROID: GKI: x86: `",
+      "revId": "b4fc0c6407433ca4ccc4d2898e18f618f912add9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6b86ec_97efb94d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-02T23:04:27Z",
+      "side": 1,
+      "message": "I\u0027d provide more details here (so that we don\u0027t forget):\n\n1. Without disabling CONFIG_INTEL_IOMMU_PERF_EVENTS fatcat doesn\u0027t boot if CONFIG_PKVM_INTEL is enabled. The reason is unknown. We can enable it back once we find and fix the root cause.\n2. Without enabling CONFIG_IRQ_REMAP and CONFIG_INTEL_IOMMU_SVM fatcat doesn\u0027t boot, regardless of CONFIG_PKVM_INTEL. The reason is unknown.\n3. Enabling CONFIG_IRQ_REMAP is useful anyway, not just on fatcat but on any x86 platform, since x2APIC depends on it. So we should keep CONFIG_IRQ_REMAP enabled even after fixing the root cause of fatcat boot issues.",
+      "revId": "b4fc0c6407433ca4ccc4d2898e18f618f912add9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28dde162_0ecb372e",
         "filename": "arch/x86/configs/gki_defconfig",
         "patchSetId": 1
