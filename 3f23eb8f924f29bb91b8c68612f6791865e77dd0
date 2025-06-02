@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2655d35b_f19c9fc8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 99
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-06-02T18:07:38Z",
+      "side": 1,
+      "message": "Is it safe to leave hyp_vm in the table and list? Do the callers not free hyp_vm unconditionally?",
+      "revId": "3f23eb8f924f29bb91b8c68612f6791865e77dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
