@@ -62,7 +62,12 @@ struct vm_struct {
 	unsigned int		nr_pages;
 	phys_addr_t		phys_addr;
 	const void		*caller;
+<<<<<<< HEAD   (ccbcf3 Merge bb8f86f40e04 ("net: export a helper for adding up queu)
 	ANDROID_OEM_DATA(1);
+||||||| BASE
+=======
+	unsigned long		requested_size;
+>>>>>>> BRANCH (5be5db Linux 6.12.29)
 };
 
 struct vmap_area {
