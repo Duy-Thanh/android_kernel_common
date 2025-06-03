@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cc9822_aedec800",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-06-03T10:39:17Z",
+      "side": 1,
+      "message": "So this is called on the back of an HVC from the host, which is good, but what prevents a malicious host from not issuing that HVC?\n\nIt feels like kvm_guest_ffa_handler() should check whether that has been called before allowing FF-A requests to go through? Is this already implemented somehow and I missed it?",
+      "range": {
+        "startLine": 1600,
+        "startChar": 4,
+        "endLine": 1600,
+        "endChar": 33
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0d918a_b888501a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-06-03T10:39:17Z",
+      "side": 1,
+      "message": "Do we really want to allow sending a destruction message while a guest is not dying?",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "696878e3_097f3397",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-06-03T10:39:17Z",
+      "side": 1,
+      "message": "Why do you not need vm_handle_to_idx() any more?",
+      "range": {
+        "startLine": 794,
+        "startChar": 11,
+        "endLine": 794,
+        "endChar": 19
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
