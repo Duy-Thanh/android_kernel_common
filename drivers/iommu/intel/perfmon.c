@@ -602,6 +602,8 @@ int alloc_iommu_pmu(struct intel_iommu *iommu)
 	if (!iommu_pmu)
 		return -ENOMEM;
 
+	iommu_pmu->iommu = iommu;
+
 	iommu_pmu->num_cntr = pcap_num_cntr(perfcap);
 	if (iommu_pmu->num_cntr > IOMMU_PMU_IDX_MAX) {
 		pr_warn_once("The number of IOMMU counters %d > max(%d), clipping!",
