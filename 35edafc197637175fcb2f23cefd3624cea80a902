@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1c8591a_b9180440",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-06-03T20:38:07Z",
+      "side": 1,
+      "message": "I left a comment https://android-review.googlesource.com/c/kernel/common/+/3365083/comment/89a00a46_cdb57597/ w.r.t. the creation message on the host.\n\nRe the guest: we don\u0027t currently check the VM availability bit before processing FFA calls from guests. It should be pretty simple to check `ffa_buf-\u003evm_avail_bit`, do we want to add that?",
+      "parentUuid": "13324f67_b0065c17",
+      "range": {
+        "startLine": 1600,
+        "startChar": 4,
+        "endLine": 1600,
+        "endChar": 33
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a0d918a_b888501a",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100
