@@ -22,6 +22,30 @@
       },
       "revId": "f989bfdb54e59403e4ffea4a88fae60c095b7306",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb8cabc_e24c54db",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-06-03T07:04:01Z",
+      "side": 1,
+      "message": "You would have a hang here. But a panic while RB_WRITING is very much unlikely. This is a really short operation.\n\nYou could get a hang too because of trace_rb_lock held. \n\nThat\u0027s also why we didn\u0027t want to enable this by default. You have some risk of hangs :-\\",
+      "parentUuid": "8a6001bc_8ef7c6ce",
+      "range": {
+        "startLine": 636,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 42
+      },
+      "revId": "f989bfdb54e59403e4ffea4a88fae60c095b7306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
