@@ -285,6 +285,30 @@
       },
       "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36ac03aa_368d3795",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-03T23:23:48Z",
+      "side": 1,
+      "message": "Well, yeah, modules should not be allowed to modify the LRU and that\u0027s why these functions are defined in mm_inline.h. But I don\u0027t see why a module technically can\u0027t include a header from include/linux/.\nThe proper way would have been to modify this upstream but the effort failed because of the concern that the behavior will change into LIFO, see: https://lore.kernel.org/linux-mm/f29f64e29c08427b95e3df30a5770056@honor.com/, so this vendor hook approach seems the best way to handle this.",
+      "parentUuid": "5d54d154_2725431c",
+      "range": {
+        "startLine": 634,
+        "startChar": 2,
+        "endLine": 636,
+        "endChar": 19
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
