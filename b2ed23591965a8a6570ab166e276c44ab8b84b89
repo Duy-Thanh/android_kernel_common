@@ -87,6 +87,24 @@
       "parentUuid": "036e1b23_3e09cf6e",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e192c7_abb48a4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-06-03T01:41:45Z",
+      "side": 1,
+      "message": "we want to hook it in our ko to capture some io info,It has been merged in branch  android15-6.6",
+      "parentUuid": "d36a44b8_b506d9ff",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
