@@ -188,6 +188,30 @@
       },
       "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "089f67bc_37ad691d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-03T12:50:58Z",
+      "side": 1,
+      "message": "Ok that\u0027s a typo `vm_handle_to_idx` was dropped accidentally. I will fix this",
+      "parentUuid": "6b779122_e22da6e8",
+      "range": {
+        "startLine": 794,
+        "startChar": 11,
+        "endLine": 794,
+        "endChar": 19
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
