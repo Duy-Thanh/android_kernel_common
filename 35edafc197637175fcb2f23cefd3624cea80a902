@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e71c6a0_1bd9eac1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-03T13:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18c6a6d5_238d3b46",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "696878e3_097f3397",
@@ -204,6 +228,30 @@
       "side": 1,
       "message": "Ok that\u0027s a typo `vm_handle_to_idx` was dropped accidentally. I will fix this",
       "parentUuid": "6b779122_e22da6e8",
+      "range": {
+        "startLine": 794,
+        "startChar": 11,
+        "endLine": 794,
+        "endChar": 19
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "313f919a_4363fa86",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-03T13:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "089f67bc_37ad691d",
       "range": {
         "startLine": 794,
         "startChar": 11,
