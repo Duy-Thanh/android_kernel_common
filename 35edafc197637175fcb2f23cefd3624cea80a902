@@ -140,6 +140,30 @@
       },
       "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b779122_e22da6e8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-06-03T11:16:49Z",
+      "side": 1,
+      "message": "I meant that all indexing into vm_table[] was previously done using vm_handle_to_idx(handle) and not the \u0027raw\u0027 handle. Why isn\u0027t it needed any more? That seems inconsistent with the hyp_vm lookup above.\n\nNote that your code also converts `vm_table[(handle)] \u003d NULL` below, and I\u0027m worried this is in fact an OOB write that will corrupt memory.",
+      "parentUuid": "23bd555f_80f6a77b",
+      "range": {
+        "startLine": 794,
+        "startChar": 11,
+        "endLine": 794,
+        "endChar": 19
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
