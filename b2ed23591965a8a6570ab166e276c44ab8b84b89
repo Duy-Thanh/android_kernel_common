@@ -159,6 +159,24 @@
       "parentUuid": "c7352c47_8378aef3",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a6d57ad_de75b48e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-06-03T11:19:58Z",
+      "side": 1,
+      "message": "You mean like through the ftrace? We have some build version that can not get ftrace.",
+      "parentUuid": "62a09865_c4dd70bc",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
