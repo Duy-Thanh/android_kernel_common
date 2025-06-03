@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5754f8a_cc1d09da",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-03T18:22:30Z",
+      "side": 1,
+      "message": "It seems to duplicate the functionality of `static bool pkvm_init` in __pkvm_init_finalise()?\n\nAnd related question: what if __pkvm_init_finalise() fails? Currently we don\u0027t even return this failure to the host, but that seems wrong, we should let the host properly fail pKVM initialization and clear pvmfw (and reprivilege CPUs, since now we are able to do that anyway)?\n\nSo, would it be cleaner and more correct to: 1. move the `pkvm_init` variable out of __pkvm_init_finalise() to the global scope in init_finalise.c (and while we\u0027re at it, rename it to `pkvm_initialized` for clarity). 2. move the reprivilege implementation to init_finalise.c, including checking `pkvm_initialized` (instead of `finalize_hc_called`). 3. and of course return __pkvm_init_finalise() error to the host?",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
