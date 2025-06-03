@@ -16,6 +16,24 @@
       "message": "Hrm, the presubmit failure might be legit. Postsubmit history looks ok and this patch _is_ touching the EL2 boot path. CR-1 while I investigate...",
       "revId": "1b7a20b004451e81c7d85485fbe031e3bb273c72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f32848e_19f8ca10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-06-03T12:03:10Z",
+      "side": 1,
+      "message": "I think the patch is fine and the failure is due to an unrelated bootloader regression (tracked at b/332443283).",
+      "parentUuid": "861aa1d0_8e5e7103",
+      "revId": "1b7a20b004451e81c7d85485fbe031e3bb273c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
