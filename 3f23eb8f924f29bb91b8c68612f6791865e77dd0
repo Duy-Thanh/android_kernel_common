@@ -34,6 +34,24 @@
       "parentUuid": "2655d35b_f19c9fc8",
       "revId": "3f23eb8f924f29bb91b8c68612f6791865e77dd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88cf778f_53bb2bd4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 99
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-03T08:10:59Z",
+      "side": 1,
+      "message": "I can also use a poison value instead of keeping that dangling ptr.",
+      "parentUuid": "9b4b6c19_79c5892a",
+      "revId": "3f23eb8f924f29bb91b8c68612f6791865e77dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
