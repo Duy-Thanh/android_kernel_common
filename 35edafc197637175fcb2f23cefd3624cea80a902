@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13324f67_b0065c17",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-06-03T20:34:27Z",
+      "side": 1,
+      "message": "We have the `has_host_signalled` flag for the host, and we check it and send the VM availability message on the first non-`FFA_VERSION` call.",
+      "parentUuid": "2ce6cc65_18d04bcb",
+      "range": {
+        "startLine": 1600,
+        "startChar": 4,
+        "endLine": 1600,
+        "endChar": 33
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a0d918a_b888501a",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100
