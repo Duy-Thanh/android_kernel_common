@@ -86,6 +86,23 @@
       "parentUuid": "28dde162_0ecb372e",
       "revId": "b4fc0c6407433ca4ccc4d2898e18f618f912add9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69311231_53c22ba9",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-03T12:42:50Z",
+      "side": 1,
+      "message": "The root cause of the problem with CONFIG_INTEL_IOMMU_PERF_EVENTS has been just fixed in aosp/3649324 so we don\u0027t need to disable it anymore.",
+      "revId": "b4fc0c6407433ca4ccc4d2898e18f618f912add9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
