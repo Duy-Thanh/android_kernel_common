@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea28f7d5_b6b0f7c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-03T06:17:18Z",
+      "side": 1,
+      "message": "Thanks Prabu for the fix. For the emulation-based IOMMU, it does need to set the IOMMU pointer earlier.",
+      "revId": "0ef9c981af5142a89922f2dc3a01c5f175d9c1a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
