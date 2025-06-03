@@ -309,6 +309,30 @@
       },
       "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e991c9_4f2e79c6",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-03T23:26:58Z",
+      "side": 1,
+      "message": "Hmm. Actually I think if you enable CONFIG_MEMCG you might get into trouble using lruvec_add_folio_tail() because if will use mem_cgroup_update_lru_size() which is not exported. This would require exporting that function as well.",
+      "parentUuid": "36ac03aa_368d3795",
+      "range": {
+        "startLine": 634,
+        "startChar": 2,
+        "endLine": 636,
+        "endChar": 19
+      },
+      "revId": "7a184f09ae9bd0b5c9ddead5f7734b6a9be2b7f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
