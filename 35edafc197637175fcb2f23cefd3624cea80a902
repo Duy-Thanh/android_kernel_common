@@ -191,6 +191,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce8840a1_14a2fce0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-06-03T22:32:04Z",
+      "side": 1,
+      "message": "Why do you need the `vm_availability` argument at all? After aosp/3644969 there is no 1:1 match between this argument and the message sent anyway. __pkvm_notify_guest_vm_avail just needs to be repeated until all SPs that requested availability messages have responded with success to the messages sent by the hypervisor. The host does not need to know what the specific messages are.",
+      "parentUuid": "6e71c6a0_1bd9eac1",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "696878e3_097f3397",

@@ -16,6 +16,61 @@
       "message": "If there\u0027s any other error here, we silently ignore it and continue. Do we want to return or abort instead?",
       "revId": "4b8b8d7312fba950b7f59c7f870c4e532a064e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb134e6b_f37c3992",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 101
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-06-03T22:32:04Z",
+      "side": 1,
+      "message": "This should work, but you can avoid code duplication here by either moving the list deletion before the if statement or removing the return and moving `vm_table[vm_handle_to_idx(handle)] \u003d NULL;` to an else block.",
+      "fixSuggestions": [
+        {
+          "fixId": "78cbb9fa_41907605",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+              "range": {
+                "startLine": 789,
+                "startChar": 0,
+                "endLine": 789,
+                "endChar": 0
+              },
+              "replacement": "\tlist_del(\u0026hyp_vm-\u003evm_list);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+              "range": {
+                "startLine": 796,
+                "startChar": 0,
+                "endLine": 797,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+              "range": {
+                "startLine": 801,
+                "startChar": 0,
+                "endLine": 802,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4b8b8d7312fba950b7f59c7f870c4e532a064e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
