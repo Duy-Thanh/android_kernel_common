@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ce6cc65_18d04bcb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-03T11:10:31Z",
+      "side": 1,
+      "message": "My understanding is that we won\u0027t accept any requests if the availability message is not sent but @ahomescu@xwf.google.com can confirm",
+      "parentUuid": "07cc9822_aedec800",
+      "range": {
+        "startLine": 1600,
+        "startChar": 4,
+        "endLine": 1600,
+        "endChar": 33
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a0d918a_b888501a",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34700274_f2c71bd5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-03T11:10:31Z",
+      "side": 1,
+      "message": "This prevents sending a creation message while the guest is dying. I can enhance it if you want to handle the case you mentioned.",
+      "parentUuid": "5a0d918a_b888501a",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "696878e3_097f3397",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100
@@ -60,6 +108,30 @@
       "writtenOn": "2025-06-03T10:39:17Z",
       "side": 1,
       "message": "Why do you not need vm_handle_to_idx() any more?",
+      "range": {
+        "startLine": 794,
+        "startChar": 11,
+        "endLine": 794,
+        "endChar": 19
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23bd555f_80f6a77b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-03T11:10:31Z",
+      "side": 1,
+      "message": "Sorry, I am not sure I get this question. This is addressing Arve\u0027s concern from https://android-review.git.corp.google.com/c/kernel/common/+/3365083/comment/7452e615_e1c976b9/",
+      "parentUuid": "696878e3_097f3397",
       "range": {
         "startLine": 794,
         "startChar": 11,
