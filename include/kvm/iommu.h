@@ -12,10 +12,22 @@
  */
 #define KVM_IOMMU_DOMAIN_IDMAP_ID		0
 
+/*
+ * Nested domains must invalidate all stage-1 TLB entries when stage-2 mappings
+ * change. If stage-1 only domains use the same VMID as nested domains, then
+ * those TLB entries will also be invalidated when nested domains require
+ * invalidation, which can negatively impact performance.
+ *
+ * Reserve VMID 1 so that nested domains don't share the same VMID as stage-1
+ * only domains. This ensures that nested domain invalidations for stage-2 only
+ * affect stage-1 TLB entries associated with nested domains.
+ */
+#define KVM_IOMMU_S1_DOMAIN_VMID		1
+
 /* Used in alloc_domain type argument. */
 #define KVM_IOMMU_DOMAIN_IDMAP_TYPE		0
 
-#define KVM_IOMMU_DOMAIN_NR_START		(KVM_IOMMU_DOMAIN_IDMAP_ID + 1)
+#define KVM_IOMMU_DOMAIN_NR_START		(KVM_IOMMU_S1_DOMAIN_VMID + 1)
 
 /**
  * struct kvm_hyp_iommu - Parameters from the trusted host:
