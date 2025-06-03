@@ -62,7 +62,12 @@ struct vm_struct {
 	unsigned int		nr_pages;
 	phys_addr_t		phys_addr;
 	const void		*caller;
+<<<<<<< HEAD   (964937 Merge efb597345953 ("mm: fix folio_pte_batch() on XEN PV") i)
 	ANDROID_OEM_DATA(1);
+||||||| BASE
+=======
+	unsigned long		requested_size;
+>>>>>>> BRANCH (291001 mm: vmalloc: support more granular vrealloc() sizing)
 };
 
 struct vmap_area {
