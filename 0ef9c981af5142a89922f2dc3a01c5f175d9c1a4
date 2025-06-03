@@ -33,6 +33,24 @@
       "message": "Thanks for debugging and fixing!",
       "revId": "0ef9c981af5142a89922f2dc3a01c5f175d9c1a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1987805_b9888dc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-03T12:40:25Z",
+      "side": 1,
+      "message": "I think with PV IOMMU it will be still needed as well, even if the IOMMU driver initialization is fully postponed after pKVM deprivilege. The problem here was that dmar_pmu_read\\*() and dmar_pmu_write\\*() always dereference the `iommu` pointer, even if pKVM is not enabled. (So alternatively we could fix this by avoiding dereferencing it.)",
+      "parentUuid": "ea28f7d5_b6b0f7c9",
+      "revId": "0ef9c981af5142a89922f2dc3a01c5f175d9c1a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
