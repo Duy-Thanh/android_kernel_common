@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c75b341_fca949af",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 101
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-06-04T01:06:08Z",
+      "side": 1,
+      "message": "This isn\u0027t correct,  applying DeMorgan we get `(!(!hyp_vm-\u003eis_dying \u0026\u0026 vm_availability \u003d\u003d FFA_VM_CREATION_MSG)) \u003d\u003d (!!hyp_vm-\u003eis_dying || !vm_availability \u003d\u003d FFA_VM_CREATION_MSG) \u003d\u003d (hyp_vm-\u003eis_dying || vm_availability !\u003d FFA_VM_CREATION_MSG)` which doesn\u0027t look like what you intended.\n\nTesting confirms it, this crashes during guest startup with\n```\n[   10.538297][  T199] [2025-06-04T00:57:15.374084512+00:00 ERROR crosvm::crosvm::sys::linux::vcpu] vcpu hit unknown error: Invalid argument (os error 22)\n```",
+      "revId": "4b8b8d7312fba950b7f59c7f870c4e532a064e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb134e6b_f37c3992",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 101
