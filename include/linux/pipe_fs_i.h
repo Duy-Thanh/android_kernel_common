@@ -2,6 +2,8 @@
 #ifndef _LINUX_PIPE_FS_I_H
 #define _LINUX_PIPE_FS_I_H
 
+#include <linux/android_kabi.h>
+
 #define PIPE_DEF_BUFFERS	16
 
 #define PIPE_BUF_FLAG_LRU	0x01	/* page is on the LRU */
@@ -89,6 +91,8 @@ struct pipe_inode_info {
 		long extensive_changes6;
 	};
 };
+
+ANDROID_KABI_TYPE_STRING("s#pipe_inode_info", "structure_type pipe_inode_info { member s#mutex mutex data_member_location(0) , member t#wait_queue_head_t rd_wait data_member_location(48) , member t#wait_queue_head_t wr_wait data_member_location(72) , member base_type unsigned int byte_size(4) encoding(7) head data_member_location(96) , member base_type unsigned int byte_size(4) encoding(7) tail data_member_location(100) , member base_type unsigned int byte_size(4) encoding(7) max_usage data_member_location(104) , member base_type unsigned int byte_size(4) encoding(7) ring_size data_member_location(108) , member base_type unsigned int byte_size(4) encoding(7) nr_accounted data_member_location(112) , member base_type unsigned int byte_size(4) encoding(7) readers data_member_location(116) , member base_type unsigned int byte_size(4) encoding(7) writers data_member_location(120) , member base_type unsigned int byte_size(4) encoding(7) files data_member_location(124) , member base_type unsigned int byte_size(4) encoding(7) r_counter data_member_location(128) , member base_type unsigned int byte_size(4) encoding(7) w_counter data_member_location(132) , member t#bool poll_usage data_member_location(136) , member pointer_type { s#page } tmp_page data_member_location(144) , member pointer_type { s#fasync_struct } fasync_readers data_member_location(152) , member pointer_type { s#fasync_struct } fasync_writers data_member_location(160) , member pointer_type { s#pipe_buffer } bufs data_member_location(168) , member pointer_type { s#user_struct } user data_member_location(176) } byte_size(184)");
 
 /*
  * Note on the nesting of these functions:
