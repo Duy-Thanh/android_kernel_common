@@ -94,6 +94,30 @@
       },
       "revId": "23504e24a5df876acd7006579ecff0f9d9c19451",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54cc5ad0_82da11b2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-06-04T15:39:44Z",
+      "side": 1,
+      "message": "Trusty will not transition to \"available\" until it gets a VM creation message that it can respond to with `SUCCESS`.",
+      "parentUuid": "c93a8dba_39bea3f1",
+      "range": {
+        "startLine": 320,
+        "startChar": 6,
+        "endLine": 323,
+        "endChar": 37
+      },
+      "revId": "23504e24a5df876acd7006579ecff0f9d9c19451",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
