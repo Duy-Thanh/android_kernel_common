@@ -319,6 +319,10 @@ DECLARE_HOOK(android_vh_lruvec_del_folio,
 		bool *skip),
 	TP_ARGS(lruvec, page, lru, skip));
 
+DECLARE_HOOK(android_vh_mm_free_page,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+
 DECLARE_HOOK(android_vh_do_read_fault,
 	TP_PROTO(struct vm_fault *vmf, unsigned long fault_around_bytes),
 	TP_ARGS(vmf, fault_around_bytes));
