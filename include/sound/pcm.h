@@ -456,8 +456,10 @@ struct snd_pcm_runtime {
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
-	size_t unused;
+	ANDROID_KABI_IGNORE(1, size_t unused);
 };
+
+ANDROID_KABI_BYTE_SIZE(snd_pcm_runtime, 840);
 
 struct snd_pcm_group {		/* keep linked substreams */
 	spinlock_t lock;
