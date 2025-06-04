@@ -265,6 +265,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d0e9364_3db81b76",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-04T10:43:07Z",
+      "side": 1,
+      "message": "aosp/3644969 is not complaint with the spec. If the vm_state inside Trusty transitions to available without the hypervisor knowing it (eg. because of a pending creation message) then a sub-sequent creation message should result in \"vm_state \u003d error\" according to the spec.",
+      "parentUuid": "cd6f461f_73bfd0cc",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "696878e3_097f3397",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100
