@@ -43781,6 +43781,11 @@ member {
   type_id: 0x1301986c
 }
 member {
+  id: 0x270cd191
+  type_id: 0x131d2b14
+  offset: 1472
+}
+member {
   id: 0x270d1dfb
   type_id: 0x131a07fe
 }
@@ -95244,6 +95249,41 @@ member {
   name: "extensions"
   type_id: 0x70e475cf
   offset: 864
+}
+member {
+  id: 0x2d295cc0
+  name: "extensive_changes1"
+  type_id: 0x6720d32f
+}
+member {
+  id: 0xec49a421
+  name: "extensive_changes2"
+  type_id: 0x384f7d7c
+  offset: 32
+}
+member {
+  id: 0xaa32800f
+  name: "extensive_changes3"
+  type_id: 0xfc0e1dbd
+  offset: 64
+}
+member {
+  id: 0x6b9e58a1
+  name: "extensive_changes4"
+  type_id: 0x6d7f5ff6
+  offset: 128
+}
+member {
+  id: 0x285483bd
+  name: "extensive_changes5"
+  type_id: 0x6720d32f
+  offset: 160
+}
+member {
+  id: 0xe98c479c
+  name: "extensive_changes6"
+  type_id: 0xfc0e1dbd
+  offset: 192
 }
 member {
   id: 0xca9f2e3d
@@ -231084,6 +231124,19 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x131d2b14
+  kind: STRUCT
+  definition {
+    bytesize: 32
+    member_id: 0x2d295cc0
+    member_id: 0xec49a421
+    member_id: 0xaa32800f
+    member_id: 0x6b9e58a1
+    member_id: 0x285483bd
+    member_id: 0xe98c479c
+  }
+}
+struct_union {
   id: 0x13222919
   kind: STRUCT
   definition {
@@ -273767,7 +273820,7 @@ struct_union {
   kind: STRUCT
   name: "pipe_inode_info"
   definition {
-    bytesize: 184
+    bytesize: 216
     member_id: 0xad898302
     member_id: 0x0c716ce5
     member_id: 0x4f5ae8a9
@@ -273787,6 +273840,7 @@ struct_union {
     member_id: 0xa5eb13a1
     member_id: 0xd0e95938
     member_id: 0x042a2210
+    member_id: 0x270cd191
   }
 }
 struct_union {
