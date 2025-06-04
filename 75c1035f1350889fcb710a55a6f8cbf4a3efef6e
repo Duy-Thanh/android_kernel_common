@@ -70,6 +70,30 @@
       },
       "revId": "75c1035f1350889fcb710a55a6f8cbf4a3efef6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "184fef07_d9ce51bb",
+        "filename": "sound/soc/sof/intel/hda.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2025-06-04T06:27:36Z",
+      "side": 1,
+      "message": "Hi Greg,\nI\u0027ll mark this comment as resolved and proceed to merge this patch, to unblock PTL Bringup. If you have any concern, feel free to raise a new bug and we can have a discussion to revert it.",
+      "parentUuid": "79e2445e_b994d67d",
+      "range": {
+        "startLine": 1470,
+        "startChar": 0,
+        "endLine": 1470,
+        "endChar": 14
+      },
+      "revId": "75c1035f1350889fcb710a55a6f8cbf4a3efef6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
