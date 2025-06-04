@@ -529,6 +529,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_trylock_failed);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mglru_new_gen);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_cache_miss);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lru_cache_add_page_activate);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_pre_page_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_page_mapped);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zap_pte_range_page_remove_rmap);
 /*
  * For type visibility
  */
