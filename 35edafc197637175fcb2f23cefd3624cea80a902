@@ -289,6 +289,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78acf621_046ca8a8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-04T12:36:47Z",
+      "side": 1,
+      "message": "Or your implementation defines an additional \"pending\" state in which you transition when retries are returned. I am not sure if it matters to the hypervisor but the spec is clear that the state should remain \"unavailable\" when retry is returned.",
+      "parentUuid": "2d0e9364_3db81b76",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "696878e3_097f3397",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100
