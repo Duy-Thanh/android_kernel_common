@@ -456,6 +456,7 @@ struct snd_pcm_runtime {
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
+	size_t unused;
 };
 
 struct snd_pcm_group {		/* keep linked substreams */
