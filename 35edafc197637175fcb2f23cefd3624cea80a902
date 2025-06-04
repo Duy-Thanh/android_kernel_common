@@ -313,6 +313,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1da1a0a_5d9747c2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-06-04T15:34:33Z",
+      "side": 1,
+      "message": "\u003e If the vm_state inside Trusty transitions to available without the hypervisor knowing it (eg. because of a pending creation message)\n\nThat should never happen, the transition from \"pending\" (called `FRESH` in our code) to \"available\" always happens in the handler for a VM creation message that subsequently returns `SUCCESS`.\n\n\u003e Or your implementation defines an additional \"pending\" state in which you transition when retries are returned\n\nThat is already how it\u0027s implemented. I\u0027m not sure the hypervisor needs to know about it though, it should just keep retrying until it gets `SUCCESS`.",
+      "parentUuid": "78acf621_046ca8a8",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "696878e3_097f3397",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100
