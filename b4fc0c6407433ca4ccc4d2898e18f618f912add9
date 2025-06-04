@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b366e975_720326a6",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-04T16:51:28Z",
+      "side": 1,
+      "message": "I\u0027ve checked on my side that kernel still doesn\u0027t boot without problems after removing CONFIG_INTEL_IOMMU_SVM.\n\nSo looks like now we only need to enable IRQ_REMAP. I\u0027ve uploaded aosp/3652796 for it.",
+      "parentUuid": "27940550_89014cb3",
+      "revId": "b4fc0c6407433ca4ccc4d2898e18f618f912add9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69311231_53c22ba9",
         "filename": "arch/x86/configs/gki_defconfig",
         "patchSetId": 1
