@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08ef75c1_c8d94b81",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-04T09:18:02Z",
+      "side": 1,
+      "message": "Yes I think that would be desirable. We wouldn\u0027t allow any other calls from TZ until `VM availability is signalled`.",
+      "parentUuid": "d1c8591a_b9180440",
+      "range": {
+        "startLine": 1600,
+        "startChar": 4,
+        "endLine": 1600,
+        "endChar": 33
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a0d918a_b888501a",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100

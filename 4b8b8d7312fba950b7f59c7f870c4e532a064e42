@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ade3e8_89f73faf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 101
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-04T09:18:02Z",
+      "side": 1,
+      "message": "If there is an error different than `-EAGAIN` and `-EINTR` what guarantees do we have that retrying would fix it ?\n\nThe current behaviour allows the call to proceed (even though availability returned an error) and I think it is up to TZ to return an error if it expected the availability message first.",
+      "parentUuid": "89a00a46_cdb57597",
+      "revId": "4b8b8d7312fba950b7f59c7f870c4e532a064e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c75b341_fca949af",
