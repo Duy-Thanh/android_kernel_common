@@ -23,3 +23,7 @@ type 'struct snd_pcm_runtime' changed
   byte size changed from 840 to 848
   member 'union { size_t unused; unsigned char __kabi_ignored1; }' was added
 
+type 'struct pipe_inode_info' changed
+  byte size changed from 184 to 216
+  member 'struct { int extensive_changes1; char extensive_changes2; long extensive_changes3; bool extensive_changes4; int extensive_changes5; long extensive_changes6; }' was added
+
