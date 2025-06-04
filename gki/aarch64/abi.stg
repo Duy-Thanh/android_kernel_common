@@ -44784,6 +44784,11 @@ member {
   offset: 1344
 }
 member {
+  id: 0x35b5f826
+  type_id: 0x59f9b872
+  offset: 6720
+}
+member {
   id: 0x35b86f03
   type_id: 0x59cfcc1c
 }
@@ -218347,6 +218352,11 @@ member {
   offset: 704
 }
 member {
+  id: 0x3c5f3beb
+  name: "unused"
+  type_id: 0xf435685e
+}
+member {
   id: 0x3c62344c
   name: "unused"
   type_id: 0xc93e017b
@@ -235578,6 +235588,15 @@ struct_union {
     bytesize: 16
     member_id: 0x3cd401f2
     member_id: 0x95dac977
+  }
+}
+struct_union {
+  id: 0x59f9b872
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x3c5f3beb
+    member_id: 0x52ad2439
   }
 }
 struct_union {
@@ -282566,7 +282585,7 @@ struct_union {
   kind: STRUCT
   name: "snd_pcm_runtime"
   definition {
-    bytesize: 840
+    bytesize: 848
     member_id: 0x72e1f985
     member_id: 0xf5fbd358
     member_id: 0x2223a46e
@@ -282631,6 +282650,7 @@ struct_union {
     member_id: 0x8cc1ff5e
     member_id: 0x415b052c
     member_id: 0xb116e333
+    member_id: 0x35b5f826
   }
 }
 struct_union {
