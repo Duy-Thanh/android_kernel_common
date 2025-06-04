@@ -195,6 +195,24 @@
       "parentUuid": "5a6d57ad_de75b48e",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8e844ef_d1f28dd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-06-04T18:14:36Z",
+      "side": 1,
+      "message": "What information do you need? Why not giving them via sysfs or procfs?",
+      "parentUuid": "5b7d18b8_e3896733",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
