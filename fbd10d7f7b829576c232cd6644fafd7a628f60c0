@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d32819_ec23ef8f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-05T14:20:27Z",
+      "side": 1,
+      "message": "Maybe it would be more readable to add __pkvm_host_donate_hyp_noflush() (without an extra argument), and then the implementation of __pkvm_host_donate_hyp() would contain just __pkvm_host_donate_hyp_noflush() + pkvm_iommu_flush_iotlb()?",
+      "revId": "fbd10d7f7b829576c232cd6644fafd7a628f60c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
