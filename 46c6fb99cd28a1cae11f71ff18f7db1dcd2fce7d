@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb836c62_f84eecb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-06-05T17:44:21Z",
+      "side": 1,
+      "message": "Don\u0027t use codewords in commit messages.",
+      "revId": "46c6fb99cd28a1cae11f71ff18f7db1dcd2fce7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8aba9c6_2d048e8d",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-06-05T17:44:21Z",
+      "side": 1,
+      "message": "Is it necessary for this to be a GKI module?\n\nI think it should be a vendor module instead.",
+      "revId": "46c6fb99cd28a1cae11f71ff18f7db1dcd2fce7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80275940_23f8d833",
+        "filename": "modules.bzl",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-06-05T17:44:21Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Buildifier: File is not formatted. Run `buildifier modules.bzl` to format the file, or apply the suggested fix.\n\nAnalyzer Description: Check formats of Bazel definitions.\nOwner: kleaf@google.com\n\nFile is not formatted. Run `buildifier modules.bzl` to format the file, or apply the suggested fix.",
+      "revId": "46c6fb99cd28a1cae11f71ff18f7db1dcd2fce7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
