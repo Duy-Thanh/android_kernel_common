@@ -337,6 +337,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23e72edb_489f4869",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-06-05T02:11:39Z",
+      "side": 1,
+      "message": "If I understand correctly, what Arve is saying is that we should do\n```\nvm_availability \u003d hyp_vm-\u003eis_dying ? FFA_VM_DESTRUCTION_MSG : FFA_VM_CREATION_MSG;\n```\ninstead. It\u0027s much simpler, could we do it this way?",
+      "parentUuid": "d1da1a0a_5d9747c2",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "696878e3_097f3397",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 100
