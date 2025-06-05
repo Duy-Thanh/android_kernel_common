@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b6cb27_2ba2df06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-06-05T15:41:51Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick the version from android15-6.6 (aosp/3163700) so the Change-Id is preserved.",
+      "revId": "feb3c45d964dcd16c040db79b9645535b096f271",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
