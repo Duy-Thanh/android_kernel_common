@@ -4,6 +4,7 @@
 
 #include <linux/types.h>
 #include <linux/moduleloader.h>
+#include <linux/cleanup.h>
 
 #if (defined(CONFIG_KASAN_GENERIC) || defined(CONFIG_KASAN_SW_TAGS)) && \
 		!defined(CONFIG_KASAN_VMALLOC)
@@ -123,6 +124,7 @@ void *execmem_alloc(enum execmem_type type, size_t size);
  */
 void execmem_free(void *ptr);
 
+<<<<<<< HEAD   (d2f3f2 Merge a781ffe410d8 ("loop: factor out a loop_assign_backing_)
 #ifdef CONFIG_MMU
 /**
  * execmem_vmap - create virtual mapping for EXECMEM_MODULE_DATA memory
@@ -134,6 +136,10 @@ void execmem_free(void *ptr);
  */
 struct vm_struct *execmem_vmap(size_t size);
 #endif
+||||||| BASE
+=======
+DEFINE_FREE(execmem, void *, if (_T) execmem_free(_T));
+>>>>>>> BRANCH (5be5db Linux 6.12.29)
 
 #if defined(CONFIG_EXECMEM) && !defined(CONFIG_ARCH_WANTS_EXECMEM_LATE)
 void execmem_init(void);
