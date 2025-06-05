@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c31e1f_62c60328",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 4079418
+      },
+      "writtenOn": "2025-06-05T14:25:07Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ec0935f0_42b8d9a8",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 31
+      },
+      "revId": "771b04e5e6f8fef7e664092c854151b61d0c6440",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c81354f_00d45f8d",
@@ -119,6 +143,30 @@
           ]
         }
       ],
+      "revId": "771b04e5e6f8fef7e664092c854151b61d0c6440",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba00581a_86ebea44",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 4079418
+      },
+      "writtenOn": "2025-06-05T14:25:07Z",
+      "side": 1,
+      "message": "OK got it",
+      "parentUuid": "6c81354f_00d45f8d",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 31
+      },
       "revId": "771b04e5e6f8fef7e664092c854151b61d0c6440",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
