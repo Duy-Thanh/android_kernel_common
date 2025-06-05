@@ -157,8 +157,19 @@ static int posix_timer_add(struct k_itimer *timer)
 			/* Loop over all possible ids completed */
 			ret = -EAGAIN;
 		spin_unlock(&hash_lock);
+<<<<<<< HEAD   (0fd679 Merge android12-5.10 into android12-5.10-lts)
 	} while (ret == -ENOENT);
 	return ret;
+||||||| BASE
+	}
+	/* POSIX return code when no timer ID could be allocated */
+	return -EAGAIN;
+=======
+		cond_resched();
+	}
+	/* POSIX return code when no timer ID could be allocated */
+	return -EAGAIN;
+>>>>>>> BRANCH (01e7e3 Linux 5.10.238)
 }
 
 static inline void unlock_timer(struct k_itimer *timr, unsigned long flags)
