@@ -26,6 +26,10 @@
  * Daniel Vetter <daniel.vetter@ffwll.ch>
  */
 
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(iosys_map);
+ANDROID_KABI_DECLONLY(dma_buf);
+ANDROID_KABI_DECLONLY(dma_buf_attachment);
 
 #include <linux/sync_file.h>
 
