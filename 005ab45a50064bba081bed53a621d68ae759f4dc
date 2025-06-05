@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd91217_622a4d52",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-05T14:21:20Z",
+      "side": 1,
+      "message": "nit: unneeded change",
+      "revId": "005ab45a50064bba081bed53a621d68ae759f4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
