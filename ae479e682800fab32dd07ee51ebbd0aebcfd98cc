@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff694a3c_54227135",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-05T07:09:07Z",
+      "side": 1,
+      "message": "Why are RAX, RBP and RSP special here?",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5754f8a_cc1d09da",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
         "patchSetId": 1
@@ -32,6 +49,23 @@
       "side": 1,
       "message": "Agree with you. I did see the pkvm_init variable, but didn\u0027t want to disturb that function while getting the reprivilege code working. I will refactor as you suggested. Will also handle the failure of __pkvm_init_finalize() using reprivilege logic.",
       "parentUuid": "d5754f8a_cc1d09da",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc54677_fd2f2193",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-05T07:09:07Z",
+      "side": 1,
+      "message": "probably nit: technically it may fail?",
       "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
