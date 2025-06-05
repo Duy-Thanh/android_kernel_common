@@ -34,6 +34,11 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(iosys_map);
+ANDROID_KABI_DECLONLY(dma_buf);
+ANDROID_KABI_DECLONLY(dma_buf_attachment);
+
 #include <linux/kref.h>
 #include <linux/dma-buf.h>
 #include <linux/dma-resv.h>
