@@ -213,6 +213,24 @@
       "parentUuid": "5b7d18b8_e3896733",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb687208_84289ebb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-06-05T03:38:41Z",
+      "side": 1,
+      "message": "We need to collect the latency distributions during the problematic time window for:\nf2fs_write_checkpoint\nf2fs_sync_file\nf2fs_gc\nUFS I/O operations of varying sizes",
+      "parentUuid": "a8e844ef_d1f28dd9",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
