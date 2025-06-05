@@ -1022,7 +1022,11 @@ static int loop_configure(struct loop_device *lo, blk_mode_t mode,
 
 	lim = queue_limits_start_update(lo->lo_queue);
 	loop_update_limits(lo, &lim, config->block_size);
+<<<<<<< HEAD   (b9315b Merge 0558ce095b76 ("loop: Fix ABBA locking race") into andr)
 	/* No need to freeze the queue as the device isn't bound yet. */
+||||||| BASE
+=======
+>>>>>>> BRANCH (5e1470 loop: refactor queue limits updates)
 	error = queue_limits_commit_update(lo->lo_queue, &lim);
 	if (error)
 		goto out_unlock;
@@ -1412,6 +1416,12 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
 	loop_update_limits(lo, &lim, arg);
 
 	blk_mq_freeze_queue(lo->lo_queue);
+<<<<<<< HEAD   (b9315b Merge 0558ce095b76 ("loop: Fix ABBA locking race") into andr)
+||||||| BASE
+=======
+	lim = queue_limits_start_update(lo->lo_queue);
+	loop_update_limits(lo, &lim, arg);
+>>>>>>> BRANCH (5e1470 loop: refactor queue limits updates)
 	err = queue_limits_commit_update(lo->lo_queue, &lim);
 	loop_update_dio(lo);
 	blk_mq_unfreeze_queue(lo->lo_queue);
