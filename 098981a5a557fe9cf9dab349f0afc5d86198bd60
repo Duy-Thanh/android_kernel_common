@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb54d04_a2a2a3ec",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-06-05T18:19:50Z",
+      "side": 1,
+      "message": "You might want to add a comment here that this will not be triggered if an SP requested creation messages without destruction. I don\u0027t know of any real use-cases that would be affected by this, but it could potentially trigger a failure in the compatibility test suite.",
+      "fixSuggestions": [
+        {
+          "fixId": "91e848b0_a5eb55d6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 324,
+                "startChar": 0,
+                "endLine": 324,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t *\n\t\t\t * Note that this will not be triggered if an SP requested\n\t\t\t * creation messages without destruction.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "098981a5a557fe9cf9dab349f0afc5d86198bd60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
