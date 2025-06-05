@@ -78,6 +78,13 @@ struct file;
 
 extern struct pid *pidfd_pid(const struct file *file);
 struct pid *pidfd_get_pid(unsigned int fd, unsigned int *flags);
+<<<<<<< HEAD   (cf6ed0 Merge android13-5.10 into android13-5.10-lts)
+||||||| BASE
+int pidfd_create(struct pid *pid, unsigned int flags);
+=======
+int pidfd_create(struct pid *pid, unsigned int flags);
+int pidfd_prepare(struct pid *pid, unsigned int flags, struct file **ret);
+>>>>>>> BRANCH (01e7e3 Linux 5.10.238)
 
 static inline struct pid *get_pid(struct pid *pid)
 {

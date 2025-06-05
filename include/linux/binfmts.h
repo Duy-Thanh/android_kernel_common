@@ -86,6 +86,17 @@ struct coredump_params {
 	unsigned long mm_flags;
 	loff_t written;
 	loff_t pos;
+<<<<<<< HEAD   (cf6ed0 Merge android13-5.10 into android13-5.10-lts)
+||||||| BASE
+	int vma_count;
+	size_t vma_data_size;
+	struct core_vma_metadata *vma_meta;
+=======
+	int vma_count;
+	size_t vma_data_size;
+	struct core_vma_metadata *vma_meta;
+	struct pid *pid;
+>>>>>>> BRANCH (01e7e3 Linux 5.10.238)
 };
 
 /*
