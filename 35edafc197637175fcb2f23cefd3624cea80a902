@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7d9844a_d0fd8646",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-06T14:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08ef75c1_c8d94b81",
+      "range": {
+        "startLine": 1600,
+        "startChar": 4,
+        "endLine": 1600,
+        "endChar": 33
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a0d918a_b888501a",
@@ -421,6 +445,30 @@
       "side": 1,
       "message": "\u003e ```vm_availability \u003d hyp_vm-\u003eis_dying ? FFA_VM_DESTRUCTION_MSG : FFA_VM_CREATION_MSG;```\n\nI would move all references to `FFA_VM_DESTRUCTION_MSG` and `FFA_VM_CREATION_MSG` into `arch/arm64/kvm/hyp/nvhe/ffa.c`/`kvm_notify_vm_availability`. `hyp_vm` is not available there, so would pass in `hyp_vm-\u003eis_dying` as a bool (or `!hyp_vm-\u003eis_dying` depending on which polarity you prefer) instead.",
       "parentUuid": "21169987_ea937f4d",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 66
+      },
+      "revId": "35edafc197637175fcb2f23cefd3624cea80a902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b948b8ce_b4e884c6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 100
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-06T14:34:14Z",
+      "side": 1,
+      "message": "Closing this as I squashed the CL from Andrei and I applied Arve\u0027s suggestion.",
+      "parentUuid": "b7a473d1_16e59357",
       "range": {
         "startLine": 411,
         "startChar": 5,
