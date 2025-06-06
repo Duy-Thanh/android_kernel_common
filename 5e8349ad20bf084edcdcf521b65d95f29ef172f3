@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8eddbf_a0e402c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-06T18:05:30Z",
+      "side": 1,
+      "message": "Again, I recognize this is a cherry pick, but vendorhook submissions need to explain the actual issue that necessitates them being added in this request, not just that \"vendors can do things\". \n\nMy usual request is:\n1) What is the problem seen with kernels when this vendorhook doesn\u0027t exist?\n2) What is some quantification of benefit derived from adding the vh?\n3) What might be needed to be addressed upstream to resolve the need for this vendorhook so it can be removed?",
+      "revId": "5e8349ad20bf084edcdcf521b65d95f29ef172f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a54954_4bfc804e",
+        "filename": "fs/exec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-06T18:05:30Z",
+      "side": 1,
+      "message": "So, this is adding a third tracepoint to this small function. Can you explain why trace_task_rename isn\u0027t sufficient in the commit message?",
+      "revId": "5e8349ad20bf084edcdcf521b65d95f29ef172f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
