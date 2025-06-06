@@ -4074,6 +4074,33 @@ bool cpus_share_cache(int this_cpu, int that_cpu)
 static inline bool ttwu_queue_cond(struct task_struct *p, int cpu)
 {
 	/*
+<<<<<<< HEAD   (cb3571 ANDROID: scsi: ufs: add UFSHCD_ANDROID_QUIRK_NO_IS_READ_ON_H)
+||||||| BASE
+	 * The BPF scheduler may depend on select_task_rq() being invoked during
+	 * wakeups. In addition, @p may end up executing on a different CPU
+	 * regardless of what happens in the wakeup path making the ttwu_queue
+	 * optimization less meaningful. Skip if on SCX.
+	 */
+	if (task_on_scx(p))
+		return false;
+
+	/*
+=======
+	 * The BPF scheduler may depend on select_task_rq() being invoked during
+	 * wakeups. In addition, @p may end up executing on a different CPU
+	 * regardless of what happens in the wakeup path making the ttwu_queue
+	 * optimization less meaningful. Skip if on SCX.
+	 */
+	if (task_on_scx(p))
+		return false;
+
+#ifdef CONFIG_SMP
+	if (p->sched_class == &stop_sched_class)
+		return false;
+#endif
+
+	/*
+>>>>>>> CHANGE (4d9c22 FROMLIST: sched: Fix migrate_swap() vs. hotplug)
 	 * Do not complicate things with the async wake_list while the CPU is
 	 * in hotplug state.
 	 */
