@@ -16,6 +16,24 @@
       "message": "Delete",
       "revId": "ec8df0602a98ebf858cfb0f8c7d0d6437c9b7554",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07850811_777cb050",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-06-06T18:17:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7f3d84db_b7594fdc",
+      "revId": "ec8df0602a98ebf858cfb0f8c7d0d6437c9b7554",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
