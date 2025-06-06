@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac9ca8e6_f9a41538",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-06-06T10:26:35Z",
+      "side": 1,
+      "message": "Why is this needed now, in this old, stable, release branch?  This should not be an issue here at all.",
+      "revId": "08bc14aaebcfd601010a8e225c6c0e30ad776066",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
