@@ -16,6 +16,24 @@
       "message": "Please abandon this patch and cherry-pick the version from android15-6.6 (aosp/3163700) so the Change-Id is preserved.",
       "revId": "feb3c45d964dcd16c040db79b9645535b096f271",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f95530_2f3ddc2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3551534
+      },
+      "writtenOn": "2025-06-06T03:44:25Z",
+      "side": 1,
+      "message": "ok, please check: https://android-review.googlesource.com/c/kernel/common/+/3655796",
+      "parentUuid": "19b6cb27_2ba2df06",
+      "revId": "feb3c45d964dcd16c040db79b9645535b096f271",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
