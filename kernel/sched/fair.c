@@ -96,8 +96,17 @@ unsigned int sysctl_sched_tunable_scaling = SCHED_TUNABLESCALING_LOG;
  *
  * (default: 0.70 msec * (1 + ilog(ncpus)), units: nanoseconds)
  */
+<<<<<<< HEAD   (d1fc2286a5a2815948f6ed96b4444bcfb4b90727 ANDROID: GKI: Update symbol list for honor)
 unsigned int sysctl_sched_base_slice			= 700000ULL;
 static unsigned int normalized_sysctl_sched_base_slice	= 700000ULL;
+||||||| BASE   (5b56ab949aab438682f136ea827c46b6829da3af ANDROID: sched: Add vendor hook for util_fits_cpu)
+unsigned int sysctl_sched_base_slice			= 750000ULL;
+static unsigned int normalized_sysctl_sched_base_slice	= 750000ULL;
+=======
+unsigned int sysctl_sched_base_slice			= 750000ULL;
+EXPORT_SYMBOL_GPL(sysctl_sched_base_slice);
+static unsigned int normalized_sysctl_sched_base_slice	= 750000ULL;
+>>>>>>> CHANGE (dc7c02e14314a58593e0e48acd54fb7ada2ac552 ANDROID: Export symbols for vendor hooks)
 
 /*
  * After fork, child runs first. If set to 0 (default) then
