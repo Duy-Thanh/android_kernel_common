@@ -43,6 +43,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c629f57e_4c0d9baa",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-06-06T21:21:47Z",
+      "side": 1,
+      "message": "https://github.com/PaulLawrenceGoogle/fuse-bpf/tree/fuse-bpf-dev has code that has this refactored into fuse_copy_args. Some of that may be useful here",
+      "range": {
+        "startLine": 2192,
+        "startChar": 0,
+        "endLine": 2203,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e44c2b64_ad748921",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/fuse/dev.c",
+              "range": {
+                "startLine": 2099,
+                "startChar": 0,
+                "endLine": 2099,
+                "endChar": 0
+              },
+              "replacement": "\nstatic int fuse_handle_backing_file(struct fuse_req *req)\n{\n\tint err \u003d 0;\n\n\tif (req-\u003ein.h.opcode \u003d\u003d FUSE_LOOKUP \u0026\u0026\n\t\t\treq-\u003eargs-\u003eout_args[1].size \u003d\u003d\n\t\t\tsizeof(struct fuse_entry_backing_out)) {\n\t\tstruct fuse_entry_backing_out *febo \u003d\n\t\t\t(struct fuse_entry_backing_out *)\n\t\t\t\treq-\u003eargs-\u003eout_args[1].value;\n\t\tstruct fuse_entry_backing *feb \u003d\n\t\t\tcontainer_of(febo, struct fuse_entry_backing, out);\n\n\t\tfeb-\u003ebacking_file \u003d fget(febo-\u003ebacking_fd);\n\t\tif (!feb-\u003ebacking_file)\n\t\t\terr \u003d -EBADFD;\n\t}\n\n\treturn err;\n}\n"
+            },
+            {
+              "path": "fs/fuse/dev.c",
+              "range": {
+                "startLine": 2192,
+                "startChar": 0,
+                "endLine": 2205,
+                "endChar": 0
+              },
+              "replacement": "\tif (!err)\n\t\terr \u003d fuse_handle_backing_file(req);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c3b57c776c1a45db1af573e8df4e7d26dcba815f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9305b584_3f54f730",
         "filename": "fs/fuse/dir.c",
         "patchSetId": 1
