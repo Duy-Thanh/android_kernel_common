@@ -50,6 +50,46 @@
       "message": "Now in this case it would be good to return this error to the host, to let it somehow handle it and abort IOMMU initialization and thus abort pKVM initialization? (Back to our recent discussion about ensuring failing pKVM initialization unless we fully enabled protection.)\n\n(I know the legacy implementation has the same problem, but we don\u0027t care as much about quality of the legacy implementation?)",
       "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e02d27a8_b63e6c7a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-06T18:28:52Z",
+      "side": 1,
+      "message": "__pkvm_host_donate_hyp() may fail too?",
+      "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b38753a8_bd3cf3ec",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-06T18:28:52Z",
+      "side": 1,
+      "message": "We don\u0027t really? We don\u0027t check for CONTEXT_TT_DEV_IOTLB.",
+      "range": {
+        "startLine": 132,
+        "startChar": 23,
+        "endLine": 132,
+        "endChar": 54
+      },
+      "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
