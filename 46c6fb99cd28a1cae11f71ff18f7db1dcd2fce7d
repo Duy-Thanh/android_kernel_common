@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cd4af45_4f440b96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2025-06-06T15:51:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb836c62_f84eecb6",
+      "revId": "46c6fb99cd28a1cae11f71ff18f7db1dcd2fce7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8aba9c6_2d048e8d",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-06-05T17:44:21Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Buildifier: File is not formatted. Run `buildifier modules.bzl` to format the file, or apply the suggested fix.\n\nAnalyzer Description: Check formats of Bazel definitions.\nOwner: kleaf@google.com\n\nFile is not formatted. Run `buildifier modules.bzl` to format the file, or apply the suggested fix.",
+      "revId": "46c6fb99cd28a1cae11f71ff18f7db1dcd2fce7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a57027_7531c664",
+        "filename": "modules.bzl",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2025-06-06T15:51:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80275940_23f8d833",
       "revId": "46c6fb99cd28a1cae11f71ff18f7db1dcd2fce7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
