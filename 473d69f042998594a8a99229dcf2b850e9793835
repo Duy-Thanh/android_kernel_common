@@ -16,6 +16,24 @@
       "message": "Why not upstream this change?",
       "revId": "473d69f042998594a8a99229dcf2b850e9793835",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f2914b7_67a3e23b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2025-06-06T23:00:43Z",
+      "side": 1,
+      "message": "We have pushed this change to mailing list: \nhttps://patchwork.kernel.org/patch/14109252  Link: https://lore.kernel.org/all/20250606210230.340803-2-george.d.sworo@intel.com/",
+      "parentUuid": "91d215aa_d41e48d8",
+      "revId": "473d69f042998594a8a99229dcf2b850e9793835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
