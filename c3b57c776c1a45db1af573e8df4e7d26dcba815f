@@ -117,6 +117,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7c5f899_068482f8",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-06-06T21:53:26Z",
+      "side": 1,
+      "message": "iput returns immediately if the passed inode is null",
+      "range": {
+        "startLine": 206,
+        "startChar": 1,
+        "endLine": 207,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d2eeabf0_270bacef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/fuse/inode.c",
+              "range": {
+                "startLine": 206,
+                "startChar": 0,
+                "endLine": 208,
+                "endChar": 0
+              },
+              "replacement": "\tiput(fi-\u003ebacking_inode);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c3b57c776c1a45db1af573e8df4e7d26dcba815f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ad6057d_c319dd14",
         "filename": "fs/fuse/inode.c",
         "patchSetId": 1
