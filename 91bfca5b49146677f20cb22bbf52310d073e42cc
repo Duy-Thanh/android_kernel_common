@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa61672f_79f2142a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-06T19:16:14Z",
+      "side": 1,
+      "message": "Looking more at this... We don\u0027t really support setting the root table more than once (since we only call activate_iommu() once), yet we allow the host to change root_pa, and even to undonate the root table?\n\nI don\u0027t think we need to support changing the root table, so it would be much simpler if we just explicitly disallowed calling PKVM_HC_IOMMU_SET_RTA more than once? (Maybe even renamed it to PKVM_HC_IOMMU_ACTIVATE? and/or let it enable translation right away, as I suggested in another comment?)",
+      "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3898aca1_9e7edb2e",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 5
@@ -65,6 +82,23 @@
       "writtenOn": "2025-06-06T18:28:52Z",
       "side": 1,
       "message": "__pkvm_host_donate_hyp() may fail too?",
+      "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798a74e1_af37cd61",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-06T19:16:14Z",
+      "side": 1,
+      "message": "Maybe we should do some basic sanitization of the context entry value before letting the host set it?",
       "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
