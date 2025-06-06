@@ -117,6 +117,217 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb2f22f7_33f7668e",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-06-06T22:03:59Z",
+      "side": 1,
+      "message": "Does the style guide prefer { 0 };",
+      "range": {
+        "startLine": 428,
+        "startChar": 41,
+        "endLine": 428,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0942d849_38c69740",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 428,
+                "startChar": 0,
+                "endLine": 429,
+                "endChar": 0
+              },
+              "replacement": "\tstruct fuse_entry_backing backing_arg \u003d { 0 };\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 572,
+                "startChar": 0,
+                "endLine": 573,
+                "endChar": 0
+              },
+              "replacement": "\tvoid *ptr \u003d NULL;\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 658,
+                "startChar": 0,
+                "endLine": 659,
+                "endChar": 0
+              },
+              "replacement": "\tkgid_t kgid;\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 664,
+                "startChar": 0,
+                "endLine": 664,
+                "endChar": 0
+              },
+              "replacement": "\tkgid \u003d dir-\u003ei_gid;\n\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 1722,
+                "startChar": 0,
+                "endLine": 1725,
+                "endChar": 0
+              },
+              "replacement": "\t\t.num_folios\t\u003d 1,\n\t\t.folios\t\u003d \u0026folio,\n\t\t.descs\t\u003d \u0026desc,\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 1758,
+                "startChar": 0,
+                "endLine": 1758,
+                "endChar": 0
+              },
+              "replacement": "\tconst char *ret \u003d ERR_PTR(-EIO);\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 1766,
+                "startChar": 0,
+                "endLine": 1767,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 1773,
+                "startChar": 0,
+                "endLine": 1774,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto out_err_folio;\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 1778,
+                "startChar": 0,
+                "endLine": 1779,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto out_err_folio;\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 1783,
+                "startChar": 0,
+                "endLine": 1784,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d folio_address(folio);\n\nout_err_folio:\n\tif (IS_ERR(ret))\n\t\tret \u003d ERR_PTR(err);\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 1786,
+                "startChar": 0,
+                "endLine": 1787,
+                "endChar": 0
+              },
+              "replacement": "\treturn ret;\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 2004,
+                "startChar": 0,
+                "endLine": 2005,
+                "endChar": 0
+              },
+              "replacement": "\tstruct fuse_attr_out outarg \u003d { 0 };\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 2007,
+                "startChar": 0,
+                "endLine": 2008,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 2044,
+                "startChar": 0,
+                "endLine": 2045,
+                "endChar": 0
+              },
+              "replacement": "\tstruct fuse_attr_out outarg \u003d { 0 };\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 2113,
+                "startChar": 0,
+                "endLine": 2114,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 2210,
+                "startChar": 0,
+                "endLine": 2210,
+                "endChar": 0
+              },
+              "replacement": "\tif (!attr)\n\t\treturn 0;\n\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 2337,
+                "startChar": 0,
+                "endLine": 2338,
+                "endChar": 0
+              },
+              "replacement": "static const struct inode_operations fuse_symlink_inode_operations \u003d {\t\n"
+            },
+            {
+              "path": "fs/fuse/dir.c",
+              "range": {
+                "startLine": 2385,
+                "startChar": 0,
+                "endLine": 2385,
+                "endChar": 0
+              },
+              "replacement": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c3b57c776c1a45db1af573e8df4e7d26dcba815f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7c5f899_068482f8",
         "filename": "fs/fuse/inode.c",
         "patchSetId": 1
