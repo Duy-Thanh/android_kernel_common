@@ -267,6 +267,24 @@
       "parentUuid": "e2e83ffc_88714437",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be088c86_0d7e957b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-06-06T06:39:02Z",
+      "side": 1,
+      "message": "This is not something to do in normal kernels, only do it in debug kernel builds please.",
+      "parentUuid": "eac1e74b_1d1de2b3",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
