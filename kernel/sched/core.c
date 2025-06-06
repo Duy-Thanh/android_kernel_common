@@ -4074,6 +4074,33 @@ bool cpus_share_cache(int this_cpu, int that_cpu)
 static inline bool ttwu_queue_cond(struct task_struct *p, int cpu)
 {
 	/*
+<<<<<<< HEAD   (cc8b08 ANDROID: ABI: Update pixel symbol list)
+||||||| BASE
+	 * The BPF scheduler may depend on select_task_rq() being invoked during
+	 * wakeups. In addition, @p may end up executing on a different CPU
+	 * regardless of what happens in the wakeup path making the ttwu_queue
+	 * optimization less meaningful. Skip if on SCX.
+	 */
+	if (task_on_scx(p))
+		return false;
+
+	/*
+=======
+	 * The BPF scheduler may depend on select_task_rq() being invoked during
+	 * wakeups. In addition, @p may end up executing on a different CPU
+	 * regardless of what happens in the wakeup path making the ttwu_queue
+	 * optimization less meaningful. Skip if on SCX.
+	 */
+	if (task_on_scx(p))
+		return false;
+
+#ifdef CONFIG_SMP
+	if (p->sched_class == &stop_sched_class)
+		return false;
+#endif
+
+	/*
+>>>>>>> CHANGE (3da7ac FROMLIST: sched: Fix migrate_swap() vs. hotplug)
 	 * Do not complicate things with the async wake_list while the CPU is
 	 * in hotplug state.
 	 */
