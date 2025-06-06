@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0bd328e_e57177ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-06-06T06:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c730ae8_b64bbb32",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 9
+      },
+      "revId": "27e3ab001c87fc001c21a0c46fb5c63cc123ca3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3482f3a5_5717fad9",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-06-06T02:23:06Z",
       "side": 1,
       "message": "Why this needs to move?",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 20
+      },
+      "revId": "27e3ab001c87fc001c21a0c46fb5c63cc123ca3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32188ff_770deeb6",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-06-06T06:53:01Z",
+      "side": 1,
+      "message": "I guess whomever added that did so manually, while I used the menuconfig bazel command, which has its own way of sorting it. To avoid any confusion, I just left it as is.",
+      "parentUuid": "3482f3a5_5717fad9",
       "range": {
         "startLine": 142,
         "startChar": 0,
