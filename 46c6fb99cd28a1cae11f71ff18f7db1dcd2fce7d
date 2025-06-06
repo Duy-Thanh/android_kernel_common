@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "190c5b80_20fcb2d9",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2025-06-06T22:59:50Z",
+      "side": 1,
+      "message": "For now, I have moved it to vendor config and it built fine. I will abandon this change.",
+      "parentUuid": "e8aba9c6_2d048e8d",
+      "revId": "46c6fb99cd28a1cae11f71ff18f7db1dcd2fce7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80275940_23f8d833",
         "filename": "modules.bzl",
         "patchSetId": 5
