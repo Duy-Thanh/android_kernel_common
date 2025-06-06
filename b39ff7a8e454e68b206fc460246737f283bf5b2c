@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83add14_12f54789",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-06T18:21:33Z",
+      "side": 1,
+      "message": "This description still needs a little extra detail:\n\n1) Can you provide more detail as to the issue that necessitated the vendorhook being added?\n2) Do we have some metric for the benefit that it brings?\n3) Is any of Qais\u0027 upstream work trying to address this problem?",
+      "revId": "b39ff7a8e454e68b206fc460246737f283bf5b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
