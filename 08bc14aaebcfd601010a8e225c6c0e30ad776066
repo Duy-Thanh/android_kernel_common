@@ -16,6 +16,24 @@
       "message": "Why is this needed now, in this old, stable, release branch?  This should not be an issue here at all.",
       "revId": "08bc14aaebcfd601010a8e225c6c0e30ad776066",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "facbb7b8_56adae7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2041020
+      },
+      "writtenOn": "2025-06-06T11:19:00Z",
+      "side": 1,
+      "message": "We switched to MGLRU to achieve better performance. Some performance improvements need to be implemented through changes to the vendor hook, which is why these changes are necessary in this stable release branch.",
+      "parentUuid": "ac9ca8e6_f9a41538",
+      "revId": "08bc14aaebcfd601010a8e225c6c0e30ad776066",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
