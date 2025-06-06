@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93e0dbd3_cbe2bc55",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2025-06-06T22:12:15Z",
+      "side": 1,
+      "message": "This may need to move to an external location to be shared with other backing filesystems, but probably not needed for initial RFC",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "1b026d667c3ae48e3e8e3fbf2a4e40cda4c3e322",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
