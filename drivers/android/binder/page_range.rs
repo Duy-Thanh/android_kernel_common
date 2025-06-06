@@ -27,11 +27,11 @@ use kernel::{
     error::Result,
     ffi::{c_ulong, c_void},
     mm::{virt, Mm, MmWithUser},
-    new_mutex, new_spinlock,
+    new_spinlock,
     page::{Page, PAGE_SHIFT, PAGE_SIZE},
     prelude::*,
     str::CStr,
-    sync::{Mutex, SpinLock},
+    sync::SpinLock,
     task::Pid,
     types::ARef,
     types::{FromBytes, Opaque},
@@ -132,9 +132,6 @@ pub(crate) struct ShrinkablePageRange {
     pid: Pid,
     /// The mm for the relevant process.
     mm: ARef<Mm>,
-    /// Used to synchronize calls to `vm_insert_page` and `zap_page_range_single`.
-    #[pin]
-    mm_lock: Mutex<()>,
     /// Spinlock protecting changes to pages.
     #[pin]
     lock: SpinLock<Inner>,
@@ -158,9 +155,6 @@ struct Inner {
 
 unsafe impl Send for ShrinkablePageRange {}
 unsafe impl Sync for ShrinkablePageRange {}
-
-type StableMmGuard =
-    kernel::sync::lock::Guard<'static, (), kernel::sync::lock::mutex::MutexBackend>;
 
 /// An array element that describes the current state of a page.
 ///
@@ -261,7 +255,6 @@ impl ShrinkablePageRange {
             shrinker,
             pid: kernel::current!().pid(),
             mm: ARef::from(&**kernel::current!().mm().ok_or(ESRCH)?),
-            mm_lock <- new_mutex!((), "ShrinkablePageRange::mm"),
             lock <- new_spinlock!(Inner {
                 pages: ptr::null_mut(),
                 size: 0,
@@ -269,15 +262,6 @@ impl ShrinkablePageRange {
             }, "ShrinkablePageRange"),
             _pin: PhantomPinned,
         })
-    }
-
-    pub(crate) fn stable_trylock_mm(&self) -> Option<StableMmGuard> {
-        // SAFETY: This extends the duration of the reference. Since this call happens before
-        // `mm_lock` is taken in the destructor of `ShrinkablePageRange`, the destructor will block
-        // until the returned guard is dropped. This ensures that the guard is valid until dropped.
-        let mm_lock = unsafe { &*ptr::from_ref(&self.mm_lock) };
-
-        mm_lock.try_lock()
     }
 
     /// Register a vma with this page range. Returns the size of the region.
@@ -385,8 +369,18 @@ impl ShrinkablePageRange {
     #[cold]
     fn use_page_slow(&self, i: usize) -> Result<()> {
         let new_page = Page::alloc_page(GFP_KERNEL | __GFP_HIGHMEM | __GFP_ZERO)?;
-
-        let mm_mutex = self.mm_lock.lock();
+        // We use `mmput_async` when dropping the `mm` because `use_page_slow` is usually used from
+        // a remote process. If the call to `mmput` races with the process shutting down, then the
+        // caller of `use_page_slow` becomes responsible for cleaning up the `mm`, which doesn't
+        // happen until it returns to userspace. However, the caller might instead go to sleep and
+        // wait for the owner of the `mm` to wake it up, which doesn't happen because it's in the
+        // middle of a shutdown process that wont complete until the `mm` is dropped. This can
+        // amount to a deadlock.
+        //
+        // Using `mmput_async` avoids this, because then the `mm` cleanup is instead queued to a
+        // workqueue.
+        let mm = MmWithUser::into_mmput_async(self.mm.mmget_not_zero().ok_or(ESRCH)?);
+        let mmap_lock = mm.mmap_write_lock();
         let inner = self.lock.lock();
 
         // SAFETY: This pointer offset is in bounds.
@@ -409,35 +403,26 @@ impl ShrinkablePageRange {
         // Release the spinlock while we insert the page into the vma.
         drop(inner);
 
+        let vma = mmap_lock
+            .vma_lookup(vma_addr)
+            .and_then(virt::VmAreaRef::as_mixedmap_vma)
+            .ok_or(ESRCH)?;
+
         // No overflow since we stay in bounds of the vma.
         let user_page_addr = vma_addr + (i << PAGE_SHIFT);
-
-        // We use `mmput_async` when dropping the `mm` because `use_page_slow` is usually used from
-        // a remote process. If the call to `mmput` races with the process shutting down, then the
-        // caller of `use_page_slow` becomes responsible for cleaning up the `mm`, which doesn't
-        // happen until it returns to userspace. However, the caller might instead go to sleep and
-        // wait for the owner of the `mm` to wake it up, which doesn't happen because it's in the
-        // middle of a shutdown process that wont complete until the `mm` is dropped. This can
-        // amount to a deadlock.
-        //
-        // Using `mmput_async` avoids this, because then the `mm` cleanup is instead queued to a
-        // workqueue.
-        MmWithUser::into_mmput_async(self.mm.mmget_not_zero().ok_or(ESRCH)?)
-            .mmap_read_lock()
-            .vma_lookup(vma_addr)
-            .ok_or(ESRCH)?
-            .as_mixedmap_vma()
-            .ok_or(ESRCH)?
-            .vm_insert_page(user_page_addr, &new_page)
-            .inspect_err(|err| {
+        match vma.vm_insert_page(user_page_addr, &new_page) {
+            Ok(()) => {}
+            Err(err) => {
                 pr_warn!(
-                    "Failed to vm_insert_page({}): vma_addr:{} i:{} err:{:?}",
+                    "Error in insert_page({}): vma_addr:{} i:{} err:{:?}",
                     user_page_addr,
                     vma_addr,
                     i,
                     err
-                )
-            })?;
+                );
+                return Err(err);
+            }
+        }
 
         let inner = self.lock.lock();
 
@@ -445,12 +430,11 @@ impl ShrinkablePageRange {
         // can be written to since we hold the lock.
         //
         // We released and reacquired the spinlock since we checked that the page is null, but we
-        // always hold the mm_lock mutex when setting the page to a non-null value, so it's not
+        // always hold the mmap write lock when setting the page to a non-null value, so it's not
         // possible for someone else to have changed it since our check.
         unsafe { PageInfo::set_page(page_info, new_page) };
 
         drop(inner);
-        drop(mm_mutex);
 
         Ok(())
     }
@@ -708,7 +692,6 @@ unsafe extern "C" fn rust_shrink_free_page(
     let page_index;
     let mm;
     let mmap_read;
-    let mm_mutex;
     let vma_addr;
 
     {
@@ -718,11 +701,6 @@ unsafe extern "C" fn rust_shrink_free_page(
 
         mm = match range.mm.mmget_not_zero() {
             Some(mm) => MmWithUser::into_mmput_async(mm),
-            None => return LRU_SKIP,
-        };
-
-        mm_mutex = match range.stable_trylock_mm() {
-            Some(guard) => guard,
             None => return LRU_SKIP,
         };
 
@@ -757,8 +735,7 @@ unsafe extern "C" fn rust_shrink_free_page(
         crate::trace::trace_unmap_kernel_end(pid, page_index);
 
         // From this point on, we don't access this PageInfo or ShrinkablePageRange again, because
-        // they can be freed at any point after we unlock `lru_lock`. This is with the exception of
-        // `mm_mutex` which is kept alive by holding the lock.
+        // they can be freed at any point after we unlock `lru_lock`.
     }
 
     // SAFETY: The lru lock is locked when this method is called.
@@ -772,7 +749,6 @@ unsafe extern "C" fn rust_shrink_free_page(
     }
 
     drop(mmap_read);
-    drop(mm_mutex);
     drop(mm);
     drop(page);
 
