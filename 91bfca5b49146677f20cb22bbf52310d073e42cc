@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ddef4b2_0e8cc597",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-06T16:24:55Z",
+      "side": 1,
+      "message": "We are not really using this (neither we do nor the host does), right? Although it might not hurt to still do this, \"for consistency\"... \n\n...Also general thoughts: so it looks like we are still relying on emulating various registers (not this DMA_GSTS_RTPS but others). I.e. in fact we still have a hybrid of PV and emulation. Do you consider it a persistent approach, or rather a temporary one and eventually we should eliminate emulation and let the host driver consciously avoid using those particular registers/bits when pKVM is enabled, relying on the PV interfaces instead? (I\u0027m not fully sure myself if that would be worth doing, just wondering.)\n\nFor instance, pKVM in fact is relying on the IOMMU driver init function not just to make the PKVM_HC_IOMMU_SET_RTA call but also to write the emulated DMA_GCMD_TE bit to let pKVM enable translation. Until then, DMA protection is not enabled. We could instead just enable translation already at the moment of PKVM_HC_IOMMU_SET_RTA, in activate_iommu(), then the DMA_GCMD_TE emulation would not be needed?",
+      "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca672d07_3c851a86",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-06T16:24:55Z",
+      "side": 1,
+      "message": "We can use host_gpa2hpa(), basically just for \"documentation purposes\", and then no need for such comments?",
+      "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3898aca1_9e7edb2e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-06T16:24:55Z",
+      "side": 1,
+      "message": "Now in this case it would be good to return this error to the host, to let it somehow handle it and abort IOMMU initialization and thus abort pKVM initialization? (Back to our recent discussion about ensuring failing pKVM initialization unless we fully enabled protection.)\n\n(I know the legacy implementation has the same problem, but we don\u0027t care as much about quality of the legacy implementation?)",
+      "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
