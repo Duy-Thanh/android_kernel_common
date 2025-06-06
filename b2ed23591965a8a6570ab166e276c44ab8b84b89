@@ -249,6 +249,24 @@
       "parentUuid": "eb687208_84289ebb",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac1e74b_1d1de2b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-06-06T02:09:50Z",
+      "side": 1,
+      "message": "We think that implementing this in fs/f2fs/iostat.c may be not fit.\nOur intention is to collect latency distributions across these operational stages - specifically quantifying operations within ranges like 0-100μs, 100-200μs, and similar buckets.\nThis may introduce modest computational overhead and additional memory allocation costs.\nwe propose keep this functionality disabled by default and enable it selectively during anomaly investigation scenarios",
+      "parentUuid": "e2e83ffc_88714437",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
