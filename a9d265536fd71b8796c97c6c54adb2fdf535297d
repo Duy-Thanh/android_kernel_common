@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f264a6e6_a2ac8d85",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:03:06Z",
+      "side": 1,
+      "message": "It is still only used in this file?",
+      "fixSuggestions": [
+        {
+          "fixId": "2dce7259_ded0652e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+              "range": {
+                "startLine": 1057,
+                "startChar": 0,
+                "endLine": 1058,
+                "endChar": 0
+              },
+              "replacement": "static void iommu_flush_iotlb(struct pkvm_iommu *iommu, struct iotlb_flush_data *data)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a9d265536fd71b8796c97c6c54adb2fdf535297d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
