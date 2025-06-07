@@ -178,6 +178,7 @@ def get_gki_modules_list(arch = None, map_each = None, allow_select = None):
 
     if allow_select:
         gki_modules_list += select({
+            "//build/kernel/kleaf:kasan_sw_tags_is_true": [],
             "//conditions:default": _apply(map_each, _RUST_MODULES),
         })
     else:
@@ -238,7 +239,10 @@ def declare_common_kernel_in_tree_modules(kernel_build, arch, **kwargs):
     for module in _RUST_MODULES:
         kernel_build_output(
             name = kernel_build + "/" + module,
-            kernel_build = kernel_build,
+            kernel_build = select({
+                "//build/kernel/kleaf:kasan_sw_tags_is_true": None,
+                "//conditions:default": kernel_build,
+            }),
             out = module,
             **kwargs
         )
@@ -246,7 +250,10 @@ def declare_common_kernel_in_tree_modules(kernel_build, arch, **kwargs):
         if module != basename:
             kernel_build_output(
                 name = kernel_build + "/" + basename,
-                kernel_build = kernel_build,
+                kernel_build = select({
+                    "//build/kernel/kleaf:kasan_sw_tags_is_true": None,
+                    "//conditions:default": kernel_build,
+                }),
                 out = module,
                 **kwargs
             )
