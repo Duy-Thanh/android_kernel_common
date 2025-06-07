@@ -124,6 +124,23 @@
       },
       "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97cf74e_60e61147",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T11:35:39Z",
+      "side": 1,
+      "message": "We should update it atomically (e.g. to avoid having a time window when the translation type is CONTEXT_TT_PASS_THROUGH, and so on)?\n\nOr just clear the context entry first, before updating it, and make sure that the Present field is not set earlier than other fields (similarly to what the host driver does)? (as per VT-d spec section 6.2.2.1)\n\nBTW I\u0027m not sure how the host driver ensures memory ordering there (e.g. in domain_context_mapping_one() between context_clear_entry() and context_set_present()). In pKVM we\u0027ve been ensuring it using WRITE_ONCE() (in fact we are using it a bit excessively), while the host doesn\u0027t seem to have any barriers there at all?",
+      "revId": "91bfca5b49146677f20cb22bbf52310d073e42cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
