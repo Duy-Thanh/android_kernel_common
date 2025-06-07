@@ -63,6 +63,24 @@
       "message": "This link is for v3 of the patch, when there is a v4 available (https://lwn.net/Articles/1018349/).\n\nFurther, this CL does not even match the patch in the link. I haven\u0027t compared everything, but to start with the commit messages are different and `drivers/platform/x86/intel/pmc/Kconfig` is missing changes.\n\n1. Pull in the latest version of the patch.\n2. If there are merge conflicts that need to be resolved, the commit message subject needs the `BACKPORT` tag added as well.",
       "revId": "ae0dbf3f32e2188daed8e6b98b3e5301d1780a3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4457c89c_4baf15e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2025-06-07T00:32:50Z",
+      "side": 1,
+      "message": "@Tim Van Patten, The latest version of this patch part of linux upstream now. https://github.com/torvalds/linux/commit/b5d46539626833bf3bdd5a2295e85ec1c2a76a78#diff-5c5e0c0a952e890f01011c23c1242e42703c6bda120bfec9b7dfc79c2914d189 I have cherry-picked upstream patch, resolved merge conflicts, compilation errors and added BACKPORT tag and re-pushed it. On this process, I had to pull in few more dependency patches as well.",
+      "parentUuid": "0aac96ec_1bc207f4",
+      "revId": "ae0dbf3f32e2188daed8e6b98b3e5301d1780a3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
