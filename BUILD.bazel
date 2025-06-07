@@ -33,6 +33,7 @@ load(
 load(":abi.bzl", "cc_binary_with_abi")
 load(
     ":modules.bzl",
+    "declare_common_kernel_in_tree_modules",
     "get_gki_modules_list",
     "get_gki_protected_modules_list",
     "get_kunit_modules_list",
@@ -94,7 +95,10 @@ write_file(
     name = "gki_system_dlkm_modules_arm64",
     out = "gki/aarch64/system_dlkm_modules",
     # Do not built kunit modules into system_dlkm
-    content = get_gki_modules_list("arm64") + [
+    content = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + [
         # Ensure new line at the end.
         "",
     ],
@@ -115,7 +119,10 @@ write_file(
     name = "gki_system_dlkm_modules_x86_64",
     out = "gki/x86_64/system_dlkm_modules",
     # Do not built kunit modules into system_dlkm
-    content = get_gki_modules_list("x86_64") + [
+    content = get_gki_modules_list(
+        "x86_64",
+        allow_select = True,
+    ) + [
         # Ensure new line at the end.
         "",
     ],
@@ -245,6 +252,7 @@ common_kernel(
         ":test_mappings_zip",
         ":tests_zip_arm64",
     ],
+    generate_out_targets = False,
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     kcflags = COMMON_KCFLAGS,
@@ -253,11 +261,19 @@ common_kernel(
     kmi_symbol_list_strict_mode = True,
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     makefile = ":Makefile",
-    module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
+    module_implicit_outs = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + get_kunit_modules_list("arm64"),
     protected_module_names_list = ":gki_aarch64_protected_module_names",
     system_dlkm_extra_archive_files = [":generate_gki_module_info_arm64"],
     trim_nonlisted_kmi = True,
     visibility = ["//visibility:public"],
+)
+
+declare_common_kernel_in_tree_modules(
+    arch = "arm64",
+    kernel_build = "kernel_aarch64",
 )
 
 common_kernel(
@@ -273,6 +289,7 @@ common_kernel(
         ":test_mappings_zip",
         ":tests_zip_arm64",
     ],
+    generate_out_targets = False,
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     kcflags = COMMON_KCFLAGS,
@@ -282,12 +299,20 @@ common_kernel(
     kmi_symbol_list_strict_mode = True,
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     makefile = ":Makefile",
-    module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
+    module_implicit_outs = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + get_kunit_modules_list("arm64"),
     page_size = "16k",
     protected_module_names_list = ":gki_aarch64_protected_module_names",
     system_dlkm_extra_archive_files = [":generate_gki_module_info_arm64"],
     trim_nonlisted_kmi = True,
     visibility = ["//visibility:public"],
+)
+
+declare_common_kernel_in_tree_modules(
+    arch = "arm64",
+    kernel_build = "kernel_aarch64_16k",
 )
 
 common_kernel(
@@ -301,6 +326,7 @@ common_kernel(
     ddk_module_headers = [":all_headers_aarch64"],
     defconfig = "arch/arm64/configs/gki_defconfig",
     extra_dist = [],
+    generate_out_targets = False,
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     kcflags = COMMON_KCFLAGS,
@@ -310,12 +336,20 @@ common_kernel(
     kmi_symbol_list_strict_mode = False,
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     makefile = ":Makefile",
-    module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
+    module_implicit_outs = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + get_kunit_modules_list("arm64"),
     pre_defconfig_fragments = ["arch/arm64/configs/tv_gki.fragment"],
     protected_module_names_list = ":gki_aarch64_protected_module_names",
     system_dlkm_extra_archive_files = [":generate_gki_module_info_arm64"],
     trim_nonlisted_kmi = True,
     visibility = ["//visibility:public"],
+)
+
+declare_common_kernel_in_tree_modules(
+    arch = "arm64",
+    kernel_build = "kernel_aarch64_tv",
 )
 
 fail_rule(
@@ -341,6 +375,7 @@ common_kernel(
         ":test_mappings_zip",
         ":tests_zip_arm64",
     ],
+    generate_out_targets = False,
     gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     kcflags = COMMON_KCFLAGS,
@@ -350,11 +385,19 @@ common_kernel(
     kmi_symbol_list_strict_mode = True,
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     makefile = ":Makefile",
-    module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
+    module_implicit_outs = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + get_kunit_modules_list("arm64"),
     protected_module_names_list = ":gki_aarch64_protected_module_names",
     system_dlkm_extra_archive_files = [":generate_gki_module_info_arm64"],
     trim_nonlisted_kmi = True,
     visibility = ["//visibility:public"],
+)
+
+declare_common_kernel_in_tree_modules(
+    arch = "arm64",
+    kernel_build = "kernel_aarch64_autofdo",
 )
 
 fail_rule(
@@ -377,14 +420,23 @@ common_kernel(
         ":test_mappings_zip",
         ":tests_zip_x86_64",
     ],
+    generate_out_targets = False,
     gki_boot_img_sizes = _GKI_X86_64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_x86_64",
     kcflags = COMMON_KCFLAGS,
     make_goals = _GKI_X86_64_MAKE_GOALS,
     makefile = ":Makefile",
-    module_implicit_outs = get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
+    module_implicit_outs = get_gki_modules_list(
+        "x86_64",
+        allow_select = True,
+    ) + get_kunit_modules_list("x86_64"),
     system_dlkm_extra_archive_files = [":generate_gki_module_info_x86_64"],
     visibility = ["//visibility:public"],
+)
+
+declare_common_kernel_in_tree_modules(
+    arch = "x86_64",
+    kernel_build = "kernel_x86_64",
 )
 
 alias(
@@ -1077,6 +1129,7 @@ kernel_build(
     build_config = "build.config.rockpi4",
     defconfig = "arch/arm64/configs/gki_defconfig",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
+    generate_out_targets = False,
     kmi_symbol_list_strict_mode = False,
     make_goals = [
         "Image",
@@ -1084,7 +1137,10 @@ kernel_build(
         "rk3399-rock-pi-4b.dtb",
     ],
     makefile = ":Makefile",
-    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,
+    module_outs = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,
     pre_defconfig_fragments = ["arch/arm64/configs/rockpi4_gki.fragment"],
     trim_nonlisted_kmi = False,
     visibility = ["//visibility:private"],
@@ -1106,6 +1162,7 @@ kernel_build(
     arch = "arm64",
     build_config = "build.config.rockpi4",
     dtstree = "//common-modules/virtual-device:rockpi4_dts",
+    generate_out_targets = False,
     kmi_symbol_list_strict_mode = False,
     make_goals = [
         "Image",
@@ -1113,7 +1170,10 @@ kernel_build(
         "rk3399-rock-pi-4b.dtb",
     ],
     makefile = ":Makefile",
-    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS,
+    module_outs = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS,
     trim_nonlisted_kmi = False,
     visibility = ["//visibility:private"],
 )
@@ -1294,6 +1354,7 @@ kernel_build(
     ],
     arch = "arm64",
     defconfig = "arch/arm64/configs/gki_defconfig",
+    generate_out_targets = False,
     make_goals = [
         "Image",
         "modules",
@@ -1303,7 +1364,10 @@ kernel_build(
         "amlogic/meson-sm1-khadas-vim3l.dtb",
     ],
     makefile = ":Makefile",
-    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _AMLOGIC_MODULE_OUTS + _AMLOGIC_WATCHDOG_MODULE_OUTS,
+    module_outs = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + get_kunit_modules_list("arm64") + _AMLOGIC_MODULE_OUTS + _AMLOGIC_WATCHDOG_MODULE_OUTS,
     pre_defconfig_fragments = ["arch/arm64/configs/amlogic_gki.fragment"],
     visibility = ["//visibility:private"],
 )
@@ -1325,6 +1389,7 @@ kernel_build(
     ],
     arch = "arm64",
     defconfig = "arch/arm64/configs/gki_defconfig",
+    generate_out_targets = False,
     make_goals = [
         "Image",
         "modules",
@@ -1334,7 +1399,10 @@ kernel_build(
         "amlogic/meson-sm1-khadas-vim3l.dtb",
     ],
     makefile = ":Makefile",
-    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _AMLOGIC_MODULE_OUTS,
+    module_outs = get_gki_modules_list(
+        "arm64",
+        allow_select = True,
+    ) + get_kunit_modules_list("arm64") + _AMLOGIC_MODULE_OUTS,
     pre_defconfig_fragments = ["arch/arm64/configs/amlogic_gki.fragment"],
     visibility = ["//visibility:private"],
 )

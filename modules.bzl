@@ -6,6 +6,12 @@ This module contains a full list of kernel modules
  compiled by GKI.
 """
 
+load("@bazel_skylib//lib:paths.bzl", "paths")
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "kernel_build_output",
+)
+
 _COMMON_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/block/virtio_blk.ko",
@@ -98,7 +104,6 @@ _ARM_GKI_MODULES_LIST = [
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "arch/arm64/geniezone/gzvm.ko",
-    "drivers/android/rust_binder.ko",
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
@@ -129,7 +134,7 @@ def _apply(map_each, lst):
     return ret
 
 # buildifier: disable=unnamed-macro
-def get_gki_modules_list(arch = None, map_each = None):
+def get_gki_modules_list(arch = None, map_each = None, allow_select = None):
     """ Provides the list of GKI modules.
 
     Args:
@@ -137,9 +142,21 @@ def get_gki_modules_list(arch = None, map_each = None):
         map_each: A function that takes the module name as parameter, and returns
             the mapped value. If the module should be filtered out, the function
             should return None.
+        allow_select: If True, returned value may be a select() expression. The
+            caller should not interpret the value at the macro expansion phase,
+            and just pass the value to `kernel_build(module_outs=)` or
+            `kernel_build(moduel_implicit_outs=)`.
+
+            When `allow_select` is True and you are passing the return value
+            to `kernel_build(module_outs=)` or
+            `kernel_build(moduel_implicit_outs=)`, you should also set
+            `kernel_build(generate_out_targets = False)`. Use the
+            `kernel_build_output()` macro if you need the labels to the
+            individual modules.
 
     Returns:
-        The list of GKI modules for the given |arch|.
+        The list of GKI modules for the given |arch|. If `allow_select` is
+        `True`, returned value may be a select() expression.
     """
     if not arch in ("arm64", "x86_64", "arm", "i386"):
         fail("{}: arch {} not supported. Use one of [arm, arm64, i386, x86_64]".format(
@@ -159,8 +176,89 @@ def get_gki_modules_list(arch = None, map_each = None):
     elif arch == "x86_64":
         gki_modules_list += _apply(map_each, _X86_64_GKI_MODULES_LIST)
 
-    gki_modules_list += _apply(map_each, _RUST_MODULES)
+    if allow_select:
+        gki_modules_list += select({
+            "//conditions:default": _apply(map_each, _RUST_MODULES),
+        })
+    else:
+        # buildifier: disable=print
+        print("""\
+WARNING: {}: get_gki_modules_list(allow_select = False) will no longer be
+supported. Set it to True, and optionally use the `map_each` argument if you
+need to post-process the list.
+
+If you do not set allow_select = True, flags like --kasan_sw_tags may not work.
+
+See documentation in {} for details.
+""".format(str(native.package_relative_label(":x")).removesuffix(":x"), Label(":modules.bzl")))
+        gki_modules_list += _apply(map_each, _RUST_MODULES)
+
     return gki_modules_list
+
+# buildifier: disable=unnamed-macro
+def declare_common_kernel_in_tree_modules(kernel_build, arch, **kwargs):
+    """Declare <kernel_build>/<module.ko> labels for common kernels.
+
+    Args:
+        kernel_build: the common_kernel()'s name (without prefixing :)
+        arch: the arch value of the common_kernel.
+        **kwargs: extra kwargs
+    """
+
+    if not arch in ("arm64", "x86_64"):
+        fail("{}: arch {} not supported. Use one of [arm64, x86_64]".format(
+            str(native.package_relative_label(":x")).removesuffix(":x"),
+            arch,
+        ))
+
+    modules_list_except_rust = [] + _COMMON_GKI_MODULES_LIST
+    if arch == "arm64":
+        modules_list_except_rust += _ARM64_GKI_MODULES_LIST
+    elif arch == "x86_64":
+        modules_list_except_rust += _X86_64_GKI_MODULES_LIST
+
+    modules_list_except_rust += get_kunit_modules_list(arch)
+
+    for module in modules_list_except_rust:
+        kernel_build_output(
+            name = kernel_build + "/" + module,
+            kernel_build = kernel_build,
+            out = module,
+            **kwargs
+        )
+        basename = paths.basename(module)
+        if module != basename:
+            kernel_build_output(
+                name = kernel_build + "/" + basename,
+                kernel_build = kernel_build,
+                out = module,
+                **kwargs
+            )
+
+    for module in _RUST_MODULES:
+        kernel_build_output(
+            name = kernel_build + "/" + module,
+            kernel_build = kernel_build,
+            out = module,
+            **kwargs
+        )
+        basename = paths.basename(module)
+        if module != basename:
+            kernel_build_output(
+                name = kernel_build + "/" + basename,
+                kernel_build = kernel_build,
+                out = module,
+                **kwargs
+            )
+
+    native.filegroup(
+        name = kernel_build + "_modules",
+        srcs = [
+            kernel_build + "/" + module
+            for module in modules_list_except_rust + _RUST_MODULES
+        ],
+        **kwargs
+    )
 
 _KUNIT_FRAMEWORK_MODULES = [
     "lib/kunit/kunit.ko",
@@ -230,6 +328,7 @@ _COMMON_UNPROTECTED_MODULES_LIST = [
 
 # buildifier: disable=unnamed-macro
 def get_gki_protected_modules_list(arch = None):
+    # FIXME for kasan_sw_tags
     all_gki_modules = get_gki_modules_list(arch) + get_kunit_modules_list(arch)
     unprotected_modules = _COMMON_UNPROTECTED_MODULES_LIST
     protected_modules = [mod for mod in all_gki_modules if mod not in unprotected_modules]
