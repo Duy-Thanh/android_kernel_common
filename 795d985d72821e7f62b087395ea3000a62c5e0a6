@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d04af952_e6e79a75",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-08T16:35:28Z",
+      "side": 1,
+      "message": "It is simpler and more efficient to let the host pass the physical address?\n\nI think this read_gva() is a remnant of the VMX emulation that should go away.",
+      "revId": "795d985d72821e7f62b087395ea3000a62c5e0a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
