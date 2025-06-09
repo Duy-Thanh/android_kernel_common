@@ -9701,9 +9701,10 @@ EXPORT_SYMBOL_GPL(trace_array_get_by_name_ext);
 static int __remove_instance(struct trace_array *tr)
 {
 	int i;
-	struct trace_array_ext *tr_ext = container_of(tr,
-						      struct trace_array_ext,
-						      trace_array);
+	struct trace_array_ext *tr_ext = NULL;
+
+	if (!(tr->flags & TRACE_ARRAY_FL_GLOBAL))
+		tr_ext = container_of(tr, struct trace_array_ext, trace_array);
 
 	/* Reference counter for a newly created trace array = 1. */
 	if (tr->ref > 1 || (tr->current_trace && tr->trace_ref))
@@ -9734,9 +9735,13 @@ static int __remove_instance(struct trace_array *tr)
 
 	free_cpumask_var(tr->pipe_cpumask);
 	free_cpumask_var(tr->tracing_cpumask);
-	kfree_const(tr_ext->system_names);
+	if (tr_ext)
+		kfree_const(tr_ext->system_names);
 	kfree(tr->name);
-	kfree(tr_ext);
+	if (tr_ext)
+		kfree(tr_ext);
+	else
+		kfree(tr);
 
 	return 0;
 }
