@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8d3f17_f5246076",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-09T15:21:49Z",
+      "side": 1,
+      "message": "fixed this, I rebased it and I lost the definition. I am surprised that presubmit passed.",
+      "parentUuid": "28df03f8_2ec31387",
+      "revId": "eef61f11826a7143b0e2fa49a2f6e7913ac58ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6cea52a_b9c04702",
@@ -69,6 +87,24 @@
           ]
         }
       ],
+      "revId": "eef61f11826a7143b0e2fa49a2f6e7913ac58ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4704acd9_257018e2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-09T15:21:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6cea52a_b9c04702",
       "revId": "eef61f11826a7143b0e2fa49a2f6e7913ac58ac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
