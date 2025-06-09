@@ -16,6 +16,24 @@
       "message": "Wait for all patches to be ready.",
       "revId": "ebfebd52b1b694efb8672225dd770e8126d9e753",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfc34a29_82c12f66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-06-09T14:11:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8968e9a_8174cfbe",
+      "revId": "ebfebd52b1b694efb8672225dd770e8126d9e753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
