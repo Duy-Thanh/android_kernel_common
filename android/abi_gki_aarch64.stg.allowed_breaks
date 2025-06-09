@@ -144,3 +144,9 @@ type 'struct kvm_hyp_req' changed
 type 'struct scm_fp_list' changed
   byte size changed from 2040 to 2048
   member 'short count_unix' was added
+
+type 'struct scm_fp_list' changed
+  byte size changed from 2048 to 2064
+  member 'struct list_head vertices' was added
+  3 members ('struct user_struct* user' .. 'short count_unix') changed
+    offset changed by 128
