@@ -671,6 +671,7 @@ static void idletimer_tg_destroy(const struct xt_tgdtor_param *par)
 
 	timer_shutdown_sync(&info->timer->timer);
 	cancel_work_sync(&info->timer->work);
+	unregister_pm_notifier(&info->timer->pm_nb);
 	sysfs_remove_file(idletimer_tg_kobj, &info->timer->attr.attr);
 	kfree(info->timer->attr.attr.name);
 	kfree(info->timer);
@@ -702,6 +703,7 @@ static void idletimer_tg_destroy_v1(const struct xt_tgdtor_param *par)
 		timer_shutdown_sync(&info->timer->timer);
 	}
 	cancel_work_sync(&info->timer->work);
+	unregister_pm_notifier(&info->timer->pm_nb);
 	sysfs_remove_file(idletimer_tg_kobj, &info->timer->attr.attr);
 	kfree(info->timer->attr.attr.name);
 	kfree(info->timer);
