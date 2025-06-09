@@ -16,6 +16,24 @@
       "message": "Same feedback as on other patches in this series.\n\nWhile vendors may want to do lots of things with vendorhooks, we do need some documented rationale that demonstrates the necessity of adding these hooks.  This is ideally added in the commit message here, but if sensitive can be in the bug. Unfortunately the two bugs linked on this don\u0027t really explain why this hook is needed and what the benefit derived is.",
       "revId": "80c5b7aa33b2f0214c8a17820de1f1a3418426d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d470bd_f42527ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2025-06-09T04:08:09Z",
+      "side": 1,
+      "message": "Added the original bug for it. Thanks.",
+      "parentUuid": "a1a37ddf_fe3ed8c2",
+      "revId": "80c5b7aa33b2f0214c8a17820de1f1a3418426d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
