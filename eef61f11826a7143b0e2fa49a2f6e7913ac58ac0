@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28d158a_75bbecce",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-06-09T15:47:54Z",
+      "side": 1,
+      "message": "\"presubmit-verified-together\" So probably the definition was in a following patch?",
+      "parentUuid": "ff8d3f17_f5246076",
+      "revId": "eef61f11826a7143b0e2fa49a2f6e7913ac58ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6cea52a_b9c04702",
