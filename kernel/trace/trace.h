@@ -418,7 +418,8 @@ struct trace_array_ext {
 };
 
 enum {
-	TRACE_ARRAY_FL_GLOBAL	= (1 << 0)
+	TRACE_ARRAY_FL_GLOBAL	= (1 << 0),
+	TRACE_ARRAY_FL_HAS_EXT	= (1 << 1)
 };
 
 extern struct list_head ftrace_trace_arrays;
