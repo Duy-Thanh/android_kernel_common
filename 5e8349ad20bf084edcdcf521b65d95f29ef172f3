@@ -33,6 +33,24 @@
       "message": "So, this is adding a third tracepoint to this small function. Can you explain why trace_task_rename isn\u0027t sufficient in the commit message?",
       "revId": "5e8349ad20bf084edcdcf521b65d95f29ef172f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f371c327_bbfe10a6",
+        "filename": "fs/exec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2025-06-09T06:36:47Z",
+      "side": 1,
+      "message": "trace_task_rename is not a vendor hook, I\u0027m not sure if we could hook to it directly. However, I missed that there is already another similar hook, trace_android_rvh_set_task_comm, which does not exist when I initially add the hook on kernel 6.1, I think I could just use it. Thanks.",
+      "parentUuid": "f5a54954_4bfc804e",
+      "revId": "5e8349ad20bf084edcdcf521b65d95f29ef172f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
