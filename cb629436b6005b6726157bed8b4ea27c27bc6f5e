@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eeec007_693578d0",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 104
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-06-09T17:12:46Z",
+      "side": 1,
+      "message": "5 retires without delay is too short. The work that you are waiting for might be running on another CPU. Do you plan to squash aosp/3637806 into this as well?",
+      "fixSuggestions": [
+        {
+          "fixId": "834f786d_139700a8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 366,
+                "startChar": 0,
+                "endLine": 367,
+                "endChar": 0
+              },
+              "replacement": "\tint ret, retry_availability_msg \u003d 10;\n"
+            },
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 377,
+                "startChar": 0,
+                "endLine": 377,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tmsleep(100);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cb629436b6005b6726157bed8b4ea27c27bc6f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
