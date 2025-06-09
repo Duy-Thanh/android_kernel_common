@@ -1,0 +1,76 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28df03f8_2ec31387",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-06-09T09:30:01Z",
+      "side": 1,
+      "message": "ffa_handle isn\u0027t declared anywhere.",
+      "revId": "eef61f11826a7143b0e2fa49a2f6e7913ac58ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6cea52a_b9c04702",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-06-09T09:30:01Z",
+      "side": 1,
+      "message": "nit: The linux coding style imposes curly brackets in all the if else blocks here because you have at least one block using them.",
+      "fixSuggestions": [
+        {
+          "fixId": "4b99919a_a8d51aeb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 721,
+                "startChar": 0,
+                "endLine": 722,
+                "endChar": 0
+              },
+              "replacement": "\t} else if (res-\u003ea0 \u003d\u003d FFA_SUCCESS) {\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 723,
+                "startChar": 0,
+                "endLine": 724,
+                "endChar": 0
+              },
+              "replacement": "\t} else {\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 725,
+                "startChar": 0,
+                "endLine": 725,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eef61f11826a7143b0e2fa49a2f6e7913ac58ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
