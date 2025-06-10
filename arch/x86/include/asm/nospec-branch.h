@@ -373,9 +373,6 @@ static inline void __x86_return_thunk(void) {}
 #endif
 
 #ifdef CONFIG_PKVM_INTEL
-extern retpoline_thunk_t __x86_indirect_thunk_array__pkvm[];
-extern retpoline_thunk_t __x86_indirect_call_thunk_array__pkvm[];
-extern retpoline_thunk_t __x86_indirect_jump_thunk_array__pkvm[];
 #define GEN(reg) 								\
 	extern retpoline_thunk_t __x86_indirect_thunk_##reg##__pkvm;
 #include <asm/GEN-for-each-reg.h>
