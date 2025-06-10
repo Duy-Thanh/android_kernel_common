@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dffc94d_f1fdca87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-06-10T15:47:56Z",
+      "side": 1,
+      "message": "As with the other one: approved since if an algorithm is enabled, then acceleration for that algorithm should be enabled too.  But we should work towards deprecating SHA-1.",
+      "revId": "e476abfcd2f0890da20ce277806160444be51e77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
