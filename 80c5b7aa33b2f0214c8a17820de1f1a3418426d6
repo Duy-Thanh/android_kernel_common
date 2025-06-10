@@ -52,6 +52,24 @@
       "parentUuid": "c9d470bd_f42527ff",
       "revId": "80c5b7aa33b2f0214c8a17820de1f1a3418426d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a001393c_c23b80ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2025-06-10T01:23:17Z",
+      "side": 1,
+      "message": "Sorry that the commit message was lost during patch update, added again. Thanks.",
+      "parentUuid": "47ec5a55_d71929ff",
+      "revId": "80c5b7aa33b2f0214c8a17820de1f1a3418426d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
