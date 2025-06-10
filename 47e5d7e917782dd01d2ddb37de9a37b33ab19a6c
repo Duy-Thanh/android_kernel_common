@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91bdf139_c3cf880c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-06-10T19:20:01Z",
+      "side": 1,
+      "message": "The presubmit test failure is an infrastructure failure has been reported here: https://buganizer.corp.google.com/issues/423945251",
+      "revId": "47e5d7e917782dd01d2ddb37de9a37b33ab19a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
