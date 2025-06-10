@@ -16,6 +16,24 @@
       "message": "Maybe it would be more readable to add __pkvm_host_donate_hyp_noflush() (without an extra argument), and then the implementation of __pkvm_host_donate_hyp() would contain just __pkvm_host_donate_hyp_noflush() + pkvm_iommu_flush_iotlb()?",
       "revId": "fbd10d7f7b829576c232cd6644fafd7a628f60c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "486056d0_a53bd84d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-10T15:01:55Z",
+      "side": 1,
+      "message": "sure, sounds good to me. I am more used to the precedence with having options in the arguments rather than explicitly in the function name only. But this is also fine with me. Will do",
+      "parentUuid": "25d32819_ec23ef8f",
+      "revId": "fbd10d7f7b829576c232cd6644fafd7a628f60c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
