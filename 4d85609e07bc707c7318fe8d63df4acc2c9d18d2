@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3871b204_7d935032",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-10T16:07:34Z",
+      "side": 1,
+      "message": "The title does not describe what you do here. Suggest:\n`add hook to retry mempool allocation without delay`",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 69
+      },
+      "revId": "4d85609e07bc707c7318fe8d63df4acc2c9d18d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98bcff4d_a4314d42",
+        "filename": "mm/mempool.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-10T16:07:34Z",
+      "side": 1,
+      "message": "What are you bypassing? I would suggest more descriptive `trace_android_vh_mempool_alloc_skip_wait(\u0026gfp_temp, \u0026skip)`",
+      "range": {
+        "startLine": 428,
+        "startChar": 1,
+        "endLine": 428,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "019a5b63_515b7d92",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/mempool.c",
+              "range": {
+                "startLine": 382,
+                "startChar": 0,
+                "endLine": 383,
+                "endChar": 0
+              },
+              "replacement": "\tbool skip_wait \u003d false;\n"
+            },
+            {
+              "path": "mm/mempool.c",
+              "range": {
+                "startLine": 428,
+                "startChar": 0,
+                "endLine": 430,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_mempool_alloc_skip_wait(\u0026gfp_temp, \u0026skip_wait);\n\tif (skip_wait) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4d85609e07bc707c7318fe8d63df4acc2c9d18d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
