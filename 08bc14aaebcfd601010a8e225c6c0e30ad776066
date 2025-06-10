@@ -52,6 +52,24 @@
       "parentUuid": "facbb7b8_56adae7f",
       "revId": "08bc14aaebcfd601010a8e225c6c0e30ad776066",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea6ce95e_c24ca8d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2041020
+      },
+      "writtenOn": "2025-06-10T03:08:54Z",
+      "side": 1,
+      "message": "We have already merged this vendor hook in kernel 6.6 and observed significant performance benefits. Now, we need to backport it to version 5.15.",
+      "parentUuid": "1b172daf_a84df282",
+      "revId": "08bc14aaebcfd601010a8e225c6c0e30ad776066",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
