@@ -34,6 +34,24 @@
       "parentUuid": "e83add14_12f54789",
       "revId": "b39ff7a8e454e68b206fc460246737f283bf5b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb3a846_4024b2b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2025-06-10T01:32:44Z",
+      "side": 1,
+      "message": "Actually let me add the original bug that has more detail for it.",
+      "parentUuid": "68bfa045_cd4f0f6f",
+      "revId": "b39ff7a8e454e68b206fc460246737f283bf5b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
