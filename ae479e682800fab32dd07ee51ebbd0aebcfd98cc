@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7a74bf2_f8b26d08",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-10T14:59:40Z",
+      "side": 1,
+      "message": "Its a remnant of my previous iteration where I was using stack variables and hence it needed to be towards the end. I wanted to pass result on RAX but then figured its useless to return for this hypercall. I chose to keep the comments. If you feel these comments are not worth or misleading, I shall remove those.",
+      "parentUuid": "ff694a3c_54227135",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5754f8a_cc1d09da",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "writtenOn": "2025-06-05T07:09:07Z",
       "side": 1,
       "message": "probably nit: technically it may fail?",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac1cc38c_e4b501d8",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-10T14:59:40Z",
+      "side": 1,
+      "message": "Yeah true. Practically the chances are close to nil as this is early in the boot and we should have enough memory. I have wrapped it in BUG_ON() and added a comment block. I could also have a bool field in the vcpu structure instead of dynamically doing it with cpumask. What do you think?",
+      "parentUuid": "fcc54677_fd2f2193",
       "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
