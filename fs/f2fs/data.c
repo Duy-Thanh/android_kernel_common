@@ -40,6 +40,8 @@ static struct bio_set f2fs_bioset;
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_write_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_submit_folio_write);
+EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_submit_read_bio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_submit_write_bio);
 
 int __init f2fs_init_bioset(void)
 {
