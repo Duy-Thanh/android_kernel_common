@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65fde9f_685ed311",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-10T16:07:28Z",
+      "side": 1,
+      "message": "Rebase this patch on top of https://android-review.googlesource.com/c/kernel/common/+/3658572",
+      "revId": "137ded465bea69fdab37d346d81a5ce55229aac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
