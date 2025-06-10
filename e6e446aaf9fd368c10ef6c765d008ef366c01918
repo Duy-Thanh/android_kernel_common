@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d70329_8998bae5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-06-10T15:38:02Z",
+      "side": 1,
+      "message": "Since folios do not exist in 5.15 and the patch has been modified to not refer to folios, please update the commit message to explain the changes compared to the original patch",
+      "revId": "e6e446aaf9fd368c10ef6c765d008ef366c01918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
