@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b45dc5b_27497b13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-06-10T16:03:40Z",
+      "side": 1,
+      "message": "We cannot accept UAPI changes that haven\u0027t landed upstream. Need to wait for it to land in a maintainer tree and then change to FROMGIT",
+      "revId": "c99df98b65d6d2de52876ab4681f4aa19ddfa9d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
