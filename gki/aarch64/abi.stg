@@ -352661,6 +352661,14 @@ function {
   parameter_id: 0x27a7c613
 }
 function {
+  id: 0x9b2d9d7b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x26ee682a
+  parameter_id: 0x6720d32f
+  parameter_id: 0x15a30023
+}
+function {
   id: 0x9b2eaf21
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -379072,6 +379080,24 @@ elf_symbol {
   full_name: "__traceiter_f2fs_submit_folio_write"
 }
 elf_symbol {
+  id: 0x69169027
+  name: "__traceiter_f2fs_submit_read_bio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x31a63806
+  type_id: 0x9b2d9d7b
+  full_name: "__traceiter_f2fs_submit_read_bio"
+}
+elf_symbol {
+  id: 0x7265aac5
+  name: "__traceiter_f2fs_submit_write_bio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x31a63806
+  type_id: 0x9b2d9d7b
+  full_name: "__traceiter_f2fs_submit_write_bio"
+}
+elf_symbol {
   id: 0xa3b097a8
   name: "__traceiter_f2fs_write_begin"
   is_defined: true
@@ -385019,6 +385045,24 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_f2fs_submit_folio_write"
+}
+elf_symbol {
+  id: 0xf61b8401
+  name: "__tracepoint_f2fs_submit_read_bio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_f2fs_submit_read_bio"
+}
+elf_symbol {
+  id: 0x53b1591b
+  name: "__tracepoint_f2fs_submit_write_bio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_f2fs_submit_write_bio"
 }
 elf_symbol {
   id: 0x46235392
@@ -451111,6 +451155,8 @@ interface {
   symbol_id: 0x7b03aae7
   symbol_id: 0x92373f85
   symbol_id: 0x0cf359e7
+  symbol_id: 0x69169027
+  symbol_id: 0x7265aac5
   symbol_id: 0xa3b097a8
   symbol_id: 0x104ffeec
   symbol_id: 0x6d4f31c4
@@ -451772,6 +451818,8 @@ interface {
   symbol_id: 0xef6e6795
   symbol_id: 0xb2d6f207
   symbol_id: 0x1581f1d1
+  symbol_id: 0xf61b8401
+  symbol_id: 0x53b1591b
   symbol_id: 0x46235392
   symbol_id: 0xd8f3ca82
   symbol_id: 0xff315556
