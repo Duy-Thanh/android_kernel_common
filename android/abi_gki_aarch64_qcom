@@ -426,6 +426,7 @@
   devm_gpiod_get_optional
   devm_gpio_request
   devm_gpio_request_one
+  devm_hwmon_device_register_with_info
   devm_hwspin_lock_register
   devm_iio_channel_get
   devm_iio_channel_get_all
@@ -1255,6 +1256,7 @@
   log_read_mmio
   log_write_mmio
   lookup_page_ext
+  macsec_pn_wrapped
   match_string
   mbox_chan_received_data
   mbox_chan_txdone
