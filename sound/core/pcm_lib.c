@@ -1892,6 +1892,8 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 	snd_pcm_uframes_t avail = 0;
 	long wait_time, tout;
 
+
+	pr_info("[MM_AOSP] %s: ++\n", __func__);
 	init_waitqueue_entry(&wait, current);
 	set_current_state(TASK_INTERRUPTIBLE);
 	add_wait_queue(&runtime->tsleep, &wait);
@@ -1968,6 +1970,7 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 	set_current_state(TASK_RUNNING);
 	remove_wait_queue(&runtime->tsleep, &wait);
 	*availp = avail;
+	pr_info("[MM_AOSP] %s: --\n", __func__);
 	return err;
 }
 	
@@ -2274,6 +2277,8 @@ snd_pcm_sframes_t __snd_pcm_lib_xfer(struct snd_pcm_substream *substream,
 	}
 
 	avail = snd_pcm_avail(substream);
+	pr_info("[MM_AOSP] %s: avail %ld, hw_ptr %ld, appl_ptr %ld\n", __func__, avail,
+			runtime->status->hw_ptr, runtime->control->appl_ptr);
 
 	while (size > 0) {
 		snd_pcm_uframes_t frames, appl_ptr, appl_ofs;
