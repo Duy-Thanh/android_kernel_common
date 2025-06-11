@@ -16,6 +16,24 @@
       "message": "We are not checking if this page is owned by the host, i.e. we don\u0027t really ensure memory protection?\n\n(BTW I can see it in my tests.)",
       "revId": "ad2436ac151d05951547cda9d9457acc869c731b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dc02d8a_6f9ded9e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T15:21:15Z",
+      "side": 1,
+      "message": "Yeah we did not port the memory protection patch which we had for shadow iommu implementation to pviommu as we saw an issue with vmemmap(discussed in the other CL). Will port it once we refine the fix.",
+      "parentUuid": "6363d36f_a2982fb9",
+      "revId": "ad2436ac151d05951547cda9d9457acc869c731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
