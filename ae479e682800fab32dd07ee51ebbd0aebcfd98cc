@@ -176,6 +176,24 @@
       "parentUuid": "720f9994_e024f211",
       "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1d1fb69_da9a17c8",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T17:58:08Z",
+      "side": 1,
+      "message": "I didn\u0027t suggest to proceed to deprivileging, I suggested to immediately return with -ENOMEM if zalloc_cpumask_var() fails. We check pkvm_host_deprivilege_cpus() return value anyway, this would be just one of dozens of possible failures of pKVM initialization that we need to handle anyway.\n\nAnyway, if there is a simple clean way to avoid allocation, I\u0027m surely ok with that.",
+      "parentUuid": "28d2051c_611d7cd3",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

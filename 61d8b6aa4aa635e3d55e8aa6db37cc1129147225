@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58a266f7_8acf80e9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T17:58:08Z",
+      "side": 1,
+      "message": "IMHO such premature generalizations don\u0027t bring any benefit, only complicate the code. We can always add such functions in the future if we want to.\n\nIt also seems to me that this style is not quite encouraged in Linux kernel in general. One example I recall: https://lore.kernel.org/all/20230508121957.32341-1-bp@alien8.de/ (BTW it seems like a good idea to use __ro_after_init like in that patch?)",
+      "parentUuid": "4c0e00d6_ab19fa3e",
+      "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f38dfb9c_1771c388",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
         "patchSetId": 2
