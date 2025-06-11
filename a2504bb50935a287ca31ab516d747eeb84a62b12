@@ -46,6 +46,29 @@
       },
       "revId": "a2504bb50935a287ca31ab516d747eeb84a62b12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39254ed6_ea23cd70",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-06-11T20:57:34Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 563,
+        "endChar": 0
+      },
+      "revId": "a2504bb50935a287ca31ab516d747eeb84a62b12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
