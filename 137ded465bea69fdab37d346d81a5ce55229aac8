@@ -16,6 +16,24 @@
       "message": "Rebase this patch on top of https://android-review.googlesource.com/c/kernel/common/+/3658572",
       "revId": "137ded465bea69fdab37d346d81a5ce55229aac8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b3b3e42_703bff8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2025-06-11T02:16:14Z",
+      "side": 1,
+      "message": "Updated.\nThanks.",
+      "parentUuid": "d65fde9f_685ed311",
+      "revId": "137ded465bea69fdab37d346d81a5ce55229aac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
