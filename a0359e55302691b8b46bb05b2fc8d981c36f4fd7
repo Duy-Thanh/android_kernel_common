@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94cae542_ae8785a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-06-11T21:08:29Z",
+      "side": 1,
+      "message": "Duplicate with L146. While you have to change this. Please move all additions Bug, Test, ... after Andrew\u0027s sign off",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 139
+      },
+      "revId": "a0359e55302691b8b46bb05b2fc8d981c36f4fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
