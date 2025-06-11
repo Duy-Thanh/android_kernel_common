@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "485252fe_69db1348",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T16:18:26Z",
+      "side": 1,
+      "message": "Personally I feel its okay, but I can remove the comments.",
+      "parentUuid": "285c0c81_e18950d8",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5754f8a_cc1d09da",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
         "patchSetId": 1
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "OTOH it is not particularly hard to just return -ENOMEM and print an error message, why not just do that?",
       "parentUuid": "ac1cc38c_e4b501d8",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d2051c_611d7cd3",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T16:18:26Z",
+      "side": 1,
+      "message": "Then we break the security guarantees if we continue and hit a failure in deprivileging(but it is at par with existing implementation). Also, it does seem strange to hit a allocation failure early in this boot, and safely assume that system will boot all the way after failing for memory allocation here?\n\nWith this implementation, we definitely need the cpus mask to safely reprivilege so that the system doesn\u0027t have partially deprivileged cpus. As I mentioned above, I can change the implementation to use a new field in the pcpu structure to denote the deprivilege status. That way, we need not do memory allocation at the cost of one extra byte in the pcpu structure. What do you think?",
+      "parentUuid": "720f9994_e024f211",
       "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

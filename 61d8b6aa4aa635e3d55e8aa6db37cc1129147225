@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c0e00d6_ab19fa3e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T16:18:26Z",
+      "side": 1,
+      "message": "Gives us a bit of flexibility. this function hides the internal implementation of how we determine if the pkvm is initialized. As of now, its just a flag, but may possibly change in future. A better programming practice I have been following :-).",
+      "parentUuid": "7b64fc73_9346784c",
+      "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f38dfb9c_1771c388",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
         "patchSetId": 2
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cc8f76b_79687d3b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T16:18:26Z",
+      "side": 1,
+      "message": "no specific reason, just wanted it to stand out :-)",
+      "parentUuid": "f38dfb9c_1771c388",
+      "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d429515_5b766976",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2025-06-11T15:20:20Z",
       "side": 1,
       "message": "This kind of duplicates \"%s: WARNING - failed to deprivilege all CPUs!\\n\" in pkvm_host_deprivilege_cpus()?",
+      "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e5cdb9_24a49493",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T16:18:26Z",
+      "side": 1,
+      "message": "True, will remove",
+      "parentUuid": "4d429515_5b766976",
       "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
