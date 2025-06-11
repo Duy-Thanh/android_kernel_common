@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "920e4af4_5db7b648",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-06-11T20:49:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d167d307_536ec061",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 52
+      },
+      "revId": "a46eca6f20eab6dfc06ba14c289fa94289523dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a527a45_4e189109",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-06-11T17:02:52Z",
       "side": 1,
       "message": "I checked the bug but it\u0027s still not clear to me why this is needed. Shouldn\u0027t `CONFIG_PAGE_BLOCK_ORDER` just be set in the defconfig that is used for a 16k page size kernel configuration?",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 5
+      },
+      "revId": "a46eca6f20eab6dfc06ba14c289fa94289523dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc590045_ddeae4ee",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-06-11T20:49:53Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t CONFIG_PAGE_BLOCK_ORDER just be set in the defconfig that is used for a 16k page size kernel configuration?\n\nThat is right why to do it. However there are some presubmit issues that are preventing us from updating the GKI fragment. The whole explanation is here b/424212284#comment2",
+      "parentUuid": "2a527a45_4e189109",
       "range": {
         "startLine": 41,
         "startChar": 1,
