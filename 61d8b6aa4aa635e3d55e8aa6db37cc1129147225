@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b64fc73_9346784c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T15:20:20Z",
+      "side": 1,
+      "message": "What is the advantage of having these wrappers instead of using the global variable directly?",
+      "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f38dfb9c_1771c388",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T15:20:20Z",
+      "side": 1,
+      "message": "nit: why is it the first one in the switch, not the last one? :)",
+      "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d429515_5b766976",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T15:20:20Z",
+      "side": 1,
+      "message": "This kind of duplicates \"%s: WARNING - failed to deprivilege all CPUs!\\n\" in pkvm_host_deprivilege_cpus()?",
+      "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

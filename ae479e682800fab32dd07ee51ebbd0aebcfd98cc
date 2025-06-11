@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "285c0c81_e18950d8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T15:20:20Z",
+      "side": 1,
+      "message": "I think it is just confusing. It is not clear why they are not grouped together with the rest of GPRs above, and the comments don\u0027t make it clearer.",
+      "parentUuid": "a7a74bf2_f8b26d08",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5754f8a_cc1d09da",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Yeah true. Practically the chances are close to nil as this is early in the boot and we should have enough memory. I have wrapped it in BUG_ON() and added a comment block. I could also have a bool field in the vcpu structure instead of dynamically doing it with cpumask. What do you think?",
       "parentUuid": "fcc54677_fd2f2193",
+      "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "720f9994_e024f211",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T15:20:20Z",
+      "side": 1,
+      "message": "OTOH it is not particularly hard to just return -ENOMEM and print an error message, why not just do that?",
+      "parentUuid": "ac1cc38c_e4b501d8",
       "revId": "ae479e682800fab32dd07ee51ebbd0aebcfd98cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
