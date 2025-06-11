@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b90c98_f5b4a84b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-06-11T22:43:55Z",
+      "side": 1,
+      "message": "Can you please add an explanation as to why this is needed?",
+      "revId": "f570144df35a9931c62744d93d3f3530904fa808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7cfbdc5d_ae4d0d6c",
