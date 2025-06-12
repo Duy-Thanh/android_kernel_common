@@ -231,6 +231,18 @@ static void dma_buf_vma_close(struct vm_area_struct *vma)
 	dma_buf_unaccount_from_mm(dmabuf, vma->vm_mm);
 }
 
+static int dma_buf_flush(struct file *file, fl_owner_t id)
+{
+	struct mm_struct *mm = get_task_mm(current);
+
+	if (mm) {
+		dma_buf_unaccount_from_mm(file->private_data, mm);
+		mmput(mm);
+	}
+	return 0;
+}
+
+
 static const struct vm_operations_struct dma_buf_vm_ops = {
 	.close = dma_buf_vma_close,
 };
@@ -656,6 +668,7 @@ static const struct file_operations dma_buf_fops = {
 	.unlocked_ioctl	= dma_buf_ioctl,
 	.compat_ioctl	= compat_ptr_ioctl,
 	.show_fdinfo	= dma_buf_show_fdinfo,
+	.flush		= dma_buf_flush,
 };
 
 /*
