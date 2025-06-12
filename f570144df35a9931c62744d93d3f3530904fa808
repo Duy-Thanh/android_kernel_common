@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ed2e3f_1f8f1543",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-06-12T00:30:51Z",
+      "side": 1,
+      "message": "I thought change-id should be a unique id for a change?\n\nI am getting \"Error 409: wrong Change-Id footer\"",
+      "parentUuid": "fe340be0_6406403f",
+      "revId": "f570144df35a9931c62744d93d3f3530904fa808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7cfbdc5d_ae4d0d6c",
