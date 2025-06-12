@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12914f73_9fd41b8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-12T17:07:59Z",
+      "side": 1,
+      "message": "Overriding lint, as its complaining about a change later in the patch series, not something wrong with this patch.",
+      "revId": "f681680501132ca9454b1133f4b9e782d8a31711",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
