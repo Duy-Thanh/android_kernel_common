@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffaa41d9_20bdc149",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-06-12T00:45:14Z",
+      "side": 1,
+      "message": "It doesn\u0027t have to be for a given branch, and we prefer for it to be the same across multiple branches so we know where a CL has been cherrypicked to. (e.g. aosp/Ia4685272b2f64db737697a3e3c1640d110060111)\n\nIf it\u0027s giving you trouble, you could use the cherrypick option from the gerrit UI to cherrypick the `android16-6.12` CL to the `android15-6.6` branch.",
+      "parentUuid": "92ed2e3f_1f8f1543",
+      "revId": "f570144df35a9931c62744d93d3f3530904fa808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7cfbdc5d_ae4d0d6c",
