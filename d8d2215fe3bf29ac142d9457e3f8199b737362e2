@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e848ee05_4ed6ef07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-06-12T05:19:01Z",
+      "side": 1,
+      "message": "You should not bypass that on FROMLIST changes",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 35
+      },
+      "revId": "d8d2215fe3bf29ac142d9457e3f8199b737362e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e2cd68_db936a7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-06-12T05:19:01Z",
+      "side": 1,
+      "message": "VMD driver looks to me like something that can be extracted as a vendor module. The only affected file by downstream changes is `drivers/pci/controller/vmd.c`, steered by CONFIG_VMD. The variable is then not enabled anyhwere in GKI and is Intel platform specific.\n\nThat being said, this patch should be intaken into AL kernel as a out-of-tree vendor module built with DDK. See: go/al-gki-vmm.\n\nLmk if there is anything else that touches core kernel that I\u0027ve missed. Backports from upstream are ofc fine",
+      "revId": "d8d2215fe3bf29ac142d9457e3f8199b737362e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
