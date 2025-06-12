@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3ef3e972_a7cd2ecd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-06-12T00:10:41Z",
+      "side": 1,
+      "message": "Sorry for the lack of context. We have been using SHA1 for Mainline APEXes. (That itself is a problem to be fixed; we shouldn\u0027t be using SHA1 for security reasons. But this is an off-topic here.)\n\nThe problem this patch try to fix is that we have been using the sw implementation of SHA1, which obviously is much slower and less power efficient than the hw implementation. We are enabling it.",
+      "parentUuid": "e8b90c98_f5b4a84b",
+      "revId": "f570144df35a9931c62744d93d3f3530904fa808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7cfbdc5d_ae4d0d6c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
