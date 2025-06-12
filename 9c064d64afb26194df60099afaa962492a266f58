@@ -34,6 +34,24 @@
       "parentUuid": "971f597c_a84049b6",
       "revId": "9c064d64afb26194df60099afaa962492a266f58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f8156b9_db2fe870",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4141404
+      },
+      "writtenOn": "2025-06-12T12:44:35Z",
+      "side": 1,
+      "message": "We encountered this critical kernel panic issue during the development of the Samsung Watch project (based on Wear OS 6: Android 15 / Linux 6.6 kernel). The crash log indicates a NULL pointer dereference in the interrupt context, leading to an unrecoverable system failure:\n\n[ 26.762143]I[0: irq/209-dwc3: 1725] Unable to handle kernel NULL pointer dereference at virtual address 00000000000001f8\n[ 26.765315]I[0: irq/209-dwc3: 1725] PC is at tty_wakeup+0x10/0x88\n[ 26.765345]I[0: irq/209-dwc3: 1725] LR is at gs_start_io+0x148/0x25c\n[ 26.770965]I[0: irq/209-dwc3: 1725] Kernel panic - not syncing: Oops: Fatal exception in interrupt\n[ 26.770758]I[0: irq/209-dwc3: 1725] Call trace:\n[ 26.770769]I[0: irq/209-dwc3: 1725] tty_wakeup+0x10/0x88\n[ 26.770784]I[0: irq/209-dwc3: 1725] gs_start_io+0x148/0x25c\n[ 26.770797]I[0: irq/209-dwc3: 1725] gserial_connect+0xb8/0x154\n[ 26.770811]I[0: irq/209-dwc3: 1725] acm_set_alt+0xec/0x10c\n[ 26.770824]I[0: irq/209-dwc3: 1725] set_config+0x234/0x38c\n[ 26.770837]I[0: irq/209-dwc3: 1725] composite_setup+0x5a8/0xc5c\n[ 26.770850]I[0: irq/209-dwc3: 1725] configfs_composite_setup+0x64/0x94\n[ 26.770861]I[0: irq/209-dwc3: 1725] dwc3_ep0_interrupt+0x778/0xd54\n[ 26.770875]I[0: irq/209-dwc3: 1725] dwc3_thread_interrupt+0xa8/0x12cc\n\nWe observe this issue rarely. \n\nGiven the project\u0027s GKI (Generic Kernel Image) compliance requirements (which forbid modifications to kernel6.6/common/ code), we propose a minimal-risk cherry-pick of the upstream fix.",
+      "parentUuid": "0122d901_51892dce",
+      "revId": "9c064d64afb26194df60099afaa962492a266f58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
