@@ -360,6 +360,7 @@
   __traceiter_android_rvh_setscheduler
   __traceiter_android_rvh_shmem_get_folio
   __traceiter_android_rvh_show_max_freq
+  __traceiter_android_rvh_tcp_rcv_spurious_retrans
   __traceiter_android_rvh_tick_entry
   __traceiter_android_rvh_try_to_wake_up
   __traceiter_android_rvh_try_to_wake_up_success
@@ -434,6 +435,7 @@
   __traceiter_android_vh_swapmem_gather_finish
   __traceiter_android_vh_swapmem_gather_init
   __traceiter_android_vh_sysrq_crash
+  __traceiter_android_vh_tcp_rtt_estimator
   __traceiter_android_vh_timer_calc_index
   __traceiter_android_vh_try_to_freeze_todo
   __traceiter_android_vh_try_to_freeze_todo_unfrozen
@@ -475,6 +477,7 @@
   __traceiter_sched_switch
   __traceiter_suspend_resume
   __traceiter_sys_exit
+  __traceiter_tcp_retransmit_skb
   __traceiter_workqueue_execute_start
   __traceiter_xdp_exception
   __tracepoint_android_rvh_account_irq
@@ -553,6 +556,7 @@
   __tracepoint_android_rvh_setscheduler
   __tracepoint_android_rvh_shmem_get_folio
   __tracepoint_android_rvh_show_max_freq
+  __tracepoint_android_rvh_tcp_rcv_spurious_retrans
   __tracepoint_android_vh_swapmem_gather_add_bypass
   __tracepoint_android_vh_swapmem_gather_finish
   __tracepoint_android_vh_swapmem_gather_init
@@ -625,6 +629,7 @@
   __tracepoint_android_vh_show_resume_epoch_val
   __tracepoint_android_vh_show_suspend_epoch_val
   __tracepoint_android_vh_sysrq_crash
+  __tracepoint_android_vh_tcp_rtt_estimator
   __tracepoint_android_vh_timer_calc_index
   __tracepoint_android_vh_try_to_unmap_one
   __tracepoint_android_vh_try_to_freeze_todo
@@ -666,6 +671,7 @@
   __tracepoint_sched_switch
   __tracepoint_suspend_resume
   __tracepoint_sys_exit
+  __tracepoint_tcp_retransmit_skb
   __tracepoint_workqueue_execute_start
   __tracepoint_xdp_exception
   __tty_alloc_driver
