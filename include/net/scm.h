@@ -23,13 +23,15 @@ struct scm_creds {
 };
 
 struct scm_fp_list {
-	short			count;
-	short			max;
-	struct user_struct	*user;
-	struct file		*fp[SCM_MAX_FD];
 #ifndef __GENKSYMS__
 	short			count_unix;
 #endif
+	int			padding1[8];
+	short			max;
+	int			padding2[8];
+	struct user_struct	*user;
+	short			count;
+	struct file		*fp[SCM_MAX_FD];
 };
 
 struct scm_cookie {
