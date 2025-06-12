@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3dfae7c_b1f06e9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-06-12T08:29:22Z",
+      "side": 1,
+      "message": "This branch is no longer respin eligible from 2025-02-01, unless for security patches cited in the Android Security Bulletin (ASB).",
+      "revId": "b149fd11fab5489ff3ac38d29f8a9e607d0b65f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
