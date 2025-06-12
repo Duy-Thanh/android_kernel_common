@@ -329,7 +329,6 @@ static inline bool is_active_lru(enum lru_list lru)
 
 #define WORKINGSET_ANON 0
 #define WORKINGSET_FILE 1
-#define ANON_AND_FILE 2
 
 enum lruvec_flags {
 	/*
@@ -561,6 +560,10 @@ struct lru_gen_mm_walk {
 	int mm_stats[NR_MM_STATS];
 	/* total batched items */
 	int batched;
+	/* whether this walk is because of aging in the given type */
+	bool type_is_aging[ANON_AND_FILE];
+	/* whether this walk should scan for the given type */
+	bool type_should_scan[ANON_AND_FILE];
 	int swappiness;
 	bool force_scan;
 

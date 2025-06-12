@@ -2920,9 +2920,16 @@ static inline int filter_gen_from_seq(unsigned long seq)
 	return seq % NR_BLOOM_FILTERS;
 }
 
-static void get_item_key(void *item, int *key)
+static void get_item_key(pmd_t *item, int type, int *key)
 {
-	u32 hash = hash_ptr(item, BLOOM_FILTER_SHIFT * 2);
+	unsigned long hash_input;
+	u32 hash;
+
+	hash_input = (unsigned long) item;
+	hash_input |= type;
+	BUILD_BUG_ON(__alignof__(*item) == 1);
+
+	hash = hash_long(hash_input, BLOOM_FILTER_SHIFT * 2);
 
 	BUILD_BUG_ON(BLOOM_FILTER_SHIFT * 2 > BITS_PER_TYPE(u32));
 
@@ -2930,8 +2937,8 @@ static void get_item_key(void *item, int *key)
 	key[1] = hash >> BLOOM_FILTER_SHIFT;
 }
 
-static bool test_bloom_filter(struct lru_gen_mm_state *mm_state, unsigned long seq,
-			      void *item)
+static bool test_bloom_filter(struct lru_gen_mm_state *mm_state, int type,
+			      unsigned long seq, pmd_t *item)
 {
 	int key[2];
 	unsigned long *filter;
@@ -2941,13 +2948,14 @@ static bool test_bloom_filter(struct lru_gen_mm_state *mm_state, unsigned long s
 	if (!filter)
 		return true;
 
-	get_item_key(item, key);
+	get_item_key(item, type, key);
 
 	return test_bit(key[0], filter) && test_bit(key[1], filter);
 }
 
-static void update_bloom_filter(struct lru_gen_mm_state *mm_state, unsigned long seq,
-				void *item)
+
+static void update_bloom_filter(struct lru_gen_mm_state *mm_state,
+				int type, unsigned long seq, pmd_t *item)
 {
 	int key[2];
 	unsigned long *filter;
@@ -2957,7 +2965,7 @@ static void update_bloom_filter(struct lru_gen_mm_state *mm_state, unsigned long
 	if (!filter)
 		return;
 
-	get_item_key(item, key);
+	get_item_key(item, type, key);
 
 	if (!test_bit(key[0], filter))
 		set_bit(key[0], filter);
@@ -3010,7 +3018,7 @@ static struct lru_gen_mm_state *get_mm_state(struct lruvec *lruvec)
 
 static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk)
 {
-	int key;
+	int key, type;
 	struct mm_struct *mm;
 	struct pglist_data *pgdat = lruvec_pgdat(walk->lruvec);
 	struct lru_gen_mm_state *mm_state = get_mm_state(walk->lruvec);
@@ -3018,12 +3026,19 @@ static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk)
 	mm = list_entry(mm_state->head, struct mm_struct, lru_gen.list);
 	key = pgdat->node_id % BITS_PER_TYPE(mm->lru_gen.bitmap);
 
-	if (!walk->force_scan && !test_bit(key, &mm->lru_gen.bitmap))
-		return NULL;
+	for (type = ANON_AND_FILE - 1; type >= 0; type--) {
+		walk->type_should_scan[type] =
+			walk->type_is_aging[type] &&
+			(walk->force_scan || test_bit(key, &mm->lru_gen.bitmap[type]));
 
-	clear_bit(key, &mm->lru_gen.bitmap);
+		if (walk->type_should_scan[type])
+			clear_bit(key, &mm->lru_gen.bitmap[type]);
+	}
 
-	return mmget_not_zero(mm) ? mm : NULL;
+	if (walk->type_should_scan[LRU_GEN_ANON] || walk->type_should_scan[LRU_GEN_FILE])
+		return mmget_not_zero(mm) ? mm : NULL;
+
+	return NULL;
 }
 
 static void lru_gen_start_scanning_memcg(struct mem_cgroup *memcg);
@@ -3697,15 +3712,15 @@ static void walk_update_folio(struct lru_gen_mm_walk *walk, struct folio *folio,
 }
 
 static bool walk_pte_range(pmd_t *pmd, unsigned long start, unsigned long end,
-			   struct mm_walk *args)
+			   struct mm_walk *args, bool *should_scan)
 {
-	int i;
+	int i, type;
 	bool dirty;
 	pte_t *pte;
 	spinlock_t *ptl;
 	unsigned long addr;
 	int total = 0;
-	int young = 0;
+	int young[ANON_AND_FILE] = {};
 	struct folio *last = NULL;
 	struct lru_gen_mm_walk *walk = args->private;
 	struct mem_cgroup *memcg = lruvec_memcg(walk->lruvec);
@@ -3762,7 +3777,7 @@ restart:
 		if (pte_dirty(ptent))
 			dirty = true;
 
-		young++;
+		young[folio_is_file_lru(folio)]++;
 		walk->mm_stats[MM_LEAF_YOUNG]++;
 	}
 
@@ -3776,7 +3791,9 @@ restart:
 	arch_leave_lazy_mmu_mode();
 	pte_unmap_unlock(pte, ptl);
 
-	return suitable_to_scan(total, young);
+	for (type = ANON_AND_FILE - 1; type >= 0; type--)
+		should_scan[type] = suitable_to_scan(total, young[type]);
+	return should_scan[0] || should_scan[1];
 }
 
 static void walk_pmd_range_locked(pud_t *pud, unsigned long addr, struct vm_area_struct *vma,
@@ -3873,7 +3890,7 @@ done:
 static void walk_pmd_range(pud_t *pud, unsigned long start, unsigned long end,
 			   struct mm_walk *args)
 {
-	int i;
+	int i, type;
 	pmd_t *pmd;
 	unsigned long next;
 	unsigned long addr;
@@ -3882,6 +3899,7 @@ static void walk_pmd_range(pud_t *pud, unsigned long start, unsigned long end,
 	unsigned long first = -1;
 	struct lru_gen_mm_walk *walk = args->private;
 	struct lru_gen_mm_state *mm_state = get_mm_state(walk->lruvec);
+	bool should_scan[ANON_AND_FILE];
 
 	VM_WARN_ON_ONCE(pud_leaf(*pud));
 
@@ -3923,18 +3941,37 @@ restart:
 			walk_pmd_range_locked(pud, addr, vma, args, bitmap, &first);
 		}
 
-		if (!walk->force_scan && !test_bloom_filter(mm_state, walk->scan_seq, pmd + i))
-			continue;
+		if (!walk->force_scan) {
+			int type;
+			bool should_scan = false;
+
+			for (type = ANON_AND_FILE - 1; type >= 0; type--) {
+				if (walk->type_should_scan[type]) {
+					should_scan |= test_bloom_filter(mm_state, type,
+									 walk->scan_seq, pmd + i);
+				} else if (test_bloom_filter(mm_state, type, walk->scan_seq, pmd + i)) {
+					update_bloom_filter(mm_state, type, walk->scan_seq + 1, pmd + i);
+				}
+			}
+
+			if (!should_scan)
+				continue;
+		}
 
 		walk->mm_stats[MM_NONLEAF_FOUND]++;
 
-		if (!walk_pte_range(&val, addr, next, args))
+		for (type = ANON_AND_FILE - 1; type >= 0; type--)
+			should_scan[type] = walk->type_should_scan[type];
+
+		if (!walk_pte_range(&val, addr, next, args, should_scan))
 			continue;
 
 		walk->mm_stats[MM_NONLEAF_ADDED]++;
 
 		/* carry over to the next generation */
-		update_bloom_filter(mm_state, walk->scan_seq + 1, pmd + i);
+		for (type = ANON_AND_FILE - 1; type >= 0; type--)
+			if (should_scan[type])
+				update_bloom_filter(mm_state, type, walk->scan_seq + 1, pmd + i);
 	}
 
 	walk_pmd_range_locked(pud, -1, vma, args, bitmap, &first);
@@ -4264,8 +4301,10 @@ static void try_to_inc_max_seq(struct lruvec *lruvec, unsigned long *seq,
 	}
 
 	walk->lruvec = lruvec;
-	for (type = ANON_AND_FILE - 1; type >= 0; type--)
+	for (type = ANON_AND_FILE - 1; type >= 0; type--) {
 		walk->seq[type] = seq[type];
+		walk->type_is_aging[type] = should_age[type];
+	}
 	walk->scan_seq = scan_seq;
 	walk->swappiness = swappiness;
 	walk->force_scan = force_scan;
@@ -4556,7 +4595,7 @@ bool lru_gen_look_around(struct page_vma_mapped_walk *pvmw,
 
 	/* feedback from rmap walkers to page table walkers */
 	if (mm_state && suitable_to_scan(i, young))
-		update_bloom_filter(mm_state, scan_seq, pvmw->pmd);
+		update_bloom_filter(mm_state, type, scan_seq, pvmw->pmd);
 
 	return true;
 }

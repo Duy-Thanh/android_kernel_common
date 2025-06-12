@@ -825,6 +825,8 @@ struct mm_cid {
 };
 #endif
 
+#define ANON_AND_FILE 2
+
 struct kioctx_table;
 struct iommu_mm_data;
 struct mm_struct {
@@ -1067,7 +1069,7 @@ struct mm_struct {
 			 * whether it has been used since the last time per-node
 			 * page table walkers cleared the corresponding bits.
 			 */
-			unsigned long bitmap;
+			unsigned long bitmap[ANON_AND_FILE];
 #ifdef CONFIG_MEMCG
 			/* points to the memcg of "owner" above */
 			struct mem_cgroup *memcg;
@@ -1123,8 +1125,11 @@ void lru_gen_migrate_mm(struct mm_struct *mm);
 
 static inline void lru_gen_init_mm(struct mm_struct *mm)
 {
+	int type;
+
 	INIT_LIST_HEAD(&mm->lru_gen.list);
-	mm->lru_gen.bitmap = 0;
+	for (type = ANON_AND_FILE - 1; type >= 0; type--)
+		mm->lru_gen.bitmap[type] = 0;
 #ifdef CONFIG_MEMCG
 	mm->lru_gen.memcg = NULL;
 #endif
@@ -1132,12 +1137,15 @@ static inline void lru_gen_init_mm(struct mm_struct *mm)
 
 static inline void lru_gen_use_mm(struct mm_struct *mm)
 {
+	int type;
+
 	/*
 	 * When the bitmap is set, page reclaim knows this mm_struct has been
 	 * used since the last time it cleared the bitmap. So it might be worth
 	 * walking the page tables of this mm_struct to clear the accessed bit.
 	 */
-	WRITE_ONCE(mm->lru_gen.bitmap, -1);
+	for (type = ANON_AND_FILE - 1; type >= 0; type--)
+		WRITE_ONCE(mm->lru_gen.bitmap[type], -1);
 }
 
 #else /* !CONFIG_LRU_GEN_WALKS_MMU */
