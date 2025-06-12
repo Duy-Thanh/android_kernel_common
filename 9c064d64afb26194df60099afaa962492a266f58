@@ -16,6 +16,24 @@
       "message": "This seems to be unfinished upstream. After a year of discussion, shouldn\u0027t this actually evolve into something that is acceptable to land upstream?",
       "revId": "9c064d64afb26194df60099afaa962492a266f58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0122d901_51892dce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954065
+      },
+      "writtenOn": "2025-06-12T08:36:48Z",
+      "side": 1,
+      "message": "We are in the process of redesigning our solution this year, though it is not yet complete. We did observe the issue re-emerge on kernel 6.6; however, it is not a critical problem. So we have chosen not to implement this particular fix on kernel 6.6. Our intention is to finalize the new design and then discuss it with the upstream maintainers later this year.\n\nHowever, since this cherry-pick change was submitted by @muhammed.ali@samsung.com, perhaps they are encountering this problem more frequently. @muhammed.ali@samsung.com, could you please provide your input?",
+      "parentUuid": "971f597c_a84049b6",
+      "revId": "9c064d64afb26194df60099afaa962492a266f58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
