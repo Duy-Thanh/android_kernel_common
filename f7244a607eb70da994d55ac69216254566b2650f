@@ -16,6 +16,24 @@
       "message": "Build-break:\n```\n...4-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/19/execroot/__main__/common/drivers/android/vendor_hooks.c:486:65: error: expected \u0027;\u0027 after top-level asm block\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mempool_alloc_skip_wait)\n```",
       "revId": "f7244a607eb70da994d55ac69216254566b2650f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb03fa90_4b8a32d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2025-06-12T01:32:33Z",
+      "side": 1,
+      "message": "resolved,\nthanks.",
+      "parentUuid": "845b495a_f9fe26ea",
+      "revId": "f7244a607eb70da994d55ac69216254566b2650f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
