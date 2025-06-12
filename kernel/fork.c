@@ -954,6 +954,9 @@ void __mmdrop(struct mm_struct *mm)
 	mm_destroy_cid(mm);
 	percpu_counter_destroy_many(mm->rss_stat, NR_MM_COUNTERS);
 
+	BUG_ON(!list_empty(&mm->dmabufs->refcounts));
+	kfree(mm->dmabufs);
+
 	free_mm(mm);
 }
 EXPORT_SYMBOL_GPL(__mmdrop);
@@ -1049,6 +1052,19 @@ static void set_max_threads(unsigned int max_threads_suggested)
 /* Initialized by the architecture: */
 int arch_task_struct_size __read_mostly;
 #endif
+
+static int mm_init_dma_buf_task_info(struct mm_struct *mm)
+{
+	mm->dmabufs = kmalloc(sizeof(*mm->dmabufs), GFP_KERNEL);
+	if (!mm->dmabufs)
+		return -ENOMEM;
+
+	spin_lock_init(&mm->dmabufs->lock);
+	INIT_LIST_HEAD(&mm->dmabufs->refcounts);
+	mm->dmabufs->rss = 0;
+
+	return 0;
+}
 
 #ifndef CONFIG_ARCH_TASK_STRUCT_ALLOCATOR
 static void task_struct_whitelist(unsigned long *offset, unsigned long *size)
@@ -1341,10 +1357,15 @@ static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p,
 				     NR_MM_COUNTERS))
 		goto fail_pcpu;
 
+	if (mm_init_dma_buf_task_info(mm))
+		goto fail_dmabuf;
+
 	mm->user_ns = get_user_ns(user_ns);
 	lru_gen_init_mm(mm);
 	return mm;
 
+fail_dmabuf:
+	mm->dmabufs = NULL;
 fail_pcpu:
 	mm_destroy_cid(mm);
 fail_cid:

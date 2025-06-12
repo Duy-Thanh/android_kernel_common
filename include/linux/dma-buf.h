@@ -363,6 +363,13 @@ struct dma_buf_ops {
 	ANDROID_KABI_RESERVE(2);
 };
 
+// For PSS
+struct task_dma_buf_info {
+	spinlock_t lock; // TODO uhhh... deadlocks possible?
+	struct list_head tasks;
+	unsigned long num_tasks;
+};
+
 /**
  * struct dma_buf - shared buffer object
  *
@@ -531,7 +538,7 @@ struct dma_buf {
 	} *sysfs_entry;
 #endif
 
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, struct task_dma_buf_info *task_info);
 	ANDROID_KABI_RESERVE(2);
 };
 

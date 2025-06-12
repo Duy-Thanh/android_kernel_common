@@ -763,6 +763,19 @@ struct mm_cid {
 };
 #endif
 
+struct dma_buf;
+struct dma_buf_record {
+	struct list_head node;
+	struct dma_buf *dmabuf;
+	unsigned long refcount;
+};
+
+struct dma_buf_mm_info {
+	spinlock_t lock;
+	struct list_head refcounts;
+	uint64_t rss;
+};
+
 struct kioctx_table;
 struct mm_struct {
 	struct {
@@ -1012,8 +1025,8 @@ struct mm_struct {
 		} lru_gen;
 #endif /* CONFIG_LRU_GEN */
 
-		ANDROID_KABI_RESERVE(1);
-		ANDROID_BACKPORT_RESERVE(1);
+// TODO ifdef CONFIG_DMA_SHARED_BUFFER
+		ANDROID_KABI_USE(1, struct dma_buf_mm_info *dmabufs);
 	} __randomize_layout;
 
 	/*

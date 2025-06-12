@@ -186,7 +186,7 @@ static int cma_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 
 	vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
 
-	vma->vm_ops = &dma_heap_vm_ops;
+	vma->vm_ops = &dma_heap_vm_ops; // TODO Bug here!?
 	vma->vm_private_data = buffer;
 
 	return 0;
