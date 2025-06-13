@@ -300,6 +300,7 @@
   __traceiter_android_vh_f2fs_printk
   __tracepoint_android_vh_f2fs_create
   __traceiter_android_vh_f2fs_create
+  backing_file_user_path
   wb_wakeup
   redirty_tail_locked
   bdi_list
