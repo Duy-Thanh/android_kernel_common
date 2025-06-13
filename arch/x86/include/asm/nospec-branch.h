@@ -499,6 +499,12 @@ static inline void call_depth_return_thunk(void) {}
 extern retpoline_thunk_t __x86_indirect_thunk_array__pkvm[];
 extern retpoline_thunk_t __x86_indirect_call_thunk_array__pkvm[];
 extern retpoline_thunk_t __x86_indirect_jump_thunk_array__pkvm[];
+#ifdef CONFIG_MITIGATION_RETPOLINE
+#define GEN(reg) 								\
+	extern retpoline_thunk_t __x86_indirect_thunk_##reg##__pkvm;
+#include <asm/GEN-for-each-reg.h>
+#undef GEN
+#endif
 
 #ifdef CONFIG_MITIGATION_RETHUNK
 extern void __x86_return_thunk__pkvm(void);
@@ -528,6 +534,11 @@ extern void srso_alias_return_thunk__pkvm(void);
 
 #ifdef CONFIG_MITIGATION_CALL_DEPTH_TRACKING
 extern void call_depth_return_thunk__pkvm(void);
+#define GEN(reg) 								\
+	extern retpoline_thunk_t __x86_indirect_call_thunk_##reg##__pkvm;	\
+	extern retpoline_thunk_t __x86_indirect_jump_thunk_##reg##__pkvm;
+#include <asm/GEN-for-each-reg.h>
+#undef GEN
 #else
 static inline void call_depth_return_thunk__pkvm(void) {}
 #endif
