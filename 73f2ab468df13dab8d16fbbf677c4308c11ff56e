@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96813cd2_b6d4ce0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-06-13T07:48:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "038f5575_17c0c013",
+      "revId": "73f2ab468df13dab8d16fbbf677c4308c11ff56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2156855f_18bb66fe",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "I can\u0027t review this until you rebase them into a single patchset. As separate patches they will all conflict with each other when attempting to merge.",
       "parentUuid": "2156855f_18bb66fe",
+      "revId": "73f2ab468df13dab8d16fbbf677c4308c11ff56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d75650c1_5faba1fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-06-13T07:48:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55fd8351_1bf1cd8f",
       "revId": "73f2ab468df13dab8d16fbbf677c4308c11ff56e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
