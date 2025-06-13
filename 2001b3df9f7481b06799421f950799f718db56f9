@@ -16,6 +16,23 @@
       "message": "Respin bug:b/424766421",
       "revId": "2001b3df9f7481b06799421f950799f718db56f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9186e31_61375431",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-06-13T14:45:16Z",
+      "side": 1,
+      "message": "Rebase the set please.",
+      "revId": "2001b3df9f7481b06799421f950799f718db56f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
