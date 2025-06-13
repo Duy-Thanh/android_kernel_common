@@ -13,6 +13,7 @@
 #ifndef __DMA_BUF_H__
 #define __DMA_BUF_H__
 
+#include <linux/atomic.h>
 #include <linux/iosys-map.h>
 #include <linux/file.h>
 #include <linux/err.h>
@@ -531,7 +532,7 @@ struct dma_buf {
 	} *sysfs_entry;
 #endif
 
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, atomic64_t num_unique_mm_refs);
 	ANDROID_KABI_RESERVE(2);
 };
 

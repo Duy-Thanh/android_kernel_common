@@ -189,6 +189,7 @@ int dma_buf_account_to_mm(struct dma_buf *dmabuf, struct mm_struct *mm)
 	list_add(&r->node, &mm->dmabufs->refcounts);
 	mm->dmabufs->rss += dmabuf->size;
 	mm->dmabufs->rss_hwm = max(mm->dmabufs->rss_hwm, mm->dmabufs->rss);
+	atomic64_inc(&dmabuf->num_unique_mm_refs);
 	spin_unlock(&mm->dmabufs->lock);
 
 	return 0;
@@ -208,6 +209,8 @@ void dma_buf_unaccount_from_mm(struct dma_buf *dmabuf, struct mm_struct *mm)
 			mm->dmabufs->rss -= r->dmabuf->size;
 			list_del(&r->node);
 			kfree(r);
+			WARN_ON(atomic64_read(&dmabuf->num_unique_mm_refs) == 0);
+			atomic64_dec(&dmabuf->num_unique_mm_refs);
 			goto out;
 		}
 	}
@@ -774,6 +777,7 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 	dmabuf->cb_in.poll = dmabuf->cb_out.poll = &dmabuf->poll;
 	dmabuf->cb_in.active = dmabuf->cb_out.active = 0;
 	INIT_LIST_HEAD(&dmabuf->attachments);
+	atomic64_set(&dmabuf->num_unique_mm_refs, 0);
 
 	if (!resv) {
 		dmabuf->resv = (struct dma_resv *)&dmabuf[1];
