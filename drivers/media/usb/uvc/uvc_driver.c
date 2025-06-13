@@ -13,8 +13,10 @@
 #include <linux/kernel.h>
 #include <linux/list.h>
 #include <linux/module.h>
+#include <linux/of_platform.h>
 #include <linux/slab.h>
 #include <linux/usb.h>
+#include <linux/usb/hcd.h>
 #include <linux/usb/quirks.h>
 #include <linux/usb/uvc.h>
 #include <linux/videodev2.h>
@@ -2188,6 +2190,34 @@ static int uvc_register_chains(struct uvc_device *dev)
 
 static const struct uvc_device_info uvc_quirk_none = { 0 };
 
+/*
+ * Find the special DMA pool device if it exists by looking for the
+ * device tree node with the 'google,uvc-urb' compatible string.
+ * If not, use the bus device.
+ */
+static struct device *uvc_find_dma_pool_device(struct usb_device *udev)
+{
+        struct device_node *np;
+        struct platform_device *pdev;
+        struct device *dma_dev = NULL;
+
+        np = of_find_compatible_node(NULL, NULL, "google,uvc-urb");
+        if (np) {
+		pdev = of_find_device_by_node(np);
+		of_node_put(np);
+
+		if (pdev) {
+			dma_dev = &pdev->dev;
+			platform_device_put(pdev);
+		}
+	}
+
+	if (!dma_dev)
+		dma_dev = bus_to_hcd(udev->bus)->self.sysdev;
+
+        return dma_dev;
+}
+
 static int uvc_probe(struct usb_interface *intf,
 		     const struct usb_device_id *id)
 {
@@ -2211,6 +2241,7 @@ static int uvc_probe(struct usb_interface *intf,
 	mutex_init(&dev->lock);
 
 	dev->udev = usb_get_dev(udev);
+	dev->dma_dev = uvc_find_dma_pool_device(udev);
 	dev->intf = usb_get_intf(intf);
 	dev->intfnum = intf->cur_altsetting->desc.bInterfaceNumber;
 	dev->info = info ? info : &uvc_quirk_none;

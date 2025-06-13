@@ -590,6 +590,7 @@ struct uvc_status {
 
 struct uvc_device {
 	struct usb_device *udev;
+	struct device *dma_dev;
 	struct usb_interface *intf;
 	unsigned long warnings;
 	u32 quirks;
