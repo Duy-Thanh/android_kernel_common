@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "093c5295_1318095b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-13T17:47:23Z",
+      "side": 1,
+      "message": "Please preserve the same Change-Id, when cherry-picking patches to other branches.\n\nhttps://r.android.com/3658572",
+      "revId": "88f764d03fcd2b9287038717b498efa65da96720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
