@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "018bc66e_6d81c3ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-06-13T07:44:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e75c638_ebfc0a71",
+      "revId": "c2a162af08fff61b961e69629d04d1d2bdb8b9ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "049d5a41_57ff4270",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-02T15:31:26Z",
       "side": 1,
       "message": "Rebase all of these TV config changes on top of each other into one patchset",
+      "revId": "c2a162af08fff61b961e69629d04d1d2bdb8b9ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4a73785_42b4d921",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-06-13T07:44:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "049d5a41_57ff4270",
       "revId": "c2a162af08fff61b961e69629d04d1d2bdb8b9ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
