@@ -16,6 +16,24 @@
       "message": "why not just remove them?",
       "revId": "b8f35acc1c7464ea449c4d9b090e8692588295ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80147b84_05748ed9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-06-13T20:47:23Z",
+      "side": 1,
+      "message": "to make the error more human readable. I was planning to remove them a bit later",
+      "parentUuid": "d0db84e7_f206668d",
+      "revId": "b8f35acc1c7464ea449c4d9b090e8692588295ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
