@@ -261,11 +261,12 @@ static int check_donation(const struct pkvm_mem_transition *tx)
 
 static int host_initiate_donation(const struct pkvm_mem_transition *tx)
 {
+	struct mem_range range;
 	pkvm_id owner_id = completer_owner_id(tx);
 	u64 addr = tx->initiator.host.addr;
 	u64 size = tx->size;
-
-	if (owner_id == OWNER_ID_INV || hyp_page_count(__hyp_va(addr)))
+	if (!find_mem_range(addr, &range) || owner_id == OWNER_ID_INV ||
+			hyp_page_count(__hyp_va(addr)))
 		return -EINVAL;
 	else
 		return host_ept_set_owner_locked(tx->initiator.host.pgt_override,
