@@ -3323,6 +3323,25 @@ static int proc_dmabuf_rss_show(struct seq_file *m, struct pid_namespace *ns,
 	return 0;
 }
 
+static int proc_dmabuf_rss_hwm_show(struct seq_file *m, struct pid_namespace *ns,
+		     struct pid *pid, struct task_struct *tsk)
+{
+	struct mm_struct *mm;
+	uint64_t rss_hwm;
+
+	mm = get_task_mm(tsk);
+	if (mm) {
+		spin_lock(&mm->dmabufs->lock);
+		rss_hwm = mm->dmabufs->rss_hwm;
+		spin_unlock(&mm->dmabufs->lock);
+
+		seq_printf(m, "%llu\n", rss_hwm);
+		mmput(mm);
+	}
+
+	return 0;
+}
+
 /*
  * Thread groups
  */
@@ -3448,6 +3467,7 @@ static const struct pid_entry tgid_base_stuff[] = {
 #endif
 // TODO ifdefs
 	ONE("dmabuf_rss",  S_IRUGO, proc_dmabuf_rss_show),
+	ONE("dmabuf_rss_hwm",  S_IRUGO, proc_dmabuf_rss_hwm_show),
 };
 
 static int proc_tgid_base_readdir(struct file *file, struct dir_context *ctx)

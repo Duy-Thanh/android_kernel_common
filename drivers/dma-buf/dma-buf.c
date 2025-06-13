@@ -27,6 +27,7 @@
 #include <linux/mm.h>
 #include <linux/mount.h>
 #include <linux/pseudo_fs.h>
+#include <linux/minmax.h>
 
 #include <uapi/linux/dma-buf.h>
 #include <uapi/linux/magic.h>
@@ -187,6 +188,7 @@ int dma_buf_account_to_mm(struct dma_buf *dmabuf, struct mm_struct *mm)
 	r->refcount = 1;
 	list_add(&r->node, &mm->dmabufs->refcounts);
 	mm->dmabufs->rss += dmabuf->size;
+	mm->dmabufs->rss_hwm = max(mm->dmabufs->rss_hwm, mm->dmabufs->rss);
 	spin_unlock(&mm->dmabufs->lock);
 
 	return 0;

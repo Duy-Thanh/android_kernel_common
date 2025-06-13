@@ -774,6 +774,7 @@ struct dma_buf_mm_info {
 	spinlock_t lock;
 	struct list_head refcounts;
 	uint64_t rss;
+	uint64_t rss_hwm;
 };
 
 struct kioctx_table;
