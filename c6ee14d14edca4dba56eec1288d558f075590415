@@ -34,6 +34,24 @@
       "parentUuid": "04fcaae8_87d7338d",
       "revId": "c6ee14d14edca4dba56eec1288d558f075590415",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "392010ee_2d5868cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2025-06-14T07:59:49Z",
+      "side": 1,
+      "message": "That was 4 years ago, and it was code I didn\u0027t even know back then.\nYour guess is as good (or likely better at this point) as mine.\nIf you know why it broke you presumably know what to revert?",
+      "parentUuid": "77c21703_70efe51b",
+      "revId": "c6ee14d14edca4dba56eec1288d558f075590415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
