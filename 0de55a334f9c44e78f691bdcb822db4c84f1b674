@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdaa06b3_9cc49fbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-14T00:28:20Z",
+      "side": 1,
+      "message": "Overriding Lint, as the change to ignore MACRO_ARG_UNUSED landed in https://r.android.com/3663092 which resolved the presubmit failures, but I can\u0027t trivially re-trigger lint checks here.",
+      "revId": "0de55a334f9c44e78f691bdcb822db4c84f1b674",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
