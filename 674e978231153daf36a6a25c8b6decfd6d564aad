@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dde52788_77be419d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4160441
+      },
+      "writtenOn": "2025-06-14T17:19:30Z",
+      "side": 1,
+      "message": "Hi! I was wondering how would you solve this intermittent issue, and propose a long-term fix. I was reviewing subsequent updates while trying to read each pull that has been made so far.\n\nIf you determine a range for the kernel ABI as a floating point to lookup or untag, this is to me a high rish approach and the same issue will arise each time or possibility for every slight modification of the memory allocation. At this point the memory allocation is modular and you should impose a key-chain, similar as your actual post (ironic) and include each assets (point-to-float) (user-isolated system) in a separate cell with simply a different version. Then add a color scheme id-type to compute the divergence in between each cells as your current roadmap is not made to scale so. My opinion, not sure if this can help but as a modular microsystems to a distributed allocation with user cache and partitions, this is better...",
+      "revId": "674e978231153daf36a6a25c8b6decfd6d564aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
