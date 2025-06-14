@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04fcaae8_87d7338d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-14T00:00:19Z",
+      "side": 1,
+      "message": "Looks similar to the merge in 92cf99250dd3d508726d5c3ad850857e7766c594 (Change-Id: I615a7f2cffdf3f3c8d80022a977ac11d5597221d)\n\nSo I think this is ok.  Would be good to have a +2 from someone more familiar with the android changes to xt_IDLETIMER.c",
+      "revId": "c6ee14d14edca4dba56eec1288d558f075590415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
