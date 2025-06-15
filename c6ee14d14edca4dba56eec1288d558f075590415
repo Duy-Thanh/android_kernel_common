@@ -52,6 +52,24 @@
       "parentUuid": "77c21703_70efe51b",
       "revId": "c6ee14d14edca4dba56eec1288d558f075590415",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "504281d5_e0debe23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-06-15T01:57:38Z",
+      "side": 1,
+      "message": "This code got dropped during a merge. Upstream refactored the two functions and we accidentally removed our xt_IDLETIMER changes. This patch just restores the previous OOT patch. So there is really nothing new to look at here.",
+      "parentUuid": "392010ee_2d5868cf",
+      "revId": "c6ee14d14edca4dba56eec1288d558f075590415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
