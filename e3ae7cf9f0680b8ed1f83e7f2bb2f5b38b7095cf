@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e9540b7_fc9ff5f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-16T09:35:46Z",
+      "side": 1,
+      "message": "The bootup issue with the GPU driver that we\u0027ve encountered is just one manifestation of the underlying issue. With some other driver it could cause problems not at boot time but later at runtime, and so on. So maybe a more generic title, e.g. \"Avoid using refcounting for reserved memory\"?",
+      "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f37ad8fd_9fcf852e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-16T09:35:46Z",
+      "side": 1,
+      "message": "I think it\u0027s worth mentioning that it\u0027s the Intel GPU driver that tries to map reserved memory (it\u0027s a valuable knowledge).",
+      "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "513cf8ad_5321555c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-16T09:35:46Z",
+      "side": 1,
+      "message": "This logic is now duplicated in 3 places, so maybe extract it to a helper function?\n\nMaybe even a generic one in buddy_memory.h, something like:\n\n```\nstatic inline struct hyp_page *hyp_phys_to_page_safe(phys_addr_t phys)\n{\n\tstruct mem_range range;\n\t\n\tif (!find_mem_range(phys, \u0026range))\n\t\treturn NULL;\n\t\t\n\treturn hyp_phys_to_page(phys);\n}\n```",
+      "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93f97881_d5f8a05f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-16T09:35:46Z",
+      "side": 1,
+      "message": "nit:\n1. We shouldn\u0027t remove the empty line.\n2. The `!find_mem_range(addr, \u0026range)` check could be after `owner_id \u003d\u003d OWNER_ID_INV` (it is slower, and it is related to the hyp_page_count check).\n\nActually, maybe let\u0027s refactor the code a bit:\n\n```\n\tif (owner_id \u003d\u003d OWNER_ID_INV)\n\t\treturn -EINVAL;\n\n\t/*\n\t * Only allow the host to donate normal memory (tracked in the hyp vmemmap),\n\t * not reserved memory, MMIO etc.\n\t */\n\tif (!find_mem_range(addr, \u0026range))\n\t\treturn -EPERM;\n\n\t/* Prevent donating pages used by the host for DMA. */\n\tif (hyp_page_count(__hyp_va(addr)))\n\t\treturn -EBUSY;\n\n\treturn host_ept_set_owner_locked(tx-\u003einitiator.host.pgt_override,\n\t\t\t\t\t addr, size, owner_id);\n```",
+      "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
