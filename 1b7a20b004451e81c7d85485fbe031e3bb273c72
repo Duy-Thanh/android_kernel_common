@@ -34,6 +34,24 @@
       "parentUuid": "861aa1d0_8e5e7103",
       "revId": "1b7a20b004451e81c7d85485fbe031e3bb273c72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b641faac_ede59db2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-06-16T09:29:48Z",
+      "side": 1,
+      "message": "Presubmit is still broken because of unrelated issues, but this has now landed upstream and I\u0027m confident in it.",
+      "parentUuid": "1f32848e_19f8ca10",
+      "revId": "1b7a20b004451e81c7d85485fbe031e3bb273c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
