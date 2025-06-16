@@ -531,6 +531,7 @@ config FORCE_MAX_ZONEORDER
 	int
 
 #
+<<<<<<< HEAD   (00bb1e ANDROID: mm: Set PAGE_BLOCK_ORDER to 8 when ARM64_16K_PAGES)
 # Select this config option from the ARM64 architecture Kconfig to set
 # the page size to 16KB.
 # See b/424212284 for more information.
@@ -539,15 +540,42 @@ config ARM64_16K_PAGES
 
 # When FORCE_MAX_ZONEORDER is not defined,
 # the default page block order is MAX_ORDER (10) as per
+||||||| BASE
+# Select this config option from the ARM64 architecture Kconfig to set
+# the page size to 16KB.
+# See b/424212284 for more information.
+config ARM64_16K_PAGES
+	bool
+
+#
+# When ARCH_FORCE_MAX_ORDER is not defined,
+# the default page block order is MAX_PAGE_ORDER (10) as per
+=======
+# When ARCH_FORCE_MAX_ORDER is not defined,
+# the default page block order is MAX_PAGE_ORDER (10) as per
+>>>>>>> CHANGE (a2a8d9 Revert "ANDROID: mm: Set PAGE_BLOCK_ORDER to 7 when ARM64_16)
 # include/linux/mmzone.h.
 #
 config PAGE_BLOCK_ORDER
 	int "Page Block Order"
+<<<<<<< HEAD   (00bb1e ANDROID: mm: Set PAGE_BLOCK_ORDER to 8 when ARM64_16K_PAGES)
 	range 1 10 if FORCE_MAX_ZONEORDER = 0 || FORCE_MAX_ZONEORDER = ""
 	default 10 if FORCE_MAX_ZONEORDER = 0 || FORCE_MAX_ZONEORDER = ""
 	default 8 if ARM64_16K_PAGES
 	range 1 FORCE_MAX_ZONEORDER if FORCE_MAX_ZONEORDER != 0
 	default FORCE_MAX_ZONEORDER if FORCE_MAX_ZONEORDER != 0
+||||||| BASE
+	range 1 10 if ARCH_FORCE_MAX_ORDER = 0 || ARCH_FORCE_MAX_ORDER = ""
+	default 10 if ARCH_FORCE_MAX_ORDER = 0 || ARCH_FORCE_MAX_ORDER = ""
+	default 7 if ARM64_16K_PAGES
+	range 1 ARCH_FORCE_MAX_ORDER if ARCH_FORCE_MAX_ORDER != 0
+	default ARCH_FORCE_MAX_ORDER if ARCH_FORCE_MAX_ORDER != 0
+=======
+	range 1 10 if ARCH_FORCE_MAX_ORDER = 0 || ARCH_FORCE_MAX_ORDER = ""
+	default 10 if ARCH_FORCE_MAX_ORDER = 0 || ARCH_FORCE_MAX_ORDER = ""
+	range 1 ARCH_FORCE_MAX_ORDER if ARCH_FORCE_MAX_ORDER != 0
+	default ARCH_FORCE_MAX_ORDER if ARCH_FORCE_MAX_ORDER != 0
+>>>>>>> CHANGE (a2a8d9 Revert "ANDROID: mm: Set PAGE_BLOCK_ORDER to 7 when ARM64_16)
 	help
 	  The page block order refers to the power of two number of pages that
 	  are physically contiguous and can have a migrate type associated to
