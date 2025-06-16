@@ -1498,4 +1498,9 @@ int walk_page_range_mm(struct mm_struct *mm, unsigned long start,
 		unsigned long end, const struct mm_walk_ops *ops,
 		void *private);
 
+#ifdef CONFIG_LRU_GEN
+unsigned long lru_gen_eviction_history_get_count(
+	struct lru_gen_eviction_history *history, int num_gens);
+#endif
+
 #endif	/* __MM_INTERNAL_H */

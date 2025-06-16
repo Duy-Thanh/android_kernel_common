@@ -292,8 +292,6 @@ static void lru_gen_refault(struct folio *folio, void *shadow)
 	struct lru_gen_folio *lrugen;
 	int type = folio_is_file_lru(folio);
 	int delta = folio_nr_pages(folio);
-	unsigned long opposite_min_seq;
-	unsigned long victim_seq;
 
 	rcu_read_lock();
 
@@ -303,19 +301,31 @@ static void lru_gen_refault(struct folio *folio, void *shadow)
 
 	lrugen = &lruvec->lrugen;
 
+	hist = lru_hist_from_seq(READ_ONCE(lrugen->min_seq[type]));
+
 	mod_lruvec_state(lruvec, WORKINGSET_REFAULT_BASE + type, delta);
 
-	opposite_min_seq = READ_ONCE(lrugen->min_seq[!type]);
-	hist = lru_hist_from_seq(opposite_min_seq);
-	victim_seq = READ_ONCE(lrugen->victim_seq[hist][!type]);
+	{
+		unsigned long num_evictions = 0, seq, min_seq, num_inactive;
+		int tier;
 
-	if ((token >> LRU_REFS_WIDTH) >= (victim_seq & (EVICTION_MASK >> LRU_REFS_WIDTH)))
-		atomic_long_add(delta, &lrugen->refaulted_victims[hist][!type]);
+		for (tier = 0; tier < MAX_NR_TIERS; tier++)
+			num_evictions += atomic_long_read(&lrugen->evicted[hist][type][tier]);
+
+		num_inactive = READ_ONCE(lrugen->evictable_gen_size[!type]);
+		seq = token >> LRU_REFS_WIDTH;
+		min_seq = READ_ONCE(lrugen->min_seq[type]);
+
+		num_evictions += lru_gen_eviction_history_get_count(
+			lrugen->eviction_history + type, min_seq - seq);
+		if (num_evictions < num_inactive)
+			atomic_long_add(delta, &lrugen->cost[type]);
+	}
 
 	if (!recent)
 		goto unlock;
 
-	hist = lru_hist_from_seq(READ_ONCE(lrugen->min_seq[type]));
+	//hist = lru_hist_from_seq(READ_ONCE(lrugen->min_seq[type]));
 	refs = (token & (BIT(LRU_REFS_WIDTH) - 1)) + 1;
 	tier = lru_tier_from_refs(refs, workingset);
 
