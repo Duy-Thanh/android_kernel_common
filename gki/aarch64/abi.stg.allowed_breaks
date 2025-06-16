@@ -1,0 +1,9 @@
+<<<<<<< HEAD   (755471 ANDROID: vendor_hooks: add one hook for lazy preemption)
+||||||| BASE
+=======
+# How to use this file: http://go/approve-abi-break
+# ABI freeze commit: 0690b3438b4acb24f7ecfd946cf9a9ac5954ef20
+
+type 'enum prs_errcode' changed
+  enumerator 'PERR_REMOTE' (10) was added
+>>>>>>> BRANCH (398ede Merge android16-6.12 into android16-6.12-lts)
