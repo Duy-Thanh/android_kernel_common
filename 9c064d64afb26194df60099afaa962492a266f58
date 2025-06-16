@@ -52,6 +52,24 @@
       "parentUuid": "0122d901_51892dce",
       "revId": "9c064d64afb26194df60099afaa962492a266f58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043acdf4_bf309e8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-06-16T04:51:34Z",
+      "side": 1,
+      "message": "This is not an \"upstream fix\" as it was rejected by upstream.  Please work upstream to resolve this properly there.",
+      "parentUuid": "5f8156b9_db2fe870",
+      "revId": "9c064d64afb26194df60099afaa962492a266f58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
