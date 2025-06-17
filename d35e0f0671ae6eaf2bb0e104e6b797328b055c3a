@@ -16,6 +16,24 @@
       "message": "This feels wrong to me.  If there ia a delay in the logic here, it needs to be resolved upstream, not in a vendor-hook like this.\n\nHas the issue been reported upstream and have they rejected a fix for it?",
       "revId": "d35e0f0671ae6eaf2bb0e104e6b797328b055c3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b22d77_2b053d75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2025-06-17T02:04:44Z",
+      "side": 1,
+      "message": "Should Upstream implement different memory allocation strategies for threads of different priorities?",
+      "parentUuid": "09e4f013_f9a0fbc6",
+      "revId": "d35e0f0671ae6eaf2bb0e104e6b797328b055c3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
