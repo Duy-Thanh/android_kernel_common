@@ -236,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba90285b_d678a77a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-17T20:24:05Z",
+      "side": 1,
+      "message": "\u003e ...where ACTIVATE_IOMMU would return reprivileged if it fails.\n\nSounds interesting. :)\n\n\u003e Regarding the underscores, its just an implicit way of commenting the code that it is an internal helper function and not to be used as generically as an API or such\n\nTo be clear, that was just a digression, not about your code but about various existing functions in pKVM-IA (e.g. those from mem_protect.c) that are used very much as an API, yet they have those double-underscores, for this or that historical reason.\n\n\u003e I shall leave the code as it is for now. Thanks for your understanding\n\nSure, that\u0027s not so important.",
+      "parentUuid": "82e03a45_6b10a616",
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82287e09_f15a1810",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 4
