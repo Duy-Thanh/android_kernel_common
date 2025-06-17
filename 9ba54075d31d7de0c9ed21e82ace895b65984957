@@ -218,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82e03a45_6b10a616",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-17T19:56:39Z",
+      "side": 1,
+      "message": "Actually, I had some more deep plans after reading your comments in later cls in this series. One of the comments where you mentioned about bringing back the ACTIVATE_IOMMU made sense and I was planning to call this reprivilege if ACTIVATE_IOMMU failed. So we will have two callers, one is explicit reprivilege and one is implicit in ACTIVATE_IOMMU where ACTIVATE_IOMMU would return reprivileged if it fails. That was the use case I was mentioning. Again, this could also be reworked to make an explicit hypercall if ACTIVATE_IOMMU failed but then we need to have mutiple flags. We can weigh in the merits/demerits in that cl once I implement it fully ;-). My plan was to work through the first 8 patches in this series(probably last 5 in the first 8) and get it merged first and then can send out the rest once I have them implemented and tested.\n\nRegarding the underscores, its just an implicit way of commenting the code that it is an internal helper function and not to be used as generically as an API or such(yells at the reader without even reading the code). I like to use that when I feel that a function is a specific helper function catering a specific need and think twice before using it else where.\n\nI shall leave the code as it is for now. Thanks for your understanding",
+      "parentUuid": "8fa2686c_72fc3dcb",
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82287e09_f15a1810",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 4
