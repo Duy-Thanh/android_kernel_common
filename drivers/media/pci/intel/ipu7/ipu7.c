@@ -2480,7 +2480,8 @@ static int ipu7_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		break;
 	case IPU7P5_PCI_ID:
 		isp->hw_ver = IPU_VER_7P5;
-		isp->cpd_fw_name = IPU7P5_FIRMWARE_NAME;
+		isp->cpd_fw_name = is_es ? IPU7P5ES_FIRMWARE_NAME :
+			IPU7P5_FIRMWARE_NAME;
 		isys_ipdata = &ipu7p5_isys_ipdata;
 		psys_ipdata = &ipu7p5_psys_ipdata;
 		isys_buttress_ctrl = &ipu7_isys_buttress_ctrl;

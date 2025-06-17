@@ -21,6 +21,7 @@ struct firmware;
 
 #define IPU7_FIRMWARE_NAME		"intel/ipu/ipu7_fw.bin"
 #define IPU7P5_FIRMWARE_NAME		"intel/ipu/ipu7ptl_fw.bin"
+#define IPU7P5ES_FIRMWARE_NAME		"intel/ipu/ipu7ptles_fw.bin"
 #define IPU8_FIRMWARE_NAME		"intel/ipu/ipu8_fw.bin"
 
 #define IPU7_ISYS_NUM_STREAMS		12
