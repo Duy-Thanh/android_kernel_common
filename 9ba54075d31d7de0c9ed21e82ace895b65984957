@@ -200,6 +200,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fa2686c_72fc3dcb",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-17T19:41:04Z",
+      "side": 1,
+      "message": "\u003e\u003e Regarding the use case, I had one use case to reprivilege when iommu init fails, \u003e\u003e because we have pkvm_initialized already set by that time.\n\u003e \n\u003e Indeed, makes sense.\n\nAlthough after more thought, I don\u0027t quite get it: reprivilege is still initiated by the host, via the hypercall, so on pKVM side we\u0027re still gonna validate it in a single place (just the check is gonna be different, e.g. check for iommu initialized instead of pkvm_initialized, or something like that), so we\u0027re still not gonna have more than one user of __pkvm_reprivilege_vcpu()?",
+      "parentUuid": "c07a4342_9bbbaa82",
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82287e09_f15a1810",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 4
