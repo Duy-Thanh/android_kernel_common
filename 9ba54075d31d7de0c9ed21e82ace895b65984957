@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c07a4342_9bbbaa82",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-17T19:34:34Z",
+      "side": 1,
+      "message": "I don\u0027t have much problem with the current code either, my last comment was rather about your suggestion to add pkvm_handle_reprivilege_hc()... Anyway, nevermind, since:\n\n\u003e Regarding the use case, I had one use case to reprivilege when iommu init fails, because we have pkvm_initialized already set by that time.\n\nIndeed, makes sense.\n\nNow it seems to me the nicest way would be to have __pkvm_reprivilege_vcpu() which doesn\u0027t do the check, and pkvm_reprivilege_vcpu() wrapper which does the check. (BTW those double underscores we have in __pkvm_init_finalise() and many other function names are quite pointless, I think.)",
+      "parentUuid": "b5052672_9175ac43",
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82287e09_f15a1810",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 4
