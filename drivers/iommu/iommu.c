@@ -2656,8 +2656,20 @@ static int __iommu_add_sg(struct iommu_map_cookie_sg *cookie_sg,
 		       iova, &paddr, size, min_pagesz);
 		return -EINVAL;
 	}
-	pgsize = iommu_pgsize(domain, iova, paddr, size, &count);
-	return ops->add_deferred_map_sg(cookie_sg, paddr, pgsize, count);
+
+	while (size) {
+		size_t mapped = 0;
+
+		pgsize = iommu_pgsize(domain, iova, paddr, size, &count);
+		ops->add_deferred_map_sg(cookie_sg, paddr, pgsize, count);
+		mapped = pgsize * count;
+		iova += mapped;
+		paddr += mapped;
+		WARN_ON(size < mapped);
+		size -= mapped;
+	}
+
+	return 0;
 }
 
 ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
