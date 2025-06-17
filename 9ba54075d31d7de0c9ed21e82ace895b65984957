@@ -1,0 +1,110 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a1ef826_40009bcc",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-17T16:11:18Z",
+      "side": 1,
+      "message": "nit: I think in Linux kernel it\u0027s really much more conventional to not explicitly initialize global variables with zero values. (It\u0027s not about my personal preferences.)\n\nEDIT: furthermore, I see checkpatch complains about it: \"ERROR: do not initialise globals to false\"",
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80438bf3_6c32f8b0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-17T16:11:18Z",
+      "side": 1,
+      "message": "Sorry for nitpicking on this again, but why are these 3 registers at the end, not in the order of their occurrence in vcpu-\u003earch.regs?",
+      "fixSuggestions": [
+        {
+          "fixId": "315bd785_0f8ac5a8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 459,
+                "startChar": 0,
+                "endLine": 459,
+                "endChar": 0
+              },
+              "replacement": "\t\t\"mov 0x00(%%rdi), %%rax\\n\"\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 462,
+                "startChar": 0,
+                "endLine": 462,
+                "endChar": 0
+              },
+              "replacement": "\t\t\"mov 0x20(%%rdi), %%rsp\\n\"\n\t\t\"mov 0x28(%%rdi), %%rbp\\n\"\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 471,
+                "startChar": 0,
+                "endLine": 474,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0d9ec1_62c7b00d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-17T16:11:18Z",
+      "side": 1,
+      "message": "This check could be inside __pkvm_reprivilege_vcpu() (together with the loud comment below), and then no need to make pkvm_initialized externally visible?",
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82287e09_f15a1810",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-17T16:11:18Z",
+      "side": 1,
+      "message": "nit: checkpatch complains about this as well: \"WARNING: Missing a blank line after declarations\"",
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
