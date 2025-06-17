@@ -164,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5052672_9175ac43",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-17T18:28:52Z",
+      "side": 1,
+      "message": "Quite honestly, I don\u0027t think the existing code is complicated and I don\u0027t think I am doing any premature optimization. I like the idea of having the check whether this hypercall can be made in vmexit.c itself. And __pkvm_reprivilege_vcpu() is an intricate function which I would like to include only the core logic of reprivileging. Regarding the use case, I had one use case to reprivilege when iommu init fails, because we have pkvm_initialized already set by that time. Ofcourse this could be worked around as well by moving the global variable around and some kind of trickery, but was just mentioning that we might hit some use cases. Again, this is not an excuse for keeping the code as it is. But I feel the code is well structured now and is readable and do not have any performance or security implications. I would like to keep it as it is, please :-)",
+      "parentUuid": "1ba09e78_567bd016",
+      "revId": "9ba54075d31d7de0c9ed21e82ace895b65984957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82287e09_f15a1810",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 4
