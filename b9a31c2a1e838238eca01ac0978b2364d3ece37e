@@ -16,6 +16,24 @@
       "message": "Why is this an `ANDROID:` patch and not upstream?",
       "revId": "b9a31c2a1e838238eca01ac0978b2364d3ece37e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09aed0f9_a1a69cfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3131553
+      },
+      "writtenOn": "2025-06-17T22:36:39Z",
+      "side": 1,
+      "message": "Oh, yes, it should not be ANDROID only. Let me check with Mostafa about upstream.",
+      "parentUuid": "d3321bcc_27de6279",
+      "revId": "b9a31c2a1e838238eca01ac0978b2364d3ece37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
