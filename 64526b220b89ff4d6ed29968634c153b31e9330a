@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4d641dc_28582545",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-06-18T18:06:15Z",
+      "side": 1,
+      "message": "This isn\u0027t something we can defer for long, since the next LTS uprev will be starting eventually.\n\nWhat\u0027s preventing uploading this to mainline first, and then landing here only if they reject it?",
+      "revId": "64526b220b89ff4d6ed29968634c153b31e9330a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aab47f2b_735ac24d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
