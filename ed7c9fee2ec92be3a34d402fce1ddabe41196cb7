@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793f0ff9_e7545ef6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-18T19:42:38Z",
+      "side": 1,
+      "message": "nit: \"mapped for DMA by the host\" (otherwise it sounds misleading, we don\u0027t really refcount pages mapped just for CPU)",
+      "revId": "ed7c9fee2ec92be3a34d402fce1ddabe41196cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f7aa57_03681b4b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-18T19:42:38Z",
+      "side": 1,
+      "message": "Any reason why not add it to buddy_memory.h right away? I guess we\u0027ll want to reuse it for pvIOMMU...",
+      "revId": "ed7c9fee2ec92be3a34d402fce1ddabe41196cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82102fe2_02f7509d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-18T19:42:38Z",
+      "side": 1,
+      "message": "Just a note: I\u0027ve recalled that we also have check_donation(), which calls host_request_donation(), so it might be suitable to do these checks there... But I\u0027m not really suggesting to do that, I think all these multiple levels of indirection we have in mem_protect.c are not really helpful anyway, and pKVM-ARM folks already got rid of that and made their mem_protect.c much flatter: aosp/3405968",
+      "revId": "ed7c9fee2ec92be3a34d402fce1ddabe41196cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
