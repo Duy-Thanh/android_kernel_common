@@ -1446,10 +1446,8 @@ static int __init acpi_init(void)
 	}
 
 	acpi_kobj = kobject_create_and_add("acpi", firmware_kobj);
-	if (!acpi_kobj) {
-		pr_err("Failed to register kobject\n");
-		return -ENOMEM;
-	}
+	if (!acpi_kobj)
+		pr_debug("%s: kset create error\n", __func__);
 
 	init_prmt();
 	acpi_init_pcc();

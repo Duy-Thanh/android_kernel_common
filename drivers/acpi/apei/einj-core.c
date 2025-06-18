@@ -21,7 +21,7 @@
 #include <linux/nmi.h>
 #include <linux/delay.h>
 #include <linux/mm.h>
-#include <linux/device/faux.h>
+#include <linux/platform_device.h>
 #include <linux/unaligned.h>
 
 #include "apei-internal.h"
@@ -82,8 +82,6 @@ static u32 vendor_flags;
 static struct debugfs_blob_wrapper vendor_blob;
 static struct debugfs_blob_wrapper vendor_errors;
 static char vendor_dev[64];
-
-static u32 available_error_type;
 
 /*
  * Some BIOSes allow parameters to the SET_ERROR_TYPE entries in the
@@ -650,9 +648,14 @@ static struct { u32 mask; const char *str; } const einj_error_type_string[] = {
 
 static int available_error_type_show(struct seq_file *m, void *v)
 {
+	int rc;
+	u32 error_type = 0;
 
+	rc = einj_get_available_error_type(&error_type);
+	if (rc)
+		return rc;
 	for (int pos = 0; pos < ARRAY_SIZE(einj_error_type_string); pos++)
-		if (available_error_type & einj_error_type_string[pos].mask)
+		if (error_type & einj_error_type_string[pos].mask)
 			seq_printf(m, "0x%08x\t%s\n", einj_error_type_string[pos].mask,
 				   einj_error_type_string[pos].str);
 
@@ -675,7 +678,8 @@ bool einj_is_cxl_error_type(u64 type)
 
 int einj_validate_error_type(u64 type)
 {
-	u32 tval, vendor;
+	u32 tval, vendor, available_error_type = 0;
+	int rc;
 
 	/* Only low 32 bits for error type are valid */
 	if (type & GENMASK_ULL(63, 32))
@@ -691,9 +695,13 @@ int einj_validate_error_type(u64 type)
 	/* Only one error type can be specified */
 	if (tval & (tval - 1))
 		return -EINVAL;
-	if (!vendor)
+	if (!vendor) {
+		rc = einj_get_available_error_type(&available_error_type);
+		if (rc)
+			return rc;
 		if (!(type & available_error_type))
 			return -EINVAL;
+	}
 
 	return 0;
 }
@@ -741,11 +749,16 @@ static int einj_check_table(struct acpi_table_einj *einj_tab)
 	return 0;
 }
 
-static int __init einj_probe(struct faux_device *fdev)
+static int __init einj_probe(struct platform_device *pdev)
 {
 	int rc;
 	acpi_status status;
 	struct apei_exec_context ctx;
+
+	if (acpi_disabled) {
+		pr_debug("ACPI disabled.\n");
+		return -ENODEV;
+	}
 
 	status = acpi_get_table(ACPI_SIG_EINJ, 0,
 				(struct acpi_table_header **)&einj_tab);
@@ -763,10 +776,6 @@ static int __init einj_probe(struct faux_device *fdev)
 		pr_warn(FW_BUG "Invalid EINJ table.\n");
 		goto err_put_table;
 	}
-
-	rc = einj_get_available_error_type(&available_error_type);
-	if (rc)
-		return rc;
 
 	rc = -ENOMEM;
 	einj_debug_dir = debugfs_create_dir("einj", apei_get_debugfs_dir());
@@ -842,7 +851,7 @@ err_put_table:
 	return rc;
 }
 
-static void __exit einj_remove(struct faux_device *fdev)
+static void __exit einj_remove(struct platform_device *pdev)
 {
 	struct apei_exec_context ctx;
 
@@ -863,30 +872,34 @@ static void __exit einj_remove(struct faux_device *fdev)
 	acpi_put_table((struct acpi_table_header *)einj_tab);
 }
 
-static struct faux_device *einj_dev;
+static struct platform_device *einj_dev;
 /*
  * einj_remove() lives in .exit.text. For drivers registered via
  * platform_driver_probe() this is ok because they cannot get unbound at
  * runtime. So mark the driver struct with __refdata to prevent modpost
  * triggering a section mismatch warning.
  */
-static struct faux_device_ops einj_device_ops __refdata = {
-	.probe = einj_probe,
+static struct platform_driver einj_driver __refdata = {
 	.remove = __exit_p(einj_remove),
+	.driver = {
+		.name = "acpi-einj",
+	},
 };
 
 static int __init einj_init(void)
 {
-	if (acpi_disabled) {
-		pr_debug("ACPI disabled.\n");
-		return -ENODEV;
-	}
+	struct platform_device_info einj_dev_info = {
+		.name = "acpi-einj",
+		.id = -1,
+	};
+	int rc;
 
-	einj_dev = faux_device_create("acpi-einj", NULL, &einj_device_ops);
-	if (!einj_dev)
-		return -ENODEV;
+	einj_dev = platform_device_register_full(&einj_dev_info);
+	if (IS_ERR(einj_dev))
+		return PTR_ERR(einj_dev);
 
-	einj_initialized = true;
+	rc = platform_driver_probe(&einj_driver, einj_probe);
+	einj_initialized = rc == 0;
 
 	return 0;
 }
@@ -894,8 +907,9 @@ static int __init einj_init(void)
 static void __exit einj_exit(void)
 {
 	if (einj_initialized)
-		faux_device_destroy(einj_dev);
+		platform_driver_unregister(&einj_driver);
 
+	platform_device_unregister(einj_dev);
 }
 
 module_init(einj_init);
