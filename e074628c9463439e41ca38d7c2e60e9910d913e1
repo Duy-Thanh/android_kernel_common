@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "303b4cac_2f245381",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-06-18T09:59:01Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s the bug, this would be sub-optimal behavior as that will force the mapping to have a smaller page size.",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 11,
+        "endChar": 56
+      },
+      "revId": "e074628c9463439e41ca38d7c2e60e9910d913e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

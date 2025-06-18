@@ -416,6 +416,24 @@
       "parentUuid": "e980edb0_395ad25f",
       "revId": "ba14aa4c88b3f4d41933e3e0307cdcb390844e16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b6c8662_1bd1c1c0",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2664,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-06-18T09:59:01Z",
+      "side": 1,
+      "message": "Yes, this was designed to have an entry per sg entry, the only way I can see to guarantee that, would be to multiple `nents * N * 2` where N is number of supported pages sizes to cover the worst case, which is very wasteful.\n\nAnother way is track when the end is reached, and then `consume` the current one and allocate another.",
+      "parentUuid": "10756efb_692e6dd0",
+      "revId": "ba14aa4c88b3f4d41933e3e0307cdcb390844e16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
