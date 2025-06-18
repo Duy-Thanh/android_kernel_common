@@ -22,6 +22,30 @@
       },
       "revId": "c52303d9440afafe29a5494230ee1050dce84654",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d38929f_3657911c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-06-18T09:28:56Z",
+      "side": 1,
+      "message": "As discussed offline, the kmemdup() that chops off this new attribute (count_unix) is here:\n\nhttps://elixir.bootlin.com/linux/v6.6.93/source/net/core/scm.c#L380\n\nThis is the revert.",
+      "parentUuid": "6f8643df_36ffbb61",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 70
+      },
+      "revId": "c52303d9440afafe29a5494230ee1050dce84654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
