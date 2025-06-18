@@ -4017,8 +4017,7 @@ def parseKernelLog(data):
 							'PM: early restore of devices complete after.*'],
 		'resume_complete': ['PM: resume of devices complete after.*',
 							'PM: restore of devices complete after.*'],
-		    'post_resume': [r'.*Restarting tasks \.\.\..*',
-							'Done restarting tasks.*'],
+		    'post_resume': [r'.*Restarting tasks \.\.\..*'],
 	}
 
 	# action table (expected events that occur and show up in dmesg)

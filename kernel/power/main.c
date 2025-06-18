@@ -502,10 +502,6 @@ static int __init pm_debugfs_init(void)
 late_initcall(pm_debugfs_init);
 #endif /* CONFIG_DEBUG_FS */
 
-bool pm_sleep_transition_in_progress(void)
-{
-	return pm_suspend_in_progress() || hibernation_in_progress();
-}
 #endif /* CONFIG_PM_SLEEP */
 
 #ifdef CONFIG_PM_SLEEP_DEBUG
@@ -543,7 +539,7 @@ power_attr(pm_print_times);
 
 static inline void pm_print_times_init(void)
 {
-	pm_print_times_enabled = initcall_debug;
+	pm_print_times_enabled = !!initcall_debug;
 }
 
 static ssize_t pm_wakeup_irq_show(struct kobject *kobj,
@@ -562,7 +558,7 @@ bool pm_debug_messages_on __read_mostly;
 
 bool pm_debug_messages_should_print(void)
 {
-	return pm_debug_messages_on && pm_sleep_transition_in_progress();
+	return pm_debug_messages_on && pm_suspend_target_state != PM_SUSPEND_ON;
 }
 EXPORT_SYMBOL_GPL(pm_debug_messages_should_print);
 
