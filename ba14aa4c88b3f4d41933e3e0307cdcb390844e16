@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf512344_c70f35be",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2638,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-06-18T00:39:39Z",
+      "side": 1,
+      "message": "This can be moved inside the while body online 2661.",
+      "fixSuggestions": [
+        {
+          "fixId": "01e1df40_60cdb251",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2638,
+                "startChar": 0,
+                "endLine": 2639,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2661,
+                "startChar": 0,
+                "endLine": 2661,
+                "endChar": 0
+              },
+              "replacement": "\t\tsize_t pgsize, count;\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2689,
+                "startChar": 0,
+                "endLine": 2690,
+                "endChar": 0
+              },
+              "replacement": "\t\tcookie_sg \u003d ops-\u003ealloc_cookie_sg(iova, prot, gfp);\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2729,
+                "startChar": 0,
+                "endLine": 2734,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d ops-\u003econsume_deferred_map_sg(cookie_sg, \u0026mapped);\n\t\tif (ret) {\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2743,
+                "startChar": 0,
+                "endLine": 2743,
+                "endChar": 0
+              },
+              "replacement": "\tif (deferred_sg)\n\t\tkfree(cookie_sg);\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2748,
+                "startChar": 0,
+                "endLine": 2748,
+                "endChar": 0
+              },
+              "replacement": "\tif (deferred_sg)\n\t\tkfree(cookie_sg);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ba14aa4c88b3f4d41933e3e0307cdcb390844e16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac66ef9_3f5244cf",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2660,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-06-18T00:39:39Z",
+      "side": 1,
+      "message": "Consider formatting this loop similar to the loop on line 2480 in `iommu_map_nosync`",
+      "fixSuggestions": [
+        {
+          "fixId": "a96403c3_d9c6437f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2661,
+                "startChar": 0,
+                "endLine": 2662,
+                "endChar": 0
+              },
+              "replacement": "\t\tsize_t mapped;\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2666,
+                "startChar": 0,
+                "endLine": 2668,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2670,
+                "startChar": 0,
+                "endLine": 2670,
+                "endChar": 0
+              },
+              "replacement": "\t\tiova +\u003d mapped;\n\t\tpaddr +\u003d mapped;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ba14aa4c88b3f4d41933e3e0307cdcb390844e16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e209827_9606ebe0",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-06-18T00:39:39Z",
+      "side": 1,
+      "message": "No need to initialize this to `0`, because it\u0027s always overwritten on line 2665.\n\nAlso, can we call this something other than `mapped` e.g. `added`, because it\u0027s not yet getting mapped.",
+      "fixSuggestions": [
+        {
+          "fixId": "98983556_587146b0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2661,
+                "startChar": 0,
+                "endLine": 2662,
+                "endChar": 0
+              },
+              "replacement": "\t\tsize_t added;\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2665,
+                "startChar": 0,
+                "endLine": 2670,
+                "endChar": 0
+              },
+              "replacement": "\t\tadded \u003d pgsize * count;\n\t\tiova +\u003d added;\n\t\tpaddr +\u003d added;\n\t\tWARN_ON(size \u003c added);\n\t\tsize -\u003d added;\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2729,
+                "startChar": 0,
+                "endLine": 2730,
+                "endChar": 0
+              },
+              "replacement": "\t\tsize_t consumed \u003d ops-\u003econsume_deferred_map_sg(cookie_sg);\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2731,
+                "startChar": 0,
+                "endLine": 2734,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (consumed !\u003d len + mapped) {\n\t\t\tmapped \u003d consumed - mapped;\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2737,
+                "startChar": 0,
+                "endLine": 2737,
+                "endChar": 0
+              },
+              "replacement": "\t\tmapped +\u003d len;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ba14aa4c88b3f4d41933e3e0307cdcb390844e16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e980edb0_395ad25f",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2664,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-06-18T00:39:39Z",
+      "side": 1,
+      "message": "Consider capturing the return value and handling potential errors",
+      "fixSuggestions": [
+        {
+          "fixId": "9ccf4bdc_1207f638",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2664,
+                "startChar": 0,
+                "endLine": 2665,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d ops-\u003eadd_deferred_map_sg(cookie_sg, paddr, pgsize, count);\n\t\tif (ret)\n\t\t\treturn ret;\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2729,
+                "startChar": 0,
+                "endLine": 2735,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d ops-\u003econsume_deferred_map_sg(cookie_sg, \u0026mapped);\n\t\tif (ret)\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2749,
+                "startChar": 0,
+                "endLine": 2750,
+                "endChar": 0
+              },
+              "replacement": "\treturn PTR_ERR(ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ba14aa4c88b3f4d41933e3e0307cdcb390844e16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10756efb_692e6dd0",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2664,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-06-18T00:39:39Z",
+      "side": 1,
+      "message": "When you call `ops-\u003ealloc_cookie_sg` with the value `nents`, you have to make sure that you don\u0027t call `ops-\u003eadd_deferred_map_sg` more often that `nents` times. As it stands, I don\u0027t think you can guarantee that.",
+      "fixSuggestions": [
+        {
+          "fixId": "b8d6c930_1e588225",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2639,
+                "startChar": 0,
+                "endLine": 2639,
+                "endChar": 0
+              },
+              "replacement": "\tint ret \u003d 0;\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2664,
+                "startChar": 0,
+                "endLine": 2665,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d ops-\u003eadd_deferred_map_sg(cookie_sg, paddr, pgsize, count);\n\t\tif (ret)\n\t\t\treturn ret;\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2689,
+                "startChar": 0,
+                "endLine": 2690,
+                "endChar": 0
+              },
+              "replacement": "\t\tcookie_sg \u003d ops-\u003ealloc_cookie_sg(iova, prot, gfp);\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2729,
+                "startChar": 0,
+                "endLine": 2735,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d ops-\u003econsume_deferred_map_sg(cookie_sg, mapped);\n\t\tif (ret) {\n"
+            },
+            {
+              "path": "drivers/iommu/iommu.c",
+              "range": {
+                "startLine": 2749,
+                "startChar": 0,
+                "endLine": 2750,
+                "endChar": 0
+              },
+              "replacement": "\treturn PTR_ERR(ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ba14aa4c88b3f4d41933e3e0307cdcb390844e16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
