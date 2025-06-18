@@ -16,6 +16,24 @@
       "message": "Can INTEL_HFI_THERMAL be converted to tristate? If so, then we should do it and enable it as a vendor module",
       "revId": "64526b220b89ff4d6ed29968634c153b31e9330a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2885ad_fb38fc81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3758251
+      },
+      "writtenOn": "2025-06-18T09:35:06Z",
+      "side": 1,
+      "message": "No, i checked through the nconfigs it only supports two states. Y/N.\nSo i added in gki configs.\n\nI tried adding in vendor first but, this config is not taking any effect or code is not building with Y/M in the vendor fragments so left with adding in gki config only.",
+      "parentUuid": "aab47f2b_735ac24d",
+      "revId": "64526b220b89ff4d6ed29968634c153b31e9330a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
