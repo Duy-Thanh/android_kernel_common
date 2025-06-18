@@ -18,7 +18,6 @@
 
 #include "mt6735-pm-domains.h"
 #include "mt6795-pm-domains.h"
-#include "mt6893-pm-domains.h"
 #include "mt8167-pm-domains.h"
 #include "mt8173-pm-domains.h"
 #include "mt8183-pm-domains.h"
@@ -398,26 +397,20 @@ generic_pm_domain *scpsys_add_one_domain(struct scpsys *scpsys, struct device_no
 
 	pd->infracfg = syscon_regmap_lookup_by_phandle_optional(node, "mediatek,infracfg");
 	if (IS_ERR(pd->infracfg))
-		return dev_err_cast_probe(scpsys->dev, pd->infracfg,
-					  "%pOF: failed to get infracfg regmap\n",
-					  node);
+		return ERR_CAST(pd->infracfg);
 
 	smi_node = of_parse_phandle(node, "mediatek,smi", 0);
 	if (smi_node) {
 		pd->smi = device_node_to_regmap(smi_node);
 		of_node_put(smi_node);
 		if (IS_ERR(pd->smi))
-			return dev_err_cast_probe(scpsys->dev, pd->smi,
-						  "%pOF: failed to get SMI regmap\n",
-						  node);
+			return ERR_CAST(pd->smi);
 	}
 
 	if (MTK_SCPD_CAPS(pd, MTK_SCPD_HAS_INFRA_NAO)) {
 		pd->infracfg_nao = syscon_regmap_lookup_by_phandle(node, "mediatek,infracfg-nao");
 		if (IS_ERR(pd->infracfg_nao))
-			return dev_err_cast_probe(scpsys->dev, pd->infracfg_nao,
-						  "%pOF: failed to get infracfg-nao regmap\n",
-						  node);
+			return ERR_CAST(pd->infracfg_nao);
 	} else {
 		pd->infracfg_nao = NULL;
 	}
@@ -623,10 +616,6 @@ static const struct of_device_id scpsys_of_match[] = {
 	{
 		.compatible = "mediatek,mt6795-power-controller",
 		.data = &mt6795_scpsys_data,
-	},
-	{
-		.compatible = "mediatek,mt6893-power-controller",
-		.data = &mt6893_scpsys_data,
 	},
 	{
 		.compatible = "mediatek,mt8167-power-controller",
