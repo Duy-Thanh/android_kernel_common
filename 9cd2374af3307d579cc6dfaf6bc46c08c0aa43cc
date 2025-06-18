@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f40326_8cea3903",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-06-18T06:41:59Z",
+      "side": 1,
+      "message": "This will need to land as a vendor module (go/al-gki-vmm). cc @ribalda@google.com",
+      "revId": "9cd2374af3307d579cc6dfaf6bc46c08c0aa43cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
