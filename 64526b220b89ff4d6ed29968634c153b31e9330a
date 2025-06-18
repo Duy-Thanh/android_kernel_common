@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aab47f2b_735ac24d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-06-18T09:20:11Z",
+      "side": 1,
+      "message": "Can INTEL_HFI_THERMAL be converted to tristate? If so, then we should do it and enable it as a vendor module",
+      "revId": "64526b220b89ff4d6ed29968634c153b31e9330a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
