@@ -3741,6 +3741,11 @@ static int mmu_alloc_direct_roots(struct kvm_vcpu *vcpu)
 	if (tdp_mmu_enabled)
 		return kvm_tdp_mmu_alloc_root(vcpu);
 
+	if (enable_pkvm) {
+		vcpu->arch.mmu->root.hpa = 0;   /* fake valid hpa */
+		return 0;
+	}
+
 	write_lock(&vcpu->kvm->mmu_lock);
 	r = make_mmu_pages_available(vcpu);
 	if (r < 0)
