@@ -34,6 +34,24 @@
       "parentUuid": "aab47f2b_735ac24d",
       "revId": "64526b220b89ff4d6ed29968634c153b31e9330a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "776a3cd1_699a0e10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-06-18T09:37:04Z",
+      "side": 1,
+      "message": "That\u0027s right, it\u0027s a bool now. But it doesn\u0027t mean it cannot be converted to a tristate cc @srosek@google.com to take a look",
+      "parentUuid": "fb2885ad_fb38fc81",
+      "revId": "64526b220b89ff4d6ed29968634c153b31e9330a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
