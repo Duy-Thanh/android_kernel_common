@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1bb971e_32eee2a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-06-18T03:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e9540b7_fc9ff5f7",
+      "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f37ad8fd_9fcf852e",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-16T09:35:46Z",
       "side": 1,
       "message": "I think it\u0027s worth mentioning that it\u0027s the Intel GPU driver that tries to map reserved memory (it\u0027s a valuable knowledge).",
+      "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30827ad1_310eda3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-06-18T03:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f37ad8fd_9fcf852e",
       "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fbb8f61_2dd31d26",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-06-18T03:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "513cf8ad_5321555c",
+      "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93f97881_d5f8a05f",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-06-16T09:35:46Z",
       "side": 1,
       "message": "nit:\n1. We shouldn\u0027t remove the empty line.\n2. The `!find_mem_range(addr, \u0026range)` check could be after `owner_id \u003d\u003d OWNER_ID_INV` (it is slower, and it is related to the hyp_page_count check).\n\nActually, maybe let\u0027s refactor the code a bit:\n\n```\n\tif (owner_id \u003d\u003d OWNER_ID_INV)\n\t\treturn -EINVAL;\n\n\t/*\n\t * Only allow the host to donate normal memory (tracked in the hyp vmemmap),\n\t * not reserved memory, MMIO etc.\n\t */\n\tif (!find_mem_range(addr, \u0026range))\n\t\treturn -EPERM;\n\n\t/* Prevent donating pages used by the host for DMA. */\n\tif (hyp_page_count(__hyp_va(addr)))\n\t\treturn -EBUSY;\n\n\treturn host_ept_set_owner_locked(tx-\u003einitiator.host.pgt_override,\n\t\t\t\t\t addr, size, owner_id);\n```",
+      "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f136ca48_0f7668f5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-06-18T03:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93f97881_d5f8a05f",
       "revId": "e3ae7cf9f0680b8ed1f83e7f2bb2f5b38b7095cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
