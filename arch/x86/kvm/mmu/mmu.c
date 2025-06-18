@@ -5919,6 +5919,12 @@ int kvm_mmu_load(struct kvm_vcpu *vcpu)
 {
 	int r;
 
+	if (enable_pkvm) {
+		vcpu->arch.mmu->root.hpa = 0;	/* fake valid hpa */
+		r = 0;
+		goto load_pgd;
+	}
+
 	r = mmu_topup_memory_caches(vcpu, !vcpu->arch.mmu->root_role.direct);
 	if (r)
 		goto out;
@@ -5934,6 +5940,7 @@ int kvm_mmu_load(struct kvm_vcpu *vcpu)
 
 	kvm_mmu_sync_roots(vcpu);
 
+load_pgd:
 	kvm_mmu_load_pgd(vcpu);
 
 	/*
@@ -5951,6 +5958,11 @@ out:
 void kvm_mmu_unload(struct kvm_vcpu *vcpu)
 {
 	struct kvm *kvm = vcpu->kvm;
+
+	if (enable_pkvm) {
+		vcpu->arch.mmu->root.hpa = INVALID_PAGE;
+		return;
+	}
 
 	kvm_mmu_free_roots(kvm, &vcpu->arch.root_mmu, KVM_MMU_ROOTS_ALL);
 	WARN_ON_ONCE(VALID_PAGE(vcpu->arch.root_mmu.root.hpa));
@@ -7502,6 +7514,9 @@ int kvm_mmu_vendor_module_init(void)
 {
 	int ret = -ENOMEM;
 
+	if (enable_pkvm)
+		return 0;
+
 	/*
 	 * MMU roles use union aliasing which is, generally speaking, an
 	 * undefined behavior. However, we supposedly know how compilers behave
@@ -7556,6 +7571,9 @@ void kvm_mmu_destroy(struct kvm_vcpu *vcpu)
 
 void kvm_mmu_vendor_module_exit(void)
 {
+	if (enable_pkvm)
+		return;
+
 	mmu_destroy_caches();
 	percpu_counter_destroy(&kvm_total_used_mmu_pages);
 	shrinker_free(mmu_shrinker);
