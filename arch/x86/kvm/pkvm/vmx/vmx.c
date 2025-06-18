@@ -5323,7 +5323,7 @@ static int handle_ept_violation(struct kvm_vcpu *vcpu)
 		return kvm_emulate_instruction(vcpu, 0);
 
 #ifdef __PKVM_HYP__
-	return pkvm_handle_guest_ept_violation(vcpu, gpa);
+	return 0;
 #else
 	return kvm_mmu_page_fault(vcpu, gpa, error_code, NULL, 0);
 #endif
