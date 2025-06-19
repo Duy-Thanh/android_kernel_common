@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb47aaf1_12a4e85b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-06-19T18:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "793f0ff9_e7545ef6",
+      "revId": "ed7c9fee2ec92be3a34d402fce1ddabe41196cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4f7aa57_03681b4b",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-18T19:42:38Z",
       "side": 1,
       "message": "Any reason why not add it to buddy_memory.h right away? I guess we\u0027ll want to reuse it for pvIOMMU...",
+      "revId": "ed7c9fee2ec92be3a34d402fce1ddabe41196cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deb653e4_8d7846f5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-06-19T18:11:30Z",
+      "side": 1,
+      "message": "Ah right! Since it was only used in this file, I added it here. But I see, it will be resued for pvIOMMU. \nDone.",
+      "parentUuid": "e4f7aa57_03681b4b",
       "revId": "ed7c9fee2ec92be3a34d402fce1ddabe41196cb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
