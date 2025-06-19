@@ -138,8 +138,7 @@ static inline size_t virtio_vsock_skb_len(struct sk_buff *skb)
 #define VIRTIO_VSOCK_SKB_DATA_SIZE		(SKB_WITH_OVERHEAD(PAGE_SIZE) \
 						 - VIRTIO_VSOCK_SKB_HEADROOM)
 #define VIRTIO_VSOCK_MAX_BUF_SIZE		0xFFFFFFFFUL
-#define VIRTIO_VSOCK_MAX_PKT_BUF_SIZE		virtio_transport_max_vsock_pkt_buf_size
-extern uint virtio_transport_max_vsock_pkt_buf_size;
+#define VIRTIO_VSOCK_MAX_PKT_BUF_SIZE		(1024 * 64)
 
 enum {
 	VSOCK_VQ_RX     = 0, /* for host to guest data */
