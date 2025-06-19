@@ -16,6 +16,24 @@
       "message": "Please can you respin your upstream series based on the comment I left last month? Thanks.\n\nhttps://lore.kernel.org/all/20250529121751.GB29242@willie-the-truck/",
       "revId": "7fcdd17ad9a94885c0349cb7f493a74ea80be9a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06668bb7_beb52ee3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-06-19T09:09:38Z",
+      "side": 1,
+      "message": "yes, it is here: https://lore.kernel.org/all/20250619-virtio-msg-ffa-v5-0-412c98558807@google.com/T/#t\n\nv5 moves all of the hyp FF-A code over to SMCCC 1.2 unconditionally as you suggested so this particular CL will not be needed anymore. I will update Gerrit once I have your feedback on v5.",
+      "parentUuid": "06e11fbc_0fd4ed30",
+      "revId": "7fcdd17ad9a94885c0349cb7f493a74ea80be9a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
