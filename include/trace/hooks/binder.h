@@ -20,8 +20,8 @@ struct binder_transaction_data;
 struct binder_transaction_log;
 
 DECLARE_HOOK(android_vh_binder_transaction_init,
-	TP_PROTO(struct binder_transaction *t),
-	TP_ARGS(t));
+	TP_PROTO(struct binder_transaction *t, int call_type),
+	TP_ARGS(t, call_type));
 DECLARE_HOOK(android_vh_binder_set_priority,
 	TP_PROTO(struct binder_transaction *t, struct task_struct *task),
 	TP_ARGS(t, task));

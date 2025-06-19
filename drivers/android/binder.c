@@ -3220,12 +3220,13 @@ static void binder_transaction(struct binder_proc *proc,
 	const void __user *user_buffer = (const void __user *)
 				(uintptr_t)tr->data.ptr.buffer;
 	bool is_nested = false;
+	int call_type = reply ? 2 : !!(tr->flags & TF_ONE_WAY);
 	INIT_LIST_HEAD(&sgc_head);
 	INIT_LIST_HEAD(&pf_head);
 
 	e = binder_transaction_log_add(&binder_transaction_log);
 	e->debug_id = t_debug_id;
-	e->call_type = reply ? 2 : !!(tr->flags & TF_ONE_WAY);
+	e->call_type = call_type;
 	e->from_proc = proc->pid;
 	e->from_thread = thread->pid;
 	e->target_handle = tr->target.handle;
@@ -3444,7 +3445,7 @@ static void binder_transaction(struct binder_proc *proc,
 	INIT_LIST_HEAD(&t->fd_fixups);
 	binder_stats_created(BINDER_STAT_TRANSACTION);
 	spin_lock_init(&t->lock);
-	trace_android_vh_binder_transaction_init(t);
+	trace_android_vh_binder_transaction_init(t, call_type);
 
 	tcomplete = kzalloc(sizeof(*tcomplete), GFP_KERNEL);
 	if (tcomplete == NULL) {
