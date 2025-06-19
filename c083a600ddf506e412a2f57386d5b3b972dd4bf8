@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aa141a9_dc0c623e",
+        "filename": "drivers/vhost/vsock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-06-19T17:24:02Z",
+      "side": 1,
+      "message": "should there be a vq_err in this case (and others)? I don\u0027t quite understand why it\u0027s only there sometimes",
+      "revId": "c083a600ddf506e412a2f57386d5b3b972dd4bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
