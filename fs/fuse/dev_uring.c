@@ -1260,7 +1260,7 @@ static void fuse_uring_dispatch_ent(struct fuse_ring_ent *ent)
 }
 
 /* queue a fuse request and send it if a ring entry is available */
-void fuse_uring_queue_fuse_req(struct fuse_iqueue *fiq, struct fuse_req *req)
+void fuse_uring_queue_fuse_req(struct fuse_iqueue *fiq, struct fuse_req *req, bool sync)
 {
 	struct fuse_conn *fc = req->fm->fc;
 	struct fuse_ring *ring = fc->ring;
