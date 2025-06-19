@@ -69,8 +69,8 @@ int fuse_copy_args(struct fuse_copy_state *cs, unsigned int numargs,
 int fuse_copy_out_args(struct fuse_copy_state *cs, struct fuse_args *args,
 		       unsigned int nbytes);
 void fuse_dev_queue_forget(struct fuse_iqueue *fiq,
-			   struct fuse_forget_link *forget);
-void fuse_dev_queue_interrupt(struct fuse_iqueue *fiq, struct fuse_req *req);
+			   struct fuse_forget_link *forget, bool sync);
+void fuse_dev_queue_interrupt(struct fuse_iqueue *fiq, struct fuse_req *req, bool sync);
 bool fuse_remove_pending_req(struct fuse_req *req, spinlock_t *lock);
 
 bool fuse_request_expired(struct fuse_conn *fc, struct list_head *list);
