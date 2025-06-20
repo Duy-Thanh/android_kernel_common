@@ -52,6 +52,24 @@
       "parentUuid": "cb14ccf2_297e683d",
       "revId": "1d5d6167b3288bbffd9bcce533a731643977825b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "812ae64c_a4760af7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-06-20T18:03:45Z",
+      "side": 1,
+      "message": "I would like +1 from Jaegeuk before we allow these symbols to be exported.",
+      "parentUuid": "07746869_f2dad1d6",
+      "revId": "1d5d6167b3288bbffd9bcce533a731643977825b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
