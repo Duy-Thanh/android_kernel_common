@@ -16,6 +16,23 @@
       "message": "Respin bug:b/426503576",
       "revId": "b1aadb3bf881ae4956b5c26088eef41e311f1164",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16dfafa2_23041dc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-20T19:20:10Z",
+      "side": 1,
+      "message": "This patch was not merged into android15-6.6",
+      "revId": "b1aadb3bf881ae4956b5c26088eef41e311f1164",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
