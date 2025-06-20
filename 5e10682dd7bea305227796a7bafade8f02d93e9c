@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "767b1b5f_7f696948",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-20T19:09:04Z",
+      "side": 1,
+      "message": "I984569d990d264bca9a7de1ec8f6ec94ecd58877",
+      "range": {
+        "startLine": 37,
+        "startChar": 11,
+        "endLine": 37,
+        "endChar": 52
+      },
+      "revId": "5e10682dd7bea305227796a7bafade8f02d93e9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dab815fe_ce7f23b1",
@@ -14,6 +37,23 @@
       "writtenOn": "2025-06-20T13:53:10Z",
       "side": 1,
       "message": "Respin bug:b/426503576",
+      "revId": "5e10682dd7bea305227796a7bafade8f02d93e9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ad95b23_67540f6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-20T19:09:04Z",
+      "side": 1,
+      "message": "Not a clean cherry-pick from https://android-review.googlesource.com/c/kernel/common/+/3644932",
       "revId": "5e10682dd7bea305227796a7bafade8f02d93e9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
