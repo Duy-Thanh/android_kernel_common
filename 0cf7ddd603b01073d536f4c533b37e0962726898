@@ -16,6 +16,23 @@
       "message": "Respin bug:b/426503576",
       "revId": "0cf7ddd603b01073d536f4c533b37e0962726898",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12193cff_87034b28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-20T18:56:00Z",
+      "side": 1,
+      "message": "Where was it cherry-picked from? Changes should be submitted into the main android15-6.6 branch before submitting them into a release branch.",
+      "revId": "0cf7ddd603b01073d536f4c533b37e0962726898",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
