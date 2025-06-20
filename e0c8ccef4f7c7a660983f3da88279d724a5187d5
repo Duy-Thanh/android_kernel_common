@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "634c00ea_5afad339",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-20T12:24:19Z",
+      "side": 1,
+      "message": "objtool complains about lretq for some reason:\n```\nvmlinux.o: warning: objtool: __pkvm_reprivilege_vcpu__pkvm+0x14e: unsupported instruction in callable function\n```",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa5f4bfc_1717afc9",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-20T12:24:19Z",
+      "side": 1,
+      "message": "I\u0027ve tried this patch with the following test hack:\n```\n--- a/arch/x86/kvm/vmx/pkvm/pkvm_host.c\n+++ b/arch/x86/kvm/vmx/pkvm/pkvm_host.c\n@@ -980,7 +980,7 @@ static __init void pkvm_host_deprivilege_cpu(void *data)\n \t\tgoto out;\n \t}\n \n-\tret \u003d local_deprivilege_cpu(hvcpu);\n+\tret \u003d cpu !\u003d 10 ? local_deprivilege_cpu(hvcpu) : -1;\n \tif (ret \u003d\u003d 0) {\n \t\tvcpu \u003d \u0026hvcpu-\u003evmx.vcpu;\n \t\tvcpu-\u003emode \u003d IN_GUEST_MODE;\n```\n\nIt seems to work fine with CONFIG_PKVM_INTEL_DEBUG\u003dy, but with CONFIG_PKVM_INTEL_DEBUG\u003dn it crashes without logs after \"WARNING - failed to deprivilege all CPUs!\".\n\ngdb shows that it crashes at _printk here. After commenting out this pr_info, it crashes below at put_cpu() -\u003e \\__preempt_count_dec_and_test().\n\nSo it looks like the CPU still has no access to the host memory after reprivilege. We should restore the host\u0027s CR3 (at least)?",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
