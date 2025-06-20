@@ -125,6 +125,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db85841_c7432f7d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-20T11:33:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5cc8f76b_79687d3b",
+      "revId": "61d8b6aa4aa635e3d55e8aa6db37cc1129147225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d429515_5b766976",
