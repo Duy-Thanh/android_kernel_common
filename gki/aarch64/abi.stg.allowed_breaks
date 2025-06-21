@@ -1,3 +1,12 @@
+<<<<<<< HEAD   (d9fd90 UPSTREAM: scsi: ufs: core: Don't perform UFS clkscaling duri)
 type 'struct sched_dl_entity' changed
   member 'unsigned int dl_server_idle:1' was added
 
+||||||| BASE
+=======
+# How to use this file: http://go/approve-abi-break
+# ABI freeze commit: 0690b3438b4acb24f7ecfd946cf9a9ac5954ef20
+
+type 'enum prs_errcode' changed
+  enumerator 'PERR_REMOTE' (10) was added
+>>>>>>> BRANCH (398ede Merge android16-6.12 into android16-6.12-lts)
