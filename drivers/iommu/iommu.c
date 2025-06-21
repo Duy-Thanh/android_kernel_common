@@ -566,6 +566,18 @@ int iommu_probe_device(struct device *dev)
 	mutex_lock(&iommu_probe_device_lock);
 	ret = __iommu_probe_device(dev, NULL);
 	mutex_unlock(&iommu_probe_device_lock);
+
+	/*
+	 * The dma_configure replay paths need bus_iommu_probe() to
+	 * finish before they can call arch_setup_dma_ops()
+	 */
+	if (IS_ENABLED(CONFIG_IOMMU_DMA) && !ret && dev->iommu_group) {
+		mutex_lock(&dev->iommu_group->mutex);
+		if (!dev->iommu_group->default_domain &&
+		    !dev_iommu_ops(dev)->set_platform_dma_ops)
+			ret = -EPROBE_DEFER;
+		mutex_unlock(&dev->iommu_group->mutex);
+	}
 	if (ret)
 		return ret;
 
@@ -3150,7 +3162,13 @@ int iommu_device_use_default_domain(struct device *dev)
 
 	mutex_lock(&group->mutex);
 	/* We may race against bus_iommu_probe() finalising groups here */
+<<<<<<< HEAD   (081344 FROMGIT: scsi: core: ufs: Fix a hang in the error handler)
 	if (!group->default_domain) {
+||||||| BASE
+=======
+	if (IS_ENABLED(CONFIG_IOMMU_DMA) && !group->default_domain &&
+	    !dev_iommu_ops(dev)->set_platform_dma_ops) {
+>>>>>>> BRANCH (fc57b3 ANDROID: GKI: db845c: add devm_register_sys_off_handler to s)
 		ret = -EPROBE_DEFER;
 		goto unlock_out;
 	}

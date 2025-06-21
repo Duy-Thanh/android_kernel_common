@@ -21,7 +21,15 @@ void unix_inflight(struct user_struct *user, struct file *fp);
 void unix_notinflight(struct user_struct *user, struct file *fp);
 void unix_destruct_scm(struct sk_buff *skb);
 void unix_gc(void);
+<<<<<<< HEAD   (081344 FROMGIT: scsi: core: ufs: Fix a hang in the error handler)
 void wait_for_unix_gc(struct scm_fp_list *fpl);
+||||||| BASE
+void wait_for_unix_gc(void);
+struct sock *unix_get_socket(struct file *filp);
+=======
+void wait_for_unix_gc(void);
+struct unix_sock *unix_get_socket(struct file *filp);
+>>>>>>> BRANCH (fc57b3 ANDROID: GKI: db845c: add devm_register_sys_off_handler to s)
 struct sock *unix_peer_get(struct sock *sk);
 
 #define UNIX_HASH_MOD	(256 - 1)

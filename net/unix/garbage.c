@@ -184,6 +184,30 @@ static bool gc_in_progress;
 
 static void __unix_gc(struct work_struct *work)
 {
+<<<<<<< HEAD   (081344 FROMGIT: scsi: core: ufs: Fix a hang in the error handler)
+||||||| BASE
+	/* If number of inflight sockets is insane,
+	 * force a garbage collect right now.
+	 * Paired with the WRITE_ONCE() in unix_inflight(),
+	 * unix_notinflight() and gc_in_progress().
+	 */
+	if (READ_ONCE(unix_tot_inflight) > UNIX_INFLIGHT_TRIGGER_GC &&
+	    !READ_ONCE(gc_in_progress))
+		unix_gc();
+	wait_event(unix_gc_wait, !READ_ONCE(gc_in_progress));
+}
+
+/* The external entry point: unix_gc() */
+void unix_gc(void)
+{
+	struct sk_buff *next_skb, *skb;
+	struct unix_sock *u;
+	struct unix_sock *next;
+=======
+	struct sk_buff *next_skb, *skb;
+	struct unix_sock *u;
+	struct unix_sock *next;
+>>>>>>> BRANCH (fc57b3 ANDROID: GKI: db845c: add devm_register_sys_off_handler to s)
 	struct sk_buff_head hitlist;
 	struct unix_sock *u, *next;
 	LIST_HEAD(not_cycle_list);
@@ -314,6 +338,7 @@ void unix_gc(void)
 }
 
 #define UNIX_INFLIGHT_TRIGGER_GC 16000
+<<<<<<< HEAD   (081344 FROMGIT: scsi: core: ufs: Fix a hang in the error handler)
 #define UNIX_INFLIGHT_SANE_USER (SCM_MAX_FD * 8)
 
 void wait_for_unix_gc(struct scm_fp_list *fpl)
@@ -334,6 +359,21 @@ void wait_for_unix_gc(struct scm_fp_list *fpl)
 	if (!fpl || !fpl->count_unix ||
 	    READ_ONCE(fpl->user->unix_inflight) < UNIX_INFLIGHT_SANE_USER)
 		return;
+||||||| BASE
+=======
+
+void wait_for_unix_gc(void)
+{
+	/* If number of inflight sockets is insane,
+	 * force a garbage collect right now.
+	 *
+	 * Paired with the WRITE_ONCE() in unix_inflight(),
+	 * unix_notinflight(), and __unix_gc().
+	 */
+	if (READ_ONCE(unix_tot_inflight) > UNIX_INFLIGHT_TRIGGER_GC &&
+	    !READ_ONCE(gc_in_progress))
+		unix_gc();
+>>>>>>> BRANCH (fc57b3 ANDROID: GKI: db845c: add devm_register_sys_off_handler to s)
 
 	if (READ_ONCE(gc_in_progress))
 		flush_work(&unix_gc_work);

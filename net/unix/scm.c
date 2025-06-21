@@ -71,8 +71,18 @@ void unix_notinflight(struct user_struct *user, struct file *fp)
 	spin_lock(&unix_gc_lock);
 
 	if (u) {
+<<<<<<< HEAD   (081344 FROMGIT: scsi: core: ufs: Fix a hang in the error handler)
 		WARN_ON_ONCE(!u->inflight);
 		WARN_ON_ONCE(list_empty(&u->link));
+||||||| BASE
+		struct unix_sock *u = unix_sk(s);
+
+		BUG_ON(!u->inflight);
+		BUG_ON(list_empty(&u->link));
+=======
+		BUG_ON(!u->inflight);
+		BUG_ON(list_empty(&u->link));
+>>>>>>> BRANCH (fc57b3 ANDROID: GKI: db845c: add devm_register_sys_off_handler to s)
 
 		u->inflight--;
 		if (!u->inflight)
