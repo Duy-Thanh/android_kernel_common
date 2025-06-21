@@ -16,6 +16,24 @@
       "message": "Do not merge yet.",
       "revId": "f72f9e68800fe54866e97cfbbb79c720cf3007f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0da5ce_14d80aa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-06-21T14:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d8c1feb_92e797f3",
+      "revId": "f72f9e68800fe54866e97cfbbb79c720cf3007f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
