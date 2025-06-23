@@ -1812,6 +1812,13 @@ ddk_headers(
         "drivers/usb/host/xhci-ext-caps.h",
         "drivers/usb/host/xhci-port.h",
         "//build/kernel/kleaf:user_ddk_unsafe_headers",
+	"arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+	"arch/arm64/kvm/hyp/include/nvhe/alloc_mgt.h",
+	"arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+	"arch/arm64/kvm/hyp/include/nvhe/gfp.h",
+	"arch/arm64/kvm/hyp/include/nvhe/memory.h",
+	"arch/arm64/kvm/hyp/include/nvhe/refcount.h",
+	"arch/arm64/kvm/hyp/include/nvhe/spinlock.h",
     ],
     # The list of include directories where source files can #include headers
     # from. In other words, these are the `-I` option to the C compiler.
@@ -1826,6 +1833,8 @@ ddk_headers(
         "drivers/usb/gadget",
         "drivers/usb/gadget/function",
         "drivers/usb/host",
+	"arch/arm64/kvm/hyp/include",
+	"arch/arm64/kvm/hyp/nvhe",
     ],
     visibility = ["//visibility:private"],
 )
