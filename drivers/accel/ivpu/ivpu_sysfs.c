@@ -7,7 +7,11 @@
 #include <linux/err.h>
 
 #include "ivpu_drv.h"
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
 #include "ivpu_gem.h"
+||||||| BASE
+=======
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 #include "ivpu_fw.h"
 #include "ivpu_hw.h"
 #include "ivpu_sysfs.h"
@@ -46,6 +50,7 @@ npu_busy_time_us_show(struct device *dev, struct device_attribute *attr, char *b
 static DEVICE_ATTR_RO(npu_busy_time_us);
 
 /**
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
  * DOC: npu_memory_utilization
  *
  * The npu_memory_utilization is used to report in bytes a current NPU memory utilization.
@@ -70,6 +75,9 @@ npu_memory_utilization_show(struct device *dev, struct device_attribute *attr, c
 static DEVICE_ATTR_RO(npu_memory_utilization);
 
 /**
+||||||| BASE
+=======
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
  * DOC: sched_mode
  *
  * The sched_mode is used to report current NPU scheduling mode.
@@ -92,7 +100,11 @@ static DEVICE_ATTR_RO(sched_mode);
 
 static struct attribute *ivpu_dev_attrs[] = {
 	&dev_attr_npu_busy_time_us.attr,
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
 	&dev_attr_npu_memory_utilization.attr,
+||||||| BASE
+=======
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 	&dev_attr_sched_mode.attr,
 	NULL,
 };

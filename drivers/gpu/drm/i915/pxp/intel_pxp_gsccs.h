@@ -23,6 +23,7 @@ void intel_pxp_gsccs_fini(struct intel_pxp *pxp);
 int intel_pxp_gsccs_init(struct intel_pxp *pxp);
 
 int intel_pxp_gsccs_create_session(struct intel_pxp *pxp, int arb_session_id);
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
 
 void intel_gsccs_free_client_resources(struct intel_pxp *pxp,
 				       struct drm_file *drmfile);
@@ -37,6 +38,12 @@ intel_pxp_gsccs_client_io_msg(struct intel_pxp *pxp, struct drm_file *drmfile,
 void intel_pxp_gsccs_end_fw_sessions(struct intel_pxp *pxp, u32 sessions_mask);
 int intel_pxp_gsccs_get_client_host_session_handle(struct intel_pxp *pxp, struct drm_file *drmfile,
 						   u64 *handle);
+||||||| BASE
+void intel_pxp_gsccs_end_arb_fw_session(struct intel_pxp *pxp, u32 arb_session_id);
+=======
+void intel_pxp_gsccs_end_arb_fw_session(struct intel_pxp *pxp, u32 arb_session_id);
+bool intel_pxp_gsccs_is_ready_for_sessions(struct intel_pxp *pxp);
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 
 #else
 static inline void intel_pxp_gsccs_fini(struct intel_pxp *pxp)
@@ -48,8 +55,11 @@ static inline int intel_pxp_gsccs_init(struct intel_pxp *pxp)
 	return 0;
 }
 
-#endif
+static inline bool intel_pxp_gsccs_is_ready_for_sessions(struct intel_pxp *pxp)
+{
+	return false;
+}
 
-bool intel_pxp_gsccs_is_ready_for_sessions(struct intel_pxp *pxp);
+#endif
 
 #endif /*__INTEL_PXP_GSCCS_H__ */

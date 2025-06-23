@@ -48,6 +48,15 @@
 
 #define IVPU_JOB_ID_JOB_MASK		GENMASK(7, 0)
 #define IVPU_JOB_ID_CONTEXT_MASK	GENMASK(31, 8)
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
+||||||| BASE
+#define IVPU_NUM_CMDQS_PER_CTX (IVPU_NUM_ENGINES * IVPU_NUM_PRIORITIES)
+=======
+
+#define IVPU_NUM_ENGINES       2
+#define IVPU_NUM_PRIORITIES    4
+#define IVPU_NUM_CMDQS_PER_CTX (IVPU_NUM_ENGINES * IVPU_NUM_PRIORITIES)
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 
 #define IVPU_NUM_PRIORITIES    4
 #define IVPU_NUM_CMDQS_PER_CTX (IVPU_NUM_PRIORITIES)
@@ -139,14 +148,19 @@ struct ivpu_device {
 	struct mutex context_list_lock; /* Protects user context addition/removal */
 	struct xarray context_xa;
 	struct xa_limit context_xa_limit;
+	struct work_struct context_abort_work;
 
 	struct xarray db_xa;
 	struct xa_limit db_limit;
 	u32 db_next;
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
 
 	struct work_struct irq_ipc_work;
 	struct work_struct irq_dct_work;
 	struct work_struct context_abort_work;
+||||||| BASE
+=======
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 
 	struct mutex bo_list_lock; /* Protects bo_list */
 	struct list_head bo_list;
@@ -185,8 +199,12 @@ struct ivpu_file_priv {
 	struct ivpu_bo *ms_info_bo;
 	struct xa_limit job_limit;
 	u32 job_id_next;
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
 	struct xa_limit cmdq_limit;
 	u32 cmdq_id_next;
+||||||| BASE
+=======
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 	bool has_mmu_faults;
 	bool bound;
 	bool aborted;

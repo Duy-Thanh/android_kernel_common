@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
- * Copyright (C) 2020-2024 Intel Corporation
+ * Copyright (C) 2020-2025 Intel Corporation
  */
 
 #include <linux/firmware.h>
@@ -145,10 +145,15 @@ ivpu_fw_sched_mode_select(struct ivpu_device *vdev, const struct vpu_firmware_he
 	if (ivpu_sched_mode != IVPU_SCHED_MODE_AUTO)
 		return ivpu_sched_mode;
 
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
 	if (IVPU_FW_CHECK_API_VER_LT(vdev, fw_hdr, JSM, 3, 24))
 		return VPU_SCHEDULING_MODE_OS;
 
 	return VPU_SCHEDULING_MODE_HW;
+||||||| BASE
+=======
+	return VPU_SCHEDULING_MODE_OS;
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 }
 
 static int ivpu_fw_parse(struct ivpu_device *vdev)
@@ -566,7 +571,6 @@ void ivpu_fw_boot_params_setup(struct ivpu_device *vdev, struct vpu_boot_params 
 
 	boot_params->magic = VPU_BOOT_PARAMS_MAGIC;
 	boot_params->vpu_id = to_pci_dev(vdev->drm.dev)->bus->number;
-	boot_params->frequency = ivpu_hw_pll_freq_get(vdev);
 
 	/*
 	 * This param is a debug firmware feature.  It switches default clock

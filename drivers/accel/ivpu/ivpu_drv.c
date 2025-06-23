@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
- * Copyright (C) 2020-2024 Intel Corporation
+ * Copyright (C) 2020-2025 Intel Corporation
  */
 
 #include <linux/firmware.h>
@@ -164,7 +164,7 @@ static int ivpu_get_param_ioctl(struct drm_device *dev, void *data, struct drm_f
 		args->value = vdev->platform;
 		break;
 	case DRM_IVPU_PARAM_CORE_CLOCK_RATE:
-		args->value = ivpu_hw_ratio_to_freq(vdev, vdev->hw->pll.max_ratio);
+		args->value = ivpu_hw_dpu_max_freq_get(vdev);
 		break;
 	case DRM_IVPU_PARAM_NUM_CONTEXTS:
 		args->value = ivpu_get_context_count(vdev);
@@ -263,6 +263,9 @@ static int ivpu_open(struct drm_device *dev, struct drm_file *file)
 	xa_init_flags(&file_priv->cmdq_xa, XA_FLAGS_ALLOC1);
 	file_priv->cmdq_limit.min = IVPU_CMDQ_MIN_ID;
 	file_priv->cmdq_limit.max = IVPU_CMDQ_MAX_ID;
+
+	file_priv->job_limit.min = FIELD_PREP(IVPU_JOB_ID_CONTEXT_MASK, (file_priv->ctx.id - 1));
+	file_priv->job_limit.max = file_priv->job_limit.min | IVPU_JOB_ID_JOB_MASK;
 
 	mutex_unlock(&vdev->context_list_lock);
 	drm_dev_exit(idx);
@@ -469,6 +472,83 @@ static const struct drm_driver driver = {
 	.major = 1,
 };
 
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
+||||||| BASE
+static void ivpu_context_abort_invalid(struct ivpu_device *vdev)
+{
+	struct ivpu_file_priv *file_priv;
+	unsigned long ctx_id;
+
+	mutex_lock(&vdev->context_list_lock);
+
+	xa_for_each(&vdev->context_xa, ctx_id, file_priv) {
+		if (!file_priv->has_mmu_faults || file_priv->aborted)
+			continue;
+
+		mutex_lock(&file_priv->lock);
+		ivpu_context_abort_locked(file_priv);
+		file_priv->aborted = true;
+		mutex_unlock(&file_priv->lock);
+	}
+
+	mutex_unlock(&vdev->context_list_lock);
+}
+
+static irqreturn_t ivpu_irq_thread_handler(int irq, void *arg)
+{
+	struct ivpu_device *vdev = arg;
+	u8 irq_src;
+
+	if (kfifo_is_empty(&vdev->hw->irq.fifo))
+		return IRQ_NONE;
+
+	while (kfifo_get(&vdev->hw->irq.fifo, &irq_src)) {
+		switch (irq_src) {
+		case IVPU_HW_IRQ_SRC_IPC:
+			ivpu_ipc_irq_thread_handler(vdev);
+			break;
+		case IVPU_HW_IRQ_SRC_MMU_EVTQ:
+			ivpu_context_abort_invalid(vdev);
+			break;
+		case IVPU_HW_IRQ_SRC_DCT:
+			ivpu_pm_dct_irq_thread_handler(vdev);
+			break;
+		default:
+			ivpu_err_ratelimited(vdev, "Unknown IRQ source: %u\n", irq_src);
+			break;
+		}
+	}
+
+	return IRQ_HANDLED;
+}
+
+=======
+static irqreturn_t ivpu_irq_thread_handler(int irq, void *arg)
+{
+	struct ivpu_device *vdev = arg;
+	u8 irq_src;
+
+	if (kfifo_is_empty(&vdev->hw->irq.fifo))
+		return IRQ_NONE;
+
+	while (kfifo_get(&vdev->hw->irq.fifo, &irq_src)) {
+		switch (irq_src) {
+		case IVPU_HW_IRQ_SRC_IPC:
+			ivpu_ipc_irq_thread_handler(vdev);
+			break;
+		case IVPU_HW_IRQ_SRC_DCT:
+			ivpu_pm_dct_irq_thread_handler(vdev);
+			break;
+		default:
+			ivpu_err_ratelimited(vdev, "Unknown IRQ source: %u\n", irq_src);
+			break;
+		}
+	}
+
+	return IRQ_HANDLED;
+}
+
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 static int ivpu_irq_init(struct ivpu_device *vdev)
 {
 	struct pci_dev *pdev = to_pci_dev(vdev->drm.dev);
@@ -582,6 +662,12 @@ static int ivpu_dev_init(struct ivpu_device *vdev)
 	vdev->db_limit.min = IVPU_MIN_DB;
 	vdev->db_limit.max = IVPU_MAX_DB;
 
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
+||||||| BASE
+=======
+	INIT_WORK(&vdev->context_abort_work, ivpu_context_abort_thread_handler);
+
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 	ret = drmm_mutex_init(&vdev->drm, &vdev->context_list_lock);
 	if (ret)
 		goto err_xa_destroy;

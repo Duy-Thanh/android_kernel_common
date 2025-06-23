@@ -71,7 +71,12 @@ void ivpu_cmdq_abort_all_jobs(struct ivpu_device *vdev, u32 ctx_id, u32 cmdq_id)
 
 void ivpu_job_done_consumer_init(struct ivpu_device *vdev);
 void ivpu_job_done_consumer_fini(struct ivpu_device *vdev);
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
 void ivpu_context_abort_work_fn(struct work_struct *work);
+||||||| BASE
+=======
+void ivpu_context_abort_thread_handler(struct work_struct *work);
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 
 void ivpu_jobs_abort_all(struct ivpu_device *vdev);
 

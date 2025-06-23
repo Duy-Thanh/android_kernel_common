@@ -1337,6 +1337,7 @@ static void btintel_pcie_rx_work(struct work_struct *work)
 	struct btintel_pcie_data *data = container_of(work,
 					struct btintel_pcie_data, rx_work);
 	struct sk_buff *skb;
+<<<<<<< TARGET BRANCH (e81b21 FROMGIT: iio: cros_ec_sensors: add cros_ec_activity driver)
 
 	if (test_bit(BTINTEL_PCIE_HWEXP_INPROGRESS, &data->flags)) {
 		/* Unlike usb products, controller will not send hardware
@@ -1354,6 +1355,11 @@ static void btintel_pcie_rx_work(struct work_struct *work)
 		btintel_pcie_dump_traces(data->hdev);
 		clear_bit(BTINTEL_PCIE_COREDUMP_INPROGRESS, &data->flags);
 	}
+||||||| BASE
+	int err;
+	struct hci_dev *hdev = data->hdev;
+=======
+>>>>>>> SOURCE BRANCH (5bf4b9 Merge tag 'android16-6.12.30_r00' into android16-6.12)
 
 	/* Process the sk_buf in queue and send to the HCI layer */
 	while ((skb = skb_dequeue(&data->rx_skb_q))) {
