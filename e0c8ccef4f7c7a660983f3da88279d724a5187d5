@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea0ebbaf_2f042a72",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-23T10:53:36Z",
+      "side": 1,
+      "message": "I had seen this and investigated, but sorry that I missed putting a comment. objtool complains on lretq because it didn\u0027t expect a far return from a callable function. objecttool expects this only in kernel entry/exit functions(syscall, intr nmi etc) and expects this only in assembly code (SYM_CODE_START/SYM_CODE_END). I had tried moving the last part of code to a asm file, but didn\u0027t help. We should probably upstream a change to objtool to ignore this usecase as well once we have a upstreamable version of this.\n\nI have put a small comment here now.",
+      "parentUuid": "634c00ea_5afad339",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa5f4bfc_1717afc9",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 5
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Although, in create_mmu_mapping() it looks like with CONFIG_PKVM_INTEL_DEBUG\u003dn we still create hypervisor mapping for all non-reserved memblocks (so it should include \\_printk and the rest of kernel text), with the same VA offset as the kernel\u0027s direct map, so I\u0027m not sure why _exactly_ it crashes here...",
       "parentUuid": "fa5f4bfc_1717afc9",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3099d801_b4a05da4",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-23T10:53:36Z",
+      "side": 1,
+      "message": "Ahh, I missed this. I had tested on PKVM_INTEL_DEBUG and didn\u0027t get to testing without that. The issues is, we use same selectors(CS,DS, ES, ...) and TR with PKVM_INTEL_DEBUG but they are all different without PKVM_INTEL_DEBUG. Since we reprivilege before setting CR3, I thought restoring CR3 also was not needed. Now I am restoring all selectors, reloading TR explicitly and reprivilege works without PKVM_INTEL_DEBUG now. I am explicitly restoring CR3 as well (we would need it when we want to reprivilege if iommu init fails). So now it works as expected.",
+      "parentUuid": "5f541441_1394a838",
       "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
