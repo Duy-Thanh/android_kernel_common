@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405ab7f5_adc313d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-23T23:10:34Z",
+      "side": 1,
+      "message": "A point raised by Greg offline: from security standpoint, perhaps it\u0027s better to not have this code in the hypervisor, deliberately making life easier for the attacker (in case there is a vulnerability in pKVM already being exploited, all the attacker needs to do to gain full control over the system is to jump to the reprivileging code)?\n\nSo perhaps it\u0027s better keep it simple and just panic, or for example just taint kernel, if pKVM init failed during or after pkvm_host_deprivilege_cpus()?",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

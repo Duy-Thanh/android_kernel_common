@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0fa45837_3249efb8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-23T23:10:34Z",
+      "side": 1,
+      "message": "Ok it\u0027s harmless but it means we\u0027re gonna see this warning every time we build kernel? So if we intend to merge this, should we implement such a change to objtool (to mute this warning) right away?",
+      "parentUuid": "ea0ebbaf_2f042a72",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa5f4bfc_1717afc9",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 5
