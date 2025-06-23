@@ -23,6 +23,7 @@
 #include <linux/string.h>
 #include <linux/jump_label.h>
 #include <linux/security.h>
+#include <trace/hooks/dm-verity.h>
 
 #define DM_MSG_PREFIX			"verity"
 
@@ -761,6 +762,7 @@ static void verity_end_io(struct bio *bio)
 	struct dm_verity_io *io = bio->bi_private;
 	unsigned short ioprio = IOPRIO_PRIO_CLASS(bio->bi_ioprio);
 	unsigned int bytes = io->n_blocks << io->v->data_dev_block_bits;
+	bool skip = false;
 
 	if (bio->bi_status &&
 	    (!verity_fec_is_enabled(io->v) ||
@@ -780,6 +782,11 @@ static void verity_end_io(struct bio *bio)
 		}
 	} else {
 		INIT_WORK(&io->work, verity_work);
+
+		trace_android_vh_verity_end_io_queue_work(io, &skip);
+		if (skip)
+			return;
+
 		queue_work(io->v->verify_wq, &io->work);
 	}
 }

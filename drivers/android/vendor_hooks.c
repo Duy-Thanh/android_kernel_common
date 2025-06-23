@@ -69,6 +69,7 @@
 #include <trace/hooks/madvise.h>
 #include <trace/events/android_vendor_lmk.h>
 #include <trace/hooks/blk.h>
+#include <trace/hooks/dm-verity.h>
 #include <trace/hooks/fsnotify.h>
 #include <trace/hooks/fuse.h>
 #include <trace/hooks/ogki_honor.h>
@@ -398,6 +399,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sk_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_receive_sock);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_get_classid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_delay_run_hw_queue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_verity_end_io_queue_work);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_kick_requeue_list);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_pm_notify_suspend);
