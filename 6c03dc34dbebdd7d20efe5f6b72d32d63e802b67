@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d23017a_b09019a9",
+        "filename": "drivers/ufs/host/ufs-qcom.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1341,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-06-23T20:59:05Z",
+      "side": 1,
+      "message": "ufs_qcom_cfg_timers() needs 7 arguments, look like you need to fix the backport.",
+      "revId": "6c03dc34dbebdd7d20efe5f6b72d32d63e802b67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
