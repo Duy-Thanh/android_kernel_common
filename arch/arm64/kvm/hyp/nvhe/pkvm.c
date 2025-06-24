@@ -1719,6 +1719,102 @@ static bool pkvm_forward_trng(struct kvm_vcpu *vcpu)
 	return true;
 }
 
+#define ARM_SMCCC_TRNG_VER_1_0			(1ULL << 16 | 0ULL)
+#define ARM_SMCCC_TRNG_INVALID_PARAMETERS	ULL(-2)
+#define ARM_SMCCC_TRNG_NO_ENTROPY		ULL(-3)
+#define ARM_SMCCC_TRNG_SMC32_BITS		96
+#define ARM_SMCCC_TRNG_SMC64_BITS		192
+
+static bool module_handle_guest_trng_rng(struct kvm_vcpu *vcpu)
+{
+	u64 ret;
+	u64 out[3] = { 0 };
+	u64 entropy[3];
+	u64 fn, nbits;
+
+	fn = smccc_get_function(vcpu);
+	nbits = smccc_get_arg1(vcpu);
+
+	if (nbits == 0 ||
+	    (fn == ARM_SMCCC_TRNG_RND32 && nbits > ARM_SMCCC_TRNG_SMC32_BITS) ||
+	    nbits > ARM_SMCCC_TRNG_SMC64_BITS) {
+		ret = ARM_SMCCC_TRNG_INVALID_PARAMETERS;
+		goto retval;
+	}
+
+	switch (module_get_guest_trng_rng((u8 *)entropy, nbits)) {
+	case 0:
+		ret = SMCCC_RET_SUCCESS;
+		if (fn == ARM_SMCCC_TRNG_RND32) {
+			out[0] = lower_32_bits(le64_to_cpu(entropy[1]));
+			out[1] = upper_32_bits(le64_to_cpu(entropy[0]));
+			out[2] = lower_32_bits(le64_to_cpu(entropy[0]));
+		} else {
+			out[0] = le64_to_cpu(entropy[2]);
+			out[1] = le64_to_cpu(entropy[1]);
+			out[2] = le64_to_cpu(entropy[0]);
+		}
+		break;
+	case -EOPNOTSUPP:
+		ret = SMCCC_RET_NOT_SUPPORTED;
+		break;
+	case -EAGAIN:
+		ret = ARM_SMCCC_TRNG_NO_ENTROPY;
+		break;
+	default:
+		ret = ARM_SMCCC_TRNG_INVALID_PARAMETERS;
+		break;
+	}
+
+retval:
+	smccc_set_retval(vcpu, ret, out[0], out[1], out[2]);
+	return true;
+}
+
+static bool module_handle_guest_trng(struct kvm_vcpu *vcpu)
+{
+	u32 fn;
+	u64 ret = SMCCC_RET_NOT_SUPPORTED;
+	const uuid_t *uuid;
+
+	fn = smccc_get_function(vcpu);
+	uuid = module_get_guest_trng_uuid();
+	if (!uuid)
+		return false;
+
+	switch (fn) {
+	case ARM_SMCCC_TRNG_VERSION:
+		ret = ARM_SMCCC_TRNG_VER_1_0;
+		break;
+	case ARM_SMCCC_TRNG_FEATURES:
+		switch (smccc_get_arg1(vcpu)) {
+		case ARM_SMCCC_TRNG_VERSION:
+		case ARM_SMCCC_TRNG_FEATURES:
+		case ARM_SMCCC_TRNG_GET_UUID:
+		case ARM_SMCCC_TRNG_RND32:
+		case ARM_SMCCC_TRNG_RND64:
+			ret = SMCCC_RET_SUCCESS;
+			break;
+		}
+		break;
+	case ARM_SMCCC_TRNG_GET_UUID:
+		smccc_set_retval(vcpu, le32_to_cpu(((u32 *)uuid->b)[0]),
+				 le32_to_cpu(((u32 *)uuid->b)[1]),
+				 le32_to_cpu(((u32 *)uuid->b)[2]),
+				 le32_to_cpu(((u32 *)uuid->b)[3]));
+		return true;
+	case ARM_SMCCC_TRNG_RND32:
+	case ARM_SMCCC_TRNG_RND64:
+		return module_handle_guest_trng_rng(vcpu);
+	default:
+		return false;
+	}
+
+	smccc_set_retval(vcpu, ret, 0, 0, 0);
+	return true;
+}
+
+
 static bool is_standard_secure_service_call(u64 func_id)
 {
 	return (func_id >= PSCI_0_2_FN_BASE && func_id <= ARM_CCA_FUNC_END) ||
@@ -1815,7 +1911,9 @@ bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 		return pkvm_memrelinquish_call(hyp_vcpu, exit_code);
 	case ARM_SMCCC_TRNG_VERSION ... ARM_SMCCC_TRNG_RND32:
 	case ARM_SMCCC_TRNG_RND64:
-		if (smccc_trng_available)
+		if (module_handle_guest_trng(vcpu))
+			return true;
+		else if (smccc_trng_available)
 			return pkvm_forward_trng(vcpu);
 		break;
 	case ARM_SMCCC_VENDOR_HYP_KVM_PVIOMMU_OP_FUNC_ID:

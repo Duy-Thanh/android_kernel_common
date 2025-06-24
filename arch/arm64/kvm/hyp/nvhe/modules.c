@@ -237,6 +237,39 @@ bool module_handle_guest_smc(struct arm_smccc_1_2_regs *regs, struct arm_smccc_1
 	return false;
 }
 
+static uuid_t module_guest_trng_uuid;
+static int (*module_guest_trng_rng)(u8 *entropy, int nbits);
+
+static int __register_guest_trng_handler(const uuid_t *trng_uuid,
+					 int (*trng_rng)(u8 *entropy, int bits))
+{
+	if (cmpxchg64_release(&module_guest_trng_rng, NULL, trng_rng))
+		return -EBUSY;
+
+	uuid_copy(&module_guest_trng_uuid, trng_uuid);
+	return 0;
+}
+
+const uuid_t *module_get_guest_trng_uuid(void)
+{
+	if (!smp_load_acquire(&module_guest_trng_rng))
+		return NULL;
+
+	return &module_guest_trng_uuid;
+}
+
+
+u64 module_get_guest_trng_rng(u8 *entropy, int nbits)
+{
+	int (*trng_rng)(u8 *entropy, int nbits);
+
+	trng_rng = smp_load_acquire(&module_guest_trng_rng);
+	if (!trng_rng)
+		return -EOPNOTSUPP;
+
+	return trng_rng(entropy, nbits);
+}
+
 const struct pkvm_module_ops module_ops = {
 	.create_private_mapping = __pkvm_create_private_mapping,
 	.alloc_module_va = __pkvm_alloc_module_va,
@@ -301,6 +334,7 @@ const struct pkvm_module_ops module_ops = {
 	.iommu_reclaim_pages_atomic = kvm_iommu_reclaim_pages_atomic,
 	.hyp_smp_processor_id = __hyp_smp_processor_id,
 	.device_register_reset = pkvm_device_register_reset,
+	.register_guest_trng_handler = __register_guest_trng_handler,
 };
 
 static void *pkvm_module_hyp_va(struct pkvm_el2_module *mod, void *kern_va)

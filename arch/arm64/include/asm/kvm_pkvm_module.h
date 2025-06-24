@@ -206,6 +206,11 @@ struct pkvm_sglist_page {
  *				panic to avoid leaking any information.
  *				Direction of assignment can be deduced from pkvm_device::ctxt
  *				where NULL means host to guest and vice versa.
+ * @register_guest_trng_handler:
+ *				Register a ARM SMCCC TRNG alternative implementation
+ *				for pVMs. The @trng_uuid is used to advertise the
+ *				identity of TRNG implementation. @trng_uuid is used
+ *				to generate entropy bits to guest.
  */
 struct pkvm_module_ops {
 	int (*create_private_mapping)(phys_addr_t phys, size_t size,
@@ -280,7 +285,9 @@ struct pkvm_module_ops {
 	int (*hyp_smp_processor_id)(void);
 	int (*device_register_reset)(u64 phys, void *cookie,
 				     int (*cb)(void *cookie, bool host_to_guest));
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, int (*register_guest_trng_handler)(
+				    const uuid_t *trng_uuid,
+				    int (*trng_rng)(u8 *entropy, int bits)));
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
