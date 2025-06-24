@@ -34,6 +34,24 @@
       "parentUuid": "405ab7f5_adc313d5",
       "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95730002_54be4cf5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-24T12:23:52Z",
+      "side": 1,
+      "message": "\u003e But if pkvm is compromised, then all bets are already off isn\u0027t it?\n\nYeah, that\u0027s true. I\u0027m not a security person, so I\u0027m not sure how much extra risk is created by having the reprivilege code. OTOH, it\u0027s generally better to minimize the amount of code and complexity in the hypervisor?\n\n\u003e I could also go a bit further to zero out the reprivilege code once the pkvm has been fully initialized so that attacker would not be able to use the logic any more if pkvm is compromised.\n\nI thought about exactly the same thing. :) BTW it seems it might be easier to do if we move this code to an assembly file, and that BTW would allow us to avoid the objtool warning?",
+      "parentUuid": "eed2bc6a_32e191b4",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
