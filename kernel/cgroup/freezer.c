@@ -4,6 +4,8 @@
 #include <linux/sched/task.h>
 #include <linux/sched/signal.h>
 
+#include <linux/printk.h>
+
 #include "cgroup-internal.h"
 
 #include <trace/events/cgroup.h>
@@ -20,10 +22,17 @@ static bool cgroup_update_frozen_flag(struct cgroup *cgrp, bool frozen)
 	if (test_bit(CGRP_FROZEN, &cgrp->flags) == frozen)
 		return false;
 
-	if (frozen)
+	if (frozen) {
 		set_bit(CGRP_FROZEN, &cgrp->flags);
-	else
+		cgrp->freezer.frozen_time_start = ktime_get_ns();
+		pr_crit("ynaffitlog: setting frozen_start to %llu for cgrp: %px", (unsigned long long)cgrp->freezer.frozen_time_start, cgrp);
+	} else {
+		u64 end_ns;
 		clear_bit(CGRP_FROZEN, &cgrp->flags);
+		end_ns = ktime_get_ns();
+		cgrp->freezer.frozen_time_total = (end_ns - cgrp->freezer.frozen_time_start);
+		pr_crit("ynaffitlog: setting frozen_total to %llu for cgrp: %px", (unsigned long long)cgrp->freezer.frozen_time_total, cgrp);
+	}
 
 	cgroup_file_notify(&cgrp->events_file);
 	TRACE_CGROUP_PATH(notify_frozen, cgrp, frozen);
@@ -139,7 +148,7 @@ void cgroup_leave_frozen(bool always_leave)
 		WARN_ON_ONCE(!current->frozen);
 		current->frozen = false;
 		end_ns = ktime_get_ns();
-		current->frozen_time_total += (end_ns - current->frozen_time_start);
+		current->frozen_time_total = (end_ns - current->frozen_time_start);
 	} else if (!(current->jobctl & JOBCTL_TRAP_FREEZE)) {
 		spin_lock(&current->sighand->siglock);
 		current->jobctl |= JOBCTL_TRAP_FREEZE;
@@ -183,10 +192,17 @@ static void cgroup_do_freeze(struct cgroup *cgrp, bool freeze)
 	lockdep_assert_held(&cgroup_mutex);
 
 	spin_lock_irq(&css_set_lock);
-	if (freeze)
+	if (freeze) {
 		set_bit(CGRP_FREEZE, &cgrp->flags);
-	else
+		cgrp->freezer.freeze_time_start = ktime_get_ns();
+		pr_crit("ynaffitlog: setting freeze_start to %llu for cgrp: %px", (unsigned long long)cgrp->freezer.freeze_time_start, cgrp);
+	} else {
+		u64 end_ns;
 		clear_bit(CGRP_FREEZE, &cgrp->flags);
+		end_ns = ktime_get_ns();
+		cgrp->freezer.freeze_time_total = (end_ns - cgrp->freezer.freeze_time_start);
+		pr_crit("ynaffitlog: setting freeze_total to %llu for cgrp: %px", (unsigned long long)cgrp->freezer.freeze_time_total, cgrp);
+	}
 	spin_unlock_irq(&css_set_lock);
 
 	if (freeze)
@@ -261,14 +277,35 @@ void cgroup_freezer_migrate_task(struct task_struct *task,
 int proc_cgroup_frztime_show(struct seq_file *m, struct pid_namespace *ns,
 			     struct pid *pid, struct task_struct *tsk)
 {
+	u64 delta_cgrp_freeze = 0;
+	u64 delta_cgrp_frozen = 0;
+	struct cgroup *cgrp;
 	u64 delta = 0;
+	u64 end_ns;
+
+	u64 task_frozen_time, cgrp_freeze_time, cgrp_frozen_time;
 
 	spin_lock_irq(&css_set_lock);
+	cgrp = task_dfl_cgroup(tsk);
+	end_ns = ktime_get_ns();
 	if (tsk->frozen) {
-		delta = ktime_get() - tsk->frozen_time_start;
+		delta = end_ns - tsk->frozen_time_start;
 	}
-	seq_printf(m, "%llu\n",
-		   (unsigned long long)(tsk->frozen_time_total + delta));
+	if (test_bit(CGRP_FREEZE, &cgrp->flags)) {
+		delta_cgrp_freeze = end_ns - cgrp->freezer.freeze_time_start;
+	}
+	if (test_bit(CGRP_FROZEN, &cgrp->flags)) {
+		delta_cgrp_frozen = end_ns - cgrp->freezer.frozen_time_start;
+	}
+	task_frozen_time = tsk->frozen_time_total + delta;
+	cgrp_freeze_time = cgrp->freezer.freeze_time_total + delta_cgrp_freeze;
+	cgrp_frozen_time = cgrp->freezer.frozen_time_total + delta_cgrp_frozen;
+	seq_printf(m, "cgrp: %px\n", cgrp);
+	seq_printf(m, "%llu\t%lld\t%lld\n", task_frozen_time, ((s64)task_frozen_time - (s64)cgrp_freeze_time), ((s64)task_frozen_time - (s64)cgrp_frozen_time));
+	seq_printf(m, "%llu\t%lld\t%lld\n", cgrp_freeze_time, ((s64)cgrp_freeze_time - (s64)task_frozen_time), ((s64)cgrp_freeze_time - (s64)cgrp_frozen_time));
+	seq_printf(m, "%llu\t%lld\t%lld\n", cgrp_frozen_time, ((s64)cgrp_frozen_time - (s64)cgrp_freeze_time), ((s64)cgrp_frozen_time - (s64)task_frozen_time));
+
+	//(unsigned long long)()
 	spin_unlock_irq(&css_set_lock);
 
 	return 0;

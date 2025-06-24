@@ -5765,6 +5765,8 @@ static struct cgroup *cgroup_create(struct cgroup *parent, const char *name,
 	 * if the parent has to be frozen, the child has too.
 	 */
 	cgrp->freezer.e_freeze = parent->freezer.e_freeze;
+	cgrp->freezer.freeze_time_total = 0;
+	cgrp->freezer.frozen_time_total = 0;
 	if (cgrp->freezer.e_freeze) {
 		/*
 		 * Set the CGRP_FREEZE flag, so when a process will be
@@ -5773,7 +5775,9 @@ static struct cgroup *cgroup_create(struct cgroup *parent, const char *name,
 		 * consider it frozen immediately.
 		 */
 		set_bit(CGRP_FREEZE, &cgrp->flags);
+		cgrp->freezer.freeze_time_start = ktime_get_ns();
 		set_bit(CGRP_FROZEN, &cgrp->flags);
+		cgrp->freezer.frozen_time_start = ktime_get_ns();
 	}
 
 	if (notify_on_release(parent))
@@ -6447,6 +6451,7 @@ int proc_cgroup_show(struct seq_file *m, struct pid_namespace *ns,
 				goto out_unlock;
 
 			seq_puts(m, buf);
+			seq_printf(m, " - cgrp:%px df: %px cs: %px", cgrp, task_dfl_cgroup(tsk), cset_cgroup_from_root(tsk->nsproxy->cgroup_ns->root_cset, cgrp->root));
 		} else {
 			seq_puts(m, "/");
 		}

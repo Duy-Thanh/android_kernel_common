@@ -436,6 +436,14 @@ struct cgroup_freezer_state {
 	 * frozen, SIGSTOPped, and PTRACEd.
 	 */
 	int nr_frozen_tasks;
+
+	//ynaffittodo: you looked at the other structs in here and it looks like
+	//they fill the structs "logically" instead of trying to reduce its size
+	//you're looking at both values just in case
+	u64 freeze_time_total; // when CGRP_FREEZE
+	u64 freeze_time_start;
+	u64 frozen_time_total; // when CGRP_FROZEN
+	u64 frozen_time_start;
 };
 
 struct cgroup {
