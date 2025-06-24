@@ -52,6 +52,24 @@
       "parentUuid": "eed2bc6a_32e191b4",
       "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afcf1871_a3277326",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-24T17:18:47Z",
+      "side": 1,
+      "message": "\u003e Yeah, that\u0027s true. I\u0027m not a security person, so I\u0027m not sure how much extra risk is created by having the reprivilege code. OTOH, it\u0027s generally better to minimize the amount of code and complexity in the hypervisor?\n\nYeah more code is more bugs for sure :-). We can probably discuss it with a more wider audience(intel-pkvm. meeting? ) and see what the general consensus is.\n\n\u003e  BTW it seems it might be easier to do if we move this code to an assembly file, and that BTW would allow us to avoid the objtool warning?\n\nTrue. I tried it partially by moving the lretq related stuff to an assembly file and using SYM_CODE_START/END, but objtool still complained. I need to try moving the whole code over or try using a trampoline for lretq and JMP to the trampoline. While waiting on a go/nogo on this, I will try the above options and also disabling/zeroing the code after initialization.",
+      "parentUuid": "95730002_54be4cf5",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
