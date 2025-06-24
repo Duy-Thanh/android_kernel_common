@@ -22,6 +22,30 @@
       },
       "revId": "a213abada81b086661a4f0d342a95435c3bc542e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4efaa70_8d75c28f",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-06-24T23:10:05Z",
+      "side": 0,
+      "message": "Thanks, yeah you are right. I didn\u0027t have needed to zero it, because we are duping the full original vma and modifying it below.",
+      "parentUuid": "697c59cf_25f28d3c",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 284,
+        "endChar": 9
+      },
+      "revId": "a213abada81b086661a4f0d342a95435c3bc542e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
