@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4176c7_3f62ff22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-24T15:01:04Z",
+      "side": 1,
+      "message": "You can\u0027t change an existing hook after ABI was frozen. You need to introduce a new one. Please see my comment in the bug.",
+      "revId": "33f74173cd120f7b8da0f311134eeda91a6836c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
