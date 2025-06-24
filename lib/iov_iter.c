@@ -1809,6 +1809,8 @@ static ssize_t iov_iter_extract_user_pages(struct iov_iter *i,
 		gup_flags |= FOLL_WRITE;
 	if (extraction_flags & ITER_ALLOW_P2PDMA)
 		gup_flags |= FOLL_PCI_P2PDMA;
+	if (extraction_flags & ITER_ALLOW_LONGTERM_USAGE)
+		gup_flags |= FOLL_LONGTERM;
 	if (i->nofault)
 		gup_flags |= FOLL_NOFAULT;
 
