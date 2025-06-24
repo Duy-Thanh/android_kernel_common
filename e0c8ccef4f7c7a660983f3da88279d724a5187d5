@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0436002b_697d5079",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-24T10:47:58Z",
+      "side": 1,
+      "message": "Yes agreed, I wanted to start a discussion upstream to see if conditional warning suppressions could be implemented. I think upstream dev had some plans to remove this warning, but re-added it while fixing another spurious warning:\nhttps://lore.kernel.org/all/9b23e4413873bee38961e628b0c73f6d3a26d494.1743799705.git.jpoimboe@kernel.org/\n\nI shall talk to them and see if we can hide this warning for genuine use cases like this. In the meantime, I can have a hacky patch to objtool to hide this warning. I thought it would be okay to have this warning for a while as it comes between a lot other warnings (ABI and such).",
+      "parentUuid": "0fa45837_3249efb8",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa5f4bfc_1717afc9",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 5
