@@ -34,6 +34,24 @@
       "parentUuid": "4a062288_6423278d",
       "revId": "c7086ba83d43701f83d37aff9a886db88e153408",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb17726b_41f509f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2025-06-24T05:24:49Z",
+      "side": 1,
+      "message": "The upstreamed patch should be in the next GKI branch anyway. I\u0027m wondering if a \"ANDROID\" patch for correcting this in the desktop branch should be sufficient.\n\n+mikrawczyk for comments.",
+      "parentUuid": "baee73af_8136627d",
+      "revId": "c7086ba83d43701f83d37aff9a886db88e153408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
