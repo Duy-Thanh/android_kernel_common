@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b6d03d_6696577d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-24T20:50:06Z",
+      "side": 1,
+      "message": "This unfortunately shows the KABI is changed with your patch, so I don\u0027t think we can take this as is right now into android16-6.12. You might look to see if the KABI reservation space could be used here.",
+      "revId": "d216ee07461575348c87992f89471915a0ef72ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7fbfa1a8_8fc64c33",
