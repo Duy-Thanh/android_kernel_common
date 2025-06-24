@@ -16,6 +16,23 @@
       "message": "Please review, Thanks",
       "revId": "cd861fe71513de2ee16823b8b14ddc0481060648",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b956759b_e274c9d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-06-24T14:31:19Z",
+      "side": 1,
+      "message": "Sorry, this branch is closed for non-Bulletin fixes.",
+      "revId": "cd861fe71513de2ee16823b8b14ddc0481060648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
