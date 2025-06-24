@@ -16,6 +16,23 @@
       "message": "Set Ready For Review",
       "revId": "f1e7beea4a624ec0be1d2747402c22a8e3f7826a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5dbe986_9d75d099",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-24T20:47:32Z",
+      "side": 1,
+      "message": "I think this change is going to have KABI impact, and since we\u0027re after the freeze we may not be able to take it as is. \n\nIt may need to consume some of the KABI reservations in order to land.",
+      "revId": "f1e7beea4a624ec0be1d2747402c22a8e3f7826a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
