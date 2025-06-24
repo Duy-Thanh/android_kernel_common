@@ -267601,6 +267601,13 @@ function {
   parameter_id: 0xc93e017b
 }
 function {
+  id: 0x11ecf47b
+  return_type_id: 0x48b5725f
+  parameter_id: 0x054f691a
+  parameter_id: 0x054f691a
+  parameter_id: 0xc9082b19
+}
+function {
   id: 0x11f553a6
   return_type_id: 0x48b5725f
   parameter_id: 0x06835e9c
@@ -328384,6 +328391,15 @@ elf_symbol {
   full_name: "down_interruptible"
 }
 elf_symbol {
+  id: 0x0b4ac64d
+  name: "down_killable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x36b6ebbf
+  type_id: 0x99c75a91
+  full_name: "down_killable"
+}
+elf_symbol {
   id: 0xf65b5ded
   name: "down_read"
   is_defined: true
@@ -357175,6 +357191,15 @@ elf_symbol {
   full_name: "skb_set_owner_w"
 }
 elf_symbol {
+  id: 0x24587583
+  name: "skb_split"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4ac769d2
+  type_id: 0x11ecf47b
+  full_name: "skb_split"
+}
+elf_symbol {
   id: 0xf23330c5
   name: "skb_store_bits"
   is_defined: true
@@ -371919,6 +371944,7 @@ interface {
   symbol_id: 0x1f647fed
   symbol_id: 0xb832d27e
   symbol_id: 0x22b91009
+  symbol_id: 0x0b4ac64d
   symbol_id: 0xf65b5ded
   symbol_id: 0x4bd2ef24
   symbol_id: 0x6d790d49
@@ -375113,6 +375139,7 @@ interface {
   symbol_id: 0x3c015632
   symbol_id: 0xea81e880
   symbol_id: 0xd1b9e255
+  symbol_id: 0x24587583
   symbol_id: 0xf23330c5
   symbol_id: 0x05746b6c
   symbol_id: 0xd034d018
