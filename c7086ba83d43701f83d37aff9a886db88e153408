@@ -16,6 +16,24 @@
       "message": "Wondering if we really have to revert and reapply for correcting the prefix only?",
       "revId": "c7086ba83d43701f83d37aff9a886db88e153408",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baee73af_8136627d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1070555
+      },
+      "writtenOn": "2025-06-24T04:45:01Z",
+      "side": 1,
+      "message": "I think it is cleaner, only one patch is needed to apply the correct code.",
+      "parentUuid": "4a062288_6423278d",
+      "revId": "c7086ba83d43701f83d37aff9a886db88e153408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
