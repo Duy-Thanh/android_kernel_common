@@ -155,6 +155,10 @@
   blk_mq_sched_try_insert_merge
   elv_rqhash_add
 
+#required by Filesystem
+  __traceiter_android_vh_verity_end_io_queue_work
+  __tracepoint_android_vh_verity_end_io_queue_work
+
 #required by cifs.ko
   add_swap_extent
   asn1_ber_decoder
