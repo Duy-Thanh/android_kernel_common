@@ -33,6 +33,41 @@
       "message": "Sorry, this branch is closed for non-Bulletin fixes.",
       "revId": "cd861fe71513de2ee16823b8b14ddc0481060648",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55e321fa_e1471bb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2025-06-25T01:45:33Z",
+      "side": 1,
+      "message": "This means that the December branch does not support repin operations, and the information obtained internally is that the maintenance cycle is half a year.",
+      "parentUuid": "b956759b_e274c9d5",
+      "revId": "cd861fe71513de2ee16823b8b14ddc0481060648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "018efd41_0e507414",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2025-06-25T01:45:33Z",
+      "side": 1,
+      "message": "This means that the December branch does not support repin operations, and the information obtained internally is that the maintenance cycle is half a year.",
+      "revId": "cd861fe71513de2ee16823b8b14ddc0481060648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
