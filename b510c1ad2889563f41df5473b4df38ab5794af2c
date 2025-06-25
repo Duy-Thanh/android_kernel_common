@@ -1,0 +1,217 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4970f0f_9b9e7d12",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-25T00:40:44Z",
+      "side": 1,
+      "message": "Allocating while holding mm-\u003edmabufs-\u003elock spinlock is not a good idea. Allocation might cause direct reclaim, so the lock might be held for a long time.",
+      "range": {
+        "startLine": 207,
+        "startChar": 8,
+        "endLine": 207,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "98e9c016_dbd7cedf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 200,
+                "startChar": 0,
+                "endLine": 200,
+                "endChar": 0
+              },
+              "replacement": "\tbool new_record \u003d false;\n\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 206,
+                "startChar": 0,
+                "endLine": 209,
+                "endChar": 0
+              },
+              "replacement": "\tif (!mm_rec) {\n\t\tnew_record \u003d true;\n\t} else {\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 210,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 212,
+                "startChar": 0,
+                "endLine": 212,
+                "endChar": 0
+              },
+              "replacement": "\tif (new_record)\n\t\tret \u003d __new_mm_dmabuf_record(dmabuf, mm);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b510c1ad2889563f41df5473b4df38ab5794af2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5ff35be_1009fa01",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3367,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-25T00:40:44Z",
+      "side": 1,
+      "message": "If we had that and dedup dmabufs within files_struct.list and mm-\u003edmabufs-\u003elist I think we could have done this aggregation without copying dmabufs into ctx.unique_dmabufs, which is the biggest issue I see here. This copying requires allocations, which is not great by itself but even worse the allocations are made while holding spinlocks.",
+      "range": {
+        "startLine": 3367,
+        "startChar": 9,
+        "endLine": 3367,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a6ae5705_7f281fcb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3367,
+                "startChar": 0,
+                "endLine": 3370,
+                "endChar": 0
+              },
+              "replacement": "\tdo { // We could keep a dmabuf list in files_struct to avoid this full\n\t\t // iteration, but we don\u0027t have official KMI padding there, and\n\t\t // we shouldn\u0027t have nearly as many FDs as VMAs, and that\u0027d be\n\t\t // more unsupported, non-upstream changes to deal with.\n"
+            },
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3379,
+                "startChar": 0,
+                "endLine": 3380,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3515,
+                "startChar": 0,
+                "endLine": 3517,
+                "endChar": 0
+              },
+              "replacement": "#endif\t\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b510c1ad2889563f41df5473b4df38ab5794af2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9411970_36439465",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-25T00:40:44Z",
+      "side": 1,
+      "message": "Good candidate to be a separate function like dup_dma_buf_records()",
+      "range": {
+        "startLine": 768,
+        "startChar": 4,
+        "endLine": 776,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "46aaf5b1_ff08ac25",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 543,
+                "startChar": 0,
+                "endLine": 543,
+                "endChar": 0
+              },
+              "replacement": "\nstatic int dup_dma_buf_records(struct mm_struct *mm, struct mm_struct *oldmm)\n{\n\tstruct mm_dma_buf_record *old_mm_rec, *new_mm_rec;\n\n\tlist_for_each_entry(old_mm_rec, \u0026oldmm-\u003edmabufs-\u003elist, node) {\n\t\tnew_mm_rec \u003d kmalloc(sizeof(*new_mm_rec), GFP_KERNEL);\n\t\tif (!new_mm_rec)\n\t\t\treturn -ENOMEM;\n\n\t\tnew_mm_rec-\u003edmabuf \u003d old_mm_rec-\u003edmabuf;\n\t\tnew_mm_rec-\u003erefcount \u003d old_mm_rec-\u003erefcount;\n\t\tlist_add(\u0026new_mm_rec-\u003enode, \u0026mm-\u003edmabufs-\u003elist);\n\t}\n\n\treturn 0;\n}\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 669,
+                "startChar": 0,
+                "endLine": 670,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 768,
+                "startChar": 0,
+                "endLine": 777,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tretval \u003d dup_dma_buf_records(mm, oldmm);\n\t\t\t\tif (retval)\n\t\t\t\t\tgoto fail_nomem_dmabuf_list;\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 828,
+                "startChar": 0,
+                "endLine": 828,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 830,
+                "startChar": 0,
+                "endLine": 833,
+                "endChar": 0
+              },
+              "replacement": "\t{\n\t\tstruct mm_dma_buf_record *mm_rec, *tmp;\n\n\t\tlist_for_each_entry_safe(mm_rec, tmp, \u0026mm-\u003edmabufs-\u003elist, node) {\n\t\t\tlist_del(\u0026mm_rec-\u003enode);\n\t\t\tkfree(mm_rec);\n\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b510c1ad2889563f41df5473b4df38ab5794af2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
