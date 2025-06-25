@@ -68,6 +68,41 @@
       "message": "This means that the December branch does not support repin operations, and the information obtained internally is that the maintenance cycle is half a year.",
       "revId": "cd861fe71513de2ee16823b8b14ddc0481060648",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dad0edbc_599d90b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2025-06-25T02:31:57Z",
+      "side": 1,
+      "message": "Branch: android15-6.6-2024-12 (history)\nNo longer respin eligible from 2025-07-01, unless for security patches cited in the Android Security Bulletin (ASB) upon explicit partner request.\n\nThanks",
+      "revId": "cd861fe71513de2ee16823b8b14ddc0481060648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d335d92_59adc878",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2025-06-25T02:31:57Z",
+      "side": 1,
+      "message": "Branch: android15-6.6-2024-12 (history)\nNo longer respin eligible from 2025-07-01, unless for security patches cited in the Android Security Bulletin (ASB) upon explicit partner request.\n\nThanks",
+      "parentUuid": "55e321fa_e1471bb5",
+      "revId": "cd861fe71513de2ee16823b8b14ddc0481060648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
