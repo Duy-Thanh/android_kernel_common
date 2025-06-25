@@ -70,6 +70,40 @@
       "parentUuid": "95730002_54be4cf5",
       "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c431a443_1ad4f6ea",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-25T01:55:36Z",
+      "side": 1,
+      "message": "Nit: Probably can use the VM_EXIT_INSTRUCTION_LEN rather than hardcoding value 3?",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3790b131_47cd8448",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-25T01:55:36Z",
+      "side": 1,
+      "message": "When the first CPU is successfully finalized, the pkvm_initialized will be true. So looks like if the subsequential CPU is failed to be finalized, this hypercall is not re-privilege the CPU back to root mode. Is this a correct understanding?",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff203221_1b54bf10",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-25T01:55:36Z",
+      "side": 1,
+      "message": "Just some though in my mind. Can we use iret here rather than lretq? iret can also performs a far jump. If this is ok, then the objtool warning will be \"return with modified stack frame\". To handle this warning, probably the unwind hints in the \"asm/unwind_hints.h\" may be helpful with moving the code to asm file(SYM_CODE_START/SYM_CODE_END)?",
+      "parentUuid": "0436002b_697d5079",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa5f4bfc_1717afc9",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 5
