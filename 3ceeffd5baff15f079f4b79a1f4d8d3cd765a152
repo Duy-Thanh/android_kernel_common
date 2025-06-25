@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14d8c40c_f973ee7f",
+        "filename": "mm/madvise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1536,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-25T23:45:15Z",
+      "side": 0,
+      "message": "Instead of open-coding this I suggest you include madvise_lock() and madvise_unlock() from the original patch and use them here. The backport will be much cleaner than way.",
+      "range": {
+        "startLine": 1530,
+        "startChar": 1,
+        "endLine": 1536,
+        "endChar": 2
+      },
+      "revId": "3ceeffd5baff15f079f4b79a1f4d8d3cd765a152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
