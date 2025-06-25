@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0db7b76_a86fd772",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-25T13:21:41Z",
+      "side": 1,
+      "message": "Ahh, I hadn\u0027t thought about iret. I shall give it a try and see.",
+      "parentUuid": "ff203221_1b54bf10",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa5f4bfc_1717afc9",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 5

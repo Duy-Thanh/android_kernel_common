@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16654a08_b4eb0df4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-25T13:21:41Z",
+      "side": 1,
+      "message": "makes sense. Fixed",
+      "parentUuid": "c431a443_1ad4f6ea",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3790b131_47cd8448",
@@ -102,6 +120,24 @@
       "writtenOn": "2025-06-25T01:55:36Z",
       "side": 1,
       "message": "When the first CPU is successfully finalized, the pkvm_initialized will be true. So looks like if the subsequential CPU is failed to be finalized, this hypercall is not re-privilege the CPU back to root mode. Is this a correct understanding?",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc33bf92_4413cb39",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-25T13:21:41Z",
+      "side": 1,
+      "message": "Youre absolutely right. I was under the impression that subsequent cpus will not fail this call as it directly jumps to `switch_pgt`. But reading the code again, subsequent cpus can fail in `pkvm_setup_lapic()`. Thanks for catching this, So I need to rework this logic.",
+      "parentUuid": "3790b131_47cd8448",
       "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
