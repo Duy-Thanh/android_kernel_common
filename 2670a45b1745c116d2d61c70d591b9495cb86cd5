@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf096a2_738bab13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-06-25T21:19:54Z",
+      "side": 1,
+      "message": "This hook would allow vendor modules to skip the dm-verity check.  I think this is a great example of why vendor hooks in security-relevant components is a bad idea.\n\nPlease consider using the `try_verify_in_tasklet` option, which eliminates the dm-verity scheduling overhead in many cases, which seems to be what you\u0027re trying to achieve.  It was recently improved by the following commits:\n\n* FROMGIT: dm-verity: support block number limits for different ioprio classes\n* FROMGIT: dm-bufio: don\u0027t schedule in atomic context\n* FROMGIT: dm-verity: use softirq context only when !need_resched()\n\nAdditionally, please ensure your Android build includes https://r.android.com/q/topic:%22dm-verity-max-age-seconds%22, which fixed the Merkle tree block cache to not expire so quickly.\n\nIf there are remaining issues, please collaborate with us and upstream to fix them.",
+      "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
