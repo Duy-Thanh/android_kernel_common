@@ -159,6 +159,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22346808_b4259bf7",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3367,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-25T17:46:15Z",
+      "side": 1,
+      "message": "re: Having deduped lists in mm_struct and files_struct doesn\u0027t mean there aren\u0027t duplicates between them.\n\nTrue but I think if we had that we could check if dmabuf already belongs to one of these lists without copying into unique_dmabufs. That would require holding a lock while we check both lists but that I think is better than copying the records.",
+      "parentUuid": "8dd04719_6ca07b7b",
+      "range": {
+        "startLine": 3367,
+        "startChar": 9,
+        "endLine": 3367,
+        "endChar": 60
+      },
+      "revId": "b510c1ad2889563f41df5473b4df38ab5794af2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9411970_36439465",
         "filename": "kernel/fork.c",
         "patchSetId": 1
