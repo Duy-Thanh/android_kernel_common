@@ -34,6 +34,24 @@
       "parentUuid": "8cf096a2_738bab13",
       "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e8bd11f_4e24775d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-06-26T03:46:32Z",
+      "side": 1,
+      "message": "Regarding our previous discussion, our verity_end_io executes in a hard interrupt context.",
+      "parentUuid": "179354bb_4fbd7ddd",
+      "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
