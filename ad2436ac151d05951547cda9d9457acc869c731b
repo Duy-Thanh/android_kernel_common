@@ -34,6 +34,24 @@
       "parentUuid": "6363d36f_a2982fb9",
       "revId": "ad2436ac151d05951547cda9d9457acc869c731b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813eb137_1899f8d3",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-06-26T23:52:01Z",
+      "side": 1,
+      "message": "Looks there\u0027s a bit of confusion here. There are two security concerns here:\n1. Mapping a page which is not owned by the host. This is what Dymtro is referring to I believe and should be addressed by something like:\n```\n\tunsigned long map_phys;\n\tpkvm_host_ept_lookup(pteval \u0026 VTD_PAGE_MASK, \u0026map_phys, NULL, NULL);\n\tif (map_phys \u003d\u003d INVALID_ADDR) {\n\t\tpkvm_err(\"pkvm: phys addr 0x%lx not mapped in host ept\\n\", pteval \u0026 VTD_PAGE_MASK);\n\t\treturn err;\n\t}\n```\nIn the shadow implementation, its taken care by [this](https://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12-desktop/arch/x86/kvm/vmx/pkvm/hyp/iommu.c#392)\n2. Donation of a page from host to hypervisor which is already DMA mapped by the host (solved by aosp/3586350), which has to be taken care separately.",
+      "parentUuid": "6dc02d8a_6f9ded9e",
+      "revId": "ad2436ac151d05951547cda9d9457acc869c731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
