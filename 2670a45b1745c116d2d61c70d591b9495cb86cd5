@@ -52,6 +52,24 @@
       "parentUuid": "179354bb_4fbd7ddd",
       "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "612f959b_3ce0e3ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-06-26T21:19:04Z",
+      "side": 1,
+      "message": "`system_bh_wq` is the bottom-half (BH) workqueue.  It causes the work to be executed in softirq context, also known as BH context.  If `verity_end_io` is being called in hardirq context on your devices, what this means is that (if `try_verify_in_tasklet` is set) when that hardirq finishes, the CPU will immediately execute a softirq that does the verity work.  There\u0027s no scheduling overhead.\n\nTo reduce impact on real-time tasks, the latest implementation of `try_verify_in_tasklet` chooses softirq context only when the I/O request is 8 KiB or less and rescheduling of the current task has not been requested yet.  Note that 4 KiB is a common request size, and the latency of it is very important, as it\u0027s what the kernel uses for synchronous reads.  Additionally, hashing 4 KiB with the ARMv8 crypto extensions takes only a few microseconds.  So this solution should work rather well.  We have other partners who are either already using or considering using this solution.\n\nSo, can you consider this solution, which is already upstream as well as already in this kernel branch?  There\u0027s no need for a vendor hook if you just use that.",
+      "parentUuid": "0e8bd11f_4e24775d",
+      "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
