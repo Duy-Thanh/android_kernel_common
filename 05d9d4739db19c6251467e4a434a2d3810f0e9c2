@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4705e0d_739daf89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-06-26T15:01:40Z",
+      "side": 1,
+      "message": "This is hypervisor ABI so we shouldn\u0027t expose it to modules.\n\nCan you use SMCs instead? We already have mechanisms for routing those to vendor modules.",
+      "revId": "05d9d4739db19c6251467e4a434a2d3810f0e9c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
