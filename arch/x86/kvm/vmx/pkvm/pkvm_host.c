@@ -786,7 +786,10 @@ static __init void init_idt(struct pkvm_pcpu *pcpu)
 			idt_init_desc(&desc, &d);
 			write_idt_entry(idt, i, &desc);
 		} else {
-			memcpy(&idt[i], &host_idt[i], sizeof(gate_desc));
+			if (cpu_feature_enabled(X86_FEATURE_FRED))
+				d.addr = (const void *)pkvm_sym(noop_handler);
+			else
+				memcpy(&idt[i], &host_idt[i], sizeof(gate_desc));
 		}
 	}
 #else
