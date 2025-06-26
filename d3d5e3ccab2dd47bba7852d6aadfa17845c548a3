@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc67ef3_4b0a7cb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-06-26T05:04:42Z",
+      "side": 1,
+      "message": "nit: This can just be a line in the tags section as such:\n\n`Fixes: 988dc02cddcb (\"BACKPORT: mm: support large folios swap-in for sync io devices\")`\n\nInstead of what you currently have.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 66
+      },
+      "revId": "d3d5e3ccab2dd47bba7852d6aadfa17845c548a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "158ab25c_432bb7ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-06-26T05:04:42Z",
+      "side": 1,
+      "message": "Remove newline?",
+      "revId": "d3d5e3ccab2dd47bba7852d6aadfa17845c548a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a99cd9da_a0e20aec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-06-26T05:04:42Z",
+      "side": 1,
+      "message": "s/Buit/Built",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 10
+      },
+      "revId": "d3d5e3ccab2dd47bba7852d6aadfa17845c548a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
