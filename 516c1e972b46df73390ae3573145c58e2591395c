@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3208301_ca6aa442",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-26T20:12:51Z",
+      "side": 1,
+      "message": "It might also help if there was more explanation for why this approach differs so drastically from the fromgit change. I assume its KABI consistency?",
+      "parentUuid": "a30d2f5e_7c14ac8f",
+      "revId": "516c1e972b46df73390ae3573145c58e2591395c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0600ba9_4cbfbf17",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
