@@ -16,6 +16,24 @@
       "message": "This is hypervisor ABI so we shouldn\u0027t expose it to modules.\n\nCan you use SMCs instead? We already have mechanisms for routing those to vendor modules.",
       "revId": "05d9d4739db19c6251467e4a434a2d3810f0e9c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee23d23_1e4e8e9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-06-26T15:15:08Z",
+      "side": 1,
+      "message": "Thank you for a quick response! \n\n\u003e Can you use SMCs instead?\n\nThe main intent behind this change is to bring the ARM-TRNG support using a pKVM vendor module as discussed in the past. All guests\u0027 use cases default to HVC instead of SMC once discovered it\u0027s in the VM.\n\n\u003e We already have mechanisms for routing those to vendor modules.\n\nAlso IIUC the SMC handler mechanism requires per VM basic opt-in and AFAIK there is no method to callback on every pVM creation to opt-in the handler (or at all without VMM modification).\n\n\u003e This is hypervisor ABI so we shouldn\u0027t expose it to modules.\n\nI don\u0027t quite understand. pKVM vendor module only have hypervisor ABI to interact with 😅",
+      "parentUuid": "c4705e0d_739daf89",
+      "revId": "05d9d4739db19c6251467e4a434a2d3810f0e9c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
