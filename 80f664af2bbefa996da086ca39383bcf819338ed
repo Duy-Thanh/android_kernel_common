@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ce02b50_65500dc2",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-26T19:40:28Z",
+      "side": 1,
+      "message": "does not seem like appropriate place. Just forward-declare `struct task_dma_buf_info`",
+      "range": {
+        "startLine": 734,
+        "startChar": 0,
+        "endLine": 746,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cf72b4fc_f25cb4be",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/sched.h",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "struct task_dma_buf_info;\n"
+            },
+            {
+              "path": "include/linux/sched.h",
+              "range": {
+                "startLine": 734,
+                "startChar": 0,
+                "endLine": 748,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "80f664af2bbefa996da086ca39383bcf819338ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8ace81_3f224180",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2301,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-26T19:40:28Z",
+      "side": 1,
+      "message": "I think rss should be read also under current-\u003edmabuf_info-\u003elock protection to avoid inaccuracy from a possible race.",
+      "range": {
+        "startLine": 2300,
+        "startChar": 2,
+        "endLine": 2301,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "407839a1_8a218056",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2300,
+                "startChar": 0,
+                "endLine": 2302,
+                "endChar": 0
+              },
+              "replacement": "\t\ts64 rss \u003d 0;\n\n\t\tif (current-\u003edmabuf_info) {\n\t\t\tspin_lock(\u0026current-\u003edmabuf_info-\u003elock);\n\t\t\trss \u003d atomic64_read(\u0026current-\u003edmabuf_info-\u003erss);\n\t\t\tspin_unlock(\u0026current-\u003edmabuf_info-\u003elock);\n\t\t}\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2644,
+                "startChar": 0,
+                "endLine": 2645,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (retval \u003c 0) {\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2646,
+                "startChar": 0,
+                "endLine": 2646,
+                "endChar": 0
+              },
+              "replacement": "\t\t}\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2649,
+                "startChar": 0,
+                "endLine": 2650,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (retval) {\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2651,
+                "startChar": 0,
+                "endLine": 2651,
+                "endChar": 0
+              },
+              "replacement": "\t\t}\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2705,
+                "startChar": 0,
+                "endLine": 2706,
+                "endChar": 0
+              },
+              "replacement": "\t * progress. If the cgroup is not allowed to fork, we must release the\n\t * pidfd before returning.\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2708,
+                "startChar": 0,
+                "endLine": 2709,
+                "endChar": 0
+              },
+              "replacement": "\tif (retval) {\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2710,
+                "startChar": 0,
+                "endLine": 2710,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2858,
+                "startChar": 0,
+                "endLine": 2858,
+                "endChar": 0
+              },
+              "replacement": "\t\tpidfile \u003d NULL;\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 3066,
+                "startChar": 0,
+                "endLine": 3066,
+                "endChar": 0
+              },
+              "replacement": "\n\tif (args-\u003epidfd \u0026\u0026 !pidfile) {\n\t\t/*\n\t\t * The pidfd was not installed because the caller did not\n\t\t * request it.\n\t\t */\n\t\tput_unused_fd(args-\u003epidfd);\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "80f664af2bbefa996da086ca39383bcf819338ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
