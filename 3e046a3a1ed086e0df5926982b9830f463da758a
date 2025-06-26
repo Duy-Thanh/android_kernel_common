@@ -108,6 +108,30 @@
       },
       "revId": "3e046a3a1ed086e0df5926982b9830f463da758a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f2b6e87_1ca56c2f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-06-26T08:30:37Z",
+      "side": 1,
+      "message": "Marc Zyngier left the following comment on the LMKL\n\n\u003e This is the *return value*, right? Not the function number. How can\nyou tell about the 64-bitness of the function number based on that?\n\nLink: https://lore.kernel.org/all/20250619-virtio-msg-ffa-v5-0-412c98558807@google.com/T/#t\n\nLooking at this closer. I don\u0027t think it is always the case that `a0` contains a function ID. For instance, `FFA_VERSION` puts the negotiated version or `FFA_RET_NOT_SUPPORTED` in that register.\n\nI figured your concern was with the messaging interfaces where the response to a 64-bit request (e.g. `FFA_MSG_SEND_DIRECT_REQ2`) can be either 64 (e.g. `FFA_MSG_SEND_DIRECT_RESP2`) or 32 bit (`FFA_ERROR`) but it is not clear to me that it would be a problem to look at the function ID of the request and thus send an 18-register reply no matter what the result of the interface is (e.g. `FFA_ERROR`). Maybe your concern is something else, can you enlighten me?",
+      "parentUuid": "1353336b_82cdfb7c",
+      "range": {
+        "startLine": 124,
+        "startChar": 21,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "3e046a3a1ed086e0df5926982b9830f463da758a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
