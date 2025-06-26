@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce499a71_ecb2cef6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-06-26T20:18:57Z",
+      "side": 1,
+      "message": "Indeed. The upstream patch breaks the KABI. Hence this backport for the android16-6.12 kernel.\n\nThe intent of both patches is the same. As explained in the patch description, the intention is to change the op_is_write() return value from false into true for REQ_OP_ZONE_FINISH. This CL realizes that goal without renumbering any REQ_OP_* operation.",
+      "parentUuid": "e3208301_ca6aa442",
+      "revId": "516c1e972b46df73390ae3573145c58e2591395c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0600ba9_4cbfbf17",
