@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fe9dffe_7393d20d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-26T16:21:09Z",
+      "side": 1,
+      "message": "Unclear why this export helps `vendor modules perform more operations on abnormal memory usage detection and collecting stack traces for abnormal processes`. Please update description with more specific information on the need to export it.",
+      "revId": "93712a0f58c0d6af0b5bccc229dd97551245cdeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
