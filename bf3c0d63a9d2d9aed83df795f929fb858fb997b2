@@ -22,6 +22,30 @@
       },
       "revId": "bf3c0d63a9d2d9aed83df795f929fb858fb997b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29dee90b_a668c313",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6046,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-06-26T07:51:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4e79947c_ad722d37",
+      "range": {
+        "startLine": 6032,
+        "startChar": 0,
+        "endLine": 6046,
+        "endChar": 0
+      },
+      "revId": "bf3c0d63a9d2d9aed83df795f929fb858fb997b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
