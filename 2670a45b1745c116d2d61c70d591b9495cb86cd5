@@ -88,6 +88,24 @@
       "parentUuid": "612f959b_3ce0e3ac",
       "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f944ae_1fb956d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-06-27T20:07:48Z",
+      "side": 1,
+      "message": "\u003e We\u0027ve conducted practical tests on the impact of enabling try_verify_in_tasklet. It appears that even when there are numerous softirqs, this approach cannot guarantee that the verity processing occurs within the softirq context. In such scenarios, the scheduling overhead does not seem to outperform our optimized solution.\n\nWas your test done on the latest version of `try_verify_in_tasklet`, and if so what threshold did you use for the I/O size?  It could be tuned to use softirq context in more cases, but it\u0027s meant to be balanced to avoid too much impact on other tasks.  It\u0027s important not to optimize for one part of the system (dm-verity) at the expense of everything else.\n\n\u003e Additionally, older kernel versions don\u0027t have the system_bh_wq. We would like to address/optimize the scheduling overhead for this verity processing on devices running these kernels as well.\n\nWe\u0027d be glad to backport patches from upstream if needed.\n\nAlso, please let me know if you\u0027ve incorporated https://r.android.com/q/topic:%22dm-verity-max-age-seconds%22 as I suggested.",
+      "parentUuid": "005e87f0_3431381f",
+      "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
