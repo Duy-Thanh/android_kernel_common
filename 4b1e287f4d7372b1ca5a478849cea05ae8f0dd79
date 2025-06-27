@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "982b450b_85374628",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-27T20:22:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e65793da_968fa75f",
+      "revId": "4b1e287f4d7372b1ca5a478849cea05ae8f0dd79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5198afac_6e70c79b",
@@ -84,6 +102,24 @@
           ]
         }
       ],
+      "revId": "4b1e287f4d7372b1ca5a478849cea05ae8f0dd79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b4e5ac_c06ef581",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-27T20:22:10Z",
+      "side": 1,
+      "message": "It is printed in the above line, but yeah, won\u0027t hurt to print it in this line as well. Done.",
+      "parentUuid": "5198afac_6e70c79b",
       "revId": "4b1e287f4d7372b1ca5a478849cea05ae8f0dd79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
