@@ -70,6 +70,24 @@
       "parentUuid": "0e8bd11f_4e24775d",
       "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "005e87f0_3431381f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-06-27T14:04:32Z",
+      "side": 1,
+      "message": "We\u0027ve conducted practical tests on the impact of enabling try_verify_in_tasklet. It appears that even when there are numerous softirqs, this approach cannot guarantee that the verity processing occurs within the softirq context. In such scenarios, the scheduling overhead does not seem to outperform our optimized solution.\n\nAdditionally, older kernel versions don\u0027t have the system_bh_wq. We would like to address/optimize the scheduling overhead for this verity processing on devices running these kernels as well.",
+      "parentUuid": "612f959b_3ce0e3ac",
+      "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
