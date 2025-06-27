@@ -52,6 +52,24 @@
       "parentUuid": "6dc02d8a_6f9ded9e",
       "revId": "ad2436ac151d05951547cda9d9457acc869c731b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cca63903_3ff8af48",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-27T13:17:28Z",
+      "side": 1,
+      "message": "Thanks for the clarification Aashish. Sorry that I overlooked and missed the fix, I shall fix it in the next iteration.",
+      "parentUuid": "813eb137_1899f8d3",
+      "revId": "ad2436ac151d05951547cda9d9457acc869c731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
