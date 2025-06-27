@@ -15,3 +15,6 @@ type 'struct f2fs_sb_info' changed
   member 'unsigned short gc_pin_file_threshold' changed
     offset changed by 32
 
+type 'enum gunyah_rm_vm_status' changed
+  enumerator 'GUNYAH_RM_VM_STATUS_RESET_FAILED' (12) was added
+
