@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d93150_175967c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-27T20:14:43Z",
+      "side": 1,
+      "message": "Changes look good to me, but looks like I do not have +2 rights yet.",
+      "revId": "4b1e287f4d7372b1ca5a478849cea05ae8f0dd79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e65793da_968fa75f",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-27T20:14:43Z",
+      "side": 1,
+      "message": "nit: update this comment as well to reason the change?",
+      "fixSuggestions": [
+        {
+          "fixId": "14bc6601_06bc5a3a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 208,
+                "startChar": 0,
+                "endLine": 209,
+                "endChar": 0
+              },
+              "replacement": "\t\t * If pkvm IOMMU works in scalable mode, it is better to use nested\n\t\t * translation. But it is not a must, as pKVM can also work with\n\t\t * non-nested translation.\n\t\t *\n\t\t * If nested translation is not supported, pKVM can only work with\n\t\t * IOMMU pass-through mode.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4b1e287f4d7372b1ca5a478849cea05ae8f0dd79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5198afac_6e70c79b",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-27T20:14:43Z",
+      "side": 1,
+      "message": "nit: It might be worth logging the base_addr as well(like the initial pr_err() so that user gets to know which IOMMU is the culprit",
+      "fixSuggestions": [
+        {
+          "fixId": "741a39f3_b577a94e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 213,
+                "startChar": 0,
+                "endLine": 214,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tpr_warn(\"pkvm: drhd reg_base 0x%llx: do not use this iommu in non-passthrough mode!\\n\",\n\t\t\t\tdrhd-\u003ereg_base_addr);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4b1e287f4d7372b1ca5a478849cea05ae8f0dd79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
