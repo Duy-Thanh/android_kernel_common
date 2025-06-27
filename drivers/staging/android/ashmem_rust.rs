@@ -12,7 +12,8 @@
 
 use core::{
     pin::Pin,
-    sync::atomic::{AtomicBool, AtomicUsize, Ordering},
+    sync::atomic::{AtomicBool, AtomicPtr, AtomicUsize, Ordering},
+    ptr::null_mut,
 };
 use kernel::{
     bindings::{self, ASHMEM_GET_PIN_STATUS, ASHMEM_PIN, ASHMEM_UNPIN},
@@ -71,6 +72,7 @@ fn has_cap_sys_admin() -> bool {
 static NUM_PIN_IOCTLS_WAITING: AtomicUsize = AtomicUsize::new(0);
 static IGNORE_UNSET_PROT_READ: AtomicBool = AtomicBool::new(false);
 static IGNORE_UNSET_PROT_EXEC: AtomicBool = AtomicBool::new(false);
+static ASHMEM_FOPS_PTR: AtomicPtr<bindings::file_operations> = AtomicPtr::new(null_mut());
 
 fn shrinker_should_stop() -> bool {
     NUM_PIN_IOCTLS_WAITING.load(Ordering::Relaxed) > 0
@@ -104,13 +106,18 @@ impl kernel::Module for AshmemModule {
 
         ashmem_range::set_shrinker_enabled(true)?;
 
-        Ok(Self {
-            _misc: KBox::pin_init(
+        let ashmem_miscdevice_registration = KBox::pin_init(
                 MiscDeviceRegistration::register(MiscDeviceOptions {
                     name: c_str!("ashmem"),
                 }),
                 GFP_KERNEL,
-            )?,
+            )?;
+        let ashmem_miscdevice_ptr = ashmem_miscdevice_registration.as_raw();
+        let fops_ptr = unsafe { (*ashmem_miscdevice_ptr).fops };
+        ASHMEM_FOPS_PTR.store(fops_ptr.cast_mut(), Ordering::Relaxed);
+
+        Ok(Self {
+            _misc: ashmem_miscdevice_registration,
             _toggle_unpin: AshmemToggleMisc::<AshmemToggleShrinker>::new()?,
             _toggle_read: AshmemToggleMisc::<AshmemToggleRead>::new()?,
             _toggle_exec: AshmemToggleMisc::<AshmemToggleExec>::new()?,
@@ -637,4 +644,20 @@ fn ashmem_memfd_ioctl_inner(file: &File, cmd: u32, arg: usize) -> Result<isize> 
         bindings::ASHMEM_SET_SIZE => Err(EINVAL),
         _ => Err(EINVAL),
     }
+}
+
+#[no_mangle]
+unsafe extern "C" fn is_ashmem_file(file: *mut bindings::file) -> c_int {
+    if file.is_null() || ASHMEM_FOPS_PTR.load(Ordering::Relaxed).is_null() {
+        return 0;
+    }
+
+    let fops_ptr = unsafe { (*file).f_op };
+    let ashmem_fops_ptr = ASHMEM_FOPS_PTR.load(Ordering::Relaxed);
+
+    if fops_ptr == ashmem_fops_ptr {
+        return 1;
+    }
+
+    return 0;
 }
