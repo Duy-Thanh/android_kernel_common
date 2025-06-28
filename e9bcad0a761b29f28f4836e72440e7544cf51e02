@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ade3ac_34a2ca36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-28T13:00:33Z",
+      "side": 1,
+      "message": "After aosp/3590992 + aosp/3590993 + aosp/3590991 this fix might become unneeded, or might be still needed but in a different form, depending on the outcome of the discussion in aosp/3590991... In the meantime let\u0027s just apply this fix, to make the current code correct again.",
+      "revId": "e9bcad0a761b29f28f4836e72440e7544cf51e02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
