@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d527dbc_e3a273be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2025-06-28T05:34:36Z",
+      "side": 1,
+      "message": "The android16-6.12 branch also requires a similar patch to fix the issue.",
+      "revId": "53f2e3b5409156df0319fc1112632c4d9a4dbf04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
