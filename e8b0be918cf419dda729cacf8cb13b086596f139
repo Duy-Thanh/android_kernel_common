@@ -34,6 +34,24 @@
       ],
       "revId": "e8b0be918cf419dda729cacf8cb13b086596f139",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee0c0ae_8802995b",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 3735354
+      },
+      "writtenOn": "2025-06-30T23:42:19Z",
+      "side": 1,
+      "message": "This can be a tristate.",
+      "parentUuid": "def4b4c1_6fc27ff4",
+      "revId": "e8b0be918cf419dda729cacf8cb13b086596f139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
