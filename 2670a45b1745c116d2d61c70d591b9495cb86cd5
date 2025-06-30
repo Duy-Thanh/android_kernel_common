@@ -124,6 +124,24 @@
       "parentUuid": "82f944ae_1fb956d5",
       "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c90af46a_35ede015",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-06-30T19:03:20Z",
+      "side": 1,
+      "message": "\u003e Regarding skipping dm-verity verification:\nIn our custom module, we ensure that dm-verity verification is always performed. Also skipping this check will not be intercepted by CTS/VTS tests.\n\nI certainly hope you don\u0027t skip it, but my point is that this hook would easily allow any vendor/OEM to skip the check.  I worry about people using it to disable security checks to gain a performance advantage.  As far as I know, and as you mentioned yourself, there are no CTS or VTS tests that would detect this.  It seems like a bad idea.\n\n\u003e Another reason we proposed this vendorhook is: we don\u0027t intend to prioritize all verity operations. Instead, we\u0027ll use our internal logic to determine which specific cases require high-priority handling.\n\ntry_verify_in_tasklet already takes into account the I/O priority.  If you found that the logic isn\u0027t sufficient, could you propose an improvement to it?\n\n\u003e \"We\u0027d be glad to backport patches from upstream if needed,\" are you suggesting backporting the entire system_bh_wq mechanism to older kernel versions? That would require a significant amount of work...\n\nI\u0027d be willing to backport the BH workqueue if needed.  However, this is irrelevant to this CL, since this CL is for android16-6.12 which already has it.",
+      "parentUuid": "9eda6cd0_99a2a05c",
+      "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
