@@ -2078,12 +2078,28 @@ static int qca_serdev_probe(struct serdev_device *serdev)
 
 		qcadev->bt_en = devm_gpiod_get_optional(&serdev->dev, "enable",
 					       GPIOD_OUT_LOW);
+<<<<<<< HEAD   (e08d8b Merge android14-6.1 into android14-6.1-lts)
 		if (IS_ERR(qcadev->bt_en) && data->soc_type == QCA_WCN6750) {
 			dev_err(&serdev->dev, "failed to acquire BT_EN gpio\n");
 			return PTR_ERR(qcadev->bt_en);
 		}
+||||||| BASE
+		if (IS_ERR(qcadev->bt_en) &&
+		    (data->soc_type == QCA_WCN6750 ||
+		     data->soc_type == QCA_WCN6855)) {
+			dev_err(&serdev->dev, "failed to acquire BT_EN gpio\n");
+			return PTR_ERR(qcadev->bt_en);
+		}
+=======
+		if (IS_ERR(qcadev->bt_en))
+			return dev_err_probe(&serdev->dev,
+					     PTR_ERR(qcadev->bt_en),
+					     "failed to acquire BT_EN gpio\n");
+>>>>>>> BRANCH (7e69c3 Linux 6.1.142)
 
-		if (!qcadev->bt_en)
+		if (!qcadev->bt_en &&
+		    (data->soc_type == QCA_WCN6750 ||
+		     data->soc_type == QCA_WCN6855))
 			power_ctrl_enabled = false;
 
 		qcadev->sw_ctrl = devm_gpiod_get_optional(&serdev->dev, "swctrl",
