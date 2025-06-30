@@ -150,9 +150,19 @@ void dst_dev_put(struct dst_entry *dst)
 	dst->obsolete = DST_OBSOLETE_DEAD;
 	if (dst->ops->ifdown)
 		dst->ops->ifdown(dst, dev);
+<<<<<<< HEAD   (162ecea43cb4059b7717e2d6c689f0274a1137db UPSTREAM: tls: make sure to abort the stream if headers are )
 	dst->input = dst_discard;
 	dst->output = dst_discard_out;
 	dst->dev = blackhole_netdev;
+||||||| BASE   (c88d5c40babac0f1b146bd7a9a71ca76c0bbc20e UPSTREAM: arm64: insn: Simulate nop instruction for better u)
+	WRITE_ONCE(dst->input, dst_discard);
+	WRITE_ONCE(dst->output, dst_discard_out);
+	dst->dev = blackhole_netdev;
+=======
+	WRITE_ONCE(dst->input, dst_discard);
+	WRITE_ONCE(dst->output, dst_discard_out);
+	WRITE_ONCE(dst->dev, blackhole_netdev);
+>>>>>>> CHANGE (41bb88adcf1e38b3fbe0f76e93e84f22a14943e4 UPSTREAM: net: dst: add four helpers to annotate data-races )
 	netdev_ref_replace(dev, blackhole_netdev, &dst->dev_tracker,
 			   GFP_ATOMIC);
 }
@@ -257,7 +267,7 @@ unsigned int dst_blackhole_mtu(const struct dst_entry *dst)
 {
 	unsigned int mtu = dst_metric_raw(dst, RTAX_MTU);
 
-	return mtu ? : dst->dev->mtu;
+	return mtu ? : dst_dev(dst)->mtu;
 }
 EXPORT_SYMBOL_GPL(dst_blackhole_mtu);
 
