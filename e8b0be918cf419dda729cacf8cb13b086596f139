@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "def4b4c1_6fc27ff4",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-06-30T20:58:36Z",
+      "side": 1,
+      "message": "why is this not tristate?",
+      "fixSuggestions": [
+        {
+          "fixId": "e13701bf_25181ded",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/Kconfig",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 118,
+                "endChar": 0
+              },
+              "replacement": "\ttristate \"Android kernel experiment selection\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e8b0be918cf419dda729cacf8cb13b086596f139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
