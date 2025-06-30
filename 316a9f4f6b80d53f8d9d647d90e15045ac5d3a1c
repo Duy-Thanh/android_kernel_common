@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11d1b8d3_813163b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-06-30T16:40:39Z",
+      "side": 1,
+      "message": "Why is this change only required for the Android kernel?\n\nWhat is different compared to upstream?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "316a9f4f6b80d53f8d9d647d90e15045ac5d3a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
