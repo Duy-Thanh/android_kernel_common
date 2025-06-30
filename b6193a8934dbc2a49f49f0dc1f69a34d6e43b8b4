@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a4cca1_4fd3b9ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T19:45:10Z",
+      "side": 1,
+      "message": "Breaks ABI as expected.",
+      "revId": "b6193a8934dbc2a49f49f0dc1f69a34d6e43b8b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
