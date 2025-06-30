@@ -350,7 +350,7 @@ static int idletimer_tg_create(struct idletimer_tg_info *info)
 
 	timer_setup(&info->timer->timer, idletimer_tg_expired, 0);
 	mod_timer(&info->timer->timer,
-		  msecs_to_jiffies(info->timeout * 1000) + jiffies);
+		  secs_to_jiffies(info->timeout) + jiffies);
 
 	return 0;
 
@@ -427,7 +427,13 @@ static int idletimer_tg_create_v1(struct idletimer_tg_info_v1 *info)
 	} else {
 		timer_setup(&info->timer->timer, idletimer_tg_expired, 0);
 		mod_timer(&info->timer->timer,
+<<<<<<< HEAD   (ee8fe5 Merge 47cf96fbe393 ("Merge tag 'arm64-upstream' of git://git)
 			  msecs_to_jiffies(info->timeout * 1000) + jiffies);
+||||||| BASE
+				msecs_to_jiffies(info->timeout * 1000) + jiffies);
+=======
+				secs_to_jiffies(info->timeout) + jiffies);
+>>>>>>> BRANCH (1b98f3 Merge tag 'net-next-6.16' of git://git.kernel.org/pub/scm/li)
 	}
 
 	return 0;
@@ -487,6 +493,7 @@ static unsigned int idletimer_tg_target(struct sk_buff *skb,
 	pr_debug("resetting timer %s, timeout period %u\n",
 		 info->label, info->timeout);
 
+<<<<<<< HEAD   (ee8fe5 Merge 47cf96fbe393 ("Merge tag 'arm64-upstream' of git://git)
 	info->timer->active = true;
 
 	if (time_before(info->timer->timer.expires, now)) {
@@ -497,6 +504,13 @@ static unsigned int idletimer_tg_target(struct sk_buff *skb,
 
 	/* TODO: Avoid modifying timers on each packet */
 	reset_timer(info->timer, info->timeout, skb);
+||||||| BASE
+	mod_timer(&info->timer->timer,
+		  msecs_to_jiffies(info->timeout * 1000) + jiffies);
+=======
+	mod_timer(&info->timer->timer,
+		  secs_to_jiffies(info->timeout) + jiffies);
+>>>>>>> BRANCH (1b98f3 Merge tag 'net-next-6.16' of git://git.kernel.org/pub/scm/li)
 
 	return XT_CONTINUE;
 }
@@ -517,6 +531,7 @@ static unsigned int idletimer_tg_target_v1(struct sk_buff *skb,
 		ktime_t tout = ktime_set(info->timeout, 0);
 		alarm_start_relative(&info->timer->alarm, tout);
 	} else {
+<<<<<<< HEAD   (ee8fe5 Merge 47cf96fbe393 ("Merge tag 'arm64-upstream' of git://git)
 		info->timer->active = true;
 
 		if (time_before(info->timer->timer.expires, now)) {
@@ -527,6 +542,13 @@ static unsigned int idletimer_tg_target_v1(struct sk_buff *skb,
 
 		/* TODO: Avoid modifying timers on each packet */
 		reset_timer(info->timer, info->timeout, skb);
+||||||| BASE
+		mod_timer(&info->timer->timer,
+				msecs_to_jiffies(info->timeout * 1000) + jiffies);
+=======
+		mod_timer(&info->timer->timer,
+				secs_to_jiffies(info->timeout) + jiffies);
+>>>>>>> BRANCH (1b98f3 Merge tag 'net-next-6.16' of git://git.kernel.org/pub/scm/li)
 	}
 
 	return XT_CONTINUE;
@@ -570,7 +592,17 @@ static int idletimer_tg_checkentry(const struct xt_tgchk_param *par)
 	info->timer = __idletimer_tg_find_by_label(info->label);
 	if (info->timer) {
 		info->timer->refcnt++;
+<<<<<<< HEAD   (ee8fe5 Merge 47cf96fbe393 ("Merge tag 'arm64-upstream' of git://git)
 		reset_timer(info->timer, info->timeout, NULL);
+||||||| BASE
+		mod_timer(&info->timer->timer,
+			  msecs_to_jiffies(info->timeout * 1000) + jiffies);
+
+=======
+		mod_timer(&info->timer->timer,
+			  secs_to_jiffies(info->timeout) + jiffies);
+
+>>>>>>> BRANCH (1b98f3 Merge tag 'net-next-6.16' of git://git.kernel.org/pub/scm/li)
 		pr_debug("increased refcnt of timer %s to %u\n",
 			 info->label, info->timer->refcnt);
 	} else {
@@ -632,7 +664,15 @@ static int idletimer_tg_checkentry_v1(const struct xt_tgchk_param *par)
 				alarm_start_relative(&info->timer->alarm, tout);
 			}
 		} else {
+<<<<<<< HEAD   (ee8fe5 Merge 47cf96fbe393 ("Merge tag 'arm64-upstream' of git://git)
 			reset_timer(info->timer, info->timeout, NULL);
+||||||| BASE
+				mod_timer(&info->timer->timer,
+					msecs_to_jiffies(info->timeout * 1000) + jiffies);
+=======
+				mod_timer(&info->timer->timer,
+					secs_to_jiffies(info->timeout) + jiffies);
+>>>>>>> BRANCH (1b98f3 Merge tag 'net-next-6.16' of git://git.kernel.org/pub/scm/li)
 		}
 		pr_debug("increased refcnt of timer %s to %u\n",
 			 info->label, info->timer->refcnt);
