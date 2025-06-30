@@ -106,6 +106,24 @@
       "parentUuid": "005e87f0_3431381f",
       "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eda6cd0_99a2a05c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2025-06-30T02:32:17Z",
+      "side": 1,
+      "message": "I conducted the tests based on the 6.12 kernel, incorporating the changes you mentioned. The threshold used was the default: #define DM_VERITY_USE_BH_DEFAULT_BYTES 8192.\n\n\"It\u0027s important not to optimize for one part of the system (dm-verity) at the expense of everything else,\"We fully agree that system optimizations should not disproportionately impact other component，and based on current tests, we believe using our own scheduling policy can also ensure this principle.\n\nAnother reason we proposed this vendorhook is: we don\u0027t intend to prioritize all verity operations. Instead, we\u0027ll use our internal logic to determine which specific cases require high-priority handling.\n\n\"We\u0027d be glad to backport patches from upstream if needed,\" are you suggesting backporting the entire system_bh_wq mechanism to older kernel versions? That would require a significant amount of work...",
+      "parentUuid": "82f944ae_1fb956d5",
+      "revId": "2670a45b1745c116d2d61c70d591b9495cb86cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
