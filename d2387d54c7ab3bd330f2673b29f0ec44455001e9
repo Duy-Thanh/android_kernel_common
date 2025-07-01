@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5537de2_e8d9288d",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T12:52:54Z",
+      "side": 1,
+      "message": "Make it the type you need to, and document why please.  Adding two different hooks, that are of different types, feels wrong to me, they should probably be the same, don\u0027t you think?",
+      "parentUuid": "a762f412_62c920f1",
+      "range": {
+        "startLine": 1430,
+        "startChar": 15,
+        "endLine": 1430,
+        "endChar": 19
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9aae0d92_c342b2f9",
         "filename": "drivers/usb/core/driver.c",
         "patchSetId": 3
