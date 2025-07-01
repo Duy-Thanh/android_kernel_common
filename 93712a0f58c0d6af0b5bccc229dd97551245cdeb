@@ -16,6 +16,47 @@
       "message": "Unclear why this export helps `vendor modules perform more operations on abnormal memory usage detection and collecting stack traces for abnormal processes`. Please update description with more specific information on the need to export it.",
       "revId": "93712a0f58c0d6af0b5bccc229dd97551245cdeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9a4e16_df567334",
+        "filename": "mm/memory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-01T15:11:03Z",
+      "side": 1,
+      "message": "Please export and use this instead as page-based API is slowly being deprecated upstream.",
+      "range": {
+        "startLine": 708,
+        "startChar": 14,
+        "endLine": 708,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "de9a0e76_b95673d3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/memory.c",
+              "range": {
+                "startLine": 717,
+                "startChar": 0,
+                "endLine": 717,
+                "endChar": 0
+              },
+              "replacement": "EXPORT_SYMBOL_GPL(vm_normal_folio_pmd);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "93712a0f58c0d6af0b5bccc229dd97551245cdeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
