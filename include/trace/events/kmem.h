@@ -5,6 +5,7 @@
 #if !defined(_TRACE_KMEM_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _TRACE_KMEM_H
 
+#include <linux/dma-buf.h>
 #include <linux/types.h>
 #include <linux/tracepoint.h>
 #include <trace/events/mmflags.h>
@@ -486,6 +487,27 @@ TRACE_EVENT(rss_stat,
 		__entry->curr,
 		__print_symbolic(__entry->member, TRACE_MM_PAGES),
 		__entry->size)
+	);
+
+TRACE_EVENT(dmabuf_rss_stat,
+
+	TP_PROTO(s64 rss, struct dma_buf *dmabuf),
+
+	TP_ARGS(rss, dmabuf),
+
+	TP_STRUCT__entry(
+		__field(s64, rss)
+		__field(unsigned long, i_ino)
+	),
+
+	TP_fast_assign(
+		__entry->rss = rss;
+		__entry->i_ino = file_inode(dmabuf->file)->i_ino;
+	),
+
+	TP_printk("rss=%lld i_ino=%lu",
+		__entry->rss,
+		__entry->i_ino)
 	);
 #endif /* _TRACE_KMEM_H */
 
