@@ -458,6 +458,7 @@ enum binder_prio_state {
  */
 struct binder_proc {
 	struct hlist_node proc_node;
+	int break_kmi;
 	struct rb_root threads;
 	struct rb_root nodes;
 	struct rb_root refs_by_desc;
