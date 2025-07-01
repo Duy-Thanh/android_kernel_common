@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee194d4e_5518c2f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-07-01T17:49:53Z",
+      "side": 1,
+      "message": "this is a build-break:\n```\nERROR: Unable to find drivers/android/rust_binder.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_aarch64_tv/staging/lib/modules/6.12.30-android16-5-g5a7c0df98873-abP99698988-4k/kernel\n```\nDoes it build for you locally?",
+      "revId": "523f15361637bbaa264286045758e556748ffc59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
