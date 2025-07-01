@@ -1,6 +1,75 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f09613_77351201",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T09:18:53Z",
+      "side": 1,
+      "message": "why is this \"rvh\" and not just \"vh\"?",
+      "range": {
+        "startLine": 1430,
+        "startChar": 15,
+        "endLine": 1430,
+        "endChar": 19
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aae0d92_c342b2f9",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T09:18:53Z",
+      "side": 1,
+      "message": "what about status?",
+      "range": {
+        "startLine": 1432,
+        "startChar": 0,
+        "endLine": 1432,
+        "endChar": 12
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa0f6eca_d4ec9d53",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1539,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T09:18:53Z",
+      "side": 1,
+      "message": "shouldn\u0027t you set status here as well?",
+      "range": {
+        "startLine": 1539,
+        "startChar": 0,
+        "endLine": 1539,
+        "endChar": 12
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0b938f13_66116e1e",
