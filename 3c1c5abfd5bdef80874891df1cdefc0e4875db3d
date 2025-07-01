@@ -34,6 +34,24 @@
       "parentUuid": "7be37ddf_7a200e7e",
       "revId": "3c1c5abfd5bdef80874891df1cdefc0e4875db3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ca3efa_6cb20191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T08:00:48Z",
+      "side": 1,
+      "message": "Please fix your code to not use these symbols as upstream has removed them from being exported as they do not want them used by external users at all.\n\nIf you have real users, please submit that code upstream for acceptance there and then it will be automatically merged here.",
+      "parentUuid": "f852de7f_39b5912c",
+      "revId": "3c1c5abfd5bdef80874891df1cdefc0e4875db3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
