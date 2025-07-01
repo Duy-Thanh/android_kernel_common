@@ -533,6 +533,9 @@ DECLARE_HOOK(android_vh_filemap_add_folio,
 	TP_PROTO(struct address_space *mapping, struct folio *folio,
 		pgoff_t index),
 	TP_ARGS(mapping, folio, index));
+DECLARE_HOOK(android_vh_iter_allow_longterm_usage,
+	TP_PROTO(iov_iter_extraction_t extraction_flags, unsigned int *gup_flags),
+	TP_ARGS(extraction_flags, gup_flags));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

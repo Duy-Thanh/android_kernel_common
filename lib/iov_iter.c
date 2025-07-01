@@ -13,6 +13,10 @@
 #include <linux/instrumented.h>
 #include <linux/iov_iter.h>
 
+#ifdef CONFIG_ANDROID_VENDOR_HOOKS
+#include <trace/hooks/mm.h>
+#endif
+
 static __always_inline
 size_t copy_to_user_iter(void __user *iter_to, size_t progress,
 			 size_t len, void *from, void *priv2)
@@ -1811,6 +1815,8 @@ static ssize_t iov_iter_extract_user_pages(struct iov_iter *i,
 		gup_flags |= FOLL_PCI_P2PDMA;
 	if (i->nofault)
 		gup_flags |= FOLL_NOFAULT;
+
+	trace_android_vh_iter_allow_longterm_usage(extraction_flags, &gup_flags);
 
 	addr = first_iovec_segment(i, &maxsize);
 	*offset0 = offset = addr % PAGE_SIZE;
