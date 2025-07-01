@@ -80,8 +80,16 @@ struct unix_sock {
 	struct path		path;
 	struct mutex		iolock, bindlock;
 	struct sock		*peer;
+<<<<<<< HEAD   (ce8bd9 Merge android15-6.6 into android15-6.6-lts)
 	struct unix_vertex	*vertex;
 	struct sock		*listener;
+||||||| BASE
+	struct list_head	link;
+	unsigned long		inflight;
+=======
+	struct sock		*listener;
+	struct unix_vertex	*vertex;
+>>>>>>> BRANCH (ea61ed af_unix: Fix uninit-value in __unix_walk_scc())
 	spinlock_t		lock;
 	struct socket_wq	peer_wq;
 	wait_queue_entry_t	peer_wake;
