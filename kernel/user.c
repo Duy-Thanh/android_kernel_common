@@ -21,7 +21,14 @@
 #include <linux/binfmts.h>
 #include <linux/proc_ns.h>
 
+<<<<<<< PATCH SET (d6259caf788f1a1965ebc925b071740275ddb752 ANDROID: Fixup init_user_ns CRC change)
+#include <linux/android_kabi.h>
+
+ANDROID_KABI_DECLONLY(module);
+||||||| BASE      (eac9b74cb7ed7b68f0962d50764077f82211feac ANDROID: KVM: arm64: Add keep= option to kvm-arm.host_s2 cmd)
+=======
 #include <trace/hooks/user.h>
+>>>>>>> BASE      (f1bce0faada489eb4d6e88def1e870f272afe553 ANDROID: user: Add vendor hook to user for GKI purpose)
 
 #if IS_ENABLED(CONFIG_BINFMT_MISC)
 struct binfmt_misc init_binfmt_misc = {
