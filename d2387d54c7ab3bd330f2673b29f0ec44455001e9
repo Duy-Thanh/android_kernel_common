@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a762f412_62c920f1",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T12:50:52Z",
+      "side": 1,
+      "message": "It used to be a normal vendor hook on android12-5.10. But it has been changed as a restricted vendor hook from android14-5.15, the 2nd \u00272)\u0027 link below(no reason description).\n\n\n1) (cherry picked from commit 98085b5dd8afd1ec65500eb091d061a3fee21b84) - android12-5.10\n2) (cherry picked from commit 358b59f1bce213fe1d83e09ae2e1fba718682e4a) - android14-5.15\n3) (cherry picked from commit 41292928f934c3f947f881ea0c51e61200c84d8d) - android14-6.1\n4) (cherry picked from commit 26f9f515d1b98fb93c8c797bdedacf05ada5a75a) - android15-6.6",
+      "parentUuid": "19f09613_77351201",
+      "range": {
+        "startLine": 1430,
+        "startChar": 15,
+        "endLine": 1430,
+        "endChar": 19
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9aae0d92_c342b2f9",
