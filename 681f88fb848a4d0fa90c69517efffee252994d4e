@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "425c3c56_94bfb6b2",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T06:36:27Z",
+      "side": 1,
+      "message": "bool?",
+      "range": {
+        "startLine": 1424,
+        "startChar": 4,
+        "endLine": 1424,
+        "endChar": 5
+      },
+      "revId": "681f88fb848a4d0fa90c69517efffee252994d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba1e6f2_27307f65",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T06:36:27Z",
+      "side": 1,
+      "message": "bool?",
+      "range": {
+        "startLine": 1530,
+        "startChar": 1,
+        "endLine": 1530,
+        "endChar": 4
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fed5f221_5e80bbf8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/core/driver.c",
+              "range": {
+                "startLine": 1424,
+                "startChar": 0,
+                "endLine": 1425,
+                "endChar": 0
+              },
+              "replacement": "\tbool\t\t\tbypass \u003d false;\n"
+            },
+            {
+              "path": "drivers/usb/core/driver.c",
+              "range": {
+                "startLine": 1530,
+                "startChar": 0,
+                "endLine": 1531,
+                "endChar": 0
+              },
+              "replacement": "\tbool\t\t\tbypass \u003d false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "681f88fb848a4d0fa90c69517efffee252994d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17e9aded_82963e37",
+        "filename": "include/trace/hooks/usb.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T06:36:27Z",
+      "side": 1,
+      "message": "this doesn\u0027t pertain to this change, so why is it here?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 61
+      },
+      "revId": "681f88fb848a4d0fa90c69517efffee252994d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
