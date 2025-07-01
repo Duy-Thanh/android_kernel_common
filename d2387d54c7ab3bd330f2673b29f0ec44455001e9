@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b938f13_66116e1e",
+        "filename": "include/trace/hooks/usb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T09:16:04Z",
+      "side": 1,
+      "message": "int *bypass -\u003e bool *bypass (according to the change - bool\tbypass \u003d false;)",
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e76008b1_3df07b6d",
+        "filename": "include/trace/hooks/usb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T09:16:04Z",
+      "side": 1,
+      "message": "int *bypass -\u003e bool *bypass (according to the change - bool\tbypass \u003d false;)",
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

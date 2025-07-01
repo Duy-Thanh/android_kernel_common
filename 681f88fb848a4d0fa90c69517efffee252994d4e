@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ac5a599_b5b5a9ec",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T09:16:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "425c3c56_94bfb6b2",
+      "range": {
+        "startLine": 1424,
+        "startChar": 4,
+        "endLine": 1424,
+        "endChar": 5
+      },
+      "revId": "681f88fb848a4d0fa90c69517efffee252994d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cba1e6f2_27307f65",
@@ -75,6 +99,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79fb555f_18870dbe",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T09:16:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cba1e6f2_27307f65",
+      "range": {
+        "startLine": 1530,
+        "startChar": 1,
+        "endLine": 1530,
+        "endChar": 4
+      },
+      "revId": "681f88fb848a4d0fa90c69517efffee252994d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17e9aded_82963e37",
@@ -88,6 +136,30 @@
       "writtenOn": "2025-07-01T06:36:27Z",
       "side": 1,
       "message": "this doesn\u0027t pertain to this change, so why is it here?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 61
+      },
+      "revId": "681f88fb848a4d0fa90c69517efffee252994d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cee3ea7_19708fc3",
+        "filename": "include/trace/hooks/usb.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T09:16:04Z",
+      "side": 1,
+      "message": "deleted",
+      "parentUuid": "17e9aded_82963e37",
       "range": {
         "startLine": 15,
         "startChar": 0,
