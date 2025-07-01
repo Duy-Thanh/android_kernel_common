@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4c8c59_28106474",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T13:01:52Z",
+      "side": 1,
+      "message": "/* Return: 0 if the suspend succeeded. */\nTo return 0 after \u0027goto done:\u0027 is on purpose. Let the system go into suspend by returning 0(suspend succeeded) to system, even though we skip/bypass the usb device and its interfaces suspend. no need to change/set the \u0027status\u0027 from the default value, int status \u003d 0;.",
+      "parentUuid": "9aae0d92_c342b2f9",
+      "range": {
+        "startLine": 1432,
+        "startChar": 0,
+        "endLine": 1432,
+        "endChar": 12
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa0f6eca_d4ec9d53",
@@ -108,6 +132,30 @@
       "writtenOn": "2025-07-01T09:18:53Z",
       "side": 1,
       "message": "shouldn\u0027t you set status here as well?",
+      "range": {
+        "startLine": 1539,
+        "startChar": 0,
+        "endLine": 1539,
+        "endChar": 12
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f042d09_9c19f2d1",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1539,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T13:01:52Z",
+      "side": 1,
+      "message": "/* Return: 0 on success. */\nThe same manner for usb_resume_both(),",
+      "parentUuid": "fa0f6eca_d4ec9d53",
       "range": {
         "startLine": 1539,
         "startChar": 0,
