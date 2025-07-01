@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77d49570_01d63702",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-01T13:04:30Z",
+      "side": 1,
+      "message": "Actually, I agree with you. The similar/paired hook should be the same type. \nWe\u0027re going to update the change after test. (trace_android_rvh_usb_dev_suspend() -\u003e trace_android_vh_usb_dev_suspend())",
+      "parentUuid": "b5537de2_e8d9288d",
+      "range": {
+        "startLine": 1430,
+        "startChar": 15,
+        "endLine": 1430,
+        "endChar": 19
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9aae0d92_c342b2f9",
