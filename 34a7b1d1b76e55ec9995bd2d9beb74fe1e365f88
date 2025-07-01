@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b000721_69fe248a",
+        "filename": "lib/iov_iter.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T12:49:06Z",
+      "side": 1,
+      "message": "what is this hook supposed to do?  What does \"longterm\" mean?\n\nAnd why would a hook ever want to modify the flags?  Shouldn\u0027t the caller be fixed instead?  You have control over it.",
+      "range": {
+        "startLine": 1819,
+        "startChar": 1,
+        "endLine": 1819,
+        "endChar": 43
+      },
+      "revId": "34a7b1d1b76e55ec9995bd2d9beb74fe1e365f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
