@@ -21,6 +21,25 @@
 #include <linux/binfmts.h>
 #include <linux/proc_ns.h>
 
+<<<<<<< HEAD   (4f4f6c2f3dee6ccfe3b87d8c6c10ef6911ea2100 ANDROID: mm: export lock_vma_under_rcu())
+||||||| BASE   (4e873ad60721c94eff5fe2e50b13163a7dfc26fe ANDROID: user: Add vendor hook to user for GKI purpose)
+#include <trace/hooks/user.h>
+
+=======
+#include <trace/hooks/user.h>
+#include <linux/android_kabi.h>
+
+ANDROID_KABI_DECLONLY(address_space);
+ANDROID_KABI_DECLONLY(cred);
+ANDROID_KABI_DECLONLY(dentry);
+ANDROID_KABI_DECLONLY(file);
+ANDROID_KABI_DECLONLY(io_context);
+ANDROID_KABI_DECLONLY(module);
+ANDROID_KABI_DECLONLY(pid);
+ANDROID_KABI_DECLONLY(sighand_struct);
+ANDROID_KABI_DECLONLY(signal_struct);
+
+>>>>>>> CHANGE (55972ed83a43014ccb3a1d6cac057d4e07041c5b ANDROID: Fixup init_user_ns CRC change)
 #if IS_ENABLED(CONFIG_BINFMT_MISC)
 struct binfmt_misc init_binfmt_misc = {
 	.entries = LIST_HEAD_INIT(init_binfmt_misc.entries),
