@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13bfea48_ddf27d5a",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-01T11:33:08Z",
+      "side": 1,
+      "message": "Is this actually needed? CONFIG_KVM_SW_PROTECTED_VM enables a different type of \"protected VMs\", not pKVM-based ones. CONFIG_PKVM_INTEL should be enough to enable pKVM-based protected VMs.",
+      "revId": "902b1fb8cba49a23e7fe5f5291d450168fbeab18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
