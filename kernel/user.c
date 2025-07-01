@@ -21,6 +21,10 @@
 #include <linux/binfmts.h>
 #include <linux/proc_ns.h>
 
+#include <linux/android_kabi.h>
+
+ANDROID_KABI_DECLONLY(module);
+
 #if IS_ENABLED(CONFIG_BINFMT_MISC)
 struct binfmt_misc init_binfmt_misc = {
 	.entries = LIST_HEAD_INIT(init_binfmt_misc.entries),
