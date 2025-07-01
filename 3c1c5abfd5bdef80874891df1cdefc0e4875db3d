@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be37ddf_7a200e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-01T06:33:20Z",
+      "side": 1,
+      "message": "Not allowed to export symbols without real users, ESPECIALLY in a non-gpl namespace.",
+      "revId": "3c1c5abfd5bdef80874891df1cdefc0e4875db3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
