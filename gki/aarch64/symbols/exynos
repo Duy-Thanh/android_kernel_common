@@ -1408,6 +1408,10 @@
 # required by exynos-usb-audio-offloading.ko
   snd_ctl_add
   snd_ctl_new1
+  __traceiter_android_rvh_usb_dev_suspend
+  __traceiter_android_vh_usb_dev_resume
+  __tracepoint_android_rvh_usb_dev_suspend
+  __tracepoint_android_vh_usb_dev_resume
   usb_altnum_to_altsetting
   usb_choose_configuration
   usb_ifnum_to_if
