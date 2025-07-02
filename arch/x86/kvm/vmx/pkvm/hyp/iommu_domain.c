@@ -7,6 +7,7 @@
 #include <asm/pkvm_spinlock.h>
 #include <pkvm.h>
 #include "pkvm_hyp.h"
+#include "gfp.h"
 #include "debug.h"
 #include "iommu_internal.h"
 #include "iommu.h"
@@ -621,6 +622,12 @@ domain_map(struct pkvm_iommu_domain *domain, struct pkvm_iommu_map_param *param,
 		}
 	}
 
+	for (phys_pfn = param->phys_pfn; phys_pfn < param->phys_pfn + param->nr_pages; phys_pfn++) {
+		struct hyp_page *page = hyp_phys_to_page_safe(phys_pfn << VTD_PAGE_SHIFT);
+		if (page)
+			hyp_page_ref_inc(page);
+	}
+
 	return 0;
 }
 
@@ -669,6 +676,18 @@ unsigned long pkvm_iommu_domain_map(struct kvm_vcpu *hvcpu,
 	return ret;
 }
 
+static inline void decrease_page_ref(unsigned long addr, int level)
+{
+	unsigned long phys;
+	struct hyp_page *page = hyp_phys_to_page_safe(addr);
+
+	if (!page)
+		return;
+
+	for (phys = addr; phys < addr + (level_size(level) * VTD_PAGE_SIZE); phys += VTD_PAGE_SIZE)
+		hyp_page_ref_dec(hyp_phys_to_page(phys));
+}
+
 /* When a page at a given level is being unlinked from its parent, we don't
    need to *modify* it at all. All we need to do is make a list of all the
    pages which can be freed just as soon as we've flushed the IOTLB and we
@@ -686,13 +705,24 @@ static void dma_pte_list_pagetables(struct pkvm_iommu_domain *domain,
 	PKVM_ASSERT(donation->nr_pages <= PKVM_MAX_IOMMU_PAGE_DONATION);
 	__pkvm_hyp_donate_host(dma_pte_addr(pte), PAGE_SIZE);
 
-	if (level == 1)
+	if (level == 1) {
+		pte = pkvm_phys_to_virt(dma_pte_addr(pte));
+		do {
+			if (dma_pte_present(pte))
+				decrease_page_ref(dma_pte_addr(pte), 1);
+			pte++;
+		} while (!first_pte_in_page(pte));
 		return;
+	}
 
 	pte = pkvm_phys_to_virt(dma_pte_addr(pte));
 	do {
-		if (dma_pte_present(pte) && !dma_pte_superpage(pte))
-			dma_pte_list_pagetables(domain, level - 1, pte, donation);
+		if (dma_pte_present(pte)) {
+			if (!dma_pte_superpage(pte))
+				dma_pte_list_pagetables(domain, level - 1, pte, donation);
+			else
+				decrease_page_ref(dma_pte_addr(pte), level);
+		}
 		pte++;
 	} while (!first_pte_in_page(pte));
 }
@@ -720,7 +750,8 @@ static void dma_pte_clear_level(struct pkvm_iommu_domain *domain, int level,
 			   bother to clear them; we're just going to *free* them. */
 			if (level > 1 && !dma_pte_superpage(pte))
 				dma_pte_list_pagetables(domain, level - 1, pte, donation);
-
+			else
+				decrease_page_ref(dma_pte_addr(pte), level);
 			dma_clear_pte(pte);
 			if (!first_pte)
 				first_pte = pte;
