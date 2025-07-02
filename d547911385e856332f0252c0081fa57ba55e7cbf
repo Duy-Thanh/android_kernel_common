@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8efec271_cfd49c70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-02T06:15:57Z",
+      "side": 1,
+      "message": "Ignore flaky arm64 test failures, they are unrelated to x86 defconfig changes.",
+      "revId": "d547911385e856332f0252c0081fa57ba55e7cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
