@@ -22,6 +22,30 @@
       },
       "revId": "316a9f4f6b80d53f8d9d647d90e15045ac5d3a1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7bd175_dc62e98f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4132227
+      },
+      "writtenOn": "2025-07-02T04:29:15Z",
+      "side": 1,
+      "message": "On Android kernel we have this commit: 74912b718e9ab4e3472b80384b60f4af0389190b\nANDROID: HID: multitouch: Add lid handler for touchpad\n\nIt has this change:\n74912b718e9ab (Sean O\u0027Brien          2025-04-29 12:02:47 +0000  656) static void mt_set_modes(struct hid_device *hdev, enum latency_mode latency,\n74912b718e9ab (Sean O\u0027Brien          2025-04-29 12:02:47 +0000  657)                     bool surface_switch, bool button_switch);\n\n\nHowever, this commit and change is not there in linux upstream and hence this change is only required in Android kernel because in one of the patches we are making the change for mt_set_modes function with this commit:\n\ncommit 0ac857219cc230734a26d94e5b5db8207f4e3309\nHID: multitouch: make mt_set_mode() less cryptic",
+      "parentUuid": "11d1b8d3_813163b7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "316a9f4f6b80d53f8d9d647d90e15045ac5d3a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
