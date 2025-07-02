@@ -16,6 +16,23 @@
       "message": "This CL updates LTS version to 6.12.30 on top of reverted patches from the upstream.",
       "revId": "fc7371eb09f0580cba3cc08a62139725fa9b0f99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef1394b1_1e90f04d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-02T12:27:48Z",
+      "side": 1,
+      "message": "Build failure for brya is expected. This CL needs to be merged to kernel/common to be processed by automerger in partner repositories.",
+      "revId": "fc7371eb09f0580cba3cc08a62139725fa9b0f99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
