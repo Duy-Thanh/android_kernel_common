@@ -1056,6 +1056,7 @@ static int uvc_get_le_value(struct uvc_control_mapping *mapping,
 		value |= -(value & (1 << (mapping->size - 1)));
 
 	/* If it is a menu, convert from uvc to v4l2. */
+<<<<<<< HEAD   (3aa4e2 ANDROID: GKI: fix up CRC issue with struct drm_atomic_state)
 	if (mapping->v4l2_type != V4L2_CTRL_TYPE_MENU) {
 		*out = value;
 		return 0;
@@ -1070,6 +1071,19 @@ static int uvc_get_le_value(struct uvc_control_mapping *mapping,
 
 	*out = value;
 	return 0;
+||||||| BASE
+=======
+	if (mapping->v4l2_type != V4L2_CTRL_TYPE_MENU)
+		return value;
+
+	switch (query) {
+	case UVC_GET_CUR:
+	case UVC_GET_DEF:
+		return uvc_menu_to_v4l2_menu(mapping, value);
+	}
+
+	return value;
+>>>>>>> BRANCH (0d508c vdpa/mlx5: Fix mlx5_vdpa_get_config() endianness on big-endi)
 }
 
 /*
@@ -1305,8 +1319,16 @@ static int __uvc_ctrl_get(struct uvc_video_chain *chain,
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD   (3aa4e2 ANDROID: GKI: fix up CRC issue with struct drm_atomic_state)
 	*value = uvc_mapping_get_s32(mapping, UVC_GET_CUR,
 				     uvc_ctrl_data(ctrl, UVC_CTRL_DATA_CURRENT));
+||||||| BASE
+	*value = __uvc_ctrl_get_value(mapping,
+				uvc_ctrl_data(ctrl, UVC_CTRL_DATA_CURRENT));
+=======
+	*value = mapping->get(mapping, UVC_GET_CUR,
+			      uvc_ctrl_data(ctrl, UVC_CTRL_DATA_CURRENT));
+>>>>>>> BRANCH (0d508c vdpa/mlx5: Fix mlx5_vdpa_get_config() endianness on big-endi)
 
 	return 0;
 }
@@ -1488,6 +1510,67 @@ static int __uvc_queryctrl_boundaries(struct uvc_video_chain *chain,
 				      struct uvc_control_mapping *mapping,
 				      struct v4l2_query_ext_ctrl *v4l2_ctrl)
 {
+<<<<<<< HEAD   (3aa4e2 ANDROID: GKI: fix up CRC issue with struct drm_atomic_state)
+||||||| BASE
+	struct uvc_control_mapping *master_map = NULL;
+	struct uvc_control *master_ctrl = NULL;
+	unsigned int i;
+
+	memset(v4l2_ctrl, 0, sizeof(*v4l2_ctrl));
+	v4l2_ctrl->id = mapping->id;
+	v4l2_ctrl->type = mapping->v4l2_type;
+	strscpy(v4l2_ctrl->name, uvc_map_get_name(mapping),
+		sizeof(v4l2_ctrl->name));
+	v4l2_ctrl->flags = 0;
+
+	if (!(ctrl->info.flags & UVC_CTRL_FLAG_GET_CUR))
+		v4l2_ctrl->flags |= V4L2_CTRL_FLAG_WRITE_ONLY;
+	if (!(ctrl->info.flags & UVC_CTRL_FLAG_SET_CUR))
+		v4l2_ctrl->flags |= V4L2_CTRL_FLAG_READ_ONLY;
+
+	if (mapping->master_id)
+		__uvc_find_control(ctrl->entity, mapping->master_id,
+				   &master_map, &master_ctrl, 0);
+	if (master_ctrl && (master_ctrl->info.flags & UVC_CTRL_FLAG_GET_CUR)) {
+		s32 val;
+		int ret = __uvc_ctrl_get(chain, master_ctrl, master_map, &val);
+		if (ret < 0)
+			return ret;
+
+		if (val != mapping->master_manual)
+				v4l2_ctrl->flags |= V4L2_CTRL_FLAG_INACTIVE;
+	}
+
+=======
+	struct uvc_control_mapping *master_map = NULL;
+	struct uvc_control *master_ctrl = NULL;
+
+	memset(v4l2_ctrl, 0, sizeof(*v4l2_ctrl));
+	v4l2_ctrl->id = mapping->id;
+	v4l2_ctrl->type = mapping->v4l2_type;
+	strscpy(v4l2_ctrl->name, uvc_map_get_name(mapping),
+		sizeof(v4l2_ctrl->name));
+	v4l2_ctrl->flags = 0;
+
+	if (!(ctrl->info.flags & UVC_CTRL_FLAG_GET_CUR))
+		v4l2_ctrl->flags |= V4L2_CTRL_FLAG_WRITE_ONLY;
+	if (!(ctrl->info.flags & UVC_CTRL_FLAG_SET_CUR))
+		v4l2_ctrl->flags |= V4L2_CTRL_FLAG_READ_ONLY;
+
+	if (mapping->master_id)
+		__uvc_find_control(ctrl->entity, mapping->master_id,
+				   &master_map, &master_ctrl, 0);
+	if (master_ctrl && (master_ctrl->info.flags & UVC_CTRL_FLAG_GET_CUR)) {
+		s32 val;
+		int ret = __uvc_ctrl_get(chain, master_ctrl, master_map, &val);
+		if (ret < 0)
+			return ret;
+
+		if (val != mapping->master_manual)
+				v4l2_ctrl->flags |= V4L2_CTRL_FLAG_INACTIVE;
+	}
+
+>>>>>>> BRANCH (0d508c vdpa/mlx5: Fix mlx5_vdpa_get_config() endianness on big-endi)
 	if (!ctrl->cached) {
 		int ret = uvc_ctrl_populate_cache(chain, ctrl);
 		if (ret < 0)
@@ -1860,12 +1943,18 @@ void uvc_ctrl_status_event(struct uvc_video_chain *chain,
 		uvc_ctrl_set_handle(handle, ctrl, NULL);
 
 	list_for_each_entry(mapping, &ctrl->info.mappings, list) {
+<<<<<<< HEAD   (3aa4e2 ANDROID: GKI: fix up CRC issue with struct drm_atomic_state)
 		s32 value;
 
 		if (uvc_ctrl_mapping_is_compound(mapping))
 			value = 0;
 		else
 			value = uvc_mapping_get_s32(mapping, UVC_GET_CUR, data);
+||||||| BASE
+		s32 value = __uvc_ctrl_get_value(mapping, data);
+=======
+		s32 value = mapping->get(mapping, UVC_GET_CUR, data);
+>>>>>>> BRANCH (0d508c vdpa/mlx5: Fix mlx5_vdpa_get_config() endianness on big-endi)
 
 		/*
 		 * handle may be NULL here if the device sends auto-update
