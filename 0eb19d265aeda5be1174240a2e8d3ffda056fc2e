@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a433b353_d2bf88ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-07-02T15:26:43Z",
+      "side": 1,
+      "message": "Formatting:\n\n```\nBug: ...\nTest: ...\n```",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "0eb19d265aeda5be1174240a2e8d3ffda056fc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975ea830_c8587948",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-07-02T15:26:43Z",
+      "side": 1,
+      "message": "L+1, since the \"unclean\" cherrypick message is due to a difference outside of the scope of this change in `drivers/hid/Makefile`.",
+      "revId": "0eb19d265aeda5be1174240a2e8d3ffda056fc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
