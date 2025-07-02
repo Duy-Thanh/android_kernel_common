@@ -6,6 +6,7 @@
  * Chrome OS EC.
  */
 
+#include <linux/mutex.h>
 #include <linux/acpi.h>
 #include <linux/module.h>
 #include <linux/of.h>
@@ -54,8 +55,11 @@ static int cros_typec_enter_usb_mode(struct typec_port *tc_port, enum usb_mode m
 		.mode_to_enter = CROS_EC_ALTMODE_USB4
 	};
 
-	return cros_ec_cmd(port->typec_data->ec, 0, EC_CMD_TYPEC_CONTROL,
+	mutex_lock(&port->lock);
+	int ret = cros_ec_cmd(port->typec_data->ec, 0, EC_CMD_TYPEC_CONTROL,
 			  &req, sizeof(req), NULL, 0);
+	mutex_unlock(&port->lock);
+	return ret;
 }
 
 static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_role, u8 swap_type)
@@ -70,6 +74,8 @@ static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_r
 	if (!data->pd_ctrl_ver)
 		return -EOPNOTSUPP;
 
+	mutex_lock(&port->lock);
+
 	/* First query the state */
 	req.port = port->port_num;
 	req.role = USB_PD_CTRL_ROLE_NO_CHANGE;
@@ -79,7 +85,7 @@ static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_r
 	ret = cros_ec_cmd(data->ec, data->pd_ctrl_ver, EC_CMD_USB_PD_CONTROL,
 				&req, sizeof(req), &resp, sizeof(resp));
 	if (ret < 0)
-		return ret;
+		goto unlock_and_ret;
 
 	switch (swap_type) {
 	case USB_PD_CTRL_SWAP_DATA:
@@ -92,18 +98,21 @@ static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_r
 		break;
 	default:
 		dev_warn(data->dev, "Unsupported role swap type %d", swap_type);
-		return -ENOTSUPP;
+		ret = -ENOTSUPP;
+		goto unlock_and_ret;
 	}
 
-	if (role == target_role)
-		return 0;
+	if (role == target_role) {
+		ret = 0;
+		goto unlock_and_ret;
+	}
 
 	req.swap = swap_type;
 	ret = cros_ec_cmd(data->ec, data->pd_ctrl_ver, EC_CMD_USB_PD_CONTROL,
 				&req, sizeof(req), &resp, sizeof(resp));
 
 	if (ret < 0)
-		return ret;
+		goto unlock_and_ret;
 
 	switch (swap_type) {
 	case USB_PD_CTRL_SWAP_DATA:
@@ -118,8 +127,11 @@ static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_r
 		break;
 	// Default case handled above
 	}
+	ret = 0;
 
-	return 0;
+unlock_and_ret:
+	mutex_unlock(&port->lock);
+	return ret;
 }
 
 static int cros_typec_dr_swap(struct typec_port *port, enum typec_data_role role)
@@ -371,6 +383,7 @@ static void cros_unregister_ports(struct cros_typec_data *typec)
 		if (!typec->ports[i])
 			continue;
 
+		mutex_lock(&typec->ports[i]->lock);
 		cros_typec_remove_partner(typec, i);
 		cros_typec_remove_cable(typec, i);
 
@@ -379,6 +392,8 @@ static void cros_unregister_ports(struct cros_typec_data *typec)
 		typec_mux_put(typec->ports[i]->mux);
 		cros_typec_unregister_port_altmodes(typec->ports[i]);
 		typec_unregister_port(typec->ports[i]->port);
+		mutex_unlock(&typec->ports[i]->lock);
+		mutex_destroy(&typec->ports[i]->lock);
 	}
 }
 
@@ -473,6 +488,7 @@ static int cros_typec_init_ports(struct cros_typec_data *typec)
 			goto unregister_ports;
 		}
 
+		mutex_init(&cros_port->lock);
 		cros_port->port_num = port_num;
 		cros_port->typec_data = typec;
 		typec->ports[port_num] = cros_port;
@@ -1233,6 +1249,7 @@ static int cros_typec_port_update(struct cros_typec_data *typec, int port_num)
 		return -EINVAL;
 	}
 
+	mutex_lock(&typec->ports[port_num]->lock);
 	req.port = port_num;
 	req.role = USB_PD_CTRL_ROLE_NO_CHANGE;
 	req.mux = USB_PD_CTRL_MUX_NO_CHANGE;
@@ -1242,7 +1259,7 @@ static int cros_typec_port_update(struct cros_typec_data *typec, int port_num)
 			  EC_CMD_USB_PD_CONTROL, &req, sizeof(req),
 			  &resp, sizeof(resp));
 	if (ret < 0)
-		return ret;
+		goto unlock_and_ret;
 
 	/* Update the switches if they exist, according to requested state */
 	ret = cros_typec_configure_mux(typec, port_num, &resp);
@@ -1264,7 +1281,10 @@ static int cros_typec_port_update(struct cros_typec_data *typec, int port_num)
 	if (typec->typec_cmd_supported)
 		cros_typec_handle_status(typec, port_num);
 
-	return 0;
+	ret = 0;
+unlock_and_ret:
+	mutex_unlock(&typec->ports[port_num]->lock);
+	return ret;
 }
 
 static int cros_typec_get_cmd_version(struct cros_typec_data *typec)
