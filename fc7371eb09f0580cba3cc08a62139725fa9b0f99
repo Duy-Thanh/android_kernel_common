@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b25999_b6e1e0ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-02T11:43:29Z",
+      "side": 1,
+      "message": "This CL updates LTS version to 6.12.30 on top of reverted patches from the upstream.",
+      "revId": "fc7371eb09f0580cba3cc08a62139725fa9b0f99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
