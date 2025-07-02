@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c893291c_c802d542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-02T02:48:57Z",
+      "side": 1,
+      "message": "albertccwang@google.com",
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19f09613_77351201",
         "filename": "drivers/usb/core/driver.c",
         "patchSetId": 3
@@ -110,6 +127,30 @@
       "side": 1,
       "message": "Marked as unresolved.",
       "parentUuid": "77d49570_01d63702",
+      "range": {
+        "startLine": 1430,
+        "startChar": 15,
+        "endLine": 1430,
+        "endChar": 19
+      },
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12a5cf4b_b8688b3a",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-02T02:48:57Z",
+      "side": 1,
+      "message": "I think that we need to get confirmation from Albert Wang(\nalbertccwang@google.com) and Puma Hsu about this change. Using \u0027Restricted vh\u0027 from android14-5.15 is on purpose, I think. Becasue, Googling says that restricted vh is desgigned to work under specific condition such as AP is offline. So, our usb_dev_SUSPEND() vendor hook must be defined as \u0027Restricted\u0027 vh to be executed during suspend process. Let\u0027e ask why to Alber Wang who made the rvh change patch on android14-5.15 or Puma Hsu who is the author of these patch sets.\n(* I\u0027ve already tested the usb-audio low power call scenario with rh__usb_dev_suspend(). It works on normal situation well but could be malfuntion under abnormal or corner case, I think) \n\n\nGoogling-Gemini: \u0027Vendor hooks are a more general mechanism for adding custom functionality, while restricted vendor hooks are specifically designed for situations where a hook must be executed under specific conditions, even if the CPU is offline or in a non-atomic context.\u0027",
+      "parentUuid": "5657f6b7_9deb2602",
       "range": {
         "startLine": 1430,
         "startChar": 15,
