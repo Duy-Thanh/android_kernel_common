@@ -708,3 +708,20 @@ unsafe extern "C" fn ashmem_area_name(
         Err(err) => err.to_errno() as c_int,
     }
 }
+
+/// # Safety
+///
+/// The caller must ensure that `file` is valid for the duration of this function.
+#[no_mangle]
+unsafe extern "C" fn ashmem_area_size(file: *mut bindings::file) -> isize {
+    // SAFETY: file is valid for the duration of this function.
+    let ashmem = unsafe { get_ashmem_area(file) };
+    if ashmem.is_err() {
+        return 0;
+    }
+
+    match ashmem.unwrap().get_size() {
+        Ok(size) => size,
+        Err(_) => 0,
+    }
+}
