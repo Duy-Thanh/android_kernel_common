@@ -354,6 +354,124 @@ static int cros_typec_register_port_altmodes(struct cros_typec_data *typec,
 	return 0;
 }
 
+
+static int cros_typec_dr_swap(struct typec_port *port, enum typec_data_role role)
+{
+	struct cros_typec_data *typec = typec_get_drvdata(port);
+	struct cros_typec_port *cros_port = NULL;
+	struct ec_response_usb_pd_control_v2 resp;
+	struct ec_params_usb_pd_control req;
+	enum typec_data_role current_role;
+	int ret;
+
+	/* Must be at least v1 to support data role swap. */
+	if (typec->pd_ctrl_ver == 0)
+		return -EOPNOTSUPP;
+
+	for (u32 port_num = 0; port_num < typec->num_ports; ++port_num) {
+		if (typec->ports[port_num]->port == port) {
+			cros_port = typec->ports[port_num];
+			break;
+		}
+	}
+
+	if (cros_port == NULL) {
+		dev_err(typec->dev, "Given port is out of range.");
+		return -EINVAL;
+	}
+
+	/* First query the state */
+	req.port = cros_port->port_num;
+	req.role = USB_PD_CTRL_ROLE_NO_CHANGE;
+	req.mux = USB_PD_CTRL_MUX_NO_CHANGE;
+	req.swap = USB_PD_CTRL_SWAP_NONE;
+
+	ret = cros_ec_cmd(typec->ec, typec->pd_ctrl_ver, EC_CMD_USB_PD_CONTROL,
+			  &req, sizeof(req), &resp, sizeof(resp));
+	if (ret < 0)
+		return ret;
+
+	current_role = (resp.role & PD_CTRL_RESP_ROLE_DATA) ? TYPEC_HOST :
+							       TYPEC_DEVICE;
+
+	if (current_role == role)
+		return 0;
+
+	req.swap = USB_PD_CTRL_SWAP_DATA;
+	ret = cros_ec_cmd(typec->ec, typec->pd_ctrl_ver, EC_CMD_USB_PD_CONTROL,
+			  &req, sizeof(req), &resp, sizeof(resp));
+
+	if (ret < 0)
+		return ret;
+
+	typec_set_data_role(port, resp.role & PD_CTRL_RESP_ROLE_DATA ?
+					  TYPEC_HOST :
+					  TYPEC_DEVICE);
+
+	return 0;
+}
+
+static int cros_typec_pr_swap(struct typec_port *port, enum typec_role role)
+{
+	struct cros_typec_data *typec = typec_get_drvdata(port);
+	struct cros_typec_port *cros_port = NULL;
+	struct ec_response_usb_pd_control_v2 resp;
+	struct ec_params_usb_pd_control req;
+	enum typec_role current_role;
+	int ret;
+
+	/* Must be at least v1 to support data role swap. */
+	if (typec->pd_ctrl_ver == 0)
+		return -EOPNOTSUPP;
+
+	for (u32 port_num = 0; port_num < typec->num_ports; ++port_num) {
+		if (typec->ports[port_num]->port == port) {
+			cros_port = typec->ports[port_num];
+			break;
+		}
+	}
+
+	if (cros_port == NULL) {
+		dev_err(typec->dev, "Given port is out of range.");
+		return -EINVAL;
+	}
+
+	/* First query the state */
+	req.port = cros_port->port_num;
+	req.role = USB_PD_CTRL_ROLE_NO_CHANGE;
+	req.mux = USB_PD_CTRL_MUX_NO_CHANGE;
+	req.swap = USB_PD_CTRL_SWAP_NONE;
+
+	ret = cros_ec_cmd(typec->ec, typec->pd_ctrl_ver, EC_CMD_USB_PD_CONTROL,
+			  &req, sizeof(req), &resp, sizeof(resp));
+	if (ret < 0)
+		return ret;
+
+	current_role = (resp.role & PD_CTRL_RESP_ROLE_POWER) ? TYPEC_SOURCE :
+								TYPEC_SINK;
+
+	if (current_role == role)
+		return 0;
+
+	req.swap = USB_PD_CTRL_SWAP_POWER;
+	ret = cros_ec_cmd(typec->ec, typec->pd_ctrl_ver, EC_CMD_USB_PD_CONTROL,
+			  &req, sizeof(req), &resp, sizeof(resp));
+
+	if (ret < 0)
+		return ret;
+
+	typec_set_pwr_role(port, resp.role & PD_CTRL_RESP_ROLE_POWER ?
+					   TYPEC_SOURCE :
+					   TYPEC_SINK);
+
+	return 0;
+}
+
+static const struct typec_operations typec_ops = {
+	.dr_set = cros_typec_dr_swap,
+	.pr_set = cros_typec_pr_swap
+};
+
 static int cros_typec_init_ports(struct cros_typec_data *typec)
 {
 	struct device *dev = typec->dev;
@@ -410,7 +528,7 @@ static int cros_typec_init_ports(struct cros_typec_data *typec)
 			goto unregister_ports;
 
 		cap->driver_data = cros_port;
-		cap->ops = &cros_typec_usb_mode_ops;
+		cap->ops = &typec_ops;
 
 		cros_port->port = typec_register_port(dev, cap);
 		if (IS_ERR(cros_port->port)) {
