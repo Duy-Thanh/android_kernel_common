@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b383b79b_3fdb7de9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-07-02T18:57:12Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/3cf67d61ff98672120f6ad07528afa165df12588) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d3cf67d61ff98672120f6ad07528afa165df12588).\n\n```\n      ## include/linux/mutex.h ##\n     @@ include/linux/mutex.h: DEFINE_GUARD(mutex, struct mutex *, mutex_lock(_T), mutex_unlock(_T))\n      DEFINE_GUARD_COND(mutex, _try, mutex_trylock(_T))\n    @@ include/linux/mutex.h: DEFINE_GUARD(mutex, struct mutex *, mutex_lock(_T), mutex\n     \n      ## include/linux/sched.h ##\n     @@ include/linux/sched.h: struct task_struct {\n    - \tstruct mutex_waiter\t\t*blocked_on;\n      #endif\n    + \traw_spinlock_t\t\t\tblocked_lock;\n      \n     +#ifdef CONFIG_DETECT_HUNG_TASK_BLOCKER\n     +\tstruct mutex\t\t\t*blocker_mutex;\n    @@ kernel/locking/mutex.c: static inline unsigned long __owner_flags(unsigned long\n      /*\n       * Returns: __mutex_owner(lock) on failure or NULL on success.\n       */\n    -@@ kernel/locking/mutex.c: static void\n    - __mutex_add_waiter(struct mutex *lock, struct mutex_waiter *waiter,\n    +@@ kernel/locking/mutex.c: __mutex_add_waiter(struct mutex *lock, struct mutex_waiter *waiter,\n      \t\t   struct list_head *list)\n      {\n    + \tbool already_on_list \u003d false;\n    ++\n     +#ifdef CONFIG_DETECT_HUNG_TASK_BLOCKER\n     +\tWRITE_ONCE(current-\u003eblocker_mutex, lock);\n     +#endif\n      \tdebug_mutex_add_waiter(lock, waiter, current);\n      \n    - \tlist_add_tail(\u0026waiter-\u003elist, list);\n    + \ttrace_android_vh_alter_mutex_list_add(lock, waiter, list, \u0026already_on_list);\n     @@ kernel/locking/mutex.c: __mutex_remove_waiter(struct mutex *lock, struct mutex_waiter *waiter)\n      \t\t__mutex_clear_flag(lock, MUTEX_FLAGS);\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "70265e7d12f0aa4e7049296bb317059a373cf555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
