@@ -6,6 +6,7 @@
  * Chrome OS EC.
  */
 
+#include <linux/mutex.h>
 #include <linux/acpi.h>
 #include <linux/module.h>
 #include <linux/of.h>
@@ -72,6 +73,8 @@ static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_r
 	if (!data->pd_ctrl_ver)
 		return -EOPNOTSUPP;
 
+	mutex_lock(&port->lock);
+
 	/* First query the state */
 	req.port = port->port_num;
 	req.role = USB_PD_CTRL_ROLE_NO_CHANGE;
@@ -81,7 +84,7 @@ static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_r
 	ret = cros_ec_cmd(data->ec, data->pd_ctrl_ver, EC_CMD_USB_PD_CONTROL,
 				&req, sizeof(req), &resp, sizeof(resp));
 	if (ret < 0)
-		return ret;
+		goto unlock_and_ret;
 
 	switch (swap_type) {
 	case USB_PD_CTRL_SWAP_DATA:
@@ -94,18 +97,21 @@ static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_r
 		break;
 	default:
 		dev_warn(data->dev, "Unsupported role swap type %d", swap_type);
-		return -ENOTSUPP;
+		ret = -ENOTSUPP;
+		goto unlock_and_ret;
 	}
 
-	if (role == target_role)
-		return 0;
+	if (role == target_role) {
+		ret = 0;
+		goto unlock_and_ret;
+	}
 
 	req.swap = swap_type;
 	ret = cros_ec_cmd(data->ec, data->pd_ctrl_ver, EC_CMD_USB_PD_CONTROL,
 				&req, sizeof(req), &resp, sizeof(resp));
 
 	if (ret < 0)
-		return ret;
+		goto unlock_and_ret;
 
 	switch (swap_type) {
 	case USB_PD_CTRL_SWAP_DATA:
@@ -120,8 +126,11 @@ static int cros_typec_perform_role_swap(struct typec_port *tc_port, int target_r
 		break;
 	// Default case handled above
 	}
+	ret = 0;
 
-	return 0;
+unlock_and_ret:
+	mutex_unlock(&port->lock);
+	return ret;
 }
 
 static int cros_typec_dr_swap(struct typec_port *port, enum typec_data_role role)
@@ -381,6 +390,7 @@ static void cros_unregister_ports(struct cros_typec_data *typec)
 		typec_mux_put(typec->ports[i]->mux);
 		cros_typec_unregister_port_altmodes(typec->ports[i]);
 		typec_unregister_port(typec->ports[i]->port);
+		mutex_destroy(&typec->ports[i]->lock);
 	}
 }
 
@@ -475,6 +485,7 @@ static int cros_typec_init_ports(struct cros_typec_data *typec)
 			goto unregister_ports;
 		}
 
+		mutex_init(&cros_port->lock);
 		cros_port->port_num = port_num;
 		cros_port->typec_data = typec;
 		typec->ports[port_num] = cros_port;
