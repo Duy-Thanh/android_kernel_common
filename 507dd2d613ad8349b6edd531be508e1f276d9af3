@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466b194e_5c63ff46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-02T21:34:45Z",
+      "side": 1,
+      "message": "Its unclear to me this is worth including in andorid16-6.12 as the debugfs isn\u0027t mounted with Android, and the option isn\u0027t going to be enabled in GKI.\n\nCould you share your rationale for why this change is needed/is useful?",
+      "revId": "507dd2d613ad8349b6edd531be508e1f276d9af3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
