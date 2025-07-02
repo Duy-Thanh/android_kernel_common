@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3740904e_ce6add12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1062708
+      },
+      "writtenOn": "2025-07-02T02:52:38Z",
+      "side": 1,
+      "message": "To Albert Wang or Puma Hsu, \n\nCould you explain why the usb_deb_suspend() vendor hook mode changed from normal vendor hook to RESTRICTED vendor hook from android14-5.15(\u00272) (cherry picked from commit 358b59f1bce213fe1d83e09ae2e1fba718682e4a)\u0027 -\u003e 2579599: ANDROID: usb: Add vendor hook for usb suspend and resume | https://android-review.googlesource.com/c/kernel/common/+/2579599)",
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19f09613_77351201",
         "filename": "drivers/usb/core/driver.c",
         "patchSetId": 3
