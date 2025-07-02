@@ -46,6 +46,30 @@
       },
       "revId": "316a9f4f6b80d53f8d9d647d90e15045ac5d3a1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e72e61fc_60d80130",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-07-02T15:36:28Z",
+      "side": 1,
+      "message": "1. Please add this as a comment to the commit message.\n\n2. Add a line containing `Bypass-Upstream-Divergence-Tracking`, since this is resolving back port merge conflicts with an `ANDROID` CL, so there\u0027s nothing to upstream.",
+      "parentUuid": "0c7bd175_dc62e98f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "316a9f4f6b80d53f8d9d647d90e15045ac5d3a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
