@@ -156,8 +156,8 @@ static void intel_mode_config_init(struct intel_display *display)
 		mode_config->cursor_width = 64;
 		mode_config->cursor_height = 64;
 	} else {
-		mode_config->cursor_width = 256;
-		mode_config->cursor_height = 256;
+		mode_config->cursor_width = 4;
+		mode_config->cursor_height = 4;
 	}
 }
 
