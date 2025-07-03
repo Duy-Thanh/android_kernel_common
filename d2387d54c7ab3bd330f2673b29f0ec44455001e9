@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64d41917_452001c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1427064
+      },
+      "writtenOn": "2025-07-03T02:37:17Z",
+      "side": 1,
+      "message": "We changed to restricted type because we ran into a bug scheduling while atomic, that\u0027s related our hook implementation at that time. We don\u0027t use these hooks now since we are going to use new proposed design(https://lore.kernel.org/all/20250604082449.2029156-1-guanyulin@google.com/) which @guanyulin@google.com was discussing with your team. Therefore, I think you can modify the hooks or upload a new patch according to your feature design if you still need them.",
+      "parentUuid": "3740904e_ce6add12",
+      "revId": "d2387d54c7ab3bd330f2673b29f0ec44455001e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19f09613_77351201",
         "filename": "drivers/usb/core/driver.c",
         "patchSetId": 3
