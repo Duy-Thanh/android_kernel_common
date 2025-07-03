@@ -647,6 +647,7 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
 		if (unlikely(segno == NULL_SEGNO))
 			return false;
 
+<<<<<<< HEAD   (b91482 Revert "coredump: hand a pidfd to the usermode coredump help)
 		if (f2fs_lfs_mode(sbi) && __is_large_section(sbi)) {
 			left_blocks = CAP_BLKS_PER_SEC(sbi) -
 				SEGS_TO_BLKS(sbi, (segno - GET_START_SEG_FROM_SEC(sbi, segno))) -
@@ -655,6 +656,11 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
 			left_blocks = CAP_BLKS_PER_SEC(sbi) -
 					get_ckpt_valid_blocks(sbi, segno, true);
 		}
+||||||| BASE
+=======
+		left_blocks = CAP_BLKS_PER_SEC(sbi) -
+				get_ckpt_valid_blocks(sbi, segno, true);
+>>>>>>> BRANCH (e03ced Linux 6.12.33)
 
 		blocks = i <= CURSEG_COLD_DATA ? data_blocks : node_blocks;
 		if (blocks > left_blocks)
@@ -667,6 +673,7 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
 	if (unlikely(segno == NULL_SEGNO))
 		return false;
 
+<<<<<<< HEAD   (b91482 Revert "coredump: hand a pidfd to the usermode coredump help)
 	if (f2fs_lfs_mode(sbi) && __is_large_section(sbi)) {
 		left_blocks = CAP_BLKS_PER_SEC(sbi) -
 				SEGS_TO_BLKS(sbi, (segno - GET_START_SEG_FROM_SEC(sbi, segno))) -
@@ -676,6 +683,11 @@ static inline bool has_curseg_enough_space(struct f2fs_sb_info *sbi,
 				get_ckpt_valid_blocks(sbi, segno, true);
 	}
 
+||||||| BASE
+=======
+	left_blocks = CAP_BLKS_PER_SEC(sbi) -
+			get_ckpt_valid_blocks(sbi, segno, true);
+>>>>>>> BRANCH (e03ced Linux 6.12.33)
 	if (dent_blocks > left_blocks)
 		return false;
 	return true;
