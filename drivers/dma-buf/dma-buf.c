@@ -93,6 +93,7 @@ static char *dmabuffs_dname(struct dentry *dentry, char *buffer, int buflen)
 
 static void dma_buf_release(struct dentry *dentry)
 {
+	struct dma_buf_ext *dmabuf_ext;
 	struct dma_buf *dmabuf;
 
 	dmabuf = dentry->d_fsdata;
@@ -115,13 +116,13 @@ static void dma_buf_release(struct dentry *dentry)
 	if (dmabuf->resv == (struct dma_resv *)&dmabuf[1])
 		dma_resv_fini(dmabuf->resv);
 
-	if (atomic64_read(&dmabuf->num_unique_refs))
+	dmabuf_ext = get_dmabuf_ext(dmabuf);
+	if (atomic64_read(&dmabuf_ext->num_unique_refs))
 		pr_err("destroying dmabuf with non-zero task refs\n");
-
 	WARN_ON(!list_empty(&dmabuf->attachments));
 	module_put(dmabuf->owner);
 	kfree(dmabuf->name);
-	kfree(dmabuf);
+	kfree(dmabuf_ext);
 }
 
 static int dma_buf_file_release(struct inode *inode, struct file *file)
@@ -279,7 +280,7 @@ static void add_task_dmabuf_record(struct task_dma_buf_info *dmabuf_info,
 	rec->refcnt = 1;
 	list_add(&rec->node, &dmabuf_info->dmabufs);
 	dmabuf_info->dmabuf_count++;
-	atomic64_inc(&dmabuf->num_unique_refs);
+	atomic64_inc(&get_dmabuf_ext(dmabuf)->num_unique_refs);
 }
 
 /**
@@ -363,7 +364,7 @@ void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task)
 		kmem_cache_free(task_dmabuf_record_cachep, rec);
 		dmabuf_info->dmabuf_count--;
 		dmabuf_info->rss -= dmabuf->size;
-		atomic64_dec(&dmabuf->num_unique_refs);
+		atomic64_dec(&get_dmabuf_ext(dmabuf)->num_unique_refs);
 	}
 	spin_unlock(&dmabuf_info->lock);
 }
@@ -995,10 +996,11 @@ err_alloc_file:
  */
 struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 {
+	struct dma_buf_ext *dmabuf_ext;
 	struct dma_buf *dmabuf;
 	struct dma_resv *resv = exp_info->resv;
 	struct file *file;
-	size_t alloc_size = sizeof(struct dma_buf);
+	size_t alloc_size = sizeof(struct dma_buf_ext);
 	int ret;
 
 	if (WARN_ON(!exp_info->priv || !exp_info->ops
@@ -1028,12 +1030,13 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 	else
 		/* prevent &dma_buf[1] == dma_buf->resv */
 		alloc_size += 1;
-	dmabuf = kzalloc(alloc_size, GFP_KERNEL);
-	if (!dmabuf) {
+	dmabuf_ext = kzalloc(alloc_size, GFP_KERNEL);
+	if (!dmabuf_ext) {
 		ret = -ENOMEM;
 		goto err_file;
 	}
 
+	dmabuf = &dmabuf_ext->dmabuf;
 	dmabuf->priv = exp_info->priv;
 	dmabuf->ops = exp_info->ops;
 	dmabuf->size = exp_info->size;
@@ -1052,7 +1055,7 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 		dmabuf->resv = resv;
 	}
 
-	atomic64_set(&dmabuf->num_unique_refs, 0);
+	atomic64_set(&dmabuf_ext->num_unique_refs, 0);
 
 	file->private_data = dmabuf;
 	file->f_path.dentry->d_fsdata = dmabuf;
