@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19afb5e2_1ce95202",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8689,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-03T19:56:38Z",
+      "side": 0,
+      "message": "minor nit: removing this outer `if () { }` and keeping the inner `if{} else {}` could avoid the extra `if (enable_pkvm)`",
+      "revId": "9036d2bde1660376efd8418fe52dba344ece3e4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
