@@ -157,6 +157,10 @@ static int init_recovered_filename(const struct inode *dir,
 		/* Case-sensitive match is fine for recovery */
 		kmem_cache_free(f2fs_cf_name_slab, fname->cf_name.name);
 		fname->cf_name.name = NULL;
+		if (fname->cf_name_new.name) {
+			kmem_cache_free(f2fs_cf_name_slab, fname->cf_name_new.name);
+			fname->cf_name_new.name = NULL;
+		}
 #endif
 	} else {
 		f2fs_hash_filename(dir, fname);

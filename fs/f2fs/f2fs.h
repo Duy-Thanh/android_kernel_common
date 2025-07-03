@@ -521,6 +521,8 @@ struct f2fs_filename {
 
 	/* The dirhash of this filename */
 	f2fs_hash_t hash;
+	f2fs_hash_t hash_new;
+	bool hash_new_is_valid;
 
 #ifdef CONFIG_FS_ENCRYPTION
 	/*
@@ -539,6 +541,7 @@ struct f2fs_filename {
 	 * we fall back to treating the name as an opaque byte sequence.
 	 */
 	struct fscrypt_str cf_name;
+	struct fscrypt_str cf_name_new;
 #endif
 };
 
@@ -1846,6 +1849,10 @@ struct f2fs_sb_info {
 	/* For io latency related statistics info in one iostat period */
 	spinlock_t iostat_lat_lock;
 	struct iostat_lat_info *iostat_io_lat;
+#endif
+
+#if IS_ENABLED(CONFIG_UNICODE)
+	struct unicode_map *s_encoding;
 #endif
 };
 

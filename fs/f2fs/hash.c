@@ -107,6 +107,8 @@ void f2fs_hash_filename(const struct inode *dir, struct f2fs_filename *fname)
 
 #if IS_ENABLED(CONFIG_UNICODE)
 	if (IS_CASEFOLDED(dir)) {
+		bool new_needed = false;
+
 		/*
 		 * If the casefolded name is provided, hash it instead of the
 		 * on-disk name.  If the casefolded name is *not* provided, that
@@ -120,15 +122,25 @@ void f2fs_hash_filename(const struct inode *dir, struct f2fs_filename *fname)
 		if (fname->cf_name.name) {
 			name = fname->cf_name.name;
 			len = fname->cf_name.len;
+			new_needed = true;
 		} else {
 			name = fname->usr_fname->name;
 			len = fname->usr_fname->len;
 		}
+		fname->hash_new_is_valid = false;
 		if (IS_ENCRYPTED(dir)) {
 			struct qstr tmp = QSTR_INIT(name, len);
 
 			fname->hash =
 				cpu_to_le32(fscrypt_fname_siphash(dir, &tmp));
+
+			if (new_needed && fname->cf_name_new.name) {
+				tmp.name = fname->cf_name_new.name;
+				tmp.len = fname->cf_name_new.len;
+				fname->hash_new =
+					cpu_to_le32(fscrypt_fname_siphash(dir, &tmp));
+				fname->hash_new_is_valid = true;
+			}
 			return;
 		}
 	}

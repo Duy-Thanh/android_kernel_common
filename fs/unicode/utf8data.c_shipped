@@ -4121,7 +4121,4 @@ struct utf8data_table utf8_data_table = {
 };
 EXPORT_SYMBOL_GPL(utf8_data_table);
 
-struct utf8data_table utf8_data_table_new;
-EXPORT_SYMBOL_GPL(utf8_data_table_new);
-
 MODULE_LICENSE("GPL v2");

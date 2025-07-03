@@ -24,6 +24,7 @@
 #include <linux/sysfs.h>
 #include <linux/quota.h>
 #include <linux/unicode.h>
+#include <linux/unicode_new.h>
 #include <linux/part_stat.h>
 #include <linux/zstd.h>
 #include <linux/lz4.h>
@@ -1694,6 +1695,7 @@ static void f2fs_put_super(struct super_block *sb)
 		kvfree(sbi->write_io[i]);
 #if IS_ENABLED(CONFIG_UNICODE)
 	utf8_unload(sb->s_encoding);
+	utf8_unload_new(sbi->s_encoding);
 #endif
 }
 
@@ -4372,6 +4374,16 @@ static int f2fs_setup_casefold(struct f2fs_sb_info *sbi)
 				 unicode_minor(encoding_info->version),
 				 unicode_rev(encoding_info->version),
 				 encoding_flags);
+			return PTR_ERR(encoding);
+		}
+		sbi->s_encoding = utf8_load_new(encoding_info->version);
+		if (IS_ERR(sbi->s_encoding)) {
+			f2fs_err(sbi,
+				 "NEW: can't mount with superblock charset: %s-%u.%u.%u ",
+				 encoding_info->name,
+				 unicode_major(encoding_info->version),
+				 unicode_minor(encoding_info->version),
+				 unicode_rev(encoding_info->version));
 			return PTR_ERR(encoding);
 		}
 		f2fs_info(sbi, "Using encoding defined by superblock: "

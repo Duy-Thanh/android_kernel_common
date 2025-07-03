@@ -10,6 +10,7 @@
 #include <linux/f2fs_fs.h>
 #include <linux/sched/signal.h>
 #include <linux/unicode.h>
+#include <linux/unicode_new.h>
 #include "f2fs.h"
 #include "node.h"
 #include "acl.h"
@@ -59,6 +60,20 @@ int f2fs_init_casefolded_name(const struct inode *dir,
 						   fname->usr_fname,
 						   fname->cf_name.name,
 						   F2FS_NAME_LEN);
+
+		fname->cf_name_new.name = f2fs_kmem_cache_alloc(f2fs_cf_name_slab,
+					GFP_NOFS, false, F2FS_SB(sb));
+		if (fname->cf_name_new.name) {
+			fname->cf_name_new.len = utf8_casefold(
+					F2FS_I_SB((struct inode *)dir)->s_encoding,
+					fname->usr_fname,
+					fname->cf_name_new.name,
+					F2FS_NAME_LEN);
+			if ((int)fname->cf_name_new.len <= 0) {
+				kmem_cache_free(f2fs_cf_name_slab, fname->cf_name_new.name);
+				fname->cf_name_new.name = NULL;
+			}
+		}
 		if ((int)fname->cf_name.len <= 0) {
 			kmem_cache_free(f2fs_cf_name_slab, fname->cf_name.name);
 			fname->cf_name.name = NULL;
@@ -146,6 +161,10 @@ void f2fs_free_filename(struct f2fs_filename *fname)
 	if (fname->cf_name.name) {
 		kmem_cache_free(f2fs_cf_name_slab, fname->cf_name.name);
 		fname->cf_name.name = NULL;
+	}
+	if (fname->cf_name_new.name) {
+		kmem_cache_free(f2fs_cf_name_slab, fname->cf_name_new.name);
+		fname->cf_name_new.name = NULL;
 	}
 #endif
 }
@@ -276,7 +295,9 @@ struct f2fs_dir_entry *f2fs_find_target_dentry(const struct f2fs_dentry_ptr *d,
 			continue;
 		}
 
-		if (!use_hash || de->hash_code == fname->hash) {
+		if (!use_hash || de->hash_code == fname->hash
+				|| (fname->hash_new_is_valid &&
+					de->hash_code == fname->hash_new)) {
 			res = f2fs_match_name(d->inode, fname,
 					      d->filename[bit_pos],
 					      le16_to_cpu(de->name_len));
