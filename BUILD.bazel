@@ -1024,7 +1024,12 @@ ddk_headers(
 ddk_headers(
     name = "all_headers_allowlist_aarch64",
     hdrs = [
+<<<<<<< HEAD   (326b0b BACKPORT: FROMGIT: sched/core: Fix migrate_swap() vs. hotplu)
         "drivers/dma-buf/heaps/deferred-free-helper.h",
+||||||| BASE
+=======
+        "drivers/dma/dmaengine.h",
+>>>>>>> CHANGE (cb7b6a ANDROID: Add the dma header to aarch64 allowlist)
         "drivers/extcon/extcon.h",
         "drivers/pci/controller/dwc/pcie-designware.h",
         "drivers/thermal/thermal_core.h",
@@ -1045,7 +1050,12 @@ ddk_headers(
     linux_includes = [
         "arch/arm64/include",
         "arch/arm64/include/uapi",
+<<<<<<< HEAD   (326b0b BACKPORT: FROMGIT: sched/core: Fix migrate_swap() vs. hotplu)
         "drivers/dma-buf",
+||||||| BASE
+=======
+        "drivers/dma",
+>>>>>>> CHANGE (cb7b6a ANDROID: Add the dma header to aarch64 allowlist)
         "drivers/extcon",
         "drivers/pci/controller/dwc",
         "drivers/thermal",
