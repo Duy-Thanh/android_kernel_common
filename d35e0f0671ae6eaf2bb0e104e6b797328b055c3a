@@ -52,6 +52,24 @@
       "parentUuid": "b7b22d77_2b053d75",
       "revId": "d35e0f0671ae6eaf2bb0e104e6b797328b055c3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dd72c49_1499d1ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2025-07-03T03:17:13Z",
+      "side": 1,
+      "message": "Ok, I try to submit a patch to the upstream for discussion and review.",
+      "parentUuid": "b7b22d77_2b053d75",
+      "revId": "d35e0f0671ae6eaf2bb0e104e6b797328b055c3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
