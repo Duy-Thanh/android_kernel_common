@@ -7124,12 +7124,20 @@ pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
  * Otherwise marks the task's __state as RUNNING
  */
 static bool try_to_block_task(struct rq *rq, struct task_struct *p,
+<<<<<<< HEAD   (580b0f Merge 6.12.33 into android16-6.12-lts)
 			      unsigned long task_state, bool deactivate_cond)
+||||||| BASE
+			      unsigned long task_state)
+=======
+			      unsigned long *task_state_p)
+>>>>>>> BRANCH (48ca71 cifs: Fix validation of SMB1 query reparse point response)
 {
+	unsigned long task_state = *task_state_p;
 	int flags = DEQUEUE_NOCLOCK;
 
 	if (signal_pending_state(task_state, p)) {
 		WRITE_ONCE(p->__state, TASK_RUNNING);
+		*task_state_p = TASK_RUNNING;
 		return false;
 	}
 
@@ -7663,7 +7671,13 @@ static void __sched notrace __schedule(int sched_mode)
 			goto picked;
 		}
 	} else if (!preempt && prev_state) {
+<<<<<<< HEAD   (580b0f Merge 6.12.33 into android16-6.12-lts)
 		block = try_to_block_task(rq, prev, prev_state, !task_is_blocked(prev));
+||||||| BASE
+		try_to_block_task(rq, prev, prev_state);
+=======
+		try_to_block_task(rq, prev, &prev_state);
+>>>>>>> BRANCH (48ca71 cifs: Fix validation of SMB1 query reparse point response)
 		switch_count = &prev->nvcsw;
 	}
 
