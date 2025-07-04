@@ -34,6 +34,24 @@
       "parentUuid": "19afb5e2_1ce95202",
       "revId": "9036d2bde1660376efd8418fe52dba344ece3e4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7f02a2b_87f0230f",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8689,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-04T11:13:19Z",
+      "side": 0,
+      "message": "Done. (That actually also required to modify vmx_pkvm_init() to return an error if pKVM is disabled.)",
+      "parentUuid": "db3fb8f5_f8e6551c",
+      "revId": "9036d2bde1660376efd8418fe52dba344ece3e4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
