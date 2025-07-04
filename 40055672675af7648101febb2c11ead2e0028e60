@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4393747_89b0ebd2",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-04T15:00:53Z",
+      "side": 1,
+      "message": "I edited this to place the line in the correct place. If you repush, please do the same.",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 54
+      },
+      "revId": "40055672675af7648101febb2c11ead2e0028e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb63978b_979a4c14",
         "filename": "kernel/cgroup/cpuset.c",
         "patchSetId": 7
