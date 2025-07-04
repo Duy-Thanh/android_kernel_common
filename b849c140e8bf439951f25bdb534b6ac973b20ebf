@@ -16,6 +16,24 @@
       "message": "This full chain should likely land as a vendor module in the desktop-google repository\n\n@srosek@google.com @mikrawczyk@google.com can coordinate this with you",
       "revId": "b849c140e8bf439951f25bdb534b6ac973b20ebf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e682a1cc_d6daff4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-07-04T13:32:55Z",
+      "side": 1,
+      "message": "We can accept the UPSTREAM patches and very straightforward FROMLIST patches. However for the bigger FROMLIST changes, we should rather put them in the desktop-google",
+      "parentUuid": "1017e7a4_53a54cdc",
+      "revId": "b849c140e8bf439951f25bdb534b6ac973b20ebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
