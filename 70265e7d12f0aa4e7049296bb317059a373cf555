@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c424ecbf_96469385",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2006581
+      },
+      "writtenOn": "2025-07-04T01:41:01Z",
+      "side": 1,
+      "message": "Done to \"BACKPORT:\". And also change default to N to avoid KMI change.",
+      "parentUuid": "acfcac89_f625c581",
+      "revId": "70265e7d12f0aa4e7049296bb317059a373cf555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e74c426_81618ed3",
