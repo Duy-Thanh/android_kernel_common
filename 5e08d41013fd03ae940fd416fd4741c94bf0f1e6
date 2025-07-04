@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/429333853",
       "revId": "5e08d41013fd03ae940fd416fd4741c94bf0f1e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2045f033_c0632041",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-04T02:46:13Z",
+      "side": 1,
+      "message": "As a nit, usually the symbol change is applied last in a series, not before the symbols are introduced.",
+      "revId": "5e08d41013fd03ae940fd416fd4741c94bf0f1e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
