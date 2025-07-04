@@ -213,6 +213,10 @@
   blk_req_needs_zone_write_lock
   __blk_req_zone_write_lock
 
+# required by mi_damon.ko
+  folio_deactivate
+  folio_mark_accessed
+
 #required by cifs.ko
   add_swap_extent
   asn1_ber_decoder

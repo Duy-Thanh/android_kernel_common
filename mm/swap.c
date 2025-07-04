@@ -736,6 +736,7 @@ void folio_deactivate(struct folio *folio)
 		local_unlock(&cpu_fbatches.lock);
 	}
 }
+EXPORT_SYMBOL(folio_deactivate);
 
 /**
  * folio_mark_lazyfree - make an anon folio lazyfree
