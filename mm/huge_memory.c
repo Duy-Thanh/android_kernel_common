@@ -2827,13 +2827,58 @@ void __split_huge_pmd(struct vm_area_struct *vma, pmd_t *pmd,
 {
 	spinlock_t *ptl;
 	struct mmu_notifier_range range;
+	bool pmd_migration;
 
 	mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, vma->vm_mm,
 				address & HPAGE_PMD_MASK,
 				(address & HPAGE_PMD_MASK) + HPAGE_PMD_SIZE);
 	mmu_notifier_invalidate_range_start(&range);
 	ptl = pmd_lock(vma->vm_mm, pmd);
+<<<<<<< HEAD   (71c835 Merge af6cfcd0efb7 ("mm/hugetlb: unshare page tables during )
 	split_huge_pmd_locked(vma, range.start, pmd, freeze, folio);
+||||||| BASE
+
+	/*
+	 * If caller asks to setup a migration entry, we need a folio to check
+	 * pmd against. Otherwise we can end up replacing wrong folio.
+	 */
+	VM_BUG_ON(freeze && !folio);
+	VM_WARN_ON_ONCE(folio && !folio_test_locked(folio));
+
+	if (pmd_trans_huge(*pmd) || pmd_devmap(*pmd) ||
+	    is_pmd_migration_entry(*pmd)) {
+		/*
+		 * It's safe to call pmd_page when folio is set because it's
+		 * guaranteed that pmd is present.
+		 */
+		if (folio && folio != page_folio(pmd_page(*pmd)))
+			goto out;
+		__split_huge_pmd_locked(vma, pmd, range.start, freeze);
+	}
+
+out:
+=======
+	pmd_migration = is_pmd_migration_entry(*pmd);
+
+	/*
+	 * If caller asks to setup a migration entry, we need a folio to check
+	 * pmd against. Otherwise we can end up replacing wrong folio.
+	 */
+	VM_BUG_ON(freeze && !folio);
+	VM_WARN_ON_ONCE(folio && !folio_test_locked(folio));
+
+	if (pmd_trans_huge(*pmd) || pmd_devmap(*pmd) || pmd_migration) {
+		/*
+		 * Do not apply pmd_folio() to a migration entry; and folio lock
+		 * guarantees that it must be of the wrong folio anyway.
+		 */
+		if (folio && (pmd_migration || folio != page_folio(pmd_page(*pmd))))
+			goto out;
+		__split_huge_pmd_locked(vma, pmd, range.start, freeze);
+	}
+
+out:
+>>>>>>> BRANCH (397794 mm/huge_memory: fix dereferencing invalid pmd migration entr)
 	spin_unlock(ptl);
 	mmu_notifier_invalidate_range_end(&range);
 }
