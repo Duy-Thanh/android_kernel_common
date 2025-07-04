@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb63978b_979a4c14",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3994,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-04T14:58:20Z",
+      "side": 1,
+      "message": "This was not in this change, it was in:\n\nI344fa69ecfaf06d677bab4ad2adca8d9b5af26e8",
+      "range": {
+        "startLine": 3994,
+        "startChar": 0,
+        "endLine": 3994,
+        "endChar": 39
+      },
+      "revId": "40055672675af7648101febb2c11ead2e0028e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
