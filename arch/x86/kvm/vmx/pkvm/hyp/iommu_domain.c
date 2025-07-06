@@ -9,6 +9,7 @@
 #include "pkvm_hyp.h"
 #include "gfp.h"
 #include "debug.h"
+#include "ept.h"
 #include "iommu_internal.h"
 #include "iommu.h"
 #include "iommu_domain.h"
@@ -533,6 +534,41 @@ static void switch_to_super_page(struct pkvm_iommu_domain *domain,
 	}
 }
 
+static inline int verify_page_onwership(unsigned long phys_start, int level)
+{
+	unsigned long map_phys, phys_end;
+	int ept_level, ret = 1;
+
+	host_ept_lock();
+
+	pkvm_host_ept_lookup(phys_start, &map_phys, NULL, &ept_level);
+	if (map_phys == INVALID_ADDR) {
+		ret = 0;
+		goto out;
+	}
+
+	if (ept_level >= level)
+		goto out;
+
+	phys_end = phys_start + (level_size(level) * VTD_PAGE_SHIFT) - 1;
+	phys_start += level_size(ept_level) * VTD_PAGE_SHIFT;
+
+	while(phys_start >= phys_end) {
+		pkvm_host_ept_lookup(phys_start, &map_phys, NULL, &ept_level);
+		if (map_phys == INVALID_ADDR) {
+			ret = 0;
+			goto out;
+		}
+		phys_start += level_size(ept_level) * VTD_PAGE_SHIFT;
+	}
+
+out:
+	host_ept_unlock();
+	if (!ret)
+		pkvm_err("pkvm: phys addr 0x%lx not mapped in host ept\n", phys_start);
+	return ret;
+}
+
 static int
 domain_map(struct pkvm_iommu_domain *domain, struct pkvm_iommu_map_param *param,
 		struct pkvm_iommu_page_donation *donation)
@@ -588,6 +624,10 @@ domain_map(struct pkvm_iommu_domain *domain, struct pkvm_iommu_map_param *param,
 			}
 
 		}
+
+		if (!verify_page_onwership(pteval & VTD_PAGE_MASK, largepage_lvl))
+			return -EPERM;
+
 		/* We don't need lock here, nobody else
 		 * touches the iova range
 		 */
