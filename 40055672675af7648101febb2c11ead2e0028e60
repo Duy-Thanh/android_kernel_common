@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63660977_30bac486",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-07T09:50:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "70c7e2a0_ac14e418",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 54
+      },
+      "revId": "40055672675af7648101febb2c11ead2e0028e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb63978b_979a4c14",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Yes, we originally prepared this export for android16-6.12 (preempted by I344fa69), but are now adding it to android16-6.12-2025-06 where the symbol remains unexported.",
       "parentUuid": "cb63978b_979a4c14",
+      "range": {
+        "startLine": 3994,
+        "startChar": 0,
+        "endLine": 3994,
+        "endChar": 39
+      },
+      "revId": "40055672675af7648101febb2c11ead2e0028e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3914c598_7f66f628",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3994,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-07T09:50:46Z",
+      "side": 1,
+      "message": "I\u0027ve added a cherry-pick of I344fa69 to the beginning of the series.",
+      "parentUuid": "6c472d4a_bd190a85",
       "range": {
         "startLine": 3994,
         "startChar": 0,
