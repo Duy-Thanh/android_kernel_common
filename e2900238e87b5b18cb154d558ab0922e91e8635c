@@ -170,6 +170,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0168c55_2353114d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-07-07T20:12:36Z",
+      "side": 1,
+      "message": "In the discussion on https://r.android.com/c/kernel/common/+/3671615/comments/8cf096a2_738bab13, there was a report of verity_end_io being called in hardirq context.  So it seems we cannot assume that case is unimportant.",
+      "parentUuid": "ab117581_13396186",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "e2900238e87b5b18cb154d558ab0922e91e8635c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daef2e7d_c000c722",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
