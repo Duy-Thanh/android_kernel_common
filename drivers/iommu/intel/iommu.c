@@ -184,6 +184,7 @@ struct dmar_atsr_unit {
 	u8 include_all:1;		/* include all ports */
 };
 
+#ifndef CONFIG_PKVM_INTEL
 struct dmar_satc_unit {
 	struct list_head list;		/* list of SATC units */
 	struct acpi_dmar_header *hdr;	/* ACPI header */
@@ -192,10 +193,15 @@ struct dmar_satc_unit {
 	int devices_cnt;		/* target device count */
 	u8 atc_required:1;		/* ATS is required */
 };
+#endif
 
 static LIST_HEAD(dmar_atsr_units);
 static LIST_HEAD(dmar_rmrr_units);
+#ifdef CONFIG_PKVM_INTEL
+LIST_HEAD(dmar_satc_units);
+#else
 static LIST_HEAD(dmar_satc_units);
+#endif
 
 #define for_each_rmrr_units(rmrr) \
 	list_for_each_entry(rmrr, &dmar_rmrr_units, list)

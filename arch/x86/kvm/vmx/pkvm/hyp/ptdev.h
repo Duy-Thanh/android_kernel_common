@@ -28,6 +28,7 @@ struct pkvm_ptdev {
 
 	int shadow_vm_handle;
 	struct list_head vm_node;
+	bool devtlb_allowed;
 };
 
 struct pkvm_ptdev *pkvm_alloc_ptdev(u16 bdf, u32 pasid, bool coherency);

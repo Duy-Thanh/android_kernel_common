@@ -49,6 +49,16 @@ struct dmar_drhd_unit {
 	struct intel_iommu *iommu;
 };
 
+#ifdef CONFIG_PKVM_INTEL
+struct dmar_satc_unit {
+	struct list_head list;		/* list of SATC units */
+	struct acpi_dmar_header *hdr;	/* ACPI header */
+	struct dmar_dev_scope *devices;	/* target devices */
+	struct intel_iommu *iommu;	/* the corresponding iommu */
+	int devices_cnt;		/* target device count */
+	u8 atc_required:1;		/* ATS is required */
+};
+#endif
 struct dmar_pci_path {
 	u8 bus;
 	u8 device;
@@ -66,6 +76,12 @@ struct dmar_pci_notify_info {
 
 extern struct rw_semaphore dmar_global_lock;
 extern struct list_head dmar_drhd_units;
+#ifdef CONFIG_PKVM_INTEL
+extern struct list_head dmar_satc_units;
+
+#define for_each_satc_unit(satcu)					\
+	list_for_each_entry(satcu, &dmar_satc_units, list)
+#endif
 
 #define for_each_drhd_unit(drhd)					\
 	list_for_each_entry_rcu(drhd, &dmar_drhd_units, list,		\
