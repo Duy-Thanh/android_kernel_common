@@ -16,6 +16,24 @@
       "message": "Should this function increment the refcount of the returned file? Otherwise the caller needs to be really careful that the file doesn\u0027t get freed while its using it.",
       "revId": "e59b415444a826e554fea4921d9ac024bc0d8554",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f030633b_a16ca4c5",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-07T22:10:33Z",
+      "side": 1,
+      "message": "Yes, that\u0027s a good point. I went ahead and did that; thanks!",
+      "parentUuid": "faddfe88_2da1d893",
+      "revId": "e59b415444a826e554fea4921d9ac024bc0d8554",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
