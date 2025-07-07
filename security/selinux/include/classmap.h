@@ -10,6 +10,9 @@
 		"watch", "watch_mount", "watch_sb", "watch_with_perm",   \
 		"watch_reads", "watch_mountns"
 
+#define COMMON_FILE_PERMS_WITH_EXECUTE                                  \
+	COMMON_FILE_PERMS, "execute_no_trans", "entrypoint"
+
 #define COMMON_SOCK_PERMS                                              \
 	COMMON_FILE_SOCK_PERMS, "bind", "connect", "listen", "accept", \
 		"getopt", "setopt", "shutdown", "recvfrom", "sendto",  \
@@ -68,8 +71,7 @@ const struct security_class_mapping secclass_map[] = {
 	{ "filesystem",
 	  { "mount", "remount", "unmount", "getattr", "relabelfrom",
 	    "relabelto", "associate", "quotamod", "quotaget", "watch", NULL } },
-	{ "file",
-	  { COMMON_FILE_PERMS, "execute_no_trans", "entrypoint", NULL } },
+	{ "file", { COMMON_FILE_PERMS_WITH_EXECUTE, NULL } },
 	{ "dir",
 	  { COMMON_FILE_PERMS, "add_name", "remove_name", "reparent", "search",
 	    "rmdir", NULL } },
@@ -179,6 +181,8 @@ const struct security_class_mapping secclass_map[] = {
 	{ "anon_inode", { COMMON_FILE_PERMS, NULL } },
 	{ "io_uring", { "override_creds", "sqpoll", "cmd", NULL } },
 	{ "user_namespace", { "create", NULL } },
+	{ "memfd_file", { COMMON_FILE_PERMS_WITH_EXECUTE, NULL } },
+
 	/* last one */ { NULL, {} }
 };
 
