@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18f590e2_295f9d5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-07-07T16:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a4668dd_e7abeff2",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "a3e42962adc4481b0952ca786662fa0ca9c503be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f3dc72b_cc370f79",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-07-02T15:36:28Z",
       "side": 1,
       "message": "This `Fixes` line is referring to itself, implying this CL broke and then fixed itself, which doesn\u0027t make much sense and doesn\u0027t help any other maintainers in terms of knowing where a fix needs to land (what other branches contain the \"broken\" patch).\n\nPlease remove it.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 41
+      },
+      "revId": "a3e42962adc4481b0952ca786662fa0ca9c503be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6208d02_d805f226",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-07-07T16:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f3dc72b_cc370f79",
       "range": {
         "startLine": 18,
         "startChar": 0,
