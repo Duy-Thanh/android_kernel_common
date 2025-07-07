@@ -2,6 +2,7 @@
 /* Copyright(c) 2022 Intel Corporation. */
 
 #include <linux/hashtable.h>
+#include <linux/dmar.h>
 #include <asm/pkvm_spinlock.h>
 #include <pkvm.h>
 #include "pkvm_hyp.h"
@@ -14,11 +15,27 @@
 #include "memory.h"
 #include <pkvm/vmx/vmx.h>
 
+
 #define MAX_PTDEV_NUM	(PKVM_MAX_PDEV_NUM + PKVM_MAX_PASID_PDEV_NUM)
 static DEFINE_HASHTABLE(ptdev_hasht, 8);
 static DECLARE_BITMAP(ptdevs_bitmap, MAX_PTDEV_NUM);
 static struct pkvm_ptdev pkvm_ptdev[MAX_PTDEV_NUM];
 static pkvm_spinlock_t ptdev_lock = __PKVM_SPINLOCK_UNLOCKED;
+
+static bool is_dev_in_satc(u16 bdf)
+{
+	struct dmar_dev_scope *devs = pkvm_hyp->satc_devs;
+
+	if(!pkvm_hyp->satc_dev_cnt)
+		return false;
+
+	for(int idx = 0; idx < pkvm_hyp->satc_dev_cnt; idx++) {
+		if(bdf == (devs[idx].bus + devs[idx].devfn))
+			return true;
+	}
+
+	return false;
+}
 
 struct pkvm_ptdev *pkvm_alloc_ptdev(u16 bdf, u32 pasid, bool coherency)
 {
@@ -36,6 +53,7 @@ struct pkvm_ptdev *pkvm_alloc_ptdev(u16 bdf, u32 pasid, bool coherency)
 		ptdev->iommu_coherency = coherency;
 		ptdev->index = index;
 		ptdev->pgt = pkvm_hyp->host_vm.ept;
+		ptdev->devtlb_allowed = is_dev_in_satc(bdf);
 		INIT_LIST_HEAD(&ptdev->iommu_node);
 		INIT_LIST_HEAD(&ptdev->vm_node);
 		atomic_set(&ptdev->refcount, 1);

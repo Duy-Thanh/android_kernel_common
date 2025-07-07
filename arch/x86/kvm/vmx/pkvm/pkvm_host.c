@@ -111,6 +111,34 @@ static __init int check_pci_device_count(void)
 	return 0;
 }
 
+static void find_devs_in_satc(void)
+{
+	struct dmar_satc_unit *satc;
+	struct device *satc_dev;
+	struct dmar_dev_scope *devices = pkvm->satc_devs;
+	int i, cnt = 0;
+
+	pkvm->satc_dev_cnt = 0;
+	for_each_satc_unit(satc)
+		if(satc->atc_required)
+			for_each_dev_scope(satc->devices, satc->devices_cnt,
+								i, satc_dev)
+				if(satc_dev != NULL) {
+					if(cnt < PKVM_MAX_DEVS_IN_SATC) {
+						devices[cnt].bus = satc->devices[i].bus;
+						devices[cnt].devfn = satc->devices[i].devfn;
+						devices[cnt].dev = satc_dev;
+						cnt++;
+						pr_info("pkvm: found dev %s in SATC \n", dev_name(satc_dev));
+					} else
+						pr_err("pkvm: too many devices in SATC, not adding %s\n",
+								dev_name(satc_dev));
+				}
+
+	pkvm->satc_dev_cnt = cnt;
+	pr_info("pkvm: found %d devices in SATC \n", pkvm->satc_dev_cnt);
+}
+
 /*
  * Check for the coherency of paging structures accessed through pasid table
  * entries (in scalable mode) or context table entries (in legacy mode).
@@ -243,6 +271,7 @@ static __init int check_and_init_iommu(struct pkvm_hyp *pkvm)
 		index++;
 	}
 
+	find_devs_in_satc();
 	/*
 	 * There may be no supported page table level for both IOMMU and EPT.
 	 * But there will always be both supported page size, which is 4K.

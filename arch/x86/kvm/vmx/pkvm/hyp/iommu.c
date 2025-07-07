@@ -499,11 +499,21 @@ static bool sync_shadow_context_entry(struct id_sync_data *sdata)
 
 	if (ecap_smts(sdata->iommu_ecap)) {
 		if (sdata->guest_ptep && sdata->shadow_pa) {
+			bdf = sdata->vaddr >> DEVFN_SHIFT;
+			ptdev = iommu_find_ptdev(iommu, bdf, 0);
+
+			if (!ptdev) {
+				ptdev = iommu_add_ptdev(iommu, bdf, 0);
+				if (!ptdev)
+					return false;
+			}
+
 			tmp.hi = guest_ce->hi;
 			tmp.lo = sdata->shadow_pa | (guest_ce->lo & 0xfff);
 
-			/* Clear DTE to make sure device TLB is disabled for security */
-			context_sm_clear_dte(&tmp);
+			if(!ptdev->devtlb_allowed)
+				/* Clear DTE to make sure device TLB is disabled for security */
+				context_sm_clear_dte(&tmp);
 		}
 	} else {
 		/*
