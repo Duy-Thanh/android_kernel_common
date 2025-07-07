@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c3d1125_4986099d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964618
+      },
+      "writtenOn": "2025-07-07T01:53:51Z",
+      "side": 1,
+      "message": "Set Ready For Review",
+      "revId": "40055672675af7648101febb2c11ead2e0028e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4393747_89b0ebd2",
@@ -26,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70c7e2a0_ac14e418",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1964618
+      },
+      "writtenOn": "2025-07-07T01:53:51Z",
+      "side": 1,
+      "message": "Acknowledged. Using your version of android_rvh_cpuset_fork placement.",
+      "parentUuid": "b4393747_89b0ebd2",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 54
+      },
+      "revId": "40055672675af7648101febb2c11ead2e0028e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb63978b_979a4c14",
         "filename": "kernel/cgroup/cpuset.c",
         "patchSetId": 7
@@ -37,6 +78,30 @@
       "writtenOn": "2025-07-04T14:58:20Z",
       "side": 1,
       "message": "This was not in this change, it was in:\n\nI344fa69ecfaf06d677bab4ad2adca8d9b5af26e8",
+      "range": {
+        "startLine": 3994,
+        "startChar": 0,
+        "endLine": 3994,
+        "endChar": 39
+      },
+      "revId": "40055672675af7648101febb2c11ead2e0028e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c472d4a_bd190a85",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3994,
+      "author": {
+        "id": 1964618
+      },
+      "writtenOn": "2025-07-07T01:53:51Z",
+      "side": 1,
+      "message": "Yes, we originally prepared this export for android16-6.12 (preempted by I344fa69), but are now adding it to android16-6.12-2025-06 where the symbol remains unexported.",
+      "parentUuid": "cb63978b_979a4c14",
       "range": {
         "startLine": 3994,
         "startChar": 0,
