@@ -22,6 +22,30 @@
       },
       "revId": "12ac95dd7cc4853d591134eb50a27e075a827e57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85c0356_3b03782a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2025-07-08T23:21:06Z",
+      "side": 1,
+      "message": "I\u0027m FWDing your message to internal driver owner. They are checking it, and reply soon.",
+      "parentUuid": "e01d999f_c456f966",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 62
+      },
+      "revId": "12ac95dd7cc4853d591134eb50a27e075a827e57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
