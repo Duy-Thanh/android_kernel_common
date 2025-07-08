@@ -318,7 +318,7 @@ static unsigned int __gang_lookup_nat_set(struct f2fs_nm_info *nm_i,
 bool f2fs_in_warm_node_list(struct f2fs_sb_info *sbi, const struct folio *folio)
 {
 	return NODE_MAPPING(sbi) == folio->mapping &&
-			IS_DNODE(&folio->page) && is_cold_node(&folio->page);
+			IS_DNODE(&folio->page) && is_cold_node(folio);
 }
 
 void f2fs_init_fsync_node_info(struct f2fs_sb_info *sbi)
@@ -1633,7 +1633,7 @@ static struct folio *last_fsync_dnode(struct f2fs_sb_info *sbi, nid_t ino)
 				return ERR_PTR(-EIO);
 			}
 
-			if (!IS_DNODE(&folio->page) || !is_cold_node(&folio->page))
+			if (!IS_DNODE(&folio->page) || !is_cold_node(folio))
 				continue;
 			if (ino_of_node(folio) != ino)
 				continue;
@@ -1705,7 +1705,7 @@ static int __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
 
 	if (!is_sbi_flag_set(sbi, SBI_CP_DISABLED) &&
 			wbc->sync_mode == WB_SYNC_NONE &&
-			IS_DNODE(&folio->page) && is_cold_node(&folio->page))
+			IS_DNODE(&folio->page) && is_cold_node(folio))
 		goto redirty_out;
 
 	/* get old block addr of this node page */
@@ -1860,7 +1860,7 @@ retry:
 				goto out;
 			}
 
-			if (!IS_DNODE(&folio->page) || !is_cold_node(&folio->page))
+			if (!IS_DNODE(&folio->page) || !is_cold_node(folio))
 				continue;
 			if (ino_of_node(folio) != ino)
 				continue;
@@ -2066,10 +2066,10 @@ next_step:
 			if (step == 0 && IS_DNODE(&folio->page))
 				continue;
 			if (step == 1 && (!IS_DNODE(&folio->page) ||
-						is_cold_node(&folio->page)))
+						is_cold_node(folio)))
 				continue;
 			if (step == 2 && (!IS_DNODE(&folio->page) ||
-						!is_cold_node(&folio->page)))
+						!is_cold_node(folio)))
 				continue;
 lock_node:
 			if (wbc->sync_mode == WB_SYNC_ALL)
