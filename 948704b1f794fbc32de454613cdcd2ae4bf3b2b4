@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ce7e96d_2ac72a59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-08T14:07:12Z",
+      "side": 1,
+      "message": "Got rid of the objtool warning by using iretq and using STACK_FRAME_NON_STANDARD().",
+      "parentUuid": "afcf1871_a3277326",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c431a443_1ad4f6ea",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
         "patchSetId": 6
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Youre absolutely right. I was under the impression that subsequent cpus will not fail this call as it directly jumps to `switch_pgt`. But reading the code again, subsequent cpus can fail in `pkvm_setup_lapic()`. Thanks for catching this, So I need to rework this logic.",
       "parentUuid": "3790b131_47cd8448",
+      "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17220d88_45f52923",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-08T14:07:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc33bf92_4413cb39",
       "revId": "948704b1f794fbc32de454613cdcd2ae4bf3b2b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
