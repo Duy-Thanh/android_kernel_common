@@ -36,6 +36,13 @@ EXPORT_SYMBOL_GPL(gcma_stat_get);
 #define GCMA_ATTR_RO(_name) \
 	static struct kobj_attribute _name##_attr = __ATTR_RO(_name)
 
+static ssize_t free_show(struct kobject *kobj,
+		struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "%llu\n", (u64)atomic64_read(&gcma_stats[FREE_PAGE]));
+}
+GCMA_ATTR_RO(free);
+
 static ssize_t stored_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
 {
@@ -71,12 +78,21 @@ static ssize_t discarded_show(struct kobject *kobj,
 }
 GCMA_ATTR_RO(discarded);
 
+static ssize_t total_show(struct kobject *kobj,
+		struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "%llu\n", (u64)atomic64_read(&gcma_stats[TOTAL_PAGE]));
+}
+GCMA_ATTR_RO(total);
+
 static struct attribute *gcma_attrs[] = {
+	&free_attr.attr,
 	&stored_attr.attr,
 	&loaded_attr.attr,
 	&evicted_attr.attr,
 	&cached_attr.attr,
 	&discarded_attr.attr,
+	&total_attr.attr,
 	NULL,
 };
 ATTRIBUTE_GROUPS(gcma);

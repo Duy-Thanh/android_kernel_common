@@ -176,6 +176,7 @@ static void delete_page_from_lru(struct page *page)
 static void SetPageGCMAFree(struct page *page)
 {
 	SetPagePrivate(page);
+	gcma_stat_inc(FREE_PAGE);
 }
 
 static int PageGCMAFree(struct page *page)
@@ -186,6 +187,7 @@ static int PageGCMAFree(struct page *page)
 static void ClearPageGCMAFree(struct page *page)
 {
 	ClearPagePrivate(page);
+	gcma_stat_dec(FREE_PAGE);
 }
 
 static void reset_gcma_page(struct page *page)
@@ -306,6 +308,7 @@ int register_gcma_area(const char *name, phys_addr_t base, phys_addr_t size)
 	INIT_LIST_HEAD(&area->free_pages);
 	spin_lock_init(&area->free_pages_lock);
 
+	gcma_stat_add(TOTAL_PAGE, page_count);
 	for (i = 0; i < page_count; i++) {
 		page = pfn_to_page(pfn + i);
 		set_area_id(page, area_id);
