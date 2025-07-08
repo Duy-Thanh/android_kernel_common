@@ -1883,7 +1883,7 @@ continue_unlock:
 			f2fs_folio_wait_writeback(folio, NODE, true, true);
 
 			set_fsync_mark(&folio->page, 0);
-			set_dentry_mark(&folio->page, 0);
+			set_dentry_mark(folio, 0);
 
 			if (!atomic || folio == last_folio) {
 				set_fsync_mark(&folio->page, 1);
@@ -1893,7 +1893,7 @@ continue_unlock:
 								FI_DIRTY_INODE))
 						f2fs_update_inode(inode, folio);
 					if (!atomic)
-						set_dentry_mark(&folio->page,
+						set_dentry_mark(folio,
 							f2fs_need_dentry_mark(sbi, ino));
 				}
 				/* may be written by other thread */
@@ -2110,7 +2110,7 @@ write_node:
 				goto continue_unlock;
 
 			set_fsync_mark(&folio->page, 0);
-			set_dentry_mark(&folio->page, 0);
+			set_dentry_mark(folio, 0);
 
 			ret = __write_node_folio(folio, false, &submitted,
 						wbc, do_balance, io_type, NULL);
