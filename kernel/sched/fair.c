@@ -1254,14 +1254,6 @@ static s64 update_se(struct rq *rq, struct sched_entity *se)
 	return delta_exec;
 }
 
-static inline bool resched_next_slice(struct cfs_rq *cfs_rq, struct sched_entity *curr)
-{
-	if (protect_slice(curr))
-		return false;
-
-	return !entity_eligible(cfs_rq, curr);
-}
-
 /*
  * Used by other classes to account runtime.
  */
@@ -1317,7 +1309,7 @@ static void update_curr(struct cfs_rq *cfs_rq)
 	if (cfs_rq->nr_running == 1)
 		return;
 
-	if (resched || resched_next_slice(cfs_rq, curr)) {
+	if (resched || !protect_slice(curr)) {
 		resched_curr(rq);
 		clear_buddies(cfs_rq, curr);
 	}
