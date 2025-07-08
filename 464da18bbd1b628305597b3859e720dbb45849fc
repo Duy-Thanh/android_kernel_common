@@ -16,6 +16,24 @@
       "message": "Any reason for not calling the pkvm_firmware_rmem_init() after the if (!enable_pkvm) check? e.g.\n\n```\n        if (!enable_pkvm)\n                return 0;\n\n        ret \u003d pkvm_firmware_rmem_init();\n        if (ret)\n                return ret;\n```",
       "revId": "464da18bbd1b628305597b3859e720dbb45849fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae80730_00f2fec9",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-08T09:11:45Z",
+      "side": 1,
+      "message": "The point is that if we accidentally boot with pKVM disabled but with pvmfw loaded into memory by the bootloader (a production version of pvmfw, which contains secrets that must not be exposed to an untrusted host), we want to clear pvmfw from memory before continuing booting.\n\nSo in this case we call pkvm_firmware_rmem_init() just to detect that and to call pkvm_firmware_rmem_clear().",
+      "parentUuid": "df98d50d_bb7c5f19",
+      "revId": "464da18bbd1b628305597b3859e720dbb45849fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
