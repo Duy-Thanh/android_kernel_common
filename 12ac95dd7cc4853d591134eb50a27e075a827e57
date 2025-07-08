@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e01d999f_c456f966",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-08T15:58:54Z",
+      "side": 1,
+      "message": "these should not be touched by kernel drivers, why do you need them?",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 62
+      },
+      "revId": "12ac95dd7cc4853d591134eb50a27e075a827e57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
