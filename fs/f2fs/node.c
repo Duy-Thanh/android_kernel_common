@@ -1415,7 +1415,7 @@ static int read_node_folio(struct folio *folio, blk_opf_t op_flags)
 		.type = NODE,
 		.op = REQ_OP_READ,
 		.op_flags = op_flags,
-		.page = &folio->page,
+		.folio = folio,
 		.encrypted_page = NULL,
 	};
 	int err;
@@ -1679,7 +1679,7 @@ static int __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
 		.type = NODE,
 		.op = REQ_OP_WRITE,
 		.op_flags = wbc_to_write_flags(wbc),
-		.page = &folio->page,
+		.folio = folio,
 		.encrypted_page = NULL,
 		.submitted = 0,
 		.io_type = io_type,

@@ -293,7 +293,7 @@ repeat:
 	if (folio_test_uptodate(folio))
 		goto out;
 
-	fio.page = &folio->page;
+	fio.folio = folio;
 
 	err = f2fs_submit_page_bio(&fio);
 	if (err) {
@@ -520,7 +520,7 @@ int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
 			continue;
 		}
 
-		fio.page = &folio->page;
+		fio.folio = folio;
 		err = f2fs_submit_page_bio(&fio);
 		f2fs_folio_put(folio, err ? true : false);
 
