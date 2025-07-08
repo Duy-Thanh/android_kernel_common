@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b29d8e39_92f3820c",
+        "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-07-08T16:10:07Z",
+      "side": 1,
+      "message": "why are hooks needed in gz files given you own them and can make the changes directly?",
+      "fixSuggestions": [
+        {
+          "fixId": "34e828ca_dd52ef33",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/geniezone/gzvm_vcpu.c",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/virt/geniezone/gzvm_vcpu.c",
+              "range": {
+                "startLine": 196,
+                "startChar": 0,
+                "endLine": 197,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_mtk_gzvm_vcpu_exit_reason(vcpu, \u0026need_userspace);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6dc0624e99203014ed572d2333c89787d0dcfef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
