@@ -64,9 +64,8 @@ void f2fs_destroy_bioset(void)
 	bioset_exit(&f2fs_bioset);
 }
 
-bool f2fs_is_cp_guaranteed(const struct page *page)
+bool f2fs_is_cp_guaranteed(const struct folio *folio)
 {
-	const struct folio *folio = page_folio(page);
 	struct address_space *mapping = folio->mapping;
 	struct inode *inode;
 	struct f2fs_sb_info *sbi;
@@ -379,7 +378,7 @@ static void f2fs_write_end_io(struct bio *bio)
 		}
 #endif
 
-		type = WB_DATA_TYPE(&folio->page, false);
+		type = WB_DATA_TYPE(folio, false);
 
 		if (unlikely(bio->bi_status)) {
 			mapping_set_error(folio->mapping, -EIO);
@@ -763,7 +762,7 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
 		wbc_account_cgroup_owner(fio->io_wbc, fio_folio, PAGE_SIZE);
 
 	inc_page_count(fio->sbi, is_read_io(fio->op) ?
-			__read_io_type(data_folio) : WB_DATA_TYPE(fio->page, false));
+			__read_io_type(data_folio) : WB_DATA_TYPE(fio->folio, false));
 
 	if (is_read_io(bio_op(bio)))
 		f2fs_submit_read_bio(fio->sbi, bio, fio->type);
@@ -964,7 +963,7 @@ alloc_new:
 	if (fio->io_wbc)
 		wbc_account_cgroup_owner(fio->io_wbc, folio, folio_size(folio));
 
-	inc_page_count(fio->sbi, WB_DATA_TYPE(&data_folio->page, false));
+	inc_page_count(fio->sbi, WB_DATA_TYPE(data_folio, false));
 
 	*fio->last_block = fio->new_blkaddr;
 	*fio->bio = bio;
@@ -1040,7 +1039,7 @@ next:
 	/* set submitted = true as a return value */
 	fio->submitted = 1;
 
-	type = WB_DATA_TYPE(&bio_folio->page, fio->compressed_page);
+	type = WB_DATA_TYPE(bio_folio, fio->compressed_page);
 	inc_page_count(sbi, type);
 
 	if (io->bio &&
