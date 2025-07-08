@@ -69,6 +69,24 @@
       "message": "Unfortunately, as the Kconfig defaults the option to Y and this the patch changes the task_struct size, it breaks the KABI. So I don\u0027t think this will be able to be merged in android16-6.12. It might be a candidate for the KABI thaw, but this feels more like a feature, which might prevent it from being included.",
       "revId": "70265e7d12f0aa4e7049296bb317059a373cf555",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb0edac_964c571e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2006581
+      },
+      "writtenOn": "2025-07-08T06:22:54Z",
+      "side": 1,
+      "message": "Is it possible if this function defaults to N? Then we can use this fuction for debugging in the userdebug version.",
+      "parentUuid": "3e74c426_81618ed3",
+      "revId": "70265e7d12f0aa4e7049296bb317059a373cf555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
