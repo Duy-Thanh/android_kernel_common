@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c8c52a_d9f5fdc4",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1760,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-07-08T17:51:02Z",
+      "side": 1,
+      "message": "Have you considered always allocating exactly one page? The DMA-API always calls this with `GFP_ATOMIC` which could increase the risk of allocation failures in situations where more than one page is required.",
+      "fixSuggestions": [
+        {
+          "fixId": "cd831c50_79c4c441",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 1750,
+                "startChar": 0,
+                "endLine": 1754,
+                "endChar": 0
+              },
+              "replacement": "static inline struct kvm_iommu_sg *kvm_iommu_sg_alloc(gfp_t gfp)\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 1755,
+                "startChar": 0,
+                "endLine": 1761,
+                "endChar": 0
+              },
+              "replacement": "\treturn alloc_page(gfp);\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 1763,
+                "startChar": 0,
+                "endLine": 1764,
+                "endChar": 0
+              },
+              "replacement": "static inline void kvm_iommu_sg_free(struct kvm_iommu_sg *sg)\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 1765,
+                "startChar": 0,
+                "endLine": 1766,
+                "endChar": 0
+              },
+              "replacement": "\tfree_page((unsigned long)sg);\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 1783,
+                "startChar": 0,
+                "endLine": 1785,
+                "endChar": 0
+              },
+              "replacement": "size_t kvm_iommu_map_sg(pkvm_handle_t domain_id, unsigned long iova,\n\t\t\tstruct kvm_iommu_sg *sg, unsigned int nent,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a078db345a0b588449e67e7d52556126a5f135d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
