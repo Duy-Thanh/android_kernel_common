@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df98d50d_bb7c5f19",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-08T09:00:06Z",
+      "side": 1,
+      "message": "Any reason for not calling the pkvm_firmware_rmem_init() after the if (!enable_pkvm) check? e.g.\n\n```\n        if (!enable_pkvm)\n                return 0;\n\n        ret \u003d pkvm_firmware_rmem_init();\n        if (ret)\n                return ret;\n```",
+      "revId": "464da18bbd1b628305597b3859e720dbb45849fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
