@@ -23,6 +23,12 @@ void gcma_stat_add(enum gcma_stat_type type, unsigned long delta)
 	atomic64_add(delta, &gcma_stats[type]);
 }
 
+u64 gcma_stat_get(enum gcma_stat_type type)
+{
+	return (u64)atomic64_read(&gcma_stats[type]);
+}
+EXPORT_SYMBOL_GPL(gcma_stat_get);
+
 /*
  * This all compiles without CONFIG_SYSFS, but is a waste of space.
  */
