@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ea841a_fe1f3895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-07-09T19:46:02Z",
+      "side": 1,
+      "message": "We are going to hold off on merging this unless absolutely necessary as it is in the RFC stage upstream.",
+      "revId": "0e7958199e1582eed738feefa9c23ee2cb0dd73d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
