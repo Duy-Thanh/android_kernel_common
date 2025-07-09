@@ -669,6 +669,19 @@ int pkvm_vm_ioctl_enable_cap(struct kvm *kvm, struct kvm_enable_cap *cap)
 	return 0;
 }
 
+static unsigned long *pkvm_ffa_constituents_sz = &kvm_nvhe_sym(pkvm_ffa_constituents_sz);
+
+static int __init early_pkvm_ffa_buffer_cfg(char *arg)
+{
+	if (!arg)
+		return -EINVAL;
+
+	*pkvm_ffa_constituents_sz = simple_strtoul(arg, NULL, 0);
+
+	return 0;
+}
+early_param("kvm-arm.num_ffa_constituents", early_pkvm_ffa_buffer_cfg);
+
 #ifdef CONFIG_MODULES
 static char early_pkvm_modules[COMMAND_LINE_SIZE] __initdata;
 
