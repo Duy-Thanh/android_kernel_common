@@ -34,6 +34,24 @@
       "parentUuid": "af6e3d79_7405b301",
       "revId": "db936a257d4dc59f9496d9678d92c58bba3637e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffce3229_dd5491bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-09T19:21:24Z",
+      "side": 1,
+      "message": "There are no CRC issues, as far as I can tell. You just need to update the ABI file.",
+      "parentUuid": "7403f3e5_a62f2bc7",
+      "revId": "db936a257d4dc59f9496d9678d92c58bba3637e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
