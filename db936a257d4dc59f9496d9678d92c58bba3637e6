@@ -70,6 +70,24 @@
       "parentUuid": "ffce3229_dd5491bd",
       "revId": "db936a257d4dc59f9496d9678d92c58bba3637e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa8c2b19_077ec834",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-07-09T20:42:58Z",
+      "side": 1,
+      "message": "...and now I see your doc on this topic: https://source.android.com/docs/core/architecture/kernel/abi-monitor#new_or_modified_enumerators so I\u0027ll go try it again myself.",
+      "parentUuid": "b1453325_2247a7da",
+      "revId": "db936a257d4dc59f9496d9678d92c58bba3637e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
