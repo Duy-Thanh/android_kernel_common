@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc6ad681_1cf120f2",
+        "filename": "drivers/platform/chrome/cros_ec_typec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1064639
+      },
+      "writtenOn": "2025-07-09T18:55:52Z",
+      "side": 1,
+      "message": "I left this feedback upstream too, but please declare `int ret;` at the top of the block, before the `mutex_lock` and before an empty carriage return.",
+      "range": {
+        "startLine": 59,
+        "startChar": 1,
+        "endLine": 59,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "17faa8a6_f416dc90",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/platform/chrome/cros_ec_typec.c",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "\tint ret;\n"
+            },
+            {
+              "path": "drivers/platform/chrome/cros_ec_typec.c",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "\n\tret \u003d cros_ec_cmd(port-\u003etypec_data-\u003eec, 0, EC_CMD_TYPEC_CONTROL,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b0f58eee2f68554652139c295a11eda11f3ffe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
