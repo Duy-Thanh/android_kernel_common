@@ -16,6 +16,24 @@
       "message": "@gprocida@google.com, I tried various incantations to try to suppress the CRC issues. Can you show me how it is done for this case with the new 6.12 mechanism?\n\nI tried adding this to drivers/virt/geniezone/gzvm_vcpu.c: \n```\n#include \u003clinux/android_kabi.h\u003e\n\nANDROID_KABI_DECLONLY(gunyah_rm_vm_status);\n```\n(and then tried the same in include/trace/hooks/gzvm.h which didn\u0027t feel correct, but didn\u0027t work either).",
       "revId": "db936a257d4dc59f9496d9678d92c58bba3637e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7403f3e5_a62f2bc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-09T18:58:19Z",
+      "side": 1,
+      "message": "I\u0027ll take a look. Note that for KMI thaw we should isolate such fixups in their own commits.",
+      "parentUuid": "af6e3d79_7405b301",
+      "revId": "db936a257d4dc59f9496d9678d92c58bba3637e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
