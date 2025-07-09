@@ -502,6 +502,8 @@ extern unsigned int kvm_nvhe_sym(hyp_memblock_nr);
 extern phys_addr_t kvm_nvhe_sym(pvmfw_base);
 extern phys_addr_t kvm_nvhe_sym(pvmfw_size);
 
+extern unsigned long kvm_nvhe_sym(pkvm_ffa_constituents_sz);
+
 static inline unsigned long
 hyp_vmemmap_memblock_size(struct memblock_region *reg, size_t vmemmap_entry_size)
 {
@@ -598,6 +600,7 @@ static inline unsigned long host_s2_pgtable_pages(void)
 static inline unsigned long hyp_ffa_proxy_pages(void)
 {
 	size_t desc_max;
+	unsigned long nr_constituents = KVM_FFA_MAX_NR_CONSTITUENTS;
 
 	/*
 	 * SG_MAX_SEGMENTS is supposed to bound the number of elements in an
@@ -610,6 +613,9 @@ static inline unsigned long hyp_ffa_proxy_pages(void)
 	 */
 	BUILD_BUG_ON(KVM_FFA_MAX_NR_CONSTITUENTS < SG_MAX_SEGMENTS);
 
+	if (kvm_nvhe_sym(pkvm_ffa_constituents_sz) != 0)
+		nr_constituents = kvm_nvhe_sym(pkvm_ffa_constituents_sz);
+
 	/*
 	 * The hypervisor FFA proxy needs enough memory to buffer a fragmented
 	 * descriptor returned from EL3 in response to a RETRIEVE_REQ call.
@@ -617,7 +623,8 @@ static inline unsigned long hyp_ffa_proxy_pages(void)
 	desc_max = sizeof(struct ffa_mem_region) +
 		   sizeof(struct ffa_mem_region_attributes) +
 		   sizeof(struct ffa_composite_mem_region) +
-		   KVM_FFA_MAX_NR_CONSTITUENTS * sizeof(struct ffa_mem_region_addr_range);
+		   nr_constituents * sizeof(struct ffa_mem_region_addr_range);
+
 
 	/* Plus a page each for the hypervisor's RX and TX mailboxes. */
 	return (2 * KVM_FFA_MBOX_NR_PAGES) + DIV_ROUND_UP(desc_max, PAGE_SIZE);
