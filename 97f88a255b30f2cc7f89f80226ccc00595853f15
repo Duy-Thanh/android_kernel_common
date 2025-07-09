@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e68d75a_0eda4976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-07-09T17:02:43Z",
+      "side": 1,
+      "message": "wait for patch to land in a maintainer tree and relabel as FROMGIT",
+      "revId": "97f88a255b30f2cc7f89f80226ccc00595853f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
