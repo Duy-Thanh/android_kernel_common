@@ -22,6 +22,30 @@
       },
       "revId": "b512f2ed9bb4c93b6434e2230f876d12adb0189b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beded16e_86ae671e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-07-09T20:24:55Z",
+      "side": 1,
+      "message": "Yeah, Todd requested ANDROID: if we were to merge as-is, will update when we get to the FROMGIT: stage.",
+      "parentUuid": "affb44df_4675a8d7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "b512f2ed9bb4c93b6434e2230f876d12adb0189b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
