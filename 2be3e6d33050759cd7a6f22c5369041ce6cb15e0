@@ -16,6 +16,23 @@
       "message": "Respin bug:b/430229917",
       "revId": "2be3e6d33050759cd7a6f22c5369041ce6cb15e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f8cb964_a75847a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902100
+      },
+      "writtenOn": "2025-07-09T05:57:55Z",
+      "side": 1,
+      "message": "hi，@John Stultz\nCan you help to submit together ? we need this for feature.\nhttps://android-review.googlesource.com/c/kernel/common/+/3687392\nhttps://android-review.googlesource.com/c/kernel/common/+/3687632",
+      "revId": "2be3e6d33050759cd7a6f22c5369041ce6cb15e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
