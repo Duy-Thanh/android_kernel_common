@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8eb8bad_6b9cf7b6",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-09T06:50:41Z",
+      "side": 1,
+      "message": "Using `.unwrap()` is best avoided as it panics if you get it wrong. It\u0027s generally better to unwrap the result by a question mark operator or matching:\n```\n    let asma \u003d match unsafe { get_ashmem_area(file) } {\n        Ok(file) \u003d\u003e file,\n        Err(_err) \u003d\u003e return null_mut(),\n    };\n```",
+      "revId": "e3c7715583c62b53a3f08c0e65b31c0a40a11ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
