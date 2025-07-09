@@ -528,6 +528,14 @@ struct xe_device {
 	u8 vm_inject_error_position;
 #endif
 
+#if IS_ENABLED(CONFIG_TRACE_GPU_MEM)
+	/**
+	 * @global_total_pages: global GPU page usage tracked for gpu_mem
+	 * tracepoints
+	 */
+	atomic64_t global_total_pages;
+#endif
+
 #if IS_ENABLED(CONFIG_DRM_XE_TRACE_GPU_WORK_PERIOD)
 	/**
 	 * @xe_work_period: Support for GPU work period tracepoint
