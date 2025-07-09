@@ -376,6 +376,9 @@ DECLARE_HOOK(android_vh_page_cache_readahead_start,
 DECLARE_HOOK(android_vh_page_cache_readahead_end,
 	TP_PROTO(struct file *file, pgoff_t pgoff),
 	TP_ARGS(file, pgoff));
+DECLARE_HOOK(android_vh_page_cache_ra_order_bypass,
+	TP_PROTO(struct address_space *mapping, bool *bypass),
+	TP_ARGS(mapping, bypass));
 DECLARE_HOOK(android_vh_filemap_fault_start,
 	TP_PROTO(struct file *file, pgoff_t pgoff),
 	TP_ARGS(file, pgoff));
