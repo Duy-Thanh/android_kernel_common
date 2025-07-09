@@ -16,6 +16,23 @@
       "message": "We are going to hold off on merging this unless absolutely necessary as it is in the RFC stage upstream.",
       "revId": "0e7958199e1582eed738feefa9c23ee2cb0dd73d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78893596_6568a787",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-09T19:48:56Z",
+      "side": 1,
+      "message": "Has some build issues that need to be resolved. Also while its helpful to have it in Gerrit for folks to test with, we might want to wait until its FROMGIT before merging it to the android common tree.",
+      "revId": "0e7958199e1582eed738feefa9c23ee2cb0dd73d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
