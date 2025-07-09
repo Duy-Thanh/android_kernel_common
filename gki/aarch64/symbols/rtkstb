@@ -1387,6 +1387,7 @@
   rpmsg_register_device
   rpmsg_register_device_override
   rproc_get_by_phandle
+  rpmsg_chrdev_eptdev_create
 
 # required by rr320010-regulator.ko
   regulator_list_voltage_linear_range
