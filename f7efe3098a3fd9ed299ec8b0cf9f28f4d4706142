@@ -16,6 +16,77 @@
       "message": "Respin Bug: b/430427695",
       "revId": "f7efe3098a3fd9ed299ec8b0cf9f28f4d4706142",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c281ee7d_8d6f6a3e",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-09T20:07:53Z",
+      "side": 1,
+      "message": "GFP_KERNEL under spin_lock?\n\nSeparate API with memory allocation out of spin_lock and install the record here.",
+      "range": {
+        "startLine": 185,
+        "startChar": 1,
+        "endLine": 185,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78c9d91f_c6cc9632",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 179,
+                "startChar": 0,
+                "endLine": 180,
+                "endChar": 0
+              },
+              "replacement": "static int __new_task_dmabuf_record(struct task_struct *task,\n\t\t\t\t   struct dma_buf *dmabuf)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 185,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 189,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "\n\treturn rec;\n}\n\nstatic int new_task_dmabuf_record(struct task_struct *task, struct dma_buf *dmabuf)\n{\n\tstruct task_dma_buf_record *rec;\n\n\trec \u003d __new_task_dmabuf_record(task, dmabuf);\n\tif (!rec)\n\t\treturn -ENOMEM;\n\n\tlockdep_assert_held(\u0026task-\u003edmabuf_info-\u003elock);\n\ttask-\u003edmabuf_info-\u003erss +\u003d dmabuf-\u003esize;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f7efe3098a3fd9ed299ec8b0cf9f28f4d4706142",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
