@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "025faf52_b401bd18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-07-09T18:16:47Z",
+      "side": 1,
+      "message": "Please get a CR+1 from someone who can confirm that a change to `struct f2fs_sb_info` is safe",
+      "revId": "8591becc66d6fb46457eeb9ad1d3cb5c0c5f5ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
