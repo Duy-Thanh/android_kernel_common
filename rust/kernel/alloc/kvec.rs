@@ -198,6 +198,7 @@ where
     /// - `additional` must be less than or equal to `self.capacity - self.len`.
     /// - All elements within the interval [`self.len`,`self.len + additional`) must be initialized.
     #[inline]
+<<<<<<< HEAD   (1d7d3adfa49d079ad42c53ec701dfa3e4d9932a8 Revert "dm: fix dm_blk_report_zones")
     pub unsafe fn inc_len(&mut self, additional: usize) {
         // Guaranteed by the type invariant to never underflow.
         debug_assert!(additional <= self.capacity() - self.len());
@@ -223,6 +224,18 @@ where
         // SAFETY: The memory after `self.len()` is guaranteed to contain `count` initialized
         // elements of type `T`.
         unsafe { slice::from_raw_parts_mut(self.as_mut_ptr().add(self.len), count) }
+||||||| BASE
+    pub unsafe fn set_len(&mut self, new_len: usize) {
+        debug_assert!(new_len <= self.capacity());
+        self.len = new_len;
+=======
+    pub unsafe fn set_len(&mut self, new_len: usize) {
+        debug_assert!(new_len <= self.capacity());
+
+        // INVARIANT: By the safety requirements of this method `new_len` represents the exact
+        // number of elements stored within `self`.
+        self.len = new_len;
+>>>>>>> BRANCH (23fdf46589db718d538fa3e65ab0d57362d50b4a Linux 6.12.34)
     }
 
     /// Returns a slice of the entire vector.
