@@ -16,6 +16,24 @@
       "message": "This is a tristate config. Why can\u0027t you just enable it as a vendor module?",
       "revId": "e01c40e2d0886abc3ee8a06bbefd2a12f8be172f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3522a5_58df7e3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2025-07-09T09:17:26Z",
+      "side": 1,
+      "message": "I will enable it as a vendor module.\n\nThank you.",
+      "parentUuid": "79d94595_328a9be4",
+      "revId": "e01c40e2d0886abc3ee8a06bbefd2a12f8be172f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
