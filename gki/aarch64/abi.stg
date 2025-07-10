@@ -27874,6 +27874,11 @@ pointer_reference {
   pointee_type_id: 0xfccdbf80
 }
 pointer_reference {
+  id: 0x35a3cc71
+  kind: POINTER
+  pointee_type_id: 0xfccfd759
+}
+pointer_reference {
   id: 0x35ab6b03
   kind: POINTER
   pointee_type_id: 0xfced4a93
@@ -39697,6 +39702,11 @@ qualified {
   id: 0xfccdbf80
   qualifier: CONST
   qualified_type_id: 0x83714889
+}
+qualified {
+  id: 0xfccfd759
+  qualifier: CONST
+  qualified_type_id: 0x8378ebef
 }
 qualified {
   id: 0xfd03f127
@@ -329243,6 +329253,12 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x1c180122
+  return_type_id: 0x48b5725f
+  parameter_id: 0x315b7e01
+  parameter_id: 0x35a3cc71
+}
+function {
   id: 0x1c18b1c5
   return_type_id: 0x48b5725f
   parameter_id: 0x315b7e01
@@ -344182,6 +344198,14 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x3c01aef6
   parameter_id: 0x3c01aef6
+}
+function {
+  id: 0x92709a7a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x39a4e83f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x13580d6c
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x9271fe5c
@@ -393032,6 +393056,7 @@ elf_symbol {
   full_name: "capable_wrt_inode_uidgid"
 }
 elf_symbol {
+<<<<<<< TARGET BRANCH (da38f7079e8beb490b2a0fdc408426b32d65363e UPSTREAM: xhci: dbctty: disable ECHO flag by default am: 766)
   id: 0x0d8df2d6
   name: "cdc_ncm_bind_common"
   is_defined: true
@@ -393093,6 +393118,16 @@ elf_symbol {
   crc: 0xa58d5bcc
   type_id: 0x136e318e
   full_name: "cdc_ncm_unbind"
+||||||| BASE          (766ecae19f56d2f638ec2132c5231443dbbe7501 UPSTREAM: xhci: dbctty: disable ECHO flag by default)
+=======
+  id: 0xf796806d
+  name: "capacity_freq_ref"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe82c42ee
+  type_id: 0x33756485
+  full_name: "capacity_freq_ref"
+>>>>>>> SOURCE BRANCH (41f730f9c4c84eca8f4e1ed85d1e407956baa560 ANDROID: GKI: update exynos symbol list)
 }
 elf_symbol {
   id: 0xb2bfcc0c
@@ -404252,6 +404287,15 @@ elf_symbol {
   full_name: "drm_crtc_vblank_on"
 }
 elf_symbol {
+  id: 0x55ebc92f
+  name: "drm_crtc_vblank_on_config"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe20e718a
+  type_id: 0x1c180122
+  full_name: "drm_crtc_vblank_on_config"
+}
+elf_symbol {
   id: 0x19d409c4
   name: "drm_crtc_vblank_put"
   is_defined: true
@@ -414305,6 +414349,15 @@ elf_symbol {
   crc: 0x3d86d8d1
   type_id: 0x1ef16b9c
   full_name: "iio_channel_release"
+}
+elf_symbol {
+  id: 0x793a0b03
+  name: "iio_convert_raw_to_processed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x24c789fe
+  type_id: 0x92709a7a
+  full_name: "iio_convert_raw_to_processed"
 }
 elf_symbol {
   id: 0x7ee06725
@@ -457364,6 +457417,7 @@ interface {
   symbol_id: 0x9e7fc289
   symbol_id: 0x0e419b40
   symbol_id: 0x61aaf300
+<<<<<<< TARGET BRANCH (da38f7079e8beb490b2a0fdc408426b32d65363e UPSTREAM: xhci: dbctty: disable ECHO flag by default am: 766)
   symbol_id: 0x0d8df2d6
   symbol_id: 0xbe895b99
   symbol_id: 0x438a802b
@@ -457371,6 +457425,10 @@ interface {
   symbol_id: 0xb0d627f0
   symbol_id: 0x3b573ab8
   symbol_id: 0xb4ff03eb
+||||||| BASE          (766ecae19f56d2f638ec2132c5231443dbbe7501 UPSTREAM: xhci: dbctty: disable ECHO flag by default)
+=======
+  symbol_id: 0xf796806d
+>>>>>>> SOURCE BRANCH (41f730f9c4c84eca8f4e1ed85d1e407956baa560 ANDROID: GKI: update exynos symbol list)
   symbol_id: 0xb2bfcc0c
   symbol_id: 0x06192615
   symbol_id: 0x9e3deb49
@@ -458608,6 +458666,7 @@ interface {
   symbol_id: 0x3d72f095
   symbol_id: 0x1d6c3f41
   symbol_id: 0xa05d587d
+  symbol_id: 0x55ebc92f
   symbol_id: 0x19d409c4
   symbol_id: 0x427db265
   symbol_id: 0x2ca7efbd
@@ -459724,6 +459783,7 @@ interface {
   symbol_id: 0xd941beb8
   symbol_id: 0xe4653a75
   symbol_id: 0x8aa99af0
+  symbol_id: 0x793a0b03
   symbol_id: 0x7ee06725
   symbol_id: 0xea065265
   symbol_id: 0xd50bc6e1
