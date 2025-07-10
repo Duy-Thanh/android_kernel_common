@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30247d46_66239514",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1836438
+      },
+      "writtenOn": "2025-07-10T18:02:37Z",
+      "side": 1,
+      "message": "Add Upstream-task: to this same bug with same justification as last.",
+      "revId": "6b0f58eee2f68554652139c295a11eda11f3ffe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f18690_e1abab97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1836438
+      },
+      "writtenOn": "2025-07-10T18:02:37Z",
+      "side": 1,
+      "message": "Change Link: to https://lore.kernel.org/chrome-platform/20250709132232.2475172-2-raduvele@google.com/",
+      "revId": "6b0f58eee2f68554652139c295a11eda11f3ffe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc6ad681_1cf120f2",
         "filename": "drivers/platform/chrome/cros_ec_typec.c",
         "patchSetId": 1
