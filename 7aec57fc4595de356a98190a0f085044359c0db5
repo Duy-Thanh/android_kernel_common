@@ -16,6 +16,24 @@
       "message": "Causes build errors, as mentioned in the bug ticket. Please address this.",
       "revId": "7aec57fc4595de356a98190a0f085044359c0db5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2317d9d7_6d012143",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960732
+      },
+      "writtenOn": "2025-07-10T21:51:01Z",
+      "side": 1,
+      "message": "It looks like when the original patch aosp/3655158 was merged, the backport tag wasn\u0027t actually resolved in the patch. It was fixed later in the relation chain in aosp/3655436, so the build was able to pass presubmit when merged together.\n\nIt looks like the dependency needs to be resolved for the original patch. Sorry about that.",
+      "parentUuid": "030b9e0b_2b4e5ada",
+      "revId": "7aec57fc4595de356a98190a0f085044359c0db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
