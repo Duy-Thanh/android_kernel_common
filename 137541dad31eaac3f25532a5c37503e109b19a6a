@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1099e9ab_647912fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1927972
+      },
+      "writtenOn": "2025-07-10T12:51:47Z",
+      "side": 1,
+      "message": "we were advised in Bug 427622615 to submit this patch to the GKI branch as a reference implementation. We hope this will help. Thanks.",
+      "revId": "137541dad31eaac3f25532a5c37503e109b19a6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
