@@ -1,5 +1,98 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "182bdf85_8496bf21",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-10T09:59:33Z",
+      "side": 1,
+      "message": "Maybe have this guy take the sg, so that it can set `-\u003enents` and `-\u003esg` itself, returning an integer error code instead of a pointer?\n\n```\nint kvm_arm_smmu_sg_alloc(kvm_arm_smmu_map_sg *map_sg);\n```\n\nYou could do the same for share and free.",
+      "range": {
+        "startLine": 430,
+        "startChar": 14,
+        "endLine": 430,
+        "endChar": 32
+      },
+      "revId": "b5766b9ec58613e78c156366619d411129a4effc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67728392_770663c1",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-10T09:59:33Z",
+      "side": 1,
+      "message": "nit: clearer as `nents` (but we know they are the same)",
+      "range": {
+        "startLine": 458,
+        "startChar": 15,
+        "endLine": 458,
+        "endChar": 18
+      },
+      "revId": "b5766b9ec58613e78c156366619d411129a4effc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1506f66c_3ddb3617",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-10T09:59:33Z",
+      "side": 1,
+      "message": "What if the map didn\u0027t manage to map everything?",
+      "range": {
+        "startLine": 459,
+        "startChar": 15,
+        "endLine": 459,
+        "endChar": 18
+      },
+      "revId": "b5766b9ec58613e78c156366619d411129a4effc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25ce9d10_c853155f",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2752,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-10T09:59:33Z",
+      "side": 1,
+      "message": "nit: You might now end up unmapping things you never managed to map if `__iommu_add_sg()` fails.",
+      "range": {
+        "startLine": 2752,
+        "startChar": 1,
+        "endLine": 2752,
+        "endChar": 12
+      },
+      "revId": "b5766b9ec58613e78c156366619d411129a4effc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
