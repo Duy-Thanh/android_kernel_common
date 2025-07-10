@@ -111,6 +111,30 @@
       },
       "revId": "f7efe3098a3fd9ed299ec8b0cf9f28f4d4706142",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1829bc9_e5e5c422",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-10T00:09:23Z",
+      "side": 1,
+      "message": "I\u0027m abandoning this patchset. I posted reverts in android15-6.6 (https://android-review.git.corp.google.com/q/topic:%22revert-3680024-IISNNCTTTA%22) and new version of this patchset on top of that. Once these are reviewed and merged I\u0027ll cherry pick the new version into this release branch.",
+      "parentUuid": "784c995f_2ded8aba",
+      "range": {
+        "startLine": 185,
+        "startChar": 1,
+        "endLine": 185,
+        "endChar": 41
+      },
+      "revId": "f7efe3098a3fd9ed299ec8b0cf9f28f4d4706142",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
