@@ -50,6 +50,24 @@
       "message": "Prevent submission since this won\u0027t go in with required ABI changes.",
       "revId": "0c0b4a338f1403efebf7cd2db04d0dcd03305b91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "612bfdd3_4b4b6439",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2025-07-10T19:24:27Z",
+      "side": 1,
+      "message": "corrected sequence , ABI change is following",
+      "parentUuid": "15f4d549_ffcf02fb",
+      "revId": "0c0b4a338f1403efebf7cd2db04d0dcd03305b91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
