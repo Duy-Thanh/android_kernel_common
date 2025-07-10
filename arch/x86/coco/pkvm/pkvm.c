@@ -64,14 +64,20 @@ static void pkvm_get_ve_info(struct ve_info *ve)
 
 static bool mmio_write(int size, unsigned long addr, unsigned long val)
 {
-	kvm_hypercall3(PKVM_GHC_IOWRITE, addr, size, val);
+	/*
+	 * The PKVM_GHC_IOWRITE will be emulated by the pkvm host. Use
+	 * the pkvm_host_hypercall wrapper to make sure no valuable
+	 * vcpu register can be shared with the pkvm host.
+	 */
+	pkvm_host_hypercall(PKVM_GHC_IOWRITE, addr, size, val);
 
 	return true;
 }
 
 static bool mmio_read(int size, unsigned long addr, unsigned long *val)
 {
-	*val = kvm_hypercall2(PKVM_GHC_IOREAD, addr, size);
+	/* Use pkvm_host_hypercall for the same reason with PKVM_GHC_IOWRITE */
+	*val = pkvm_host_hypercall(PKVM_GHC_IOREAD, addr, size);
 
 	return true;
 }

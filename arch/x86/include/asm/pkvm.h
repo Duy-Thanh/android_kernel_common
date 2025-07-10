@@ -146,6 +146,33 @@ int pkvm_set_mem_host_visibility(unsigned long addr, int numpages, bool enc);
 
 u64 __pkvm_module_call(u64 fn, struct tdx_module_args *out);
 
+#define __pkvm_host_hypercall0(f)			kvm_hypercall4(f, 0, 0, 0, 0)
+
+#define __pkvm_host_hypercall1(f, a1)			kvm_hypercall4(f, (unsigned long)(a1),	\
+								       0, 0, 0)
+
+#define __pkvm_host_hypercall2(f, a1, a2)		kvm_hypercall4(f, (unsigned long)(a1),	\
+								       (unsigned long)(a2), 0, 0)
+
+#define __pkvm_host_hypercall3(f, a1, a2, a3)		kvm_hypercall4(f, (unsigned long)(a1),	\
+								       (unsigned long)(a2),	\
+								       (unsigned long)(a3), 0)
+
+#define __pkvm_host_hypercall4(f, a1, a2, a3, a4)	kvm_hypercall4(f, (unsigned long)(a1),	\
+								       (unsigned long)(a2),	\
+								       (unsigned long)(a3),	\
+								       (unsigned long)(a4))
+/*
+ * The pkvm hypervisor will share RAX/RBX/RCX/RDX/RSI if some hypercalls need
+ * to be emulated by the pkvm host. Use kvm_hypercall4() to explicitly overwrite
+ * these 5 registers to make sure no valuable information will be shared.
+ */
+#define pkvm_host_hypercall(f, ...)							\
+	({										\
+		CONCATENATE(__pkvm_host_hypercall,					\
+			    COUNT_ARGS(__VA_ARGS__))(f, ##__VA_ARGS__);			\
+	})
+
 #else
 
 static inline void pkvm_guest_init_coco(void) { }
