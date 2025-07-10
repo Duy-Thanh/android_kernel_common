@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f66ebd7_d281ce1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-10T05:19:01Z",
+      "side": 1,
+      "message": "Looks like this will need a Lint +2 as it was submitted before the patch it cherry-picks was merged to android15-6.6",
+      "revId": "d4aed7ed470efa667595f6b9993ca46f6e97cb6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
