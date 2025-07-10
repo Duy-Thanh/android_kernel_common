@@ -16,6 +16,23 @@
       "message": "Thanks, Jaehyoung",
       "revId": "4ea16cfb602eaf9d1e759cda652f75f4e75666f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121410cb_5aaf69dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2025-07-10T09:02:55Z",
+      "side": 1,
+      "message": "Hi, Would anybody in google kernel team make process this commit? We must speed up this ABI mereging and going to respin process in \"android16-6.12-2025-07\" branch soon. Our SOC milestone is looking at this commit, because of VTS -GKI booting - Failure : Critical issue.\n\nThanks in advance.",
+      "revId": "4ea16cfb602eaf9d1e759cda652f75f4e75666f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
