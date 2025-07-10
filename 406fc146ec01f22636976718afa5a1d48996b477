@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fabce160_d0276baa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-10T12:40:43Z",
+      "side": 1,
+      "message": "At the moment it\u0027s just these 2 pKVM-specific hypercalls. But maybe we want to support some KVM PV hypercalls (e.g. KVM_HC_KICK_CPU, KVM_HC_SEND_IPI, KVM_HC_SCHED_YIELD) for pVM as well?\n\nSo how about modifying kvm_hypercallX() itself instead? Something like:\n\n```\n--- a/arch/x86/include/asm/kvm_para.h\n+++ b/arch/x86/include/asm/kvm_para.h\n@@ -52,6 +52,9 @@ static inline long kvm_hypercall1(unsigned int nr, unsigned long p1)\n \tif (cpu_feature_enabled(X86_FEATURE_TDX_GUEST))\n \t\treturn tdx_kvm_hypercall(nr, p1, 0, 0, 0);\n \n+\tif (pkvm_is_protected_guest())\n+\t\treturn kvm_hypercall4(nr, p1, 0, 0, 0);\n+\n \tasm volatile(KVM_HYPERCALL\n \t\t     : \"\u003da\"(ret)\n \t\t     : \"a\"(nr), \"b\"(p1)\n```\n\n(and similarly in all other kvm_hypercallX() functions)\n\nWe can also make pkvm_is_protected_guest() use a static key?",
+      "revId": "406fc146ec01f22636976718afa5a1d48996b477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd32d16d_f0165d80",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-10T12:40:43Z",
+      "side": 1,
+      "message": "Maybe pkvm_guest_hypercall()? Otherwise it might not be obvious if it is hypercall _to_ host or _from_ host (to pKVM).",
+      "revId": "406fc146ec01f22636976718afa5a1d48996b477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
