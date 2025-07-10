@@ -33,6 +33,23 @@
       "message": "Ignoring kernel commit checker because patch matches what went into android15-6.6.",
       "revId": "0c0b4a338f1403efebf7cd2db04d0dcd03305b91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15f4d549_ffcf02fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-10T17:45:16Z",
+      "side": 1,
+      "message": "Prevent submission since this won\u0027t go in with required ABI changes.",
+      "revId": "0c0b4a338f1403efebf7cd2db04d0dcd03305b91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
