@@ -16,6 +16,23 @@
       "message": "Respin Bug: 430819740",
       "revId": "0c0b4a338f1403efebf7cd2db04d0dcd03305b91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2da4e27f_55ffda64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2025-07-10T17:12:44Z",
+      "side": 1,
+      "message": "Ignoring kernel commit checker because patch matches what went into android15-6.6.",
+      "revId": "0c0b4a338f1403efebf7cd2db04d0dcd03305b91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
