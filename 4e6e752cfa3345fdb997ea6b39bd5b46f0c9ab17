@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332baf72_12337bc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1836438
+      },
+      "writtenOn": "2025-07-10T18:01:25Z",
+      "side": 1,
+      "message": "Add Upstream-Task: with the same bug. Add justification of \"Meeting feature complete deadline while upstream review is ongoing\".",
+      "revId": "4e6e752cfa3345fdb997ea6b39bd5b46f0c9ab17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c8a9cf_1a7a5a6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1836438
+      },
+      "writtenOn": "2025-07-10T18:01:25Z",
+      "side": 1,
+      "message": "Replace Link: with https://lore.kernel.org/chrome-platform/20250709132232.2475172-1-raduvele@google.com/",
+      "revId": "4e6e752cfa3345fdb997ea6b39bd5b46f0c9ab17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
