@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030b9e0b_2b4e5ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-10T21:39:45Z",
+      "side": 1,
+      "message": "Causes build errors, as mentioned in the bug ticket. Please address this.",
+      "revId": "7aec57fc4595de356a98190a0f085044359c0db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
