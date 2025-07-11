@@ -22,6 +22,30 @@
       },
       "revId": "d9828e6f68bf07aa053fc2d6515e9e7c619add08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c33465b_4f53bf3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-11T18:10:27Z",
+      "side": 1,
+      "message": "Rust Binder currently doesn\u0027t support that flag.",
+      "parentUuid": "b12b2d7e_1df7311b",
+      "range": {
+        "startLine": 9,
+        "startChar": 25,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "d9828e6f68bf07aa053fc2d6515e9e7c619add08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
