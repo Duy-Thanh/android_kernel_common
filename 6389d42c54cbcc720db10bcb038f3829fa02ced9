@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b67790c8_c2c3cf95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3935150
+      },
+      "writtenOn": "2025-07-11T17:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5718d54f_7f153bae",
+      "revId": "6389d42c54cbcc720db10bcb038f3829fa02ced9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e14ec330_36f6c00b",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-07-11T15:49:22Z",
       "side": 1,
       "message": "The original CL was pulled in as part of a merge commit:\n\n[Merge tag \u0027android16-6.12.30_r00\u0027 into android16-6.12](https://android-review.git.corp.google.com/c/kernel/common/+/3662353)\n\n1. Why does it need to be reverted to allow the other CLs to apply cleanly?\n\n2. Why weren\u0027t the preceding CLs included as part of the merge commit that brought in this CL?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 7
+      },
+      "revId": "6389d42c54cbcc720db10bcb038f3829fa02ced9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4408214_c85f8eee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3935150
+      },
+      "writtenOn": "2025-07-11T17:23:33Z",
+      "side": 1,
+      "message": "Need to revert this change due to an order mismatch between the upstream branch and the android16-6.12-desktop branch for npu-kmd patches. This ensures that the remaining upstream patches are applied cleanly",
+      "parentUuid": "e14ec330_36f6c00b",
       "range": {
         "startLine": 7,
         "startChar": 0,
