@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12b2d7e_1df7311b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-07-11T18:07:21Z",
+      "side": 1,
+      "message": "The size of binder_uintptr_t depends on the compilation flag -DBINDER_IPC_32BIT. Although I don\u0027t know if this is still a thing. I don\u0027t know that it is always a u64, maybe u32 is obsolete?",
+      "range": {
+        "startLine": 9,
+        "startChar": 25,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "d9828e6f68bf07aa053fc2d6515e9e7c619add08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
