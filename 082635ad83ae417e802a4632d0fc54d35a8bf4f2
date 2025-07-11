@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568c1d9c_b44b7c88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-07-11T14:59:57Z",
+      "side": 1,
+      "message": "Hello, this causes a KMI break due to CRC mismatch errors.",
+      "revId": "082635ad83ae417e802a4632d0fc54d35a8bf4f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
