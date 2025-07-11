@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8df3ab3f_9aad764f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-11T06:18:42Z",
+      "side": 1,
+      "message": "This FROMLIST patch fixes cros_ec_typec internals which is a pure vendor driver owned by Google. IMO due to the tight schedule it is acceptable for the common and moving whole drivers to DDK does not make sense.",
+      "revId": "f6d2ad16a123d4123f69f44aa815944a11687881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
