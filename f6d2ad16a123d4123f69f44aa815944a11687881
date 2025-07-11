@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "382c6995_366f3cfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-11T07:13:48Z",
+      "side": 1,
+      "message": "Please remove the duplicate signature.",
+      "revId": "f6d2ad16a123d4123f69f44aa815944a11687881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8df3ab3f_9aad764f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
