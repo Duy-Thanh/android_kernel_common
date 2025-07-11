@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f7fb7d3_787b1509",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-11T05:43:14Z",
+      "side": 1,
+      "message": "Above your signoff, please add an annotation message making clear the changes you made from the usptream patch.\nsomething like:\n[jing.xia: Switched BOOTPARAM_HUNG_TASK_PANIC to default to N, resolved collisions with other changes in android16-6.12 branch]",
+      "revId": "2b290502c75faecb892a0142512cc634b8af5617",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d03a007_4182f750",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
