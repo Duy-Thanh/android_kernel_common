@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0318f263_7bc43a9d",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-07-11T15:01:44Z",
+      "side": 1,
+      "message": "Thanks @gprocida@google.com! That was the one thing I didn\u0027t try because I didn\u0027t see the symbol used anywhere. Someday I need to look into the details of how tracepoints work....",
+      "revId": "26937a37f5c7869b659329307854fa5b4732a6c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
