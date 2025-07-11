@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b608bb20_0c73d3b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-11T03:02:51Z",
+      "side": 1,
+      "message": "Seems we need some refactoring if we want to implement like this. The reason is that, we have arch/x86/include/asm/pkvm.h, which declares pkvm_is_protected_guest(actually I will move this as an inline function for using static key). So the asm/kvm_para.h needs to \"#include \u003casm/pkvm.h\u003e\". But the asm/pkvm.h also \"#include \u003casm/kvm_param.h\u003e\". To resolve this interdependent, how about split the pkvm guest related headers from pkvm.h to pkvm_guest.h, so that the asm/kvm_para.h can just \"#include \u003casm/pkvm_guest.h\u003e\" which will not have the interdependent issue?\n\nAnd if we use the above snapshot by calling kvm_hypercall4 directly, then seems we don\u0027t need to define our pkvm_guest_hypercall, but just declare kvm_hypercall4 in the front, right?",
+      "parentUuid": "3d1c4dbf_a451e922",
+      "revId": "406fc146ec01f22636976718afa5a1d48996b477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd32d16d_f0165d80",
         "filename": "arch/x86/include/asm/pkvm.h",
         "patchSetId": 2
