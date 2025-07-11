@@ -481,6 +481,11 @@ void page_cache_ra_order(struct readahead_control *ractl,
 		goto fallback;
 	}
 
+	trace_android_vh_page_cache_ra_order_bypass(ractl, ra, new_order, &gfp,
+						    &bypass);
+	if (bypass)
+		goto fallback;
+
 	limit = min(limit, index + ra->size - 1);
 
 	new_order = min(mapping_max_folio_order(mapping), new_order);
