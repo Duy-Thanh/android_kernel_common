@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d1c4dbf_a451e922",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-11T00:31:45Z",
+      "side": 1,
+      "message": "Good point! That is better as we can still just use kvm_hypercallX() in the guest without knowing any details.",
+      "parentUuid": "fabce160_d0276baa",
+      "revId": "406fc146ec01f22636976718afa5a1d48996b477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd32d16d_f0165d80",
         "filename": "arch/x86/include/asm/pkvm.h",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2025-07-10T12:40:43Z",
       "side": 1,
       "message": "Maybe pkvm_guest_hypercall()? Otherwise it might not be obvious if it is hypercall _to_ host or _from_ host (to pKVM).",
+      "revId": "406fc146ec01f22636976718afa5a1d48996b477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc3758eb_ad070db9",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-11T00:31:45Z",
+      "side": 1,
+      "message": "I though pkvm_host_hypercall represents the hypercall to the pkvm host. But seems the name has confusion. Indeed, pkvm_guest_hypercal is better. :) Considering the td guest hypercall function is called tdx_kvm_hypercall (in the code snapshot of kvm_hypercallX()), maybe the pkvm_kvm_hypercall is another choice? Just wondering which one is better for people to understand what this function will do. What do you think?",
+      "parentUuid": "dd32d16d_f0165d80",
       "revId": "406fc146ec01f22636976718afa5a1d48996b477",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
