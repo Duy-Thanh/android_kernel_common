@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3399d85_26003f73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-11T07:14:49Z",
+      "side": 1,
+      "message": "Please remove the duplicate signature.",
+      "revId": "4b41059a95dff64af717daa7ca24ec6bed52c423",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8596aeb7_cac21642",
