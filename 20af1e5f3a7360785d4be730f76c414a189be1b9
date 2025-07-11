@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62243784_3f1a0274",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-07-11T09:48:10Z",
+      "side": 1,
+      "message": "If you are interested in mainly reviewing DRM related changes, then it is advised to add yourself as an owner of the appropriate sub-domain, like in this patch: aosp/3678686",
+      "revId": "20af1e5f3a7360785d4be730f76c414a189be1b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
