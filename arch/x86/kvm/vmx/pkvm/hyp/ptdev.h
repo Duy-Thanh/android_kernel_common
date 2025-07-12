@@ -16,6 +16,7 @@ struct pkvm_ptdev {
 	unsigned long index;
 	struct list_head iommu_node;
 	bool iommu_coherency;
+	bool devtlb_allowed;
 	/* cached value of BARs when attach to shadow vm */
 	u32 bars[6];
 

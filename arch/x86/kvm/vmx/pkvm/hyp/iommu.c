@@ -58,6 +58,12 @@ struct id_sync_walk_data {
 	 * range of pages in shadow page tables.
 	 */
 	struct shadow_pgt_sync_data *spgt_data;
+	/*
+	 * Used to hold the ptdev data allocated when
+	 * walking the SM context entry. This used while walking
+	 * the PASID table entry to avoid looking for ptdev again.
+	 */
+	struct pkvm_ptdev *ptdev;
 };
 
 #define DEFINE_ID_SYNC_WALK_DATA(name, _iommu, domain_id, _spgt_data)	\
@@ -66,6 +72,7 @@ struct id_sync_walk_data {
 		.shadow_pa = {0},					\
 		.did = (domain_id),					\
 		.spgt_data = (_spgt_data),				\
+		.ptdev = NULL,						\
 	}
 
 /*
@@ -87,6 +94,7 @@ struct id_sync_data {
 	struct pkvm_pgtable *shadow_id;
 	unsigned long vaddr;
 	struct shadow_pgt_sync_data *spgt_data;
+	struct pkvm_ptdev *ptdev;
 };
 
 static inline void *iommu_zalloc_pages(size_t size)
@@ -499,11 +507,29 @@ static bool sync_shadow_context_entry(struct id_sync_data *sdata)
 
 	if (ecap_smts(sdata->iommu_ecap)) {
 		if (sdata->guest_ptep && sdata->shadow_pa) {
+			bdf = sdata->vaddr >> DEVFN_SHIFT;
+			ptdev = iommu_find_ptdev(iommu, bdf, 0);
+
+			if (!ptdev) {
+				ptdev = iommu_add_ptdev(iommu, bdf, 0);
+				if (!ptdev)
+					return false;
+			}
+
+			/* Save the ptdev entry, to be used while walking the
+			 * PASID table entry
+			 */
+			sdata->ptdev = ptdev;
+
 			tmp.hi = guest_ce->hi;
 			tmp.lo = sdata->shadow_pa | (guest_ce->lo & 0xfff);
 
-			/* Clear DTE to make sure device TLB is disabled for security */
-			context_sm_clear_dte(&tmp);
+			/*
+			 * Make sure device TLB is disabled for security, unless
+			 * the device is explicitly trusted to use it.
+			 */
+			if (!ptdev->devtlb_allowed)
+				context_sm_clear_dte(&tmp);
 		}
 	} else {
 		/*
@@ -638,20 +664,12 @@ static bool sync_shadow_pasid_dir_entry(struct id_sync_data *sdata)
 /* sync pasid table entry when guest_ptep valid, otherwise un-present it */
 static bool sync_shadow_pasid_table_entry(struct id_sync_data *sdata)
 {
-	u16 bdf = sdata->vaddr >> DEVFN_SHIFT;
-	u32 pasid = sdata->vaddr & ((1UL << MAX_NR_PASID_BITS) - 1);
 	struct pkvm_iommu *iommu = pgt_to_pkvm_iommu(sdata->shadow_id);
-	struct pkvm_ptdev *ptdev = iommu_find_ptdev(iommu, bdf, pasid);
+	struct pkvm_ptdev *ptdev = sdata->ptdev;
 	struct pasid_entry *shadow_pte = sdata->shadow_ptep, tmp_pte = {0};
 	struct pasid_entry *guest_pte;
 	bool synced = false;
 	u64 type, aw;
-
-	if (!ptdev) {
-		ptdev = iommu_add_ptdev(iommu, bdf, pasid);
-		if (!ptdev)
-			return false;
-	}
 
 	if (!sdata->guest_ptep) {
 		if (pasid_pte_is_present(shadow_pte)) {
@@ -943,6 +961,9 @@ static int free_shadow_id_cb(struct pkvm_pgtable *pgt, unsigned long vaddr,
 
 	/* Un-present a present PASID Table entry */
 	if (LAST_LEVEL(level)) {
+		u32 pasid = (vaddr & ((1UL << MAX_NR_PASID_BITS) - 1));
+
+		sync_data.ptdev = iommu_find_ptdev(iommu, (vaddr >> DEVFN_SHIFT), pasid);
 		if (iommu_id_sync_entry(&sync_data))
 			mm_ops->put_page(ptep);
 		return 0;
@@ -1024,6 +1045,7 @@ static int init_sync_id_data(struct id_sync_data *sync_data,
 	sync_data->shadow_pa = 0;
 	sync_data->vaddr = vaddr;
 	sync_data->spgt_data = data->spgt_data;
+	sync_data->ptdev = data->ptdev;
 
 	return 0;
 }
@@ -1141,6 +1163,9 @@ static int sync_shadow_id_cb(struct pkvm_pgtable *vpgt, unsigned long vaddr,
 			 * a new reference count for the shadow id page.
 			 */
 			shadow_id->mm_ops->get_page(shadow_ptep);
+
+		/* Store the ptdev entry to use while walking the PASID table entry */
+		data->ptdev = sync_data.ptdev;
 	}
 
 	if ((flags == PKVM_PGTABLE_WALK_TABLE_PRE) && (!LAST_LEVEL(level))) {
