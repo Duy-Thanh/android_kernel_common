@@ -16,6 +16,40 @@
       "message": "Please fix this INFO reported by KernelCommit: Cherry pick is clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/9769378133bbc4b77458ed0a520b008439a45488) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d9769378133bbc4b77458ed0a520b008439a45488).\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "2b3e211e14f185b5bc154c6e6fe39ee89b8c2358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19933b2b_aeecfb7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4132933
+      },
+      "writtenOn": "2025-07-12T05:03:17Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Cherry pick is clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/9769378133bbc4b77458ed0a520b008439a45488) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d9769378133bbc4b77458ed0a520b008439a45488).\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "2b3e211e14f185b5bc154c6e6fe39ee89b8c2358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d709ae_661b13a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4132933
+      },
+      "writtenOn": "2025-07-12T05:03:17Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Cherry pick is clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\n\nCherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/9769378133bbc4b77458ed0a520b008439a45488) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d9769378133bbc4b77458ed0a520b008439a45488).\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "2b3e211e14f185b5bc154c6e6fe39ee89b8c2358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
