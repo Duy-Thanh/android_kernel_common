@@ -38,6 +38,7 @@
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/fs.h>
 
+<<<<<<< HEAD   (b0291e9adee64088b02548ae76481e9f1016bffc ANDROID: GKI: add devm_regulator_bulk_get_enable to db845c s)
 static void f2fs_zero_post_eof_page(struct inode *inode, loff_t new_size)
 {
 	loff_t old_size = i_size_read(inode);
@@ -48,6 +49,11 @@ static void f2fs_zero_post_eof_page(struct inode *inode, loff_t new_size)
 	/* zero or drop pages only in range of [old_size, new_size] */
 	truncate_pagecache(inode, old_size);
 }
+||||||| BASE
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_sync_file_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_sync_file_exit);
+>>>>>>> BRANCH (21ed84930c160ed721c131a67e5ae6181ac40e1e UPSTREAM: Revert "usb: xhci: Implement xhci_handshake_check_)
 
 vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
 {
@@ -1892,9 +1898,8 @@ next_alloc:
 			}
 		}
 
-		if (has_not_enough_free_secs(sbi, 0, f2fs_sb_has_blkzoned(sbi) ?
-			ZONED_PIN_SEC_REQUIRED_COUNT :
-			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))) {
+		if (has_not_enough_free_secs(sbi, 0,
+				sbi->reserved_pin_section)) {
 			f2fs_down_write(&sbi->gc_lock);
 			stat_inc_gc_call_count(sbi, FOREGROUND);
 			err = f2fs_gc(sbi, &gc_control);
