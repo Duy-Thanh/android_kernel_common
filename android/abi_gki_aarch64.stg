@@ -258550,6 +258550,56 @@ enumeration {
   }
 }
 enumeration {
+  id: 0xd59c9b2e
+  name: "key_need_perm"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "KEY_NEED_UNSPECIFIED"
+    }
+    enumerator {
+      name: "KEY_NEED_VIEW"
+      value: 1
+    }
+    enumerator {
+      name: "KEY_NEED_READ"
+      value: 2
+    }
+    enumerator {
+      name: "KEY_NEED_WRITE"
+      value: 3
+    }
+    enumerator {
+      name: "KEY_NEED_SEARCH"
+      value: 4
+    }
+    enumerator {
+      name: "KEY_NEED_LINK"
+      value: 5
+    }
+    enumerator {
+      name: "KEY_NEED_SETATTR"
+      value: 6
+    }
+    enumerator {
+      name: "KEY_NEED_UNLINK"
+      value: 7
+    }
+    enumerator {
+      name: "KEY_SYSADMIN_OVERRIDE"
+      value: 8
+    }
+    enumerator {
+      name: "KEY_AUTHTOKEN_OVERRIDE"
+      value: 9
+    }
+    enumerator {
+      name: "KEY_DEFER_PERM_CHECK"
+      value: 10
+    }
+  }
+}
+enumeration {
   id: 0x4e0bad92
   name: "kmsg_dump_reason"
   definition {
@@ -267599,6 +267649,13 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x09427c40
   parameter_id: 0xc93e017b
+}
+function {
+  id: 0x11ecf47b
+  return_type_id: 0x48b5725f
+  parameter_id: 0x054f691a
+  parameter_id: 0x054f691a
+  parameter_id: 0xc9082b19
 }
 function {
   id: 0x11f553a6
@@ -294018,6 +294075,13 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x9b4f443a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1d2bb1b6
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9b4f857e
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -304317,6 +304381,13 @@ function {
   id: 0xc5663ffe
   return_type_id: 0x3f37d9d5
   parameter_id: 0x30d9f406
+}
+function {
+  id: 0xc59b3a62
+  return_type_id: 0x3a800090
+  parameter_id: 0xe2836f7f
+  parameter_id: 0x33756485
+  parameter_id: 0xd59c9b2e
 }
 function {
   id: 0xc61915b4
@@ -328384,6 +328455,15 @@ elf_symbol {
   full_name: "down_interruptible"
 }
 elf_symbol {
+  id: 0x0b4ac64d
+  name: "down_killable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x36b6ebbf
+  type_id: 0x99c75a91
+  full_name: "down_killable"
+}
+elf_symbol {
   id: 0xf65b5ded
   name: "down_read"
   is_defined: true
@@ -342186,6 +342266,15 @@ elf_symbol {
   namespace: "MINIDUMP"
   type_id: 0xb8d6179f
   full_name: "lookup_page_ext"
+}
+elf_symbol {
+  id: 0x7d6628ba
+  name: "lookup_user_key"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1dc6c93b
+  type_id: 0xc59b3a62
+  full_name: "lookup_user_key"
 }
 elf_symbol {
   id: 0x493ce9fc
@@ -357175,6 +357264,15 @@ elf_symbol {
   full_name: "skb_set_owner_w"
 }
 elf_symbol {
+  id: 0x24587583
+  name: "skb_split"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4ac769d2
+  type_id: 0x11ecf47b
+  full_name: "skb_split"
+}
+elf_symbol {
   id: 0xf23330c5
   name: "skb_store_bits"
   is_defined: true
@@ -359441,6 +359539,15 @@ elf_symbol {
   crc: 0x62737e1d
   type_id: 0x09506558
   full_name: "sock_unregister"
+}
+elf_symbol {
+  id: 0xeab36c96
+  name: "sock_wake_async"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa435c6d8
+  type_id: 0x9b4f443a
+  full_name: "sock_wake_async"
 }
 elf_symbol {
   id: 0xba26b6a3
@@ -371919,6 +372026,7 @@ interface {
   symbol_id: 0x1f647fed
   symbol_id: 0xb832d27e
   symbol_id: 0x22b91009
+  symbol_id: 0x0b4ac64d
   symbol_id: 0xf65b5ded
   symbol_id: 0x4bd2ef24
   symbol_id: 0x6d790d49
@@ -373449,6 +373557,7 @@ interface {
   symbol_id: 0x06e891b4
   symbol_id: 0xad10cf0f
   symbol_id: 0x5868181f
+  symbol_id: 0x7d6628ba
   symbol_id: 0x493ce9fc
   symbol_id: 0x531bbd3e
   symbol_id: 0xb78a4a87
@@ -375113,6 +375222,7 @@ interface {
   symbol_id: 0x3c015632
   symbol_id: 0xea81e880
   symbol_id: 0xd1b9e255
+  symbol_id: 0x24587583
   symbol_id: 0xf23330c5
   symbol_id: 0x05746b6c
   symbol_id: 0xd034d018
@@ -375365,6 +375475,7 @@ interface {
   symbol_id: 0xeffe0f16
   symbol_id: 0x7b771682
   symbol_id: 0x39362be4
+  symbol_id: 0xeab36c96
   symbol_id: 0xba26b6a3
   symbol_id: 0xfdaa1c0d
   symbol_id: 0xe86ce747

@@ -103,6 +103,7 @@
   bt_sock_unlink
   bt_sock_unregister
   buffer_migrate_page
+  build_skb
   bus_find_device
   bus_for_each_dev
   bus_register
@@ -235,6 +236,7 @@
   cpu_hwcaps
   cpumask_any_but
   cpumask_next
+  cpumask_next_and
   cpu_number
   __cpu_online_mask
   cpu_pm_register_notifier
@@ -556,6 +558,7 @@
   down
   downgrade_write
   down_interruptible
+  down_killable
   down_read
   down_timeout
   down_trylock
@@ -919,6 +922,7 @@
   inet_frag_reasm_prepare
   inet_frags_fini
   inet_frags_init
+  init_dummy_netdev
   init_net
   init_pseudo
   __init_rwsem
@@ -1083,6 +1087,7 @@
   kobject_init_and_add
   kobject_put
   kobject_uevent
+  kobject_uevent_env
   kobj_sysfs_ops
   krealloc
   kstrdup
@@ -1244,6 +1249,7 @@
   netdev_err
   netdev_info
   netdev_notice
+  netdev_pick_tx
   netdev_printk
   netdev_set_default_ethtool_ops
   netdev_update_features
@@ -1609,6 +1615,7 @@
   register_netdev
   register_netdevice
   register_netdevice_notifier
+  register_netevent_notifier
   register_net_sysctl
   register_oom_notifier
   register_pernet_device
@@ -1700,6 +1707,7 @@
   rproc_report_crash
   rproc_shutdown
   rproc_vq_interrupt
+  rps_needed
   rtc_add_group
   rtc_time64_to_tm
   rtc_tm_to_time64
@@ -1847,6 +1855,7 @@
   skb_recv_datagram
   skb_scrub_packet
   skb_set_owner_w
+  skb_split
   skb_to_sgvec
   skb_trim
   skb_try_coalesce
@@ -2185,6 +2194,7 @@
   unregister_netdevice_many
   unregister_netdevice_notifier
   unregister_netdevice_queue
+  unregister_netevent_notifier
   unregister_net_sysctl_table
   unregister_oom_notifier
   unregister_pernet_device
