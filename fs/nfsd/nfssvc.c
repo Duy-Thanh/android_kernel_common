@@ -399,13 +399,27 @@ static int nfsd_startup_net(struct net *net, const struct cred *cred)
 	ret = nfsd_file_cache_start_net(net);
 	if (ret)
 		goto out_lockd;
-	ret = nfs4_state_start_net(net);
+<<<<<<< HEAD   (500138d8ebaeaece6e8db51c833c80a52e98743f ANDROID: GKI: disable CONFIG_DRM_MESON for ARM targets)
+||||||| BASE
+
+	ret = nfsd_reply_cache_init(nn);
+	if (ret)
+		goto out_filecache;
+
+=======
+
+	ret = nfsd_reply_cache_init(nn);
 	if (ret)
 		goto out_filecache;
 
 #ifdef CONFIG_NFSD_V4_2_INTER_SSC
 	nfsd4_ssc_init_umount_work(nn);
 #endif
+>>>>>>> BRANCH (3dea0e7f549ee8ce3ce9d058d6d5c494d9ad02dc Linux 5.15.186)
+	ret = nfs4_state_start_net(net);
+	if (ret)
+		goto out_filecache;
+
 	nn->nfsd_net_up = true;
 	return 0;
 

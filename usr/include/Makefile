@@ -10,10 +10,16 @@ UAPI_CFLAGS := -std=c90 -Wall -Werror=implicit-function-declaration
 
 # In theory, we do not care -m32 or -m64 for header compile tests.
 # It is here just because CONFIG_CC_CAN_LINK is tested with -m32 or -m64.
+<<<<<<< HEAD   (500138d8ebaeaece6e8db51c833c80a52e98743f ANDROID: GKI: disable CONFIG_DRM_MESON for ARM targets)
 UAPI_CFLAGS += $(filter -m32 -m64 --target=%, $(KBUILD_CFLAGS))
 
 # USERCFLAGS might contain sysroot location for CC.
 UAPI_CFLAGS += $(USERCFLAGS)
+||||||| BASE
+UAPI_CFLAGS += $(filter -m32 -m64, $(KBUILD_CFLAGS))
+=======
+UAPI_CFLAGS += $(filter -m32 -m64, $(KBUILD_CPPFLAGS) $(KBUILD_CFLAGS))
+>>>>>>> BRANCH (3dea0e7f549ee8ce3ce9d058d6d5c494d9ad02dc Linux 5.15.186)
 
 override c_flags = $(UAPI_CFLAGS) -Wp,-MMD,$(depfile) -I$(objtree)/usr/include
 
