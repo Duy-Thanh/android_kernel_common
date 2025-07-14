@@ -78,7 +78,7 @@ struct kvm_hyp_iommu_domain {
 
 /* Number of entries in the root domain table */
 #define KVM_IOMMU_DOMAINS_ROOT_ENTRIES \
-	(KVM_IOMMU_MAX_DOMAINS / KVM_IOMMU_DOMAINS_PER_PAGE)
+	DIV_ROUND_UP(KVM_IOMMU_MAX_DOMAINS, KVM_IOMMU_DOMAINS_PER_PAGE)
 
 #define KVM_IOMMU_DOMAINS_ROOT_SIZE \
 	(KVM_IOMMU_DOMAINS_ROOT_ENTRIES * sizeof(void *))
