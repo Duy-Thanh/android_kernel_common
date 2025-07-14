@@ -16,6 +16,23 @@
       "message": "this is a build-break:\n```\nERROR: Unable to find drivers/android/rust_binder.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_aarch64_tv/staging/lib/modules/6.12.30-android16-5-g5a7c0df98873-abP99698988-4k/kernel\n```\nDoes it build for you locally?",
       "revId": "523f15361637bbaa264286045758e556748ffc59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e41ada9c_280e2b3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1735919
+      },
+      "writtenOn": "2025-07-14T23:21:45Z",
+      "side": 1,
+      "message": "We will keep CONFIG_DEBUG_INFO for TVGKI because:\n- Memory saving that is strictly associated to CONFIG_DEBUG_INFO (after disabling CONFIG_DEBUG_INFO_BTF) is \u003c 1MB\n- CONFIG_DEBUG_INFO is required for CONFIG_RUST, which is mandatory.",
+      "revId": "523f15361637bbaa264286045758e556748ffc59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
