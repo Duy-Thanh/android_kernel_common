@@ -194,6 +194,11 @@ unsigned long hugetlb_change_protection(struct vm_area_struct *vma,
 
 bool is_hugetlb_entry_migration(pte_t pte);
 void hugetlb_unshare_all_pmds(struct vm_area_struct *vma);
+<<<<<<< HEAD   (a8986660cf70877ffcf184d3871299c15c5f7822 Merge f1082f5f3d02 ("hugetlb: unshare some PMDs when splitti)
+||||||| BASE
+=======
+void hugetlb_split(struct vm_area_struct *vma, unsigned long addr);
+>>>>>>> BRANCH (e8847d18cd9fff1edbb45e963d9141273c3b539c mm/hugetlb: unshare page tables during VMA split, not before)
 
 #else /* !CONFIG_HUGETLB_PAGE */
 
@@ -380,6 +385,12 @@ static inline vm_fault_t hugetlb_fault(struct mm_struct *mm,
 
 static inline void hugetlb_unshare_all_pmds(struct vm_area_struct *vma) { }
 
+<<<<<<< HEAD   (a8986660cf70877ffcf184d3871299c15c5f7822 Merge f1082f5f3d02 ("hugetlb: unshare some PMDs when splitti)
+||||||| BASE
+=======
+static inline void hugetlb_split(struct vm_area_struct *vma, unsigned long addr) {}
+
+>>>>>>> BRANCH (e8847d18cd9fff1edbb45e963d9141273c3b539c mm/hugetlb: unshare page tables during VMA split, not before)
 #endif /* !CONFIG_HUGETLB_PAGE */
 /*
  * hugepages at page global directory. If arch support
