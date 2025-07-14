@@ -634,6 +634,17 @@ DECLARE_HOOK(android_vh_mm_customize_zone_max_order,
 DECLARE_HOOK(android_vh_mm_customize_zone_pageset,
 	TP_PROTO(struct zone *zone, int *new_high, int *new_batch),
 	TP_ARGS(zone, new_high, new_batch));
+DECLARE_HOOK(android_vh_mm_customize_lru_add_dst,
+	TP_PROTO(struct lruvec *lruvec, struct folio *src, struct folio *dst, bool *added),
+	TP_ARGS(lruvec, src, dst, added));
+DECLARE_HOOK(android_vh_mm_lru_add_priv_folio,
+	TP_PROTO(struct lruvec *lruvec, enum lru_list lru, struct folio *folio,
+		 bool tail, bool *skip),
+	TP_ARGS(lruvec, lru, folio, tail, skip));
+DECLARE_HOOK(android_vh_mm_lru_del_priv_folio,
+	TP_PROTO(struct lruvec *lruvec, enum lru_list lru, struct folio *folio,
+		 bool *skip),
+	TP_ARGS(lruvec, lru, folio, skip));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
