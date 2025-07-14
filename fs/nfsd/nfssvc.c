@@ -407,6 +407,24 @@ static int nfsd_startup_net(int nrservs, struct net *net, const struct cred *cre
 	if (ret)
 		goto out_filecache;
 
+<<<<<<< HEAD   (b1f396d3ff203f27726fd3172aaf6286ffc36233 Merge 79a4fba715fa ("kbuild: Add KBUILD_CPPFLAGS to as-optio)
+||||||| BASE
+	ret = nfs4_state_start_net(net);
+	if (ret)
+		goto out_reply_cache;
+
+#ifdef CONFIG_NFSD_V4_2_INTER_SSC
+	nfsd4_ssc_init_umount_work(nn);
+#endif
+=======
+#ifdef CONFIG_NFSD_V4_2_INTER_SSC
+	nfsd4_ssc_init_umount_work(nn);
+#endif
+	ret = nfs4_state_start_net(net);
+	if (ret)
+		goto out_reply_cache;
+
+>>>>>>> BRANCH (8e56a792eba5a6b689073235d5abfa2e77949dec ALSA: hda/realtek: enable headset mic on Latitude 5420 Rugge)
 	nn->nfsd_net_up = true;
 	return 0;
 
