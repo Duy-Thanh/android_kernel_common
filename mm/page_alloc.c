@@ -927,6 +927,7 @@ static inline void __free_one_page(struct page *page,
 
 	account_freepages(zone, 1 << order, migratetype);
 
+	trace_android_vh_mm_customize_zone_max_order(zone, &max_order);
 	while (order < max_order) {
 		int buddy_mt = migratetype;
 
@@ -3087,6 +3088,8 @@ struct page *rmqueue(struct zone *preferred_zone,
 	 */
 	WARN_ON_ONCE((gfp_flags & __GFP_NOFAIL) && (order > 1));
 
+	trace_android_vh_mm_customize_rmqueue(zone, order, &alloc_flags, &migratetype);
+
 	if (likely(pcp_allowed_order(order))) {
 		page = rmqueue_pcplist(preferred_zone, zone, order,
 				       migratetype, alloc_flags);
@@ -3546,11 +3549,21 @@ retry:
 	z = ac->preferred_zoneref;
 	for_next_zone_zonelist_nodemask(zone, z, ac->highest_zoneidx,
 					ac->nodemask) {
+		bool try_this_zone = false;
+		bool suitable = true;
 		struct page *page;
 		unsigned long mark;
 
 		if (!zone_is_suitable(zone, order))
 			continue;
+
+		trace_android_vh_mm_customize_suitable_zone(zone, gfp_mask, order, ac->highest_zoneidx,
+							    &try_this_zone, &suitable);
+		if (!suitable)
+			continue;
+
+		if (try_this_zone)
+			goto try_this_zone;
 
 		trace_android_vh_should_skip_zone(zone, gfp_mask, order,
 			ac->migratetype, &should_skip_zone);
@@ -4993,6 +5006,8 @@ struct page *__alloc_pages(gfp_t gfp, unsigned int order, int preferred_nid,
 			&alloc_gfp, &alloc_flags))
 		return NULL;
 
+	trace_android_vh_mm_customize_ac(gfp, order, &ac, &alloc_flags);
+
 	trace_android_rvh_try_alloc_pages_gfp(&page, order, gfp, gfp_zone(gfp));
 	if (page)
 		goto out;
@@ -5952,6 +5967,8 @@ static void zone_set_pageset_high_and_batch(struct zone *zone, int cpu_online)
 	if (zone->pageset_high == new_high &&
 	    zone->pageset_batch == new_batch)
 		return;
+
+	trace_android_vh_mm_customize_zone_pageset(zone, &new_high, &new_batch);
 
 	zone->pageset_high = new_high;
 	zone->pageset_batch = new_batch;

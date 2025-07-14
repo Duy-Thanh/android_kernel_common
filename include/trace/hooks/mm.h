@@ -12,6 +12,7 @@
 
 #include <trace/hooks/vendor_hooks.h>
 
+struct alloc_context;
 struct shmem_inode_info;
 struct folio;
 struct page_vma_mapped_walk;
@@ -615,6 +616,24 @@ DECLARE_HOOK(android_vh_pageset_update,
 DECLARE_HOOK(android_vh_mempool_alloc_skip_wait,
 	TP_PROTO(gfp_t *gfp_flags, bool *skip_wait),
 	TP_ARGS(gfp_flags, skip_wait));
+DECLARE_HOOK(android_vh_mm_customize_ac,
+	TP_PROTO(gfp_t gfp, unsigned int order, struct alloc_context *ac,
+		 unsigned int *alloc_flags),
+	TP_ARGS(gfp, order, ac, alloc_flags));
+DECLARE_HOOK(android_vh_mm_customize_rmqueue,
+	TP_PROTO(struct zone *zone, unsigned int order, unsigned int *alloc_flags,
+		 int *migratetype),
+	TP_ARGS(zone, order, alloc_flags, migratetype));
+DECLARE_HOOK(android_vh_mm_customize_suitable_zone,
+	TP_PROTO(struct zone *zone, gfp_t gfp, int order, enum zone_type highest_zoneidx,
+		 bool *try_this_zone, bool *suitable),
+	TP_ARGS(zone, gfp, order, highest_zoneidx, try_this_zone, suitable));
+DECLARE_HOOK(android_vh_mm_customize_zone_max_order,
+	TP_PROTO(struct zone *zone, int *max_order),
+	TP_ARGS(zone, max_order));
+DECLARE_HOOK(android_vh_mm_customize_zone_pageset,
+	TP_PROTO(struct zone *zone, int *new_high, int *new_batch),
+	TP_ARGS(zone, new_high, new_batch));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
