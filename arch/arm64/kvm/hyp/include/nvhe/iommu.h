@@ -54,6 +54,8 @@ void kvm_iommu_iotlb_gather_add_page(struct kvm_hyp_iommu_domain *domain,
 void kvm_iommu_host_stage2_idmap(phys_addr_t start, phys_addr_t end,
 				 enum kvm_pgtable_prot prot);
 int kvm_iommu_snapshot_host_stage2(struct kvm_hyp_iommu_domain *domain);
+int kvm_iommu_iotlb_sync_map(pkvm_handle_t domain_id,
+			     unsigned long iova, size_t size);
 
 #define KVM_IOMMU_PADDR_CACHE_MAX		((size_t)511)
 /**
@@ -138,7 +140,8 @@ struct kvm_iommu_ops {
 			      struct iommu_iotlb_gather *gather,
 			      struct kvm_iommu_paddr_cache *cache);
 	phys_addr_t (*iova_to_phys)(struct kvm_hyp_iommu_domain *domain, unsigned long iova);
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, int (*iotlb_sync_map)(struct kvm_hyp_iommu_domain *domain,
+						  unsigned long iova, size_t size));
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
