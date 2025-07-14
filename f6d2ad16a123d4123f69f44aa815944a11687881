@@ -69,6 +69,24 @@
       "parentUuid": "8df3ab3f_9aad764f",
       "revId": "f6d2ad16a123d4123f69f44aa815944a11687881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba42612_9d9ce1dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2025-07-14T02:33:26Z",
+      "side": 1,
+      "message": "The first patch is already in for-next branch (thus, it shouldn\u0027t be an issue to be in upstream kernel).\n\nThe second patch is still reviewing.  It depends on whether the patch makes sense and how fast the review conversation goes.",
+      "parentUuid": "d1fe115b_71b661a6",
+      "revId": "f6d2ad16a123d4123f69f44aa815944a11687881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
