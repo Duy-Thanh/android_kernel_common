@@ -34,6 +34,24 @@
       "parentUuid": "c4705e0d_739daf89",
       "revId": "05d9d4739db19c6251467e4a434a2d3810f0e9c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b70a7f86_2650bb07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-07-14T10:52:14Z",
+      "side": 1,
+      "message": "Friendly ping :)\n\nWould it be more acceptable if I would limit the change to only providing the TRNG implementation?",
+      "parentUuid": "0ee23d23_1e4e8e9e",
+      "revId": "05d9d4739db19c6251467e4a434a2d3810f0e9c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
