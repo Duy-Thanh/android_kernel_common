@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/431084427",
       "revId": "4fa33b9a520220f1270bc915e7dad148dbe60b86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c68155e_3b187040",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-07-14T08:05:32Z",
+      "side": 1,
+      "message": "Reverted in 3680698.  Please abandon this one.",
+      "revId": "4fa33b9a520220f1270bc915e7dad148dbe60b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
