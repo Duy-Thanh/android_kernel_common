@@ -87,6 +87,24 @@
       "parentUuid": "d1fe115b_71b661a6",
       "revId": "f6d2ad16a123d4123f69f44aa815944a11687881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184aac5d_2ff2b58e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1836438
+      },
+      "writtenOn": "2025-07-14T04:53:16Z",
+      "side": 1,
+      "message": "We have time to fix the review comments well before 6.18. Functionally, the current CL was reviewed by myself and Benson (driver maintainers) and it does the correct thing (protects against simultaneous access from EC events and sysfs calls).\n\nCan we +2 this and then replace it with the FROMGIT/UPSTREAM later?",
+      "parentUuid": "7ba42612_9d9ce1dc",
+      "revId": "f6d2ad16a123d4123f69f44aa815944a11687881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
