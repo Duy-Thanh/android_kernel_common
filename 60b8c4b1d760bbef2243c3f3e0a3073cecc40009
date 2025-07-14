@@ -16,6 +16,24 @@
       "message": "Where is the conflict in this patch?",
       "revId": "60b8c4b1d760bbef2243c3f3e0a3073cecc40009",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9cdb526_d0305b1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3266585
+      },
+      "writtenOn": "2025-07-14T06:58:05Z",
+      "side": 1,
+      "message": "If there is none could you help to mark this as UPSTREAM?",
+      "parentUuid": "08f1be4e_727f8817",
+      "revId": "60b8c4b1d760bbef2243c3f3e0a3073cecc40009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
