@@ -34,6 +34,24 @@
       "parentUuid": "08f1be4e_727f8817",
       "revId": "60b8c4b1d760bbef2243c3f3e0a3073cecc40009",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e68dd3c_47f4c1a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3728328
+      },
+      "writtenOn": "2025-07-14T07:23:56Z",
+      "side": 1,
+      "message": "it doesn\u0027t qualify upstream due to to minor NS conflict, hence updated comments accordingly with appropriate tag Bypass-Upstream-Divergence-Tracking",
+      "parentUuid": "b9cdb526_d0305b1b",
+      "revId": "60b8c4b1d760bbef2243c3f3e0a3073cecc40009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
