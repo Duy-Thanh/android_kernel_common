@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ed58021_3243a12e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-14T07:08:50Z",
+      "side": 1,
+      "message": "Just uploaded another two patches, one is to split the header and the other one is to use static key for detecting pkvm guest.",
+      "parentUuid": "d7d3bab0_7fc6cd2a",
+      "revId": "406fc146ec01f22636976718afa5a1d48996b477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd32d16d_f0165d80",
         "filename": "arch/x86/include/asm/pkvm.h",
         "patchSetId": 2
