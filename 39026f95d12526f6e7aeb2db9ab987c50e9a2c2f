@@ -16,6 +16,24 @@
       "message": "Please add  Bug: or Fixes: tag in the commit log",
       "revId": "39026f95d12526f6e7aeb2db9ab987c50e9a2c2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0835964_bc3ea757",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-14T11:06:55Z",
+      "side": 1,
+      "message": "Got it. Will update with a Bug number as this patch is not a fixes.",
+      "parentUuid": "259df805_ae106f14",
+      "revId": "39026f95d12526f6e7aeb2db9ab987c50e9a2c2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
