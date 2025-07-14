@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99e4c652_2d55c5d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-14T18:20:42Z",
+      "side": 1,
+      "message": "Sorry, as someone who hasn\u0027t followed the mm layer so closely, could you be a bit more explicit as to why this patch is an ANDORID patch and not something sent upstream? I assume this is a fix to previously merged ANDROID patches? Which ones?",
+      "revId": "21aae286e96e2e52753c192754dd43a80d3641c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eafe84be_3d87a7fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-14T18:20:42Z",
+      "side": 1,
+      "message": "Probably should have a Fixes: tag",
+      "revId": "21aae286e96e2e52753c192754dd43a80d3641c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
