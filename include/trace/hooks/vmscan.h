@@ -120,6 +120,11 @@ DECLARE_HOOK(android_vh_should_memcg_bypass,
 DECLARE_HOOK(android_vh_isolate_folio_type,
 	TP_PROTO(int swappiness, int *type, int *tier, int *type_to_scan),
 	TP_ARGS(swappiness, type, tier, type_to_scan));
+DECLARE_HOOK(android_vh_mm_isolate_priv_lru,
+	TP_PROTO(unsigned long nr_to_scan, struct lruvec *lruvec, enum lru_list lru,
+		struct list_head *dst, int reclaim_idx, bool may_unmap,
+		unsigned long *nr_scanned, unsigned long *nr_taken),
+	TP_ARGS(nr_to_scan, lruvec, lru, dst, reclaim_idx, may_unmap, nr_scanned, nr_taken));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

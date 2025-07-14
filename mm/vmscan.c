@@ -2290,6 +2290,12 @@ static unsigned long isolate_lru_folios(unsigned long nr_to_scan,
 	unsigned long skipped = 0;
 	unsigned long scan, total_scan, nr_pages;
 	LIST_HEAD(folios_skipped);
+	unsigned long nr_scanned_before = *nr_scanned;
+
+	trace_android_vh_mm_isolate_priv_lru(nr_to_scan, lruvec, lru, dst, sc->reclaim_idx,
+					     sc->may_unmap, nr_scanned, &nr_taken);
+	if (*nr_scanned != nr_scanned_before)
+		return nr_taken;
 
 	total_scan = 0;
 	scan = 0;
@@ -2547,7 +2553,7 @@ static unsigned long shrink_inactive_list(unsigned long nr_to_scan,
 		enum lru_list lru)
 {
 	LIST_HEAD(folio_list);
-	unsigned long nr_scanned;
+	unsigned long nr_scanned = 0;
 	unsigned int nr_reclaimed = 0;
 	unsigned long nr_taken;
 	struct reclaim_stat stat;
@@ -2669,7 +2675,7 @@ static void shrink_active_list(unsigned long nr_to_scan,
 			       enum lru_list lru)
 {
 	unsigned long nr_taken;
-	unsigned long nr_scanned;
+	unsigned long nr_scanned = 0;
 	unsigned long vm_flags;
 	LIST_HEAD(l_hold);	/* The folios which were snipped off */
 	LIST_HEAD(l_active);
