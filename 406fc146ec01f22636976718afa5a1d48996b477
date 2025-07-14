@@ -159,6 +159,24 @@
       "parentUuid": "bc3758eb_ad070db9",
       "revId": "406fc146ec01f22636976718afa5a1d48996b477",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b58ea9f3_52cdae37",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-14T14:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e58bb684_84dcdd76",
+      "revId": "406fc146ec01f22636976718afa5a1d48996b477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
