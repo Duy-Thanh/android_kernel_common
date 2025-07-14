@@ -98,6 +98,8 @@ static inline void ClearPageHugeFreed(struct page *head)
 
 /* Forward declaration */
 static int hugetlb_acct_memory(struct hstate *h, long delta);
+static void hugetlb_unshare_pmds(struct vm_area_struct *vma,
+		unsigned long start, unsigned long end);
 
 static inline void unlock_or_release_subpool(struct hugepage_subpool *spool)
 {
@@ -5797,6 +5799,7 @@ static void hugetlb_unshare_pmds(struct vm_area_struct *vma,
 	mmu_notifier_invalidate_range_start(&range);
 	i_mmap_lock_write(vma->vm_file->f_mapping);
 	for (address = start; address < end; address += PUD_SIZE) {
+<<<<<<< HEAD   (383d139c256179e777ffa194c52383608627febb Merge 8e56a792eba5 ("ALSA: hda/realtek: enable headset mic o)
 		unsigned long tmp = address;
 
 		ptep = huge_pte_offset(mm, address, sz);
@@ -5824,6 +5827,23 @@ void hugetlb_unshare_all_pmds(struct vm_area_struct *vma)
 {
 	hugetlb_unshare_pmds(vma, ALIGN(vma->vm_start, PUD_SIZE),
 			ALIGN_DOWN(vma->vm_end, PUD_SIZE));
+||||||| BASE
+=======
+		ptep = huge_pte_offset(mm, address, sz);
+		if (!ptep)
+			continue;
+		ptl = huge_pte_lock(h, mm, ptep);
+		huge_pmd_unshare(mm, vma, &address, ptep);
+		spin_unlock(ptl);
+	}
+	flush_hugetlb_tlb_range(vma, start, end);
+	i_mmap_unlock_write(vma->vm_file->f_mapping);
+	/*
+	 * No need to call mmu_notifier_invalidate_range(), see
+	 * Documentation/mm/mmu_notifier.rst.
+	 */
+	mmu_notifier_invalidate_range_end(&range);
+>>>>>>> BRANCH (f1082f5f3d02f2f9b4ca36642274529cf5ddaf34 hugetlb: unshare some PMDs when splitting VMAs)
 }
 
 #ifdef CONFIG_CMA
