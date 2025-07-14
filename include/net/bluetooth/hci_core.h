@@ -29,7 +29,12 @@
 #include <linux/idr.h>
 #include <linux/leds.h>
 #include <linux/rculist.h>
+<<<<<<< HEAD   (c9f588b3cf23a64b5e265ad8f3d34e72ec97be73 Merge 33713f7cda3d ("platform/mellanox: mlxreg-lc: Fix logic)
 #include <linux/android_kabi.h>
+||||||| BASE
+=======
+#include <linux/srcu.h>
+>>>>>>> BRANCH (bceae1daf3029326dc8e1f5a7a497f3e9691352f x86/traps: Initialize DR6 by writing its architectural reset)
 
 #include <net/bluetooth/hci.h>
 #include <net/bluetooth/hci_sync.h>
@@ -349,6 +354,7 @@ struct amp_assoc {
 
 struct hci_dev {
 	struct list_head list;
+	struct srcu_struct srcu;
 	struct mutex	lock;
 
 	struct ida	unset_handle_ida;
