@@ -52,6 +52,24 @@
       "parentUuid": "0ee23d23_1e4e8e9e",
       "revId": "05d9d4739db19c6251467e4a434a2d3810f0e9c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ae0490_443d976d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-15T08:33:41Z",
+      "side": 1,
+      "message": "Right, I think providing module ops specific to implementing TRNG would be better. That way, pKVM core can call those if they exist and then issue the SMC if not.",
+      "parentUuid": "b70a7f86_2650bb07",
+      "revId": "05d9d4739db19c6251467e4a434a2d3810f0e9c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
