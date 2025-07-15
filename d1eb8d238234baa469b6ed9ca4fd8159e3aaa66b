@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a01d13_7a78d37b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2025-07-15T12:27:23Z",
+      "side": 1,
+      "message": "Smoke tested on RB5 with suggested changes.",
+      "revId": "d1eb8d238234baa469b6ed9ca4fd8159e3aaa66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca26523_225b1b04",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2025-07-15T12:27:23Z",
+      "side": 1,
+      "message": "`base_kernel \u003d \":kernel_aarch64_16k\",`",
+      "revId": "d1eb8d238234baa469b6ed9ca4fd8159e3aaa66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e7ed187_cb650e9f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2025-07-15T12:27:23Z",
+      "side": 1,
+      "message": "Don\u0027t need this. `build.config.db845c` is deprecated.",
+      "revId": "d1eb8d238234baa469b6ed9ca4fd8159e3aaa66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dd9cef7_413a57b0",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2025-07-15T12:27:23Z",
+      "side": 1,
+      "message": "Don\u0027t need `kmi_symbol_list` iiuc",
+      "revId": "d1eb8d238234baa469b6ed9ca4fd8159e3aaa66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5133124d_106977d0",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2025-07-15T12:27:23Z",
+      "side": 1,
+      "message": "Don\u0027t need the kernel_abi() block. With that we run into `ERROR: .../common/BUILD.bazel:838:1: name \u0027kernel_abi\u0027 is not defined (did you mean \u0027kernel_build\u0027?)`",
+      "revId": "d1eb8d238234baa469b6ed9ca4fd8159e3aaa66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77df195b_e28427ca",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2025-07-15T12:27:23Z",
+      "side": 1,
+      "message": "`\":kernel_aarch64_16k_modules\",`",
+      "revId": "d1eb8d238234baa469b6ed9ca4fd8159e3aaa66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f696672_95885f1d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2025-07-15T12:27:23Z",
+      "side": 1,
+      "message": "typo\n`destdir \u003d \"out/db845c_16k/dist\",`",
+      "revId": "d1eb8d238234baa469b6ed9ca4fd8159e3aaa66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
