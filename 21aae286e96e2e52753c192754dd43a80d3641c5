@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b1899df_59298b7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2025-07-15T03:55:45Z",
+      "side": 1,
+      "message": "I\u0027m so sorry and thanks for pointing this out, I almost stole someone else\u0027s work.\n\nI pushed again with BACKPORT (because there was a conflict that needed to be resolved).  \nhttps://android-review.googlesource.com/c/kernel/common/+/3697406\n\nThanks again, thank you for your review",
+      "parentUuid": "5a4f7a81_458ead21",
+      "revId": "21aae286e96e2e52753c192754dd43a80d3641c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eafe84be_3d87a7fc",
