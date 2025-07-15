@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a4f7a81_458ead21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-15T02:24:17Z",
+      "side": 1,
+      "message": "So, if its cherry-picked cleanly from an upstream commit UPSTREAM is the right tag (including the sha of the upstream commit)\n\nIf its from upstream, but requires changes, use BACKPORT (also referencing the upstream commit sha), and also include context on what what changed and why.\n\nTaking a single fix from a series using the UPSTREAM tag is totally ok if the patch stands on its own properly and doesn\u0027t have any dependencies on prior or later changes. If you modify it to avoid dependencies on other patches in the series, use BACKPORT and add that context in the commit message.\n\nThe problem in this case is that appears that you\u0027ve taken someone else\u0027s work, and submitted it as your own. Never do that.  Instead preserve their changelog, and append any extra context or annotations of changes you\u0027ve made, align with your Signed off by.",
+      "parentUuid": "c2b45f1b_88604dde",
+      "revId": "21aae286e96e2e52753c192754dd43a80d3641c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eafe84be_3d87a7fc",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
