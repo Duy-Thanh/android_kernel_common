@@ -16,6 +16,24 @@
       "message": "We may want to wait for the patches to become FROMGIT before going through with this update.",
       "revId": "4ea22e3b571a9bd0830e7dfe8cac79815c48bc24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0536030_f9cf1bee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-15T18:45:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd7e65cc_267f6e13",
+      "revId": "4ea22e3b571a9bd0830e7dfe8cac79815c48bc24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
