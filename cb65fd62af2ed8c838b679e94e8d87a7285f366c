@@ -16,6 +16,23 @@
       "message": "If `CONFIG_INTEL_IDLE` cannot be changed to `tristate` in the upstream we need to be sure it is acceptable for the common kernel in the long term. Please submit this CL for the `android-mainline` branch first.",
       "revId": "cb65fd62af2ed8c838b679e94e8d87a7285f366c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b621d7e_e7fc0e75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-16T06:33:12Z",
+      "side": 1,
+      "message": "No explanation of why this is needed?",
+      "revId": "cb65fd62af2ed8c838b679e94e8d87a7285f366c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
