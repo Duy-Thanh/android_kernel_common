@@ -573,6 +573,7 @@ void perf_sample_event_took(u64 sample_len_ns)
 			     sysctl_perf_event_sample_rate);
 	}
 }
+EXPORT_SYMBOL_GPL(perf_sample_event_took);
 
 static atomic64_t perf_event_id;
 
@@ -9634,6 +9635,7 @@ int perf_event_overflow(struct perf_event *event,
 {
 	return __perf_event_overflow(event, 1, data, regs);
 }
+EXPORT_SYMBOL_GPL(perf_event_overflow);
 
 /*
  * Generic software event infrastructure
