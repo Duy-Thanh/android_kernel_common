@@ -16,6 +16,24 @@
       "message": "while this is ok for C, for readability sake, I\u0027d avoid using the exact same name for local variables and local labels.  Maybe name the bool `use_this_zone` or similar, just to have some distinguishing feature.",
       "revId": "9697b6e8ed28cbc2c48d55c977bef654b9b9666f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc77ded8_790aec92",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3566,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2025-07-16T02:09:09Z",
+      "side": 1,
+      "message": "Done. \nThanks for your review, the local variable has been renamed to use_this_zone.",
+      "parentUuid": "fa859d48_23b0e324",
+      "revId": "9697b6e8ed28cbc2c48d55c977bef654b9b9666f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
