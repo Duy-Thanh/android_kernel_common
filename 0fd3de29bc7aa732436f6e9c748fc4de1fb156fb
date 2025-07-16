@@ -1,0 +1,177 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72ace431_4b238a84",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-16T20:14:14Z",
+      "side": 1,
+      "message": "Please either move this hook into zone_max_order() or change its name to reflect it\u0027s positioning inside page freeing path.",
+      "range": {
+        "startLine": 930,
+        "startChar": 1,
+        "endLine": 930,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ad0bbcd8_c61b5440",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 872,
+                "startChar": 0,
+                "endLine": 873,
+                "endChar": 0
+              },
+              "replacement": "\tint max_order \u003d zone-\u003eorder \u0026\u0026 zone_idx(zone) \u003d\u003d ZONE_NOMERGE ? zone-\u003eorder : MAX_ORDER;\n\n\ttrace_android_vh_mm_customize_zone_max_order(zone, \u0026max_order);\n\treturn max_order;\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 930,
+                "startChar": 0,
+                "endLine": 931,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "0fd3de29bc7aa732436f6e9c748fc4de1fb156fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ba1898b_3450957c",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3560,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-16T20:14:14Z",
+      "side": 1,
+      "message": "Can you use `trace_android_vh_should_skip_zone` to skip this zone? If not, please add the missing `ac-\u003emigratetype` parameter here and add a comment for `trace_android_vh_should_skip_zone` that it is deprecated by this hook so that we do not carry it into new kernel versions.",
+      "range": {
+        "startLine": 3560,
+        "startChar": 2,
+        "endLine": 3560,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cf360e07_2698eaab",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3560,
+                "startChar": 0,
+                "endLine": 3560,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_should_skip_zone(zone, gfp_mask, order,\n\t\t\tac-\u003emigratetype, \u0026should_skip_zone);\n\t\tif (should_skip_zone)\n\t\t\tcontinue;\n\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3568,
+                "startChar": 0,
+                "endLine": 3573,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 4635,
+                "startChar": 0,
+                "endLine": 4639,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 4647,
+                "startChar": 0,
+                "endLine": 4647,
+                "endChar": 0
+              },
+              "replacement": "\t/* Do not loop if specifically requested */\n\tif (gfp_mask \u0026 __GFP_NORETRY)\n\t\tgoto nopage;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0fd3de29bc7aa732436f6e9c748fc4de1fb156fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e715cec_481042f9",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5009,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-16T20:14:14Z",
+      "side": 1,
+      "message": "Do you really need access to the entire alloc_context? This is an internal structure defined inside mm/internal.h and this exposes it to the modules. If you are modifying a specific field please consider passing it instead of the whole structure.",
+      "range": {
+        "startLine": 5009,
+        "startChar": 46,
+        "endLine": 5009,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "21424d60_b0029a0d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 4444,
+                "startChar": 0,
+                "endLine": 4445,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long pages_reclaimed \u003d 0;\t\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 5009,
+                "startChar": 0,
+                "endLine": 5010,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_mm_customize_ac(gfp, order, ac.migratetype,\n\t\t\tac.preferred_zoneref-\u003ezone, \u0026alloc_flags);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0fd3de29bc7aa732436f6e9c748fc4de1fb156fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
