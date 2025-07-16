@@ -1542,11 +1542,13 @@
   perf_event_create_kernel_counter
   perf_event_disable
   perf_event_enable
+  perf_event_overflow
   perf_event_release_kernel
   perf_event_update_userpage
   perf_pmu_migrate_context
   perf_pmu_register
   perf_pmu_unregister
+  perf_sample_event_took
   perf_trace_buf_alloc
   perf_trace_run_bpf_submit
   pfn_is_map_memory
