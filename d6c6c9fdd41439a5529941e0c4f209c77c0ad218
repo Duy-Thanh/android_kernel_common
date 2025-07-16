@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7ad564_d995a689",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3326,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-16T14:01:47Z",
+      "side": 1,
+      "message": "why is this needed?  Can\u0027t your driver properly allocate the needed amount of memory instead of relying on a hook?",
+      "range": {
+        "startLine": 3326,
+        "startChar": 0,
+        "endLine": 3326,
+        "endChar": 67
+      },
+      "revId": "d6c6c9fdd41439a5529941e0c4f209c77c0ad218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
