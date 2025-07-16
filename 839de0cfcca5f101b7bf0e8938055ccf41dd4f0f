@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4291f5e7_fccfcf1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-07-16T12:30:16Z",
+      "side": 1,
+      "message": "Please leave the commit message as it was created by the automerger - at the last position there is `am: \u003cSHA\u003e` - we want to keep this format as it indicate the change was created by the automerger. The format is as the following: \n`ANDROID: \u003coriginal commit subject\u003e am: \u003coriginal SHA\u003e`\n\nJust copy paste from the first revision of the CL - you can even do this in gerrit UI. The commit should look like (you can take this and copy):\n\n\n\nANDROID: GKI: Update oplus symbol list am: a76eb2b67b\n\nOriginal change: https://android-review.googlesource.com/c/kernel/common/+/3692334\n\nChange-Id: I30e3b7cf99387a8a0d2d52181440a35bb22fb049\nSigned-off-by: Automerger Merge Worker \u003candroid-build-automerger-merge-worker@system.gserviceaccount.com\u003e\nSigned-off-by: Radoslaw Biernacki \u003cbiernacki@google.com\u003e\n\nBypass-Upstream-Divergence-Tracking",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 48
+      },
+      "revId": "839de0cfcca5f101b7bf0e8938055ccf41dd4f0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf0db8e_9cdc5ce8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-07-16T12:30:16Z",
+      "side": 1,
+      "message": "You don\u0027t need upstream task - this patch will never be upstreamed for sure. To satisfy the linter, you can add at the bottom of the commit:\n\nBypass-Upstream-Divergence-Tracking",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 24
+      },
+      "revId": "839de0cfcca5f101b7bf0e8938055ccf41dd4f0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
