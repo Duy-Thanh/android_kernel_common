@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2aa511_f5037598",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3659872
+      },
+      "writtenOn": "2025-07-16T14:42:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4291f5e7_fccfcf1a",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 48
+      },
+      "revId": "839de0cfcca5f101b7bf0e8938055ccf41dd4f0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdf0db8e_9cdc5ce8",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-07-16T12:30:16Z",
       "side": 1,
       "message": "You don\u0027t need upstream task - this patch will never be upstreamed for sure. To satisfy the linter, you can add at the bottom of the commit:\n\nBypass-Upstream-Divergence-Tracking",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 24
+      },
+      "revId": "839de0cfcca5f101b7bf0e8938055ccf41dd4f0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be07af78_eb5299a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3659872
+      },
+      "writtenOn": "2025-07-16T14:42:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fdf0db8e_9cdc5ce8",
       "range": {
         "startLine": 15,
         "startChar": 0,
