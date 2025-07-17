@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2829bf7c_67f81625",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2025-07-17T03:08:02Z",
+      "side": 1,
+      "message": "Thanks, it has been modified as suggested.",
+      "parentUuid": "72ace431_4b238a84",
+      "range": {
+        "startLine": 930,
+        "startChar": 1,
+        "endLine": 930,
+        "endChar": 64
+      },
+      "revId": "0fd3de29bc7aa732436f6e9c748fc4de1fb156fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ba1898b_3450957c",
@@ -123,6 +147,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfb4b4c_e577cef2",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3560,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2025-07-17T03:08:02Z",
+      "side": 1,
+      "message": "The existing trace_android_vh_should_skip_zone does not meet my needs. (The new parameter \u0026use_this_zone is needed).\n\nI cannot modify it (because it is not submitted by vivo), so I added trace_android_vh_mm_customize_suitable_zone.",
+      "parentUuid": "3ba1898b_3450957c",
+      "range": {
+        "startLine": 3560,
+        "startChar": 2,
+        "endLine": 3560,
+        "endChar": 45
+      },
+      "revId": "0fd3de29bc7aa732436f6e9c748fc4de1fb156fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e715cec_481042f9",
@@ -170,6 +218,30 @@
           ]
         }
       ],
+      "revId": "0fd3de29bc7aa732436f6e9c748fc4de1fb156fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dc535b6_e0173d0c",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5009,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2025-07-17T03:08:02Z",
+      "side": 1,
+      "message": "Thanks, the parameters of trace_android_vh_mm_customize_ac have been reworked.",
+      "parentUuid": "4e715cec_481042f9",
+      "range": {
+        "startLine": 5009,
+        "startChar": 46,
+        "endLine": 5009,
+        "endChar": 49
+      },
       "revId": "0fd3de29bc7aa732436f6e9c748fc4de1fb156fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
