@@ -33,6 +33,42 @@
       "message": "No explanation of why this is needed?",
       "revId": "cb65fd62af2ed8c838b679e94e8d87a7285f366c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f6449a4_1f689c06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2025-07-17T17:39:17Z",
+      "side": 1,
+      "message": "Android mainline patch is already merged: https://android-review.googlesource.com/c/kernel/common/+/3687252",
+      "parentUuid": "8a8e11e7_eda0c26b",
+      "revId": "cb65fd62af2ed8c838b679e94e8d87a7285f366c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69ebdea_8ef2e3d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2025-07-17T17:39:17Z",
+      "side": 1,
+      "message": "Updated details in commit msg.",
+      "parentUuid": "6b621d7e_e7fc0e75",
+      "revId": "cb65fd62af2ed8c838b679e94e8d87a7285f366c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
