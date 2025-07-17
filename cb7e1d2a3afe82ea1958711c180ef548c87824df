@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7622bcd4_6d04d825",
+        "filename": "mm/gcma_sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-17T01:57:32Z",
+      "side": 1,
+      "message": "Why do you need this information from the modules? The changelog should describe that.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e45a0f98_03ecc3a1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/gcma_sysfs.c",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "cb7e1d2a3afe82ea1958711c180ef548c87824df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "836643da_6e9a3375",
         "filename": "mm/gcma_sysfs.c",
         "patchSetId": 2
