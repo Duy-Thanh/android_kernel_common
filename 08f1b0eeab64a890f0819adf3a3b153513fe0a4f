@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6dbb0fb_c7643b49",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-17T01:48:20Z",
+      "side": 1,
+      "message": "As every cpu will be there and pgt_switched will be set to true by the first cpu, so looks like the other cpu seems doesn\u0027t need to do this again. Or we have some reason for putting the line here?",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aadec6b_ca96cba2",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/reprivilege.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-17T01:48:20Z",
+      "side": 1,
+      "message": "nit: asm/kvm_vcpu_regs.h defines the offset of registers, which may give a better reability.",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa1336a_c418bf02",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/reprivilege.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-17T01:48:20Z",
+      "side": 1,
+      "message": "By looking at the vmx_asm.S, seems the RSP is not saved to kvm_vcpu-\u003earch.regs when exits from the host VM, as the guest rsp will be automatically saved to VMCS GUEST_RSP field and the pkvm rsp will be automatically loaded to the hardware from the VMCS HOST_RSP field. So we probably need to get the rsp from GUEST_RSP field rather than from kvm_vcpu-\u003earch.regs.",
+      "range": {
+        "startLine": 118,
+        "startChar": 22,
+        "endLine": 118,
+        "endChar": 25
+      },
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
