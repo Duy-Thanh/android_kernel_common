@@ -46,6 +46,30 @@
       },
       "revId": "d6c6c9fdd41439a5529941e0c4f209c77c0ad218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f7a0cf5_5b9bfbb8",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3326,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-17T08:50:16Z",
+      "side": 1,
+      "message": "Please fix the offending drivers that are taking up so much memory, this should not be an issue in a normal system as I do not see any upstream bug reports.  Do you have a link to the relevant reports on how to get it resolved somewhere?  You can not rely on a hook for forever for this type of thing, the correct fix should be done instead.",
+      "parentUuid": "cbf44d4d_f2faa303",
+      "range": {
+        "startLine": 3326,
+        "startChar": 0,
+        "endLine": 3326,
+        "endChar": 67
+      },
+      "revId": "d6c6c9fdd41439a5529941e0c4f209c77c0ad218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
