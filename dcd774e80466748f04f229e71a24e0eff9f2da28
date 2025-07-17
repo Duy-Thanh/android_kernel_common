@@ -16,6 +16,24 @@
       "message": "If you don\u0027t think this information is commonly useful, I can use existing vendor hook.\nLet me know your opinion.",
       "revId": "dcd774e80466748f04f229e71a24e0eff9f2da28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92db2ab9_b0cd5029",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-17T02:35:36Z",
+      "side": 1,
+      "message": "I think it is useful but I don\u0027t want to modify existing UAPI with out-of-tree entries. This potentially can break maminfo parsers. It\u0027s better to have an additional sysfs node that does not modify existing files.",
+      "parentUuid": "2e913906_fe8bf7fd",
+      "revId": "dcd774e80466748f04f229e71a24e0eff9f2da28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
