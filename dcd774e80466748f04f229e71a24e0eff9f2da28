@@ -34,6 +34,24 @@
       "parentUuid": "2e913906_fe8bf7fd",
       "revId": "dcd774e80466748f04f229e71a24e0eff9f2da28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe82b19_2634d4c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-07-17T02:54:05Z",
+      "side": 1,
+      "message": "As you said, to avoid potential break in meminfo parsers other vendors might use, it seems better to use existing meminfo vendor hooks for SS only.",
+      "parentUuid": "92db2ab9_b0cd5029",
+      "revId": "dcd774e80466748f04f229e71a24e0eff9f2da28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -22,6 +22,30 @@
       },
       "revId": "496391e2993ffd87d8a12dd0b56c26c0a3ed37a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51e41b48_d4b3eca1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-07-17T02:54:05Z",
+      "side": 1,
+      "message": "I also can use sysfs nodes, but I thought it would be more accessible.\nBecause in SS, memory profiling is done via /proc/meminfo.\nAnyway, I don\u0027t want to affect others, so I will add them via meminfo vendor hooks.",
+      "parentUuid": "2be84f54_f4f50db4",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "496391e2993ffd87d8a12dd0b56c26c0a3ed37a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
