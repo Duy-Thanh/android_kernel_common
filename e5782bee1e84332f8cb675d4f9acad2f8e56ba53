@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603cb9ee_bec4cd42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-17T15:23:50Z",
+      "side": 1,
+      "message": "nit: Please use at least 12 characters and then enclose the following subject in parentheses",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "e5782bee1e84332f8cb675d4f9acad2f8e56ba53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88356f1a_11196236",
+        "filename": "arch/arm64/include/asm/kvm_hypevents_defs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-17T15:23:50Z",
+      "side": 1,
+      "message": "Can you avoid renaming this? It seems to affect the KMI",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "e5782bee1e84332f8cb675d4f9acad2f8e56ba53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91b252fa_483b2018",
+        "filename": "arch/arm64/include/asm/kvm_hypevents_defs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-17T15:23:50Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 24,
+        "startChar": 16,
+        "endLine": 24,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a2e49c55_5a7d0e7f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_hypevents_defs.h",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned short\thyp_id;\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_hypevents_defs.h",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "\tconst char\tfmt[127];\t\n\tconst char\tnull;\t\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e5782bee1e84332f8cb675d4f9acad2f8e56ba53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffb94fb_954cc107",
+        "filename": "arch/arm64/kvm/hyp_events.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-17T15:23:50Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:INITIALISED_STATIC: do not initialise statics to 0\n\nERROR:INITIALISED_STATIC: do not initialise statics to 0",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "e5782bee1e84332f8cb675d4f9acad2f8e56ba53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
