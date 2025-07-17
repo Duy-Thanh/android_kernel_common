@@ -16,6 +16,24 @@
       "message": "Minchan, as GCMA author, do you see issues with adding these stats?",
       "revId": "7a78776c4e314d5465926b02995da5800ce98c8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad85525_6f5ac0f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-17T17:00:31Z",
+      "side": 1,
+      "message": "How about adding \n\ngcma_stat_add/sub(ALLOCATED, X) in gcma_alloc_range and gcma_free_range.\nThus, you can know how much memory are freed currenlty via Total - (CACHED + ALLOCATED)\n\nThen, we can avoid atomic update whenever page alloc/free.",
+      "parentUuid": "dab2eb8f_24fc2d89",
+      "revId": "7a78776c4e314d5465926b02995da5800ce98c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
