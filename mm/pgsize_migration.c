@@ -272,22 +272,10 @@ static const struct vm_operations_struct pad_vma_ops = {
 };
 
 /*
- * Returns a new VMA representing the padding in @vma;
- * returns NULL if no padding in @vma or allocation failed.
+ * Initialize @pad VMA fields with information from the original @vma.
  */
-static struct vm_area_struct *get_pad_vma(struct vm_area_struct *vma)
+static void init_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *pad)
 {
-	struct vm_area_struct *pad;
-
-	if (!is_pgsize_migration_enabled() || !(vma->vm_flags & VM_PAD_MASK))
-		return NULL;
-
-	pad = kzalloc(sizeof(struct vm_area_struct), GFP_KERNEL);
-	if (!pad) {
-		pr_warn("Page size migration: Failed to allocate padding VMA");
-		return NULL;
-	}
-
 	memcpy(pad, vma, sizeof(struct vm_area_struct));
 
 	/* Remove file */
@@ -307,32 +295,21 @@ static struct vm_area_struct *get_pad_vma(struct vm_area_struct *vma)
 	__vm_flags_mod(pad, 0, VM_READ|VM_WRITE|VM_EXEC);
 	/* Remove padding bits */
 	__vm_flags_mod(pad, 0, VM_PAD_MASK);
-
-	return pad;
 }
 
 /*
- * Calls the show_pad_vma_fn on the @pad VMA, and frees the copies of @vma
- * and @pad.
+ * Calls the show_pad_vma_fn on the @pad VMA.
  */
 void show_map_pad_vma(struct vm_area_struct *vma, struct seq_file *m,
 		      void *func, bool smaps)
 {
-	struct vm_area_struct *pad = get_pad_vma(vma);
-	if (!pad)
+	if (!is_pgsize_migration_enabled() || !(vma->vm_flags & VM_PAD_MASK))
 		return;
 
-	/*
-	 * This cannot happen. If @pad vma was allocated the corresponding
-	 * @vma should have the VM_PAD_MASK bit(s) set.
-	 */
-	BUG_ON(!(vma->vm_flags & VM_PAD_MASK));
+	struct vm_area_struct pad_vma;
+	struct vm_area_struct *pad = &pad_vma;
 
-	/*
-	 * This cannot happen. @pad is a section of the original VMA.
-	 * Therefore @vma cannot be null if @pad is not null.
-	 */
-	BUG_ON(!vma);
+	init_pad_vma(vma, pad);
 
 	/* The pad VMA should be anonymous. */
 	BUG_ON(pad->vm_file);
@@ -347,8 +324,6 @@ void show_map_pad_vma(struct vm_area_struct *vma, struct seq_file *m,
 		((show_pad_smaps_fn)func)(m, pad);
 	else
 		((show_pad_maps_fn)func)(m, pad);
-
-	kfree(pad);
 }
 
 /*
