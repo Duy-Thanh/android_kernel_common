@@ -22,6 +22,30 @@
       },
       "revId": "d6c6c9fdd41439a5529941e0c4f209c77c0ad218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbf44d4d_f2faa303",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3326,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2025-07-17T00:39:38Z",
+      "side": 1,
+      "message": "Insufficient buddy highatomic memory caused the SKB module allocs GFP_ATOMIC memory fail,as the SKB module dynamically allocs and free memory on demand. If a specified size of memory is reserved in advance, it can easily trigger a system memory shortage. In addition, buddy highatomic memory can be applied for all modules in the system, which is more reasonable.\nWe hope to adjust the buddy MIGRATE_HIGHATOMIC memory as needed.",
+      "parentUuid": "df7ad564_d995a689",
+      "range": {
+        "startLine": 3326,
+        "startChar": 0,
+        "endLine": 3326,
+        "endChar": 67
+      },
+      "revId": "d6c6c9fdd41439a5529941e0c4f209c77c0ad218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
