@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "836643da_6e9a3375",
+        "filename": "mm/gcma_sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-17T01:50:56Z",
+      "side": 1,
+      "message": "There is not need to change this code if all you want is an additional gcma_stat_get() exported function. Do not add unnecessary churn.",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 62
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c7568971_62aa6f30",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/gcma_sysfs.c",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 42,
+                "endChar": 0
+              },
+              "replacement": "\treturn sprintf(buf, \"%llu\\n\", gcma_stat_get(STORED_PAGE));\n"
+            },
+            {
+              "path": "mm/gcma_sysfs.c",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "\treturn sprintf(buf, \"%llu\\n\", gcma_stat_get(LOADED_PAGE));\n"
+            },
+            {
+              "path": "mm/gcma_sysfs.c",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "\treturn sprintf(buf, \"%llu\\n\", gcma_stat_get(EVICTED_PAGE));\n"
+            },
+            {
+              "path": "mm/gcma_sysfs.c",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 63,
+                "endChar": 0
+              },
+              "replacement": "\treturn sprintf(buf, \"%llu\\n\", gcma_stat_get(CACHED_PAGE));\n"
+            },
+            {
+              "path": "mm/gcma_sysfs.c",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "\treturn sprintf(buf, \"%llu\\n\", gcma_stat_get(DISCARDED_PAGE));\n"
+            },
+            {
+              "path": "mm/gcma_sysfs.c",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "\tint ret;\n\n\tret \u003d kobject_init_and_add(\u0026gcma_kobj, \u0026gcma_ktype, mm_kobj, \"gcma\");\n\tif (ret)\n\t\treturn ret;\n\n\treturn 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cb7e1d2a3afe82ea1958711c180ef548c87824df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
