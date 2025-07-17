@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61707172_c87cb3f6",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3570,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-17T15:19:07Z",
+      "side": 1,
+      "message": "Please add a comment next to this hook that it is deprecated by `trace_android_vh_mm_customize_suitable_zone`",
+      "range": {
+        "startLine": 3570,
+        "startChar": 2,
+        "endLine": 3570,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bd291aec_6bf0f559",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3570,
+                "startChar": 0,
+                "endLine": 3570,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * This hook is deprecated by trace_android_vh_mm_customize_suitable_zone.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "109b0ab9f819478e5033ad523081e720d8a17bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
