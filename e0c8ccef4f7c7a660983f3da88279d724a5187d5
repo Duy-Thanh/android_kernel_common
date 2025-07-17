@@ -126,6 +126,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b4ad64_0f755b28",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-17T21:25:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "306e8c67_114c1466",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0010f3e_56521900",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-17T21:25:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "306e8c67_114c1466",
+      "revId": "e0c8ccef4f7c7a660983f3da88279d724a5187d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa5f4bfc_1717afc9",

@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42f8a5b1_20fd6fc5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-17T21:25:50Z",
+      "side": 1,
+      "message": "These are the same as the local variables `hyp_mem_base` and `hyp_mem_size` in __pkvm_init_finalise()? So we can just make those variables global, and don\u0027t need to pass them to protect_pkvm_pages() then?",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f838e18_c5a9606a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-17T21:25:50Z",
+      "side": 1,
+      "message": "Why exactly does it need this access _during_ reprivileging (not just _after_ reprivileging, when the EPT doesn\u0027t matter anymore)?",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6dbb0fb_c7643b49",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
         "patchSetId": 11
@@ -14,6 +48,23 @@
       "writtenOn": "2025-07-17T01:48:20Z",
       "side": 1,
       "message": "As every cpu will be there and pgt_switched will be set to true by the first cpu, so looks like the other cpu seems doesn\u0027t need to do this again. Or we have some reason for putting the line here?",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4203a03a_f626ce5a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-17T21:25:50Z",
+      "side": 1,
+      "message": "nit: pkvm_host_ept_map() may fail, at least hypothetically?\nWe hardly need to handle that, but we might want to just print an error?",
       "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +105,23 @@
         "endLine": 118,
         "endChar": 25
       },
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "945f9618_48f3f34e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-17T21:25:50Z",
+      "side": 1,
+      "message": "Well, then PKVM_HC_INIT_FINALISE is special too, in the same way?\nAnd BTW we should disallow PKVM_HC_INIT_FINALISE after pkvm initialization as well, and we don\u0027t seem to do that yet?",
       "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
