@@ -336743,6 +336743,24 @@ elf_symbol {
   full_name: "hid_destroy_device"
 }
 elf_symbol {
+  id: 0xfba34655
+  name: "hid_hw_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf1a9ea7a
+  type_id: 0x9fefc71b
+  full_name: "hid_hw_start"
+}
+elf_symbol {
+  id: 0x52d444b1
+  name: "hid_hw_stop"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb47c8305
+  type_id: 0x13e1603f
+  full_name: "hid_hw_stop"
+}
+elf_symbol {
   id: 0x7d0e44ca
   name: "hid_ignore"
   is_defined: true
@@ -372945,6 +372963,8 @@ interface {
   symbol_id: 0xccc593d6
   symbol_id: 0x97a02af0
   symbol_id: 0x2ffc7c7e
+  symbol_id: 0xfba34655
+  symbol_id: 0x52d444b1
   symbol_id: 0x7d0e44ca
   symbol_id: 0x10de460f
   symbol_id: 0x0eb11e95
