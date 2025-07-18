@@ -5614,6 +5614,7 @@ int mas_preallocate(struct ma_state *mas, void *entry, gfp_t gfp)
 	int request = 1;
 	int ret;
 
+<<<<<<< HEAD   (92a87015490df4dac76185ce05197817521dc0fd Merge 23c165dde88e ("net/sched: Abort __tc_modify_qdisc if p)
 
 	if (unlikely(!mas->index && mas->last == ULONG_MAX))
 		goto ask_now;
@@ -5660,7 +5661,18 @@ ask_now:
 	mas_node_count_gfp(mas, request, gfp);
 	mas->mas_flags |= MA_STATE_PREALLOC;
 	if (likely(!mas_is_err(mas)))
+||||||| BASE
+	mas_node_count_gfp(mas, 1 + mas_mt_height(mas) * 3, gfp);
+	mas->mas_flags |= MA_STATE_PREALLOC;
+	if (likely(!mas_is_err(mas)))
+=======
+	mas->mas_flags &= ~MA_STATE_PREALLOC;
+	mas_node_count_gfp(mas, 1 + mas_mt_height(mas) * 3, gfp);
+	if (likely(!mas_is_err(mas))) {
+		mas->mas_flags |= MA_STATE_PREALLOC;
+>>>>>>> BRANCH (d69cd64bd5af41c6fd409313504089970edaf02f maple_tree: fix MA_STATE_PREALLOC flag in mas_preallocate())
 		return 0;
+	}
 
 	mas_set_alloc_req(mas, 0);
 	ret = xa_err(mas->node);
