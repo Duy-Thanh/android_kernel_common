@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d08f6283_460b0fd8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-18T14:47:20Z",
+      "side": 1,
+      "message": "Per my latest comment in https://android-review.googlesource.com/c/kernel/common/+/3590992/comment/9b2cd540_fc70f3db/ (that it doesn\u0027t make much difference whether to clear pvmfw here in the hypercall, or in the host right after returning from this hypercall, so it might be better to do it in the host in all cases, for simplicity), I agree it\u0027s useful to unprotect the hypervisor memory (or at least just the pvmfw memory) here.\n\nStill, I\u0027m just curious: any other reasons to unprotect it here, besides clearing pvmfw?",
+      "parentUuid": "42807ae5_815e7e30",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6dbb0fb_c7643b49",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
         "patchSetId": 11
