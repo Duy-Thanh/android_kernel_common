@@ -10024,12 +10024,26 @@ static int complete_hypercall_exit(struct kvm_vcpu *vcpu)
 	return kvm_skip_emulated_instruction(vcpu);
 }
 
+#ifdef CONFIG_PKVM_INTEL
+static int handle_memcache_refill(struct kvm_vcpu *vcpu, int refill_size)
+{
+	int ret;
+
+	ret = topup_pkvm_memcache(&vcpu->arch.stage2_mc, refill_size, 0);
+	if (ret)
+		return ret;
+
+	/* handled */
+	return 1;
+}
+
 static int kvm_pkvm_hypercall(struct kvm_vcpu *vcpu)
 {
 	unsigned long val, nr;
 	int size;
 	gpa_t gpa;
 	int ret;
+	int refill_size;
 
 	nr = kvm_rax_read(vcpu);
 	gpa = kvm_rbx_read(vcpu);
@@ -10049,6 +10063,10 @@ static int kvm_pkvm_hypercall(struct kvm_vcpu *vcpu)
 		vcpu->mmio_is_write = 1;
 		ret = kvm_sev_es_mmio_write(vcpu, gpa, size, &val);
 		break;
+	case PKVM_GHC_SHARE_MEM:
+		refill_size = kvm_rsi_read(vcpu);
+		ret = handle_memcache_refill(vcpu, refill_size);
+		break;
 	default:
 		ret = 1;
 		break;
@@ -10056,6 +10074,7 @@ static int kvm_pkvm_hypercall(struct kvm_vcpu *vcpu)
 
 	return ret;
 }
+#endif
 
 unsigned long __kvm_emulate_hypercall(struct kvm_vcpu *vcpu, unsigned long nr,
 				      unsigned long a0, unsigned long a1,
@@ -10155,8 +10174,10 @@ int kvm_emulate_hypercall(struct kvm_vcpu *vcpu)
 	int op_64_bit;
 	int cpl;
 
+#ifdef CONFIG_PKVM_INTEL
 	if (pkvm_is_protected_vcpu(vcpu))
 		return kvm_pkvm_hypercall(vcpu);
+#endif
 
 	if (kvm_xen_hypercall_enabled(vcpu->kvm))
 		return kvm_xen_hypercall(vcpu);

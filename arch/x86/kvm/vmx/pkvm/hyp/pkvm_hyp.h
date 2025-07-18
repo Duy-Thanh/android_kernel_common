@@ -66,4 +66,6 @@ int pkvm_init_shadow_vm(struct kvm *kvm);
 void pkvm_teardown_shadow_vm(struct kvm *kvm);
 int pkvm_init_shadow_vcpu(struct kvm_vcpu *vcpu);
 void pkvm_teardown_shadow_vcpu(struct kvm_vcpu *vcpu);
+int pkvm_refill_memcache(struct pkvm_vcpu *pkvm_vcpu);
+
 #endif

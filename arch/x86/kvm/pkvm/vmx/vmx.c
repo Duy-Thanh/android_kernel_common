@@ -5112,9 +5112,11 @@ static int handle_invlpg(struct kvm_vcpu *vcpu)
 static int kvm_pkvm_hypercall(struct kvm_vcpu *vcpu)
 {
 	u64 nr, a0, a1, a2, a3;
+	struct pkvm_vcpu *pkvm_vcpu = to_pkvm_vcpu(vcpu);
 	struct pkvm_vm *pkvm_vm = to_pkvm(vcpu->kvm);
 	int cpl = vmx_get_cpl(vcpu);
 	int ret = -KVM_EPERM;
+	int memcache_refill;
 
 	if (cpl) {
 		kvm_inject_gp(vcpu, 0);
@@ -5129,6 +5131,30 @@ static int kvm_pkvm_hypercall(struct kvm_vcpu *vcpu)
 
 	switch (nr) {
 	case PKVM_GHC_SHARE_MEM:
+
+		pkvm_refill_memcache(pkvm_vcpu);
+
+		/* Check if enough mem in memcache to handle mapping, if not
+		 * don't even start to prevent further permissions errors
+		 * (otherwise part of the pages could changed ownership and
+		 * other not so repeating the steps after refilling will result
+		 * in permissions errors)
+		 */
+		memcache_refill = __pkvm_pgtable_max_pages(a1 >> PAGE_SHIFT);
+		if (vcpu->arch.stage2_mc.nr_pages < memcache_refill) {
+
+			/* Pass the refill request size in rsi */
+			kvm_rsi_write(vcpu, memcache_refill);
+
+			/*
+			 * If not enough mem, request should be forwarded to the
+			 * host for handling memcache refill after which the
+			 * instruction will be re-issued (don't skip the
+			 * instruction)
+			 */
+			return 0;
+		}
+
 		ret = __pkvm_guest_share_host(&pkvm_vm->pgt, a0, a1,
 					      &vcpu->arch.stage2_mc);
 		break;
