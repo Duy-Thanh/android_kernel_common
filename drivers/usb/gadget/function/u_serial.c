@@ -290,8 +290,8 @@ __acquires(&port->port_lock)
 			break;
 	}
 
-	if (do_tty_wake && port->port.tty)
-		tty_wakeup(port->port.tty);
+	if (do_tty_wake)
+		tty_port_tty_wakeup(&port->port);
 	return status;
 }
 
@@ -575,9 +575,15 @@ static int gs_start_io(struct gs_port *port)
 		gs_start_tx(port);
 		/* Unblock any pending writes into our circular buffer, in case
 		 * we didn't in gs_start_tx() */
+<<<<<<< HEAD   (67e62b61a1f66784fb0bd4401db84028d137f480 Merge d69cd64bd5af ("maple_tree: fix MA_STATE_PREALLOC flag )
 		if (!port->port.tty)
 			goto out;
 		tty_wakeup(port->port.tty);
+||||||| BASE
+		tty_wakeup(port->port.tty);
+=======
+		tty_port_tty_wakeup(&port->port);
+>>>>>>> BRANCH (07acd398613bd09a4d6e7d021d53b86f53d13dda usb: cdnsp: Fix issue with CV Bad Descriptor test)
 	} else {
 out:
 		/* Free reqs only if we are still connected */

@@ -1914,6 +1914,15 @@ struct xhci_hcd {
 #define XHCI_RESET_TO_DEFAULT	BIT_ULL(44)
 #define XHCI_TRB_OVERFETCH	BIT_ULL(45)
 #define XHCI_ZHAOXIN_HOST	BIT_ULL(46)
+<<<<<<< HEAD   (67e62b61a1f66784fb0bd4401db84028d137f480 Merge d69cd64bd5af ("maple_tree: fix MA_STATE_PREALLOC flag )
+||||||| BASE
+#define XHCI_WRITE_64_HI_LO	BIT_ULL(47)
+#define XHCI_CDNS_SCTX_QUIRK	BIT_ULL(48)
+=======
+#define XHCI_WRITE_64_HI_LO	BIT_ULL(47)
+#define XHCI_CDNS_SCTX_QUIRK	BIT_ULL(48)
+#define XHCI_LIMIT_ENDPOINT_INTERVAL_9 BIT_ULL(49)
+>>>>>>> BRANCH (07acd398613bd09a4d6e7d021d53b86f53d13dda usb: cdnsp: Fix issue with CV Bad Descriptor test)
 
 	unsigned int		num_active_eps;
 	unsigned int		limit_active_eps;
