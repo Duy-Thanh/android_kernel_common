@@ -34,6 +34,24 @@
       "parentUuid": "dab2eb8f_24fc2d89",
       "revId": "7a78776c4e314d5465926b02995da5800ce98c8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a52290f_896a8f95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-07-18T00:52:19Z",
+      "side": 1,
+      "message": "That seems better.\nI will update commit as your suggestion.",
+      "parentUuid": "9ad85525_6f5ac0f0",
+      "revId": "7a78776c4e314d5465926b02995da5800ce98c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
