@@ -3392,9 +3392,9 @@ static unsigned long retain_cost(struct ctrl_pos *retain, struct ctrl_pos *evict
 	return retain->gain * (unnecessary_refaults + potential_refault);
 }
 
-static bool positive_ctrl_err(struct ctrl_pos *sp, struct ctrl_pos *pv)
+static bool positive_ctrl_err(struct ctrl_pos *sp, struct ctrl_pos *pv, bool has_victims)
 {
-	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP))
+	if (!has_victims || get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP))
 		return pv->refaulted < MIN_LRU_BATCH ||
 		       pv->refaulted * (sp->total + MIN_LRU_BATCH) * sp->gain <=
 		       (sp->refaulted + 1) * pv->total * pv->gain;
@@ -4123,7 +4123,7 @@ static bool try_to_inc_min_seq(struct lruvec *lruvec, int swappiness)
 
 	/* find the oldest populated generation */
 	for_each_evictable_type(type, swappiness) {
-		while (min_seq[type] + MIN_NR_GENS <= lrugen->max_seq[type]) {
+		while (min_seq[type] + MIN_NR_GENS <= max_seq[type]) {
 			gen = lru_gen_from_seq(min_seq[type]);
 
 			for (zone = 0; zone < MAX_NR_ZONES; zone++) {
@@ -4628,6 +4628,13 @@ static void lru_gen_rotate_memcg(struct lruvec *lruvec, int op)
 	if (!pgdat->memcg_lru.nr_memcgs[old] && old == get_memcg_gen(pgdat->memcg_lru.seq))
 		WRITE_ONCE(pgdat->memcg_lru.seq, pgdat->memcg_lru.seq + 1);
 
+	if (old != new) {
+		DEFINE_MAX_SEQ(lruvec);
+
+		lruvec->lrugen.memcg_gen_max_seq[LRU_GEN_ANON] = max_seq[LRU_GEN_ANON];
+		lruvec->lrugen.memcg_gen_max_seq[LRU_GEN_FILE] = max_seq[LRU_GEN_FILE];
+	}
+
 	spin_unlock_irqrestore(&pgdat->memcg_lru.lock, flags);
 }
 
@@ -4922,7 +4929,7 @@ static int get_tier_idx(struct lruvec *lruvec, int type)
 	read_ctrl_pos(lruvec, type, 0, 2, false, &sp);
 	for (tier = 1; tier < MAX_NR_TIERS; tier++) {
 		read_ctrl_pos(lruvec, type, tier, 3, false, &pv);
-		if (!positive_ctrl_err(&sp, &pv))
+		if (!positive_ctrl_err(&sp, &pv, false))
 			break;
 	}
 
@@ -4945,7 +4952,7 @@ static int get_type_to_scan(struct lruvec *lruvec, int swappiness)
 	read_ctrl_pos(lruvec, LRU_GEN_ANON, MAX_NR_TIERS, swappiness, true, &sp);
 	read_ctrl_pos(lruvec, LRU_GEN_FILE, MAX_NR_TIERS, MAX_SWAPPINESS - swappiness, true, &pv);
 
-	return positive_ctrl_err(&sp, &pv);
+	return positive_ctrl_err(&sp, &pv, true);
 }
 
 static int isolate_folios(struct lruvec *lruvec, struct scan_control *sc, int swappiness,
@@ -5109,12 +5116,17 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, int s
 	bool should_age[ANON_AND_FILE] = {};
 	int type;
 	bool max_seq_incremented[ANON_AND_FILE] = {}, max_seq_inc = false;
+	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 	bool bypass = false;
 	bool young = false;
 
 	if (mem_cgroup_below_min(sc->target_mem_cgroup, memcg))
 		return -1;
 
+	/* both types already aged, so we're low on cold folios. Stop aging */
+	if (lrugen->memcg_gen_max_seq[LRU_GEN_ANON] != max_seq[LRU_GEN_ANON] &&
+	    lrugen->memcg_gen_max_seq[LRU_GEN_FILE] != max_seq[LRU_GEN_FILE])
+		return -1;
 
 	if (get_cap(LRU_GEN_ADVANCE_IN_LOCKSTEP)) {
 		bool age;
@@ -5169,7 +5181,7 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, int s
 	}
 
 	/* skip this lruvec as it's low on cold folios */
-	return ret > 0 ? ret : (max_seq_inc ? -1  : 0);
+	return ret > 0 ? (ret >> sc->priority) : (max_seq_inc ? -1 : 0);
 }
 
 static bool should_abort_scan(struct lruvec *lruvec, struct scan_control *sc)
@@ -5817,12 +5829,16 @@ static int lru_gen_seq_show(struct seq_file *m, void *v)
 			unsigned long size = 0;
 			char mark = full && seq < min_seq[type] ? 'x' : ' ';
 
-			seq_printf(m, " %10lu %10u", seq, jiffies_to_msecs(jiffies - birth));
+			if (seq <= max_seq[type]) {
+				seq_printf(m, " %10lu %10u", seq, jiffies_to_msecs(jiffies - birth));
 
-			for (zone = 0; zone < MAX_NR_ZONES; zone++)
-				size += max(READ_ONCE(lrugen->nr_pages[gen][type][zone]), 0L);
+				for (zone = 0; zone < MAX_NR_ZONES; zone++)
+					size += max(READ_ONCE(lrugen->nr_pages[gen][type][zone]), 0L);
 
-			seq_printf(m, " %10lu%c", size, mark);
+				seq_printf(m, " %10lu%c", size, mark);
+			} else if (type == 0) {
+				seq_puts(m, "                                  ");
+			}
 
 		}
 
@@ -6076,6 +6092,7 @@ void lru_gen_init_lruvec(struct lruvec *lruvec)
 
 	for (type = ANON_AND_FILE - 1; type >= 0; type--) {
 		lrugen->max_seq[type] = MIN_NR_GENS + 1;
+		lrugen->memcg_gen_max_seq[type] = MIN_NR_GENS + 1;
 		for (i = 0; i <= MIN_NR_GENS + 1; i++)
 			lrugen->timestamps[i][type] = jiffies;
 	}

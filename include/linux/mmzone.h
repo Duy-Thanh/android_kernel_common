@@ -508,6 +508,8 @@ struct lru_gen_folio {
 	bool enabled;
 	/* the memcg generation this lru_gen_folio belongs to */
 	u8 gen;
+	/* the max_seq values when a gen is updated */
+	unsigned long memcg_gen_max_seq[ANON_AND_FILE];
 	/* the list segment this lru_gen_folio belongs to */
 	u8 seg;
 	/* per-node lru_gen_folio list for global reclaim */
