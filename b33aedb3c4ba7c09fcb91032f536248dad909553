@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60cc4364_39f3fc09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-07-18T02:02:35Z",
+      "side": 1,
+      "message": "Please check updated revision.\nAs you suggested, I\u0027ve added allocated counter and added gcma_stat_sub() function.",
+      "revId": "b33aedb3c4ba7c09fcb91032f536248dad909553",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
