@@ -26,8 +26,7 @@ properties:
       - const: realtek,rtl9301-i2c
 
   reg:
-    items:
-      - description: Register offset and size this I2C controller.
+    description: Register offset and size this I2C controller.
 
   "#address-cells":
     const: 1

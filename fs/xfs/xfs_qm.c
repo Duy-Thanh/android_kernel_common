@@ -134,7 +134,6 @@ xfs_qm_dqpurge(
 
 	dqp->q_flags |= XFS_DQFLAG_FREEING;
 
-	xfs_qm_dqunpin_wait(dqp);
 	xfs_dqflock(dqp);
 
 	/*
@@ -466,7 +465,6 @@ xfs_qm_dquot_isolate(
 	struct xfs_dquot	*dqp = container_of(item,
 						struct xfs_dquot, q_lru);
 	struct xfs_qm_isolate	*isol = arg;
-	enum lru_status		ret = LRU_SKIP;
 
 	if (!xfs_dqlock_nowait(dqp))
 		goto out_miss_busy;
@@ -478,16 +476,6 @@ xfs_qm_dquot_isolate(
 	 */
 	if (dqp->q_flags & XFS_DQFLAG_FREEING)
 		goto out_miss_unlock;
-
-	/*
-	 * If the dquot is pinned or dirty, rotate it to the end of the LRU to
-	 * give some time for it to be cleaned before we try to isolate it
-	 * again.
-	 */
-	ret = LRU_ROTATE;
-	if (XFS_DQ_IS_DIRTY(dqp) || atomic_read(&dqp->q_pincount) > 0) {
-		goto out_miss_unlock;
-	}
 
 	/*
 	 * This dquot has acquired a reference in the meantime remove it from
@@ -504,14 +492,41 @@ xfs_qm_dquot_isolate(
 	}
 
 	/*
-	 * The dquot may still be under IO, in which case the flush lock will be
-	 * held. If we can't get the flush lock now, just skip over the dquot as
-	 * if it was dirty.
+	 * If the dquot is dirty, flush it. If it's already being flushed, just
+	 * skip it so there is time for the IO to complete before we try to
+	 * reclaim it again on the next LRU pass.
 	 */
 	if (!xfs_dqflock_nowait(dqp))
 		goto out_miss_unlock;
 
-	ASSERT(!XFS_DQ_IS_DIRTY(dqp));
+	if (XFS_DQ_IS_DIRTY(dqp)) {
+		struct xfs_buf	*bp = NULL;
+		int		error;
+
+		trace_xfs_dqreclaim_dirty(dqp);
+
+		/* we have to drop the LRU lock to flush the dquot */
+		spin_unlock(&lru->lock);
+
+		error = xfs_dquot_use_attached_buf(dqp, &bp);
+		if (!bp || error == -EAGAIN) {
+			xfs_dqfunlock(dqp);
+			goto out_unlock_dirty;
+		}
+
+		/*
+		 * dqflush completes dqflock on error, and the delwri ioend
+		 * does it on success.
+		 */
+		error = xfs_qm_dqflush(dqp, bp);
+		if (error)
+			goto out_unlock_dirty;
+
+		xfs_buf_delwri_queue(bp, &isol->buffers);
+		xfs_buf_relse(bp);
+		goto out_unlock_dirty;
+	}
+
 	xfs_dquot_detach_buf(dqp);
 	xfs_dqfunlock(dqp);
 
@@ -533,7 +548,13 @@ out_miss_unlock:
 out_miss_busy:
 	trace_xfs_dqreclaim_busy(dqp);
 	XFS_STATS_INC(dqp->q_mount, xs_qm_dqreclaim_misses);
-	return ret;
+	return LRU_SKIP;
+
+out_unlock_dirty:
+	trace_xfs_dqreclaim_busy(dqp);
+	XFS_STATS_INC(dqp->q_mount, xs_qm_dqreclaim_misses);
+	xfs_dqunlock(dqp);
+	return LRU_RETRY;
 }
 
 static unsigned long
@@ -1465,6 +1486,7 @@ xfs_qm_flush_one(
 	struct xfs_dquot	*dqp,
 	void			*data)
 {
+	struct xfs_mount	*mp = dqp->q_mount;
 	struct list_head	*buffer_list = data;
 	struct xfs_buf		*bp = NULL;
 	int			error = 0;
@@ -1475,8 +1497,34 @@ xfs_qm_flush_one(
 	if (!XFS_DQ_IS_DIRTY(dqp))
 		goto out_unlock;
 
-	xfs_qm_dqunpin_wait(dqp);
-	xfs_dqflock(dqp);
+	/*
+	 * The only way the dquot is already flush locked by the time quotacheck
+	 * gets here is if reclaim flushed it before the dqadjust walk dirtied
+	 * it for the final time. Quotacheck collects all dquot bufs in the
+	 * local delwri queue before dquots are dirtied, so reclaim can't have
+	 * possibly queued it for I/O. The only way out is to push the buffer to
+	 * cycle the flush lock.
+	 */
+	if (!xfs_dqflock_nowait(dqp)) {
+		/* buf is pinned in-core by delwri list */
+		error = xfs_buf_incore(mp->m_ddev_targp, dqp->q_blkno,
+				mp->m_quotainfo->qi_dqchunklen, 0, &bp);
+		if (error)
+			goto out_unlock;
+
+		if (!(bp->b_flags & _XBF_DELWRI_Q)) {
+			error = -EAGAIN;
+			xfs_buf_relse(bp);
+			goto out_unlock;
+		}
+		xfs_buf_unlock(bp);
+
+		xfs_buf_delwri_pushbuf(bp, buffer_list);
+		xfs_buf_rele(bp);
+
+		error = -EAGAIN;
+		goto out_unlock;
+	}
 
 	error = xfs_dquot_use_attached_buf(dqp, &bp);
 	if (error)

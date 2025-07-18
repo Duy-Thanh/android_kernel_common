@@ -1265,14 +1265,7 @@ int bch2_inode_set_casefold(struct btree_trans *trans, subvol_inum inum,
 {
 	struct bch_fs *c = trans->c;
 
-#ifndef CONFIG_UNICODE
-	bch_err(c, "Cannot use casefolding on a kernel without CONFIG_UNICODE");
-	return -EOPNOTSUPP;
-#endif
-
-	if (c->opts.casefold_disabled)
-		return -EOPNOTSUPP;
-
+#ifdef CONFIG_UNICODE
 	int ret = 0;
 	/* Not supported on individual files. */
 	if (!S_ISDIR(bi->bi_mode))
@@ -1296,6 +1289,10 @@ int bch2_inode_set_casefold(struct btree_trans *trans, subvol_inum inum,
 	bi->bi_fields_set |= BIT(Inode_opt_casefold);
 
 	return bch2_maybe_propagate_has_case_insensitive(trans, inum, bi);
+#else
+	bch_err(c, "Cannot use casefolding on a kernel without CONFIG_UNICODE");
+	return -EOPNOTSUPP;
+#endif
 }
 
 static noinline int __bch2_inode_rm_snapshot(struct btree_trans *trans, u64 inum, u32 snapshot)

@@ -3705,10 +3705,9 @@ static ssize_t add_target_store(struct device *dev,
 	target_host->max_id      = 1;
 	target_host->max_lun     = -1LL;
 	target_host->max_cmd_len = sizeof ((struct srp_cmd *) (void *) 0L)->cdb;
+	target_host->max_segment_size = ib_dma_max_seg_size(ibdev);
 
-	if (ibdev->attrs.kernel_cap_flags & IBK_SG_GAPS_REG)
-		target_host->max_segment_size = ib_dma_max_seg_size(ibdev);
-	else
+	if (!(ibdev->attrs.kernel_cap_flags & IBK_SG_GAPS_REG))
 		target_host->virt_boundary_mask = ~srp_dev->mr_page_mask;
 
 	target = host_to_target(target_host);

@@ -4567,6 +4567,8 @@ static void lan78xx_disconnect(struct usb_interface *intf)
 	if (!dev)
 		return;
 
+	netif_napi_del(&dev->napi);
+
 	udev = interface_to_usbdev(intf);
 	net = dev->net;
 

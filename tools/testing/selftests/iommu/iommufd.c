@@ -54,8 +54,6 @@ static __attribute__((constructor)) void setup_sizes(void)
 
 	mfd_buffer = memfd_mmap(BUFFER_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED,
 				&mfd);
-	assert(mfd_buffer != MAP_FAILED);
-	assert(mfd > 0);
 }
 
 FIXTURE(iommufd)
@@ -1748,15 +1746,13 @@ TEST_F(iommufd_mock_domain, all_aligns)
 	unsigned int end;
 	uint8_t *buf;
 	int prot = PROT_READ | PROT_WRITE;
-	int mfd = -1;
+	int mfd;
 
 	if (variant->file)
 		buf = memfd_mmap(buf_size, prot, MAP_SHARED, &mfd);
 	else
 		buf = mmap(0, buf_size, prot, self->mmap_flags, -1, 0);
 	ASSERT_NE(MAP_FAILED, buf);
-	if (variant->file)
-		ASSERT_GT(mfd, 0);
 	check_refs(buf, buf_size, 0);
 
 	/*
@@ -1802,15 +1798,13 @@ TEST_F(iommufd_mock_domain, all_aligns_copy)
 	unsigned int end;
 	uint8_t *buf;
 	int prot = PROT_READ | PROT_WRITE;
-	int mfd = -1;
+	int mfd;
 
 	if (variant->file)
 		buf = memfd_mmap(buf_size, prot, MAP_SHARED, &mfd);
 	else
 		buf = mmap(0, buf_size, prot, self->mmap_flags, -1, 0);
 	ASSERT_NE(MAP_FAILED, buf);
-	if (variant->file)
-		ASSERT_GT(mfd, 0);
 	check_refs(buf, buf_size, 0);
 
 	/*
@@ -2014,7 +2008,6 @@ FIXTURE_VARIANT(iommufd_dirty_tracking)
 
 FIXTURE_SETUP(iommufd_dirty_tracking)
 {
-	size_t mmap_buffer_size;
 	unsigned long size;
 	int mmap_flags;
 	void *vrc;
@@ -2029,33 +2022,22 @@ FIXTURE_SETUP(iommufd_dirty_tracking)
 	self->fd = open("/dev/iommu", O_RDWR);
 	ASSERT_NE(-1, self->fd);
 
+	rc = posix_memalign(&self->buffer, HUGEPAGE_SIZE, variant->buffer_size);
+	if (rc || !self->buffer) {
+		SKIP(return, "Skipping buffer_size=%lu due to errno=%d",
+			   variant->buffer_size, rc);
+	}
+
 	mmap_flags = MAP_SHARED | MAP_ANONYMOUS | MAP_FIXED;
-	mmap_buffer_size = variant->buffer_size;
 	if (variant->hugepages) {
 		/*
 		 * MAP_POPULATE will cause the kernel to fail mmap if THPs are
 		 * not available.
 		 */
 		mmap_flags |= MAP_HUGETLB | MAP_POPULATE;
-
-		/*
-		 * Allocation must be aligned to the HUGEPAGE_SIZE, because the
-		 * following mmap() will automatically align the length to be a
-		 * multiple of the underlying huge page size. Failing to do the
-		 * same at this allocation will result in a memory overwrite by
-		 * the mmap().
-		 */
-		if (mmap_buffer_size < HUGEPAGE_SIZE)
-			mmap_buffer_size = HUGEPAGE_SIZE;
-	}
-
-	rc = posix_memalign(&self->buffer, HUGEPAGE_SIZE, mmap_buffer_size);
-	if (rc || !self->buffer) {
-		SKIP(return, "Skipping buffer_size=%lu due to errno=%d",
-			   mmap_buffer_size, rc);
 	}
 	assert((uintptr_t)self->buffer % HUGEPAGE_SIZE == 0);
-	vrc = mmap(self->buffer, mmap_buffer_size, PROT_READ | PROT_WRITE,
+	vrc = mmap(self->buffer, variant->buffer_size, PROT_READ | PROT_WRITE,
 		   mmap_flags, -1, 0);
 	assert(vrc == self->buffer);
 
@@ -2084,8 +2066,8 @@ FIXTURE_SETUP(iommufd_dirty_tracking)
 
 FIXTURE_TEARDOWN(iommufd_dirty_tracking)
 {
-	free(self->buffer);
-	free(self->bitmap);
+	munmap(self->buffer, variant->buffer_size);
+	munmap(self->bitmap, DIV_ROUND_UP(self->bitmap_size, BITS_PER_BYTE));
 	teardown_iommufd(self->fd, _metadata);
 }
 

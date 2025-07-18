@@ -276,8 +276,7 @@ static int spacemit_sdhci_probe(struct platform_device *pdev)
 
 	host->mmc->caps |= MMC_CAP_NEED_RSP_BUSY;
 
-	ret = spacemit_sdhci_get_clocks(dev, pltfm_host);
-	if (ret)
+	if (spacemit_sdhci_get_clocks(dev, pltfm_host))
 		goto err_pltfm;
 
 	ret = sdhci_add_host(host);

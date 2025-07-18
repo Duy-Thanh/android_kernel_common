@@ -2020,13 +2020,14 @@ xfs_remount_rw(
 	int error;
 
 	if (mp->m_logdev_targp && mp->m_logdev_targp != mp->m_ddev_targp &&
-	    xfs_readonly_buftarg(mp->m_logdev_targp)) {
+	    bdev_read_only(mp->m_logdev_targp->bt_bdev)) {
 		xfs_warn(mp,
 			"ro->rw transition prohibited by read-only logdev");
 		return -EACCES;
 	}
 
-	if (mp->m_rtdev_targp && xfs_readonly_buftarg(mp->m_rtdev_targp)) {
+	if (mp->m_rtdev_targp &&
+	    bdev_read_only(mp->m_rtdev_targp->bt_bdev)) {
 		xfs_warn(mp,
 			"ro->rw transition prohibited by read-only rtdev");
 		return -EACCES;

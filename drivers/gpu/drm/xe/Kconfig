@@ -1,8 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 config DRM_XE
-	tristate "Intel Xe2 Graphics"
-	depends on DRM && PCI
-	depends on KUNIT || !KUNIT
+	tristate "Intel Xe Graphics"
+	depends on DRM && PCI && (m || (y && KUNIT=y))
 	depends on INTEL_VSEC || !INTEL_VSEC
 	depends on X86_PLATFORM_DEVICES || !(X86 && ACPI)
 	select INTERVAL_TREE
@@ -47,8 +46,7 @@ config DRM_XE
 	select AUXILIARY_BUS
 	select HMM_MIRROR
 	help
-	  Driver for Intel Xe2 series GPUs and later. Experimental support
-	  for Xe series is also available.
+	  Experimental driver for Intel Xe series GPUs
 
 	  If "M" is selected, the module will be called xe.
 

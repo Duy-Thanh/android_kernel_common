@@ -951,6 +951,8 @@ static void perf_cgroup_switch(struct task_struct *task)
 	if (READ_ONCE(cpuctx->cgrp) == NULL)
 		return;
 
+	WARN_ON_ONCE(cpuctx->ctx.nr_cgroups == 0);
+
 	cgrp = perf_cgroup_from_task(task, NULL);
 	if (READ_ONCE(cpuctx->cgrp) == cgrp)
 		return;
@@ -961,8 +963,6 @@ static void perf_cgroup_switch(struct task_struct *task)
 	 */
 	if (READ_ONCE(cpuctx->cgrp) == NULL)
 		return;
-
-	WARN_ON_ONCE(cpuctx->ctx.nr_cgroups == 0);
 
 	perf_ctx_disable(&cpuctx->ctx, true);
 
@@ -11102,7 +11102,7 @@ static int perf_uprobe_event_init(struct perf_event *event)
 	if (event->attr.type != perf_uprobe.type)
 		return -ENOENT;
 
-	if (!capable(CAP_SYS_ADMIN))
+	if (!perfmon_capable())
 		return -EACCES;
 
 	/*

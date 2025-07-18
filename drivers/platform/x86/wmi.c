@@ -177,22 +177,16 @@ static int wmi_device_enable(struct wmi_device *wdev, bool enable)
 	acpi_handle handle;
 	acpi_status status;
 
+	if (!(wblock->gblock.flags & ACPI_WMI_EXPENSIVE))
+		return 0;
+
 	if (wblock->dev.dev.type == &wmi_type_method)
 		return 0;
 
-	if (wblock->dev.dev.type == &wmi_type_event) {
-		/*
-		 * Windows always enables/disables WMI events, even when they are
-		 * not marked as being expensive. We follow this behavior for
-		 * compatibility reasons.
-		 */
+	if (wblock->dev.dev.type == &wmi_type_event)
 		snprintf(method, sizeof(method), "WE%02X", wblock->gblock.notify_id);
-	} else {
-		if (!(wblock->gblock.flags & ACPI_WMI_EXPENSIVE))
-			return 0;
-
+	else
 		get_acpi_method_name(wblock, 'C', method);
-	}
 
 	/*
 	 * Not all WMI devices marked as expensive actually implement the

@@ -424,9 +424,9 @@ skip_sess_setup:
 		free_xid(xid);
 		ses->flags &= ~CIFS_SES_FLAGS_PENDING_QUERY_INTERFACES;
 
-		if (!tcon->ipc && !tcon->dummy)
-			queue_delayed_work(cifsiod_wq, &tcon->query_interfaces,
-					   (SMB_INTERFACE_POLL_INTERVAL * HZ));
+		/* regardless of rc value, setup polling */
+		queue_delayed_work(cifsiod_wq, &tcon->query_interfaces,
+				   (SMB_INTERFACE_POLL_INTERVAL * HZ));
 
 		mutex_unlock(&ses->session_mutex);
 
@@ -4229,8 +4229,10 @@ void smb2_reconnect_server(struct work_struct *work)
 		}
 		goto done;
 	}
+
 	tcon->status = TID_GOOD;
-	tcon->dummy = true;
+	tcon->retry = false;
+	tcon->need_reconnect = false;
 
 	/* now reconnect sessions for necessary channels */
 	list_for_each_entry_safe(ses, ses2, &tmp_ses_list, rlist) {
@@ -4565,11 +4567,7 @@ smb2_readv_callback(struct mid_q_entry *mid)
 		cifs_stats_bytes_read(tcon, rdata->got_bytes);
 		break;
 	case MID_REQUEST_SUBMITTED:
-		trace_netfs_sreq(&rdata->subreq, netfs_sreq_trace_io_req_submitted);
-		goto do_retry;
 	case MID_RETRY_NEEDED:
-		trace_netfs_sreq(&rdata->subreq, netfs_sreq_trace_io_retry_needed);
-do_retry:
 		__set_bit(NETFS_SREQ_NEED_RETRY, &rdata->subreq.flags);
 		rdata->result = -EAGAIN;
 		if (server->sign && rdata->got_bytes)
@@ -4580,15 +4578,11 @@ do_retry:
 		cifs_stats_bytes_read(tcon, rdata->got_bytes);
 		break;
 	case MID_RESPONSE_MALFORMED:
-		trace_netfs_sreq(&rdata->subreq, netfs_sreq_trace_io_malformed);
 		credits.value = le16_to_cpu(shdr->CreditRequest);
 		credits.instance = server->reconnect_instance;
-		rdata->result = -EIO;
-		break;
+		fallthrough;
 	default:
-		trace_netfs_sreq(&rdata->subreq, netfs_sreq_trace_io_unknown);
 		rdata->result = -EIO;
-		break;
 	}
 #ifdef CONFIG_CIFS_SMB_DIRECT
 	/*
@@ -4841,14 +4835,11 @@ smb2_writev_callback(struct mid_q_entry *mid)
 
 	switch (mid->mid_state) {
 	case MID_RESPONSE_RECEIVED:
-		trace_netfs_sreq(&wdata->subreq, netfs_sreq_trace_io_progress);
 		credits.value = le16_to_cpu(rsp->hdr.CreditRequest);
 		credits.instance = server->reconnect_instance;
 		result = smb2_check_receive(mid, server, 0);
-		if (result != 0) {
-			trace_netfs_sreq(&wdata->subreq, netfs_sreq_trace_io_bad);
+		if (result != 0)
 			break;
-		}
 
 		written = le32_to_cpu(rsp->DataLength);
 		/*
@@ -4870,23 +4861,14 @@ smb2_writev_callback(struct mid_q_entry *mid)
 		}
 		break;
 	case MID_REQUEST_SUBMITTED:
-		trace_netfs_sreq(&wdata->subreq, netfs_sreq_trace_io_req_submitted);
-		__set_bit(NETFS_SREQ_NEED_RETRY, &wdata->subreq.flags);
-		result = -EAGAIN;
-		break;
 	case MID_RETRY_NEEDED:
-		trace_netfs_sreq(&wdata->subreq, netfs_sreq_trace_io_retry_needed);
-		__set_bit(NETFS_SREQ_NEED_RETRY, &wdata->subreq.flags);
 		result = -EAGAIN;
 		break;
 	case MID_RESPONSE_MALFORMED:
-		trace_netfs_sreq(&wdata->subreq, netfs_sreq_trace_io_malformed);
 		credits.value = le16_to_cpu(rsp->hdr.CreditRequest);
 		credits.instance = server->reconnect_instance;
-		result = -EIO;
-		break;
+		fallthrough;
 	default:
-		trace_netfs_sreq(&wdata->subreq, netfs_sreq_trace_io_unknown);
 		result = -EIO;
 		break;
 	}
@@ -4926,6 +4908,7 @@ smb2_writev_callback(struct mid_q_entry *mid)
 			      server->credits, server->in_flight,
 			      0, cifs_trace_rw_credits_write_response_clear);
 	wdata->credits.value = 0;
+	trace_netfs_sreq(&wdata->subreq, netfs_sreq_trace_io_progress);
 	cifs_write_subrequest_terminated(wdata, result ?: written);
 	release_mid(mid);
 	trace_smb3_rw_credits(rreq_debug_id, subreq_debug_index, 0,

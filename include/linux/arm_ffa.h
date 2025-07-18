@@ -283,7 +283,6 @@ struct ffa_indirect_msg_hdr {
 	u32 offset;
 	u32 send_recv_id;
 	u32 size;
-	u32 res1;
 	uuid_t uuid;
 };
 

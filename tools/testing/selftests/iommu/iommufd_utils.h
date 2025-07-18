@@ -60,18 +60,13 @@ static inline void *memfd_mmap(size_t length, int prot, int flags, int *mfd_p)
 {
 	int mfd_flags = (flags & MAP_HUGETLB) ? MFD_HUGETLB : 0;
 	int mfd = memfd_create("buffer", mfd_flags);
-	void *buf = MAP_FAILED;
 
 	if (mfd <= 0)
 		return MAP_FAILED;
 	if (ftruncate(mfd, length))
-		goto out;
+		return MAP_FAILED;
 	*mfd_p = mfd;
-	buf = mmap(0, length, prot, flags, mfd, 0);
-out:
-	if (buf == MAP_FAILED)
-		close(mfd);
-	return buf;
+	return mmap(0, length, prot, flags, mfd, 0);
 }
 
 /*

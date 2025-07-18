@@ -2302,7 +2302,9 @@ static int check_dirent(struct btree_trans *trans, struct btree_iter *iter,
 		*hash_info = bch2_hash_info_init(c, &i->inode);
 	dir->first_this_inode = false;
 
+#ifdef CONFIG_UNICODE
 	hash_info->cf_encoding = bch2_inode_casefold(c, &i->inode) ? c->cf_encoding : NULL;
+#endif
 
 	ret = bch2_str_hash_check_key(trans, s, &bch2_dirent_hash_desc, hash_info,
 				      iter, k, need_second_pass);
@@ -2817,7 +2819,7 @@ static int check_path_loop(struct btree_trans *trans, struct bkey_s_c inode_k)
 				ret = remove_backpointer(trans, &inode);
 				bch_err_msg(c, ret, "removing dirent");
 				if (ret)
-					goto out;
+					break;
 
 				ret = reattach_inode(trans, &inode);
 				bch_err_msg(c, ret, "reattaching inode %llu", inode.bi_inum);
