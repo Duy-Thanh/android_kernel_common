@@ -40,6 +40,30 @@
       ],
       "revId": "109b0ab9f819478e5033ad523081e720d8a17bf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e8f6db_fd575170",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3570,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2025-07-18T06:53:49Z",
+      "side": 1,
+      "message": "Thanks, suggested comments have been added",
+      "parentUuid": "61707172_c87cb3f6",
+      "range": {
+        "startLine": 3570,
+        "startChar": 2,
+        "endLine": 3570,
+        "endChar": 35
+      },
+      "revId": "109b0ab9f819478e5033ad523081e720d8a17bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
