@@ -24,7 +24,7 @@ extern void nouveau_debugfs_fini(struct nouveau_drm *);
 
 extern struct dentry *nouveau_debugfs_root;
 
-void nouveau_module_debugfs_init(void);
+int  nouveau_module_debugfs_init(void);
 void nouveau_module_debugfs_fini(void);
 #else
 static inline void
@@ -42,9 +42,10 @@ nouveau_debugfs_fini(struct nouveau_drm *drm)
 {
 }
 
-static inline void
+static inline int
 nouveau_module_debugfs_init(void)
 {
+	return 0;
 }
 
 static inline void

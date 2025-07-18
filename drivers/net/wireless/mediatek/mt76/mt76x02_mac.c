@@ -564,7 +564,9 @@ void mt76x02_send_tx_status(struct mt76x02_dev *dev,
 
 	rcu_read_lock();
 
-	wcid = mt76_wcid_ptr(dev, stat->wcid);
+	if (stat->wcid < MT76x02_N_WCIDS)
+		wcid = rcu_dereference(dev->mt76.wcid[stat->wcid]);
+
 	if (wcid && wcid->sta) {
 		void *priv;
 

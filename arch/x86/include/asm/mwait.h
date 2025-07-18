@@ -43,6 +43,8 @@ static __always_inline void __monitorx(const void *eax, u32 ecx, u32 edx)
 
 static __always_inline void __mwait(u32 eax, u32 ecx)
 {
+	mds_idle_clear_cpu_buffers();
+
 	/*
 	 * Use the instruction mnemonic with implicit operands, as the LLVM
 	 * assembler fails to assemble the mnemonic with explicit operands:
@@ -78,7 +80,7 @@ static __always_inline void __mwait(u32 eax, u32 ecx)
  */
 static __always_inline void __mwaitx(u32 eax, u32 ebx, u32 ecx)
 {
-	/* No need for TSA buffer clearing on AMD */
+	/* No MDS buffer clear as this is AMD/HYGON only */
 
 	/* "mwaitx %eax, %ebx, %ecx" */
 	asm volatile(".byte 0x0f, 0x01, 0xfb"
@@ -96,6 +98,7 @@ static __always_inline void __mwaitx(u32 eax, u32 ebx, u32 ecx)
  */
 static __always_inline void __sti_mwait(u32 eax, u32 ecx)
 {
+	mds_idle_clear_cpu_buffers();
 
 	asm volatile("sti; mwait" :: "a" (eax), "c" (ecx));
 }
@@ -112,29 +115,21 @@ static __always_inline void __sti_mwait(u32 eax, u32 ecx)
  */
 static __always_inline void mwait_idle_with_hints(u32 eax, u32 ecx)
 {
-	if (need_resched())
-		return;
-
-	x86_idle_clear_cpu_buffers();
-
 	if (static_cpu_has_bug(X86_BUG_MONITOR) || !current_set_polling_and_test()) {
 		const void *addr = &current_thread_info()->flags;
 
 		alternative_input("", "clflush (%[addr])", X86_BUG_CLFLUSH_MONITOR, [addr] "a" (addr));
 		__monitor(addr, 0, 0);
 
-		if (need_resched())
-			goto out;
-
-		if (ecx & 1) {
-			__mwait(eax, ecx);
-		} else {
-			__sti_mwait(eax, ecx);
-			raw_local_irq_disable();
+		if (!need_resched()) {
+			if (ecx & 1) {
+				__mwait(eax, ecx);
+			} else {
+				__sti_mwait(eax, ecx);
+				raw_local_irq_disable();
+			}
 		}
 	}
-
-out:
 	current_clr_polling();
 }
 

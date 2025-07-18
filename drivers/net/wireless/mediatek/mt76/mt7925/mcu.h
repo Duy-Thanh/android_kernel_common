@@ -269,7 +269,7 @@ struct scan_ie_tlv {
 	__le16 ies_len;
 	u8 band;
 	u8 pad;
-	u8 ies[];
+	u8 ies[MT76_CONNAC_SCAN_IE_LEN];
 };
 
 struct scan_misc_tlv {
@@ -673,8 +673,7 @@ int mt7925_mcu_cancel_hw_scan(struct mt76_phy *phy,
 			      struct ieee80211_vif *vif);
 int mt7925_mcu_sched_scan_req(struct mt76_phy *phy,
 			      struct ieee80211_vif *vif,
-			      struct cfg80211_sched_scan_request *sreq,
-			      struct ieee80211_scan_ies *ies);
+			      struct cfg80211_sched_scan_request *sreq);
 int mt7925_mcu_sched_scan_enable(struct mt76_phy *phy,
 				 struct ieee80211_vif *vif,
 				 bool enable);

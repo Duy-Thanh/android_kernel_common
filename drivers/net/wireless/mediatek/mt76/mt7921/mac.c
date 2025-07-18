@@ -465,7 +465,7 @@ void mt7921_mac_add_txs(struct mt792x_dev *dev, void *data)
 
 	rcu_read_lock();
 
-	wcid = mt76_wcid_ptr(dev, wcidx);
+	wcid = rcu_dereference(dev->mt76.wcid[wcidx]);
 	if (!wcid)
 		goto out;
 
@@ -516,7 +516,7 @@ static void mt7921_mac_tx_free(struct mt792x_dev *dev, void *data, int len)
 
 			count++;
 			idx = FIELD_GET(MT_TX_FREE_WLAN_ID, info);
-			wcid = mt76_wcid_ptr(dev, idx);
+			wcid = rcu_dereference(dev->mt76.wcid[idx]);
 			sta = wcid_to_sta(wcid);
 			if (!sta)
 				continue;
@@ -816,7 +816,7 @@ void mt7921_usb_sdio_tx_complete_skb(struct mt76_dev *mdev,
 	u16 idx;
 
 	idx = le32_get_bits(txwi[1], MT_TXD1_WLAN_IDX);
-	wcid = __mt76_wcid_ptr(mdev, idx);
+	wcid = rcu_dereference(mdev->wcid[idx]);
 	sta = wcid_to_sta(wcid);
 
 	if (sta && likely(e->skb->protocol != cpu_to_be16(ETH_P_PAE)))

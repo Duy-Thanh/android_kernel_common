@@ -85,7 +85,7 @@ void bch2_btree_node_to_freelist(struct bch_fs *c, struct btree *b)
 	six_unlock_intent(&b->c.lock);
 }
 
-void __btree_node_data_free(struct btree *b)
+static void __btree_node_data_free(struct btree_cache *bc, struct btree *b)
 {
 	BUG_ON(!list_empty(&b->list));
 	BUG_ON(btree_node_hashed(b));
@@ -112,17 +112,16 @@ void __btree_node_data_free(struct btree *b)
 	munmap(b->aux_data, btree_aux_data_bytes(b));
 #endif
 	b->aux_data = NULL;
+
+	btree_node_to_freedlist(bc, b);
 }
 
 static void btree_node_data_free(struct btree_cache *bc, struct btree *b)
 {
 	BUG_ON(list_empty(&b->list));
 	list_del_init(&b->list);
-
-	__btree_node_data_free(b);
-
 	--bc->nr_freeable;
-	btree_node_to_freedlist(bc, b);
+	__btree_node_data_free(bc, b);
 }
 
 static int bch2_btree_cache_cmp_fn(struct rhashtable_compare_arg *arg,
@@ -186,7 +185,10 @@ static struct btree *__btree_node_mem_alloc(struct bch_fs *c, gfp_t gfp)
 
 struct btree *__bch2_btree_node_mem_alloc(struct bch_fs *c)
 {
-	struct btree *b = __btree_node_mem_alloc(c, GFP_KERNEL);
+	struct btree_cache *bc = &c->btree_cache;
+	struct btree *b;
+
+	b = __btree_node_mem_alloc(c, GFP_KERNEL);
 	if (!b)
 		return NULL;
 
@@ -196,6 +198,8 @@ struct btree *__bch2_btree_node_mem_alloc(struct bch_fs *c)
 	}
 
 	bch2_btree_lock_init(&b->c, 0, GFP_KERNEL);
+
+	__bch2_btree_node_to_freelist(bc, b);
 	return b;
 }
 
@@ -520,8 +524,7 @@ restart:
 			--touched;;
 		} else if (!btree_node_reclaim(c, b)) {
 			__bch2_btree_node_hash_remove(bc, b);
-			__btree_node_data_free(b);
-			btree_node_to_freedlist(bc, b);
+			__btree_node_data_free(bc, b);
 
 			freed++;
 			bc->nr_freed++;
@@ -649,12 +652,9 @@ int bch2_fs_btree_cache_init(struct bch_fs *c)
 
 	bch2_recalc_btree_reserve(c);
 
-	for (i = 0; i < bc->nr_reserve; i++) {
-		struct btree *b = __bch2_btree_node_mem_alloc(c);
-		if (!b)
+	for (i = 0; i < bc->nr_reserve; i++)
+		if (!__bch2_btree_node_mem_alloc(c))
 			goto err;
-		__bch2_btree_node_to_freelist(bc, b);
-	}
 
 	list_splice_init(&bc->live[0].list, &bc->freeable);
 

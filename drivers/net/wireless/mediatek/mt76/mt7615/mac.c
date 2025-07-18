@@ -90,7 +90,10 @@ static struct mt76_wcid *mt7615_rx_get_wcid(struct mt7615_dev *dev,
 	struct mt7615_sta *sta;
 	struct mt76_wcid *wcid;
 
-	wcid = mt76_wcid_ptr(dev, idx);
+	if (idx >= MT7615_WTBL_SIZE)
+		return NULL;
+
+	wcid = rcu_dereference(dev->mt76.wcid[idx]);
 	if (unicast || !wcid)
 		return wcid;
 
@@ -1501,7 +1504,7 @@ static void mt7615_mac_add_txs(struct mt7615_dev *dev, void *data)
 
 	rcu_read_lock();
 
-	wcid = mt76_wcid_ptr(dev, wcidx);
+	wcid = rcu_dereference(dev->mt76.wcid[wcidx]);
 	if (!wcid)
 		goto out;
 

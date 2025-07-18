@@ -2340,15 +2340,12 @@ struct folio *alloc_hugetlb_folio_reserve(struct hstate *h, int preferred_nid,
 	struct folio *folio;
 
 	spin_lock_irq(&hugetlb_lock);
-	if (!h->resv_huge_pages) {
-		spin_unlock_irq(&hugetlb_lock);
-		return NULL;
-	}
-
 	folio = dequeue_hugetlb_folio_nodemask(h, gfp_mask, preferred_nid,
 					       nmask);
-	if (folio)
+	if (folio) {
+		VM_BUG_ON(!h->resv_huge_pages);
 		h->resv_huge_pages--;
+	}
 
 	spin_unlock_irq(&hugetlb_lock);
 	return folio;

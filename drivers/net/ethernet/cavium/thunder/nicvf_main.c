@@ -1578,6 +1578,7 @@ napi_del:
 static int nicvf_change_mtu(struct net_device *netdev, int new_mtu)
 {
 	struct nicvf *nic = netdev_priv(netdev);
+	int orig_mtu = netdev->mtu;
 
 	/* For now just support only the usual MTU sized frames,
 	 * plus some headroom for VLAN, QinQ.
@@ -1588,10 +1589,15 @@ static int nicvf_change_mtu(struct net_device *netdev, int new_mtu)
 		return -EINVAL;
 	}
 
-	if (netif_running(netdev) && nicvf_update_hw_max_frs(nic, new_mtu))
-		return -EINVAL;
-
 	WRITE_ONCE(netdev->mtu, new_mtu);
+
+	if (!netif_running(netdev))
+		return 0;
+
+	if (nicvf_update_hw_max_frs(nic, new_mtu)) {
+		netdev->mtu = orig_mtu;
+		return -EINVAL;
+	}
 
 	return 0;
 }

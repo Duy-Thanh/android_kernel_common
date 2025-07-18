@@ -1150,7 +1150,7 @@ static inline unsigned int num_other_online_cpus(void)
 void smp_send_stop(void)
 {
 	static unsigned long stop_in_progress;
-	static cpumask_t mask;
+	cpumask_t mask;
 	unsigned long timeout;
 
 	/*

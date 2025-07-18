@@ -82,7 +82,7 @@ static void io_msg_tw_complete(struct io_kiocb *req, io_tw_token_t tw)
 		spin_unlock(&ctx->msg_lock);
 	}
 	if (req)
-		kfree_rcu(req, rcu_head);
+		kmem_cache_free(req_cachep, req);
 	percpu_ref_put(&ctx->refs);
 }
 
@@ -90,7 +90,7 @@ static int io_msg_remote_post(struct io_ring_ctx *ctx, struct io_kiocb *req,
 			      int res, u32 cflags, u64 user_data)
 {
 	if (!READ_ONCE(ctx->submitter_task)) {
-		kfree_rcu(req, rcu_head);
+		kmem_cache_free(req_cachep, req);
 		return -EOWNERDEAD;
 	}
 	req->opcode = IORING_OP_NOP;

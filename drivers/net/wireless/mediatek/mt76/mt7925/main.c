@@ -1481,7 +1481,7 @@ mt7925_start_sched_scan(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 
 	mt792x_mutex_acquire(dev);
 
-	err = mt7925_mcu_sched_scan_req(mphy, vif, req, ies);
+	err = mt7925_mcu_sched_scan_req(mphy, vif, req);
 	if (err < 0)
 		goto out;
 
@@ -1603,9 +1603,6 @@ static void mt7925_sta_set_decap_offload(struct ieee80211_hw *hw,
 	unsigned long valid = mvif->valid_links;
 	u8 i;
 
-	if (!msta->vif)
-		return;
-
 	mt792x_mutex_acquire(dev);
 
 	valid = ieee80211_vif_is_mld(vif) ? mvif->valid_links : BIT(0);
@@ -1619,9 +1616,6 @@ static void mt7925_sta_set_decap_offload(struct ieee80211_hw *hw,
 			set_bit(MT_WCID_FLAG_HDR_TRANS, &mlink->wcid.flags);
 		else
 			clear_bit(MT_WCID_FLAG_HDR_TRANS, &mlink->wcid.flags);
-
-		if (!mlink->wcid.sta)
-			continue;
 
 		mt7925_mcu_wtbl_update_hdr_trans(dev, vif, sta, i);
 	}

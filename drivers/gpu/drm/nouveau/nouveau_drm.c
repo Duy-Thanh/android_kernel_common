@@ -1461,7 +1461,9 @@ nouveau_drm_init(void)
 	if (!nouveau_modeset)
 		return 0;
 
-	nouveau_module_debugfs_init();
+	ret = nouveau_module_debugfs_init();
+	if (ret)
+		return ret;
 
 #ifdef CONFIG_NOUVEAU_PLATFORM_DRIVER
 	platform_driver_register(&nouveau_platform_driver);
