@@ -16,6 +16,24 @@
       "message": "You also need to add the symbol list here: https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/BUILD.bazel;l\u003d182",
       "revId": "7cc2438f0d3302a53eeec01e955eb8aec06994a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b03efed9_f656427a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-20T18:12:36Z",
+      "side": 1,
+      "message": "Unresolving",
+      "parentUuid": "017f4884_d9336720",
+      "revId": "7cc2438f0d3302a53eeec01e955eb8aec06994a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
