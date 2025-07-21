@@ -373449,6 +373449,12 @@ function {
   parameter_id: 0x01b328b8
 }
 function {
+  id: 0x10f62d1c
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x10f7e72f
   return_type_id: 0x48b5725f
   parameter_id: 0x0258f96e
@@ -413351,6 +413357,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9bfc29dd
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x18bd6530
+  parameter_id: 0xc9082b19
+  parameter_id: 0xc9082b19
+}
+function {
   id: 0x9bfd43c2
   return_type_id: 0x3e10b518
   parameter_id: 0x26e55184
@@ -416860,6 +416874,13 @@ function {
   parameter_id: 0x0130219f
 }
 function {
+  id: 0x9dccf51d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x347303b4
+  parameter_id: 0x2f919e03
+}
+function {
   id: 0x9dcd39d1
   return_type_id: 0x6720d32f
   parameter_id: 0x01c5a749
@@ -417316,6 +417337,14 @@ function {
   parameter_id: 0x0258f96e
   parameter_id: 0x3e10b518
   parameter_id: 0x00c72527
+}
+function {
+  id: 0x9deef1dc
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x3e10b518
+  parameter_id: 0x0258f96e
+  parameter_id: 0x3e10b518
 }
 function {
   id: 0x9df11d57
@@ -435862,6 +435891,15 @@ elf_symbol {
   full_name: "__traceiter_dma_fence_emit"
 }
 elf_symbol {
+  id: 0xafc53276
+  name: "__traceiter_dwc3_readl"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2b7dc4c7
+  type_id: 0x9bfc29dd
+  full_name: "__traceiter_dwc3_readl"
+}
+elf_symbol {
   id: 0x0cf359e7
   name: "__traceiter_f2fs_submit_folio_write"
   is_defined: true
@@ -442142,6 +442180,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_dma_fence_emit"
+}
+elf_symbol {
+  id: 0x53afc62c
+  name: "__tracepoint_dwc3_readl"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_dwc3_readl"
 }
 elf_symbol {
   id: 0x1581f1d1
@@ -479202,6 +479249,15 @@ elf_symbol {
   full_name: "of_hwspin_lock_get_id"
 }
 elf_symbol {
+  id: 0xf1e7ee30
+  name: "of_i2c_get_board_info"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x10b6feff
+  type_id: 0x9dccf51d
+  full_name: "of_i2c_get_board_info"
+}
+elf_symbol {
   id: 0x453bec03
   name: "of_icc_get"
   is_defined: true
@@ -487666,6 +487722,15 @@ elf_symbol {
   full_name: "regulator_register_notifier"
 }
 elf_symbol {
+  id: 0x504d7dfe
+  name: "regulator_register_supply_alias"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7a382155
+  type_id: 0x9deef1dc
+  full_name: "regulator_register_supply_alias"
+}
+elf_symbol {
   id: 0x21d8367b
   name: "regulator_set_active_discharge_regmap"
   is_defined: true
@@ -487826,6 +487891,15 @@ elf_symbol {
   crc: 0xf676ff13
   type_id: 0x9d85be32
   full_name: "regulator_unregister_notifier"
+}
+elf_symbol {
+  id: 0xdecab267
+  name: "regulator_unregister_supply_alias"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbc4a6dcc
+  type_id: 0x10f62d1c
+  full_name: "regulator_unregister_supply_alias"
 }
 elf_symbol {
   id: 0xc0705cb4
@@ -509782,6 +509856,7 @@ interface {
   symbol_id: 0x7e705ab7
   symbol_id: 0x7b03aae7
   symbol_id: 0x92373f85
+  symbol_id: 0xafc53276
   symbol_id: 0x0cf359e7
   symbol_id: 0xa3b097a8
   symbol_id: 0x104ffeec
@@ -510480,6 +510555,7 @@ interface {
   symbol_id: 0xbf086359
   symbol_id: 0xef6e6795
   symbol_id: 0xb2d6f207
+  symbol_id: 0x53afc62c
   symbol_id: 0x1581f1d1
   symbol_id: 0x46235392
   symbol_id: 0xd8f3ca82
@@ -514594,6 +514670,7 @@ interface {
   symbol_id: 0xe63f0c53
   symbol_id: 0x8be0e5f9
   symbol_id: 0xb3d357f8
+  symbol_id: 0xf1e7ee30
   symbol_id: 0x453bec03
   symbol_id: 0xbd1c7f26
   symbol_id: 0x21b8efef
@@ -515533,6 +515610,7 @@ interface {
   symbol_id: 0xbf6a903f
   symbol_id: 0xfd977d86
   symbol_id: 0xddb9ed35
+  symbol_id: 0x504d7dfe
   symbol_id: 0x21d8367b
   symbol_id: 0xc9c5804a
   symbol_id: 0xce959ab5
@@ -515551,6 +515629,7 @@ interface {
   symbol_id: 0x21b06e02
   symbol_id: 0x70f8b485
   symbol_id: 0x3a44a497
+  symbol_id: 0xdecab267
   symbol_id: 0xc0705cb4
   symbol_id: 0x5ebdf90f
   symbol_id: 0xe7e7ab1a
