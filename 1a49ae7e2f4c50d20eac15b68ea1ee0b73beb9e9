@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e540953_ac8c7f66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-21T17:28:15Z",
+      "side": 1,
+      "message": "Very cool, thanks. Now I can do for example `watch -n 1 grep -v vcpu /sys/kernel/debug/pkvm/dump_vmexit_trace` to easily monitor vmexits in real time. :)",
+      "revId": "1a49ae7e2f4c50d20eac15b68ea1ee0b73beb9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
