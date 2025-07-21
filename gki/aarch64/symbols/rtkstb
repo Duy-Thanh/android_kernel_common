@@ -959,6 +959,10 @@
   mmc_gpio_get_ro
   mmc_regulator_get_supply
 
+# required by dwc3-rtk-debugfs.ko
+  __traceiter_dwc3_readl
+  __tracepoint_dwc3_readl
+
 # required by dwc3-rtk.ko
   platform_device_put
   usb_get_dr_mode
@@ -1828,6 +1832,13 @@
   pin_user_pages_fast
   unpin_user_pages
   uuid_null
+
+# required by regulator_supply_alias.ko
+  regulator_register_supply_alias
+  regulator_unregister_supply_alias
+
+# required by selector.ko
+  of_i2c_get_board_info
 
 # preserved by --additions-only
   cancel_work
