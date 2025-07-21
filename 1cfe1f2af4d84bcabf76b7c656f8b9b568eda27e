@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ad2b8f_db83e2ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-21T21:45:48Z",
+      "side": 1,
+      "message": "Bypassing presubmit, since this is just a symbol list update, and has no functional bearing.",
+      "revId": "1cfe1f2af4d84bcabf76b7c656f8b9b568eda27e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
