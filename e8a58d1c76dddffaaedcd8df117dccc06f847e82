@@ -87,6 +87,24 @@
       "message": "this is going to break the abi.  Why are new features being added after the feature deadline has passed?",
       "revId": "e8a58d1c76dddffaaedcd8df117dccc06f847e82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aac2f61_df239388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2025-07-22T13:45:14Z",
+      "side": 1,
+      "message": "this feature has been merged and drop, and owner recently start to work on this (base on v6.16rc1), so the timing to introduce this to aosp is a bit late.",
+      "parentUuid": "67d981ea_7a17acf2",
+      "revId": "e8a58d1c76dddffaaedcd8df117dccc06f847e82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
