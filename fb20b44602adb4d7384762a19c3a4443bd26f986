@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca142dc5_602cbfb9",
+        "filename": "net/unix/af_unix.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2556,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-22T14:44:12Z",
+      "side": 1,
+      "message": "not quite right placement for {",
+      "range": {
+        "startLine": 2556,
+        "startChar": 0,
+        "endLine": 2556,
+        "endChar": 34
+      },
+      "revId": "fb20b44602adb4d7384762a19c3a4443bd26f986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
