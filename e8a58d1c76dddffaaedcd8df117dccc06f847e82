@@ -22,6 +22,23 @@
       },
       "revId": "e8a58d1c76dddffaaedcd8df117dccc06f847e82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d981ea_7a17acf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-22T09:59:22Z",
+      "side": 1,
+      "message": "this is going to break the abi.  Why are new features being added after the feature deadline has passed?",
+      "revId": "e8a58d1c76dddffaaedcd8df117dccc06f847e82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
