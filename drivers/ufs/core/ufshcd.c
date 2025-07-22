@@ -9,7 +9,7 @@
  *	Vinayak Holikatti <h.vinayak@samsung.com>
  */
 
-#include <linux/async.h>
+#include <linux/async.h
 #include <linux/devfreq.h>
 #include <linux/nls.h>
 #include <linux/of.h>
@@ -8881,6 +8881,7 @@ static int ufshcd_device_init(struct ufs_hba *hba, bool init_dev_params)
 	struct Scsi_Host *host = hba->host;
 
 	hba->ufshcd_state = UFSHCD_STATE_RESET;
+        pr_info("Randall test build\n");
 
 	ret = ufshcd_link_startup(hba);
 	if (ret)
