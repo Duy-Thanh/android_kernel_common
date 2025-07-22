@@ -16,6 +16,24 @@
       "message": "No bug id?  Why are these needed now?",
       "revId": "28e0a708d2db37861d5bd48b5feaf02e479141de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d910503_d75dab32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2025-07-22T13:37:19Z",
+      "side": 1,
+      "message": "Add bug id. \n\nwe are going to introduce this error recovery mechanism for unexpected link down event, one of the CL -\u003e pa/3703408 has dependency on this one, so we cherry-pick it to this topic",
+      "parentUuid": "1076a12b_88ebdbde",
+      "revId": "28e0a708d2db37861d5bd48b5feaf02e479141de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
