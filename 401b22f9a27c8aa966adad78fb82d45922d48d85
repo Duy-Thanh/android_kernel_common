@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ec6a6ad_21488378",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-22T06:34:27Z",
+      "side": 1,
+      "message": "This can not be applied as-is, it is missing MANY follow-on fixes.  There is a reason it has not been included into any stable kernel tree just yet.",
+      "revId": "401b22f9a27c8aa966adad78fb82d45922d48d85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
