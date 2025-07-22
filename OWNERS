@@ -1,19 +1,15 @@
-# The full list of approvers is defined in
-# https://android.googlesource.com/kernel/common/+/refs/meta/config/OWNERS
+set noparent
 
-# The following OWNERS are defined at the top level to improve the OWNERS
-# suggestions through any user interface. Consider those people the ones that
-# can help with finding the best person to review.
-adelva@google.com
-gregkh@google.com
-joneslee@google.com
-maennich@google.com
-saravanak@google.com
-surenb@google.com
-tkjos@google.com
-vmartensson@google.com
-willdeacon@google.com
+# GKI Dr. No Enforcement is active on this branch. Approval of one of the Dr.
+# No reviewers is required following a regular CodeReview+2 vote of a code
+# reviewer.
+#
+# See the GKI release documentation (go/gki-dr-no) for further details.
+#
+# The expanded list of reviewers can be found at:
+# https://android.googlesource.com/kernel/common/+/android-mainline/OWNERS_DrNo
 
+<<<<<<< HEAD   (34006315f4850cb56f0de3d89410f841ca0894e1 UPSTREAM: af_unix: Don't leave consecutive consumed OOB skbs)
 # Test mapping changes can be made by anyone
 per-file */TEST_MAPPING = *
 
@@ -36,3 +32,12 @@ tnowicki@google.com
 urbanczyk@google.com
 wmacek@google.com
 zyta@google.com
+||||||| BASE
+# Test mapping changes can be made by anyone
+per-file */TEST_MAPPING = *
+
+# Test config xml can be made by anyone
+per-file */*.xml = *
+=======
+include kernel/common:android-mainline:/OWNERS_DrNo
+>>>>>>> BRANCH (633de2adabf1ccd886416d1fdb4f57e90eded752 ANDROID: Enable GKI Dr. No Enforcement)
