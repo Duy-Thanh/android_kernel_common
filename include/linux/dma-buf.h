@@ -733,11 +733,11 @@ struct task_dma_buf_info *get_task_dma_buf_info(struct task_struct *task)
 	if (!task_has_dma_buf_info(task))
 		return NULL;
 
-	if (task->flags & PF_KTHREAD)
-		return get_kthread_dmabuf_info(task);
-
 	if (!task->worker_private)
 		return ERR_PTR(-ENOMEM);
+
+	if (task->flags & PF_KTHREAD)
+		return get_kthread_dmabuf_info(task) ? : ERR_PTR(-ENOMEM);
 
 	return (struct task_dma_buf_info *)task->worker_private;
 }

@@ -144,7 +144,11 @@ void free_kthread_struct(struct task_struct *k)
 	WARN_ON_ONCE(kthread->blkcg_css);
 #endif
 	k->worker_private = NULL;
-	if (kthread->dmabuf_info)
+	/*
+	 * By now put_dmabuf_info() should have released the reference and
+	 * reset this field.
+	 */
+	if (WARN_ON(kthread->dmabuf_info))
 		kfree(kthread->dmabuf_info);
 	kfree(kthread->full_name);
 	kfree(kthread);
@@ -365,7 +369,6 @@ static int kthread(void *_create)
 	self->full_name = create->full_name;
 	self->threadfn = threadfn;
 	self->data = data;
-	self->dmabuf_info = NULL;
 
 	/*
 	 * The new thread inherited kthreadd's priority and CPU mask. Reset
