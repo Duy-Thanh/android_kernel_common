@@ -2861,8 +2861,14 @@ void free_unref_folios(struct folio_batch *folios)
 		struct folio *folio = folios->folios[i];
 		unsigned long pfn = folio_pfn(folio);
 		unsigned int order = folio_order(folio);
+		bool bypass = false;
 
 		if (!free_pages_prepare(&folio->page, order))
+			continue;
+
+		trace_android_vh_free_pages_ok_bypass(&folio->page, order,
+				FPI_NONE, &bypass);
+		if (bypass)
 			continue;
 		/*
 		 * Free orders not handled on the PCP directly to the
