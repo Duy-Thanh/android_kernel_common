@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08926df8_77821634",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/trace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-23T01:10:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab57e9f0_674ca8a2",
+      "revId": "ee5da7df087308185430f9f9c03e7a76c5217905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63898674_355ecf0f",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Make sense. The name \"pkvm_exit_trace“ sounds clear enough to me and it is shorter.",
       "parentUuid": "63898674_355ecf0f",
+      "revId": "ee5da7df087308185430f9f9c03e7a76c5217905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1de669_5da668d0",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_debugfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-23T01:10:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68a8333d_b30bb31c",
       "revId": "ee5da7df087308185430f9f9c03e7a76c5217905",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
