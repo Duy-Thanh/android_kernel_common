@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12532742_8698a598",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_debugfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-23T12:43:20Z",
+      "side": 1,
+      "message": "If we are changing the name anyway, how about just \"vmexit_trace\"?",
+      "revId": "31a97745a68bca4f8d1c1bb4552efffb3fd7809b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
