@@ -739,6 +739,10 @@ struct task_dma_buf_info *get_task_dma_buf_info(struct task_struct *task)
 	if (task->flags & PF_KTHREAD)
 		return get_kthread_dmabuf_info(task) ? : ERR_PTR(-ENOMEM);
 
+	task = task->group_leader;
+	if (!task->worker_private)
+		return ERR_PTR(-ENOMEM);
+
 	return (struct task_dma_buf_info *)task->worker_private;
 }
 
@@ -847,8 +851,8 @@ int dma_buf_get_flags(struct dma_buf *dmabuf, unsigned long *flags);
 #ifdef CONFIG_DMA_SHARED_BUFFER
 
 int is_dma_buf_file(struct file *file);
-int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task);
-void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task);
+int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task, bool fd_ref);
+void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task, bool fd_ref);
 int copy_dmabuf_info(u64 clone_flags, struct task_struct *task);
 void put_dmabuf_info(struct task_struct *task);
 
@@ -856,9 +860,9 @@ void put_dmabuf_info(struct task_struct *task);
 
 static inline int is_dma_buf_file(struct file *file) { return 0; }
 static inline int dma_buf_account_task(struct dma_buf *dmabuf,
-				       struct task_struct *task) { return 0; }
+				       struct task_struct *task, bool fd_ref) { return 0; }
 static inline void dma_buf_unaccount_task(struct dma_buf *dmabuf,
-					  struct task_struct *task) {}
+					  struct task_struct *task, bool fd_ref) {}
 static inline int copy_dmabuf_info(u64 clone_flags,
 				   struct task_struct *task) { return 0; }
 static inline void put_dmabuf_info(struct task_struct *task) {}

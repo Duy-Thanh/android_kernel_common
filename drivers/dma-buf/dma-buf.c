@@ -329,6 +329,16 @@ static void add_task_dmabuf_record(struct task_dma_buf_info *dmabuf_info,
 	atomic64_inc(&get_dmabuf_ext(dmabuf)->nr_task_refs);
 }
 
+static struct task_dma_buf_info *sf_dmabuf_info;
+
+static inline bool should_log(struct task_dma_buf_info *dmabuf_info, struct task_struct *task)
+{
+	if (sf_dmabuf_info && sf_dmabuf_info == dmabuf_info)
+		return true;
+
+	 return !strcmp(task->comm, "surfaceflinger");
+}
+
 /**
  * dma_buf_account_task - Account a dmabuf to a task
  * @dmabuf:	[in]	pointer to dma_buf
@@ -342,7 +352,7 @@ static void add_task_dmabuf_record(struct task_dma_buf_info *dmabuf_info,
  * * 0 on success
  * * A negative error code upon error
  */
-int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task)
+int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task, bool fd_ref)
 {
 	struct task_dma_buf_info *dmabuf_info;
 	struct task_dma_buf_record *rec;
@@ -364,10 +374,24 @@ int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task)
 	rec = find_task_dmabuf_record(dmabuf_info, dmabuf);
 	if (rec) {
 		++rec->refcnt;
+		if (should_log(dmabuf_info, task))
+			pr_err("dmabuf account existing record, %s [%d %s] [%lx %zu] [%lx %u %zu] %lu\n",
+					fd_ref ? "fd" : "vma",
+					task_pid_nr(task), task->comm,
+					(unsigned long)dmabuf, dmabuf->size,
+					(unsigned long)dmabuf_info, dmabuf_info->rss, dmabuf_info->dmabuf_count,
+					rec->refcnt);
 		trim_task_dmabuf_records_locked();
 	} else {
 		rec = alloc_task_dmabuf_record();
 		add_task_dmabuf_record(dmabuf_info, dmabuf, rec);
+		if (should_log(dmabuf_info, task))
+			pr_err("dmabuf account new record, %s [%d %s] [%lx %zu] [%lx %u %zu] %lu\n",
+					fd_ref ? "fd" : "vma",
+					task_pid_nr(task), task->comm,
+					(unsigned long)dmabuf, dmabuf->size,
+					(unsigned long)dmabuf_info, dmabuf_info->rss, dmabuf_info->dmabuf_count,
+					rec->refcnt);
 	}
 	spin_unlock(&dmabuf_info->lock);
 	task_dmabuf_records_preload_end();
@@ -385,7 +409,7 @@ int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task)
  * references to @dmabuf are removed from @task, the buffer's size is removed
  * from the task's dmabuf RSS.
  */
-void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task)
+void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task, bool fd_ref)
 {
 	struct task_dma_buf_info *dmabuf_info;
 	struct task_dma_buf_record *rec;
@@ -402,13 +426,40 @@ void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task)
 
 	spin_lock(&dmabuf_info->lock);
 	rec = find_task_dmabuf_record(dmabuf_info, dmabuf);
-	if (rec && --rec->refcnt == 0) {
-		list_del(&rec->node);
-		free_task_dmabuf_record(rec);
-		dmabuf_info->dmabuf_count--;
-		dmabuf_info->rss -= dmabuf->size;
-		trace_dmabuf_rss_stat(dmabuf_info->rss, -dmabuf->size, dmabuf);
-		atomic64_dec(&get_dmabuf_ext(dmabuf)->nr_task_refs);
+	if (rec) {
+		if (--rec->refcnt == 0) {
+			list_del(&rec->node);
+			free_task_dmabuf_record(rec);
+			dmabuf_info->dmabuf_count--;
+			dmabuf_info->rss -= dmabuf->size;
+			trace_dmabuf_rss_stat(dmabuf_info->rss, -dmabuf->size, dmabuf);
+			atomic64_dec(&get_dmabuf_ext(dmabuf)->nr_task_refs);
+			if (should_log(dmabuf_info, task))
+				pr_err("dmabuf unaccount and remove record, %s [%d %s] [%lx %zu] [%lx %u %zu] %lu\n",
+						fd_ref ? "fd" : "vma",
+						task_pid_nr(task), task->comm,
+						(unsigned long)dmabuf, dmabuf->size,
+						(unsigned long)dmabuf_info, dmabuf_info->rss, dmabuf_info->dmabuf_count,
+						rec->refcnt);
+			if (atomic64_read(&get_dmabuf_ext(dmabuf)->nr_task_refs) < 0)
+				pr_alert("dmabuf regcount went negative (%lld) after task %d %s dropped it\n",
+					 atomic64_read(&get_dmabuf_ext(dmabuf)->nr_task_refs),
+					 task_pid_nr(task), task->comm);
+		} else {
+			if (should_log(dmabuf_info, task))
+				pr_err("dmabuf unaccount record, %s [%d %s] [%lx %zu] [%lx %u %zu] %lu\n",
+					fd_ref ? "fd" : "vma",
+					task_pid_nr(task), task->comm,
+					(unsigned long)dmabuf, dmabuf->size,
+					(unsigned long)dmabuf_info, dmabuf_info->rss, dmabuf_info->dmabuf_count,
+					rec->refcnt);
+		}
+	} else {
+		if (should_log(dmabuf_info, task))
+			pr_err("dmabuf unaccount non-existing record, %s [%d %s] [%lx %zu] [%lx %u %zu]\n",
+				fd_ref ? "fd" : "vma", task_pid_nr(task), task->comm,
+				(unsigned long)dmabuf, dmabuf->size,
+				(unsigned long)dmabuf_info, dmabuf_info->rss, dmabuf_info->dmabuf_count);
 	}
 	spin_unlock(&dmabuf_info->lock);
 }
@@ -421,6 +472,10 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 	int retries = 0;
 	size_t count;
 
+	if (!strcmp(task->comm, "surfaceflinger"))
+		pr_err("copy child dmabuf info, [%d %s] %llu\n",
+			task_pid_nr(task), task->comm, clone_flags);
+
 	if (!task_has_dma_buf_info(task))
 		return 0; /* Task is not supposed to have dmabuf_info */
 
@@ -428,6 +483,10 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 	/* Original might not have dmabuf_info and that's fine */
 	if (IS_ERR(dmabuf_info))
 		dmabuf_info = NULL;
+
+	if (dmabuf_info && !sf_dmabuf_info && !strcmp(task->comm, "surfaceflinger")) {
+		sf_dmabuf_info = dmabuf_info;
+	}
 
 	if (dmabuf_info && (clone_flags & (CLONE_VM | CLONE_FILES))
 						== (CLONE_VM | CLONE_FILES)) {
@@ -438,8 +497,20 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 		refcount_inc(&dmabuf_info->refcnt);
 		set_task_dma_buf_info(task, dmabuf_info);
 
+		if (should_log(dmabuf_info, task))
+			pr_err("child dmabuf info is shared, [%d %s] [%lx %u %zu] %llu\n",
+				task_pid_nr(task), task->comm,
+				(unsigned long)dmabuf_info, dmabuf_info->rss, dmabuf_info->dmabuf_count,
+				clone_flags);
+
 		return 0;
 	}
+
+	if (should_log(dmabuf_info, task))
+		pr_err("child dmabuf info is not shared, [%d %s] [%lx %u %zu] %llu\n",
+			task_pid_nr(task), task->comm,
+			(unsigned long)dmabuf_info, dmabuf_info->rss, dmabuf_info->dmabuf_count,
+			clone_flags);
 
 	/*
 	 * Allocate now even if !current->dmabuf_info instead of during
@@ -529,12 +600,12 @@ void put_dmabuf_info(struct task_struct *task)
 		return;
 
 	if (dmabuf_info->rss)
-		pr_alert("destroying task %d with non-zero dmabuf rss %u\n",
-			 task_pid_nr(task), dmabuf_info->rss);
+		pr_alert("destroying task %d %s with non-zero dmabuf rss %u\n",
+			 task_pid_nr(task), task->comm, dmabuf_info->rss);
 
 	if (!list_empty(&dmabuf_info->dmabufs) || dmabuf_info->dmabuf_count > 0)
-		pr_alert("destroying task %d with non-empty dmabuf list of size %zu\n",
-			 task_pid_nr(task), dmabuf_info->dmabuf_count);
+		pr_alert("destroying task %d %s with non-empty dmabuf list of size %zu\n",
+			 task_pid_nr(task), task->comm, dmabuf_info->dmabuf_count);
 
 	kfree(dmabuf_info);
 }
@@ -560,7 +631,7 @@ static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 
 	ret = dmabuf->ops->mmap(dmabuf, vma);
 	if (!ret) {
-		int acct_err = dma_buf_account_task(dmabuf, current);
+		int acct_err = dma_buf_account_task(dmabuf, current, false);
 		if (acct_err)
 			pr_err("dmabuf accounting failed during mmap operation, err %d\n",
 			       acct_err);
@@ -946,7 +1017,7 @@ static void dma_buf_show_fdinfo(struct seq_file *m, struct file *file)
 static int dma_buf_flush(struct file *file, fl_owner_t id)
 {
 	/* When dmabuf FD is closed we should unaccount it */
-	dma_buf_unaccount_task(file->private_data, current);
+	dma_buf_unaccount_task(file->private_data, current, true);
 	return 0;
 }
 
@@ -1977,7 +2048,7 @@ int dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma,
 
 	ret = dmabuf->ops->mmap(dmabuf, vma);
 	if (!ret) {
-		int acct_err = dma_buf_account_task(dmabuf, current);
+		int acct_err = dma_buf_account_task(dmabuf, current, false);
 		if (acct_err)
 			pr_err("dmabuf accounting failed during mmap operation, err %d\n",
 			       acct_err);
