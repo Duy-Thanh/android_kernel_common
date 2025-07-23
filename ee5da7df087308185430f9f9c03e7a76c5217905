@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab57e9f0_674ca8a2",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/trace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-23T00:39:28Z",
+      "side": 1,
+      "message": "Will fix this.",
+      "parentUuid": "dbdc9b36_211c3774",
+      "revId": "ee5da7df087308185430f9f9c03e7a76c5217905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63898674_355ecf0f",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_debugfs.c",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2025-07-22T16:07:28Z",
       "side": 1,
       "message": "Since it is in `kvm/` directory, not in `pkvm/`, it is not so clear that it is pKVM trace, not a regular KVM trace, so we should name it rather `pkvm_exit_trace`, or `pkvm_dump_exit_trace`?",
+      "revId": "ee5da7df087308185430f9f9c03e7a76c5217905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a8333d_b30bb31c",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_debugfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-23T00:39:28Z",
+      "side": 1,
+      "message": "Make sense. The name \"pkvm_exit_trace“ sounds clear enough to me and it is shorter.",
+      "parentUuid": "63898674_355ecf0f",
       "revId": "ee5da7df087308185430f9f9c03e7a76c5217905",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
