@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "292dbd18_d1924c76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-07-23T08:24:21Z",
+      "side": 1,
+      "message": "Why hasn\u0027t the patch \u0027mm: madvise: use per_vma lock for MADV_FREE\u0027 been synchronized?",
+      "revId": "aeb35eb6f21607e1ce58ccbb125e7d86f7eeb78c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
