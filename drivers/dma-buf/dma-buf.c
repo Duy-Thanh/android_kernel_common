@@ -409,6 +409,10 @@ void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task)
 		dmabuf_info->rss -= dmabuf->size;
 		trace_dmabuf_rss_stat(dmabuf_info->rss, -dmabuf->size, dmabuf);
 		atomic64_dec(&get_dmabuf_ext(dmabuf)->nr_task_refs);
+		if (atomic64_read(&get_dmabuf_ext(dmabuf)->nr_task_refs) < 0)
+			pr_alert("dmabuf regcount went negative (%lld) after task %d dropped it\n",
+				 atomic64_read(&get_dmabuf_ext(dmabuf)->nr_task_refs),
+				 task_pid_nr(task));
 	}
 	spin_unlock(&dmabuf_info->lock);
 }
