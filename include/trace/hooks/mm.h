@@ -635,6 +635,9 @@ struct oom_control;
 DECLARE_HOOK(android_vh_mm_may_oom_exit,
 	TP_PROTO(struct oom_control *oc, unsigned long did_some_progress),
 	TP_ARGS(oc, did_some_progress));
+DECLARE_HOOK(android_vh_gcma_cc_allow_nonworkingset,
+	TP_PROTO(bool *allow_nonworkingset),
+	TP_ARGS(allow_nonworkingset));
 DECLARE_HOOK(android_vh_gcma_cc_store_page_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
