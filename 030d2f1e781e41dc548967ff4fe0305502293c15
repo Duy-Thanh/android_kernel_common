@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27ef706d_f1c9c94d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-24T10:57:27Z",
+      "side": 1,
+      "message": "You may as well create `gki/x86_64/abi.stg.allowed_breaks` as empty, in this change.",
+      "revId": "030d2f1e781e41dc548967ff4fe0305502293c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
