@@ -285,6 +285,24 @@
       "parentUuid": "eac1e74b_1d1de2b3",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4aaadd8_400b6767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4207969
+      },
+      "writtenOn": "2025-07-24T02:03:02Z",
+      "side": 1,
+      "message": "I have a question: Is it that exporting Symbols is not allowed or is the position where they are added incorrect?",
+      "parentUuid": "be088c86_0d7e957b",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
