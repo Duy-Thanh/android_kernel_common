@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d4466db_cb017169",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-07-24T10:39:40Z",
+      "side": 1,
+      "message": "Missing internal bug tracking, please add details why do we need this in the internal bug tracking \u0026 how will the ff-a notification be used and tag the rest of the series with it.",
+      "revId": "bd5df93df16df19494e79635ba4039490ace9f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
