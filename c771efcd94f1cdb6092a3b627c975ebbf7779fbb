@@ -34,6 +34,24 @@
       "parentUuid": "407f137b_1eacab31",
       "revId": "c771efcd94f1cdb6092a3b627c975ebbf7779fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "504cc9c5_797bba9b",
+        "filename": "gki/x86_64/symbols/base",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-24T10:37:27Z",
+      "side": 1,
+      "message": "It should be merged before aosp/3707568 otherwise symbol_get/pus is added to the list and abi generation fails. I\u0027ve placed it intentionally at the beginning to not intermix with BUILD.bazel updates. Should I remove it from topic, suqsh or maybe place just before aosp/3707568?",
+      "parentUuid": "7263a795_8bc03b9e",
+      "revId": "c771efcd94f1cdb6092a3b627c975ebbf7779fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
