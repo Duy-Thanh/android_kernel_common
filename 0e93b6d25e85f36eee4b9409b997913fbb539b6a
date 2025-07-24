@@ -34,6 +34,24 @@
       "parentUuid": "b6fcc2f3_ba4659e5",
       "revId": "0e93b6d25e85f36eee4b9409b997913fbb539b6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a0d034a_3a3749b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-24T08:22:41Z",
+      "side": 1,
+      "message": "Looks like Gerrit bug or feature. This commit does not create empty file for abi. Same here: https://android-review.git.corp.google.com/c/kernel/common/+/3707571/comments/896bf2f7_a1fcdf7b",
+      "parentUuid": "3b8e85aa_717f240f",
+      "revId": "0e93b6d25e85f36eee4b9409b997913fbb539b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
