@@ -70,6 +70,24 @@
       "parentUuid": "504cc9c5_797bba9b",
       "revId": "c771efcd94f1cdb6092a3b627c975ebbf7779fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568f8eea_4315f058",
+        "filename": "gki/x86_64/symbols/base",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-24T12:15:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7cfbfd1_628e0369",
+      "revId": "c771efcd94f1cdb6092a3b627c975ebbf7779fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
