@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f43b403_36399072",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmx_asm.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-24T18:32:54Z",
+      "side": 1,
+      "message": "In this context this means: \"if the host\u0027s SPEC_CTRL value differs from pkvm\u0027s\"? (I understand this was just copied from vmenter.S :))",
+      "revId": "e9193e5f79438ca399b92ffcfbf82d2a433ec39a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea18b3e7_a25524d2",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-24T18:32:54Z",
+      "side": 1,
+      "message": "nit: typo: x86_spec_ctrl",
+      "fixSuggestions": [
+        {
+          "fixId": "e9acfd50_84e2393e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 926,
+                "startChar": 0,
+                "endLine": 927,
+                "endChar": 0
+              },
+              "replacement": "\t * Setup the x86_spec_ctrl percpu value for the pkvm hypervisor before\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e9193e5f79438ca399b92ffcfbf82d2a433ec39a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
