@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "896bf2f7_a1fcdf7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-07-24T05:23:44Z",
+      "side": 1,
+      "message": "hould the file abi.stg be here in this commit and not in the one adding symbol list for x86 desktop?",
+      "revId": "285ce1923e40d33d0a87247e70473a78926f0fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
