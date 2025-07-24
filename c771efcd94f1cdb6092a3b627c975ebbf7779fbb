@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407f137b_1eacab31",
+        "filename": "gki/x86_64/symbols/base",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-24T10:23:16Z",
+      "side": 1,
+      "message": "This file addition should be split into its own change.\n\nIt should be accompanied by a change to `BUILD.bazel` that adds it to configuration.",
+      "revId": "c771efcd94f1cdb6092a3b627c975ebbf7779fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
