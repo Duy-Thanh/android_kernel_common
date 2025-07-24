@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ea8cc1_633300f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-24T10:36:32Z",
+      "side": 1,
+      "message": "Looks OK, except the `base` file addition should be in this change.",
+      "revId": "7e5b7eef3f3ad4c2dd900f484cbf0d32453bb593",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
