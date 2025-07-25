@@ -91672,6 +91672,12 @@ member {
   offset: 1024
 }
 member {
+  id: 0xe4ce25b6
+  name: "f_dontcache"
+  type_id: 0x9547a3da
+  offset: 736
+}
+member {
   id: 0x5010272b
   name: "f_ep"
   type_id: 0x1d33485a
@@ -243599,6 +243605,7 @@ struct_union {
     member_id: 0x17b29a7f
     member_id: 0xaf177ee8
     member_id: 0x38568dd5
+    member_id: 0xe4ce25b6
     member_id: 0x4a3a95ab
     member_id: 0xa6beecde
     member_id: 0xe253ea42

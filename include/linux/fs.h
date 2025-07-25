@@ -998,6 +998,9 @@ struct file {
 	struct mutex		f_pos_lock;
 	loff_t			f_pos;
 	unsigned int		f_flags;
+#ifndef __GENKSYMS__
+	fmode_t                 f_dontcache;
+#endif
 	struct fown_struct	f_owner;
 	const struct cred	*f_cred;
 	struct file_ra_state	f_ra;
@@ -1915,6 +1918,9 @@ struct dir_context {
 struct iov_iter;
 struct io_uring_cmd;
 struct offset_ctx;
+
+/* File system supports uncached read/write buffered IO */
+#define FOP_DONTCACHE ((__force fmode_t)(1 << 7))
 
 struct file_operations {
 	struct module *owner;
@@ -3300,7 +3306,10 @@ static inline int kiocb_set_rw_flags(struct kiocb *ki, rwf_t flags)
 		kiocb_flags |= IOCB_NOIO;
 	}
 	if (flags & RWF_DONTCACHE) {
-		return -EOPNOTSUPP;
+#ifndef __GENKSYMS__
+		if (!(ki->ki_filp->f_dontcache & FOP_DONTCACHE))
+			return -EOPNOTSUPP;
+#endif
 	}
 	kiocb_flags |= (__force int) (flags & RWF_SUPPORTED);
 	if (flags & RWF_SYNC)

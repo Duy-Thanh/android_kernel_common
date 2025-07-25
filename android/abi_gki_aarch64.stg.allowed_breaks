@@ -251,3 +251,6 @@ type 'struct drm_framebuffer' changed
 type 'struct readahead_control' changed
   member 'bool dropbehind' was added
 
+type 'struct file' changed
+  member 'fmode_t f_dontcache' was added
+
