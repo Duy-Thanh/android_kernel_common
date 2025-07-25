@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06277079_289e4124",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-25T12:35:01Z",
+      "side": 1,
+      "message": "Good idea -- we can handle VERSION and FEATURES entirely in the core code and then we can also bridge the SMCCC \u003c-\u003e module interface too so we don\u0027t e.g. end up with wild error codes from modules.",
+      "parentUuid": "24ba23da_d6c6592b",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 0
+      },
+      "revId": "e48f02a07e5feec6455032b40258a963d2d8c608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06e8256e_c079a966",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 2
