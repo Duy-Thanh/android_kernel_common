@@ -22,6 +22,47 @@
       },
       "revId": "e48f02a07e5feec6455032b40258a963d2d8c608",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e8256e_c079a966",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1836,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-25T11:12:21Z",
+      "side": 1,
+      "message": "nit: no need for the `else`",
+      "range": {
+        "startLine": 1836,
+        "startChar": 2,
+        "endLine": 1836,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9fcf1feb_7c29a4f6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+              "range": {
+                "startLine": 1836,
+                "startChar": 0,
+                "endLine": 1837,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (smccc_trng_available)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e48f02a07e5feec6455032b40258a963d2d8c608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
