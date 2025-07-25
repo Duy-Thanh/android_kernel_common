@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24ba23da_d6c6592b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-07-25T11:22:44Z",
+      "side": 1,
+      "message": "Good point!. I\u0027ll do that. What do you think about instead of having\n\n\u003e  a new struct containing four function pointers.\n\na module would register with just UUID and function producing random numbers eg.\n\n`__register_guest_trng_handler(u8 uuid[16], int (*cb)(size_t size, u8* out))`\n?",
+      "parentUuid": "57763c67_686b21cc",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 0
+      },
+      "revId": "e48f02a07e5feec6455032b40258a963d2d8c608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06e8256e_c079a966",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 2
