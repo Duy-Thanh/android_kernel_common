@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d290bcd_2306e1a0",
+        "filename": "arch/x86/include/asm/vmx.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-25T15:43:28Z",
+      "side": 1,
+      "message": "nit: There is still a duplicate of this define in vmx.c? (Maybe it\u0027s ok for now...)",
+      "revId": "677c06e0a3b0e6b1d7eb0db15f3a7030dae8edbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
