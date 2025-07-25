@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57763c67_686b21cc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-07-25T11:11:34Z",
+      "side": 1,
+      "message": "The TRNG firmware spec only has four functions, so I think it would be better to have the module register a new struct containing four function pointers. That way, we can pass the relevant parameters rather than pass in all of the SMCCC registers and the core code can take care of marshalling the results structure as well.\n\nThat also makes it somewhat more difficult for this hypercall range to be abused to implement arbitrary other hypercalls!",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 0
+      },
+      "revId": "e48f02a07e5feec6455032b40258a963d2d8c608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
