@@ -16,6 +16,23 @@
       "message": "If an acceptable workaround, I think this should be merged into all kernels older than 6.4.",
       "revId": "d7ff31431a1c2dce489f3dd83abcbf977de46fd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "624eb2f4_6c960ad7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2025-07-26T18:51:54Z",
+      "side": 1,
+      "message": "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d121664093803",
+      "revId": "d7ff31431a1c2dce489f3dd83abcbf977de46fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
