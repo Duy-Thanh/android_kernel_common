@@ -173,7 +173,13 @@ void xe_irq_enable_hwe(struct xe_gt *gt)
 		if (ccs_mask & (BIT(0)|BIT(1)))
 			xe_mmio_write32(mmio, CCS0_CCS1_INTR_MASK, ~dmask);
 		if (ccs_mask & (BIT(2)|BIT(3)))
+<<<<<<< HEAD   (53063e07d53576af9c287dad652e7e98ec8a1ee3 ANDROID: kvm: pkvm: Check and set kvm governed features)
 			xe_mmio_write32(mmio, CCS2_CCS3_INTR_MASK, ~dmask);
+||||||| BASE
+			xe_mmio_write32(gt,  CCS2_CCS3_INTR_MASK, ~dmask);
+=======
+			xe_mmio_write32(gt, CCS2_CCS3_INTR_MASK, ~dmask);
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 	}
 
 	if (xe_gt_is_media_type(gt) || MEDIA_VER(xe) < 13) {

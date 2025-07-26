@@ -990,7 +990,13 @@ timeout:
 		BUILD_BUG_ON(FIELD_MAX(GUC_HXG_MSG_0_TYPE) != GUC_HXG_TYPE_RESPONSE_SUCCESS);
 		BUILD_BUG_ON((GUC_HXG_TYPE_RESPONSE_SUCCESS ^ GUC_HXG_TYPE_RESPONSE_FAILURE) != 1);
 
+<<<<<<< HEAD   (53063e07d53576af9c287dad652e7e98ec8a1ee3 ANDROID: kvm: pkvm: Check and set kvm governed features)
 		ret = xe_mmio_wait32(mmio, reply_reg, resp_mask, resp_mask,
+||||||| BASE
+		ret = xe_mmio_wait32(gt, reply_reg,  resp_mask, resp_mask,
+=======
+		ret = xe_mmio_wait32(gt, reply_reg, resp_mask, resp_mask,
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 				     1000000, &header, false);
 
 		if (unlikely(FIELD_GET(GUC_HXG_MSG_0_ORIGIN, header) !=
@@ -1180,7 +1186,7 @@ void xe_guc_print_info(struct xe_guc *guc, struct drm_printer *p)
 
 	xe_force_wake_put(gt_to_fw(gt), XE_FW_GT);
 
-	xe_guc_ct_print(&guc->ct, p, false);
+	xe_guc_ct_print(&guc->ct, p);
 	xe_guc_submit_print(guc, p);
 }
 

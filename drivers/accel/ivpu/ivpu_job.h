@@ -30,8 +30,15 @@ struct ivpu_cmdq {
 	u32 entry_count;
 	u32 id;
 	u32 db_id;
+<<<<<<< HEAD   (53063e07d53576af9c287dad652e7e98ec8a1ee3 ANDROID: kvm: pkvm: Check and set kvm governed features)
 	u8 priority;
 	bool is_legacy;
+||||||| BASE
+	bool db_registered;
+=======
+	bool db_registered;
+	u8 priority;
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 };
 
 /**

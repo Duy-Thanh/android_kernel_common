@@ -455,7 +455,12 @@ priority_bands_fops_write(struct file *file, const char __user *user_buf, size_t
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD   (53063e07d53576af9c287dad652e7e98ec8a1ee3 ANDROID: kvm: pkvm: Check and set kvm governed features)
 	buf[ret] = '\0';
+||||||| BASE
+=======
+	buf[size] = '\0';
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 	ret = sscanf(buf, "%u %u %u %u", &band, &grace_period, &process_grace_period,
 		     &process_quantum);
 	if (ret != 4)
