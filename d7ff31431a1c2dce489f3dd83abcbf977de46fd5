@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abee390b_aad57607",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-07-26T18:35:30Z",
+      "side": 1,
+      "message": "If an acceptable workaround, I think this should be merged into all kernels older than 6.4.",
+      "revId": "d7ff31431a1c2dce489f3dd83abcbf977de46fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
