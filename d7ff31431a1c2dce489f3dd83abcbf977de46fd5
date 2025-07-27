@@ -33,6 +33,24 @@
       "message": "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d121664093803",
       "revId": "d7ff31431a1c2dce489f3dd83abcbf977de46fd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30094b03_30076b26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-27T11:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abee390b_aad57607",
+      "revId": "d7ff31431a1c2dce489f3dd83abcbf977de46fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
