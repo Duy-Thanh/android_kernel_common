@@ -476713,6 +476713,15 @@ elf_symbol {
   full_name: "of_irq_parse_one"
 }
 elf_symbol {
+  id: 0x3fb40bf5
+  name: "of_irq_to_resource"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x482c3875
+  type_id: 0x910e73b6
+  full_name: "of_irq_to_resource"
+}
+elf_symbol {
   id: 0x9f4df85d
   name: "of_irq_to_resource_table"
   is_defined: true
@@ -511340,6 +511349,7 @@ interface {
   symbol_id: 0xa66a671b
   symbol_id: 0x4c312bdc
   symbol_id: 0x538752dd
+  symbol_id: 0x3fb40bf5
   symbol_id: 0x9f4df85d
   symbol_id: 0xd2f45a6e
   symbol_id: 0xf4ac07e4
