@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "810fad63_4b03cdff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-28T23:30:46Z",
+      "side": 1,
+      "message": "Seems to include an empty include/trace/misc/sped.h file? The file add should probably be included with the change and not before.",
+      "revId": "9cf9d7b018c7ac686424eb2121bde2654ef04a01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
