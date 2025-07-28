@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f08ccd00_fe7622ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-07-28T17:09:05Z",
+      "side": 1,
+      "message": "Is this a true backport, or simply a cherry pick FROMGIT? If a backport, please add a note explaining what you have changed.",
+      "revId": "6609b53faddbd30e76ff187763b553e65f2044f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f0642c4_29e85f5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-07-28T17:09:05Z",
+      "side": 1,
+      "message": "Is there a pressing reason this can not wait until it lands upstream?",
+      "revId": "6609b53faddbd30e76ff187763b553e65f2044f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
