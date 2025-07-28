@@ -5014,6 +5014,7 @@ void wake_up_new_task(struct task_struct *p)
 	update_rq_clock(rq);
 	post_init_entity_util_avg(p);
 	trace_android_rvh_new_task_stats(p);
+	trace_android_rvh_add_task(p);
 
 	activate_task(rq, p, ENQUEUE_NOCLOCK);
 	trace_sched_wakeup_new(p);
@@ -6170,6 +6171,8 @@ __pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 		if (unlikely(p == RETRY_TASK))
 			goto restart;
 
+		trace_android_rvh_chk_task(&p, rq, &fair_sched_class);
+
 		/* Assume the next prioritized class is idle_sched_class */
 		if (!p) {
 			put_prev_task(rq, prev);
@@ -6184,6 +6187,7 @@ restart:
 
 	for_each_class(class) {
 		p = class->pick_next_task(rq);
+		trace_android_rvh_chk_task(&p, rq, class);
 		if (p)
 			return p;
 	}
