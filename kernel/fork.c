@@ -1001,7 +1001,14 @@ void __put_task_struct(struct task_struct *tsk)
 	WARN_ON(refcount_read(&tsk->usage));
 	WARN_ON(tsk == current);
 
+<<<<<<< PATCH SET (cc33ddaa28cf4f806ed019b662e4bd5fe90fc403 ANDROID: SPED: modify scheduler to include vendor hooks)
+	/* SPED: Delete the (terminated) task.*/
+	trace_android_rvh_sped_del_task(tsk);
+
+||||||| BASE      (b200449c200a6a90d01665654294c806426fda28 ANDROID: SPED: Register vendor hooks)
+=======
 	put_dmabuf_info(tsk);
+>>>>>>> BASE      (c1a4113af4ffd59599729ba53e1fdc4b44429bc7 BACKPORT: mm: userfaultfd: fix race of userfaultfd_move and )
 	io_uring_free(tsk);
 	cgroup_free(tsk);
 	task_numa_free(tsk, true);
