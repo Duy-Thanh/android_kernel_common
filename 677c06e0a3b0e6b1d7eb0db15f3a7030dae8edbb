@@ -34,6 +34,24 @@
       "parentUuid": "8d290bcd_2306e1a0",
       "revId": "677c06e0a3b0e6b1d7eb0db15f3a7030dae8edbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f53f022_82380c9d",
+        "filename": "arch/x86/include/asm/vmx.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-28T10:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a5fb424_badb1bba",
+      "revId": "677c06e0a3b0e6b1d7eb0db15f3a7030dae8edbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
