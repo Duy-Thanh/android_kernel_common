@@ -16,6 +16,24 @@
       "message": "I think you can get away without this patch all together, leaving the logic internal to the vendorhook implementation.",
       "revId": "3d253a7cc140129f9d1ca2101fbb95e47ee10a3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a3fbf8_40f4b0e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-28T23:41:35Z",
+      "side": 1,
+      "message": "marking as unresolved.",
+      "parentUuid": "d11b434c_4e3aa204",
+      "revId": "3d253a7cc140129f9d1ca2101fbb95e47ee10a3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
