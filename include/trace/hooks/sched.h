@@ -533,6 +533,20 @@ DECLARE_RESTRICTED_HOOK(android_rvh_util_fits_cpu,
 
 /* macro versions of hooks are no longer required */
 
+DECLARE_RESTRICTED_HOOK(android_rvh_add_task,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+struct sched_class;
+
+DECLARE_RESTRICTED_HOOK(android_rvh_chk_task,
+	TP_PROTO(struct task_struct **pp, struct rq *rq, const struct sched_class *class),
+	TP_ARGS(pp, rq, class), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_del_task,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
