@@ -5015,6 +5015,9 @@ void wake_up_new_task(struct task_struct *p)
 	post_init_entity_util_avg(p);
 	trace_android_rvh_new_task_stats(p);
 
+	/* SPED: Register the new task. */
+	trace_android_rvh_sped_add_task(p);
+
 	activate_task(rq, p, ENQUEUE_NOCLOCK);
 	trace_sched_wakeup_new(p);
 	check_preempt_curr(rq, p, WF_FORK);
@@ -6170,6 +6173,12 @@ __pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 		if (unlikely(p == RETRY_TASK))
 			goto restart;
 
+		/*
+		 * SPED: Check if the next task has elevated privileges.
+		 * If yes, set p to NULL, so the idle task is picked up next.
+		 */
+		trace_android_rvh_sped_chk_task(&p);
+
 		/* Assume the next prioritized class is idle_sched_class */
 		if (!p) {
 			put_prev_task(rq, prev);
@@ -6184,6 +6193,9 @@ restart:
 
 	for_each_class(class) {
 		p = class->pick_next_task(rq);
+
+		/* SPED: Check if the next task has elevated privileges.*/
+		trace_android_rvh_sped_chk_task(&p);
 		if (p)
 			return p;
 	}

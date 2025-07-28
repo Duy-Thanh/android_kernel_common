@@ -1000,6 +1000,9 @@ void __put_task_struct(struct task_struct *tsk)
 	WARN_ON(refcount_read(&tsk->usage));
 	WARN_ON(tsk == current);
 
+	/* SPED: Delete the (terminated) task.*/
+	trace_android_rvh_sped_del_task(tsk);
+
 	io_uring_free(tsk);
 	cgroup_free(tsk);
 	task_numa_free(tsk, true);
