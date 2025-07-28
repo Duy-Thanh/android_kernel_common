@@ -962,7 +962,15 @@ void __put_task_struct(struct task_struct *tsk)
 	WARN_ON(refcount_read(&tsk->usage));
 	WARN_ON(tsk == current);
 
+<<<<<<< HEAD   (209015b548fb36223e01bbeb84c88f375ddd2829 ANDROID: GKI: Add batman-adv symbols for unisoc)
 	sched_ext_free(tsk);
+||||||| BASE   (c1a4113af4ffd59599729ba53e1fdc4b44429bc7 BACKPORT: mm: userfaultfd: fix race of userfaultfd_move and )
+	put_dmabuf_info(tsk);
+=======
+	trace_android_rvh_del_task(tsk);
+
+	put_dmabuf_info(tsk);
+>>>>>>> CHANGE (94cc872149900edb0b4dc10aef66cc405c9f0f4c ANDROID: SPED: Add vendor hooks in Scheduler)
 	io_uring_free(tsk);
 	cgroup_free(tsk);
 	task_numa_free(tsk, true);

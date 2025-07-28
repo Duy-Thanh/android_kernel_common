@@ -5404,6 +5404,7 @@ void wake_up_new_task(struct task_struct *p)
 	update_rq_clock(rq);
 	post_init_entity_util_avg(p);
 	trace_android_rvh_new_task_stats(p);
+	trace_android_rvh_add_task(p);
 
 	activate_task(rq, p, ENQUEUE_NOCLOCK | ENQUEUE_INITIAL);
 	trace_sched_wakeup_new(p);
@@ -6606,6 +6607,8 @@ __pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 		if (unlikely(p == RETRY_TASK))
 			goto restart;
 
+		trace_android_rvh_chk_task(&p, rq, &fair_sched_class);
+
 		/* Assume the next prioritized class is idle_sched_class */
 		if (!p) {
 			p = pick_task_idle(rq);
@@ -6618,6 +6621,7 @@ __pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 restart:
 	prev_balance(rq, prev, rf);
 
+<<<<<<< HEAD   (209015b548fb36223e01bbeb84c88f375ddd2829 ANDROID: GKI: Add batman-adv symbols for unisoc)
 	for_each_active_class(class) {
 		if (class->pick_next_task) {
 			p = class->pick_next_task(rq, prev);
@@ -6644,6 +6648,14 @@ struct task_struct *pick_task(struct rq *rq)
 
 	for_each_active_class(class) {
 		p = class->pick_task(rq);
+||||||| BASE   (c1a4113af4ffd59599729ba53e1fdc4b44429bc7 BACKPORT: mm: userfaultfd: fix race of userfaultfd_move and )
+	for_each_class(class) {
+		p = class->pick_next_task(rq);
+=======
+	for_each_class(class) {
+		p = class->pick_next_task(rq);
+		trace_android_rvh_chk_task(&p, rq, class);
+>>>>>>> CHANGE (94cc872149900edb0b4dc10aef66cc405c9f0f4c ANDROID: SPED: Add vendor hooks in Scheduler)
 		if (p)
 			return p;
 	}

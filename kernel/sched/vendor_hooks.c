@@ -129,6 +129,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_entity_delayed);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_inheritance);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_restore);
+<<<<<<< HEAD   (209015b548fb36223e01bbeb84c88f375ddd2829 ANDROID: GKI: Add batman-adv symbols for unisoc)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_sugov_sched_attr);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_iowait);
@@ -136,3 +137,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_util_fits_cpu);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_before_pick_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_balance_fair);
+||||||| BASE   (c1a4113af4ffd59599729ba53e1fdc4b44429bc7 BACKPORT: mm: userfaultfd: fix race of userfaultfd_move and )
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_task_comm);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_task_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_add_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_chk_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_del_task);
+>>>>>>> CHANGE (94cc872149900edb0b4dc10aef66cc405c9f0f4c ANDROID: SPED: Add vendor hooks in Scheduler)
