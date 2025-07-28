@@ -1001,6 +1001,7 @@ void __put_task_struct(struct task_struct *tsk)
 	WARN_ON(refcount_read(&tsk->usage));
 	WARN_ON(tsk == current);
 
+	trace_android_rvh_put_task(tsk);
 	put_dmabuf_info(tsk);
 	io_uring_free(tsk);
 	cgroup_free(tsk);
@@ -2764,6 +2765,7 @@ __latent_entropy struct task_struct *copy_process(
 		nr_threads++;
 	}
 	trace_android_vh_copy_process(current, nr_threads);
+	trace_android_rvh_add_task(p);
 	total_forks++;
 	hlist_del_init(&delayed.node);
 	spin_unlock(&current->sighand->siglock);

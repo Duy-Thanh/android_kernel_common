@@ -488,6 +488,18 @@ DECLARE_HOOK(android_vh_set_task_comm,
 	TP_PROTO(struct task_struct *p),
 	TP_ARGS(p));
 
+DECLARE_RESTRICTED_HOOK(android_rvh_add_task,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_chk_task,
+	TP_PROTO(struct task_struct **pp, struct rq *rq),
+	TP_ARGS(pp, rq), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_put_task,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
