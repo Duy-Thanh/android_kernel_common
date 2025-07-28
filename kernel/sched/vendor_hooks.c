@@ -137,4 +137,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_util_fits_cpu);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_before_pick_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_balance_fair);
+<<<<<<< PATCH SET (06358111e12d46169650c4ac75d7b8e8058d1b60 ANDROID: SPED: Add vendor hooks in Scheduler)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_add_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_chk_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_del_task);
+||||||| BASE      (209015b548fb36223e01bbeb84c88f375ddd2829 ANDROID: GKI: Add batman-adv symbols for unisoc)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dump_dl_server);
+>>>>>>> BASE      (9e32f3af006ab0a4e9ee7c0979aed359932e6f79 Revert "ANDROID: sched: Add vendor hooks for override sugov )
