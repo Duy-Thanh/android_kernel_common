@@ -8927,7 +8927,7 @@ struct task_struct *
 pick_next_task_fair(struct rq *rq, struct rq_flags *rf)
 {
 	struct sched_entity *se;
-	struct task_struct *p, *prev;
+	struct task_struct *p = NULL, *prev;
 	int new_tasks;
 
 again:
@@ -8936,8 +8936,11 @@ again:
 	 * changed across a rq lock drop
 	 */
 	prev = rq->donor;
-	p = pick_task_fair(rq, rf);
-	trace_android_rvh_replace_next_task_fair(rq, &p, prev);
+	trace_android_rvh_before_pick_task_fair(rq, &p, prev, rf);
+	if (!p) {
+		p = pick_task_fair(rq, rf);
+		trace_android_rvh_replace_next_task_fair(rq, &p, prev);
+	}
 	if (!p)
 		goto idle;
 	se = &p->se;
