@@ -34,6 +34,24 @@
       "parentUuid": "5327f618_14b12270",
       "revId": "001996699a16cc639673ad26d376b542ee2ff310",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e22b50_d98c2229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1881538
+      },
+      "writtenOn": "2025-07-29T11:09:24Z",
+      "side": 1,
+      "message": "Yes @srosek@google.com you are right only Intel based devices implement DbC. The QC and MTK SoCs we used don\u0027t implemement DbC.\n\n@gregkh@google.com based on the above do you still think the DbC should be enabled in all gki defconfigs ?\n\nThanks",
+      "parentUuid": "ed1ca2c8_8cb62226",
+      "revId": "001996699a16cc639673ad26d376b542ee2ff310",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
