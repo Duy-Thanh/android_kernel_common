@@ -52,6 +52,24 @@
       "parentUuid": "6ce8f3e2_6a2cf6de",
       "revId": "285ce1923e40d33d0a87247e70473a78926f0fcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb25d40c_6e776487",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-29T12:15:52Z",
+      "side": 1,
+      "message": "It\u0027s visible because something referenced it with a finding. It\u0027s possible there is some stray metadata in a finding, or possibly a finding from an old patch set.\n\nYou could report this as a Gerrit UI issue.",
+      "parentUuid": "324bc341_6d8d927d",
+      "revId": "285ce1923e40d33d0a87247e70473a78926f0fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
