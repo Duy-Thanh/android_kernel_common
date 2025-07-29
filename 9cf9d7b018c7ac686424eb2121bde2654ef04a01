@@ -16,6 +16,24 @@
       "message": "Seems to include an empty include/trace/misc/sped.h file? The file add should probably be included with the change and not before.",
       "revId": "9cf9d7b018c7ac686424eb2121bde2654ef04a01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749c750b_600c8065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2025-07-29T22:08:56Z",
+      "side": 1,
+      "message": "I\u0027m sorry, I\u0027m new to gerrit and I messed up the branches. This file shouldn\u0027t be here at all. I removed it.",
+      "parentUuid": "810fad63_4b03cdff",
+      "revId": "9cf9d7b018c7ac686424eb2121bde2654ef04a01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
