@@ -321,6 +321,24 @@
       "parentUuid": "d4aaadd8_400b6767",
       "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc6ca19_ba454e27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-07-29T03:04:40Z",
+      "side": 1,
+      "message": "Hi Gao,\nAFAICT if symbols are exported and used by vendors, they become part of KMI (stable interface). This hinders our ability to do backports of upstream features if we want to pull in and they happen to touch/modify these symbols. Stable KMI is what guarantees vendors \"in-field updates\" to kernel i.e. vendors can just update GKI kernel without having to rebuild/ship vendor modules.\n\nIts not that android kernels don\u0027t allow such things. We do, but with good enough justification. We always prefer contributors to upstream the features and then backport it to android kernels.",
+      "parentUuid": "0075318f_d89bcef4",
+      "revId": "b2ed23591965a8a6570ab166e276c44ab8b84b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
