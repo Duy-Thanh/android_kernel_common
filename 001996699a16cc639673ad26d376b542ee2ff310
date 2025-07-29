@@ -52,6 +52,24 @@
       "parentUuid": "ed1ca2c8_8cb62226",
       "revId": "001996699a16cc639673ad26d376b542ee2ff310",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "093317ab_ab86ed0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-29T13:28:01Z",
+      "side": 1,
+      "message": "Yes, it is an xhci feature, not an x86 feature.  Keep the configs in sync as much as is possible please.",
+      "parentUuid": "52e22b50_d98c2229",
+      "revId": "001996699a16cc639673ad26d376b542ee2ff310",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
