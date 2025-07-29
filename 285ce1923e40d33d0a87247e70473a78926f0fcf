@@ -70,6 +70,24 @@
       "parentUuid": "324bc341_6d8d927d",
       "revId": "285ce1923e40d33d0a87247e70473a78926f0fcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9380208c_e8b5f8e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-29T12:24:16Z",
+      "side": 1,
+      "message": "Hmmm. I\u0027m not sure about my previous comment. I do know that findings can pull files into the UI. I\u0027ve checked the most obvious candidate though and there\u0027s nothing there.",
+      "parentUuid": "fb25d40c_6e776487",
+      "revId": "285ce1923e40d33d0a87247e70473a78926f0fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
