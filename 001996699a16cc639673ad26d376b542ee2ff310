@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5327f618_14b12270",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-29T09:59:48Z",
+      "side": 1,
+      "message": "Also enable for all gki defconfig files, to keep them in sync properly.",
+      "revId": "001996699a16cc639673ad26d376b542ee2ff310",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
