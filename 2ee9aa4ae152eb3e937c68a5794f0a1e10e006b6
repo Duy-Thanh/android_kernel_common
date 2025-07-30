@@ -33,6 +33,24 @@
       "message": "Is there a pressing reason this can not wait until it lands upstream?",
       "revId": "2ee9aa4ae152eb3e937c68a5794f0a1e10e006b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d3a0a63_55412111",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960732
+      },
+      "writtenOn": "2025-07-30T21:24:12Z",
+      "side": 1,
+      "message": "not in particular, will wait until 6.17 rc",
+      "parentUuid": "7ae63c9a_949c32ec",
+      "revId": "2ee9aa4ae152eb3e937c68a5794f0a1e10e006b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
