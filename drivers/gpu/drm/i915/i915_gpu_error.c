@@ -64,6 +64,13 @@
 #define ALLOW_FAIL (__GFP_KSWAPD_RECLAIM | __GFP_RETRY_MAYFAIL | __GFP_NOWARN)
 #define ATOMIC_MAYFAIL (GFP_ATOMIC | __GFP_NOWARN)
 
+#if IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_DEVCOREDUMP)
+#define I915_COREDUMP_TIMEOUT_JIFFIES (60 * 60 * HZ)
+
+static ssize_t i915_devcoredump_read(char *buffer, loff_t offset, size_t count, void *data,
+				     size_t datalen);
+static void i915_devcoredump_free(void *data);
+#endif
 static void __sg_set_buf(struct scatterlist *sg,
 			 void *addr, unsigned int len, loff_t it)
 {
@@ -2223,6 +2230,12 @@ void i915_capture_error_state(struct intel_gt *gt,
 	}
 
 	i915_error_state_store(error);
+#if IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_DEVCOREDUMP)
+	dev_coredumpm_timeout(gt->i915->drm.dev, THIS_MODULE, &gt->i915->gpu_error, 0, GFP_KERNEL,
+			      i915_devcoredump_read, i915_devcoredump_free,
+			      I915_COREDUMP_TIMEOUT_JIFFIES);
+#endif
+
 	i915_gpu_coredump_put(error);
 }
 
@@ -2503,6 +2516,7 @@ void i915_gpu_error_debugfs_register(struct drm_i915_private *i915)
 			    &i915_gpu_info_fops);
 }
 
+#if IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_LEGACY)
 static ssize_t error_state_read(struct file *filp, struct kobject *kobj,
 				struct bin_attribute *attr, char *buf,
 				loff_t off, size_t count)
@@ -2559,18 +2573,70 @@ static const struct bin_attribute error_state_attr = {
 	.read = error_state_read,
 	.write = error_state_write,
 };
+#endif
 
 void i915_gpu_error_sysfs_setup(struct drm_i915_private *i915)
 {
+#if IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_LEGACY)
 	struct device *kdev = i915->drm.primary->kdev;
 
 	if (sysfs_create_bin_file(&kdev->kobj, &error_state_attr))
 		drm_err(&i915->drm, "error_state sysfs setup failed\n");
+#elif IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_DEVCOREDUMP)
+	devm_add_action_or_reset(i915->drm.dev, i915_gpu_error_sysfs_teardown, &i915->drm);
+#endif
 }
 
-void i915_gpu_error_sysfs_teardown(struct drm_i915_private *i915)
+void i915_gpu_error_sysfs_teardown(void *data)
 {
+#if IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_LEGACY)
+	struct drm_i915_private *i915 = data;
 	struct device *kdev = i915->drm.primary->kdev;
 
 	sysfs_remove_bin_file(&kdev->kobj, &error_state_attr);
+#elif IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_DEVCOREDUMP)
+	struct drm_device *drm = data;
+	dev_coredump_put(drm->dev);
+#endif
 }
+
+#if IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_DEVCOREDUMP)
+
+static ssize_t i915_devcoredump_read(char *buffer, loff_t offset,
+				     size_t count, void *data, size_t datalen)
+{
+	struct i915_gpu_error *error = data;
+	struct i915_gpu_coredump *coredump = NULL;
+	ssize_t ret = 0;
+
+	spin_lock_irq(&error->lock);
+	coredump = error->first_error;
+	if (IS_ERR_OR_NULL(coredump))
+	{
+		spin_unlock_irq(&error->lock);
+		return 0;
+	}
+
+	i915_gpu_coredump_get(coredump);
+	spin_unlock_irq(&error->lock);
+
+	ret = i915_gpu_coredump_copy_to_buffer(coredump, buffer, offset, count);
+	i915_gpu_coredump_put(coredump);
+	return ret;
+}
+
+static void i915_devcoredump_free(void *data)
+{
+	struct i915_gpu_error *error = data;
+	struct i915_gpu_coredump *coredump = NULL;
+
+	spin_lock_irq(&error->lock);
+	coredump = error->first_error;
+	if(coredump != ERR_PTR(-ENODEV))
+		error->first_error = NULL;
+	spin_unlock_irq(&error->lock);
+
+	if(!IS_ERR_OR_NULL(coredump))
+		i915_gpu_coredump_put(coredump);
+}
+#endif

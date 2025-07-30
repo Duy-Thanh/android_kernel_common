@@ -108,6 +108,24 @@ config DRM_I915_COMPRESS_ERROR
 	  to be compressed using zlib.
 
 	  If in doubt, say "Y".
+choice
+	prompt "Type of coredump collection method"
+	depends on DRM_I915_CAPTURE_ERROR
+	help
+		The type of coredump collection method. Default is legacy method.
+
+config DRM_I915_CAPTURE_ERROR_LEGACY
+	bool "Legacy"
+	help
+		Use legacy coredump collection method
+
+config DRM_I915_CAPTURE_ERROR_DEVCOREDUMP
+	bool "Devcoredump"
+	help
+		Use kernel provided devcoredump infrastucture
+
+endchoice
+
 
 config DRM_I915_USERPTR
 	bool "Always enable userptr support"

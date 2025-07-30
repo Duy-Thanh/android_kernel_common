@@ -13,6 +13,7 @@
 #include <linux/sched.h>
 
 #include <drm/drm_mm.h>
+#include <linux/devcoredump.h>
 
 #include "display/intel_display_device.h"
 #include "display/intel_display_params.h"
@@ -338,7 +339,12 @@ void i915_disable_error_state(struct drm_i915_private *i915, int err);
 
 void i915_gpu_error_debugfs_register(struct drm_i915_private *i915);
 void i915_gpu_error_sysfs_setup(struct drm_i915_private *i915);
-void i915_gpu_error_sysfs_teardown(struct drm_i915_private *i915);
+void i915_gpu_error_sysfs_teardown(void *data);
+
+#if IS_ENABLED(CONFIG_DRM_I915_CAPTURE_ERROR_DEVCOREDUMP)
+void i915_devcoredump_init(struct drm_i915_private *i915);
+void i915_devcoredump_fini(void *arg);
+#endif
 
 #else
 
@@ -424,7 +430,14 @@ static inline void i915_gpu_error_sysfs_setup(struct drm_i915_private *i915)
 {
 }
 
-static inline void i915_gpu_error_sysfs_teardown(struct drm_i915_private *i915)
+static inline void i915_gpu_error_sysfs_teardown(void *data)
+{
+}
+
+static inline void i915_devcoredump_init(struct drm_i915_private *i915)
+{
+}
+static inline void i915_devcoredump_fini(void *arg)
 {
 }
 
