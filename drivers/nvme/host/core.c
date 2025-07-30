@@ -1870,8 +1870,11 @@ static bool nvme_init_integrity(struct nvme_ns_head *head,
 		break;
 	}
 
-	bi->tuple_size = head->ms;
-	bi->pi_offset = info->pi_offset;
+	bi->metadata_size = head->ms;
+	if (bi->csum_type) {
+		bi->pi_tuple_size = head->pi_size;
+		bi->pi_offset = info->pi_offset;
+	}
 	return true;
 }
 
@@ -4297,7 +4300,7 @@ static void nvme_scan_ns(struct nvme_ctrl *ctrl, unsigned nsid)
 	}
 
 	/*
-	 * If available try to use the Command Set Idependent Identify Namespace
+	 * If available try to use the Command Set Independent Identify Namespace
 	 * data structure to find all the generic information that is needed to
 	 * set up a namespace.  If not fall back to the legacy version.
 	 */

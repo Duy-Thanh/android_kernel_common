@@ -540,30 +540,42 @@ static void blkdev_readahead(struct readahead_control *rac)
 	iomap_readahead(rac, &blkdev_iomap_ops);
 }
 
-static int blkdev_map_blocks(struct iomap_writepage_ctx *wpc,
-		struct inode *inode, loff_t offset, unsigned int len)
+static ssize_t blkdev_writeback_range(struct iomap_writepage_ctx *wpc,
+		struct folio *folio, u64 offset, unsigned int len, u64 end_pos)
 {
-	loff_t isize = i_size_read(inode);
+	loff_t isize = i_size_read(wpc->inode);
 
 	if (WARN_ON_ONCE(offset >= isize))
 		return -EIO;
-	if (offset >= wpc->iomap.offset &&
-	    offset < wpc->iomap.offset + wpc->iomap.length)
-		return 0;
-	return blkdev_iomap_begin(inode, offset, isize - offset,
-				  IOMAP_WRITE, &wpc->iomap, NULL);
+
+	if (offset < wpc->iomap.offset ||
+	    offset >= wpc->iomap.offset + wpc->iomap.length) {
+		int error;
+
+		error = blkdev_iomap_begin(wpc->inode, offset, isize - offset,
+				IOMAP_WRITE, &wpc->iomap, NULL);
+		if (error)
+			return error;
+	}
+
+	return iomap_add_to_ioend(wpc, folio, offset, end_pos, len);
 }
 
 static const struct iomap_writeback_ops blkdev_writeback_ops = {
-	.map_blocks		= blkdev_map_blocks,
+	.writeback_range	= blkdev_writeback_range,
+	.writeback_submit	= iomap_ioend_writeback_submit,
 };
 
 static int blkdev_writepages(struct address_space *mapping,
 		struct writeback_control *wbc)
 {
-	struct iomap_writepage_ctx wpc = { };
+	struct iomap_writepage_ctx wpc = {
+		.inode		= mapping->host,
+		.wbc		= wbc,
+		.ops		= &blkdev_writeback_ops
+	};
 
-	return iomap_writepages(mapping, wbc, &wpc, &blkdev_writeback_ops);
+	return iomap_writepages(&wpc);
 }
 
 const struct address_space_operations def_blk_aops = {
@@ -714,7 +726,8 @@ blkdev_direct_write(struct kiocb *iocb, struct iov_iter *from)
 
 static ssize_t blkdev_buffered_write(struct kiocb *iocb, struct iov_iter *from)
 {
-	return iomap_file_buffered_write(iocb, from, &blkdev_iomap_ops, NULL);
+	return iomap_file_buffered_write(iocb, from, &blkdev_iomap_ops, NULL,
+			NULL);
 }
 
 /*
@@ -920,14 +933,14 @@ static long blkdev_fallocate(struct file *file, int mode, loff_t start,
 	return error;
 }
 
-static int blkdev_mmap(struct file *file, struct vm_area_struct *vma)
+static int blkdev_mmap_prepare(struct vm_area_desc *desc)
 {
-	struct inode *bd_inode = bdev_file_inode(file);
+	struct file *file = desc->file;
 
-	if (bdev_read_only(I_BDEV(bd_inode)))
-		return generic_file_readonly_mmap(file, vma);
+	if (bdev_read_only(I_BDEV(bdev_file_inode(file))))
+		return generic_file_readonly_mmap_prepare(desc);
 
-	return generic_file_mmap(file, vma);
+	return generic_file_mmap_prepare(desc);
 }
 
 const struct file_operations def_blk_fops = {
@@ -937,7 +950,7 @@ const struct file_operations def_blk_fops = {
 	.read_iter	= blkdev_read_iter,
 	.write_iter	= blkdev_write_iter,
 	.iopoll		= iocb_bio_iopoll,
-	.mmap		= blkdev_mmap,
+	.mmap_prepare	= blkdev_mmap_prepare,
 	.fsync		= blkdev_fsync,
 	.unlocked_ioctl	= blkdev_ioctl,
 #ifdef CONFIG_COMPAT
