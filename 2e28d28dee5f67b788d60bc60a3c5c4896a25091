@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e8a95f5_add48a05",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2025-07-30T17:49:28Z",
+      "side": 1,
+      "message": "Thanks for the reference. This one is definitely clearer.",
+      "parentUuid": "2a990590_8589b2c8",
+      "revId": "2e28d28dee5f67b788d60bc60a3c5c4896a25091",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90421635_30e657d9",
@@ -55,6 +73,30 @@
           ]
         }
       ],
+      "revId": "2e28d28dee5f67b788d60bc60a3c5c4896a25091",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5ec456_07a8b6c4",
+        "filename": "mm/userfaultfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2025-07-30T17:49:28Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "90421635_30e657d9",
+      "range": {
+        "startLine": 997,
+        "startChar": 19,
+        "endLine": 997,
+        "endChar": 51
+      },
       "revId": "2e28d28dee5f67b788d60bc60a3c5c4896a25091",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
