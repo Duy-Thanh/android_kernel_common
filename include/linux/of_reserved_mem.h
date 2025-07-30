@@ -36,9 +36,11 @@ int of_reserved_mem_device_init_by_idx(struct device *dev,
 int of_reserved_mem_device_init_by_name(struct device *dev,
 					struct device_node *np,
 					const char *name);
+int reserved_mem_device_init(struct device *dev, struct reserved_mem *rmem);
 void of_reserved_mem_device_release(struct device *dev);
 
 struct reserved_mem *of_reserved_mem_lookup(struct device_node *np);
+struct reserved_mem *of_reserved_mem_lookup_by_name(const char *name);
 #else
 
 #define RESERVEDMEM_OF_DECLARE(name, compat, init)			\
@@ -57,12 +59,24 @@ static inline int of_reserved_mem_device_init_by_name(struct device *dev,
 	return -ENOSYS;
 }
 
+static inline int reserved_mem_device_init(struct device *dev,
+					   struct reserved_mem *rmem)
+{
+	return -ENOSYS;
+}
+
 static inline void of_reserved_mem_device_release(struct device *pdev) { }
 
 static inline struct reserved_mem *of_reserved_mem_lookup(struct device_node *np)
 {
 	return NULL;
 }
+
+static inline struct reserved_mem *of_reserved_mem_lookup_by_name(const char *name)
+{
+	return NULL;
+}
+
 #endif
 
 /**

@@ -285,3 +285,4 @@
   hrtimer_init
   hrtimer_start_range_ns
   param_ops_ulong
+  kmemdup_noprof
