@@ -303,6 +303,7 @@ struct bpf_map {
 		enum bpf_prog_type type;
 		bool jited;
 		bool xdp_has_frags;
+		u64 storage_cookie[MAX_BPF_CGROUP_STORAGE_TYPE];
 	} owner;
 	bool bypass_spec_v1;
 	bool frozen; /* write-once; write-protected by freeze_mutex */
