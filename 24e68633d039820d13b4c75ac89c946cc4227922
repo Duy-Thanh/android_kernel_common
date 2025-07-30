@@ -50,6 +50,30 @@
       ],
       "revId": "24e68633d039820d13b4c75ac89c946cc4227922",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806e53c1_91da31e7",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-30T15:07:27Z",
+      "side": 1,
+      "message": "It breaks arm32 builds.",
+      "parentUuid": "16eef6f1_fd7a75ad",
+      "range": {
+        "startLine": 601,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 50
+      },
+      "revId": "24e68633d039820d13b4c75ac89c946cc4227922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
