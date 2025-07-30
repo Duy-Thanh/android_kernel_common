@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a990590_8589b2c8",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-07-30T17:26:48Z",
+      "side": 1,
+      "message": "This API @lokeshgidra@google.com",
+      "revId": "2e28d28dee5f67b788d60bc60a3c5c4896a25091",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90421635_30e657d9",
+        "filename": "mm/userfaultfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-07-30T17:26:48Z",
+      "side": 1,
+      "message": "I it\u0027s clearer if we do:\n\n`entry.val !\u003d folio_swap_entry(src_folio).val`",
+      "range": {
+        "startLine": 997,
+        "startChar": 19,
+        "endLine": 997,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "df4a0c52_69ce0ff5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/userfaultfd.c",
+              "range": {
+                "startLine": 997,
+                "startChar": 0,
+                "endLine": 998,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t  entry.val !\u003d folio_swap_entry(src_folio).val))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e28d28dee5f67b788d60bc60a3c5c4896a25091",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
