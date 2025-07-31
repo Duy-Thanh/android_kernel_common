@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "004244d4_ee507593",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-07-31T13:19:44Z",
+      "side": 1,
+      "message": "Q: Why is this targeting the `android15-6.6` branch but not android16-6.12 ? If we add this we will have to port it to latest branches as well.",
+      "range": {
+        "startLine": 340,
+        "startChar": 8,
+        "endLine": 340,
+        "endChar": 31
+      },
+      "revId": "170ec557be8c9743450febfa20393fb489dbf1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
