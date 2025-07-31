@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c78f79a_ba3aabb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2025-07-31T01:44:53Z",
+      "side": 1,
+      "message": "I\u0027ve applied the fix and verified locally that the arm32 build succeeds.",
+      "revId": "24e68633d039820d13b4c75ac89c946cc4227922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16eef6f1_fd7a75ad",
@@ -90,6 +107,30 @@
       "side": 1,
       "message": "Yeah, but I also see:\n```\nmm/page_alloc.c:602:51: error: statement expression not allowed at file scope\n  602 | static unsigned int pcp_thp_order __read_mostly \u003d HPAGE_PMD_ORDER;\n```",
       "parentUuid": "806e53c1_91da31e7",
+      "range": {
+        "startLine": 601,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 50
+      },
+      "revId": "24e68633d039820d13b4c75ac89c946cc4227922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13787188_9fb58042",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2025-07-31T01:44:53Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "daa09295_061eab43",
       "range": {
         "startLine": 601,
         "startChar": 0,
