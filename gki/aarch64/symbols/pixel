@@ -368,6 +368,7 @@
   device_property_match_string
   device_property_present
   device_property_read_string
+  device_property_read_u16_array
   device_property_read_u32_array
   device_property_read_u8_array
   device_register
@@ -3076,6 +3077,7 @@
   xhci_resume
   xhci_run
   xhci_sideband_add_endpoint
+  xhci_sideband_check
   xhci_sideband_create_interrupter
   xhci_sideband_register
   xhci_sideband_remove_endpoint
