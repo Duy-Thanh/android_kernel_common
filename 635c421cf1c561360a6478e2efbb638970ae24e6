@@ -16,6 +16,24 @@
       "message": "Cherry-picks into the Android kernel have a specific format, see https://android.googlesource.com/kernel/common/.\n\nYou\u0027ll need at least:\n* `UPSTREAM: ` prepended here\n* `(cherry picked from commit ...)`\n* Your own `Signed-off-by` moved to the end.\n\nThey recommend keeping the items in chronological order, so the new lines should be moved to the end.",
       "revId": "635c421cf1c561360a6478e2efbb638970ae24e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9899dccb_fd809724",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-07-31T21:24:35Z",
+      "side": 1,
+      "message": "See https://r.android.com/3703448 for an example.",
+      "parentUuid": "897060d2_467e634b",
+      "revId": "635c421cf1c561360a6478e2efbb638970ae24e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
