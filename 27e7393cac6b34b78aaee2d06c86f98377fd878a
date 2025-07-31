@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c27fbbdf_d8d38c41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-07-31T11:45:21Z",
+      "side": 1,
+      "message": "The ARCH_HAS_DMA_OPS option is removed from GKI_HACKS_TO_FIX thus ABI needs to be updated. Incompatible changes are expected.",
+      "revId": "27e7393cac6b34b78aaee2d06c86f98377fd878a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
