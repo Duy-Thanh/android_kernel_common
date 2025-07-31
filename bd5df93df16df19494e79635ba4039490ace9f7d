@@ -34,6 +34,24 @@
       "parentUuid": "9d4466db_cb017169",
       "revId": "bd5df93df16df19494e79635ba4039490ace9f7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e09dbefd_cb9ea47e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-07-31T10:34:18Z",
+      "side": 1,
+      "message": "I +2 the indicated change but please apply the bug annotation as I suggested as they are documented here (Requirements for backports from mainline Linux: UPSTREAM:) https://android.git.corp.google.com/kernel/common/",
+      "parentUuid": "31c3738a_cbb438da",
+      "revId": "bd5df93df16df19494e79635ba4039490ace9f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
