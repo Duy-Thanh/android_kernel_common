@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee9ef9a_804bc853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-31T06:04:51Z",
+      "side": 1,
+      "message": "This will not work, leave the KMI padding alone, that is for upstream LTS merges.\n\nIf you really need/want padding, please do it properly for an OEM field.",
+      "revId": "7dea79c17edd653764203570811c818616e67e2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
