@@ -680,9 +680,15 @@ struct task_dma_buf_record {
 	unsigned long refcnt;
 };
 
+// refcount is list size
+struct task_dma_buf_shared_list {
+	spinlock_t lock;
+	struct list_head list;
+};
+
 /**
  * struct task_dma_buf_info - Holds RSS and RSS HWM counters, and a list of
- * dmabufs for all tasks that share both mm_struct and files_struct.
+ * dmabufs for all tasks that share both mm_struct and files_struct. TODO
  *
  * @rss: The sum of all dmabuf memory referenced by the tasks via memory
  *       mappings or file descriptors in bytes. Buffers referenced more than
@@ -695,6 +701,12 @@ struct task_dma_buf_record {
  * @refcnt: The number of tasks sharing this struct.
  * @lock: Lock protecting writes for @rss, and reads/writes for @dmabufs.
  * @dmabufs: List of all dmabufs referenced by the tasks.
+ * @dmabuf_count: The number of task_dma_buf_records on the @dmabufs list
+ * 
+ * @mm_list: TODO
+ * @fd_list: TODO
+ * @mm_node: TODO
+ * @fd_node: TODO
  */
 struct task_dma_buf_info {
 	unsigned int rss;
@@ -703,6 +715,12 @@ struct task_dma_buf_info {
 	spinlock_t lock;
 	struct list_head dmabufs;
 	size_t dmabuf_count;
+
+	// Only for partial MM/FD sharing among tasks
+	struct task_dma_buf_shared_list *mm_list;
+	struct task_dma_buf_shared_list *fd_list;
+	struct list_head mm_node;
+	struct list_head fd_node;
 };
 
 static inline bool task_has_dma_buf_info(struct task_struct *task)
@@ -714,7 +732,6 @@ static inline bool task_has_dma_buf_info(struct task_struct *task)
 static inline void set_task_dma_buf_info(struct task_struct *task,
 					 struct task_dma_buf_info *dmabuf_info)
 {
-	/* This should never happen unless this function is used incorrectly */
 	if (WARN_ON(!task_has_dma_buf_info(task)))
 		return;
 
@@ -847,8 +864,13 @@ int dma_buf_get_flags(struct dma_buf *dmabuf, unsigned long *flags);
 #ifdef CONFIG_DMA_SHARED_BUFFER
 
 int is_dma_buf_file(struct file *file);
-int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task);
-void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task);
+enum dma_buf_ref_type {MM, FD};
+int dma_buf_account_task(struct dma_buf *dmabuf,
+			 struct task_struct *task,
+			 enum dma_buf_ref_type ref_type);
+void dma_buf_unaccount_task(struct dma_buf *dmabuf,
+			    struct task_struct *task,
+			    enum dma_buf_ref_type ref_type);
 int copy_dmabuf_info(u64 clone_flags, struct task_struct *task);
 void put_dmabuf_info(struct task_struct *task);
 
