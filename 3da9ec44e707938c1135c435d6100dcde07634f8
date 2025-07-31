@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b244828c_33553312",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-31T16:08:55Z",
+      "side": 1,
+      "message": "\u003e Actually, this problem is an Android bug, which has not been resolved in the upstream Linux. How about I submit a separate Android bug patch?\n\nYeah. Looking closer at the upstream commit, this patch seems to be an entirely separate change. The referenced change in your commit log is already in the android16-6.12 tree.  Submitting your patch this was is very much the wrong thing to do here.\n\n_Please_ follow the contribution guidelines:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\n\n\u003e In fact, Joy\u0027s patch did not completely solve the problem of HID device charging status not being reported. This problem can only be solved by adding the line \"power_supply_changed(dev-\u003ebattery);\".\n\nYou do not explain how this is an Android specific bug. It sounds like it does affect upstream, and you should report it to lkml.\n\n\u003e I also suggest you submit this line of code, \"power_supply_changed(dev-\u003ebattery);\", to the Linux community later. Submitting to the community is difficult for us, but it should be easier for you.\n\nI\u0027m sorry, but that\u0027s not how the process works. If there is an issue with the upstream kernel, the fix needs to be sent upstream first.",
+      "parentUuid": "0436899c_12786ca7",
+      "revId": "3da9ec44e707938c1135c435d6100dcde07634f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b1bccb7_46d43b75",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -84,6 +102,23 @@
       "writtenOn": "2025-07-30T00:54:51Z",
       "side": 1,
       "message": "Please help review, thanks!",
+      "revId": "3da9ec44e707938c1135c435d6100dcde07634f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc84190a_22afc0b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-31T16:08:55Z",
+      "side": 1,
+      "message": "Please don\u0027t attribute new changes as coming from other developers. Please follow the contribution process.\n\nIt looks like this change was already merged to other branches, and we may need to revert them there.",
       "revId": "3da9ec44e707938c1135c435d6100dcde07634f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
