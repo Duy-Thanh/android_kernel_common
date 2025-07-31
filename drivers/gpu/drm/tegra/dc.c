@@ -1319,16 +1319,10 @@ static struct drm_plane *tegra_dc_add_shared_planes(struct drm_device *drm,
 		if (wgrp->dc == dc->pipe) {
 			for (j = 0; j < wgrp->num_windows; j++) {
 				unsigned int index = wgrp->windows[j];
-				enum drm_plane_type type;
-
-				if (primary)
-					type = DRM_PLANE_TYPE_OVERLAY;
-				else
-					type = DRM_PLANE_TYPE_PRIMARY;
 
 				plane = tegra_shared_plane_create(drm, dc,
 								  wgrp->index,
-								  index, type);
+								  index);
 				if (IS_ERR(plane))
 					return plane;
 
@@ -1336,8 +1330,10 @@ static struct drm_plane *tegra_dc_add_shared_planes(struct drm_device *drm,
 				 * Choose the first shared plane owned by this
 				 * head as the primary plane.
 				 */
-				if (!primary)
+				if (!primary) {
+					plane->type = DRM_PLANE_TYPE_PRIMARY;
 					primary = plane;
+				}
 			}
 		}
 	}
@@ -1391,10 +1387,7 @@ static void tegra_crtc_reset(struct drm_crtc *crtc)
 	if (crtc->state)
 		tegra_crtc_atomic_destroy_state(crtc, crtc->state);
 
-	if (state)
-		__drm_atomic_helper_crtc_reset(crtc, &state->base);
-	else
-		__drm_atomic_helper_crtc_reset(crtc, NULL);
+	__drm_atomic_helper_crtc_reset(crtc, &state->base);
 }
 
 static struct drm_crtc_state *

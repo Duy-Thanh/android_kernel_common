@@ -5908,11 +5908,7 @@ megasas_set_high_iops_queue_affinity_and_hint(struct megasas_instance *instance)
 	const struct cpumask *mask;
 
 	if (instance->perf_mode == MR_BALANCED_PERF_MODE) {
-		int nid = dev_to_node(&instance->pdev->dev);
-
-		if (nid == NUMA_NO_NODE)
-			nid = 0;
-		mask = cpumask_of_node(nid);
+		mask = cpumask_of_node(dev_to_node(&instance->pdev->dev));
 
 		for (i = 0; i < instance->low_latency_index_start; i++) {
 			irq = pci_irq_vector(instance->pdev, i);

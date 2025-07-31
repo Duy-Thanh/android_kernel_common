@@ -1773,32 +1773,26 @@ static int f2fs_statfs_project(struct super_block *sb,
 
 	limit = min_not_zero(dquot->dq_dqb.dqb_bsoftlimit,
 					dquot->dq_dqb.dqb_bhardlimit);
-	limit >>= sb->s_blocksize_bits;
+	if (limit)
+		limit >>= sb->s_blocksize_bits;
 
-	if (limit) {
-		uint64_t remaining = 0;
-
+	if (limit && buf->f_blocks > limit) {
 		curblock = (dquot->dq_dqb.dqb_curspace +
 			    dquot->dq_dqb.dqb_rsvspace) >> sb->s_blocksize_bits;
-		if (limit > curblock)
-			remaining = limit - curblock;
-
-		buf->f_blocks = min(buf->f_blocks, limit);
-		buf->f_bfree = min(buf->f_bfree, remaining);
-		buf->f_bavail = min(buf->f_bavail, remaining);
+		buf->f_blocks = limit;
+		buf->f_bfree = buf->f_bavail =
+			(buf->f_blocks > curblock) ?
+			 (buf->f_blocks - curblock) : 0;
 	}
 
 	limit = min_not_zero(dquot->dq_dqb.dqb_isoftlimit,
 					dquot->dq_dqb.dqb_ihardlimit);
 
-	if (limit) {
-		uint64_t remaining = 0;
-
-		if (limit > dquot->dq_dqb.dqb_curinodes)
-			remaining = limit - dquot->dq_dqb.dqb_curinodes;
-
-		buf->f_files = min(buf->f_files, limit);
-		buf->f_ffree = min(buf->f_ffree, remaining);
+	if (limit && buf->f_files > limit) {
+		buf->f_files = limit;
+		buf->f_ffree =
+			(buf->f_files > dquot->dq_dqb.dqb_curinodes) ?
+			 (buf->f_files - dquot->dq_dqb.dqb_curinodes) : 0;
 	}
 
 	spin_unlock(&dquot->dq_dqb_lock);
