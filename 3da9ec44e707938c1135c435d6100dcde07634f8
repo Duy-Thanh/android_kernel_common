@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0436899c_12786ca7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2025-07-31T11:56:56Z",
+      "side": 1,
+      "message": "Actually, this problem is an Android bug, which has not been resolved in the upstream Linux. How about I submit a separate Android bug patch?\nIn fact, Joy\u0027s patch did not completely solve the problem of HID device charging status not being reported. This problem can only be solved by adding the line \"power_supply_changed(dev-\u003ebattery);\".\nI also suggest you submit this line of code, \"power_supply_changed(dev-\u003ebattery);\", to the Linux community later. Submitting to the community is difficult for us, but it should be easier for you. \nThank you!",
+      "parentUuid": "68d44b74_f15ba4e9",
+      "revId": "3da9ec44e707938c1135c435d6100dcde07634f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b1bccb7_46d43b75",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2025-07-30T21:00:58Z",
       "side": 1,
       "message": "This cherry-pick is clean so it should be labeled as UPSTREAM",
+      "revId": "3da9ec44e707938c1135c435d6100dcde07634f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8696a0a3_fcd28c45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2025-07-31T11:56:56Z",
+      "side": 1,
+      "message": "Actually, this problem is an Android bug, which has not been resolved in the upstream Linux. How about I submit a separate Android bug patch?\nOr should I just add upstream to the tag?\nIn fact, Joy\u0027s patch did not completely solve the problem of HID device charging status not being reported. This problem can only be solved by adding the line \"power_supply_changed(dev-\u003ebattery);\".\nI also suggest you submit this line of code, \"power_supply_changed(dev-\u003ebattery);\", to the Linux community later. Submitting to the community is difficult for us, but it should be easier for you. \nThank you!",
+      "parentUuid": "9b1bccb7_46d43b75",
       "revId": "3da9ec44e707938c1135c435d6100dcde07634f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
