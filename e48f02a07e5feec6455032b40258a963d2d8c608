@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0cad6e0_86c9b113",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-07-31T12:20:05Z",
+      "side": 1,
+      "message": "Done. PTAL 😊 I tried to minimize the amount of work that hypervisor needs to do for this feature, but I am fully open to discussion.",
+      "parentUuid": "06277079_289e4124",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 0
+      },
+      "revId": "e48f02a07e5feec6455032b40258a963d2d8c608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06e8256e_c079a966",
@@ -109,6 +133,30 @@
           ]
         }
       ],
+      "revId": "e48f02a07e5feec6455032b40258a963d2d8c608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12569f0_a1588c65",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1836,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-07-31T12:20:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06e8256e_c079a966",
+      "range": {
+        "startLine": 1836,
+        "startChar": 2,
+        "endLine": 1836,
+        "endChar": 6
+      },
       "revId": "e48f02a07e5feec6455032b40258a963d2d8c608",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
