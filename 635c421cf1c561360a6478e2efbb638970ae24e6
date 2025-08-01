@@ -34,6 +34,24 @@
       "parentUuid": "897060d2_467e634b",
       "revId": "635c421cf1c561360a6478e2efbb638970ae24e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f86676f_a4e09020",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1129709
+      },
+      "writtenOn": "2025-08-01T05:23:30Z",
+      "side": 1,
+      "message": "Done. Thanks. I have also moved the Change-Id a line below as the doc suggests (which wasn\u0027t the case in your commit for some reason).",
+      "parentUuid": "9899dccb_fd809724",
+      "revId": "635c421cf1c561360a6478e2efbb638970ae24e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
