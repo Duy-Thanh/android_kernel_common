@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee99fb21_30e28ba6",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-01T18:55:46Z",
+      "side": 1,
+      "message": "No, you can\u0027t add these (KMI break). Instead, change 2 of the above ANDROID_KABI_RESERVE fields to ANDROID_BACKPORT_RESERVE() and ask Greg to approve. This would unreserved 2 of the fields so they can be used for backports. We can approve this if we think we won\u0027t need all 4 of the reserved fields for LTS merges.",
+      "fixSuggestions": [
+        {
+          "fixId": "0bc98172_85feff7f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/usb.h",
+              "range": {
+                "startLine": 751,
+                "startChar": 0,
+                "endLine": 755,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/usb.h",
+              "range": {
+                "startLine": 757,
+                "startChar": 0,
+                "endLine": 757,
+                "endChar": 0
+              },
+              "replacement": "\tANDROID_KABI_RESERVE(3);\n\tANDROID_KABI_RESERVE(4);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "133f82410a48d043e4a1f3607147f55314dcfe51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
