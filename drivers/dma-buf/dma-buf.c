@@ -457,7 +457,7 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 	refcount_set(&new_dmabuf_info->refcnt, 1);
 	spin_lock_init(&new_dmabuf_info->lock);
 	INIT_LIST_HEAD(&new_dmabuf_info->dmabufs);
-	if (!dmabuf_info) {
+	if (!dmabuf_info || (clone_flags & (CLONE_VM | CLONE_FILES))) {
 		new_dmabuf_info->dmabuf_count = 0;
 		new_dmabuf_info->rss = 0;
 		new_dmabuf_info->rss_hwm = 0;
