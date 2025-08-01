@@ -16,6 +16,24 @@
       "message": "Can\u0027t say I have a good sense of this resolution, but looks plausible.",
       "revId": "761a3d9e92088d02c90e8c12222668ab994d3140",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53700a73_e4b64eb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-08-01T22:32:33Z",
+      "side": 1,
+      "message": "Yeah I know. The shown diff3-view makes it hard to read the resolution. It is only a trivial context conflict.\n\nFWIW, I kept both changes: the addition from our `ANDROID:` patch:\n```\n+#ifdef CONFIG_CPU_FREQ_TIMES\n+\tONE(\"time_in_state\", 0444, proc_time_in_state_show),\n+#endif\n```\n...and the Kconfig rename from upstream:\n```\n-#ifdef CONFIG_STACKLEAK_METRICS\n+#ifdef CONFIG_KSTACK_ERASE_METRICS\n```",
+      "parentUuid": "fc719d2f_b103c23d",
+      "revId": "761a3d9e92088d02c90e8c12222668ab994d3140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
