@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/435097151",
       "revId": "16f34e2a7c644284dd52bfeb4b7ca019a2dc44f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553309bf_464399e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-01T17:38:22Z",
+      "side": 1,
+      "message": "This patch needs to include the KABI update (changes to the abi.stg file) along with it.",
+      "revId": "16f34e2a7c644284dd52bfeb4b7ca019a2dc44f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
