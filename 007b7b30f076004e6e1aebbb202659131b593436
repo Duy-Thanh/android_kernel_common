@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6634fcd8_65896bb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2025-08-01T09:16:11Z",
+      "side": 1,
+      "message": "Not sure how i am able to reply through my personal mail here. Just commenting the same from the official mailing address.",
+      "parentUuid": "fc2bc714_5b987498",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 45
+      },
+      "revId": "007b7b30f076004e6e1aebbb202659131b593436",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86db3748_5980679c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "True.. This is never be part of the linear mapping unless I explicitly map.\n\nOn the same line, please do share/point other alternatives for the same problem statement, I can explore them as well.",
       "parentUuid": "86db3748_5980679c",
+      "range": {
+        "startLine": 14,
+        "startChar": 26,
+        "endLine": 14,
+        "endChar": 52
+      },
+      "revId": "007b7b30f076004e6e1aebbb202659131b593436",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba425af_83a00249",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2025-08-01T09:16:11Z",
+      "side": 1,
+      "message": "same comment, from official mailing address.",
+      "parentUuid": "6050ece6_ba82f0ec",
       "range": {
         "startLine": 14,
         "startChar": 26,
