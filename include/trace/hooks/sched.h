@@ -319,6 +319,10 @@ DECLARE_HOOK(android_vh_dup_task_struct,
 	TP_PROTO(struct task_struct *tsk, struct task_struct *orig),
 	TP_ARGS(tsk, orig));
 
+DECLARE_HOOK(android_vh_switching_to_scx,
+	TP_PROTO(struct rq *rq, struct task_struct *p),
+	TP_ARGS(rq, p));
+
 DECLARE_RESTRICTED_HOOK(android_rvh_update_rq_clock_pelt,
 	TP_PROTO(struct rq *rq, s64 delta, int *ret),
 	TP_ARGS(rq, delta, ret), 1);
