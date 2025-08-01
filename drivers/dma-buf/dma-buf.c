@@ -442,6 +442,7 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 		 */
 		refcount_inc(&dmabuf_info->refcnt);
 		set_task_dma_buf_info(task, dmabuf_info);
+		//pr_err("task %d (%s) got dmabuf %lx\n", task_pid_nr(task), task->comm, (unsigned long)dmabuf_info);
 
 		return 0;
 	}
@@ -457,11 +458,12 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 	refcount_set(&new_dmabuf_info->refcnt, 1);
 	spin_lock_init(&new_dmabuf_info->lock);
 	INIT_LIST_HEAD(&new_dmabuf_info->dmabufs);
-	if (!dmabuf_info) {
+	if (!dmabuf_info || (clone_flags & (CLONE_VM | CLONE_FILES))) {
 		new_dmabuf_info->dmabuf_count = 0;
 		new_dmabuf_info->rss = 0;
 		new_dmabuf_info->rss_hwm = 0;
 		set_task_dma_buf_info(task, new_dmabuf_info);
+		//pr_err("task %d (%s) got dmabuf %lx\n", task_pid_nr(task), task->comm, (unsigned long)new_dmabuf_info);
 
 		return 0;
 	}
@@ -505,6 +507,7 @@ retry:
 	new_dmabuf_info->rss_hwm = dmabuf_info->rss;
 	spin_unlock(&dmabuf_info->lock);
 	set_task_dma_buf_info(task, new_dmabuf_info);
+	//pr_err("task %d (%s) got dmabuf with copy %lx\n", task_pid_nr(task), task->comm, (unsigned long)new_dmabuf_info);
 
 	trim_task_dmabuf_records_locked();
 	task_dmabuf_records_preload_end();
@@ -515,6 +518,7 @@ err_list_copy:
 	trim_task_dmabuf_records();
 	kfree(new_dmabuf_info);
 	set_task_dma_buf_info(task, NULL);
+	pr_err("task %d (%s) got dmabuf reset\n", task_pid_nr(task), task->comm);
 
 	return -ENOMEM;
 }
@@ -537,12 +541,12 @@ void put_dmabuf_info(struct task_struct *task)
 		return;
 
 	if (dmabuf_info->rss)
-		pr_alert("destroying task %d with non-zero dmabuf rss %u\n",
-			 task_pid_nr(task), dmabuf_info->rss);
+		pr_alert("destroying task %d (%s) %x with non-zero dmabuf rss %u %lx\n",
+			 task_pid_nr(task), task->comm, task->flags, dmabuf_info->rss, (unsigned long)dmabuf_info);
 
 	if (!list_empty(&dmabuf_info->dmabufs) || dmabuf_info->dmabuf_count > 0)
-		pr_alert("destroying task %d with non-empty dmabuf list of size %zu\n",
-			 task_pid_nr(task), dmabuf_info->dmabuf_count);
+		pr_alert("destroying task %d (%s) %x with non-empty dmabuf list of size %zu %lx\n",
+			 task_pid_nr(task), task->comm, task->flags, dmabuf_info->dmabuf_count, (unsigned long)dmabuf_info);
 
 	kfree(dmabuf_info);
 }
