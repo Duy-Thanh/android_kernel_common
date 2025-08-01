@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e77e66bd_39a725d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-01T18:33:11Z",
+      "side": 1,
+      "message": "The symbol changes (1 and 2) should be in a separate patch. Code changes (3) should not be combined with symbol changes. Please resubmit as a 2 patch series.",
+      "revId": "373004d7666d415e604b87c566fe277a13b1c9f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fe97cac_f4bc0cf2",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-01T18:33:11Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Buildifier: File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply...\n\nFile is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "373004d7666d415e604b87c566fe277a13b1c9f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
