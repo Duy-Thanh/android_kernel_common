@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2e2209c_ed99dee3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-01T23:49:11Z",
+      "side": 1,
+      "message": "Please cherry-pick the existing patch https://android-review.googlesource.com/c/kernel/common/+/2629950 from earlier kernels and post the rest of the change as a follow-up patch like Todd asked.",
+      "revId": "373004d7666d415e604b87c566fe277a13b1c9f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fe97cac_f4bc0cf2",
         "filename": "BUILD.bazel",
         "patchSetId": 2
