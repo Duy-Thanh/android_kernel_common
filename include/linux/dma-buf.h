@@ -705,8 +705,13 @@ struct task_dma_buf_info {
 	size_t dmabuf_count;
 };
 
+DECLARE_STATIC_KEY_TRUE(dmabuf_accounting_key);
+
 static inline bool task_has_dma_buf_info(struct task_struct *task)
 {
+	if (!static_key_enabled(&dmabuf_accounting_key))
+		return false;
+
 	/* init_task is the only kthread with its worker_private set to NULL */
 	return task != &init_task && (task->flags & PF_IO_WORKER) == 0;
 }
@@ -727,6 +732,9 @@ static inline void set_task_dma_buf_info(struct task_struct *task,
 static inline
 struct task_dma_buf_info *get_task_dma_buf_info(struct task_struct *task)
 {
+	if (!static_key_enabled(&dmabuf_accounting_key))
+		return NULL;
+
 	if (!task)
 		return ERR_PTR(-EINVAL);
 

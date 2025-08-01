@@ -2234,6 +2234,45 @@ static inline void dma_buf_uninit_debugfs(void)
 }
 #endif
 
+DEFINE_STATIC_KEY_TRUE(dmabuf_accounting_key);
+
+static int __init setup_early_dmabuf_accounting(char *str)
+{
+	bool enable;
+
+	if (kstrtobool(str, &enable))
+		return -EINVAL;
+
+	if (enable != static_key_enabled(&dmabuf_accounting_key)) {
+		if (enable)
+			static_branch_enable(&dmabuf_accounting_key);
+		else
+			static_branch_disable(&dmabuf_accounting_key);
+	}
+
+	return 0;
+}
+early_param("dmabuf_accounting", setup_early_dmabuf_accounting);
+
+#ifdef CONFIG_SYSCTL
+static struct ctl_table dmabuf_accounting_sysctls[] = {
+	{
+		.procname	= "dmabuf_accounting",
+		.data		= &dmabuf_accounting_key,
+		.mode		= 0644,
+		.proc_handler	= proc_do_static_key,
+	},
+	{ }
+};
+
+static void __init dma_buf_init_sysctl(void)
+{
+	register_sysctl_init("vm", dmabuf_accounting_sysctls);
+}
+#else /* CONFIG_SYSCTL */
+static inline void dma_buf_init_sysctl(void) {}
+#endif /* CONFIG_SYSCTL */
+
 static int __init dma_buf_init(void)
 {
 	int ret;
@@ -2249,6 +2288,7 @@ static int __init dma_buf_init(void)
 	mutex_init(&db_list.lock);
 	INIT_LIST_HEAD(&db_list.head);
 	init_task_dmabuf_record_pool();
+	dma_buf_init_sysctl();
 	dma_buf_init_debugfs();
 	return 0;
 }
