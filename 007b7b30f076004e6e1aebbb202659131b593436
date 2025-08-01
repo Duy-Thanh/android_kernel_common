@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc2bc714_5b987498",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1986393
+      },
+      "writtenOn": "2025-08-01T09:13:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9c28e08d_2d1a3dec",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 45
+      },
+      "revId": "007b7b30f076004e6e1aebbb202659131b593436",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86db3748_5980679c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-07-31T18:12:25Z",
       "side": 1,
       "message": "Is that why you want to export _noflush versions and avoid flush_cache_vmap()?",
+      "range": {
+        "startLine": 14,
+        "startChar": 26,
+        "endLine": 14,
+        "endChar": 52
+      },
+      "revId": "007b7b30f076004e6e1aebbb202659131b593436",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6050ece6_ba82f0ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1986393
+      },
+      "writtenOn": "2025-08-01T09:13:09Z",
+      "side": 1,
+      "message": "True.. This is never be part of the linear mapping unless I explicitly map.\n\nOn the same line, please do share/point other alternatives for the same problem statement, I can explore them as well.",
+      "parentUuid": "86db3748_5980679c",
       "range": {
         "startLine": 14,
         "startChar": 26,
