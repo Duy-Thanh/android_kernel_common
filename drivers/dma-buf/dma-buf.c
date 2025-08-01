@@ -40,6 +40,8 @@
 
 #include "dma-buf-sysfs-stats.h"
 
+DEFINE_STATIC_KEY_TRUE(dmabuf_accounting_key);
+
 static DEFINE_MUTEX(dmabuf_list_mutex);
 static LIST_HEAD(dmabuf_list);
 
@@ -412,6 +414,9 @@ int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task)
 	struct task_dma_buf_info *dmabuf_info = task->dmabuf_info;
 	struct task_dma_buf_record *rec;
 
+	if (!static_key_enabled(&dmabuf_accounting_key))
+		return 0;
+
 	if (!dmabuf_info)
 		return 0;
 
@@ -448,6 +453,9 @@ void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task)
 {
 	struct task_dma_buf_info *dmabuf_info = task->dmabuf_info;
 	struct task_dma_buf_record *rec;
+
+	if (!static_key_enabled(&dmabuf_accounting_key))
+		return;
 
 	if (!dmabuf_info)
 		return;
@@ -557,6 +565,9 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 	struct task_dma_buf_info *child_dmabuf_info;
 	bool share_vm = clone_flags & CLONE_VM;
 	bool share_fs = clone_flags & CLONE_FILES;
+
+	if (!static_key_enabled(&dmabuf_accounting_key))
+		return 0;
 
 	/* kthreads are not supported */
 	if (task->flags & PF_KTHREAD) {
@@ -2310,6 +2321,43 @@ static inline void dma_buf_uninit_debugfs(void)
 }
 #endif
 
+static int __init setup_early_dmabuf_accounting(char *str)
+{
+	bool enable;
+
+	if (kstrtobool(str, &enable))
+		return -EINVAL;
+
+	if (enable != static_key_enabled(&dmabuf_accounting_key)) {
+		if (enable)
+			static_branch_enable(&dmabuf_accounting_key);
+		else
+			static_branch_disable(&dmabuf_accounting_key);
+	}
+
+	return 0;
+}
+early_param("dmabuf_accounting", setup_early_dmabuf_accounting);
+
+#ifdef CONFIG_SYSCTL
+static struct ctl_table dmabuf_accounting_sysctls[] = {
+	{
+		.procname	= "dmabuf_accounting",
+		.data		= &dmabuf_accounting_key,
+		.mode		= 0644,
+		.proc_handler	= proc_do_static_key,
+	},
+	{ }
+};
+
+static void __init dma_buf_init_sysctl(void)
+{
+	register_sysctl_init("vm", dmabuf_accounting_sysctls);
+}
+#else /* CONFIG_SYSCTL */
+static inline void dma_buf_init_sysctl(void) {}
+#endif /* CONFIG_SYSCTL */
+
 static int __init dma_buf_init(void)
 {
 	int ret;
@@ -2323,6 +2371,7 @@ static int __init dma_buf_init(void)
 		return PTR_ERR(dma_buf_mnt);
 
 	init_task_dmabuf_record_pool();
+	dma_buf_init_sysctl();
 	dma_buf_init_debugfs();
 	return 0;
 }
