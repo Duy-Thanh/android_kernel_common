@@ -33,6 +33,24 @@
       "message": "This patch needs to include the KABI update (changes to the abi.stg file) along with it.",
       "revId": "16f34e2a7c644284dd52bfeb4b7ca019a2dc44f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7aab087_3f7b01c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3232228
+      },
+      "writtenOn": "2025-08-02T01:00:39Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/3712148  include the abi stg file change which I also inlude in the respin request",
+      "parentUuid": "553309bf_464399e9",
+      "revId": "16f34e2a7c644284dd52bfeb4b7ca019a2dc44f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
