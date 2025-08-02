@@ -51,6 +51,24 @@
       "parentUuid": "553309bf_464399e9",
       "revId": "16f34e2a7c644284dd52bfeb4b7ca019a2dc44f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6f5bcf_220b13fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-02T01:05:30Z",
+      "side": 1,
+      "message": "Yeah, but the update there was missing the symbol added in this commit.\n\nI\u0027ve made the change for you this time, but in the future be sure to submit the abi.stg files along with the symbol updates.",
+      "parentUuid": "f7aab087_3f7b01c1",
+      "revId": "16f34e2a7c644284dd52bfeb4b7ca019a2dc44f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
