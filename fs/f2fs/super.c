@@ -196,6 +196,7 @@ enum {
 	Opt_age_extent_cache,
 	Opt_errors,
 	Opt_nat_bits,
+	Opt_lookup_mode,
 	Opt_err,
 };
 
@@ -276,6 +277,7 @@ static match_table_t f2fs_tokens = {
 	{Opt_age_extent_cache, "age_extent_cache"},
 	{Opt_errors, "errors=%s"},
 	{Opt_nat_bits, "nat_bits"},
+	{Opt_lookup_mode, "lookup_mode=%s"},
 	{Opt_err, NULL},
 };
 
@@ -690,6 +692,8 @@ static int parse_options(struct f2fs_sb_info *sbi, char *options, bool is_remoun
 	kuid_t uid;
 	kgid_t gid;
 	int ret;
+
+	f2fs_set_lookup_mode(sbi, LOOKUP_PERF);
 
 	if (!options)
 		return 0;
@@ -1317,6 +1321,22 @@ static int parse_options(struct f2fs_sb_info *sbi, char *options, bool is_remoun
 			break;
 		case Opt_nat_bits:
 			set_opt(sbi, NAT_BITS);
+			break;
+		case Opt_lookup_mode:
+			name = match_strdup(&args[0]);
+			if (!name)
+				return -ENOMEM;
+			if (!strcmp(name, "perf")) {
+				f2fs_set_lookup_mode(sbi, LOOKUP_PERF);
+			} else if (!strcmp(name, "compat")) {
+				f2fs_set_lookup_mode(sbi, LOOKUP_COMPAT);
+			} else if (!strcmp(name, "auto")) {
+				f2fs_set_lookup_mode(sbi, LOOKUP_AUTO);
+			} else {
+				kfree(name);
+				return -EINVAL;
+			}
+			kfree(name);
 			break;
 		default:
 			f2fs_err(sbi, "Unrecognized mount option \"%s\" or missing value",

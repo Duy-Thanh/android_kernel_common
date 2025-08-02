@@ -124,6 +124,12 @@ extern const char *f2fs_fault_name[FAULT_MAX];
  */
 #define F2FS_MOUNT_LAZYTIME		0x40000000
 
+enum f2fs_lookup_mode {
+	LOOKUP_PERF,
+	LOOKUP_COMPAT,
+	LOOKUP_AUTO,
+};
+
 #define F2FS_OPTION(sbi)	((sbi)->mount_opt)
 #define clear_opt(sbi, option)	(F2FS_OPTION(sbi).opt &= ~F2FS_MOUNT_##option)
 #define set_opt(sbi, option)	(F2FS_OPTION(sbi).opt |= F2FS_MOUNT_##option)
@@ -1345,6 +1351,8 @@ enum {
 	SBI_IS_RESIZEFS,			/* resizefs is in process */
 	SBI_IS_FREEZING,			/* freezefs is in process */
 	SBI_IS_WRITABLE,			/* remove ro mountoption transiently */
+	SBI_LOOKUP_MODE_BIT0,
+	SBI_LOOKUP_MODE_BIT1,
 	MAX_SBI_FLAG,
 };
 
@@ -4911,6 +4919,27 @@ static inline void f2fs_invalidate_internal_cache(struct f2fs_sb_info *sbi,
 {
 	f2fs_truncate_meta_inode_pages(sbi, blkaddr, len);
 	f2fs_invalidate_compress_pages_range(sbi, blkaddr, len);
+}
+
+static inline enum f2fs_lookup_mode f2fs_get_lookup_mode(struct f2fs_sb_info *sbi)
+{
+	if (is_sbi_flag_set(sbi, SBI_LOOKUP_MODE_BIT1))
+		return LOOKUP_AUTO;
+	if (is_sbi_flag_set(sbi, SBI_LOOKUP_MODE_BIT0))
+		return LOOKUP_COMPAT;
+	return LOOKUP_PERF;
+}
+
+static inline void f2fs_set_lookup_mode(struct f2fs_sb_info *sbi,
+						enum f2fs_lookup_mode mode)
+{
+	clear_sbi_flag(sbi, SBI_LOOKUP_MODE_BIT0);
+	clear_sbi_flag(sbi, SBI_LOOKUP_MODE_BIT1);
+
+	if (mode == LOOKUP_COMPAT)
+		set_sbi_flag(sbi, SBI_LOOKUP_MODE_BIT0);
+	else if (mode == LOOKUP_AUTO)
+		set_sbi_flag(sbi, SBI_LOOKUP_MODE_BIT1);
 }
 
 #define EFSBADCRC	EBADMSG		/* Bad CRC detected */
