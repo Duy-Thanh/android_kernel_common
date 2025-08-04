@@ -46,6 +46,30 @@
       },
       "revId": "170ec557be8c9743450febfa20393fb489dbf1d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a01dd42c_dc80ae1c",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-04T14:47:33Z",
+      "side": 1,
+      "message": "This change has no cherry-picks and I cannot see this any change mentioning `pkvm_el2_mod_call_smccc` on `android16-6.12`.\n\nIf there is one, please link it.",
+      "parentUuid": "b2b94ceb_b02c2657",
+      "range": {
+        "startLine": 340,
+        "startChar": 8,
+        "endLine": 340,
+        "endChar": 31
+      },
+      "revId": "170ec557be8c9743450febfa20393fb489dbf1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
