@@ -32,6 +32,7 @@
 #include <linux/fs_context.h>
 #include <linux/shmem_fs.h>
 #include <linux/mnt_idmapping.h>
+#include <trace/hooks/fs.h>
 
 #include "pnode.h"
 #include "internal.h"
@@ -1771,7 +1772,7 @@ static int ksys_umount(char __user *name, int flags)
 	// basic validity checks done first
 	if (flags & ~(MNT_FORCE | MNT_DETACH | MNT_EXPIRE | UMOUNT_NOFOLLOW))
 		return -EINVAL;
-
+	trace_android_rvh_ksys_umount(name, flags);
 	if (!(flags & UMOUNT_NOFOLLOW))
 		lookup_flags |= LOOKUP_FOLLOW;
 	ret = user_path_at(AT_FDCWD, name, lookup_flags, &path);

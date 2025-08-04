@@ -4533,12 +4533,13 @@ static vm_fault_t do_read_fault(struct vm_fault *vmf)
 	 * if page by the offset is not ready to be mapped (cold cache or
 	 * something).
 	 */
-	if (vma->vm_ops->map_pages && fault_around_bytes >> PAGE_SHIFT > 1) {
-		if (likely(!userfaultfd_minor(vmf->vma))) {
-			ret = do_fault_around(vmf);
-			if (ret)
-				return ret;
-		}
+	if (vma->vm_ops->map_pages && (fault_around_bytes >> PAGE_SHIFT > 1) &&
+		likely(!userfaultfd_minor(vmf->vma))) {
+		ret = do_fault_around(vmf);
+		if (ret)
+			return ret;
+	} else {
+		trace_android_vh_do_read_fault(vmf, fault_around_bytes >> PAGE_SHIFT);
 	}
 
 	ret = __do_fault(vmf);
