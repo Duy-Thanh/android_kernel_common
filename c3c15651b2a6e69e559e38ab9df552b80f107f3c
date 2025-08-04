@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd8254e9_acc6f547",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-04T15:11:36Z",
+      "side": 1,
+      "message": "As I said before, this should be a cherry-pick of https://android-review.googlesource.com/c/kernel/common/+/2629950 and their Change-Id should be the same `I103b983fbb46ff7a45cfc57f5657142a1bbd3d68`. This way we can track related changes.",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "c3c15651b2a6e69e559e38ab9df552b80f107f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf95b77_9f4abd72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-04T15:11:36Z",
+      "side": 1,
+      "message": "As I said before, this should",
+      "revId": "c3c15651b2a6e69e559e38ab9df552b80f107f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
