@@ -34,6 +34,24 @@
       "parentUuid": "d11b434c_4e3aa204",
       "revId": "3d253a7cc140129f9d1ca2101fbb95e47ee10a3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d2d90a_dd5233cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2025-08-04T13:49:52Z",
+      "side": 1,
+      "message": "You are correct. After updating the VH in aosp/3706182 we do not need this header file anymore. I\u0027m reverting the CL.",
+      "parentUuid": "48a3fbf8_40f4b0e6",
+      "revId": "3d253a7cc140129f9d1ca2101fbb95e47ee10a3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
