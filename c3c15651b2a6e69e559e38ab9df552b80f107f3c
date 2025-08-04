@@ -39,6 +39,24 @@
       "message": "As I said before, this should",
       "revId": "c3c15651b2a6e69e559e38ab9df552b80f107f3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "868947c5_2098e335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-04T15:12:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf95b77_9f4abd72",
+      "revId": "c3c15651b2a6e69e559e38ab9df552b80f107f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
