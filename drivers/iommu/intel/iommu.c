@@ -676,11 +676,15 @@ struct context_entry *iommu_context_addr(struct intel_iommu *iommu, u8 bus,
 	struct pkvm_root_entry *pv_root = iommu->pv_root_entry;
 	struct pkvm_ce_node *ce_node;
 	void *context;
+	int sm_ind = 0;
 
 	if (!pkvm_enabled())
 		return __iommu_context_addr(iommu, bus, devfn, alloc);
 
-	context = pv_root->context_ptr[bus];
+	if (sm_supported(iommu) && devfn >= 0x80)
+		sm_ind = 1;
+
+	context = pv_root->context_ptr[bus][sm_ind];
 	if (!context) {
 		if (!alloc)
 			return NULL;
@@ -697,7 +701,7 @@ struct context_entry *iommu_context_addr(struct intel_iommu *iommu, u8 bus,
 		return NULL;
 	}
 
-	pv_root->context_ptr[bus] = context;
+	pv_root->context_ptr[bus][sm_ind] = context;
 
 	return &ce_node->ce;
 }
@@ -2059,20 +2063,24 @@ static void context_present_cache_flush(struct intel_iommu *iommu, u16 did,
 }
 
 #ifdef CONFIG_PKVM_INTEL_PVIOMMU
-static long pv_update_context_entry(struct intel_iommu *iommu, struct dmar_domain *domain,
+long pv_update_context_entry(struct intel_iommu *iommu, struct dmar_domain *domain,
 		u8 bus, u8 devfn, struct context_entry *context)
 {
 	struct pkvm_root_entry *pv_root = iommu->pv_root_entry;
 	struct pkvm_iommu_page_donation donation = { 0 };
 	struct pkvm_update_ce_param param  = { 0 };
 	int ret = 0, i;
+	int sm_ind = 0;
 
 	if (WARN_ON(!pkvm_enabled()))
 		return 0;
 
+	if (sm_supported(iommu) && devfn >= 0x80)
+		sm_ind = 1;
+
 	param.reg_phys = iommu->reg_phys;
 	param.bdf = PCI_DEVID(bus, devfn);
-	param.rte = virt_to_phys(pv_root->context_ptr[bus]) | 1;
+	param.rte = virt_to_phys(pv_root->context_ptr[bus][sm_ind]) | 1;
 	param.ce_lo = context->lo;
 	param.ce_hi = context->hi;
 	if (domain) {
@@ -2090,16 +2098,10 @@ static long pv_update_context_entry(struct intel_iommu *iommu, struct dmar_domai
 	/*
 	 * pkvm changed the pgd. Record it in the domain.
 	 */
-	if (param.pgd)
+	if (domain && param.pgd)
 		domain->pgd = phys_to_virt(param.pgd);
 
 	return ret;
-}
-#else
-static inline long pv_update_context_entry(struct intel_iommu *iommu, struct dmar_domain *domain,
-		u8 bus, u8 devfn, struct context_entry *context)
-{
-	return 0;
 }
 #endif
 
@@ -2407,6 +2409,10 @@ static void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8
 	spin_unlock(&iommu->lock);
 }
 
+static u64 pv_domain_update_agaw(struct dma_pte *pgd, int agaw) {
+	return kvm_hypercall2(PKVM_HC_UPDATE_AGAW, virt_to_phys(pgd), agaw);
+}
+
 static int domain_setup_first_level(struct intel_iommu *iommu,
 				    struct dmar_domain *domain,
 				    struct device *dev,
@@ -2420,10 +2426,19 @@ static int domain_setup_first_level(struct intel_iommu *iommu,
 	 * Skip top levels of page tables for iommu which has
 	 * less agaw than default. Unnecessary for PT mode.
 	 */
-	for (agaw = domain->agaw; agaw > iommu->agaw; agaw--) {
-		pgd = phys_to_virt(dma_pte_addr(pgd));
-		if (!dma_pte_present(pgd))
-			return -ENOMEM;
+	if (IS_ENABLED(CONFIG_PKVM_INTEL_PVIOMMU) && pkvm_enabled()) {
+		agaw = domain->agaw;
+		if (agaw > iommu->agaw) {
+			pgd = domain->pgd = phys_to_virt(pv_domain_update_agaw(pgd, iommu->agaw));
+			agaw = domain->agaw = iommu->agaw;
+		}
+	}
+	else {
+		for (agaw = domain->agaw; agaw > iommu->agaw; agaw--) {
+			pgd = phys_to_virt(dma_pte_addr(pgd));
+			if (!dma_pte_present(pgd))
+				return -ENOMEM;
+		}
 	}
 
 	level = agaw_to_level(agaw);
@@ -3953,6 +3968,7 @@ static int md_domain_init(struct dmar_domain *domain, int guest_width)
 			.domain_agaw = domain->agaw,
 			.iommu_coherency = domain->iommu_coherency,
 			.iommu_superpage = domain->iommu_superpage,
+			.use_first_level = domain->use_first_level,
 		};
 		pkvm_iommu_alloc_domain(&param);
 	}
@@ -4053,6 +4069,7 @@ static struct dmar_domain *paging_domain_alloc(struct device *dev, bool first_st
 			.domain_agaw = domain->agaw,
 			.iommu_coherency = domain->iommu_coherency,
 			.iommu_superpage = domain->iommu_superpage,
+			.use_first_level = domain->use_first_level,
 		};
 		pkvm_iommu_alloc_domain(&param);
 	}
@@ -4182,17 +4199,26 @@ int prepare_domain_attach_device(struct iommu_domain *domain,
 	/*
 	 * Knock out extra levels of page tables if necessary
 	 */
-	while (iommu->agaw < dmar_domain->agaw) {
-#ifndef CONFIG_PKVM_INTEL_PVIOMMU
-		struct dma_pte *pte;
-
-		pte = dmar_domain->pgd;
-		if (dma_pte_present(pte)) {
-			dmar_domain->pgd = phys_to_virt(dma_pte_addr(pte));
-			iommu_free_page(pte);
+	if (sm_supported(iommu) && IS_ENABLED(CONFIG_PKVM_INTEL_PVIOMMU)
+			&& pkvm_enabled()) {
+		if (dmar_domain->agaw > iommu->agaw) {
+			dmar_domain->pgd = phys_to_virt(pv_domain_update_agaw(dmar_domain->pgd, iommu->agaw));
+			dmar_domain->agaw = iommu->agaw;
 		}
+	}
+	else {
+		while (iommu->agaw < dmar_domain->agaw) {
+#ifndef CONFIG_PKVM_INTEL_PVIOMMU
+			struct dma_pte *pte;
+
+			pte = dmar_domain->pgd;
+			if (dma_pte_present(pte)) {
+				dmar_domain->pgd = phys_to_virt(dma_pte_addr(pte));
+				iommu_free_page(pte);
+			}
 #endif
-		dmar_domain->agaw--;
+			dmar_domain->agaw--;
+		}
 	}
 
 	if (sm_supported(iommu) && !dev_is_real_dma_subdevice(dev) &&
@@ -4505,6 +4531,7 @@ static struct iommu_device *intel_iommu_probe_device(struct device *dev)
 			ret = intel_pasid_setup_sm_context(dev);
 			if (ret)
 				goto free_table;
+			//panic("abc\n");
 		}
 	}
 

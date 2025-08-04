@@ -81,6 +81,7 @@ static void handle_cr(struct kvm_vcpu *vcpu)
 	}
 }
 
+u64 pkvm_domain_update_agaw(u64 pgd, int agaw);
 static unsigned long handle_vmcall(struct kvm_vcpu *vcpu)
 {
 	u64 nr, a0, a1, a2, a3;
@@ -109,6 +110,9 @@ static unsigned long handle_vmcall(struct kvm_vcpu *vcpu)
 		ret = pkvm_access_iommu(a0, a1, a2, a3);
 		break;
 #ifdef CONFIG_PKVM_INTEL_PVIOMMU
+	case PKVM_HC_UPDATE_AGAW:
+		ret = pkvm_domain_update_agaw(a0, a1);
+		break;
 	case PKVM_HC_IOMMU_DOMAIN_ALLOC:
 		ret = pkvm_iommu_domain_alloc(vcpu, a0);
 		break;

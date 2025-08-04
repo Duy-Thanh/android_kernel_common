@@ -733,12 +733,13 @@ static unsigned long context_get_sm_pds(struct pasid_table *table)
 }
 
 static int context_entry_set_pasid_table(struct context_entry *context,
-					 struct device *dev)
+					 struct device *dev, u8 bus, u8 devfn)
 {
 	struct device_domain_info *info = dev_iommu_priv_get(dev);
 	struct pasid_table *table = info->pasid_table;
 	struct intel_iommu *iommu = info->iommu;
 	unsigned long pds;
+	int ret;
 
 	context_clear_entry(context);
 
@@ -753,7 +754,15 @@ static int context_entry_set_pasid_table(struct context_entry *context,
 
 	context_set_fault_enable(context);
 	context_set_present(context);
-	__iommu_flush_cache(iommu, context, sizeof(*context));
+
+	if (IS_ENABLED(CONFIG_PKVM_INTEL_PVIOMMU) && pkvm_enabled()) {
+		ret = pv_update_context_entry(iommu, NULL, bus, devfn, context);
+		if (ret) {
+			pr_warn("PV call to update context entry failed! ce: %llx:%llx\n",
+				context->hi, context->lo);
+		}
+	} else
+		__iommu_flush_cache(iommu, context, sizeof(*context));
 
 	return 0;
 }
@@ -805,7 +814,7 @@ static int device_pasid_table_setup(struct device *dev, u8 bus, u8 devfn)
 		clear_context_copied(iommu, bus, devfn);
 	}
 
-	context_entry_set_pasid_table(context, dev);
+	context_entry_set_pasid_table(context, dev, bus, devfn);
 	spin_unlock(&iommu->lock);
 
 	/*

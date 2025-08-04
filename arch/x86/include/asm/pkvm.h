@@ -24,6 +24,7 @@
 #define PKVM_HC_ADD_PTDEV		15
 #define PKVM_HC_SUBMIT_QI		16
 #define PKVM_HC_SET_QI_DESC_STATUS	17
+#define PKVM_HC_UPDATE_AGAW		18
 
 #define PKVM_HC_DUMP_DMAR_TR_STRUCT	20
 #define PKVM_HC_DUMP_DOMAIN_PGT		21
@@ -110,6 +111,7 @@ struct pkvm_iommu_domalloc_param {
 	u16 domain_agaw;
 	u8 iommu_coherency;
 	u8 iommu_superpage;
+	u8 use_first_level;
 };
 
 #ifndef __PKVM_HYP__

@@ -131,14 +131,23 @@ unsigned long pkvm_iommu_update_ce(struct kvm_vcpu *hvcpu, unsigned long param_g
 	pkvm_spin_lock(&iommu->lock);
 
 	root = &root_entry[bus];
-	ce = &context[devfn];
-	did = context_domain_id(ce);
-	pkvm_dbg("pkvm: %s: did: %d, old_rte=%llx, new_rte: %llx, old_ce: (%llx:%llx), new_ce: (%llx:%llx)\n",
-			__func__, did, root->lo, param.rte, ce->hi, ce->lo, param.ce_hi, param.ce_lo);
 
-	old_rte = root->lo & VTD_PAGE_MASK;
-	old_ce_pgd = ce->lo & VTD_PAGE_MASK;
-	new_ce_pgd = param.ce_lo & VTD_PAGE_MASK;
+	if (ecap_smts(iommu->iommu.ecap)) {
+		if (devfn >= 0x80)
+			ce = &context[2 * (devfn - 0x80)];
+		else
+			ce = &context[2 * devfn];
+	}
+	else {
+		ce = &context[devfn];
+		old_ce_pgd = ce->lo & VTD_PAGE_MASK;
+		new_ce_pgd = param.ce_lo & VTD_PAGE_MASK;
+	}
+
+	if (ecap_smts(iommu->iommu.ecap) && devfn >= 0x80)
+		old_rte = root->hi & VTD_PAGE_MASK;
+	else
+		old_rte = root->lo & VTD_PAGE_MASK;
 
 	/*
 	 * Remove the mapping for the context table page so that host
@@ -158,10 +167,23 @@ unsigned long pkvm_iommu_update_ce(struct kvm_vcpu *hvcpu, unsigned long param_g
 		}
 	}
 
+	if (ecap_smts(iommu->iommu.ecap))
+		pkvm_dbg("pkvm: %s: old_rte=%llx, new_rte: %llx, old_ce: (%llx:%llx), new_ce: (%llx:%llx)\n",
+				__func__, old_rte, new_rte, ce->hi, ce->lo, param.ce_hi, param.ce_lo);
+	else {
+		did = context_domain_id(ce);
+		pkvm_dbg("pkvm: %s: did: %d, old_rte=%llx, new_rte: %llx, old_ce: (%llx:%llx), new_ce: (%llx:%llx)\n",
+				__func__, did, old_rte, new_rte, ce->hi, ce->lo, param.ce_hi, param.ce_lo);
+	}
+
 	/*
 	 * Set the context and root entries.
 	 */
-	root->lo = param.rte;
+	if (ecap_smts(iommu->iommu.ecap) && devfn >= 0x80)
+		root->hi = param.rte;
+	else
+		root->lo = param.rte;
+
 	ce->hi = param.ce_hi;
 	ce->lo = param.ce_lo;
 
@@ -169,7 +191,7 @@ unsigned long pkvm_iommu_update_ce(struct kvm_vcpu *hvcpu, unsigned long param_g
 	 * Always set translation type to MULTI_LEVEL to ensure address
 	 * translation and to disable device TLB for security.
 	 */
-	if (context_lm_get_tt(ce) == CONTEXT_TT_PASS_THROUGH) {
+	if (!ecap_smts(iommu->iommu.ecap) && context_lm_get_tt(ce) == CONTEXT_TT_PASS_THROUGH) {
 		unsigned long pgd = pkvm_host_ept_pgd();
 		int level = pkvm_host_ept_level();
 		u8 aw;
@@ -182,7 +204,7 @@ unsigned long pkvm_iommu_update_ce(struct kvm_vcpu *hvcpu, unsigned long param_g
 		new_ce_pgd = pgd;
 	}
 
-	if (old_ce_pgd != new_ce_pgd) {
+	if (!ecap_smts(iommu->iommu.ecap) && old_ce_pgd != new_ce_pgd) {
 		struct pkvm_iommu_domain *domain;
 		struct pkvm_ptdev *ptdev;
 		if (__valid_paging_pgd(old_ce_pgd)) {
@@ -233,8 +255,14 @@ unsigned long pkvm_iommu_update_ce(struct kvm_vcpu *hvcpu, unsigned long param_g
 		pkvm_clflush_cache_range(root, sizeof(*root));
 		pkvm_clflush_cache_range(ce, sizeof(*ce));
 	}
+
 	flush_context_cache(iommu, 0, param.bdf, DMA_CCMD_MASK_NOBIT, DMA_CCMD_DEVICE_INVL);
-	flush_iotlb(iommu, did, 0, 0, DMA_TLB_DSI_FLUSH);
+
+	if (ecap_smts(iommu->iommu.ecap))
+		flush_iotlb(iommu, 0, 0, 0, DMA_TLB_DSI_FLUSH);
+	else
+		flush_iotlb(iommu, did, 0, 0, DMA_TLB_DSI_FLUSH);
+
 	pkvm_spin_unlock(&iommu->lock);
 
 	ret = write_gva(hvcpu, donation_gva, &donation, sizeof(struct pkvm_iommu_page_donation), &e);

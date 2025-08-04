@@ -24,6 +24,7 @@ struct pkvm_iommu_domain {
 	atomic_t refcount;
 	unsigned long index;
 	bool iommu_coherency;
+	bool use_first_level;
 	u64 pgd;
 	int iommu_superpage;
 	int gaw;

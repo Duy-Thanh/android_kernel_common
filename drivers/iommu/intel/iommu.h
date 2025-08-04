@@ -608,7 +608,7 @@ struct pkvm_root_entry {
 	/*
 	 * vaddr of context table pages
 	 */
-	void *context_ptr[ROOT_ENTRY_NR];
+	void *context_ptr[ROOT_ENTRY_NR][2];
 	/*
 	 * key = bdf, value = context entry.
 	 */
@@ -1406,6 +1406,17 @@ static inline int iommu_calculate_max_sagaw(struct intel_iommu *iommu)
 #define dmar_disabled	(1)
 #define intel_iommu_enabled (0)
 #define intel_iommu_sm (0)
+#endif
+
+#ifdef CONFIG_PKVM_INTEL_PVIOMMU
+long pv_update_context_entry(struct intel_iommu *iommu, struct dmar_domain *domain,
+		u8 bus, u8 devfn, struct context_entry *context);
+#else
+static inline long pv_update_context_entry(struct intel_iommu *iommu, struct dmar_domain *domain,
+		u8 bus, u8 devfn, struct context_entry *context)
+{
+	return 0;
+}
 #endif
 
 static inline const char *decode_prq_descriptor(char *str, size_t size,

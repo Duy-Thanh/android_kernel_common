@@ -176,13 +176,40 @@ unsigned long pkvm_domain_update_pgd(struct pkvm_iommu_domain *domain,
 		pte = pkvm_phys_to_virt(pgd);
 		if (dma_pte_present(pte)) {
 			__pkvm_hyp_donate_host(pgd, PAGE_SIZE);
-			donation->pages[donation->nr_pages++] = pgd;
-			PKVM_ASSERT(donation->nr_pages <= PKVM_MAX_IOMMU_PAGE_DONATION);
+			if (donation) {
+				donation->pages[donation->nr_pages++] = pgd;
+				PKVM_ASSERT(donation->nr_pages <= PKVM_MAX_IOMMU_PAGE_DONATION);
+			}
 			pgd = dma_pte_addr(pte);
 		}
 		domain->agaw--;
 	}
 	return pgd;
+}
+
+u64 pkvm_domain_update_agaw(u64 pgd, int agaw)
+{
+	u64 new_pgd;
+	struct pkvm_iommu_domain *domain = pkvm_get_iommu_domain(pgd);
+	struct pkvm_iommu_domain *new_domain;
+	PKVM_ASSERT(domain);
+	new_pgd = pkvm_domain_update_pgd(domain, NULL, agaw);
+	if (new_pgd != domain->pgd) {
+		pkvm_dbg("pkvm: %s, domain changed pgd [%llx] => [%llx]\n",
+			__func__, domain->pgd, new_pgd);
+		new_domain = pkvm_alloc_iommu_domain(new_pgd);
+		new_domain = pkvm_get_iommu_domain(new_pgd);
+		new_domain->iommu_coherency = domain->iommu_coherency;
+		new_domain->iommu_superpage = domain->iommu_superpage;
+		new_domain->use_first_level = domain->use_first_level;
+		new_domain->gaw = domain->gaw;
+		new_domain->agaw = domain->agaw;
+		pkvm_put_iommu_domain(new_domain);
+	}
+	//TODO: Address the potential memory leak if the domain changes
+	//by adding a free domain function.
+	pkvm_put_iommu_domain(domain);
+	return new_pgd;
 }
 
 static unsigned long calculate_psi_aligned_address(unsigned long start,
@@ -345,6 +372,8 @@ static struct dma_pte *pfn_to_dma_pte(struct pkvm_iommu_domain *domain,
 
 			domain_flush_cache(domain, tmp_page, VTD_PAGE_SIZE);
 			pteval = pkvm_virt_to_phys(tmp_page) | DMA_PTE_READ | DMA_PTE_WRITE;
+			if (domain->use_first_level)
+				pteval |= DMA_FL_PTE_US | DMA_FL_PTE_ACCESS;
 
 			tmp = 0ULL;
 			if (!try_cmpxchg64(&pte->val, &tmp, pteval)) {
@@ -592,6 +621,12 @@ domain_map(struct pkvm_iommu_domain *domain, struct pkvm_iommu_map_param *param,
 	attr = prot & (DMA_PTE_READ | DMA_PTE_WRITE | DMA_PTE_SNP);
 	attr |= DMA_FL_PTE_PRESENT;
 
+	if (domain->use_first_level) {
+		attr |= DMA_FL_PTE_US | DMA_FL_PTE_ACCESS;
+		if (prot & DMA_PTE_WRITE)
+			attr |= DMA_FL_PTE_DIRTY;
+	}
+
 	pteval = ((phys_addr_t)phys_pfn << VTD_PAGE_SHIFT) | attr;
 
 	while (nr_pages > 0) {
@@ -792,6 +827,7 @@ static void dma_pte_clear_level(struct pkvm_iommu_domain *domain, int level,
 				dma_pte_list_pagetables(domain, level - 1, pte, donation);
 			else
 				decrease_page_ref(dma_pte_addr(pte), level);
+
 			dma_clear_pte(pte);
 			if (!first_pte)
 				first_pte = pte;
@@ -900,6 +936,7 @@ unsigned long pkvm_iommu_domain_alloc(struct kvm_vcpu *hvcpu, unsigned long para
 	PKVM_ASSERT(domain);
 	domain->iommu_coherency = param.iommu_coherency;
 	domain->iommu_superpage = param.iommu_superpage;
+	domain->use_first_level = param.use_first_level;
 	domain->gaw = param.domain_gaw;
 	domain->agaw = param.domain_agaw;
 	__pkvm_host_donate_hyp(param.pgd_gpa, PAGE_SIZE);
