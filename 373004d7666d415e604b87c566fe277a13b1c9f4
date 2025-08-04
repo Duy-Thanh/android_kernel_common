@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9cfe03_cd17db51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1940445
+      },
+      "writtenOn": "2025-08-04T09:13:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e77e66bd_39a725d1",
+      "revId": "373004d7666d415e604b87c566fe277a13b1c9f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2e2209c_ed99dee3",
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9334f09_22cf22da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940445
+      },
+      "writtenOn": "2025-08-04T09:13:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e2209c_ed99dee3",
+      "revId": "373004d7666d415e604b87c566fe277a13b1c9f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fe97cac_f4bc0cf2",
@@ -65,6 +101,24 @@
       "writtenOn": "2025-08-01T18:33:11Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Buildifier: File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply...\n\nFile is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "373004d7666d415e604b87c566fe277a13b1c9f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95529d3_e9775ece",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940445
+      },
+      "writtenOn": "2025-08-04T09:13:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fe97cac_f4bc0cf2",
       "revId": "373004d7666d415e604b87c566fe277a13b1c9f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
