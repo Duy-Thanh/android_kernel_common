@@ -70,6 +70,23 @@
       },
       "revId": "170ec557be8c9743450febfa20393fb489dbf1d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b55928d_36bd76c0",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-04T21:06:01Z",
+      "side": 1,
+      "message": "Adding a macro without its use feels a little strange, especially as it doesn\u0027t seem to be used anywhere in this series. Why should it be added here? I assume its used in vendorhook logic, but could it be defined there instead?",
+      "revId": "170ec557be8c9743450febfa20393fb489dbf1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
