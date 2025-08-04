@@ -2785,3 +2785,5 @@
   xsk_tx_release
   xsk_uses_need_wakeup
   zap_vma_ptes
+  prandom_seed
+  alarm_forward_now
