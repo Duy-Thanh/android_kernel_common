@@ -35,6 +35,9 @@
 #include "iostat.h"
 #include <trace/events/f2fs.h>
 #include <uapi/linux/f2fs.h>
+#include <trace/hooks/f2fs.h>
+
+EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_datawrite_end);
 
 static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
 {
@@ -216,6 +219,8 @@ static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)
 		f2fs_exist_written_data(sbi, F2FS_I(inode)->i_pino,
 							TRANS_DIR_INO))
 		cp_reason = CP_RECOVER_DIR;
+
+	trace_android_vh_modify_cp_reason(inode, (void *)&cp_reason);
 
 	return cp_reason;
 }
@@ -4810,6 +4815,8 @@ out:
 
 	if (ret > 0 && may_need_sync)
 		ret = generic_write_sync(iocb, ret);
+
+	trace_android_vh_clean_compress_flag(inode);
 
 	/* If buffered IO was forced, flush and drop the data from
 	 * the page cache to preserve O_DIRECT semantics
