@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0bb5a37_f4953a24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4255728
+      },
+      "writtenOn": "2025-08-05T02:05:55Z",
+      "side": 1,
+      "message": "Okay, cherry-pick of it into the new patch link: https://android-review.googlesource.com/c/kernel/common/+/3719471",
+      "parentUuid": "dd8254e9_acc6f547",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "c3c15651b2a6e69e559e38ab9df552b80f107f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bf95b77_9f4abd72",
