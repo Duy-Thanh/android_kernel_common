@@ -16,6 +16,7 @@
 #include "xe_bo.h"
 #include "xe_device.h"
 #include "xe_force_wake.h"
+#include "xe_gpufreqtracer/xe_gpufreqtracer.h"
 #include "xe_gt.h"
 #include "xe_gt_idle.h"
 #include "xe_gt_printk.h"
@@ -536,6 +537,11 @@ int xe_guc_pc_set_min_freq(struct xe_guc_pc *pc, u32 freq)
 
 	pc->user_requested_min = freq;
 
+#ifdef CONFIG_DRM_XE_GPUFREQTRACER
+	/* Report frequency change via tracepoint */
+	xe_gpufreqtracer_report_frequency_change(pc_to_gt(pc), freq * 1000); /* MHz to KHz */
+#endif
+
 out:
 	mutex_unlock(&pc->freq_lock);
 	return ret;
@@ -596,6 +602,11 @@ int xe_guc_pc_set_max_freq(struct xe_guc_pc *pc, u32 freq)
 		goto out;
 
 	pc->user_requested_max = freq;
+
+#ifdef CONFIG_DRM_XE_GPUFREQTRACER
+	/* Report frequency change via tracepoint */
+	xe_gpufreqtracer_report_frequency_change(pc_to_gt(pc), freq * 1000); /* MHz to KHz*/
+#endif
 
 out:
 	mutex_unlock(&pc->freq_lock);
