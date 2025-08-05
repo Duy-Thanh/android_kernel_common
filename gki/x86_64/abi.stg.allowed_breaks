@@ -1,0 +1,56 @@
+
+
+function symbol 'void* __devm_drm_dev_alloc(struct device*, const struct drm_driver*, size_t, size_t)' changed
+  CRC changed from 0x5557c54 to 0xf315daeb
+
+function symbol 'void __drm_atomic_helper_connector_duplicate_state(struct drm_connector*, struct drm_connector_state*)' changed
+  CRC changed from 0x2632375b to 0x92f6a1a9
+
+function symbol 'void __drm_atomic_helper_connector_reset(struct drm_connector*, struct drm_connector_state*)' changed
+  CRC changed from 0x31978f0e to 0x8d47676b
+
+... 279 omitted; 282 symbols have only CRC changes
+
+type 'struct drm_plane_state' changed
+  byte size changed from 176 to 184
+  member 'struct drm_colorop* color_pipeline' was added
+  3 members ('struct drm_crtc_commit* commit' .. 'bool color_mgmt_changed:1') changed
+    offset changed by 64
+
+type 'struct drm_plane' changed
+  byte size changed from 1880 to 1888
+  member 'struct drm_property* color_pipeline_property' was added
+  4 members ('struct drm_property* scaling_filter_property' .. 'struct kmsg_dumper kmsg_panic') changed
+    offset changed by 64
+
+type 'struct drm_shadow_plane_state' changed
+  byte size changed from 328 to 336
+  3 members ('struct drm_format_conv_state fmtcnv_state' .. 'struct iosys_map data[4]') changed
+    offset changed by 64
+
+type 'struct drm_device' changed
+  byte size changed from 1736 to 1760
+  7 members ('struct mutex object_name_lock' .. 'struct dentry* debugfs_root') changed
+    offset changed by 192
+
+type 'struct drm_atomic_state' changed
+  byte size changed from 120 to 128
+  member 'bool plane_color_pipeline:1' was added
+  member 'struct __drm_colorops_state* colorops' was added
+  9 members ('struct __drm_planes_state* planes' .. 'struct work_struct commit_work') changed
+    offset changed by 64
+
+type 'struct drm_file' changed
+  member 'bool plane_color_pipeline' was added
+  3 members ('bool was_master' .. 'bool supports_virtualized_cursor_plane') changed
+    offset changed by 8
+
+type 'struct drm_mode_config' changed
+  byte size changed from 1192 to 1216
+  member 'int num_colorop' was added
+  member 'struct list_head colorop_list' was added
+  member 'int num_crtc' changed
+    offset changed by 160
+  84 members ('struct list_head crtc_list' .. 'const struct drm_mode_config_helper_funcs* helper_private') changed
+    offset changed by 192
+
