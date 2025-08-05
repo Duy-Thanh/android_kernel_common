@@ -22,6 +22,30 @@
       },
       "revId": "310dfd6b6ea4d11789a7f706675ed263e06c1f3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f8507e_88a52ab0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4255728
+      },
+      "writtenOn": "2025-08-05T01:55:11Z",
+      "side": 1,
+      "message": "Okay, updated it in the new patch link: https://android-review.googlesource.com/c/kernel/common/+/3720310， and this change is abandoned.",
+      "parentUuid": "57578e20_295e72d7",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "310dfd6b6ea4d11789a7f706675ed263e06c1f3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
