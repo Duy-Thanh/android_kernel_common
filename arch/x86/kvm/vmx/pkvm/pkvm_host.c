@@ -214,7 +214,7 @@ static __init int check_and_init_iommu(struct pkvm_hyp *pkvm)
 			return -EINVAL;
 		}
 
-		addr = ioremap(drhd->reg_base_addr, VTD_PAGE_SIZE);
+		addr = ioremap(drhd->reg_base_addr, PKVM_IOMMU_REMAP_REGION_SIZE);
 		if (!addr) {
 			pr_err("pkvm: failed to map drhd reg physical addr 0x%llx\n",
 				drhd->reg_base_addr);
@@ -246,7 +246,7 @@ static __init int check_and_init_iommu(struct pkvm_hyp *pkvm)
 		info->reg_phys = drhd->reg_base_addr;
 		reg_size = max_t(u64, ecap_max_iotlb_offset(ecap),
 				 cap_max_fault_reg_offset(cap));
-		info->reg_size = max_t(u64, reg_size, VTD_PAGE_SIZE);
+		info->reg_size = max_t(u64, reg_size, PKVM_IOMMU_REMAP_REGION_SIZE);
 
 		if (cap_sagaw(cap) & PGT_4LEVEL)
 			level |= PGT_4LEVEL;

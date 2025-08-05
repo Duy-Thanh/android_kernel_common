@@ -16,6 +16,7 @@
 #define PKVM_MAX_PASID_PDEV_NUM	32
 #define PKVM_MAX_PDEV_NUM	512
 #define PKVM_MAX_DEVS_IN_SATC	16
+#define PKVM_IOMMU_REMAP_REGION_SIZE   SZ_64K
 
 struct pkvm_pgtable_cap {
 	int level;
