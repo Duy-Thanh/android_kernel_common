@@ -1097,13 +1097,15 @@ int bio_add_page(struct bio *bio, struct page *page,
 		 unsigned int len, unsigned int offset)
 {
 	bool same_page = false;
+	bool skip_merge = false;
 
 	if (WARN_ON_ONCE(bio_flagged(bio, BIO_CLONED)))
 		return 0;
 	if (bio->bi_iter.bi_size > UINT_MAX - len)
 		return 0;
 
-	if (bio->bi_vcnt > 0 &&
+	trace_android_vh_bio_add_page_merge_bypass(bio, &skip_merge);
+	if (!skip_merge && bio->bi_vcnt > 0 &&
 	    bvec_try_merge_page(&bio->bi_io_vec[bio->bi_vcnt - 1],
 				page, len, offset, &same_page)) {
 		bio->bi_iter.bi_size += len;
@@ -1196,11 +1198,13 @@ static int bio_iov_add_page(struct bio *bio, struct page *page,
 		unsigned int len, unsigned int offset)
 {
 	bool same_page = false;
+	bool skip_merge = false;
 
 	if (WARN_ON_ONCE(bio->bi_iter.bi_size > UINT_MAX - len))
 		return -EIO;
 
-	if (bio->bi_vcnt > 0 &&
+	trace_android_vh_bio_add_page_merge_bypass(bio, &skip_merge);
+	if (!skip_merge && bio->bi_vcnt > 0 &&
 	    bvec_try_merge_page(&bio->bi_io_vec[bio->bi_vcnt - 1],
 				page, len, offset, &same_page)) {
 		bio->bi_iter.bi_size += len;
