@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdd11ea3_7f27ffb4",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2025-08-05T10:41:55Z",
+      "side": 1,
+      "message": "I cherry-picked it in aosp/3720650 for 6.12",
+      "parentUuid": "a01dd42c_dc80ae1c",
+      "range": {
+        "startLine": 340,
+        "startChar": 8,
+        "endLine": 340,
+        "endChar": 31
+      },
+      "revId": "170ec557be8c9743450febfa20393fb489dbf1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b55928d_36bd76c0",
@@ -85,6 +109,24 @@
       "writtenOn": "2025-08-04T21:06:01Z",
       "side": 1,
       "message": "Adding a macro without its use feels a little strange, especially as it doesn\u0027t seem to be used anywhere in this series. Why should it be added here? I assume its used in vendorhook logic, but could it be defined there instead?",
+      "revId": "170ec557be8c9743450febfa20393fb489dbf1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "babcb6dd_f6204b7d",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1181388
+      },
+      "writtenOn": "2025-08-05T10:41:55Z",
+      "side": 1,
+      "message": "Since there is already a macro pkvm_el2_mod_call here, it is natural to add the new macro here as well. I also use this macro in 2 different files, so I wouldn\u0027t prefer to add it in an another irrelevant header file.\n\nI also think that people might find this macro useful when we start having more pkvm modules (so far we only have 1).",
+      "parentUuid": "2b55928d_36bd76c0",
       "revId": "170ec557be8c9743450febfa20393fb489dbf1d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
