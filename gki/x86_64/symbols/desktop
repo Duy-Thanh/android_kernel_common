@@ -3242,6 +3242,8 @@
   typec_altmode_enter
   typec_altmode_exit
   typec_altmode_get_plug
+  typec_mode_selection_altmode_complete
+  typec_mode_selection_usb4_complete
   typec_altmode_notify
   typec_altmode_put_plug
   __typec_altmode_register_driver
