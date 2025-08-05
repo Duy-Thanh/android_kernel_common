@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1366eb37_3257f3fa",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3865,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-05T14:26:32Z",
+      "side": 1,
+      "message": "It\u0027s very strange to see vendor hooks in sched_ext which lets you use arbitrary bpf code. Please provide more description in the commit message about why this hook is needed and what the handler will be doing.",
+      "fixSuggestions": [
+        {
+          "fixId": "ade78c0c_91894382",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/sched/ext.c",
+              "range": {
+                "startLine": 3865,
+                "startChar": 0,
+                "endLine": 3865,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * Notify the vendor hook that a task has been switched to SCX. This\n\t * allows vendor code to perform additional actions when a task is\n\t * scheduled by SCX, such as updating task-specific data structures.\n\t */\n"
+            },
+            {
+              "path": "kernel/sched/ext.c",
+              "range": {
+                "startLine": 4692,
+                "startChar": 0,
+                "endLine": 4692,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * Notify the vendor hook that a task has been switched out from\n\t\t * SCX. This allows vendor code to perform additional actions\n\t\t * when a task is no longer scheduled by SCX, such as updating\n\t\t * task-specific data structures.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2cd64581c49dc137070a0b68e1ba00a9bae36a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
