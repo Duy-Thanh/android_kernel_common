@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9228963_796fe1c9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-05T03:16:57Z",
+      "side": 1,
+      "message": "I think the assignment of `old_ce_pgd` is incorrect. `ce` contains the address of the new context from the new rte. It\u0027s assigned as follows:\n```\ncontext \u003d pkvm_phys_to_virt(param.rte \u0026 VTD_PAGE_MASK);\nce \u003d \u0026context[devfn];\n```\n`param.rte` is the new rte. \n\nThe correct assignment should be (given `root_entry[bus].lo` exists):\n`old_ce_pgd \u003d  root_entry[bus].lo[devfn].lo \u0026 VTD_PAGE_MASK;`",
+      "revId": "4d9d41ae020c55876dbd83b33a29acb68c62ff53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
