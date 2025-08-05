@@ -195,8 +195,8 @@ static int cros_typec_parse_port_props(struct typec_capability *cap,
 		cap->usb_capability |= USB_CAPABILITY_USB2;
 	if (fwnode_property_present(fwnode, "usb3-port"))
 		cap->usb_capability |= USB_CAPABILITY_USB3;
-	if (fwnode_property_present(fwnode, "usb4-port"))
-		cap->usb_capability |= USB_CAPABILITY_USB4;
+	//if (fwnode_property_present(fwnode, "usb4-port"))
+	cap->usb_capability |= USB_CAPABILITY_USB4;
 
 	cros_typec_role_switch_quirk(fwnode);
 
@@ -428,7 +428,9 @@ static int cros_typec_register_port_altmodes(struct cros_typec_data *typec,
 		memset(&desc, 0, sizeof(desc));
 		desc.svid = USB_TYPEC_TBT_SID;
 		desc.mode = TBT_MODE;
+#if 0
 		desc.inactive = true;
+#endif
 		amode = cros_typec_register_thunderbolt(port, &desc);
 		if (IS_ERR(amode))
 			return PTR_ERR(amode);
