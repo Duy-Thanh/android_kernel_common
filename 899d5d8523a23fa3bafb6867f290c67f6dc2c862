@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1178a6e_21320025",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-05T03:57:51Z",
+      "side": 1,
+      "message": "Check if domain is NULL.",
+      "fixSuggestions": [
+        {
+          "fixId": "259755c4_d8fe3c85",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 1851,
+                "startChar": 0,
+                "endLine": 1852,
+                "endChar": 0
+              },
+              "replacement": "\tif (param.pgd \u0026\u0026 domain)\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 2147,
+                "startChar": 0,
+                "endLine": 2148,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tcontext-\u003ehi, context-\u003elo);\t\n"
+            }
+          ]
+        }
+      ],
+      "revId": "899d5d8523a23fa3bafb6867f290c67f6dc2c862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
