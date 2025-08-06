@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8a656c_613e9b0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-06T19:30:42Z",
+      "side": 1,
+      "message": "The commit topic isn\u0027t very clear, as its not obvious how you\u0027re duplicating sched_clock. Instead it looks as though you are providing a new interface which returns cached sched_clock values to avoid the slower reading from the hardware.\n\nPlease rework this to make it more clear as to what is being done. Also include details like what usecase this is important for.",
+      "revId": "1441faa56638949932557ce20019f7c44d655cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0c182a2_0b006409",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-06T19:30:42Z",
+      "side": 1,
+      "message": "Thanks for submitting this. The patch needs a little work.  The feature really should be submitted upstream for consideration (after addressing the feedback here), as we don\u0027t really want to carry new interfaces in the Android tree.",
+      "revId": "1441faa56638949932557ce20019f7c44d655cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28011e74_0b672998",
+        "filename": "gki/aarch64/symbols/vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-06T19:30:42Z",
+      "side": 1,
+      "message": "symbol file and kabi .stg updates should be in separate commits.",
+      "revId": "1441faa56638949932557ce20019f7c44d655cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f40c72b_6a6049d9",
+        "filename": "kernel/time/sched_clock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-06T19:30:42Z",
+      "side": 1,
+      "message": "It seems like it might be useful to have a way to enable this at runtime or via a boot argument, so it isn\u0027t called on every sched_clock() call - which is a very optimized fast path.",
+      "revId": "1441faa56638949932557ce20019f7c44d655cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24663a1_9d79d88c",
+        "filename": "kernel/time/sched_clock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-06T19:30:42Z",
+      "side": 1,
+      "message": "The atomic operations likely creates additional memory bus overhead on every call to sched_clock() (which again is considered a hotpath heavily optimized call) do you have some performance metrics to indicate this doesn\u0027t negatively affect performance, especially on systems with larger numbers of cores?",
+      "revId": "1441faa56638949932557ce20019f7c44d655cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dfbbe48_d915edd8",
+        "filename": "kernel/time/sched_clock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-06T19:30:42Z",
+      "side": 1,
+      "message": "This new interface should have a comment describing the exact semantics it provides, and potential tradeoffs.",
+      "fixSuggestions": [
+        {
+          "fixId": "42c2536a_ea1b66de",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/time/sched_clock.c",
+              "range": {
+                "startLine": 142,
+                "startChar": 0,
+                "endLine": 142,
+                "endChar": 0
+              },
+              "replacement": "/*\n * get_dup_sched_clock() - Returns a cached value of sched_clock()\n *\n * This function returns a value of sched_clock() that was previously\n * obtained by a call to sched_clock(). If no previous value was\n * obtained, it will call sched_clock() to get one.\n *\n * This function is useful for cases where the caller needs to read\n * sched_clock() multiple times and wants to ensure that the values\n * are monotonically increasing.\n *\n * The tradeoff is that the returned value may be slightly stale,\n * since it is not updated every time.\n */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1441faa56638949932557ce20019f7c44d655cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19c914a1_2a6b5c02",
+        "filename": "kernel/time/sched_clock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-06T19:30:42Z",
+      "side": 1,
+      "message": "Again, it would be good to have this conditionalized on something that is runtime or boottime configurable (maybe the cached value can be uninitialized (0), disabled (-1) or set to a cached value?)",
+      "revId": "1441faa56638949932557ce20019f7c44d655cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
