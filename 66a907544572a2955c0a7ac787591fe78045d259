@@ -16,6 +16,23 @@
       "message": "Hold. Doesn\u0027t look as though pre-submit passed properly.",
       "revId": "66a907544572a2955c0a7ac787591fe78045d259",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "725a8a0a_a98c1379",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2025-08-06T02:30:41Z",
+      "side": 1,
+      "message": "Respin Bug: b/436528862",
+      "revId": "66a907544572a2955c0a7ac787591fe78045d259",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
