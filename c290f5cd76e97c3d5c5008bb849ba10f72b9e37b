@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d397963b_a941299b",
+        "filename": "include/trace/hooks/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1354067
+      },
+      "writtenOn": "2025-08-06T05:47:46Z",
+      "side": 1,
+      "message": "应该要的是enum cp_reason_type类型，包头文件方式来吧。参考：\n\ninclude/trace/events/bridge.h:10:#include \"../../../net/bridge/br_private.h\"\ninclude/trace/events/dlm.h:13:#include \"../../../fs/dlm/dlm_internal.h\"\ninclude/trace/events/sof_intel.h:15:#include \"../../../sound/soc/sof/sof-audio.h\"\ninclude/trace/events/sof.h:16:#include \"../../../sound/soc/sof/sof-audio.h\"\ninclude/trace/events/wbt.h:9:#include \"../../../block/blk-wbt.h\"",
+      "range": {
+        "startLine": 15,
+        "startChar": 32,
+        "endLine": 15,
+        "endChar": 48
+      },
+      "revId": "c290f5cd76e97c3d5c5008bb849ba10f72b9e37b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c2c17a_b374976b",
+        "filename": "include/trace/hooks/f2fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1354067
+      },
+      "writtenOn": "2025-08-06T05:47:46Z",
+      "side": 1,
+      "message": "clear ？",
+      "range": {
+        "startLine": 18,
+        "startChar": 24,
+        "endLine": 18,
+        "endChar": 29
+      },
+      "revId": "c290f5cd76e97c3d5c5008bb849ba10f72b9e37b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
