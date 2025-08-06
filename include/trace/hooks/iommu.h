@@ -15,6 +15,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_iommu_setup_dma_ops,
 
 struct iova_domain;
 struct iova;
+struct iommu_domain;
+typedef int (*iommu_fault_handler_t)(struct iommu_domain *,
+		struct device *, unsigned long, int, void *);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_iommu_alloc_insert_iova,
 	TP_PROTO(struct iova_domain *iovad, unsigned long size,
@@ -44,6 +47,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_iommu_limit_align_shift,
 		unsigned long *shift),
 	TP_ARGS(iovad, size, shift), 1);
 
+DECLARE_HOOK(android_vh_set_iommu_fault_handler,
+	TP_PROTO(bool *set_fh, struct iommu_domain *domain,
+	    iommu_fault_handler_t handler, void *token),
+	TP_ARGS(set_fh, domain, handler, token));
 #endif /* _TRACE_HOOK_IOMMU_H */
 
 /* This part must be outside protection */

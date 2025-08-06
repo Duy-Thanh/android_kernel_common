@@ -33,6 +33,7 @@
 #include <trace/events/iommu.h>
 #include <linux/sched/mm.h>
 #include <linux/msi.h>
+#include <trace/hooks/iommu.h>
 #include <uapi/linux/iommufd.h>
 
 #include "dma-iommu.h"
@@ -2012,7 +2013,9 @@ void iommu_set_fault_handler(struct iommu_domain *domain,
 					iommu_fault_handler_t handler,
 					void *token)
 {
-	if (WARN_ON(!domain || domain->cookie_type != IOMMU_COOKIE_NONE))
+	bool set_fh = false;
+	trace_android_vh_set_iommu_fault_handler(&set_fh, domain, handler, token);
+	if (set_fh || WARN_ON(!domain || domain->cookie_type != IOMMU_COOKIE_NONE))
 		return;
 
 	domain->cookie_type = IOMMU_COOKIE_FAULT_HANDLER;
