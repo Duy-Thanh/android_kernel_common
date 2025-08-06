@@ -25,6 +25,7 @@
 
 static int max_ypos = 25, max_xpos = 80;
 static int current_ypos = 25, current_xpos;
+static void __iomem *early_serial_base_ptr;
 
 static void early_vga_write(struct console *con, const char *str, unsigned n)
 {
@@ -222,6 +223,7 @@ static __init void early_mmio_serial_init(char *s)
 		/* NB: only 32-bit addresses are supported. */
 		membase = simple_strtoul(s, &e, 16);
 		early_serial_base = (unsigned long)early_ioremap(membase, PAGE_SIZE);
+		early_serial_base_ptr = (void __iomem *)early_serial_base;
 
 		serial_in = mem32_serial_in;
 		serial_out = mem32_serial_out;
@@ -327,7 +329,8 @@ static __init void early_pci_serial_init(char *s)
 		serial_out = mem32_serial_out;
 		/* WARNING! assuming the address is always in the first 4G */
 		early_serial_base =
-			(unsigned long)early_ioremap(bar0 & PCI_BASE_ADDRESS_MEM_MASK, 0x10);
+			(unsigned long)early_ioremap(bar0 & PCI_BASE_ADDRESS_MEM_MASK, PAGE_SIZE);
+		early_serial_base_ptr = (void __iomem *)early_serial_base;
 		write_pci_config(bus, slot, func, PCI_COMMAND,
 				 cmdreg|PCI_COMMAND_MEMORY);
 	}
@@ -439,3 +442,17 @@ static int __init setup_early_printk(char *buf)
 }
 
 early_param("earlyprintk", setup_early_printk);
+
+static int __init unregister_early_console(void)
+{
+       if (early_console)
+               unregister_console(early_console);
+
+       if (early_serial_base_ptr) {
+               early_iounmap(early_serial_base_ptr, PAGE_SIZE);
+               early_serial_base_ptr = NULL;
+       }
+
+       return 0;
+}
+late_initcall(unregister_early_console);
