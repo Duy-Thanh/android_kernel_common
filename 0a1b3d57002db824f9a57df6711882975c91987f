@@ -1,0 +1,183 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d335d324_13d53fe3",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-07T15:00:27Z",
+      "side": 1,
+      "message": "typo? Should be @trng_rng. That said, I think calling the function `trng_rnd` would be closer to the spec.",
+      "range": {
+        "startLine": 212,
+        "startChar": 40,
+        "endLine": 212,
+        "endChar": 49
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea44ec85_722e9254",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-07T15:00:27Z",
+      "side": 1,
+      "message": "Put these two in a struct and have the module register one of those instead?",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 0
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "282a0a9a_f3f39b57",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-07T15:00:27Z",
+      "side": 1,
+      "message": "Do we actually need the memory barriers here? This should only be exercised by a guest, which is long after module loading and we should\u0027ve synchronised by then. Plus, you\u0027d need to handle UUID copy somehow if this was actually important.",
+      "range": {
+        "startLine": 246,
+        "startChar": 5,
+        "endLine": 246,
+        "endChar": 22
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b5121d_d08cbf8d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1725,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-07T15:00:27Z",
+      "side": 1,
+      "message": "Do we really care about SMC32? Perhaps only expose SMC64 to the module implementation.",
+      "range": {
+        "startLine": 1725,
+        "startChar": 8,
+        "endLine": 1725,
+        "endChar": 33
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d0c06c8_57ccba97",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1732,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-07T15:00:27Z",
+      "side": 1,
+      "message": "Size this based on `ARM_SMCCC_TRNG_SMC64_BITS`?",
+      "range": {
+        "startLine": 1732,
+        "startChar": 13,
+        "endLine": 1732,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ee9d645c_313c1678",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+              "range": {
+                "startLine": 1732,
+                "startChar": 0,
+                "endLine": 1733,
+                "endChar": 0
+              },
+              "replacement": "\tu64 entropy[DIV_ROUND_UP(ARM_SMCCC_TRNG_SMC64_BITS, 64)];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d92e884_4663cb20",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1746,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-07T15:00:27Z",
+      "side": 1,
+      "message": "Why not have the module op return the SMCCC status code directly?",
+      "range": {
+        "startLine": 1746,
+        "startChar": 6,
+        "endLine": 1746,
+        "endChar": 7
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e69875_ec65ddfc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-07T15:00:27Z",
+      "side": 1,
+      "message": "Why do we care about endianness here?",
+      "range": {
+        "startLine": 1749,
+        "startChar": 0,
+        "endLine": 1756,
+        "endChar": 0
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
