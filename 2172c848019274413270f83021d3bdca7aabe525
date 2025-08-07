@@ -33,6 +33,24 @@
       "message": "Please file a respin request as noted here: https://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nOnce that\u0027s done, can you please add the Bug ID of the respin bug to the commit message?",
       "revId": "2172c848019274413270f83021d3bdca7aabe525",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "665d0eca_fd2f123a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-07T07:34:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab4ac1d4_b106d8f9",
+      "revId": "2172c848019274413270f83021d3bdca7aabe525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
