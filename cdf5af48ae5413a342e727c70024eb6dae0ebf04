@@ -16,6 +16,24 @@
       "message": "wait for the android-mainline version to land and then cherry-pick it to android16-6.12.",
       "revId": "cdf5af48ae5413a342e727c70024eb6dae0ebf04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a7d55d_84edfc40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-07T17:21:01Z",
+      "side": 1,
+      "message": "As an alternative, you might consider adding the vendorhooks (which won\u0027t go upstream) in a patch apart from the printk message that was submitted to the list?",
+      "parentUuid": "7ff57522_75e82277",
+      "revId": "cdf5af48ae5413a342e727c70024eb6dae0ebf04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
