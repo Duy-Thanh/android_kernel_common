@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb2ced5_df5ca37c",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-07T20:06:30Z",
+      "side": 0,
+      "message": "Please include the same change to arch/x86/configs/gki_defconfig so they stay in sync.",
+      "revId": "deaaa4913ed95c17710ed076024e21acb94c7a5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
