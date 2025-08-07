@@ -16,6 +16,24 @@
       "message": "Please include the same change to arch/x86/configs/gki_defconfig so they stay in sync.",
       "revId": "deaaa4913ed95c17710ed076024e21acb94c7a5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a10c5f_5e7a4a18",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-07T20:20:55Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "afb2ced5_df5ca37c",
+      "revId": "deaaa4913ed95c17710ed076024e21acb94c7a5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
