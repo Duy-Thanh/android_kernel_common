@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff73ba22_ffcd67ba",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-07T18:50:44Z",
+      "side": 1,
+      "message": "We aren\u0027t using this return value.",
+      "revId": "74d3fd70929ede9b92b6c3862c3dcee7164b0e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
