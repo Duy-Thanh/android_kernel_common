@@ -348,11 +348,23 @@ defined(CONFIG_AUTOFDO_CLANG)
 	KEEP(*(.dtb.init.rodata))					\
 	__dtb_end = .;
 
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+#define INIT_TASK_EXPAND()						\
+	__init_task_expand_begin = .;				\
+	KEEP(*(.init_task0))						\
+	KEEP(*(.init_task1))						\
+	KEEP(*(.init_task2))						\
+	__init_task_expand_end = .;
+#else
+#define INIT_TASK_EXPAND()
+#endif
+
 /*
  * .data section
  */
 #define DATA_DATA							\
 	*(.xiptext)							\
+	INIT_TASK_EXPAND()					\
 	*(DATA_MAIN)							\
 	*(.data..decrypted)						\
 	*(.ref.data)							\

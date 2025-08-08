@@ -58,7 +58,8 @@ extern spinlock_t mmlist_lock;
 extern union thread_union init_thread_union;
 extern struct task_struct init_task;
 #ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
-extern u64 vendor_data_pad[CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX / sizeof(u64)];
+extern u64 vendor_data_pad[512 / sizeof(u64)];
+extern u64 vendor_data_pad2[(CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX-512) / sizeof(u64)];
 #endif
 
 extern int lockdep_tasklist_lock_is_held(void);
@@ -243,9 +244,6 @@ DEFINE_GUARD(task_lock, struct task_struct *, task_lock(_T), task_unlock(_T))
 #ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
 static inline void *android_task_vendor_data(struct task_struct *p)
 {
-	if (p == &init_task)
-		return &vendor_data_pad[0];
-
 	return p + 1;
 }
 
