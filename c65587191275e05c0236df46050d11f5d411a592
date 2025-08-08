@@ -33,6 +33,24 @@
       "message": "`__pte_offset_map`\n\nis mentioned in the commit message but has been lost from the change. Is a dependent change missing?",
       "revId": "c65587191275e05c0236df46050d11f5d411a592",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6724054c_e5209096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-08T15:51:48Z",
+      "side": 1,
+      "message": "The answers are:\n\n* this symbol does not exist in `android14-6.1`\n* the same issue exists in the cherry-pick to that release branch\n* it is better to preserve the commit message\n* it would have been best to add a note to the commit message at the point of the first dirty cherry-pick\n\nI have reinstated the commit message.",
+      "parentUuid": "d5000c12_f27b7dfa",
+      "revId": "c65587191275e05c0236df46050d11f5d411a592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
