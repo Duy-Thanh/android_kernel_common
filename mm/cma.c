@@ -521,7 +521,7 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 		pfn = cma->base_pfn + (bitmap_no << cma->order_per_bit);
 		mutex_lock(&cma_mutex);
 		if (cma->gcma) {
-			gcma_alloc_range(pfn, pfn + count - 1);
+			gcma_alloc_range(pfn, pfn + count - 1, gfp);
 			ret = 0;
 		} else {
 			ret = alloc_contig_range(pfn, pfn + count, MIGRATE_CMA, gfp);
