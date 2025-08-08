@@ -16,6 +16,23 @@
       "message": "Respin bug:b/436958726",
       "revId": "427bc23903c5856daf426f89e2769209d66fe655",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7af1b02_6e127104",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-08T16:03:46Z",
+      "side": 1,
+      "message": "Flaky test.",
+      "revId": "427bc23903c5856daf426f89e2769209d66fe655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
