@@ -46,6 +46,30 @@
       },
       "revId": "b5d9903ae1cfcea97ea231eaee44998ca1a24d36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4297d93_07ff6db0",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-08-08T19:51:17Z",
+      "side": 1,
+      "message": "I verified that earlycon still works, so we can move ahead with this.",
+      "parentUuid": "58d77e29_bbc6a86e",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 36
+      },
+      "revId": "b5d9903ae1cfcea97ea231eaee44998ca1a24d36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
