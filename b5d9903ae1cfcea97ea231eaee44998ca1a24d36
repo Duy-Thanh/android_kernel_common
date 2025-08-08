@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689ba5bd_f3220c40",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-08-08T00:57:24Z",
+      "side": 1,
+      "message": "isn\u0027t 16550A preferred over 8250 in terms of stability? we use serial console for early logging and also for emitting failure reason [1]. \n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/crosvm.rs;drc\u003dd7a027971a7bcf86b97d3892eda8824cba0f4f52;l\u003d631",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 36
+      },
+      "revId": "b5d9903ae1cfcea97ea231eaee44998ca1a24d36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
