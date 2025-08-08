@@ -16,6 +16,24 @@
       "message": "- Please add Bug id to the change. \n- Also do cherry-pick using `git cherry-pick -x \u003csha\u003e` which will add a message for you regarding (cherry-picked from ...). \n- Please mention cherry picked from which tree and branch.\n\nYou can refer to https://android.googlesource.com/kernel/common/#requirements-for-other-backports for how to do FROMGIT patches",
       "revId": "cb77f3d156ae6691d9bb90bb636f03a9ecd01fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1009061a_ff5c540e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-08-08T11:22:36Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "3947fd2d_75032912",
+      "revId": "cb77f3d156ae6691d9bb90bb636f03a9ecd01fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
