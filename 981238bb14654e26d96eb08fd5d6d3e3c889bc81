@@ -16,6 +16,24 @@
       "message": "If you have the hook, do you really need the printk in the parent patch?",
       "revId": "981238bb14654e26d96eb08fd5d6d3e3c889bc81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fdf5530_45f64c1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2025-08-08T04:04:11Z",
+      "side": 1,
+      "message": "Thanks, I think the hook function is sufficient to debug RT/Fair contention issues.\nUpdated as patchset#2",
+      "parentUuid": "14ff0628_2f33a591",
+      "revId": "981238bb14654e26d96eb08fd5d6d3e3c889bc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
