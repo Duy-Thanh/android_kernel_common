@@ -22,6 +22,30 @@
       },
       "revId": "b5d9903ae1cfcea97ea231eaee44998ca1a24d36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d77e29_bbc6a86e",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-08-08T17:28:14Z",
+      "side": 1,
+      "message": "crosvm does advertise the serial port as \"ns16550a\" compatible. that said, i don\u0027t think it implements any of the ns16550 features that this probes for\n\nthe only reference to this config option i see is https://cs.android.com/android/kernel/common/+/android15-6.6:drivers/tty/serial/8250/8250_port.c;l\u003d992;drc\u003d5e00346deb7bf40a4cf70e3716ac8e9a2409eb55 and it includes a runtime check, so i wonder if we actually save any binary size by disabling this. perhaps skipping the extra probing would help a bit with boot time for debuggable VMs though",
+      "parentUuid": "689ba5bd_f3220c40",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 36
+      },
+      "revId": "b5d9903ae1cfcea97ea231eaee44998ca1a24d36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
