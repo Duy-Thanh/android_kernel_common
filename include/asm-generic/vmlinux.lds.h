@@ -348,11 +348,31 @@ defined(CONFIG_AUTOFDO_CLANG)
 	KEEP(*(.dtb.init.rodata))					\
 	__dtb_end = .;
 
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+/*
+ * When CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE is enabled, the init task will be
+ * expanded to multiple tasks. The linker needs to keep the init task data
+ * in the .data section.
+ *
+ * __init_task_expand_begin and __init_task_expand_end are used to record the
+ * start and end of the init task data.
+ */
+#define INIT_TASK_EXPAND()						\
+	__init_task_expand_begin = .;				\
+	KEEP(*(.init_task0))						\
+	KEEP(*(.init_task1))						\
+	KEEP(*(.init_task2))						\
+	__init_task_expand_end = .;
+#else
+#define INIT_TASK_EXPAND()
+#endif
+
 /*
  * .data section
  */
 #define DATA_DATA							\
 	*(.xiptext)							\
+	INIT_TASK_EXPAND()					\
 	*(DATA_MAIN)							\
 	*(.data..decrypted)						\
 	*(.ref.data)							\

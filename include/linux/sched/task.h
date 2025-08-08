@@ -58,7 +58,13 @@ extern spinlock_t mmlist_lock;
 extern union thread_union init_thread_union;
 extern struct task_struct init_task;
 #ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
-extern u64 vendor_data_pad[CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX / sizeof(u64)];
+/*
+ * vendor_data_pad is used to reserve 512 bytes for vendor data,
+ * vendor_data_pad2 is used to reserve the rest of the vendor data.
+ * The total size of vendor data is CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX.
+ */
+extern u64 vendor_data_pad[512 / sizeof(u64)];
+extern u64 vendor_data_pad2[(CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX-512) / sizeof(u64)];
 #endif
 
 extern int lockdep_tasklist_lock_is_held(void);
@@ -241,14 +247,17 @@ static inline void task_unlock(struct task_struct *p)
 DEFINE_GUARD(task_lock, struct task_struct *, task_lock(_T), task_unlock(_T))
 
 #ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+/*
+ * The vendor data is located after the task_struct.
+ */
 static inline void *android_task_vendor_data(struct task_struct *p)
 {
-	if (p == &init_task)
-		return &vendor_data_pad[0];
-
 	return p + 1;
 }
 
+/*
+ * Initialize the vendor data to 0.
+ */
 static inline void android_init_dynamic_vendor_data(struct task_struct *p)
 {
 	if (arch_task_struct_size > sizeof(struct task_struct))

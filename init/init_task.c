@@ -58,11 +58,21 @@ unsigned long init_shadow_call_stack[SCS_SIZE / sizeof(long)] = {
 };
 #endif
 
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+#define __init_task0 __section(".init_task0")
+#define __init_task1 __section(".init_task1")
+#define __init_task2 __section(".init_task2")
+#endif
+
 /*
  * Set up the first task table, touch at your own risk!. Base=0,
  * limit=0x1fffff (=2MB)
  */
-struct task_struct init_task __aligned(L1_CACHE_BYTES) = {
+struct task_struct init_task __aligned(L1_CACHE_BYTES)
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+	__init_task0
+#endif
+= {
 #ifdef CONFIG_THREAD_INFO_IN_TASK
 	.thread_info	= INIT_THREAD_INFO(init_task),
 	.stack_refcount	= REFCOUNT_INIT(1),
@@ -237,7 +247,12 @@ struct task_struct init_task __aligned(L1_CACHE_BYTES) = {
 EXPORT_SYMBOL(init_task);
 
 #ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
-u64 vendor_data_pad[CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX / sizeof(u64)];
+/*
+ * vendor_data_pad and vendor_data_pad2 are padding data after init_task task_strcut
+ * for dynamic_vendor_data of init_task.
+ */
+u64 __init_task1 vendor_data_pad[512 / sizeof(u64)];
+u64 __init_task2 vendor_data_pad2[(CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX-512) / sizeof(u64)];
 EXPORT_SYMBOL_GPL(vendor_data_pad);
 #endif
 
