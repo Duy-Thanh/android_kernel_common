@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37314d41_36767c36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-08-08T22:35:39Z",
+      "side": 1,
+      "message": "Use consistent spelling. Compare with \"ff-a handle\" on line 10.",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "49495bb87ef0d25c164c250b229dd01e6559cee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "504a303f_ee51c5eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-08-08T22:35:39Z",
+      "side": 1,
+      "message": "we",
+      "range": {
+        "startLine": 13,
+        "startChar": 26,
+        "endLine": 13,
+        "endChar": 29
+      },
+      "revId": "49495bb87ef0d25c164c250b229dd01e6559cee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ada194ac_b1de9f0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-08-08T22:35:39Z",
+      "side": 1,
+      "message": "Reflow body of commit message and wrap at 72 characters per line.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "49495bb87ef0d25c164c250b229dd01e6559cee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
