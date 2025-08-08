@@ -522,6 +522,15 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 		mutex_lock(&cma_mutex);
 		if (cma->gcma) {
 			gcma_alloc_range(pfn, pfn + count - 1);
+			/* Prepare new pages */
+			for (unsigned long i = 0; i < count; i++) {
+				struct page *gcma_page = pfn_to_page(pfn + i);
+
+				post_alloc_hook(gcma_page, 0, gfp);
+				set_page_refcounted(gcma_page);
+				atomic_set(&gcma_page->_mapcount, -1);
+				ClearPageReserved(gcma_page);
+			}
 			ret = 0;
 		} else {
 			ret = alloc_contig_range(pfn, pfn + count, MIGRATE_CMA, gfp);
@@ -650,10 +659,41 @@ bool cma_release(struct cma *cma, const struct page *pages,
 
 	VM_BUG_ON(pfn + count > cma->base_pfn + cma->count);
 
-	if (cma->gcma)
+	if (cma->gcma) {
+		struct folio *folio = pfn_folio(pfn);
+
+		if (folio_test_large(folio)) {
+			int expected = folio_nr_pages(folio);
+
+			if (WARN(count != expected, "PFN %lu: count %lu != expected %d\n",
+			     pfn, count, expected))
+				return false;
+
+			if (WARN_ON(!folio_put_testzero(folio)))
+				return false;
+
+			page_cache_release(folio);
+			folio_unqueue_deferred_split(folio);
+			mem_cgroup_uncharge(folio);
+			free_unref_page(&folio->page, folio_order(folio));
+			free_pages_prepare(&folio->page, folio_order(folio));
+			for (unsigned long i = 0; i < count; i++)
+				SetPageReserved(pfn_to_page(pfn + i));
+		} else {
+			for (unsigned long i = 0; i < count; i++) {
+				struct page *page = pfn_to_page(pfn + i);
+
+				if (WARN_ON(!put_page_testzero(page)))
+					continue;
+
+				free_pages_prepare(page, 0);
+				SetPageReserved(page);
+			}
+		}
 		gcma_free_range(pfn, pfn + count - 1);
-	else
+	} else {
 		free_contig_range(pfn, count);
+	}
 	cma_clear_bitmap(cma, pfn, count);
 	cma_sysfs_account_release_pages(cma, count);
 	trace_cma_release(cma->name, pfn, pages, count);
