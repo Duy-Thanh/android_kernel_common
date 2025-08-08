@@ -15,6 +15,7 @@
 #include <linux/xarray.h>
 #include <trace/hooks/mm.h>
 #include "gcma_sysfs.h"
+#include "internal.h"
 
 /*
  * page->page_type : area id
@@ -601,7 +602,19 @@ again:
 	local_irq_enable();
 }
 
-void gcma_alloc_range(unsigned long start_pfn, unsigned long end_pfn)
+static void prepare_new_pages(unsigned long pfn, unsigned long count, gfp_t gfp)
+{
+	for (unsigned long i = 0; i < count; i++) {
+		struct page *page = pfn_to_page(pfn + i);
+
+		post_alloc_hook(page, 0, gfp);
+		set_page_refcounted(page);
+		atomic_set(&page->_mapcount, -1);
+		ClearPageReserved(page);
+	}
+}
+
+void gcma_alloc_range(unsigned long start_pfn, unsigned long end_pfn, gfp_t gfp)
 {
 	int i;
 	struct gcma_area *area;
@@ -622,9 +635,43 @@ void gcma_alloc_range(unsigned long start_pfn, unsigned long end_pfn)
 
 		__gcma_discard_range(area, s_pfn, e_pfn);
 	}
+	prepare_new_pages(start_pfn, end_pfn - start_pfn + 1, gfp);
 	gcma_stat_add(ALLOCATED_PAGE, end_pfn - start_pfn + 1);
 }
 EXPORT_SYMBOL_GPL(gcma_alloc_range);
+
+static void prepare_free_pages(unsigned long pfn, unsigned long count)
+{
+	struct folio *folio = pfn_folio(pfn);
+
+	if (folio_test_large(folio)) {
+		int expected = folio_nr_pages(folio);
+
+		if (WARN(count != expected, "PFN %lu: count %lu != expected %d\n",
+		     pfn, count, expected))
+			return;
+
+		if (WARN_ON(!folio_put_testzero(folio)))
+			return;
+
+		page_cache_release(folio);
+		folio_unqueue_deferred_split(folio);
+		mem_cgroup_uncharge(folio);
+		free_pages_prepare(&folio->page, folio_order(folio));
+		for (unsigned long i = 0; i < count; i++)
+			SetPageReserved(pfn_to_page(pfn + i));
+	} else {
+		for (unsigned long i = 0; i < count; i++) {
+			struct page *page = pfn_to_page(pfn + i);
+
+			if (WARN_ON(!put_page_testzero(page)))
+				continue;
+
+			free_pages_prepare(page, 0);
+			SetPageReserved(page);
+		}
+	}
+}
 
 void gcma_free_range(unsigned long start_pfn, unsigned long end_pfn)
 {
@@ -634,6 +681,8 @@ void gcma_free_range(unsigned long start_pfn, unsigned long end_pfn)
 	int area_id, start_id = 0;
 
 	VM_BUG_ON(irqs_disabled());
+
+	prepare_free_pages(start_pfn, end_pfn - start_pfn + 1);
 
 	local_irq_disable();
 

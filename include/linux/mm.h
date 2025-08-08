@@ -1395,6 +1395,8 @@ static inline struct folio *virt_to_folio(const void *x)
 	return page_folio(page);
 }
 
+void page_cache_release(struct folio *folio);
+
 void __folio_put(struct folio *folio);
 
 void put_pages_list(struct list_head *pages);
