@@ -52,6 +52,24 @@
       "parentUuid": "d2a7d55d_84edfc40",
       "revId": "cdf5af48ae5413a342e727c70024eb6dae0ebf04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a819442c_83900d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2025-08-08T04:10:15Z",
+      "side": 1,
+      "message": "Wait for android-mainline to land, then k6.12.",
+      "parentUuid": "fcd0e64f_81eecc30",
+      "revId": "cdf5af48ae5413a342e727c70024eb6dae0ebf04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
