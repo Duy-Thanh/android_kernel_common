@@ -68,6 +68,23 @@
       },
       "revId": "49495bb87ef0d25c164c250b229dd01e6559cee8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "389f9ad8_02c14088",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-08-09T06:10:46Z",
+      "side": 1,
+      "message": "Add this line\n```\nFixes: 5d45bc0cb24b (\"ANDROID: KVM: arm64: Unmap host stage-2 memory on FF-A lend\")\n```",
+      "revId": "49495bb87ef0d25c164c250b229dd01e6559cee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
