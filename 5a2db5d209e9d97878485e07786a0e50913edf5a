@@ -34,6 +34,24 @@
       "parentUuid": "ddcc9d9a_55fe4646",
       "revId": "5a2db5d209e9d97878485e07786a0e50913edf5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23772208_779f3386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-10T12:30:12Z",
+      "side": 1,
+      "message": "Not done, this is from a gmail account, not a corporate account, so we can\u0027t accept this as-is, sorry.  Let me abandon this and you can submit a new one after this with the correct account.",
+      "parentUuid": "abc205db_c028ca0d",
+      "revId": "5a2db5d209e9d97878485e07786a0e50913edf5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
