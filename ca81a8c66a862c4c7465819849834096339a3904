@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd77e46_c81e30e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-10T12:31:18Z",
+      "side": 1,
+      "message": "wrong file modified.",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "ca81a8c66a862c4c7465819849834096339a3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff74820_b2ae5b50",
+        "filename": "android/abi_gki_aarch64_pointmobile",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-10T12:31:18Z",
+      "side": 1,
+      "message": "this file can not be marked executable.  Please do your development on a Linux system, NOT a windows machine.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "ca81a8c66a862c4c7465819849834096339a3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0a10bf_13c658a3",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-10T12:31:18Z",
+      "side": 1,
+      "message": "must be in sorted order",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "ca81a8c66a862c4c7465819849834096339a3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
