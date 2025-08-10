@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "631bf24d_8b13ccba",
+        "filename": "arch/x86/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 4244157
+      },
+      "writtenOn": "2025-08-10T02:52:54Z",
+      "side": 0,
+      "message": "```suggestion\nCONFIG_CRYPTO_POLYVAL_CLMUL_NI\u003dy\n```\n```suggestion\nCONFIG_CRYPTO_POLYVAL_CLMUL_NI\u003dy\n```\n```suggestion\nCONFIG_CRYPTO_POLYVAL_CLMUL_NI\u003dy\n```",
+      "revId": "62f8e0b7c3e85db685cca18a5dee268d1d579fb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
