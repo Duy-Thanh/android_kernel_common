@@ -467410,7 +467410,7 @@ elf_symbol {
   name: "gunyah_vm_get"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbcf71d39
+  crc: 0x331271f5
   type_id: 0x9d30f522
   full_name: "gunyah_vm_get"
 }
@@ -467419,7 +467419,7 @@ elf_symbol {
   name: "gunyah_vm_put"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xeb74b27a
+  crc: 0x707b954b
   type_id: 0x1028479e
   full_name: "gunyah_vm_put"
 }
