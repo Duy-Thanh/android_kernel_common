@@ -410,7 +410,7 @@ static inline bool blk_queue_may_bounce(struct request_queue *q)
 {
 	return IS_ENABLED(CONFIG_BOUNCE) &&
 		q->limits.bounce == BLK_BOUNCE_HIGH &&
-		max_low_pfn >= max_pfn;
+		max_low_pfn < max_pfn;
 }
 
 static inline struct bio *blk_queue_bounce(struct bio *bio,
