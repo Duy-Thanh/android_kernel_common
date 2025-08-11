@@ -16,6 +16,24 @@
       "message": "Please add more rationale for why it is needed",
       "revId": "672588f756085609cc4e87e58a524405c457ea10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b09b3eb_8c22c128",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-11T09:08:57Z",
+      "side": 1,
+      "message": "The commit message is updated.",
+      "parentUuid": "8005e12a_bd818f56",
+      "revId": "672588f756085609cc4e87e58a524405c457ea10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
