@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca74960_28d83749",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-11T10:00:16Z",
+      "side": 1,
+      "message": "Please fix the offending driver instead, and also are you _SURE_ this is needed for the hardware you are wanting to run it on?  Odds are, most users of `GFP_DMA` are wrong.",
+      "revId": "aa4ee29229536b79df5fcca01d0c009f6f055076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
