@@ -344,7 +344,7 @@ int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task)
 	struct task_dma_buf_record *rec;
 
 	if (!task->dmabuf_info)
-		return -ENOMEM;
+		return 0;
 
 	if (!task_dmabuf_records_preload(1))
 		return -ENOMEM;
@@ -405,6 +405,9 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 	struct task_dma_buf_record *parent_rec, *child_rec;
 	int retries = 0;
 	size_t count;
+
+	if (task->flags & PF_KTHREAD)
+		return 0;
 
 	if (current->dmabuf_info && (clone_flags & (CLONE_VM | CLONE_FILES))
 						== (CLONE_VM | CLONE_FILES)) {
