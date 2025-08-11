@@ -467534,7 +467534,13 @@ elf_symbol {
   name: "gunyah_vm_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (bfeb3e11d1d00f84c5f6afdfc112886c00948634 ANDROID: GKI: remove users of ANDROID_KABI_ENUMERATOR_IGNORE)
+  crc: 0x331271f5
+||||||| BASE      (f2280e1b378d1542715d80800d1476f57d24bee4 ANDROID: GKI: update the abi due to reverts being re-applied)
+  crc: 0xbcf71d39
+=======
   crc: 0x5d52d0ae
+>>>>>>> BASE      (5231261640f261aea792dd5a3dbc08fb0f700626 ANDROID: GKI: update the abi due to reverts being re-applied)
   type_id: 0x9d30f522
   full_name: "gunyah_vm_get"
 }
@@ -467543,7 +467549,13 @@ elf_symbol {
   name: "gunyah_vm_put"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (bfeb3e11d1d00f84c5f6afdfc112886c00948634 ANDROID: GKI: remove users of ANDROID_KABI_ENUMERATOR_IGNORE)
+  crc: 0x707b954b
+||||||| BASE      (f2280e1b378d1542715d80800d1476f57d24bee4 ANDROID: GKI: update the abi due to reverts being re-applied)
+  crc: 0xeb74b27a
+=======
   crc: 0x17c9ad58
+>>>>>>> BASE      (5231261640f261aea792dd5a3dbc08fb0f700626 ANDROID: GKI: update the abi due to reverts being re-applied)
   type_id: 0x1028479e
   full_name: "gunyah_vm_put"
 }

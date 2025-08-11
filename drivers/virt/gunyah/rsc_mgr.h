@@ -52,7 +52,6 @@ enum gunyah_rm_vm_status {
 	GUNYAH_RM_VM_STATUS_RESET_FAILED	= 12,
 	/* clang-format on */
 };
-ANDROID_KABI_ENUMERATOR_IGNORE(gunyah_rm_vm_status, GUNYAH_RM_VM_STATUS_RESET_FAILED);
 
 struct gunyah_rm_vm_status_payload {
 	__le16 vmid;

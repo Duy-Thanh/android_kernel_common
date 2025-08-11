@@ -36,7 +36,6 @@ enum prs_errcode {
 	PERR_ACCESS,
 	PERR_REMOTE,
 };
-ANDROID_KABI_ENUMERATOR_IGNORE(prs_errcode, PERR_REMOTE);
 
 /* bits in struct cpuset flags field */
 typedef enum {
