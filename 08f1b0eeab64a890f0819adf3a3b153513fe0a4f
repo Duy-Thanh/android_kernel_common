@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa1bc6cf_eb61f5c0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-11T18:10:36Z",
+      "side": 1,
+      "message": "Agreed, removed the function arguments of protect_pkvm_pages and divide_memory_pool.",
+      "parentUuid": "42f8a5b1_20fd6fc5",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f838e18_c5a9606a",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
         "patchSetId": 11
@@ -73,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3a46a6c_03f5b55a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-11T18:10:36Z",
+      "side": 1,
+      "message": "Yeah one use case is clearing pvmfw and the second one is to allow host to use pkvm_hyp structure to perform cleanup on deprivilege failure.",
+      "parentUuid": "d08f6283_460b0fd8",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6dbb0fb_c7643b49",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
         "patchSetId": 11
@@ -108,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9015643_598e93f6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-11T18:10:36Z",
+      "side": 1,
+      "message": "Agreed, renaming it to pkvm_protect_setup to denote that the boot cpu performed steps needed to enable protection. Updated the comment as well",
+      "parentUuid": "2798f15f_c6f800f7",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4203a03a_f626ce5a",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
         "patchSetId": 11
@@ -125,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fde8b289_02eb960d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-11T18:10:36Z",
+      "side": 1,
+      "message": "makes sense, adding error logging.",
+      "parentUuid": "4203a03a_f626ce5a",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5aadec6b_ca96cba2",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/reprivilege.c",
         "patchSetId": 11
@@ -136,6 +208,24 @@
       "writtenOn": "2025-07-17T01:48:20Z",
       "side": 1,
       "message": "nit: asm/kvm_vcpu_regs.h defines the offset of registers, which may give a better reability.",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13c3efd4_b135c7ba",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/reprivilege.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-11T18:10:36Z",
+      "side": 1,
+      "message": "make sense!",
+      "parentUuid": "5aadec6b_ca96cba2",
       "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -165,6 +255,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "433fce5f_05adee2d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/reprivilege.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-11T18:10:36Z",
+      "side": 1,
+      "message": "Ahh ok, Thanks for catching this. Since we are explicitly restoring RSP for iretq, this instruction is not needed and I shall remove it.",
+      "parentUuid": "2fa1336a_c418bf02",
+      "range": {
+        "startLine": 118,
+        "startChar": 22,
+        "endLine": 118,
+        "endChar": 25
+      },
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "945f9618_48f3f34e",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
         "patchSetId": 11
@@ -176,6 +290,24 @@
       "writtenOn": "2025-07-17T21:25:50Z",
       "side": 1,
       "message": "Well, then PKVM_HC_INIT_FINALISE is special too, in the same way?\nAnd BTW we should disallow PKVM_HC_INIT_FINALISE after pkvm initialization as well, and we don\u0027t seem to do that yet?",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "068c4725_904c66bb",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-11T18:10:36Z",
+      "side": 1,
+      "message": "Agreed, adding that check.",
+      "parentUuid": "945f9618_48f3f34e",
       "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
