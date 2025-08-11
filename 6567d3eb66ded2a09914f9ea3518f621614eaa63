@@ -33,6 +33,24 @@
       "message": "Please fix this INFO reported by KernelCommit: Original change on base branch \u0027android13-5.15\u0027: [3725866](https://android-revie...\n\nOriginal change on base branch \u0027android13-5.15\u0027: [3725866](https://android-review.googlesource.com/c/3725866)\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "6567d3eb66ded2a09914f9ea3518f621614eaa63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b91f690e_5729c99e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4268280
+      },
+      "writtenOn": "2025-08-11T05:45:20Z",
+      "side": 1,
+      "message": "This patch is cherry-picked from android-mainline, when I cherry-pick this patch to android13.5.15, I found that it already contains this patch, so I abandon 3725866, and only cherry-pick this patch to android13-5.15-2025-05 and android13-5.15-2025-07",
+      "parentUuid": "ddac0c91_58be5849",
+      "revId": "6567d3eb66ded2a09914f9ea3518f621614eaa63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
