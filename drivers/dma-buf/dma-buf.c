@@ -815,18 +815,46 @@ void put_dmabuf_info(struct task_struct *task)
 	}
 
 	/*
-	 * Partial sharing with another task could mean we still have buffers attributed to this
-	 * task via the other task, even though we're exiting. Sanity check only when we know
-	 * we're alone.
+	 * If the task still partially shares dmabufs with some other tasks
+	 * its shared VMAs and FDs will not be freed or closed upon its exit.
+	 * We should remove those records manually.
 	 */
-	if (!dmabuf_info->mm_list && !dmabuf_info->fd_list) {
-		if (dmabuf_info->rss)
-			pr_alert("destroying task %d with non-zero dmabuf rss %lu\n",
-				 task_pid_nr(task), dmabuf_info->rss);
-		if (!list_empty(&dmabuf_info->dmabufs) || dmabuf_info->dmabuf_count > 0)
-			pr_alert("destroying task with non-empty dmabuf list still containing %u elements\n",
-				 dmabuf_info->dmabuf_count);
+	if ((dmabuf_info->mm_list || dmabuf_info->fd_list) &&
+	    !list_empty(&dmabuf_info->dmabufs)) {
+		struct task_dma_buf_record *rec, *n;
+		int freed = 0;
+
+		/* Lock the lists to prevent updates from other tasks */
+		if (dmabuf_info->mm_list)
+			spin_lock(&dmabuf_info->mm_list->lock);
+		if (dmabuf_info->fd_list)
+			spin_lock(&dmabuf_info->fd_list->lock);
+
+		/* Free the shared records and adjust all counters */
+		list_for_each_entry_safe(rec, n, &dmabuf_info->dmabufs, node) {
+			atomic64_dec(&rec->dmabuf->nr_task_refs);
+			dmabuf_info->rss -= rec->dmabuf->size;
+			free_task_dmabuf_record(rec);
+			freed++;
+		}
+
+		if (dmabuf_info->fd_list)
+			spin_unlock(&dmabuf_info->fd_list->lock);
+		if (dmabuf_info->mm_list)
+			spin_unlock(&dmabuf_info->mm_list->lock);
+
+		WARN_ON(freed != dmabuf_info->dmabuf_count);
+
+		INIT_LIST_HEAD(&dmabuf_info->dmabufs);
+		dmabuf_info->dmabuf_count = 0;
 	}
+
+	if (dmabuf_info->rss)
+		pr_alert("destroying task %d with non-zero dmabuf rss %lu\n",
+			 task_pid_nr(task), dmabuf_info->rss);
+	if (!list_empty(&dmabuf_info->dmabufs) || dmabuf_info->dmabuf_count > 0)
+		pr_alert("destroying task with non-empty dmabuf list still containing %u elements\n",
+			 dmabuf_info->dmabuf_count);
 
 	kfree(dmabuf_info);
 }
