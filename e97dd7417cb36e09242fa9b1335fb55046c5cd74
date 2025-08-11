@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "384285ee_4fdf8f01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-11T17:15:43Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Please **attach an open respin request bug** to this change. Refer the following...\n\nPlease **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e97dd7417cb36e09242fa9b1335fb55046c5cd74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e80ca5fa_519f6eb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-11T17:15:43Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Original change on base branch \u0027android13-5.15\u0027: [3725866](https://android-revie...\n\nOriginal change on base branch \u0027android13-5.15\u0027: [3725866](https://android-review.googlesource.com/c/3725866)\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e97dd7417cb36e09242fa9b1335fb55046c5cd74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
