@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ec44b3c_010a8d6c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-11T18:23:40Z",
+      "side": 1,
+      "message": "There is a potential memory leak here. `pkvm_put_iommu_domain`  will not deallocate the domain since domain-\u003erefcount will be 1 (as `pkvm_alloc_iommu_domain` does initialize domain-\u003erefcount to 1).",
+      "revId": "b8e06cef506001f4fc71e661664333f9b580fbcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
