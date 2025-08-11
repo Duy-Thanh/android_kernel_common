@@ -707,8 +707,7 @@ struct task_dma_buf_info {
 
 static inline bool task_has_dma_buf_info(struct task_struct *task)
 {
-	/* init_task is the only kthread with its worker_private set to NULL */
-	return task != &init_task && (task->flags & PF_IO_WORKER) == 0;
+	return (task->flags & PF_KTHREAD) == 0;
 }
 
 static inline void set_task_dma_buf_info(struct task_struct *task,
