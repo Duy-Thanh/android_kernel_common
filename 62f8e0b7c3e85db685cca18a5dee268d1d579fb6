@@ -16,6 +16,23 @@
       "message": "3725046: ANDROID: Disable miscellaneous features from microdroid kernels | https://android-review.googlesource.com/c/kernel/common/+/3725046",
       "revId": "62f8e0b7c3e85db685cca18a5dee268d1d579fb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6f6aa32_c3703f32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4244157
+      },
+      "writtenOn": "2025-08-11T17:44:42Z",
+      "side": 1,
+      "message": "Ui",
+      "revId": "62f8e0b7c3e85db685cca18a5dee268d1d579fb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
