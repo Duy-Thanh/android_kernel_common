@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51308c78_354d19b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-11T01:00:22Z",
+      "side": 1,
+      "message": "This patch has no functional changes. Why is a cherry-pick needed?",
+      "revId": "1ef2bc659b7b0540ef0e0b75bcb6f35d668a4984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6953bbe_ec221906",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-11T01:00:22Z",
+      "side": 1,
+      "message": "FROMGIT patches must cite the source repo, branch, and sha. Please see https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "1ef2bc659b7b0540ef0e0b75bcb6f35d668a4984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
