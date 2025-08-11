@@ -316910,6 +316910,14 @@ function {
   parameter_id: 0x38fdd541
 }
 function {
+  id: 0x1eaa3da1
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3b04bead
+  parameter_id: 0x3e10b518
+  parameter_id: 0x2d8ee262
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x1eabf44d
   return_type_id: 0x48b5725f
   parameter_id: 0x38ce9779
@@ -389426,6 +389434,15 @@ elf_symbol {
   full_name: "drm_cvt_mode"
 }
 elf_symbol {
+  id: 0xb9b8aba9
+  name: "drm_debugfs_add_file"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x44a7004e
+  type_id: 0x1eaa3da1
+  full_name: "drm_debugfs_add_file"
+}
+elf_symbol {
   id: 0x9952c940
   name: "drm_debugfs_add_files"
   is_defined: true
@@ -441094,6 +441111,7 @@ interface {
   symbol_id: 0x2ca7efbd
   symbol_id: 0x94cd1327
   symbol_id: 0x9a9fe23f
+  symbol_id: 0xb9b8aba9
   symbol_id: 0x9952c940
   symbol_id: 0x6d0482ba
   symbol_id: 0x858617be
