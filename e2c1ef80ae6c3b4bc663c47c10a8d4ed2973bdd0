@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc38723_cdbfb261",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-11T00:22:40Z",
+      "side": 1,
+      "message": "PERF_EVENTS is already enabled via dependency. Please remove.",
+      "fixSuggestions": [
+        {
+          "fixId": "21355e49_634aa35a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/configs/gki_defconfig",
+              "range": {
+                "startLine": 775,
+                "startChar": 0,
+                "endLine": 776,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e2c1ef80ae6c3b4bc663c47c10a8d4ed2973bdd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12c401c_d760cf50",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-11T00:22:40Z",
+      "side": 1,
+      "message": "Why can\u0027t this just be a vendor module? (no need to enable in gki_defconfig)",
+      "fixSuggestions": [
+        {
+          "fixId": "559f570e_97fa51b4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/configs/gki_defconfig",
+              "range": {
+                "startLine": 776,
+                "startChar": 0,
+                "endLine": 777,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e2c1ef80ae6c3b4bc663c47c10a8d4ed2973bdd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
