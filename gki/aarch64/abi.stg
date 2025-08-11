@@ -363810,6 +363810,10 @@ enumeration {
       name: "PERR_ACCESS"
       value: 9
     }
+    enumerator {
+      name: "PERR_REMOTE"
+      value: 10
+    }
   }
 }
 enumeration {
@@ -451190,7 +451194,7 @@ elf_symbol {
   name: "crypto_get_default_null_skcipher"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x85f3075f
+  crc: 0x9bd542e9
   type_id: 0x3e015618
   full_name: "crypto_get_default_null_skcipher"
 }
@@ -482395,7 +482399,7 @@ elf_symbol {
   name: "pci_msi_mask_irq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe88b2f84
+  crc: 0x9f40163a
   type_id: 0x1247424a
   full_name: "pci_msi_mask_irq"
 }
@@ -482404,7 +482408,7 @@ elf_symbol {
   name: "pci_msi_unmask_irq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe88b2f84
+  crc: 0x9f40163a
   type_id: 0x1247424a
   full_name: "pci_msi_unmask_irq"
 }
