@@ -16,6 +16,24 @@
       "message": "Hi,Todd Kjos\n\nDue use hardware compression, we need to submit  some vendor hooks. please view it，thanks!",
       "revId": "82a8470608201ecbb229a5cb6c29d969cf107fdc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e7aff78_3abb017e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-11T10:04:16Z",
+      "side": 1,
+      "message": "f2fs should not have vendor hooks added.  Please work to get your needed changes upstream first and then we will be glad to add the needed patches later.",
+      "parentUuid": "0abcace2_70b76039",
+      "revId": "82a8470608201ecbb229a5cb6c29d969cf107fdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
