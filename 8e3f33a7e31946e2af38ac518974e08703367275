@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f129c76_cca14134",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-11T21:27:13Z",
+      "side": 1,
+      "message": "Just FYI: Greg has a patch set queued that includes this one: aosp/3725476\n\nSo there may be some collisions and rebasing needed on this set.",
+      "revId": "8e3f33a7e31946e2af38ac518974e08703367275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
