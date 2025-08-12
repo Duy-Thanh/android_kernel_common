@@ -39,6 +39,20 @@
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
+<<<<<<< HEAD   (db15f4990be1b8865ae651c9d748d43c91bb9d13 Merge 6.18.13 into android17-6.18)
+||||||| BASE   (39b965f012188353f7000b13f67782455c9079a7 UPSTREAM: media: i2c: ov13b10: Support 2 lane mode)
+#endif
+
+EXPORT_TRACEPOINT_SYMBOL_GPL(cma_alloc_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(cma_alloc_finish);
+=======
+#endif
+
+EXPORT_TRACEPOINT_SYMBOL_GPL(cma_alloc_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(cma_alloc_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(cma_alloc_busy_retry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(cma_release);
+>>>>>>> CHANGE (0a67541578eef66f4b27a7bcf514a0e8cdf99b6c ANDROID: android: Export cma tracehooks)
 
 struct cma cma_areas[MAX_CMA_AREAS];
 unsigned int cma_area_count;
