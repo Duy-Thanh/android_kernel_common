@@ -68,6 +68,24 @@
       "parentUuid": "a4327006_43a91a1f",
       "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ddd0d63_a0ba21b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-12T22:52:50Z",
+      "side": 1,
+      "message": "Yeah. I\u0027d probably drop the patch that follows this one, and instead submit a ABI.stg update change on top of this one.",
+      "parentUuid": "b79d750a_84c35e90",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
