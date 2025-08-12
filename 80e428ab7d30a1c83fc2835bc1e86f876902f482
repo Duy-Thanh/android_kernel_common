@@ -16,6 +16,24 @@
       "message": "This patch adds an interface, but there is no consumer of it. How is it intended to be used?",
       "revId": "80e428ab7d30a1c83fc2835bc1e86f876902f482",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72e4b3f_65aadd45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-08-12T18:24:18Z",
+      "side": 1,
+      "message": "Actually I\u0027m wondering now - vendor modules can use it, but if they do, then this will change the ABI due to EXPORT_SYMBOL_GPL. So I guess that I need to double check, whether this is really used, and if so, upload it to kminext branch.",
+      "parentUuid": "ac555ac4_dd4fd8d1",
+      "revId": "80e428ab7d30a1c83fc2835bc1e86f876902f482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
