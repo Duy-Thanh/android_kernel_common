@@ -30,6 +30,7 @@ load(
     "modinfo_summary_report",
 )
 load(":abi.bzl", "cc_binary_with_abi")
+load(":gki/module_rules.bzl", "gki_all_modules", "gki_out")
 load(
     ":modules.bzl",
     "get_gki_modules_list",
@@ -237,6 +238,36 @@ common_kernel(
     # kmi_enforced = False,
 )
 
+# Declare `kernel_aarch64/<out>` targets, e.g. kernel_aarch64/zram.ko
+# buildifier: disable=no-effect
+[get_gki_modules_list(
+    arch = "arm64",
+    map_each = gki_out(
+        kernel_build = ":kernel_aarch64",
+        visibility = ["//visibility:public"],
+    ),
+)]
+
+# buildifier: disable=no-effect
+[get_kunit_modules_list(
+    arch = "arm64",
+    map_each = gki_out(
+        kernel_build = ":kernel_aarch64",
+        visibility = ["//visibility:public"],
+    ),
+)]
+
+gki_all_modules(
+    name = "kernel_aarch64_modules",
+    arch = "arm64",
+    kernel_build = ":kernel_aarch64",
+    list_functions = [
+        get_gki_modules_list,
+        get_kunit_modules_list,
+    ],
+    visibility = ["//visibility:public"],
+)
+
 common_kernel(
     name = "kernel_aarch64_16k",
     outs = DEFAULT_GKI_OUTS,
@@ -258,6 +289,36 @@ common_kernel(
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     page_size = "16k",
     system_dlkm_extra_archive_files = [":generate_gki_module_info_arm64"],
+    visibility = ["//visibility:public"],
+)
+
+# Declare `kernel_aarch64_16k/<out>` targets, e.g. kernel_aarch64_16k/zram.ko
+# buildifier: disable=no-effect
+[get_gki_modules_list(
+    arch = "arm64",
+    map_each = gki_out(
+        kernel_build = ":kernel_aarch64_16k",
+        visibility = ["//visibility:public"],
+    ),
+)]
+
+# buildifier: disable=no-effect
+[get_kunit_modules_list(
+    arch = "arm64",
+    map_each = gki_out(
+        kernel_build = ":kernel_aarch64_16k",
+        visibility = ["//visibility:public"],
+    ),
+)]
+
+gki_all_modules(
+    name = "kernel_aarch64_16k_modules",
+    arch = "arm64",
+    kernel_build = ":kernel_aarch64_16k",
+    list_functions = [
+        get_gki_modules_list,
+        get_kunit_modules_list,
+    ],
     visibility = ["//visibility:public"],
 )
 
@@ -298,6 +359,36 @@ common_kernel(
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
     system_dlkm_extra_archive_files = [":generate_gki_module_info_x86_64"],
+    visibility = ["//visibility:public"],
+)
+
+# Declare `kernel_x86_64/<out>` targets, e.g. kernel_x86_64/zram.ko
+# buildifier: disable=no-effect
+[get_gki_modules_list(
+    arch = "x86_64",
+    map_each = gki_out(
+        kernel_build = ":kernel_x86_64",
+        visibility = ["//visibility:public"],
+    ),
+)]
+
+# buildifier: disable=no-effect
+[get_kunit_modules_list(
+    arch = "x86_64",
+    map_each = gki_out(
+        kernel_build = ":kernel_x86_64",
+        visibility = ["//visibility:public"],
+    ),
+)]
+
+gki_all_modules(
+    name = "kernel_x86_64_modules",
+    arch = "x86_64",
+    kernel_build = ":kernel_x86_64",
+    list_functions = [
+        get_gki_modules_list,
+        get_kunit_modules_list,
+    ],
     visibility = ["//visibility:public"],
 )
 
