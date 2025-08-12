@@ -131,6 +131,30 @@
       ],
       "revId": "330b1227f512179c9d8484289a3e41c839b309ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca91f8f_27f90bba",
+        "filename": "modules.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-08-12T21:12:56Z",
+      "side": 1,
+      "message": "In the future this will need to become a select expression. See https://r.android.com/c/kernel/common/+/3656878/2/modules.bzl .",
+      "parentUuid": "935da592_46fd975f",
+      "range": {
+        "startLine": 152,
+        "startChar": 23,
+        "endLine": 152,
+        "endChar": 39
+      },
+      "revId": "330b1227f512179c9d8484289a3e41c839b309ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
