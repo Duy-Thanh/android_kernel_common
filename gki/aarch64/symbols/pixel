@@ -69,6 +69,7 @@
   bitmap_to_arr32
   __bitmap_weight
   bitmap_zalloc
+  blk_check_plugged
   blk_execute_rq_nowait
   blk_get_queue
   blk_mq_free_request
@@ -2425,6 +2426,8 @@
   strstr
   subsys_system_register
   suspend_set_ops
+  sw842_compress
+  sw842_decompress
   __sw_hweight16
   __sw_hweight32
   __sw_hweight64
@@ -3082,3 +3085,4 @@
   xhci_sideband_remove_interrupter
   xhci_sideband_unregister
   xhci_suspend
+  zstd_default_clevel
