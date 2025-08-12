@@ -4,7 +4,12 @@
  *
  * (C) 2004 Nadia Yvette Chambers, Oracle
  */
+<<<<<<< HEAD   (874acf57ab8f330e9058705c0a5d82ef0f74468f Merge 14bed9bc81ba ("Merge tag 'x86_sev_for_v6.17_rc1' of gi)
 #include <trace/hooks/sched.h>
+||||||| BASE   (14bed9bc81bae64db98349319f367bfc7dab0afd Merge tag 'x86_sev_for_v6.17_rc1' of git://git.kernel.org/pu)
+=======
+#include "sched.h"
+>>>>>>> BRANCH (bf76f23aa1c178e9115eba17f699fa726aed669b Merge tag 'sched-core-2025-07-28' of git://git.kernel.org/pu)
 
 void __init_waitqueue_head(struct wait_queue_head *wq_head, const char *name, struct lock_class_key *key)
 {
