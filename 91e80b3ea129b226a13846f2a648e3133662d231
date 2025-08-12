@@ -50,6 +50,24 @@
       "message": "This driver is not built into GKI. You can apply this to your downstream branch where vendor modules are built.",
       "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b79d750a_84c35e90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2025-08-12T20:32:39Z",
+      "side": 1,
+      "message": "\u003e This driver is not built into GKI. You can apply this to your downstream branch where vendor modules are built.\n\nWhile I\u0027m not an expert on GKI, the impression I got from others was that the change to `include/drm/drm_bridge.h` was officially an ABI change. I know that there are ways to work around that through the padding that\u0027s added to some structures for GKI purposes, but that also means that that the driver needs to fork from what otherwise could be a pristine copy of upstream just for this.\n\nWhile it\u0027s not a guarantee that this will land upstream, it does seem quite likely at this point in time and it would be nice not to have to fork a pile of drivers for this.\n\nAnyway, I\u0027ve got no skin in the game here, but just my $0.02 worth...",
+      "parentUuid": "a4327006_43a91a1f",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
