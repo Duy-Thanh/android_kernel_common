@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a744c06_3de8fbd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-12T11:52:16Z",
+      "side": 1,
+      "message": "This is an ABI-breaking change.\n\nSee https://docs.partner.android.com/partners/guides/gki/whatsnew#2025-July-25\n\nThe KMI thaw window closes in 3 days. Would you like these patches in `-kminext` or do you think they can be reworked to avoid the break?",
+      "revId": "498ac95d4f0a4c6fecd3ea6aba5a8adffa3a2554",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
