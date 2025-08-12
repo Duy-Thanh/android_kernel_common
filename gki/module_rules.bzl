@@ -73,3 +73,22 @@ def gki_all_modules(name, kernel_build, arch, list_functions, **kwargs):
         srcs = srcs,
         **kwargs
     )
+
+def _gki_protected_module_names_impl(ctx):
+    module_names = sorted([
+        module_name.removesuffix(".ko")
+        for module_name in ctx.attr.module_names
+        if module_name not in ctx.attr.exclude
+    ])
+    out = ctx.actions.declare_file(ctx.attr.out)
+    ctx.actions.write(out, "\n".join(module_names) + "\n")
+    return DefaultInfo(files = depset([out]))
+
+gki_protected_module_names = rule(
+    implementation = _gki_protected_module_names_impl,
+    attrs = {
+        "out": attr.string(mandatory = True),
+        "module_names": attr.string_list(),
+        "exclude": attr.string_list(),
+    },
+)
