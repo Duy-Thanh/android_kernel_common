@@ -33,6 +33,24 @@
       "message": "The change landed in `android13-5.15` as part of `94f34ebb26e4 Merge tag \u0027android13-5.15.188_r00\u0027 into android13-5.15`.",
       "revId": "39ca6edfe33de492a5f68daaa8509da234238e18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "079c5792_cb513b5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-12T11:42:16Z",
+      "side": 1,
+      "message": "Cherry-pick is clean.",
+      "parentUuid": "6d7cef9e_97603510",
+      "revId": "39ca6edfe33de492a5f68daaa8509da234238e18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
