@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac555ac4_dd4fd8d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-12T17:15:30Z",
+      "side": 1,
+      "message": "This patch adds an interface, but there is no consumer of it. How is it intended to be used?",
+      "revId": "80e428ab7d30a1c83fc2835bc1e86f876902f482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
