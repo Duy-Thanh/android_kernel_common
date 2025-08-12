@@ -34,6 +34,24 @@
       "parentUuid": "ac555ac4_dd4fd8d1",
       "revId": "80e428ab7d30a1c83fc2835bc1e86f876902f482",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6583ce63_42e8b4fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-12T20:28:17Z",
+      "side": 1,
+      "message": "It is ok to extend the ABI with new symbols. You just can\u0027t change existing ones. If this exports a new symbol for vendor modules, then you need to create a patch on top of this one to add the symbol to your symbol list.",
+      "parentUuid": "a72e4b3f_65aadd45",
+      "revId": "80e428ab7d30a1c83fc2835bc1e86f876902f482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
