@@ -16,6 +16,23 @@
       "message": "Adding Doug who reviews the patch on the linux kernel mailing list.",
       "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f71f3821_5d9d49a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2025-08-12T19:35:30Z",
+      "side": 1,
+      "message": "FWIW, my plan is to land this patch into drm-misc-next in the middle of next week unless there are any objections. See my response on the mailing lists:\n\nhttps://lore.kernel.org/r/CAD\u003dFV\u003dU+Zh2V2r-THx25Qw7W-Fu_qM4v-+Evi+1tBCg92ieYKg@mail.gmail.com/\n\nI guess there is a need to land these in the Android tree earlier though? I don\u0027t personally have any objections to that.",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
