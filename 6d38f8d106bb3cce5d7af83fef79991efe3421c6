@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e127166_272b337b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-12T17:56:29Z",
+      "side": 1,
+      "message": "Do you know how much this adds to the kernel memory footprint if not running on an MTK device?",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39338682_35048cb6",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-12T17:56:29Z",
+      "side": 1,
+      "message": "MTK_IRQ and MTK_WATCHDOG are not defined in the android16-6.12 branch",
+      "fixSuggestions": [
+        {
+          "fixId": "b45c65d4_f2d2e154",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "init/Kconfig.gki",
+              "range": {
+                "startLine": 115,
+                "startChar": 0,
+                "endLine": 116,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "init/Kconfig.gki",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 121,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bb26164_70fc38f6",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-12T17:56:29Z",
+      "side": 1,
+      "message": "does this need to be conditional on ARM64?",
+      "fixSuggestions": [
+        {
+          "fixId": "f1283fbe_b0d43755",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "init/Kconfig.gki",
+              "range": {
+                "startLine": 312,
+                "startChar": 0,
+                "endLine": 313,
+                "endChar": 0
+              },
+              "replacement": "\tselect GKI_HIDDEN_MTK_CONFIGS if (ARM64)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
