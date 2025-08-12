@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fce06806_c7b3c984",
+        "filename": "modules.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-08-12T21:13:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2177e996_a1b29050",
+      "range": {
+        "startLine": 117,
+        "startChar": 21,
+        "endLine": 117,
+        "endChar": 24
+      },
+      "revId": "330b1227f512179c9d8484289a3e41c839b309ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "935da592_46fd975f",
