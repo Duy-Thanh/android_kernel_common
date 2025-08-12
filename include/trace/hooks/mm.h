@@ -422,6 +422,7 @@ DECLARE_HOOK(android_vh_filemap_add_folio,
 	TP_PROTO(struct address_space *mapping, struct folio *folio,
 		pgoff_t index),
 	TP_ARGS(mapping, folio, index));
+<<<<<<< HEAD   (95f1215cfce74de8d3ff78b5d3340c2a51d1af54 ANDROID: KVM: arm64: Fail if no IOMMU driver exists)
 DECLARE_HOOK(android_vh_folio_add_file_rmap,
 	TP_PROTO(struct folio *folio, struct page *page, int nr_pages,
 		 int level),
@@ -437,6 +438,120 @@ DECLARE_HOOK(android_vh_folios_put_refs_direct_free_extent,
 DECLARE_HOOK(android_vh_free_pages_and_swap_cache,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+||||||| BASE   (e17186d5c7580887b2d67cb11c2e0be1447941fa ANDROID: GKI: update symbol list file for xiaomi)
+DECLARE_HOOK(android_vh_gcma_cc_allow_nonworkingset,
+	TP_PROTO(bool *allow_nonworkingset),
+	TP_ARGS(allow_nonworkingset));
+DECLARE_HOOK(android_vh_gcma_cc_store_page_bypass,
+	TP_PROTO(bool *bypass),
+	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_swap_bio_charge,
+	TP_PROTO(struct bio *bio),
+	TP_ARGS(bio));
+DECLARE_HOOK(android_vh_mm_customize_alloc_anon_thp,
+	TP_PROTO(gfp_t *gfp_mask, unsigned long *orders, int *order, struct folio **folio),
+	TP_ARGS(gfp_mask, orders, order, folio));
+DECLARE_HOOK(android_vh_mm_customize_ac,
+	TP_PROTO(gfp_t gfp, unsigned int order, struct zonelist **zonelist,
+		 struct zoneref **preferred_zoneref, enum zone_type *highest_zoneidx,
+		 unsigned int *alloc_flags),
+	TP_ARGS(gfp, order, zonelist, preferred_zoneref, highest_zoneidx, alloc_flags));
+DECLARE_HOOK(android_vh_mm_customize_rmqueue,
+	TP_PROTO(struct zone *zone, unsigned int order, unsigned int *alloc_flags,
+		 int *migratetype),
+	TP_ARGS(zone, order, alloc_flags, migratetype));
+DECLARE_HOOK(android_vh_mm_customize_suitable_zone,
+	TP_PROTO(struct zone *zone, gfp_t gfp, int order, enum zone_type highest_zoneidx,
+		 bool *use_this_zone, bool *suitable),
+	TP_ARGS(zone, gfp, order, highest_zoneidx, use_this_zone, suitable));
+DECLARE_HOOK(android_vh_mm_customize_wmark_ok,
+	TP_PROTO(struct zone *zone, unsigned int order, enum zone_type highest_zoneidx,
+		 bool *wmark_ok, bool *customized),
+	TP_ARGS(zone, order, highest_zoneidx, wmark_ok, customized));
+DECLARE_HOOK(android_vh_mm_customize_zone_max_order,
+	TP_PROTO(struct zone *zone, int *max_order),
+	TP_ARGS(zone, max_order));
+DECLARE_HOOK(android_vh_mm_customize_zone_pageset,
+	TP_PROTO(struct zone *zone, int *new_high_min, int *new_high_max, int *new_batch),
+	TP_ARGS(zone, new_high_min, new_high_max, new_batch));
+DECLARE_HOOK(android_vh_mm_customize_longterm_pinnable,
+	TP_PROTO(struct folio *folio, bool *is_longterm_pinnable),
+	TP_ARGS(folio, is_longterm_pinnable));
+DECLARE_HOOK(android_vh_mm_migrate_one_page,
+	TP_PROTO(struct page *page, const vm_flags_t vm_flags),
+	TP_ARGS(page, vm_flags));
+DECLARE_HOOK(android_vh_mm_remove_migration_pte_bypass,
+	TP_PROTO(struct folio *dst, struct vm_area_struct *vma, unsigned long addr,
+		 struct folio *src, bool *bypass),
+	TP_ARGS(dst, vma, addr, src, bypass));
+DECLARE_HOOK(android_vh_mm_split_huge_page_bypass,
+	TP_PROTO(struct page *page, struct list_head *list, int *ret, bool *bypass),
+	TP_ARGS(page, list, ret, bypass));
+DECLARE_HOOK(android_vh_mm_try_split_folio_bypass,
+	TP_PROTO(struct folio *folio, bool *bypass),
+	TP_ARGS(folio, bypass));
+DECLARE_HOOK(android_vh_customize_thp_gfp_orders,
+	TP_PROTO(gfp_t *gfp_mask, unsigned long *orders, int *order),
+	TP_ARGS(gfp_mask, orders, order));
+=======
+DECLARE_HOOK(android_vh_gcma_cc_allow_nonworkingset,
+	TP_PROTO(bool *allow_nonworkingset),
+	TP_ARGS(allow_nonworkingset));
+DECLARE_HOOK(android_vh_gcma_cc_store_page_bypass,
+	TP_PROTO(bool *bypass),
+	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_swap_bio_charge,
+	TP_PROTO(struct bio *bio),
+	TP_ARGS(bio));
+DECLARE_HOOK(android_vh_mm_customize_alloc_anon_thp,
+	TP_PROTO(gfp_t *gfp_mask, unsigned long *orders, int *order, struct folio **folio),
+	TP_ARGS(gfp_mask, orders, order, folio));
+DECLARE_HOOK(android_vh_mm_customize_ac,
+	TP_PROTO(gfp_t gfp, unsigned int order, struct zonelist **zonelist,
+		 struct zoneref **preferred_zoneref, enum zone_type *highest_zoneidx,
+		 unsigned int *alloc_flags),
+	TP_ARGS(gfp, order, zonelist, preferred_zoneref, highest_zoneidx, alloc_flags));
+DECLARE_HOOK(android_vh_mm_customize_rmqueue,
+	TP_PROTO(struct zone *zone, unsigned int order, unsigned int *alloc_flags,
+		 int *migratetype),
+	TP_ARGS(zone, order, alloc_flags, migratetype));
+DECLARE_HOOK(android_vh_mm_customize_suitable_zone,
+	TP_PROTO(struct zone *zone, gfp_t gfp, int order, enum zone_type highest_zoneidx,
+		 bool *use_this_zone, bool *suitable),
+	TP_ARGS(zone, gfp, order, highest_zoneidx, use_this_zone, suitable));
+DECLARE_HOOK(android_vh_mm_customize_wmark_ok,
+	TP_PROTO(struct zone *zone, unsigned int order, enum zone_type highest_zoneidx,
+		 bool *wmark_ok, bool *customized),
+	TP_ARGS(zone, order, highest_zoneidx, wmark_ok, customized));
+DECLARE_HOOK(android_vh_mm_customize_zone_max_order,
+	TP_PROTO(struct zone *zone, int *max_order),
+	TP_ARGS(zone, max_order));
+DECLARE_HOOK(android_vh_mm_customize_zone_pageset,
+	TP_PROTO(struct zone *zone, int *new_high_min, int *new_high_max, int *new_batch),
+	TP_ARGS(zone, new_high_min, new_high_max, new_batch));
+DECLARE_HOOK(android_vh_mm_customize_longterm_pinnable,
+	TP_PROTO(struct folio *folio, bool *is_longterm_pinnable),
+	TP_ARGS(folio, is_longterm_pinnable));
+DECLARE_HOOK(android_vh_mm_migrate_one_page,
+	TP_PROTO(struct page *page, const vm_flags_t vm_flags),
+	TP_ARGS(page, vm_flags));
+DECLARE_HOOK(android_vh_mm_remove_migration_pte_bypass,
+	TP_PROTO(struct folio *dst, struct vm_area_struct *vma, unsigned long addr,
+		 struct folio *src, bool *bypass),
+	TP_ARGS(dst, vma, addr, src, bypass));
+DECLARE_HOOK(android_vh_mm_split_huge_page_bypass,
+	TP_PROTO(struct page *page, struct list_head *list, int *ret, bool *bypass),
+	TP_ARGS(page, list, ret, bypass));
+DECLARE_HOOK(android_vh_mm_try_split_folio_bypass,
+	TP_PROTO(struct folio *folio, bool *bypass),
+	TP_ARGS(folio, bypass));
+DECLARE_HOOK(android_vh_customize_thp_gfp_orders,
+	TP_PROTO(gfp_t *gfp_mask, unsigned long *orders, int *order),
+	TP_ARGS(gfp_mask, orders, order));
+DECLARE_HOOK(android_vh_thp_vma_allowable_orders,
+	TP_PROTO(struct vm_area_struct *vma, unsigned long *orders),
+	TP_ARGS(vma, orders));
+>>>>>>> CHANGE (9f9a4ec93070957892111e38a2ce8e84850477da ANDROID: vendor_hooks: add hook to modify allowable THP orde)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
