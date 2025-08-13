@@ -611,6 +611,7 @@ struct pci_host_bridge {
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
+	ANDROID_BACKPORT_RESERVE(1);
 
 	unsigned long	private[] ____cacheline_aligned;
 };
