@@ -46,6 +46,30 @@
 
   __traceiter_android_vh_save_vmalloc_stack
   __tracepoint_android_vh_save_vmalloc_stack
+<<<<<<< PATCH SET (fe202277f94b6ea97239297c4ca1b1d453949275 ANDROID: GKI: update symbol list file for xiaomi)
+  __traceiter_android_vh_customize_thp_gfp_orders
+  __tracepoint_android_vh_customize_thp_gfp_orders
+  __traceiter_android_vh_customize_pmd_gfp_bypass
+  __tracepoint_android_vh_customize_pmd_gfp_bypass
+  __traceiter_android_vh_thp_vma_allowable_orders
+  __tracepoint_android_vh_thp_vma_allowable_orders
+  __traceiter_android_vh_dma_buf_release
+  __tracepoint_android_vh_dma_buf_release
+  __traceiter_cma_alloc_busy_retry
+  __tracepoint_cma_alloc_busy_retry
+  __traceiter_cma_release
+  __tracepoint_cma_release
+||||||| BASE      (6355550c251f2498dbaa876c13f44d99fff86935 UPSTREAM: selftests/bpf: Fix OOB read in dmabuf_collector)
+  __traceiter_android_vh_customize_thp_gfp_orders
+  __tracepoint_android_vh_customize_thp_gfp_orders
+  __traceiter_android_vh_customize_pmd_gfp_bypass
+  __tracepoint_android_vh_customize_pmd_gfp_bypass
+  __traceiter_android_vh_thp_vma_allowable_orders
+  __tracepoint_android_vh_thp_vma_allowable_orders
+  __traceiter_android_vh_dma_buf_release
+  __tracepoint_android_vh_dma_buf_release
+=======
+>>>>>>> BASE      (cbb230451110a4195dd94c8379b07b74abdd60d4 ANDROID: android: Export cma tracehooks)
 
 #required by metis.ko module
   __traceiter_android_rvh_try_to_wake_up_begin
