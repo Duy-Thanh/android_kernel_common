@@ -161,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6a74119_6521f93c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-08-13T18:43:03Z",
+      "side": 1,
+      "message": "I will do that, sure but it won\u0027t get before KMI thaw - this patch modifies the ABI since it adds a new field to a structure drm_bridge - are you going to accept it after the KMI thaw on Friday?",
+      "parentUuid": "a1833980_0bff0e0d",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3408cc01_c4faeaa9",
         "filename": "include/drm/drm_bridge.h",
         "patchSetId": 1
