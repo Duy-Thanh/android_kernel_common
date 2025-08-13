@@ -104,6 +104,24 @@
       "parentUuid": "6ddd0d63_a0ba21b9",
       "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb3fb8c8_b6eb4b87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-08-13T05:03:32Z",
+      "side": 1,
+      "message": "I\u0027m not sure though whether this is the desired workflow for kminext branch - should the ABI breaking patch be followed by the ABI update, or the ABI update should be ammended to the offensive change?",
+      "parentUuid": "eab30ae1_cefe77a3",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
