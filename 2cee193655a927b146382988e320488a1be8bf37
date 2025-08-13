@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e25095f7_7b1d7c22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-13T00:51:25Z",
+      "side": 1,
+      "message": "I would suggest squashing aosp/3723071 into aosp/3723073 and I think you also need to regenerate .stg file in this patch.",
+      "revId": "2cee193655a927b146382988e320488a1be8bf37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
