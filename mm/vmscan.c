@@ -201,7 +201,7 @@ struct scan_control {
 #endif
 
 /*
- * From 0 .. MAX_SWAPPINESS.  Higher means more swappy.
+ * From 0 .. 200.  Higher means more swappy.
  */
 int vm_swappiness = 60;
 
@@ -3258,7 +3258,7 @@ static void get_scan_count(struct lruvec *lruvec, struct scan_control *sc,
 	ap = swappiness * (total_cost + 1);
 	ap /= anon_cost + 1;
 
-	fp = (MAX_SWAPPINESS - swappiness) * (total_cost + 1);
+	fp = (200 - swappiness) * (total_cost + 1);
 	fp /= file_cost + 1;
 
 	fraction[0] = ap;
@@ -5297,7 +5297,7 @@ static int get_type_to_scan(struct lruvec *lruvec, int swappiness, int *tier_idx
 {
 	int type, tier;
 	struct ctrl_pos sp, pv;
-	int gain[ANON_AND_FILE] = { swappiness, MAX_SWAPPINESS - swappiness };
+	int gain[ANON_AND_FILE] = { swappiness, 200 - swappiness };
 
 	/*
 	 * Compare the first tier of anon with that of file to determine which
@@ -5341,7 +5341,7 @@ static int isolate_folios(struct lruvec *lruvec, struct scan_control *sc, int sw
 		type = LRU_GEN_ANON;
 	else if (swappiness == 1)
 		type = LRU_GEN_FILE;
-	else if (swappiness == MAX_SWAPPINESS)
+	else if (swappiness == 200)
 		type = LRU_GEN_ANON;
 	else
 		type = get_type_to_scan(lruvec, swappiness, &tier);
@@ -6294,9 +6294,9 @@ static int run_cmd(char cmd, int memcg_id, int nid, unsigned long seq,
 
 	lruvec = get_lruvec(memcg, nid);
 
-	if (swappiness < MIN_SWAPPINESS)
+	if (swappiness < 0)
 		swappiness = get_swappiness(lruvec, sc);
-	else if (swappiness > MAX_SWAPPINESS)
+	else if (swappiness > 200)
 		goto done;
 
 	switch (cmd) {
