@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01d77b1_6c8fd1ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-13T03:48:35Z",
+      "side": 1,
+      "message": "Check patch is complaining because Fixes: details need to be on a single line.",
+      "revId": "74a3d28cf609a6a23427f511ed06670631220c54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "97d1282d_acc2d94c",
@@ -14,6 +31,24 @@
       "writtenOn": "2025-08-13T02:36:21Z",
       "side": 1,
       "message": "@John Stultz\nSeems the build error is not related with the change, can you help to check if can override the error and merge?\n\nUse of uninitialized value $cid in concatenation (.) or string at /mnt/disks/build-disk/src/android/common-android16-6.12/common/scripts/checkpatch.pl line 3242.\nErrors were reported from checkpatch.pl.",
+      "revId": "74a3d28cf609a6a23427f511ed06670631220c54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57bc39a_317c0a4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-13T03:48:35Z",
+      "side": 1,
+      "message": "You do have a checkpatch issue that needs to be resolved.",
+      "parentUuid": "97d1282d_acc2d94c",
       "revId": "74a3d28cf609a6a23427f511ed06670631220c54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
