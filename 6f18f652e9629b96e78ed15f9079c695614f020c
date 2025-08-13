@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b64a02_6abca4c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-13T20:13:25Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Original change [3666191](https://android-review.googlesource.com/c/3666191) for...\n\nOriginal change [3666191](https://android-review.googlesource.com/c/3666191) for this cherry pick, on base branch \u0027android16-6.12\u0027 is NOT MERGED.\nPlease merge the original change.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\n\nThis change needs to be merged against android16-6.12 first before it can be cherry-picked to android16-6.12-2025-06",
+      "revId": "6f18f652e9629b96e78ed15f9079c695614f020c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c16f7838_e2c39091",
