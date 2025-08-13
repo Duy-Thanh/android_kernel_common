@@ -943,13 +943,35 @@ static bool allow_shadow_ept_mapping(struct pkvm_shadow_vm *vm,
 		}
 	} else if (mapped_hpa != hpa) {
 		/*
-		 * Page state pgt has mapping already, so check if the mapped
-		 * phys matches with the hpa, and report an error if doesn't
-		 * match.
+		 * Page state pgt has mapping already, but the mapped HPA doesn't
+		 * match the expected HPA.
+		 * Instead of failing immediately, invalidate the conflicting
+		 * mapping and allow remapping to proceed.
 		 */
-		pkvm_err("pgstate_pgt not match: mapped_hpa 0x%lx != 0x%lx for gpa 0x%llx\n",
+		pkvm_dbg("jvle: pgstate_pgt mismatch: mapped_hpa 0x%lx != 0x%lx for gpa 0x%llx, invalidating old mapping\n",
 			 mapped_hpa, hpa, gpa);
-		return false;
+		
+		/* Unmap the conflicting entry */
+		if (pkvm_pgtable_unmap_safe(pgstate_pgt, gpa, mapped_hpa, size, NULL)) {
+			pkvm_err("jvle: failed to unmap conflicting pgstate_pgt entry for gpa 0x%llx\n", gpa);
+			return false;
+		}
+		
+		/* Now try to map with the new HPA */
+		u64 prot;
+		if (is_pgt_ops_ept(pgstate_pgt)) {
+			prot = VMX_EPT_RWX_MASK;
+		} else {
+			pkvm_err("%s: pgstate_pgt format not supported\n", __func__);
+			return false;
+		}
+
+		if (pkvm_pgtable_map(pgstate_pgt, gpa, hpa, size,
+				     0, prot, pkvm_pgstate_pgt_map_leaf)) {
+			pkvm_err("jvle: pgstate_pgt remap gpa 0x%llx hpa 0x%lx size 0x%lx failed\n",
+				 gpa, hpa, size);
+			return false;
+		}
 	}
 
 	return true;
