@@ -53,8 +53,64 @@
   __tracepoint_android_vh_customize_pmd_gfp_bypass
   __traceiter_android_vh_thp_vma_allowable_orders
   __tracepoint_android_vh_thp_vma_allowable_orders
+<<<<<<< HEAD   (f23529430ef3763ab714acfd20c94b0774a8eec6 ANDROID: pKVM: VMX: Require the APICv feature)
   __traceiter_android_vh_dma_buf_release
   __tracepoint_android_vh_dma_buf_release
+||||||| BASE   (0a67541578eef66f4b27a7bcf514a0e8cdf99b6c ANDROID: android: Export cma tracehooks)
+
+#required by stability
+  sock_from_file
+  get_dmabuf_debugfs_data
+  __traceiter_android_vh_cma_alloc_fail
+  __tracepoint_android_vh_cma_alloc_fail
+  __traceiter_android_vh_warn_alloc_show_mem_bypass
+  __tracepoint_android_vh_warn_alloc_show_mem_bypass
+  __traceiter_android_vh_meminfo_proc_show
+  __tracepoint_android_vh_meminfo_proc_show
+  __traceiter_android_vh_slab_alloc_node
+  __tracepoint_android_vh_slab_alloc_node
+  __traceiter_android_vh_wq_lockup_pool
+  __tracepoint_android_vh_wq_lockup_pool
+  __traceiter_android_vh_alloc_pages_slowpath_start
+  __tracepoint_android_vh_alloc_pages_slowpath_start
+  __traceiter_android_vh_alloc_pages_slowpath_end
+  __tracepoint_android_vh_alloc_pages_slowpath_end
+  __traceiter_android_vh_alloc_pages_entry
+  __tracepoint_android_vh_alloc_pages_entry
+  __traceiter_android_vh_sysrq_crash
+  __tracepoint_android_vh_sysrq_crash
+  __traceiter_android_rvh_schedule_bug
+  __tracepoint_android_rvh_schedule_bug
+=======
+  __traceiter_cma_alloc_busy_retry
+  __tracepoint_cma_alloc_busy_retry
+  __traceiter_cma_release
+  __tracepoint_cma_release
+
+#required by stability
+  sock_from_file
+  get_dmabuf_debugfs_data
+  __traceiter_android_vh_cma_alloc_fail
+  __tracepoint_android_vh_cma_alloc_fail
+  __traceiter_android_vh_warn_alloc_show_mem_bypass
+  __tracepoint_android_vh_warn_alloc_show_mem_bypass
+  __traceiter_android_vh_meminfo_proc_show
+  __tracepoint_android_vh_meminfo_proc_show
+  __traceiter_android_vh_slab_alloc_node
+  __tracepoint_android_vh_slab_alloc_node
+  __traceiter_android_vh_wq_lockup_pool
+  __tracepoint_android_vh_wq_lockup_pool
+  __traceiter_android_vh_alloc_pages_slowpath_start
+  __tracepoint_android_vh_alloc_pages_slowpath_start
+  __traceiter_android_vh_alloc_pages_slowpath_end
+  __tracepoint_android_vh_alloc_pages_slowpath_end
+  __traceiter_android_vh_alloc_pages_entry
+  __tracepoint_android_vh_alloc_pages_entry
+  __traceiter_android_vh_sysrq_crash
+  __tracepoint_android_vh_sysrq_crash
+  __traceiter_android_rvh_schedule_bug
+  __tracepoint_android_rvh_schedule_bug
+>>>>>>> CHANGE (affdb774d7ec489843c01b1e82a1c4626af9e0c6 ANDROID: GKI: update symbol list file for xiaomi)
 
 #required by metis.ko module
   __traceiter_android_rvh_try_to_wake_up_begin
