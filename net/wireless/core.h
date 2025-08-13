@@ -570,6 +570,9 @@ int cfg80211_assoc_ml_reconf(struct cfg80211_registered_device *rdev,
 			     struct net_device *dev,
 			     struct cfg80211_assoc_link *links,
 			     u16 rem_links);
+int cfg80211_link_reconfig_remove(struct wireless_dev *wdev,
+				  const struct cfg80211_link_reconfig_removal_params *params);
+
 /**
  * struct cfg80211_colocated_ap - colocated AP information
  *
