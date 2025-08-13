@@ -46,6 +46,30 @@
       },
       "revId": "7fa376a8526f258d2107f0b49f24a117c2b0ed44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc1b049_4f5fa69a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmx_asm.S",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-08-13T11:10:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e079bc5e_1e6b5273",
+      "range": {
+        "startLine": 87,
+        "startChar": 1,
+        "endLine": 87,
+        "endChar": 36
+      },
+      "revId": "7fa376a8526f258d2107f0b49f24a117c2b0ed44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
