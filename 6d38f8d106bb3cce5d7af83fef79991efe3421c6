@@ -99,6 +99,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7990c1c_0778a66c",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-13T22:11:53Z",
+      "side": 1,
+      "message": "Hmm. I see it now. I must have looked on the wrong branch. Sorry about that.",
+      "parentUuid": "5fe47fd4_8b9960b8",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bb26164_70fc38f6",
