@@ -122,6 +122,41 @@
       "parentUuid": "eab30ae1_cefe77a3",
       "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff5e129b_d651ea8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-13T05:05:51Z",
+      "side": 1,
+      "message": "Thanks for iterating on this.",
+      "parentUuid": "eab30ae1_cefe77a3",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3408cc01_c4faeaa9",
+        "filename": "include/drm/drm_bridge.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-13T05:05:51Z",
+      "side": 1,
+      "message": "I don\u0027t see a default initializer, so I\u0027m assuming all the drm_bridges are kzalloced?  I just want to make sure the drivers that don\u0027t explicitly set this don\u0027t accidently end up tripping the added logic.",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
