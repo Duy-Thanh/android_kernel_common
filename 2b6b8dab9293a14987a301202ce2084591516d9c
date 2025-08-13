@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b51ae39c_3bba6368",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-13T15:42:31Z",
+      "side": 1,
+      "message": "I\u0027m not sure about the conflict resolution here.\n\nI checked versus 6.12.41 and the diff includes this chunk:\n\n```\n@@ -15477,11 +15476,6 @@\n                                insn-\u003esrc_reg);\n                        return -EACCES;\n                }\n-\n-               if (src_reg-\u003etype \u003d\u003d PTR_TO_STACK)\n-                       insn_flags |\u003d INSN_F_SRC_REG_STACK;\n-               if (dst_reg-\u003etype \u003d\u003d PTR_TO_STACK)\n-                       insn_flags |\u003d INSN_F_DST_REG_STACK;\n        } else {\n                if (insn-\u003esrc_reg !\u003d BPF_REG_0) {\n                        verbose(env, \"BPF_JMP/JMP32 uses reserved fields\\n\");\n@@ -15491,15 +15485,6 @@\n                memset(src_reg, 0, sizeof(*src_reg));\n                src_reg-\u003etype \u003d SCALAR_VALUE;\n                __mark_reg_known(src_reg, insn-\u003eimm);\n-\n-               if (dst_reg-\u003etype \u003d\u003d PTR_TO_STACK)\n-                       insn_flags |\u003d INSN_F_DST_REG_STACK;\n-       }\n-\n-       if (insn_flags) {\n-               err \u003d push_insn_history(env, this_branch, insn_flags, 0);\n-               if (err)\n-                       return err;\n        }\n \n        is_jmp32 \u003d BPF_CLASS(insn-\u003ecode) \u003d\u003d BPF_JMP32;\n```",
+      "revId": "2b6b8dab9293a14987a301202ce2084591516d9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
