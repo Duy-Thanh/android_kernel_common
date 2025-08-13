@@ -52,6 +52,24 @@
       "parentUuid": "b5c1f8ba_c109ecfc",
       "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "969dc38e_fbfaef0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-13T05:21:27Z",
+      "side": 1,
+      "message": "If you are going to rely on this driver/hardware, please upstream the code now to get proper review and acceptance first.",
+      "parentUuid": "f71f66df_f03d409e",
+      "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
