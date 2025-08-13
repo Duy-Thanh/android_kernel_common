@@ -86,6 +86,24 @@
       "parentUuid": "b79d750a_84c35e90",
       "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab30ae1_cefe77a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-08-13T05:01:00Z",
+      "side": 1,
+      "message": "Thanks John, I did exactly like you suggested, the patch for anx driver was abandoned and I uploaded the ABI update, could you please take a look?",
+      "parentUuid": "6ddd0d63_a0ba21b9",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
