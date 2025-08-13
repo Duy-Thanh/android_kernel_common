@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "265be85c_a87cb0be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-08-13T23:48:08Z",
+      "side": 1,
+      "message": "Also, the fixes tag is incorrect it should be the commits that added the exports, so in this case:\n```\nFixes: 2de397d27cc9 (\"ANDROID: sched: Export set_next_entity\")\nFixes: e1d313a431d2 (\"ANDROID: GKI: vendor code needs __balance_callbacks access\")\n```\n\nWhy not add the prototypes on your end though? e.g. in the OOT files you are using them.",
+      "parentUuid": "d01d77b1_6c8fd1ee",
+      "revId": "74a3d28cf609a6a23427f511ed06670631220c54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "97d1282d_acc2d94c",
