@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cb43c0fb_61c34dff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-13T20:17:04Z",
+      "side": 1,
+      "message": "Oh, it already landed in android16-6.12 via -stable. Apologies.",
+      "parentUuid": "c7b64a02_6abca4c3",
+      "revId": "6f18f652e9629b96e78ed15f9079c695614f020c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c16f7838_e2c39091",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
