@@ -232647,6 +232647,12 @@ member {
   type_id: 0x3e10b518
 }
 member {
+  id: 0x037897ee
+  name: "support_hdcp"
+  type_id: 0x6d7f5ff6
+  offset: 1552
+}
+member {
   id: 0xa69acf8a
   name: "support_mbssid"
   type_id: 0x295c7202
@@ -299166,6 +299172,7 @@ struct_union {
     member_id: 0x5c31f0a9
     member_id: 0x50e8b0b9
     member_id: 0xd8099d3a
+    member_id: 0x037897ee
     member_id: 0x1036f59b
     member_id: 0xf97928be
     member_id: 0x01a76bb5
@@ -428081,7 +428088,7 @@ elf_symbol {
   name: "__drm_atomic_helper_bridge_duplicate_state"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9ed85f5c
+  crc: 0x845827d4
   type_id: 0x1912c3c7
   full_name: "__drm_atomic_helper_bridge_duplicate_state"
 }
@@ -428090,7 +428097,7 @@ elf_symbol {
   name: "__drm_atomic_helper_bridge_reset"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9ed85f5c
+  crc: 0x845827d4
   type_id: 0x1912c3c7
   full_name: "__drm_atomic_helper_bridge_reset"
 }
@@ -454744,7 +454751,7 @@ elf_symbol {
   name: "devm_drm_bridge_add"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xeb9c29ea
+  crc: 0x7b1667d5
   type_id: 0x9d8f7eed
   full_name: "devm_drm_bridge_add"
 }
@@ -454753,7 +454760,7 @@ elf_symbol {
   name: "devm_drm_of_get_bridge"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe8dadf6b
+  crc: 0xec7820ff
   type_id: 0x9a68883d
   full_name: "devm_drm_of_get_bridge"
 }
@@ -454762,7 +454769,7 @@ elf_symbol {
   name: "devm_drm_panel_bridge_add"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x367a9472
+  crc: 0x70cf94e5
   type_id: 0x9ac9a7eb
   full_name: "devm_drm_panel_bridge_add"
 }
@@ -454771,7 +454778,7 @@ elf_symbol {
   name: "devm_drm_panel_bridge_add_typed"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9ba48372
+  crc: 0xf78f473a
   type_id: 0x9afbe5e1
   full_name: "devm_drm_panel_bridge_add_typed"
 }
@@ -457991,7 +457998,7 @@ elf_symbol {
   name: "drm_atomic_bridge_chain_check"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0a41196b
+  crc: 0x568641e4
   type_id: 0x94fa90ba
   full_name: "drm_atomic_bridge_chain_check"
 }
@@ -458000,7 +458007,7 @@ elf_symbol {
   name: "drm_atomic_bridge_chain_disable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xea7c0c09
+  crc: 0xc1fc3e0a
   type_id: 0x198668f4
   full_name: "drm_atomic_bridge_chain_disable"
 }
@@ -458009,7 +458016,7 @@ elf_symbol {
   name: "drm_atomic_bridge_chain_enable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xea7c0c09
+  crc: 0xc1fc3e0a
   type_id: 0x198668f4
   full_name: "drm_atomic_bridge_chain_enable"
 }
@@ -458018,7 +458025,7 @@ elf_symbol {
   name: "drm_atomic_bridge_chain_post_disable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xea7c0c09
+  crc: 0xc1fc3e0a
   type_id: 0x198668f4
   full_name: "drm_atomic_bridge_chain_post_disable"
 }
@@ -458027,7 +458034,7 @@ elf_symbol {
   name: "drm_atomic_bridge_chain_pre_enable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xea7c0c09
+  crc: 0xc1fc3e0a
   type_id: 0x198668f4
   full_name: "drm_atomic_bridge_chain_pre_enable"
 }
@@ -458045,7 +458052,7 @@ elf_symbol {
   name: "drm_atomic_get_bridge_state"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xab6f489b
+  crc: 0x463969cf
   type_id: 0x289916da
   full_name: "drm_atomic_get_bridge_state"
 }
@@ -458072,7 +458079,7 @@ elf_symbol {
   name: "drm_atomic_get_new_bridge_state"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x80f46178
+  crc: 0xe229cd85
   type_id: 0x2d050940
   full_name: "drm_atomic_get_new_bridge_state"
 }
@@ -458171,7 +458178,7 @@ elf_symbol {
   name: "drm_atomic_helper_bridge_destroy_state"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9ed85f5c
+  crc: 0x845827d4
   type_id: 0x1912c3c7
   full_name: "drm_atomic_helper_bridge_destroy_state"
 }
@@ -458180,7 +458187,7 @@ elf_symbol {
   name: "drm_atomic_helper_bridge_duplicate_state"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcc39a39a
+  crc: 0xeeb91aa9
   type_id: 0x29da83bb
   full_name: "drm_atomic_helper_bridge_duplicate_state"
 }
@@ -458189,7 +458196,7 @@ elf_symbol {
   name: "drm_atomic_helper_bridge_propagate_bus_fmt"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x77424b3c
+  crc: 0x5be6ede4
   type_id: 0x6a320335
   full_name: "drm_atomic_helper_bridge_propagate_bus_fmt"
 }
@@ -458198,7 +458205,7 @@ elf_symbol {
   name: "drm_atomic_helper_bridge_reset"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcc39a39a
+  crc: 0xeeb91aa9
   type_id: 0x29da83bb
   full_name: "drm_atomic_helper_bridge_reset"
 }
@@ -458765,7 +458772,7 @@ elf_symbol {
   name: "drm_bridge_add"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdae016db
+  crc: 0xc1c06769
   type_id: 0x19026802
   full_name: "drm_bridge_add"
 }
@@ -458774,7 +458781,7 @@ elf_symbol {
   name: "drm_bridge_attach"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1886027a
+  crc: 0x1f59cf95
   type_id: 0x96ac3609
   full_name: "drm_bridge_attach"
 }
@@ -458783,7 +458790,7 @@ elf_symbol {
   name: "drm_bridge_chain_mode_set"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0f3dbf9e
+  crc: 0xd696be1b
   type_id: 0x19d93429
   full_name: "drm_bridge_chain_mode_set"
 }
@@ -458792,7 +458799,7 @@ elf_symbol {
   name: "drm_bridge_chain_mode_valid"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x48754c44
+  crc: 0x89f8b75f
   type_id: 0xb649ac13
   full_name: "drm_bridge_chain_mode_valid"
 }
@@ -458801,7 +458808,7 @@ elf_symbol {
   name: "drm_bridge_detect"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf5de8a09
+  crc: 0x3b8e23e9
   type_id: 0xfcf090be
   full_name: "drm_bridge_detect"
 }
@@ -458810,7 +458817,7 @@ elf_symbol {
   name: "drm_bridge_edid_read"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x16c1c130
+  crc: 0x789a11c8
   type_id: 0xa82027b2
   full_name: "drm_bridge_edid_read"
 }
@@ -458819,7 +458826,7 @@ elf_symbol {
   name: "drm_bridge_hpd_disable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdae016db
+  crc: 0xc1c06769
   type_id: 0x19026802
   full_name: "drm_bridge_hpd_disable"
 }
@@ -458828,7 +458835,7 @@ elf_symbol {
   name: "drm_bridge_hpd_enable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe2c4c525
+  crc: 0x96abe32e
   type_id: 0x193999f5
   full_name: "drm_bridge_hpd_enable"
 }
@@ -458837,7 +458844,7 @@ elf_symbol {
   name: "drm_bridge_hpd_notify"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf7e7b57c
+  crc: 0xa29b5b51
   type_id: 0x182b2835
   full_name: "drm_bridge_hpd_notify"
 }
@@ -458846,7 +458853,7 @@ elf_symbol {
   name: "drm_bridge_is_panel"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x295b8315
+  crc: 0x87629895
   type_id: 0xf30ec649
   full_name: "drm_bridge_is_panel"
 }
@@ -458855,7 +458862,7 @@ elf_symbol {
   name: "drm_bridge_remove"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdae016db
+  crc: 0xc1c06769
   type_id: 0x19026802
   full_name: "drm_bridge_remove"
 }
@@ -461276,7 +461283,7 @@ elf_symbol {
   name: "drm_of_find_panel_or_bridge"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc384dc89
+  crc: 0x330a7a0a
   type_id: 0x908eb1a6
   full_name: "drm_of_find_panel_or_bridge"
 }
@@ -461348,7 +461355,7 @@ elf_symbol {
   name: "drm_panel_bridge_add_typed"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xedbe3186
+  crc: 0xfe6c3cfd
   type_id: 0x9d2263c5
   full_name: "drm_panel_bridge_add_typed"
 }
@@ -461357,7 +461364,7 @@ elf_symbol {
   name: "drm_panel_bridge_connector"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xfba6bf12
+  crc: 0x980069ab
   type_id: 0xaa55ab2e
   full_name: "drm_panel_bridge_connector"
 }
@@ -461366,7 +461373,7 @@ elf_symbol {
   name: "drm_panel_bridge_remove"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf237ada2
+  crc: 0xdacaf49d
   type_id: 0x19026802
   full_name: "drm_panel_bridge_remove"
 }
@@ -461375,7 +461382,7 @@ elf_symbol {
   name: "drm_panel_bridge_set_orientation"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0a37d563
+  crc: 0xd1cb360b
   type_id: 0x9174292d
   full_name: "drm_panel_bridge_set_orientation"
 }
@@ -461942,7 +461949,7 @@ elf_symbol {
   name: "drm_simple_display_pipe_attach_bridge"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcf5761ed
+  crc: 0xaf53ca36
   type_id: 0x9e08dfbb
   full_name: "drm_simple_display_pipe_attach_bridge"
 }
@@ -479999,7 +480006,7 @@ elf_symbol {
   name: "of_drm_find_bridge"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x75fc9e59
+  crc: 0x5fd396ec
   type_id: 0x9702dcaf
   full_name: "of_drm_find_bridge"
 }
