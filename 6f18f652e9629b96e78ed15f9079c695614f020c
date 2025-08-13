@@ -51,6 +51,23 @@
       "message": "Respin bug:b/437295328",
       "revId": "6f18f652e9629b96e78ed15f9079c695614f020c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60dc9b0_00bee2e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-13T20:30:58Z",
+      "side": 1,
+      "message": "Overriding lint as the change 4399f59a9467a324ed46657555f0e1f209a14acb from -stable is already in android16-6.12",
+      "revId": "6f18f652e9629b96e78ed15f9079c695614f020c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
