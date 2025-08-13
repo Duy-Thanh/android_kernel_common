@@ -88,6 +88,24 @@
       "parentUuid": "07038f6d_97219c3a",
       "revId": "498ac95d4f0a4c6fecd3ea6aba5a8adffa3a2554",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e87ed5_16e236a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2025-08-13T00:39:57Z",
+      "side": 1,
+      "message": "Sure, I will submit the non-breaking patch first, once I got the code review +2\n\nthanks",
+      "parentUuid": "9ec542ae_0b4bb873",
+      "revId": "498ac95d4f0a4c6fecd3ea6aba5a8adffa3a2554",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
