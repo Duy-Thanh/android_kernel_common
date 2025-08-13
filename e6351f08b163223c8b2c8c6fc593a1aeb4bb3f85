@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9cda6d_b4cae4ca",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-13T15:24:00Z",
+      "side": 1,
+      "message": "nit: we could use the local variable `mm_ops` here and below?",
+      "range": {
+        "startLine": 544,
+        "startChar": 5,
+        "endLine": 544,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "52f5b185_45ad96a4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+              "range": {
+                "startLine": 544,
+                "startChar": 0,
+                "endLine": 545,
+                "endChar": 0
+              },
+              "replacement": "\tif (mm_ops-\u003eflush_tlb \u0026\u0026 (data.flush_data.flushtlb ||\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+              "range": {
+                "startLine": 546,
+                "startChar": 0,
+                "endLine": 547,
+                "endChar": 0
+              },
+              "replacement": "\t\tmm_ops-\u003eflush_tlb(pgt, aligned_vaddr, aligned_size);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+              "range": {
+                "startLine": 551,
+                "startChar": 0,
+                "endLine": 552,
+                "endChar": 0
+              },
+              "replacement": "\t\tmm_ops-\u003eput_page(page);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e6351f08b163223c8b2c8c6fc593a1aeb4bb3f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
