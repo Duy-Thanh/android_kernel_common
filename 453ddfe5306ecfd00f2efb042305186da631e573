@@ -33,6 +33,24 @@
       "message": "Cherry pick does not have same author date as original commit.\n\n```\nOriginal author date: Mon Feb 17 09:43:29 2025 +0800\nCherry pick author date: Wed Aug 13 17:32:29 2025 +0800\n```\n\nPlease cherry-pick using: `git cherry-pick -s -x af288a426c3e3552b62595c6138ec6371a17dbba`.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "453ddfe5306ecfd00f2efb042305186da631e573",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deb50ba7_7c60a164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-13T11:55:06Z",
+      "side": 1,
+      "message": "The cherry-pick instructions were not helpful. They should have said to cherry-pick the change on the development branch (`3926b572fd07`) and not the upstream commit.\n\nI have redone the pick and push.",
+      "parentUuid": "a57aca8c_17d36a07",
+      "revId": "453ddfe5306ecfd00f2efb042305186da631e573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
