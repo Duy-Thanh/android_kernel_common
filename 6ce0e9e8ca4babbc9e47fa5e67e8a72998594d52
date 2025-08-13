@@ -34,6 +34,24 @@
       "parentUuid": "969cdf76_d19ec292",
       "revId": "6ce0e9e8ca4babbc9e47fa5e67e8a72998594d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9bb0b8e_6034b210",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-08-13T19:21:42Z",
+      "side": 1,
+      "message": "what about generating the .kunit directory in an output directory, not in the source directory?\n\nAlso: thanks for the link to the Bazel issue; TIL.",
+      "parentUuid": "ce062d7b_42edfc45",
+      "revId": "6ce0e9e8ca4babbc9e47fa5e67e8a72998594d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
