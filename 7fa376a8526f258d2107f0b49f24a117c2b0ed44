@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca3564e_a4fe2827",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmx_asm.S",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-08-13T10:06:03Z",
+      "side": 1,
+      "message": "Ignorant question: shouldn\u0027t this be `2*WORD_SIZE`:\n`mov 2*WORD_SIZE(%_ASM_SP), %_ASM_DI`\nas in original code? \n(https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?id\u003dafd743f6dde87296c6f3414706964c491bb85862)?",
+      "range": {
+        "startLine": 87,
+        "startChar": 1,
+        "endLine": 87,
+        "endChar": 36
+      },
+      "revId": "7fa376a8526f258d2107f0b49f24a117c2b0ed44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
