@@ -22,6 +22,30 @@
       },
       "revId": "7fa376a8526f258d2107f0b49f24a117c2b0ed44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e079bc5e_1e6b5273",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmx_asm.S",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-08-13T10:40:23Z",
+      "side": 1,
+      "message": "The stack layout for pkvm is different with KVM. We reserved 16bytes at the pkvm stack top. The `0*WORD_SIZE(%ASM_SP)` saves vcpu-\u003earch.regs and the `1*WORD_SIZE(%ASM_SP)` saves vmx pointer. So we get the vmx from the offset of `1*WORD_SIZE`",
+      "parentUuid": "5ca3564e_a4fe2827",
+      "range": {
+        "startLine": 87,
+        "startChar": 1,
+        "endLine": 87,
+        "endChar": 36
+      },
+      "revId": "7fa376a8526f258d2107f0b49f24a117c2b0ed44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
