@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8236dcd_1d69ee83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-13T12:03:04Z",
+      "side": 1,
+      "message": "Notes on Lint override:\n\n- there is no development branch commit as this landed as part of a merge\n- I am granting an exception to the deadline for submission to this branch; please switch to a newer branch as soon as possible",
+      "revId": "c8d465512cdf4115614f49004b013741d7fbabeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
