@@ -144,6 +144,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1833980_0bff0e0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-13T18:33:16Z",
+      "side": 1,
+      "message": "On the upstream patch, the maintainer says \"As per my response to the cover letter [1], I\u0027ll plan to land both patches midway through next week unless there are objections\".\n\nWhen it lands in the maintainer tree, please update this to FROMGIT citing the patch in the maintainer tree.",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3408cc01_c4faeaa9",
         "filename": "include/drm/drm_bridge.h",
         "patchSetId": 1
