@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97d1282d_acc2d94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869026
+      },
+      "writtenOn": "2025-08-13T02:36:21Z",
+      "side": 1,
+      "message": "@John Stultz\nSeems the build error is not related with the change, can you help to check if can override the error and merge?\n\nUse of uninitialized value $cid in concatenation (.) or string at /mnt/disks/build-disk/src/android/common-android16-6.12/common/scripts/checkpatch.pl line 3242.\nErrors were reported from checkpatch.pl.",
+      "revId": "74a3d28cf609a6a23427f511ed06670631220c54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
