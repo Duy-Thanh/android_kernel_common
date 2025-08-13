@@ -83,6 +83,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fe47fd4_8b9960b8",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-13T20:01:16Z",
+      "side": 1,
+      "message": "Wait.. MTK_WATCHDOG does not exist indeed, but there is MEDIATEK_WATCHDOG in android16-6.12. I have MEDIATEK_WATCHDOG here. I\u0027ll doueble check anyway, if it needs \u003dy.",
+      "parentUuid": "c34d171c_f40b8e47",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bb26164_70fc38f6",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
