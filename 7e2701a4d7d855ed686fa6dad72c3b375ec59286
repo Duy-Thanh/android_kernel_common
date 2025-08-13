@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a2c119_d9b73cc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-13T07:13:04Z",
+      "side": 1,
+      "message": "What driver needs these functions?  No one should be using symbols from a usb storage driver.",
+      "revId": "7e2701a4d7d855ed686fa6dad72c3b375ec59286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
