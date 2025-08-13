@@ -4062,4 +4062,7 @@ static inline bool cpu_busy_with_softirqs(int cpu)
 }
 #endif /* CONFIG_RT_SOFTIRQ_AWARE_SCHED */
 
+void __balance_callbacks(struct rq *rq);
+void set_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *se);
+
 #endif /* _KERNEL_SCHED_SCHED_H */
