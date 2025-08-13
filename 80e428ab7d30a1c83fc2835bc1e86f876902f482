@@ -52,6 +52,24 @@
       "parentUuid": "a72e4b3f_65aadd45",
       "revId": "80e428ab7d30a1c83fc2835bc1e86f876902f482",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf92ad2_e3c85d16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-08-13T07:02:02Z",
+      "side": 1,
+      "message": "I synced offline and I can confirm that we don\u0027t need this actually - there is only one place it is used and it belongs to a config that is not enabled in the vendor.\n\nI\u0027ll abandon this patch then. Thanks Todd for the insightful review.",
+      "parentUuid": "6583ce63_42e8b4fb",
+      "revId": "80e428ab7d30a1c83fc2835bc1e86f876902f482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
