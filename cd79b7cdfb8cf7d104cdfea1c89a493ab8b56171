@@ -52,6 +52,24 @@
       "parentUuid": "2d92a5a4_a91a2f13",
       "revId": "cd79b7cdfb8cf7d104cdfea1c89a493ab8b56171",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "902d4aa3_96e8076b",
+        "filename": "drivers/gpu/drm/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2025-08-13T08:40:29Z",
+      "side": 0,
+      "message": "Thanks. I\u0027ll approve this CL and let you two (and maybe Michal, when he\u0027s back) take care of that. :)",
+      "parentUuid": "62438253_7ddf5d4d",
+      "revId": "cd79b7cdfb8cf7d104cdfea1c89a493ab8b56171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
