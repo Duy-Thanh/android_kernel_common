@@ -34,6 +34,24 @@
       "parentUuid": "4fb44771_87f04664",
       "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f71f66df_f03d409e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2025-08-13T00:24:27Z",
+      "side": 1,
+      "message": "It is Google\u0027s PCIe RC driver, need to include the pci-host-common.h.\n\nthe header file didn\u0027t have any structure defined for now, so would it be possible that we have the needed symbol when there are struct get defined there ?\n\nMay I ask what\u0027s the abi padding you are referring to here ?\n\nGoogle\u0027s PCIe RC driver is still in the preliminary stage, so we currently didn\u0027t have plan to upstream those.",
+      "parentUuid": "b5c1f8ba_c109ecfc",
+      "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
