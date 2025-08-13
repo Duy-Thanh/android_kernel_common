@@ -38,7 +38,7 @@ struct system_heap_buffer {
 
 struct dma_heap_attachment {
 	struct device *dev;
-	struct sg_table *table;
+	struct sg_table table;
 	struct list_head list;
 	bool mapped;
 
@@ -59,6 +59,7 @@ static gfp_t order_flags[] = {HIGH_ORDER_GFP, HIGH_ORDER_GFP, LOW_ORDER_GFP};
 static const unsigned int orders[] = {8, 4, 0};
 #define NUM_ORDERS ARRAY_SIZE(orders)
 
+<<<<<<< HEAD   (11b72e404507abc3ce96886c6a3d7922aa385a69 Merge 63eb28bb1402 ("Merge tag 'for-linus' of git://git.kern)
 static bool needs_swiotlb_bounce(struct device *dev, struct sg_table *table)
 {
 	struct iommu_domain *domain = iommu_get_domain_for_dev(dev);
@@ -82,28 +83,26 @@ static bool needs_swiotlb_bounce(struct device *dev, struct sg_table *table)
 }
 
 static struct sg_table *dup_sg_table(struct sg_table *table)
+||||||| BASE   (63eb28bb1402891b1ad2be02a530f29a9dd7f1cd Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/k)
+static struct sg_table *dup_sg_table(struct sg_table *table)
+=======
+static int dup_sg_table(struct sg_table *from, struct sg_table *to)
+>>>>>>> BRANCH (260f6f4fda93c8485c8037865c941b42b9cba5d2 Merge tag 'drm-next-2025-07-30' of https://gitlab.freedeskto)
 {
-	struct sg_table *new_table;
-	int ret, i;
 	struct scatterlist *sg, *new_sg;
+	int ret, i;
 
-	new_table = kzalloc(sizeof(*new_table), GFP_KERNEL);
-	if (!new_table)
-		return ERR_PTR(-ENOMEM);
+	ret = sg_alloc_table(to, from->orig_nents, GFP_KERNEL);
+	if (ret)
+		return ret;
 
-	ret = sg_alloc_table(new_table, table->orig_nents, GFP_KERNEL);
-	if (ret) {
-		kfree(new_table);
-		return ERR_PTR(-ENOMEM);
-	}
-
-	new_sg = new_table->sgl;
-	for_each_sgtable_sg(table, sg, i) {
+	new_sg = to->sgl;
+	for_each_sgtable_sg(from, sg, i) {
 		sg_set_page(new_sg, sg_page(sg), sg->length, sg->offset);
 		new_sg = sg_next(new_sg);
 	}
 
-	return new_table;
+	return 0;
 }
 
 static int system_heap_attach(struct dma_buf *dmabuf,
@@ -111,19 +110,18 @@ static int system_heap_attach(struct dma_buf *dmabuf,
 {
 	struct system_heap_buffer *buffer = dmabuf->priv;
 	struct dma_heap_attachment *a;
-	struct sg_table *table;
+	int ret;
 
 	a = kzalloc(sizeof(*a), GFP_KERNEL);
 	if (!a)
 		return -ENOMEM;
 
-	table = dup_sg_table(&buffer->sg_table);
-	if (IS_ERR(table)) {
+	ret = dup_sg_table(&buffer->sg_table, &a->table);
+	if (ret) {
 		kfree(a);
-		return -ENOMEM;
+		return ret;
 	}
 
-	a->table = table;
 	a->dev = attachment->dev;
 	INIT_LIST_HEAD(&a->list);
 	a->mapped = false;
@@ -147,8 +145,7 @@ static void system_heap_detach(struct dma_buf *dmabuf,
 	list_del(&a->list);
 	mutex_unlock(&buffer->lock);
 
-	sg_free_table(a->table);
-	kfree(a->table);
+	sg_free_table(&a->table);
 	kfree(a);
 }
 
@@ -156,8 +153,14 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
 						enum dma_data_direction direction)
 {
 	struct dma_heap_attachment *a = attachment->priv;
+<<<<<<< HEAD   (11b72e404507abc3ce96886c6a3d7922aa385a69 Merge 63eb28bb1402 ("Merge tag 'for-linus' of git://git.kern)
 	struct sg_table *table = a->table;
 	int attr = attachment->dma_map_attrs;
+||||||| BASE   (63eb28bb1402891b1ad2be02a530f29a9dd7f1cd Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/k)
+	struct sg_table *table = a->table;
+=======
+	struct sg_table *table = &a->table;
+>>>>>>> BRANCH (260f6f4fda93c8485c8037865c941b42b9cba5d2 Merge tag 'drm-next-2025-07-30' of https://gitlab.freedeskto)
 	int ret;
 
 	if (a->uncached)
@@ -202,12 +205,24 @@ static int system_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
 	if (buffer->vmap_cnt)
 		invalidate_kernel_vmap_range(buffer->vaddr, buffer->len);
 
+<<<<<<< HEAD   (11b72e404507abc3ce96886c6a3d7922aa385a69 Merge 63eb28bb1402 ("Merge tag 'for-linus' of git://git.kern)
 	if (!buffer->uncached) {
 		list_for_each_entry(a, &buffer->attachments, list) {
 			if (!a->mapped)
 				continue;
 			dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
 		}
+||||||| BASE   (63eb28bb1402891b1ad2be02a530f29a9dd7f1cd Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/k)
+	list_for_each_entry(a, &buffer->attachments, list) {
+		if (!a->mapped)
+			continue;
+		dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
+=======
+	list_for_each_entry(a, &buffer->attachments, list) {
+		if (!a->mapped)
+			continue;
+		dma_sync_sgtable_for_cpu(a->dev, &a->table, direction);
+>>>>>>> BRANCH (260f6f4fda93c8485c8037865c941b42b9cba5d2 Merge tag 'drm-next-2025-07-30' of https://gitlab.freedeskto)
 	}
 	mutex_unlock(&buffer->lock);
 
@@ -225,12 +240,24 @@ static int system_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
 	if (buffer->vmap_cnt)
 		flush_kernel_vmap_range(buffer->vaddr, buffer->len);
 
+<<<<<<< HEAD   (11b72e404507abc3ce96886c6a3d7922aa385a69 Merge 63eb28bb1402 ("Merge tag 'for-linus' of git://git.kern)
 	if (!buffer->uncached) {
 		list_for_each_entry(a, &buffer->attachments, list) {
 			if (!a->mapped)
 				continue;
 			dma_sync_sgtable_for_device(a->dev, a->table, direction);
 		}
+||||||| BASE   (63eb28bb1402891b1ad2be02a530f29a9dd7f1cd Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/k)
+	list_for_each_entry(a, &buffer->attachments, list) {
+		if (!a->mapped)
+			continue;
+		dma_sync_sgtable_for_device(a->dev, a->table, direction);
+=======
+	list_for_each_entry(a, &buffer->attachments, list) {
+		if (!a->mapped)
+			continue;
+		dma_sync_sgtable_for_device(a->dev, &a->table, direction);
+>>>>>>> BRANCH (260f6f4fda93c8485c8037865c941b42b9cba5d2 Merge tag 'drm-next-2025-07-30' of https://gitlab.freedeskto)
 	}
 	mutex_unlock(&buffer->lock);
 
