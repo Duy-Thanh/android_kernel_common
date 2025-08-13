@@ -433490,6 +433490,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_dma_buf_attr_show_start"
 }
 elf_symbol {
+  id: 0x6664371a
+  name: "__traceiter_android_vh_dma_buf_release"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2dac4d6e
+  type_id: 0x9bac9a8d
+  full_name: "__traceiter_android_vh_dma_buf_release"
+}
+elf_symbol {
   id: 0x94b48bb0
   name: "__traceiter_android_vh_dma_heap_buffer_alloc_end"
   is_defined: true
@@ -440094,6 +440103,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_dma_buf_attr_show_start"
+}
+elf_symbol {
+  id: 0x7bbd7744
+  name: "__tracepoint_android_vh_dma_buf_release"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_dma_buf_release"
 }
 elf_symbol {
   id: 0x30442e2e
@@ -456776,7 +456794,7 @@ elf_symbol {
   name: "dma_buf_attach"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x155300d5
+  crc: 0xeb20b9c0
   namespace: "DMA_BUF"
   type_id: 0x6b24e9ea
   full_name: "dma_buf_attach"
@@ -456786,7 +456804,7 @@ elf_symbol {
   name: "dma_buf_begin_cpu_access"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7e9fa46e
+  crc: 0xfb97b721
   namespace: "DMA_BUF"
   type_id: 0x9e84fe49
   full_name: "dma_buf_begin_cpu_access"
@@ -456796,7 +456814,7 @@ elf_symbol {
   name: "dma_buf_begin_cpu_access_partial"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf2512675
+  crc: 0x77691f35
   type_id: 0x9e948905
   full_name: "dma_buf_begin_cpu_access_partial"
 }
@@ -456805,7 +456823,7 @@ elf_symbol {
   name: "dma_buf_detach"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2017a08b
+  crc: 0x98cee33e
   namespace: "DMA_BUF"
   type_id: 0x10df3ba9
   full_name: "dma_buf_detach"
@@ -456815,7 +456833,7 @@ elf_symbol {
   name: "dma_buf_dynamic_attach"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9571458e
+  crc: 0xc36dfdef
   namespace: "DMA_BUF"
   type_id: 0x6b29d69a
   full_name: "dma_buf_dynamic_attach"
@@ -456825,7 +456843,7 @@ elf_symbol {
   name: "dma_buf_end_cpu_access"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7e9fa46e
+  crc: 0xfb97b721
   namespace: "DMA_BUF"
   type_id: 0x9e84fe49
   full_name: "dma_buf_end_cpu_access"
@@ -456835,7 +456853,7 @@ elf_symbol {
   name: "dma_buf_end_cpu_access_partial"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf2512675
+  crc: 0x77691f35
   type_id: 0x9e948905
   full_name: "dma_buf_end_cpu_access_partial"
 }
@@ -456844,7 +456862,7 @@ elf_symbol {
   name: "dma_buf_export"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe65b55ec
+  crc: 0x68ac79e8
   namespace: "DMA_BUF"
   type_id: 0x448c535b
   full_name: "dma_buf_export"
@@ -456854,7 +456872,7 @@ elf_symbol {
   name: "dma_buf_fd"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x915ad4e7
+  crc: 0x8f00b2d7
   namespace: "DMA_BUF"
   type_id: 0x9c2e6e8a
   full_name: "dma_buf_fd"
@@ -456864,7 +456882,7 @@ elf_symbol {
   name: "dma_buf_get"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe1497866
+  crc: 0xc2759a82
   namespace: "DMA_BUF"
   type_id: 0x53e428b3
   full_name: "dma_buf_get"
@@ -456874,7 +456892,7 @@ elf_symbol {
   name: "dma_buf_get_flags"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4fdc48d6
+  crc: 0x9b9ca7a4
   type_id: 0x9dabd844
   full_name: "dma_buf_get_flags"
 }
@@ -456883,7 +456901,7 @@ elf_symbol {
   name: "dma_buf_map_attachment"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8075d065
+  crc: 0x975e60a0
   namespace: "DMA_BUF"
   type_id: 0x451c3ee7
   full_name: "dma_buf_map_attachment"
@@ -456893,7 +456911,7 @@ elf_symbol {
   name: "dma_buf_map_attachment_unlocked"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8075d065
+  crc: 0x975e60a0
   namespace: "DMA_BUF"
   type_id: 0x451c3ee7
   full_name: "dma_buf_map_attachment_unlocked"
@@ -456903,7 +456921,7 @@ elf_symbol {
   name: "dma_buf_mmap"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x974380c2
+  crc: 0x364c0c8e
   namespace: "DMA_BUF"
   type_id: 0x9d967d9a
   full_name: "dma_buf_mmap"
@@ -456913,7 +456931,7 @@ elf_symbol {
   name: "dma_buf_move_notify"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xfe62e2c9
+  crc: 0xb170bec6
   namespace: "DMA_BUF"
   type_id: 0x10aa5f7a
   full_name: "dma_buf_move_notify"
@@ -456923,7 +456941,7 @@ elf_symbol {
   name: "dma_buf_pin"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6d831de9
+  crc: 0xc2557fd5
   namespace: "DMA_BUF"
   type_id: 0x9ad6ae1c
   full_name: "dma_buf_pin"
@@ -456933,7 +456951,7 @@ elf_symbol {
   name: "dma_buf_put"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xfe62e2c9
+  crc: 0xb170bec6
   namespace: "DMA_BUF"
   type_id: 0x10aa5f7a
   full_name: "dma_buf_put"
@@ -456943,7 +456961,7 @@ elf_symbol {
   name: "dma_buf_set_name"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0937b13f
+  crc: 0xf4cd882a
   type_id: 0xa7ea77a4
   full_name: "dma_buf_set_name"
 }
@@ -456952,7 +456970,7 @@ elf_symbol {
   name: "dma_buf_unmap_attachment"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x17a61341
+  crc: 0xdb01438e
   namespace: "DMA_BUF"
   type_id: 0x17ffed59
   full_name: "dma_buf_unmap_attachment"
@@ -456962,7 +456980,7 @@ elf_symbol {
   name: "dma_buf_unmap_attachment_unlocked"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x17a61341
+  crc: 0xdb01438e
   namespace: "DMA_BUF"
   type_id: 0x17ffed59
   full_name: "dma_buf_unmap_attachment_unlocked"
@@ -456972,7 +456990,7 @@ elf_symbol {
   name: "dma_buf_unpin"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb1770a90
+  crc: 0x3945ed73
   namespace: "DMA_BUF"
   type_id: 0x17ce1ca0
   full_name: "dma_buf_unpin"
@@ -456982,7 +457000,7 @@ elf_symbol {
   name: "dma_buf_vmap"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x77d3f7c8
+  crc: 0x848c60d4
   namespace: "DMA_BUF"
   type_id: 0x9d4e84a4
   full_name: "dma_buf_vmap"
@@ -456992,7 +457010,7 @@ elf_symbol {
   name: "dma_buf_vmap_unlocked"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x77d3f7c8
+  crc: 0x848c60d4
   namespace: "DMA_BUF"
   type_id: 0x9d4e84a4
   full_name: "dma_buf_vmap_unlocked"
@@ -457002,7 +457020,7 @@ elf_symbol {
   name: "dma_buf_vunmap"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbcc1a6e0
+  crc: 0xf0f2af40
   namespace: "DMA_BUF"
   type_id: 0x10563618
   full_name: "dma_buf_vunmap"
@@ -457012,7 +457030,7 @@ elf_symbol {
   name: "dma_buf_vunmap_unlocked"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbcc1a6e0
+  crc: 0xf0f2af40
   namespace: "DMA_BUF"
   type_id: 0x10563618
   full_name: "dma_buf_vunmap_unlocked"
@@ -466302,7 +466320,7 @@ elf_symbol {
   name: "get_dmabuf_debugfs_data"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8b99886b
+  crc: 0x250d02ca
   namespace: "DMA_BUF"
   type_id: 0x966430b0
   full_name: "get_dmabuf_debugfs_data"
@@ -472702,7 +472720,7 @@ elf_symbol {
   name: "is_dma_buf_file"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xec773a97
+  crc: 0xa94ebc35
   namespace: "DMA_BUF"
   type_id: 0x9bba7997
   full_name: "is_dma_buf_file"
@@ -511084,6 +511102,7 @@ interface {
   symbol_id: 0x5db6a094
   symbol_id: 0x8dc41da8
   symbol_id: 0x5f33b294
+  symbol_id: 0x6664371a
   symbol_id: 0x94b48bb0
   symbol_id: 0xbcd1a27c
   symbol_id: 0x5e9ed424
@@ -511818,6 +511837,7 @@ interface {
   symbol_id: 0x694ad7a6
   symbol_id: 0xd020303e
   symbol_id: 0xe829284e
+  symbol_id: 0x7bbd7744
   symbol_id: 0x30442e2e
   symbol_id: 0x9d32ef5e
   symbol_id: 0x325e746a
