@@ -16,6 +16,24 @@
       "message": "Instead of doing this:\n\n- Can you have the script NOT generate the .kunit directory? Polluting the source tree is always bad. All outputs should go to an output directory.\n- If this is not possible, can you update the glob() to just exclude the .kunit directory?  https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/BUILD.bazel;l\u003d153-178;drc\u003dc75b5c52aa80fcee0126211301ab5b57b69caef5",
       "revId": "6ce0e9e8ca4babbc9e47fa5e67e8a72998594d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce062d7b_42edfc45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970076
+      },
+      "writtenOn": "2025-08-13T02:37:56Z",
+      "side": 1,
+      "message": "For glob + exclude, it\u0027s not supported by bazel when there\u0027s recursive symlinks.\nhttps://github.com/bazelbuild/bazel/issues/13950",
+      "parentUuid": "969cdf76_d19ec292",
+      "revId": "6ce0e9e8ca4babbc9e47fa5e67e8a72998594d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
