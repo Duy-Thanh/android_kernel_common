@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c89d8a76_0b77838c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2025-08-13T19:05:06Z",
+      "side": 1,
+      "message": "That maintainer being me. :-) Well, technically in drm-misc I\u0027m a \"committer\" which means I have less authority, but I can still land patches.\n\nIn any case, I don\u0027t feel comfortable committing this particular patch without giving at least a week of time on the list for others to speak up, so there\u0027s not really any chance I\u0027d land it before Friday. It\u0027s certainly possible that some other committer _could_ choose to land it before then, but that feels quite unlikely to me.\n\nYou\u0027re free to wait until Friday to land if you want, of course...",
+      "parentUuid": "e6857d49_f9b67d6e",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3408cc01_c4faeaa9",
         "filename": "include/drm/drm_bridge.h",
         "patchSetId": 1
