@@ -65,6 +65,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c34d171c_f40b8e47",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-13T19:34:39Z",
+      "side": 1,
+      "message": "MTK_IRQ is added by this same commit. To avoid adding files to build directly by ARCH_MEDIATEK I added this Kconfig option. Should I split it to a separate commit? MEDIATEK_WATCHDOG indeed may be a module. I\u0027ll double check this one and probably remove it. Thanks for noting.",
+      "parentUuid": "39338682_35048cb6",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bb26164_70fc38f6",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
@@ -94,6 +112,24 @@
           ]
         }
       ],
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f92c771b_9758661e",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-13T19:34:39Z",
+      "side": 1,
+      "message": "May be so, I saw GKI_HIDDEN_QCOM_CONFIGS does not use this condition so I skipped it but fine by me adding it.",
+      "parentUuid": "5bb26164_70fc38f6",
       "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
