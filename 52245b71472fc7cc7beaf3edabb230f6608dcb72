@@ -88,6 +88,24 @@
       "parentUuid": "969dc38e_fbfaef0b",
       "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb661fc_ad4611ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2025-08-13T12:00:02Z",
+      "side": 1,
+      "message": "aosp/3730426 for the ABI padding on the kminext branch",
+      "parentUuid": "83a7f435_a36025b9",
+      "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
