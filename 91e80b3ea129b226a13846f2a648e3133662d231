@@ -175,6 +175,24 @@
       "parentUuid": "3408cc01_c4faeaa9",
       "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a072a89d_c8e09282",
+        "filename": "include/drm/drm_bridge.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-13T05:57:00Z",
+      "side": 1,
+      "message": "Sounds good. Just wanted to double check.",
+      "parentUuid": "fc561eff_56134f3d",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
