@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58c94a84_012a34df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-14T17:32:25Z",
+      "side": 1,
+      "message": "This is a clean cherry-pick so it should be labeled as UPSTREAM",
+      "revId": "a82d7f127d12c27624f0667895c52574b4cf9bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
