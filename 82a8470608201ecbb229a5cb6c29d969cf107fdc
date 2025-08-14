@@ -34,6 +34,24 @@
       "parentUuid": "0abcace2_70b76039",
       "revId": "82a8470608201ecbb229a5cb6c29d969cf107fdc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdd6f591_373538ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2025-08-14T06:27:59Z",
+      "side": 1,
+      "message": "Hi,gregkh\n\nThis vendor hook enables Amlogic hardware accelerator support for F2FS compression/decompression, which improves the filesystem\u0027s performance.\nWe will try to push this new HW driver to upstream, but it will take a very long time for upstream to accept it, and the current GKI products will not benefit from this hardware.\nWith this vendor hook, Amlogic\u0027s SoCs will gain hardware benefits on the current GKI version.",
+      "parentUuid": "7e7aff78_3abb017e",
+      "revId": "82a8470608201ecbb229a5cb6c29d969cf107fdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
