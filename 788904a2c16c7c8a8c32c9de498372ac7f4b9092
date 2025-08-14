@@ -33,6 +33,24 @@
       "message": "Since this gets reverted later, I\u0027ve pulled it out of this series for now.\n\nLooks like it could be added after the KMI thaw, since it doesn\u0027t impact it.",
       "revId": "788904a2c16c7c8a8c32c9de498372ac7f4b9092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd4b39c_b4ac8c86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2025-08-14T11:36:44Z",
+      "side": 1,
+      "message": "Yeah it will cause compilation failure since nr_queued doesn\u0027t exist on 6.12 and we didn\u0027t pull the renaming patches due to worries about clashes.",
+      "parentUuid": "284e2137_bad06d86",
+      "revId": "788904a2c16c7c8a8c32c9de498372ac7f4b9092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
