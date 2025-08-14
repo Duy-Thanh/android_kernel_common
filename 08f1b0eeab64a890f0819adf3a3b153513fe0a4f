@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a806a1d8_b18bbe1b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "\u003e and the second one is to allow host to use pkvm_hyp structure to perform cleanup on deprivilege failure.\n\nCould you point to a place in the code where such usage of pkvm_hyp is performed?",
+      "parentUuid": "e3a46a6c_03f5b55a",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6dbb0fb_c7643b49",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
         "patchSetId": 11

@@ -1,0 +1,214 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae9255bf_93b72cd7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "Its host-side counterpart in arch/x86/kvm/vmx/pkvm/pkvm.c is phys_addr_t...",
+      "fixSuggestions": [
+        {
+          "fixId": "dc4a34be_e77e0940",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 43,
+                "startChar": 0,
+                "endLine": 44,
+                "endChar": 0
+              },
+              "replacement": "static phys_addr_t pkvm_mem_size;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aad567b_7e6e372e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "If we are adding this assert anyway, then maybe `pkvm_mem_size \u003e data_struct_size`?",
+      "fixSuggestions": [
+        {
+          "fixId": "0a57c689_5ff7d470",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "\tPKVM_ASSERT(pkvm_mem_size \u003e data_struct_size);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa6a157_72072efb",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "The name \"pkvm_protect_setup\" sounds like there is some \"setup\", and this flags controls whether we should protect this setup or not. :)\n\nAnd the above comment is misleading (apart from being IMHO too detailed): not all steps needed for protection from host VM are completed: EPT is enabled on just one CPU, and IOMMU protection is rather not enabled at all?\n\nSo maybe something like e.g. `pkvm_setup_done`, and comment about what is actually important here (and not so obvious from the code), e.g.:\n\n```\n/*\n * This flag indicates, in particular, that the host EPT is set up\n * and is enabled on at least one CPU. It does *not* indicate yet\n * that pkvm is fully initialized.\n */\nstatic bool pkvm_setup_done __ro_after_init;\n```\n\nBTW \"is enabled on at least one CPU\" is important since, for example, if protect_pkvm_pages() succeeds (so the hypervisor memory is unmapped from the host EPT) but then create_iommu() fails, we return failure without setting this flag to true, so in pkvm_undo_finalise() we don\u0027t restore the mapping for the hypervisor memory in the host EPT, but that\u0027s ok since none of the CPUs has switched to this EPT.",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e25037a3_f7d4ad1a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "-EPERM seems more appropriate?\n\nDitto other \"internal\" hypercalls.",
+      "fixSuggestions": [
+        {
+          "fixId": "0744640d_dc739154",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 329,
+                "startChar": 0,
+                "endLine": 330,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -EPERM;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 365,
+                "startChar": 0,
+                "endLine": 366,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -EPERM;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 393,
+                "startChar": 0,
+                "endLine": 394,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -EPERM;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e05d9a_e85a3bd0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "This may fail at least in theory, we might want to at least log the error? (Did I already comment about this?)",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d2addce_fb780fd6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "Is all this stuff used just in reprivilege.c? Why need to define it here in pkvm_hyp.h, not where it is used?",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4718d5df_fc7de661",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "-EPERM seems more appropriate?",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d29a17a_9a8e92f7",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1433,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:46:16Z",
+      "side": 1,
+      "message": "Do this inside pkvm_init_finalise()?",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
