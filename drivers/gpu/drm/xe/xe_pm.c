@@ -22,6 +22,7 @@
 #include "xe_pcode.h"
 #include "xe_pxp.h"
 #include "xe_trace.h"
+#include "xe_work_period.h"
 #include "xe_wa.h"
 
 /**
@@ -407,6 +408,8 @@ int xe_pm_runtime_suspend(struct xe_device *xe)
 	 */
 	xe_rpm_lockmap_acquire(xe);
 
+	xe_work_period_suspend(xe);
+
 	err = xe_pxp_pm_suspend(xe->pxp);
 	if (err)
 		goto out;
@@ -485,6 +488,8 @@ int xe_pm_runtime_resume(struct xe_device *xe)
 		if (err)
 			goto out;
 	}
+
+	xe_work_period_resume(xe);
 
 	xe_irq_resume(xe);
 

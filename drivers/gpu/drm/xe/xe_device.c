@@ -5,6 +5,7 @@
 
 #include "xe_device.h"
 
+#include <linux/cred.h>
 #include <linux/delay.h>
 #include <linux/units.h>
 
@@ -58,6 +59,7 @@
 #include "xe_tile.h"
 #include "xe_ttm_stolen_mgr.h"
 #include "xe_ttm_sys_mgr.h"
+#include "xe_work_period.h"
 #include "xe_vm.h"
 #include "xe_vram.h"
 #include "xe_wait_user_fence.h"
@@ -71,7 +73,9 @@ static int xe_file_open(struct drm_device *dev, struct drm_file *file)
 	struct xe_drm_client *client;
 	struct xe_file *xef;
 	int ret = -ENOMEM;
+	int uid = -EINVAL;
 	struct task_struct *task = NULL;
+	const struct cred *cred = NULL;
 
 	xef = kzalloc(sizeof(*xef), GFP_KERNEL);
 	if (!xef)
@@ -96,8 +100,16 @@ static int xe_file_open(struct drm_device *dev, struct drm_file *file)
 	file->driver_priv = xef;
 	kref_init(&xef->refcount);
 
+	INIT_LIST_HEAD(&xef->user_link);
+
 	task = get_pid_task(rcu_access_pointer(file->pid), PIDTYPE_PID);
 	if (task) {
+		cred = get_task_cred(task);
+		if (cred) {
+			uid = (unsigned int) cred->euid.val;
+			xe_work_period_attach(xe, xef, uid);
+			put_cred(cred);
+		}
 		xef->process_name = kstrdup(task->comm, GFP_KERNEL);
 		xef->pid = task->pid;
 		put_task_struct(task);
@@ -117,6 +129,8 @@ static void xe_file_destroy(struct kref *ref)
 
 	xe_drm_client_put(xef->client);
 	kfree(xef->process_name);
+
+	xe_work_period_detach(xef);
 	kfree(xef);
 }
 
@@ -302,6 +316,8 @@ static void xe_device_destroy(struct drm_device *dev, void *dummy)
 	if (xe->destroy_wq)
 		destroy_workqueue(xe->destroy_wq);
 
+	xe_work_period_fini(xe);
+
 	ttm_device_fini(&xe->ttm);
 }
 
@@ -346,6 +362,8 @@ struct xe_device *xe_device_create(struct pci_dev *pdev,
 	init_rwsem(&xe->usm.lock);
 
 	xa_init_flags(&xe->usm.asid_to_vm, XA_FLAGS_ALLOC);
+
+	xe_work_period_init(xe);
 
 	if (IS_ENABLED(CONFIG_DRM_XE_DEBUG)) {
 		/* Trigger a large asid and an early asid wrap. */
@@ -904,7 +922,7 @@ void xe_device_td_flush(struct xe_device *xe)
 		xe_device_l2_flush(xe);
 	} else {
 		xe_guc_pc_apply_flush_freq_limit(&gt->uc.guc.pc);
-		
+
 		/* Execute TDF flush on all graphics GTs */
 		for_each_gt(gt, xe, id) {
 			if (xe_gt_is_media_type(gt))
@@ -928,7 +946,7 @@ void xe_device_td_flush(struct xe_device *xe)
 
 			xe_force_wake_put(gt_to_fw(gt), fw_ref);
 		}
-		
+
 		xe_guc_pc_remove_flush_freq_limit(&xe_root_mmio_gt(xe)->uc.guc.pc);
 	}
 }

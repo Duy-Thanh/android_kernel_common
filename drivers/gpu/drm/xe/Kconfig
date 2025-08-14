@@ -124,6 +124,17 @@ config DRM_XE_GPUFREQTRACER
 
 	  If unsure, say N.
 
+config DRM_XE_TRACE_GPU_WORK_PERIOD
+	  bool "Enable XE  GPU work period tracing"
+	  depends on DRM_XE && FTRACE
+	  default n
+	  help
+	    Choose this option to enable tracepoint for tracking
+	    GPU usage based on the UID. Intended for performance
+	    profiling and required for Android.
+
+	    If in doubt, say "N".
+
 menu "drm/Xe Debugging"
 depends on DRM_XE
 depends on EXPERT
