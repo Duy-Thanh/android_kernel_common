@@ -6,6 +6,7 @@
  *          Laurent Pinchart (laurent.pinchart@ideasonboard.com)
  */
 
+#error "Testing pick_prebuilt"
 #include <linux/atomic.h>
 #include <linux/bits.h>
 #include <linux/gpio/consumer.h>
