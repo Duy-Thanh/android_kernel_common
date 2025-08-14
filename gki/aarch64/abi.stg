@@ -54788,6 +54788,12 @@ member {
   offset: 1792
 }
 member {
+  id: 0x415b0b04
+  name: "__kabi_reserved1"
+  type_id: 0x92233392
+  offset: 8320
+}
+member {
   id: 0x415b0b3e
   name: "__kabi_reserved1"
   type_id: 0x92233392
@@ -55247,6 +55253,12 @@ member {
   name: "__kabi_reserved2"
   type_id: 0x89d2d38c
   offset: 5440
+}
+member {
+  id: 0xb116e021
+  name: "__kabi_reserved2"
+  type_id: 0x92233392
+  offset: 8384
 }
 member {
   id: 0xb116e027
@@ -57028,6 +57040,12 @@ member {
   name: "__kabi_reserved_backport1"
   type_id: 0x92233392
   offset: 11840
+}
+member {
+  id: 0x112ba318
+  name: "__kabi_reserved_backport1"
+  type_id: 0x92233392
+  offset: 8256
 }
 member {
   id: 0x112ba34f
@@ -323350,8 +323368,9 @@ struct_union {
     member_id: 0x99d63b14
     member_id: 0x721b09e6
     member_id: 0x5b337c99
-    member_id: 0x415b0c2a
-    member_id: 0xb116edf0
+    member_id: 0x112ba318
+    member_id: 0x415b0b04
+    member_id: 0xb116e021
     member_id: 0x91a931d3
   }
 }
@@ -455465,7 +455484,7 @@ elf_symbol {
   name: "devm_pci_alloc_host_bridge"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2b2f7eca
+  crc: 0x52a2715d
   type_id: 0x68eaecc0
   full_name: "devm_pci_alloc_host_bridge"
 }
@@ -462428,7 +462447,7 @@ elf_symbol {
   name: "dw_handle_msi_irq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x78bbb1f5
+  crc: 0x7b533c30
   type_id: 0x2ba2f0cc
   full_name: "dw_handle_msi_irq"
 }
@@ -462491,7 +462510,13 @@ elf_symbol {
   name: "dw_pcie_find_capability"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (f5b96189577b4ff451c619ab4671d64b029ee188 ANDROID: PCI: Add backport reserved field to struct pci_host)
   crc: 0xedce5b94
+||||||| BASE   (1228a6c19fc562a93a4d721f50c9e9e149ace294 ANDROID: PCI: Add backport reserved field to struct pci_host)
+  crc: 0x58c65bcd
+=======
+  crc: 0x4fabff72
+>>>>>>> CHANGE (ff74b916cafd10304820ad90617cca7254f7dfaa ANDROID: refresh ABI following)
   type_id: 0x5ca118ca
   full_name: "dw_pcie_find_capability"
 }
@@ -462500,7 +462525,13 @@ elf_symbol {
   name: "dw_pcie_find_ext_capability"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (f5b96189577b4ff451c619ab4671d64b029ee188 ANDROID: PCI: Add backport reserved field to struct pci_host)
   crc: 0x3bf5585b
+||||||| BASE   (1228a6c19fc562a93a4d721f50c9e9e149ace294 ANDROID: PCI: Add backport reserved field to struct pci_host)
+  crc: 0x29f7b90b
+=======
+  crc: 0x723e7ab2
+>>>>>>> CHANGE (ff74b916cafd10304820ad90617cca7254f7dfaa ANDROID: refresh ABI following)
   type_id: 0x0ec08f0d
   full_name: "dw_pcie_find_ext_capability"
 }
@@ -462509,7 +462540,7 @@ elf_symbol {
   name: "dw_pcie_host_deinit"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x854b5253
+  crc: 0x6e468ce1
   type_id: 0x19fe25be
   full_name: "dw_pcie_host_deinit"
 }
@@ -462518,7 +462549,7 @@ elf_symbol {
   name: "dw_pcie_host_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x50a63949
+  crc: 0x5a7ab2f4
   type_id: 0x94e69702
   full_name: "dw_pcie_host_init"
 }
@@ -462527,7 +462558,13 @@ elf_symbol {
   name: "dw_pcie_link_up"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (f5b96189577b4ff451c619ab4671d64b029ee188 ANDROID: PCI: Add backport reserved field to struct pci_host)
   crc: 0x60f8e060
+||||||| BASE   (1228a6c19fc562a93a4d721f50c9e9e149ace294 ANDROID: PCI: Add backport reserved field to struct pci_host)
+  crc: 0x4d58ad4b
+=======
+  crc: 0xf346af96
+>>>>>>> CHANGE (ff74b916cafd10304820ad90617cca7254f7dfaa ANDROID: refresh ABI following)
   type_id: 0x92ce345a
   full_name: "dw_pcie_link_up"
 }
@@ -462554,7 +462591,13 @@ elf_symbol {
   name: "dw_pcie_read_dbi"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (f5b96189577b4ff451c619ab4671d64b029ee188 ANDROID: PCI: Add backport reserved field to struct pci_host)
   crc: 0xb62bd120
+||||||| BASE   (1228a6c19fc562a93a4d721f50c9e9e149ace294 ANDROID: PCI: Add backport reserved field to struct pci_host)
+  crc: 0x39076ee1
+=======
+  crc: 0x80d8d72b
+>>>>>>> CHANGE (ff74b916cafd10304820ad90617cca7254f7dfaa ANDROID: refresh ABI following)
   type_id: 0x49afd1e1
   full_name: "dw_pcie_read_dbi"
 }
@@ -462563,7 +462606,13 @@ elf_symbol {
   name: "dw_pcie_resume_noirq"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (f5b96189577b4ff451c619ab4671d64b029ee188 ANDROID: PCI: Add backport reserved field to struct pci_host)
   crc: 0x81b9673a
+||||||| BASE   (1228a6c19fc562a93a4d721f50c9e9e149ace294 ANDROID: PCI: Add backport reserved field to struct pci_host)
+  crc: 0xa8cb982e
+=======
+  crc: 0x940fd9a3
+>>>>>>> CHANGE (ff74b916cafd10304820ad90617cca7254f7dfaa ANDROID: refresh ABI following)
   type_id: 0x92ce345a
   full_name: "dw_pcie_resume_noirq"
 }
@@ -462572,7 +462621,7 @@ elf_symbol {
   name: "dw_pcie_setup_rc"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x50a63949
+  crc: 0x5a7ab2f4
   type_id: 0x94e69702
   full_name: "dw_pcie_setup_rc"
 }
@@ -462581,7 +462630,13 @@ elf_symbol {
   name: "dw_pcie_suspend_noirq"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (f5b96189577b4ff451c619ab4671d64b029ee188 ANDROID: PCI: Add backport reserved field to struct pci_host)
   crc: 0x81b9673a
+||||||| BASE   (1228a6c19fc562a93a4d721f50c9e9e149ace294 ANDROID: PCI: Add backport reserved field to struct pci_host)
+  crc: 0xa8cb982e
+=======
+  crc: 0x940fd9a3
+>>>>>>> CHANGE (ff74b916cafd10304820ad90617cca7254f7dfaa ANDROID: refresh ABI following)
   type_id: 0x92ce345a
   full_name: "dw_pcie_suspend_noirq"
 }
@@ -462590,7 +462645,13 @@ elf_symbol {
   name: "dw_pcie_wait_for_link"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (f5b96189577b4ff451c619ab4671d64b029ee188 ANDROID: PCI: Add backport reserved field to struct pci_host)
   crc: 0x60f8e060
+||||||| BASE   (1228a6c19fc562a93a4d721f50c9e9e149ace294 ANDROID: PCI: Add backport reserved field to struct pci_host)
+  crc: 0x4d58ad4b
+=======
+  crc: 0xf346af96
+>>>>>>> CHANGE (ff74b916cafd10304820ad90617cca7254f7dfaa ANDROID: refresh ABI following)
   type_id: 0x92ce345a
   full_name: "dw_pcie_wait_for_link"
 }
@@ -462608,7 +462669,13 @@ elf_symbol {
   name: "dw_pcie_write_dbi"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (f5b96189577b4ff451c619ab4671d64b029ee188 ANDROID: PCI: Add backport reserved field to struct pci_host)
   crc: 0xb446567b
+||||||| BASE   (1228a6c19fc562a93a4d721f50c9e9e149ace294 ANDROID: PCI: Add backport reserved field to struct pci_host)
+  crc: 0x4cc8e328
+=======
+  crc: 0x2eae31a9
+>>>>>>> CHANGE (ff74b916cafd10304820ad90617cca7254f7dfaa ANDROID: refresh ABI following)
   type_id: 0x1ccc8f30
   full_name: "dw_pcie_write_dbi"
 }
@@ -482183,7 +482250,7 @@ elf_symbol {
   name: "pci_find_host_bridge"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x291244d1
+  crc: 0xe7fd11a6
   type_id: 0x636e6c75
   full_name: "pci_find_host_bridge"
 }
@@ -482300,7 +482367,7 @@ elf_symbol {
   name: "pci_host_probe"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xae3623a9
+  crc: 0xc7f690ae
   type_id: 0x93acae9b
   full_name: "pci_host_probe"
 }
