@@ -495,6 +495,8 @@
   __traceiter_android_vh_mem_cgroup_css_online
   __traceiter_android_vh_mem_cgroup_free
   __traceiter_android_vh_mem_cgroup_id_remove
+  __traceiter_android_vh_sched_move_task
+  __traceiter_android_vh_reweight_entity
   __traceiter_android_vh_meminfo_proc_show
   __traceiter_android_vh_modify_thermal_cpu_get_power
   __traceiter_android_vh_mutex_can_spin_on_owner
@@ -708,6 +710,12 @@
   __tracepoint_android_vh_binder_special_task
   __tracepoint_android_vh_binder_free_buf
   __tracepoint_android_vh_binder_buffer_release
+  __tracepoint_android_vh_sched_move_task
+  __tracepoint_android_vh_reweight_entity
+  cpu_cgrp_subsys
+  css_task_iter_end
+  css_task_iter_next
+  css_task_iter_start
   try_to_free_mem_cgroup_pages
   __ubsan_handle_cfi_check_fail_abort
   unlock_page
