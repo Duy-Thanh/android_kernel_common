@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9ea1d49_7430fc34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-14T05:15:47Z",
+      "side": 1,
+      "message": "Sorry, wrong click. So the size difference is:\n```   text\t   data\t    bss\t    dec\t    hex\tfilename\n30092281\t9760804  651168 40504253\t26a0bbd\tvmlinux\n   text\t   data\t    bss\t    dec\t    hex\tfilename\n30072828\t9747260\t 651104\t40471192\t2698a98\tvmlinux```\n\ndiff: text:19453 data:13544   bss:64  dec:33061  on -kminext branch",
+      "parentUuid": "7c7af5e9_da8b7efd",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39338682_35048cb6",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
