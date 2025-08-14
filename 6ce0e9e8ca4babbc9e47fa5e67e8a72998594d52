@@ -52,6 +52,24 @@
       "parentUuid": "ce062d7b_42edfc45",
       "revId": "6ce0e9e8ca4babbc9e47fa5e67e8a72998594d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca223a21_578bb349",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970076
+      },
+      "writtenOn": "2025-08-14T11:00:26Z",
+      "side": 1,
+      "message": "Adding an extra arg works. Everything will be output to the folder and bazel can build.\n\n```\n./tools/testing/kunit/kunit.py run --build_dir ../kunit_output\n```\n\nIt\u0027ll rely on users to pass this arg. But I think it\u0027s good to not polluting the source tree.\nHi @bettyzhou@google.com, do you have any thoughts on this?",
+      "parentUuid": "c9bb0b8e_6034b210",
+      "revId": "6ce0e9e8ca4babbc9e47fa5e67e8a72998594d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
