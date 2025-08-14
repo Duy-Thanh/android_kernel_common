@@ -415633,15 +415633,6 @@ function {
   parameter_id: 0x4585663f
 }
 function {
-  id: 0x9ce119d6
-  return_type_id: 0x6720d32f
-  parameter_id: 0x019e2530
-  parameter_id: 0x4585663f
-  parameter_id: 0x4585663f
-  parameter_id: 0x4585663f
-  parameter_id: 0x4585663f
-}
-function {
   id: 0x9ce276b7
   return_type_id: 0x6720d32f
   parameter_id: 0x01c5a749
@@ -450855,8 +450846,8 @@ elf_symbol {
   name: "cpufreq_table_index_unsorted"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8c55e819
-  type_id: 0x9ce119d6
+  crc: 0xf77d0714
+  type_id: 0x9ce01ea2
   full_name: "cpufreq_table_index_unsorted"
 }
 elf_symbol {
