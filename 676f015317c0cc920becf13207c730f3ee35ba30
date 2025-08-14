@@ -16,6 +16,24 @@
       "message": "Backports require the sha1 for the upstream patch. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "676f015317c0cc920becf13207c730f3ee35ba30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00096264_d6ed2cd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990142
+      },
+      "writtenOn": "2025-08-14T05:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35e54a2f_b38f5df7",
+      "revId": "676f015317c0cc920becf13207c730f3ee35ba30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
