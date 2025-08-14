@@ -2150,6 +2150,8 @@ static int uvc_probe(struct usb_interface *intf,
 	int function;
 	int ret;
 
+	printk(KERN_ERR "%s:%d %s\n", __FILE__, __LINE__, __func__);
+
 	/* Allocate memory for the device and initialize it. */
 	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
 	if (dev == NULL)
