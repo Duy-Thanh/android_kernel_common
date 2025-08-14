@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e46083_603ea0e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-14T10:35:09Z",
+      "side": 1,
+      "message": "Does this actually break the KMI?\n\nAnd why can\u0027t these be modules?",
+      "revId": "bebd554e92628f4d2387308d1b61a5648f3b791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
