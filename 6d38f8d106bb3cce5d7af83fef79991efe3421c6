@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c7af5e9_da8b7efd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-14T04:31:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e127166_272b337b",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39338682_35048cb6",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
@@ -166,6 +184,24 @@
       "side": 1,
       "message": "May be so, I saw GKI_HIDDEN_QCOM_CONFIGS does not use this condition so I skipped it but fine by me adding it.",
       "parentUuid": "5bb26164_70fc38f6",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b817658_d5d6caa7",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-14T04:31:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f92c771b_9758661e",
       "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
