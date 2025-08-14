@@ -3340,7 +3340,12 @@ static struct list_head *get_populated_pcp_list(struct zone *zone,
 	if (list_empty(list)) {
 		int batch = READ_ONCE(pcp->batch);
 		int alloced;
+		int ret;
 
+#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
+		trace_android_vh_nr_pcp_alloc(pcp, zone, order, &ret);
+		batch = ret;
+#endif
 		trace_android_vh_rmqueue_bulk_bypass(order, pcp, migratetype, list);
 		if (!list_empty(list))
 			return list;
@@ -3641,6 +3646,7 @@ static void free_unref_page_commit(struct zone *zone, struct per_cpu_pages *pcp,
 	int pindex;
 	bool free_high;
 
+	trace_android_vh_pcp_alloc_factor_adjust(zone, pcp, page, migratetype, order);
 	__count_vm_events(PGFREE, 1 << order);
 	pindex = order_to_pindex(migratetype, order);
 	list_add(&page->pcp_list, &pcp->lists[pindex]);
