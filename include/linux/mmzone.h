@@ -716,6 +716,10 @@ struct per_cpu_pages {
 	struct list_head lists[NR_PCP_LISTS];
 } ____cacheline_aligned_in_smp;
 
+struct per_cpu_zone_extra_data {
+	unsigned long	__percpu *pad;
+};
+
 struct per_cpu_zonestat {
 #ifdef CONFIG_SMP
 	s8 vm_stat_diff[NR_VM_ZONE_STAT_ITEMS];
