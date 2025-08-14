@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0396183_a5b649dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-14T07:37:21Z",
+      "side": 1,
+      "message": "I removed the MEDIATEK_WATCHDOG config after checking that it can be set to vendor module. The new values are:\n\n```   text\t   data\t    bss\t    dec\t    hex\tfilename\n30072828 9747260  651104  40471192\t2698a98\tvmlinux\n   text\t   data\t    bss\t    dec\t    hex\tfilename\n30090371\t9756636\t 651104\t40498111\t269f3bf\tvmlinux```\n\ndiff: text:17543 data:9376 bss:0 dec:26919",
+      "parentUuid": "c9ea1d49_7430fc34",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39338682_35048cb6",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
@@ -149,6 +167,24 @@
       "side": 1,
       "message": "Hmm. I see it now. I must have looked on the wrong branch. Sorry about that.",
       "parentUuid": "5fe47fd4_8b9960b8",
+      "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ef735c_14f85f2b",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-08-14T07:37:21Z",
+      "side": 1,
+      "message": "I tested the MEDIATEK_WATCHDOG as vendor module and it can be removed from this patch. Updated the patch and size info.",
+      "parentUuid": "a7990c1c_0778a66c",
       "revId": "6d38f8d106bb3cce5d7af83fef79991efe3421c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
