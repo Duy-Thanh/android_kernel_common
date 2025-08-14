@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32bb0a66_7b4db7c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-14T14:31:53Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 47
+      },
+      "revId": "86b96334e07fde3a2acf20d91a6c42cb9bc0bae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4dbfbe4_1a349648",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-14T14:31:53Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this check just be `if (spm_free_handle)` ? In which situation can be it non-NULL but out of range?",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 0
+      },
+      "revId": "86b96334e07fde3a2acf20d91a6c42cb9bc0bae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
