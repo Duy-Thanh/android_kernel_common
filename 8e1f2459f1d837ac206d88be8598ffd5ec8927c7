@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06161ee_7ea2feea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-14T12:52:40Z",
+      "side": 1,
+      "message": "cpufreq_table_index_unsorted is in multiple vendor symbol lists and is not source compatible.",
+      "revId": "8e1f2459f1d837ac206d88be8598ffd5ec8927c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
