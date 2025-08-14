@@ -209,6 +209,24 @@
       "message": "Do this inside pkvm_init_finalise()?",
       "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "395638d0_75aababc",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1433,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-14T18:50:28Z",
+      "side": 1,
+      "message": "Just recalled that in aosp/3590992 you move it elsewhere anyway...",
+      "parentUuid": "7d29a17a_9a8e92f7",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
