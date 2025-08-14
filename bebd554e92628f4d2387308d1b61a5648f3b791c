@@ -34,6 +34,24 @@
       "parentUuid": "e6e46083_603ea0e4",
       "revId": "bebd554e92628f4d2387308d1b61a5648f3b791c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d3cb68_da850e0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-14T14:16:04Z",
+      "side": 1,
+      "message": "Doesn\u0027t look like it breaks the KMI, so no need to wait for this break period, right?",
+      "parentUuid": "6cf8f58a_e0fca29f",
+      "revId": "bebd554e92628f4d2387308d1b61a5648f3b791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
