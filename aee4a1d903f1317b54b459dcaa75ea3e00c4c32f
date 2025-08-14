@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "207440e2_4b2d18e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3594453
+      },
+      "writtenOn": "2025-08-14T07:32:39Z",
+      "side": 1,
+      "message": "The v2 of the patch is cherry picked FROMGIT on the partner-android pa/3404912.\n\nWe should\n1. move cros_ec_typec to ddk - see pa/3404911\n2. revert this change (and the other change from the topic) \n3. wait for propagation to pa\n4. merge pa/3404912 on top.\n\nNote about timing: We should revert it right after the prebuilts are pushed such that there is enough time for this revert to be propagated to the partner-android and pa/3404912 to be merged on top before the next prebuilts push. This way we would avoid releasing a new android image without role swap working.",
+      "revId": "aee4a1d903f1317b54b459dcaa75ea3e00c4c32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
