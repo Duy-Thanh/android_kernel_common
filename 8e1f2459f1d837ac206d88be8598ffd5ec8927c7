@@ -16,6 +16,24 @@
       "message": "cpufreq_table_index_unsorted is in multiple vendor symbol lists and is not source compatible.",
       "revId": "8e1f2459f1d837ac206d88be8598ffd5ec8927c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "426ced05_7dc2af43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-14T13:51:03Z",
+      "side": 1,
+      "message": "That is due to drivers calling `cpufreq_frequency_table_target()` which is an inline function.  When they rebuild, this change will automatically work for them.",
+      "parentUuid": "c06161ee_7ea2feea",
+      "revId": "8e1f2459f1d837ac206d88be8598ffd5ec8927c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
