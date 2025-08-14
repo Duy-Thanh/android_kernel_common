@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d881bfa_f8d87fac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-14T00:02:13Z",
+      "side": 1,
+      "message": "Why is this reverted? It was added earlier in this same series, no? Should it just be dropped or is there something I\u0027m missing that necessitates it?",
+      "revId": "3e866c99e06867c37a8d79efa412339e867e195c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
