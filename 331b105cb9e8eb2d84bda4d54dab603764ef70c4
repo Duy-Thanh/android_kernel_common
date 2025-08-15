@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2f6da5_ab9b1327",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ae9255bf_93b72cd7",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aad567b_7e6e372e",
@@ -71,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18888960_4fb960e7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8aad567b_7e6e372e",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9aa6a157_72072efb",
@@ -84,6 +120,24 @@
       "writtenOn": "2025-08-14T18:46:16Z",
       "side": 1,
       "message": "The name \"pkvm_protect_setup\" sounds like there is some \"setup\", and this flags controls whether we should protect this setup or not. :)\n\nAnd the above comment is misleading (apart from being IMHO too detailed): not all steps needed for protection from host VM are completed: EPT is enabled on just one CPU, and IOMMU protection is rather not enabled at all?\n\nSo maybe something like e.g. `pkvm_setup_done`, and comment about what is actually important here (and not so obvious from the code), e.g.:\n\n```\n/*\n * This flag indicates, in particular, that the host EPT is set up\n * and is enabled on at least one CPU. It does *not* indicate yet\n * that pkvm is fully initialized.\n */\nstatic bool pkvm_setup_done __ro_after_init;\n```\n\nBTW \"is enabled on at least one CPU\" is important since, for example, if protect_pkvm_pages() succeeds (so the hypervisor memory is unmapped from the host EPT) but then create_iommu() fails, we return failure without setting this flag to true, so in pkvm_undo_finalise() we don\u0027t restore the mapping for the hypervisor memory in the host EPT, but that\u0027s ok since none of the CPUs has switched to this EPT.",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "637412e8_8bcc1e34",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9aa6a157_72072efb",
       "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -143,6 +197,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fea8f3e_470b3dfb",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e25037a3_f7d4ad1a",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5e05d9a_e85a3bd0",
@@ -156,6 +228,24 @@
       "writtenOn": "2025-08-14T18:46:16Z",
       "side": 1,
       "message": "This may fail at least in theory, we might want to at least log the error? (Did I already comment about this?)",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c296064_3d672a56",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Yeah you mentioned it in iommu.c and I fixed it there, sorry that I did not realize we had another instance here. Fixed all the places to log error",
+      "parentUuid": "d5e05d9a_e85a3bd0",
       "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -177,6 +267,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "166046c4_be846a56",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "The VCPU_* macros was generic enough that I thought it could reside in pkvm_hyp.h and then tagged along rest of the macros as well. As you mentioned, its not used else where and I shall move this back to reprivilege code.",
+      "parentUuid": "1d2addce_fb780fd6",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4718d5df_fc7de661",
@@ -190,6 +298,24 @@
       "writtenOn": "2025-08-14T18:46:16Z",
       "side": 1,
       "message": "-EPERM seems more appropriate?",
+      "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f63d44_072c720a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4718d5df_fc7de661",
       "revId": "331b105cb9e8eb2d84bda4d54dab603764ef70c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

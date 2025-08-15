@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b672a2_d252efa0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fa1bc6cf_eb61f5c0",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f838e18_c5a9606a",
@@ -127,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5badcdb4_bb5a4755",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "`pkvm_host_reprivilege_cpus` uses this. It goes through each vcpu and `hvcpu-\u003evmx.vcpu.mode` is `OUTSIDE_GUEST_MODE`, its skips reprivileging that cpu. hvcpu is a field in pkvm_hyp that I access during reprivilege",
+      "parentUuid": "a806a1d8_b18bbe1b",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6dbb0fb_c7643b49",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
         "patchSetId": 11
@@ -178,6 +214,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e4f12bb_7816f99c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d9015643_598e93f6",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4203a03a_f626ce5a",
@@ -213,6 +267,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca1607c9_0931fd08",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fde8b289_02eb960d",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5aadec6b_ca96cba2",
@@ -244,6 +316,24 @@
       "side": 1,
       "message": "make sense!",
       "parentUuid": "5aadec6b_ca96cba2",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa0c40a_56704900",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/reprivilege.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "13c3efd4_b135c7ba",
       "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -295,6 +385,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "849a71b9_cdbc86b0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/reprivilege.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "433fce5f_05adee2d",
+      "range": {
+        "startLine": 118,
+        "startChar": 22,
+        "endLine": 118,
+        "endChar": 25
+      },
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "945f9618_48f3f34e",
@@ -326,6 +440,24 @@
       "side": 1,
       "message": "Agreed, adding that check.",
       "parentUuid": "945f9618_48f3f34e",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed6c038a_16affcef",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-15T02:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "068c4725_904c66bb",
       "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
