@@ -196,11 +196,17 @@ def get_kunit_modules_list(arch = None):
     elif arch == "arm64":
         kunit_modules_list += _KUNIT_CLK_MODULES_LIST
     elif arch == "i386":
-        kunit_modules_list += []
+        kunit_modules_list.append("drivers/clk/clk_kunit_helpers.ko")
     elif arch == "x86_64":
+<<<<<<< HEAD   (af886514b619b5952bbfee8f3cfce291a2c19591 ANDROID: riscv: GKI: defconfig: Enable a few zram configs)
         kunit_modules_list += []
     elif arch == "riscv64":
         kunit_modules_list += []
+||||||| BASE   (0ea17863e84a3a60fd8f35767aa493e1cd5ff5b5 ANDROID: incfs: handle lookup_one_len() api change in 6.16-r)
+        kunit_modules_list += []
+=======
+        kunit_modules_list.append("drivers/clk/clk_kunit_helpers.ko")
+>>>>>>> BRANCH (833391244f08915513d4d1bbb7e33cd0bc2942a8 ANDROID: GKI: x86: Enable Intel Low Power Subsystem)
     else:
         fail("{}: arch {} not supported. Use one of [arm, arm64, i386, x86_64, riscv64]".format(
             str(native.package_relative_label(":x")).removesuffix(":x"),
