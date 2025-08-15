@@ -1,0 +1,214 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff83f68_5987bb87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-15T23:48:59Z",
+      "side": 1,
+      "message": "Rejecting because of the ANDROID_OEM_DATA(1) addition which breaks ABI.",
+      "revId": "1f97badfca9ed71b7af0fdaba19f36f1af1f95f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1275483_d2e5d9c2",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-15T23:48:59Z",
+      "side": 1,
+      "message": "I don\u0027t think you can do this on a kernel with frozen ABI.",
+      "range": {
+        "startLine": 717,
+        "startChar": 1,
+        "endLine": 717,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c36489c5_9e4012ae",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 717,
+                "startChar": 0,
+                "endLine": 718,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long pad;\n"
+            },
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 1292,
+                "startChar": 0,
+                "endLine": 1293,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 1295,
+                "startChar": 0,
+                "endLine": 1296,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long pad;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1f97badfca9ed71b7af0fdaba19f36f1af1f95f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f23203e5_4704bb4b",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3345,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-15T23:48:59Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "range": {
+        "startLine": 3344,
+        "startChar": 0,
+        "endLine": 3345,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3e3aa2b3_5076f70c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3344,
+                "startChar": 0,
+                "endLine": 3345,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "1f97badfca9ed71b7af0fdaba19f36f1af1f95f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7e5c87_d37d39d8",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3347,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-15T23:48:59Z",
+      "side": 1,
+      "message": "No, this is wrong. If trace_android_vh_nr_pcp_alloc() is not attached to a handler, ret will be uninitialized, so you will be setting `batch` to an uninitialized random value. Instead do `trace_android_vh_nr_pcp_alloc(pcp, zone, order, \u0026batch);`",
+      "range": {
+        "startLine": 3347,
+        "startChar": 2,
+        "endLine": 3347,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4212903e_26494aa7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3343,
+                "startChar": 0,
+                "endLine": 3344,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3346,
+                "startChar": 0,
+                "endLine": 3348,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_nr_pcp_alloc(pcp, zone, order, \u0026batch);\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3681,
+                "startChar": 0,
+                "endLine": 3682,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3687,
+                "startChar": 0,
+                "endLine": 3689,
+                "endChar": 0
+              },
+              "replacement": "\tif (trace_android_vh_free_unref_page_bypass(page, order, migratetype))\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3731,
+                "startChar": 0,
+                "endLine": 3732,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3753,
+                "startChar": 0,
+                "endLine": 3755,
+                "endChar": 0
+              },
+              "replacement": "\tif (trace_android_vh_free_unref_page_list_bypass(list))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1f97badfca9ed71b7af0fdaba19f36f1af1f95f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
