@@ -1,0 +1,114 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f75baaf_ee92574c",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-15T14:51:39Z",
+      "side": 1,
+      "message": "Put with its friends.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 32
+      },
+      "revId": "6994fcad2b9b26005b6e48b287c6f1c3afd61917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bde78a2_8bea19b2",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-15T14:51:39Z",
+      "side": 1,
+      "message": "Check to see if surrounding code has these superfluous ().",
+      "range": {
+        "startLine": 348,
+        "startChar": 20,
+        "endLine": 348,
+        "endChar": 52
+      },
+      "revId": "6994fcad2b9b26005b6e48b287c6f1c3afd61917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1472ed0d_8b703a26",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-15T14:51:39Z",
+      "side": 1,
+      "message": "No (()).",
+      "range": {
+        "startLine": 354,
+        "startChar": 1,
+        "endLine": 356,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "89bed549_eee29f0d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/module/main.c",
+              "range": {
+                "startLine": 354,
+                "startChar": 0,
+                "endLine": 356,
+                "endChar": 0
+              },
+              "replacement": "\tfsa-\u003elicense \u003d\n\t\t(sym_flags \u0026 KSYM_FLAG_GPL_ONLY) ? GPL_ONLY : NOT_GPL_ONLY;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6994fcad2b9b26005b6e48b287c6f1c3afd61917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3182ffda_c0cb105c",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-15T14:51:39Z",
+      "side": 1,
+      "message": "New local, const.",
+      "range": {
+        "startLine": 382,
+        "startChar": 1,
+        "endLine": 387,
+        "endChar": 4
+      },
+      "revId": "6994fcad2b9b26005b6e48b287c6f1c3afd61917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
