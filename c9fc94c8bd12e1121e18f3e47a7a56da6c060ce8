@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580d7c84_6e94abc7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-15T02:01:35Z",
+      "side": 1,
+      "message": "There is a security issue here. A malicious host can create a PGD (with a full page mapping) and give it to pkvm to set it in it\u0027s context table. This will allow host to potentially access any memory.\n\nBefore setting the context, we should verify that the PGD is safe. To check for the PGD\u0027s safety we must iterate through all the entries in the PGD and if the entry is set, we should ensure that it points to a page owned by the hypervisor.",
+      "revId": "c9fc94c8bd12e1121e18f3e47a7a56da6c060ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
