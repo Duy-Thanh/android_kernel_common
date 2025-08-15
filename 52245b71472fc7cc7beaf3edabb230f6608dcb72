@@ -142,6 +142,24 @@
       "parentUuid": "7e10ef4f_1ad62655",
       "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab0b13b0_4088db89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-15T16:42:13Z",
+      "side": 1,
+      "message": "KMI freeze is now over, however this is still an internal set of functions and apis that you are wanting access to, without ANY of the proper padding to allow that to happen correctly over time.  Given that your drivers are not public yet, we can not know what needs to be padded properly, so there\u0027s not much we can do here, sorry.",
+      "parentUuid": "9f7e326c_11756fa7",
+      "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
