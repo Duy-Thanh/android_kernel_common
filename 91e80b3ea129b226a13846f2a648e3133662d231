@@ -213,6 +213,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7297339b_92bd018e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-08-15T06:51:59Z",
+      "side": 1,
+      "message": "Given that today is the deadline for KMI thaw - could you please revisit and review again this change? It has not landed on linux mainline, so I hope we can push FROMLIST here.",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3408cc01_c4faeaa9",
