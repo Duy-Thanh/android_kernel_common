@@ -232,6 +232,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a8fa44e_116c6744",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-15T08:04:02Z",
+      "side": 1,
+      "message": "I wouldn\u0027t worry too much. The extra bool fits in a hole so we can use existing ABI allowed break / CRC stabilisation mechanisms to land the change at a later date.",
+      "parentUuid": "c89d8a76_0b77838c",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3408cc01_c4faeaa9",
         "filename": "include/drm/drm_bridge.h",
         "patchSetId": 1
