@@ -16,6 +16,24 @@
       "message": "This is a clean cherry-pick so it should be labeled as UPSTREAM",
       "revId": "d1377312b8b6a32eaeaabd0a0971d4deba81159b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "415b4f18_48c9dd64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1990142
+      },
+      "writtenOn": "2025-08-15T16:14:36Z",
+      "side": 1,
+      "message": "Thanks for checking",
+      "parentUuid": "e107e0ff_72fd1e8d",
+      "revId": "d1377312b8b6a32eaeaabd0a0971d4deba81159b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
