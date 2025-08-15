@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2e69f6_bb5add5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-15T04:37:39Z",
+      "side": 1,
+      "message": "I\u0027ve cherry-picked this to go in via andorid16-6.12, so I don\u0027t think its needed to go in for KMInext.",
+      "revId": "14f4331d8e4ef51130d77c7e00031796bc655827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
