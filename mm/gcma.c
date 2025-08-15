@@ -14,6 +14,7 @@
 #include <linux/slab.h>
 #include <linux/xarray.h>
 #include "gcma_sysfs.h"
+#include "internal.h"
 
 /*
  * page->page_type : area id
@@ -602,6 +603,7 @@ again:
 void gcma_alloc_range(unsigned long start_pfn, unsigned long end_pfn)
 {
 	int i;
+	unsigned long pfn;
 	struct gcma_area *area;
 	int nr_area = atomic_read(&nr_gcma_area);
 
@@ -620,6 +622,19 @@ void gcma_alloc_range(unsigned long start_pfn, unsigned long end_pfn)
 
 		__gcma_discard_range(area, s_pfn, e_pfn);
 	}
+<<<<<<< HEAD   (d1c52ce211834c06e70f38c6832a6cba932b5edb UPSTREAM: tls: always refresh the queue when reading sock)
+||||||| BASE   (830a2dadaa8fc019f8238b1adc292b5de1e7eea5 ANDROID: GKI: Add empty symbol list for meizu)
+	gcma_stat_add(ALLOCATED_PAGE, end_pfn - start_pfn + 1);
+=======
+	gcma_stat_add(ALLOCATED_PAGE, end_pfn - start_pfn + 1);
+
+	/*
+	 * GCMA returns pages with refcount 1 and expects them to have
+	 * the same refcount 1 whet they are freed.
+	 */
+	for (pfn = start_pfn; pfn <= end_pfn; pfn++)
+		set_page_count(pfn_to_page(pfn), 1);
+>>>>>>> CHANGE (3f3a5c5e782d183bab668b1bd992e6812494f798 ANDROID: ensure pages allocated from GCMA are correctly refc)
 }
 EXPORT_SYMBOL_GPL(gcma_alloc_range);
 
@@ -631,6 +646,10 @@ void gcma_free_range(unsigned long start_pfn, unsigned long end_pfn)
 	int area_id, start_id = 0;
 
 	VM_BUG_ON(irqs_disabled());
+
+	/* The caller should ensure no other users when freeing */
+	for (pfn = start_pfn; pfn <= end_pfn; pfn++)
+		WARN_ON(!page_ref_dec_and_test(pfn_to_page(pfn)));
 
 	local_irq_disable();
 
