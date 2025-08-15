@@ -16,6 +16,24 @@
       "message": "I\u0027ve cherry-picked this to go in via andorid16-6.12, so I don\u0027t think its needed to go in for KMInext.",
       "revId": "14f4331d8e4ef51130d77c7e00031796bc655827",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7f4cb7_aa0e1283",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-15T08:14:28Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll abandon this one. There is zero KMI impact.",
+      "parentUuid": "3f2e69f6_bb5add5e",
+      "revId": "14f4331d8e4ef51130d77c7e00031796bc655827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
