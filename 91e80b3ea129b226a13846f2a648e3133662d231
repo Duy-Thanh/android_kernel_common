@@ -250,6 +250,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "707c1122_b2662cf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-08-15T08:10:26Z",
+      "side": 1,
+      "message": "Thanks Giuliano! If that\u0027s the case we can merge it after KMI thaw then I\u0027m okay with waiting until the patch lands on the linux mainline and taking it as FROMGIT.",
+      "parentUuid": "6a8fa44e_116c6744",
+      "revId": "91e80b3ea129b226a13846f2a648e3133662d231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3408cc01_c4faeaa9",
         "filename": "include/drm/drm_bridge.h",
         "patchSetId": 1
