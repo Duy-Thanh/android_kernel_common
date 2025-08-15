@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb3373d2_b528f293",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-15T14:40:37Z",
+      "side": 1,
+      "message": "No ( ).",
+      "range": {
+        "startLine": 251,
+        "startChar": 7,
+        "endLine": 251,
+        "endChar": 52
+      },
+      "revId": "50ca07aaff3be7ce4973f23788342919fb95d036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
