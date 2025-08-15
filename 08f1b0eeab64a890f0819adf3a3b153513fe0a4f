@@ -161,6 +161,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ee290a7_085a7eab",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-15T11:32:37Z",
+      "side": 1,
+      "message": "Ah indeed, thanks.",
+      "parentUuid": "5badcdb4_bb5a4755",
+      "revId": "08f1b0eeab64a890f0819adf3a3b153513fe0a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6dbb0fb_c7643b49",

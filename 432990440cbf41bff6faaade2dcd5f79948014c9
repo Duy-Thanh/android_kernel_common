@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2de1b4e_661cd956",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-15T11:32:37Z",
+      "side": 1,
+      "message": "nit: s/and/but/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "0618871e_2fa2e0fc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 309,
+                "startChar": 0,
+                "endLine": 310,
+                "endChar": 0
+              },
+              "replacement": " * on at least one cpu but does not indicate pkvm is fully initialized.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "432990440cbf41bff6faaade2dcd5f79948014c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
