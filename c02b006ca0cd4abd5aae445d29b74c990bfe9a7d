@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deedbf62_2881cf10",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-16T00:07:29Z",
+      "side": 1,
+      "message": "We should also ensure that the root page is 0 initialized or memset it to 0. A malicious host may provide an already filled root page.",
+      "revId": "c02b006ca0cd4abd5aae445d29b74c990bfe9a7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
