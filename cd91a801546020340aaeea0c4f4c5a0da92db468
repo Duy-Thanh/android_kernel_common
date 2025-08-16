@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f082ae44_bdf27249",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-08-16T14:22:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c7b7043_aaf7871f",
+      "range": {
+        "startLine": 9,
+        "startChar": 49,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "cd91a801546020340aaeea0c4f4c5a0da92db468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfedcc84_b4518e58",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-08-15T18:44:32Z",
       "side": 1,
       "message": "while at it, this probably deserves a \u0027else ...-\u003euid \u003d \u003csomething\u003e\u0027 clause either  0 or global root or -1",
+      "revId": "cd91a801546020340aaeea0c4f4c5a0da92db468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceddb8bb_ac4bee9f",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-08-16T14:22:01Z",
+      "side": 1,
+      "message": "Sound good, I\u0027ll add this in a separate patch.",
+      "parentUuid": "dfedcc84_b4518e58",
       "revId": "cd91a801546020340aaeea0c4f4c5a0da92db468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
