@@ -475391,6 +475391,15 @@ elf_symbol {
   full_name: "lowpan_unregister_netdevice"
 }
 elf_symbol {
+  id: 0x0f6e0660
+  name: "lru_add_drain"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd272d446
+  type_id: 0x10985193
+  full_name: "lru_add_drain"
+}
+elf_symbol {
   id: 0x786bc3fa
   name: "lru_cache_disable"
   is_defined: true
@@ -515763,6 +515772,7 @@ interface {
   symbol_id: 0xbc74f02a
   symbol_id: 0x01bea327
   symbol_id: 0x4f31c756
+  symbol_id: 0x0f6e0660
   symbol_id: 0x786bc3fa
   symbol_id: 0x9a75fb33
   symbol_id: 0x4507edab
