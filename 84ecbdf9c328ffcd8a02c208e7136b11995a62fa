@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f369318_7295245d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-18T18:31:10Z",
+      "side": 1,
+      "message": "Ok, didn\u0027t realize that interrupt remapping uses QI too (QI_IEC). Makes sense.",
+      "parentUuid": "7865b1d3_24ca2653",
+      "range": {
+        "startLine": 1294,
+        "startChar": 39,
+        "endLine": 1295,
+        "endChar": 65
+      },
+      "revId": "84ecbdf9c328ffcd8a02c208e7136b11995a62fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55aafeba_2a3955c6",
@@ -103,6 +127,24 @@
       "side": 1,
       "message": "\u003e What guarantees that qw0 is zero (not some random undefined value) if the host hasn\u0027t issued any invalidation requests?\n\nI checked the iommu driver code and the descriptor page is zeroed before using. So that should guarantee that qw0 is zero if not used.\n\n\u003e Also, since this patch is fixing the issue for you, I understand that when you are observing the issue (without this patch), qw0 is zero, so the below QI_DESC_TYPE(wait_desc-\u003eqw0) !\u003d QI_IWD_TYPE check fails? So, what this patch actually prevents is the below -EINVAL failure, not endless waiting for the queue to quiesce? Or am I missing something?\n\nYes correct, we are fixing EINVAL return which causes the qi subsystem in a bad state and causes stall. I did not understand what you actually meant - Do you mean to say that we need not have the while loop in the if block? Or is it that the commit message needs to be reworded?",
       "parentUuid": "55aafeba_2a3955c6",
+      "revId": "84ecbdf9c328ffcd8a02c208e7136b11995a62fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bc58d5_6d33c0c7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-18T18:31:10Z",
+      "side": 1,
+      "message": "\u003e I checked the iommu driver code and the descriptor page is zeroed before using. So that should guarantee that qw0 is zero if not used.\n\nOk, seems correct. But I think it should be mentioned in the comment, instead of just \"...if its a valid descriptor\" (since it is not obvious why \"descriptor is valid\" \u003d\u003d \"descriptor is non-zero\" in this case).\n\n\u003e Yes correct, we are fixing EINVAL return which causes the qi subsystem in a bad state and causes stall. I did not understand what you actually meant - Do you mean to say that we need not have the while loop in the if block? Or is it that the commit message needs to be reworded?\n\nOk, I was just asking if I correctly understand what\u0027s going on. From what Aashish told me before, I had an impression that the stall was directly caused by spinning waiting for QI_DONE (which is why it was just hanging, not crashing and not rebooting). While as I understand now, it was indirectly caused by pKVM initialization failure (triggered by this -EINVAL) which left the system in an invalid state (IOMMU MMIO already protected but not properly virtualized). Correct?",
+      "parentUuid": "32018b1a_3756fd38",
       "revId": "84ecbdf9c328ffcd8a02c208e7136b11995a62fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
