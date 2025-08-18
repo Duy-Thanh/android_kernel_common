@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "306f675b_7c27c191",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-18T19:24:53Z",
+      "side": 1,
+      "message": "No, you still can\u0027t do this. It will break the ABI. You will have to store it separately outside of per_cpu_pages. Something like this:\n```\nstruct per_cpu_zone_extra_data {\n    unsigned long\t__percpu *per_cpu_pageset;\n};\n\nstruct per_cpu_zone_extra_data zones_extra_data[MAX_NR_ZONES];\n```\nObviously you will need to initialize/free this array in `setup_zone_pageset/zone_pcp_reset`",
+      "range": {
+        "startLine": 717,
+        "startChar": 15,
+        "endLine": 717,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c9e4357a_a6d4ca6c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 717,
+                "startChar": 0,
+                "endLine": 717,
+                "endChar": 0
+              },
+              "replacement": "} ____cacheline_aligned_in_smp;\n\nstruct per_cpu_zone_extra_data {\n"
+            },
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 862,
+                "startChar": 0,
+                "endLine": 862,
+                "endChar": 0
+              },
+              "replacement": "\tstruct per_cpu_zone_extra_data __percpu *per_cpu_zone_extra_data;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9d610f34ee23aa8cd270a5328d64ac02ab8ae008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a53876bc_a7373a7b",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3343,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-18T19:24:53Z",
+      "side": 1,
+      "message": "Again, why do you need this #ifdef, can you explain?",
+      "range": {
+        "startLine": 3343,
+        "startChar": 7,
+        "endLine": 3343,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7173a741_09f9c57b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3343,
+                "startChar": 0,
+                "endLine": 3344,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3345,
+                "startChar": 0,
+                "endLine": 3346,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "9d610f34ee23aa8cd270a5328d64ac02ab8ae008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

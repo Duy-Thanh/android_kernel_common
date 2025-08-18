@@ -79,6 +79,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e667f0a_37c1a6d6",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-18T19:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1275483_d2e5d9c2",
+      "range": {
+        "startLine": 717,
+        "startChar": 1,
+        "endLine": 717,
+        "endChar": 24
+      },
+      "revId": "1f97badfca9ed71b7af0fdaba19f36f1af1f95f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f23203e5_4704bb4b",
@@ -207,6 +231,30 @@
           ]
         }
       ],
+      "revId": "1f97badfca9ed71b7af0fdaba19f36f1af1f95f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fca0b3d_76bff00b",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3347,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-18T19:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c7e5c87_d37d39d8",
+      "range": {
+        "startLine": 3347,
+        "startChar": 2,
+        "endLine": 3347,
+        "endChar": 14
+      },
       "revId": "1f97badfca9ed71b7af0fdaba19f36f1af1f95f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
