@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93b2b3b2_285f3f8a",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-18T14:59:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d335d324_13d53fe3",
+      "range": {
+        "startLine": 212,
+        "startChar": 40,
+        "endLine": 212,
+        "endChar": 49
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea44ec85_722e9254",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-08-07T15:00:27Z",
       "side": 1,
       "message": "Put these two in a struct and have the module register one of those instead?",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 0
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccea245d_ad90a3f0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-18T14:59:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea44ec85_722e9254",
       "range": {
         "startLine": 240,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9c2b3c6_737eb62e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-18T14:59:33Z",
+      "side": 1,
+      "message": "\u003e Do we actually need the memory barriers here? \n\nI mimicked the `mod_handlers` logic. However you\u0027re right, we don\u0027t expect the module to register the ops after the modules are initialized, if the module does so it is just a bad implementation. \n\nMaybe `__ro_after_init` would make more sense here?",
+      "parentUuid": "282a0a9a_f3f39b57",
+      "range": {
+        "startLine": 246,
+        "startChar": 5,
+        "endLine": 246,
+        "endChar": 22
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24b5121d_d08cbf8d",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 4
@@ -83,6 +155,30 @@
       "writtenOn": "2025-08-07T15:00:27Z",
       "side": 1,
       "message": "Do we really care about SMC32? Perhaps only expose SMC64 to the module implementation.",
+      "range": {
+        "startLine": 1725,
+        "startChar": 8,
+        "endLine": 1725,
+        "endChar": 33
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a769366_0e4ce6b7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1725,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-18T14:59:33Z",
+      "side": 1,
+      "message": "\u003e Do we really care about SMC32? \n\nHonestly I think we don\u0027t, most of the use cases seem to rely on SMC64. Yet I think we should leave it, unless SMC32 bloats the code too much. TF-A implements both at the same time, and it should be as close to it as possible.",
+      "parentUuid": "24b5121d_d08cbf8d",
       "range": {
         "startLine": 1725,
         "startChar": 8,
@@ -134,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f72ca34_7d6fec06",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1732,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-18T14:59:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d0c06c8_57ccba97",
+      "range": {
+        "startLine": 1732,
+        "startChar": 13,
+        "endLine": 1732,
+        "endChar": 14
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d92e884_4663cb20",
@@ -157,6 +277,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d936182_f140628b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1746,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-18T14:59:33Z",
+      "side": 1,
+      "message": "I wanted to sanitize the return values to make sure that the vendor implementation would adhere to the spec and limit potential abuse to implement other functionality using those HVCs. However I think I went too far with it. Done.",
+      "parentUuid": "2d92e884_4663cb20",
+      "range": {
+        "startLine": 1746,
+        "startChar": 6,
+        "endLine": 1746,
+        "endChar": 7
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31e69875_ec65ddfc",
@@ -170,6 +314,30 @@
       "writtenOn": "2025-08-07T15:00:27Z",
       "side": 1,
       "message": "Why do we care about endianness here?",
+      "range": {
+        "startLine": 1749,
+        "startChar": 0,
+        "endLine": 1756,
+        "endChar": 0
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66afc5d4_3b2170c3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-18T14:59:33Z",
+      "side": 1,
+      "message": "The module would fill the entropy buffer in little endian. On the odd change of ARM64 big endian device running this code, it would fail.",
+      "parentUuid": "31e69875_ec65ddfc",
       "range": {
         "startLine": 1749,
         "startChar": 0,
