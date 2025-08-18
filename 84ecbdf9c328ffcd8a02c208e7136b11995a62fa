@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7865b1d3_24ca2653",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-18T16:47:47Z",
+      "side": 1,
+      "message": "This issue was seen after aosp/3590992. The very initial invalidation requests are from Interrupt remapping and I believe this is a timing issue that was uncovered when we delayed the iommu initialization. On fatcat, with the iommu init delay, we reach this code earlier and interrupt remapping wouldn\u0027t have got a chance to issue the invalidation. The theory is that - interrupt remapping on ADL might be quicker to issue the invalidation so that we don\u0027t see this issue. Verification of this theory is a TODO, will get to that soon :-).",
+      "parentUuid": "2fbfdfe8_b3236b59",
+      "range": {
+        "startLine": 1294,
+        "startChar": 39,
+        "endLine": 1295,
+        "endChar": 65
+      },
+      "revId": "84ecbdf9c328ffcd8a02c208e7136b11995a62fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55aafeba_2a3955c6",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2025-08-18T14:10:35Z",
       "side": 1,
       "message": "What guarantees that qw0 is zero (not some random undefined value) if the host hasn\u0027t issued any invalidation requests?\n\nAlso, since this patch is fixing the issue for you, I understand that when you are observing the issue (without this patch), qw0 is zero, so the below `QI_DESC_TYPE(wait_desc-\u003eqw0) !\u003d QI_IWD_TYPE` check fails? So, what this patch actually prevents is the below -EINVAL failure, not endless waiting for the queue to quiesce? Or am I missing something?",
+      "revId": "84ecbdf9c328ffcd8a02c208e7136b11995a62fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32018b1a_3756fd38",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-08-18T16:47:47Z",
+      "side": 1,
+      "message": "\u003e What guarantees that qw0 is zero (not some random undefined value) if the host hasn\u0027t issued any invalidation requests?\n\nI checked the iommu driver code and the descriptor page is zeroed before using. So that should guarantee that qw0 is zero if not used.\n\n\u003e Also, since this patch is fixing the issue for you, I understand that when you are observing the issue (without this patch), qw0 is zero, so the below QI_DESC_TYPE(wait_desc-\u003eqw0) !\u003d QI_IWD_TYPE check fails? So, what this patch actually prevents is the below -EINVAL failure, not endless waiting for the queue to quiesce? Or am I missing something?\n\nYes correct, we are fixing EINVAL return which causes the qi subsystem in a bad state and causes stall. I did not understand what you actually meant - Do you mean to say that we need not have the while loop in the if block? Or is it that the commit message needs to be reworded?",
+      "parentUuid": "55aafeba_2a3955c6",
       "revId": "84ecbdf9c328ffcd8a02c208e7136b11995a62fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
