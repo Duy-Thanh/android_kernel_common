@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "452ad5ac_370cc5c9",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-08-18T11:20:54Z",
+      "side": 1,
+      "message": "Why 40?",
+      "revId": "7a87fe2219bfd84c448acdb13515816eef6e76ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
