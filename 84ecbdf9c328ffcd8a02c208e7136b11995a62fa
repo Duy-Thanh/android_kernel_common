@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a61c5be0_7a987975",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-18T18:15:32Z",
+      "side": 1,
+      "message": "I also feel that this check needs to be there before aosp/3590992. The rationale is that, what if QI never even got a single request to begin with. \n\nOn PTL, I observed, that out of 3 IOMMUs, 2 did not have any wait descriptors (were 0) and one of them had a wait descriptor.",
+      "parentUuid": "7865b1d3_24ca2653",
+      "range": {
+        "startLine": 1294,
+        "startChar": 39,
+        "endLine": 1295,
+        "endChar": 65
+      },
+      "revId": "84ecbdf9c328ffcd8a02c208e7136b11995a62fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55aafeba_2a3955c6",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
         "patchSetId": 2
