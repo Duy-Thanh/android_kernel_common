@@ -60,6 +60,30 @@
       ],
       "revId": "e6351f08b163223c8b2c8c6fc593a1aeb4bb3f85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be0e27f3_c7778b48",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-18T11:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb9cda6d_b4cae4ca",
+      "range": {
+        "startLine": 544,
+        "startChar": 5,
+        "endLine": 544,
+        "endChar": 10
+      },
+      "revId": "e6351f08b163223c8b2c8c6fc593a1aeb4bb3f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
