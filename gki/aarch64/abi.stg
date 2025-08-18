@@ -360436,6 +360436,44 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x0af5108b
+  name: "kernel_read_file_id"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "READING_UNKNOWN"
+    }
+    enumerator {
+      name: "READING_FIRMWARE"
+      value: 1
+    }
+    enumerator {
+      name: "READING_MODULE"
+      value: 2
+    }
+    enumerator {
+      name: "READING_KEXEC_IMAGE"
+      value: 3
+    }
+    enumerator {
+      name: "READING_KEXEC_INITRAMFS"
+      value: 4
+    }
+    enumerator {
+      name: "READING_POLICY"
+      value: 5
+    }
+    enumerator {
+      name: "READING_X509_CERTIFICATE"
+      value: 6
+    }
+    enumerator {
+      name: "READING_MAX_ID"
+      value: 7
+    }
+  }
+}
+enumeration {
   id: 0x093a9d02
   name: "key_being_used_for"
   definition {
@@ -374759,6 +374797,16 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x08be563f
   parameter_id: 0x38d730db
+}
+function {
+  id: 0x125516e0
+  return_type_id: 0xd5cc9c9a
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x27a7c613
+  parameter_id: 0x0cbf60eb
+  parameter_id: 0xf435685e
+  parameter_id: 0x379d63b0
+  parameter_id: 0x0af5108b
 }
 function {
   id: 0x1256dc52
@@ -408266,6 +408314,17 @@ function {
   parameter_id: 0x2ba5754c
 }
 function {
+  id: 0x9b013c72
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x28273940
+  parameter_id: 0x37e8a64c
+  parameter_id: 0xf435685e
+  parameter_id: 0xc9082b19
+  parameter_id: 0x92233392
+  parameter_id: 0x0aa2374e
+}
+function {
   id: 0x9b022eae
   return_type_id: 0x6720d32f
   parameter_id: 0x1b8590a8
@@ -431258,6 +431317,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_dma_buf_stats_teardown"
 }
 elf_symbol {
+  id: 0xba9ce568
+  name: "__traceiter_android_rvh_dma_heap_buffer_alloc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0b0443e1
+  type_id: 0x9b013c72
+  full_name: "__traceiter_android_rvh_dma_heap_buffer_alloc"
+}
+elf_symbol {
   id: 0x40034e11
   name: "__traceiter_android_rvh_do_el1_bti"
   is_defined: true
@@ -437871,6 +437939,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_dma_buf_stats_teardown"
+}
+elf_symbol {
+  id: 0x2fd61966
+  name: "__tracepoint_android_rvh_dma_heap_buffer_alloc"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_dma_heap_buffer_alloc"
 }
 elf_symbol {
   id: 0x25e320a3
@@ -473129,6 +473206,15 @@ elf_symbol {
   crc: 0xd272d446
   type_id: 0x10985193
   full_name: "kernel_power_off"
+}
+elf_symbol {
+  id: 0xb0d82c18
+  name: "kernel_read_file"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x20b0a555
+  type_id: 0x125516e0
+  full_name: "kernel_read_file"
 }
 elf_symbol {
   id: 0x05b57a3a
@@ -510863,6 +510949,7 @@ interface {
   symbol_id: 0xa0a77bb8
   symbol_id: 0xa3b41867
   symbol_id: 0xaed18130
+  symbol_id: 0xba9ce568
   symbol_id: 0x40034e11
   symbol_id: 0x6e62463e
   symbol_id: 0x1bf82dcd
@@ -511598,6 +511685,7 @@ interface {
   symbol_id: 0x5029bb46
   symbol_id: 0x11f903b1
   symbol_id: 0x95b8edae
+  symbol_id: 0x2fd61966
   symbol_id: 0x25e320a3
   symbol_id: 0xcd81b300
   symbol_id: 0x7a6ec3db
@@ -515512,6 +515600,7 @@ interface {
   symbol_id: 0xff4a14be
   symbol_id: 0x4e60d546
   symbol_id: 0x0e6a648c
+  symbol_id: 0xb0d82c18
   symbol_id: 0x05b57a3a
   symbol_id: 0x5da7d3fd
   symbol_id: 0x51fc2e7c

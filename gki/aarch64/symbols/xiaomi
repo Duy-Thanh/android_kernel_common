@@ -518,3 +518,7 @@ vfs_fadvise
 __tracepoint_android_rvh_update_cpus_allowed
 __traceiter_android_rvh_update_cpus_allowed
 
+# required by xiaomi dmabuf
+kernel_read_file
+__traceiter_android_rvh_dma_heap_buffer_alloc
+__tracepoint_android_rvh_dma_heap_buffer_alloc
