@@ -16,6 +16,24 @@
       "message": "Why 40?",
       "revId": "7a87fe2219bfd84c448acdb13515816eef6e76ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee29f9a_d674e778",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-08-18T11:57:00Z",
+      "side": 1,
+      "message": "Arbitrary number based on the platforms known to support pKVM.",
+      "parentUuid": "452ad5ac_370cc5c9",
+      "revId": "7a87fe2219bfd84c448acdb13515816eef6e76ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
