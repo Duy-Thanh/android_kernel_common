@@ -34,6 +34,24 @@
       "parentUuid": "452ad5ac_370cc5c9",
       "revId": "7a87fe2219bfd84c448acdb13515816eef6e76ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b97f4307_08073ea9",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-08-18T11:57:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fee29f9a_d674e778",
+      "revId": "7a87fe2219bfd84c448acdb13515816eef6e76ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
