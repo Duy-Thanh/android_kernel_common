@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85d6b5dc_d18226c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-08-18T14:01:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea968b75_272f76ba",
+      "revId": "f4c9c38937cce16c818fda25517a97870d3c6d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2e6cecd_d1dc75ee",
@@ -48,6 +66,30 @@
       "writtenOn": "2025-08-15T15:01:13Z",
       "side": 1,
       "message": "move inside for",
+      "range": {
+        "startLine": 1448,
+        "startChar": 1,
+        "endLine": 1448,
+        "endChar": 31
+      },
+      "revId": "f4c9c38937cce16c818fda25517a97870d3c6d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b62a83a5_a42322ea",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2025-08-18T14:01:57Z",
+      "side": 1,
+      "message": "The precedent is to keep this outside.",
+      "parentUuid": "f2e6cecd_d1dc75ee",
       "range": {
         "startLine": 1448,
         "startChar": 1,
