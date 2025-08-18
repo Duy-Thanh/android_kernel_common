@@ -16,6 +16,24 @@
       "message": "I think Tiffany is looking at a fix for this.",
       "revId": "3e977a9bed4b72f5dfca97469fec585eaaf7fa3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4de432_9715780a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-08-18T21:14:09Z",
+      "side": 1,
+      "message": "I\u0027m looking at the \"stop_two_cpus\" part of it, so the \"trace_sched_swap_numa\" part would still be broken after that fix!",
+      "parentUuid": "8d042998_cbe6c3d7",
+      "revId": "3e977a9bed4b72f5dfca97469fec585eaaf7fa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
