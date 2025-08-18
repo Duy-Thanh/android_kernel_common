@@ -34,6 +34,24 @@
       "parentUuid": "8d042998_cbe6c3d7",
       "revId": "3e977a9bed4b72f5dfca97469fec585eaaf7fa3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5918cd63_967dd8f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-08-18T22:33:11Z",
+      "side": 1,
+      "message": "Right, this will be brought back after the merge of tag \u0027trace-unused-v6.17\u0027. The owner of the new version should figure out the desired sections to #ifdef. Please CR+2?",
+      "parentUuid": "1e4de432_9715780a",
+      "revId": "3e977a9bed4b72f5dfca97469fec585eaaf7fa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
