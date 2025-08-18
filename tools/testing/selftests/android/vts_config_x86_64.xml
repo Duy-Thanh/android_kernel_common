@@ -27,4 +27,352 @@ SPDX-License-Identifier: GPL-2.0 OR Apache-2.0
         <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
         <option name="test-command-line" key="kselftest_binderfs_binderfs_test" value="cd &ktest_dir;; ./kselftest_binderfs_binderfs_test" />
     </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_capabilities_test_execve" value="cd &ktest_dir;; ./kselftest_capabilities_execve" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_capabilities_validate_cap" value="cd &ktest_dir;; ./kselftest_capabilities_validate_cap" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_requeue_pi_mismatched_ops" value="cd &ktest_dir;; ./kselftest_futex_futex_requeue_pi_mismatched_ops" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_requeue_pi_signal_restart" value="cd &ktest_dir;; ./kselftest_futex_futex_requeue_pi_signal_restart" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_requeue_pi" value="cd &ktest_dir;; ./kselftest_futex_futex_requeue_pi" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_requeue" value="cd &ktest_dir;; ./kselftest_futex_futex_requeue" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_wait_private_mapped_file" value="cd &ktest_dir;; ./kselftest_futex_futex_wait_private_mapped_file" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_wait_timeout" value="cd &ktest_dir;; ./kselftest_futex_futex_wait_timeout" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_wait_uninitialized_heap" value="cd &ktest_dir;; ./kselftest_futex_futex_wait_uninitialized_heap" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_wait_wouldblock" value="cd &ktest_dir;; ./kselftest_futex_futex_wait_wouldblock" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_wait" value="cd &ktest_dir;; ./kselftest_futex_futex_wait" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_futex_waitv" value="cd &ktest_dir;; ./kselftest_futex_futex_waitv" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_futex_functional_run.sh" value="cd &ktest_dir;; ./kselftest_futex_functional_run.sh" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_kcmp_kcmp_test" value="cd &ktest_dir;; ./kselftest_kcmp_kcmp" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_net_socket" value="cd &ktest_dir;; ./kselftest_net_socket" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_net_psock_fanout" value="cd &ktest_dir;; ./kselftest_net_psock_fanout" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_net_psock_tpacket" value="cd &ktest_dir;; ./kselftest_net_psock_tpacket" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_net_reuseport_dualstack" value="cd &ktest_dir;; ./kselftest_net_reuseport_dualstack" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_net_reuseaddr_conflict" value="cd &ktest_dir;; ./kselftest_net_reuseaddr_conflict" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_net_bpf" value="cd &ktest_dir;; ./kselftest_net_bpf" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_ptrace_peeksiginfo" value="cd &ktest_dir;; ./kselftest_ptrace_peeksiginfo" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_rtc_rtctest" value="cd &ktest_dir;; ./kselftest_rtc_rtctest" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_seccomp_seccomp_bpf" value="cd &ktest_dir;; ./kselftest_seccomp_seccomp_bpf" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_size_get_size" value="cd &ktest_dir;; ./kselftest_size_get_size" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_splice_default_file_splice_read" value="cd &ktest_dir;; ./kselftest_splice_default_file_splice_read" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_splice_default_file_splice_read.sh" value="cd &ktest_dir;; ./kselftest_splice_default_file_splice_read.sh" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_inconsistency-check" value="cd &ktest_dir;; ./kselftest_timers_inconsistency-check" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_nanosleep" value="cd &ktest_dir;; ./kselftest_timers_nanosleep" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_nsleep-lat" value="cd &ktest_dir;; ./kselftest_timers_nsleep-lat" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_posix_timers" value="cd &ktest_dir;; ./kselftest_timers_posix_timers" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_raw_skew" value="cd &ktest_dir;; ./kselftest_timers_raw_skew" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_set-tai" value="cd &ktest_dir;; ./kselftest_timers_set-tai" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_set-timer-lat" value="cd &ktest_dir;; ./kselftest_timers_set-timer-lat" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_threadtest" value="cd &ktest_dir;; ./kselftest_timers_threadtest" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_timers_valid-adjtimex" value="cd &ktest_dir;; ./kselftest_timers_valid-adjtimex" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_compaction_test" value="cd &ktest_dir;; ./kselftest_mm_compaction" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_hugepage_mmap" value="cd &ktest_dir;; ./kselftest_mm_hugepage_mmap" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_hugepage_shm" value="cd &ktest_dir;; ./kselftest_mm_hugepage_shm" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_map_hugetlb" value="cd &ktest_dir;; ./kselftest_mm_map_hugetlb" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_mlock_random_test" value="cd &ktest_dir;; ./kselftest_mm_mlock_random" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_mlock2_tests" value="cd &ktest_dir;; ./kselftest_mm_mlock2" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_on_fault_limit" value="cd &ktest_dir;; ./kselftest_mm_on_fault_limit" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_mremap_dontunmap" value="cd &ktest_dir;; ./kselftest_mm_mremap_dontunmap" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_mremap_test" value="cd &ktest_dir;; ./kselftest_mm_mremap" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_uffd_unit_tests" value="cd &ktest_dir;; ./kselftest_mm_uffd_unit" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_thuge_gen" value="cd &ktest_dir;; ./kselftest_mm_thuge_gen" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_transhuge_stress" value="cd &ktest_dir;; ./kselftest_mm_transhuge_stress" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_mm_run_vmtests" value="cd &ktest_dir;; ./kselftest_mm_run_vmtests" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_vdso_abi" value="cd &ktest_dir;; ./kselftest_vdso_abi" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_vdso_clock_getres" value="cd &ktest_dir;; ./kselftest_vdso_clock_getres" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_vdso_getcpu" value="cd &ktest_dir;; ./kselftest_vdso_getcpu" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_vdso_gettimeofday" value="cd &ktest_dir;; ./kselftest_vdso_gettimeofday" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_x86_single_step_syscall" value="cd &ktest_dir;; ./kselftest_x86_single_step_syscall" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_x86_syscall_nt" value="cd &ktest_dir;; ./kselftest_x86_syscall_nt" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_x86_ptrace_syscall" value="cd &ktest_dir;; ./kselftest_x86_ptrace_syscall" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_x86_mremap_vdso" value="cd &ktest_dir;; ./kselftest_x86_mremap_vdso" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_x86_check_initial_reg_state" value="cd &ktest_dir;; ./kselftest_x86_check_initial_reg_state" />
+    </test>
+    <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
+        <option name="exit-code-skip" value="4" />
+        <option name="skip-binary-check" value="true" />
+        <option name="ktap-result-parser-resolution" value="INDIVIDUAL_LEAVES" />
+        <option name="test-command-line" key="kselftest_x86_ldt_gdt" value="cd &ktest_dir;; ./kselftest_x86_ldt_gdt" />
+    </test>
 </configuration>
