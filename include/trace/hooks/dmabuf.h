@@ -29,6 +29,13 @@ DECLARE_HOOK(android_vh_dma_buf_attr_show_start,
 DECLARE_HOOK(android_vh_dma_buf_attr_show_end,
 		TP_PROTO(struct dma_buf *dmabuf),
 		TP_ARGS(dmabuf));
+struct dma_heap;
+struct dma_heap_ops;
+DECLARE_RESTRICTED_HOOK(android_rvh_dma_heap_buffer_alloc,
+	TP_PROTO(struct dma_heap *heap, const struct dma_heap_ops *ops,
+		size_t len, u32 fd_flags, u64 heap_flags,
+		struct dma_buf **rdma_buf),
+	TP_ARGS(heap, ops, len, fd_flags, heap_flags, rdma_buf), 1);
 #endif /* _TRACE_HOOK_DMABUF_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

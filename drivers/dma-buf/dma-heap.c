@@ -81,7 +81,12 @@ struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 				      u32 fd_flags,
 				      u64 heap_flags)
 {
-	struct dma_buf *dma_buf;
+	struct dma_buf *dma_buf = NULL;
+
+	trace_android_rvh_dma_heap_buffer_alloc(heap, heap->ops, len, fd_flags,
+						heap_flags, &dma_buf);
+	if (dma_buf)
+		return dma_buf;
 
 	if (fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
 		return ERR_PTR(-EINVAL);
