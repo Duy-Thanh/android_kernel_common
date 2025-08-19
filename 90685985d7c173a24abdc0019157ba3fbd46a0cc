@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da54db5c_88990ebb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-19T16:13:07Z",
+      "side": 1,
+      "message": "Appears to be the same change as https://r.android.com/3738206 but not correctly attributed to the original author.\n\nPlease rebase the dependent ABI change on the properly attributed change and abandon this one.",
+      "revId": "90685985d7c173a24abdc0019157ba3fbd46a0cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
