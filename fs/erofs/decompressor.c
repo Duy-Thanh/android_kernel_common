@@ -320,10 +320,27 @@ static int z_erofs_transform_plain(struct z_erofs_decompress_req *rq,
 		PAGE_ALIGN(rq->pageofs_in + rq->inputsize) >> PAGE_SHIFT;
 	const unsigned int nrpages_out =
 		PAGE_ALIGN(rq->pageofs_out + rq->outputsize) >> PAGE_SHIFT;
+<<<<<<< HEAD   (0e8280d5d9a939de4cb499b8efaf29e5d1720717 Merge da8db07814f8 ("erofs: drop z_erofs_page_mark_eio()") i)
 	const unsigned int bs = rq->sb->s_blocksize;
 	unsigned int cur = 0, ni = 0, no, pi, po, insz, cnt;
 	u8 *kin;
+||||||| BASE   (da8db07814f88a1fdd66053fceaadf2d133a9796 erofs: drop z_erofs_page_mark_eio())
+	const unsigned int righthalf = min_t(unsigned int, rq->outputsize,
+					     PAGE_SIZE - rq->pageofs_out);
+	const unsigned int lefthalf = rq->outputsize - righthalf;
+	const unsigned int interlaced_offset =
+		rq->alg == Z_EROFS_COMPRESSION_SHIFTED ? 0 : rq->pageofs_out;
+	unsigned char *src, *dst;
+=======
+	const unsigned int righthalf = min_t(unsigned int, rq->outputsize,
+					     PAGE_SIZE - rq->pageofs_out);
+	const unsigned int lefthalf = rq->outputsize - righthalf;
+	const unsigned int interlaced_offset =
+		rq->alg == Z_EROFS_COMPRESSION_SHIFTED ? 0 : rq->pageofs_out;
+	u8 *src;
+>>>>>>> BRANCH (0346dbe08ed707f04200d5a95d43de175eb66b43 erofs: simplify z_erofs_transform_plain())
 
+<<<<<<< HEAD   (0e8280d5d9a939de4cb499b8efaf29e5d1720717 Merge da8db07814f8 ("erofs: drop z_erofs_page_mark_eio()") i)
 	if (rq->outputsize > rq->inputsize)
 		return -EOPNOTSUPP;
 	if (rq->alg == Z_EROFS_COMPRESSION_INTERLACED) {
@@ -340,6 +357,60 @@ static int z_erofs_transform_plain(struct z_erofs_decompress_req *rq,
 					       kin + pi, cur);
 			}
 			kunmap_local(kin);
+||||||| BASE   (da8db07814f88a1fdd66053fceaadf2d133a9796 erofs: drop z_erofs_page_mark_eio())
+	if (outpages > 2 && rq->alg == Z_EROFS_COMPRESSION_SHIFTED) {
+		DBG_BUGON(1);
+		return -EFSCORRUPTED;
+	}
+
+	if (rq->out[0] == *rq->in) {
+		DBG_BUGON(rq->pageofs_out);
+		return 0;
+	}
+
+	src = kmap_local_page(rq->in[inpages - 1]) + rq->pageofs_in;
+	if (rq->out[0]) {
+		dst = kmap_local_page(rq->out[0]);
+		memcpy(dst + rq->pageofs_out, src + interlaced_offset,
+		       righthalf);
+		kunmap_local(dst);
+	}
+
+	if (outpages > inpages) {
+		DBG_BUGON(!rq->out[outpages - 1]);
+		if (rq->out[outpages - 1] != rq->in[inpages - 1]) {
+			dst = kmap_local_page(rq->out[outpages - 1]);
+			memcpy(dst, interlaced_offset ? src :
+					(src + righthalf), lefthalf);
+			kunmap_local(dst);
+		} else if (!interlaced_offset) {
+			memmove(src, src + righthalf, lefthalf);
+=======
+	if (outpages > 2 && rq->alg == Z_EROFS_COMPRESSION_SHIFTED) {
+		DBG_BUGON(1);
+		return -EFSCORRUPTED;
+	}
+
+	if (rq->out[0] == *rq->in) {
+		DBG_BUGON(rq->pageofs_out);
+		return 0;
+	}
+
+	src = kmap_local_page(rq->in[inpages - 1]) + rq->pageofs_in;
+	if (rq->out[0])
+		memcpy_to_page(rq->out[0], rq->pageofs_out,
+			       src + interlaced_offset, righthalf);
+
+	if (outpages > inpages) {
+		DBG_BUGON(!rq->out[outpages - 1]);
+		if (rq->out[outpages - 1] != rq->in[inpages - 1]) {
+			memcpy_to_page(rq->out[outpages - 1], 0, src +
+					(interlaced_offset ? 0 : righthalf),
+				       lefthalf);
+		} else if (!interlaced_offset) {
+			memmove(src, src + righthalf, lefthalf);
+			flush_dcache_page(rq->in[inpages - 1]);
+>>>>>>> BRANCH (0346dbe08ed707f04200d5a95d43de175eb66b43 erofs: simplify z_erofs_transform_plain())
 		}
 		rq->outputsize -= cur;
 	}
