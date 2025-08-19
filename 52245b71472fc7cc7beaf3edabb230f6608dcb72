@@ -160,6 +160,24 @@
       "parentUuid": "9f7e326c_11756fa7",
       "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a279d909_fa74ae5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2025-08-19T01:03:47Z",
+      "side": 1,
+      "message": "there is 2 CLs in this series I didn\u0027t cherry-pick here because those are the user of this api which is irrelevant to us (qcom and rockchip) -\u003e https://lore.kernel.org/linux-pci/20250715-pci-port-reset-v6-3-6f9cce94e7bb@oss.qualcomm.com/\n\nif those are added, would it help to know what\u0027s the proper padding to be added ?\n\nthanks",
+      "parentUuid": "ab0b13b0_4088db89",
+      "revId": "52245b71472fc7cc7beaf3edabb230f6608dcb72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
