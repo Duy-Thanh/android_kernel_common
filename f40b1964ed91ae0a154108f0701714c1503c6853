@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499b1d39_52c4980b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8056,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-19T03:50:54Z",
+      "side": 1,
+      "message": "Should be a tab instead of a space.",
+      "range": {
+        "startLine": 8056,
+        "startChar": 0,
+        "endLine": 8056,
+        "endChar": 8
+      },
+      "revId": "f40b1964ed91ae0a154108f0701714c1503c6853",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
