@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e41b8cb4_a9bf85e7",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-19T14:57:32Z",
+      "side": 1,
+      "message": "Now you are breaking ABI because `struct zone` gets changed. As I commented before, you need to manage it as a separate array inside page_alloc.c:\n```\nstatic struct per_cpu_zone_extra_data zones_extra_data[MAX_NR_ZONES];\n```",
+      "range": {
+        "startLine": 865,
+        "startChar": 1,
+        "endLine": 865,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a922b1c3_d306deb7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 719,
+                "startChar": 0,
+                "endLine": 723,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 865,
+                "startChar": 0,
+                "endLine": 866,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 1010,
+                "startChar": 0,
+                "endLine": 1010,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long\t\t*per_cpu_zone_extra_data;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1f78b325fc2ff3f7f6e2b9cfca3c50da2b0a3a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
