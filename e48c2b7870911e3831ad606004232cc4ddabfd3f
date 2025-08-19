@@ -16,6 +16,24 @@
       "message": "Bug id?",
       "revId": "e48c2b7870911e3831ad606004232cc4ddabfd3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22f80baa_686e4b37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-08-19T02:45:35Z",
+      "side": 1,
+      "message": "Oh you are right. I should have clarified the intention is for this revert to be permanent. Unless, it is actually needed by someone else, in that case they should upload a new version with corresponding updates. I\u0027ll update the commit message with this info. Thanks",
+      "parentUuid": "5bf6e75f_9517c93f",
+      "revId": "e48c2b7870911e3831ad606004232cc4ddabfd3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
