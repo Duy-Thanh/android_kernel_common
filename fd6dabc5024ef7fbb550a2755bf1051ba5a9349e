@@ -16,6 +16,24 @@
       "message": "Looks good to me, but having @willdeacon@google.com +2 would be good here, just in case I\u0027m missing something.",
       "revId": "fd6dabc5024ef7fbb550a2755bf1051ba5a9349e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5639a8d_35c73365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-19T08:17:03Z",
+      "side": 1,
+      "message": "I replied on the bug.",
+      "parentUuid": "53263301_a6047813",
+      "revId": "fd6dabc5024ef7fbb550a2755bf1051ba5a9349e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
