@@ -3683,7 +3683,21 @@ static void sd_shutdown(struct device *dev)
 		sd_sync_cache(sdkp, NULL);
 	}
 
+<<<<<<< HEAD   (235ac1d903a157f40a2a8a7c3066fa68d0342ae4 Merge cf7f345b5376 ("erofs: address D-cache aliasing") into )
 	if (system_state != SYSTEM_RESTART && sdkp->device->manage_start_stop) {
+||||||| BASE   (cf7f345b537656a25b3c2821ae2316f246e6271a erofs: address D-cache aliasing)
+	if ((system_state != SYSTEM_RESTART &&
+	     sdkp->device->manage_system_start_stop) ||
+	    (system_state == SYSTEM_POWER_OFF &&
+	     sdkp->device->manage_shutdown)) {
+=======
+	if ((system_state != SYSTEM_RESTART &&
+	     sdkp->device->manage_system_start_stop) ||
+	    (system_state == SYSTEM_POWER_OFF &&
+	     sdkp->device->manage_shutdown) ||
+	    (system_state == SYSTEM_RUNNING &&
+	     sdkp->device->manage_runtime_start_stop)) {
+>>>>>>> BRANCH (0bc96de781b4da716c8dbd248af4b26d8d8341f5 Linux 6.1.148)
 		sd_printk(KERN_NOTICE, sdkp, "Stopping disk\n");
 		sd_start_stop_device(sdkp, 0);
 	}
