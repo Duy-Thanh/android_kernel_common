@@ -58,7 +58,8 @@ properties:
   fsl,phy-tx-vboost-level-microvolt:
     description:
       Adjust the boosted transmit launch pk-pk differential amplitude
-    enum: [844, 1008, 1156]
+    minimum: 880
+    maximum: 1120
 
   fsl,phy-comp-dis-tune-percent:
     description:

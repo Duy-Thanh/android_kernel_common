@@ -14,22 +14,9 @@ allOf:
 
 properties:
   compatible:
-    oneOf:
-      - enum:
-          - usb4b4,6504
-          - usb4b4,6506
-      - items:
-          - enum:
-              - usb4b4,6500
-              - usb4b4,6508
-          - const: usb4b4,6504
-      - items:
-          - enum:
-              - usb4b4,6502
-              - usb4b4,6503
-              - usb4b4,6507
-              - usb4b4,650a
-          - const: usb4b4,6506
+    enum:
+      - usb4b4,6504
+      - usb4b4,6506
 
   reg: true
 

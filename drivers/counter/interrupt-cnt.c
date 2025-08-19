@@ -3,14 +3,12 @@
  * Copyright (c) 2021 Pengutronix, Oleksij Rempel <kernel@pengutronix.de>
  */
 
-#include <linux/cleanup.h>
 #include <linux/counter.h>
 #include <linux/gpio/consumer.h>
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/mod_devicetable.h>
 #include <linux/module.h>
-#include <linux/mutex.h>
 #include <linux/platform_device.h>
 #include <linux/types.h>
 
@@ -21,7 +19,6 @@ struct interrupt_cnt_priv {
 	struct gpio_desc *gpio;
 	int irq;
 	bool enabled;
-	struct mutex lock;
 	struct counter_signal signals;
 	struct counter_synapse synapses;
 	struct counter_count cnts;
@@ -44,8 +41,6 @@ static int interrupt_cnt_enable_read(struct counter_device *counter,
 {
 	struct interrupt_cnt_priv *priv = counter_priv(counter);
 
-	guard(mutex)(&priv->lock);
-
 	*enable = priv->enabled;
 
 	return 0;
@@ -55,8 +50,6 @@ static int interrupt_cnt_enable_write(struct counter_device *counter,
 				      struct counter_count *count, u8 enable)
 {
 	struct interrupt_cnt_priv *priv = counter_priv(counter);
-
-	guard(mutex)(&priv->lock);
 
 	if (priv->enabled == enable)
 		return 0;
@@ -233,8 +226,6 @@ static int interrupt_cnt_probe(struct platform_device *pdev)
 			       dev_name(dev), counter);
 	if (ret)
 		return ret;
-
-	mutex_init(&priv->lock);
 
 	ret = devm_counter_add(dev, counter);
 	if (ret < 0)

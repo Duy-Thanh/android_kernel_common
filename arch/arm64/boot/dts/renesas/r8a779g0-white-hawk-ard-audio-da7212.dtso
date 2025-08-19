@@ -108,7 +108,7 @@
 	};
 
 	tpu0_pins: tpu0 {
-		groups = "tpu_to0_b";
+		groups = "tpu_to0_a";
 		function = "tpu";
 	};
 };

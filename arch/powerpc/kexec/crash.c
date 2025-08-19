@@ -356,10 +356,7 @@ void default_machine_crash_shutdown(struct pt_regs *regs)
 	if (TRAP(regs) == INTERRUPT_SYSTEM_RESET)
 		is_via_system_reset = 1;
 
-	if (IS_ENABLED(CONFIG_SMP))
-		crash_smp_send_stop();
-	else
-		crash_kexec_prepare();
+	crash_smp_send_stop();
 
 	crash_save_cpu(regs, crashing_cpu);
 

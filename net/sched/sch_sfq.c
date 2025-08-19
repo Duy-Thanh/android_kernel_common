@@ -310,10 +310,7 @@ drop:
 		/* It is difficult to believe, but ALL THE SLOTS HAVE LENGTH 1. */
 		x = q->tail->next;
 		slot = &q->slots[x];
-		if (slot->next == x)
-			q->tail = NULL; /* no more active slots */
-		else
-			q->tail->next = slot->next;
+		q->tail->next = slot->next;
 		q->ht[slot->hash] = SFQ_EMPTY_SLOT;
 		goto drop;
 	}

@@ -75,30 +75,24 @@ int vc4_mock_atomic_add_output(struct kunit *test,
 	int ret;
 
 	encoder = vc4_find_encoder_by_type(drm, type);
-	if (!encoder)
-		return -ENODEV;
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, encoder);
 
 	crtc = vc4_find_crtc_for_encoder(test, drm, encoder);
-	if (!crtc)
-		return -ENODEV;
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, crtc);
 
 	output = encoder_to_vc4_dummy_output(encoder);
 	conn = &output->connector;
 	conn_state = drm_atomic_get_connector_state(state, conn);
-	if (IS_ERR(conn_state))
-		return PTR_ERR(conn_state);
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, conn_state);
 
 	ret = drm_atomic_set_crtc_for_connector(conn_state, crtc);
-	if (ret)
-		return ret;
+	KUNIT_EXPECT_EQ(test, ret, 0);
 
 	crtc_state = drm_atomic_get_crtc_state(state, crtc);
-	if (IS_ERR(crtc_state))
-		return PTR_ERR(crtc_state);
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, crtc_state);
 
 	ret = drm_atomic_set_mode_for_crtc(crtc_state, &default_mode);
-	if (ret)
-		return ret;
+	KUNIT_EXPECT_EQ(test, ret, 0);
 
 	crtc_state->active = true;
 
@@ -119,32 +113,26 @@ int vc4_mock_atomic_del_output(struct kunit *test,
 	int ret;
 
 	encoder = vc4_find_encoder_by_type(drm, type);
-	if (!encoder)
-		return -ENODEV;
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, encoder);
 
 	crtc = vc4_find_crtc_for_encoder(test, drm, encoder);
-	if (!crtc)
-		return -ENODEV;
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, crtc);
 
 	crtc_state = drm_atomic_get_crtc_state(state, crtc);
-	if (IS_ERR(crtc_state))
-		return PTR_ERR(crtc_state);
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, crtc_state);
 
 	crtc_state->active = false;
 
 	ret = drm_atomic_set_mode_for_crtc(crtc_state, NULL);
-	if (ret)
-		return ret;
+	KUNIT_ASSERT_EQ(test, ret, 0);
 
 	output = encoder_to_vc4_dummy_output(encoder);
 	conn = &output->connector;
 	conn_state = drm_atomic_get_connector_state(state, conn);
-	if (IS_ERR(conn_state))
-		return PTR_ERR(conn_state);
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, conn_state);
 
 	ret = drm_atomic_set_crtc_for_connector(conn_state, NULL);
-	if (ret)
-		return ret;
+	KUNIT_ASSERT_EQ(test, ret, 0);
 
 	return 0;
 }

@@ -671,7 +671,7 @@ out_put:
 			break;
 	}
 out:
-	ocfs2_free_quota_recovery(rec);
+	kfree(rec);
 	return status;
 }
 

@@ -962,11 +962,7 @@ retry:
 		}
 	}
 
-	ret = lt9611uxc_audio_init(dev, lt9611uxc);
-	if (ret)
-		goto err_remove_bridge;
-
-	return 0;
+	return lt9611uxc_audio_init(dev, lt9611uxc);
 
 err_remove_bridge:
 	free_irq(client->irq, lt9611uxc);

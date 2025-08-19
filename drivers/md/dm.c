@@ -2221,28 +2221,20 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
 			       struct queue_limits *limits)
 {
 	struct dm_table *old_map;
-	sector_t size, old_size;
+	sector_t size;
 	int ret;
 
 	lockdep_assert_held(&md->suspend_lock);
 
 	size = dm_table_get_size(t);
 
-	old_size = dm_get_size(md);
-	set_capacity(md->disk, size);
-
-	ret = dm_table_set_restrictions(t, md->queue, limits);
-	if (ret) {
-		set_capacity(md->disk, old_size);
-		old_map = ERR_PTR(ret);
-		goto out;
-	}
-
 	/*
 	 * Wipe any geometry if the size of the table changed.
 	 */
-	if (size != old_size)
+	if (size != dm_get_size(md))
 		memset(&md->geometry, 0, sizeof(md->geometry));
+
+	set_capacity(md->disk, size);
 
 	dm_table_event_callback(t, event_callback, md);
 
@@ -2261,10 +2253,10 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
 		 * requests in the queue may refer to bio from the old bioset,
 		 * so you must walk through the queue to unprep.
 		 */
-		if (!md->mempools)
+		if (!md->mempools) {
 			md->mempools = t->mempools;
-		else
-			dm_free_md_mempools(t->mempools);
+			t->mempools = NULL;
+		}
 	} else {
 		/*
 		 * The md may already have mempools that need changing.
@@ -2273,8 +2265,14 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
 		 */
 		dm_free_md_mempools(md->mempools);
 		md->mempools = t->mempools;
+		t->mempools = NULL;
 	}
-	t->mempools = NULL;
+
+	ret = dm_table_set_restrictions(t, md->queue, limits);
+	if (ret) {
+		old_map = ERR_PTR(ret);
+		goto out;
+	}
 
 	old_map = rcu_dereference_protected(md->map, lockdep_is_held(&md->suspend_lock));
 	rcu_assign_pointer(md->map, (void *)t);
