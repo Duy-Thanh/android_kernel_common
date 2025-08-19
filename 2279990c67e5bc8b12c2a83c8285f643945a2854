@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "816232c5_6bb81884",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4286514
+      },
+      "writtenOn": "2025-08-19T19:59:49Z",
+      "side": 1,
+      "message": "no its not static its open to ftc and ic3",
+      "revId": "2279990c67e5bc8b12c2a83c8285f643945a2854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
