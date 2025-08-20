@@ -34,6 +34,24 @@
       "parentUuid": "bcbb6195_cb28f727",
       "revId": "0d533277ba9d4dbb2d1835d58f2ccd296de72723",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff3e02cb_83750d04",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-20T03:25:47Z",
+      "side": 1,
+      "message": "This is still misusing the uAPI (overlaying new meanings to the interface that aren\u0027t upstream).  I\u0027d suggest adding a separate vendor driver chardev which you can implement your own ioctl against to export dmabufs the way you\u0027d prefer. That avoids extending the existing uAPI in ways that might become incompatible in the future.",
+      "parentUuid": "6cff9bd1_05a57e8e",
+      "revId": "0d533277ba9d4dbb2d1835d58f2ccd296de72723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
