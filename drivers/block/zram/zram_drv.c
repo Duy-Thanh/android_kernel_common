@@ -36,6 +36,7 @@
 #include <linux/kernel_read_file.h>
 
 #include "zram_drv.h"
+#include "zram_ioctl.h"
 
 static DEFINE_IDR(zram_index_idr);
 /* idr index must be protected */
@@ -2588,10 +2589,23 @@ static int zram_open(struct gendisk *disk, blk_mode_t mode)
 	return 0;
 }
 
+static int zram_ioctl(struct block_device *bdev, blk_mode_t mode,
+		      unsigned int cmd, unsigned long arg)
+{
+	void __user *argp = (void __user *)arg;
+	struct zram_ioc_data ioc_data;
+
+	if (copy_from_user(&ioc_data, argp, sizeof(ioc_data)))
+		return -EFAULT;
+
+	return -EINVAL;
+}
+
 static const struct block_device_operations zram_devops = {
 	.open = zram_open,
 	.submit_bio = zram_submit_bio,
 	.swap_slot_free_notify = zram_slot_free_notify,
+	.ioctl = zram_ioctl,
 	.owner = THIS_MODULE
 };
 
