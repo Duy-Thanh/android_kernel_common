@@ -82,6 +82,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe8d181_8c65154c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "It\u0027s possible. However it can be convenient to have the task pointers in these functions for local debugging. I\u0027ll change them now.",
+      "parentUuid": "401149f1_502449a6",
+      "range": {
+        "startLine": 287,
+        "startChar": 2,
+        "endLine": 287,
+        "endChar": 26
+      },
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ab3f4de_56ef9051",
@@ -95,6 +119,30 @@
       "writtenOn": "2025-08-20T16:13:04Z",
       "side": 1,
       "message": "I think you can pass `struct task_dma_buf_info *dmabuf_info` directly here.",
+      "range": {
+        "startLine": 300,
+        "startChar": 35,
+        "endLine": 300,
+        "endChar": 59
+      },
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00808d0c_5f964efa",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ab3f4de_56ef9051",
       "range": {
         "startLine": 300,
         "startChar": 35,
@@ -156,6 +204,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c138a581_555977fa",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1870795_f55528d0",
+      "range": {
+        "startLine": 305,
+        "startChar": 1,
+        "endLine": 305,
+        "endChar": 40
+      },
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62403898_f8acde06",
@@ -193,6 +265,30 @@
           ]
         }
       ],
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ad47e23_2649a565",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62403898_f8acde06",
+      "range": {
+        "startLine": 342,
+        "startChar": 2,
+        "endLine": 342,
+        "endChar": 5
+      },
       "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -244,6 +340,30 @@
           ]
         }
       ],
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f1af88_6c9d7e2a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fca025af_32bf77eb",
+      "range": {
+        "startLine": 393,
+        "startChar": 1,
+        "endLine": 395,
+        "endChar": 39
+      },
       "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -319,6 +439,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efb9cfc3_1a905618",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23a9eecd_efb3e0c9",
+      "range": {
+        "startLine": 420,
+        "startChar": 3,
+        "endLine": 421,
+        "endChar": 37
+      },
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c27e494_679c99df",
@@ -356,6 +500,30 @@
           ]
         }
       ],
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac16e388_0266ec0f",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c27e494_679c99df",
+      "range": {
+        "startLine": 425,
+        "startChar": 3,
+        "endLine": 425,
+        "endChar": 7
+      },
       "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -417,6 +585,30 @@
           ]
         }
       ],
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5616a69f_b53ce527",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b27b46a_c834574a",
+      "range": {
+        "startLine": 425,
+        "startChar": 12,
+        "endLine": 426,
+        "endChar": 62
+      },
       "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -542,6 +734,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce02ab94_8f553a72",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "192abc2f_4affd811",
+      "range": {
+        "startLine": 441,
+        "startChar": 16,
+        "endLine": 441,
+        "endChar": 36
+      },
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e0135b6_17b4076e",
@@ -579,6 +795,30 @@
           ]
         }
       ],
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fca08edd_16320ffc",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e0135b6_17b4076e",
+      "range": {
+        "startLine": 448,
+        "startChar": 12,
+        "endLine": 448,
+        "endChar": 29
+      },
       "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -676,6 +916,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6746474f_1505b002",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "Think so, I did something like that here: go/tjm-duplicate_dmabuf_info",
+      "parentUuid": "edb2413c_cbf30003",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 488,
+        "endChar": 35
+      },
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8b4bd39_106df972",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 1
@@ -762,6 +1026,30 @@
           ]
         }
       ],
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8431df65_73b2c1d9",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1956,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-20T19:37:17Z",
+      "side": 1,
+      "message": "We should fail here if `dma_buf_account_task` fails. This cherrypick doesn\u0027t do that, so I\u0027ll add it back.\n\nI don\u0027t want `mmap` to succeed, `dma_buf_account_task` to subsequently fail, and then have to unmap the successful `mmap`, so that\u0027s why account goes first.",
+      "parentUuid": "a4938d72_cc4dac62",
+      "range": {
+        "startLine": 1949,
+        "startChar": 1,
+        "endLine": 1956,
+        "endChar": 42
+      },
       "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
