@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b311c4_35753cc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-20T22:42:48Z",
+      "side": 1,
+      "message": "Please fix the checkpatch issue:\n```\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: \"qiankun.wang\" \u003cqiankun.wang@amlogic.com\u003e\u0027 !\u003d \u0027Signed-off-by: Qiankun.wang \u003cqiankun.wang@amlogic.com\u003e\u0027\n\n```",
+      "revId": "672603a210570eaa081a32385af37d7a3de80914",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
