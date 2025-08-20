@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b59856_5ad75b35",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-20T21:27:59Z",
+      "side": 1,
+      "message": "nit: newline before return.",
+      "range": {
+        "startLine": 458,
+        "startChar": 1,
+        "endLine": 458,
+        "endChar": 7
+      },
+      "revId": "bff601535600816391a1912b204f25d83c605d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "133b952d_e642a238",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-20T21:27:59Z",
+      "side": 1,
+      "message": "nit: newline before return.",
+      "range": {
+        "startLine": 515,
+        "startChar": 1,
+        "endLine": 515,
+        "endChar": 7
+      },
+      "revId": "bff601535600816391a1912b204f25d83c605d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
