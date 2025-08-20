@@ -2589,14 +2589,71 @@ static int zram_open(struct gendisk *disk, blk_mode_t mode)
 	return 0;
 }
 
+#if IS_ENABLED(CONFIG_ZRAM_WRITEBACK)
+static int zram_ioctl_process_writeback(struct zram *zram,
+					struct zram_ioc_data *ioc_data)
+{
+	struct zram_pp_ctl *ctl = NULL;
+	int ret;
+
+	down_read(&zram->init_lock);
+	if (!init_done(zram)) {
+		ret = -EINVAL;
+		goto release_init_lock;
+	}
+
+	if (!zram->backing_dev) {
+		ret = -ENODEV;
+		goto release_init_lock;
+	}
+
+	/* Do not permit concurrent post-processing actions. */
+	if (atomic_xchg(&zram->pp_in_progress, 1)) {
+		ret = -EAGAIN;
+		goto release_init_lock;
+	}
+
+	ctl = init_pp_ctl();
+	if (!ctl) {
+		ret = -ENOMEM;
+		goto clear_pp_in_progress;
+	}
+
+	ret = zram_ioctl_process_writeback_scan(zram, ioc_data, ctl);
+	if (ret)
+		goto free_pp_ctl;
+
+	ret = zram_writeback_slots(zram, ctl);
+
+free_pp_ctl:
+	release_pp_ctl(zram, ctl);
+clear_pp_in_progress:
+	atomic_set(&zram->pp_in_progress, 0);
+release_init_lock:
+	up_read(&zram->init_lock);
+
+	return ret;
+}
+#else
+static int zram_ioctl_process_writeback(struct zram *zram,
+					struct zram_ioc_data *ioc_data)
+{
+	return -ENOSYS;
+}
+#endif
+
 static int zram_ioctl(struct block_device *bdev, blk_mode_t mode,
 		      unsigned int cmd, unsigned long arg)
 {
+	struct zram *zram = bdev->bd_disk->private_data;
 	void __user *argp = (void __user *)arg;
 	struct zram_ioc_data ioc_data;
 
 	if (copy_from_user(&ioc_data, argp, sizeof(ioc_data)))
 		return -EFAULT;
+
+	if (cmd == ZRAM_IOC_PROCESS_WRITEBACK)
+		return zram_ioctl_process_writeback(zram, &ioc_data);
 
 	return -EINVAL;
 }
