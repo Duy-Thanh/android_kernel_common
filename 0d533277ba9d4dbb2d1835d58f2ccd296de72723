@@ -16,6 +16,24 @@
       "message": "This worries me a little that we\u0027re calling the vendor hook before we validate the flags. It feels like its trying to skirt around the check to avoid non-upstream custom vendor flags and gets us into an ION-like ABI, with its issues.",
       "revId": "0d533277ba9d4dbb2d1835d58f2ccd296de72723",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cff9bd1_05a57e8e",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3829517
+      },
+      "writtenOn": "2025-08-20T02:23:13Z",
+      "side": 1,
+      "message": "We will check it in the vendor hook and we will be responsible for any problems caused.",
+      "parentUuid": "bcbb6195_cb28f727",
+      "revId": "0d533277ba9d4dbb2d1835d58f2ccd296de72723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
