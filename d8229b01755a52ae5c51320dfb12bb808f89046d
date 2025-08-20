@@ -1052,6 +1052,30 @@
       },
       "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec0412d_03646b07",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1956,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-20T19:57:09Z",
+      "side": 1,
+      "message": "No, I think if `dma_buf_account_task` fails we just log the error and proceed. `mmap` should not fail because we failed to account it.",
+      "parentUuid": "8431df65_73b2c1d9",
+      "range": {
+        "startLine": 1949,
+        "startChar": 1,
+        "endLine": 1956,
+        "endChar": 42
+      },
+      "revId": "d8229b01755a52ae5c51320dfb12bb808f89046d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
