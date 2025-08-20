@@ -16,6 +16,24 @@
       "message": "nit: Not sure if there is a better place to hold these two functions as seems they are not mmu related?",
       "revId": "f9e3a903602c37aab190218b5d08efb806d32c13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d826a9f_195d15b5",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-20T10:19:12Z",
+      "side": 1,
+      "message": "In a certain sense they are MMU related (they are currently used only when mapping guest pages). :)\n\nBut actually the only reason I put them here is that the existing functions pkvm_load_pvmfw_pages() and gpa_range_has_pvmfw() are still used by the existing shadow code (so in particular they are still using pkvm_shadow_vm etc, so we cannot just reuse them here), and we are not switching from shadow EPT to PV MMU in this patch yet, we only do that at the end of the series.\n\nSo we might move these 2 functions to a more suitable place later, once we completely get rid of the shadow code, or for example just in the v6.15 rebase.",
+      "parentUuid": "183ea4b5_da0ac853",
+      "revId": "f9e3a903602c37aab190218b5d08efb806d32c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
