@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "183ea4b5_da0ac853",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-08-20T06:57:41Z",
+      "side": 1,
+      "message": "nit: Not sure if there is a better place to hold these two functions as seems they are not mmu related?",
+      "revId": "f9e3a903602c37aab190218b5d08efb806d32c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
