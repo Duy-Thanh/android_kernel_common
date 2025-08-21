@@ -56,6 +56,30 @@
       },
       "revId": "aeb35eb6f21607e1ce58ccbb125e7d86f7eeb78c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab569733_32d54c8b",
+        "filename": "mm/madvise.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-21T15:39:02Z",
+      "side": 1,
+      "message": "Looks like it was missed but prev is an output parameter and visit() functions override its value. Do you see actual issues?",
+      "parentUuid": "b484446e_063ccdc8",
+      "range": {
+        "startLine": 1359,
+        "startChar": 11,
+        "endLine": 1359,
+        "endChar": 16
+      },
+      "revId": "aeb35eb6f21607e1ce58ccbb125e7d86f7eeb78c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
