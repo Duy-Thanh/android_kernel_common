@@ -16,6 +16,24 @@
       "message": "When is it okay to merge FROMLIST patches?",
       "revId": "afd645fea937d6ae3cd2a994d27ff7d41a2da3af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c66d6c38_a52d646e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-08-21T15:49:44Z",
+      "side": 1,
+      "message": "Usually not, but this is fine as we don\u0027t even use this module. It is only \"urgent\" because of the allmodconfig build. A revert would have also worked but it would still be \"tech-debt\". I opened up b/440330341 to follow up on whatever permanent fix this turns into.",
+      "parentUuid": "c0d6db4f_7f08ca39",
+      "revId": "afd645fea937d6ae3cd2a994d27ff7d41a2da3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
