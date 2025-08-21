@@ -595,12 +595,52 @@ static void hidinput_cleanup_battery(struct hid_device *dev)
 	dev->battery = NULL;
 }
 
+<<<<<<< HEAD   (7a3dbd673fd9225909e276965bad44cc634375e0 FROMGIT: net: avoid one loop iteration in __skb_splice_bits)
 static void hidinput_update_battery(struct hid_device *dev, int value)
+||||||| BASE   (6eb9748fea0236796f94d7e8b8638dbc2b203e67 FROMGIT: HID: input: rename hidinput_set_battery_charge_stat)
+static bool hidinput_update_battery_charge_status(struct hid_device *dev,
+			                                       unsigned int usage, int value)
+{
+	switch (usage) {
+		case HID_BAT_CHARGING:
+			dev->battery_charge_status = value ?
+					POWER_SUPPLY_STATUS_CHARGING :
+					POWER_SUPPLY_STATUS_DISCHARGING;
+			return true;
+	}
+
+	return false;
+}
+
+static void hidinput_update_battery(struct hid_device *dev, int value)
+=======
+static bool hidinput_update_battery_charge_status(struct hid_device *dev,
+			                                       unsigned int usage, int value)
+{
+	switch (usage) {
+		case HID_BAT_CHARGING:
+			dev->battery_charge_status = value ?
+					POWER_SUPPLY_STATUS_CHARGING :
+					POWER_SUPPLY_STATUS_DISCHARGING;
+			return true;
+	}
+
+	return false;
+}
+
+static void hidinput_update_battery(struct hid_device *dev, unsigned int usage,
+				    int value)
+>>>>>>> CHANGE (8aaaf75e3e9a71afbc10cf96c13050555ff869ee FROMGIT: HID: input: report battery status changes immediate)
 {
 	int capacity;
 
 	if (!dev->battery)
 		return;
+
+	if (hidinput_update_battery_charge_status(dev, usage, value)) {
+		power_supply_changed(dev->battery);
+		return;
+	}
 
 	if (value == 0 || value < dev->battery_min || value > dev->battery_max)
 		return;
@@ -642,6 +682,7 @@ static void hidinput_cleanup_battery(struct hid_device *dev)
 {
 }
 
+<<<<<<< HEAD   (7a3dbd673fd9225909e276965bad44cc634375e0 FROMGIT: net: avoid one loop iteration in __skb_splice_bits)
 static void hidinput_update_battery(struct hid_device *dev, int value)
 {
 }
@@ -650,6 +691,20 @@ static bool hidinput_set_battery_charge_status(struct hid_device *dev,
 					       unsigned int usage, int value)
 {
 	return false;
+||||||| BASE   (6eb9748fea0236796f94d7e8b8638dbc2b203e67 FROMGIT: HID: input: rename hidinput_set_battery_charge_stat)
+static bool hidinput_update_battery_charge_status(struct hid_device *dev,
+					       unsigned int usage, int value)
+{
+	return false;
+}
+
+static void hidinput_update_battery(struct hid_device *dev, int value)
+{
+=======
+static void hidinput_update_battery(struct hid_device *dev, unsigned int usage,
+				    int value)
+{
+>>>>>>> CHANGE (8aaaf75e3e9a71afbc10cf96c13050555ff869ee FROMGIT: HID: input: report battery status changes immediate)
 }
 #endif	/* CONFIG_HID_BATTERY_STRENGTH */
 
@@ -1515,11 +1570,21 @@ void hidinput_hid_event(struct hid_device *hid, struct hid_field *field, struct 
 		return;
 
 	if (usage->type == EV_PWR) {
+<<<<<<< HEAD   (7a3dbd673fd9225909e276965bad44cc634375e0 FROMGIT: net: avoid one loop iteration in __skb_splice_bits)
 		bool handled = hidinput_set_battery_charge_status(hid, usage->hid, value);
 
 		if (!handled)
 			hidinput_update_battery(hid, value);
 
+||||||| BASE   (6eb9748fea0236796f94d7e8b8638dbc2b203e67 FROMGIT: HID: input: rename hidinput_set_battery_charge_stat)
+		bool handled = hidinput_update_battery_charge_status(hid, usage->hid, value);
+
+		if (!handled)
+			hidinput_update_battery(hid, value);
+
+=======
+		hidinput_update_battery(hid, usage->hid, value);
+>>>>>>> CHANGE (8aaaf75e3e9a71afbc10cf96c13050555ff869ee FROMGIT: HID: input: report battery status changes immediate)
 		return;
 	}
 
