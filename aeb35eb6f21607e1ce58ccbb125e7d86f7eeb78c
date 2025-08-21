@@ -16,6 +16,46 @@
       "message": "Why hasn\u0027t the patch \u0027mm: madvise: use per_vma lock for MADV_FREE\u0027 been synchronized?",
       "revId": "aeb35eb6f21607e1ce58ccbb125e7d86f7eeb78c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ed0c37_074f83fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-08-21T07:50:21Z",
+      "side": 1,
+      "message": "Compared to the original patch, this part is missing a line of code: prev \u003d vma;\nMay I ask if this was intentionally removed?",
+      "revId": "aeb35eb6f21607e1ce58ccbb125e7d86f7eeb78c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b484446e_063ccdc8",
+        "filename": "mm/madvise.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-08-21T07:50:21Z",
+      "side": 1,
+      "message": "Compared to the original patch, this part is missing a line of code: prev \u003d vma;\nMay I ask if this was intentionally removed?",
+      "range": {
+        "startLine": 1359,
+        "startChar": 11,
+        "endLine": 1359,
+        "endChar": 16
+      },
+      "revId": "aeb35eb6f21607e1ce58ccbb125e7d86f7eeb78c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
