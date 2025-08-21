@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "850e5a92_ef668c84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-08-21T22:02:15Z",
+      "side": 1,
+      "message": "Missing the CP tag? UPSTREAM for 6.6 stable not torvalds? Maybe will fix the linter warning.\n\n```\n(cherry picked from commit e63032e66bca1d06e600033f3369ba3db3af0870 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git linux-6.6.y)\n```",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 62
+      },
+      "revId": "585962599300ef5d59922128ef499929b122dbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
