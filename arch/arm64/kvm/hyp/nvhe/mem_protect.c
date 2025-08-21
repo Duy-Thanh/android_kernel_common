@@ -1000,7 +1000,7 @@ static int ___host_check_page_state_range(u64 addr, u64 size,
 
 	/* MMIO state is still in the page-table */
 	if (!reg)
-		return check_page_state_range(&host_mmu.pgt, addr, size, &d);
+		return chck_page_state_range(&host_mmu.pgt, addr, size, &d);
 
 	if (reg->flags & MEMBLOCK_NOMAP)
 		return -EPERM;
@@ -1031,7 +1031,7 @@ static int __host_check_page_state_range(u64 addr, u64 size,
 
 	/* Can't check the state of both MMIO and memory regions at once */
 	reg = find_mem_range(addr, &range);
-	if (!is_in_mem_range(end - 1, &range))
+	if (!reg || !is_in_mem_range(end - 1, &range))
 		return -EINVAL;
 
 	/* Check the refcount of PAGE_OWNED pages as those may be used for DMA. */
@@ -1569,16 +1569,27 @@ static int pkvm_hyp_donate_guest(struct pkvm_hyp_vcpu *vcpu, u64 pfn, u64 gfn)
 
 int __pkvm_host_donate_hyp_locked(u64 pfn, u64 nr_pages, enum kvm_pgtable_prot prot)
 {
-	u64 size, phys = hyp_pfn_to_phys(pfn);
+	u64 size, end, phys = hyp_pfn_to_phys(pfn);
 	void *virt = __hyp_va(phys);
 	int ret;
+	struct memblock_region *reg;
+	struct kvm_mem_range range;
 
 	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size))
+	       return -EINVAL;
+
+	if (check_add_overflow(phys, size, &end))
 		return -EINVAL;
 
 	hyp_lock_component();
 
-	ret = __host_check_page_state_range(phys, size, PKVM_PAGE_OWNED);
+	reg = find_mem_range(addr, &range);
+	if (!is_in_mem_range(end - 1, &range)) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	ret = ___host_check_page_state_range(phys, size, state, reg, true);
 	if (ret)
 		goto unlock;
 	if (IS_ENABLED(CONFIG_PKVM_STRICT_CHECKS)) {
@@ -1607,6 +1618,7 @@ int __pkvm_hyp_donate_host(u64 pfn, u64 nr_pages)
 {
 	u64 size, phys = hyp_pfn_to_phys(pfn);
 	u64 virt = (u64)__hyp_va(phys);
+	struct kvm_mem_range range;
 	int ret;
 
 	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size))
@@ -1619,7 +1631,8 @@ int __pkvm_hyp_donate_host(u64 pfn, u64 nr_pages)
 	if (ret)
 		goto unlock;
 	if (IS_ENABLED(CONFIG_PKVM_STRICT_CHECKS)) {
-		ret = __host_check_page_state_range(phys, size, PKVM_NOPAGE);
+		reg = find_mem_range(phys, &range);
+		ret = ___host_check_page_state_range(phys, size, PKVM_NOPAGE, reg, false);
 		if (ret)
 			goto unlock;
 	}
