@@ -34,6 +34,24 @@
       "parentUuid": "71b311c4_35753cc0",
       "revId": "672603a210570eaa081a32385af37d7a3de80914",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad0e8cf9_515c4719",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-21T16:30:36Z",
+      "side": 1,
+      "message": "This is still an issue. The Author is \"qiankun.wang \u003cqiankun.wang@amlogic.com\u003e\". The Signed-off-by: needs to exactly match that. Right now it does not match (\"Qiankun Wang \u003cqiankun.wang@amlogic.com\u003e\")",
+      "parentUuid": "1e2f5757_ca81c7bd",
+      "revId": "672603a210570eaa081a32385af37d7a3de80914",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
