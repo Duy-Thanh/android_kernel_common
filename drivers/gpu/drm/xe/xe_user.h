@@ -68,11 +68,37 @@ struct xe_user {
 	u64 last_timestamp_ns;
 };
 
+#if IS_ENABLED(CONFIG_TRACE_GPU_WORK_PERIOD)
+
 int xe_user_init(struct xe_device *xe, struct xe_file *xef, unsigned int uid);
 
 void xe_user_cancel_workers(struct xe_device *xe);
 
 void xe_user_resume_workers(struct xe_device *xe);
+
+void __xe_user_free(struct kref *kref);
+
+#else
+
+static inline
+int xe_user_init(struct xe_device *xe, struct xe_file *xef, unsigned int uid)
+{
+	return 0;
+}
+
+static inline void __xe_user_free(struct kref *kref)
+{
+}
+
+static inline void xe_user_cancel_workers(struct xe_device *xe)
+{
+}
+
+static inline void xe_user_resume_workers(struct xe_device *xe)
+{
+}
+
+#endif // CONFIG_TRACE_GPU_WORK_PERIOD
 
 static inline struct xe_user *
 xe_user_get_unless_zero(struct xe_user *user)
@@ -89,7 +115,6 @@ xe_user_get(struct xe_user *user)
 	return user;
 }
 
-void __xe_user_free(struct kref *kref);
 
 static inline void xe_user_put(struct xe_user *user)
 {

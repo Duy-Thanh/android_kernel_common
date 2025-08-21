@@ -358,7 +358,6 @@ struct xe_device *xe_device_create(struct pci_dev *pdev,
 	xa_init_flags(&xe->usm.asid_to_vm, XA_FLAGS_ALLOC);
 
 	xa_init_flags(&xe->work_period.users, XA_FLAGS_ALLOC1);
-
 	mutex_init(&xe->work_period.lock);
 
 	if (IS_ENABLED(CONFIG_DRM_XE_DEBUG)) {
