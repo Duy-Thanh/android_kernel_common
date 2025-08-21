@@ -34,6 +34,24 @@
       "parentUuid": "b51ae39c_3bba6368",
       "revId": "2b6b8dab9293a14987a301202ce2084591516d9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d835884_f8d7b9c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-21T07:21:43Z",
+      "side": 1,
+      "message": "fixup is now in aosp/3741487  had to cherry-pick the merged-out patch here.  Will be reviewing all other reverts as well after this as part of the bug listed in that commit.",
+      "parentUuid": "2c215e56_0317068b",
+      "revId": "2b6b8dab9293a14987a301202ce2084591516d9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
