@@ -16,6 +16,24 @@
       "message": "Does this warrant a Fixes: tag?",
       "revId": "d4e7d9d645c93dac977ee2c6e0e89c6e42a81dfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e696562_c4a4ee9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-21T06:58:01Z",
+      "side": 1,
+      "message": "Not really, it\u0027s just a revert of a portion of a patch.",
+      "parentUuid": "8c3213a3_ae87dc77",
+      "revId": "d4e7d9d645c93dac977ee2c6e0e89c6e42a81dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
