@@ -66,6 +66,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24952995_d1e16bb3",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-21T12:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "635a84dd_b63fedfa",
+      "range": {
+        "startLine": 350,
+        "startChar": 20,
+        "endLine": 350,
+        "endChar": 33
+      },
+      "revId": "3f24a677a2f938f61ec442cc0eb83497271912ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb8910b9_4cf13135",
@@ -115,6 +139,24 @@
       "side": 1,
       "message": "Ahh yes, thanks for catching it. Fixed",
       "parentUuid": "fb8910b9_4cf13135",
+      "revId": "3f24a677a2f938f61ec442cc0eb83497271912ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d5943fe_687b8e81",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-21T12:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e33d9ba_f9a1ff5b",
       "revId": "3f24a677a2f938f61ec442cc0eb83497271912ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
