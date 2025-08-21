@@ -16,6 +16,24 @@
       "message": "How does this break the ABI?",
       "revId": "e8583e9f305038ae613e1cfaabe747282da0aae9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a327877_d15fae24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-21T04:04:50Z",
+      "side": 1,
+      "message": "This one doesn\u0027t, but the next one does, and this patch fixes a bug in the next one so they both have to be reverted.",
+      "parentUuid": "a8c4dbaf_e039f8c6",
+      "revId": "e8583e9f305038ae613e1cfaabe747282da0aae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
