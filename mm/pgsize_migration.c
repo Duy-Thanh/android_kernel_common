@@ -180,6 +180,18 @@ static inline bool linker_ctx(void)
 
 	vma = lock_vma_under_rcu(mm, instruction_pointer(regs));
 
+	/*
+	* lock_vma_under_rcu() is a try-lock than can fail if the
+	* VMA is already locked for modification.
+	*
+	* Fallback to finding the vma under mmap read lock.
+	*/
+	if (!vma) {
+		mmap_read_lock(mm);
+		vma = find_vma(mm, instruction_pointer(regs));
+		mmap_read_unlock(mm);
+	}
+
 	/* Current execution context, the VMA must be present */
 	BUG_ON(!vma);
 
