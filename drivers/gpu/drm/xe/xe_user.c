@@ -258,6 +258,12 @@ int xe_user_init(struct xe_device *xe, struct xe_file *xef, unsigned int uid)
 	return 0;
 }
 
+void xe_user_fini(struct xe_device *xe)
+{
+	xe_user_cancel_workers(xe);
+	xa_destroy(&xe->work_period.users);
+}
+
 void xe_user_cancel_workers(struct xe_device *xe)
 {
 	struct xe_user *user = NULL;
@@ -273,7 +279,6 @@ void xe_user_cancel_workers(struct xe_device *xe)
 		if (user && cancel_delayed_work_sync(&user->delay_work))
  			xe_user_put(user);
  	}
-
 }
 
 void xe_user_resume_workers(struct xe_device *xe)

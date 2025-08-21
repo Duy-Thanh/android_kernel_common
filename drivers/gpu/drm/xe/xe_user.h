@@ -72,6 +72,8 @@ struct xe_user {
 
 int xe_user_init(struct xe_device *xe, struct xe_file *xef, unsigned int uid);
 
+void xe_user_fini(struct xe_device *xe);
+
 void xe_user_cancel_workers(struct xe_device *xe);
 
 void xe_user_resume_workers(struct xe_device *xe);
@@ -84,6 +86,10 @@ static inline
 int xe_user_init(struct xe_device *xe, struct xe_file *xef, unsigned int uid)
 {
 	return 0;
+}
+
+static inline void xe_user_fini(struct xe_device *xe)
+{
 }
 
 static inline void __xe_user_free(struct kref *kref)

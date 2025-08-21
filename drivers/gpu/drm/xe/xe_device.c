@@ -316,6 +316,8 @@ static void xe_device_destroy(struct drm_device *dev, void *dummy)
 	if (xe->destroy_wq)
 		destroy_workqueue(xe->destroy_wq);
 
+	xe_user_fini(xe);
+
 	ttm_device_fini(&xe->ttm);
 }
 
