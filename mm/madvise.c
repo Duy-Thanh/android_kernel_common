@@ -1708,8 +1708,13 @@ int do_madvise(struct mm_struct *mm, unsigned long start, size_t len_in, int beh
 		return 0;
 
 #ifdef CONFIG_MEMORY_FAILURE
-	if (behavior == MADV_HWPOISON || behavior == MADV_SOFT_OFFLINE)
-		return madvise_inject_error(behavior, start, start + len_in);
+	if (behavior == MADV_HWPOISON || behavior == MADV_SOFT_OFFLINE) {
+		int ret = madvise_inject_error(behavior, start, start + len_in);
+
+		madvise_unlock(mm, &madv_behavior);
+
+		return ret;
+	}
 #endif
 
 	trace_android_vh_mm_do_madvise_bypass(mm, start, len, behavior,
