@@ -20,7 +20,6 @@
 #include "intel_modeset_lock.h"
 #include "intel_tc.h"
 
-#define DP_PIN_ASSIGNMENT_NONE	0x0
 #define DP_PIN_ASSIGNMENT_C	0x3
 #define DP_PIN_ASSIGNMENT_D	0x4
 #define DP_PIN_ASSIGNMENT_E	0x5
@@ -64,7 +63,6 @@ struct intel_tc_port {
 	enum tc_port_mode init_mode;
 	enum phy_fia phy_fia;
 	u8 phy_fia_idx;
-	u8 max_lane_count;
 };
 
 static enum intel_display_power_domain
@@ -310,8 +308,6 @@ static int lnl_tc_port_get_max_lane_count(struct intel_digital_port *dig_port)
 		REG_FIELD_GET(TCSS_DDI_STATUS_PIN_ASSIGNMENT_MASK, val);
 
 	switch (pin_assignment) {
-	case DP_PIN_ASSIGNMENT_NONE:
-		return 0;
 	default:
 		MISSING_CASE(pin_assignment);
 		fallthrough;
@@ -370,12 +366,12 @@ static int intel_tc_port_get_max_lane_count(struct intel_digital_port *dig_port)
 	}
 }
 
-static int get_max_lane_count(struct intel_tc_port *tc)
+int intel_tc_port_max_lane_count(struct intel_digital_port *dig_port)
 {
-	struct intel_digital_port *dig_port = tc->dig_port;
 	struct drm_i915_private *i915 = to_i915(dig_port->base.base.dev);
+	struct intel_tc_port *tc = to_tc_port(dig_port);
 
-	if (tc->mode != TC_PORT_DP_ALT)
+	if (!intel_encoder_is_tc(&dig_port->base) || tc->mode != TC_PORT_DP_ALT)
 		return 4;
 
 	assert_tc_cold_blocked(tc);
@@ -387,25 +383,6 @@ static int get_max_lane_count(struct intel_tc_port *tc)
 		return mtl_tc_port_get_max_lane_count(dig_port);
 
 	return intel_tc_port_get_max_lane_count(dig_port);
-}
-
-static void read_pin_configuration(struct intel_tc_port *tc)
-{
-	tc->max_lane_count = get_max_lane_count(tc);
-}
-
-int intel_tc_port_max_lane_count(struct intel_digital_port *dig_port)
-{
-	struct intel_display *display = to_intel_display(dig_port);
-	struct intel_tc_port *tc = to_tc_port(dig_port);
-
-	if (!intel_encoder_is_tc(&dig_port->base))
-		return 4;
-
-	if (DISPLAY_VER(display) < 20)
-		return get_max_lane_count(tc);
-
-	return tc->max_lane_count;
 }
 
 void intel_tc_port_set_fia_lane_count(struct intel_digital_port *dig_port,
@@ -620,11 +597,8 @@ static void icl_tc_phy_get_hw_state(struct intel_tc_port *tc)
 	tc_cold_wref = __tc_cold_block(tc, &domain);
 
 	tc->mode = tc_phy_get_current_mode(tc);
-	if (tc->mode != TC_PORT_DISCONNECTED) {
+	if (tc->mode != TC_PORT_DISCONNECTED)
 		tc->lock_wakeref = tc_cold_block(tc);
-
-		read_pin_configuration(tc);
-	}
 
 	__tc_cold_unblock(tc, domain, tc_cold_wref);
 }
@@ -683,11 +657,8 @@ static bool icl_tc_phy_connect(struct intel_tc_port *tc,
 
 	tc->lock_wakeref = tc_cold_block(tc);
 
-	if (tc->mode == TC_PORT_TBT_ALT) {
-		read_pin_configuration(tc);
-
+	if (tc->mode == TC_PORT_TBT_ALT)
 		return true;
-	}
 
 	if ((!tc_phy_is_ready(tc) ||
 	     !icl_tc_phy_take_ownership(tc, true)) &&
@@ -698,7 +669,6 @@ static bool icl_tc_phy_connect(struct intel_tc_port *tc,
 		goto out_unblock_tc_cold;
 	}
 
-	read_pin_configuration(tc);
 
 	if (!tc_phy_verify_legacy_or_dp_alt_mode(tc, required_lanes))
 		goto out_release_phy;
@@ -889,11 +859,8 @@ static void adlp_tc_phy_get_hw_state(struct intel_tc_port *tc)
 	port_wakeref = intel_display_power_get(i915, port_power_domain);
 
 	tc->mode = tc_phy_get_current_mode(tc);
-	if (tc->mode != TC_PORT_DISCONNECTED) {
+	if (tc->mode != TC_PORT_DISCONNECTED)
 		tc->lock_wakeref = tc_cold_block(tc);
-
-		read_pin_configuration(tc);
-	}
 
 	intel_display_power_put(i915, port_power_domain, port_wakeref);
 }
@@ -907,9 +874,6 @@ static bool adlp_tc_phy_connect(struct intel_tc_port *tc, int required_lanes)
 
 	if (tc->mode == TC_PORT_TBT_ALT) {
 		tc->lock_wakeref = tc_cold_block(tc);
-
-		read_pin_configuration(tc);
-
 		return true;
 	}
 
@@ -930,8 +894,6 @@ static bool adlp_tc_phy_connect(struct intel_tc_port *tc, int required_lanes)
 	}
 
 	tc->lock_wakeref = tc_cold_block(tc);
-
-	read_pin_configuration(tc);
 
 	if (!tc_phy_verify_legacy_or_dp_alt_mode(tc, required_lanes))
 		goto out_unblock_tc_cold;
@@ -1163,17 +1125,8 @@ static void xelpdp_tc_phy_get_hw_state(struct intel_tc_port *tc)
 	tc_cold_wref = __tc_cold_block(tc, &domain);
 
 	tc->mode = tc_phy_get_current_mode(tc);
-	if (tc->mode != TC_PORT_DISCONNECTED) {
+	if (tc->mode != TC_PORT_DISCONNECTED)
 		tc->lock_wakeref = tc_cold_block(tc);
-
-		read_pin_configuration(tc);
-		/*
-		 * Set a valid lane count value for a DP-alt sink which got
-		 * disconnected. The driver can only disable the output on this PHY.
-		 */
-		if (tc->max_lane_count == 0)
-			tc->max_lane_count = 4;
-	}
 
 	drm_WARN_ON(&i915->drm,
 		    (tc->mode == TC_PORT_DP_ALT || tc->mode == TC_PORT_LEGACY) &&
@@ -1186,18 +1139,13 @@ static bool xelpdp_tc_phy_connect(struct intel_tc_port *tc, int required_lanes)
 {
 	tc->lock_wakeref = tc_cold_block(tc);
 
-	if (tc->mode == TC_PORT_TBT_ALT) {
-		read_pin_configuration(tc);
-
+	if (tc->mode == TC_PORT_TBT_ALT)
 		return true;
-	}
 
 	if (!xelpdp_tc_phy_enable_tcss_power(tc, true))
 		goto out_unblock_tccold;
 
 	xelpdp_tc_phy_take_ownership(tc, true);
-
-	read_pin_configuration(tc);
 
 	if (!tc_phy_verify_legacy_or_dp_alt_mode(tc, required_lanes))
 		goto out_release_phy;
@@ -1279,19 +1227,14 @@ static void tc_phy_get_hw_state(struct intel_tc_port *tc)
 	tc->phy_ops->get_hw_state(tc);
 }
 
-/* Is the PHY owned by display i.e. is it in legacy or DP-alt mode? */
-static bool tc_phy_owned_by_display(struct intel_tc_port *tc,
-				    bool phy_is_ready, bool phy_is_owned)
+static bool tc_phy_is_ready_and_owned(struct intel_tc_port *tc,
+				      bool phy_is_ready, bool phy_is_owned)
 {
 	struct drm_i915_private *i915 = tc_to_i915(tc);
 
-	if (DISPLAY_VER(i915) < 20) {
-		drm_WARN_ON(&i915->drm, phy_is_owned && !phy_is_ready);
+	drm_WARN_ON(&i915->drm, phy_is_owned && !phy_is_ready);
 
-		return phy_is_ready && phy_is_owned;
-	} else {
-		return phy_is_owned;
-	}
+	return phy_is_ready && phy_is_owned;
 }
 
 static bool tc_phy_is_connected(struct intel_tc_port *tc,
@@ -1303,7 +1246,7 @@ static bool tc_phy_is_connected(struct intel_tc_port *tc,
 	bool phy_is_owned = tc_phy_is_owned(tc);
 	bool is_connected;
 
-	if (tc_phy_owned_by_display(tc, phy_is_ready, phy_is_owned))
+	if (tc_phy_is_ready_and_owned(tc, phy_is_ready, phy_is_owned))
 		is_connected = port_pll_type == ICL_PORT_DPLL_MG_PHY;
 	else
 		is_connected = port_pll_type == ICL_PORT_DPLL_DEFAULT;
@@ -1411,7 +1354,7 @@ tc_phy_get_current_mode(struct intel_tc_port *tc)
 	phy_is_ready = tc_phy_is_ready(tc);
 	phy_is_owned = tc_phy_is_owned(tc);
 
-	if (!tc_phy_owned_by_display(tc, phy_is_ready, phy_is_owned)) {
+	if (!tc_phy_is_ready_and_owned(tc, phy_is_ready, phy_is_owned)) {
 		mode = get_tc_mode_in_phy_not_owned_state(tc, live_mode);
 	} else {
 		drm_WARN_ON(&i915->drm, live_mode == TC_PORT_TBT_ALT);
@@ -1500,11 +1443,11 @@ static void intel_tc_port_reset_mode(struct intel_tc_port *tc,
 	intel_display_power_flush_work(i915);
 	if (!intel_tc_cold_requires_aux_pw(dig_port)) {
 		enum intel_display_power_domain aux_domain;
+		bool aux_powered;
 
 		aux_domain = intel_aux_power_domain(dig_port);
-		if (intel_display_power_is_enabled(i915, aux_domain))
-			drm_dbg_kms(&i915->drm, "Port %s: AUX unexpectedly powered\n",
-				    tc->port_name);
+		aux_powered = intel_display_power_is_enabled(i915, aux_domain);
+		drm_WARN_ON(&i915->drm, aux_powered);
 	}
 
 	tc_phy_disconnect(tc);
