@@ -2151,10 +2151,8 @@ spc_rsoc_get_descr(struct se_cmd *cmd, struct target_opcode_descriptor **opcode)
 			if (descr->serv_action_valid)
 				return TCM_INVALID_CDB_FIELD;
 
-			if (!descr->enabled || descr->enabled(descr, cmd)) {
+			if (!descr->enabled || descr->enabled(descr, cmd))
 				*opcode = descr;
-				return TCM_NO_SENSE;
-			}
 			break;
 		case 0x2:
 			/*
@@ -2168,10 +2166,8 @@ spc_rsoc_get_descr(struct se_cmd *cmd, struct target_opcode_descriptor **opcode)
 			if (descr->serv_action_valid &&
 			    descr->service_action == requested_sa) {
 				if (!descr->enabled || descr->enabled(descr,
-								      cmd)) {
+								      cmd))
 					*opcode = descr;
-					return TCM_NO_SENSE;
-				}
 			} else if (!descr->serv_action_valid)
 				return TCM_INVALID_CDB_FIELD;
 			break;
@@ -2184,15 +2180,13 @@ spc_rsoc_get_descr(struct se_cmd *cmd, struct target_opcode_descriptor **opcode)
 			 */
 			if (descr->service_action == requested_sa)
 				if (!descr->enabled || descr->enabled(descr,
-								      cmd)) {
+								      cmd))
 					*opcode = descr;
-					return TCM_NO_SENSE;
-				}
 			break;
 		}
 	}
 
-	return TCM_NO_SENSE;
+	return 0;
 }
 
 static sense_reason_t

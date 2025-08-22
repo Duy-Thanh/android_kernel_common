@@ -4862,6 +4862,8 @@ static int rtw89_chip_efuse_info_setup(struct rtw89_dev *rtwdev)
 
 	rtw89_hci_mac_pre_deinit(rtwdev);
 
+	rtw89_mac_pwr_off(rtwdev);
+
 	return 0;
 }
 
@@ -4942,45 +4944,36 @@ int rtw89_chip_info_setup(struct rtw89_dev *rtwdev)
 
 	rtw89_read_chip_ver(rtwdev);
 
-	ret = rtw89_mac_pwr_on(rtwdev);
-	if (ret) {
-		rtw89_err(rtwdev, "failed to power on\n");
-		return ret;
-	}
-
 	ret = rtw89_wait_firmware_completion(rtwdev);
 	if (ret) {
 		rtw89_err(rtwdev, "failed to wait firmware completion\n");
-		goto out;
+		return ret;
 	}
 
 	ret = rtw89_fw_recognize(rtwdev);
 	if (ret) {
 		rtw89_err(rtwdev, "failed to recognize firmware\n");
-		goto out;
+		return ret;
 	}
 
 	ret = rtw89_chip_efuse_info_setup(rtwdev);
 	if (ret)
-		goto out;
+		return ret;
 
 	ret = rtw89_fw_recognize_elements(rtwdev);
 	if (ret) {
 		rtw89_err(rtwdev, "failed to recognize firmware elements\n");
-		goto out;
+		return ret;
 	}
 
 	ret = rtw89_chip_board_info_setup(rtwdev);
 	if (ret)
-		goto out;
+		return ret;
 
 	rtw89_core_setup_rfe_parms(rtwdev);
 	rtwdev->ps_mode = rtw89_update_ps_mode(rtwdev);
 
-out:
-	rtw89_mac_pwr_off(rtwdev);
-
-	return ret;
+	return 0;
 }
 EXPORT_SYMBOL(rtw89_chip_info_setup);
 
