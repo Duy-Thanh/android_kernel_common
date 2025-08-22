@@ -34,6 +34,24 @@
       "parentUuid": "319a71f6_697a619c",
       "revId": "675d15af1402b2471c6618a240b4a7bc2da2032e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab4fbb6_cc611bdc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-08-22T08:53:37Z",
+      "side": 1,
+      "message": "Right, if we need to donate the MMIO regions for a guest then we will need the same thing that I did for host donate hyp.",
+      "parentUuid": "2d6c41a0_66e86954",
+      "revId": "675d15af1402b2471c6618a240b4a7bc2da2032e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
