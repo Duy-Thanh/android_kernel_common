@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "319a71f6_697a619c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-08-22T07:48:53Z",
+      "side": 1,
+      "message": "So here this function will now reject MMIO.\n\nThe problem is `__pkvm_host_donate_guest()` which is a caller seems to allow MMIO.\n\nSame would then go for `__pkvm_host_reclaim_page()`.\n\n`__pkvm_host_donate_sglist_guest()` in practice allows MMIO regions. But I am not sure this is actually used.",
+      "revId": "675d15af1402b2471c6618a240b4a7bc2da2032e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
