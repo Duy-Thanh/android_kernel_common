@@ -80,6 +80,13 @@
   __traceiter_android_vh_do_async_mmap_readahead
   __traceiter_android_vh_dup_task_struct
   __traceiter_android_vh_f2fs_file_open
+<<<<<<< HEAD   (6355550c251f2498dbaa876c13f44d99fff86935 UPSTREAM: selftests/bpf: Fix OOB read in dmabuf_collector)
+||||||| BASE   (11bc7a256c6c37b70af33451f0e651165e7d9dd4 ANDROID: vendor_hooks: add hook in __dev_pm_qos_update_reque)
+  __traceiter_android_vh_f2fs_ra_op_flags
+=======
+  __traceiter_android_vh_f2fs_ra_op_flags
+  __traceiter_android_vh_fas_gpu_qos_update_tracer
+>>>>>>> CHANGE (a2bc6533e6cc289203eaf3d879c1b485dce2cbef ANDROID: GKI: Update symbol list for vivo)
   __traceiter_android_vh_filemap_update_page
   __traceiter_android_vh_free_task
   __traceiter_android_vh_free_unref_folios_to_pcp_bypass
@@ -163,6 +170,13 @@
   __tracepoint_android_vh_do_async_mmap_readahead
   __tracepoint_android_vh_dup_task_struct
   __tracepoint_android_vh_f2fs_file_open
+<<<<<<< HEAD   (6355550c251f2498dbaa876c13f44d99fff86935 UPSTREAM: selftests/bpf: Fix OOB read in dmabuf_collector)
+||||||| BASE   (11bc7a256c6c37b70af33451f0e651165e7d9dd4 ANDROID: vendor_hooks: add hook in __dev_pm_qos_update_reque)
+  __tracepoint_android_vh_f2fs_ra_op_flags
+=======
+  __tracepoint_android_vh_f2fs_ra_op_flags
+  __tracepoint_android_vh_fas_gpu_qos_update_tracer
+>>>>>>> CHANGE (a2bc6533e6cc289203eaf3d879c1b485dce2cbef ANDROID: GKI: Update symbol list for vivo)
   __tracepoint_android_vh_filemap_update_page
   __tracepoint_android_vh_free_task
   __tracepoint_android_vh_inode_lru_isolate
