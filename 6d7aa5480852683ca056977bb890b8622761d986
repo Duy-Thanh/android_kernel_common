@@ -22,6 +22,30 @@
       },
       "revId": "6d7aa5480852683ca056977bb890b8622761d986",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "927e4415_b8d4046b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-22T13:31:14Z",
+      "side": 1,
+      "message": "Will do!",
+      "parentUuid": "9272281f_44e0d3d5",
+      "range": {
+        "startLine": 253,
+        "startChar": 6,
+        "endLine": 253,
+        "endChar": 27
+      },
+      "revId": "6d7aa5480852683ca056977bb890b8622761d986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
