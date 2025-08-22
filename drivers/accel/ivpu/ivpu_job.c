@@ -180,14 +180,22 @@ static int ivpu_register_db(struct ivpu_file_priv *file_priv, struct ivpu_cmdq *
 					   cmdq->mem->vpu_addr, ivpu_bo_size(cmdq->mem));
 
 	if (!ret)
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 		ivpu_dbg(vdev, JOB, "DB %d registered to cmdq %d ctx %d priority %d\n",
 			 cmdq->db_id, cmdq->id, file_priv->ctx.id, cmdq->priority);
 	else
 		xa_erase(&vdev->db_xa, cmdq->db_id);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+		ivpu_dbg(vdev, JOB, "DB %d registered to ctx %d\n", cmdq->db_id, file_priv->ctx.id);
+=======
+		ivpu_dbg(vdev, JOB, "DB %d registered to cmdq %d ctx %d\n",
+			 cmdq->db_id, cmdq->id, file_priv->ctx.id);
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 
 	return ret;
 }
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 static void ivpu_cmdq_jobq_init(struct ivpu_device *vdev, struct vpu_job_queue *jobq)
 {
 	jobq->header.engine_idx = VPU_ENGINE_COMPUTE;
@@ -210,6 +218,13 @@ static inline u32 ivpu_cmdq_get_entry_count(struct ivpu_cmdq *cmdq)
 }
 
 static int ivpu_cmdq_register(struct ivpu_file_priv *file_priv, struct ivpu_cmdq *cmdq)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+static int
+ivpu_cmdq_init(struct ivpu_file_priv *file_priv, struct ivpu_cmdq *cmdq, u16 engine, u8 priority)
+=======
+static int
+ivpu_cmdq_init(struct ivpu_file_priv *file_priv, struct ivpu_cmdq *cmdq, u8 priority)
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 {
 	struct ivpu_device *vdev = file_priv->vdev;
 	int ret;
@@ -221,11 +236,31 @@ static int ivpu_cmdq_register(struct ivpu_file_priv *file_priv, struct ivpu_cmdq
 
 	cmdq->entry_count = ivpu_cmdq_get_entry_count(cmdq);
 	cmdq->jobq = (struct vpu_job_queue *)ivpu_bo_vaddr(cmdq->mem);
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 
 	ivpu_cmdq_jobq_init(vdev, cmdq->jobq);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	jobq_header = &cmdq->jobq->header;
+	jobq_header->engine_idx = engine;
+	jobq_header->head = 0;
+	jobq_header->tail = 0;
+	wmb(); /* Flush WC buffer for jobq->header */
+=======
+	jobq_header = &cmdq->jobq->header;
+	jobq_header->engine_idx = VPU_ENGINE_COMPUTE;
+	jobq_header->head = 0;
+	jobq_header->tail = 0;
+	wmb(); /* Flush WC buffer for jobq->header */
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 
 	if (vdev->fw->sched_mode == VPU_SCHEDULING_MODE_HW) {
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 		ret = ivpu_hws_cmdq_init(file_priv, cmdq, VPU_ENGINE_COMPUTE, cmdq->priority);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+		ret = ivpu_hws_cmdq_init(file_priv, cmdq, engine, priority);
+=======
+		ret = ivpu_hws_cmdq_init(file_priv, cmdq, VPU_ENGINE_COMPUTE, priority);
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 		if (ret)
 			return ret;
 	}
@@ -250,8 +285,14 @@ static int ivpu_cmdq_unregister(struct ivpu_file_priv *file_priv, struct ivpu_cm
 	if (vdev->fw->sched_mode == VPU_SCHEDULING_MODE_HW) {
 		ret = ivpu_jsm_hws_destroy_cmdq(vdev, file_priv->ctx.id, cmdq->id);
 		if (!ret)
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 			ivpu_dbg(vdev, JOB, "Command queue %d destroyed, ctx %d\n",
 				 cmdq->id, file_priv->ctx.id);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+			ivpu_dbg(vdev, JOB, "Command queue %d destroyed\n", cmdq->db_id);
+=======
+			ivpu_dbg(vdev, JOB, "Command queue %d destroyed\n", cmdq->id);
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 	}
 
 	ret = ivpu_jsm_unregister_db(vdev, cmdq->db_id);
@@ -264,8 +305,16 @@ static int ivpu_cmdq_unregister(struct ivpu_file_priv *file_priv, struct ivpu_cm
 	return 0;
 }
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 static inline u8 ivpu_job_to_jsm_priority(u8 priority)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+static struct ivpu_cmdq *ivpu_cmdq_acquire(struct ivpu_file_priv *file_priv, u16 engine,
+					   u8 priority)
+=======
+static int ivpu_db_id_alloc(struct ivpu_device *vdev, u32 *db_id)
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 {
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	if (priority == DRM_IVPU_JOB_PRIORITY_DEFAULT)
 		return VPU_JOB_SCHEDULING_PRIORITY_BAND_NORMAL;
 
@@ -283,22 +332,112 @@ static struct ivpu_cmdq *ivpu_cmdq_acquire_legacy(struct ivpu_file_priv *file_pr
 {
 	struct ivpu_cmdq *cmdq;
 	unsigned long id;
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	int cmdq_idx = IVPU_CMDQ_INDEX(engine, priority);
+	struct ivpu_cmdq *cmdq = file_priv->cmdq[cmdq_idx];
+	int ret;
+=======
+	int ret;
+	u32 id;
+
+	ret = xa_alloc_cyclic(&vdev->db_xa, &id, NULL, vdev->db_limit, &vdev->db_next, GFP_KERNEL);
+	if (ret < 0)
+		return ret;
+
+	*db_id = id;
+	return 0;
+}
+
+static int ivpu_cmdq_id_alloc(struct ivpu_file_priv *file_priv, u32 *cmdq_id)
+{
+	int ret;
+	u32 id;
+
+	ret = xa_alloc_cyclic(&file_priv->cmdq_xa, &id, NULL, file_priv->cmdq_limit,
+			      &file_priv->cmdq_id_next, GFP_KERNEL);
+	if (ret < 0)
+		return ret;
+
+	*cmdq_id = id;
+	return 0;
+}
+
+static struct ivpu_cmdq *ivpu_cmdq_acquire(struct ivpu_file_priv *file_priv, u8 priority)
+{
+	struct ivpu_device *vdev = file_priv->vdev;
+	struct ivpu_cmdq *cmdq;
+	unsigned long id;
+	int ret;
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 
 	lockdep_assert_held(&file_priv->lock);
 
 	xa_for_each(&file_priv->cmdq_xa, id, cmdq)
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 		if (cmdq->is_legacy && cmdq->priority == priority)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+=======
+		if (cmdq->priority == priority)
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 			break;
 
 	if (!cmdq) {
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 		cmdq = ivpu_cmdq_create(file_priv, priority, true);
 		if (!cmdq)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+		cmdq = ivpu_cmdq_alloc(file_priv);
+		if (!cmdq)
+=======
+		cmdq = ivpu_cmdq_alloc(file_priv);
+		if (!cmdq) {
+			ivpu_err(vdev, "Failed to allocate command queue\n");
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 			return NULL;
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+		file_priv->cmdq[cmdq_idx] = cmdq;
+=======
+		}
+
+		ret = ivpu_db_id_alloc(vdev, &cmdq->db_id);
+		if (ret) {
+			ivpu_err(file_priv->vdev, "Failed to allocate doorbell ID: %d\n", ret);
+			goto err_free_cmdq;
+		}
+
+		ret = ivpu_cmdq_id_alloc(file_priv, &cmdq->id);
+		if (ret) {
+			ivpu_err(vdev, "Failed to allocate command queue ID: %d\n", ret);
+			goto err_erase_db_id;
+		}
+
+		cmdq->priority = priority;
+		ret = xa_err(xa_store(&file_priv->cmdq_xa, cmdq->id, cmdq, GFP_KERNEL));
+		if (ret) {
+			ivpu_err(vdev, "Failed to store command queue in cmdq_xa: %d\n", ret);
+			goto err_erase_cmdq_id;
+		}
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 	}
 
-	return cmdq;
-}
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	ret = ivpu_cmdq_init(file_priv, cmdq, engine, priority);
+	if (ret)
+		return NULL;
 
+=======
+	ret = ivpu_cmdq_init(file_priv, cmdq, priority);
+	if (ret) {
+		ivpu_err(vdev, "Failed to initialize command queue: %d\n", ret);
+		goto err_free_cmdq;
+	}
+
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
+	return cmdq;
+
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 static struct ivpu_cmdq *ivpu_cmdq_acquire(struct ivpu_file_priv *file_priv, u32 cmdq_id)
 {
 	struct ivpu_device *vdev = file_priv->vdev;
@@ -313,6 +452,28 @@ static struct ivpu_cmdq *ivpu_cmdq_acquire(struct ivpu_file_priv *file_priv, u32
 	}
 
 	return cmdq;
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+static void ivpu_cmdq_release_locked(struct ivpu_file_priv *file_priv, u16 engine, u8 priority)
+{
+	int cmdq_idx = IVPU_CMDQ_INDEX(engine, priority);
+	struct ivpu_cmdq *cmdq = file_priv->cmdq[cmdq_idx];
+
+	lockdep_assert_held(&file_priv->lock);
+
+	if (cmdq) {
+		file_priv->cmdq[cmdq_idx] = NULL;
+		ivpu_cmdq_fini(file_priv, cmdq);
+		ivpu_cmdq_free(file_priv, cmdq);
+	}
+=======
+err_erase_cmdq_id:
+	xa_erase(&file_priv->cmdq_xa, cmdq->id);
+err_erase_db_id:
+	xa_erase(&vdev->db_xa, cmdq->db_id);
+err_free_cmdq:
+	ivpu_cmdq_free(file_priv, cmdq);
+	return NULL;
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 }
 
 void ivpu_cmdq_release_all_locked(struct ivpu_file_priv *file_priv)
@@ -322,8 +483,20 @@ void ivpu_cmdq_release_all_locked(struct ivpu_file_priv *file_priv)
 
 	lockdep_assert_held(&file_priv->lock);
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	xa_for_each(&file_priv->cmdq_xa, cmdq_id, cmdq)
 		ivpu_cmdq_destroy(file_priv, cmdq);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	for (engine = 0; engine < IVPU_NUM_ENGINES; engine++)
+		for (priority = 0; priority < IVPU_NUM_PRIORITIES; priority++)
+			ivpu_cmdq_release_locked(file_priv, engine, priority);
+=======
+	xa_for_each(&file_priv->cmdq_xa, cmdq_id, cmdq) {
+		xa_erase(&file_priv->cmdq_xa, cmdq_id);
+		ivpu_cmdq_fini(file_priv, cmdq);
+		ivpu_cmdq_free(file_priv, cmdq);
+	}
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 }
 
 /*
@@ -339,10 +512,25 @@ static void ivpu_cmdq_reset(struct ivpu_file_priv *file_priv)
 
 	mutex_lock(&file_priv->lock);
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	xa_for_each(&file_priv->cmdq_xa, cmdq_id, cmdq) {
 		xa_erase(&file_priv->vdev->db_xa, cmdq->db_id);
 		cmdq->db_id = 0;
 	}
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	for (engine = 0; engine < IVPU_NUM_ENGINES; engine++) {
+		for (priority = 0; priority < IVPU_NUM_PRIORITIES; priority++) {
+			int cmdq_idx = IVPU_CMDQ_INDEX(engine, priority);
+			struct ivpu_cmdq *cmdq = file_priv->cmdq[cmdq_idx];
+
+			if (cmdq)
+				cmdq->db_registered = false;
+		}
+	}
+=======
+	xa_for_each(&file_priv->cmdq_xa, cmdq_id, cmdq)
+		cmdq->db_registered = false;
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 
 	mutex_unlock(&file_priv->lock);
 }
@@ -360,6 +548,34 @@ void ivpu_cmdq_reset_all_contexts(struct ivpu_device *vdev)
 	mutex_unlock(&vdev->context_list_lock);
 }
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+static void ivpu_cmdq_fini_all(struct ivpu_file_priv *file_priv)
+{
+	u16 engine;
+	u8 priority;
+
+	for (engine = 0; engine < IVPU_NUM_ENGINES; engine++) {
+		for (priority = 0; priority < IVPU_NUM_PRIORITIES; priority++) {
+			int cmdq_idx = IVPU_CMDQ_INDEX(engine, priority);
+
+			if (file_priv->cmdq[cmdq_idx])
+				ivpu_cmdq_fini(file_priv, file_priv->cmdq[cmdq_idx]);
+		}
+	}
+}
+
+=======
+static void ivpu_cmdq_fini_all(struct ivpu_file_priv *file_priv)
+{
+	struct ivpu_cmdq *cmdq;
+	unsigned long cmdq_id;
+
+	xa_for_each(&file_priv->cmdq_xa, cmdq_id, cmdq)
+		ivpu_cmdq_fini(file_priv, cmdq);
+}
+
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 void ivpu_context_abort_locked(struct ivpu_file_priv *file_priv)
 {
 	struct ivpu_device *vdev = file_priv->vdev;
@@ -402,7 +618,13 @@ static int ivpu_cmdq_push_job(struct ivpu_cmdq *cmdq, struct ivpu_job *job)
 	if (unlikely(ivpu_test_mode & IVPU_TEST_MODE_NULL_SUBMISSION))
 		entry->flags = VPU_JOB_FLAGS_NULL_SUBMISSION_MASK;
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	if (vdev->fw->sched_mode == VPU_SCHEDULING_MODE_HW) {
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+=======
+	if (vdev->fw->sched_mode == VPU_SCHEDULING_MODE_HW &&
+	    (unlikely(!(ivpu_test_mode & IVPU_TEST_MODE_PREEMPTION_DISABLE)))) {
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 		if (cmdq->primary_preempt_buf) {
 			entry->primary_preempt_buf_addr = cmdq->primary_preempt_buf->vpu_addr;
 			entry->primary_preempt_buf_size = ivpu_bo_size(cmdq->primary_preempt_buf);
@@ -620,10 +842,16 @@ static int ivpu_job_submit(struct ivpu_job *job, u8 priority, u32 cmdq_id)
 	mutex_lock(&vdev->submitted_jobs_lock);
 	mutex_lock(&file_priv->lock);
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	if (cmdq_id == 0)
 		cmdq = ivpu_cmdq_acquire_legacy(file_priv, priority);
 	else
 		cmdq = ivpu_cmdq_acquire(file_priv, cmdq_id);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	cmdq = ivpu_cmdq_acquire(file_priv, job->engine_idx, priority);
+=======
+	cmdq = ivpu_cmdq_acquire(file_priv, priority);
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 	if (!cmdq) {
 		ivpu_warn_ratelimited(vdev, "Failed to get job queue, ctx %d\n", file_priv->ctx.id);
 		ret = -EINVAL;
@@ -762,7 +990,49 @@ static int ivpu_submit(struct drm_file *file, struct ivpu_file_priv *file_priv, 
 	u32 *buf_handles;
 	int idx, ret;
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	buf_handles = kcalloc(buffer_count, sizeof(u32), GFP_KERNEL);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	if (params->engine > DRM_IVPU_ENGINE_COPY)
+		return -EINVAL;
+
+	if (params->priority > DRM_IVPU_JOB_PRIORITY_REALTIME)
+		return -EINVAL;
+
+	if (params->buffer_count == 0 || params->buffer_count > JOB_MAX_BUFFER_COUNT)
+		return -EINVAL;
+
+	if (!IS_ALIGNED(params->commands_offset, 8))
+		return -EINVAL;
+
+	if (!file_priv->ctx.id)
+		return -EINVAL;
+
+	if (file_priv->has_mmu_faults)
+		return -EBADFD;
+
+	buf_handles = kcalloc(params->buffer_count, sizeof(u32), GFP_KERNEL);
+=======
+	if (params->engine != DRM_IVPU_ENGINE_COMPUTE)
+		return -EINVAL;
+
+	if (params->priority > DRM_IVPU_JOB_PRIORITY_REALTIME)
+		return -EINVAL;
+
+	if (params->buffer_count == 0 || params->buffer_count > JOB_MAX_BUFFER_COUNT)
+		return -EINVAL;
+
+	if (!IS_ALIGNED(params->commands_offset, 8))
+		return -EINVAL;
+
+	if (!file_priv->ctx.id)
+		return -EINVAL;
+
+	if (file_priv->has_mmu_faults)
+		return -EBADFD;
+
+	buf_handles = kcalloc(params->buffer_count, sizeof(u32), GFP_KERNEL);
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 	if (!buf_handles)
 		return -ENOMEM;
 
@@ -986,7 +1256,8 @@ void ivpu_context_abort_work_fn(struct work_struct *work)
 		return;
 
 	if (vdev->fw->sched_mode == VPU_SCHEDULING_MODE_HW)
-		ivpu_jsm_reset_engine(vdev, 0);
+		if (ivpu_jsm_reset_engine(vdev, 0))
+			return;
 
 	mutex_lock(&vdev->context_list_lock);
 	xa_for_each(&vdev->context_xa, ctx_id, file_priv) {
@@ -1009,7 +1280,8 @@ void ivpu_context_abort_work_fn(struct work_struct *work)
 	if (vdev->fw->sched_mode != VPU_SCHEDULING_MODE_HW)
 		goto runtime_put;
 
-	ivpu_jsm_hws_resume_engine(vdev, 0);
+	if (ivpu_jsm_hws_resume_engine(vdev, 0))
+		return;
 	/*
 	 * In hardware scheduling mode NPU already has stopped processing jobs
 	 * and won't send us any further notifications, thus we have to free job related resources

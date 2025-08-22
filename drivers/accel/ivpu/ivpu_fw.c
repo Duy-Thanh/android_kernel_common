@@ -55,18 +55,32 @@ static struct {
 	int gen;
 	const char *name;
 } fw_names[] = {
-	{ IVPU_HW_IP_37XX, "vpu_37xx.bin" },
+	{ IVPU_HW_IP_37XX, "intel/vpu/vpu_37xx_v1.bin" },
 	{ IVPU_HW_IP_37XX, "intel/vpu/vpu_37xx_v0.0.bin" },
-	{ IVPU_HW_IP_40XX, "vpu_40xx.bin" },
+	{ IVPU_HW_IP_40XX, "intel/vpu/vpu_40xx_v1.bin" },
 	{ IVPU_HW_IP_40XX, "intel/vpu/vpu_40xx_v0.0.bin" },
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	{ IVPU_HW_IP_50XX, "vpu_50xx.bin" },
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+=======
+	{ IVPU_HW_IP_50XX, "intel/vpu/vpu_50xx_v1.bin" },
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 	{ IVPU_HW_IP_50XX, "intel/vpu/vpu_50xx_v0.0.bin" },
 };
 
 /* Production fw_names from the table above */
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 MODULE_FIRMWARE("intel/vpu/vpu_37xx_v0.0.bin");
 MODULE_FIRMWARE("intel/vpu/vpu_40xx_v0.0.bin");
 MODULE_FIRMWARE("intel/vpu/vpu_50xx_v0.0.bin");
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+MODULE_FIRMWARE("intel/vpu/vpu_37xx_v0.0.bin");
+MODULE_FIRMWARE("intel/vpu/vpu_40xx_v0.0.bin");
+=======
+MODULE_FIRMWARE("intel/vpu/vpu_37xx_v1.bin");
+MODULE_FIRMWARE("intel/vpu/vpu_40xx_v1.bin");
+MODULE_FIRMWARE("intel/vpu/vpu_50xx_v1.bin");
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 
 static int ivpu_fw_request(struct ivpu_device *vdev)
 {

@@ -37,6 +37,7 @@
 #include "xe_gt_printk.h"
 #include "xe_gt_sriov_vf.h"
 #include "xe_guc.h"
+#include "xe_guc_pc.h"
 #include "xe_hw_engine_group.h"
 #include "xe_hwmon.h"
 #include "xe_irq.h"
@@ -376,7 +377,12 @@ err:
 
 static bool xe_driver_flr_disabled(struct xe_device *xe)
 {
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	return xe_mmio_read32(xe_root_tile_mmio(xe), GU_CNTL_PROTECTED) & DRIVERINT_FLR_DIS;
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+=======
+	return xe_mmio_read32(xe_root_mmio_gt(xe), GU_CNTL_PROTECTED) & DRIVERINT_FLR_DIS;
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 }
 
 /*
@@ -436,6 +442,16 @@ static void __xe_driver_flr(struct xe_device *xe)
 
 	/* Clear sticky completion status */
 	xe_mmio_write32(mmio, GU_DEBUG, DRIVERFLR_STATUS);
+}
+
+static void xe_driver_flr(struct xe_device *xe)
+{
+	if (xe_driver_flr_disabled(xe)) {
+		drm_info_once(&xe->drm, "BIOS Disabled Driver-FLR\n");
+		return;
+	}
+
+	__xe_driver_flr(xe);
 }
 
 static void xe_driver_flr(struct xe_device *xe)
@@ -705,7 +721,9 @@ int xe_device_probe(struct xe_device *xe)
 	}
 
 	/* Allocate and map stolen after potential VRAM resize */
-	xe_ttm_stolen_mgr_init(xe);
+	err = xe_ttm_stolen_mgr_init(xe);
+	if (err)
+		return err;
 
 	/*
 	 * Now that GT is initialized (TTM in particular),
@@ -716,6 +734,12 @@ int xe_device_probe(struct xe_device *xe)
 	err = xe_display_init_noaccel(xe);
 	if (err)
 		goto err;
+
+	for_each_tile(tile, xe, id) {
+		err = xe_tile_init(tile);
+		if (err)
+			goto err;
+	}
 
 	for_each_gt(gt, xe, id) {
 		last_gt = id;
@@ -862,18 +886,34 @@ void xe_device_td_flush(struct xe_device *xe)
 	if (!IS_DGFX(xe) || GRAPHICS_VER(xe) < 20)
 		return;
 
-	if (XE_WA(xe_root_mmio_gt(xe), 16023588340)) {
+	gt = xe_root_mmio_gt(xe);
+	if (XE_WA(gt, 16023588340)) {
+		/* A transient flush is not sufficient: flush the L2 */
 		xe_device_l2_flush(xe);
-		return;
-	}
+	} else {
+		xe_guc_pc_apply_flush_freq_limit(&gt->uc.guc.pc);
+		
+		/* Execute TDF flush on all graphics GTs */
+		for_each_gt(gt, xe, id) {
+			if (xe_gt_is_media_type(gt))
+				continue;
 
-	for_each_gt(gt, xe, id) {
-		if (xe_gt_is_media_type(gt))
-			continue;
+			if (xe_force_wake_get(gt_to_fw(gt), XE_FW_GT))
+				return;
 
-		if (xe_force_wake_get(gt_to_fw(gt), XE_FW_GT))
-			return;
+			xe_mmio_write32(gt, XE2_TDF_CTRL, TRANSIENT_FLUSH_REQUEST);
+			/*
+			 * FIXME: We can likely do better here with our choice of
+			 * timeout. Currently we just assume the worst case, i.e. 150us,
+			 * which is believed to be sufficient to cover the worst case
+			 * scenario on current platforms if all cache entries are
+			 * transient and need to be flushed..
+			 */
+			if (xe_mmio_wait32(gt, XE2_TDF_CTRL, TRANSIENT_FLUSH_REQUEST, 0,
+					   150, NULL, false))
+				xe_gt_err_once(gt, "TD flush timeout\n");
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 		xe_mmio_write32(&gt->mmio, XE2_TDF_CTRL, TRANSIENT_FLUSH_REQUEST);
 		/*
 		 * FIXME: We can likely do better here with our choice of
@@ -887,6 +927,26 @@ void xe_device_td_flush(struct xe_device *xe)
 			xe_gt_err_once(gt, "TD flush timeout\n");
 
 		xe_force_wake_put(gt_to_fw(gt), XE_FW_GT);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+		xe_mmio_write32(gt, XE2_TDF_CTRL, TRANSIENT_FLUSH_REQUEST);
+		/*
+		 * FIXME: We can likely do better here with our choice of
+		 * timeout. Currently we just assume the worst case, i.e. 150us,
+		 * which is believed to be sufficient to cover the worst case
+		 * scenario on current platforms if all cache entries are
+		 * transient and need to be flushed..
+		 */
+		if (xe_mmio_wait32(gt, XE2_TDF_CTRL, TRANSIENT_FLUSH_REQUEST, 0,
+				   150, NULL, false))
+			xe_gt_err_once(gt, "TD flush timeout\n");
+
+		xe_force_wake_put(gt_to_fw(gt), XE_FW_GT);
+=======
+			xe_force_wake_put(gt_to_fw(gt), XE_FW_GT);
+		}
+		
+		xe_guc_pc_remove_flush_freq_limit(&xe_root_mmio_gt(xe)->uc.guc.pc);
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 	}
 }
 

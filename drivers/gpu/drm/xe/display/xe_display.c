@@ -96,6 +96,8 @@ int xe_display_create(struct xe_device *xe)
 	spin_lock_init(&xe->display.fb_tracking.lock);
 
 	xe->display.hotplug.dp_wq = alloc_ordered_workqueue("xe-dp", 0);
+	if (!xe->display.hotplug.dp_wq)
+		return -ENOMEM;
 
 	return drmm_add_action_or_reset(&xe->drm, display_destroy, NULL);
 }
@@ -372,6 +374,7 @@ void xe_display_pm_shutdown(struct xe_device *xe)
 	if (!xe->info.probe_display)
 		return;
 
+<<<<<<< HEAD   (4e823e0e1f45a7358a3393404a7c4067199c38a2 BACKPORT: FROMGIT: drm/i915/icl+/tc: Convert AUX powered WAR)
 	intel_power_domains_disable(display);
 	intel_fbdev_set_suspend(&xe->drm, FBINFO_STATE_SUSPENDED, true);
 	if (has_display(xe)) {
@@ -393,6 +396,30 @@ void xe_display_pm_shutdown(struct xe_device *xe)
 	intel_opregion_suspend(display, PCI_D3cold);
 
 	intel_dmc_suspend(display);
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+=======
+	intel_power_domains_disable(xe);
+	intel_fbdev_set_suspend(&xe->drm, FBINFO_STATE_SUSPENDED, true);
+	if (has_display(xe)) {
+		drm_kms_helper_poll_disable(&xe->drm);
+		intel_display_driver_disable_user_access(xe);
+		intel_display_driver_suspend(xe);
+	}
+
+	xe_display_flush_cleanup_work(xe);
+	intel_dp_mst_suspend(xe);
+	intel_hpd_cancel_work(xe);
+
+	if (has_display(xe))
+		intel_display_driver_suspend_access(xe);
+
+	intel_encoder_suspend_all(display);
+	intel_encoder_shutdown_all(display);
+
+	intel_opregion_suspend(display, PCI_D3cold);
+
+	intel_dmc_suspend(xe);
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 }
 
 void xe_display_pm_runtime_suspend(struct xe_device *xe)
@@ -450,6 +477,19 @@ void xe_display_pm_shutdown_late(struct xe_device *xe)
 	 * enabled.
 	 */
 	intel_power_domains_driver_remove(display);
+}
+
+void xe_display_pm_shutdown_late(struct xe_device *xe)
+{
+	if (!xe->info.probe_display)
+		return;
+
+	/*
+	 * The only requirement is to reboot with display DC states disabled,
+	 * for now leaving all display power wells in the INIT power domain
+	 * enabled.
+	 */
+	intel_power_domains_driver_remove(xe);
 }
 
 void xe_display_pm_resume_early(struct xe_device *xe)
