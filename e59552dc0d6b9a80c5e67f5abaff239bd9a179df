@@ -16,6 +16,24 @@
       "message": "Also needed on android15-6.6?",
       "revId": "e59552dc0d6b9a80c5e67f5abaff239bd9a179df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68df7ac3_6d16ea8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-08-22T12:57:41Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll backport once we\u0027re happy with this one.",
+      "parentUuid": "5a43b053_9bcc199a",
+      "revId": "e59552dc0d6b9a80c5e67f5abaff239bd9a179df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
