@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320336ed_8f103ee3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-22T17:45:11Z",
+      "side": 1,
+      "message": "This was reverted since it isn\u0027t in the upstream Linux branch and is therefore not UPSTREAM. Please reclassify appropriately (FROMGIT? FROMLIST?) and re-submit.",
+      "revId": "60ca34a631961cd529eb2ed2ee335be5c2a9f64c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
