@@ -34,6 +34,24 @@
       "parentUuid": "183ea4b5_da0ac853",
       "revId": "f9e3a903602c37aab190218b5d08efb806d32c13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68bfce16_69338fb7",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-08-22T00:27:33Z",
+      "side": 1,
+      "message": "Reasonable to me. We can do it in v6.15 rebase.",
+      "parentUuid": "8d826a9f_195d15b5",
+      "revId": "f9e3a903602c37aab190218b5d08efb806d32c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
