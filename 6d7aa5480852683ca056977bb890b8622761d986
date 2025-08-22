@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9272281f_44e0d3d5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-22T12:28:08Z",
+      "side": 1,
+      "message": "You should `READ_ONCE()` this into a local variable.",
+      "range": {
+        "startLine": 253,
+        "startChar": 6,
+        "endLine": 253,
+        "endChar": 27
+      },
+      "revId": "6d7aa5480852683ca056977bb890b8622761d986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

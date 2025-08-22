@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10fbd054_8be223da",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-22T12:28:08Z",
+      "side": 1,
+      "message": "I\u0027m not following how `__ro_after_init` could be used here, but I think we still need the `cmpxchg64()` for atomicity. You can just use `cmpxchg64_relaxed()` instead of the release variant.",
+      "parentUuid": "a9c2b3c6_737eb62e",
+      "range": {
+        "startLine": 246,
+        "startChar": 5,
+        "endLine": 246,
+        "endChar": 22
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24b5121d_d08cbf8d",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 4
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "\u003e Do we really care about SMC32? \n\nHonestly I think we don\u0027t, most of the use cases seem to rely on SMC64. Yet I think we should leave it, unless SMC32 bloats the code too much. TF-A implements both at the same time, and it should be as close to it as possible.",
       "parentUuid": "24b5121d_d08cbf8d",
+      "range": {
+        "startLine": 1725,
+        "startChar": 8,
+        "endLine": 1725,
+        "endChar": 33
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d1e365_ca2dfe4a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1725,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-22T12:28:08Z",
+      "side": 1,
+      "message": "I\u0027d prefer to drop it for now and add it back if we find out somebody actually needs it.",
+      "parentUuid": "5a769366_0e4ce6b7",
       "range": {
         "startLine": 1725,
         "startChar": 8,
@@ -338,6 +386,30 @@
       "side": 1,
       "message": "The module would fill the entropy buffer in little endian. On the odd change of ARM64 big endian device running this code, it would fail.",
       "parentUuid": "31e69875_ec65ddfc",
+      "range": {
+        "startLine": 1749,
+        "startChar": 0,
+        "endLine": 1756,
+        "endChar": 0
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac3d942_48dbba0b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-08-22T12:28:08Z",
+      "side": 1,
+      "message": "I\u0027m just having a hard time understanding how the endianness matters for entropy. What goes wrong if you don\u0027t byte swap it?",
+      "parentUuid": "66afc5d4_3b2170c3",
       "range": {
         "startLine": 1749,
         "startChar": 0,
