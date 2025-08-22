@@ -43,6 +43,7 @@
  * @pctrl:          pinctrl handle.
  * @chip:           gpiochip handle.
  * @desc:           pin controller descriptor
+ * @restart_nb:     restart notifier block.
  * @irq:            parent irq for the TLMM irq_chip.
  * @intr_target_use_scm: route irq to application cpu using scm calls
  * @lock:           Spinlock to protect register resources as well
@@ -62,6 +63,7 @@ struct msm_pinctrl {
 	struct pinctrl_dev *pctrl;
 	struct gpio_chip chip;
 	struct pinctrl_desc desc;
+	struct notifier_block restart_nb;
 
 	int irq;
 
@@ -1468,9 +1470,10 @@ static int msm_gpio_init(struct msm_pinctrl *pctrl)
 	return 0;
 }
 
-static int msm_ps_hold_restart(struct sys_off_data *data)
+static int msm_ps_hold_restart(struct notifier_block *nb, unsigned long action,
+			       void *data)
 {
-	struct msm_pinctrl *pctrl = data->cb_data;
+	struct msm_pinctrl *pctrl = container_of(nb, struct msm_pinctrl, restart_nb);
 
 	writel(0, pctrl->regs[0] + PS_HOLD_OFFSET);
 	mdelay(1000);
@@ -1481,11 +1484,7 @@ static struct msm_pinctrl *poweroff_pctrl;
 
 static void msm_ps_hold_poweroff(void)
 {
-	struct sys_off_data data = {
-		.cb_data = poweroff_pctrl,
-	};
-
-	msm_ps_hold_restart(&data);
+	msm_ps_hold_restart(&poweroff_pctrl->restart_nb, 0, NULL);
 }
 
 static void msm_pinctrl_setup_pm_reset(struct msm_pinctrl *pctrl)
@@ -1495,11 +1494,9 @@ static void msm_pinctrl_setup_pm_reset(struct msm_pinctrl *pctrl)
 
 	for (i = 0; i < pctrl->soc->nfunctions; i++)
 		if (!strcmp(func[i].name, "ps_hold")) {
-			if (devm_register_sys_off_handler(pctrl->dev,
-							  SYS_OFF_MODE_RESTART,
-							  128,
-							  msm_ps_hold_restart,
-							  pctrl))
+			pctrl->restart_nb.notifier_call = msm_ps_hold_restart;
+			pctrl->restart_nb.priority = 128;
+			if (register_restart_handler(&pctrl->restart_nb))
 				dev_err(pctrl->dev,
 					"failed to setup restart handler.\n");
 			poweroff_pctrl = pctrl;
@@ -1601,6 +1598,8 @@ void msm_pinctrl_remove(struct platform_device *pdev)
 	struct msm_pinctrl *pctrl = platform_get_drvdata(pdev);
 
 	gpiochip_remove(&pctrl->chip);
+
+	unregister_restart_handler(&pctrl->restart_nb);
 }
 EXPORT_SYMBOL(msm_pinctrl_remove);
 

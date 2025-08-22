@@ -31,7 +31,9 @@
 
 #include <linux/completion.h>
 #include <linux/device-mapper.h>
+#include <linux/kernel.h>
 #include <linux/lz4.h>
+#include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/spinlock.h>
 #include <linux/types.h>
@@ -139,6 +141,12 @@ static void finish_vdo_request_queue(void *ptr)
 {
 	vdo_unregister_allocating_thread();
 }
+
+#ifdef MODULE
+#define MODULE_NAME THIS_MODULE->name
+#else
+#define MODULE_NAME "dm-vdo"
+#endif  /* MODULE */
 
 static const struct vdo_work_queue_type default_queue_type = {
 	.start = start_vdo_request_queue,
@@ -551,7 +559,8 @@ int vdo_make(unsigned int instance, struct device_config *config, char **reason,
 	*vdo_ptr = vdo;
 
 	snprintf(vdo->thread_name_prefix, sizeof(vdo->thread_name_prefix),
-		 "vdo%u", instance);
+		 "%s%u", MODULE_NAME, instance);
+	BUG_ON(vdo->thread_name_prefix[0] == '\0');
 	result = vdo_allocate(vdo->thread_config.thread_count,
 			      struct vdo_thread, __func__, &vdo->threads);
 	if (result != VDO_SUCCESS) {

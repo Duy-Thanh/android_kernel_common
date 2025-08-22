@@ -2417,9 +2417,6 @@ def render_uapi(family, cw):
 
     defines = []
     for const in family['definitions']:
-        if const.get('header'):
-            continue
-
         if const['type'] != 'const':
             cw.writes_defines(defines)
             defines = []

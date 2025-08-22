@@ -26,8 +26,6 @@
 
 	leds {
 		compatible = "gpio-leds";
-		pinctrl-names = "default";
-		pinctrl-0 = <&spi_quad_pins>;
 
 		led-power1 {
 			label = "udpu:green:power";
@@ -84,6 +82,8 @@
 
 &spi0 {
 	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi_quad_pins>;
 
 	flash@0 {
 		compatible = "jedec,spi-nor";
@@ -106,10 +106,6 @@
 			};
 		};
 	};
-};
-
-&spi_quad_pins {
-	function = "gpio";
 };
 
 &pinctrl_nb {

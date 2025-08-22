@@ -794,8 +794,7 @@ static int sof_ipc4_pcm_setup(struct snd_sof_dev *sdev, struct snd_sof_pcm *spcm
 
 		spcm->stream[stream].private = stream_priv;
 
-		/* Delay reporting is only supported on playback */
-		if (!support_info || stream == SNDRV_PCM_STREAM_CAPTURE)
+		if (!support_info)
 			continue;
 
 		time_info = kzalloc(sizeof(*time_info), GFP_KERNEL);

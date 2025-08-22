@@ -45,7 +45,7 @@ static void ice_free_irq_res(struct ice_pf *pf, u16 index)
 /**
  * ice_get_irq_res - get an interrupt resource
  * @pf: board private structure
- * @dyn_allowed: allow entry to be dynamically allocated
+ * @dyn_only: force entry to be dynamically allocated
  *
  * Allocate new irq entry in the free slot of the tracker. Since xarray
  * is used, always allocate new entry at the lowest possible index. Set
@@ -53,12 +53,11 @@ static void ice_free_irq_res(struct ice_pf *pf, u16 index)
  *
  * Returns allocated irq entry or NULL on failure.
  */
-static struct ice_irq_entry *ice_get_irq_res(struct ice_pf *pf,
-					     bool dyn_allowed)
+static struct ice_irq_entry *ice_get_irq_res(struct ice_pf *pf, bool dyn_only)
 {
-	struct xa_limit limit = { .max = pf->irq_tracker.num_entries - 1,
+	struct xa_limit limit = { .max = pf->irq_tracker.num_entries,
 				  .min = 0 };
-	unsigned int num_static = pf->irq_tracker.num_static - 1;
+	unsigned int num_static = pf->irq_tracker.num_static;
 	struct ice_irq_entry *entry;
 	unsigned int index;
 	int ret;
@@ -67,9 +66,9 @@ static struct ice_irq_entry *ice_get_irq_res(struct ice_pf *pf,
 	if (!entry)
 		return NULL;
 
-	/* only already allocated if the caller says so */
-	if (!dyn_allowed)
-		limit.max = num_static;
+	/* skip preallocated entries if the caller says so */
+	if (dyn_only)
+		limit.min = num_static;
 
 	ret = xa_alloc(&pf->irq_tracker.entries, &index, entry, limit,
 		       GFP_KERNEL);
@@ -79,7 +78,7 @@ static struct ice_irq_entry *ice_get_irq_res(struct ice_pf *pf,
 		entry = NULL;
 	} else {
 		entry->index = index;
-		entry->dynamic = index > num_static;
+		entry->dynamic = index >= num_static;
 	}
 
 	return entry;
@@ -273,7 +272,7 @@ int ice_init_interrupt_scheme(struct ice_pf *pf)
 /**
  * ice_alloc_irq - Allocate new interrupt vector
  * @pf: board private structure
- * @dyn_allowed: allow dynamic allocation of the interrupt
+ * @dyn_only: force dynamic allocation of the interrupt
  *
  * Allocate new interrupt vector for a given owner id.
  * return struct msi_map with interrupt details and track
@@ -286,20 +285,20 @@ int ice_init_interrupt_scheme(struct ice_pf *pf)
  * interrupt will be allocated with pci_msix_alloc_irq_at.
  *
  * Some callers may only support dynamically allocated interrupts.
- * This is indicated with dyn_allowed flag.
+ * This is indicated with dyn_only flag.
  *
  * On failure, return map with negative .index. The caller
  * is expected to check returned map index.
  *
  */
-struct msi_map ice_alloc_irq(struct ice_pf *pf, bool dyn_allowed)
+struct msi_map ice_alloc_irq(struct ice_pf *pf, bool dyn_only)
 {
 	int sriov_base_vector = pf->sriov_base_vector;
 	struct msi_map map = { .index = -ENOENT };
 	struct device *dev = ice_pf_to_dev(pf);
 	struct ice_irq_entry *entry;
 
-	entry = ice_get_irq_res(pf, dyn_allowed);
+	entry = ice_get_irq_res(pf, dyn_only);
 	if (!entry)
 		return map;
 

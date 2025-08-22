@@ -179,18 +179,14 @@ struct sk_buff *xfrm6_gro_udp_encap_rcv(struct sock *sk, struct list_head *head,
 	int offset = skb_gro_offset(skb);
 	const struct net_offload *ops;
 	struct sk_buff *pp = NULL;
-	int len, dlen;
-	__u8 *udpdata;
-	__be32 *udpdata32;
+	int ret;
 
 	if (skb->protocol == htons(ETH_P_IP))
 		return xfrm4_gro_udp_encap_rcv(sk, head, skb);
 
-	len = skb->len - offset;
-	dlen = offset + min(len, 8);
-	udpdata = skb_gro_header(skb, dlen, offset);
-	udpdata32 = (__be32 *)udpdata;
-	if (unlikely(!udpdata))
+	offset = offset - sizeof(struct udphdr);
+
+	if (!pskb_pull(skb, offset))
 		return NULL;
 
 	rcu_read_lock();
@@ -198,10 +194,11 @@ struct sk_buff *xfrm6_gro_udp_encap_rcv(struct sock *sk, struct list_head *head,
 	if (!ops || !ops->callbacks.gro_receive)
 		goto out;
 
-	/* check if it is a keepalive or IKE packet */
-	if (len <= sizeof(struct ip_esp_hdr) || udpdata32[0] == 0)
+	ret = __xfrm6_udp_encap_rcv(sk, skb, false);
+	if (ret)
 		goto out;
 
+	skb_push(skb, offset);
 	NAPI_GRO_CB(skb)->proto = IPPROTO_UDP;
 
 	pp = call_gro_receive(ops->callbacks.gro_receive, head, skb);
@@ -211,6 +208,7 @@ struct sk_buff *xfrm6_gro_udp_encap_rcv(struct sock *sk, struct list_head *head,
 
 out:
 	rcu_read_unlock();
+	skb_push(skb, offset);
 	NAPI_GRO_CB(skb)->same_flow = 0;
 	NAPI_GRO_CB(skb)->flush = 1;
 

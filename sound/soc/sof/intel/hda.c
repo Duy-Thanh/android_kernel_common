@@ -1007,21 +1007,7 @@ static void hda_generic_machine_select(struct snd_sof_dev *sdev,
 		if (!*mach && codec_num <= 2) {
 			bool tplg_fixup = false;
 
-			/*
-			 * make a local copy of the match array since we might
-			 * be modifying it
-			 */
-			hda_mach = devm_kmemdup_array(sdev->dev,
-					snd_soc_acpi_intel_hda_machines,
-					2, /* we have one entry + sentinel in the array */
-					sizeof(snd_soc_acpi_intel_hda_machines[0]),
-					GFP_KERNEL);
-			if (!hda_mach) {
-				dev_err(bus->dev,
-					"%s: failed to duplicate the HDA match table\n",
-					__func__);
-				return;
-			}
+			hda_mach = snd_soc_acpi_intel_hda_machines;
 
 			dev_info(bus->dev, "using HDA machine driver %s now\n",
 				 hda_mach->drv_name);

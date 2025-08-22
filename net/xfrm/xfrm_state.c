@@ -773,6 +773,9 @@ int __xfrm_state_delete(struct xfrm_state *x)
 		xfrm_nat_keepalive_state_updated(x);
 		spin_unlock(&net->xfrm.xfrm_state_lock);
 
+		if (x->encap_sk)
+			sock_put(rcu_dereference_raw(x->encap_sk));
+
 		xfrm_dev_state_delete(x);
 
 		/* All xfrm_state objects are created by xfrm_state_alloc.
@@ -1652,9 +1655,6 @@ static void __xfrm_state_insert(struct xfrm_state *x)
 	unsigned int h;
 
 	list_add(&x->km.all, &net->xfrm.state_all);
-
-	/* Sanitize mark before store */
-	x->mark.v &= x->mark.m;
 
 	h = xfrm_dst_hash(net, &x->id.daddr, &x->props.saddr,
 			  x->props.reqid, x->props.family);
