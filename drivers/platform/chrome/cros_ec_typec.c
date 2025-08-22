@@ -1225,7 +1225,13 @@ static int cros_typec_probe(struct platform_device *pdev)
 	typec->dev = dev;
 
 	typec->ec = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD   (dad46dcfd3958cd0c928f710d9f5be01351b7859 Revert "sched/psi: Optimize psi_group_change() cpu_clock() u)
 	if (!typec->ec || !typec->ec->ec) {
+||||||| BASE   (880e4ff5d6c8dc6b660f163a0e9b68b898cc6310 Linux 6.12.42)
+	if (!typec->ec) {
+=======
+	if (!typec->ec) {
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 		dev_warn(dev, "couldn't find parent EC device\n");
 		return -EPROBE_DEFER;
 	}
