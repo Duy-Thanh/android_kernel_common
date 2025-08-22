@@ -552,6 +552,10 @@ void *hyp_alloc(size_t size)
 	size_t missing_map;
 	int ret = 0;
 
+	/* constrained by chunk_hdr *_size types */
+	if (size > U32_MAX)
+		return -E2BIG;
+
 	size = ALIGN(size ?: MIN_ALLOC, MIN_ALLOC);
 
 	hyp_spin_lock(&allocator->lock);
