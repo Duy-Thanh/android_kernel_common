@@ -27,6 +27,7 @@
  */
 #define FSCRYPT_MIN_KEY_SIZE	16
 
+<<<<<<< HEAD   (dad46dcfd3958cd0c928f710d9f5be01351b7859 Revert "sched/psi: Optimize psi_group_change() cpu_clock() u)
 /* Maximum size of a standard fscrypt master key */
 #define FSCRYPT_MAX_STANDARD_KEY_SIZE	64
 
@@ -47,6 +48,25 @@
  * Don't use it in kernel code; use one of the above constants instead.
  */
 #undef FSCRYPT_MAX_KEY_SIZE
+||||||| BASE   (880e4ff5d6c8dc6b660f163a0e9b68b898cc6310 Linux 6.12.42)
+=======
+/*
+ * This mask is passed as the third argument to the crypto_alloc_*() functions
+ * to prevent fscrypt from using the Crypto API drivers for non-inline crypto
+ * engines.  Those drivers have been problematic for fscrypt.  fscrypt users
+ * have reported hangs and even incorrect en/decryption with these drivers.
+ * Since going to the driver, off CPU, and back again is really slow, such
+ * drivers can be over 50 times slower than the CPU-based code for fscrypt's
+ * workload.  Even on platforms that lack AES instructions on the CPU, using the
+ * offloads has been shown to be slower, even staying with AES.  (Of course,
+ * Adiantum is faster still, and is the recommended option on such platforms...)
+ *
+ * Note that fscrypt also supports inline crypto engines.  Those don't use the
+ * Crypto API and work much better than the old-style (non-inline) engines.
+ */
+#define FSCRYPT_CRYPTOAPI_MASK \
+	(CRYPTO_ALG_ALLOCATES_MEMORY | CRYPTO_ALG_KERN_DRIVER_ONLY)
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 
 #define FSCRYPT_CONTEXT_V1	1
 #define FSCRYPT_CONTEXT_V2	2

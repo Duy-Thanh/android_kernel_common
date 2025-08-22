@@ -829,7 +829,12 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 		 */
 		siaddr  = untagged_addr(far);
 	}
+<<<<<<< HEAD   (dad46dcfd3958cd0c928f710d9f5be01351b7859 Revert "sched/psi: Optimize psi_group_change() cpu_clock() u)
 	trace_android_rvh_do_sea(siaddr, esr, regs);
+||||||| BASE   (880e4ff5d6c8dc6b660f163a0e9b68b898cc6310 Linux 6.12.42)
+=======
+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;

@@ -1797,8 +1797,7 @@ static void init_clone_info(struct clone_info *ci, struct dm_io *io,
 }
 
 #ifdef CONFIG_BLK_DEV_ZONED
-static inline bool dm_zone_bio_needs_split(struct mapped_device *md,
-					   struct bio *bio)
+static inline bool dm_zone_bio_needs_split(struct bio *bio)
 {
 	/*
 	 * Special case the zone operations that cannot or should not be split.
@@ -1814,6 +1813,7 @@ static inline bool dm_zone_bio_needs_split(struct mapped_device *md,
 	}
 
 	/*
+<<<<<<< HEAD   (dad46dcfd3958cd0c928f710d9f5be01351b7859 Revert "sched/psi: Optimize psi_group_change() cpu_clock() u)
 	 * Mapped devices that require zone append emulation will use the block
 	 * layer zone write plugging. In such case, we must split any large BIO
 	 * to the mapped device limits to avoid potential deadlocks with queue
@@ -1821,6 +1821,14 @@ static inline bool dm_zone_bio_needs_split(struct mapped_device *md,
 	 */
 	if (!dm_emulate_zone_append(md))
 		return false;
+||||||| BASE   (880e4ff5d6c8dc6b660f163a0e9b68b898cc6310 Linux 6.12.42)
+=======
+	 * When mapped devices use the block layer zone write plugging, we must
+	 * split any large BIO to the mapped device limits to not submit BIOs
+	 * that span zone boundaries and to avoid potential deadlocks with
+	 * queue freeze operations.
+	 */
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 	return bio_needs_zone_write_plugging(bio) || bio_straddles_zones(bio);
 }
 
@@ -1944,8 +1952,7 @@ static blk_status_t __send_zone_reset_all(struct clone_info *ci)
 }
 
 #else
-static inline bool dm_zone_bio_needs_split(struct mapped_device *md,
-					   struct bio *bio)
+static inline bool dm_zone_bio_needs_split(struct bio *bio)
 {
 	return false;
 }
@@ -1972,7 +1979,15 @@ static void dm_split_and_process_bio(struct mapped_device *md,
 
 	is_abnormal = is_abnormal_io(bio);
 	if (static_branch_unlikely(&zoned_enabled)) {
+<<<<<<< HEAD   (dad46dcfd3958cd0c928f710d9f5be01351b7859 Revert "sched/psi: Optimize psi_group_change() cpu_clock() u)
 		need_split = is_abnormal || dm_zone_bio_needs_split(md, bio);
+||||||| BASE   (880e4ff5d6c8dc6b660f163a0e9b68b898cc6310 Linux 6.12.42)
+		/* Special case REQ_OP_ZONE_RESET_ALL as it cannot be split. */
+		need_split = (bio_op(bio) != REQ_OP_ZONE_RESET_ALL) &&
+			(is_abnormal || dm_zone_bio_needs_split(md, bio));
+=======
+		need_split = is_abnormal || dm_zone_bio_needs_split(bio);
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 	} else {
 		need_split = is_abnormal;
 	}
