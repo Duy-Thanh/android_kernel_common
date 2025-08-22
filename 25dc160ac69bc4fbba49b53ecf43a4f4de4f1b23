@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ce913c_dbf3ef37",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3648,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-22T15:24:29Z",
+      "side": 1,
+      "message": "If the only field this vendor hook is using is `pad`, I would suggest passing  `zones_extra_data[zone_idx(zone)].pad` here instead of the whole `struct per_cpu_zone_extra_data`. This way `struct per_cpu_zone_extra_data` will not become part of ABI and you can extend it in the future if needed.\nIf you do that you can also move `struct per_cpu_zone_extra_data` definition into page_alloc.c file.",
+      "range": {
+        "startLine": 3648,
+        "startChar": 48,
+        "endLine": 3648,
+        "endChar": 81
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ebe06981_18f7bbf2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3648,
+                "startChar": 0,
+                "endLine": 3649,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_pcp_alloc_factor_adjust(zone, zones_extra_data[zone_idx(zone)].pad,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "25dc160ac69bc4fbba49b53ecf43a4f4de4f1b23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
