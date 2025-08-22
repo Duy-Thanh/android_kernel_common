@@ -70,6 +70,24 @@
       "parentUuid": "1ab4fbb6_cc611bdc",
       "revId": "675d15af1402b2471c6618a240b4a7bc2da2032e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b3552df_13759196",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-08-22T09:04:00Z",
+      "side": 1,
+      "message": "Yup, if we allow giving MMIO pages to guest we also need to make sure we can get them back through `_pkvm_host_reclaim_page()`",
+      "parentUuid": "7a85994d_2775696b",
+      "revId": "675d15af1402b2471c6618a240b4a7bc2da2032e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
