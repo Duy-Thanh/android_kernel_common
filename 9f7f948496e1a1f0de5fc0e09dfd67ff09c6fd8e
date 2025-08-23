@@ -16,6 +16,24 @@
       "message": "Do not submit yet.",
       "revId": "9f7f948496e1a1f0de5fc0e09dfd67ff09c6fd8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bbe65ce_4fb91def",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-23T12:12:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36994ba4_adbdcc78",
+      "revId": "9f7f948496e1a1f0de5fc0e09dfd67ff09c6fd8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
