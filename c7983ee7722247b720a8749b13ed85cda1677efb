@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3fd0fdc_15e9d609",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-24T22:42:57Z",
+      "side": 1,
+      "message": "There is a minor security issue here. Context entry (ce) is set to present (with the assignment `ce-\u003elo \u003d param.ce_lo` before we check the tt type. If the tt type is passthrough, there is a small [time-of-check-time-of-use](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use) like vulnerability, where a malicious device will be able to access any memory. we should unset present bit (in param.ce before we assign it to ce), then check the tt type and set it last (in ce) after we have done all the checks and set the slptr and aw.",
+      "revId": "c7983ee7722247b720a8749b13ed85cda1677efb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
