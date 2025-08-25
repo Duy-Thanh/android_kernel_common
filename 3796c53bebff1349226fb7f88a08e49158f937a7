@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f516584_b738dac9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-08-25T09:12:46Z",
+      "side": 1,
+      "message": "This relation chain should land as patches to vendor modules specific `desktop-google` repository.\n\nSee go/intel-al-gki, Vendor Modules Maintenance tab",
+      "revId": "3796c53bebff1349226fb7f88a08e49158f937a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
