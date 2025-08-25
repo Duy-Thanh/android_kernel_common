@@ -16,6 +16,24 @@
       "message": "just to remind, to support WCL BEP on ALOS, this patch is required to enable CS42L43 codec.\n \nThis is Accepted \u0026 Merged Upstream as well, any idea why this revert is required ?\nRevert \"BACKPORT: ASoC: Intel: soc-acpi-intel-ptl-match: Add cs42l43 support\"",
       "revId": "63ac6485b2198d0d59b60e019423dbe260ec1996",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ca5df7_94d3ab80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3728328
+      },
+      "writtenOn": "2025-08-25T03:05:33Z",
+      "side": 1,
+      "message": "Thanks I notice upstream commit is taken.. thanks",
+      "parentUuid": "5cc8daf8_ed18d69c",
+      "revId": "63ac6485b2198d0d59b60e019423dbe260ec1996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
