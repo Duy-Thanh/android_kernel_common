@@ -380,6 +380,7 @@ static bool find_exported_symbol_in_section(const struct symsearch *syms,
 	fsa->crc = symversion(syms->crcs, sym - syms->start);
 	fsa->sym = sym;
 	fsa->license = (sym_flags & KSYM_FLAG_GPL_ONLY) ? GPL_ONLY : NOT_GPL_ONLY;
+	fsa->is_protected = sym_flags & KSYM_FLAG_PROTECTED;
 
 	return true;
 }
@@ -1299,6 +1300,15 @@ static const struct kernel_symbol *resolve_symbol(struct module *mod,
 		fsa.sym = ERR_PTR(err);
 		goto getname;
 	}
+
+#ifdef CONFIG_MODULE_SIG
+	if (fsa.is_protected && !mod->sig_ok) {
+		pr_warn("%s: Cannot use protected symbol %s\n",
+			mod->name, name);
+		fsa.sym = ERR_PTR(-EACCES);
+		goto getname;
+	}
+#endif
 
 	err = ref_module(mod, fsa.owner);
 	if (err) {
