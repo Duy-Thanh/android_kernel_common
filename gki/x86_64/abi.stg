@@ -294649,6 +294649,13 @@ function {
   parameter_id: 0x04c02b90
 }
 function {
+  id: 0xaed20ac7
+  return_type_id: 0x3e10b518
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x3e10b518
+  parameter_id: 0x1fa12dd9
+}
+function {
   id: 0xaf2275d4
   return_type_id: 0xd0b3a203
   parameter_id: 0x1582ab06
@@ -316044,6 +316051,15 @@ elf_symbol {
   full_name: "kvasprintf"
 }
 elf_symbol {
+  id: 0xbc9cd951
+  name: "kvasprintf_const"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd605d039
+  type_id: 0xaed20ac7
+  full_name: "kvasprintf_const"
+}
+elf_symbol {
   id: 0x15a3f41a
   name: "kvfree"
   is_defined: true
@@ -319909,6 +319925,15 @@ elf_symbol {
   full_name: "pcim_enable_device"
 }
 elf_symbol {
+  id: 0xafefcb91
+  name: "pcim_iomap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa0c3d89d
+  type_id: 0x537f4e77
+  full_name: "pcim_iomap"
+}
+elf_symbol {
   id: 0x432fd530
   name: "pcim_iomap_region"
   is_defined: true
@@ -319952,6 +319977,15 @@ elf_symbol {
   crc: 0xcf2d1aef
   type_id: 0x14e1f000
   full_name: "pcim_pin_device"
+}
+elf_symbol {
+  id: 0x662a2cd8
+  name: "pcim_request_all_regions"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8dc41cdd
+  type_id: 0x99010068
+  full_name: "pcim_request_all_regions"
 }
 elf_symbol {
   id: 0x8ac08118
@@ -335259,6 +335293,7 @@ interface {
   symbol_id: 0xc1b901e4
   symbol_id: 0x6c9fdcbe
   symbol_id: 0x3160ee82
+  symbol_id: 0xbc9cd951
   symbol_id: 0x15a3f41a
   symbol_id: 0x6e8c6baf
   symbol_id: 0xbbe14755
@@ -335689,11 +335724,13 @@ interface {
   symbol_id: 0x5c9f4427
   symbol_id: 0x43b060b3
   symbol_id: 0x42595f98
+  symbol_id: 0xafefcb91
   symbol_id: 0x432fd530
   symbol_id: 0xd085753f
   symbol_id: 0xae61b91f
   symbol_id: 0xc37c9a74
   symbol_id: 0xfa9dbeca
+  symbol_id: 0x662a2cd8
   symbol_id: 0x8ac08118
   symbol_id: 0xa5f4a227
   symbol_id: 0x665e5018
