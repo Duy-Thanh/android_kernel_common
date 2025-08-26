@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8233ad7c_93e2d72b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-08-26T15:32:53Z",
+      "side": 0,
+      "message": "Why not simply having one of those in the host_share_hyp path?",
+      "range": {
+        "startLine": 1647,
+        "startChar": 1,
+        "endLine": 1647,
+        "endChar": 36
+      },
+      "revId": "bb9513914902b52a9751ea1126ad40518a38c89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
