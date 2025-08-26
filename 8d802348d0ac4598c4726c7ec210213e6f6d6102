@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac3ed16_c3f40190",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-26T20:05:06Z",
+      "side": 1,
+      "message": "This is really vague. For example it does not explain why you need to mock with KASAN checks, which potentially can result in issues being unreported. Please explain in more details here or in the bug.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 82
+      },
+      "revId": "8d802348d0ac4598c4726c7ec210213e6f6d6102",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a5859de5_f12ea57a",
@@ -14,6 +37,47 @@
       "writtenOn": "2025-08-25T08:25:15Z",
       "side": 1,
       "message": "hi，tkjos\n\nBy these vhs, we can obtain the large slab allocation information and optimize it. please view it, thanks.",
+      "revId": "8d802348d0ac4598c4726c7ec210213e6f6d6102",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4dcf3a7_2f68ce63",
+        "filename": "mm/slub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4297,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-26T20:05:06Z",
+      "side": 1,
+      "message": "So, you always return NULL in this case?",
+      "range": {
+        "startLine": 4297,
+        "startChar": 9,
+        "endLine": 4297,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b996bdf6_b3ac2397",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/slub.c",
+              "range": {
+                "startLine": 4297,
+                "startChar": 0,
+                "endLine": 4298,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn NULL;\n"
+            }
+          ]
+        }
+      ],
       "revId": "8d802348d0ac4598c4726c7ec210213e6f6d6102",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
