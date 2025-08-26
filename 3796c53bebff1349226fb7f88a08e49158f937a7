@@ -16,6 +16,24 @@
       "message": "This relation chain should land as patches to vendor modules specific `desktop-google` repository.\n\nSee go/intel-al-gki, Vendor Modules Maintenance tab",
       "revId": "3796c53bebff1349226fb7f88a08e49158f937a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9501dece_4e9ad0f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2025-08-26T20:15:38Z",
+      "side": 1,
+      "message": "Since the five FROMLIST patches depend on the prior four patches that are already in upstream Linux (Linus tree), I would abandon the FROMLIST patches for now, and re-submit to the proper repo later.  Also, could you share \"go/intel-al-gki, Vendor Modules Maintenance tab\".  We don\u0027t have access from here.  Thanks!",
+      "parentUuid": "4f516584_b738dac9",
+      "revId": "3796c53bebff1349226fb7f88a08e49158f937a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
