@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eefab9d1_c168d382",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-26T16:53:34Z",
+      "side": 1,
+      "message": "Please move this definition into mm/page_alloc.c. No need for it to have wider scope.",
+      "range": {
+        "startLine": 718,
+        "startChar": 0,
+        "endLine": 721,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "212ad5c5_47d3c84f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mmzone.h",
+              "range": {
+                "startLine": 719,
+                "startChar": 0,
+                "endLine": 723,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3515b2300627479cd977eded7f41695f7a855fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
