@@ -88,6 +88,24 @@
       "parentUuid": "7a85994d_2775696b",
       "revId": "675d15af1402b2471c6618a240b4a7bc2da2032e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498f763d_418da554",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-08-26T13:42:10Z",
+      "side": 1,
+      "message": "@vdonnefort@google.com I was talking to @smostafa@google.com and normally we don\u0027t invoke host_reclaim_page for MMIO pages that have been given to the guest.",
+      "parentUuid": "8b3552df_13759196",
+      "revId": "675d15af1402b2471c6618a240b4a7bc2da2032e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
