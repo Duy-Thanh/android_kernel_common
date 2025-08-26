@@ -22,6 +22,30 @@
       },
       "revId": "bb9513914902b52a9751ea1126ad40518a38c89f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4f89b05_e982a860",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-08-26T15:42:25Z",
+      "side": 0,
+      "message": "I was having this in the `Patchset 2` but I discussed /w Will and I re-structured the fix like this.",
+      "parentUuid": "8233ad7c_93e2d72b",
+      "range": {
+        "startLine": 1647,
+        "startChar": 1,
+        "endLine": 1647,
+        "endChar": 36
+      },
+      "revId": "bb9513914902b52a9751ea1126ad40518a38c89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
