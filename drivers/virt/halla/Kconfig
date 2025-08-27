@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Exynos HVM solutions
+#
+
+config EXYNOS_HVM
+	tristate "Exynos Halla VM"
+	depends on ARM64 && EVENTFD
+	help
+	  Exynos Halla VM Management module.
