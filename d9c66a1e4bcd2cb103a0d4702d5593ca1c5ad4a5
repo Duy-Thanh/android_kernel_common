@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980a4b72_708bc995",
+        "filename": "mm/pgtable-generic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2025-08-27T07:32:18Z",
+      "side": 1,
+      "message": "Just curious, what\u0027s the reason you export this instead of using pte_offset_map_lock()?",
+      "range": {
+        "startLine": 410,
+        "startChar": 18,
+        "endLine": 410,
+        "endChar": 39
+      },
+      "revId": "d9c66a1e4bcd2cb103a0d4702d5593ca1c5ad4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
