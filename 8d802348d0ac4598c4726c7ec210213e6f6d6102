@@ -272,6 +272,30 @@
       },
       "revId": "8d802348d0ac4598c4726c7ec210213e6f6d6102",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ec5a66_fda26cd6",
+        "filename": "mm/slub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4297,
+      "author": {
+        "id": 2044150
+      },
+      "writtenOn": "2025-08-27T03:31:45Z",
+      "side": 1,
+      "message": "ptr updated, thank you",
+      "parentUuid": "11d12340_5e58ffe5",
+      "range": {
+        "startLine": 4297,
+        "startChar": 9,
+        "endLine": 4297,
+        "endChar": 12
+      },
+      "revId": "8d802348d0ac4598c4726c7ec210213e6f6d6102",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
