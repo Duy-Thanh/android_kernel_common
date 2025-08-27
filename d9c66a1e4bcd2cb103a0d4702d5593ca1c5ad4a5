@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2399b779_137c656f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2025-08-27T07:33:12Z",
+      "side": 1,
+      "message": "A side nit: commit messages usually explain \"why\", not \"what\".\nThe \"what\" part is what the patch is for.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 23
+      },
+      "revId": "d9c66a1e4bcd2cb103a0d4702d5593ca1c5ad4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "980a4b72_708bc995",
