@@ -105,6 +105,23 @@
       "parentUuid": "dc86ea78_32456b53",
       "revId": "5291f743dd071be652251ceb6941f67f8685b833",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe0a9352_ffc26c15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-27T15:23:08Z",
+      "side": 1,
+      "message": "Has this been submitted upstream to LKML? If so, please relabel as FROMLIST and include a \"Link:\" pointing to the patch on lore.kernel.org.",
+      "revId": "5291f743dd071be652251ceb6941f67f8685b833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
