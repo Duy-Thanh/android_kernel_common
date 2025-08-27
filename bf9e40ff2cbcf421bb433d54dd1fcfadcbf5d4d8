@@ -46,6 +46,29 @@
       },
       "revId": "bf9e40ff2cbcf421bb433d54dd1fcfadcbf5d4d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "684f9558_88d13b26",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2025-08-27T07:39:45Z",
+      "side": 1,
+      "message": "Up to android people, but these are spaces (as far as I can tell), which is not what kernel coding styles require.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 33
+      },
+      "revId": "bf9e40ff2cbcf421bb433d54dd1fcfadcbf5d4d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
