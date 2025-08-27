@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3fc090a_4b121779",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-27T17:02:40Z",
+      "side": 1,
+      "message": "Should be `Ib9d9c84b6f20afc1e1d129ceb59c9c3a7eb8e6de`, the same SHA as the original in android15-6.6 (https://android-review.googlesource.com/c/kernel/common/+/3666193)",
+      "range": {
+        "startLine": 76,
+        "startChar": 11,
+        "endLine": 76,
+        "endChar": 52
+      },
+      "revId": "b4849b7553cb935c3c7c9fbbc812db0ddd33358f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ffc76413_44acf1db",
