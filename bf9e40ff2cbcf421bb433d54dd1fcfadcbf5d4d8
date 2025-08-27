@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eea45643_766eb62c",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2025-08-27T07:35:54Z",
+      "side": 1,
+      "message": "Oh, so you don\u0027t use the double-underscored version of it after all.",
+      "range": {
+        "startLine": 65,
+        "startChar": 9,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "bf9e40ff2cbcf421bb433d54dd1fcfadcbf5d4d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
