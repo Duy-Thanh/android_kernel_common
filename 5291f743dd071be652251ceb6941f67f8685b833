@@ -87,6 +87,24 @@
       "parentUuid": "50a3ae0b_dbf9b4d7",
       "revId": "5291f743dd071be652251ceb6941f67f8685b833",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc4b1fc_9e8f47e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-08-27T12:56:15Z",
+      "side": 1,
+      "message": "As far as I can tell this patch is not yet upstream?",
+      "parentUuid": "dc86ea78_32456b53",
+      "revId": "5291f743dd071be652251ceb6941f67f8685b833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
