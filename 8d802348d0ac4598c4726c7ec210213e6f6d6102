@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a409e30_e33ecf6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2044150
+      },
+      "writtenOn": "2025-08-27T01:03:53Z",
+      "side": 1,
+      "message": "Hello Suren, thank you. \nOk, we want to modify the slab allocation size, add debugging information or align by page, which will cause the kasan check to fail, so we need to add vendor here to modify the slab redzone.",
+      "parentUuid": "eac3ed16_c3f40190",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 82
+      },
+      "revId": "8d802348d0ac4598c4726c7ec210213e6f6d6102",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a5859de5_f12ea57a",
@@ -78,6 +102,30 @@
           ]
         }
       ],
+      "revId": "8d802348d0ac4598c4726c7ec210213e6f6d6102",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6769f02c_7852e8d0",
+        "filename": "mm/slub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4297,
+      "author": {
+        "id": 2044150
+      },
+      "writtenOn": "2025-08-27T01:03:53Z",
+      "side": 1,
+      "message": "We will reimplement the allocation function in vendor hook, so the returned ptr is not necessarily NULL.",
+      "parentUuid": "a4dcf3a7_2f68ce63",
+      "range": {
+        "startLine": 4297,
+        "startChar": 9,
+        "endLine": 4297,
+        "endChar": 12
+      },
       "revId": "8d802348d0ac4598c4726c7ec210213e6f6d6102",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
