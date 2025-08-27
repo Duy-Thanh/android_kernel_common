@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b83f08_e141bb6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-27T17:03:46Z",
+      "side": 1,
+      "message": "This SHA should have been Ib9d9c84b6f20afc1e1d129ceb59c9c3a7eb8e6de, the same SHA as the original in android15-6.6 (https://android-review.googlesource.com/c/kernel/common/+/3666193)",
+      "range": {
+        "startLine": 75,
+        "startChar": 11,
+        "endLine": 75,
+        "endChar": 52
+      },
+      "revId": "a8f88ad96df3b3e640d5b0aa313739188d5b4acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
