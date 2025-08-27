@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f864c5be_8ba796fa",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3350,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-27T16:54:07Z",
+      "side": 1,
+      "message": "Hmm. You intend to allocate zones_extra_data[zone_idx(zone)].pad in this hook right? If so, you need to pass a pointer to it instead of its value:\n```\ntrace_android_vh_nr_pcp_alloc(pcp, zone, \u0026(zones_extra_data[zone_idx(zone)].pad), ...)\n```",
+      "range": {
+        "startLine": 3350,
+        "startChar": 43,
+        "endLine": 3350,
+        "endChar": 79
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8e81ac7b_268f5dd4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3350,
+                "startChar": 0,
+                "endLine": 3351,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_nr_pcp_alloc(pcp, zone, \u0026(zones_extra_data[zone_idx(zone)].pad),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8e4879d21a85f1d604ca3f45ce403b55a34d4553",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
