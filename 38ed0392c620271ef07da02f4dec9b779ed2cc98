@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62722a4f_9532ad04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-08-28T14:31:00Z",
+      "side": 1,
+      "message": "Please address this issue as well:\n\nKernelCommit\nPlease **attach an open respin request bug** to this change. Refer the following... \n Link to details File a bug\n /COMMIT_MSG\nPlease attach an open respin request bug to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "38ed0392c620271ef07da02f4dec9b779ed2cc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
