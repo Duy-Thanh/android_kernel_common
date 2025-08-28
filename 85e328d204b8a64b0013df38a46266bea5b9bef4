@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c6138e_6265fff5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-28T15:05:36Z",
+      "side": 1,
+      "message": "-2 to make sure the revert is not merged. The regression is still under investigation but I\u0027m quite sure this patch would not cause it.",
+      "revId": "85e328d204b8a64b0013df38a46266bea5b9bef4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
