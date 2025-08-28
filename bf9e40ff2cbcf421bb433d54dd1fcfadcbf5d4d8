@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c75621f_5be7d582",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-08-28T12:24:13Z",
+      "side": 1,
+      "message": "It\u0027s inline function. Explained in the previous commit.",
+      "parentUuid": "26726581_9bdbcbdb",
+      "range": {
+        "startLine": 65,
+        "startChar": 9,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "bf9e40ff2cbcf421bb433d54dd1fcfadcbf5d4d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "684f9558_88d13b26",
@@ -61,6 +85,30 @@
       "writtenOn": "2025-08-27T07:39:45Z",
       "side": 1,
       "message": "Up to android people, but these are spaces (as far as I can tell), which is not what kernel coding styles require.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 33
+      },
+      "revId": "bf9e40ff2cbcf421bb433d54dd1fcfadcbf5d4d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "543b78ae_608f9179",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-08-28T12:24:13Z",
+      "side": 1,
+      "message": "Fixed the indentation.",
+      "parentUuid": "684f9558_88d13b26",
       "range": {
         "startLine": 131,
         "startChar": 0,
