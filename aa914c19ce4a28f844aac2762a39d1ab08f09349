@@ -16,6 +16,24 @@
       "message": "Needs an additional \"Bug:\" tag pointing to a respin request bug",
       "revId": "aa914c19ce4a28f844aac2762a39d1ab08f09349",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6564d13_1d9231a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3434417
+      },
+      "writtenOn": "2025-08-28T03:14:43Z",
+      "side": 1,
+      "message": "Hi，Todd\n   respin request bug about this change is submited.",
+      "parentUuid": "50efc0bd_5c55a694",
+      "revId": "aa914c19ce4a28f844aac2762a39d1ab08f09349",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
