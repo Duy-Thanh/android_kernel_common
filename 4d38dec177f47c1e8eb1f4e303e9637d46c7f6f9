@@ -33,6 +33,29 @@
       "message": "Hi，Todd:\n   respin request bug about this change is submited.",
       "revId": "4d38dec177f47c1e8eb1f4e303e9637d46c7f6f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f393e28_bdcd4dbf",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-08-28T06:55:06Z",
+      "side": 1,
+      "message": "Why are these being added into this patch? They don\u0027t seem relevant.",
+      "range": {
+        "startLine": 596,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 51
+      },
+      "revId": "4d38dec177f47c1e8eb1f4e303e9637d46c7f6f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
