@@ -122,6 +122,42 @@
       "message": "Has this been submitted upstream to LKML? If so, please relabel as FROMLIST and include a \"Link:\" pointing to the patch on lore.kernel.org.",
       "revId": "5291f743dd071be652251ceb6941f67f8685b833",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f716957d_8c6e81f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005551
+      },
+      "writtenOn": "2025-08-28T01:06:07Z",
+      "side": 1,
+      "message": "It hasn\u0027t been merged upstream yet. I marked the patch as under review.",
+      "parentUuid": "4bc4b1fc_9e8f47e5",
+      "revId": "5291f743dd071be652251ceb6941f67f8685b833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cbccd4c_d808afff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005551
+      },
+      "writtenOn": "2025-08-28T01:06:07Z",
+      "side": 1,
+      "message": "I\u0027ll relabel it once it\u0027s submitted upstream.",
+      "parentUuid": "fe0a9352_ffc26c15",
+      "revId": "5291f743dd071be652251ceb6941f67f8685b833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
