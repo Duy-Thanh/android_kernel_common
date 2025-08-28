@@ -78,6 +78,8 @@ _COMMON_GKI_MODULES_LIST = [
     "net/ieee802154/6lowpan/ieee802154_6lowpan.ko",
     "net/ieee802154/ieee802154.ko",
     "net/ieee802154/ieee802154_socket.ko",
+    "net/ipv4/esp4_offload.ko",
+    "net/ipv6/esp6_offload.ko",
     "net/l2tp/l2tp_core.ko",
     "net/l2tp/l2tp_ppp.ko",
     "net/mac802154/mac802154.ko",
