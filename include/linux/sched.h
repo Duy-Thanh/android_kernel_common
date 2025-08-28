@@ -47,7 +47,12 @@
 #include <linux/rv.h>
 #include <linux/uidgid_types.h>
 #include <linux/tracepoint-defs.h>
+<<<<<<< HEAD   (3d52ac2275495bdc24b6499a28f37bd3597c7029 Merge 89748acdf226 ("Merge tag 'drm-next-2025-08-01' of http)
 #include <linux/android_vendor.h>
+||||||| BASE   (89748acdf226fd1a8775ff6fa2703f8412b286c8 Merge tag 'drm-next-2025-08-01' of https://gitlab.freedeskto)
+=======
+#include <linux/unwind_deferred_types.h>
+>>>>>>> BRANCH (c6439bfaabf25b736154ac5640c677da2c085db4 Merge tag 'trace-deferred-unwind-v6.17' of git://git.kernel.)
 #include <asm/kmap_size.h>
 
 /* task_struct member predeclarations (sorted alphabetically): */
@@ -1654,6 +1659,10 @@ struct task_struct {
 
 #ifdef CONFIG_USER_EVENTS
 	struct user_event_mm		*user_event_mm;
+#endif
+
+#ifdef CONFIG_UNWIND_USER
+	struct unwind_task_info		unwind_info;
 #endif
 
 	/* CPU-specific state of this task: */
