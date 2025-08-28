@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98dc960e_8f27a4c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-08-28T12:22:15Z",
+      "side": 1,
+      "message": "Thanks! Updated the commit messages.",
+      "parentUuid": "2399b779_137c656f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 23
+      },
+      "revId": "d9c66a1e4bcd2cb103a0d4702d5593ca1c5ad4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "980a4b72_708bc995",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-08-27T07:32:18Z",
       "side": 1,
       "message": "Just curious, what\u0027s the reason you export this instead of using pte_offset_map_lock()?",
+      "range": {
+        "startLine": 410,
+        "startChar": 18,
+        "endLine": 410,
+        "endChar": 39
+      },
+      "revId": "d9c66a1e4bcd2cb103a0d4702d5593ca1c5ad4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "757eb780_bfa61d03",
+        "filename": "mm/pgtable-generic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-08-28T12:22:15Z",
+      "side": 1,
+      "message": "The pte_offset_map_lock is an inline function, without the __pte_offset_map_lock exported, the zram module will fail to build.",
+      "parentUuid": "980a4b72_708bc995",
       "range": {
         "startLine": 410,
         "startChar": 18,
