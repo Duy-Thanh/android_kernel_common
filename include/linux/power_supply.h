@@ -238,7 +238,6 @@ struct power_supply;
 
 /* Run-time specific power supply configuration */
 struct power_supply_config {
-	struct device_node *of_node;
 	struct fwnode_handle *fwnode;
 
 	/* Driver private data */
@@ -814,6 +813,7 @@ static inline void power_supply_put(struct power_supply *psy) {}
 static inline struct power_supply *power_supply_get_by_name(const char *name)
 { return NULL; }
 #endif
+<<<<<<< HEAD   (2f1d2d2bf840cc0e492728f1de8df4ef7a59e348 Merge b80a75cf6999 ("Merge tag 'hid-for-linus-2025073101' of)
 #ifdef CONFIG_OF
 extern struct power_supply *power_supply_get_by_phandle(struct device_node *np,
 							const char *property);
@@ -822,7 +822,18 @@ extern int power_supply_get_by_phandle_array(struct device_node *np,
 					     struct power_supply **psy,
 					     ssize_t size);
 extern struct power_supply *devm_power_supply_get_by_phandle(
+||||||| BASE   (b80a75cf6999fb79971b41eaec7af2bb4b514714 Merge tag 'hid-for-linus-2025073101' of git://git.kernel.org)
+#ifdef CONFIG_OF
+extern struct power_supply *power_supply_get_by_phandle(struct device_node *np,
+							const char *property);
+extern struct power_supply *devm_power_supply_get_by_phandle(
+=======
+extern struct power_supply *power_supply_get_by_reference(struct fwnode_handle *fwnode,
+							  const char *property);
+extern struct power_supply *devm_power_supply_get_by_reference(
+>>>>>>> BRANCH (07b43820437bd96f31f5d7f9baf4453fcb7dedbf Merge tag 'for-v6.17' of git://git.kernel.org/pub/scm/linux/)
 				    struct device *dev, const char *property);
+<<<<<<< HEAD   (2f1d2d2bf840cc0e492728f1de8df4ef7a59e348 Merge b80a75cf6999 ("Merge tag 'hid-for-linus-2025073101' of)
 #else /* !CONFIG_OF */
 static inline struct power_supply *
 power_supply_get_by_phandle(struct device_node *np, const char *property)
@@ -837,6 +848,17 @@ static inline struct power_supply *
 devm_power_supply_get_by_phandle(struct device *dev, const char *property)
 { return NULL; }
 #endif /* CONFIG_OF */
+||||||| BASE   (b80a75cf6999fb79971b41eaec7af2bb4b514714 Merge tag 'hid-for-linus-2025073101' of git://git.kernel.org)
+#else /* !CONFIG_OF */
+static inline struct power_supply *
+power_supply_get_by_phandle(struct device_node *np, const char *property)
+{ return NULL; }
+static inline struct power_supply *
+devm_power_supply_get_by_phandle(struct device *dev, const char *property)
+{ return NULL; }
+#endif /* CONFIG_OF */
+=======
+>>>>>>> BRANCH (07b43820437bd96f31f5d7f9baf4453fcb7dedbf Merge tag 'for-v6.17' of git://git.kernel.org/pub/scm/linux/)
 
 extern const enum power_supply_property power_supply_battery_info_properties[];
 extern const size_t power_supply_battery_info_properties_size;
