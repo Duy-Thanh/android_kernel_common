@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc801e6_ae8c6f3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-28T23:07:16Z",
+      "side": 1,
+      "message": "If you need a \"hidden\" config like this, you can add it to init/Kconfig.gki. Then the other two can be dropped from gki_defconfig and used as vendor modules.",
+      "revId": "6be724f79a9945db3661590b4607026223393edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
