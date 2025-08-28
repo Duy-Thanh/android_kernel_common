@@ -190,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aede4aea_e58eee7a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-28T12:44:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ad5f87_0abb0a84",
+      "range": {
+        "startLine": 246,
+        "startChar": 5,
+        "endLine": 246,
+        "endChar": 22
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24b5121d_d08cbf8d",
@@ -275,6 +299,30 @@
       "side": 1,
       "message": "Will do!",
       "parentUuid": "19d1e365_ca2dfe4a",
+      "range": {
+        "startLine": 1725,
+        "startChar": 8,
+        "endLine": 1725,
+        "endChar": 33
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10994314_1fde4724",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1725,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-28T12:44:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92af1db5_6900fbb3",
       "range": {
         "startLine": 1725,
         "startChar": 8,
@@ -482,6 +530,30 @@
       "side": 1,
       "message": "It does not matter for the entropy, but how entropy bits are delivered to the client. If the endianness would be not considered here, the client would expect the entropy bits at the wrong end of the registers.",
       "parentUuid": "2ac3d942_48dbba0b",
+      "range": {
+        "startLine": 1749,
+        "startChar": 0,
+        "endLine": 1756,
+        "endChar": 0
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95474910_9542a396",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-08-28T12:44:44Z",
+      "side": 1,
+      "message": "I moved the responsibility of dealing with endianness to the module. WDYT?",
+      "parentUuid": "d346b9ca_a68eb0f5",
       "range": {
         "startLine": 1749,
         "startChar": 0,
