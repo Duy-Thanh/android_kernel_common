@@ -16,6 +16,41 @@
       "message": "Relabeling",
       "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca1c07ad_2c7036c8",
+        "filename": "include/ufs/ufs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-29T14:55:48Z",
+      "side": 1,
+      "message": "UFS_CMD_ERR needs to be added at the end to preserve the enum values.",
+      "fixSuggestions": [
+        {
+          "fixId": "0c599711_69ec4b5c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/ufs/ufs.h",
+              "range": {
+                "startLine": 595,
+                "startChar": 0,
+                "endLine": 596,
+                "endChar": 0
+              },
+              "replacement": "\tUFS_TM_SEND, UFS_TM_COMP, UFS_TM_ERR, UFS_CMD_ERR\n"
+            }
+          ]
+        }
+      ],
+      "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
