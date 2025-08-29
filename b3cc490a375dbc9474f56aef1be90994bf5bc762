@@ -34,6 +34,24 @@
       "parentUuid": "ed707277_b2b242f8",
       "revId": "b3cc490a375dbc9474f56aef1be90994bf5bc762",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3137cd8_667a6f00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-29T10:53:02Z",
+      "side": 1,
+      "message": "No, get the needed kernel changes you are wanting these hooks for, upstream, so that no hook will ever be needed.  We can not keep adding hooks to the tree for every release, the needed functionality you are using  must go upstream eventually.",
+      "parentUuid": "143f35ef_f718ac67",
+      "revId": "b3cc490a375dbc9474f56aef1be90994bf5bc762",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
