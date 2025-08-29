@@ -3062,7 +3062,7 @@ bool unmap_huge_pmd_locked(struct vm_area_struct *vma, unsigned long addr,
 	return false;
 }
 
-static void remap_page(struct folio *folio, unsigned long nr, int flags)
+static void remap_page(struct folio *folio, unsigned long nr)
 {
 	int i = 0;
 
@@ -3070,7 +3070,7 @@ static void remap_page(struct folio *folio, unsigned long nr, int flags)
 	if (!folio_test_anon(folio))
 		return;
 	for (;;) {
-		remove_migration_ptes(folio, folio, RMP_LOCKED | flags);
+		remove_migration_ptes(folio, folio, true);
 		i += folio_nr_pages(folio);
 		if (i >= nr)
 			break;
@@ -3279,8 +3279,16 @@ static void __split_huge_page(struct page *page, struct list_head *list,
 	local_irq_enable();
 
 	if (nr_dropped)
+<<<<<<< HEAD   (48e14edb7739412123f814f9bb148ea2100a844f ANDROID: GKI: Update oplus symbol list)
 		shmem_uncharge(folio->mapping->host, nr_dropped);
 	remap_page(folio, nr, PageAnon(head) ? RMP_USE_SHARED_ZEROPAGE : 0);
+||||||| BASE   (e7ead7be5a015aa566d6651afb41ceeb24b89612 Revert "ANDROID: mm: Fix incorrect call to try_to_map_unused)
+		shmem_uncharge(head->mapping->host, nr_dropped);
+	remap_page(folio, nr, PageAnon(head) ? RMP_USE_SHARED_ZEROPAGE : 0);
+=======
+		shmem_uncharge(head->mapping->host, nr_dropped);
+	remap_page(folio, nr);
+>>>>>>> CHANGE (e89bbbc4803ce47854ce8f835ecfdf259cff7e72 Revert "BACKPORT: mm: remap unused subpages to shared zeropa)
 
 	/*
 	 * set page to its compound_head when split to non order-0 pages, so
@@ -3577,8 +3585,22 @@ fail:
 		if (mapping)
 			xas_unlock(&xas);
 		local_irq_enable();
+<<<<<<< HEAD   (48e14edb7739412123f814f9bb148ea2100a844f ANDROID: GKI: Update oplus symbol list)
 		remap_page(folio, folio_nr_pages(folio), 0);
 		ret = -EAGAIN;
+||||||| BASE   (e7ead7be5a015aa566d6651afb41ceeb24b89612 Revert "ANDROID: mm: Fix incorrect call to try_to_map_unused)
+unfreeze:
+		folio_ref_unfreeze(folio, 1 + extra_pins);
+remap:
+		free_dst_pages(folio);
+		remap_page(folio, folio_nr_pages(folio), 0);
+=======
+unfreeze:
+		folio_ref_unfreeze(folio, 1 + extra_pins);
+remap:
+		free_dst_pages(folio);
+		remap_page(folio, folio_nr_pages(folio));
+>>>>>>> CHANGE (e89bbbc4803ce47854ce8f835ecfdf259cff7e72 Revert "BACKPORT: mm: remap unused subpages to shared zeropa)
 	}
 
 out_unlock:

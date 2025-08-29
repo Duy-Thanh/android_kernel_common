@@ -424,7 +424,7 @@ static unsigned long migrate_device_unmap(unsigned long *src_pfns,
 			continue;
 
 		folio = page_folio(page);
-		remove_migration_ptes(folio, folio, 0);
+		remove_migration_ptes(folio, folio, false);
 
 		src_pfns[i] = 0;
 		folio_unlock(folio);
@@ -840,9 +840,19 @@ void migrate_device_finalize(unsigned long *src_pfns,
 			dst = src;
 		}
 
+<<<<<<< HEAD   (48e14edb7739412123f814f9bb148ea2100a844f ANDROID: GKI: Update oplus symbol list)
 		if (!folio_is_zone_device(dst))
 			folio_add_lru(dst);
 		remove_migration_ptes(src, dst, 0);
+||||||| BASE   (e7ead7be5a015aa566d6651afb41ceeb24b89612 Revert "ANDROID: mm: Fix incorrect call to try_to_map_unused)
+		src = page_folio(page);
+		dst = page_folio(newpage);
+		remove_migration_ptes(src, dst, 0);
+=======
+		src = page_folio(page);
+		dst = page_folio(newpage);
+		remove_migration_ptes(src, dst, false);
+>>>>>>> CHANGE (e89bbbc4803ce47854ce8f835ecfdf259cff7e72 Revert "BACKPORT: mm: remap unused subpages to shared zeropa)
 		folio_unlock(src);
 		folio_put(src);
 
