@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e97db14_205ae9d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-08-29T21:53:57Z",
+      "side": 1,
+      "message": "Please rebase this onto `android16-6.12-desktop`, to break the relation chain the (abandoned) aosp/3718546 and make sure it can be applied to ToT cleanly.",
+      "revId": "736ea09f9483b40f62379e75ba334605ae73072e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
