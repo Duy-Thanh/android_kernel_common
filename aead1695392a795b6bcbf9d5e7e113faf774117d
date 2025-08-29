@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1983e3e1_b6281a81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-29T17:32:43Z",
+      "side": 1,
+      "message": "KMI break. Needs to be refactored to avoid changing the enum values",
+      "revId": "aead1695392a795b6bcbf9d5e7e113faf774117d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
