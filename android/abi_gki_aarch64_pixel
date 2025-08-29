@@ -1850,6 +1850,8 @@
   refcount_dec_not_one
   refcount_warn_saturate
   __refrigerator
+  ref_tracker_alloc
+  ref_tracker_free
   regcache_cache_only
   regcache_drop_region
   regcache_mark_dirty
