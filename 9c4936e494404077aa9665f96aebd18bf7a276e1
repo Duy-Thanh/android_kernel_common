@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f08ecd4_7718fdf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-29T08:37:44Z",
+      "side": 1,
+      "message": "These symbols should not be exported, sorry.  Please just keep the zram code built-in.",
+      "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
