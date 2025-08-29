@@ -51,6 +51,23 @@
       ],
       "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fa612ae_ad7876d9",
+        "filename": "include/ufs/ufs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-08-29T15:15:58Z",
+      "side": 1,
+      "message": "Does UFS_CMD_ERR stand for \"command error\" or \"completion error\"? Please\nmake the enum label and the text that is displayed in error messages\nconsistent.",
+      "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
