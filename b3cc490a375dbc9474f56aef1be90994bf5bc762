@@ -16,6 +16,24 @@
       "message": "Why not do this properly upstream first?  And it should be done in the platform-specific code for this processor, not in the module core code.",
       "revId": "b3cc490a375dbc9474f56aef1be90994bf5bc762",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "143f35ef_f718ac67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3623314
+      },
+      "writtenOn": "2025-08-29T09:59:50Z",
+      "side": 1,
+      "message": "Do you mean that we shoud update the patch to android-mainline branch at first?",
+      "parentUuid": "ed707277_b2b242f8",
+      "revId": "b3cc490a375dbc9474f56aef1be90994bf5bc762",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
