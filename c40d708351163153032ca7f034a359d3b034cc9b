@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7fb722b_73f11d8f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2628,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-29T00:19:56Z",
+      "side": 1,
+      "message": "Instead of this simply:\n```\nif (!ret)\n\tret \u003d zram_writeback_slots(zram, ctl);\n```",
+      "range": {
+        "startLine": 2623,
+        "startChar": 1,
+        "endLine": 2628,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f3ca27a6_f9e7c3c6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 2623,
+                "startChar": 0,
+                "endLine": 2625,
+                "endChar": 0
+              },
+              "replacement": "\tif (!ret)\n\t\tret \u003d zram_writeback_slots(zram, ctl);\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 2626,
+                "startChar": 0,
+                "endLine": 2629,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c40d708351163153032ca7f034a359d3b034cc9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ebb7b6_fdb569a1",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-29T00:19:56Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LEADING_SPACE: please, no spaces at the start of a line\n\nWARNING:LEADING_SPACE: please, no spaces at the start of a line",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "c40d708351163153032ca7f034a359d3b034cc9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
