@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0f009f_2e35750b",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-29T00:06:06Z",
+      "side": 1,
+      "message": "Why are these \"unmodified files\" are included here?",
+      "revId": "627a58f726f86ed0361018c354056240571091f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
