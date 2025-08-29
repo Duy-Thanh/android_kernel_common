@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee08e5d_468e4b2b",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2628,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-08-29T02:51:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7fb722b_73f11d8f",
+      "range": {
+        "startLine": 2623,
+        "startChar": 1,
+        "endLine": 2628,
+        "endChar": 12
+      },
+      "revId": "c40d708351163153032ca7f034a359d3b034cc9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97ebb7b6_fdb569a1",
@@ -65,6 +89,30 @@
       "writtenOn": "2025-08-29T00:19:56Z",
       "side": 1,
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LEADING_SPACE: please, no spaces at the start of a line\n\nWARNING:LEADING_SPACE: please, no spaces at the start of a line",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "c40d708351163153032ca7f034a359d3b034cc9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5033ce3_6bee9a2e",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-08-29T02:51:38Z",
+      "side": 1,
+      "message": "Somehow I messed up the indentation here. Fixed now. Thanks!",
+      "parentUuid": "97ebb7b6_fdb569a1",
       "range": {
         "startLine": 32,
         "startChar": 0,
