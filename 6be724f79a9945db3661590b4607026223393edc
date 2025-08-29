@@ -16,6 +16,24 @@
       "message": "If you need a \"hidden\" config like this, you can add it to init/Kconfig.gki. Then the other two can be dropped from gki_defconfig and used as vendor modules.",
       "revId": "6be724f79a9945db3661590b4607026223393edc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d26ad7_7f63eceb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1349423
+      },
+      "writtenOn": "2025-08-29T10:01:01Z",
+      "side": 1,
+      "message": "Patchset#2: I followed your suggestion to add a dummy kernel config to enable XFRM_OFFLOAD. The Presubmit failed.\n\nPatchset#3: I switched the code back to patchset#1. The Presubmit still failed. It did pass in patchset#1...",
+      "parentUuid": "5bc801e6_ae8c6f3e",
+      "revId": "6be724f79a9945db3661590b4607026223393edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
