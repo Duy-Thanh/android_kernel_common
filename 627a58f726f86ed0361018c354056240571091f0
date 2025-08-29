@@ -16,6 +16,24 @@
       "message": "Why are these \"unmodified files\" are included here?",
       "revId": "627a58f726f86ed0361018c354056240571091f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e1b2145_8757c3c3",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-08-29T02:48:47Z",
+      "side": 1,
+      "message": "Seems gerrit issue? They are gone now.",
+      "parentUuid": "1d0f009f_2e35750b",
+      "revId": "627a58f726f86ed0361018c354056240571091f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
