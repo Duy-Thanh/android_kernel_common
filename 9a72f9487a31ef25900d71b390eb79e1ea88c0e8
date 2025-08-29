@@ -16,6 +16,24 @@
       "message": "This is not the correct commit being reverted. This looks like `UPSTREAM: wifi: cfg80211: remove cfg80211_inform_single_bss_frame_data()` should have been reverted instead.",
       "revId": "9a72f9487a31ef25900d71b390eb79e1ea88c0e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7fb150_baab64b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-08-29T16:19:26Z",
+      "side": 1,
+      "message": "hmmm, never mind. I guess is OK to call this a revert of `\"UPSTREAM: wifi: cfg80211: handle UHB AP and STA power type\"` with conflicts. There was some renaming of the `cfg80211_uhb_power_type_valid()` -\u003e `cfg80211_6ghz_power_type_valid()` that I got confused with.",
+      "parentUuid": "370299dd_f080d1a0",
+      "revId": "9a72f9487a31ef25900d71b390eb79e1ea88c0e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
