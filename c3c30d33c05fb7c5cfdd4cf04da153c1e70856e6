@@ -16,6 +16,29 @@
       "message": "Do not submit new user/kernel apis here without them being upstream first.  Please get them reviewed and merged there and then backport to android-mainline if it is still needed.",
       "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4338805_7b23afcf",
+        "filename": "drivers/block/zram/zram_ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-29T08:39:40Z",
+      "side": 1,
+      "message": "not a valid user/kernel api type at all.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
