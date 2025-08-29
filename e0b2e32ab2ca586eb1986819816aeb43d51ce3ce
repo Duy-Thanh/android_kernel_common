@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "add39929_19d5c5ea",
+        "filename": "net/ipv4/netfilter/arp_tables.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1655,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-29T20:59:54Z",
+      "side": 1,
+      "message": "what required this addition?",
+      "range": {
+        "startLine": 1655,
+        "startChar": 1,
+        "endLine": 1655,
+        "endChar": 40
+      },
+      "revId": "e0b2e32ab2ca586eb1986819816aeb43d51ce3ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
