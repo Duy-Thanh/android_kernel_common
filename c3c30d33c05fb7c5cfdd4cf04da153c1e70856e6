@@ -39,6 +39,29 @@
       },
       "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e59dfc3_5305e970",
+        "filename": "drivers/block/zram/zram_ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-29T08:40:07Z",
+      "side": 1,
+      "message": "not the correct way to create new ioctls at all.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 59
+      },
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
