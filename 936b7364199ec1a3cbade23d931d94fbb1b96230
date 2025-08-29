@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff1d3671_b7da0774",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-29T21:25:03Z",
+      "side": 1,
+      "message": "You also need to backport this fix: https://android-review.googlesource.com/c/kernel/common/+/3742271",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "044374f6_a8a43e45",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 185,
+                "endChar": 0
+              },
+              "replacement": "\t/* Current execution context, the VMA must be present. */\n\tif (!vma)\n\t\treturn false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "936b7364199ec1a3cbade23d931d94fbb1b96230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
