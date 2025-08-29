@@ -12867,6 +12867,8 @@ static int inherit_group(struct perf_event *parent_event,
 			return -EINVAL;
 	}
 	leader->group_generation = parent_event->group_generation;
+        if (leader)
+                leader->group_generation = parent_event->group_generation;
 	return 0;
 }
 
