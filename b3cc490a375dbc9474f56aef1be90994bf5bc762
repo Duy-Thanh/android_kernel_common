@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed707277_b2b242f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-29T08:40:52Z",
+      "side": 1,
+      "message": "Why not do this properly upstream first?  And it should be done in the platform-specific code for this processor, not in the module core code.",
+      "revId": "b3cc490a375dbc9474f56aef1be90994bf5bc762",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
