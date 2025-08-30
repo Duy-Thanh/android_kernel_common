@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "764bf31b_7f70ad92",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-08-30T07:37:45Z",
+      "side": 1,
+      "message": "no vma-\u003evm_lock, Need to switch to another implementation method",
+      "range": {
+        "startLine": 204,
+        "startChar": 2,
+        "endLine": 204,
+        "endChar": 11
+      },
+      "revId": "d7a1d0438c5aafc4bea5762bfbedd79f26538077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
