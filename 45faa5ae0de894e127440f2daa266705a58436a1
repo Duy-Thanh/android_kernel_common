@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "262259d1_3822fdc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-30T10:49:26Z",
+      "side": 1,
+      "message": "No code should be calling this function, it should not even be exported.  I\u0027ll go remove that export from upstream, thanks for pointing it out.",
+      "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
