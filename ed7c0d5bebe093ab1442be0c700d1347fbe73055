@@ -34,6 +34,23 @@
       "parentUuid": "f953bcb2_5a47ba39",
       "revId": "ed7c0d5bebe093ab1442be0c700d1347fbe73055",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21beab24_3dd156c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4296666
+      },
+      "writtenOn": "2025-08-31T16:28:43Z",
+      "side": 1,
+      "message": "3726567: Merge tag \u0027android13-5.10.240_r00\u0027 into android13-5.10 | https://android-review.googlesource.com/c/kernel/common/+/3726567",
+      "revId": "ed7c0d5bebe093ab1442be0c700d1347fbe73055",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
