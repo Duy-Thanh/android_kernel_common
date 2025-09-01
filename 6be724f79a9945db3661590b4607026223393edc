@@ -52,6 +52,24 @@
       "parentUuid": "f4d26ad7_7f63eceb",
       "revId": "6be724f79a9945db3661590b4607026223393edc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c03b3c20_d51cf330",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1349423
+      },
+      "writtenOn": "2025-09-01T06:29:22Z",
+      "side": 1,
+      "message": "Switched to patchset#2. The Presubmit passed.",
+      "parentUuid": "eb148410_6b662ff8",
+      "revId": "6be724f79a9945db3661590b4607026223393edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
