@@ -88,6 +88,24 @@
       "parentUuid": "c03b3c20_d51cf330",
       "revId": "6be724f79a9945db3661590b4607026223393edc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a580d10_da8243c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1349423
+      },
+      "writtenOn": "2025-09-01T09:03:55Z",
+      "side": 1,
+      "message": "OEMs who want to support XFRM offload need to enable `CONFIG_INET_ESP_OFFLOAD` and `CONFIG_INET6_ESP_OFFLOAD`. `CONFIG_XFRM_OFFLOAD` will be enabled automatically.\n\nHi Todd, does it sound reasonable to enable the two configs in the GKI modules and remove the dummy config?",
+      "parentUuid": "af48dfe8_378734fb",
+      "revId": "6be724f79a9945db3661590b4607026223393edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
