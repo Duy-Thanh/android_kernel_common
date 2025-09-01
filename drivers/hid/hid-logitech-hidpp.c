@@ -3296,6 +3296,7 @@ static int m560_raw_event(struct hid_device *hdev, u8 *data, int size)
 					 120);
 		}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		v = sign_extend32(hid_field_extract(hdev, data + 3, 0, 12), 11);
 		input_report_rel(hidpp->input, REL_X, v);
 
@@ -4626,6 +4627,1337 @@ static const struct hid_device_id hidpp_devices[] = {
 	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC09b) },
 	{ /* Logitech G PRO 2 LIGHTSPEED Wireless Mouse over USB */
 	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xc09a) },
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		v = hid_snto32(hid_field_extract(hdev, data+3, 0, 12), 12);
+		input_report_rel(hidpp->input, REL_X, v);
+
+		v = hid_snto32(hid_field_extract(hdev, data+3, 12, 12), 12);
+		input_report_rel(hidpp->input, REL_Y, v);
+
+		v = hid_snto32(data[6], 8);
+		if (v != 0)
+			hidpp_scroll_counter_handle_scroll(hidpp->input,
+					&hidpp->vertical_wheel_counter, v);
+
+		input_sync(hidpp->input);
+	}
+
+	return 1;
+}
+
+static void m560_populate_input(struct hidpp_device *hidpp,
+				struct input_dev *input_dev)
+{
+	__set_bit(EV_KEY, input_dev->evbit);
+	__set_bit(BTN_MIDDLE, input_dev->keybit);
+	__set_bit(BTN_RIGHT, input_dev->keybit);
+	__set_bit(BTN_LEFT, input_dev->keybit);
+	__set_bit(BTN_BACK, input_dev->keybit);
+	__set_bit(BTN_FORWARD, input_dev->keybit);
+
+	__set_bit(EV_REL, input_dev->evbit);
+	__set_bit(REL_X, input_dev->relbit);
+	__set_bit(REL_Y, input_dev->relbit);
+	__set_bit(REL_WHEEL, input_dev->relbit);
+	__set_bit(REL_HWHEEL, input_dev->relbit);
+	__set_bit(REL_WHEEL_HI_RES, input_dev->relbit);
+	__set_bit(REL_HWHEEL_HI_RES, input_dev->relbit);
+}
+
+static int m560_input_mapping(struct hid_device *hdev, struct hid_input *hi,
+		struct hid_field *field, struct hid_usage *usage,
+		unsigned long **bit, int *max)
+{
+	return -1;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Logitech K400 devices                                                     */
+/* ------------------------------------------------------------------------- */
+
+/*
+ * The Logitech K400 keyboard has an embedded touchpad which is seen
+ * as a mouse from the OS point of view. There is a hardware shortcut to disable
+ * tap-to-click but the setting is not remembered accross reset, annoying some
+ * users.
+ *
+ * We can toggle this feature from the host by using the feature 0x6010:
+ * Touchpad FW items
+ */
+
+struct k400_private_data {
+	u8 feature_index;
+};
+
+static int k400_disable_tap_to_click(struct hidpp_device *hidpp)
+{
+	struct k400_private_data *k400 = hidpp->private_data;
+	struct hidpp_touchpad_fw_items items = {};
+	int ret;
+	u8 feature_type;
+
+	if (!k400->feature_index) {
+		ret = hidpp_root_get_feature(hidpp,
+			HIDPP_PAGE_TOUCHPAD_FW_ITEMS,
+			&k400->feature_index, &feature_type);
+		if (ret)
+			/* means that the device is not powered up */
+			return ret;
+	}
+
+	ret = hidpp_touchpad_fw_items_set(hidpp, k400->feature_index, &items);
+	if (ret)
+		return ret;
+
+	return 0;
+}
+
+static int k400_allocate(struct hid_device *hdev)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+	struct k400_private_data *k400;
+
+	k400 = devm_kzalloc(&hdev->dev, sizeof(struct k400_private_data),
+			    GFP_KERNEL);
+	if (!k400)
+		return -ENOMEM;
+
+	hidpp->private_data = k400;
+
+	return 0;
+};
+
+static int k400_connect(struct hid_device *hdev)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+
+	if (!disable_tap_to_click)
+		return 0;
+
+	return k400_disable_tap_to_click(hidpp);
+}
+
+/* ------------------------------------------------------------------------- */
+/* Logitech G920 Driving Force Racing Wheel for Xbox One                     */
+/* ------------------------------------------------------------------------- */
+
+#define HIDPP_PAGE_G920_FORCE_FEEDBACK			0x8123
+
+static int g920_ff_set_autocenter(struct hidpp_device *hidpp,
+				  struct hidpp_ff_private_data *data)
+{
+	struct hidpp_report response;
+	u8 params[HIDPP_AUTOCENTER_PARAMS_LENGTH] = {
+		[1] = HIDPP_FF_EFFECT_SPRING | HIDPP_FF_EFFECT_AUTOSTART,
+	};
+	int ret;
+
+	/* initialize with zero autocenter to get wheel in usable state */
+
+	dbg_hid("Setting autocenter to 0.\n");
+	ret = hidpp_send_fap_command_sync(hidpp, data->feature_index,
+					  HIDPP_FF_DOWNLOAD_EFFECT,
+					  params, ARRAY_SIZE(params),
+					  &response);
+	if (ret)
+		hid_warn(hidpp->hid_dev, "Failed to autocenter device!\n");
+	else
+		data->slot_autocenter = response.fap.params[0];
+
+	return ret;
+}
+
+static int g920_get_config(struct hidpp_device *hidpp,
+			   struct hidpp_ff_private_data *data)
+{
+	struct hidpp_report response;
+	u8 feature_type;
+	int ret;
+
+	memset(data, 0, sizeof(*data));
+
+	/* Find feature and store for later use */
+	ret = hidpp_root_get_feature(hidpp, HIDPP_PAGE_G920_FORCE_FEEDBACK,
+				     &data->feature_index, &feature_type);
+	if (ret)
+		return ret;
+
+	/* Read number of slots available in device */
+	ret = hidpp_send_fap_command_sync(hidpp, data->feature_index,
+					  HIDPP_FF_GET_INFO,
+					  NULL, 0,
+					  &response);
+	if (ret) {
+		if (ret < 0)
+			return ret;
+		hid_err(hidpp->hid_dev,
+			"%s: received protocol error 0x%02x\n", __func__, ret);
+		return -EPROTO;
+	}
+
+	data->num_effects = response.fap.params[0] - HIDPP_FF_RESERVED_SLOTS;
+
+	/* reset all forces */
+	ret = hidpp_send_fap_command_sync(hidpp, data->feature_index,
+					  HIDPP_FF_RESET_ALL,
+					  NULL, 0,
+					  &response);
+	if (ret)
+		hid_warn(hidpp->hid_dev, "Failed to reset all forces!\n");
+
+	ret = hidpp_send_fap_command_sync(hidpp, data->feature_index,
+					  HIDPP_FF_GET_APERTURE,
+					  NULL, 0,
+					  &response);
+	if (ret) {
+		hid_warn(hidpp->hid_dev,
+			 "Failed to read range from device!\n");
+	}
+	data->range = ret ?
+		900 : get_unaligned_be16(&response.fap.params[0]);
+
+	/* Read the current gain values */
+	ret = hidpp_send_fap_command_sync(hidpp, data->feature_index,
+					  HIDPP_FF_GET_GLOBAL_GAINS,
+					  NULL, 0,
+					  &response);
+	if (ret)
+		hid_warn(hidpp->hid_dev,
+			 "Failed to read gain values from device!\n");
+	data->gain = ret ?
+		0xffff : get_unaligned_be16(&response.fap.params[0]);
+
+	/* ignore boost value at response.fap.params[2] */
+
+	return g920_ff_set_autocenter(hidpp, data);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Logitech Dinovo Mini keyboard with builtin touchpad                        */
+/* -------------------------------------------------------------------------- */
+#define DINOVO_MINI_PRODUCT_ID		0xb30c
+
+static int lg_dinovo_input_mapping(struct hid_device *hdev, struct hid_input *hi,
+		struct hid_field *field, struct hid_usage *usage,
+		unsigned long **bit, int *max)
+{
+	if ((usage->hid & HID_USAGE_PAGE) != HID_UP_LOGIVENDOR)
+		return 0;
+
+	switch (usage->hid & HID_USAGE) {
+	case 0x00d: lg_map_key_clear(KEY_MEDIA);	break;
+	default:
+		return 0;
+	}
+	return 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* HID++1.0 devices which use HID++ reports for their wheels                  */
+/* -------------------------------------------------------------------------- */
+static int hidpp10_wheel_connect(struct hidpp_device *hidpp)
+{
+	return hidpp10_set_register(hidpp, HIDPP_REG_ENABLE_REPORTS, 0,
+			HIDPP_ENABLE_WHEEL_REPORT | HIDPP_ENABLE_HWHEEL_REPORT,
+			HIDPP_ENABLE_WHEEL_REPORT | HIDPP_ENABLE_HWHEEL_REPORT);
+}
+
+static int hidpp10_wheel_raw_event(struct hidpp_device *hidpp,
+				   u8 *data, int size)
+{
+	s8 value, hvalue;
+
+	if (!hidpp->input)
+		return -EINVAL;
+
+	if (size < 7)
+		return 0;
+
+	if (data[0] != REPORT_ID_HIDPP_SHORT || data[2] != HIDPP_SUB_ID_ROLLER)
+		return 0;
+
+	value = data[3];
+	hvalue = data[4];
+
+	input_report_rel(hidpp->input, REL_WHEEL, value);
+	input_report_rel(hidpp->input, REL_WHEEL_HI_RES, value * 120);
+	input_report_rel(hidpp->input, REL_HWHEEL, hvalue);
+	input_report_rel(hidpp->input, REL_HWHEEL_HI_RES, hvalue * 120);
+	input_sync(hidpp->input);
+
+	return 1;
+}
+
+static void hidpp10_wheel_populate_input(struct hidpp_device *hidpp,
+					 struct input_dev *input_dev)
+{
+	__set_bit(EV_REL, input_dev->evbit);
+	__set_bit(REL_WHEEL, input_dev->relbit);
+	__set_bit(REL_WHEEL_HI_RES, input_dev->relbit);
+	__set_bit(REL_HWHEEL, input_dev->relbit);
+	__set_bit(REL_HWHEEL_HI_RES, input_dev->relbit);
+}
+
+/* -------------------------------------------------------------------------- */
+/* HID++1.0 mice which use HID++ reports for extra mouse buttons              */
+/* -------------------------------------------------------------------------- */
+static int hidpp10_extra_mouse_buttons_connect(struct hidpp_device *hidpp)
+{
+	return hidpp10_set_register(hidpp, HIDPP_REG_ENABLE_REPORTS, 0,
+				    HIDPP_ENABLE_MOUSE_EXTRA_BTN_REPORT,
+				    HIDPP_ENABLE_MOUSE_EXTRA_BTN_REPORT);
+}
+
+static int hidpp10_extra_mouse_buttons_raw_event(struct hidpp_device *hidpp,
+				    u8 *data, int size)
+{
+	int i;
+
+	if (!hidpp->input)
+		return -EINVAL;
+
+	if (size < 7)
+		return 0;
+
+	if (data[0] != REPORT_ID_HIDPP_SHORT ||
+	    data[2] != HIDPP_SUB_ID_MOUSE_EXTRA_BTNS)
+		return 0;
+
+	/*
+	 * Buttons are either delivered through the regular mouse report *or*
+	 * through the extra buttons report. At least for button 6 how it is
+	 * delivered differs per receiver firmware version. Even receivers with
+	 * the same usb-id show different behavior, so we handle both cases.
+	 */
+	for (i = 0; i < 8; i++)
+		input_report_key(hidpp->input, BTN_MOUSE + i,
+				 (data[3] & (1 << i)));
+
+	/* Some mice report events on button 9+, use BTN_MISC */
+	for (i = 0; i < 8; i++)
+		input_report_key(hidpp->input, BTN_MISC + i,
+				 (data[4] & (1 << i)));
+
+	input_sync(hidpp->input);
+	return 1;
+}
+
+static void hidpp10_extra_mouse_buttons_populate_input(
+			struct hidpp_device *hidpp, struct input_dev *input_dev)
+{
+	/* BTN_MOUSE - BTN_MOUSE+7 are set already by the descriptor */
+	__set_bit(BTN_0, input_dev->keybit);
+	__set_bit(BTN_1, input_dev->keybit);
+	__set_bit(BTN_2, input_dev->keybit);
+	__set_bit(BTN_3, input_dev->keybit);
+	__set_bit(BTN_4, input_dev->keybit);
+	__set_bit(BTN_5, input_dev->keybit);
+	__set_bit(BTN_6, input_dev->keybit);
+	__set_bit(BTN_7, input_dev->keybit);
+}
+
+/* -------------------------------------------------------------------------- */
+/* HID++1.0 kbds which only report 0x10xx consumer usages through sub-id 0x03 */
+/* -------------------------------------------------------------------------- */
+
+/* Find the consumer-page input report desc and change Maximums to 0x107f */
+static u8 *hidpp10_consumer_keys_report_fixup(struct hidpp_device *hidpp,
+					      u8 *_rdesc, unsigned int *rsize)
+{
+	/* Note 0 terminated so we can use strnstr to search for this. */
+	static const char consumer_rdesc_start[] = {
+		0x05, 0x0C,	/* USAGE_PAGE (Consumer Devices)       */
+		0x09, 0x01,	/* USAGE (Consumer Control)            */
+		0xA1, 0x01,	/* COLLECTION (Application)            */
+		0x85, 0x03,	/* REPORT_ID = 3                       */
+		0x75, 0x10,	/* REPORT_SIZE (16)                    */
+		0x95, 0x02,	/* REPORT_COUNT (2)                    */
+		0x15, 0x01,	/* LOGICAL_MIN (1)                     */
+		0x26, 0x00	/* LOGICAL_MAX (...                    */
+	};
+	char *consumer_rdesc, *rdesc = (char *)_rdesc;
+	unsigned int size;
+
+	consumer_rdesc = strnstr(rdesc, consumer_rdesc_start, *rsize);
+	size = *rsize - (consumer_rdesc - rdesc);
+	if (consumer_rdesc && size >= 25) {
+		consumer_rdesc[15] = 0x7f;
+		consumer_rdesc[16] = 0x10;
+		consumer_rdesc[20] = 0x7f;
+		consumer_rdesc[21] = 0x10;
+	}
+	return _rdesc;
+}
+
+static int hidpp10_consumer_keys_connect(struct hidpp_device *hidpp)
+{
+	return hidpp10_set_register(hidpp, HIDPP_REG_ENABLE_REPORTS, 0,
+				    HIDPP_ENABLE_CONSUMER_REPORT,
+				    HIDPP_ENABLE_CONSUMER_REPORT);
+}
+
+static int hidpp10_consumer_keys_raw_event(struct hidpp_device *hidpp,
+					   u8 *data, int size)
+{
+	u8 consumer_report[5];
+
+	if (size < 7)
+		return 0;
+
+	if (data[0] != REPORT_ID_HIDPP_SHORT ||
+	    data[2] != HIDPP_SUB_ID_CONSUMER_VENDOR_KEYS)
+		return 0;
+
+	/*
+	 * Build a normal consumer report (3) out of the data, this detour
+	 * is necessary to get some keyboards to report their 0x10xx usages.
+	 */
+	consumer_report[0] = 0x03;
+	memcpy(&consumer_report[1], &data[3], 4);
+	/* We are called from atomic context */
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, 5, 1);
+
+	return 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* High-resolution scroll wheels                                              */
+/* -------------------------------------------------------------------------- */
+
+static int hi_res_scroll_enable(struct hidpp_device *hidpp)
+{
+	int ret;
+	u8 multiplier = 1;
+
+	if (hidpp->capabilities & HIDPP_CAPABILITY_HIDPP20_HI_RES_WHEEL) {
+		ret = hidpp_hrw_set_wheel_mode(hidpp, false, true, false);
+		if (ret == 0)
+			ret = hidpp_hrw_get_wheel_capability(hidpp, &multiplier);
+	} else if (hidpp->capabilities & HIDPP_CAPABILITY_HIDPP20_HI_RES_SCROLL) {
+		ret = hidpp_hrs_set_highres_scrolling_mode(hidpp, true,
+							   &multiplier);
+	} else /* if (hidpp->capabilities & HIDPP_CAPABILITY_HIDPP10_FAST_SCROLL) */ {
+		ret = hidpp10_enable_scrolling_acceleration(hidpp);
+		multiplier = 8;
+	}
+	if (ret) {
+		hid_dbg(hidpp->hid_dev,
+			"Could not enable hi-res scrolling: %d\n", ret);
+		return ret;
+	}
+
+	if (multiplier == 0) {
+		hid_dbg(hidpp->hid_dev,
+			"Invalid multiplier 0 from device, setting it to 1\n");
+		multiplier = 1;
+	}
+
+	hidpp->vertical_wheel_counter.wheel_multiplier = multiplier;
+	hid_dbg(hidpp->hid_dev, "wheel multiplier = %d\n", multiplier);
+	return 0;
+}
+
+static int hidpp_initialize_hires_scroll(struct hidpp_device *hidpp)
+{
+	int ret;
+	unsigned long capabilities;
+
+	capabilities = hidpp->capabilities;
+
+	if (hidpp->protocol_major >= 2) {
+		u8 feature_index;
+		u8 feature_type;
+
+		ret = hidpp_root_get_feature(hidpp, HIDPP_PAGE_HIRES_WHEEL,
+					     &feature_index, &feature_type);
+		if (!ret) {
+			hidpp->capabilities |= HIDPP_CAPABILITY_HIDPP20_HI_RES_WHEEL;
+			hid_dbg(hidpp->hid_dev, "Detected HID++ 2.0 hi-res scroll wheel\n");
+			return 0;
+		}
+		ret = hidpp_root_get_feature(hidpp, HIDPP_PAGE_HI_RESOLUTION_SCROLLING,
+					     &feature_index, &feature_type);
+		if (!ret) {
+			hidpp->capabilities |= HIDPP_CAPABILITY_HIDPP20_HI_RES_SCROLL;
+			hid_dbg(hidpp->hid_dev, "Detected HID++ 2.0 hi-res scrolling\n");
+		}
+	} else {
+		/* We cannot detect fast scrolling support on HID++ 1.0 devices */
+		if (hidpp->quirks & HIDPP_QUIRK_HI_RES_SCROLL_1P0) {
+			hidpp->capabilities |= HIDPP_CAPABILITY_HIDPP10_FAST_SCROLL;
+			hid_dbg(hidpp->hid_dev, "Detected HID++ 1.0 fast scroll\n");
+		}
+	}
+
+	if (hidpp->capabilities == capabilities)
+		hid_dbg(hidpp->hid_dev, "Did not detect HID++ hi-res scrolling hardware support\n");
+	return 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Generic HID++ devices                                                      */
+/* -------------------------------------------------------------------------- */
+
+static const u8 *hidpp_report_fixup(struct hid_device *hdev, u8 *rdesc,
+				    unsigned int *rsize)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+
+	if (!hidpp)
+		return rdesc;
+
+	/* For 27 MHz keyboards the quirk gets set after hid_parse. */
+	if (hdev->group == HID_GROUP_LOGITECH_27MHZ_DEVICE ||
+	    (hidpp->quirks & HIDPP_QUIRK_HIDPP_CONSUMER_VENDOR_KEYS))
+		rdesc = hidpp10_consumer_keys_report_fixup(hidpp, rdesc, rsize);
+
+	return rdesc;
+}
+
+static int hidpp_input_mapping(struct hid_device *hdev, struct hid_input *hi,
+		struct hid_field *field, struct hid_usage *usage,
+		unsigned long **bit, int *max)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+
+	if (!hidpp)
+		return 0;
+
+	if (hidpp->quirks & HIDPP_QUIRK_CLASS_WTP)
+		return wtp_input_mapping(hdev, hi, field, usage, bit, max);
+	else if (hidpp->quirks & HIDPP_QUIRK_CLASS_M560 &&
+			field->application != HID_GD_MOUSE)
+		return m560_input_mapping(hdev, hi, field, usage, bit, max);
+
+	if (hdev->product == DINOVO_MINI_PRODUCT_ID)
+		return lg_dinovo_input_mapping(hdev, hi, field, usage, bit, max);
+
+	return 0;
+}
+
+static int hidpp_input_mapped(struct hid_device *hdev, struct hid_input *hi,
+		struct hid_field *field, struct hid_usage *usage,
+		unsigned long **bit, int *max)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+
+	if (!hidpp)
+		return 0;
+
+	/* Ensure that Logitech G920 is not given a default fuzz/flat value */
+	if (hidpp->quirks & HIDPP_QUIRK_CLASS_G920) {
+		if (usage->type == EV_ABS && (usage->code == ABS_X ||
+				usage->code == ABS_Y || usage->code == ABS_Z ||
+				usage->code == ABS_RZ)) {
+			field->application = HID_GD_MULTIAXIS;
+		}
+	}
+
+	return 0;
+}
+
+
+static void hidpp_populate_input(struct hidpp_device *hidpp,
+				 struct input_dev *input)
+{
+	hidpp->input = input;
+
+	if (hidpp->quirks & HIDPP_QUIRK_CLASS_WTP)
+		wtp_populate_input(hidpp, input);
+	else if (hidpp->quirks & HIDPP_QUIRK_CLASS_M560)
+		m560_populate_input(hidpp, input);
+
+	if (hidpp->quirks & HIDPP_QUIRK_HIDPP_WHEELS)
+		hidpp10_wheel_populate_input(hidpp, input);
+
+	if (hidpp->quirks & HIDPP_QUIRK_HIDPP_EXTRA_MOUSE_BTNS)
+		hidpp10_extra_mouse_buttons_populate_input(hidpp, input);
+}
+
+static int hidpp_input_configured(struct hid_device *hdev,
+				struct hid_input *hidinput)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+	struct input_dev *input = hidinput->input;
+
+	if (!hidpp)
+		return 0;
+
+	hidpp_populate_input(hidpp, input);
+
+	return 0;
+}
+
+static int hidpp_raw_hidpp_event(struct hidpp_device *hidpp, u8 *data,
+		int size)
+{
+	struct hidpp_report *question = hidpp->send_receive_buf;
+	struct hidpp_report *answer = hidpp->send_receive_buf;
+	struct hidpp_report *report = (struct hidpp_report *)data;
+	int ret;
+
+	/*
+	 * If the mutex is locked then we have a pending answer from a
+	 * previously sent command.
+	 */
+	if (unlikely(mutex_is_locked(&hidpp->send_mutex))) {
+		/*
+		 * Check for a correct hidpp20 answer or the corresponding
+		 * error
+		 */
+		if (hidpp_match_answer(question, report) ||
+				hidpp_match_error(question, report)) {
+			*answer = *report;
+			hidpp->answer_available = true;
+			wake_up(&hidpp->wait);
+			/*
+			 * This was an answer to a command that this driver sent
+			 * We return 1 to hid-core to avoid forwarding the
+			 * command upstream as it has been treated by the driver
+			 */
+
+			return 1;
+		}
+	}
+
+	if (unlikely(hidpp_report_is_connect_event(hidpp, report))) {
+		if (schedule_work(&hidpp->work) == 0)
+			dbg_hid("%s: connect event already queued\n", __func__);
+		return 1;
+	}
+
+	if (hidpp->hid_dev->group == HID_GROUP_LOGITECH_27MHZ_DEVICE &&
+	    data[0] == REPORT_ID_HIDPP_SHORT &&
+	    data[2] == HIDPP_SUB_ID_USER_IFACE_EVENT &&
+	    (data[3] & HIDPP_USER_IFACE_EVENT_ENCRYPTION_KEY_LOST)) {
+		dev_err_ratelimited(&hidpp->hid_dev->dev,
+			"Error the keyboard's wireless encryption key has been lost, your keyboard will not work unless you re-configure encryption.\n");
+		dev_err_ratelimited(&hidpp->hid_dev->dev,
+			"See: https://gitlab.freedesktop.org/jwrdegoede/logitech-27mhz-keyboard-encryption-setup/\n");
+	}
+
+	if (hidpp->capabilities & HIDPP_CAPABILITY_HIDPP20_BATTERY) {
+		ret = hidpp20_battery_event_1000(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+		ret = hidpp20_battery_event_1004(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+		ret = hidpp_solar_battery_event(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+		ret = hidpp20_battery_voltage_event(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+		ret = hidpp20_adc_measurement_event_1f20(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+	}
+
+	if (hidpp->capabilities & HIDPP_CAPABILITY_HIDPP10_BATTERY) {
+		ret = hidpp10_battery_event(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+	}
+
+	if (hidpp->quirks & HIDPP_QUIRK_HIDPP_WHEELS) {
+		ret = hidpp10_wheel_raw_event(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+	}
+
+	if (hidpp->quirks & HIDPP_QUIRK_HIDPP_EXTRA_MOUSE_BTNS) {
+		ret = hidpp10_extra_mouse_buttons_raw_event(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+	}
+
+	if (hidpp->quirks & HIDPP_QUIRK_HIDPP_CONSUMER_VENDOR_KEYS) {
+		ret = hidpp10_consumer_keys_raw_event(hidpp, data, size);
+		if (ret != 0)
+			return ret;
+	}
+
+	return 0;
+}
+
+static int hidpp_raw_event(struct hid_device *hdev, struct hid_report *report,
+		u8 *data, int size)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+	int ret = 0;
+
+	if (!hidpp)
+		return 0;
+
+	/* Generic HID++ processing. */
+	switch (data[0]) {
+	case REPORT_ID_HIDPP_VERY_LONG:
+		if (size != hidpp->very_long_report_length) {
+			hid_err(hdev, "received hid++ report of bad size (%d)",
+				size);
+			return 1;
+		}
+		ret = hidpp_raw_hidpp_event(hidpp, data, size);
+		break;
+	case REPORT_ID_HIDPP_LONG:
+		if (size != HIDPP_REPORT_LONG_LENGTH) {
+			hid_err(hdev, "received hid++ report of bad size (%d)",
+				size);
+			return 1;
+		}
+		ret = hidpp_raw_hidpp_event(hidpp, data, size);
+		break;
+	case REPORT_ID_HIDPP_SHORT:
+		if (size != HIDPP_REPORT_SHORT_LENGTH) {
+			hid_err(hdev, "received hid++ report of bad size (%d)",
+				size);
+			return 1;
+		}
+		ret = hidpp_raw_hidpp_event(hidpp, data, size);
+		break;
+	}
+
+	/* If no report is available for further processing, skip calling
+	 * raw_event of subclasses. */
+	if (ret != 0)
+		return ret;
+
+	if (hidpp->quirks & HIDPP_QUIRK_CLASS_WTP)
+		return wtp_raw_event(hdev, data, size);
+	else if (hidpp->quirks & HIDPP_QUIRK_CLASS_M560)
+		return m560_raw_event(hdev, data, size);
+
+	return 0;
+}
+
+static int hidpp_event(struct hid_device *hdev, struct hid_field *field,
+	struct hid_usage *usage, __s32 value)
+{
+	/* This function will only be called for scroll events, due to the
+	 * restriction imposed in hidpp_usages.
+	 */
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+	struct hidpp_scroll_counter *counter;
+
+	if (!hidpp)
+		return 0;
+
+	counter = &hidpp->vertical_wheel_counter;
+	/* A scroll event may occur before the multiplier has been retrieved or
+	 * the input device set, or high-res scroll enabling may fail. In such
+	 * cases we must return early (falling back to default behaviour) to
+	 * avoid a crash in hidpp_scroll_counter_handle_scroll.
+	 */
+	if (!(hidpp->capabilities & HIDPP_CAPABILITY_HI_RES_SCROLL)
+	    || value == 0 || hidpp->input == NULL
+	    || counter->wheel_multiplier == 0)
+		return 0;
+
+	hidpp_scroll_counter_handle_scroll(hidpp->input, counter, value);
+	return 1;
+}
+
+static int hidpp_initialize_battery(struct hidpp_device *hidpp)
+{
+	static atomic_t battery_no = ATOMIC_INIT(0);
+	struct power_supply_config cfg = { .drv_data = hidpp };
+	struct power_supply_desc *desc = &hidpp->battery.desc;
+	enum power_supply_property *battery_props;
+	struct hidpp_battery *battery;
+	unsigned int num_battery_props;
+	unsigned long n;
+	int ret;
+
+	if (hidpp->battery.ps)
+		return 0;
+
+	hidpp->battery.feature_index = 0xff;
+	hidpp->battery.solar_feature_index = 0xff;
+	hidpp->battery.voltage_feature_index = 0xff;
+	hidpp->battery.adc_measurement_feature_index = 0xff;
+
+	if (hidpp->protocol_major >= 2) {
+		if (hidpp->quirks & HIDPP_QUIRK_CLASS_K750)
+			ret = hidpp_solar_request_battery_event(hidpp);
+		else {
+			/* we only support one battery feature right now, so let's
+			   first check the ones that support battery level first
+			   and leave voltage for last */
+			ret = hidpp20_query_battery_info_1000(hidpp);
+			if (ret)
+				ret = hidpp20_query_battery_info_1004(hidpp);
+			if (ret)
+				ret = hidpp20_query_battery_voltage_info(hidpp);
+			if (ret)
+				ret = hidpp20_query_adc_measurement_info_1f20(hidpp);
+		}
+
+		if (ret)
+			return ret;
+		hidpp->capabilities |= HIDPP_CAPABILITY_HIDPP20_BATTERY;
+	} else {
+		ret = hidpp10_query_battery_status(hidpp);
+		if (ret) {
+			ret = hidpp10_query_battery_mileage(hidpp);
+			if (ret)
+				return -ENOENT;
+			hidpp->capabilities |= HIDPP_CAPABILITY_BATTERY_MILEAGE;
+		} else {
+			hidpp->capabilities |= HIDPP_CAPABILITY_BATTERY_LEVEL_STATUS;
+		}
+		hidpp->capabilities |= HIDPP_CAPABILITY_HIDPP10_BATTERY;
+	}
+
+	battery_props = devm_kmemdup(&hidpp->hid_dev->dev,
+				     hidpp_battery_props,
+				     sizeof(hidpp_battery_props),
+				     GFP_KERNEL);
+	if (!battery_props)
+		return -ENOMEM;
+
+	num_battery_props = ARRAY_SIZE(hidpp_battery_props) - 3;
+
+	if (hidpp->capabilities & HIDPP_CAPABILITY_BATTERY_MILEAGE ||
+	    hidpp->capabilities & HIDPP_CAPABILITY_BATTERY_PERCENTAGE ||
+	    hidpp->capabilities & HIDPP_CAPABILITY_BATTERY_VOLTAGE ||
+	    hidpp->capabilities & HIDPP_CAPABILITY_ADC_MEASUREMENT)
+		battery_props[num_battery_props++] =
+				POWER_SUPPLY_PROP_CAPACITY;
+
+	if (hidpp->capabilities & HIDPP_CAPABILITY_BATTERY_LEVEL_STATUS)
+		battery_props[num_battery_props++] =
+				POWER_SUPPLY_PROP_CAPACITY_LEVEL;
+
+	if (hidpp->capabilities & HIDPP_CAPABILITY_BATTERY_VOLTAGE ||
+	    hidpp->capabilities & HIDPP_CAPABILITY_ADC_MEASUREMENT)
+		battery_props[num_battery_props++] =
+			POWER_SUPPLY_PROP_VOLTAGE_NOW;
+
+	battery = &hidpp->battery;
+
+	n = atomic_inc_return(&battery_no) - 1;
+	desc->properties = battery_props;
+	desc->num_properties = num_battery_props;
+	desc->get_property = hidpp_battery_get_property;
+	sprintf(battery->name, "hidpp_battery_%ld", n);
+	desc->name = battery->name;
+	desc->type = POWER_SUPPLY_TYPE_BATTERY;
+	desc->use_for_apm = 0;
+
+	battery->ps = devm_power_supply_register(&hidpp->hid_dev->dev,
+						 &battery->desc,
+						 &cfg);
+	if (IS_ERR(battery->ps))
+		return PTR_ERR(battery->ps);
+
+	power_supply_powers(battery->ps, &hidpp->hid_dev->dev);
+
+	return ret;
+}
+
+/* Get name + serial for USB and Bluetooth HID++ devices */
+static void hidpp_non_unifying_init(struct hidpp_device *hidpp)
+{
+	struct hid_device *hdev = hidpp->hid_dev;
+	char *name;
+
+	/* Bluetooth devices already have their serialnr set */
+	if (hid_is_usb(hdev))
+		hidpp_serial_init(hidpp);
+
+	name = hidpp_get_device_name(hidpp);
+	if (name) {
+		dbg_hid("HID++: Got name: %s\n", name);
+		snprintf(hdev->name, sizeof(hdev->name), "%s", name);
+		kfree(name);
+	}
+}
+
+static int hidpp_input_open(struct input_dev *dev)
+{
+	struct hid_device *hid = input_get_drvdata(dev);
+
+	return hid_hw_open(hid);
+}
+
+static void hidpp_input_close(struct input_dev *dev)
+{
+	struct hid_device *hid = input_get_drvdata(dev);
+
+	hid_hw_close(hid);
+}
+
+static struct input_dev *hidpp_allocate_input(struct hid_device *hdev)
+{
+	struct input_dev *input_dev = devm_input_allocate_device(&hdev->dev);
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+
+	if (!input_dev)
+		return NULL;
+
+	input_set_drvdata(input_dev, hdev);
+	input_dev->open = hidpp_input_open;
+	input_dev->close = hidpp_input_close;
+
+	input_dev->name = hidpp->name;
+	input_dev->phys = hdev->phys;
+	input_dev->uniq = hdev->uniq;
+	input_dev->id.bustype = hdev->bus;
+	input_dev->id.vendor  = hdev->vendor;
+	input_dev->id.product = hdev->product;
+	input_dev->id.version = hdev->version;
+	input_dev->dev.parent = &hdev->dev;
+
+	return input_dev;
+}
+
+static void hidpp_connect_event(struct work_struct *work)
+{
+	struct hidpp_device *hidpp = container_of(work, struct hidpp_device, work);
+	struct hid_device *hdev = hidpp->hid_dev;
+	struct input_dev *input;
+	char *name, *devm_name;
+	int ret;
+
+	/* Get device version to check if it is connected */
+	ret = hidpp_root_get_protocol_version(hidpp);
+	if (ret) {
+		hid_dbg(hidpp->hid_dev, "Disconnected\n");
+		if (hidpp->battery.ps) {
+			hidpp->battery.online = false;
+			hidpp->battery.status = POWER_SUPPLY_STATUS_UNKNOWN;
+			hidpp->battery.level = POWER_SUPPLY_CAPACITY_LEVEL_UNKNOWN;
+			power_supply_changed(hidpp->battery.ps);
+		}
+		return;
+	}
+
+	if (hidpp->quirks & HIDPP_QUIRK_CLASS_WTP) {
+		ret = wtp_connect(hdev);
+		if (ret)
+			return;
+	} else if (hidpp->quirks & HIDPP_QUIRK_CLASS_M560) {
+		ret = m560_send_config_command(hdev);
+		if (ret)
+			return;
+	} else if (hidpp->quirks & HIDPP_QUIRK_CLASS_K400) {
+		ret = k400_connect(hdev);
+		if (ret)
+			return;
+	}
+
+	if (hidpp->quirks & HIDPP_QUIRK_HIDPP_WHEELS) {
+		ret = hidpp10_wheel_connect(hidpp);
+		if (ret)
+			return;
+	}
+
+	if (hidpp->quirks & HIDPP_QUIRK_HIDPP_EXTRA_MOUSE_BTNS) {
+		ret = hidpp10_extra_mouse_buttons_connect(hidpp);
+		if (ret)
+			return;
+	}
+
+	if (hidpp->quirks & HIDPP_QUIRK_HIDPP_CONSUMER_VENDOR_KEYS) {
+		ret = hidpp10_consumer_keys_connect(hidpp);
+		if (ret)
+			return;
+	}
+
+	if (hidpp->protocol_major >= 2) {
+		u8 feature_index;
+
+		if (!hidpp_get_wireless_feature_index(hidpp, &feature_index))
+			hidpp->wireless_feature_index = feature_index;
+	}
+
+	if (hidpp->name == hdev->name && hidpp->protocol_major >= 2) {
+		name = hidpp_get_device_name(hidpp);
+		if (name) {
+			devm_name = devm_kasprintf(&hdev->dev, GFP_KERNEL,
+						   "%s", name);
+			kfree(name);
+			if (!devm_name)
+				return;
+
+			hidpp->name = devm_name;
+		}
+	}
+
+	hidpp_initialize_battery(hidpp);
+	if (!hid_is_usb(hidpp->hid_dev))
+		hidpp_initialize_hires_scroll(hidpp);
+
+	/* forward current battery state */
+	if (hidpp->capabilities & HIDPP_CAPABILITY_HIDPP10_BATTERY) {
+		hidpp10_enable_battery_reporting(hidpp);
+		if (hidpp->capabilities & HIDPP_CAPABILITY_BATTERY_MILEAGE)
+			hidpp10_query_battery_mileage(hidpp);
+		else
+			hidpp10_query_battery_status(hidpp);
+	} else if (hidpp->capabilities & HIDPP_CAPABILITY_HIDPP20_BATTERY) {
+		if (hidpp->capabilities & HIDPP_CAPABILITY_BATTERY_VOLTAGE)
+			hidpp20_query_battery_voltage_info(hidpp);
+		else if (hidpp->capabilities & HIDPP_CAPABILITY_UNIFIED_BATTERY)
+			hidpp20_query_battery_info_1004(hidpp);
+		else if (hidpp->capabilities & HIDPP_CAPABILITY_ADC_MEASUREMENT)
+			hidpp20_query_adc_measurement_info_1f20(hidpp);
+		else
+			hidpp20_query_battery_info_1000(hidpp);
+	}
+	if (hidpp->battery.ps)
+		power_supply_changed(hidpp->battery.ps);
+
+	if (hidpp->capabilities & HIDPP_CAPABILITY_HI_RES_SCROLL)
+		hi_res_scroll_enable(hidpp);
+
+	if (!(hidpp->quirks & HIDPP_QUIRK_DELAYED_INIT) || hidpp->delayed_input)
+		/* if the input nodes are already created, we can stop now */
+		return;
+
+	input = hidpp_allocate_input(hdev);
+	if (!input) {
+		hid_err(hdev, "cannot allocate new input device: %d\n", ret);
+		return;
+	}
+
+	hidpp_populate_input(hidpp, input);
+
+	ret = input_register_device(input);
+	if (ret) {
+		input_free_device(input);
+		return;
+	}
+
+	hidpp->delayed_input = input;
+}
+
+static DEVICE_ATTR(builtin_power_supply, 0000, NULL, NULL);
+
+static struct attribute *sysfs_attrs[] = {
+	&dev_attr_builtin_power_supply.attr,
+	NULL
+};
+
+static const struct attribute_group ps_attribute_group = {
+	.attrs = sysfs_attrs
+};
+
+static int hidpp_get_report_length(struct hid_device *hdev, int id)
+{
+	struct hid_report_enum *re;
+	struct hid_report *report;
+
+	re = &(hdev->report_enum[HID_OUTPUT_REPORT]);
+	report = re->report_id_hash[id];
+	if (!report)
+		return 0;
+
+	return report->field[0]->report_count + 1;
+}
+
+static u8 hidpp_validate_device(struct hid_device *hdev)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+	int id, report_length;
+	u8 supported_reports = 0;
+
+	id = REPORT_ID_HIDPP_SHORT;
+	report_length = hidpp_get_report_length(hdev, id);
+	if (report_length) {
+		if (report_length < HIDPP_REPORT_SHORT_LENGTH)
+			goto bad_device;
+
+		supported_reports |= HIDPP_REPORT_SHORT_SUPPORTED;
+	}
+
+	id = REPORT_ID_HIDPP_LONG;
+	report_length = hidpp_get_report_length(hdev, id);
+	if (report_length) {
+		if (report_length < HIDPP_REPORT_LONG_LENGTH)
+			goto bad_device;
+
+		supported_reports |= HIDPP_REPORT_LONG_SUPPORTED;
+	}
+
+	id = REPORT_ID_HIDPP_VERY_LONG;
+	report_length = hidpp_get_report_length(hdev, id);
+	if (report_length) {
+		if (report_length < HIDPP_REPORT_LONG_LENGTH ||
+		    report_length > HIDPP_REPORT_VERY_LONG_MAX_LENGTH)
+			goto bad_device;
+
+		supported_reports |= HIDPP_REPORT_VERY_LONG_SUPPORTED;
+		hidpp->very_long_report_length = report_length;
+	}
+
+	return supported_reports;
+
+bad_device:
+	hid_warn(hdev, "not enough values in hidpp report %d\n", id);
+	return false;
+}
+
+static bool hidpp_application_equals(struct hid_device *hdev,
+				     unsigned int application)
+{
+	struct list_head *report_list;
+	struct hid_report *report;
+
+	report_list = &hdev->report_enum[HID_INPUT_REPORT].report_list;
+	report = list_first_entry_or_null(report_list, struct hid_report, list);
+	return report && report->application == application;
+}
+
+static int hidpp_probe(struct hid_device *hdev, const struct hid_device_id *id)
+{
+	struct hidpp_device *hidpp;
+	int ret;
+	unsigned int connect_mask = HID_CONNECT_DEFAULT;
+
+	/* report_fixup needs drvdata to be set before we call hid_parse */
+	hidpp = devm_kzalloc(&hdev->dev, sizeof(*hidpp), GFP_KERNEL);
+	if (!hidpp)
+		return -ENOMEM;
+
+	hidpp->hid_dev = hdev;
+	hidpp->name = hdev->name;
+	hidpp->quirks = id->driver_data;
+	hid_set_drvdata(hdev, hidpp);
+
+	ret = hid_parse(hdev);
+	if (ret) {
+		hid_err(hdev, "%s:parse failed\n", __func__);
+		return ret;
+	}
+
+	/*
+	 * Make sure the device is HID++ capable, otherwise treat as generic HID
+	 */
+	hidpp->supported_reports = hidpp_validate_device(hdev);
+
+	if (!hidpp->supported_reports) {
+		hid_set_drvdata(hdev, NULL);
+		devm_kfree(&hdev->dev, hidpp);
+		return hid_hw_start(hdev, HID_CONNECT_DEFAULT);
+	}
+
+	if (id->group == HID_GROUP_LOGITECH_27MHZ_DEVICE &&
+	    hidpp_application_equals(hdev, HID_GD_MOUSE))
+		hidpp->quirks |= HIDPP_QUIRK_HIDPP_WHEELS |
+				 HIDPP_QUIRK_HIDPP_EXTRA_MOUSE_BTNS;
+
+	if (id->group == HID_GROUP_LOGITECH_27MHZ_DEVICE &&
+	    hidpp_application_equals(hdev, HID_GD_KEYBOARD))
+		hidpp->quirks |= HIDPP_QUIRK_HIDPP_CONSUMER_VENDOR_KEYS;
+
+	if (hidpp->quirks & HIDPP_QUIRK_CLASS_WTP) {
+		ret = wtp_allocate(hdev, id);
+		if (ret)
+			return ret;
+	} else if (hidpp->quirks & HIDPP_QUIRK_CLASS_K400) {
+		ret = k400_allocate(hdev);
+		if (ret)
+			return ret;
+	}
+
+	INIT_WORK(&hidpp->work, hidpp_connect_event);
+	mutex_init(&hidpp->send_mutex);
+	init_waitqueue_head(&hidpp->wait);
+
+	/* indicates we are handling the battery properties in the kernel */
+	ret = sysfs_create_group(&hdev->dev.kobj, &ps_attribute_group);
+	if (ret)
+		hid_warn(hdev, "Cannot allocate sysfs group for %s\n",
+			 hdev->name);
+
+	/*
+	 * First call hid_hw_start(hdev, 0) to allow IO without connecting any
+	 * hid subdrivers (hid-input, hidraw). This allows retrieving the dev's
+	 * name and serial number and store these in hdev->name and hdev->uniq,
+	 * before the hid-input and hidraw drivers expose these to userspace.
+	 */
+	ret = hid_hw_start(hdev, 0);
+	if (ret) {
+		hid_err(hdev, "hw start failed\n");
+		goto hid_hw_start_fail;
+	}
+
+	ret = hid_hw_open(hdev);
+	if (ret < 0) {
+		dev_err(&hdev->dev, "%s:hid_hw_open returned error:%d\n",
+			__func__, ret);
+		goto hid_hw_open_fail;
+	}
+
+	/* Allow incoming packets */
+	hid_device_io_start(hdev);
+
+	/* Get name + serial, store in hdev->name + hdev->uniq */
+	if (id->group == HID_GROUP_LOGITECH_DJ_DEVICE)
+		hidpp_unifying_init(hidpp);
+	else
+		hidpp_non_unifying_init(hidpp);
+
+	if (hidpp->quirks & HIDPP_QUIRK_DELAYED_INIT)
+		connect_mask &= ~HID_CONNECT_HIDINPUT;
+
+	/* Now export the actual inputs and hidraw nodes to the world */
+	hid_device_io_stop(hdev);
+	ret = hid_connect(hdev, connect_mask);
+	if (ret) {
+		hid_err(hdev, "%s:hid_connect returned error %d\n", __func__, ret);
+		goto hid_hw_init_fail;
+	}
+
+	/* Check for connected devices now that incoming packets will not be disabled again */
+	hid_device_io_start(hdev);
+	schedule_work(&hidpp->work);
+	flush_work(&hidpp->work);
+
+	if (hidpp->quirks & HIDPP_QUIRK_CLASS_G920) {
+		struct hidpp_ff_private_data data;
+
+		ret = g920_get_config(hidpp, &data);
+		if (!ret)
+			ret = hidpp_ff_init(hidpp, &data);
+
+		if (ret)
+			hid_warn(hidpp->hid_dev,
+		     "Unable to initialize force feedback support, errno %d\n",
+				 ret);
+	}
+
+	/*
+	 * This relies on logi_dj_ll_close() being a no-op so that DJ connection
+	 * events will still be received.
+	 */
+	hid_hw_close(hdev);
+	return ret;
+
+hid_hw_init_fail:
+	hid_hw_close(hdev);
+hid_hw_open_fail:
+	hid_hw_stop(hdev);
+hid_hw_start_fail:
+	sysfs_remove_group(&hdev->dev.kobj, &ps_attribute_group);
+	cancel_work_sync(&hidpp->work);
+	mutex_destroy(&hidpp->send_mutex);
+	return ret;
+}
+
+static void hidpp_remove(struct hid_device *hdev)
+{
+	struct hidpp_device *hidpp = hid_get_drvdata(hdev);
+
+	if (!hidpp)
+		return hid_hw_stop(hdev);
+
+	sysfs_remove_group(&hdev->dev.kobj, &ps_attribute_group);
+
+	hid_hw_stop(hdev);
+	cancel_work_sync(&hidpp->work);
+	mutex_destroy(&hidpp->send_mutex);
+}
+
+#define LDJ_DEVICE(product) \
+	HID_DEVICE(BUS_USB, HID_GROUP_LOGITECH_DJ_DEVICE, \
+		   USB_VENDOR_ID_LOGITECH, (product))
+
+#define L27MHZ_DEVICE(product) \
+	HID_DEVICE(BUS_USB, HID_GROUP_LOGITECH_27MHZ_DEVICE, \
+		   USB_VENDOR_ID_LOGITECH, (product))
+
+static const struct hid_device_id hidpp_devices[] = {
+	{ /* wireless touchpad */
+	  LDJ_DEVICE(0x4011),
+	  .driver_data = HIDPP_QUIRK_CLASS_WTP | HIDPP_QUIRK_DELAYED_INIT |
+			 HIDPP_QUIRK_WTP_PHYSICAL_BUTTONS },
+	{ /* wireless touchpad T650 */
+	  LDJ_DEVICE(0x4101),
+	  .driver_data = HIDPP_QUIRK_CLASS_WTP | HIDPP_QUIRK_DELAYED_INIT },
+	{ /* wireless touchpad T651 */
+	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH,
+		USB_DEVICE_ID_LOGITECH_T651),
+	  .driver_data = HIDPP_QUIRK_CLASS_WTP | HIDPP_QUIRK_DELAYED_INIT },
+	{ /* Mouse Logitech Anywhere MX */
+	  LDJ_DEVICE(0x1017), .driver_data = HIDPP_QUIRK_HI_RES_SCROLL_1P0 },
+	{ /* Mouse logitech M560 */
+	  LDJ_DEVICE(0x402d),
+	  .driver_data = HIDPP_QUIRK_DELAYED_INIT | HIDPP_QUIRK_CLASS_M560 },
+	{ /* Mouse Logitech M705 (firmware RQM17) */
+	  LDJ_DEVICE(0x101b), .driver_data = HIDPP_QUIRK_HI_RES_SCROLL_1P0 },
+	{ /* Mouse Logitech Performance MX */
+	  LDJ_DEVICE(0x101a), .driver_data = HIDPP_QUIRK_HI_RES_SCROLL_1P0 },
+	{ /* Keyboard logitech K400 */
+	  LDJ_DEVICE(0x4024),
+	  .driver_data = HIDPP_QUIRK_CLASS_K400 },
+	{ /* Solar Keyboard Logitech K750 */
+	  LDJ_DEVICE(0x4002),
+	  .driver_data = HIDPP_QUIRK_CLASS_K750 },
+	{ /* Keyboard MX5000 (Bluetooth-receiver in HID proxy mode) */
+	  LDJ_DEVICE(0xb305),
+	  .driver_data = HIDPP_QUIRK_HIDPP_CONSUMER_VENDOR_KEYS },
+	{ /* Dinovo Edge (Bluetooth-receiver in HID proxy mode) */
+	  LDJ_DEVICE(0xb309),
+	  .driver_data = HIDPP_QUIRK_HIDPP_CONSUMER_VENDOR_KEYS },
+	{ /* Keyboard MX5500 (Bluetooth-receiver in HID proxy mode) */
+	  LDJ_DEVICE(0xb30b),
+	  .driver_data = HIDPP_QUIRK_HIDPP_CONSUMER_VENDOR_KEYS },
+
+	{ LDJ_DEVICE(HID_ANY_ID) },
+
+	{ /* Keyboard LX501 (Y-RR53) */
+	  L27MHZ_DEVICE(0x0049),
+	  .driver_data = HIDPP_QUIRK_KBD_ZOOM_WHEEL },
+	{ /* Keyboard MX3000 (Y-RAM74) */
+	  L27MHZ_DEVICE(0x0057),
+	  .driver_data = HIDPP_QUIRK_KBD_SCROLL_WHEEL },
+	{ /* Keyboard MX3200 (Y-RAV80) */
+	  L27MHZ_DEVICE(0x005c),
+	  .driver_data = HIDPP_QUIRK_KBD_ZOOM_WHEEL },
+	{ /* S510 Media Remote */
+	  L27MHZ_DEVICE(0x00fe),
+	  .driver_data = HIDPP_QUIRK_KBD_SCROLL_WHEEL },
+
+	{ L27MHZ_DEVICE(HID_ANY_ID) },
+
+	{ /* Logitech G403 Wireless Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC082) },
+	{ /* Logitech G502 Lightspeed Wireless Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC08D) },
+	{ /* Logitech G703 Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC087) },
+	{ /* Logitech G703 Hero Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC090) },
+	{ /* Logitech G900 Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC081) },
+	{ /* Logitech G903 Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC086) },
+	{ /* Logitech G Pro Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC088) },
+	{ /* MX Vertical over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC08A) },
+	{ /* Logitech G703 Hero Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC090) },
+	{ /* Logitech G903 Hero Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC091) },
+	{ /* Logitech G915 TKL Keyboard over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC343) },
+	{ /* Logitech G920 Wheel over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, USB_DEVICE_ID_LOGITECH_G920_WHEEL),
+		.driver_data = HIDPP_QUIRK_CLASS_G920 | HIDPP_QUIRK_FORCE_OUTPUT_REPORTS},
+	{ /* Logitech G923 Wheel (Xbox version) over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, USB_DEVICE_ID_LOGITECH_G923_XBOX_WHEEL),
+		.driver_data = HIDPP_QUIRK_CLASS_G920 | HIDPP_QUIRK_FORCE_OUTPUT_REPORTS },
+	{ /* Logitech G Pro X Superlight Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC094) },
+	{ /* Logitech G Pro X Superlight 2 Gaming Mouse over USB */
+	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC09b) },
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	{ /* G935 Gaming Headset */
 	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0x0a87),

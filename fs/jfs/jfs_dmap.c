@@ -1389,6 +1389,7 @@ dbAllocAG(struct bmap * bmp, int agno, s64 nblocks, int l2nb, s64 * results)
 	    (1 << (L2LPERCTL - (bmp->db_agheight << 1))) / bmp->db_agwidth;
 	ti = bmp->db_agstart + bmp->db_agwidth * (agno & (agperlev - 1));
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (ti < 0 || ti >= le32_to_cpu(dcp->nleafs)) {
 		jfs_error(bmp->db_ipbmap->i_sb, "Corrupt dmapctl page\n");
 		release_metapage(mp);
@@ -1819,6 +1820,431 @@ dbAllocCtl(struct bmap * bmp, s64 nblocks, int l2nb, s64 blkno, s64 * results)
 			release_metapage(mp);
 			return -EIO;
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* dmap control page trees fan-out by 4 and a single allocation
+	 * group may be described by 1 or 2 subtrees within the ag level
+	 * dmap control page, depending upon the ag size. examine the ag's
+	 * subtrees for sufficient free space, starting with the leftmost
+	 * subtree.
+	 */
+	for (i = 0; i < bmp->db_agwidth; i++, ti++) {
+		/* is there sufficient free space ?
+		 */
+		if (l2nb > dcp->stree[ti])
+			continue;
+
+		/* sufficient free space found in a subtree. now search down
+		 * the subtree to find the leftmost leaf that describes this
+		 * free space.
+		 */
+		for (k = bmp->db_agheight; k > 0; k--) {
+			for (n = 0, m = (ti << 2) + 1; n < 4; n++) {
+				if (l2nb <= dcp->stree[m + n]) {
+					ti = m + n;
+					break;
+				}
+			}
+			if (n == 4) {
+				jfs_error(bmp->db_ipbmap->i_sb,
+					  "failed descending stree\n");
+				release_metapage(mp);
+				return -EIO;
+			}
+		}
+
+		/* determine the block number within the file system
+		 * that corresponds to this leaf.
+		 */
+		if (bmp->db_aglevel == 2)
+			blkno = 0;
+		else if (bmp->db_aglevel == 1)
+			blkno &= ~(MAXL1SIZE - 1);
+		else		/* bmp->db_aglevel == 0 */
+			blkno &= ~(MAXL0SIZE - 1);
+
+		blkno +=
+		    ((s64) (ti - le32_to_cpu(dcp->leafidx))) << budmin;
+
+		/* release the buffer in preparation for going down
+		 * the next level of dmap control pages.
+		 */
+		release_metapage(mp);
+
+		/* check if we need to continue to search down the lower
+		 * level dmap control pages.  we need to if the number of
+		 * blocks required is less than maximum number of blocks
+		 * described at the next lower level.
+		 */
+		if (l2nb < budmin) {
+
+			/* search the lower level dmap control pages to get
+			 * the starting block number of the dmap that
+			 * contains or starts off the free space.
+			 */
+			if ((rc =
+			     dbFindCtl(bmp, l2nb, bmp->db_aglevel - 1,
+				       &blkno))) {
+				if (rc == -ENOSPC) {
+					jfs_error(bmp->db_ipbmap->i_sb,
+						  "control page inconsistent\n");
+					return -EIO;
+				}
+				return (rc);
+			}
+		}
+
+		/* allocate the blocks.
+		 */
+		rc = dbAllocCtl(bmp, nblocks, l2nb, blkno, results);
+		if (rc == -ENOSPC) {
+			jfs_error(bmp->db_ipbmap->i_sb,
+				  "unable to allocate blocks\n");
+			rc = -EIO;
+		}
+		return (rc);
+	}
+
+	/* no space in the allocation group.  release the buffer and
+	 * return -ENOSPC.
+	 */
+	release_metapage(mp);
+
+	return -ENOSPC;
+}
+
+
+/*
+ * NAME:	dbAllocAny()
+ *
+ * FUNCTION:	attempt to allocate the specified number of contiguous
+ *		free blocks anywhere in the file system.
+ *
+ *		dbAllocAny() attempts to find the sufficient free space by
+ *		searching down the dmap control pages, starting with the
+ *		highest level (i.e. L0, L1, L2) control page.  if free space
+ *		large enough to satisfy the desired free space is found, the
+ *		desired free space is allocated.
+ *
+ * PARAMETERS:
+ *	bmp	-  pointer to bmap descriptor
+ *	nblocks	 -  actual number of contiguous free blocks desired.
+ *	l2nb	 -  log2 number of contiguous free blocks desired.
+ *	results	-  on successful return, set to the starting block number
+ *		   of the newly allocated range.
+ *
+ * RETURN VALUES:
+ *	0	- success
+ *	-ENOSPC	- insufficient disk resources
+ *	-EIO	- i/o error
+ *
+ * serialization: IWRITE_LOCK(ipbmap) held on entry/exit;
+ */
+static int dbAllocAny(struct bmap * bmp, s64 nblocks, int l2nb, s64 * results)
+{
+	int rc;
+	s64 blkno = 0;
+
+	/* starting with the top level dmap control page, search
+	 * down the dmap control levels for sufficient free space.
+	 * if free space is found, dbFindCtl() returns the starting
+	 * block number of the dmap that contains or starts off the
+	 * range of free space.
+	 */
+	if ((rc = dbFindCtl(bmp, l2nb, bmp->db_maxlevel, &blkno)))
+		return (rc);
+
+	/* allocate the blocks.
+	 */
+	rc = dbAllocCtl(bmp, nblocks, l2nb, blkno, results);
+	if (rc == -ENOSPC) {
+		jfs_error(bmp->db_ipbmap->i_sb, "unable to allocate blocks\n");
+		return -EIO;
+	}
+	return (rc);
+}
+
+
+/*
+ * NAME:	dbDiscardAG()
+ *
+ * FUNCTION:	attempt to discard (TRIM) all free blocks of specific AG
+ *
+ *		algorithm:
+ *		1) allocate blocks, as large as possible and save them
+ *		   while holding IWRITE_LOCK on ipbmap
+ *		2) trim all these saved block/length values
+ *		3) mark the blocks free again
+ *
+ *		benefit:
+ *		- we work only on one ag at some time, minimizing how long we
+ *		  need to lock ipbmap
+ *		- reading / writing the fs is possible most time, even on
+ *		  trimming
+ *
+ *		downside:
+ *		- we write two times to the dmapctl and dmap pages
+ *		- but for me, this seems the best way, better ideas?
+ *		/TR 2012
+ *
+ * PARAMETERS:
+ *	ip	- pointer to in-core inode
+ *	agno	- ag to trim
+ *	minlen	- minimum value of contiguous blocks
+ *
+ * RETURN VALUES:
+ *	s64	- actual number of blocks trimmed
+ */
+s64 dbDiscardAG(struct inode *ip, int agno, s64 minlen)
+{
+	struct inode *ipbmap = JFS_SBI(ip->i_sb)->ipbmap;
+	struct bmap *bmp = JFS_SBI(ip->i_sb)->bmap;
+	s64 nblocks, blkno;
+	u64 trimmed = 0;
+	int rc, l2nb;
+	struct super_block *sb = ipbmap->i_sb;
+
+	struct range2trim {
+		u64 blkno;
+		u64 nblocks;
+	} *totrim, *tt;
+
+	/* max blkno / nblocks pairs to trim */
+	int count = 0, range_cnt;
+	u64 max_ranges;
+
+	/* prevent others from writing new stuff here, while trimming */
+	IWRITE_LOCK(ipbmap, RDWRLOCK_DMAP);
+
+	nblocks = bmp->db_agfree[agno];
+	max_ranges = nblocks;
+	do_div(max_ranges, minlen);
+	range_cnt = min_t(u64, max_ranges + 1, 32 * 1024);
+	totrim = kmalloc_array(range_cnt, sizeof(struct range2trim), GFP_NOFS);
+	if (totrim == NULL) {
+		jfs_error(bmp->db_ipbmap->i_sb, "no memory for trim array\n");
+		IWRITE_UNLOCK(ipbmap);
+		return 0;
+	}
+
+	tt = totrim;
+	while (nblocks >= minlen) {
+		l2nb = BLKSTOL2(nblocks);
+
+		/* 0 = okay, -EIO = fatal, -ENOSPC -> try smaller block */
+		rc = dbAllocAG(bmp, agno, nblocks, l2nb, &blkno);
+		if (rc == 0) {
+			tt->blkno = blkno;
+			tt->nblocks = nblocks;
+			tt++; count++;
+
+			/* the whole ag is free, trim now */
+			if (bmp->db_agfree[agno] == 0)
+				break;
+
+			/* give a hint for the next while */
+			nblocks = bmp->db_agfree[agno];
+			continue;
+		} else if (rc == -ENOSPC) {
+			/* search for next smaller log2 block */
+			l2nb = BLKSTOL2(nblocks) - 1;
+			if (unlikely(l2nb < 0))
+				break;
+			nblocks = 1LL << l2nb;
+		} else {
+			/* Trim any already allocated blocks */
+			jfs_error(bmp->db_ipbmap->i_sb, "-EIO\n");
+			break;
+		}
+
+		/* check, if our trim array is full */
+		if (unlikely(count >= range_cnt - 1))
+			break;
+	}
+	IWRITE_UNLOCK(ipbmap);
+
+	tt->nblocks = 0; /* mark the current end */
+	for (tt = totrim; tt->nblocks != 0; tt++) {
+		/* when mounted with online discard, dbFree() will
+		 * call jfs_issue_discard() itself */
+		if (!(JFS_SBI(sb)->flag & JFS_DISCARD))
+			jfs_issue_discard(ip, tt->blkno, tt->nblocks);
+		dbFree(ip, tt->blkno, tt->nblocks);
+		trimmed += tt->nblocks;
+	}
+	kfree(totrim);
+
+	return trimmed;
+}
+
+/*
+ * NAME:	dbFindCtl()
+ *
+ * FUNCTION:	starting at a specified dmap control page level and block
+ *		number, search down the dmap control levels for a range of
+ *		contiguous free blocks large enough to satisfy an allocation
+ *		request for the specified number of free blocks.
+ *
+ *		if sufficient contiguous free blocks are found, this routine
+ *		returns the starting block number within a dmap page that
+ *		contains or starts a range of contiqious free blocks that
+ *		is sufficient in size.
+ *
+ * PARAMETERS:
+ *	bmp	-  pointer to bmap descriptor
+ *	level	-  starting dmap control page level.
+ *	l2nb	-  log2 number of contiguous free blocks desired.
+ *	*blkno	-  on entry, starting block number for conducting the search.
+ *		   on successful return, the first block within a dmap page
+ *		   that contains or starts a range of contiguous free blocks.
+ *
+ * RETURN VALUES:
+ *	0	- success
+ *	-ENOSPC	- insufficient disk resources
+ *	-EIO	- i/o error
+ *
+ * serialization: IWRITE_LOCK(ipbmap) held on entry/exit;
+ */
+static int dbFindCtl(struct bmap * bmp, int l2nb, int level, s64 * blkno)
+{
+	int rc, leafidx, lev;
+	s64 b, lblkno;
+	struct dmapctl *dcp;
+	int budmin;
+	struct metapage *mp;
+
+	/* starting at the specified dmap control page level and block
+	 * number, search down the dmap control levels for the starting
+	 * block number of a dmap page that contains or starts off
+	 * sufficient free blocks.
+	 */
+	for (lev = level, b = *blkno; lev >= 0; lev--) {
+		/* get the buffer of the dmap control page for the block
+		 * number and level (i.e. L0, L1, L2).
+		 */
+		lblkno = BLKTOCTL(b, bmp->db_l2nbperpage, lev);
+		mp = read_metapage(bmp->db_ipbmap, lblkno, PSIZE, 0);
+		if (mp == NULL)
+			return -EIO;
+		dcp = (struct dmapctl *) mp->data;
+		budmin = dcp->budmin;
+
+		if (dcp->leafidx != cpu_to_le32(CTLLEAFIND)) {
+			jfs_error(bmp->db_ipbmap->i_sb,
+				  "Corrupt dmapctl page\n");
+			release_metapage(mp);
+			return -EIO;
+		}
+
+		/* search the tree within the dmap control page for
+		 * sufficient free space.  if sufficient free space is found,
+		 * dbFindLeaf() returns the index of the leaf at which
+		 * free space was found.
+		 */
+		rc = dbFindLeaf((dmtree_t *) dcp, l2nb, &leafidx, true);
+
+		/* release the buffer.
+		 */
+		release_metapage(mp);
+
+		/* space found ?
+		 */
+		if (rc) {
+			if (lev != level) {
+				jfs_error(bmp->db_ipbmap->i_sb,
+					  "dmap inconsistent\n");
+				return -EIO;
+			}
+			return -ENOSPC;
+		}
+
+		/* adjust the block number to reflect the location within
+		 * the dmap control page (i.e. the leaf) at which free
+		 * space was found.
+		 */
+		b += (((s64) leafidx) << budmin);
+
+		/* we stop the search at this dmap control page level if
+		 * the number of blocks required is greater than or equal
+		 * to the maximum number of blocks described at the next
+		 * (lower) level.
+		 */
+		if (l2nb >= budmin)
+			break;
+	}
+
+	*blkno = b;
+	return (0);
+}
+
+
+/*
+ * NAME:	dbAllocCtl()
+ *
+ * FUNCTION:	attempt to allocate a specified number of contiguous
+ *		blocks starting within a specific dmap.
+ *
+ *		this routine is called by higher level routines that search
+ *		the dmap control pages above the actual dmaps for contiguous
+ *		free space.  the result of successful searches by these
+ *		routines are the starting block numbers within dmaps, with
+ *		the dmaps themselves containing the desired contiguous free
+ *		space or starting a contiguous free space of desired size
+ *		that is made up of the blocks of one or more dmaps. these
+ *		calls should not fail due to insufficent resources.
+ *
+ *		this routine is called in some cases where it is not known
+ *		whether it will fail due to insufficient resources.  more
+ *		specifically, this occurs when allocating from an allocation
+ *		group whose size is equal to the number of blocks per dmap.
+ *		in this case, the dmap control pages are not examined prior
+ *		to calling this routine (to save pathlength) and the call
+ *		might fail.
+ *
+ *		for a request size that fits within a dmap, this routine relies
+ *		upon the dmap's dmtree to find the requested contiguous free
+ *		space.  for request sizes that are larger than a dmap, the
+ *		requested free space will start at the first block of the
+ *		first dmap (i.e. blkno).
+ *
+ * PARAMETERS:
+ *	bmp	-  pointer to bmap descriptor
+ *	nblocks	 -  actual number of contiguous free blocks to allocate.
+ *	l2nb	 -  log2 number of contiguous free blocks to allocate.
+ *	blkno	 -  starting block number of the dmap to start the allocation
+ *		    from.
+ *	results	-  on successful return, set to the starting block number
+ *		   of the newly allocated range.
+ *
+ * RETURN VALUES:
+ *	0	- success
+ *	-ENOSPC	- insufficient disk resources
+ *	-EIO	- i/o error
+ *
+ * serialization: IWRITE_LOCK(ipbmap) held on entry/exit;
+ */
+static int
+dbAllocCtl(struct bmap * bmp, s64 nblocks, int l2nb, s64 blkno, s64 * results)
+{
+	int rc, nb;
+	s64 b, lblkno, n;
+	struct metapage *mp;
+	struct dmap *dp;
+
+	/* check if the allocation request is confined to a single dmap.
+	 */
+	if (l2nb <= L2BPERDMAP) {
+		/* get the buffer for the dmap.
+		 */
+		lblkno = BLKTODMAP(blkno, bmp->db_l2nbperpage);
+		mp = read_metapage(bmp->db_ipbmap, lblkno, PSIZE, 0);
+		if (mp == NULL)
+			return -EIO;
+		dp = (struct dmap *) mp->data;
+
+		if (dp->tree.budmin < 0)
+			return -EIO;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		/* try to allocate the blocks.
 		 */

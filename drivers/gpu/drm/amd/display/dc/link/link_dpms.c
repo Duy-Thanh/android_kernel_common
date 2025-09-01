@@ -140,8 +140,13 @@ void link_blank_dp_stream(struct dc_link *link, bool hw_init)
 				}
 		}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (((!link->wa_flags.dp_keep_receiver_powered) || hw_init) &&
 			(link->type != dc_connection_none))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if ((!link->wa_flags.dp_keep_receiver_powered) || hw_init)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			dpcd_write_rx_power_ctrl(link, false);
 	}
 }

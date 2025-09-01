@@ -30,6 +30,7 @@ struct mlx5_dm *mlx5_dm_create(struct mlx5_core_dev *dev)
 
 	dm = kzalloc(sizeof(*dm), GFP_KERNEL);
 	if (!dm)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		return NULL;
 
 	spin_lock_init(&dm->lock);
@@ -97,6 +98,76 @@ err_steering:
 	kfree(dm);
 
 	return NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		return ERR_PTR(-ENOMEM);
+
+	spin_lock_init(&dm->lock);
+
+	if (MLX5_CAP64_DEV_MEM(dev, steering_sw_icm_start_address)) {
+		steering_icm_blocks =
+			BIT(MLX5_CAP_DEV_MEM(dev, log_steering_sw_icm_size) -
+			    MLX5_LOG_SW_ICM_BLOCK_SIZE(dev));
+
+		dm->steering_sw_icm_alloc_blocks =
+			bitmap_zalloc(steering_icm_blocks, GFP_KERNEL);
+		if (!dm->steering_sw_icm_alloc_blocks)
+			goto err_steering;
+	}
+
+	if (MLX5_CAP64_DEV_MEM(dev, header_modify_sw_icm_start_address)) {
+		header_modify_icm_blocks =
+			BIT(MLX5_CAP_DEV_MEM(dev, log_header_modify_sw_icm_size) -
+			    MLX5_LOG_SW_ICM_BLOCK_SIZE(dev));
+
+		dm->header_modify_sw_icm_alloc_blocks =
+			bitmap_zalloc(header_modify_icm_blocks, GFP_KERNEL);
+		if (!dm->header_modify_sw_icm_alloc_blocks)
+			goto err_modify_hdr;
+	}
+
+	if (MLX5_CAP_DEV_MEM(dev, log_indirect_encap_sw_icm_size)) {
+		header_sw_encap_icm_blocks =
+			BIT(MLX5_CAP_DEV_MEM(dev, log_indirect_encap_sw_icm_size) -
+			    MLX5_LOG_SW_ICM_BLOCK_SIZE(dev));
+
+		dm->header_encap_sw_icm_alloc_blocks =
+			bitmap_zalloc(header_sw_encap_icm_blocks, GFP_KERNEL);
+		if (!dm->header_encap_sw_icm_alloc_blocks)
+			goto err_pattern;
+	}
+
+	support_v2 = MLX5_CAP_FLOWTABLE_NIC_RX(dev, sw_owner_v2) &&
+		     MLX5_CAP_FLOWTABLE_NIC_TX(dev, sw_owner_v2) &&
+		     MLX5_CAP64_DEV_MEM(dev, header_modify_pattern_sw_icm_start_address);
+
+	if (support_v2) {
+		header_modify_pattern_icm_blocks =
+			BIT(MLX5_CAP_DEV_MEM(dev, log_header_modify_pattern_sw_icm_size) -
+			    MLX5_LOG_SW_ICM_BLOCK_SIZE(dev));
+
+		dm->header_modify_pattern_sw_icm_alloc_blocks =
+			bitmap_zalloc(header_modify_pattern_icm_blocks, GFP_KERNEL);
+		if (!dm->header_modify_pattern_sw_icm_alloc_blocks)
+			goto err_sw_encap;
+	}
+
+	return dm;
+
+err_sw_encap:
+	bitmap_free(dm->header_encap_sw_icm_alloc_blocks);
+
+err_pattern:
+	bitmap_free(dm->header_modify_sw_icm_alloc_blocks);
+
+err_modify_hdr:
+	bitmap_free(dm->steering_sw_icm_alloc_blocks);
+
+err_steering:
+	kfree(dm);
+
+	return ERR_PTR(-ENOMEM);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 void mlx5_dm_cleanup(struct mlx5_core_dev *dev)

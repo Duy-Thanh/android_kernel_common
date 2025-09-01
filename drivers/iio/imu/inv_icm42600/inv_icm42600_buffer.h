@@ -28,6 +28,7 @@ struct inv_icm42600_state;
 struct inv_icm42600_fifo {
 	unsigned int on;
 	unsigned int en;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32 period;
 	struct {
 		unsigned int gyro;
@@ -76,6 +77,57 @@ inv_icm42600_fifo_is_data_valid(const struct inv_icm42600_fifo_sensor_data *s)
 
 ssize_t inv_icm42600_fifo_decode_packet(const void *packet, const void **accel,
 					const void **gyro, const s8 **temp,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	uint32_t period;
+	struct {
+		unsigned int gyro;
+		unsigned int accel;
+		unsigned int eff_gyro;
+		unsigned int eff_accel;
+	} watermark;
+	size_t count;
+	struct {
+		size_t gyro;
+		size_t accel;
+		size_t total;
+	} nb;
+	uint8_t data[2080] __aligned(IIO_DMA_MINALIGN);
+};
+
+/* FIFO data packet */
+struct inv_icm42600_fifo_sensor_data {
+	__be16 x;
+	__be16 y;
+	__be16 z;
+} __packed;
+#define INV_ICM42600_FIFO_DATA_INVALID		-32768
+
+static inline int16_t inv_icm42600_fifo_get_sensor_data(__be16 d)
+{
+	return be16_to_cpu(d);
+}
+
+static inline bool
+inv_icm42600_fifo_is_data_valid(const struct inv_icm42600_fifo_sensor_data *s)
+{
+	int16_t x, y, z;
+
+	x = inv_icm42600_fifo_get_sensor_data(s->x);
+	y = inv_icm42600_fifo_get_sensor_data(s->y);
+	z = inv_icm42600_fifo_get_sensor_data(s->z);
+
+	if (x == INV_ICM42600_FIFO_DATA_INVALID &&
+	    y == INV_ICM42600_FIFO_DATA_INVALID &&
+	    z == INV_ICM42600_FIFO_DATA_INVALID)
+		return false;
+
+	return true;
+}
+
+ssize_t inv_icm42600_fifo_decode_packet(const void *packet, const void **accel,
+					const void **gyro, const int8_t **temp,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 					const void **timestamp, unsigned int *odr);
 
 extern const struct iio_buffer_setup_ops inv_icm42600_buffer_ops;

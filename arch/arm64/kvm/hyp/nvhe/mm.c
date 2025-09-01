@@ -554,6 +554,7 @@ int pkvm_create_stack(phys_addr_t phys, unsigned long *haddr)
 	return ret;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* Note: The caller has to use a local copy of the arg */
 void *admit_host_page(void *arg, unsigned long order)
 {
@@ -626,6 +627,77 @@ int refill_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *host_mc)
 			return -EINVAL;
 		*host_mc = tmp;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void *admit_host_page(void *arg, unsigned long order)
+{
+	phys_addr_t p;
+	struct kvm_hyp_memcache *host_mc = arg;
+	unsigned long mc_order;
+
+	if (!host_mc->nr_pages)
+		return NULL;
+
+	mc_order = FIELD_GET(~PAGE_MASK, host_mc->head);
+	BUG_ON(order != mc_order);
+
+	p = host_mc->head & PAGE_MASK;
+	/*
+	 * The host still owns the pages in its memcache, so we need to go
+	 * through a full host-to-hyp donation cycle to change it. Fortunately,
+	 * __pkvm_host_donate_hyp() takes care of races for us, so if it
+	 * succeeds we're good to go.
+	 */
+	if (__pkvm_host_donate_hyp(hyp_phys_to_pfn(p), 1 << order))
+		return NULL;
+
+	return pop_hyp_memcache(host_mc, hyp_phys_to_virt, &order);
+}
+
+/* Refill our local memcache by popping pages from the one provided by the host. */
+int refill_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages,
+		    struct kvm_hyp_memcache *host_mc)
+{
+	struct kvm_hyp_memcache tmp = *host_mc;
+	int ret;
+
+	ret =  __topup_hyp_memcache(mc, min_pages, admit_host_page,
+				    hyp_virt_to_phys, &tmp, 0);
+	*host_mc = tmp;
+
+	return ret;
+}
+
+phys_addr_t __pkvm_private_range_pa(void *va)
+{
+	kvm_pte_t pte;
+	s8 level;
+
+	hyp_spin_lock(&pkvm_pgd_lock);
+	WARN_ON(kvm_pgtable_get_leaf(&pkvm_pgtable, (u64)va, &pte, &level));
+	hyp_spin_unlock(&pkvm_pgd_lock);
+
+	BUG_ON(!kvm_pte_valid(pte));
+
+	return kvm_pte_to_phys(pte) + offset_in_page(va);
+}
+
+/* The host passed a mc, fill a pool with the pages in it. */
+int refill_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *host_mc)
+{
+	unsigned long order;
+	u64 nr_pages;
+	void *p;
+
+	while (host_mc->nr_pages) {
+		order = FIELD_GET(~PAGE_MASK, host_mc->head);
+		if (check_shl_overflow(1UL, order, &nr_pages))
+			return -EINVAL;
+
+		p = admit_host_page(host_mc, order);
+		if (!p)
+			return -EINVAL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		hyp_virt_to_page(p)->order = order;
 		hyp_set_page_refcounted(hyp_virt_to_page(p));
 		hyp_put_page(pool, p);

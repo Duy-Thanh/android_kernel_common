@@ -247,6 +247,7 @@ void nf_send_reset(struct net *net, struct sock *sk, struct sk_buff *oldskb,
 	if (!oth)
 		return;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!skb_dst(oldskb) && nf_reject_fill_skb_dst(oldskb) < 0)
 		return;
 
@@ -321,6 +322,85 @@ void nf_send_unreach(struct sk_buff *skb_in, int code, int hook)
 		return;
 
 	if (!skb_dst(skb_in) && nf_reject_fill_skb_dst(skb_in) < 0)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if ((hook == NF_INET_PRE_ROUTING || hook == NF_INET_INGRESS) &&
+	    nf_reject_fill_skb_dst(oldskb) < 0)
+		return;
+
+	if (skb_rtable(oldskb)->rt_flags & (RTCF_BROADCAST | RTCF_MULTICAST))
+		return;
+
+	nskb = alloc_skb(sizeof(struct iphdr) + sizeof(struct tcphdr) +
+			 LL_MAX_HEADER, GFP_ATOMIC);
+	if (!nskb)
+		return;
+
+	/* ip_route_me_harder expects skb->dst to be set */
+	skb_dst_set_noref(nskb, skb_dst(oldskb));
+
+	nskb->mark = IP4_REPLY_MARK(net, oldskb->mark);
+
+	skb_reserve(nskb, LL_MAX_HEADER);
+	nf_reject_iphdr_put(nskb, oldskb, IPPROTO_TCP,
+			    ip4_dst_hoplimit(skb_dst(nskb)));
+	nf_reject_ip_tcphdr_put(nskb, oldskb, oth);
+	if (ip_route_me_harder(net, sk, nskb, RTN_UNSPEC))
+		goto free_nskb;
+
+	/* "Never happens" */
+	if (nskb->len > dst_mtu(skb_dst(nskb)))
+		goto free_nskb;
+
+	nf_ct_attach(nskb, oldskb);
+	nf_ct_set_closing(skb_nfct(oldskb));
+
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+	/* If we use ip_local_out for bridged traffic, the MAC source on
+	 * the RST will be ours, instead of the destination's.  This confuses
+	 * some routers/firewalls, and they drop the packet.  So we need to
+	 * build the eth header using the original destination's MAC as the
+	 * source, and send the RST packet directly.
+	 */
+	if (nf_bridge_info_exists(oldskb)) {
+		struct ethhdr *oeth = eth_hdr(oldskb);
+		struct iphdr *niph = ip_hdr(nskb);
+		struct net_device *br_indev;
+
+		br_indev = nf_bridge_get_physindev(oldskb, net);
+		if (!br_indev)
+			goto free_nskb;
+
+		nskb->dev = br_indev;
+		niph->tot_len = htons(nskb->len);
+		ip_send_check(niph);
+		if (dev_hard_header(nskb, nskb->dev, ntohs(nskb->protocol),
+				    oeth->h_source, oeth->h_dest, nskb->len) < 0)
+			goto free_nskb;
+		dev_queue_xmit(nskb);
+	} else
+#endif
+		ip_local_out(net, nskb->sk, nskb);
+
+	return;
+
+ free_nskb:
+	kfree_skb(nskb);
+}
+EXPORT_SYMBOL_GPL(nf_send_reset);
+
+void nf_send_unreach(struct sk_buff *skb_in, int code, int hook)
+{
+	struct iphdr *iph = ip_hdr(skb_in);
+	int dataoff = ip_hdrlen(skb_in);
+	u8 proto = iph->protocol;
+
+	if (iph->frag_off & htons(IP_OFFSET))
+		return;
+
+	if ((hook == NF_INET_PRE_ROUTING || hook == NF_INET_INGRESS) &&
+	    nf_reject_fill_skb_dst(skb_in) < 0)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return;
 
 	if (skb_csum_unnecessary(skb_in) ||

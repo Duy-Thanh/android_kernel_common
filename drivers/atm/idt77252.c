@@ -852,6 +852,7 @@ queue_skb(struct idt77252_dev *card, struct vc_map *vc,
 
 	IDT77252_PRV_PADDR(skb) = dma_map_single(&card->pcidev->dev, skb->data,
 						 skb->len, DMA_TO_DEVICE);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (dma_mapping_error(&card->pcidev->dev, IDT77252_PRV_PADDR(skb)))
 		return -ENOMEM;
 
@@ -1876,6 +1877,1028 @@ outunmap:
 			 skb_end_pointer(skb) - skb->data, DMA_FROM_DEVICE);
 
 outpoolrm:
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	error = -EINVAL;
+
+	if (oam) {
+		if (skb->len != 52)
+			goto errout;
+
+		tbd->word_1 = SAR_TBD_OAM | ATM_CELL_PAYLOAD | SAR_TBD_EPDU;
+		tbd->word_2 = IDT77252_PRV_PADDR(skb) + 4;
+		tbd->word_3 = 0x00000000;
+		tbd->word_4 = word4;
+
+		if (test_bit(VCF_RSV, &vc->flags))
+			vc = card->vcs[0];
+
+		goto done;
+	}
+
+	if (test_bit(VCF_RSV, &vc->flags)) {
+		printk("%s: Trying to transmit on reserved VC\n", card->name);
+		goto errout;
+	}
+
+	aal = vcc->qos.aal;
+
+	switch (aal) {
+	case ATM_AAL0:
+	case ATM_AAL34:
+		if (skb->len > 52)
+			goto errout;
+
+		if (aal == ATM_AAL0)
+			tbd->word_1 = SAR_TBD_EPDU | SAR_TBD_AAL0 |
+				      ATM_CELL_PAYLOAD;
+		else
+			tbd->word_1 = SAR_TBD_EPDU | SAR_TBD_AAL34 |
+				      ATM_CELL_PAYLOAD;
+
+		tbd->word_2 = IDT77252_PRV_PADDR(skb) + 4;
+		tbd->word_3 = 0x00000000;
+		tbd->word_4 = word4;
+		break;
+
+	case ATM_AAL5:
+		tbd->word_1 = SAR_TBD_EPDU | SAR_TBD_AAL5 | skb->len;
+		tbd->word_2 = IDT77252_PRV_PADDR(skb);
+		tbd->word_3 = skb->len;
+		tbd->word_4 = (vcc->vpi << SAR_TBD_VPI_SHIFT) |
+			      (vcc->vci << SAR_TBD_VCI_SHIFT);
+		break;
+
+	case ATM_AAL1:
+	case ATM_AAL2:
+	default:
+		printk("%s: Traffic type not supported.\n", card->name);
+		error = -EPROTONOSUPPORT;
+		goto errout;
+	}
+
+done:
+	spin_lock_irqsave(&vc->scq->skblock, flags);
+	skb_queue_tail(&vc->scq->pending, skb);
+
+	while ((skb = skb_dequeue(&vc->scq->pending))) {
+		if (push_on_scq(card, vc, skb)) {
+			skb_queue_head(&vc->scq->pending, skb);
+			break;
+		}
+	}
+	spin_unlock_irqrestore(&vc->scq->skblock, flags);
+
+	return 0;
+
+errout:
+	dma_unmap_single(&card->pcidev->dev, IDT77252_PRV_PADDR(skb),
+			 skb->len, DMA_TO_DEVICE);
+	return error;
+}
+
+static unsigned long
+get_free_scd(struct idt77252_dev *card, struct vc_map *vc)
+{
+	int i;
+
+	for (i = 0; i < card->scd_size; i++) {
+		if (!card->scd2vc[i]) {
+			card->scd2vc[i] = vc;
+			vc->scd_index = i;
+			return card->scd_base + i * SAR_SRAM_SCD_SIZE;
+		}
+	}
+	return 0;
+}
+
+static void
+fill_scd(struct idt77252_dev *card, struct scq_info *scq, int class)
+{
+	write_sram(card, scq->scd, scq->paddr);
+	write_sram(card, scq->scd + 1, 0x00000000);
+	write_sram(card, scq->scd + 2, 0xffffffff);
+	write_sram(card, scq->scd + 3, 0x00000000);
+}
+
+static void
+clear_scd(struct idt77252_dev *card, struct scq_info *scq, int class)
+{
+	return;
+}
+
+/*****************************************************************************/
+/*                                                                           */
+/* RSQ Handling                                                              */
+/*                                                                           */
+/*****************************************************************************/
+
+static int
+init_rsq(struct idt77252_dev *card)
+{
+	struct rsq_entry *rsqe;
+
+	card->rsq.base = dma_alloc_coherent(&card->pcidev->dev, RSQSIZE,
+					    &card->rsq.paddr, GFP_KERNEL);
+	if (card->rsq.base == NULL) {
+		printk("%s: can't allocate RSQ.\n", card->name);
+		return -1;
+	}
+
+	card->rsq.last = card->rsq.base + RSQ_NUM_ENTRIES - 1;
+	card->rsq.next = card->rsq.last;
+	for (rsqe = card->rsq.base; rsqe <= card->rsq.last; rsqe++)
+		rsqe->word_4 = 0;
+
+	writel((unsigned long) card->rsq.last - (unsigned long) card->rsq.base,
+	       SAR_REG_RSQH);
+	writel(card->rsq.paddr, SAR_REG_RSQB);
+
+	IPRINTK("%s: RSQ base at 0x%lx (0x%x).\n", card->name,
+		(unsigned long) card->rsq.base,
+		readl(SAR_REG_RSQB));
+	IPRINTK("%s: RSQ head = 0x%x, base = 0x%x, tail = 0x%x.\n",
+		card->name,
+		readl(SAR_REG_RSQH),
+		readl(SAR_REG_RSQB),
+		readl(SAR_REG_RSQT));
+
+	return 0;
+}
+
+static void
+deinit_rsq(struct idt77252_dev *card)
+{
+	dma_free_coherent(&card->pcidev->dev, RSQSIZE,
+			  card->rsq.base, card->rsq.paddr);
+}
+
+static void
+dequeue_rx(struct idt77252_dev *card, struct rsq_entry *rsqe)
+{
+	struct atm_vcc *vcc;
+	struct sk_buff *skb;
+	struct rx_pool *rpp;
+	struct vc_map *vc;
+	u32 header, vpi, vci;
+	u32 stat;
+	int i;
+
+	stat = le32_to_cpu(rsqe->word_4);
+
+	if (stat & SAR_RSQE_IDLE) {
+		RXPRINTK("%s: message about inactive connection.\n",
+			 card->name);
+		return;
+	}
+
+	skb = sb_pool_skb(card, le32_to_cpu(rsqe->word_2));
+	if (skb == NULL) {
+		printk("%s: NULL skb in %s, rsqe: %08x %08x %08x %08x\n",
+		       card->name, __func__,
+		       le32_to_cpu(rsqe->word_1), le32_to_cpu(rsqe->word_2),
+		       le32_to_cpu(rsqe->word_3), le32_to_cpu(rsqe->word_4));
+		return;
+	}
+
+	header = le32_to_cpu(rsqe->word_1);
+	vpi = (header >> 16) & 0x00ff;
+	vci = (header >>  0) & 0xffff;
+
+	RXPRINTK("%s: SDU for %d.%d received in buffer 0x%p (data 0x%p).\n",
+		 card->name, vpi, vci, skb, skb->data);
+
+	if ((vpi >= (1 << card->vpibits)) || (vci != (vci & card->vcimask))) {
+		printk("%s: SDU received for out-of-range vc %u.%u\n",
+		       card->name, vpi, vci);
+		recycle_rx_skb(card, skb);
+		return;
+	}
+
+	vc = card->vcs[VPCI2VC(card, vpi, vci)];
+	if (!vc || !test_bit(VCF_RX, &vc->flags)) {
+		printk("%s: SDU received on non RX vc %u.%u\n",
+		       card->name, vpi, vci);
+		recycle_rx_skb(card, skb);
+		return;
+	}
+
+	vcc = vc->rx_vcc;
+
+	dma_sync_single_for_cpu(&card->pcidev->dev, IDT77252_PRV_PADDR(skb),
+				skb_end_pointer(skb) - skb->data,
+				DMA_FROM_DEVICE);
+
+	if ((vcc->qos.aal == ATM_AAL0) ||
+	    (vcc->qos.aal == ATM_AAL34)) {
+		struct sk_buff *sb;
+		unsigned char *cell;
+		u32 aal0;
+
+		cell = skb->data;
+		for (i = (stat & SAR_RSQE_CELLCNT); i; i--) {
+			if ((sb = dev_alloc_skb(64)) == NULL) {
+				printk("%s: Can't allocate buffers for aal0.\n",
+				       card->name);
+				atomic_add(i, &vcc->stats->rx_drop);
+				break;
+			}
+			if (!atm_charge(vcc, sb->truesize)) {
+				RXPRINTK("%s: atm_charge() dropped aal0 packets.\n",
+					 card->name);
+				atomic_add(i - 1, &vcc->stats->rx_drop);
+				dev_kfree_skb(sb);
+				break;
+			}
+			aal0 = (vpi << ATM_HDR_VPI_SHIFT) |
+			       (vci << ATM_HDR_VCI_SHIFT);
+			aal0 |= (stat & SAR_RSQE_EPDU) ? 0x00000002 : 0;
+			aal0 |= (stat & SAR_RSQE_CLP)  ? 0x00000001 : 0;
+
+			*((u32 *) sb->data) = aal0;
+			skb_put(sb, sizeof(u32));
+			skb_put_data(sb, cell, ATM_CELL_PAYLOAD);
+
+			ATM_SKB(sb)->vcc = vcc;
+			__net_timestamp(sb);
+			vcc->push(vcc, sb);
+			atomic_inc(&vcc->stats->rx);
+
+			cell += ATM_CELL_PAYLOAD;
+		}
+
+		recycle_rx_skb(card, skb);
+		return;
+	}
+	if (vcc->qos.aal != ATM_AAL5) {
+		printk("%s: Unexpected AAL type in dequeue_rx(): %d.\n",
+		       card->name, vcc->qos.aal);
+		recycle_rx_skb(card, skb);
+		return;
+	}
+	skb->len = (stat & SAR_RSQE_CELLCNT) * ATM_CELL_PAYLOAD;
+
+	rpp = &vc->rcv.rx_pool;
+
+	__skb_queue_tail(&rpp->queue, skb);
+	rpp->len += skb->len;
+
+	if (stat & SAR_RSQE_EPDU) {
+		unsigned int len, truesize;
+		unsigned char *l1l2;
+
+		l1l2 = (unsigned char *) ((unsigned long) skb->data + skb->len - 6);
+
+		len = (l1l2[0] << 8) | l1l2[1];
+		len = len ? len : 0x10000;
+
+		RXPRINTK("%s: PDU has %d bytes.\n", card->name, len);
+
+		if ((len + 8 > rpp->len) || (len + (47 + 8) < rpp->len)) {
+			RXPRINTK("%s: AAL5 PDU size mismatch: %d != %d. "
+			         "(CDC: %08x)\n",
+			         card->name, len, rpp->len, readl(SAR_REG_CDC));
+			recycle_rx_pool_skb(card, rpp);
+			atomic_inc(&vcc->stats->rx_err);
+			return;
+		}
+		if (stat & SAR_RSQE_CRC) {
+			RXPRINTK("%s: AAL5 CRC error.\n", card->name);
+			recycle_rx_pool_skb(card, rpp);
+			atomic_inc(&vcc->stats->rx_err);
+			return;
+		}
+		if (skb_queue_len(&rpp->queue) > 1) {
+			struct sk_buff *sb;
+
+			skb = dev_alloc_skb(rpp->len);
+			if (!skb) {
+				RXPRINTK("%s: Can't alloc RX skb.\n",
+					 card->name);
+				recycle_rx_pool_skb(card, rpp);
+				atomic_inc(&vcc->stats->rx_err);
+				return;
+			}
+			if (!atm_charge(vcc, skb->truesize)) {
+				recycle_rx_pool_skb(card, rpp);
+				dev_kfree_skb(skb);
+				return;
+			}
+			skb_queue_walk(&rpp->queue, sb)
+				skb_put_data(skb, sb->data, sb->len);
+
+			recycle_rx_pool_skb(card, rpp);
+
+			skb_trim(skb, len);
+			ATM_SKB(skb)->vcc = vcc;
+			__net_timestamp(skb);
+
+			vcc->push(vcc, skb);
+			atomic_inc(&vcc->stats->rx);
+
+			return;
+		}
+
+		flush_rx_pool(card, rpp);
+
+		if (!atm_charge(vcc, skb->truesize)) {
+			recycle_rx_skb(card, skb);
+			return;
+		}
+
+		dma_unmap_single(&card->pcidev->dev, IDT77252_PRV_PADDR(skb),
+				 skb_end_pointer(skb) - skb->data,
+				 DMA_FROM_DEVICE);
+		sb_pool_remove(card, skb);
+
+		skb_trim(skb, len);
+		ATM_SKB(skb)->vcc = vcc;
+		__net_timestamp(skb);
+
+		truesize = skb->truesize;
+		vcc->push(vcc, skb);
+		atomic_inc(&vcc->stats->rx);
+
+		if (truesize > SAR_FB_SIZE_3)
+			add_rx_skb(card, 3, SAR_FB_SIZE_3, 1);
+		else if (truesize > SAR_FB_SIZE_2)
+			add_rx_skb(card, 2, SAR_FB_SIZE_2, 1);
+		else if (truesize > SAR_FB_SIZE_1)
+			add_rx_skb(card, 1, SAR_FB_SIZE_1, 1);
+		else
+			add_rx_skb(card, 0, SAR_FB_SIZE_0, 1);
+		return;
+	}
+}
+
+static void
+idt77252_rx(struct idt77252_dev *card)
+{
+	struct rsq_entry *rsqe;
+
+	if (card->rsq.next == card->rsq.last)
+		rsqe = card->rsq.base;
+	else
+		rsqe = card->rsq.next + 1;
+
+	if (!(le32_to_cpu(rsqe->word_4) & SAR_RSQE_VALID)) {
+		RXPRINTK("%s: no entry in RSQ.\n", card->name);
+		return;
+	}
+
+	do {
+		dequeue_rx(card, rsqe);
+		rsqe->word_4 = 0;
+		card->rsq.next = rsqe;
+		if (card->rsq.next == card->rsq.last)
+			rsqe = card->rsq.base;
+		else
+			rsqe = card->rsq.next + 1;
+	} while (le32_to_cpu(rsqe->word_4) & SAR_RSQE_VALID);
+
+	writel((unsigned long) card->rsq.next - (unsigned long) card->rsq.base,
+	       SAR_REG_RSQH);
+}
+
+static void
+idt77252_rx_raw(struct idt77252_dev *card)
+{
+	struct sk_buff	*queue;
+	u32		head, tail;
+	struct atm_vcc	*vcc;
+	struct vc_map	*vc;
+	struct sk_buff	*sb;
+
+	if (card->raw_cell_head == NULL) {
+		u32 handle = le32_to_cpu(*(card->raw_cell_hnd + 1));
+		card->raw_cell_head = sb_pool_skb(card, handle);
+	}
+
+	queue = card->raw_cell_head;
+	if (!queue)
+		return;
+
+	head = IDT77252_PRV_PADDR(queue) + (queue->data - queue->head - 16);
+	tail = readl(SAR_REG_RAWCT);
+
+	dma_sync_single_for_cpu(&card->pcidev->dev, IDT77252_PRV_PADDR(queue),
+				skb_end_offset(queue) - 16,
+				DMA_FROM_DEVICE);
+
+	while (head != tail) {
+		unsigned int vpi, vci;
+		u32 header;
+
+		header = le32_to_cpu(*(u32 *) &queue->data[0]);
+
+		vpi = (header & ATM_HDR_VPI_MASK) >> ATM_HDR_VPI_SHIFT;
+		vci = (header & ATM_HDR_VCI_MASK) >> ATM_HDR_VCI_SHIFT;
+
+#ifdef CONFIG_ATM_IDT77252_DEBUG
+		if (debug & DBG_RAW_CELL) {
+			int i;
+
+			printk("%s: raw cell %x.%02x.%04x.%x.%x\n",
+			       card->name, (header >> 28) & 0x000f,
+			       (header >> 20) & 0x00ff,
+			       (header >>  4) & 0xffff,
+			       (header >>  1) & 0x0007,
+			       (header >>  0) & 0x0001);
+			for (i = 16; i < 64; i++)
+				printk(" %02x", queue->data[i]);
+			printk("\n");
+		}
+#endif
+
+		if (vpi >= (1<<card->vpibits) || vci >= (1<<card->vcibits)) {
+			RPRINTK("%s: SDU received for out-of-range vc %u.%u\n",
+				card->name, vpi, vci);
+			goto drop;
+		}
+
+		vc = card->vcs[VPCI2VC(card, vpi, vci)];
+		if (!vc || !test_bit(VCF_RX, &vc->flags)) {
+			RPRINTK("%s: SDU received on non RX vc %u.%u\n",
+				card->name, vpi, vci);
+			goto drop;
+		}
+
+		vcc = vc->rx_vcc;
+
+		if (vcc->qos.aal != ATM_AAL0) {
+			RPRINTK("%s: raw cell for non AAL0 vc %u.%u\n",
+				card->name, vpi, vci);
+			atomic_inc(&vcc->stats->rx_drop);
+			goto drop;
+		}
+	
+		if ((sb = dev_alloc_skb(64)) == NULL) {
+			printk("%s: Can't allocate buffers for AAL0.\n",
+			       card->name);
+			atomic_inc(&vcc->stats->rx_err);
+			goto drop;
+		}
+
+		if (!atm_charge(vcc, sb->truesize)) {
+			RXPRINTK("%s: atm_charge() dropped AAL0 packets.\n",
+				 card->name);
+			dev_kfree_skb(sb);
+			goto drop;
+		}
+
+		*((u32 *) sb->data) = header;
+		skb_put(sb, sizeof(u32));
+		skb_put_data(sb, &(queue->data[16]), ATM_CELL_PAYLOAD);
+
+		ATM_SKB(sb)->vcc = vcc;
+		__net_timestamp(sb);
+		vcc->push(vcc, sb);
+		atomic_inc(&vcc->stats->rx);
+
+drop:
+		skb_pull(queue, 64);
+
+		head = IDT77252_PRV_PADDR(queue)
+					+ (queue->data - queue->head - 16);
+
+		if (queue->len < 128) {
+			struct sk_buff *next;
+			u32 handle;
+
+			head = le32_to_cpu(*(u32 *) &queue->data[0]);
+			handle = le32_to_cpu(*(u32 *) &queue->data[4]);
+
+			next = sb_pool_skb(card, handle);
+			recycle_rx_skb(card, queue);
+
+			if (next) {
+				card->raw_cell_head = next;
+				queue = card->raw_cell_head;
+				dma_sync_single_for_cpu(&card->pcidev->dev,
+							IDT77252_PRV_PADDR(queue),
+							(skb_end_pointer(queue) -
+							 queue->data),
+							DMA_FROM_DEVICE);
+			} else {
+				card->raw_cell_head = NULL;
+				printk("%s: raw cell queue overrun\n",
+				       card->name);
+				break;
+			}
+		}
+	}
+}
+
+
+/*****************************************************************************/
+/*                                                                           */
+/* TSQ Handling                                                              */
+/*                                                                           */
+/*****************************************************************************/
+
+static int
+init_tsq(struct idt77252_dev *card)
+{
+	struct tsq_entry *tsqe;
+
+	card->tsq.base = dma_alloc_coherent(&card->pcidev->dev, RSQSIZE,
+					    &card->tsq.paddr, GFP_KERNEL);
+	if (card->tsq.base == NULL) {
+		printk("%s: can't allocate TSQ.\n", card->name);
+		return -1;
+	}
+
+	card->tsq.last = card->tsq.base + TSQ_NUM_ENTRIES - 1;
+	card->tsq.next = card->tsq.last;
+	for (tsqe = card->tsq.base; tsqe <= card->tsq.last; tsqe++)
+		tsqe->word_2 = cpu_to_le32(SAR_TSQE_INVALID);
+
+	writel(card->tsq.paddr, SAR_REG_TSQB);
+	writel((unsigned long) card->tsq.next - (unsigned long) card->tsq.base,
+	       SAR_REG_TSQH);
+
+	return 0;
+}
+
+static void
+deinit_tsq(struct idt77252_dev *card)
+{
+	dma_free_coherent(&card->pcidev->dev, TSQSIZE,
+			  card->tsq.base, card->tsq.paddr);
+}
+
+static void
+idt77252_tx(struct idt77252_dev *card)
+{
+	struct tsq_entry *tsqe;
+	unsigned int vpi, vci;
+	struct vc_map *vc;
+	u32 conn, stat;
+
+	if (card->tsq.next == card->tsq.last)
+		tsqe = card->tsq.base;
+	else
+		tsqe = card->tsq.next + 1;
+
+	TXPRINTK("idt77252_tx: tsq  %p: base %p, next %p, last %p\n", tsqe,
+		 card->tsq.base, card->tsq.next, card->tsq.last);
+	TXPRINTK("idt77252_tx: tsqb %08x, tsqt %08x, tsqh %08x, \n",
+		 readl(SAR_REG_TSQB),
+		 readl(SAR_REG_TSQT),
+		 readl(SAR_REG_TSQH));
+
+	stat = le32_to_cpu(tsqe->word_2);
+
+	if (stat & SAR_TSQE_INVALID)
+		return;
+
+	do {
+		TXPRINTK("tsqe: 0x%p [0x%08x 0x%08x]\n", tsqe,
+			 le32_to_cpu(tsqe->word_1),
+			 le32_to_cpu(tsqe->word_2));
+
+		switch (stat & SAR_TSQE_TYPE) {
+		case SAR_TSQE_TYPE_TIMER:
+			TXPRINTK("%s: Timer RollOver detected.\n", card->name);
+			break;
+
+		case SAR_TSQE_TYPE_IDLE:
+
+			conn = le32_to_cpu(tsqe->word_1);
+
+			if (SAR_TSQE_TAG(stat) == 0x10) {
+#ifdef	NOTDEF
+				printk("%s: Connection %d halted.\n",
+				       card->name,
+				       le32_to_cpu(tsqe->word_1) & 0x1fff);
+#endif
+				break;
+			}
+
+			vc = card->vcs[conn & 0x1fff];
+			if (!vc) {
+				printk("%s: could not find VC from conn %d\n",
+				       card->name, conn & 0x1fff);
+				break;
+			}
+
+			printk("%s: Connection %d IDLE.\n",
+			       card->name, vc->index);
+
+			set_bit(VCF_IDLE, &vc->flags);
+			break;
+
+		case SAR_TSQE_TYPE_TSR:
+
+			conn = le32_to_cpu(tsqe->word_1);
+
+			vc = card->vcs[conn & 0x1fff];
+			if (!vc) {
+				printk("%s: no VC at index %d\n",
+				       card->name,
+				       le32_to_cpu(tsqe->word_1) & 0x1fff);
+				break;
+			}
+
+			drain_scq(card, vc);
+			break;
+
+		case SAR_TSQE_TYPE_TBD_COMP:
+
+			conn = le32_to_cpu(tsqe->word_1);
+
+			vpi = (conn >> SAR_TBD_VPI_SHIFT) & 0x00ff;
+			vci = (conn >> SAR_TBD_VCI_SHIFT) & 0xffff;
+
+			if (vpi >= (1 << card->vpibits) ||
+			    vci >= (1 << card->vcibits)) {
+				printk("%s: TBD complete: "
+				       "out of range VPI.VCI %u.%u\n",
+				       card->name, vpi, vci);
+				break;
+			}
+
+			vc = card->vcs[VPCI2VC(card, vpi, vci)];
+			if (!vc) {
+				printk("%s: TBD complete: "
+				       "no VC at VPI.VCI %u.%u\n",
+				       card->name, vpi, vci);
+				break;
+			}
+
+			drain_scq(card, vc);
+			break;
+		}
+
+		tsqe->word_2 = cpu_to_le32(SAR_TSQE_INVALID);
+
+		card->tsq.next = tsqe;
+		if (card->tsq.next == card->tsq.last)
+			tsqe = card->tsq.base;
+		else
+			tsqe = card->tsq.next + 1;
+
+		TXPRINTK("tsqe: %p: base %p, next %p, last %p\n", tsqe,
+			 card->tsq.base, card->tsq.next, card->tsq.last);
+
+		stat = le32_to_cpu(tsqe->word_2);
+
+	} while (!(stat & SAR_TSQE_INVALID));
+
+	writel((unsigned long)card->tsq.next - (unsigned long)card->tsq.base,
+	       SAR_REG_TSQH);
+
+	XPRINTK("idt77252_tx-after writel%d: TSQ head = 0x%x, tail = 0x%x, next = 0x%p.\n",
+		card->index, readl(SAR_REG_TSQH),
+		readl(SAR_REG_TSQT), card->tsq.next);
+}
+
+
+static void
+tst_timer(struct timer_list *t)
+{
+	struct idt77252_dev *card = from_timer(card, t, tst_timer);
+	unsigned long base, idle, jump;
+	unsigned long flags;
+	u32 pc;
+	int e;
+
+	spin_lock_irqsave(&card->tst_lock, flags);
+
+	base = card->tst[card->tst_index];
+	idle = card->tst[card->tst_index ^ 1];
+
+	if (test_bit(TST_SWITCH_WAIT, &card->tst_state)) {
+		jump = base + card->tst_size - 2;
+
+		pc = readl(SAR_REG_NOW) >> 2;
+		if ((pc ^ idle) & ~(card->tst_size - 1)) {
+			mod_timer(&card->tst_timer, jiffies + 1);
+			goto out;
+		}
+
+		clear_bit(TST_SWITCH_WAIT, &card->tst_state);
+
+		card->tst_index ^= 1;
+		write_sram(card, jump, TSTE_OPC_JMP | (base << 2));
+
+		base = card->tst[card->tst_index];
+		idle = card->tst[card->tst_index ^ 1];
+
+		for (e = 0; e < card->tst_size - 2; e++) {
+			if (card->soft_tst[e].tste & TSTE_PUSH_IDLE) {
+				write_sram(card, idle + e,
+					   card->soft_tst[e].tste & TSTE_MASK);
+				card->soft_tst[e].tste &= ~(TSTE_PUSH_IDLE);
+			}
+		}
+	}
+
+	if (test_and_clear_bit(TST_SWITCH_PENDING, &card->tst_state)) {
+
+		for (e = 0; e < card->tst_size - 2; e++) {
+			if (card->soft_tst[e].tste & TSTE_PUSH_ACTIVE) {
+				write_sram(card, idle + e,
+					   card->soft_tst[e].tste & TSTE_MASK);
+				card->soft_tst[e].tste &= ~(TSTE_PUSH_ACTIVE);
+				card->soft_tst[e].tste |= TSTE_PUSH_IDLE;
+			}
+		}
+
+		jump = base + card->tst_size - 2;
+
+		write_sram(card, jump, TSTE_OPC_NULL);
+		set_bit(TST_SWITCH_WAIT, &card->tst_state);
+
+		mod_timer(&card->tst_timer, jiffies + 1);
+	}
+
+out:
+	spin_unlock_irqrestore(&card->tst_lock, flags);
+}
+
+static int
+__fill_tst(struct idt77252_dev *card, struct vc_map *vc,
+	   int n, unsigned int opc)
+{
+	unsigned long cl, avail;
+	unsigned long idle;
+	int e, r;
+	u32 data;
+
+	avail = card->tst_size - 2;
+	for (e = 0; e < avail; e++) {
+		if (card->soft_tst[e].vc == NULL)
+			break;
+	}
+	if (e >= avail) {
+		printk("%s: No free TST entries found\n", card->name);
+		return -1;
+	}
+
+	NPRINTK("%s: conn %d: first TST entry at %d.\n",
+		card->name, vc ? vc->index : -1, e);
+
+	r = n;
+	cl = avail;
+	data = opc & TSTE_OPC_MASK;
+	if (vc && (opc != TSTE_OPC_NULL))
+		data = opc | vc->index;
+
+	idle = card->tst[card->tst_index ^ 1];
+
+	/*
+	 * Fill Soft TST.
+	 */
+	while (r > 0) {
+		if ((cl >= avail) && (card->soft_tst[e].vc == NULL)) {
+			if (vc)
+				card->soft_tst[e].vc = vc;
+			else
+				card->soft_tst[e].vc = (void *)-1;
+
+			card->soft_tst[e].tste = data;
+			if (timer_pending(&card->tst_timer))
+				card->soft_tst[e].tste |= TSTE_PUSH_ACTIVE;
+			else {
+				write_sram(card, idle + e, data);
+				card->soft_tst[e].tste |= TSTE_PUSH_IDLE;
+			}
+
+			cl -= card->tst_size;
+			r--;
+		}
+
+		if (++e == avail)
+			e = 0;
+		cl += n;
+	}
+
+	return 0;
+}
+
+static int
+fill_tst(struct idt77252_dev *card, struct vc_map *vc, int n, unsigned int opc)
+{
+	unsigned long flags;
+	int res;
+
+	spin_lock_irqsave(&card->tst_lock, flags);
+
+	res = __fill_tst(card, vc, n, opc);
+
+	set_bit(TST_SWITCH_PENDING, &card->tst_state);
+	if (!timer_pending(&card->tst_timer))
+		mod_timer(&card->tst_timer, jiffies + 1);
+
+	spin_unlock_irqrestore(&card->tst_lock, flags);
+	return res;
+}
+
+static int
+__clear_tst(struct idt77252_dev *card, struct vc_map *vc)
+{
+	unsigned long idle;
+	int e;
+
+	idle = card->tst[card->tst_index ^ 1];
+
+	for (e = 0; e < card->tst_size - 2; e++) {
+		if (card->soft_tst[e].vc == vc) {
+			card->soft_tst[e].vc = NULL;
+
+			card->soft_tst[e].tste = TSTE_OPC_VAR;
+			if (timer_pending(&card->tst_timer))
+				card->soft_tst[e].tste |= TSTE_PUSH_ACTIVE;
+			else {
+				write_sram(card, idle + e, TSTE_OPC_VAR);
+				card->soft_tst[e].tste |= TSTE_PUSH_IDLE;
+			}
+		}
+	}
+
+	return 0;
+}
+
+static int
+clear_tst(struct idt77252_dev *card, struct vc_map *vc)
+{
+	unsigned long flags;
+	int res;
+
+	spin_lock_irqsave(&card->tst_lock, flags);
+
+	res = __clear_tst(card, vc);
+
+	set_bit(TST_SWITCH_PENDING, &card->tst_state);
+	if (!timer_pending(&card->tst_timer))
+		mod_timer(&card->tst_timer, jiffies + 1);
+
+	spin_unlock_irqrestore(&card->tst_lock, flags);
+	return res;
+}
+
+static int
+change_tst(struct idt77252_dev *card, struct vc_map *vc,
+	   int n, unsigned int opc)
+{
+	unsigned long flags;
+	int res;
+
+	spin_lock_irqsave(&card->tst_lock, flags);
+
+	__clear_tst(card, vc);
+	res = __fill_tst(card, vc, n, opc);
+
+	set_bit(TST_SWITCH_PENDING, &card->tst_state);
+	if (!timer_pending(&card->tst_timer))
+		mod_timer(&card->tst_timer, jiffies + 1);
+
+	spin_unlock_irqrestore(&card->tst_lock, flags);
+	return res;
+}
+
+
+static int
+set_tct(struct idt77252_dev *card, struct vc_map *vc)
+{
+	unsigned long tct;
+
+	tct = (unsigned long) (card->tct_base + vc->index * SAR_SRAM_TCT_SIZE);
+
+	switch (vc->class) {
+	case SCHED_CBR:
+		OPRINTK("%s: writing TCT at 0x%lx, SCD 0x%lx.\n",
+		        card->name, tct, vc->scq->scd);
+
+		write_sram(card, tct + 0, TCT_CBR | vc->scq->scd);
+		write_sram(card, tct + 1, 0);
+		write_sram(card, tct + 2, 0);
+		write_sram(card, tct + 3, 0);
+		write_sram(card, tct + 4, 0);
+		write_sram(card, tct + 5, 0);
+		write_sram(card, tct + 6, 0);
+		write_sram(card, tct + 7, 0);
+		break;
+
+	case SCHED_UBR:
+		OPRINTK("%s: writing TCT at 0x%lx, SCD 0x%lx.\n",
+		        card->name, tct, vc->scq->scd);
+
+		write_sram(card, tct + 0, TCT_UBR | vc->scq->scd);
+		write_sram(card, tct + 1, 0);
+		write_sram(card, tct + 2, TCT_TSIF);
+		write_sram(card, tct + 3, TCT_HALT | TCT_IDLE);
+		write_sram(card, tct + 4, 0);
+		write_sram(card, tct + 5, vc->init_er);
+		write_sram(card, tct + 6, 0);
+		write_sram(card, tct + 7, TCT_FLAG_UBR);
+		break;
+
+	case SCHED_VBR:
+	case SCHED_ABR:
+	default:
+		return -ENOSYS;
+	}
+
+	return 0;
+}
+
+/*****************************************************************************/
+/*                                                                           */
+/* FBQ Handling                                                              */
+/*                                                                           */
+/*****************************************************************************/
+
+static __inline__ int
+idt77252_fbq_full(struct idt77252_dev *card, int queue)
+{
+	return (readl(SAR_REG_STAT) >> (16 + (queue << 2))) == 0x0f;
+}
+
+static int
+push_rx_skb(struct idt77252_dev *card, struct sk_buff *skb, int queue)
+{
+	unsigned long flags;
+	u32 handle;
+	u32 addr;
+
+	skb->data = skb->head;
+	skb_reset_tail_pointer(skb);
+	skb->len = 0;
+
+	skb_reserve(skb, 16);
+
+	switch (queue) {
+	case 0:
+		skb_put(skb, SAR_FB_SIZE_0);
+		break;
+	case 1:
+		skb_put(skb, SAR_FB_SIZE_1);
+		break;
+	case 2:
+		skb_put(skb, SAR_FB_SIZE_2);
+		break;
+	case 3:
+		skb_put(skb, SAR_FB_SIZE_3);
+		break;
+	default:
+		return -1;
+	}
+
+	if (idt77252_fbq_full(card, queue))
+		return -1;
+
+	memset(&skb->data[(skb->len & ~(0x3f)) - 64], 0, 2 * sizeof(u32));
+
+	handle = IDT77252_PRV_POOL(skb);
+	addr = IDT77252_PRV_PADDR(skb);
+
+	spin_lock_irqsave(&card->cmd_lock, flags);
+	writel(handle, card->fbq[queue]);
+	writel(addr, card->fbq[queue]);
+	spin_unlock_irqrestore(&card->cmd_lock, flags);
+
+	return 0;
+}
+
+static void
+add_rx_skb(struct idt77252_dev *card, int queue,
+	   unsigned int size, unsigned int count)
+{
+	struct sk_buff *skb;
+	dma_addr_t paddr;
+	u32 handle;
+
+	while (count--) {
+		skb = dev_alloc_skb(size);
+		if (!skb)
+			return;
+
+		if (sb_pool_add(card, skb, queue)) {
+			printk("%s: SB POOL full\n", __func__);
+			goto outfree;
+		}
+
+		paddr = dma_map_single(&card->pcidev->dev, skb->data,
+				       skb_end_pointer(skb) - skb->data,
+				       DMA_FROM_DEVICE);
+		IDT77252_PRV_PADDR(skb) = paddr;
+
+		if (push_rx_skb(card, skb, queue)) {
+			printk("%s: FB QUEUE full\n", __func__);
+			goto outunmap;
+		}
+	}
+
+	return;
+
+outunmap:
+	dma_unmap_single(&card->pcidev->dev, IDT77252_PRV_PADDR(skb),
+			 skb_end_pointer(skb) - skb->data, DMA_FROM_DEVICE);
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	handle = IDT77252_PRV_POOL(skb);
 	card->sbpool[POOL_QUEUE(handle)].skb[POOL_INDEX(handle)] = NULL;
 

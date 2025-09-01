@@ -870,7 +870,12 @@ static int cxl_pmu_probe(struct device *dev)
 		return rc;
 	irq = rc;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	irq_name = devm_kasprintf(dev, GFP_KERNEL, "%s_overflow", dev_name);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	irq_name = devm_kasprintf(dev, GFP_KERNEL, "%s_overflow\n", dev_name);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (!irq_name)
 		return -ENOMEM;
 

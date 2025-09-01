@@ -2955,6 +2955,7 @@ int iwl_fw_dbg_collect(struct iwl_fw_runtime *fwrt,
 	struct iwl_fw_dump_desc *desc;
 	unsigned int delay = 0;
 	bool monitor_only = false;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int ret;
 
 	if (trigger) {
@@ -2991,6 +2992,40 @@ int iwl_fw_dbg_collect(struct iwl_fw_runtime *fwrt,
 		kfree(desc);
 
 	return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (trigger) {
+		u16 occurrences = le16_to_cpu(trigger->occurrences) - 1;
+
+		if (!le16_to_cpu(trigger->occurrences))
+			return 0;
+
+		if (trigger->flags & IWL_FW_DBG_FORCE_RESTART) {
+			IWL_WARN(fwrt, "Force restart: trigger %d fired.\n",
+				 trig);
+			iwl_force_nmi(fwrt->trans);
+			return 0;
+		}
+
+		trigger->occurrences = cpu_to_le16(occurrences);
+		monitor_only = trigger->mode & IWL_FW_DBG_TRIGGER_MONITOR_ONLY;
+
+		/* convert msec to usec */
+		delay = le32_to_cpu(trigger->stop_delay) * USEC_PER_MSEC;
+	}
+
+	desc = kzalloc(struct_size(desc, trig_desc.data, len), GFP_ATOMIC);
+	if (!desc)
+		return -ENOMEM;
+
+
+	desc->len = len;
+	desc->trig_desc.type = cpu_to_le32(trig);
+	memcpy(desc->trig_desc.data, str, len);
+
+	return iwl_fw_dbg_collect_desc(fwrt, desc, monitor_only, delay);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 IWL_EXPORT_SYMBOL(iwl_fw_dbg_collect);
 

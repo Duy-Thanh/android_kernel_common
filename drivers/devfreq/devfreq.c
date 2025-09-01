@@ -1382,6 +1382,7 @@ int devfreq_remove_governor(struct devfreq_governor *governor)
 		int ret;
 		struct device *dev = devfreq->dev.parent;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (!devfreq->governor)
 			continue;
 
@@ -1740,6 +1741,371 @@ static ssize_t trans_stat_show(struct device *dev,
 		if (len >= PAGE_SIZE - 1)
 			break;
 		if (df->freq_table[i] == df->previous_freq)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (!strncmp(devfreq->governor->name, governor->name,
+			     DEVFREQ_NAME_LEN)) {
+			/* we should have a devfreq governor! */
+			if (!devfreq->governor) {
+				dev_warn(dev, "%s: Governor %s NOT present\n",
+					 __func__, governor->name);
+				continue;
+				/* Fall through */
+			}
+			ret = devfreq->governor->event_handler(devfreq,
+						DEVFREQ_GOV_STOP, NULL);
+			if (ret) {
+				dev_warn(dev, "%s: Governor %s stop=%d\n",
+					 __func__, devfreq->governor->name,
+					 ret);
+			}
+			devfreq->governor = NULL;
+		}
+	}
+
+	list_del(&governor->node);
+err_out:
+	mutex_unlock(&devfreq_list_lock);
+
+	return err;
+}
+EXPORT_SYMBOL(devfreq_remove_governor);
+
+static ssize_t name_show(struct device *dev,
+			struct device_attribute *attr, char *buf)
+{
+	struct devfreq *df = to_devfreq(dev);
+	return sprintf(buf, "%s\n", dev_name(df->dev.parent));
+}
+static DEVICE_ATTR_RO(name);
+
+static ssize_t governor_show(struct device *dev,
+			     struct device_attribute *attr, char *buf)
+{
+	struct devfreq *df = to_devfreq(dev);
+
+	if (!df->governor)
+		return -EINVAL;
+
+	return sprintf(buf, "%s\n", df->governor->name);
+}
+
+static ssize_t governor_store(struct device *dev, struct device_attribute *attr,
+			      const char *buf, size_t count)
+{
+	struct devfreq *df = to_devfreq(dev);
+	int ret;
+	char str_governor[DEVFREQ_NAME_LEN + 1];
+	const struct devfreq_governor *governor, *prev_governor;
+
+	if (!df->governor)
+		return -EINVAL;
+
+	ret = sscanf(buf, "%" __stringify(DEVFREQ_NAME_LEN) "s", str_governor);
+	if (ret != 1)
+		return -EINVAL;
+
+	mutex_lock(&devfreq_list_lock);
+	governor = try_then_request_governor(str_governor);
+	if (IS_ERR(governor)) {
+		ret = PTR_ERR(governor);
+		goto out;
+	}
+	if (df->governor == governor) {
+		ret = 0;
+		goto out;
+	} else if (IS_SUPPORTED_FLAG(df->governor->flags, IMMUTABLE)
+		|| IS_SUPPORTED_FLAG(governor->flags, IMMUTABLE)) {
+		ret = -EINVAL;
+		goto out;
+	}
+
+	/*
+	 * Stop the current governor and remove the specific sysfs files
+	 * which depend on current governor.
+	 */
+	ret = df->governor->event_handler(df, DEVFREQ_GOV_STOP, NULL);
+	if (ret) {
+		dev_warn(dev, "%s: Governor %s not stopped(%d)\n",
+			 __func__, df->governor->name, ret);
+		goto out;
+	}
+	remove_sysfs_files(df, df->governor);
+
+	/*
+	 * Start the new governor and create the specific sysfs files
+	 * which depend on the new governor.
+	 */
+	prev_governor = df->governor;
+	df->governor = governor;
+	ret = df->governor->event_handler(df, DEVFREQ_GOV_START, NULL);
+	if (ret) {
+		dev_warn(dev, "%s: Governor %s not started(%d)\n",
+			 __func__, df->governor->name, ret);
+
+		/* Restore previous governor */
+		df->governor = prev_governor;
+		ret = df->governor->event_handler(df, DEVFREQ_GOV_START, NULL);
+		if (ret) {
+			dev_err(dev,
+				"%s: reverting to Governor %s failed (%d)\n",
+				__func__, prev_governor->name, ret);
+			df->governor = NULL;
+			goto out;
+		}
+	}
+
+	/*
+	 * Create the sysfs files for the new governor. But if failed to start
+	 * the new governor, restore the sysfs files of previous governor.
+	 */
+	create_sysfs_files(df, df->governor);
+
+out:
+	mutex_unlock(&devfreq_list_lock);
+
+	if (!ret)
+		ret = count;
+	return ret;
+}
+static DEVICE_ATTR_RW(governor);
+
+static ssize_t available_governors_show(struct device *d,
+					struct device_attribute *attr,
+					char *buf)
+{
+	struct devfreq *df = to_devfreq(d);
+	ssize_t count = 0;
+
+	if (!df->governor)
+		return -EINVAL;
+
+	mutex_lock(&devfreq_list_lock);
+
+	/*
+	 * The devfreq with immutable governor (e.g., passive) shows
+	 * only own governor.
+	 */
+	if (IS_SUPPORTED_FLAG(df->governor->flags, IMMUTABLE)) {
+		count = scnprintf(&buf[count], DEVFREQ_NAME_LEN,
+				  "%s ", df->governor->name);
+	/*
+	 * The devfreq device shows the registered governor except for
+	 * immutable governors such as passive governor .
+	 */
+	} else {
+		struct devfreq_governor *governor;
+
+		list_for_each_entry(governor, &devfreq_governor_list, node) {
+			if (IS_SUPPORTED_FLAG(governor->flags, IMMUTABLE))
+				continue;
+			count += scnprintf(&buf[count], (PAGE_SIZE - count - 2),
+					   "%s ", governor->name);
+		}
+	}
+
+	mutex_unlock(&devfreq_list_lock);
+
+	/* Truncate the trailing space */
+	if (count)
+		count--;
+
+	count += sprintf(&buf[count], "\n");
+
+	return count;
+}
+static DEVICE_ATTR_RO(available_governors);
+
+static ssize_t cur_freq_show(struct device *dev, struct device_attribute *attr,
+			     char *buf)
+{
+	unsigned long freq;
+	struct devfreq *df = to_devfreq(dev);
+
+	if (!df->profile)
+		return -EINVAL;
+
+	if (df->profile->get_cur_freq &&
+		!df->profile->get_cur_freq(df->dev.parent, &freq))
+		return sprintf(buf, "%lu\n", freq);
+
+	return sprintf(buf, "%lu\n", df->previous_freq);
+}
+static DEVICE_ATTR_RO(cur_freq);
+
+static ssize_t target_freq_show(struct device *dev,
+				struct device_attribute *attr, char *buf)
+{
+	struct devfreq *df = to_devfreq(dev);
+
+	return sprintf(buf, "%lu\n", df->previous_freq);
+}
+static DEVICE_ATTR_RO(target_freq);
+
+static ssize_t min_freq_store(struct device *dev, struct device_attribute *attr,
+			      const char *buf, size_t count)
+{
+	struct devfreq *df = to_devfreq(dev);
+	unsigned long value;
+	int ret;
+
+	/*
+	 * Protect against theoretical sysfs writes between
+	 * device_add and dev_pm_qos_add_request
+	 */
+	if (!dev_pm_qos_request_active(&df->user_min_freq_req))
+		return -EAGAIN;
+
+	ret = sscanf(buf, "%lu", &value);
+	if (ret != 1)
+		return -EINVAL;
+
+	/* Round down to kHz for PM QoS */
+	ret = dev_pm_qos_update_request(&df->user_min_freq_req,
+					value / HZ_PER_KHZ);
+	if (ret < 0)
+		return ret;
+
+	return count;
+}
+
+static ssize_t min_freq_show(struct device *dev, struct device_attribute *attr,
+			     char *buf)
+{
+	struct devfreq *df = to_devfreq(dev);
+	unsigned long min_freq, max_freq;
+
+	mutex_lock(&df->lock);
+	devfreq_get_freq_range(df, &min_freq, &max_freq);
+	mutex_unlock(&df->lock);
+
+	return sprintf(buf, "%lu\n", min_freq);
+}
+static DEVICE_ATTR_RW(min_freq);
+
+static ssize_t max_freq_store(struct device *dev, struct device_attribute *attr,
+			      const char *buf, size_t count)
+{
+	struct devfreq *df = to_devfreq(dev);
+	unsigned long value;
+	int ret;
+
+	/*
+	 * Protect against theoretical sysfs writes between
+	 * device_add and dev_pm_qos_add_request
+	 */
+	if (!dev_pm_qos_request_active(&df->user_max_freq_req))
+		return -EINVAL;
+
+	ret = sscanf(buf, "%lu", &value);
+	if (ret != 1)
+		return -EINVAL;
+
+	/*
+	 * PM QoS frequencies are in kHz so we need to convert. Convert by
+	 * rounding upwards so that the acceptable interval never shrinks.
+	 *
+	 * For example if the user writes "666666666" to sysfs this value will
+	 * be converted to 666667 kHz and back to 666667000 Hz before an OPP
+	 * lookup, this ensures that an OPP of 666666666Hz is still accepted.
+	 *
+	 * A value of zero means "no limit".
+	 */
+	if (value)
+		value = DIV_ROUND_UP(value, HZ_PER_KHZ);
+	else
+		value = PM_QOS_MAX_FREQUENCY_DEFAULT_VALUE;
+
+	ret = dev_pm_qos_update_request(&df->user_max_freq_req, value);
+	if (ret < 0)
+		return ret;
+
+	return count;
+}
+
+static ssize_t max_freq_show(struct device *dev, struct device_attribute *attr,
+			     char *buf)
+{
+	struct devfreq *df = to_devfreq(dev);
+	unsigned long min_freq, max_freq;
+
+	mutex_lock(&df->lock);
+	devfreq_get_freq_range(df, &min_freq, &max_freq);
+	mutex_unlock(&df->lock);
+
+	return sprintf(buf, "%lu\n", max_freq);
+}
+static DEVICE_ATTR_RW(max_freq);
+
+static ssize_t available_frequencies_show(struct device *d,
+					  struct device_attribute *attr,
+					  char *buf)
+{
+	struct devfreq *df = to_devfreq(d);
+	ssize_t count = 0;
+	int i;
+
+	if (!df->profile)
+		return -EINVAL;
+
+	mutex_lock(&df->lock);
+
+	for (i = 0; i < df->max_state; i++)
+		count += scnprintf(&buf[count], (PAGE_SIZE - count - 2),
+				"%lu ", df->freq_table[i]);
+
+	mutex_unlock(&df->lock);
+	/* Truncate the trailing space */
+	if (count)
+		count--;
+
+	count += sprintf(&buf[count], "\n");
+
+	return count;
+}
+static DEVICE_ATTR_RO(available_frequencies);
+
+static ssize_t trans_stat_show(struct device *dev,
+			       struct device_attribute *attr, char *buf)
+{
+	struct devfreq *df = to_devfreq(dev);
+	ssize_t len = 0;
+	int i, j;
+	unsigned int max_state;
+
+	if (!df->profile)
+		return -EINVAL;
+	max_state = df->max_state;
+
+	if (max_state == 0)
+		return sysfs_emit(buf, "Not Supported.\n");
+
+	mutex_lock(&df->lock);
+	if (!df->stop_polling &&
+			devfreq_update_status(df, df->previous_freq)) {
+		mutex_unlock(&df->lock);
+		return 0;
+	}
+	mutex_unlock(&df->lock);
+
+	len += sysfs_emit_at(buf, len, "     From  :   To\n");
+	len += sysfs_emit_at(buf, len, "           :");
+	for (i = 0; i < max_state; i++) {
+		if (len >= PAGE_SIZE - 1)
+			break;
+		len += sysfs_emit_at(buf, len, "%10lu",
+				     df->freq_table[i]);
+	}
+
+	if (len >= PAGE_SIZE - 1)
+		return PAGE_SIZE - 1;
+	len += sysfs_emit_at(buf, len, "   time(ms)\n");
+
+	for (i = 0; i < max_state; i++) {
+		if (len >= PAGE_SIZE - 1)
+			break;
+		if (df->freq_table[2] == df->previous_freq)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			len += sysfs_emit_at(buf, len, "*");
 		else
 			len += sysfs_emit_at(buf, len, " ");

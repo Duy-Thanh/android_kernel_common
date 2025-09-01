@@ -1119,6 +1119,7 @@ static void axienet_dma_rx_cb(void *data, const struct dmaengine_result *result)
 	struct axienet_local *lp = data;
 	struct sk_buff *skb;
 	u32 *app_metadata;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int i;
 
 	skbuf_dma = axienet_get_rx_desc(lp, lp->rx_ring_tail++);
@@ -1433,6 +1434,309 @@ static void axienet_rx_submit_desc(struct net_device *ndev)
 	dma_rx_desc->callback_param = lp;
 	dma_rx_desc->callback_result = axienet_dma_rx_cb;
 	lp->rx_ring_head++;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	skbuf_dma = axienet_get_rx_desc(lp, lp->rx_ring_tail++);
+	skb = skbuf_dma->skb;
+	app_metadata = dmaengine_desc_get_metadata_ptr(skbuf_dma->desc, &meta_len,
+						       &meta_max_len);
+	dma_unmap_single(lp->dev, skbuf_dma->dma_address, lp->max_frm_size,
+			 DMA_FROM_DEVICE);
+	/* TODO: Derive app word index programmatically */
+	rx_len = (app_metadata[LEN_APP] & 0xFFFF);
+	skb_put(skb, rx_len);
+	skb->protocol = eth_type_trans(skb, lp->ndev);
+	skb->ip_summed = CHECKSUM_NONE;
+
+	__netif_rx(skb);
+	u64_stats_update_begin(&lp->rx_stat_sync);
+	u64_stats_add(&lp->rx_packets, 1);
+	u64_stats_add(&lp->rx_bytes, rx_len);
+	u64_stats_update_end(&lp->rx_stat_sync);
+	axienet_rx_submit_desc(lp->ndev);
+	dma_async_issue_pending(lp->rx_chan);
+}
+
+/**
+ * axienet_rx_poll - Triggered by RX ISR to complete the BD processing.
+ * @napi:	Pointer to NAPI structure.
+ * @budget:	Max number of RX packets to process.
+ *
+ * Return: Number of RX packets processed.
+ */
+static int axienet_rx_poll(struct napi_struct *napi, int budget)
+{
+	u32 length;
+	u32 csumstatus;
+	u32 size = 0;
+	int packets = 0;
+	dma_addr_t tail_p = 0;
+	struct axidma_bd *cur_p;
+	struct sk_buff *skb, *new_skb;
+	struct axienet_local *lp = container_of(napi, struct axienet_local, napi_rx);
+
+	cur_p = &lp->rx_bd_v[lp->rx_bd_ci];
+
+	while (packets < budget && (cur_p->status & XAXIDMA_BD_STS_COMPLETE_MASK)) {
+		dma_addr_t phys;
+
+		/* Ensure we see complete descriptor update */
+		dma_rmb();
+
+		skb = cur_p->skb;
+		cur_p->skb = NULL;
+
+		/* skb could be NULL if a previous pass already received the
+		 * packet for this slot in the ring, but failed to refill it
+		 * with a newly allocated buffer. In this case, don't try to
+		 * receive it again.
+		 */
+		if (likely(skb)) {
+			length = cur_p->app4 & 0x0000FFFF;
+
+			phys = desc_get_phys_addr(lp, cur_p);
+			dma_unmap_single(lp->dev, phys, lp->max_frm_size,
+					 DMA_FROM_DEVICE);
+
+			skb_put(skb, length);
+			skb->protocol = eth_type_trans(skb, lp->ndev);
+			/*skb_checksum_none_assert(skb);*/
+			skb->ip_summed = CHECKSUM_NONE;
+
+			/* if we're doing Rx csum offload, set it up */
+			if (lp->features & XAE_FEATURE_FULL_RX_CSUM) {
+				csumstatus = (cur_p->app2 &
+					      XAE_FULL_CSUM_STATUS_MASK) >> 3;
+				if (csumstatus == XAE_IP_TCP_CSUM_VALIDATED ||
+				    csumstatus == XAE_IP_UDP_CSUM_VALIDATED) {
+					skb->ip_summed = CHECKSUM_UNNECESSARY;
+				}
+			} else if (lp->features & XAE_FEATURE_PARTIAL_RX_CSUM) {
+				skb->csum = be32_to_cpu(cur_p->app3 & 0xFFFF);
+				skb->ip_summed = CHECKSUM_COMPLETE;
+			}
+
+			napi_gro_receive(napi, skb);
+
+			size += length;
+			packets++;
+		}
+
+		new_skb = napi_alloc_skb(napi, lp->max_frm_size);
+		if (!new_skb)
+			break;
+
+		phys = dma_map_single(lp->dev, new_skb->data,
+				      lp->max_frm_size,
+				      DMA_FROM_DEVICE);
+		if (unlikely(dma_mapping_error(lp->dev, phys))) {
+			if (net_ratelimit())
+				netdev_err(lp->ndev, "RX DMA mapping error\n");
+			dev_kfree_skb(new_skb);
+			break;
+		}
+		desc_set_phys_addr(lp, phys, cur_p);
+
+		cur_p->cntrl = lp->max_frm_size;
+		cur_p->status = 0;
+		cur_p->skb = new_skb;
+
+		/* Only update tail_p to mark this slot as usable after it has
+		 * been successfully refilled.
+		 */
+		tail_p = lp->rx_bd_p + sizeof(*lp->rx_bd_v) * lp->rx_bd_ci;
+
+		if (++lp->rx_bd_ci >= lp->rx_bd_num)
+			lp->rx_bd_ci = 0;
+		cur_p = &lp->rx_bd_v[lp->rx_bd_ci];
+	}
+
+	u64_stats_update_begin(&lp->rx_stat_sync);
+	u64_stats_add(&lp->rx_packets, packets);
+	u64_stats_add(&lp->rx_bytes, size);
+	u64_stats_update_end(&lp->rx_stat_sync);
+
+	if (tail_p)
+		axienet_dma_out_addr(lp, XAXIDMA_RX_TDESC_OFFSET, tail_p);
+
+	if (packets < budget && napi_complete_done(napi, packets)) {
+		/* Re-enable RX completion interrupts. This should
+		 * cause an immediate interrupt if any RX packets are
+		 * already pending.
+		 */
+		axienet_dma_out32(lp, XAXIDMA_RX_CR_OFFSET, lp->rx_dma_cr);
+	}
+	return packets;
+}
+
+/**
+ * axienet_tx_irq - Tx Done Isr.
+ * @irq:	irq number
+ * @_ndev:	net_device pointer
+ *
+ * Return: IRQ_HANDLED if device generated a TX interrupt, IRQ_NONE otherwise.
+ *
+ * This is the Axi DMA Tx done Isr. It invokes NAPI polling to complete the
+ * TX BD processing.
+ */
+static irqreturn_t axienet_tx_irq(int irq, void *_ndev)
+{
+	unsigned int status;
+	struct net_device *ndev = _ndev;
+	struct axienet_local *lp = netdev_priv(ndev);
+
+	status = axienet_dma_in32(lp, XAXIDMA_TX_SR_OFFSET);
+
+	if (!(status & XAXIDMA_IRQ_ALL_MASK))
+		return IRQ_NONE;
+
+	axienet_dma_out32(lp, XAXIDMA_TX_SR_OFFSET, status);
+
+	if (unlikely(status & XAXIDMA_IRQ_ERROR_MASK)) {
+		netdev_err(ndev, "DMA Tx error 0x%x\n", status);
+		netdev_err(ndev, "Current BD is at: 0x%x%08x\n",
+			   (lp->tx_bd_v[lp->tx_bd_ci]).phys_msb,
+			   (lp->tx_bd_v[lp->tx_bd_ci]).phys);
+		schedule_work(&lp->dma_err_task);
+	} else {
+		/* Disable further TX completion interrupts and schedule
+		 * NAPI to handle the completions.
+		 */
+		u32 cr = lp->tx_dma_cr;
+
+		cr &= ~(XAXIDMA_IRQ_IOC_MASK | XAXIDMA_IRQ_DELAY_MASK);
+		if (napi_schedule_prep(&lp->napi_tx)) {
+			axienet_dma_out32(lp, XAXIDMA_TX_CR_OFFSET, cr);
+			__napi_schedule(&lp->napi_tx);
+		}
+	}
+
+	return IRQ_HANDLED;
+}
+
+/**
+ * axienet_rx_irq - Rx Isr.
+ * @irq:	irq number
+ * @_ndev:	net_device pointer
+ *
+ * Return: IRQ_HANDLED if device generated a RX interrupt, IRQ_NONE otherwise.
+ *
+ * This is the Axi DMA Rx Isr. It invokes NAPI polling to complete the RX BD
+ * processing.
+ */
+static irqreturn_t axienet_rx_irq(int irq, void *_ndev)
+{
+	unsigned int status;
+	struct net_device *ndev = _ndev;
+	struct axienet_local *lp = netdev_priv(ndev);
+
+	status = axienet_dma_in32(lp, XAXIDMA_RX_SR_OFFSET);
+
+	if (!(status & XAXIDMA_IRQ_ALL_MASK))
+		return IRQ_NONE;
+
+	axienet_dma_out32(lp, XAXIDMA_RX_SR_OFFSET, status);
+
+	if (unlikely(status & XAXIDMA_IRQ_ERROR_MASK)) {
+		netdev_err(ndev, "DMA Rx error 0x%x\n", status);
+		netdev_err(ndev, "Current BD is at: 0x%x%08x\n",
+			   (lp->rx_bd_v[lp->rx_bd_ci]).phys_msb,
+			   (lp->rx_bd_v[lp->rx_bd_ci]).phys);
+		schedule_work(&lp->dma_err_task);
+	} else {
+		/* Disable further RX completion interrupts and schedule
+		 * NAPI receive.
+		 */
+		u32 cr = lp->rx_dma_cr;
+
+		cr &= ~(XAXIDMA_IRQ_IOC_MASK | XAXIDMA_IRQ_DELAY_MASK);
+		if (napi_schedule_prep(&lp->napi_rx)) {
+			axienet_dma_out32(lp, XAXIDMA_RX_CR_OFFSET, cr);
+			__napi_schedule(&lp->napi_rx);
+		}
+	}
+
+	return IRQ_HANDLED;
+}
+
+/**
+ * axienet_eth_irq - Ethernet core Isr.
+ * @irq:	irq number
+ * @_ndev:	net_device pointer
+ *
+ * Return: IRQ_HANDLED if device generated a core interrupt, IRQ_NONE otherwise.
+ *
+ * Handle miscellaneous conditions indicated by Ethernet core IRQ.
+ */
+static irqreturn_t axienet_eth_irq(int irq, void *_ndev)
+{
+	struct net_device *ndev = _ndev;
+	struct axienet_local *lp = netdev_priv(ndev);
+	unsigned int pending;
+
+	pending = axienet_ior(lp, XAE_IP_OFFSET);
+	if (!pending)
+		return IRQ_NONE;
+
+	if (pending & XAE_INT_RXFIFOOVR_MASK)
+		ndev->stats.rx_missed_errors++;
+
+	if (pending & XAE_INT_RXRJECT_MASK)
+		ndev->stats.rx_dropped++;
+
+	axienet_iow(lp, XAE_IS_OFFSET, pending);
+	return IRQ_HANDLED;
+}
+
+static void axienet_dma_err_handler(struct work_struct *work);
+
+/**
+ * axienet_rx_submit_desc - Submit the rx descriptors to dmaengine.
+ * allocate skbuff, map the scatterlist and obtain a descriptor
+ * and then add the callback information and submit descriptor.
+ *
+ * @ndev:	net_device pointer
+ *
+ */
+static void axienet_rx_submit_desc(struct net_device *ndev)
+{
+	struct dma_async_tx_descriptor *dma_rx_desc = NULL;
+	struct axienet_local *lp = netdev_priv(ndev);
+	struct skbuf_dma_descriptor *skbuf_dma;
+	struct sk_buff *skb;
+	dma_addr_t addr;
+
+	skbuf_dma = axienet_get_rx_desc(lp, lp->rx_ring_head);
+	if (!skbuf_dma)
+		return;
+
+	lp->rx_ring_head++;
+	skb = netdev_alloc_skb(ndev, lp->max_frm_size);
+	if (!skb)
+		return;
+
+	sg_init_table(skbuf_dma->sgl, 1);
+	addr = dma_map_single(lp->dev, skb->data, lp->max_frm_size, DMA_FROM_DEVICE);
+	if (unlikely(dma_mapping_error(lp->dev, addr))) {
+		if (net_ratelimit())
+			netdev_err(ndev, "DMA mapping error\n");
+		goto rx_submit_err_free_skb;
+	}
+	sg_dma_address(skbuf_dma->sgl) = addr;
+	sg_dma_len(skbuf_dma->sgl) = lp->max_frm_size;
+	dma_rx_desc = dmaengine_prep_slave_sg(lp->rx_chan, skbuf_dma->sgl,
+					      1, DMA_DEV_TO_MEM,
+					      DMA_PREP_INTERRUPT);
+	if (!dma_rx_desc)
+		goto rx_submit_err_unmap_skb;
+
+	skbuf_dma->skb = skb;
+	skbuf_dma->dma_address = sg_dma_address(skbuf_dma->sgl);
+	skbuf_dma->desc = dma_rx_desc;
+	dma_rx_desc->callback_param = lp;
+	dma_rx_desc->callback_result = axienet_dma_rx_cb;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	dmaengine_submit(dma_rx_desc);
 
 	return;

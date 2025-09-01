@@ -258,6 +258,7 @@ static void uvc_fixup_video_ctrl(struct uvc_streaming *stream,
 
 		ctrl->dwMaxPayloadTransferSize = bandwidth;
 	}
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	if (stream->intf->num_altsetting > 1 &&
 	    ctrl->dwMaxPayloadTransferSize > stream->maxpsize) {
@@ -1462,6 +1463,1204 @@ static void uvc_video_decode_meta(struct uvc_streaming *stream,
 		meta_buf->error = 1;
 		return;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+}
+
+static size_t uvc_video_ctrl_size(struct uvc_streaming *stream)
+{
+	/*
+	 * Return the size of the video probe and commit controls, which depends
+	 * on the protocol version.
+	 */
+	if (stream->dev->uvc_version < 0x0110)
+		return 26;
+	else if (stream->dev->uvc_version < 0x0150)
+		return 34;
+	else
+		return 48;
+}
+
+static int uvc_get_video_ctrl(struct uvc_streaming *stream,
+	struct uvc_streaming_control *ctrl, int probe, u8 query)
+{
+	u16 size = uvc_video_ctrl_size(stream);
+	u8 *data;
+	int ret;
+
+	if ((stream->dev->quirks & UVC_QUIRK_PROBE_DEF) &&
+			query == UVC_GET_DEF)
+		return -EIO;
+
+	data = kmalloc(size, GFP_KERNEL);
+	if (data == NULL)
+		return -ENOMEM;
+
+	ret = __uvc_query_ctrl(stream->dev, query, 0, stream->intfnum,
+		probe ? UVC_VS_PROBE_CONTROL : UVC_VS_COMMIT_CONTROL, data,
+		size, uvc_timeout_param);
+
+	if ((query == UVC_GET_MIN || query == UVC_GET_MAX) && ret == 2) {
+		/*
+		 * Some cameras, mostly based on Bison Electronics chipsets,
+		 * answer a GET_MIN or GET_MAX request with the wCompQuality
+		 * field only.
+		 */
+		uvc_warn_once(stream->dev, UVC_WARN_MINMAX, "UVC non "
+			"compliance - GET_MIN/MAX(PROBE) incorrectly "
+			"supported. Enabling workaround.\n");
+		memset(ctrl, 0, sizeof(*ctrl));
+		ctrl->wCompQuality = le16_to_cpup((__le16 *)data);
+		ret = 0;
+		goto out;
+	} else if (query == UVC_GET_DEF && probe == 1 && ret != size) {
+		/*
+		 * Many cameras don't support the GET_DEF request on their
+		 * video probe control. Warn once and return, the caller will
+		 * fall back to GET_CUR.
+		 */
+		uvc_warn_once(stream->dev, UVC_WARN_PROBE_DEF, "UVC non "
+			"compliance - GET_DEF(PROBE) not supported. "
+			"Enabling workaround.\n");
+		ret = -EIO;
+		goto out;
+	} else if (ret != size) {
+		dev_err(&stream->intf->dev,
+			"Failed to query (%u) UVC %s control : %d (exp. %u).\n",
+			query, probe ? "probe" : "commit", ret, size);
+		ret = (ret == -EPROTO) ? -EPROTO : -EIO;
+		goto out;
+	}
+
+	ctrl->bmHint = le16_to_cpup((__le16 *)&data[0]);
+	ctrl->bFormatIndex = data[2];
+	ctrl->bFrameIndex = data[3];
+	ctrl->dwFrameInterval = le32_to_cpup((__le32 *)&data[4]);
+	ctrl->wKeyFrameRate = le16_to_cpup((__le16 *)&data[8]);
+	ctrl->wPFrameRate = le16_to_cpup((__le16 *)&data[10]);
+	ctrl->wCompQuality = le16_to_cpup((__le16 *)&data[12]);
+	ctrl->wCompWindowSize = le16_to_cpup((__le16 *)&data[14]);
+	ctrl->wDelay = le16_to_cpup((__le16 *)&data[16]);
+	ctrl->dwMaxVideoFrameSize = get_unaligned_le32(&data[18]);
+	ctrl->dwMaxPayloadTransferSize = get_unaligned_le32(&data[22]);
+
+	if (size >= 34) {
+		ctrl->dwClockFrequency = get_unaligned_le32(&data[26]);
+		ctrl->bmFramingInfo = data[30];
+		ctrl->bPreferedVersion = data[31];
+		ctrl->bMinVersion = data[32];
+		ctrl->bMaxVersion = data[33];
+	} else {
+		ctrl->dwClockFrequency = stream->dev->clock_frequency;
+		ctrl->bmFramingInfo = 0;
+		ctrl->bPreferedVersion = 0;
+		ctrl->bMinVersion = 0;
+		ctrl->bMaxVersion = 0;
+	}
+
+	/*
+	 * Some broken devices return null or wrong dwMaxVideoFrameSize and
+	 * dwMaxPayloadTransferSize fields. Try to get the value from the
+	 * format and frame descriptors.
+	 */
+	uvc_fixup_video_ctrl(stream, ctrl);
+	ret = 0;
+
+out:
+	kfree(data);
+	return ret;
+}
+
+static int uvc_set_video_ctrl(struct uvc_streaming *stream,
+	struct uvc_streaming_control *ctrl, int probe)
+{
+	u16 size = uvc_video_ctrl_size(stream);
+	u8 *data;
+	int ret;
+
+	data = kzalloc(size, GFP_KERNEL);
+	if (data == NULL)
+		return -ENOMEM;
+
+	*(__le16 *)&data[0] = cpu_to_le16(ctrl->bmHint);
+	data[2] = ctrl->bFormatIndex;
+	data[3] = ctrl->bFrameIndex;
+	*(__le32 *)&data[4] = cpu_to_le32(ctrl->dwFrameInterval);
+	*(__le16 *)&data[8] = cpu_to_le16(ctrl->wKeyFrameRate);
+	*(__le16 *)&data[10] = cpu_to_le16(ctrl->wPFrameRate);
+	*(__le16 *)&data[12] = cpu_to_le16(ctrl->wCompQuality);
+	*(__le16 *)&data[14] = cpu_to_le16(ctrl->wCompWindowSize);
+	*(__le16 *)&data[16] = cpu_to_le16(ctrl->wDelay);
+	put_unaligned_le32(ctrl->dwMaxVideoFrameSize, &data[18]);
+	put_unaligned_le32(ctrl->dwMaxPayloadTransferSize, &data[22]);
+
+	if (size >= 34) {
+		put_unaligned_le32(ctrl->dwClockFrequency, &data[26]);
+		data[30] = ctrl->bmFramingInfo;
+		data[31] = ctrl->bPreferedVersion;
+		data[32] = ctrl->bMinVersion;
+		data[33] = ctrl->bMaxVersion;
+	}
+
+	ret = __uvc_query_ctrl(stream->dev, UVC_SET_CUR, 0, stream->intfnum,
+		probe ? UVC_VS_PROBE_CONTROL : UVC_VS_COMMIT_CONTROL, data,
+		size, uvc_timeout_param);
+	if (ret != size) {
+		dev_err(&stream->intf->dev,
+			"Failed to set UVC %s control : %d (exp. %u).\n",
+			probe ? "probe" : "commit", ret, size);
+		ret = -EIO;
+	}
+
+	kfree(data);
+	return ret;
+}
+
+int uvc_probe_video(struct uvc_streaming *stream,
+	struct uvc_streaming_control *probe)
+{
+	struct uvc_streaming_control probe_min, probe_max;
+	unsigned int i;
+	int ret;
+
+	/*
+	 * Perform probing. The device should adjust the requested values
+	 * according to its capabilities. However, some devices, namely the
+	 * first generation UVC Logitech webcams, don't implement the Video
+	 * Probe control properly, and just return the needed bandwidth. For
+	 * that reason, if the needed bandwidth exceeds the maximum available
+	 * bandwidth, try to lower the quality.
+	 */
+	ret = uvc_set_video_ctrl(stream, probe, 1);
+	if (ret < 0)
+		goto done;
+
+	/* Get the minimum and maximum values for compression settings. */
+	if (!(stream->dev->quirks & UVC_QUIRK_PROBE_MINMAX)) {
+		ret = uvc_get_video_ctrl(stream, &probe_min, 1, UVC_GET_MIN);
+		if (ret < 0)
+			goto done;
+		ret = uvc_get_video_ctrl(stream, &probe_max, 1, UVC_GET_MAX);
+		if (ret < 0)
+			goto done;
+
+		probe->wCompQuality = probe_max.wCompQuality;
+	}
+
+	for (i = 0; i < 2; ++i) {
+		ret = uvc_set_video_ctrl(stream, probe, 1);
+		if (ret < 0)
+			goto done;
+		ret = uvc_get_video_ctrl(stream, probe, 1, UVC_GET_CUR);
+		if (ret < 0)
+			goto done;
+
+		if (stream->intf->num_altsetting == 1)
+			break;
+
+		if (probe->dwMaxPayloadTransferSize <= stream->maxpsize)
+			break;
+
+		if (stream->dev->quirks & UVC_QUIRK_PROBE_MINMAX) {
+			ret = -ENOSPC;
+			goto done;
+		}
+
+		/* TODO: negotiate compression parameters */
+		probe->wKeyFrameRate = probe_min.wKeyFrameRate;
+		probe->wPFrameRate = probe_min.wPFrameRate;
+		probe->wCompQuality = probe_max.wCompQuality;
+		probe->wCompWindowSize = probe_min.wCompWindowSize;
+	}
+
+done:
+	return ret;
+}
+
+static int uvc_commit_video(struct uvc_streaming *stream,
+			    struct uvc_streaming_control *probe)
+{
+	return uvc_set_video_ctrl(stream, probe, 0);
+}
+
+/* -----------------------------------------------------------------------------
+ * Clocks and timestamps
+ */
+
+static inline ktime_t uvc_video_get_time(void)
+{
+	if (uvc_clock_param == CLOCK_MONOTONIC)
+		return ktime_get();
+	else
+		return ktime_get_real();
+}
+
+static void uvc_video_clock_add_sample(struct uvc_clock *clock,
+				       const struct uvc_clock_sample *sample)
+{
+	unsigned long flags;
+
+	/*
+	 * If we write new data on the position where we had the last
+	 * overflow, remove the overflow pointer. There is no SOF overflow
+	 * in the whole circular buffer.
+	 */
+	if (clock->head == clock->last_sof_overflow)
+		clock->last_sof_overflow = -1;
+
+	spin_lock_irqsave(&clock->lock, flags);
+
+	if (clock->count > 0 && clock->last_sof > sample->dev_sof) {
+		/*
+		 * Remove data from the circular buffer that is older than the
+		 * last SOF overflow. We only support one SOF overflow per
+		 * circular buffer.
+		 */
+		if (clock->last_sof_overflow != -1)
+			clock->count = (clock->head - clock->last_sof_overflow
+					+ clock->size) % clock->size;
+		clock->last_sof_overflow = clock->head;
+	}
+
+	/* Add sample. */
+	clock->samples[clock->head] = *sample;
+	clock->head = (clock->head + 1) % clock->size;
+	clock->count = min(clock->count + 1, clock->size);
+
+	spin_unlock_irqrestore(&clock->lock, flags);
+}
+
+static void
+uvc_video_clock_decode(struct uvc_streaming *stream, struct uvc_buffer *buf,
+		       const u8 *data, int len)
+{
+	struct uvc_clock_sample sample;
+	unsigned int header_size;
+	bool has_pts = false;
+	bool has_scr = false;
+
+	switch (data[1] & (UVC_STREAM_PTS | UVC_STREAM_SCR)) {
+	case UVC_STREAM_PTS | UVC_STREAM_SCR:
+		header_size = 12;
+		has_pts = true;
+		has_scr = true;
+		break;
+	case UVC_STREAM_PTS:
+		header_size = 6;
+		has_pts = true;
+		break;
+	case UVC_STREAM_SCR:
+		header_size = 8;
+		has_scr = true;
+		break;
+	default:
+		header_size = 2;
+		break;
+	}
+
+	/* Check for invalid headers. */
+	if (len < header_size)
+		return;
+
+	/*
+	 * Extract the timestamps:
+	 *
+	 * - store the frame PTS in the buffer structure
+	 * - if the SCR field is present, retrieve the host SOF counter and
+	 *   kernel timestamps and store them with the SCR STC and SOF fields
+	 *   in the ring buffer
+	 */
+	if (has_pts && buf != NULL)
+		buf->pts = get_unaligned_le32(&data[2]);
+
+	if (!has_scr)
+		return;
+
+	/*
+	 * To limit the amount of data, drop SCRs with an SOF identical to the
+	 * previous one. This filtering is also needed to support UVC 1.5, where
+	 * all the data packets of the same frame contains the same SOF. In that
+	 * case only the first one will match the host_sof.
+	 */
+	sample.dev_sof = get_unaligned_le16(&data[header_size - 2]);
+	if (sample.dev_sof == stream->clock.last_sof)
+		return;
+
+	sample.dev_stc = get_unaligned_le32(&data[header_size - 6]);
+
+	/*
+	 * STC (Source Time Clock) is the clock used by the camera. The UVC 1.5
+	 * standard states that it "must be captured when the first video data
+	 * of a video frame is put on the USB bus". This is generally understood
+	 * as requiring devices to clear the payload header's SCR bit before
+	 * the first packet containing video data.
+	 *
+	 * Most vendors follow that interpretation, but some (namely SunplusIT
+	 * on some devices) always set the `UVC_STREAM_SCR` bit, fill the SCR
+	 * field with 0's,and expect that the driver only processes the SCR if
+	 * there is data in the packet.
+	 *
+	 * Ignore all the hardware timestamp information if we haven't received
+	 * any data for this frame yet, the packet contains no data, and both
+	 * STC and SOF are zero. This heuristics should be safe on compliant
+	 * devices. This should be safe with compliant devices, as in the very
+	 * unlikely case where a UVC 1.1 device would send timing information
+	 * only before the first packet containing data, and both STC and SOF
+	 * happen to be zero for a particular frame, we would only miss one
+	 * clock sample from many and the clock recovery algorithm wouldn't
+	 * suffer from this condition.
+	 */
+	if (buf && buf->bytesused == 0 && len == header_size &&
+	    sample.dev_stc == 0 && sample.dev_sof == 0)
+		return;
+
+	sample.host_sof = usb_get_current_frame_number(stream->dev->udev);
+
+	/*
+	 * On some devices, like the Logitech C922, the device SOF does not run
+	 * at a stable rate of 1kHz. For those devices use the host SOF instead.
+	 * In the tests performed so far, this improves the timestamp precision.
+	 * This is probably explained by a small packet handling jitter from the
+	 * host, but the exact reason hasn't been fully determined.
+	 */
+	if (stream->dev->quirks & UVC_QUIRK_INVALID_DEVICE_SOF)
+		sample.dev_sof = sample.host_sof;
+
+	sample.host_time = uvc_video_get_time();
+
+	/*
+	 * The UVC specification allows device implementations that can't obtain
+	 * the USB frame number to keep their own frame counters as long as they
+	 * match the size and frequency of the frame number associated with USB
+	 * SOF tokens. The SOF values sent by such devices differ from the USB
+	 * SOF tokens by a fixed offset that needs to be estimated and accounted
+	 * for to make timestamp recovery as accurate as possible.
+	 *
+	 * The offset is estimated the first time a device SOF value is received
+	 * as the difference between the host and device SOF values. As the two
+	 * SOF values can differ slightly due to transmission delays, consider
+	 * that the offset is null if the difference is not higher than 10 ms
+	 * (negative differences can not happen and are thus considered as an
+	 * offset). The video commit control wDelay field should be used to
+	 * compute a dynamic threshold instead of using a fixed 10 ms value, but
+	 * devices don't report reliable wDelay values.
+	 *
+	 * See uvc_video_clock_host_sof() for an explanation regarding why only
+	 * the 8 LSBs of the delta are kept.
+	 */
+	if (stream->clock.sof_offset == (u16)-1) {
+		u16 delta_sof = (sample.host_sof - sample.dev_sof) & 255;
+		if (delta_sof >= 10)
+			stream->clock.sof_offset = delta_sof;
+		else
+			stream->clock.sof_offset = 0;
+	}
+
+	sample.dev_sof = (sample.dev_sof + stream->clock.sof_offset) & 2047;
+	uvc_video_clock_add_sample(&stream->clock, &sample);
+	stream->clock.last_sof = sample.dev_sof;
+}
+
+static void uvc_video_clock_reset(struct uvc_clock *clock)
+{
+	clock->head = 0;
+	clock->count = 0;
+	clock->last_sof = -1;
+	clock->last_sof_overflow = -1;
+	clock->sof_offset = -1;
+}
+
+static int uvc_video_clock_init(struct uvc_clock *clock)
+{
+	spin_lock_init(&clock->lock);
+	clock->size = 32;
+
+	clock->samples = kmalloc_array(clock->size, sizeof(*clock->samples),
+				       GFP_KERNEL);
+	if (clock->samples == NULL)
+		return -ENOMEM;
+
+	uvc_video_clock_reset(clock);
+
+	return 0;
+}
+
+static void uvc_video_clock_cleanup(struct uvc_clock *clock)
+{
+	kfree(clock->samples);
+	clock->samples = NULL;
+}
+
+/*
+ * uvc_video_clock_host_sof - Return the host SOF value for a clock sample
+ *
+ * Host SOF counters reported by usb_get_current_frame_number() usually don't
+ * cover the whole 11-bits SOF range (0-2047) but are limited to the HCI frame
+ * schedule window. They can be limited to 8, 9 or 10 bits depending on the host
+ * controller and its configuration.
+ *
+ * We thus need to recover the SOF value corresponding to the host frame number.
+ * As the device and host frame numbers are sampled in a short interval, the
+ * difference between their values should be equal to a small delta plus an
+ * integer multiple of 256 caused by the host frame number limited precision.
+ *
+ * To obtain the recovered host SOF value, compute the small delta by masking
+ * the high bits of the host frame counter and device SOF difference and add it
+ * to the device SOF value.
+ */
+static u16 uvc_video_clock_host_sof(const struct uvc_clock_sample *sample)
+{
+	/* The delta value can be negative. */
+	s8 delta_sof;
+
+	delta_sof = (sample->host_sof - sample->dev_sof) & 255;
+
+	return (sample->dev_sof + delta_sof) & 2047;
+}
+
+/*
+ * uvc_video_clock_update - Update the buffer timestamp
+ *
+ * This function converts the buffer PTS timestamp to the host clock domain by
+ * going through the USB SOF clock domain and stores the result in the V4L2
+ * buffer timestamp field.
+ *
+ * The relationship between the device clock and the host clock isn't known.
+ * However, the device and the host share the common USB SOF clock which can be
+ * used to recover that relationship.
+ *
+ * The relationship between the device clock and the USB SOF clock is considered
+ * to be linear over the clock samples sliding window and is given by
+ *
+ * SOF = m * PTS + p
+ *
+ * Several methods to compute the slope (m) and intercept (p) can be used. As
+ * the clock drift should be small compared to the sliding window size, we
+ * assume that the line that goes through the points at both ends of the window
+ * is a good approximation. Naming those points P1 and P2, we get
+ *
+ * SOF = (SOF2 - SOF1) / (STC2 - STC1) * PTS
+ *     + (SOF1 * STC2 - SOF2 * STC1) / (STC2 - STC1)
+ *
+ * or
+ *
+ * SOF = ((SOF2 - SOF1) * PTS + SOF1 * STC2 - SOF2 * STC1) / (STC2 - STC1)   (1)
+ *
+ * to avoid losing precision in the division. Similarly, the host timestamp is
+ * computed with
+ *
+ * TS = ((TS2 - TS1) * SOF + TS1 * SOF2 - TS2 * SOF1) / (SOF2 - SOF1)	     (2)
+ *
+ * SOF values are coded on 11 bits by USB. We extend their precision with 16
+ * decimal bits, leading to a 11.16 coding.
+ *
+ * TODO: To avoid surprises with device clock values, PTS/STC timestamps should
+ * be normalized using the nominal device clock frequency reported through the
+ * UVC descriptors.
+ *
+ * Both the PTS/STC and SOF counters roll over, after a fixed but device
+ * specific amount of time for PTS/STC and after 2048ms for SOF. As long as the
+ * sliding window size is smaller than the rollover period, differences computed
+ * on unsigned integers will produce the correct result. However, the p term in
+ * the linear relations will be miscomputed.
+ *
+ * To fix the issue, we subtract a constant from the PTS and STC values to bring
+ * PTS to half the 32 bit STC range. The sliding window STC values then fit into
+ * the 32 bit range without any rollover.
+ *
+ * Similarly, we add 2048 to the device SOF values to make sure that the SOF
+ * computed by (1) will never be smaller than 0. This offset is then compensated
+ * by adding 2048 to the SOF values used in (2). However, this doesn't prevent
+ * rollovers between (1) and (2): the SOF value computed by (1) can be slightly
+ * lower than 4096, and the host SOF counters can have rolled over to 2048. This
+ * case is handled by subtracting 2048 from the SOF value if it exceeds the host
+ * SOF value at the end of the sliding window.
+ *
+ * Finally we subtract a constant from the host timestamps to bring the first
+ * timestamp of the sliding window to 1s.
+ */
+void uvc_video_clock_update(struct uvc_streaming *stream,
+			    struct vb2_v4l2_buffer *vbuf,
+			    struct uvc_buffer *buf)
+{
+	struct uvc_clock *clock = &stream->clock;
+	struct uvc_clock_sample *first;
+	struct uvc_clock_sample *last;
+	unsigned long flags;
+	u64 timestamp;
+	u32 delta_stc;
+	u32 y1;
+	u32 x1, x2;
+	u32 mean;
+	u32 sof;
+	u64 y, y2;
+
+	if (!uvc_hw_timestamps_param)
+		return;
+
+	/*
+	 * We will get called from __vb2_queue_cancel() if there are buffers
+	 * done but not dequeued by the user, but the sample array has already
+	 * been released at that time. Just bail out in that case.
+	 */
+	if (!clock->samples)
+		return;
+
+	spin_lock_irqsave(&clock->lock, flags);
+
+	if (clock->count < 2)
+		goto done;
+
+	first = &clock->samples[(clock->head - clock->count + clock->size) % clock->size];
+	last = &clock->samples[(clock->head - 1 + clock->size) % clock->size];
+
+	/* First step, PTS to SOF conversion. */
+	delta_stc = buf->pts - (1UL << 31);
+	x1 = first->dev_stc - delta_stc;
+	x2 = last->dev_stc - delta_stc;
+	if (x1 == x2)
+		goto done;
+
+	y1 = (first->dev_sof + 2048) << 16;
+	y2 = (last->dev_sof + 2048) << 16;
+	if (y2 < y1)
+		y2 += 2048 << 16;
+
+	/*
+	 * Have at least 1/4 of a second of timestamps before we
+	 * try to do any calculation. Otherwise we do not have enough
+	 * precision. This value was determined by running Android CTS
+	 * on different devices.
+	 *
+	 * dev_sof runs at 1KHz, and we have a fixed point precision of
+	 * 16 bits.
+	 */
+	if ((y2 - y1) < ((1000 / 4) << 16))
+		goto done;
+
+	y = (u64)(y2 - y1) * (1ULL << 31) + (u64)y1 * (u64)x2
+	  - (u64)y2 * (u64)x1;
+	y = div_u64(y, x2 - x1);
+
+	sof = y;
+
+	uvc_dbg(stream->dev, CLOCK,
+		"%s: PTS %u y %llu.%06llu SOF %u.%06llu (x1 %u x2 %u y1 %u y2 %llu SOF offset %u)\n",
+		stream->dev->name, buf->pts,
+		y >> 16, div_u64((y & 0xffff) * 1000000, 65536),
+		sof >> 16, div_u64(((u64)sof & 0xffff) * 1000000LLU, 65536),
+		x1, x2, y1, y2, clock->sof_offset);
+
+	/* Second step, SOF to host clock conversion. */
+	x1 = (uvc_video_clock_host_sof(first) + 2048) << 16;
+	x2 = (uvc_video_clock_host_sof(last) + 2048) << 16;
+	if (x2 < x1)
+		x2 += 2048 << 16;
+	if (x1 == x2)
+		goto done;
+
+	y1 = NSEC_PER_SEC;
+	y2 = ktime_to_ns(ktime_sub(last->host_time, first->host_time)) + y1;
+
+	/*
+	 * Interpolated and host SOF timestamps can wrap around at slightly
+	 * different times. Handle this by adding or removing 2048 to or from
+	 * the computed SOF value to keep it close to the SOF samples mean
+	 * value.
+	 */
+	mean = (x1 + x2) / 2;
+	if (mean - (1024 << 16) > sof)
+		sof += 2048 << 16;
+	else if (sof > mean + (1024 << 16))
+		sof -= 2048 << 16;
+
+	y = (u64)(y2 - y1) * (u64)sof + (u64)y1 * (u64)x2
+	  - (u64)y2 * (u64)x1;
+	y = div_u64(y, x2 - x1);
+
+	timestamp = ktime_to_ns(first->host_time) + y - y1;
+
+	uvc_dbg(stream->dev, CLOCK,
+		"%s: SOF %u.%06llu y %llu ts %llu buf ts %llu (x1 %u/%u/%u x2 %u/%u/%u y1 %u y2 %llu)\n",
+		stream->dev->name,
+		sof >> 16, div_u64(((u64)sof & 0xffff) * 1000000LLU, 65536),
+		y, timestamp, vbuf->vb2_buf.timestamp,
+		x1, first->host_sof, first->dev_sof,
+		x2, last->host_sof, last->dev_sof, y1, y2);
+
+	/* Update the V4L2 buffer. */
+	vbuf->vb2_buf.timestamp = timestamp;
+
+done:
+	spin_unlock_irqrestore(&clock->lock, flags);
+}
+
+/* ------------------------------------------------------------------------
+ * Stream statistics
+ */
+
+static void uvc_video_stats_decode(struct uvc_streaming *stream,
+		const u8 *data, int len)
+{
+	unsigned int header_size;
+	bool has_pts = false;
+	bool has_scr = false;
+	u16 scr_sof;
+	u32 scr_stc;
+	u32 pts;
+
+	if (stream->stats.stream.nb_frames == 0 &&
+	    stream->stats.frame.nb_packets == 0)
+		stream->stats.stream.start_ts = ktime_get();
+
+	switch (data[1] & (UVC_STREAM_PTS | UVC_STREAM_SCR)) {
+	case UVC_STREAM_PTS | UVC_STREAM_SCR:
+		header_size = 12;
+		has_pts = true;
+		has_scr = true;
+		break;
+	case UVC_STREAM_PTS:
+		header_size = 6;
+		has_pts = true;
+		break;
+	case UVC_STREAM_SCR:
+		header_size = 8;
+		has_scr = true;
+		break;
+	default:
+		header_size = 2;
+		break;
+	}
+
+	/* Check for invalid headers. */
+	if (len < header_size || data[0] < header_size) {
+		stream->stats.frame.nb_invalid++;
+		return;
+	}
+
+	/* Extract the timestamps. */
+	if (has_pts)
+		pts = get_unaligned_le32(&data[2]);
+
+	if (has_scr) {
+		scr_stc = get_unaligned_le32(&data[header_size - 6]);
+		scr_sof = get_unaligned_le16(&data[header_size - 2]);
+	}
+
+	/* Is PTS constant through the whole frame ? */
+	if (has_pts && stream->stats.frame.nb_pts) {
+		if (stream->stats.frame.pts != pts) {
+			stream->stats.frame.nb_pts_diffs++;
+			stream->stats.frame.last_pts_diff =
+				stream->stats.frame.nb_packets;
+		}
+	}
+
+	if (has_pts) {
+		stream->stats.frame.nb_pts++;
+		stream->stats.frame.pts = pts;
+	}
+
+	/*
+	 * Do all frames have a PTS in their first non-empty packet, or before
+	 * their first empty packet ?
+	 */
+	if (stream->stats.frame.size == 0) {
+		if (len > header_size)
+			stream->stats.frame.has_initial_pts = has_pts;
+		if (len == header_size && has_pts)
+			stream->stats.frame.has_early_pts = true;
+	}
+
+	/* Do the SCR.STC and SCR.SOF fields vary through the frame ? */
+	if (has_scr && stream->stats.frame.nb_scr) {
+		if (stream->stats.frame.scr_stc != scr_stc)
+			stream->stats.frame.nb_scr_diffs++;
+	}
+
+	if (has_scr) {
+		/* Expand the SOF counter to 32 bits and store its value. */
+		if (stream->stats.stream.nb_frames > 0 ||
+		    stream->stats.frame.nb_scr > 0)
+			stream->stats.stream.scr_sof_count +=
+				(scr_sof - stream->stats.stream.scr_sof) % 2048;
+		stream->stats.stream.scr_sof = scr_sof;
+
+		stream->stats.frame.nb_scr++;
+		stream->stats.frame.scr_stc = scr_stc;
+		stream->stats.frame.scr_sof = scr_sof;
+
+		if (scr_sof < stream->stats.stream.min_sof)
+			stream->stats.stream.min_sof = scr_sof;
+		if (scr_sof > stream->stats.stream.max_sof)
+			stream->stats.stream.max_sof = scr_sof;
+	}
+
+	/* Record the first non-empty packet number. */
+	if (stream->stats.frame.size == 0 && len > header_size)
+		stream->stats.frame.first_data = stream->stats.frame.nb_packets;
+
+	/* Update the frame size. */
+	stream->stats.frame.size += len - header_size;
+
+	/* Update the packets counters. */
+	stream->stats.frame.nb_packets++;
+	if (len <= header_size)
+		stream->stats.frame.nb_empty++;
+
+	if (data[1] & UVC_STREAM_ERR)
+		stream->stats.frame.nb_errors++;
+}
+
+static void uvc_video_stats_update(struct uvc_streaming *stream)
+{
+	struct uvc_stats_frame *frame = &stream->stats.frame;
+
+	uvc_dbg(stream->dev, STATS,
+		"frame %u stats: %u/%u/%u packets, %u/%u/%u pts (%searly %sinitial), %u/%u scr, last pts/stc/sof %u/%u/%u\n",
+		stream->sequence, frame->first_data,
+		frame->nb_packets - frame->nb_empty, frame->nb_packets,
+		frame->nb_pts_diffs, frame->last_pts_diff, frame->nb_pts,
+		frame->has_early_pts ? "" : "!",
+		frame->has_initial_pts ? "" : "!",
+		frame->nb_scr_diffs, frame->nb_scr,
+		frame->pts, frame->scr_stc, frame->scr_sof);
+
+	stream->stats.stream.nb_frames++;
+	stream->stats.stream.nb_packets += stream->stats.frame.nb_packets;
+	stream->stats.stream.nb_empty += stream->stats.frame.nb_empty;
+	stream->stats.stream.nb_errors += stream->stats.frame.nb_errors;
+	stream->stats.stream.nb_invalid += stream->stats.frame.nb_invalid;
+
+	if (frame->has_early_pts)
+		stream->stats.stream.nb_pts_early++;
+	if (frame->has_initial_pts)
+		stream->stats.stream.nb_pts_initial++;
+	if (frame->last_pts_diff <= frame->first_data)
+		stream->stats.stream.nb_pts_constant++;
+	if (frame->nb_scr >= frame->nb_packets - frame->nb_empty)
+		stream->stats.stream.nb_scr_count_ok++;
+	if (frame->nb_scr_diffs + 1 == frame->nb_scr)
+		stream->stats.stream.nb_scr_diffs_ok++;
+
+	memset(&stream->stats.frame, 0, sizeof(stream->stats.frame));
+}
+
+size_t uvc_video_stats_dump(struct uvc_streaming *stream, char *buf,
+			    size_t size)
+{
+	unsigned int scr_sof_freq;
+	unsigned int duration;
+	size_t count = 0;
+
+	/*
+	 * Compute the SCR.SOF frequency estimate. At the nominal 1kHz SOF
+	 * frequency this will not overflow before more than 1h.
+	 */
+	duration = ktime_ms_delta(stream->stats.stream.stop_ts,
+				  stream->stats.stream.start_ts);
+	if (duration != 0)
+		scr_sof_freq = stream->stats.stream.scr_sof_count * 1000
+			     / duration;
+	else
+		scr_sof_freq = 0;
+
+	count += scnprintf(buf + count, size - count,
+			   "frames:  %u\npackets: %u\nempty:   %u\n"
+			   "errors:  %u\ninvalid: %u\n",
+			   stream->stats.stream.nb_frames,
+			   stream->stats.stream.nb_packets,
+			   stream->stats.stream.nb_empty,
+			   stream->stats.stream.nb_errors,
+			   stream->stats.stream.nb_invalid);
+	count += scnprintf(buf + count, size - count,
+			   "pts: %u early, %u initial, %u ok\n",
+			   stream->stats.stream.nb_pts_early,
+			   stream->stats.stream.nb_pts_initial,
+			   stream->stats.stream.nb_pts_constant);
+	count += scnprintf(buf + count, size - count,
+			   "scr: %u count ok, %u diff ok\n",
+			   stream->stats.stream.nb_scr_count_ok,
+			   stream->stats.stream.nb_scr_diffs_ok);
+	count += scnprintf(buf + count, size - count,
+			   "sof: %u <= sof <= %u, freq %u.%03u kHz\n",
+			   stream->stats.stream.min_sof,
+			   stream->stats.stream.max_sof,
+			   scr_sof_freq / 1000, scr_sof_freq % 1000);
+
+	return count;
+}
+
+static void uvc_video_stats_start(struct uvc_streaming *stream)
+{
+	memset(&stream->stats, 0, sizeof(stream->stats));
+	stream->stats.stream.min_sof = 2048;
+}
+
+static void uvc_video_stats_stop(struct uvc_streaming *stream)
+{
+	stream->stats.stream.stop_ts = ktime_get();
+}
+
+/* ------------------------------------------------------------------------
+ * Video codecs
+ */
+
+/*
+ * Video payload decoding is handled by uvc_video_decode_start(),
+ * uvc_video_decode_data() and uvc_video_decode_end().
+ *
+ * uvc_video_decode_start is called with URB data at the start of a bulk or
+ * isochronous payload. It processes header data and returns the header size
+ * in bytes if successful. If an error occurs, it returns a negative error
+ * code. The following error codes have special meanings.
+ *
+ * - EAGAIN informs the caller that the current video buffer should be marked
+ *   as done, and that the function should be called again with the same data
+ *   and a new video buffer. This is used when end of frame conditions can be
+ *   reliably detected at the beginning of the next frame only.
+ *
+ * If an error other than -EAGAIN is returned, the caller will drop the current
+ * payload. No call to uvc_video_decode_data and uvc_video_decode_end will be
+ * made until the next payload. -ENODATA can be used to drop the current
+ * payload if no other error code is appropriate.
+ *
+ * uvc_video_decode_data is called for every URB with URB data. It copies the
+ * data to the video buffer.
+ *
+ * uvc_video_decode_end is called with header data at the end of a bulk or
+ * isochronous payload. It performs any additional header data processing and
+ * returns 0 or a negative error code if an error occurred. As header data have
+ * already been processed by uvc_video_decode_start, this functions isn't
+ * required to perform sanity checks a second time.
+ *
+ * For isochronous transfers where a payload is always transferred in a single
+ * URB, the three functions will be called in a row.
+ *
+ * To let the decoder process header data and update its internal state even
+ * when no video buffer is available, uvc_video_decode_start must be prepared
+ * to be called with a NULL buf parameter. uvc_video_decode_data and
+ * uvc_video_decode_end will never be called with a NULL buffer.
+ */
+static int uvc_video_decode_start(struct uvc_streaming *stream,
+		struct uvc_buffer *buf, const u8 *data, int len)
+{
+	u8 header_len;
+	u8 fid;
+
+	/*
+	 * Sanity checks:
+	 * - packet must be at least 2 bytes long
+	 * - bHeaderLength value must be at least 2 bytes (see above)
+	 * - bHeaderLength value can't be larger than the packet size.
+	 */
+	if (len < 2 || data[0] < 2 || data[0] > len) {
+		stream->stats.frame.nb_invalid++;
+		return -EINVAL;
+	}
+
+	header_len = data[0];
+	fid = data[1] & UVC_STREAM_FID;
+
+	/*
+	 * Increase the sequence number regardless of any buffer states, so
+	 * that discontinuous sequence numbers always indicate lost frames.
+	 */
+	if (stream->last_fid != fid) {
+		stream->sequence++;
+		if (stream->sequence)
+			uvc_video_stats_update(stream);
+	}
+
+	uvc_video_clock_decode(stream, buf, data, len);
+	uvc_video_stats_decode(stream, data, len);
+
+	/*
+	 * Store the payload FID bit and return immediately when the buffer is
+	 * NULL.
+	 */
+	if (buf == NULL) {
+		stream->last_fid = fid;
+		return -ENODATA;
+	}
+
+	/* Mark the buffer as bad if the error bit is set. */
+	if (data[1] & UVC_STREAM_ERR) {
+		uvc_dbg(stream->dev, FRAME,
+			"Marking buffer as bad (error bit set)\n");
+		buf->error = 1;
+	}
+
+	/*
+	 * Synchronize to the input stream by waiting for the FID bit to be
+	 * toggled when the buffer state is not UVC_BUF_STATE_ACTIVE.
+	 * stream->last_fid is initialized to -1, so the first isochronous
+	 * frame will always be in sync.
+	 *
+	 * If the device doesn't toggle the FID bit, invert stream->last_fid
+	 * when the EOF bit is set to force synchronisation on the next packet.
+	 */
+	if (buf->state != UVC_BUF_STATE_ACTIVE) {
+		if (fid == stream->last_fid) {
+			uvc_dbg(stream->dev, FRAME,
+				"Dropping payload (out of sync)\n");
+			if ((stream->dev->quirks & UVC_QUIRK_STREAM_NO_FID) &&
+			    (data[1] & UVC_STREAM_EOF))
+				stream->last_fid ^= UVC_STREAM_FID;
+			return -ENODATA;
+		}
+
+		buf->buf.field = V4L2_FIELD_NONE;
+		buf->buf.sequence = stream->sequence;
+		buf->buf.vb2_buf.timestamp = ktime_to_ns(uvc_video_get_time());
+
+		/* TODO: Handle PTS and SCR. */
+		buf->state = UVC_BUF_STATE_ACTIVE;
+	}
+
+	/*
+	 * Mark the buffer as done if we're at the beginning of a new frame.
+	 * End of frame detection is better implemented by checking the EOF
+	 * bit (FID bit toggling is delayed by one frame compared to the EOF
+	 * bit), but some devices don't set the bit at end of frame (and the
+	 * last payload can be lost anyway). We thus must check if the FID has
+	 * been toggled.
+	 *
+	 * stream->last_fid is initialized to -1, so the first isochronous
+	 * frame will never trigger an end of frame detection.
+	 *
+	 * Empty buffers (bytesused == 0) don't trigger end of frame detection
+	 * as it doesn't make sense to return an empty buffer. This also
+	 * avoids detecting end of frame conditions at FID toggling if the
+	 * previous payload had the EOF bit set.
+	 */
+	if (fid != stream->last_fid && buf->bytesused != 0) {
+		uvc_dbg(stream->dev, FRAME,
+			"Frame complete (FID bit toggled)\n");
+		buf->state = UVC_BUF_STATE_READY;
+		return -EAGAIN;
+	}
+
+	/*
+	 * Some cameras, when running two parallel streams (one MJPEG alongside
+	 * another non-MJPEG stream), are known to lose the EOF packet for a frame.
+	 * We can detect the end of a frame by checking for a new SOI marker, as
+	 * the SOI always lies on the packet boundary between two frames for
+	 * these devices.
+	 */
+	if (stream->dev->quirks & UVC_QUIRK_MJPEG_NO_EOF &&
+	    (stream->cur_format->fcc == V4L2_PIX_FMT_MJPEG ||
+	    stream->cur_format->fcc == V4L2_PIX_FMT_JPEG)) {
+		const u8 *packet = data + header_len;
+
+		if (len >= header_len + 2 &&
+		    packet[0] == 0xff && packet[1] == JPEG_MARKER_SOI &&
+		    buf->bytesused != 0) {
+			buf->state = UVC_BUF_STATE_READY;
+			buf->error = 1;
+			stream->last_fid ^= UVC_STREAM_FID;
+			return -EAGAIN;
+		}
+	}
+
+	stream->last_fid = fid;
+
+	return header_len;
+}
+
+static inline enum dma_data_direction uvc_stream_dir(
+				struct uvc_streaming *stream)
+{
+	if (stream->type == V4L2_BUF_TYPE_VIDEO_CAPTURE)
+		return DMA_FROM_DEVICE;
+	else
+		return DMA_TO_DEVICE;
+}
+
+static inline struct device *uvc_stream_to_dmadev(struct uvc_streaming *stream)
+{
+	return bus_to_hcd(stream->dev->udev->bus)->self.sysdev;
+}
+
+static int uvc_submit_urb(struct uvc_urb *uvc_urb, gfp_t mem_flags)
+{
+	/* Sync DMA. */
+	dma_sync_sgtable_for_device(uvc_stream_to_dmadev(uvc_urb->stream),
+				    uvc_urb->sgt,
+				    uvc_stream_dir(uvc_urb->stream));
+	return usb_submit_urb(uvc_urb->urb, mem_flags);
+}
+
+/*
+ * uvc_video_decode_data_work: Asynchronous memcpy processing
+ *
+ * Copy URB data to video buffers in process context, releasing buffer
+ * references and requeuing the URB when done.
+ */
+static void uvc_video_copy_data_work(struct work_struct *work)
+{
+	struct uvc_urb *uvc_urb = container_of(work, struct uvc_urb, work);
+	unsigned int i;
+	int ret;
+
+	for (i = 0; i < uvc_urb->async_operations; i++) {
+		struct uvc_copy_op *op = &uvc_urb->copy_operations[i];
+
+		memcpy(op->dst, op->src, op->len);
+
+		/* Release reference taken on this buffer. */
+		uvc_queue_buffer_release(op->buf);
+	}
+
+	ret = uvc_submit_urb(uvc_urb, GFP_KERNEL);
+	if (ret < 0)
+		dev_err(&uvc_urb->stream->intf->dev,
+			"Failed to resubmit video URB (%d).\n", ret);
+}
+
+static void uvc_video_decode_data(struct uvc_urb *uvc_urb,
+		struct uvc_buffer *buf, const u8 *data, int len)
+{
+	unsigned int active_op = uvc_urb->async_operations;
+	struct uvc_copy_op *op = &uvc_urb->copy_operations[active_op];
+	unsigned int maxlen;
+
+	if (len <= 0)
+		return;
+
+	maxlen = buf->length - buf->bytesused;
+
+	/* Take a buffer reference for async work. */
+	kref_get(&buf->ref);
+
+	op->buf = buf;
+	op->src = data;
+	op->dst = buf->mem + buf->bytesused;
+	op->len = min_t(unsigned int, len, maxlen);
+
+	buf->bytesused += op->len;
+
+	/* Complete the current frame if the buffer size was exceeded. */
+	if (len > maxlen) {
+		uvc_dbg(uvc_urb->stream->dev, FRAME,
+			"Frame complete (overflow)\n");
+		buf->error = 1;
+		buf->state = UVC_BUF_STATE_READY;
+	}
+
+	uvc_urb->async_operations++;
+}
+
+static void uvc_video_decode_end(struct uvc_streaming *stream,
+		struct uvc_buffer *buf, const u8 *data, int len)
+{
+	/* Mark the buffer as done if the EOF marker is set. */
+	if (data[1] & UVC_STREAM_EOF && buf->bytesused != 0) {
+		uvc_dbg(stream->dev, FRAME, "Frame complete (EOF found)\n");
+		if (data[0] == len)
+			uvc_dbg(stream->dev, FRAME, "EOF in empty payload\n");
+		buf->state = UVC_BUF_STATE_READY;
+		if (stream->dev->quirks & UVC_QUIRK_STREAM_NO_FID)
+			stream->last_fid ^= UVC_STREAM_FID;
+	}
+}
+
+/*
+ * Video payload encoding is handled by uvc_video_encode_header() and
+ * uvc_video_encode_data(). Only bulk transfers are currently supported.
+ *
+ * uvc_video_encode_header is called at the start of a payload. It adds header
+ * data to the transfer buffer and returns the header size. As the only known
+ * UVC output device transfers a whole frame in a single payload, the EOF bit
+ * is always set in the header.
+ *
+ * uvc_video_encode_data is called for every URB and copies the data from the
+ * video buffer to the transfer buffer.
+ */
+static int uvc_video_encode_header(struct uvc_streaming *stream,
+		struct uvc_buffer *buf, u8 *data, int len)
+{
+	data[0] = 2;	/* Header length */
+	data[1] = UVC_STREAM_EOH | UVC_STREAM_EOF
+		| (stream->last_fid & UVC_STREAM_FID);
+	return 2;
+}
+
+static int uvc_video_encode_data(struct uvc_streaming *stream,
+		struct uvc_buffer *buf, u8 *data, int len)
+{
+	struct uvc_video_queue *queue = &stream->queue;
+	unsigned int nbytes;
+	void *mem;
+
+	/* Copy video data to the URB buffer. */
+	mem = buf->mem + queue->buf_used;
+	nbytes = min((unsigned int)len, buf->bytesused - queue->buf_used);
+	nbytes = min(stream->bulk.max_payload_size - stream->bulk.payload_size,
+			nbytes);
+	memcpy(data, mem, nbytes);
+
+	queue->buf_used += nbytes;
+
+	return nbytes;
+}
+
+/* ------------------------------------------------------------------------
+ * Metadata
+ */
+
+/*
+ * Additionally to the payload headers we also want to provide the user with USB
+ * Frame Numbers and system time values. The resulting buffer is thus composed
+ * of blocks, containing a 64-bit timestamp in  nanoseconds, a 16-bit USB Frame
+ * Number, and a copy of the payload header.
+ *
+ * Ideally we want to capture all payload headers for each frame. However, their
+ * number is unknown and unbound. We thus drop headers that contain no vendor
+ * data and that either contain no SCR value or an SCR value identical to the
+ * previous header.
+ */
+static void uvc_video_decode_meta(struct uvc_streaming *stream,
+				  struct uvc_buffer *meta_buf,
+				  const u8 *mem, unsigned int length)
+{
+	struct uvc_meta_buf *meta;
+	size_t len_std = 2;
+	bool has_pts, has_scr;
+	unsigned long flags;
+	unsigned int sof;
+	ktime_t time;
+	const u8 *scr;
+
+	if (!meta_buf || length == 2)
+		return;
+
+	if (meta_buf->length - meta_buf->bytesused <
+	    length + sizeof(meta->ns) + sizeof(meta->sof)) {
+		meta_buf->error = 1;
+		return;
+	}
+
+	has_pts = mem[1] & UVC_STREAM_PTS;
+	has_scr = mem[1] & UVC_STREAM_SCR;
+
+	if (has_pts) {
+		len_std += 4;
+		scr = mem + 6;
+	} else {
+		scr = mem + 2;
+	}
+
+	if (has_scr)
+		len_std += 6;
+
+	if (stream->meta.format == V4L2_META_FMT_UVC)
+		length = len_std;
+
+	if (length == len_std && (!has_scr ||
+				  !memcmp(scr, stream->clock.last_scr, 6)))
+		return;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	meta = (struct uvc_meta_buf *)((u8 *)meta_buf->mem + meta_buf->bytesused);
 	local_irq_save(flags);

@@ -1010,6 +1010,7 @@ u32 amdgpu_virt_rlcg_reg_rw(struct amdgpu_device *adev, u32 offset, u32 v, u32 f
 	void *scratch_reg2;
 	void *scratch_reg3;
 	void *spare_int;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	unsigned long flags;
 
 	if (!adev->gfx.rlc.rlcg_reg_access_supported) {
@@ -1092,6 +1093,90 @@ u32 amdgpu_virt_rlcg_reg_rw(struct amdgpu_device *adev, u32 offset, u32 v, u32 f
 	ret = readl(scratch_reg0);
 
 	spin_unlock_irqrestore(&adev->virt.rlcg_reg_lock, flags);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (!adev->gfx.rlc.rlcg_reg_access_supported) {
+		dev_err(adev->dev,
+			"indirect registers access through rlcg is not available\n");
+		return 0;
+	}
+
+	if (adev->gfx.xcc_mask && (((1 << xcc_id) & adev->gfx.xcc_mask) == 0)) {
+		dev_err(adev->dev, "invalid xcc\n");
+		return 0;
+	}
+
+	if (amdgpu_device_skip_hw_access(adev))
+		return 0;
+
+	reg_access_ctrl = &adev->gfx.rlc.reg_access_ctrl[xcc_id];
+	scratch_reg0 = (void __iomem *)adev->rmmio + 4 * reg_access_ctrl->scratch_reg0;
+	scratch_reg1 = (void __iomem *)adev->rmmio + 4 * reg_access_ctrl->scratch_reg1;
+	scratch_reg2 = (void __iomem *)adev->rmmio + 4 * reg_access_ctrl->scratch_reg2;
+	scratch_reg3 = (void __iomem *)adev->rmmio + 4 * reg_access_ctrl->scratch_reg3;
+
+	mutex_lock(&adev->virt.rlcg_reg_lock);
+
+	if (reg_access_ctrl->spare_int)
+		spare_int = (void __iomem *)adev->rmmio + 4 * reg_access_ctrl->spare_int;
+
+	if (offset == reg_access_ctrl->grbm_cntl) {
+		/* if the target reg offset is grbm_cntl, write to scratch_reg2 */
+		writel(v, scratch_reg2);
+		if (flag == AMDGPU_RLCG_GC_WRITE_LEGACY)
+			writel(v, ((void __iomem *)adev->rmmio) + (offset * 4));
+	} else if (offset == reg_access_ctrl->grbm_idx) {
+		/* if the target reg offset is grbm_idx, write to scratch_reg3 */
+		writel(v, scratch_reg3);
+		if (flag == AMDGPU_RLCG_GC_WRITE_LEGACY)
+			writel(v, ((void __iomem *)adev->rmmio) + (offset * 4));
+	} else {
+		/*
+		 * SCRATCH_REG0 	= read/write value
+		 * SCRATCH_REG1[30:28]	= command
+		 * SCRATCH_REG1[19:0]	= address in dword
+		 * SCRATCH_REG1[27:24]	= Error reporting
+		 */
+		writel(v, scratch_reg0);
+		writel((offset | flag), scratch_reg1);
+		if (reg_access_ctrl->spare_int)
+			writel(1, spare_int);
+
+		for (i = 0; i < timeout; i++) {
+			tmp = readl(scratch_reg1);
+			if (!(tmp & AMDGPU_RLCG_SCRATCH1_ADDRESS_MASK))
+				break;
+			udelay(10);
+		}
+
+		tmp = readl(scratch_reg1);
+		if (i >= timeout || (tmp & AMDGPU_RLCG_SCRATCH1_ERROR_MASK) != 0) {
+			if (amdgpu_sriov_rlcg_error_report_enabled(adev)) {
+				if (tmp & AMDGPU_RLCG_VFGATE_DISABLED) {
+					dev_err(adev->dev,
+						"vfgate is disabled, rlcg failed to program reg: 0x%05x\n", offset);
+				} else if (tmp & AMDGPU_RLCG_WRONG_OPERATION_TYPE) {
+					dev_err(adev->dev,
+						"wrong operation type, rlcg failed to program reg: 0x%05x\n", offset);
+				} else if (tmp & AMDGPU_RLCG_REG_NOT_IN_RANGE) {
+					dev_err(adev->dev,
+						"register is not in range, rlcg failed to program reg: 0x%05x\n", offset);
+				} else {
+					dev_err(adev->dev,
+						"unknown error type, rlcg failed to program reg: 0x%05x\n", offset);
+				}
+			} else {
+				dev_err(adev->dev,
+					"timeout: rlcg faled to program reg: 0x%05x\n", offset);
+			}
+		}
+	}
+
+	ret = readl(scratch_reg0);
+
+	mutex_unlock(&adev->virt.rlcg_reg_lock);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return ret;
 }

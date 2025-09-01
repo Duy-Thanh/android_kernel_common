@@ -184,6 +184,7 @@ static int srp_direct_data(struct ibmvscsis_cmd *cmd, struct srp_direct_buf *md,
 	err = rdma_io(cmd, sg, nsg, md, 1, dir, len);
 
 	if (dma_map)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		dma_unmap_sg(iue->target->dev, sg, cmd->se_cmd.t_data_nents,
 			     DMA_BIDIRECTIONAL);
 
@@ -259,6 +260,82 @@ rdma:
 	if (dma_map)
 		dma_unmap_sg(iue->target->dev, sg, cmd->se_cmd.t_data_nents,
 			     DMA_BIDIRECTIONAL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		dma_unmap_sg(iue->target->dev, sg, nsg, DMA_BIDIRECTIONAL);
+
+	return err;
+}
+
+static int srp_indirect_data(struct ibmvscsis_cmd *cmd, struct srp_cmd *srp_cmd,
+			     struct srp_indirect_buf *id,
+			     enum dma_data_direction dir, srp_rdma_t rdma_io,
+			     int dma_map, int ext_desc)
+{
+	struct iu_entry *iue = NULL;
+	struct srp_direct_buf *md = NULL;
+	struct scatterlist dummy, *sg = NULL;
+	dma_addr_t token = 0;
+	int err = 0;
+	int nmd, nsg = 0, len;
+
+	if (dma_map || ext_desc) {
+		iue = cmd->iue;
+		sg = cmd->se_cmd.t_data_sg;
+	}
+
+	nmd = be32_to_cpu(id->table_desc.len) / sizeof(struct srp_direct_buf);
+
+	if ((dir == DMA_FROM_DEVICE && nmd == srp_cmd->data_in_desc_cnt) ||
+	    (dir == DMA_TO_DEVICE && nmd == srp_cmd->data_out_desc_cnt)) {
+		md = &id->desc_list[0];
+		goto rdma;
+	}
+
+	if (ext_desc && dma_map) {
+		md = dma_alloc_coherent(iue->target->dev,
+					be32_to_cpu(id->table_desc.len),
+					&token, GFP_KERNEL);
+		if (!md) {
+			pr_err("Can't get dma memory %u\n",
+			       be32_to_cpu(id->table_desc.len));
+			return -ENOMEM;
+		}
+
+		sg_init_one(&dummy, md, be32_to_cpu(id->table_desc.len));
+		sg_dma_address(&dummy) = token;
+		sg_dma_len(&dummy) = be32_to_cpu(id->table_desc.len);
+		err = rdma_io(cmd, &dummy, 1, &id->table_desc, 1, DMA_TO_DEVICE,
+			      be32_to_cpu(id->table_desc.len));
+		if (err) {
+			pr_err("Error copying indirect table %d\n", err);
+			goto free_mem;
+		}
+	} else {
+		pr_err("This command uses external indirect buffer\n");
+		return -EINVAL;
+	}
+
+rdma:
+	if (dma_map) {
+		nsg = dma_map_sg(iue->target->dev, sg, cmd->se_cmd.t_data_nents,
+				 DMA_BIDIRECTIONAL);
+		if (!nsg) {
+			pr_err("fail to map %p %d\n", iue,
+			       cmd->se_cmd.t_data_nents);
+			err = -EIO;
+			goto free_mem;
+		}
+		len = min(cmd->se_cmd.data_length, be32_to_cpu(id->len));
+	} else {
+		len = be32_to_cpu(id->len);
+	}
+
+	err = rdma_io(cmd, sg, nsg, md, nmd, dir, len);
+
+	if (dma_map)
+		dma_unmap_sg(iue->target->dev, sg, nsg, DMA_BIDIRECTIONAL);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 free_mem:
 	if (token && dma_map) {

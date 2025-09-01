@@ -63,12 +63,23 @@ void *vmem_crst_alloc(unsigned long val)
 
 pte_t __ref *vmem_pte_alloc(void)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	pte_t *pte;
 
 	if (slab_is_available())
 		pte = (pte_t *)page_table_alloc(&init_mm);
 	else
 		pte = (pte_t *)memblock_alloc(PAGE_SIZE, PAGE_SIZE);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	unsigned long size = PTRS_PER_PTE * sizeof(pte_t);
+	pte_t *pte;
+
+	if (slab_is_available())
+		pte = (pte_t *) page_table_alloc(&init_mm);
+	else
+		pte = (pte_t *) memblock_alloc(size, size);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (!pte)
 		return NULL;
 	memset64((u64 *)pte, _PAGE_INVALID, PTRS_PER_PTE);

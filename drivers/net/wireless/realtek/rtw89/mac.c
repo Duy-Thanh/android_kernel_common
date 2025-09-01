@@ -1441,6 +1441,7 @@ void rtw89_mac_notify_wake(struct rtw89_dev *rtwdev)
 	rtw89_mac_send_rpwm(rtwdev, state, true);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void rtw89_mac_power_switch_boot_mode(struct rtw89_dev *rtwdev)
 {
 	u32 boot_mode;
@@ -1468,6 +1469,17 @@ static int rtw89_mac_power_switch(struct rtw89_dev *rtwdev, bool on)
 	u8 val;
 
 	rtw89_mac_power_switch_boot_mode(rtwdev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int rtw89_mac_power_switch(struct rtw89_dev *rtwdev, bool on)
+{
+#define PWR_ACT 1
+	const struct rtw89_chip_info *chip = rtwdev->chip;
+	const struct rtw89_pwr_cfg * const *cfg_seq;
+	int (*cfg_func)(struct rtw89_dev *rtwdev);
+	int ret;
+	u8 val;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (on) {
 		cfg_seq = chip->pwr_on_seq;

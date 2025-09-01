@@ -2,6 +2,7 @@
 menu "Tegra firmware driver"
 
 config TEGRA_IVC
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool "Tegra IVC protocol" if COMPILE_TEST
 	depends on ARCH_TEGRA
 	help
@@ -16,6 +17,22 @@ config TEGRA_BPMP
 	depends on ARCH_TEGRA && TEGRA_HSP_MBOX
 	depends on !CPU_BIG_ENDIAN
 	select TEGRA_IVC
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool "Tegra IVC protocol"
+	depends on ARCH_TEGRA
+	help
+	  IVC (Inter-VM Communication) protocol is part of the IPC
+	  (Inter Processor Communication) framework on Tegra. It maintains the
+	  data and the different communication channels in SysRAM or RAM and
+	  keeps the content is synchronization between host CPU and remote
+	  processors.
+
+config TEGRA_BPMP
+	bool "Tegra BPMP driver"
+	depends on ARCH_TEGRA && TEGRA_HSP_MBOX && TEGRA_IVC
+	depends on !CPU_BIG_ENDIAN
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	help
 	  BPMP (Boot and Power Management Processor) is designed to off-loading
 	  the PM functions which include clock/DVFS/thermal/power from the CPU.

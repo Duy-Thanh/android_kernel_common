@@ -54,6 +54,7 @@ extern void debug_dma_sync_sg_for_cpu(struct device *dev,
 extern void debug_dma_sync_sg_for_device(struct device *dev,
 					 struct scatterlist *sg,
 					 int nelems, int direction);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 extern void debug_dma_alloc_pages(struct device *dev, struct page *page,
 				  size_t size, int direction,
 				  dma_addr_t dma_addr,
@@ -144,6 +145,79 @@ static inline void debug_dma_alloc_pages(struct device *dev, struct page *page,
 static inline void debug_dma_free_pages(struct device *dev, struct page *page,
 					size_t size, int direction,
 					dma_addr_t dma_addr)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#else /* CONFIG_DMA_API_DEBUG */
+static inline void debug_dma_map_page(struct device *dev, struct page *page,
+				      size_t offset, size_t size,
+				      int direction, dma_addr_t dma_addr,
+				      unsigned long attrs)
+{
+}
+
+static inline void debug_dma_unmap_page(struct device *dev, dma_addr_t addr,
+					size_t size, int direction)
+{
+}
+
+static inline void debug_dma_map_sg(struct device *dev, struct scatterlist *sg,
+				    int nents, int mapped_ents, int direction,
+				    unsigned long attrs)
+{
+}
+
+static inline void debug_dma_unmap_sg(struct device *dev,
+				      struct scatterlist *sglist,
+				      int nelems, int dir)
+{
+}
+
+static inline void debug_dma_alloc_coherent(struct device *dev, size_t size,
+					    dma_addr_t dma_addr, void *virt,
+					    unsigned long attrs)
+{
+}
+
+static inline void debug_dma_free_coherent(struct device *dev, size_t size,
+					   void *virt, dma_addr_t addr)
+{
+}
+
+static inline void debug_dma_map_resource(struct device *dev, phys_addr_t addr,
+					  size_t size, int direction,
+					  dma_addr_t dma_addr,
+					  unsigned long attrs)
+{
+}
+
+static inline void debug_dma_unmap_resource(struct device *dev,
+					    dma_addr_t dma_addr, size_t size,
+					    int direction)
+{
+}
+
+static inline void debug_dma_sync_single_for_cpu(struct device *dev,
+						 dma_addr_t dma_handle,
+						 size_t size, int direction)
+{
+}
+
+static inline void debug_dma_sync_single_for_device(struct device *dev,
+						    dma_addr_t dma_handle,
+						    size_t size, int direction)
+{
+}
+
+static inline void debug_dma_sync_sg_for_cpu(struct device *dev,
+					     struct scatterlist *sg,
+					     int nelems, int direction)
+{
+}
+
+static inline void debug_dma_sync_sg_for_device(struct device *dev,
+						struct scatterlist *sg,
+						int nelems, int direction)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 {
 }
 #endif /* CONFIG_DMA_API_DEBUG */

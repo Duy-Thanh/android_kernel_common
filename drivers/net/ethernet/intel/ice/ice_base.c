@@ -445,6 +445,7 @@ static int ice_setup_rx_ctx(struct ice_rx_ring *ring)
 	/* Max packet size for this queue - must not be set to a larger value
 	 * than 5 x DBUF
 	 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	rlan_ctx.rxmax = min_t(u32, ring->max_frame,
 			       ICE_MAX_CHAINED_RX_BUFS * ring->rx_buf_len);
 
@@ -681,6 +682,243 @@ int ice_vsi_cfg_rxqs(struct ice_vsi *vsi)
 			ice_vsi_cfg_frame_size(vsi, ring);
 
 		err = ice_vsi_cfg_rxq(ring);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	rlan_ctx.rxmax = min_t(u32, vsi->max_frame,
+			       ICE_MAX_CHAINED_RX_BUFS * ring->rx_buf_len);
+
+	/* Rx queue threshold in units of 64 */
+	rlan_ctx.lrxqthresh = 1;
+
+	/* PF acts as uplink for switchdev; set flex descriptor with src_vsi
+	 * metadata and flags to allow redirecting to PR netdev
+	 */
+	if (ice_is_eswitch_mode_switchdev(vsi->back)) {
+		ring->flags |= ICE_RX_FLAGS_MULTIDEV;
+		rxdid = ICE_RXDID_FLEX_NIC_2;
+	}
+
+	/* Enable Flexible Descriptors in the queue context which
+	 * allows this driver to select a specific receive descriptor format
+	 * increasing context priority to pick up profile ID; default is 0x01;
+	 * setting to 0x03 to ensure profile is programming if prev context is
+	 * of same priority
+	 */
+	if (vsi->type != ICE_VSI_VF)
+		ice_write_qrxflxp_cntxt(hw, pf_q, rxdid, 0x3, true);
+	else
+		ice_write_qrxflxp_cntxt(hw, pf_q, ICE_RXDID_LEGACY_1, 0x3,
+					false);
+
+	/* Absolute queue number out of 2K needs to be passed */
+	err = ice_write_rxq_ctx(hw, &rlan_ctx, pf_q);
+	if (err) {
+		dev_err(ice_pf_to_dev(vsi->back), "Failed to set LAN Rx queue context for absolute Rx queue %d error: %d\n",
+			pf_q, err);
+		return -EIO;
+	}
+
+	if (vsi->type == ICE_VSI_VF)
+		return 0;
+
+	/* configure Rx buffer alignment */
+	if (!vsi->netdev || test_bit(ICE_FLAG_LEGACY_RX, vsi->back->flags))
+		ice_clear_ring_build_skb_ena(ring);
+	else
+		ice_set_ring_build_skb_ena(ring);
+
+	ring->rx_offset = ice_rx_offset(ring);
+
+	/* init queue specific tail register */
+	ring->tail = hw->hw_addr + QRX_TAIL(pf_q);
+	writel(0, ring->tail);
+
+	return 0;
+}
+
+static void ice_xsk_pool_fill_cb(struct ice_rx_ring *ring)
+{
+	void *ctx_ptr = &ring->pkt_ctx;
+	struct xsk_cb_desc desc = {};
+
+	XSK_CHECK_PRIV_TYPE(struct ice_xdp_buff);
+	desc.src = &ctx_ptr;
+	desc.off = offsetof(struct ice_xdp_buff, pkt_ctx) -
+		   sizeof(struct xdp_buff);
+	desc.bytes = sizeof(ctx_ptr);
+	xsk_pool_fill_cb(ring->xsk_pool, &desc);
+}
+
+/**
+ * ice_get_frame_sz - calculate xdp_buff::frame_sz
+ * @rx_ring: the ring being configured
+ *
+ * Return frame size based on underlying PAGE_SIZE
+ */
+static unsigned int ice_get_frame_sz(struct ice_rx_ring *rx_ring)
+{
+	unsigned int frame_sz;
+
+#if (PAGE_SIZE >= 8192)
+	frame_sz = rx_ring->rx_buf_len;
+#else
+	frame_sz = ice_rx_pg_size(rx_ring) / 2;
+#endif
+
+	return frame_sz;
+}
+
+/**
+ * ice_vsi_cfg_rxq - Configure an Rx queue
+ * @ring: the ring being configured
+ *
+ * Return 0 on success and a negative value on error.
+ */
+static int ice_vsi_cfg_rxq(struct ice_rx_ring *ring)
+{
+	struct device *dev = ice_pf_to_dev(ring->vsi->back);
+	u32 num_bufs = ICE_RX_DESC_UNUSED(ring);
+	int err;
+
+	ring->rx_buf_len = ring->vsi->rx_buf_len;
+
+	if (ring->vsi->type == ICE_VSI_PF || ring->vsi->type == ICE_VSI_SF) {
+		if (!xdp_rxq_info_is_reg(&ring->xdp_rxq)) {
+			err = __xdp_rxq_info_reg(&ring->xdp_rxq, ring->netdev,
+						 ring->q_index,
+						 ring->q_vector->napi.napi_id,
+						 ring->rx_buf_len);
+			if (err)
+				return err;
+		}
+
+		ice_rx_xsk_pool(ring);
+		if (ring->xsk_pool) {
+			xdp_rxq_info_unreg(&ring->xdp_rxq);
+
+			ring->rx_buf_len =
+				xsk_pool_get_rx_frame_size(ring->xsk_pool);
+			err = __xdp_rxq_info_reg(&ring->xdp_rxq, ring->netdev,
+						 ring->q_index,
+						 ring->q_vector->napi.napi_id,
+						 ring->rx_buf_len);
+			if (err)
+				return err;
+			err = xdp_rxq_info_reg_mem_model(&ring->xdp_rxq,
+							 MEM_TYPE_XSK_BUFF_POOL,
+							 NULL);
+			if (err)
+				return err;
+			xsk_pool_set_rxq_info(ring->xsk_pool, &ring->xdp_rxq);
+			ice_xsk_pool_fill_cb(ring);
+
+			dev_info(dev, "Registered XDP mem model MEM_TYPE_XSK_BUFF_POOL on Rx ring %d\n",
+				 ring->q_index);
+		} else {
+			if (!xdp_rxq_info_is_reg(&ring->xdp_rxq)) {
+				err = __xdp_rxq_info_reg(&ring->xdp_rxq, ring->netdev,
+							 ring->q_index,
+							 ring->q_vector->napi.napi_id,
+							 ring->rx_buf_len);
+				if (err)
+					return err;
+			}
+
+			err = xdp_rxq_info_reg_mem_model(&ring->xdp_rxq,
+							 MEM_TYPE_PAGE_SHARED,
+							 NULL);
+			if (err)
+				return err;
+		}
+	}
+
+	xdp_init_buff(&ring->xdp, ice_get_frame_sz(ring), &ring->xdp_rxq);
+	ring->xdp.data = NULL;
+	ring->xdp_ext.pkt_ctx = &ring->pkt_ctx;
+	err = ice_setup_rx_ctx(ring);
+	if (err) {
+		dev_err(dev, "ice_setup_rx_ctx failed for RxQ %d, err %d\n",
+			ring->q_index, err);
+		return err;
+	}
+
+	if (ring->xsk_pool) {
+		bool ok;
+
+		if (!xsk_buff_can_alloc(ring->xsk_pool, num_bufs)) {
+			dev_warn(dev, "XSK buffer pool does not provide enough addresses to fill %d buffers on Rx ring %d\n",
+				 num_bufs, ring->q_index);
+			dev_warn(dev, "Change Rx ring/fill queue size to avoid performance issues\n");
+
+			return 0;
+		}
+
+		ok = ice_alloc_rx_bufs_zc(ring, ring->xsk_pool, num_bufs);
+		if (!ok) {
+			u16 pf_q = ring->vsi->rxq_map[ring->q_index];
+
+			dev_info(dev, "Failed to allocate some buffers on XSK buffer pool enabled Rx ring %d (pf_q %d)\n",
+				 ring->q_index, pf_q);
+		}
+
+		return 0;
+	}
+
+	ice_alloc_rx_bufs(ring, num_bufs);
+
+	return 0;
+}
+
+int ice_vsi_cfg_single_rxq(struct ice_vsi *vsi, u16 q_idx)
+{
+	if (q_idx >= vsi->num_rxq)
+		return -EINVAL;
+
+	return ice_vsi_cfg_rxq(vsi->rx_rings[q_idx]);
+}
+
+/**
+ * ice_vsi_cfg_frame_size - setup max frame size and Rx buffer length
+ * @vsi: VSI
+ */
+static void ice_vsi_cfg_frame_size(struct ice_vsi *vsi)
+{
+	if (!vsi->netdev || test_bit(ICE_FLAG_LEGACY_RX, vsi->back->flags)) {
+		vsi->max_frame = ICE_MAX_FRAME_LEGACY_RX;
+		vsi->rx_buf_len = ICE_RXBUF_1664;
+#if (PAGE_SIZE < 8192)
+	} else if (!ICE_2K_TOO_SMALL_WITH_PADDING &&
+		   (vsi->netdev->mtu <= ETH_DATA_LEN)) {
+		vsi->max_frame = ICE_RXBUF_1536 - NET_IP_ALIGN;
+		vsi->rx_buf_len = ICE_RXBUF_1536 - NET_IP_ALIGN;
+#endif
+	} else {
+		vsi->max_frame = ICE_AQ_SET_MAC_FRAME_SIZE_MAX;
+		vsi->rx_buf_len = ICE_RXBUF_3072;
+	}
+}
+
+/**
+ * ice_vsi_cfg_rxqs - Configure the VSI for Rx
+ * @vsi: the VSI being configured
+ *
+ * Return 0 on success and a negative value on error
+ * Configure the Rx VSI for operation.
+ */
+int ice_vsi_cfg_rxqs(struct ice_vsi *vsi)
+{
+	u16 i;
+
+	if (vsi->type == ICE_VSI_VF)
+		goto setup_rings;
+
+	ice_vsi_cfg_frame_size(vsi);
+setup_rings:
+	/* set up individual rings */
+	ice_for_each_rxq(vsi, i) {
+		int err = ice_vsi_cfg_rxq(vsi->rx_rings[i]);
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (err)
 			return err;
 	}

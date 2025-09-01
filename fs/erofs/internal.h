@@ -166,6 +166,7 @@ struct erofs_sb_info {
 	/* sysfs support */
 	struct kobject s_kobj;		/* /sys/fs/erofs/<devname> */
 	struct completion s_kobj_unregister;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	erofs_off_t dir_ra_bytes;
 
 	/* fscache support */
@@ -408,6 +409,250 @@ int erofs_map_blocks(struct inode *inode, struct erofs_map_blocks *map);
 void erofs_onlinefolio_init(struct folio *folio);
 void erofs_onlinefolio_split(struct folio *folio);
 void erofs_onlinefolio_end(struct folio *folio, int err, bool dirty);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	/* fscache support */
+	struct fscache_volume *volume;
+	struct erofs_domain *domain;
+	char *fsid;
+	char *domain_id;
+};
+
+#define EROFS_SB(sb) ((struct erofs_sb_info *)(sb)->s_fs_info)
+#define EROFS_I_SB(inode) ((struct erofs_sb_info *)(inode)->i_sb->s_fs_info)
+
+/* Mount flags set via mount options or defaults */
+#define EROFS_MOUNT_XATTR_USER		0x00000010
+#define EROFS_MOUNT_POSIX_ACL		0x00000020
+#define EROFS_MOUNT_DAX_ALWAYS		0x00000040
+#define EROFS_MOUNT_DAX_NEVER		0x00000080
+#define EROFS_MOUNT_DIRECT_IO		0x00000100
+
+#define clear_opt(opt, option)	((opt)->mount_opt &= ~EROFS_MOUNT_##option)
+#define set_opt(opt, option)	((opt)->mount_opt |= EROFS_MOUNT_##option)
+#define test_opt(opt, option)	((opt)->mount_opt & EROFS_MOUNT_##option)
+
+static inline bool erofs_is_fileio_mode(struct erofs_sb_info *sbi)
+{
+	return IS_ENABLED(CONFIG_EROFS_FS_BACKED_BY_FILE) && sbi->dif0.file;
+}
+
+static inline bool erofs_is_fscache_mode(struct super_block *sb)
+{
+	return IS_ENABLED(CONFIG_EROFS_FS_ONDEMAND) &&
+			!erofs_is_fileio_mode(EROFS_SB(sb)) && !sb->s_bdev;
+}
+
+enum {
+	EROFS_ZIP_CACHE_DISABLED,
+	EROFS_ZIP_CACHE_READAHEAD,
+	EROFS_ZIP_CACHE_READAROUND
+};
+
+enum erofs_kmap_type {
+	EROFS_NO_KMAP,		/* don't map the buffer */
+	EROFS_KMAP,		/* use kmap_local_page() to map the buffer */
+};
+
+struct erofs_buf {
+	struct address_space *mapping;
+	struct file *file;
+	u64 off;
+	struct page *page;
+	void *base;
+	enum erofs_kmap_type kmap_type;
+};
+#define __EROFS_BUF_INITIALIZER	((struct erofs_buf){ .page = NULL })
+
+#define erofs_blknr(sb, addr)	((erofs_blk_t)((addr) >> (sb)->s_blocksize_bits))
+#define erofs_blkoff(sb, addr)	((addr) & ((sb)->s_blocksize - 1))
+#define erofs_pos(sb, blk)	((erofs_off_t)(blk) << (sb)->s_blocksize_bits)
+#define erofs_iblks(i)	(round_up((i)->i_size, i_blocksize(i)) >> (i)->i_blkbits)
+
+#define EROFS_FEATURE_FUNCS(name, compat, feature) \
+static inline bool erofs_sb_has_##name(struct erofs_sb_info *sbi) \
+{ \
+	return sbi->feature_##compat & EROFS_FEATURE_##feature; \
+}
+
+EROFS_FEATURE_FUNCS(zero_padding, incompat, INCOMPAT_ZERO_PADDING)
+EROFS_FEATURE_FUNCS(compr_cfgs, incompat, INCOMPAT_COMPR_CFGS)
+EROFS_FEATURE_FUNCS(big_pcluster, incompat, INCOMPAT_BIG_PCLUSTER)
+EROFS_FEATURE_FUNCS(chunked_file, incompat, INCOMPAT_CHUNKED_FILE)
+EROFS_FEATURE_FUNCS(device_table, incompat, INCOMPAT_DEVICE_TABLE)
+EROFS_FEATURE_FUNCS(compr_head2, incompat, INCOMPAT_COMPR_HEAD2)
+EROFS_FEATURE_FUNCS(ztailpacking, incompat, INCOMPAT_ZTAILPACKING)
+EROFS_FEATURE_FUNCS(fragments, incompat, INCOMPAT_FRAGMENTS)
+EROFS_FEATURE_FUNCS(dedupe, incompat, INCOMPAT_DEDUPE)
+EROFS_FEATURE_FUNCS(xattr_prefixes, incompat, INCOMPAT_XATTR_PREFIXES)
+EROFS_FEATURE_FUNCS(sb_chksum, compat, COMPAT_SB_CHKSUM)
+EROFS_FEATURE_FUNCS(xattr_filter, compat, COMPAT_XATTR_FILTER)
+
+/* atomic flag definitions */
+#define EROFS_I_EA_INITED_BIT	0
+#define EROFS_I_Z_INITED_BIT	1
+
+/* bitlock definitions (arranged in reverse order) */
+#define EROFS_I_BL_XATTR_BIT	(BITS_PER_LONG - 1)
+#define EROFS_I_BL_Z_BIT	(BITS_PER_LONG - 2)
+
+struct erofs_inode {
+	erofs_nid_t nid;
+
+	/* atomic flags (including bitlocks) */
+	unsigned long flags;
+
+	unsigned char datalayout;
+	unsigned char inode_isize;
+	unsigned int xattr_isize;
+
+	unsigned int xattr_name_filter;
+	unsigned int xattr_shared_count;
+	unsigned int *xattr_shared_xattrs;
+
+	union {
+		erofs_blk_t raw_blkaddr;
+		struct {
+			unsigned short	chunkformat;
+			unsigned char	chunkbits;
+		};
+#ifdef CONFIG_EROFS_FS_ZIP
+		struct {
+			unsigned short z_advise;
+			unsigned char  z_algorithmtype[2];
+			unsigned char  z_logical_clusterbits;
+			unsigned long  z_tailextent_headlcn;
+			union {
+				struct {
+					erofs_off_t    z_idataoff;
+					unsigned short z_idata_size;
+				};
+				erofs_off_t z_fragmentoff;
+			};
+		};
+#endif	/* CONFIG_EROFS_FS_ZIP */
+	};
+	/* the corresponding vfs inode */
+	struct inode vfs_inode;
+};
+
+#define EROFS_I(ptr)	container_of(ptr, struct erofs_inode, vfs_inode)
+
+static inline erofs_off_t erofs_iloc(struct inode *inode)
+{
+	struct erofs_sb_info *sbi = EROFS_I_SB(inode);
+
+	return erofs_pos(inode->i_sb, sbi->meta_blkaddr) +
+		(EROFS_I(inode)->nid << sbi->islotbits);
+}
+
+static inline unsigned int erofs_inode_version(unsigned int ifmt)
+{
+	return (ifmt >> EROFS_I_VERSION_BIT) & EROFS_I_VERSION_MASK;
+}
+
+static inline unsigned int erofs_inode_datalayout(unsigned int ifmt)
+{
+	return (ifmt >> EROFS_I_DATALAYOUT_BIT) & EROFS_I_DATALAYOUT_MASK;
+}
+
+/* reclaiming is never triggered when allocating new folios. */
+static inline struct folio *erofs_grab_folio_nowait(struct address_space *as,
+						    pgoff_t index)
+{
+	return __filemap_get_folio(as, index,
+			FGP_LOCK|FGP_CREAT|FGP_NOFS|FGP_NOWAIT,
+			readahead_gfp_mask(as) & ~__GFP_RECLAIM);
+}
+
+/* Has a disk mapping */
+#define EROFS_MAP_MAPPED	0x0001
+/* Located in metadata (could be copied from bd_inode) */
+#define EROFS_MAP_META		0x0002
+/* The extent is encoded */
+#define EROFS_MAP_ENCODED	0x0004
+/* The length of extent is full */
+#define EROFS_MAP_FULL_MAPPED	0x0008
+/* Located in the special packed inode */
+#define EROFS_MAP_FRAGMENT	0x0010
+/* The extent refers to partial decompressed data */
+#define EROFS_MAP_PARTIAL_REF	0x0020
+
+struct erofs_map_blocks {
+	struct erofs_buf buf;
+
+	erofs_off_t m_pa, m_la;
+	u64 m_plen, m_llen;
+
+	unsigned short m_deviceid;
+	char m_algorithmformat;
+	unsigned int m_flags;
+};
+
+/*
+ * Used to get the exact decompressed length, e.g. fiemap (consider lookback
+ * approach instead if possible since it's more metadata lightweight.)
+ */
+#define EROFS_GET_BLOCKS_FIEMAP		0x0001
+/* Used to map the whole extent if non-negligible data is requested for LZMA */
+#define EROFS_GET_BLOCKS_READMORE	0x0002
+/* Used to map tail extent for tailpacking inline or fragment pcluster */
+#define EROFS_GET_BLOCKS_FINDTAIL	0x0004
+
+enum {
+	Z_EROFS_COMPRESSION_SHIFTED = Z_EROFS_COMPRESSION_MAX,
+	Z_EROFS_COMPRESSION_INTERLACED,
+	Z_EROFS_COMPRESSION_RUNTIME_MAX
+};
+
+struct erofs_map_dev {
+	struct super_block *m_sb;
+	struct erofs_device_info *m_dif;
+	struct block_device *m_bdev;
+
+	erofs_off_t m_pa;
+	unsigned int m_deviceid;
+};
+
+extern const struct super_operations erofs_sops;
+
+extern const struct address_space_operations erofs_aops;
+extern const struct address_space_operations erofs_fileio_aops;
+extern const struct address_space_operations z_erofs_aops;
+extern const struct address_space_operations erofs_fscache_access_aops;
+
+extern const struct inode_operations erofs_generic_iops;
+extern const struct inode_operations erofs_symlink_iops;
+extern const struct inode_operations erofs_fast_symlink_iops;
+extern const struct inode_operations erofs_dir_iops;
+
+extern const struct file_operations erofs_file_fops;
+extern const struct file_operations erofs_dir_fops;
+
+extern const struct iomap_ops z_erofs_iomap_report_ops;
+
+/* flags for erofs_fscache_register_cookie() */
+#define EROFS_REG_COOKIE_SHARE		0x0001
+#define EROFS_REG_COOKIE_NEED_NOEXIST	0x0002
+
+void *erofs_read_metadata(struct super_block *sb, struct erofs_buf *buf,
+			  erofs_off_t *offset, int *lengthp);
+void erofs_unmap_metabuf(struct erofs_buf *buf);
+void erofs_put_metabuf(struct erofs_buf *buf);
+void *erofs_bread(struct erofs_buf *buf, erofs_off_t offset,
+		  enum erofs_kmap_type type);
+void erofs_init_metabuf(struct erofs_buf *buf, struct super_block *sb);
+void *erofs_read_metabuf(struct erofs_buf *buf, struct super_block *sb,
+			 erofs_off_t offset, enum erofs_kmap_type type);
+int erofs_map_dev(struct super_block *sb, struct erofs_map_dev *dev);
+int erofs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+		 u64 start, u64 len);
+int erofs_map_blocks(struct inode *inode, struct erofs_map_blocks *map);
+void erofs_onlinefolio_init(struct folio *folio);
+void erofs_onlinefolio_split(struct folio *folio);
+void erofs_onlinefolio_end(struct folio *folio, int err);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 struct inode *erofs_iget(struct super_block *sb, erofs_nid_t nid);
 int erofs_getattr(struct mnt_idmap *idmap, const struct path *path,
 		  struct kstat *stat, u32 request_mask,

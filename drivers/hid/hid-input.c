@@ -596,6 +596,7 @@ static void hidinput_cleanup_battery(struct hid_device *dev)
 }
 
 static bool hidinput_update_battery_charge_status(struct hid_device *dev,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 						  unsigned int usage, int value)
 {
 	switch (usage) {
@@ -626,6 +627,36 @@ static void hidinput_update_battery(struct hid_device *dev, unsigned int usage,
 		return;
 
 	if (value < dev->battery_min || value > dev->battery_max)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			                                       unsigned int usage, int value)
+{
+	switch (usage) {
+		case HID_BAT_CHARGING:
+			dev->battery_charge_status = value ?
+					POWER_SUPPLY_STATUS_CHARGING :
+					POWER_SUPPLY_STATUS_DISCHARGING;
+			return true;
+	}
+
+	return false;
+}
+
+static void hidinput_update_battery(struct hid_device *dev, unsigned int usage,
+				    int value)
+{
+	int capacity;
+
+	if (!dev->battery)
+		return;
+
+	if (hidinput_update_battery_charge_status(dev, usage, value)) {
+		power_supply_changed(dev->battery);
+		return;
+	}
+
+	if (value == 0 || value < dev->battery_min || value > dev->battery_max)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return;
 
 	capacity = hidinput_scale_battery_capacity(dev, value);

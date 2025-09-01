@@ -612,6 +612,7 @@ extern int ceph_mds_check_access(struct ceph_mds_client *mdsc, char *tpath,
 
 extern void ceph_mdsc_pre_umount(struct ceph_mds_client *mdsc);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /*
  * Structure to group path-related output parameters for build_*_path functions
  */
@@ -630,6 +631,17 @@ static inline void ceph_mdsc_free_path_info(const struct ceph_path_info *path_in
 
 extern char *ceph_mdsc_build_path(struct ceph_mds_client *mdsc,
 				  struct dentry *dentry, struct ceph_path_info *path_info,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static inline void ceph_mdsc_free_path(char *path, int len)
+{
+	if (!IS_ERR_OR_NULL(path))
+		__putname(path - (PATH_MAX - 1 - len));
+}
+
+extern char *ceph_mdsc_build_path(struct ceph_mds_client *mdsc,
+				  struct dentry *dentry, int *plen, u64 *base,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				  int for_wire);
 
 extern void __ceph_mdsc_drop_dentry_lease(struct dentry *dentry);

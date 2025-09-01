@@ -1239,6 +1239,7 @@ static irqreturn_t irq0_isr(int irq, void *devid)
 				/* clear CS control register */
 				memset_io(reg_ctrl, 0, sizeof(val));
 			}
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		} else {
 			regmap_read(xcvr->regmap, FSL_XCVR_RX_CS_DATA_0,
 				    (u32 *)&xcvr->rx_iec958.status[0]);
@@ -1259,6 +1260,9 @@ static irqreturn_t irq0_isr(int irq, void *devid)
 			}
 			regmap_set_bits(xcvr->regmap, FSL_XCVR_RX_DPTH_CTRL,
 					FSL_XCVR_RX_DPTH_CTRL_CSA);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 	}
 	if (isr & FSL_XCVR_IRQ_NEW_UD) {

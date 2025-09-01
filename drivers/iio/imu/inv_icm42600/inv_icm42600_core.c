@@ -103,6 +103,7 @@ const struct regmap_config inv_icm42600_spi_regmap_config = {
 EXPORT_SYMBOL_NS_GPL(inv_icm42600_spi_regmap_config, IIO_ICM42600);
 
 struct inv_icm42600_hw {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u8 whoami;
 	const char *name;
 	const struct inv_icm42600_conf *conf;
@@ -191,6 +192,97 @@ inv_icm42600_get_mount_matrix(const struct iio_dev *indio_dev,
 u32 inv_icm42600_odr_to_period(enum inv_icm42600_odr odr)
 {
 	static u32 odr_periods[INV_ICM42600_ODR_NB] = {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	uint8_t whoami;
+	const char *name;
+	const struct inv_icm42600_conf *conf;
+};
+
+/* chip initial default configuration */
+static const struct inv_icm42600_conf inv_icm42600_default_conf = {
+	.gyro = {
+		.mode = INV_ICM42600_SENSOR_MODE_OFF,
+		.fs = INV_ICM42600_GYRO_FS_2000DPS,
+		.odr = INV_ICM42600_ODR_50HZ,
+		.filter = INV_ICM42600_FILTER_BW_ODR_DIV_2,
+	},
+	.accel = {
+		.mode = INV_ICM42600_SENSOR_MODE_OFF,
+		.fs = INV_ICM42600_ACCEL_FS_16G,
+		.odr = INV_ICM42600_ODR_50HZ,
+		.filter = INV_ICM42600_FILTER_BW_ODR_DIV_2,
+	},
+	.temp_en = false,
+};
+
+static const struct inv_icm42600_conf inv_icm42686_default_conf = {
+	.gyro = {
+		.mode = INV_ICM42600_SENSOR_MODE_OFF,
+		.fs = INV_ICM42686_GYRO_FS_4000DPS,
+		.odr = INV_ICM42600_ODR_50HZ,
+		.filter = INV_ICM42600_FILTER_BW_ODR_DIV_2,
+	},
+	.accel = {
+		.mode = INV_ICM42600_SENSOR_MODE_OFF,
+		.fs = INV_ICM42686_ACCEL_FS_32G,
+		.odr = INV_ICM42600_ODR_50HZ,
+		.filter = INV_ICM42600_FILTER_BW_ODR_DIV_2,
+	},
+	.temp_en = false,
+};
+
+static const struct inv_icm42600_hw inv_icm42600_hw[INV_CHIP_NB] = {
+	[INV_CHIP_ICM42600] = {
+		.whoami = INV_ICM42600_WHOAMI_ICM42600,
+		.name = "icm42600",
+		.conf = &inv_icm42600_default_conf,
+	},
+	[INV_CHIP_ICM42602] = {
+		.whoami = INV_ICM42600_WHOAMI_ICM42602,
+		.name = "icm42602",
+		.conf = &inv_icm42600_default_conf,
+	},
+	[INV_CHIP_ICM42605] = {
+		.whoami = INV_ICM42600_WHOAMI_ICM42605,
+		.name = "icm42605",
+		.conf = &inv_icm42600_default_conf,
+	},
+	[INV_CHIP_ICM42686] = {
+		.whoami = INV_ICM42600_WHOAMI_ICM42686,
+		.name = "icm42686",
+		.conf = &inv_icm42686_default_conf,
+	},
+	[INV_CHIP_ICM42622] = {
+		.whoami = INV_ICM42600_WHOAMI_ICM42622,
+		.name = "icm42622",
+		.conf = &inv_icm42600_default_conf,
+	},
+	[INV_CHIP_ICM42688] = {
+		.whoami = INV_ICM42600_WHOAMI_ICM42688,
+		.name = "icm42688",
+		.conf = &inv_icm42600_default_conf,
+	},
+	[INV_CHIP_ICM42631] = {
+		.whoami = INV_ICM42600_WHOAMI_ICM42631,
+		.name = "icm42631",
+		.conf = &inv_icm42600_default_conf,
+	},
+};
+
+const struct iio_mount_matrix *
+inv_icm42600_get_mount_matrix(const struct iio_dev *indio_dev,
+			      const struct iio_chan_spec *chan)
+{
+	const struct inv_icm42600_state *st = iio_device_get_drvdata(indio_dev);
+
+	return &st->orientation;
+}
+
+uint32_t inv_icm42600_odr_to_period(enum inv_icm42600_odr odr)
+{
+	static uint32_t odr_periods[INV_ICM42600_ODR_NB] = {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		/* reserved values */
 		0, 0, 0,
 		/* 8kHz */

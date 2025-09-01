@@ -177,6 +177,7 @@ static int vfs_dentry_acceptable(void *context, struct dentry *dentry)
 		return 1;
 
 	/*
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	 * Verify that the decoded dentry itself has a valid id mapping.
 	 * In case the decoded dentry is the mountfd root itself, this
 	 * verifies that the mountfd inode itself has a valid id mapping.
@@ -185,6 +186,9 @@ static int vfs_dentry_acceptable(void *context, struct dentry *dentry)
 		return 0;
 
 	/*
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	 * It's racy as we're not taking rename_lock but we're able to ignore
 	 * permissions and we just need an approximation whether we were able
 	 * to follow a path to the file.

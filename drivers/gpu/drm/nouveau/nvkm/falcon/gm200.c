@@ -103,6 +103,7 @@ gm200_flcn_pio_imem_wr_init(struct nvkm_falcon *falcon, u8 port, bool sec, u32 i
 static void
 gm200_flcn_pio_imem_wr(struct nvkm_falcon *falcon, u8 port, const u8 *img, int len, u16 tag)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	nvkm_falcon_wr32(falcon, 0x188 + (port * 0x10), tag);
 	while (len >= 4) {
 		nvkm_falcon_wr32(falcon, 0x184 + (port * 0x10), *(u32 *)img);
@@ -287,6 +288,200 @@ gm200_flcn_fw_load(struct nvkm_falcon_fw *fw)
 	}
 
 	if (fw->boot) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	nvkm_falcon_wr32(falcon, 0x188 + (port * 0x10), tag++);
+	while (len >= 4) {
+		nvkm_falcon_wr32(falcon, 0x184 + (port * 0x10), *(u32 *)img);
+		img += 4;
+		len -= 4;
+	}
+}
+
+const struct nvkm_falcon_func_pio
+gm200_flcn_imem_pio = {
+	.min = 0x100,
+	.max = 0x100,
+	.wr_init = gm200_flcn_pio_imem_wr_init,
+	.wr = gm200_flcn_pio_imem_wr,
+};
+
+int
+gm200_flcn_bind_stat(struct nvkm_falcon *falcon, bool intr)
+{
+	if (intr && !(nvkm_falcon_rd32(falcon, 0x008) & 0x00000008))
+		return -1;
+
+	return (nvkm_falcon_rd32(falcon, 0x0dc) & 0x00007000) >> 12;
+}
+
+void
+gm200_flcn_bind_inst(struct nvkm_falcon *falcon, int target, u64 addr)
+{
+	nvkm_falcon_mask(falcon, 0x604, 0x00000007, 0x00000000); /* DMAIDX_VIRT */
+	nvkm_falcon_wr32(falcon, 0x054, (1 << 30) | (target << 28) | (addr >> 12));
+	nvkm_falcon_mask(falcon, 0x090, 0x00010000, 0x00010000);
+	nvkm_falcon_mask(falcon, 0x0a4, 0x00000008, 0x00000008);
+}
+
+int
+gm200_flcn_reset_wait_mem_scrubbing(struct nvkm_falcon *falcon)
+{
+	nvkm_falcon_mask(falcon, 0x040, 0x00000000, 0x00000000);
+
+	if (nvkm_msec(falcon->owner->device, 10,
+		if (!(nvkm_falcon_rd32(falcon, 0x10c) & 0x00000006))
+			break;
+	) < 0)
+		return -ETIMEDOUT;
+
+	return 0;
+}
+
+int
+gm200_flcn_enable(struct nvkm_falcon *falcon)
+{
+	struct nvkm_device *device = falcon->owner->device;
+	int ret;
+
+	if (falcon->func->reset_eng) {
+		ret = falcon->func->reset_eng(falcon);
+		if (ret)
+			return ret;
+	}
+
+	if (falcon->func->select) {
+		ret = falcon->func->select(falcon);
+		if (ret)
+			return ret;
+	}
+
+	if (falcon->func->reset_pmc)
+		nvkm_mc_enable(device, falcon->owner->type, falcon->owner->inst);
+
+	ret = falcon->func->reset_wait_mem_scrubbing(falcon);
+	if (ret)
+		return ret;
+
+	nvkm_falcon_wr32(falcon, 0x084, nvkm_rd32(device, 0x000000));
+	return 0;
+}
+
+int
+gm200_flcn_disable(struct nvkm_falcon *falcon)
+{
+	struct nvkm_device *device = falcon->owner->device;
+	int ret;
+
+	if (falcon->func->select) {
+		ret = falcon->func->select(falcon);
+		if (ret)
+			return ret;
+	}
+
+	nvkm_falcon_mask(falcon, 0x048, 0x00000003, 0x00000000);
+	nvkm_falcon_wr32(falcon, 0x014, 0xffffffff);
+
+	if (falcon->func->reset_pmc) {
+		if (falcon->func->reset_prep) {
+			ret = falcon->func->reset_prep(falcon);
+			if (ret)
+				return ret;
+		}
+
+		nvkm_mc_disable(device, falcon->owner->type, falcon->owner->inst);
+	}
+
+	if (falcon->func->reset_eng) {
+		ret = falcon->func->reset_eng(falcon);
+		if (ret)
+			return ret;
+	}
+
+	return 0;
+}
+
+int
+gm200_flcn_fw_boot(struct nvkm_falcon_fw *fw, u32 *pmbox0, u32 *pmbox1, u32 mbox0_ok, u32 irqsclr)
+{
+	struct nvkm_falcon *falcon = fw->falcon;
+	u32 mbox0, mbox1;
+	int ret = 0;
+
+	nvkm_falcon_wr32(falcon, 0x040, pmbox0 ? *pmbox0 : 0xcafebeef);
+	if (pmbox1)
+		nvkm_falcon_wr32(falcon, 0x044, *pmbox1);
+
+	nvkm_falcon_wr32(falcon, 0x104, fw->boot_addr);
+	nvkm_falcon_wr32(falcon, 0x100, 0x00000002);
+
+	if (nvkm_msec(falcon->owner->device, 2000,
+		if (nvkm_falcon_rd32(falcon, 0x100) & 0x00000010)
+			break;
+	) < 0)
+		ret = -ETIMEDOUT;
+
+	mbox0 = nvkm_falcon_rd32(falcon, 0x040);
+	mbox1 = nvkm_falcon_rd32(falcon, 0x044);
+	if (FLCN_ERRON(falcon, ret || mbox0 != mbox0_ok, "mbox %08x %08x", mbox0, mbox1))
+		ret = ret ?: -EIO;
+
+	if (irqsclr)
+		nvkm_falcon_mask(falcon, 0x004, 0xffffffff, irqsclr);
+
+	return ret;
+}
+
+int
+gm200_flcn_fw_load(struct nvkm_falcon_fw *fw)
+{
+	struct nvkm_falcon *falcon = fw->falcon;
+	int target, ret;
+
+	if (fw->inst) {
+		nvkm_falcon_mask(falcon, 0x048, 0x00000001, 0x00000001);
+
+		switch (nvkm_memory_target(fw->inst)) {
+		case NVKM_MEM_TARGET_VRAM: target = 0; break;
+		case NVKM_MEM_TARGET_HOST: target = 2; break;
+		case NVKM_MEM_TARGET_NCOH: target = 3; break;
+		default:
+			WARN_ON(1);
+			return -EINVAL;
+		}
+
+		falcon->func->bind_inst(falcon, target, nvkm_memory_addr(fw->inst));
+
+		if (nvkm_msec(falcon->owner->device, 10,
+			if (falcon->func->bind_stat(falcon, falcon->func->bind_intr) == 5)
+				break;
+		) < 0)
+			return -ETIMEDOUT;
+
+		nvkm_falcon_mask(falcon, 0x004, 0x00000008, 0x00000008);
+		nvkm_falcon_mask(falcon, 0x058, 0x00000002, 0x00000002);
+
+		if (nvkm_msec(falcon->owner->device, 10,
+			if (falcon->func->bind_stat(falcon, false) == 0)
+				break;
+		) < 0)
+			return -ETIMEDOUT;
+	} else {
+		nvkm_falcon_mask(falcon, 0x624, 0x00000080, 0x00000080);
+		nvkm_falcon_wr32(falcon, 0x10c, 0x00000000);
+	}
+
+	if (fw->boot) {
+		switch (nvkm_memory_target(&fw->fw.mem.memory)) {
+		case NVKM_MEM_TARGET_VRAM: target = 4; break;
+		case NVKM_MEM_TARGET_HOST: target = 5; break;
+		case NVKM_MEM_TARGET_NCOH: target = 6; break;
+		default:
+			WARN_ON(1);
+			return -EINVAL;
+		}
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		ret = nvkm_falcon_pio_wr(falcon, fw->boot, 0, 0,
 					 IMEM, falcon->code.limit - fw->boot_size, fw->boot_size,
 					 fw->boot_addr >> 8, false);

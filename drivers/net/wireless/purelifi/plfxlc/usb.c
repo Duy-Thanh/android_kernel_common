@@ -604,6 +604,7 @@ static int probe(struct usb_interface *intf,
 	r = plfxlc_upload_mac_and_serial(intf, hw_address, serial_number);
 	if (r) {
 		dev_err(&intf->dev, "MAC and Serial upload failed (%d)\n", r);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		goto error_free_hw;
 	}
 
@@ -731,6 +732,137 @@ static void disconnect(struct usb_interface *intf)
 	usb_reset_device(interface_to_usbdev(intf));
 
 	plfxlc_mac_release_hw(hw);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		goto error;
+	}
+
+	chip->unit_type = STA;
+	dev_err(&intf->dev, "Unit type is station");
+
+	r = plfxlc_mac_preinit_hw(hw, hw_address);
+	if (r) {
+		dev_err(&intf->dev, "Init mac failed (%d)\n", r);
+		goto error;
+	}
+
+	r = ieee80211_register_hw(hw);
+	if (r) {
+		dev_err(&intf->dev, "Register device failed (%d)\n", r);
+		goto error;
+	}
+
+	if ((le16_to_cpu(interface_to_usbdev(intf)->descriptor.idVendor) ==
+				PURELIFI_XL_VENDOR_ID_0) &&
+	    (le16_to_cpu(interface_to_usbdev(intf)->descriptor.idProduct) ==
+				PURELIFI_XL_PRODUCT_ID_0)) {
+		r = plfxlc_download_xl_firmware(intf);
+	} else {
+		r = plfxlc_download_fpga(intf);
+	}
+	if (r != 0) {
+		dev_err(&intf->dev, "FPGA download failed (%d)\n", r);
+		goto error;
+	}
+
+	tx->mac_fifo_full = 0;
+	spin_lock_init(&tx->lock);
+
+	msleep(PLF_MSLEEP_TIME);
+	r = plfxlc_usb_init_hw(usb);
+	if (r < 0) {
+		dev_err(&intf->dev, "usb_init_hw failed (%d)\n", r);
+		goto error;
+	}
+
+	msleep(PLF_MSLEEP_TIME);
+	r = plfxlc_chip_switch_radio(chip, PLFXLC_RADIO_ON);
+	if (r < 0) {
+		dev_dbg(&intf->dev, "chip_switch_radio_on failed (%d)\n", r);
+		goto error;
+	}
+
+	msleep(PLF_MSLEEP_TIME);
+	r = plfxlc_chip_set_rate(chip, 8);
+	if (r < 0) {
+		dev_dbg(&intf->dev, "chip_set_rate failed (%d)\n", r);
+		goto error;
+	}
+
+	msleep(PLF_MSLEEP_TIME);
+	r = plfxlc_usb_wreq(usb->ez_usb,
+			    hw_address, ETH_ALEN, USB_REQ_MAC_WR);
+	if (r < 0) {
+		dev_dbg(&intf->dev, "MAC_WR failure (%d)\n", r);
+		goto error;
+	}
+
+	plfxlc_chip_enable_rxtx(chip);
+
+	/* Initialise the data plane Tx queue */
+	for (i = 0; i < MAX_STA_NUM; i++) {
+		skb_queue_head_init(&tx->station[i].data_list);
+		tx->station[i].flag = 0;
+	}
+
+	tx->station[STA_BROADCAST_INDEX].flag |= STATION_CONNECTED_FLAG;
+	for (i = 0; i < ETH_ALEN; i++)
+		tx->station[STA_BROADCAST_INDEX].mac[i] = 0xFF;
+
+	timer_setup(&tx->tx_retry_timer, slif_data_plane_sap_timer_callb, 0);
+	tx->tx_retry_timer.expires = jiffies + TX_RETRY_BACKOFF_JIFF;
+	add_timer(&tx->tx_retry_timer);
+
+	timer_setup(&usb->sta_queue_cleanup,
+		    sta_queue_cleanup_timer_callb, 0);
+	usb->sta_queue_cleanup.expires = jiffies + STA_QUEUE_CLEANUP_JIFF;
+	add_timer(&usb->sta_queue_cleanup);
+
+	plfxlc_mac_init_hw(hw);
+	usb->initialized = true;
+	return 0;
+error:
+	if (hw) {
+		plfxlc_mac_release(plfxlc_hw_mac(hw));
+		ieee80211_unregister_hw(hw);
+		ieee80211_free_hw(hw);
+	}
+	dev_err(&intf->dev, "pureLifi:Device error");
+	return r;
+}
+
+static void disconnect(struct usb_interface *intf)
+{
+	struct ieee80211_hw *hw = plfxlc_intf_to_hw(intf);
+	struct plfxlc_mac *mac;
+	struct plfxlc_usb *usb;
+
+	/* Either something really bad happened, or
+	 * we're just dealing with a DEVICE_INSTALLER.
+	 */
+	if (!hw)
+		return;
+
+	mac = plfxlc_hw_mac(hw);
+	usb = &mac->chip.usb;
+
+	del_timer_sync(&usb->tx.tx_retry_timer);
+	del_timer_sync(&usb->sta_queue_cleanup);
+
+	ieee80211_unregister_hw(hw);
+
+	plfxlc_chip_disable_rxtx(&mac->chip);
+
+	/* If the disconnect has been caused by a removal of the
+	 * driver module, the reset allows reloading of the driver. If the
+	 * reset will not be executed here, the upload of the firmware in the
+	 * probe function caused by the reloading of the driver will fail.
+	 */
+	usb_reset_device(interface_to_usbdev(intf));
+
+	plfxlc_mac_release(mac);
+	ieee80211_free_hw(hw);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static void plfxlc_usb_resume(struct plfxlc_usb *usb)

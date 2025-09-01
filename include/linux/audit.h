@@ -417,6 +417,7 @@ extern int __audit_log_bprm_fcaps(struct linux_binprm *bprm,
 extern void __audit_log_capset(const struct cred *new, const struct cred *old);
 extern void __audit_mmap_fd(int fd, int flags);
 extern void __audit_openat2_how(struct open_how *how);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 extern void __audit_log_kern_module(const char *name);
 extern void __audit_fanotify(u32 response, struct fanotify_response_info_audit_rule *friar);
 extern void __audit_tk_injoffset(struct timespec64 offset);
@@ -679,6 +680,272 @@ static inline void audit_openat2_how(struct open_how *how)
 
 static inline void audit_log_kern_module(const char *name)
 { }
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+extern void __audit_log_kern_module(char *name);
+extern void __audit_fanotify(u32 response, struct fanotify_response_info_audit_rule *friar);
+extern void __audit_tk_injoffset(struct timespec64 offset);
+extern void __audit_ntp_log(const struct audit_ntp_data *ad);
+extern void __audit_log_nfcfg(const char *name, u8 af, unsigned int nentries,
+			      enum audit_nfcfgop op, gfp_t gfp);
+
+static inline void audit_ipc_obj(struct kern_ipc_perm *ipcp)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_ipc_obj(ipcp);
+}
+static inline void audit_fd_pair(int fd1, int fd2)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_fd_pair(fd1, fd2);
+}
+static inline void audit_ipc_set_perm(unsigned long qbytes, uid_t uid, gid_t gid, umode_t mode)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_ipc_set_perm(qbytes, uid, gid, mode);
+}
+static inline void audit_bprm(struct linux_binprm *bprm)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_bprm(bprm);
+}
+static inline int audit_socketcall(int nargs, unsigned long *args)
+{
+	if (unlikely(!audit_dummy_context()))
+		return __audit_socketcall(nargs, args);
+	return 0;
+}
+
+static inline int audit_socketcall_compat(int nargs, u32 *args)
+{
+	unsigned long a[AUDITSC_ARGS];
+	int i;
+
+	if (audit_dummy_context())
+		return 0;
+
+	for (i = 0; i < nargs; i++)
+		a[i] = (unsigned long)args[i];
+	return __audit_socketcall(nargs, a);
+}
+
+static inline int audit_sockaddr(int len, void *addr)
+{
+	if (unlikely(!audit_dummy_context()))
+		return __audit_sockaddr(len, addr);
+	return 0;
+}
+static inline void audit_mq_open(int oflag, umode_t mode, struct mq_attr *attr)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_mq_open(oflag, mode, attr);
+}
+static inline void audit_mq_sendrecv(mqd_t mqdes, size_t msg_len, unsigned int msg_prio, const struct timespec64 *abs_timeout)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_mq_sendrecv(mqdes, msg_len, msg_prio, abs_timeout);
+}
+static inline void audit_mq_notify(mqd_t mqdes, const struct sigevent *notification)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_mq_notify(mqdes, notification);
+}
+static inline void audit_mq_getsetattr(mqd_t mqdes, struct mq_attr *mqstat)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_mq_getsetattr(mqdes, mqstat);
+}
+
+static inline int audit_log_bprm_fcaps(struct linux_binprm *bprm,
+				       const struct cred *new,
+				       const struct cred *old)
+{
+	if (unlikely(!audit_dummy_context()))
+		return __audit_log_bprm_fcaps(bprm, new, old);
+	return 0;
+}
+
+static inline void audit_log_capset(const struct cred *new,
+				   const struct cred *old)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_log_capset(new, old);
+}
+
+static inline void audit_mmap_fd(int fd, int flags)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_mmap_fd(fd, flags);
+}
+
+static inline void audit_openat2_how(struct open_how *how)
+{
+	if (unlikely(!audit_dummy_context()))
+		__audit_openat2_how(how);
+}
+
+static inline void audit_log_kern_module(char *name)
+{
+	if (!audit_dummy_context())
+		__audit_log_kern_module(name);
+}
+
+static inline void audit_fanotify(u32 response, struct fanotify_response_info_audit_rule *friar)
+{
+	if (!audit_dummy_context())
+		__audit_fanotify(response, friar);
+}
+
+static inline void audit_tk_injoffset(struct timespec64 offset)
+{
+	/* ignore no-op events */
+	if (offset.tv_sec == 0 && offset.tv_nsec == 0)
+		return;
+
+	if (!audit_dummy_context())
+		__audit_tk_injoffset(offset);
+}
+
+static inline void audit_ntp_init(struct audit_ntp_data *ad)
+{
+	memset(ad, 0, sizeof(*ad));
+}
+
+static inline void audit_ntp_set_old(struct audit_ntp_data *ad,
+				     enum audit_ntp_type type, long long val)
+{
+	ad->vals[type].oldval = val;
+}
+
+static inline void audit_ntp_set_new(struct audit_ntp_data *ad,
+				     enum audit_ntp_type type, long long val)
+{
+	ad->vals[type].newval = val;
+}
+
+static inline void audit_ntp_log(const struct audit_ntp_data *ad)
+{
+	if (!audit_dummy_context())
+		__audit_ntp_log(ad);
+}
+
+static inline void audit_log_nfcfg(const char *name, u8 af,
+				   unsigned int nentries,
+				   enum audit_nfcfgop op, gfp_t gfp)
+{
+	if (audit_enabled)
+		__audit_log_nfcfg(name, af, nentries, op, gfp);
+}
+
+extern int audit_n_rules;
+extern int audit_signals;
+#else /* CONFIG_AUDITSYSCALL */
+static inline int audit_alloc(struct task_struct *task)
+{
+	return 0;
+}
+static inline void audit_free(struct task_struct *task)
+{ }
+static inline void audit_uring_entry(u8 op)
+{ }
+static inline void audit_uring_exit(int success, long code)
+{ }
+static inline void audit_syscall_entry(int major, unsigned long a0,
+				       unsigned long a1, unsigned long a2,
+				       unsigned long a3)
+{ }
+static inline void audit_syscall_exit(void *pt_regs)
+{ }
+static inline bool audit_dummy_context(void)
+{
+	return true;
+}
+static inline void audit_set_context(struct task_struct *task, struct audit_context *ctx)
+{ }
+static inline struct audit_context *audit_context(void)
+{
+	return NULL;
+}
+static inline struct filename *audit_reusename(const __user char *name)
+{
+	return NULL;
+}
+static inline void audit_getname(struct filename *name)
+{ }
+static inline void audit_inode(struct filename *name,
+				const struct dentry *dentry,
+				unsigned int aflags)
+{ }
+static inline void audit_file(struct file *file)
+{
+}
+static inline void audit_inode_parent_hidden(struct filename *name,
+				const struct dentry *dentry)
+{ }
+static inline void audit_inode_child(struct inode *parent,
+				     const struct dentry *dentry,
+				     const unsigned char type)
+{ }
+static inline void audit_core_dumps(long signr)
+{ }
+static inline void audit_seccomp(unsigned long syscall, long signr, int code)
+{ }
+static inline void audit_seccomp_actions_logged(const char *names,
+						const char *old_names, int res)
+{ }
+static inline void audit_ipc_obj(struct kern_ipc_perm *ipcp)
+{ }
+static inline void audit_ipc_set_perm(unsigned long qbytes, uid_t uid,
+					gid_t gid, umode_t mode)
+{ }
+static inline void audit_bprm(struct linux_binprm *bprm)
+{ }
+static inline int audit_socketcall(int nargs, unsigned long *args)
+{
+	return 0;
+}
+
+static inline int audit_socketcall_compat(int nargs, u32 *args)
+{
+	return 0;
+}
+
+static inline void audit_fd_pair(int fd1, int fd2)
+{ }
+static inline int audit_sockaddr(int len, void *addr)
+{
+	return 0;
+}
+static inline void audit_mq_open(int oflag, umode_t mode, struct mq_attr *attr)
+{ }
+static inline void audit_mq_sendrecv(mqd_t mqdes, size_t msg_len,
+				     unsigned int msg_prio,
+				     const struct timespec64 *abs_timeout)
+{ }
+static inline void audit_mq_notify(mqd_t mqdes,
+				   const struct sigevent *notification)
+{ }
+static inline void audit_mq_getsetattr(mqd_t mqdes, struct mq_attr *mqstat)
+{ }
+static inline int audit_log_bprm_fcaps(struct linux_binprm *bprm,
+				       const struct cred *new,
+				       const struct cred *old)
+{
+	return 0;
+}
+static inline void audit_log_capset(const struct cred *new,
+				    const struct cred *old)
+{ }
+static inline void audit_mmap_fd(int fd, int flags)
+{ }
+
+static inline void audit_openat2_how(struct open_how *how)
+{ }
+
+static inline void audit_log_kern_module(char *name)
+{
+}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 static inline void audit_fanotify(u32 response, struct fanotify_response_info_audit_rule *friar)
 { }

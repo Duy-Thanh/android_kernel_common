@@ -68,6 +68,7 @@ struct ocs_hcu_ctx {
  * @sg_data_total:  Total data in the SG list at any time.
  * @sg_data_offset: Offset into the data of the current individual SG node.
  * @sg_dma_nents:   Number of sg entries mapped in dma_list.
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @nents:          Number of entries in the scatterlist.
  */
 struct ocs_hcu_rctx {
@@ -266,6 +267,201 @@ static int kmb_ocs_dma_prepare(struct ahash_request *req)
 		/* Save the value of nents to pass to dma_unmap_sg. */
 		rctx->nents = nents;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ */
+struct ocs_hcu_rctx {
+	struct ocs_hcu_dev	*hcu_dev;
+	u32			flags;
+	enum ocs_hcu_algo	algo;
+	size_t			blk_sz;
+	size_t			dig_sz;
+	struct ocs_hcu_dma_list	*dma_list;
+	struct ocs_hcu_hash_ctx	hash_ctx;
+	/*
+	 * Buffer is double the block size because we need space for SW HMAC
+	 * artifacts, i.e:
+	 * - ipad (1 block) + a possible partial block of data.
+	 * - opad (1 block) + digest of H(k ^ ipad || m)
+	 */
+	u8			buffer[2 * SHA512_BLOCK_SIZE];
+	size_t			buf_cnt;
+	dma_addr_t		buf_dma_addr;
+	size_t			buf_dma_count;
+	struct scatterlist	*sg;
+	unsigned int		sg_data_total;
+	unsigned int		sg_data_offset;
+	unsigned int		sg_dma_nents;
+};
+
+/**
+ * struct ocs_hcu_drv - Driver data
+ * @dev_list:	The list of HCU devices.
+ * @lock:	The lock protecting dev_list.
+ */
+struct ocs_hcu_drv {
+	struct list_head dev_list;
+	spinlock_t lock; /* Protects dev_list. */
+};
+
+static struct ocs_hcu_drv ocs_hcu = {
+	.dev_list = LIST_HEAD_INIT(ocs_hcu.dev_list),
+	.lock = __SPIN_LOCK_UNLOCKED(ocs_hcu.lock),
+};
+
+/*
+ * Return the total amount of data in the request; that is: the data in the
+ * request buffer + the data in the sg list.
+ */
+static inline unsigned int kmb_get_total_data(struct ocs_hcu_rctx *rctx)
+{
+	return rctx->sg_data_total + rctx->buf_cnt;
+}
+
+/* Move remaining content of scatter-gather list to context buffer. */
+static int flush_sg_to_ocs_buffer(struct ocs_hcu_rctx *rctx)
+{
+	size_t count;
+
+	if (rctx->sg_data_total > (sizeof(rctx->buffer) - rctx->buf_cnt)) {
+		WARN(1, "%s: sg data does not fit in buffer\n", __func__);
+		return -EINVAL;
+	}
+
+	while (rctx->sg_data_total) {
+		if (!rctx->sg) {
+			WARN(1, "%s: unexpected NULL sg\n", __func__);
+			return -EINVAL;
+		}
+		/*
+		 * If current sg has been fully processed, skip to the next
+		 * one.
+		 */
+		if (rctx->sg_data_offset == rctx->sg->length) {
+			rctx->sg = sg_next(rctx->sg);
+			rctx->sg_data_offset = 0;
+			continue;
+		}
+		/*
+		 * Determine the maximum data available to copy from the node.
+		 * Minimum of the length left in the sg node, or the total data
+		 * in the request.
+		 */
+		count = min(rctx->sg->length - rctx->sg_data_offset,
+			    rctx->sg_data_total);
+		/* Copy from scatter-list entry to context buffer. */
+		scatterwalk_map_and_copy(&rctx->buffer[rctx->buf_cnt],
+					 rctx->sg, rctx->sg_data_offset,
+					 count, 0);
+
+		rctx->sg_data_offset += count;
+		rctx->sg_data_total -= count;
+		rctx->buf_cnt += count;
+	}
+
+	return 0;
+}
+
+static struct ocs_hcu_dev *kmb_ocs_hcu_find_dev(struct ahash_request *req)
+{
+	struct crypto_ahash *tfm = crypto_ahash_reqtfm(req);
+	struct ocs_hcu_ctx *tctx = crypto_ahash_ctx(tfm);
+
+	/* If the HCU device for the request was previously set, return it. */
+	if (tctx->hcu_dev)
+		return tctx->hcu_dev;
+
+	/*
+	 * Otherwise, get the first HCU device available (there should be one
+	 * and only one device).
+	 */
+	spin_lock_bh(&ocs_hcu.lock);
+	tctx->hcu_dev = list_first_entry_or_null(&ocs_hcu.dev_list,
+						 struct ocs_hcu_dev,
+						 list);
+	spin_unlock_bh(&ocs_hcu.lock);
+
+	return tctx->hcu_dev;
+}
+
+/* Free OCS DMA linked list and DMA-able context buffer. */
+static void kmb_ocs_hcu_dma_cleanup(struct ahash_request *req,
+				    struct ocs_hcu_rctx *rctx)
+{
+	struct ocs_hcu_dev *hcu_dev = rctx->hcu_dev;
+	struct device *dev = hcu_dev->dev;
+
+	/* Unmap rctx->buffer (if mapped). */
+	if (rctx->buf_dma_count) {
+		dma_unmap_single(dev, rctx->buf_dma_addr, rctx->buf_dma_count,
+				 DMA_TO_DEVICE);
+		rctx->buf_dma_count = 0;
+	}
+
+	/* Unmap req->src (if mapped). */
+	if (rctx->sg_dma_nents) {
+		dma_unmap_sg(dev, req->src, rctx->sg_dma_nents, DMA_TO_DEVICE);
+		rctx->sg_dma_nents = 0;
+	}
+
+	/* Free dma_list (if allocated). */
+	if (rctx->dma_list) {
+		ocs_hcu_dma_list_free(hcu_dev, rctx->dma_list);
+		rctx->dma_list = NULL;
+	}
+}
+
+/*
+ * Prepare for DMA operation:
+ * - DMA-map request context buffer (if needed)
+ * - DMA-map SG list (only the entries to be processed, see note below)
+ * - Allocate OCS HCU DMA linked list (number of elements =  SG entries to
+ *   process + context buffer (if not empty)).
+ * - Add DMA-mapped request context buffer to OCS HCU DMA list.
+ * - Add SG entries to DMA list.
+ *
+ * Note: if this is a final request, we process all the data in the SG list,
+ * otherwise we can only process up to the maximum amount of block-aligned data
+ * (the remainder will be put into the context buffer and processed in the next
+ * request).
+ */
+static int kmb_ocs_dma_prepare(struct ahash_request *req)
+{
+	struct ocs_hcu_rctx *rctx = ahash_request_ctx_dma(req);
+	struct device *dev = rctx->hcu_dev->dev;
+	unsigned int remainder = 0;
+	unsigned int total;
+	size_t nents;
+	size_t count;
+	int rc;
+	int i;
+
+	/* This function should be called only when there is data to process. */
+	total = kmb_get_total_data(rctx);
+	if (!total)
+		return -EINVAL;
+
+	/*
+	 * If this is not a final DMA (terminated DMA), the data passed to the
+	 * HCU must be aligned to the block size; compute the remainder data to
+	 * be processed in the next request.
+	 */
+	if (!(rctx->flags & REQ_FINAL))
+		remainder = total % rctx->blk_sz;
+
+	/* Determine the number of scatter gather list entries to process. */
+	nents = sg_nents_for_len(req->src, rctx->sg_data_total - remainder);
+
+	/* If there are entries to process, map them. */
+	if (nents) {
+		rctx->sg_dma_nents = dma_map_sg(dev, req->src, nents,
+						DMA_TO_DEVICE);
+		if (!rctx->sg_dma_nents) {
+			dev_err(dev, "Failed to MAP SG\n");
+			rc = -ENOMEM;
+			goto cleanup;
+		}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		/*
 		 * The value returned by dma_map_sg() can be < nents; so update
 		 * nents accordingly.

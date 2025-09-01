@@ -202,6 +202,7 @@ extern bool snd_usb_skip_validation;
  *  for the given endpoint.
  * QUIRK_FLAG_MIC_RES_16 and QUIRK_FLAG_MIC_RES_384
  *  Set the fixed resolution for Mic Capture Volume (mostly for webcams)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * QUIRK_FLAG_MIXER_MIN_MUTE
  *  Set minimum volume control value as mute for devices where the lowest
  *  playback value represents muted state instead of minimum audible volume
@@ -232,5 +233,34 @@ extern bool snd_usb_skip_validation;
 #define QUIRK_FLAG_MIC_RES_16		(1U << 22)
 #define QUIRK_FLAG_MIC_RES_384		(1U << 23)
 #define QUIRK_FLAG_MIXER_MIN_MUTE	(1U << 24)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ */
+
+#define QUIRK_FLAG_GET_SAMPLE_RATE	(1U << 0)
+#define QUIRK_FLAG_SHARE_MEDIA_DEVICE	(1U << 1)
+#define QUIRK_FLAG_ALIGN_TRANSFER	(1U << 2)
+#define QUIRK_FLAG_TX_LENGTH		(1U << 3)
+#define QUIRK_FLAG_PLAYBACK_FIRST	(1U << 4)
+#define QUIRK_FLAG_SKIP_CLOCK_SELECTOR	(1U << 5)
+#define QUIRK_FLAG_IGNORE_CLOCK_SOURCE	(1U << 6)
+#define QUIRK_FLAG_ITF_USB_DSD_DAC	(1U << 7)
+#define QUIRK_FLAG_CTL_MSG_DELAY	(1U << 8)
+#define QUIRK_FLAG_CTL_MSG_DELAY_1M	(1U << 9)
+#define QUIRK_FLAG_CTL_MSG_DELAY_5M	(1U << 10)
+#define QUIRK_FLAG_IFACE_DELAY		(1U << 11)
+#define QUIRK_FLAG_VALIDATE_RATES	(1U << 12)
+#define QUIRK_FLAG_DISABLE_AUTOSUSPEND	(1U << 13)
+#define QUIRK_FLAG_IGNORE_CTL_ERROR	(1U << 14)
+#define QUIRK_FLAG_DSD_RAW		(1U << 15)
+#define QUIRK_FLAG_SET_IFACE_FIRST	(1U << 16)
+#define QUIRK_FLAG_GENERIC_IMPLICIT_FB	(1U << 17)
+#define QUIRK_FLAG_SKIP_IMPLICIT_FB	(1U << 18)
+#define QUIRK_FLAG_IFACE_SKIP_CLOSE	(1U << 19)
+#define QUIRK_FLAG_FORCE_IFACE_RESET	(1U << 20)
+#define QUIRK_FLAG_FIXED_RATE		(1U << 21)
+#define QUIRK_FLAG_MIC_RES_16		(1U << 22)
+#define QUIRK_FLAG_MIC_RES_384		(1U << 23)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #endif /* __USBAUDIO_H */

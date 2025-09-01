@@ -48,8 +48,14 @@ This value is reset to 100 when the kernel boots.
 Fan mode
 --------
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 Writing 0/1/2 to /sys/devices/platform/lg-laptop/fan_mode sets fan mode to
 Optimal/Silent/Performance respectively.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+Writing 1/0 to /sys/devices/platform/lg-laptop/fan_mode disables/enables
+the fan silent mode.
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 
 USB charge

@@ -9,6 +9,7 @@
 #include "include/policy.h"
 #include "include/policy_unpack.h"
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/unaligned.h>
 
 #define TEST_STRING_NAME "TEST_STRING"
@@ -106,6 +107,104 @@ static struct aa_ext *build_aa_ext_struct(struct policy_unpack_fixture *puf,
 	strscpy(buf + 3, TEST_ARRAY_NAME, e->end - (void *)(buf + 3));
 	*(buf + 3 + strlen(TEST_ARRAY_NAME) + 1) = AA_ARRAY;
 	put_unaligned_le16(TEST_ARRAY_SIZE, buf + 3 + strlen(TEST_ARRAY_NAME) + 2);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define TEST_STRING_NAME "TEST_STRING"
+#define TEST_STRING_DATA "testing"
+#define TEST_STRING_BUF_OFFSET \
+	(3 + strlen(TEST_STRING_NAME) + 1)
+
+#define TEST_U32_NAME "U32_TEST"
+#define TEST_U32_DATA ((u32)0x01020304)
+#define TEST_NAMED_U32_BUF_OFFSET \
+	(TEST_STRING_BUF_OFFSET + 3 + strlen(TEST_STRING_DATA) + 1)
+#define TEST_U32_BUF_OFFSET \
+	(TEST_NAMED_U32_BUF_OFFSET + 3 + strlen(TEST_U32_NAME) + 1)
+
+#define TEST_U16_OFFSET (TEST_U32_BUF_OFFSET + 3)
+#define TEST_U16_DATA ((u16)(TEST_U32_DATA >> 16))
+
+#define TEST_U64_NAME "U64_TEST"
+#define TEST_U64_DATA ((u64)0x0102030405060708)
+#define TEST_NAMED_U64_BUF_OFFSET (TEST_U32_BUF_OFFSET + sizeof(u32) + 1)
+#define TEST_U64_BUF_OFFSET \
+	(TEST_NAMED_U64_BUF_OFFSET + 3 + strlen(TEST_U64_NAME) + 1)
+
+#define TEST_BLOB_NAME "BLOB_TEST"
+#define TEST_BLOB_DATA "\xde\xad\x00\xbe\xef"
+#define TEST_BLOB_DATA_SIZE (ARRAY_SIZE(TEST_BLOB_DATA))
+#define TEST_NAMED_BLOB_BUF_OFFSET (TEST_U64_BUF_OFFSET + sizeof(u64) + 1)
+#define TEST_BLOB_BUF_OFFSET \
+	(TEST_NAMED_BLOB_BUF_OFFSET + 3 + strlen(TEST_BLOB_NAME) + 1)
+
+#define TEST_ARRAY_NAME "ARRAY_TEST"
+#define TEST_ARRAY_SIZE 16
+#define TEST_NAMED_ARRAY_BUF_OFFSET \
+	(TEST_BLOB_BUF_OFFSET + 5 + TEST_BLOB_DATA_SIZE)
+#define TEST_ARRAY_BUF_OFFSET \
+	(TEST_NAMED_ARRAY_BUF_OFFSET + 3 + strlen(TEST_ARRAY_NAME) + 1)
+
+MODULE_IMPORT_NS(EXPORTED_FOR_KUNIT_TESTING);
+
+struct policy_unpack_fixture {
+	struct aa_ext *e;
+	size_t e_size;
+};
+
+static struct aa_ext *build_aa_ext_struct(struct policy_unpack_fixture *puf,
+					  struct kunit *test, size_t buf_size)
+{
+	char *buf;
+	struct aa_ext *e;
+
+	buf = kunit_kzalloc(test, buf_size, GFP_USER);
+	KUNIT_EXPECT_NOT_ERR_OR_NULL(test, buf);
+
+	e = kunit_kmalloc(test, sizeof(*e), GFP_USER);
+	KUNIT_EXPECT_NOT_ERR_OR_NULL(test, e);
+
+	e->start = buf;
+	e->end = e->start + buf_size;
+	e->pos = e->start;
+
+	*buf = AA_NAME;
+	*(buf + 1) = strlen(TEST_STRING_NAME) + 1;
+	strscpy(buf + 3, TEST_STRING_NAME, e->end - (void *)(buf + 3));
+
+	buf = e->start + TEST_STRING_BUF_OFFSET;
+	*buf = AA_STRING;
+	*(buf + 1) = strlen(TEST_STRING_DATA) + 1;
+	strscpy(buf + 3, TEST_STRING_DATA, e->end - (void *)(buf + 3));
+	buf = e->start + TEST_NAMED_U32_BUF_OFFSET;
+	*buf = AA_NAME;
+	*(buf + 1) = strlen(TEST_U32_NAME) + 1;
+	strscpy(buf + 3, TEST_U32_NAME, e->end - (void *)(buf + 3));
+	*(buf + 3 + strlen(TEST_U32_NAME) + 1) = AA_U32;
+	*((__le32 *)(buf + 3 + strlen(TEST_U32_NAME) + 2)) = cpu_to_le32(TEST_U32_DATA);
+
+	buf = e->start + TEST_NAMED_U64_BUF_OFFSET;
+	*buf = AA_NAME;
+	*(buf + 1) = strlen(TEST_U64_NAME) + 1;
+	strscpy(buf + 3, TEST_U64_NAME, e->end - (void *)(buf + 3));
+	*(buf + 3 + strlen(TEST_U64_NAME) + 1) = AA_U64;
+	*((__le64 *)(buf + 3 + strlen(TEST_U64_NAME) + 2)) = cpu_to_le64(TEST_U64_DATA);
+
+	buf = e->start + TEST_NAMED_BLOB_BUF_OFFSET;
+	*buf = AA_NAME;
+	*(buf + 1) = strlen(TEST_BLOB_NAME) + 1;
+	strscpy(buf + 3, TEST_BLOB_NAME, e->end - (void *)(buf + 3));
+	*(buf + 3 + strlen(TEST_BLOB_NAME) + 1) = AA_BLOB;
+	*(buf + 3 + strlen(TEST_BLOB_NAME) + 2) = TEST_BLOB_DATA_SIZE;
+	memcpy(buf + 3 + strlen(TEST_BLOB_NAME) + 6,
+		TEST_BLOB_DATA, TEST_BLOB_DATA_SIZE);
+
+	buf = e->start + TEST_NAMED_ARRAY_BUF_OFFSET;
+	*buf = AA_NAME;
+	*(buf + 1) = strlen(TEST_ARRAY_NAME) + 1;
+	strscpy(buf + 3, TEST_ARRAY_NAME, e->end - (void *)(buf + 3));
+	*(buf + 3 + strlen(TEST_ARRAY_NAME) + 1) = AA_ARRAY;
+	*((__le16 *)(buf + 3 + strlen(TEST_ARRAY_NAME) + 2)) = cpu_to_le16(TEST_ARRAY_SIZE);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return e;
 }

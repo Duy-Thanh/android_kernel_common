@@ -58,6 +58,7 @@
  #define USB2_0_TX_ENABLE		BIT(2)
 
 #define USB2PHY_USB_PHY_M31_XCFGI_4	0xc8
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  #define HSTX_SLEW_RATE_400PS		GENMASK(2, 0)
  #define PLL_CHARGING_PUMP_CURRENT_35UA	GENMASK(4, 3)
  #define ODT_VALUE_38_02_OHM		GENMASK(7, 6)
@@ -182,6 +183,127 @@ static struct m31_phy_regs m31_ipq5332_regs[] = {
 	{
 		USB2PHY_USB_PHY_M31_XCFGI_9,
 		HSTX_CURRENT_17_1MA_385MV,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ #define HSTX_SLEW_RATE_565PS		GENMASK(1, 0)
+ #define PLL_CHARGING_PUMP_CURRENT_35UA	GENMASK(4, 3)
+ #define ODT_VALUE_38_02_OHM		GENMASK(7, 6)
+
+#define USB2PHY_USB_PHY_M31_XCFGI_5	0xcc
+ #define ODT_VALUE_45_02_OHM		BIT(2)
+ #define HSTX_PRE_EMPHASIS_LEVEL_0_55MA	BIT(0)
+
+#define USB2PHY_USB_PHY_M31_XCFGI_11	0xe4
+ #define XCFG_COARSE_TUNE_NUM		BIT(1)
+ #define XCFG_FINE_TUNE_NUM		BIT(3)
+
+struct m31_phy_regs {
+	u32 off;
+	u32 val;
+	u32 delay;
+};
+
+struct m31_priv_data {
+	bool				ulpi_mode;
+	const struct m31_phy_regs	*regs;
+	unsigned int			nregs;
+};
+
+static const struct m31_phy_regs m31_ipq5018_regs[] = {
+	{
+		.off = USB_PHY_CFG0,
+		.val = UTMI_PHY_OVERRIDE_EN
+	},
+	{
+		.off = USB_PHY_UTMI_CTRL5,
+		.val = POR_EN,
+		.delay = 15
+	},
+	{
+		.off = USB_PHY_FSEL_SEL,
+		.val = FREQ_SEL
+	},
+	{
+		.off = USB_PHY_HS_PHY_CTRL_COMMON0,
+		.val = COMMONONN | FSEL | RETENABLEN
+	},
+	{
+		.off = USB_PHY_REFCLK_CTRL,
+		.val = CLKCORE
+	},
+	{
+		.off = USB_PHY_UTMI_CTRL5,
+		.val = POR_EN
+	},
+	{
+		.off = USB_PHY_HS_PHY_CTRL2,
+		.val = USB2_SUSPEND_N_SEL | USB2_SUSPEND_N | USB2_UTMI_CLK_EN
+	},
+	{
+		.off = USB_PHY_UTMI_CTRL5,
+		.val = 0x0
+	},
+	{
+		.off = USB_PHY_HS_PHY_CTRL2,
+		.val = USB2_SUSPEND_N | USB2_UTMI_CLK_EN
+	},
+	{
+		.off = USB_PHY_CFG0,
+		.val = 0x0
+	},
+};
+
+static struct m31_phy_regs m31_ipq5332_regs[] = {
+	{
+		USB_PHY_CFG0,
+		UTMI_PHY_OVERRIDE_EN,
+		0
+	},
+	{
+		USB_PHY_UTMI_CTRL5,
+		POR_EN,
+		15
+	},
+	{
+		USB_PHY_FSEL_SEL,
+		FREQ_SEL,
+		0
+	},
+	{
+		USB_PHY_HS_PHY_CTRL_COMMON0,
+		COMMONONN | FREQ_24MHZ | RETENABLEN,
+		0
+	},
+	{
+		USB_PHY_UTMI_CTRL5,
+		POR_EN,
+		0
+	},
+	{
+		USB_PHY_HS_PHY_CTRL2,
+		USB2_SUSPEND_N_SEL | USB2_SUSPEND_N | USB2_UTMI_CLK_EN,
+		0
+	},
+	{
+		USB2PHY_USB_PHY_M31_XCFGI_11,
+		XCFG_COARSE_TUNE_NUM  | XCFG_FINE_TUNE_NUM,
+		0
+	},
+	{
+		USB2PHY_USB_PHY_M31_XCFGI_4,
+		HSTX_SLEW_RATE_565PS | PLL_CHARGING_PUMP_CURRENT_35UA | ODT_VALUE_38_02_OHM,
+		0
+	},
+	{
+		USB2PHY_USB_PHY_M31_XCFGI_1,
+		USB2_0_TX_ENABLE,
+		0
+	},
+	{
+		USB2PHY_USB_PHY_M31_XCFGI_5,
+		ODT_VALUE_45_02_OHM | HSTX_PRE_EMPHASIS_LEVEL_0_55MA,
+		4
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	},
 	{
 		USB_PHY_UTMI_CTRL5,

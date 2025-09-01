@@ -258,6 +258,7 @@ static int hibmc_load(struct drm_device *dev)
 
 	ret = hibmc_hw_init(priv);
 	if (ret)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		return ret;
 
 	ret = drmm_vram_helper_init(dev, pci_resource_start(pdev, 0),
@@ -265,6 +266,16 @@ static int hibmc_load(struct drm_device *dev)
 	if (ret) {
 		drm_err(dev, "Error initializing VRAM MM; %d\n", ret);
 		return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		goto err;
+
+	ret = drmm_vram_helper_init(dev, pci_resource_start(pdev, 0),
+				    pci_resource_len(pdev, 0));
+	if (ret) {
+		drm_err(dev, "Error initializing VRAM MM; %d\n", ret);
+		goto err;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	ret = hibmc_kms_init(priv);

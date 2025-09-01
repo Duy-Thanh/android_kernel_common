@@ -499,6 +499,7 @@ static int __nilfs_read_inode(struct super_block *sb,
 		inode->i_op = &nilfs_symlink_inode_operations;
 		inode_nohighmem(inode);
 		inode->i_mapping->a_ops = &nilfs_aops;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	} else if (S_ISCHR(inode->i_mode) || S_ISBLK(inode->i_mode) ||
 		   S_ISFIFO(inode->i_mode) || S_ISSOCK(inode->i_mode)) {
 		inode->i_op = &nilfs_special_inode_operations;
@@ -511,6 +512,14 @@ static int __nilfs_read_inode(struct super_block *sb,
 			    inode->i_mode, ino);
 		err = -EIO;
 		goto failed_unmap;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	} else {
+		inode->i_op = &nilfs_special_inode_operations;
+		init_special_inode(
+			inode, inode->i_mode,
+			huge_decode_dev(le64_to_cpu(raw_inode->i_device_code)));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 	nilfs_ifile_unmap_inode(raw_inode);
 	brelse(bh);

@@ -1120,6 +1120,7 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 	int result, i;
 	enum nl80211_band band;
 	int channels, max_bitrates;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool supp_ht, supp_vht, supp_he, supp_eht, supp_s1g;
 	struct cfg80211_chan_def dflt_chandef = {};
 
@@ -1415,6 +1416,299 @@ int ieee80211_register_hw(struct ieee80211_hw *hw)
 
 	if (supp_s1g)
 		local->scan_ies_len += 2 + sizeof(struct ieee80211_s1g_cap);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool supp_ht, supp_vht, supp_he, supp_eht;
+	struct cfg80211_chan_def dflt_chandef = {};
+
+	if (ieee80211_hw_check(hw, QUEUE_CONTROL) &&
+	    (local->hw.offchannel_tx_hw_queue == IEEE80211_INVAL_HW_QUEUE ||
+	     local->hw.offchannel_tx_hw_queue >= local->hw.queues))
+		return -EINVAL;
+
+	if ((hw->wiphy->features & NL80211_FEATURE_TDLS_CHANNEL_SWITCH) &&
+	    (!local->ops->tdls_channel_switch ||
+	     !local->ops->tdls_cancel_channel_switch ||
+	     !local->ops->tdls_recv_channel_switch))
+		return -EOPNOTSUPP;
+
+	if (WARN_ON(ieee80211_hw_check(hw, SUPPORTS_TX_FRAG) &&
+		    !local->ops->set_frag_threshold))
+		return -EINVAL;
+
+	if (WARN_ON(local->hw.wiphy->interface_modes &
+			BIT(NL80211_IFTYPE_NAN) &&
+		    (!local->ops->start_nan || !local->ops->stop_nan)))
+		return -EINVAL;
+
+	if (hw->wiphy->flags & WIPHY_FLAG_SUPPORTS_MLO) {
+		/*
+		 * For drivers capable of doing MLO, assume modern driver
+		 * or firmware facilities, so software doesn't have to do
+		 * as much, e.g. monitoring beacons would be hard if we
+		 * might not even know which link is active at which time.
+		 */
+		if (WARN_ON(local->emulate_chanctx))
+			return -EINVAL;
+
+		if (WARN_ON(!local->ops->link_info_changed))
+			return -EINVAL;
+
+		if (WARN_ON(!ieee80211_hw_check(hw, HAS_RATE_CONTROL)))
+			return -EINVAL;
+
+		if (WARN_ON(!ieee80211_hw_check(hw, AMPDU_AGGREGATION)))
+			return -EINVAL;
+
+		if (WARN_ON(ieee80211_hw_check(hw, HOST_BROADCAST_PS_BUFFERING)))
+			return -EINVAL;
+
+		if (WARN_ON(ieee80211_hw_check(hw, SUPPORTS_PS) &&
+			    (!ieee80211_hw_check(hw, SUPPORTS_DYNAMIC_PS) ||
+			     ieee80211_hw_check(hw, PS_NULLFUNC_STACK))))
+			return -EINVAL;
+
+		if (WARN_ON(!ieee80211_hw_check(hw, MFP_CAPABLE)))
+			return -EINVAL;
+
+		if (WARN_ON(!ieee80211_hw_check(hw, CONNECTION_MONITOR)))
+			return -EINVAL;
+
+		if (WARN_ON(ieee80211_hw_check(hw, NEED_DTIM_BEFORE_ASSOC)))
+			return -EINVAL;
+
+		if (WARN_ON(ieee80211_hw_check(hw, TIMING_BEACON_ONLY)))
+			return -EINVAL;
+
+		if (WARN_ON(!ieee80211_hw_check(hw, AP_LINK_PS)))
+			return -EINVAL;
+	}
+
+#ifdef CONFIG_PM
+	if (hw->wiphy->wowlan && (!local->ops->suspend || !local->ops->resume))
+		return -EINVAL;
+#endif
+
+	if (local->emulate_chanctx) {
+		for (i = 0; i < local->hw.wiphy->n_iface_combinations; i++) {
+			const struct ieee80211_iface_combination *comb;
+
+			comb = &local->hw.wiphy->iface_combinations[i];
+
+			if (comb->num_different_channels > 1)
+				return -EINVAL;
+		}
+	}
+
+	if (hw->wiphy->n_radio) {
+		for (i = 0; i < hw->wiphy->n_radio; i++) {
+			const struct wiphy_radio *radio = &hw->wiphy->radio[i];
+
+			if (!ieee80211_ifcomb_check(radio->iface_combinations,
+						    radio->n_iface_combinations))
+				return -EINVAL;
+		}
+	} else {
+		if (!ieee80211_ifcomb_check(hw->wiphy->iface_combinations,
+					    hw->wiphy->n_iface_combinations))
+			return -EINVAL;
+	}
+
+	/* Only HW csum features are currently compatible with mac80211 */
+	if (WARN_ON(hw->netdev_features & ~MAC80211_SUPPORTED_FEATURES))
+		return -EINVAL;
+
+	if (hw->max_report_rates == 0)
+		hw->max_report_rates = hw->max_rates;
+
+	local->rx_chains = 1;
+
+	/*
+	 * generic code guarantees at least one band,
+	 * set this very early because much code assumes
+	 * that hw.conf.channel is assigned
+	 */
+	channels = 0;
+	max_bitrates = 0;
+	supp_ht = false;
+	supp_vht = false;
+	supp_he = false;
+	supp_eht = false;
+	for (band = 0; band < NUM_NL80211_BANDS; band++) {
+		const struct ieee80211_sband_iftype_data *iftd;
+		struct ieee80211_supported_band *sband;
+
+		sband = local->hw.wiphy->bands[band];
+		if (!sband)
+			continue;
+
+		if (!dflt_chandef.chan) {
+			/*
+			 * Assign the first enabled channel to dflt_chandef
+			 * from the list of channels
+			 */
+			for (i = 0; i < sband->n_channels; i++)
+				if (!(sband->channels[i].flags &
+						IEEE80211_CHAN_DISABLED))
+					break;
+			/* if none found then use the first anyway */
+			if (i == sband->n_channels)
+				i = 0;
+			cfg80211_chandef_create(&dflt_chandef,
+						&sband->channels[i],
+						NL80211_CHAN_NO_HT);
+			/* init channel we're on */
+			local->monitor_chanreq.oper = dflt_chandef;
+			if (local->emulate_chanctx) {
+				local->dflt_chandef = dflt_chandef;
+				local->hw.conf.chandef = dflt_chandef;
+			}
+		}
+
+		channels += sband->n_channels;
+
+		/*
+		 * Due to the way the aggregation code handles this and it
+		 * being an HT capability, we can't really support delayed
+		 * BA in MLO (yet).
+		 */
+		if (WARN_ON(sband->ht_cap.ht_supported &&
+			    (sband->ht_cap.cap & IEEE80211_HT_CAP_DELAY_BA) &&
+			    hw->wiphy->flags & WIPHY_FLAG_SUPPORTS_MLO))
+			return -EINVAL;
+
+		if (max_bitrates < sband->n_bitrates)
+			max_bitrates = sband->n_bitrates;
+		supp_ht = supp_ht || sband->ht_cap.ht_supported;
+		supp_vht = supp_vht || sband->vht_cap.vht_supported;
+
+		for_each_sband_iftype_data(sband, i, iftd) {
+			u8 he_40_mhz_cap;
+
+			supp_he = supp_he || iftd->he_cap.has_he;
+			supp_eht = supp_eht || iftd->eht_cap.has_eht;
+
+			if (band == NL80211_BAND_2GHZ)
+				he_40_mhz_cap =
+					IEEE80211_HE_PHY_CAP0_CHANNEL_WIDTH_SET_40MHZ_IN_2G;
+			else
+				he_40_mhz_cap =
+					IEEE80211_HE_PHY_CAP0_CHANNEL_WIDTH_SET_40MHZ_80MHZ_IN_5G;
+
+			/* currently no support for HE client where HT has 40 MHz but not HT */
+			if (iftd->he_cap.has_he &&
+			    iftd->types_mask & (BIT(NL80211_IFTYPE_STATION) |
+						BIT(NL80211_IFTYPE_P2P_CLIENT)) &&
+			    sband->ht_cap.ht_supported &&
+			    sband->ht_cap.cap & IEEE80211_HT_CAP_SUP_WIDTH_20_40 &&
+			    !(iftd->he_cap.he_cap_elem.phy_cap_info[0] & he_40_mhz_cap))
+				return -EINVAL;
+		}
+
+		/* HT, VHT, HE require QoS, thus >= 4 queues */
+		if (WARN_ON(local->hw.queues < IEEE80211_NUM_ACS &&
+			    (supp_ht || supp_vht || supp_he)))
+			return -EINVAL;
+
+		/* EHT requires HE support */
+		if (WARN_ON(supp_eht && !supp_he))
+			return -EINVAL;
+
+		if (!sband->ht_cap.ht_supported)
+			continue;
+
+		/* TODO: consider VHT for RX chains, hopefully it's the same */
+		local->rx_chains =
+			max(ieee80211_mcs_to_chains(&sband->ht_cap.mcs),
+			    local->rx_chains);
+
+		/* no need to mask, SM_PS_DISABLED has all bits set */
+		sband->ht_cap.cap |= WLAN_HT_CAP_SM_PS_DISABLED <<
+			             IEEE80211_HT_CAP_SM_PS_SHIFT;
+	}
+
+	/* if low-level driver supports AP, we also support VLAN.
+	 * drivers advertising SW_CRYPTO_CONTROL should enable AP_VLAN
+	 * based on their support to transmit SW encrypted packets.
+	 */
+	if (local->hw.wiphy->interface_modes & BIT(NL80211_IFTYPE_AP) &&
+	    !ieee80211_hw_check(&local->hw, SW_CRYPTO_CONTROL)) {
+		hw->wiphy->interface_modes |= BIT(NL80211_IFTYPE_AP_VLAN);
+		hw->wiphy->software_iftypes |= BIT(NL80211_IFTYPE_AP_VLAN);
+	}
+
+	/* mac80211 always supports monitor */
+	hw->wiphy->interface_modes |= BIT(NL80211_IFTYPE_MONITOR);
+	hw->wiphy->software_iftypes |= BIT(NL80211_IFTYPE_MONITOR);
+
+
+	local->int_scan_req = kzalloc(struct_size(local->int_scan_req,
+						  channels, channels),
+				      GFP_KERNEL);
+	if (!local->int_scan_req)
+		return -ENOMEM;
+	local->int_scan_req->n_channels = channels;
+
+	eth_broadcast_addr(local->int_scan_req->bssid);
+
+	for (band = 0; band < NUM_NL80211_BANDS; band++) {
+		if (!local->hw.wiphy->bands[band])
+			continue;
+		local->int_scan_req->rates[band] = (u32) -1;
+	}
+
+#ifndef CONFIG_MAC80211_MESH
+	/* mesh depends on Kconfig, but drivers should set it if they want */
+	local->hw.wiphy->interface_modes &= ~BIT(NL80211_IFTYPE_MESH_POINT);
+#endif
+
+	/* if the underlying driver supports mesh, mac80211 will (at least)
+	 * provide routing of mesh authentication frames to userspace */
+	if (local->hw.wiphy->interface_modes & BIT(NL80211_IFTYPE_MESH_POINT))
+		local->hw.wiphy->flags |= WIPHY_FLAG_MESH_AUTH;
+
+	/* mac80211 supports control port protocol changing */
+	local->hw.wiphy->flags |= WIPHY_FLAG_CONTROL_PORT_PROTOCOL;
+
+	if (ieee80211_hw_check(&local->hw, SIGNAL_DBM)) {
+		local->hw.wiphy->signal_type = CFG80211_SIGNAL_TYPE_MBM;
+	} else if (ieee80211_hw_check(&local->hw, SIGNAL_UNSPEC)) {
+		local->hw.wiphy->signal_type = CFG80211_SIGNAL_TYPE_UNSPEC;
+		if (hw->max_signal <= 0) {
+			result = -EINVAL;
+			goto fail_workqueue;
+		}
+	}
+
+	/* Mac80211 and therefore all drivers using SW crypto only
+	 * are able to handle PTK rekeys and Extended Key ID.
+	 */
+	if (!local->ops->set_key) {
+		wiphy_ext_feature_set(local->hw.wiphy,
+				      NL80211_EXT_FEATURE_CAN_REPLACE_PTK0);
+		wiphy_ext_feature_set(local->hw.wiphy,
+				      NL80211_EXT_FEATURE_EXT_KEY_ID);
+	}
+
+	if (local->hw.wiphy->interface_modes & BIT(NL80211_IFTYPE_ADHOC))
+		wiphy_ext_feature_set(local->hw.wiphy,
+				      NL80211_EXT_FEATURE_DEL_IBSS_STA);
+
+	/*
+	 * Calculate scan IE length -- we need this to alloc
+	 * memory and to subtract from the driver limit. It
+	 * includes the DS Params, (extended) supported rates, and HT
+	 * information -- SSID is the driver's responsibility.
+	 */
+	local->scan_ies_len = 4 + max_bitrates /* (ext) supp rates */ +
+		3 /* DS Params */;
+	if (supp_ht)
+		local->scan_ies_len += 2 + sizeof(struct ieee80211_ht_cap);
+
+	if (supp_vht)
+		local->scan_ies_len +=
+			2 + sizeof(struct ieee80211_vht_cap);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/*
 	 * HE cap element is variable in size - set len to allow max size */

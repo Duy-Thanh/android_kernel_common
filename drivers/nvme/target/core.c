@@ -1714,6 +1714,7 @@ static int __init nvmet_init(void)
 	if (!nvmet_wq)
 		goto out_free_buffered_work_queue;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	error = nvmet_init_debugfs();
 	if (error)
 		goto out_free_nvmet_work_queue;
@@ -1748,6 +1749,43 @@ static void __exit nvmet_exit(void)
 	nvmet_exit_configfs();
 	nvmet_exit_discovery();
 	nvmet_exit_debugfs();
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	error = nvmet_init_discovery();
+	if (error)
+		goto out_free_nvmet_work_queue;
+
+	error = nvmet_init_debugfs();
+	if (error)
+		goto out_exit_discovery;
+
+	error = nvmet_init_configfs();
+	if (error)
+		goto out_exit_debugfs;
+
+	return 0;
+
+out_exit_debugfs:
+	nvmet_exit_debugfs();
+out_exit_discovery:
+	nvmet_exit_discovery();
+out_free_nvmet_work_queue:
+	destroy_workqueue(nvmet_wq);
+out_free_buffered_work_queue:
+	destroy_workqueue(buffered_io_wq);
+out_free_zbd_work_queue:
+	destroy_workqueue(zbd_wq);
+out_destroy_bvec_cache:
+	kmem_cache_destroy(nvmet_bvec_cache);
+	return error;
+}
+
+static void __exit nvmet_exit(void)
+{
+	nvmet_exit_configfs();
+	nvmet_exit_debugfs();
+	nvmet_exit_discovery();
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	ida_destroy(&cntlid_ida);
 	destroy_workqueue(nvmet_wq);
 	destroy_workqueue(buffered_io_wq);

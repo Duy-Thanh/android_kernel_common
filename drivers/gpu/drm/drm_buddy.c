@@ -401,6 +401,7 @@ drm_get_buddy(struct drm_buddy_block *block)
 EXPORT_SYMBOL(drm_get_buddy);
 
 /**
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * drm_buddy_reset_clear - reset blocks clear state
  *
  * @mm: DRM buddy manager
@@ -444,6 +445,9 @@ void drm_buddy_reset_clear(struct drm_buddy *mm, bool is_clear)
 EXPORT_SYMBOL(drm_buddy_reset_clear);
 
 /**
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
  * drm_buddy_free_block - free a block
  *
  * @mm: DRM buddy manager

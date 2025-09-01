@@ -306,6 +306,7 @@ is issuing IO to the underlying local filesystem that it is sharing with
 the NFS server. See: fs/nfs/localio.c:nfs_local_doio() and
 fs/nfs/localio.c:nfs_local_commit().
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 With normal NFS that makes use of RPC to issue IO to the server, if an
 application uses O_DIRECT the NFS client will bypass the pagecache but
 the NFS server will not. Because the NFS server's use of buffered IO
@@ -319,6 +320,9 @@ parameter to Y, e.g.:
 Once enabled, it will cause LOCALIO to use O_DIRECT semantics (this may
 cause IO to fail if applications do not properly align their IO).
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 Security
 ========
 

@@ -1912,6 +1912,7 @@ static int musb_gadget_stop(struct usb_gadget *g)
 	 * gadget driver here and have everything work;
 	 * that currently misbehaves.
 	 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	usb_gadget_set_state(g, USB_STATE_NOTATTACHED);
 
 	/* Force check of devctl register for PM runtime */
@@ -2020,6 +2021,115 @@ void musb_g_disconnect(struct musb *musb)
 	case OTG_STATE_B_IDLE:
 		musb_set_state(musb, OTG_STATE_B_IDLE);
 		usb_gadget_set_state(&musb->g, USB_STATE_NOTATTACHED);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	/* Force check of devctl register for PM runtime */
+	pm_runtime_mark_last_busy(musb->controller);
+	pm_runtime_put_autosuspend(musb->controller);
+
+	return 0;
+}
+
+/* ----------------------------------------------------------------------- */
+
+/* lifecycle operations called through plat_uds.c */
+
+void musb_g_resume(struct musb *musb)
+{
+	musb->is_suspended = 0;
+	switch (musb_get_state(musb)) {
+	case OTG_STATE_B_IDLE:
+		break;
+	case OTG_STATE_B_WAIT_ACON:
+	case OTG_STATE_B_PERIPHERAL:
+		musb->is_active = 1;
+		if (musb->gadget_driver && musb->gadget_driver->resume) {
+			spin_unlock(&musb->lock);
+			musb->gadget_driver->resume(&musb->g);
+			spin_lock(&musb->lock);
+		}
+		break;
+	default:
+		WARNING("unhandled RESUME transition (%s)\n",
+			musb_otg_state_string(musb));
+	}
+}
+
+/* called when SOF packets stop for 3+ msec */
+void musb_g_suspend(struct musb *musb)
+{
+	u8	devctl;
+
+	devctl = musb_readb(musb->mregs, MUSB_DEVCTL);
+	musb_dbg(musb, "musb_g_suspend: devctl %02x", devctl);
+
+	switch (musb_get_state(musb)) {
+	case OTG_STATE_B_IDLE:
+		if ((devctl & MUSB_DEVCTL_VBUS) == MUSB_DEVCTL_VBUS)
+			musb_set_state(musb, OTG_STATE_B_PERIPHERAL);
+		break;
+	case OTG_STATE_B_PERIPHERAL:
+		musb->is_suspended = 1;
+		if (musb->gadget_driver && musb->gadget_driver->suspend) {
+			spin_unlock(&musb->lock);
+			musb->gadget_driver->suspend(&musb->g);
+			spin_lock(&musb->lock);
+		}
+		break;
+	default:
+		/* REVISIT if B_HOST, clear DEVCTL.HOSTREQ;
+		 * A_PERIPHERAL may need care too
+		 */
+		WARNING("unhandled SUSPEND transition (%s)",
+			musb_otg_state_string(musb));
+	}
+}
+
+/* Called during SRP */
+void musb_g_wakeup(struct musb *musb)
+{
+	musb_gadget_wakeup(&musb->g);
+}
+
+/* called when VBUS drops below session threshold, and in other cases */
+void musb_g_disconnect(struct musb *musb)
+{
+	void __iomem	*mregs = musb->mregs;
+	u8	devctl = musb_readb(mregs, MUSB_DEVCTL);
+
+	musb_dbg(musb, "musb_g_disconnect: devctl %02x", devctl);
+
+	/* clear HR */
+	musb_writeb(mregs, MUSB_DEVCTL, devctl & MUSB_DEVCTL_SESSION);
+
+	/* don't draw vbus until new b-default session */
+	(void) musb_gadget_vbus_draw(&musb->g, 0);
+
+	musb->g.speed = USB_SPEED_UNKNOWN;
+	if (musb->gadget_driver && musb->gadget_driver->disconnect) {
+		spin_unlock(&musb->lock);
+		musb->gadget_driver->disconnect(&musb->g);
+		spin_lock(&musb->lock);
+	}
+
+	switch (musb_get_state(musb)) {
+	default:
+		musb_dbg(musb, "Unhandled disconnect %s, setting a_idle",
+			 musb_otg_state_string(musb));
+		musb_set_state(musb, OTG_STATE_A_IDLE);
+		MUSB_HST_MODE(musb);
+		break;
+	case OTG_STATE_A_PERIPHERAL:
+		musb_set_state(musb, OTG_STATE_A_WAIT_BCON);
+		MUSB_HST_MODE(musb);
+		break;
+	case OTG_STATE_B_WAIT_ACON:
+	case OTG_STATE_B_HOST:
+	case OTG_STATE_B_PERIPHERAL:
+	case OTG_STATE_B_IDLE:
+		musb_set_state(musb, OTG_STATE_B_IDLE);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		break;
 	case OTG_STATE_B_SRP_INIT:
 		break;

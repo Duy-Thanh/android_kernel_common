@@ -8,6 +8,7 @@
 #include <linux/module.h>
 #include <linux/moduleloader.h>
 #include <linux/ftrace.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/sort.h>
 
 Elf_Addr module_emit_got_entry(struct module *mod, Elf_Shdr *sechdrs, Elf_Addr val)
@@ -94,6 +95,95 @@ static void count_max_entries(Elf_Rela *relas, int num,
 			break;
 		case R_LARCH_GOT_PC_HI20:
 			(*gots)++;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+Elf_Addr module_emit_got_entry(struct module *mod, Elf_Shdr *sechdrs, Elf_Addr val)
+{
+	struct mod_section *got_sec = &mod->arch.got;
+	int i = got_sec->num_entries;
+	struct got_entry *got = get_got_entry(val, sechdrs, got_sec);
+
+	if (got)
+		return (Elf_Addr)got;
+
+	/* There is no GOT entry for val yet, create a new one. */
+	got = (struct got_entry *)sechdrs[got_sec->shndx].sh_addr;
+	got[i] = emit_got_entry(val);
+
+	got_sec->num_entries++;
+	if (got_sec->num_entries > got_sec->max_entries) {
+		/*
+		 * This may happen when the module contains a GOT_HI20 without
+		 * a paired GOT_LO12. Such a module is broken, reject it.
+		 */
+		pr_err("%s: module contains bad GOT relocation\n", mod->name);
+		return 0;
+	}
+
+	return (Elf_Addr)&got[i];
+}
+
+Elf_Addr module_emit_plt_entry(struct module *mod, Elf_Shdr *sechdrs, Elf_Addr val)
+{
+	int nr;
+	struct mod_section *plt_sec = &mod->arch.plt;
+	struct mod_section *plt_idx_sec = &mod->arch.plt_idx;
+	struct plt_entry *plt = get_plt_entry(val, sechdrs, plt_sec, plt_idx_sec);
+	struct plt_idx_entry *plt_idx;
+
+	if (plt)
+		return (Elf_Addr)plt;
+
+	nr = plt_sec->num_entries;
+
+	/* There is no duplicate entry, create a new one */
+	plt = (struct plt_entry *)sechdrs[plt_sec->shndx].sh_addr;
+	plt[nr] = emit_plt_entry(val);
+	plt_idx = (struct plt_idx_entry *)sechdrs[plt_idx_sec->shndx].sh_addr;
+	plt_idx[nr] = emit_plt_idx_entry(val);
+
+	plt_sec->num_entries++;
+	plt_idx_sec->num_entries++;
+	BUG_ON(plt_sec->num_entries > plt_sec->max_entries);
+
+	return (Elf_Addr)&plt[nr];
+}
+
+static int is_rela_equal(const Elf_Rela *x, const Elf_Rela *y)
+{
+	return x->r_info == y->r_info && x->r_addend == y->r_addend;
+}
+
+static bool duplicate_rela(const Elf_Rela *rela, int idx)
+{
+	int i;
+
+	for (i = 0; i < idx; i++) {
+		if (is_rela_equal(&rela[i], &rela[idx]))
+			return true;
+	}
+
+	return false;
+}
+
+static void count_max_entries(Elf_Rela *relas, int num,
+			      unsigned int *plts, unsigned int *gots)
+{
+	unsigned int i, type;
+
+	for (i = 0; i < num; i++) {
+		type = ELF_R_TYPE(relas[i].r_info);
+		switch (type) {
+		case R_LARCH_SOP_PUSH_PLT_PCREL:
+		case R_LARCH_B26:
+			if (!duplicate_rela(relas, i))
+				(*plts)++;
+			break;
+		case R_LARCH_GOT_PC_HI20:
+			if (!duplicate_rela(relas, i))
+				(*gots)++;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			break;
 		default:
 			break; /* Do nothing. */

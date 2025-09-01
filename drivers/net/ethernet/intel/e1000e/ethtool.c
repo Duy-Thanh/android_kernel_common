@@ -549,6 +549,7 @@ static int e1000_set_eeprom(struct net_device *netdev,
 {
 	struct e1000_adapter *adapter = netdev_priv(netdev);
 	struct e1000_hw *hw = &adapter->hw;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	size_t total_len, max_len;
 	u16 *eeprom_buff;
 	int ret_val = 0;
@@ -572,6 +573,28 @@ static int e1000_set_eeprom(struct net_device *netdev,
 	if (check_add_overflow(eeprom->offset, eeprom->len, &total_len) ||
 	    total_len > max_len)
 		return -EFBIG;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u16 *eeprom_buff;
+	void *ptr;
+	int max_len;
+	int first_word;
+	int last_word;
+	int ret_val = 0;
+	u16 i;
+
+	if (eeprom->len == 0)
+		return -EOPNOTSUPP;
+
+	if (eeprom->magic !=
+	    (adapter->pdev->vendor | (adapter->pdev->device << 16)))
+		return -EFAULT;
+
+	if (adapter->flags & FLAG_READ_ONLY_NVM)
+		return -EINVAL;
+
+	max_len = hw->nvm.word_size * 2;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	first_word = eeprom->offset >> 1;
 	last_word = (eeprom->offset + eeprom->len - 1) >> 1;

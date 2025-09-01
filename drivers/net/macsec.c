@@ -1843,6 +1843,7 @@ static int macsec_add_rxsa(struct sk_buff *skb, struct genl_info *info)
 
 	if (tb_sa[MACSEC_SA_ATTR_PN]) {
 		spin_lock_bh(&rx_sa->lock);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		rx_sa->next_pn = nla_get_uint(tb_sa[MACSEC_SA_ATTR_PN]);
 		spin_unlock_bh(&rx_sa->lock);
 	}
@@ -2496,6 +2497,662 @@ static int macsec_upd_rxsa(struct sk_buff *skb, struct genl_info *info)
 		spin_lock_bh(&rx_sa->lock);
 		prev_pn = rx_sa->next_pn_halves;
 		rx_sa->next_pn = nla_get_uint(tb_sa[MACSEC_SA_ATTR_PN]);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		rx_sa->next_pn = nla_get_u64(tb_sa[MACSEC_SA_ATTR_PN]);
+		spin_unlock_bh(&rx_sa->lock);
+	}
+
+	if (tb_sa[MACSEC_SA_ATTR_ACTIVE])
+		rx_sa->active = !!nla_get_u8(tb_sa[MACSEC_SA_ATTR_ACTIVE]);
+
+	rx_sa->sc = rx_sc;
+
+	if (secy->xpn) {
+		rx_sa->ssci = nla_get_ssci(tb_sa[MACSEC_SA_ATTR_SSCI]);
+		nla_memcpy(rx_sa->key.salt.bytes, tb_sa[MACSEC_SA_ATTR_SALT],
+			   MACSEC_SALT_LEN);
+	}
+
+	/* If h/w offloading is available, propagate to the device */
+	if (macsec_is_offloaded(netdev_priv(dev))) {
+		const struct macsec_ops *ops;
+		struct macsec_context ctx;
+
+		ops = macsec_get_ops(netdev_priv(dev), &ctx);
+		if (!ops) {
+			err = -EOPNOTSUPP;
+			goto cleanup;
+		}
+
+		ctx.sa.assoc_num = assoc_num;
+		ctx.sa.rx_sa = rx_sa;
+		ctx.secy = secy;
+		memcpy(ctx.sa.key, nla_data(tb_sa[MACSEC_SA_ATTR_KEY]),
+		       secy->key_len);
+
+		err = macsec_offload(ops->mdo_add_rxsa, &ctx);
+		memzero_explicit(ctx.sa.key, secy->key_len);
+		if (err)
+			goto cleanup;
+	}
+
+	nla_memcpy(rx_sa->key.id, tb_sa[MACSEC_SA_ATTR_KEYID], MACSEC_KEYID_LEN);
+	rcu_assign_pointer(rx_sc->sa[assoc_num], rx_sa);
+
+	rtnl_unlock();
+
+	return 0;
+
+cleanup:
+	macsec_rxsa_put(rx_sa);
+	rtnl_unlock();
+	return err;
+}
+
+static bool validate_add_rxsc(struct nlattr **attrs)
+{
+	if (!attrs[MACSEC_RXSC_ATTR_SCI])
+		return false;
+
+	if (attrs[MACSEC_RXSC_ATTR_ACTIVE]) {
+		if (nla_get_u8(attrs[MACSEC_RXSC_ATTR_ACTIVE]) > 1)
+			return false;
+	}
+
+	return true;
+}
+
+static int macsec_add_rxsc(struct sk_buff *skb, struct genl_info *info)
+{
+	struct net_device *dev;
+	sci_t sci = MACSEC_UNDEF_SCI;
+	struct nlattr **attrs = info->attrs;
+	struct macsec_rx_sc *rx_sc;
+	struct nlattr *tb_rxsc[MACSEC_RXSC_ATTR_MAX + 1];
+	struct macsec_secy *secy;
+	bool active = true;
+	int ret;
+
+	if (!attrs[MACSEC_ATTR_IFINDEX])
+		return -EINVAL;
+
+	if (parse_rxsc_config(attrs, tb_rxsc))
+		return -EINVAL;
+
+	if (!validate_add_rxsc(tb_rxsc))
+		return -EINVAL;
+
+	rtnl_lock();
+	dev = get_dev_from_nl(genl_info_net(info), attrs);
+	if (IS_ERR(dev)) {
+		rtnl_unlock();
+		return PTR_ERR(dev);
+	}
+
+	secy = &macsec_priv(dev)->secy;
+	sci = nla_get_sci(tb_rxsc[MACSEC_RXSC_ATTR_SCI]);
+
+	if (tb_rxsc[MACSEC_RXSC_ATTR_ACTIVE])
+		active = nla_get_u8(tb_rxsc[MACSEC_RXSC_ATTR_ACTIVE]);
+
+	rx_sc = create_rx_sc(dev, sci, active);
+	if (IS_ERR(rx_sc)) {
+		rtnl_unlock();
+		return PTR_ERR(rx_sc);
+	}
+
+	if (macsec_is_offloaded(netdev_priv(dev))) {
+		const struct macsec_ops *ops;
+		struct macsec_context ctx;
+
+		ops = macsec_get_ops(netdev_priv(dev), &ctx);
+		if (!ops) {
+			ret = -EOPNOTSUPP;
+			goto cleanup;
+		}
+
+		ctx.rx_sc = rx_sc;
+		ctx.secy = secy;
+
+		ret = macsec_offload(ops->mdo_add_rxsc, &ctx);
+		if (ret)
+			goto cleanup;
+	}
+
+	rtnl_unlock();
+
+	return 0;
+
+cleanup:
+	del_rx_sc(secy, sci);
+	free_rx_sc(rx_sc);
+	rtnl_unlock();
+	return ret;
+}
+
+static bool validate_add_txsa(struct nlattr **attrs)
+{
+	if (!attrs[MACSEC_SA_ATTR_AN] ||
+	    !attrs[MACSEC_SA_ATTR_PN] ||
+	    !attrs[MACSEC_SA_ATTR_KEY] ||
+	    !attrs[MACSEC_SA_ATTR_KEYID])
+		return false;
+
+	if (nla_get_u8(attrs[MACSEC_SA_ATTR_AN]) >= MACSEC_NUM_AN)
+		return false;
+
+	if (nla_get_u64(attrs[MACSEC_SA_ATTR_PN]) == 0)
+		return false;
+
+	if (attrs[MACSEC_SA_ATTR_ACTIVE]) {
+		if (nla_get_u8(attrs[MACSEC_SA_ATTR_ACTIVE]) > 1)
+			return false;
+	}
+
+	if (nla_len(attrs[MACSEC_SA_ATTR_KEYID]) != MACSEC_KEYID_LEN)
+		return false;
+
+	return true;
+}
+
+static int macsec_add_txsa(struct sk_buff *skb, struct genl_info *info)
+{
+	struct net_device *dev;
+	struct nlattr **attrs = info->attrs;
+	struct macsec_secy *secy;
+	struct macsec_tx_sc *tx_sc;
+	struct macsec_tx_sa *tx_sa;
+	unsigned char assoc_num;
+	int pn_len;
+	struct nlattr *tb_sa[MACSEC_SA_ATTR_MAX + 1];
+	bool was_operational;
+	int err;
+
+	if (!attrs[MACSEC_ATTR_IFINDEX])
+		return -EINVAL;
+
+	if (parse_sa_config(attrs, tb_sa))
+		return -EINVAL;
+
+	if (!validate_add_txsa(tb_sa))
+		return -EINVAL;
+
+	rtnl_lock();
+	dev = get_dev_from_nl(genl_info_net(info), attrs);
+	if (IS_ERR(dev)) {
+		rtnl_unlock();
+		return PTR_ERR(dev);
+	}
+
+	secy = &macsec_priv(dev)->secy;
+	tx_sc = &secy->tx_sc;
+
+	assoc_num = nla_get_u8(tb_sa[MACSEC_SA_ATTR_AN]);
+
+	if (nla_len(tb_sa[MACSEC_SA_ATTR_KEY]) != secy->key_len) {
+		pr_notice("macsec: nl: add_txsa: bad key length: %d != %d\n",
+			  nla_len(tb_sa[MACSEC_SA_ATTR_KEY]), secy->key_len);
+		rtnl_unlock();
+		return -EINVAL;
+	}
+
+	pn_len = secy->xpn ? MACSEC_XPN_PN_LEN : MACSEC_DEFAULT_PN_LEN;
+	if (nla_len(tb_sa[MACSEC_SA_ATTR_PN]) != pn_len) {
+		pr_notice("macsec: nl: add_txsa: bad pn length: %d != %d\n",
+			  nla_len(tb_sa[MACSEC_SA_ATTR_PN]), pn_len);
+		rtnl_unlock();
+		return -EINVAL;
+	}
+
+	if (secy->xpn) {
+		if (!tb_sa[MACSEC_SA_ATTR_SSCI] || !tb_sa[MACSEC_SA_ATTR_SALT]) {
+			rtnl_unlock();
+			return -EINVAL;
+		}
+
+		if (nla_len(tb_sa[MACSEC_SA_ATTR_SALT]) != MACSEC_SALT_LEN) {
+			pr_notice("macsec: nl: add_txsa: bad salt length: %d != %d\n",
+				  nla_len(tb_sa[MACSEC_SA_ATTR_SALT]),
+				  MACSEC_SALT_LEN);
+			rtnl_unlock();
+			return -EINVAL;
+		}
+	}
+
+	tx_sa = rtnl_dereference(tx_sc->sa[assoc_num]);
+	if (tx_sa) {
+		rtnl_unlock();
+		return -EBUSY;
+	}
+
+	tx_sa = kmalloc(sizeof(*tx_sa), GFP_KERNEL);
+	if (!tx_sa) {
+		rtnl_unlock();
+		return -ENOMEM;
+	}
+
+	err = init_tx_sa(tx_sa, nla_data(tb_sa[MACSEC_SA_ATTR_KEY]),
+			 secy->key_len, secy->icv_len);
+	if (err < 0) {
+		kfree(tx_sa);
+		rtnl_unlock();
+		return err;
+	}
+
+	spin_lock_bh(&tx_sa->lock);
+	tx_sa->next_pn = nla_get_u64(tb_sa[MACSEC_SA_ATTR_PN]);
+	spin_unlock_bh(&tx_sa->lock);
+
+	if (tb_sa[MACSEC_SA_ATTR_ACTIVE])
+		tx_sa->active = !!nla_get_u8(tb_sa[MACSEC_SA_ATTR_ACTIVE]);
+
+	was_operational = secy->operational;
+	if (assoc_num == tx_sc->encoding_sa && tx_sa->active)
+		secy->operational = true;
+
+	if (secy->xpn) {
+		tx_sa->ssci = nla_get_ssci(tb_sa[MACSEC_SA_ATTR_SSCI]);
+		nla_memcpy(tx_sa->key.salt.bytes, tb_sa[MACSEC_SA_ATTR_SALT],
+			   MACSEC_SALT_LEN);
+	}
+
+	/* If h/w offloading is available, propagate to the device */
+	if (macsec_is_offloaded(netdev_priv(dev))) {
+		const struct macsec_ops *ops;
+		struct macsec_context ctx;
+
+		ops = macsec_get_ops(netdev_priv(dev), &ctx);
+		if (!ops) {
+			err = -EOPNOTSUPP;
+			goto cleanup;
+		}
+
+		ctx.sa.assoc_num = assoc_num;
+		ctx.sa.tx_sa = tx_sa;
+		ctx.secy = secy;
+		memcpy(ctx.sa.key, nla_data(tb_sa[MACSEC_SA_ATTR_KEY]),
+		       secy->key_len);
+
+		err = macsec_offload(ops->mdo_add_txsa, &ctx);
+		memzero_explicit(ctx.sa.key, secy->key_len);
+		if (err)
+			goto cleanup;
+	}
+
+	nla_memcpy(tx_sa->key.id, tb_sa[MACSEC_SA_ATTR_KEYID], MACSEC_KEYID_LEN);
+	rcu_assign_pointer(tx_sc->sa[assoc_num], tx_sa);
+
+	rtnl_unlock();
+
+	return 0;
+
+cleanup:
+	secy->operational = was_operational;
+	macsec_txsa_put(tx_sa);
+	rtnl_unlock();
+	return err;
+}
+
+static int macsec_del_rxsa(struct sk_buff *skb, struct genl_info *info)
+{
+	struct nlattr **attrs = info->attrs;
+	struct net_device *dev;
+	struct macsec_secy *secy;
+	struct macsec_rx_sc *rx_sc;
+	struct macsec_rx_sa *rx_sa;
+	u8 assoc_num;
+	struct nlattr *tb_rxsc[MACSEC_RXSC_ATTR_MAX + 1];
+	struct nlattr *tb_sa[MACSEC_SA_ATTR_MAX + 1];
+	int ret;
+
+	if (!attrs[MACSEC_ATTR_IFINDEX])
+		return -EINVAL;
+
+	if (parse_sa_config(attrs, tb_sa))
+		return -EINVAL;
+
+	if (parse_rxsc_config(attrs, tb_rxsc))
+		return -EINVAL;
+
+	rtnl_lock();
+	rx_sa = get_rxsa_from_nl(genl_info_net(info), attrs, tb_rxsc, tb_sa,
+				 &dev, &secy, &rx_sc, &assoc_num);
+	if (IS_ERR(rx_sa)) {
+		rtnl_unlock();
+		return PTR_ERR(rx_sa);
+	}
+
+	if (rx_sa->active) {
+		rtnl_unlock();
+		return -EBUSY;
+	}
+
+	/* If h/w offloading is available, propagate to the device */
+	if (macsec_is_offloaded(netdev_priv(dev))) {
+		const struct macsec_ops *ops;
+		struct macsec_context ctx;
+
+		ops = macsec_get_ops(netdev_priv(dev), &ctx);
+		if (!ops) {
+			ret = -EOPNOTSUPP;
+			goto cleanup;
+		}
+
+		ctx.sa.assoc_num = assoc_num;
+		ctx.sa.rx_sa = rx_sa;
+		ctx.secy = secy;
+
+		ret = macsec_offload(ops->mdo_del_rxsa, &ctx);
+		if (ret)
+			goto cleanup;
+	}
+
+	RCU_INIT_POINTER(rx_sc->sa[assoc_num], NULL);
+	clear_rx_sa(rx_sa);
+
+	rtnl_unlock();
+
+	return 0;
+
+cleanup:
+	rtnl_unlock();
+	return ret;
+}
+
+static int macsec_del_rxsc(struct sk_buff *skb, struct genl_info *info)
+{
+	struct nlattr **attrs = info->attrs;
+	struct net_device *dev;
+	struct macsec_secy *secy;
+	struct macsec_rx_sc *rx_sc;
+	sci_t sci;
+	struct nlattr *tb_rxsc[MACSEC_RXSC_ATTR_MAX + 1];
+	int ret;
+
+	if (!attrs[MACSEC_ATTR_IFINDEX])
+		return -EINVAL;
+
+	if (parse_rxsc_config(attrs, tb_rxsc))
+		return -EINVAL;
+
+	if (!tb_rxsc[MACSEC_RXSC_ATTR_SCI])
+		return -EINVAL;
+
+	rtnl_lock();
+	dev = get_dev_from_nl(genl_info_net(info), info->attrs);
+	if (IS_ERR(dev)) {
+		rtnl_unlock();
+		return PTR_ERR(dev);
+	}
+
+	secy = &macsec_priv(dev)->secy;
+	sci = nla_get_sci(tb_rxsc[MACSEC_RXSC_ATTR_SCI]);
+
+	rx_sc = del_rx_sc(secy, sci);
+	if (!rx_sc) {
+		rtnl_unlock();
+		return -ENODEV;
+	}
+
+	/* If h/w offloading is available, propagate to the device */
+	if (macsec_is_offloaded(netdev_priv(dev))) {
+		const struct macsec_ops *ops;
+		struct macsec_context ctx;
+
+		ops = macsec_get_ops(netdev_priv(dev), &ctx);
+		if (!ops) {
+			ret = -EOPNOTSUPP;
+			goto cleanup;
+		}
+
+		ctx.rx_sc = rx_sc;
+		ctx.secy = secy;
+		ret = macsec_offload(ops->mdo_del_rxsc, &ctx);
+		if (ret)
+			goto cleanup;
+	}
+
+	free_rx_sc(rx_sc);
+	rtnl_unlock();
+
+	return 0;
+
+cleanup:
+	rtnl_unlock();
+	return ret;
+}
+
+static int macsec_del_txsa(struct sk_buff *skb, struct genl_info *info)
+{
+	struct nlattr **attrs = info->attrs;
+	struct net_device *dev;
+	struct macsec_secy *secy;
+	struct macsec_tx_sc *tx_sc;
+	struct macsec_tx_sa *tx_sa;
+	u8 assoc_num;
+	struct nlattr *tb_sa[MACSEC_SA_ATTR_MAX + 1];
+	int ret;
+
+	if (!attrs[MACSEC_ATTR_IFINDEX])
+		return -EINVAL;
+
+	if (parse_sa_config(attrs, tb_sa))
+		return -EINVAL;
+
+	rtnl_lock();
+	tx_sa = get_txsa_from_nl(genl_info_net(info), attrs, tb_sa,
+				 &dev, &secy, &tx_sc, &assoc_num);
+	if (IS_ERR(tx_sa)) {
+		rtnl_unlock();
+		return PTR_ERR(tx_sa);
+	}
+
+	if (tx_sa->active) {
+		rtnl_unlock();
+		return -EBUSY;
+	}
+
+	/* If h/w offloading is available, propagate to the device */
+	if (macsec_is_offloaded(netdev_priv(dev))) {
+		const struct macsec_ops *ops;
+		struct macsec_context ctx;
+
+		ops = macsec_get_ops(netdev_priv(dev), &ctx);
+		if (!ops) {
+			ret = -EOPNOTSUPP;
+			goto cleanup;
+		}
+
+		ctx.sa.assoc_num = assoc_num;
+		ctx.sa.tx_sa = tx_sa;
+		ctx.secy = secy;
+
+		ret = macsec_offload(ops->mdo_del_txsa, &ctx);
+		if (ret)
+			goto cleanup;
+	}
+
+	RCU_INIT_POINTER(tx_sc->sa[assoc_num], NULL);
+	clear_tx_sa(tx_sa);
+
+	rtnl_unlock();
+
+	return 0;
+
+cleanup:
+	rtnl_unlock();
+	return ret;
+}
+
+static bool validate_upd_sa(struct nlattr **attrs)
+{
+	if (!attrs[MACSEC_SA_ATTR_AN] ||
+	    attrs[MACSEC_SA_ATTR_KEY] ||
+	    attrs[MACSEC_SA_ATTR_KEYID] ||
+	    attrs[MACSEC_SA_ATTR_SSCI] ||
+	    attrs[MACSEC_SA_ATTR_SALT])
+		return false;
+
+	if (nla_get_u8(attrs[MACSEC_SA_ATTR_AN]) >= MACSEC_NUM_AN)
+		return false;
+
+	if (attrs[MACSEC_SA_ATTR_PN] && nla_get_u64(attrs[MACSEC_SA_ATTR_PN]) == 0)
+		return false;
+
+	if (attrs[MACSEC_SA_ATTR_ACTIVE]) {
+		if (nla_get_u8(attrs[MACSEC_SA_ATTR_ACTIVE]) > 1)
+			return false;
+	}
+
+	return true;
+}
+
+static int macsec_upd_txsa(struct sk_buff *skb, struct genl_info *info)
+{
+	struct nlattr **attrs = info->attrs;
+	struct net_device *dev;
+	struct macsec_secy *secy;
+	struct macsec_tx_sc *tx_sc;
+	struct macsec_tx_sa *tx_sa;
+	u8 assoc_num;
+	struct nlattr *tb_sa[MACSEC_SA_ATTR_MAX + 1];
+	bool was_operational, was_active;
+	pn_t prev_pn;
+	int ret = 0;
+
+	prev_pn.full64 = 0;
+
+	if (!attrs[MACSEC_ATTR_IFINDEX])
+		return -EINVAL;
+
+	if (parse_sa_config(attrs, tb_sa))
+		return -EINVAL;
+
+	if (!validate_upd_sa(tb_sa))
+		return -EINVAL;
+
+	rtnl_lock();
+	tx_sa = get_txsa_from_nl(genl_info_net(info), attrs, tb_sa,
+				 &dev, &secy, &tx_sc, &assoc_num);
+	if (IS_ERR(tx_sa)) {
+		rtnl_unlock();
+		return PTR_ERR(tx_sa);
+	}
+
+	if (tb_sa[MACSEC_SA_ATTR_PN]) {
+		int pn_len;
+
+		pn_len = secy->xpn ? MACSEC_XPN_PN_LEN : MACSEC_DEFAULT_PN_LEN;
+		if (nla_len(tb_sa[MACSEC_SA_ATTR_PN]) != pn_len) {
+			pr_notice("macsec: nl: upd_txsa: bad pn length: %d != %d\n",
+				  nla_len(tb_sa[MACSEC_SA_ATTR_PN]), pn_len);
+			rtnl_unlock();
+			return -EINVAL;
+		}
+
+		spin_lock_bh(&tx_sa->lock);
+		prev_pn = tx_sa->next_pn_halves;
+		tx_sa->next_pn = nla_get_u64(tb_sa[MACSEC_SA_ATTR_PN]);
+		spin_unlock_bh(&tx_sa->lock);
+	}
+
+	was_active = tx_sa->active;
+	if (tb_sa[MACSEC_SA_ATTR_ACTIVE])
+		tx_sa->active = nla_get_u8(tb_sa[MACSEC_SA_ATTR_ACTIVE]);
+
+	was_operational = secy->operational;
+	if (assoc_num == tx_sc->encoding_sa)
+		secy->operational = tx_sa->active;
+
+	/* If h/w offloading is available, propagate to the device */
+	if (macsec_is_offloaded(netdev_priv(dev))) {
+		const struct macsec_ops *ops;
+		struct macsec_context ctx;
+
+		ops = macsec_get_ops(netdev_priv(dev), &ctx);
+		if (!ops) {
+			ret = -EOPNOTSUPP;
+			goto cleanup;
+		}
+
+		ctx.sa.assoc_num = assoc_num;
+		ctx.sa.tx_sa = tx_sa;
+		ctx.sa.update_pn = !!prev_pn.full64;
+		ctx.secy = secy;
+
+		ret = macsec_offload(ops->mdo_upd_txsa, &ctx);
+		if (ret)
+			goto cleanup;
+	}
+
+	rtnl_unlock();
+
+	return 0;
+
+cleanup:
+	if (tb_sa[MACSEC_SA_ATTR_PN]) {
+		spin_lock_bh(&tx_sa->lock);
+		tx_sa->next_pn_halves = prev_pn;
+		spin_unlock_bh(&tx_sa->lock);
+	}
+	tx_sa->active = was_active;
+	secy->operational = was_operational;
+	rtnl_unlock();
+	return ret;
+}
+
+static int macsec_upd_rxsa(struct sk_buff *skb, struct genl_info *info)
+{
+	struct nlattr **attrs = info->attrs;
+	struct net_device *dev;
+	struct macsec_secy *secy;
+	struct macsec_rx_sc *rx_sc;
+	struct macsec_rx_sa *rx_sa;
+	u8 assoc_num;
+	struct nlattr *tb_rxsc[MACSEC_RXSC_ATTR_MAX + 1];
+	struct nlattr *tb_sa[MACSEC_SA_ATTR_MAX + 1];
+	bool was_active;
+	pn_t prev_pn;
+	int ret = 0;
+
+	prev_pn.full64 = 0;
+
+	if (!attrs[MACSEC_ATTR_IFINDEX])
+		return -EINVAL;
+
+	if (parse_rxsc_config(attrs, tb_rxsc))
+		return -EINVAL;
+
+	if (parse_sa_config(attrs, tb_sa))
+		return -EINVAL;
+
+	if (!validate_upd_sa(tb_sa))
+		return -EINVAL;
+
+	rtnl_lock();
+	rx_sa = get_rxsa_from_nl(genl_info_net(info), attrs, tb_rxsc, tb_sa,
+				 &dev, &secy, &rx_sc, &assoc_num);
+	if (IS_ERR(rx_sa)) {
+		rtnl_unlock();
+		return PTR_ERR(rx_sa);
+	}
+
+	if (tb_sa[MACSEC_SA_ATTR_PN]) {
+		int pn_len;
+
+		pn_len = secy->xpn ? MACSEC_XPN_PN_LEN : MACSEC_DEFAULT_PN_LEN;
+		if (nla_len(tb_sa[MACSEC_SA_ATTR_PN]) != pn_len) {
+			pr_notice("macsec: nl: upd_rxsa: bad pn length: %d != %d\n",
+				  nla_len(tb_sa[MACSEC_SA_ATTR_PN]), pn_len);
+			rtnl_unlock();
+			return -EINVAL;
+		}
+
+		spin_lock_bh(&rx_sa->lock);
+		prev_pn = rx_sa->next_pn_halves;
+		rx_sa->next_pn = nla_get_u64(tb_sa[MACSEC_SA_ATTR_PN]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		spin_unlock_bh(&rx_sa->lock);
 	}
 

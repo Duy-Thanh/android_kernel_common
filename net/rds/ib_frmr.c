@@ -133,6 +133,7 @@ static int rds_ib_post_reg_frmr(struct rds_ib_mr *ibmr)
 
 	ret = ib_map_mr_sg_zbva(frmr->mr, ibmr->sg, ibmr->sg_dma_len,
 				&off, PAGE_SIZE);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (unlikely(ret != ibmr->sg_dma_len)) {
 		ret = ret < 0 ? ret : -EINVAL;
 		goto out_inc;
@@ -185,6 +186,57 @@ static int rds_ib_post_reg_frmr(struct rds_ib_mr *ibmr)
 
 out_inc:
 	atomic_inc(&ibmr->ic->i_fastreg_wrs);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (unlikely(ret != ibmr->sg_dma_len))
+		return ret < 0 ? ret : -EINVAL;
+
+	if (cmpxchg(&frmr->fr_state,
+		    FRMR_IS_FREE, FRMR_IS_INUSE) != FRMR_IS_FREE)
+		return -EBUSY;
+
+	atomic_inc(&ibmr->ic->i_fastreg_inuse_count);
+
+	/* Perform a WR for the fast_reg_mr. Each individual page
+	 * in the sg list is added to the fast reg page list and placed
+	 * inside the fast_reg_mr WR.  The key used is a rolling 8bit
+	 * counter, which should guarantee uniqueness.
+	 */
+	ib_update_fast_reg_key(frmr->mr, ibmr->remap_count++);
+	frmr->fr_reg = true;
+
+	memset(&reg_wr, 0, sizeof(reg_wr));
+	reg_wr.wr.wr_id = (unsigned long)(void *)ibmr;
+	reg_wr.wr.opcode = IB_WR_REG_MR;
+	reg_wr.wr.num_sge = 0;
+	reg_wr.mr = frmr->mr;
+	reg_wr.key = frmr->mr->rkey;
+	reg_wr.access = IB_ACCESS_LOCAL_WRITE |
+			IB_ACCESS_REMOTE_READ |
+			IB_ACCESS_REMOTE_WRITE;
+	reg_wr.wr.send_flags = IB_SEND_SIGNALED;
+
+	ret = ib_post_send(ibmr->ic->i_cm_id->qp, &reg_wr.wr, NULL);
+	if (unlikely(ret)) {
+		/* Failure here can be because of -ENOMEM as well */
+		rds_transition_frwr_state(ibmr, FRMR_IS_INUSE, FRMR_IS_STALE);
+
+		atomic_inc(&ibmr->ic->i_fastreg_wrs);
+		if (printk_ratelimit())
+			pr_warn("RDS/IB: %s returned error(%d)\n",
+				__func__, ret);
+		goto out;
+	}
+
+	/* Wait for the registration to complete in order to prevent an invalid
+	 * access error resulting from a race between the memory region already
+	 * being accessed while registration is still pending.
+	 */
+	wait_event(frmr->fr_reg_done, !frmr->fr_reg);
+
+out:
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return ret;
 }
 

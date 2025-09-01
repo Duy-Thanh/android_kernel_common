@@ -195,6 +195,7 @@ void kmsan_internal_set_shadow_origin(void *addr, size_t size, int b,
 				      u32 origin, bool checked)
 {
 	u64 address = (u64)addr;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	void *shadow_start;
 	u32 *aligned_shadow, *origin_start;
 	size_t pad = 0;
@@ -235,6 +236,45 @@ void kmsan_internal_set_shadow_origin(void *addr, size_t size, int b,
 	 */
 	for (int i = 0; i < size / KMSAN_ORIGIN_SIZE; i++) {
 		if (origin || !aligned_shadow[i])
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u32 *shadow_start, *origin_start;
+	size_t pad = 0;
+
+	KMSAN_WARN_ON(!kmsan_metadata_is_contiguous(addr, size));
+	shadow_start = kmsan_get_metadata(addr, KMSAN_META_SHADOW);
+	if (!shadow_start) {
+		/*
+		 * kmsan_metadata_is_contiguous() is true, so either all shadow
+		 * and origin pages are NULL, or all are non-NULL.
+		 */
+		if (checked) {
+			pr_err("%s: not memsetting %ld bytes starting at %px, because the shadow is NULL\n",
+			       __func__, size, addr);
+			KMSAN_WARN_ON(true);
+		}
+		return;
+	}
+	__memset(shadow_start, b, size);
+
+	if (!IS_ALIGNED(address, KMSAN_ORIGIN_SIZE)) {
+		pad = address % KMSAN_ORIGIN_SIZE;
+		address -= pad;
+		size += pad;
+	}
+	size = ALIGN(size, KMSAN_ORIGIN_SIZE);
+	origin_start =
+		(u32 *)kmsan_get_metadata((void *)address, KMSAN_META_ORIGIN);
+
+	/*
+	 * If the new origin is non-zero, assume that the shadow byte is also non-zero,
+	 * and unconditionally overwrite the old origin slot.
+	 * If the new origin is zero, overwrite the old origin slot iff the
+	 * corresponding shadow slot is zero.
+	 */
+	for (int i = 0; i < size / KMSAN_ORIGIN_SIZE; i++) {
+		if (origin || !shadow_start[i])
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			origin_start[i] = origin;
 	}
 }

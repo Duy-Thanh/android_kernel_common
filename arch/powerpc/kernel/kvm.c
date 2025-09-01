@@ -632,6 +632,7 @@ static void __init kvm_check_ins(u32 *inst, u32 features)
 #endif
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #ifdef CONFIG_PPC_BOOK3S_32
 	switch (inst_no_rt & ~KVM_MASK_RB) {
 	case KVM_INST_MTSRIN:
@@ -654,6 +655,31 @@ static void __init kvm_check_ins(u32 *inst, u32 features)
 		break;
 	}
 #endif
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	switch (inst_no_rt & ~KVM_MASK_RB) {
+#ifdef CONFIG_PPC_BOOK3S_32
+	case KVM_INST_MTSRIN:
+		if (features & KVM_MAGIC_FEAT_SR) {
+			u32 inst_rb = _inst & KVM_MASK_RB;
+			kvm_patch_ins_mtsrin(inst, inst_rt, inst_rb);
+		}
+		break;
+#endif
+	}
+
+	switch (_inst) {
+#ifdef CONFIG_BOOKE
+	case KVM_INST_WRTEEI_0:
+		kvm_patch_ins_wrteei_0(inst);
+		break;
+
+	case KVM_INST_WRTEEI_1:
+		kvm_patch_ins_wrtee(inst, 0, 1);
+		break;
+#endif
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 extern u32 kvm_template_start[];

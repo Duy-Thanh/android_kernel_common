@@ -216,6 +216,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void ufs_intel_ctrl_uic_compl(struct ufs_hba *hba, bool enable)
 {
 	u32 set = ufshcd_readl(hba, REG_INTERRUPT_ENABLE);
@@ -573,6 +574,326 @@ static struct ufs_hba_variant_ops ufs_intel_mtl_hba_vops = {
 	.exit			= ufs_intel_common_exit,
 	.hce_enable_notify	= ufs_intel_hce_enable_notify,
 	.hibern8_notify		= ufs_intel_mtl_h8_notify,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define INTEL_ACTIVELTR		0x804
+#define INTEL_IDLELTR		0x808
+
+#define INTEL_LTR_REQ		BIT(15)
+#define INTEL_LTR_SCALE_MASK	GENMASK(11, 10)
+#define INTEL_LTR_SCALE_1US	(2 << 10)
+#define INTEL_LTR_SCALE_32US	(3 << 10)
+#define INTEL_LTR_VALUE_MASK	GENMASK(9, 0)
+
+static void intel_cache_ltr(struct ufs_hba *hba)
+{
+	struct intel_host *host = ufshcd_get_variant(hba);
+
+	host->active_ltr = readl(hba->mmio_base + INTEL_ACTIVELTR);
+	host->idle_ltr = readl(hba->mmio_base + INTEL_IDLELTR);
+}
+
+static void intel_ltr_set(struct device *dev, s32 val)
+{
+	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct intel_host *host = ufshcd_get_variant(hba);
+	u32 ltr;
+
+	pm_runtime_get_sync(dev);
+
+	/*
+	 * Program latency tolerance (LTR) accordingly what has been asked
+	 * by the PM QoS layer or disable it in case we were passed
+	 * negative value or PM_QOS_LATENCY_ANY.
+	 */
+	ltr = readl(hba->mmio_base + INTEL_ACTIVELTR);
+
+	if (val == PM_QOS_LATENCY_ANY || val < 0) {
+		ltr &= ~INTEL_LTR_REQ;
+	} else {
+		ltr |= INTEL_LTR_REQ;
+		ltr &= ~INTEL_LTR_SCALE_MASK;
+		ltr &= ~INTEL_LTR_VALUE_MASK;
+
+		if (val > INTEL_LTR_VALUE_MASK) {
+			val >>= 5;
+			if (val > INTEL_LTR_VALUE_MASK)
+				val = INTEL_LTR_VALUE_MASK;
+			ltr |= INTEL_LTR_SCALE_32US | val;
+		} else {
+			ltr |= INTEL_LTR_SCALE_1US | val;
+		}
+	}
+
+	if (ltr == host->active_ltr)
+		goto out;
+
+	writel(ltr, hba->mmio_base + INTEL_ACTIVELTR);
+	writel(ltr, hba->mmio_base + INTEL_IDLELTR);
+
+	/* Cache the values into intel_host structure */
+	intel_cache_ltr(hba);
+out:
+	pm_runtime_put(dev);
+}
+
+static void intel_ltr_expose(struct device *dev)
+{
+	dev->power.set_latency_tolerance = intel_ltr_set;
+	dev_pm_qos_expose_latency_tolerance(dev);
+}
+
+static void intel_ltr_hide(struct device *dev)
+{
+	dev_pm_qos_hide_latency_tolerance(dev);
+	dev->power.set_latency_tolerance = NULL;
+}
+
+static void intel_add_debugfs(struct ufs_hba *hba)
+{
+	struct dentry *dir = debugfs_create_dir(dev_name(hba->dev), NULL);
+	struct intel_host *host = ufshcd_get_variant(hba);
+
+	intel_cache_ltr(hba);
+
+	host->debugfs_root = dir;
+	debugfs_create_x32("active_ltr", 0444, dir, &host->active_ltr);
+	debugfs_create_x32("idle_ltr", 0444, dir, &host->idle_ltr);
+}
+
+static void intel_remove_debugfs(struct ufs_hba *hba)
+{
+	struct intel_host *host = ufshcd_get_variant(hba);
+
+	debugfs_remove_recursive(host->debugfs_root);
+}
+
+static int ufs_intel_device_reset(struct ufs_hba *hba)
+{
+	struct intel_host *host = ufshcd_get_variant(hba);
+
+	if (INTEL_DSM_SUPPORTED(host, RESET)) {
+		u32 result = 0;
+		int err;
+
+		err = intel_dsm(host, hba->dev, INTEL_DSM_RESET, &result);
+		if (!err && !result)
+			err = -EIO;
+		if (err)
+			dev_err(hba->dev, "%s: DSM error %d result %u\n",
+				__func__, err, result);
+		return err;
+	}
+
+	if (!host->reset_gpio)
+		return -EOPNOTSUPP;
+
+	gpiod_set_value_cansleep(host->reset_gpio, 1);
+	usleep_range(10, 15);
+
+	gpiod_set_value_cansleep(host->reset_gpio, 0);
+	usleep_range(10, 15);
+
+	return 0;
+}
+
+static struct gpio_desc *ufs_intel_get_reset_gpio(struct device *dev)
+{
+	/* GPIO in _DSD has active low setting */
+	return devm_gpiod_get_optional(dev, "reset", GPIOD_OUT_LOW);
+}
+
+static int ufs_intel_common_init(struct ufs_hba *hba)
+{
+	struct intel_host *host;
+
+	hba->caps |= UFSHCD_CAP_RPM_AUTOSUSPEND;
+
+	host = devm_kzalloc(hba->dev, sizeof(*host), GFP_KERNEL);
+	if (!host)
+		return -ENOMEM;
+	ufshcd_set_variant(hba, host);
+	intel_dsm_init(host, hba->dev);
+	if (INTEL_DSM_SUPPORTED(host, RESET)) {
+		if (hba->vops->device_reset)
+			hba->caps |= UFSHCD_CAP_DEEPSLEEP;
+	} else {
+		if (hba->vops->device_reset)
+			host->reset_gpio = ufs_intel_get_reset_gpio(hba->dev);
+		if (IS_ERR(host->reset_gpio)) {
+			dev_err(hba->dev, "%s: failed to get reset GPIO, error %ld\n",
+				__func__, PTR_ERR(host->reset_gpio));
+			host->reset_gpio = NULL;
+		}
+		if (host->reset_gpio) {
+			gpiod_set_value_cansleep(host->reset_gpio, 0);
+			hba->caps |= UFSHCD_CAP_DEEPSLEEP;
+		}
+	}
+	intel_ltr_expose(hba->dev);
+	intel_add_debugfs(hba);
+	return 0;
+}
+
+static void ufs_intel_common_exit(struct ufs_hba *hba)
+{
+	intel_remove_debugfs(hba);
+	intel_ltr_hide(hba->dev);
+}
+
+static int ufs_intel_resume(struct ufs_hba *hba, enum ufs_pm_op op)
+{
+	if (ufshcd_is_link_hibern8(hba)) {
+		int ret = ufshcd_uic_hibern8_exit(hba);
+
+		if (!ret) {
+			ufshcd_set_link_active(hba);
+		} else {
+			dev_err(hba->dev, "%s: hibern8 exit failed %d\n",
+				__func__, ret);
+			/*
+			 * Force reset and restore. Any other actions can lead
+			 * to an unrecoverable state.
+			 */
+			ufshcd_set_link_off(hba);
+		}
+	}
+
+	return 0;
+}
+
+static int ufs_intel_ehl_init(struct ufs_hba *hba)
+{
+	hba->quirks |= UFSHCD_QUIRK_BROKEN_AUTO_HIBERN8;
+	return ufs_intel_common_init(hba);
+}
+
+static void ufs_intel_lkf_late_init(struct ufs_hba *hba)
+{
+	/* LKF always needs a full reset, so set PM accordingly */
+	if (hba->caps & UFSHCD_CAP_DEEPSLEEP) {
+		hba->spm_lvl = UFS_PM_LVL_6;
+		hba->rpm_lvl = UFS_PM_LVL_6;
+	} else {
+		hba->spm_lvl = UFS_PM_LVL_5;
+		hba->rpm_lvl = UFS_PM_LVL_5;
+	}
+}
+
+static int ufs_intel_lkf_init(struct ufs_hba *hba)
+{
+	struct ufs_host *ufs_host;
+	int err;
+
+	hba->nop_out_timeout = 200;
+	hba->quirks |= UFSHCD_QUIRK_BROKEN_AUTO_HIBERN8;
+	hba->caps |= UFSHCD_CAP_CRYPTO;
+	err = ufs_intel_common_init(hba);
+	ufs_host = ufshcd_get_variant(hba);
+	ufs_host->late_init = ufs_intel_lkf_late_init;
+	return err;
+}
+
+static int ufs_intel_adl_init(struct ufs_hba *hba)
+{
+	hba->nop_out_timeout = 200;
+	hba->quirks |= UFSHCD_QUIRK_BROKEN_AUTO_HIBERN8;
+	hba->caps |= UFSHCD_CAP_WB_EN;
+	return ufs_intel_common_init(hba);
+}
+
+static int ufs_intel_mtl_init(struct ufs_hba *hba)
+{
+	hba->caps |= UFSHCD_CAP_CRYPTO | UFSHCD_CAP_WB_EN;
+	return ufs_intel_common_init(hba);
+}
+
+static int ufs_qemu_get_hba_mac(struct ufs_hba *hba)
+{
+	return MAX_SUPP_MAC;
+}
+
+static int ufs_qemu_mcq_config_resource(struct ufs_hba *hba)
+{
+	hba->mcq_base = hba->mmio_base + ufshcd_mcq_queue_cfg_addr(hba);
+
+	return 0;
+}
+
+static int ufs_qemu_op_runtime_config(struct ufs_hba *hba)
+{
+	struct ufshcd_mcq_opr_info_t *opr;
+	int i;
+
+	u32 sqdao = ufsmcq_readl(hba, ufshcd_mcq_cfg_offset(REG_SQDAO, 0));
+	u32 sqisao = ufsmcq_readl(hba, ufshcd_mcq_cfg_offset(REG_SQISAO, 0));
+	u32 cqdao = ufsmcq_readl(hba, ufshcd_mcq_cfg_offset(REG_CQDAO, 0));
+	u32 cqisao = ufsmcq_readl(hba, ufshcd_mcq_cfg_offset(REG_CQISAO, 0));
+
+	hba->mcq_opr[OPR_SQD].offset = sqdao;
+	hba->mcq_opr[OPR_SQIS].offset = sqisao;
+	hba->mcq_opr[OPR_CQD].offset = cqdao;
+	hba->mcq_opr[OPR_CQIS].offset = cqisao;
+
+	for (i = 0; i < OPR_MAX; i++) {
+		opr = &hba->mcq_opr[i];
+		opr->stride = 48;
+		opr->base = hba->mmio_base + opr->offset;
+	}
+
+	return 0;
+}
+
+static struct ufs_hba_variant_ops ufs_qemu_hba_vops = {
+	.name                   = "qemu-pci",
+	.get_hba_mac		= ufs_qemu_get_hba_mac,
+	.mcq_config_resource	= ufs_qemu_mcq_config_resource,
+	.op_runtime_config	= ufs_qemu_op_runtime_config,
+};
+
+static struct ufs_hba_variant_ops ufs_intel_cnl_hba_vops = {
+	.name                   = "intel-pci",
+	.init			= ufs_intel_common_init,
+	.exit			= ufs_intel_common_exit,
+	.link_startup_notify	= ufs_intel_link_startup_notify,
+	.resume			= ufs_intel_resume,
+};
+
+static struct ufs_hba_variant_ops ufs_intel_ehl_hba_vops = {
+	.name                   = "intel-pci",
+	.init			= ufs_intel_ehl_init,
+	.exit			= ufs_intel_common_exit,
+	.link_startup_notify	= ufs_intel_link_startup_notify,
+	.resume			= ufs_intel_resume,
+};
+
+static struct ufs_hba_variant_ops ufs_intel_lkf_hba_vops = {
+	.name                   = "intel-pci",
+	.init			= ufs_intel_lkf_init,
+	.exit			= ufs_intel_common_exit,
+	.hce_enable_notify	= ufs_intel_hce_enable_notify,
+	.link_startup_notify	= ufs_intel_link_startup_notify,
+	.pwr_change_notify	= ufs_intel_lkf_pwr_change_notify,
+	.apply_dev_quirks	= ufs_intel_lkf_apply_dev_quirks,
+	.resume			= ufs_intel_resume,
+	.device_reset		= ufs_intel_device_reset,
+};
+
+static struct ufs_hba_variant_ops ufs_intel_adl_hba_vops = {
+	.name			= "intel-pci",
+	.init			= ufs_intel_adl_init,
+	.exit			= ufs_intel_common_exit,
+	.link_startup_notify	= ufs_intel_link_startup_notify,
+	.resume			= ufs_intel_resume,
+	.device_reset		= ufs_intel_device_reset,
+};
+
+static struct ufs_hba_variant_ops ufs_intel_mtl_hba_vops = {
+	.name                   = "intel-pci",
+	.init			= ufs_intel_mtl_init,
+	.exit			= ufs_intel_common_exit,
+	.hce_enable_notify	= ufs_intel_hce_enable_notify,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.link_startup_notify	= ufs_intel_link_startup_notify,
 	.resume			= ufs_intel_resume,
 	.device_reset		= ufs_intel_device_reset,

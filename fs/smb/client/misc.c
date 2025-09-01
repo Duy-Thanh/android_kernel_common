@@ -829,6 +829,7 @@ cifs_close_all_deferred_files(struct cifs_tcon *tcon)
 		kfree(tmp_list);
 	}
 }
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 void cifs_close_deferred_file_under_dentry(struct cifs_tcon *tcon,
 					   struct dentry *dentry)
@@ -860,6 +861,46 @@ void cifs_close_deferred_file_under_dentry(struct cifs_tcon *tcon,
 		list_del(&tmp_list->list);
 		kfree(tmp_list);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void
+cifs_close_deferred_file_under_dentry(struct cifs_tcon *tcon, const char *path)
+{
+	struct cifsFileInfo *cfile;
+	struct file_list *tmp_list, *tmp_next_list;
+	void *page;
+	const char *full_path;
+	LIST_HEAD(file_head);
+
+	page = alloc_dentry_path();
+	spin_lock(&tcon->open_file_lock);
+	list_for_each_entry(cfile, &tcon->openFileList, tlist) {
+		full_path = build_path_from_dentry(cfile->dentry, page);
+		if (strstr(full_path, path)) {
+			if (delayed_work_pending(&cfile->deferred)) {
+				if (cancel_delayed_work(&cfile->deferred)) {
+					spin_lock(&CIFS_I(d_inode(cfile->dentry))->deferred_lock);
+					cifs_del_deferred_close(cfile);
+					spin_unlock(&CIFS_I(d_inode(cfile->dentry))->deferred_lock);
+
+					tmp_list = kmalloc(sizeof(struct file_list), GFP_ATOMIC);
+					if (tmp_list == NULL)
+						break;
+					tmp_list->cfile = cfile;
+					list_add_tail(&tmp_list->list, &file_head);
+				}
+			}
+		}
+	}
+	spin_unlock(&tcon->open_file_lock);
+
+	list_for_each_entry_safe(tmp_list, tmp_next_list, &file_head, list) {
+		_cifsFileInfo_put(tmp_list->cfile, true, false);
+		list_del(&tmp_list->list);
+		kfree(tmp_list);
+	}
+	free_dentry_path(page);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /*

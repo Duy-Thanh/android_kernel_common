@@ -45,6 +45,7 @@ static void nvmem_layout_bus_remove(struct device *dev)
 	return drv->remove(layout);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int nvmem_layout_bus_uevent(const struct device *dev,
 				   struct kobj_uevent_env *env)
 {
@@ -63,6 +64,14 @@ static const struct bus_type nvmem_layout_bus_type = {
 	.probe		= nvmem_layout_bus_probe,
 	.remove		= nvmem_layout_bus_remove,
 	.uevent		= nvmem_layout_bus_uevent,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static const struct bus_type nvmem_layout_bus_type = {
+	.name		= "nvmem-layout",
+	.match		= nvmem_layout_bus_match,
+	.probe		= nvmem_layout_bus_probe,
+	.remove		= nvmem_layout_bus_remove,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 int __nvmem_layout_driver_register(struct nvmem_layout_driver *drv,

@@ -6617,6 +6617,7 @@ static int rtl8xxxu_submit_rx_urb(struct rtl8xxxu_priv *priv,
 		skb_size = fops->rx_agg_buf_size;
 		skb_size += (rx_desc_sz + sizeof(struct rtl8723au_phy_stats));
 	} else {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		skb_size = IEEE80211_MAX_FRAME_LEN + rx_desc_sz;
 	}
 
@@ -8169,6 +8170,1563 @@ static const struct usb_device_id dev_table[] = {
 {USB_DEVICE_AND_INTERFACE_INFO(0x050d, 0x11f2, 0xff, 0xff, 0xff),
 	.driver_info = (unsigned long)&rtl8192cu_fops},
 {USB_DEVICE_AND_INTERFACE_INFO(0x06f8, 0xe033, 0xff, 0xff, 0xff),
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		skb_size = IEEE80211_MAX_FRAME_LEN;
+	}
+
+	skb = __netdev_alloc_skb(NULL, skb_size, GFP_KERNEL);
+	if (!skb)
+		return -ENOMEM;
+
+	memset(skb->data, 0, rx_desc_sz);
+	usb_fill_bulk_urb(&rx_urb->urb, priv->udev, priv->pipe_in, skb->data,
+			  skb_size, rtl8xxxu_rx_complete, skb);
+	usb_anchor_urb(&rx_urb->urb, &priv->rx_anchor);
+	ret = usb_submit_urb(&rx_urb->urb, GFP_ATOMIC);
+	if (ret)
+		usb_unanchor_urb(&rx_urb->urb);
+	return ret;
+}
+
+static void rtl8xxxu_int_complete(struct urb *urb)
+{
+	struct rtl8xxxu_priv *priv = (struct rtl8xxxu_priv *)urb->context;
+	struct device *dev = &priv->udev->dev;
+	int ret;
+
+	if (rtl8xxxu_debug & RTL8XXXU_DEBUG_INTERRUPT)
+		dev_dbg(dev, "%s: status %i\n", __func__, urb->status);
+	if (urb->status == 0) {
+		usb_anchor_urb(urb, &priv->int_anchor);
+		ret = usb_submit_urb(urb, GFP_ATOMIC);
+		if (ret)
+			usb_unanchor_urb(urb);
+	} else {
+		dev_dbg(dev, "%s: Error %i\n", __func__, urb->status);
+	}
+}
+
+
+static int rtl8xxxu_submit_int_urb(struct ieee80211_hw *hw)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+	struct urb *urb;
+	u32 val32;
+	int ret;
+
+	urb = usb_alloc_urb(0, GFP_KERNEL);
+	if (!urb)
+		return -ENOMEM;
+
+	usb_fill_int_urb(urb, priv->udev, priv->pipe_interrupt,
+			 priv->int_buf, USB_INTR_CONTENT_LENGTH,
+			 rtl8xxxu_int_complete, priv, 1);
+	usb_anchor_urb(urb, &priv->int_anchor);
+	ret = usb_submit_urb(urb, GFP_KERNEL);
+	if (ret) {
+		usb_unanchor_urb(urb);
+		goto error;
+	}
+
+	val32 = rtl8xxxu_read32(priv, REG_USB_HIMR);
+	val32 |= USB_HIMR_CPWM;
+	rtl8xxxu_write32(priv, REG_USB_HIMR, val32);
+
+error:
+	usb_free_urb(urb);
+	return ret;
+}
+
+static void rtl8xxxu_switch_ports(struct rtl8xxxu_priv *priv)
+{
+	u8 macid[ETH_ALEN], bssid[ETH_ALEN], macid_1[ETH_ALEN], bssid_1[ETH_ALEN];
+	u8 msr, bcn_ctrl, bcn_ctrl_1, atimwnd[2], atimwnd_1[2];
+	struct rtl8xxxu_vif *rtlvif;
+	u8 tsftr[8], tsftr_1[8];
+	int i;
+
+	msr = rtl8xxxu_read8(priv, REG_MSR);
+	bcn_ctrl = rtl8xxxu_read8(priv, REG_BEACON_CTRL);
+	bcn_ctrl_1 = rtl8xxxu_read8(priv, REG_BEACON_CTRL_1);
+
+	for (i = 0; i < ARRAY_SIZE(atimwnd); i++)
+		atimwnd[i] = rtl8xxxu_read8(priv, REG_ATIMWND + i);
+	for (i = 0; i < ARRAY_SIZE(atimwnd_1); i++)
+		atimwnd_1[i] = rtl8xxxu_read8(priv, REG_ATIMWND_1 + i);
+
+	for (i = 0; i < ARRAY_SIZE(tsftr); i++)
+		tsftr[i] = rtl8xxxu_read8(priv, REG_TSFTR + i);
+	for (i = 0; i < ARRAY_SIZE(tsftr); i++)
+		tsftr_1[i] = rtl8xxxu_read8(priv, REG_TSFTR1 + i);
+
+	for (i = 0; i < ARRAY_SIZE(macid); i++)
+		macid[i] = rtl8xxxu_read8(priv, REG_MACID + i);
+
+	for (i = 0; i < ARRAY_SIZE(bssid); i++)
+		bssid[i] = rtl8xxxu_read8(priv, REG_BSSID + i);
+
+	for (i = 0; i < ARRAY_SIZE(macid_1); i++)
+		macid_1[i] = rtl8xxxu_read8(priv, REG_MACID1 + i);
+
+	for (i = 0; i < ARRAY_SIZE(bssid_1); i++)
+		bssid_1[i] = rtl8xxxu_read8(priv, REG_BSSID1 + i);
+
+	/* disable bcn function, disable update TSF */
+	rtl8xxxu_write8(priv, REG_BEACON_CTRL, (bcn_ctrl &
+			(~BEACON_FUNCTION_ENABLE)) | BEACON_DISABLE_TSF_UPDATE);
+	rtl8xxxu_write8(priv, REG_BEACON_CTRL_1, (bcn_ctrl_1 &
+			(~BEACON_FUNCTION_ENABLE)) | BEACON_DISABLE_TSF_UPDATE);
+
+	/* switch msr */
+	msr = (msr & 0xf0) | ((msr & 0x03) << 2) | ((msr & 0x0c) >> 2);
+	rtl8xxxu_write8(priv, REG_MSR, msr);
+
+	/* write port0 */
+	rtl8xxxu_write8(priv, REG_BEACON_CTRL, bcn_ctrl_1 & ~BEACON_FUNCTION_ENABLE);
+	for (i = 0; i < ARRAY_SIZE(atimwnd_1); i++)
+		rtl8xxxu_write8(priv, REG_ATIMWND + i, atimwnd_1[i]);
+	for (i = 0; i < ARRAY_SIZE(tsftr_1); i++)
+		rtl8xxxu_write8(priv, REG_TSFTR + i, tsftr_1[i]);
+	for (i = 0; i < ARRAY_SIZE(macid_1); i++)
+		rtl8xxxu_write8(priv, REG_MACID + i, macid_1[i]);
+	for (i = 0; i < ARRAY_SIZE(bssid_1); i++)
+		rtl8xxxu_write8(priv, REG_BSSID + i, bssid_1[i]);
+
+	/* write port1 */
+	rtl8xxxu_write8(priv, REG_BEACON_CTRL_1, bcn_ctrl & ~BEACON_FUNCTION_ENABLE);
+	for (i = 0; i < ARRAY_SIZE(atimwnd); i++)
+		rtl8xxxu_write8(priv, REG_ATIMWND_1 + i, atimwnd[i]);
+	for (i = 0; i < ARRAY_SIZE(tsftr); i++)
+		rtl8xxxu_write8(priv, REG_TSFTR1 + i, tsftr[i]);
+	for (i = 0; i < ARRAY_SIZE(macid); i++)
+		rtl8xxxu_write8(priv, REG_MACID1 + i, macid[i]);
+	for (i = 0; i < ARRAY_SIZE(bssid); i++)
+		rtl8xxxu_write8(priv, REG_BSSID1 + i, bssid[i]);
+
+	/* write bcn ctl */
+	rtl8xxxu_write8(priv, REG_BEACON_CTRL, bcn_ctrl_1);
+	rtl8xxxu_write8(priv, REG_BEACON_CTRL_1, bcn_ctrl);
+	swap(priv->vifs[0], priv->vifs[1]);
+
+	/* priv->vifs[0] is NULL here, based on how this function is currently
+	 * called from rtl8xxxu_add_interface().
+	 * When this function will be used in the future for a different
+	 * scenario, please check whether vifs[0] or vifs[1] can be NULL and if
+	 * necessary add code to set port_num = 1.
+	 */
+	rtlvif = (struct rtl8xxxu_vif *)priv->vifs[1]->drv_priv;
+	rtlvif->port_num = 1;
+}
+
+static int rtl8xxxu_add_interface(struct ieee80211_hw *hw,
+				  struct ieee80211_vif *vif)
+{
+	struct rtl8xxxu_vif *rtlvif = (struct rtl8xxxu_vif *)vif->drv_priv;
+	struct rtl8xxxu_priv *priv = hw->priv;
+	int port_num;
+	u8 val8;
+
+	if (!priv->vifs[0])
+		port_num = 0;
+	else if (!priv->vifs[1])
+		port_num = 1;
+	else
+		return -EOPNOTSUPP;
+
+	switch (vif->type) {
+	case NL80211_IFTYPE_STATION:
+		if (port_num == 0) {
+			rtl8xxxu_stop_tx_beacon(priv);
+
+			val8 = rtl8xxxu_read8(priv, REG_BEACON_CTRL);
+			val8 |= BEACON_ATIM | BEACON_FUNCTION_ENABLE |
+				BEACON_DISABLE_TSF_UPDATE;
+			rtl8xxxu_write8(priv, REG_BEACON_CTRL, val8);
+		}
+		break;
+	case NL80211_IFTYPE_AP:
+		if (port_num == 1) {
+			rtl8xxxu_switch_ports(priv);
+			port_num = 0;
+		}
+
+		rtl8xxxu_write8(priv, REG_BEACON_CTRL,
+				BEACON_DISABLE_TSF_UPDATE | BEACON_CTRL_MBSSID);
+		rtl8xxxu_write8(priv, REG_ATIMWND, 0x0c); /* 12ms */
+		rtl8xxxu_write16(priv, REG_TSFTR_SYN_OFFSET, 0x7fff); /* ~32ms */
+		rtl8xxxu_write8(priv, REG_DUAL_TSF_RST, DUAL_TSF_RESET_TSF0);
+
+		/* enable BCN0 function */
+		rtl8xxxu_write8(priv, REG_BEACON_CTRL,
+				BEACON_DISABLE_TSF_UPDATE |
+				BEACON_FUNCTION_ENABLE | BEACON_CTRL_MBSSID |
+				BEACON_CTRL_TX_BEACON_RPT);
+
+		/* select BCN on port 0 */
+		val8 = rtl8xxxu_read8(priv, REG_CCK_CHECK);
+		val8 &= ~BIT_BCN_PORT_SEL;
+		rtl8xxxu_write8(priv, REG_CCK_CHECK, val8);
+		break;
+	default:
+		return -EOPNOTSUPP;
+	}
+
+	priv->vifs[port_num] = vif;
+	rtlvif->port_num = port_num;
+	rtlvif->hw_key_idx = 0xff;
+
+	rtl8xxxu_set_linktype(priv, vif->type, port_num);
+	ether_addr_copy(priv->mac_addr, vif->addr);
+	rtl8xxxu_set_mac(priv, port_num);
+
+	return 0;
+}
+
+static void rtl8xxxu_remove_interface(struct ieee80211_hw *hw,
+				      struct ieee80211_vif *vif)
+{
+	struct rtl8xxxu_vif *rtlvif = (struct rtl8xxxu_vif *)vif->drv_priv;
+	struct rtl8xxxu_priv *priv = hw->priv;
+
+	dev_dbg(&priv->udev->dev, "%s\n", __func__);
+
+	priv->vifs[rtlvif->port_num] = NULL;
+}
+
+static int rtl8xxxu_config(struct ieee80211_hw *hw, u32 changed)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+	struct device *dev = &priv->udev->dev;
+	int ret = 0, channel;
+	bool ht40;
+
+	if (rtl8xxxu_debug & RTL8XXXU_DEBUG_CHANNEL)
+		dev_info(dev,
+			 "%s: channel: %i (changed %08x chandef.width %02x)\n",
+			 __func__, hw->conf.chandef.chan->hw_value,
+			 changed, hw->conf.chandef.width);
+
+	if (changed & IEEE80211_CONF_CHANGE_CHANNEL) {
+		switch (hw->conf.chandef.width) {
+		case NL80211_CHAN_WIDTH_20_NOHT:
+		case NL80211_CHAN_WIDTH_20:
+			ht40 = false;
+			break;
+		case NL80211_CHAN_WIDTH_40:
+			ht40 = true;
+			break;
+		default:
+			ret = -ENOTSUPP;
+			goto exit;
+		}
+
+		channel = hw->conf.chandef.chan->hw_value;
+
+		priv->fops->set_tx_power(priv, channel, ht40);
+
+		priv->fops->config_channel(hw);
+	}
+
+exit:
+	return ret;
+}
+
+static int rtl8xxxu_conf_tx(struct ieee80211_hw *hw,
+			    struct ieee80211_vif *vif,
+			    unsigned int link_id, u16 queue,
+			    const struct ieee80211_tx_queue_params *param)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+	struct device *dev = &priv->udev->dev;
+	u32 val32;
+	u8 aifs, acm_ctrl, acm_bit;
+
+	aifs = param->aifs;
+
+	val32 = aifs |
+		fls(param->cw_min) << EDCA_PARAM_ECW_MIN_SHIFT |
+		fls(param->cw_max) << EDCA_PARAM_ECW_MAX_SHIFT |
+		(u32)param->txop << EDCA_PARAM_TXOP_SHIFT;
+
+	acm_ctrl = rtl8xxxu_read8(priv, REG_ACM_HW_CTRL);
+	dev_dbg(dev,
+		"%s: IEEE80211 queue %02x val %08x, acm %i, acm_ctrl %02x\n",
+		__func__, queue, val32, param->acm, acm_ctrl);
+
+	switch (queue) {
+	case IEEE80211_AC_VO:
+		acm_bit = ACM_HW_CTRL_VO;
+		rtl8xxxu_write32(priv, REG_EDCA_VO_PARAM, val32);
+		break;
+	case IEEE80211_AC_VI:
+		acm_bit = ACM_HW_CTRL_VI;
+		rtl8xxxu_write32(priv, REG_EDCA_VI_PARAM, val32);
+		break;
+	case IEEE80211_AC_BE:
+		acm_bit = ACM_HW_CTRL_BE;
+		rtl8xxxu_write32(priv, REG_EDCA_BE_PARAM, val32);
+		break;
+	case IEEE80211_AC_BK:
+		acm_bit = ACM_HW_CTRL_BK;
+		rtl8xxxu_write32(priv, REG_EDCA_BK_PARAM, val32);
+		break;
+	default:
+		acm_bit = 0;
+		break;
+	}
+
+	if (param->acm)
+		acm_ctrl |= acm_bit;
+	else
+		acm_ctrl &= ~acm_bit;
+	rtl8xxxu_write8(priv, REG_ACM_HW_CTRL, acm_ctrl);
+
+	return 0;
+}
+
+static void rtl8xxxu_configure_filter(struct ieee80211_hw *hw,
+				      unsigned int changed_flags,
+				      unsigned int *total_flags, u64 multicast)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+	u32 rcr = priv->regrcr;
+
+	dev_dbg(&priv->udev->dev, "%s: changed_flags %08x, total_flags %08x\n",
+		__func__, changed_flags, *total_flags);
+
+	/*
+	 * FIF_ALLMULTI ignored as all multicast frames are accepted (REG_MAR)
+	 */
+
+	if (*total_flags & FIF_FCSFAIL)
+		rcr |= RCR_ACCEPT_CRC32;
+	else
+		rcr &= ~RCR_ACCEPT_CRC32;
+
+	/*
+	 * FIF_PLCPFAIL not supported?
+	 */
+
+	if (*total_flags & FIF_BCN_PRBRESP_PROMISC)
+		rcr &= ~(RCR_CHECK_BSSID_BEACON | RCR_CHECK_BSSID_MATCH);
+	else
+		rcr |= RCR_CHECK_BSSID_BEACON | RCR_CHECK_BSSID_MATCH;
+
+	if (priv->vifs[0] && priv->vifs[0]->type == NL80211_IFTYPE_AP)
+		rcr &= ~(RCR_CHECK_BSSID_MATCH | RCR_CHECK_BSSID_BEACON);
+
+	if (*total_flags & FIF_CONTROL)
+		rcr |= RCR_ACCEPT_CTRL_FRAME;
+	else
+		rcr &= ~RCR_ACCEPT_CTRL_FRAME;
+
+	if (*total_flags & FIF_OTHER_BSS)
+		rcr |= RCR_ACCEPT_AP;
+	else
+		rcr &= ~RCR_ACCEPT_AP;
+
+	if (*total_flags & FIF_PSPOLL)
+		rcr |= RCR_ACCEPT_PM;
+	else
+		rcr &= ~RCR_ACCEPT_PM;
+
+	/*
+	 * FIF_PROBE_REQ ignored as probe requests always seem to be accepted
+	 */
+
+	rtl8xxxu_write32(priv, REG_RCR, rcr);
+	priv->regrcr = rcr;
+
+	*total_flags &= (FIF_ALLMULTI | FIF_FCSFAIL | FIF_BCN_PRBRESP_PROMISC |
+			 FIF_CONTROL | FIF_OTHER_BSS | FIF_PSPOLL |
+			 FIF_PROBE_REQ);
+}
+
+static int rtl8xxxu_set_rts_threshold(struct ieee80211_hw *hw, u32 rts)
+{
+	if (rts > 2347 && rts != (u32)-1)
+		return -EINVAL;
+
+	return 0;
+}
+
+static int rtl8xxxu_get_free_sec_cam(struct ieee80211_hw *hw)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+
+	return find_first_zero_bit(priv->cam_map, priv->fops->max_sec_cam_num);
+}
+
+static int rtl8xxxu_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
+			    struct ieee80211_vif *vif,
+			    struct ieee80211_sta *sta,
+			    struct ieee80211_key_conf *key)
+{
+	struct rtl8xxxu_vif *rtlvif = (struct rtl8xxxu_vif *)vif->drv_priv;
+	struct rtl8xxxu_priv *priv = hw->priv;
+	struct device *dev = &priv->udev->dev;
+	u8 mac_addr[ETH_ALEN];
+	u8 val8;
+	u16 val16;
+	u32 val32;
+	int retval = -EOPNOTSUPP;
+
+	dev_dbg(dev, "%s: cmd %02x, cipher %08x, index %i\n",
+		__func__, cmd, key->cipher, key->keyidx);
+
+	if (key->keyidx > 3)
+		return -EOPNOTSUPP;
+
+	switch (key->cipher) {
+	case WLAN_CIPHER_SUITE_WEP40:
+	case WLAN_CIPHER_SUITE_WEP104:
+
+		break;
+	case WLAN_CIPHER_SUITE_CCMP:
+		key->flags |= IEEE80211_KEY_FLAG_SW_MGMT_TX;
+		break;
+	case WLAN_CIPHER_SUITE_TKIP:
+		key->flags |= IEEE80211_KEY_FLAG_GENERATE_MMIC;
+		break;
+	default:
+		return -EOPNOTSUPP;
+	}
+
+	if (key->flags & IEEE80211_KEY_FLAG_PAIRWISE) {
+		dev_dbg(dev, "%s: pairwise key\n", __func__);
+		ether_addr_copy(mac_addr, sta->addr);
+	} else {
+		dev_dbg(dev, "%s: group key\n", __func__);
+		ether_addr_copy(mac_addr, vif->bss_conf.bssid);
+	}
+
+	val16 = rtl8xxxu_read16(priv, REG_CR);
+	val16 |= CR_SECURITY_ENABLE;
+	rtl8xxxu_write16(priv, REG_CR, val16);
+
+	val8 = SEC_CFG_TX_SEC_ENABLE | SEC_CFG_TXBC_USE_DEFKEY |
+		SEC_CFG_RX_SEC_ENABLE | SEC_CFG_RXBC_USE_DEFKEY;
+	val8 |= SEC_CFG_TX_USE_DEFKEY | SEC_CFG_RX_USE_DEFKEY;
+	rtl8xxxu_write8(priv, REG_SECURITY_CFG, val8);
+
+	switch (cmd) {
+	case SET_KEY:
+
+		retval = rtl8xxxu_get_free_sec_cam(hw);
+		if (retval < 0)
+			return -EOPNOTSUPP;
+
+		key->hw_key_idx = retval;
+
+		if (vif->type == NL80211_IFTYPE_AP && !(key->flags & IEEE80211_KEY_FLAG_PAIRWISE))
+			rtlvif->hw_key_idx = key->hw_key_idx;
+
+		key->flags |= IEEE80211_KEY_FLAG_GENERATE_IV;
+		rtl8xxxu_cam_write(priv, key, mac_addr);
+		set_bit(key->hw_key_idx, priv->cam_map);
+		retval = 0;
+		break;
+	case DISABLE_KEY:
+		rtl8xxxu_write32(priv, REG_CAM_WRITE, 0x00000000);
+		val32 = CAM_CMD_POLLING | CAM_CMD_WRITE |
+			key->hw_key_idx << CAM_CMD_KEY_SHIFT;
+		rtl8xxxu_write32(priv, REG_CAM_CMD, val32);
+		rtlvif->hw_key_idx = 0xff;
+		clear_bit(key->hw_key_idx, priv->cam_map);
+		retval = 0;
+		break;
+	default:
+		dev_warn(dev, "%s: Unsupported command %02x\n", __func__, cmd);
+	}
+
+	return retval;
+}
+
+static int
+rtl8xxxu_ampdu_action(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+		      struct ieee80211_ampdu_params *params)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+	struct device *dev = &priv->udev->dev;
+	u8 ampdu_factor, ampdu_density;
+	struct ieee80211_sta *sta = params->sta;
+	u16 tid = params->tid;
+	enum ieee80211_ampdu_mlme_action action = params->action;
+
+	switch (action) {
+	case IEEE80211_AMPDU_TX_START:
+		dev_dbg(dev, "%s: IEEE80211_AMPDU_TX_START\n", __func__);
+		ampdu_factor = sta->deflink.ht_cap.ampdu_factor;
+		ampdu_density = sta->deflink.ht_cap.ampdu_density;
+		rtl8xxxu_set_ampdu_factor(priv, ampdu_factor);
+		rtl8xxxu_set_ampdu_min_space(priv, ampdu_density);
+		dev_dbg(dev,
+			"Changed HT: ampdu_factor %02x, ampdu_density %02x\n",
+			ampdu_factor, ampdu_density);
+		return IEEE80211_AMPDU_TX_START_IMMEDIATE;
+	case IEEE80211_AMPDU_TX_STOP_CONT:
+	case IEEE80211_AMPDU_TX_STOP_FLUSH:
+	case IEEE80211_AMPDU_TX_STOP_FLUSH_CONT:
+		dev_dbg(dev, "%s: IEEE80211_AMPDU_TX_STOP\n", __func__);
+		rtl8xxxu_set_ampdu_factor(priv, 0);
+		rtl8xxxu_set_ampdu_min_space(priv, 0);
+		clear_bit(tid, priv->tx_aggr_started);
+		clear_bit(tid, priv->tid_tx_operational);
+		ieee80211_stop_tx_ba_cb_irqsafe(vif, sta->addr, tid);
+		break;
+	case IEEE80211_AMPDU_TX_OPERATIONAL:
+		dev_dbg(dev, "%s: IEEE80211_AMPDU_TX_OPERATIONAL\n", __func__);
+		set_bit(tid, priv->tid_tx_operational);
+		break;
+	case IEEE80211_AMPDU_RX_START:
+		dev_dbg(dev, "%s: IEEE80211_AMPDU_RX_START\n", __func__);
+		break;
+	case IEEE80211_AMPDU_RX_STOP:
+		dev_dbg(dev, "%s: IEEE80211_AMPDU_RX_STOP\n", __func__);
+		break;
+	default:
+		break;
+	}
+	return 0;
+}
+
+static void
+rtl8xxxu_sta_statistics(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			struct ieee80211_sta *sta, struct station_info *sinfo)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+
+	sinfo->txrate = priv->ra_report.txrate;
+	sinfo->filled |= BIT_ULL(NL80211_STA_INFO_TX_BITRATE);
+}
+
+static u8 rtl8xxxu_signal_to_snr(int signal)
+{
+	if (signal < RTL8XXXU_NOISE_FLOOR_MIN)
+		signal = RTL8XXXU_NOISE_FLOOR_MIN;
+	else if (signal > 0)
+		signal = 0;
+	return (u8)(signal - RTL8XXXU_NOISE_FLOOR_MIN);
+}
+
+static void rtl8xxxu_refresh_rate_mask(struct rtl8xxxu_priv *priv,
+				       int signal, struct ieee80211_sta *sta,
+				       bool force)
+{
+	struct rtl8xxxu_sta_info *sta_info = (struct rtl8xxxu_sta_info *)sta->drv_priv;
+	struct ieee80211_hw *hw = priv->hw;
+	u16 wireless_mode;
+	u8 rssi_level, ratr_idx;
+	u8 txbw_40mhz;
+	u8 snr, snr_thresh_high, snr_thresh_low;
+	u8 go_up_gap = 5;
+	u8 macid = rtl8xxxu_get_macid(priv, sta);
+
+	rssi_level = sta_info->rssi_level;
+	snr = rtl8xxxu_signal_to_snr(signal);
+	snr_thresh_high = RTL8XXXU_SNR_THRESH_HIGH;
+	snr_thresh_low = RTL8XXXU_SNR_THRESH_LOW;
+	txbw_40mhz = (hw->conf.chandef.width == NL80211_CHAN_WIDTH_40) ? 1 : 0;
+
+	switch (rssi_level) {
+	case RTL8XXXU_RATR_STA_MID:
+		snr_thresh_high += go_up_gap;
+		break;
+	case RTL8XXXU_RATR_STA_LOW:
+		snr_thresh_high += go_up_gap;
+		snr_thresh_low += go_up_gap;
+		break;
+	default:
+		break;
+	}
+
+	if (snr > snr_thresh_high)
+		rssi_level = RTL8XXXU_RATR_STA_HIGH;
+	else if (snr > snr_thresh_low)
+		rssi_level = RTL8XXXU_RATR_STA_MID;
+	else
+		rssi_level = RTL8XXXU_RATR_STA_LOW;
+
+	if (rssi_level != sta_info->rssi_level || force) {
+		int sgi = 0;
+		u32 rate_bitmap = 0;
+
+		rate_bitmap = (sta->deflink.supp_rates[0] & 0xfff) |
+				(sta->deflink.ht_cap.mcs.rx_mask[0] << 12) |
+				(sta->deflink.ht_cap.mcs.rx_mask[1] << 20);
+		if (sta->deflink.ht_cap.cap &
+		    (IEEE80211_HT_CAP_SGI_40 | IEEE80211_HT_CAP_SGI_20))
+			sgi = 1;
+
+		wireless_mode = rtl8xxxu_wireless_mode(hw, sta);
+		switch (wireless_mode) {
+		case WIRELESS_MODE_B:
+			ratr_idx = RATEID_IDX_B;
+			if (rate_bitmap & 0x0000000c)
+				rate_bitmap &= 0x0000000d;
+			else
+				rate_bitmap &= 0x0000000f;
+			break;
+		case WIRELESS_MODE_A:
+		case WIRELESS_MODE_G:
+			ratr_idx = RATEID_IDX_G;
+			if (rssi_level == RTL8XXXU_RATR_STA_HIGH)
+				rate_bitmap &= 0x00000f00;
+			else
+				rate_bitmap &= 0x00000ff0;
+			break;
+		case (WIRELESS_MODE_B | WIRELESS_MODE_G):
+			ratr_idx = RATEID_IDX_BG;
+			if (rssi_level == RTL8XXXU_RATR_STA_HIGH)
+				rate_bitmap &= 0x00000f00;
+			else if (rssi_level == RTL8XXXU_RATR_STA_MID)
+				rate_bitmap &= 0x00000ff0;
+			else
+				rate_bitmap &= 0x00000ff5;
+			break;
+		case WIRELESS_MODE_N_24G:
+		case WIRELESS_MODE_N_5G:
+		case (WIRELESS_MODE_G | WIRELESS_MODE_N_24G):
+		case (WIRELESS_MODE_A | WIRELESS_MODE_N_5G):
+			if (priv->tx_paths == 2 && priv->rx_paths == 2)
+				ratr_idx = RATEID_IDX_GN_N2SS;
+			else
+				ratr_idx = RATEID_IDX_GN_N1SS;
+			break;
+		case (WIRELESS_MODE_B | WIRELESS_MODE_G | WIRELESS_MODE_N_24G):
+		case (WIRELESS_MODE_B | WIRELESS_MODE_N_24G):
+			if (txbw_40mhz) {
+				if (priv->tx_paths == 2 && priv->rx_paths == 2)
+					ratr_idx = RATEID_IDX_BGN_40M_2SS;
+				else
+					ratr_idx = RATEID_IDX_BGN_40M_1SS;
+			} else {
+				if (priv->tx_paths == 2 && priv->rx_paths == 2)
+					ratr_idx = RATEID_IDX_BGN_20M_2SS_BN;
+				else
+					ratr_idx = RATEID_IDX_BGN_20M_1SS_BN;
+			}
+
+			if (priv->tx_paths == 2 && priv->rx_paths == 2) {
+				if (rssi_level == RTL8XXXU_RATR_STA_HIGH) {
+					rate_bitmap &= 0x0f8f0000;
+				} else if (rssi_level == RTL8XXXU_RATR_STA_MID) {
+					rate_bitmap &= 0x0f8ff000;
+				} else {
+					if (txbw_40mhz)
+						rate_bitmap &= 0x0f8ff015;
+					else
+						rate_bitmap &= 0x0f8ff005;
+				}
+			} else {
+				if (rssi_level == RTL8XXXU_RATR_STA_HIGH) {
+					rate_bitmap &= 0x000f0000;
+				} else if (rssi_level == RTL8XXXU_RATR_STA_MID) {
+					rate_bitmap &= 0x000ff000;
+				} else {
+					if (txbw_40mhz)
+						rate_bitmap &= 0x000ff015;
+					else
+						rate_bitmap &= 0x000ff005;
+				}
+			}
+			break;
+		default:
+			ratr_idx = RATEID_IDX_BGN_40M_2SS;
+			rate_bitmap &= 0x0fffffff;
+			break;
+		}
+
+		sta_info->rssi_level = rssi_level;
+		priv->fops->update_rate_mask(priv, rate_bitmap, ratr_idx, sgi, txbw_40mhz, macid);
+	}
+}
+
+static void rtl8xxxu_set_atc_status(struct rtl8xxxu_priv *priv, bool atc_status)
+{
+	struct rtl8xxxu_cfo_tracking *cfo = &priv->cfo_tracking;
+	u32 val32;
+
+	if (atc_status == cfo->atc_status)
+		return;
+
+	cfo->atc_status = atc_status;
+
+	val32 = rtl8xxxu_read32(priv, REG_OFDM1_CFO_TRACKING);
+	if (atc_status)
+		val32 |= CFO_TRACKING_ATC_STATUS;
+	else
+		val32 &= ~CFO_TRACKING_ATC_STATUS;
+	rtl8xxxu_write32(priv, REG_OFDM1_CFO_TRACKING, val32);
+}
+
+/* Central frequency offset correction */
+static void rtl8xxxu_track_cfo(struct rtl8xxxu_priv *priv)
+{
+	struct rtl8xxxu_cfo_tracking *cfo = &priv->cfo_tracking;
+	int cfo_khz_a, cfo_khz_b, cfo_average;
+	int crystal_cap;
+
+	if (!rtl8xxxu_is_assoc(priv)) {
+		/* Reset */
+		cfo->adjust = true;
+
+		if (cfo->crystal_cap > priv->default_crystal_cap)
+			priv->fops->set_crystal_cap(priv, cfo->crystal_cap - 1);
+		else if (cfo->crystal_cap < priv->default_crystal_cap)
+			priv->fops->set_crystal_cap(priv, cfo->crystal_cap + 1);
+
+		rtl8xxxu_set_atc_status(priv, true);
+
+		return;
+	}
+
+	if (cfo->packet_count == cfo->packet_count_pre)
+		/* No new information. */
+		return;
+
+	cfo->packet_count_pre = cfo->packet_count;
+
+	/* CFO_tail[1:0] is S(8,7), (num_subcarrier>>7) x 312.5K = CFO value(K Hz) */
+	cfo_khz_a = (int)((cfo->cfo_tail[0] * 3125) / 10) >> 7;
+	cfo_khz_b = (int)((cfo->cfo_tail[1] * 3125) / 10) >> 7;
+
+	if (priv->tx_paths == 1)
+		cfo_average = cfo_khz_a;
+	else
+		cfo_average = (cfo_khz_a + cfo_khz_b) / 2;
+
+	dev_dbg(&priv->udev->dev, "cfo_average: %d\n", cfo_average);
+
+	if (cfo->adjust) {
+		if (abs(cfo_average) < CFO_TH_XTAL_LOW)
+			cfo->adjust = false;
+	} else {
+		if (abs(cfo_average) > CFO_TH_XTAL_HIGH)
+			cfo->adjust = true;
+	}
+
+	/*
+	 * TODO: We should return here only if bluetooth is enabled.
+	 * See the vendor drivers for how to determine that.
+	 */
+	if (priv->has_bluetooth)
+		return;
+
+	if (!cfo->adjust)
+		return;
+
+	crystal_cap = cfo->crystal_cap;
+
+	if (cfo_average > CFO_TH_XTAL_LOW)
+		crystal_cap++;
+	else if (cfo_average < -CFO_TH_XTAL_LOW)
+		crystal_cap--;
+
+	crystal_cap = clamp(crystal_cap, 0, 0x3f);
+
+	priv->fops->set_crystal_cap(priv, crystal_cap);
+
+	rtl8xxxu_set_atc_status(priv, abs(cfo_average) >= CFO_TH_ATC);
+}
+
+static void rtl8xxxu_ra_iter(void *data, struct ieee80211_sta *sta)
+{
+	struct rtl8xxxu_sta_info *sta_info = (struct rtl8xxxu_sta_info *)sta->drv_priv;
+	struct rtl8xxxu_priv *priv = data;
+	int signal = -ewma_rssi_read(&sta_info->avg_rssi);
+
+	priv->fops->report_rssi(priv, rtl8xxxu_get_macid(priv, sta),
+				rtl8xxxu_signal_to_snr(signal));
+	rtl8xxxu_refresh_rate_mask(priv, signal, sta, false);
+}
+
+struct rtl8xxxu_stas_entry {
+	struct list_head list;
+	struct ieee80211_sta *sta;
+};
+
+struct rtl8xxxu_iter_stas_data {
+	struct rtl8xxxu_priv *priv;
+	struct list_head list;
+};
+
+static void rtl8xxxu_collect_sta_iter(void *data, struct ieee80211_sta *sta)
+{
+	struct rtl8xxxu_iter_stas_data *iter_stas = data;
+	struct rtl8xxxu_stas_entry *stas_entry;
+
+	stas_entry = kmalloc(sizeof(*stas_entry), GFP_ATOMIC);
+	if (!stas_entry)
+		return;
+
+	stas_entry->sta = sta;
+	list_add_tail(&stas_entry->list, &iter_stas->list);
+}
+
+static void rtl8xxxu_watchdog_callback(struct work_struct *work)
+{
+
+	struct rtl8xxxu_iter_stas_data iter_data;
+	struct rtl8xxxu_stas_entry *sta_entry, *tmp;
+	struct rtl8xxxu_priv *priv;
+
+	priv = container_of(work, struct rtl8xxxu_priv, ra_watchdog.work);
+	iter_data.priv = priv;
+	INIT_LIST_HEAD(&iter_data.list);
+
+	mutex_lock(&priv->sta_mutex);
+	ieee80211_iterate_stations_atomic(priv->hw, rtl8xxxu_collect_sta_iter,
+					  &iter_data);
+	list_for_each_entry_safe(sta_entry, tmp, &iter_data.list, list) {
+		list_del_init(&sta_entry->list);
+		rtl8xxxu_ra_iter(priv, sta_entry->sta);
+		kfree(sta_entry);
+	}
+	mutex_unlock(&priv->sta_mutex);
+
+	if (priv->fops->set_crystal_cap)
+		rtl8xxxu_track_cfo(priv);
+
+	schedule_delayed_work(&priv->ra_watchdog, 2 * HZ);
+}
+
+static int rtl8xxxu_start(struct ieee80211_hw *hw)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+	struct rtl8xxxu_rx_urb *rx_urb;
+	struct rtl8xxxu_tx_urb *tx_urb;
+	struct sk_buff *skb;
+	unsigned long flags;
+	int ret, i;
+
+	ret = 0;
+
+	init_usb_anchor(&priv->rx_anchor);
+	init_usb_anchor(&priv->tx_anchor);
+	init_usb_anchor(&priv->int_anchor);
+
+	priv->fops->enable_rf(priv);
+	if (priv->usb_interrupts) {
+		ret = rtl8xxxu_submit_int_urb(hw);
+		if (ret)
+			goto exit;
+	}
+
+	for (i = 0; i < RTL8XXXU_TX_URBS; i++) {
+		tx_urb = kmalloc(sizeof(struct rtl8xxxu_tx_urb), GFP_KERNEL);
+		if (!tx_urb) {
+			if (!i)
+				ret = -ENOMEM;
+
+			goto error_out;
+		}
+		usb_init_urb(&tx_urb->urb);
+		INIT_LIST_HEAD(&tx_urb->list);
+		tx_urb->hw = hw;
+		list_add(&tx_urb->list, &priv->tx_urb_free_list);
+		priv->tx_urb_free_count++;
+	}
+
+	priv->tx_stopped = false;
+
+	spin_lock_irqsave(&priv->rx_urb_lock, flags);
+	priv->shutdown = false;
+	spin_unlock_irqrestore(&priv->rx_urb_lock, flags);
+
+	for (i = 0; i < RTL8XXXU_RX_URBS; i++) {
+		rx_urb = kmalloc(sizeof(struct rtl8xxxu_rx_urb), GFP_KERNEL);
+		if (!rx_urb) {
+			if (!i)
+				ret = -ENOMEM;
+
+			goto error_out;
+		}
+		usb_init_urb(&rx_urb->urb);
+		INIT_LIST_HEAD(&rx_urb->list);
+		rx_urb->hw = hw;
+
+		ret = rtl8xxxu_submit_rx_urb(priv, rx_urb);
+		if (ret) {
+			if (ret != -ENOMEM) {
+				skb = (struct sk_buff *)rx_urb->urb.context;
+				dev_kfree_skb(skb);
+			}
+			rtl8xxxu_queue_rx_urb(priv, rx_urb);
+		}
+	}
+
+	schedule_delayed_work(&priv->ra_watchdog, 2 * HZ);
+exit:
+	/*
+	 * Accept all data and mgmt frames
+	 */
+	rtl8xxxu_write16(priv, REG_RXFLTMAP2, 0xffff);
+	rtl8xxxu_write16(priv, REG_RXFLTMAP0, 0xffff);
+
+	rtl8xxxu_write32_mask(priv, REG_OFDM0_XA_AGC_CORE1,
+			      OFDM0_X_AGC_CORE1_IGI_MASK, 0x1e);
+
+	return ret;
+
+error_out:
+	rtl8xxxu_free_tx_resources(priv);
+	/*
+	 * Disable all data and mgmt frames
+	 */
+	rtl8xxxu_write16(priv, REG_RXFLTMAP2, 0x0000);
+	rtl8xxxu_write16(priv, REG_RXFLTMAP0, 0x0000);
+
+	return ret;
+}
+
+static void rtl8xxxu_stop(struct ieee80211_hw *hw, bool suspend)
+{
+	struct rtl8xxxu_priv *priv = hw->priv;
+	unsigned long flags;
+
+	rtl8xxxu_write8(priv, REG_TXPAUSE, 0xff);
+
+	rtl8xxxu_write16(priv, REG_RXFLTMAP0, 0x0000);
+	rtl8xxxu_write16(priv, REG_RXFLTMAP2, 0x0000);
+
+	spin_lock_irqsave(&priv->rx_urb_lock, flags);
+	priv->shutdown = true;
+	spin_unlock_irqrestore(&priv->rx_urb_lock, flags);
+
+	usb_kill_anchored_urbs(&priv->rx_anchor);
+	usb_kill_anchored_urbs(&priv->tx_anchor);
+	if (priv->usb_interrupts)
+		usb_kill_anchored_urbs(&priv->int_anchor);
+
+	rtl8xxxu_write8(priv, REG_TXPAUSE, 0xff);
+
+	priv->fops->disable_rf(priv);
+
+	/*
+	 * Disable interrupts
+	 */
+	if (priv->usb_interrupts)
+		rtl8xxxu_write32(priv, REG_USB_HIMR, 0);
+
+	cancel_work_sync(&priv->c2hcmd_work);
+	cancel_delayed_work_sync(&priv->ra_watchdog);
+	cancel_delayed_work_sync(&priv->update_beacon_work);
+
+	rtl8xxxu_free_rx_resources(priv);
+	rtl8xxxu_free_tx_resources(priv);
+}
+
+static int rtl8xxxu_sta_add(struct ieee80211_hw *hw,
+			    struct ieee80211_vif *vif,
+			    struct ieee80211_sta *sta)
+{
+	struct rtl8xxxu_sta_info *sta_info = (struct rtl8xxxu_sta_info *)sta->drv_priv;
+	struct rtl8xxxu_vif *rtlvif = (struct rtl8xxxu_vif *)vif->drv_priv;
+	struct rtl8xxxu_priv *priv = hw->priv;
+
+	mutex_lock(&priv->sta_mutex);
+	ewma_rssi_init(&sta_info->avg_rssi);
+	if (vif->type == NL80211_IFTYPE_AP) {
+		sta_info->rssi_level = RTL8XXXU_RATR_STA_INIT;
+		sta_info->macid = rtl8xxxu_acquire_macid(priv);
+		if (sta_info->macid >= RTL8XXXU_MAX_MAC_ID_NUM) {
+			mutex_unlock(&priv->sta_mutex);
+			return -ENOSPC;
+		}
+
+		rtl8xxxu_refresh_rate_mask(priv, 0, sta, true);
+		priv->fops->report_connect(priv, sta_info->macid, H2C_MACID_ROLE_STA, true);
+	} else {
+		switch (rtlvif->port_num) {
+		case 0:
+			sta_info->macid = RTL8XXXU_BC_MC_MACID;
+			break;
+		case 1:
+			sta_info->macid = RTL8XXXU_BC_MC_MACID1;
+			break;
+		default:
+			break;
+		}
+	}
+	mutex_unlock(&priv->sta_mutex);
+
+	return 0;
+}
+
+static int rtl8xxxu_sta_remove(struct ieee80211_hw *hw,
+			       struct ieee80211_vif *vif,
+			       struct ieee80211_sta *sta)
+{
+	struct rtl8xxxu_sta_info *sta_info = (struct rtl8xxxu_sta_info *)sta->drv_priv;
+	struct rtl8xxxu_priv *priv = hw->priv;
+
+	mutex_lock(&priv->sta_mutex);
+	if (vif->type == NL80211_IFTYPE_AP)
+		rtl8xxxu_release_macid(priv, sta_info->macid);
+	mutex_unlock(&priv->sta_mutex);
+
+	return 0;
+}
+
+static const struct ieee80211_ops rtl8xxxu_ops = {
+	.add_chanctx = ieee80211_emulate_add_chanctx,
+	.remove_chanctx = ieee80211_emulate_remove_chanctx,
+	.change_chanctx = ieee80211_emulate_change_chanctx,
+	.switch_vif_chanctx = ieee80211_emulate_switch_vif_chanctx,
+	.tx = rtl8xxxu_tx,
+	.wake_tx_queue = ieee80211_handle_wake_tx_queue,
+	.add_interface = rtl8xxxu_add_interface,
+	.remove_interface = rtl8xxxu_remove_interface,
+	.config = rtl8xxxu_config,
+	.conf_tx = rtl8xxxu_conf_tx,
+	.bss_info_changed = rtl8xxxu_bss_info_changed,
+	.start_ap = rtl8xxxu_start_ap,
+	.configure_filter = rtl8xxxu_configure_filter,
+	.set_rts_threshold = rtl8xxxu_set_rts_threshold,
+	.start = rtl8xxxu_start,
+	.stop = rtl8xxxu_stop,
+	.sw_scan_start = rtl8xxxu_sw_scan_start,
+	.sw_scan_complete = rtl8xxxu_sw_scan_complete,
+	.set_key = rtl8xxxu_set_key,
+	.ampdu_action = rtl8xxxu_ampdu_action,
+	.sta_statistics = rtl8xxxu_sta_statistics,
+	.get_antenna = rtl8xxxu_get_antenna,
+	.set_tim = rtl8xxxu_set_tim,
+	.sta_add = rtl8xxxu_sta_add,
+	.sta_remove = rtl8xxxu_sta_remove,
+};
+
+static int rtl8xxxu_parse_usb(struct rtl8xxxu_priv *priv,
+			      struct usb_interface *interface)
+{
+	struct usb_interface_descriptor *interface_desc;
+	struct usb_host_interface *host_interface;
+	struct usb_endpoint_descriptor *endpoint;
+	struct device *dev = &priv->udev->dev;
+	int i, j = 0, endpoints;
+	u8 dir, xtype, num;
+	int ret = 0;
+
+	host_interface = interface->cur_altsetting;
+	interface_desc = &host_interface->desc;
+	endpoints = interface_desc->bNumEndpoints;
+
+	for (i = 0; i < endpoints; i++) {
+		endpoint = &host_interface->endpoint[i].desc;
+
+		dir = endpoint->bEndpointAddress & USB_ENDPOINT_DIR_MASK;
+		num = usb_endpoint_num(endpoint);
+		xtype = usb_endpoint_type(endpoint);
+		if (rtl8xxxu_debug & RTL8XXXU_DEBUG_USB)
+			dev_dbg(dev,
+				"%s: endpoint: dir %02x, # %02x, type %02x\n",
+				__func__, dir, num, xtype);
+		if (usb_endpoint_dir_in(endpoint) &&
+		    usb_endpoint_xfer_bulk(endpoint)) {
+			if (rtl8xxxu_debug & RTL8XXXU_DEBUG_USB)
+				dev_dbg(dev, "%s: in endpoint num %i\n",
+					__func__, num);
+
+			if (priv->pipe_in) {
+				dev_warn(dev,
+					 "%s: Too many IN pipes\n", __func__);
+				ret = -EINVAL;
+				goto exit;
+			}
+
+			priv->pipe_in =	usb_rcvbulkpipe(priv->udev, num);
+		}
+
+		if (usb_endpoint_dir_in(endpoint) &&
+		    usb_endpoint_xfer_int(endpoint)) {
+			if (rtl8xxxu_debug & RTL8XXXU_DEBUG_USB)
+				dev_dbg(dev, "%s: interrupt endpoint num %i\n",
+					__func__, num);
+
+			if (priv->pipe_interrupt) {
+				dev_warn(dev, "%s: Too many INTERRUPT pipes\n",
+					 __func__);
+				ret = -EINVAL;
+				goto exit;
+			}
+
+			priv->pipe_interrupt = usb_rcvintpipe(priv->udev, num);
+		}
+
+		if (usb_endpoint_dir_out(endpoint) &&
+		    usb_endpoint_xfer_bulk(endpoint)) {
+			if (rtl8xxxu_debug & RTL8XXXU_DEBUG_USB)
+				dev_dbg(dev, "%s: out endpoint num %i\n",
+					__func__, num);
+			if (j >= RTL8XXXU_OUT_ENDPOINTS) {
+				dev_warn(dev,
+					 "%s: Too many OUT pipes\n", __func__);
+				ret = -EINVAL;
+				goto exit;
+			}
+			priv->out_ep[j++] = num;
+		}
+	}
+exit:
+	priv->nr_out_eps = j;
+	return ret;
+}
+
+static void rtl8xxxu_init_led(struct rtl8xxxu_priv *priv)
+{
+	struct led_classdev *led = &priv->led_cdev;
+
+	if (!priv->fops->led_classdev_brightness_set)
+		return;
+
+	led->brightness_set_blocking = priv->fops->led_classdev_brightness_set;
+
+	snprintf(priv->led_name, sizeof(priv->led_name),
+		 "rtl8xxxu-usb%s", dev_name(&priv->udev->dev));
+	led->name = priv->led_name;
+	led->max_brightness = RTL8XXXU_HW_LED_CONTROL;
+
+	if (led_classdev_register(&priv->udev->dev, led))
+		return;
+
+	priv->led_registered = true;
+
+	led->brightness = led->max_brightness;
+	priv->fops->led_classdev_brightness_set(led, led->brightness);
+}
+
+static void rtl8xxxu_deinit_led(struct rtl8xxxu_priv *priv)
+{
+	struct led_classdev *led = &priv->led_cdev;
+
+	if (!priv->led_registered)
+		return;
+
+	priv->fops->led_classdev_brightness_set(led, LED_OFF);
+	led_classdev_unregister(led);
+}
+
+static const struct ieee80211_iface_limit rtl8xxxu_limits[] = {
+	{ .max = 2, .types = BIT(NL80211_IFTYPE_STATION), },
+	{ .max = 1, .types = BIT(NL80211_IFTYPE_AP), },
+};
+
+static const struct ieee80211_iface_combination rtl8xxxu_combinations[] = {
+	{
+		.limits = rtl8xxxu_limits,
+		.n_limits = ARRAY_SIZE(rtl8xxxu_limits),
+		.max_interfaces = 2,
+		.num_different_channels = 1,
+	},
+};
+
+static int rtl8xxxu_probe(struct usb_interface *interface,
+			  const struct usb_device_id *id)
+{
+	struct rtl8xxxu_priv *priv;
+	struct ieee80211_hw *hw;
+	struct usb_device *udev;
+	struct ieee80211_supported_band *sband;
+	int ret;
+	int untested = 1;
+
+	udev = usb_get_dev(interface_to_usbdev(interface));
+
+	switch (id->idVendor) {
+	case USB_VENDOR_ID_REALTEK:
+		switch(id->idProduct) {
+		case 0x1724:
+		case 0x8176:
+		case 0x8178:
+		case 0x817f:
+		case 0x818b:
+		case 0xf179:
+		case 0x8179:
+		case 0xb711:
+		case 0xf192:
+		case 0x2005:
+			untested = 0;
+			break;
+		}
+		break;
+	case 0x7392:
+		if (id->idProduct == 0x7811 || id->idProduct == 0xa611 || id->idProduct == 0xb811)
+			untested = 0;
+		break;
+	case 0x050d:
+		if (id->idProduct == 0x1004)
+			untested = 0;
+		break;
+	case 0x20f4:
+		if (id->idProduct == 0x648b)
+			untested = 0;
+		break;
+	case 0x2001:
+		if (id->idProduct == 0x3308)
+			untested = 0;
+		break;
+	case 0x2357:
+		if (id->idProduct == 0x0109 || id->idProduct == 0x0135)
+			untested = 0;
+		break;
+	case 0x0b05:
+		if (id->idProduct == 0x18f1)
+			untested = 0;
+		break;
+	default:
+		break;
+	}
+
+	if (untested) {
+		rtl8xxxu_debug |= RTL8XXXU_DEBUG_EFUSE;
+		dev_info(&udev->dev,
+			 "This Realtek USB WiFi dongle (0x%04x:0x%04x) is untested!\n",
+			 id->idVendor, id->idProduct);
+		dev_info(&udev->dev,
+			 "Please report results to Jes.Sorensen@gmail.com\n");
+	}
+
+	hw = ieee80211_alloc_hw(sizeof(struct rtl8xxxu_priv), &rtl8xxxu_ops);
+	if (!hw) {
+		ret = -ENOMEM;
+		goto err_put_dev;
+	}
+
+	priv = hw->priv;
+	priv->hw = hw;
+	priv->udev = udev;
+	priv->fops = (struct rtl8xxxu_fileops *)id->driver_info;
+	mutex_init(&priv->usb_buf_mutex);
+	mutex_init(&priv->syson_indirect_access_mutex);
+	mutex_init(&priv->h2c_mutex);
+	mutex_init(&priv->sta_mutex);
+	INIT_LIST_HEAD(&priv->tx_urb_free_list);
+	spin_lock_init(&priv->tx_urb_lock);
+	INIT_LIST_HEAD(&priv->rx_urb_pending_list);
+	spin_lock_init(&priv->rx_urb_lock);
+	INIT_WORK(&priv->rx_urb_wq, rtl8xxxu_rx_urb_work);
+	INIT_DELAYED_WORK(&priv->ra_watchdog, rtl8xxxu_watchdog_callback);
+	INIT_DELAYED_WORK(&priv->update_beacon_work, rtl8xxxu_update_beacon_work_callback);
+	skb_queue_head_init(&priv->c2hcmd_queue);
+
+	usb_set_intfdata(interface, hw);
+
+	ret = rtl8xxxu_parse_usb(priv, interface);
+	if (ret)
+		goto err_set_intfdata;
+
+	ret = priv->fops->identify_chip(priv);
+	if (ret) {
+		dev_err(&udev->dev, "Fatal - failed to identify chip\n");
+		goto err_set_intfdata;
+	}
+
+	hw->wiphy->available_antennas_tx = BIT(priv->tx_paths) - 1;
+	hw->wiphy->available_antennas_rx = BIT(priv->rx_paths) - 1;
+
+	if (priv->rtl_chip == RTL8188E)
+		INIT_WORK(&priv->c2hcmd_work, rtl8188e_c2hcmd_callback);
+	else
+		INIT_WORK(&priv->c2hcmd_work, rtl8xxxu_c2hcmd_callback);
+
+	ret = priv->fops->read_efuse(priv);
+	if (ret) {
+		dev_err(&udev->dev, "Fatal - failed to read EFuse\n");
+		goto err_set_intfdata;
+	}
+
+	ret = priv->fops->parse_efuse(priv);
+	if (ret) {
+		dev_err(&udev->dev, "Fatal - failed to parse EFuse\n");
+		goto err_set_intfdata;
+	}
+
+	if (rtl8xxxu_debug & RTL8XXXU_DEBUG_EFUSE)
+		rtl8xxxu_dump_efuse(priv);
+
+	rtl8xxxu_print_chipinfo(priv);
+
+	ret = priv->fops->load_firmware(priv);
+	if (ret) {
+		dev_err(&udev->dev, "Fatal - failed to load firmware\n");
+		goto err_set_intfdata;
+	}
+
+	ret = rtl8xxxu_init_device(hw);
+	if (ret)
+		goto err_set_intfdata;
+
+	hw->vif_data_size = sizeof(struct rtl8xxxu_vif);
+
+	hw->wiphy->max_scan_ssids = 1;
+	hw->wiphy->max_scan_ie_len = IEEE80211_MAX_DATA_LEN;
+	if (priv->fops->max_macid_num)
+		hw->wiphy->max_ap_assoc_sta = priv->fops->max_macid_num - 1;
+	hw->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION);
+	if (priv->fops->supports_ap)
+		hw->wiphy->interface_modes |= BIT(NL80211_IFTYPE_AP);
+	hw->queues = 4;
+
+	hw->wiphy->flags |= WIPHY_FLAG_HAS_CHANNEL_SWITCH;
+
+	if (priv->fops->supports_concurrent) {
+		hw->wiphy->iface_combinations = rtl8xxxu_combinations;
+		hw->wiphy->n_iface_combinations = ARRAY_SIZE(rtl8xxxu_combinations);
+	}
+
+	sband = &rtl8xxxu_supported_band;
+	sband->ht_cap.ht_supported = true;
+	sband->ht_cap.ampdu_factor = IEEE80211_HT_MAX_AMPDU_64K;
+	sband->ht_cap.ampdu_density = IEEE80211_HT_MPDU_DENSITY_16;
+	sband->ht_cap.cap = IEEE80211_HT_CAP_SGI_20 | IEEE80211_HT_CAP_SGI_40;
+	memset(&sband->ht_cap.mcs, 0, sizeof(sband->ht_cap.mcs));
+	sband->ht_cap.mcs.rx_mask[0] = 0xff;
+	sband->ht_cap.mcs.rx_mask[4] = 0x01;
+	if (priv->rf_paths > 1) {
+		sband->ht_cap.mcs.rx_mask[1] = 0xff;
+		sband->ht_cap.cap |= IEEE80211_HT_CAP_SGI_40;
+	}
+	sband->ht_cap.mcs.tx_params = IEEE80211_HT_MCS_TX_DEFINED;
+	/*
+	 * Some APs will negotiate HT20_40 in a noisy environment leading
+	 * to miserable performance. Rather than defaulting to this, only
+	 * enable it if explicitly requested at module load time.
+	 */
+	if (rtl8xxxu_ht40_2g) {
+		dev_info(&udev->dev, "Enabling HT_20_40 on the 2.4GHz band\n");
+		sband->ht_cap.cap |= IEEE80211_HT_CAP_SUP_WIDTH_20_40;
+	}
+	hw->wiphy->bands[NL80211_BAND_2GHZ] = sband;
+
+	hw->wiphy->rts_threshold = 2347;
+
+	SET_IEEE80211_DEV(priv->hw, &interface->dev);
+	SET_IEEE80211_PERM_ADDR(hw, priv->mac_addr);
+
+	hw->extra_tx_headroom = priv->fops->tx_desc_size;
+	ieee80211_hw_set(hw, SIGNAL_DBM);
+
+	/*
+	 * The firmware handles rate control, except for RTL8188EU,
+	 * where we handle the rate control in the driver.
+	 */
+	ieee80211_hw_set(hw, HAS_RATE_CONTROL);
+	ieee80211_hw_set(hw, SUPPORT_FAST_XMIT);
+	ieee80211_hw_set(hw, AMPDU_AGGREGATION);
+	ieee80211_hw_set(hw, MFP_CAPABLE);
+
+	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_CQM_RSSI_LIST);
+
+	ret = ieee80211_register_hw(priv->hw);
+	if (ret) {
+		dev_err(&udev->dev, "%s: Failed to register: %i\n",
+			__func__, ret);
+		goto err_set_intfdata;
+	}
+
+	rtl8xxxu_init_led(priv);
+
+	return 0;
+
+err_set_intfdata:
+	usb_set_intfdata(interface, NULL);
+
+	kfree(priv->fw_data);
+	mutex_destroy(&priv->usb_buf_mutex);
+	mutex_destroy(&priv->syson_indirect_access_mutex);
+	mutex_destroy(&priv->h2c_mutex);
+
+	ieee80211_free_hw(hw);
+err_put_dev:
+	usb_put_dev(udev);
+
+	return ret;
+}
+
+static void rtl8xxxu_disconnect(struct usb_interface *interface)
+{
+	struct rtl8xxxu_priv *priv;
+	struct ieee80211_hw *hw;
+
+	hw = usb_get_intfdata(interface);
+	priv = hw->priv;
+
+	rtl8xxxu_deinit_led(priv);
+
+	ieee80211_unregister_hw(hw);
+
+	priv->fops->power_off(priv);
+
+	usb_set_intfdata(interface, NULL);
+
+	dev_info(&priv->udev->dev, "disconnecting\n");
+
+	kfree(priv->fw_data);
+	mutex_destroy(&priv->usb_buf_mutex);
+	mutex_destroy(&priv->syson_indirect_access_mutex);
+	mutex_destroy(&priv->h2c_mutex);
+
+	if (priv->udev->state != USB_STATE_NOTATTACHED) {
+		dev_info(&priv->udev->dev,
+			 "Device still attached, trying to reset\n");
+		usb_reset_device(priv->udev);
+	}
+	usb_put_dev(priv->udev);
+	ieee80211_free_hw(hw);
+}
+
+static const struct usb_device_id dev_table[] = {
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8724, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8723au_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x1724, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8723au_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x0724, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8723au_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x818b, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192eu_fops},
+/* TP-Link TL-WN822N v4 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2357, 0x0108, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192eu_fops},
+/* D-Link DWA-131 rev E1, tested by David Patiño */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2001, 0x3319, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192eu_fops},
+/* Tested by Myckel Habets */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2357, 0x0109, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192eu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0xb720, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8723bu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(0x7392, 0xa611, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8723bu_fops},
+/* RTL8188FU */
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0xf179, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188fu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8179, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* Tested by Hans de Goede - rtl8188etv */
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x0179, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* Sitecom rtl8188eus */
+{USB_DEVICE_AND_INTERFACE_INFO(0x0df6, 0x0076, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* D-Link USB-GO-N150 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2001, 0x3311, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* D-Link DWA-125 REV D1 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2001, 0x330f, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* D-Link DWA-123 REV D1 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2001, 0x3310, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* D-Link DWA-121 rev B1 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2001, 0x331b, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* Abocom - Abocom */
+{USB_DEVICE_AND_INTERFACE_INFO(0x07b8, 0x8179, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* Elecom WDC-150SU2M */
+{USB_DEVICE_AND_INTERFACE_INFO(0x056e, 0x4008, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* TP-Link TL-WN722N v2 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2357, 0x010c, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* TP-Link TL-WN727N v5.21 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2357, 0x0111, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* MERCUSYS MW150US v2 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2c4e, 0x0102, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* ASUS USB-N10 Nano B1 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x0b05, 0x18f0, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+ /* Edimax EW-7811Un V2 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x7392, 0xb811, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* Rosewill USB-N150 Nano */
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0xffef, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8188eu_fops},
+/* RTL8710BU aka RTL8188GU (not to be confused with RTL8188GTVU) */
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0xb711, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8710bu_fops},
+/* TOTOLINK N150UA V5 / N150UA-B */
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x2005, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8710bu_fops},
+/* Comfast CF-826F */
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0xf192, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192fu_fops},
+/* Asus USB-N13 rev C1 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x0b05, 0x18f1, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192fu_fops},
+/* EDIMAX EW-7722UTn V3 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x7392, 0xb722, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192fu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x318b, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192fu_fops},
+/* TP-Link TL-WN823N V2 */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2357, 0x0135, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192fu_fops},
+#ifdef CONFIG_RTL8XXXU_UNTESTED
+/* Still supported by rtlwifi */
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8176, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8178, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x817f, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x819a, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8754, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x817c, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+/* Tested by Larry Finger */
+{USB_DEVICE_AND_INTERFACE_INFO(0x7392, 0x7811, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+/* Tested by Andrea Merello */
+{USB_DEVICE_AND_INTERFACE_INFO(0x050d, 0x1004, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+/* Tested by Jocelyn Mayer */
+{USB_DEVICE_AND_INTERFACE_INFO(0x20f4, 0x648b, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+/* Tested by Stefano Bravi */
+{USB_DEVICE_AND_INTERFACE_INFO(0x2001, 0x3308, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+/* Currently untested 8188 series devices */
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x018a, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8191, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8170, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8177, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x817a, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x817b, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x817d, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x817e, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x8186, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x818a, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDOR_ID_REALTEK, 0x317f, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(0x1058, 0x0631, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(0x04bb, 0x094c, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(0x050d, 0x1102, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(0x050d, 0x11f2, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(0x06f8, 0xe033, 0xff, 0xff, 0xff),
+	.driver_info = (unsigned long)&rtl8192cu_fops},
+{USB_DEVICE_AND_INTERFACE_INFO(0x07b8, 0x8188, 0xff, 0xff, 0xff),
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.driver_info = (unsigned long)&rtl8192cu_fops},
 {USB_DEVICE_AND_INTERFACE_INFO(0x07b8, 0x8189, 0xff, 0xff, 0xff),
 	.driver_info = (unsigned long)&rtl8192cu_fops},

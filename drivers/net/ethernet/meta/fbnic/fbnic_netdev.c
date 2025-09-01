@@ -53,6 +53,7 @@ int __fbnic_open(struct fbnic_net *fbn)
 	fbnic_bmc_rpc_init(fbd);
 	fbnic_rss_reinit(fbd, fbn);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	phylink_resume(fbn->phylink);
 
 	return 0;
@@ -82,6 +83,34 @@ static int fbnic_stop(struct net_device *netdev)
 	struct fbnic_net *fbn = netdev_priv(netdev);
 
 	phylink_suspend(fbn->phylink, fbnic_bmc_present(fbn->fbd));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	return 0;
+release_ownership:
+	fbnic_fw_xmit_ownership_msg(fbn->fbd, false);
+free_resources:
+	fbnic_free_resources(fbn);
+free_napi_vectors:
+	fbnic_free_napi_vectors(fbn);
+	return err;
+}
+
+static int fbnic_open(struct net_device *netdev)
+{
+	struct fbnic_net *fbn = netdev_priv(netdev);
+	int err;
+
+	err = __fbnic_open(fbn);
+	if (!err)
+		fbnic_up(fbn);
+
+	return err;
+}
+
+static int fbnic_stop(struct net_device *netdev)
+{
+	struct fbnic_net *fbn = netdev_priv(netdev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	fbnic_down(fbn);
 	fbnic_pcs_irq_disable(fbn->fbd);

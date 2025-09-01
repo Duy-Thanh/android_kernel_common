@@ -340,6 +340,7 @@ static int venus_probe(struct platform_device *pdev)
 	INIT_DELAYED_WORK(&core->work, venus_sys_error_handler);
 	init_waitqueue_head(&core->sys_err_done);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ret = hfi_create(core, &venus_core_ops);
 	if (ret)
 		goto err_core_put;
@@ -598,6 +599,267 @@ static const struct freq_tbl msm8998_freq_table[] = {
 	{  829440, 355200000 },	/* 4k @ 44 */
 	{  489600, 269330000 },/* 4k @ 30 */
 	{  108000, 200000000 },	/* 1080p @ 60 */
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ret = devm_request_threaded_irq(dev, core->irq, hfi_isr, venus_isr_thread,
+					IRQF_TRIGGER_HIGH | IRQF_ONESHOT,
+					"venus", core);
+	if (ret)
+		goto err_core_put;
+
+	ret = hfi_create(core, &venus_core_ops);
+	if (ret)
+		goto err_core_put;
+
+	venus_assign_register_offsets(core);
+
+	ret = v4l2_device_register(dev, &core->v4l2_dev);
+	if (ret)
+		goto err_hfi_destroy;
+
+	platform_set_drvdata(pdev, core);
+
+	pm_runtime_enable(dev);
+
+	ret = pm_runtime_get_sync(dev);
+	if (ret < 0)
+		goto err_runtime_disable;
+
+	ret = of_platform_populate(dev->of_node, NULL, NULL, dev);
+	if (ret)
+		goto err_runtime_disable;
+
+	ret = venus_firmware_init(core);
+	if (ret)
+		goto err_of_depopulate;
+
+	ret = venus_boot(core);
+	if (ret)
+		goto err_firmware_deinit;
+
+	ret = hfi_core_resume(core, true);
+	if (ret)
+		goto err_venus_shutdown;
+
+	ret = hfi_core_init(core);
+	if (ret)
+		goto err_venus_shutdown;
+
+	ret = venus_enumerate_codecs(core, VIDC_SESSION_TYPE_DEC);
+	if (ret)
+		goto err_core_deinit;
+
+	ret = venus_enumerate_codecs(core, VIDC_SESSION_TYPE_ENC);
+	if (ret)
+		goto err_core_deinit;
+
+	ret = pm_runtime_put_sync(dev);
+	if (ret) {
+		pm_runtime_get_noresume(dev);
+		goto err_core_deinit;
+	}
+
+	venus_dbgfs_init(core);
+
+	return 0;
+
+err_core_deinit:
+	hfi_core_deinit(core, false);
+err_venus_shutdown:
+	venus_shutdown(core);
+err_firmware_deinit:
+	venus_firmware_deinit(core);
+err_of_depopulate:
+	of_platform_depopulate(dev);
+err_runtime_disable:
+	pm_runtime_put_noidle(dev);
+	pm_runtime_disable(dev);
+	pm_runtime_set_suspended(dev);
+	v4l2_device_unregister(&core->v4l2_dev);
+err_hfi_destroy:
+	hfi_destroy(core);
+err_core_put:
+	if (core->pm_ops->core_put)
+		core->pm_ops->core_put(core);
+	return ret;
+}
+
+static void venus_remove(struct platform_device *pdev)
+{
+	struct venus_core *core = platform_get_drvdata(pdev);
+	const struct venus_pm_ops *pm_ops = core->pm_ops;
+	struct device *dev = core->dev;
+	int ret;
+
+	cancel_delayed_work_sync(&core->work);
+	ret = pm_runtime_get_sync(dev);
+	WARN_ON(ret < 0);
+
+	ret = hfi_core_deinit(core, true);
+	WARN_ON(ret);
+
+	venus_shutdown(core);
+	of_platform_depopulate(dev);
+
+	venus_firmware_deinit(core);
+
+	pm_runtime_put_sync(dev);
+	pm_runtime_disable(dev);
+
+	if (pm_ops->core_put)
+		pm_ops->core_put(core);
+
+	v4l2_device_unregister(&core->v4l2_dev);
+
+	hfi_destroy(core);
+
+	mutex_destroy(&core->pm_lock);
+	mutex_destroy(&core->lock);
+	venus_dbgfs_deinit(core);
+}
+
+static void venus_core_shutdown(struct platform_device *pdev)
+{
+	struct venus_core *core = platform_get_drvdata(pdev);
+
+	pm_runtime_get_sync(core->dev);
+	venus_shutdown(core);
+	venus_firmware_deinit(core);
+	pm_runtime_put_sync(core->dev);
+}
+
+static __maybe_unused int venus_runtime_suspend(struct device *dev)
+{
+	struct venus_core *core = dev_get_drvdata(dev);
+	const struct venus_pm_ops *pm_ops = core->pm_ops;
+	int ret;
+
+	ret = hfi_core_suspend(core);
+	if (ret)
+		return ret;
+
+	if (pm_ops->core_power) {
+		ret = pm_ops->core_power(core, POWER_OFF);
+		if (ret)
+			return ret;
+	}
+
+	ret = icc_set_bw(core->cpucfg_path, 0, 0);
+	if (ret)
+		goto err_cpucfg_path;
+
+	ret = icc_set_bw(core->video_path, 0, 0);
+	if (ret)
+		goto err_video_path;
+
+	return ret;
+
+err_video_path:
+	icc_set_bw(core->cpucfg_path, kbps_to_icc(1000), 0);
+err_cpucfg_path:
+	if (pm_ops->core_power)
+		pm_ops->core_power(core, POWER_ON);
+
+	return ret;
+}
+
+static __maybe_unused int venus_runtime_resume(struct device *dev)
+{
+	struct venus_core *core = dev_get_drvdata(dev);
+	const struct venus_pm_ops *pm_ops = core->pm_ops;
+	int ret;
+
+	ret = icc_set_bw(core->video_path, kbps_to_icc(20000), 0);
+	if (ret)
+		return ret;
+
+	ret = icc_set_bw(core->cpucfg_path, kbps_to_icc(1000), 0);
+	if (ret)
+		return ret;
+
+	if (pm_ops->core_power) {
+		ret = pm_ops->core_power(core, POWER_ON);
+		if (ret)
+			return ret;
+	}
+
+	return hfi_core_resume(core, false);
+}
+
+static const struct dev_pm_ops venus_pm_ops = {
+	SET_SYSTEM_SLEEP_PM_OPS(pm_runtime_force_suspend,
+				pm_runtime_force_resume)
+	SET_RUNTIME_PM_OPS(venus_runtime_suspend, venus_runtime_resume, NULL)
+};
+
+static const struct freq_tbl msm8916_freq_table[] = {
+	{ 352800, 228570000 },	/* 1920x1088 @ 30 + 1280x720 @ 30 */
+	{ 244800, 160000000 },	/* 1920x1088 @ 30 */
+	{ 108000, 100000000 },	/* 1280x720 @ 30 */
+};
+
+static const struct reg_val msm8916_reg_preset[] = {
+	{ 0xe0020, 0x05555556 },
+	{ 0xe0024, 0x05555556 },
+	{ 0x80124, 0x00000003 },
+};
+
+static const struct venus_resources msm8916_res = {
+	.freq_tbl = msm8916_freq_table,
+	.freq_tbl_size = ARRAY_SIZE(msm8916_freq_table),
+	.reg_tbl = msm8916_reg_preset,
+	.reg_tbl_size = ARRAY_SIZE(msm8916_reg_preset),
+	.clks = { "core", "iface", "bus", },
+	.clks_num = 3,
+	.max_load = 352800, /* 720p@30 + 1080p@30 */
+	.hfi_version = HFI_VERSION_1XX,
+	.vmem_id = VIDC_RESOURCE_NONE,
+	.vmem_size = 0,
+	.vmem_addr = 0,
+	.dma_mask = 0xddc00000 - 1,
+	.fwname = "qcom/venus-1.8/venus.mbn",
+};
+
+static const struct freq_tbl msm8996_freq_table[] = {
+	{ 1944000, 520000000 },	/* 4k UHD @ 60 (decode only) */
+	{  972000, 520000000 },	/* 4k UHD @ 30 */
+	{  489600, 346666667 },	/* 1080p @ 60 */
+	{  244800, 150000000 },	/* 1080p @ 30 */
+	{  108000,  75000000 },	/* 720p @ 30 */
+};
+
+static const struct reg_val msm8996_reg_preset[] = {
+	{ 0x80010, 0xffffffff },
+	{ 0x80018, 0x00001556 },
+	{ 0x8001C, 0x00001556 },
+};
+
+static const struct venus_resources msm8996_res = {
+	.freq_tbl = msm8996_freq_table,
+	.freq_tbl_size = ARRAY_SIZE(msm8996_freq_table),
+	.reg_tbl = msm8996_reg_preset,
+	.reg_tbl_size = ARRAY_SIZE(msm8996_reg_preset),
+	.clks = {"core", "iface", "bus", "mbus" },
+	.clks_num = 4,
+	.vcodec0_clks = { "core" },
+	.vcodec1_clks = { "core" },
+	.vcodec_clks_num = 1,
+	.max_load = 2563200,
+	.hfi_version = HFI_VERSION_3XX,
+	.vmem_id = VIDC_RESOURCE_NONE,
+	.vmem_size = 0,
+	.vmem_addr = 0,
+	.dma_mask = 0xddc00000 - 1,
+	.fwname = "qcom/venus-4.2/venus.mbn",
+};
+
+static const struct freq_tbl msm8998_freq_table[] = {
+	{ 1944000, 465000000 },	/* 4k UHD @ 60 (decode only) */
+	{  972000, 465000000 },	/* 4k UHD @ 30 */
+	{  489600, 360000000 },	/* 1080p @ 60 */
+	{  244800, 186000000 },	/* 1080p @ 30 */
+	{  108000, 100000000 },	/* 720p @ 30 */
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 static const struct reg_val msm8998_reg_preset[] = {

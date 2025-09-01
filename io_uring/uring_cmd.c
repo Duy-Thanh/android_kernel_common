@@ -116,6 +116,7 @@ EXPORT_SYMBOL_GPL(io_uring_cmd_mark_cancelable);
 static void io_uring_cmd_work(struct io_kiocb *req, struct io_tw_state *ts)
 {
 	struct io_uring_cmd *ioucmd = io_kiocb_to_cmd(req, struct io_uring_cmd);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	unsigned int flags = IO_URING_F_COMPLETE_DEFER;
 
 	if (io_should_terminate_tw(req->ctx))
@@ -123,6 +124,12 @@ static void io_uring_cmd_work(struct io_kiocb *req, struct io_tw_state *ts)
 
 	/* task_work executor checks the deffered list completion */
 	ioucmd->task_work_cb(ioucmd, flags);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	/* task_work executor checks the deffered list completion */
+	ioucmd->task_work_cb(ioucmd, IO_URING_F_COMPLETE_DEFER);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 void __io_uring_cmd_do_in_task(struct io_uring_cmd *ioucmd,

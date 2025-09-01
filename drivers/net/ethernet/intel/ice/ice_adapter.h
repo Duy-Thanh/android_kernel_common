@@ -32,6 +32,7 @@ struct ice_port_list {
  * @refcount: Reference count. struct ice_pf objects hold the references.
  * @ctrl_pf: Control PF of the adapter
  * @ports: Ports list
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @index: 64-bit index cached for collision detection on 32bit systems
  */
 struct ice_adapter {
@@ -42,6 +43,19 @@ struct ice_adapter {
 	struct ice_pf *ctrl_pf;
 	struct ice_port_list ports;
 	u64 index;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * @device_serial_number: DSN cached for collision detection on 32bit systems
+ */
+struct ice_adapter {
+	refcount_t refcount;
+	/* For access to the GLTSYN_TIME register */
+	spinlock_t ptp_gltsyn_time_lock;
+
+	struct ice_pf *ctrl_pf;
+	struct ice_port_list ports;
+	u64 device_serial_number;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 struct ice_adapter *ice_adapter_get(struct pci_dev *pdev);

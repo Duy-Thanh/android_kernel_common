@@ -100,6 +100,7 @@ void vhost_task_stop(struct vhost_task *vtsk)
 	 * freeing it below.
 	 */
 	wait_for_completion(&vtsk->exited);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	put_task_struct(vtsk->task);
 	kfree(vtsk);
 }
@@ -150,6 +151,58 @@ struct vhost_task *vhost_task_create(bool (*fn)(void *),
 	}
 
 	vtsk->task = get_task_struct(tsk);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	kfree(vtsk);
+}
+EXPORT_SYMBOL_GPL(vhost_task_stop);
+
+/**
+ * vhost_task_create - create a copy of a task to be used by the kernel
+ * @fn: vhost worker function
+ * @handle_sigkill: vhost function to handle when we are killed
+ * @arg: data to be passed to fn and handled_kill
+ * @name: the thread's name
+ *
+ * This returns a specialized task for use by the vhost layer or ERR_PTR() on
+ * failure. The returned task is inactive, and the caller must fire it up
+ * through vhost_task_start().
+ */
+struct vhost_task *vhost_task_create(bool (*fn)(void *),
+				     void (*handle_sigkill)(void *), void *arg,
+				     const char *name)
+{
+	struct kernel_clone_args args = {
+		.flags		= CLONE_FS | CLONE_UNTRACED | CLONE_VM |
+				  CLONE_THREAD | CLONE_SIGHAND,
+		.exit_signal	= 0,
+		.fn		= vhost_task_fn,
+		.name		= name,
+		.user_worker	= 1,
+		.no_files	= 1,
+	};
+	struct vhost_task *vtsk;
+	struct task_struct *tsk;
+
+	vtsk = kzalloc(sizeof(*vtsk), GFP_KERNEL);
+	if (!vtsk)
+		return ERR_PTR(-ENOMEM);
+	init_completion(&vtsk->exited);
+	mutex_init(&vtsk->exit_mutex);
+	vtsk->data = arg;
+	vtsk->fn = fn;
+	vtsk->handle_sigkill = handle_sigkill;
+
+	args.fn_arg = vtsk;
+
+	tsk = copy_process(NULL, 0, NUMA_NO_NODE, &args);
+	if (IS_ERR(tsk)) {
+		kfree(vtsk);
+		return ERR_PTR(PTR_ERR(tsk));
+	}
+
+	vtsk->task = tsk;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return vtsk;
 }
 EXPORT_SYMBOL_GPL(vhost_task_create);

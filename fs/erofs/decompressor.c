@@ -331,6 +331,7 @@ static int z_erofs_transform_plain(struct z_erofs_decompress_req *rq,
 		cur = min(cur, rq->outputsize);
 		if (cur && rq->out[0]) {
 			kin = kmap_local_page(rq->in[nrpages_in - 1]);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			if (rq->out[0] == rq->in[nrpages_in - 1])
 				memmove(kin + rq->pageofs_out, kin + pi, cur);
 			else
@@ -359,6 +360,41 @@ static int z_erofs_transform_plain(struct z_erofs_decompress_req *rq,
 			else if (rq->out[no])
 				memcpy_to_page(rq->out[no], po,
 					       kin + rq->pageofs_in + pi, cnt);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			if (rq->out[0] == rq->in[nrpages_in - 1]) {
+				memmove(kin + rq->pageofs_out, kin + pi, cur);
+				flush_dcache_page(rq->out[0]);
+			} else {
+				memcpy_to_page(rq->out[0], rq->pageofs_out,
+					       kin + pi, cur);
+			}
+			kunmap_local(kin);
+		}
+		rq->outputsize -= cur;
+	}
+
+	for (; rq->outputsize; rq->pageofs_in = 0, cur += PAGE_SIZE, ni++) {
+		insz = min(PAGE_SIZE - rq->pageofs_in, rq->outputsize);
+		rq->outputsize -= insz;
+		if (!rq->in[ni])
+			continue;
+		kin = kmap_local_page(rq->in[ni]);
+		pi = 0;
+		do {
+			no = (rq->pageofs_out + cur + pi) >> PAGE_SHIFT;
+			po = (rq->pageofs_out + cur + pi) & ~PAGE_MASK;
+			DBG_BUGON(no >= nrpages_out);
+			cnt = min(insz - pi, PAGE_SIZE - po);
+			if (rq->out[no] == rq->in[ni]) {
+				memmove(kin + po,
+					kin + rq->pageofs_in + pi, cnt);
+				flush_dcache_page(rq->out[no]);
+			} else if (rq->out[no]) {
+				memcpy_to_page(rq->out[no], po,
+					       kin + rq->pageofs_in + pi, cnt);
+			}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			pi += cnt;
 		} while (pi < insz);
 		kunmap_local(kin);

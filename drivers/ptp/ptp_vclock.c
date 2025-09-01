@@ -154,6 +154,7 @@ static long ptp_vclock_refresh(struct ptp_clock_info *ptp)
 	return PTP_VCLOCK_REFRESH_INTERVAL;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void ptp_vclock_set_subclass(struct ptp_clock *ptp)
 {
 	lockdep_set_subclass(&ptp->clock.rwsem, PTP_LOCK_VIRTUAL);
@@ -219,6 +220,67 @@ struct ptp_vclock *ptp_vclock_register(struct ptp_clock *pclock)
 	}
 
 	ptp_vclock_set_subclass(vclock->clock);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static const struct ptp_clock_info ptp_vclock_info = {
+	.owner		= THIS_MODULE,
+	.name		= "ptp virtual clock",
+	.max_adj	= 500000000,
+	.adjfine	= ptp_vclock_adjfine,
+	.adjtime	= ptp_vclock_adjtime,
+	.settime64	= ptp_vclock_settime,
+	.do_aux_work	= ptp_vclock_refresh,
+};
+
+static u64 ptp_vclock_read(const struct cyclecounter *cc)
+{
+	struct ptp_vclock *vclock = cc_to_vclock(cc);
+	struct ptp_clock *ptp = vclock->pclock;
+	struct timespec64 ts = {};
+
+	ptp->info->getcycles64(ptp->info, &ts);
+
+	return timespec64_to_ns(&ts);
+}
+
+static const struct cyclecounter ptp_vclock_cc = {
+	.read	= ptp_vclock_read,
+	.mask	= CYCLECOUNTER_MASK(32),
+	.mult	= PTP_VCLOCK_CC_MULT,
+	.shift	= PTP_VCLOCK_CC_SHIFT,
+};
+
+struct ptp_vclock *ptp_vclock_register(struct ptp_clock *pclock)
+{
+	struct ptp_vclock *vclock;
+
+	vclock = kzalloc(sizeof(*vclock), GFP_KERNEL);
+	if (!vclock)
+		return NULL;
+
+	vclock->pclock = pclock;
+	vclock->info = ptp_vclock_info;
+	if (pclock->info->getcyclesx64)
+		vclock->info.gettimex64 = ptp_vclock_gettimex;
+	else
+		vclock->info.gettime64 = ptp_vclock_gettime;
+	if (pclock->info->getcrosscycles)
+		vclock->info.getcrosststamp = ptp_vclock_getcrosststamp;
+	vclock->cc = ptp_vclock_cc;
+
+	snprintf(vclock->info.name, PTP_CLOCK_NAME_LEN, "ptp%d_virt",
+		 pclock->index);
+
+	INIT_HLIST_NODE(&vclock->vclock_hash_node);
+
+	mutex_init(&vclock->lock);
+
+	vclock->clock = ptp_clock_register(&vclock->info, &pclock->dev);
+	if (IS_ERR_OR_NULL(vclock->clock)) {
+		kfree(vclock);
+		return NULL;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	timecounter_init(&vclock->tc, &vclock->cc, 0);
 	ptp_schedule_worker(vclock->clock, PTP_VCLOCK_REFRESH_INTERVAL);

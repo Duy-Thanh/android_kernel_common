@@ -191,6 +191,7 @@ inline bool is_a_helper<const gassign *>::test(const_gimple gs)
 }
 #endif
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #if BUILDING_GCC_VERSION < 16000
 #define TODO_verify_ssa TODO_verify_il
 #define TODO_verify_flow TODO_verify_il
@@ -202,6 +203,13 @@ inline bool is_a_helper<const gassign *>::test(const_gimple gs)
 #define TODO_verify_stmts 0
 #define TODO_verify_rtl_sharing 0
 #endif
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define TODO_verify_ssa TODO_verify_il
+#define TODO_verify_flow TODO_verify_il
+#define TODO_verify_stmts TODO_verify_il
+#define TODO_verify_rtl_sharing TODO_verify_il
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #define INSN_DELETED_P(insn) (insn)->deleted()
 

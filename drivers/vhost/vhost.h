@@ -26,6 +26,7 @@ struct vhost_work {
 	unsigned long		flags;
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 struct vhost_worker;
 struct vhost_dev;
 
@@ -198,6 +199,159 @@ struct vhost_dev {
 	 * The default value is set by fork_from_owner_default
 	 */
 	bool fork_owner;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+struct vhost_worker {
+	struct vhost_task	*vtsk;
+	struct vhost_dev	*dev;
+	/* Used to serialize device wide flushing with worker swapping. */
+	struct mutex		mutex;
+	struct llist_head	work_list;
+	u64			kcov_handle;
+	u32			id;
+	int			attachment_cnt;
+	bool			killed;
+};
+
+/* Poll a file (eventfd or socket) */
+/* Note: there's nothing vhost specific about this structure. */
+struct vhost_poll {
+	poll_table		table;
+	wait_queue_head_t	*wqh;
+	wait_queue_entry_t	wait;
+	struct vhost_work	work;
+	__poll_t		mask;
+	struct vhost_dev	*dev;
+	struct vhost_virtqueue	*vq;
+};
+
+void vhost_poll_init(struct vhost_poll *poll, vhost_work_fn_t fn,
+		     __poll_t mask, struct vhost_dev *dev,
+		     struct vhost_virtqueue *vq);
+int vhost_poll_start(struct vhost_poll *poll, struct file *file);
+void vhost_poll_stop(struct vhost_poll *poll);
+void vhost_poll_queue(struct vhost_poll *poll);
+
+void vhost_work_init(struct vhost_work *work, vhost_work_fn_t fn);
+void vhost_dev_flush(struct vhost_dev *dev);
+
+struct vhost_log {
+	u64 addr;
+	u64 len;
+};
+
+enum vhost_uaddr_type {
+	VHOST_ADDR_DESC = 0,
+	VHOST_ADDR_AVAIL = 1,
+	VHOST_ADDR_USED = 2,
+	VHOST_NUM_ADDRS = 3,
+};
+
+struct vhost_vring_call {
+	struct eventfd_ctx *ctx;
+	struct irq_bypass_producer producer;
+};
+
+/* The virtqueue structure describes a queue attached to a device. */
+struct vhost_virtqueue {
+	struct vhost_dev *dev;
+	struct vhost_worker __rcu *worker;
+
+	/* The actual ring of buffers. */
+	struct mutex mutex;
+	unsigned int num;
+	vring_desc_t __user *desc;
+	vring_avail_t __user *avail;
+	vring_used_t __user *used;
+	const struct vhost_iotlb_map *meta_iotlb[VHOST_NUM_ADDRS];
+	struct file *kick;
+	struct vhost_vring_call call_ctx;
+	struct eventfd_ctx *error_ctx;
+	struct eventfd_ctx *log_ctx;
+
+	struct vhost_poll poll;
+
+	/* The routine to call when the Guest pings us, or timeout. */
+	vhost_work_fn_t handle_kick;
+
+	/* Last available index we saw.
+	 * Values are limited to 0x7fff, and the high bit is used as
+	 * a wrap counter when using VIRTIO_F_RING_PACKED. */
+	u16 last_avail_idx;
+
+	/* Caches available index value from user. */
+	u16 avail_idx;
+
+	/* Last index we used.
+	 * Values are limited to 0x7fff, and the high bit is used as
+	 * a wrap counter when using VIRTIO_F_RING_PACKED. */
+	u16 last_used_idx;
+
+	/* Used flags */
+	u16 used_flags;
+
+	/* Last used index value we have signalled on */
+	u16 signalled_used;
+
+	/* Last used index value we have signalled on */
+	bool signalled_used_valid;
+
+	/* Log writes to used structure. */
+	bool log_used;
+	u64 log_addr;
+
+	struct iovec iov[UIO_MAXIOV];
+	struct iovec iotlb_iov[64];
+	struct iovec *indirect;
+	struct vring_used_elem *heads;
+	/* Protected by virtqueue mutex. */
+	struct vhost_iotlb *umem;
+	struct vhost_iotlb *iotlb;
+	void *private_data;
+	u64 acked_features;
+	u64 acked_backend_features;
+	/* Log write descriptors */
+	void __user *log_base;
+	struct vhost_log *log;
+	struct iovec log_iov[64];
+
+	/* Ring endianness. Defaults to legacy native endianness.
+	 * Set to true when starting a modern virtio device. */
+	bool is_le;
+#ifdef CONFIG_VHOST_CROSS_ENDIAN_LEGACY
+	/* Ring endianness requested by userspace for cross-endian support. */
+	bool user_be;
+#endif
+	u32 busyloop_timeout;
+};
+
+struct vhost_msg_node {
+  union {
+	  struct vhost_msg msg;
+	  struct vhost_msg_v2 msg_v2;
+  };
+  struct vhost_virtqueue *vq;
+  struct list_head node;
+};
+
+struct vhost_dev {
+	struct mm_struct *mm;
+	struct mutex mutex;
+	struct vhost_virtqueue **vqs;
+	int nvqs;
+	struct eventfd_ctx *log_ctx;
+	struct vhost_iotlb *umem;
+	struct vhost_iotlb *iotlb;
+	spinlock_t iotlb_lock;
+	struct list_head read_list;
+	struct list_head pending_list;
+	wait_queue_head_t wait;
+	int iov_limit;
+	int weight;
+	int byte_weight;
+	struct xarray worker_xa;
+	bool use_worker;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	int (*msg_handler)(struct vhost_dev *dev, u32 asid,
 			   struct vhost_iotlb_msg *msg);
 };

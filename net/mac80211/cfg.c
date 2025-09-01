@@ -1078,6 +1078,7 @@ ieee80211_copy_rnr_beacon(u8 *pos, struct cfg80211_rnr_elems *dst,
 {
 	int i, offset = 0;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	dst->cnt = src->cnt;
 	for (i = 0; i < src->cnt; i++) {
 		memcpy(pos + offset, src->elem[i].data, src->elem[i].len);
@@ -1885,6 +1886,816 @@ static int sta_link_apply_parameters(struct ieee80211_local *local,
 				      params->supported_rates_len,
 				      &link_sta->pub->supp_rates[sband->band]))
 		return -EINVAL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	for (i = 0; i < src->cnt; i++) {
+		memcpy(pos + offset, src->elem[i].data, src->elem[i].len);
+		dst->elem[i].len = src->elem[i].len;
+		dst->elem[i].data = pos + offset;
+		offset += dst->elem[i].len;
+	}
+	dst->cnt = src->cnt;
+
+	return offset;
+}
+
+static int
+ieee80211_assign_beacon(struct ieee80211_sub_if_data *sdata,
+			struct ieee80211_link_data *link,
+			struct cfg80211_beacon_data *params,
+			const struct ieee80211_csa_settings *csa,
+			const struct ieee80211_color_change_settings *cca,
+			u64 *changed)
+{
+	struct cfg80211_mbssid_elems *mbssid = NULL;
+	struct cfg80211_rnr_elems *rnr = NULL;
+	struct beacon_data *new, *old;
+	int new_head_len, new_tail_len;
+	int size, err;
+	u64 _changed = BSS_CHANGED_BEACON;
+	struct ieee80211_bss_conf *link_conf = link->conf;
+
+	old = sdata_dereference(link->u.ap.beacon, sdata);
+
+	/* Need to have a beacon head if we don't have one yet */
+	if (!params->head && !old)
+		return -EINVAL;
+
+	/* new or old head? */
+	if (params->head)
+		new_head_len = params->head_len;
+	else
+		new_head_len = old->head_len;
+
+	/* new or old tail? */
+	if (params->tail || !old)
+		/* params->tail_len will be zero for !params->tail */
+		new_tail_len = params->tail_len;
+	else
+		new_tail_len = old->tail_len;
+
+	size = sizeof(*new) + new_head_len + new_tail_len;
+
+	/* new or old multiple BSSID elements? */
+	if (params->mbssid_ies) {
+		mbssid = params->mbssid_ies;
+		size += struct_size(new->mbssid_ies, elem, mbssid->cnt);
+		if (params->rnr_ies) {
+			rnr = params->rnr_ies;
+			size += struct_size(new->rnr_ies, elem, rnr->cnt);
+		}
+		size += ieee80211_get_mbssid_beacon_len(mbssid, rnr,
+							mbssid->cnt);
+	} else if (old && old->mbssid_ies) {
+		mbssid = old->mbssid_ies;
+		size += struct_size(new->mbssid_ies, elem, mbssid->cnt);
+		if (old && old->rnr_ies) {
+			rnr = old->rnr_ies;
+			size += struct_size(new->rnr_ies, elem, rnr->cnt);
+		}
+		size += ieee80211_get_mbssid_beacon_len(mbssid, rnr,
+							mbssid->cnt);
+	}
+
+	new = kzalloc(size, GFP_KERNEL);
+	if (!new)
+		return -ENOMEM;
+
+	/* start filling the new info now */
+
+	/*
+	 * pointers go into the block we allocated,
+	 * memory is | beacon_data | head | tail | mbssid_ies | rnr_ies
+	 */
+	new->head = ((u8 *) new) + sizeof(*new);
+	new->tail = new->head + new_head_len;
+	new->head_len = new_head_len;
+	new->tail_len = new_tail_len;
+	/* copy in optional mbssid_ies */
+	if (mbssid) {
+		u8 *pos = new->tail + new->tail_len;
+
+		new->mbssid_ies = (void *)pos;
+		pos += struct_size(new->mbssid_ies, elem, mbssid->cnt);
+		pos += ieee80211_copy_mbssid_beacon(pos, new->mbssid_ies,
+						    mbssid);
+		if (rnr) {
+			new->rnr_ies = (void *)pos;
+			pos += struct_size(new->rnr_ies, elem, rnr->cnt);
+			ieee80211_copy_rnr_beacon(pos, new->rnr_ies, rnr);
+		}
+		/* update bssid_indicator */
+		link_conf->bssid_indicator =
+			ilog2(__roundup_pow_of_two(mbssid->cnt + 1));
+	}
+
+	if (csa) {
+		new->cntdwn_current_counter = csa->count;
+		memcpy(new->cntdwn_counter_offsets, csa->counter_offsets_beacon,
+		       csa->n_counter_offsets_beacon *
+		       sizeof(new->cntdwn_counter_offsets[0]));
+	} else if (cca) {
+		new->cntdwn_current_counter = cca->count;
+		new->cntdwn_counter_offsets[0] = cca->counter_offset_beacon;
+	}
+
+	/* copy in head */
+	if (params->head)
+		memcpy(new->head, params->head, new_head_len);
+	else
+		memcpy(new->head, old->head, new_head_len);
+
+	/* copy in optional tail */
+	if (params->tail)
+		memcpy(new->tail, params->tail, new_tail_len);
+	else
+		if (old)
+			memcpy(new->tail, old->tail, new_tail_len);
+
+	err = ieee80211_set_probe_resp(sdata, params->probe_resp,
+				       params->probe_resp_len, csa, cca, link);
+	if (err < 0) {
+		kfree(new);
+		return err;
+	}
+	if (err == 0)
+		_changed |= BSS_CHANGED_AP_PROBE_RESP;
+
+	if (params->ftm_responder != -1) {
+		link_conf->ftm_responder = params->ftm_responder;
+		err = ieee80211_set_ftm_responder_params(sdata,
+							 params->lci,
+							 params->lci_len,
+							 params->civicloc,
+							 params->civicloc_len,
+							 link_conf);
+
+		if (err < 0) {
+			kfree(new);
+			return err;
+		}
+
+		_changed |= BSS_CHANGED_FTM_RESPONDER;
+	}
+
+	rcu_assign_pointer(link->u.ap.beacon, new);
+	sdata->u.ap.active = true;
+
+	if (old)
+		kfree_rcu(old, rcu_head);
+
+	*changed |= _changed;
+	return 0;
+}
+
+static u8 ieee80211_num_beaconing_links(struct ieee80211_sub_if_data *sdata)
+{
+	struct ieee80211_link_data *link;
+	u8 link_id, num = 0;
+
+	if (sdata->vif.type != NL80211_IFTYPE_AP &&
+	    sdata->vif.type != NL80211_IFTYPE_P2P_GO)
+		return num;
+
+	if (!sdata->vif.valid_links)
+		return num;
+
+	for (link_id = 0; link_id < IEEE80211_MLD_MAX_NUM_LINKS; link_id++) {
+		link = sdata_dereference(sdata->link[link_id], sdata);
+		if (!link)
+			continue;
+
+		if (sdata_dereference(link->u.ap.beacon, sdata))
+			num++;
+	}
+
+	return num;
+}
+
+static int ieee80211_start_ap(struct wiphy *wiphy, struct net_device *dev,
+			      struct cfg80211_ap_settings *params)
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_DEV_TO_SUB_IF(dev);
+	struct ieee80211_local *local = sdata->local;
+	struct beacon_data *old;
+	struct ieee80211_sub_if_data *vlan;
+	u64 changed = BSS_CHANGED_BEACON_INT |
+		      BSS_CHANGED_BEACON_ENABLED |
+		      BSS_CHANGED_BEACON |
+		      BSS_CHANGED_P2P_PS |
+		      BSS_CHANGED_TXPOWER |
+		      BSS_CHANGED_TWT;
+	int i, err;
+	int prev_beacon_int;
+	unsigned int link_id = params->beacon.link_id;
+	struct ieee80211_link_data *link;
+	struct ieee80211_bss_conf *link_conf;
+	struct ieee80211_chan_req chanreq = { .oper = params->chandef };
+
+	lockdep_assert_wiphy(local->hw.wiphy);
+
+	link = sdata_dereference(sdata->link[link_id], sdata);
+	if (!link)
+		return -ENOLINK;
+
+	link_conf = link->conf;
+
+	old = sdata_dereference(link->u.ap.beacon, sdata);
+	if (old)
+		return -EALREADY;
+
+	if (params->smps_mode != NL80211_SMPS_OFF)
+		return -EOPNOTSUPP;
+
+	link->smps_mode = IEEE80211_SMPS_OFF;
+
+	link->needed_rx_chains = sdata->local->rx_chains;
+
+	prev_beacon_int = link_conf->beacon_int;
+	link_conf->beacon_int = params->beacon_interval;
+
+	if (params->ht_cap)
+		link_conf->ht_ldpc =
+			params->ht_cap->cap_info &
+				cpu_to_le16(IEEE80211_HT_CAP_LDPC_CODING);
+
+	if (params->vht_cap) {
+		link_conf->vht_ldpc =
+			params->vht_cap->vht_cap_info &
+				cpu_to_le32(IEEE80211_VHT_CAP_RXLDPC);
+		link_conf->vht_su_beamformer =
+			params->vht_cap->vht_cap_info &
+				cpu_to_le32(IEEE80211_VHT_CAP_SU_BEAMFORMER_CAPABLE);
+		link_conf->vht_su_beamformee =
+			params->vht_cap->vht_cap_info &
+				cpu_to_le32(IEEE80211_VHT_CAP_SU_BEAMFORMEE_CAPABLE);
+		link_conf->vht_mu_beamformer =
+			params->vht_cap->vht_cap_info &
+				cpu_to_le32(IEEE80211_VHT_CAP_MU_BEAMFORMER_CAPABLE);
+		link_conf->vht_mu_beamformee =
+			params->vht_cap->vht_cap_info &
+				cpu_to_le32(IEEE80211_VHT_CAP_MU_BEAMFORMEE_CAPABLE);
+	}
+
+	if (params->he_cap && params->he_oper) {
+		link_conf->he_support = true;
+		link_conf->htc_trig_based_pkt_ext =
+			le32_get_bits(params->he_oper->he_oper_params,
+			      IEEE80211_HE_OPERATION_DFLT_PE_DURATION_MASK);
+		link_conf->frame_time_rts_th =
+			le32_get_bits(params->he_oper->he_oper_params,
+			      IEEE80211_HE_OPERATION_RTS_THRESHOLD_MASK);
+		changed |= BSS_CHANGED_HE_OBSS_PD;
+
+		if (params->beacon.he_bss_color.enabled)
+			changed |= BSS_CHANGED_HE_BSS_COLOR;
+	}
+
+	if (params->he_cap) {
+		link_conf->he_ldpc =
+			params->he_cap->phy_cap_info[1] &
+				IEEE80211_HE_PHY_CAP1_LDPC_CODING_IN_PAYLOAD;
+		link_conf->he_su_beamformer =
+			params->he_cap->phy_cap_info[3] &
+				IEEE80211_HE_PHY_CAP3_SU_BEAMFORMER;
+		link_conf->he_su_beamformee =
+			params->he_cap->phy_cap_info[4] &
+				IEEE80211_HE_PHY_CAP4_SU_BEAMFORMEE;
+		link_conf->he_mu_beamformer =
+			params->he_cap->phy_cap_info[4] &
+				IEEE80211_HE_PHY_CAP4_MU_BEAMFORMER;
+		link_conf->he_full_ul_mumimo =
+			params->he_cap->phy_cap_info[2] &
+				IEEE80211_HE_PHY_CAP2_UL_MU_FULL_MU_MIMO;
+	}
+
+	if (params->eht_cap) {
+		if (!link_conf->he_support)
+			return -EOPNOTSUPP;
+
+		link_conf->eht_support = true;
+
+		link_conf->eht_su_beamformer =
+			params->eht_cap->fixed.phy_cap_info[0] &
+				IEEE80211_EHT_PHY_CAP0_SU_BEAMFORMER;
+		link_conf->eht_su_beamformee =
+			params->eht_cap->fixed.phy_cap_info[0] &
+				IEEE80211_EHT_PHY_CAP0_SU_BEAMFORMEE;
+		link_conf->eht_mu_beamformer =
+			params->eht_cap->fixed.phy_cap_info[7] &
+				(IEEE80211_EHT_PHY_CAP7_MU_BEAMFORMER_80MHZ |
+				 IEEE80211_EHT_PHY_CAP7_MU_BEAMFORMER_160MHZ |
+				 IEEE80211_EHT_PHY_CAP7_MU_BEAMFORMER_320MHZ);
+		link_conf->eht_80mhz_full_bw_ul_mumimo =
+			params->eht_cap->fixed.phy_cap_info[7] &
+				(IEEE80211_EHT_PHY_CAP7_NON_OFDMA_UL_MU_MIMO_80MHZ |
+				 IEEE80211_EHT_PHY_CAP7_NON_OFDMA_UL_MU_MIMO_160MHZ |
+				 IEEE80211_EHT_PHY_CAP7_NON_OFDMA_UL_MU_MIMO_320MHZ);
+	} else {
+		link_conf->eht_su_beamformer = false;
+		link_conf->eht_su_beamformee = false;
+		link_conf->eht_mu_beamformer = false;
+	}
+
+	if (sdata->vif.type == NL80211_IFTYPE_AP &&
+	    params->mbssid_config.tx_wdev) {
+		err = ieee80211_set_ap_mbssid_options(sdata,
+						      params->mbssid_config,
+						      link_conf);
+		if (err)
+			return err;
+	}
+
+	err = ieee80211_link_use_channel(link, &chanreq,
+					 IEEE80211_CHANCTX_SHARED);
+	if (!err)
+		ieee80211_link_copy_chanctx_to_vlans(link, false);
+	if (err) {
+		link_conf->beacon_int = prev_beacon_int;
+		return err;
+	}
+
+	/*
+	 * Apply control port protocol, this allows us to
+	 * not encrypt dynamic WEP control frames.
+	 */
+	sdata->control_port_protocol = params->crypto.control_port_ethertype;
+	sdata->control_port_no_encrypt = params->crypto.control_port_no_encrypt;
+	sdata->control_port_over_nl80211 =
+				params->crypto.control_port_over_nl80211;
+	sdata->control_port_no_preauth =
+				params->crypto.control_port_no_preauth;
+
+	list_for_each_entry(vlan, &sdata->u.ap.vlans, u.vlan.list) {
+		vlan->control_port_protocol =
+			params->crypto.control_port_ethertype;
+		vlan->control_port_no_encrypt =
+			params->crypto.control_port_no_encrypt;
+		vlan->control_port_over_nl80211 =
+			params->crypto.control_port_over_nl80211;
+		vlan->control_port_no_preauth =
+			params->crypto.control_port_no_preauth;
+	}
+
+	link_conf->dtim_period = params->dtim_period;
+	link_conf->enable_beacon = true;
+	link_conf->allow_p2p_go_ps = sdata->vif.p2p;
+	link_conf->twt_responder = params->twt_responder;
+	link_conf->he_obss_pd = params->he_obss_pd;
+	link_conf->he_bss_color = params->beacon.he_bss_color;
+	sdata->vif.cfg.s1g = params->chandef.chan->band ==
+				  NL80211_BAND_S1GHZ;
+
+	sdata->vif.cfg.ssid_len = params->ssid_len;
+	if (params->ssid_len)
+		memcpy(sdata->vif.cfg.ssid, params->ssid,
+		       params->ssid_len);
+	link_conf->hidden_ssid =
+		(params->hidden_ssid != NL80211_HIDDEN_SSID_NOT_IN_USE);
+
+	memset(&link_conf->p2p_noa_attr, 0,
+	       sizeof(link_conf->p2p_noa_attr));
+	link_conf->p2p_noa_attr.oppps_ctwindow =
+		params->p2p_ctwindow & IEEE80211_P2P_OPPPS_CTWINDOW_MASK;
+	if (params->p2p_opp_ps)
+		link_conf->p2p_noa_attr.oppps_ctwindow |=
+					IEEE80211_P2P_OPPPS_ENABLE_BIT;
+
+	sdata->beacon_rate_set = false;
+	if (wiphy_ext_feature_isset(local->hw.wiphy,
+				    NL80211_EXT_FEATURE_BEACON_RATE_LEGACY)) {
+		for (i = 0; i < NUM_NL80211_BANDS; i++) {
+			sdata->beacon_rateidx_mask[i] =
+				params->beacon_rate.control[i].legacy;
+			if (sdata->beacon_rateidx_mask[i])
+				sdata->beacon_rate_set = true;
+		}
+	}
+
+	if (ieee80211_hw_check(&local->hw, HAS_RATE_CONTROL))
+		link_conf->beacon_tx_rate = params->beacon_rate;
+
+	err = ieee80211_assign_beacon(sdata, link, &params->beacon, NULL, NULL,
+				      &changed);
+	if (err < 0)
+		goto error;
+
+	err = ieee80211_set_fils_discovery(sdata, &params->fils_discovery,
+					   link, link_conf, &changed);
+	if (err < 0)
+		goto error;
+
+	err = ieee80211_set_unsol_bcast_probe_resp(sdata,
+						   &params->unsol_bcast_probe_resp,
+						   link, link_conf, &changed);
+	if (err < 0)
+		goto error;
+
+	err = drv_start_ap(sdata->local, sdata, link_conf);
+	if (err) {
+		old = sdata_dereference(link->u.ap.beacon, sdata);
+
+		if (old)
+			kfree_rcu(old, rcu_head);
+		RCU_INIT_POINTER(link->u.ap.beacon, NULL);
+
+		if (ieee80211_num_beaconing_links(sdata) == 0)
+			sdata->u.ap.active = false;
+
+		goto error;
+	}
+
+	ieee80211_recalc_dtim(local, sdata);
+	ieee80211_vif_cfg_change_notify(sdata, BSS_CHANGED_SSID);
+	ieee80211_link_info_change_notify(sdata, link, changed);
+
+	if (ieee80211_num_beaconing_links(sdata) <= 1)
+		netif_carrier_on(dev);
+
+	list_for_each_entry(vlan, &sdata->u.ap.vlans, u.vlan.list)
+		netif_carrier_on(vlan->dev);
+
+	return 0;
+
+error:
+	ieee80211_link_release_channel(link);
+
+	return err;
+}
+
+static int ieee80211_change_beacon(struct wiphy *wiphy, struct net_device *dev,
+				   struct cfg80211_ap_update *params)
+
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_DEV_TO_SUB_IF(dev);
+	struct ieee80211_link_data *link;
+	struct cfg80211_beacon_data *beacon = &params->beacon;
+	struct beacon_data *old;
+	int err;
+	struct ieee80211_bss_conf *link_conf;
+	u64 changed = 0;
+
+	lockdep_assert_wiphy(wiphy);
+
+	link = sdata_dereference(sdata->link[beacon->link_id], sdata);
+	if (!link)
+		return -ENOLINK;
+
+	link_conf = link->conf;
+
+	/* don't allow changing the beacon while a countdown is in place - offset
+	 * of channel switch counter may change
+	 */
+	if (link_conf->csa_active || link_conf->color_change_active)
+		return -EBUSY;
+
+	old = sdata_dereference(link->u.ap.beacon, sdata);
+	if (!old)
+		return -ENOENT;
+
+	err = ieee80211_assign_beacon(sdata, link, beacon, NULL, NULL,
+				      &changed);
+	if (err < 0)
+		return err;
+
+	err = ieee80211_set_fils_discovery(sdata, &params->fils_discovery,
+					   link, link_conf, &changed);
+	if (err < 0)
+		return err;
+
+	err = ieee80211_set_unsol_bcast_probe_resp(sdata,
+						   &params->unsol_bcast_probe_resp,
+						   link, link_conf, &changed);
+	if (err < 0)
+		return err;
+
+	if (beacon->he_bss_color_valid &&
+	    beacon->he_bss_color.enabled != link_conf->he_bss_color.enabled) {
+		link_conf->he_bss_color.enabled = beacon->he_bss_color.enabled;
+		changed |= BSS_CHANGED_HE_BSS_COLOR;
+	}
+
+	ieee80211_link_info_change_notify(sdata, link, changed);
+	return 0;
+}
+
+static void ieee80211_free_next_beacon(struct ieee80211_link_data *link)
+{
+	if (!link->u.ap.next_beacon)
+		return;
+
+	kfree(link->u.ap.next_beacon->mbssid_ies);
+	kfree(link->u.ap.next_beacon->rnr_ies);
+	kfree(link->u.ap.next_beacon);
+	link->u.ap.next_beacon = NULL;
+}
+
+static int ieee80211_stop_ap(struct wiphy *wiphy, struct net_device *dev,
+			     unsigned int link_id)
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_DEV_TO_SUB_IF(dev);
+	struct ieee80211_sub_if_data *vlan;
+	struct ieee80211_local *local = sdata->local;
+	struct beacon_data *old_beacon;
+	struct probe_resp *old_probe_resp;
+	struct fils_discovery_data *old_fils_discovery;
+	struct unsol_bcast_probe_resp_data *old_unsol_bcast_probe_resp;
+	struct cfg80211_chan_def chandef;
+	struct ieee80211_link_data *link =
+		sdata_dereference(sdata->link[link_id], sdata);
+	struct ieee80211_bss_conf *link_conf = link->conf;
+	LIST_HEAD(keys);
+
+	lockdep_assert_wiphy(local->hw.wiphy);
+
+	old_beacon = sdata_dereference(link->u.ap.beacon, sdata);
+	if (!old_beacon)
+		return -ENOENT;
+	old_probe_resp = sdata_dereference(link->u.ap.probe_resp,
+					   sdata);
+	old_fils_discovery = sdata_dereference(link->u.ap.fils_discovery,
+					       sdata);
+	old_unsol_bcast_probe_resp =
+		sdata_dereference(link->u.ap.unsol_bcast_probe_resp,
+				  sdata);
+
+	/* abort any running channel switch or color change */
+	link_conf->csa_active = false;
+	link_conf->color_change_active = false;
+	ieee80211_vif_unblock_queues_csa(sdata);
+
+	ieee80211_free_next_beacon(link);
+
+	/* turn off carrier for this interface and dependent VLANs */
+	list_for_each_entry(vlan, &sdata->u.ap.vlans, u.vlan.list)
+		netif_carrier_off(vlan->dev);
+
+	if (ieee80211_num_beaconing_links(sdata) <= 1) {
+		netif_carrier_off(dev);
+		sdata->u.ap.active = false;
+	}
+
+	/* remove beacon and probe response */
+	RCU_INIT_POINTER(link->u.ap.beacon, NULL);
+	RCU_INIT_POINTER(link->u.ap.probe_resp, NULL);
+	RCU_INIT_POINTER(link->u.ap.fils_discovery, NULL);
+	RCU_INIT_POINTER(link->u.ap.unsol_bcast_probe_resp, NULL);
+	kfree_rcu(old_beacon, rcu_head);
+	if (old_probe_resp)
+		kfree_rcu(old_probe_resp, rcu_head);
+	if (old_fils_discovery)
+		kfree_rcu(old_fils_discovery, rcu_head);
+	if (old_unsol_bcast_probe_resp)
+		kfree_rcu(old_unsol_bcast_probe_resp, rcu_head);
+
+	kfree(link_conf->ftmr_params);
+	link_conf->ftmr_params = NULL;
+
+	sdata->vif.mbssid_tx_vif = NULL;
+	link_conf->bssid_index = 0;
+	link_conf->nontransmitted = false;
+	link_conf->ema_ap = false;
+	link_conf->bssid_indicator = 0;
+
+	__sta_info_flush(sdata, true, link_id);
+
+	ieee80211_remove_link_keys(link, &keys);
+	if (!list_empty(&keys)) {
+		synchronize_net();
+		ieee80211_free_key_list(local, &keys);
+	}
+
+	link_conf->enable_beacon = false;
+	sdata->beacon_rate_set = false;
+	sdata->vif.cfg.ssid_len = 0;
+	clear_bit(SDATA_STATE_OFFCHANNEL_BEACON_STOPPED, &sdata->state);
+	ieee80211_link_info_change_notify(sdata, link,
+					  BSS_CHANGED_BEACON_ENABLED);
+
+	if (sdata->wdev.links[link_id].cac_started) {
+		chandef = link_conf->chanreq.oper;
+		wiphy_delayed_work_cancel(wiphy, &link->dfs_cac_timer_work);
+		cfg80211_cac_event(sdata->dev, &chandef,
+				   NL80211_RADAR_CAC_ABORTED,
+				   GFP_KERNEL, link_id);
+	}
+
+	drv_stop_ap(sdata->local, sdata, link_conf);
+
+	/* free all potentially still buffered bcast frames */
+	local->total_ps_buffered -= skb_queue_len(&sdata->u.ap.ps.bc_buf);
+	ieee80211_purge_tx_queue(&local->hw, &sdata->u.ap.ps.bc_buf);
+
+	ieee80211_link_copy_chanctx_to_vlans(link, true);
+	ieee80211_link_release_channel(link);
+
+	return 0;
+}
+
+static int sta_apply_auth_flags(struct ieee80211_local *local,
+				struct sta_info *sta,
+				u32 mask, u32 set)
+{
+	int ret;
+
+	if (mask & BIT(NL80211_STA_FLAG_AUTHENTICATED) &&
+	    set & BIT(NL80211_STA_FLAG_AUTHENTICATED) &&
+	    !test_sta_flag(sta, WLAN_STA_AUTH)) {
+		ret = sta_info_move_state(sta, IEEE80211_STA_AUTH);
+		if (ret)
+			return ret;
+	}
+
+	if (mask & BIT(NL80211_STA_FLAG_ASSOCIATED) &&
+	    set & BIT(NL80211_STA_FLAG_ASSOCIATED) &&
+	    !test_sta_flag(sta, WLAN_STA_ASSOC)) {
+		/*
+		 * When peer becomes associated, init rate control as
+		 * well. Some drivers require rate control initialized
+		 * before drv_sta_state() is called.
+		 */
+		if (!test_sta_flag(sta, WLAN_STA_RATE_CONTROL))
+			rate_control_rate_init(sta);
+
+		ret = sta_info_move_state(sta, IEEE80211_STA_ASSOC);
+		if (ret)
+			return ret;
+	}
+
+	if (mask & BIT(NL80211_STA_FLAG_AUTHORIZED)) {
+		if (set & BIT(NL80211_STA_FLAG_AUTHORIZED))
+			ret = sta_info_move_state(sta, IEEE80211_STA_AUTHORIZED);
+		else if (test_sta_flag(sta, WLAN_STA_AUTHORIZED))
+			ret = sta_info_move_state(sta, IEEE80211_STA_ASSOC);
+		else
+			ret = 0;
+		if (ret)
+			return ret;
+	}
+
+	if (mask & BIT(NL80211_STA_FLAG_ASSOCIATED) &&
+	    !(set & BIT(NL80211_STA_FLAG_ASSOCIATED)) &&
+	    test_sta_flag(sta, WLAN_STA_ASSOC)) {
+		ret = sta_info_move_state(sta, IEEE80211_STA_AUTH);
+		if (ret)
+			return ret;
+	}
+
+	if (mask & BIT(NL80211_STA_FLAG_AUTHENTICATED) &&
+	    !(set & BIT(NL80211_STA_FLAG_AUTHENTICATED)) &&
+	    test_sta_flag(sta, WLAN_STA_AUTH)) {
+		ret = sta_info_move_state(sta, IEEE80211_STA_NONE);
+		if (ret)
+			return ret;
+	}
+
+	return 0;
+}
+
+static void sta_apply_mesh_params(struct ieee80211_local *local,
+				  struct sta_info *sta,
+				  struct station_parameters *params)
+{
+#ifdef CONFIG_MAC80211_MESH
+	struct ieee80211_sub_if_data *sdata = sta->sdata;
+	u64 changed = 0;
+
+	if (params->sta_modify_mask & STATION_PARAM_APPLY_PLINK_STATE) {
+		switch (params->plink_state) {
+		case NL80211_PLINK_ESTAB:
+			if (sta->mesh->plink_state != NL80211_PLINK_ESTAB)
+				changed = mesh_plink_inc_estab_count(sdata);
+			sta->mesh->plink_state = params->plink_state;
+			sta->mesh->aid = params->peer_aid;
+
+			ieee80211_mps_sta_status_update(sta);
+			changed |= ieee80211_mps_set_sta_local_pm(sta,
+				      sdata->u.mesh.mshcfg.power_mode);
+
+			ewma_mesh_tx_rate_avg_init(&sta->mesh->tx_rate_avg);
+			/* init at low value */
+			ewma_mesh_tx_rate_avg_add(&sta->mesh->tx_rate_avg, 10);
+
+			break;
+		case NL80211_PLINK_LISTEN:
+		case NL80211_PLINK_BLOCKED:
+		case NL80211_PLINK_OPN_SNT:
+		case NL80211_PLINK_OPN_RCVD:
+		case NL80211_PLINK_CNF_RCVD:
+		case NL80211_PLINK_HOLDING:
+			if (sta->mesh->plink_state == NL80211_PLINK_ESTAB)
+				changed = mesh_plink_dec_estab_count(sdata);
+			sta->mesh->plink_state = params->plink_state;
+
+			ieee80211_mps_sta_status_update(sta);
+			changed |= ieee80211_mps_set_sta_local_pm(sta,
+					NL80211_MESH_POWER_UNKNOWN);
+			break;
+		default:
+			/*  nothing  */
+			break;
+		}
+	}
+
+	switch (params->plink_action) {
+	case NL80211_PLINK_ACTION_NO_ACTION:
+		/* nothing */
+		break;
+	case NL80211_PLINK_ACTION_OPEN:
+		changed |= mesh_plink_open(sta);
+		break;
+	case NL80211_PLINK_ACTION_BLOCK:
+		changed |= mesh_plink_block(sta);
+		break;
+	}
+
+	if (params->local_pm)
+		changed |= ieee80211_mps_set_sta_local_pm(sta,
+							  params->local_pm);
+
+	ieee80211_mbss_info_change_notify(sdata, changed);
+#endif
+}
+
+enum sta_link_apply_mode {
+	STA_LINK_MODE_NEW,
+	STA_LINK_MODE_STA_MODIFY,
+	STA_LINK_MODE_LINK_MODIFY,
+};
+
+static int sta_link_apply_parameters(struct ieee80211_local *local,
+				     struct sta_info *sta,
+				     enum sta_link_apply_mode mode,
+				     struct link_station_parameters *params)
+{
+	struct ieee80211_supported_band *sband;
+	struct ieee80211_sub_if_data *sdata = sta->sdata;
+	u32 link_id = params->link_id < 0 ? 0 : params->link_id;
+	struct ieee80211_link_data *link =
+		sdata_dereference(sdata->link[link_id], sdata);
+	struct link_sta_info *link_sta =
+		rcu_dereference_protected(sta->link[link_id],
+					  lockdep_is_held(&local->hw.wiphy->mtx));
+	bool changes = params->link_mac ||
+		       params->txpwr_set ||
+		       params->supported_rates_len ||
+		       params->ht_capa ||
+		       params->vht_capa ||
+		       params->he_capa ||
+		       params->eht_capa ||
+		       params->opmode_notif_used;
+
+	switch (mode) {
+	case STA_LINK_MODE_NEW:
+		if (!params->link_mac)
+			return -EINVAL;
+		break;
+	case STA_LINK_MODE_LINK_MODIFY:
+		break;
+	case STA_LINK_MODE_STA_MODIFY:
+		if (params->link_id >= 0)
+			break;
+		if (!changes)
+			return 0;
+		break;
+	}
+
+	if (!link || !link_sta)
+		return -EINVAL;
+
+	sband = ieee80211_get_link_sband(link);
+	if (!sband)
+		return -EINVAL;
+
+	if (params->link_mac) {
+		if (mode == STA_LINK_MODE_NEW) {
+			memcpy(link_sta->addr, params->link_mac, ETH_ALEN);
+			memcpy(link_sta->pub->addr, params->link_mac, ETH_ALEN);
+		} else if (!ether_addr_equal(link_sta->addr,
+					     params->link_mac)) {
+			return -EINVAL;
+		}
+	}
+
+	if (params->txpwr_set) {
+		int ret;
+
+		link_sta->pub->txpwr.type = params->txpwr.type;
+		if (params->txpwr.type == NL80211_TX_POWER_LIMITED)
+			link_sta->pub->txpwr.power = params->txpwr.power;
+		ret = drv_sta_set_txpwr(local, sdata, sta);
+		if (ret)
+			return ret;
+	}
+
+	if (params->supported_rates &&
+	    params->supported_rates_len) {
+		ieee80211_parse_bitrates(link->conf->chanreq.oper.width,
+					 sband, params->supported_rates,
+					 params->supported_rates_len,
+					 &link_sta->pub->supp_rates[sband->band]);
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (params->ht_capa)
 		ieee80211_ht_cap_ie_to_sta_ht_cap(sdata, sband,

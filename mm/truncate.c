@@ -556,6 +556,7 @@ unsigned long invalidate_mapping_pages(struct address_space *mapping,
 }
 EXPORT_SYMBOL(invalidate_mapping_pages);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int folio_launder(struct address_space *mapping, struct folio *folio)
 {
 	if (!folio_test_dirty(folio))
@@ -671,6 +672,123 @@ int invalidate_inode_pages2_range(struct address_space *mapping,
 			VM_BUG_ON_FOLIO(!folio_contains(folio, indices[i]), folio);
 			folio_wait_writeback(folio);
 			ret2 = folio_unmap_invalidate(mapping, folio, GFP_KERNEL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/*
+ * This is like mapping_evict_folio(), except it ignores the folio's
+ * refcount.  We do this because invalidate_inode_pages2() needs stronger
+ * invalidation guarantees, and cannot afford to leave folios behind because
+ * shrink_folio_list() has a temp ref on them, or because they're transiently
+ * sitting in the folio_add_lru() caches.
+ */
+static int invalidate_complete_folio2(struct address_space *mapping,
+					struct folio *folio)
+{
+	if (folio->mapping != mapping)
+		return 0;
+
+	if (!filemap_release_folio(folio, GFP_KERNEL))
+		return 0;
+
+	spin_lock(&mapping->host->i_lock);
+	xa_lock_irq(&mapping->i_pages);
+	if (folio_test_dirty(folio))
+		goto failed;
+
+	BUG_ON(folio_has_private(folio));
+	__filemap_remove_folio(folio, NULL);
+	xa_unlock_irq(&mapping->i_pages);
+	if (mapping_shrinkable(mapping))
+		inode_add_lru(mapping->host);
+	spin_unlock(&mapping->host->i_lock);
+
+	filemap_free_folio(mapping, folio);
+	return 1;
+failed:
+	xa_unlock_irq(&mapping->i_pages);
+	spin_unlock(&mapping->host->i_lock);
+	return 0;
+}
+
+static int folio_launder(struct address_space *mapping, struct folio *folio)
+{
+	if (!folio_test_dirty(folio))
+		return 0;
+	if (folio->mapping != mapping || mapping->a_ops->launder_folio == NULL)
+		return 0;
+	return mapping->a_ops->launder_folio(folio);
+}
+
+/**
+ * invalidate_inode_pages2_range - remove range of pages from an address_space
+ * @mapping: the address_space
+ * @start: the page offset 'from' which to invalidate
+ * @end: the page offset 'to' which to invalidate (inclusive)
+ *
+ * Any pages which are found to be mapped into pagetables are unmapped prior to
+ * invalidation.
+ *
+ * Return: -EBUSY if any pages could not be invalidated.
+ */
+int invalidate_inode_pages2_range(struct address_space *mapping,
+				  pgoff_t start, pgoff_t end)
+{
+	pgoff_t indices[PAGEVEC_SIZE];
+	struct folio_batch fbatch;
+	pgoff_t index;
+	int i;
+	int ret = 0;
+	int ret2 = 0;
+	int did_range_unmap = 0;
+	bool xa_has_values = false;
+
+	if (mapping_empty(mapping))
+		goto out;
+
+	folio_batch_init(&fbatch);
+	index = start;
+	while (find_get_entries(mapping, &index, end, &fbatch, indices)) {
+		for (i = 0; i < folio_batch_count(&fbatch); i++) {
+			struct folio *folio = fbatch.folios[i];
+
+			/* We rely upon deletion not changing folio->index */
+
+			if (xa_is_value(folio)) {
+				xa_has_values = true;
+				if (dax_mapping(mapping) &&
+				    !dax_invalidate_mapping_entry_sync(mapping, indices[i]))
+					ret = -EBUSY;
+				continue;
+			}
+
+			if (!did_range_unmap && folio_mapped(folio)) {
+				/*
+				 * If folio is mapped, before taking its lock,
+				 * zap the rest of the file in one hit.
+				 */
+				unmap_mapping_pages(mapping, indices[i],
+						(1 + end - indices[i]), false);
+				did_range_unmap = 1;
+			}
+
+			folio_lock(folio);
+			if (unlikely(folio->mapping != mapping)) {
+				folio_unlock(folio);
+				continue;
+			}
+			VM_BUG_ON_FOLIO(!folio_contains(folio, indices[i]), folio);
+			folio_wait_writeback(folio);
+
+			if (folio_mapped(folio))
+				unmap_mapping_folio(folio);
+			BUG_ON(folio_mapped(folio));
+
+			ret2 = folio_launder(mapping, folio);
+			if (ret2 == 0) {
+				if (!invalidate_complete_folio2(mapping, folio))
+					ret2 = -EBUSY;
+			}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			if (ret2 < 0)
 				ret = ret2;
 			folio_unlock(folio);

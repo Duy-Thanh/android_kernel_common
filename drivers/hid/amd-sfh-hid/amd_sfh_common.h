@@ -10,6 +10,7 @@
 #ifndef AMD_SFH_COMMON_H
 #define AMD_SFH_COMMON_H
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/mutex.h>
 #include <linux/pci.h>
 #include "amd_sfh_hid.h"
@@ -60,6 +61,56 @@ struct amd_mp2_dev {
 	struct work_struct work;
 	/* mp2 to protect data */
 	struct mutex lock;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/pci.h>
+#include "amd_sfh_hid.h"
+
+#define PCI_DEVICE_ID_AMD_MP2		0x15E4
+#define PCI_DEVICE_ID_AMD_MP2_1_1	0x164A
+
+#define AMD_C2P_MSG(regno) (0x10500 + ((regno) * 4))
+#define AMD_P2C_MSG(regno) (0x10680 + ((regno) * 4))
+
+#define AMD_C2P_MSG_V1(regno) (0x10900 + ((regno) * 4))
+#define AMD_P2C_MSG_V1(regno) (0x10500 + ((regno) * 4))
+
+#define SENSOR_ENABLED			4
+#define SENSOR_DISABLED			5
+
+#define AMD_SFH_IDLE_LOOP		200
+
+enum cmd_id {
+	NO_OP,
+	ENABLE_SENSOR,
+	DISABLE_SENSOR,
+	STOP_ALL_SENSORS = 8,
+};
+
+struct amd_mp2_sensor_info {
+	u8 sensor_idx;
+	u32 period;
+	dma_addr_t dma_address;
+};
+
+struct sfh_dev_status {
+	bool is_hpd_present;
+	bool is_als_present;
+};
+
+struct amd_mp2_dev {
+	struct pci_dev *pdev;
+	struct amdtp_cl_data *cl_data;
+	void __iomem *mmio;
+	void __iomem *vsbase;
+	const struct amd_sfh1_1_ops *sfh1_1_ops;
+	struct amd_mp2_ops *mp2_ops;
+	struct amd_input_data in_data;
+	/* mp2 active control status */
+	u32 mp2_acs;
+	struct sfh_dev_status dev_en;
+	struct work_struct work;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	u8 init_done;
 	u8 rver;
 };

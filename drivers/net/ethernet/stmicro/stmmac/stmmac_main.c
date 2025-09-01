@@ -2488,6 +2488,7 @@ static bool stmmac_xdp_xmit_zc(struct stmmac_priv *priv, u32 queue, u32 budget)
 	struct netdev_queue *nq = netdev_get_tx_queue(priv->dev, queue);
 	struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[queue];
 	struct stmmac_txq_stats *txq_stats = &priv->xstats.txq_stats[queue];
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool csum = !priv->plat->tx_queues_cfg[queue].coe_unsupported;
 	struct xsk_buff_pool *pool = tx_q->xsk_pool;
 	unsigned int entry = tx_q->cur_tx;
@@ -4956,6 +4957,2475 @@ static int stmmac_xdp_xmit_xdpf(struct stmmac_priv *priv, int queue,
 
 	stmmac_prepare_tx_desc(priv, tx_desc, 1, xdpf->len,
 			       csum, priv->mode, true, true,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct xsk_buff_pool *pool = tx_q->xsk_pool;
+	unsigned int entry = tx_q->cur_tx;
+	struct dma_desc *tx_desc = NULL;
+	struct xdp_desc xdp_desc;
+	bool work_done = true;
+	u32 tx_set_ic_bit = 0;
+
+	/* Avoids TX time-out as we are sharing with slow path */
+	txq_trans_cond_update(nq);
+
+	budget = min(budget, stmmac_tx_avail(priv, queue));
+
+	while (budget-- > 0) {
+		struct stmmac_metadata_request meta_req;
+		struct xsk_tx_metadata *meta = NULL;
+		dma_addr_t dma_addr;
+		bool set_ic;
+
+		/* We are sharing with slow path and stop XSK TX desc submission when
+		 * available TX ring is less than threshold.
+		 */
+		if (unlikely(stmmac_tx_avail(priv, queue) < STMMAC_TX_XSK_AVAIL) ||
+		    !netif_carrier_ok(priv->dev)) {
+			work_done = false;
+			break;
+		}
+
+		if (!xsk_tx_peek_desc(pool, &xdp_desc))
+			break;
+
+		if (priv->est && priv->est->enable &&
+		    priv->est->max_sdu[queue] &&
+		    xdp_desc.len > priv->est->max_sdu[queue]) {
+			priv->xstats.max_sdu_txq_drop[queue]++;
+			continue;
+		}
+
+		if (likely(priv->extend_desc))
+			tx_desc = (struct dma_desc *)(tx_q->dma_etx + entry);
+		else if (tx_q->tbs & STMMAC_TBS_AVAIL)
+			tx_desc = &tx_q->dma_entx[entry].basic;
+		else
+			tx_desc = tx_q->dma_tx + entry;
+
+		dma_addr = xsk_buff_raw_get_dma(pool, xdp_desc.addr);
+		meta = xsk_buff_get_metadata(pool, xdp_desc.addr);
+		xsk_buff_raw_dma_sync_for_device(pool, dma_addr, xdp_desc.len);
+
+		tx_q->tx_skbuff_dma[entry].buf_type = STMMAC_TXBUF_T_XSK_TX;
+
+		/* To return XDP buffer to XSK pool, we simple call
+		 * xsk_tx_completed(), so we don't need to fill up
+		 * 'buf' and 'xdpf'.
+		 */
+		tx_q->tx_skbuff_dma[entry].buf = 0;
+		tx_q->xdpf[entry] = NULL;
+
+		tx_q->tx_skbuff_dma[entry].map_as_page = false;
+		tx_q->tx_skbuff_dma[entry].len = xdp_desc.len;
+		tx_q->tx_skbuff_dma[entry].last_segment = true;
+		tx_q->tx_skbuff_dma[entry].is_jumbo = false;
+
+		stmmac_set_desc_addr(priv, tx_desc, dma_addr);
+
+		tx_q->tx_count_frames++;
+
+		if (!priv->tx_coal_frames[queue])
+			set_ic = false;
+		else if (tx_q->tx_count_frames % priv->tx_coal_frames[queue] == 0)
+			set_ic = true;
+		else
+			set_ic = false;
+
+		meta_req.priv = priv;
+		meta_req.tx_desc = tx_desc;
+		meta_req.set_ic = &set_ic;
+		xsk_tx_metadata_request(meta, &stmmac_xsk_tx_metadata_ops,
+					&meta_req);
+		if (set_ic) {
+			tx_q->tx_count_frames = 0;
+			stmmac_set_tx_ic(priv, tx_desc);
+			tx_set_ic_bit++;
+		}
+
+		stmmac_prepare_tx_desc(priv, tx_desc, 1, xdp_desc.len,
+				       true, priv->mode, true, true,
+				       xdp_desc.len);
+
+		stmmac_enable_dma_transmission(priv, priv->ioaddr, queue);
+
+		xsk_tx_metadata_to_compl(meta,
+					 &tx_q->tx_skbuff_dma[entry].xsk_meta);
+
+		tx_q->cur_tx = STMMAC_GET_ENTRY(tx_q->cur_tx, priv->dma_conf.dma_tx_size);
+		entry = tx_q->cur_tx;
+	}
+	u64_stats_update_begin(&txq_stats->napi_syncp);
+	u64_stats_add(&txq_stats->napi.tx_set_ic_bit, tx_set_ic_bit);
+	u64_stats_update_end(&txq_stats->napi_syncp);
+
+	if (tx_desc) {
+		stmmac_flush_tx_descriptors(priv, queue);
+		xsk_tx_release(pool);
+	}
+
+	/* Return true if all of the 3 conditions are met
+	 *  a) TX Budget is still available
+	 *  b) work_done = true when XSK TX desc peek is empty (no more
+	 *     pending XSK TX for transmission)
+	 */
+	return !!budget && work_done;
+}
+
+static void stmmac_bump_dma_threshold(struct stmmac_priv *priv, u32 chan)
+{
+	if (unlikely(priv->xstats.threshold != SF_DMA_MODE) && tc <= 256) {
+		tc += 64;
+
+		if (priv->plat->force_thresh_dma_mode)
+			stmmac_set_dma_operation_mode(priv, tc, tc, chan);
+		else
+			stmmac_set_dma_operation_mode(priv, tc, SF_DMA_MODE,
+						      chan);
+
+		priv->xstats.threshold = tc;
+	}
+}
+
+/**
+ * stmmac_tx_clean - to manage the transmission completion
+ * @priv: driver private structure
+ * @budget: napi budget limiting this functions packet handling
+ * @queue: TX queue index
+ * @pending_packets: signal to arm the TX coal timer
+ * Description: it reclaims the transmit resources after transmission completes.
+ * If some packets still needs to be handled, due to TX coalesce, set
+ * pending_packets to true to make NAPI arm the TX coal timer.
+ */
+static int stmmac_tx_clean(struct stmmac_priv *priv, int budget, u32 queue,
+			   bool *pending_packets)
+{
+	struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[queue];
+	struct stmmac_txq_stats *txq_stats = &priv->xstats.txq_stats[queue];
+	unsigned int bytes_compl = 0, pkts_compl = 0;
+	unsigned int entry, xmits = 0, count = 0;
+	u32 tx_packets = 0, tx_errors = 0;
+
+	__netif_tx_lock_bh(netdev_get_tx_queue(priv->dev, queue));
+
+	tx_q->xsk_frames_done = 0;
+
+	entry = tx_q->dirty_tx;
+
+	/* Try to clean all TX complete frame in 1 shot */
+	while ((entry != tx_q->cur_tx) && count < priv->dma_conf.dma_tx_size) {
+		struct xdp_frame *xdpf;
+		struct sk_buff *skb;
+		struct dma_desc *p;
+		int status;
+
+		if (tx_q->tx_skbuff_dma[entry].buf_type == STMMAC_TXBUF_T_XDP_TX ||
+		    tx_q->tx_skbuff_dma[entry].buf_type == STMMAC_TXBUF_T_XDP_NDO) {
+			xdpf = tx_q->xdpf[entry];
+			skb = NULL;
+		} else if (tx_q->tx_skbuff_dma[entry].buf_type == STMMAC_TXBUF_T_SKB) {
+			xdpf = NULL;
+			skb = tx_q->tx_skbuff[entry];
+		} else {
+			xdpf = NULL;
+			skb = NULL;
+		}
+
+		if (priv->extend_desc)
+			p = (struct dma_desc *)(tx_q->dma_etx + entry);
+		else if (tx_q->tbs & STMMAC_TBS_AVAIL)
+			p = &tx_q->dma_entx[entry].basic;
+		else
+			p = tx_q->dma_tx + entry;
+
+		status = stmmac_tx_status(priv,	&priv->xstats, p, priv->ioaddr);
+		/* Check if the descriptor is owned by the DMA */
+		if (unlikely(status & tx_dma_own))
+			break;
+
+		count++;
+
+		/* Make sure descriptor fields are read after reading
+		 * the own bit.
+		 */
+		dma_rmb();
+
+		/* Just consider the last segment and ...*/
+		if (likely(!(status & tx_not_ls))) {
+			/* ... verify the status error condition */
+			if (unlikely(status & tx_err)) {
+				tx_errors++;
+				if (unlikely(status & tx_err_bump_tc))
+					stmmac_bump_dma_threshold(priv, queue);
+			} else {
+				tx_packets++;
+			}
+			if (skb) {
+				stmmac_get_tx_hwtstamp(priv, p, skb);
+			} else if (tx_q->xsk_pool &&
+				   xp_tx_metadata_enabled(tx_q->xsk_pool)) {
+				struct stmmac_xsk_tx_complete tx_compl = {
+					.priv = priv,
+					.desc = p,
+				};
+
+				xsk_tx_metadata_complete(&tx_q->tx_skbuff_dma[entry].xsk_meta,
+							 &stmmac_xsk_tx_metadata_ops,
+							 &tx_compl);
+			}
+		}
+
+		if (likely(tx_q->tx_skbuff_dma[entry].buf &&
+			   tx_q->tx_skbuff_dma[entry].buf_type != STMMAC_TXBUF_T_XDP_TX)) {
+			if (tx_q->tx_skbuff_dma[entry].map_as_page)
+				dma_unmap_page(priv->device,
+					       tx_q->tx_skbuff_dma[entry].buf,
+					       tx_q->tx_skbuff_dma[entry].len,
+					       DMA_TO_DEVICE);
+			else
+				dma_unmap_single(priv->device,
+						 tx_q->tx_skbuff_dma[entry].buf,
+						 tx_q->tx_skbuff_dma[entry].len,
+						 DMA_TO_DEVICE);
+			tx_q->tx_skbuff_dma[entry].buf = 0;
+			tx_q->tx_skbuff_dma[entry].len = 0;
+			tx_q->tx_skbuff_dma[entry].map_as_page = false;
+		}
+
+		stmmac_clean_desc3(priv, tx_q, p);
+
+		tx_q->tx_skbuff_dma[entry].last_segment = false;
+		tx_q->tx_skbuff_dma[entry].is_jumbo = false;
+
+		if (xdpf &&
+		    tx_q->tx_skbuff_dma[entry].buf_type == STMMAC_TXBUF_T_XDP_TX) {
+			xdp_return_frame_rx_napi(xdpf);
+			tx_q->xdpf[entry] = NULL;
+		}
+
+		if (xdpf &&
+		    tx_q->tx_skbuff_dma[entry].buf_type == STMMAC_TXBUF_T_XDP_NDO) {
+			xdp_return_frame(xdpf);
+			tx_q->xdpf[entry] = NULL;
+		}
+
+		if (tx_q->tx_skbuff_dma[entry].buf_type == STMMAC_TXBUF_T_XSK_TX)
+			tx_q->xsk_frames_done++;
+
+		if (tx_q->tx_skbuff_dma[entry].buf_type == STMMAC_TXBUF_T_SKB) {
+			if (likely(skb)) {
+				pkts_compl++;
+				bytes_compl += skb->len;
+				dev_consume_skb_any(skb);
+				tx_q->tx_skbuff[entry] = NULL;
+			}
+		}
+
+		stmmac_release_tx_desc(priv, p, priv->mode);
+
+		entry = STMMAC_GET_ENTRY(entry, priv->dma_conf.dma_tx_size);
+	}
+	tx_q->dirty_tx = entry;
+
+	netdev_tx_completed_queue(netdev_get_tx_queue(priv->dev, queue),
+				  pkts_compl, bytes_compl);
+
+	if (unlikely(netif_tx_queue_stopped(netdev_get_tx_queue(priv->dev,
+								queue))) &&
+	    stmmac_tx_avail(priv, queue) > STMMAC_TX_THRESH(priv)) {
+
+		netif_dbg(priv, tx_done, priv->dev,
+			  "%s: restart transmit\n", __func__);
+		netif_tx_wake_queue(netdev_get_tx_queue(priv->dev, queue));
+	}
+
+	if (tx_q->xsk_pool) {
+		bool work_done;
+
+		if (tx_q->xsk_frames_done)
+			xsk_tx_completed(tx_q->xsk_pool, tx_q->xsk_frames_done);
+
+		if (xsk_uses_need_wakeup(tx_q->xsk_pool))
+			xsk_set_tx_need_wakeup(tx_q->xsk_pool);
+
+		/* For XSK TX, we try to send as many as possible.
+		 * If XSK work done (XSK TX desc empty and budget still
+		 * available), return "budget - 1" to reenable TX IRQ.
+		 * Else, return "budget" to make NAPI continue polling.
+		 */
+		work_done = stmmac_xdp_xmit_zc(priv, queue,
+					       STMMAC_XSK_TX_BUDGET_MAX);
+		if (work_done)
+			xmits = budget - 1;
+		else
+			xmits = budget;
+	}
+
+	if (priv->eee_enabled && !priv->tx_path_in_lpi_mode &&
+	    priv->eee_sw_timer_en) {
+		if (stmmac_enable_eee_mode(priv))
+			mod_timer(&priv->eee_ctrl_timer, STMMAC_LPI_T(priv->tx_lpi_timer));
+	}
+
+	/* We still have pending packets, let's call for a new scheduling */
+	if (tx_q->dirty_tx != tx_q->cur_tx)
+		*pending_packets = true;
+
+	u64_stats_update_begin(&txq_stats->napi_syncp);
+	u64_stats_add(&txq_stats->napi.tx_packets, tx_packets);
+	u64_stats_add(&txq_stats->napi.tx_pkt_n, tx_packets);
+	u64_stats_inc(&txq_stats->napi.tx_clean);
+	u64_stats_update_end(&txq_stats->napi_syncp);
+
+	priv->xstats.tx_errors += tx_errors;
+
+	__netif_tx_unlock_bh(netdev_get_tx_queue(priv->dev, queue));
+
+	/* Combine decisions from TX clean and XSK TX */
+	return max(count, xmits);
+}
+
+/**
+ * stmmac_tx_err - to manage the tx error
+ * @priv: driver private structure
+ * @chan: channel index
+ * Description: it cleans the descriptors and restarts the transmission
+ * in case of transmission errors.
+ */
+static void stmmac_tx_err(struct stmmac_priv *priv, u32 chan)
+{
+	struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[chan];
+
+	netif_tx_stop_queue(netdev_get_tx_queue(priv->dev, chan));
+
+	stmmac_stop_tx_dma(priv, chan);
+	dma_free_tx_skbufs(priv, &priv->dma_conf, chan);
+	stmmac_clear_tx_descriptors(priv, &priv->dma_conf, chan);
+	stmmac_reset_tx_queue(priv, chan);
+	stmmac_init_tx_chan(priv, priv->ioaddr, priv->plat->dma_cfg,
+			    tx_q->dma_tx_phy, chan);
+	stmmac_start_tx_dma(priv, chan);
+
+	priv->xstats.tx_errors++;
+	netif_tx_wake_queue(netdev_get_tx_queue(priv->dev, chan));
+}
+
+/**
+ *  stmmac_set_dma_operation_mode - Set DMA operation mode by channel
+ *  @priv: driver private structure
+ *  @txmode: TX operating mode
+ *  @rxmode: RX operating mode
+ *  @chan: channel index
+ *  Description: it is used for configuring of the DMA operation mode in
+ *  runtime in order to program the tx/rx DMA thresholds or Store-And-Forward
+ *  mode.
+ */
+static void stmmac_set_dma_operation_mode(struct stmmac_priv *priv, u32 txmode,
+					  u32 rxmode, u32 chan)
+{
+	u8 rxqmode = priv->plat->rx_queues_cfg[chan].mode_to_use;
+	u8 txqmode = priv->plat->tx_queues_cfg[chan].mode_to_use;
+	u32 rx_channels_count = priv->plat->rx_queues_to_use;
+	u32 tx_channels_count = priv->plat->tx_queues_to_use;
+	int rxfifosz = priv->plat->rx_fifo_size;
+	int txfifosz = priv->plat->tx_fifo_size;
+
+	if (rxfifosz == 0)
+		rxfifosz = priv->dma_cap.rx_fifo_size;
+	if (txfifosz == 0)
+		txfifosz = priv->dma_cap.tx_fifo_size;
+
+	/* Adjust for real per queue fifo size */
+	rxfifosz /= rx_channels_count;
+	txfifosz /= tx_channels_count;
+
+	stmmac_dma_rx_mode(priv, priv->ioaddr, rxmode, chan, rxfifosz, rxqmode);
+	stmmac_dma_tx_mode(priv, priv->ioaddr, txmode, chan, txfifosz, txqmode);
+}
+
+static bool stmmac_safety_feat_interrupt(struct stmmac_priv *priv)
+{
+	int ret;
+
+	ret = stmmac_safety_feat_irq_status(priv, priv->dev,
+			priv->ioaddr, priv->dma_cap.asp, &priv->sstats);
+	if (ret && (ret != -EINVAL)) {
+		stmmac_global_err(priv);
+		return true;
+	}
+
+	return false;
+}
+
+static int stmmac_napi_check(struct stmmac_priv *priv, u32 chan, u32 dir)
+{
+	int status = stmmac_dma_interrupt_status(priv, priv->ioaddr,
+						 &priv->xstats, chan, dir);
+	struct stmmac_rx_queue *rx_q = &priv->dma_conf.rx_queue[chan];
+	struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[chan];
+	struct stmmac_channel *ch = &priv->channel[chan];
+	struct napi_struct *rx_napi;
+	struct napi_struct *tx_napi;
+	unsigned long flags;
+
+	rx_napi = rx_q->xsk_pool ? &ch->rxtx_napi : &ch->rx_napi;
+	tx_napi = tx_q->xsk_pool ? &ch->rxtx_napi : &ch->tx_napi;
+
+	if ((status & handle_rx) && (chan < priv->plat->rx_queues_to_use)) {
+		if (napi_schedule_prep(rx_napi)) {
+			spin_lock_irqsave(&ch->lock, flags);
+			stmmac_disable_dma_irq(priv, priv->ioaddr, chan, 1, 0);
+			spin_unlock_irqrestore(&ch->lock, flags);
+			__napi_schedule(rx_napi);
+		}
+	}
+
+	if ((status & handle_tx) && (chan < priv->plat->tx_queues_to_use)) {
+		if (napi_schedule_prep(tx_napi)) {
+			spin_lock_irqsave(&ch->lock, flags);
+			stmmac_disable_dma_irq(priv, priv->ioaddr, chan, 0, 1);
+			spin_unlock_irqrestore(&ch->lock, flags);
+			__napi_schedule(tx_napi);
+		}
+	}
+
+	return status;
+}
+
+/**
+ * stmmac_dma_interrupt - DMA ISR
+ * @priv: driver private structure
+ * Description: this is the DMA ISR. It is called by the main ISR.
+ * It calls the dwmac dma routine and schedule poll method in case of some
+ * work can be done.
+ */
+static void stmmac_dma_interrupt(struct stmmac_priv *priv)
+{
+	u32 tx_channel_count = priv->plat->tx_queues_to_use;
+	u32 rx_channel_count = priv->plat->rx_queues_to_use;
+	u32 channels_to_check = tx_channel_count > rx_channel_count ?
+				tx_channel_count : rx_channel_count;
+	u32 chan;
+	int status[MAX_T(u32, MTL_MAX_TX_QUEUES, MTL_MAX_RX_QUEUES)];
+
+	/* Make sure we never check beyond our status buffer. */
+	if (WARN_ON_ONCE(channels_to_check > ARRAY_SIZE(status)))
+		channels_to_check = ARRAY_SIZE(status);
+
+	for (chan = 0; chan < channels_to_check; chan++)
+		status[chan] = stmmac_napi_check(priv, chan,
+						 DMA_DIR_RXTX);
+
+	for (chan = 0; chan < tx_channel_count; chan++) {
+		if (unlikely(status[chan] & tx_hard_error_bump_tc)) {
+			/* Try to bump up the dma threshold on this failure */
+			stmmac_bump_dma_threshold(priv, chan);
+		} else if (unlikely(status[chan] == tx_hard_error)) {
+			stmmac_tx_err(priv, chan);
+		}
+	}
+}
+
+/**
+ * stmmac_mmc_setup: setup the Mac Management Counters (MMC)
+ * @priv: driver private structure
+ * Description: this masks the MMC irq, in fact, the counters are managed in SW.
+ */
+static void stmmac_mmc_setup(struct stmmac_priv *priv)
+{
+	unsigned int mode = MMC_CNTRL_RESET_ON_READ | MMC_CNTRL_COUNTER_RESET |
+			    MMC_CNTRL_PRESET | MMC_CNTRL_FULL_HALF_PRESET;
+
+	stmmac_mmc_intr_all_mask(priv, priv->mmcaddr);
+
+	if (priv->dma_cap.rmon) {
+		stmmac_mmc_ctrl(priv, priv->mmcaddr, mode);
+		memset(&priv->mmc, 0, sizeof(struct stmmac_counters));
+	} else
+		netdev_info(priv->dev, "No MAC Management Counters available\n");
+}
+
+/**
+ * stmmac_get_hw_features - get MAC capabilities from the HW cap. register.
+ * @priv: driver private structure
+ * Description:
+ *  new GMAC chip generations have a new register to indicate the
+ *  presence of the optional feature/functions.
+ *  This can be also used to override the value passed through the
+ *  platform and necessary for old MAC10/100 and GMAC chips.
+ */
+static int stmmac_get_hw_features(struct stmmac_priv *priv)
+{
+	return stmmac_get_hw_feature(priv, priv->ioaddr, &priv->dma_cap) == 0;
+}
+
+/**
+ * stmmac_check_ether_addr - check if the MAC addr is valid
+ * @priv: driver private structure
+ * Description:
+ * it is to verify if the MAC address is valid, in case of failures it
+ * generates a random MAC address
+ */
+static void stmmac_check_ether_addr(struct stmmac_priv *priv)
+{
+	u8 addr[ETH_ALEN];
+
+	if (!is_valid_ether_addr(priv->dev->dev_addr)) {
+		stmmac_get_umac_addr(priv, priv->hw, addr, 0);
+		if (is_valid_ether_addr(addr))
+			eth_hw_addr_set(priv->dev, addr);
+		else
+			eth_hw_addr_random(priv->dev);
+		dev_info(priv->device, "device MAC address %pM\n",
+			 priv->dev->dev_addr);
+	}
+}
+
+/**
+ * stmmac_init_dma_engine - DMA init.
+ * @priv: driver private structure
+ * Description:
+ * It inits the DMA invoking the specific MAC/GMAC callback.
+ * Some DMA parameters can be passed from the platform;
+ * in case of these are not passed a default is kept for the MAC or GMAC.
+ */
+static int stmmac_init_dma_engine(struct stmmac_priv *priv)
+{
+	u32 rx_channels_count = priv->plat->rx_queues_to_use;
+	u32 tx_channels_count = priv->plat->tx_queues_to_use;
+	u32 dma_csr_ch = max(rx_channels_count, tx_channels_count);
+	struct stmmac_rx_queue *rx_q;
+	struct stmmac_tx_queue *tx_q;
+	u32 chan = 0;
+	int ret = 0;
+
+	if (!priv->plat->dma_cfg || !priv->plat->dma_cfg->pbl) {
+		dev_err(priv->device, "Invalid DMA configuration\n");
+		return -EINVAL;
+	}
+
+	if (priv->extend_desc && (priv->mode == STMMAC_RING_MODE))
+		priv->plat->dma_cfg->atds = 1;
+
+	ret = stmmac_reset(priv, priv->ioaddr);
+	if (ret) {
+		dev_err(priv->device, "Failed to reset the dma\n");
+		return ret;
+	}
+
+	/* DMA Configuration */
+	stmmac_dma_init(priv, priv->ioaddr, priv->plat->dma_cfg);
+
+	if (priv->plat->axi)
+		stmmac_axi(priv, priv->ioaddr, priv->plat->axi);
+
+	/* DMA CSR Channel configuration */
+	for (chan = 0; chan < dma_csr_ch; chan++) {
+		stmmac_init_chan(priv, priv->ioaddr, priv->plat->dma_cfg, chan);
+		stmmac_disable_dma_irq(priv, priv->ioaddr, chan, 1, 1);
+	}
+
+	/* DMA RX Channel Configuration */
+	for (chan = 0; chan < rx_channels_count; chan++) {
+		rx_q = &priv->dma_conf.rx_queue[chan];
+
+		stmmac_init_rx_chan(priv, priv->ioaddr, priv->plat->dma_cfg,
+				    rx_q->dma_rx_phy, chan);
+
+		rx_q->rx_tail_addr = rx_q->dma_rx_phy +
+				     (rx_q->buf_alloc_num *
+				      sizeof(struct dma_desc));
+		stmmac_set_rx_tail_ptr(priv, priv->ioaddr,
+				       rx_q->rx_tail_addr, chan);
+	}
+
+	/* DMA TX Channel Configuration */
+	for (chan = 0; chan < tx_channels_count; chan++) {
+		tx_q = &priv->dma_conf.tx_queue[chan];
+
+		stmmac_init_tx_chan(priv, priv->ioaddr, priv->plat->dma_cfg,
+				    tx_q->dma_tx_phy, chan);
+
+		tx_q->tx_tail_addr = tx_q->dma_tx_phy;
+		stmmac_set_tx_tail_ptr(priv, priv->ioaddr,
+				       tx_q->tx_tail_addr, chan);
+	}
+
+	return ret;
+}
+
+static void stmmac_tx_timer_arm(struct stmmac_priv *priv, u32 queue)
+{
+	struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[queue];
+	u32 tx_coal_timer = priv->tx_coal_timer[queue];
+	struct stmmac_channel *ch;
+	struct napi_struct *napi;
+
+	if (!tx_coal_timer)
+		return;
+
+	ch = &priv->channel[tx_q->queue_index];
+	napi = tx_q->xsk_pool ? &ch->rxtx_napi : &ch->tx_napi;
+
+	/* Arm timer only if napi is not already scheduled.
+	 * Try to cancel any timer if napi is scheduled, timer will be armed
+	 * again in the next scheduled napi.
+	 */
+	if (unlikely(!napi_is_scheduled(napi)))
+		hrtimer_start(&tx_q->txtimer,
+			      STMMAC_COAL_TIMER(tx_coal_timer),
+			      HRTIMER_MODE_REL);
+	else
+		hrtimer_try_to_cancel(&tx_q->txtimer);
+}
+
+/**
+ * stmmac_tx_timer - mitigation sw timer for tx.
+ * @t: data pointer
+ * Description:
+ * This is the timer handler to directly invoke the stmmac_tx_clean.
+ */
+static enum hrtimer_restart stmmac_tx_timer(struct hrtimer *t)
+{
+	struct stmmac_tx_queue *tx_q = container_of(t, struct stmmac_tx_queue, txtimer);
+	struct stmmac_priv *priv = tx_q->priv_data;
+	struct stmmac_channel *ch;
+	struct napi_struct *napi;
+
+	ch = &priv->channel[tx_q->queue_index];
+	napi = tx_q->xsk_pool ? &ch->rxtx_napi : &ch->tx_napi;
+
+	if (likely(napi_schedule_prep(napi))) {
+		unsigned long flags;
+
+		spin_lock_irqsave(&ch->lock, flags);
+		stmmac_disable_dma_irq(priv, priv->ioaddr, ch->index, 0, 1);
+		spin_unlock_irqrestore(&ch->lock, flags);
+		__napi_schedule(napi);
+	}
+
+	return HRTIMER_NORESTART;
+}
+
+/**
+ * stmmac_init_coalesce - init mitigation options.
+ * @priv: driver private structure
+ * Description:
+ * This inits the coalesce parameters: i.e. timer rate,
+ * timer handler and default threshold used for enabling the
+ * interrupt on completion bit.
+ */
+static void stmmac_init_coalesce(struct stmmac_priv *priv)
+{
+	u32 tx_channel_count = priv->plat->tx_queues_to_use;
+	u32 rx_channel_count = priv->plat->rx_queues_to_use;
+	u32 chan;
+
+	for (chan = 0; chan < tx_channel_count; chan++) {
+		struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[chan];
+
+		priv->tx_coal_frames[chan] = STMMAC_TX_FRAMES;
+		priv->tx_coal_timer[chan] = STMMAC_COAL_TX_TIMER;
+
+		hrtimer_init(&tx_q->txtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+		tx_q->txtimer.function = stmmac_tx_timer;
+	}
+
+	for (chan = 0; chan < rx_channel_count; chan++)
+		priv->rx_coal_frames[chan] = STMMAC_RX_FRAMES;
+}
+
+static void stmmac_set_rings_length(struct stmmac_priv *priv)
+{
+	u32 rx_channels_count = priv->plat->rx_queues_to_use;
+	u32 tx_channels_count = priv->plat->tx_queues_to_use;
+	u32 chan;
+
+	/* set TX ring length */
+	for (chan = 0; chan < tx_channels_count; chan++)
+		stmmac_set_tx_ring_len(priv, priv->ioaddr,
+				       (priv->dma_conf.dma_tx_size - 1), chan);
+
+	/* set RX ring length */
+	for (chan = 0; chan < rx_channels_count; chan++)
+		stmmac_set_rx_ring_len(priv, priv->ioaddr,
+				       (priv->dma_conf.dma_rx_size - 1), chan);
+}
+
+/**
+ *  stmmac_set_tx_queue_weight - Set TX queue weight
+ *  @priv: driver private structure
+ *  Description: It is used for setting TX queues weight
+ */
+static void stmmac_set_tx_queue_weight(struct stmmac_priv *priv)
+{
+	u32 tx_queues_count = priv->plat->tx_queues_to_use;
+	u32 weight;
+	u32 queue;
+
+	for (queue = 0; queue < tx_queues_count; queue++) {
+		weight = priv->plat->tx_queues_cfg[queue].weight;
+		stmmac_set_mtl_tx_queue_weight(priv, priv->hw, weight, queue);
+	}
+}
+
+/**
+ *  stmmac_configure_cbs - Configure CBS in TX queue
+ *  @priv: driver private structure
+ *  Description: It is used for configuring CBS in AVB TX queues
+ */
+static void stmmac_configure_cbs(struct stmmac_priv *priv)
+{
+	u32 tx_queues_count = priv->plat->tx_queues_to_use;
+	u32 mode_to_use;
+	u32 queue;
+
+	/* queue 0 is reserved for legacy traffic */
+	for (queue = 1; queue < tx_queues_count; queue++) {
+		mode_to_use = priv->plat->tx_queues_cfg[queue].mode_to_use;
+		if (mode_to_use == MTL_QUEUE_DCB)
+			continue;
+
+		stmmac_config_cbs(priv, priv->hw,
+				priv->plat->tx_queues_cfg[queue].send_slope,
+				priv->plat->tx_queues_cfg[queue].idle_slope,
+				priv->plat->tx_queues_cfg[queue].high_credit,
+				priv->plat->tx_queues_cfg[queue].low_credit,
+				queue);
+	}
+}
+
+/**
+ *  stmmac_rx_queue_dma_chan_map - Map RX queue to RX dma channel
+ *  @priv: driver private structure
+ *  Description: It is used for mapping RX queues to RX dma channels
+ */
+static void stmmac_rx_queue_dma_chan_map(struct stmmac_priv *priv)
+{
+	u32 rx_queues_count = priv->plat->rx_queues_to_use;
+	u32 queue;
+	u32 chan;
+
+	for (queue = 0; queue < rx_queues_count; queue++) {
+		chan = priv->plat->rx_queues_cfg[queue].chan;
+		stmmac_map_mtl_to_dma(priv, priv->hw, queue, chan);
+	}
+}
+
+/**
+ *  stmmac_mac_config_rx_queues_prio - Configure RX Queue priority
+ *  @priv: driver private structure
+ *  Description: It is used for configuring the RX Queue Priority
+ */
+static void stmmac_mac_config_rx_queues_prio(struct stmmac_priv *priv)
+{
+	u32 rx_queues_count = priv->plat->rx_queues_to_use;
+	u32 queue;
+	u32 prio;
+
+	for (queue = 0; queue < rx_queues_count; queue++) {
+		if (!priv->plat->rx_queues_cfg[queue].use_prio)
+			continue;
+
+		prio = priv->plat->rx_queues_cfg[queue].prio;
+		stmmac_rx_queue_prio(priv, priv->hw, prio, queue);
+	}
+}
+
+/**
+ *  stmmac_mac_config_tx_queues_prio - Configure TX Queue priority
+ *  @priv: driver private structure
+ *  Description: It is used for configuring the TX Queue Priority
+ */
+static void stmmac_mac_config_tx_queues_prio(struct stmmac_priv *priv)
+{
+	u32 tx_queues_count = priv->plat->tx_queues_to_use;
+	u32 queue;
+	u32 prio;
+
+	for (queue = 0; queue < tx_queues_count; queue++) {
+		if (!priv->plat->tx_queues_cfg[queue].use_prio)
+			continue;
+
+		prio = priv->plat->tx_queues_cfg[queue].prio;
+		stmmac_tx_queue_prio(priv, priv->hw, prio, queue);
+	}
+}
+
+/**
+ *  stmmac_mac_config_rx_queues_routing - Configure RX Queue Routing
+ *  @priv: driver private structure
+ *  Description: It is used for configuring the RX queue routing
+ */
+static void stmmac_mac_config_rx_queues_routing(struct stmmac_priv *priv)
+{
+	u32 rx_queues_count = priv->plat->rx_queues_to_use;
+	u32 queue;
+	u8 packet;
+
+	for (queue = 0; queue < rx_queues_count; queue++) {
+		/* no specific packet type routing specified for the queue */
+		if (priv->plat->rx_queues_cfg[queue].pkt_route == 0x0)
+			continue;
+
+		packet = priv->plat->rx_queues_cfg[queue].pkt_route;
+		stmmac_rx_queue_routing(priv, priv->hw, packet, queue);
+	}
+}
+
+static void stmmac_mac_config_rss(struct stmmac_priv *priv)
+{
+	if (!priv->dma_cap.rssen || !priv->plat->rss_en) {
+		priv->rss.enable = false;
+		return;
+	}
+
+	if (priv->dev->features & NETIF_F_RXHASH)
+		priv->rss.enable = true;
+	else
+		priv->rss.enable = false;
+
+	stmmac_rss_configure(priv, priv->hw, &priv->rss,
+			     priv->plat->rx_queues_to_use);
+}
+
+/**
+ *  stmmac_mtl_configuration - Configure MTL
+ *  @priv: driver private structure
+ *  Description: It is used for configurring MTL
+ */
+static void stmmac_mtl_configuration(struct stmmac_priv *priv)
+{
+	u32 rx_queues_count = priv->plat->rx_queues_to_use;
+	u32 tx_queues_count = priv->plat->tx_queues_to_use;
+
+	if (tx_queues_count > 1)
+		stmmac_set_tx_queue_weight(priv);
+
+	/* Configure MTL RX algorithms */
+	if (rx_queues_count > 1)
+		stmmac_prog_mtl_rx_algorithms(priv, priv->hw,
+				priv->plat->rx_sched_algorithm);
+
+	/* Configure MTL TX algorithms */
+	if (tx_queues_count > 1)
+		stmmac_prog_mtl_tx_algorithms(priv, priv->hw,
+				priv->plat->tx_sched_algorithm);
+
+	/* Configure CBS in AVB TX queues */
+	if (tx_queues_count > 1)
+		stmmac_configure_cbs(priv);
+
+	/* Map RX MTL to DMA channels */
+	stmmac_rx_queue_dma_chan_map(priv);
+
+	/* Enable MAC RX Queues */
+	stmmac_mac_enable_rx_queues(priv);
+
+	/* Set RX priorities */
+	if (rx_queues_count > 1)
+		stmmac_mac_config_rx_queues_prio(priv);
+
+	/* Set TX priorities */
+	if (tx_queues_count > 1)
+		stmmac_mac_config_tx_queues_prio(priv);
+
+	/* Set RX routing */
+	if (rx_queues_count > 1)
+		stmmac_mac_config_rx_queues_routing(priv);
+
+	/* Receive Side Scaling */
+	if (rx_queues_count > 1)
+		stmmac_mac_config_rss(priv);
+}
+
+static void stmmac_safety_feat_configuration(struct stmmac_priv *priv)
+{
+	if (priv->dma_cap.asp) {
+		netdev_info(priv->dev, "Enabling Safety Features\n");
+		stmmac_safety_feat_config(priv, priv->ioaddr, priv->dma_cap.asp,
+					  priv->plat->safety_feat_cfg);
+	} else {
+		netdev_info(priv->dev, "No Safety Features support found\n");
+	}
+}
+
+/**
+ * stmmac_hw_setup - setup mac in a usable state.
+ *  @dev : pointer to the device structure.
+ *  @ptp_register: register PTP if set
+ *  Description:
+ *  this is the main function to setup the HW in a usable state because the
+ *  dma engine is reset, the core registers are configured (e.g. AXI,
+ *  Checksum features, timers). The DMA is ready to start receiving and
+ *  transmitting.
+ *  Return value:
+ *  0 on success and an appropriate (-)ve integer as defined in errno.h
+ *  file on failure.
+ */
+static int stmmac_hw_setup(struct net_device *dev, bool ptp_register)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+	u32 rx_cnt = priv->plat->rx_queues_to_use;
+	u32 tx_cnt = priv->plat->tx_queues_to_use;
+	bool sph_en;
+	u32 chan;
+	int ret;
+
+	/* Make sure RX clock is enabled */
+	if (priv->hw->phylink_pcs)
+		phylink_pcs_pre_init(priv->phylink, priv->hw->phylink_pcs);
+
+	/* DMA initialization and SW reset */
+	ret = stmmac_init_dma_engine(priv);
+	if (ret < 0) {
+		netdev_err(priv->dev, "%s: DMA engine initialization failed\n",
+			   __func__);
+		return ret;
+	}
+
+	/* Copy the MAC addr into the HW  */
+	stmmac_set_umac_addr(priv, priv->hw, dev->dev_addr, 0);
+
+	/* PS and related bits will be programmed according to the speed */
+	if (priv->hw->pcs) {
+		int speed = priv->plat->mac_port_sel_speed;
+
+		if ((speed == SPEED_10) || (speed == SPEED_100) ||
+		    (speed == SPEED_1000)) {
+			priv->hw->ps = speed;
+		} else {
+			dev_warn(priv->device, "invalid port speed\n");
+			priv->hw->ps = 0;
+		}
+	}
+
+	/* Initialize the MAC Core */
+	stmmac_core_init(priv, priv->hw, dev);
+
+	/* Initialize MTL*/
+	stmmac_mtl_configuration(priv);
+
+	/* Initialize Safety Features */
+	stmmac_safety_feat_configuration(priv);
+
+	ret = stmmac_rx_ipc(priv, priv->hw);
+	if (!ret) {
+		netdev_warn(priv->dev, "RX IPC Checksum Offload disabled\n");
+		priv->plat->rx_coe = STMMAC_RX_COE_NONE;
+		priv->hw->rx_csum = 0;
+	}
+
+	/* Enable the MAC Rx/Tx */
+	stmmac_mac_set(priv, priv->ioaddr, true);
+
+	/* Set the HW DMA mode and the COE */
+	stmmac_dma_operation_mode(priv);
+
+	stmmac_mmc_setup(priv);
+
+	if (ptp_register) {
+		ret = clk_prepare_enable(priv->plat->clk_ptp_ref);
+		if (ret < 0)
+			netdev_warn(priv->dev,
+				    "failed to enable PTP reference clock: %pe\n",
+				    ERR_PTR(ret));
+	}
+
+	ret = stmmac_init_ptp(priv);
+	if (ret == -EOPNOTSUPP)
+		netdev_info(priv->dev, "PTP not supported by HW\n");
+	else if (ret)
+		netdev_warn(priv->dev, "PTP init failed\n");
+	else if (ptp_register)
+		stmmac_ptp_register(priv);
+
+	priv->eee_tw_timer = STMMAC_DEFAULT_TWT_LS;
+
+	/* Convert the timer from msec to usec */
+	if (!priv->tx_lpi_timer)
+		priv->tx_lpi_timer = eee_timer * 1000;
+
+	if (priv->use_riwt) {
+		u32 queue;
+
+		for (queue = 0; queue < rx_cnt; queue++) {
+			if (!priv->rx_riwt[queue])
+				priv->rx_riwt[queue] = DEF_DMA_RIWT;
+
+			stmmac_rx_watchdog(priv, priv->ioaddr,
+					   priv->rx_riwt[queue], queue);
+		}
+	}
+
+	if (priv->hw->pcs)
+		stmmac_pcs_ctrl_ane(priv, priv->ioaddr, 1, priv->hw->ps, 0);
+
+	/* set TX and RX rings length */
+	stmmac_set_rings_length(priv);
+
+	/* Enable TSO */
+	if (priv->tso) {
+		for (chan = 0; chan < tx_cnt; chan++) {
+			struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[chan];
+
+			/* TSO and TBS cannot co-exist */
+			if (tx_q->tbs & STMMAC_TBS_AVAIL)
+				continue;
+
+			stmmac_enable_tso(priv, priv->ioaddr, 1, chan);
+		}
+	}
+
+	/* Enable Split Header */
+	sph_en = (priv->hw->rx_csum > 0) && priv->sph;
+	for (chan = 0; chan < rx_cnt; chan++)
+		stmmac_enable_sph(priv, priv->ioaddr, sph_en, chan);
+
+
+	/* VLAN Tag Insertion */
+	if (priv->dma_cap.vlins)
+		stmmac_enable_vlan(priv, priv->hw, STMMAC_VLAN_INSERT);
+
+	/* TBS */
+	for (chan = 0; chan < tx_cnt; chan++) {
+		struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[chan];
+		int enable = tx_q->tbs & STMMAC_TBS_AVAIL;
+
+		stmmac_enable_tbs(priv, priv->ioaddr, enable, chan);
+	}
+
+	/* Configure real RX and TX queues */
+	netif_set_real_num_rx_queues(dev, priv->plat->rx_queues_to_use);
+	netif_set_real_num_tx_queues(dev, priv->plat->tx_queues_to_use);
+
+	/* Start the ball rolling... */
+	stmmac_start_all_dma(priv);
+
+	stmmac_set_hw_vlan_mode(priv, priv->hw);
+
+	return 0;
+}
+
+static void stmmac_hw_teardown(struct net_device *dev)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+
+	clk_disable_unprepare(priv->plat->clk_ptp_ref);
+}
+
+static void stmmac_free_irq(struct net_device *dev,
+			    enum request_irq_err irq_err, int irq_idx)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+	int j;
+
+	switch (irq_err) {
+	case REQ_IRQ_ERR_ALL:
+		irq_idx = priv->plat->tx_queues_to_use;
+		fallthrough;
+	case REQ_IRQ_ERR_TX:
+		for (j = irq_idx - 1; j >= 0; j--) {
+			if (priv->tx_irq[j] > 0) {
+				irq_set_affinity_hint(priv->tx_irq[j], NULL);
+				free_irq(priv->tx_irq[j], &priv->dma_conf.tx_queue[j]);
+			}
+		}
+		irq_idx = priv->plat->rx_queues_to_use;
+		fallthrough;
+	case REQ_IRQ_ERR_RX:
+		for (j = irq_idx - 1; j >= 0; j--) {
+			if (priv->rx_irq[j] > 0) {
+				irq_set_affinity_hint(priv->rx_irq[j], NULL);
+				free_irq(priv->rx_irq[j], &priv->dma_conf.rx_queue[j]);
+			}
+		}
+
+		if (priv->sfty_ue_irq > 0 && priv->sfty_ue_irq != dev->irq)
+			free_irq(priv->sfty_ue_irq, dev);
+		fallthrough;
+	case REQ_IRQ_ERR_SFTY_UE:
+		if (priv->sfty_ce_irq > 0 && priv->sfty_ce_irq != dev->irq)
+			free_irq(priv->sfty_ce_irq, dev);
+		fallthrough;
+	case REQ_IRQ_ERR_SFTY_CE:
+		if (priv->lpi_irq > 0 && priv->lpi_irq != dev->irq)
+			free_irq(priv->lpi_irq, dev);
+		fallthrough;
+	case REQ_IRQ_ERR_LPI:
+		if (priv->wol_irq > 0 && priv->wol_irq != dev->irq)
+			free_irq(priv->wol_irq, dev);
+		fallthrough;
+	case REQ_IRQ_ERR_SFTY:
+		if (priv->sfty_irq > 0 && priv->sfty_irq != dev->irq)
+			free_irq(priv->sfty_irq, dev);
+		fallthrough;
+	case REQ_IRQ_ERR_WOL:
+		free_irq(dev->irq, dev);
+		fallthrough;
+	case REQ_IRQ_ERR_MAC:
+	case REQ_IRQ_ERR_NO:
+		/* If MAC IRQ request error, no more IRQ to free */
+		break;
+	}
+}
+
+static int stmmac_request_irq_multi_msi(struct net_device *dev)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+	enum request_irq_err irq_err;
+	int irq_idx = 0;
+	char *int_name;
+	int ret;
+	int i;
+
+	/* For common interrupt */
+	int_name = priv->int_name_mac;
+	sprintf(int_name, "%s:%s", dev->name, "mac");
+	ret = request_irq(dev->irq, stmmac_mac_interrupt,
+			  0, int_name, dev);
+	if (unlikely(ret < 0)) {
+		netdev_err(priv->dev,
+			   "%s: alloc mac MSI %d (error: %d)\n",
+			   __func__, dev->irq, ret);
+		irq_err = REQ_IRQ_ERR_MAC;
+		goto irq_error;
+	}
+
+	/* Request the Wake IRQ in case of another line
+	 * is used for WoL
+	 */
+	priv->wol_irq_disabled = true;
+	if (priv->wol_irq > 0 && priv->wol_irq != dev->irq) {
+		int_name = priv->int_name_wol;
+		sprintf(int_name, "%s:%s", dev->name, "wol");
+		ret = request_irq(priv->wol_irq,
+				  stmmac_mac_interrupt,
+				  0, int_name, dev);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: alloc wol MSI %d (error: %d)\n",
+				   __func__, priv->wol_irq, ret);
+			irq_err = REQ_IRQ_ERR_WOL;
+			goto irq_error;
+		}
+	}
+
+	/* Request the LPI IRQ in case of another line
+	 * is used for LPI
+	 */
+	if (priv->lpi_irq > 0 && priv->lpi_irq != dev->irq) {
+		int_name = priv->int_name_lpi;
+		sprintf(int_name, "%s:%s", dev->name, "lpi");
+		ret = request_irq(priv->lpi_irq,
+				  stmmac_mac_interrupt,
+				  0, int_name, dev);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: alloc lpi MSI %d (error: %d)\n",
+				   __func__, priv->lpi_irq, ret);
+			irq_err = REQ_IRQ_ERR_LPI;
+			goto irq_error;
+		}
+	}
+
+	/* Request the common Safety Feature Correctible/Uncorrectible
+	 * Error line in case of another line is used
+	 */
+	if (priv->sfty_irq > 0 && priv->sfty_irq != dev->irq) {
+		int_name = priv->int_name_sfty;
+		sprintf(int_name, "%s:%s", dev->name, "safety");
+		ret = request_irq(priv->sfty_irq, stmmac_safety_interrupt,
+				  0, int_name, dev);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: alloc sfty MSI %d (error: %d)\n",
+				   __func__, priv->sfty_irq, ret);
+			irq_err = REQ_IRQ_ERR_SFTY;
+			goto irq_error;
+		}
+	}
+
+	/* Request the Safety Feature Correctible Error line in
+	 * case of another line is used
+	 */
+	if (priv->sfty_ce_irq > 0 && priv->sfty_ce_irq != dev->irq) {
+		int_name = priv->int_name_sfty_ce;
+		sprintf(int_name, "%s:%s", dev->name, "safety-ce");
+		ret = request_irq(priv->sfty_ce_irq,
+				  stmmac_safety_interrupt,
+				  0, int_name, dev);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: alloc sfty ce MSI %d (error: %d)\n",
+				   __func__, priv->sfty_ce_irq, ret);
+			irq_err = REQ_IRQ_ERR_SFTY_CE;
+			goto irq_error;
+		}
+	}
+
+	/* Request the Safety Feature Uncorrectible Error line in
+	 * case of another line is used
+	 */
+	if (priv->sfty_ue_irq > 0 && priv->sfty_ue_irq != dev->irq) {
+		int_name = priv->int_name_sfty_ue;
+		sprintf(int_name, "%s:%s", dev->name, "safety-ue");
+		ret = request_irq(priv->sfty_ue_irq,
+				  stmmac_safety_interrupt,
+				  0, int_name, dev);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: alloc sfty ue MSI %d (error: %d)\n",
+				   __func__, priv->sfty_ue_irq, ret);
+			irq_err = REQ_IRQ_ERR_SFTY_UE;
+			goto irq_error;
+		}
+	}
+
+	/* Request Rx MSI irq */
+	for (i = 0; i < priv->plat->rx_queues_to_use; i++) {
+		if (i >= MTL_MAX_RX_QUEUES)
+			break;
+		if (priv->rx_irq[i] == 0)
+			continue;
+
+		int_name = priv->int_name_rx_irq[i];
+		sprintf(int_name, "%s:%s-%d", dev->name, "rx", i);
+		ret = request_irq(priv->rx_irq[i],
+				  stmmac_msi_intr_rx,
+				  0, int_name, &priv->dma_conf.rx_queue[i]);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: alloc rx-%d  MSI %d (error: %d)\n",
+				   __func__, i, priv->rx_irq[i], ret);
+			irq_err = REQ_IRQ_ERR_RX;
+			irq_idx = i;
+			goto irq_error;
+		}
+		irq_set_affinity_hint(priv->rx_irq[i],
+				      cpumask_of(i % num_online_cpus()));
+	}
+
+	/* Request Tx MSI irq */
+	for (i = 0; i < priv->plat->tx_queues_to_use; i++) {
+		if (i >= MTL_MAX_TX_QUEUES)
+			break;
+		if (priv->tx_irq[i] == 0)
+			continue;
+
+		int_name = priv->int_name_tx_irq[i];
+		sprintf(int_name, "%s:%s-%d", dev->name, "tx", i);
+		ret = request_irq(priv->tx_irq[i],
+				  stmmac_msi_intr_tx,
+				  0, int_name, &priv->dma_conf.tx_queue[i]);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: alloc tx-%d  MSI %d (error: %d)\n",
+				   __func__, i, priv->tx_irq[i], ret);
+			irq_err = REQ_IRQ_ERR_TX;
+			irq_idx = i;
+			goto irq_error;
+		}
+		irq_set_affinity_hint(priv->tx_irq[i],
+				      cpumask_of(i % num_online_cpus()));
+	}
+
+	return 0;
+
+irq_error:
+	stmmac_free_irq(dev, irq_err, irq_idx);
+	return ret;
+}
+
+static int stmmac_request_irq_single(struct net_device *dev)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+	enum request_irq_err irq_err;
+	int ret;
+
+	ret = request_irq(dev->irq, stmmac_interrupt,
+			  IRQF_SHARED, dev->name, dev);
+	if (unlikely(ret < 0)) {
+		netdev_err(priv->dev,
+			   "%s: ERROR: allocating the IRQ %d (error: %d)\n",
+			   __func__, dev->irq, ret);
+		irq_err = REQ_IRQ_ERR_MAC;
+		goto irq_error;
+	}
+
+	/* Request the Wake IRQ in case of another line
+	 * is used for WoL
+	 */
+	priv->wol_irq_disabled = true;
+	if (priv->wol_irq > 0 && priv->wol_irq != dev->irq) {
+		ret = request_irq(priv->wol_irq, stmmac_interrupt,
+				  IRQF_SHARED, dev->name, dev);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: ERROR: allocating the WoL IRQ %d (%d)\n",
+				   __func__, priv->wol_irq, ret);
+			irq_err = REQ_IRQ_ERR_WOL;
+			goto irq_error;
+		}
+	}
+
+	/* Request the IRQ lines */
+	if (priv->lpi_irq > 0 && priv->lpi_irq != dev->irq) {
+		ret = request_irq(priv->lpi_irq, stmmac_interrupt,
+				  IRQF_SHARED, dev->name, dev);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: ERROR: allocating the LPI IRQ %d (%d)\n",
+				   __func__, priv->lpi_irq, ret);
+			irq_err = REQ_IRQ_ERR_LPI;
+			goto irq_error;
+		}
+	}
+
+	/* Request the common Safety Feature Correctible/Uncorrectible
+	 * Error line in case of another line is used
+	 */
+	if (priv->sfty_irq > 0 && priv->sfty_irq != dev->irq) {
+		ret = request_irq(priv->sfty_irq, stmmac_safety_interrupt,
+				  IRQF_SHARED, dev->name, dev);
+		if (unlikely(ret < 0)) {
+			netdev_err(priv->dev,
+				   "%s: ERROR: allocating the sfty IRQ %d (%d)\n",
+				   __func__, priv->sfty_irq, ret);
+			irq_err = REQ_IRQ_ERR_SFTY;
+			goto irq_error;
+		}
+	}
+
+	return 0;
+
+irq_error:
+	stmmac_free_irq(dev, irq_err, 0);
+	return ret;
+}
+
+static int stmmac_request_irq(struct net_device *dev)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+	int ret;
+
+	/* Request the IRQ lines */
+	if (priv->plat->flags & STMMAC_FLAG_MULTI_MSI_EN)
+		ret = stmmac_request_irq_multi_msi(dev);
+	else
+		ret = stmmac_request_irq_single(dev);
+
+	return ret;
+}
+
+/**
+ *  stmmac_setup_dma_desc - Generate a dma_conf and allocate DMA queue
+ *  @priv: driver private structure
+ *  @mtu: MTU to setup the dma queue and buf with
+ *  Description: Allocate and generate a dma_conf based on the provided MTU.
+ *  Allocate the Tx/Rx DMA queue and init them.
+ *  Return value:
+ *  the dma_conf allocated struct on success and an appropriate ERR_PTR on failure.
+ */
+static struct stmmac_dma_conf *
+stmmac_setup_dma_desc(struct stmmac_priv *priv, unsigned int mtu)
+{
+	struct stmmac_dma_conf *dma_conf;
+	int chan, bfsize, ret;
+
+	dma_conf = kzalloc(sizeof(*dma_conf), GFP_KERNEL);
+	if (!dma_conf) {
+		netdev_err(priv->dev, "%s: DMA conf allocation failed\n",
+			   __func__);
+		return ERR_PTR(-ENOMEM);
+	}
+
+	bfsize = stmmac_set_16kib_bfsize(priv, mtu);
+	if (bfsize < 0)
+		bfsize = 0;
+
+	if (bfsize < BUF_SIZE_16KiB)
+		bfsize = stmmac_set_bfsize(mtu, 0);
+
+	dma_conf->dma_buf_sz = bfsize;
+	/* Chose the tx/rx size from the already defined one in the
+	 * priv struct. (if defined)
+	 */
+	dma_conf->dma_tx_size = priv->dma_conf.dma_tx_size;
+	dma_conf->dma_rx_size = priv->dma_conf.dma_rx_size;
+
+	if (!dma_conf->dma_tx_size)
+		dma_conf->dma_tx_size = DMA_DEFAULT_TX_SIZE;
+	if (!dma_conf->dma_rx_size)
+		dma_conf->dma_rx_size = DMA_DEFAULT_RX_SIZE;
+
+	/* Earlier check for TBS */
+	for (chan = 0; chan < priv->plat->tx_queues_to_use; chan++) {
+		struct stmmac_tx_queue *tx_q = &dma_conf->tx_queue[chan];
+		int tbs_en = priv->plat->tx_queues_cfg[chan].tbs_en;
+
+		/* Setup per-TXQ tbs flag before TX descriptor alloc */
+		tx_q->tbs |= tbs_en ? STMMAC_TBS_AVAIL : 0;
+	}
+
+	ret = alloc_dma_desc_resources(priv, dma_conf);
+	if (ret < 0) {
+		netdev_err(priv->dev, "%s: DMA descriptors allocation failed\n",
+			   __func__);
+		goto alloc_error;
+	}
+
+	ret = init_dma_desc_rings(priv->dev, dma_conf, GFP_KERNEL);
+	if (ret < 0) {
+		netdev_err(priv->dev, "%s: DMA descriptors initialization failed\n",
+			   __func__);
+		goto init_error;
+	}
+
+	return dma_conf;
+
+init_error:
+	free_dma_desc_resources(priv, dma_conf);
+alloc_error:
+	kfree(dma_conf);
+	return ERR_PTR(ret);
+}
+
+/**
+ *  __stmmac_open - open entry point of the driver
+ *  @dev : pointer to the device structure.
+ *  @dma_conf :  structure to take the dma data
+ *  Description:
+ *  This function is the open entry point of the driver.
+ *  Return value:
+ *  0 on success and an appropriate (-)ve integer as defined in errno.h
+ *  file on failure.
+ */
+static int __stmmac_open(struct net_device *dev,
+			 struct stmmac_dma_conf *dma_conf)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+	int mode = priv->plat->phy_interface;
+	u32 chan;
+	int ret;
+
+	ret = pm_runtime_resume_and_get(priv->device);
+	if (ret < 0)
+		return ret;
+
+	if ((!priv->hw->xpcs ||
+	     xpcs_get_an_mode(priv->hw->xpcs, mode) != DW_AN_C73)) {
+		ret = stmmac_init_phy(dev);
+		if (ret) {
+			netdev_err(priv->dev,
+				   "%s: Cannot attach to PHY (error: %d)\n",
+				   __func__, ret);
+			goto init_phy_error;
+		}
+	}
+
+	priv->rx_copybreak = STMMAC_RX_COPYBREAK;
+
+	buf_sz = dma_conf->dma_buf_sz;
+	for (int i = 0; i < MTL_MAX_TX_QUEUES; i++)
+		if (priv->dma_conf.tx_queue[i].tbs & STMMAC_TBS_EN)
+			dma_conf->tx_queue[i].tbs = priv->dma_conf.tx_queue[i].tbs;
+	memcpy(&priv->dma_conf, dma_conf, sizeof(*dma_conf));
+
+	stmmac_reset_queues_param(priv);
+
+	if (!(priv->plat->flags & STMMAC_FLAG_SERDES_UP_AFTER_PHY_LINKUP) &&
+	    priv->plat->serdes_powerup) {
+		ret = priv->plat->serdes_powerup(dev, priv->plat->bsp_priv);
+		if (ret < 0) {
+			netdev_err(priv->dev, "%s: Serdes powerup failed\n",
+				   __func__);
+			goto init_error;
+		}
+	}
+
+	ret = stmmac_hw_setup(dev, true);
+	if (ret < 0) {
+		netdev_err(priv->dev, "%s: Hw setup failed\n", __func__);
+		goto init_error;
+	}
+
+	stmmac_init_coalesce(priv);
+
+	phylink_start(priv->phylink);
+	/* We may have called phylink_speed_down before */
+	phylink_speed_up(priv->phylink);
+
+	ret = stmmac_request_irq(dev);
+	if (ret)
+		goto irq_error;
+
+	stmmac_enable_all_queues(priv);
+	netif_tx_start_all_queues(priv->dev);
+	stmmac_enable_all_dma_irq(priv);
+
+	return 0;
+
+irq_error:
+	phylink_stop(priv->phylink);
+
+	for (chan = 0; chan < priv->plat->tx_queues_to_use; chan++)
+		hrtimer_cancel(&priv->dma_conf.tx_queue[chan].txtimer);
+
+	stmmac_hw_teardown(dev);
+init_error:
+	phylink_disconnect_phy(priv->phylink);
+init_phy_error:
+	pm_runtime_put(priv->device);
+	return ret;
+}
+
+static int stmmac_open(struct net_device *dev)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+	struct stmmac_dma_conf *dma_conf;
+	int ret;
+
+	dma_conf = stmmac_setup_dma_desc(priv, dev->mtu);
+	if (IS_ERR(dma_conf))
+		return PTR_ERR(dma_conf);
+
+	ret = __stmmac_open(dev, dma_conf);
+	if (ret)
+		free_dma_desc_resources(priv, dma_conf);
+
+	kfree(dma_conf);
+	return ret;
+}
+
+/**
+ *  stmmac_release - close entry point of the driver
+ *  @dev : device pointer.
+ *  Description:
+ *  This is the stop entry point of the driver.
+ */
+static int stmmac_release(struct net_device *dev)
+{
+	struct stmmac_priv *priv = netdev_priv(dev);
+	u32 chan;
+
+	if (device_may_wakeup(priv->device))
+		phylink_speed_down(priv->phylink, false);
+	/* Stop and disconnect the PHY */
+	phylink_stop(priv->phylink);
+	phylink_disconnect_phy(priv->phylink);
+
+	stmmac_disable_all_queues(priv);
+
+	for (chan = 0; chan < priv->plat->tx_queues_to_use; chan++)
+		hrtimer_cancel(&priv->dma_conf.tx_queue[chan].txtimer);
+
+	netif_tx_disable(dev);
+
+	/* Free the IRQ lines */
+	stmmac_free_irq(dev, REQ_IRQ_ERR_ALL, 0);
+
+	if (priv->eee_enabled) {
+		priv->tx_path_in_lpi_mode = false;
+		del_timer_sync(&priv->eee_ctrl_timer);
+	}
+
+	/* Stop TX/RX DMA and clear the descriptors */
+	stmmac_stop_all_dma(priv);
+
+	/* Release and free the Rx/Tx resources */
+	free_dma_desc_resources(priv, &priv->dma_conf);
+
+	/* Disable the MAC Rx/Tx */
+	stmmac_mac_set(priv, priv->ioaddr, false);
+
+	/* Powerdown Serdes if there is */
+	if (priv->plat->serdes_powerdown)
+		priv->plat->serdes_powerdown(dev, priv->plat->bsp_priv);
+
+	stmmac_release_ptp(priv);
+
+	if (priv->dma_cap.fpesel)
+		timer_shutdown_sync(&priv->fpe_cfg.verify_timer);
+
+	pm_runtime_put(priv->device);
+
+	return 0;
+}
+
+static bool stmmac_vlan_insert(struct stmmac_priv *priv, struct sk_buff *skb,
+			       struct stmmac_tx_queue *tx_q)
+{
+	u16 tag = 0x0, inner_tag = 0x0;
+	u32 inner_type = 0x0;
+	struct dma_desc *p;
+
+	if (!priv->dma_cap.vlins)
+		return false;
+	if (!skb_vlan_tag_present(skb))
+		return false;
+	if (skb->vlan_proto == htons(ETH_P_8021AD)) {
+		inner_tag = skb_vlan_tag_get(skb);
+		inner_type = STMMAC_VLAN_INSERT;
+	}
+
+	tag = skb_vlan_tag_get(skb);
+
+	if (tx_q->tbs & STMMAC_TBS_AVAIL)
+		p = &tx_q->dma_entx[tx_q->cur_tx].basic;
+	else
+		p = &tx_q->dma_tx[tx_q->cur_tx];
+
+	if (stmmac_set_desc_vlan_tag(priv, p, tag, inner_tag, inner_type))
+		return false;
+
+	stmmac_set_tx_owner(priv, p);
+	tx_q->cur_tx = STMMAC_GET_ENTRY(tx_q->cur_tx, priv->dma_conf.dma_tx_size);
+	return true;
+}
+
+/**
+ *  stmmac_tso_allocator - close entry point of the driver
+ *  @priv: driver private structure
+ *  @des: buffer start address
+ *  @total_len: total length to fill in descriptors
+ *  @last_segment: condition for the last descriptor
+ *  @queue: TX queue index
+ *  Description:
+ *  This function fills descriptor and request new descriptors according to
+ *  buffer length to fill
+ */
+static void stmmac_tso_allocator(struct stmmac_priv *priv, dma_addr_t des,
+				 int total_len, bool last_segment, u32 queue)
+{
+	struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[queue];
+	struct dma_desc *desc;
+	u32 buff_size;
+	int tmp_len;
+
+	tmp_len = total_len;
+
+	while (tmp_len > 0) {
+		dma_addr_t curr_addr;
+
+		tx_q->cur_tx = STMMAC_GET_ENTRY(tx_q->cur_tx,
+						priv->dma_conf.dma_tx_size);
+		WARN_ON(tx_q->tx_skbuff[tx_q->cur_tx]);
+
+		if (tx_q->tbs & STMMAC_TBS_AVAIL)
+			desc = &tx_q->dma_entx[tx_q->cur_tx].basic;
+		else
+			desc = &tx_q->dma_tx[tx_q->cur_tx];
+
+		curr_addr = des + (total_len - tmp_len);
+		if (priv->dma_cap.addr64 <= 32)
+			desc->des0 = cpu_to_le32(curr_addr);
+		else
+			stmmac_set_desc_addr(priv, desc, curr_addr);
+
+		buff_size = tmp_len >= TSO_MAX_BUFF_SIZE ?
+			    TSO_MAX_BUFF_SIZE : tmp_len;
+
+		stmmac_prepare_tso_tx_desc(priv, desc, 0, buff_size,
+				0, 1,
+				(last_segment) && (tmp_len <= TSO_MAX_BUFF_SIZE),
+				0, 0);
+
+		tmp_len -= TSO_MAX_BUFF_SIZE;
+	}
+}
+
+static void stmmac_flush_tx_descriptors(struct stmmac_priv *priv, int queue)
+{
+	struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[queue];
+	int desc_size;
+
+	if (likely(priv->extend_desc))
+		desc_size = sizeof(struct dma_extended_desc);
+	else if (tx_q->tbs & STMMAC_TBS_AVAIL)
+		desc_size = sizeof(struct dma_edesc);
+	else
+		desc_size = sizeof(struct dma_desc);
+
+	/* The own bit must be the latest setting done when prepare the
+	 * descriptor and then barrier is needed to make sure that
+	 * all is coherent before granting the DMA engine.
+	 */
+	wmb();
+
+	tx_q->tx_tail_addr = tx_q->dma_tx_phy + (tx_q->cur_tx * desc_size);
+	stmmac_set_tx_tail_ptr(priv, priv->ioaddr, tx_q->tx_tail_addr, queue);
+}
+
+/**
+ *  stmmac_tso_xmit - Tx entry point of the driver for oversized frames (TSO)
+ *  @skb : the socket buffer
+ *  @dev : device pointer
+ *  Description: this is the transmit function that is called on TSO frames
+ *  (support available on GMAC4 and newer chips).
+ *  Diagram below show the ring programming in case of TSO frames:
+ *
+ *  First Descriptor
+ *   --------
+ *   | DES0 |---> buffer1 = L2/L3/L4 header
+ *   | DES1 |---> TCP Payload (can continue on next descr...)
+ *   | DES2 |---> buffer 1 and 2 len
+ *   | DES3 |---> must set TSE, TCP hdr len-> [22:19]. TCP payload len [17:0]
+ *   --------
+ *	|
+ *     ...
+ *	|
+ *   --------
+ *   | DES0 | --| Split TCP Payload on Buffers 1 and 2
+ *   | DES1 | --|
+ *   | DES2 | --> buffer 1 and 2 len
+ *   | DES3 |
+ *   --------
+ *
+ * mss is fixed when enable tso, so w/o programming the TDES3 ctx field.
+ */
+static netdev_tx_t stmmac_tso_xmit(struct sk_buff *skb, struct net_device *dev)
+{
+	struct dma_desc *desc, *first, *mss_desc = NULL;
+	struct stmmac_priv *priv = netdev_priv(dev);
+	int tmp_pay_len = 0, first_tx, nfrags;
+	unsigned int first_entry, tx_packets;
+	struct stmmac_txq_stats *txq_stats;
+	struct stmmac_tx_queue *tx_q;
+	u32 pay_len, mss, queue;
+	dma_addr_t tso_des, des;
+	u8 proto_hdr_len, hdr;
+	bool set_ic;
+	int i;
+
+	/* Always insert VLAN tag to SKB payload for TSO frames.
+	 *
+	 * Never insert VLAN tag by HW, since segments splited by
+	 * TSO engine will be un-tagged by mistake.
+	 */
+	if (skb_vlan_tag_present(skb)) {
+		skb = __vlan_hwaccel_push_inside(skb);
+		if (unlikely(!skb)) {
+			priv->xstats.tx_dropped++;
+			return NETDEV_TX_OK;
+		}
+	}
+
+	nfrags = skb_shinfo(skb)->nr_frags;
+	queue = skb_get_queue_mapping(skb);
+
+	tx_q = &priv->dma_conf.tx_queue[queue];
+	txq_stats = &priv->xstats.txq_stats[queue];
+	first_tx = tx_q->cur_tx;
+
+	/* Compute header lengths */
+	if (skb_shinfo(skb)->gso_type & SKB_GSO_UDP_L4) {
+		proto_hdr_len = skb_transport_offset(skb) + sizeof(struct udphdr);
+		hdr = sizeof(struct udphdr);
+	} else {
+		proto_hdr_len = skb_tcp_all_headers(skb);
+		hdr = tcp_hdrlen(skb);
+	}
+
+	/* Desc availability based on threshold should be enough safe */
+	if (unlikely(stmmac_tx_avail(priv, queue) <
+		(((skb->len - proto_hdr_len) / TSO_MAX_BUFF_SIZE + 1)))) {
+		if (!netif_tx_queue_stopped(netdev_get_tx_queue(dev, queue))) {
+			netif_tx_stop_queue(netdev_get_tx_queue(priv->dev,
+								queue));
+			/* This is a hard error, log it. */
+			netdev_err(priv->dev,
+				   "%s: Tx Ring full when queue awake\n",
+				   __func__);
+		}
+		return NETDEV_TX_BUSY;
+	}
+
+	pay_len = skb_headlen(skb) - proto_hdr_len; /* no frags */
+
+	mss = skb_shinfo(skb)->gso_size;
+
+	/* set new MSS value if needed */
+	if (mss != tx_q->mss) {
+		if (tx_q->tbs & STMMAC_TBS_AVAIL)
+			mss_desc = &tx_q->dma_entx[tx_q->cur_tx].basic;
+		else
+			mss_desc = &tx_q->dma_tx[tx_q->cur_tx];
+
+		stmmac_set_mss(priv, mss_desc, mss);
+		tx_q->mss = mss;
+		tx_q->cur_tx = STMMAC_GET_ENTRY(tx_q->cur_tx,
+						priv->dma_conf.dma_tx_size);
+		WARN_ON(tx_q->tx_skbuff[tx_q->cur_tx]);
+	}
+
+	if (netif_msg_tx_queued(priv)) {
+		pr_info("%s: hdrlen %d, hdr_len %d, pay_len %d, mss %d\n",
+			__func__, hdr, proto_hdr_len, pay_len, mss);
+		pr_info("\tskb->len %d, skb->data_len %d\n", skb->len,
+			skb->data_len);
+	}
+
+	first_entry = tx_q->cur_tx;
+	WARN_ON(tx_q->tx_skbuff[first_entry]);
+
+	if (tx_q->tbs & STMMAC_TBS_AVAIL)
+		desc = &tx_q->dma_entx[first_entry].basic;
+	else
+		desc = &tx_q->dma_tx[first_entry];
+	first = desc;
+
+	/* first descriptor: fill Headers on Buf1 */
+	des = dma_map_single(priv->device, skb->data, skb_headlen(skb),
+			     DMA_TO_DEVICE);
+	if (dma_mapping_error(priv->device, des))
+		goto dma_map_err;
+
+	if (priv->dma_cap.addr64 <= 32) {
+		first->des0 = cpu_to_le32(des);
+
+		/* Fill start of payload in buff2 of first descriptor */
+		if (pay_len)
+			first->des1 = cpu_to_le32(des + proto_hdr_len);
+
+		/* If needed take extra descriptors to fill the remaining payload */
+		tmp_pay_len = pay_len - TSO_MAX_BUFF_SIZE;
+		tso_des = des;
+	} else {
+		stmmac_set_desc_addr(priv, first, des);
+		tmp_pay_len = pay_len;
+		tso_des = des + proto_hdr_len;
+		pay_len = 0;
+	}
+
+	stmmac_tso_allocator(priv, tso_des, tmp_pay_len, (nfrags == 0), queue);
+
+	/* In case two or more DMA transmit descriptors are allocated for this
+	 * non-paged SKB data, the DMA buffer address should be saved to
+	 * tx_q->tx_skbuff_dma[].buf corresponding to the last descriptor,
+	 * and leave the other tx_q->tx_skbuff_dma[].buf as NULL to guarantee
+	 * that stmmac_tx_clean() does not unmap the entire DMA buffer too early
+	 * since the tail areas of the DMA buffer can be accessed by DMA engine
+	 * sooner or later.
+	 * By saving the DMA buffer address to tx_q->tx_skbuff_dma[].buf
+	 * corresponding to the last descriptor, stmmac_tx_clean() will unmap
+	 * this DMA buffer right after the DMA engine completely finishes the
+	 * full buffer transmission.
+	 */
+	tx_q->tx_skbuff_dma[tx_q->cur_tx].buf = des;
+	tx_q->tx_skbuff_dma[tx_q->cur_tx].len = skb_headlen(skb);
+	tx_q->tx_skbuff_dma[tx_q->cur_tx].map_as_page = false;
+	tx_q->tx_skbuff_dma[tx_q->cur_tx].buf_type = STMMAC_TXBUF_T_SKB;
+
+	/* Prepare fragments */
+	for (i = 0; i < nfrags; i++) {
+		const skb_frag_t *frag = &skb_shinfo(skb)->frags[i];
+
+		des = skb_frag_dma_map(priv->device, frag, 0,
+				       skb_frag_size(frag),
+				       DMA_TO_DEVICE);
+		if (dma_mapping_error(priv->device, des))
+			goto dma_map_err;
+
+		stmmac_tso_allocator(priv, des, skb_frag_size(frag),
+				     (i == nfrags - 1), queue);
+
+		tx_q->tx_skbuff_dma[tx_q->cur_tx].buf = des;
+		tx_q->tx_skbuff_dma[tx_q->cur_tx].len = skb_frag_size(frag);
+		tx_q->tx_skbuff_dma[tx_q->cur_tx].map_as_page = true;
+		tx_q->tx_skbuff_dma[tx_q->cur_tx].buf_type = STMMAC_TXBUF_T_SKB;
+	}
+
+	tx_q->tx_skbuff_dma[tx_q->cur_tx].last_segment = true;
+
+	/* Only the last descriptor gets to point to the skb. */
+	tx_q->tx_skbuff[tx_q->cur_tx] = skb;
+	tx_q->tx_skbuff_dma[tx_q->cur_tx].buf_type = STMMAC_TXBUF_T_SKB;
+
+	/* Manage tx mitigation */
+	tx_packets = (tx_q->cur_tx + 1) - first_tx;
+	tx_q->tx_count_frames += tx_packets;
+
+	if ((skb_shinfo(skb)->tx_flags & SKBTX_HW_TSTAMP) && priv->hwts_tx_en)
+		set_ic = true;
+	else if (!priv->tx_coal_frames[queue])
+		set_ic = false;
+	else if (tx_packets > priv->tx_coal_frames[queue])
+		set_ic = true;
+	else if ((tx_q->tx_count_frames %
+		  priv->tx_coal_frames[queue]) < tx_packets)
+		set_ic = true;
+	else
+		set_ic = false;
+
+	if (set_ic) {
+		if (tx_q->tbs & STMMAC_TBS_AVAIL)
+			desc = &tx_q->dma_entx[tx_q->cur_tx].basic;
+		else
+			desc = &tx_q->dma_tx[tx_q->cur_tx];
+
+		tx_q->tx_count_frames = 0;
+		stmmac_set_tx_ic(priv, desc);
+	}
+
+	/* We've used all descriptors we need for this skb, however,
+	 * advance cur_tx so that it references a fresh descriptor.
+	 * ndo_start_xmit will fill this descriptor the next time it's
+	 * called and stmmac_tx_clean may clean up to this descriptor.
+	 */
+	tx_q->cur_tx = STMMAC_GET_ENTRY(tx_q->cur_tx, priv->dma_conf.dma_tx_size);
+
+	if (unlikely(stmmac_tx_avail(priv, queue) <= (MAX_SKB_FRAGS + 1))) {
+		netif_dbg(priv, hw, priv->dev, "%s: stop transmitted packets\n",
+			  __func__);
+		netif_tx_stop_queue(netdev_get_tx_queue(priv->dev, queue));
+	}
+
+	u64_stats_update_begin(&txq_stats->q_syncp);
+	u64_stats_add(&txq_stats->q.tx_bytes, skb->len);
+	u64_stats_inc(&txq_stats->q.tx_tso_frames);
+	u64_stats_add(&txq_stats->q.tx_tso_nfrags, nfrags);
+	if (set_ic)
+		u64_stats_inc(&txq_stats->q.tx_set_ic_bit);
+	u64_stats_update_end(&txq_stats->q_syncp);
+
+	if (priv->sarc_type)
+		stmmac_set_desc_sarc(priv, first, priv->sarc_type);
+
+	if (unlikely((skb_shinfo(skb)->tx_flags & SKBTX_HW_TSTAMP) &&
+		     priv->hwts_tx_en)) {
+		/* declare that device is doing timestamping */
+		skb_shinfo(skb)->tx_flags |= SKBTX_IN_PROGRESS;
+		stmmac_enable_tx_timestamp(priv, first);
+	}
+
+	/* Complete the first descriptor before granting the DMA */
+	stmmac_prepare_tso_tx_desc(priv, first, 1,
+			proto_hdr_len,
+			pay_len,
+			1, tx_q->tx_skbuff_dma[first_entry].last_segment,
+			hdr / 4, (skb->len - proto_hdr_len));
+
+	/* If context desc is used to change MSS */
+	if (mss_desc) {
+		/* Make sure that first descriptor has been completely
+		 * written, including its own bit. This is because MSS is
+		 * actually before first descriptor, so we need to make
+		 * sure that MSS's own bit is the last thing written.
+		 */
+		dma_wmb();
+		stmmac_set_tx_owner(priv, mss_desc);
+	}
+
+	if (netif_msg_pktdata(priv)) {
+		pr_info("%s: curr=%d dirty=%d f=%d, e=%d, f_p=%p, nfrags %d\n",
+			__func__, tx_q->cur_tx, tx_q->dirty_tx, first_entry,
+			tx_q->cur_tx, first, nfrags);
+		pr_info(">>> frame to be transmitted: ");
+		print_pkt(skb->data, skb_headlen(skb));
+	}
+
+	netdev_tx_sent_queue(netdev_get_tx_queue(dev, queue), skb->len);
+	skb_tx_timestamp(skb);
+
+	stmmac_flush_tx_descriptors(priv, queue);
+	stmmac_tx_timer_arm(priv, queue);
+
+	return NETDEV_TX_OK;
+
+dma_map_err:
+	dev_err(priv->device, "Tx dma map failed\n");
+	dev_kfree_skb(skb);
+	priv->xstats.tx_dropped++;
+	return NETDEV_TX_OK;
+}
+
+/**
+ * stmmac_has_ip_ethertype() - Check if packet has IP ethertype
+ * @skb: socket buffer to check
+ *
+ * Check if a packet has an ethertype that will trigger the IP header checks
+ * and IP/TCP checksum engine of the stmmac core.
+ *
+ * Return: true if the ethertype can trigger the checksum engine, false
+ * otherwise
+ */
+static bool stmmac_has_ip_ethertype(struct sk_buff *skb)
+{
+	int depth = 0;
+	__be16 proto;
+
+	proto = __vlan_get_protocol(skb, eth_header_parse_protocol(skb),
+				    &depth);
+
+	return (depth <= ETH_HLEN) &&
+		(proto == htons(ETH_P_IP) || proto == htons(ETH_P_IPV6));
+}
+
+/**
+ *  stmmac_xmit - Tx entry point of the driver
+ *  @skb : the socket buffer
+ *  @dev : device pointer
+ *  Description : this is the tx entry point of the driver.
+ *  It programs the chain or the ring and supports oversized frames
+ *  and SG feature.
+ */
+static netdev_tx_t stmmac_xmit(struct sk_buff *skb, struct net_device *dev)
+{
+	unsigned int first_entry, tx_packets, enh_desc;
+	struct stmmac_priv *priv = netdev_priv(dev);
+	unsigned int nopaged_len = skb_headlen(skb);
+	int i, csum_insertion = 0, is_jumbo = 0;
+	u32 queue = skb_get_queue_mapping(skb);
+	int nfrags = skb_shinfo(skb)->nr_frags;
+	int gso = skb_shinfo(skb)->gso_type;
+	struct stmmac_txq_stats *txq_stats;
+	struct dma_edesc *tbs_desc = NULL;
+	struct dma_desc *desc, *first;
+	struct stmmac_tx_queue *tx_q;
+	bool has_vlan, set_ic;
+	int entry, first_tx;
+	dma_addr_t des;
+
+	tx_q = &priv->dma_conf.tx_queue[queue];
+	txq_stats = &priv->xstats.txq_stats[queue];
+	first_tx = tx_q->cur_tx;
+
+	if (priv->tx_path_in_lpi_mode && priv->eee_sw_timer_en)
+		stmmac_disable_eee_mode(priv);
+
+	/* Manage oversized TCP frames for GMAC4 device */
+	if (skb_is_gso(skb) && priv->tso) {
+		if (gso & (SKB_GSO_TCPV4 | SKB_GSO_TCPV6))
+			return stmmac_tso_xmit(skb, dev);
+		if (priv->plat->has_gmac4 && (gso & SKB_GSO_UDP_L4))
+			return stmmac_tso_xmit(skb, dev);
+	}
+
+	if (priv->est && priv->est->enable &&
+	    priv->est->max_sdu[queue] &&
+	    skb->len > priv->est->max_sdu[queue]){
+		priv->xstats.max_sdu_txq_drop[queue]++;
+		goto max_sdu_err;
+	}
+
+	if (unlikely(stmmac_tx_avail(priv, queue) < nfrags + 1)) {
+		if (!netif_tx_queue_stopped(netdev_get_tx_queue(dev, queue))) {
+			netif_tx_stop_queue(netdev_get_tx_queue(priv->dev,
+								queue));
+			/* This is a hard error, log it. */
+			netdev_err(priv->dev,
+				   "%s: Tx Ring full when queue awake\n",
+				   __func__);
+		}
+		return NETDEV_TX_BUSY;
+	}
+
+	/* Check if VLAN can be inserted by HW */
+	has_vlan = stmmac_vlan_insert(priv, skb, tx_q);
+
+	entry = tx_q->cur_tx;
+	first_entry = entry;
+	WARN_ON(tx_q->tx_skbuff[first_entry]);
+
+	csum_insertion = (skb->ip_summed == CHECKSUM_PARTIAL);
+	/* DWMAC IPs can be synthesized to support tx coe only for a few tx
+	 * queues. In that case, checksum offloading for those queues that don't
+	 * support tx coe needs to fallback to software checksum calculation.
+	 *
+	 * Packets that won't trigger the COE e.g. most DSA-tagged packets will
+	 * also have to be checksummed in software.
+	 */
+	if (csum_insertion &&
+	    (priv->plat->tx_queues_cfg[queue].coe_unsupported ||
+	     !stmmac_has_ip_ethertype(skb))) {
+		if (unlikely(skb_checksum_help(skb)))
+			goto dma_map_err;
+		csum_insertion = !csum_insertion;
+	}
+
+	if (likely(priv->extend_desc))
+		desc = (struct dma_desc *)(tx_q->dma_etx + entry);
+	else if (tx_q->tbs & STMMAC_TBS_AVAIL)
+		desc = &tx_q->dma_entx[entry].basic;
+	else
+		desc = tx_q->dma_tx + entry;
+
+	first = desc;
+
+	if (has_vlan)
+		stmmac_set_desc_vlan(priv, first, STMMAC_VLAN_INSERT);
+
+	enh_desc = priv->plat->enh_desc;
+	/* To program the descriptors according to the size of the frame */
+	if (enh_desc)
+		is_jumbo = stmmac_is_jumbo_frm(priv, skb->len, enh_desc);
+
+	if (unlikely(is_jumbo)) {
+		entry = stmmac_jumbo_frm(priv, tx_q, skb, csum_insertion);
+		if (unlikely(entry < 0) && (entry != -EINVAL))
+			goto dma_map_err;
+	}
+
+	for (i = 0; i < nfrags; i++) {
+		const skb_frag_t *frag = &skb_shinfo(skb)->frags[i];
+		int len = skb_frag_size(frag);
+		bool last_segment = (i == (nfrags - 1));
+
+		entry = STMMAC_GET_ENTRY(entry, priv->dma_conf.dma_tx_size);
+		WARN_ON(tx_q->tx_skbuff[entry]);
+
+		if (likely(priv->extend_desc))
+			desc = (struct dma_desc *)(tx_q->dma_etx + entry);
+		else if (tx_q->tbs & STMMAC_TBS_AVAIL)
+			desc = &tx_q->dma_entx[entry].basic;
+		else
+			desc = tx_q->dma_tx + entry;
+
+		des = skb_frag_dma_map(priv->device, frag, 0, len,
+				       DMA_TO_DEVICE);
+		if (dma_mapping_error(priv->device, des))
+			goto dma_map_err; /* should reuse desc w/o issues */
+
+		tx_q->tx_skbuff_dma[entry].buf = des;
+
+		stmmac_set_desc_addr(priv, desc, des);
+
+		tx_q->tx_skbuff_dma[entry].map_as_page = true;
+		tx_q->tx_skbuff_dma[entry].len = len;
+		tx_q->tx_skbuff_dma[entry].last_segment = last_segment;
+		tx_q->tx_skbuff_dma[entry].buf_type = STMMAC_TXBUF_T_SKB;
+
+		/* Prepare the descriptor and set the own bit too */
+		stmmac_prepare_tx_desc(priv, desc, 0, len, csum_insertion,
+				priv->mode, 1, last_segment, skb->len);
+	}
+
+	/* Only the last descriptor gets to point to the skb. */
+	tx_q->tx_skbuff[entry] = skb;
+	tx_q->tx_skbuff_dma[entry].buf_type = STMMAC_TXBUF_T_SKB;
+
+	/* According to the coalesce parameter the IC bit for the latest
+	 * segment is reset and the timer re-started to clean the tx status.
+	 * This approach takes care about the fragments: desc is the first
+	 * element in case of no SG.
+	 */
+	tx_packets = (entry + 1) - first_tx;
+	tx_q->tx_count_frames += tx_packets;
+
+	if ((skb_shinfo(skb)->tx_flags & SKBTX_HW_TSTAMP) && priv->hwts_tx_en)
+		set_ic = true;
+	else if (!priv->tx_coal_frames[queue])
+		set_ic = false;
+	else if (tx_packets > priv->tx_coal_frames[queue])
+		set_ic = true;
+	else if ((tx_q->tx_count_frames %
+		  priv->tx_coal_frames[queue]) < tx_packets)
+		set_ic = true;
+	else
+		set_ic = false;
+
+	if (set_ic) {
+		if (likely(priv->extend_desc))
+			desc = &tx_q->dma_etx[entry].basic;
+		else if (tx_q->tbs & STMMAC_TBS_AVAIL)
+			desc = &tx_q->dma_entx[entry].basic;
+		else
+			desc = &tx_q->dma_tx[entry];
+
+		tx_q->tx_count_frames = 0;
+		stmmac_set_tx_ic(priv, desc);
+	}
+
+	/* We've used all descriptors we need for this skb, however,
+	 * advance cur_tx so that it references a fresh descriptor.
+	 * ndo_start_xmit will fill this descriptor the next time it's
+	 * called and stmmac_tx_clean may clean up to this descriptor.
+	 */
+	entry = STMMAC_GET_ENTRY(entry, priv->dma_conf.dma_tx_size);
+	tx_q->cur_tx = entry;
+
+	if (netif_msg_pktdata(priv)) {
+		netdev_dbg(priv->dev,
+			   "%s: curr=%d dirty=%d f=%d, e=%d, first=%p, nfrags=%d",
+			   __func__, tx_q->cur_tx, tx_q->dirty_tx, first_entry,
+			   entry, first, nfrags);
+
+		netdev_dbg(priv->dev, ">>> frame to be transmitted: ");
+		print_pkt(skb->data, skb->len);
+	}
+
+	if (unlikely(stmmac_tx_avail(priv, queue) <= (MAX_SKB_FRAGS + 1))) {
+		netif_dbg(priv, hw, priv->dev, "%s: stop transmitted packets\n",
+			  __func__);
+		netif_tx_stop_queue(netdev_get_tx_queue(priv->dev, queue));
+	}
+
+	u64_stats_update_begin(&txq_stats->q_syncp);
+	u64_stats_add(&txq_stats->q.tx_bytes, skb->len);
+	if (set_ic)
+		u64_stats_inc(&txq_stats->q.tx_set_ic_bit);
+	u64_stats_update_end(&txq_stats->q_syncp);
+
+	if (priv->sarc_type)
+		stmmac_set_desc_sarc(priv, first, priv->sarc_type);
+
+	/* Ready to fill the first descriptor and set the OWN bit w/o any
+	 * problems because all the descriptors are actually ready to be
+	 * passed to the DMA engine.
+	 */
+	if (likely(!is_jumbo)) {
+		bool last_segment = (nfrags == 0);
+
+		des = dma_map_single(priv->device, skb->data,
+				     nopaged_len, DMA_TO_DEVICE);
+		if (dma_mapping_error(priv->device, des))
+			goto dma_map_err;
+
+		tx_q->tx_skbuff_dma[first_entry].buf = des;
+		tx_q->tx_skbuff_dma[first_entry].buf_type = STMMAC_TXBUF_T_SKB;
+		tx_q->tx_skbuff_dma[first_entry].map_as_page = false;
+
+		stmmac_set_desc_addr(priv, first, des);
+
+		tx_q->tx_skbuff_dma[first_entry].len = nopaged_len;
+		tx_q->tx_skbuff_dma[first_entry].last_segment = last_segment;
+
+		if (unlikely((skb_shinfo(skb)->tx_flags & SKBTX_HW_TSTAMP) &&
+			     priv->hwts_tx_en)) {
+			/* declare that device is doing timestamping */
+			skb_shinfo(skb)->tx_flags |= SKBTX_IN_PROGRESS;
+			stmmac_enable_tx_timestamp(priv, first);
+		}
+
+		/* Prepare the first descriptor setting the OWN bit too */
+		stmmac_prepare_tx_desc(priv, first, 1, nopaged_len,
+				csum_insertion, priv->mode, 0, last_segment,
+				skb->len);
+	}
+
+	if (tx_q->tbs & STMMAC_TBS_EN) {
+		struct timespec64 ts = ns_to_timespec64(skb->tstamp);
+
+		tbs_desc = &tx_q->dma_entx[first_entry];
+		stmmac_set_desc_tbs(priv, tbs_desc, ts.tv_sec, ts.tv_nsec);
+	}
+
+	stmmac_set_tx_owner(priv, first);
+
+	netdev_tx_sent_queue(netdev_get_tx_queue(dev, queue), skb->len);
+
+	stmmac_enable_dma_transmission(priv, priv->ioaddr, queue);
+	skb_tx_timestamp(skb);
+	stmmac_flush_tx_descriptors(priv, queue);
+	stmmac_tx_timer_arm(priv, queue);
+
+	return NETDEV_TX_OK;
+
+dma_map_err:
+	netdev_err(priv->dev, "Tx DMA map failed\n");
+max_sdu_err:
+	dev_kfree_skb(skb);
+	priv->xstats.tx_dropped++;
+	return NETDEV_TX_OK;
+}
+
+static void stmmac_rx_vlan(struct net_device *dev, struct sk_buff *skb)
+{
+	struct vlan_ethhdr *veth = skb_vlan_eth_hdr(skb);
+	__be16 vlan_proto = veth->h_vlan_proto;
+	u16 vlanid;
+
+	if ((vlan_proto == htons(ETH_P_8021Q) &&
+	     dev->features & NETIF_F_HW_VLAN_CTAG_RX) ||
+	    (vlan_proto == htons(ETH_P_8021AD) &&
+	     dev->features & NETIF_F_HW_VLAN_STAG_RX)) {
+		/* pop the vlan tag */
+		vlanid = ntohs(veth->h_vlan_TCI);
+		memmove(skb->data + VLAN_HLEN, veth, ETH_ALEN * 2);
+		skb_pull(skb, VLAN_HLEN);
+		__vlan_hwaccel_put_tag(skb, vlan_proto, vlanid);
+	}
+}
+
+/**
+ * stmmac_rx_refill - refill used skb preallocated buffers
+ * @priv: driver private structure
+ * @queue: RX queue index
+ * Description : this is to reallocate the skb for the reception process
+ * that is based on zero-copy.
+ */
+static inline void stmmac_rx_refill(struct stmmac_priv *priv, u32 queue)
+{
+	struct stmmac_rx_queue *rx_q = &priv->dma_conf.rx_queue[queue];
+	int dirty = stmmac_rx_dirty(priv, queue);
+	unsigned int entry = rx_q->dirty_rx;
+	gfp_t gfp = (GFP_ATOMIC | __GFP_NOWARN);
+
+	if (priv->dma_cap.host_dma_width <= 32)
+		gfp |= GFP_DMA32;
+
+	while (dirty-- > 0) {
+		struct stmmac_rx_buffer *buf = &rx_q->buf_pool[entry];
+		struct dma_desc *p;
+		bool use_rx_wd;
+
+		if (priv->extend_desc)
+			p = (struct dma_desc *)(rx_q->dma_erx + entry);
+		else
+			p = rx_q->dma_rx + entry;
+
+		if (!buf->page) {
+			buf->page = page_pool_alloc_pages(rx_q->page_pool, gfp);
+			if (!buf->page)
+				break;
+		}
+
+		if (priv->sph && !buf->sec_page) {
+			buf->sec_page = page_pool_alloc_pages(rx_q->page_pool, gfp);
+			if (!buf->sec_page)
+				break;
+
+			buf->sec_addr = page_pool_get_dma_addr(buf->sec_page);
+		}
+
+		buf->addr = page_pool_get_dma_addr(buf->page) + buf->page_offset;
+
+		stmmac_set_desc_addr(priv, p, buf->addr);
+		if (priv->sph)
+			stmmac_set_desc_sec_addr(priv, p, buf->sec_addr, true);
+		else
+			stmmac_set_desc_sec_addr(priv, p, buf->sec_addr, false);
+		stmmac_refill_desc3(priv, rx_q, p);
+
+		rx_q->rx_count_frames++;
+		rx_q->rx_count_frames += priv->rx_coal_frames[queue];
+		if (rx_q->rx_count_frames > priv->rx_coal_frames[queue])
+			rx_q->rx_count_frames = 0;
+
+		use_rx_wd = !priv->rx_coal_frames[queue];
+		use_rx_wd |= rx_q->rx_count_frames > 0;
+		if (!priv->use_riwt)
+			use_rx_wd = false;
+
+		dma_wmb();
+		stmmac_set_rx_owner(priv, p, use_rx_wd);
+
+		entry = STMMAC_GET_ENTRY(entry, priv->dma_conf.dma_rx_size);
+	}
+	rx_q->dirty_rx = entry;
+	rx_q->rx_tail_addr = rx_q->dma_rx_phy +
+			    (rx_q->dirty_rx * sizeof(struct dma_desc));
+	stmmac_set_rx_tail_ptr(priv, priv->ioaddr, rx_q->rx_tail_addr, queue);
+}
+
+static unsigned int stmmac_rx_buf1_len(struct stmmac_priv *priv,
+				       struct dma_desc *p,
+				       int status, unsigned int len)
+{
+	unsigned int plen = 0, hlen = 0;
+	int coe = priv->hw->rx_csum;
+
+	/* Not first descriptor, buffer is always zero */
+	if (priv->sph && len)
+		return 0;
+
+	/* First descriptor, get split header length */
+	stmmac_get_rx_header_len(priv, p, &hlen);
+	if (priv->sph && hlen) {
+		priv->xstats.rx_split_hdr_pkt_n++;
+		return hlen;
+	}
+
+	/* First descriptor, not last descriptor and not split header */
+	if (status & rx_not_ls)
+		return priv->dma_conf.dma_buf_sz;
+
+	plen = stmmac_get_rx_frame_len(priv, p, coe);
+
+	/* First descriptor and last descriptor and not split header */
+	return min_t(unsigned int, priv->dma_conf.dma_buf_sz, plen);
+}
+
+static unsigned int stmmac_rx_buf2_len(struct stmmac_priv *priv,
+				       struct dma_desc *p,
+				       int status, unsigned int len)
+{
+	int coe = priv->hw->rx_csum;
+	unsigned int plen = 0;
+
+	/* Not split header, buffer is not available */
+	if (!priv->sph)
+		return 0;
+
+	/* Not last descriptor */
+	if (status & rx_not_ls)
+		return priv->dma_conf.dma_buf_sz;
+
+	plen = stmmac_get_rx_frame_len(priv, p, coe);
+
+	/* Last descriptor */
+	return plen - len;
+}
+
+static int stmmac_xdp_xmit_xdpf(struct stmmac_priv *priv, int queue,
+				struct xdp_frame *xdpf, bool dma_map)
+{
+	struct stmmac_txq_stats *txq_stats = &priv->xstats.txq_stats[queue];
+	struct stmmac_tx_queue *tx_q = &priv->dma_conf.tx_queue[queue];
+	unsigned int entry = tx_q->cur_tx;
+	struct dma_desc *tx_desc;
+	dma_addr_t dma_addr;
+	bool set_ic;
+
+	if (stmmac_tx_avail(priv, queue) < STMMAC_TX_THRESH(priv))
+		return STMMAC_XDP_CONSUMED;
+
+	if (priv->est && priv->est->enable &&
+	    priv->est->max_sdu[queue] &&
+	    xdpf->len > priv->est->max_sdu[queue]) {
+		priv->xstats.max_sdu_txq_drop[queue]++;
+		return STMMAC_XDP_CONSUMED;
+	}
+
+	if (likely(priv->extend_desc))
+		tx_desc = (struct dma_desc *)(tx_q->dma_etx + entry);
+	else if (tx_q->tbs & STMMAC_TBS_AVAIL)
+		tx_desc = &tx_q->dma_entx[entry].basic;
+	else
+		tx_desc = tx_q->dma_tx + entry;
+
+	if (dma_map) {
+		dma_addr = dma_map_single(priv->device, xdpf->data,
+					  xdpf->len, DMA_TO_DEVICE);
+		if (dma_mapping_error(priv->device, dma_addr))
+			return STMMAC_XDP_CONSUMED;
+
+		tx_q->tx_skbuff_dma[entry].buf_type = STMMAC_TXBUF_T_XDP_NDO;
+	} else {
+		struct page *page = virt_to_page(xdpf->data);
+
+		dma_addr = page_pool_get_dma_addr(page) + sizeof(*xdpf) +
+			   xdpf->headroom;
+		dma_sync_single_for_device(priv->device, dma_addr,
+					   xdpf->len, DMA_BIDIRECTIONAL);
+
+		tx_q->tx_skbuff_dma[entry].buf_type = STMMAC_TXBUF_T_XDP_TX;
+	}
+
+	tx_q->tx_skbuff_dma[entry].buf = dma_addr;
+	tx_q->tx_skbuff_dma[entry].map_as_page = false;
+	tx_q->tx_skbuff_dma[entry].len = xdpf->len;
+	tx_q->tx_skbuff_dma[entry].last_segment = true;
+	tx_q->tx_skbuff_dma[entry].is_jumbo = false;
+
+	tx_q->xdpf[entry] = xdpf;
+
+	stmmac_set_desc_addr(priv, tx_desc, dma_addr);
+
+	stmmac_prepare_tx_desc(priv, tx_desc, 1, xdpf->len,
+			       true, priv->mode, true, true,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			       xdpf->len);
 
 	tx_q->tx_count_frames++;

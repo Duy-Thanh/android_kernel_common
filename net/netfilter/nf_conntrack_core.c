@@ -1121,6 +1121,7 @@ static int nf_ct_resolve_clash_harder(struct sk_buff *skb, u32 repl_idx)
 
 	hlist_nulls_add_head_rcu(&loser_ct->tuplehash[IP_CT_DIR_REPLY].hnnode,
 				 &nf_conntrack_hash[repl_idx]);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* confirmed bit must be set after hlist add, not before:
 	 * loser_ct can still be visible to other cpu due to
 	 * SLAB_TYPESAFE_BY_RCU.
@@ -1317,6 +1318,191 @@ chaintoolong:
 	smp_mb__before_atomic();
 	set_bit(IPS_CONFIRMED_BIT, &ct->status);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	NF_CT_STAT_INC(net, clash_resolve);
+	return NF_ACCEPT;
+}
+
+/**
+ * nf_ct_resolve_clash - attempt to handle clash without packet drop
+ *
+ * @skb: skb that causes the clash
+ * @h: tuplehash of the clashing entry already in table
+ * @reply_hash: hash slot for reply direction
+ *
+ * A conntrack entry can be inserted to the connection tracking table
+ * if there is no existing entry with an identical tuple.
+ *
+ * If there is one, @skb (and the associated, unconfirmed conntrack) has
+ * to be dropped.  In case @skb is retransmitted, next conntrack lookup
+ * will find the already-existing entry.
+ *
+ * The major problem with such packet drop is the extra delay added by
+ * the packet loss -- it will take some time for a retransmit to occur
+ * (or the sender to time out when waiting for a reply).
+ *
+ * This function attempts to handle the situation without packet drop.
+ *
+ * If @skb has no NAT transformation or if the colliding entries are
+ * exactly the same, only the to-be-confirmed conntrack entry is discarded
+ * and @skb is associated with the conntrack entry already in the table.
+ *
+ * Failing that, the new, unconfirmed conntrack is still added to the table
+ * provided that the collision only occurs in the ORIGINAL direction.
+ * The new entry will be added only in the non-clashing REPLY direction,
+ * so packets in the ORIGINAL direction will continue to match the existing
+ * entry.  The new entry will also have a fixed timeout so it expires --
+ * due to the collision, it will only see reply traffic.
+ *
+ * Returns NF_DROP if the clash could not be resolved.
+ */
+static __cold noinline int
+nf_ct_resolve_clash(struct sk_buff *skb, struct nf_conntrack_tuple_hash *h,
+		    u32 reply_hash)
+{
+	/* This is the conntrack entry already in hashes that won race. */
+	struct nf_conn *ct = nf_ct_tuplehash_to_ctrack(h);
+	const struct nf_conntrack_l4proto *l4proto;
+	enum ip_conntrack_info ctinfo;
+	struct nf_conn *loser_ct;
+	struct net *net;
+	int ret;
+
+	loser_ct = nf_ct_get(skb, &ctinfo);
+	net = nf_ct_net(loser_ct);
+
+	l4proto = nf_ct_l4proto_find(nf_ct_protonum(ct));
+	if (!l4proto->allow_clash)
+		goto drop;
+
+	ret = __nf_ct_resolve_clash(skb, h);
+	if (ret == NF_ACCEPT)
+		return ret;
+
+	ret = nf_ct_resolve_clash_harder(skb, reply_hash);
+	if (ret == NF_ACCEPT)
+		return ret;
+
+drop:
+	NF_CT_STAT_INC(net, drop);
+	NF_CT_STAT_INC(net, insert_failed);
+	return NF_DROP;
+}
+
+/* Confirm a connection given skb; places it in hash table */
+int
+__nf_conntrack_confirm(struct sk_buff *skb)
+{
+	unsigned int chainlen = 0, sequence, max_chainlen;
+	const struct nf_conntrack_zone *zone;
+	unsigned int hash, reply_hash;
+	struct nf_conntrack_tuple_hash *h;
+	struct nf_conn *ct;
+	struct nf_conn_help *help;
+	struct hlist_nulls_node *n;
+	enum ip_conntrack_info ctinfo;
+	struct net *net;
+	int ret = NF_DROP;
+
+	ct = nf_ct_get(skb, &ctinfo);
+	net = nf_ct_net(ct);
+
+	/* ipt_REJECT uses nf_conntrack_attach to attach related
+	   ICMP/TCP RST packets in other direction.  Actual packet
+	   which created connection will be IP_CT_NEW or for an
+	   expected connection, IP_CT_RELATED. */
+	if (CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)
+		return NF_ACCEPT;
+
+	zone = nf_ct_zone(ct);
+	local_bh_disable();
+
+	do {
+		sequence = read_seqcount_begin(&nf_conntrack_generation);
+		/* reuse the hash saved before */
+		hash = *(unsigned long *)&ct->tuplehash[IP_CT_DIR_REPLY].hnnode.pprev;
+		hash = scale_hash(hash);
+		reply_hash = hash_conntrack(net,
+					   &ct->tuplehash[IP_CT_DIR_REPLY].tuple,
+					   nf_ct_zone_id(nf_ct_zone(ct), IP_CT_DIR_REPLY));
+	} while (nf_conntrack_double_lock(net, hash, reply_hash, sequence));
+
+	/* We're not in hash table, and we refuse to set up related
+	 * connections for unconfirmed conns.  But packet copies and
+	 * REJECT will give spurious warnings here.
+	 */
+
+	/* Another skb with the same unconfirmed conntrack may
+	 * win the race. This may happen for bridge(br_flood)
+	 * or broadcast/multicast packets do skb_clone with
+	 * unconfirmed conntrack.
+	 */
+	if (unlikely(nf_ct_is_confirmed(ct))) {
+		WARN_ON_ONCE(1);
+		nf_conntrack_double_unlock(hash, reply_hash);
+		local_bh_enable();
+		return NF_DROP;
+	}
+
+	if (!nf_ct_ext_valid_pre(ct->ext)) {
+		NF_CT_STAT_INC(net, insert_failed);
+		goto dying;
+	}
+
+	/* We have to check the DYING flag after unlink to prevent
+	 * a race against nf_ct_get_next_corpse() possibly called from
+	 * user context, else we insert an already 'dead' hash, blocking
+	 * further use of that particular connection -JM.
+	 */
+	ct->status |= IPS_CONFIRMED;
+
+	if (unlikely(nf_ct_is_dying(ct))) {
+		NF_CT_STAT_INC(net, insert_failed);
+		goto dying;
+	}
+
+	max_chainlen = MIN_CHAINLEN + get_random_u32_below(MAX_CHAINLEN);
+	/* See if there's one in the list already, including reverse:
+	   NAT could have grabbed it without realizing, since we're
+	   not in the hash.  If there is, we lost race. */
+	hlist_nulls_for_each_entry(h, n, &nf_conntrack_hash[hash], hnnode) {
+		if (nf_ct_key_equal(h, &ct->tuplehash[IP_CT_DIR_ORIGINAL].tuple,
+				    zone, net))
+			goto out;
+		if (chainlen++ > max_chainlen)
+			goto chaintoolong;
+	}
+
+	chainlen = 0;
+	hlist_nulls_for_each_entry(h, n, &nf_conntrack_hash[reply_hash], hnnode) {
+		if (nf_ct_key_equal(h, &ct->tuplehash[IP_CT_DIR_REPLY].tuple,
+				    zone, net))
+			goto out;
+		if (chainlen++ > max_chainlen) {
+chaintoolong:
+			NF_CT_STAT_INC(net, chaintoolong);
+			NF_CT_STAT_INC(net, insert_failed);
+			ret = NF_DROP;
+			goto dying;
+		}
+	}
+
+	/* Timer relative to confirmation time, not original
+	   setting time, otherwise we'd get timer wrap in
+	   weird delay cases. */
+	ct->timeout += nfct_time_stamp;
+
+	__nf_conntrack_insert_prepare(ct);
+
+	/* Since the lookup is lockless, hash insertion must be done after
+	 * starting the timer and setting the CONFIRMED bit. The RCU barriers
+	 * guarantee that no other CPU can find the conntrack before the above
+	 * stores are visible.
+	 */
+	__nf_conntrack_hash_insert(ct, hash, reply_hash);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	nf_conntrack_double_unlock(hash, reply_hash);
 	local_bh_enable();
 

@@ -756,6 +756,7 @@ static int hi556_test_pattern(struct hi556 *hi556, u32 pattern)
 	int ret;
 	u32 val;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ret = hi556_read_reg(hi556, HI556_REG_ISP,
 			     HI556_REG_VALUE_08BIT, &val);
 	if (ret)
@@ -1329,6 +1330,575 @@ static int hi556_resume(struct device *dev)
 		gpiod_set_value_cansleep(hi556->reset_gpio, 0);
 	}
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (pattern) {
+		ret = hi556_read_reg(hi556, HI556_REG_ISP,
+				     HI556_REG_VALUE_08BIT, &val);
+		if (ret)
+			return ret;
+
+		ret = hi556_write_reg(hi556, HI556_REG_ISP,
+				      HI556_REG_VALUE_08BIT,
+				      val | HI556_REG_ISP_TPG_EN);
+		if (ret)
+			return ret;
+	}
+
+	return hi556_write_reg(hi556, HI556_REG_TEST_PATTERN,
+			       HI556_REG_VALUE_08BIT, pattern);
+}
+
+static int hi556_set_ctrl(struct v4l2_ctrl *ctrl)
+{
+	struct hi556 *hi556 = container_of(ctrl->handler,
+					     struct hi556, ctrl_handler);
+	struct i2c_client *client = v4l2_get_subdevdata(&hi556->sd);
+	s64 exposure_max;
+	int ret = 0;
+
+	/* Propagate change of current control to all related controls */
+	if (ctrl->id == V4L2_CID_VBLANK) {
+		/* Update max exposure while meeting expected vblanking */
+		exposure_max = hi556->cur_mode->height + ctrl->val -
+			       HI556_EXPOSURE_MAX_MARGIN;
+		__v4l2_ctrl_modify_range(hi556->exposure,
+					 hi556->exposure->minimum,
+					 exposure_max, hi556->exposure->step,
+					 exposure_max);
+	}
+
+	/* V4L2 controls values will be applied only when power is already up */
+	if (!pm_runtime_get_if_in_use(&client->dev))
+		return 0;
+
+	switch (ctrl->id) {
+	case V4L2_CID_ANALOGUE_GAIN:
+		ret = hi556_write_reg(hi556, HI556_REG_ANALOG_GAIN,
+				      HI556_REG_VALUE_16BIT, ctrl->val);
+		break;
+
+	case V4L2_CID_DIGITAL_GAIN:
+		ret = hi556_update_digital_gain(hi556, ctrl->val);
+		break;
+
+	case V4L2_CID_EXPOSURE:
+		ret = hi556_write_reg(hi556, HI556_REG_EXPOSURE,
+				      HI556_REG_VALUE_16BIT, ctrl->val);
+		break;
+
+	case V4L2_CID_VBLANK:
+		/* Update FLL that meets expected vertical blanking */
+		ret = hi556_write_reg(hi556, HI556_REG_FLL,
+				      HI556_REG_VALUE_16BIT,
+				      hi556->cur_mode->height + ctrl->val);
+		break;
+
+	case V4L2_CID_TEST_PATTERN:
+		ret = hi556_test_pattern(hi556, ctrl->val);
+		break;
+
+	default:
+		ret = -EINVAL;
+		break;
+	}
+
+	pm_runtime_put(&client->dev);
+
+	return ret;
+}
+
+static const struct v4l2_ctrl_ops hi556_ctrl_ops = {
+	.s_ctrl = hi556_set_ctrl,
+};
+
+static int hi556_init_controls(struct hi556 *hi556)
+{
+	struct v4l2_ctrl_handler *ctrl_hdlr;
+	s64 exposure_max, h_blank;
+	int ret;
+
+	ctrl_hdlr = &hi556->ctrl_handler;
+	ret = v4l2_ctrl_handler_init(ctrl_hdlr, 8);
+	if (ret)
+		return ret;
+
+	ctrl_hdlr->lock = &hi556->mutex;
+	hi556->link_freq = v4l2_ctrl_new_int_menu(ctrl_hdlr, &hi556_ctrl_ops,
+						  V4L2_CID_LINK_FREQ,
+					ARRAY_SIZE(link_freq_menu_items) - 1,
+					0, link_freq_menu_items);
+	if (hi556->link_freq)
+		hi556->link_freq->flags |= V4L2_CTRL_FLAG_READ_ONLY;
+
+	hi556->pixel_rate = v4l2_ctrl_new_std
+			    (ctrl_hdlr, &hi556_ctrl_ops,
+			     V4L2_CID_PIXEL_RATE, 0,
+			     to_pixel_rate(HI556_LINK_FREQ_437MHZ_INDEX),
+			     1,
+			     to_pixel_rate(HI556_LINK_FREQ_437MHZ_INDEX));
+	hi556->vblank = v4l2_ctrl_new_std(ctrl_hdlr, &hi556_ctrl_ops,
+					  V4L2_CID_VBLANK,
+					  hi556->cur_mode->fll_min -
+					  hi556->cur_mode->height,
+					  HI556_FLL_MAX -
+					  hi556->cur_mode->height, 1,
+					  hi556->cur_mode->fll_def -
+					  hi556->cur_mode->height);
+
+	h_blank = hi556->cur_mode->llp - hi556->cur_mode->width;
+
+	hi556->hblank = v4l2_ctrl_new_std(ctrl_hdlr, &hi556_ctrl_ops,
+					  V4L2_CID_HBLANK, h_blank, h_blank, 1,
+					  h_blank);
+	if (hi556->hblank)
+		hi556->hblank->flags |= V4L2_CTRL_FLAG_READ_ONLY;
+
+	v4l2_ctrl_new_std(ctrl_hdlr, &hi556_ctrl_ops, V4L2_CID_ANALOGUE_GAIN,
+			  HI556_ANAL_GAIN_MIN, HI556_ANAL_GAIN_MAX,
+			  HI556_ANAL_GAIN_STEP, HI556_ANAL_GAIN_MIN);
+	v4l2_ctrl_new_std(ctrl_hdlr, &hi556_ctrl_ops, V4L2_CID_DIGITAL_GAIN,
+			  HI556_DGTL_GAIN_MIN, HI556_DGTL_GAIN_MAX,
+			  HI556_DGTL_GAIN_STEP, HI556_DGTL_GAIN_DEFAULT);
+	exposure_max = hi556->cur_mode->fll_def - HI556_EXPOSURE_MAX_MARGIN;
+	hi556->exposure = v4l2_ctrl_new_std(ctrl_hdlr, &hi556_ctrl_ops,
+					    V4L2_CID_EXPOSURE,
+					    HI556_EXPOSURE_MIN, exposure_max,
+					    HI556_EXPOSURE_STEP,
+					    exposure_max);
+	v4l2_ctrl_new_std_menu_items(ctrl_hdlr, &hi556_ctrl_ops,
+				     V4L2_CID_TEST_PATTERN,
+				     ARRAY_SIZE(hi556_test_pattern_menu) - 1,
+				     0, 0, hi556_test_pattern_menu);
+	if (ctrl_hdlr->error)
+		return ctrl_hdlr->error;
+
+	hi556->sd.ctrl_handler = ctrl_hdlr;
+
+	return 0;
+}
+
+static void hi556_assign_pad_format(const struct hi556_mode *mode,
+				    struct v4l2_mbus_framefmt *fmt)
+{
+	fmt->width = mode->width;
+	fmt->height = mode->height;
+	fmt->code = MEDIA_BUS_FMT_SGRBG10_1X10;
+	fmt->field = V4L2_FIELD_NONE;
+}
+
+static int hi556_identify_module(struct hi556 *hi556)
+{
+	struct i2c_client *client = v4l2_get_subdevdata(&hi556->sd);
+	int ret;
+	u32 val;
+
+	if (hi556->identified)
+		return 0;
+
+	ret = hi556_read_reg(hi556, HI556_REG_CHIP_ID,
+			     HI556_REG_VALUE_16BIT, &val);
+	if (ret)
+		return ret;
+
+	if (val != HI556_CHIP_ID) {
+		dev_err(&client->dev, "chip id mismatch: %x!=%x",
+			HI556_CHIP_ID, val);
+		return -ENXIO;
+	}
+
+	hi556->identified = true;
+
+	return 0;
+}
+
+static const struct v4l2_rect *
+__hi556_get_pad_crop(struct hi556 *hi556,
+		     struct v4l2_subdev_state *sd_state,
+		     unsigned int pad, enum v4l2_subdev_format_whence which)
+{
+	switch (which) {
+	case V4L2_SUBDEV_FORMAT_TRY:
+		return v4l2_subdev_state_get_crop(sd_state, pad);
+	case V4L2_SUBDEV_FORMAT_ACTIVE:
+		return &hi556->cur_mode->crop;
+	}
+
+	return NULL;
+}
+
+static int hi556_get_selection(struct v4l2_subdev *sd,
+			       struct v4l2_subdev_state *sd_state,
+			       struct v4l2_subdev_selection *sel)
+{
+	switch (sel->target) {
+	case V4L2_SEL_TGT_CROP: {
+		struct hi556 *hi556 = to_hi556(sd);
+
+		mutex_lock(&hi556->mutex);
+		sel->r = *__hi556_get_pad_crop(hi556, sd_state, sel->pad,
+						sel->which);
+		mutex_unlock(&hi556->mutex);
+
+		return 0;
+	}
+
+	case V4L2_SEL_TGT_NATIVE_SIZE:
+		sel->r.top = 0;
+		sel->r.left = 0;
+		sel->r.width = HI556_NATIVE_WIDTH;
+		sel->r.height = HI556_NATIVE_HEIGHT;
+
+		return 0;
+
+	case V4L2_SEL_TGT_CROP_DEFAULT:
+	case V4L2_SEL_TGT_CROP_BOUNDS:
+		sel->r.top = HI556_PIXEL_ARRAY_TOP;
+		sel->r.left = HI556_PIXEL_ARRAY_LEFT;
+		sel->r.width = HI556_PIXEL_ARRAY_WIDTH;
+		sel->r.height = HI556_PIXEL_ARRAY_HEIGHT;
+
+		return 0;
+	}
+
+	return -EINVAL;
+}
+
+static int hi556_start_streaming(struct hi556 *hi556)
+{
+	struct i2c_client *client = v4l2_get_subdevdata(&hi556->sd);
+	const struct hi556_reg_list *reg_list;
+	int link_freq_index, ret;
+
+	ret = hi556_identify_module(hi556);
+	if (ret)
+		return ret;
+
+	link_freq_index = hi556->cur_mode->link_freq_index;
+	reg_list = &link_freq_configs[link_freq_index].reg_list;
+	ret = hi556_write_reg_list(hi556, reg_list);
+	if (ret) {
+		dev_err(&client->dev, "failed to set plls");
+		return ret;
+	}
+
+	reg_list = &hi556->cur_mode->reg_list;
+	ret = hi556_write_reg_list(hi556, reg_list);
+	if (ret) {
+		dev_err(&client->dev, "failed to set mode");
+		return ret;
+	}
+
+	ret = __v4l2_ctrl_handler_setup(hi556->sd.ctrl_handler);
+	if (ret)
+		return ret;
+
+	ret = hi556_write_reg(hi556, HI556_REG_MODE_SELECT,
+			      HI556_REG_VALUE_16BIT, HI556_MODE_STREAMING);
+
+	if (ret) {
+		dev_err(&client->dev, "failed to set stream");
+		return ret;
+	}
+
+	return 0;
+}
+
+static void hi556_stop_streaming(struct hi556 *hi556)
+{
+	struct i2c_client *client = v4l2_get_subdevdata(&hi556->sd);
+
+	if (hi556_write_reg(hi556, HI556_REG_MODE_SELECT,
+			    HI556_REG_VALUE_16BIT, HI556_MODE_STANDBY))
+		dev_err(&client->dev, "failed to set stream");
+}
+
+static int hi556_set_stream(struct v4l2_subdev *sd, int enable)
+{
+	struct hi556 *hi556 = to_hi556(sd);
+	struct i2c_client *client = v4l2_get_subdevdata(sd);
+	int ret = 0;
+
+	mutex_lock(&hi556->mutex);
+	if (enable) {
+		ret = pm_runtime_resume_and_get(&client->dev);
+		if (ret < 0) {
+			mutex_unlock(&hi556->mutex);
+			return ret;
+		}
+
+		ret = hi556_start_streaming(hi556);
+		if (ret) {
+			enable = 0;
+			hi556_stop_streaming(hi556);
+			pm_runtime_put(&client->dev);
+		}
+	} else {
+		hi556_stop_streaming(hi556);
+		pm_runtime_put(&client->dev);
+	}
+
+	mutex_unlock(&hi556->mutex);
+
+	return ret;
+}
+
+static int hi556_set_format(struct v4l2_subdev *sd,
+			    struct v4l2_subdev_state *sd_state,
+			    struct v4l2_subdev_format *fmt)
+{
+	struct hi556 *hi556 = to_hi556(sd);
+	const struct hi556_mode *mode;
+	s32 vblank_def, h_blank;
+
+	mode = v4l2_find_nearest_size(supported_modes,
+				      ARRAY_SIZE(supported_modes), width,
+				      height, fmt->format.width,
+				      fmt->format.height);
+
+	mutex_lock(&hi556->mutex);
+	hi556_assign_pad_format(mode, &fmt->format);
+	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
+		*v4l2_subdev_state_get_format(sd_state, fmt->pad) = fmt->format;
+	} else {
+		hi556->cur_mode = mode;
+		__v4l2_ctrl_s_ctrl(hi556->link_freq, mode->link_freq_index);
+		__v4l2_ctrl_s_ctrl_int64(hi556->pixel_rate,
+					 to_pixel_rate(mode->link_freq_index));
+
+		/* Update limits and set FPS to default */
+		vblank_def = mode->fll_def - mode->height;
+		__v4l2_ctrl_modify_range(hi556->vblank,
+					 mode->fll_min - mode->height,
+					 HI556_FLL_MAX - mode->height, 1,
+					 vblank_def);
+		__v4l2_ctrl_s_ctrl(hi556->vblank, vblank_def);
+
+		h_blank = hi556->cur_mode->llp - hi556->cur_mode->width;
+
+		__v4l2_ctrl_modify_range(hi556->hblank, h_blank, h_blank, 1,
+					 h_blank);
+	}
+
+	mutex_unlock(&hi556->mutex);
+
+	return 0;
+}
+
+static int hi556_get_format(struct v4l2_subdev *sd,
+			    struct v4l2_subdev_state *sd_state,
+			    struct v4l2_subdev_format *fmt)
+{
+	struct hi556 *hi556 = to_hi556(sd);
+
+	mutex_lock(&hi556->mutex);
+	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY)
+		fmt->format = *v4l2_subdev_state_get_format(sd_state,
+							    fmt->pad);
+	else
+		hi556_assign_pad_format(hi556->cur_mode, &fmt->format);
+
+	mutex_unlock(&hi556->mutex);
+
+	return 0;
+}
+
+static int hi556_enum_mbus_code(struct v4l2_subdev *sd,
+				struct v4l2_subdev_state *sd_state,
+				struct v4l2_subdev_mbus_code_enum *code)
+{
+	if (code->index > 0)
+		return -EINVAL;
+
+	code->code = MEDIA_BUS_FMT_SGRBG10_1X10;
+
+	return 0;
+}
+
+static int hi556_enum_frame_size(struct v4l2_subdev *sd,
+				 struct v4l2_subdev_state *sd_state,
+				 struct v4l2_subdev_frame_size_enum *fse)
+{
+	if (fse->index >= ARRAY_SIZE(supported_modes))
+		return -EINVAL;
+
+	if (fse->code != MEDIA_BUS_FMT_SGRBG10_1X10)
+		return -EINVAL;
+
+	fse->min_width = supported_modes[fse->index].width;
+	fse->max_width = fse->min_width;
+	fse->min_height = supported_modes[fse->index].height;
+	fse->max_height = fse->min_height;
+
+	return 0;
+}
+
+static int hi556_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
+{
+	struct hi556 *hi556 = to_hi556(sd);
+	struct v4l2_rect *try_crop;
+
+	mutex_lock(&hi556->mutex);
+	hi556_assign_pad_format(&supported_modes[0],
+				v4l2_subdev_state_get_format(fh->state, 0));
+
+	/* Initialize try_crop rectangle. */
+	try_crop = v4l2_subdev_state_get_crop(fh->state, 0);
+	try_crop->top = HI556_PIXEL_ARRAY_TOP;
+	try_crop->left = HI556_PIXEL_ARRAY_LEFT;
+	try_crop->width = HI556_PIXEL_ARRAY_WIDTH;
+	try_crop->height = HI556_PIXEL_ARRAY_HEIGHT;
+
+	mutex_unlock(&hi556->mutex);
+
+	return 0;
+}
+
+static const struct v4l2_subdev_video_ops hi556_video_ops = {
+	.s_stream = hi556_set_stream,
+};
+
+static const struct v4l2_subdev_pad_ops hi556_pad_ops = {
+	.set_fmt = hi556_set_format,
+	.get_fmt = hi556_get_format,
+	.get_selection = hi556_get_selection,
+	.enum_mbus_code = hi556_enum_mbus_code,
+	.enum_frame_size = hi556_enum_frame_size,
+};
+
+static const struct v4l2_subdev_ops hi556_subdev_ops = {
+	.video = &hi556_video_ops,
+	.pad = &hi556_pad_ops,
+};
+
+static const struct media_entity_operations hi556_subdev_entity_ops = {
+	.link_validate = v4l2_subdev_link_validate,
+};
+
+static const struct v4l2_subdev_internal_ops hi556_internal_ops = {
+	.open = hi556_open,
+};
+
+static int hi556_check_hwcfg(struct device *dev)
+{
+	struct fwnode_handle *ep;
+	struct fwnode_handle *fwnode = dev_fwnode(dev);
+	struct v4l2_fwnode_endpoint bus_cfg = {
+		.bus_type = V4L2_MBUS_CSI2_DPHY
+	};
+	u32 mclk;
+	int ret = 0;
+	unsigned int i, j;
+
+	/*
+	 * Sometimes the fwnode graph is initialized by the bridge driver,
+	 * wait for this.
+	 */
+	ep = fwnode_graph_get_next_endpoint(fwnode, NULL);
+	if (!ep)
+		return -EPROBE_DEFER;
+
+	ret = v4l2_fwnode_endpoint_alloc_parse(ep, &bus_cfg);
+	fwnode_handle_put(ep);
+	if (ret)
+		return ret;
+
+	ret = fwnode_property_read_u32(fwnode, "clock-frequency", &mclk);
+	if (ret) {
+		dev_err(dev, "can't get clock frequency");
+		goto check_hwcfg_error;
+	}
+
+	if (mclk != HI556_MCLK) {
+		dev_err(dev, "external clock %d is not supported", mclk);
+		ret = -EINVAL;
+		goto check_hwcfg_error;
+	}
+
+	if (bus_cfg.bus.mipi_csi2.num_data_lanes != 2) {
+		dev_err(dev, "number of CSI2 data lanes %d is not supported",
+			bus_cfg.bus.mipi_csi2.num_data_lanes);
+		ret = -EINVAL;
+		goto check_hwcfg_error;
+	}
+
+	if (!bus_cfg.nr_of_link_frequencies) {
+		dev_err(dev, "no link frequencies defined");
+		ret = -EINVAL;
+		goto check_hwcfg_error;
+	}
+
+	for (i = 0; i < ARRAY_SIZE(link_freq_menu_items); i++) {
+		for (j = 0; j < bus_cfg.nr_of_link_frequencies; j++) {
+			if (link_freq_menu_items[i] ==
+				bus_cfg.link_frequencies[j])
+				break;
+		}
+
+		if (j == bus_cfg.nr_of_link_frequencies) {
+			dev_err(dev, "no link frequency %lld supported",
+				link_freq_menu_items[i]);
+			ret = -EINVAL;
+			goto check_hwcfg_error;
+		}
+	}
+
+check_hwcfg_error:
+	v4l2_fwnode_endpoint_free(&bus_cfg);
+
+	return ret;
+}
+
+static void hi556_remove(struct i2c_client *client)
+{
+	struct v4l2_subdev *sd = i2c_get_clientdata(client);
+	struct hi556 *hi556 = to_hi556(sd);
+
+	v4l2_async_unregister_subdev(sd);
+	media_entity_cleanup(&sd->entity);
+	v4l2_ctrl_handler_free(sd->ctrl_handler);
+	pm_runtime_disable(&client->dev);
+	mutex_destroy(&hi556->mutex);
+}
+
+static int hi556_suspend(struct device *dev)
+{
+	struct v4l2_subdev *sd = dev_get_drvdata(dev);
+	struct hi556 *hi556 = to_hi556(sd);
+	int ret;
+
+	gpiod_set_value_cansleep(hi556->reset_gpio, 1);
+
+	ret = regulator_disable(hi556->avdd);
+	if (ret) {
+		dev_err(dev, "failed to disable avdd: %d\n", ret);
+		gpiod_set_value_cansleep(hi556->reset_gpio, 0);
+		return ret;
+	}
+
+	clk_disable_unprepare(hi556->clk);
+	return 0;
+}
+
+static int hi556_resume(struct device *dev)
+{
+	struct v4l2_subdev *sd = dev_get_drvdata(dev);
+	struct hi556 *hi556 = to_hi556(sd);
+	int ret;
+
+	ret = clk_prepare_enable(hi556->clk);
+	if (ret)
+		return ret;
+
+	ret = regulator_enable(hi556->avdd);
+	if (ret) {
+		dev_err(dev, "failed to enable avdd: %d\n", ret);
+		clk_disable_unprepare(hi556->clk);
+		return ret;
+	}
+
+	gpiod_set_value_cansleep(hi556->reset_gpio, 0);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	usleep_range(5000, 5500);
 	return 0;
 }

@@ -628,6 +628,7 @@ struct usb3_lpm_parameters {
  *	FIXME -- complete doc
  * @authenticated: Crypto authentication passed
  * @tunnel_mode: Connection native or tunneled over USB4
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @usb4_link: device link to the USB4 host interface
  * @lpm_capable: device supports LPM
  * @lpm_devinit_allow: Allow USB3 device initiated LPM, exit latency is in range
@@ -874,6 +875,237 @@ static inline int usb_offload_put(struct usb_device *udev)
 { return 0; }
 static inline bool usb_offload_check(struct usb_device *udev)
 { return false; }
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * @lpm_capable: device supports LPM
+ * @lpm_devinit_allow: Allow USB3 device initiated LPM, exit latency is in range
+ * @usb2_hw_lpm_capable: device can perform USB2 hardware LPM
+ * @usb2_hw_lpm_besl_capable: device can perform USB2 hardware BESL LPM
+ * @usb2_hw_lpm_enabled: USB2 hardware LPM is enabled
+ * @usb2_hw_lpm_allowed: Userspace allows USB 2.0 LPM to be enabled
+ * @usb3_lpm_u1_enabled: USB3 hardware U1 LPM enabled
+ * @usb3_lpm_u2_enabled: USB3 hardware U2 LPM enabled
+ * @string_langid: language ID for strings
+ * @product: iProduct string, if present (static)
+ * @manufacturer: iManufacturer string, if present (static)
+ * @serial: iSerialNumber string, if present (static)
+ * @filelist: usbfs files that are open to this device
+ * @maxchild: number of ports if hub
+ * @quirks: quirks of the whole device
+ * @urbnum: number of URBs submitted for the whole device
+ * @active_duration: total time device is not suspended
+ * @connect_time: time device was first connected
+ * @do_remote_wakeup:  remote wakeup should be enabled
+ * @reset_resume: needs reset instead of resume
+ * @port_is_suspended: the upstream port is suspended (L2 or U3)
+ * @slot_id: Slot ID assigned by xHCI
+ * @l1_params: best effor service latency for USB2 L1 LPM state, and L1 timeout.
+ * @u1_params: exit latencies for USB3 U1 LPM state, and hub-initiated timeout.
+ * @u2_params: exit latencies for USB3 U2 LPM state, and hub-initiated timeout.
+ * @lpm_disable_count: Ref count used by usb_disable_lpm() and usb_enable_lpm()
+ *	to keep track of the number of functions that require USB 3.0 Link Power
+ *	Management to be disabled for this usb_device.  This count should only
+ *	be manipulated by those functions, with the bandwidth_mutex is held.
+ * @hub_delay: cached value consisting of:
+ *	parent->hub_delay + wHubDelay + tTPTransmissionDelay (40ns)
+ *	Will be used as wValue for SetIsochDelay requests.
+ * @use_generic_driver: ask driver core to reprobe using the generic driver.
+ *
+ * Notes:
+ * Usbcore drivers should not set usbdev->state directly.  Instead use
+ * usb_set_device_state().
+ */
+struct usb_device {
+	int		devnum;
+	char		devpath[16];
+	u32		route;
+	enum usb_device_state	state;
+	enum usb_device_speed	speed;
+	unsigned int		rx_lanes;
+	unsigned int		tx_lanes;
+	enum usb_ssp_rate	ssp_rate;
+
+	struct usb_tt	*tt;
+	int		ttport;
+
+	unsigned int toggle[2];
+
+	struct usb_device *parent;
+	struct usb_bus *bus;
+	struct usb_host_endpoint ep0;
+
+	struct device dev;
+
+	struct usb_device_descriptor descriptor;
+	struct usb_host_bos *bos;
+	struct usb_host_config *config;
+
+	struct usb_host_config *actconfig;
+	struct usb_host_endpoint *ep_in[16];
+	struct usb_host_endpoint *ep_out[16];
+
+	char **rawdescriptors;
+
+	unsigned short bus_mA;
+	u8 portnum;
+	u8 level;
+	u8 devaddr;
+
+	unsigned can_submit:1;
+	unsigned persist_enabled:1;
+	unsigned reset_in_progress:1;
+	unsigned have_langid:1;
+	unsigned authorized:1;
+	unsigned authenticated:1;
+	unsigned lpm_capable:1;
+	unsigned lpm_devinit_allow:1;
+	unsigned usb2_hw_lpm_capable:1;
+	unsigned usb2_hw_lpm_besl_capable:1;
+	unsigned usb2_hw_lpm_enabled:1;
+	unsigned usb2_hw_lpm_allowed:1;
+	unsigned usb3_lpm_u1_enabled:1;
+	unsigned usb3_lpm_u2_enabled:1;
+	int string_langid;
+
+	/* static strings from the device */
+	char *product;
+	char *manufacturer;
+	char *serial;
+
+	struct list_head filelist;
+
+	int maxchild;
+
+	u32 quirks;
+	atomic_t urbnum;
+
+	unsigned long active_duration;
+
+	unsigned long connect_time;
+
+	unsigned do_remote_wakeup:1;
+	unsigned reset_resume:1;
+	unsigned port_is_suspended:1;
+	enum usb_link_tunnel_mode tunnel_mode;
+
+	int slot_id;
+	struct usb2_lpm_parameters l1_params;
+	struct usb3_lpm_parameters u1_params;
+	struct usb3_lpm_parameters u2_params;
+	unsigned lpm_disable_count;
+
+	u16 hub_delay;
+	unsigned use_generic_driver:1;
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+};
+
+#define to_usb_device(__dev)	container_of_const(__dev, struct usb_device, dev)
+
+static inline struct usb_device *__intf_to_usbdev(struct usb_interface *intf)
+{
+	return to_usb_device(intf->dev.parent);
+}
+static inline const struct usb_device *__intf_to_usbdev_const(const struct usb_interface *intf)
+{
+	return to_usb_device((const struct device *)intf->dev.parent);
+}
+
+#define interface_to_usbdev(intf)					\
+	_Generic((intf),						\
+		 const struct usb_interface *: __intf_to_usbdev_const,	\
+		 struct usb_interface *: __intf_to_usbdev)(intf)
+
+extern struct usb_device *usb_get_dev(struct usb_device *dev);
+extern void usb_put_dev(struct usb_device *dev);
+extern struct usb_device *usb_hub_find_child(struct usb_device *hdev,
+	int port1);
+
+/**
+ * usb_hub_for_each_child - iterate over all child devices on the hub
+ * @hdev:  USB device belonging to the usb hub
+ * @port1: portnum associated with child device
+ * @child: child device pointer
+ */
+#define usb_hub_for_each_child(hdev, port1, child) \
+	for (port1 = 1,	child =	usb_hub_find_child(hdev, port1); \
+			port1 <= hdev->maxchild; \
+			child = usb_hub_find_child(hdev, ++port1)) \
+		if (!child) continue; else
+
+/* USB device locking */
+#define usb_lock_device(udev)			device_lock(&(udev)->dev)
+#define usb_unlock_device(udev)			device_unlock(&(udev)->dev)
+#define usb_lock_device_interruptible(udev)	device_lock_interruptible(&(udev)->dev)
+#define usb_trylock_device(udev)		device_trylock(&(udev)->dev)
+extern int usb_lock_device_for_reset(struct usb_device *udev,
+				     const struct usb_interface *iface);
+
+/* USB port reset for device reinitialization */
+extern int usb_reset_device(struct usb_device *dev);
+extern void usb_queue_reset_device(struct usb_interface *dev);
+
+extern struct device *usb_intf_get_dma_device(struct usb_interface *intf);
+
+#ifdef CONFIG_ACPI
+extern int usb_acpi_set_power_state(struct usb_device *hdev, int index,
+	bool enable);
+extern bool usb_acpi_power_manageable(struct usb_device *hdev, int index);
+extern int usb_acpi_port_lpm_incapable(struct usb_device *hdev, int index);
+#else
+static inline int usb_acpi_set_power_state(struct usb_device *hdev, int index,
+	bool enable) { return 0; }
+static inline bool usb_acpi_power_manageable(struct usb_device *hdev, int index)
+	{ return true; }
+static inline int usb_acpi_port_lpm_incapable(struct usb_device *hdev, int index)
+	{ return 0; }
+#endif
+
+/* USB autosuspend and autoresume */
+#ifdef CONFIG_PM
+extern void usb_enable_autosuspend(struct usb_device *udev);
+extern void usb_disable_autosuspend(struct usb_device *udev);
+
+extern int usb_autopm_get_interface(struct usb_interface *intf);
+extern void usb_autopm_put_interface(struct usb_interface *intf);
+extern int usb_autopm_get_interface_async(struct usb_interface *intf);
+extern void usb_autopm_put_interface_async(struct usb_interface *intf);
+extern void usb_autopm_get_interface_no_resume(struct usb_interface *intf);
+extern void usb_autopm_put_interface_no_suspend(struct usb_interface *intf);
+
+static inline void usb_mark_last_busy(struct usb_device *udev)
+{
+	pm_runtime_mark_last_busy(&udev->dev);
+}
+
+#else
+
+static inline int usb_enable_autosuspend(struct usb_device *udev)
+{ return 0; }
+static inline int usb_disable_autosuspend(struct usb_device *udev)
+{ return 0; }
+
+static inline int usb_autopm_get_interface(struct usb_interface *intf)
+{ return 0; }
+static inline int usb_autopm_get_interface_async(struct usb_interface *intf)
+{ return 0; }
+
+static inline void usb_autopm_put_interface(struct usb_interface *intf)
+{ }
+static inline void usb_autopm_put_interface_async(struct usb_interface *intf)
+{ }
+static inline void usb_autopm_get_interface_no_resume(
+		struct usb_interface *intf)
+{ }
+static inline void usb_autopm_put_interface_no_suspend(
+		struct usb_interface *intf)
+{ }
+static inline void usb_mark_last_busy(struct usb_device *udev)
+{ }
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #endif
 
 extern int usb_disable_lpm(struct usb_device *udev);

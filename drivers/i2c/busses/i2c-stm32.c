@@ -102,6 +102,7 @@ int stm32_i2c_prep_dma_xfer(struct device *dev, struct stm32_i2c_dma *dma,
 			    void *dma_async_param)
 {
 	struct dma_async_tx_descriptor *txdesc;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int ret;
 
 	if (rd_wr) {
@@ -149,6 +150,58 @@ int stm32_i2c_prep_dma_xfer(struct device *dev, struct stm32_i2c_dma *dma,
 
 err:
 	dma_unmap_single(dev, dma->dma_buf, dma->dma_len,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct device *chan_dev;
+	int ret;
+
+	if (rd_wr) {
+		dma->chan_using = dma->chan_rx;
+		dma->dma_transfer_dir = DMA_DEV_TO_MEM;
+		dma->dma_data_dir = DMA_FROM_DEVICE;
+	} else {
+		dma->chan_using = dma->chan_tx;
+		dma->dma_transfer_dir = DMA_MEM_TO_DEV;
+		dma->dma_data_dir = DMA_TO_DEVICE;
+	}
+
+	dma->dma_len = len;
+	chan_dev = dma->chan_using->device->dev;
+
+	dma->dma_buf = dma_map_single(chan_dev, buf, dma->dma_len,
+				      dma->dma_data_dir);
+	if (dma_mapping_error(chan_dev, dma->dma_buf)) {
+		dev_err(dev, "DMA mapping failed\n");
+		return -EINVAL;
+	}
+
+	txdesc = dmaengine_prep_slave_single(dma->chan_using, dma->dma_buf,
+					     dma->dma_len,
+					     dma->dma_transfer_dir,
+					     DMA_PREP_INTERRUPT);
+	if (!txdesc) {
+		dev_err(dev, "Not able to get desc for DMA xfer\n");
+		ret = -EINVAL;
+		goto err;
+	}
+
+	reinit_completion(&dma->dma_complete);
+
+	txdesc->callback = callback;
+	txdesc->callback_param = dma_async_param;
+	ret = dma_submit_error(dmaengine_submit(txdesc));
+	if (ret < 0) {
+		dev_err(dev, "DMA submit failed\n");
+		goto err;
+	}
+
+	dma_async_issue_pending(dma->chan_using);
+
+	return 0;
+
+err:
+	dma_unmap_single(chan_dev, dma->dma_buf, dma->dma_len,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			 dma->dma_data_dir);
 	return ret;
 }

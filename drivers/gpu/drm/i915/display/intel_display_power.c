@@ -1150,6 +1150,7 @@ static void icl_mbus_init(struct drm_i915_private *dev_priv)
 	if (DISPLAY_VER(dev_priv) == 12)
 		abox_regs |= BIT(0);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	for_each_set_bit(i, &abox_regs, BITS_PER_TYPE(abox_regs))
 		intel_de_rmw(dev_priv, MBUS_ABOX_CTL(i), mask, val);
 }
@@ -1608,6 +1609,467 @@ static void tgl_bw_buddy_init(struct drm_i915_private *dev_priv)
 				       BW_BUDDY_DISABLE);
 	} else {
 		for_each_set_bit(i, &abox_mask, BITS_PER_TYPE(abox_mask)) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	for_each_set_bit(i, &abox_regs, sizeof(abox_regs))
+		intel_de_rmw(dev_priv, MBUS_ABOX_CTL(i), mask, val);
+}
+
+static void hsw_assert_cdclk(struct drm_i915_private *dev_priv)
+{
+	u32 val = intel_de_read(dev_priv, LCPLL_CTL);
+
+	/*
+	 * The LCPLL register should be turned on by the BIOS. For now
+	 * let's just check its state and print errors in case
+	 * something is wrong.  Don't even try to turn it on.
+	 */
+
+	if (val & LCPLL_CD_SOURCE_FCLK)
+		drm_err(&dev_priv->drm, "CDCLK source is not LCPLL\n");
+
+	if (val & LCPLL_PLL_DISABLE)
+		drm_err(&dev_priv->drm, "LCPLL is disabled\n");
+
+	if ((val & LCPLL_REF_MASK) != LCPLL_REF_NON_SSC)
+		drm_err(&dev_priv->drm, "LCPLL not using non-SSC reference\n");
+}
+
+static void assert_can_disable_lcpll(struct drm_i915_private *dev_priv)
+{
+	struct intel_crtc *crtc;
+
+	for_each_intel_crtc(&dev_priv->drm, crtc)
+		I915_STATE_WARN(dev_priv, crtc->active,
+				"CRTC for pipe %c enabled\n",
+				pipe_name(crtc->pipe));
+
+	I915_STATE_WARN(dev_priv, intel_de_read(dev_priv, HSW_PWR_WELL_CTL2),
+			"Display power well on\n");
+	I915_STATE_WARN(dev_priv,
+			intel_de_read(dev_priv, SPLL_CTL) & SPLL_PLL_ENABLE,
+			"SPLL enabled\n");
+	I915_STATE_WARN(dev_priv,
+			intel_de_read(dev_priv, WRPLL_CTL(0)) & WRPLL_PLL_ENABLE,
+			"WRPLL1 enabled\n");
+	I915_STATE_WARN(dev_priv,
+			intel_de_read(dev_priv, WRPLL_CTL(1)) & WRPLL_PLL_ENABLE,
+			"WRPLL2 enabled\n");
+	I915_STATE_WARN(dev_priv,
+			intel_de_read(dev_priv, PP_STATUS(dev_priv, 0)) & PP_ON,
+			"Panel power on\n");
+	I915_STATE_WARN(dev_priv,
+			intel_de_read(dev_priv, BLC_PWM_CPU_CTL2) & BLM_PWM_ENABLE,
+			"CPU PWM1 enabled\n");
+	if (IS_HASWELL(dev_priv))
+		I915_STATE_WARN(dev_priv,
+				intel_de_read(dev_priv, HSW_BLC_PWM2_CTL) & BLM_PWM_ENABLE,
+				"CPU PWM2 enabled\n");
+	I915_STATE_WARN(dev_priv,
+			intel_de_read(dev_priv, BLC_PWM_PCH_CTL1) & BLM_PCH_PWM_ENABLE,
+			"PCH PWM1 enabled\n");
+	I915_STATE_WARN(dev_priv,
+			(intel_de_read(dev_priv, UTIL_PIN_CTL) & (UTIL_PIN_ENABLE | UTIL_PIN_MODE_MASK)) == (UTIL_PIN_ENABLE | UTIL_PIN_MODE_PWM),
+			"Utility pin enabled in PWM mode\n");
+	I915_STATE_WARN(dev_priv,
+			intel_de_read(dev_priv, PCH_GTC_CTL) & PCH_GTC_ENABLE,
+			"PCH GTC enabled\n");
+
+	/*
+	 * In theory we can still leave IRQs enabled, as long as only the HPD
+	 * interrupts remain enabled. We used to check for that, but since it's
+	 * gen-specific and since we only disable LCPLL after we fully disable
+	 * the interrupts, the check below should be enough.
+	 */
+	I915_STATE_WARN(dev_priv, intel_irqs_enabled(dev_priv),
+			"IRQs enabled\n");
+}
+
+static u32 hsw_read_dcomp(struct drm_i915_private *dev_priv)
+{
+	if (IS_HASWELL(dev_priv))
+		return intel_de_read(dev_priv, D_COMP_HSW);
+	else
+		return intel_de_read(dev_priv, D_COMP_BDW);
+}
+
+static void hsw_write_dcomp(struct drm_i915_private *dev_priv, u32 val)
+{
+	if (IS_HASWELL(dev_priv)) {
+		if (snb_pcode_write(&dev_priv->uncore, GEN6_PCODE_WRITE_D_COMP, val))
+			drm_dbg_kms(&dev_priv->drm,
+				    "Failed to write to D_COMP\n");
+	} else {
+		intel_de_write(dev_priv, D_COMP_BDW, val);
+		intel_de_posting_read(dev_priv, D_COMP_BDW);
+	}
+}
+
+/*
+ * This function implements pieces of two sequences from BSpec:
+ * - Sequence for display software to disable LCPLL
+ * - Sequence for display software to allow package C8+
+ * The steps implemented here are just the steps that actually touch the LCPLL
+ * register. Callers should take care of disabling all the display engine
+ * functions, doing the mode unset, fixing interrupts, etc.
+ */
+static void hsw_disable_lcpll(struct drm_i915_private *dev_priv,
+			      bool switch_to_fclk, bool allow_power_down)
+{
+	u32 val;
+
+	assert_can_disable_lcpll(dev_priv);
+
+	val = intel_de_read(dev_priv, LCPLL_CTL);
+
+	if (switch_to_fclk) {
+		val |= LCPLL_CD_SOURCE_FCLK;
+		intel_de_write(dev_priv, LCPLL_CTL, val);
+
+		if (wait_for_us(intel_de_read(dev_priv, LCPLL_CTL) &
+				LCPLL_CD_SOURCE_FCLK_DONE, 1))
+			drm_err(&dev_priv->drm, "Switching to FCLK failed\n");
+
+		val = intel_de_read(dev_priv, LCPLL_CTL);
+	}
+
+	val |= LCPLL_PLL_DISABLE;
+	intel_de_write(dev_priv, LCPLL_CTL, val);
+	intel_de_posting_read(dev_priv, LCPLL_CTL);
+
+	if (intel_de_wait_for_clear(dev_priv, LCPLL_CTL, LCPLL_PLL_LOCK, 1))
+		drm_err(&dev_priv->drm, "LCPLL still locked\n");
+
+	val = hsw_read_dcomp(dev_priv);
+	val |= D_COMP_COMP_DISABLE;
+	hsw_write_dcomp(dev_priv, val);
+	ndelay(100);
+
+	if (wait_for((hsw_read_dcomp(dev_priv) &
+		      D_COMP_RCOMP_IN_PROGRESS) == 0, 1))
+		drm_err(&dev_priv->drm, "D_COMP RCOMP still in progress\n");
+
+	if (allow_power_down) {
+		intel_de_rmw(dev_priv, LCPLL_CTL, 0, LCPLL_POWER_DOWN_ALLOW);
+		intel_de_posting_read(dev_priv, LCPLL_CTL);
+	}
+}
+
+/*
+ * Fully restores LCPLL, disallowing power down and switching back to LCPLL
+ * source.
+ */
+static void hsw_restore_lcpll(struct drm_i915_private *dev_priv)
+{
+	u32 val;
+
+	val = intel_de_read(dev_priv, LCPLL_CTL);
+
+	if ((val & (LCPLL_PLL_LOCK | LCPLL_PLL_DISABLE | LCPLL_CD_SOURCE_FCLK |
+		    LCPLL_POWER_DOWN_ALLOW)) == LCPLL_PLL_LOCK)
+		return;
+
+	/*
+	 * Make sure we're not on PC8 state before disabling PC8, otherwise
+	 * we'll hang the machine. To prevent PC8 state, just enable force_wake.
+	 */
+	intel_uncore_forcewake_get(&dev_priv->uncore, FORCEWAKE_ALL);
+
+	if (val & LCPLL_POWER_DOWN_ALLOW) {
+		val &= ~LCPLL_POWER_DOWN_ALLOW;
+		intel_de_write(dev_priv, LCPLL_CTL, val);
+		intel_de_posting_read(dev_priv, LCPLL_CTL);
+	}
+
+	val = hsw_read_dcomp(dev_priv);
+	val |= D_COMP_COMP_FORCE;
+	val &= ~D_COMP_COMP_DISABLE;
+	hsw_write_dcomp(dev_priv, val);
+
+	val = intel_de_read(dev_priv, LCPLL_CTL);
+	val &= ~LCPLL_PLL_DISABLE;
+	intel_de_write(dev_priv, LCPLL_CTL, val);
+
+	if (intel_de_wait_for_set(dev_priv, LCPLL_CTL, LCPLL_PLL_LOCK, 5))
+		drm_err(&dev_priv->drm, "LCPLL not locked yet\n");
+
+	if (val & LCPLL_CD_SOURCE_FCLK) {
+		intel_de_rmw(dev_priv, LCPLL_CTL, LCPLL_CD_SOURCE_FCLK, 0);
+
+		if (wait_for_us((intel_de_read(dev_priv, LCPLL_CTL) &
+				 LCPLL_CD_SOURCE_FCLK_DONE) == 0, 1))
+			drm_err(&dev_priv->drm,
+				"Switching back to LCPLL failed\n");
+	}
+
+	intel_uncore_forcewake_put(&dev_priv->uncore, FORCEWAKE_ALL);
+
+	intel_update_cdclk(dev_priv);
+	intel_cdclk_dump_config(dev_priv, &dev_priv->display.cdclk.hw, "Current CDCLK");
+}
+
+/*
+ * Package states C8 and deeper are really deep PC states that can only be
+ * reached when all the devices on the system allow it, so even if the graphics
+ * device allows PC8+, it doesn't mean the system will actually get to these
+ * states. Our driver only allows PC8+ when going into runtime PM.
+ *
+ * The requirements for PC8+ are that all the outputs are disabled, the power
+ * well is disabled and most interrupts are disabled, and these are also
+ * requirements for runtime PM. When these conditions are met, we manually do
+ * the other conditions: disable the interrupts, clocks and switch LCPLL refclk
+ * to Fclk. If we're in PC8+ and we get an non-hotplug interrupt, we can hard
+ * hang the machine.
+ *
+ * When we really reach PC8 or deeper states (not just when we allow it) we lose
+ * the state of some registers, so when we come back from PC8+ we need to
+ * restore this state. We don't get into PC8+ if we're not in RC6, so we don't
+ * need to take care of the registers kept by RC6. Notice that this happens even
+ * if we don't put the device in PCI D3 state (which is what currently happens
+ * because of the runtime PM support).
+ *
+ * For more, read "Display Sequences for Package C8" on the hardware
+ * documentation.
+ */
+static void hsw_enable_pc8(struct drm_i915_private *dev_priv)
+{
+	drm_dbg_kms(&dev_priv->drm, "Enabling package C8+\n");
+
+	if (HAS_PCH_LPT_LP(dev_priv))
+		intel_de_rmw(dev_priv, SOUTH_DSPCLK_GATE_D,
+			     PCH_LP_PARTITION_LEVEL_DISABLE, 0);
+
+	lpt_disable_clkout_dp(dev_priv);
+	hsw_disable_lcpll(dev_priv, true, true);
+}
+
+static void hsw_disable_pc8(struct drm_i915_private *dev_priv)
+{
+	drm_dbg_kms(&dev_priv->drm, "Disabling package C8+\n");
+
+	hsw_restore_lcpll(dev_priv);
+	intel_init_pch_refclk(dev_priv);
+
+	/* Many display registers don't survive PC8+ */
+	intel_clock_gating_init(dev_priv);
+}
+
+static void intel_pch_reset_handshake(struct drm_i915_private *dev_priv,
+				      bool enable)
+{
+	i915_reg_t reg;
+	u32 reset_bits;
+
+	if (IS_IVYBRIDGE(dev_priv)) {
+		reg = GEN7_MSG_CTL;
+		reset_bits = WAIT_FOR_PCH_FLR_ACK | WAIT_FOR_PCH_RESET_ACK;
+	} else {
+		reg = HSW_NDE_RSTWRN_OPT;
+		reset_bits = RESET_PCH_HANDSHAKE_ENABLE;
+	}
+
+	if (DISPLAY_VER(dev_priv) >= 14)
+		reset_bits |= MTL_RESET_PICA_HANDSHAKE_EN;
+
+	intel_de_rmw(dev_priv, reg, reset_bits, enable ? reset_bits : 0);
+}
+
+static void skl_display_core_init(struct drm_i915_private *dev_priv,
+				  bool resume)
+{
+	struct i915_power_domains *power_domains = &dev_priv->display.power.domains;
+	struct i915_power_well *well;
+
+	gen9_set_dc_state(dev_priv, DC_STATE_DISABLE);
+
+	/* enable PCH reset handshake */
+	intel_pch_reset_handshake(dev_priv, !HAS_PCH_NOP(dev_priv));
+
+	if (!HAS_DISPLAY(dev_priv))
+		return;
+
+	/* enable PG1 and Misc I/O */
+	mutex_lock(&power_domains->lock);
+
+	well = lookup_power_well(dev_priv, SKL_DISP_PW_1);
+	intel_power_well_enable(dev_priv, well);
+
+	well = lookup_power_well(dev_priv, SKL_DISP_PW_MISC_IO);
+	intel_power_well_enable(dev_priv, well);
+
+	mutex_unlock(&power_domains->lock);
+
+	intel_cdclk_init_hw(dev_priv);
+
+	gen9_dbuf_enable(dev_priv);
+
+	if (resume)
+		intel_dmc_load_program(dev_priv);
+}
+
+static void skl_display_core_uninit(struct drm_i915_private *dev_priv)
+{
+	struct i915_power_domains *power_domains = &dev_priv->display.power.domains;
+	struct i915_power_well *well;
+
+	if (!HAS_DISPLAY(dev_priv))
+		return;
+
+	gen9_disable_dc_states(dev_priv);
+	/* TODO: disable DMC program */
+
+	gen9_dbuf_disable(dev_priv);
+
+	intel_cdclk_uninit_hw(dev_priv);
+
+	/* The spec doesn't call for removing the reset handshake flag */
+	/* disable PG1 and Misc I/O */
+
+	mutex_lock(&power_domains->lock);
+
+	/*
+	 * BSpec says to keep the MISC IO power well enabled here, only
+	 * remove our request for power well 1.
+	 * Note that even though the driver's request is removed power well 1
+	 * may stay enabled after this due to DMC's own request on it.
+	 */
+	well = lookup_power_well(dev_priv, SKL_DISP_PW_1);
+	intel_power_well_disable(dev_priv, well);
+
+	mutex_unlock(&power_domains->lock);
+
+	usleep_range(10, 30);		/* 10 us delay per Bspec */
+}
+
+static void bxt_display_core_init(struct drm_i915_private *dev_priv, bool resume)
+{
+	struct i915_power_domains *power_domains = &dev_priv->display.power.domains;
+	struct i915_power_well *well;
+
+	gen9_set_dc_state(dev_priv, DC_STATE_DISABLE);
+
+	/*
+	 * NDE_RSTWRN_OPT RST PCH Handshake En must always be 0b on BXT
+	 * or else the reset will hang because there is no PCH to respond.
+	 * Move the handshake programming to initialization sequence.
+	 * Previously was left up to BIOS.
+	 */
+	intel_pch_reset_handshake(dev_priv, false);
+
+	if (!HAS_DISPLAY(dev_priv))
+		return;
+
+	/* Enable PG1 */
+	mutex_lock(&power_domains->lock);
+
+	well = lookup_power_well(dev_priv, SKL_DISP_PW_1);
+	intel_power_well_enable(dev_priv, well);
+
+	mutex_unlock(&power_domains->lock);
+
+	intel_cdclk_init_hw(dev_priv);
+
+	gen9_dbuf_enable(dev_priv);
+
+	if (resume)
+		intel_dmc_load_program(dev_priv);
+}
+
+static void bxt_display_core_uninit(struct drm_i915_private *dev_priv)
+{
+	struct i915_power_domains *power_domains = &dev_priv->display.power.domains;
+	struct i915_power_well *well;
+
+	if (!HAS_DISPLAY(dev_priv))
+		return;
+
+	gen9_disable_dc_states(dev_priv);
+	/* TODO: disable DMC program */
+
+	gen9_dbuf_disable(dev_priv);
+
+	intel_cdclk_uninit_hw(dev_priv);
+
+	/* The spec doesn't call for removing the reset handshake flag */
+
+	/*
+	 * Disable PW1 (PG1).
+	 * Note that even though the driver's request is removed power well 1
+	 * may stay enabled after this due to DMC's own request on it.
+	 */
+	mutex_lock(&power_domains->lock);
+
+	well = lookup_power_well(dev_priv, SKL_DISP_PW_1);
+	intel_power_well_disable(dev_priv, well);
+
+	mutex_unlock(&power_domains->lock);
+
+	usleep_range(10, 30);		/* 10 us delay per Bspec */
+}
+
+struct buddy_page_mask {
+	u32 page_mask;
+	u8 type;
+	u8 num_channels;
+};
+
+static const struct buddy_page_mask tgl_buddy_page_masks[] = {
+	{ .num_channels = 1, .type = INTEL_DRAM_DDR4,   .page_mask = 0xF },
+	{ .num_channels = 1, .type = INTEL_DRAM_DDR5,	.page_mask = 0xF },
+	{ .num_channels = 2, .type = INTEL_DRAM_LPDDR4, .page_mask = 0x1C },
+	{ .num_channels = 2, .type = INTEL_DRAM_LPDDR5, .page_mask = 0x1C },
+	{ .num_channels = 2, .type = INTEL_DRAM_DDR4,   .page_mask = 0x1F },
+	{ .num_channels = 2, .type = INTEL_DRAM_DDR5,   .page_mask = 0x1E },
+	{ .num_channels = 4, .type = INTEL_DRAM_LPDDR4, .page_mask = 0x38 },
+	{ .num_channels = 4, .type = INTEL_DRAM_LPDDR5, .page_mask = 0x38 },
+	{}
+};
+
+static const struct buddy_page_mask wa_1409767108_buddy_page_masks[] = {
+	{ .num_channels = 1, .type = INTEL_DRAM_LPDDR4, .page_mask = 0x1 },
+	{ .num_channels = 1, .type = INTEL_DRAM_DDR4,   .page_mask = 0x1 },
+	{ .num_channels = 1, .type = INTEL_DRAM_DDR5,   .page_mask = 0x1 },
+	{ .num_channels = 1, .type = INTEL_DRAM_LPDDR5, .page_mask = 0x1 },
+	{ .num_channels = 2, .type = INTEL_DRAM_LPDDR4, .page_mask = 0x3 },
+	{ .num_channels = 2, .type = INTEL_DRAM_DDR4,   .page_mask = 0x3 },
+	{ .num_channels = 2, .type = INTEL_DRAM_DDR5,   .page_mask = 0x3 },
+	{ .num_channels = 2, .type = INTEL_DRAM_LPDDR5, .page_mask = 0x3 },
+	{}
+};
+
+static void tgl_bw_buddy_init(struct drm_i915_private *dev_priv)
+{
+	enum intel_dram_type type = dev_priv->dram_info.type;
+	u8 num_channels = dev_priv->dram_info.num_channels;
+	const struct buddy_page_mask *table;
+	unsigned long abox_mask = DISPLAY_INFO(dev_priv)->abox_mask;
+	int config, i;
+
+	/* BW_BUDDY registers are not used on dgpu's beyond DG1 */
+	if (IS_DGFX(dev_priv) && !IS_DG1(dev_priv))
+		return;
+
+	if (IS_ALDERLAKE_S(dev_priv) ||
+	    (IS_ROCKETLAKE(dev_priv) && IS_DISPLAY_STEP(dev_priv, STEP_A0, STEP_B0)))
+		/* Wa_1409767108 */
+		table = wa_1409767108_buddy_page_masks;
+	else
+		table = tgl_buddy_page_masks;
+
+	for (config = 0; table[config].page_mask != 0; config++)
+		if (table[config].num_channels == num_channels &&
+		    table[config].type == type)
+			break;
+
+	if (table[config].page_mask == 0) {
+		drm_dbg(&dev_priv->drm,
+			"Unknown memory configuration; disabling address buddy logic.\n");
+		for_each_set_bit(i, &abox_mask, sizeof(abox_mask))
+			intel_de_write(dev_priv, BW_BUDDY_CTL(i),
+				       BW_BUDDY_DISABLE);
+	} else {
+		for_each_set_bit(i, &abox_mask, sizeof(abox_mask)) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			intel_de_write(dev_priv, BW_BUDDY_PAGE_MASK(i),
 				       table[config].page_mask);
 

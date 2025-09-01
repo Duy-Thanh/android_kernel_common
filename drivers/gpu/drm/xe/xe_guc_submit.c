@@ -1241,6 +1241,7 @@ static void __guc_exec_queue_fini_async(struct work_struct *w)
 	xe_sched_entity_fini(&ge->entity);
 	xe_sched_fini(&ge->sched);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * RCU free due sched being exported via DRM scheduler fences
 	 * (timeline name).
@@ -1432,6 +1433,195 @@ static int guc_exec_queue_init(struct xe_exec_queue *q)
 	q->guc = ge;
 	ge->q = q;
 	init_rcu_head(&ge->rcu);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	kfree(ge);
+	xe_exec_queue_fini(q);
+	xe_pm_runtime_put(guc_to_xe(guc));
+}
+
+static void guc_exec_queue_fini_async(struct xe_exec_queue *q)
+{
+	struct xe_guc *guc = exec_queue_to_guc(q);
+	struct xe_device *xe = guc_to_xe(guc);
+
+	INIT_WORK(&q->guc->fini_async, __guc_exec_queue_fini_async);
+
+	/* We must block on kernel engines so slabs are empty on driver unload */
+	if (q->flags & EXEC_QUEUE_FLAG_PERMANENT || exec_queue_wedged(q))
+		__guc_exec_queue_fini_async(&q->guc->fini_async);
+	else
+		queue_work(xe->destroy_wq, &q->guc->fini_async);
+}
+
+static void __guc_exec_queue_fini(struct xe_guc *guc, struct xe_exec_queue *q)
+{
+	/*
+	 * Might be done from within the GPU scheduler, need to do async as we
+	 * fini the scheduler when the engine is fini'd, the scheduler can't
+	 * complete fini within itself (circular dependency). Async resolves
+	 * this we and don't really care when everything is fini'd, just that it
+	 * is.
+	 */
+	guc_exec_queue_fini_async(q);
+}
+
+static void __guc_exec_queue_process_msg_cleanup(struct xe_sched_msg *msg)
+{
+	struct xe_exec_queue *q = msg->private_data;
+	struct xe_guc *guc = exec_queue_to_guc(q);
+	struct xe_device *xe = guc_to_xe(guc);
+
+	xe_assert(xe, !(q->flags & EXEC_QUEUE_FLAG_PERMANENT));
+	trace_xe_exec_queue_cleanup_entity(q);
+
+	if (exec_queue_registered(q))
+		disable_scheduling_deregister(guc, q);
+	else
+		__guc_exec_queue_fini(guc, q);
+}
+
+static bool guc_exec_queue_allowed_to_change_state(struct xe_exec_queue *q)
+{
+	return !exec_queue_killed_or_banned_or_wedged(q) && exec_queue_registered(q);
+}
+
+static void __guc_exec_queue_process_msg_set_sched_props(struct xe_sched_msg *msg)
+{
+	struct xe_exec_queue *q = msg->private_data;
+	struct xe_guc *guc = exec_queue_to_guc(q);
+
+	if (guc_exec_queue_allowed_to_change_state(q))
+		init_policies(guc, q);
+	kfree(msg);
+}
+
+static void __suspend_fence_signal(struct xe_exec_queue *q)
+{
+	if (!q->guc->suspend_pending)
+		return;
+
+	WRITE_ONCE(q->guc->suspend_pending, false);
+	wake_up(&q->guc->suspend_wait);
+}
+
+static void suspend_fence_signal(struct xe_exec_queue *q)
+{
+	struct xe_guc *guc = exec_queue_to_guc(q);
+	struct xe_device *xe = guc_to_xe(guc);
+
+	xe_assert(xe, exec_queue_suspended(q) || exec_queue_killed(q) ||
+		  guc_read_stopped(guc));
+	xe_assert(xe, q->guc->suspend_pending);
+
+	__suspend_fence_signal(q);
+}
+
+static void __guc_exec_queue_process_msg_suspend(struct xe_sched_msg *msg)
+{
+	struct xe_exec_queue *q = msg->private_data;
+	struct xe_guc *guc = exec_queue_to_guc(q);
+
+	if (guc_exec_queue_allowed_to_change_state(q) && !exec_queue_suspended(q) &&
+	    exec_queue_enabled(q)) {
+		wait_event(guc->ct.wq, q->guc->resume_time != RESUME_PENDING ||
+			   guc_read_stopped(guc));
+
+		if (!guc_read_stopped(guc)) {
+			s64 since_resume_ms =
+				ktime_ms_delta(ktime_get(),
+					       q->guc->resume_time);
+			s64 wait_ms = q->vm->preempt.min_run_period_ms -
+				since_resume_ms;
+
+			if (wait_ms > 0 && q->guc->resume_time)
+				msleep(wait_ms);
+
+			set_exec_queue_suspended(q);
+			disable_scheduling(q, false);
+		}
+	} else if (q->guc->suspend_pending) {
+		set_exec_queue_suspended(q);
+		suspend_fence_signal(q);
+	}
+}
+
+static void __guc_exec_queue_process_msg_resume(struct xe_sched_msg *msg)
+{
+	struct xe_exec_queue *q = msg->private_data;
+
+	if (guc_exec_queue_allowed_to_change_state(q)) {
+		clear_exec_queue_suspended(q);
+		if (!exec_queue_enabled(q)) {
+			q->guc->resume_time = RESUME_PENDING;
+			enable_scheduling(q);
+		}
+	} else {
+		clear_exec_queue_suspended(q);
+	}
+}
+
+#define CLEANUP		1	/* Non-zero values to catch uninitialized msg */
+#define SET_SCHED_PROPS	2
+#define SUSPEND		3
+#define RESUME		4
+#define OPCODE_MASK	0xf
+#define MSG_LOCKED	BIT(8)
+
+static void guc_exec_queue_process_msg(struct xe_sched_msg *msg)
+{
+	struct xe_device *xe = guc_to_xe(exec_queue_to_guc(msg->private_data));
+
+	trace_xe_sched_msg_recv(msg);
+
+	switch (msg->opcode) {
+	case CLEANUP:
+		__guc_exec_queue_process_msg_cleanup(msg);
+		break;
+	case SET_SCHED_PROPS:
+		__guc_exec_queue_process_msg_set_sched_props(msg);
+		break;
+	case SUSPEND:
+		__guc_exec_queue_process_msg_suspend(msg);
+		break;
+	case RESUME:
+		__guc_exec_queue_process_msg_resume(msg);
+		break;
+	default:
+		XE_WARN_ON("Unknown message type");
+	}
+
+	xe_pm_runtime_put(xe);
+}
+
+static const struct drm_sched_backend_ops drm_sched_ops = {
+	.run_job = guc_exec_queue_run_job,
+	.free_job = guc_exec_queue_free_job,
+	.timedout_job = guc_exec_queue_timedout_job,
+};
+
+static const struct xe_sched_backend_ops xe_sched_ops = {
+	.process_msg = guc_exec_queue_process_msg,
+};
+
+static int guc_exec_queue_init(struct xe_exec_queue *q)
+{
+	struct xe_gpu_scheduler *sched;
+	struct xe_guc *guc = exec_queue_to_guc(q);
+	struct xe_device *xe = guc_to_xe(guc);
+	struct xe_guc_exec_queue *ge;
+	long timeout;
+	int err, i;
+
+	xe_assert(xe, xe_device_uc_enabled(guc_to_xe(guc)));
+
+	ge = kzalloc(sizeof(*ge), GFP_KERNEL);
+	if (!ge)
+		return -ENOMEM;
+
+	q->guc = ge;
+	ge->q = q;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	init_waitqueue_head(&ge->suspend_wait);
 
 	for (i = 0; i < MAX_STATIC_MSG_TYPE; ++i)

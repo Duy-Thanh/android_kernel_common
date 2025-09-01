@@ -384,6 +384,7 @@ void folio_add_lru_vma(struct folio *, struct vm_area_struct *);
 void mark_page_accessed(struct page *);
 void folio_mark_accessed(struct folio *);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static inline bool folio_may_be_lru_cached(struct folio *folio)
 {
 	/*
@@ -472,6 +473,86 @@ static inline unsigned long total_swapcache_pages(void)
 }
 
 void delete_from_swap_cache(struct folio *folio);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+extern atomic_t lru_disable_count;
+
+static inline bool lru_cache_disabled(void)
+{
+	return atomic_read(&lru_disable_count);
+}
+
+static inline void lru_cache_enable(void)
+{
+	atomic_dec(&lru_disable_count);
+}
+
+extern void lru_cache_disable(void);
+extern void lru_add_drain(void);
+extern void lru_add_drain_cpu(int cpu);
+extern void lru_add_drain_cpu_zone(struct zone *zone);
+extern void lru_add_drain_all(void);
+void folio_deactivate(struct folio *folio);
+void folio_mark_lazyfree(struct folio *folio);
+extern void swap_setup(void);
+
+/* linux/mm/vmscan.c */
+extern unsigned long zone_reclaimable_pages(struct zone *zone);
+extern unsigned long try_to_free_pages(struct zonelist *zonelist, int order,
+					gfp_t gfp_mask, nodemask_t *mask);
+
+#define MEMCG_RECLAIM_MAY_SWAP (1 << 1)
+#define MEMCG_RECLAIM_PROACTIVE (1 << 2)
+#define MIN_SWAPPINESS 0
+#define MAX_SWAPPINESS 200
+extern unsigned long try_to_free_mem_cgroup_pages(struct mem_cgroup *memcg,
+						  unsigned long nr_pages,
+						  gfp_t gfp_mask,
+						  unsigned int reclaim_options,
+						  int *swappiness);
+extern unsigned long mem_cgroup_shrink_node(struct mem_cgroup *mem,
+						gfp_t gfp_mask, bool noswap,
+						pg_data_t *pgdat,
+						unsigned long *nr_scanned);
+extern unsigned long shrink_all_memory(unsigned long nr_pages);
+extern int vm_swappiness;
+long remove_mapping(struct address_space *mapping, struct folio *folio);
+
+extern unsigned long reclaim_pages(struct list_head *folio_list);
+extern unsigned long __reclaim_pages(struct list_head *folio_list,
+				     void *private);
+#ifdef CONFIG_NUMA
+extern int node_reclaim_mode;
+extern int sysctl_min_unmapped_ratio;
+extern int sysctl_min_slab_ratio;
+#else
+#define node_reclaim_mode 0
+#endif
+
+static inline bool node_reclaim_enabled(void)
+{
+	/* Is any node_reclaim_mode bit set? */
+	return node_reclaim_mode & (RECLAIM_ZONE|RECLAIM_WRITE|RECLAIM_UNMAP);
+}
+
+void check_move_unevictable_folios(struct folio_batch *fbatch);
+
+extern void __meminit kswapd_run(int nid);
+extern void __meminit kswapd_stop(int nid);
+
+#ifdef CONFIG_SWAP
+
+int add_swap_extent(struct swap_info_struct *sis, unsigned long start_page,
+		unsigned long nr_pages, sector_t start_block);
+int generic_swapfile_activate(struct swap_info_struct *, struct file *,
+		sector_t *);
+
+static inline unsigned long total_swapcache_pages(void)
+{
+	return global_node_page_state(NR_SWAPCACHE);
+}
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 void free_swap_cache(struct folio *folio);
 void free_page_and_swap_cache(struct page *);
 void free_pages_and_swap_cache(struct encoded_page **, int);

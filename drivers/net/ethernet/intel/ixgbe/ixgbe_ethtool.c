@@ -3443,6 +3443,7 @@ ixgbe_get_eee_fw(struct ixgbe_adapter *adapter, struct ethtool_keee *edata)
 
 	for (i = 0; i < ARRAY_SIZE(ixgbe_ls_map); ++i) {
 		if (hw->phy.eee_speeds_supported & ixgbe_ls_map[i].mac_speed)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			linkmode_set_bit(ixgbe_ls_map[i].link_mode,
 					 edata->supported);
 	}
@@ -3450,6 +3451,16 @@ ixgbe_get_eee_fw(struct ixgbe_adapter *adapter, struct ethtool_keee *edata)
 	for (i = 0; i < ARRAY_SIZE(ixgbe_ls_map); ++i) {
 		if (hw->phy.eee_speeds_advertised & ixgbe_ls_map[i].mac_speed)
 			linkmode_set_bit(ixgbe_ls_map[i].link_mode,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			linkmode_set_bit(ixgbe_lp_map[i].link_mode,
+					 edata->supported);
+	}
+
+	for (i = 0; i < ARRAY_SIZE(ixgbe_ls_map); ++i) {
+		if (hw->phy.eee_speeds_advertised & ixgbe_ls_map[i].mac_speed)
+			linkmode_set_bit(ixgbe_lp_map[i].link_mode,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 					 edata->advertised);
 	}
 

@@ -92,6 +92,7 @@
 #define TCAN4X5X_MODE_STANDBY BIT(6)
 #define TCAN4X5X_MODE_NORMAL BIT(7)
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define TCAN4X5X_NWKRQ_VOLTAGE_VIO BIT(19)
 
 #define TCAN4X5X_DISABLE_WAKE_MSK	(BIT(31) | BIT(30))
@@ -493,6 +494,370 @@ static int tcan4x5x_can_probe(struct spi_device *spi)
 	}
 
 	tcan4x5x_get_dt_data(mcan_class);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define TCAN4X5X_DISABLE_WAKE_MSK	(BIT(31) | BIT(30))
+#define TCAN4X5X_DISABLE_INH_MSK	BIT(9)
+
+#define TCAN4X5X_SW_RESET BIT(2)
+
+#define TCAN4X5X_MCAN_CONFIGURED BIT(5)
+#define TCAN4X5X_WATCHDOG_EN BIT(3)
+#define TCAN4X5X_WD_60_MS_TIMER 0
+#define TCAN4X5X_WD_600_MS_TIMER BIT(28)
+#define TCAN4X5X_WD_3_S_TIMER BIT(29)
+#define TCAN4X5X_WD_6_S_TIMER (BIT(28) | BIT(29))
+
+struct tcan4x5x_version_info {
+	const char *name;
+	u32 id2_register;
+
+	bool has_wake_pin;
+	bool has_state_pin;
+};
+
+enum {
+	TCAN4552 = 0,
+	TCAN4553,
+	TCAN4X5X,
+};
+
+static const struct tcan4x5x_version_info tcan4x5x_versions[] = {
+	[TCAN4552] = {
+		.name = "4552",
+		.id2_register = 0x32353534,
+	},
+	[TCAN4553] = {
+		.name = "4553",
+		.id2_register = 0x33353534,
+	},
+	/* generic version with no id2_register at the end */
+	[TCAN4X5X] = {
+		.name = "generic",
+		.has_wake_pin = true,
+		.has_state_pin = true,
+	},
+};
+
+static inline struct tcan4x5x_priv *cdev_to_priv(struct m_can_classdev *cdev)
+{
+	return container_of(cdev, struct tcan4x5x_priv, cdev);
+}
+
+static void tcan4x5x_check_wake(struct tcan4x5x_priv *priv)
+{
+	int wake_state = 0;
+
+	if (priv->device_state_gpio)
+		wake_state = gpiod_get_value(priv->device_state_gpio);
+
+	if (priv->device_wake_gpio && wake_state) {
+		gpiod_set_value(priv->device_wake_gpio, 0);
+		usleep_range(5, 50);
+		gpiod_set_value(priv->device_wake_gpio, 1);
+	}
+}
+
+static int tcan4x5x_reset(struct tcan4x5x_priv *priv)
+{
+	int ret = 0;
+
+	if (priv->reset_gpio) {
+		gpiod_set_value(priv->reset_gpio, 1);
+
+		/* tpulse_width minimum 30us */
+		usleep_range(30, 100);
+		gpiod_set_value(priv->reset_gpio, 0);
+	} else {
+		ret = regmap_write(priv->regmap, TCAN4X5X_CONFIG,
+				   TCAN4X5X_SW_RESET);
+		if (ret)
+			return ret;
+	}
+
+	usleep_range(700, 1000);
+
+	return ret;
+}
+
+static u32 tcan4x5x_read_reg(struct m_can_classdev *cdev, int reg)
+{
+	struct tcan4x5x_priv *priv = cdev_to_priv(cdev);
+	u32 val;
+
+	regmap_read(priv->regmap, TCAN4X5X_MCAN_OFFSET + reg, &val);
+
+	return val;
+}
+
+static int tcan4x5x_read_fifo(struct m_can_classdev *cdev, int addr_offset,
+			      void *val, size_t val_count)
+{
+	struct tcan4x5x_priv *priv = cdev_to_priv(cdev);
+
+	return regmap_bulk_read(priv->regmap, TCAN4X5X_MRAM_START + addr_offset, val, val_count);
+}
+
+static int tcan4x5x_write_reg(struct m_can_classdev *cdev, int reg, int val)
+{
+	struct tcan4x5x_priv *priv = cdev_to_priv(cdev);
+
+	return regmap_write(priv->regmap, TCAN4X5X_MCAN_OFFSET + reg, val);
+}
+
+static int tcan4x5x_write_fifo(struct m_can_classdev *cdev,
+			       int addr_offset, const void *val, size_t val_count)
+{
+	struct tcan4x5x_priv *priv = cdev_to_priv(cdev);
+
+	return regmap_bulk_write(priv->regmap, TCAN4X5X_MRAM_START + addr_offset, val, val_count);
+}
+
+static int tcan4x5x_power_enable(struct regulator *reg, int enable)
+{
+	if (IS_ERR_OR_NULL(reg))
+		return 0;
+
+	if (enable)
+		return regulator_enable(reg);
+	else
+		return regulator_disable(reg);
+}
+
+static int tcan4x5x_write_tcan_reg(struct m_can_classdev *cdev,
+				   int reg, int val)
+{
+	struct tcan4x5x_priv *priv = cdev_to_priv(cdev);
+
+	return regmap_write(priv->regmap, reg, val);
+}
+
+static int tcan4x5x_clear_interrupts(struct m_can_classdev *cdev)
+{
+	int ret;
+
+	ret = tcan4x5x_write_tcan_reg(cdev, TCAN4X5X_STATUS,
+				      TCAN4X5X_CLEAR_ALL_INT);
+	if (ret)
+		return ret;
+
+	return tcan4x5x_write_tcan_reg(cdev, TCAN4X5X_INT_FLAGS,
+				       TCAN4X5X_CLEAR_ALL_INT);
+}
+
+static int tcan4x5x_init(struct m_can_classdev *cdev)
+{
+	struct tcan4x5x_priv *tcan4x5x = cdev_to_priv(cdev);
+	int ret;
+
+	tcan4x5x_check_wake(tcan4x5x);
+
+	ret = tcan4x5x_clear_interrupts(cdev);
+	if (ret)
+		return ret;
+
+	ret = tcan4x5x_write_tcan_reg(cdev, TCAN4X5X_INT_EN,
+				      TCAN4X5X_ENABLE_TCAN_INT);
+	if (ret)
+		return ret;
+
+	ret = tcan4x5x_write_tcan_reg(cdev, TCAN4X5X_ERROR_STATUS_MASK,
+				      TCAN4X5X_CLEAR_ALL_INT);
+	if (ret)
+		return ret;
+
+	ret = regmap_update_bits(tcan4x5x->regmap, TCAN4X5X_CONFIG,
+				 TCAN4X5X_MODE_SEL_MASK, TCAN4X5X_MODE_NORMAL);
+	if (ret)
+		return ret;
+
+	return ret;
+}
+
+static int tcan4x5x_disable_wake(struct m_can_classdev *cdev)
+{
+	struct tcan4x5x_priv *tcan4x5x = cdev_to_priv(cdev);
+
+	return regmap_update_bits(tcan4x5x->regmap, TCAN4X5X_CONFIG,
+				  TCAN4X5X_DISABLE_WAKE_MSK, 0x00);
+}
+
+static int tcan4x5x_disable_state(struct m_can_classdev *cdev)
+{
+	struct tcan4x5x_priv *tcan4x5x = cdev_to_priv(cdev);
+
+	return regmap_update_bits(tcan4x5x->regmap, TCAN4X5X_CONFIG,
+				  TCAN4X5X_DISABLE_INH_MSK, 0x01);
+}
+
+static const struct tcan4x5x_version_info
+*tcan4x5x_find_version(struct tcan4x5x_priv *priv)
+{
+	u32 val;
+	int ret;
+
+	ret = regmap_read(priv->regmap, TCAN4X5X_DEV_ID1, &val);
+	if (ret)
+		return ERR_PTR(ret);
+
+	if (val != TCAN4X5X_DEV_ID1_TCAN) {
+		dev_err(&priv->spi->dev, "Not a tcan device %x\n", val);
+		return ERR_PTR(-ENODEV);
+	}
+
+	ret = regmap_read(priv->regmap, TCAN4X5X_DEV_ID2, &val);
+	if (ret)
+		return ERR_PTR(ret);
+
+	for (int i = 0; i != ARRAY_SIZE(tcan4x5x_versions); ++i) {
+		const struct tcan4x5x_version_info *vinfo = &tcan4x5x_versions[i];
+
+		if (!vinfo->id2_register || val == vinfo->id2_register) {
+			dev_info(&priv->spi->dev, "Detected TCAN device version %s\n",
+				 vinfo->name);
+			return vinfo;
+		}
+	}
+
+	return &tcan4x5x_versions[TCAN4X5X];
+}
+
+static int tcan4x5x_get_gpios(struct m_can_classdev *cdev,
+			      const struct tcan4x5x_version_info *version_info)
+{
+	struct tcan4x5x_priv *tcan4x5x = cdev_to_priv(cdev);
+	int ret;
+
+	if (version_info->has_wake_pin) {
+		tcan4x5x->device_wake_gpio = devm_gpiod_get(cdev->dev, "device-wake",
+							    GPIOD_OUT_HIGH);
+		if (IS_ERR(tcan4x5x->device_wake_gpio)) {
+			if (PTR_ERR(tcan4x5x->device_wake_gpio) == -EPROBE_DEFER)
+				return -EPROBE_DEFER;
+
+			tcan4x5x_disable_wake(cdev);
+		}
+	}
+
+	tcan4x5x->reset_gpio = devm_gpiod_get_optional(cdev->dev, "reset",
+						       GPIOD_OUT_LOW);
+	if (IS_ERR(tcan4x5x->reset_gpio))
+		tcan4x5x->reset_gpio = NULL;
+
+	ret = tcan4x5x_reset(tcan4x5x);
+	if (ret)
+		return ret;
+
+	if (version_info->has_state_pin) {
+		tcan4x5x->device_state_gpio = devm_gpiod_get_optional(cdev->dev,
+								      "device-state",
+								      GPIOD_IN);
+		if (IS_ERR(tcan4x5x->device_state_gpio)) {
+			tcan4x5x->device_state_gpio = NULL;
+			tcan4x5x_disable_state(cdev);
+		}
+	}
+
+	return 0;
+}
+
+static const struct m_can_ops tcan4x5x_ops = {
+	.init = tcan4x5x_init,
+	.read_reg = tcan4x5x_read_reg,
+	.write_reg = tcan4x5x_write_reg,
+	.write_fifo = tcan4x5x_write_fifo,
+	.read_fifo = tcan4x5x_read_fifo,
+	.clear_interrupts = tcan4x5x_clear_interrupts,
+};
+
+static int tcan4x5x_can_probe(struct spi_device *spi)
+{
+	const struct tcan4x5x_version_info *version_info;
+	struct tcan4x5x_priv *priv;
+	struct m_can_classdev *mcan_class;
+	int freq, ret;
+
+	mcan_class = m_can_class_allocate_dev(&spi->dev,
+					      sizeof(struct tcan4x5x_priv));
+	if (!mcan_class)
+		return -ENOMEM;
+
+	ret = m_can_check_mram_cfg(mcan_class, TCAN4X5X_MRAM_SIZE);
+	if (ret)
+		goto out_m_can_class_free_dev;
+
+	priv = cdev_to_priv(mcan_class);
+
+	priv->power = devm_regulator_get_optional(&spi->dev, "vsup");
+	if (IS_ERR(priv->power)) {
+		if (PTR_ERR(priv->power) == -EPROBE_DEFER) {
+			ret = -EPROBE_DEFER;
+			goto out_m_can_class_free_dev;
+		}
+		priv->power = NULL;
+	}
+
+	m_can_class_get_clocks(mcan_class);
+	if (IS_ERR(mcan_class->cclk)) {
+		dev_err(&spi->dev, "no CAN clock source defined\n");
+		freq = TCAN4X5X_EXT_CLK_DEF;
+	} else {
+		freq = clk_get_rate(mcan_class->cclk);
+	}
+
+	/* Sanity check */
+	if (freq < 20000000 || freq > TCAN4X5X_EXT_CLK_DEF) {
+		dev_err(&spi->dev, "Clock frequency is out of supported range %d\n",
+			freq);
+		ret = -ERANGE;
+		goto out_m_can_class_free_dev;
+	}
+
+	priv->spi = spi;
+
+	mcan_class->pm_clock_support = 0;
+	mcan_class->pm_wake_source = device_property_read_bool(&spi->dev, "wakeup-source");
+	mcan_class->can.clock.freq = freq;
+	mcan_class->dev = &spi->dev;
+	mcan_class->ops = &tcan4x5x_ops;
+	mcan_class->is_peripheral = true;
+	mcan_class->net->irq = spi->irq;
+
+	spi_set_drvdata(spi, priv);
+
+	/* Configure the SPI bus */
+	spi->bits_per_word = 8;
+	ret = spi_setup(spi);
+	if (ret) {
+		dev_err(&spi->dev, "SPI setup failed %pe\n", ERR_PTR(ret));
+		goto out_m_can_class_free_dev;
+	}
+
+	ret = tcan4x5x_regmap_init(priv);
+	if (ret) {
+		dev_err(&spi->dev, "regmap init failed %pe\n", ERR_PTR(ret));
+		goto out_m_can_class_free_dev;
+	}
+
+	ret = tcan4x5x_power_enable(priv->power, 1);
+	if (ret) {
+		dev_err(&spi->dev, "Enabling regulator failed %pe\n",
+			ERR_PTR(ret));
+		goto out_m_can_class_free_dev;
+	}
+
+	version_info = tcan4x5x_find_version(priv);
+	if (IS_ERR(version_info)) {
+		ret = PTR_ERR(version_info);
+		goto out_power;
+	}
+
+	ret = tcan4x5x_get_gpios(mcan_class, version_info);
+	if (ret) {
+		dev_err(&spi->dev, "Getting gpios failed %pe\n", ERR_PTR(ret));
+		goto out_power;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	tcan4x5x_check_wake(priv);
 

@@ -704,6 +704,7 @@ int bnxt_qplib_create_srq(struct bnxt_qplib_res *res,
 	srq->dbinfo.db = srq->dpi->dbr;
 	srq->dbinfo.max_slot = 1;
 	srq->dbinfo.priv_db = res->dpi_tbl.priv_db;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bnxt_qplib_armen_db(&srq->dbinfo, DBC_DBC_TYPE_SRQ_ARMENA);
 
 	return 0;
@@ -788,6 +789,121 @@ int bnxt_qplib_post_srq_recv(struct bnxt_qplib_srq *srq,
 
 	/* Ring DB */
 	bnxt_qplib_ring_prod_db(&srq->dbinfo, DBC_DBC_TYPE_SRQ);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (srq->threshold)
+		bnxt_qplib_armen_db(&srq->dbinfo, DBC_DBC_TYPE_SRQ_ARMENA);
+	srq->arm_req = false;
+
+	return 0;
+fail:
+	bnxt_qplib_free_hwq(res, &srq->hwq);
+	kfree(srq->swq);
+
+	return rc;
+}
+
+int bnxt_qplib_modify_srq(struct bnxt_qplib_res *res,
+			  struct bnxt_qplib_srq *srq)
+{
+	struct bnxt_qplib_hwq *srq_hwq = &srq->hwq;
+	u32 count;
+
+	count = __bnxt_qplib_get_avail(srq_hwq);
+	if (count > srq->threshold) {
+		srq->arm_req = false;
+		bnxt_qplib_srq_arm_db(&srq->dbinfo, srq->threshold);
+	} else {
+		/* Deferred arming */
+		srq->arm_req = true;
+	}
+
+	return 0;
+}
+
+int bnxt_qplib_query_srq(struct bnxt_qplib_res *res,
+			 struct bnxt_qplib_srq *srq)
+{
+	struct bnxt_qplib_rcfw *rcfw = res->rcfw;
+	struct creq_query_srq_resp resp = {};
+	struct bnxt_qplib_cmdqmsg msg = {};
+	struct bnxt_qplib_rcfw_sbuf sbuf;
+	struct creq_query_srq_resp_sb *sb;
+	struct cmdq_query_srq req = {};
+	int rc;
+
+	bnxt_qplib_rcfw_cmd_prep((struct cmdq_base *)&req,
+				 CMDQ_BASE_OPCODE_QUERY_SRQ,
+				 sizeof(req));
+
+	/* Configure the request */
+	sbuf.size = ALIGN(sizeof(*sb), BNXT_QPLIB_CMDQE_UNITS);
+	sbuf.sb = dma_alloc_coherent(&rcfw->pdev->dev, sbuf.size,
+				     &sbuf.dma_addr, GFP_KERNEL);
+	if (!sbuf.sb)
+		return -ENOMEM;
+	req.resp_size = sbuf.size / BNXT_QPLIB_CMDQE_UNITS;
+	req.srq_cid = cpu_to_le32(srq->id);
+	sb = sbuf.sb;
+	bnxt_qplib_fill_cmdqmsg(&msg, &req, &resp, &sbuf, sizeof(req),
+				sizeof(resp), 0);
+	rc = bnxt_qplib_rcfw_send_message(rcfw, &msg);
+	if (!rc)
+		srq->threshold = le16_to_cpu(sb->srq_limit);
+	dma_free_coherent(&rcfw->pdev->dev, sbuf.size,
+			  sbuf.sb, sbuf.dma_addr);
+
+	return rc;
+}
+
+int bnxt_qplib_post_srq_recv(struct bnxt_qplib_srq *srq,
+			     struct bnxt_qplib_swqe *wqe)
+{
+	struct bnxt_qplib_hwq *srq_hwq = &srq->hwq;
+	struct rq_wqe *srqe;
+	struct sq_sge *hw_sge;
+	u32 count = 0;
+	int i, next;
+
+	spin_lock(&srq_hwq->lock);
+	if (srq->start_idx == srq->last_idx) {
+		dev_err(&srq_hwq->pdev->dev,
+			"FP: SRQ (0x%x) is full!\n", srq->id);
+		spin_unlock(&srq_hwq->lock);
+		return -EINVAL;
+	}
+	next = srq->start_idx;
+	srq->start_idx = srq->swq[next].next_idx;
+	spin_unlock(&srq_hwq->lock);
+
+	srqe = bnxt_qplib_get_qe(srq_hwq, srq_hwq->prod, NULL);
+	memset(srqe, 0, srq->wqe_size);
+	/* Calculate wqe_size16 and data_len */
+	for (i = 0, hw_sge = (struct sq_sge *)srqe->data;
+	     i < wqe->num_sge; i++, hw_sge++) {
+		hw_sge->va_or_pa = cpu_to_le64(wqe->sg_list[i].addr);
+		hw_sge->l_key = cpu_to_le32(wqe->sg_list[i].lkey);
+		hw_sge->size = cpu_to_le32(wqe->sg_list[i].size);
+	}
+	srqe->wqe_type = wqe->type;
+	srqe->flags = wqe->flags;
+	srqe->wqe_size = wqe->num_sge +
+			((offsetof(typeof(*srqe), data) + 15) >> 4);
+	srqe->wr_id[0] = cpu_to_le32((u32)next);
+	srq->swq[next].wr_id = wqe->wr_id;
+
+	bnxt_qplib_hwq_incr_prod(&srq->dbinfo, srq_hwq, srq->dbinfo.max_slot);
+
+	spin_lock(&srq_hwq->lock);
+	count = __bnxt_qplib_get_avail(srq_hwq);
+	spin_unlock(&srq_hwq->lock);
+	/* Ring DB */
+	bnxt_qplib_ring_prod_db(&srq->dbinfo, DBC_DBC_TYPE_SRQ);
+	if (srq->arm_req == true && count > srq->threshold) {
+		srq->arm_req = false;
+		bnxt_qplib_srq_arm_db(&srq->dbinfo, srq->threshold);
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

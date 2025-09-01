@@ -22,9 +22,13 @@ DECLARE_HOOK(android_vh_printk_caller,
 DECLARE_HOOK(android_vh_printk_ext_header,
 	TP_PROTO(char *caller, size_t size, u32 id, int *ret),
 	TP_ARGS(caller, size, id, ret));
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 DECLARE_HOOK(android_vh_printk_save_irq,
 	TP_PROTO(u32 *caller_id, unsigned long irqflags),
 	TP_ARGS(caller_id, irqflags));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #endif /* _TRACE_HOOK_PRINTK_H */
 /* This part must be outside protection */

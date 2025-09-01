@@ -415,6 +415,7 @@ int iommufd_fault_alloc(struct iommufd_ucmd *ucmd)
 	fdno = get_unused_fd_flags(O_CLOEXEC);
 	if (fdno < 0) {
 		rc = fdno;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		goto out_abort;
 	}
 
@@ -431,6 +432,27 @@ int iommufd_fault_alloc(struct iommufd_ucmd *ucmd)
 	return 0;
 out_put_fdno:
 	put_unused_fd(fdno);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		goto out_fput;
+	}
+
+	cmd->out_fault_id = fault->obj.id;
+	cmd->out_fault_fd = fdno;
+
+	rc = iommufd_ucmd_respond(ucmd, sizeof(*cmd));
+	if (rc)
+		goto out_put_fdno;
+	iommufd_object_finalize(ucmd->ictx, &fault->obj);
+
+	fd_install(fdno, fault->filep);
+
+	return 0;
+out_put_fdno:
+	put_unused_fd(fdno);
+out_fput:
+	fput(filep);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 out_abort:
 	iommufd_object_abort_and_destroy(ucmd->ictx, &fault->obj);
 

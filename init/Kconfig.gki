@@ -109,6 +109,7 @@ config GKI_HIDDEN_QCOM_CONFIGS
 	  These are normally selected implicitly when a module
 	  that relies on it is configured.
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 config GKI_HIDDEN_MTK_CONFIGS
 	bool "Hidden MTK configs needed for GKI"
 	select MTK_TIMER
@@ -306,6 +307,194 @@ config GKI_HACKS_TO_FIX
 	select GKI_HIDDEN_GPIO_CONFIGS
 	select GKI_HIDDEN_QCOM_CONFIGS
 	select GKI_HIDDEN_MTK_CONFIGS if (ARM64)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+config GKI_HIDDEN_MEDIA_CONFIGS
+	bool "Hidden Media configs needed for GKI"
+	select VIDEOBUF2_CORE
+	select V4L2_MEM2MEM_DEV
+	select MEDIA_CONTROLLER
+	select MEDIA_CONTROLLER_REQUEST_API
+	select MEDIA_SUPPORT
+	select FRAME_VECTOR
+	select CEC_CORE
+	select CEC_NOTIFIER
+	select CEC_PIN
+	select VIDEOBUF2_DMA_CONTIG
+	select VIDEOBUF2_DMA_SG
+	select VIDEO_V4L2_SUBDEV_API
+	help
+	  Dummy config option used to enable hidden media configs.
+	  These are normally selected implicitly when a module
+	  that relies on it is configured.
+
+config GKI_HIDDEN_VIRTUAL_CONFIGS
+	bool "Hidden Virtual configs needed for GKI"
+	select HVC_DRIVER
+	select DIMLIB
+	help
+	  Dummy config option used to enable hidden virtual device configs.
+	  These are normally selected implicitly when a module
+	  that relies on it is configured.
+
+# LEGACY_WEXT_ALLCONFIG Discussed upstream, soundly rejected as a unique
+# problem for GKI to solve.  It should be noted that these extensions are
+# in-effect deprecated and generally unsupported and we should pressure
+# the SOC vendors to drop any modules that require these extensions.
+config GKI_LEGACY_WEXT_ALLCONFIG
+	bool "Hidden wireless extension configs needed for GKI"
+	select WIRELESS_EXT
+	select WEXT_CORE
+	select WEXT_PROC
+	select WEXT_SPY
+	select WEXT_PRIV
+	help
+	  Dummy config option used to enable all the hidden legacy wireless
+	  extensions to the core wireless network functionality used by
+	  add-in modules.
+
+	  If you are not building a kernel to be used for a variety of
+	  out-of-kernel built wireless modules, say N here.
+
+config GKI_HIDDEN_USB_CONFIGS
+	bool "Hidden USB configurations needed for GKI"
+	select USB_PHY
+	help
+	  Dummy config option used to enable all USB related hidden configs.
+	  These configurations are usually only selected by another config
+	  option or a combination of them.
+
+	  If you are not building a kernel to be used for a variety of
+	  out-of-kernel build USB drivers, say N here.
+
+config GKI_HIDDEN_SOC_BUS_CONFIGS
+	bool "Hidden SoC bus configuration needed for GKI"
+	select SOC_BUS
+	  help
+	    Dummy config option used to enable SOC_BUS hidden Kconfig.
+	    The configuration is required for SoCs to register themselves to the bus.
+
+	    If you are not building a kernel to be used for a variety of SoCs and
+	    out-of-tree drivers, say N here.
+
+config GKI_HIDDEN_RPMSG_CONFIGS
+	bool "Hidden RPMSG configuration needed for GKI"
+	select RPMSG
+	help
+	  Dummy config option used to enable the hidden RPMSG config.
+	  This configuration is usually only selected by another config
+	  option or a combination of them.
+
+	  If you are not building a kernel to be used for a variety of
+	  out-of-kernel build RPMSG drivers, say N here.
+
+config GKI_HIDDEN_GPU_CONFIGS
+	bool "Hidden GPU configuration needed for GKI"
+	select TRACE_GPU_MEM
+	help
+	  Dummy config option used to enable the hidden GPU config.
+	  These are normally selected implicitly when a module
+	  that relies on it is configured.
+
+config GKI_HIDDEN_IRQ_CONFIGS
+	bool "Hidden IRQ configuration needed for GKI"
+	select GENERIC_IRQ_CHIP
+	select IRQ_DOMAIN_HIERARCHY
+	select IRQ_FASTEOI_HIERARCHY_HANDLERS
+	help
+	  Dummy config option used to enable GENERIC_IRQ_CHIP hidden
+	  config, required by various SoC platforms. This is usually
+	  selected by ARCH_*.
+
+config GKI_HIDDEN_HYPERVISOR_CONFIGS
+	bool "Hidden hypervisor configuration needed for GKI"
+	select SYS_HYPERVISOR
+	help
+	  Dummy config option used to enable the SYS_HYPERVISOR hidden
+	  config, required by various SoC platforms. This is usually
+	  selected by XEN or S390.
+
+config GKI_HIDDEN_NET_CONFIGS
+	bool "Hidden networking configuration needed for GKI"
+	select PAGE_POOL
+	select NET_PTP_CLASSIFY
+	select NET_DEVLINK
+	help
+	  Dummy config option used to enable the networking hidden
+	  config, required by various SoC platforms.
+
+config GKI_HIDDEN_PHY_CONFIGS
+	bool "Hidden PHY configuration needed for GKI"
+	select GENERIC_PHY_MIPI_DPHY
+	help
+	  Dummy config option used to enable the hidden PHY configs,
+	  required by various SoC platforms.
+
+config GKI_HIDDEN_MM_CONFIGS
+	bool "Hidden MM configuration needed for GKI"
+	select PAGE_REPORTING
+	select BALLOON_COMPACTION
+	select MEMORY_BALLOON
+	help
+	  Dummy config option used to enable hidden MM configs,
+	  currently required for VIRTIO_BALLOON
+
+config GKI_HIDDEN_ETHERNET_CONFIGS
+	bool "Hidden Ethernet configuration needed for GKI"
+	select PHYLINK
+	help
+	  Dummy config option used to enable the hidden Ethernet PHYLINK
+	  configs, required by various ethernet devices.
+
+config GKI_HIDDEN_DMA_CONFIGS
+	bool "Hidden DMA configuration needed for GKI"
+	select ASYNC_TX_ENABLE_CHANNEL_SWITCH
+	select DMA_ENGINE_RAID
+	help
+	  Dummy config option used to enable the hidden DMA configs,
+	  required by various SoC platforms.
+
+config GKI_DYNAMIC_TASK_STRUCT_SIZE
+	bool "Dynamic task_struct size needed for GKI"
+	select ARCH_WANTS_DYNAMIC_TASK_STRUCT
+	help
+	  Avoid static allocation of memory for vendor data in task_struct.
+
+config GKI_TASK_STRUCT_VENDOR_SIZE_MAX
+	int "Max vendor data size in bytes"
+	default 512
+	depends on GKI_DYNAMIC_TASK_STRUCT_SIZE
+	help
+	  Allows vendor to choose the maximum size which can be added to
+	  task_struct dynamically when the GKI_DYNAMIC_TASK_STRUCT_SIZE
+	  option is enabled.
+
+config GKI_NET_XFRM_HACKS
+	bool "XFRM changes required by Android"
+	help
+	  Android Networking tests fail without this.
+
+# Atrocities needed for
+# a) building GKI modules in separate tree, or
+# b) building drivers that are not modularizable
+#
+# All of these should be reworked into an upstream solution
+# if possible.
+#
+config GKI_HACKS_TO_FIX
+	bool "GKI Dummy config options"
+	select GKI_NET_XFRM_HACKS
+	select GKI_HIDDEN_CRYPTO_CONFIGS
+	select GKI_HIDDEN_DRM_CONFIGS
+	select GKI_HIDDEN_MCP251XFD_CONFIGS
+	select GKI_HIDDEN_REGMAP_CONFIGS
+	select GKI_HIDDEN_SND_CONFIGS
+	select GKI_HIDDEN_SND_SOC_CONFIGS
+	select GKI_HIDDEN_UFS_CONFIGS
+	select GKI_HIDDEN_MMC_CONFIGS
+	select GKI_HIDDEN_GPIO_CONFIGS
+	select GKI_HIDDEN_QCOM_CONFIGS
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	select GKI_LEGACY_WEXT_ALLCONFIG
 	select GKI_HIDDEN_MEDIA_CONFIGS
 	select GKI_HIDDEN_VIRTUAL_CONFIGS

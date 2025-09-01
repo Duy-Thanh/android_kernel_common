@@ -51,6 +51,7 @@ enum reg2i16_op {
 	bgeu_op		= 0x1b,
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 enum reg3_op {
 	amswapw_op	= 0x70c0,
 };
@@ -117,6 +118,63 @@ union loongarch_instruction {
 	struct reg2i14_format	reg2i14_format;
 	struct reg2i16_format	reg2i16_format;
 	struct reg3_format	reg3_format;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+struct reg0i15_format {
+	unsigned int immediate : 15;
+	unsigned int opcode : 17;
+};
+
+struct reg0i26_format {
+	unsigned int immediate_h : 10;
+	unsigned int immediate_l : 16;
+	unsigned int opcode : 6;
+};
+
+struct reg1i21_format {
+	unsigned int immediate_h  : 5;
+	unsigned int rj : 5;
+	unsigned int immediate_l : 16;
+	unsigned int opcode : 6;
+};
+
+struct reg2_format {
+	unsigned int rd : 5;
+	unsigned int rj : 5;
+	unsigned int opcode : 22;
+};
+
+struct reg2i12_format {
+	unsigned int rd : 5;
+	unsigned int rj : 5;
+	unsigned int immediate : 12;
+	unsigned int opcode : 10;
+};
+
+struct reg2i14_format {
+	unsigned int rd : 5;
+	unsigned int rj : 5;
+	unsigned int immediate : 14;
+	unsigned int opcode : 8;
+};
+
+struct reg2i16_format {
+	unsigned int rd : 5;
+	unsigned int rj : 5;
+	unsigned int immediate : 16;
+	unsigned int opcode : 6;
+};
+
+union loongarch_instruction {
+	unsigned int word;
+	struct reg0i15_format	reg0i15_format;
+	struct reg0i26_format	reg0i26_format;
+	struct reg1i21_format	reg1i21_format;
+	struct reg2_format	reg2_format;
+	struct reg2i12_format	reg2i12_format;
+	struct reg2i14_format	reg2i14_format;
+	struct reg2i16_format	reg2i16_format;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 #define LOONGARCH_INSN_SIZE	sizeof(union loongarch_instruction)

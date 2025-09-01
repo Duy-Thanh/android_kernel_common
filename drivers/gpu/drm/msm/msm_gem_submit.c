@@ -879,6 +879,7 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
 
 	if (ret == 0 && args->flags & MSM_SUBMIT_FENCE_FD_OUT) {
 		sync_file = sync_file_create(submit->user_fence);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (!sync_file)
 			ret = -ENOMEM;
 	}
@@ -916,6 +917,46 @@ out_post_unlock:
 	} else if (sync_file) {
 		fd_install(out_fence_fd, sync_file->file);
 		args->fence_fd = out_fence_fd;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (!sync_file) {
+			ret = -ENOMEM;
+		} else {
+			fd_install(out_fence_fd, sync_file->file);
+			args->fence_fd = out_fence_fd;
+		}
+	}
+
+	if (ret)
+		goto out;
+
+	submit_attach_object_fences(submit);
+
+	/* The scheduler owns a ref now: */
+	msm_gem_submit_get(submit);
+
+	msm_rd_dump_submit(priv->rd, submit, NULL);
+
+	drm_sched_entity_push_job(&submit->base);
+
+	args->fence = submit->fence_id;
+	queue->last_fence = submit->fence_id;
+
+	msm_reset_syncobjs(syncobjs_to_reset, args->nr_in_syncobjs);
+	msm_process_post_deps(post_deps, args->nr_out_syncobjs,
+	                      submit->user_fence);
+
+
+out:
+	submit_cleanup(submit, !!ret);
+out_unlock:
+	mutex_unlock(&queue->lock);
+out_post_unlock:
+	if (ret && (out_fence_fd >= 0)) {
+		put_unused_fd(out_fence_fd);
+		if (sync_file)
+			fput(sync_file->file);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	if (!IS_ERR_OR_NULL(submit)) {

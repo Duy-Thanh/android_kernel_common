@@ -1454,6 +1454,7 @@ r535_gsp_acpi_caps(acpi_handle handle, CAPS_METHOD_DATA *caps)
 	union acpi_object argv4 = {
 		.buffer.type    = ACPI_TYPE_BUFFER,
 		.buffer.length  = 4,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	}, *obj;
 
 	caps->status = 0xffff;
@@ -1515,6 +1516,62 @@ r535_gsp_acpi_jt(acpi_handle handle, JT_METHOD_DATA *jt)
 	jt->bSBIOSCaps = 0;
 
 done:
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		.buffer.pointer = kmalloc(argv4.buffer.length, GFP_KERNEL),
+	}, *obj;
+
+	caps->status = 0xffff;
+
+	if (!acpi_check_dsm(handle, &NVOP_DSM_GUID, NVOP_DSM_REV, BIT_ULL(0x1a)))
+		return;
+
+	obj = acpi_evaluate_dsm(handle, &NVOP_DSM_GUID, NVOP_DSM_REV, 0x1a, &argv4);
+	if (!obj)
+		return;
+
+	if (WARN_ON(obj->type != ACPI_TYPE_BUFFER) ||
+	    WARN_ON(obj->buffer.length != 4))
+		return;
+
+	caps->status = 0;
+	caps->optimusCaps = *(u32 *)obj->buffer.pointer;
+
+	ACPI_FREE(obj);
+
+	kfree(argv4.buffer.pointer);
+}
+
+static void
+r535_gsp_acpi_jt(acpi_handle handle, JT_METHOD_DATA *jt)
+{
+	const guid_t JT_DSM_GUID =
+		GUID_INIT(0xCBECA351L, 0x067B, 0x4924,
+			  0x9C, 0xBD, 0xB4, 0x6B, 0x00, 0xB8, 0x6F, 0x34);
+	u64 JT_DSM_REV = 0x00000103;
+	u32 caps;
+	union acpi_object argv4 = {
+		.buffer.type    = ACPI_TYPE_BUFFER,
+		.buffer.length  = sizeof(caps),
+		.buffer.pointer = kmalloc(argv4.buffer.length, GFP_KERNEL),
+	}, *obj;
+
+	jt->status = 0xffff;
+
+	obj = acpi_evaluate_dsm(handle, &JT_DSM_GUID, JT_DSM_REV, 0x1, &argv4);
+	if (!obj)
+		return;
+
+	if (WARN_ON(obj->type != ACPI_TYPE_BUFFER) ||
+	    WARN_ON(obj->buffer.length != 4))
+		return;
+
+	jt->status = 0;
+	jt->jtCaps = *(u32 *)obj->buffer.pointer;
+	jt->jtRevId = (jt->jtCaps & 0xfff00000) >> 20;
+	jt->bSBIOSCaps = 0;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	ACPI_FREE(obj);
 
 	kfree(argv4.buffer.pointer);

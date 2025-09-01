@@ -322,6 +322,7 @@ EXPORT_SYMBOL(memstick_init_req);
 static int h_memstick_read_dev_id(struct memstick_dev *card,
 				  struct memstick_request **mrq)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct ms_id_register id_reg = {};
 
 	if (!(*mrq)) {
@@ -547,6 +548,235 @@ EXPORT_SYMBOL(memstick_add_host);
  */
 void memstick_remove_host(struct memstick_host *host)
 {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct ms_id_register id_reg;
+
+	if (!(*mrq)) {
+		memstick_init_req(&card->current_mrq, MS_TPC_READ_REG, &id_reg,
+				  sizeof(struct ms_id_register));
+		*mrq = &card->current_mrq;
+		return 0;
+	}
+	if (!(*mrq)->error) {
+		memcpy(&id_reg, (*mrq)->data, sizeof(id_reg));
+		card->id.match_flags = MEMSTICK_MATCH_ALL;
+		card->id.type = id_reg.type;
+		card->id.category = id_reg.category;
+		card->id.class = id_reg.class;
+		dev_dbg(&card->dev, "if_mode = %02x\n", id_reg.if_mode);
+	}
+	complete(&card->mrq_complete);
+	return -EAGAIN;
+}
+
+static int h_memstick_set_rw_addr(struct memstick_dev *card,
+				  struct memstick_request **mrq)
+{
+	if (!(*mrq)) {
+		memstick_init_req(&card->current_mrq, MS_TPC_SET_RW_REG_ADRS,
+				  (char *)&card->reg_addr,
+				  sizeof(card->reg_addr));
+		*mrq = &card->current_mrq;
+		return 0;
+	} else {
+		complete(&card->mrq_complete);
+		return -EAGAIN;
+	}
+}
+
+/**
+ * memstick_set_rw_addr - issue SET_RW_REG_ADDR request and wait for it to
+ *                        complete
+ * @card - media device to use
+ */
+int memstick_set_rw_addr(struct memstick_dev *card)
+{
+	card->next_request = h_memstick_set_rw_addr;
+	memstick_new_req(card->host);
+	wait_for_completion(&card->mrq_complete);
+
+	return card->current_mrq.error;
+}
+EXPORT_SYMBOL(memstick_set_rw_addr);
+
+static struct memstick_dev *memstick_alloc_card(struct memstick_host *host)
+{
+	struct memstick_dev *card = kzalloc(sizeof(struct memstick_dev),
+					    GFP_KERNEL);
+	struct memstick_dev *old_card = host->card;
+	struct ms_id_register id_reg;
+
+	if (card) {
+		card->host = host;
+		dev_set_name(&card->dev, "%s", dev_name(&host->dev));
+		card->dev.parent = &host->dev;
+		card->dev.bus = &memstick_bus_type;
+		card->dev.release = memstick_free_card;
+		card->check = memstick_dummy_check;
+
+		card->reg_addr.r_offset = offsetof(struct ms_register, id);
+		card->reg_addr.r_length = sizeof(id_reg);
+		card->reg_addr.w_offset = offsetof(struct ms_register, id);
+		card->reg_addr.w_length = sizeof(id_reg);
+
+		init_completion(&card->mrq_complete);
+
+		host->card = card;
+		if (memstick_set_rw_addr(card))
+			goto err_out;
+
+		card->next_request = h_memstick_read_dev_id;
+		memstick_new_req(host);
+		wait_for_completion(&card->mrq_complete);
+
+		if (card->current_mrq.error)
+			goto err_out;
+	}
+	host->card = old_card;
+	return card;
+err_out:
+	host->card = old_card;
+	kfree_const(card->dev.kobj.name);
+	kfree(card);
+	return NULL;
+}
+
+static int memstick_power_on(struct memstick_host *host)
+{
+	int rc = host->set_param(host, MEMSTICK_POWER, MEMSTICK_POWER_ON);
+
+	if (!rc)
+		rc = host->set_param(host, MEMSTICK_INTERFACE, MEMSTICK_SERIAL);
+
+	return rc;
+}
+
+static void memstick_check(struct work_struct *work)
+{
+	struct memstick_host *host = container_of(work, struct memstick_host,
+						  media_checker);
+	struct memstick_dev *card;
+
+	dev_dbg(&host->dev, "memstick_check started\n");
+	pm_runtime_get_noresume(host->dev.parent);
+	mutex_lock(&host->lock);
+	if (!host->card) {
+		if (memstick_power_on(host))
+			goto out_power_off;
+	} else if (host->card->stop)
+		host->card->stop(host->card);
+
+	if (host->removing)
+		goto out_power_off;
+
+	card = memstick_alloc_card(host);
+
+	if (!card) {
+		if (host->card) {
+			device_unregister(&host->card->dev);
+			host->card = NULL;
+		}
+	} else {
+		dev_dbg(&host->dev, "new card %02x, %02x, %02x\n",
+			card->id.type, card->id.category, card->id.class);
+		if (host->card) {
+			if (memstick_set_rw_addr(host->card)
+			    || !memstick_dev_match(host->card, &card->id)
+			    || !(host->card->check(host->card))) {
+				device_unregister(&host->card->dev);
+				host->card = NULL;
+			} else if (host->card->start)
+				host->card->start(host->card);
+		}
+
+		if (!host->card) {
+			host->card = card;
+			if (device_register(&card->dev)) {
+				put_device(&card->dev);
+				host->card = NULL;
+			}
+		} else {
+			kfree_const(card->dev.kobj.name);
+			kfree(card);
+		}
+	}
+
+out_power_off:
+	if (!host->card)
+		host->set_param(host, MEMSTICK_POWER, MEMSTICK_POWER_OFF);
+
+	mutex_unlock(&host->lock);
+	pm_runtime_put(host->dev.parent);
+	dev_dbg(&host->dev, "memstick_check finished\n");
+}
+
+/**
+ * memstick_alloc_host - allocate a memstick_host structure
+ * @extra: size of the user private data to allocate
+ * @dev: parent device of the host
+ */
+struct memstick_host *memstick_alloc_host(unsigned int extra,
+					  struct device *dev)
+{
+	struct memstick_host *host;
+
+	host = kzalloc(sizeof(struct memstick_host) + extra, GFP_KERNEL);
+	if (host) {
+		mutex_init(&host->lock);
+		INIT_WORK(&host->media_checker, memstick_check);
+		host->dev.class = &memstick_host_class;
+		host->dev.parent = dev;
+		device_initialize(&host->dev);
+	}
+	return host;
+}
+EXPORT_SYMBOL(memstick_alloc_host);
+
+/**
+ * memstick_add_host - start request processing on memstick host
+ * @host - host to use
+ */
+int memstick_add_host(struct memstick_host *host)
+{
+	int rc;
+
+	idr_preload(GFP_KERNEL);
+	spin_lock(&memstick_host_lock);
+
+	rc = idr_alloc(&memstick_host_idr, host, 0, 0, GFP_NOWAIT);
+	if (rc >= 0)
+		host->id = rc;
+
+	spin_unlock(&memstick_host_lock);
+	idr_preload_end();
+	if (rc < 0)
+		return rc;
+
+	dev_set_name(&host->dev, "memstick%u", host->id);
+
+	rc = device_add(&host->dev);
+	if (rc) {
+		spin_lock(&memstick_host_lock);
+		idr_remove(&memstick_host_idr, host->id);
+		spin_unlock(&memstick_host_lock);
+		return rc;
+	}
+
+	host->set_param(host, MEMSTICK_POWER, MEMSTICK_POWER_OFF);
+	memstick_detect_change(host);
+	return 0;
+}
+EXPORT_SYMBOL(memstick_add_host);
+
+/**
+ * memstick_remove_host - stop request processing on memstick host
+ * @host - host to use
+ */
+void memstick_remove_host(struct memstick_host *host)
+{
+	host->removing = 1;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	flush_workqueue(workqueue);
 	mutex_lock(&host->lock);
 	if (host->card)

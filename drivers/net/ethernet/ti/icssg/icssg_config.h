@@ -26,6 +26,7 @@ struct icssg_flow_cfg {
 #define PRUETH_MAX_RX_FLOWS	1	/* excluding default flow */
 #define PRUETH_RX_FLOW_DATA	0
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* Defines for forwarding path buffer pools:
  *   - used by firmware to store packets to be forwarded to other port
  *   - 8 total pools per slice
@@ -91,6 +92,24 @@ struct icssg_flow_cfg {
 
 /* Size of 1 bank of MSMC/OC_SRAM memory */
 #define MSMC_RAM_BANK_SIZE			SZ_256K
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define PRUETH_EMAC_BUF_POOL_SIZE	SZ_8K
+#define PRUETH_EMAC_POOLS_PER_SLICE	24
+#define PRUETH_EMAC_BUF_POOL_START	8
+#define PRUETH_NUM_BUF_POOLS	8
+#define PRUETH_EMAC_RX_CTX_BUF_SIZE	SZ_16K	/* per slice */
+#define MSMC_RAM_SIZE	\
+	(2 * (PRUETH_EMAC_BUF_POOL_SIZE * PRUETH_NUM_BUF_POOLS + \
+	 PRUETH_EMAC_RX_CTX_BUF_SIZE * 2))
+
+#define PRUETH_SW_BUF_POOL_SIZE_HOST	SZ_4K
+#define PRUETH_SW_NUM_BUF_POOLS_HOST	8
+#define PRUETH_SW_NUM_BUF_POOLS_PER_PRU 4
+#define MSMC_RAM_SIZE_SWITCH_MODE \
+	(MSMC_RAM_SIZE + \
+	(2 * PRUETH_SW_BUF_POOL_SIZE_HOST * PRUETH_SW_NUM_BUF_POOLS_HOST))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #define PRUETH_SWITCH_FDB_MASK ((SIZE_OF_FDB / NUMBER_OF_FDB_BUCKET_ENTRIES) - 1)
 

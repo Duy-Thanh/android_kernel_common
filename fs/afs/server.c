@@ -394,6 +394,7 @@ struct afs_server *afs_use_server(struct afs_server *server, enum afs_server_tra
 void afs_put_server(struct afs_net *net, struct afs_server *server,
 		    enum afs_server_trace reason)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	unsigned int a, debug_id;
 	bool zero;
 	int r;
@@ -402,6 +403,16 @@ void afs_put_server(struct afs_net *net, struct afs_server *server,
 		return;
 
 	debug_id = server->debug_id;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	unsigned int a, debug_id = server->debug_id;
+	bool zero;
+	int r;
+
+	if (!server)
+		return;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	a = atomic_read(&server->active);
 	zero = __refcount_dec_and_test(&server->ref, &r);
 	trace_afs_server(debug_id, r - 1, a, reason);

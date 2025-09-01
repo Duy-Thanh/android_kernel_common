@@ -3057,6 +3057,7 @@ int ni_add_name(struct ntfs_inode *dir_ni, struct ntfs_inode *ni,
  * ni_rename - Remove one name and insert new name.
  */
 int ni_rename(struct ntfs_inode *dir_ni, struct ntfs_inode *new_dir_ni,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	      struct ntfs_inode *ni, struct NTFS_DE *de, struct NTFS_DE *new_de)
 {
 	int err;
@@ -3082,6 +3083,35 @@ int ni_rename(struct ntfs_inode *dir_ni, struct ntfs_inode *new_dir_ni,
 		err = ni_remove_name(dir_ni, ni, de, &de2, &undo);
 		WARN_ON(err && ni_remove_name(new_dir_ni, ni, new_de, &de2,
 			&undo));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	      struct ntfs_inode *ni, struct NTFS_DE *de, struct NTFS_DE *new_de,
+	      bool *is_bad)
+{
+	int err;
+	struct NTFS_DE *de2 = NULL;
+	int undo = 0;
+
+	/*
+	 * There are two possible ways to rename:
+	 * 1) Add new name and remove old name.
+	 * 2) Remove old name and add new name.
+	 *
+	 * In most cases (not all!) adding new name into MFT and into directory can
+	 * allocate additional cluster(s).
+	 * Second way may result to bad inode if we can't add new name
+	 * and then can't restore (add) old name.
+	 */
+
+	/*
+	 * Way 1 - Add new + remove old.
+	 */
+	err = ni_add_name(new_dir_ni, ni, new_de);
+	if (!err) {
+		err = ni_remove_name(dir_ni, ni, de, &de2, &undo);
+		if (err && ni_remove_name(new_dir_ni, ni, new_de, &de2, &undo))
+			*is_bad = true;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	/*

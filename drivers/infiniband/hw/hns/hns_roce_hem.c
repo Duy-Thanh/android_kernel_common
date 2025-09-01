@@ -249,6 +249,7 @@ int hns_roce_calc_hem_mhop(struct hns_roce_dev *hr_dev,
 }
 
 static struct hns_roce_hem *hns_roce_alloc_hem(struct hns_roce_dev *hr_dev,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 					       unsigned long hem_alloc_size)
 {
 	struct hns_roce_hem *hem;
@@ -541,6 +542,309 @@ int hns_roce_table_get(struct hns_roce_dev *hr_dev,
 	}
 
 	table->hem[i] = hns_roce_alloc_hem(hr_dev, table->table_chunk_size);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+					       unsigned long hem_alloc_size,
+					       gfp_t gfp_mask)
+{
+	struct hns_roce_hem *hem;
+	int order;
+	void *buf;
+
+	WARN_ON(gfp_mask & __GFP_HIGHMEM);
+
+	order = get_order(hem_alloc_size);
+	if (PAGE_SIZE << order != hem_alloc_size) {
+		dev_err(hr_dev->dev, "invalid hem_alloc_size: %lu!\n",
+			hem_alloc_size);
+		return NULL;
+	}
+
+	hem = kmalloc(sizeof(*hem),
+		      gfp_mask & ~(__GFP_HIGHMEM | __GFP_NOWARN));
+	if (!hem)
+		return NULL;
+
+	buf = dma_alloc_coherent(hr_dev->dev, hem_alloc_size,
+				 &hem->dma, gfp_mask);
+	if (!buf)
+		goto fail;
+
+	hem->buf = buf;
+	hem->size = hem_alloc_size;
+
+	return hem;
+
+fail:
+	kfree(hem);
+	return NULL;
+}
+
+void hns_roce_free_hem(struct hns_roce_dev *hr_dev, struct hns_roce_hem *hem)
+{
+	if (!hem)
+		return;
+
+	dma_free_coherent(hr_dev->dev, hem->size, hem->buf, hem->dma);
+
+	kfree(hem);
+}
+
+static int calc_hem_config(struct hns_roce_dev *hr_dev,
+			   struct hns_roce_hem_table *table, unsigned long obj,
+			   struct hns_roce_hem_mhop *mhop,
+			   struct hns_roce_hem_index *index)
+{
+	struct device *dev = hr_dev->dev;
+	unsigned long mhop_obj = obj;
+	u32 l0_idx, l1_idx, l2_idx;
+	u32 chunk_ba_num;
+	u32 bt_num;
+	int ret;
+
+	ret = hns_roce_calc_hem_mhop(hr_dev, table, &mhop_obj, mhop);
+	if (ret)
+		return ret;
+
+	l0_idx = mhop->l0_idx;
+	l1_idx = mhop->l1_idx;
+	l2_idx = mhop->l2_idx;
+	chunk_ba_num = mhop->bt_chunk_size / BA_BYTE_LEN;
+	bt_num = hns_roce_get_bt_num(table->type, mhop->hop_num);
+	switch (bt_num) {
+	case 3:
+		index->l1 = l0_idx * chunk_ba_num + l1_idx;
+		index->l0 = l0_idx;
+		index->buf = l0_idx * chunk_ba_num * chunk_ba_num +
+			     l1_idx * chunk_ba_num + l2_idx;
+		break;
+	case 2:
+		index->l0 = l0_idx;
+		index->buf = l0_idx * chunk_ba_num + l1_idx;
+		break;
+	case 1:
+		index->buf = l0_idx;
+		break;
+	default:
+		dev_err(dev, "table %u not support mhop.hop_num = %u!\n",
+			table->type, mhop->hop_num);
+		return -EINVAL;
+	}
+
+	if (unlikely(index->buf >= table->num_hem)) {
+		dev_err(dev, "table %u exceed hem limt idx %llu, max %lu!\n",
+			table->type, index->buf, table->num_hem);
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
+static void free_mhop_hem(struct hns_roce_dev *hr_dev,
+			  struct hns_roce_hem_table *table,
+			  struct hns_roce_hem_mhop *mhop,
+			  struct hns_roce_hem_index *index)
+{
+	u32 bt_size = mhop->bt_chunk_size;
+	struct device *dev = hr_dev->dev;
+
+	if (index->inited & HEM_INDEX_BUF) {
+		hns_roce_free_hem(hr_dev, table->hem[index->buf]);
+		table->hem[index->buf] = NULL;
+	}
+
+	if (index->inited & HEM_INDEX_L1) {
+		dma_free_coherent(dev, bt_size, table->bt_l1[index->l1],
+				  table->bt_l1_dma_addr[index->l1]);
+		table->bt_l1[index->l1] = NULL;
+	}
+
+	if (index->inited & HEM_INDEX_L0) {
+		dma_free_coherent(dev, bt_size, table->bt_l0[index->l0],
+				  table->bt_l0_dma_addr[index->l0]);
+		table->bt_l0[index->l0] = NULL;
+	}
+}
+
+static int alloc_mhop_hem(struct hns_roce_dev *hr_dev,
+			  struct hns_roce_hem_table *table,
+			  struct hns_roce_hem_mhop *mhop,
+			  struct hns_roce_hem_index *index)
+{
+	u32 bt_size = mhop->bt_chunk_size;
+	struct device *dev = hr_dev->dev;
+	gfp_t flag;
+	u64 bt_ba;
+	u32 size;
+	int ret;
+
+	/* alloc L1 BA's chunk */
+	if ((check_whether_bt_num_3(table->type, mhop->hop_num) ||
+	     check_whether_bt_num_2(table->type, mhop->hop_num)) &&
+	     !table->bt_l0[index->l0]) {
+		table->bt_l0[index->l0] = dma_alloc_coherent(dev, bt_size,
+					    &table->bt_l0_dma_addr[index->l0],
+					    GFP_KERNEL);
+		if (!table->bt_l0[index->l0]) {
+			ret = -ENOMEM;
+			goto out;
+		}
+		index->inited |= HEM_INDEX_L0;
+	}
+
+	/* alloc L2 BA's chunk */
+	if (check_whether_bt_num_3(table->type, mhop->hop_num) &&
+	    !table->bt_l1[index->l1])  {
+		table->bt_l1[index->l1] = dma_alloc_coherent(dev, bt_size,
+					    &table->bt_l1_dma_addr[index->l1],
+					    GFP_KERNEL);
+		if (!table->bt_l1[index->l1]) {
+			ret = -ENOMEM;
+			goto err_alloc_hem;
+		}
+		index->inited |= HEM_INDEX_L1;
+		*(table->bt_l0[index->l0] + mhop->l1_idx) =
+					       table->bt_l1_dma_addr[index->l1];
+	}
+
+	/*
+	 * alloc buffer space chunk for QPC/MTPT/CQC/SRQC/SCCC.
+	 * alloc bt space chunk for MTT/CQE.
+	 */
+	size = table->type < HEM_TYPE_MTT ? mhop->buf_chunk_size : bt_size;
+	flag = GFP_KERNEL | __GFP_NOWARN;
+	table->hem[index->buf] = hns_roce_alloc_hem(hr_dev, size, flag);
+	if (!table->hem[index->buf]) {
+		ret = -ENOMEM;
+		goto err_alloc_hem;
+	}
+
+	index->inited |= HEM_INDEX_BUF;
+	bt_ba = table->hem[index->buf]->dma;
+
+	if (table->type < HEM_TYPE_MTT) {
+		if (mhop->hop_num == 2)
+			*(table->bt_l1[index->l1] + mhop->l2_idx) = bt_ba;
+		else if (mhop->hop_num == 1)
+			*(table->bt_l0[index->l0] + mhop->l1_idx) = bt_ba;
+	} else if (mhop->hop_num == 2) {
+		*(table->bt_l0[index->l0] + mhop->l1_idx) = bt_ba;
+	}
+
+	return 0;
+err_alloc_hem:
+	free_mhop_hem(hr_dev, table, mhop, index);
+out:
+	return ret;
+}
+
+static int set_mhop_hem(struct hns_roce_dev *hr_dev,
+			struct hns_roce_hem_table *table, unsigned long obj,
+			struct hns_roce_hem_mhop *mhop,
+			struct hns_roce_hem_index *index)
+{
+	struct device *dev = hr_dev->dev;
+	u32 step_idx;
+	int ret = 0;
+
+	if (index->inited & HEM_INDEX_L0) {
+		ret = hr_dev->hw->set_hem(hr_dev, table, obj, 0);
+		if (ret) {
+			dev_err(dev, "set HEM step 0 failed!\n");
+			goto out;
+		}
+	}
+
+	if (index->inited & HEM_INDEX_L1) {
+		ret = hr_dev->hw->set_hem(hr_dev, table, obj, 1);
+		if (ret) {
+			dev_err(dev, "set HEM step 1 failed!\n");
+			goto out;
+		}
+	}
+
+	if (index->inited & HEM_INDEX_BUF) {
+		if (mhop->hop_num == HNS_ROCE_HOP_NUM_0)
+			step_idx = 0;
+		else
+			step_idx = mhop->hop_num;
+		ret = hr_dev->hw->set_hem(hr_dev, table, obj, step_idx);
+		if (ret)
+			dev_err(dev, "set HEM step last failed!\n");
+	}
+out:
+	return ret;
+}
+
+static int hns_roce_table_mhop_get(struct hns_roce_dev *hr_dev,
+				   struct hns_roce_hem_table *table,
+				   unsigned long obj)
+{
+	struct hns_roce_hem_index index = {};
+	struct hns_roce_hem_mhop mhop = {};
+	struct device *dev = hr_dev->dev;
+	int ret;
+
+	ret = calc_hem_config(hr_dev, table, obj, &mhop, &index);
+	if (ret) {
+		dev_err(dev, "calc hem config failed!\n");
+		return ret;
+	}
+
+	mutex_lock(&table->mutex);
+	if (table->hem[index.buf]) {
+		refcount_inc(&table->hem[index.buf]->refcount);
+		goto out;
+	}
+
+	ret = alloc_mhop_hem(hr_dev, table, &mhop, &index);
+	if (ret) {
+		dev_err(dev, "alloc mhop hem failed!\n");
+		goto out;
+	}
+
+	/* set HEM base address to hardware */
+	if (table->type < HEM_TYPE_MTT) {
+		ret = set_mhop_hem(hr_dev, table, obj, &mhop, &index);
+		if (ret) {
+			dev_err(dev, "set HEM address to HW failed!\n");
+			goto err_alloc;
+		}
+	}
+
+	refcount_set(&table->hem[index.buf]->refcount, 1);
+	goto out;
+
+err_alloc:
+	free_mhop_hem(hr_dev, table, &mhop, &index);
+out:
+	mutex_unlock(&table->mutex);
+	return ret;
+}
+
+int hns_roce_table_get(struct hns_roce_dev *hr_dev,
+		       struct hns_roce_hem_table *table, unsigned long obj)
+{
+	struct device *dev = hr_dev->dev;
+	unsigned long i;
+	int ret = 0;
+
+	if (hns_roce_check_whether_mhop(hr_dev, table->type))
+		return hns_roce_table_mhop_get(hr_dev, table, obj);
+
+	i = obj / (table->table_chunk_size / table->obj_size);
+
+	mutex_lock(&table->mutex);
+
+	if (table->hem[i]) {
+		refcount_inc(&table->hem[i]->refcount);
+		goto out;
+	}
+
+	table->hem[i] = hns_roce_alloc_hem(hr_dev,
+				       table->table_chunk_size,
+				       GFP_KERNEL | __GFP_NOWARN);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (!table->hem[i]) {
 		ret = -ENOMEM;
 		goto out;

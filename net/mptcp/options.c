@@ -979,6 +979,7 @@ static bool check_fully_established(struct mptcp_sock *msk, struct sock *ssk,
 		if (subflow->mp_join)
 			goto reset;
 		subflow->mp_capable = 0;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (!mptcp_try_fallback(ssk))
 			goto reset;
 		pr_fallback(msk);
@@ -1225,6 +1226,252 @@ bool mptcp_incoming_options(struct sock *sk, struct sk_buff *skb)
 	mpext = skb_ext_add(skb, SKB_EXT_MPTCP);
 	if (!mpext)
 		return false;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		pr_fallback(msk);
+		mptcp_do_fallback(ssk);
+		return false;
+	}
+
+	if (mp_opt->deny_join_id0)
+		WRITE_ONCE(msk->pm.remote_deny_join_id0, true);
+
+	if (unlikely(!READ_ONCE(msk->pm.server_side)))
+		pr_warn_once("bogus mpc option on established client sk");
+
+set_fully_established:
+	mptcp_data_lock((struct sock *)msk);
+	__mptcp_subflow_fully_established(msk, subflow, mp_opt);
+	mptcp_data_unlock((struct sock *)msk);
+
+check_notify:
+	/* if the subflow is not already linked into the conn_list, we can't
+	 * notify the PM: this subflow is still on the listener queue
+	 * and the PM possibly acquiring the subflow lock could race with
+	 * the listener close
+	 */
+	if (likely(subflow->pm_notified) || list_empty(&subflow->node))
+		return true;
+
+	subflow->pm_notified = 1;
+	if (subflow->mp_join) {
+		clear_3rdack_retransmission(ssk);
+		mptcp_pm_subflow_established(msk);
+	} else {
+		mptcp_pm_fully_established(msk, ssk);
+	}
+	return true;
+
+reset:
+	mptcp_subflow_reset(ssk);
+	return false;
+}
+
+u64 __mptcp_expand_seq(u64 old_seq, u64 cur_seq)
+{
+	u32 old_seq32, cur_seq32;
+
+	old_seq32 = (u32)old_seq;
+	cur_seq32 = (u32)cur_seq;
+	cur_seq = (old_seq & GENMASK_ULL(63, 32)) + cur_seq32;
+	if (unlikely(cur_seq32 < old_seq32 && before(old_seq32, cur_seq32)))
+		return cur_seq + (1LL << 32);
+
+	/* reverse wrap could happen, too */
+	if (unlikely(cur_seq32 > old_seq32 && after(old_seq32, cur_seq32)))
+		return cur_seq - (1LL << 32);
+	return cur_seq;
+}
+
+static void __mptcp_snd_una_update(struct mptcp_sock *msk, u64 new_snd_una)
+{
+	msk->bytes_acked += new_snd_una - msk->snd_una;
+	WRITE_ONCE(msk->snd_una, new_snd_una);
+}
+
+static void ack_update_msk(struct mptcp_sock *msk,
+			   struct sock *ssk,
+			   struct mptcp_options_received *mp_opt)
+{
+	u64 new_wnd_end, new_snd_una, snd_nxt = READ_ONCE(msk->snd_nxt);
+	struct sock *sk = (struct sock *)msk;
+	u64 old_snd_una;
+
+	mptcp_data_lock(sk);
+
+	/* avoid ack expansion on update conflict, to reduce the risk of
+	 * wrongly expanding to a future ack sequence number, which is way
+	 * more dangerous than missing an ack
+	 */
+	old_snd_una = msk->snd_una;
+	new_snd_una = mptcp_expand_seq(old_snd_una, mp_opt->data_ack, mp_opt->ack64);
+
+	/* ACK for data not even sent yet? Ignore.*/
+	if (unlikely(after64(new_snd_una, snd_nxt)))
+		new_snd_una = old_snd_una;
+
+	new_wnd_end = new_snd_una + tcp_sk(ssk)->snd_wnd;
+
+	if (after64(new_wnd_end, msk->wnd_end))
+		WRITE_ONCE(msk->wnd_end, new_wnd_end);
+
+	/* this assumes mptcp_incoming_options() is invoked after tcp_ack() */
+	if (after64(msk->wnd_end, snd_nxt))
+		__mptcp_check_push(sk, ssk);
+
+	if (after64(new_snd_una, old_snd_una)) {
+		__mptcp_snd_una_update(msk, new_snd_una);
+		__mptcp_data_acked(sk);
+	}
+	msk->last_ack_recv = tcp_jiffies32;
+	mptcp_data_unlock(sk);
+
+	trace_ack_update_msk(mp_opt->data_ack,
+			     old_snd_una, new_snd_una,
+			     new_wnd_end, READ_ONCE(msk->wnd_end));
+}
+
+bool mptcp_update_rcv_data_fin(struct mptcp_sock *msk, u64 data_fin_seq, bool use_64bit)
+{
+	/* Skip if DATA_FIN was already received.
+	 * If updating simultaneously with the recvmsg loop, values
+	 * should match. If they mismatch, the peer is misbehaving and
+	 * we will prefer the most recent information.
+	 */
+	if (READ_ONCE(msk->rcv_data_fin))
+		return false;
+
+	WRITE_ONCE(msk->rcv_data_fin_seq,
+		   mptcp_expand_seq(READ_ONCE(msk->ack_seq), data_fin_seq, use_64bit));
+	WRITE_ONCE(msk->rcv_data_fin, 1);
+
+	return true;
+}
+
+static bool add_addr_hmac_valid(struct mptcp_sock *msk,
+				struct mptcp_options_received *mp_opt)
+{
+	u64 hmac = 0;
+
+	if (mp_opt->echo)
+		return true;
+
+	hmac = add_addr_generate_hmac(READ_ONCE(msk->remote_key),
+				      READ_ONCE(msk->local_key),
+				      &mp_opt->addr);
+
+	pr_debug("msk=%p, ahmac=%llu, mp_opt->ahmac=%llu\n",
+		 msk, hmac, mp_opt->ahmac);
+
+	return hmac == mp_opt->ahmac;
+}
+
+/* Return false if a subflow has been reset, else return true */
+bool mptcp_incoming_options(struct sock *sk, struct sk_buff *skb)
+{
+	struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(sk);
+	struct mptcp_sock *msk = mptcp_sk(subflow->conn);
+	struct mptcp_options_received mp_opt;
+	struct mptcp_ext *mpext;
+
+	if (__mptcp_check_fallback(msk)) {
+		/* Keep it simple and unconditionally trigger send data cleanup and
+		 * pending queue spooling. We will need to acquire the data lock
+		 * for more accurate checks, and once the lock is acquired, such
+		 * helpers are cheap.
+		 */
+		mptcp_data_lock(subflow->conn);
+		if (sk_stream_memory_free(sk))
+			__mptcp_check_push(subflow->conn, sk);
+
+		/* on fallback we just need to ignore the msk-level snd_una, as
+		 * this is really plain TCP
+		 */
+		__mptcp_snd_una_update(msk, READ_ONCE(msk->snd_nxt));
+
+		__mptcp_data_acked(subflow->conn);
+		mptcp_data_unlock(subflow->conn);
+		return true;
+	}
+
+	mptcp_get_options(skb, &mp_opt);
+
+	/* The subflow can be in close state only if check_fully_established()
+	 * just sent a reset. If so, tell the caller to ignore the current packet.
+	 */
+	if (!check_fully_established(msk, sk, subflow, skb, &mp_opt))
+		return sk->sk_state != TCP_CLOSE;
+
+	if (unlikely(mp_opt.suboptions != OPTION_MPTCP_DSS)) {
+		if ((mp_opt.suboptions & OPTION_MPTCP_FASTCLOSE) &&
+		    READ_ONCE(msk->local_key) == mp_opt.rcvr_key) {
+			WRITE_ONCE(msk->rcv_fastclose, true);
+			mptcp_schedule_work((struct sock *)msk);
+			MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_MPFASTCLOSERX);
+		}
+
+		if ((mp_opt.suboptions & OPTION_MPTCP_ADD_ADDR) &&
+		    add_addr_hmac_valid(msk, &mp_opt)) {
+			if (!mp_opt.echo) {
+				mptcp_pm_add_addr_received(sk, &mp_opt.addr);
+				MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_ADDADDR);
+			} else {
+				mptcp_pm_add_addr_echoed(msk, &mp_opt.addr);
+				mptcp_pm_del_add_timer(msk, &mp_opt.addr, true);
+				MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_ECHOADD);
+			}
+
+			if (mp_opt.addr.port)
+				MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_PORTADD);
+		}
+
+		if (mp_opt.suboptions & OPTION_MPTCP_RM_ADDR)
+			mptcp_pm_rm_addr_received(msk, &mp_opt.rm_list);
+
+		if (mp_opt.suboptions & OPTION_MPTCP_PRIO) {
+			mptcp_pm_mp_prio_received(sk, mp_opt.backup);
+			MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_MPPRIORX);
+		}
+
+		if (mp_opt.suboptions & OPTION_MPTCP_FAIL) {
+			mptcp_pm_mp_fail_received(sk, mp_opt.fail_seq);
+			MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_MPFAILRX);
+		}
+
+		if (mp_opt.suboptions & OPTION_MPTCP_RST) {
+			subflow->reset_seen = 1;
+			subflow->reset_reason = mp_opt.reset_reason;
+			subflow->reset_transient = mp_opt.reset_transient;
+			MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_MPRSTRX);
+		}
+
+		if (!(mp_opt.suboptions & OPTION_MPTCP_DSS))
+			return true;
+	}
+
+	/* we can't wait for recvmsg() to update the ack_seq, otherwise
+	 * monodirectional flows will stuck
+	 */
+	if (mp_opt.use_ack)
+		ack_update_msk(msk, sk, &mp_opt);
+
+	/* Zero-data-length packets are dropped by the caller and not
+	 * propagated to the MPTCP layer, so the skb extension does not
+	 * need to be allocated or populated. DATA_FIN information, if
+	 * present, needs to be updated here before the skb is freed.
+	 */
+	if (TCP_SKB_CB(skb)->seq == TCP_SKB_CB(skb)->end_seq) {
+		if (mp_opt.data_fin && mp_opt.data_len == 1 &&
+		    mptcp_update_rcv_data_fin(msk, mp_opt.data_seq, mp_opt.dsn64))
+			mptcp_schedule_work((struct sock *)msk);
+
+		return true;
+	}
+
+	mpext = skb_ext_add(skb, SKB_EXT_MPTCP);
+	if (!mpext)
+		return true;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	memset(mpext, 0, sizeof(*mpext));
 

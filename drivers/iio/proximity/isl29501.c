@@ -938,6 +938,7 @@ static irqreturn_t isl29501_trigger_handler(int irq, void *p)
 	struct iio_dev *indio_dev = pf->indio_dev;
 	struct isl29501_private *isl29501 = iio_priv(indio_dev);
 	const unsigned long *active_mask = indio_dev->active_scan_mask;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32 value;
 	struct {
 		u16 data;
@@ -950,6 +951,15 @@ static irqreturn_t isl29501_trigger_handler(int irq, void *p)
 	}
 
 	iio_push_to_buffers_with_timestamp(indio_dev, &scan, pf->timestamp);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u32 buffer[4] __aligned(8) = {}; /* 1x16-bit + naturally aligned ts */
+
+	if (test_bit(ISL29501_DISTANCE_SCAN_INDEX, active_mask))
+		isl29501_register_read(isl29501, REG_DISTANCE, buffer);
+
+	iio_push_to_buffers_with_timestamp(indio_dev, buffer, pf->timestamp);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	iio_trigger_notify_done(indio_dev->trig);
 
 	return IRQ_HANDLED;

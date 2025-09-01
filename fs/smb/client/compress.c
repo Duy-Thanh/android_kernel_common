@@ -155,6 +155,7 @@ static int cmp_bkt(const void *_a, const void *_b)
 }
 
 /*
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * Collect some 2K samples with 2K gaps between.
  */
 static int collect_sample(const struct iov_iter *source, ssize_t max, u8 *sample)
@@ -178,6 +179,61 @@ static int collect_sample(const struct iov_iter *source, ssize_t max, u8 *sample
 
 		iov_iter_advance(&iter, SZ_2K);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * TODO:
+ * Support other iter types, if required.
+ * Only ITER_XARRAY is supported for now.
+ */
+static int collect_sample(const struct iov_iter *iter, ssize_t max, u8 *sample)
+{
+	struct folio *folios[16], *folio;
+	unsigned int nr, i, j, npages;
+	loff_t start = iter->xarray_start + iter->iov_offset;
+	pgoff_t last, index = start / PAGE_SIZE;
+	size_t len, off, foff;
+	void *p;
+	int s = 0;
+
+	last = (start + max - 1) / PAGE_SIZE;
+	do {
+		nr = xa_extract(iter->xarray, (void **)folios, index, last, ARRAY_SIZE(folios),
+				XA_PRESENT);
+		if (nr == 0)
+			return -EIO;
+
+		for (i = 0; i < nr; i++) {
+			folio = folios[i];
+			npages = folio_nr_pages(folio);
+			foff = start - folio_pos(folio);
+			off = foff % PAGE_SIZE;
+
+			for (j = foff / PAGE_SIZE; j < npages; j++) {
+				size_t len2;
+
+				len = min_t(size_t, max, PAGE_SIZE - off);
+				len2 = min_t(size_t, len, SZ_2K);
+
+				p = kmap_local_page(folio_page(folio, j));
+				memcpy(&sample[s], p, len2);
+				kunmap_local(p);
+
+				s += len2;
+
+				if (len2 < SZ_2K || s >= max - SZ_2K)
+					return s;
+
+				max -= len;
+				if (max <= 0)
+					return s;
+
+				start += len;
+				off = 0;
+				index++;
+			}
+		}
+	} while (nr == ARRAY_SIZE(folios));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return s;
 }

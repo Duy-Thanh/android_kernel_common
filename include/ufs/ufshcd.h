@@ -709,9 +709,13 @@ enum ufshcd_android_quirks {
 
 	/* Do not read IS after H8 enter */
 	UFSHCD_ANDROID_QUIRK_NO_IS_READ_ON_H8		= 1 << 1,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	/* Initiate Cleanup (ICU) is not supported */
 	UFSHCD_ANDROID_QUIRK_MCQ_BROKEN_ICU		= 1 << 2,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 enum ufshcd_caps {

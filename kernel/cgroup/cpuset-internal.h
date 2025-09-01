@@ -3,6 +3,7 @@
 #ifndef __CPUSET_INTERNAL_H
 #define __CPUSET_INTERNAL_H
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/cgroup.h>
 #include <linux/cpu.h>
 #include <linux/cpumask.h>
@@ -35,6 +36,43 @@ enum prs_errcode {
 	PERR_ACCESS,
 	PERR_REMOTE,
 };
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/android_kabi.h>
+#include <linux/cgroup.h>
+#include <linux/cpu.h>
+#include <linux/cpumask.h>
+#include <linux/cpuset.h>
+#include <linux/spinlock.h>
+#include <linux/union_find.h>
+
+/* See "Frequency meter" comments, below. */
+
+struct fmeter {
+	int cnt;		/* unprocessed events count */
+	int val;		/* most recent output value */
+	time64_t time;		/* clock (secs) when val computed */
+	spinlock_t lock;	/* guards read or write of above */
+};
+
+/*
+ * Invalid partition error code
+ */
+enum prs_errcode {
+	PERR_NONE = 0,
+	PERR_INVCPUS,
+	PERR_INVPARENT,
+	PERR_NOTPART,
+	PERR_NOTEXCL,
+	PERR_NOCPUS,
+	PERR_HOTPLUG,
+	PERR_CPUSEMPTY,
+	PERR_HKEEPING,
+	PERR_ACCESS,
+	PERR_REMOTE,
+};
+ANDROID_KABI_ENUMERATOR_IGNORE(prs_errcode, PERR_REMOTE);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 /* bits in struct cpuset flags field */
 typedef enum {

@@ -12,6 +12,7 @@
  */
 
 struct wait_queue_head;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 struct fuse_req;
 DECLARE_HOOK(android_vh_fuse_request_send,
 	TP_PROTO(struct wait_queue_head *wq_head),
@@ -25,6 +26,15 @@ DECLARE_HOOK(android_vh_fuse_request_end,
 DECLARE_HOOK(android_vh_fuse_request_end_ext,
 	TP_PROTO(struct fuse_req *req, struct task_struct *self),
 	TP_ARGS(req, self));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+DECLARE_HOOK(android_vh_fuse_request_send,
+	TP_PROTO(struct wait_queue_head *wq_head),
+	TP_ARGS(wq_head));
+DECLARE_HOOK(android_vh_fuse_request_end,
+	TP_PROTO(struct task_struct *self),
+	TP_ARGS(self));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #endif /* _TRACE_HOOK_FUSE_H */
 /* This part must be outside protection */

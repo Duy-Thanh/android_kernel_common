@@ -3263,6 +3263,7 @@ func_return	putn
  *	turns around and calls the internal routines.  This routine
  *	is used by the boot console.
  *
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  *	The function signature is -
  *		void debug_cons_nputs(struct console *c, const char *s, unsigned int n)
  *
@@ -3643,6 +3644,378 @@ L(console_do_font_scanline):
 	cmpl	%d1,%d0
 	jcs	L(console_exit)
 	console_putc	#'\n'		/* Line wrap using tail recursion */
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ *	The calling parameters are:
+ *		void debug_cons_nputs(const char *str, unsigned length)
+ *
+ *	This routine does NOT understand variable arguments only
+ *	simple strings!
+ */
+ENTRY(debug_cons_nputs)
+	moveml	%d0/%d1/%a0,%sp@-
+	movew	%sr,%sp@-
+	ori	#0x0700,%sr
+	movel	%sp@(18),%a0		/* fetch parameter */
+	movel	%sp@(22),%d1		/* fetch parameter */
+	jra	2f
+1:
+#ifdef CONSOLE_DEBUG
+	console_putc	%d0
+#endif
+#ifdef SERIAL_DEBUG
+	serial_putc	%d0
+#endif
+	subq	#1,%d1
+2:	jeq	3f
+	moveb	%a0@+,%d0
+	jne	1b
+3:
+	movew	%sp@+,%sr
+	moveml	%sp@+,%d0/%d1/%a0
+	rts
+#endif /* CONFIG_EARLY_PRINTK */
+
+#if defined(CONFIG_HP300) || defined(CONFIG_APOLLO)
+func_start	set_leds,%d0/%a0
+	movel	ARG1,%d0
+#ifdef CONFIG_HP300
+	is_not_hp300(1f)
+	movel	%pc@(L(iobase)),%a0
+	moveb	%d0,%a0@(0x1ffff)
+	jra	2f
+#endif
+1:
+#ifdef CONFIG_APOLLO
+	movel   %pc@(L(iobase)),%a0
+	lsll    #8,%d0
+	eorw    #0xff00,%d0
+	moveb	%d0,%a0@(LCPUCTRL)
+#endif
+2:
+func_return	set_leds
+#endif
+
+#ifdef CONSOLE_DEBUG
+/*
+ *	For continuity, see the data alignment
+ *	to which this structure is tied.
+ */
+#define Lconsole_struct_cur_column	0
+#define Lconsole_struct_cur_row		4
+#define Lconsole_struct_num_columns	8
+#define Lconsole_struct_num_rows	12
+#define Lconsole_struct_left_edge	16
+
+func_start	console_init,%a0-%a4/%d0-%d7
+	/*
+	 *	Some of the register usage that follows
+	 *		a0 = pointer to boot_info
+	 *		a1 = pointer to screen
+	 *		a2 = pointer to console_globals
+	 *		d3 = pixel width of screen
+	 *		d4 = pixel height of screen
+	 *		(d3,d4) ~= (x,y) of a point just below
+	 *			and to the right of the screen
+	 *			NOT on the screen!
+	 *		d5 = number of bytes per scan line
+	 *		d6 = number of bytes on the entire screen
+	 */
+
+	lea	%pc@(L(console_globals)),%a2
+	movel	%pc@(L(mac_videobase)),%a1
+	movel	%pc@(L(mac_rowbytes)),%d5
+	movel	%pc@(L(mac_dimensions)),%d3	/* -> low byte */
+	movel	%d3,%d4
+	swap	%d4		/* -> high byte */
+	andl	#0xffff,%d3	/* d3 = screen width in pixels */
+	andl	#0xffff,%d4	/* d4 = screen height in pixels */
+
+	movel	%d5,%d6
+|	subl	#20,%d6
+	mulul	%d4,%d6		/* scan line bytes x num scan lines */
+	divul	#8,%d6		/* we'll clear 8 bytes at a time */
+	moveq	#-1,%d0		/* Mac_black */
+	subq	#1,%d6
+
+L(console_clear_loop):
+	movel	%d0,%a1@+
+	movel	%d0,%a1@+
+	dbra	%d6,L(console_clear_loop)
+
+	/* Calculate font size */
+
+#if   defined(FONT_8x8) && defined(CONFIG_FONT_8x8)
+	lea	%pc@(font_vga_8x8),%a0
+#elif defined(FONT_8x16) && defined(CONFIG_FONT_8x16)
+	lea	%pc@(font_vga_8x16),%a0
+#elif defined(FONT_6x11) && defined(CONFIG_FONT_6x11)
+	lea	%pc@(font_vga_6x11),%a0
+#elif defined(CONFIG_FONT_8x8) /* default */
+	lea	%pc@(font_vga_8x8),%a0
+#else /* no compiled-in font */
+	lea	0,%a0
+#endif
+
+	/*
+	 *	At this point we make a shift in register usage
+	 *	a1 = address of console_font pointer
+	 */
+	lea	%pc@(L(console_font)),%a1
+	movel	%a0,%a1@	/* store pointer to struct fbcon_font_desc in console_font */
+	tstl	%a0
+	jeq	1f
+	lea	%pc@(L(console_font_data)),%a4
+	movel	%a0@(FONT_DESC_DATA),%d0
+	subl	#L(console_font),%a1
+	addl	%a1,%d0
+	movel	%d0,%a4@
+
+	/*
+	 *	Calculate global maxs
+	 *	Note - we can use either an
+	 *	8 x 16 or 8 x 8 character font
+	 *	6 x 11 also supported
+	 */
+		/* ASSERT: a0 = contents of Lconsole_font */
+	movel	%d3,%d0				/* screen width in pixels */
+	divul	%a0@(FONT_DESC_WIDTH),%d0	/* d0 = max num chars per row */
+
+	movel	%d4,%d1				/* screen height in pixels */
+	divul	%a0@(FONT_DESC_HEIGHT),%d1	/* d1 = max num rows */
+
+	movel	%d0,%a2@(Lconsole_struct_num_columns)
+	movel	%d1,%a2@(Lconsole_struct_num_rows)
+
+	/*
+	 *	Clear the current row and column
+	 */
+	clrl	%a2@(Lconsole_struct_cur_column)
+	clrl	%a2@(Lconsole_struct_cur_row)
+	clrl	%a2@(Lconsole_struct_left_edge)
+
+	/*
+	 * Initialization is complete
+	 */
+1:
+func_return	console_init
+
+#ifdef CONFIG_LOGO
+func_start	console_put_penguin,%a0-%a1/%d0-%d7
+	/*
+	 *	Get 'that_penguin' onto the screen in the upper right corner
+	 *	penguin is 64 x 74 pixels, align against right edge of screen
+	 */
+	lea	%pc@(L(mac_dimensions)),%a0
+	movel	%a0@,%d0
+	andil	#0xffff,%d0
+	subil	#64,%d0		/* snug up against the right edge */
+	clrl	%d1		/* start at the top */
+	movel	#73,%d7
+	lea	%pc@(L(that_penguin)),%a1
+L(console_penguin_row):
+	movel	#31,%d6
+L(console_penguin_pixel_pair):
+	moveb	%a1@,%d2
+	lsrb	#4,%d2
+	console_plot_pixel %d0,%d1,%d2
+	addq	#1,%d0
+	moveb	%a1@+,%d2
+	console_plot_pixel %d0,%d1,%d2
+	addq	#1,%d0
+	dbra	%d6,L(console_penguin_pixel_pair)
+
+	subil	#64,%d0
+	addq	#1,%d1
+	dbra	%d7,L(console_penguin_row)
+
+func_return	console_put_penguin
+
+/* include penguin bitmap */
+L(that_penguin):
+#include "../mac/mac_penguin.S"
+#endif
+
+	/*
+	 * Calculate source and destination addresses
+	 *	output	a1 = dest
+	 *		a2 = source
+	 */
+
+func_start	console_scroll,%a0-%a4/%d0-%d7
+	lea	%pc@(L(mac_videobase)),%a0
+	movel	%a0@,%a1
+	movel	%a1,%a2
+	lea	%pc@(L(mac_rowbytes)),%a0
+	movel	%a0@,%d5
+	movel	%pc@(L(console_font)),%a0
+	tstl	%a0
+	jeq	1f
+	mulul	%a0@(FONT_DESC_HEIGHT),%d5	/* account for # scan lines per character */
+	addal	%d5,%a2
+
+	/*
+	 * Get dimensions
+	 */
+	lea	%pc@(L(mac_dimensions)),%a0
+	movel	%a0@,%d3
+	movel	%d3,%d4
+	swap	%d4
+	andl	#0xffff,%d3	/* d3 = screen width in pixels */
+	andl	#0xffff,%d4	/* d4 = screen height in pixels */
+
+	/*
+	 * Calculate number of bytes to move
+	 */
+	lea	%pc@(L(mac_rowbytes)),%a0
+	movel	%a0@,%d6
+	movel	%pc@(L(console_font)),%a0
+	subl	%a0@(FONT_DESC_HEIGHT),%d4	/* we're not scrolling the top row! */
+	mulul	%d4,%d6		/* scan line bytes x num scan lines */
+	divul	#32,%d6		/* we'll move 8 longs at a time */
+	subq	#1,%d6
+
+L(console_scroll_loop):
+	movel	%a2@+,%a1@+
+	movel	%a2@+,%a1@+
+	movel	%a2@+,%a1@+
+	movel	%a2@+,%a1@+
+	movel	%a2@+,%a1@+
+	movel	%a2@+,%a1@+
+	movel	%a2@+,%a1@+
+	movel	%a2@+,%a1@+
+	dbra	%d6,L(console_scroll_loop)
+
+	lea	%pc@(L(mac_rowbytes)),%a0
+	movel	%a0@,%d6
+	movel	%pc@(L(console_font)),%a0
+	mulul	%a0@(FONT_DESC_HEIGHT),%d6	/* scan line bytes x font height */
+	divul	#32,%d6			/* we'll move 8 words at a time */
+	subq	#1,%d6
+
+	moveq	#-1,%d0
+L(console_scroll_clear_loop):
+	movel	%d0,%a1@+
+	movel	%d0,%a1@+
+	movel	%d0,%a1@+
+	movel	%d0,%a1@+
+	movel	%d0,%a1@+
+	movel	%d0,%a1@+
+	movel	%d0,%a1@+
+	movel	%d0,%a1@+
+	dbra	%d6,L(console_scroll_clear_loop)
+
+1:
+func_return	console_scroll
+
+
+func_start	console_putc,%a0/%a1/%d0-%d7
+
+	is_not_mac(L(console_exit))
+	tstl	%pc@(L(console_font))
+	jeq	L(console_exit)
+
+	/* Output character in d7 on console.
+	 */
+	movel	ARG1,%d7
+	cmpib	#'\n',%d7
+	jbne	1f
+
+	/* A little safe recursion is good for the soul */
+	console_putc	#'\r'
+1:
+	lea	%pc@(L(console_globals)),%a0
+
+	cmpib	#10,%d7
+	jne	L(console_not_lf)
+	movel	%a0@(Lconsole_struct_cur_row),%d0
+	addil	#1,%d0
+	movel	%d0,%a0@(Lconsole_struct_cur_row)
+	movel	%a0@(Lconsole_struct_num_rows),%d1
+	cmpl	%d1,%d0
+	jcs	1f
+	subil	#1,%d0
+	movel	%d0,%a0@(Lconsole_struct_cur_row)
+	console_scroll
+1:
+	jra	L(console_exit)
+
+L(console_not_lf):
+	cmpib	#13,%d7
+	jne	L(console_not_cr)
+	clrl	%a0@(Lconsole_struct_cur_column)
+	jra	L(console_exit)
+
+L(console_not_cr):
+	cmpib	#1,%d7
+	jne	L(console_not_home)
+	clrl	%a0@(Lconsole_struct_cur_row)
+	clrl	%a0@(Lconsole_struct_cur_column)
+	jra	L(console_exit)
+
+/*
+ *	At this point we know that the %d7 character is going to be
+ *	rendered on the screen.  Register usage is -
+ *		a0 = pointer to console globals
+ *		a1 = font data
+ *		d0 = cursor column
+ *		d1 = cursor row to draw the character
+ *		d7 = character number
+ */
+L(console_not_home):
+	movel	%a0@(Lconsole_struct_cur_column),%d0
+	addql	#1,%a0@(Lconsole_struct_cur_column)
+	movel	%a0@(Lconsole_struct_num_columns),%d1
+	cmpl	%d1,%d0
+	jcs	1f
+	console_putc	#'\n'	/* recursion is OK! */
+1:
+	movel	%a0@(Lconsole_struct_cur_row),%d1
+
+	/*
+	 *	At this point we make a shift in register usage
+	 *	a0 = address of pointer to font data (fbcon_font_desc)
+	 */
+	movel	%pc@(L(console_font)),%a0
+	movel	%pc@(L(console_font_data)),%a1	/* Load fbcon_font_desc.data into a1 */
+	andl	#0x000000ff,%d7
+		/* ASSERT: a0 = contents of Lconsole_font */
+	mulul	%a0@(FONT_DESC_HEIGHT),%d7	/* d7 = index into font data */
+	addl	%d7,%a1			/* a1 = points to char image */
+
+	/*
+	 *	At this point we make a shift in register usage
+	 *	d0 = pixel coordinate, x
+	 *	d1 = pixel coordinate, y
+	 *	d2 = (bit 0) 1/0 for white/black (!) pixel on screen
+	 *	d3 = font scan line data (8 pixels)
+	 *	d6 = count down for the font's pixel width (8)
+	 *	d7 = count down for the font's pixel count in height
+	 */
+		/* ASSERT: a0 = contents of Lconsole_font */
+	mulul	%a0@(FONT_DESC_WIDTH),%d0
+	mulul	%a0@(FONT_DESC_HEIGHT),%d1
+	movel	%a0@(FONT_DESC_HEIGHT),%d7	/* Load fbcon_font_desc.height into d7 */
+	subq	#1,%d7
+L(console_read_char_scanline):
+	moveb	%a1@+,%d3
+
+		/* ASSERT: a0 = contents of Lconsole_font */
+	movel	%a0@(FONT_DESC_WIDTH),%d6	/* Load fbcon_font_desc.width into d6 */
+	subql	#1,%d6
+
+L(console_do_font_scanline):
+	lslb	#1,%d3
+	scsb	%d2		/* convert 1 bit into a byte */
+	console_plot_pixel %d0,%d1,%d2
+	addq	#1,%d0
+	dbra	%d6,L(console_do_font_scanline)
+
+		/* ASSERT: a0 = contents of Lconsole_font */
+	subl	%a0@(FONT_DESC_WIDTH),%d0
+	addq	#1,%d1
+	dbra	%d7,L(console_read_char_scanline)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 L(console_exit):
 func_return	console_putc

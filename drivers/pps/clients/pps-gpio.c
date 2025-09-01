@@ -206,6 +206,7 @@ static int pps_gpio_probe(struct platform_device *pdev)
 	}
 
 	/* register IRQ interrupt handler */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ret = request_irq(data->irq, pps_gpio_irq_handler,
 			  get_irqf_trigger_flags(data), data->info.name, data);
 	if (ret) {
@@ -225,6 +226,27 @@ static void pps_gpio_remove(struct platform_device *pdev)
 	struct pps_gpio_device_data *data = platform_get_drvdata(pdev);
 
 	free_irq(data->irq, data);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ret = devm_request_irq(dev, data->irq, pps_gpio_irq_handler,
+			get_irqf_trigger_flags(data), data->info.name, data);
+	if (ret) {
+		pps_unregister_source(data->pps);
+		dev_err(dev, "failed to acquire IRQ %d\n", data->irq);
+		return -EINVAL;
+	}
+
+	dev_dbg(&data->pps->dev, "Registered IRQ %d as PPS source\n",
+		data->irq);
+
+	return 0;
+}
+
+static void pps_gpio_remove(struct platform_device *pdev)
+{
+	struct pps_gpio_device_data *data = platform_get_drvdata(pdev);
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	pps_unregister_source(data->pps);
 	del_timer_sync(&data->echo_timer);
 	/* reset echo pin in any case */

@@ -1007,6 +1007,7 @@ static int imxfb_probe(struct platform_device *pdev)
 	info->fix.smem_start = fbi->map_dma;
 
 	INIT_LIST_HEAD(&info->modelist);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	for (i = 0; i < fbi->num_modes; i++) {
 		ret = fb_add_videomode(&fbi->mode[i].mode, &info->modelist);
 		if (ret) {
@@ -1014,6 +1015,11 @@ static int imxfb_probe(struct platform_device *pdev)
 			goto failed_cmap;
 		}
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	for (i = 0; i < fbi->num_modes; i++)
+		fb_add_videomode(&fbi->mode[i].mode, &info->modelist);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/*
 	 * This makes sure that our colour bitfield

@@ -362,6 +362,7 @@ struct vsc85xx_hw_stat {
 	u16 mask;
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 struct vsc8531_skb_cb {
 	u32 ns;
 };
@@ -498,6 +499,129 @@ static inline int vsc8584_ptp_init(struct phy_device *phydev)
 }
 static inline void vsc8584_ptp_deinit(struct phy_device *phydev)
 {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+struct vsc8531_private {
+	int rate_magic;
+	u16 supp_led_modes;
+	u32 leds_mode[MAX_LEDS];
+	u8 nleds;
+	const struct vsc85xx_hw_stat *hw_stats;
+	u64 *stats;
+	int nstats;
+	/* PHY address within the package. */
+	u8 addr;
+	/* For multiple port PHYs; the MDIO address of the base PHY in the
+	 * package.
+	 */
+	unsigned int base_addr;
+
+#if IS_ENABLED(CONFIG_MACSEC)
+	/* MACsec fields:
+	 * - One SecY per device (enforced at the s/w implementation level)
+	 * - macsec_flows: list of h/w flows
+	 * - ingr_flows: bitmap of ingress flows
+	 * - egr_flows: bitmap of egress flows
+	 */
+	struct macsec_secy *secy;
+	struct list_head macsec_flows;
+	unsigned long ingr_flows;
+	unsigned long egr_flows;
+#endif
+
+	struct mii_timestamper mii_ts;
+
+	bool input_clk_init;
+	struct vsc85xx_ptp *ptp;
+	/* LOAD/SAVE GPIO pin, used for retrieving or setting time to the PHC. */
+	struct gpio_desc *load_save;
+
+	/* For multiple port PHYs; the MDIO address of the base PHY in the
+	 * pair of two PHYs that share a 1588 engine. PHY0 and PHY2 are coupled.
+	 * PHY1 and PHY3 as well. PHY0 and PHY1 are base PHYs for their
+	 * respective pair.
+	 */
+	unsigned int ts_base_addr;
+	u8 ts_base_phy;
+
+	/* ts_lock: used for per-PHY timestamping operations.
+	 * phc_lock: used for per-PHY PHC opertations.
+	 */
+	struct mutex ts_lock;
+	struct mutex phc_lock;
+};
+
+/* Shared structure between the PHYs of the same package.
+ * gpio_lock: used for PHC operations. Common for all PHYs as the load/save GPIO
+ * is shared.
+ */
+
+enum vsc85xx_global_phy {
+	VSC88XX_BASE_ADDR = 0,
+};
+
+struct vsc85xx_shared_private {
+	struct mutex gpio_lock;
+};
+
+#if IS_ENABLED(CONFIG_OF_MDIO)
+struct vsc8531_edge_rate_table {
+	u32 vddmac;
+	u32 slowdown[8];
+};
+#endif /* CONFIG_OF_MDIO */
+
+enum csr_target {
+	MACRO_CTRL  = 0x07,
+};
+
+u32 vsc85xx_csr_read(struct phy_device *phydev,
+		     enum csr_target target, u32 reg);
+
+int vsc85xx_csr_write(struct phy_device *phydev,
+		      enum csr_target target, u32 reg, u32 val);
+
+int phy_base_write(struct phy_device *phydev, u32 regnum, u16 val);
+int phy_base_read(struct phy_device *phydev, u32 regnum);
+int phy_update_mcb_s6g(struct phy_device *phydev, u32 reg, u8 mcb);
+int phy_commit_mcb_s6g(struct phy_device *phydev, u32 reg, u8 mcb);
+int vsc8584_cmd(struct phy_device *phydev, u16 val);
+
+#if IS_ENABLED(CONFIG_MACSEC)
+int vsc8584_macsec_init(struct phy_device *phydev);
+void vsc8584_handle_macsec_interrupt(struct phy_device *phydev);
+void vsc8584_config_macsec_intr(struct phy_device *phydev);
+#else
+static inline int vsc8584_macsec_init(struct phy_device *phydev)
+{
+	return 0;
+}
+static inline void vsc8584_handle_macsec_interrupt(struct phy_device *phydev)
+{
+}
+static inline void vsc8584_config_macsec_intr(struct phy_device *phydev)
+{
+}
+#endif
+
+#if IS_ENABLED(CONFIG_NETWORK_PHY_TIMESTAMPING)
+void vsc85xx_link_change_notify(struct phy_device *phydev);
+void vsc8584_config_ts_intr(struct phy_device *phydev);
+int vsc8584_ptp_init(struct phy_device *phydev);
+int vsc8584_ptp_probe_once(struct phy_device *phydev);
+int vsc8584_ptp_probe(struct phy_device *phydev);
+irqreturn_t vsc8584_handle_ts_interrupt(struct phy_device *phydev);
+#else
+static inline void vsc85xx_link_change_notify(struct phy_device *phydev)
+{
+}
+static inline void vsc8584_config_ts_intr(struct phy_device *phydev)
+{
+}
+static inline int vsc8584_ptp_init(struct phy_device *phydev)
+{
+	return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 static inline int vsc8584_ptp_probe_once(struct phy_device *phydev)
 {

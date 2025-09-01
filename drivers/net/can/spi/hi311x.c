@@ -545,6 +545,7 @@ static int hi3110_stop(struct net_device *net)
 
 	priv->force_quit = 1;
 	free_irq(spi->irq, priv);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	mutex_lock(&priv->hi3110_lock);
 
@@ -965,6 +966,427 @@ static void hi3110_can_remove(struct spi_device *spi)
 
 	destroy_workqueue(priv->wq);
 	priv->wq = NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	destroy_workqueue(priv->wq);
+	priv->wq = NULL;
+
+	mutex_lock(&priv->hi3110_lock);
+
+	/* Disable transmit, interrupts and clear flags */
+	hi3110_write(spi, HI3110_WRITE_CTRL1, 0x0);
+	hi3110_write(spi, HI3110_WRITE_INTE, 0x0);
+	hi3110_read(spi, HI3110_READ_INTF);
+
+	hi3110_clean(net);
+
+	hi3110_hw_sleep(spi);
+
+	hi3110_power_enable(priv->transceiver, 0);
+
+	priv->can.state = CAN_STATE_STOPPED;
+
+	mutex_unlock(&priv->hi3110_lock);
+
+	return 0;
+}
+
+static void hi3110_tx_work_handler(struct work_struct *ws)
+{
+	struct hi3110_priv *priv = container_of(ws, struct hi3110_priv,
+						tx_work);
+	struct spi_device *spi = priv->spi;
+	struct net_device *net = priv->net;
+	struct can_frame *frame;
+
+	mutex_lock(&priv->hi3110_lock);
+	if (priv->tx_skb) {
+		if (priv->can.state == CAN_STATE_BUS_OFF) {
+			hi3110_clean(net);
+		} else {
+			frame = (struct can_frame *)priv->tx_skb->data;
+			hi3110_hw_tx(spi, frame);
+			priv->tx_busy = true;
+			can_put_echo_skb(priv->tx_skb, net, 0, 0);
+			priv->tx_skb = NULL;
+		}
+	}
+	mutex_unlock(&priv->hi3110_lock);
+}
+
+static void hi3110_restart_work_handler(struct work_struct *ws)
+{
+	struct hi3110_priv *priv = container_of(ws, struct hi3110_priv,
+						restart_work);
+	struct spi_device *spi = priv->spi;
+	struct net_device *net = priv->net;
+
+	mutex_lock(&priv->hi3110_lock);
+	if (priv->after_suspend) {
+		hi3110_hw_reset(spi);
+		hi3110_setup(net);
+		if (priv->after_suspend & HI3110_AFTER_SUSPEND_RESTART) {
+			hi3110_set_normal_mode(spi);
+		} else if (priv->after_suspend & HI3110_AFTER_SUSPEND_UP) {
+			netif_device_attach(net);
+			hi3110_clean(net);
+			hi3110_set_normal_mode(spi);
+			netif_wake_queue(net);
+		} else {
+			hi3110_hw_sleep(spi);
+		}
+		priv->after_suspend = 0;
+		priv->force_quit = 0;
+	}
+
+	if (priv->restart_tx) {
+		priv->restart_tx = 0;
+		hi3110_hw_reset(spi);
+		hi3110_setup(net);
+		hi3110_clean(net);
+		hi3110_set_normal_mode(spi);
+		netif_wake_queue(net);
+	}
+	mutex_unlock(&priv->hi3110_lock);
+}
+
+static irqreturn_t hi3110_can_ist(int irq, void *dev_id)
+{
+	struct hi3110_priv *priv = dev_id;
+	struct spi_device *spi = priv->spi;
+	struct net_device *net = priv->net;
+
+	mutex_lock(&priv->hi3110_lock);
+
+	while (!priv->force_quit) {
+		enum can_state new_state;
+		u8 intf, eflag, statf;
+
+		while (!(HI3110_STAT_RXFMTY &
+			 (statf = hi3110_read(spi, HI3110_READ_STATF)))) {
+			hi3110_hw_rx(spi);
+		}
+
+		intf = hi3110_read(spi, HI3110_READ_INTF);
+		eflag = hi3110_read(spi, HI3110_READ_ERR);
+		/* Update can state */
+		if (eflag & HI3110_ERR_BUSOFF)
+			new_state = CAN_STATE_BUS_OFF;
+		else if (eflag & HI3110_ERR_PASSIVE_MASK)
+			new_state = CAN_STATE_ERROR_PASSIVE;
+		else if (statf & HI3110_STAT_ERRW)
+			new_state = CAN_STATE_ERROR_WARNING;
+		else
+			new_state = CAN_STATE_ERROR_ACTIVE;
+
+		if (new_state != priv->can.state) {
+			struct can_frame *cf;
+			struct sk_buff *skb;
+			enum can_state rx_state, tx_state;
+			u8 rxerr, txerr;
+
+			skb = alloc_can_err_skb(net, &cf);
+			if (!skb)
+				break;
+
+			txerr = hi3110_read(spi, HI3110_READ_TEC);
+			rxerr = hi3110_read(spi, HI3110_READ_REC);
+			tx_state = txerr >= rxerr ? new_state : 0;
+			rx_state = txerr <= rxerr ? new_state : 0;
+			can_change_state(net, cf, tx_state, rx_state);
+
+			if (new_state == CAN_STATE_BUS_OFF) {
+				netif_rx(skb);
+				can_bus_off(net);
+				if (priv->can.restart_ms == 0) {
+					priv->force_quit = 1;
+					hi3110_hw_sleep(spi);
+					break;
+				}
+			} else {
+				cf->can_id |= CAN_ERR_CNT;
+				cf->data[6] = txerr;
+				cf->data[7] = rxerr;
+				netif_rx(skb);
+			}
+		}
+
+		/* Update bus errors */
+		if ((intf & HI3110_INT_BUSERR) &&
+		    (priv->can.ctrlmode & CAN_CTRLMODE_BERR_REPORTING)) {
+			struct can_frame *cf;
+			struct sk_buff *skb;
+
+			/* Check for protocol errors */
+			if (eflag & HI3110_ERR_PROTOCOL_MASK) {
+				skb = alloc_can_err_skb(net, &cf);
+				if (skb)
+					cf->can_id |= CAN_ERR_PROT | CAN_ERR_BUSERROR;
+
+				priv->can.can_stats.bus_error++;
+				if (eflag & HI3110_ERR_BITERR) {
+					priv->net->stats.tx_errors++;
+					if (skb)
+						cf->data[2] |= CAN_ERR_PROT_BIT;
+				} else if (eflag & HI3110_ERR_FRMERR) {
+					priv->net->stats.rx_errors++;
+					if (skb)
+						cf->data[2] |= CAN_ERR_PROT_FORM;
+				} else if (eflag & HI3110_ERR_STUFERR) {
+					priv->net->stats.rx_errors++;
+					if (skb)
+						cf->data[2] |= CAN_ERR_PROT_STUFF;
+				} else if (eflag & HI3110_ERR_CRCERR) {
+					priv->net->stats.rx_errors++;
+					if (skb)
+						cf->data[3] |= CAN_ERR_PROT_LOC_CRC_SEQ;
+				} else if (eflag & HI3110_ERR_ACKERR) {
+					priv->net->stats.tx_errors++;
+					if (skb)
+						cf->data[3] |= CAN_ERR_PROT_LOC_ACK;
+				}
+
+				netdev_dbg(priv->net, "Bus Error\n");
+				if (skb) {
+					cf->data[6] = hi3110_read(spi, HI3110_READ_TEC);
+					cf->data[7] = hi3110_read(spi, HI3110_READ_REC);
+					netif_rx(skb);
+				}
+			}
+		}
+
+		if (priv->tx_busy && statf & HI3110_STAT_TXMTY) {
+			net->stats.tx_packets++;
+			net->stats.tx_bytes += can_get_echo_skb(net, 0, NULL);
+			priv->tx_busy = false;
+			netif_wake_queue(net);
+		}
+
+		if (intf == 0)
+			break;
+	}
+	mutex_unlock(&priv->hi3110_lock);
+	return IRQ_HANDLED;
+}
+
+static int hi3110_open(struct net_device *net)
+{
+	struct hi3110_priv *priv = netdev_priv(net);
+	struct spi_device *spi = priv->spi;
+	unsigned long flags = IRQF_ONESHOT | IRQF_TRIGGER_HIGH;
+	int ret;
+
+	ret = open_candev(net);
+	if (ret)
+		return ret;
+
+	mutex_lock(&priv->hi3110_lock);
+	hi3110_power_enable(priv->transceiver, 1);
+
+	priv->force_quit = 0;
+	priv->tx_skb = NULL;
+	priv->tx_busy = false;
+
+	ret = request_threaded_irq(spi->irq, NULL, hi3110_can_ist,
+				   flags, DEVICE_NAME, priv);
+	if (ret) {
+		dev_err(&spi->dev, "failed to acquire irq %d\n", spi->irq);
+		goto out_close;
+	}
+
+	priv->wq = alloc_workqueue("hi3110_wq", WQ_FREEZABLE | WQ_MEM_RECLAIM,
+				   0);
+	if (!priv->wq) {
+		ret = -ENOMEM;
+		goto out_free_irq;
+	}
+	INIT_WORK(&priv->tx_work, hi3110_tx_work_handler);
+	INIT_WORK(&priv->restart_work, hi3110_restart_work_handler);
+
+	ret = hi3110_hw_reset(spi);
+	if (ret)
+		goto out_free_wq;
+
+	ret = hi3110_setup(net);
+	if (ret)
+		goto out_free_wq;
+
+	ret = hi3110_set_normal_mode(spi);
+	if (ret)
+		goto out_free_wq;
+
+	netif_wake_queue(net);
+	mutex_unlock(&priv->hi3110_lock);
+
+	return 0;
+
+ out_free_wq:
+	destroy_workqueue(priv->wq);
+ out_free_irq:
+	free_irq(spi->irq, priv);
+	hi3110_hw_sleep(spi);
+ out_close:
+	hi3110_power_enable(priv->transceiver, 0);
+	close_candev(net);
+	mutex_unlock(&priv->hi3110_lock);
+	return ret;
+}
+
+static const struct net_device_ops hi3110_netdev_ops = {
+	.ndo_open = hi3110_open,
+	.ndo_stop = hi3110_stop,
+	.ndo_start_xmit = hi3110_hard_start_xmit,
+};
+
+static const struct ethtool_ops hi3110_ethtool_ops = {
+	.get_ts_info = ethtool_op_get_ts_info,
+};
+
+static const struct of_device_id hi3110_of_match[] = {
+	{
+		.compatible	= "holt,hi3110",
+		.data		= (void *)CAN_HI3110_HI3110,
+	},
+	{ }
+};
+MODULE_DEVICE_TABLE(of, hi3110_of_match);
+
+static const struct spi_device_id hi3110_id_table[] = {
+	{
+		.name		= "hi3110",
+		.driver_data	= (kernel_ulong_t)CAN_HI3110_HI3110,
+	},
+	{ }
+};
+MODULE_DEVICE_TABLE(spi, hi3110_id_table);
+
+static int hi3110_can_probe(struct spi_device *spi)
+{
+	struct device *dev = &spi->dev;
+	struct net_device *net;
+	struct hi3110_priv *priv;
+	struct clk *clk;
+	u32 freq;
+	int ret;
+
+	clk = devm_clk_get_optional(&spi->dev, NULL);
+	if (IS_ERR(clk))
+		return dev_err_probe(dev, PTR_ERR(clk), "no CAN clock source defined\n");
+
+	if (clk) {
+		freq = clk_get_rate(clk);
+	} else {
+		ret = device_property_read_u32(dev, "clock-frequency", &freq);
+		if (ret)
+			return dev_err_probe(dev, ret, "Failed to get clock-frequency!\n");
+	}
+
+	/* Sanity check */
+	if (freq > 40000000)
+		return -ERANGE;
+
+	/* Allocate can/net device */
+	net = alloc_candev(sizeof(struct hi3110_priv), HI3110_TX_ECHO_SKB_MAX);
+	if (!net)
+		return -ENOMEM;
+
+	ret = clk_prepare_enable(clk);
+	if (ret)
+		goto out_free;
+
+	net->netdev_ops = &hi3110_netdev_ops;
+	net->ethtool_ops = &hi3110_ethtool_ops;
+	net->flags |= IFF_ECHO;
+
+	priv = netdev_priv(net);
+	priv->can.bittiming_const = &hi3110_bittiming_const;
+	priv->can.do_set_mode = hi3110_do_set_mode;
+	priv->can.do_get_berr_counter = hi3110_get_berr_counter;
+	priv->can.clock.freq = freq / 2;
+	priv->can.ctrlmode_supported = CAN_CTRLMODE_3_SAMPLES |
+		CAN_CTRLMODE_LOOPBACK |
+		CAN_CTRLMODE_LISTENONLY |
+		CAN_CTRLMODE_BERR_REPORTING;
+
+	priv->model = (enum hi3110_model)(uintptr_t)spi_get_device_match_data(spi);
+	priv->net = net;
+	priv->clk = clk;
+
+	spi_set_drvdata(spi, priv);
+
+	/* Configure the SPI bus */
+	spi->bits_per_word = 8;
+	ret = spi_setup(spi);
+	if (ret)
+		goto out_clk;
+
+	priv->power = devm_regulator_get_optional(&spi->dev, "vdd");
+	priv->transceiver = devm_regulator_get_optional(&spi->dev, "xceiver");
+	if ((PTR_ERR(priv->power) == -EPROBE_DEFER) ||
+	    (PTR_ERR(priv->transceiver) == -EPROBE_DEFER)) {
+		ret = -EPROBE_DEFER;
+		goto out_clk;
+	}
+
+	ret = hi3110_power_enable(priv->power, 1);
+	if (ret)
+		goto out_clk;
+
+	priv->spi = spi;
+	mutex_init(&priv->hi3110_lock);
+
+	priv->spi_tx_buf = devm_kzalloc(&spi->dev, HI3110_RX_BUF_LEN,
+					GFP_KERNEL);
+	if (!priv->spi_tx_buf) {
+		ret = -ENOMEM;
+		goto error_probe;
+	}
+	priv->spi_rx_buf = devm_kzalloc(&spi->dev, HI3110_RX_BUF_LEN,
+					GFP_KERNEL);
+
+	if (!priv->spi_rx_buf) {
+		ret = -ENOMEM;
+		goto error_probe;
+	}
+
+	SET_NETDEV_DEV(net, &spi->dev);
+
+	ret = hi3110_hw_probe(spi);
+	if (ret) {
+		dev_err_probe(dev, ret, "Cannot initialize %x. Wrong wiring?\n", priv->model);
+		goto error_probe;
+	}
+	hi3110_hw_sleep(spi);
+
+	ret = register_candev(net);
+	if (ret)
+		goto error_probe;
+
+	netdev_info(net, "%x successfully initialized.\n", priv->model);
+
+	return 0;
+
+ error_probe:
+	hi3110_power_enable(priv->power, 0);
+
+ out_clk:
+	clk_disable_unprepare(clk);
+
+ out_free:
+	free_candev(net);
+
+	return dev_err_probe(dev, ret, "Probe failed\n");
+}
+
+static void hi3110_can_remove(struct spi_device *spi)
+{
+	struct hi3110_priv *priv = spi_get_drvdata(spi);
+	struct net_device *net = priv->net;
+
+	unregister_candev(net);
+
+	hi3110_power_enable(priv->power, 0);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	clk_disable_unprepare(priv->clk);
 

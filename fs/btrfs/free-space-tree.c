@@ -1104,6 +1104,7 @@ static int populate_free_space_tree(struct btrfs_trans_handle *trans,
 	ret = btrfs_search_slot_for_read(extent_root, &key, path, 1, 0);
 	if (ret < 0)
 		goto out_locked;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * If ret is 1 (no key found), it means this is an empty block group,
 	 * without any extents allocated from it and there's no block group
@@ -1417,6 +1418,311 @@ int add_block_group_free_space(struct btrfs_trans_handle *trans,
 out:
 	btrfs_free_path(path);
 	mutex_unlock(&block_group->free_space_lock);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ASSERT(ret == 0);
+
+	start = block_group->start;
+	end = block_group->start + block_group->length;
+	while (1) {
+		btrfs_item_key_to_cpu(path->nodes[0], &key, path->slots[0]);
+
+		if (key.type == BTRFS_EXTENT_ITEM_KEY ||
+		    key.type == BTRFS_METADATA_ITEM_KEY) {
+			if (key.objectid >= end)
+				break;
+
+			if (start < key.objectid) {
+				ret = __add_to_free_space_tree(trans,
+							       block_group,
+							       path2, start,
+							       key.objectid -
+							       start);
+				if (ret)
+					goto out_locked;
+			}
+			start = key.objectid;
+			if (key.type == BTRFS_METADATA_ITEM_KEY)
+				start += trans->fs_info->nodesize;
+			else
+				start += key.offset;
+		} else if (key.type == BTRFS_BLOCK_GROUP_ITEM_KEY) {
+			if (key.objectid != block_group->start)
+				break;
+		}
+
+		ret = btrfs_next_item(extent_root, path);
+		if (ret < 0)
+			goto out_locked;
+		if (ret)
+			break;
+	}
+	if (start < end) {
+		ret = __add_to_free_space_tree(trans, block_group, path2,
+					       start, end - start);
+		if (ret)
+			goto out_locked;
+	}
+
+	ret = 0;
+out_locked:
+	mutex_unlock(&block_group->free_space_lock);
+out:
+	btrfs_free_path(path2);
+	btrfs_free_path(path);
+	return ret;
+}
+
+int btrfs_create_free_space_tree(struct btrfs_fs_info *fs_info)
+{
+	struct btrfs_trans_handle *trans;
+	struct btrfs_root *tree_root = fs_info->tree_root;
+	struct btrfs_root *free_space_root;
+	struct btrfs_block_group *block_group;
+	struct rb_node *node;
+	int ret;
+
+	trans = btrfs_start_transaction(tree_root, 0);
+	if (IS_ERR(trans))
+		return PTR_ERR(trans);
+
+	set_bit(BTRFS_FS_CREATING_FREE_SPACE_TREE, &fs_info->flags);
+	set_bit(BTRFS_FS_FREE_SPACE_TREE_UNTRUSTED, &fs_info->flags);
+	free_space_root = btrfs_create_tree(trans,
+					    BTRFS_FREE_SPACE_TREE_OBJECTID);
+	if (IS_ERR(free_space_root)) {
+		ret = PTR_ERR(free_space_root);
+		btrfs_abort_transaction(trans, ret);
+		btrfs_end_transaction(trans);
+		goto out_clear;
+	}
+	ret = btrfs_global_root_insert(free_space_root);
+	if (ret) {
+		btrfs_put_root(free_space_root);
+		btrfs_abort_transaction(trans, ret);
+		btrfs_end_transaction(trans);
+		goto out_clear;
+	}
+
+	node = rb_first_cached(&fs_info->block_group_cache_tree);
+	while (node) {
+		block_group = rb_entry(node, struct btrfs_block_group,
+				       cache_node);
+		ret = populate_free_space_tree(trans, block_group);
+		if (ret) {
+			btrfs_abort_transaction(trans, ret);
+			btrfs_end_transaction(trans);
+			goto out_clear;
+		}
+		node = rb_next(node);
+	}
+
+	btrfs_set_fs_compat_ro(fs_info, FREE_SPACE_TREE);
+	btrfs_set_fs_compat_ro(fs_info, FREE_SPACE_TREE_VALID);
+	clear_bit(BTRFS_FS_CREATING_FREE_SPACE_TREE, &fs_info->flags);
+	ret = btrfs_commit_transaction(trans);
+
+	/*
+	 * Now that we've committed the transaction any reading of our commit
+	 * root will be safe, so we can cache from the free space tree now.
+	 */
+	clear_bit(BTRFS_FS_FREE_SPACE_TREE_UNTRUSTED, &fs_info->flags);
+	return ret;
+
+out_clear:
+	clear_bit(BTRFS_FS_CREATING_FREE_SPACE_TREE, &fs_info->flags);
+	clear_bit(BTRFS_FS_FREE_SPACE_TREE_UNTRUSTED, &fs_info->flags);
+	return ret;
+}
+
+static int clear_free_space_tree(struct btrfs_trans_handle *trans,
+				 struct btrfs_root *root)
+{
+	struct btrfs_path *path;
+	struct btrfs_key key;
+	int nr;
+	int ret;
+
+	path = btrfs_alloc_path();
+	if (!path)
+		return -ENOMEM;
+
+	key.objectid = 0;
+	key.type = 0;
+	key.offset = 0;
+
+	while (1) {
+		ret = btrfs_search_slot(trans, root, &key, path, -1, 1);
+		if (ret < 0)
+			goto out;
+
+		nr = btrfs_header_nritems(path->nodes[0]);
+		if (!nr)
+			break;
+
+		path->slots[0] = 0;
+		ret = btrfs_del_items(trans, root, path, 0, nr);
+		if (ret)
+			goto out;
+
+		btrfs_release_path(path);
+	}
+
+	ret = 0;
+out:
+	btrfs_free_path(path);
+	return ret;
+}
+
+int btrfs_delete_free_space_tree(struct btrfs_fs_info *fs_info)
+{
+	struct btrfs_trans_handle *trans;
+	struct btrfs_root *tree_root = fs_info->tree_root;
+	struct btrfs_key key = {
+		.objectid = BTRFS_FREE_SPACE_TREE_OBJECTID,
+		.type = BTRFS_ROOT_ITEM_KEY,
+		.offset = 0,
+	};
+	struct btrfs_root *free_space_root = btrfs_global_root(fs_info, &key);
+	int ret;
+
+	trans = btrfs_start_transaction(tree_root, 0);
+	if (IS_ERR(trans))
+		return PTR_ERR(trans);
+
+	btrfs_clear_fs_compat_ro(fs_info, FREE_SPACE_TREE);
+	btrfs_clear_fs_compat_ro(fs_info, FREE_SPACE_TREE_VALID);
+
+	ret = clear_free_space_tree(trans, free_space_root);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		btrfs_end_transaction(trans);
+		return ret;
+	}
+
+	ret = btrfs_del_root(trans, &free_space_root->root_key);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		btrfs_end_transaction(trans);
+		return ret;
+	}
+
+	btrfs_global_root_delete(free_space_root);
+
+	spin_lock(&fs_info->trans_lock);
+	list_del(&free_space_root->dirty_list);
+	spin_unlock(&fs_info->trans_lock);
+
+	btrfs_tree_lock(free_space_root->node);
+	btrfs_clear_buffer_dirty(trans, free_space_root->node);
+	btrfs_tree_unlock(free_space_root->node);
+	ret = btrfs_free_tree_block(trans, btrfs_root_id(free_space_root),
+				    free_space_root->node, 0, 1);
+	btrfs_put_root(free_space_root);
+	if (ret < 0) {
+		btrfs_abort_transaction(trans, ret);
+		btrfs_end_transaction(trans);
+		return ret;
+	}
+
+	return btrfs_commit_transaction(trans);
+}
+
+int btrfs_rebuild_free_space_tree(struct btrfs_fs_info *fs_info)
+{
+	struct btrfs_trans_handle *trans;
+	struct btrfs_key key = {
+		.objectid = BTRFS_FREE_SPACE_TREE_OBJECTID,
+		.type = BTRFS_ROOT_ITEM_KEY,
+		.offset = 0,
+	};
+	struct btrfs_root *free_space_root = btrfs_global_root(fs_info, &key);
+	struct rb_node *node;
+	int ret;
+
+	trans = btrfs_start_transaction(free_space_root, 1);
+	if (IS_ERR(trans))
+		return PTR_ERR(trans);
+
+	set_bit(BTRFS_FS_CREATING_FREE_SPACE_TREE, &fs_info->flags);
+	set_bit(BTRFS_FS_FREE_SPACE_TREE_UNTRUSTED, &fs_info->flags);
+
+	ret = clear_free_space_tree(trans, free_space_root);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		btrfs_end_transaction(trans);
+		return ret;
+	}
+
+	node = rb_first_cached(&fs_info->block_group_cache_tree);
+	while (node) {
+		struct btrfs_block_group *block_group;
+
+		block_group = rb_entry(node, struct btrfs_block_group,
+				       cache_node);
+		ret = populate_free_space_tree(trans, block_group);
+		if (ret) {
+			btrfs_abort_transaction(trans, ret);
+			btrfs_end_transaction(trans);
+			return ret;
+		}
+		node = rb_next(node);
+	}
+
+	btrfs_set_fs_compat_ro(fs_info, FREE_SPACE_TREE);
+	btrfs_set_fs_compat_ro(fs_info, FREE_SPACE_TREE_VALID);
+	clear_bit(BTRFS_FS_CREATING_FREE_SPACE_TREE, &fs_info->flags);
+
+	ret = btrfs_commit_transaction(trans);
+	clear_bit(BTRFS_FS_FREE_SPACE_TREE_UNTRUSTED, &fs_info->flags);
+	return ret;
+}
+
+static int __add_block_group_free_space(struct btrfs_trans_handle *trans,
+					struct btrfs_block_group *block_group,
+					struct btrfs_path *path)
+{
+	int ret;
+
+	clear_bit(BLOCK_GROUP_FLAG_NEEDS_FREE_SPACE, &block_group->runtime_flags);
+
+	ret = add_new_free_space_info(trans, block_group, path);
+	if (ret)
+		return ret;
+
+	return __add_to_free_space_tree(trans, block_group, path,
+					block_group->start,
+					block_group->length);
+}
+
+int add_block_group_free_space(struct btrfs_trans_handle *trans,
+			       struct btrfs_block_group *block_group)
+{
+	struct btrfs_fs_info *fs_info = trans->fs_info;
+	struct btrfs_path *path = NULL;
+	int ret = 0;
+
+	if (!btrfs_fs_compat_ro(fs_info, FREE_SPACE_TREE))
+		return 0;
+
+	mutex_lock(&block_group->free_space_lock);
+	if (!test_bit(BLOCK_GROUP_FLAG_NEEDS_FREE_SPACE, &block_group->runtime_flags))
+		goto out;
+
+	path = btrfs_alloc_path();
+	if (!path) {
+		ret = -ENOMEM;
+		goto out;
+	}
+
+	ret = __add_block_group_free_space(trans, block_group, path);
+
+out:
+	btrfs_free_path(path);
+	mutex_unlock(&block_group->free_space_lock);
+	if (ret)
+		btrfs_abort_transaction(trans, ret);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return ret;
 }
 

@@ -934,6 +934,7 @@ UNUSUAL_DEV(  0x05e3, 0x0723, 0x9451, 0x9451,
 		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
 		US_FL_SANE_SENSE ),
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* Added by Maël GUERIN <mael.guerin@murena.io> */
 UNUSUAL_DEV(  0x0603, 0x8611, 0x0000, 0xffff,
 		"Novatek",
@@ -1522,6 +1523,568 @@ UNUSUAL_DEV( 0x0bda, 0xa192, 0x0000, 0xffff,
 		"DISK",
 		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
 		US_FL_IGNORE_DEVICE ),
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/*
+ * Reported by Hanno Boeck <hanno@gmx.de>
+ * Taken from the Lycoris Kernel
+ */
+UNUSUAL_DEV(  0x0636, 0x0003, 0x0000, 0x9999,
+		"Vivitar",
+		"Vivicam 35Xx",
+		USB_SC_SCSI, USB_PR_BULK, NULL,
+		US_FL_FIX_INQUIRY ),
+
+UNUSUAL_DEV(  0x0644, 0x0000, 0x0100, 0x0100,
+		"TEAC",
+		"Floppy Drive",
+		USB_SC_UFI, USB_PR_CB, NULL, 0 ),
+
+/* Reported by Darsen Lu <darsen@micro.ee.nthu.edu.tw> */
+UNUSUAL_DEV( 0x066f, 0x8000, 0x0001, 0x0001,
+		"SigmaTel",
+		"USBMSC Audio Player",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY ),
+
+/* Reported by Daniel Kukula <daniel.kuku@gmail.com> */
+UNUSUAL_DEV( 0x067b, 0x1063, 0x0100, 0x0100,
+		"Prolific Technology, Inc.",
+		"Prolific Storage Gadget",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_BAD_SENSE ),
+
+/* Reported by Rogerio Brito <rbrito@ime.usp.br> */
+UNUSUAL_DEV( 0x067b, 0x2317, 0x0001, 0x001,
+		"Prolific Technology, Inc.",
+		"Mass Storage Device",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_NOT_LOCKABLE ),
+
+/* Reported by Richard -=[]=- <micro_flyer@hotmail.com> */
+/*
+ * Change to bcdDeviceMin (0x0100 to 0x0001) reported by
+ * Thomas Bartosik <tbartdev@gmx-topmail.de>
+ */
+UNUSUAL_DEV( 0x067b, 0x2507, 0x0001, 0x0100,
+		"Prolific Technology Inc.",
+		"Mass Storage Device",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY | US_FL_GO_SLOW ),
+
+/* Reported by Alex Butcher <alex.butcher@assursys.co.uk> */
+UNUSUAL_DEV( 0x067b, 0x3507, 0x0001, 0x0101,
+		"Prolific Technology Inc.",
+		"ATAPI-6 Bridge Controller",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY | US_FL_GO_SLOW ),
+
+/* Submitted by Benny Sjostrand <benny@hostmobility.com> */
+UNUSUAL_DEV( 0x0686, 0x4011, 0x0001, 0x0001,
+		"Minolta",
+		"Dimage F300",
+		USB_SC_SCSI, USB_PR_BULK, NULL, 0 ),
+
+/* Reported by Miguel A. Fosas <amn3s1a@ono.com> */
+UNUSUAL_DEV(  0x0686, 0x4017, 0x0001, 0x0001,
+		"Minolta",
+		"DIMAGE E223",
+		USB_SC_SCSI, USB_PR_DEVICE, NULL, 0 ),
+
+UNUSUAL_DEV(  0x0693, 0x0005, 0x0100, 0x0100,
+		"Hagiwara",
+		"Flashgate",
+		USB_SC_SCSI, USB_PR_BULK, NULL, 0 ),
+
+/* Reported by David Hamilton <niftimusmaximus@lycos.com> */
+UNUSUAL_DEV(  0x069b, 0x3004, 0x0001, 0x0001,
+		"Thomson Multimedia Inc.",
+		"RCA RD1080 MP3 Player",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY ),
+
+UNUSUAL_DEV(  0x06ca, 0x2003, 0x0100, 0x0100,
+		"Newer Technology",
+		"uSCSI",
+		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
+		US_FL_SCM_MULT_TARG ),
+
+/* Reported by Adrian Pilchowiec <adi1981@epf.pl> */
+UNUSUAL_DEV(  0x071b, 0x3203, 0x0000, 0x0000,
+		"RockChip",
+		"MP3",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_NO_WP_DETECT | US_FL_MAX_SECTORS_64 |
+		US_FL_NO_READ_CAPACITY_16),
+
+/*
+ * Reported by Jean-Baptiste Onofre <jb@nanthrax.net>
+ * Support the following product :
+ *    "Dane-Elec MediaTouch"
+ */
+UNUSUAL_DEV(  0x071b, 0x32bb, 0x0000, 0x0000,
+		"RockChip",
+		"MTP",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_NO_WP_DETECT | US_FL_MAX_SECTORS_64),
+
+/*
+ * Reported by Massimiliano Ghilardi <massimiliano.ghilardi@gmail.com>
+ * This USB MP3/AVI player device fails and disconnects if more than 128
+ * sectors (64kB) are read/written in a single command, and may be present
+ * at least in the following products:
+ *   "Magnex Digital Video Panel DVP 1800"
+ *   "MP4 AIGO 4GB SLOT SD"
+ *   "Teclast TL-C260 MP3"
+ *   "i.Meizu PMP MP3/MP4"
+ *   "Speed MV8 MP4 Audio Player"
+ */
+UNUSUAL_DEV(  0x071b, 0x3203, 0x0100, 0x0100,
+		"RockChip",
+		"ROCK MP3",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_MAX_SECTORS_64),
+
+/* Reported by Olivier Blondeau <zeitoun@gmail.com> */
+UNUSUAL_DEV(  0x0727, 0x0306, 0x0100, 0x0100,
+		"ATMEL",
+		"SND1 Storage",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_IGNORE_RESIDUE),
+
+/* Submitted by Roman Hodek <roman@hodek.net> */
+UNUSUAL_DEV(  0x0781, 0x0001, 0x0200, 0x0200,
+		"Sandisk",
+		"ImageMate SDDR-05a",
+		USB_SC_SCSI, USB_PR_CB, NULL,
+		US_FL_SINGLE_LUN ),
+
+UNUSUAL_DEV(  0x0781, 0x0002, 0x0009, 0x0009,
+		"SanDisk Corporation",
+		"ImageMate CompactFlash USB",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY ),
+
+UNUSUAL_DEV(  0x0781, 0x0100, 0x0100, 0x0100,
+		"Sandisk",
+		"ImageMate SDDR-12",
+		USB_SC_SCSI, USB_PR_CB, NULL,
+		US_FL_SINGLE_LUN ),
+
+/* Reported by Eero Volotinen <eero@ping-viini.org> */
+UNUSUAL_DEV(  0x07ab, 0xfccd, 0x0000, 0x9999,
+		"Freecom Technologies",
+		"FHD-Classic",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY),
+
+UNUSUAL_DEV(  0x07af, 0x0004, 0x0100, 0x0133,
+		"Microtech",
+		"USB-SCSI-DB25",
+		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
+		US_FL_SCM_MULT_TARG ), 
+
+UNUSUAL_DEV(  0x07af, 0x0005, 0x0100, 0x0100,
+		"Microtech",
+		"USB-SCSI-HD50",
+		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
+		US_FL_SCM_MULT_TARG ),
+
+#ifdef NO_SDDR09
+UNUSUAL_DEV(  0x07af, 0x0006, 0x0100, 0x0100,
+		"Microtech",
+		"CameraMate",
+		USB_SC_SCSI, USB_PR_CB, NULL,
+		US_FL_SINGLE_LUN ),
+#endif
+
+/*
+ * Datafab KECF-USB / Sagatek DCS-CF / Simpletech Flashlink UCF-100
+ * Only revision 1.13 tested (same for all of the above devices,
+ * based on the Datafab DF-UG-07 chip).  Needed for US_FL_FIX_INQUIRY.
+ * Submitted by Marek Michalkiewicz <marekm@amelek.gda.pl>.
+ * See also http://martin.wilck.bei.t-online.de/#kecf .
+ */
+UNUSUAL_DEV(  0x07c4, 0xa400, 0x0000, 0xffff,
+		"Datafab",
+		"KECF-USB",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_INQUIRY | US_FL_FIX_CAPACITY ),
+
+/*
+ * Reported by Rauch Wolke <rauchwolke@gmx.net>
+ * and augmented by binbin <binbinsh@gmail.com> (Bugzilla #12882)
+ */
+UNUSUAL_DEV(  0x07c4, 0xa4a5, 0x0000, 0xffff,
+		"Simple Tech/Datafab",
+		"CF+SM Reader",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_IGNORE_RESIDUE | US_FL_MAX_SECTORS_64 ),
+
+/*
+ * Casio QV 2x00/3x00/4000/8000 digital still cameras are not conformant
+ * to the USB storage specification in two ways:
+ * - They tell us they are using transport protocol CBI. In reality they
+ *   are using transport protocol CB.
+ * - They don't like the INQUIRY command. So we must handle this command
+ *   of the SCSI layer ourselves.
+ * - Some cameras with idProduct=0x1001 and bcdDevice=0x1000 have
+ *   bInterfaceProtocol=0x00 (USB_PR_CBI) while others have 0x01 (USB_PR_CB).
+ *   So don't remove the USB_PR_CB override!
+ * - Cameras with bcdDevice=0x9009 require the USB_SC_8070 override.
+ */
+UNUSUAL_DEV( 0x07cf, 0x1001, 0x1000, 0x9999,
+		"Casio",
+		"QV DigitalCamera",
+		USB_SC_8070, USB_PR_CB, NULL,
+		US_FL_NEED_OVERRIDE | US_FL_FIX_INQUIRY ),
+
+/* Submitted by Oleksandr Chumachenko <ledest@gmail.com> */
+UNUSUAL_DEV( 0x07cf, 0x1167, 0x0100, 0x0100,
+		"Casio",
+		"EX-N1 DigitalCamera",
+		USB_SC_8070, USB_PR_DEVICE, NULL, 0),
+
+/* Submitted by Hartmut Wahl <hwahl@hwahl.de>*/
+UNUSUAL_DEV( 0x0839, 0x000a, 0x0001, 0x0001,
+		"Samsung",
+		"Digimax 410",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_INQUIRY),
+
+/* Reported by Luciano Rocha <luciano@eurotux.com> */
+UNUSUAL_DEV( 0x0840, 0x0082, 0x0001, 0x0001,
+		"Argosy",
+		"Storage",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY),
+
+/* Reported and patched by Nguyen Anh Quynh <aquynh@gmail.com> */
+UNUSUAL_DEV( 0x0840, 0x0084, 0x0001, 0x0001,
+		"Argosy",
+		"Storage",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY),
+
+/* Reported by Martijn Hijdra <martijn.hijdra@gmail.com> */
+UNUSUAL_DEV( 0x0840, 0x0085, 0x0001, 0x0001,
+		"Argosy",
+		"Storage",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY),
+
+/* Supplied with some Castlewood ORB removable drives */
+UNUSUAL_DEV(  0x084b, 0xa001, 0x0000, 0x9999,
+		"Castlewood Systems",
+		"USB to SCSI cable",
+		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
+		US_FL_SCM_MULT_TARG ),
+
+/*
+ * Entry and supporting patch by Theodore Kilgore <kilgota@auburn.edu>.
+ * Flag will support Bulk devices which use a standards-violating 32-byte
+ * Command Block Wrapper. Here, the "DC2MEGA" cameras (several brands) with
+ * Grandtech GT892x chip, which request "Proprietary SCSI Bulk" support.
+ */
+
+UNUSUAL_DEV(  0x084d, 0x0011, 0x0110, 0x0110,
+		"Grandtech",
+		"DC2MEGA",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_BULK32),
+
+/*
+ * Reported by <ttkspam@free.fr>
+ * The device reports a vendor-specific device class, requiring an
+ * explicit vendor/product match.
+ */
+UNUSUAL_DEV(  0x0851, 0x1542, 0x0002, 0x0002,
+		"MagicPixel",
+		"FW_Omega2",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL, 0),
+
+/*
+ * Andrew Lunn <andrew@lunn.ch>
+ * PanDigital Digital Picture Frame. Does not like ALLOW_MEDIUM_REMOVAL
+ * on LUN 4.
+ * Note: Vend:Prod clash with "Ltd Maxell WS30 Slim Digital Camera"
+ */
+UNUSUAL_DEV(  0x0851, 0x1543, 0x0200, 0x0200,
+		"PanDigital",
+		"Photo Frame",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_NOT_LOCKABLE),
+
+UNUSUAL_DEV(  0x085a, 0x0026, 0x0100, 0x0133,
+		"Xircom",
+		"PortGear USB-SCSI (Mac USB Dock)",
+		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
+		US_FL_SCM_MULT_TARG ),
+
+UNUSUAL_DEV(  0x085a, 0x0028, 0x0100, 0x0133,
+		"Xircom",
+		"PortGear USB to SCSI Converter",
+		USB_SC_DEVICE, USB_PR_DEVICE, usb_stor_euscsi_init,
+		US_FL_SCM_MULT_TARG ),
+
+/* Submitted by Jan De Luyck <lkml@kcore.org> */
+UNUSUAL_DEV(  0x08bd, 0x1100, 0x0000, 0x0000,
+		"CITIZEN",
+		"X1DE-USB",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_SINGLE_LUN),
+
+/*
+ * Submitted by Dylan Taft <d13f00l@gmail.com>
+ * US_FL_IGNORE_RESIDUE Needed
+ */
+UNUSUAL_DEV(  0x08ca, 0x3103, 0x0100, 0x0100,
+		"AIPTEK",
+		"Aiptek USB Keychain MP3 Player",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_IGNORE_RESIDUE),
+
+/*
+ * Entry needed for flags. Moreover, all devices with this ID use
+ * bulk-only transport, but _some_ falsely report Control/Bulk instead.
+ * One example is "Trumpion Digital Research MYMP3".
+ * Submitted by Bjoern Brill <brill(at)fs.math.uni-frankfurt.de>
+ */
+UNUSUAL_DEV(  0x090a, 0x1001, 0x0100, 0x0100,
+		"Trumpion",
+		"t33520 USB Flash Card Controller",
+		USB_SC_DEVICE, USB_PR_BULK, NULL,
+		US_FL_NEED_OVERRIDE ),
+
+/*
+ * Reported by Filippo Bardelli <filibard@libero.it>
+ * The device reports a subclass of RBC, which is wrong.
+ */
+UNUSUAL_DEV(  0x090a, 0x1050, 0x0100, 0x0100,
+		"Trumpion Microelectronics, Inc.",
+		"33520 USB Digital Voice Recorder",
+		USB_SC_UFI, USB_PR_DEVICE, NULL,
+		0),
+
+/* Trumpion Microelectronics MP3 player (felipe_alfaro@linuxmail.org) */
+UNUSUAL_DEV( 0x090a, 0x1200, 0x0000, 0x9999,
+		"Trumpion",
+		"MP3 player",
+		USB_SC_RBC, USB_PR_BULK, NULL,
+		0 ),
+
+/* aeb */
+UNUSUAL_DEV( 0x090c, 0x1132, 0x0000, 0xffff,
+		"Feiya",
+		"5-in-1 Card Reader",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_CAPACITY ),
+
+/*
+ * Reported by Icenowy Zheng <icenowy@aosc.io>
+ * The SMI SM3350 USB-UFS bridge controller will enter a wrong state
+ * that do not process read/write command if a long sense is requested,
+ * so force to use 18-byte sense.
+ */
+UNUSUAL_DEV(  0x090c, 0x3350, 0x0000, 0xffff,
+		"SMI",
+		"SM3350 UFS-to-USB-Mass-Storage bridge",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_BAD_SENSE ),
+
+/*
+ * Reported by Paul Hartman <paul.hartman+linux@gmail.com>
+ * This card reader returns "Illegal Request, Logical Block Address
+ * Out of Range" for the first READ(10) after a new card is inserted.
+ */
+UNUSUAL_DEV(  0x090c, 0x6000, 0x0100, 0x0100,
+		"Feiya",
+		"SD/SDHC Card Reader",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_INITIAL_READ10 ),
+
+/*
+ * Patch by Tasos Sahanidis <tasos@tasossah.com>
+ * This flash drive always shows up with write protect enabled
+ * during the first mode sense.
+ */
+UNUSUAL_DEV(0x0951, 0x1697, 0x0100, 0x0100,
+		"Kingston",
+		"DT Ultimate G3",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_NO_WP_DETECT),
+
+/*
+ * This Pentax still camera is not conformant
+ * to the USB storage specification: -
+ * - It does not like the INQUIRY command. So we must handle this command
+ *   of the SCSI layer ourselves.
+ * Tested on Rev. 10.00 (0x1000)
+ * Submitted by James Courtier-Dutton <James@superbug.demon.co.uk>
+ */
+UNUSUAL_DEV( 0x0a17, 0x0004, 0x1000, 0x1000,
+		"Pentax",
+		"Optio 2/3/400",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_FIX_INQUIRY ),
+
+/*
+ * These are virtual windows driver CDs, which the zd1211rw driver
+ * automatically converts into WLAN devices.
+ */
+UNUSUAL_DEV( 0x0ace, 0x2011, 0x0101, 0x0101,
+		"ZyXEL",
+		"G-220F USB-WLAN Install",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_IGNORE_DEVICE ),
+
+UNUSUAL_DEV( 0x0ace, 0x20ff, 0x0101, 0x0101,
+		"SiteCom",
+		"WL-117 USB-WLAN Install",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_IGNORE_DEVICE ),
+
+/*
+ * Reported by Dan Williams <dcbw@redhat.com>
+ * Option N.V. mobile broadband modems
+ * Ignore driver CD mode and force into modem mode by default.
+ */
+
+/* iCON 225 */
+UNUSUAL_DEV(  0x0af0, 0x6971, 0x0000, 0x9999,
+		"Option N.V.",
+		"Mass Storage",
+		USB_SC_DEVICE, USB_PR_DEVICE, option_ms_init,
+		0),
+
+/*
+ * Reported by F. Aben <f.aben@option.com>
+ * This device (wrongly) has a vendor-specific device descriptor.
+ * The entry is needed so usb-storage can bind to it's mass-storage
+ * interface as an interface driver
+ */
+UNUSUAL_DEV( 0x0af0, 0x7401, 0x0000, 0x0000,
+		"Option",
+		"GI 0401 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+/*
+ * Reported by Jan Dumon <j.dumon@option.com>
+ * These devices (wrongly) have a vendor-specific device descriptor.
+ * These entries are needed so usb-storage can bind to their mass-storage
+ * interface as an interface driver
+ */
+UNUSUAL_DEV( 0x0af0, 0x7501, 0x0000, 0x0000,
+		"Option",
+		"GI 0431 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0x7701, 0x0000, 0x0000,
+		"Option",
+		"GI 0451 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0x7706, 0x0000, 0x0000,
+		"Option",
+		"GI 0451 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0x7901, 0x0000, 0x0000,
+		"Option",
+		"GI 0452 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0x7A01, 0x0000, 0x0000,
+		"Option",
+		"GI 0461 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0x7A05, 0x0000, 0x0000,
+		"Option",
+		"GI 0461 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0x8300, 0x0000, 0x0000,
+		"Option",
+		"GI 033x SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0x8302, 0x0000, 0x0000,
+		"Option",
+		"GI 033x SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0x8304, 0x0000, 0x0000,
+		"Option",
+		"GI 033x SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0xc100, 0x0000, 0x0000,
+		"Option",
+		"GI 070x SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0xd057, 0x0000, 0x0000,
+		"Option",
+		"GI 1505 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0xd058, 0x0000, 0x0000,
+		"Option",
+		"GI 1509 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0xd157, 0x0000, 0x0000,
+		"Option",
+		"GI 1515 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0xd257, 0x0000, 0x0000,
+		"Option",
+		"GI 1215 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+UNUSUAL_DEV( 0x0af0, 0xd357, 0x0000, 0x0000,
+		"Option",
+		"GI 1505 SD-Card",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		0 ),
+
+/* Reported by Namjae Jeon <namjae.jeon@samsung.com> */
+UNUSUAL_DEV(0x0bc2, 0x2300, 0x0000, 0x9999,
+		"Seagate",
+		"Portable HDD",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL, US_FL_WRITE_CACHE),
+
+/* Reported by Ben Efros <ben@pc-doctor.com> */
+UNUSUAL_DEV( 0x0bc2, 0x3010, 0x0000, 0x0000,
+		"Seagate",
+		"FreeAgent Pro",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_SANE_SENSE ),
+
+/* Reported by Kris Lindgren <kris.lindgren@gmail.com> */
+UNUSUAL_DEV( 0x0bc2, 0x3332, 0x0000, 0x9999,
+		"Seagate",
+		"External",
+		USB_SC_DEVICE, USB_PR_DEVICE, NULL,
+		US_FL_NO_WP_DETECT ),
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 UNUSUAL_DEV(  0x0d49, 0x7310, 0x0000, 0x9999,
 		"Maxtor",

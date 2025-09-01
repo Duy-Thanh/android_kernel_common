@@ -23,6 +23,7 @@
 #include <linux/platform_device.h>
 #include <linux/slab.h>
 #include <linux/delay.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/if_ether.h>	/* ETH_ALEN */
 
 #define IMX_OCOTP_OFFSET_B0W0		0x400 /* Offset from base address of the
@@ -233,6 +234,216 @@ static int imx_ocotp_cell_pp(void *context, const char *id, int index,
 		for (i = 0; i < bytes / 2; i++)
 			swap(buf[i], buf[bytes - i - 1]);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+#define IMX_OCOTP_OFFSET_B0W0		0x400 /* Offset from base address of the
+					       * OTP Bank0 Word0
+					       */
+#define IMX_OCOTP_OFFSET_PER_WORD	0x10  /* Offset between the start addr
+					       * of two consecutive OTP words.
+					       */
+
+#define IMX_OCOTP_ADDR_CTRL		0x0000
+#define IMX_OCOTP_ADDR_CTRL_SET		0x0004
+#define IMX_OCOTP_ADDR_CTRL_CLR		0x0008
+#define IMX_OCOTP_ADDR_TIMING		0x0010
+#define IMX_OCOTP_ADDR_DATA0		0x0020
+#define IMX_OCOTP_ADDR_DATA1		0x0030
+#define IMX_OCOTP_ADDR_DATA2		0x0040
+#define IMX_OCOTP_ADDR_DATA3		0x0050
+
+#define IMX_OCOTP_BM_CTRL_ADDR		0x000000FF
+#define IMX_OCOTP_BM_CTRL_BUSY		0x00000100
+#define IMX_OCOTP_BM_CTRL_ERROR		0x00000200
+#define IMX_OCOTP_BM_CTRL_REL_SHADOWS	0x00000400
+
+#define IMX_OCOTP_BM_CTRL_ADDR_8MP		0x000001FF
+#define IMX_OCOTP_BM_CTRL_BUSY_8MP		0x00000200
+#define IMX_OCOTP_BM_CTRL_ERROR_8MP		0x00000400
+#define IMX_OCOTP_BM_CTRL_REL_SHADOWS_8MP	0x00000800
+
+#define IMX_OCOTP_BM_CTRL_DEFAULT				\
+	{							\
+		.bm_addr = IMX_OCOTP_BM_CTRL_ADDR,		\
+		.bm_busy = IMX_OCOTP_BM_CTRL_BUSY,		\
+		.bm_error = IMX_OCOTP_BM_CTRL_ERROR,		\
+		.bm_rel_shadows = IMX_OCOTP_BM_CTRL_REL_SHADOWS,\
+	}
+
+#define IMX_OCOTP_BM_CTRL_8MP					\
+	{							\
+		.bm_addr = IMX_OCOTP_BM_CTRL_ADDR_8MP,		\
+		.bm_busy = IMX_OCOTP_BM_CTRL_BUSY_8MP,		\
+		.bm_error = IMX_OCOTP_BM_CTRL_ERROR_8MP,	\
+		.bm_rel_shadows = IMX_OCOTP_BM_CTRL_REL_SHADOWS_8MP,\
+	}
+
+#define TIMING_STROBE_PROG_US		10	/* Min time to blow a fuse */
+#define TIMING_STROBE_READ_NS		37	/* Min time before read */
+#define TIMING_RELAX_NS			17
+#define DEF_FSOURCE			1001	/* > 1000 ns */
+#define DEF_STROBE_PROG			10000	/* IPG clocks */
+#define IMX_OCOTP_WR_UNLOCK		0x3E770000
+#define IMX_OCOTP_READ_LOCKED_VAL	0xBADABADA
+
+static DEFINE_MUTEX(ocotp_mutex);
+
+struct ocotp_priv {
+	struct device *dev;
+	struct clk *clk;
+	void __iomem *base;
+	const struct ocotp_params *params;
+	struct nvmem_config *config;
+};
+
+struct ocotp_ctrl_reg {
+	u32 bm_addr;
+	u32 bm_busy;
+	u32 bm_error;
+	u32 bm_rel_shadows;
+};
+
+struct ocotp_params {
+	unsigned int nregs;
+	unsigned int bank_address_words;
+	void (*set_timing)(struct ocotp_priv *priv);
+	struct ocotp_ctrl_reg ctrl;
+};
+
+static int imx_ocotp_wait_for_busy(struct ocotp_priv *priv, u32 flags)
+{
+	int count;
+	u32 c, mask;
+	u32 bm_ctrl_busy, bm_ctrl_error;
+	void __iomem *base = priv->base;
+
+	bm_ctrl_busy = priv->params->ctrl.bm_busy;
+	bm_ctrl_error = priv->params->ctrl.bm_error;
+
+	mask = bm_ctrl_busy | bm_ctrl_error | flags;
+
+	for (count = 10000; count >= 0; count--) {
+		c = readl(base + IMX_OCOTP_ADDR_CTRL);
+		if (!(c & mask))
+			break;
+		cpu_relax();
+	}
+
+	if (count < 0) {
+		/* HW_OCOTP_CTRL[ERROR] will be set under the following
+		 * conditions:
+		 * - A write is performed to a shadow register during a shadow
+		 *   reload (essentially, while HW_OCOTP_CTRL[RELOAD_SHADOWS] is
+		 *   set. In addition, the contents of the shadow register shall
+		 *   not be updated.
+		 * - A write is performed to a shadow register which has been
+		 *   locked.
+		 * - A read is performed to from a shadow register which has
+		 *   been read locked.
+		 * - A program is performed to a fuse word which has been locked
+		 * - A read is performed to from a fuse word which has been read
+		 *   locked.
+		 */
+		if (c & bm_ctrl_error)
+			return -EPERM;
+		return -ETIMEDOUT;
+	}
+
+	return 0;
+}
+
+static void imx_ocotp_clr_err_if_set(struct ocotp_priv *priv)
+{
+	u32 c, bm_ctrl_error;
+	void __iomem *base = priv->base;
+
+	bm_ctrl_error = priv->params->ctrl.bm_error;
+
+	c = readl(base + IMX_OCOTP_ADDR_CTRL);
+	if (!(c & bm_ctrl_error))
+		return;
+
+	writel(bm_ctrl_error, base + IMX_OCOTP_ADDR_CTRL_CLR);
+}
+
+static int imx_ocotp_read(void *context, unsigned int offset,
+			  void *val, size_t bytes)
+{
+	struct ocotp_priv *priv = context;
+	unsigned int count;
+	u8 *buf, *p;
+	int i, ret;
+	u32 index, num_bytes;
+
+	index = offset >> 2;
+	num_bytes = round_up((offset % 4) + bytes, 4);
+	count = num_bytes >> 2;
+
+	if (count > (priv->params->nregs - index))
+		count = priv->params->nregs - index;
+
+	p = kzalloc(num_bytes, GFP_KERNEL);
+	if (!p)
+		return -ENOMEM;
+
+	mutex_lock(&ocotp_mutex);
+
+	buf = p;
+
+	ret = clk_prepare_enable(priv->clk);
+	if (ret < 0) {
+		mutex_unlock(&ocotp_mutex);
+		dev_err(priv->dev, "failed to prepare/enable ocotp clk\n");
+		kfree(p);
+		return ret;
+	}
+
+	ret = imx_ocotp_wait_for_busy(priv, 0);
+	if (ret < 0) {
+		dev_err(priv->dev, "timeout during read setup\n");
+		goto read_end;
+	}
+
+	for (i = index; i < (index + count); i++) {
+		*(u32 *)buf = readl(priv->base + IMX_OCOTP_OFFSET_B0W0 +
+			       i * IMX_OCOTP_OFFSET_PER_WORD);
+
+		/* 47.3.1.2
+		 * For "read locked" registers 0xBADABADA will be returned and
+		 * HW_OCOTP_CTRL[ERROR] will be set. It must be cleared by
+		 * software before any new write, read or reload access can be
+		 * issued
+		 */
+		if (*((u32 *)buf) == IMX_OCOTP_READ_LOCKED_VAL)
+			imx_ocotp_clr_err_if_set(priv);
+
+		buf += 4;
+	}
+
+	index = offset % 4;
+	memcpy(val, &p[index], bytes);
+
+read_end:
+	clk_disable_unprepare(priv->clk);
+	mutex_unlock(&ocotp_mutex);
+
+	kfree(p);
+
+	return ret;
+}
+
+static int imx_ocotp_cell_pp(void *context, const char *id, int index,
+			     unsigned int offset, void *data, size_t bytes)
+{
+	u8 *buf = data;
+	int i;
+
+	/* Deal with some post processing of nvmem cell data */
+	if (id && !strcmp(id, "mac-address"))
+		for (i = 0; i < bytes / 2; i++)
+			swap(buf[i], buf[bytes - i - 1]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

@@ -48,6 +48,7 @@ run_one() {
 
 	cfg_veth
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ip netns exec "${PEER_NS}" ./udpgso_bench_rx -C 1000 -R 100 ${rx_args} &
 	local PID1=$!
 
@@ -120,6 +121,81 @@ run_one_2sock() {
 	ip netns exec "${PEER_NS}" ./udpgso_bench_rx -C 1000 -R 100 ${rx_args} -p 12345 &
 	local PID1=$!
 	ip netns exec "${PEER_NS}" ./udpgso_bench_rx -C 2000 -R 100 ${rx_args} &
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ip netns exec "${PEER_NS}" ./udpgso_bench_rx -C 1000 -R 10 ${rx_args} &
+	local PID1=$!
+
+	wait_local_port_listen ${PEER_NS} 8000 udp
+	./udpgso_bench_tx ${tx_args}
+	check_err $?
+	wait ${PID1}
+	check_err $?
+	[ "$ret" -eq 0 ] && echo "ok" || echo "failed"
+	return $ret
+}
+
+run_test() {
+	local -r args=$@
+
+	printf " %-40s" "$1"
+	./in_netns.sh $0 __subprocess $2 rx -G -r $3
+}
+
+run_one_nat() {
+	# use 'rx' as separator between sender args and receiver args
+	local addr1 addr2 pid family="" ipt_cmd=ip6tables
+	local -r all="$@"
+	local -r tx_args=${all%rx*}
+	local -r rx_args=${all#*rx}
+	local ret=0
+
+	if [[ ${tx_args} = *-4* ]]; then
+		ipt_cmd=iptables
+		family=-4
+		addr1=192.168.1.1
+		addr2=192.168.1.3/24
+	else
+		addr1=2001:db8::1
+		addr2="2001:db8::3/64 nodad"
+	fi
+
+	cfg_veth
+	ip -netns "${PEER_NS}" addr add dev veth1 ${addr2}
+
+	# fool the GRO engine changing the destination address ...
+	ip netns exec "${PEER_NS}" $ipt_cmd -t nat -I PREROUTING -d ${addr1} -j DNAT --to-destination ${addr2%/*}
+
+	# ... so that GRO will match the UDP_GRO enabled socket, but packets
+	# will land on the 'plain' one
+	ip netns exec "${PEER_NS}" ./udpgso_bench_rx -G ${family} -b ${addr1} -n 0 &
+	local PID1=$!
+	ip netns exec "${PEER_NS}" ./udpgso_bench_rx -C 1000 -R 10 ${family} -b ${addr2%/*} ${rx_args} &
+	local PID2=$!
+
+	wait_local_port_listen "${PEER_NS}" 8000 udp
+	./udpgso_bench_tx ${tx_args}
+	check_err $?
+	kill -INT ${PID1}
+	wait ${PID2}
+	check_err $?
+	[ "$ret" -eq 0 ] && echo "ok" || echo "failed"
+	return $ret
+}
+
+run_one_2sock() {
+	# use 'rx' as separator between sender args and receiver args
+	local -r all="$@"
+	local -r tx_args=${all%rx*}
+	local -r rx_args=${all#*rx}
+	local ret=0
+
+	cfg_veth
+
+	ip netns exec "${PEER_NS}" ./udpgso_bench_rx -C 1000 -R 10 ${rx_args} -p 12345 &
+	local PID1=$!
+	ip netns exec "${PEER_NS}" ./udpgso_bench_rx -C 2000 -R 10 ${rx_args} &
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	local PID2=$!
 
 	wait_local_port_listen "${PEER_NS}" 12345 udp

@@ -32,6 +32,7 @@ struct xe_gt_sriov_metadata {
 };
 
 /**
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * struct xe_gt_sriov_pf_workers - GT level workers used by the PF.
  */
 struct xe_gt_sriov_pf_workers {
@@ -50,6 +51,17 @@ struct xe_gt_sriov_pf_workers {
  */
 struct xe_gt_sriov_pf {
 	struct xe_gt_sriov_pf_workers workers;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * struct xe_gt_sriov_pf - GT level PF virtualization data.
+ * @service: service data.
+ * @control: control data.
+ * @policy: policy data.
+ * @spare: PF-only provisioning configuration.
+ * @vfs: metadata for all VFs.
+ */
+struct xe_gt_sriov_pf {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	struct xe_gt_sriov_pf_service service;
 	struct xe_gt_sriov_pf_control control;
 	struct xe_gt_sriov_pf_policy policy;

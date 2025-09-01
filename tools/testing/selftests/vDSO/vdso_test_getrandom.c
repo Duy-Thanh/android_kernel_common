@@ -242,6 +242,7 @@ static void kselftest(void)
 	pid_t child;
 
 	ksft_print_header();
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	vgetrandom_init();
 	ksft_set_plan(2);
 
@@ -308,6 +309,73 @@ int main(int argc, char *argv[])
 
 	vgetrandom_init();
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ksft_set_plan(2);
+
+	for (size_t i = 0; i < 1000; ++i) {
+		ssize_t ret = vgetrandom(weird_size, sizeof(weird_size), 0);
+		ksft_assert(ret == sizeof(weird_size));
+	}
+
+	ksft_test_result_pass("getrandom: PASS\n");
+
+	unshare(CLONE_NEWUSER);
+	ksft_assert(unshare(CLONE_NEWTIME) == 0);
+	child = fork();
+	ksft_assert(child >= 0);
+	if (!child) {
+		vgetrandom_init();
+		child = getpid();
+		ksft_assert(ptrace(PTRACE_TRACEME, 0, NULL, NULL) == 0);
+		ksft_assert(kill(child, SIGSTOP) == 0);
+		ksft_assert(vgetrandom(weird_size, sizeof(weird_size), 0) == sizeof(weird_size));
+		_exit(0);
+	}
+	for (;;) {
+		struct ptrace_syscall_info info = { 0 };
+		int status, ret;
+		ksft_assert(waitpid(child, &status, 0) >= 0);
+		if (WIFEXITED(status)) {
+			ksft_assert(WEXITSTATUS(status) == 0);
+			break;
+		}
+		ksft_assert(WIFSTOPPED(status));
+		if (WSTOPSIG(status) == SIGSTOP)
+			ksft_assert(ptrace(PTRACE_SETOPTIONS, child, 0, PTRACE_O_TRACESYSGOOD) == 0);
+		else if (WSTOPSIG(status) == (SIGTRAP | 0x80)) {
+			ksft_assert(ptrace(PTRACE_GET_SYSCALL_INFO, child, sizeof(info), &info) > 0);
+			if (info.op == PTRACE_SYSCALL_INFO_ENTRY && info.entry.nr == __NR_getrandom &&
+			    info.entry.args[0] == (uintptr_t)weird_size && info.entry.args[1] == sizeof(weird_size))
+				ksft_exit_fail_msg("vgetrandom passed buffer to syscall getrandom unexpectedly\n");
+		}
+		ksft_assert(ptrace(PTRACE_SYSCALL, child, 0, 0) == 0);
+	}
+
+	ksft_test_result_pass("getrandom timens: PASS\n");
+
+	ksft_exit_pass();
+}
+
+static void usage(const char *argv0)
+{
+	fprintf(stderr, "Usage: %s [bench-single|bench-multi|fill]\n", argv0);
+}
+
+int main(int argc, char *argv[])
+{
+	vgetrandom_init();
+
+	if (argc == 1) {
+		kselftest();
+		return 0;
+	}
+
+	if (argc != 2) {
+		usage(argv[0]);
+		return 1;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (!strcmp(argv[1], "bench-single"))
 		bench_single();
 	else if (!strcmp(argv[1], "bench-multi"))

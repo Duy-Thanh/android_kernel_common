@@ -132,6 +132,7 @@ int hfsplus_uni2asc(struct super_block *sb,
 
 	op = astr;
 	ip = ustr->unicode;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	ustrlen = be16_to_cpu(ustr->length);
 	if (ustrlen > HFSPLUS_MAX_STRLEN) {
@@ -140,6 +141,10 @@ int hfsplus_uni2asc(struct super_block *sb,
 			be16_to_cpu(ustr->length), ustrlen);
 	}
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ustrlen = be16_to_cpu(ustr->length);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	len = *len_p;
 	ce1 = NULL;
 	compose = !test_bit(HFSPLUS_SB_NODECOMPOSE, &HFSPLUS_SB(sb)->flags);

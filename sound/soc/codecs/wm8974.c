@@ -419,6 +419,7 @@ static int wm8974_update_clocks(struct snd_soc_dai *dai)
 	fs256 = 256 * priv->fs;
 
 	f = wm8974_get_mclkdiv(priv->mclk, fs256, &mclkdiv);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (f != priv->mclk) {
 		/* The PLL performs best around 90MHz */
 		if (fs256 % 8000)
@@ -427,6 +428,13 @@ static int wm8974_update_clocks(struct snd_soc_dai *dai)
 			f = 24576000;
 
 		fpll = wm8974_get_mclkdiv(f, fs256, &mclkdiv);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (f != priv->mclk) {
+		/* The PLL performs best around 90MHz */
+		fpll = wm8974_get_mclkdiv(22500000, fs256, &mclkdiv);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	wm8974_set_dai_pll(dai, 0, 0, priv->mclk, fpll);

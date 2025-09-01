@@ -1181,6 +1181,7 @@ static void esw_set_peer_miss_rule_source_port(struct mlx5_eswitch *esw,
 static int esw_add_fdb_peer_miss_rules(struct mlx5_eswitch *esw,
 				       struct mlx5_core_dev *peer_dev)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct mlx5_eswitch *peer_esw = peer_dev->priv.eswitch;
 	struct mlx5_flow_destination dest = {};
 	struct mlx5_flow_act flow_act = {0};
@@ -1343,6 +1344,171 @@ static void esw_del_fdb_peer_miss_rules(struct mlx5_eswitch *esw,
 	if (mlx5_core_is_ecpf_esw_manager(peer_dev)) {
 		peer_vport = mlx5_eswitch_get_vport(peer_esw, MLX5_VPORT_PF);
 		mlx5_del_flow_rules(flows[peer_vport->index]);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct mlx5_flow_destination dest = {};
+	struct mlx5_flow_act flow_act = {0};
+	struct mlx5_flow_handle **flows;
+	/* total vports is the same for both e-switches */
+	int nvports = esw->total_vports;
+	struct mlx5_flow_handle *flow;
+	struct mlx5_flow_spec *spec;
+	struct mlx5_vport *vport;
+	int err, pfindex;
+	unsigned long i;
+	void *misc;
+
+	if (!MLX5_VPORT_MANAGER(esw->dev) && !mlx5_core_is_ecpf_esw_manager(esw->dev))
+		return 0;
+
+	spec = kvzalloc(sizeof(*spec), GFP_KERNEL);
+	if (!spec)
+		return -ENOMEM;
+
+	peer_miss_rules_setup(esw, peer_dev, spec, &dest);
+
+	flows = kvcalloc(nvports, sizeof(*flows), GFP_KERNEL);
+	if (!flows) {
+		err = -ENOMEM;
+		goto alloc_flows_err;
+	}
+
+	flow_act.action = MLX5_FLOW_CONTEXT_ACTION_FWD_DEST;
+	misc = MLX5_ADDR_OF(fte_match_param, spec->match_value,
+			    misc_parameters);
+
+	if (mlx5_core_is_ecpf_esw_manager(esw->dev)) {
+		vport = mlx5_eswitch_get_vport(esw, MLX5_VPORT_PF);
+		esw_set_peer_miss_rule_source_port(esw, peer_dev->priv.eswitch,
+						   spec, MLX5_VPORT_PF);
+
+		flow = mlx5_add_flow_rules(mlx5_eswitch_get_slow_fdb(esw),
+					   spec, &flow_act, &dest, 1);
+		if (IS_ERR(flow)) {
+			err = PTR_ERR(flow);
+			goto add_pf_flow_err;
+		}
+		flows[vport->index] = flow;
+	}
+
+	if (mlx5_ecpf_vport_exists(esw->dev)) {
+		vport = mlx5_eswitch_get_vport(esw, MLX5_VPORT_ECPF);
+		MLX5_SET(fte_match_set_misc, misc, source_port, MLX5_VPORT_ECPF);
+		flow = mlx5_add_flow_rules(mlx5_eswitch_get_slow_fdb(esw),
+					   spec, &flow_act, &dest, 1);
+		if (IS_ERR(flow)) {
+			err = PTR_ERR(flow);
+			goto add_ecpf_flow_err;
+		}
+		flows[vport->index] = flow;
+	}
+
+	mlx5_esw_for_each_vf_vport(esw, i, vport, mlx5_core_max_vfs(esw->dev)) {
+		esw_set_peer_miss_rule_source_port(esw,
+						   peer_dev->priv.eswitch,
+						   spec, vport->vport);
+
+		flow = mlx5_add_flow_rules(mlx5_eswitch_get_slow_fdb(esw),
+					   spec, &flow_act, &dest, 1);
+		if (IS_ERR(flow)) {
+			err = PTR_ERR(flow);
+			goto add_vf_flow_err;
+		}
+		flows[vport->index] = flow;
+	}
+
+	if (mlx5_core_ec_sriov_enabled(esw->dev)) {
+		mlx5_esw_for_each_ec_vf_vport(esw, i, vport, mlx5_core_max_ec_vfs(esw->dev)) {
+			if (i >= mlx5_core_max_ec_vfs(peer_dev))
+				break;
+			esw_set_peer_miss_rule_source_port(esw, peer_dev->priv.eswitch,
+							   spec, vport->vport);
+			flow = mlx5_add_flow_rules(esw->fdb_table.offloads.slow_fdb,
+						   spec, &flow_act, &dest, 1);
+			if (IS_ERR(flow)) {
+				err = PTR_ERR(flow);
+				goto add_ec_vf_flow_err;
+			}
+			flows[vport->index] = flow;
+		}
+	}
+
+	pfindex = mlx5_get_dev_index(peer_dev);
+	if (pfindex >= MLX5_MAX_PORTS) {
+		esw_warn(esw->dev, "Peer dev index(%d) is over the max num defined(%d)\n",
+			 pfindex, MLX5_MAX_PORTS);
+		err = -EINVAL;
+		goto add_ec_vf_flow_err;
+	}
+	esw->fdb_table.offloads.peer_miss_rules[pfindex] = flows;
+
+	kvfree(spec);
+	return 0;
+
+add_ec_vf_flow_err:
+	mlx5_esw_for_each_ec_vf_vport(esw, i, vport, mlx5_core_max_ec_vfs(esw->dev)) {
+		if (!flows[vport->index])
+			continue;
+		mlx5_del_flow_rules(flows[vport->index]);
+	}
+add_vf_flow_err:
+	mlx5_esw_for_each_vf_vport(esw, i, vport, mlx5_core_max_vfs(esw->dev)) {
+		if (!flows[vport->index])
+			continue;
+		mlx5_del_flow_rules(flows[vport->index]);
+	}
+	if (mlx5_ecpf_vport_exists(esw->dev)) {
+		vport = mlx5_eswitch_get_vport(esw, MLX5_VPORT_ECPF);
+		mlx5_del_flow_rules(flows[vport->index]);
+	}
+add_ecpf_flow_err:
+	if (mlx5_core_is_ecpf_esw_manager(esw->dev)) {
+		vport = mlx5_eswitch_get_vport(esw, MLX5_VPORT_PF);
+		mlx5_del_flow_rules(flows[vport->index]);
+	}
+add_pf_flow_err:
+	esw_warn(esw->dev, "FDB: Failed to add peer miss flow rule err %d\n", err);
+	kvfree(flows);
+alloc_flows_err:
+	kvfree(spec);
+	return err;
+}
+
+static void esw_del_fdb_peer_miss_rules(struct mlx5_eswitch *esw,
+					struct mlx5_core_dev *peer_dev)
+{
+	u16 peer_index = mlx5_get_dev_index(peer_dev);
+	struct mlx5_flow_handle **flows;
+	struct mlx5_vport *vport;
+	unsigned long i;
+
+	flows = esw->fdb_table.offloads.peer_miss_rules[peer_index];
+	if (!flows)
+		return;
+
+	if (mlx5_core_ec_sriov_enabled(esw->dev)) {
+		mlx5_esw_for_each_ec_vf_vport(esw, i, vport, mlx5_core_max_ec_vfs(esw->dev)) {
+			/* The flow for a particular vport could be NULL if the other ECPF
+			 * has fewer or no VFs enabled
+			 */
+			if (!flows[vport->index])
+				continue;
+			mlx5_del_flow_rules(flows[vport->index]);
+		}
+	}
+
+	mlx5_esw_for_each_vf_vport(esw, i, vport, mlx5_core_max_vfs(esw->dev))
+		mlx5_del_flow_rules(flows[vport->index]);
+
+	if (mlx5_ecpf_vport_exists(esw->dev)) {
+		vport = mlx5_eswitch_get_vport(esw, MLX5_VPORT_ECPF);
+		mlx5_del_flow_rules(flows[vport->index]);
+	}
+
+	if (mlx5_core_is_ecpf_esw_manager(esw->dev)) {
+		vport = mlx5_eswitch_get_vport(esw, MLX5_VPORT_PF);
+		mlx5_del_flow_rules(flows[vport->index]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	kvfree(flows);

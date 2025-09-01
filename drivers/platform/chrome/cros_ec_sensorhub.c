@@ -8,6 +8,7 @@
 
 #include <linux/init.h>
 #include <linux/device.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/delay.h>
 #include <linux/mod_devicetable.h>
 #include <linux/module.h>
@@ -85,6 +86,71 @@ static int cros_ec_sensorhub_register(struct device *dev,
 		if (retries < CROS_EC_CMD_INFO_RETRIES) {
 			dev_warn(dev, "%d retries needed to bring up sensor %d\n",
 				 CROS_EC_CMD_INFO_RETRIES - retries, i);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/mod_devicetable.h>
+#include <linux/module.h>
+#include <linux/platform_data/cros_ec_commands.h>
+#include <linux/platform_data/cros_ec_proto.h>
+#include <linux/platform_data/cros_ec_sensorhub.h>
+#include <linux/platform_device.h>
+#include <linux/slab.h>
+#include <linux/types.h>
+
+#define DRV_NAME		"cros-ec-sensorhub"
+
+static void cros_ec_sensorhub_free_sensor(void *arg)
+{
+	struct platform_device *pdev = arg;
+
+	platform_device_unregister(pdev);
+}
+
+static int cros_ec_sensorhub_allocate_sensor(struct device *parent,
+					     char *sensor_name,
+					     int sensor_num)
+{
+	struct cros_ec_sensor_platform sensor_platforms = {
+		.sensor_num = sensor_num,
+	};
+	struct platform_device *pdev;
+
+	pdev = platform_device_register_data(parent, sensor_name,
+					     PLATFORM_DEVID_AUTO,
+					     &sensor_platforms,
+					     sizeof(sensor_platforms));
+	if (IS_ERR(pdev))
+		return PTR_ERR(pdev);
+
+	return devm_add_action_or_reset(parent,
+					cros_ec_sensorhub_free_sensor,
+					pdev);
+}
+
+static int cros_ec_sensorhub_register(struct device *dev,
+				      struct cros_ec_sensorhub *sensorhub)
+{
+	int sensor_type[MOTIONSENSE_TYPE_MAX] = { 0 };
+	struct cros_ec_command *msg = sensorhub->msg;
+	struct cros_ec_dev *ec = sensorhub->ec;
+	int ret, i;
+	char *name;
+
+
+	msg->version = 1;
+	msg->insize = sizeof(struct ec_response_motion_sense);
+	msg->outsize = sizeof(struct ec_params_motion_sense);
+
+	for (i = 0; i < sensorhub->sensor_num; i++) {
+		sensorhub->params->cmd = MOTIONSENSE_CMD_INFO;
+		sensorhub->params->info.sensor_num = i;
+
+		ret = cros_ec_cmd_xfer_status(ec->ec_dev, msg);
+		if (ret < 0) {
+			dev_warn(dev, "no info for EC sensor %d : %d/%d\n",
+				 i, ret, msg->result);
+			continue;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 
 		switch (sensorhub->resp->info.type) {

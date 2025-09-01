@@ -232,6 +232,7 @@ static void signal_our_withdraw(struct gfs2_sbd *sdp)
 	 */
 	ret = gfs2_glock_nq(&sdp->sd_live_gh);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	gfs2_glock_put(live_gl); /* drop extra reference we acquired */
 	clear_bit(SDF_WITHDRAW_RECOVERY, &sdp->sd_flags);
 
@@ -248,6 +249,34 @@ static void signal_our_withdraw(struct gfs2_sbd *sdp)
 		 */
 		goto skip_recovery;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/*
+	 * If we actually got the "live" lock in EX mode, there are no other
+	 * nodes available to replay our journal. So we try to replay it
+	 * ourselves. We hold the "live" glock to prevent other mounters
+	 * during recovery, then just dequeue it and reacquire it in our
+	 * normal SH mode. Just in case the problem that caused us to
+	 * withdraw prevents us from recovering our journal (e.g. io errors
+	 * and such) we still check if the journal is clean before proceeding
+	 * but we may wait forever until another mounter does the recovery.
+	 */
+	if (ret == 0) {
+		fs_warn(sdp, "No other mounters found. Trying to recover our "
+			"own journal jid %d.\n", sdp->sd_lockstruct.ls_jid);
+		if (gfs2_recover_journal(sdp->sd_jdesc, 1))
+			fs_warn(sdp, "Unable to recover our journal jid %d.\n",
+				sdp->sd_lockstruct.ls_jid);
+		gfs2_glock_dq_wait(&sdp->sd_live_gh);
+		gfs2_holder_reinit(LM_ST_SHARED,
+				   LM_FLAG_NOEXP | GL_EXACT | GL_NOPID,
+				   &sdp->sd_live_gh);
+		gfs2_glock_nq(&sdp->sd_live_gh);
+	}
+
+	gfs2_glock_put(live_gl); /* drop extra reference we acquired */
+	clear_bit(SDF_WITHDRAW_RECOVERY, &sdp->sd_flags);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/*
 	 * At this point our journal is evicted, so we need to get a new inode

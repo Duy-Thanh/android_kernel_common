@@ -8996,6 +8996,7 @@ void md_do_sync(struct md_thread *thread)
 	}
 
 	action = md_sync_action(mddev);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (action == ACTION_FROZEN || action == ACTION_IDLE) {
 		set_bit(MD_RECOVERY_INTR, &mddev->recovery);
 		goto skip;
@@ -10010,6 +10011,1015 @@ static void check_sb_changes(struct mddev *mddev, struct md_rdev *rdev)
 				set_bit(MD_RECOVERY_NEEDED, &mddev->recovery);
 			continue;
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	desc = md_sync_action_name(action);
+	mddev->last_sync_action = action;
+
+	/*
+	 * Before starting a resync we must have set curr_resync to
+	 * 2, and then checked that every "conflicting" array has curr_resync
+	 * less than ours.  When we find one that is the same or higher
+	 * we wait on resync_wait.  To avoid deadlock, we reduce curr_resync
+	 * to 1 if we choose to yield (based arbitrarily on address of mddev structure).
+	 * This will mean we have to start checking from the beginning again.
+	 *
+	 */
+	if (mddev_is_clustered(mddev))
+		md_cluster_ops->resync_start_notify(mddev);
+	do {
+		int mddev2_minor = -1;
+		mddev->curr_resync = MD_RESYNC_DELAYED;
+
+	try_again:
+		if (test_bit(MD_RECOVERY_INTR, &mddev->recovery))
+			goto skip;
+		spin_lock(&all_mddevs_lock);
+		list_for_each_entry(mddev2, &all_mddevs, all_mddevs) {
+			if (test_bit(MD_DELETED, &mddev2->flags))
+				continue;
+			if (mddev2 == mddev)
+				continue;
+			if (!mddev->parallel_resync
+			&&  mddev2->curr_resync
+			&&  match_mddev_units(mddev, mddev2)) {
+				DEFINE_WAIT(wq);
+				if (mddev < mddev2 &&
+				    mddev->curr_resync == MD_RESYNC_DELAYED) {
+					/* arbitrarily yield */
+					mddev->curr_resync = MD_RESYNC_YIELDED;
+					wake_up(&resync_wait);
+				}
+				if (mddev > mddev2 &&
+				    mddev->curr_resync == MD_RESYNC_YIELDED)
+					/* no need to wait here, we can wait the next
+					 * time 'round when curr_resync == 2
+					 */
+					continue;
+				/* We need to wait 'interruptible' so as not to
+				 * contribute to the load average, and not to
+				 * be caught by 'softlockup'
+				 */
+				prepare_to_wait(&resync_wait, &wq, TASK_INTERRUPTIBLE);
+				if (!test_bit(MD_RECOVERY_INTR, &mddev->recovery) &&
+				    mddev2->curr_resync >= mddev->curr_resync) {
+					if (mddev2_minor != mddev2->md_minor) {
+						mddev2_minor = mddev2->md_minor;
+						pr_info("md: delaying %s of %s until %s has finished (they share one or more physical units)\n",
+							desc, mdname(mddev),
+							mdname(mddev2));
+					}
+					spin_unlock(&all_mddevs_lock);
+
+					if (signal_pending(current))
+						flush_signals(current);
+					schedule();
+					finish_wait(&resync_wait, &wq);
+					goto try_again;
+				}
+				finish_wait(&resync_wait, &wq);
+			}
+		}
+		spin_unlock(&all_mddevs_lock);
+	} while (mddev->curr_resync < MD_RESYNC_DELAYED);
+
+	max_sectors = md_sync_max_sectors(mddev, action);
+	j = md_sync_position(mddev, action);
+
+	pr_info("md: %s of RAID array %s\n", desc, mdname(mddev));
+	pr_debug("md: minimum _guaranteed_  speed: %d KB/sec/disk.\n", speed_min(mddev));
+	pr_debug("md: using maximum available idle IO bandwidth (but not more than %d KB/sec) for %s.\n",
+		 speed_max(mddev), desc);
+
+	is_mddev_idle(mddev, 1); /* this initializes IO event counters */
+
+	io_sectors = 0;
+	for (m = 0; m < SYNC_MARKS; m++) {
+		mark[m] = jiffies;
+		mark_cnt[m] = io_sectors;
+	}
+	last_mark = 0;
+	mddev->resync_mark = mark[last_mark];
+	mddev->resync_mark_cnt = mark_cnt[last_mark];
+
+	/*
+	 * Tune reconstruction:
+	 */
+	window = 32 * (PAGE_SIZE / 512);
+	pr_debug("md: using %dk window, over a total of %lluk.\n",
+		 window/2, (unsigned long long)max_sectors/2);
+
+	atomic_set(&mddev->recovery_active, 0);
+	last_check = 0;
+
+	if (j >= MD_RESYNC_ACTIVE) {
+		pr_debug("md: resuming %s of %s from checkpoint.\n",
+			 desc, mdname(mddev));
+		mddev->curr_resync = j;
+	} else
+		mddev->curr_resync = MD_RESYNC_ACTIVE; /* no longer delayed */
+	mddev->curr_resync_completed = j;
+	sysfs_notify_dirent_safe(mddev->sysfs_completed);
+	md_new_event();
+	update_time = jiffies;
+
+	blk_start_plug(&plug);
+	while (j < max_sectors) {
+		sector_t sectors;
+
+		skipped = 0;
+
+		if (!test_bit(MD_RECOVERY_RESHAPE, &mddev->recovery) &&
+		    ((mddev->curr_resync > mddev->curr_resync_completed &&
+		      (mddev->curr_resync - mddev->curr_resync_completed)
+		      > (max_sectors >> 4)) ||
+		     time_after_eq(jiffies, update_time + UPDATE_FREQUENCY) ||
+		     (j - mddev->curr_resync_completed)*2
+		     >= mddev->resync_max - mddev->curr_resync_completed ||
+		     mddev->curr_resync_completed > mddev->resync_max
+			    )) {
+			/* time to update curr_resync_completed */
+			wait_event(mddev->recovery_wait,
+				   atomic_read(&mddev->recovery_active) == 0);
+			mddev->curr_resync_completed = j;
+			if (test_bit(MD_RECOVERY_SYNC, &mddev->recovery) &&
+			    j > mddev->recovery_cp)
+				mddev->recovery_cp = j;
+			update_time = jiffies;
+			set_bit(MD_SB_CHANGE_CLEAN, &mddev->sb_flags);
+			sysfs_notify_dirent_safe(mddev->sysfs_completed);
+		}
+
+		while (j >= mddev->resync_max &&
+		       !test_bit(MD_RECOVERY_INTR, &mddev->recovery)) {
+			/* As this condition is controlled by user-space,
+			 * we can block indefinitely, so use '_interruptible'
+			 * to avoid triggering warnings.
+			 */
+			flush_signals(current); /* just in case */
+			wait_event_interruptible(mddev->recovery_wait,
+						 mddev->resync_max > j
+						 || test_bit(MD_RECOVERY_INTR,
+							     &mddev->recovery));
+		}
+
+		if (test_bit(MD_RECOVERY_INTR, &mddev->recovery))
+			break;
+
+		sectors = mddev->pers->sync_request(mddev, j, max_sectors,
+						    &skipped);
+		if (sectors == 0) {
+			set_bit(MD_RECOVERY_INTR, &mddev->recovery);
+			break;
+		}
+
+		if (!skipped) { /* actual IO requested */
+			io_sectors += sectors;
+			atomic_add(sectors, &mddev->recovery_active);
+		}
+
+		if (test_bit(MD_RECOVERY_INTR, &mddev->recovery))
+			break;
+
+		j += sectors;
+		if (j > max_sectors)
+			/* when skipping, extra large numbers can be returned. */
+			j = max_sectors;
+		if (j >= MD_RESYNC_ACTIVE)
+			mddev->curr_resync = j;
+		mddev->curr_mark_cnt = io_sectors;
+		if (last_check == 0)
+			/* this is the earliest that rebuild will be
+			 * visible in /proc/mdstat
+			 */
+			md_new_event();
+
+		if (last_check + window > io_sectors || j == max_sectors)
+			continue;
+
+		last_check = io_sectors;
+	repeat:
+		if (time_after_eq(jiffies, mark[last_mark] + SYNC_MARK_STEP )) {
+			/* step marks */
+			int next = (last_mark+1) % SYNC_MARKS;
+
+			mddev->resync_mark = mark[next];
+			mddev->resync_mark_cnt = mark_cnt[next];
+			mark[next] = jiffies;
+			mark_cnt[next] = io_sectors - atomic_read(&mddev->recovery_active);
+			last_mark = next;
+		}
+
+		if (test_bit(MD_RECOVERY_INTR, &mddev->recovery))
+			break;
+
+		/*
+		 * this loop exits only if either when we are slower than
+		 * the 'hard' speed limit, or the system was IO-idle for
+		 * a jiffy.
+		 * the system might be non-idle CPU-wise, but we only care
+		 * about not overloading the IO subsystem. (things like an
+		 * e2fsck being done on the RAID array should execute fast)
+		 */
+		cond_resched();
+
+		recovery_done = io_sectors - atomic_read(&mddev->recovery_active);
+		currspeed = ((unsigned long)(recovery_done - mddev->resync_mark_cnt))/2
+			/((jiffies-mddev->resync_mark)/HZ +1) +1;
+
+		if (currspeed > speed_min(mddev)) {
+			if (currspeed > speed_max(mddev)) {
+				msleep(500);
+				goto repeat;
+			}
+			if (!is_mddev_idle(mddev, 0)) {
+				/*
+				 * Give other IO more of a chance.
+				 * The faster the devices, the less we wait.
+				 */
+				wait_event(mddev->recovery_wait,
+					   !atomic_read(&mddev->recovery_active));
+			}
+		}
+	}
+	pr_info("md: %s: %s %s.\n",mdname(mddev), desc,
+		test_bit(MD_RECOVERY_INTR, &mddev->recovery)
+		? "interrupted" : "done");
+	/*
+	 * this also signals 'finished resyncing' to md_stop
+	 */
+	blk_finish_plug(&plug);
+	wait_event(mddev->recovery_wait, !atomic_read(&mddev->recovery_active));
+
+	if (!test_bit(MD_RECOVERY_RESHAPE, &mddev->recovery) &&
+	    !test_bit(MD_RECOVERY_INTR, &mddev->recovery) &&
+	    mddev->curr_resync >= MD_RESYNC_ACTIVE) {
+		mddev->curr_resync_completed = mddev->curr_resync;
+		sysfs_notify_dirent_safe(mddev->sysfs_completed);
+	}
+	mddev->pers->sync_request(mddev, max_sectors, max_sectors, &skipped);
+
+	if (!test_bit(MD_RECOVERY_CHECK, &mddev->recovery) &&
+	    mddev->curr_resync > MD_RESYNC_ACTIVE) {
+		if (test_bit(MD_RECOVERY_SYNC, &mddev->recovery)) {
+			if (test_bit(MD_RECOVERY_INTR, &mddev->recovery)) {
+				if (mddev->curr_resync >= mddev->recovery_cp) {
+					pr_debug("md: checkpointing %s of %s.\n",
+						 desc, mdname(mddev));
+					if (test_bit(MD_RECOVERY_ERROR,
+						&mddev->recovery))
+						mddev->recovery_cp =
+							mddev->curr_resync_completed;
+					else
+						mddev->recovery_cp =
+							mddev->curr_resync;
+				}
+			} else
+				mddev->recovery_cp = MaxSector;
+		} else {
+			if (!test_bit(MD_RECOVERY_INTR, &mddev->recovery))
+				mddev->curr_resync = MaxSector;
+			if (!test_bit(MD_RECOVERY_RESHAPE, &mddev->recovery) &&
+			    test_bit(MD_RECOVERY_RECOVER, &mddev->recovery)) {
+				rcu_read_lock();
+				rdev_for_each_rcu(rdev, mddev)
+					if (rdev->raid_disk >= 0 &&
+					    mddev->delta_disks >= 0 &&
+					    !test_bit(Journal, &rdev->flags) &&
+					    !test_bit(Faulty, &rdev->flags) &&
+					    !test_bit(In_sync, &rdev->flags) &&
+					    rdev->recovery_offset < mddev->curr_resync)
+						rdev->recovery_offset = mddev->curr_resync;
+				rcu_read_unlock();
+			}
+		}
+	}
+ skip:
+	/* set CHANGE_PENDING here since maybe another update is needed,
+	 * so other nodes are informed. It should be harmless for normal
+	 * raid */
+	set_mask_bits(&mddev->sb_flags, 0,
+		      BIT(MD_SB_CHANGE_PENDING) | BIT(MD_SB_CHANGE_DEVS));
+
+	if (test_bit(MD_RECOVERY_RESHAPE, &mddev->recovery) &&
+			!test_bit(MD_RECOVERY_INTR, &mddev->recovery) &&
+			mddev->delta_disks > 0 &&
+			mddev->pers->finish_reshape &&
+			mddev->pers->size &&
+			!mddev_is_dm(mddev)) {
+		mddev_lock_nointr(mddev);
+		md_set_array_sectors(mddev, mddev->pers->size(mddev, 0, 0));
+		mddev_unlock(mddev);
+		if (!mddev_is_clustered(mddev))
+			set_capacity_and_notify(mddev->gendisk,
+						mddev->array_sectors);
+	}
+
+	spin_lock(&mddev->lock);
+	if (!test_bit(MD_RECOVERY_INTR, &mddev->recovery)) {
+		/* We completed so min/max setting can be forgotten if used. */
+		if (test_bit(MD_RECOVERY_REQUESTED, &mddev->recovery))
+			mddev->resync_min = 0;
+		mddev->resync_max = MaxSector;
+	} else if (test_bit(MD_RECOVERY_REQUESTED, &mddev->recovery))
+		mddev->resync_min = mddev->curr_resync_completed;
+	set_bit(MD_RECOVERY_DONE, &mddev->recovery);
+	mddev->curr_resync = MD_RESYNC_NONE;
+	spin_unlock(&mddev->lock);
+
+	wake_up(&resync_wait);
+	md_wakeup_thread(mddev->thread);
+	return;
+}
+EXPORT_SYMBOL_GPL(md_do_sync);
+
+static bool rdev_removeable(struct md_rdev *rdev)
+{
+	/* rdev is not used. */
+	if (rdev->raid_disk < 0)
+		return false;
+
+	/* There are still inflight io, don't remove this rdev. */
+	if (atomic_read(&rdev->nr_pending))
+		return false;
+
+	/*
+	 * An error occurred but has not yet been acknowledged by the metadata
+	 * handler, don't remove this rdev.
+	 */
+	if (test_bit(Blocked, &rdev->flags))
+		return false;
+
+	/* Fautly rdev is not used, it's safe to remove it. */
+	if (test_bit(Faulty, &rdev->flags))
+		return true;
+
+	/* Journal disk can only be removed if it's faulty. */
+	if (test_bit(Journal, &rdev->flags))
+		return false;
+
+	/*
+	 * 'In_sync' is cleared while 'raid_disk' is valid, which means
+	 * replacement has just become active from pers->spare_active(), and
+	 * then pers->hot_remove_disk() will replace this rdev with replacement.
+	 */
+	if (!test_bit(In_sync, &rdev->flags))
+		return true;
+
+	return false;
+}
+
+static bool rdev_is_spare(struct md_rdev *rdev)
+{
+	return !test_bit(Candidate, &rdev->flags) && rdev->raid_disk >= 0 &&
+	       !test_bit(In_sync, &rdev->flags) &&
+	       !test_bit(Journal, &rdev->flags) &&
+	       !test_bit(Faulty, &rdev->flags);
+}
+
+static bool rdev_addable(struct md_rdev *rdev)
+{
+	/* rdev is already used, don't add it again. */
+	if (test_bit(Candidate, &rdev->flags) || rdev->raid_disk >= 0 ||
+	    test_bit(Faulty, &rdev->flags))
+		return false;
+
+	/* Allow to add journal disk. */
+	if (test_bit(Journal, &rdev->flags))
+		return true;
+
+	/* Allow to add if array is read-write. */
+	if (md_is_rdwr(rdev->mddev))
+		return true;
+
+	/*
+	 * For read-only array, only allow to readd a rdev. And if bitmap is
+	 * used, don't allow to readd a rdev that is too old.
+	 */
+	if (rdev->saved_raid_disk >= 0 && !test_bit(Bitmap_sync, &rdev->flags))
+		return true;
+
+	return false;
+}
+
+static bool md_spares_need_change(struct mddev *mddev)
+{
+	struct md_rdev *rdev;
+
+	rcu_read_lock();
+	rdev_for_each_rcu(rdev, mddev) {
+		if (rdev_removeable(rdev) || rdev_addable(rdev)) {
+			rcu_read_unlock();
+			return true;
+		}
+	}
+	rcu_read_unlock();
+	return false;
+}
+
+static int remove_and_add_spares(struct mddev *mddev,
+				 struct md_rdev *this)
+{
+	struct md_rdev *rdev;
+	int spares = 0;
+	int removed = 0;
+
+	if (this && test_bit(MD_RECOVERY_RUNNING, &mddev->recovery))
+		/* Mustn't remove devices when resync thread is running */
+		return 0;
+
+	rdev_for_each(rdev, mddev) {
+		if ((this == NULL || rdev == this) && rdev_removeable(rdev) &&
+		    !mddev->pers->hot_remove_disk(mddev, rdev)) {
+			sysfs_unlink_rdev(mddev, rdev);
+			rdev->saved_raid_disk = rdev->raid_disk;
+			rdev->raid_disk = -1;
+			removed++;
+		}
+	}
+
+	if (removed && mddev->kobj.sd)
+		sysfs_notify_dirent_safe(mddev->sysfs_degraded);
+
+	if (this && removed)
+		goto no_add;
+
+	rdev_for_each(rdev, mddev) {
+		if (this && this != rdev)
+			continue;
+		if (rdev_is_spare(rdev))
+			spares++;
+		if (!rdev_addable(rdev))
+			continue;
+		if (!test_bit(Journal, &rdev->flags))
+			rdev->recovery_offset = 0;
+		if (mddev->pers->hot_add_disk(mddev, rdev) == 0) {
+			/* failure here is OK */
+			sysfs_link_rdev(mddev, rdev);
+			if (!test_bit(Journal, &rdev->flags))
+				spares++;
+			md_new_event();
+			set_bit(MD_SB_CHANGE_DEVS, &mddev->sb_flags);
+		}
+	}
+no_add:
+	if (removed)
+		set_bit(MD_SB_CHANGE_DEVS, &mddev->sb_flags);
+	return spares;
+}
+
+static bool md_choose_sync_action(struct mddev *mddev, int *spares)
+{
+	/* Check if reshape is in progress first. */
+	if (mddev->reshape_position != MaxSector) {
+		if (mddev->pers->check_reshape == NULL ||
+		    mddev->pers->check_reshape(mddev) != 0)
+			return false;
+
+		set_bit(MD_RECOVERY_RESHAPE, &mddev->recovery);
+		clear_bit(MD_RECOVERY_RECOVER, &mddev->recovery);
+		return true;
+	}
+
+	/*
+	 * Remove any failed drives, then add spares if possible. Spares are
+	 * also removed and re-added, to allow the personality to fail the
+	 * re-add.
+	 */
+	*spares = remove_and_add_spares(mddev, NULL);
+	if (*spares) {
+		clear_bit(MD_RECOVERY_SYNC, &mddev->recovery);
+		clear_bit(MD_RECOVERY_CHECK, &mddev->recovery);
+		clear_bit(MD_RECOVERY_REQUESTED, &mddev->recovery);
+
+		/* Start new recovery. */
+		set_bit(MD_RECOVERY_RECOVER, &mddev->recovery);
+		return true;
+	}
+
+	/* Check if recovery is in progress. */
+	if (mddev->recovery_cp < MaxSector) {
+		set_bit(MD_RECOVERY_SYNC, &mddev->recovery);
+		clear_bit(MD_RECOVERY_RECOVER, &mddev->recovery);
+		return true;
+	}
+
+	/* Delay to choose resync/check/repair in md_do_sync(). */
+	if (test_bit(MD_RECOVERY_SYNC, &mddev->recovery))
+		return true;
+
+	/* Nothing to be done */
+	return false;
+}
+
+static void md_start_sync(struct work_struct *ws)
+{
+	struct mddev *mddev = container_of(ws, struct mddev, sync_work);
+	int spares = 0;
+	bool suspend = false;
+	char *name;
+
+	/*
+	 * If reshape is still in progress, spares won't be added or removed
+	 * from conf until reshape is done.
+	 */
+	if (mddev->reshape_position == MaxSector &&
+	    md_spares_need_change(mddev)) {
+		suspend = true;
+		mddev_suspend(mddev, false);
+	}
+
+	mddev_lock_nointr(mddev);
+	if (!md_is_rdwr(mddev)) {
+		/*
+		 * On a read-only array we can:
+		 * - remove failed devices
+		 * - add already-in_sync devices if the array itself is in-sync.
+		 * As we only add devices that are already in-sync, we can
+		 * activate the spares immediately.
+		 */
+		remove_and_add_spares(mddev, NULL);
+		goto not_running;
+	}
+
+	if (!md_choose_sync_action(mddev, &spares))
+		goto not_running;
+
+	if (!mddev->pers->sync_request)
+		goto not_running;
+
+	/*
+	 * We are adding a device or devices to an array which has the bitmap
+	 * stored on all devices. So make sure all bitmap pages get written.
+	 */
+	if (spares)
+		mddev->bitmap_ops->write_all(mddev);
+
+	name = test_bit(MD_RECOVERY_RESHAPE, &mddev->recovery) ?
+			"reshape" : "resync";
+	rcu_assign_pointer(mddev->sync_thread,
+			   md_register_thread(md_do_sync, mddev, name));
+	if (!mddev->sync_thread) {
+		pr_warn("%s: could not start resync thread...\n",
+			mdname(mddev));
+		/* leave the spares where they are, it shouldn't hurt */
+		goto not_running;
+	}
+
+	mddev_unlock(mddev);
+	/*
+	 * md_start_sync was triggered by MD_RECOVERY_NEEDED, so we should
+	 * not set it again. Otherwise, we may cause issue like this one:
+	 *     https://bugzilla.kernel.org/show_bug.cgi?id=218200
+	 * Therefore, use __mddev_resume(mddev, false).
+	 */
+	if (suspend)
+		__mddev_resume(mddev, false);
+	md_wakeup_thread(mddev->sync_thread);
+	sysfs_notify_dirent_safe(mddev->sysfs_action);
+	md_new_event();
+	return;
+
+not_running:
+	clear_bit(MD_RECOVERY_SYNC, &mddev->recovery);
+	clear_bit(MD_RECOVERY_RESHAPE, &mddev->recovery);
+	clear_bit(MD_RECOVERY_REQUESTED, &mddev->recovery);
+	clear_bit(MD_RECOVERY_CHECK, &mddev->recovery);
+	clear_bit(MD_RECOVERY_RUNNING, &mddev->recovery);
+	mddev_unlock(mddev);
+	/*
+	 * md_start_sync was triggered by MD_RECOVERY_NEEDED, so we should
+	 * not set it again. Otherwise, we may cause issue like this one:
+	 *     https://bugzilla.kernel.org/show_bug.cgi?id=218200
+	 * Therefore, use __mddev_resume(mddev, false).
+	 */
+	if (suspend)
+		__mddev_resume(mddev, false);
+
+	wake_up(&resync_wait);
+	if (test_and_clear_bit(MD_RECOVERY_RECOVER, &mddev->recovery) &&
+	    mddev->sysfs_action)
+		sysfs_notify_dirent_safe(mddev->sysfs_action);
+}
+
+static void unregister_sync_thread(struct mddev *mddev)
+{
+	if (!test_bit(MD_RECOVERY_DONE, &mddev->recovery)) {
+		/* resync/recovery still happening */
+		clear_bit(MD_RECOVERY_NEEDED, &mddev->recovery);
+		return;
+	}
+
+	if (WARN_ON_ONCE(!mddev->sync_thread))
+		return;
+
+	md_reap_sync_thread(mddev);
+}
+
+/*
+ * This routine is regularly called by all per-raid-array threads to
+ * deal with generic issues like resync and super-block update.
+ * Raid personalities that don't have a thread (linear/raid0) do not
+ * need this as they never do any recovery or update the superblock.
+ *
+ * It does not do any resync itself, but rather "forks" off other threads
+ * to do that as needed.
+ * When it is determined that resync is needed, we set MD_RECOVERY_RUNNING in
+ * "->recovery" and create a thread at ->sync_thread.
+ * When the thread finishes it sets MD_RECOVERY_DONE
+ * and wakeups up this thread which will reap the thread and finish up.
+ * This thread also removes any faulty devices (with nr_pending == 0).
+ *
+ * The overall approach is:
+ *  1/ if the superblock needs updating, update it.
+ *  2/ If a recovery thread is running, don't do anything else.
+ *  3/ If recovery has finished, clean up, possibly marking spares active.
+ *  4/ If there are any faulty devices, remove them.
+ *  5/ If array is degraded, try to add spares devices
+ *  6/ If array has spares or is not in-sync, start a resync thread.
+ */
+void md_check_recovery(struct mddev *mddev)
+{
+	if (mddev->bitmap)
+		mddev->bitmap_ops->daemon_work(mddev);
+
+	if (signal_pending(current)) {
+		if (mddev->pers->sync_request && !mddev->external) {
+			pr_debug("md: %s in immediate safe mode\n",
+				 mdname(mddev));
+			mddev->safemode = 2;
+		}
+		flush_signals(current);
+	}
+
+	if (!md_is_rdwr(mddev) &&
+	    !test_bit(MD_RECOVERY_NEEDED, &mddev->recovery) &&
+	    !test_bit(MD_RECOVERY_DONE, &mddev->recovery))
+		return;
+	if ( ! (
+		(mddev->sb_flags & ~ (1<<MD_SB_CHANGE_PENDING)) ||
+		test_bit(MD_RECOVERY_NEEDED, &mddev->recovery) ||
+		test_bit(MD_RECOVERY_DONE, &mddev->recovery) ||
+		(mddev->external == 0 && mddev->safemode == 1) ||
+		(mddev->safemode == 2
+		 && !mddev->in_sync && mddev->recovery_cp == MaxSector)
+		))
+		return;
+
+	if (mddev_trylock(mddev)) {
+		bool try_set_sync = mddev->safemode != 0;
+
+		if (!mddev->external && mddev->safemode == 1)
+			mddev->safemode = 0;
+
+		if (!md_is_rdwr(mddev)) {
+			struct md_rdev *rdev;
+
+			if (test_bit(MD_RECOVERY_RUNNING, &mddev->recovery)) {
+				unregister_sync_thread(mddev);
+				goto unlock;
+			}
+
+			if (!mddev->external && mddev->in_sync)
+				/*
+				 * 'Blocked' flag not needed as failed devices
+				 * will be recorded if array switched to read/write.
+				 * Leaving it set will prevent the device
+				 * from being removed.
+				 */
+				rdev_for_each(rdev, mddev)
+					clear_bit(Blocked, &rdev->flags);
+
+			/*
+			 * There is no thread, but we need to call
+			 * ->spare_active and clear saved_raid_disk
+			 */
+			set_bit(MD_RECOVERY_INTR, &mddev->recovery);
+			md_reap_sync_thread(mddev);
+
+			/*
+			 * Let md_start_sync() to remove and add rdevs to the
+			 * array.
+			 */
+			if (md_spares_need_change(mddev)) {
+				set_bit(MD_RECOVERY_RUNNING, &mddev->recovery);
+				queue_work(md_misc_wq, &mddev->sync_work);
+			}
+
+			clear_bit(MD_RECOVERY_RECOVER, &mddev->recovery);
+			clear_bit(MD_RECOVERY_NEEDED, &mddev->recovery);
+			clear_bit(MD_SB_CHANGE_PENDING, &mddev->sb_flags);
+
+			goto unlock;
+		}
+
+		if (mddev_is_clustered(mddev)) {
+			struct md_rdev *rdev, *tmp;
+			/* kick the device if another node issued a
+			 * remove disk.
+			 */
+			rdev_for_each_safe(rdev, tmp, mddev) {
+				if (test_and_clear_bit(ClusterRemove, &rdev->flags) &&
+						rdev->raid_disk < 0)
+					md_kick_rdev_from_array(rdev);
+			}
+		}
+
+		if (try_set_sync && !mddev->external && !mddev->in_sync) {
+			spin_lock(&mddev->lock);
+			set_in_sync(mddev);
+			spin_unlock(&mddev->lock);
+		}
+
+		if (mddev->sb_flags)
+			md_update_sb(mddev, 0);
+
+		/*
+		 * Never start a new sync thread if MD_RECOVERY_RUNNING is
+		 * still set.
+		 */
+		if (test_bit(MD_RECOVERY_RUNNING, &mddev->recovery)) {
+			unregister_sync_thread(mddev);
+			goto unlock;
+		}
+
+		/* Set RUNNING before clearing NEEDED to avoid
+		 * any transients in the value of "sync_action".
+		 */
+		mddev->curr_resync_completed = 0;
+		spin_lock(&mddev->lock);
+		set_bit(MD_RECOVERY_RUNNING, &mddev->recovery);
+		spin_unlock(&mddev->lock);
+		/* Clear some bits that don't mean anything, but
+		 * might be left set
+		 */
+		clear_bit(MD_RECOVERY_INTR, &mddev->recovery);
+		clear_bit(MD_RECOVERY_DONE, &mddev->recovery);
+
+		if (test_and_clear_bit(MD_RECOVERY_NEEDED, &mddev->recovery) &&
+		    !test_bit(MD_RECOVERY_FROZEN, &mddev->recovery)) {
+			queue_work(md_misc_wq, &mddev->sync_work);
+		} else {
+			clear_bit(MD_RECOVERY_RUNNING, &mddev->recovery);
+			wake_up(&resync_wait);
+		}
+
+	unlock:
+		wake_up(&mddev->sb_wait);
+		mddev_unlock(mddev);
+	}
+}
+EXPORT_SYMBOL(md_check_recovery);
+
+void md_reap_sync_thread(struct mddev *mddev)
+{
+	struct md_rdev *rdev;
+	sector_t old_dev_sectors = mddev->dev_sectors;
+	bool is_reshaped = false;
+
+	/* resync has finished, collect result */
+	md_unregister_thread(mddev, &mddev->sync_thread);
+	atomic_inc(&mddev->sync_seq);
+
+	if (!test_bit(MD_RECOVERY_INTR, &mddev->recovery) &&
+	    !test_bit(MD_RECOVERY_REQUESTED, &mddev->recovery) &&
+	    mddev->degraded != mddev->raid_disks) {
+		/* success...*/
+		/* activate any spares */
+		if (mddev->pers->spare_active(mddev)) {
+			sysfs_notify_dirent_safe(mddev->sysfs_degraded);
+			set_bit(MD_SB_CHANGE_DEVS, &mddev->sb_flags);
+		}
+	}
+	if (test_bit(MD_RECOVERY_RESHAPE, &mddev->recovery) &&
+	    mddev->pers->finish_reshape) {
+		mddev->pers->finish_reshape(mddev);
+		if (mddev_is_clustered(mddev))
+			is_reshaped = true;
+	}
+
+	/* If array is no-longer degraded, then any saved_raid_disk
+	 * information must be scrapped.
+	 */
+	if (!mddev->degraded)
+		rdev_for_each(rdev, mddev)
+			rdev->saved_raid_disk = -1;
+
+	md_update_sb(mddev, 1);
+	/* MD_SB_CHANGE_PENDING should be cleared by md_update_sb, so we can
+	 * call resync_finish here if MD_CLUSTER_RESYNC_LOCKED is set by
+	 * clustered raid */
+	if (test_and_clear_bit(MD_CLUSTER_RESYNC_LOCKED, &mddev->flags))
+		md_cluster_ops->resync_finish(mddev);
+	clear_bit(MD_RECOVERY_RUNNING, &mddev->recovery);
+	clear_bit(MD_RECOVERY_DONE, &mddev->recovery);
+	clear_bit(MD_RECOVERY_SYNC, &mddev->recovery);
+	clear_bit(MD_RECOVERY_RESHAPE, &mddev->recovery);
+	clear_bit(MD_RECOVERY_REQUESTED, &mddev->recovery);
+	clear_bit(MD_RECOVERY_CHECK, &mddev->recovery);
+	/*
+	 * We call md_cluster_ops->update_size here because sync_size could
+	 * be changed by md_update_sb, and MD_RECOVERY_RESHAPE is cleared,
+	 * so it is time to update size across cluster.
+	 */
+	if (mddev_is_clustered(mddev) && is_reshaped
+				      && !test_bit(MD_CLOSING, &mddev->flags))
+		md_cluster_ops->update_size(mddev, old_dev_sectors);
+	/* flag recovery needed just to double check */
+	set_bit(MD_RECOVERY_NEEDED, &mddev->recovery);
+	sysfs_notify_dirent_safe(mddev->sysfs_completed);
+	sysfs_notify_dirent_safe(mddev->sysfs_action);
+	md_new_event();
+	if (mddev->event_work.func)
+		queue_work(md_misc_wq, &mddev->event_work);
+	wake_up(&resync_wait);
+}
+EXPORT_SYMBOL(md_reap_sync_thread);
+
+void md_wait_for_blocked_rdev(struct md_rdev *rdev, struct mddev *mddev)
+{
+	sysfs_notify_dirent_safe(rdev->sysfs_state);
+	wait_event_timeout(rdev->blocked_wait,
+			   !test_bit(Blocked, &rdev->flags) &&
+			   !test_bit(BlockedBadBlocks, &rdev->flags),
+			   msecs_to_jiffies(5000));
+	rdev_dec_pending(rdev, mddev);
+}
+EXPORT_SYMBOL(md_wait_for_blocked_rdev);
+
+void md_finish_reshape(struct mddev *mddev)
+{
+	/* called be personality module when reshape completes. */
+	struct md_rdev *rdev;
+
+	rdev_for_each(rdev, mddev) {
+		if (rdev->data_offset > rdev->new_data_offset)
+			rdev->sectors += rdev->data_offset - rdev->new_data_offset;
+		else
+			rdev->sectors -= rdev->new_data_offset - rdev->data_offset;
+		rdev->data_offset = rdev->new_data_offset;
+	}
+}
+EXPORT_SYMBOL(md_finish_reshape);
+
+/* Bad block management */
+
+/* Returns 1 on success, 0 on failure */
+int rdev_set_badblocks(struct md_rdev *rdev, sector_t s, int sectors,
+		       int is_new)
+{
+	struct mddev *mddev = rdev->mddev;
+	int rv;
+	if (is_new)
+		s += rdev->new_data_offset;
+	else
+		s += rdev->data_offset;
+	rv = badblocks_set(&rdev->badblocks, s, sectors, 0);
+	if (rv == 0) {
+		/* Make sure they get written out promptly */
+		if (test_bit(ExternalBbl, &rdev->flags))
+			sysfs_notify_dirent_safe(rdev->sysfs_unack_badblocks);
+		sysfs_notify_dirent_safe(rdev->sysfs_state);
+		set_mask_bits(&mddev->sb_flags, 0,
+			      BIT(MD_SB_CHANGE_CLEAN) | BIT(MD_SB_CHANGE_PENDING));
+		md_wakeup_thread(rdev->mddev->thread);
+		return 1;
+	} else
+		return 0;
+}
+EXPORT_SYMBOL_GPL(rdev_set_badblocks);
+
+int rdev_clear_badblocks(struct md_rdev *rdev, sector_t s, int sectors,
+			 int is_new)
+{
+	int rv;
+	if (is_new)
+		s += rdev->new_data_offset;
+	else
+		s += rdev->data_offset;
+	rv = badblocks_clear(&rdev->badblocks, s, sectors);
+	if ((rv == 0) && test_bit(ExternalBbl, &rdev->flags))
+		sysfs_notify_dirent_safe(rdev->sysfs_badblocks);
+	return rv;
+}
+EXPORT_SYMBOL_GPL(rdev_clear_badblocks);
+
+static int md_notify_reboot(struct notifier_block *this,
+			    unsigned long code, void *x)
+{
+	struct mddev *mddev;
+	int need_delay = 0;
+
+	spin_lock(&all_mddevs_lock);
+	list_for_each_entry(mddev, &all_mddevs, all_mddevs) {
+		if (!mddev_get(mddev))
+			continue;
+		spin_unlock(&all_mddevs_lock);
+		if (mddev_trylock(mddev)) {
+			if (mddev->pers)
+				__md_stop_writes(mddev);
+			if (mddev->persistent)
+				mddev->safemode = 2;
+			mddev_unlock(mddev);
+		}
+		need_delay = 1;
+		spin_lock(&all_mddevs_lock);
+		mddev_put_locked(mddev);
+	}
+	spin_unlock(&all_mddevs_lock);
+
+	/*
+	 * certain more exotic SCSI devices are known to be
+	 * volatile wrt too early system reboots. While the
+	 * right place to handle this issue is the given
+	 * driver, we do want to have a safe RAID driver ...
+	 */
+	if (need_delay)
+		msleep(1000);
+
+	return NOTIFY_DONE;
+}
+
+static struct notifier_block md_notifier = {
+	.notifier_call	= md_notify_reboot,
+	.next		= NULL,
+	.priority	= INT_MAX, /* before any real devices */
+};
+
+static void md_geninit(void)
+{
+	pr_debug("md: sizeof(mdp_super_t) = %d\n", (int)sizeof(mdp_super_t));
+
+	proc_create("mdstat", S_IRUGO, NULL, &mdstat_proc_ops);
+}
+
+static int __init md_init(void)
+{
+	int ret = -ENOMEM;
+
+	md_wq = alloc_workqueue("md", WQ_MEM_RECLAIM, 0);
+	if (!md_wq)
+		goto err_wq;
+
+	md_misc_wq = alloc_workqueue("md_misc", 0, 0);
+	if (!md_misc_wq)
+		goto err_misc_wq;
+
+	md_bitmap_wq = alloc_workqueue("md_bitmap", WQ_MEM_RECLAIM | WQ_UNBOUND,
+				       0);
+	if (!md_bitmap_wq)
+		goto err_bitmap_wq;
+
+	ret = __register_blkdev(MD_MAJOR, "md", md_probe);
+	if (ret < 0)
+		goto err_md;
+
+	ret = __register_blkdev(0, "mdp", md_probe);
+	if (ret < 0)
+		goto err_mdp;
+	mdp_major = ret;
+
+	register_reboot_notifier(&md_notifier);
+	raid_table_header = register_sysctl("dev/raid", raid_table);
+
+	md_geninit();
+	return 0;
+
+err_mdp:
+	unregister_blkdev(MD_MAJOR, "md");
+err_md:
+	destroy_workqueue(md_bitmap_wq);
+err_bitmap_wq:
+	destroy_workqueue(md_misc_wq);
+err_misc_wq:
+	destroy_workqueue(md_wq);
+err_wq:
+	return ret;
+}
+
+static void check_sb_changes(struct mddev *mddev, struct md_rdev *rdev)
+{
+	struct mdp_superblock_1 *sb = page_address(rdev->sb_page);
+	struct md_rdev *rdev2, *tmp;
+	int role, ret;
+
+	/*
+	 * If size is changed in another node then we need to
+	 * do resize as well.
+	 */
+	if (mddev->dev_sectors != le64_to_cpu(sb->size)) {
+		ret = mddev->pers->resize(mddev, le64_to_cpu(sb->size));
+		if (ret)
+			pr_info("md-cluster: resize failed\n");
+		else
+			mddev->bitmap_ops->update_sb(mddev->bitmap);
+	}
+
+	/* Check for change of roles in the active devices */
+	rdev_for_each_safe(rdev2, tmp, mddev) {
+		if (test_bit(Faulty, &rdev2->flags))
+			continue;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		/* Check if the roles changed */
 		role = le16_to_cpu(sb->dev_roles[rdev2->desc_nr]);

@@ -1048,6 +1048,7 @@ static void iwl_bg_restart(struct work_struct *data)
  *
  *****************************************************************************/
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int iwl_setup_deferred_work(struct iwl_priv *priv)
 {
 	priv->workqueue = alloc_ordered_workqueue(DRV_NAME, 0);
@@ -1499,6 +1500,453 @@ out_destroy_workqueue:
 	destroy_workqueue(priv->workqueue);
 	priv->workqueue = NULL;
 out_uninit_drv:
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void iwl_setup_deferred_work(struct iwl_priv *priv)
+{
+	priv->workqueue = alloc_ordered_workqueue(DRV_NAME, 0);
+
+	INIT_WORK(&priv->restart, iwl_bg_restart);
+	INIT_WORK(&priv->beacon_update, iwl_bg_beacon_update);
+	INIT_WORK(&priv->run_time_calib_work, iwl_bg_run_time_calib_work);
+	INIT_WORK(&priv->tx_flush, iwl_bg_tx_flush);
+	INIT_WORK(&priv->bt_full_concurrency, iwl_bg_bt_full_concurrency);
+	INIT_WORK(&priv->bt_runtime_config, iwl_bg_bt_runtime_config);
+
+	iwl_setup_scan_deferred_work(priv);
+
+	if (priv->lib->bt_params)
+		iwlagn_bt_setup_deferred_work(priv);
+
+	timer_setup(&priv->statistics_periodic, iwl_bg_statistics_periodic, 0);
+
+	timer_setup(&priv->ucode_trace, iwl_bg_ucode_trace, 0);
+}
+
+void iwl_cancel_deferred_work(struct iwl_priv *priv)
+{
+	if (priv->lib->bt_params)
+		iwlagn_bt_cancel_deferred_work(priv);
+
+	cancel_work_sync(&priv->run_time_calib_work);
+	cancel_work_sync(&priv->beacon_update);
+
+	iwl_cancel_scan_deferred_work(priv);
+
+	cancel_work_sync(&priv->bt_full_concurrency);
+	cancel_work_sync(&priv->bt_runtime_config);
+
+	del_timer_sync(&priv->statistics_periodic);
+	del_timer_sync(&priv->ucode_trace);
+}
+
+static int iwl_init_drv(struct iwl_priv *priv)
+{
+	spin_lock_init(&priv->sta_lock);
+
+	mutex_init(&priv->mutex);
+
+	INIT_LIST_HEAD(&priv->calib_results);
+
+	priv->band = NL80211_BAND_2GHZ;
+
+	priv->plcp_delta_threshold = priv->lib->plcp_delta_threshold;
+
+	priv->iw_mode = NL80211_IFTYPE_STATION;
+	priv->current_ht_config.smps = IEEE80211_SMPS_STATIC;
+	priv->missed_beacon_threshold = IWL_MISSED_BEACON_THRESHOLD_DEF;
+	priv->agg_tids_count = 0;
+
+	priv->rx_statistics_jiffies = jiffies;
+
+	/* Choose which receivers/antennas to use */
+	iwlagn_set_rxon_chain(priv, &priv->contexts[IWL_RXON_CTX_BSS]);
+
+	iwl_init_scan_params(priv);
+
+	/* init bt coex */
+	if (priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist) {
+		priv->kill_ack_mask = IWLAGN_BT_KILL_ACK_MASK_DEFAULT;
+		priv->kill_cts_mask = IWLAGN_BT_KILL_CTS_MASK_DEFAULT;
+		priv->bt_valid = IWLAGN_BT_ALL_VALID_MSK;
+		priv->bt_on_thresh = BT_ON_THRESHOLD_DEF;
+		priv->bt_duration = BT_DURATION_LIMIT_DEF;
+		priv->dynamic_frag_thresh = BT_FRAG_THRESHOLD_DEF;
+	}
+
+	return 0;
+}
+
+static void iwl_uninit_drv(struct iwl_priv *priv)
+{
+	kfree(priv->scan_cmd);
+	kfree(priv->beacon_cmd);
+	kfree(rcu_dereference_raw(priv->noa_data));
+	iwl_calib_free_results(priv);
+#ifdef CONFIG_IWLWIFI_DEBUGFS
+	kfree(priv->wowlan_sram);
+#endif
+}
+
+static void iwl_set_hw_params(struct iwl_priv *priv)
+{
+	if (priv->cfg->ht_params)
+		priv->hw_params.use_rts_for_aggregation =
+			priv->cfg->ht_params->use_rts_for_aggregation;
+
+	/* Device-specific setup */
+	priv->lib->set_hw_params(priv);
+}
+
+
+
+/* show what optional capabilities we have */
+static void iwl_option_config(struct iwl_priv *priv)
+{
+#ifdef CONFIG_IWLWIFI_DEBUG
+	IWL_INFO(priv, "CONFIG_IWLWIFI_DEBUG enabled\n");
+#else
+	IWL_INFO(priv, "CONFIG_IWLWIFI_DEBUG disabled\n");
+#endif
+
+#ifdef CONFIG_IWLWIFI_DEBUGFS
+	IWL_INFO(priv, "CONFIG_IWLWIFI_DEBUGFS enabled\n");
+#else
+	IWL_INFO(priv, "CONFIG_IWLWIFI_DEBUGFS disabled\n");
+#endif
+
+#ifdef CONFIG_IWLWIFI_DEVICE_TRACING
+	IWL_INFO(priv, "CONFIG_IWLWIFI_DEVICE_TRACING enabled\n");
+#else
+	IWL_INFO(priv, "CONFIG_IWLWIFI_DEVICE_TRACING disabled\n");
+#endif
+}
+
+static int iwl_eeprom_init_hw_params(struct iwl_priv *priv)
+{
+	struct iwl_nvm_data *data = priv->nvm_data;
+
+	if (data->sku_cap_11n_enable &&
+	    !priv->cfg->ht_params) {
+		IWL_ERR(priv, "Invalid 11n configuration\n");
+		return -EINVAL;
+	}
+
+	if (!data->sku_cap_11n_enable && !data->sku_cap_band_24ghz_enable &&
+	    !data->sku_cap_band_52ghz_enable) {
+		IWL_ERR(priv, "Invalid device sku\n");
+		return -EINVAL;
+	}
+
+	IWL_DEBUG_INFO(priv,
+		       "Device SKU: 24GHz %s %s, 52GHz %s %s, 11.n %s %s\n",
+		       data->sku_cap_band_24ghz_enable ? "" : "NOT", "enabled",
+		       data->sku_cap_band_52ghz_enable ? "" : "NOT", "enabled",
+		       data->sku_cap_11n_enable ? "" : "NOT", "enabled");
+
+	priv->hw_params.tx_chains_num =
+		num_of_ant(data->valid_tx_ant);
+	if (priv->cfg->rx_with_siso_diversity)
+		priv->hw_params.rx_chains_num = 1;
+	else
+		priv->hw_params.rx_chains_num =
+			num_of_ant(data->valid_rx_ant);
+
+	IWL_DEBUG_INFO(priv, "Valid Tx ant: 0x%X, Valid Rx ant: 0x%X\n",
+		       data->valid_tx_ant,
+		       data->valid_rx_ant);
+
+	return 0;
+}
+
+static int iwl_nvm_check_version(struct iwl_nvm_data *data,
+				 struct iwl_trans *trans)
+{
+	if (data->nvm_version >= trans->cfg->nvm_ver ||
+	    data->calib_version >= trans->cfg->nvm_calib_ver) {
+		IWL_DEBUG_INFO(trans, "device EEPROM VER=0x%x, CALIB=0x%x\n",
+			       data->nvm_version, data->calib_version);
+		return 0;
+	}
+
+	IWL_ERR(trans,
+		"Unsupported (too old) EEPROM VER=0x%x < 0x%x CALIB=0x%x < 0x%x\n",
+		data->nvm_version, trans->cfg->nvm_ver,
+		data->calib_version,  trans->cfg->nvm_calib_ver);
+	return -EINVAL;
+}
+
+static struct iwl_op_mode *iwl_op_mode_dvm_start(struct iwl_trans *trans,
+						 const struct iwl_cfg *cfg,
+						 const struct iwl_fw *fw,
+						 struct dentry *dbgfs_dir)
+{
+	struct iwl_priv *priv;
+	struct ieee80211_hw *hw;
+	struct iwl_op_mode *op_mode;
+	u16 num_mac;
+	u32 ucode_flags;
+	struct iwl_trans_config trans_cfg = {};
+	static const u8 no_reclaim_cmds[] = {
+		REPLY_RX_PHY_CMD,
+		REPLY_RX_MPDU_CMD,
+		REPLY_COMPRESSED_BA,
+		STATISTICS_NOTIFICATION,
+		REPLY_TX,
+	};
+	int i;
+
+	/************************
+	 * 1. Allocating HW data
+	 ************************/
+	hw = iwl_alloc_all();
+	if (!hw) {
+		pr_err("%s: Cannot allocate network device\n", trans->name);
+		goto out;
+	}
+
+	op_mode = hw->priv;
+	op_mode->ops = &iwl_dvm_ops;
+	priv = IWL_OP_MODE_GET_DVM(op_mode);
+	priv->trans = trans;
+	priv->dev = trans->dev;
+	priv->cfg = cfg;
+	priv->fw = fw;
+
+	switch (priv->trans->trans_cfg->device_family) {
+	case IWL_DEVICE_FAMILY_1000:
+	case IWL_DEVICE_FAMILY_100:
+		priv->lib = &iwl_dvm_1000_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_2000:
+		priv->lib = &iwl_dvm_2000_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_105:
+		priv->lib = &iwl_dvm_105_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_2030:
+	case IWL_DEVICE_FAMILY_135:
+		priv->lib = &iwl_dvm_2030_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_5000:
+		priv->lib = &iwl_dvm_5000_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_5150:
+		priv->lib = &iwl_dvm_5150_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_6000:
+	case IWL_DEVICE_FAMILY_6000i:
+		priv->lib = &iwl_dvm_6000_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_6005:
+		priv->lib = &iwl_dvm_6005_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_6050:
+	case IWL_DEVICE_FAMILY_6150:
+		priv->lib = &iwl_dvm_6050_cfg;
+		break;
+	case IWL_DEVICE_FAMILY_6030:
+		priv->lib = &iwl_dvm_6030_cfg;
+		break;
+	default:
+		break;
+	}
+
+	if (WARN_ON(!priv->lib))
+		goto out_free_hw;
+
+	/*
+	 * Populate the state variables that the transport layer needs
+	 * to know about.
+	 */
+	trans_cfg.op_mode = op_mode;
+	trans_cfg.no_reclaim_cmds = no_reclaim_cmds;
+	trans_cfg.n_no_reclaim_cmds = ARRAY_SIZE(no_reclaim_cmds);
+
+	switch (iwlwifi_mod_params.amsdu_size) {
+	case IWL_AMSDU_DEF:
+	case IWL_AMSDU_4K:
+		trans_cfg.rx_buf_size = IWL_AMSDU_4K;
+		break;
+	case IWL_AMSDU_8K:
+		trans_cfg.rx_buf_size = IWL_AMSDU_8K;
+		break;
+	case IWL_AMSDU_12K:
+	default:
+		trans_cfg.rx_buf_size = IWL_AMSDU_4K;
+		pr_err("Unsupported amsdu_size: %d\n",
+		       iwlwifi_mod_params.amsdu_size);
+	}
+
+	trans_cfg.command_groups = iwl_dvm_groups;
+	trans_cfg.command_groups_size = ARRAY_SIZE(iwl_dvm_groups);
+
+	trans_cfg.cmd_fifo = IWLAGN_CMD_FIFO_NUM;
+	trans_cfg.cb_data_offs = offsetof(struct ieee80211_tx_info,
+					  driver_data[2]);
+
+	WARN_ON(sizeof(priv->transport_queue_stop) * BITS_PER_BYTE <
+		priv->trans->trans_cfg->base_params->num_of_queues);
+
+	ucode_flags = fw->ucode_capa.flags;
+
+	if (ucode_flags & IWL_UCODE_TLV_FLAGS_PAN) {
+		priv->sta_key_max_num = STA_KEY_MAX_NUM_PAN;
+		trans_cfg.cmd_queue = IWL_IPAN_CMD_QUEUE_NUM;
+	} else {
+		priv->sta_key_max_num = STA_KEY_MAX_NUM;
+		trans_cfg.cmd_queue = IWL_DEFAULT_CMD_QUEUE_NUM;
+	}
+
+	/* Configure transport layer */
+	iwl_trans_configure(priv->trans, &trans_cfg);
+
+	trans->rx_mpdu_cmd = REPLY_RX_MPDU_CMD;
+	trans->rx_mpdu_cmd_hdr_size = sizeof(struct iwl_rx_mpdu_res_start);
+	trans->command_groups = trans_cfg.command_groups;
+	trans->command_groups_size = trans_cfg.command_groups_size;
+
+	/* At this point both hw and priv are allocated. */
+
+	SET_IEEE80211_DEV(priv->hw, priv->trans->dev);
+
+	iwl_option_config(priv);
+
+	IWL_DEBUG_INFO(priv, "*** LOAD DRIVER ***\n");
+
+	/* bt channel inhibition enabled*/
+	priv->bt_ch_announce = true;
+	IWL_DEBUG_INFO(priv, "BT channel inhibition is %s\n",
+		       (priv->bt_ch_announce) ? "On" : "Off");
+
+	/* these spin locks will be used in apm_ops.init and EEPROM access
+	 * we should init now
+	 */
+	spin_lock_init(&priv->statistics.lock);
+
+	/***********************
+	 * 2. Read REV register
+	 ***********************/
+	IWL_INFO(priv, "Detected %s, REV=0x%X\n",
+		priv->trans->name, priv->trans->hw_rev);
+
+	if (iwl_trans_start_hw(priv->trans))
+		goto out_free_hw;
+
+	/* Read the EEPROM */
+	if (iwl_read_eeprom(priv->trans, &priv->eeprom_blob,
+			    &priv->eeprom_blob_size)) {
+		IWL_ERR(priv, "Unable to init EEPROM\n");
+		goto out_free_hw;
+	}
+
+	/* Reset chip to save power until we load uCode during "up". */
+	iwl_trans_stop_device(priv->trans);
+
+	priv->nvm_data = iwl_parse_eeprom_data(priv->trans, priv->cfg,
+					       priv->eeprom_blob,
+					       priv->eeprom_blob_size);
+	if (!priv->nvm_data)
+		goto out_free_eeprom_blob;
+
+	if (iwl_nvm_check_version(priv->nvm_data, priv->trans))
+		goto out_free_eeprom;
+
+	if (iwl_eeprom_init_hw_params(priv))
+		goto out_free_eeprom;
+
+	/* extract MAC Address */
+	memcpy(priv->addresses[0].addr, priv->nvm_data->hw_addr, ETH_ALEN);
+	IWL_DEBUG_INFO(priv, "MAC address: %pM\n", priv->addresses[0].addr);
+	priv->hw->wiphy->addresses = priv->addresses;
+	priv->hw->wiphy->n_addresses = 1;
+	num_mac = priv->nvm_data->n_hw_addrs;
+	if (num_mac > 1) {
+		memcpy(priv->addresses[1].addr, priv->addresses[0].addr,
+		       ETH_ALEN);
+		priv->addresses[1].addr[5]++;
+		priv->hw->wiphy->n_addresses++;
+	}
+
+	/************************
+	 * 4. Setup HW constants
+	 ************************/
+	iwl_set_hw_params(priv);
+
+	if (!(priv->nvm_data->sku_cap_ipan_enable)) {
+		IWL_DEBUG_INFO(priv, "Your EEPROM disabled PAN\n");
+		ucode_flags &= ~IWL_UCODE_TLV_FLAGS_PAN;
+		/*
+		 * if not PAN, then don't support P2P -- might be a uCode
+		 * packaging bug or due to the eeprom check above
+		 */
+		priv->sta_key_max_num = STA_KEY_MAX_NUM;
+		trans_cfg.cmd_queue = IWL_DEFAULT_CMD_QUEUE_NUM;
+
+		/* Configure transport layer again*/
+		iwl_trans_configure(priv->trans, &trans_cfg);
+	}
+
+	/*******************
+	 * 5. Setup priv
+	 *******************/
+	for (i = 0; i < IWL_MAX_HW_QUEUES; i++) {
+		priv->queue_to_mac80211[i] = IWL_INVALID_MAC80211_QUEUE;
+		if (i < IWLAGN_FIRST_AMPDU_QUEUE &&
+		    i != IWL_DEFAULT_CMD_QUEUE_NUM &&
+		    i != IWL_IPAN_CMD_QUEUE_NUM)
+			priv->queue_to_mac80211[i] = i;
+		atomic_set(&priv->queue_stop_count[i], 0);
+	}
+
+	if (iwl_init_drv(priv))
+		goto out_free_eeprom;
+
+	/* At this point both hw and priv are initialized. */
+
+	/********************
+	 * 6. Setup services
+	 ********************/
+	iwl_setup_deferred_work(priv);
+	iwl_setup_rx_handlers(priv);
+
+	iwl_power_initialize(priv);
+	iwl_tt_initialize(priv);
+
+	snprintf(priv->hw->wiphy->fw_version,
+		 sizeof(priv->hw->wiphy->fw_version),
+		 "%.31s", fw->fw_version);
+
+	priv->new_scan_threshold_behaviour =
+		!!(ucode_flags & IWL_UCODE_TLV_FLAGS_NEWSCAN);
+
+	priv->phy_calib_chain_noise_reset_cmd =
+		fw->ucode_capa.standard_phy_calibration_size;
+	priv->phy_calib_chain_noise_gain_cmd =
+		fw->ucode_capa.standard_phy_calibration_size + 1;
+
+	/* initialize all valid contexts */
+	iwl_init_context(priv, ucode_flags);
+
+	/**************************************************
+	 * This is still part of probe() in a sense...
+	 *
+	 * 7. Setup and register with mac80211 and debugfs
+	 **************************************************/
+	if (iwlagn_mac_setup_register(priv, &fw->ucode_capa))
+		goto out_destroy_workqueue;
+
+	iwl_dbgfs_register(priv, dbgfs_dir);
+
+	return op_mode;
+
+out_destroy_workqueue:
+	iwl_tt_exit(priv);
+	iwl_cancel_deferred_work(priv);
+	destroy_workqueue(priv->workqueue);
+	priv->workqueue = NULL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	iwl_uninit_drv(priv);
 out_free_eeprom_blob:
 	kfree(priv->eeprom_blob);

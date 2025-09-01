@@ -22,6 +22,7 @@ static enum scx_test_status run(void *ctx)
 		struct bpf_link *link;
 		char buf[16];
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		/*
 		 * On single-CPU systems, ops.select_cpu() is never
 		 * invoked, so skip this test to avoid getting stuck
@@ -30,6 +31,9 @@ static enum scx_test_status run(void *ctx)
 		if (tc == EXIT_SELECT_CPU && libbpf_num_possible_cpus() == 1)
 			continue;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		skel = exit__open();
 		skel->rodata->exit_point = tc;
 		exit__load(skel);

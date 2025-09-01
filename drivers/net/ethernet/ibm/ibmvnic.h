@@ -211,6 +211,7 @@ struct ibmvnic_statistics {
 	u8 reserved[72];
 } __packed __aligned(8);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 struct ibmvnic_tx_queue_stats {
 	u64 batched_packets;
 	u64 direct_packets;
@@ -229,6 +230,23 @@ struct ibmvnic_rx_queue_stats {
 
 #define NUM_RX_STATS \
 	(sizeof(struct ibmvnic_rx_queue_stats) / sizeof(u64))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define NUM_TX_STATS 3
+struct ibmvnic_tx_queue_stats {
+	u64 batched_packets;
+	u64 direct_packets;
+	u64 bytes;
+	u64 dropped_packets;
+};
+
+#define NUM_RX_STATS 3
+struct ibmvnic_rx_queue_stats {
+	u64 packets;
+	u64 bytes;
+	u64 interrupts;
+};
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 struct ibmvnic_acl_buffer {
 	__be32 len;

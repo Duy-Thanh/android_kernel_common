@@ -1592,6 +1592,7 @@ static void vector_eth_configure(
 
 	device->dev = dev;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	INIT_LIST_HEAD(&vp->list);
 	vp->dev		= dev;
 	vp->unit	= n;
@@ -1605,6 +1606,38 @@ static void vector_eth_configure(
 	vp->headroom	= get_headroom(def);
 	vp->coalesce	= 2;
 	vp->req_size	= get_req_size(def);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	*vp = ((struct vector_private)
+		{
+		.list			= LIST_HEAD_INIT(vp->list),
+		.dev			= dev,
+		.unit			= n,
+		.options		= get_transport_options(def),
+		.rx_irq			= 0,
+		.tx_irq			= 0,
+		.parsed			= def,
+		.max_packet		= get_mtu(def) + ETH_HEADER_OTHER,
+		/* TODO - we need to calculate headroom so that ip header
+		 * is 16 byte aligned all the time
+		 */
+		.headroom		= get_headroom(def),
+		.form_header		= NULL,
+		.verify_header		= NULL,
+		.header_rxbuffer	= NULL,
+		.header_txbuffer	= NULL,
+		.header_size		= 0,
+		.rx_header_size		= 0,
+		.rexmit_scheduled	= false,
+		.opened			= false,
+		.transport_data		= NULL,
+		.in_write_poll		= false,
+		.coalesce		= 2,
+		.req_size		= get_req_size(def),
+		.in_error		= false,
+		.bpf			= NULL
+	});
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	dev->features = dev->hw_features = (NETIF_F_SG | NETIF_F_FRAGLIST);
 	INIT_WORK(&vp->reset_tx, vector_reset_tx);

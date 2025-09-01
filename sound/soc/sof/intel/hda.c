@@ -1209,6 +1209,7 @@ static int check_tplg_quirk_mask(struct snd_soc_acpi_mach *mach)
 	return 0;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static char *remove_file_ext(struct device *dev, const char *tplg_filename)
 {
 	char *filename, *tmp;
@@ -1298,6 +1299,98 @@ struct snd_soc_acpi_mach *hda_machine_select(struct snd_sof_dev *sdev)
 		if (!sof_pdata->tplg_filename) {
 			/* remove file extension if it exists */
 			tplg_filename = remove_file_ext(sdev->dev, mach->sof_tplg_filename);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static char *remove_file_ext(const char *tplg_filename)
+{
+	char *filename, *tmp;
+
+	filename = kstrdup(tplg_filename, GFP_KERNEL);
+	if (!filename)
+		return NULL;
+
+	/* remove file extension if exist */
+	tmp = filename;
+	return strsep(&tmp, ".");
+}
+
+struct snd_soc_acpi_mach *hda_machine_select(struct snd_sof_dev *sdev)
+{
+	u32 interface_mask = hda_get_interface_mask(sdev);
+	struct snd_sof_pdata *sof_pdata = sdev->pdata;
+	const struct sof_dev_desc *desc = sof_pdata->desc;
+	struct hdac_bus *bus = sof_to_bus(sdev);
+	struct snd_soc_acpi_mach *mach = NULL;
+	enum snd_soc_acpi_intel_codec codec_type, amp_type;
+	const char *tplg_filename;
+	const char *tplg_suffix;
+	bool amp_name_valid;
+	bool i2s_mach_found = false;
+	bool sdw_mach_found = false;
+
+	/* Try I2S or DMIC if it is supported */
+	if (interface_mask & (BIT(SOF_DAI_INTEL_SSP) | BIT(SOF_DAI_INTEL_DMIC))) {
+		mach = snd_soc_acpi_find_machine(desc->machines);
+		if (mach)
+			i2s_mach_found = true;
+	}
+
+	/*
+	 * If I2S fails and no external HDaudio codec is detected,
+	 * try SoundWire if it is supported
+	 */
+	if (!mach && !HDA_EXT_CODEC(bus->codec_mask) &&
+	    (interface_mask & BIT(SOF_DAI_INTEL_ALH))) {
+		mach = hda_sdw_machine_select(sdev);
+		if (mach)
+			sdw_mach_found = true;
+	}
+
+	/*
+	 * Choose HDA generic machine driver if mach is NULL.
+	 * Otherwise, set certain mach params.
+	 */
+	hda_generic_machine_select(sdev, &mach);
+	if (!mach) {
+		dev_warn(sdev->dev, "warning: No matching ASoC machine driver found\n");
+		return NULL;
+	}
+
+	/* report BT offload link mask to machine driver */
+	mach->mach_params.bt_link_mask = check_nhlt_ssp_mask(sdev, NHLT_DEVICE_BT);
+
+	dev_info(sdev->dev, "BT link detected in NHLT tables: %#x\n",
+		 mach->mach_params.bt_link_mask);
+
+	/* allow for module parameter override */
+	if (bt_link_mask_override) {
+		dev_dbg(sdev->dev, "overriding BT link detected in NHLT tables %#x by kernel param %#x\n",
+			mach->mach_params.bt_link_mask, bt_link_mask_override);
+		mach->mach_params.bt_link_mask = bt_link_mask_override;
+	}
+
+	if (hweight_long(mach->mach_params.bt_link_mask) > 1) {
+		dev_warn(sdev->dev, "invalid BT link mask %#x found, reset the mask\n",
+			mach->mach_params.bt_link_mask);
+		mach->mach_params.bt_link_mask = 0;
+	}
+
+	/*
+	 * Fixup tplg file name by appending dmic num, ssp num, codec/amplifier
+	 * name string if quirk flag is set.
+	 */
+	if (mach) {
+		bool tplg_fixup = false;
+		bool dmic_fixup = false;
+
+		/*
+		 * If tplg file name is overridden, use it instead of
+		 * the one set in mach table
+		 */
+		if (!sof_pdata->tplg_filename) {
+			/* remove file extension if it exists */
+			tplg_filename = remove_file_ext(mach->sof_tplg_filename);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			if (!tplg_filename)
 				return NULL;
 

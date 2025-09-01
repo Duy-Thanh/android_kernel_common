@@ -439,6 +439,7 @@ static int avs_pci_probe(struct pci_dev *pci, const struct pci_device_id *id)
 	adev = devm_kzalloc(dev, sizeof(*adev), GFP_KERNEL);
 	if (!adev)
 		return -ENOMEM;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bus = &adev->base.core;
 
 	ret = avs_bus_init(adev, pci, id);
@@ -451,6 +452,20 @@ static int avs_pci_probe(struct pci_dev *pci, const struct pci_device_id *id)
 	if (ret < 0)
 		return ret;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ret = avs_bus_init(adev, pci, id);
+	if (ret < 0) {
+		dev_err(dev, "failed to init avs bus: %d\n", ret);
+		return ret;
+	}
+
+	ret = pci_request_regions(pci, "AVS HDAudio");
+	if (ret < 0)
+		return ret;
+
+	bus = &adev->base.core;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	bus->addr = pci_resource_start(pci, 0);
 	bus->remap_addr = pci_ioremap_bar(pci, 0);
 	if (!bus->remap_addr) {

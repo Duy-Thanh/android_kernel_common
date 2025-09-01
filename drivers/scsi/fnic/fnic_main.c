@@ -16,6 +16,7 @@
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
 #include <linux/if_ether.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <scsi/fc/fc_fip.h>
 #include <scsi/scsi_host.h>
 #include <scsi/scsi_transport.h>
@@ -601,6 +602,595 @@ void fnic_mq_map_queues_cpus(struct Scsi_Host *host)
 	}
 
 	blk_mq_map_hw_queues(qmap, &l_pdev->dev, FNIC_PCI_OFFSET);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/blk-mq-pci.h>
+#include <scsi/fc/fc_fip.h>
+#include <scsi/scsi_host.h>
+#include <scsi/scsi_transport.h>
+#include <scsi/scsi_transport_fc.h>
+#include <scsi/scsi_tcq.h>
+#include <scsi/libfc.h>
+#include <scsi/fc_frame.h>
+
+#include "vnic_dev.h"
+#include "vnic_intr.h"
+#include "vnic_stats.h"
+#include "fnic_io.h"
+#include "fnic_fip.h"
+#include "fnic.h"
+
+#define PCI_DEVICE_ID_CISCO_FNIC	0x0045
+
+/* Timer to poll notification area for events. Used for MSI interrupts */
+#define FNIC_NOTIFY_TIMER_PERIOD	(2 * HZ)
+
+static struct kmem_cache *fnic_sgl_cache[FNIC_SGL_NUM_CACHES];
+static struct kmem_cache *fnic_io_req_cache;
+static LIST_HEAD(fnic_list);
+static DEFINE_SPINLOCK(fnic_list_lock);
+static DEFINE_IDA(fnic_ida);
+
+/* Supported devices by fnic module */
+static struct pci_device_id fnic_id_table[] = {
+	{ PCI_DEVICE(PCI_VENDOR_ID_CISCO, PCI_DEVICE_ID_CISCO_FNIC) },
+	{ 0, }
+};
+
+MODULE_DESCRIPTION(DRV_DESCRIPTION);
+MODULE_AUTHOR("Abhijeet Joglekar <abjoglek@cisco.com>, "
+	      "Joseph R. Eykholt <jeykholt@cisco.com>");
+MODULE_LICENSE("GPL v2");
+MODULE_VERSION(DRV_VERSION);
+MODULE_DEVICE_TABLE(pci, fnic_id_table);
+
+unsigned int fnic_log_level;
+module_param(fnic_log_level, int, S_IRUGO|S_IWUSR);
+MODULE_PARM_DESC(fnic_log_level, "bit mask of fnic logging levels");
+
+
+unsigned int io_completions = FNIC_DFLT_IO_COMPLETIONS;
+module_param(io_completions, int, S_IRUGO|S_IWUSR);
+MODULE_PARM_DESC(io_completions, "Max CQ entries to process at a time");
+
+unsigned int fnic_trace_max_pages = 16;
+module_param(fnic_trace_max_pages, uint, S_IRUGO|S_IWUSR);
+MODULE_PARM_DESC(fnic_trace_max_pages, "Total allocated memory pages "
+					"for fnic trace buffer");
+
+unsigned int fnic_fc_trace_max_pages = 64;
+module_param(fnic_fc_trace_max_pages, uint, S_IRUGO|S_IWUSR);
+MODULE_PARM_DESC(fnic_fc_trace_max_pages,
+		 "Total allocated memory pages for fc trace buffer");
+
+static unsigned int fnic_max_qdepth = FNIC_DFLT_QUEUE_DEPTH;
+module_param(fnic_max_qdepth, uint, S_IRUGO|S_IWUSR);
+MODULE_PARM_DESC(fnic_max_qdepth, "Queue depth to report for each LUN");
+
+static struct libfc_function_template fnic_transport_template = {
+	.frame_send = fnic_send,
+	.lport_set_port_id = fnic_set_port_id,
+	.fcp_abort_io = fnic_empty_scsi_cleanup,
+	.fcp_cleanup = fnic_empty_scsi_cleanup,
+	.exch_mgr_reset = fnic_exch_mgr_reset
+};
+
+static int fnic_slave_alloc(struct scsi_device *sdev)
+{
+	struct fc_rport *rport = starget_to_rport(scsi_target(sdev));
+
+	if (!rport || fc_remote_port_chkready(rport))
+		return -ENXIO;
+
+	scsi_change_queue_depth(sdev, fnic_max_qdepth);
+	return 0;
+}
+
+static const struct scsi_host_template fnic_host_template = {
+	.module = THIS_MODULE,
+	.name = DRV_NAME,
+	.queuecommand = fnic_queuecommand,
+	.eh_timed_out = fc_eh_timed_out,
+	.eh_abort_handler = fnic_abort_cmd,
+	.eh_device_reset_handler = fnic_device_reset,
+	.eh_host_reset_handler = fnic_host_reset,
+	.slave_alloc = fnic_slave_alloc,
+	.change_queue_depth = scsi_change_queue_depth,
+	.this_id = -1,
+	.cmd_per_lun = 3,
+	.can_queue = FNIC_DFLT_IO_REQ,
+	.sg_tablesize = FNIC_MAX_SG_DESC_CNT,
+	.max_sectors = 0xffff,
+	.shost_groups = fnic_host_groups,
+	.track_queue_depth = 1,
+	.cmd_size = sizeof(struct fnic_cmd_priv),
+	.map_queues = fnic_mq_map_queues_cpus,
+};
+
+static void
+fnic_set_rport_dev_loss_tmo(struct fc_rport *rport, u32 timeout)
+{
+	if (timeout)
+		rport->dev_loss_tmo = timeout;
+	else
+		rport->dev_loss_tmo = 1;
+}
+
+static void fnic_get_host_speed(struct Scsi_Host *shost);
+static struct scsi_transport_template *fnic_fc_transport;
+static struct fc_host_statistics *fnic_get_stats(struct Scsi_Host *);
+static void fnic_reset_host_stats(struct Scsi_Host *);
+
+static struct fc_function_template fnic_fc_functions = {
+
+	.show_host_node_name = 1,
+	.show_host_port_name = 1,
+	.show_host_supported_classes = 1,
+	.show_host_supported_fc4s = 1,
+	.show_host_active_fc4s = 1,
+	.show_host_maxframe_size = 1,
+	.show_host_port_id = 1,
+	.show_host_supported_speeds = 1,
+	.get_host_speed = fnic_get_host_speed,
+	.show_host_speed = 1,
+	.show_host_port_type = 1,
+	.get_host_port_state = fc_get_host_port_state,
+	.show_host_port_state = 1,
+	.show_host_symbolic_name = 1,
+	.show_rport_maxframe_size = 1,
+	.show_rport_supported_classes = 1,
+	.show_host_fabric_name = 1,
+	.show_starget_node_name = 1,
+	.show_starget_port_name = 1,
+	.show_starget_port_id = 1,
+	.show_rport_dev_loss_tmo = 1,
+	.set_rport_dev_loss_tmo = fnic_set_rport_dev_loss_tmo,
+	.issue_fc_host_lip = fnic_reset,
+	.get_fc_host_stats = fnic_get_stats,
+	.reset_fc_host_stats = fnic_reset_host_stats,
+	.dd_fcrport_size = sizeof(struct fc_rport_libfc_priv),
+	.terminate_rport_io = fnic_terminate_rport_io,
+	.bsg_request = fc_lport_bsg_request,
+};
+
+static void fnic_get_host_speed(struct Scsi_Host *shost)
+{
+	struct fc_lport *lp = shost_priv(shost);
+	struct fnic *fnic = lport_priv(lp);
+	u32 port_speed = vnic_dev_port_speed(fnic->vdev);
+
+	/* Add in other values as they get defined in fw */
+	switch (port_speed) {
+	case DCEM_PORTSPEED_10G:
+		fc_host_speed(shost) = FC_PORTSPEED_10GBIT;
+		break;
+	case DCEM_PORTSPEED_20G:
+		fc_host_speed(shost) = FC_PORTSPEED_20GBIT;
+		break;
+	case DCEM_PORTSPEED_25G:
+		fc_host_speed(shost) = FC_PORTSPEED_25GBIT;
+		break;
+	case DCEM_PORTSPEED_40G:
+	case DCEM_PORTSPEED_4x10G:
+		fc_host_speed(shost) = FC_PORTSPEED_40GBIT;
+		break;
+	case DCEM_PORTSPEED_100G:
+		fc_host_speed(shost) = FC_PORTSPEED_100GBIT;
+		break;
+	default:
+		fc_host_speed(shost) = FC_PORTSPEED_UNKNOWN;
+		break;
+	}
+}
+
+static struct fc_host_statistics *fnic_get_stats(struct Scsi_Host *host)
+{
+	int ret;
+	struct fc_lport *lp = shost_priv(host);
+	struct fnic *fnic = lport_priv(lp);
+	struct fc_host_statistics *stats = &lp->host_stats;
+	struct vnic_stats *vs;
+	unsigned long flags;
+
+	if (time_before(jiffies, fnic->stats_time + HZ / FNIC_STATS_RATE_LIMIT))
+		return stats;
+	fnic->stats_time = jiffies;
+
+	spin_lock_irqsave(&fnic->fnic_lock, flags);
+	ret = vnic_dev_stats_dump(fnic->vdev, &fnic->stats);
+	spin_unlock_irqrestore(&fnic->fnic_lock, flags);
+
+	if (ret) {
+		FNIC_MAIN_DBG(KERN_DEBUG, fnic->lport->host, fnic->fnic_num,
+			      "fnic: Get vnic stats failed"
+			      " 0x%x", ret);
+		return stats;
+	}
+	vs = fnic->stats;
+	stats->tx_frames = vs->tx.tx_unicast_frames_ok;
+	stats->tx_words  = vs->tx.tx_unicast_bytes_ok / 4;
+	stats->rx_frames = vs->rx.rx_unicast_frames_ok;
+	stats->rx_words  = vs->rx.rx_unicast_bytes_ok / 4;
+	stats->error_frames = vs->tx.tx_errors + vs->rx.rx_errors;
+	stats->dumped_frames = vs->tx.tx_drops + vs->rx.rx_drop;
+	stats->invalid_crc_count = vs->rx.rx_crc_errors;
+	stats->seconds_since_last_reset =
+			(jiffies - fnic->stats_reset_time) / HZ;
+	stats->fcp_input_megabytes = div_u64(fnic->fcp_input_bytes, 1000000);
+	stats->fcp_output_megabytes = div_u64(fnic->fcp_output_bytes, 1000000);
+
+	return stats;
+}
+
+/*
+ * fnic_dump_fchost_stats
+ * note : dumps fc_statistics into system logs
+ */
+void fnic_dump_fchost_stats(struct Scsi_Host *host,
+				struct fc_host_statistics *stats)
+{
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: seconds since last reset = %llu\n",
+			stats->seconds_since_last_reset);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: tx frames		= %llu\n",
+			stats->tx_frames);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: tx words		= %llu\n",
+			stats->tx_words);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: rx frames		= %llu\n",
+			stats->rx_frames);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: rx words		= %llu\n",
+			stats->rx_words);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: lip count		= %llu\n",
+			stats->lip_count);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: nos count		= %llu\n",
+			stats->nos_count);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: error frames		= %llu\n",
+			stats->error_frames);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: dumped frames	= %llu\n",
+			stats->dumped_frames);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: link failure count	= %llu\n",
+			stats->link_failure_count);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: loss of sync count	= %llu\n",
+			stats->loss_of_sync_count);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: loss of signal count	= %llu\n",
+			stats->loss_of_signal_count);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: prim seq protocol err count = %llu\n",
+			stats->prim_seq_protocol_err_count);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: invalid tx word count= %llu\n",
+			stats->invalid_tx_word_count);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: invalid crc count	= %llu\n",
+			stats->invalid_crc_count);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: fcp input requests	= %llu\n",
+			stats->fcp_input_requests);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: fcp output requests	= %llu\n",
+			stats->fcp_output_requests);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: fcp control requests	= %llu\n",
+			stats->fcp_control_requests);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: fcp input megabytes	= %llu\n",
+			stats->fcp_input_megabytes);
+	FNIC_MAIN_NOTE(KERN_NOTICE, host,
+			"fnic: fcp output megabytes	= %llu\n",
+			stats->fcp_output_megabytes);
+	return;
+}
+
+/*
+ * fnic_reset_host_stats : clears host stats
+ * note : called when reset_statistics set under sysfs dir
+ */
+static void fnic_reset_host_stats(struct Scsi_Host *host)
+{
+	int ret;
+	struct fc_lport *lp = shost_priv(host);
+	struct fnic *fnic = lport_priv(lp);
+	struct fc_host_statistics *stats;
+	unsigned long flags;
+
+	/* dump current stats, before clearing them */
+	stats = fnic_get_stats(host);
+	fnic_dump_fchost_stats(host, stats);
+
+	spin_lock_irqsave(&fnic->fnic_lock, flags);
+	ret = vnic_dev_stats_clear(fnic->vdev);
+	spin_unlock_irqrestore(&fnic->fnic_lock, flags);
+
+	if (ret) {
+		FNIC_MAIN_DBG(KERN_DEBUG, fnic->lport->host, fnic->fnic_num,
+				"fnic: Reset vnic stats failed"
+				" 0x%x", ret);
+		return;
+	}
+	fnic->stats_reset_time = jiffies;
+	memset(stats, 0, sizeof(*stats));
+
+	return;
+}
+
+void fnic_log_q_error(struct fnic *fnic)
+{
+	unsigned int i;
+	u32 error_status;
+
+	for (i = 0; i < fnic->raw_wq_count; i++) {
+		error_status = ioread32(&fnic->wq[i].ctrl->error_status);
+		if (error_status)
+			shost_printk(KERN_ERR, fnic->lport->host,
+				     "WQ[%d] error_status"
+				     " %d\n", i, error_status);
+	}
+
+	for (i = 0; i < fnic->rq_count; i++) {
+		error_status = ioread32(&fnic->rq[i].ctrl->error_status);
+		if (error_status)
+			shost_printk(KERN_ERR, fnic->lport->host,
+				     "RQ[%d] error_status"
+				     " %d\n", i, error_status);
+	}
+
+	for (i = 0; i < fnic->wq_copy_count; i++) {
+		error_status = ioread32(&fnic->hw_copy_wq[i].ctrl->error_status);
+		if (error_status)
+			shost_printk(KERN_ERR, fnic->lport->host,
+				     "CWQ[%d] error_status"
+				     " %d\n", i, error_status);
+	}
+}
+
+void fnic_handle_link_event(struct fnic *fnic)
+{
+	unsigned long flags;
+
+	spin_lock_irqsave(&fnic->fnic_lock, flags);
+	if (fnic->stop_rx_link_events) {
+		spin_unlock_irqrestore(&fnic->fnic_lock, flags);
+		return;
+	}
+	spin_unlock_irqrestore(&fnic->fnic_lock, flags);
+
+	queue_work(fnic_event_queue, &fnic->link_work);
+
+}
+
+static int fnic_notify_set(struct fnic *fnic)
+{
+	int err;
+
+	switch (vnic_dev_get_intr_mode(fnic->vdev)) {
+	case VNIC_DEV_INTR_MODE_INTX:
+		err = vnic_dev_notify_set(fnic->vdev, FNIC_INTX_NOTIFY);
+		break;
+	case VNIC_DEV_INTR_MODE_MSI:
+		err = vnic_dev_notify_set(fnic->vdev, -1);
+		break;
+	case VNIC_DEV_INTR_MODE_MSIX:
+		err = vnic_dev_notify_set(fnic->vdev, fnic->wq_copy_count + fnic->copy_wq_base);
+		break;
+	default:
+		shost_printk(KERN_ERR, fnic->lport->host,
+			     "Interrupt mode should be set up"
+			     " before devcmd notify set %d\n",
+			     vnic_dev_get_intr_mode(fnic->vdev));
+		err = -1;
+		break;
+	}
+
+	return err;
+}
+
+static void fnic_notify_timer(struct timer_list *t)
+{
+	struct fnic *fnic = from_timer(fnic, t, notify_timer);
+
+	fnic_handle_link_event(fnic);
+	mod_timer(&fnic->notify_timer,
+		  round_jiffies(jiffies + FNIC_NOTIFY_TIMER_PERIOD));
+}
+
+static void fnic_fip_notify_timer(struct timer_list *t)
+{
+	struct fnic *fnic = from_timer(fnic, t, fip_timer);
+
+	fnic_handle_fip_timer(fnic);
+}
+
+static void fnic_notify_timer_start(struct fnic *fnic)
+{
+	switch (vnic_dev_get_intr_mode(fnic->vdev)) {
+	case VNIC_DEV_INTR_MODE_MSI:
+		/*
+		 * Schedule first timeout immediately. The driver is
+		 * initiatialized and ready to look for link up notification
+		 */
+		mod_timer(&fnic->notify_timer, jiffies);
+		break;
+	default:
+		/* Using intr for notification for INTx/MSI-X */
+		break;
+	}
+}
+
+static int fnic_dev_wait(struct vnic_dev *vdev,
+			 int (*start)(struct vnic_dev *, int),
+			 int (*finished)(struct vnic_dev *, int *),
+			 int arg)
+{
+	unsigned long time;
+	int done;
+	int err;
+	int count;
+
+	count = 0;
+
+	err = start(vdev, arg);
+	if (err)
+		return err;
+
+	/* Wait for func to complete.
+	* Sometime schedule_timeout_uninterruptible take long time
+	* to wake up so we do not retry as we are only waiting for
+	* 2 seconds in while loop. By adding count, we make sure
+	* we try atleast three times before returning -ETIMEDOUT
+	*/
+	time = jiffies + (HZ * 2);
+	do {
+		err = finished(vdev, &done);
+		count++;
+		if (err)
+			return err;
+		if (done)
+			return 0;
+		schedule_timeout_uninterruptible(HZ / 10);
+	} while (time_after(time, jiffies) || (count < 3));
+
+	return -ETIMEDOUT;
+}
+
+static int fnic_cleanup(struct fnic *fnic)
+{
+	unsigned int i;
+	int err;
+	int raw_wq_rq_counts;
+
+	vnic_dev_disable(fnic->vdev);
+	for (i = 0; i < fnic->intr_count; i++)
+		vnic_intr_mask(&fnic->intr[i]);
+
+	for (i = 0; i < fnic->rq_count; i++) {
+		err = vnic_rq_disable(&fnic->rq[i]);
+		if (err)
+			return err;
+	}
+	for (i = 0; i < fnic->raw_wq_count; i++) {
+		err = vnic_wq_disable(&fnic->wq[i]);
+		if (err)
+			return err;
+	}
+	for (i = 0; i < fnic->wq_copy_count; i++) {
+		err = vnic_wq_copy_disable(&fnic->hw_copy_wq[i]);
+		if (err)
+			return err;
+		raw_wq_rq_counts = fnic->raw_wq_count + fnic->rq_count;
+		fnic_wq_copy_cmpl_handler(fnic, -1, i + raw_wq_rq_counts);
+	}
+
+	/* Clean up completed IOs and FCS frames */
+	fnic_wq_cmpl_handler(fnic, -1);
+	fnic_rq_cmpl_handler(fnic, -1);
+
+	/* Clean up the IOs and FCS frames that have not completed */
+	for (i = 0; i < fnic->raw_wq_count; i++)
+		vnic_wq_clean(&fnic->wq[i], fnic_free_wq_buf);
+	for (i = 0; i < fnic->rq_count; i++)
+		vnic_rq_clean(&fnic->rq[i], fnic_free_rq_buf);
+	for (i = 0; i < fnic->wq_copy_count; i++)
+		vnic_wq_copy_clean(&fnic->hw_copy_wq[i],
+				   fnic_wq_copy_cleanup_handler);
+
+	for (i = 0; i < fnic->cq_count; i++)
+		vnic_cq_clean(&fnic->cq[i]);
+	for (i = 0; i < fnic->intr_count; i++)
+		vnic_intr_clean(&fnic->intr[i]);
+
+	mempool_destroy(fnic->io_req_pool);
+	for (i = 0; i < FNIC_SGL_NUM_CACHES; i++)
+		mempool_destroy(fnic->io_sgl_pool[i]);
+
+	return 0;
+}
+
+static void fnic_iounmap(struct fnic *fnic)
+{
+	if (fnic->bar0.vaddr)
+		iounmap(fnic->bar0.vaddr);
+}
+
+/**
+ * fnic_get_mac() - get assigned data MAC address for FIP code.
+ * @lport: 	local port.
+ */
+static u8 *fnic_get_mac(struct fc_lport *lport)
+{
+	struct fnic *fnic = lport_priv(lport);
+
+	return fnic->data_src_addr;
+}
+
+static void fnic_set_vlan(struct fnic *fnic, u16 vlan_id)
+{
+	vnic_dev_set_default_vlan(fnic->vdev, vlan_id);
+}
+
+static int fnic_scsi_drv_init(struct fnic *fnic)
+{
+	struct Scsi_Host *host = fnic->lport->host;
+
+	/* Configure maximum outstanding IO reqs*/
+	if (fnic->config.io_throttle_count != FNIC_UCSM_DFLT_THROTTLE_CNT_BLD)
+		host->can_queue = min_t(u32, FNIC_MAX_IO_REQ,
+					max_t(u32, FNIC_MIN_IO_REQ,
+					fnic->config.io_throttle_count));
+
+	fnic->fnic_max_tag_id = host->can_queue;
+	host->max_lun = fnic->config.luns_per_tgt;
+	host->max_id = FNIC_MAX_FCP_TARGET;
+	host->max_cmd_len = FCOE_MAX_CMD_LEN;
+
+	host->nr_hw_queues = fnic->wq_copy_count;
+
+	shost_printk(KERN_INFO, host,
+			"fnic: can_queue: %d max_lun: %llu",
+			host->can_queue, host->max_lun);
+
+	shost_printk(KERN_INFO, host,
+			"fnic: max_id: %d max_cmd_len: %d nr_hw_queues: %d",
+			host->max_id, host->max_cmd_len, host->nr_hw_queues);
+
+	return 0;
+}
+
+void fnic_mq_map_queues_cpus(struct Scsi_Host *host)
+{
+	struct fc_lport *lp = shost_priv(host);
+	struct fnic *fnic = lport_priv(lp);
+	struct pci_dev *l_pdev = fnic->pdev;
+	int intr_mode = fnic->config.intr_mode;
+	struct blk_mq_queue_map *qmap = &host->tag_set.map[HCTX_TYPE_DEFAULT];
+
+	if (intr_mode == VNIC_DEV_INTR_MODE_MSI || intr_mode == VNIC_DEV_INTR_MODE_INTX) {
+		FNIC_MAIN_DBG(KERN_ERR, fnic->lport->host, fnic->fnic_num,
+			"intr_mode is not msix\n");
+		return;
+	}
+
+	FNIC_MAIN_DBG(KERN_INFO, fnic->lport->host, fnic->fnic_num,
+			"qmap->nr_queues: %d\n", qmap->nr_queues);
+
+	if (l_pdev == NULL) {
+		FNIC_MAIN_DBG(KERN_ERR, fnic->lport->host, fnic->fnic_num,
+						"l_pdev is null\n");
+		return;
+	}
+
+	blk_mq_pci_map_queues(qmap, l_pdev, FNIC_PCI_OFFSET);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static int fnic_probe(struct pci_dev *pdev, const struct pci_device_id *ent)

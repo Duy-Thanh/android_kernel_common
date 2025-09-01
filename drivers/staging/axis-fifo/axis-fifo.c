@@ -42,6 +42,7 @@
 #define DRIVER_NAME "axis_fifo"
 
 #define READ_BUF_SIZE 128U /* read buffer length in words */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 /* ----------------------------
  *     IP register offsets
@@ -549,6 +550,522 @@ static ssize_t axis_fifo_write(struct file *f, const char __user *buf,
 
 	ret = len;
 	kvfree(txbuf);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define WRITE_BUF_SIZE 128U /* write buffer length in words */
+
+/* ----------------------------
+ *     IP register offsets
+ * ----------------------------
+ */
+
+#define XLLF_ISR_OFFSET  0x00000000  /* Interrupt Status */
+#define XLLF_IER_OFFSET  0x00000004  /* Interrupt Enable */
+
+#define XLLF_TDFR_OFFSET 0x00000008  /* Transmit Reset */
+#define XLLF_TDFV_OFFSET 0x0000000c  /* Transmit Vacancy */
+#define XLLF_TDFD_OFFSET 0x00000010  /* Transmit Data */
+#define XLLF_TLR_OFFSET  0x00000014  /* Transmit Length */
+
+#define XLLF_RDFR_OFFSET 0x00000018  /* Receive Reset */
+#define XLLF_RDFO_OFFSET 0x0000001c  /* Receive Occupancy */
+#define XLLF_RDFD_OFFSET 0x00000020  /* Receive Data */
+#define XLLF_RLR_OFFSET  0x00000024  /* Receive Length */
+#define XLLF_SRR_OFFSET  0x00000028  /* Local Link Reset */
+#define XLLF_TDR_OFFSET  0x0000002C  /* Transmit Destination */
+#define XLLF_RDR_OFFSET  0x00000030  /* Receive Destination */
+
+/* ----------------------------
+ *     reset register masks
+ * ----------------------------
+ */
+
+#define XLLF_RDFR_RESET_MASK        0x000000a5 /* receive reset value */
+#define XLLF_TDFR_RESET_MASK        0x000000a5 /* Transmit reset value */
+#define XLLF_SRR_RESET_MASK         0x000000a5 /* Local Link reset value */
+
+/* ----------------------------
+ *       interrupt masks
+ * ----------------------------
+ */
+
+#define XLLF_INT_RPURE_MASK       0x80000000 /* Receive under-read */
+#define XLLF_INT_RPORE_MASK       0x40000000 /* Receive over-read */
+#define XLLF_INT_RPUE_MASK        0x20000000 /* Receive underrun (empty) */
+#define XLLF_INT_TPOE_MASK        0x10000000 /* Transmit overrun */
+#define XLLF_INT_TC_MASK          0x08000000 /* Transmit complete */
+#define XLLF_INT_RC_MASK          0x04000000 /* Receive complete */
+#define XLLF_INT_TSE_MASK         0x02000000 /* Transmit length mismatch */
+#define XLLF_INT_TRC_MASK         0x01000000 /* Transmit reset complete */
+#define XLLF_INT_RRC_MASK         0x00800000 /* Receive reset complete */
+#define XLLF_INT_TFPF_MASK        0x00400000 /* Tx FIFO Programmable Full */
+#define XLLF_INT_TFPE_MASK        0x00200000 /* Tx FIFO Programmable Empty */
+#define XLLF_INT_RFPF_MASK        0x00100000 /* Rx FIFO Programmable Full */
+#define XLLF_INT_RFPE_MASK        0x00080000 /* Rx FIFO Programmable Empty */
+#define XLLF_INT_ALL_MASK         0xfff80000 /* All the ints */
+#define XLLF_INT_ERROR_MASK       0xf2000000 /* Error status ints */
+#define XLLF_INT_RXERROR_MASK     0xe0000000 /* Receive Error status ints */
+#define XLLF_INT_TXERROR_MASK     0x12000000 /* Transmit Error status ints */
+
+/* ----------------------------
+ *           globals
+ * ----------------------------
+ */
+static long read_timeout = 1000; /* ms to wait before read() times out */
+static long write_timeout = 1000; /* ms to wait before write() times out */
+
+/* ----------------------------
+ * module command-line arguments
+ * ----------------------------
+ */
+
+module_param(read_timeout, long, 0444);
+MODULE_PARM_DESC(read_timeout, "ms to wait before blocking read() timing out; set to -1 for no timeout");
+module_param(write_timeout, long, 0444);
+MODULE_PARM_DESC(write_timeout, "ms to wait before blocking write() timing out; set to -1 for no timeout");
+
+/* ----------------------------
+ *            types
+ * ----------------------------
+ */
+
+struct axis_fifo {
+	int irq; /* interrupt */
+	void __iomem *base_addr; /* kernel space memory */
+
+	unsigned int rx_fifo_depth; /* max words in the receive fifo */
+	unsigned int tx_fifo_depth; /* max words in the transmit fifo */
+	int has_rx_fifo; /* whether the IP has the rx fifo enabled */
+	int has_tx_fifo; /* whether the IP has the tx fifo enabled */
+
+	wait_queue_head_t read_queue; /* wait queue for asynchronos read */
+	struct mutex read_lock; /* lock for reading */
+	wait_queue_head_t write_queue; /* wait queue for asynchronos write */
+	struct mutex write_lock; /* lock for writing */
+	unsigned int write_flags; /* write file flags */
+	unsigned int read_flags; /* read file flags */
+
+	struct device *dt_device; /* device created from the device tree */
+	struct miscdevice miscdev;
+};
+
+/* ----------------------------
+ *         sysfs entries
+ * ----------------------------
+ */
+
+static ssize_t sysfs_write(struct device *dev, const char *buf,
+			   size_t count, unsigned int addr_offset)
+{
+	struct axis_fifo *fifo = dev_get_drvdata(dev);
+	unsigned long tmp;
+	int rc;
+
+	rc = kstrtoul(buf, 0, &tmp);
+	if (rc < 0)
+		return rc;
+
+	iowrite32(tmp, fifo->base_addr + addr_offset);
+
+	return count;
+}
+
+static ssize_t sysfs_read(struct device *dev, char *buf,
+			  unsigned int addr_offset)
+{
+	struct axis_fifo *fifo = dev_get_drvdata(dev);
+	unsigned int read_val;
+
+	read_val = ioread32(fifo->base_addr + addr_offset);
+	return sysfs_emit(buf, "0x%x\n", read_val);
+}
+
+static ssize_t isr_store(struct device *dev, struct device_attribute *attr,
+			 const char *buf, size_t count)
+{
+	return sysfs_write(dev, buf, count, XLLF_ISR_OFFSET);
+}
+
+static ssize_t isr_show(struct device *dev,
+			struct device_attribute *attr, char *buf)
+{
+	return sysfs_read(dev, buf, XLLF_ISR_OFFSET);
+}
+
+static DEVICE_ATTR_RW(isr);
+
+static ssize_t ier_store(struct device *dev, struct device_attribute *attr,
+			 const char *buf, size_t count)
+{
+	return sysfs_write(dev, buf, count, XLLF_IER_OFFSET);
+}
+
+static ssize_t ier_show(struct device *dev,
+			struct device_attribute *attr, char *buf)
+{
+	return sysfs_read(dev, buf, XLLF_IER_OFFSET);
+}
+
+static DEVICE_ATTR_RW(ier);
+
+static ssize_t tdfr_store(struct device *dev, struct device_attribute *attr,
+			  const char *buf, size_t count)
+{
+	return sysfs_write(dev, buf, count, XLLF_TDFR_OFFSET);
+}
+
+static DEVICE_ATTR_WO(tdfr);
+
+static ssize_t tdfv_show(struct device *dev,
+			 struct device_attribute *attr, char *buf)
+{
+	return sysfs_read(dev, buf, XLLF_TDFV_OFFSET);
+}
+
+static DEVICE_ATTR_RO(tdfv);
+
+static ssize_t tdfd_store(struct device *dev, struct device_attribute *attr,
+			  const char *buf, size_t count)
+{
+	return sysfs_write(dev, buf, count, XLLF_TDFD_OFFSET);
+}
+
+static DEVICE_ATTR_WO(tdfd);
+
+static ssize_t tlr_store(struct device *dev, struct device_attribute *attr,
+			 const char *buf, size_t count)
+{
+	return sysfs_write(dev, buf, count, XLLF_TLR_OFFSET);
+}
+
+static DEVICE_ATTR_WO(tlr);
+
+static ssize_t rdfr_store(struct device *dev, struct device_attribute *attr,
+			  const char *buf, size_t count)
+{
+	return sysfs_write(dev, buf, count, XLLF_RDFR_OFFSET);
+}
+
+static DEVICE_ATTR_WO(rdfr);
+
+static ssize_t rdfo_show(struct device *dev,
+			 struct device_attribute *attr, char *buf)
+{
+	return sysfs_read(dev, buf, XLLF_RDFO_OFFSET);
+}
+
+static DEVICE_ATTR_RO(rdfo);
+
+static ssize_t rdfd_show(struct device *dev,
+			 struct device_attribute *attr, char *buf)
+{
+	return sysfs_read(dev, buf, XLLF_RDFD_OFFSET);
+}
+
+static DEVICE_ATTR_RO(rdfd);
+
+static ssize_t rlr_show(struct device *dev,
+			struct device_attribute *attr, char *buf)
+{
+	return sysfs_read(dev, buf, XLLF_RLR_OFFSET);
+}
+
+static DEVICE_ATTR_RO(rlr);
+
+static ssize_t srr_store(struct device *dev, struct device_attribute *attr,
+			 const char *buf, size_t count)
+{
+	return sysfs_write(dev, buf, count, XLLF_SRR_OFFSET);
+}
+
+static DEVICE_ATTR_WO(srr);
+
+static ssize_t tdr_store(struct device *dev, struct device_attribute *attr,
+			 const char *buf, size_t count)
+{
+	return sysfs_write(dev, buf, count, XLLF_TDR_OFFSET);
+}
+
+static DEVICE_ATTR_WO(tdr);
+
+static ssize_t rdr_show(struct device *dev,
+			struct device_attribute *attr, char *buf)
+{
+	return sysfs_read(dev, buf, XLLF_RDR_OFFSET);
+}
+
+static DEVICE_ATTR_RO(rdr);
+
+static struct attribute *axis_fifo_attrs[] = {
+	&dev_attr_isr.attr,
+	&dev_attr_ier.attr,
+	&dev_attr_tdfr.attr,
+	&dev_attr_tdfv.attr,
+	&dev_attr_tdfd.attr,
+	&dev_attr_tlr.attr,
+	&dev_attr_rdfr.attr,
+	&dev_attr_rdfo.attr,
+	&dev_attr_rdfd.attr,
+	&dev_attr_rlr.attr,
+	&dev_attr_srr.attr,
+	&dev_attr_tdr.attr,
+	&dev_attr_rdr.attr,
+	NULL,
+};
+
+static const struct attribute_group axis_fifo_attrs_group = {
+	.name = "ip_registers",
+	.attrs = axis_fifo_attrs,
+};
+
+static const struct attribute_group *axis_fifo_attrs_groups[] = {
+	&axis_fifo_attrs_group,
+	NULL,
+};
+
+/* ----------------------------
+ *        implementation
+ * ----------------------------
+ */
+
+static void reset_ip_core(struct axis_fifo *fifo)
+{
+	iowrite32(XLLF_SRR_RESET_MASK, fifo->base_addr + XLLF_SRR_OFFSET);
+	iowrite32(XLLF_TDFR_RESET_MASK, fifo->base_addr + XLLF_TDFR_OFFSET);
+	iowrite32(XLLF_RDFR_RESET_MASK, fifo->base_addr + XLLF_RDFR_OFFSET);
+	iowrite32(XLLF_INT_TC_MASK | XLLF_INT_RC_MASK | XLLF_INT_RPURE_MASK |
+		  XLLF_INT_RPORE_MASK | XLLF_INT_RPUE_MASK |
+		  XLLF_INT_TPOE_MASK | XLLF_INT_TSE_MASK,
+		  fifo->base_addr + XLLF_IER_OFFSET);
+	iowrite32(XLLF_INT_ALL_MASK, fifo->base_addr + XLLF_ISR_OFFSET);
+}
+
+/**
+ * axis_fifo_read() - Read a packet from AXIS-FIFO character device.
+ * @f: Open file.
+ * @buf: User space buffer to read to.
+ * @len: User space buffer length.
+ * @off: Buffer offset.
+ *
+ * As defined by the device's documentation, we need to check the device's
+ * occupancy before reading the length register and then the data. All these
+ * operations must be executed atomically, in order and one after the other
+ * without missing any.
+ *
+ * Returns the number of bytes read from the device or negative error code
+ *	on failure.
+ */
+static ssize_t axis_fifo_read(struct file *f, char __user *buf,
+			      size_t len, loff_t *off)
+{
+	struct axis_fifo *fifo = (struct axis_fifo *)f->private_data;
+	size_t bytes_available;
+	unsigned int words_available;
+	unsigned int copied;
+	unsigned int copy;
+	unsigned int i;
+	int ret;
+	u32 tmp_buf[READ_BUF_SIZE];
+
+	if (fifo->read_flags & O_NONBLOCK) {
+		/*
+		 * Device opened in non-blocking mode. Try to lock it and then
+		 * check if any packet is available.
+		 */
+		if (!mutex_trylock(&fifo->read_lock))
+			return -EAGAIN;
+
+		if (!ioread32(fifo->base_addr + XLLF_RDFO_OFFSET)) {
+			ret = -EAGAIN;
+			goto end_unlock;
+		}
+	} else {
+		/* opened in blocking mode
+		 * wait for a packet available interrupt (or timeout)
+		 * if nothing is currently available
+		 */
+		mutex_lock(&fifo->read_lock);
+		ret = wait_event_interruptible_timeout(fifo->read_queue,
+						       ioread32(fifo->base_addr + XLLF_RDFO_OFFSET),
+						       read_timeout);
+
+		if (ret <= 0) {
+			if (ret == 0) {
+				ret = -EAGAIN;
+			} else if (ret != -ERESTARTSYS) {
+				dev_err(fifo->dt_device, "wait_event_interruptible_timeout() error in read (ret=%i)\n",
+					ret);
+			}
+
+			goto end_unlock;
+		}
+	}
+
+	bytes_available = ioread32(fifo->base_addr + XLLF_RLR_OFFSET);
+	if (!bytes_available) {
+		dev_err(fifo->dt_device, "received a packet of length 0\n");
+		ret = -EIO;
+		goto end_unlock;
+	}
+
+	if (bytes_available > len) {
+		dev_err(fifo->dt_device, "user read buffer too small (available bytes=%zu user buffer bytes=%zu)\n",
+			bytes_available, len);
+		ret = -EINVAL;
+		goto end_unlock;
+	}
+
+	if (bytes_available % sizeof(u32)) {
+		/* this probably can't happen unless IP
+		 * registers were previously mishandled
+		 */
+		dev_err(fifo->dt_device, "received a packet that isn't word-aligned\n");
+		ret = -EIO;
+		goto end_unlock;
+	}
+
+	words_available = bytes_available / sizeof(u32);
+
+	/* read data into an intermediate buffer, copying the contents
+	 * to userspace when the buffer is full
+	 */
+	copied = 0;
+	while (words_available > 0) {
+		copy = min(words_available, READ_BUF_SIZE);
+
+		for (i = 0; i < copy; i++) {
+			tmp_buf[i] = ioread32(fifo->base_addr +
+					      XLLF_RDFD_OFFSET);
+		}
+
+		if (copy_to_user(buf + copied * sizeof(u32), tmp_buf,
+				 copy * sizeof(u32))) {
+			ret = -EFAULT;
+			goto end_unlock;
+		}
+
+		copied += copy;
+		words_available -= copy;
+	}
+
+	ret = bytes_available;
+
+end_unlock:
+	mutex_unlock(&fifo->read_lock);
+
+	return ret;
+}
+
+/**
+ * axis_fifo_write() - Write buffer to AXIS-FIFO character device.
+ * @f: Open file.
+ * @buf: User space buffer to write to the device.
+ * @len: User space buffer length.
+ * @off: Buffer offset.
+ *
+ * As defined by the device's documentation, we need to write to the device's
+ * data buffer then to the device's packet length register atomically. Also,
+ * we need to lock before checking if the device has available space to avoid
+ * any concurrency issue.
+ *
+ * Returns the number of bytes written to the device or negative error code
+ *	on failure.
+ */
+static ssize_t axis_fifo_write(struct file *f, const char __user *buf,
+			       size_t len, loff_t *off)
+{
+	struct axis_fifo *fifo = (struct axis_fifo *)f->private_data;
+	unsigned int words_to_write;
+	unsigned int copied;
+	unsigned int copy;
+	unsigned int i;
+	int ret;
+	u32 tmp_buf[WRITE_BUF_SIZE];
+
+	if (len % sizeof(u32)) {
+		dev_err(fifo->dt_device,
+			"tried to send a packet that isn't word-aligned\n");
+		return -EINVAL;
+	}
+
+	words_to_write = len / sizeof(u32);
+
+	if (!words_to_write) {
+		dev_err(fifo->dt_device,
+			"tried to send a packet of length 0\n");
+		return -EINVAL;
+	}
+
+	if (words_to_write > fifo->tx_fifo_depth) {
+		dev_err(fifo->dt_device, "tried to write more words [%u] than slots in the fifo buffer [%u]\n",
+			words_to_write, fifo->tx_fifo_depth);
+		return -EINVAL;
+	}
+
+	if (fifo->write_flags & O_NONBLOCK) {
+		/*
+		 * Device opened in non-blocking mode. Try to lock it and then
+		 * check if there is any room to write the given buffer.
+		 */
+		if (!mutex_trylock(&fifo->write_lock))
+			return -EAGAIN;
+
+		if (words_to_write > ioread32(fifo->base_addr +
+					      XLLF_TDFV_OFFSET)) {
+			ret = -EAGAIN;
+			goto end_unlock;
+		}
+	} else {
+		/* opened in blocking mode */
+
+		/* wait for an interrupt (or timeout) if there isn't
+		 * currently enough room in the fifo
+		 */
+		mutex_lock(&fifo->write_lock);
+		ret = wait_event_interruptible_timeout(fifo->write_queue,
+						       ioread32(fifo->base_addr + XLLF_TDFV_OFFSET)
+								>= words_to_write,
+						       write_timeout);
+
+		if (ret <= 0) {
+			if (ret == 0) {
+				ret = -EAGAIN;
+			} else if (ret != -ERESTARTSYS) {
+				dev_err(fifo->dt_device, "wait_event_interruptible_timeout() error in write (ret=%i)\n",
+					ret);
+			}
+
+			goto end_unlock;
+		}
+	}
+
+	/* write data from an intermediate buffer into the fifo IP, refilling
+	 * the buffer with userspace data as needed
+	 */
+	copied = 0;
+	while (words_to_write > 0) {
+		copy = min(words_to_write, WRITE_BUF_SIZE);
+
+		if (copy_from_user(tmp_buf, buf + copied * sizeof(u32),
+				   copy * sizeof(u32))) {
+			ret = -EFAULT;
+			goto end_unlock;
+		}
+
+		for (i = 0; i < copy; i++)
+			iowrite32(tmp_buf[i], fifo->base_addr +
+				  XLLF_TDFD_OFFSET);
+
+		copied += copy;
+		words_to_write -= copy;
+	}
+
+	ret = copied * sizeof(u32);
+
+	/* write packet size to fifo */
+	iowrite32(ret, fifo->base_addr + XLLF_TLR_OFFSET);
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 end_unlock:
 	mutex_unlock(&fifo->write_lock);
 

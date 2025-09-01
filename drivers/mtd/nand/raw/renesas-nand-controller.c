@@ -426,6 +426,7 @@ static int rnandc_read_page_hw_ecc(struct nand_chip *chip, u8 *buf,
 	/* Configure DMA */
 	dma_addr = dma_map_single(rnandc->dev, rnandc->buf, mtd->writesize,
 				  DMA_FROM_DEVICE);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (dma_mapping_error(rnandc->dev, dma_addr))
 		return -ENOMEM;
 
@@ -612,6 +613,189 @@ static int rnandc_write_page_hw_ecc(struct nand_chip *chip, const u8 *buf,
 	if (dma_mapping_error(rnandc->dev, dma_addr))
 		return -ENOMEM;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	writel(dma_addr, rnandc->regs + DMA_ADDR_LOW_REG);
+	writel(mtd->writesize, rnandc->regs + DMA_CNT_REG);
+	writel(DMA_TLVL_MAX, rnandc->regs + DMA_TLVL_REG);
+
+	rnandc_trigger_op(rnandc, &rop);
+	rnandc_trigger_dma(rnandc);
+
+	ret = rnandc_wait_end_of_io(rnandc, chip);
+	dma_unmap_single(rnandc->dev, dma_addr, mtd->writesize, DMA_FROM_DEVICE);
+	rnandc_dis_correction(rnandc);
+	if (ret) {
+		dev_err(rnandc->dev, "Read page operation never ending\n");
+		return ret;
+	}
+
+	ecc_stat = readl_relaxed(rnandc->regs + ECC_STAT_REG);
+
+	if (oob_required || ECC_STAT_UNCORRECTABLE(cs, ecc_stat)) {
+		ret = nand_change_read_column_op(chip, mtd->writesize,
+						 chip->oob_poi, mtd->oobsize,
+						 false);
+		if (ret)
+			return ret;
+	}
+
+	if (ECC_STAT_UNCORRECTABLE(cs, ecc_stat)) {
+		for (i = 0; i < chip->ecc.steps; i++) {
+			unsigned int off = i * chip->ecc.size;
+			unsigned int eccoff = i * chip->ecc.bytes;
+
+			bf = nand_check_erased_ecc_chunk(rnandc->buf + off,
+							 chip->ecc.size,
+							 chip->oob_poi + 2 + eccoff,
+							 chip->ecc.bytes,
+							 NULL, 0,
+							 chip->ecc.strength);
+			if (bf < 0) {
+				mtd->ecc_stats.failed++;
+			} else {
+				mtd->ecc_stats.corrected += bf;
+				max_bitflips = max_t(unsigned int, max_bitflips, bf);
+			}
+		}
+	} else if (ECC_STAT_CORRECTABLE(cs, ecc_stat)) {
+		bf = ECC_CNT(cs, readl_relaxed(rnandc->regs + ECC_CNT_REG));
+		/*
+		 * The number of bitflips is an approximation given the fact
+		 * that this controller does not provide per-chunk details but
+		 * only gives statistics on the entire page.
+		 */
+		mtd->ecc_stats.corrected += bf;
+	}
+
+	memcpy(buf, rnandc->buf, mtd->writesize);
+
+	return 0;
+}
+
+static int rnandc_read_subpage_hw_ecc(struct nand_chip *chip, u32 req_offset,
+				      u32 req_len, u8 *bufpoi, int page)
+{
+	struct rnandc *rnandc = to_rnandc(chip->controller);
+	struct mtd_info *mtd = nand_to_mtd(chip);
+	struct rnand_chip *rnand = to_rnand(chip);
+	unsigned int cs = to_rnandc_cs(rnand);
+	unsigned int page_off = round_down(req_offset, chip->ecc.size);
+	unsigned int real_len = round_up(req_offset + req_len - page_off,
+					 chip->ecc.size);
+	unsigned int start_chunk = page_off / chip->ecc.size;
+	unsigned int nchunks = real_len / chip->ecc.size;
+	unsigned int ecc_off = 2 + (start_chunk * chip->ecc.bytes);
+	struct rnandc_op rop = {
+		.command = COMMAND_INPUT_SEL_AHBS | COMMAND_0(NAND_CMD_READ0) |
+			   COMMAND_2(NAND_CMD_READSTART) | COMMAND_FIFO_SEL |
+			   COMMAND_SEQ_READ_PAGE,
+		.addr0_row = page,
+		.addr0_col = page_off,
+		.len = real_len,
+		.ecc_offset = ECC_OFFSET(mtd->writesize + ecc_off),
+	};
+	unsigned int max_bitflips = 0, i;
+	u32 ecc_stat;
+	int bf, ret;
+
+	/* Prepare controller */
+	rnandc_select_target(chip, chip->cur_cs);
+	rnandc_clear_status(rnandc);
+	rnandc_en_correction(rnandc);
+	rnandc_trigger_op(rnandc, &rop);
+
+	while (!FIFO_STATE_C_EMPTY(readl(rnandc->regs + FIFO_STATE_REG)))
+		cpu_relax();
+
+	while (FIFO_STATE_R_EMPTY(readl(rnandc->regs + FIFO_STATE_REG)))
+		cpu_relax();
+
+	ioread32_rep(rnandc->regs + FIFO_DATA_REG, bufpoi + page_off,
+		     real_len / 4);
+
+	if (!FIFO_STATE_R_EMPTY(readl(rnandc->regs + FIFO_STATE_REG))) {
+		dev_err(rnandc->dev, "Clearing residual data in the read FIFO\n");
+		rnandc_clear_fifo(rnandc);
+	}
+
+	ret = rnandc_wait_end_of_op(rnandc, chip);
+	rnandc_dis_correction(rnandc);
+	if (ret) {
+		dev_err(rnandc->dev, "Read subpage operation never ending\n");
+		return ret;
+	}
+
+	ecc_stat = readl_relaxed(rnandc->regs + ECC_STAT_REG);
+
+	if (ECC_STAT_UNCORRECTABLE(cs, ecc_stat)) {
+		ret = nand_change_read_column_op(chip, mtd->writesize,
+						 chip->oob_poi, mtd->oobsize,
+						 false);
+		if (ret)
+			return ret;
+
+		for (i = start_chunk; i < nchunks; i++) {
+			unsigned int dataoff = i * chip->ecc.size;
+			unsigned int eccoff = 2 + (i * chip->ecc.bytes);
+
+			bf = nand_check_erased_ecc_chunk(bufpoi + dataoff,
+							 chip->ecc.size,
+							 chip->oob_poi + eccoff,
+							 chip->ecc.bytes,
+							 NULL, 0,
+							 chip->ecc.strength);
+			if (bf < 0) {
+				mtd->ecc_stats.failed++;
+			} else {
+				mtd->ecc_stats.corrected += bf;
+				max_bitflips = max_t(unsigned int, max_bitflips, bf);
+			}
+		}
+	} else if (ECC_STAT_CORRECTABLE(cs, ecc_stat)) {
+		bf = ECC_CNT(cs, readl_relaxed(rnandc->regs + ECC_CNT_REG));
+		/*
+		 * The number of bitflips is an approximation given the fact
+		 * that this controller does not provide per-chunk details but
+		 * only gives statistics on the entire page.
+		 */
+		mtd->ecc_stats.corrected += bf;
+	}
+
+	return 0;
+}
+
+static int rnandc_write_page_hw_ecc(struct nand_chip *chip, const u8 *buf,
+				    int oob_required, int page)
+{
+	struct rnandc *rnandc = to_rnandc(chip->controller);
+	struct mtd_info *mtd = nand_to_mtd(chip);
+	struct rnand_chip *rnand = to_rnand(chip);
+	unsigned int cs = to_rnandc_cs(rnand);
+	struct rnandc_op rop = {
+		.command = COMMAND_INPUT_SEL_DMA | COMMAND_0(NAND_CMD_SEQIN) |
+			   COMMAND_1(NAND_CMD_PAGEPROG) | COMMAND_FIFO_SEL |
+			   COMMAND_SEQ_WRITE_PAGE,
+		.addr0_row = page,
+		.len = mtd->writesize,
+		.ecc_offset = ECC_OFFSET(mtd->writesize + 2),
+	};
+	dma_addr_t dma_addr;
+	int ret;
+
+	memcpy(rnandc->buf, buf, mtd->writesize);
+
+	/* Prepare controller */
+	rnandc_select_target(chip, chip->cur_cs);
+	rnandc_clear_status(rnandc);
+	reinit_completion(&rnandc->complete);
+	rnandc_en_interrupts(rnandc, INT_MEM_RDY(cs));
+	rnandc_en_correction(rnandc);
+
+	/* Configure DMA */
+	dma_addr = dma_map_single(rnandc->dev, (void *)rnandc->buf, mtd->writesize,
+				  DMA_TO_DEVICE);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	writel(dma_addr, rnandc->regs + DMA_ADDR_LOW_REG);
 	writel(mtd->writesize, rnandc->regs + DMA_CNT_REG);
 	writel(DMA_TLVL_MAX, rnandc->regs + DMA_TLVL_REG);

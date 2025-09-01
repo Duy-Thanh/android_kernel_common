@@ -748,6 +748,7 @@ static void renderer_edited(GtkCellRendererText * cell,
 	struct symbol *sym;
 
 	if (!gtk_tree_model_get_iter(model2, &iter, path))
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		goto free;
 
 	gtk_tree_model_get(model2, &iter, COL_MENU, &menu, -1);
@@ -951,6 +952,210 @@ on_treeview2_cursor_changed(GtkTreeView * treeview, gpointer user_data)
 	selection = gtk_tree_view_get_selection(treeview);
 	if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
 		gtk_tree_model_get(model, &iter, COL_MENU, &menu, -1);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		return;
+
+	gtk_tree_model_get(model2, &iter, COL_MENU, &menu, -1);
+	sym = menu->sym;
+
+	gtk_tree_model_get(model2, &iter, COL_VALUE, &old_def, -1);
+	new_def = new_text;
+
+	sym_set_string_value(sym, new_def);
+
+	update_tree(&rootmenu, NULL);
+
+	gtk_tree_path_free(path);
+}
+
+/* Change the value of a symbol and update the tree */
+static void change_sym_value(struct menu *menu, gint col)
+{
+	struct symbol *sym = menu->sym;
+	tristate newval;
+
+	if (!sym)
+		return;
+
+	if (col == COL_NO)
+		newval = no;
+	else if (col == COL_MOD)
+		newval = mod;
+	else if (col == COL_YES)
+		newval = yes;
+	else
+		return;
+
+	switch (sym_get_type(sym)) {
+	case S_BOOLEAN:
+	case S_TRISTATE:
+		if (!sym_tristate_within_range(sym, newval))
+			newval = yes;
+		sym_set_tristate_value(sym, newval);
+		if (view_mode == FULL_VIEW)
+			update_tree(&rootmenu, NULL);
+		else if (view_mode == SPLIT_VIEW) {
+			update_tree(browsed, NULL);
+			display_list();
+		}
+		else if (view_mode == SINGLE_VIEW)
+			display_tree_part();	//fixme: keep exp/coll
+		break;
+	case S_INT:
+	case S_HEX:
+	case S_STRING:
+	default:
+		break;
+	}
+}
+
+static void toggle_sym_value(struct menu *menu)
+{
+	if (!menu->sym)
+		return;
+
+	sym_toggle_tristate_value(menu->sym);
+	if (view_mode == FULL_VIEW)
+		update_tree(&rootmenu, NULL);
+	else if (view_mode == SPLIT_VIEW) {
+		update_tree(browsed, NULL);
+		display_list();
+	}
+	else if (view_mode == SINGLE_VIEW)
+		display_tree_part();	//fixme: keep exp/coll
+}
+
+static gint column2index(GtkTreeViewColumn * column)
+{
+	gint i;
+
+	for (i = 0; i < COL_NUMBER; i++) {
+		GtkTreeViewColumn *col;
+
+		col = gtk_tree_view_get_column(GTK_TREE_VIEW(tree2_w), i);
+		if (col == column)
+			return i;
+	}
+
+	return -1;
+}
+
+
+/* User click: update choice (full) or goes down (single) */
+gboolean
+on_treeview2_button_press_event(GtkWidget * widget,
+				GdkEventButton * event, gpointer user_data)
+{
+	GtkTreeView *view = GTK_TREE_VIEW(widget);
+	GtkTreePath *path;
+	GtkTreeViewColumn *column;
+	GtkTreeIter iter;
+	struct menu *menu;
+	gint col;
+
+#if GTK_CHECK_VERSION(2,1,4) // bug in ctree with earlier version of GTK
+	gint tx = (gint) event->x;
+	gint ty = (gint) event->y;
+	gint cx, cy;
+
+	gtk_tree_view_get_path_at_pos(view, tx, ty, &path, &column, &cx,
+				      &cy);
+#else
+	gtk_tree_view_get_cursor(view, &path, &column);
+#endif
+	if (path == NULL)
+		return FALSE;
+
+	if (!gtk_tree_model_get_iter(model2, &iter, path))
+		return FALSE;
+	gtk_tree_model_get(model2, &iter, COL_MENU, &menu, -1);
+
+	col = column2index(column);
+	if (event->type == GDK_2BUTTON_PRESS) {
+		enum prop_type ptype;
+		ptype = menu->prompt ? menu->prompt->type : P_UNKNOWN;
+
+		if (ptype == P_MENU && view_mode != FULL_VIEW && col == COL_OPTION) {
+			// goes down into menu
+			current = menu;
+			display_tree_part();
+			gtk_widget_set_sensitive(back_btn, TRUE);
+		} else if (col == COL_OPTION) {
+			toggle_sym_value(menu);
+			gtk_tree_view_expand_row(view, path, TRUE);
+		}
+	} else {
+		if (col == COL_VALUE) {
+			toggle_sym_value(menu);
+			gtk_tree_view_expand_row(view, path, TRUE);
+		} else if (col == COL_NO || col == COL_MOD
+			   || col == COL_YES) {
+			change_sym_value(menu, col);
+			gtk_tree_view_expand_row(view, path, TRUE);
+		}
+	}
+
+	return FALSE;
+}
+
+/* Key pressed: update choice */
+gboolean
+on_treeview2_key_press_event(GtkWidget * widget,
+			     GdkEventKey * event, gpointer user_data)
+{
+	GtkTreeView *view = GTK_TREE_VIEW(widget);
+	GtkTreePath *path;
+	GtkTreeViewColumn *column;
+	GtkTreeIter iter;
+	struct menu *menu;
+	gint col;
+
+	gtk_tree_view_get_cursor(view, &path, &column);
+	if (path == NULL)
+		return FALSE;
+
+	if (event->keyval == GDK_space) {
+		if (gtk_tree_view_row_expanded(view, path))
+			gtk_tree_view_collapse_row(view, path);
+		else
+			gtk_tree_view_expand_row(view, path, FALSE);
+		return TRUE;
+	}
+	if (event->keyval == GDK_KP_Enter) {
+	}
+	if (widget == tree1_w)
+		return FALSE;
+
+	gtk_tree_model_get_iter(model2, &iter, path);
+	gtk_tree_model_get(model2, &iter, COL_MENU, &menu, -1);
+
+	if (!strcasecmp(event->string, "n"))
+		col = COL_NO;
+	else if (!strcasecmp(event->string, "m"))
+		col = COL_MOD;
+	else if (!strcasecmp(event->string, "y"))
+		col = COL_YES;
+	else
+		col = -1;
+	change_sym_value(menu, col);
+
+	return FALSE;
+}
+
+
+/* Row selection changed: update help */
+void
+on_treeview2_cursor_changed(GtkTreeView * treeview, gpointer user_data)
+{
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+	struct menu *menu;
+
+	selection = gtk_tree_view_get_selection(treeview);
+	if (gtk_tree_selection_get_selected(selection, &model2, &iter)) {
+		gtk_tree_model_get(model2, &iter, COL_MENU, &menu, -1);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		text_insert_help(menu);
 	}
 }

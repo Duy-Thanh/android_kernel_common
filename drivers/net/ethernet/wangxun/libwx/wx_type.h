@@ -787,6 +787,7 @@ enum wx_reset_type {
 struct wx_cb {
 	dma_addr_t dma;
 	u16     append_cnt;      /* number of skb's appended */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool    dma_released;
 };
 
@@ -1135,6 +1136,359 @@ struct wx {
 
 #define WX_INTR_ALL (~0ULL)
 #define WX_INTR_Q(i) BIT((i))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool    page_released;
+	bool    dma_released;
+};
+
+#define WX_CB(skb) ((struct wx_cb *)(skb)->cb)
+
+/* Transmit Descriptor */
+union wx_tx_desc {
+	struct {
+		__le64 buffer_addr; /* Address of descriptor's data buf */
+		__le32 cmd_type_len;
+		__le32 olinfo_status;
+	} read;
+	struct {
+		__le64 rsvd; /* Reserved */
+		__le32 nxtseq_seed;
+		__le32 status;
+	} wb;
+};
+
+/* Receive Descriptor */
+union wx_rx_desc {
+	struct {
+		__le64 pkt_addr; /* Packet buffer address */
+		__le64 hdr_addr; /* Header buffer address */
+	} read;
+	struct {
+		struct {
+			union {
+				__le32 data;
+				struct {
+					__le16 pkt_info; /* RSS, Pkt type */
+					__le16 hdr_info; /* Splithdr, hdrlen */
+				} hs_rss;
+			} lo_dword;
+			union {
+				__le32 rss; /* RSS Hash */
+				struct {
+					__le16 ip_id; /* IP id */
+					__le16 csum; /* Packet Checksum */
+				} csum_ip;
+			} hi_dword;
+		} lower;
+		struct {
+			__le32 status_error; /* ext status/error */
+			__le16 length; /* Packet length */
+			__le16 vlan; /* VLAN tag */
+		} upper;
+	} wb;  /* writeback */
+};
+
+struct wx_tx_context_desc {
+	__le32 vlan_macip_lens;
+	__le32 seqnum_seed;
+	__le32 type_tucmd_mlhl;
+	__le32 mss_l4len_idx;
+};
+
+/* if _flag is in _input, return _result */
+#define WX_SET_FLAG(_input, _flag, _result) \
+	(((_flag) <= (_result)) ? \
+	 ((u32)((_input) & (_flag)) * ((_result) / (_flag))) : \
+	 ((u32)((_input) & (_flag)) / ((_flag) / (_result))))
+
+#define WX_RX_DESC(R, i)     \
+	(&(((union wx_rx_desc *)((R)->desc))[i]))
+#define WX_TX_DESC(R, i)     \
+	(&(((union wx_tx_desc *)((R)->desc))[i]))
+#define WX_TX_CTXTDESC(R, i) \
+	(&(((struct wx_tx_context_desc *)((R)->desc))[i]))
+
+/* wrapper around a pointer to a socket buffer,
+ * so a DMA handle can be stored along with the buffer
+ */
+struct wx_tx_buffer {
+	union wx_tx_desc *next_to_watch;
+	struct sk_buff *skb;
+	unsigned int bytecount;
+	unsigned short gso_segs;
+	DEFINE_DMA_UNMAP_ADDR(dma);
+	DEFINE_DMA_UNMAP_LEN(len);
+	__be16 protocol;
+	u32 tx_flags;
+};
+
+struct wx_rx_buffer {
+	struct sk_buff *skb;
+	dma_addr_t dma;
+	dma_addr_t page_dma;
+	struct page *page;
+	unsigned int page_offset;
+};
+
+struct wx_queue_stats {
+	u64 packets;
+	u64 bytes;
+};
+
+struct wx_tx_queue_stats {
+	u64 restart_queue;
+	u64 tx_busy;
+};
+
+struct wx_rx_queue_stats {
+	u64 non_eop_descs;
+	u64 csum_good_cnt;
+	u64 csum_err;
+	u64 alloc_rx_buff_failed;
+};
+
+/* iterator for handling rings in ring container */
+#define wx_for_each_ring(posm, headm) \
+	for (posm = (headm).ring; posm; posm = posm->next)
+
+struct wx_ring_container {
+	struct wx_ring *ring;           /* pointer to linked list of rings */
+	unsigned int total_bytes;       /* total bytes processed this int */
+	unsigned int total_packets;     /* total packets processed this int */
+	u8 count;                       /* total number of rings in vector */
+	u8 itr;                         /* current ITR setting for ring */
+};
+struct wx_ring {
+	struct wx_ring *next;           /* pointer to next ring in q_vector */
+	struct wx_q_vector *q_vector;   /* backpointer to host q_vector */
+	struct net_device *netdev;      /* netdev ring belongs to */
+	struct device *dev;             /* device for DMA mapping */
+	struct page_pool *page_pool;
+	void *desc;                     /* descriptor ring memory */
+	union {
+		struct wx_tx_buffer *tx_buffer_info;
+		struct wx_rx_buffer *rx_buffer_info;
+	};
+	u8 __iomem *tail;
+	dma_addr_t dma;                 /* phys. address of descriptor ring */
+	unsigned int size;              /* length in bytes */
+
+	u16 count;                      /* amount of descriptors */
+
+	u8 queue_index; /* needed for multiqueue queue management */
+	u8 reg_idx;                     /* holds the special value that gets
+					 * the hardware register offset
+					 * associated with this ring, which is
+					 * different for DCB and RSS modes
+					 */
+	u16 next_to_use;
+	u16 next_to_clean;
+	union {
+		u16 next_to_alloc;
+		struct {
+			u8 atr_sample_rate;
+			u8 atr_count;
+		};
+	};
+
+	struct wx_queue_stats stats;
+	struct u64_stats_sync syncp;
+	union {
+		struct wx_tx_queue_stats tx_stats;
+		struct wx_rx_queue_stats rx_stats;
+	};
+} ____cacheline_internodealigned_in_smp;
+
+struct wx_q_vector {
+	struct wx *wx;
+	int cpu;        /* CPU for DCA */
+	int numa_node;
+	u16 v_idx;      /* index of q_vector within array, also used for
+			 * finding the bit in EICR and friends that
+			 * represents the vector for this ring
+			 */
+	u16 itr;        /* Interrupt throttle rate written to EITR */
+	struct wx_ring_container rx, tx;
+	struct napi_struct napi;
+	struct rcu_head rcu;    /* to avoid race with update stats on free */
+
+	char name[IFNAMSIZ + 17];
+
+	/* for dynamic allocation of rings associated with this q_vector */
+	struct wx_ring ring[] ____cacheline_internodealigned_in_smp;
+};
+
+struct wx_ring_feature {
+	u16 limit;      /* upper limit on feature indices */
+	u16 indices;    /* current value of indices */
+	u16 mask;       /* Mask used for feature to ring mapping */
+	u16 offset;     /* offset to start of feature */
+};
+
+enum wx_ring_f_enum {
+	RING_F_NONE = 0,
+	RING_F_RSS,
+	RING_F_FDIR,
+	RING_F_ARRAY_SIZE  /* must be last in enum set */
+};
+
+enum wx_isb_idx {
+	WX_ISB_HEADER,
+	WX_ISB_MISC,
+	WX_ISB_VEC0,
+	WX_ISB_VEC1,
+	WX_ISB_MAX
+};
+
+struct wx_fc_info {
+	u32 high_water; /* Flow Ctrl High-water */
+	u32 low_water; /* Flow Ctrl Low-water */
+};
+
+/* Statistics counters collected by the MAC */
+struct wx_hw_stats {
+	u64 gprc;
+	u64 gptc;
+	u64 gorc;
+	u64 gotc;
+	u64 tpr;
+	u64 tpt;
+	u64 bprc;
+	u64 bptc;
+	u64 mprc;
+	u64 mptc;
+	u64 roc;
+	u64 ruc;
+	u64 lxonoffrxc;
+	u64 lxontxc;
+	u64 lxofftxc;
+	u64 o2bgptc;
+	u64 b2ospc;
+	u64 o2bspc;
+	u64 b2ogprc;
+	u64 rdmdrop;
+	u64 crcerrs;
+	u64 rlec;
+	u64 qmprc;
+	u64 fdirmatch;
+	u64 fdirmiss;
+};
+
+enum wx_state {
+	WX_STATE_RESETTING,
+	WX_STATE_NBITS,		/* must be last */
+};
+
+enum wx_pf_flags {
+	WX_FLAG_FDIR_CAPABLE,
+	WX_FLAG_FDIR_HASH,
+	WX_FLAG_FDIR_PERFECT,
+	WX_PF_FLAGS_NBITS               /* must be last */
+};
+
+struct wx {
+	unsigned long active_vlans[BITS_TO_LONGS(VLAN_N_VID)];
+	DECLARE_BITMAP(state, WX_STATE_NBITS);
+	DECLARE_BITMAP(flags, WX_PF_FLAGS_NBITS);
+
+	void *priv;
+	u8 __iomem *hw_addr;
+	struct pci_dev *pdev;
+	struct net_device *netdev;
+	struct wx_bus_info bus;
+	struct wx_mac_info mac;
+	enum em_mac_type mac_type;
+	enum sp_media_type media_type;
+	struct wx_eeprom_info eeprom;
+	struct wx_addr_filter_info addr_ctrl;
+	struct wx_fc_info fc;
+	struct wx_mac_addr *mac_table;
+	u16 device_id;
+	u16 vendor_id;
+	u16 subsystem_device_id;
+	u16 subsystem_vendor_id;
+	u8 revision_id;
+	u16 oem_ssid;
+	u16 oem_svid;
+	u16 msg_enable;
+	bool adapter_stopped;
+	u16 tpid[8];
+	char eeprom_id[32];
+	char *driver_name;
+	enum wx_reset_type reset_type;
+
+	/* PHY stuff */
+	unsigned int link;
+	int speed;
+	int duplex;
+	struct phy_device *phydev;
+	struct phylink *phylink;
+	struct phylink_config phylink_config;
+
+	bool wol_hw_supported;
+	bool ncsi_enabled;
+	bool gpio_ctrl;
+	raw_spinlock_t gpio_lock;
+
+	/* Tx fast path data */
+	int num_tx_queues;
+	u16 tx_itr_setting;
+	u16 tx_work_limit;
+
+	/* Rx fast path data */
+	int num_rx_queues;
+	u16 rx_itr_setting;
+	u16 rx_work_limit;
+
+	int num_q_vectors;      /* current number of q_vectors for device */
+	int max_q_vectors;      /* upper limit of q_vectors for device */
+
+	u32 tx_ring_count;
+	u32 rx_ring_count;
+
+	struct wx_ring *tx_ring[64] ____cacheline_aligned_in_smp;
+	struct wx_ring *rx_ring[64];
+	struct wx_q_vector *q_vector[64];
+
+	unsigned int queues_per_pool;
+	struct msix_entry *msix_q_entries;
+	struct msix_entry *msix_entry;
+	struct wx_ring_feature ring_feature[RING_F_ARRAY_SIZE];
+
+	/* misc interrupt status block */
+	dma_addr_t isb_dma;
+	u32 *isb_mem;
+	u32 isb_tag[WX_ISB_MAX];
+	bool misc_irq_domain;
+
+#define WX_MAX_RETA_ENTRIES 128
+#define WX_RSS_INDIR_TBL_MAX 64
+	u8 rss_indir_tbl[WX_MAX_RETA_ENTRIES];
+	bool rss_enabled;
+#define WX_RSS_KEY_SIZE     40  /* size of RSS Hash Key in bytes */
+	u32 *rss_key;
+	u32 wol;
+
+	u16 bd_number;
+
+	struct wx_hw_stats stats;
+	u64 tx_busy;
+	u64 non_eop_descs;
+	u64 restart_queue;
+	u64 hw_csum_rx_good;
+	u64 hw_csum_rx_error;
+	u64 alloc_rx_buff_failed;
+
+	u32 atr_sample_rate;
+	void (*atr)(struct wx_ring *ring, struct wx_tx_buffer *first, u8 ptype);
+	void (*configure_fdir)(struct wx *wx);
+	void (*do_reset)(struct net_device *netdev);
+};
+
+#define WX_INTR_ALL (~0ULL)
+#define WX_INTR_Q(i) BIT((i) + 1)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 /* register operations */
 #define wr32(a, reg, value)	writel((value), ((a)->hw_addr + (reg)))

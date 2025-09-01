@@ -26,6 +26,7 @@ do {									\
 	__once_init((once), #once, &__key);				\
 } while (0)
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /*
  * call_once - Ensure a function has been called exactly once
  *
@@ -61,6 +62,23 @@ static inline int call_once(struct once *once, int (*cb)(struct once *))
 	else
 		atomic_set_release(&once->state, ONCE_COMPLETED);
 	return r;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static inline void call_once(struct once *once, void (*cb)(struct once *))
+{
+        /* Pairs with atomic_set_release() below.  */
+        if (atomic_read_acquire(&once->state) == ONCE_COMPLETED)
+                return;
+
+        guard(mutex)(&once->lock);
+        WARN_ON(atomic_read(&once->state) == ONCE_RUNNING);
+        if (atomic_read(&once->state) != ONCE_NOT_STARTED)
+                return;
+
+        atomic_set(&once->state, ONCE_RUNNING);
+        cb(once);
+        atomic_set_release(&once->state, ONCE_COMPLETED);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 #endif /* _LINUX_CALL_ONCE_H */

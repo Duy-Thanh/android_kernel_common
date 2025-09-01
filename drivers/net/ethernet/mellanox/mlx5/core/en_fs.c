@@ -776,7 +776,12 @@ static int mlx5e_create_promisc_table(struct mlx5e_flow_steering *fs)
 	ft_attr.max_fte = MLX5E_PROMISC_TABLE_SIZE;
 	ft_attr.autogroup.max_num_groups = 1;
 	ft_attr.level = MLX5E_PROMISC_FT_LEVEL;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ft_attr.prio = MLX5E_PROMISC_PRIO;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ft_attr.prio = MLX5E_NIC_PRIO;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	ft->t = mlx5_create_auto_grouped_flow_table(fs->ns, &ft_attr);
 	if (IS_ERR(ft->t)) {

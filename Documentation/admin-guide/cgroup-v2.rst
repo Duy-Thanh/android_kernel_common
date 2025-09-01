@@ -991,6 +991,7 @@ All cgroup core files are prefixed with "cgroup."
 		Total number of dying cgroup subsystems (e.g. memory
 		cgroup) at and beneath the current cgroup.
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
   cgroup.stat.local
 	A read-only flat-keyed file which exists in non-root cgroups.
 	The following entry is defined:
@@ -1009,6 +1010,9 @@ All cgroup core files are prefixed with "cgroup."
 
 		the duration being measured is the span between a and c.
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
   cgroup.freeze
 	A read-write single value file which exists on non-root cgroups.
 	Allowed values are "0" and "1". The default is "0".

@@ -2283,6 +2283,7 @@ int vprintk_store(int facility, int level,
 	ts_nsec = local_clock();
 
 	caller_id = printk_caller_id();
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	trace_android_vh_printk_save_irq(&caller_id, irqflags);
 
 	/*
@@ -2362,6 +2363,88 @@ int vprintk_store(int facility, int level,
 	else
 		prb_final_commit(&e);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	/*
+	 * The sprintf needs to come first since the syslog prefix might be
+	 * passed in as a parameter. An extra byte must be reserved so that
+	 * later the vscnprintf() into the reserved buffer has room for the
+	 * terminating '\0', which is not counted by vsnprintf().
+	 */
+	va_copy(args2, args);
+	reserve_size = vsnprintf(&prefix_buf[0], sizeof(prefix_buf), fmt, args2) + 1;
+	va_end(args2);
+
+	if (reserve_size > PRINTKRB_RECORD_MAX)
+		reserve_size = PRINTKRB_RECORD_MAX;
+
+	/* Extract log level or control flags. */
+	if (facility == 0)
+		printk_parse_prefix(&prefix_buf[0], &level, &flags);
+
+	if (level == LOGLEVEL_DEFAULT)
+		level = default_message_loglevel;
+
+	if (dev_info)
+		flags |= LOG_NEWLINE;
+
+	if (flags & LOG_CONT) {
+		prb_rec_init_wr(&r, reserve_size);
+		if (prb_reserve_in_last(&e, prb, &r, caller_id, PRINTKRB_RECORD_MAX)) {
+			text_len = printk_sprint(&r.text_buf[r.info->text_len], reserve_size,
+						 facility, &flags, fmt, args);
+			r.info->text_len += text_len;
+
+			if (flags & LOG_NEWLINE) {
+				r.info->flags |= LOG_NEWLINE;
+				prb_final_commit(&e);
+			} else {
+				prb_commit(&e);
+			}
+
+			trace_android_vh_logbuf_pr_cont(&r, text_len);
+			ret = text_len;
+			goto out;
+		}
+	}
+
+	/*
+	 * Explicitly initialize the record before every prb_reserve() call.
+	 * prb_reserve_in_last() and prb_reserve() purposely invalidate the
+	 * structure when they fail.
+	 */
+	prb_rec_init_wr(&r, reserve_size);
+	if (!prb_reserve(&e, prb, &r)) {
+		/* truncate the message if it is too long for empty buffer */
+		truncate_msg(&reserve_size, &trunc_msg_len);
+
+		prb_rec_init_wr(&r, reserve_size + trunc_msg_len);
+		if (!prb_reserve(&e, prb, &r))
+			goto out;
+	}
+
+	/* fill message */
+	text_len = printk_sprint(&r.text_buf[0], reserve_size, facility, &flags, fmt, args);
+	if (trunc_msg_len)
+		memcpy(&r.text_buf[text_len], trunc_msg, trunc_msg_len);
+	r.info->text_len = text_len + trunc_msg_len;
+	r.info->facility = facility;
+	r.info->level = level & 7;
+	r.info->flags = flags & 0x1f;
+	r.info->ts_nsec = ts_nsec;
+	r.info->caller_id = caller_id;
+	if (dev_info)
+		memcpy(&r.info->dev_info, dev_info, sizeof(r.info->dev_info));
+
+	/* A message without a trailing newline can be continued. */
+	if (!(flags & LOG_NEWLINE))
+		prb_commit(&e);
+	else
+		prb_final_commit(&e);
+
+	trace_android_rvh_logbuf(prb, &r);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	trace_android_vh_logbuf(prb, &r);
 	ret = text_len + trunc_msg_len;
 out:

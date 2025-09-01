@@ -690,6 +690,7 @@ static void xcan_write_frame(struct net_device *ndev, struct sk_buff *skb,
 		dlc |= XCAN_DLCR_EDL_MASK;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	priv->write_reg(priv, XCAN_FRAME_ID_OFFSET(frame_offset), id);
 	/* If the CAN frame is RTR frame this write triggers transmission
 	 * (not on CAN FD)
@@ -730,6 +731,49 @@ static void xcan_write_frame(struct net_device *ndev, struct sk_buff *skb,
 		can_put_echo_skb(skb, ndev, 0, 0);
 
 	priv->tx_head++;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (!(priv->devtype.flags & XCAN_FLAG_TX_MAILBOXES) &&
+	    (priv->devtype.flags & XCAN_FLAG_TXFEMP))
+		can_put_echo_skb(skb, ndev, priv->tx_head % priv->tx_max, 0);
+	else
+		can_put_echo_skb(skb, ndev, 0, 0);
+
+	priv->tx_head++;
+
+	priv->write_reg(priv, XCAN_FRAME_ID_OFFSET(frame_offset), id);
+	/* If the CAN frame is RTR frame this write triggers transmission
+	 * (not on CAN FD)
+	 */
+	priv->write_reg(priv, XCAN_FRAME_DLC_OFFSET(frame_offset), dlc);
+	if (priv->devtype.cantype == XAXI_CANFD ||
+	    priv->devtype.cantype == XAXI_CANFD_2_0) {
+		for (i = 0; i < cf->len; i += 4) {
+			ramoff = XCANFD_FRAME_DW_OFFSET(frame_offset) +
+					(dwindex * XCANFD_DW_BYTES);
+			priv->write_reg(priv, ramoff,
+					be32_to_cpup((__be32 *)(cf->data + i)));
+			dwindex++;
+		}
+	} else {
+		if (cf->len > 0)
+			data[0] = be32_to_cpup((__be32 *)(cf->data + 0));
+		if (cf->len > 4)
+			data[1] = be32_to_cpup((__be32 *)(cf->data + 4));
+
+		if (!(cf->can_id & CAN_RTR_FLAG)) {
+			priv->write_reg(priv,
+					XCAN_FRAME_DW1_OFFSET(frame_offset),
+					data[0]);
+			/* If the CAN frame is Standard/Extended frame this
+			 * write triggers transmission (not on CAN FD)
+			 */
+			priv->write_reg(priv,
+					XCAN_FRAME_DW2_OFFSET(frame_offset),
+					data[1]);
+		}
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /**

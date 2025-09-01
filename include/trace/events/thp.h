@@ -8,6 +8,7 @@
 #include <linux/types.h>
 #include <linux/tracepoint.h>
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #ifdef CONFIG_PPC_BOOK3S_64
 DECLARE_EVENT_CLASS(hugepage_set,
 
@@ -68,6 +69,67 @@ DEFINE_EVENT(hugepage_update, hugepage_update_pud,
 	    TP_ARGS(addr, pud, clr, set)
 );
 #endif /* CONFIG_PPC_BOOK3S_64 */
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+DECLARE_EVENT_CLASS(hugepage_set,
+
+	    TP_PROTO(unsigned long addr, unsigned long pte),
+	    TP_ARGS(addr, pte),
+	    TP_STRUCT__entry(
+		    __field(unsigned long, addr)
+		    __field(unsigned long, pte)
+		    ),
+
+	    TP_fast_assign(
+		    __entry->addr = addr;
+		    __entry->pte = pte;
+		    ),
+
+	    TP_printk("Set page table entry with 0x%lx with 0x%lx", __entry->addr, __entry->pte)
+);
+
+DEFINE_EVENT(hugepage_set, hugepage_set_pmd,
+	    TP_PROTO(unsigned long addr, unsigned long pmd),
+	    TP_ARGS(addr, pmd)
+);
+
+DEFINE_EVENT(hugepage_set, hugepage_set_pud,
+	    TP_PROTO(unsigned long addr, unsigned long pud),
+	    TP_ARGS(addr, pud)
+);
+
+DECLARE_EVENT_CLASS(hugepage_update,
+
+	    TP_PROTO(unsigned long addr, unsigned long pte, unsigned long clr, unsigned long set),
+	    TP_ARGS(addr, pte, clr, set),
+	    TP_STRUCT__entry(
+		    __field(unsigned long, addr)
+		    __field(unsigned long, pte)
+		    __field(unsigned long, clr)
+		    __field(unsigned long, set)
+		    ),
+
+	    TP_fast_assign(
+		    __entry->addr = addr;
+		    __entry->pte = pte;
+		    __entry->clr = clr;
+		    __entry->set = set;
+
+		    ),
+
+	    TP_printk("hugepage update at addr 0x%lx and pte = 0x%lx clr = 0x%lx, set = 0x%lx", __entry->addr, __entry->pte, __entry->clr, __entry->set)
+);
+
+DEFINE_EVENT(hugepage_update, hugepage_update_pmd,
+	    TP_PROTO(unsigned long addr, unsigned long pmd, unsigned long clr, unsigned long set),
+	    TP_ARGS(addr, pmd, clr, set)
+);
+
+DEFINE_EVENT(hugepage_update, hugepage_update_pud,
+	    TP_PROTO(unsigned long addr, unsigned long pud, unsigned long clr, unsigned long set),
+	    TP_ARGS(addr, pud, clr, set)
+);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 DECLARE_EVENT_CLASS(migration_pmd,
 

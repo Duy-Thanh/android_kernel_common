@@ -239,6 +239,7 @@ int xe_vm_add_compute_exec_queue(struct xe_vm *vm, struct xe_exec_queue *q)
 
 	pfence = xe_preempt_fence_create(q, q->lr.context,
 					 ++q->lr.seqno);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (IS_ERR(pfence)) {
 		err = PTR_ERR(pfence);
 		goto out_fini;
@@ -1408,6 +1409,1174 @@ static int xe_vm_create_scratch(struct xe_device *xe, struct xe_tile *tile,
 			vm->scratch_pt[id][i] = NULL;
 			return err;
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (!pfence) {
+		err = -ENOMEM;
+		goto out_fini;
+	}
+
+	list_add(&q->lr.link, &vm->preempt.exec_queues);
+	++vm->preempt.num_exec_queues;
+	q->lr.pfence = pfence;
+
+	down_read(&vm->userptr.notifier_lock);
+
+	drm_gpuvm_resv_add_fence(&vm->gpuvm, exec, pfence,
+				 DMA_RESV_USAGE_BOOKKEEP, DMA_RESV_USAGE_BOOKKEEP);
+
+	/*
+	 * Check to see if a preemption on VM is in flight or userptr
+	 * invalidation, if so trigger this preempt fence to sync state with
+	 * other preempt fences on the VM.
+	 */
+	wait = __xe_vm_userptr_needs_repin(vm) || preempt_fences_waiting(vm);
+	if (wait)
+		dma_fence_enable_sw_signaling(pfence);
+
+	up_read(&vm->userptr.notifier_lock);
+
+out_fini:
+	drm_exec_fini(exec);
+out_up_write:
+	up_write(&vm->lock);
+
+	return err;
+}
+
+/**
+ * xe_vm_remove_compute_exec_queue() - Remove compute exec queue from VM
+ * @vm: The VM.
+ * @q: The exec_queue
+ *
+ * Note that this function might be called multiple times on the same queue.
+ */
+void xe_vm_remove_compute_exec_queue(struct xe_vm *vm, struct xe_exec_queue *q)
+{
+	if (!xe_vm_in_preempt_fence_mode(vm))
+		return;
+
+	down_write(&vm->lock);
+	if (!list_empty(&q->lr.link)) {
+		list_del_init(&q->lr.link);
+		--vm->preempt.num_exec_queues;
+	}
+	if (q->lr.pfence) {
+		dma_fence_enable_sw_signaling(q->lr.pfence);
+		dma_fence_put(q->lr.pfence);
+		q->lr.pfence = NULL;
+	}
+	up_write(&vm->lock);
+}
+
+/**
+ * __xe_vm_userptr_needs_repin() - Check whether the VM does have userptrs
+ * that need repinning.
+ * @vm: The VM.
+ *
+ * This function checks for whether the VM has userptrs that need repinning,
+ * and provides a release-type barrier on the userptr.notifier_lock after
+ * checking.
+ *
+ * Return: 0 if there are no userptrs needing repinning, -EAGAIN if there are.
+ */
+int __xe_vm_userptr_needs_repin(struct xe_vm *vm)
+{
+	lockdep_assert_held_read(&vm->userptr.notifier_lock);
+
+	return (list_empty(&vm->userptr.repin_list) &&
+		list_empty(&vm->userptr.invalidated)) ? 0 : -EAGAIN;
+}
+
+#define XE_VM_REBIND_RETRY_TIMEOUT_MS 1000
+
+/**
+ * xe_vm_kill() - VM Kill
+ * @vm: The VM.
+ * @unlocked: Flag indicates the VM's dma-resv is not held
+ *
+ * Kill the VM by setting banned flag indicated VM is no longer available for
+ * use. If in preempt fence mode, also kill all exec queue attached to the VM.
+ */
+void xe_vm_kill(struct xe_vm *vm, bool unlocked)
+{
+	struct xe_exec_queue *q;
+
+	lockdep_assert_held(&vm->lock);
+
+	if (unlocked)
+		xe_vm_lock(vm, false);
+
+	vm->flags |= XE_VM_FLAG_BANNED;
+	trace_xe_vm_kill(vm);
+
+	list_for_each_entry(q, &vm->preempt.exec_queues, lr.link)
+		q->ops->kill(q);
+
+	if (unlocked)
+		xe_vm_unlock(vm);
+
+	/* TODO: Inform user the VM is banned */
+}
+
+/**
+ * xe_vm_validate_should_retry() - Whether to retry after a validate error.
+ * @exec: The drm_exec object used for locking before validation.
+ * @err: The error returned from ttm_bo_validate().
+ * @end: A ktime_t cookie that should be set to 0 before first use and
+ * that should be reused on subsequent calls.
+ *
+ * With multiple active VMs, under memory pressure, it is possible that
+ * ttm_bo_validate() run into -EDEADLK and in such case returns -ENOMEM.
+ * Until ttm properly handles locking in such scenarios, best thing the
+ * driver can do is retry with a timeout. Check if that is necessary, and
+ * if so unlock the drm_exec's objects while keeping the ticket to prepare
+ * for a rerun.
+ *
+ * Return: true if a retry after drm_exec_init() is recommended;
+ * false otherwise.
+ */
+bool xe_vm_validate_should_retry(struct drm_exec *exec, int err, ktime_t *end)
+{
+	ktime_t cur;
+
+	if (err != -ENOMEM)
+		return false;
+
+	cur = ktime_get();
+	*end = *end ? : ktime_add_ms(cur, XE_VM_REBIND_RETRY_TIMEOUT_MS);
+	if (!ktime_before(cur, *end))
+		return false;
+
+	msleep(20);
+	return true;
+}
+
+static int xe_gpuvm_validate(struct drm_gpuvm_bo *vm_bo, struct drm_exec *exec)
+{
+	struct xe_vm *vm = gpuvm_to_vm(vm_bo->vm);
+	struct drm_gpuva *gpuva;
+	int ret;
+
+	lockdep_assert_held(&vm->lock);
+	drm_gpuvm_bo_for_each_va(gpuva, vm_bo)
+		list_move_tail(&gpuva_to_vma(gpuva)->combined_links.rebind,
+			       &vm->rebind_list);
+
+	ret = xe_bo_validate(gem_to_xe_bo(vm_bo->obj), vm, false);
+	if (ret)
+		return ret;
+
+	vm_bo->evicted = false;
+	return 0;
+}
+
+/**
+ * xe_vm_validate_rebind() - Validate buffer objects and rebind vmas
+ * @vm: The vm for which we are rebinding.
+ * @exec: The struct drm_exec with the locked GEM objects.
+ * @num_fences: The number of fences to reserve for the operation, not
+ * including rebinds and validations.
+ *
+ * Validates all evicted gem objects and rebinds their vmas. Note that
+ * rebindings may cause evictions and hence the validation-rebind
+ * sequence is rerun until there are no more objects to validate.
+ *
+ * Return: 0 on success, negative error code on error. In particular,
+ * may return -EINTR or -ERESTARTSYS if interrupted, and -EDEADLK if
+ * the drm_exec transaction needs to be restarted.
+ */
+int xe_vm_validate_rebind(struct xe_vm *vm, struct drm_exec *exec,
+			  unsigned int num_fences)
+{
+	struct drm_gem_object *obj;
+	unsigned long index;
+	int ret;
+
+	do {
+		ret = drm_gpuvm_validate(&vm->gpuvm, exec);
+		if (ret)
+			return ret;
+
+		ret = xe_vm_rebind(vm, false);
+		if (ret)
+			return ret;
+	} while (!list_empty(&vm->gpuvm.evict.list));
+
+	drm_exec_for_each_locked_object(exec, index, obj) {
+		ret = dma_resv_reserve_fences(obj->resv, num_fences);
+		if (ret)
+			return ret;
+	}
+
+	return 0;
+}
+
+static int xe_preempt_work_begin(struct drm_exec *exec, struct xe_vm *vm,
+				 bool *done)
+{
+	int err;
+
+	err = drm_gpuvm_prepare_vm(&vm->gpuvm, exec, 0);
+	if (err)
+		return err;
+
+	if (xe_vm_is_idle(vm)) {
+		vm->preempt.rebind_deactivated = true;
+		*done = true;
+		return 0;
+	}
+
+	if (!preempt_fences_waiting(vm)) {
+		*done = true;
+		return 0;
+	}
+
+	err = drm_gpuvm_prepare_objects(&vm->gpuvm, exec, 0);
+	if (err)
+		return err;
+
+	err = wait_for_existing_preempt_fences(vm);
+	if (err)
+		return err;
+
+	/*
+	 * Add validation and rebinding to the locking loop since both can
+	 * cause evictions which may require blocing dma_resv locks.
+	 * The fence reservation here is intended for the new preempt fences
+	 * we attach at the end of the rebind work.
+	 */
+	return xe_vm_validate_rebind(vm, exec, vm->preempt.num_exec_queues);
+}
+
+static void preempt_rebind_work_func(struct work_struct *w)
+{
+	struct xe_vm *vm = container_of(w, struct xe_vm, preempt.rebind_work);
+	struct drm_exec exec;
+	unsigned int fence_count = 0;
+	LIST_HEAD(preempt_fences);
+	ktime_t end = 0;
+	int err = 0;
+	long wait;
+	int __maybe_unused tries = 0;
+
+	xe_assert(vm->xe, xe_vm_in_preempt_fence_mode(vm));
+	trace_xe_vm_rebind_worker_enter(vm);
+
+	down_write(&vm->lock);
+
+	if (xe_vm_is_closed_or_banned(vm)) {
+		up_write(&vm->lock);
+		trace_xe_vm_rebind_worker_exit(vm);
+		return;
+	}
+
+retry:
+	if (xe_vm_userptr_check_repin(vm)) {
+		err = xe_vm_userptr_pin(vm);
+		if (err)
+			goto out_unlock_outer;
+	}
+
+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
+
+	drm_exec_until_all_locked(&exec) {
+		bool done = false;
+
+		err = xe_preempt_work_begin(&exec, vm, &done);
+		drm_exec_retry_on_contention(&exec);
+		if (err || done) {
+			drm_exec_fini(&exec);
+			if (err && xe_vm_validate_should_retry(&exec, err, &end))
+				err = -EAGAIN;
+
+			goto out_unlock_outer;
+		}
+	}
+
+	err = alloc_preempt_fences(vm, &preempt_fences, &fence_count);
+	if (err)
+		goto out_unlock;
+
+	err = xe_vm_rebind(vm, true);
+	if (err)
+		goto out_unlock;
+
+	/* Wait on rebinds and munmap style VM unbinds */
+	wait = dma_resv_wait_timeout(xe_vm_resv(vm),
+				     DMA_RESV_USAGE_KERNEL,
+				     false, MAX_SCHEDULE_TIMEOUT);
+	if (wait <= 0) {
+		err = -ETIME;
+		goto out_unlock;
+	}
+
+#define retry_required(__tries, __vm) \
+	(IS_ENABLED(CONFIG_DRM_XE_USERPTR_INVAL_INJECT) ? \
+	(!(__tries)++ || __xe_vm_userptr_needs_repin(__vm)) : \
+	__xe_vm_userptr_needs_repin(__vm))
+
+	down_read(&vm->userptr.notifier_lock);
+	if (retry_required(tries, vm)) {
+		up_read(&vm->userptr.notifier_lock);
+		err = -EAGAIN;
+		goto out_unlock;
+	}
+
+#undef retry_required
+
+	spin_lock(&vm->xe->ttm.lru_lock);
+	ttm_lru_bulk_move_tail(&vm->lru_bulk_move);
+	spin_unlock(&vm->xe->ttm.lru_lock);
+
+	/* Point of no return. */
+	arm_preempt_fences(vm, &preempt_fences);
+	resume_and_reinstall_preempt_fences(vm, &exec);
+	up_read(&vm->userptr.notifier_lock);
+
+out_unlock:
+	drm_exec_fini(&exec);
+out_unlock_outer:
+	if (err == -EAGAIN) {
+		trace_xe_vm_rebind_worker_retry(vm);
+		goto retry;
+	}
+
+	if (err) {
+		drm_warn(&vm->xe->drm, "VM worker error: %d\n", err);
+		xe_vm_kill(vm, true);
+	}
+	up_write(&vm->lock);
+
+	free_preempt_fences(&preempt_fences);
+
+	trace_xe_vm_rebind_worker_exit(vm);
+}
+
+static void __vma_userptr_invalidate(struct xe_vm *vm, struct xe_userptr_vma *uvma)
+{
+	struct xe_userptr *userptr = &uvma->userptr;
+	struct xe_vma *vma = &uvma->vma;
+	struct dma_resv_iter cursor;
+	struct dma_fence *fence;
+	long err;
+
+	/*
+	 * Tell exec and rebind worker they need to repin and rebind this
+	 * userptr.
+	 */
+	if (!xe_vm_in_fault_mode(vm) &&
+	    !(vma->gpuva.flags & XE_VMA_DESTROYED)) {
+		spin_lock(&vm->userptr.invalidated_lock);
+		list_move_tail(&userptr->invalidate_link,
+			       &vm->userptr.invalidated);
+		spin_unlock(&vm->userptr.invalidated_lock);
+	}
+
+	/*
+	 * Preempt fences turn into schedule disables, pipeline these.
+	 * Note that even in fault mode, we need to wait for binds and
+	 * unbinds to complete, and those are attached as BOOKMARK fences
+	 * to the vm.
+	 */
+	dma_resv_iter_begin(&cursor, xe_vm_resv(vm),
+			    DMA_RESV_USAGE_BOOKKEEP);
+	dma_resv_for_each_fence_unlocked(&cursor, fence)
+		dma_fence_enable_sw_signaling(fence);
+	dma_resv_iter_end(&cursor);
+
+	err = dma_resv_wait_timeout(xe_vm_resv(vm),
+				    DMA_RESV_USAGE_BOOKKEEP,
+				    false, MAX_SCHEDULE_TIMEOUT);
+	XE_WARN_ON(err <= 0);
+
+	if (xe_vm_in_fault_mode(vm) && userptr->initial_bind) {
+		err = xe_vm_invalidate_vma(vma);
+		XE_WARN_ON(err);
+	}
+
+	xe_hmm_userptr_unmap(uvma);
+}
+
+static bool vma_userptr_invalidate(struct mmu_interval_notifier *mni,
+				   const struct mmu_notifier_range *range,
+				   unsigned long cur_seq)
+{
+	struct xe_userptr_vma *uvma = container_of(mni, typeof(*uvma), userptr.notifier);
+	struct xe_vma *vma = &uvma->vma;
+	struct xe_vm *vm = xe_vma_vm(vma);
+
+	xe_assert(vm->xe, xe_vma_is_userptr(vma));
+	trace_xe_vma_userptr_invalidate(vma);
+
+	if (!mmu_notifier_range_blockable(range))
+		return false;
+
+	vm_dbg(&xe_vma_vm(vma)->xe->drm,
+	       "NOTIFIER: addr=0x%016llx, range=0x%016llx",
+		xe_vma_start(vma), xe_vma_size(vma));
+
+	down_write(&vm->userptr.notifier_lock);
+	mmu_interval_set_seq(mni, cur_seq);
+
+	__vma_userptr_invalidate(vm, uvma);
+	up_write(&vm->userptr.notifier_lock);
+	trace_xe_vma_userptr_invalidate_complete(vma);
+
+	return true;
+}
+
+static const struct mmu_interval_notifier_ops vma_userptr_notifier_ops = {
+	.invalidate = vma_userptr_invalidate,
+};
+
+#if IS_ENABLED(CONFIG_DRM_XE_USERPTR_INVAL_INJECT)
+/**
+ * xe_vma_userptr_force_invalidate() - force invalidate a userptr
+ * @uvma: The userptr vma to invalidate
+ *
+ * Perform a forced userptr invalidation for testing purposes.
+ */
+void xe_vma_userptr_force_invalidate(struct xe_userptr_vma *uvma)
+{
+	struct xe_vm *vm = xe_vma_vm(&uvma->vma);
+
+	/* Protect against concurrent userptr pinning */
+	lockdep_assert_held(&vm->lock);
+	/* Protect against concurrent notifiers */
+	lockdep_assert_held(&vm->userptr.notifier_lock);
+	/*
+	 * Protect against concurrent instances of this function and
+	 * the critical exec sections
+	 */
+	xe_vm_assert_held(vm);
+
+	if (!mmu_interval_read_retry(&uvma->userptr.notifier,
+				     uvma->userptr.notifier_seq))
+		uvma->userptr.notifier_seq -= 2;
+	__vma_userptr_invalidate(vm, uvma);
+}
+#endif
+
+int xe_vm_userptr_pin(struct xe_vm *vm)
+{
+	struct xe_userptr_vma *uvma, *next;
+	int err = 0;
+	LIST_HEAD(tmp_evict);
+
+	xe_assert(vm->xe, !xe_vm_in_fault_mode(vm));
+	lockdep_assert_held_write(&vm->lock);
+
+	/* Collect invalidated userptrs */
+	spin_lock(&vm->userptr.invalidated_lock);
+	xe_assert(vm->xe, list_empty(&vm->userptr.repin_list));
+	list_for_each_entry_safe(uvma, next, &vm->userptr.invalidated,
+				 userptr.invalidate_link) {
+		list_del_init(&uvma->userptr.invalidate_link);
+		list_add_tail(&uvma->userptr.repin_link,
+			      &vm->userptr.repin_list);
+	}
+	spin_unlock(&vm->userptr.invalidated_lock);
+
+	/* Pin and move to bind list */
+	list_for_each_entry_safe(uvma, next, &vm->userptr.repin_list,
+				 userptr.repin_link) {
+		err = xe_vma_userptr_pin_pages(uvma);
+		if (err == -EFAULT) {
+			list_del_init(&uvma->userptr.repin_link);
+			/*
+			 * We might have already done the pin once already, but
+			 * then had to retry before the re-bind happened, due
+			 * some other condition in the caller, but in the
+			 * meantime the userptr got dinged by the notifier such
+			 * that we need to revalidate here, but this time we hit
+			 * the EFAULT. In such a case make sure we remove
+			 * ourselves from the rebind list to avoid going down in
+			 * flames.
+			 */
+			if (!list_empty(&uvma->vma.combined_links.rebind))
+				list_del_init(&uvma->vma.combined_links.rebind);
+
+			/* Wait for pending binds */
+			xe_vm_lock(vm, false);
+			dma_resv_wait_timeout(xe_vm_resv(vm),
+					      DMA_RESV_USAGE_BOOKKEEP,
+					      false, MAX_SCHEDULE_TIMEOUT);
+
+			err = xe_vm_invalidate_vma(&uvma->vma);
+			xe_vm_unlock(vm);
+			if (err)
+				break;
+		} else {
+			if (err)
+				break;
+
+			list_del_init(&uvma->userptr.repin_link);
+			list_move_tail(&uvma->vma.combined_links.rebind,
+				       &vm->rebind_list);
+		}
+	}
+
+	if (err) {
+		down_write(&vm->userptr.notifier_lock);
+		spin_lock(&vm->userptr.invalidated_lock);
+		list_for_each_entry_safe(uvma, next, &vm->userptr.repin_list,
+					 userptr.repin_link) {
+			list_del_init(&uvma->userptr.repin_link);
+			list_move_tail(&uvma->userptr.invalidate_link,
+				       &vm->userptr.invalidated);
+		}
+		spin_unlock(&vm->userptr.invalidated_lock);
+		up_write(&vm->userptr.notifier_lock);
+	}
+	return err;
+}
+
+/**
+ * xe_vm_userptr_check_repin() - Check whether the VM might have userptrs
+ * that need repinning.
+ * @vm: The VM.
+ *
+ * This function does an advisory check for whether the VM has userptrs that
+ * need repinning.
+ *
+ * Return: 0 if there are no indications of userptrs needing repinning,
+ * -EAGAIN if there are.
+ */
+int xe_vm_userptr_check_repin(struct xe_vm *vm)
+{
+	return (list_empty_careful(&vm->userptr.repin_list) &&
+		list_empty_careful(&vm->userptr.invalidated)) ? 0 : -EAGAIN;
+}
+
+static int xe_vma_ops_alloc(struct xe_vma_ops *vops, bool array_of_binds)
+{
+	int i;
+
+	for (i = 0; i < XE_MAX_TILES_PER_DEVICE; ++i) {
+		if (!vops->pt_update_ops[i].num_ops)
+			continue;
+
+		vops->pt_update_ops[i].ops =
+			kmalloc_array(vops->pt_update_ops[i].num_ops,
+				      sizeof(*vops->pt_update_ops[i].ops),
+				      GFP_KERNEL);
+		if (!vops->pt_update_ops[i].ops)
+			return array_of_binds ? -ENOBUFS : -ENOMEM;
+	}
+
+	return 0;
+}
+
+static void xe_vma_ops_fini(struct xe_vma_ops *vops)
+{
+	int i;
+
+	for (i = 0; i < XE_MAX_TILES_PER_DEVICE; ++i)
+		kfree(vops->pt_update_ops[i].ops);
+}
+
+static void xe_vma_ops_incr_pt_update_ops(struct xe_vma_ops *vops, u8 tile_mask)
+{
+	int i;
+
+	for (i = 0; i < XE_MAX_TILES_PER_DEVICE; ++i)
+		if (BIT(i) & tile_mask)
+			++vops->pt_update_ops[i].num_ops;
+}
+
+static void xe_vm_populate_rebind(struct xe_vma_op *op, struct xe_vma *vma,
+				  u8 tile_mask)
+{
+	INIT_LIST_HEAD(&op->link);
+	op->tile_mask = tile_mask;
+	op->base.op = DRM_GPUVA_OP_MAP;
+	op->base.map.va.addr = vma->gpuva.va.addr;
+	op->base.map.va.range = vma->gpuva.va.range;
+	op->base.map.gem.obj = vma->gpuva.gem.obj;
+	op->base.map.gem.offset = vma->gpuva.gem.offset;
+	op->map.vma = vma;
+	op->map.immediate = true;
+	op->map.dumpable = vma->gpuva.flags & XE_VMA_DUMPABLE;
+	op->map.is_null = xe_vma_is_null(vma);
+}
+
+static int xe_vm_ops_add_rebind(struct xe_vma_ops *vops, struct xe_vma *vma,
+				u8 tile_mask)
+{
+	struct xe_vma_op *op;
+
+	op = kzalloc(sizeof(*op), GFP_KERNEL);
+	if (!op)
+		return -ENOMEM;
+
+	xe_vm_populate_rebind(op, vma, tile_mask);
+	list_add_tail(&op->link, &vops->list);
+	xe_vma_ops_incr_pt_update_ops(vops, tile_mask);
+
+	return 0;
+}
+
+static struct dma_fence *ops_execute(struct xe_vm *vm,
+				     struct xe_vma_ops *vops);
+static void xe_vma_ops_init(struct xe_vma_ops *vops, struct xe_vm *vm,
+			    struct xe_exec_queue *q,
+			    struct xe_sync_entry *syncs, u32 num_syncs);
+
+int xe_vm_rebind(struct xe_vm *vm, bool rebind_worker)
+{
+	struct dma_fence *fence;
+	struct xe_vma *vma, *next;
+	struct xe_vma_ops vops;
+	struct xe_vma_op *op, *next_op;
+	int err, i;
+
+	lockdep_assert_held(&vm->lock);
+	if ((xe_vm_in_lr_mode(vm) && !rebind_worker) ||
+	    list_empty(&vm->rebind_list))
+		return 0;
+
+	xe_vma_ops_init(&vops, vm, NULL, NULL, 0);
+	for (i = 0; i < XE_MAX_TILES_PER_DEVICE; ++i)
+		vops.pt_update_ops[i].wait_vm_bookkeep = true;
+
+	xe_vm_assert_held(vm);
+	list_for_each_entry(vma, &vm->rebind_list, combined_links.rebind) {
+		xe_assert(vm->xe, vma->tile_present);
+
+		if (rebind_worker)
+			trace_xe_vma_rebind_worker(vma);
+		else
+			trace_xe_vma_rebind_exec(vma);
+
+		err = xe_vm_ops_add_rebind(&vops, vma,
+					   vma->tile_present);
+		if (err)
+			goto free_ops;
+	}
+
+	err = xe_vma_ops_alloc(&vops, false);
+	if (err)
+		goto free_ops;
+
+	fence = ops_execute(vm, &vops);
+	if (IS_ERR(fence)) {
+		err = PTR_ERR(fence);
+	} else {
+		dma_fence_put(fence);
+		list_for_each_entry_safe(vma, next, &vm->rebind_list,
+					 combined_links.rebind)
+			list_del_init(&vma->combined_links.rebind);
+	}
+free_ops:
+	list_for_each_entry_safe(op, next_op, &vops.list, link) {
+		list_del(&op->link);
+		kfree(op);
+	}
+	xe_vma_ops_fini(&vops);
+
+	return err;
+}
+
+struct dma_fence *xe_vma_rebind(struct xe_vm *vm, struct xe_vma *vma, u8 tile_mask)
+{
+	struct dma_fence *fence = NULL;
+	struct xe_vma_ops vops;
+	struct xe_vma_op *op, *next_op;
+	struct xe_tile *tile;
+	u8 id;
+	int err;
+
+	lockdep_assert_held(&vm->lock);
+	xe_vm_assert_held(vm);
+	xe_assert(vm->xe, xe_vm_in_fault_mode(vm));
+
+	xe_vma_ops_init(&vops, vm, NULL, NULL, 0);
+	for_each_tile(tile, vm->xe, id) {
+		vops.pt_update_ops[id].wait_vm_bookkeep = true;
+		vops.pt_update_ops[tile->id].q =
+			xe_tile_migrate_exec_queue(tile);
+	}
+
+	err = xe_vm_ops_add_rebind(&vops, vma, tile_mask);
+	if (err)
+		return ERR_PTR(err);
+
+	err = xe_vma_ops_alloc(&vops, false);
+	if (err) {
+		fence = ERR_PTR(err);
+		goto free_ops;
+	}
+
+	fence = ops_execute(vm, &vops);
+
+free_ops:
+	list_for_each_entry_safe(op, next_op, &vops.list, link) {
+		list_del(&op->link);
+		kfree(op);
+	}
+	xe_vma_ops_fini(&vops);
+
+	return fence;
+}
+
+static void xe_vma_free(struct xe_vma *vma)
+{
+	if (xe_vma_is_userptr(vma))
+		kfree(to_userptr_vma(vma));
+	else
+		kfree(vma);
+}
+
+#define VMA_CREATE_FLAG_READ_ONLY	BIT(0)
+#define VMA_CREATE_FLAG_IS_NULL		BIT(1)
+#define VMA_CREATE_FLAG_DUMPABLE	BIT(2)
+
+static struct xe_vma *xe_vma_create(struct xe_vm *vm,
+				    struct xe_bo *bo,
+				    u64 bo_offset_or_userptr,
+				    u64 start, u64 end,
+				    u16 pat_index, unsigned int flags)
+{
+	struct xe_vma *vma;
+	struct xe_tile *tile;
+	u8 id;
+	bool read_only = (flags & VMA_CREATE_FLAG_READ_ONLY);
+	bool is_null = (flags & VMA_CREATE_FLAG_IS_NULL);
+	bool dumpable = (flags & VMA_CREATE_FLAG_DUMPABLE);
+
+	xe_assert(vm->xe, start < end);
+	xe_assert(vm->xe, end < vm->size);
+
+	/*
+	 * Allocate and ensure that the xe_vma_is_userptr() return
+	 * matches what was allocated.
+	 */
+	if (!bo && !is_null) {
+		struct xe_userptr_vma *uvma = kzalloc(sizeof(*uvma), GFP_KERNEL);
+
+		if (!uvma)
+			return ERR_PTR(-ENOMEM);
+
+		vma = &uvma->vma;
+	} else {
+		vma = kzalloc(sizeof(*vma), GFP_KERNEL);
+		if (!vma)
+			return ERR_PTR(-ENOMEM);
+
+		if (is_null)
+			vma->gpuva.flags |= DRM_GPUVA_SPARSE;
+		if (bo)
+			vma->gpuva.gem.obj = &bo->ttm.base;
+	}
+
+	INIT_LIST_HEAD(&vma->combined_links.rebind);
+
+	INIT_LIST_HEAD(&vma->gpuva.gem.entry);
+	vma->gpuva.vm = &vm->gpuvm;
+	vma->gpuva.va.addr = start;
+	vma->gpuva.va.range = end - start + 1;
+	if (read_only)
+		vma->gpuva.flags |= XE_VMA_READ_ONLY;
+	if (dumpable)
+		vma->gpuva.flags |= XE_VMA_DUMPABLE;
+
+	for_each_tile(tile, vm->xe, id)
+		vma->tile_mask |= 0x1 << id;
+
+	if (vm->xe->info.has_atomic_enable_pte_bit)
+		vma->gpuva.flags |= XE_VMA_ATOMIC_PTE_BIT;
+
+	vma->pat_index = pat_index;
+
+	if (bo) {
+		struct drm_gpuvm_bo *vm_bo;
+
+		xe_bo_assert_held(bo);
+
+		vm_bo = drm_gpuvm_bo_obtain(vma->gpuva.vm, &bo->ttm.base);
+		if (IS_ERR(vm_bo)) {
+			xe_vma_free(vma);
+			return ERR_CAST(vm_bo);
+		}
+
+		drm_gpuvm_bo_extobj_add(vm_bo);
+		drm_gem_object_get(&bo->ttm.base);
+		vma->gpuva.gem.offset = bo_offset_or_userptr;
+		drm_gpuva_link(&vma->gpuva, vm_bo);
+		drm_gpuvm_bo_put(vm_bo);
+	} else /* userptr or null */ {
+		if (!is_null) {
+			struct xe_userptr *userptr = &to_userptr_vma(vma)->userptr;
+			u64 size = end - start + 1;
+			int err;
+
+			INIT_LIST_HEAD(&userptr->invalidate_link);
+			INIT_LIST_HEAD(&userptr->repin_link);
+			vma->gpuva.gem.offset = bo_offset_or_userptr;
+			mutex_init(&userptr->unmap_mutex);
+
+			err = mmu_interval_notifier_insert(&userptr->notifier,
+							   current->mm,
+							   xe_vma_userptr(vma), size,
+							   &vma_userptr_notifier_ops);
+			if (err) {
+				xe_vma_free(vma);
+				return ERR_PTR(err);
+			}
+
+			userptr->notifier_seq = LONG_MAX;
+		}
+
+		xe_vm_get(vm);
+	}
+
+	return vma;
+}
+
+static void xe_vma_destroy_late(struct xe_vma *vma)
+{
+	struct xe_vm *vm = xe_vma_vm(vma);
+
+	if (vma->ufence) {
+		xe_sync_ufence_put(vma->ufence);
+		vma->ufence = NULL;
+	}
+
+	if (xe_vma_is_userptr(vma)) {
+		struct xe_userptr_vma *uvma = to_userptr_vma(vma);
+		struct xe_userptr *userptr = &uvma->userptr;
+
+		if (userptr->sg)
+			xe_hmm_userptr_free_sg(uvma);
+
+		/*
+		 * Since userptr pages are not pinned, we can't remove
+		 * the notifer until we're sure the GPU is not accessing
+		 * them anymore
+		 */
+		mmu_interval_notifier_remove(&userptr->notifier);
+		mutex_destroy(&userptr->unmap_mutex);
+		xe_vm_put(vm);
+	} else if (xe_vma_is_null(vma)) {
+		xe_vm_put(vm);
+	} else {
+		xe_bo_put(xe_vma_bo(vma));
+	}
+
+	xe_vma_free(vma);
+}
+
+static void vma_destroy_work_func(struct work_struct *w)
+{
+	struct xe_vma *vma =
+		container_of(w, struct xe_vma, destroy_work);
+
+	xe_vma_destroy_late(vma);
+}
+
+static void vma_destroy_cb(struct dma_fence *fence,
+			   struct dma_fence_cb *cb)
+{
+	struct xe_vma *vma = container_of(cb, struct xe_vma, destroy_cb);
+
+	INIT_WORK(&vma->destroy_work, vma_destroy_work_func);
+	queue_work(system_unbound_wq, &vma->destroy_work);
+}
+
+static void xe_vma_destroy(struct xe_vma *vma, struct dma_fence *fence)
+{
+	struct xe_vm *vm = xe_vma_vm(vma);
+
+	lockdep_assert_held_write(&vm->lock);
+	xe_assert(vm->xe, list_empty(&vma->combined_links.destroy));
+
+	if (xe_vma_is_userptr(vma)) {
+		xe_assert(vm->xe, vma->gpuva.flags & XE_VMA_DESTROYED);
+
+		spin_lock(&vm->userptr.invalidated_lock);
+		xe_assert(vm->xe, list_empty(&to_userptr_vma(vma)->userptr.repin_link));
+		list_del(&to_userptr_vma(vma)->userptr.invalidate_link);
+		spin_unlock(&vm->userptr.invalidated_lock);
+	} else if (!xe_vma_is_null(vma)) {
+		xe_bo_assert_held(xe_vma_bo(vma));
+
+		drm_gpuva_unlink(&vma->gpuva);
+	}
+
+	xe_vm_assert_held(vm);
+	if (fence) {
+		int ret = dma_fence_add_callback(fence, &vma->destroy_cb,
+						 vma_destroy_cb);
+
+		if (ret) {
+			XE_WARN_ON(ret != -ENOENT);
+			xe_vma_destroy_late(vma);
+		}
+	} else {
+		xe_vma_destroy_late(vma);
+	}
+}
+
+/**
+ * xe_vm_lock_vma() - drm_exec utility to lock a vma
+ * @exec: The drm_exec object we're currently locking for.
+ * @vma: The vma for witch we want to lock the vm resv and any attached
+ * object's resv.
+ *
+ * Return: 0 on success, negative error code on error. In particular
+ * may return -EDEADLK on WW transaction contention and -EINTR if
+ * an interruptible wait is terminated by a signal.
+ */
+int xe_vm_lock_vma(struct drm_exec *exec, struct xe_vma *vma)
+{
+	struct xe_vm *vm = xe_vma_vm(vma);
+	struct xe_bo *bo = xe_vma_bo(vma);
+	int err;
+
+	XE_WARN_ON(!vm);
+
+	err = drm_exec_lock_obj(exec, xe_vm_obj(vm));
+	if (!err && bo && !bo->vm)
+		err = drm_exec_lock_obj(exec, &bo->ttm.base);
+
+	return err;
+}
+
+static void xe_vma_destroy_unlocked(struct xe_vma *vma)
+{
+	struct drm_exec exec;
+	int err;
+
+	drm_exec_init(&exec, 0, 0);
+	drm_exec_until_all_locked(&exec) {
+		err = xe_vm_lock_vma(&exec, vma);
+		drm_exec_retry_on_contention(&exec);
+		if (XE_WARN_ON(err))
+			break;
+	}
+
+	xe_vma_destroy(vma, NULL);
+
+	drm_exec_fini(&exec);
+}
+
+struct xe_vma *
+xe_vm_find_overlapping_vma(struct xe_vm *vm, u64 start, u64 range)
+{
+	struct drm_gpuva *gpuva;
+
+	lockdep_assert_held(&vm->lock);
+
+	if (xe_vm_is_closed_or_banned(vm))
+		return NULL;
+
+	xe_assert(vm->xe, start + range <= vm->size);
+
+	gpuva = drm_gpuva_find_first(&vm->gpuvm, start, range);
+
+	return gpuva ? gpuva_to_vma(gpuva) : NULL;
+}
+
+static int xe_vm_insert_vma(struct xe_vm *vm, struct xe_vma *vma)
+{
+	int err;
+
+	xe_assert(vm->xe, xe_vma_vm(vma) == vm);
+	lockdep_assert_held(&vm->lock);
+
+	mutex_lock(&vm->snap_mutex);
+	err = drm_gpuva_insert(&vm->gpuvm, &vma->gpuva);
+	mutex_unlock(&vm->snap_mutex);
+	XE_WARN_ON(err);	/* Shouldn't be possible */
+
+	return err;
+}
+
+static void xe_vm_remove_vma(struct xe_vm *vm, struct xe_vma *vma)
+{
+	xe_assert(vm->xe, xe_vma_vm(vma) == vm);
+	lockdep_assert_held(&vm->lock);
+
+	mutex_lock(&vm->snap_mutex);
+	drm_gpuva_remove(&vma->gpuva);
+	mutex_unlock(&vm->snap_mutex);
+	if (vm->usm.last_fault_vma == vma)
+		vm->usm.last_fault_vma = NULL;
+}
+
+static struct drm_gpuva_op *xe_vm_op_alloc(void)
+{
+	struct xe_vma_op *op;
+
+	op = kzalloc(sizeof(*op), GFP_KERNEL);
+
+	if (unlikely(!op))
+		return NULL;
+
+	return &op->base;
+}
+
+static void xe_vm_free(struct drm_gpuvm *gpuvm);
+
+static const struct drm_gpuvm_ops gpuvm_ops = {
+	.op_alloc = xe_vm_op_alloc,
+	.vm_bo_validate = xe_gpuvm_validate,
+	.vm_free = xe_vm_free,
+};
+
+static u64 pde_encode_pat_index(u16 pat_index)
+{
+	u64 pte = 0;
+
+	if (pat_index & BIT(0))
+		pte |= XE_PPGTT_PTE_PAT0;
+
+	if (pat_index & BIT(1))
+		pte |= XE_PPGTT_PTE_PAT1;
+
+	return pte;
+}
+
+static u64 pte_encode_pat_index(u16 pat_index, u32 pt_level)
+{
+	u64 pte = 0;
+
+	if (pat_index & BIT(0))
+		pte |= XE_PPGTT_PTE_PAT0;
+
+	if (pat_index & BIT(1))
+		pte |= XE_PPGTT_PTE_PAT1;
+
+	if (pat_index & BIT(2)) {
+		if (pt_level)
+			pte |= XE_PPGTT_PDE_PDPE_PAT2;
+		else
+			pte |= XE_PPGTT_PTE_PAT2;
+	}
+
+	if (pat_index & BIT(3))
+		pte |= XELPG_PPGTT_PTE_PAT3;
+
+	if (pat_index & (BIT(4)))
+		pte |= XE2_PPGTT_PTE_PAT4;
+
+	return pte;
+}
+
+static u64 pte_encode_ps(u32 pt_level)
+{
+	XE_WARN_ON(pt_level > MAX_HUGEPTE_LEVEL);
+
+	if (pt_level == 1)
+		return XE_PDE_PS_2M;
+	else if (pt_level == 2)
+		return XE_PDPE_PS_1G;
+
+	return 0;
+}
+
+static u64 xelp_pde_encode_bo(struct xe_bo *bo, u64 bo_offset,
+			      const u16 pat_index)
+{
+	u64 pde;
+
+	pde = xe_bo_addr(bo, bo_offset, XE_PAGE_SIZE);
+	pde |= XE_PAGE_PRESENT | XE_PAGE_RW;
+	pde |= pde_encode_pat_index(pat_index);
+
+	return pde;
+}
+
+static u64 xelp_pte_encode_bo(struct xe_bo *bo, u64 bo_offset,
+			      u16 pat_index, u32 pt_level)
+{
+	u64 pte;
+
+	pte = xe_bo_addr(bo, bo_offset, XE_PAGE_SIZE);
+	pte |= XE_PAGE_PRESENT | XE_PAGE_RW;
+	pte |= pte_encode_pat_index(pat_index, pt_level);
+	pte |= pte_encode_ps(pt_level);
+
+	if (xe_bo_is_vram(bo) || xe_bo_is_stolen_devmem(bo))
+		pte |= XE_PPGTT_PTE_DM;
+
+	return pte;
+}
+
+static u64 xelp_pte_encode_vma(u64 pte, struct xe_vma *vma,
+			       u16 pat_index, u32 pt_level)
+{
+	pte |= XE_PAGE_PRESENT;
+
+	if (likely(!xe_vma_read_only(vma)))
+		pte |= XE_PAGE_RW;
+
+	pte |= pte_encode_pat_index(pat_index, pt_level);
+	pte |= pte_encode_ps(pt_level);
+
+	if (unlikely(xe_vma_is_null(vma)))
+		pte |= XE_PTE_NULL;
+
+	return pte;
+}
+
+static u64 xelp_pte_encode_addr(struct xe_device *xe, u64 addr,
+				u16 pat_index,
+				u32 pt_level, bool devmem, u64 flags)
+{
+	u64 pte;
+
+	/* Avoid passing random bits directly as flags */
+	xe_assert(xe, !(flags & ~XE_PTE_PS64));
+
+	pte = addr;
+	pte |= XE_PAGE_PRESENT | XE_PAGE_RW;
+	pte |= pte_encode_pat_index(pat_index, pt_level);
+	pte |= pte_encode_ps(pt_level);
+
+	if (devmem)
+		pte |= XE_PPGTT_PTE_DM;
+
+	pte |= flags;
+
+	return pte;
+}
+
+static const struct xe_pt_ops xelp_pt_ops = {
+	.pte_encode_bo = xelp_pte_encode_bo,
+	.pte_encode_vma = xelp_pte_encode_vma,
+	.pte_encode_addr = xelp_pte_encode_addr,
+	.pde_encode_bo = xelp_pde_encode_bo,
+};
+
+static void vm_destroy_work_func(struct work_struct *w);
+
+/**
+ * xe_vm_create_scratch() - Setup a scratch memory pagetable tree for the
+ * given tile and vm.
+ * @xe: xe device.
+ * @tile: tile to set up for.
+ * @vm: vm to set up for.
+ *
+ * Sets up a pagetable tree with one page-table per level and a single
+ * leaf PTE. All pagetable entries point to the single page-table or,
+ * for MAX_HUGEPTE_LEVEL, a NULL huge PTE returning 0 on read and
+ * writes become NOPs.
+ *
+ * Return: 0 on success, negative error code on error.
+ */
+static int xe_vm_create_scratch(struct xe_device *xe, struct xe_tile *tile,
+				struct xe_vm *vm)
+{
+	u8 id = tile->id;
+	int i;
+
+	for (i = MAX_HUGEPTE_LEVEL; i < vm->pt_root[id]->level; i++) {
+		vm->scratch_pt[id][i] = xe_pt_create(vm, tile, i);
+		if (IS_ERR(vm->scratch_pt[id][i]))
+			return PTR_ERR(vm->scratch_pt[id][i]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		xe_pt_populate_empty(tile, vm, vm->scratch_pt[id][i]);
 	}

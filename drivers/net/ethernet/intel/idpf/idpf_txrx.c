@@ -4190,6 +4190,7 @@ static void idpf_vport_intr_napi_add_all(struct idpf_vport *vport)
 int idpf_vport_intr_alloc(struct idpf_vport *vport)
 {
 	u16 txqs_per_vector, rxqs_per_vector, bufqs_per_vector;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct idpf_vport_user_config_data *user_config;
 	struct idpf_q_vector *q_vector;
 	struct idpf_q_coalesce *q_coal;
@@ -4223,6 +4224,37 @@ int idpf_vport_intr_alloc(struct idpf_vport *vport)
 
 		q_vector->rx_itr_value = q_coal->rx_coalesce_usecs;
 		q_vector->rx_intr_mode = q_coal->rx_intr_mode;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct idpf_q_vector *q_vector;
+	u32 complqs_per_vector, v_idx;
+
+	vport->q_vectors = kcalloc(vport->num_q_vectors,
+				   sizeof(struct idpf_q_vector), GFP_KERNEL);
+	if (!vport->q_vectors)
+		return -ENOMEM;
+
+	txqs_per_vector = DIV_ROUND_UP(vport->num_txq_grp,
+				       vport->num_q_vectors);
+	rxqs_per_vector = DIV_ROUND_UP(vport->num_rxq_grp,
+				       vport->num_q_vectors);
+	bufqs_per_vector = vport->num_bufqs_per_qgrp *
+			   DIV_ROUND_UP(vport->num_rxq_grp,
+					vport->num_q_vectors);
+	complqs_per_vector = DIV_ROUND_UP(vport->num_txq_grp,
+					  vport->num_q_vectors);
+
+	for (v_idx = 0; v_idx < vport->num_q_vectors; v_idx++) {
+		q_vector = &vport->q_vectors[v_idx];
+		q_vector->vport = vport;
+
+		q_vector->tx_itr_value = IDPF_ITR_TX_DEF;
+		q_vector->tx_intr_mode = IDPF_ITR_DYNAMIC;
+		q_vector->tx_itr_idx = VIRTCHNL2_ITR_IDX_1;
+
+		q_vector->rx_itr_value = IDPF_ITR_RX_DEF;
+		q_vector->rx_intr_mode = IDPF_ITR_DYNAMIC;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		q_vector->rx_itr_idx = VIRTCHNL2_ITR_IDX_0;
 
 		if (!zalloc_cpumask_var(&q_vector->affinity_mask, GFP_KERNEL))

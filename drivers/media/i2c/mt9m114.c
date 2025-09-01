@@ -1599,6 +1599,7 @@ static int mt9m114_ifp_get_frame_interval(struct v4l2_subdev *sd,
 	if (interval->which != V4L2_SUBDEV_FORMAT_ACTIVE)
 		return -EINVAL;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ival->numerator = 1;
 	ival->denominator = sensor->ifp.frame_rate;
 
@@ -1632,6 +1633,50 @@ static int mt9m114_ifp_set_frame_interval(struct v4l2_subdev *sd,
 
 	if (sensor->streaming)
 		ret = mt9m114_set_frame_rate(sensor);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	mutex_lock(sensor->ifp.hdl.lock);
+
+	ival->numerator = 1;
+	ival->denominator = sensor->ifp.frame_rate;
+
+	mutex_unlock(sensor->ifp.hdl.lock);
+
+	return 0;
+}
+
+static int mt9m114_ifp_set_frame_interval(struct v4l2_subdev *sd,
+					  struct v4l2_subdev_state *sd_state,
+					  struct v4l2_subdev_frame_interval *interval)
+{
+	struct v4l2_fract *ival = &interval->interval;
+	struct mt9m114 *sensor = ifp_to_mt9m114(sd);
+	int ret = 0;
+
+	/*
+	 * FIXME: Implement support for V4L2_SUBDEV_FORMAT_TRY, using the V4L2
+	 * subdev active state API.
+	 */
+	if (interval->which != V4L2_SUBDEV_FORMAT_ACTIVE)
+		return -EINVAL;
+
+	mutex_lock(sensor->ifp.hdl.lock);
+
+	if (ival->numerator != 0 && ival->denominator != 0)
+		sensor->ifp.frame_rate = min_t(unsigned int,
+					       ival->denominator / ival->numerator,
+					       MT9M114_MAX_FRAME_RATE);
+	else
+		sensor->ifp.frame_rate = MT9M114_MAX_FRAME_RATE;
+
+	ival->numerator = 1;
+	ival->denominator = sensor->ifp.frame_rate;
+
+	if (sensor->streaming)
+		ret = mt9m114_set_frame_rate(sensor);
+
+	mutex_unlock(sensor->ifp.hdl.lock);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return ret;
 }

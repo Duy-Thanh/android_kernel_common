@@ -239,6 +239,7 @@ impl Transaction {
     }
 
     /// Searches in the transaction stack for a transaction originating at the given thread.
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
     pub(crate) fn find_from(&self, thread: &Thread) -> Option<&DArc<Transaction>> {
         let mut it = &self.from_parent;
         while let Some(transaction) = it {
@@ -335,6 +336,104 @@ impl Transaction {
             }
         } else {
             crate::trace::trace_transaction(false, &self, None);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+    pub(crate) fn find_from(&self, thread: &Thread) -> Option<DArc<Transaction>> {
+        let mut it = &self.from_parent;
+        while let Some(transaction) = it {
+            if core::ptr::eq(thread, transaction.from.as_ref()) {
+                return Some(transaction.clone());
+            }
+
+            it = &transaction.from_parent;
+        }
+        None
+    }
+
+    pub(crate) fn set_outstanding(&self, to_process: &mut ProcessInner) {
+        // No race because this method is only called once.
+        if !self.is_outstanding.load(Ordering::Relaxed) {
+            self.is_outstanding.store(true, Ordering::Relaxed);
+            to_process.add_outstanding_txn();
+        }
+    }
+
+    /// Decrement `outstanding_txns` in `to` if it hasn't already been decremented.
+    fn drop_outstanding_txn(&self) {
+        // No race because this is called at most twice, and one of the calls are in the
+        // destructor, which is guaranteed to not race with any other operations on the
+        // transaction. It also cannot race with `set_outstanding`, since submission happens
+        // before delivery.
+        if self.is_outstanding.load(Ordering::Relaxed) {
+            self.is_outstanding.store(false, Ordering::Relaxed);
+            self.to.drop_outstanding_txn();
+        }
+    }
+
+    /// Submits the transaction to a work queue. Uses a thread if there is one in the transaction
+    /// stack, otherwise uses the destination process.
+    ///
+    /// Not used for replies.
+    pub(crate) fn submit(self: DLArc<Self>) -> BinderResult {
+        crate::trace::trace_transaction(false, &self);
+
+        // Defined before `process_inner` so that the destructor runs after releasing the lock.
+        let mut _t_outdated;
+
+        let oneway = self.flags & TF_ONE_WAY != 0;
+        let process = self.to.clone();
+        let mut process_inner = process.inner.lock();
+
+        self.set_outstanding(&mut process_inner);
+
+        if oneway {
+            if let Some(target_node) = self.target_node.clone() {
+                if process_inner.is_frozen {
+                    process_inner.async_recv = true;
+                    if self.flags & TF_UPDATE_TXN != 0 {
+                        if let Some(t_outdated) =
+                            target_node.take_outdated_transaction(&self, &mut process_inner)
+                        {
+                            crate::trace::trace_transaction_update_buffer_release(
+                                t_outdated.debug_id,
+                            );
+                            // Save the transaction to be dropped after locks are released.
+                            _t_outdated = t_outdated;
+                        }
+                    }
+                }
+                match target_node.submit_oneway(self, &mut process_inner) {
+                    Ok(()) => {}
+                    Err((err, work)) => {
+                        drop(process_inner);
+                        // Drop work after releasing process lock.
+                        drop(work);
+                        return Err(err);
+                    }
+                }
+
+                if process_inner.is_frozen {
+                    return Err(BinderError::new_frozen_oneway());
+                } else {
+                    return Ok(());
+                }
+            } else {
+                pr_err!("Failed to submit oneway transaction to node.");
+            }
+        }
+
+        if process_inner.is_frozen {
+            process_inner.sync_recv = true;
+            return Err(BinderError::new_frozen());
+        }
+
+        let res = if let Some(thread) = self.find_target_thread() {
+            match thread.push_work(self) {
+                PushWorkRes::Ok => Ok(()),
+                PushWorkRes::FailedDead(me) => Err((BinderError::new_dead(), me)),
+            }
+        } else {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
             process_inner.push_work(self)
         };
         drop(process_inner);

@@ -160,6 +160,7 @@ size_t iterate_folioq(struct iov_iter *iter, size_t len, void *priv, void *priv2
 
 	do {
 		struct folio *folio = folioq_folio(folioq, slot);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		size_t part, remain = 0, consumed;
 		size_t fsize;
 		void *base;
@@ -178,6 +179,25 @@ size_t iterate_folioq(struct iov_iter *iter, size_t len, void *priv, void *priv2
 			progress += consumed;
 			skip += consumed;
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		size_t part, remain, consumed;
+		size_t fsize;
+		void *base;
+
+		if (!folio)
+			break;
+
+		fsize = folioq_folio_size(folioq, slot);
+		base = kmap_local_folio(folio, skip);
+		part = umin(len, PAGE_SIZE - skip % PAGE_SIZE);
+		remain = step(base, progress, part, priv, priv2);
+		kunmap_local(base);
+		consumed = part - remain;
+		len -= consumed;
+		progress += consumed;
+		skip += consumed;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (skip >= fsize) {
 			skip = 0;
 			slot++;

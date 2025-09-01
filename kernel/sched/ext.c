@@ -4645,6 +4645,7 @@ static void scx_ops_disable_workfn(struct kthread_work *work)
 	default:
 		break;
 	}
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	/*
 	 * Here, every runnable task is guaranteed to make forward progress and
@@ -5417,6 +5418,777 @@ static int scx_ops_enable(struct sched_ext_ops *ops, struct bpf_link *link)
 
 		check_class_changed(task_rq(p), p, old_class, p->prio);
 		put_task_struct(p);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	trace_android_vh_scx_ops_enable_state(SCX_OPS_DISABLING);
+
+	/*
+	 * Here, every runnable task is guaranteed to make forward progress and
+	 * we can safely use blocking synchronization constructs. Actually
+	 * disable ops.
+	 */
+	mutex_lock(&scx_ops_enable_mutex);
+
+	static_branch_disable(&__scx_switched_all);
+	WRITE_ONCE(scx_switching_all, false);
+
+	/*
+	 * Shut down cgroup support before tasks so that the cgroup attach path
+	 * doesn't race against scx_ops_exit_task().
+	 */
+	scx_cgroup_lock();
+	scx_cgroup_exit();
+	scx_cgroup_unlock();
+
+	/*
+	 * The BPF scheduler is going away. All tasks including %TASK_DEAD ones
+	 * must be switched out and exited synchronously.
+	 */
+	percpu_down_write(&scx_fork_rwsem);
+
+	scx_ops_init_task_enabled = false;
+
+	scx_task_iter_start(&sti);
+	while ((p = scx_task_iter_next_locked(&sti))) {
+		const struct sched_class *old_class = p->sched_class;
+		const struct sched_class *new_class =
+			__setscheduler_class(p->policy, p->prio);
+		struct sched_enq_and_set_ctx ctx;
+
+		if (old_class != new_class && p->se.sched_delayed)
+			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED);
+
+		sched_deq_and_put_task(p, DEQUEUE_SAVE | DEQUEUE_MOVE, &ctx);
+
+		p->sched_class = new_class;
+		check_class_changing(task_rq(p), p, old_class);
+		trace_android_vh_scx_task_switch_finish(p, 0);
+
+		sched_enq_and_set_task(&ctx);
+
+		check_class_changed(task_rq(p), p, old_class, p->prio);
+		scx_ops_exit_task(p);
+	}
+	scx_task_iter_stop(&sti);
+	percpu_up_write(&scx_fork_rwsem);
+
+	/* no task is on scx, turn off all the switches and flush in-progress calls */
+	static_branch_disable(&__scx_ops_enabled);
+	trace_android_vh_scx_enabled(0);
+	for (i = SCX_OPI_BEGIN; i < SCX_OPI_END; i++)
+		static_branch_disable(&scx_has_op[i]);
+	static_branch_disable(&scx_ops_enq_last);
+	static_branch_disable(&scx_ops_enq_exiting);
+	static_branch_disable(&scx_ops_cpu_preempt);
+	static_branch_disable(&scx_builtin_idle_enabled);
+	synchronize_rcu();
+
+	if (ei->kind >= SCX_EXIT_ERROR) {
+		pr_err("sched_ext: BPF scheduler \"%s\" disabled (%s)\n",
+		       scx_ops.name, ei->reason);
+
+		if (ei->msg[0] != '\0')
+			pr_err("sched_ext: %s: %s\n", scx_ops.name, ei->msg);
+#ifdef CONFIG_STACKTRACE
+		stack_trace_print(ei->bt, ei->bt_len, 2);
+#endif
+	} else {
+		pr_info("sched_ext: BPF scheduler \"%s\" disabled (%s)\n",
+			scx_ops.name, ei->reason);
+	}
+
+	if (scx_ops.exit)
+		SCX_CALL_OP(SCX_KF_UNLOCKED, exit, ei);
+
+	cancel_delayed_work_sync(&scx_watchdog_work);
+
+	/*
+	 * Delete the kobject from the hierarchy eagerly in addition to just
+	 * dropping a reference. Otherwise, if the object is deleted
+	 * asynchronously, sysfs could observe an object of the same name still
+	 * in the hierarchy when another scheduler is loaded.
+	 */
+	kobject_del(scx_root_kobj);
+	kobject_put(scx_root_kobj);
+	scx_root_kobj = NULL;
+
+	memset(&scx_ops, 0, sizeof(scx_ops));
+
+	rhashtable_walk_enter(&dsq_hash, &rht_iter);
+	do {
+		rhashtable_walk_start(&rht_iter);
+
+		while ((dsq = rhashtable_walk_next(&rht_iter)) && !IS_ERR(dsq))
+			destroy_dsq(dsq->id);
+
+		rhashtable_walk_stop(&rht_iter);
+	} while (dsq == ERR_PTR(-EAGAIN));
+	rhashtable_walk_exit(&rht_iter);
+
+	free_percpu(scx_dsp_ctx);
+	scx_dsp_ctx = NULL;
+	scx_dsp_max_batch = 0;
+
+	free_exit_info(scx_exit_info);
+	scx_exit_info = NULL;
+
+	mutex_unlock(&scx_ops_enable_mutex);
+
+	WARN_ON_ONCE(scx_ops_set_enable_state(SCX_OPS_DISABLED) !=
+		     SCX_OPS_DISABLING);
+	trace_android_vh_scx_ops_enable_state(SCX_OPS_DISABLED);
+done:
+	scx_ops_bypass(false);
+}
+
+static DEFINE_KTHREAD_WORK(scx_ops_disable_work, scx_ops_disable_workfn);
+
+static void schedule_scx_ops_disable_work(void)
+{
+	struct kthread_worker *helper = READ_ONCE(scx_ops_helper);
+
+	/*
+	 * We may be called spuriously before the first bpf_sched_ext_reg(). If
+	 * scx_ops_helper isn't set up yet, there's nothing to do.
+	 */
+	if (helper)
+		kthread_queue_work(helper, &scx_ops_disable_work);
+}
+
+static void scx_ops_disable(enum scx_exit_kind kind)
+{
+	int none = SCX_EXIT_NONE;
+
+	if (WARN_ON_ONCE(kind == SCX_EXIT_NONE || kind == SCX_EXIT_DONE))
+		kind = SCX_EXIT_ERROR;
+
+	atomic_try_cmpxchg(&scx_exit_kind, &none, kind);
+
+	schedule_scx_ops_disable_work();
+}
+
+static void dump_newline(struct seq_buf *s)
+{
+	trace_sched_ext_dump("");
+
+	/* @s may be zero sized and seq_buf triggers WARN if so */
+	if (s->size)
+		seq_buf_putc(s, '\n');
+}
+
+static __printf(2, 3) void dump_line(struct seq_buf *s, const char *fmt, ...)
+{
+	va_list args;
+
+#ifdef CONFIG_TRACEPOINTS
+	if (trace_sched_ext_dump_enabled()) {
+		/* protected by scx_dump_state()::dump_lock */
+		static char line_buf[SCX_EXIT_MSG_LEN];
+
+		va_start(args, fmt);
+		vscnprintf(line_buf, sizeof(line_buf), fmt, args);
+		va_end(args);
+
+		trace_sched_ext_dump(line_buf);
+	}
+#endif
+	/* @s may be zero sized and seq_buf triggers WARN if so */
+	if (s->size) {
+		va_start(args, fmt);
+		seq_buf_vprintf(s, fmt, args);
+		va_end(args);
+
+		seq_buf_putc(s, '\n');
+	}
+}
+
+static void dump_stack_trace(struct seq_buf *s, const char *prefix,
+			     const unsigned long *bt, unsigned int len)
+{
+	unsigned int i;
+
+	for (i = 0; i < len; i++)
+		dump_line(s, "%s%pS", prefix, (void *)bt[i]);
+}
+
+static void ops_dump_init(struct seq_buf *s, const char *prefix)
+{
+	struct scx_dump_data *dd = &scx_dump_data;
+
+	lockdep_assert_irqs_disabled();
+
+	dd->cpu = smp_processor_id();		/* allow scx_bpf_dump() */
+	dd->first = true;
+	dd->cursor = 0;
+	dd->s = s;
+	dd->prefix = prefix;
+}
+
+static void ops_dump_flush(void)
+{
+	struct scx_dump_data *dd = &scx_dump_data;
+	char *line = dd->buf.line;
+
+	if (!dd->cursor)
+		return;
+
+	/*
+	 * There's something to flush and this is the first line. Insert a blank
+	 * line to distinguish ops dump.
+	 */
+	if (dd->first) {
+		dump_newline(dd->s);
+		dd->first = false;
+	}
+
+	/*
+	 * There may be multiple lines in $line. Scan and emit each line
+	 * separately.
+	 */
+	while (true) {
+		char *end = line;
+		char c;
+
+		while (*end != '\n' && *end != '\0')
+			end++;
+
+		/*
+		 * If $line overflowed, it may not have newline at the end.
+		 * Always emit with a newline.
+		 */
+		c = *end;
+		*end = '\0';
+		dump_line(dd->s, "%s%s", dd->prefix, line);
+		if (c == '\0')
+			break;
+
+		/* move to the next line */
+		end++;
+		if (*end == '\0')
+			break;
+		line = end;
+	}
+
+	dd->cursor = 0;
+}
+
+static void ops_dump_exit(void)
+{
+	ops_dump_flush();
+	scx_dump_data.cpu = -1;
+}
+
+static void scx_dump_task(struct seq_buf *s, struct scx_dump_ctx *dctx,
+			  struct task_struct *p, char marker)
+{
+	static unsigned long bt[SCX_EXIT_BT_LEN];
+	char dsq_id_buf[19] = "(n/a)";
+	unsigned long ops_state = atomic_long_read(&p->scx.ops_state);
+	unsigned int bt_len = 0;
+
+	if (p->scx.dsq)
+		scnprintf(dsq_id_buf, sizeof(dsq_id_buf), "0x%llx",
+			  (unsigned long long)p->scx.dsq->id);
+
+	dump_newline(s);
+	dump_line(s, " %c%c %s[%d] %+ldms",
+		  marker, task_state_to_char(p), p->comm, p->pid,
+		  jiffies_delta_msecs(p->scx.runnable_at, dctx->at_jiffies));
+	dump_line(s, "      scx_state/flags=%u/0x%x dsq_flags=0x%x ops_state/qseq=%lu/%lu",
+		  scx_get_task_state(p), p->scx.flags & ~SCX_TASK_STATE_MASK,
+		  p->scx.dsq_flags, ops_state & SCX_OPSS_STATE_MASK,
+		  ops_state >> SCX_OPSS_QSEQ_SHIFT);
+	dump_line(s, "      sticky/holding_cpu=%d/%d dsq_id=%s dsq_vtime=%llu",
+		  p->scx.sticky_cpu, p->scx.holding_cpu, dsq_id_buf,
+		  p->scx.dsq_vtime);
+	dump_line(s, "      cpus=%*pb", cpumask_pr_args(p->cpus_ptr));
+
+	if (SCX_HAS_OP(dump_task)) {
+		ops_dump_init(s, "    ");
+		SCX_CALL_OP(SCX_KF_REST, dump_task, dctx, p);
+		ops_dump_exit();
+	}
+
+#ifdef CONFIG_STACKTRACE
+	bt_len = stack_trace_save_tsk(p, bt, SCX_EXIT_BT_LEN, 1);
+#endif
+	if (bt_len) {
+		dump_newline(s);
+		dump_stack_trace(s, "    ", bt, bt_len);
+	}
+}
+
+static void scx_dump_state(struct scx_exit_info *ei, size_t dump_len)
+{
+	static DEFINE_SPINLOCK(dump_lock);
+	static const char trunc_marker[] = "\n\n~~~~ TRUNCATED ~~~~\n";
+	struct scx_dump_ctx dctx = {
+		.kind = ei->kind,
+		.exit_code = ei->exit_code,
+		.reason = ei->reason,
+		.at_ns = ktime_get_ns(),
+		.at_jiffies = jiffies,
+	};
+	struct seq_buf s;
+	unsigned long flags;
+	char *buf;
+	int cpu;
+
+	spin_lock_irqsave(&dump_lock, flags);
+
+	seq_buf_init(&s, ei->dump, dump_len);
+
+	if (ei->kind == SCX_EXIT_NONE) {
+		dump_line(&s, "Debug dump triggered by %s", ei->reason);
+	} else {
+		dump_line(&s, "%s[%d] triggered exit kind %d:",
+			  current->comm, current->pid, ei->kind);
+		dump_line(&s, "  %s (%s)", ei->reason, ei->msg);
+		dump_newline(&s);
+		dump_line(&s, "Backtrace:");
+		dump_stack_trace(&s, "  ", ei->bt, ei->bt_len);
+	}
+
+	if (SCX_HAS_OP(dump)) {
+		ops_dump_init(&s, "");
+		SCX_CALL_OP(SCX_KF_UNLOCKED, dump, &dctx);
+		ops_dump_exit();
+	}
+
+	dump_newline(&s);
+	dump_line(&s, "CPU states");
+	dump_line(&s, "----------");
+
+	for_each_possible_cpu(cpu) {
+		struct rq *rq = cpu_rq(cpu);
+		struct rq_flags rf;
+		struct task_struct *p;
+		struct seq_buf ns;
+		size_t avail, used;
+		bool idle;
+
+		rq_lock(rq, &rf);
+
+		idle = list_empty(&rq->scx.runnable_list) &&
+			rq->curr->sched_class == &idle_sched_class;
+
+		if (idle && !SCX_HAS_OP(dump_cpu))
+			goto next;
+
+		/*
+		 * We don't yet know whether ops.dump_cpu() will produce output
+		 * and we may want to skip the default CPU dump if it doesn't.
+		 * Use a nested seq_buf to generate the standard dump so that we
+		 * can decide whether to commit later.
+		 */
+		avail = seq_buf_get_buf(&s, &buf);
+		seq_buf_init(&ns, buf, avail);
+
+		dump_newline(&ns);
+		dump_line(&ns, "CPU %-4d: nr_run=%u flags=0x%x cpu_rel=%d ops_qseq=%lu pnt_seq=%lu",
+			  cpu, rq->scx.nr_running, rq->scx.flags,
+			  rq->scx.cpu_released, rq->scx.ops_qseq,
+			  rq->scx.pnt_seq);
+		dump_line(&ns, "          curr=%s[%d] class=%ps",
+			  rq->curr->comm, rq->curr->pid,
+			  rq->curr->sched_class);
+		if (!cpumask_empty(rq->scx.cpus_to_kick))
+			dump_line(&ns, "  cpus_to_kick   : %*pb",
+				  cpumask_pr_args(rq->scx.cpus_to_kick));
+		if (!cpumask_empty(rq->scx.cpus_to_kick_if_idle))
+			dump_line(&ns, "  idle_to_kick   : %*pb",
+				  cpumask_pr_args(rq->scx.cpus_to_kick_if_idle));
+		if (!cpumask_empty(rq->scx.cpus_to_preempt))
+			dump_line(&ns, "  cpus_to_preempt: %*pb",
+				  cpumask_pr_args(rq->scx.cpus_to_preempt));
+		if (!cpumask_empty(rq->scx.cpus_to_wait))
+			dump_line(&ns, "  cpus_to_wait   : %*pb",
+				  cpumask_pr_args(rq->scx.cpus_to_wait));
+
+		used = seq_buf_used(&ns);
+		if (SCX_HAS_OP(dump_cpu)) {
+			ops_dump_init(&ns, "  ");
+			SCX_CALL_OP(SCX_KF_REST, dump_cpu, &dctx, cpu, idle);
+			ops_dump_exit();
+		}
+
+		/*
+		 * If idle && nothing generated by ops.dump_cpu(), there's
+		 * nothing interesting. Skip.
+		 */
+		if (idle && used == seq_buf_used(&ns))
+			goto next;
+
+		/*
+		 * $s may already have overflowed when $ns was created. If so,
+		 * calling commit on it will trigger BUG.
+		 */
+		if (avail) {
+			seq_buf_commit(&s, seq_buf_used(&ns));
+			if (seq_buf_has_overflowed(&ns))
+				seq_buf_set_overflow(&s);
+		}
+
+		if (rq->curr->sched_class == &ext_sched_class)
+			scx_dump_task(&s, &dctx, rq->curr, '*');
+
+		list_for_each_entry(p, &rq->scx.runnable_list, scx.runnable_node)
+			scx_dump_task(&s, &dctx, p, ' ');
+	next:
+		rq_unlock(rq, &rf);
+	}
+
+	if (seq_buf_has_overflowed(&s) && dump_len >= sizeof(trunc_marker))
+		memcpy(ei->dump + dump_len - sizeof(trunc_marker),
+		       trunc_marker, sizeof(trunc_marker));
+
+	spin_unlock_irqrestore(&dump_lock, flags);
+}
+
+static void scx_ops_error_irq_workfn(struct irq_work *irq_work)
+{
+	struct scx_exit_info *ei = scx_exit_info;
+
+	if (ei->kind >= SCX_EXIT_ERROR)
+		scx_dump_state(ei, scx_ops.exit_dump_len);
+
+	schedule_scx_ops_disable_work();
+}
+
+static DEFINE_IRQ_WORK(scx_ops_error_irq_work, scx_ops_error_irq_workfn);
+
+static __printf(3, 4) void scx_ops_exit_kind(enum scx_exit_kind kind,
+					     s64 exit_code,
+					     const char *fmt, ...)
+{
+	struct scx_exit_info *ei = scx_exit_info;
+	int none = SCX_EXIT_NONE;
+	va_list args;
+
+	if (!atomic_try_cmpxchg(&scx_exit_kind, &none, kind))
+		return;
+
+	ei->exit_code = exit_code;
+#ifdef CONFIG_STACKTRACE
+	if (kind >= SCX_EXIT_ERROR)
+		ei->bt_len = stack_trace_save(ei->bt, SCX_EXIT_BT_LEN, 1);
+#endif
+	va_start(args, fmt);
+	vscnprintf(ei->msg, SCX_EXIT_MSG_LEN, fmt, args);
+	va_end(args);
+
+	/*
+	 * Set ei->kind and ->reason for scx_dump_state(). They'll be set again
+	 * in scx_ops_disable_workfn().
+	 */
+	ei->kind = kind;
+	ei->reason = scx_exit_reason(ei->kind);
+
+	irq_work_queue(&scx_ops_error_irq_work);
+}
+
+static struct kthread_worker *scx_create_rt_helper(const char *name)
+{
+	struct kthread_worker *helper;
+
+	helper = kthread_create_worker(0, name);
+	if (helper)
+		sched_set_fifo(helper->task);
+	return helper;
+}
+
+static void check_hotplug_seq(const struct sched_ext_ops *ops)
+{
+	unsigned long long global_hotplug_seq;
+
+	/*
+	 * If a hotplug event has occurred between when a scheduler was
+	 * initialized, and when we were able to attach, exit and notify user
+	 * space about it.
+	 */
+	if (ops->hotplug_seq) {
+		global_hotplug_seq = atomic_long_read(&scx_hotplug_seq);
+		if (ops->hotplug_seq != global_hotplug_seq) {
+			scx_ops_exit(SCX_ECODE_ACT_RESTART | SCX_ECODE_RSN_HOTPLUG,
+				     "expected hotplug seq %llu did not match actual %llu",
+				     ops->hotplug_seq, global_hotplug_seq);
+		}
+	}
+}
+
+static int validate_ops(const struct sched_ext_ops *ops)
+{
+	/*
+	 * It doesn't make sense to specify the SCX_OPS_ENQ_LAST flag if the
+	 * ops.enqueue() callback isn't implemented.
+	 */
+	if ((ops->flags & SCX_OPS_ENQ_LAST) && !ops->enqueue) {
+		scx_ops_error("SCX_OPS_ENQ_LAST requires ops.enqueue() to be implemented");
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
+static int scx_ops_enable(struct sched_ext_ops *ops, struct bpf_link *link)
+{
+	struct scx_task_iter sti;
+	struct task_struct *p;
+	unsigned long timeout;
+	int i, cpu, node, ret;
+
+	if (!cpumask_equal(housekeeping_cpumask(HK_TYPE_DOMAIN),
+			   cpu_possible_mask)) {
+		pr_err("sched_ext: Not compatible with \"isolcpus=\" domain isolation\n");
+		return -EINVAL;
+	}
+
+	mutex_lock(&scx_ops_enable_mutex);
+
+	if (!scx_ops_helper) {
+		WRITE_ONCE(scx_ops_helper,
+			   scx_create_rt_helper("sched_ext_ops_helper"));
+		if (!scx_ops_helper) {
+			ret = -ENOMEM;
+			goto err_unlock;
+		}
+	}
+
+	if (!global_dsqs) {
+		struct scx_dispatch_q **dsqs;
+
+		dsqs = kcalloc(nr_node_ids, sizeof(dsqs[0]), GFP_KERNEL);
+		if (!dsqs) {
+			ret = -ENOMEM;
+			goto err_unlock;
+		}
+
+		for_each_node_state(node, N_POSSIBLE) {
+			struct scx_dispatch_q *dsq;
+
+			dsq = kzalloc_node(sizeof(*dsq), GFP_KERNEL, node);
+			if (!dsq) {
+				for_each_node_state(node, N_POSSIBLE)
+					kfree(dsqs[node]);
+				kfree(dsqs);
+				ret = -ENOMEM;
+				goto err_unlock;
+			}
+
+			init_dsq(dsq, SCX_DSQ_GLOBAL);
+			dsqs[node] = dsq;
+		}
+
+		global_dsqs = dsqs;
+	}
+
+	if (scx_ops_enable_state() != SCX_OPS_DISABLED) {
+		ret = -EBUSY;
+		goto err_unlock;
+	}
+
+	scx_root_kobj = kzalloc(sizeof(*scx_root_kobj), GFP_KERNEL);
+	if (!scx_root_kobj) {
+		ret = -ENOMEM;
+		goto err_unlock;
+	}
+
+	scx_root_kobj->kset = scx_kset;
+	ret = kobject_init_and_add(scx_root_kobj, &scx_ktype, NULL, "root");
+	if (ret < 0)
+		goto err;
+
+	scx_exit_info = alloc_exit_info(ops->exit_dump_len);
+	if (!scx_exit_info) {
+		ret = -ENOMEM;
+		goto err_del;
+	}
+
+	/*
+	 * Set scx_ops, transition to ENABLING and clear exit info to arm the
+	 * disable path. Failure triggers full disabling from here on.
+	 */
+	scx_ops = *ops;
+
+	WARN_ON_ONCE(scx_ops_set_enable_state(SCX_OPS_ENABLING) !=
+		     SCX_OPS_DISABLED);
+	trace_android_vh_scx_ops_enable_state(SCX_OPS_ENABLING);
+
+	atomic_set(&scx_exit_kind, SCX_EXIT_NONE);
+	scx_warned_zero_slice = false;
+
+	atomic_long_set(&scx_nr_rejected, 0);
+
+	for_each_possible_cpu(cpu)
+		cpu_rq(cpu)->scx.cpuperf_target = SCX_CPUPERF_ONE;
+
+	/*
+	 * Keep CPUs stable during enable so that the BPF scheduler can track
+	 * online CPUs by watching ->on/offline_cpu() after ->init().
+	 */
+	cpus_read_lock();
+
+	if (scx_ops.init) {
+		ret = SCX_CALL_OP_RET(SCX_KF_UNLOCKED, init);
+		if (ret) {
+			ret = ops_sanitize_err("init", ret);
+			cpus_read_unlock();
+			scx_ops_error("ops.init() failed (%d)", ret);
+			goto err_disable;
+		}
+	}
+
+	for (i = SCX_OPI_CPU_HOTPLUG_BEGIN; i < SCX_OPI_CPU_HOTPLUG_END; i++)
+		if (((void (**)(void))ops)[i])
+			static_branch_enable_cpuslocked(&scx_has_op[i]);
+
+	check_hotplug_seq(ops);
+	cpus_read_unlock();
+
+	ret = validate_ops(ops);
+	if (ret)
+		goto err_disable;
+
+	WARN_ON_ONCE(scx_dsp_ctx);
+	scx_dsp_max_batch = ops->dispatch_max_batch ?: SCX_DSP_DFL_MAX_BATCH;
+	scx_dsp_ctx = __alloc_percpu(struct_size_t(struct scx_dsp_ctx, buf,
+						   scx_dsp_max_batch),
+				     __alignof__(struct scx_dsp_ctx));
+	if (!scx_dsp_ctx) {
+		ret = -ENOMEM;
+		goto err_disable;
+	}
+
+	if (ops->timeout_ms)
+		timeout = msecs_to_jiffies(ops->timeout_ms);
+	else
+		timeout = SCX_WATCHDOG_MAX_TIMEOUT;
+
+	WRITE_ONCE(scx_watchdog_timeout, timeout);
+	WRITE_ONCE(scx_watchdog_timestamp, jiffies);
+	queue_delayed_work(system_unbound_wq, &scx_watchdog_work,
+			   scx_watchdog_timeout / 2);
+
+	/*
+	 * Once __scx_ops_enabled is set, %current can be switched to SCX
+	 * anytime. This can lead to stalls as some BPF schedulers (e.g.
+	 * userspace scheduling) may not function correctly before all tasks are
+	 * switched. Init in bypass mode to guarantee forward progress.
+	 */
+	scx_ops_bypass(true);
+
+	for (i = SCX_OPI_NORMAL_BEGIN; i < SCX_OPI_NORMAL_END; i++)
+		if (((void (**)(void))ops)[i])
+			static_branch_enable(&scx_has_op[i]);
+
+	if (ops->flags & SCX_OPS_ENQ_LAST)
+		static_branch_enable(&scx_ops_enq_last);
+
+	if (ops->flags & SCX_OPS_ENQ_EXITING)
+		static_branch_enable(&scx_ops_enq_exiting);
+	if (scx_ops.cpu_acquire || scx_ops.cpu_release)
+		static_branch_enable(&scx_ops_cpu_preempt);
+
+	if (!ops->update_idle || (ops->flags & SCX_OPS_KEEP_BUILTIN_IDLE)) {
+		reset_idle_masks();
+		static_branch_enable(&scx_builtin_idle_enabled);
+	} else {
+		static_branch_disable(&scx_builtin_idle_enabled);
+	}
+
+	/*
+	 * Lock out forks, cgroup on/offlining and moves before opening the
+	 * floodgate so that they don't wander into the operations prematurely.
+	 */
+	percpu_down_write(&scx_fork_rwsem);
+
+	WARN_ON_ONCE(scx_ops_init_task_enabled);
+	scx_ops_init_task_enabled = true;
+
+	/*
+	 * Enable ops for every task. Fork is excluded by scx_fork_rwsem
+	 * preventing new tasks from being added. No need to exclude tasks
+	 * leaving as sched_ext_free() can handle both prepped and enabled
+	 * tasks. Prep all tasks first and then enable them with preemption
+	 * disabled.
+	 *
+	 * All cgroups should be initialized before scx_ops_init_task() so that
+	 * the BPF scheduler can reliably track each task's cgroup membership
+	 * from scx_ops_init_task(). Lock out cgroup on/offlining and task
+	 * migrations while tasks are being initialized so that
+	 * scx_cgroup_can_attach() never sees uninitialized tasks.
+	 */
+	scx_cgroup_lock();
+	ret = scx_cgroup_init();
+	if (ret)
+		goto err_disable_unlock_all;
+
+	scx_task_iter_start(&sti);
+	while ((p = scx_task_iter_next_locked(&sti))) {
+		/*
+		 * @p may already be dead, have lost all its usages counts and
+		 * be waiting for RCU grace period before being freed. @p can't
+		 * be initialized for SCX in such cases and should be ignored.
+		 */
+		if (!tryget_task_struct(p))
+			continue;
+
+		scx_task_iter_unlock(&sti);
+
+		ret = scx_ops_init_task(p, task_group(p), false);
+		if (ret) {
+			put_task_struct(p);
+			scx_task_iter_relock(&sti);
+			scx_task_iter_stop(&sti);
+			scx_ops_error("ops.init_task() failed (%d) for %s[%d]",
+				      ret, p->comm, p->pid);
+			goto err_disable_unlock_all;
+		}
+
+		scx_set_task_state(p, SCX_TASK_READY);
+
+		put_task_struct(p);
+		scx_task_iter_relock(&sti);
+	}
+	scx_task_iter_stop(&sti);
+	scx_cgroup_unlock();
+	percpu_up_write(&scx_fork_rwsem);
+
+	/*
+	 * All tasks are READY. It's safe to turn on scx_enabled() and switch
+	 * all eligible tasks.
+	 */
+	WRITE_ONCE(scx_switching_all, !(ops->flags & SCX_OPS_SWITCH_PARTIAL));
+	static_branch_enable(&__scx_ops_enabled);
+	trace_android_vh_scx_enabled(1);
+
+	/*
+	 * We're fully committed and can't fail. The task READY -> ENABLED
+	 * transitions here are synchronized against sched_ext_free() through
+	 * scx_tasks_lock.
+	 */
+	percpu_down_write(&scx_fork_rwsem);
+	scx_task_iter_start(&sti);
+	while ((p = scx_task_iter_next_locked(&sti))) {
+		const struct sched_class *old_class = p->sched_class;
+		const struct sched_class *new_class =
+			__setscheduler_class(p->policy, p->prio);
+		struct sched_enq_and_set_ctx ctx;
+
+		if (old_class != new_class && p->se.sched_delayed)
+			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED);
+
+		sched_deq_and_put_task(p, DEQUEUE_SAVE | DEQUEUE_MOVE, &ctx);
+
+		p->scx.slice = SCX_SLICE_DFL;
+		p->sched_class = new_class;
+		check_class_changing(task_rq(p), p, old_class);
+		trace_android_vh_scx_task_switch_finish(p, 1);
+
+		sched_enq_and_set_task(&ctx);
+
+		check_class_changed(task_rq(p), p, old_class, p->prio);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 	scx_task_iter_stop(&sti);
 	percpu_up_write(&scx_fork_rwsem);

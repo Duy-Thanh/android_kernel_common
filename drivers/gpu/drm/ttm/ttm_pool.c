@@ -630,6 +630,7 @@ void ttm_pool_fini(struct ttm_pool *pool)
 }
 EXPORT_SYMBOL(ttm_pool_fini);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static unsigned long ttm_pool_shrinker_scan(struct shrinker *shrink,
 					    struct shrink_control *sc)
 {
@@ -643,6 +644,20 @@ static unsigned long ttm_pool_shrinker_scan(struct shrinker *shrink,
 	sc->nr_scanned = num_freed;
 
 	return num_freed ?: SHRINK_STOP;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/* As long as pages are available make sure to release at least one */
+static unsigned long ttm_pool_shrinker_scan(struct shrinker *shrink,
+					    struct shrink_control *sc)
+{
+	unsigned long num_freed = 0;
+
+	do
+		num_freed += ttm_pool_shrink();
+	while (!num_freed && atomic_long_read(&allocated_pages));
+
+	return num_freed;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /* Return the number of pages available or SHRINK_EMPTY if we have none */

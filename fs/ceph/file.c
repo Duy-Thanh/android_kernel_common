@@ -368,6 +368,7 @@ int ceph_open(struct inode *inode, struct file *file)
 	int flags, fmode, wanted;
 	struct dentry *dentry;
 	char *path;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool do_sync = false;
 	int mask = MAY_READ;
 
@@ -823,6 +824,468 @@ int ceph_atomic_open(struct inode *dir, struct dentry *dentry,
 			err = ceph_mds_check_access(mdsc, path, mask);
 		}
 		ceph_mdsc_free_path_info(&path_info);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int pathlen;
+	u64 pathbase;
+	bool do_sync = false;
+	int mask = MAY_READ;
+
+	if (fi) {
+		doutc(cl, "file %p is already opened\n", file);
+		return 0;
+	}
+
+	/* filter out O_CREAT|O_EXCL; vfs did that already.  yuck. */
+	flags = file->f_flags & ~(O_CREAT|O_EXCL);
+	if (S_ISDIR(inode->i_mode)) {
+		flags = O_DIRECTORY;  /* mds likes to know */
+	} else if (S_ISREG(inode->i_mode)) {
+		err = fscrypt_file_open(inode, file);
+		if (err)
+			return err;
+	}
+
+	doutc(cl, "%p %llx.%llx file %p flags %d (%d)\n", inode,
+	      ceph_vinop(inode), file, flags, file->f_flags);
+	fmode = ceph_flags_to_mode(flags);
+	wanted = ceph_caps_for_mode(fmode);
+
+	if (fmode & CEPH_FILE_MODE_WR)
+		mask |= MAY_WRITE;
+	dentry = d_find_alias(inode);
+	if (!dentry) {
+		do_sync = true;
+	} else {
+		path = ceph_mdsc_build_path(mdsc, dentry, &pathlen, &pathbase, 0);
+		if (IS_ERR(path)) {
+			do_sync = true;
+			err = 0;
+		} else {
+			err = ceph_mds_check_access(mdsc, path, mask);
+		}
+		ceph_mdsc_free_path(path, pathlen);
+		dput(dentry);
+
+		/* For none EACCES cases will let the MDS do the mds auth check */
+		if (err == -EACCES) {
+			return err;
+		} else if (err < 0) {
+			do_sync = true;
+			err = 0;
+		}
+	}
+
+	/* snapped files are read-only */
+	if (ceph_snap(inode) != CEPH_NOSNAP && (file->f_mode & FMODE_WRITE))
+		return -EROFS;
+
+	/* trivially open snapdir */
+	if (ceph_snap(inode) == CEPH_SNAPDIR) {
+		return ceph_init_file(inode, file, fmode);
+	}
+
+	/*
+	 * No need to block if we have caps on the auth MDS (for
+	 * write) or any MDS (for read).  Update wanted set
+	 * asynchronously.
+	 */
+	spin_lock(&ci->i_ceph_lock);
+	if (!do_sync && __ceph_is_any_real_caps(ci) &&
+	    (((fmode & CEPH_FILE_MODE_WR) == 0) || ci->i_auth_cap)) {
+		int mds_wanted = __ceph_caps_mds_wanted(ci, true);
+		int issued = __ceph_caps_issued(ci, NULL);
+
+		doutc(cl, "open %p fmode %d want %s issued %s using existing\n",
+		      inode, fmode, ceph_cap_string(wanted),
+		      ceph_cap_string(issued));
+		__ceph_touch_fmode(ci, mdsc, fmode);
+		spin_unlock(&ci->i_ceph_lock);
+
+		/* adjust wanted? */
+		if ((issued & wanted) != wanted &&
+		    (mds_wanted & wanted) != wanted &&
+		    ceph_snap(inode) != CEPH_SNAPDIR)
+			ceph_check_caps(ci, 0);
+
+		return ceph_init_file(inode, file, fmode);
+	} else if (!do_sync && ceph_snap(inode) != CEPH_NOSNAP &&
+		   (ci->i_snap_caps & wanted) == wanted) {
+		__ceph_touch_fmode(ci, mdsc, fmode);
+		spin_unlock(&ci->i_ceph_lock);
+		return ceph_init_file(inode, file, fmode);
+	}
+
+	spin_unlock(&ci->i_ceph_lock);
+
+	doutc(cl, "open fmode %d wants %s\n", fmode, ceph_cap_string(wanted));
+	req = prepare_open_request(inode->i_sb, flags, 0);
+	if (IS_ERR(req)) {
+		err = PTR_ERR(req);
+		goto out;
+	}
+	req->r_inode = inode;
+	ihold(inode);
+
+	req->r_num_caps = 1;
+	err = ceph_mdsc_do_request(mdsc, NULL, req);
+	if (!err)
+		err = ceph_init_file(inode, file, req->r_fmode);
+	ceph_mdsc_put_request(req);
+	doutc(cl, "open result=%d on %llx.%llx\n", err, ceph_vinop(inode));
+out:
+	return err;
+}
+
+/* Clone the layout from a synchronous create, if the dir now has Dc caps */
+static void
+cache_file_layout(struct inode *dst, struct inode *src)
+{
+	struct ceph_inode_info *cdst = ceph_inode(dst);
+	struct ceph_inode_info *csrc = ceph_inode(src);
+
+	spin_lock(&cdst->i_ceph_lock);
+	if ((__ceph_caps_issued(cdst, NULL) & CEPH_CAP_DIR_CREATE) &&
+	    !ceph_file_layout_is_valid(&cdst->i_cached_layout)) {
+		memcpy(&cdst->i_cached_layout, &csrc->i_layout,
+			sizeof(cdst->i_cached_layout));
+		rcu_assign_pointer(cdst->i_cached_layout.pool_ns,
+				   ceph_try_get_string(csrc->i_layout.pool_ns));
+	}
+	spin_unlock(&cdst->i_ceph_lock);
+}
+
+/*
+ * Try to set up an async create. We need caps, a file layout, and inode number,
+ * and either a lease on the dentry or complete dir info. If any of those
+ * criteria are not satisfied, then return false and the caller can go
+ * synchronous.
+ */
+static int try_prep_async_create(struct inode *dir, struct dentry *dentry,
+				 struct ceph_file_layout *lo, u64 *pino)
+{
+	struct ceph_inode_info *ci = ceph_inode(dir);
+	struct ceph_dentry_info *di = ceph_dentry(dentry);
+	int got = 0, want = CEPH_CAP_FILE_EXCL | CEPH_CAP_DIR_CREATE;
+	u64 ino;
+
+	spin_lock(&ci->i_ceph_lock);
+	/* No auth cap means no chance for Dc caps */
+	if (!ci->i_auth_cap)
+		goto no_async;
+
+	/* Any delegated inos? */
+	if (xa_empty(&ci->i_auth_cap->session->s_delegated_inos))
+		goto no_async;
+
+	if (!ceph_file_layout_is_valid(&ci->i_cached_layout))
+		goto no_async;
+
+	if ((__ceph_caps_issued(ci, NULL) & want) != want)
+		goto no_async;
+
+	if (d_in_lookup(dentry)) {
+		if (!__ceph_dir_is_complete(ci))
+			goto no_async;
+		spin_lock(&dentry->d_lock);
+		di->lease_shared_gen = atomic_read(&ci->i_shared_gen);
+		spin_unlock(&dentry->d_lock);
+	} else if (atomic_read(&ci->i_shared_gen) !=
+		   READ_ONCE(di->lease_shared_gen)) {
+		goto no_async;
+	}
+
+	ino = ceph_get_deleg_ino(ci->i_auth_cap->session);
+	if (!ino)
+		goto no_async;
+
+	*pino = ino;
+	ceph_take_cap_refs(ci, want, false);
+	memcpy(lo, &ci->i_cached_layout, sizeof(*lo));
+	rcu_assign_pointer(lo->pool_ns,
+			   ceph_try_get_string(ci->i_cached_layout.pool_ns));
+	got = want;
+no_async:
+	spin_unlock(&ci->i_ceph_lock);
+	return got;
+}
+
+static void restore_deleg_ino(struct inode *dir, u64 ino)
+{
+	struct ceph_client *cl = ceph_inode_to_client(dir);
+	struct ceph_inode_info *ci = ceph_inode(dir);
+	struct ceph_mds_session *s = NULL;
+
+	spin_lock(&ci->i_ceph_lock);
+	if (ci->i_auth_cap)
+		s = ceph_get_mds_session(ci->i_auth_cap->session);
+	spin_unlock(&ci->i_ceph_lock);
+	if (s) {
+		int err = ceph_restore_deleg_ino(s, ino);
+		if (err)
+			pr_warn_client(cl,
+				"unable to restore delegated ino 0x%llx to session: %d\n",
+				ino, err);
+		ceph_put_mds_session(s);
+	}
+}
+
+static void wake_async_create_waiters(struct inode *inode,
+				      struct ceph_mds_session *session)
+{
+	struct ceph_inode_info *ci = ceph_inode(inode);
+	bool check_cap = false;
+
+	spin_lock(&ci->i_ceph_lock);
+	if (ci->i_ceph_flags & CEPH_I_ASYNC_CREATE) {
+		ci->i_ceph_flags &= ~CEPH_I_ASYNC_CREATE;
+		wake_up_bit(&ci->i_ceph_flags, CEPH_ASYNC_CREATE_BIT);
+
+		if (ci->i_ceph_flags & CEPH_I_ASYNC_CHECK_CAPS) {
+			ci->i_ceph_flags &= ~CEPH_I_ASYNC_CHECK_CAPS;
+			check_cap = true;
+		}
+	}
+	ceph_kick_flushing_inode_caps(session, ci);
+	spin_unlock(&ci->i_ceph_lock);
+
+	if (check_cap)
+		ceph_check_caps(ci, CHECK_CAPS_FLUSH);
+}
+
+static void ceph_async_create_cb(struct ceph_mds_client *mdsc,
+                                 struct ceph_mds_request *req)
+{
+	struct ceph_client *cl = mdsc->fsc->client;
+	struct dentry *dentry = req->r_dentry;
+	struct inode *dinode = d_inode(dentry);
+	struct inode *tinode = req->r_target_inode;
+	int result = req->r_err ? req->r_err :
+			le32_to_cpu(req->r_reply_info.head->result);
+
+	WARN_ON_ONCE(dinode && tinode && dinode != tinode);
+
+	/* MDS changed -- caller must resubmit */
+	if (result == -EJUKEBOX)
+		goto out;
+
+	mapping_set_error(req->r_parent->i_mapping, result);
+
+	if (result) {
+		int pathlen = 0;
+		u64 base = 0;
+		char *path = ceph_mdsc_build_path(mdsc, req->r_dentry, &pathlen,
+						  &base, 0);
+
+		pr_warn_client(cl,
+			"async create failure path=(%llx)%s result=%d!\n",
+			base, IS_ERR(path) ? "<<bad>>" : path, result);
+		ceph_mdsc_free_path(path, pathlen);
+
+		ceph_dir_clear_complete(req->r_parent);
+		if (!d_unhashed(dentry))
+			d_drop(dentry);
+
+		if (dinode) {
+			mapping_set_error(dinode->i_mapping, result);
+			ceph_inode_shutdown(dinode);
+			wake_async_create_waiters(dinode, req->r_session);
+		}
+	}
+
+	if (tinode) {
+		u64 ino = ceph_vino(tinode).ino;
+
+		if (req->r_deleg_ino != ino)
+			pr_warn_client(cl,
+				"inode number mismatch! err=%d deleg_ino=0x%llx target=0x%llx\n",
+				req->r_err, req->r_deleg_ino, ino);
+
+		mapping_set_error(tinode->i_mapping, result);
+		wake_async_create_waiters(tinode, req->r_session);
+	} else if (!result) {
+		pr_warn_client(cl, "no req->r_target_inode for 0x%llx\n",
+			       req->r_deleg_ino);
+	}
+out:
+	ceph_mdsc_release_dir_caps(req);
+}
+
+static int ceph_finish_async_create(struct inode *dir, struct inode *inode,
+				    struct dentry *dentry,
+				    struct file *file, umode_t mode,
+				    struct ceph_mds_request *req,
+				    struct ceph_acl_sec_ctx *as_ctx,
+				    struct ceph_file_layout *lo)
+{
+	int ret;
+	char xattr_buf[4];
+	struct ceph_mds_reply_inode in = { };
+	struct ceph_mds_reply_info_in iinfo = { .in = &in };
+	struct ceph_inode_info *ci = ceph_inode(dir);
+	struct ceph_dentry_info *di = ceph_dentry(dentry);
+	struct timespec64 now;
+	struct ceph_string *pool_ns;
+	struct ceph_mds_client *mdsc = ceph_sb_to_mdsc(dir->i_sb);
+	struct ceph_client *cl = mdsc->fsc->client;
+	struct ceph_vino vino = { .ino = req->r_deleg_ino,
+				  .snap = CEPH_NOSNAP };
+
+	ktime_get_real_ts64(&now);
+
+	iinfo.inline_version = CEPH_INLINE_NONE;
+	iinfo.change_attr = 1;
+	ceph_encode_timespec64(&iinfo.btime, &now);
+
+	if (req->r_pagelist) {
+		iinfo.xattr_len = req->r_pagelist->length;
+		iinfo.xattr_data = req->r_pagelist->mapped_tail;
+	} else {
+		/* fake it */
+		iinfo.xattr_len = ARRAY_SIZE(xattr_buf);
+		iinfo.xattr_data = xattr_buf;
+		memset(iinfo.xattr_data, 0, iinfo.xattr_len);
+	}
+
+	in.ino = cpu_to_le64(vino.ino);
+	in.snapid = cpu_to_le64(CEPH_NOSNAP);
+	in.version = cpu_to_le64(1);	// ???
+	in.cap.caps = in.cap.wanted = cpu_to_le32(CEPH_CAP_ALL_FILE);
+	in.cap.cap_id = cpu_to_le64(1);
+	in.cap.realm = cpu_to_le64(ci->i_snap_realm->ino);
+	in.cap.flags = CEPH_CAP_FLAG_AUTH;
+	in.ctime = in.mtime = in.atime = iinfo.btime;
+	in.truncate_seq = cpu_to_le32(1);
+	in.truncate_size = cpu_to_le64(-1ULL);
+	in.xattr_version = cpu_to_le64(1);
+	in.uid = cpu_to_le32(from_kuid(&init_user_ns,
+				       mapped_fsuid(req->r_mnt_idmap,
+						    &init_user_ns)));
+	if (dir->i_mode & S_ISGID) {
+		in.gid = cpu_to_le32(from_kgid(&init_user_ns, dir->i_gid));
+
+		/* Directories always inherit the setgid bit. */
+		if (S_ISDIR(mode))
+			mode |= S_ISGID;
+	} else {
+		in.gid = cpu_to_le32(from_kgid(&init_user_ns,
+				     mapped_fsgid(req->r_mnt_idmap,
+						  &init_user_ns)));
+	}
+	in.mode = cpu_to_le32((u32)mode);
+
+	in.nlink = cpu_to_le32(1);
+	in.max_size = cpu_to_le64(lo->stripe_unit);
+
+	ceph_file_layout_to_legacy(lo, &in.layout);
+	/* lo is private, so pool_ns can't change */
+	pool_ns = rcu_dereference_raw(lo->pool_ns);
+	if (pool_ns) {
+		iinfo.pool_ns_len = pool_ns->len;
+		iinfo.pool_ns_data = pool_ns->str;
+	}
+
+	down_read(&mdsc->snap_rwsem);
+	ret = ceph_fill_inode(inode, NULL, &iinfo, NULL, req->r_session,
+			      req->r_fmode, NULL);
+	up_read(&mdsc->snap_rwsem);
+	if (ret) {
+		doutc(cl, "failed to fill inode: %d\n", ret);
+		ceph_dir_clear_complete(dir);
+		if (!d_unhashed(dentry))
+			d_drop(dentry);
+		discard_new_inode(inode);
+	} else {
+		struct dentry *dn;
+
+		doutc(cl, "d_adding new inode 0x%llx to 0x%llx/%s\n",
+		      vino.ino, ceph_ino(dir), dentry->d_name.name);
+		ceph_dir_clear_ordered(dir);
+		ceph_init_inode_acls(inode, as_ctx);
+		if (inode->i_state & I_NEW) {
+			/*
+			 * If it's not I_NEW, then someone created this before
+			 * we got here. Assume the server is aware of it at
+			 * that point and don't worry about setting
+			 * CEPH_I_ASYNC_CREATE.
+			 */
+			ceph_inode(inode)->i_ceph_flags = CEPH_I_ASYNC_CREATE;
+			unlock_new_inode(inode);
+		}
+		if (d_in_lookup(dentry) || d_really_is_negative(dentry)) {
+			if (!d_unhashed(dentry))
+				d_drop(dentry);
+			dn = d_splice_alias(inode, dentry);
+			WARN_ON_ONCE(dn && dn != dentry);
+		}
+		file->f_mode |= FMODE_CREATED;
+		ret = finish_open(file, dentry, ceph_open);
+	}
+
+	spin_lock(&dentry->d_lock);
+	di->flags &= ~CEPH_DENTRY_ASYNC_CREATE;
+	wake_up_bit(&di->flags, CEPH_DENTRY_ASYNC_CREATE_BIT);
+	spin_unlock(&dentry->d_lock);
+
+	return ret;
+}
+
+/*
+ * Do a lookup + open with a single request.  If we get a non-existent
+ * file or symlink, return 1 so the VFS can retry.
+ */
+int ceph_atomic_open(struct inode *dir, struct dentry *dentry,
+		     struct file *file, unsigned flags, umode_t mode)
+{
+	struct mnt_idmap *idmap = file_mnt_idmap(file);
+	struct ceph_fs_client *fsc = ceph_sb_to_fs_client(dir->i_sb);
+	struct ceph_client *cl = fsc->client;
+	struct ceph_mds_client *mdsc = fsc->mdsc;
+	struct ceph_mds_request *req;
+	struct inode *new_inode = NULL;
+	struct dentry *dn;
+	struct ceph_acl_sec_ctx as_ctx = {};
+	bool try_async = ceph_test_mount_opt(fsc, ASYNC_DIROPS);
+	int mask;
+	int err;
+	char *path;
+	int pathlen;
+	u64 pathbase;
+
+	doutc(cl, "%p %llx.%llx dentry %p '%pd' %s flags %d mode 0%o\n",
+	      dir, ceph_vinop(dir), dentry, dentry,
+	      d_unhashed(dentry) ? "unhashed" : "hashed", flags, mode);
+
+	if (dentry->d_name.len > NAME_MAX)
+		return -ENAMETOOLONG;
+
+	err = ceph_wait_on_conflict_unlink(dentry);
+	if (err)
+		return err;
+	/*
+	 * Do not truncate the file, since atomic_open is called before the
+	 * permission check. The caller will do the truncation afterward.
+	 */
+	flags &= ~O_TRUNC;
+
+	dn = d_find_alias(dir);
+	if (!dn) {
+		try_async = false;
+	} else {
+		path = ceph_mdsc_build_path(mdsc, dn, &pathlen, &pathbase, 0);
+		if (IS_ERR(path)) {
+			try_async = false;
+			err = 0;
+		} else {
+			int fmode = ceph_flags_to_mode(flags);
+
+			mask = MAY_READ;
+			if (fmode & CEPH_FILE_MODE_WR)
+				mask |= MAY_WRITE;
+			err = ceph_mds_check_access(mdsc, path, mask);
+		}
+		ceph_mdsc_free_path(path, pathlen);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		dput(dn);
 
 		/* For none EACCES cases will let the MDS do the mds auth check */

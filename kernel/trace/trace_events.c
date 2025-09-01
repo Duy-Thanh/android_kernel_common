@@ -2804,6 +2804,7 @@ event_create_dir(struct eventfs_inode *parent, struct trace_event_file *file)
 	return 0;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 void remove_event_from_tracers(struct trace_event_call *call)
 {
 	struct trace_event_file *file;
@@ -3475,6 +3476,675 @@ __trace_add_event_dirs(struct trace_array *tr)
 	int ret;
 
 	lockdep_assert_held(&trace_event_sem);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void remove_event_from_tracers(struct trace_event_call *call)
+{
+	struct trace_event_file *file;
+	struct trace_array *tr;
+
+	do_for_each_event_file_safe(tr, file) {
+		if (file->event_call != call)
+			continue;
+
+		remove_event_file_dir(file);
+		/*
+		 * The do_for_each_event_file_safe() is
+		 * a double loop. After finding the call for this
+		 * trace_array, we use break to jump to the next
+		 * trace_array.
+		 */
+		break;
+	} while_for_each_event_file();
+}
+
+static void event_remove(struct trace_event_call *call)
+{
+	struct trace_array *tr;
+	struct trace_event_file *file;
+
+	do_for_each_event_file(tr, file) {
+		if (file->event_call != call)
+			continue;
+
+		if (file->flags & EVENT_FILE_FL_WAS_ENABLED)
+			tr->clear_trace = true;
+
+		ftrace_event_enable_disable(file, 0);
+		/*
+		 * The do_for_each_event_file() is
+		 * a double loop. After finding the call for this
+		 * trace_array, we use break to jump to the next
+		 * trace_array.
+		 */
+		break;
+	} while_for_each_event_file();
+
+	if (call->event.funcs)
+		__unregister_trace_event(&call->event);
+	remove_event_from_tracers(call);
+	list_del(&call->list);
+}
+
+static int event_init(struct trace_event_call *call)
+{
+	int ret = 0;
+	const char *name;
+
+	name = trace_event_name(call);
+	if (WARN_ON(!name))
+		return -EINVAL;
+
+	if (call->class->raw_init) {
+		ret = call->class->raw_init(call);
+		if (ret < 0 && ret != -ENOSYS)
+			pr_warn("Could not initialize trace events/%s\n", name);
+	}
+
+	return ret;
+}
+
+static int
+__register_event(struct trace_event_call *call, struct module *mod)
+{
+	int ret;
+
+	ret = event_init(call);
+	if (ret < 0)
+		return ret;
+
+	list_add(&call->list, &ftrace_events);
+	if (call->flags & TRACE_EVENT_FL_DYNAMIC)
+		atomic_set(&call->refcnt, 0);
+	else
+		call->module = mod;
+
+	return 0;
+}
+
+static char *eval_replace(char *ptr, struct trace_eval_map *map, int len)
+{
+	int rlen;
+	int elen;
+
+	/* Find the length of the eval value as a string */
+	elen = snprintf(ptr, 0, "%ld", map->eval_value);
+	/* Make sure there's enough room to replace the string with the value */
+	if (len < elen)
+		return NULL;
+
+	snprintf(ptr, elen + 1, "%ld", map->eval_value);
+
+	/* Get the rest of the string of ptr */
+	rlen = strlen(ptr + len);
+	memmove(ptr + elen, ptr + len, rlen);
+	/* Make sure we end the new string */
+	ptr[elen + rlen] = 0;
+
+	return ptr + elen;
+}
+
+static void update_event_printk(struct trace_event_call *call,
+				struct trace_eval_map *map)
+{
+	char *ptr;
+	int quote = 0;
+	int len = strlen(map->eval_string);
+
+	for (ptr = call->print_fmt; *ptr; ptr++) {
+		if (*ptr == '\\') {
+			ptr++;
+			/* paranoid */
+			if (!*ptr)
+				break;
+			continue;
+		}
+		if (*ptr == '"') {
+			quote ^= 1;
+			continue;
+		}
+		if (quote)
+			continue;
+		if (isdigit(*ptr)) {
+			/* skip numbers */
+			do {
+				ptr++;
+				/* Check for alpha chars like ULL */
+			} while (isalnum(*ptr));
+			if (!*ptr)
+				break;
+			/*
+			 * A number must have some kind of delimiter after
+			 * it, and we can ignore that too.
+			 */
+			continue;
+		}
+		if (isalpha(*ptr) || *ptr == '_') {
+			if (strncmp(map->eval_string, ptr, len) == 0 &&
+			    !isalnum(ptr[len]) && ptr[len] != '_') {
+				ptr = eval_replace(ptr, map, len);
+				/* enum/sizeof string smaller than value */
+				if (WARN_ON_ONCE(!ptr))
+					return;
+				/*
+				 * No need to decrement here, as eval_replace()
+				 * returns the pointer to the character passed
+				 * the eval, and two evals can not be placed
+				 * back to back without something in between.
+				 * We can skip that something in between.
+				 */
+				continue;
+			}
+		skip_more:
+			do {
+				ptr++;
+			} while (isalnum(*ptr) || *ptr == '_');
+			if (!*ptr)
+				break;
+			/*
+			 * If what comes after this variable is a '.' or
+			 * '->' then we can continue to ignore that string.
+			 */
+			if (*ptr == '.' || (ptr[0] == '-' && ptr[1] == '>')) {
+				ptr += *ptr == '.' ? 1 : 2;
+				if (!*ptr)
+					break;
+				goto skip_more;
+			}
+			/*
+			 * Once again, we can skip the delimiter that came
+			 * after the string.
+			 */
+			continue;
+		}
+	}
+}
+
+static void add_str_to_module(struct module *module, char *str)
+{
+	struct module_string *modstr;
+
+	modstr = kmalloc(sizeof(*modstr), GFP_KERNEL);
+
+	/*
+	 * If we failed to allocate memory here, then we'll just
+	 * let the str memory leak when the module is removed.
+	 * If this fails to allocate, there's worse problems than
+	 * a leaked string on module removal.
+	 */
+	if (WARN_ON_ONCE(!modstr))
+		return;
+
+	modstr->module = module;
+	modstr->str = str;
+
+	list_add(&modstr->next, &module_strings);
+}
+
+static void update_event_fields(struct trace_event_call *call,
+				struct trace_eval_map *map)
+{
+	struct ftrace_event_field *field;
+	struct list_head *head;
+	char *ptr;
+	char *str;
+	int len = strlen(map->eval_string);
+
+	/* Dynamic events should never have field maps */
+	if (WARN_ON_ONCE(call->flags & TRACE_EVENT_FL_DYNAMIC))
+		return;
+
+	head = trace_get_fields(call);
+	list_for_each_entry(field, head, link) {
+		ptr = strchr(field->type, '[');
+		if (!ptr)
+			continue;
+		ptr++;
+
+		if (!isalpha(*ptr) && *ptr != '_')
+			continue;
+
+		if (strncmp(map->eval_string, ptr, len) != 0)
+			continue;
+
+		str = kstrdup(field->type, GFP_KERNEL);
+		if (WARN_ON_ONCE(!str))
+			return;
+		ptr = str + (ptr - field->type);
+		ptr = eval_replace(ptr, map, len);
+		/* enum/sizeof string smaller than value */
+		if (WARN_ON_ONCE(!ptr)) {
+			kfree(str);
+			continue;
+		}
+
+		/*
+		 * If the event is part of a module, then we need to free the string
+		 * when the module is removed. Otherwise, it will stay allocated
+		 * until a reboot.
+		 */
+		if (call->module)
+			add_str_to_module(call->module, str);
+
+		field->type = str;
+	}
+}
+
+void trace_event_eval_update(struct trace_eval_map **map, int len)
+{
+	struct trace_event_call *call, *p;
+	const char *last_system = NULL;
+	bool first = false;
+	int last_i;
+	int i;
+
+	down_write(&trace_event_sem);
+	list_for_each_entry_safe(call, p, &ftrace_events, list) {
+		/* events are usually grouped together with systems */
+		if (!last_system || call->class->system != last_system) {
+			first = true;
+			last_i = 0;
+			last_system = call->class->system;
+		}
+
+		/*
+		 * Since calls are grouped by systems, the likelihood that the
+		 * next call in the iteration belongs to the same system as the
+		 * previous call is high. As an optimization, we skip searching
+		 * for a map[] that matches the call's system if the last call
+		 * was from the same system. That's what last_i is for. If the
+		 * call has the same system as the previous call, then last_i
+		 * will be the index of the first map[] that has a matching
+		 * system.
+		 */
+		for (i = last_i; i < len; i++) {
+			if (call->class->system == map[i]->system) {
+				/* Save the first system if need be */
+				if (first) {
+					last_i = i;
+					first = false;
+				}
+				update_event_printk(call, map[i]);
+				update_event_fields(call, map[i]);
+			}
+		}
+		cond_resched();
+	}
+	up_write(&trace_event_sem);
+}
+
+static bool event_in_systems(struct trace_event_call *call,
+			     const char *systems)
+{
+	const char *system;
+	const char *p;
+
+	if (!systems)
+		return true;
+
+	system = call->class->system;
+	p = strstr(systems, system);
+	if (!p)
+		return false;
+
+	if (p != systems && !isspace(*(p - 1)) && *(p - 1) != ',')
+		return false;
+
+	p += strlen(system);
+	return !*p || isspace(*p) || *p == ',';
+}
+
+#ifdef CONFIG_HIST_TRIGGERS
+/*
+ * Wake up waiter on the hist_poll_wq from irq_work because the hist trigger
+ * may happen in any context.
+ */
+static void hist_poll_event_irq_work(struct irq_work *work)
+{
+	wake_up_all(&hist_poll_wq);
+}
+
+DEFINE_IRQ_WORK(hist_poll_work, hist_poll_event_irq_work);
+DECLARE_WAIT_QUEUE_HEAD(hist_poll_wq);
+#endif
+
+static struct trace_event_file *
+trace_create_new_event(struct trace_event_call *call,
+		       struct trace_array *tr)
+{
+	struct trace_pid_list *no_pid_list;
+	struct trace_pid_list *pid_list;
+	struct trace_event_file *file;
+	unsigned int first;
+
+	if (!event_in_systems(call, tr->system_names))
+		return NULL;
+
+	file = kmem_cache_alloc(file_cachep, GFP_TRACE);
+	if (!file)
+		return ERR_PTR(-ENOMEM);
+
+	pid_list = rcu_dereference_protected(tr->filtered_pids,
+					     lockdep_is_held(&event_mutex));
+	no_pid_list = rcu_dereference_protected(tr->filtered_no_pids,
+					     lockdep_is_held(&event_mutex));
+
+	if (!trace_pid_list_first(pid_list, &first) ||
+	    !trace_pid_list_first(no_pid_list, &first))
+		file->flags |= EVENT_FILE_FL_PID_FILTER;
+
+	file->event_call = call;
+	file->tr = tr;
+	atomic_set(&file->sm_ref, 0);
+	atomic_set(&file->tm_ref, 0);
+	INIT_LIST_HEAD(&file->triggers);
+	list_add(&file->list, &tr->events);
+	refcount_set(&file->ref, 1);
+
+	return file;
+}
+
+#define MAX_BOOT_TRIGGERS 32
+
+static struct boot_triggers {
+	const char		*event;
+	char			*trigger;
+} bootup_triggers[MAX_BOOT_TRIGGERS];
+
+static char bootup_trigger_buf[COMMAND_LINE_SIZE];
+static int nr_boot_triggers;
+
+static __init int setup_trace_triggers(char *str)
+{
+	char *trigger;
+	char *buf;
+	int i;
+
+	strscpy(bootup_trigger_buf, str, COMMAND_LINE_SIZE);
+	trace_set_ring_buffer_expanded(NULL);
+	disable_tracing_selftest("running event triggers");
+
+	buf = bootup_trigger_buf;
+	for (i = 0; i < MAX_BOOT_TRIGGERS; i++) {
+		trigger = strsep(&buf, ",");
+		if (!trigger)
+			break;
+		bootup_triggers[i].event = strsep(&trigger, ".");
+		bootup_triggers[i].trigger = trigger;
+		if (!bootup_triggers[i].trigger)
+			break;
+	}
+
+	nr_boot_triggers = i;
+	return 1;
+}
+__setup("trace_trigger=", setup_trace_triggers);
+
+/* Add an event to a trace directory */
+static int
+__trace_add_new_event(struct trace_event_call *call, struct trace_array *tr)
+{
+	struct trace_event_file *file;
+
+	file = trace_create_new_event(call, tr);
+	/*
+	 * trace_create_new_event() returns ERR_PTR(-ENOMEM) if failed
+	 * allocation, or NULL if the event is not part of the tr->system_names.
+	 * When the event is not part of the tr->system_names, return zero, not
+	 * an error.
+	 */
+	if (!file)
+		return 0;
+
+	if (IS_ERR(file))
+		return PTR_ERR(file);
+
+	if (eventdir_initialized)
+		return event_create_dir(tr->event_dir, file);
+	else
+		return event_define_fields(call);
+}
+
+static void trace_early_triggers(struct trace_event_file *file, const char *name)
+{
+	int ret;
+	int i;
+
+	for (i = 0; i < nr_boot_triggers; i++) {
+		if (strcmp(name, bootup_triggers[i].event))
+			continue;
+		mutex_lock(&event_mutex);
+		ret = trigger_process_regex(file, bootup_triggers[i].trigger);
+		mutex_unlock(&event_mutex);
+		if (ret)
+			pr_err("Failed to register trigger '%s' on event %s\n",
+			       bootup_triggers[i].trigger,
+			       bootup_triggers[i].event);
+	}
+}
+
+/*
+ * Just create a descriptor for early init. A descriptor is required
+ * for enabling events at boot. We want to enable events before
+ * the filesystem is initialized.
+ */
+static int
+__trace_early_add_new_event(struct trace_event_call *call,
+			    struct trace_array *tr)
+{
+	struct trace_event_file *file;
+	int ret;
+
+	file = trace_create_new_event(call, tr);
+	/*
+	 * trace_create_new_event() returns ERR_PTR(-ENOMEM) if failed
+	 * allocation, or NULL if the event is not part of the tr->system_names.
+	 * When the event is not part of the tr->system_names, return zero, not
+	 * an error.
+	 */
+	if (!file)
+		return 0;
+
+	if (IS_ERR(file))
+		return PTR_ERR(file);
+
+	ret = event_define_fields(call);
+	if (ret)
+		return ret;
+
+	trace_early_triggers(file, trace_event_name(call));
+
+	return 0;
+}
+
+struct ftrace_module_file_ops;
+static void __add_event_to_tracers(struct trace_event_call *call);
+
+/* Add an additional event_call dynamically */
+int trace_add_event_call(struct trace_event_call *call)
+{
+	int ret;
+	lockdep_assert_held(&event_mutex);
+
+	mutex_lock(&trace_types_lock);
+
+	ret = __register_event(call, NULL);
+	if (ret >= 0)
+		__add_event_to_tracers(call);
+
+	mutex_unlock(&trace_types_lock);
+	return ret;
+}
+EXPORT_SYMBOL_GPL(trace_add_event_call);
+
+/*
+ * Must be called under locking of trace_types_lock, event_mutex and
+ * trace_event_sem.
+ */
+static void __trace_remove_event_call(struct trace_event_call *call)
+{
+	event_remove(call);
+	trace_destroy_fields(call);
+	free_event_filter(call->filter);
+	call->filter = NULL;
+}
+
+static int probe_remove_event_call(struct trace_event_call *call)
+{
+	struct trace_array *tr;
+	struct trace_event_file *file;
+
+#ifdef CONFIG_PERF_EVENTS
+	if (call->perf_refcount)
+		return -EBUSY;
+#endif
+	do_for_each_event_file(tr, file) {
+		if (file->event_call != call)
+			continue;
+		/*
+		 * We can't rely on ftrace_event_enable_disable(enable => 0)
+		 * we are going to do, EVENT_FILE_FL_SOFT_MODE can suppress
+		 * TRACE_REG_UNREGISTER.
+		 */
+		if (file->flags & EVENT_FILE_FL_ENABLED)
+			goto busy;
+
+		if (file->flags & EVENT_FILE_FL_WAS_ENABLED)
+			tr->clear_trace = true;
+		/*
+		 * The do_for_each_event_file_safe() is
+		 * a double loop. After finding the call for this
+		 * trace_array, we use break to jump to the next
+		 * trace_array.
+		 */
+		break;
+	} while_for_each_event_file();
+
+	__trace_remove_event_call(call);
+
+	return 0;
+ busy:
+	/* No need to clear the trace now */
+	list_for_each_entry(tr, &ftrace_trace_arrays, list) {
+		tr->clear_trace = false;
+	}
+	return -EBUSY;
+}
+
+/* Remove an event_call */
+int trace_remove_event_call(struct trace_event_call *call)
+{
+	int ret;
+
+	lockdep_assert_held(&event_mutex);
+
+	mutex_lock(&trace_types_lock);
+	down_write(&trace_event_sem);
+	ret = probe_remove_event_call(call);
+	up_write(&trace_event_sem);
+	mutex_unlock(&trace_types_lock);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(trace_remove_event_call);
+
+#define for_each_event(event, start, end)			\
+	for (event = start;					\
+	     (unsigned long)event < (unsigned long)end;		\
+	     event++)
+
+#ifdef CONFIG_MODULES
+
+static void trace_module_add_events(struct module *mod)
+{
+	struct trace_event_call **call, **start, **end;
+
+	if (!mod->num_trace_events)
+		return;
+
+	/* Don't add infrastructure for mods without tracepoints */
+	if (trace_module_has_bad_taint(mod)) {
+		pr_err("%s: module has bad taint, not creating trace events\n",
+		       mod->name);
+		return;
+	}
+
+	start = mod->trace_events;
+	end = mod->trace_events + mod->num_trace_events;
+
+	for_each_event(call, start, end) {
+		__register_event(*call, mod);
+		__add_event_to_tracers(*call);
+	}
+}
+
+static void trace_module_remove_events(struct module *mod)
+{
+	struct trace_event_call *call, *p;
+	struct module_string *modstr, *m;
+
+	down_write(&trace_event_sem);
+	list_for_each_entry_safe(call, p, &ftrace_events, list) {
+		if ((call->flags & TRACE_EVENT_FL_DYNAMIC) || !call->module)
+			continue;
+		if (call->module == mod)
+			__trace_remove_event_call(call);
+	}
+	/* Check for any strings allocade for this module */
+	list_for_each_entry_safe(modstr, m, &module_strings, next) {
+		if (modstr->module != mod)
+			continue;
+		list_del(&modstr->next);
+		kfree(modstr->str);
+		kfree(modstr);
+	}
+	up_write(&trace_event_sem);
+
+	/*
+	 * It is safest to reset the ring buffer if the module being unloaded
+	 * registered any events that were used. The only worry is if
+	 * a new module gets loaded, and takes on the same id as the events
+	 * of this module. When printing out the buffer, traced events left
+	 * over from this module may be passed to the new module events and
+	 * unexpected results may occur.
+	 */
+	tracing_reset_all_online_cpus_unlocked();
+}
+
+static int trace_module_notify(struct notifier_block *self,
+			       unsigned long val, void *data)
+{
+	struct module *mod = data;
+
+	mutex_lock(&event_mutex);
+	mutex_lock(&trace_types_lock);
+	switch (val) {
+	case MODULE_STATE_COMING:
+		trace_module_add_events(mod);
+		break;
+	case MODULE_STATE_GOING:
+		trace_module_remove_events(mod);
+		break;
+	}
+	mutex_unlock(&trace_types_lock);
+	mutex_unlock(&event_mutex);
+
+	return NOTIFY_OK;
+}
+
+static struct notifier_block trace_module_nb = {
+	.notifier_call = trace_module_notify,
+	.priority = 1, /* higher than trace.c module notify */
+};
+#endif /* CONFIG_MODULES */
+
+/* Create a new event directory structure for a trace directory. */
+static void
+__trace_add_event_dirs(struct trace_array *tr)
+{
+	struct trace_event_call *call;
+	int ret;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	list_for_each_entry(call, &ftrace_events, list) {
 		ret = __trace_add_new_event(call, tr);

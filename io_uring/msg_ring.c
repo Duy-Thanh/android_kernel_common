@@ -82,6 +82,7 @@ static void io_msg_tw_complete(struct io_kiocb *req, struct io_tw_state *ts)
 		spin_unlock(&ctx->msg_lock);
 	}
 	if (req)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		kfree_rcu(req, rcu_head);
 	percpu_ref_put(&ctx->refs);
 }
@@ -92,6 +93,19 @@ static int io_msg_remote_post(struct io_ring_ctx *ctx, struct io_kiocb *req,
 	req->task = READ_ONCE(ctx->submitter_task);
 	if (!req->task) {
 		kfree_rcu(req, rcu_head);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		kmem_cache_free(req_cachep, req);
+	percpu_ref_put(&ctx->refs);
+}
+
+static int io_msg_remote_post(struct io_ring_ctx *ctx, struct io_kiocb *req,
+			      int res, u32 cflags, u64 user_data)
+{
+	req->task = READ_ONCE(ctx->submitter_task);
+	if (!req->task) {
+		kmem_cache_free(req_cachep, req);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return -EOWNERDEAD;
 	}
 	req->opcode = IORING_OP_NOP;

@@ -464,6 +464,7 @@ static int tracefs_d_revalidate(struct dentry *dentry, unsigned int flags)
 	return !(ei && ei->is_freed);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int tracefs_d_delete(const struct dentry *dentry)
 {
 	/*
@@ -478,6 +479,12 @@ static const struct dentry_operations tracefs_dentry_operations = {
 	.d_revalidate = tracefs_d_revalidate,
 	.d_release = tracefs_d_release,
 	.d_delete = tracefs_d_delete,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static const struct dentry_operations tracefs_dentry_operations = {
+	.d_revalidate = tracefs_d_revalidate,
+	.d_release = tracefs_d_release,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 static int tracefs_fill_super(struct super_block *sb, struct fs_context *fc)

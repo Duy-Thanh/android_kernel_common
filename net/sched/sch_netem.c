@@ -972,6 +972,7 @@ static int parse_attr(struct nlattr *tb[], int maxtype, struct nlattr *nla,
 	return 0;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static const struct Qdisc_class_ops netem_class_ops;
 
 static int check_netem_in_tree(struct Qdisc *sch, bool duplicates,
@@ -1070,6 +1071,67 @@ static int netem_change(struct Qdisc *sch, struct nlattr *opt,
 	if (ret)
 		goto unlock;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/* Parse netlink message to set options */
+static int netem_change(struct Qdisc *sch, struct nlattr *opt,
+			struct netlink_ext_ack *extack)
+{
+	struct netem_sched_data *q = qdisc_priv(sch);
+	struct nlattr *tb[TCA_NETEM_MAX + 1];
+	struct disttable *delay_dist = NULL;
+	struct disttable *slot_dist = NULL;
+	struct tc_netem_qopt *qopt;
+	struct clgstate old_clg;
+	int old_loss_model = CLG_RANDOM;
+	int ret;
+
+	qopt = nla_data(opt);
+	ret = parse_attr(tb, TCA_NETEM_MAX, opt, netem_policy, sizeof(*qopt));
+	if (ret < 0)
+		return ret;
+
+	if (tb[TCA_NETEM_DELAY_DIST]) {
+		ret = get_dist_table(&delay_dist, tb[TCA_NETEM_DELAY_DIST]);
+		if (ret)
+			goto table_free;
+	}
+
+	if (tb[TCA_NETEM_SLOT_DIST]) {
+		ret = get_dist_table(&slot_dist, tb[TCA_NETEM_SLOT_DIST]);
+		if (ret)
+			goto table_free;
+	}
+
+	sch_tree_lock(sch);
+	/* backup q->clg and q->loss_model */
+	old_clg = q->clg;
+	old_loss_model = q->loss_model;
+
+	if (tb[TCA_NETEM_LOSS]) {
+		ret = get_loss_clg(q, tb[TCA_NETEM_LOSS]);
+		if (ret) {
+			q->loss_model = old_loss_model;
+			q->clg = old_clg;
+			goto unlock;
+		}
+	} else {
+		q->loss_model = CLG_RANDOM;
+	}
+
+	if (delay_dist)
+		swap(q->delay_dist, delay_dist);
+	if (slot_dist)
+		swap(q->slot_dist, slot_dist);
+	sch->limit = qopt->limit;
+
+	q->latency = PSCHED_TICKS2NS(qopt->latency);
+	q->jitter = PSCHED_TICKS2NS(qopt->jitter);
+	q->limit = qopt->limit;
+	q->gap = qopt->gap;
+	q->counter = 0;
+	q->loss = qopt->loss;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	q->duplicate = qopt->duplicate;
 
 	/* for compatibility with earlier versions.

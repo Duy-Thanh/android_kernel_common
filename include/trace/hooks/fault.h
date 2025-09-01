@@ -27,10 +27,14 @@ DECLARE_HOOK(android_vh_try_fixup_sea,
 		 bool *can_fixup),
 	TP_ARGS(addr, esr, regs, can_fixup));
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 DECLARE_HOOK(android_vh_kernel_nofault,
 	TP_PROTO(bool *use_nofault),
 	TP_ARGS(use_nofault));
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #endif /* _TRACE_HOOK_FAULT_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

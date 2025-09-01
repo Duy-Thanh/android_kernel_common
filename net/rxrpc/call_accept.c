@@ -149,6 +149,7 @@ static int rxrpc_service_prealloc_one(struct rxrpc_sock *rx,
 
 id_in_use:
 	write_unlock(&rx->call_lock);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	rxrpc_prefail_call(call, RXRPC_CALL_LOCAL_ERROR, -EBADSLT);
 	rxrpc_cleanup_call(call);
 	_leave(" = -EBADSLT");
@@ -257,6 +258,112 @@ static struct rxrpc_call *rxrpc_alloc_incoming_call(struct rxrpc_sock *rx,
 
 	if (!b)
 		return NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	rxrpc_cleanup_call(call);
+	_leave(" = -EBADSLT");
+	return -EBADSLT;
+}
+
+/*
+ * Allocate the preallocation buffers for incoming service calls.  These must
+ * be charged manually.
+ */
+int rxrpc_service_prealloc(struct rxrpc_sock *rx, gfp_t gfp)
+{
+	struct rxrpc_backlog *b = rx->backlog;
+
+	if (!b) {
+		b = kzalloc(sizeof(struct rxrpc_backlog), gfp);
+		if (!b)
+			return -ENOMEM;
+		rx->backlog = b;
+	}
+
+	return 0;
+}
+
+/*
+ * Discard the preallocation on a service.
+ */
+void rxrpc_discard_prealloc(struct rxrpc_sock *rx)
+{
+	struct rxrpc_backlog *b = rx->backlog;
+	struct rxrpc_net *rxnet = rxrpc_net(sock_net(&rx->sk));
+	unsigned int size = RXRPC_BACKLOG_MAX, head, tail;
+
+	if (!b)
+		return;
+	rx->backlog = NULL;
+
+	/* Make sure that there aren't any incoming calls in progress before we
+	 * clear the preallocation buffers.
+	 */
+	spin_lock(&rx->incoming_lock);
+	spin_unlock(&rx->incoming_lock);
+
+	head = b->peer_backlog_head;
+	tail = b->peer_backlog_tail;
+	while (CIRC_CNT(head, tail, size) > 0) {
+		struct rxrpc_peer *peer = b->peer_backlog[tail];
+		rxrpc_put_local(peer->local, rxrpc_local_put_prealloc_peer);
+		kfree(peer);
+		tail = (tail + 1) & (size - 1);
+	}
+
+	head = b->conn_backlog_head;
+	tail = b->conn_backlog_tail;
+	while (CIRC_CNT(head, tail, size) > 0) {
+		struct rxrpc_connection *conn = b->conn_backlog[tail];
+		write_lock(&rxnet->conn_lock);
+		list_del(&conn->link);
+		list_del(&conn->proc_link);
+		write_unlock(&rxnet->conn_lock);
+		kfree(conn);
+		if (atomic_dec_and_test(&rxnet->nr_conns))
+			wake_up_var(&rxnet->nr_conns);
+		tail = (tail + 1) & (size - 1);
+	}
+
+	head = b->call_backlog_head;
+	tail = b->call_backlog_tail;
+	while (CIRC_CNT(head, tail, size) > 0) {
+		struct rxrpc_call *call = b->call_backlog[tail];
+		rcu_assign_pointer(call->socket, rx);
+		if (rx->discard_new_call) {
+			_debug("discard %lx", call->user_call_ID);
+			rx->discard_new_call(call, call->user_call_ID);
+			if (call->notify_rx)
+				call->notify_rx = rxrpc_dummy_notify;
+			rxrpc_put_call(call, rxrpc_call_put_kernel);
+		}
+		rxrpc_call_completed(call);
+		rxrpc_release_call(rx, call);
+		rxrpc_put_call(call, rxrpc_call_put_discard_prealloc);
+		tail = (tail + 1) & (size - 1);
+	}
+
+	kfree(b);
+}
+
+/*
+ * Allocate a new incoming call from the prealloc pool, along with a connection
+ * and a peer as necessary.
+ */
+static struct rxrpc_call *rxrpc_alloc_incoming_call(struct rxrpc_sock *rx,
+						    struct rxrpc_local *local,
+						    struct rxrpc_peer *peer,
+						    struct rxrpc_connection *conn,
+						    const struct rxrpc_security *sec,
+						    struct sockaddr_rxrpc *peer_srx,
+						    struct sk_buff *skb)
+{
+	struct rxrpc_backlog *b = rx->backlog;
+	struct rxrpc_call *call;
+	unsigned short call_head, conn_head, peer_head;
+	unsigned short call_tail, conn_tail, peer_tail;
+	unsigned short call_count, conn_count;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* #calls >= #conns >= #peers must hold true. */
 	call_head = smp_load_acquire(&b->call_backlog_head);

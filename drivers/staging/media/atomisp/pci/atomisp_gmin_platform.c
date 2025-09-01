@@ -1358,6 +1358,7 @@ static int gmin_get_config_var(struct device *maindev,
 	if (efi_rt_services_supported(EFI_RT_SUPPORTED_GET_VARIABLE))
 		status = efi.get_variable(var16, &GMIN_CFG_VAR_EFI_GUID, NULL,
 					  (unsigned long *)out_len, out);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (status == EFI_SUCCESS) {
 		dev_info(maindev, "found EFI entry for '%s'\n", var8);
 		return 0;
@@ -1367,6 +1368,17 @@ static int gmin_get_config_var(struct device *maindev,
 	else
 		dev_info(maindev, "Failed to find EFI variable %s\n", var8);
 	return -ENOENT;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (status == EFI_SUCCESS)
+		dev_info(maindev, "found EFI entry for '%s'\n", var8);
+	else if (is_gmin)
+		dev_info(maindev, "Failed to find EFI gmin variable %s\n", var8);
+	else
+		dev_info(maindev, "Failed to find EFI variable %s\n", var8);
+
+	return ret;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 int gmin_get_var_int(struct device *dev, bool is_gmin, const char *var, int def)

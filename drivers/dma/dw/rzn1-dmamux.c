@@ -48,6 +48,7 @@ static void *rzn1_dmamux_route_allocate(struct of_phandle_args *dma_spec,
 	u32 mask;
 	int ret;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (dma_spec->args_count != RNZ1_DMAMUX_NCELLS) {
 		ret = -EINVAL;
 		goto put_device;
@@ -107,6 +108,61 @@ free_map:
 	kfree(map);
 put_device:
 	put_device(&pdev->dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (dma_spec->args_count != RNZ1_DMAMUX_NCELLS)
+		return ERR_PTR(-EINVAL);
+
+	map = kzalloc(sizeof(*map), GFP_KERNEL);
+	if (!map)
+		return ERR_PTR(-ENOMEM);
+
+	chan = dma_spec->args[0];
+	map->req_idx = dma_spec->args[4];
+	val = dma_spec->args[5];
+	dma_spec->args_count -= 2;
+
+	if (chan >= RZN1_DMAMUX_LINES_PER_CTLR) {
+		dev_err(&pdev->dev, "Invalid DMA request line: %u\n", chan);
+		ret = -EINVAL;
+		goto free_map;
+	}
+
+	if (map->req_idx >= RZN1_DMAMUX_MAX_LINES ||
+	    (map->req_idx % RZN1_DMAMUX_LINES_PER_CTLR) != chan) {
+		dev_err(&pdev->dev, "Invalid MUX request line: %u\n", map->req_idx);
+		ret = -EINVAL;
+		goto free_map;
+	}
+
+	dmac_idx = map->req_idx >= RZN1_DMAMUX_LINES_PER_CTLR ? 1 : 0;
+	dma_spec->np = of_parse_phandle(ofdma->of_node, "dma-masters", dmac_idx);
+	if (!dma_spec->np) {
+		dev_err(&pdev->dev, "Can't get DMA master\n");
+		ret = -EINVAL;
+		goto free_map;
+	}
+
+	dev_dbg(&pdev->dev, "Mapping DMAMUX request %u to DMAC%u request %u\n",
+		map->req_idx, dmac_idx, chan);
+
+	if (test_and_set_bit(map->req_idx, dmamux->used_chans)) {
+		ret = -EBUSY;
+		goto free_map;
+	}
+
+	mask = BIT(map->req_idx);
+	ret = r9a06g032_sysctrl_set_dmamux(mask, val ? mask : 0);
+	if (ret)
+		goto clear_bitmap;
+
+	return map;
+
+clear_bitmap:
+	clear_bit(map->req_idx, dmamux->used_chans);
+free_map:
+	kfree(map);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return ERR_PTR(ret);
 }

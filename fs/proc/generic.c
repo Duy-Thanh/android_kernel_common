@@ -362,6 +362,7 @@ static const struct inode_operations proc_dir_inode_operations = {
 	.setattr	= proc_notify_change,
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void pde_set_flags(struct proc_dir_entry *pde)
 {
 	const struct proc_ops *proc_ops = pde->proc_ops;
@@ -669,6 +670,309 @@ struct proc_dir_entry *proc_create_single_data(const char *name, umode_t mode,
 		return NULL;
 	p->proc_ops = &proc_single_ops;
 	p->single_show = show;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/* returns the registered entry, or frees dp and returns NULL on failure */
+struct proc_dir_entry *proc_register(struct proc_dir_entry *dir,
+		struct proc_dir_entry *dp)
+{
+	if (proc_alloc_inum(&dp->low_ino))
+		goto out_free_entry;
+
+	write_lock(&proc_subdir_lock);
+	dp->parent = dir;
+	if (pde_subdir_insert(dir, dp) == false) {
+		WARN(1, "proc_dir_entry '%s/%s' already registered\n",
+		     dir->name, dp->name);
+		write_unlock(&proc_subdir_lock);
+		goto out_free_inum;
+	}
+	dir->nlink++;
+	write_unlock(&proc_subdir_lock);
+
+	return dp;
+out_free_inum:
+	proc_free_inum(dp->low_ino);
+out_free_entry:
+	pde_free(dp);
+	return NULL;
+}
+
+static struct proc_dir_entry *__proc_create(struct proc_dir_entry **parent,
+					  const char *name,
+					  umode_t mode,
+					  nlink_t nlink)
+{
+	struct proc_dir_entry *ent = NULL;
+	const char *fn;
+	struct qstr qstr;
+
+	if (xlate_proc_name(name, parent, &fn) != 0)
+		goto out;
+	qstr.name = fn;
+	qstr.len = strlen(fn);
+	if (qstr.len == 0 || qstr.len >= 256) {
+		WARN(1, "name len %u\n", qstr.len);
+		return NULL;
+	}
+	if (qstr.len == 1 && fn[0] == '.') {
+		WARN(1, "name '.'\n");
+		return NULL;
+	}
+	if (qstr.len == 2 && fn[0] == '.' && fn[1] == '.') {
+		WARN(1, "name '..'\n");
+		return NULL;
+	}
+	if (*parent == &proc_root && name_to_int(&qstr) != ~0U) {
+		WARN(1, "create '/proc/%s' by hand\n", qstr.name);
+		return NULL;
+	}
+	if (is_empty_pde(*parent)) {
+		WARN(1, "attempt to add to permanently empty directory");
+		return NULL;
+	}
+
+	ent = kmem_cache_zalloc(proc_dir_entry_cache, GFP_KERNEL);
+	if (!ent)
+		goto out;
+
+	if (qstr.len + 1 <= SIZEOF_PDE_INLINE_NAME) {
+		ent->name = ent->inline_name;
+	} else {
+		ent->name = kmalloc(qstr.len + 1, GFP_KERNEL);
+		if (!ent->name) {
+			pde_free(ent);
+			return NULL;
+		}
+	}
+
+	memcpy(ent->name, fn, qstr.len + 1);
+	ent->namelen = qstr.len;
+	ent->mode = mode;
+	ent->nlink = nlink;
+	ent->subdir = RB_ROOT;
+	refcount_set(&ent->refcnt, 1);
+	spin_lock_init(&ent->pde_unload_lock);
+	INIT_LIST_HEAD(&ent->pde_openers);
+	proc_set_user(ent, (*parent)->uid, (*parent)->gid);
+
+	ent->proc_dops = &proc_misc_dentry_ops;
+	/* Revalidate everything under /proc/${pid}/net */
+	if ((*parent)->proc_dops == &proc_net_dentry_ops)
+		pde_force_lookup(ent);
+
+out:
+	return ent;
+}
+
+struct proc_dir_entry *proc_symlink(const char *name,
+		struct proc_dir_entry *parent, const char *dest)
+{
+	struct proc_dir_entry *ent;
+
+	ent = __proc_create(&parent, name,
+			  (S_IFLNK | S_IRUGO | S_IWUGO | S_IXUGO),1);
+
+	if (ent) {
+		ent->size = strlen(dest);
+		ent->data = kmemdup(dest, ent->size + 1, GFP_KERNEL);
+		if (ent->data) {
+			ent->proc_iops = &proc_link_inode_operations;
+			ent = proc_register(parent, ent);
+		} else {
+			pde_free(ent);
+			ent = NULL;
+		}
+	}
+	return ent;
+}
+EXPORT_SYMBOL(proc_symlink);
+
+struct proc_dir_entry *_proc_mkdir(const char *name, umode_t mode,
+		struct proc_dir_entry *parent, void *data, bool force_lookup)
+{
+	struct proc_dir_entry *ent;
+
+	if (mode == 0)
+		mode = S_IRUGO | S_IXUGO;
+
+	ent = __proc_create(&parent, name, S_IFDIR | mode, 2);
+	if (ent) {
+		ent->data = data;
+		ent->proc_dir_ops = &proc_dir_operations;
+		ent->proc_iops = &proc_dir_inode_operations;
+		if (force_lookup) {
+			pde_force_lookup(ent);
+		}
+		ent = proc_register(parent, ent);
+	}
+	return ent;
+}
+EXPORT_SYMBOL_GPL(_proc_mkdir);
+
+struct proc_dir_entry *proc_mkdir_data(const char *name, umode_t mode,
+		struct proc_dir_entry *parent, void *data)
+{
+	return _proc_mkdir(name, mode, parent, data, false);
+}
+EXPORT_SYMBOL_GPL(proc_mkdir_data);
+
+struct proc_dir_entry *proc_mkdir_mode(const char *name, umode_t mode,
+				       struct proc_dir_entry *parent)
+{
+	return proc_mkdir_data(name, mode, parent, NULL);
+}
+EXPORT_SYMBOL(proc_mkdir_mode);
+
+struct proc_dir_entry *proc_mkdir(const char *name,
+		struct proc_dir_entry *parent)
+{
+	return proc_mkdir_data(name, 0, parent, NULL);
+}
+EXPORT_SYMBOL(proc_mkdir);
+
+struct proc_dir_entry *proc_create_mount_point(const char *name)
+{
+	umode_t mode = S_IFDIR | S_IRUGO | S_IXUGO;
+	struct proc_dir_entry *ent, *parent = NULL;
+
+	ent = __proc_create(&parent, name, mode, 2);
+	if (ent) {
+		ent->data = NULL;
+		ent->proc_dir_ops = NULL;
+		ent->proc_iops = NULL;
+		ent = proc_register(parent, ent);
+	}
+	return ent;
+}
+EXPORT_SYMBOL(proc_create_mount_point);
+
+struct proc_dir_entry *proc_create_reg(const char *name, umode_t mode,
+		struct proc_dir_entry **parent, void *data)
+{
+	struct proc_dir_entry *p;
+
+	if ((mode & S_IFMT) == 0)
+		mode |= S_IFREG;
+	if ((mode & S_IALLUGO) == 0)
+		mode |= S_IRUGO;
+	if (WARN_ON_ONCE(!S_ISREG(mode)))
+		return NULL;
+
+	p = __proc_create(parent, name, mode, 1);
+	if (p) {
+		p->proc_iops = &proc_file_inode_operations;
+		p->data = data;
+	}
+	return p;
+}
+
+static void pde_set_flags(struct proc_dir_entry *pde)
+{
+	if (pde->proc_ops->proc_flags & PROC_ENTRY_PERMANENT)
+		pde->flags |= PROC_ENTRY_PERMANENT;
+	if (pde->proc_ops->proc_read_iter)
+		pde->flags |= PROC_ENTRY_proc_read_iter;
+#ifdef CONFIG_COMPAT
+	if (pde->proc_ops->proc_compat_ioctl)
+		pde->flags |= PROC_ENTRY_proc_compat_ioctl;
+#endif
+}
+
+struct proc_dir_entry *proc_create_data(const char *name, umode_t mode,
+		struct proc_dir_entry *parent,
+		const struct proc_ops *proc_ops, void *data)
+{
+	struct proc_dir_entry *p;
+
+	p = proc_create_reg(name, mode, &parent, data);
+	if (!p)
+		return NULL;
+	p->proc_ops = proc_ops;
+	pde_set_flags(p);
+	return proc_register(parent, p);
+}
+EXPORT_SYMBOL(proc_create_data);
+ 
+struct proc_dir_entry *proc_create(const char *name, umode_t mode,
+				   struct proc_dir_entry *parent,
+				   const struct proc_ops *proc_ops)
+{
+	return proc_create_data(name, mode, parent, proc_ops, NULL);
+}
+EXPORT_SYMBOL(proc_create);
+
+static int proc_seq_open(struct inode *inode, struct file *file)
+{
+	struct proc_dir_entry *de = PDE(inode);
+
+	if (de->state_size)
+		return seq_open_private(file, de->seq_ops, de->state_size);
+	return seq_open(file, de->seq_ops);
+}
+
+static int proc_seq_release(struct inode *inode, struct file *file)
+{
+	struct proc_dir_entry *de = PDE(inode);
+
+	if (de->state_size)
+		return seq_release_private(inode, file);
+	return seq_release(inode, file);
+}
+
+static const struct proc_ops proc_seq_ops = {
+	/* not permanent -- can call into arbitrary seq_operations */
+	.proc_open	= proc_seq_open,
+	.proc_read_iter	= seq_read_iter,
+	.proc_lseek	= seq_lseek,
+	.proc_release	= proc_seq_release,
+};
+
+struct proc_dir_entry *proc_create_seq_private(const char *name, umode_t mode,
+		struct proc_dir_entry *parent, const struct seq_operations *ops,
+		unsigned int state_size, void *data)
+{
+	struct proc_dir_entry *p;
+
+	p = proc_create_reg(name, mode, &parent, data);
+	if (!p)
+		return NULL;
+	p->proc_ops = &proc_seq_ops;
+	p->seq_ops = ops;
+	p->state_size = state_size;
+	pde_set_flags(p);
+	return proc_register(parent, p);
+}
+EXPORT_SYMBOL(proc_create_seq_private);
+
+static int proc_single_open(struct inode *inode, struct file *file)
+{
+	struct proc_dir_entry *de = PDE(inode);
+
+	return single_open(file, de->single_show, de->data);
+}
+
+static const struct proc_ops proc_single_ops = {
+	/* not permanent -- can call into arbitrary ->single_show */
+	.proc_open	= proc_single_open,
+	.proc_read_iter = seq_read_iter,
+	.proc_lseek	= seq_lseek,
+	.proc_release	= single_release,
+};
+
+struct proc_dir_entry *proc_create_single_data(const char *name, umode_t mode,
+		struct proc_dir_entry *parent,
+		int (*show)(struct seq_file *, void *), void *data)
+{
+	struct proc_dir_entry *p;
+
+	p = proc_create_reg(name, mode, &parent, data);
+	if (!p)
+		return NULL;
+	p->proc_ops = &proc_single_ops;
+	p->single_show = show;
+	pde_set_flags(p);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return proc_register(parent, p);
 }
 EXPORT_SYMBOL(proc_create_single_data);

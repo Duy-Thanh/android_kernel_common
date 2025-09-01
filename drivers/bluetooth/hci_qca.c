@@ -2363,6 +2363,7 @@ static int qca_serdev_probe(struct serdev_device *serdev)
 			 */
 			qcadev->bt_power->pwrseq = devm_pwrseq_get(&serdev->dev,
 								   "bluetooth");
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 			/*
 			 * Some modules have BT_EN enabled via a hardware pull-up,
@@ -2374,6 +2375,13 @@ static int qca_serdev_probe(struct serdev_device *serdev)
 				qcadev->bt_power->pwrseq = NULL;
 			else
 				break;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			if (IS_ERR(qcadev->bt_power->pwrseq))
+				return PTR_ERR(qcadev->bt_power->pwrseq);
+
+			break;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 		fallthrough;
 	case QCA_WCN3988:

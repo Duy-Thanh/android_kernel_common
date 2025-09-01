@@ -1917,6 +1917,7 @@ int cifs_unlink(struct inode *dir, struct dentry *dentry)
 	struct cifs_sb_info *cifs_sb = CIFS_SB(sb);
 	struct tcon_link *tlink;
 	struct cifs_tcon *tcon;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	__u32 dosattr = 0, origattr = 0;
 	struct TCP_Server_Info *server;
 	struct iattr *attrs = NULL;
@@ -2579,6 +2580,641 @@ unlink_target:
 cifs_rename_exit:
 	if (rehash)
 		d_rehash(target_dentry);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct TCP_Server_Info *server;
+	struct iattr *attrs = NULL;
+	__u32 dosattr = 0, origattr = 0;
+
+	cifs_dbg(FYI, "cifs_unlink, dir=0x%p, dentry=0x%p\n", dir, dentry);
+
+	if (unlikely(cifs_forced_shutdown(cifs_sb)))
+		return -EIO;
+
+	tlink = cifs_sb_tlink(cifs_sb);
+	if (IS_ERR(tlink))
+		return PTR_ERR(tlink);
+	tcon = tlink_tcon(tlink);
+	server = tcon->ses->server;
+
+	xid = get_xid();
+	page = alloc_dentry_path();
+
+	if (tcon->nodelete) {
+		rc = -EACCES;
+		goto unlink_out;
+	}
+
+	/* Unlink can be called from rename so we can not take the
+	 * sb->s_vfs_rename_mutex here */
+	full_path = build_path_from_dentry(dentry, page);
+	if (IS_ERR(full_path)) {
+		rc = PTR_ERR(full_path);
+		goto unlink_out;
+	}
+
+	netfs_wait_for_outstanding_io(inode);
+	cifs_close_deferred_file_under_dentry(tcon, full_path);
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	if (cap_unix(tcon->ses) && (CIFS_UNIX_POSIX_PATH_OPS_CAP &
+				le64_to_cpu(tcon->fsUnixInfo.Capability))) {
+		rc = CIFSPOSIXDelFile(xid, tcon, full_path,
+			SMB_POSIX_UNLINK_FILE_TARGET, cifs_sb->local_nls,
+			cifs_remap(cifs_sb));
+		cifs_dbg(FYI, "posix del rc %d\n", rc);
+		if ((rc == 0) || (rc == -ENOENT))
+			goto psx_del_no_retry;
+	}
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+
+retry_std_delete:
+	if (!server->ops->unlink) {
+		rc = -ENOSYS;
+		goto psx_del_no_retry;
+	}
+
+	rc = server->ops->unlink(xid, tcon, full_path, cifs_sb, dentry);
+
+psx_del_no_retry:
+	if (!rc) {
+		if (inode) {
+			cifs_mark_open_handles_for_deleted_file(inode, full_path);
+			cifs_drop_nlink(inode);
+		}
+	} else if (rc == -ENOENT) {
+		d_drop(dentry);
+	} else if (rc == -EBUSY) {
+		if (server->ops->rename_pending_delete) {
+			rc = server->ops->rename_pending_delete(full_path,
+								dentry, xid);
+			if (rc == 0) {
+				cifs_mark_open_handles_for_deleted_file(inode, full_path);
+				cifs_drop_nlink(inode);
+			}
+		}
+	} else if ((rc == -EACCES) && (dosattr == 0) && inode) {
+		attrs = kzalloc(sizeof(*attrs), GFP_KERNEL);
+		if (attrs == NULL) {
+			rc = -ENOMEM;
+			goto out_reval;
+		}
+
+		/* try to reset dos attributes */
+		cifs_inode = CIFS_I(inode);
+		origattr = cifs_inode->cifsAttrs;
+		if (origattr == 0)
+			origattr |= ATTR_NORMAL;
+		dosattr = origattr & ~ATTR_READONLY;
+		if (dosattr == 0)
+			dosattr |= ATTR_NORMAL;
+		dosattr |= ATTR_HIDDEN;
+
+		rc = cifs_set_file_info(inode, attrs, xid, full_path, dosattr);
+		if (rc != 0)
+			goto out_reval;
+
+		goto retry_std_delete;
+	}
+
+	/* undo the setattr if we errored out and it's needed */
+	if (rc != 0 && dosattr != 0)
+		cifs_set_file_info(inode, attrs, xid, full_path, origattr);
+
+out_reval:
+	if (inode) {
+		cifs_inode = CIFS_I(inode);
+		cifs_inode->time = 0;	/* will force revalidate to get info
+					   when needed */
+		inode_set_ctime_current(inode);
+	}
+	inode_set_mtime_to_ts(dir, inode_set_ctime_current(dir));
+	cifs_inode = CIFS_I(dir);
+	CIFS_I(dir)->time = 0;	/* force revalidate of dir as well */
+unlink_out:
+	free_dentry_path(page);
+	kfree(attrs);
+	free_xid(xid);
+	cifs_put_tlink(tlink);
+	return rc;
+}
+
+static int
+cifs_mkdir_qinfo(struct inode *parent, struct dentry *dentry, umode_t mode,
+		 const char *full_path, struct cifs_sb_info *cifs_sb,
+		 struct cifs_tcon *tcon, const unsigned int xid)
+{
+	int rc = 0;
+	struct inode *inode = NULL;
+
+	if (tcon->posix_extensions) {
+		rc = smb311_posix_get_inode_info(&inode, full_path,
+						 NULL, parent->i_sb, xid);
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	} else if (tcon->unix_ext) {
+		rc = cifs_get_inode_info_unix(&inode, full_path, parent->i_sb,
+					      xid);
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+	} else {
+		rc = cifs_get_inode_info(&inode, full_path, NULL, parent->i_sb,
+					 xid, NULL);
+	}
+
+	if (rc)
+		return rc;
+
+	if (!S_ISDIR(inode->i_mode)) {
+		/*
+		 * mkdir succeeded, but another client has managed to remove the
+		 * sucker and replace it with non-directory.  Return success,
+		 * but don't leave the child in dcache.
+		 */
+		 iput(inode);
+		 d_drop(dentry);
+		 return 0;
+	}
+	/*
+	 * setting nlink not necessary except in cases where we failed to get it
+	 * from the server or was set bogus. Also, since this is a brand new
+	 * inode, no need to grab the i_lock before setting the i_nlink.
+	 */
+	if (inode->i_nlink < 2)
+		set_nlink(inode, 2);
+	mode &= ~current_umask();
+	/* must turn on setgid bit if parent dir has it */
+	if (parent->i_mode & S_ISGID)
+		mode |= S_ISGID;
+
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	if (tcon->unix_ext) {
+		struct cifs_unix_set_info_args args = {
+			.mode	= mode,
+			.ctime	= NO_CHANGE_64,
+			.atime	= NO_CHANGE_64,
+			.mtime	= NO_CHANGE_64,
+			.device	= 0,
+		};
+		if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_SET_UID) {
+			args.uid = current_fsuid();
+			if (parent->i_mode & S_ISGID)
+				args.gid = parent->i_gid;
+			else
+				args.gid = current_fsgid();
+		} else {
+			args.uid = INVALID_UID; /* no change */
+			args.gid = INVALID_GID; /* no change */
+		}
+		CIFSSMBUnixSetPathInfo(xid, tcon, full_path, &args,
+				       cifs_sb->local_nls,
+				       cifs_remap(cifs_sb));
+	} else {
+#else
+	{
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+		struct TCP_Server_Info *server = tcon->ses->server;
+		if (!(cifs_sb->mnt_cifs_flags & CIFS_MOUNT_CIFS_ACL) &&
+		    (mode & S_IWUGO) == 0 && server->ops->mkdir_setinfo)
+			server->ops->mkdir_setinfo(inode, full_path, cifs_sb,
+						   tcon, xid);
+		if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_DYNPERM)
+			inode->i_mode = (mode | S_IFDIR);
+
+		if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_SET_UID) {
+			inode->i_uid = current_fsuid();
+			if (inode->i_mode & S_ISGID)
+				inode->i_gid = parent->i_gid;
+			else
+				inode->i_gid = current_fsgid();
+		}
+	}
+	d_instantiate(dentry, inode);
+	return 0;
+}
+
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+static int
+cifs_posix_mkdir(struct inode *inode, struct dentry *dentry, umode_t mode,
+		 const char *full_path, struct cifs_sb_info *cifs_sb,
+		 struct cifs_tcon *tcon, const unsigned int xid)
+{
+	int rc = 0;
+	u32 oplock = 0;
+	FILE_UNIX_BASIC_INFO *info = NULL;
+	struct inode *newinode = NULL;
+	struct cifs_fattr fattr;
+
+	info = kzalloc(sizeof(FILE_UNIX_BASIC_INFO), GFP_KERNEL);
+	if (info == NULL) {
+		rc = -ENOMEM;
+		goto posix_mkdir_out;
+	}
+
+	mode &= ~current_umask();
+	rc = CIFSPOSIXCreate(xid, tcon, SMB_O_DIRECTORY | SMB_O_CREAT, mode,
+			     NULL /* netfid */, info, &oplock, full_path,
+			     cifs_sb->local_nls, cifs_remap(cifs_sb));
+	if (rc == -EOPNOTSUPP)
+		goto posix_mkdir_out;
+	else if (rc) {
+		cifs_dbg(FYI, "posix mkdir returned 0x%x\n", rc);
+		d_drop(dentry);
+		goto posix_mkdir_out;
+	}
+
+	if (info->Type == cpu_to_le32(-1))
+		/* no return info, go query for it */
+		goto posix_mkdir_get_info;
+	/*
+	 * BB check (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_SET_UID ) to see if
+	 * need to set uid/gid.
+	 */
+
+	cifs_unix_basic_to_fattr(&fattr, info, cifs_sb);
+	cifs_fill_uniqueid(inode->i_sb, &fattr);
+	newinode = cifs_iget(inode->i_sb, &fattr);
+	if (!newinode)
+		goto posix_mkdir_get_info;
+
+	d_instantiate(dentry, newinode);
+
+#ifdef CONFIG_CIFS_DEBUG2
+	cifs_dbg(FYI, "instantiated dentry %p %pd to inode %p\n",
+		 dentry, dentry, newinode);
+
+	if (newinode->i_nlink != 2)
+		cifs_dbg(FYI, "unexpected number of links %d\n",
+			 newinode->i_nlink);
+#endif
+
+posix_mkdir_out:
+	kfree(info);
+	return rc;
+posix_mkdir_get_info:
+	rc = cifs_mkdir_qinfo(inode, dentry, mode, full_path, cifs_sb, tcon,
+			      xid);
+	goto posix_mkdir_out;
+}
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+
+int cifs_mkdir(struct mnt_idmap *idmap, struct inode *inode,
+	       struct dentry *direntry, umode_t mode)
+{
+	int rc = 0;
+	unsigned int xid;
+	struct cifs_sb_info *cifs_sb;
+	struct tcon_link *tlink;
+	struct cifs_tcon *tcon;
+	struct TCP_Server_Info *server;
+	const char *full_path;
+	void *page;
+
+	cifs_dbg(FYI, "In cifs_mkdir, mode = %04ho inode = 0x%p\n",
+		 mode, inode);
+
+	cifs_sb = CIFS_SB(inode->i_sb);
+	if (unlikely(cifs_forced_shutdown(cifs_sb)))
+		return -EIO;
+	tlink = cifs_sb_tlink(cifs_sb);
+	if (IS_ERR(tlink))
+		return PTR_ERR(tlink);
+	tcon = tlink_tcon(tlink);
+
+	xid = get_xid();
+
+	page = alloc_dentry_path();
+	full_path = build_path_from_dentry(direntry, page);
+	if (IS_ERR(full_path)) {
+		rc = PTR_ERR(full_path);
+		goto mkdir_out;
+	}
+
+	server = tcon->ses->server;
+
+	if ((server->ops->posix_mkdir) && (tcon->posix_extensions)) {
+		rc = server->ops->posix_mkdir(xid, inode, mode, tcon, full_path,
+					      cifs_sb);
+		d_drop(direntry); /* for time being always refresh inode info */
+		goto mkdir_out;
+	}
+
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	if (cap_unix(tcon->ses) && (CIFS_UNIX_POSIX_PATH_OPS_CAP &
+				le64_to_cpu(tcon->fsUnixInfo.Capability))) {
+		rc = cifs_posix_mkdir(inode, direntry, mode, full_path, cifs_sb,
+				      tcon, xid);
+		if (rc != -EOPNOTSUPP)
+			goto mkdir_out;
+	}
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+
+	if (!server->ops->mkdir) {
+		rc = -ENOSYS;
+		goto mkdir_out;
+	}
+
+	/* BB add setting the equivalent of mode via CreateX w/ACLs */
+	rc = server->ops->mkdir(xid, inode, mode, tcon, full_path, cifs_sb);
+	if (rc) {
+		cifs_dbg(FYI, "cifs_mkdir returned 0x%x\n", rc);
+		d_drop(direntry);
+		goto mkdir_out;
+	}
+
+	/* TODO: skip this for smb2/smb3 */
+	rc = cifs_mkdir_qinfo(inode, direntry, mode, full_path, cifs_sb, tcon,
+			      xid);
+mkdir_out:
+	/*
+	 * Force revalidate to get parent dir info when needed since cached
+	 * attributes are invalid now.
+	 */
+	CIFS_I(inode)->time = 0;
+	free_dentry_path(page);
+	free_xid(xid);
+	cifs_put_tlink(tlink);
+	return rc;
+}
+
+int cifs_rmdir(struct inode *inode, struct dentry *direntry)
+{
+	int rc = 0;
+	unsigned int xid;
+	struct cifs_sb_info *cifs_sb;
+	struct tcon_link *tlink;
+	struct cifs_tcon *tcon;
+	struct TCP_Server_Info *server;
+	const char *full_path;
+	void *page = alloc_dentry_path();
+	struct cifsInodeInfo *cifsInode;
+
+	cifs_dbg(FYI, "cifs_rmdir, inode = 0x%p\n", inode);
+
+	xid = get_xid();
+
+	full_path = build_path_from_dentry(direntry, page);
+	if (IS_ERR(full_path)) {
+		rc = PTR_ERR(full_path);
+		goto rmdir_exit;
+	}
+
+	cifs_sb = CIFS_SB(inode->i_sb);
+	if (unlikely(cifs_forced_shutdown(cifs_sb))) {
+		rc = -EIO;
+		goto rmdir_exit;
+	}
+
+	tlink = cifs_sb_tlink(cifs_sb);
+	if (IS_ERR(tlink)) {
+		rc = PTR_ERR(tlink);
+		goto rmdir_exit;
+	}
+	tcon = tlink_tcon(tlink);
+	server = tcon->ses->server;
+
+	if (!server->ops->rmdir) {
+		rc = -ENOSYS;
+		cifs_put_tlink(tlink);
+		goto rmdir_exit;
+	}
+
+	if (tcon->nodelete) {
+		rc = -EACCES;
+		cifs_put_tlink(tlink);
+		goto rmdir_exit;
+	}
+
+	rc = server->ops->rmdir(xid, tcon, full_path, cifs_sb);
+	cifs_put_tlink(tlink);
+
+	if (!rc) {
+		spin_lock(&d_inode(direntry)->i_lock);
+		i_size_write(d_inode(direntry), 0);
+		clear_nlink(d_inode(direntry));
+		spin_unlock(&d_inode(direntry)->i_lock);
+	}
+
+	cifsInode = CIFS_I(d_inode(direntry));
+	/* force revalidate to go get info when needed */
+	cifsInode->time = 0;
+
+	cifsInode = CIFS_I(inode);
+	/*
+	 * Force revalidate to get parent dir info when needed since cached
+	 * attributes are invalid now.
+	 */
+	cifsInode->time = 0;
+
+	inode_set_ctime_current(d_inode(direntry));
+	inode_set_mtime_to_ts(inode, inode_set_ctime_current(inode));
+
+rmdir_exit:
+	free_dentry_path(page);
+	free_xid(xid);
+	return rc;
+}
+
+static int
+cifs_do_rename(const unsigned int xid, struct dentry *from_dentry,
+	       const char *from_path, struct dentry *to_dentry,
+	       const char *to_path)
+{
+	struct cifs_sb_info *cifs_sb = CIFS_SB(from_dentry->d_sb);
+	struct tcon_link *tlink;
+	struct cifs_tcon *tcon;
+	struct TCP_Server_Info *server;
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	struct cifs_fid fid;
+	struct cifs_open_parms oparms;
+	int oplock;
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+	int rc;
+
+	tlink = cifs_sb_tlink(cifs_sb);
+	if (IS_ERR(tlink))
+		return PTR_ERR(tlink);
+	tcon = tlink_tcon(tlink);
+	server = tcon->ses->server;
+
+	if (!server->ops->rename)
+		return -ENOSYS;
+
+	/* try path-based rename first */
+	rc = server->ops->rename(xid, tcon, from_dentry,
+				 from_path, to_path, cifs_sb);
+
+	/*
+	 * Don't bother with rename by filehandle unless file is busy and
+	 * source. Note that cross directory moves do not work with
+	 * rename by filehandle to various Windows servers.
+	 */
+	if (rc == 0 || rc != -EBUSY)
+		goto do_rename_exit;
+
+	/* Don't fall back to using SMB on SMB 2+ mount */
+	if (server->vals->protocol_id != 0)
+		goto do_rename_exit;
+
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	/* open-file renames don't work across directories */
+	if (to_dentry->d_parent != from_dentry->d_parent)
+		goto do_rename_exit;
+
+	oparms = (struct cifs_open_parms) {
+		.tcon = tcon,
+		.cifs_sb = cifs_sb,
+		/* open the file to be renamed -- we need DELETE perms */
+		.desired_access = DELETE,
+		.create_options = cifs_create_options(cifs_sb, CREATE_NOT_DIR),
+		.disposition = FILE_OPEN,
+		.path = from_path,
+		.fid = &fid,
+	};
+
+	rc = CIFS_open(xid, &oparms, &oplock, NULL);
+	if (rc == 0) {
+		rc = CIFSSMBRenameOpenFile(xid, tcon, fid.netfid,
+				(const char *) to_dentry->d_name.name,
+				cifs_sb->local_nls, cifs_remap(cifs_sb));
+		CIFSSMBClose(xid, tcon, fid.netfid);
+	}
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+do_rename_exit:
+	if (rc == 0)
+		d_move(from_dentry, to_dentry);
+	cifs_put_tlink(tlink);
+	return rc;
+}
+
+int
+cifs_rename2(struct mnt_idmap *idmap, struct inode *source_dir,
+	     struct dentry *source_dentry, struct inode *target_dir,
+	     struct dentry *target_dentry, unsigned int flags)
+{
+	const char *from_name, *to_name;
+	void *page1, *page2;
+	struct cifs_sb_info *cifs_sb;
+	struct tcon_link *tlink;
+	struct cifs_tcon *tcon;
+	unsigned int xid;
+	int rc, tmprc;
+	int retry_count = 0;
+	FILE_UNIX_BASIC_INFO *info_buf_source = NULL;
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	FILE_UNIX_BASIC_INFO *info_buf_target;
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+
+	if (flags & ~RENAME_NOREPLACE)
+		return -EINVAL;
+
+	cifs_sb = CIFS_SB(source_dir->i_sb);
+	if (unlikely(cifs_forced_shutdown(cifs_sb)))
+		return -EIO;
+
+	tlink = cifs_sb_tlink(cifs_sb);
+	if (IS_ERR(tlink))
+		return PTR_ERR(tlink);
+	tcon = tlink_tcon(tlink);
+
+	page1 = alloc_dentry_path();
+	page2 = alloc_dentry_path();
+	xid = get_xid();
+
+	from_name = build_path_from_dentry(source_dentry, page1);
+	if (IS_ERR(from_name)) {
+		rc = PTR_ERR(from_name);
+		goto cifs_rename_exit;
+	}
+
+	to_name = build_path_from_dentry(target_dentry, page2);
+	if (IS_ERR(to_name)) {
+		rc = PTR_ERR(to_name);
+		goto cifs_rename_exit;
+	}
+
+	cifs_close_deferred_file_under_dentry(tcon, from_name);
+	if (d_inode(target_dentry) != NULL) {
+		netfs_wait_for_outstanding_io(d_inode(target_dentry));
+		cifs_close_deferred_file_under_dentry(tcon, to_name);
+	}
+
+	rc = cifs_do_rename(xid, source_dentry, from_name, target_dentry,
+			    to_name);
+
+	if (rc == -EACCES) {
+		while (retry_count < 3) {
+			cifs_close_all_deferred_files(tcon);
+			rc = cifs_do_rename(xid, source_dentry, from_name, target_dentry,
+					    to_name);
+			if (rc != -EACCES)
+				break;
+			retry_count++;
+		}
+	}
+
+	/*
+	 * No-replace is the natural behavior for CIFS, so skip unlink hacks.
+	 */
+	if (flags & RENAME_NOREPLACE)
+		goto cifs_rename_exit;
+
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	if (rc == -EEXIST && tcon->unix_ext) {
+		/*
+		 * Are src and dst hardlinks of same inode? We can only tell
+		 * with unix extensions enabled.
+		 */
+		info_buf_source =
+			kmalloc_array(2, sizeof(FILE_UNIX_BASIC_INFO),
+					GFP_KERNEL);
+		if (info_buf_source == NULL) {
+			rc = -ENOMEM;
+			goto cifs_rename_exit;
+		}
+
+		info_buf_target = info_buf_source + 1;
+		tmprc = CIFSSMBUnixQPathInfo(xid, tcon, from_name,
+					     info_buf_source,
+					     cifs_sb->local_nls,
+					     cifs_remap(cifs_sb));
+		if (tmprc != 0)
+			goto unlink_target;
+
+		tmprc = CIFSSMBUnixQPathInfo(xid, tcon, to_name,
+					     info_buf_target,
+					     cifs_sb->local_nls,
+					     cifs_remap(cifs_sb));
+
+		if (tmprc == 0 && (info_buf_source->UniqueId ==
+				   info_buf_target->UniqueId)) {
+			/* same file, POSIX says that this is a noop */
+			rc = 0;
+			goto cifs_rename_exit;
+		}
+	}
+	/*
+	 * else ... BB we could add the same check for Windows by
+	 * checking the UniqueId via FILE_INTERNAL_INFO
+	 */
+
+unlink_target:
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+
+	/* Try unlinking the target dentry if it's not negative */
+	if (d_really_is_positive(target_dentry) && (rc == -EACCES || rc == -EEXIST)) {
+		if (d_is_dir(target_dentry))
+			tmprc = cifs_rmdir(target_dir, target_dentry);
+		else
+			tmprc = cifs_unlink(target_dir, target_dentry);
+		if (tmprc)
+			goto cifs_rename_exit;
+		rc = cifs_do_rename(xid, source_dentry, from_name,
+				    target_dentry, to_name);
+	}
+
+	/* force revalidate to go get info when needed */
+	CIFS_I(source_dir)->time = CIFS_I(target_dir)->time = 0;
+
+cifs_rename_exit:
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	kfree(info_buf_source);
 	free_dentry_path(page2);
 	free_dentry_path(page1);

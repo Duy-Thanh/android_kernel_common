@@ -13,6 +13,7 @@
  * page size in Android.
  */
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/elf.h>
 #include <linux/fs.h>
 #include <linux/pgsize_migration_inline.h>
@@ -94,4 +95,67 @@ static inline bool is_elf_file(struct file *file)
 	return !memcmp(buf, ELFMAG, SELFMAG);
 }
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/pgsize_migration_inline.h>
+#include <linux/seq_file.h>
+#include <linux/mm.h>
+
+#if PAGE_SIZE == SZ_4K && defined(CONFIG_64BIT)
+extern void vma_set_pad_pages(struct vm_area_struct *vma,
+			      unsigned long nr_pages);
+
+extern unsigned long vma_pad_pages(struct vm_area_struct *vma);
+
+extern void madvise_vma_pad_pages(struct vm_area_struct *vma,
+				  unsigned long start, unsigned long end);
+
+extern void show_map_pad_vma(struct vm_area_struct *vma,
+			     struct seq_file *m, void *func, bool smaps);
+
+extern void split_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *new,
+			  unsigned long addr, int new_below);
+
+extern bool is_mergable_pad_vma(struct vm_area_struct *vma,
+				unsigned long vm_flags);
+
+extern unsigned long vma_data_pages(struct vm_area_struct *vma);
+#else /* PAGE_SIZE != SZ_4K || !defined(CONFIG_64BIT) */
+static inline void vma_set_pad_pages(struct vm_area_struct *vma,
+				     unsigned long nr_pages)
+{
+}
+
+static inline unsigned long vma_pad_pages(struct vm_area_struct *vma)
+{
+	return 0;
+}
+
+static inline void madvise_vma_pad_pages(struct vm_area_struct *vma,
+					 unsigned long start, unsigned long end)
+{
+}
+
+static inline void show_map_pad_vma(struct vm_area_struct *vma,
+				    struct seq_file *m, void *func, bool smaps)
+{
+}
+
+static inline void split_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *new,
+				 unsigned long addr, int new_below)
+{
+}
+
+static inline bool is_mergable_pad_vma(struct vm_area_struct *vma,
+				       unsigned long vm_flags)
+{
+	return true;
+}
+
+static inline unsigned long vma_data_pages(struct vm_area_struct *vma)
+{
+	return vma_pages(vma);
+}
+#endif /* PAGE_SIZE == SZ_4K && defined(CONFIG_64BIT) */
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #endif /* _LINUX_PAGE_SIZE_MIGRATION_H */

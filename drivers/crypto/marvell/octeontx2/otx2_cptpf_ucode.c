@@ -1490,6 +1490,7 @@ int otx2_cpt_discover_eng_capabilities(struct otx2_cptpf_dev *cptpf)
 	union otx2_cpt_opcode opcode;
 	union otx2_cpt_res_s *result;
 	union otx2_cpt_inst_s inst;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	dma_addr_t result_baddr;
 	dma_addr_t rptr_baddr;
 	struct pci_dev *pdev;
@@ -1586,6 +1587,86 @@ error_no_response:
 	dma_unmap_single(&pdev->dev, rptr_baddr, len, DMA_BIDIRECTIONAL);
 free_rptr:
 	kfree(base);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	dma_addr_t rptr_baddr;
+	struct pci_dev *pdev;
+	u32 len, compl_rlen;
+	int ret, etype;
+	void *rptr;
+
+	/*
+	 * We don't get capabilities if it was already done
+	 * (when user enabled VFs for the first time)
+	 */
+	if (cptpf->is_eng_caps_discovered)
+		return 0;
+
+	pdev = cptpf->pdev;
+	/*
+	 * Create engine groups for each type to submit LOAD_FVC op and
+	 * get engine's capabilities.
+	 */
+	ret = create_eng_caps_discovery_grps(pdev, &cptpf->eng_grps);
+	if (ret)
+		goto delete_grps;
+
+	otx2_cptlf_set_dev_info(lfs, cptpf->pdev, cptpf->reg_base,
+				&cptpf->afpf_mbox, BLKADDR_CPT0);
+	ret = otx2_cptlf_init(lfs, OTX2_CPT_ALL_ENG_GRPS_MASK,
+			      OTX2_CPT_QUEUE_HI_PRIO, 1);
+	if (ret)
+		goto delete_grps;
+
+	compl_rlen = ALIGN(sizeof(union otx2_cpt_res_s), OTX2_CPT_DMA_MINALIGN);
+	len = compl_rlen + LOADFVC_RLEN;
+
+	result = kzalloc(len, GFP_KERNEL);
+	if (!result) {
+		ret = -ENOMEM;
+		goto lf_cleanup;
+	}
+	rptr_baddr = dma_map_single(&pdev->dev, (void *)result, len,
+				    DMA_BIDIRECTIONAL);
+	if (dma_mapping_error(&pdev->dev, rptr_baddr)) {
+		dev_err(&pdev->dev, "DMA mapping failed\n");
+		ret = -EFAULT;
+		goto free_result;
+	}
+	rptr = (u8 *)result + compl_rlen;
+
+	/* Fill in the command */
+	opcode.s.major = LOADFVC_MAJOR_OP;
+	opcode.s.minor = LOADFVC_MINOR_OP;
+
+	iq_cmd.cmd.u = 0;
+	iq_cmd.cmd.s.opcode = cpu_to_be16(opcode.flags);
+
+	/* 64-bit swap for microcode data reads, not needed for addresses */
+	cpu_to_be64s(&iq_cmd.cmd.u);
+	iq_cmd.dptr = 0;
+	iq_cmd.rptr = rptr_baddr + compl_rlen;
+	iq_cmd.cptr.u = 0;
+
+	for (etype = 1; etype < OTX2_CPT_MAX_ENG_TYPES; etype++) {
+		result->s.compcode = OTX2_CPT_COMPLETION_CODE_INIT;
+		iq_cmd.cptr.s.grp = otx2_cpt_get_eng_grp(&cptpf->eng_grps,
+							 etype);
+		otx2_cpt_fill_inst(&inst, &iq_cmd, rptr_baddr);
+		lfs->ops->send_cmd(&inst, 1, &cptpf->lfs.lf[0]);
+
+		while (lfs->ops->cpt_get_compcode(result) ==
+						OTX2_CPT_COMPLETION_CODE_INIT)
+			cpu_relax();
+
+		cptpf->eng_caps[etype].u = be64_to_cpup(rptr);
+	}
+	dma_unmap_single(&pdev->dev, rptr_baddr, len, DMA_BIDIRECTIONAL);
+	cptpf->is_eng_caps_discovered = true;
+
+free_result:
+	kfree(result);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 lf_cleanup:
 	otx2_cptlf_shutdown(lfs);
 delete_grps:

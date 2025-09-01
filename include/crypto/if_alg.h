@@ -135,6 +135,7 @@ struct af_alg_async_req {
  *			SG?
  * @enc:		Cryptographic operation to be performed when
  *			recvmsg is invoked.
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @write:		True if we are in the middle of a write.
  * @init:		True if metadata has been sent.
  * @len:		Length of memory allocated for this data structure.
@@ -157,6 +158,29 @@ struct af_alg_ctx {
 			enc:1,
 			write:1,
 			init:1;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * @init:		True if metadata has been sent.
+ * @len:		Length of memory allocated for this data structure.
+ * @inflight:		Non-zero when AIO requests are in flight.
+ */
+struct af_alg_ctx {
+	struct list_head tsgl_list;
+
+	void *iv;
+	void *state;
+	size_t aead_assoclen;
+
+	struct crypto_wait wait;
+
+	size_t used;
+	atomic_t rcvused;
+
+	bool more;
+	bool merge;
+	bool enc;
+	bool init;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	unsigned int len;
 

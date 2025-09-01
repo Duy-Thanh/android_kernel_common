@@ -10358,6 +10358,7 @@ struct mlx5_ifc_pifr_reg_bits {
 	u8         port_filter_update_en[8][0x20];
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 enum {
 	MLX5_BUF_OWNERSHIP_UNKNOWN	= 0x0,
 	MLX5_BUF_OWNERSHIP_FW_OWNED	= 0x1,
@@ -10502,6 +10503,143 @@ struct mlx5_ifc_pcam_enhanced_features_bits {
 	u8         reserved_at_49[0xa];
 	u8	   buffer_ownership[0x1];
 	u8	   resereved_at_54[0x14];
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+struct mlx5_ifc_pfcc_reg_bits {
+	u8         reserved_at_0[0x8];
+	u8         local_port[0x8];
+	u8         reserved_at_10[0xb];
+	u8         ppan_mask_n[0x1];
+	u8         minor_stall_mask[0x1];
+	u8         critical_stall_mask[0x1];
+	u8         reserved_at_1e[0x2];
+
+	u8         ppan[0x4];
+	u8         reserved_at_24[0x4];
+	u8         prio_mask_tx[0x8];
+	u8         reserved_at_30[0x8];
+	u8         prio_mask_rx[0x8];
+
+	u8         pptx[0x1];
+	u8         aptx[0x1];
+	u8         pptx_mask_n[0x1];
+	u8         reserved_at_43[0x5];
+	u8         pfctx[0x8];
+	u8         reserved_at_50[0x10];
+
+	u8         pprx[0x1];
+	u8         aprx[0x1];
+	u8         pprx_mask_n[0x1];
+	u8         reserved_at_63[0x5];
+	u8         pfcrx[0x8];
+	u8         reserved_at_70[0x10];
+
+	u8         device_stall_minor_watermark[0x10];
+	u8         device_stall_critical_watermark[0x10];
+
+	u8         reserved_at_a0[0x60];
+};
+
+struct mlx5_ifc_pelc_reg_bits {
+	u8         op[0x4];
+	u8         reserved_at_4[0x4];
+	u8         local_port[0x8];
+	u8         reserved_at_10[0x10];
+
+	u8         op_admin[0x8];
+	u8         op_capability[0x8];
+	u8         op_request[0x8];
+	u8         op_active[0x8];
+
+	u8         admin[0x40];
+
+	u8         capability[0x40];
+
+	u8         request[0x40];
+
+	u8         active[0x40];
+
+	u8         reserved_at_140[0x80];
+};
+
+struct mlx5_ifc_peir_reg_bits {
+	u8         reserved_at_0[0x8];
+	u8         local_port[0x8];
+	u8         reserved_at_10[0x10];
+
+	u8         reserved_at_20[0xc];
+	u8         error_count[0x4];
+	u8         reserved_at_30[0x10];
+
+	u8         reserved_at_40[0xc];
+	u8         lane[0x4];
+	u8         reserved_at_50[0x8];
+	u8         error_type[0x8];
+};
+
+struct mlx5_ifc_mpegc_reg_bits {
+	u8         reserved_at_0[0x30];
+	u8         field_select[0x10];
+
+	u8         tx_overflow_sense[0x1];
+	u8         mark_cqe[0x1];
+	u8         mark_cnp[0x1];
+	u8         reserved_at_43[0x1b];
+	u8         tx_lossy_overflow_oper[0x2];
+
+	u8         reserved_at_60[0x100];
+};
+
+struct mlx5_ifc_mpir_reg_bits {
+	u8         sdm[0x1];
+	u8         reserved_at_1[0x1b];
+	u8         host_buses[0x4];
+
+	u8         reserved_at_20[0x20];
+
+	u8         local_port[0x8];
+	u8         reserved_at_28[0x18];
+
+	u8         reserved_at_60[0x20];
+};
+
+enum {
+	MLX5_MTUTC_FREQ_ADJ_UNITS_PPB          = 0x0,
+	MLX5_MTUTC_FREQ_ADJ_UNITS_SCALED_PPM   = 0x1,
+};
+
+enum {
+	MLX5_MTUTC_OPERATION_SET_TIME_IMMEDIATE   = 0x1,
+	MLX5_MTUTC_OPERATION_ADJUST_TIME          = 0x2,
+	MLX5_MTUTC_OPERATION_ADJUST_FREQ_UTC      = 0x3,
+};
+
+struct mlx5_ifc_mtutc_reg_bits {
+	u8         reserved_at_0[0x5];
+	u8         freq_adj_units[0x3];
+	u8         reserved_at_8[0x3];
+	u8         log_max_freq_adjustment[0x5];
+
+	u8         reserved_at_10[0xc];
+	u8         operation[0x4];
+
+	u8         freq_adjustment[0x20];
+
+	u8         reserved_at_40[0x40];
+
+	u8         utc_sec[0x20];
+
+	u8         reserved_at_a0[0x2];
+	u8         utc_nsec[0x1e];
+
+	u8         time_adjustment[0x20];
+};
+
+struct mlx5_ifc_pcam_enhanced_features_bits {
+	u8         reserved_at_0[0x48];
+	u8         fec_100G_per_lane_in_pplm[0x1];
+	u8         reserved_at_49[0x1f];
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	u8         fec_50G_per_lane_in_pplm[0x1];
 	u8         reserved_at_69[0x4];
 	u8         rx_icrc_encapsulated_counter[0x1];

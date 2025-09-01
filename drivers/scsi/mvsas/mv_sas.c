@@ -828,6 +828,7 @@ err_out:
 	dev_printk(KERN_ERR, mvi->dev, "mvsas prep failed[%d]!\n", rc);
 	if (!sas_protocol_ata(task->task_proto))
 		if (n_elem)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			dma_unmap_sg(mvi->dev, task->scatter, task->num_scatter,
 				     task->data_dir);
 prep_out:
@@ -875,6 +876,56 @@ static void mvs_slot_task_free(struct mvs_info *mvi, struct sas_task *task,
 		if (slot->n_elem)
 			dma_unmap_sg(mvi->dev, task->scatter,
 				     task->num_scatter, task->data_dir);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			dma_unmap_sg(mvi->dev, task->scatter, n_elem,
+				     task->data_dir);
+prep_out:
+	return rc;
+}
+
+int mvs_queue_command(struct sas_task *task, gfp_t gfp_flags)
+{
+	struct mvs_info *mvi = NULL;
+	u32 rc = 0;
+	u32 pass = 0;
+	unsigned long flags = 0;
+	struct sas_tmf_task *tmf = task->tmf;
+	int is_tmf = !!task->tmf;
+
+	mvi = ((struct mvs_device *)task->dev->lldd_dev)->mvi_info;
+
+	spin_lock_irqsave(&mvi->lock, flags);
+	rc = mvs_task_prep(task, mvi, is_tmf, tmf, &pass);
+	if (rc)
+		dev_printk(KERN_ERR, mvi->dev, "mvsas exec failed[%d]!\n", rc);
+
+	if (likely(pass))
+			MVS_CHIP_DISP->start_delivery(mvi, (mvi->tx_prod - 1) &
+				(MVS_CHIP_SLOT_SZ - 1));
+	spin_unlock_irqrestore(&mvi->lock, flags);
+
+	return rc;
+}
+
+static void mvs_slot_free(struct mvs_info *mvi, u32 rx_desc)
+{
+	u32 slot_idx = rx_desc & RXQ_SLOT_MASK;
+	mvs_tag_free(mvi, slot_idx);
+}
+
+static void mvs_slot_task_free(struct mvs_info *mvi, struct sas_task *task,
+			  struct mvs_slot_info *slot, u32 slot_idx)
+{
+	if (!slot)
+		return;
+	if (!slot->task)
+		return;
+	if (!sas_protocol_ata(task->task_proto))
+		if (slot->n_elem)
+			dma_unmap_sg(mvi->dev, task->scatter,
+				     slot->n_elem, task->data_dir);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	switch (task->task_proto) {
 	case SAS_PROTOCOL_SMP:

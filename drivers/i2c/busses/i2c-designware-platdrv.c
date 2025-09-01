@@ -101,6 +101,7 @@ static int bt1_i2c_request_regs(struct dw_i2c_dev *dev)
 }
 #endif
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int dw_i2c_get_parent_regmap(struct dw_i2c_dev *dev)
 {
 	dev->map = dev_get_regmap(dev->dev->parent, NULL);
@@ -132,6 +133,37 @@ static int dw_i2c_plat_request_regs(struct dw_i2c_dev *dev)
 		break;
 	case MODEL_WANGXUN_SP:
 		ret = dw_i2c_get_parent_regmap(dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int txgbe_i2c_request_regs(struct dw_i2c_dev *dev)
+{
+	dev->map = dev_get_regmap(dev->dev->parent, NULL);
+	if (!dev->map)
+		return -ENODEV;
+
+	return 0;
+}
+
+static void dw_i2c_plat_pm_cleanup(struct dw_i2c_dev *dev)
+{
+	pm_runtime_disable(dev->dev);
+
+	if (dev->shared_with_punit)
+		pm_runtime_put_noidle(dev->dev);
+}
+
+static int dw_i2c_plat_request_regs(struct dw_i2c_dev *dev)
+{
+	struct platform_device *pdev = to_platform_device(dev->dev);
+	int ret;
+
+	switch (dev->flags & MODEL_MASK) {
+	case MODEL_BAIKAL_BT1:
+		ret = bt1_i2c_request_regs(dev);
+		break;
+	case MODEL_WANGXUN_SP:
+		ret = txgbe_i2c_request_regs(dev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		break;
 	default:
 		dev->base = devm_platform_ioremap_resource(pdev, 0);

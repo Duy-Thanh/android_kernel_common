@@ -272,6 +272,7 @@ static int port_update_shared_buffer(struct mlx5_core_dev *mdev,
 	/* Total shared buffer size is split in a ratio of 3:1 between
 	 * lossy and lossless pools respectively.
 	 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	lossless_ipool_size = shared_buffer_size / 4;
 	lossy_epool_size    = shared_buffer_size - lossless_ipool_size;
 
@@ -584,6 +585,319 @@ int mlx5e_port_manual_buffer_config(struct mlx5e_priv *priv,
 	}
 
 	priv->dcbx.xoff = xoff;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	lossy_epool_size = (shared_buffer_size / 4) * 3;
+	lossless_ipool_size = shared_buffer_size / 4;
+
+	mlx5e_port_set_sbpr(mdev, 0, MLX5_EGRESS_DIR, MLX5_LOSSY_POOL, 0,
+			    lossy_epool_size);
+	mlx5e_port_set_sbpr(mdev, 0, MLX5_INGRESS_DIR, MLX5_LOSSLESS_POOL, 0,
+			    lossless_ipool_size);
+	return 0;
+}
+
+static int port_set_buffer(struct mlx5e_priv *priv,
+			   struct mlx5e_port_buffer *port_buffer)
+{
+	u16 port_buff_cell_sz = priv->dcbx.port_buff_cell_sz;
+	struct mlx5_core_dev *mdev = priv->mdev;
+	int sz = MLX5_ST_SZ_BYTES(pbmc_reg);
+	u32 new_headroom_size = 0;
+	u32 current_headroom_size;
+	void *in;
+	int err;
+	int i;
+
+	current_headroom_size = port_buffer->headroom_size;
+
+	in = kzalloc(sz, GFP_KERNEL);
+	if (!in)
+		return -ENOMEM;
+
+	err = mlx5e_port_query_pbmc(mdev, in);
+	if (err)
+		goto out;
+
+	for (i = 0; i < MLX5E_MAX_NETWORK_BUFFER; i++) {
+		void *buffer = MLX5_ADDR_OF(pbmc_reg, in, buffer[i]);
+		u64 size = port_buffer->buffer[i].size;
+		u64 xoff = port_buffer->buffer[i].xoff;
+		u64 xon = port_buffer->buffer[i].xon;
+
+		new_headroom_size += size;
+		do_div(size, port_buff_cell_sz);
+		do_div(xoff, port_buff_cell_sz);
+		do_div(xon, port_buff_cell_sz);
+		MLX5_SET(bufferx_reg, buffer, size, size);
+		MLX5_SET(bufferx_reg, buffer, lossy, port_buffer->buffer[i].lossy);
+		MLX5_SET(bufferx_reg, buffer, xoff_threshold, xoff);
+		MLX5_SET(bufferx_reg, buffer, xon_threshold, xon);
+	}
+
+	new_headroom_size /= port_buff_cell_sz;
+	current_headroom_size /= port_buff_cell_sz;
+	err = port_update_shared_buffer(priv->mdev, current_headroom_size,
+					new_headroom_size);
+	if (err)
+		goto out;
+
+	err = port_update_pool_cfg(priv->mdev, port_buffer);
+	if (err)
+		goto out;
+
+	err = mlx5e_port_set_pbmc(mdev, in);
+out:
+	kfree(in);
+	return err;
+}
+
+/* xoff = ((301+2.16 * len [m]) * speed [Gbps] + 2.72 MTU [B])
+ * minimum speed value is 40Gbps
+ */
+static u32 calculate_xoff(struct mlx5e_priv *priv, unsigned int mtu)
+{
+	u32 speed;
+	u32 xoff;
+	int err;
+
+	err = mlx5e_port_linkspeed(priv->mdev, &speed);
+	if (err)
+		speed = SPEED_40000;
+	speed = max_t(u32, speed, SPEED_40000);
+
+	xoff = (301 + 216 * priv->dcbx.cable_len / 100) * speed / 1000 + 272 * mtu / 100;
+
+	netdev_dbg(priv->netdev, "%s: xoff=%d\n", __func__, xoff);
+	return xoff;
+}
+
+static int update_xoff_threshold(struct mlx5e_port_buffer *port_buffer,
+				 u32 xoff, unsigned int max_mtu, u16 port_buff_cell_sz)
+{
+	int i;
+
+	for (i = 0; i < MLX5E_MAX_NETWORK_BUFFER; i++) {
+		if (port_buffer->buffer[i].lossy) {
+			port_buffer->buffer[i].xoff = 0;
+			port_buffer->buffer[i].xon  = 0;
+			continue;
+		}
+
+		if (port_buffer->buffer[i].size <
+		    (xoff + max_mtu + port_buff_cell_sz)) {
+			pr_err("buffer_size[%d]=%d is not enough for lossless buffer\n",
+			       i, port_buffer->buffer[i].size);
+			return -ENOMEM;
+		}
+
+		port_buffer->buffer[i].xoff = port_buffer->buffer[i].size - xoff;
+		port_buffer->buffer[i].xon  =
+			port_buffer->buffer[i].xoff - max_mtu;
+	}
+
+	return 0;
+}
+
+/**
+ *	update_buffer_lossy	- Update buffer configuration based on pfc
+ *	@mdev: port function core device
+ *	@max_mtu: netdev's max_mtu
+ *	@pfc_en: <input> current pfc configuration
+ *	@buffer: <input> current prio to buffer mapping
+ *	@xoff:   <input> xoff value
+ *	@port_buff_cell_sz: <input> port buffer cell_size
+ *	@port_buffer: <output> port receive buffer configuration
+ *	@change: <output>
+ *
+ *	Update buffer configuration based on pfc configuration and
+ *	priority to buffer mapping.
+ *	Buffer's lossy bit is changed to:
+ *		lossless if there is at least one PFC enabled priority
+ *		mapped to this buffer lossy if all priorities mapped to
+ *		this buffer are PFC disabled
+ *
+ *	@return: 0 if no error,
+ *	sets change to true if buffer configuration was modified.
+ */
+static int update_buffer_lossy(struct mlx5_core_dev *mdev,
+			       unsigned int max_mtu,
+			       u8 pfc_en, u8 *buffer, u32 xoff, u16 port_buff_cell_sz,
+			       struct mlx5e_port_buffer *port_buffer,
+			       bool *change)
+{
+	bool changed = false;
+	u8 lossy_count;
+	u8 prio_count;
+	u8 lossy;
+	int prio;
+	int err;
+	int i;
+
+	for (i = 0; i < MLX5E_MAX_NETWORK_BUFFER; i++) {
+		prio_count = 0;
+		lossy_count = 0;
+
+		for (prio = 0; prio < MLX5E_MAX_PRIORITY; prio++) {
+			if (buffer[prio] != i)
+				continue;
+
+			prio_count++;
+			lossy_count += !(pfc_en & (1 << prio));
+		}
+
+		if (lossy_count == prio_count)
+			lossy = 1;
+		else /* lossy_count < prio_count */
+			lossy = 0;
+
+		if (lossy != port_buffer->buffer[i].lossy) {
+			port_buffer->buffer[i].lossy = lossy;
+			changed = true;
+		}
+	}
+
+	if (changed) {
+		err = update_xoff_threshold(port_buffer, xoff, max_mtu, port_buff_cell_sz);
+		if (err)
+			return err;
+
+		err = port_update_pool_cfg(mdev, port_buffer);
+		if (err)
+			return err;
+
+		*change = true;
+	}
+
+	return 0;
+}
+
+static int fill_pfc_en(struct mlx5_core_dev *mdev, u8 *pfc_en)
+{
+	u32 g_rx_pause, g_tx_pause;
+	int err;
+
+	err = mlx5_query_port_pause(mdev, &g_rx_pause, &g_tx_pause);
+	if (err)
+		return err;
+
+	/* If global pause enabled, set all active buffers to lossless.
+	 * Otherwise, check PFC setting.
+	 */
+	if (g_rx_pause || g_tx_pause)
+		*pfc_en = 0xff;
+	else
+		err = mlx5_query_port_pfc(mdev, pfc_en, NULL);
+
+	return err;
+}
+
+#define MINIMUM_MAX_MTU 9216
+int mlx5e_port_manual_buffer_config(struct mlx5e_priv *priv,
+				    u32 change, unsigned int mtu,
+				    struct ieee_pfc *pfc,
+				    u32 *buffer_size,
+				    u8 *prio2buffer)
+{
+	u16 port_buff_cell_sz = priv->dcbx.port_buff_cell_sz;
+	struct net_device *netdev = priv->netdev;
+	struct mlx5e_port_buffer port_buffer;
+	u32 xoff = calculate_xoff(priv, mtu);
+	bool update_prio2buffer = false;
+	u8 buffer[MLX5E_MAX_PRIORITY];
+	bool update_buffer = false;
+	unsigned int max_mtu;
+	u32 total_used = 0;
+	u8 curr_pfc_en;
+	int err;
+	int i;
+
+	netdev_dbg(netdev, "%s: change=%x\n", __func__, change);
+	max_mtu = max_t(unsigned int, priv->netdev->max_mtu, MINIMUM_MAX_MTU);
+
+	err = mlx5e_port_query_buffer(priv, &port_buffer);
+	if (err)
+		return err;
+
+	if (change & MLX5E_PORT_BUFFER_CABLE_LEN) {
+		update_buffer = true;
+		err = update_xoff_threshold(&port_buffer, xoff, max_mtu, port_buff_cell_sz);
+		if (err)
+			return err;
+	}
+
+	if (change & MLX5E_PORT_BUFFER_PFC) {
+		netdev_dbg(netdev, "%s: requested PFC per priority bitmask: 0x%x\n",
+			   __func__, pfc->pfc_en);
+		err = mlx5e_port_query_priority2buffer(priv->mdev, buffer);
+		if (err)
+			return err;
+
+		err = update_buffer_lossy(priv->mdev, max_mtu, pfc->pfc_en, buffer, xoff,
+					  port_buff_cell_sz, &port_buffer,
+					  &update_buffer);
+		if (err)
+			return err;
+	}
+
+	if (change & MLX5E_PORT_BUFFER_PRIO2BUFFER) {
+		update_prio2buffer = true;
+		for (i = 0; i < MLX5E_MAX_NETWORK_BUFFER; i++)
+			netdev_dbg(priv->netdev, "%s: requested to map prio[%d] to buffer %d\n",
+				   __func__, i, prio2buffer[i]);
+
+		err = fill_pfc_en(priv->mdev, &curr_pfc_en);
+		if (err)
+			return err;
+
+		err = update_buffer_lossy(priv->mdev, max_mtu, curr_pfc_en, prio2buffer, xoff,
+					  port_buff_cell_sz, &port_buffer, &update_buffer);
+		if (err)
+			return err;
+	}
+
+	if (change & MLX5E_PORT_BUFFER_SIZE) {
+		for (i = 0; i < MLX5E_MAX_NETWORK_BUFFER; i++) {
+			netdev_dbg(priv->netdev, "%s: buffer[%d]=%d\n", __func__, i, buffer_size[i]);
+			if (!port_buffer.buffer[i].lossy && !buffer_size[i]) {
+				netdev_dbg(priv->netdev, "%s: lossless buffer[%d] size cannot be zero\n",
+					   __func__, i);
+				return -EINVAL;
+			}
+
+			port_buffer.buffer[i].size = buffer_size[i];
+			total_used += buffer_size[i];
+		}
+
+		netdev_dbg(priv->netdev, "%s: total buffer requested=%d\n", __func__, total_used);
+
+		if (total_used > port_buffer.headroom_size &&
+		    (total_used - port_buffer.headroom_size) >
+			    port_buffer.spare_buffer_size)
+			return -EINVAL;
+
+		update_buffer = true;
+		err = update_xoff_threshold(&port_buffer, xoff, max_mtu, port_buff_cell_sz);
+		if (err)
+			return err;
+	}
+
+	/* Need to update buffer configuration if xoff value is changed */
+	if (!update_buffer && xoff != priv->dcbx.xoff) {
+		update_buffer = true;
+		err = update_xoff_threshold(&port_buffer, xoff, max_mtu, port_buff_cell_sz);
+		if (err)
+			return err;
+	}
+	priv->dcbx.xoff = xoff;
+
+	/* Apply the settings */
+	if (update_buffer) {
+		err = port_set_buffer(priv, &port_buffer);
+		if (err)
+			return err;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (update_prio2buffer)
 		err = mlx5e_port_set_priority2buffer(priv->mdev, prio2buffer);

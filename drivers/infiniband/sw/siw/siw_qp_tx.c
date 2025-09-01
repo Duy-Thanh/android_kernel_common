@@ -334,6 +334,7 @@ static int siw_tcp_sendpages(struct socket *s, struct page **page, int offset,
 		if (!sendpage_ok(page[i]))
 			msg.msg_flags &= ~MSG_SPLICE_PAGES;
 		bvec_set_page(&bvec, page[i], bytes, offset);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		iov_iter_bvec(&msg.msg_iter, ITER_SOURCE, &bvec, 1, bytes);
 
 try_page_again:
@@ -345,6 +346,21 @@ try_page_again:
 			size -= rv;
 			sent += rv;
 			if (rv != bytes) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		iov_iter_bvec(&msg.msg_iter, ITER_SOURCE, &bvec, 1, size);
+
+try_page_again:
+		lock_sock(sk);
+		rv = tcp_sendmsg_locked(sk, &msg, size);
+		release_sock(sk);
+
+		if (rv > 0) {
+			size -= rv;
+			sent += rv;
+			if (rv != bytes) {
+				offset += rv;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				bytes -= rv;
 				goto try_page_again;
 			}

@@ -1182,6 +1182,7 @@ static int enetc_pf_register_with_ierb(struct pci_dev *pdev)
 {
 	struct platform_device *ierb_pdev;
 	struct device_node *ierb_node;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int ret;
 
 	ierb_node = of_find_compatible_node(NULL, NULL,
@@ -1205,6 +1206,22 @@ static int enetc_pf_register_with_ierb(struct pci_dev *pdev)
 	put_device(&ierb_pdev->dev);
 
 	return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	ierb_node = of_find_compatible_node(NULL, NULL,
+					    "fsl,ls1028a-enetc-ierb");
+	if (!ierb_node || !of_device_is_available(ierb_node))
+		return -ENODEV;
+
+	ierb_pdev = of_find_device_by_node(ierb_node);
+	of_node_put(ierb_node);
+
+	if (!ierb_pdev)
+		return -EPROBE_DEFER;
+
+	return enetc_ierb_register_pf(ierb_pdev, pdev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static struct enetc_si *enetc_psi_create(struct pci_dev *pdev)

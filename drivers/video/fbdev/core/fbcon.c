@@ -826,6 +826,7 @@ static void con2fb_init_display(struct vc_data *vc, struct fb_info *info,
 				   fg_vc->vc_rows);
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (fg_console != unit)
 		update_screen(vc_cons[fg_console].d);
 }
@@ -2529,6 +2530,1704 @@ static int fbcon_set_font(struct vc_data *vc, const struct console_font *font,
 		return -EINVAL;
 
 	new_data = kmalloc(alloc_size, GFP_USER);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	update_screen(vc_cons[fg_console].d);
+}
+
+/**
+ *	set_con2fb_map - map console to frame buffer device
+ *	@unit: virtual console number to map
+ *	@newidx: frame buffer index to map virtual console to
+ *      @user: user request
+ *
+ *	Maps a virtual console @unit to a frame buffer device
+ *	@newidx.
+ *
+ *	This should be called with the console lock held.
+ */
+static int set_con2fb_map(int unit, int newidx, int user)
+{
+	struct vc_data *vc = vc_cons[unit].d;
+	int oldidx = con2fb_map[unit];
+	struct fb_info *info = fbcon_registered_fb[newidx];
+	struct fb_info *oldinfo = NULL;
+	int err = 0, show_logo;
+
+	WARN_CONSOLE_UNLOCKED();
+
+	if (oldidx == newidx)
+		return 0;
+
+	if (!info)
+		return -EINVAL;
+
+	if (!search_for_mapped_con() || !con_is_bound(&fb_con)) {
+		info_idx = newidx;
+		return do_fbcon_takeover(0);
+	}
+
+	if (oldidx != -1)
+		oldinfo = fbcon_registered_fb[oldidx];
+
+	if (!search_fb_in_map(newidx)) {
+		err = con2fb_acquire_newinfo(vc, info, unit);
+		if (err)
+			return err;
+
+		fbcon_add_cursor_work(info);
+	} else if (vc) {
+		set_blitting_type(vc, info);
+	}
+
+	con2fb_map[unit] = newidx;
+
+	/*
+	 * If old fb is not mapped to any of the consoles,
+	 * fbcon should release it.
+	 */
+	if (oldinfo && !search_fb_in_map(oldidx))
+		con2fb_release_oldinfo(vc, oldinfo, info);
+
+	show_logo = (fg_console == 0 && !user &&
+			 logo_shown != FBCON_LOGO_DONTSHOW);
+
+	con2fb_map_boot[unit] = newidx;
+	con2fb_init_display(vc, info, unit, show_logo);
+
+	if (!search_fb_in_map(info_idx))
+		info_idx = newidx;
+
+	return err;
+}
+
+/*
+ *  Low Level Operations
+ */
+/* NOTE: fbcon cannot be __init: it may be called from do_take_over_console later */
+static int var_to_display(struct fbcon_display *disp,
+			  struct fb_var_screeninfo *var,
+			  struct fb_info *info)
+{
+	disp->xres_virtual = var->xres_virtual;
+	disp->yres_virtual = var->yres_virtual;
+	disp->bits_per_pixel = var->bits_per_pixel;
+	disp->grayscale = var->grayscale;
+	disp->nonstd = var->nonstd;
+	disp->accel_flags = var->accel_flags;
+	disp->height = var->height;
+	disp->width = var->width;
+	disp->red = var->red;
+	disp->green = var->green;
+	disp->blue = var->blue;
+	disp->transp = var->transp;
+	disp->rotate = var->rotate;
+	disp->mode = fb_match_mode(var, &info->modelist);
+	if (disp->mode == NULL)
+		/* This should not happen */
+		return -EINVAL;
+	return 0;
+}
+
+static void display_to_var(struct fb_var_screeninfo *var,
+			   struct fbcon_display *disp)
+{
+	fb_videomode_to_var(var, disp->mode);
+	var->xres_virtual = disp->xres_virtual;
+	var->yres_virtual = disp->yres_virtual;
+	var->bits_per_pixel = disp->bits_per_pixel;
+	var->grayscale = disp->grayscale;
+	var->nonstd = disp->nonstd;
+	var->accel_flags = disp->accel_flags;
+	var->height = disp->height;
+	var->width = disp->width;
+	var->red = disp->red;
+	var->green = disp->green;
+	var->blue = disp->blue;
+	var->transp = disp->transp;
+	var->rotate = disp->rotate;
+}
+
+static const char *fbcon_startup(void)
+{
+	static const char display_desc[] = "frame buffer device";
+	struct fbcon_display *p = &fb_display[fg_console];
+	struct vc_data *vc = vc_cons[fg_console].d;
+	const struct font_desc *font = NULL;
+	struct fb_info *info = NULL;
+	struct fbcon_ops *ops;
+	int rows, cols;
+
+	/*
+	 *  If num_registered_fb is zero, this is a call for the dummy part.
+	 *  The frame buffer devices weren't initialized yet.
+	 */
+	if (!fbcon_num_registered_fb || info_idx == -1)
+		return display_desc;
+	/*
+	 * Instead of blindly using registered_fb[0], we use info_idx, set by
+	 * fbcon_fb_registered();
+	 */
+	info = fbcon_registered_fb[info_idx];
+	if (!info)
+		return NULL;
+
+	if (fbcon_open(info))
+		return NULL;
+
+	ops = info->fbcon_par;
+	ops->currcon = -1;
+	ops->graphics = 1;
+	ops->cur_rotate = -1;
+
+	p->con_rotate = initial_rotation;
+	if (p->con_rotate == -1)
+		p->con_rotate = info->fbcon_rotate_hint;
+	if (p->con_rotate == -1)
+		p->con_rotate = FB_ROTATE_UR;
+
+	set_blitting_type(vc, info);
+
+	/* Setup default font */
+	if (!p->fontdata) {
+		if (!fontname[0] || !(font = find_font(fontname)))
+			font = get_default_font(info->var.xres,
+						info->var.yres,
+						info->pixmap.blit_x,
+						info->pixmap.blit_y);
+		vc->vc_font.width = font->width;
+		vc->vc_font.height = font->height;
+		vc->vc_font.data = (void *)(p->fontdata = font->data);
+		vc->vc_font.charcount = font->charcount;
+	}
+
+	cols = FBCON_SWAP(ops->rotate, info->var.xres, info->var.yres);
+	rows = FBCON_SWAP(ops->rotate, info->var.yres, info->var.xres);
+	cols /= vc->vc_font.width;
+	rows /= vc->vc_font.height;
+	vc_resize(vc, cols, rows);
+
+	pr_debug("mode:   %s\n", info->fix.id);
+	pr_debug("visual: %d\n", info->fix.visual);
+	pr_debug("res:    %dx%d-%d\n", info->var.xres,
+		 info->var.yres,
+		 info->var.bits_per_pixel);
+
+	fbcon_add_cursor_work(info);
+	return display_desc;
+}
+
+static void fbcon_init(struct vc_data *vc, bool init)
+{
+	struct fb_info *info;
+	struct fbcon_ops *ops;
+	struct vc_data **default_mode = vc->vc_display_fg;
+	struct vc_data *svc = *default_mode;
+	struct fbcon_display *t, *p = &fb_display[vc->vc_num];
+	int logo = 1, new_rows, new_cols, rows, cols;
+	int ret;
+
+	if (WARN_ON(info_idx == -1))
+	    return;
+
+	if (con2fb_map[vc->vc_num] == -1)
+		con2fb_map[vc->vc_num] = info_idx;
+
+	info = fbcon_info_from_console(vc->vc_num);
+
+	if (logo_shown < 0 && console_loglevel <= CONSOLE_LOGLEVEL_QUIET)
+		logo_shown = FBCON_LOGO_DONTSHOW;
+
+	if (vc != svc || logo_shown == FBCON_LOGO_DONTSHOW ||
+	    (info->fix.type == FB_TYPE_TEXT))
+		logo = 0;
+
+	if (var_to_display(p, &info->var, info))
+		return;
+
+	if (!info->fbcon_par)
+		con2fb_acquire_newinfo(vc, info, vc->vc_num);
+
+	/* If we are not the first console on this
+	   fb, copy the font from that console */
+	t = &fb_display[fg_console];
+	if (!p->fontdata) {
+		if (t->fontdata) {
+			struct vc_data *fvc = vc_cons[fg_console].d;
+
+			vc->vc_font.data = (void *)(p->fontdata =
+						    fvc->vc_font.data);
+			vc->vc_font.width = fvc->vc_font.width;
+			vc->vc_font.height = fvc->vc_font.height;
+			vc->vc_font.charcount = fvc->vc_font.charcount;
+			p->userfont = t->userfont;
+
+			if (p->userfont)
+				REFCOUNT(p->fontdata)++;
+		} else {
+			const struct font_desc *font = NULL;
+
+			if (!fontname[0] || !(font = find_font(fontname)))
+				font = get_default_font(info->var.xres,
+							info->var.yres,
+							info->pixmap.blit_x,
+							info->pixmap.blit_y);
+			vc->vc_font.width = font->width;
+			vc->vc_font.height = font->height;
+			vc->vc_font.data = (void *)(p->fontdata = font->data);
+			vc->vc_font.charcount = font->charcount;
+		}
+	}
+
+	vc->vc_can_do_color = (fb_get_color_depth(&info->var, &info->fix)!=1);
+	vc->vc_complement_mask = vc->vc_can_do_color ? 0x7700 : 0x0800;
+	if (vc->vc_font.charcount == 256) {
+		vc->vc_hi_font_mask = 0;
+	} else {
+		vc->vc_hi_font_mask = 0x100;
+		if (vc->vc_can_do_color)
+			vc->vc_complement_mask <<= 1;
+	}
+
+	if (!*svc->uni_pagedict_loc)
+		con_set_default_unimap(svc);
+	if (!*vc->uni_pagedict_loc)
+		con_copy_unimap(vc, svc);
+
+	ops = info->fbcon_par;
+	ops->cur_blink_jiffies = msecs_to_jiffies(vc->vc_cur_blink_ms);
+
+	p->con_rotate = initial_rotation;
+	if (p->con_rotate == -1)
+		p->con_rotate = info->fbcon_rotate_hint;
+	if (p->con_rotate == -1)
+		p->con_rotate = FB_ROTATE_UR;
+
+	set_blitting_type(vc, info);
+
+	cols = vc->vc_cols;
+	rows = vc->vc_rows;
+	new_cols = FBCON_SWAP(ops->rotate, info->var.xres, info->var.yres);
+	new_rows = FBCON_SWAP(ops->rotate, info->var.yres, info->var.xres);
+	new_cols /= vc->vc_font.width;
+	new_rows /= vc->vc_font.height;
+
+	/*
+	 * We must always set the mode. The mode of the previous console
+	 * driver could be in the same resolution but we are using different
+	 * hardware so we have to initialize the hardware.
+	 *
+	 * We need to do it in fbcon_init() to prevent screen corruption.
+	 */
+	if (con_is_visible(vc) && vc->vc_mode == KD_TEXT) {
+		if (info->fbops->fb_set_par && !ops->initialized) {
+			ret = info->fbops->fb_set_par(info);
+
+			if (ret)
+				printk(KERN_ERR "fbcon_init: detected "
+					"unhandled fb_set_par error, "
+					"error code %d\n", ret);
+		}
+
+		ops->initialized = true;
+	}
+
+	ops->graphics = 0;
+
+#ifdef CONFIG_FRAMEBUFFER_CONSOLE_LEGACY_ACCELERATION
+	if ((info->flags & FBINFO_HWACCEL_COPYAREA) &&
+	    !(info->flags & FBINFO_HWACCEL_DISABLED))
+		p->scrollmode = SCROLL_MOVE;
+	else /* default to something safe */
+		p->scrollmode = SCROLL_REDRAW;
+#endif
+
+	/*
+	 *  ++guenther: console.c:vc_allocate() relies on initializing
+	 *  vc_{cols,rows}, but we must not set those if we are only
+	 *  resizing the console.
+	 */
+	if (init) {
+		vc->vc_cols = new_cols;
+		vc->vc_rows = new_rows;
+	} else
+		vc_resize(vc, new_cols, new_rows);
+
+	if (logo)
+		fbcon_prepare_logo(vc, info, cols, rows, new_cols, new_rows);
+
+	if (ops->rotate_font && ops->rotate_font(info, vc)) {
+		ops->rotate = FB_ROTATE_UR;
+		set_blitting_type(vc, info);
+	}
+
+	ops->p = &fb_display[fg_console];
+}
+
+static void fbcon_free_font(struct fbcon_display *p)
+{
+	if (p->userfont && p->fontdata && (--REFCOUNT(p->fontdata) == 0))
+		kfree(p->fontdata - FONT_EXTRA_WORDS * sizeof(int));
+	p->fontdata = NULL;
+	p->userfont = 0;
+}
+
+static void set_vc_hi_font(struct vc_data *vc, bool set);
+
+static void fbcon_release_all(void)
+{
+	struct fb_info *info;
+	int i, j, mapped;
+
+	fbcon_for_each_registered_fb(i) {
+		mapped = 0;
+		info = fbcon_registered_fb[i];
+
+		for (j = first_fb_vc; j <= last_fb_vc; j++) {
+			if (con2fb_map[j] == i) {
+				mapped = 1;
+				con2fb_map[j] = -1;
+			}
+		}
+
+		if (mapped)
+			fbcon_release(info);
+	}
+}
+
+static void fbcon_deinit(struct vc_data *vc)
+{
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	struct fb_info *info;
+	struct fbcon_ops *ops;
+	int idx;
+
+	fbcon_free_font(p);
+	idx = con2fb_map[vc->vc_num];
+
+	if (idx == -1)
+		goto finished;
+
+	info = fbcon_registered_fb[idx];
+
+	if (!info)
+		goto finished;
+
+	ops = info->fbcon_par;
+
+	if (!ops)
+		goto finished;
+
+	if (con_is_visible(vc))
+		fbcon_del_cursor_work(info);
+
+	ops->initialized = false;
+finished:
+
+	fbcon_free_font(p);
+	vc->vc_font.data = NULL;
+
+	if (vc->vc_hi_font_mask && vc->vc_screenbuf)
+		set_vc_hi_font(vc, false);
+
+	if (!con_is_bound(&fb_con))
+		fbcon_release_all();
+
+	if (vc->vc_num == logo_shown)
+		logo_shown = FBCON_LOGO_CANSHOW;
+
+	return;
+}
+
+/* ====================================================================== */
+
+/*  fbcon_XXX routines - interface used by the world
+ *
+ *  This system is now divided into two levels because of complications
+ *  caused by hardware scrolling. Top level functions:
+ *
+ *	fbcon_bmove(), fbcon_clear(), fbcon_putc(), fbcon_clear_margins()
+ *
+ *  handles y values in range [0, scr_height-1] that correspond to real
+ *  screen positions. y_wrap shift means that first line of bitmap may be
+ *  anywhere on this display. These functions convert lineoffsets to
+ *  bitmap offsets and deal with the wrap-around case by splitting blits.
+ *
+ *	fbcon_bmove_physical_8()    -- These functions fast implementations
+ *	fbcon_clear_physical_8()    -- of original fbcon_XXX fns.
+ *	fbcon_putc_physical_8()	    -- (font width != 8) may be added later
+ *
+ *  WARNING:
+ *
+ *  At the moment fbcon_putc() cannot blit across vertical wrap boundary
+ *  Implies should only really hardware scroll in rows. Only reason for
+ *  restriction is simplicity & efficiency at the moment.
+ */
+
+static void __fbcon_clear(struct vc_data *vc, unsigned int sy, unsigned int sx,
+			  unsigned int height, unsigned int width)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+	int fg, bg;
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	u_int y_break;
+
+	if (fbcon_is_inactive(vc, info))
+		return;
+
+	if (!height || !width)
+		return;
+
+	if (sy < vc->vc_top && vc->vc_top == logo_lines) {
+		vc->vc_top = 0;
+		/*
+		 * If the font dimensions are not an integral of the display
+		 * dimensions then the ops->clear below won't end up clearing
+		 * the margins.  Call clear_margins here in case the logo
+		 * bitmap stretched into the margin area.
+		 */
+		fbcon_clear_margins(vc, 0);
+	}
+
+	fg = get_color(vc, info, vc->vc_video_erase_char, 1);
+	bg = get_color(vc, info, vc->vc_video_erase_char, 0);
+	/* Split blits that cross physical y_wrap boundary */
+
+	y_break = p->vrows - p->yscroll;
+	if (sy < y_break && sy + height - 1 >= y_break) {
+		u_int b = y_break - sy;
+		ops->clear(vc, info, real_y(p, sy), sx, b, width, fg, bg);
+		ops->clear(vc, info, real_y(p, sy + b), sx, height - b,
+				 width, fg, bg);
+	} else
+		ops->clear(vc, info, real_y(p, sy), sx, height, width, fg, bg);
+}
+
+static void fbcon_clear(struct vc_data *vc, unsigned int sy, unsigned int sx,
+			unsigned int width)
+{
+	__fbcon_clear(vc, sy, sx, 1, width);
+}
+
+static void fbcon_putcs(struct vc_data *vc, const u16 *s, unsigned int count,
+			unsigned int ypos, unsigned int xpos)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	struct fbcon_ops *ops = info->fbcon_par;
+
+	if (!fbcon_is_inactive(vc, info))
+		ops->putcs(vc, info, s, count, real_y(p, ypos), xpos,
+			   get_color(vc, info, scr_readw(s), 1),
+			   get_color(vc, info, scr_readw(s), 0));
+}
+
+static void fbcon_clear_margins(struct vc_data *vc, int bottom_only)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+
+	if (!fbcon_is_inactive(vc, info))
+		ops->clear_margins(vc, info, margin_color, bottom_only);
+}
+
+static void fbcon_cursor(struct vc_data *vc, bool enable)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+ 	int c = scr_readw((u16 *) vc->vc_pos);
+
+	ops->cur_blink_jiffies = msecs_to_jiffies(vc->vc_cur_blink_ms);
+
+	if (fbcon_is_inactive(vc, info) || vc->vc_deccm != 1)
+		return;
+
+	if (vc->vc_cursor_type & CUR_SW)
+		fbcon_del_cursor_work(info);
+	else
+		fbcon_add_cursor_work(info);
+
+	ops->cursor_flash = enable;
+
+	if (!ops->cursor)
+		return;
+
+	ops->cursor(vc, info, enable, get_color(vc, info, c, 1),
+		    get_color(vc, info, c, 0));
+}
+
+static int scrollback_phys_max = 0;
+static int scrollback_max = 0;
+static int scrollback_current = 0;
+
+static void fbcon_set_disp(struct fb_info *info, struct fb_var_screeninfo *var,
+			   int unit)
+{
+	struct fbcon_display *p, *t;
+	struct vc_data **default_mode, *vc;
+	struct vc_data *svc;
+	struct fbcon_ops *ops = info->fbcon_par;
+	int rows, cols;
+
+	p = &fb_display[unit];
+
+	if (var_to_display(p, var, info))
+		return;
+
+	vc = vc_cons[unit].d;
+
+	if (!vc)
+		return;
+
+	default_mode = vc->vc_display_fg;
+	svc = *default_mode;
+	t = &fb_display[svc->vc_num];
+
+	if (!vc->vc_font.data) {
+		vc->vc_font.data = (void *)(p->fontdata = t->fontdata);
+		vc->vc_font.width = (*default_mode)->vc_font.width;
+		vc->vc_font.height = (*default_mode)->vc_font.height;
+		vc->vc_font.charcount = (*default_mode)->vc_font.charcount;
+		p->userfont = t->userfont;
+		if (p->userfont)
+			REFCOUNT(p->fontdata)++;
+	}
+
+	var->activate = FB_ACTIVATE_NOW;
+	info->var.activate = var->activate;
+	var->yoffset = info->var.yoffset;
+	var->xoffset = info->var.xoffset;
+	fb_set_var(info, var);
+	ops->var = info->var;
+	vc->vc_can_do_color = (fb_get_color_depth(&info->var, &info->fix)!=1);
+	vc->vc_complement_mask = vc->vc_can_do_color ? 0x7700 : 0x0800;
+	if (vc->vc_font.charcount == 256) {
+		vc->vc_hi_font_mask = 0;
+	} else {
+		vc->vc_hi_font_mask = 0x100;
+		if (vc->vc_can_do_color)
+			vc->vc_complement_mask <<= 1;
+	}
+
+	if (!*svc->uni_pagedict_loc)
+		con_set_default_unimap(svc);
+	if (!*vc->uni_pagedict_loc)
+		con_copy_unimap(vc, svc);
+
+	cols = FBCON_SWAP(ops->rotate, info->var.xres, info->var.yres);
+	rows = FBCON_SWAP(ops->rotate, info->var.yres, info->var.xres);
+	cols /= vc->vc_font.width;
+	rows /= vc->vc_font.height;
+	vc_resize(vc, cols, rows);
+
+	if (con_is_visible(vc)) {
+		update_screen(vc);
+	}
+}
+
+static __inline__ void ywrap_up(struct vc_data *vc, int count)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+
+	p->yscroll += count;
+	if (p->yscroll >= p->vrows)	/* Deal with wrap */
+		p->yscroll -= p->vrows;
+	ops->var.xoffset = 0;
+	ops->var.yoffset = p->yscroll * vc->vc_font.height;
+	ops->var.vmode |= FB_VMODE_YWRAP;
+	ops->update_start(info);
+	scrollback_max += count;
+	if (scrollback_max > scrollback_phys_max)
+		scrollback_max = scrollback_phys_max;
+	scrollback_current = 0;
+}
+
+static __inline__ void ywrap_down(struct vc_data *vc, int count)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+
+	p->yscroll -= count;
+	if (p->yscroll < 0)	/* Deal with wrap */
+		p->yscroll += p->vrows;
+	ops->var.xoffset = 0;
+	ops->var.yoffset = p->yscroll * vc->vc_font.height;
+	ops->var.vmode |= FB_VMODE_YWRAP;
+	ops->update_start(info);
+	scrollback_max -= count;
+	if (scrollback_max < 0)
+		scrollback_max = 0;
+	scrollback_current = 0;
+}
+
+static __inline__ void ypan_up(struct vc_data *vc, int count)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	struct fbcon_ops *ops = info->fbcon_par;
+
+	p->yscroll += count;
+	if (p->yscroll > p->vrows - vc->vc_rows) {
+		ops->bmove(vc, info, p->vrows - vc->vc_rows,
+			    0, 0, 0, vc->vc_rows, vc->vc_cols);
+		p->yscroll -= p->vrows - vc->vc_rows;
+	}
+
+	ops->var.xoffset = 0;
+	ops->var.yoffset = p->yscroll * vc->vc_font.height;
+	ops->var.vmode &= ~FB_VMODE_YWRAP;
+	ops->update_start(info);
+	fbcon_clear_margins(vc, 1);
+	scrollback_max += count;
+	if (scrollback_max > scrollback_phys_max)
+		scrollback_max = scrollback_phys_max;
+	scrollback_current = 0;
+}
+
+static __inline__ void ypan_up_redraw(struct vc_data *vc, int t, int count)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+
+	p->yscroll += count;
+
+	if (p->yscroll > p->vrows - vc->vc_rows) {
+		p->yscroll -= p->vrows - vc->vc_rows;
+		fbcon_redraw_move(vc, p, t + count, vc->vc_rows - count, t);
+	}
+
+	ops->var.xoffset = 0;
+	ops->var.yoffset = p->yscroll * vc->vc_font.height;
+	ops->var.vmode &= ~FB_VMODE_YWRAP;
+	ops->update_start(info);
+	fbcon_clear_margins(vc, 1);
+	scrollback_max += count;
+	if (scrollback_max > scrollback_phys_max)
+		scrollback_max = scrollback_phys_max;
+	scrollback_current = 0;
+}
+
+static __inline__ void ypan_down(struct vc_data *vc, int count)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	struct fbcon_ops *ops = info->fbcon_par;
+
+	p->yscroll -= count;
+	if (p->yscroll < 0) {
+		ops->bmove(vc, info, 0, 0, p->vrows - vc->vc_rows,
+			    0, vc->vc_rows, vc->vc_cols);
+		p->yscroll += p->vrows - vc->vc_rows;
+	}
+
+	ops->var.xoffset = 0;
+	ops->var.yoffset = p->yscroll * vc->vc_font.height;
+	ops->var.vmode &= ~FB_VMODE_YWRAP;
+	ops->update_start(info);
+	fbcon_clear_margins(vc, 1);
+	scrollback_max -= count;
+	if (scrollback_max < 0)
+		scrollback_max = 0;
+	scrollback_current = 0;
+}
+
+static __inline__ void ypan_down_redraw(struct vc_data *vc, int t, int count)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+
+	p->yscroll -= count;
+
+	if (p->yscroll < 0) {
+		p->yscroll += p->vrows - vc->vc_rows;
+		fbcon_redraw_move(vc, p, t, vc->vc_rows - count, t + count);
+	}
+
+	ops->var.xoffset = 0;
+	ops->var.yoffset = p->yscroll * vc->vc_font.height;
+	ops->var.vmode &= ~FB_VMODE_YWRAP;
+	ops->update_start(info);
+	fbcon_clear_margins(vc, 1);
+	scrollback_max -= count;
+	if (scrollback_max < 0)
+		scrollback_max = 0;
+	scrollback_current = 0;
+}
+
+static void fbcon_redraw_move(struct vc_data *vc, struct fbcon_display *p,
+			      int line, int count, int dy)
+{
+	unsigned short *s = (unsigned short *)
+		(vc->vc_origin + vc->vc_size_row * line);
+
+	while (count--) {
+		unsigned short *start = s;
+		unsigned short *le = advance_row(s, 1);
+		unsigned short c;
+		int x = 0;
+		unsigned short attr = 1;
+
+		do {
+			c = scr_readw(s);
+			if (attr != (c & 0xff00)) {
+				attr = c & 0xff00;
+				if (s > start) {
+					fbcon_putcs(vc, start, s - start,
+						    dy, x);
+					x += s - start;
+					start = s;
+				}
+			}
+			console_conditional_schedule();
+			s++;
+		} while (s < le);
+		if (s > start)
+			fbcon_putcs(vc, start, s - start, dy, x);
+		console_conditional_schedule();
+		dy++;
+	}
+}
+
+static void fbcon_redraw_blit(struct vc_data *vc, struct fb_info *info,
+			struct fbcon_display *p, int line, int count, int ycount)
+{
+	int offset = ycount * vc->vc_cols;
+	unsigned short *d = (unsigned short *)
+	    (vc->vc_origin + vc->vc_size_row * line);
+	unsigned short *s = d + offset;
+	struct fbcon_ops *ops = info->fbcon_par;
+
+	while (count--) {
+		unsigned short *start = s;
+		unsigned short *le = advance_row(s, 1);
+		unsigned short c;
+		int x = 0;
+
+		do {
+			c = scr_readw(s);
+
+			if (c == scr_readw(d)) {
+				if (s > start) {
+					ops->bmove(vc, info, line + ycount, x,
+						   line, x, 1, s-start);
+					x += s - start + 1;
+					start = s + 1;
+				} else {
+					x++;
+					start++;
+				}
+			}
+
+			scr_writew(c, d);
+			console_conditional_schedule();
+			s++;
+			d++;
+		} while (s < le);
+		if (s > start)
+			ops->bmove(vc, info, line + ycount, x, line, x, 1,
+				   s-start);
+		console_conditional_schedule();
+		if (ycount > 0)
+			line++;
+		else {
+			line--;
+			/* NOTE: We subtract two lines from these pointers */
+			s -= vc->vc_size_row;
+			d -= vc->vc_size_row;
+		}
+	}
+}
+
+static void fbcon_redraw(struct vc_data *vc, int line, int count, int offset)
+{
+	unsigned short *d = (unsigned short *)
+	    (vc->vc_origin + vc->vc_size_row * line);
+	unsigned short *s = d + offset;
+
+	while (count--) {
+		unsigned short *start = s;
+		unsigned short *le = advance_row(s, 1);
+		unsigned short c;
+		int x = 0;
+		unsigned short attr = 1;
+
+		do {
+			c = scr_readw(s);
+			if (attr != (c & 0xff00)) {
+				attr = c & 0xff00;
+				if (s > start) {
+					fbcon_putcs(vc, start, s - start,
+						    line, x);
+					x += s - start;
+					start = s;
+				}
+			}
+			if (c == scr_readw(d)) {
+				if (s > start) {
+					fbcon_putcs(vc, start, s - start,
+						     line, x);
+					x += s - start + 1;
+					start = s + 1;
+				} else {
+					x++;
+					start++;
+				}
+			}
+			scr_writew(c, d);
+			console_conditional_schedule();
+			s++;
+			d++;
+		} while (s < le);
+		if (s > start)
+			fbcon_putcs(vc, start, s - start, line, x);
+		console_conditional_schedule();
+		if (offset > 0)
+			line++;
+		else {
+			line--;
+			/* NOTE: We subtract two lines from these pointers */
+			s -= vc->vc_size_row;
+			d -= vc->vc_size_row;
+		}
+	}
+}
+
+static void fbcon_bmove_rec(struct vc_data *vc, struct fbcon_display *p, int sy, int sx,
+			    int dy, int dx, int height, int width, u_int y_break)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+	u_int b;
+
+	if (sy < y_break && sy + height > y_break) {
+		b = y_break - sy;
+		if (dy < sy) {	/* Avoid trashing self */
+			fbcon_bmove_rec(vc, p, sy, sx, dy, dx, b, width,
+					y_break);
+			fbcon_bmove_rec(vc, p, sy + b, sx, dy + b, dx,
+					height - b, width, y_break);
+		} else {
+			fbcon_bmove_rec(vc, p, sy + b, sx, dy + b, dx,
+					height - b, width, y_break);
+			fbcon_bmove_rec(vc, p, sy, sx, dy, dx, b, width,
+					y_break);
+		}
+		return;
+	}
+
+	if (dy < y_break && dy + height > y_break) {
+		b = y_break - dy;
+		if (dy < sy) {	/* Avoid trashing self */
+			fbcon_bmove_rec(vc, p, sy, sx, dy, dx, b, width,
+					y_break);
+			fbcon_bmove_rec(vc, p, sy + b, sx, dy + b, dx,
+					height - b, width, y_break);
+		} else {
+			fbcon_bmove_rec(vc, p, sy + b, sx, dy + b, dx,
+					height - b, width, y_break);
+			fbcon_bmove_rec(vc, p, sy, sx, dy, dx, b, width,
+					y_break);
+		}
+		return;
+	}
+	ops->bmove(vc, info, real_y(p, sy), sx, real_y(p, dy), dx,
+		   height, width);
+}
+
+static void fbcon_bmove(struct vc_data *vc, int sy, int sx, int dy, int dx,
+			int height, int width)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+
+	if (fbcon_is_inactive(vc, info))
+		return;
+
+	if (!width || !height)
+		return;
+
+	/*  Split blits that cross physical y_wrap case.
+	 *  Pathological case involves 4 blits, better to use recursive
+	 *  code rather than unrolled case
+	 *
+	 *  Recursive invocations don't need to erase the cursor over and
+	 *  over again, so we use fbcon_bmove_rec()
+	 */
+	fbcon_bmove_rec(vc, p, sy, sx, dy, dx, height, width,
+			p->vrows - p->yscroll);
+}
+
+static bool fbcon_scroll(struct vc_data *vc, unsigned int t, unsigned int b,
+		enum con_scroll dir, unsigned int count)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	int scroll_partial = info->flags & FBINFO_PARTIAL_PAN_OK;
+
+	if (fbcon_is_inactive(vc, info))
+		return true;
+
+	fbcon_cursor(vc, false);
+
+	/*
+	 * ++Geert: Only use ywrap/ypan if the console is in text mode
+	 * ++Andrew: Only use ypan on hardware text mode when scrolling the
+	 *           whole screen (prevents flicker).
+	 */
+
+	switch (dir) {
+	case SM_UP:
+		if (count > vc->vc_rows)	/* Maximum realistic size */
+			count = vc->vc_rows;
+		switch (fb_scrollmode(p)) {
+		case SCROLL_MOVE:
+			fbcon_redraw_blit(vc, info, p, t, b - t - count,
+				     count);
+			__fbcon_clear(vc, b - count, 0, count, vc->vc_cols);
+			scr_memsetw((unsigned short *) (vc->vc_origin +
+							vc->vc_size_row *
+							(b - count)),
+				    vc->vc_video_erase_char,
+				    vc->vc_size_row * count);
+			return true;
+
+		case SCROLL_WRAP_MOVE:
+			if (b - t - count > 3 * vc->vc_rows >> 2) {
+				if (t > 0)
+					fbcon_bmove(vc, 0, 0, count, 0, t,
+						    vc->vc_cols);
+				ywrap_up(vc, count);
+				if (vc->vc_rows - b > 0)
+					fbcon_bmove(vc, b - count, 0, b, 0,
+						    vc->vc_rows - b,
+						    vc->vc_cols);
+			} else if (info->flags & FBINFO_READS_FAST)
+				fbcon_bmove(vc, t + count, 0, t, 0,
+					    b - t - count, vc->vc_cols);
+			else
+				goto redraw_up;
+			__fbcon_clear(vc, b - count, 0, count, vc->vc_cols);
+			break;
+
+		case SCROLL_PAN_REDRAW:
+			if ((p->yscroll + count <=
+			     2 * (p->vrows - vc->vc_rows))
+			    && ((!scroll_partial && (b - t == vc->vc_rows))
+				|| (scroll_partial
+				    && (b - t - count >
+					3 * vc->vc_rows >> 2)))) {
+				if (t > 0)
+					fbcon_redraw_move(vc, p, 0, t, count);
+				ypan_up_redraw(vc, t, count);
+				if (vc->vc_rows - b > 0)
+					fbcon_redraw_move(vc, p, b,
+							  vc->vc_rows - b, b);
+			} else
+				fbcon_redraw_move(vc, p, t + count, b - t - count, t);
+			__fbcon_clear(vc, b - count, 0, count, vc->vc_cols);
+			break;
+
+		case SCROLL_PAN_MOVE:
+			if ((p->yscroll + count <=
+			     2 * (p->vrows - vc->vc_rows))
+			    && ((!scroll_partial && (b - t == vc->vc_rows))
+				|| (scroll_partial
+				    && (b - t - count >
+					3 * vc->vc_rows >> 2)))) {
+				if (t > 0)
+					fbcon_bmove(vc, 0, 0, count, 0, t,
+						    vc->vc_cols);
+				ypan_up(vc, count);
+				if (vc->vc_rows - b > 0)
+					fbcon_bmove(vc, b - count, 0, b, 0,
+						    vc->vc_rows - b,
+						    vc->vc_cols);
+			} else if (info->flags & FBINFO_READS_FAST)
+				fbcon_bmove(vc, t + count, 0, t, 0,
+					    b - t - count, vc->vc_cols);
+			else
+				goto redraw_up;
+			__fbcon_clear(vc, b - count, 0, count, vc->vc_cols);
+			break;
+
+		case SCROLL_REDRAW:
+		      redraw_up:
+			fbcon_redraw(vc, t, b - t - count,
+				     count * vc->vc_cols);
+			__fbcon_clear(vc, b - count, 0, count, vc->vc_cols);
+			scr_memsetw((unsigned short *) (vc->vc_origin +
+							vc->vc_size_row *
+							(b - count)),
+				    vc->vc_video_erase_char,
+				    vc->vc_size_row * count);
+			return true;
+		}
+		break;
+
+	case SM_DOWN:
+		if (count > vc->vc_rows)	/* Maximum realistic size */
+			count = vc->vc_rows;
+		switch (fb_scrollmode(p)) {
+		case SCROLL_MOVE:
+			fbcon_redraw_blit(vc, info, p, b - 1, b - t - count,
+				     -count);
+			__fbcon_clear(vc, t, 0, count, vc->vc_cols);
+			scr_memsetw((unsigned short *) (vc->vc_origin +
+							vc->vc_size_row *
+							t),
+				    vc->vc_video_erase_char,
+				    vc->vc_size_row * count);
+			return true;
+
+		case SCROLL_WRAP_MOVE:
+			if (b - t - count > 3 * vc->vc_rows >> 2) {
+				if (vc->vc_rows - b > 0)
+					fbcon_bmove(vc, b, 0, b - count, 0,
+						    vc->vc_rows - b,
+						    vc->vc_cols);
+				ywrap_down(vc, count);
+				if (t > 0)
+					fbcon_bmove(vc, count, 0, 0, 0, t,
+						    vc->vc_cols);
+			} else if (info->flags & FBINFO_READS_FAST)
+				fbcon_bmove(vc, t, 0, t + count, 0,
+					    b - t - count, vc->vc_cols);
+			else
+				goto redraw_down;
+			__fbcon_clear(vc, t, 0, count, vc->vc_cols);
+			break;
+
+		case SCROLL_PAN_MOVE:
+			if ((count - p->yscroll <= p->vrows - vc->vc_rows)
+			    && ((!scroll_partial && (b - t == vc->vc_rows))
+				|| (scroll_partial
+				    && (b - t - count >
+					3 * vc->vc_rows >> 2)))) {
+				if (vc->vc_rows - b > 0)
+					fbcon_bmove(vc, b, 0, b - count, 0,
+						    vc->vc_rows - b,
+						    vc->vc_cols);
+				ypan_down(vc, count);
+				if (t > 0)
+					fbcon_bmove(vc, count, 0, 0, 0, t,
+						    vc->vc_cols);
+			} else if (info->flags & FBINFO_READS_FAST)
+				fbcon_bmove(vc, t, 0, t + count, 0,
+					    b - t - count, vc->vc_cols);
+			else
+				goto redraw_down;
+			__fbcon_clear(vc, t, 0, count, vc->vc_cols);
+			break;
+
+		case SCROLL_PAN_REDRAW:
+			if ((count - p->yscroll <= p->vrows - vc->vc_rows)
+			    && ((!scroll_partial && (b - t == vc->vc_rows))
+				|| (scroll_partial
+				    && (b - t - count >
+					3 * vc->vc_rows >> 2)))) {
+				if (vc->vc_rows - b > 0)
+					fbcon_redraw_move(vc, p, b, vc->vc_rows - b,
+							  b - count);
+				ypan_down_redraw(vc, t, count);
+				if (t > 0)
+					fbcon_redraw_move(vc, p, count, t, 0);
+			} else
+				fbcon_redraw_move(vc, p, t, b - t - count, t + count);
+			__fbcon_clear(vc, t, 0, count, vc->vc_cols);
+			break;
+
+		case SCROLL_REDRAW:
+		      redraw_down:
+			fbcon_redraw(vc, b - 1, b - t - count,
+				     -count * vc->vc_cols);
+			__fbcon_clear(vc, t, 0, count, vc->vc_cols);
+			scr_memsetw((unsigned short *) (vc->vc_origin +
+							vc->vc_size_row *
+							t),
+				    vc->vc_video_erase_char,
+				    vc->vc_size_row * count);
+			return true;
+		}
+	}
+	return false;
+}
+
+
+static void updatescrollmode_accel(struct fbcon_display *p,
+					struct fb_info *info,
+					struct vc_data *vc)
+{
+#ifdef CONFIG_FRAMEBUFFER_CONSOLE_LEGACY_ACCELERATION
+	struct fbcon_ops *ops = info->fbcon_par;
+	int cap = info->flags;
+	u16 t = 0;
+	int ypan = FBCON_SWAP(ops->rotate, info->fix.ypanstep,
+				  info->fix.xpanstep);
+	int ywrap = FBCON_SWAP(ops->rotate, info->fix.ywrapstep, t);
+	int yres = FBCON_SWAP(ops->rotate, info->var.yres, info->var.xres);
+	int vyres = FBCON_SWAP(ops->rotate, info->var.yres_virtual,
+				   info->var.xres_virtual);
+	int good_pan = (cap & FBINFO_HWACCEL_YPAN) &&
+		divides(ypan, vc->vc_font.height) && vyres > yres;
+	int good_wrap = (cap & FBINFO_HWACCEL_YWRAP) &&
+		divides(ywrap, vc->vc_font.height) &&
+		divides(vc->vc_font.height, vyres) &&
+		divides(vc->vc_font.height, yres);
+	int reading_fast = cap & FBINFO_READS_FAST;
+	int fast_copyarea = (cap & FBINFO_HWACCEL_COPYAREA) &&
+		!(cap & FBINFO_HWACCEL_DISABLED);
+	int fast_imageblit = (cap & FBINFO_HWACCEL_IMAGEBLIT) &&
+		!(cap & FBINFO_HWACCEL_DISABLED);
+
+	if (good_wrap || good_pan) {
+		if (reading_fast || fast_copyarea)
+			p->scrollmode = good_wrap ?
+				SCROLL_WRAP_MOVE : SCROLL_PAN_MOVE;
+		else
+			p->scrollmode = good_wrap ? SCROLL_REDRAW :
+				SCROLL_PAN_REDRAW;
+	} else {
+		if (reading_fast || (fast_copyarea && !fast_imageblit))
+			p->scrollmode = SCROLL_MOVE;
+		else
+			p->scrollmode = SCROLL_REDRAW;
+	}
+#endif
+}
+
+static void updatescrollmode(struct fbcon_display *p,
+					struct fb_info *info,
+					struct vc_data *vc)
+{
+	struct fbcon_ops *ops = info->fbcon_par;
+	int fh = vc->vc_font.height;
+	int yres = FBCON_SWAP(ops->rotate, info->var.yres, info->var.xres);
+	int vyres = FBCON_SWAP(ops->rotate, info->var.yres_virtual,
+				   info->var.xres_virtual);
+
+	p->vrows = vyres/fh;
+	if (yres > (fh * (vc->vc_rows + 1)))
+		p->vrows -= (yres - (fh * vc->vc_rows)) / fh;
+	if ((yres % fh) && (vyres % fh < yres % fh))
+		p->vrows--;
+
+	/* update scrollmode in case hardware acceleration is used */
+	updatescrollmode_accel(p, info, vc);
+}
+
+#define PITCH(w) (((w) + 7) >> 3)
+#define CALC_FONTSZ(h, p, c) ((h) * (p) * (c)) /* size = height * pitch * charcount */
+
+static int fbcon_resize(struct vc_data *vc, unsigned int width,
+			unsigned int height, bool from_user)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	struct fb_var_screeninfo var = info->var;
+	int x_diff, y_diff, virt_w, virt_h, virt_fw, virt_fh;
+
+	if (p->userfont && FNTSIZE(vc->vc_font.data)) {
+		int size;
+		int pitch = PITCH(vc->vc_font.width);
+
+		/*
+		 * If user font, ensure that a possible change to user font
+		 * height or width will not allow a font data out-of-bounds access.
+		 * NOTE: must use original charcount in calculation as font
+		 * charcount can change and cannot be used to determine the
+		 * font data allocated size.
+		 */
+		if (pitch <= 0)
+			return -EINVAL;
+		size = CALC_FONTSZ(vc->vc_font.height, pitch, vc->vc_font.charcount);
+		if (size > FNTSIZE(vc->vc_font.data))
+			return -EINVAL;
+	}
+
+	virt_w = FBCON_SWAP(ops->rotate, width, height);
+	virt_h = FBCON_SWAP(ops->rotate, height, width);
+	virt_fw = FBCON_SWAP(ops->rotate, vc->vc_font.width,
+				 vc->vc_font.height);
+	virt_fh = FBCON_SWAP(ops->rotate, vc->vc_font.height,
+				 vc->vc_font.width);
+	var.xres = virt_w * virt_fw;
+	var.yres = virt_h * virt_fh;
+	x_diff = info->var.xres - var.xres;
+	y_diff = info->var.yres - var.yres;
+	if (x_diff < 0 || x_diff > virt_fw ||
+	    y_diff < 0 || y_diff > virt_fh) {
+		const struct fb_videomode *mode;
+
+		pr_debug("attempting resize %ix%i\n", var.xres, var.yres);
+		mode = fb_find_best_mode(&var, &info->modelist);
+		if (mode == NULL)
+			return -EINVAL;
+		display_to_var(&var, p);
+		fb_videomode_to_var(&var, mode);
+
+		if (virt_w > var.xres/virt_fw || virt_h > var.yres/virt_fh)
+			return -EINVAL;
+
+		pr_debug("resize now %ix%i\n", var.xres, var.yres);
+		if (con_is_visible(vc) && vc->vc_mode == KD_TEXT) {
+			var.activate = FB_ACTIVATE_NOW |
+				FB_ACTIVATE_FORCE;
+			fb_set_var(info, &var);
+		}
+		var_to_display(p, &info->var, info);
+		ops->var = info->var;
+	}
+	updatescrollmode(p, info, vc);
+	return 0;
+}
+
+static bool fbcon_switch(struct vc_data *vc)
+{
+	struct fb_info *info, *old_info = NULL;
+	struct fbcon_ops *ops;
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	struct fb_var_screeninfo var;
+	int i, ret, prev_console;
+
+	info = fbcon_info_from_console(vc->vc_num);
+	ops = info->fbcon_par;
+
+	if (logo_shown >= 0) {
+		struct vc_data *conp2 = vc_cons[logo_shown].d;
+
+		if (conp2->vc_top == logo_lines
+		    && conp2->vc_bottom == conp2->vc_rows)
+			conp2->vc_top = 0;
+		logo_shown = FBCON_LOGO_CANSHOW;
+	}
+
+	prev_console = ops->currcon;
+	if (prev_console != -1)
+		old_info = fbcon_info_from_console(prev_console);
+	/*
+	 * FIXME: If we have multiple fbdev's loaded, we need to
+	 * update all info->currcon.  Perhaps, we can place this
+	 * in a centralized structure, but this might break some
+	 * drivers.
+	 *
+	 * info->currcon = vc->vc_num;
+	 */
+	fbcon_for_each_registered_fb(i) {
+		if (fbcon_registered_fb[i]->fbcon_par) {
+			struct fbcon_ops *o = fbcon_registered_fb[i]->fbcon_par;
+
+			o->currcon = vc->vc_num;
+		}
+	}
+	memset(&var, 0, sizeof(struct fb_var_screeninfo));
+	display_to_var(&var, p);
+	var.activate = FB_ACTIVATE_NOW;
+
+	/*
+	 * make sure we don't unnecessarily trip the memcmp()
+	 * in fb_set_var()
+	 */
+	info->var.activate = var.activate;
+	var.vmode |= info->var.vmode & ~FB_VMODE_MASK;
+	fb_set_var(info, &var);
+	ops->var = info->var;
+
+	if (old_info != NULL && (old_info != info ||
+				 info->flags & FBINFO_MISC_ALWAYS_SETPAR)) {
+		if (info->fbops->fb_set_par) {
+			ret = info->fbops->fb_set_par(info);
+
+			if (ret)
+				printk(KERN_ERR "fbcon_switch: detected "
+					"unhandled fb_set_par error, "
+					"error code %d\n", ret);
+		}
+
+		if (old_info != info)
+			fbcon_del_cursor_work(old_info);
+	}
+
+	if (fbcon_is_inactive(vc, info) ||
+	    ops->blank_state != FB_BLANK_UNBLANK)
+		fbcon_del_cursor_work(info);
+	else
+		fbcon_add_cursor_work(info);
+
+	set_blitting_type(vc, info);
+	ops->cursor_reset = 1;
+
+	if (ops->rotate_font && ops->rotate_font(info, vc)) {
+		ops->rotate = FB_ROTATE_UR;
+		set_blitting_type(vc, info);
+	}
+
+	vc->vc_can_do_color = (fb_get_color_depth(&info->var, &info->fix)!=1);
+	vc->vc_complement_mask = vc->vc_can_do_color ? 0x7700 : 0x0800;
+
+	if (vc->vc_font.charcount > 256)
+		vc->vc_complement_mask <<= 1;
+
+	updatescrollmode(p, info, vc);
+
+	switch (fb_scrollmode(p)) {
+	case SCROLL_WRAP_MOVE:
+		scrollback_phys_max = p->vrows - vc->vc_rows;
+		break;
+	case SCROLL_PAN_MOVE:
+	case SCROLL_PAN_REDRAW:
+		scrollback_phys_max = p->vrows - 2 * vc->vc_rows;
+		if (scrollback_phys_max < 0)
+			scrollback_phys_max = 0;
+		break;
+	default:
+		scrollback_phys_max = 0;
+		break;
+	}
+
+	scrollback_max = 0;
+	scrollback_current = 0;
+
+	if (!fbcon_is_inactive(vc, info)) {
+	    ops->var.xoffset = ops->var.yoffset = p->yscroll = 0;
+	    ops->update_start(info);
+	}
+
+	fbcon_set_palette(vc, color_table);
+	fbcon_clear_margins(vc, 0);
+
+	if (logo_shown == FBCON_LOGO_DRAW) {
+
+		logo_shown = fg_console;
+		fb_show_logo(info, ops->rotate);
+		update_region(vc,
+			      vc->vc_origin + vc->vc_size_row * vc->vc_top,
+			      vc->vc_size_row * (vc->vc_bottom -
+						 vc->vc_top) / 2);
+		return false;
+	}
+	return true;
+}
+
+static void fbcon_generic_blank(struct vc_data *vc, struct fb_info *info,
+				int blank)
+{
+	if (blank) {
+		unsigned short charmask = vc->vc_hi_font_mask ?
+			0x1ff : 0xff;
+		unsigned short oldc;
+
+		oldc = vc->vc_video_erase_char;
+		vc->vc_video_erase_char &= charmask;
+		__fbcon_clear(vc, 0, 0, vc->vc_rows, vc->vc_cols);
+		vc->vc_video_erase_char = oldc;
+	}
+}
+
+static bool fbcon_blank(struct vc_data *vc, enum vesa_blank_mode blank,
+			bool mode_switch)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+
+	if (mode_switch) {
+		struct fb_var_screeninfo var = info->var;
+
+		ops->graphics = 1;
+
+		if (!blank) {
+			var.activate = FB_ACTIVATE_NOW | FB_ACTIVATE_FORCE |
+				FB_ACTIVATE_KD_TEXT;
+			fb_set_var(info, &var);
+			ops->graphics = 0;
+			ops->var = info->var;
+		}
+	}
+
+ 	if (!fbcon_is_inactive(vc, info)) {
+		if (ops->blank_state != blank) {
+			ops->blank_state = blank;
+			fbcon_cursor(vc, !blank);
+			ops->cursor_flash = (!blank);
+
+			if (fb_blank(info, blank))
+				fbcon_generic_blank(vc, info, blank);
+		}
+
+		if (!blank)
+			update_screen(vc);
+	}
+
+	if (mode_switch || fbcon_is_inactive(vc, info) ||
+	    ops->blank_state != FB_BLANK_UNBLANK)
+		fbcon_del_cursor_work(info);
+	else
+		fbcon_add_cursor_work(info);
+
+	return false;
+}
+
+static void fbcon_debug_enter(struct vc_data *vc)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+
+	ops->save_graphics = ops->graphics;
+	ops->graphics = 0;
+	if (info->fbops->fb_debug_enter)
+		info->fbops->fb_debug_enter(info);
+	fbcon_set_palette(vc, color_table);
+}
+
+static void fbcon_debug_leave(struct vc_data *vc)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+
+	ops->graphics = ops->save_graphics;
+	if (info->fbops->fb_debug_leave)
+		info->fbops->fb_debug_leave(info);
+}
+
+static int fbcon_get_font(struct vc_data *vc, struct console_font *font, unsigned int vpitch)
+{
+	u8 *fontdata = vc->vc_font.data;
+	u8 *data = font->data;
+	int i, j;
+
+	font->width = vc->vc_font.width;
+	font->height = vc->vc_font.height;
+	if (font->height > vpitch)
+		return -ENOSPC;
+	font->charcount = vc->vc_hi_font_mask ? 512 : 256;
+	if (!font->data)
+		return 0;
+
+	if (font->width <= 8) {
+		j = vc->vc_font.height;
+		if (font->charcount * j > FNTSIZE(fontdata))
+			return -EINVAL;
+
+		for (i = 0; i < font->charcount; i++) {
+			memcpy(data, fontdata, j);
+			memset(data + j, 0, vpitch - j);
+			data += vpitch;
+			fontdata += j;
+		}
+	} else if (font->width <= 16) {
+		j = vc->vc_font.height * 2;
+		if (font->charcount * j > FNTSIZE(fontdata))
+			return -EINVAL;
+
+		for (i = 0; i < font->charcount; i++) {
+			memcpy(data, fontdata, j);
+			memset(data + j, 0, 2*vpitch - j);
+			data += 2*vpitch;
+			fontdata += j;
+		}
+	} else if (font->width <= 24) {
+		if (font->charcount * (vc->vc_font.height * sizeof(u32)) > FNTSIZE(fontdata))
+			return -EINVAL;
+
+		for (i = 0; i < font->charcount; i++) {
+			for (j = 0; j < vc->vc_font.height; j++) {
+				*data++ = fontdata[0];
+				*data++ = fontdata[1];
+				*data++ = fontdata[2];
+				fontdata += sizeof(u32);
+			}
+			memset(data, 0, 3 * (vpitch - j));
+			data += 3 * (vpitch - j);
+		}
+	} else {
+		j = vc->vc_font.height * 4;
+		if (font->charcount * j > FNTSIZE(fontdata))
+			return -EINVAL;
+
+		for (i = 0; i < font->charcount; i++) {
+			memcpy(data, fontdata, j);
+			memset(data + j, 0, 4 * vpitch - j);
+			data += 4 * vpitch;
+			fontdata += j;
+		}
+	}
+	return 0;
+}
+
+/* set/clear vc_hi_font_mask and update vc attrs accordingly */
+static void set_vc_hi_font(struct vc_data *vc, bool set)
+{
+	if (!set) {
+		vc->vc_hi_font_mask = 0;
+		if (vc->vc_can_do_color) {
+			vc->vc_complement_mask >>= 1;
+			vc->vc_s_complement_mask >>= 1;
+		}
+
+		/* ++Edmund: reorder the attribute bits */
+		if (vc->vc_can_do_color) {
+			unsigned short *cp =
+			    (unsigned short *) vc->vc_origin;
+			int count = vc->vc_screenbuf_size / 2;
+			unsigned short c;
+			for (; count > 0; count--, cp++) {
+				c = scr_readw(cp);
+				scr_writew(((c & 0xfe00) >> 1) |
+					   (c & 0xff), cp);
+			}
+			c = vc->vc_video_erase_char;
+			vc->vc_video_erase_char =
+			    ((c & 0xfe00) >> 1) | (c & 0xff);
+			vc->vc_attr >>= 1;
+		}
+	} else {
+		vc->vc_hi_font_mask = 0x100;
+		if (vc->vc_can_do_color) {
+			vc->vc_complement_mask <<= 1;
+			vc->vc_s_complement_mask <<= 1;
+		}
+
+		/* ++Edmund: reorder the attribute bits */
+		{
+			unsigned short *cp =
+			    (unsigned short *) vc->vc_origin;
+			int count = vc->vc_screenbuf_size / 2;
+			unsigned short c;
+			for (; count > 0; count--, cp++) {
+				unsigned short newc;
+				c = scr_readw(cp);
+				if (vc->vc_can_do_color)
+					newc =
+					    ((c & 0xff00) << 1) | (c &
+								   0xff);
+				else
+					newc = c & ~0x100;
+				scr_writew(newc, cp);
+			}
+			c = vc->vc_video_erase_char;
+			if (vc->vc_can_do_color) {
+				vc->vc_video_erase_char =
+				    ((c & 0xff00) << 1) | (c & 0xff);
+				vc->vc_attr <<= 1;
+			} else
+				vc->vc_video_erase_char = c & ~0x100;
+		}
+	}
+}
+
+static int fbcon_do_set_font(struct vc_data *vc, int w, int h, int charcount,
+			     const u8 * data, int userfont)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	struct fbcon_ops *ops = info->fbcon_par;
+	struct fbcon_display *p = &fb_display[vc->vc_num];
+	int resize, ret, old_userfont, old_width, old_height, old_charcount;
+	u8 *old_data = vc->vc_font.data;
+
+	resize = (w != vc->vc_font.width) || (h != vc->vc_font.height);
+	vc->vc_font.data = (void *)(p->fontdata = data);
+	old_userfont = p->userfont;
+	if ((p->userfont = userfont))
+		REFCOUNT(data)++;
+
+	old_width = vc->vc_font.width;
+	old_height = vc->vc_font.height;
+	old_charcount = vc->vc_font.charcount;
+
+	vc->vc_font.width = w;
+	vc->vc_font.height = h;
+	vc->vc_font.charcount = charcount;
+	if (vc->vc_hi_font_mask && charcount == 256)
+		set_vc_hi_font(vc, false);
+	else if (!vc->vc_hi_font_mask && charcount == 512)
+		set_vc_hi_font(vc, true);
+
+	if (resize) {
+		int cols, rows;
+
+		cols = FBCON_SWAP(ops->rotate, info->var.xres, info->var.yres);
+		rows = FBCON_SWAP(ops->rotate, info->var.yres, info->var.xres);
+		cols /= w;
+		rows /= h;
+		ret = vc_resize(vc, cols, rows);
+		if (ret)
+			goto err_out;
+	} else if (con_is_visible(vc)
+		   && vc->vc_mode == KD_TEXT) {
+		fbcon_clear_margins(vc, 0);
+		update_screen(vc);
+	}
+
+	if (old_userfont && (--REFCOUNT(old_data) == 0))
+		kfree(old_data - FONT_EXTRA_WORDS * sizeof(int));
+	return 0;
+
+err_out:
+	p->fontdata = old_data;
+	vc->vc_font.data = old_data;
+
+	if (userfont) {
+		p->userfont = old_userfont;
+		if (--REFCOUNT(data) == 0)
+			kfree(data - FONT_EXTRA_WORDS * sizeof(int));
+	}
+
+	vc->vc_font.width = old_width;
+	vc->vc_font.height = old_height;
+	vc->vc_font.charcount = old_charcount;
+
+	return ret;
+}
+
+/*
+ *  User asked to set font; we are guaranteed that charcount does not exceed 512
+ *  but lets not assume that, since charcount of 512 is small for unicode support.
+ */
+
+static int fbcon_set_font(struct vc_data *vc, const struct console_font *font,
+			  unsigned int vpitch, unsigned int flags)
+{
+	struct fb_info *info = fbcon_info_from_console(vc->vc_num);
+	unsigned charcount = font->charcount;
+	int w = font->width;
+	int h = font->height;
+	int size;
+	int i, csum;
+	u8 *new_data, *data = font->data;
+	int pitch = PITCH(font->width);
+
+	/* Is there a reason why fbconsole couldn't handle any charcount >256?
+	 * If not this check should be changed to charcount < 256 */
+	if (charcount != 256 && charcount != 512)
+		return -EINVAL;
+
+	/* font bigger than screen resolution ? */
+	if (w > FBCON_SWAP(info->var.rotate, info->var.xres, info->var.yres) ||
+	    h > FBCON_SWAP(info->var.rotate, info->var.yres, info->var.xres))
+		return -EINVAL;
+
+	if (font->width > FB_MAX_BLIT_WIDTH || font->height > FB_MAX_BLIT_HEIGHT)
+		return -EINVAL;
+
+	/* Make sure drawing engine can handle the font */
+	if (!test_bit(font->width - 1, info->pixmap.blit_x) ||
+	    !test_bit(font->height - 1, info->pixmap.blit_y))
+		return -EINVAL;
+
+	/* Make sure driver can handle the font length */
+	if (fbcon_invalid_charcount(info, charcount))
+		return -EINVAL;
+
+	size = CALC_FONTSZ(h, pitch, charcount);
+
+	new_data = kmalloc(FONT_EXTRA_WORDS * sizeof(int) + size, GFP_USER);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (!new_data)
 		return -ENOMEM;

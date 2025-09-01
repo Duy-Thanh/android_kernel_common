@@ -1070,6 +1070,7 @@ static ssize_t webusb_landingPage_store(struct config_item *item, const char *pa
 	unsigned int bytes_to_strip = 0;
 	int l = len;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!len)
 		return len;
 	if (page[l - 1] == '\n') {
@@ -1197,6 +1198,132 @@ static ssize_t os_desc_qw_sign_store(struct config_item *item, const char *page,
 
 	if (!len)
 		return len;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (page[l - 1] == '\n') {
+		--l;
+		++bytes_to_strip;
+	}
+
+	if (l > sizeof(gi->landing_page)) {
+		pr_err("webusb: landingPage URL too long\n");
+		return -EINVAL;
+	}
+
+	// validation
+	if (strncasecmp(page, "https://",  8) == 0)
+		bytes_to_strip = 8;
+	else if (strncasecmp(page, "http://", 7) == 0)
+		bytes_to_strip = 7;
+	else
+		bytes_to_strip = 0;
+
+	if (l > U8_MAX - WEBUSB_URL_DESCRIPTOR_HEADER_LENGTH + bytes_to_strip) {
+		pr_err("webusb: landingPage URL %d bytes too long for given URL scheme\n",
+			l - U8_MAX + WEBUSB_URL_DESCRIPTOR_HEADER_LENGTH - bytes_to_strip);
+		return -EINVAL;
+	}
+
+	mutex_lock(&gi->lock);
+	// ensure 0 bytes are set, in case the new landing page is shorter then the old one.
+	memcpy_and_pad(gi->landing_page, sizeof(gi->landing_page), page, l, 0);
+	mutex_unlock(&gi->lock);
+
+	return len;
+}
+
+CONFIGFS_ATTR(webusb_, use);
+CONFIGFS_ATTR(webusb_, bVendorCode);
+CONFIGFS_ATTR(webusb_, bcdVersion);
+CONFIGFS_ATTR(webusb_, landingPage);
+
+static struct configfs_attribute *webusb_attrs[] = {
+	&webusb_attr_use,
+	&webusb_attr_bcdVersion,
+	&webusb_attr_bVendorCode,
+	&webusb_attr_landingPage,
+	NULL,
+};
+
+static const struct config_item_type webusb_type = {
+	.ct_attrs	= webusb_attrs,
+	.ct_owner	= THIS_MODULE,
+};
+
+static inline struct gadget_info *os_desc_item_to_gadget_info(
+		struct config_item *item)
+{
+	return container_of(to_config_group(item),
+			struct gadget_info, os_desc_group);
+}
+
+static ssize_t os_desc_use_show(struct config_item *item, char *page)
+{
+	return sprintf(page, "%d\n",
+			os_desc_item_to_gadget_info(item)->use_os_desc);
+}
+
+static ssize_t os_desc_use_store(struct config_item *item, const char *page,
+				 size_t len)
+{
+	struct gadget_info *gi = os_desc_item_to_gadget_info(item);
+	int ret;
+	bool use;
+
+	ret = kstrtobool(page, &use);
+	if (ret)
+		return ret;
+
+	mutex_lock(&gi->lock);
+	gi->use_os_desc = use;
+	mutex_unlock(&gi->lock);
+
+	return len;
+}
+
+static ssize_t os_desc_b_vendor_code_show(struct config_item *item, char *page)
+{
+	return sprintf(page, "0x%02x\n",
+			os_desc_item_to_gadget_info(item)->b_vendor_code);
+}
+
+static ssize_t os_desc_b_vendor_code_store(struct config_item *item,
+					   const char *page, size_t len)
+{
+	struct gadget_info *gi = os_desc_item_to_gadget_info(item);
+	int ret;
+	u8 b_vendor_code;
+
+	ret = kstrtou8(page, 0, &b_vendor_code);
+	if (ret)
+		return ret;
+
+	mutex_lock(&gi->lock);
+	gi->b_vendor_code = b_vendor_code;
+	mutex_unlock(&gi->lock);
+
+	return len;
+}
+
+static ssize_t os_desc_qw_sign_show(struct config_item *item, char *page)
+{
+	struct gadget_info *gi = os_desc_item_to_gadget_info(item);
+	int res;
+
+	res = utf16s_to_utf8s((wchar_t *) gi->qw_sign, OS_STRING_QW_SIGN_LEN,
+			      UTF16_LITTLE_ENDIAN, page, PAGE_SIZE - 1);
+	page[res++] = '\n';
+
+	return res;
+}
+
+static ssize_t os_desc_qw_sign_store(struct config_item *item, const char *page,
+				     size_t len)
+{
+	struct gadget_info *gi = os_desc_item_to_gadget_info(item);
+	int res, l;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	l = min((int)len, OS_STRING_QW_SIGN_LEN >> 1);
 	if (page[l - 1] == '\n')
 		--l;

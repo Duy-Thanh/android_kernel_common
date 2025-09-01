@@ -70,6 +70,7 @@ struct iopt_area *iopt_area_contig_next(struct iopt_area_contig_iter *iter)
 	return iter->area;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static bool __alloc_iova_check_range(unsigned long *start, unsigned long last,
 				     unsigned long length,
 				     unsigned long iova_alignment,
@@ -731,6 +732,658 @@ out_unlock_iova:
 	up_write(&iopt->iova_rwsem);
 	up_read(&iopt->domains_rwsem);
 out_unmapped:
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static bool __alloc_iova_check_hole(struct interval_tree_double_span_iter *span,
+				    unsigned long length,
+				    unsigned long iova_alignment,
+				    unsigned long page_offset)
+{
+	if (span->is_used || span->last_hole - span->start_hole < length - 1)
+		return false;
+
+	span->start_hole = ALIGN(span->start_hole, iova_alignment) |
+			   page_offset;
+	if (span->start_hole > span->last_hole ||
+	    span->last_hole - span->start_hole < length - 1)
+		return false;
+	return true;
+}
+
+static bool __alloc_iova_check_used(struct interval_tree_span_iter *span,
+				    unsigned long length,
+				    unsigned long iova_alignment,
+				    unsigned long page_offset)
+{
+	if (span->is_hole || span->last_used - span->start_used < length - 1)
+		return false;
+
+	span->start_used = ALIGN(span->start_used, iova_alignment) |
+			   page_offset;
+	if (span->start_used > span->last_used ||
+	    span->last_used - span->start_used < length - 1)
+		return false;
+	return true;
+}
+
+/*
+ * Automatically find a block of IOVA that is not being used and not reserved.
+ * Does not return a 0 IOVA even if it is valid.
+ */
+static int iopt_alloc_iova(struct io_pagetable *iopt, unsigned long *iova,
+			   unsigned long uptr, unsigned long length)
+{
+	unsigned long page_offset = uptr % PAGE_SIZE;
+	struct interval_tree_double_span_iter used_span;
+	struct interval_tree_span_iter allowed_span;
+	unsigned long max_alignment = PAGE_SIZE;
+	unsigned long iova_alignment;
+
+	lockdep_assert_held(&iopt->iova_rwsem);
+
+	/* Protect roundup_pow-of_two() from overflow */
+	if (length == 0 || length >= ULONG_MAX / 2)
+		return -EOVERFLOW;
+
+	/*
+	 * Keep alignment present in the uptr when building the IOVA, this
+	 * increases the chance we can map a THP.
+	 */
+	if (!uptr)
+		iova_alignment = roundup_pow_of_two(length);
+	else
+		iova_alignment = min_t(unsigned long,
+				       roundup_pow_of_two(length),
+				       1UL << __ffs64(uptr));
+
+#ifdef CONFIG_TRANSPARENT_HUGEPAGE
+	max_alignment = HPAGE_SIZE;
+#endif
+	/* Protect against ALIGN() overflow */
+	if (iova_alignment >= max_alignment)
+		iova_alignment = max_alignment;
+
+	if (iova_alignment < iopt->iova_alignment)
+		return -EINVAL;
+
+	interval_tree_for_each_span(&allowed_span, &iopt->allowed_itree,
+				    PAGE_SIZE, ULONG_MAX - PAGE_SIZE) {
+		if (RB_EMPTY_ROOT(&iopt->allowed_itree.rb_root)) {
+			allowed_span.start_used = PAGE_SIZE;
+			allowed_span.last_used = ULONG_MAX - PAGE_SIZE;
+			allowed_span.is_hole = false;
+		}
+
+		if (!__alloc_iova_check_used(&allowed_span, length,
+					     iova_alignment, page_offset))
+			continue;
+
+		interval_tree_for_each_double_span(
+			&used_span, &iopt->reserved_itree, &iopt->area_itree,
+			allowed_span.start_used, allowed_span.last_used) {
+			if (!__alloc_iova_check_hole(&used_span, length,
+						     iova_alignment,
+						     page_offset))
+				continue;
+
+			*iova = used_span.start_hole;
+			return 0;
+		}
+	}
+	return -ENOSPC;
+}
+
+static int iopt_check_iova(struct io_pagetable *iopt, unsigned long iova,
+			   unsigned long length)
+{
+	unsigned long last;
+
+	lockdep_assert_held(&iopt->iova_rwsem);
+
+	if ((iova & (iopt->iova_alignment - 1)))
+		return -EINVAL;
+
+	if (check_add_overflow(iova, length - 1, &last))
+		return -EOVERFLOW;
+
+	/* No reserved IOVA intersects the range */
+	if (iopt_reserved_iter_first(iopt, iova, last))
+		return -EINVAL;
+
+	/* Check that there is not already a mapping in the range */
+	if (iopt_area_iter_first(iopt, iova, last))
+		return -EEXIST;
+	return 0;
+}
+
+/*
+ * The area takes a slice of the pages from start_bytes to start_byte + length
+ */
+static int iopt_insert_area(struct io_pagetable *iopt, struct iopt_area *area,
+			    struct iopt_pages *pages, unsigned long iova,
+			    unsigned long start_byte, unsigned long length,
+			    int iommu_prot)
+{
+	lockdep_assert_held_write(&iopt->iova_rwsem);
+
+	if ((iommu_prot & IOMMU_WRITE) && !pages->writable)
+		return -EPERM;
+
+	area->iommu_prot = iommu_prot;
+	area->page_offset = start_byte % PAGE_SIZE;
+	if (area->page_offset & (iopt->iova_alignment - 1))
+		return -EINVAL;
+
+	area->node.start = iova;
+	if (check_add_overflow(iova, length - 1, &area->node.last))
+		return -EOVERFLOW;
+
+	area->pages_node.start = start_byte / PAGE_SIZE;
+	if (check_add_overflow(start_byte, length - 1, &area->pages_node.last))
+		return -EOVERFLOW;
+	area->pages_node.last = area->pages_node.last / PAGE_SIZE;
+	if (WARN_ON(area->pages_node.last >= pages->npages))
+		return -EOVERFLOW;
+
+	/*
+	 * The area is inserted with a NULL pages indicating it is not fully
+	 * initialized yet.
+	 */
+	area->iopt = iopt;
+	interval_tree_insert(&area->node, &iopt->area_itree);
+	return 0;
+}
+
+static struct iopt_area *iopt_area_alloc(void)
+{
+	struct iopt_area *area;
+
+	area = kzalloc(sizeof(*area), GFP_KERNEL_ACCOUNT);
+	if (!area)
+		return NULL;
+	RB_CLEAR_NODE(&area->node.rb);
+	RB_CLEAR_NODE(&area->pages_node.rb);
+	return area;
+}
+
+static int iopt_alloc_area_pages(struct io_pagetable *iopt,
+				 struct list_head *pages_list,
+				 unsigned long length, unsigned long *dst_iova,
+				 int iommu_prot, unsigned int flags)
+{
+	struct iopt_pages_list *elm;
+	unsigned long iova;
+	int rc = 0;
+
+	list_for_each_entry(elm, pages_list, next) {
+		elm->area = iopt_area_alloc();
+		if (!elm->area)
+			return -ENOMEM;
+	}
+
+	down_write(&iopt->iova_rwsem);
+	if ((length & (iopt->iova_alignment - 1)) || !length) {
+		rc = -EINVAL;
+		goto out_unlock;
+	}
+
+	if (flags & IOPT_ALLOC_IOVA) {
+		/* Use the first entry to guess the ideal IOVA alignment */
+		elm = list_first_entry(pages_list, struct iopt_pages_list,
+				       next);
+		rc = iopt_alloc_iova(
+			iopt, dst_iova,
+			(uintptr_t)elm->pages->uptr + elm->start_byte, length);
+		if (rc)
+			goto out_unlock;
+		if (IS_ENABLED(CONFIG_IOMMUFD_TEST) &&
+		    WARN_ON(iopt_check_iova(iopt, *dst_iova, length))) {
+			rc = -EINVAL;
+			goto out_unlock;
+		}
+	} else {
+		rc = iopt_check_iova(iopt, *dst_iova, length);
+		if (rc)
+			goto out_unlock;
+	}
+
+	/*
+	 * Areas are created with a NULL pages so that the IOVA space is
+	 * reserved and we can unlock the iova_rwsem.
+	 */
+	iova = *dst_iova;
+	list_for_each_entry(elm, pages_list, next) {
+		rc = iopt_insert_area(iopt, elm->area, elm->pages, iova,
+				      elm->start_byte, elm->length, iommu_prot);
+		if (rc)
+			goto out_unlock;
+		iova += elm->length;
+	}
+
+out_unlock:
+	up_write(&iopt->iova_rwsem);
+	return rc;
+}
+
+static void iopt_abort_area(struct iopt_area *area)
+{
+	if (IS_ENABLED(CONFIG_IOMMUFD_TEST))
+		WARN_ON(area->pages);
+	if (area->iopt) {
+		down_write(&area->iopt->iova_rwsem);
+		interval_tree_remove(&area->node, &area->iopt->area_itree);
+		up_write(&area->iopt->iova_rwsem);
+	}
+	kfree(area);
+}
+
+void iopt_free_pages_list(struct list_head *pages_list)
+{
+	struct iopt_pages_list *elm;
+
+	while ((elm = list_first_entry_or_null(pages_list,
+					       struct iopt_pages_list, next))) {
+		if (elm->area)
+			iopt_abort_area(elm->area);
+		if (elm->pages)
+			iopt_put_pages(elm->pages);
+		list_del(&elm->next);
+		kfree(elm);
+	}
+}
+
+static int iopt_fill_domains_pages(struct list_head *pages_list)
+{
+	struct iopt_pages_list *undo_elm;
+	struct iopt_pages_list *elm;
+	int rc;
+
+	list_for_each_entry(elm, pages_list, next) {
+		rc = iopt_area_fill_domains(elm->area, elm->pages);
+		if (rc)
+			goto err_undo;
+	}
+	return 0;
+
+err_undo:
+	list_for_each_entry(undo_elm, pages_list, next) {
+		if (undo_elm == elm)
+			break;
+		iopt_area_unfill_domains(undo_elm->area, undo_elm->pages);
+	}
+	return rc;
+}
+
+int iopt_map_pages(struct io_pagetable *iopt, struct list_head *pages_list,
+		   unsigned long length, unsigned long *dst_iova,
+		   int iommu_prot, unsigned int flags)
+{
+	struct iopt_pages_list *elm;
+	int rc;
+
+	rc = iopt_alloc_area_pages(iopt, pages_list, length, dst_iova,
+				   iommu_prot, flags);
+	if (rc)
+		return rc;
+
+	down_read(&iopt->domains_rwsem);
+	rc = iopt_fill_domains_pages(pages_list);
+	if (rc)
+		goto out_unlock_domains;
+
+	down_write(&iopt->iova_rwsem);
+	list_for_each_entry(elm, pages_list, next) {
+		/*
+		 * area->pages must be set inside the domains_rwsem to ensure
+		 * any newly added domains will get filled. Moves the reference
+		 * in from the list.
+		 */
+		elm->area->pages = elm->pages;
+		elm->pages = NULL;
+		elm->area = NULL;
+	}
+	up_write(&iopt->iova_rwsem);
+out_unlock_domains:
+	up_read(&iopt->domains_rwsem);
+	return rc;
+}
+
+/**
+ * iopt_map_user_pages() - Map a user VA to an iova in the io page table
+ * @ictx: iommufd_ctx the iopt is part of
+ * @iopt: io_pagetable to act on
+ * @iova: If IOPT_ALLOC_IOVA is set this is unused on input and contains
+ *        the chosen iova on output. Otherwise is the iova to map to on input
+ * @uptr: User VA to map
+ * @length: Number of bytes to map
+ * @iommu_prot: Combination of IOMMU_READ/WRITE/etc bits for the mapping
+ * @flags: IOPT_ALLOC_IOVA or zero
+ *
+ * iova, uptr, and length must be aligned to iova_alignment. For domain backed
+ * page tables this will pin the pages and load them into the domain at iova.
+ * For non-domain page tables this will only setup a lazy reference and the
+ * caller must use iopt_access_pages() to touch them.
+ *
+ * iopt_unmap_iova() must be called to undo this before the io_pagetable can be
+ * destroyed.
+ */
+int iopt_map_user_pages(struct iommufd_ctx *ictx, struct io_pagetable *iopt,
+			unsigned long *iova, void __user *uptr,
+			unsigned long length, int iommu_prot,
+			unsigned int flags)
+{
+	struct iopt_pages_list elm = {};
+	LIST_HEAD(pages_list);
+	int rc;
+
+	elm.pages = iopt_alloc_pages(uptr, length, iommu_prot & IOMMU_WRITE);
+	if (IS_ERR(elm.pages))
+		return PTR_ERR(elm.pages);
+	if (ictx->account_mode == IOPT_PAGES_ACCOUNT_MM &&
+	    elm.pages->account_mode == IOPT_PAGES_ACCOUNT_USER)
+		elm.pages->account_mode = IOPT_PAGES_ACCOUNT_MM;
+	elm.start_byte = uptr - elm.pages->uptr;
+	elm.length = length;
+	list_add(&elm.next, &pages_list);
+
+	rc = iopt_map_pages(iopt, &pages_list, length, iova, iommu_prot, flags);
+	if (rc) {
+		if (elm.area)
+			iopt_abort_area(elm.area);
+		if (elm.pages)
+			iopt_put_pages(elm.pages);
+		return rc;
+	}
+	return 0;
+}
+
+struct iova_bitmap_fn_arg {
+	unsigned long flags;
+	struct io_pagetable *iopt;
+	struct iommu_domain *domain;
+	struct iommu_dirty_bitmap *dirty;
+};
+
+static int __iommu_read_and_clear_dirty(struct iova_bitmap *bitmap,
+					unsigned long iova, size_t length,
+					void *opaque)
+{
+	struct iopt_area *area;
+	struct iopt_area_contig_iter iter;
+	struct iova_bitmap_fn_arg *arg = opaque;
+	struct iommu_domain *domain = arg->domain;
+	struct iommu_dirty_bitmap *dirty = arg->dirty;
+	const struct iommu_dirty_ops *ops = domain->dirty_ops;
+	unsigned long last_iova = iova + length - 1;
+	unsigned long flags = arg->flags;
+	int ret;
+
+	iopt_for_each_contig_area(&iter, area, arg->iopt, iova, last_iova) {
+		unsigned long last = min(last_iova, iopt_area_last_iova(area));
+
+		ret = ops->read_and_clear_dirty(domain, iter.cur_iova,
+						last - iter.cur_iova + 1, flags,
+						dirty);
+		if (ret)
+			return ret;
+	}
+
+	if (!iopt_area_contig_done(&iter))
+		return -EINVAL;
+	return 0;
+}
+
+static int
+iommu_read_and_clear_dirty(struct iommu_domain *domain,
+			   struct io_pagetable *iopt, unsigned long flags,
+			   struct iommu_hwpt_get_dirty_bitmap *bitmap)
+{
+	const struct iommu_dirty_ops *ops = domain->dirty_ops;
+	struct iommu_iotlb_gather gather;
+	struct iommu_dirty_bitmap dirty;
+	struct iova_bitmap_fn_arg arg;
+	struct iova_bitmap *iter;
+	int ret = 0;
+
+	if (!ops || !ops->read_and_clear_dirty)
+		return -EOPNOTSUPP;
+
+	iter = iova_bitmap_alloc(bitmap->iova, bitmap->length,
+				 bitmap->page_size,
+				 u64_to_user_ptr(bitmap->data));
+	if (IS_ERR(iter))
+		return -ENOMEM;
+
+	iommu_dirty_bitmap_init(&dirty, iter, &gather);
+
+	arg.flags = flags;
+	arg.iopt = iopt;
+	arg.domain = domain;
+	arg.dirty = &dirty;
+	iova_bitmap_for_each(iter, &arg, __iommu_read_and_clear_dirty);
+
+	if (!(flags & IOMMU_DIRTY_NO_CLEAR))
+		iommu_iotlb_sync(domain, &gather);
+
+	iova_bitmap_free(iter);
+
+	return ret;
+}
+
+int iommufd_check_iova_range(struct io_pagetable *iopt,
+			     struct iommu_hwpt_get_dirty_bitmap *bitmap)
+{
+	size_t iommu_pgsize = iopt->iova_alignment;
+	u64 last_iova;
+
+	if (check_add_overflow(bitmap->iova, bitmap->length - 1, &last_iova))
+		return -EOVERFLOW;
+
+	if (bitmap->iova > ULONG_MAX || last_iova > ULONG_MAX)
+		return -EOVERFLOW;
+
+	if ((bitmap->iova & (iommu_pgsize - 1)) ||
+	    ((last_iova + 1) & (iommu_pgsize - 1)))
+		return -EINVAL;
+
+	if (!bitmap->page_size)
+		return -EINVAL;
+
+	if ((bitmap->iova & (bitmap->page_size - 1)) ||
+	    ((last_iova + 1) & (bitmap->page_size - 1)))
+		return -EINVAL;
+
+	return 0;
+}
+
+int iopt_read_and_clear_dirty_data(struct io_pagetable *iopt,
+				   struct iommu_domain *domain,
+				   unsigned long flags,
+				   struct iommu_hwpt_get_dirty_bitmap *bitmap)
+{
+	int ret;
+
+	ret = iommufd_check_iova_range(iopt, bitmap);
+	if (ret)
+		return ret;
+
+	down_read(&iopt->iova_rwsem);
+	ret = iommu_read_and_clear_dirty(domain, iopt, flags, bitmap);
+	up_read(&iopt->iova_rwsem);
+
+	return ret;
+}
+
+static int iopt_clear_dirty_data(struct io_pagetable *iopt,
+				 struct iommu_domain *domain)
+{
+	const struct iommu_dirty_ops *ops = domain->dirty_ops;
+	struct iommu_iotlb_gather gather;
+	struct iommu_dirty_bitmap dirty;
+	struct iopt_area *area;
+	int ret = 0;
+
+	lockdep_assert_held_read(&iopt->iova_rwsem);
+
+	iommu_dirty_bitmap_init(&dirty, NULL, &gather);
+
+	for (area = iopt_area_iter_first(iopt, 0, ULONG_MAX); area;
+	     area = iopt_area_iter_next(area, 0, ULONG_MAX)) {
+		if (!area->pages)
+			continue;
+
+		ret = ops->read_and_clear_dirty(domain, iopt_area_iova(area),
+						iopt_area_length(area), 0,
+						&dirty);
+		if (ret)
+			break;
+	}
+
+	iommu_iotlb_sync(domain, &gather);
+	return ret;
+}
+
+int iopt_set_dirty_tracking(struct io_pagetable *iopt,
+			    struct iommu_domain *domain, bool enable)
+{
+	const struct iommu_dirty_ops *ops = domain->dirty_ops;
+	int ret = 0;
+
+	if (!ops)
+		return -EOPNOTSUPP;
+
+	down_read(&iopt->iova_rwsem);
+
+	/* Clear dirty bits from PTEs to ensure a clean snapshot */
+	if (enable) {
+		ret = iopt_clear_dirty_data(iopt, domain);
+		if (ret)
+			goto out_unlock;
+	}
+
+	ret = ops->set_dirty_tracking(domain, enable);
+
+out_unlock:
+	up_read(&iopt->iova_rwsem);
+	return ret;
+}
+
+int iopt_get_pages(struct io_pagetable *iopt, unsigned long iova,
+		   unsigned long length, struct list_head *pages_list)
+{
+	struct iopt_area_contig_iter iter;
+	unsigned long last_iova;
+	struct iopt_area *area;
+	int rc;
+
+	if (!length)
+		return -EINVAL;
+	if (check_add_overflow(iova, length - 1, &last_iova))
+		return -EOVERFLOW;
+
+	down_read(&iopt->iova_rwsem);
+	iopt_for_each_contig_area(&iter, area, iopt, iova, last_iova) {
+		struct iopt_pages_list *elm;
+		unsigned long last = min(last_iova, iopt_area_last_iova(area));
+
+		elm = kzalloc(sizeof(*elm), GFP_KERNEL_ACCOUNT);
+		if (!elm) {
+			rc = -ENOMEM;
+			goto err_free;
+		}
+		elm->start_byte = iopt_area_start_byte(area, iter.cur_iova);
+		elm->pages = area->pages;
+		elm->length = (last - iter.cur_iova) + 1;
+		kref_get(&elm->pages->kref);
+		list_add_tail(&elm->next, pages_list);
+	}
+	if (!iopt_area_contig_done(&iter)) {
+		rc = -ENOENT;
+		goto err_free;
+	}
+	up_read(&iopt->iova_rwsem);
+	return 0;
+err_free:
+	up_read(&iopt->iova_rwsem);
+	iopt_free_pages_list(pages_list);
+	return rc;
+}
+
+static int iopt_unmap_iova_range(struct io_pagetable *iopt, unsigned long start,
+				 unsigned long last, unsigned long *unmapped)
+{
+	struct iopt_area *area;
+	unsigned long unmapped_bytes = 0;
+	unsigned int tries = 0;
+	int rc = -ENOENT;
+
+	/*
+	 * The domains_rwsem must be held in read mode any time any area->pages
+	 * is NULL. This prevents domain attach/detatch from running
+	 * concurrently with cleaning up the area.
+	 */
+again:
+	down_read(&iopt->domains_rwsem);
+	down_write(&iopt->iova_rwsem);
+	while ((area = iopt_area_iter_first(iopt, start, last))) {
+		unsigned long area_last = iopt_area_last_iova(area);
+		unsigned long area_first = iopt_area_iova(area);
+		struct iopt_pages *pages;
+
+		/* Userspace should not race map/unmap's of the same area */
+		if (!area->pages) {
+			rc = -EBUSY;
+			goto out_unlock_iova;
+		}
+
+		if (area_first < start || area_last > last) {
+			rc = -ENOENT;
+			goto out_unlock_iova;
+		}
+
+		if (area_first != start)
+			tries = 0;
+
+		/*
+		 * num_accesses writers must hold the iova_rwsem too, so we can
+		 * safely read it under the write side of the iovam_rwsem
+		 * without the pages->mutex.
+		 */
+		if (area->num_accesses) {
+			size_t length = iopt_area_length(area);
+
+			start = area_first;
+			area->prevent_access = true;
+			up_write(&iopt->iova_rwsem);
+			up_read(&iopt->domains_rwsem);
+
+			iommufd_access_notify_unmap(iopt, area_first, length);
+			/* Something is not responding to unmap requests. */
+			tries++;
+			if (WARN_ON(tries > 100))
+				return -EDEADLOCK;
+			goto again;
+		}
+
+		pages = area->pages;
+		area->pages = NULL;
+		up_write(&iopt->iova_rwsem);
+
+		iopt_area_unfill_domains(area, pages);
+		iopt_abort_area(area);
+		iopt_put_pages(pages);
+
+		unmapped_bytes += area_last - area_first + 1;
+
+		down_write(&iopt->iova_rwsem);
+	}
+	if (unmapped_bytes)
+		rc = 0;
+
+out_unlock_iova:
+	up_write(&iopt->iova_rwsem);
+	up_read(&iopt->domains_rwsem);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (unmapped)
 		*unmapped = unmapped_bytes;
 	return rc;

@@ -1687,12 +1687,17 @@ batadv_nc_skb_decode_packet(struct batadv_priv *bat_priv, struct sk_buff *skb,
 
 	coding_len = ntohs(coded_packet_tmp.coded_len);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* ensure dst buffer is large enough (payload only) */
 	if (coding_len + h_size > skb->len)
 		return NULL;
 
 	/* ensure src buffer is large enough (payload only) */
 	if (coding_len + h_size > nc_packet->skb->len)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (coding_len > skb->len)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return NULL;
 
 	/* Here the magic is reversed:

@@ -506,6 +506,7 @@ static void do_bad_area(unsigned long far, unsigned long esr,
 	}
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static bool fault_from_pkey(struct vm_area_struct *vma, unsigned int mm_flags)
 {
 	if (!system_supports_poe())
@@ -831,6 +832,321 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 	}
 	trace_android_rvh_do_sea(siaddr, esr, regs);
 	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static bool fault_from_pkey(unsigned long esr, struct vm_area_struct *vma,
+			unsigned int mm_flags)
+{
+	unsigned long iss2 = ESR_ELx_ISS2(esr);
+
+	if (!system_supports_poe())
+		return false;
+
+	if (esr_fsc_is_permission_fault(esr) && (iss2 & ESR_ELx_Overlay))
+		return true;
+
+	return !arch_vma_access_permitted(vma,
+			mm_flags & FAULT_FLAG_WRITE,
+			mm_flags & FAULT_FLAG_INSTRUCTION,
+			false);
+}
+
+static bool is_el0_instruction_abort(unsigned long esr)
+{
+	return ESR_ELx_EC(esr) == ESR_ELx_EC_IABT_LOW;
+}
+
+/*
+ * Note: not valid for EL1 DC IVAC, but we never use that such that it
+ * should fault. EL0 cannot issue DC IVAC (undef).
+ */
+static bool is_write_abort(unsigned long esr)
+{
+	return (esr & ESR_ELx_WNR) && !(esr & ESR_ELx_CM);
+}
+
+static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
+				   struct pt_regs *regs)
+{
+	const struct fault_info *inf;
+	struct mm_struct *mm = current->mm;
+	vm_fault_t fault;
+	unsigned long vm_flags;
+	unsigned int mm_flags = FAULT_FLAG_DEFAULT;
+	unsigned long addr = untagged_addr(far);
+	struct vm_area_struct *vma;
+	int si_code;
+	int pkey = -1;
+
+	if (kprobe_page_fault(regs, esr))
+		return 0;
+
+	/*
+	 * If we're in an interrupt or have no user context, we must not take
+	 * the fault.
+	 */
+	if (faulthandler_disabled() || !mm)
+		goto no_context;
+
+	if (user_mode(regs))
+		mm_flags |= FAULT_FLAG_USER;
+
+	/*
+	 * vm_flags tells us what bits we must have in vma->vm_flags
+	 * for the fault to be benign, __do_page_fault() would check
+	 * vma->vm_flags & vm_flags and returns an error if the
+	 * intersection is empty
+	 */
+	if (is_el0_instruction_abort(esr)) {
+		/* It was exec fault */
+		vm_flags = VM_EXEC;
+		mm_flags |= FAULT_FLAG_INSTRUCTION;
+	} else if (is_write_abort(esr)) {
+		/* It was write fault */
+		vm_flags = VM_WRITE;
+		mm_flags |= FAULT_FLAG_WRITE;
+	} else {
+		/* It was read fault */
+		vm_flags = VM_READ;
+		/* Write implies read */
+		vm_flags |= VM_WRITE;
+		/* If EPAN is absent then exec implies read */
+		if (!alternative_has_cap_unlikely(ARM64_HAS_EPAN))
+			vm_flags |= VM_EXEC;
+	}
+
+	if (is_ttbr0_addr(addr) && is_el1_permission_fault(addr, esr, regs)) {
+		if (is_el1_instruction_abort(esr))
+			die_kernel_fault("execution of user memory",
+					 addr, esr, regs);
+
+		if (!search_exception_tables(regs->pc))
+			die_kernel_fault("access to user memory outside uaccess routines",
+					 addr, esr, regs);
+	}
+
+	if (is_pkvm_stage2_abort(esr)) {
+		if (!user_mode(regs))
+			goto no_context;
+		arm64_force_sig_fault(SIGSEGV, SEGV_ACCERR, far, "stage-2 fault");
+		return 0;
+	}
+
+	perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS, 1, regs, addr);
+
+	if (!(mm_flags & FAULT_FLAG_USER))
+		goto lock_mmap;
+
+	vma = lock_vma_under_rcu(mm, addr);
+	if (!vma)
+		goto lock_mmap;
+
+	if (!(vma->vm_flags & vm_flags)) {
+		vma_end_read(vma);
+		fault = 0;
+		si_code = SEGV_ACCERR;
+		count_vm_vma_lock_event(VMA_LOCK_SUCCESS);
+		goto bad_area;
+	}
+
+	if (fault_from_pkey(esr, vma, mm_flags)) {
+		pkey = vma_pkey(vma);
+		vma_end_read(vma);
+		fault = 0;
+		si_code = SEGV_PKUERR;
+		count_vm_vma_lock_event(VMA_LOCK_SUCCESS);
+		goto bad_area;
+	}
+
+	fault = handle_mm_fault(vma, addr, mm_flags | FAULT_FLAG_VMA_LOCK, regs);
+	if (!(fault & (VM_FAULT_RETRY | VM_FAULT_COMPLETED)))
+		vma_end_read(vma);
+
+	if (!(fault & VM_FAULT_RETRY)) {
+		count_vm_vma_lock_event(VMA_LOCK_SUCCESS);
+		goto done;
+	}
+	count_vm_vma_lock_event(VMA_LOCK_RETRY);
+	if (fault & VM_FAULT_MAJOR)
+		mm_flags |= FAULT_FLAG_TRIED;
+
+	/* Quick path to respond to signals */
+	if (fault_signal_pending(fault, regs)) {
+		if (!user_mode(regs))
+			goto no_context;
+		return 0;
+	}
+lock_mmap:
+
+retry:
+	vma = lock_mm_and_find_vma(mm, addr, regs);
+	if (unlikely(!vma)) {
+		fault = 0;
+		si_code = SEGV_MAPERR;
+		goto bad_area;
+	}
+
+	if (!(vma->vm_flags & vm_flags)) {
+		mmap_read_unlock(mm);
+		fault = 0;
+		si_code = SEGV_ACCERR;
+		goto bad_area;
+	}
+
+	if (fault_from_pkey(esr, vma, mm_flags)) {
+		pkey = vma_pkey(vma);
+		mmap_read_unlock(mm);
+		fault = 0;
+		si_code = SEGV_PKUERR;
+		goto bad_area;
+	}
+
+	fault = handle_mm_fault(vma, addr, mm_flags, regs);
+
+	/* Quick path to respond to signals */
+	if (fault_signal_pending(fault, regs)) {
+		if (!user_mode(regs))
+			goto no_context;
+		return 0;
+	}
+
+	/* The fault is fully completed (including releasing mmap lock) */
+	if (fault & VM_FAULT_COMPLETED)
+		return 0;
+
+	if (fault & VM_FAULT_RETRY) {
+		mm_flags |= FAULT_FLAG_TRIED;
+		goto retry;
+	}
+	mmap_read_unlock(mm);
+
+done:
+	/* Handle the "normal" (no error) case first. */
+	if (likely(!(fault & VM_FAULT_ERROR)))
+		return 0;
+
+	si_code = SEGV_MAPERR;
+bad_area:
+	/*
+	 * If we are in kernel mode at this point, we have no context to
+	 * handle this fault with.
+	 */
+	if (!user_mode(regs))
+		goto no_context;
+
+	if (fault & VM_FAULT_OOM) {
+		/*
+		 * We ran out of memory, call the OOM killer, and return to
+		 * userspace (which will retry the fault, or kill us if we got
+		 * oom-killed).
+		 */
+		pagefault_out_of_memory();
+		return 0;
+	}
+
+	inf = esr_to_fault_info(esr);
+	set_thread_esr(addr, esr);
+	if (fault & VM_FAULT_SIGBUS) {
+		/*
+		 * We had some memory, but were unable to successfully fix up
+		 * this page fault.
+		 */
+		arm64_force_sig_fault(SIGBUS, BUS_ADRERR, far, inf->name);
+	} else if (fault & (VM_FAULT_HWPOISON_LARGE | VM_FAULT_HWPOISON)) {
+		unsigned int lsb;
+
+		lsb = PAGE_SHIFT;
+		if (fault & VM_FAULT_HWPOISON_LARGE)
+			lsb = hstate_index_to_shift(VM_FAULT_GET_HINDEX(fault));
+
+		arm64_force_sig_mceerr(BUS_MCEERR_AR, far, lsb, inf->name);
+	} else {
+		/*
+		 * The pkey value that we return to userspace can be different
+		 * from the pkey that caused the fault.
+		 *
+		 * 1. T1   : mprotect_key(foo, PAGE_SIZE, pkey=4);
+		 * 2. T1   : set POR_EL0 to deny access to pkey=4, touches, page
+		 * 3. T1   : faults...
+		 * 4.    T2: mprotect_key(foo, PAGE_SIZE, pkey=5);
+		 * 5. T1   : enters fault handler, takes mmap_lock, etc...
+		 * 6. T1   : reaches here, sees vma_pkey(vma)=5, when we really
+		 *	     faulted on a pte with its pkey=4.
+		 */
+		/* Something tried to access memory that out of memory map */
+		if (si_code == SEGV_PKUERR)
+			arm64_force_sig_fault_pkey(far, inf->name, pkey);
+		else
+			arm64_force_sig_fault(SIGSEGV, si_code, far, inf->name);
+	}
+
+	return 0;
+
+no_context:
+	__do_kernel_fault(addr, esr, regs);
+	return 0;
+}
+
+static int __kprobes do_translation_fault(unsigned long far,
+					  unsigned long esr,
+					  struct pt_regs *regs)
+{
+	unsigned long addr = untagged_addr(far);
+
+	if (is_ttbr0_addr(addr))
+		return do_page_fault(far, esr, regs);
+
+	do_bad_area(far, esr, regs);
+	return 0;
+}
+
+static int do_alignment_fault(unsigned long far, unsigned long esr,
+			      struct pt_regs *regs)
+{
+	if (IS_ENABLED(CONFIG_COMPAT_ALIGNMENT_FIXUPS) &&
+	    compat_user_mode(regs))
+		return do_compat_alignment_fixup(far, regs);
+	do_bad_area(far, esr, regs);
+	return 0;
+}
+
+static int do_bad(unsigned long far, unsigned long esr, struct pt_regs *regs)
+{
+	return 1; /* "fault" */
+}
+
+static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
+{
+	const struct fault_info *inf;
+	unsigned long siaddr;
+	bool can_fixup = false;
+
+	trace_android_vh_try_fixup_sea(far, esr, regs, &can_fixup);
+	if (can_fixup && fixup_exception(regs))
+		return 0;
+
+	inf = esr_to_fault_info(esr);
+
+	if (user_mode(regs) && apei_claim_sea(regs) == 0) {
+		/*
+		 * APEI claimed this as a firmware-first notification.
+		 * Some processing deferred to task_work before ret_to_user().
+		 */
+		return 0;
+	}
+
+	if (esr & ESR_ELx_FnV) {
+		siaddr = 0;
+	} else {
+		/*
+		 * The architecture specifies that the tag bits of FAR_EL1 are
+		 * UNKNOWN for synchronous external aborts. Mask them out now
+		 * so that userspace doesn't see them.
+		 */
+		siaddr  = untagged_addr(far);
+	}
+	trace_android_rvh_do_sea(siaddr, esr, regs);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;

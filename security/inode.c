@@ -159,6 +159,7 @@ static struct dentry *securityfs_create_dentry(const char *name, umode_t mode,
 		inode->i_fop = fops;
 	}
 	d_instantiate(dentry, inode);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	inode_unlock(dir);
 	return dentry;
 
@@ -305,6 +306,157 @@ void securityfs_remove(struct dentry *dentry)
 			simple_rmdir(dir, dentry);
 		else
 			simple_unlink(dir, dentry);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	dget(dentry);
+	inode_unlock(dir);
+	return dentry;
+
+out1:
+	dput(dentry);
+	dentry = ERR_PTR(error);
+out:
+	inode_unlock(dir);
+	simple_release_fs(&mount, &mount_count);
+	return dentry;
+}
+
+/**
+ * securityfs_create_file - create a file in the securityfs filesystem
+ *
+ * @name: a pointer to a string containing the name of the file to create.
+ * @mode: the permission that the file should have
+ * @parent: a pointer to the parent dentry for this file.  This should be a
+ *          directory dentry if set.  If this parameter is %NULL, then the
+ *          file will be created in the root of the securityfs filesystem.
+ * @data: a pointer to something that the caller will want to get to later
+ *        on.  The inode.i_private pointer will point to this value on
+ *        the open() call.
+ * @fops: a pointer to a struct file_operations that should be used for
+ *        this file.
+ *
+ * This function creates a file in securityfs with the given @name.
+ *
+ * This function returns a pointer to a dentry if it succeeds.  This
+ * pointer must be passed to the securityfs_remove() function when the file is
+ * to be removed (no automatic cleanup happens if your module is unloaded,
+ * you are responsible here).  If an error occurs, the function will return
+ * the error value (via ERR_PTR).
+ *
+ * If securityfs is not enabled in the kernel, the value %-ENODEV is
+ * returned.
+ */
+struct dentry *securityfs_create_file(const char *name, umode_t mode,
+				      struct dentry *parent, void *data,
+				      const struct file_operations *fops)
+{
+	return securityfs_create_dentry(name, mode, parent, data, fops, NULL);
+}
+EXPORT_SYMBOL_GPL(securityfs_create_file);
+
+/**
+ * securityfs_create_dir - create a directory in the securityfs filesystem
+ *
+ * @name: a pointer to a string containing the name of the directory to
+ *        create.
+ * @parent: a pointer to the parent dentry for this file.  This should be a
+ *          directory dentry if set.  If this parameter is %NULL, then the
+ *          directory will be created in the root of the securityfs filesystem.
+ *
+ * This function creates a directory in securityfs with the given @name.
+ *
+ * This function returns a pointer to a dentry if it succeeds.  This
+ * pointer must be passed to the securityfs_remove() function when the file is
+ * to be removed (no automatic cleanup happens if your module is unloaded,
+ * you are responsible here).  If an error occurs, the function will return
+ * the error value (via ERR_PTR).
+ *
+ * If securityfs is not enabled in the kernel, the value %-ENODEV is
+ * returned.
+ */
+struct dentry *securityfs_create_dir(const char *name, struct dentry *parent)
+{
+	return securityfs_create_file(name, S_IFDIR | 0755, parent, NULL, NULL);
+}
+EXPORT_SYMBOL_GPL(securityfs_create_dir);
+
+/**
+ * securityfs_create_symlink - create a symlink in the securityfs filesystem
+ *
+ * @name: a pointer to a string containing the name of the symlink to
+ *        create.
+ * @parent: a pointer to the parent dentry for the symlink.  This should be a
+ *          directory dentry if set.  If this parameter is %NULL, then the
+ *          directory will be created in the root of the securityfs filesystem.
+ * @target: a pointer to a string containing the name of the symlink's target.
+ *          If this parameter is %NULL, then the @iops parameter needs to be
+ *          setup to handle .readlink and .get_link inode_operations.
+ * @iops: a pointer to the struct inode_operations to use for the symlink. If
+ *        this parameter is %NULL, then the default simple_symlink_inode
+ *        operations will be used.
+ *
+ * This function creates a symlink in securityfs with the given @name.
+ *
+ * This function returns a pointer to a dentry if it succeeds.  This
+ * pointer must be passed to the securityfs_remove() function when the file is
+ * to be removed (no automatic cleanup happens if your module is unloaded,
+ * you are responsible here).  If an error occurs, the function will return
+ * the error value (via ERR_PTR).
+ *
+ * If securityfs is not enabled in the kernel, the value %-ENODEV is
+ * returned.
+ */
+struct dentry *securityfs_create_symlink(const char *name,
+					 struct dentry *parent,
+					 const char *target,
+					 const struct inode_operations *iops)
+{
+	struct dentry *dent;
+	char *link = NULL;
+
+	if (target) {
+		link = kstrdup(target, GFP_KERNEL);
+		if (!link)
+			return ERR_PTR(-ENOMEM);
+	}
+	dent = securityfs_create_dentry(name, S_IFLNK | 0444, parent,
+					link, NULL, iops);
+	if (IS_ERR(dent))
+		kfree(link);
+
+	return dent;
+}
+EXPORT_SYMBOL_GPL(securityfs_create_symlink);
+
+/**
+ * securityfs_remove - removes a file or directory from the securityfs filesystem
+ *
+ * @dentry: a pointer to a the dentry of the file or directory to be removed.
+ *
+ * This function removes a file or directory in securityfs that was previously
+ * created with a call to another securityfs function (like
+ * securityfs_create_file() or variants thereof.)
+ *
+ * This function is required to be called in order for the file to be
+ * removed. No automatic cleanup of files will happen when a module is
+ * removed; you are responsible here.
+ */
+void securityfs_remove(struct dentry *dentry)
+{
+	struct inode *dir;
+
+	if (IS_ERR_OR_NULL(dentry))
+		return;
+
+	dir = d_inode(dentry->d_parent);
+	inode_lock(dir);
+	if (simple_positive(dentry)) {
+		if (d_is_dir(dentry))
+			simple_rmdir(dir, dentry);
+		else
+			simple_unlink(dir, dentry);
+		dput(dentry);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 	inode_unlock(dir);
 	simple_release_fs(&mount, &mount_count);

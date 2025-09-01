@@ -276,6 +276,7 @@ ___update_load_avg(struct sched_avg *sa, unsigned long load)
  *
  *   group: [ see update_cfs_group() ]
  *     se_weight()   = tg->weight * grq->load_avg / tg->load_avg
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  *     se_runnable() = grq->h_nr_queued
  *
  *   runnable_sum = se_runnable() * runnable = grq->runnable_sum
@@ -342,6 +343,75 @@ int __update_load_avg_cfs_rq(u64 now, struct cfs_rq *cfs_rq)
 	if (___update_load_sum(now, &cfs_rq->avg,
 				scale_load_down(cfs_rq->load.weight),
 				cfs_rq->h_nr_queued - cfs_rq->h_nr_delayed,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ *     se_runnable() = grq->h_nr_running
+ *
+ *   runnable_sum = se_runnable() * runnable = grq->runnable_sum
+ *   runnable_avg = runnable_sum
+ *
+ *   load_sum := runnable
+ *   load_avg = se_weight(se) * load_sum
+ *
+ * cfq_rq:
+ *
+ *   runnable_sum = \Sum se->avg.runnable_sum
+ *   runnable_avg = \Sum se->avg.runnable_avg
+ *
+ *   load_sum = \Sum se_weight(se) * se->avg.load_sum
+ *   load_avg = \Sum se->avg.load_avg
+ */
+
+int __update_load_avg_blocked_se(u64 now, struct sched_entity *se)
+{
+	int ret = -1;
+
+	trace_android_rvh_update_load_avg_blocked_se(now, se, &ret);
+	if (ret != -1)
+		return ret;
+
+	if (___update_load_sum(now, &se->avg, 0, 0, 0)) {
+		___update_load_avg(&se->avg, se_weight(se));
+		trace_pelt_se_tp(se);
+		return 1;
+	}
+
+	return 0;
+}
+EXPORT_SYMBOL_GPL(__update_load_avg_blocked_se);
+
+int __update_load_avg_se(u64 now, struct cfs_rq *cfs_rq, struct sched_entity *se)
+{
+	int ret = -1;
+
+	trace_android_rvh_update_load_avg_se(now, cfs_rq, se, &ret);
+	if (ret != -1)
+		return ret;
+
+	if (___update_load_sum(now, &se->avg, !!se->on_rq, se_runnable(se),
+				cfs_rq->curr == se)) {
+
+		___update_load_avg(&se->avg, se_weight(se));
+		cfs_se_util_change(&se->avg);
+		trace_pelt_se_tp(se);
+		return 1;
+	}
+
+	return 0;
+}
+
+int __update_load_avg_cfs_rq(u64 now, struct cfs_rq *cfs_rq)
+{
+	int ret = -1;
+
+	trace_android_rvh_update_load_avg_cfs_rq(now, cfs_rq, &ret);
+	if (ret != -1)
+		return ret;
+
+	if (___update_load_sum(now, &cfs_rq->avg,
+				scale_load_down(cfs_rq->load.weight),
+				cfs_rq->h_nr_running - cfs_rq->h_nr_delayed,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				cfs_rq->curr != NULL)) {
 
 		___update_load_avg(&cfs_rq->avg, 1);

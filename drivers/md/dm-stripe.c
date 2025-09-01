@@ -457,6 +457,7 @@ static void stripe_io_hints(struct dm_target *ti,
 			    struct queue_limits *limits)
 {
 	struct stripe_c *sc = ti->private;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	unsigned int io_min, io_opt;
 
 	limits->chunk_sectors = sc->chunk_size;
@@ -466,6 +467,13 @@ static void stripe_io_hints(struct dm_target *ti,
 		limits->io_min = io_min;
 		limits->io_opt = io_opt;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	unsigned int chunk_size = sc->chunk_size << SECTOR_SHIFT;
+
+	limits->io_min = chunk_size;
+	limits->io_opt = chunk_size * sc->stripes;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static struct target_type stripe_target = {

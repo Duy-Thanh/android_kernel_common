@@ -217,6 +217,7 @@ int mgmt_cmd_complete(struct sock *sk, u16 index, u16 cmd, u8 status,
 struct mgmt_pending_cmd *mgmt_pending_find(unsigned short channel, u16 opcode,
 					   struct hci_dev *hdev)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct mgmt_pending_cmd *cmd, *tmp;
 
 	mutex_lock(&hdev->mgmt_pending_lock);
@@ -317,6 +318,87 @@ void mgmt_pending_remove(struct mgmt_pending_cmd *cmd)
 	list_del(&cmd->list);
 	mutex_unlock(&cmd->hdev->mgmt_pending_lock);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct mgmt_pending_cmd *cmd;
+
+	list_for_each_entry(cmd, &hdev->mgmt_pending, list) {
+		if (hci_sock_get_channel(cmd->sk) != channel)
+			continue;
+		if (cmd->opcode == opcode)
+			return cmd;
+	}
+
+	return NULL;
+}
+
+void mgmt_pending_foreach(u16 opcode, struct hci_dev *hdev,
+			  void (*cb)(struct mgmt_pending_cmd *cmd, void *data),
+			  void *data)
+{
+	struct mgmt_pending_cmd *cmd, *tmp;
+
+	list_for_each_entry_safe(cmd, tmp, &hdev->mgmt_pending, list) {
+		if (opcode > 0 && cmd->opcode != opcode)
+			continue;
+
+		cb(cmd, data);
+	}
+}
+
+struct mgmt_pending_cmd *mgmt_pending_new(struct sock *sk, u16 opcode,
+					  struct hci_dev *hdev,
+					  void *data, u16 len)
+{
+	struct mgmt_pending_cmd *cmd;
+
+	cmd = kzalloc(sizeof(*cmd), GFP_KERNEL);
+	if (!cmd)
+		return NULL;
+
+	cmd->opcode = opcode;
+	cmd->index = hdev->id;
+
+	cmd->param = kmemdup(data, len, GFP_KERNEL);
+	if (!cmd->param) {
+		kfree(cmd);
+		return NULL;
+	}
+
+	cmd->param_len = len;
+
+	cmd->sk = sk;
+	sock_hold(sk);
+
+	return cmd;
+}
+
+struct mgmt_pending_cmd *mgmt_pending_add(struct sock *sk, u16 opcode,
+					  struct hci_dev *hdev,
+					  void *data, u16 len)
+{
+	struct mgmt_pending_cmd *cmd;
+
+	cmd = mgmt_pending_new(sk, opcode, hdev, data, len);
+	if (!cmd)
+		return NULL;
+
+	list_add_tail(&cmd->list, &hdev->mgmt_pending);
+
+	return cmd;
+}
+
+void mgmt_pending_free(struct mgmt_pending_cmd *cmd)
+{
+	sock_put(cmd->sk);
+	kfree(cmd->param);
+	kfree(cmd);
+}
+
+void mgmt_pending_remove(struct mgmt_pending_cmd *cmd)
+{
+	list_del(&cmd->list);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	mgmt_pending_free(cmd);
 }
 

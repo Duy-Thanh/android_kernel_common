@@ -968,6 +968,7 @@ static int std_validate_compound(const struct v4l2_ctrl *ctrl, u32 idx,
 
 			p_h264_sps->flags &=
 				~V4L2_H264_SPS_FLAG_QPPRIME_Y_ZERO_TRANSFORM_BYPASS;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		}
 
 		if (p_h264_sps->chroma_format_idc < 3)
@@ -1661,6 +1662,703 @@ void v4l2_ctrl_handler_free(struct v4l2_ctrl_handler *hdl)
 	kvfree(hdl->buckets);
 	hdl->buckets = NULL;
 	hdl->cached = NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+			if (p_h264_sps->chroma_format_idc < 3)
+				p_h264_sps->flags &=
+					~V4L2_H264_SPS_FLAG_SEPARATE_COLOUR_PLANE;
+		}
+
+		if (p_h264_sps->flags & V4L2_H264_SPS_FLAG_FRAME_MBS_ONLY)
+			p_h264_sps->flags &=
+				~V4L2_H264_SPS_FLAG_MB_ADAPTIVE_FRAME_FIELD;
+
+		/*
+		 * Chroma 4:2:2 format require at least High 4:2:2 profile.
+		 *
+		 * The H264 specification and well-known parser implementations
+		 * use profile-idc values directly, as that is clearer and
+		 * less ambiguous. We do the same here.
+		 */
+		if (p_h264_sps->profile_idc < 122 &&
+		    p_h264_sps->chroma_format_idc > 1)
+			return -EINVAL;
+		/* Chroma 4:4:4 format require at least High 4:2:2 profile */
+		if (p_h264_sps->profile_idc < 244 &&
+		    p_h264_sps->chroma_format_idc > 2)
+			return -EINVAL;
+		if (p_h264_sps->chroma_format_idc > 3)
+			return -EINVAL;
+
+		if (p_h264_sps->bit_depth_luma_minus8 > 6)
+			return -EINVAL;
+		if (p_h264_sps->bit_depth_chroma_minus8 > 6)
+			return -EINVAL;
+		if (p_h264_sps->log2_max_frame_num_minus4 > 12)
+			return -EINVAL;
+		if (p_h264_sps->pic_order_cnt_type > 2)
+			return -EINVAL;
+		if (p_h264_sps->log2_max_pic_order_cnt_lsb_minus4 > 12)
+			return -EINVAL;
+		if (p_h264_sps->max_num_ref_frames > V4L2_H264_REF_LIST_LEN)
+			return -EINVAL;
+		break;
+
+	case V4L2_CTRL_TYPE_H264_PPS:
+		p_h264_pps = p;
+
+		if (p_h264_pps->num_slice_groups_minus1 > 7)
+			return -EINVAL;
+		if (p_h264_pps->num_ref_idx_l0_default_active_minus1 >
+		    (V4L2_H264_REF_LIST_LEN - 1))
+			return -EINVAL;
+		if (p_h264_pps->num_ref_idx_l1_default_active_minus1 >
+		    (V4L2_H264_REF_LIST_LEN - 1))
+			return -EINVAL;
+		if (p_h264_pps->weighted_bipred_idc > 2)
+			return -EINVAL;
+		/*
+		 * pic_init_qp_minus26 shall be in the range of
+		 * -(26 + QpBdOffset_y) to +25, inclusive,
+		 *  where QpBdOffset_y is 6 * bit_depth_luma_minus8
+		 */
+		if (p_h264_pps->pic_init_qp_minus26 < -62 ||
+		    p_h264_pps->pic_init_qp_minus26 > 25)
+			return -EINVAL;
+		if (p_h264_pps->pic_init_qs_minus26 < -26 ||
+		    p_h264_pps->pic_init_qs_minus26 > 25)
+			return -EINVAL;
+		if (p_h264_pps->chroma_qp_index_offset < -12 ||
+		    p_h264_pps->chroma_qp_index_offset > 12)
+			return -EINVAL;
+		if (p_h264_pps->second_chroma_qp_index_offset < -12 ||
+		    p_h264_pps->second_chroma_qp_index_offset > 12)
+			return -EINVAL;
+		break;
+
+	case V4L2_CTRL_TYPE_H264_SCALING_MATRIX:
+		break;
+
+	case V4L2_CTRL_TYPE_H264_PRED_WEIGHTS:
+		p_h264_pred_weights = p;
+
+		if (p_h264_pred_weights->luma_log2_weight_denom > 7)
+			return -EINVAL;
+		if (p_h264_pred_weights->chroma_log2_weight_denom > 7)
+			return -EINVAL;
+		break;
+
+	case V4L2_CTRL_TYPE_H264_SLICE_PARAMS:
+		p_h264_slice_params = p;
+
+		if (p_h264_slice_params->slice_type != V4L2_H264_SLICE_TYPE_B)
+			p_h264_slice_params->flags &=
+				~V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED;
+
+		if (p_h264_slice_params->colour_plane_id > 2)
+			return -EINVAL;
+		if (p_h264_slice_params->cabac_init_idc > 2)
+			return -EINVAL;
+		if (p_h264_slice_params->disable_deblocking_filter_idc > 2)
+			return -EINVAL;
+		if (p_h264_slice_params->slice_alpha_c0_offset_div2 < -6 ||
+		    p_h264_slice_params->slice_alpha_c0_offset_div2 > 6)
+			return -EINVAL;
+		if (p_h264_slice_params->slice_beta_offset_div2 < -6 ||
+		    p_h264_slice_params->slice_beta_offset_div2 > 6)
+			return -EINVAL;
+
+		if (p_h264_slice_params->slice_type == V4L2_H264_SLICE_TYPE_I ||
+		    p_h264_slice_params->slice_type == V4L2_H264_SLICE_TYPE_SI)
+			p_h264_slice_params->num_ref_idx_l0_active_minus1 = 0;
+		if (p_h264_slice_params->slice_type != V4L2_H264_SLICE_TYPE_B)
+			p_h264_slice_params->num_ref_idx_l1_active_minus1 = 0;
+
+		if (p_h264_slice_params->num_ref_idx_l0_active_minus1 >
+		    (V4L2_H264_REF_LIST_LEN - 1))
+			return -EINVAL;
+		if (p_h264_slice_params->num_ref_idx_l1_active_minus1 >
+		    (V4L2_H264_REF_LIST_LEN - 1))
+			return -EINVAL;
+		zero_reserved(*p_h264_slice_params);
+		break;
+
+	case V4L2_CTRL_TYPE_H264_DECODE_PARAMS:
+		p_h264_dec_params = p;
+
+		if (p_h264_dec_params->nal_ref_idc > 3)
+			return -EINVAL;
+		for (i = 0; i < V4L2_H264_NUM_DPB_ENTRIES; i++) {
+			struct v4l2_h264_dpb_entry *dpb_entry =
+				&p_h264_dec_params->dpb[i];
+
+			zero_reserved(*dpb_entry);
+		}
+		zero_reserved(*p_h264_dec_params);
+		break;
+
+	case V4L2_CTRL_TYPE_VP8_FRAME:
+		p_vp8_frame = p;
+
+		switch (p_vp8_frame->num_dct_parts) {
+		case 1:
+		case 2:
+		case 4:
+		case 8:
+			break;
+		default:
+			return -EINVAL;
+		}
+		zero_padding(p_vp8_frame->segment);
+		zero_padding(p_vp8_frame->lf);
+		zero_padding(p_vp8_frame->quant);
+		zero_padding(p_vp8_frame->entropy);
+		zero_padding(p_vp8_frame->coder_state);
+		break;
+
+	case V4L2_CTRL_TYPE_HEVC_SPS:
+		p_hevc_sps = p;
+
+		if (!(p_hevc_sps->flags & V4L2_HEVC_SPS_FLAG_PCM_ENABLED)) {
+			p_hevc_sps->pcm_sample_bit_depth_luma_minus1 = 0;
+			p_hevc_sps->pcm_sample_bit_depth_chroma_minus1 = 0;
+			p_hevc_sps->log2_min_pcm_luma_coding_block_size_minus3 = 0;
+			p_hevc_sps->log2_diff_max_min_pcm_luma_coding_block_size = 0;
+		}
+
+		if (!(p_hevc_sps->flags &
+		      V4L2_HEVC_SPS_FLAG_LONG_TERM_REF_PICS_PRESENT))
+			p_hevc_sps->num_long_term_ref_pics_sps = 0;
+		break;
+
+	case V4L2_CTRL_TYPE_HEVC_PPS:
+		p_hevc_pps = p;
+
+		if (!(p_hevc_pps->flags &
+		      V4L2_HEVC_PPS_FLAG_CU_QP_DELTA_ENABLED))
+			p_hevc_pps->diff_cu_qp_delta_depth = 0;
+
+		if (!(p_hevc_pps->flags & V4L2_HEVC_PPS_FLAG_TILES_ENABLED)) {
+			p_hevc_pps->num_tile_columns_minus1 = 0;
+			p_hevc_pps->num_tile_rows_minus1 = 0;
+			memset(&p_hevc_pps->column_width_minus1, 0,
+			       sizeof(p_hevc_pps->column_width_minus1));
+			memset(&p_hevc_pps->row_height_minus1, 0,
+			       sizeof(p_hevc_pps->row_height_minus1));
+
+			p_hevc_pps->flags &=
+				~V4L2_HEVC_PPS_FLAG_LOOP_FILTER_ACROSS_TILES_ENABLED;
+		}
+
+		if (p_hevc_pps->flags &
+		    V4L2_HEVC_PPS_FLAG_PPS_DISABLE_DEBLOCKING_FILTER) {
+			p_hevc_pps->pps_beta_offset_div2 = 0;
+			p_hevc_pps->pps_tc_offset_div2 = 0;
+		}
+		break;
+
+	case V4L2_CTRL_TYPE_HEVC_DECODE_PARAMS:
+		p_hevc_decode_params = p;
+
+		if (p_hevc_decode_params->num_active_dpb_entries >
+		    V4L2_HEVC_DPB_ENTRIES_NUM_MAX)
+			return -EINVAL;
+		break;
+
+	case V4L2_CTRL_TYPE_HEVC_SLICE_PARAMS:
+		break;
+
+	case V4L2_CTRL_TYPE_HDR10_CLL_INFO:
+		break;
+
+	case V4L2_CTRL_TYPE_HDR10_MASTERING_DISPLAY:
+		p_hdr10_mastering = p;
+
+		for (i = 0; i < 3; ++i) {
+			if (p_hdr10_mastering->display_primaries_x[i] <
+				V4L2_HDR10_MASTERING_PRIMARIES_X_LOW ||
+			    p_hdr10_mastering->display_primaries_x[i] >
+				V4L2_HDR10_MASTERING_PRIMARIES_X_HIGH ||
+			    p_hdr10_mastering->display_primaries_y[i] <
+				V4L2_HDR10_MASTERING_PRIMARIES_Y_LOW ||
+			    p_hdr10_mastering->display_primaries_y[i] >
+				V4L2_HDR10_MASTERING_PRIMARIES_Y_HIGH)
+				return -EINVAL;
+		}
+
+		if (p_hdr10_mastering->white_point_x <
+			V4L2_HDR10_MASTERING_WHITE_POINT_X_LOW ||
+		    p_hdr10_mastering->white_point_x >
+			V4L2_HDR10_MASTERING_WHITE_POINT_X_HIGH ||
+		    p_hdr10_mastering->white_point_y <
+			V4L2_HDR10_MASTERING_WHITE_POINT_Y_LOW ||
+		    p_hdr10_mastering->white_point_y >
+			V4L2_HDR10_MASTERING_WHITE_POINT_Y_HIGH)
+			return -EINVAL;
+
+		if (p_hdr10_mastering->max_display_mastering_luminance <
+			V4L2_HDR10_MASTERING_MAX_LUMA_LOW ||
+		    p_hdr10_mastering->max_display_mastering_luminance >
+			V4L2_HDR10_MASTERING_MAX_LUMA_HIGH ||
+		    p_hdr10_mastering->min_display_mastering_luminance <
+			V4L2_HDR10_MASTERING_MIN_LUMA_LOW ||
+		    p_hdr10_mastering->min_display_mastering_luminance >
+			V4L2_HDR10_MASTERING_MIN_LUMA_HIGH)
+			return -EINVAL;
+
+		/* The following restriction comes from ITU-T Rec. H.265 spec */
+		if (p_hdr10_mastering->max_display_mastering_luminance ==
+			V4L2_HDR10_MASTERING_MAX_LUMA_LOW &&
+		    p_hdr10_mastering->min_display_mastering_luminance ==
+			V4L2_HDR10_MASTERING_MIN_LUMA_HIGH)
+			return -EINVAL;
+
+		break;
+
+	case V4L2_CTRL_TYPE_HEVC_SCALING_MATRIX:
+		break;
+
+	case V4L2_CTRL_TYPE_VP9_COMPRESSED_HDR:
+		return validate_vp9_compressed_hdr(p);
+
+	case V4L2_CTRL_TYPE_VP9_FRAME:
+		return validate_vp9_frame(p);
+	case V4L2_CTRL_TYPE_AV1_FRAME:
+		return validate_av1_frame(p);
+	case V4L2_CTRL_TYPE_AV1_SEQUENCE:
+		return validate_av1_sequence(p);
+	case V4L2_CTRL_TYPE_AV1_TILE_GROUP_ENTRY:
+		break;
+	case V4L2_CTRL_TYPE_AV1_FILM_GRAIN:
+		return validate_av1_film_grain(p);
+
+	case V4L2_CTRL_TYPE_AREA:
+		area = p;
+		if (!area->width || !area->height)
+			return -EINVAL;
+		break;
+
+	case V4L2_CTRL_TYPE_RECT:
+		rect = p;
+		if (!rect->width || !rect->height)
+			return -EINVAL;
+		break;
+
+	default:
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
+static int std_validate_elem(const struct v4l2_ctrl *ctrl, u32 idx,
+			     union v4l2_ctrl_ptr ptr)
+{
+	size_t len;
+	u64 offset;
+	s64 val;
+
+	switch ((u32)ctrl->type) {
+	case V4L2_CTRL_TYPE_INTEGER:
+		return ROUND_TO_RANGE(ptr.p_s32[idx], u32, ctrl);
+	case V4L2_CTRL_TYPE_INTEGER64:
+		/*
+		 * We can't use the ROUND_TO_RANGE define here due to
+		 * the u64 divide that needs special care.
+		 */
+		val = ptr.p_s64[idx];
+		if (ctrl->maximum >= 0 && val >= ctrl->maximum - (s64)(ctrl->step / 2))
+			val = ctrl->maximum;
+		else
+			val += (s64)(ctrl->step / 2);
+		val = clamp_t(s64, val, ctrl->minimum, ctrl->maximum);
+		offset = val - ctrl->minimum;
+		do_div(offset, ctrl->step);
+		ptr.p_s64[idx] = ctrl->minimum + offset * ctrl->step;
+		return 0;
+	case V4L2_CTRL_TYPE_U8:
+		return ROUND_TO_RANGE(ptr.p_u8[idx], u8, ctrl);
+	case V4L2_CTRL_TYPE_U16:
+		return ROUND_TO_RANGE(ptr.p_u16[idx], u16, ctrl);
+	case V4L2_CTRL_TYPE_U32:
+		return ROUND_TO_RANGE(ptr.p_u32[idx], u32, ctrl);
+
+	case V4L2_CTRL_TYPE_BOOLEAN:
+		ptr.p_s32[idx] = !!ptr.p_s32[idx];
+		return 0;
+
+	case V4L2_CTRL_TYPE_MENU:
+	case V4L2_CTRL_TYPE_INTEGER_MENU:
+		if (ptr.p_s32[idx] < ctrl->minimum || ptr.p_s32[idx] > ctrl->maximum)
+			return -ERANGE;
+		if (ptr.p_s32[idx] < BITS_PER_LONG_LONG &&
+		    (ctrl->menu_skip_mask & BIT_ULL(ptr.p_s32[idx])))
+			return -EINVAL;
+		if (ctrl->type == V4L2_CTRL_TYPE_MENU &&
+		    ctrl->qmenu[ptr.p_s32[idx]][0] == '\0')
+			return -EINVAL;
+		return 0;
+
+	case V4L2_CTRL_TYPE_BITMASK:
+		ptr.p_s32[idx] &= ctrl->maximum;
+		return 0;
+
+	case V4L2_CTRL_TYPE_BUTTON:
+	case V4L2_CTRL_TYPE_CTRL_CLASS:
+		ptr.p_s32[idx] = 0;
+		return 0;
+
+	case V4L2_CTRL_TYPE_STRING:
+		idx *= ctrl->elem_size;
+		len = strlen(ptr.p_char + idx);
+		if (len < ctrl->minimum)
+			return -ERANGE;
+		if ((len - (u32)ctrl->minimum) % (u32)ctrl->step)
+			return -ERANGE;
+		return 0;
+
+	default:
+		return std_validate_compound(ctrl, idx, ptr);
+	}
+}
+
+int v4l2_ctrl_type_op_validate(const struct v4l2_ctrl *ctrl,
+			       union v4l2_ctrl_ptr ptr)
+{
+	unsigned int i;
+	int ret = 0;
+
+	switch ((u32)ctrl->type) {
+	case V4L2_CTRL_TYPE_U8:
+		if (ctrl->maximum == 0xff && ctrl->minimum == 0 && ctrl->step == 1)
+			return 0;
+		break;
+	case V4L2_CTRL_TYPE_U16:
+		if (ctrl->maximum == 0xffff && ctrl->minimum == 0 && ctrl->step == 1)
+			return 0;
+		break;
+	case V4L2_CTRL_TYPE_U32:
+		if (ctrl->maximum == 0xffffffff && ctrl->minimum == 0 && ctrl->step == 1)
+			return 0;
+		break;
+
+	case V4L2_CTRL_TYPE_BUTTON:
+	case V4L2_CTRL_TYPE_CTRL_CLASS:
+		memset(ptr.p_s32, 0, ctrl->new_elems * sizeof(s32));
+		return 0;
+	}
+
+	for (i = 0; !ret && i < ctrl->new_elems; i++)
+		ret = std_validate_elem(ctrl, i, ptr);
+	return ret;
+}
+EXPORT_SYMBOL(v4l2_ctrl_type_op_validate);
+
+static const struct v4l2_ctrl_type_ops std_type_ops = {
+	.equal = v4l2_ctrl_type_op_equal,
+	.init = v4l2_ctrl_type_op_init,
+	.minimum = v4l2_ctrl_type_op_minimum,
+	.maximum = v4l2_ctrl_type_op_maximum,
+	.log = v4l2_ctrl_type_op_log,
+	.validate = v4l2_ctrl_type_op_validate,
+};
+
+void v4l2_ctrl_notify(struct v4l2_ctrl *ctrl, v4l2_ctrl_notify_fnc notify, void *priv)
+{
+	if (!ctrl)
+		return;
+	if (!notify) {
+		ctrl->call_notify = 0;
+		return;
+	}
+	if (WARN_ON(ctrl->handler->notify && ctrl->handler->notify != notify))
+		return;
+	ctrl->handler->notify = notify;
+	ctrl->handler->notify_priv = priv;
+	ctrl->call_notify = 1;
+}
+EXPORT_SYMBOL(v4l2_ctrl_notify);
+
+/* Copy the one value to another. */
+static void ptr_to_ptr(struct v4l2_ctrl *ctrl,
+		       union v4l2_ctrl_ptr from, union v4l2_ctrl_ptr to,
+		       unsigned int elems)
+{
+	if (ctrl == NULL)
+		return;
+	memcpy(to.p, from.p_const, elems * ctrl->elem_size);
+}
+
+/* Copy the new value to the current value. */
+void new_to_cur(struct v4l2_fh *fh, struct v4l2_ctrl *ctrl, u32 ch_flags)
+{
+	bool changed;
+
+	if (ctrl == NULL)
+		return;
+
+	/* has_changed is set by cluster_changed */
+	changed = ctrl->has_changed;
+	if (changed) {
+		if (ctrl->is_dyn_array)
+			ctrl->elems = ctrl->new_elems;
+		ptr_to_ptr(ctrl, ctrl->p_new, ctrl->p_cur, ctrl->elems);
+	}
+
+	if (ch_flags & V4L2_EVENT_CTRL_CH_FLAGS) {
+		/* Note: CH_FLAGS is only set for auto clusters. */
+		ctrl->flags &=
+			~(V4L2_CTRL_FLAG_INACTIVE | V4L2_CTRL_FLAG_VOLATILE);
+		if (!is_cur_manual(ctrl->cluster[0])) {
+			ctrl->flags |= V4L2_CTRL_FLAG_INACTIVE;
+			if (ctrl->cluster[0]->has_volatiles)
+				ctrl->flags |= V4L2_CTRL_FLAG_VOLATILE;
+		}
+		fh = NULL;
+	}
+	if (changed || ch_flags) {
+		/* If a control was changed that was not one of the controls
+		   modified by the application, then send the event to all. */
+		if (!ctrl->is_new)
+			fh = NULL;
+		send_event(fh, ctrl,
+			(changed ? V4L2_EVENT_CTRL_CH_VALUE : 0) | ch_flags);
+		if (ctrl->call_notify && changed && ctrl->handler->notify)
+			ctrl->handler->notify(ctrl, ctrl->handler->notify_priv);
+	}
+}
+
+/* Copy the current value to the new value */
+void cur_to_new(struct v4l2_ctrl *ctrl)
+{
+	if (ctrl == NULL)
+		return;
+	if (ctrl->is_dyn_array)
+		ctrl->new_elems = ctrl->elems;
+	ptr_to_ptr(ctrl, ctrl->p_cur, ctrl->p_new, ctrl->new_elems);
+}
+
+static bool req_alloc_array(struct v4l2_ctrl_ref *ref, u32 elems)
+{
+	void *tmp;
+
+	if (elems == ref->p_req_array_alloc_elems)
+		return true;
+	if (ref->ctrl->is_dyn_array &&
+	    elems < ref->p_req_array_alloc_elems)
+		return true;
+
+	tmp = kvmalloc(elems * ref->ctrl->elem_size, GFP_KERNEL);
+
+	if (!tmp) {
+		ref->p_req_array_enomem = true;
+		return false;
+	}
+	ref->p_req_array_enomem = false;
+	kvfree(ref->p_req.p);
+	ref->p_req.p = tmp;
+	ref->p_req_array_alloc_elems = elems;
+	return true;
+}
+
+/* Copy the new value to the request value */
+void new_to_req(struct v4l2_ctrl_ref *ref)
+{
+	struct v4l2_ctrl *ctrl;
+
+	if (!ref)
+		return;
+
+	ctrl = ref->ctrl;
+	if (ctrl->is_array && !req_alloc_array(ref, ctrl->new_elems))
+		return;
+
+	ref->p_req_elems = ctrl->new_elems;
+	ptr_to_ptr(ctrl, ctrl->p_new, ref->p_req, ref->p_req_elems);
+	ref->p_req_valid = true;
+}
+
+/* Copy the current value to the request value */
+void cur_to_req(struct v4l2_ctrl_ref *ref)
+{
+	struct v4l2_ctrl *ctrl;
+
+	if (!ref)
+		return;
+
+	ctrl = ref->ctrl;
+	if (ctrl->is_array && !req_alloc_array(ref, ctrl->elems))
+		return;
+
+	ref->p_req_elems = ctrl->elems;
+	ptr_to_ptr(ctrl, ctrl->p_cur, ref->p_req, ctrl->elems);
+	ref->p_req_valid = true;
+}
+
+/* Copy the request value to the new value */
+int req_to_new(struct v4l2_ctrl_ref *ref)
+{
+	struct v4l2_ctrl *ctrl;
+
+	if (!ref)
+		return 0;
+
+	ctrl = ref->ctrl;
+
+	/*
+	 * This control was never set in the request, so just use the current
+	 * value.
+	 */
+	if (!ref->p_req_valid) {
+		if (ctrl->is_dyn_array)
+			ctrl->new_elems = ctrl->elems;
+		ptr_to_ptr(ctrl, ctrl->p_cur, ctrl->p_new, ctrl->new_elems);
+		return 0;
+	}
+
+	/* Not an array, so just copy the request value */
+	if (!ctrl->is_array) {
+		ptr_to_ptr(ctrl, ref->p_req, ctrl->p_new, ctrl->new_elems);
+		return 0;
+	}
+
+	/* Sanity check, should never happen */
+	if (WARN_ON(!ref->p_req_array_alloc_elems))
+		return -ENOMEM;
+
+	if (!ctrl->is_dyn_array &&
+	    ref->p_req_elems != ctrl->p_array_alloc_elems)
+		return -ENOMEM;
+
+	/*
+	 * Check if the number of elements in the request is more than the
+	 * elements in ctrl->p_array. If so, attempt to realloc ctrl->p_array.
+	 * Note that p_array is allocated with twice the number of elements
+	 * in the dynamic array since it has to store both the current and
+	 * new value of such a control.
+	 */
+	if (ref->p_req_elems > ctrl->p_array_alloc_elems) {
+		unsigned int sz = ref->p_req_elems * ctrl->elem_size;
+		void *old = ctrl->p_array;
+		void *tmp = kvzalloc(2 * sz, GFP_KERNEL);
+
+		if (!tmp)
+			return -ENOMEM;
+		memcpy(tmp, ctrl->p_new.p, ctrl->elems * ctrl->elem_size);
+		memcpy(tmp + sz, ctrl->p_cur.p, ctrl->elems * ctrl->elem_size);
+		ctrl->p_new.p = tmp;
+		ctrl->p_cur.p = tmp + sz;
+		ctrl->p_array = tmp;
+		ctrl->p_array_alloc_elems = ref->p_req_elems;
+		kvfree(old);
+	}
+
+	ctrl->new_elems = ref->p_req_elems;
+	ptr_to_ptr(ctrl, ref->p_req, ctrl->p_new, ctrl->new_elems);
+	return 0;
+}
+
+/* Control range checking */
+int check_range(enum v4l2_ctrl_type type,
+		s64 min, s64 max, u64 step, s64 def)
+{
+	switch (type) {
+	case V4L2_CTRL_TYPE_BOOLEAN:
+		if (step != 1 || max > 1 || min < 0)
+			return -ERANGE;
+		fallthrough;
+	case V4L2_CTRL_TYPE_U8:
+	case V4L2_CTRL_TYPE_U16:
+	case V4L2_CTRL_TYPE_U32:
+	case V4L2_CTRL_TYPE_INTEGER:
+	case V4L2_CTRL_TYPE_INTEGER64:
+		if (step == 0 || min > max || def < min || def > max)
+			return -ERANGE;
+		return 0;
+	case V4L2_CTRL_TYPE_BITMASK:
+		if (step || min || !max || (def & ~max))
+			return -ERANGE;
+		return 0;
+	case V4L2_CTRL_TYPE_MENU:
+	case V4L2_CTRL_TYPE_INTEGER_MENU:
+		if (min > max || def < min || def > max ||
+		    min < 0 || (step && max >= BITS_PER_LONG_LONG))
+			return -ERANGE;
+		/* Note: step == menu_skip_mask for menu controls.
+		   So here we check if the default value is masked out. */
+		if (def < BITS_PER_LONG_LONG && (step & BIT_ULL(def)))
+			return -EINVAL;
+		return 0;
+	case V4L2_CTRL_TYPE_STRING:
+		if (min > max || min < 0 || step < 1 || def)
+			return -ERANGE;
+		return 0;
+	default:
+		return 0;
+	}
+}
+
+/* Set the handler's error code if it wasn't set earlier already */
+static inline int handler_set_err(struct v4l2_ctrl_handler *hdl, int err)
+{
+	if (hdl->error == 0)
+		hdl->error = err;
+	return err;
+}
+
+/* Initialize the handler */
+int v4l2_ctrl_handler_init_class(struct v4l2_ctrl_handler *hdl,
+				 unsigned nr_of_controls_hint,
+				 struct lock_class_key *key, const char *name)
+{
+	mutex_init(&hdl->_lock);
+	hdl->lock = &hdl->_lock;
+	lockdep_set_class_and_name(hdl->lock, key, name);
+	INIT_LIST_HEAD(&hdl->ctrls);
+	INIT_LIST_HEAD(&hdl->ctrl_refs);
+	hdl->nr_of_buckets = 1 + nr_of_controls_hint / 8;
+	hdl->buckets = kvcalloc(hdl->nr_of_buckets, sizeof(hdl->buckets[0]),
+				GFP_KERNEL);
+	hdl->error = hdl->buckets ? 0 : -ENOMEM;
+	v4l2_ctrl_handler_init_request(hdl);
+	return hdl->error;
+}
+EXPORT_SYMBOL(v4l2_ctrl_handler_init_class);
+
+/* Free all controls and control refs */
+void v4l2_ctrl_handler_free(struct v4l2_ctrl_handler *hdl)
+{
+	struct v4l2_ctrl_ref *ref, *next_ref;
+	struct v4l2_ctrl *ctrl, *next_ctrl;
+	struct v4l2_subscribed_event *sev, *next_sev;
+
+	if (hdl == NULL || hdl->buckets == NULL)
+		return;
+
+	v4l2_ctrl_handler_free_request(hdl);
+
+	mutex_lock(hdl->lock);
+	/* Free all nodes */
+	list_for_each_entry_safe(ref, next_ref, &hdl->ctrl_refs, node) {
+		list_del(&ref->node);
+		if (ref->p_req_array_alloc_elems)
+			kvfree(ref->p_req.p);
+		kfree(ref);
+	}
+	/* Free all controls owned by the handler */
+	list_for_each_entry_safe(ctrl, next_ctrl, &hdl->ctrls, node) {
+		list_del(&ctrl->node);
+		list_for_each_entry_safe(sev, next_sev, &ctrl->ev_subs, node)
+			list_del(&sev->node);
+		kvfree(ctrl->p_array);
+		kvfree(ctrl);
+	}
+	kvfree(hdl->buckets);
+	hdl->buckets = NULL;
+	hdl->cached = NULL;
+	hdl->error = 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	mutex_unlock(hdl->lock);
 	mutex_destroy(&hdl->_lock);
 }

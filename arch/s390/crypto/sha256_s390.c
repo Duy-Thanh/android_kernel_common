@@ -31,6 +31,7 @@ static int s390_sha256_init(struct shash_desc *desc)
 	sctx->state[7] = SHA256_H7;
 	sctx->count = 0;
 	sctx->func = CPACF_KIMD_SHA_256;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	sctx->first_message_part = 0;
 
 	return 0;
@@ -93,6 +94,68 @@ static int s390_sha224_init(struct shash_desc *desc)
 	sctx->count = 0;
 	sctx->func = CPACF_KIMD_SHA_256;
 	sctx->first_message_part = 0;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	return 0;
+}
+
+static int sha256_export(struct shash_desc *desc, void *out)
+{
+	struct s390_sha_ctx *sctx = shash_desc_ctx(desc);
+	struct sha256_state *octx = out;
+
+	octx->count = sctx->count;
+	memcpy(octx->state, sctx->state, sizeof(octx->state));
+	memcpy(octx->buf, sctx->buf, sizeof(octx->buf));
+	return 0;
+}
+
+static int sha256_import(struct shash_desc *desc, const void *in)
+{
+	struct s390_sha_ctx *sctx = shash_desc_ctx(desc);
+	const struct sha256_state *ictx = in;
+
+	sctx->count = ictx->count;
+	memcpy(sctx->state, ictx->state, sizeof(ictx->state));
+	memcpy(sctx->buf, ictx->buf, sizeof(ictx->buf));
+	sctx->func = CPACF_KIMD_SHA_256;
+	return 0;
+}
+
+static struct shash_alg sha256_alg = {
+	.digestsize	=	SHA256_DIGEST_SIZE,
+	.init		=	s390_sha256_init,
+	.update		=	s390_sha_update,
+	.final		=	s390_sha_final,
+	.export		=	sha256_export,
+	.import		=	sha256_import,
+	.descsize	=	sizeof(struct s390_sha_ctx),
+	.statesize	=	sizeof(struct sha256_state),
+	.base		=	{
+		.cra_name	=	"sha256",
+		.cra_driver_name=	"sha256-s390",
+		.cra_priority	=	300,
+		.cra_blocksize	=	SHA256_BLOCK_SIZE,
+		.cra_module	=	THIS_MODULE,
+	}
+};
+
+static int s390_sha224_init(struct shash_desc *desc)
+{
+	struct s390_sha_ctx *sctx = shash_desc_ctx(desc);
+
+	sctx->state[0] = SHA224_H0;
+	sctx->state[1] = SHA224_H1;
+	sctx->state[2] = SHA224_H2;
+	sctx->state[3] = SHA224_H3;
+	sctx->state[4] = SHA224_H4;
+	sctx->state[5] = SHA224_H5;
+	sctx->state[6] = SHA224_H6;
+	sctx->state[7] = SHA224_H7;
+	sctx->count = 0;
+	sctx->func = CPACF_KIMD_SHA_256;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

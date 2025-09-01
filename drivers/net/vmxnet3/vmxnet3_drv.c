@@ -2051,6 +2051,7 @@ vmxnet3_rq_cleanup(struct vmxnet3_rx_queue *rq,
 
 	rq->comp_ring.gen = VMXNET3_INIT_GEN;
 	rq->comp_ring.next2proc = 0;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	if (xdp_rxq_info_is_reg(&rq->xdp_rxq))
 		xdp_rxq_info_unreg(&rq->xdp_rxq);
@@ -2095,6 +2096,53 @@ static void vmxnet3_rq_destroy(struct vmxnet3_rx_queue *rq,
 			rq->rx_ring[i].base = NULL;
 		}
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+}
+
+
+static void
+vmxnet3_rq_cleanup_all(struct vmxnet3_adapter *adapter)
+{
+	int i;
+
+	for (i = 0; i < adapter->num_rx_queues; i++)
+		vmxnet3_rq_cleanup(&adapter->rx_queue[i], adapter);
+	rcu_assign_pointer(adapter->xdp_bpf_prog, NULL);
+}
+
+
+static void vmxnet3_rq_destroy(struct vmxnet3_rx_queue *rq,
+			       struct vmxnet3_adapter *adapter)
+{
+	int i;
+	int j;
+
+	/* all rx buffers must have already been freed */
+	for (i = 0; i < 2; i++) {
+		if (rq->buf_info[i]) {
+			for (j = 0; j < rq->rx_ring[i].size; j++)
+				BUG_ON(rq->buf_info[i][j].page != NULL);
+		}
+	}
+
+
+	for (i = 0; i < 2; i++) {
+		if (rq->rx_ring[i].base) {
+			dma_free_coherent(&adapter->pdev->dev,
+					  rq->rx_ring[i].size
+					  * sizeof(struct Vmxnet3_RxDesc),
+					  rq->rx_ring[i].base,
+					  rq->rx_ring[i].basePA);
+			rq->rx_ring[i].base = NULL;
+		}
+	}
+
+	if (xdp_rxq_info_is_reg(&rq->xdp_rxq))
+		xdp_rxq_info_unreg(&rq->xdp_rxq);
+	page_pool_destroy(rq->page_pool);
+	rq->page_pool = NULL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (rq->data_ring.base) {
 		dma_free_coherent(&adapter->pdev->dev,

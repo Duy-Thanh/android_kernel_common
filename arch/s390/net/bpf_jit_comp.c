@@ -544,6 +544,7 @@ static void bpf_jit_plt(struct bpf_plt *plt, void *ret, void *target)
 {
 	memcpy(plt, &bpf_plt, sizeof(*plt));
 	plt->ret = ret;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * (target == NULL) implies that the branch to this PLT entry was
 	 * patched and became a no-op. However, some CPU could have jumped
@@ -553,6 +554,10 @@ static void bpf_jit_plt(struct bpf_plt *plt, void *ret, void *target)
 	 * make the target point to the return label instead of NULL.
 	 */
 	plt->target = target ?: ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	plt->target = target;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /*

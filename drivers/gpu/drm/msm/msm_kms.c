@@ -241,6 +241,7 @@ int msm_drm_kms_init(struct device *dev, const struct drm_driver *drv)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ret = msm_disp_snapshot_init(ddev);
 	if (ret) {
 		DRM_DEV_ERROR(dev, "msm_disp_snapshot_init failed ret = %d\n", ret);
@@ -298,6 +299,64 @@ int msm_drm_kms_init(struct device *dev, const struct drm_driver *drv)
 		DRM_DEV_ERROR(dev, "failed to install IRQ handler\n");
 		goto err_msm_uninit;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ret = priv->kms_init(ddev);
+	if (ret) {
+		DRM_DEV_ERROR(dev, "failed to load kms\n");
+		return ret;
+	}
+
+	/* Enable normalization of plane zpos */
+	ddev->mode_config.normalize_zpos = true;
+
+	ddev->mode_config.funcs = &mode_config_funcs;
+	ddev->mode_config.helper_private = &mode_config_helper_funcs;
+
+	kms->dev = ddev;
+	ret = kms->funcs->hw_init(kms);
+	if (ret) {
+		DRM_DEV_ERROR(dev, "kms hw init failed: %d\n", ret);
+		goto err_msm_uninit;
+	}
+
+	drm_helper_move_panel_connectors_to_head(ddev);
+
+	drm_for_each_crtc(crtc, ddev) {
+		struct msm_drm_thread *ev_thread;
+
+		/* initialize event thread */
+		ev_thread = &priv->event_thread[drm_crtc_index(crtc)];
+		ev_thread->dev = ddev;
+		ev_thread->worker = kthread_create_worker(0, "crtc_event:%d", crtc->base.id);
+		if (IS_ERR(ev_thread->worker)) {
+			ret = PTR_ERR(ev_thread->worker);
+			DRM_DEV_ERROR(dev, "failed to create crtc_event kthread\n");
+			ev_thread->worker = NULL;
+			goto err_msm_uninit;
+		}
+
+		sched_set_fifo(ev_thread->worker->task);
+	}
+
+	ret = drm_vblank_init(ddev, priv->num_crtcs);
+	if (ret < 0) {
+		DRM_DEV_ERROR(dev, "failed to initialize vblank\n");
+		goto err_msm_uninit;
+	}
+
+	pm_runtime_get_sync(dev);
+	ret = msm_irq_install(ddev, kms->irq);
+	pm_runtime_put_sync(dev);
+	if (ret < 0) {
+		DRM_DEV_ERROR(dev, "failed to install IRQ handler\n");
+		goto err_msm_uninit;
+	}
+
+	ret = msm_disp_snapshot_init(ddev);
+	if (ret)
+		DRM_DEV_ERROR(dev, "msm_disp_snapshot_init failed ret = %d\n", ret);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	drm_mode_config_reset(ddev);
 

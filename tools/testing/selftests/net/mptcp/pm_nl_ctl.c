@@ -188,6 +188,7 @@ static int capture_events(int fd, int event_group)
 					fprintf(stderr, ",error:%u", *(__u8 *)RTA_DATA(attrs));
 				else if (attrs->rta_type == MPTCP_ATTR_SERVER_SIDE)
 					fprintf(stderr, ",server_side:%u", *(__u8 *)RTA_DATA(attrs));
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 				else if (attrs->rta_type == MPTCP_ATTR_FLAGS) {
 					__u16 flags = *(__u16 *)RTA_DATA(attrs);
 
@@ -195,6 +196,9 @@ static int capture_events(int fd, int event_group)
 					if (flags & MPTCP_PM_EV_FLAG_DENY_JOIN_ID0)
 						fprintf(stderr, ",deny_join_id0:1");
 				}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 				attrs = RTA_NEXT(attrs, msg_len);
 			}

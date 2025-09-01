@@ -60,6 +60,7 @@
 #include <linux/crc32.h>
 #include <linux/vmalloc.h>
 #include <linux/bio.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/log2.h>
 
 #include "gfs2.h"
@@ -980,6 +981,931 @@ static int dir_make_exhash(struct inode *inode)
 	gfs2_add_inode_blocks(&dip->i_inode, 1);
 	dip->i_diskflags |= GFS2_DIF_EXHASH;
 	dip->i_depth = ilog2(sdp->sd_hash_ptrs);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+#include "gfs2.h"
+#include "incore.h"
+#include "dir.h"
+#include "glock.h"
+#include "inode.h"
+#include "meta_io.h"
+#include "quota.h"
+#include "rgrp.h"
+#include "trans.h"
+#include "bmap.h"
+#include "util.h"
+
+#define MAX_RA_BLOCKS 32 /* max read-ahead blocks */
+
+#define gfs2_disk_hash2offset(h) (((u64)(h)) >> 1)
+#define gfs2_dir_offset2hash(p) ((u32)(((u64)(p)) << 1))
+#define GFS2_HASH_INDEX_MASK 0xffffc000
+#define GFS2_USE_HASH_FLAG 0x2000
+
+struct qstr gfs2_qdot __read_mostly;
+struct qstr gfs2_qdotdot __read_mostly;
+
+typedef int (*gfs2_dscan_t)(const struct gfs2_dirent *dent,
+			    const struct qstr *name, void *opaque);
+
+int gfs2_dir_get_new_buffer(struct gfs2_inode *ip, u64 block,
+			    struct buffer_head **bhp)
+{
+	struct buffer_head *bh;
+
+	bh = gfs2_meta_new(ip->i_gl, block);
+	gfs2_trans_add_meta(ip->i_gl, bh);
+	gfs2_metatype_set(bh, GFS2_METATYPE_JD, GFS2_FORMAT_JD);
+	gfs2_buffer_clear_tail(bh, sizeof(struct gfs2_meta_header));
+	*bhp = bh;
+	return 0;
+}
+
+static int gfs2_dir_get_existing_buffer(struct gfs2_inode *ip, u64 block,
+					struct buffer_head **bhp)
+{
+	struct buffer_head *bh;
+	int error;
+
+	error = gfs2_meta_read(ip->i_gl, block, DIO_WAIT, 0, &bh);
+	if (error)
+		return error;
+	if (gfs2_metatype_check(GFS2_SB(&ip->i_inode), bh, GFS2_METATYPE_JD)) {
+		brelse(bh);
+		return -EIO;
+	}
+	*bhp = bh;
+	return 0;
+}
+
+static int gfs2_dir_write_stuffed(struct gfs2_inode *ip, const char *buf,
+				  unsigned int offset, unsigned int size)
+{
+	struct buffer_head *dibh;
+	int error;
+
+	error = gfs2_meta_inode_buffer(ip, &dibh);
+	if (error)
+		return error;
+
+	gfs2_trans_add_meta(ip->i_gl, dibh);
+	memcpy(dibh->b_data + offset + sizeof(struct gfs2_dinode), buf, size);
+	if (ip->i_inode.i_size < offset + size)
+		i_size_write(&ip->i_inode, offset + size);
+	inode_set_mtime_to_ts(&ip->i_inode, inode_set_ctime_current(&ip->i_inode));
+	gfs2_dinode_out(ip, dibh->b_data);
+
+	brelse(dibh);
+
+	return size;
+}
+
+
+
+/**
+ * gfs2_dir_write_data - Write directory information to the inode
+ * @ip: The GFS2 inode
+ * @buf: The buffer containing information to be written
+ * @offset: The file offset to start writing at
+ * @size: The amount of data to write
+ *
+ * Returns: The number of bytes correctly written or error code
+ */
+static int gfs2_dir_write_data(struct gfs2_inode *ip, const char *buf,
+			       u64 offset, unsigned int size)
+{
+	struct gfs2_sbd *sdp = GFS2_SB(&ip->i_inode);
+	struct buffer_head *dibh;
+	u64 lblock, dblock;
+	u32 extlen = 0;
+	unsigned int o;
+	int copied = 0;
+	int error = 0;
+	bool new = false;
+
+	if (!size)
+		return 0;
+
+	if (gfs2_is_stuffed(ip) && offset + size <= gfs2_max_stuffed_size(ip))
+		return gfs2_dir_write_stuffed(ip, buf, (unsigned int)offset,
+					      size);
+
+	if (gfs2_assert_warn(sdp, gfs2_is_jdata(ip)))
+		return -EINVAL;
+
+	if (gfs2_is_stuffed(ip)) {
+		error = gfs2_unstuff_dinode(ip);
+		if (error)
+			return error;
+	}
+
+	lblock = offset;
+	o = do_div(lblock, sdp->sd_jbsize) + sizeof(struct gfs2_meta_header);
+
+	while (copied < size) {
+		unsigned int amount;
+		struct buffer_head *bh;
+
+		amount = size - copied;
+		if (amount > sdp->sd_sb.sb_bsize - o)
+			amount = sdp->sd_sb.sb_bsize - o;
+
+		if (!extlen) {
+			extlen = 1;
+			error = gfs2_alloc_extent(&ip->i_inode, lblock, &dblock,
+						  &extlen, &new);
+			if (error)
+				goto fail;
+			error = -EIO;
+			if (gfs2_assert_withdraw(sdp, dblock))
+				goto fail;
+		}
+
+		if (amount == sdp->sd_jbsize || new)
+			error = gfs2_dir_get_new_buffer(ip, dblock, &bh);
+		else
+			error = gfs2_dir_get_existing_buffer(ip, dblock, &bh);
+
+		if (error)
+			goto fail;
+
+		gfs2_trans_add_meta(ip->i_gl, bh);
+		memcpy(bh->b_data + o, buf, amount);
+		brelse(bh);
+
+		buf += amount;
+		copied += amount;
+		lblock++;
+		dblock++;
+		extlen--;
+
+		o = sizeof(struct gfs2_meta_header);
+	}
+
+out:
+	error = gfs2_meta_inode_buffer(ip, &dibh);
+	if (error)
+		return error;
+
+	if (ip->i_inode.i_size < offset + copied)
+		i_size_write(&ip->i_inode, offset + copied);
+	inode_set_mtime_to_ts(&ip->i_inode, inode_set_ctime_current(&ip->i_inode));
+
+	gfs2_trans_add_meta(ip->i_gl, dibh);
+	gfs2_dinode_out(ip, dibh->b_data);
+	brelse(dibh);
+
+	return copied;
+fail:
+	if (copied)
+		goto out;
+	return error;
+}
+
+static int gfs2_dir_read_stuffed(struct gfs2_inode *ip, __be64 *buf,
+				 unsigned int size)
+{
+	struct buffer_head *dibh;
+	int error;
+
+	error = gfs2_meta_inode_buffer(ip, &dibh);
+	if (!error) {
+		memcpy(buf, dibh->b_data + sizeof(struct gfs2_dinode), size);
+		brelse(dibh);
+	}
+
+	return (error) ? error : size;
+}
+
+
+/**
+ * gfs2_dir_read_data - Read a data from a directory inode
+ * @ip: The GFS2 Inode
+ * @buf: The buffer to place result into
+ * @size: Amount of data to transfer
+ *
+ * Returns: The amount of data actually copied or the error
+ */
+static int gfs2_dir_read_data(struct gfs2_inode *ip, __be64 *buf,
+			      unsigned int size)
+{
+	struct gfs2_sbd *sdp = GFS2_SB(&ip->i_inode);
+	u64 lblock, dblock;
+	u32 extlen = 0;
+	unsigned int o;
+	int copied = 0;
+	int error = 0;
+
+	if (gfs2_is_stuffed(ip))
+		return gfs2_dir_read_stuffed(ip, buf, size);
+
+	if (gfs2_assert_warn(sdp, gfs2_is_jdata(ip)))
+		return -EINVAL;
+
+	lblock = 0;
+	o = do_div(lblock, sdp->sd_jbsize) + sizeof(struct gfs2_meta_header);
+
+	while (copied < size) {
+		unsigned int amount;
+		struct buffer_head *bh;
+
+		amount = size - copied;
+		if (amount > sdp->sd_sb.sb_bsize - o)
+			amount = sdp->sd_sb.sb_bsize - o;
+
+		if (!extlen) {
+			extlen = 32;
+			error = gfs2_get_extent(&ip->i_inode, lblock,
+						&dblock, &extlen);
+			if (error || !dblock)
+				goto fail;
+			BUG_ON(extlen < 1);
+			bh = gfs2_meta_ra(ip->i_gl, dblock, extlen);
+		} else {
+			error = gfs2_meta_read(ip->i_gl, dblock, DIO_WAIT, 0, &bh);
+			if (error)
+				goto fail;
+		}
+		error = gfs2_metatype_check(sdp, bh, GFS2_METATYPE_JD);
+		if (error) {
+			brelse(bh);
+			goto fail;
+		}
+		dblock++;
+		extlen--;
+		memcpy(buf, bh->b_data + o, amount);
+		brelse(bh);
+		buf += (amount/sizeof(__be64));
+		copied += amount;
+		lblock++;
+		o = sizeof(struct gfs2_meta_header);
+	}
+
+	return copied;
+fail:
+	return (copied) ? copied : error;
+}
+
+/**
+ * gfs2_dir_get_hash_table - Get pointer to the dir hash table
+ * @ip: The inode in question
+ *
+ * Returns: The hash table or an error
+ */
+
+static __be64 *gfs2_dir_get_hash_table(struct gfs2_inode *ip)
+{
+	struct inode *inode = &ip->i_inode;
+	int ret;
+	u32 hsize;
+	__be64 *hc;
+
+	BUG_ON(!(ip->i_diskflags & GFS2_DIF_EXHASH));
+
+	hc = ip->i_hash_cache;
+	if (hc)
+		return hc;
+
+	hsize = BIT(ip->i_depth);
+	hsize *= sizeof(__be64);
+	if (hsize != i_size_read(&ip->i_inode)) {
+		gfs2_consist_inode(ip);
+		return ERR_PTR(-EIO);
+	}
+
+	hc = kmalloc(hsize, GFP_NOFS | __GFP_NOWARN);
+	if (hc == NULL)
+		hc = __vmalloc(hsize, GFP_NOFS);
+
+	if (hc == NULL)
+		return ERR_PTR(-ENOMEM);
+
+	ret = gfs2_dir_read_data(ip, hc, hsize);
+	if (ret < 0) {
+		kvfree(hc);
+		return ERR_PTR(ret);
+	}
+
+	spin_lock(&inode->i_lock);
+	if (likely(!ip->i_hash_cache)) {
+		ip->i_hash_cache = hc;
+		hc = NULL;
+	}
+	spin_unlock(&inode->i_lock);
+	kvfree(hc);
+
+	return ip->i_hash_cache;
+}
+
+/**
+ * gfs2_dir_hash_inval - Invalidate dir hash
+ * @ip: The directory inode
+ *
+ * Must be called with an exclusive glock, or during glock invalidation.
+ */
+void gfs2_dir_hash_inval(struct gfs2_inode *ip)
+{
+	__be64 *hc;
+
+	spin_lock(&ip->i_inode.i_lock);
+	hc = ip->i_hash_cache;
+	ip->i_hash_cache = NULL;
+	spin_unlock(&ip->i_inode.i_lock);
+
+	kvfree(hc);
+}
+
+static inline int gfs2_dirent_sentinel(const struct gfs2_dirent *dent)
+{
+	return dent->de_inum.no_addr == 0 || dent->de_inum.no_formal_ino == 0;
+}
+
+static inline int __gfs2_dirent_find(const struct gfs2_dirent *dent,
+				     const struct qstr *name, int ret)
+{
+	if (!gfs2_dirent_sentinel(dent) &&
+	    be32_to_cpu(dent->de_hash) == name->hash &&
+	    be16_to_cpu(dent->de_name_len) == name->len &&
+	    memcmp(dent+1, name->name, name->len) == 0)
+		return ret;
+	return 0;
+}
+
+static int gfs2_dirent_find(const struct gfs2_dirent *dent,
+			    const struct qstr *name,
+			    void *opaque)
+{
+	return __gfs2_dirent_find(dent, name, 1);
+}
+
+static int gfs2_dirent_prev(const struct gfs2_dirent *dent,
+			    const struct qstr *name,
+			    void *opaque)
+{
+	return __gfs2_dirent_find(dent, name, 2);
+}
+
+/*
+ * name->name holds ptr to start of block.
+ * name->len holds size of block.
+ */
+static int gfs2_dirent_last(const struct gfs2_dirent *dent,
+			    const struct qstr *name,
+			    void *opaque)
+{
+	const char *start = name->name;
+	const char *end = (const char *)dent + be16_to_cpu(dent->de_rec_len);
+	if (name->len == (end - start))
+		return 1;
+	return 0;
+}
+
+/* Look for the dirent that contains the offset specified in data. Once we
+ * find that dirent, there must be space available there for the new dirent */
+static int gfs2_dirent_find_offset(const struct gfs2_dirent *dent,
+				  const struct qstr *name,
+				  void *ptr)
+{
+	unsigned required = GFS2_DIRENT_SIZE(name->len);
+	unsigned actual = GFS2_DIRENT_SIZE(be16_to_cpu(dent->de_name_len));
+	unsigned totlen = be16_to_cpu(dent->de_rec_len);
+
+	if (ptr < (void *)dent || ptr >= (void *)dent + totlen)
+		return 0;
+	if (gfs2_dirent_sentinel(dent))
+		actual = 0;
+	if (ptr < (void *)dent + actual)
+		return -1;
+	if ((void *)dent + totlen >= ptr + required)
+		return 1;
+	return -1;
+}
+
+static int gfs2_dirent_find_space(const struct gfs2_dirent *dent,
+				  const struct qstr *name,
+				  void *opaque)
+{
+	unsigned required = GFS2_DIRENT_SIZE(name->len);
+	unsigned actual = GFS2_DIRENT_SIZE(be16_to_cpu(dent->de_name_len));
+	unsigned totlen = be16_to_cpu(dent->de_rec_len);
+
+	if (gfs2_dirent_sentinel(dent))
+		actual = 0;
+	if (totlen - actual >= required)
+		return 1;
+	return 0;
+}
+
+struct dirent_gather {
+	const struct gfs2_dirent **pdent;
+	unsigned offset;
+};
+
+static int gfs2_dirent_gather(const struct gfs2_dirent *dent,
+			      const struct qstr *name,
+			      void *opaque)
+{
+	struct dirent_gather *g = opaque;
+	if (!gfs2_dirent_sentinel(dent)) {
+		g->pdent[g->offset++] = dent;
+	}
+	return 0;
+}
+
+/*
+ * Other possible things to check:
+ * - Inode located within filesystem size (and on valid block)
+ * - Valid directory entry type
+ * Not sure how heavy-weight we want to make this... could also check
+ * hash is correct for example, but that would take a lot of extra time.
+ * For now the most important thing is to check that the various sizes
+ * are correct.
+ */
+static int gfs2_check_dirent(struct gfs2_sbd *sdp,
+			     struct gfs2_dirent *dent, unsigned int offset,
+			     unsigned int size, unsigned int len, int first)
+{
+	const char *msg = "gfs2_dirent too small";
+	if (unlikely(size < sizeof(struct gfs2_dirent)))
+		goto error;
+	msg = "gfs2_dirent misaligned";
+	if (unlikely(offset & 0x7))
+		goto error;
+	msg = "gfs2_dirent points beyond end of block";
+	if (unlikely(offset + size > len))
+		goto error;
+	msg = "zero inode number";
+	if (unlikely(!first && gfs2_dirent_sentinel(dent)))
+		goto error;
+	msg = "name length is greater than space in dirent";
+	if (!gfs2_dirent_sentinel(dent) &&
+	    unlikely(sizeof(struct gfs2_dirent)+be16_to_cpu(dent->de_name_len) >
+		     size))
+		goto error;
+	return 0;
+error:
+	fs_warn(sdp, "%s: %s (%s)\n",
+		__func__, msg, first ? "first in block" : "not first in block");
+	return -EIO;
+}
+
+static int gfs2_dirent_offset(struct gfs2_sbd *sdp, const void *buf)
+{
+	const struct gfs2_meta_header *h = buf;
+	int offset;
+
+	BUG_ON(buf == NULL);
+
+	switch(be32_to_cpu(h->mh_type)) {
+	case GFS2_METATYPE_LF:
+		offset = sizeof(struct gfs2_leaf);
+		break;
+	case GFS2_METATYPE_DI:
+		offset = sizeof(struct gfs2_dinode);
+		break;
+	default:
+		goto wrong_type;
+	}
+	return offset;
+wrong_type:
+	fs_warn(sdp, "%s: wrong block type %u\n", __func__,
+		be32_to_cpu(h->mh_type));
+	return -1;
+}
+
+static struct gfs2_dirent *gfs2_dirent_scan(struct inode *inode, void *buf,
+					    unsigned int len, gfs2_dscan_t scan,
+					    const struct qstr *name,
+					    void *opaque)
+{
+	struct gfs2_dirent *dent, *prev;
+	unsigned offset;
+	unsigned size;
+	int ret = 0;
+
+	ret = gfs2_dirent_offset(GFS2_SB(inode), buf);
+	if (ret < 0) {
+		gfs2_consist_inode(GFS2_I(inode));
+		return ERR_PTR(-EIO);
+	}
+	offset = ret;
+	prev = NULL;
+	dent = buf + offset;
+	size = be16_to_cpu(dent->de_rec_len);
+	if (gfs2_check_dirent(GFS2_SB(inode), dent, offset, size, len, 1)) {
+		gfs2_consist_inode(GFS2_I(inode));
+		return ERR_PTR(-EIO);
+	}
+	do {
+		ret = scan(dent, name, opaque);
+		if (ret)
+			break;
+		offset += size;
+		if (offset == len)
+			break;
+		prev = dent;
+		dent = buf + offset;
+		size = be16_to_cpu(dent->de_rec_len);
+		if (gfs2_check_dirent(GFS2_SB(inode), dent, offset, size,
+				      len, 0)) {
+			gfs2_consist_inode(GFS2_I(inode));
+			return ERR_PTR(-EIO);
+		}
+	} while(1);
+
+	switch(ret) {
+	case 0:
+		return NULL;
+	case 1:
+		return dent;
+	case 2:
+		return prev ? prev : dent;
+	default:
+		BUG_ON(ret > 0);
+		return ERR_PTR(ret);
+	}
+}
+
+static int dirent_check_reclen(struct gfs2_inode *dip,
+			       const struct gfs2_dirent *d, const void *end_p)
+{
+	const void *ptr = d;
+	u16 rec_len = be16_to_cpu(d->de_rec_len);
+
+	if (unlikely(rec_len < sizeof(struct gfs2_dirent))) {
+		gfs2_consist_inode(dip);
+		return -EIO;
+	}
+	ptr += rec_len;
+	if (ptr < end_p)
+		return rec_len;
+	if (ptr == end_p)
+		return -ENOENT;
+
+	gfs2_consist_inode(dip);
+	return -EIO;
+}
+
+/**
+ * dirent_next - Next dirent
+ * @dip: the directory
+ * @bh: The buffer
+ * @dent: Pointer to list of dirents
+ *
+ * Returns: 0 on success, error code otherwise
+ */
+
+static int dirent_next(struct gfs2_inode *dip, struct buffer_head *bh,
+		       struct gfs2_dirent **dent)
+{
+	struct gfs2_dirent *cur = *dent, *tmp;
+	char *bh_end = bh->b_data + bh->b_size;
+	int ret;
+
+	ret = dirent_check_reclen(dip, cur, bh_end);
+	if (ret < 0)
+		return ret;
+
+	tmp = (void *)cur + ret;
+	ret = dirent_check_reclen(dip, tmp, bh_end);
+	if (ret == -EIO)
+		return ret;
+
+        /* Only the first dent could ever have de_inum.no_addr == 0 */
+	if (gfs2_dirent_sentinel(tmp)) {
+		gfs2_consist_inode(dip);
+		return -EIO;
+	}
+
+	*dent = tmp;
+	return 0;
+}
+
+/**
+ * dirent_del - Delete a dirent
+ * @dip: The GFS2 inode
+ * @bh: The buffer
+ * @prev: The previous dirent
+ * @cur: The current dirent
+ *
+ */
+
+static void dirent_del(struct gfs2_inode *dip, struct buffer_head *bh,
+		       struct gfs2_dirent *prev, struct gfs2_dirent *cur)
+{
+	u16 cur_rec_len, prev_rec_len;
+
+	if (gfs2_dirent_sentinel(cur)) {
+		gfs2_consist_inode(dip);
+		return;
+	}
+
+	gfs2_trans_add_meta(dip->i_gl, bh);
+
+	/* If there is no prev entry, this is the first entry in the block.
+	   The de_rec_len is already as big as it needs to be.  Just zero
+	   out the inode number and return.  */
+
+	if (!prev) {
+		cur->de_inum.no_addr = 0;
+		cur->de_inum.no_formal_ino = 0;
+		return;
+	}
+
+	/*  Combine this dentry with the previous one.  */
+
+	prev_rec_len = be16_to_cpu(prev->de_rec_len);
+	cur_rec_len = be16_to_cpu(cur->de_rec_len);
+
+	if ((char *)prev + prev_rec_len != (char *)cur)
+		gfs2_consist_inode(dip);
+	if ((char *)cur + cur_rec_len > bh->b_data + bh->b_size)
+		gfs2_consist_inode(dip);
+
+	prev_rec_len += cur_rec_len;
+	prev->de_rec_len = cpu_to_be16(prev_rec_len);
+}
+
+
+static struct gfs2_dirent *do_init_dirent(struct inode *inode,
+					  struct gfs2_dirent *dent,
+					  const struct qstr *name,
+					  struct buffer_head *bh,
+					  unsigned offset)
+{
+	struct gfs2_inode *ip = GFS2_I(inode);
+	struct gfs2_dirent *ndent;
+	unsigned totlen;
+
+	totlen = be16_to_cpu(dent->de_rec_len);
+	BUG_ON(offset + name->len > totlen);
+	gfs2_trans_add_meta(ip->i_gl, bh);
+	ndent = (struct gfs2_dirent *)((char *)dent + offset);
+	dent->de_rec_len = cpu_to_be16(offset);
+	gfs2_qstr2dirent(name, totlen - offset, ndent);
+	return ndent;
+}
+
+
+/*
+ * Takes a dent from which to grab space as an argument. Returns the
+ * newly created dent.
+ */
+static struct gfs2_dirent *gfs2_init_dirent(struct inode *inode,
+					    struct gfs2_dirent *dent,
+					    const struct qstr *name,
+					    struct buffer_head *bh)
+{
+	unsigned offset = 0;
+
+	if (!gfs2_dirent_sentinel(dent))
+		offset = GFS2_DIRENT_SIZE(be16_to_cpu(dent->de_name_len));
+	return do_init_dirent(inode, dent, name, bh, offset);
+}
+
+static struct gfs2_dirent *gfs2_dirent_split_alloc(struct inode *inode,
+						   struct buffer_head *bh,
+						   const struct qstr *name,
+						   void *ptr)
+{
+	struct gfs2_dirent *dent;
+	dent = gfs2_dirent_scan(inode, bh->b_data, bh->b_size,
+				gfs2_dirent_find_offset, name, ptr);
+	if (IS_ERR_OR_NULL(dent))
+		return dent;
+	return do_init_dirent(inode, dent, name, bh,
+			      (unsigned)(ptr - (void *)dent));
+}
+
+static int get_leaf(struct gfs2_inode *dip, u64 leaf_no,
+		    struct buffer_head **bhp)
+{
+	int error;
+
+	error = gfs2_meta_read(dip->i_gl, leaf_no, DIO_WAIT, 0, bhp);
+	if (!error && gfs2_metatype_check(GFS2_SB(&dip->i_inode), *bhp, GFS2_METATYPE_LF)) {
+		/* pr_info("block num=%llu\n", leaf_no); */
+		error = -EIO;
+	}
+
+	return error;
+}
+
+/**
+ * get_leaf_nr - Get a leaf number associated with the index
+ * @dip: The GFS2 inode
+ * @index: hash table index of the targeted leaf
+ * @leaf_out: Resulting leaf block number
+ *
+ * Returns: 0 on success, error code otherwise
+ */
+
+static int get_leaf_nr(struct gfs2_inode *dip, u32 index, u64 *leaf_out)
+{
+	__be64 *hash;
+	int error;
+
+	hash = gfs2_dir_get_hash_table(dip);
+	error = PTR_ERR_OR_ZERO(hash);
+
+	if (!error)
+		*leaf_out = be64_to_cpu(*(hash + index));
+
+	return error;
+}
+
+static int get_first_leaf(struct gfs2_inode *dip, u32 index,
+			  struct buffer_head **bh_out)
+{
+	u64 leaf_no;
+	int error;
+
+	error = get_leaf_nr(dip, index, &leaf_no);
+	if (!error)
+		error = get_leaf(dip, leaf_no, bh_out);
+
+	return error;
+}
+
+static struct gfs2_dirent *gfs2_dirent_search(struct inode *inode,
+					      const struct qstr *name,
+					      gfs2_dscan_t scan,
+					      struct buffer_head **pbh)
+{
+	struct buffer_head *bh;
+	struct gfs2_dirent *dent;
+	struct gfs2_inode *ip = GFS2_I(inode);
+	int error;
+
+	if (ip->i_diskflags & GFS2_DIF_EXHASH) {
+		struct gfs2_leaf *leaf;
+		unsigned int hsize = BIT(ip->i_depth);
+		unsigned int index;
+		u64 ln;
+		if (hsize * sizeof(u64) != i_size_read(inode)) {
+			gfs2_consist_inode(ip);
+			return ERR_PTR(-EIO);
+		}
+
+		index = name->hash >> (32 - ip->i_depth);
+		error = get_first_leaf(ip, index, &bh);
+		if (error)
+			return ERR_PTR(error);
+		do {
+			dent = gfs2_dirent_scan(inode, bh->b_data, bh->b_size,
+						scan, name, NULL);
+			if (dent)
+				goto got_dent;
+			leaf = (struct gfs2_leaf *)bh->b_data;
+			ln = be64_to_cpu(leaf->lf_next);
+			brelse(bh);
+			if (!ln)
+				break;
+
+			error = get_leaf(ip, ln, &bh);
+		} while(!error);
+
+		return error ? ERR_PTR(error) : NULL;
+	}
+
+
+	error = gfs2_meta_inode_buffer(ip, &bh);
+	if (error)
+		return ERR_PTR(error);
+	dent = gfs2_dirent_scan(inode, bh->b_data, bh->b_size, scan, name, NULL);
+got_dent:
+	if (IS_ERR_OR_NULL(dent)) {
+		brelse(bh);
+		bh = NULL;
+	}
+	*pbh = bh;
+	return dent;
+}
+
+static struct gfs2_leaf *new_leaf(struct inode *inode, struct buffer_head **pbh, u16 depth)
+{
+	struct gfs2_inode *ip = GFS2_I(inode);
+	unsigned int n = 1;
+	u64 bn;
+	int error;
+	struct buffer_head *bh;
+	struct gfs2_leaf *leaf;
+	struct gfs2_dirent *dent;
+	struct timespec64 tv = current_time(inode);
+
+	error = gfs2_alloc_blocks(ip, &bn, &n, 0);
+	if (error)
+		return NULL;
+	bh = gfs2_meta_new(ip->i_gl, bn);
+	if (!bh)
+		return NULL;
+
+	gfs2_trans_remove_revoke(GFS2_SB(inode), bn, 1);
+	gfs2_trans_add_meta(ip->i_gl, bh);
+	gfs2_metatype_set(bh, GFS2_METATYPE_LF, GFS2_FORMAT_LF);
+	leaf = (struct gfs2_leaf *)bh->b_data;
+	leaf->lf_depth = cpu_to_be16(depth);
+	leaf->lf_entries = 0;
+	leaf->lf_dirent_format = cpu_to_be32(GFS2_FORMAT_DE);
+	leaf->lf_next = 0;
+	leaf->lf_inode = cpu_to_be64(ip->i_no_addr);
+	leaf->lf_dist = cpu_to_be32(1);
+	leaf->lf_nsec = cpu_to_be32(tv.tv_nsec);
+	leaf->lf_sec = cpu_to_be64(tv.tv_sec);
+	memset(leaf->lf_reserved2, 0, sizeof(leaf->lf_reserved2));
+	dent = (struct gfs2_dirent *)(leaf+1);
+	gfs2_qstr2dirent(&empty_name, bh->b_size - sizeof(struct gfs2_leaf), dent);
+	*pbh = bh;
+	return leaf;
+}
+
+/**
+ * dir_make_exhash - Convert a stuffed directory into an ExHash directory
+ * @inode: The directory inode to be converted to exhash
+ *
+ * Returns: 0 on success, error code otherwise
+ */
+
+static int dir_make_exhash(struct inode *inode)
+{
+	struct gfs2_inode *dip = GFS2_I(inode);
+	struct gfs2_sbd *sdp = GFS2_SB(inode);
+	struct gfs2_dirent *dent;
+	struct qstr args;
+	struct buffer_head *bh, *dibh;
+	struct gfs2_leaf *leaf;
+	int y;
+	u32 x;
+	__be64 *lp;
+	u64 bn;
+	int error;
+
+	error = gfs2_meta_inode_buffer(dip, &dibh);
+	if (error)
+		return error;
+
+	/*  Turn over a new leaf  */
+
+	leaf = new_leaf(inode, &bh, 0);
+	if (!leaf)
+		return -ENOSPC;
+	bn = bh->b_blocknr;
+
+	gfs2_assert(sdp, dip->i_entries < BIT(16));
+	leaf->lf_entries = cpu_to_be16(dip->i_entries);
+
+	/*  Copy dirents  */
+
+	gfs2_buffer_copy_tail(bh, sizeof(struct gfs2_leaf), dibh,
+			     sizeof(struct gfs2_dinode));
+
+	/*  Find last entry  */
+
+	x = 0;
+	args.len = bh->b_size - sizeof(struct gfs2_dinode) +
+		   sizeof(struct gfs2_leaf);
+	args.name = bh->b_data;
+	dent = gfs2_dirent_scan(&dip->i_inode, bh->b_data, bh->b_size,
+				gfs2_dirent_last, &args, NULL);
+	if (!dent) {
+		brelse(bh);
+		brelse(dibh);
+		return -EIO;
+	}
+	if (IS_ERR(dent)) {
+		brelse(bh);
+		brelse(dibh);
+		return PTR_ERR(dent);
+	}
+
+	/*  Adjust the last dirent's record length
+	   (Remember that dent still points to the last entry.)  */
+
+	dent->de_rec_len = cpu_to_be16(be16_to_cpu(dent->de_rec_len) +
+		sizeof(struct gfs2_dinode) -
+		sizeof(struct gfs2_leaf));
+
+	brelse(bh);
+
+	/*  We're done with the new leaf block, now setup the new
+	    hash table.  */
+
+	gfs2_trans_add_meta(dip->i_gl, dibh);
+	gfs2_buffer_clear_tail(dibh, sizeof(struct gfs2_dinode));
+
+	lp = (__be64 *)(dibh->b_data + sizeof(struct gfs2_dinode));
+
+	for (x = sdp->sd_hash_ptrs; x--; lp++)
+		*lp = cpu_to_be64(bn);
+
+	i_size_write(inode, sdp->sd_sb.sb_bsize / 2);
+	gfs2_add_inode_blocks(&dip->i_inode, 1);
+	dip->i_diskflags |= GFS2_DIF_EXHASH;
+
+	for (x = sdp->sd_hash_ptrs, y = -1; x; x >>= 1, y++) ;
+	dip->i_depth = y;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	gfs2_dinode_out(dip, dibh->b_data);
 

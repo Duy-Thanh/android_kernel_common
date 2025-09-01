@@ -9,6 +9,7 @@
 #include <linux/slab.h>
 #include <linux/device.h>
 #include <linux/devfreq.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/kstrtox.h>
 #include <linux/pm.h>
 #include <linux/mutex.h>
@@ -47,6 +48,43 @@ static ssize_t set_freq_store(struct device *dev, struct device_attribute *attr,
 	mutex_lock(&devfreq->lock);
 	data = devfreq->governor_data;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/pm.h>
+#include <linux/mutex.h>
+#include <linux/module.h>
+#include "governor.h"
+
+struct userspace_data {
+	unsigned long user_frequency;
+	bool valid;
+};
+
+static int devfreq_userspace_func(struct devfreq *df, unsigned long *freq)
+{
+	struct userspace_data *data = df->governor_data;
+
+	if (data->valid)
+		*freq = data->user_frequency;
+	else
+		*freq = df->previous_freq; /* No user freq specified yet */
+
+	return 0;
+}
+
+static ssize_t set_freq_store(struct device *dev, struct device_attribute *attr,
+			      const char *buf, size_t count)
+{
+	struct devfreq *devfreq = to_devfreq(dev);
+	struct userspace_data *data;
+	unsigned long wanted;
+	int err = 0;
+
+	mutex_lock(&devfreq->lock);
+	data = devfreq->governor_data;
+
+	sscanf(buf, "%lu", &wanted);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	data->user_frequency = wanted;
 	data->valid = true;
 	err = update_devfreq(devfreq);

@@ -379,6 +379,7 @@ static int intel_crosststamp(ktime_t *device,
 		return -ETIMEDOUT;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	*system = (struct system_counterval_t) {
 		.cycles = 0,
 		.cs_id = CSID_X86_ART,
@@ -401,6 +402,25 @@ static int intel_crosststamp(ktime_t *device,
 
 	system->cycles *= intel_priv->crossts_adj;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	num_snapshot = (readl(ioaddr + GMAC_TIMESTAMP_STATUS) &
+			GMAC_TIMESTAMP_ATSNS_MASK) >>
+			GMAC_TIMESTAMP_ATSNS_SHIFT;
+
+	/* Repeat until the timestamps are from the FIFO last segment */
+	for (i = 0; i < num_snapshot; i++) {
+		read_lock_irqsave(&priv->ptp_lock, flags);
+		stmmac_get_ptptime(priv, ptpaddr, &ptp_time);
+		*device = ns_to_ktime(ptp_time);
+		read_unlock_irqrestore(&priv->ptp_lock, flags);
+		get_arttime(priv->mii, intel_priv->mdio_adhoc_addr, &art_time);
+		system->cycles = art_time;
+	}
+
+	system->cycles *= intel_priv->crossts_adj;
+	system->cs_id = CSID_X86_ART;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	priv->plat->flags &= ~STMMAC_FLAG_INT_SNAPSHOT_EN;
 
 	return 0;

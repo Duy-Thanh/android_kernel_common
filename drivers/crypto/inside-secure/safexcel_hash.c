@@ -249,6 +249,7 @@ static int safexcel_handle_req_result(struct safexcel_crypto_priv *priv,
 	safexcel_complete(priv, ring);
 
 	if (sreq->nents) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		dma_unmap_sg(priv->dev, areq->src,
 			     sg_nents_for_len(areq->src, areq->nbytes),
 			     DMA_TO_DEVICE);
@@ -502,6 +503,258 @@ unmap_sg:
 		dma_unmap_sg(priv->dev, areq->src,
 			     sg_nents_for_len(areq->src, areq->nbytes),
 			     DMA_TO_DEVICE);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		dma_unmap_sg(priv->dev, areq->src, sreq->nents, DMA_TO_DEVICE);
+		sreq->nents = 0;
+	}
+
+	if (sreq->result_dma) {
+		dma_unmap_single(priv->dev, sreq->result_dma, sreq->digest_sz,
+				 DMA_FROM_DEVICE);
+		sreq->result_dma = 0;
+	}
+
+	if (sreq->cache_dma) {
+		dma_unmap_single(priv->dev, sreq->cache_dma, sreq->cache_sz,
+				 DMA_TO_DEVICE);
+		sreq->cache_dma = 0;
+		sreq->cache_sz = 0;
+	}
+
+	if (sreq->finish) {
+		if (sreq->hmac &&
+		    (sreq->digest != CONTEXT_CONTROL_DIGEST_HMAC)) {
+			/* Faking HMAC using hash - need to do outer hash */
+			memcpy(sreq->cache, sreq->state,
+			       crypto_ahash_digestsize(ahash));
+
+			memcpy(sreq->state, &ctx->base.opad, sreq->digest_sz);
+
+			sreq->len = sreq->block_sz +
+				    crypto_ahash_digestsize(ahash);
+			sreq->processed = sreq->block_sz;
+			sreq->hmac = 0;
+
+			if (priv->flags & EIP197_TRC_CACHE)
+				ctx->base.needs_inv = true;
+			areq->nbytes = 0;
+			safexcel_ahash_enqueue(areq);
+
+			*should_complete = false; /* Not done yet */
+			return 1;
+		}
+
+		if (unlikely(sreq->digest == CONTEXT_CONTROL_DIGEST_XCM &&
+			     ctx->alg == CONTEXT_CONTROL_CRYPTO_ALG_CRC32)) {
+			/* Undo final XOR with 0xffffffff ...*/
+			*(__le32 *)areq->result = ~sreq->state[0];
+		} else {
+			memcpy(areq->result, sreq->state,
+			       crypto_ahash_digestsize(ahash));
+		}
+	}
+
+	cache_len = safexcel_queued_len(sreq);
+	if (cache_len)
+		memcpy(sreq->cache, sreq->cache_next, cache_len);
+
+	*should_complete = true;
+
+	return 1;
+}
+
+static int safexcel_ahash_send_req(struct crypto_async_request *async, int ring,
+				   int *commands, int *results)
+{
+	struct ahash_request *areq = ahash_request_cast(async);
+	struct safexcel_ahash_req *req = ahash_request_ctx_dma(areq);
+	struct safexcel_ahash_ctx *ctx = crypto_ahash_ctx(crypto_ahash_reqtfm(areq));
+	struct safexcel_crypto_priv *priv = ctx->base.priv;
+	struct safexcel_command_desc *cdesc, *first_cdesc = NULL;
+	struct safexcel_result_desc *rdesc;
+	struct scatterlist *sg;
+	struct safexcel_token *dmmy;
+	int i, extra = 0, n_cdesc = 0, ret = 0, cache_len, skip = 0;
+	u64 queued, len;
+
+	queued = safexcel_queued_len(req);
+	if (queued <= HASH_CACHE_SIZE)
+		cache_len = queued;
+	else
+		cache_len = queued - areq->nbytes;
+
+	if (!req->finish && !req->last_req) {
+		/* If this is not the last request and the queued data does not
+		 * fit into full cache blocks, cache it for the next send call.
+		 */
+		extra = queued & (HASH_CACHE_SIZE - 1);
+
+		/* If this is not the last request and the queued data
+		 * is a multiple of a block, cache the last one for now.
+		 */
+		if (!extra)
+			extra = HASH_CACHE_SIZE;
+
+		sg_pcopy_to_buffer(areq->src, sg_nents(areq->src),
+				   req->cache_next, extra,
+				   areq->nbytes - extra);
+
+		queued -= extra;
+
+		if (!queued) {
+			*commands = 0;
+			*results = 0;
+			return 0;
+		}
+
+		extra = 0;
+	}
+
+	if (unlikely(req->xcbcmac && req->processed > AES_BLOCK_SIZE)) {
+		if (unlikely(cache_len < AES_BLOCK_SIZE)) {
+			/*
+			 * Cache contains less than 1 full block, complete.
+			 */
+			extra = AES_BLOCK_SIZE - cache_len;
+			if (queued > cache_len) {
+				/* More data follows: borrow bytes */
+				u64 tmp = queued - cache_len;
+
+				skip = min_t(u64, tmp, extra);
+				sg_pcopy_to_buffer(areq->src,
+					sg_nents(areq->src),
+					req->cache + cache_len,
+					skip, 0);
+			}
+			extra -= skip;
+			memset(req->cache + cache_len + skip, 0, extra);
+			if (!ctx->cbcmac && extra) {
+				// 10- padding for XCBCMAC & CMAC
+				req->cache[cache_len + skip] = 0x80;
+				// HW will use K2 iso K3 - compensate!
+				for (i = 0; i < AES_BLOCK_SIZE / 4; i++) {
+					u32 *cache = (void *)req->cache;
+					u32 *ipad = ctx->base.ipad.word;
+					u32 x;
+
+					x = ipad[i] ^ ipad[i + 4];
+					cache[i] ^= swab32(x);
+				}
+			}
+			cache_len = AES_BLOCK_SIZE;
+			queued = queued + extra;
+		}
+
+		/* XCBC continue: XOR previous result into 1st word */
+		crypto_xor(req->cache, (const u8 *)req->state, AES_BLOCK_SIZE);
+	}
+
+	len = queued;
+	/* Add a command descriptor for the cached data, if any */
+	if (cache_len) {
+		req->cache_dma = dma_map_single(priv->dev, req->cache,
+						cache_len, DMA_TO_DEVICE);
+		if (dma_mapping_error(priv->dev, req->cache_dma))
+			return -EINVAL;
+
+		req->cache_sz = cache_len;
+		first_cdesc = safexcel_add_cdesc(priv, ring, 1,
+						 (cache_len == len),
+						 req->cache_dma, cache_len,
+						 len, ctx->base.ctxr_dma,
+						 &dmmy);
+		if (IS_ERR(first_cdesc)) {
+			ret = PTR_ERR(first_cdesc);
+			goto unmap_cache;
+		}
+		n_cdesc++;
+
+		queued -= cache_len;
+		if (!queued)
+			goto send_command;
+	}
+
+	/* Now handle the current ahash request buffer(s) */
+	req->nents = dma_map_sg(priv->dev, areq->src,
+				sg_nents_for_len(areq->src,
+						 areq->nbytes),
+				DMA_TO_DEVICE);
+	if (!req->nents) {
+		ret = -ENOMEM;
+		goto cdesc_rollback;
+	}
+
+	for_each_sg(areq->src, sg, req->nents, i) {
+		int sglen = sg_dma_len(sg);
+
+		if (unlikely(sglen <= skip)) {
+			skip -= sglen;
+			continue;
+		}
+
+		/* Do not overflow the request */
+		if ((queued + skip) <= sglen)
+			sglen = queued;
+		else
+			sglen -= skip;
+
+		cdesc = safexcel_add_cdesc(priv, ring, !n_cdesc,
+					   !(queued - sglen),
+					   sg_dma_address(sg) + skip, sglen,
+					   len, ctx->base.ctxr_dma, &dmmy);
+		if (IS_ERR(cdesc)) {
+			ret = PTR_ERR(cdesc);
+			goto unmap_sg;
+		}
+
+		if (!n_cdesc)
+			first_cdesc = cdesc;
+		n_cdesc++;
+
+		queued -= sglen;
+		if (!queued)
+			break;
+		skip = 0;
+	}
+
+send_command:
+	/* Setup the context options */
+	safexcel_context_control(ctx, req, first_cdesc);
+
+	/* Add the token */
+	safexcel_hash_token(first_cdesc, len, req->digest_sz, ctx->cbcmac);
+
+	req->result_dma = dma_map_single(priv->dev, req->state, req->digest_sz,
+					 DMA_FROM_DEVICE);
+	if (dma_mapping_error(priv->dev, req->result_dma)) {
+		ret = -EINVAL;
+		goto unmap_sg;
+	}
+
+	/* Add a result descriptor */
+	rdesc = safexcel_add_rdesc(priv, ring, 1, 1, req->result_dma,
+				   req->digest_sz);
+	if (IS_ERR(rdesc)) {
+		ret = PTR_ERR(rdesc);
+		goto unmap_result;
+	}
+
+	safexcel_rdr_req_set(priv, ring, rdesc, &areq->base);
+
+	req->processed += len - extra;
+
+	*commands = n_cdesc;
+	*results = 1;
+	return 0;
+
+unmap_result:
+	dma_unmap_single(priv->dev, req->result_dma, req->digest_sz,
+			 DMA_FROM_DEVICE);
+unmap_sg:
+	if (req->nents) {
+		dma_unmap_sg(priv->dev, areq->src, req->nents, DMA_TO_DEVICE);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		req->nents = 0;
 	}
 cdesc_rollback:

@@ -173,6 +173,7 @@ data_flush		 Enable data flushing before checkpoint in order to
 			 persist data of regular and symlink.
 reserve_root=%d		 Support configuring reserved space which is used for
 			 allocation from a privileged user with specified uid or
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			 gid, unit: 4KB, the default limit is 12.5% of user blocks.
 reserve_node=%d		 Support configuring reserved nodes which are used for
 			 allocation from a privileged user with specified uid or
@@ -242,6 +243,75 @@ jqfmt=<quota type>	 <quota type>: [vfsold,vfsv0,vfsv1].
 usrjquota=		 Turn off user journalled quota.
 grpjquota=		 Turn off group journalled quota.
 prjjquota=		 Turn off project journalled quota.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			 gid, unit: 4KB, the default limit is 0.2% of user blocks.
+resuid=%d		 The user ID which may use the reserved blocks.
+resgid=%d		 The group ID which may use the reserved blocks.
+fault_injection=%d	 Enable fault injection in all supported types with
+			 specified injection rate.
+fault_type=%d		 Support configuring fault injection type, should be
+			 enabled with fault_injection option, fault type value
+			 is shown below, it supports single or combined type.
+
+			 ===========================      ===========
+			 Type_Name                        Type_Value
+			 ===========================      ===========
+			 FAULT_KMALLOC                    0x000000001
+			 FAULT_KVMALLOC                   0x000000002
+			 FAULT_PAGE_ALLOC                 0x000000004
+			 FAULT_PAGE_GET                   0x000000008
+			 FAULT_ALLOC_BIO                  0x000000010 (obsolete)
+			 FAULT_ALLOC_NID                  0x000000020
+			 FAULT_ORPHAN                     0x000000040
+			 FAULT_BLOCK                      0x000000080
+			 FAULT_DIR_DEPTH                  0x000000100
+			 FAULT_EVICT_INODE                0x000000200
+			 FAULT_TRUNCATE                   0x000000400
+			 FAULT_READ_IO                    0x000000800
+			 FAULT_CHECKPOINT                 0x000001000
+			 FAULT_DISCARD                    0x000002000
+			 FAULT_WRITE_IO                   0x000004000
+			 FAULT_SLAB_ALLOC                 0x000008000
+			 FAULT_DQUOT_INIT                 0x000010000
+			 FAULT_LOCK_OP                    0x000020000
+			 FAULT_BLKADDR_VALIDITY           0x000040000
+			 FAULT_BLKADDR_CONSISTENCE        0x000080000
+			 FAULT_NO_SEGMENT                 0x000100000
+			 FAULT_INCONSISTENT_FOOTER        0x000200000
+			 ===========================      ===========
+mode=%s			 Control block allocation mode which supports "adaptive"
+			 and "lfs". In "lfs" mode, there should be no random
+			 writes towards main area.
+			 "fragment:segment" and "fragment:block" are newly added here.
+			 These are developer options for experiments to simulate filesystem
+			 fragmentation/after-GC situation itself. The developers use these
+			 modes to understand filesystem fragmentation/after-GC condition well,
+			 and eventually get some insights to handle them better.
+			 In "fragment:segment", f2fs allocates a new segment in ramdom
+			 position. With this, we can simulate the after-GC condition.
+			 In "fragment:block", we can scatter block allocation with
+			 "max_fragment_chunk" and "max_fragment_hole" sysfs nodes.
+			 We added some randomness to both chunk and hole size to make
+			 it close to realistic IO pattern. So, in this mode, f2fs will allocate
+			 1..<max_fragment_chunk> blocks in a chunk and make a hole in the
+			 length of 1..<max_fragment_hole> by turns. With this, the newly
+			 allocated blocks will be scattered throughout the whole partition.
+			 Note that "fragment:block" implicitly enables "fragment:segment"
+			 option for more randomness.
+			 Please, use these options for your experiments and we strongly
+			 recommend to re-format the filesystem after using these options.
+usrquota		 Enable plain user disk quota accounting.
+grpquota		 Enable plain group disk quota accounting.
+prjquota		 Enable plain project quota accounting.
+usrjquota=<file>	 Appoint specified file and type during mount, so that quota
+grpjquota=<file>	 information can be properly updated during recovery flow,
+prjjquota=<file>	 <quota file>: must be in root directory;
+jqfmt=<quota type>	 <quota type>: [vfsold,vfsv0,vfsv1].
+offusrjquota		 Turn off user journalled quota.
+offgrpjquota		 Turn off group journalled quota.
+offprjjquota		 Turn off project journalled quota.
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 quota			 Enable plain user disk quota accounting.
 noquota			 Disable all plain disk quota option.
 alloc_mode=%s		 Adjust block allocation policy, which supports "reuse"

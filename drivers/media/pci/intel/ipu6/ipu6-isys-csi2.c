@@ -360,6 +360,7 @@ static int ipu6_isys_csi2_enable_streams(struct v4l2_subdev *sd,
 	remote_pad = media_pad_remote_pad_first(&sd->entity.pads[CSI2_PAD_SINK]);
 	remote_sd = media_entity_to_v4l2_subdev(remote_pad->entity);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	sink_streams =
 		v4l2_subdev_state_xlate_streams(state, pad, CSI2_PAD_SINK,
 						&streams_mask);
@@ -393,6 +394,42 @@ static int ipu6_isys_csi2_disable_streams(struct v4l2_subdev *sd,
 	sink_streams =
 		v4l2_subdev_state_xlate_streams(state, pad, CSI2_PAD_SINK,
 						&streams_mask);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	sink_streams = v4l2_subdev_state_xlate_streams(state, CSI2_PAD_SRC,
+						       CSI2_PAD_SINK,
+						       &streams_mask);
+
+	ret = ipu6_isys_csi2_calc_timing(csi2, &timing, CSI2_ACCINV);
+	if (ret)
+		return ret;
+
+	ret = ipu6_isys_csi2_set_stream(sd, &timing, csi2->nlanes, true);
+	if (ret)
+		return ret;
+
+	ret = v4l2_subdev_enable_streams(remote_sd, remote_pad->index,
+					 sink_streams);
+	if (ret) {
+		ipu6_isys_csi2_set_stream(sd, NULL, 0, false);
+		return ret;
+	}
+
+	return 0;
+}
+
+static int ipu6_isys_csi2_disable_streams(struct v4l2_subdev *sd,
+					  struct v4l2_subdev_state *state,
+					  u32 pad, u64 streams_mask)
+{
+	struct v4l2_subdev *remote_sd;
+	struct media_pad *remote_pad;
+	u64 sink_streams;
+
+	sink_streams = v4l2_subdev_state_xlate_streams(state, CSI2_PAD_SRC,
+						       CSI2_PAD_SINK,
+						       &streams_mask);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	remote_pad = media_pad_remote_pad_first(&sd->entity.pads[CSI2_PAD_SINK]);
 	remote_sd = media_entity_to_v4l2_subdev(remote_pad->entity);

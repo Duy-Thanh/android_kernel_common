@@ -1102,6 +1102,7 @@ int inode_read_data(struct inode *inode, void *data, size_t bytes)
  * Number of bytes for REPARSE_DATA_BUFFER(IO_REPARSE_TAG_SYMLINK)
  * for unicode string of @uni_len length.
  */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static inline u32 ntfs_reparse_bytes(u32 uni_len, bool is_absolute)
 {
 	/* Header + unicode string + decorated unicode string. */
@@ -1177,6 +1178,79 @@ ntfs_create_reparse_buffer(struct ntfs_sb_info *sbi, const char *symname,
 		rp_name[2] = cpu_to_le16('?');
 		rp_name[3] = cpu_to_le16('\\');
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static inline u32 ntfs_reparse_bytes(u32 uni_len)
+{
+	/* Header + unicode string + decorated unicode string. */
+	return sizeof(short) * (2 * uni_len + 4) +
+	       offsetof(struct REPARSE_DATA_BUFFER,
+			SymbolicLinkReparseBuffer.PathBuffer);
+}
+
+static struct REPARSE_DATA_BUFFER *
+ntfs_create_reparse_buffer(struct ntfs_sb_info *sbi, const char *symname,
+			   u32 size, u16 *nsize)
+{
+	int i, err;
+	struct REPARSE_DATA_BUFFER *rp;
+	__le16 *rp_name;
+	typeof(rp->SymbolicLinkReparseBuffer) *rs;
+
+	rp = kzalloc(ntfs_reparse_bytes(2 * size + 2), GFP_NOFS);
+	if (!rp)
+		return ERR_PTR(-ENOMEM);
+
+	rs = &rp->SymbolicLinkReparseBuffer;
+	rp_name = rs->PathBuffer;
+
+	/* Convert link name to UTF-16. */
+	err = ntfs_nls_to_utf16(sbi, symname, size,
+				(struct cpu_str *)(rp_name - 1), 2 * size,
+				UTF16_LITTLE_ENDIAN);
+	if (err < 0)
+		goto out;
+
+	/* err = the length of unicode name of symlink. */
+	*nsize = ntfs_reparse_bytes(err);
+
+	if (*nsize > sbi->reparse.max_size) {
+		err = -EFBIG;
+		goto out;
+	}
+
+	/* Translate Linux '/' into Windows '\'. */
+	for (i = 0; i < err; i++) {
+		if (rp_name[i] == cpu_to_le16('/'))
+			rp_name[i] = cpu_to_le16('\\');
+	}
+
+	rp->ReparseTag = IO_REPARSE_TAG_SYMLINK;
+	rp->ReparseDataLength =
+		cpu_to_le16(*nsize - offsetof(struct REPARSE_DATA_BUFFER,
+					      SymbolicLinkReparseBuffer));
+
+	/* PrintName + SubstituteName. */
+	rs->SubstituteNameOffset = cpu_to_le16(sizeof(short) * err);
+	rs->SubstituteNameLength = cpu_to_le16(sizeof(short) * err + 8);
+	rs->PrintNameLength = rs->SubstituteNameOffset;
+
+	/*
+	 * TODO: Use relative path if possible to allow Windows to
+	 * parse this path.
+	 * 0-absolute path 1- relative path (SYMLINK_FLAG_RELATIVE).
+	 */
+	rs->Flags = 0;
+
+	memmove(rp_name + err + 4, rp_name, sizeof(short) * err);
+
+	/* Decorate SubstituteName. */
+	rp_name += err;
+	rp_name[0] = cpu_to_le16('\\');
+	rp_name[1] = cpu_to_le16('?');
+	rp_name[2] = cpu_to_le16('?');
+	rp_name[3] = cpu_to_le16('\\');
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return rp;
 out:

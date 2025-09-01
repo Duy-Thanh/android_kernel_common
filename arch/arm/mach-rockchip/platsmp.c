@@ -279,6 +279,7 @@ static void __init rockchip_smp_prepare_cpus(unsigned int max_cpus)
 	}
 
 	if (read_cpuid_part() == ARM_CPU_PART_CORTEX_A9) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		/* enable the SCU power domain */
 		pmu_set_power_domain(PMU_PWRDN_SCU, true);
 
@@ -324,6 +325,51 @@ static void __init rockchip_smp_prepare_cpus(unsigned int max_cpus)
 	}
 
 	of_node_put(node);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (rockchip_smp_prepare_sram(node)) {
+			of_node_put(node);
+			return;
+		}
+
+		/* enable the SCU power domain */
+		pmu_set_power_domain(PMU_PWRDN_SCU, true);
+
+		of_node_put(node);
+		node = of_find_compatible_node(NULL, NULL, "arm,cortex-a9-scu");
+		if (!node) {
+			pr_err("%s: missing scu\n", __func__);
+			return;
+		}
+
+		scu_base_addr = of_iomap(node, 0);
+		if (!scu_base_addr) {
+			pr_err("%s: could not map scu registers\n", __func__);
+			of_node_put(node);
+			return;
+		}
+
+		/*
+		 * While the number of cpus is gathered from dt, also get the
+		 * number of cores from the scu to verify this value when
+		 * booting the cores.
+		 */
+		ncores = scu_get_core_count(scu_base_addr);
+		pr_err("%s: ncores %d\n", __func__, ncores);
+
+		scu_enable(scu_base_addr);
+	} else {
+		unsigned int l2ctlr;
+
+		asm ("mrc p15, 1, %0, c9, c0, 2\n" : "=r" (l2ctlr));
+		ncores = ((l2ctlr >> 24) & 0x3) + 1;
+	}
+	of_node_put(node);
+
+	/* Make sure that all cores except the first are really off */
+	for (i = 1; i < ncores; i++)
+		pmu_set_power_domain(0 + i, false);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static void __init rk3036_smp_prepare_cpus(unsigned int max_cpus)

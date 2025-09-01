@@ -141,6 +141,7 @@ void update_sk_prot(struct sock *sk, struct tls_context *ctx);
 
 int wait_on_pending_writer(struct sock *sk, long *timeo);
 void tls_err_abort(struct sock *sk, int err);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 void tls_strp_abort_strp(struct tls_strparser *strp, int err);
 
 int init_prot_info(struct tls_prot_info *prot,
@@ -197,6 +198,64 @@ int tls_rx_msg_size(struct tls_strparser *strp, struct sk_buff *skb);
 void tls_rx_msg_ready(struct tls_strparser *strp);
 
 bool tls_strp_msg_load(struct tls_strparser *strp, bool force_refresh);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+int init_prot_info(struct tls_prot_info *prot,
+		   const struct tls_crypto_info *crypto_info,
+		   const struct tls_cipher_desc *cipher_desc);
+int tls_set_sw_offload(struct sock *sk, int tx);
+void tls_update_rx_zc_capable(struct tls_context *tls_ctx);
+void tls_sw_strparser_arm(struct sock *sk, struct tls_context *ctx);
+void tls_sw_strparser_done(struct tls_context *tls_ctx);
+int tls_sw_sendmsg(struct sock *sk, struct msghdr *msg, size_t size);
+void tls_sw_splice_eof(struct socket *sock);
+void tls_sw_cancel_work_tx(struct tls_context *tls_ctx);
+void tls_sw_release_resources_tx(struct sock *sk);
+void tls_sw_free_ctx_tx(struct tls_context *tls_ctx);
+void tls_sw_free_resources_rx(struct sock *sk);
+void tls_sw_release_resources_rx(struct sock *sk);
+void tls_sw_free_ctx_rx(struct tls_context *tls_ctx);
+int tls_sw_recvmsg(struct sock *sk, struct msghdr *msg, size_t len,
+		   int flags, int *addr_len);
+bool tls_sw_sock_is_readable(struct sock *sk);
+ssize_t tls_sw_splice_read(struct socket *sock, loff_t *ppos,
+			   struct pipe_inode_info *pipe,
+			   size_t len, unsigned int flags);
+int tls_sw_read_sock(struct sock *sk, read_descriptor_t *desc,
+		     sk_read_actor_t read_actor);
+
+int tls_device_sendmsg(struct sock *sk, struct msghdr *msg, size_t size);
+void tls_device_splice_eof(struct socket *sock);
+int tls_tx_records(struct sock *sk, int flags);
+
+void tls_sw_write_space(struct sock *sk, struct tls_context *ctx);
+void tls_device_write_space(struct sock *sk, struct tls_context *ctx);
+
+int tls_process_cmsg(struct sock *sk, struct msghdr *msg,
+		     unsigned char *record_type);
+int decrypt_skb(struct sock *sk, struct scatterlist *sgout);
+
+int tls_sw_fallback_init(struct sock *sk,
+			 struct tls_offload_context_tx *offload_ctx,
+			 struct tls_crypto_info *crypto_info);
+
+int tls_strp_dev_init(void);
+void tls_strp_dev_exit(void);
+
+void tls_strp_done(struct tls_strparser *strp);
+void tls_strp_stop(struct tls_strparser *strp);
+int tls_strp_init(struct tls_strparser *strp, struct sock *sk);
+void tls_strp_data_ready(struct tls_strparser *strp);
+
+void tls_strp_check_rcv(struct tls_strparser *strp);
+void tls_strp_msg_done(struct tls_strparser *strp);
+
+int tls_rx_msg_size(struct tls_strparser *strp, struct sk_buff *skb);
+void tls_rx_msg_ready(struct tls_strparser *strp);
+
+void tls_strp_msg_load(struct tls_strparser *strp, bool force_refresh);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 int tls_strp_msg_cow(struct tls_sw_context_rx *ctx);
 struct sk_buff *tls_strp_msg_detach(struct tls_sw_context_rx *ctx);
 int tls_strp_msg_hold(struct tls_strparser *strp, struct sk_buff_head *dst);

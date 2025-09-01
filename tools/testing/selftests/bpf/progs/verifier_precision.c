@@ -130,6 +130,7 @@ __naked int state_loop_first_last_equal(void)
 	);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 __used __naked static void __bpf_cond_op_r10(void)
 {
 	asm volatile (
@@ -183,4 +184,7 @@ __naked void bpf_cond_op_not_r10(void)
 	::: __clobber_all);
 }
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 char _license[] SEC("license") = "GPL";

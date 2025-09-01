@@ -44,6 +44,7 @@ MODULE_DEVICE_TABLE(usb, mfi_fc_id_table);
 struct mfi_device {
 	struct usb_device *udev;
 	struct power_supply *battery;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct power_supply_desc battery_desc;
 	int charge_type;
 };
@@ -231,6 +232,178 @@ static void mfi_fc_disconnect(struct usb_device *udev)
 	if (mfi->battery)
 		power_supply_unregister(mfi->battery);
 	kfree(mfi->battery_desc.name);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int charge_type;
+};
+
+static int apple_mfi_fc_set_charge_type(struct mfi_device *mfi,
+					const union power_supply_propval *val)
+{
+	int current_ma;
+	int retval;
+	__u8 request_type;
+
+	if (mfi->charge_type == val->intval) {
+		dev_dbg(&mfi->udev->dev, "charge type %d already set\n",
+				mfi->charge_type);
+		return 0;
+	}
+
+	switch (val->intval) {
+	case POWER_SUPPLY_CHARGE_TYPE_TRICKLE:
+		current_ma = TRICKLE_CURRENT_MA;
+		break;
+	case POWER_SUPPLY_CHARGE_TYPE_FAST:
+		current_ma = FAST_CURRENT_MA;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	request_type = USB_DIR_OUT | USB_TYPE_VENDOR | USB_RECIP_DEVICE;
+	retval = usb_control_msg(mfi->udev, usb_sndctrlpipe(mfi->udev, 0),
+				 0x40, /* Vendor‐defined power request */
+				 request_type,
+				 current_ma, /* wValue, current offset */
+				 current_ma, /* wIndex, current offset */
+				 NULL, 0, USB_CTRL_GET_TIMEOUT);
+	if (retval) {
+		dev_dbg(&mfi->udev->dev, "retval = %d\n", retval);
+		return retval;
+	}
+
+	mfi->charge_type = val->intval;
+
+	return 0;
+}
+
+static int apple_mfi_fc_get_property(struct power_supply *psy,
+		enum power_supply_property psp,
+		union power_supply_propval *val)
+{
+	struct mfi_device *mfi = power_supply_get_drvdata(psy);
+
+	dev_dbg(&mfi->udev->dev, "prop: %d\n", psp);
+
+	switch (psp) {
+	case POWER_SUPPLY_PROP_CHARGE_TYPE:
+		val->intval = mfi->charge_type;
+		break;
+	case POWER_SUPPLY_PROP_SCOPE:
+		val->intval = POWER_SUPPLY_SCOPE_DEVICE;
+		break;
+	default:
+		return -ENODATA;
+	}
+
+	return 0;
+}
+
+static int apple_mfi_fc_set_property(struct power_supply *psy,
+		enum power_supply_property psp,
+		const union power_supply_propval *val)
+{
+	struct mfi_device *mfi = power_supply_get_drvdata(psy);
+	int ret;
+
+	dev_dbg(&mfi->udev->dev, "prop: %d\n", psp);
+
+	ret = pm_runtime_get_sync(&mfi->udev->dev);
+	if (ret < 0) {
+		pm_runtime_put_noidle(&mfi->udev->dev);
+		return ret;
+	}
+
+	switch (psp) {
+	case POWER_SUPPLY_PROP_CHARGE_TYPE:
+		ret = apple_mfi_fc_set_charge_type(mfi, val);
+		break;
+	default:
+		ret = -EINVAL;
+	}
+
+	pm_runtime_mark_last_busy(&mfi->udev->dev);
+	pm_runtime_put_autosuspend(&mfi->udev->dev);
+
+	return ret;
+}
+
+static int apple_mfi_fc_property_is_writeable(struct power_supply *psy,
+					      enum power_supply_property psp)
+{
+	switch (psp) {
+	case POWER_SUPPLY_PROP_CHARGE_TYPE:
+		return 1;
+	default:
+		return 0;
+	}
+}
+
+static enum power_supply_property apple_mfi_fc_properties[] = {
+	POWER_SUPPLY_PROP_CHARGE_TYPE,
+	POWER_SUPPLY_PROP_SCOPE
+};
+
+static const struct power_supply_desc apple_mfi_fc_desc = {
+	.name                   = "apple_mfi_fastcharge",
+	.type                   = POWER_SUPPLY_TYPE_BATTERY,
+	.properties             = apple_mfi_fc_properties,
+	.num_properties         = ARRAY_SIZE(apple_mfi_fc_properties),
+	.get_property           = apple_mfi_fc_get_property,
+	.set_property           = apple_mfi_fc_set_property,
+	.property_is_writeable  = apple_mfi_fc_property_is_writeable
+};
+
+static bool mfi_fc_match(struct usb_device *udev)
+{
+	int idProduct;
+
+	idProduct = le16_to_cpu(udev->descriptor.idProduct);
+	/* See comment above mfi_fc_id_table[] */
+	return (idProduct >= 0x1200 && idProduct <= 0x12ff);
+}
+
+static int mfi_fc_probe(struct usb_device *udev)
+{
+	struct power_supply_config battery_cfg = {};
+	struct mfi_device *mfi = NULL;
+	int err;
+
+	if (!mfi_fc_match(udev))
+		return -ENODEV;
+
+	mfi = kzalloc(sizeof(struct mfi_device), GFP_KERNEL);
+	if (!mfi)
+		return -ENOMEM;
+
+	battery_cfg.drv_data = mfi;
+
+	mfi->charge_type = POWER_SUPPLY_CHARGE_TYPE_TRICKLE;
+	mfi->battery = power_supply_register(&udev->dev,
+						&apple_mfi_fc_desc,
+						&battery_cfg);
+	if (IS_ERR(mfi->battery)) {
+		dev_err(&udev->dev, "Can't register battery\n");
+		err = PTR_ERR(mfi->battery);
+		kfree(mfi);
+		return err;
+	}
+
+	mfi->udev = usb_get_dev(udev);
+	dev_set_drvdata(&udev->dev, mfi);
+
+	return 0;
+}
+
+static void mfi_fc_disconnect(struct usb_device *udev)
+{
+	struct mfi_device *mfi;
+
+	mfi = dev_get_drvdata(&udev->dev);
+	if (mfi->battery)
+		power_supply_unregister(mfi->battery);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	dev_set_drvdata(&udev->dev, NULL);
 	usb_put_dev(mfi->udev);
 	kfree(mfi);

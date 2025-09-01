@@ -812,10 +812,19 @@ static const struct snd_soc_dapm_route mtk_dai_i2s_routes[] = {
 static int mt8365_dai_i2s_set_priv(struct mtk_base_afe *afe)
 {
 	int i, ret;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	for (i = 0; i < DAI_I2S_NUM; i++) {
 		ret = mt8365_dai_set_priv(afe, mt8365_i2s_priv[i].id,
 					  sizeof(mt8365_i2s_priv[i]),
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct mt8365_afe_private *afe_priv = afe->platform_priv;
+
+	for (i = 0; i < DAI_I2S_NUM; i++) {
+		ret = mt8365_dai_set_priv(afe, mt8365_i2s_priv[i].id,
+					  sizeof(*afe_priv),
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 					  &mt8365_i2s_priv[i]);
 		if (ret)
 			return ret;

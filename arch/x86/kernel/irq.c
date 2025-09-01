@@ -251,6 +251,7 @@ static __always_inline void handle_irq(struct irq_desc *desc,
 		__handle_irq(desc, regs);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static struct irq_desc *reevaluate_vector(int vector)
 {
 	struct irq_desc *desc = __this_cpu_read(vector_irq[vector]);
@@ -318,6 +319,43 @@ DEFINE_IDTENTRY_IRQ(common_interrupt)
 	RCU_LOCKDEP_WARN(!rcu_is_watching(), "IRQ failed to wake up RCU");
 
 	if (unlikely(!call_irq_handler(vector, regs)))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static __always_inline int call_irq_handler(int vector, struct pt_regs *regs)
+{
+	struct irq_desc *desc;
+	int ret = 0;
+
+	desc = __this_cpu_read(vector_irq[vector]);
+	if (likely(!IS_ERR_OR_NULL(desc))) {
+		handle_irq(desc, regs);
+	} else {
+		ret = -EINVAL;
+		if (desc == VECTOR_UNUSED) {
+			pr_emerg_ratelimited("%s: %d.%u No irq handler for vector\n",
+					     __func__, smp_processor_id(),
+					     vector);
+		} else {
+			__this_cpu_write(vector_irq[vector], VECTOR_UNUSED);
+		}
+	}
+
+	return ret;
+}
+
+/*
+ * common_interrupt() handles all normal device IRQ's (the special SMP
+ * cross-CPU interrupts have their own entry points).
+ */
+DEFINE_IDTENTRY_IRQ(common_interrupt)
+{
+	struct pt_regs *old_regs = set_irq_regs(regs);
+
+	/* entry code tells RCU that we're not quiescent.  Check it. */
+	RCU_LOCKDEP_WARN(!rcu_is_watching(), "IRQ failed to wake up RCU");
+
+	if (unlikely(call_irq_handler(vector, regs)))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		apic_eoi();
 
 	set_irq_regs(old_regs);

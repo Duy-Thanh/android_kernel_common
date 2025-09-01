@@ -488,6 +488,7 @@ static irqreturn_t gpio_keys_irq_isr(int irq, void *dev_id)
 	if (bdata->release_delay)
 		hrtimer_start(&bdata->release_timer,
 			      ms_to_ktime(bdata->release_delay),
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			      HRTIMER_MODE_REL);
 out:
 	return IRQ_HANDLED;
@@ -634,6 +635,155 @@ static int gpio_keys_setup_key(struct platform_device *pdev,
 		bdata->release_delay = button->debounce_interval;
 		hrtimer_init(&bdata->release_timer,
 			     CLOCK_REALTIME, HRTIMER_MODE_REL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			      HRTIMER_MODE_REL_HARD);
+out:
+	return IRQ_HANDLED;
+}
+
+static int gpio_keys_setup_key(struct platform_device *pdev,
+				struct input_dev *input,
+				struct gpio_keys_drvdata *ddata,
+				const struct gpio_keys_button *button,
+				int idx,
+				struct fwnode_handle *child)
+{
+	const char *desc = button->desc ? button->desc : "gpio_keys";
+	struct device *dev = &pdev->dev;
+	struct gpio_button_data *bdata = &ddata->data[idx];
+	irq_handler_t isr;
+	unsigned long irqflags;
+	const char *wakedesc;
+	int irq;
+	int error;
+
+	bdata->input = input;
+	bdata->button = button;
+	spin_lock_init(&bdata->lock);
+
+	if (child) {
+		bdata->gpiod = devm_fwnode_gpiod_get(dev, child,
+						     NULL, GPIOD_IN, desc);
+		if (IS_ERR(bdata->gpiod)) {
+			error = PTR_ERR(bdata->gpiod);
+			if (error != -ENOENT)
+				return dev_err_probe(dev, error,
+						     "failed to get gpio\n");
+
+			/*
+			 * GPIO is optional, we may be dealing with
+			 * purely interrupt-driven setup.
+			 */
+			bdata->gpiod = NULL;
+		}
+	} else if (gpio_is_valid(button->gpio)) {
+		/*
+		 * Legacy GPIO number, so request the GPIO here and
+		 * convert it to descriptor.
+		 */
+		unsigned flags = GPIOF_IN;
+
+		if (button->active_low)
+			flags |= GPIOF_ACTIVE_LOW;
+
+		error = devm_gpio_request_one(dev, button->gpio, flags, desc);
+		if (error < 0) {
+			dev_err(dev, "Failed to request GPIO %d, error %d\n",
+				button->gpio, error);
+			return error;
+		}
+
+		bdata->gpiod = gpio_to_desc(button->gpio);
+		if (!bdata->gpiod)
+			return -EINVAL;
+	}
+
+	if (bdata->gpiod) {
+		bool active_low = gpiod_is_active_low(bdata->gpiod);
+
+		if (button->debounce_interval) {
+			error = gpiod_set_debounce(bdata->gpiod,
+					button->debounce_interval * 1000);
+			/* use timer if gpiolib doesn't provide debounce */
+			if (error < 0)
+				bdata->software_debounce =
+						button->debounce_interval;
+
+			/*
+			 * If reading the GPIO won't sleep, we can use a
+			 * hrtimer instead of a standard timer for the software
+			 * debounce, to reduce the latency as much as possible.
+			 */
+			bdata->debounce_use_hrtimer =
+					!gpiod_cansleep(bdata->gpiod);
+		}
+
+		/*
+		 * If an interrupt was specified, use it instead of the gpio
+		 * interrupt and use the gpio for reading the state. A separate
+		 * interrupt may be used as the main button interrupt for
+		 * runtime PM to detect events also in deeper idle states. If a
+		 * dedicated wakeirq is used for system suspend only, see below
+		 * for bdata->wakeirq setup.
+		 */
+		if (button->irq) {
+			bdata->irq = button->irq;
+		} else {
+			irq = gpiod_to_irq(bdata->gpiod);
+			if (irq < 0) {
+				error = irq;
+				dev_err_probe(dev, error,
+					      "Unable to get irq number for GPIO %d\n",
+					      button->gpio);
+				return error;
+			}
+			bdata->irq = irq;
+		}
+
+		INIT_DELAYED_WORK(&bdata->work, gpio_keys_gpio_work_func);
+
+		hrtimer_init(&bdata->debounce_timer,
+			     CLOCK_REALTIME, HRTIMER_MODE_REL);
+		bdata->debounce_timer.function = gpio_keys_debounce_timer;
+
+		isr = gpio_keys_gpio_isr;
+		irqflags = IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING;
+
+		switch (button->wakeup_event_action) {
+		case EV_ACT_ASSERTED:
+			bdata->wakeup_trigger_type = active_low ?
+				IRQ_TYPE_EDGE_FALLING : IRQ_TYPE_EDGE_RISING;
+			break;
+		case EV_ACT_DEASSERTED:
+			bdata->wakeup_trigger_type = active_low ?
+				IRQ_TYPE_EDGE_RISING : IRQ_TYPE_EDGE_FALLING;
+			break;
+		case EV_ACT_ANY:
+		default:
+			/*
+			 * For other cases, we are OK letting suspend/resume
+			 * not reconfigure the trigger type.
+			 */
+			break;
+		}
+	} else {
+		if (!button->irq) {
+			dev_err(dev, "Found button without gpio or irq\n");
+			return -EINVAL;
+		}
+
+		bdata->irq = button->irq;
+
+		if (button->type && button->type != EV_KEY) {
+			dev_err(dev, "Only EV_KEY allowed for IRQ buttons.\n");
+			return -EINVAL;
+		}
+
+		bdata->release_delay = button->debounce_interval;
+		hrtimer_init(&bdata->release_timer,
+			     CLOCK_REALTIME, HRTIMER_MODE_REL_HARD);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		bdata->release_timer.function = gpio_keys_irq_timer;
 
 		isr = gpio_keys_irq_isr;

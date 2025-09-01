@@ -1150,6 +1150,7 @@ int bpf_jit_emit_insn(const struct bpf_insn *insn, struct rv_jit_context *ctx,
 				emit_mv(rd, rs, ctx);
 #ifdef CONFIG_SMP
 			/* Load current CPU number in T1 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			emit_lw(RV_REG_T1, offsetof(struct thread_info, cpu),
 				RV_REG_TP, ctx);
 			/* Load address of __per_cpu_offset array in T2 */
@@ -1558,6 +1559,417 @@ int bpf_jit_emit_insn(const struct bpf_insn *insn, struct rv_jit_context *ctx,
 		if (insn->src_reg == 0 && insn->imm == BPF_FUNC_get_smp_processor_id) {
 			/* Load current CPU number in R0 */
 			emit_lw(bpf_to_rv_reg(BPF_REG_0, ctx), offsetof(struct thread_info, cpu),
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			emit_ld(RV_REG_T1, offsetof(struct thread_info, cpu),
+				RV_REG_TP, ctx);
+			/* Load address of __per_cpu_offset array in T2 */
+			emit_addr(RV_REG_T2, (u64)&__per_cpu_offset, extra_pass, ctx);
+			/* Get address of __per_cpu_offset[cpu] in T1 */
+			emit_sh3add(RV_REG_T1, RV_REG_T1, RV_REG_T2, ctx);
+			/* Load __per_cpu_offset[cpu] in T1 */
+			emit_ld(RV_REG_T1, 0, RV_REG_T1, ctx);
+			/* Add the offset to Rd */
+			emit_add(rd, rd, RV_REG_T1, ctx);
+#endif
+		}
+		if (imm == 1) {
+			/* Special mov32 for zext */
+			emit_zextw(rd, rd, ctx);
+			break;
+		}
+		switch (insn->off) {
+		case 0:
+			emit_mv(rd, rs, ctx);
+			break;
+		case 8:
+			emit_sextb(rd, rs, ctx);
+			break;
+		case 16:
+			emit_sexth(rd, rs, ctx);
+			break;
+		case 32:
+			emit_sextw(rd, rs, ctx);
+			break;
+		}
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+
+	/* dst = dst OP src */
+	case BPF_ALU | BPF_ADD | BPF_X:
+	case BPF_ALU64 | BPF_ADD | BPF_X:
+		emit_add(rd, rd, rs, ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_SUB | BPF_X:
+	case BPF_ALU64 | BPF_SUB | BPF_X:
+		if (is64)
+			emit_sub(rd, rd, rs, ctx);
+		else
+			emit_subw(rd, rd, rs, ctx);
+
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_AND | BPF_X:
+	case BPF_ALU64 | BPF_AND | BPF_X:
+		emit_and(rd, rd, rs, ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_OR | BPF_X:
+	case BPF_ALU64 | BPF_OR | BPF_X:
+		emit_or(rd, rd, rs, ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_XOR | BPF_X:
+	case BPF_ALU64 | BPF_XOR | BPF_X:
+		emit_xor(rd, rd, rs, ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_MUL | BPF_X:
+	case BPF_ALU64 | BPF_MUL | BPF_X:
+		emit(is64 ? rv_mul(rd, rd, rs) : rv_mulw(rd, rd, rs), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_DIV | BPF_X:
+	case BPF_ALU64 | BPF_DIV | BPF_X:
+		if (off)
+			emit(is64 ? rv_div(rd, rd, rs) : rv_divw(rd, rd, rs), ctx);
+		else
+			emit(is64 ? rv_divu(rd, rd, rs) : rv_divuw(rd, rd, rs), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_MOD | BPF_X:
+	case BPF_ALU64 | BPF_MOD | BPF_X:
+		if (off)
+			emit(is64 ? rv_rem(rd, rd, rs) : rv_remw(rd, rd, rs), ctx);
+		else
+			emit(is64 ? rv_remu(rd, rd, rs) : rv_remuw(rd, rd, rs), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_LSH | BPF_X:
+	case BPF_ALU64 | BPF_LSH | BPF_X:
+		emit(is64 ? rv_sll(rd, rd, rs) : rv_sllw(rd, rd, rs), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_RSH | BPF_X:
+	case BPF_ALU64 | BPF_RSH | BPF_X:
+		emit(is64 ? rv_srl(rd, rd, rs) : rv_srlw(rd, rd, rs), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_ARSH | BPF_X:
+	case BPF_ALU64 | BPF_ARSH | BPF_X:
+		emit(is64 ? rv_sra(rd, rd, rs) : rv_sraw(rd, rd, rs), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+
+	/* dst = -dst */
+	case BPF_ALU | BPF_NEG:
+	case BPF_ALU64 | BPF_NEG:
+		emit_sub(rd, RV_REG_ZERO, rd, ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+
+	/* dst = BSWAP##imm(dst) */
+	case BPF_ALU | BPF_END | BPF_FROM_LE:
+		switch (imm) {
+		case 16:
+			emit_zexth(rd, rd, ctx);
+			break;
+		case 32:
+			if (!aux->verifier_zext)
+				emit_zextw(rd, rd, ctx);
+			break;
+		case 64:
+			/* Do nothing */
+			break;
+		}
+		break;
+	case BPF_ALU | BPF_END | BPF_FROM_BE:
+	case BPF_ALU64 | BPF_END | BPF_FROM_LE:
+		emit_bswap(rd, imm, ctx);
+		break;
+
+	/* dst = imm */
+	case BPF_ALU | BPF_MOV | BPF_K:
+	case BPF_ALU64 | BPF_MOV | BPF_K:
+		emit_imm(rd, imm, ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+
+	/* dst = dst OP imm */
+	case BPF_ALU | BPF_ADD | BPF_K:
+	case BPF_ALU64 | BPF_ADD | BPF_K:
+		if (is_12b_int(imm)) {
+			emit_addi(rd, rd, imm, ctx);
+		} else {
+			emit_imm(RV_REG_T1, imm, ctx);
+			emit_add(rd, rd, RV_REG_T1, ctx);
+		}
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_SUB | BPF_K:
+	case BPF_ALU64 | BPF_SUB | BPF_K:
+		if (is_12b_int(-imm)) {
+			emit_addi(rd, rd, -imm, ctx);
+		} else {
+			emit_imm(RV_REG_T1, imm, ctx);
+			emit_sub(rd, rd, RV_REG_T1, ctx);
+		}
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_AND | BPF_K:
+	case BPF_ALU64 | BPF_AND | BPF_K:
+		if (is_12b_int(imm)) {
+			emit_andi(rd, rd, imm, ctx);
+		} else {
+			emit_imm(RV_REG_T1, imm, ctx);
+			emit_and(rd, rd, RV_REG_T1, ctx);
+		}
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_OR | BPF_K:
+	case BPF_ALU64 | BPF_OR | BPF_K:
+		if (is_12b_int(imm)) {
+			emit(rv_ori(rd, rd, imm), ctx);
+		} else {
+			emit_imm(RV_REG_T1, imm, ctx);
+			emit_or(rd, rd, RV_REG_T1, ctx);
+		}
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_XOR | BPF_K:
+	case BPF_ALU64 | BPF_XOR | BPF_K:
+		if (is_12b_int(imm)) {
+			emit(rv_xori(rd, rd, imm), ctx);
+		} else {
+			emit_imm(RV_REG_T1, imm, ctx);
+			emit_xor(rd, rd, RV_REG_T1, ctx);
+		}
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_MUL | BPF_K:
+	case BPF_ALU64 | BPF_MUL | BPF_K:
+		emit_imm(RV_REG_T1, imm, ctx);
+		emit(is64 ? rv_mul(rd, rd, RV_REG_T1) :
+		     rv_mulw(rd, rd, RV_REG_T1), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_DIV | BPF_K:
+	case BPF_ALU64 | BPF_DIV | BPF_K:
+		emit_imm(RV_REG_T1, imm, ctx);
+		if (off)
+			emit(is64 ? rv_div(rd, rd, RV_REG_T1) :
+			     rv_divw(rd, rd, RV_REG_T1), ctx);
+		else
+			emit(is64 ? rv_divu(rd, rd, RV_REG_T1) :
+			     rv_divuw(rd, rd, RV_REG_T1), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_MOD | BPF_K:
+	case BPF_ALU64 | BPF_MOD | BPF_K:
+		emit_imm(RV_REG_T1, imm, ctx);
+		if (off)
+			emit(is64 ? rv_rem(rd, rd, RV_REG_T1) :
+			     rv_remw(rd, rd, RV_REG_T1), ctx);
+		else
+			emit(is64 ? rv_remu(rd, rd, RV_REG_T1) :
+			     rv_remuw(rd, rd, RV_REG_T1), ctx);
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_LSH | BPF_K:
+	case BPF_ALU64 | BPF_LSH | BPF_K:
+		emit_slli(rd, rd, imm, ctx);
+
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_RSH | BPF_K:
+	case BPF_ALU64 | BPF_RSH | BPF_K:
+		if (is64)
+			emit_srli(rd, rd, imm, ctx);
+		else
+			emit(rv_srliw(rd, rd, imm), ctx);
+
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+	case BPF_ALU | BPF_ARSH | BPF_K:
+	case BPF_ALU64 | BPF_ARSH | BPF_K:
+		if (is64)
+			emit_srai(rd, rd, imm, ctx);
+		else
+			emit(rv_sraiw(rd, rd, imm), ctx);
+
+		if (!is64 && !aux->verifier_zext)
+			emit_zextw(rd, rd, ctx);
+		break;
+
+	/* JUMP off */
+	case BPF_JMP | BPF_JA:
+	case BPF_JMP32 | BPF_JA:
+		if (BPF_CLASS(code) == BPF_JMP)
+			rvoff = rv_offset(i, off, ctx);
+		else
+			rvoff = rv_offset(i, imm, ctx);
+		ret = emit_jump_and_link(RV_REG_ZERO, rvoff, true, ctx);
+		if (ret)
+			return ret;
+		break;
+
+	/* IF (dst COND src) JUMP off */
+	case BPF_JMP | BPF_JEQ | BPF_X:
+	case BPF_JMP32 | BPF_JEQ | BPF_X:
+	case BPF_JMP | BPF_JGT | BPF_X:
+	case BPF_JMP32 | BPF_JGT | BPF_X:
+	case BPF_JMP | BPF_JLT | BPF_X:
+	case BPF_JMP32 | BPF_JLT | BPF_X:
+	case BPF_JMP | BPF_JGE | BPF_X:
+	case BPF_JMP32 | BPF_JGE | BPF_X:
+	case BPF_JMP | BPF_JLE | BPF_X:
+	case BPF_JMP32 | BPF_JLE | BPF_X:
+	case BPF_JMP | BPF_JNE | BPF_X:
+	case BPF_JMP32 | BPF_JNE | BPF_X:
+	case BPF_JMP | BPF_JSGT | BPF_X:
+	case BPF_JMP32 | BPF_JSGT | BPF_X:
+	case BPF_JMP | BPF_JSLT | BPF_X:
+	case BPF_JMP32 | BPF_JSLT | BPF_X:
+	case BPF_JMP | BPF_JSGE | BPF_X:
+	case BPF_JMP32 | BPF_JSGE | BPF_X:
+	case BPF_JMP | BPF_JSLE | BPF_X:
+	case BPF_JMP32 | BPF_JSLE | BPF_X:
+	case BPF_JMP | BPF_JSET | BPF_X:
+	case BPF_JMP32 | BPF_JSET | BPF_X:
+		rvoff = rv_offset(i, off, ctx);
+		if (!is64) {
+			s = ctx->ninsns;
+			if (is_signed_bpf_cond(BPF_OP(code))) {
+				emit_sextw_alt(&rs, RV_REG_T1, ctx);
+				emit_sextw_alt(&rd, RV_REG_T2, ctx);
+			} else {
+				emit_zextw_alt(&rs, RV_REG_T1, ctx);
+				emit_zextw_alt(&rd, RV_REG_T2, ctx);
+			}
+			e = ctx->ninsns;
+
+			/* Adjust for extra insns */
+			rvoff -= ninsns_rvoff(e - s);
+		}
+
+		if (BPF_OP(code) == BPF_JSET) {
+			/* Adjust for and */
+			rvoff -= 4;
+			emit_and(RV_REG_T1, rd, rs, ctx);
+			emit_branch(BPF_JNE, RV_REG_T1, RV_REG_ZERO, rvoff, ctx);
+		} else {
+			emit_branch(BPF_OP(code), rd, rs, rvoff, ctx);
+		}
+		break;
+
+	/* IF (dst COND imm) JUMP off */
+	case BPF_JMP | BPF_JEQ | BPF_K:
+	case BPF_JMP32 | BPF_JEQ | BPF_K:
+	case BPF_JMP | BPF_JGT | BPF_K:
+	case BPF_JMP32 | BPF_JGT | BPF_K:
+	case BPF_JMP | BPF_JLT | BPF_K:
+	case BPF_JMP32 | BPF_JLT | BPF_K:
+	case BPF_JMP | BPF_JGE | BPF_K:
+	case BPF_JMP32 | BPF_JGE | BPF_K:
+	case BPF_JMP | BPF_JLE | BPF_K:
+	case BPF_JMP32 | BPF_JLE | BPF_K:
+	case BPF_JMP | BPF_JNE | BPF_K:
+	case BPF_JMP32 | BPF_JNE | BPF_K:
+	case BPF_JMP | BPF_JSGT | BPF_K:
+	case BPF_JMP32 | BPF_JSGT | BPF_K:
+	case BPF_JMP | BPF_JSLT | BPF_K:
+	case BPF_JMP32 | BPF_JSLT | BPF_K:
+	case BPF_JMP | BPF_JSGE | BPF_K:
+	case BPF_JMP32 | BPF_JSGE | BPF_K:
+	case BPF_JMP | BPF_JSLE | BPF_K:
+	case BPF_JMP32 | BPF_JSLE | BPF_K:
+		rvoff = rv_offset(i, off, ctx);
+		s = ctx->ninsns;
+		if (imm)
+			emit_imm(RV_REG_T1, imm, ctx);
+		rs = imm ? RV_REG_T1 : RV_REG_ZERO;
+		if (!is64) {
+			if (is_signed_bpf_cond(BPF_OP(code))) {
+				emit_sextw_alt(&rd, RV_REG_T2, ctx);
+				/* rs has been sign extended */
+			} else {
+				emit_zextw_alt(&rd, RV_REG_T2, ctx);
+				if (imm)
+					emit_zextw(rs, rs, ctx);
+			}
+		}
+		e = ctx->ninsns;
+
+		/* Adjust for extra insns */
+		rvoff -= ninsns_rvoff(e - s);
+		emit_branch(BPF_OP(code), rd, rs, rvoff, ctx);
+		break;
+
+	case BPF_JMP | BPF_JSET | BPF_K:
+	case BPF_JMP32 | BPF_JSET | BPF_K:
+		rvoff = rv_offset(i, off, ctx);
+		s = ctx->ninsns;
+		if (is_12b_int(imm)) {
+			emit_andi(RV_REG_T1, rd, imm, ctx);
+		} else {
+			emit_imm(RV_REG_T1, imm, ctx);
+			emit_and(RV_REG_T1, rd, RV_REG_T1, ctx);
+		}
+		/* For jset32, we should clear the upper 32 bits of t1, but
+		 * sign-extension is sufficient here and saves one instruction,
+		 * as t1 is used only in comparison against zero.
+		 */
+		if (!is64 && imm < 0)
+			emit_sextw(RV_REG_T1, RV_REG_T1, ctx);
+		e = ctx->ninsns;
+		rvoff -= ninsns_rvoff(e - s);
+		emit_branch(BPF_JNE, RV_REG_T1, RV_REG_ZERO, rvoff, ctx);
+		break;
+
+	/* function call */
+	case BPF_JMP | BPF_CALL:
+	{
+		bool fixed_addr;
+		u64 addr;
+
+		/* Inline calls to bpf_get_smp_processor_id()
+		 *
+		 * RV_REG_TP holds the address of the current CPU's task_struct and thread_info is
+		 * at offset 0 in task_struct.
+		 * Load cpu from thread_info:
+		 *     Set R0 to ((struct thread_info *)(RV_REG_TP))->cpu
+		 *
+		 * This replicates the implementation of raw_smp_processor_id() on RISCV
+		 */
+		if (insn->src_reg == 0 && insn->imm == BPF_FUNC_get_smp_processor_id) {
+			/* Load current CPU number in R0 */
+			emit_ld(bpf_to_rv_reg(BPF_REG_0, ctx), offsetof(struct thread_info, cpu),
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				RV_REG_TP, ctx);
 			break;
 		}

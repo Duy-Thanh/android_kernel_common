@@ -56,6 +56,7 @@ static int rose_state1_machine(struct sock *sk, struct sk_buff *skb, int framety
 	case ROSE_CLEAR_REQUEST:
 		rose_write_internal(sk, ROSE_CLEAR_CONFIRMATION);
 		rose_disconnect(sk, ECONNREFUSED, skb->data[3], skb->data[4]);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		rose_neigh_put(rose->neighbour);
 		break;
 
@@ -254,6 +255,207 @@ static int rose_state5_machine(struct sock *sk, struct sk_buff *skb, int framety
 		rose_write_internal(sk, ROSE_CLEAR_CONFIRMATION);
 		rose_disconnect(sk, 0, skb->data[3], skb->data[4]);
 		rose_neigh_put(rose_sk(sk)->neighbour);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		rose->neighbour->use--;
+		break;
+
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+/*
+ * State machine for state 2, Awaiting Clear Confirmation State.
+ * The handling of the timer(s) is in file rose_timer.c
+ * Handling of state 0 and connection release is in af_rose.c.
+ */
+static int rose_state2_machine(struct sock *sk, struct sk_buff *skb, int frametype)
+{
+	struct rose_sock *rose = rose_sk(sk);
+
+	switch (frametype) {
+	case ROSE_CLEAR_REQUEST:
+		rose_write_internal(sk, ROSE_CLEAR_CONFIRMATION);
+		rose_disconnect(sk, 0, skb->data[3], skb->data[4]);
+		rose->neighbour->use--;
+		break;
+
+	case ROSE_CLEAR_CONFIRMATION:
+		rose_disconnect(sk, 0, -1, -1);
+		rose->neighbour->use--;
+		break;
+
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+/*
+ * State machine for state 3, Connected State.
+ * The handling of the timer(s) is in file rose_timer.c
+ * Handling of state 0 and connection release is in af_rose.c.
+ */
+static int rose_state3_machine(struct sock *sk, struct sk_buff *skb, int frametype, int ns, int nr, int q, int d, int m)
+{
+	struct rose_sock *rose = rose_sk(sk);
+	int queued = 0;
+
+	switch (frametype) {
+	case ROSE_RESET_REQUEST:
+		rose_stop_timer(sk);
+		rose_start_idletimer(sk);
+		rose_write_internal(sk, ROSE_RESET_CONFIRMATION);
+		rose->condition = 0x00;
+		rose->vs        = 0;
+		rose->vr        = 0;
+		rose->va        = 0;
+		rose->vl        = 0;
+		rose_requeue_frames(sk);
+		break;
+
+	case ROSE_CLEAR_REQUEST:
+		rose_write_internal(sk, ROSE_CLEAR_CONFIRMATION);
+		rose_disconnect(sk, 0, skb->data[3], skb->data[4]);
+		rose->neighbour->use--;
+		break;
+
+	case ROSE_RR:
+	case ROSE_RNR:
+		if (!rose_validate_nr(sk, nr)) {
+			rose_write_internal(sk, ROSE_RESET_REQUEST);
+			rose->condition = 0x00;
+			rose->vs        = 0;
+			rose->vr        = 0;
+			rose->va        = 0;
+			rose->vl        = 0;
+			rose->state     = ROSE_STATE_4;
+			rose_start_t2timer(sk);
+			rose_stop_idletimer(sk);
+		} else {
+			rose_frames_acked(sk, nr);
+			if (frametype == ROSE_RNR) {
+				rose->condition |= ROSE_COND_PEER_RX_BUSY;
+			} else {
+				rose->condition &= ~ROSE_COND_PEER_RX_BUSY;
+			}
+		}
+		break;
+
+	case ROSE_DATA:	/* XXX */
+		rose->condition &= ~ROSE_COND_PEER_RX_BUSY;
+		if (!rose_validate_nr(sk, nr)) {
+			rose_write_internal(sk, ROSE_RESET_REQUEST);
+			rose->condition = 0x00;
+			rose->vs        = 0;
+			rose->vr        = 0;
+			rose->va        = 0;
+			rose->vl        = 0;
+			rose->state     = ROSE_STATE_4;
+			rose_start_t2timer(sk);
+			rose_stop_idletimer(sk);
+			break;
+		}
+		rose_frames_acked(sk, nr);
+		if (ns == rose->vr) {
+			rose_start_idletimer(sk);
+			if (sk_filter_trim_cap(sk, skb, ROSE_MIN_LEN) == 0 &&
+			    __sock_queue_rcv_skb(sk, skb) == 0) {
+				rose->vr = (rose->vr + 1) % ROSE_MODULUS;
+				queued = 1;
+			} else {
+				/* Should never happen ! */
+				rose_write_internal(sk, ROSE_RESET_REQUEST);
+				rose->condition = 0x00;
+				rose->vs        = 0;
+				rose->vr        = 0;
+				rose->va        = 0;
+				rose->vl        = 0;
+				rose->state     = ROSE_STATE_4;
+				rose_start_t2timer(sk);
+				rose_stop_idletimer(sk);
+				break;
+			}
+			if (atomic_read(&sk->sk_rmem_alloc) >
+			    (sk->sk_rcvbuf >> 1))
+				rose->condition |= ROSE_COND_OWN_RX_BUSY;
+		}
+		/*
+		 * If the window is full, ack the frame, else start the
+		 * acknowledge hold back timer.
+		 */
+		if (((rose->vl + sysctl_rose_window_size) % ROSE_MODULUS) == rose->vr) {
+			rose->condition &= ~ROSE_COND_ACK_PENDING;
+			rose_stop_timer(sk);
+			rose_enquiry_response(sk);
+		} else {
+			rose->condition |= ROSE_COND_ACK_PENDING;
+			rose_start_hbtimer(sk);
+		}
+		break;
+
+	default:
+		printk(KERN_WARNING "ROSE: unknown %02X in state 3\n", frametype);
+		break;
+	}
+
+	return queued;
+}
+
+/*
+ * State machine for state 4, Awaiting Reset Confirmation State.
+ * The handling of the timer(s) is in file rose_timer.c
+ * Handling of state 0 and connection release is in af_rose.c.
+ */
+static int rose_state4_machine(struct sock *sk, struct sk_buff *skb, int frametype)
+{
+	struct rose_sock *rose = rose_sk(sk);
+
+	switch (frametype) {
+	case ROSE_RESET_REQUEST:
+		rose_write_internal(sk, ROSE_RESET_CONFIRMATION);
+		fallthrough;
+	case ROSE_RESET_CONFIRMATION:
+		rose_stop_timer(sk);
+		rose_start_idletimer(sk);
+		rose->condition = 0x00;
+		rose->va        = 0;
+		rose->vr        = 0;
+		rose->vs        = 0;
+		rose->vl        = 0;
+		rose->state     = ROSE_STATE_3;
+		rose_requeue_frames(sk);
+		break;
+
+	case ROSE_CLEAR_REQUEST:
+		rose_write_internal(sk, ROSE_CLEAR_CONFIRMATION);
+		rose_disconnect(sk, 0, skb->data[3], skb->data[4]);
+		rose->neighbour->use--;
+		break;
+
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+/*
+ * State machine for state 5, Awaiting Call Acceptance State.
+ * The handling of the timer(s) is in file rose_timer.c
+ * Handling of state 0 and connection release is in af_rose.c.
+ */
+static int rose_state5_machine(struct sock *sk, struct sk_buff *skb, int frametype)
+{
+	if (frametype == ROSE_CLEAR_REQUEST) {
+		rose_write_internal(sk, ROSE_CLEAR_CONFIRMATION);
+		rose_disconnect(sk, 0, skb->data[3], skb->data[4]);
+		rose_sk(sk)->neighbour->use--;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	return 0;

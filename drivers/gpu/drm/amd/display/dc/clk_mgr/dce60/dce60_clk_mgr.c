@@ -83,6 +83,7 @@ static const struct state_dependent_clocks dce60_max_clks_by_state[] = {
 static int dce60_get_dp_ref_freq_khz(struct clk_mgr *clk_mgr_base)
 {
 	struct clk_mgr_internal *clk_mgr = TO_CLK_MGR_INTERNAL(clk_mgr_base);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct dc_context *ctx = clk_mgr_base->ctx;
 	int dp_ref_clk_khz = 0;
 
@@ -115,6 +116,54 @@ static void dce60_update_clocks(struct clk_mgr *clk_mgr_base,
 	const int max_disp_clk =
 		clk_mgr_dce->max_clks_by_state[DM_PP_CLOCKS_STATE_PERFORMANCE].display_clk_khz;
 	int patched_disp_clk = MIN(max_disp_clk, context->bw_ctx.bw.dce.dispclk_khz);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int dprefclk_wdivider;
+	int dp_ref_clk_khz;
+	int target_div;
+
+	/* DCE6 has no DPREFCLK_CNTL to read DP Reference Clock source */
+
+	/* Read the mmDENTIST_DISPCLK_CNTL to get the currently
+	 * programmed DID DENTIST_DPREFCLK_WDIVIDER*/
+	REG_GET(DENTIST_DISPCLK_CNTL, DENTIST_DPREFCLK_WDIVIDER, &dprefclk_wdivider);
+
+	/* Convert DENTIST_DPREFCLK_WDIVIDERto actual divider*/
+	target_div = dentist_get_divider_from_did(dprefclk_wdivider);
+
+	/* Calculate the current DFS clock, in kHz.*/
+	dp_ref_clk_khz = (DENTIST_DIVIDER_RANGE_SCALE_FACTOR
+		* clk_mgr->base.dentist_vco_freq_khz) / target_div;
+
+	return dce_adjust_dp_ref_freq_for_ss(clk_mgr, dp_ref_clk_khz);
+}
+
+static void dce60_pplib_apply_display_requirements(
+	struct dc *dc,
+	struct dc_state *context)
+{
+	struct dm_pp_display_configuration *pp_display_cfg = &context->pp_display_cfg;
+
+	pp_display_cfg->avail_mclk_switch_time_us = dce110_get_min_vblank_time_us(context);
+
+	dce110_fill_display_configs(context, pp_display_cfg);
+
+	if (memcmp(&dc->current_state->pp_display_cfg, pp_display_cfg, sizeof(*pp_display_cfg)) !=  0)
+		dm_pp_apply_display_requirements(dc->ctx, pp_display_cfg);
+}
+
+static void dce60_update_clocks(struct clk_mgr *clk_mgr_base,
+			struct dc_state *context,
+			bool safe_to_lower)
+{
+	struct clk_mgr_internal *clk_mgr_dce = TO_CLK_MGR_INTERNAL(clk_mgr_base);
+	struct dm_pp_power_level_change_request level_change_req;
+	int patched_disp_clk = context->bw_ctx.bw.dce.dispclk_khz;
+
+	/*TODO: W/A for dal3 linux, investigate why this works */
+	if (!clk_mgr_dce->dfs_bypass_active)
+		patched_disp_clk = patched_disp_clk * 115 / 100;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	level_change_req.power_level = dce_get_required_clocks_state(clk_mgr_base, context);
 	/* get max clock state from PPLIB */

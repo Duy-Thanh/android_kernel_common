@@ -429,6 +429,7 @@ static inline pte_t *get_ptep(struct mm_struct *mm, unsigned long addr)
 	return ptep;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static inline bool pte_needs_cache_flush(pte_t pte)
 {
 	return (pte_val(pte) & (_PAGE_PRESENT | _PAGE_ACCESSED | _PAGE_NO_CACHE))
@@ -842,6 +843,422 @@ void flush_cache_vmap(unsigned long start, unsigned long end)
 
 	vm = find_vm_area((void *)start);
 	if (!vm) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static inline bool pte_needs_flush(pte_t pte)
+{
+	return (pte_val(pte) & (_PAGE_PRESENT | _PAGE_ACCESSED | _PAGE_NO_CACHE))
+		== (_PAGE_PRESENT | _PAGE_ACCESSED);
+}
+
+/*
+ * Return user physical address. Returns 0 if page is not present.
+ */
+static inline unsigned long get_upa(struct mm_struct *mm, unsigned long addr)
+{
+	unsigned long flags, space, pgd, prot, pa;
+#ifdef CONFIG_TLB_PTLOCK
+	unsigned long pgd_lock;
+#endif
+
+	/* Save context */
+	local_irq_save(flags);
+	prot = mfctl(8);
+	space = mfsp(SR_USER);
+	pgd = mfctl(25);
+#ifdef CONFIG_TLB_PTLOCK
+	pgd_lock = mfctl(28);
+#endif
+
+	/* Set context for lpa_user */
+	switch_mm_irqs_off(NULL, mm, NULL);
+	pa = lpa_user(addr);
+
+	/* Restore previous context */
+#ifdef CONFIG_TLB_PTLOCK
+	mtctl(pgd_lock, 28);
+#endif
+	mtctl(pgd, 25);
+	mtsp(space, SR_USER);
+	mtctl(prot, 8);
+	local_irq_restore(flags);
+
+	return pa;
+}
+
+void flush_dcache_folio(struct folio *folio)
+{
+	struct address_space *mapping = folio_flush_mapping(folio);
+	struct vm_area_struct *vma;
+	unsigned long addr, old_addr = 0;
+	void *kaddr;
+	unsigned long count = 0;
+	unsigned long i, nr, flags;
+	pgoff_t pgoff;
+
+	if (mapping && !mapping_mapped(mapping)) {
+		set_bit(PG_dcache_dirty, &folio->flags);
+		return;
+	}
+
+	nr = folio_nr_pages(folio);
+	kaddr = folio_address(folio);
+	for (i = 0; i < nr; i++)
+		flush_kernel_dcache_page_addr(kaddr + i * PAGE_SIZE);
+
+	if (!mapping)
+		return;
+
+	pgoff = folio->index;
+
+	/*
+	 * We have carefully arranged in arch_get_unmapped_area() that
+	 * *any* mappings of a file are always congruently mapped (whether
+	 * declared as MAP_PRIVATE or MAP_SHARED), so we only need
+	 * to flush one address here for them all to become coherent
+	 * on machines that support equivalent aliasing
+	 */
+	flush_dcache_mmap_lock_irqsave(mapping, flags);
+	vma_interval_tree_foreach(vma, &mapping->i_mmap, pgoff, pgoff + nr - 1) {
+		unsigned long offset = pgoff - vma->vm_pgoff;
+		unsigned long pfn = folio_pfn(folio);
+
+		addr = vma->vm_start;
+		nr = folio_nr_pages(folio);
+		if (offset > -nr) {
+			pfn -= offset;
+			nr += offset;
+		} else {
+			addr += offset * PAGE_SIZE;
+		}
+		if (addr + nr * PAGE_SIZE > vma->vm_end)
+			nr = (vma->vm_end - addr) / PAGE_SIZE;
+
+		if (old_addr == 0 || (old_addr & (SHM_COLOUR - 1))
+					!= (addr & (SHM_COLOUR - 1))) {
+			for (i = 0; i < nr; i++)
+				__flush_cache_page(vma,
+					addr + i * PAGE_SIZE,
+					(pfn + i) * PAGE_SIZE);
+			/*
+			 * Software is allowed to have any number
+			 * of private mappings to a page.
+			 */
+			if (!(vma->vm_flags & VM_SHARED))
+				continue;
+			if (old_addr)
+				pr_err("INEQUIVALENT ALIASES 0x%lx and 0x%lx in file %pD\n",
+					old_addr, addr, vma->vm_file);
+			if (nr == folio_nr_pages(folio))
+				old_addr = addr;
+		}
+		WARN_ON(++count == 4096);
+	}
+	flush_dcache_mmap_unlock_irqrestore(mapping, flags);
+}
+EXPORT_SYMBOL(flush_dcache_folio);
+
+/* Defined in arch/parisc/kernel/pacache.S */
+EXPORT_SYMBOL(flush_kernel_dcache_range_asm);
+EXPORT_SYMBOL(flush_kernel_icache_range_asm);
+
+#define FLUSH_THRESHOLD 0x80000 /* 0.5MB */
+static unsigned long parisc_cache_flush_threshold __ro_after_init = FLUSH_THRESHOLD;
+
+#define FLUSH_TLB_THRESHOLD (16*1024) /* 16 KiB minimum TLB threshold */
+static unsigned long parisc_tlb_flush_threshold __ro_after_init = ~0UL;
+
+void __init parisc_setup_cache_timing(void)
+{
+	unsigned long rangetime, alltime;
+	unsigned long size;
+	unsigned long threshold, threshold2;
+
+	alltime = mfctl(16);
+	flush_data_cache();
+	alltime = mfctl(16) - alltime;
+
+	size = (unsigned long)(_end - _text);
+	rangetime = mfctl(16);
+	flush_kernel_dcache_range((unsigned long)_text, size);
+	rangetime = mfctl(16) - rangetime;
+
+	printk(KERN_DEBUG "Whole cache flush %lu cycles, flushing %lu bytes %lu cycles\n",
+		alltime, size, rangetime);
+
+	threshold = L1_CACHE_ALIGN((unsigned long)((uint64_t)size * alltime / rangetime));
+	pr_info("Calculated flush threshold is %lu KiB\n",
+		threshold/1024);
+
+	/*
+	 * The threshold computed above isn't very reliable. The following
+	 * heuristic works reasonably well on c8000/rp3440.
+	 */
+	threshold2 = cache_info.dc_size * num_online_cpus();
+	parisc_cache_flush_threshold = threshold2;
+	printk(KERN_INFO "Cache flush threshold set to %lu KiB\n",
+		parisc_cache_flush_threshold/1024);
+
+	/* calculate TLB flush threshold */
+
+	/* On SMP machines, skip the TLB measure of kernel text which
+	 * has been mapped as huge pages. */
+	if (num_online_cpus() > 1 && !parisc_requires_coherency()) {
+		threshold = max(cache_info.it_size, cache_info.dt_size);
+		threshold *= PAGE_SIZE;
+		threshold /= num_online_cpus();
+		goto set_tlb_threshold;
+	}
+
+	size = (unsigned long)_end - (unsigned long)_text;
+	rangetime = mfctl(16);
+	flush_tlb_kernel_range((unsigned long)_text, (unsigned long)_end);
+	rangetime = mfctl(16) - rangetime;
+
+	alltime = mfctl(16);
+	flush_tlb_all();
+	alltime = mfctl(16) - alltime;
+
+	printk(KERN_INFO "Whole TLB flush %lu cycles, Range flush %lu bytes %lu cycles\n",
+		alltime, size, rangetime);
+
+	threshold = PAGE_ALIGN((num_online_cpus() * size * alltime) / rangetime);
+	printk(KERN_INFO "Calculated TLB flush threshold %lu KiB\n",
+		threshold/1024);
+
+set_tlb_threshold:
+	parisc_tlb_flush_threshold = max(threshold, FLUSH_TLB_THRESHOLD);
+	printk(KERN_INFO "TLB flush threshold set to %lu KiB\n",
+		parisc_tlb_flush_threshold/1024);
+}
+
+extern void purge_kernel_dcache_page_asm(unsigned long);
+extern void clear_user_page_asm(void *, unsigned long);
+extern void copy_user_page_asm(void *, void *, unsigned long);
+
+static void flush_cache_page_if_present(struct vm_area_struct *vma,
+	unsigned long vmaddr)
+{
+#if CONFIG_FLUSH_PAGE_ACCESSED
+	bool needs_flush = false;
+	pte_t *ptep, pte;
+
+	ptep = get_ptep(vma->vm_mm, vmaddr);
+	if (ptep) {
+		pte = ptep_get(ptep);
+		needs_flush = pte_needs_flush(pte);
+		pte_unmap(ptep);
+	}
+	if (needs_flush)
+		__flush_cache_page(vma, vmaddr, PFN_PHYS(pte_pfn(pte)));
+#else
+	struct mm_struct *mm = vma->vm_mm;
+	unsigned long physaddr = get_upa(mm, vmaddr);
+
+	if (physaddr)
+		__flush_cache_page(vma, vmaddr, PAGE_ALIGN_DOWN(physaddr));
+#endif
+}
+
+void copy_user_highpage(struct page *to, struct page *from,
+	unsigned long vaddr, struct vm_area_struct *vma)
+{
+	void *kto, *kfrom;
+
+	kfrom = kmap_local_page(from);
+	kto = kmap_local_page(to);
+	__flush_cache_page(vma, vaddr, PFN_PHYS(page_to_pfn(from)));
+	copy_page_asm(kto, kfrom);
+	kunmap_local(kto);
+	kunmap_local(kfrom);
+}
+
+void copy_to_user_page(struct vm_area_struct *vma, struct page *page,
+		unsigned long user_vaddr, void *dst, void *src, int len)
+{
+	__flush_cache_page(vma, user_vaddr, PFN_PHYS(page_to_pfn(page)));
+	memcpy(dst, src, len);
+	flush_kernel_dcache_page_addr(PTR_PAGE_ALIGN_DOWN(dst));
+}
+
+void copy_from_user_page(struct vm_area_struct *vma, struct page *page,
+		unsigned long user_vaddr, void *dst, void *src, int len)
+{
+	__flush_cache_page(vma, user_vaddr, PFN_PHYS(page_to_pfn(page)));
+	memcpy(dst, src, len);
+	flush_kernel_dcache_page_addr(PTR_PAGE_ALIGN_DOWN(src));
+}
+
+/* __flush_tlb_range()
+ *
+ * returns 1 if all TLBs were flushed.
+ */
+int __flush_tlb_range(unsigned long sid, unsigned long start,
+		      unsigned long end)
+{
+	unsigned long flags;
+
+	if ((!IS_ENABLED(CONFIG_SMP) || !arch_irqs_disabled()) &&
+	    end - start >= parisc_tlb_flush_threshold) {
+		flush_tlb_all();
+		return 1;
+	}
+
+	/* Purge TLB entries for small ranges using the pdtlb and
+	   pitlb instructions.  These instructions execute locally
+	   but cause a purge request to be broadcast to other TLBs.  */
+	while (start < end) {
+		purge_tlb_start(flags);
+		mtsp(sid, SR_TEMP1);
+		pdtlb(SR_TEMP1, start);
+		pitlb(SR_TEMP1, start);
+		purge_tlb_end(flags);
+		start += PAGE_SIZE;
+	}
+	return 0;
+}
+
+static void flush_cache_pages(struct vm_area_struct *vma, unsigned long start, unsigned long end)
+{
+	unsigned long addr;
+
+	for (addr = start; addr < end; addr += PAGE_SIZE)
+		flush_cache_page_if_present(vma, addr);
+}
+
+static inline unsigned long mm_total_size(struct mm_struct *mm)
+{
+	struct vm_area_struct *vma;
+	unsigned long usize = 0;
+	VMA_ITERATOR(vmi, mm, 0);
+
+	for_each_vma(vmi, vma) {
+		if (usize >= parisc_cache_flush_threshold)
+			break;
+		usize += vma->vm_end - vma->vm_start;
+	}
+	return usize;
+}
+
+void flush_cache_mm(struct mm_struct *mm)
+{
+	struct vm_area_struct *vma;
+	VMA_ITERATOR(vmi, mm, 0);
+
+	/*
+	 * Flushing the whole cache on each cpu takes forever on
+	 * rp3440, etc. So, avoid it if the mm isn't too big.
+	 *
+	 * Note that we must flush the entire cache on machines
+	 * with aliasing caches to prevent random segmentation
+	 * faults.
+	 */
+	if (!parisc_requires_coherency()
+	    ||  mm_total_size(mm) >= parisc_cache_flush_threshold) {
+		if (WARN_ON(IS_ENABLED(CONFIG_SMP) && arch_irqs_disabled()))
+			return;
+		flush_tlb_all();
+		flush_cache_all();
+		return;
+	}
+
+	/* Flush mm */
+	for_each_vma(vmi, vma)
+		flush_cache_pages(vma, vma->vm_start, vma->vm_end);
+}
+
+void flush_cache_range(struct vm_area_struct *vma, unsigned long start, unsigned long end)
+{
+	if (!parisc_requires_coherency()
+	    || end - start >= parisc_cache_flush_threshold) {
+		if (WARN_ON(IS_ENABLED(CONFIG_SMP) && arch_irqs_disabled()))
+			return;
+		flush_tlb_range(vma, start, end);
+		if (vma->vm_flags & VM_EXEC)
+			flush_cache_all();
+		else
+			flush_data_cache();
+		return;
+	}
+
+	flush_cache_pages(vma, start & PAGE_MASK, end);
+}
+
+void flush_cache_page(struct vm_area_struct *vma, unsigned long vmaddr, unsigned long pfn)
+{
+	__flush_cache_page(vma, vmaddr, PFN_PHYS(pfn));
+}
+
+void flush_anon_page(struct vm_area_struct *vma, struct page *page, unsigned long vmaddr)
+{
+	if (!PageAnon(page))
+		return;
+
+	__flush_cache_page(vma, vmaddr, PFN_PHYS(page_to_pfn(page)));
+}
+
+int ptep_clear_flush_young(struct vm_area_struct *vma, unsigned long addr,
+			   pte_t *ptep)
+{
+	pte_t pte = ptep_get(ptep);
+
+	if (!pte_young(pte))
+		return 0;
+	set_pte(ptep, pte_mkold(pte));
+#if CONFIG_FLUSH_PAGE_ACCESSED
+	__flush_cache_page(vma, addr, PFN_PHYS(pte_pfn(pte)));
+#endif
+	return 1;
+}
+
+/*
+ * After a PTE is cleared, we have no way to flush the cache for
+ * the physical page. On PA8800 and PA8900 processors, these lines
+ * can cause random cache corruption. Thus, we must flush the cache
+ * as well as the TLB when clearing a PTE that's valid.
+ */
+pte_t ptep_clear_flush(struct vm_area_struct *vma, unsigned long addr,
+		       pte_t *ptep)
+{
+	struct mm_struct *mm = (vma)->vm_mm;
+	pte_t pte = ptep_get_and_clear(mm, addr, ptep);
+	unsigned long pfn = pte_pfn(pte);
+
+	if (pfn_valid(pfn))
+		__flush_cache_page(vma, addr, PFN_PHYS(pfn));
+	else if (pte_accessible(mm, pte))
+		flush_tlb_page(vma, addr);
+
+	return pte;
+}
+
+/*
+ * The physical address for pages in the ioremap case can be obtained
+ * from the vm_struct struct. I wasn't able to successfully handle the
+ * vmalloc and vmap cases. We have an array of struct page pointers in
+ * the uninitialized vmalloc case but the flush failed using page_to_pfn.
+ */
+void flush_cache_vmap(unsigned long start, unsigned long end)
+{
+	unsigned long addr, physaddr;
+	struct vm_struct *vm;
+
+	/* Prevent cache move-in */
+	flush_tlb_kernel_range(start, end);
+
+	if (end - start >= parisc_cache_flush_threshold) {
+		flush_cache_all();
+		return;
+	}
+
+	if (WARN_ON_ONCE(!is_vmalloc_addr((void *)start))) {
+		flush_cache_all();
+		return;
+	}
+
+	vm = find_vm_area((void *)start);
+	if (WARN_ON_ONCE(!vm)) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		flush_cache_all();
 		return;
 	}

@@ -1564,6 +1564,7 @@ static void sdhci_msm_check_power_status(struct sdhci_host *host, u32 req_type)
 {
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
 	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct mmc_host *mmc = host->mmc;
 	bool done = false;
 	u32 val = SWITCHABLE_SIGNALING_VOLTAGE;
@@ -1691,6 +1692,122 @@ static void sdhci_msm_handle_pwr_irq(struct sdhci_host *host, int irq)
 		msm_host_writel(msm_host, CORE_PWRCTL_BUS_FAIL, host,
 				msm_offset->core_pwrctl_ctl);
 		return;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool done = false;
+	u32 val = SWITCHABLE_SIGNALING_VOLTAGE;
+	const struct sdhci_msm_offset *msm_offset =
+					msm_host->offset;
+
+	pr_debug("%s: %s: request %d curr_pwr_state %x curr_io_level %x\n",
+			mmc_hostname(host->mmc), __func__, req_type,
+			msm_host->curr_pwr_state, msm_host->curr_io_level);
+
+	/*
+	 * The power interrupt will not be generated for signal voltage
+	 * switches if SWITCHABLE_SIGNALING_VOLTAGE in MCI_GENERICS is not set.
+	 * Since sdhci-msm-v5, this bit has been removed and SW must consider
+	 * it as always set.
+	 */
+	if (!msm_host->mci_removed)
+		val = msm_host_readl(msm_host, host,
+				msm_offset->core_generics);
+	if ((req_type & REQ_IO_HIGH || req_type & REQ_IO_LOW) &&
+	    !(val & SWITCHABLE_SIGNALING_VOLTAGE)) {
+		return;
+	}
+
+	/*
+	 * The IRQ for request type IO High/LOW will be generated when -
+	 * there is a state change in 1.8V enable bit (bit 3) of
+	 * SDHCI_HOST_CONTROL2 register. The reset state of that bit is 0
+	 * which indicates 3.3V IO voltage. So, when MMC core layer tries
+	 * to set it to 3.3V before card detection happens, the
+	 * IRQ doesn't get triggered as there is no state change in this bit.
+	 * The driver already handles this case by changing the IO voltage
+	 * level to high as part of controller power up sequence. Hence, check
+	 * for host->pwr to handle a case where IO voltage high request is
+	 * issued even before controller power up.
+	 */
+	if ((req_type & REQ_IO_HIGH) && !host->pwr) {
+		pr_debug("%s: do not wait for power IRQ that never comes, req_type: %d\n",
+				mmc_hostname(host->mmc), req_type);
+		return;
+	}
+	if ((req_type & msm_host->curr_pwr_state) ||
+			(req_type & msm_host->curr_io_level))
+		done = true;
+	/*
+	 * This is needed here to handle cases where register writes will
+	 * not change the current bus state or io level of the controller.
+	 * In this case, no power irq will be triggerred and we should
+	 * not wait.
+	 */
+	if (!done) {
+		if (!wait_event_timeout(msm_host->pwr_irq_wait,
+				msm_host->pwr_irq_flag,
+				msecs_to_jiffies(MSM_PWR_IRQ_TIMEOUT_MS)))
+			dev_warn(&msm_host->pdev->dev,
+				 "%s: pwr_irq for req: (%d) timed out\n",
+				 mmc_hostname(host->mmc), req_type);
+	}
+	pr_debug("%s: %s: request %d done\n", mmc_hostname(host->mmc),
+			__func__, req_type);
+}
+
+static void sdhci_msm_dump_pwr_ctrl_regs(struct sdhci_host *host)
+{
+	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
+	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
+	const struct sdhci_msm_offset *msm_offset =
+					msm_host->offset;
+
+	pr_err("%s: PWRCTL_STATUS: 0x%08x | PWRCTL_MASK: 0x%08x | PWRCTL_CTL: 0x%08x\n",
+		mmc_hostname(host->mmc),
+		msm_host_readl(msm_host, host, msm_offset->core_pwrctl_status),
+		msm_host_readl(msm_host, host, msm_offset->core_pwrctl_mask),
+		msm_host_readl(msm_host, host, msm_offset->core_pwrctl_ctl));
+}
+
+static void sdhci_msm_handle_pwr_irq(struct sdhci_host *host, int irq)
+{
+	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
+	struct sdhci_msm_host *msm_host = sdhci_pltfm_priv(pltfm_host);
+	struct mmc_host *mmc = host->mmc;
+	u32 irq_status, irq_ack = 0;
+	int retry = 10, ret;
+	u32 pwr_state = 0, io_level = 0;
+	u32 config;
+	const struct sdhci_msm_offset *msm_offset = msm_host->offset;
+
+	irq_status = msm_host_readl(msm_host, host,
+			msm_offset->core_pwrctl_status);
+	irq_status &= INT_MASK;
+
+	msm_host_writel(msm_host, irq_status, host,
+			msm_offset->core_pwrctl_clear);
+
+	/*
+	 * There is a rare HW scenario where the first clear pulse could be
+	 * lost when actual reset and clear/read of status register is
+	 * happening at a time. Hence, retry for at least 10 times to make
+	 * sure status register is cleared. Otherwise, this will result in
+	 * a spurious power IRQ resulting in system instability.
+	 */
+	while (irq_status & msm_host_readl(msm_host, host,
+				msm_offset->core_pwrctl_status)) {
+		if (retry == 0) {
+			pr_err("%s: Timedout clearing (0x%x) pwrctl status register\n",
+					mmc_hostname(host->mmc), irq_status);
+			sdhci_msm_dump_pwr_ctrl_regs(host);
+			WARN_ON(1);
+			break;
+		}
+		msm_host_writel(msm_host, irq_status, host,
+			msm_offset->core_pwrctl_clear);
+		retry--;
+		udelay(10);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	/* Handle BUS ON/OFF*/

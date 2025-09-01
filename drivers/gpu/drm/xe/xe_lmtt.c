@@ -78,6 +78,7 @@ static struct xe_lmtt_pt *lmtt_pt_alloc(struct xe_lmtt *lmtt, unsigned int level
 	}
 
 	lmtt_assert(lmtt, xe_bo_is_vram(bo));
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	lmtt_debug(lmtt, "level=%u addr=%#llx\n", level, (u64)xe_bo_main_addr(bo, XE_PAGE_SIZE));
 
 	xe_map_memset(lmtt_to_xe(lmtt), &bo->vmap, 0, 0, bo->size);
@@ -240,6 +241,160 @@ static void lmtt_write_pte(struct xe_lmtt *lmtt, struct xe_lmtt_pt *pt,
 	case sizeof(u64):
 		lmtt_assert(lmtt, !pte || !iosys_map_rd(&pt->bo->vmap, idx * sizeof(u64), u64));
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	pt->level = level;
+	pt->bo = bo;
+	return pt;
+
+out_free_pt:
+	kfree(pt);
+out:
+	return ERR_PTR(err);
+}
+
+static void lmtt_pt_free(struct xe_lmtt_pt *pt)
+{
+	xe_bo_unpin_map_no_vm(pt->bo);
+	kfree(pt);
+}
+
+static int lmtt_init_pd(struct xe_lmtt *lmtt)
+{
+	struct xe_lmtt_pt *pd;
+
+	lmtt_assert(lmtt, !lmtt->pd);
+	lmtt_assert(lmtt, lmtt->ops->lmtt_root_pd_level());
+
+	pd = lmtt_pt_alloc(lmtt, lmtt->ops->lmtt_root_pd_level());
+	if (IS_ERR(pd))
+		return PTR_ERR(pd);
+
+	lmtt->pd = pd;
+	return 0;
+}
+
+static void lmtt_fini_pd(struct xe_lmtt *lmtt)
+{
+	struct xe_lmtt_pt *pd = lmtt->pd;
+	unsigned int num_entries = lmtt->ops->lmtt_pte_num(pd->level);
+	unsigned int n = 0;
+
+	/* make sure we don't leak */
+	for (n = 0; n < num_entries; n++)
+		lmtt_assert(lmtt, !pd->entries[n]);
+
+	lmtt->pd = NULL;
+	lmtt_pt_free(pd);
+}
+
+static void fini_lmtt(struct drm_device *drm, void *arg)
+{
+	struct xe_lmtt *lmtt = arg;
+
+	lmtt_assert(lmtt, !(!!lmtt->ops ^ !!lmtt->pd));
+
+	if (!lmtt->pd)
+		return;
+
+	lmtt_fini_pd(lmtt);
+	lmtt->ops = NULL;
+}
+
+/**
+ * xe_lmtt_init - LMTT software initialization.
+ * @lmtt: the &xe_lmtt to initialize
+ *
+ * The LMTT initialization requires two steps.
+ *
+ * The xe_lmtt_init() checks if LMTT is required on current device and selects
+ * and initialize proper variant of the LMTT Root Directory. Currently supported
+ * variants are `Two-Level LMTT Structure`_ and `Multi-Level LMTT Structure`_.
+ *
+ * In next step xe_lmtt_init_hw() will register this directory on the hardware.
+ *
+ * Notes:
+ * The LMTT allocations are managed and will be implicitly released on driver unload.
+ * This function shall be called only once and only when running as a PF driver.
+ * Any LMTT initialization failure should block VFs enabling.
+ *
+ * Return: 0 on success or a negative error code on failure.
+ */
+int xe_lmtt_init(struct xe_lmtt *lmtt)
+{
+	struct xe_device *xe = lmtt_to_xe(lmtt);
+	int err;
+
+	lmtt_assert(lmtt, IS_SRIOV_PF(xe));
+	lmtt_assert(lmtt, !lmtt->ops);
+
+	if (!IS_DGFX(xe))
+		return 0;
+
+	if (xe_has_multi_level_lmtt(xe))
+		lmtt->ops = &lmtt_ml_ops;
+	else
+		lmtt->ops = &lmtt_2l_ops;
+
+	err = lmtt_init_pd(lmtt);
+	if (unlikely(err))
+		goto fail;
+
+	return drmm_add_action_or_reset(&xe->drm, fini_lmtt, lmtt);
+
+fail:
+	lmtt->ops = NULL;
+	return err;
+}
+
+static void lmtt_setup_dir_ptr(struct xe_lmtt *lmtt)
+{
+	struct xe_tile *tile = lmtt_to_tile(lmtt);
+	struct xe_device *xe = tile_to_xe(tile);
+	dma_addr_t offset = xe_bo_main_addr(lmtt->pd->bo, XE_PAGE_SIZE);
+
+	lmtt_debug(lmtt, "DIR offset %pad\n", &offset);
+	lmtt_assert(lmtt, xe_bo_is_vram(lmtt->pd->bo));
+	lmtt_assert(lmtt, IS_ALIGNED(offset, SZ_64K));
+
+	xe_mmio_write32(tile->primary_gt,
+			GRAPHICS_VER(xe) >= 20 ? XE2_LMEM_CFG : LMEM_CFG,
+			LMEM_EN | REG_FIELD_PREP(LMTT_DIR_PTR, offset / SZ_64K));
+}
+
+/**
+ * xe_lmtt_init_hw - Perform LMTT hardware initialization.
+ * @lmtt: the &xe_lmtt to initialize
+ *
+ * This function is a second step of the LMTT initialization.
+ * This function registers LMTT Root Directory prepared in xe_lmtt_init().
+ *
+ * This function shall be called after every hardware reset.
+ * This function shall be called only when running as a PF driver.
+ */
+void xe_lmtt_init_hw(struct xe_lmtt *lmtt)
+{
+	if (!lmtt->pd)
+		return;
+
+	lmtt_setup_dir_ptr(lmtt);
+}
+
+static void lmtt_write_pte(struct xe_lmtt *lmtt, struct xe_lmtt_pt *pt,
+			   u64 pte, unsigned int idx)
+{
+	unsigned int level = pt->level;
+
+	lmtt_assert(lmtt, idx <= lmtt->ops->lmtt_pte_num(level));
+	lmtt_debug(lmtt, "WRITE level=%u index=%u pte=%#llx\n", level, idx, pte);
+
+	switch (lmtt->ops->lmtt_pte_size(level)) {
+	case sizeof(u32):
+		xe_map_wr(lmtt_to_xe(lmtt), &pt->bo->vmap, idx * sizeof(u32), u32, pte);
+		break;
+	case sizeof(u64):
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		xe_map_wr(lmtt_to_xe(lmtt), &pt->bo->vmap, idx * sizeof(u64), u64, pte);
 		break;
 	default:

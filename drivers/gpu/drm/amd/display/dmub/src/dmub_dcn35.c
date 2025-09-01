@@ -92,6 +92,7 @@ void dmub_dcn35_reset(struct dmub_srv *dmub)
 	uint32_t in_reset, is_enabled, scratch, i, pwait_mode;
 
 	REG_GET(DMCUB_CNTL2, DMCUB_SOFT_RESET, &in_reset);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	REG_GET(DMCUB_CNTL, DMCUB_ENABLE, &is_enabled);
 
 	if (in_reset == 0 && is_enabled != 0) {
@@ -155,6 +156,82 @@ void dmub_dcn35_reset_release(struct dmub_srv *dmub)
 		     LONO_DMCUBCLK_GATE_DISABLE, 1);
 
 	REG_UPDATE_2(DMCUB_CNTL, DMCUB_ENABLE, 1, DMCUB_TRACEPORT_EN, 1);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (in_reset == 0) {
+		cmd.bits.status = 1;
+		cmd.bits.command_code = DMUB_GPINT__STOP_FW;
+		cmd.bits.param = 0;
+
+		dmub->hw_funcs.set_gpint(dmub, cmd);
+
+		/**
+		 * Timeout covers both the ACK and the wait
+		 * for remaining work to finish.
+		 */
+
+		for (i = 0; i < timeout; ++i) {
+			if (dmub->hw_funcs.is_gpint_acked(dmub, cmd))
+				break;
+
+			udelay(1);
+		}
+
+		for (i = 0; i < timeout; ++i) {
+			scratch = REG_READ(DMCUB_SCRATCH7);
+			if (scratch == DMUB_GPINT__STOP_FW_RESPONSE)
+				break;
+
+			udelay(1);
+		}
+
+		for (i = 0; i < timeout; ++i) {
+			REG_GET(DMCUB_CNTL, DMCUB_PWAIT_MODE_STATUS, &pwait_mode);
+			if (pwait_mode & (1 << 0))
+				break;
+
+			udelay(1);
+		}
+		/* Force reset in case we timed out, DMCUB is likely hung. */
+	}
+
+	REG_GET(DMCUB_CNTL, DMCUB_ENABLE, &is_enabled);
+
+	if (is_enabled) {
+		REG_UPDATE(DMCUB_CNTL2, DMCUB_SOFT_RESET, 1);
+		REG_UPDATE(MMHUBBUB_SOFT_RESET, DMUIF_SOFT_RESET, 1);
+		REG_UPDATE(DMCUB_CNTL, DMCUB_ENABLE, 0);
+	}
+
+	REG_WRITE(DMCUB_INBOX1_RPTR, 0);
+	REG_WRITE(DMCUB_INBOX1_WPTR, 0);
+	REG_WRITE(DMCUB_OUTBOX1_RPTR, 0);
+	REG_WRITE(DMCUB_OUTBOX1_WPTR, 0);
+	REG_WRITE(DMCUB_OUTBOX0_RPTR, 0);
+	REG_WRITE(DMCUB_OUTBOX0_WPTR, 0);
+	REG_WRITE(DMCUB_SCRATCH0, 0);
+
+	/* Clear the GPINT command manually so we don't send anything during boot. */
+	cmd.all = 0;
+	dmub->hw_funcs.set_gpint(dmub, cmd);
+}
+
+void dmub_dcn35_reset_release(struct dmub_srv *dmub)
+{
+	REG_WRITE(DMCUB_SCRATCH15, dmub->psp_version & 0x001100FF);
+
+	REG_UPDATE_3(DMU_CLK_CNTL,
+		     LONO_DISPCLK_GATE_DISABLE, 1,
+		     LONO_SOCCLK_GATE_DISABLE, 1,
+		     LONO_DMCUBCLK_GATE_DISABLE, 1);
+
+	REG_UPDATE(MMHUBBUB_SOFT_RESET, DMUIF_SOFT_RESET, 1);
+	udelay(1);
+	REG_UPDATE_2(DMCUB_CNTL, DMCUB_ENABLE, 1, DMCUB_TRACEPORT_EN, 1);
+	REG_UPDATE(DMCUB_CNTL2, DMCUB_SOFT_RESET, 1);
+	udelay(1);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	REG_UPDATE(MMHUBBUB_SOFT_RESET, DMUIF_SOFT_RESET, 0);
 	REG_UPDATE(DMCUB_CNTL2, DMCUB_SOFT_RESET, 0);
 }

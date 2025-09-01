@@ -405,6 +405,7 @@ static int zynq_fpga_ops_write(struct fpga_manager *mgr, struct sg_table *sgt)
 		}
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	err = dma_map_sgtable(mgr->dev.parent, sgt, DMA_TO_DEVICE, 0);
 	if (err) {
 		dev_err(&mgr->dev, "Unable to DMA map (TO_DEVICE)\n");
@@ -479,6 +480,83 @@ out_clk:
 
 out_free:
 	dma_unmap_sgtable(mgr->dev.parent, sgt, DMA_TO_DEVICE, 0);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	priv->dma_nelms =
+	    dma_map_sg(mgr->dev.parent, sgt->sgl, sgt->nents, DMA_TO_DEVICE);
+	if (priv->dma_nelms == 0) {
+		dev_err(&mgr->dev, "Unable to DMA map (TO_DEVICE)\n");
+		return -ENOMEM;
+	}
+
+	/* enable clock */
+	err = clk_enable(priv->clk);
+	if (err)
+		goto out_free;
+
+	zynq_fpga_write(priv, INT_STS_OFFSET, IXR_ALL_MASK);
+	reinit_completion(&priv->dma_done);
+
+	/* zynq_step_dma will turn on interrupts */
+	spin_lock_irqsave(&priv->dma_lock, flags);
+	priv->dma_elm = 0;
+	priv->cur_sg = sgt->sgl;
+	zynq_step_dma(priv);
+	spin_unlock_irqrestore(&priv->dma_lock, flags);
+
+	time_left = wait_for_completion_timeout(&priv->dma_done,
+						msecs_to_jiffies(DMA_TIMEOUT_MS));
+
+	spin_lock_irqsave(&priv->dma_lock, flags);
+	zynq_fpga_set_irq(priv, 0);
+	priv->cur_sg = NULL;
+	spin_unlock_irqrestore(&priv->dma_lock, flags);
+
+	intr_status = zynq_fpga_read(priv, INT_STS_OFFSET);
+	zynq_fpga_write(priv, INT_STS_OFFSET, IXR_ALL_MASK);
+
+	/* There doesn't seem to be a way to force cancel any DMA, so if
+	 * something went wrong we are relying on the hardware to have halted
+	 * the DMA before we get here, if there was we could use
+	 * wait_for_completion_interruptible too.
+	 */
+
+	if (intr_status & IXR_ERROR_FLAGS_MASK) {
+		why = "DMA reported error";
+		err = -EIO;
+		goto out_report;
+	}
+
+	if (priv->cur_sg ||
+	    !((intr_status & IXR_D_P_DONE_MASK) == IXR_D_P_DONE_MASK)) {
+		if (time_left == 0)
+			why = "DMA timed out";
+		else
+			why = "DMA did not complete";
+		err = -EIO;
+		goto out_report;
+	}
+
+	err = 0;
+	goto out_clk;
+
+out_report:
+	dev_err(&mgr->dev,
+		"%s: INT_STS:0x%x CTRL:0x%x LOCK:0x%x INT_MASK:0x%x STATUS:0x%x MCTRL:0x%x\n",
+		why,
+		intr_status,
+		zynq_fpga_read(priv, CTRL_OFFSET),
+		zynq_fpga_read(priv, LOCK_OFFSET),
+		zynq_fpga_read(priv, INT_MASK_OFFSET),
+		zynq_fpga_read(priv, STATUS_OFFSET),
+		zynq_fpga_read(priv, MCTRL_OFFSET));
+
+out_clk:
+	clk_disable(priv->clk);
+
+out_free:
+	dma_unmap_sg(mgr->dev.parent, sgt->sgl, sgt->nents, DMA_TO_DEVICE);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return err;
 }
 

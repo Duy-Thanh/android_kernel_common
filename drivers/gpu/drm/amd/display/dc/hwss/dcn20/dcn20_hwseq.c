@@ -273,6 +273,7 @@ void dcn20_setup_gsl_group_as_lock(
 	}
 
 	/* at this point we want to program whether it's to enable or disable */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (pipe_ctx->stream_res.tg->funcs->set_gsl != NULL) {
 		pipe_ctx->stream_res.tg->funcs->set_gsl(
 			pipe_ctx->stream_res.tg,
@@ -946,6 +947,683 @@ enum dc_status dcn20_enable_stream_timing(
 	}
 
 	udelay(stream->timing.v_total * (stream->timing.h_total * 10000u / stream->timing.pix_clk_100hz));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (pipe_ctx->stream_res.tg->funcs->set_gsl != NULL &&
+		pipe_ctx->stream_res.tg->funcs->set_gsl_source_select != NULL) {
+		pipe_ctx->stream_res.tg->funcs->set_gsl(
+			pipe_ctx->stream_res.tg,
+			&gsl);
+
+		pipe_ctx->stream_res.tg->funcs->set_gsl_source_select(
+			pipe_ctx->stream_res.tg, group_idx,	enable ? 4 : 0);
+	} else
+		BREAK_TO_DEBUGGER();
+}
+
+void dcn20_set_flip_control_gsl(
+		struct pipe_ctx *pipe_ctx,
+		bool flip_immediate)
+{
+	if (pipe_ctx && pipe_ctx->plane_res.hubp->funcs->hubp_set_flip_control_surface_gsl)
+		pipe_ctx->plane_res.hubp->funcs->hubp_set_flip_control_surface_gsl(
+				pipe_ctx->plane_res.hubp, flip_immediate);
+
+}
+
+void dcn20_enable_power_gating_plane(
+	struct dce_hwseq *hws,
+	bool enable)
+{
+	bool force_on = true; /* disable power gating */
+	uint32_t org_ip_request_cntl = 0;
+
+	if (enable)
+		force_on = false;
+
+	REG_GET(DC_IP_REQUEST_CNTL, IP_REQUEST_EN, &org_ip_request_cntl);
+	if (org_ip_request_cntl == 0)
+		REG_SET(DC_IP_REQUEST_CNTL, 0, IP_REQUEST_EN, 1);
+
+	/* DCHUBP0/1/2/3/4/5 */
+	REG_UPDATE(DOMAIN0_PG_CONFIG, DOMAIN0_POWER_FORCEON, force_on);
+	REG_UPDATE(DOMAIN2_PG_CONFIG, DOMAIN2_POWER_FORCEON, force_on);
+	REG_UPDATE(DOMAIN4_PG_CONFIG, DOMAIN4_POWER_FORCEON, force_on);
+	REG_UPDATE(DOMAIN6_PG_CONFIG, DOMAIN6_POWER_FORCEON, force_on);
+	if (REG(DOMAIN8_PG_CONFIG))
+		REG_UPDATE(DOMAIN8_PG_CONFIG, DOMAIN8_POWER_FORCEON, force_on);
+	if (REG(DOMAIN10_PG_CONFIG))
+		REG_UPDATE(DOMAIN10_PG_CONFIG, DOMAIN8_POWER_FORCEON, force_on);
+
+	/* DPP0/1/2/3/4/5 */
+	REG_UPDATE(DOMAIN1_PG_CONFIG, DOMAIN1_POWER_FORCEON, force_on);
+	REG_UPDATE(DOMAIN3_PG_CONFIG, DOMAIN3_POWER_FORCEON, force_on);
+	REG_UPDATE(DOMAIN5_PG_CONFIG, DOMAIN5_POWER_FORCEON, force_on);
+	REG_UPDATE(DOMAIN7_PG_CONFIG, DOMAIN7_POWER_FORCEON, force_on);
+	if (REG(DOMAIN9_PG_CONFIG))
+		REG_UPDATE(DOMAIN9_PG_CONFIG, DOMAIN9_POWER_FORCEON, force_on);
+	if (REG(DOMAIN11_PG_CONFIG))
+		REG_UPDATE(DOMAIN11_PG_CONFIG, DOMAIN9_POWER_FORCEON, force_on);
+
+	/* DCS0/1/2/3/4/5 */
+	REG_UPDATE(DOMAIN16_PG_CONFIG, DOMAIN16_POWER_FORCEON, force_on);
+	REG_UPDATE(DOMAIN17_PG_CONFIG, DOMAIN17_POWER_FORCEON, force_on);
+	REG_UPDATE(DOMAIN18_PG_CONFIG, DOMAIN18_POWER_FORCEON, force_on);
+	if (REG(DOMAIN19_PG_CONFIG))
+		REG_UPDATE(DOMAIN19_PG_CONFIG, DOMAIN19_POWER_FORCEON, force_on);
+	if (REG(DOMAIN20_PG_CONFIG))
+		REG_UPDATE(DOMAIN20_PG_CONFIG, DOMAIN20_POWER_FORCEON, force_on);
+	if (REG(DOMAIN21_PG_CONFIG))
+		REG_UPDATE(DOMAIN21_PG_CONFIG, DOMAIN21_POWER_FORCEON, force_on);
+
+	if (org_ip_request_cntl == 0)
+		REG_SET(DC_IP_REQUEST_CNTL, 0, IP_REQUEST_EN, 0);
+
+}
+
+void dcn20_dccg_init(struct dce_hwseq *hws)
+{
+	/*
+	 * set MICROSECOND_TIME_BASE_DIV
+	 * 100Mhz refclk -> 0x120264
+	 * 27Mhz refclk -> 0x12021b
+	 * 48Mhz refclk -> 0x120230
+	 *
+	 */
+	REG_WRITE(MICROSECOND_TIME_BASE_DIV, 0x120264);
+
+	/*
+	 * set MILLISECOND_TIME_BASE_DIV
+	 * 100Mhz refclk -> 0x1186a0
+	 * 27Mhz refclk -> 0x106978
+	 * 48Mhz refclk -> 0x10bb80
+	 *
+	 */
+	REG_WRITE(MILLISECOND_TIME_BASE_DIV, 0x1186a0);
+
+	/* This value is dependent on the hardware pipeline delay so set once per SOC */
+	REG_WRITE(DISPCLK_FREQ_CHANGE_CNTL, 0xe01003c);
+}
+
+void dcn20_disable_vga(
+	struct dce_hwseq *hws)
+{
+	REG_WRITE(D1VGA_CONTROL, 0);
+	REG_WRITE(D2VGA_CONTROL, 0);
+	REG_WRITE(D3VGA_CONTROL, 0);
+	REG_WRITE(D4VGA_CONTROL, 0);
+	REG_WRITE(D5VGA_CONTROL, 0);
+	REG_WRITE(D6VGA_CONTROL, 0);
+}
+
+void dcn20_program_triple_buffer(
+	const struct dc *dc,
+	struct pipe_ctx *pipe_ctx,
+	bool enable_triple_buffer)
+{
+	if (pipe_ctx->plane_res.hubp && pipe_ctx->plane_res.hubp->funcs) {
+		pipe_ctx->plane_res.hubp->funcs->hubp_enable_tripleBuffer(
+			pipe_ctx->plane_res.hubp,
+			enable_triple_buffer);
+	}
+}
+
+/* Blank pixel data during initialization */
+void dcn20_init_blank(
+		struct dc *dc,
+		struct timing_generator *tg)
+{
+	struct dce_hwseq *hws = dc->hwseq;
+	enum dc_color_space color_space;
+	struct tg_color black_color = {0};
+	struct output_pixel_processor *opp = NULL;
+	struct output_pixel_processor *bottom_opp = NULL;
+	uint32_t num_opps, opp_id_src0, opp_id_src1;
+	uint32_t otg_active_width = 0, otg_active_height = 0;
+
+	/* program opp dpg blank color */
+	color_space = COLOR_SPACE_SRGB;
+	color_space_to_black_color(dc, color_space, &black_color);
+
+	/* get the OTG active size */
+	tg->funcs->get_otg_active_size(tg,
+			&otg_active_width,
+			&otg_active_height);
+
+	/* get the OPTC source */
+	tg->funcs->get_optc_source(tg, &num_opps, &opp_id_src0, &opp_id_src1);
+
+	if (opp_id_src0 >= dc->res_pool->res_cap->num_opp) {
+		ASSERT(false);
+		return;
+	}
+	opp = dc->res_pool->opps[opp_id_src0];
+
+	/* don't override the blank pattern if already enabled with the correct one. */
+	if (opp->funcs->dpg_is_blanked && opp->funcs->dpg_is_blanked(opp))
+		return;
+
+	if (num_opps == 2) {
+		otg_active_width = otg_active_width / 2;
+
+		if (opp_id_src1 >= dc->res_pool->res_cap->num_opp) {
+			ASSERT(false);
+			return;
+		}
+		bottom_opp = dc->res_pool->opps[opp_id_src1];
+	}
+
+	opp->funcs->opp_set_disp_pattern_generator(
+			opp,
+			CONTROLLER_DP_TEST_PATTERN_SOLID_COLOR,
+			CONTROLLER_DP_COLOR_SPACE_UDEFINED,
+			COLOR_DEPTH_UNDEFINED,
+			&black_color,
+			otg_active_width,
+			otg_active_height,
+			0);
+
+	if (num_opps == 2) {
+		bottom_opp->funcs->opp_set_disp_pattern_generator(
+				bottom_opp,
+				CONTROLLER_DP_TEST_PATTERN_SOLID_COLOR,
+				CONTROLLER_DP_COLOR_SPACE_UDEFINED,
+				COLOR_DEPTH_UNDEFINED,
+				&black_color,
+				otg_active_width,
+				otg_active_height,
+				0);
+	}
+
+	hws->funcs.wait_for_blank_complete(opp);
+}
+
+void dcn20_dsc_pg_control(
+		struct dce_hwseq *hws,
+		unsigned int dsc_inst,
+		bool power_on)
+{
+	uint32_t power_gate = power_on ? 0 : 1;
+	uint32_t pwr_status = power_on ? 0 : 2;
+	uint32_t org_ip_request_cntl = 0;
+
+	if (hws->ctx->dc->debug.disable_dsc_power_gate)
+		return;
+
+	if (REG(DOMAIN16_PG_CONFIG) == 0)
+		return;
+
+	REG_GET(DC_IP_REQUEST_CNTL, IP_REQUEST_EN, &org_ip_request_cntl);
+	if (org_ip_request_cntl == 0)
+		REG_SET(DC_IP_REQUEST_CNTL, 0, IP_REQUEST_EN, 1);
+
+	switch (dsc_inst) {
+	case 0: /* DSC0 */
+		REG_UPDATE(DOMAIN16_PG_CONFIG,
+				DOMAIN16_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN16_PG_STATUS,
+				DOMAIN16_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 1: /* DSC1 */
+		REG_UPDATE(DOMAIN17_PG_CONFIG,
+				DOMAIN17_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN17_PG_STATUS,
+				DOMAIN17_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 2: /* DSC2 */
+		REG_UPDATE(DOMAIN18_PG_CONFIG,
+				DOMAIN18_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN18_PG_STATUS,
+				DOMAIN18_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 3: /* DSC3 */
+		REG_UPDATE(DOMAIN19_PG_CONFIG,
+				DOMAIN19_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN19_PG_STATUS,
+				DOMAIN19_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 4: /* DSC4 */
+		REG_UPDATE(DOMAIN20_PG_CONFIG,
+				DOMAIN20_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN20_PG_STATUS,
+				DOMAIN20_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 5: /* DSC5 */
+		REG_UPDATE(DOMAIN21_PG_CONFIG,
+				DOMAIN21_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN21_PG_STATUS,
+				DOMAIN21_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	default:
+		BREAK_TO_DEBUGGER();
+		break;
+	}
+
+	if (org_ip_request_cntl == 0)
+		REG_SET(DC_IP_REQUEST_CNTL, 0, IP_REQUEST_EN, 0);
+}
+
+void dcn20_dpp_pg_control(
+		struct dce_hwseq *hws,
+		unsigned int dpp_inst,
+		bool power_on)
+{
+	uint32_t power_gate = power_on ? 0 : 1;
+	uint32_t pwr_status = power_on ? 0 : 2;
+
+	if (hws->ctx->dc->debug.disable_dpp_power_gate)
+		return;
+	if (REG(DOMAIN1_PG_CONFIG) == 0)
+		return;
+
+	switch (dpp_inst) {
+	case 0: /* DPP0 */
+		REG_UPDATE(DOMAIN1_PG_CONFIG,
+				DOMAIN1_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN1_PG_STATUS,
+				DOMAIN1_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 1: /* DPP1 */
+		REG_UPDATE(DOMAIN3_PG_CONFIG,
+				DOMAIN3_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN3_PG_STATUS,
+				DOMAIN3_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 2: /* DPP2 */
+		REG_UPDATE(DOMAIN5_PG_CONFIG,
+				DOMAIN5_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN5_PG_STATUS,
+				DOMAIN5_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 3: /* DPP3 */
+		REG_UPDATE(DOMAIN7_PG_CONFIG,
+				DOMAIN7_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN7_PG_STATUS,
+				DOMAIN7_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 4: /* DPP4 */
+		REG_UPDATE(DOMAIN9_PG_CONFIG,
+				DOMAIN9_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN9_PG_STATUS,
+				DOMAIN9_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 5: /* DPP5 */
+		/*
+		 * Do not power gate DPP5, should be left at HW default, power on permanently.
+		 * PG on Pipe5 is De-featured, attempting to put it to PG state may result in hard
+		 * reset.
+		 * REG_UPDATE(DOMAIN11_PG_CONFIG,
+		 *		DOMAIN11_POWER_GATE, power_gate);
+		 *
+		 * REG_WAIT(DOMAIN11_PG_STATUS,
+		 *		DOMAIN11_PGFSM_PWR_STATUS, pwr_status,
+		 * 		1, 1000);
+		 */
+		break;
+	default:
+		BREAK_TO_DEBUGGER();
+		break;
+	}
+}
+
+
+void dcn20_hubp_pg_control(
+		struct dce_hwseq *hws,
+		unsigned int hubp_inst,
+		bool power_on)
+{
+	uint32_t power_gate = power_on ? 0 : 1;
+	uint32_t pwr_status = power_on ? 0 : 2;
+
+	if (hws->ctx->dc->debug.disable_hubp_power_gate)
+		return;
+	if (REG(DOMAIN0_PG_CONFIG) == 0)
+		return;
+
+	switch (hubp_inst) {
+	case 0: /* DCHUBP0 */
+		REG_UPDATE(DOMAIN0_PG_CONFIG,
+				DOMAIN0_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN0_PG_STATUS,
+				DOMAIN0_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 1: /* DCHUBP1 */
+		REG_UPDATE(DOMAIN2_PG_CONFIG,
+				DOMAIN2_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN2_PG_STATUS,
+				DOMAIN2_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 2: /* DCHUBP2 */
+		REG_UPDATE(DOMAIN4_PG_CONFIG,
+				DOMAIN4_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN4_PG_STATUS,
+				DOMAIN4_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 3: /* DCHUBP3 */
+		REG_UPDATE(DOMAIN6_PG_CONFIG,
+				DOMAIN6_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN6_PG_STATUS,
+				DOMAIN6_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 4: /* DCHUBP4 */
+		REG_UPDATE(DOMAIN8_PG_CONFIG,
+				DOMAIN8_POWER_GATE, power_gate);
+
+		REG_WAIT(DOMAIN8_PG_STATUS,
+				DOMAIN8_PGFSM_PWR_STATUS, pwr_status,
+				1, 1000);
+		break;
+	case 5: /* DCHUBP5 */
+		/*
+		 * Do not power gate DCHUB5, should be left at HW default, power on permanently.
+		 * PG on Pipe5 is De-featured, attempting to put it to PG state may result in hard
+		 * reset.
+		 * REG_UPDATE(DOMAIN10_PG_CONFIG,
+		 *		DOMAIN10_POWER_GATE, power_gate);
+		 *
+		 * REG_WAIT(DOMAIN10_PG_STATUS,
+		 *		DOMAIN10_PGFSM_PWR_STATUS, pwr_status,
+		 *		1, 1000);
+		 */
+		break;
+	default:
+		BREAK_TO_DEBUGGER();
+		break;
+	}
+}
+
+
+/* disable HW used by plane.
+ * note:  cannot disable until disconnect is complete
+ */
+void dcn20_plane_atomic_disable(struct dc *dc, struct pipe_ctx *pipe_ctx)
+{
+	struct dce_hwseq *hws = dc->hwseq;
+	struct hubp *hubp = pipe_ctx->plane_res.hubp;
+	struct dpp *dpp = pipe_ctx->plane_res.dpp;
+
+	dc->hwss.wait_for_mpcc_disconnect(dc, dc->res_pool, pipe_ctx);
+
+	/* In flip immediate with pipe splitting case GSL is used for
+	 * synchronization so we must disable it when the plane is disabled.
+	 */
+	if (pipe_ctx->stream_res.gsl_group != 0)
+		dcn20_setup_gsl_group_as_lock(dc, pipe_ctx, false);
+
+	if (hubp->funcs->hubp_update_mall_sel)
+		hubp->funcs->hubp_update_mall_sel(hubp, 0, false);
+
+	dc->hwss.set_flip_control_gsl(pipe_ctx, false);
+
+	hubp->funcs->hubp_clk_cntl(hubp, false);
+
+	dpp->funcs->dpp_dppclk_control(dpp, false, false);
+
+	hubp->power_gated = true;
+
+	hws->funcs.plane_atomic_power_down(dc,
+			pipe_ctx->plane_res.dpp,
+			pipe_ctx->plane_res.hubp);
+
+	pipe_ctx->stream = NULL;
+	memset(&pipe_ctx->stream_res, 0, sizeof(pipe_ctx->stream_res));
+	memset(&pipe_ctx->plane_res, 0, sizeof(pipe_ctx->plane_res));
+	pipe_ctx->top_pipe = NULL;
+	pipe_ctx->bottom_pipe = NULL;
+	pipe_ctx->prev_odm_pipe = NULL;
+	pipe_ctx->next_odm_pipe = NULL;
+	pipe_ctx->plane_state = NULL;
+}
+
+
+void dcn20_disable_plane(struct dc *dc, struct dc_state *state, struct pipe_ctx *pipe_ctx)
+{
+	bool is_phantom = dc_state_get_pipe_subvp_type(state, pipe_ctx) == SUBVP_PHANTOM;
+	struct timing_generator *tg = is_phantom ? pipe_ctx->stream_res.tg : NULL;
+
+	DC_LOGGER_INIT(dc->ctx->logger);
+
+	if (!pipe_ctx->plane_res.hubp || pipe_ctx->plane_res.hubp->power_gated)
+		return;
+
+	dcn20_plane_atomic_disable(dc, pipe_ctx);
+
+	/* Turn back off the phantom OTG after the phantom plane is fully disabled
+	 */
+	if (is_phantom)
+		if (tg && tg->funcs->disable_phantom_crtc)
+			tg->funcs->disable_phantom_crtc(tg);
+
+	DC_LOG_DC("Power down front end %d\n",
+					pipe_ctx->pipe_idx);
+}
+
+void dcn20_disable_pixel_data(struct dc *dc, struct pipe_ctx *pipe_ctx, bool blank)
+{
+	dcn20_blank_pixel_data(dc, pipe_ctx, blank);
+}
+
+static int calc_mpc_flow_ctrl_cnt(const struct dc_stream_state *stream,
+		int opp_cnt, bool is_two_pixels_per_container)
+{
+	bool hblank_halved = is_two_pixels_per_container;
+	int flow_ctrl_cnt;
+
+	if (opp_cnt >= 2)
+		hblank_halved = true;
+
+	flow_ctrl_cnt = stream->timing.h_total - stream->timing.h_addressable -
+			stream->timing.h_border_left -
+			stream->timing.h_border_right;
+
+	if (hblank_halved)
+		flow_ctrl_cnt /= 2;
+
+	/* ODM combine 4:1 case */
+	if (opp_cnt == 4)
+		flow_ctrl_cnt /= 2;
+
+	return flow_ctrl_cnt;
+}
+
+static enum phyd32clk_clock_source get_phyd32clk_src(struct dc_link *link)
+{
+	switch (link->link_enc->transmitter) {
+	case TRANSMITTER_UNIPHY_A:
+		return PHYD32CLKA;
+	case TRANSMITTER_UNIPHY_B:
+		return PHYD32CLKB;
+	case TRANSMITTER_UNIPHY_C:
+		return PHYD32CLKC;
+	case TRANSMITTER_UNIPHY_D:
+		return PHYD32CLKD;
+	case TRANSMITTER_UNIPHY_E:
+		return PHYD32CLKE;
+	default:
+		return PHYD32CLKA;
+	}
+}
+
+static int get_odm_segment_count(struct pipe_ctx *pipe_ctx)
+{
+	struct pipe_ctx *odm_pipe = pipe_ctx->next_odm_pipe;
+	int count = 1;
+
+	while (odm_pipe != NULL) {
+		count++;
+		odm_pipe = odm_pipe->next_odm_pipe;
+	}
+
+	return count;
+}
+
+enum dc_status dcn20_enable_stream_timing(
+		struct pipe_ctx *pipe_ctx,
+		struct dc_state *context,
+		struct dc *dc)
+{
+	struct dce_hwseq *hws = dc->hwseq;
+	struct dc_stream_state *stream = pipe_ctx->stream;
+	struct drr_params params = {0};
+	unsigned int event_triggers = 0;
+	int opp_cnt = 1;
+	int opp_inst[MAX_PIPES] = {0};
+	bool interlace = stream->timing.flags.INTERLACE;
+	int i;
+	struct mpc_dwb_flow_control flow_control;
+	struct mpc *mpc = dc->res_pool->mpc;
+	bool is_two_pixels_per_container =
+			pipe_ctx->stream_res.tg->funcs->is_two_pixels_per_container(&stream->timing);
+	bool rate_control_2x_pclk = (interlace || is_two_pixels_per_container);
+	int odm_slice_width;
+	int last_odm_slice_width;
+	struct pipe_ctx *opp_heads[MAX_PIPES];
+
+	if (dc->res_pool->dccg->funcs->set_pixel_rate_div)
+		dc->res_pool->dccg->funcs->set_pixel_rate_div(
+			dc->res_pool->dccg,
+			pipe_ctx->stream_res.tg->inst,
+			pipe_ctx->pixel_rate_divider.div_factor1,
+			pipe_ctx->pixel_rate_divider.div_factor2);
+
+	/* by upper caller loop, pipe0 is parent pipe and be called first.
+	 * back end is set up by for pipe0. Other children pipe share back end
+	 * with pipe 0. No program is needed.
+	 */
+	if (pipe_ctx->top_pipe != NULL)
+		return DC_OK;
+
+	/* TODO check if timing_changed, disable stream if timing changed */
+
+	opp_cnt = resource_get_opp_heads_for_otg_master(pipe_ctx, &context->res_ctx, opp_heads);
+	for (i = 0; i < opp_cnt; i++)
+		opp_inst[i] = opp_heads[i]->stream_res.opp->inst;
+
+	odm_slice_width = resource_get_odm_slice_dst_width(pipe_ctx, false);
+	last_odm_slice_width = resource_get_odm_slice_dst_width(pipe_ctx, true);
+	if (opp_cnt > 1)
+		pipe_ctx->stream_res.tg->funcs->set_odm_combine(
+				pipe_ctx->stream_res.tg,
+				opp_inst, opp_cnt, odm_slice_width,
+				last_odm_slice_width);
+
+	/* HW program guide assume display already disable
+	 * by unplug sequence. OTG assume stop.
+	 */
+	pipe_ctx->stream_res.tg->funcs->enable_optc_clock(pipe_ctx->stream_res.tg, true);
+
+	if (false == pipe_ctx->clock_source->funcs->program_pix_clk(
+			pipe_ctx->clock_source,
+			&pipe_ctx->stream_res.pix_clk_params,
+			dc->link_srv->dp_get_encoding_format(&pipe_ctx->link_config.dp_link_settings),
+			&pipe_ctx->pll_settings)) {
+		BREAK_TO_DEBUGGER();
+		return DC_ERROR_UNEXPECTED;
+	}
+
+	if (dc->link_srv->dp_is_128b_132b_signal(pipe_ctx)) {
+		struct dccg *dccg = dc->res_pool->dccg;
+		struct timing_generator *tg = pipe_ctx->stream_res.tg;
+		struct dtbclk_dto_params dto_params = {0};
+
+		if (dccg->funcs->set_dtbclk_p_src)
+			dccg->funcs->set_dtbclk_p_src(dccg, DTBCLK0, tg->inst);
+
+		dto_params.otg_inst = tg->inst;
+		dto_params.pixclk_khz = pipe_ctx->stream->timing.pix_clk_100hz / 10;
+		dto_params.num_odm_segments = get_odm_segment_count(pipe_ctx);
+		dto_params.timing = &pipe_ctx->stream->timing;
+		dto_params.ref_dtbclk_khz = dc->clk_mgr->funcs->get_dtb_ref_clk_frequency(dc->clk_mgr);
+		dccg->funcs->set_dtbclk_dto(dccg, &dto_params);
+	}
+
+	if (dc_is_hdmi_tmds_signal(stream->signal)) {
+		stream->link->phy_state.symclk_ref_cnts.otg = 1;
+		if (stream->link->phy_state.symclk_state == SYMCLK_OFF_TX_OFF)
+			stream->link->phy_state.symclk_state = SYMCLK_ON_TX_OFF;
+		else
+			stream->link->phy_state.symclk_state = SYMCLK_ON_TX_ON;
+	}
+
+	if (dc->hwseq->funcs.PLAT_58856_wa && (!dc_is_dp_signal(stream->signal)))
+		dc->hwseq->funcs.PLAT_58856_wa(context, pipe_ctx);
+
+	pipe_ctx->stream_res.tg->funcs->program_timing(
+			pipe_ctx->stream_res.tg,
+			&stream->timing,
+			pipe_ctx->pipe_dlg_param.vready_offset,
+			pipe_ctx->pipe_dlg_param.vstartup_start,
+			pipe_ctx->pipe_dlg_param.vupdate_offset,
+			pipe_ctx->pipe_dlg_param.vupdate_width,
+			pipe_ctx->pipe_dlg_param.pstate_keepout,
+			pipe_ctx->stream->signal,
+			true);
+
+	rate_control_2x_pclk = rate_control_2x_pclk || opp_cnt > 1;
+	flow_control.flow_ctrl_mode = 0;
+	flow_control.flow_ctrl_cnt0 = 0x80;
+	flow_control.flow_ctrl_cnt1 = calc_mpc_flow_ctrl_cnt(stream, opp_cnt,
+			is_two_pixels_per_container);
+	if (mpc->funcs->set_out_rate_control) {
+		for (i = 0; i < opp_cnt; ++i) {
+			mpc->funcs->set_out_rate_control(
+					mpc, opp_inst[i],
+					true,
+					rate_control_2x_pclk,
+					&flow_control);
+		}
+	}
+
+	for (i = 0; i < opp_cnt; i++) {
+		opp_heads[i]->stream_res.opp->funcs->opp_pipe_clock_control(
+				opp_heads[i]->stream_res.opp,
+				true);
+		opp_heads[i]->stream_res.opp->funcs->opp_program_left_edge_extra_pixel(
+				opp_heads[i]->stream_res.opp,
+				stream->timing.pixel_encoding,
+				resource_is_pipe_type(opp_heads[i], OTG_MASTER));
+	}
+
+	hws->funcs.blank_pixel_data(dc, pipe_ctx, true);
+
+	/* VTG is  within DCHUB command block. DCFCLK is always on */
+	if (false == pipe_ctx->stream_res.tg->funcs->enable_crtc(pipe_ctx->stream_res.tg)) {
+		BREAK_TO_DEBUGGER();
+		return DC_ERROR_UNEXPECTED;
+	}
+
+	hws->funcs.wait_for_blank_complete(pipe_ctx->stream_res.opp);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	params.vertical_total_min = stream->adjust.v_total_min;
 	params.vertical_total_max = stream->adjust.v_total_max;

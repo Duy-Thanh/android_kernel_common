@@ -18,6 +18,7 @@
 #define KASAN_ABI_VERSION 5
 
 /*
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * Clang 22 added preprocessor macros to match GCC, in hopes of eventually
  * dropping __has_feature support for sanitizers:
  * https://github.com/llvm/llvm-project/commit/568c23bbd3303518c5056d7f03444dae4fdc8a9c
@@ -54,6 +55,26 @@
 #endif
 
 #ifdef __SANITIZE_THREAD__
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * Note: Checking __has_feature(*_sanitizer) is only true if the feature is
+ * enabled. Therefore it is not required to additionally check defined(CONFIG_*)
+ * to avoid adding redundant attributes in other configurations.
+ */
+
+#if __has_feature(address_sanitizer) || __has_feature(hwaddress_sanitizer)
+/* Emulate GCC's __SANITIZE_ADDRESS__ flag */
+#define __SANITIZE_ADDRESS__
+#define __no_sanitize_address \
+		__attribute__((no_sanitize("address", "hwaddress")))
+#else
+#define __no_sanitize_address
+#endif
+
+#if __has_feature(thread_sanitizer)
+/* emulate gcc's __SANITIZE_THREAD__ flag */
+#define __SANITIZE_THREAD__
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #define __no_sanitize_thread \
 		__attribute__((no_sanitize("thread")))
 #else

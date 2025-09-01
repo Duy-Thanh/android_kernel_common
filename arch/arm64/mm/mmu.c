@@ -561,6 +561,7 @@ void __init mark_linear_text_alias_ro(void)
 	/*
 	 * Remove the write permissions from the linear alias of .text/.rodata
 	 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	update_mapping_prot(__pa_symbol(_text), (unsigned long)lm_alias(_text),
 			    (unsigned long)__init_begin - (unsigned long)_text,
 			    PAGE_KERNEL_RO);
@@ -772,6 +773,216 @@ static void __init declare_kernel_vmas(void)
 	static struct vm_struct vmlinux_seg[KERNEL_SEGMENT_COUNT];
 
 	declare_vma(&vmlinux_seg[0], _text, _etext, VM_NO_GUARD);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	update_mapping_prot(__pa_symbol(_stext), (unsigned long)lm_alias(_stext),
+			    (unsigned long)__init_begin - (unsigned long)_stext,
+			    PAGE_KERNEL_RO);
+}
+
+#ifdef CONFIG_KFENCE
+
+bool __ro_after_init kfence_early_init = !!CONFIG_KFENCE_SAMPLE_INTERVAL;
+
+/* early_param() will be parsed before map_mem() below. */
+static int __init parse_kfence_early_init(char *arg)
+{
+	int val;
+
+	if (get_option(&arg, &val))
+		kfence_early_init = !!val;
+	return 0;
+}
+early_param("kfence.sample_interval", parse_kfence_early_init);
+
+static phys_addr_t __init arm64_kfence_alloc_pool(void)
+{
+	phys_addr_t kfence_pool;
+
+	if (!kfence_early_init)
+		return 0;
+
+	kfence_pool = memblock_phys_alloc(KFENCE_POOL_SIZE, PAGE_SIZE);
+	if (!kfence_pool) {
+		pr_err("failed to allocate kfence pool\n");
+		kfence_early_init = false;
+		return 0;
+	}
+
+	/* Temporarily mark as NOMAP. */
+	memblock_mark_nomap(kfence_pool, KFENCE_POOL_SIZE);
+
+	return kfence_pool;
+}
+
+static void __init arm64_kfence_map_pool(phys_addr_t kfence_pool, pgd_t *pgdp)
+{
+	if (!kfence_pool)
+		return;
+
+	/* KFENCE pool needs page-level mapping. */
+	__map_memblock(pgdp, kfence_pool, kfence_pool + KFENCE_POOL_SIZE,
+			pgprot_tagged(PAGE_KERNEL),
+			NO_BLOCK_MAPPINGS | NO_CONT_MAPPINGS);
+	memblock_clear_nomap(kfence_pool, KFENCE_POOL_SIZE);
+	__kfence_pool = phys_to_virt(kfence_pool);
+}
+#else /* CONFIG_KFENCE */
+
+static inline phys_addr_t arm64_kfence_alloc_pool(void) { return 0; }
+static inline void arm64_kfence_map_pool(phys_addr_t kfence_pool, pgd_t *pgdp) { }
+
+#endif /* CONFIG_KFENCE */
+
+static void __init map_mem(pgd_t *pgdp)
+{
+	static const u64 direct_map_end = _PAGE_END(VA_BITS_MIN);
+	phys_addr_t kernel_start = __pa_symbol(_stext);
+	phys_addr_t kernel_end = __pa_symbol(__init_begin);
+	phys_addr_t start, end;
+	phys_addr_t early_kfence_pool;
+	int flags = NO_EXEC_MAPPINGS;
+	u64 i;
+
+	/*
+	 * Setting hierarchical PXNTable attributes on table entries covering
+	 * the linear region is only possible if it is guaranteed that no table
+	 * entries at any level are being shared between the linear region and
+	 * the vmalloc region. Check whether this is true for the PGD level, in
+	 * which case it is guaranteed to be true for all other levels as well.
+	 * (Unless we are running with support for LPA2, in which case the
+	 * entire reduced VA space is covered by a single pgd_t which will have
+	 * been populated without the PXNTable attribute by the time we get here.)
+	 */
+	BUILD_BUG_ON(pgd_index(direct_map_end - 1) == pgd_index(direct_map_end) &&
+		     pgd_index(_PAGE_OFFSET(VA_BITS_MIN)) != PTRS_PER_PGD - 1);
+
+	early_kfence_pool = arm64_kfence_alloc_pool();
+
+	if (can_set_direct_map())
+		flags |= NO_BLOCK_MAPPINGS | NO_CONT_MAPPINGS;
+
+	/*
+	 * Take care not to create a writable alias for the
+	 * read-only text and rodata sections of the kernel image.
+	 * So temporarily mark them as NOMAP to skip mappings in
+	 * the following for-loop
+	 */
+	memblock_mark_nomap(kernel_start, kernel_end - kernel_start);
+
+	/* map all the memory banks */
+	for_each_mem_range(i, &start, &end) {
+		if (start >= end)
+			break;
+		/*
+		 * The linear map must allow allocation tags reading/writing
+		 * if MTE is present. Otherwise, it has the same attributes as
+		 * PAGE_KERNEL.
+		 */
+		__map_memblock(pgdp, start, end, pgprot_tagged(PAGE_KERNEL),
+			       flags);
+	}
+
+	/*
+	 * Map the linear alias of the [_stext, __init_begin) interval
+	 * as non-executable now, and remove the write permission in
+	 * mark_linear_text_alias_ro() below (which will be called after
+	 * alternative patching has completed). This makes the contents
+	 * of the region accessible to subsystems such as hibernate,
+	 * but protects it from inadvertent modification or execution.
+	 * Note that contiguous mappings cannot be remapped in this way,
+	 * so we should avoid them here.
+	 */
+	__map_memblock(pgdp, kernel_start, kernel_end,
+		       PAGE_KERNEL, NO_CONT_MAPPINGS);
+	memblock_clear_nomap(kernel_start, kernel_end - kernel_start);
+	arm64_kfence_map_pool(early_kfence_pool, pgdp);
+}
+
+void mark_rodata_ro(void)
+{
+	unsigned long section_size;
+
+	/*
+	 * mark .rodata as read only. Use __init_begin rather than __end_rodata
+	 * to cover NOTES and EXCEPTION_TABLE.
+	 */
+	section_size = (unsigned long)__init_begin - (unsigned long)__start_rodata;
+	WRITE_ONCE(rodata_is_rw, false);
+	update_mapping_prot(__pa_symbol(__start_rodata), (unsigned long)__start_rodata,
+			    section_size, PAGE_KERNEL_RO);
+}
+
+static void __init declare_vma(struct vm_struct *vma,
+			       void *va_start, void *va_end,
+			       unsigned long vm_flags)
+{
+	phys_addr_t pa_start = __pa_symbol(va_start);
+	unsigned long size = va_end - va_start;
+
+	BUG_ON(!PAGE_ALIGNED(pa_start));
+	BUG_ON(!PAGE_ALIGNED(size));
+
+	if (!(vm_flags & VM_NO_GUARD))
+		size += PAGE_SIZE;
+
+	vma->addr	= va_start;
+	vma->phys_addr	= pa_start;
+	vma->size	= size;
+	vma->flags	= VM_MAP | vm_flags;
+	vma->caller	= __builtin_return_address(0);
+
+	vm_area_add_early(vma);
+}
+
+#ifdef CONFIG_UNMAP_KERNEL_AT_EL0
+static pgprot_t kernel_exec_prot(void)
+{
+	return rodata_enabled ? PAGE_KERNEL_ROX : PAGE_KERNEL_EXEC;
+}
+
+static int __init map_entry_trampoline(void)
+{
+	int i;
+
+	if (!arm64_kernel_unmapped_at_el0())
+		return 0;
+
+	pgprot_t prot = kernel_exec_prot();
+	phys_addr_t pa_start = __pa_symbol(__entry_tramp_text_start);
+
+	/* The trampoline is always mapped and can therefore be global */
+	pgprot_val(prot) &= ~PTE_NG;
+
+	/* Map only the text into the trampoline page table */
+	memset(tramp_pg_dir, 0, PGD_SIZE);
+	__create_pgd_mapping(tramp_pg_dir, pa_start, TRAMP_VALIAS,
+			     entry_tramp_text_size(), prot,
+			     __pgd_pgtable_alloc, NO_BLOCK_MAPPINGS);
+
+	/* Map both the text and data into the kernel page table */
+	for (i = 0; i < DIV_ROUND_UP(entry_tramp_text_size(), PAGE_SIZE); i++)
+		__set_fixmap(FIX_ENTRY_TRAMP_TEXT1 - i,
+			     pa_start + i * PAGE_SIZE, prot);
+
+	if (IS_ENABLED(CONFIG_RELOCATABLE))
+		__set_fixmap(FIX_ENTRY_TRAMP_TEXT1 - i,
+			     pa_start + i * PAGE_SIZE, PAGE_KERNEL_RO);
+
+	return 0;
+}
+core_initcall(map_entry_trampoline);
+#endif
+
+/*
+ * Declare the VMA areas for the kernel
+ */
+static void __init declare_kernel_vmas(void)
+{
+	static struct vm_struct vmlinux_seg[KERNEL_SEGMENT_COUNT];
+
+	declare_vma(&vmlinux_seg[0], _stext, _etext, VM_NO_GUARD);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	declare_vma(&vmlinux_seg[1], __start_rodata, __inittext_begin, VM_NO_GUARD);
 	declare_vma(&vmlinux_seg[2], __inittext_begin, __inittext_end, VM_NO_GUARD);
 	declare_vma(&vmlinux_seg[3], __initdata_begin, __initdata_end, VM_NO_GUARD);

@@ -48,6 +48,7 @@
  */
 #undef FSCRYPT_MAX_KEY_SIZE
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /*
  * This mask is passed as the third argument to the crypto_alloc_*() functions
  * to prevent fscrypt from using the Crypto API drivers for non-inline crypto
@@ -65,6 +66,9 @@
 #define FSCRYPT_CRYPTOAPI_MASK \
 	(CRYPTO_ALG_ALLOCATES_MEMORY | CRYPTO_ALG_KERN_DRIVER_ONLY)
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #define FSCRYPT_CONTEXT_V1	1
 #define FSCRYPT_CONTEXT_V2	2
 

@@ -368,6 +368,7 @@ void drm_sched_entity_destroy(struct drm_sched_entity *entity)
 }
 EXPORT_SYMBOL(drm_sched_entity_destroy);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /*
  * drm_sched_entity_clear_dep - callback to clear the entities dependency and
  * wake up scheduler
@@ -432,6 +433,90 @@ static bool drm_sched_entity_add_dependency_cb(struct drm_sched_entity *entity)
 		fence = dma_fence_get(&s_fence->scheduled);
 		dma_fence_put(entity->dependency);
 		entity->dependency = fence;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/* drm_sched_entity_clear_dep - callback to clear the entities dependency */
+static void drm_sched_entity_clear_dep(struct dma_fence *f,
+				       struct dma_fence_cb *cb)
+{
+	struct drm_sched_entity *entity =
+		container_of(cb, struct drm_sched_entity, cb);
+
+	entity->dependency = NULL;
+	dma_fence_put(f);
+}
+
+/*
+ * drm_sched_entity_clear_dep - callback to clear the entities dependency and
+ * wake up scheduler
+ */
+static void drm_sched_entity_wakeup(struct dma_fence *f,
+				    struct dma_fence_cb *cb)
+{
+	struct drm_sched_entity *entity =
+		container_of(cb, struct drm_sched_entity, cb);
+
+	drm_sched_entity_clear_dep(f, cb);
+	drm_sched_wakeup(entity->rq->sched);
+}
+
+/**
+ * drm_sched_entity_set_priority - Sets priority of the entity
+ *
+ * @entity: scheduler entity
+ * @priority: scheduler priority
+ *
+ * Update the priority of runqueus used for the entity.
+ */
+void drm_sched_entity_set_priority(struct drm_sched_entity *entity,
+				   enum drm_sched_priority priority)
+{
+	spin_lock(&entity->rq_lock);
+	entity->priority = priority;
+	spin_unlock(&entity->rq_lock);
+}
+EXPORT_SYMBOL(drm_sched_entity_set_priority);
+
+/*
+ * Add a callback to the current dependency of the entity to wake up the
+ * scheduler when the entity becomes available.
+ */
+static bool drm_sched_entity_add_dependency_cb(struct drm_sched_entity *entity)
+{
+	struct drm_gpu_scheduler *sched = entity->rq->sched;
+	struct dma_fence *fence = entity->dependency;
+	struct drm_sched_fence *s_fence;
+
+	if (fence->context == entity->fence_context ||
+	    fence->context == entity->fence_context + 1) {
+		/*
+		 * Fence is a scheduled/finished fence from a job
+		 * which belongs to the same entity, we can ignore
+		 * fences from ourself
+		 */
+		dma_fence_put(entity->dependency);
+		return false;
+	}
+
+	s_fence = to_drm_sched_fence(fence);
+	if (!fence->error && s_fence && s_fence->sched == sched &&
+	    !test_bit(DRM_SCHED_FENCE_DONT_PIPELINE, &fence->flags)) {
+
+		/*
+		 * Fence is from the same scheduler, only need to wait for
+		 * it to be scheduled
+		 */
+		fence = dma_fence_get(&s_fence->scheduled);
+		dma_fence_put(entity->dependency);
+		entity->dependency = fence;
+		if (!dma_fence_add_callback(fence, &entity->cb,
+					    drm_sched_entity_clear_dep))
+			return true;
+
+		/* Ignore it when it is already scheduled */
+		dma_fence_put(fence);
+		return false;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	if (!dma_fence_add_callback(entity->dependency, &entity->cb,

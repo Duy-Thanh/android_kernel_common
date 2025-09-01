@@ -138,12 +138,22 @@ int bpf_lwt_push_ip_encap(struct sk_buff *skb, void *hdr, u32 len,
 static inline void lwtunnel_set_redirect(struct dst_entry *dst)
 {
 	if (lwtunnel_output_redirect(dst->lwtstate)) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		dst->lwtstate->orig_output = READ_ONCE(dst->output);
 		WRITE_ONCE(dst->output, lwtunnel_output);
 	}
 	if (lwtunnel_input_redirect(dst->lwtstate)) {
 		dst->lwtstate->orig_input = READ_ONCE(dst->input);
 		WRITE_ONCE(dst->input, lwtunnel_input);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		dst->lwtstate->orig_output = dst->output;
+		dst->output = lwtunnel_output;
+	}
+	if (lwtunnel_input_redirect(dst->lwtstate)) {
+		dst->lwtstate->orig_input = dst->input;
+		dst->input = lwtunnel_input;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 }
 #else

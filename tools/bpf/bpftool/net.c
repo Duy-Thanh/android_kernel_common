@@ -366,6 +366,7 @@ static int dump_link_nlmsg(void *cookie, void *msg, struct nlattr **tb)
 {
 	struct bpf_netdev_t *netinfo = cookie;
 	struct ifinfomsg *ifinfo = msg;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct ip_devname_ifindex *tmp;
 
 	if (netinfo->filter_idx > 0 && netinfo->filter_idx != ifinfo->ifi_index)
@@ -414,6 +415,54 @@ static int dump_class_qdisc_nlmsg(void *cookie, void *msg, struct nlattr **tb)
 			return -ENOMEM;
 
 		tcinfo->handle_array = tmp;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (netinfo->filter_idx > 0 && netinfo->filter_idx != ifinfo->ifi_index)
+		return 0;
+
+	if (netinfo->used_len == netinfo->array_len) {
+		netinfo->devices = realloc(netinfo->devices,
+			(netinfo->array_len + 16) *
+			sizeof(struct ip_devname_ifindex));
+		if (!netinfo->devices)
+			return -ENOMEM;
+
+		netinfo->array_len += 16;
+	}
+	netinfo->devices[netinfo->used_len].ifindex = ifinfo->ifi_index;
+	snprintf(netinfo->devices[netinfo->used_len].devname,
+		 sizeof(netinfo->devices[netinfo->used_len].devname),
+		 "%s",
+		 tb[IFLA_IFNAME]
+			 ? libbpf_nla_getattr_str(tb[IFLA_IFNAME])
+			 : "");
+	netinfo->used_len++;
+
+	return do_xdp_dump(ifinfo, tb);
+}
+
+static int dump_class_qdisc_nlmsg(void *cookie, void *msg, struct nlattr **tb)
+{
+	struct bpf_tcinfo_t *tcinfo = cookie;
+	struct tcmsg *info = msg;
+
+	if (tcinfo->is_qdisc) {
+		/* skip clsact qdisc */
+		if (tb[TCA_KIND] &&
+		    strcmp(libbpf_nla_data(tb[TCA_KIND]), "clsact") == 0)
+			return 0;
+		if (info->tcm_handle == 0)
+			return 0;
+	}
+
+	if (tcinfo->used_len == tcinfo->array_len) {
+		tcinfo->handle_array = realloc(tcinfo->handle_array,
+			(tcinfo->array_len + 16) * sizeof(struct tc_kind_handle));
+		if (!tcinfo->handle_array)
+			return -ENOMEM;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		tcinfo->array_len += 16;
 	}
 	tcinfo->handle_array[tcinfo->used_len].handle = info->tcm_handle;

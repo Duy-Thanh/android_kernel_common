@@ -861,6 +861,7 @@ static int __maybe_unused rcar_can_resume(struct device *dev)
 {
 	struct net_device *ndev = dev_get_drvdata(dev);
 	struct rcar_can_priv *priv = netdev_priv(ndev);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int err;
 
 	if (!netif_running(ndev))
@@ -873,6 +874,27 @@ static int __maybe_unused rcar_can_resume(struct device *dev)
 	}
 
 	rcar_can_start(ndev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u16 ctlr;
+	int err;
+
+	if (!netif_running(ndev))
+		return 0;
+
+	err = clk_enable(priv->clk);
+	if (err) {
+		netdev_err(ndev, "clk_enable() failed, error %d\n", err);
+		return err;
+	}
+
+	ctlr = readw(&priv->regs->ctlr);
+	ctlr &= ~RCAR_CAN_CTLR_SLPM;
+	writew(ctlr, &priv->regs->ctlr);
+	ctlr &= ~RCAR_CAN_CTLR_CANM;
+	writew(ctlr, &priv->regs->ctlr);
+	priv->can.state = CAN_STATE_ERROR_ACTIVE;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	netif_device_attach(ndev);
 	netif_start_queue(ndev);

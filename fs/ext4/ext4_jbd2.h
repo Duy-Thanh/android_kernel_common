@@ -513,6 +513,7 @@ static inline int ext4_should_dioread_nolock(struct inode *inode)
 	return 1;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /*
  * Pass journal explicitly as it may not be cached in the sbi->s_journal in some
  * cases
@@ -542,4 +543,7 @@ static inline int ext4_journal_destroy(struct ext4_sb_info *sbi, journal_t *jour
 	return err;
 }
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #endif	/* _EXT4_JBD2_H */

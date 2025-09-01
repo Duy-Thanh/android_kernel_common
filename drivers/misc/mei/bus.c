@@ -1353,6 +1353,7 @@ static void mei_dev_bus_put(struct mei_device *bus)
 static void mei_cl_bus_dev_release(struct device *dev)
 {
 	struct mei_cl_device *cldev = to_mei_cl_device(dev);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct mei_device *mdev = cldev->cl->dev;
 	struct mei_cl *cl;
 
@@ -1363,6 +1364,13 @@ static void mei_cl_bus_dev_release(struct device *dev)
 	list_for_each_entry(cl, &mdev->file_list, link)
 		WARN_ON(cl == cldev->cl);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	mei_cl_flush_queues(cldev->cl, NULL);
+	mei_me_cl_put(cldev->me_cl);
+	mei_dev_bus_put(cldev->bus);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	kfree(cldev->cl);
 	kfree(cldev);
 }

@@ -1263,6 +1263,7 @@ static void ceph_async_unlink_cb(struct ceph_mds_client *mdsc,
 
 	/* If op failed, mark everyone involved for errors */
 	if (result) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		struct ceph_path_info path_info = {0};
 		char *path = ceph_mdsc_build_path(mdsc, dentry, &path_info, 0);
 
@@ -1364,6 +1365,113 @@ static int ceph_unlink(struct inode *dir, struct dentry *dentry)
 			err = ceph_mds_check_access(mdsc, path, MAY_WRITE);
 		}
 		ceph_mdsc_free_path_info(&path_info);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		int pathlen = 0;
+		u64 base = 0;
+		char *path = ceph_mdsc_build_path(mdsc, dentry, &pathlen,
+						  &base, 0);
+
+		/* mark error on parent + clear complete */
+		mapping_set_error(req->r_parent->i_mapping, result);
+		ceph_dir_clear_complete(req->r_parent);
+
+		/* drop the dentry -- we don't know its status */
+		if (!d_unhashed(dentry))
+			d_drop(dentry);
+
+		/* mark inode itself for an error (since metadata is bogus) */
+		mapping_set_error(req->r_old_inode->i_mapping, result);
+
+		pr_warn_client(cl, "failure path=(%llx)%s result=%d!\n",
+			       base, IS_ERR(path) ? "<<bad>>" : path, result);
+		ceph_mdsc_free_path(path, pathlen);
+	}
+out:
+	iput(req->r_old_inode);
+	ceph_mdsc_release_dir_caps(req);
+}
+
+static int get_caps_for_async_unlink(struct inode *dir, struct dentry *dentry)
+{
+	struct ceph_inode_info *ci = ceph_inode(dir);
+	struct ceph_dentry_info *di;
+	int got = 0, want = CEPH_CAP_FILE_EXCL | CEPH_CAP_DIR_UNLINK;
+
+	spin_lock(&ci->i_ceph_lock);
+	if ((__ceph_caps_issued(ci, NULL) & want) == want) {
+		ceph_take_cap_refs(ci, want, false);
+		got = want;
+	}
+	spin_unlock(&ci->i_ceph_lock);
+
+	/* If we didn't get anything, return 0 */
+	if (!got)
+		return 0;
+
+        spin_lock(&dentry->d_lock);
+        di = ceph_dentry(dentry);
+	/*
+	 * - We are holding Fx, which implies Fs caps.
+	 * - Only support async unlink for primary linkage
+	 */
+	if (atomic_read(&ci->i_shared_gen) != di->lease_shared_gen ||
+	    !(di->flags & CEPH_DENTRY_PRIMARY_LINK))
+		want = 0;
+        spin_unlock(&dentry->d_lock);
+
+	/* Do we still want what we've got? */
+	if (want == got)
+		return got;
+
+	ceph_put_cap_refs(ci, got);
+	return 0;
+}
+
+/*
+ * rmdir and unlink are differ only by the metadata op code
+ */
+static int ceph_unlink(struct inode *dir, struct dentry *dentry)
+{
+	struct ceph_fs_client *fsc = ceph_sb_to_fs_client(dir->i_sb);
+	struct ceph_client *cl = fsc->client;
+	struct ceph_mds_client *mdsc = fsc->mdsc;
+	struct inode *inode = d_inode(dentry);
+	struct ceph_mds_request *req;
+	bool try_async = ceph_test_mount_opt(fsc, ASYNC_DIROPS);
+	struct dentry *dn;
+	int err = -EROFS;
+	int op;
+	char *path;
+	int pathlen;
+	u64 pathbase;
+
+	if (ceph_snap(dir) == CEPH_SNAPDIR) {
+		/* rmdir .snap/foo is RMSNAP */
+		doutc(cl, "rmsnap %llx.%llx/'%pd' dn\n", ceph_vinop(dir),
+		      dentry);
+		op = CEPH_MDS_OP_RMSNAP;
+	} else if (ceph_snap(dir) == CEPH_NOSNAP) {
+		doutc(cl, "unlink/rmdir %llx.%llx/'%pd' inode %llx.%llx\n",
+		      ceph_vinop(dir), dentry, ceph_vinop(inode));
+		op = d_is_dir(dentry) ?
+			CEPH_MDS_OP_RMDIR : CEPH_MDS_OP_UNLINK;
+	} else
+		goto out;
+
+	dn = d_find_alias(dir);
+	if (!dn) {
+		try_async = false;
+	} else {
+		path = ceph_mdsc_build_path(mdsc, dn, &pathlen, &pathbase, 0);
+		if (IS_ERR(path)) {
+			try_async = false;
+			err = 0;
+		} else {
+			err = ceph_mds_check_access(mdsc, path, MAY_WRITE);
+		}
+		ceph_mdsc_free_path(path, pathlen);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		dput(dn);
 
 		/* For none EACCES cases will let the MDS do the mds auth check */

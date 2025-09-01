@@ -2316,6 +2316,7 @@ static int netvsc_prepare_bonding(struct net_device *vf_netdev)
 	if (!ndev)
 		return NOTIFY_DONE;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* Set slave flag and no addrconf flag before open
 	 * to prevent IPv6 addrconf.
 	 */
@@ -2833,6 +2834,496 @@ static int netvsc_netdev_event(struct notifier_block *this,
 	if (event_dev->netdev_ops == &device_ops && event == NETDEV_REGISTER) {
 		ndev_ctx = netdev_priv(event_dev);
 		schedule_delayed_work(&ndev_ctx->vfns_work, 0);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* set slave flag before open to prevent IPv6 addrconf */
+	vf_netdev->flags |= IFF_SLAVE;
+	return NOTIFY_DONE;
+}
+
+static int netvsc_register_vf(struct net_device *vf_netdev, int context)
+{
+	struct net_device_context *net_device_ctx;
+	struct netvsc_device *netvsc_dev;
+	struct bpf_prog *prog;
+	struct net_device *ndev;
+	int ret;
+
+	if (vf_netdev->addr_len != ETH_ALEN)
+		return NOTIFY_DONE;
+
+	ndev = get_netvsc_byslot(vf_netdev);
+	if (!ndev)
+		return NOTIFY_DONE;
+
+	net_device_ctx = netdev_priv(ndev);
+	netvsc_dev = rtnl_dereference(net_device_ctx->nvdev);
+	if (!netvsc_dev || rtnl_dereference(net_device_ctx->vf_netdev))
+		return NOTIFY_DONE;
+
+	/* if synthetic interface is a different namespace,
+	 * then move the VF to that namespace; join will be
+	 * done again in that context.
+	 */
+	if (!net_eq(dev_net(ndev), dev_net(vf_netdev))) {
+		ret = dev_change_net_namespace(vf_netdev,
+					       dev_net(ndev), "eth%d");
+		if (ret)
+			netdev_err(vf_netdev,
+				   "could not move to same namespace as %s: %d\n",
+				   ndev->name, ret);
+		else
+			netdev_info(vf_netdev,
+				    "VF moved to namespace with: %s\n",
+				    ndev->name);
+		return NOTIFY_DONE;
+	}
+
+	netdev_info(ndev, "VF registering: %s\n", vf_netdev->name);
+
+	if (netvsc_vf_join(vf_netdev, ndev, context) != 0)
+		return NOTIFY_DONE;
+
+	dev_hold(vf_netdev);
+	rcu_assign_pointer(net_device_ctx->vf_netdev, vf_netdev);
+
+	if (ndev->needed_headroom < vf_netdev->needed_headroom)
+		ndev->needed_headroom = vf_netdev->needed_headroom;
+
+	vf_netdev->wanted_features = ndev->features;
+	netdev_update_features(vf_netdev);
+
+	prog = netvsc_xdp_get(netvsc_dev);
+	netvsc_vf_setxdp(vf_netdev, prog);
+
+	return NOTIFY_OK;
+}
+
+/* Change the data path when VF UP/DOWN/CHANGE are detected.
+ *
+ * Typically a UP or DOWN event is followed by a CHANGE event, so
+ * net_device_ctx->data_path_is_vf is used to cache the current data path
+ * to avoid the duplicate call of netvsc_switch_datapath() and the duplicate
+ * message.
+ *
+ * During hibernation, if a VF NIC driver (e.g. mlx5) preserves the network
+ * interface, there is only the CHANGE event and no UP or DOWN event.
+ */
+static int netvsc_vf_changed(struct net_device *vf_netdev, unsigned long event)
+{
+	struct net_device_context *net_device_ctx;
+	struct netvsc_device *netvsc_dev;
+	struct net_device *ndev;
+	bool vf_is_up = false;
+	int ret;
+
+	if (event != NETDEV_GOING_DOWN)
+		vf_is_up = netif_running(vf_netdev);
+
+	ndev = get_netvsc_byref(vf_netdev);
+	if (!ndev)
+		return NOTIFY_DONE;
+
+	net_device_ctx = netdev_priv(ndev);
+	netvsc_dev = rtnl_dereference(net_device_ctx->nvdev);
+	if (!netvsc_dev)
+		return NOTIFY_DONE;
+
+	if (net_device_ctx->data_path_is_vf == vf_is_up)
+		return NOTIFY_OK;
+
+	if (vf_is_up && !net_device_ctx->vf_alloc) {
+		netdev_info(ndev, "Waiting for the VF association from host\n");
+		wait_for_completion(&net_device_ctx->vf_add);
+	}
+
+	ret = netvsc_switch_datapath(ndev, vf_is_up);
+
+	if (ret) {
+		netdev_err(ndev,
+			   "Data path failed to switch %s VF: %s, err: %d\n",
+			   vf_is_up ? "to" : "from", vf_netdev->name, ret);
+		return NOTIFY_DONE;
+	} else {
+		netdev_info(ndev, "Data path switched %s VF: %s\n",
+			    vf_is_up ? "to" : "from", vf_netdev->name);
+	}
+
+	return NOTIFY_OK;
+}
+
+static int netvsc_unregister_vf(struct net_device *vf_netdev)
+{
+	struct net_device *ndev;
+	struct net_device_context *net_device_ctx;
+
+	ndev = get_netvsc_byref(vf_netdev);
+	if (!ndev)
+		return NOTIFY_DONE;
+
+	net_device_ctx = netdev_priv(ndev);
+	cancel_delayed_work_sync(&net_device_ctx->vf_takeover);
+
+	netdev_info(ndev, "VF unregistering: %s\n", vf_netdev->name);
+
+	netvsc_vf_setxdp(vf_netdev, NULL);
+
+	reinit_completion(&net_device_ctx->vf_add);
+	netdev_rx_handler_unregister(vf_netdev);
+	netdev_upper_dev_unlink(vf_netdev, ndev);
+	RCU_INIT_POINTER(net_device_ctx->vf_netdev, NULL);
+	dev_put(vf_netdev);
+
+	ndev->needed_headroom = RNDIS_AND_PPI_SIZE;
+
+	return NOTIFY_OK;
+}
+
+static int check_dev_is_matching_vf(struct net_device *event_ndev)
+{
+	/* Skip NetVSC interfaces */
+	if (event_ndev->netdev_ops == &device_ops)
+		return -ENODEV;
+
+	/* Avoid non-Ethernet type devices */
+	if (event_ndev->type != ARPHRD_ETHER)
+		return -ENODEV;
+
+	/* Avoid Vlan dev with same MAC registering as VF */
+	if (is_vlan_dev(event_ndev))
+		return -ENODEV;
+
+	/* Avoid Bonding master dev with same MAC registering as VF */
+	if (netif_is_bond_master(event_ndev))
+		return -ENODEV;
+
+	return 0;
+}
+
+static int netvsc_probe(struct hv_device *dev,
+			const struct hv_vmbus_device_id *dev_id)
+{
+	struct net_device *net = NULL, *vf_netdev;
+	struct net_device_context *net_device_ctx;
+	struct netvsc_device_info *device_info = NULL;
+	struct netvsc_device *nvdev;
+	int ret = -ENOMEM;
+
+	net = alloc_etherdev_mq(sizeof(struct net_device_context),
+				VRSS_CHANNEL_MAX);
+	if (!net)
+		goto no_net;
+
+	netif_carrier_off(net);
+
+	netvsc_init_settings(net);
+
+	net_device_ctx = netdev_priv(net);
+	net_device_ctx->device_ctx = dev;
+	net_device_ctx->msg_enable = netif_msg_init(debug, default_msg);
+	if (netif_msg_probe(net_device_ctx))
+		netdev_dbg(net, "netvsc msg_enable: %d\n",
+			   net_device_ctx->msg_enable);
+
+	hv_set_drvdata(dev, net);
+
+	INIT_DELAYED_WORK(&net_device_ctx->dwork, netvsc_link_change);
+
+	init_completion(&net_device_ctx->vf_add);
+	spin_lock_init(&net_device_ctx->lock);
+	INIT_LIST_HEAD(&net_device_ctx->reconfig_events);
+	INIT_DELAYED_WORK(&net_device_ctx->vf_takeover, netvsc_vf_setup);
+
+	net_device_ctx->vf_stats
+		= netdev_alloc_pcpu_stats(struct netvsc_vf_pcpu_stats);
+	if (!net_device_ctx->vf_stats)
+		goto no_stats;
+
+	net->netdev_ops = &device_ops;
+	net->ethtool_ops = &ethtool_ops;
+	SET_NETDEV_DEV(net, &dev->device);
+	dma_set_min_align_mask(&dev->device, HV_HYP_PAGE_SIZE - 1);
+
+	/* We always need headroom for rndis header */
+	net->needed_headroom = RNDIS_AND_PPI_SIZE;
+
+	/* Initialize the number of queues to be 1, we may change it if more
+	 * channels are offered later.
+	 */
+	netif_set_real_num_tx_queues(net, 1);
+	netif_set_real_num_rx_queues(net, 1);
+
+	/* Notify the netvsc driver of the new device */
+	device_info = netvsc_devinfo_get(NULL);
+
+	if (!device_info) {
+		ret = -ENOMEM;
+		goto devinfo_failed;
+	}
+
+	/* We must get rtnl lock before scheduling nvdev->subchan_work,
+	 * otherwise netvsc_subchan_work() can get rtnl lock first and wait
+	 * all subchannels to show up, but that may not happen because
+	 * netvsc_probe() can't get rtnl lock and as a result vmbus_onoffer()
+	 * -> ... -> device_add() -> ... -> __device_attach() can't get
+	 * the device lock, so all the subchannels can't be processed --
+	 * finally netvsc_subchan_work() hangs forever.
+	 *
+	 * The rtnl lock also needs to be held before rndis_filter_device_add()
+	 * which advertises nvsp_2_vsc_capability / sriov bit, and triggers
+	 * VF NIC offering and registering. If VF NIC finished register_netdev()
+	 * earlier it may cause name based config failure.
+	 */
+	rtnl_lock();
+
+	nvdev = rndis_filter_device_add(dev, device_info);
+	if (IS_ERR(nvdev)) {
+		ret = PTR_ERR(nvdev);
+		netdev_err(net, "unable to add netvsc device (ret %d)\n", ret);
+		goto rndis_failed;
+	}
+
+	eth_hw_addr_set(net, device_info->mac_adr);
+
+	if (nvdev->num_chn > 1)
+		schedule_work(&nvdev->subchan_work);
+
+	/* hw_features computed in rndis_netdev_set_hwcaps() */
+	net->features = net->hw_features |
+		NETIF_F_HIGHDMA | NETIF_F_HW_VLAN_CTAG_TX |
+		NETIF_F_HW_VLAN_CTAG_RX;
+	net->vlan_features = net->features;
+
+	netdev_lockdep_set_classes(net);
+
+	net->xdp_features = NETDEV_XDP_ACT_BASIC | NETDEV_XDP_ACT_REDIRECT |
+			    NETDEV_XDP_ACT_NDO_XMIT;
+
+	/* MTU range: 68 - 1500 or 65521 */
+	net->min_mtu = NETVSC_MTU_MIN;
+	if (nvdev->nvsp_version >= NVSP_PROTOCOL_VERSION_2)
+		net->max_mtu = NETVSC_MTU - ETH_HLEN;
+	else
+		net->max_mtu = ETH_DATA_LEN;
+
+	nvdev->tx_disable = false;
+
+	ret = register_netdevice(net);
+	if (ret != 0) {
+		pr_err("Unable to register netdev.\n");
+		goto register_failed;
+	}
+
+	list_add(&net_device_ctx->list, &netvsc_dev_list);
+
+	/* When the hv_netvsc driver is unloaded and reloaded, the
+	 * NET_DEVICE_REGISTER for the vf device is replayed before probe
+	 * is complete. This is because register_netdevice_notifier() gets
+	 * registered before vmbus_driver_register() so that callback func
+	 * is set before probe and we don't miss events like NETDEV_POST_INIT
+	 * So, in this section we try to register the matching vf device that
+	 * is present as a netdevice, knowing that its register call is not
+	 * processed in the netvsc_netdev_notifier(as probing is progress and
+	 * get_netvsc_byslot fails).
+	 */
+	for_each_netdev(dev_net(net), vf_netdev) {
+		ret = check_dev_is_matching_vf(vf_netdev);
+		if (ret != 0)
+			continue;
+
+		if (net != get_netvsc_byslot(vf_netdev))
+			continue;
+
+		netvsc_prepare_bonding(vf_netdev);
+		netvsc_register_vf(vf_netdev, VF_REG_IN_PROBE);
+		__netvsc_vf_setup(net, vf_netdev);
+		break;
+	}
+	rtnl_unlock();
+
+	netvsc_devinfo_put(device_info);
+	return 0;
+
+register_failed:
+	rndis_filter_device_remove(dev, nvdev);
+rndis_failed:
+	rtnl_unlock();
+	netvsc_devinfo_put(device_info);
+devinfo_failed:
+	free_percpu(net_device_ctx->vf_stats);
+no_stats:
+	hv_set_drvdata(dev, NULL);
+	free_netdev(net);
+no_net:
+	return ret;
+}
+
+static void netvsc_remove(struct hv_device *dev)
+{
+	struct net_device_context *ndev_ctx;
+	struct net_device *vf_netdev, *net;
+	struct netvsc_device *nvdev;
+
+	net = hv_get_drvdata(dev);
+	if (net == NULL) {
+		dev_err(&dev->device, "No net device to remove\n");
+		return;
+	}
+
+	ndev_ctx = netdev_priv(net);
+
+	cancel_delayed_work_sync(&ndev_ctx->dwork);
+
+	rtnl_lock();
+	nvdev = rtnl_dereference(ndev_ctx->nvdev);
+	if (nvdev) {
+		cancel_work_sync(&nvdev->subchan_work);
+		netvsc_xdp_set(net, NULL, NULL, nvdev);
+	}
+
+	/*
+	 * Call to the vsc driver to let it know that the device is being
+	 * removed. Also blocks mtu and channel changes.
+	 */
+	vf_netdev = rtnl_dereference(ndev_ctx->vf_netdev);
+	if (vf_netdev)
+		netvsc_unregister_vf(vf_netdev);
+
+	if (nvdev)
+		rndis_filter_device_remove(dev, nvdev);
+
+	unregister_netdevice(net);
+	list_del(&ndev_ctx->list);
+
+	rtnl_unlock();
+
+	hv_set_drvdata(dev, NULL);
+
+	free_percpu(ndev_ctx->vf_stats);
+	free_netdev(net);
+}
+
+static int netvsc_suspend(struct hv_device *dev)
+{
+	struct net_device_context *ndev_ctx;
+	struct netvsc_device *nvdev;
+	struct net_device *net;
+	int ret;
+
+	net = hv_get_drvdata(dev);
+
+	ndev_ctx = netdev_priv(net);
+	cancel_delayed_work_sync(&ndev_ctx->dwork);
+
+	rtnl_lock();
+
+	nvdev = rtnl_dereference(ndev_ctx->nvdev);
+	if (nvdev == NULL) {
+		ret = -ENODEV;
+		goto out;
+	}
+
+	/* Save the current config info */
+	ndev_ctx->saved_netvsc_dev_info = netvsc_devinfo_get(nvdev);
+	if (!ndev_ctx->saved_netvsc_dev_info) {
+		ret = -ENOMEM;
+		goto out;
+	}
+	ret = netvsc_detach(net, nvdev);
+out:
+	rtnl_unlock();
+
+	return ret;
+}
+
+static int netvsc_resume(struct hv_device *dev)
+{
+	struct net_device *net = hv_get_drvdata(dev);
+	struct net_device_context *net_device_ctx;
+	struct netvsc_device_info *device_info;
+	int ret;
+
+	rtnl_lock();
+
+	net_device_ctx = netdev_priv(net);
+
+	/* Reset the data path to the netvsc NIC before re-opening the vmbus
+	 * channel. Later netvsc_netdev_event() will switch the data path to
+	 * the VF upon the UP or CHANGE event.
+	 */
+	net_device_ctx->data_path_is_vf = false;
+	device_info = net_device_ctx->saved_netvsc_dev_info;
+
+	ret = netvsc_attach(net, device_info);
+
+	netvsc_devinfo_put(device_info);
+	net_device_ctx->saved_netvsc_dev_info = NULL;
+
+	rtnl_unlock();
+
+	return ret;
+}
+static const struct hv_vmbus_device_id id_table[] = {
+	/* Network guid */
+	{ HV_NIC_GUID, },
+	{ },
+};
+
+MODULE_DEVICE_TABLE(vmbus, id_table);
+
+/* The one and only one */
+static struct  hv_driver netvsc_drv = {
+	.name = KBUILD_MODNAME,
+	.id_table = id_table,
+	.probe = netvsc_probe,
+	.remove = netvsc_remove,
+	.suspend = netvsc_suspend,
+	.resume = netvsc_resume,
+	.driver = {
+		.probe_type = PROBE_FORCE_SYNCHRONOUS,
+	},
+};
+
+/* Set VF's namespace same as the synthetic NIC */
+static void netvsc_event_set_vf_ns(struct net_device *ndev)
+{
+	struct net_device_context *ndev_ctx = netdev_priv(ndev);
+	struct net_device *vf_netdev;
+	int ret;
+
+	vf_netdev = rtnl_dereference(ndev_ctx->vf_netdev);
+	if (!vf_netdev)
+		return;
+
+	if (!net_eq(dev_net(ndev), dev_net(vf_netdev))) {
+		ret = dev_change_net_namespace(vf_netdev, dev_net(ndev),
+					       "eth%d");
+		if (ret)
+			netdev_err(vf_netdev,
+				   "Cannot move to same namespace as %s: %d\n",
+				   ndev->name, ret);
+		else
+			netdev_info(vf_netdev,
+				    "Moved VF to namespace with: %s\n",
+				    ndev->name);
+	}
+}
+
+/*
+ * On Hyper-V, every VF interface is matched with a corresponding
+ * synthetic interface. The synthetic interface is presented first
+ * to the guest. When the corresponding VF instance is registered,
+ * we will take care of switching the data path.
+ */
+static int netvsc_netdev_event(struct notifier_block *this,
+			       unsigned long event, void *ptr)
+{
+	struct net_device *event_dev = netdev_notifier_info_to_dev(ptr);
+	int ret = 0;
+
+	if (event_dev->netdev_ops == &device_ops && event == NETDEV_REGISTER) {
+		netvsc_event_set_vf_ns(event_dev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return NOTIFY_DONE;
 	}
 

@@ -9,6 +9,7 @@
 #include <linux/kernel.h>
 #include <linux/sched/clock.h>
 #include <linux/llist.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/ratelimit.h>
 #include <linux/vmalloc.h>
 #include <linux/workqueue.h>
@@ -109,6 +110,46 @@ do {									\
 #define heap_peek(h)	((h)->used ? (h)->data[0] : NULL)
 
 #define heap_full(h)	((h)->used == (h)->size)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/min_heap.h>
+#include <linux/ratelimit.h>
+#include <linux/vmalloc.h>
+#include <linux/workqueue.h>
+#include <linux/crc64.h>
+
+struct closure;
+
+#ifdef CONFIG_BCACHE_DEBUG
+
+#define EBUG_ON(cond)			BUG_ON(cond)
+#define atomic_dec_bug(v)	BUG_ON(atomic_dec_return(v) < 0)
+#define atomic_inc_bug(v, i)	BUG_ON(atomic_inc_return(v) <= i)
+
+#else /* DEBUG */
+
+#define EBUG_ON(cond)		do { if (cond) do {} while (0); } while (0)
+#define atomic_dec_bug(v)	atomic_dec(v)
+#define atomic_inc_bug(v, i)	atomic_inc(v)
+
+#endif
+
+#define init_heap(heap, _size, gfp)					\
+({									\
+	size_t _bytes;							\
+	(heap)->nr = 0;						\
+	(heap)->size = (_size);						\
+	_bytes = (heap)->size * sizeof(*(heap)->data);			\
+	(heap)->data = kvmalloc(_bytes, (gfp) & GFP_KERNEL);		\
+	(heap)->data;							\
+})
+
+#define free_heap(heap)							\
+do {									\
+	kvfree((heap)->data);						\
+	(heap)->data = NULL;						\
+} while (0)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #define DECLARE_FIFO(type, name)					\
 	struct {							\

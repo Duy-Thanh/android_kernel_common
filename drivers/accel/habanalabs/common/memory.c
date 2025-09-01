@@ -1829,6 +1829,7 @@ static void hl_release_dmabuf(struct dma_buf *dmabuf)
 	struct hl_dmabuf_priv *hl_dmabuf = dmabuf->priv;
 	struct hl_ctx *ctx;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ctx = hl_dmabuf->ctx;
 
 	if (hl_dmabuf->memhash_hnode)
@@ -1888,6 +1889,77 @@ static int export_dmabuf(struct hl_ctx *ctx,
 	fd_install(take_fd(fd), hl_dmabuf->dmabuf->file);
 
 	return 0;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (!hl_dmabuf)
+		return;
+
+	ctx = hl_dmabuf->ctx;
+
+	if (hl_dmabuf->memhash_hnode)
+		memhash_node_export_put(ctx, hl_dmabuf->memhash_hnode);
+
+	atomic_dec(&ctx->hdev->dmabuf_export_cnt);
+	hl_ctx_put(ctx);
+
+	/* Paired with get_file() in export_dmabuf() */
+	fput(ctx->hpriv->file_priv->filp);
+
+	kfree(hl_dmabuf);
+}
+
+static const struct dma_buf_ops habanalabs_dmabuf_ops = {
+	.attach = hl_dmabuf_attach,
+	.map_dma_buf = hl_map_dmabuf,
+	.unmap_dma_buf = hl_unmap_dmabuf,
+	.release = hl_release_dmabuf,
+};
+
+static int export_dmabuf(struct hl_ctx *ctx,
+				struct hl_dmabuf_priv *hl_dmabuf,
+				u64 total_size, int flags, int *dmabuf_fd)
+{
+	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+	struct hl_device *hdev = ctx->hdev;
+	int rc, fd;
+
+	exp_info.ops = &habanalabs_dmabuf_ops;
+	exp_info.size = total_size;
+	exp_info.flags = flags;
+	exp_info.priv = hl_dmabuf;
+
+	hl_dmabuf->dmabuf = dma_buf_export(&exp_info);
+	if (IS_ERR(hl_dmabuf->dmabuf)) {
+		dev_err(hdev->dev, "failed to export dma-buf\n");
+		return PTR_ERR(hl_dmabuf->dmabuf);
+	}
+
+	fd = dma_buf_fd(hl_dmabuf->dmabuf, flags);
+	if (fd < 0) {
+		dev_err(hdev->dev, "failed to get a file descriptor for a dma-buf, %d\n", fd);
+		rc = fd;
+		goto err_dma_buf_put;
+	}
+
+	hl_dmabuf->ctx = ctx;
+	hl_ctx_get(hl_dmabuf->ctx);
+	atomic_inc(&ctx->hdev->dmabuf_export_cnt);
+
+	/* Get compute device file to enforce release order, such that all exported dma-buf will be
+	 * released first and only then the compute device.
+	 * Paired with fput() in hl_release_dmabuf().
+	 */
+	get_file(ctx->hpriv->file_priv->filp);
+
+	*dmabuf_fd = fd;
+
+	return 0;
+
+err_dma_buf_put:
+	hl_dmabuf->dmabuf->priv = NULL;
+	dma_buf_put(hl_dmabuf->dmabuf);
+	return rc;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static int validate_export_params_common(struct hl_device *hdev, u64 addr, u64 size, u64 offset)

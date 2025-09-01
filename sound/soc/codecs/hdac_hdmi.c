@@ -1233,6 +1233,7 @@ static int hdac_hdmi_parse_eld(struct hdac_device *hdev,
 						>> DRM_ELD_VER_SHIFT;
 
 	if (ver != ELD_VER_CEA_861D && ver != ELD_VER_PARTIAL) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		dev_err_ratelimited(&hdev->dev,
 				    "HDMI: Unknown ELD version %d\n", ver);
 		return -EINVAL;
@@ -1304,6 +1305,78 @@ static void hdac_hdmi_present_sense(struct hdac_hdmi_pin *pin,
 
 		dev_dbg(&hdev->dev, "%s: disconnect for pin:port %d:%d\n",
 			__func__, pin->nid, port->id);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		dev_err(&hdev->dev, "HDMI: Unknown ELD version %d\n", ver);
+		return -EINVAL;
+	}
+
+	mnl = (port->eld.eld_buffer[DRM_ELD_CEA_EDID_VER_MNL] &
+		DRM_ELD_MNL_MASK) >> DRM_ELD_MNL_SHIFT;
+
+	if (mnl > ELD_MAX_MNL) {
+		dev_err(&hdev->dev, "HDMI: MNL Invalid %d\n", mnl);
+		return -EINVAL;
+	}
+
+	port->eld.info.spk_alloc = port->eld.eld_buffer[DRM_ELD_SPEAKER];
+
+	return 0;
+}
+
+static void hdac_hdmi_present_sense(struct hdac_hdmi_pin *pin,
+				    struct hdac_hdmi_port *port)
+{
+	struct hdac_device *hdev = pin->hdev;
+	struct hdac_hdmi_priv *hdmi = hdev_to_hdmi_priv(hdev);
+	struct hdac_hdmi_pcm *pcm;
+	int size = 0;
+	int port_id = -1;
+	bool eld_valid, eld_changed;
+
+	if (!hdmi)
+		return;
+
+	/*
+	 * In case of non MST pin, get_eld info API expectes port
+	 * to be -1.
+	 */
+	mutex_lock(&hdmi->pin_mutex);
+	port->eld.monitor_present = false;
+
+	if (pin->mst_capable)
+		port_id = port->id;
+
+	size = snd_hdac_acomp_get_eld(hdev, pin->nid, port_id,
+				&port->eld.monitor_present,
+				port->eld.eld_buffer,
+				ELD_MAX_SIZE);
+
+	if (size > 0) {
+		size = min(size, ELD_MAX_SIZE);
+		if (hdac_hdmi_parse_eld(hdev, port) < 0)
+			size = -EINVAL;
+	}
+
+	eld_valid = port->eld.eld_valid;
+
+	if (size > 0) {
+		port->eld.eld_valid = true;
+		port->eld.eld_size = size;
+	} else {
+		port->eld.eld_valid = false;
+		port->eld.eld_size = 0;
+	}
+
+	eld_changed = (eld_valid != port->eld.eld_valid);
+
+	pcm = hdac_hdmi_get_pcm(hdev, port);
+
+	if (!port->eld.monitor_present || !port->eld.eld_valid) {
+
+		dev_err(&hdev->dev, "%s: disconnect for pin:port %d:%d\n",
+						__func__, pin->nid, port->id);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		/*
 		 * PCMs are not registered during device probe, so don't

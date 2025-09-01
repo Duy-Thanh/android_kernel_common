@@ -353,6 +353,7 @@ ikm_event_handler(struct trace_seq *s, struct tep_record *record,
 
 	if (config_has_id && (config_my_pid == id))
 		return 0;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	else if (config_my_pid == pid)
 		return 0;
 
@@ -596,6 +597,252 @@ static int parse_arguments(char *monitor_name, int argc, char **argv)
 			break;
 		case 's':
 			config_my_pid = -1;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	else if (config_my_pid && (config_my_pid == pid))
+		return 0;
+
+	tep_print_event(trace_event->tep, s, record, "%16s-%-8d ", TEP_PRINT_COMM, TEP_PRINT_PID);
+
+	trace_seq_printf(s, "[%.3d] event ", cpu);
+
+	if (config_has_id)
+		trace_seq_printf(s, "%8llu ", id);
+
+	state = tep_get_field_raw(s, trace_event, "state", record, &val, 0);
+	event = tep_get_field_raw(s, trace_event, "event", record, &val, 0);
+	next_state = tep_get_field_raw(s, trace_event, "next_state", record, &val, 0);
+	tep_get_field_val(s, trace_event, "final_state", record, &final_state, 1);
+
+	trace_seq_printf(s, "%24s x %-24s -> %-24s %s\n",
+			 state,
+			 event,
+			 next_state,
+			 final_state ? "Y" : "N");
+
+	trace_seq_do_printf(s);
+	trace_seq_reset(s);
+
+	return 0;
+}
+
+/*
+ * ikm_error_handler - callback to handle error events
+ *
+ * Called any time a rv:"monitor"_errors events is generated.
+ * It parses and print event.
+ */
+static int
+ikm_error_handler(struct trace_seq *s, struct tep_record *record,
+		  struct tep_event *trace_event, void *context)
+{
+	unsigned long long pid, id;
+	int cpu = record->cpu;
+	char *state, *event;
+	int val;
+
+	if (config_has_id)
+		tep_get_field_val(s, trace_event, "id", record, &id, 1);
+
+	tep_get_common_field_val(s, trace_event, "common_pid", record, &pid, 1);
+
+	if (config_has_id && config_my_pid == id)
+		return 0;
+	else if (config_my_pid == pid)
+		return 0;
+
+	trace_seq_printf(s, "%8lld [%03d] error ", pid, cpu);
+
+	if (config_has_id)
+		trace_seq_printf(s, "%8llu ", id);
+
+	state = tep_get_field_raw(s, trace_event, "state", record, &val, 0);
+	event = tep_get_field_raw(s, trace_event, "event", record, &val, 0);
+
+	trace_seq_printf(s, "%24s x %s\n", state, event);
+
+	trace_seq_do_printf(s);
+	trace_seq_reset(s);
+
+	return 0;
+}
+
+/*
+ * ikm_setup_trace_instance - set up a tracing instance to collect data
+ *
+ * Create a trace instance, enable rv: events and enable the trace.
+ *
+ * Returns the trace_instance * with all set, NULL otherwise.
+ */
+static struct trace_instance *ikm_setup_trace_instance(char *monitor_name)
+{
+	char event[MAX_DA_NAME_LEN + 7]; /* max(error_,event_) + '0' = 7 */
+	struct trace_instance *inst;
+	int retval;
+
+	if (!config_trace)
+		return NULL;
+
+	config_has_id = ikm_has_id(monitor_name);
+	if (config_has_id < 0) {
+		err_msg("ikm: failed to read monitor %s event format\n", monitor_name);
+		goto out_err;
+	}
+
+	/* alloc data */
+	inst = calloc(1, sizeof(*inst));
+	if (!inst) {
+		err_msg("ikm: failed to allocate trace instance");
+		goto out_err;
+	}
+
+	retval = trace_instance_init(inst, monitor_name);
+	if (retval)
+		goto out_free;
+
+	/* enable events */
+	snprintf(event, sizeof(event), "event_%s", monitor_name);
+	retval = tracefs_event_enable(inst->inst, "rv",  event);
+	if (retval)
+		goto out_inst;
+
+	tep_register_event_handler(inst->tep, -1, "rv", event,
+				   ikm_event_handler, NULL);
+
+	snprintf(event, sizeof(event), "error_%s", monitor_name);
+	retval = tracefs_event_enable(inst->inst, "rv", event);
+	if (retval)
+		goto out_inst;
+
+	tep_register_event_handler(inst->tep, -1, "rv", event,
+				   ikm_error_handler, NULL);
+
+	/* ready to enable */
+	tracefs_trace_on(inst->inst);
+
+	return inst;
+
+out_inst:
+	trace_instance_destroy(inst);
+out_free:
+	free(inst);
+out_err:
+	return NULL;
+}
+
+/**
+ * ikm_destroy_trace_instance - destroy a previously created instance
+ */
+static void ikm_destroy_trace_instance(struct trace_instance *inst)
+{
+	if (!inst)
+		return;
+
+	trace_instance_destroy(inst);
+	free(inst);
+}
+
+/*
+ * ikm_usage_print_reactors - print all available reactors, one per line.
+ */
+static void ikm_usage_print_reactors(void)
+{
+	char *reactors = tracefs_instance_file_read(NULL, "rv/available_reactors", NULL);
+	char *start, *end;
+
+	if (!reactors)
+		return;
+
+	fprintf(stderr, "  available reactors:");
+
+	start = reactors;
+	end = strstr(start, "\n");
+
+	while (end) {
+		*end = '\0';
+
+		fprintf(stderr, " %s", start);
+
+		start = ++end;
+		end = strstr(start, "\n");
+	}
+
+	fprintf(stderr, "\n");
+}
+/*
+ * ikm_usage - print usage
+ */
+static void ikm_usage(int exit_val, char *monitor_name, const char *fmt, ...)
+{
+
+	char message[1024];
+	va_list ap;
+	int i;
+
+	static const char *const usage[] = {
+		"",
+		"	-h/--help: print this menu and the reactor list",
+		"	-r/--reactor 'reactor': enables the 'reactor'",
+		"	-s/--self: when tracing (-t), also trace rv command",
+		"	-t/--trace: trace monitor's event",
+		"	-v/--verbose: print debug messages",
+		"",
+		NULL,
+	};
+
+	va_start(ap, fmt);
+	vsnprintf(message, sizeof(message), fmt, ap);
+	va_end(ap);
+
+	fprintf(stderr, "  %s\n", message);
+
+	fprintf(stderr, "\n  usage: rv mon %s [-h] [-q] [-r reactor] [-s] [-v]", monitor_name);
+
+	for (i = 0; usage[i]; i++)
+		fprintf(stderr, "%s\n", usage[i]);
+
+	ikm_usage_print_reactors();
+	exit(exit_val);
+}
+
+/*
+ * parse_arguments - parse arguments and set config
+ */
+static int parse_arguments(char *monitor_name, int argc, char **argv)
+{
+	int c, retval;
+
+	config_my_pid = getpid();
+
+	while (1) {
+		static struct option long_options[] = {
+			{"help",		no_argument,		0, 'h'},
+			{"reactor",		required_argument,	0, 'r'},
+			{"self",		no_argument,		0, 's'},
+			{"trace",		no_argument,		0, 't'},
+			{"verbose",		no_argument,		0, 'v'},
+			{0, 0, 0, 0}
+		};
+
+		/* getopt_long stores the option index here. */
+		int option_index = 0;
+
+		c = getopt_long(argc, argv, "hr:stv", long_options, &option_index);
+
+		/* detect the end of the options. */
+		if (c == -1)
+			break;
+
+		switch (c) {
+		case 'h':
+			ikm_usage(0, monitor_name, "help:");
+			break;
+		case 'r':
+			config_reactor = optarg;
+			break;
+		case 's':
+			config_my_pid = 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			break;
 		case 't':
 			config_trace = 1;

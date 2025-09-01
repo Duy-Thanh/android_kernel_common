@@ -188,6 +188,7 @@ static int max_contaminant_read_comparators(struct max_tcpci_chip *chip, u8 *ven
 	if (ret < 0)
 		return ret;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* Disable low power mode */
 	ret = regmap_update_bits(regmap, TCPC_VENDOR_CC_CTRL2, CCLPMODESEL,
 				 FIELD_PREP(CCLPMODESEL,
@@ -437,6 +438,200 @@ bool max_contaminant_is_contaminant(struct max_tcpci_chip *chip, bool disconnect
 						ret);
 					return true;
 				}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* Sleep to allow comparators settle */
+	usleep_range(5000, 6000);
+	ret = regmap_update_bits(regmap, TCPC_TCPC_CTRL, TCPC_TCPC_CTRL_ORIENTATION, PLUG_ORNT_CC1);
+	if (ret < 0)
+		return ret;
+
+	usleep_range(5000, 6000);
+	ret = max_tcpci_read8(chip, VENDOR_CC_STATUS2, vendor_cc_status2_cc1);
+	if (ret < 0)
+		return ret;
+
+	ret = regmap_update_bits(regmap, TCPC_TCPC_CTRL, TCPC_TCPC_CTRL_ORIENTATION, PLUG_ORNT_CC2);
+	if (ret < 0)
+		return ret;
+
+	usleep_range(5000, 6000);
+	ret = max_tcpci_read8(chip, VENDOR_CC_STATUS2, vendor_cc_status2_cc2);
+	if (ret < 0)
+		return ret;
+
+	ret = regmap_update_bits(regmap, TCPC_VENDOR_CC_CTRL1, CCCOMPEN, 0);
+	if (ret < 0)
+		return ret;
+
+	ret = regmap_update_bits(regmap, TCPC_VENDOR_CC_CTRL2, CCRPCTRL,
+				 FIELD_PREP(CCRPCTRL, 0));
+	if (ret < 0)
+		return ret;
+
+	return 0;
+}
+
+static int max_contaminant_detect_contaminant(struct max_tcpci_chip *chip)
+{
+	int cc1_k, cc2_k, sbu1_k, sbu2_k, ret;
+	u8 vendor_cc_status2_cc1 = 0xff, vendor_cc_status2_cc2 = 0xff;
+	u8 role_ctrl = 0, role_ctrl_backup = 0;
+	int inferred_state = NOT_DETECTED;
+
+	ret = max_tcpci_read8(chip, TCPC_ROLE_CTRL, &role_ctrl);
+	if (ret < 0)
+		return NOT_DETECTED;
+
+	role_ctrl_backup = role_ctrl;
+	role_ctrl = 0x0F;
+	ret = max_tcpci_write8(chip, TCPC_ROLE_CTRL, role_ctrl);
+	if (ret < 0)
+		return NOT_DETECTED;
+
+	cc1_k = max_contaminant_read_resistance_kohm(chip, CC1_SCALE2, READ1_SLEEP_MS, false);
+	if (cc1_k < 0)
+		goto exit;
+
+	cc2_k = max_contaminant_read_resistance_kohm(chip, CC2_SCALE2, READ2_SLEEP_MS, false);
+	if (cc2_k < 0)
+		goto exit;
+
+	sbu1_k = max_contaminant_read_resistance_kohm(chip, SBU1, READ1_SLEEP_MS, false);
+	if (sbu1_k < 0)
+		goto exit;
+
+	sbu2_k = max_contaminant_read_resistance_kohm(chip, SBU2, READ2_SLEEP_MS, false);
+	if (sbu2_k < 0)
+		goto exit;
+
+	ret = max_contaminant_read_comparators(chip, &vendor_cc_status2_cc1,
+					       &vendor_cc_status2_cc2);
+
+	if (ret < 0)
+		goto exit;
+
+	if ((!(CC1_VUFP_RD0P5 & vendor_cc_status2_cc1) ||
+	     !(CC2_VUFP_RD0P5 & vendor_cc_status2_cc2)) &&
+	    !(CC1_VUFP_RD0P5 & vendor_cc_status2_cc1 && CC2_VUFP_RD0P5 & vendor_cc_status2_cc2))
+		inferred_state = SINK;
+	else if ((cc1_k < CONTAMINANT_THRESHOLD_CC_K || cc2_k < CONTAMINANT_THRESHOLD_CC_K) &&
+		 (sbu1_k < CONTAMINANT_THRESHOLD_SBU_K || sbu2_k < CONTAMINANT_THRESHOLD_SBU_K))
+		inferred_state = DETECTED;
+
+	if (inferred_state == NOT_DETECTED)
+		max_tcpci_write8(chip, TCPC_ROLE_CTRL, role_ctrl_backup);
+	else
+		max_tcpci_write8(chip, TCPC_ROLE_CTRL, (TCPC_ROLE_CTRL_DRP | 0xA));
+
+	return inferred_state;
+exit:
+	max_tcpci_write8(chip, TCPC_ROLE_CTRL, role_ctrl_backup);
+	return NOT_DETECTED;
+}
+
+static int max_contaminant_enable_dry_detection(struct max_tcpci_chip *chip)
+{
+	struct regmap *regmap = chip->data.regmap;
+	u8 temp;
+	int ret;
+
+	ret = regmap_update_bits(regmap, TCPC_VENDOR_CC_CTRL3,
+				 CCWTRDEB | CCWTRSEL | WTRCYCLE,
+				 FIELD_PREP(CCWTRDEB, CCWTRDEB_1MS)
+				 | FIELD_PREP(CCWTRSEL, CCWTRSEL_1V)
+				 | FIELD_PREP(WTRCYCLE, WTRCYCLE_4_8_S));
+	if (ret < 0)
+		return ret;
+
+	ret = regmap_update_bits(regmap, TCPC_ROLE_CTRL, TCPC_ROLE_CTRL_DRP, TCPC_ROLE_CTRL_DRP);
+	if (ret < 0)
+		return ret;
+
+	ret = regmap_update_bits(regmap, TCPC_VENDOR_CC_CTRL1, CCCONNDRY, CCCONNDRY);
+	if (ret < 0)
+		return ret;
+	ret = max_tcpci_read8(chip, TCPC_VENDOR_CC_CTRL1, &temp);
+	if (ret < 0)
+		return ret;
+
+	ret = regmap_update_bits(regmap, TCPC_VENDOR_CC_CTRL2, CCLPMODESEL,
+				 FIELD_PREP(CCLPMODESEL,
+					    ULTRA_LOW_POWER_MODE));
+	if (ret < 0)
+		return ret;
+	ret = max_tcpci_read8(chip, TCPC_VENDOR_CC_CTRL2, &temp);
+	if (ret < 0)
+		return ret;
+
+	/* Enable Look4Connection before sending the command */
+	ret = regmap_update_bits(regmap, TCPC_TCPC_CTRL, TCPC_TCPC_CTRL_EN_LK4CONN_ALRT,
+				 TCPC_TCPC_CTRL_EN_LK4CONN_ALRT);
+	if (ret < 0)
+		return ret;
+
+	ret = max_tcpci_write8(chip, TCPC_COMMAND, TCPC_CMD_LOOK4CONNECTION);
+	if (ret < 0)
+		return ret;
+	return 0;
+}
+
+bool max_contaminant_is_contaminant(struct max_tcpci_chip *chip, bool disconnect_while_debounce,
+				    bool *cc_handled)
+{
+	u8 cc_status, pwr_cntl;
+	int ret;
+
+	*cc_handled = true;
+
+	ret = max_tcpci_read8(chip, TCPC_CC_STATUS, &cc_status);
+	if (ret < 0)
+		return false;
+
+	ret = max_tcpci_read8(chip, TCPC_POWER_CTRL, &pwr_cntl);
+	if (ret < 0)
+		return false;
+
+	if (chip->contaminant_state == NOT_DETECTED || chip->contaminant_state == SINK) {
+		if (!disconnect_while_debounce)
+			msleep(100);
+
+		ret = max_tcpci_read8(chip, TCPC_CC_STATUS, &cc_status);
+		if (ret < 0)
+			return false;
+
+		if (IS_CC_OPEN(cc_status)) {
+			u8 role_ctrl, role_ctrl_backup;
+
+			ret = max_tcpci_read8(chip, TCPC_ROLE_CTRL, &role_ctrl);
+			if (ret < 0)
+				return false;
+
+			role_ctrl_backup = role_ctrl;
+			role_ctrl |= 0x0F;
+			role_ctrl &= ~(TCPC_ROLE_CTRL_DRP);
+			ret = max_tcpci_write8(chip, TCPC_ROLE_CTRL, role_ctrl);
+			if (ret < 0)
+				return false;
+
+			chip->contaminant_state = max_contaminant_detect_contaminant(chip);
+
+			ret = max_tcpci_write8(chip, TCPC_ROLE_CTRL, role_ctrl_backup);
+			if (ret < 0)
+				return false;
+
+			if (chip->contaminant_state == DETECTED) {
+				max_contaminant_enable_dry_detection(chip);
+				return true;
+			}
+		}
+	} else if (chip->contaminant_state == DETECTED) {
+		if (!(cc_status & TCPC_CC_STATUS_TOGGLING)) {
+			chip->contaminant_state = max_contaminant_detect_contaminant(chip);
+			if (chip->contaminant_state == DETECTED) {
+				max_contaminant_enable_dry_detection(chip);
+				return true;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			}
 		}
 	}

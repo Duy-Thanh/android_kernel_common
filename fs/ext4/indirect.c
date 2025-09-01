@@ -539,6 +539,7 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 	int indirect_blks;
 	int blocks_to_boundary = 0;
 	int depth;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u64 count = 0;
 	ext4_fsblk_t first_block = 0;
 
@@ -589,6 +590,59 @@ int ext4_ind_map_blocks(handle_t *handle, struct inode *inode,
 		/* Fill in size of a hole we found */
 		map->m_pblk = 0;
 		map->m_len = umin(map->m_len, count);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int count = 0;
+	ext4_fsblk_t first_block = 0;
+
+	trace_ext4_ind_map_blocks_enter(inode, map->m_lblk, map->m_len, flags);
+	ASSERT(!(ext4_test_inode_flag(inode, EXT4_INODE_EXTENTS)));
+	ASSERT(handle != NULL || (flags & EXT4_GET_BLOCKS_CREATE) == 0);
+	depth = ext4_block_to_path(inode, map->m_lblk, offsets,
+				   &blocks_to_boundary);
+
+	if (depth == 0)
+		goto out;
+
+	partial = ext4_get_branch(inode, depth, offsets, chain, &err);
+
+	/* Simplest case - block found, no allocation needed */
+	if (!partial) {
+		first_block = le32_to_cpu(chain[depth - 1].key);
+		count++;
+		/*map more blocks*/
+		while (count < map->m_len && count <= blocks_to_boundary) {
+			ext4_fsblk_t blk;
+
+			blk = le32_to_cpu(*(chain[depth-1].p + count));
+
+			if (blk == first_block + count)
+				count++;
+			else
+				break;
+		}
+		goto got_it;
+	}
+
+	/* Next simple case - plain lookup failed */
+	if ((flags & EXT4_GET_BLOCKS_CREATE) == 0) {
+		unsigned epb = inode->i_sb->s_blocksize / sizeof(u32);
+		int i;
+
+		/*
+		 * Count number blocks in a subtree under 'partial'. At each
+		 * level we count number of complete empty subtrees beyond
+		 * current offset and then descend into the subtree only
+		 * partially beyond current offset.
+		 */
+		count = 0;
+		for (i = partial - chain + 1; i < depth; i++)
+			count = count * epb + (epb - offsets[i] - 1);
+		count++;
+		/* Fill in size of a hole we found */
+		map->m_pblk = 0;
+		map->m_len = min_t(unsigned int, map->m_len, count);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		goto cleanup;
 	}
 

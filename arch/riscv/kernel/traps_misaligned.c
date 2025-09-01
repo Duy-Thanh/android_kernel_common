@@ -436,7 +436,12 @@ int handle_misaligned_load(struct pt_regs *regs)
 	}
 
 	if (!fp)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		SET_RD(insn, regs, (long)(val.data_ulong << shift) >> shift);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		SET_RD(insn, regs, val.data_ulong << shift >> shift);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	else if (len == 8)
 		set_f64_rd(insn, regs, val.data_u64);
 	else

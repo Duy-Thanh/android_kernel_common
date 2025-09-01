@@ -420,6 +420,7 @@ static struct virt_dma_desc *mtk_cqdma_find_active_desc(struct dma_chan *c,
 {
 	struct mtk_cqdma_vchan *cvc = to_cqdma_vchan(c);
 	struct virt_dma_desc *vd;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	list_for_each_entry(vd, &cvc->pc->queue, node)
 		if (vd->tx.cookie == cookie) {
@@ -453,6 +454,44 @@ static enum dma_status mtk_cqdma_tx_status(struct dma_chan *c,
 	vd = mtk_cqdma_find_active_desc(c, cookie);
 	spin_unlock(&cvc->vc.lock);
 	spin_unlock_irqrestore(&cvc->pc->lock, flags);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	unsigned long flags;
+
+	spin_lock_irqsave(&cvc->pc->lock, flags);
+	list_for_each_entry(vd, &cvc->pc->queue, node)
+		if (vd->tx.cookie == cookie) {
+			spin_unlock_irqrestore(&cvc->pc->lock, flags);
+			return vd;
+		}
+	spin_unlock_irqrestore(&cvc->pc->lock, flags);
+
+	list_for_each_entry(vd, &cvc->vc.desc_issued, node)
+		if (vd->tx.cookie == cookie)
+			return vd;
+
+	return NULL;
+}
+
+static enum dma_status mtk_cqdma_tx_status(struct dma_chan *c,
+					   dma_cookie_t cookie,
+					   struct dma_tx_state *txstate)
+{
+	struct mtk_cqdma_vchan *cvc = to_cqdma_vchan(c);
+	struct mtk_cqdma_vdesc *cvd;
+	struct virt_dma_desc *vd;
+	enum dma_status ret;
+	unsigned long flags;
+	size_t bytes = 0;
+
+	ret = dma_cookie_status(c, cookie, txstate);
+	if (ret == DMA_COMPLETE || !txstate)
+		return ret;
+
+	spin_lock_irqsave(&cvc->vc.lock, flags);
+	vd = mtk_cqdma_find_active_desc(c, cookie);
+	spin_unlock_irqrestore(&cvc->vc.lock, flags);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (vd) {
 		cvd = to_cqdma_vdesc(vd);

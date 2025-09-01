@@ -230,6 +230,7 @@ union MESAPI_SET_HW_RESOURCES {
 				uint32_t disable_add_queue_wptr_mc_addr : 1;
 				uint32_t enable_mes_event_int_logging : 1;
 				uint32_t enable_reg_active_poll : 1;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 				uint32_t use_disable_queue_in_legacy_uq_preemption : 1;
 				uint32_t send_write_data : 1;
 				uint32_t os_tdr_timeout_override : 1;
@@ -674,6 +675,410 @@ union MESAPI__MISC {
 			struct		SET_SHADER_DEBUGGER set_shader_debugger;
 			enum MES_AMD_PRIORITY_LEVEL queue_sch_level;
 			struct		CHANGE_CONFIG change_config;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+				uint32_t reserved	: 21;
+			};
+			uint32_t	uint32_t_all;
+		};
+		uint32_t	oversubscription_timer;
+		uint64_t        doorbell_info;
+		uint64_t        event_intr_history_gpu_mc_ptr;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI_SET_HW_RESOURCES_1 {
+	struct {
+		union MES_API_HEADER				header;
+		struct MES_API_STATUS			   api_status;
+		uint64_t							timestamp;
+		union {
+			struct {
+				uint32_t enable_mes_info_ctx : 1;
+				uint32_t reserved : 31;
+			};
+			uint32_t uint32_all;
+		};
+		uint64_t							mes_info_ctx_mc_addr;
+		uint32_t							mes_info_ctx_size;
+		uint32_t							mes_kiq_unmap_timeout; // unit is 100ms
+	};
+
+	uint32_t max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__ADD_QUEUE {
+	struct {
+		union MES_API_HEADER		header;
+		uint32_t			process_id;
+		uint64_t			page_table_base_addr;
+		uint64_t			process_va_start;
+		uint64_t			process_va_end;
+		uint64_t			process_quantum;
+		uint64_t			process_context_addr;
+		uint64_t			gang_quantum;
+		uint64_t			gang_context_addr;
+		uint32_t			inprocess_gang_priority;
+		enum MES_AMD_PRIORITY_LEVEL	gang_global_priority_level;
+		uint32_t			doorbell_offset;
+		uint64_t			mqd_addr;
+		uint64_t			wptr_addr;
+		uint64_t                        h_context;
+		uint64_t                        h_queue;
+		enum MES_QUEUE_TYPE		queue_type;
+		uint32_t			gds_base;
+		uint32_t			gds_size;
+		uint32_t			gws_base;
+		uint32_t			gws_size;
+		uint32_t			oa_mask;
+		uint64_t                        trap_handler_addr;
+		uint32_t                        vm_context_cntl;
+
+		struct {
+			uint32_t paging			: 1;
+			uint32_t debug_vmid		: 4;
+			uint32_t program_gds		: 1;
+			uint32_t is_gang_suspended	: 1;
+			uint32_t is_tmz_queue		: 1;
+			uint32_t map_kiq_utility_queue  : 1;
+			uint32_t is_kfd_process		: 1;
+			uint32_t trap_en		: 1;
+			uint32_t is_aql_queue		: 1;
+			uint32_t skip_process_ctx_clear : 1;
+			uint32_t map_legacy_kq		: 1;
+			uint32_t exclusively_scheduled	: 1;
+			uint32_t is_long_running        : 1;
+			uint32_t is_dwm_queue           : 1;
+			uint32_t is_video_blit_queue    : 1;
+			uint32_t reserved               : 14;
+		};
+		struct MES_API_STATUS       api_status;
+		uint64_t                    tma_addr;
+		uint32_t                    sch_id;
+		uint64_t                    timestamp;
+		uint32_t                    process_context_array_index;
+		uint32_t                    gang_context_array_index;
+		uint32_t                    pipe_id;
+		uint32_t                    queue_id;
+		uint32_t                    alignment_mode_setting;
+		uint64_t                    unmap_flag_addr;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__REMOVE_QUEUE {
+	struct {
+		union MES_API_HEADER	header;
+		uint32_t		doorbell_offset;
+		uint64_t		gang_context_addr;
+
+		struct {
+			uint32_t unmap_legacy_gfx_queue   : 1;
+			uint32_t unmap_kiq_utility_queue  : 1;
+			uint32_t preempt_legacy_gfx_queue : 1;
+			uint32_t unmap_legacy_queue       : 1;
+			uint32_t reserved                 : 28;
+		};
+		struct MES_API_STATUS	    api_status;
+
+		uint32_t                    pipe_id;
+		uint32_t                    queue_id;
+
+		uint64_t                    tf_addr;
+		uint32_t                    tf_data;
+
+		enum MES_QUEUE_TYPE         queue_type;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__SET_SCHEDULING_CONFIG {
+	struct {
+		union MES_API_HEADER	header;
+		/* Grace period when preempting another priority band for this
+		 * priority band. The value for idle priority band is ignored,
+		 * as it never preempts other bands.
+		 */
+		uint64_t		grace_period_other_levels[AMD_PRIORITY_NUM_LEVELS];
+		/* Default quantum for scheduling across processes within
+		 * a priority band.
+		 */
+		uint64_t		process_quantum_for_level[AMD_PRIORITY_NUM_LEVELS];
+		/* Default grace period for processes that preempt each other
+		 * within a priority band.
+		 */
+		uint64_t		process_grace_period_same_level[AMD_PRIORITY_NUM_LEVELS];
+		/* For normal level this field specifies the target GPU
+		 * percentage in situations when it's starved by the high level.
+		 * Valid values are between 0 and 50, with the default being 10.
+		 */
+		uint32_t		normal_yield_percent;
+		struct MES_API_STATUS	api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__PERFORM_YIELD {
+	struct {
+		union MES_API_HEADER	header;
+		uint32_t		dummy;
+		struct MES_API_STATUS	api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__CHANGE_GANG_PRIORITY_LEVEL {
+	struct {
+		union MES_API_HEADER		header;
+		uint32_t			inprocess_gang_priority;
+		enum MES_AMD_PRIORITY_LEVEL	gang_global_priority_level;
+		uint64_t			gang_quantum;
+		uint64_t			gang_context_addr;
+		struct MES_API_STATUS		api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__SUSPEND {
+	struct {
+		union MES_API_HEADER	header;
+		/* false - suspend all gangs; true - specific gang */
+		struct {
+			uint32_t suspend_all_gangs	: 1;
+			uint32_t reserved		: 31;
+		};
+		/* gang_context_addr is valid only if suspend_all = false */
+		uint64_t		gang_context_addr;
+
+		uint64_t		suspend_fence_addr;
+		uint32_t		suspend_fence_value;
+
+		struct MES_API_STATUS	api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__RESUME {
+	struct {
+		union MES_API_HEADER	header;
+		/* false - resume all gangs; true - specified gang */
+		struct {
+			uint32_t resume_all_gangs	: 1;
+			uint32_t reserved		: 31;
+		};
+		/* valid only if resume_all_gangs = false */
+		uint64_t		gang_context_addr;
+
+		struct MES_API_STATUS	api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__RESET {
+	struct {
+		union MES_API_HEADER		header;
+
+		struct {
+			/* Only reset the queue given by doorbell_offset (not entire gang) */
+			uint32_t                reset_queue_only : 1;
+			/* Hang detection first then reset any queues that are hung */
+			uint32_t                hang_detect_then_reset : 1;
+			/* Only do hang detection (no reset) */
+			uint32_t                hang_detect_only : 1;
+			/* Rest HP and LP kernel queues not managed by MES */
+			uint32_t                reset_legacy_gfx : 1;
+			uint32_t                reserved : 28;
+		};
+
+		uint64_t			gang_context_addr;
+
+		/* valid only if reset_queue_only = true */
+		uint32_t			doorbell_offset;
+
+		/* valid only if hang_detect_then_reset = true */
+		uint64_t			doorbell_offset_addr;
+		enum MES_QUEUE_TYPE		queue_type;
+
+		/* valid only if reset_legacy_gfx = true */
+		uint32_t			pipe_id_lp;
+		uint32_t			queue_id_lp;
+		uint32_t			vmid_id_lp;
+		uint64_t			mqd_mc_addr_lp;
+		uint32_t			doorbell_offset_lp;
+		uint64_t			wptr_addr_lp;
+
+		uint32_t			pipe_id_hp;
+		uint32_t			queue_id_hp;
+		uint32_t			vmid_id_hp;
+		uint64_t			mqd_mc_addr_hp;
+		uint32_t			doorbell_offset_hp;
+		uint64_t			wptr_addr_hp;
+
+		struct MES_API_STATUS		api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__SET_LOGGING_BUFFER {
+	struct {
+		union MES_API_HEADER	header;
+		/* There are separate log buffers for each queue type */
+		enum MES_QUEUE_TYPE	log_type;
+		/* Log buffer GPU Address */
+		uint64_t		logging_buffer_addr;
+		/* number of entries in the log buffer */
+		uint32_t		number_of_entries;
+		/* Entry index at which CPU interrupt needs to be signalled */
+		uint32_t		interrupt_entry;
+
+		struct MES_API_STATUS	api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__QUERY_MES_STATUS {
+	struct {
+		union MES_API_HEADER	header;
+		bool			mes_healthy; /* 0 - not healthy, 1 - healthy */
+		struct MES_API_STATUS	api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__PROGRAM_GDS {
+	struct {
+		union MES_API_HEADER	header;
+		uint64_t		process_context_addr;
+		uint32_t		gds_base;
+		uint32_t		gds_size;
+		uint32_t		gws_base;
+		uint32_t		gws_size;
+		uint32_t		oa_mask;
+		struct MES_API_STATUS	api_status;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+union MESAPI__SET_DEBUG_VMID {
+	struct {
+		union MES_API_HEADER	header;
+		struct MES_API_STATUS	api_status;
+		union {
+			struct {
+				uint32_t use_gds	: 1;
+				uint32_t operation      : 2;
+				uint32_t reserved       : 29;
+			} flags;
+			uint32_t	u32All;
+		};
+		uint32_t		reserved;
+		uint32_t		debug_vmid;
+		uint64_t		process_context_addr;
+		uint64_t		page_table_base_addr;
+		uint64_t		process_va_start;
+		uint64_t		process_va_end;
+		uint32_t		gds_base;
+		uint32_t		gds_size;
+		uint32_t		gws_base;
+		uint32_t		gws_size;
+		uint32_t		oa_mask;
+
+		/* output addr of the acquired vmid value */
+		uint64_t                output_addr;
+	};
+
+	uint32_t	max_dwords_in_api[API_FRAME_SIZE_IN_DWORDS];
+};
+
+enum MESAPI_MISC_OPCODE {
+	MESAPI_MISC__WRITE_REG,
+	MESAPI_MISC__INV_GART,
+	MESAPI_MISC__QUERY_STATUS,
+	MESAPI_MISC__READ_REG,
+	MESAPI_MISC__WAIT_REG_MEM,
+	MESAPI_MISC__SET_SHADER_DEBUGGER,
+	MESAPI_MISC__MAX,
+};
+
+enum { MISC_DATA_MAX_SIZE_IN_DWORDS = 20 };
+
+struct WRITE_REG {
+	uint32_t                  reg_offset;
+	uint32_t                  reg_value;
+};
+
+struct READ_REG {
+	uint32_t                  reg_offset;
+	uint64_t                  buffer_addr;
+};
+
+enum WRM_OPERATION {
+	WRM_OPERATION__WAIT_REG_MEM,
+	WRM_OPERATION__WR_WAIT_WR_REG,
+	WRM_OPERATION__MAX,
+};
+
+struct WAIT_REG_MEM {
+	enum WRM_OPERATION         op;
+	uint32_t                   reference;
+	uint32_t                   mask;
+	uint32_t                   reg_offset1;
+	uint32_t                   reg_offset2;
+};
+
+struct INV_GART {
+	uint64_t                  inv_range_va_start;
+	uint64_t                  inv_range_size;
+};
+
+struct QUERY_STATUS {
+	uint32_t context_id;
+};
+
+struct SET_SHADER_DEBUGGER {
+	uint64_t process_context_addr;
+	union {
+		struct {
+			uint32_t single_memop : 1;  /* SQ_DEBUG.single_memop */
+			uint32_t single_alu_op : 1; /* SQ_DEBUG.single_alu_op */
+			uint32_t reserved : 29;
+			uint32_t process_ctx_flush : 1;
+		};
+		uint32_t u32all;
+	} flags;
+	uint32_t spi_gdbg_per_vmid_cntl;
+	uint32_t tcp_watch_cntl[4]; /* TCP_WATCHx_CNTL */
+	uint32_t trap_en;
+};
+
+union MESAPI__MISC {
+	struct {
+		union MES_API_HEADER	header;
+		enum MESAPI_MISC_OPCODE	opcode;
+		struct MES_API_STATUS	api_status;
+
+		union {
+			struct		WRITE_REG write_reg;
+			struct		INV_GART inv_gart;
+			struct		QUERY_STATUS query_status;
+			struct		READ_REG read_reg;
+			struct          WAIT_REG_MEM wait_reg_mem;
+			struct		SET_SHADER_DEBUGGER set_shader_debugger;
+			enum MES_AMD_PRIORITY_LEVEL queue_sch_level;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 			uint32_t	data[MISC_DATA_MAX_SIZE_IN_DWORDS];
 		};

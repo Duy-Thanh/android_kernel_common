@@ -413,6 +413,7 @@
 /* SRDS #0,#1,#2,#3 - PCIe */
 &cp0_pcie0 {
 	num-lanes = <4>;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * The mvebu-comphy driver does not currently know how to pass correct
 	 * lane-count to ATF while configuring the serdes lanes.
@@ -488,6 +489,72 @@
 	 *
 	 * phys = <&cp1_comphy0 0>, <&cp1_comphy1 0>;
 	 */
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	phys = <&cp0_comphy0 0>, <&cp0_comphy1 0>, <&cp0_comphy2 0>, <&cp0_comphy3 0>;
+	status = "okay";
+};
+
+&cp0_pinctrl {
+	/*
+	 * configure unused gpios exposed via pin headers:
+	 * - J7-10: PWRBTN
+	 */
+	pinctrl-names = "default";
+	pinctrl-0 = <&cp0_pwrbtn_pins>;
+};
+
+/* microSD */
+&cp0_sdhci0 {
+	pinctrl-0 = <&cp0_mmc0_pins>, <&cp0_mmc0_cd_pins>;
+	pinctrl-names = "default";
+	bus-width = <4>;
+	no-1-8-v;
+	status = "okay";
+};
+
+&cp0_spi1 {
+	/* add CS1 */
+	pinctrl-0 = <&cp0_spi1_pins>, <&cp0_spi1_cs1_pins>;
+
+	flash@1 {
+		compatible = "jedec,spi-nor";
+		reg = <1>;
+		/* read command supports max. 50MHz */
+		spi-max-frequency = <50000000>;
+	};
+};
+
+/* J38 */
+&cp0_uart2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&cp0_uart2_pins>;
+	status = "okay";
+};
+
+&cp0_utmi {
+	/* M.2 "CON5" swaps D+/D- */
+	swap-dx-lanes = <1>;
+};
+
+&cp1_ethernet {
+	status = "okay";
+};
+
+/* SRDS #2 - 5GE */
+&cp1_eth0 {
+	phys = <&cp1_comphy2 0>;
+	phy-mode = "5gbase-r";
+	phy = <&cp1_eth_phy0>;
+	managed = "in-band-status";
+	status = "okay";
+};
+
+/* SRDS #0,#1 - PCIe */
+&cp1_pcie0 {
+	num-lanes = <2>;
+	phys = <&cp1_comphy0 0>, <&cp1_comphy1 0>;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	status = "okay";
 };
 

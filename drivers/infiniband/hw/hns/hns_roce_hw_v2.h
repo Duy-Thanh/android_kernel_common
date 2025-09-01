@@ -1168,6 +1168,7 @@ struct hns_roce_cfg_gmv_tb_b {
 #define GMV_TB_B_SMAC_H GMV_TB_B_FIELD_LOC(47, 32)
 #define GMV_TB_B_SGID_IDX GMV_TB_B_FIELD_LOC(71, 64)
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define HNS_ROCE_QUERY_PF_CAPS_CMD_NUM_HIP08 5
 #define HNS_ROCE_QUERY_PF_CAPS_CMD_NUM 6
 struct hns_roce_query_pf_caps_a {
@@ -1284,6 +1285,119 @@ struct hns_roce_query_pf_caps_e {
 struct hns_roce_query_pf_caps_f {
 	__le32 max_ack_req_msg_len;
 	__le32 rsv[5];
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define HNS_ROCE_QUERY_PF_CAPS_CMD_NUM 5
+struct hns_roce_query_pf_caps_a {
+	u8 number_ports;
+	u8 local_ca_ack_delay;
+	__le16 max_sq_sg;
+	__le16 max_sq_inline;
+	__le16 max_rq_sg;
+	__le32 rsv0;
+	__le16 num_qpc_timer;
+	__le16 num_cqc_timer;
+	__le16 max_srq_sges;
+	u8 num_aeq_vectors;
+	u8 num_other_vectors;
+	u8 max_sq_desc_sz;
+	u8 max_rq_desc_sz;
+	u8 rsv1;
+	u8 cqe_sz;
+};
+
+struct hns_roce_query_pf_caps_b {
+	u8 mtpt_entry_sz;
+	u8 irrl_entry_sz;
+	u8 trrl_entry_sz;
+	u8 cqc_entry_sz;
+	u8 srqc_entry_sz;
+	u8 idx_entry_sz;
+	u8 sccc_sz;
+	u8 max_mtu;
+	__le16 qpc_sz;
+	__le16 qpc_timer_entry_sz;
+	__le16 cqc_timer_entry_sz;
+	u8 min_cqes;
+	u8 min_wqes;
+	__le32 page_size_cap;
+	u8 pkey_table_len;
+	u8 phy_num_uars;
+	u8 ctx_hop_num;
+	u8 pbl_hop_num;
+};
+
+struct hns_roce_query_pf_caps_c {
+	__le32 cap_flags_num_pds;
+	__le32 max_gid_num_cqs;
+	__le32 cq_depth;
+	__le32 num_mrws;
+	__le32 ord_num_qps;
+	__le16 sq_depth;
+	__le16 rq_depth;
+};
+
+#define PF_CAPS_C_FIELD_LOC(h, l) \
+	FIELD_LOC(struct hns_roce_query_pf_caps_c, h, l)
+
+#define PF_CAPS_C_NUM_PDS PF_CAPS_C_FIELD_LOC(19, 0)
+#define PF_CAPS_C_CAP_FLAGS PF_CAPS_C_FIELD_LOC(31, 20)
+#define PF_CAPS_C_NUM_CQS PF_CAPS_C_FIELD_LOC(51, 32)
+#define PF_CAPS_C_MAX_GID PF_CAPS_C_FIELD_LOC(60, 52)
+#define PF_CAPS_C_CQ_DEPTH PF_CAPS_C_FIELD_LOC(86, 64)
+#define PF_CAPS_C_NUM_XRCDS PF_CAPS_C_FIELD_LOC(91, 87)
+#define PF_CAPS_C_NUM_MRWS PF_CAPS_C_FIELD_LOC(115, 96)
+#define PF_CAPS_C_NUM_QPS PF_CAPS_C_FIELD_LOC(147, 128)
+#define PF_CAPS_C_MAX_ORD PF_CAPS_C_FIELD_LOC(155, 148)
+
+struct hns_roce_query_pf_caps_d {
+	__le32 wq_hop_num_max_srqs;
+	__le16 srq_depth;
+	__le16 cap_flags_ex;
+	__le32 num_ceqs_ceq_depth;
+	__le32 arm_st_aeq_depth;
+	__le32 num_uars_rsv_pds;
+	__le32 rsv_uars_rsv_qps;
+};
+
+#define PF_CAPS_D_FIELD_LOC(h, l) \
+	FIELD_LOC(struct hns_roce_query_pf_caps_d, h, l)
+
+#define PF_CAPS_D_NUM_SRQS PF_CAPS_D_FIELD_LOC(19, 0)
+#define PF_CAPS_D_RQWQE_HOP_NUM PF_CAPS_D_FIELD_LOC(21, 20)
+#define PF_CAPS_D_EX_SGE_HOP_NUM PF_CAPS_D_FIELD_LOC(23, 22)
+#define PF_CAPS_D_SQWQE_HOP_NUM PF_CAPS_D_FIELD_LOC(25, 24)
+#define PF_CAPS_D_CONG_CAP PF_CAPS_D_FIELD_LOC(29, 26)
+#define PF_CAPS_D_CEQ_DEPTH PF_CAPS_D_FIELD_LOC(85, 64)
+#define PF_CAPS_D_NUM_CEQS PF_CAPS_D_FIELD_LOC(95, 86)
+#define PF_CAPS_D_AEQ_DEPTH PF_CAPS_D_FIELD_LOC(117, 96)
+#define PF_CAPS_D_AEQ_ARM_ST PF_CAPS_D_FIELD_LOC(119, 118)
+#define PF_CAPS_D_CEQ_ARM_ST PF_CAPS_D_FIELD_LOC(121, 120)
+#define PF_CAPS_D_DEFAULT_ALG PF_CAPS_D_FIELD_LOC(127, 122)
+#define PF_CAPS_D_RSV_PDS PF_CAPS_D_FIELD_LOC(147, 128)
+#define PF_CAPS_D_NUM_UARS PF_CAPS_D_FIELD_LOC(155, 148)
+#define PF_CAPS_D_RSV_QPS PF_CAPS_D_FIELD_LOC(179, 160)
+#define PF_CAPS_D_RSV_UARS PF_CAPS_D_FIELD_LOC(187, 180)
+
+#define HNS_ROCE_CAP_FLAGS_EX_SHIFT 12
+
+struct hns_roce_congestion_algorithm {
+	u8 alg_sel;
+	u8 alg_sub_sel;
+	u8 dip_vld;
+	u8 wnd_mode_sel;
+};
+
+struct hns_roce_query_pf_caps_e {
+	__le32 chunk_size_shift_rsv_mrws;
+	__le32 rsv_cqs;
+	__le32 rsv_srqs;
+	__le32 rsv_lkey;
+	__le16 ceq_max_cnt;
+	__le16 ceq_period;
+	__le16 aeq_max_cnt;
+	__le16 aeq_period;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 #define PF_CAPS_E_FIELD_LOC(h, l) \

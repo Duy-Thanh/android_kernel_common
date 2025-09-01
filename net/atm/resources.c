@@ -112,6 +112,7 @@ struct atm_dev *atm_dev_register(const char *type, struct device *parent,
 
 	if (atm_proc_dev_register(dev) < 0) {
 		pr_err("atm_proc_dev_register failed for dev %s\n", type);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		mutex_unlock(&atm_dev_mutex);
 		kfree(dev);
 		return NULL;
@@ -131,6 +132,26 @@ out:
 
 out_fail:
 	put_device(&dev->class_dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		goto out_fail;
+	}
+
+	if (atm_register_sysfs(dev, parent) < 0) {
+		pr_err("atm_register_sysfs failed for dev %s\n", type);
+		atm_proc_dev_deregister(dev);
+		goto out_fail;
+	}
+
+	list_add_tail(&dev->dev_list, &atm_devs);
+
+out:
+	mutex_unlock(&atm_dev_mutex);
+	return dev;
+
+out_fail:
+	kfree(dev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	dev = NULL;
 	goto out;
 }

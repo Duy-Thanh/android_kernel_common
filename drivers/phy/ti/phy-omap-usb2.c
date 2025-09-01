@@ -363,6 +363,7 @@ static void omap_usb2_init_errata(struct omap_usb *phy)
 		phy->flags |= OMAP_USB2_DISABLE_CHRG_DET;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void omap_usb2_put_device(void *_dev)
 {
 	struct device *dev = _dev;
@@ -436,6 +437,69 @@ static int omap_usb2_probe(struct platform_device *pdev)
 					       phy->control_dev);
 		if (ret)
 			return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int omap_usb2_probe(struct platform_device *pdev)
+{
+	struct omap_usb	*phy;
+	struct phy *generic_phy;
+	struct phy_provider *phy_provider;
+	struct usb_otg *otg;
+	struct device_node *node = pdev->dev.of_node;
+	struct device_node *control_node;
+	struct platform_device *control_pdev;
+	const struct usb_phy_data *phy_data;
+
+	phy_data = device_get_match_data(&pdev->dev);
+	if (!phy_data)
+		return -EINVAL;
+
+	phy = devm_kzalloc(&pdev->dev, sizeof(*phy), GFP_KERNEL);
+	if (!phy)
+		return -ENOMEM;
+
+	otg = devm_kzalloc(&pdev->dev, sizeof(*otg), GFP_KERNEL);
+	if (!otg)
+		return -ENOMEM;
+
+	phy->dev		= &pdev->dev;
+
+	phy->phy.dev		= phy->dev;
+	phy->phy.label		= phy_data->label;
+	phy->phy.otg		= otg;
+	phy->phy.type		= USB_PHY_TYPE_USB2;
+	phy->mask		= phy_data->mask;
+	phy->power_on		= phy_data->power_on;
+	phy->power_off		= phy_data->power_off;
+	phy->flags		= phy_data->flags;
+
+	omap_usb2_init_errata(phy);
+
+	phy->phy_base = devm_platform_ioremap_resource(pdev, 0);
+	if (IS_ERR(phy->phy_base))
+		return PTR_ERR(phy->phy_base);
+
+	phy->syscon_phy_power = syscon_regmap_lookup_by_phandle(node,
+								"syscon-phy-power");
+	if (IS_ERR(phy->syscon_phy_power)) {
+		dev_dbg(&pdev->dev,
+			"can't get syscon-phy-power, using control device\n");
+		phy->syscon_phy_power = NULL;
+
+		control_node = of_parse_phandle(node, "ctrl-module", 0);
+		if (!control_node) {
+			dev_err(&pdev->dev,
+				"Failed to get control device phandle\n");
+			return -EINVAL;
+		}
+
+		control_pdev = of_find_device_by_node(control_node);
+		if (!control_pdev) {
+			dev_err(&pdev->dev, "Failed to get control device\n");
+			return -EINVAL;
+		}
+		phy->control_dev = &control_pdev->dev;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	} else {
 		if (of_property_read_u32_index(node,
 					       "syscon-phy-power", 1,

@@ -1453,6 +1453,7 @@ static const __u8 *mt_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 	if (hdev->vendor == I2C_VENDOR_ID_GOODIX &&
 	    (hdev->product == I2C_DEVICE_ID_GOODIX_01E8 ||
 	     hdev->product == I2C_DEVICE_ID_GOODIX_01E9)) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (*size < 608) {
 			dev_info(
 				&hdev->dev,
@@ -2135,6 +2136,677 @@ static const struct hid_device_id mt_devices[] = {
 		HID_DEVICE(BUS_USB, HID_GROUP_MULTITOUCH_WIN_8,
 			   USB_VENDOR_ID_LENOVO,
 			   USB_DEVICE_ID_LENOVO_X1_TAB2) },
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (rdesc[607] == 0x15) {
+			rdesc[607] = 0x25;
+			dev_info(
+				&hdev->dev,
+				"GT7868Q report descriptor fixup is applied.\n");
+		} else {
+			dev_info(
+				&hdev->dev,
+				"The byte is not expected for fixing the report descriptor. \
+It's possible that the touchpad firmware is not suitable for applying the fix. \
+got: %x\n",
+				rdesc[607]);
+		}
+	}
+
+	return rdesc;
+}
+
+static void mt_report(struct hid_device *hid, struct hid_report *report)
+{
+	struct mt_device *td = hid_get_drvdata(hid);
+	struct hid_field *field = report->field[0];
+	struct mt_report_data *rdata;
+
+	if (!(hid->claimed & HID_CLAIMED_INPUT))
+		return;
+
+	rdata = mt_find_report_data(td, report);
+	if (rdata && rdata->is_mt_collection)
+		return mt_touch_report(hid, rdata);
+
+	if (field && field->hidinput && field->hidinput->input)
+		input_sync(field->hidinput->input);
+}
+
+static bool mt_need_to_apply_feature(struct hid_device *hdev,
+				     struct hid_field *field,
+				     struct hid_usage *usage,
+				     enum latency_mode latency,
+				     bool surface_switch,
+				     bool button_switch,
+				     bool *inputmode_found)
+{
+	struct mt_device *td = hid_get_drvdata(hdev);
+	struct mt_class *cls = &td->mtclass;
+	struct hid_report *report = field->report;
+	unsigned int index = usage->usage_index;
+	char *buf;
+	u32 report_len;
+	int max;
+
+	switch (usage->hid) {
+	case HID_DG_INPUTMODE:
+		/*
+		 * Some elan panels wrongly declare 2 input mode features,
+		 * and silently ignore when we set the value in the second
+		 * field. Skip the second feature and hope for the best.
+		 */
+		if (*inputmode_found)
+			return false;
+
+		if (cls->quirks & MT_QUIRK_FORCE_GET_FEATURE) {
+			report_len = hid_report_len(report);
+			buf = hid_alloc_report_buf(report, GFP_KERNEL);
+			if (!buf) {
+				hid_err(hdev,
+					"failed to allocate buffer for report\n");
+				return false;
+			}
+			hid_hw_raw_request(hdev, report->id, buf, report_len,
+					   HID_FEATURE_REPORT,
+					   HID_REQ_GET_REPORT);
+			kfree(buf);
+		}
+
+		field->value[index] = td->inputmode_value;
+		*inputmode_found = true;
+		return true;
+
+	case HID_DG_CONTACTMAX:
+		if (cls->maxcontacts) {
+			max = min_t(int, field->logical_maximum,
+				    cls->maxcontacts);
+			if (field->value[index] != max) {
+				field->value[index] = max;
+				return true;
+			}
+		}
+		break;
+
+	case HID_DG_LATENCYMODE:
+		field->value[index] = latency;
+		return true;
+
+	case HID_DG_SURFACESWITCH:
+		field->value[index] = surface_switch;
+		return true;
+
+	case HID_DG_BUTTONSWITCH:
+		field->value[index] = button_switch;
+		return true;
+	}
+
+	return false; /* no need to update the report */
+}
+
+static void mt_set_modes(struct hid_device *hdev, enum latency_mode latency,
+			 bool surface_switch, bool button_switch)
+{
+	struct hid_report_enum *rep_enum;
+	struct hid_report *rep;
+	struct hid_usage *usage;
+	int i, j;
+	bool update_report;
+	bool inputmode_found = false;
+
+	rep_enum = &hdev->report_enum[HID_FEATURE_REPORT];
+	list_for_each_entry(rep, &rep_enum->report_list, list) {
+		update_report = false;
+
+		for (i = 0; i < rep->maxfield; i++) {
+			/* Ignore if report count is out of bounds. */
+			if (rep->field[i]->report_count < 1)
+				continue;
+
+			for (j = 0; j < rep->field[i]->maxusage; j++) {
+				usage = &rep->field[i]->usage[j];
+
+				if (mt_need_to_apply_feature(hdev,
+							     rep->field[i],
+							     usage,
+							     latency,
+							     surface_switch,
+							     button_switch,
+							     &inputmode_found))
+					update_report = true;
+			}
+		}
+
+		if (update_report)
+			hid_hw_request(hdev, rep, HID_REQ_SET_REPORT);
+	}
+}
+
+static void mt_post_parse_default_settings(struct mt_device *td,
+					   struct mt_application *app)
+{
+	__s32 quirks = app->quirks;
+
+	/* unknown serial device needs special quirks */
+	if (list_is_singular(&app->mt_usages)) {
+		quirks |= MT_QUIRK_ALWAYS_VALID;
+		quirks &= ~MT_QUIRK_NOT_SEEN_MEANS_UP;
+		quirks &= ~MT_QUIRK_VALID_IS_INRANGE;
+		quirks &= ~MT_QUIRK_VALID_IS_CONFIDENCE;
+		quirks &= ~MT_QUIRK_CONTACT_CNT_ACCURATE;
+	}
+
+	app->quirks = quirks;
+}
+
+static void mt_post_parse(struct mt_device *td, struct mt_application *app)
+{
+	if (!app->have_contact_count)
+		app->quirks &= ~MT_QUIRK_CONTACT_CNT_ACCURATE;
+}
+
+static int mt_input_configured(struct hid_device *hdev, struct hid_input *hi)
+{
+	struct mt_device *td = hid_get_drvdata(hdev);
+	const char *suffix = NULL;
+	struct mt_report_data *rdata;
+	struct mt_application *mt_application = NULL;
+	struct hid_report *report;
+	int ret;
+
+	list_for_each_entry(report, &hi->reports, hidinput_list) {
+		rdata = mt_find_report_data(td, report);
+		if (!rdata) {
+			hid_err(hdev, "failed to allocate data for report\n");
+			return -ENOMEM;
+		}
+
+		mt_application = rdata->application;
+
+		if (rdata->is_mt_collection) {
+			ret = mt_touch_input_configured(hdev, hi,
+							mt_application);
+			if (ret)
+				return ret;
+		}
+	}
+
+	switch (hi->application) {
+	case HID_GD_KEYBOARD:
+	case HID_GD_KEYPAD:
+	case HID_GD_MOUSE:
+	case HID_DG_TOUCHPAD:
+	case HID_GD_SYSTEM_CONTROL:
+	case HID_CP_CONSUMER_CONTROL:
+	case HID_GD_WIRELESS_RADIO_CTLS:
+	case HID_GD_SYSTEM_MULTIAXIS:
+		/* already handled by hid core */
+		break;
+	case HID_DG_TOUCHSCREEN:
+		/* we do not set suffix = "Touchscreen" */
+		hi->input->name = hdev->name;
+		break;
+	case HID_VD_ASUS_CUSTOM_MEDIA_KEYS:
+		suffix = "Custom Media Keys";
+		break;
+	case HID_DG_STYLUS:
+		/* force BTN_STYLUS to allow tablet matching in udev */
+		__set_bit(BTN_STYLUS, hi->input->keybit);
+		break;
+	default:
+		suffix = "UNKNOWN";
+		break;
+	}
+
+	if (suffix) {
+		hi->input->name = devm_kasprintf(&hdev->dev, GFP_KERNEL,
+						 "%s %s", hdev->name, suffix);
+		if (!hi->input->name)
+			return -ENOMEM;
+	}
+
+	return 0;
+}
+
+static void mt_fix_const_field(struct hid_field *field, unsigned int usage)
+{
+	if (field->usage[0].hid != usage ||
+	    !(field->flags & HID_MAIN_ITEM_CONSTANT))
+		return;
+
+	field->flags &= ~HID_MAIN_ITEM_CONSTANT;
+	field->flags |= HID_MAIN_ITEM_VARIABLE;
+}
+
+static void mt_fix_const_fields(struct hid_device *hdev, unsigned int usage)
+{
+	struct hid_report *report;
+	int i;
+
+	list_for_each_entry(report,
+			    &hdev->report_enum[HID_INPUT_REPORT].report_list,
+			    list) {
+
+		if (!report->maxfield)
+			continue;
+
+		for (i = 0; i < report->maxfield; i++)
+			if (report->field[i]->maxusage >= 1)
+				mt_fix_const_field(report->field[i], usage);
+	}
+}
+
+static void mt_release_contacts(struct hid_device *hid)
+{
+	struct hid_input *hidinput;
+	struct mt_application *application;
+	struct mt_device *td = hid_get_drvdata(hid);
+
+	list_for_each_entry(hidinput, &hid->inputs, list) {
+		struct input_dev *input_dev = hidinput->input;
+		struct input_mt *mt = input_dev->mt;
+		int i;
+
+		if (mt) {
+			for (i = 0; i < mt->num_slots; i++) {
+				input_mt_slot(input_dev, i);
+				input_mt_report_slot_inactive(input_dev);
+			}
+			input_mt_sync_frame(input_dev);
+			input_sync(input_dev);
+		}
+	}
+
+	list_for_each_entry(application, &td->applications, list) {
+		application->num_received = 0;
+	}
+}
+
+static void mt_expired_timeout(struct timer_list *t)
+{
+	struct mt_device *td = from_timer(td, t, release_timer);
+	struct hid_device *hdev = td->hdev;
+
+	/*
+	 * An input report came in just before we release the sticky fingers,
+	 * it will take care of the sticky fingers.
+	 */
+	if (test_and_set_bit_lock(MT_IO_FLAGS_RUNNING, &td->mt_io_flags))
+		return;
+	if (test_bit(MT_IO_FLAGS_PENDING_SLOTS, &td->mt_io_flags))
+		mt_release_contacts(hdev);
+	clear_bit_unlock(MT_IO_FLAGS_RUNNING, &td->mt_io_flags);
+}
+
+static int mt_probe(struct hid_device *hdev, const struct hid_device_id *id)
+{
+	int ret, i;
+	struct mt_device *td;
+	const struct mt_class *mtclass = mt_classes; /* MT_CLS_DEFAULT */
+
+	for (i = 0; mt_classes[i].name ; i++) {
+		if (id->driver_data == mt_classes[i].name) {
+			mtclass = &(mt_classes[i]);
+			break;
+		}
+	}
+
+	td = devm_kzalloc(&hdev->dev, sizeof(struct mt_device), GFP_KERNEL);
+	if (!td) {
+		dev_err(&hdev->dev, "cannot allocate multitouch data\n");
+		return -ENOMEM;
+	}
+	td->hdev = hdev;
+	td->mtclass = *mtclass;
+	td->inputmode_value = MT_INPUTMODE_TOUCHSCREEN;
+	hid_set_drvdata(hdev, td);
+
+	INIT_LIST_HEAD(&td->applications);
+	INIT_LIST_HEAD(&td->reports);
+
+	if (id->vendor == HID_ANY_ID && id->product == HID_ANY_ID)
+		td->serial_maybe = true;
+
+
+	/* Orientation is inverted if the X or Y axes are
+	 * flipped, but normalized if both are inverted.
+	 */
+	if (hdev->quirks & (HID_QUIRK_X_INVERT | HID_QUIRK_Y_INVERT) &&
+	    !((hdev->quirks & HID_QUIRK_X_INVERT)
+	      && (hdev->quirks & HID_QUIRK_Y_INVERT)))
+		td->mtclass.quirks = MT_QUIRK_ORIENTATION_INVERT;
+
+	/* This allows the driver to correctly support devices
+	 * that emit events over several HID messages.
+	 */
+	hdev->quirks |= HID_QUIRK_NO_INPUT_SYNC;
+
+	/*
+	 * This allows the driver to handle different input sensors
+	 * that emits events through different applications on the same HID
+	 * device.
+	 */
+	hdev->quirks |= HID_QUIRK_INPUT_PER_APP;
+
+	if (id->group != HID_GROUP_MULTITOUCH_WIN_8)
+		hdev->quirks |= HID_QUIRK_MULTI_INPUT;
+
+	if (mtclass->quirks & MT_QUIRK_FORCE_MULTI_INPUT) {
+		hdev->quirks &= ~HID_QUIRK_INPUT_PER_APP;
+		hdev->quirks |= HID_QUIRK_MULTI_INPUT;
+	}
+
+	timer_setup(&td->release_timer, mt_expired_timeout, 0);
+
+	ret = hid_parse(hdev);
+	if (ret != 0)
+		return ret;
+
+	if (mtclass->quirks & MT_QUIRK_FIX_CONST_CONTACT_ID)
+		mt_fix_const_fields(hdev, HID_DG_CONTACTID);
+
+	if (hdev->vendor == USB_VENDOR_ID_SIS_TOUCH)
+		hdev->quirks |= HID_QUIRK_NOGET;
+
+	ret = hid_hw_start(hdev, HID_CONNECT_DEFAULT);
+	if (ret)
+		return ret;
+
+	ret = sysfs_create_group(&hdev->dev.kobj, &mt_attribute_group);
+	if (ret)
+		dev_warn(&hdev->dev, "Cannot allocate sysfs group for %s\n",
+				hdev->name);
+
+	mt_set_modes(hdev, HID_LATENCY_NORMAL, true, true);
+
+	return 0;
+}
+
+static int mt_suspend(struct hid_device *hdev, pm_message_t state)
+{
+	struct mt_device *td = hid_get_drvdata(hdev);
+
+	/* High latency is desirable for power savings during S3/S0ix */
+	if ((td->mtclass.quirks & MT_QUIRK_DISABLE_WAKEUP) ||
+	    !hid_hw_may_wakeup(hdev))
+		mt_set_modes(hdev, HID_LATENCY_HIGH, false, false);
+	else
+		mt_set_modes(hdev, HID_LATENCY_HIGH, true, true);
+
+	return 0;
+}
+
+static int mt_reset_resume(struct hid_device *hdev)
+{
+	mt_release_contacts(hdev);
+	mt_set_modes(hdev, HID_LATENCY_NORMAL, true, true);
+	return 0;
+}
+
+static int mt_resume(struct hid_device *hdev)
+{
+	/* Some Elan legacy devices require SET_IDLE to be set on resume.
+	 * It should be safe to send it to other devices too.
+	 * Tested on 3M, Stantum, Cypress, Zytronic, eGalax, and Elan panels. */
+
+	hid_hw_idle(hdev, 0, 0, HID_REQ_SET_IDLE);
+
+	mt_set_modes(hdev, HID_LATENCY_NORMAL, true, true);
+
+	return 0;
+}
+
+static void mt_remove(struct hid_device *hdev)
+{
+	struct mt_device *td = hid_get_drvdata(hdev);
+
+	del_timer_sync(&td->release_timer);
+
+	sysfs_remove_group(&hdev->dev.kobj, &mt_attribute_group);
+	hid_hw_stop(hdev);
+}
+
+/*
+ * This list contains only:
+ * - VID/PID of products not working with the default multitouch handling
+ * - 2 generic rules.
+ * So there is no point in adding here any device with MT_CLS_DEFAULT.
+ */
+static const struct hid_device_id mt_devices[] = {
+
+	/* 3M panels */
+	{ .driver_data = MT_CLS_3M,
+		MT_USB_DEVICE(USB_VENDOR_ID_3M,
+			USB_DEVICE_ID_3M1968) },
+	{ .driver_data = MT_CLS_3M,
+		MT_USB_DEVICE(USB_VENDOR_ID_3M,
+			USB_DEVICE_ID_3M2256) },
+	{ .driver_data = MT_CLS_3M,
+		MT_USB_DEVICE(USB_VENDOR_ID_3M,
+			USB_DEVICE_ID_3M3266) },
+
+	/* Anton devices */
+	{ .driver_data = MT_CLS_EXPORT_ALL_INPUTS,
+		MT_USB_DEVICE(USB_VENDOR_ID_ANTON,
+			USB_DEVICE_ID_ANTON_TOUCH_PAD) },
+
+	/* Asus T101HA */
+	{ .driver_data = MT_CLS_WIN_8_DISABLE_WAKEUP,
+		HID_DEVICE(BUS_USB, HID_GROUP_MULTITOUCH_WIN_8,
+			   USB_VENDOR_ID_ASUSTEK,
+			   USB_DEVICE_ID_ASUSTEK_T101HA_KEYBOARD) },
+
+	/* Asus T304UA */
+	{ .driver_data = MT_CLS_ASUS,
+		HID_DEVICE(BUS_USB, HID_GROUP_MULTITOUCH_WIN_8,
+			USB_VENDOR_ID_ASUSTEK,
+			USB_DEVICE_ID_ASUSTEK_T304_KEYBOARD) },
+
+	/* Atmel panels */
+	{ .driver_data = MT_CLS_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_ATMEL,
+			USB_DEVICE_ID_ATMEL_MXT_DIGITIZER) },
+
+	/* Baanto multitouch devices */
+	{ .driver_data = MT_CLS_NSMU,
+		MT_USB_DEVICE(USB_VENDOR_ID_BAANTO,
+			USB_DEVICE_ID_BAANTO_MT_190W2) },
+
+	/* Cando panels */
+	{ .driver_data = MT_CLS_DUAL_INRANGE_CONTACTNUMBER,
+		MT_USB_DEVICE(USB_VENDOR_ID_CANDO,
+			USB_DEVICE_ID_CANDO_MULTI_TOUCH) },
+	{ .driver_data = MT_CLS_DUAL_INRANGE_CONTACTNUMBER,
+		MT_USB_DEVICE(USB_VENDOR_ID_CANDO,
+			USB_DEVICE_ID_CANDO_MULTI_TOUCH_15_6) },
+
+	/* Chunghwa Telecom touch panels */
+	{  .driver_data = MT_CLS_NSMU,
+		MT_USB_DEVICE(USB_VENDOR_ID_CHUNGHWAT,
+			USB_DEVICE_ID_CHUNGHWAT_MULTITOUCH) },
+
+	/* CJTouch panels */
+	{ .driver_data = MT_CLS_NSMU,
+		MT_USB_DEVICE(USB_VENDOR_ID_CJTOUCH,
+			USB_DEVICE_ID_CJTOUCH_MULTI_TOUCH_0020) },
+	{ .driver_data = MT_CLS_NSMU,
+		MT_USB_DEVICE(USB_VENDOR_ID_CJTOUCH,
+			USB_DEVICE_ID_CJTOUCH_MULTI_TOUCH_0040) },
+
+	/* CVTouch panels */
+	{ .driver_data = MT_CLS_NSMU,
+		MT_USB_DEVICE(USB_VENDOR_ID_CVTOUCH,
+			USB_DEVICE_ID_CVTOUCH_SCREEN) },
+
+	/* eGalax devices (SAW) */
+	{ .driver_data = MT_CLS_EXPORT_ALL_INPUTS,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_EGALAX_TOUCHCONTROLLER) },
+
+	/* eGalax devices (resistive) */
+	{ .driver_data = MT_CLS_EGALAX,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_480D) },
+	{ .driver_data = MT_CLS_EGALAX,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_480E) },
+
+	/* eGalax devices (capacitive) */
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_7207) },
+	{ .driver_data = MT_CLS_EGALAX,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_720C) },
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_7224) },
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_722A) },
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_725E) },
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_7262) },
+	{ .driver_data = MT_CLS_EGALAX,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_726B) },
+	{ .driver_data = MT_CLS_EGALAX,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_72A1) },
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_72AA) },
+	{ .driver_data = MT_CLS_EGALAX,
+		HID_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_72C4) },
+	{ .driver_data = MT_CLS_EGALAX,
+		HID_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_72D0) },
+	{ .driver_data = MT_CLS_EGALAX,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_72FA) },
+	{ .driver_data = MT_CLS_EGALAX,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_7302) },
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_7349) },
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_73F7) },
+	{ .driver_data = MT_CLS_EGALAX_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_A001) },
+	{ .driver_data = MT_CLS_EGALAX,
+		MT_USB_DEVICE(USB_VENDOR_ID_DWAV,
+			USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_C002) },
+
+	/* Elan devices */
+	{ .driver_data = MT_CLS_WIN_8_FORCE_MULTI_INPUT,
+		HID_DEVICE(BUS_I2C, HID_GROUP_MULTITOUCH_WIN_8,
+			USB_VENDOR_ID_ELAN, 0x313a) },
+
+	{ .driver_data = MT_CLS_WIN_8_FORCE_MULTI_INPUT,
+		HID_DEVICE(BUS_I2C, HID_GROUP_MULTITOUCH_WIN_8,
+			USB_VENDOR_ID_ELAN, 0x3148) },
+
+	{ .driver_data = MT_CLS_WIN_8_FORCE_MULTI_INPUT_NSMU,
+		HID_DEVICE(BUS_I2C, HID_GROUP_MULTITOUCH_WIN_8,
+			USB_VENDOR_ID_ELAN, 0x32ae) },
+
+	/* Elitegroup panel */
+	{ .driver_data = MT_CLS_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_ELITEGROUP,
+			USB_DEVICE_ID_ELITEGROUP_05D8) },
+
+	/* Flatfrog Panels */
+	{ .driver_data = MT_CLS_FLATFROG,
+		MT_USB_DEVICE(USB_VENDOR_ID_FLATFROG,
+			USB_DEVICE_ID_MULTITOUCH_3200) },
+
+	/* FocalTech Panels */
+	{ .driver_data = MT_CLS_SERIAL,
+		MT_USB_DEVICE(USB_VENDOR_ID_CYGNAL,
+			USB_DEVICE_ID_FOCALTECH_FTXXXX_MULTITOUCH) },
+
+	/* GeneralTouch panel */
+	{ .driver_data = MT_CLS_GENERALTOUCH_TWOFINGERS,
+		MT_USB_DEVICE(USB_VENDOR_ID_GENERAL_TOUCH,
+			USB_DEVICE_ID_GENERAL_TOUCH_WIN7_TWOFINGERS) },
+	{ .driver_data = MT_CLS_GENERALTOUCH_PWT_TENFINGERS,
+		MT_USB_DEVICE(USB_VENDOR_ID_GENERAL_TOUCH,
+			USB_DEVICE_ID_GENERAL_TOUCH_WIN8_PWT_TENFINGERS) },
+	{ .driver_data = MT_CLS_GENERALTOUCH_TWOFINGERS,
+		MT_USB_DEVICE(USB_VENDOR_ID_GENERAL_TOUCH,
+			USB_DEVICE_ID_GENERAL_TOUCH_WIN8_PIT_0101) },
+	{ .driver_data = MT_CLS_GENERALTOUCH_PWT_TENFINGERS,
+		MT_USB_DEVICE(USB_VENDOR_ID_GENERAL_TOUCH,
+			USB_DEVICE_ID_GENERAL_TOUCH_WIN8_PIT_0102) },
+	{ .driver_data = MT_CLS_GENERALTOUCH_PWT_TENFINGERS,
+		MT_USB_DEVICE(USB_VENDOR_ID_GENERAL_TOUCH,
+			USB_DEVICE_ID_GENERAL_TOUCH_WIN8_PIT_0106) },
+	{ .driver_data = MT_CLS_GENERALTOUCH_PWT_TENFINGERS,
+		MT_USB_DEVICE(USB_VENDOR_ID_GENERAL_TOUCH,
+			USB_DEVICE_ID_GENERAL_TOUCH_WIN8_PIT_010A) },
+	{ .driver_data = MT_CLS_GENERALTOUCH_PWT_TENFINGERS,
+		MT_USB_DEVICE(USB_VENDOR_ID_GENERAL_TOUCH,
+			USB_DEVICE_ID_GENERAL_TOUCH_WIN8_PIT_E100) },
+
+	/* Gametel game controller */
+	{ .driver_data = MT_CLS_NSMU,
+		MT_BT_DEVICE(USB_VENDOR_ID_FRUCTEL,
+			USB_DEVICE_ID_GAMETEL_MT_MODE) },
+
+	/* Goodix GT7868Q devices */
+	{ .driver_data = MT_CLS_WIN_8_FORCE_MULTI_INPUT_NSMU,
+	  HID_DEVICE(BUS_I2C, HID_GROUP_ANY, I2C_VENDOR_ID_GOODIX,
+		     I2C_DEVICE_ID_GOODIX_01E8) },
+	{ .driver_data = MT_CLS_WIN_8_FORCE_MULTI_INPUT_NSMU,
+	  HID_DEVICE(BUS_I2C, HID_GROUP_ANY, I2C_VENDOR_ID_GOODIX,
+		     I2C_DEVICE_ID_GOODIX_01E9) },
+
+	/* GoodTouch panels */
+	{ .driver_data = MT_CLS_NSMU,
+		MT_USB_DEVICE(USB_VENDOR_ID_GOODTOUCH,
+			USB_DEVICE_ID_GOODTOUCH_000f) },
+
+	/* Hanvon panels */
+	{ .driver_data = MT_CLS_DUAL_INRANGE_CONTACTID,
+		MT_USB_DEVICE(USB_VENDOR_ID_HANVON_ALT,
+			USB_DEVICE_ID_HANVON_ALT_MULTITOUCH) },
+
+	/* HONOR GLO-GXXX panel */
+	{ .driver_data = MT_CLS_VTL,
+		HID_DEVICE(BUS_I2C, HID_GROUP_MULTITOUCH_WIN_8,
+			0x347d, 0x7853) },
+
+	/* HONOR MagicBook Art 14 touchpad */
+	{ .driver_data = MT_CLS_VTL,
+		HID_DEVICE(BUS_I2C, HID_GROUP_MULTITOUCH_WIN_8,
+			0x35cc, 0x0104) },
+
+	/* Ilitek dual touch panel */
+	{  .driver_data = MT_CLS_NSMU,
+		MT_USB_DEVICE(USB_VENDOR_ID_ILITEK,
+			USB_DEVICE_ID_ILITEK_MULTITOUCH) },
+
+	/* LG Melfas panel */
+	{ .driver_data = MT_CLS_LG,
+		HID_USB_DEVICE(USB_VENDOR_ID_LG,
+			USB_DEVICE_ID_LG_MELFAS_MT) },
+	{ .driver_data = MT_CLS_LG,
+		HID_DEVICE(BUS_I2C, HID_GROUP_GENERIC,
+			USB_VENDOR_ID_LG, I2C_DEVICE_ID_LG_7010) },
+
+	/* Lenovo X1 TAB Gen 2 */
+	{ .driver_data = MT_CLS_WIN_8_FORCE_MULTI_INPUT,
+		HID_DEVICE(BUS_USB, HID_GROUP_MULTITOUCH_WIN_8,
+			   USB_VENDOR_ID_LENOVO,
+			   USB_DEVICE_ID_LENOVO_X1_TAB) },
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* Lenovo X1 TAB Gen 3 */
 	{ .driver_data = MT_CLS_WIN_8_FORCE_MULTI_INPUT,

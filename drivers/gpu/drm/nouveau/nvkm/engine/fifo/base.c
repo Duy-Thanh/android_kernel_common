@@ -352,8 +352,12 @@ nvkm_fifo_dtor(struct nvkm_engine *engine)
 	mutex_destroy(&fifo->userd.mutex);
 
 	nvkm_event_fini(&fifo->nonstall.event);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (fifo->func->nonstall_dtor)
 		fifo->func->nonstall_dtor(fifo);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	mutex_destroy(&fifo->mutex);
 
 	if (fifo->func->dtor)

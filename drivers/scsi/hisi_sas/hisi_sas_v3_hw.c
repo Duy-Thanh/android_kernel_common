@@ -3333,8 +3333,14 @@ static void hisi_sas_map_queues(struct Scsi_Host *shost)
 		if (i == HCTX_TYPE_POLL)
 			blk_mq_map_queues(qmap);
 		else
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			blk_mq_map_hw_queues(qmap, hisi_hba->dev,
 					     BASE_VECTORS_V3_HW);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			blk_mq_pci_map_queues(qmap, hisi_hba->pci_dev,
+					      BASE_VECTORS_V3_HW);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		qoff += qmap->nr_queues;
 	}
 }

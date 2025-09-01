@@ -11,6 +11,7 @@
 #include <linux/smp.h>
 #include <linux/cpu.h>
 #include <linux/group_cpus.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/device/bus.h>
 
 #include "blk.h"
@@ -91,3 +92,49 @@ fallback:
 	blk_mq_clear_mq_map(qmap);
 }
 EXPORT_SYMBOL_GPL(blk_mq_map_hw_queues);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+#include "blk.h"
+#include "blk-mq.h"
+
+void blk_mq_map_queues(struct blk_mq_queue_map *qmap)
+{
+	const struct cpumask *masks;
+	unsigned int queue, cpu;
+
+	masks = group_cpus_evenly(qmap->nr_queues);
+	if (!masks) {
+		for_each_possible_cpu(cpu)
+			qmap->mq_map[cpu] = qmap->queue_offset;
+		return;
+	}
+
+	for (queue = 0; queue < qmap->nr_queues; queue++) {
+		for_each_cpu(cpu, &masks[queue])
+			qmap->mq_map[cpu] = qmap->queue_offset + queue;
+	}
+	kfree(masks);
+}
+EXPORT_SYMBOL_GPL(blk_mq_map_queues);
+
+/**
+ * blk_mq_hw_queue_to_node - Look up the memory node for a hardware queue index
+ * @qmap: CPU to hardware queue map.
+ * @index: hardware queue index.
+ *
+ * We have no quick way of doing reverse lookups. This is only used at
+ * queue init time, so runtime isn't important.
+ */
+int blk_mq_hw_queue_to_node(struct blk_mq_queue_map *qmap, unsigned int index)
+{
+	int i;
+
+	for_each_possible_cpu(i) {
+		if (index == qmap->mq_map[i])
+			return cpu_to_node(i);
+	}
+
+	return NUMA_NO_NODE;
+}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)

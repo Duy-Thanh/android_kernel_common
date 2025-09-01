@@ -1102,6 +1102,7 @@ void smb_send_parent_lease_break_noti(struct ksmbd_file *fp,
 			if (!atomic_inc_not_zero(&opinfo->refcount))
 				continue;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			if (ksmbd_conn_releasing(opinfo->conn)) {
 				opinfo_put(opinfo);
 				continue;
@@ -1352,6 +1353,252 @@ void smb_break_all_levII_oplock(struct ksmbd_work *work, struct ksmbd_file *fp,
 			opinfo_put(brk_op);
 			continue;
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			if (ksmbd_conn_releasing(opinfo->conn))
+				continue;
+
+			oplock_break(opinfo, SMB2_OPLOCK_LEVEL_NONE, NULL);
+			opinfo_put(opinfo);
+		}
+	}
+	up_read(&p_ci->m_lock);
+
+	ksmbd_inode_put(p_ci);
+}
+
+void smb_lazy_parent_lease_break_close(struct ksmbd_file *fp)
+{
+	struct oplock_info *opinfo;
+	struct ksmbd_inode *p_ci = NULL;
+
+	rcu_read_lock();
+	opinfo = rcu_dereference(fp->f_opinfo);
+	rcu_read_unlock();
+
+	if (!opinfo || !opinfo->is_lease || opinfo->o_lease->version != 2)
+		return;
+
+	p_ci = ksmbd_inode_lookup_lock(fp->filp->f_path.dentry->d_parent);
+	if (!p_ci)
+		return;
+
+	down_read(&p_ci->m_lock);
+	list_for_each_entry(opinfo, &p_ci->m_op_list, op_entry) {
+		if (opinfo->conn == NULL || !opinfo->is_lease)
+			continue;
+
+		if (opinfo->o_lease->state != SMB2_OPLOCK_LEVEL_NONE) {
+			if (!atomic_inc_not_zero(&opinfo->refcount))
+				continue;
+
+			if (ksmbd_conn_releasing(opinfo->conn))
+				continue;
+			oplock_break(opinfo, SMB2_OPLOCK_LEVEL_NONE, NULL);
+			opinfo_put(opinfo);
+		}
+	}
+	up_read(&p_ci->m_lock);
+
+	ksmbd_inode_put(p_ci);
+}
+
+/**
+ * smb_grant_oplock() - handle oplock/lease request on file open
+ * @work:		smb work
+ * @req_op_level:	oplock level
+ * @pid:		id of open file
+ * @fp:			ksmbd file pointer
+ * @tid:		Tree id of connection
+ * @lctx:		lease context information on file open
+ * @share_ret:		share mode
+ *
+ * Return:      0 on success, otherwise error
+ */
+int smb_grant_oplock(struct ksmbd_work *work, int req_op_level, u64 pid,
+		     struct ksmbd_file *fp, __u16 tid,
+		     struct lease_ctx_info *lctx, int share_ret)
+{
+	struct ksmbd_session *sess = work->sess;
+	int err = 0;
+	struct oplock_info *opinfo = NULL, *prev_opinfo = NULL;
+	struct ksmbd_inode *ci = fp->f_ci;
+	bool prev_op_has_lease;
+	__le32 prev_op_state = 0;
+
+	/* Only v2 leases handle the directory */
+	if (S_ISDIR(file_inode(fp->filp)->i_mode)) {
+		if (!lctx || lctx->version != 2 ||
+		    (lctx->flags != SMB2_LEASE_FLAG_PARENT_LEASE_KEY_SET_LE &&
+		     !lctx->epoch))
+			return 0;
+	}
+
+	opinfo = alloc_opinfo(work, pid, tid);
+	if (!opinfo)
+		return -ENOMEM;
+
+	if (lctx) {
+		err = alloc_lease(opinfo, lctx);
+		if (err)
+			goto err_out;
+		opinfo->is_lease = 1;
+	}
+
+	/* ci does not have any oplock */
+	if (!opinfo_count(fp))
+		goto set_lev;
+
+	/* grant none-oplock if second open is trunc */
+	if (fp->attrib_only && fp->cdoption != FILE_OVERWRITE_IF_LE &&
+	    fp->cdoption != FILE_OVERWRITE_LE &&
+	    fp->cdoption != FILE_SUPERSEDE_LE) {
+		req_op_level = SMB2_OPLOCK_LEVEL_NONE;
+		goto set_lev;
+	}
+
+	if (lctx) {
+		struct oplock_info *m_opinfo;
+
+		/* is lease already granted ? */
+		m_opinfo = same_client_has_lease(ci, sess->ClientGUID,
+						 lctx);
+		if (m_opinfo) {
+			copy_lease(m_opinfo, opinfo);
+			if (atomic_read(&m_opinfo->breaking_cnt))
+				opinfo->o_lease->flags =
+					SMB2_LEASE_FLAG_BREAK_IN_PROGRESS_LE;
+			goto out;
+		}
+	}
+	prev_opinfo = opinfo_get_list(ci);
+	if (!prev_opinfo ||
+	    (prev_opinfo->level == SMB2_OPLOCK_LEVEL_NONE && lctx)) {
+		opinfo_put(prev_opinfo);
+		goto set_lev;
+	}
+	prev_op_has_lease = prev_opinfo->is_lease;
+	if (prev_op_has_lease)
+		prev_op_state = prev_opinfo->o_lease->state;
+
+	if (share_ret < 0 &&
+	    prev_opinfo->level == SMB2_OPLOCK_LEVEL_EXCLUSIVE) {
+		err = share_ret;
+		opinfo_put(prev_opinfo);
+		goto err_out;
+	}
+
+	if (prev_opinfo->level != SMB2_OPLOCK_LEVEL_BATCH &&
+	    prev_opinfo->level != SMB2_OPLOCK_LEVEL_EXCLUSIVE) {
+		opinfo_put(prev_opinfo);
+		goto op_break_not_needed;
+	}
+
+	err = oplock_break(prev_opinfo, SMB2_OPLOCK_LEVEL_II, work);
+	opinfo_put(prev_opinfo);
+	if (err == -ENOENT)
+		goto set_lev;
+	/* Check all oplock was freed by close */
+	else if (err < 0)
+		goto err_out;
+
+op_break_not_needed:
+	if (share_ret < 0) {
+		err = share_ret;
+		goto err_out;
+	}
+
+	if (req_op_level != SMB2_OPLOCK_LEVEL_NONE)
+		req_op_level = SMB2_OPLOCK_LEVEL_II;
+
+	/* grant fixed oplock on stacked locking between lease and oplock */
+	if (prev_op_has_lease && !lctx)
+		if (prev_op_state & SMB2_LEASE_HANDLE_CACHING_LE)
+			req_op_level = SMB2_OPLOCK_LEVEL_NONE;
+
+	if (!prev_op_has_lease && lctx) {
+		req_op_level = SMB2_OPLOCK_LEVEL_II;
+		lctx->req_state = SMB2_LEASE_READ_CACHING_LE;
+	}
+
+set_lev:
+	set_oplock_level(opinfo, req_op_level, lctx);
+
+out:
+	rcu_assign_pointer(fp->f_opinfo, opinfo);
+	opinfo->o_fp = fp;
+
+	opinfo_count_inc(fp);
+	opinfo_add(opinfo);
+	if (opinfo->is_lease) {
+		err = add_lease_global_list(opinfo);
+		if (err)
+			goto err_out;
+	}
+
+	return 0;
+err_out:
+	free_opinfo(opinfo);
+	return err;
+}
+
+/**
+ * smb_break_all_write_oplock() - break batch/exclusive oplock to level2
+ * @work:	smb work
+ * @fp:		ksmbd file pointer
+ * @is_trunc:	truncate on open
+ */
+static void smb_break_all_write_oplock(struct ksmbd_work *work,
+				       struct ksmbd_file *fp, int is_trunc)
+{
+	struct oplock_info *brk_opinfo;
+
+	brk_opinfo = opinfo_get_list(fp->f_ci);
+	if (!brk_opinfo)
+		return;
+	if (brk_opinfo->level != SMB2_OPLOCK_LEVEL_BATCH &&
+	    brk_opinfo->level != SMB2_OPLOCK_LEVEL_EXCLUSIVE) {
+		opinfo_put(brk_opinfo);
+		return;
+	}
+
+	brk_opinfo->open_trunc = is_trunc;
+	oplock_break(brk_opinfo, SMB2_OPLOCK_LEVEL_II, work);
+	opinfo_put(brk_opinfo);
+}
+
+/**
+ * smb_break_all_levII_oplock() - send level2 oplock or read lease break command
+ *	from server to client
+ * @work:	smb work
+ * @fp:		ksmbd file pointer
+ * @is_trunc:	truncate on open
+ */
+void smb_break_all_levII_oplock(struct ksmbd_work *work, struct ksmbd_file *fp,
+				int is_trunc)
+{
+	struct oplock_info *op, *brk_op;
+	struct ksmbd_inode *ci;
+	struct ksmbd_conn *conn = work->conn;
+
+	if (!test_share_config_flag(work->tcon->share_conf,
+				    KSMBD_SHARE_FLAG_OPLOCKS))
+		return;
+
+	ci = fp->f_ci;
+	op = opinfo_get(fp);
+
+	down_read(&ci->m_lock);
+	list_for_each_entry(brk_op, &ci->m_op_list, op_entry) {
+		if (brk_op->conn == NULL)
+			continue;
+
+		if (!atomic_inc_not_zero(&brk_op->refcount))
+			continue;
+
+		if (ksmbd_conn_releasing(brk_op->conn))
+			continue;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		if (brk_op->is_lease && (brk_op->o_lease->state &
 		    (~(SMB2_LEASE_READ_CACHING_LE |

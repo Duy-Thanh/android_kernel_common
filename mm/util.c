@@ -634,8 +634,13 @@ static gfp_t kmalloc_gfp_adjust(gfp_t flags, size_t size)
 		flags &= ~__GFP_NOFAIL;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (size > 0)
 		trace_android_vh_adjust_kvmalloc_flags(get_order(size), &flags);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	trace_android_vh_adjust_kvmalloc_flags(get_order(size), &flags);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return flags;
 }

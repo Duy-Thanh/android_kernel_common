@@ -94,10 +94,18 @@ static const struct dmi_system_id rfkill_gpio_deny_table[] = {
 static int rfkill_gpio_probe(struct platform_device *pdev)
 {
 	struct rfkill_gpio_data *rfkill;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	const char *type_name = NULL;
 	const char *name_property;
 	const char *type_property;
 	struct gpio_desc *gpio;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct gpio_desc *gpio;
+	const char *name_property;
+	const char *type_property;
+	const char *type_name;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	int ret;
 
 	if (dmi_check_system(rfkill_gpio_deny_table))

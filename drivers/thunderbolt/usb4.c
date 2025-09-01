@@ -403,6 +403,7 @@ bool usb4_switch_lane_bonding_possible(struct tb_switch *sw)
  * usb4_switch_set_wake() - Enabled/disable wake
  * @sw: USB4 router
  * @flags: Wakeup flags (%0 to disable)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @runtime: Wake is being programmed during system runtime
  *
  * Enables/disables router to wake up from sleep.
@@ -443,6 +444,51 @@ int usb4_switch_set_wake(struct tb_switch *sw, unsigned int flags, bool runtime)
 			if ((flags & TB_WAKE_ON_CONNECT) && wakeup && !configured)
 				val |= PORT_CS_19_WOC;
 			if ((flags & TB_WAKE_ON_DISCONNECT) && wakeup && configured)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ *
+ * Enables/disables router to wake up from sleep.
+ */
+int usb4_switch_set_wake(struct tb_switch *sw, unsigned int flags)
+{
+	struct usb4_port *usb4;
+	struct tb_port *port;
+	u64 route = tb_route(sw);
+	u32 val;
+	int ret;
+
+	/*
+	 * Enable wakes coming from all USB4 downstream ports (from
+	 * child routers). For device routers do this also for the
+	 * upstream USB4 port.
+	 */
+	tb_switch_for_each_port(sw, port) {
+		if (!tb_port_is_null(port))
+			continue;
+		if (!route && tb_is_upstream_port(port))
+			continue;
+		if (!port->cap_usb4)
+			continue;
+
+		ret = tb_port_read(port, &val, TB_CFG_PORT,
+				   port->cap_usb4 + PORT_CS_19, 1);
+		if (ret)
+			return ret;
+
+		val &= ~(PORT_CS_19_WOC | PORT_CS_19_WOD | PORT_CS_19_WOU4);
+
+		if (tb_is_upstream_port(port)) {
+			val |= PORT_CS_19_WOU4;
+		} else {
+			bool configured = val & PORT_CS_19_PC;
+			usb4 = port->usb4;
+
+			if (((flags & TB_WAKE_ON_CONNECT) &&
+			      device_may_wakeup(&usb4->dev)) && !configured)
+				val |= PORT_CS_19_WOC;
+			if (((flags & TB_WAKE_ON_DISCONNECT) &&
+			      device_may_wakeup(&usb4->dev)) && configured)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				val |= PORT_CS_19_WOD;
 			if ((flags & TB_WAKE_ON_USB4) && configured)
 				val |= PORT_CS_19_WOU4;

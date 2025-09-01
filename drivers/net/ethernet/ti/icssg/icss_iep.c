@@ -621,6 +621,7 @@ exit:
 
 static int icss_iep_extts_enable(struct icss_iep *iep, u32 index, int on)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32 val, cap;
 	int ret = 0;
 
@@ -727,6 +728,101 @@ err_put_pdev:
 	put_device(&pdev->dev);
 
 	return ERR_PTR(ret);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u32 val, cap, ret = 0;
+
+	mutex_lock(&iep->ptp_clk_mutex);
+
+	if (iep->ops && iep->ops->extts_enable) {
+		ret = iep->ops->extts_enable(iep->clockops_data, index, on);
+		goto exit;
+	}
+
+	if (((iep->latch_enable & BIT(index)) >> index) == on)
+		goto exit;
+
+	regmap_read(iep->map, ICSS_IEP_CAPTURE_CFG_REG, &val);
+	cap = IEP_CAP_CFG_CAP_ASYNC_EN(index) | IEP_CAP_CFG_CAPNR_1ST_EVENT_EN(index);
+	if (on) {
+		val |= cap;
+		iep->latch_enable |= BIT(index);
+	} else {
+		val &= ~cap;
+		iep->latch_enable &= ~BIT(index);
+	}
+	regmap_write(iep->map, ICSS_IEP_CAPTURE_CFG_REG, val);
+
+exit:
+	mutex_unlock(&iep->ptp_clk_mutex);
+
+	return ret;
+}
+
+static int icss_iep_ptp_enable(struct ptp_clock_info *ptp,
+			       struct ptp_clock_request *rq, int on)
+{
+	struct icss_iep *iep = container_of(ptp, struct icss_iep, ptp_info);
+
+	switch (rq->type) {
+	case PTP_CLK_REQ_PEROUT:
+		return icss_iep_perout_enable(iep, &rq->perout, on);
+	case PTP_CLK_REQ_PPS:
+		return icss_iep_pps_enable(iep, on);
+	case PTP_CLK_REQ_EXTTS:
+		return icss_iep_extts_enable(iep, rq->extts.index, on);
+	default:
+		break;
+	}
+
+	return -EOPNOTSUPP;
+}
+
+static struct ptp_clock_info icss_iep_ptp_info = {
+	.owner		= THIS_MODULE,
+	.name		= "ICSS IEP timer",
+	.max_adj	= 10000000,
+	.adjfine	= icss_iep_ptp_adjfine,
+	.adjtime	= icss_iep_ptp_adjtime,
+	.gettimex64	= icss_iep_ptp_gettimeex,
+	.settime64	= icss_iep_ptp_settime,
+	.enable		= icss_iep_ptp_enable,
+};
+
+struct icss_iep *icss_iep_get_idx(struct device_node *np, int idx)
+{
+	struct platform_device *pdev;
+	struct device_node *iep_np;
+	struct icss_iep *iep;
+
+	iep_np = of_parse_phandle(np, "ti,iep", idx);
+	if (!iep_np || !of_device_is_available(iep_np))
+		return ERR_PTR(-ENODEV);
+
+	pdev = of_find_device_by_node(iep_np);
+	of_node_put(iep_np);
+
+	if (!pdev)
+		/* probably IEP not yet probed */
+		return ERR_PTR(-EPROBE_DEFER);
+
+	iep = platform_get_drvdata(pdev);
+	if (!iep)
+		return ERR_PTR(-EPROBE_DEFER);
+
+	device_lock(iep->dev);
+	if (iep->client_np) {
+		device_unlock(iep->dev);
+		dev_err(iep->dev, "IEP is already acquired by %s",
+			iep->client_np->name);
+		return ERR_PTR(-EBUSY);
+	}
+	iep->client_np = np;
+	device_unlock(iep->dev);
+	get_device(iep->dev);
+
+	return iep;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 EXPORT_SYMBOL_GPL(icss_iep_get_idx);
 

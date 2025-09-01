@@ -402,6 +402,7 @@ static int dwc3_mode_show(struct seq_file *s, void *unused)
 	struct dwc3		*dwc = s->private;
 	unsigned long		flags;
 	u32			reg;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32			mode;
 	int			ret;
 
@@ -422,6 +423,31 @@ static int dwc3_mode_show(struct seq_file *s, void *unused)
 		break;
 	default:
 		seq_printf(s, "UNKNOWN %08x\n", mode);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int			ret;
+
+	ret = pm_runtime_resume_and_get(dwc->dev);
+	if (ret < 0)
+		return ret;
+
+	spin_lock_irqsave(&dwc->lock, flags);
+	reg = dwc3_readl(dwc->regs, DWC3_GCTL);
+	spin_unlock_irqrestore(&dwc->lock, flags);
+
+	switch (DWC3_GCTL_PRTCAP(reg)) {
+	case DWC3_GCTL_PRTCAP_HOST:
+		seq_puts(s, "host\n");
+		break;
+	case DWC3_GCTL_PRTCAP_DEVICE:
+		seq_puts(s, "device\n");
+		break;
+	case DWC3_GCTL_PRTCAP_OTG:
+		seq_puts(s, "otg\n");
+		break;
+	default:
+		seq_printf(s, "UNKNOWN %08x\n", DWC3_GCTL_PRTCAP(reg));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	pm_runtime_put_sync(dwc->dev);

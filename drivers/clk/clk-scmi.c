@@ -404,6 +404,7 @@ static int scmi_clocks_probe(struct scmi_device *sdev)
 	const struct scmi_handle *handle = sdev->handle;
 	struct scmi_protocol_handle *ph;
 	const struct clk_ops *scmi_clk_ops_db[SCMI_MAX_CLK_OPS] = {};
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct scmi_clk *sclks;
 
 	if (!handle)
@@ -488,6 +489,91 @@ static int scmi_clocks_probe(struct scmi_device *sdev)
 			dev_dbg(dev, "Registered clock:%s%s\n",
 				sclk->info->name,
 				scmi_ops->enable ? " (atomic ops)" : "");
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (!handle)
+		return -ENODEV;
+
+	scmi_proto_clk_ops =
+		handle->devm_protocol_get(sdev, SCMI_PROTOCOL_CLOCK, &ph);
+	if (IS_ERR(scmi_proto_clk_ops))
+		return PTR_ERR(scmi_proto_clk_ops);
+
+	count = scmi_proto_clk_ops->count_get(ph);
+	if (count < 0) {
+		dev_err(dev, "%pOFn: invalid clock output count\n", np);
+		return -EINVAL;
+	}
+
+	clk_data = devm_kzalloc(dev, struct_size(clk_data, hws, count),
+				GFP_KERNEL);
+	if (!clk_data)
+		return -ENOMEM;
+
+	clk_data->num = count;
+	hws = clk_data->hws;
+
+	transport_is_atomic = handle->is_transport_atomic(handle,
+							  &atomic_threshold_us);
+
+	for (idx = 0; idx < count; idx++) {
+		struct scmi_clk *sclk;
+		const struct clk_ops *scmi_ops;
+
+		sclk = devm_kzalloc(dev, sizeof(*sclk), GFP_KERNEL);
+		if (!sclk)
+			return -ENOMEM;
+
+		sclk->info = scmi_proto_clk_ops->info_get(ph, idx);
+		if (!sclk->info) {
+			dev_dbg(dev, "invalid clock info for idx %d\n", idx);
+			devm_kfree(dev, sclk);
+			continue;
+		}
+
+		sclk->id = idx;
+		sclk->ph = ph;
+		sclk->dev = dev;
+
+		/*
+		 * Note that the scmi_clk_ops_db is on the stack, not global,
+		 * because it cannot be shared between mulitple probe-sequences
+		 * to avoid sharing the devm_ allocated clk_ops between multiple
+		 * SCMI clk driver instances.
+		 */
+		scmi_ops = scmi_clk_ops_select(sclk, transport_is_atomic,
+					       atomic_threshold_us,
+					       scmi_clk_ops_db,
+					       ARRAY_SIZE(scmi_clk_ops_db));
+		if (!scmi_ops)
+			return -ENOMEM;
+
+		/* Initialize clock parent data. */
+		if (sclk->info->num_parents > 0) {
+			sclk->parent_data = devm_kcalloc(dev, sclk->info->num_parents,
+							 sizeof(*sclk->parent_data), GFP_KERNEL);
+			if (!sclk->parent_data)
+				return -ENOMEM;
+
+			for (int i = 0; i < sclk->info->num_parents; i++) {
+				sclk->parent_data[i].index = sclk->info->parents[i];
+				sclk->parent_data[i].hw = hws[sclk->info->parents[i]];
+			}
+		}
+
+		err = scmi_clk_ops_init(dev, sclk, scmi_ops);
+		if (err) {
+			dev_err(dev, "failed to register clock %d\n", idx);
+			devm_kfree(dev, sclk->parent_data);
+			devm_kfree(dev, sclk);
+			hws[idx] = NULL;
+		} else {
+			dev_dbg(dev, "Registered clock:%s%s\n",
+				sclk->info->name,
+				scmi_ops->enable ? " (atomic ops)" : "");
+			hws[idx] = &sclk->hw;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 	}
 

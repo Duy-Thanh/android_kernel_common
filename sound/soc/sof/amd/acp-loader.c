@@ -65,6 +65,7 @@ int acp_dsp_block_write(struct snd_sof_dev *sdev, enum snd_sof_fw_blk_type blk_t
 			dma_size = page_count * ACP_PAGE_SIZE;
 			adata->bin_buf = dma_alloc_coherent(&pci->dev, dma_size,
 							    &adata->sha_dma_addr,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 							    GFP_KERNEL);
 			if (!adata->bin_buf)
 				return -ENOMEM;
@@ -91,6 +92,35 @@ int acp_dsp_block_write(struct snd_sof_dev *sdev, enum snd_sof_fw_blk_type blk_t
 								  ACP_DEFAULT_SRAM_LENGTH,
 								  &adata->sram_dma_addr,
 								  GFP_KERNEL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+							    GFP_ATOMIC);
+			if (!adata->bin_buf)
+				return -ENOMEM;
+		}
+		adata->fw_bin_size = size + offset;
+		dest = adata->bin_buf + offset;
+		break;
+	case SOF_FW_BLK_TYPE_DRAM:
+		if (!adata->data_buf) {
+			adata->data_buf = dma_alloc_coherent(&pci->dev,
+							     ACP_DEFAULT_DRAM_LENGTH,
+							     &adata->dma_addr,
+							     GFP_ATOMIC);
+			if (!adata->data_buf)
+				return -ENOMEM;
+		}
+		dest = adata->data_buf + offset;
+		adata->fw_data_bin_size = size + offset;
+		adata->is_dram_in_use = true;
+		break;
+	case SOF_FW_BLK_TYPE_SRAM:
+		if (!adata->sram_data_buf) {
+			adata->sram_data_buf = dma_alloc_coherent(&pci->dev,
+								  ACP_DEFAULT_SRAM_LENGTH,
+								  &adata->sram_dma_addr,
+								  GFP_ATOMIC);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			if (!adata->sram_data_buf)
 				return -ENOMEM;
 		}

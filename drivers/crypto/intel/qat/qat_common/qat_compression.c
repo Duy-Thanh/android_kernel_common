@@ -197,6 +197,7 @@ static int qat_compression_alloc_dc_data(struct adf_accel_dev *accel_dev)
 	struct adf_dc_data *dc_data = NULL;
 	u8 *obuff = NULL;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	dc_data = kzalloc_node(sizeof(*dc_data), GFP_KERNEL, dev_to_node(dev));
 	if (!dc_data)
 		goto err;
@@ -236,6 +237,48 @@ static void qat_free_dc_data(struct adf_accel_dev *accel_dev)
 			 DMA_BIDIRECTIONAL);
 	kfree_sensitive(dc_data->ovf_buff);
 	kfree(dc_data);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	dc_data = devm_kzalloc(dev, sizeof(*dc_data), GFP_KERNEL);
+	if (!dc_data)
+		goto err;
+
+	obuff = kzalloc_node(ovf_buff_sz, GFP_KERNEL, dev_to_node(dev));
+	if (!obuff)
+		goto err;
+
+	obuff_p = dma_map_single(dev, obuff, ovf_buff_sz, DMA_FROM_DEVICE);
+	if (unlikely(dma_mapping_error(dev, obuff_p)))
+		goto err;
+
+	dc_data->ovf_buff = obuff;
+	dc_data->ovf_buff_p = obuff_p;
+	dc_data->ovf_buff_sz = ovf_buff_sz;
+
+	accel_dev->dc_data = dc_data;
+
+	return 0;
+
+err:
+	accel_dev->dc_data = NULL;
+	kfree(obuff);
+	devm_kfree(dev, dc_data);
+	return -ENOMEM;
+}
+
+static void qat_free_dc_data(struct adf_accel_dev *accel_dev)
+{
+	struct adf_dc_data *dc_data = accel_dev->dc_data;
+	struct device *dev = &GET_DEV(accel_dev);
+
+	if (!dc_data)
+		return;
+
+	dma_unmap_single(dev, dc_data->ovf_buff_p, dc_data->ovf_buff_sz,
+			 DMA_FROM_DEVICE);
+	kfree_sensitive(dc_data->ovf_buff);
+	devm_kfree(dev, dc_data);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	accel_dev->dc_data = NULL;
 }
 

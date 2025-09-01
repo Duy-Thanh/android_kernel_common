@@ -241,6 +241,7 @@ int erofs_map_dev(struct super_block *sb, struct erofs_map_dev *map)
 
 /*
  * bit 30: I/O error occurred on this folio
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * bit 29: CPU has dirty data in D-cache (needs aliasing handling);
  * bit 0 - 29: remaining parts to complete this folio
  */
@@ -395,6 +396,152 @@ static void erofs_readahead(struct readahead_control *rac)
 	trace_erofs_readahead(rac->mapping->host, readahead_index(rac),
 					readahead_count(rac), true);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * bit 0 - 29: remaining parts to complete this folio
+ */
+#define EROFS_ONLINEFOLIO_EIO			(1 << 30)
+
+void erofs_onlinefolio_init(struct folio *folio)
+{
+	union {
+		atomic_t o;
+		void *v;
+	} u = { .o = ATOMIC_INIT(1) };
+
+	folio->private = u.v;	/* valid only if file-backed folio is locked */
+}
+
+void erofs_onlinefolio_split(struct folio *folio)
+{
+	atomic_inc((atomic_t *)&folio->private);
+}
+
+void erofs_onlinefolio_end(struct folio *folio, int err)
+{
+	int orig, v;
+
+	do {
+		orig = atomic_read((atomic_t *)&folio->private);
+		v = (orig - 1) | (err ? EROFS_ONLINEFOLIO_EIO : 0);
+	} while (atomic_cmpxchg((atomic_t *)&folio->private, orig, v) != orig);
+
+	if (v & ~EROFS_ONLINEFOLIO_EIO)
+		return;
+	folio->private = 0;
+	folio_end_read(folio, !(v & EROFS_ONLINEFOLIO_EIO));
+}
+
+static int erofs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+		unsigned int flags, struct iomap *iomap, struct iomap *srcmap)
+{
+	int ret;
+	struct super_block *sb = inode->i_sb;
+	struct erofs_map_blocks map;
+	struct erofs_map_dev mdev;
+
+	map.m_la = offset;
+	map.m_llen = length;
+
+	ret = erofs_map_blocks(inode, &map);
+	if (ret < 0)
+		return ret;
+
+	mdev = (struct erofs_map_dev) {
+		.m_deviceid = map.m_deviceid,
+		.m_pa = map.m_pa,
+	};
+	ret = erofs_map_dev(sb, &mdev);
+	if (ret)
+		return ret;
+
+	iomap->offset = map.m_la;
+	if (flags & IOMAP_DAX)
+		iomap->dax_dev = mdev.m_dif->dax_dev;
+	else
+		iomap->bdev = mdev.m_bdev;
+	iomap->length = map.m_llen;
+	iomap->flags = 0;
+	iomap->private = NULL;
+
+	if (!(map.m_flags & EROFS_MAP_MAPPED)) {
+		iomap->type = IOMAP_HOLE;
+		iomap->addr = IOMAP_NULL_ADDR;
+		if (!iomap->length)
+			iomap->length = length;
+		return 0;
+	}
+
+	if (map.m_flags & EROFS_MAP_META) {
+		void *ptr;
+		struct erofs_buf buf = __EROFS_BUF_INITIALIZER;
+
+		iomap->type = IOMAP_INLINE;
+		ptr = erofs_read_metabuf(&buf, sb, mdev.m_pa, EROFS_KMAP);
+		if (IS_ERR(ptr))
+			return PTR_ERR(ptr);
+		iomap->inline_data = ptr;
+		iomap->private = buf.base;
+	} else {
+		iomap->type = IOMAP_MAPPED;
+		iomap->addr = mdev.m_dif->fsoff + mdev.m_pa;
+		if (flags & IOMAP_DAX)
+			iomap->addr += mdev.m_dif->dax_part_off;
+	}
+	return 0;
+}
+
+static int erofs_iomap_end(struct inode *inode, loff_t pos, loff_t length,
+		ssize_t written, unsigned int flags, struct iomap *iomap)
+{
+	void *ptr = iomap->private;
+
+	if (ptr) {
+		struct erofs_buf buf = {
+			.page = kmap_to_page(ptr),
+			.base = ptr,
+			.kmap_type = EROFS_KMAP,
+		};
+
+		DBG_BUGON(iomap->type != IOMAP_INLINE);
+		erofs_put_metabuf(&buf);
+	} else {
+		DBG_BUGON(iomap->type == IOMAP_INLINE);
+	}
+	return written;
+}
+
+static const struct iomap_ops erofs_iomap_ops = {
+	.iomap_begin = erofs_iomap_begin,
+	.iomap_end = erofs_iomap_end,
+};
+
+int erofs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+		 u64 start, u64 len)
+{
+	if (erofs_inode_is_data_compressed(EROFS_I(inode)->datalayout)) {
+#ifdef CONFIG_EROFS_FS_ZIP
+		return iomap_fiemap(inode, fieinfo, start, len,
+				    &z_erofs_iomap_report_ops);
+#else
+		return -EOPNOTSUPP;
+#endif
+	}
+	return iomap_fiemap(inode, fieinfo, start, len, &erofs_iomap_ops);
+}
+
+/*
+ * since we dont have write or truncate flows, so no inode
+ * locking needs to be held at the moment.
+ */
+static int erofs_read_folio(struct file *file, struct folio *folio)
+{
+	return iomap_read_folio(folio, &erofs_iomap_ops);
+}
+
+static void erofs_readahead(struct readahead_control *rac)
+{
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return iomap_readahead(rac, &erofs_iomap_ops);
 }
 

@@ -58,6 +58,7 @@ struct aspeed_lpc_snoop_model_data {
 };
 
 struct aspeed_lpc_snoop_channel {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool enabled;
 	struct kfifo		fifo;
 	wait_queue_head_t	wq;
@@ -276,6 +277,216 @@ static void aspeed_lpc_disable_snoop(struct aspeed_lpc_snoop *lpc_snoop,
 	/* Consider improving safety wrt concurrent reader(s) */
 	misc_deregister(&lpc_snoop->chan[channel].miscdev);
 	kfifo_free(&lpc_snoop->chan[channel].fifo);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct kfifo		fifo;
+	wait_queue_head_t	wq;
+	struct miscdevice	miscdev;
+};
+
+struct aspeed_lpc_snoop {
+	struct regmap		*regmap;
+	int			irq;
+	struct clk		*clk;
+	struct aspeed_lpc_snoop_channel chan[NUM_SNOOP_CHANNELS];
+};
+
+static struct aspeed_lpc_snoop_channel *snoop_file_to_chan(struct file *file)
+{
+	return container_of(file->private_data,
+			    struct aspeed_lpc_snoop_channel,
+			    miscdev);
+}
+
+static ssize_t snoop_file_read(struct file *file, char __user *buffer,
+				size_t count, loff_t *ppos)
+{
+	struct aspeed_lpc_snoop_channel *chan = snoop_file_to_chan(file);
+	unsigned int copied;
+	int ret = 0;
+
+	if (kfifo_is_empty(&chan->fifo)) {
+		if (file->f_flags & O_NONBLOCK)
+			return -EAGAIN;
+		ret = wait_event_interruptible(chan->wq,
+				!kfifo_is_empty(&chan->fifo));
+		if (ret == -ERESTARTSYS)
+			return -EINTR;
+	}
+	ret = kfifo_to_user(&chan->fifo, buffer, count, &copied);
+	if (ret)
+		return ret;
+
+	return copied;
+}
+
+static __poll_t snoop_file_poll(struct file *file,
+				    struct poll_table_struct *pt)
+{
+	struct aspeed_lpc_snoop_channel *chan = snoop_file_to_chan(file);
+
+	poll_wait(file, &chan->wq, pt);
+	return !kfifo_is_empty(&chan->fifo) ? EPOLLIN : 0;
+}
+
+static const struct file_operations snoop_fops = {
+	.owner  = THIS_MODULE,
+	.read   = snoop_file_read,
+	.poll   = snoop_file_poll,
+	.llseek = noop_llseek,
+};
+
+/* Save a byte to a FIFO and discard the oldest byte if FIFO is full */
+static void put_fifo_with_discard(struct aspeed_lpc_snoop_channel *chan, u8 val)
+{
+	if (!kfifo_initialized(&chan->fifo))
+		return;
+	if (kfifo_is_full(&chan->fifo))
+		kfifo_skip(&chan->fifo);
+	kfifo_put(&chan->fifo, val);
+	wake_up_interruptible(&chan->wq);
+}
+
+static irqreturn_t aspeed_lpc_snoop_irq(int irq, void *arg)
+{
+	struct aspeed_lpc_snoop *lpc_snoop = arg;
+	u32 reg, data;
+
+	if (regmap_read(lpc_snoop->regmap, HICR6, &reg))
+		return IRQ_NONE;
+
+	/* Check if one of the snoop channels is interrupting */
+	reg &= (HICR6_STR_SNP0W | HICR6_STR_SNP1W);
+	if (!reg)
+		return IRQ_NONE;
+
+	/* Ack pending IRQs */
+	regmap_write(lpc_snoop->regmap, HICR6, reg);
+
+	/* Read and save most recent snoop'ed data byte to FIFO */
+	regmap_read(lpc_snoop->regmap, SNPWDR, &data);
+
+	if (reg & HICR6_STR_SNP0W) {
+		u8 val = (data & SNPWDR_CH0_MASK) >> SNPWDR_CH0_SHIFT;
+
+		put_fifo_with_discard(&lpc_snoop->chan[0], val);
+	}
+	if (reg & HICR6_STR_SNP1W) {
+		u8 val = (data & SNPWDR_CH1_MASK) >> SNPWDR_CH1_SHIFT;
+
+		put_fifo_with_discard(&lpc_snoop->chan[1], val);
+	}
+
+	return IRQ_HANDLED;
+}
+
+static int aspeed_lpc_snoop_config_irq(struct aspeed_lpc_snoop *lpc_snoop,
+				       struct platform_device *pdev)
+{
+	struct device *dev = &pdev->dev;
+	int rc;
+
+	lpc_snoop->irq = platform_get_irq(pdev, 0);
+	if (lpc_snoop->irq < 0)
+		return -ENODEV;
+
+	rc = devm_request_irq(dev, lpc_snoop->irq,
+			      aspeed_lpc_snoop_irq, IRQF_SHARED,
+			      DEVICE_NAME, lpc_snoop);
+	if (rc < 0) {
+		dev_warn(dev, "Unable to request IRQ %d\n", lpc_snoop->irq);
+		lpc_snoop->irq = 0;
+		return rc;
+	}
+
+	return 0;
+}
+
+static int aspeed_lpc_enable_snoop(struct aspeed_lpc_snoop *lpc_snoop,
+				   struct device *dev,
+				   int channel, u16 lpc_port)
+{
+	int rc = 0;
+	u32 hicr5_en, snpwadr_mask, snpwadr_shift, hicrb_en;
+	const struct aspeed_lpc_snoop_model_data *model_data =
+		of_device_get_match_data(dev);
+
+	init_waitqueue_head(&lpc_snoop->chan[channel].wq);
+	/* Create FIFO datastructure */
+	rc = kfifo_alloc(&lpc_snoop->chan[channel].fifo,
+			 SNOOP_FIFO_SIZE, GFP_KERNEL);
+	if (rc)
+		return rc;
+
+	lpc_snoop->chan[channel].miscdev.minor = MISC_DYNAMIC_MINOR;
+	lpc_snoop->chan[channel].miscdev.name =
+		devm_kasprintf(dev, GFP_KERNEL, "%s%d", DEVICE_NAME, channel);
+	if (!lpc_snoop->chan[channel].miscdev.name) {
+		rc = -ENOMEM;
+		goto err_free_fifo;
+	}
+	lpc_snoop->chan[channel].miscdev.fops = &snoop_fops;
+	lpc_snoop->chan[channel].miscdev.parent = dev;
+	rc = misc_register(&lpc_snoop->chan[channel].miscdev);
+	if (rc)
+		goto err_free_fifo;
+
+	/* Enable LPC snoop channel at requested port */
+	switch (channel) {
+	case 0:
+		hicr5_en = HICR5_EN_SNP0W | HICR5_ENINT_SNP0W;
+		snpwadr_mask = SNPWADR_CH0_MASK;
+		snpwadr_shift = SNPWADR_CH0_SHIFT;
+		hicrb_en = HICRB_ENSNP0D;
+		break;
+	case 1:
+		hicr5_en = HICR5_EN_SNP1W | HICR5_ENINT_SNP1W;
+		snpwadr_mask = SNPWADR_CH1_MASK;
+		snpwadr_shift = SNPWADR_CH1_SHIFT;
+		hicrb_en = HICRB_ENSNP1D;
+		break;
+	default:
+		rc = -EINVAL;
+		goto err_misc_deregister;
+	}
+
+	regmap_update_bits(lpc_snoop->regmap, HICR5, hicr5_en, hicr5_en);
+	regmap_update_bits(lpc_snoop->regmap, SNPWADR, snpwadr_mask,
+			   lpc_port << snpwadr_shift);
+	if (model_data->has_hicrb_ensnp)
+		regmap_update_bits(lpc_snoop->regmap, HICRB,
+				hicrb_en, hicrb_en);
+
+	return 0;
+
+err_misc_deregister:
+	misc_deregister(&lpc_snoop->chan[channel].miscdev);
+err_free_fifo:
+	kfifo_free(&lpc_snoop->chan[channel].fifo);
+	return rc;
+}
+
+static void aspeed_lpc_disable_snoop(struct aspeed_lpc_snoop *lpc_snoop,
+				     int channel)
+{
+	switch (channel) {
+	case 0:
+		regmap_update_bits(lpc_snoop->regmap, HICR5,
+				   HICR5_EN_SNP0W | HICR5_ENINT_SNP0W,
+				   0);
+		break;
+	case 1:
+		regmap_update_bits(lpc_snoop->regmap, HICR5,
+				   HICR5_EN_SNP1W | HICR5_ENINT_SNP1W,
+				   0);
+		break;
+	default:
+		return;
+	}
+
+	kfifo_free(&lpc_snoop->chan[channel].fifo);
+	misc_deregister(&lpc_snoop->chan[channel].miscdev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static int aspeed_lpc_snoop_probe(struct platform_device *pdev)

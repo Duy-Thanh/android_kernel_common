@@ -970,6 +970,7 @@ int af_alg_sendmsg(struct socket *sock, struct msghdr *msg, size_t size,
 	}
 
 	lock_sock(sk);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (ctx->write) {
 		release_sock(sk);
 		return -EBUSY;
@@ -1112,6 +1113,143 @@ int af_alg_sendmsg(struct socket *sock, struct msghdr *msg, size_t size,
 unlock:
 	af_alg_data_wakeup(sk);
 	ctx->write = false;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (ctx->init && !ctx->more) {
+		if (ctx->used) {
+			err = -EINVAL;
+			goto unlock;
+		}
+
+		pr_info_once(
+			"%s sent an empty control message without MSG_MORE.\n",
+			current->comm);
+	}
+	ctx->init = true;
+
+	if (init) {
+		ctx->enc = enc;
+		if (con.iv)
+			memcpy(ctx->iv, con.iv->iv, ivsize);
+
+		ctx->aead_assoclen = con.aead_assoclen;
+	}
+
+	while (size) {
+		struct scatterlist *sg;
+		size_t len = size;
+		ssize_t plen;
+
+		/* use the existing memory in an allocated page */
+		if (ctx->merge && !(msg->msg_flags & MSG_SPLICE_PAGES)) {
+			sgl = list_entry(ctx->tsgl_list.prev,
+					 struct af_alg_tsgl, list);
+			sg = sgl->sg + sgl->cur - 1;
+			len = min_t(size_t, len,
+				    PAGE_SIZE - sg->offset - sg->length);
+
+			err = memcpy_from_msg(page_address(sg_page(sg)) +
+					      sg->offset + sg->length,
+					      msg, len);
+			if (err)
+				goto unlock;
+
+			sg->length += len;
+			ctx->merge = (sg->offset + sg->length) &
+				     (PAGE_SIZE - 1);
+
+			ctx->used += len;
+			copied += len;
+			size -= len;
+			continue;
+		}
+
+		if (!af_alg_writable(sk)) {
+			err = af_alg_wait_for_wmem(sk, msg->msg_flags);
+			if (err)
+				goto unlock;
+		}
+
+		/* allocate a new page */
+		len = min_t(unsigned long, len, af_alg_sndbuf(sk));
+
+		err = af_alg_alloc_tsgl(sk);
+		if (err)
+			goto unlock;
+
+		sgl = list_entry(ctx->tsgl_list.prev, struct af_alg_tsgl,
+				 list);
+		sg = sgl->sg;
+		if (sgl->cur)
+			sg_unmark_end(sg + sgl->cur - 1);
+
+		if (msg->msg_flags & MSG_SPLICE_PAGES) {
+			struct sg_table sgtable = {
+				.sgl		= sg,
+				.nents		= sgl->cur,
+				.orig_nents	= sgl->cur,
+			};
+
+			plen = extract_iter_to_sg(&msg->msg_iter, len, &sgtable,
+						  MAX_SGL_ENTS - sgl->cur, 0);
+			if (plen < 0) {
+				err = plen;
+				goto unlock;
+			}
+
+			for (; sgl->cur < sgtable.nents; sgl->cur++)
+				get_page(sg_page(&sg[sgl->cur]));
+			len -= plen;
+			ctx->used += plen;
+			copied += plen;
+			size -= plen;
+			ctx->merge = 0;
+		} else {
+			do {
+				struct page *pg;
+				unsigned int i = sgl->cur;
+
+				plen = min_t(size_t, len, PAGE_SIZE);
+
+				pg = alloc_page(GFP_KERNEL);
+				if (!pg) {
+					err = -ENOMEM;
+					goto unlock;
+				}
+
+				sg_assign_page(sg + i, pg);
+
+				err = memcpy_from_msg(
+					page_address(sg_page(sg + i)),
+					msg, plen);
+				if (err) {
+					__free_page(sg_page(sg + i));
+					sg_assign_page(sg + i, NULL);
+					goto unlock;
+				}
+
+				sg[i].length = plen;
+				len -= plen;
+				ctx->used += plen;
+				copied += plen;
+				size -= plen;
+				sgl->cur++;
+			} while (len && sgl->cur < MAX_SGL_ENTS);
+
+			ctx->merge = plen & (PAGE_SIZE - 1);
+		}
+
+		if (!size)
+			sg_mark_end(sg + sgl->cur - 1);
+	}
+
+	err = 0;
+
+	ctx->more = msg->msg_flags & MSG_MORE;
+
+unlock:
+	af_alg_data_wakeup(sk);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	release_sock(sk);
 
 	return copied ?: err;

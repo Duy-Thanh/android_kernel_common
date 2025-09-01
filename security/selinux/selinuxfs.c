@@ -1875,6 +1875,7 @@ out:
 	return rc;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int sel_make_memfd_policycap(struct selinux_fs_info *fsi)
 {
 	struct dentry *dentry;
@@ -1926,6 +1927,37 @@ static int sel_make_policycap(struct selinux_fs_info *fsi)
 
 	/* ANDROID: Handle the memfd_class policycap separately to preserve the KMI. */
 	return sel_make_memfd_policycap(fsi);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int sel_make_policycap(struct selinux_fs_info *fsi)
+{
+	unsigned int iter;
+	struct dentry *dentry = NULL;
+	struct inode *inode = NULL;
+
+	for (iter = 0; iter <= POLICYDB_CAP_MAX; iter++) {
+		if (iter < ARRAY_SIZE(selinux_policycap_names))
+			dentry = d_alloc_name(fsi->policycap_dir,
+					      selinux_policycap_names[iter]);
+		else
+			dentry = d_alloc_name(fsi->policycap_dir, "unknown");
+
+		if (dentry == NULL)
+			return -ENOMEM;
+
+		inode = sel_make_inode(fsi->sb, S_IFREG | 0444);
+		if (inode == NULL) {
+			dput(dentry);
+			return -ENOMEM;
+		}
+
+		inode->i_fop = &sel_policycap_ops;
+		inode->i_ino = iter | SEL_POLICYCAP_INO_OFFSET;
+		d_add(dentry, inode);
+	}
+
+	return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static struct dentry *sel_make_dir(struct dentry *dir, const char *name,

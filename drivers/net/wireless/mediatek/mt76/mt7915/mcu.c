@@ -2071,6 +2071,7 @@ static int mt7915_load_firmware(struct mt7915_dev *dev)
 {
 	int ret;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* Release Semaphore if taken by previous failed attempt */
 	ret = mt76_connac_mcu_patch_sem_ctrl(&dev->mt76, false);
 	if (ret != PATCH_REL_SEM_SUCCESS) {
@@ -2086,6 +2087,19 @@ static int mt7915_load_firmware(struct mt7915_dev *dev)
 	if (ret) {
 		dev_err(dev->mt76.dev, "Firmware did not enter download state\n");
 		return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* make sure fw is download state */
+	if (mt7915_firmware_state(dev, false)) {
+		/* restart firmware once */
+		mt76_connac_mcu_restart(&dev->mt76);
+		ret = mt7915_firmware_state(dev, false);
+		if (ret) {
+			dev_err(dev->mt76.dev,
+				"Firmware is not ready for download\n");
+			return ret;
+		}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	ret = mt76_connac2_load_patch(&dev->mt76, fw_name_var(dev, ROM_PATCH));

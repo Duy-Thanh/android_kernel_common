@@ -3096,7 +3096,16 @@ static void hclgevf_uninit_ae_dev(struct hnae3_ae_dev *ae_dev)
 
 static u32 hclgevf_get_max_channels(struct hclgevf_dev *hdev)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	return min(hdev->rss_size_max, hdev->num_tqps);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct hnae3_handle *nic = &hdev->nic;
+	struct hnae3_knic_private_info *kinfo = &nic->kinfo;
+
+	return min_t(u32, hdev->rss_size_max,
+		     hdev->num_tqps / kinfo->tc_info.num_tc);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /**

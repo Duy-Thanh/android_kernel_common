@@ -59,8 +59,16 @@ struct fbnic_queue_stats {
 	struct u64_stats_sync syncp;
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define FBNIC_PAGECNT_BIAS_MAX	PAGE_SIZE
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/* Pagecnt bias is long max to reserve the last bit to catch overflow
+ * cases where if we overcharge the bias it will flip over to be negative.
+ */
+#define PAGECNT_BIAS_MAX	LONG_MAX
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 struct fbnic_rx_buf {
 	struct page *page;
 	long pagecnt_bias;

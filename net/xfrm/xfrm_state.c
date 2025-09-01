@@ -773,6 +773,7 @@ int __xfrm_state_delete(struct xfrm_state *x)
 		xfrm_nat_keepalive_state_updated(x);
 		spin_unlock(&net->xfrm.xfrm_state_lock);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		xfrm_dev_state_delete(x);
 
 		/* All xfrm_state objects are created by xfrm_state_alloc.
@@ -1424,6 +1425,670 @@ cached:
 		    (tmpl->id.spi == x->id.spi || !tmpl->id.spi))
 			xfrm_state_look_at(pol, x, fl, family,
 					   &best, &acquire_in_progress, &error, pcpu_id);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (x->encap_sk)
+			sock_put(rcu_dereference_raw(x->encap_sk));
+
+		xfrm_dev_state_delete(x);
+
+		/* All xfrm_state objects are created by xfrm_state_alloc.
+		 * The xfrm_state_alloc call gives a reference, and that
+		 * is what we are dropping here.
+		 */
+		xfrm_state_put(x);
+		err = 0;
+	}
+
+	return err;
+}
+EXPORT_SYMBOL(__xfrm_state_delete);
+
+int xfrm_state_delete(struct xfrm_state *x)
+{
+	int err;
+
+	spin_lock_bh(&x->lock);
+	err = __xfrm_state_delete(x);
+	spin_unlock_bh(&x->lock);
+
+	return err;
+}
+EXPORT_SYMBOL(xfrm_state_delete);
+
+#ifdef CONFIG_SECURITY_NETWORK_XFRM
+static inline int
+xfrm_state_flush_secctx_check(struct net *net, u8 proto, bool task_valid)
+{
+	int i, err = 0;
+
+	for (i = 0; i <= net->xfrm.state_hmask; i++) {
+		struct xfrm_state *x;
+
+		hlist_for_each_entry(x, net->xfrm.state_bydst+i, bydst) {
+			if (xfrm_id_proto_match(x->id.proto, proto) &&
+			   (err = security_xfrm_state_delete(x)) != 0) {
+				xfrm_audit_state_delete(x, 0, task_valid);
+				return err;
+			}
+		}
+	}
+
+	return err;
+}
+
+static inline int
+xfrm_dev_state_flush_secctx_check(struct net *net, struct net_device *dev, bool task_valid)
+{
+	int i, err = 0;
+
+	for (i = 0; i <= net->xfrm.state_hmask; i++) {
+		struct xfrm_state *x;
+		struct xfrm_dev_offload *xso;
+
+		hlist_for_each_entry(x, net->xfrm.state_bydst+i, bydst) {
+			xso = &x->xso;
+
+			if (xso->dev == dev &&
+			   (err = security_xfrm_state_delete(x)) != 0) {
+				xfrm_audit_state_delete(x, 0, task_valid);
+				return err;
+			}
+		}
+	}
+
+	return err;
+}
+#else
+static inline int
+xfrm_state_flush_secctx_check(struct net *net, u8 proto, bool task_valid)
+{
+	return 0;
+}
+
+static inline int
+xfrm_dev_state_flush_secctx_check(struct net *net, struct net_device *dev, bool task_valid)
+{
+	return 0;
+}
+#endif
+
+int xfrm_state_flush(struct net *net, u8 proto, bool task_valid, bool sync)
+{
+	int i, err = 0, cnt = 0;
+
+	spin_lock_bh(&net->xfrm.xfrm_state_lock);
+	err = xfrm_state_flush_secctx_check(net, proto, task_valid);
+	if (err)
+		goto out;
+
+	err = -ESRCH;
+	for (i = 0; i <= net->xfrm.state_hmask; i++) {
+		struct xfrm_state *x;
+restart:
+		hlist_for_each_entry(x, net->xfrm.state_bydst+i, bydst) {
+			if (!xfrm_state_kern(x) &&
+			    xfrm_id_proto_match(x->id.proto, proto)) {
+				xfrm_state_hold(x);
+				spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+
+				err = xfrm_state_delete(x);
+				xfrm_audit_state_delete(x, err ? 0 : 1,
+							task_valid);
+				if (sync)
+					xfrm_state_put_sync(x);
+				else
+					xfrm_state_put(x);
+				if (!err)
+					cnt++;
+
+				spin_lock_bh(&net->xfrm.xfrm_state_lock);
+				goto restart;
+			}
+		}
+	}
+out:
+	spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+	if (cnt)
+		err = 0;
+
+	return err;
+}
+EXPORT_SYMBOL(xfrm_state_flush);
+
+int xfrm_dev_state_flush(struct net *net, struct net_device *dev, bool task_valid)
+{
+	struct xfrm_state *x;
+	struct hlist_node *tmp;
+	struct xfrm_dev_offload *xso;
+	int i, err = 0, cnt = 0;
+
+	spin_lock_bh(&net->xfrm.xfrm_state_lock);
+	err = xfrm_dev_state_flush_secctx_check(net, dev, task_valid);
+	if (err)
+		goto out;
+
+	err = -ESRCH;
+	for (i = 0; i <= net->xfrm.state_hmask; i++) {
+restart:
+		hlist_for_each_entry(x, net->xfrm.state_bydst+i, bydst) {
+			xso = &x->xso;
+
+			if (!xfrm_state_kern(x) && xso->dev == dev) {
+				xfrm_state_hold(x);
+				spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+
+				err = xfrm_state_delete(x);
+				xfrm_dev_state_free(x);
+
+				xfrm_audit_state_delete(x, err ? 0 : 1,
+							task_valid);
+				xfrm_state_put(x);
+				if (!err)
+					cnt++;
+
+				spin_lock_bh(&net->xfrm.xfrm_state_lock);
+				goto restart;
+			}
+		}
+	}
+	if (cnt)
+		err = 0;
+
+out:
+	spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+
+	spin_lock_bh(&xfrm_state_dev_gc_lock);
+restart_gc:
+	hlist_for_each_entry_safe(x, tmp, &xfrm_state_dev_gc_list, dev_gclist) {
+		xso = &x->xso;
+
+		if (xso->dev == dev) {
+			spin_unlock_bh(&xfrm_state_dev_gc_lock);
+			xfrm_dev_state_free(x);
+			spin_lock_bh(&xfrm_state_dev_gc_lock);
+			goto restart_gc;
+		}
+
+	}
+	spin_unlock_bh(&xfrm_state_dev_gc_lock);
+
+	xfrm_flush_gc();
+
+	return err;
+}
+EXPORT_SYMBOL(xfrm_dev_state_flush);
+
+void xfrm_sad_getinfo(struct net *net, struct xfrmk_sadinfo *si)
+{
+	spin_lock_bh(&net->xfrm.xfrm_state_lock);
+	si->sadcnt = net->xfrm.state_num;
+	si->sadhcnt = net->xfrm.state_hmask + 1;
+	si->sadhmcnt = xfrm_state_hashmax;
+	spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+}
+EXPORT_SYMBOL(xfrm_sad_getinfo);
+
+static void
+__xfrm4_init_tempsel(struct xfrm_selector *sel, const struct flowi *fl)
+{
+	const struct flowi4 *fl4 = &fl->u.ip4;
+
+	sel->daddr.a4 = fl4->daddr;
+	sel->saddr.a4 = fl4->saddr;
+	sel->dport = xfrm_flowi_dport(fl, &fl4->uli);
+	sel->dport_mask = htons(0xffff);
+	sel->sport = xfrm_flowi_sport(fl, &fl4->uli);
+	sel->sport_mask = htons(0xffff);
+	sel->family = AF_INET;
+	sel->prefixlen_d = 32;
+	sel->prefixlen_s = 32;
+	sel->proto = fl4->flowi4_proto;
+	sel->ifindex = fl4->flowi4_oif;
+}
+
+static void
+__xfrm6_init_tempsel(struct xfrm_selector *sel, const struct flowi *fl)
+{
+	const struct flowi6 *fl6 = &fl->u.ip6;
+
+	/* Initialize temporary selector matching only to current session. */
+	*(struct in6_addr *)&sel->daddr = fl6->daddr;
+	*(struct in6_addr *)&sel->saddr = fl6->saddr;
+	sel->dport = xfrm_flowi_dport(fl, &fl6->uli);
+	sel->dport_mask = htons(0xffff);
+	sel->sport = xfrm_flowi_sport(fl, &fl6->uli);
+	sel->sport_mask = htons(0xffff);
+	sel->family = AF_INET6;
+	sel->prefixlen_d = 128;
+	sel->prefixlen_s = 128;
+	sel->proto = fl6->flowi6_proto;
+	sel->ifindex = fl6->flowi6_oif;
+}
+
+static void
+xfrm_init_tempstate(struct xfrm_state *x, const struct flowi *fl,
+		    const struct xfrm_tmpl *tmpl,
+		    const xfrm_address_t *daddr, const xfrm_address_t *saddr,
+		    unsigned short family)
+{
+	switch (family) {
+	case AF_INET:
+		__xfrm4_init_tempsel(&x->sel, fl);
+		break;
+	case AF_INET6:
+		__xfrm6_init_tempsel(&x->sel, fl);
+		break;
+	}
+
+	x->id = tmpl->id;
+
+	switch (tmpl->encap_family) {
+	case AF_INET:
+		if (x->id.daddr.a4 == 0)
+			x->id.daddr.a4 = daddr->a4;
+		x->props.saddr = tmpl->saddr;
+		if (x->props.saddr.a4 == 0)
+			x->props.saddr.a4 = saddr->a4;
+		break;
+	case AF_INET6:
+		if (ipv6_addr_any((struct in6_addr *)&x->id.daddr))
+			memcpy(&x->id.daddr, daddr, sizeof(x->sel.daddr));
+		memcpy(&x->props.saddr, &tmpl->saddr, sizeof(x->props.saddr));
+		if (ipv6_addr_any((struct in6_addr *)&x->props.saddr))
+			memcpy(&x->props.saddr, saddr, sizeof(x->props.saddr));
+		break;
+	}
+
+	x->props.mode = tmpl->mode;
+	x->props.reqid = tmpl->reqid;
+	x->props.family = tmpl->encap_family;
+}
+
+struct xfrm_hash_state_ptrs {
+	const struct hlist_head *bydst;
+	const struct hlist_head *bysrc;
+	const struct hlist_head *byspi;
+	unsigned int hmask;
+};
+
+static void xfrm_hash_ptrs_get(const struct net *net, struct xfrm_hash_state_ptrs *ptrs)
+{
+	unsigned int sequence;
+
+	do {
+		sequence = read_seqcount_begin(&net->xfrm.xfrm_state_hash_generation);
+
+		ptrs->bydst = xfrm_state_deref_check(net->xfrm.state_bydst, net);
+		ptrs->bysrc = xfrm_state_deref_check(net->xfrm.state_bysrc, net);
+		ptrs->byspi = xfrm_state_deref_check(net->xfrm.state_byspi, net);
+		ptrs->hmask = net->xfrm.state_hmask;
+	} while (read_seqcount_retry(&net->xfrm.xfrm_state_hash_generation, sequence));
+}
+
+static struct xfrm_state *__xfrm_state_lookup_all(const struct xfrm_hash_state_ptrs *state_ptrs,
+						  u32 mark,
+						  const xfrm_address_t *daddr,
+						  __be32 spi, u8 proto,
+						  unsigned short family,
+						  struct xfrm_dev_offload *xdo)
+{
+	unsigned int h = __xfrm_spi_hash(daddr, spi, proto, family, state_ptrs->hmask);
+	struct xfrm_state *x;
+
+	hlist_for_each_entry_rcu(x, state_ptrs->byspi + h, byspi) {
+#ifdef CONFIG_XFRM_OFFLOAD
+		if (xdo->type == XFRM_DEV_OFFLOAD_PACKET) {
+			if (x->xso.type != XFRM_DEV_OFFLOAD_PACKET)
+				/* HW states are in the head of list, there is
+				 * no need to iterate further.
+				 */
+				break;
+
+			/* Packet offload: both policy and SA should
+			 * have same device.
+			 */
+			if (xdo->dev != x->xso.dev)
+				continue;
+		} else if (x->xso.type == XFRM_DEV_OFFLOAD_PACKET)
+			/* Skip HW policy for SW lookups */
+			continue;
+#endif
+		if (x->props.family != family ||
+		    x->id.spi       != spi ||
+		    x->id.proto     != proto ||
+		    !xfrm_addr_equal(&x->id.daddr, daddr, family))
+			continue;
+
+		if ((mark & x->mark.m) != x->mark.v)
+			continue;
+		if (!xfrm_state_hold_rcu(x))
+			continue;
+		return x;
+	}
+
+	return NULL;
+}
+
+static struct xfrm_state *__xfrm_state_lookup(const struct xfrm_hash_state_ptrs *state_ptrs,
+					      u32 mark,
+					      const xfrm_address_t *daddr,
+					      __be32 spi, u8 proto,
+					      unsigned short family)
+{
+	unsigned int h = __xfrm_spi_hash(daddr, spi, proto, family, state_ptrs->hmask);
+	struct xfrm_state *x;
+
+	hlist_for_each_entry_rcu(x, state_ptrs->byspi + h, byspi) {
+		if (x->props.family != family ||
+		    x->id.spi       != spi ||
+		    x->id.proto     != proto ||
+		    !xfrm_addr_equal(&x->id.daddr, daddr, family))
+			continue;
+
+		if ((mark & x->mark.m) != x->mark.v)
+			continue;
+		if (!xfrm_state_hold_rcu(x))
+			continue;
+		return x;
+	}
+
+	return NULL;
+}
+
+struct xfrm_state *xfrm_input_state_lookup(struct net *net, u32 mark,
+					   const xfrm_address_t *daddr,
+					   __be32 spi, u8 proto,
+					   unsigned short family)
+{
+	struct xfrm_hash_state_ptrs state_ptrs;
+	struct hlist_head *state_cache_input;
+	struct xfrm_state *x = NULL;
+
+	state_cache_input = raw_cpu_ptr(net->xfrm.state_cache_input);
+
+	rcu_read_lock();
+	hlist_for_each_entry_rcu(x, state_cache_input, state_cache_input) {
+		if (x->props.family != family ||
+		    x->id.spi       != spi ||
+		    x->id.proto     != proto ||
+		    !xfrm_addr_equal(&x->id.daddr, daddr, family))
+			continue;
+
+		if ((mark & x->mark.m) != x->mark.v)
+			continue;
+		if (!xfrm_state_hold_rcu(x))
+			continue;
+		goto out;
+	}
+
+	xfrm_hash_ptrs_get(net, &state_ptrs);
+
+	x = __xfrm_state_lookup(&state_ptrs, mark, daddr, spi, proto, family);
+
+	if (x && x->km.state == XFRM_STATE_VALID) {
+		spin_lock_bh(&net->xfrm.xfrm_state_lock);
+		if (hlist_unhashed(&x->state_cache_input)) {
+			hlist_add_head_rcu(&x->state_cache_input, state_cache_input);
+		} else {
+			hlist_del_rcu(&x->state_cache_input);
+			hlist_add_head_rcu(&x->state_cache_input, state_cache_input);
+		}
+		spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+	}
+
+out:
+	rcu_read_unlock();
+	return x;
+}
+EXPORT_SYMBOL(xfrm_input_state_lookup);
+
+static struct xfrm_state *__xfrm_state_lookup_byaddr(const struct xfrm_hash_state_ptrs *state_ptrs,
+						     u32 mark,
+						     const xfrm_address_t *daddr,
+						     const xfrm_address_t *saddr,
+						     u8 proto, unsigned short family)
+{
+	unsigned int h = __xfrm_src_hash(daddr, saddr, family, state_ptrs->hmask);
+	struct xfrm_state *x;
+
+	hlist_for_each_entry_rcu(x, state_ptrs->bysrc + h, bysrc) {
+		if (x->props.family != family ||
+		    x->id.proto     != proto ||
+		    !xfrm_addr_equal(&x->id.daddr, daddr, family) ||
+		    !xfrm_addr_equal(&x->props.saddr, saddr, family))
+			continue;
+
+		if ((mark & x->mark.m) != x->mark.v)
+			continue;
+		if (!xfrm_state_hold_rcu(x))
+			continue;
+		return x;
+	}
+
+	return NULL;
+}
+
+static inline struct xfrm_state *
+__xfrm_state_locate(struct xfrm_state *x, int use_spi, int family)
+{
+	struct xfrm_hash_state_ptrs state_ptrs;
+	struct net *net = xs_net(x);
+	u32 mark = x->mark.v & x->mark.m;
+
+	xfrm_hash_ptrs_get(net, &state_ptrs);
+
+	if (use_spi)
+		return __xfrm_state_lookup(&state_ptrs, mark, &x->id.daddr,
+					   x->id.spi, x->id.proto, family);
+	else
+		return __xfrm_state_lookup_byaddr(&state_ptrs, mark,
+						  &x->id.daddr,
+						  &x->props.saddr,
+						  x->id.proto, family);
+}
+
+static void xfrm_hash_grow_check(struct net *net, int have_hash_collision)
+{
+	if (have_hash_collision &&
+	    (net->xfrm.state_hmask + 1) < xfrm_state_hashmax &&
+	    net->xfrm.state_num > net->xfrm.state_hmask)
+		schedule_work(&net->xfrm.state_hash_work);
+}
+
+static void xfrm_state_look_at(struct xfrm_policy *pol, struct xfrm_state *x,
+			       const struct flowi *fl, unsigned short family,
+			       struct xfrm_state **best, int *acq_in_progress,
+			       int *error)
+{
+	/* We need the cpu id just as a lookup key,
+	 * we don't require it to be stable.
+	 */
+	unsigned int pcpu_id = get_cpu();
+	put_cpu();
+
+	/* Resolution logic:
+	 * 1. There is a valid state with matching selector. Done.
+	 * 2. Valid state with inappropriate selector. Skip.
+	 *
+	 * Entering area of "sysdeps".
+	 *
+	 * 3. If state is not valid, selector is temporary, it selects
+	 *    only session which triggered previous resolution. Key
+	 *    manager will do something to install a state with proper
+	 *    selector.
+	 */
+	if (x->km.state == XFRM_STATE_VALID) {
+		if ((x->sel.family &&
+		     (x->sel.family != family ||
+		      !xfrm_selector_match(&x->sel, fl, family))) ||
+		    !security_xfrm_state_pol_flow_match(x, pol,
+							&fl->u.__fl_common))
+			return;
+
+		if (x->pcpu_num != UINT_MAX && x->pcpu_num != pcpu_id)
+			return;
+
+		if (!*best ||
+		    ((*best)->pcpu_num == UINT_MAX && x->pcpu_num == pcpu_id) ||
+		    (*best)->km.dying > x->km.dying ||
+		    ((*best)->km.dying == x->km.dying &&
+		     (*best)->curlft.add_time < x->curlft.add_time))
+			*best = x;
+	} else if (x->km.state == XFRM_STATE_ACQ) {
+		if (!*best || x->pcpu_num == pcpu_id)
+			*acq_in_progress = 1;
+	} else if (x->km.state == XFRM_STATE_ERROR ||
+		   x->km.state == XFRM_STATE_EXPIRED) {
+		if ((!x->sel.family ||
+		     (x->sel.family == family &&
+		      xfrm_selector_match(&x->sel, fl, family))) &&
+		    security_xfrm_state_pol_flow_match(x, pol,
+						       &fl->u.__fl_common))
+			*error = -ESRCH;
+	}
+}
+
+struct xfrm_state *
+xfrm_state_find(const xfrm_address_t *daddr, const xfrm_address_t *saddr,
+		const struct flowi *fl, struct xfrm_tmpl *tmpl,
+		struct xfrm_policy *pol, int *err,
+		unsigned short family, u32 if_id)
+{
+	static xfrm_address_t saddr_wildcard = { };
+	struct xfrm_hash_state_ptrs state_ptrs;
+	struct net *net = xp_net(pol);
+	unsigned int h, h_wildcard;
+	struct xfrm_state *x, *x0, *to_put;
+	int acquire_in_progress = 0;
+	int error = 0;
+	struct xfrm_state *best = NULL;
+	u32 mark = pol->mark.v & pol->mark.m;
+	unsigned short encap_family = tmpl->encap_family;
+	unsigned int sequence;
+	struct km_event c;
+	unsigned int pcpu_id;
+	bool cached = false;
+
+	/* We need the cpu id just as a lookup key,
+	 * we don't require it to be stable.
+	 */
+	pcpu_id = get_cpu();
+	put_cpu();
+
+	to_put = NULL;
+
+	sequence = read_seqcount_begin(&net->xfrm.xfrm_state_hash_generation);
+
+	rcu_read_lock();
+	hlist_for_each_entry_rcu(x, &pol->state_cache_list, state_cache) {
+		if (x->props.family == encap_family &&
+		    x->props.reqid == tmpl->reqid &&
+		    (mark & x->mark.m) == x->mark.v &&
+		    x->if_id == if_id &&
+		    !(x->props.flags & XFRM_STATE_WILDRECV) &&
+		    xfrm_state_addr_check(x, daddr, saddr, encap_family) &&
+		    tmpl->mode == x->props.mode &&
+		    tmpl->id.proto == x->id.proto &&
+		    (tmpl->id.spi == x->id.spi || !tmpl->id.spi))
+			xfrm_state_look_at(pol, x, fl, encap_family,
+					   &best, &acquire_in_progress, &error);
+	}
+
+	if (best)
+		goto cached;
+
+	hlist_for_each_entry_rcu(x, &pol->state_cache_list, state_cache) {
+		if (x->props.family == encap_family &&
+		    x->props.reqid == tmpl->reqid &&
+		    (mark & x->mark.m) == x->mark.v &&
+		    x->if_id == if_id &&
+		    !(x->props.flags & XFRM_STATE_WILDRECV) &&
+		    xfrm_addr_equal(&x->id.daddr, daddr, encap_family) &&
+		    tmpl->mode == x->props.mode &&
+		    tmpl->id.proto == x->id.proto &&
+		    (tmpl->id.spi == x->id.spi || !tmpl->id.spi))
+			xfrm_state_look_at(pol, x, fl, family,
+					   &best, &acquire_in_progress, &error);
+	}
+
+cached:
+	cached = true;
+	if (best)
+		goto found;
+	else if (error)
+		best = NULL;
+	else if (acquire_in_progress) /* XXX: acquire_in_progress should not happen */
+		WARN_ON(1);
+
+	xfrm_hash_ptrs_get(net, &state_ptrs);
+
+	h = __xfrm_dst_hash(daddr, saddr, tmpl->reqid, encap_family, state_ptrs.hmask);
+	hlist_for_each_entry_rcu(x, state_ptrs.bydst + h, bydst) {
+#ifdef CONFIG_XFRM_OFFLOAD
+		if (pol->xdo.type == XFRM_DEV_OFFLOAD_PACKET) {
+			if (x->xso.type != XFRM_DEV_OFFLOAD_PACKET)
+				/* HW states are in the head of list, there is
+				 * no need to iterate further.
+				 */
+				break;
+
+			/* Packet offload: both policy and SA should
+			 * have same device.
+			 */
+			if (pol->xdo.dev != x->xso.dev)
+				continue;
+		} else if (x->xso.type == XFRM_DEV_OFFLOAD_PACKET)
+			/* Skip HW policy for SW lookups */
+			continue;
+#endif
+		if (x->props.family == encap_family &&
+		    x->props.reqid == tmpl->reqid &&
+		    (mark & x->mark.m) == x->mark.v &&
+		    x->if_id == if_id &&
+		    !(x->props.flags & XFRM_STATE_WILDRECV) &&
+		    xfrm_state_addr_check(x, daddr, saddr, encap_family) &&
+		    tmpl->mode == x->props.mode &&
+		    tmpl->id.proto == x->id.proto &&
+		    (tmpl->id.spi == x->id.spi || !tmpl->id.spi))
+			xfrm_state_look_at(pol, x, fl, family,
+					   &best, &acquire_in_progress, &error);
+	}
+	if (best || acquire_in_progress)
+		goto found;
+
+	h_wildcard = __xfrm_dst_hash(daddr, &saddr_wildcard, tmpl->reqid,
+				     encap_family, state_ptrs.hmask);
+	hlist_for_each_entry_rcu(x, state_ptrs.bydst + h_wildcard, bydst) {
+#ifdef CONFIG_XFRM_OFFLOAD
+		if (pol->xdo.type == XFRM_DEV_OFFLOAD_PACKET) {
+			if (x->xso.type != XFRM_DEV_OFFLOAD_PACKET)
+				/* HW states are in the head of list, there is
+				 * no need to iterate further.
+				 */
+				break;
+
+			/* Packet offload: both policy and SA should
+			 * have same device.
+			 */
+			if (pol->xdo.dev != x->xso.dev)
+				continue;
+		} else if (x->xso.type == XFRM_DEV_OFFLOAD_PACKET)
+			/* Skip HW policy for SW lookups */
+			continue;
+#endif
+		if (x->props.family == encap_family &&
+		    x->props.reqid == tmpl->reqid &&
+		    (mark & x->mark.m) == x->mark.v &&
+		    x->if_id == if_id &&
+		    !(x->props.flags & XFRM_STATE_WILDRECV) &&
+		    xfrm_addr_equal(&x->id.daddr, daddr, encap_family) &&
+		    tmpl->mode == x->props.mode &&
+		    tmpl->id.proto == x->id.proto &&
+		    (tmpl->id.spi == x->id.spi || !tmpl->id.spi))
+			xfrm_state_look_at(pol, x, fl, family,
+					   &best, &acquire_in_progress, &error);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 found:

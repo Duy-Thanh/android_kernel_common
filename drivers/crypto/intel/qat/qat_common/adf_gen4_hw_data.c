@@ -585,6 +585,7 @@ static int bank_state_restore(struct adf_hw_csr_ops *ops, void __iomem *base,
 	ops->write_csr_int_srcsel_w_val(base, bank, state->iaintflagsrcsel0);
 	ops->write_csr_exp_int_en(base, bank, state->ringexpintenable);
 	ops->write_csr_int_col_ctl(base, bank, state->iaintcolctl);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	/*
 	 * Verify whether any exceptions were raised during the bank save process.
@@ -639,6 +640,48 @@ static int bank_state_restore(struct adf_hw_csr_ops *ops, void __iomem *base,
 			 base, bank);
 	if (ret)
 		return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ops->write_csr_ring_srv_arb_en(base, bank, state->ringsrvarben);
+
+	/* Check that all ring statuses match the saved state. */
+	ret = CHECK_STAT(ops->read_csr_stat, state->ringstat0, "ringstat",
+			 base, bank);
+	if (ret)
+		return ret;
+
+	ret = CHECK_STAT(ops->read_csr_e_stat, state->ringestat, "ringestat",
+			 base, bank);
+	if (ret)
+		return ret;
+
+	ret = CHECK_STAT(ops->read_csr_ne_stat, state->ringnestat, "ringnestat",
+			 base, bank);
+	if (ret)
+		return ret;
+
+	ret = CHECK_STAT(ops->read_csr_nf_stat, state->ringnfstat, "ringnfstat",
+			 base, bank);
+	if (ret)
+		return ret;
+
+	ret = CHECK_STAT(ops->read_csr_f_stat, state->ringfstat, "ringfstat",
+			 base, bank);
+	if (ret)
+		return ret;
+
+	ret = CHECK_STAT(ops->read_csr_c_stat, state->ringcstat0, "ringcstat",
+			 base, bank);
+	if (ret)
+		return ret;
+
+	tmp_val = ops->read_csr_exp_stat(base, bank);
+	val = state->ringexpstat;
+	if (tmp_val && !val) {
+		pr_err("QAT: Bank was restored with exception: 0x%x\n", val);
+		return -EINVAL;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

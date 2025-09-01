@@ -147,6 +147,7 @@ void can_change_state(struct net_device *dev, struct can_frame *cf,
 EXPORT_SYMBOL_GPL(can_change_state);
 
 /* CAN device restart for bus-off recovery */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int can_restart(struct net_device *dev)
 {
 	struct can_priv *priv = netdev_priv(dev);
@@ -212,6 +213,68 @@ int can_restart_now(struct net_device *dev)
 	cancel_delayed_work_sync(&priv->restart_work);
 
 	return can_restart(dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void can_restart(struct net_device *dev)
+{
+	struct can_priv *priv = netdev_priv(dev);
+	struct sk_buff *skb;
+	struct can_frame *cf;
+	int err;
+
+	if (netif_carrier_ok(dev))
+		netdev_err(dev, "Attempt to restart for bus-off recovery, but carrier is OK?\n");
+
+	/* No synchronization needed because the device is bus-off and
+	 * no messages can come in or go out.
+	 */
+	can_flush_echo_skb(dev);
+
+	/* send restart message upstream */
+	skb = alloc_can_err_skb(dev, &cf);
+	if (skb) {
+		cf->can_id |= CAN_ERR_RESTARTED;
+		netif_rx(skb);
+	}
+
+	/* Now restart the device */
+	netif_carrier_on(dev);
+	err = priv->do_set_mode(dev, CAN_MODE_START);
+	if (err) {
+		netdev_err(dev, "Restart failed, error %pe\n", ERR_PTR(err));
+		netif_carrier_off(dev);
+	} else {
+		netdev_dbg(dev, "Restarted\n");
+		priv->can_stats.restarts++;
+	}
+}
+
+static void can_restart_work(struct work_struct *work)
+{
+	struct delayed_work *dwork = to_delayed_work(work);
+	struct can_priv *priv = container_of(dwork, struct can_priv,
+					     restart_work);
+
+	can_restart(priv->dev);
+}
+
+int can_restart_now(struct net_device *dev)
+{
+	struct can_priv *priv = netdev_priv(dev);
+
+	/* A manual restart is only permitted if automatic restart is
+	 * disabled and the device is in the bus-off state
+	 */
+	if (priv->restart_ms)
+		return -EINVAL;
+	if (priv->state != CAN_STATE_BUS_OFF)
+		return -EBUSY;
+
+	cancel_delayed_work_sync(&priv->restart_work);
+	can_restart(dev);
+
+	return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /* CAN bus-off

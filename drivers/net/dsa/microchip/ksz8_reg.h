@@ -784,9 +784,14 @@
 #define KSZ8795_MIB_TOTAL_TX_1		0x105
 
 #define KSZ8863_MIB_PACKET_DROPPED_TX_0 0x100
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define KSZ8863_MIB_PACKET_DROPPED_RX_0 0x103
 
 #define KSZ8895_MIB_PACKET_DROPPED_RX_0 0x105
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define KSZ8863_MIB_PACKET_DROPPED_RX_0 0x105
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #define MIB_PACKET_DROPPED		0x0000FFFF
 

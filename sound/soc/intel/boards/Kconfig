@@ -11,6 +11,7 @@ menuconfig SND_SOC_INTEL_MACH
 	 kernel: saying N will just cause the configurator to skip all
 	 the questions about Intel ASoC machine drivers.
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 if SND_SOC_INTEL_MACH && (SND_SOC_SOF_INTEL_COMMON || !SND_SOC_SOF_INTEL_COMMON)
 
 config SND_SOC_INTEL_USER_FRIENDLY_LONG_NAMES
@@ -43,6 +44,40 @@ config SND_SOC_INTEL_SOF_NUVOTON_COMMON
 
 config SND_SOC_INTEL_SOF_BOARD_HELPERS
 	select SND_SOC_ACPI_INTEL_MATCH
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+if SND_SOC_INTEL_MACH
+
+config SND_SOC_INTEL_USER_FRIENDLY_LONG_NAMES
+	bool "Use more user friendly long card names"
+	help
+	  Some drivers report the I/O configuration to userspace through the
+	  soundcard's long card name in the control user space AP. An unfortunate
+	  side effect is that this long name may also be used by the GUI,
+	  confusing users with information they don't need.
+	  This option prevents the long name from being modified, and the I/O
+	  configuration will be provided through a different component interface.
+	  Select Y if userspace like UCM (Use Case Manager) uses the component
+	  interface.
+	  If unsure select N.
+
+config SND_SOC_INTEL_HDA_DSP_COMMON
+	tristate
+
+config SND_SOC_INTEL_SOF_MAXIM_COMMON
+	tristate
+
+config SND_SOC_INTEL_SOF_REALTEK_COMMON
+	tristate
+
+config SND_SOC_INTEL_SOF_CIRRUS_COMMON
+	tristate
+
+config SND_SOC_INTEL_SOF_NUVOTON_COMMON
+	tristate
+
+config SND_SOC_INTEL_SOF_BOARD_HELPERS
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	tristate
 
 if SND_SOC_INTEL_CATPT

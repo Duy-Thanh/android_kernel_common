@@ -1275,6 +1275,7 @@ static int hidg_bind(struct usb_configuration *c, struct usb_function *f)
 
 	if (!hidg->workqueue) {
 		status = -ENOMEM;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		goto fail_free_descs;
 	}
 
@@ -1288,6 +1289,21 @@ static int hidg_bind(struct usb_configuration *c, struct usb_function *f)
 fail_free_all:
 	destroy_workqueue(hidg->workqueue);
 fail_free_descs:
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		goto fail;
+	}
+
+	/* create char device */
+	cdev_init(&hidg->cdev, &f_hidg_fops);
+	status = cdev_device_add(&hidg->cdev, &hidg->dev);
+	if (status)
+		goto fail_free_descs;
+
+	return 0;
+fail_free_descs:
+	destroy_workqueue(hidg->workqueue);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	usb_free_all_descriptors(f);
 fail:
 	ERROR(f->config->cdev, "hidg_bind FAILED\n");

@@ -236,6 +236,7 @@ void pci_epf_free_space(struct pci_epf *epf, void *addr, enum pci_barno bar,
 	}
 
 	dev = epc->dev.parent;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	dma_free_coherent(dev, epf_bar[bar].aligned_size, addr,
 			  epf_bar[bar].phys_addr);
 
@@ -335,6 +336,100 @@ static void pci_epf_remove_cfs(struct pci_epf_driver *driver)
 	list_for_each_entry_safe(group, tmp, &driver->epf_group, group_entry)
 		pci_ep_cfs_remove_epf_group(group);
 	WARN_ON(!list_empty(&driver->epf_group));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	dma_free_coherent(dev, epf_bar[bar].size, addr,
+			  epf_bar[bar].phys_addr);
+
+	epf_bar[bar].phys_addr = 0;
+	epf_bar[bar].addr = NULL;
+	epf_bar[bar].size = 0;
+	epf_bar[bar].barno = 0;
+	epf_bar[bar].flags = 0;
+}
+EXPORT_SYMBOL_GPL(pci_epf_free_space);
+
+/**
+ * pci_epf_alloc_space() - allocate memory for the PCI EPF register space
+ * @epf: the EPF device to whom allocate the memory
+ * @size: the size of the memory that has to be allocated
+ * @bar: the BAR number corresponding to the allocated register space
+ * @epc_features: the features provided by the EPC specific to this EPF
+ * @type: Identifies if the allocation is for primary EPC or secondary EPC
+ *
+ * Invoke to allocate memory for the PCI EPF register space.
+ * Flag PCI_BASE_ADDRESS_MEM_TYPE_64 will automatically get set if the BAR
+ * can only be a 64-bit BAR, or if the requested size is larger than 2 GB.
+ */
+void *pci_epf_alloc_space(struct pci_epf *epf, size_t size, enum pci_barno bar,
+			  const struct pci_epc_features *epc_features,
+			  enum pci_epc_interface_type type)
+{
+	u64 bar_fixed_size = epc_features->bar[bar].fixed_size;
+	size_t align = epc_features->align;
+	struct pci_epf_bar *epf_bar;
+	dma_addr_t phys_addr;
+	struct pci_epc *epc;
+	struct device *dev;
+	void *space;
+
+	if (size < 128)
+		size = 128;
+
+	if (epc_features->bar[bar].type == BAR_FIXED && bar_fixed_size) {
+		if (size > bar_fixed_size) {
+			dev_err(&epf->dev,
+				"requested BAR size is larger than fixed size\n");
+			return NULL;
+		}
+		size = bar_fixed_size;
+	}
+
+	if (align)
+		size = ALIGN(size, align);
+	else
+		size = roundup_pow_of_two(size);
+
+	if (type == PRIMARY_INTERFACE) {
+		epc = epf->epc;
+		epf_bar = epf->bar;
+	} else {
+		epc = epf->sec_epc;
+		epf_bar = epf->sec_epc_bar;
+	}
+
+	dev = epc->dev.parent;
+	space = dma_alloc_coherent(dev, size, &phys_addr, GFP_KERNEL);
+	if (!space) {
+		dev_err(dev, "failed to allocate mem space\n");
+		return NULL;
+	}
+
+	epf_bar[bar].phys_addr = phys_addr;
+	epf_bar[bar].addr = space;
+	epf_bar[bar].size = size;
+	epf_bar[bar].barno = bar;
+	if (upper_32_bits(size) || epc_features->bar[bar].only_64bit)
+		epf_bar[bar].flags |= PCI_BASE_ADDRESS_MEM_TYPE_64;
+	else
+		epf_bar[bar].flags |= PCI_BASE_ADDRESS_MEM_TYPE_32;
+
+	return space;
+}
+EXPORT_SYMBOL_GPL(pci_epf_alloc_space);
+
+static void pci_epf_remove_cfs(struct pci_epf_driver *driver)
+{
+	struct config_group *group, *tmp;
+
+	if (!IS_ENABLED(CONFIG_PCI_ENDPOINT_CONFIGFS))
+		return;
+
+	mutex_lock(&pci_epf_mutex);
+	list_for_each_entry_safe(group, tmp, &driver->epf_group, group_entry)
+		pci_ep_cfs_remove_epf_group(group);
+	list_del(&driver->epf_group);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	mutex_unlock(&pci_epf_mutex);
 }
 

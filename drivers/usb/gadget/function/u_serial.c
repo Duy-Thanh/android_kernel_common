@@ -543,6 +543,7 @@ static int gs_alloc_requests(struct usb_ep *ep, struct list_head *head,
 static int gs_start_io(struct gs_port *port)
 {
 	struct list_head	*head = &port->read_pool;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct usb_ep		*ep = port->port_usb->out;
 	int			status;
 	unsigned		started;
@@ -553,6 +554,23 @@ static int gs_start_io(struct gs_port *port)
 	 * configurations may use different endpoints with a given port;
 	 * and high speed vs full speed changes packet sizes too.
 	 */
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct usb_ep		*ep;
+	int			status;
+	unsigned		started;
+
+	if (!port->port_usb || !port->port.tty)
+		return -EIO;
+
+	/* Allocate RX and TX I/O buffers.  We can't easily do this much
+	 * earlier (with GFP_KERNEL) because the requests are coupled to
+	 * endpoints, as are the packet sizes we'll be using.  Different
+	 * configurations may use different endpoints with a given port;
+	 * and high speed vs full speed changes packet sizes too.
+	 */
+	ep = port->port_usb->out;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	status = gs_alloc_requests(ep, head, gs_read_complete,
 		&port->read_allocated);
 	if (status)

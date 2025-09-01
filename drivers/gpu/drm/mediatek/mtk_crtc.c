@@ -719,6 +719,7 @@ int mtk_crtc_plane_check(struct drm_crtc *crtc, struct drm_plane *plane,
 	return 0;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 void mtk_crtc_plane_disable(struct drm_crtc *crtc, struct drm_plane *plane)
 {
 #if IS_REACHABLE(CONFIG_MTK_CMDQ)
@@ -965,6 +966,221 @@ static int mtk_crtc_init_comp_planes(struct drm_device *drm_dev,
 				mtk_ddp_comp_get_formats(comp),
 				mtk_ddp_comp_get_num_formats(comp),
 				mtk_ddp_comp_is_afbc_supported(comp), i);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void mtk_crtc_async_update(struct drm_crtc *crtc, struct drm_plane *plane,
+			   struct drm_atomic_state *state)
+{
+	struct mtk_crtc *mtk_crtc = to_mtk_crtc(crtc);
+
+	if (!mtk_crtc->enabled)
+		return;
+
+	mtk_crtc_update_config(mtk_crtc, false);
+}
+
+static void mtk_crtc_atomic_enable(struct drm_crtc *crtc,
+				   struct drm_atomic_state *state)
+{
+	struct mtk_crtc *mtk_crtc = to_mtk_crtc(crtc);
+	struct mtk_ddp_comp *comp = mtk_crtc->ddp_comp[0];
+	int ret;
+
+	DRM_DEBUG_DRIVER("%s %d\n", __func__, crtc->base.id);
+
+	ret = mtk_ddp_comp_power_on(comp);
+	if (ret < 0) {
+		DRM_DEV_ERROR(comp->dev, "Failed to enable power domain: %d\n", ret);
+		return;
+	}
+
+	mtk_crtc_update_output(crtc, state);
+
+	ret = mtk_crtc_ddp_hw_init(mtk_crtc);
+	if (ret) {
+		mtk_ddp_comp_power_off(comp);
+		return;
+	}
+
+	drm_crtc_vblank_on(crtc);
+	mtk_crtc->enabled = true;
+}
+
+static void mtk_crtc_atomic_disable(struct drm_crtc *crtc,
+				    struct drm_atomic_state *state)
+{
+	struct mtk_crtc *mtk_crtc = to_mtk_crtc(crtc);
+	struct mtk_ddp_comp *comp = mtk_crtc->ddp_comp[0];
+	int i;
+
+	DRM_DEBUG_DRIVER("%s %d\n", __func__, crtc->base.id);
+	if (!mtk_crtc->enabled)
+		return;
+
+	/* Set all pending plane state to disabled */
+	for (i = 0; i < mtk_crtc->layer_nr; i++) {
+		struct drm_plane *plane = &mtk_crtc->planes[i];
+		struct mtk_plane_state *plane_state;
+
+		plane_state = to_mtk_plane_state(plane->state);
+		plane_state->pending.enable = false;
+		plane_state->pending.config = true;
+	}
+	mtk_crtc->pending_planes = true;
+
+	mtk_crtc_update_config(mtk_crtc, false);
+#if IS_REACHABLE(CONFIG_MTK_CMDQ)
+	/* Wait for planes to be disabled by cmdq */
+	if (mtk_crtc->cmdq_client.chan)
+		wait_event_timeout(mtk_crtc->cb_blocking_queue,
+				   mtk_crtc->cmdq_vblank_cnt == 0,
+				   msecs_to_jiffies(500));
+#endif
+	/* Wait for planes to be disabled */
+	drm_crtc_wait_one_vblank(crtc);
+
+	drm_crtc_vblank_off(crtc);
+	mtk_crtc_ddp_hw_fini(mtk_crtc);
+	mtk_ddp_comp_power_off(comp);
+
+	mtk_crtc->enabled = false;
+}
+
+static void mtk_crtc_atomic_begin(struct drm_crtc *crtc,
+				  struct drm_atomic_state *state)
+{
+	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(state,
+									  crtc);
+	struct mtk_crtc_state *mtk_crtc_state = to_mtk_crtc_state(crtc_state);
+	struct mtk_crtc *mtk_crtc = to_mtk_crtc(crtc);
+	unsigned long flags;
+
+	if (mtk_crtc->event && mtk_crtc_state->base.event)
+		DRM_ERROR("new event while there is still a pending event\n");
+
+	if (mtk_crtc_state->base.event) {
+		mtk_crtc_state->base.event->pipe = drm_crtc_index(crtc);
+		WARN_ON(drm_crtc_vblank_get(crtc) != 0);
+
+		spin_lock_irqsave(&crtc->dev->event_lock, flags);
+		mtk_crtc->event = mtk_crtc_state->base.event;
+		spin_unlock_irqrestore(&crtc->dev->event_lock, flags);
+
+		mtk_crtc_state->base.event = NULL;
+	}
+}
+
+static void mtk_crtc_atomic_flush(struct drm_crtc *crtc,
+				  struct drm_atomic_state *state)
+{
+	struct mtk_crtc *mtk_crtc = to_mtk_crtc(crtc);
+	int i;
+
+	if (crtc->state->color_mgmt_changed)
+		for (i = 0; i < mtk_crtc->ddp_comp_nr; i++) {
+			mtk_ddp_gamma_set(mtk_crtc->ddp_comp[i], crtc->state);
+			mtk_ddp_ctm_set(mtk_crtc->ddp_comp[i], crtc->state);
+		}
+	mtk_crtc_update_config(mtk_crtc, !!mtk_crtc->event);
+}
+
+static const struct drm_crtc_funcs mtk_crtc_funcs = {
+	.set_config		= drm_atomic_helper_set_config,
+	.page_flip		= drm_atomic_helper_page_flip,
+	.destroy		= mtk_crtc_destroy,
+	.reset			= mtk_crtc_reset,
+	.atomic_duplicate_state	= mtk_crtc_duplicate_state,
+	.atomic_destroy_state	= mtk_crtc_destroy_state,
+	.enable_vblank		= mtk_crtc_enable_vblank,
+	.disable_vblank		= mtk_crtc_disable_vblank,
+};
+
+static const struct drm_crtc_helper_funcs mtk_crtc_helper_funcs = {
+	.mode_fixup	= mtk_crtc_mode_fixup,
+	.mode_set_nofb	= mtk_crtc_mode_set_nofb,
+	.mode_valid	= mtk_crtc_mode_valid,
+	.atomic_begin	= mtk_crtc_atomic_begin,
+	.atomic_flush	= mtk_crtc_atomic_flush,
+	.atomic_enable	= mtk_crtc_atomic_enable,
+	.atomic_disable	= mtk_crtc_atomic_disable,
+};
+
+static int mtk_crtc_init(struct drm_device *drm, struct mtk_crtc *mtk_crtc,
+			 unsigned int pipe)
+{
+	struct drm_plane *primary = NULL;
+	struct drm_plane *cursor = NULL;
+	int i, ret;
+
+	for (i = 0; i < mtk_crtc->layer_nr; i++) {
+		if (mtk_crtc->planes[i].type == DRM_PLANE_TYPE_PRIMARY)
+			primary = &mtk_crtc->planes[i];
+		else if (mtk_crtc->planes[i].type == DRM_PLANE_TYPE_CURSOR)
+			cursor = &mtk_crtc->planes[i];
+	}
+
+	ret = drm_crtc_init_with_planes(drm, &mtk_crtc->base, primary, cursor,
+					&mtk_crtc_funcs, NULL);
+	if (ret)
+		goto err_cleanup_crtc;
+
+	drm_crtc_helper_add(&mtk_crtc->base, &mtk_crtc_helper_funcs);
+
+	return 0;
+
+err_cleanup_crtc:
+	drm_crtc_cleanup(&mtk_crtc->base);
+	return ret;
+}
+
+static int mtk_crtc_num_comp_planes(struct mtk_crtc *mtk_crtc, int comp_idx)
+{
+	struct mtk_ddp_comp *comp;
+
+	if (comp_idx > 1)
+		return 0;
+
+	comp = mtk_crtc->ddp_comp[comp_idx];
+	if (!comp->funcs)
+		return 0;
+
+	if (comp_idx == 1 && !comp->funcs->bgclr_in_on)
+		return 0;
+
+	return mtk_ddp_comp_layer_nr(comp);
+}
+
+static inline
+enum drm_plane_type mtk_crtc_plane_type(unsigned int plane_idx,
+					unsigned int num_planes)
+{
+	if (plane_idx == 0)
+		return DRM_PLANE_TYPE_PRIMARY;
+	else if (plane_idx == (num_planes - 1))
+		return DRM_PLANE_TYPE_CURSOR;
+	else
+		return DRM_PLANE_TYPE_OVERLAY;
+
+}
+
+static int mtk_crtc_init_comp_planes(struct drm_device *drm_dev,
+				     struct mtk_crtc *mtk_crtc,
+				     int comp_idx, int pipe)
+{
+	int num_planes = mtk_crtc_num_comp_planes(mtk_crtc, comp_idx);
+	struct mtk_ddp_comp *comp = mtk_crtc->ddp_comp[comp_idx];
+	int i, ret;
+
+	for (i = 0; i < num_planes; i++) {
+		ret = mtk_plane_init(drm_dev,
+				&mtk_crtc->planes[mtk_crtc->layer_nr],
+				BIT(pipe),
+				mtk_crtc_plane_type(mtk_crtc->layer_nr, num_planes),
+				mtk_ddp_comp_supported_rotations(comp),
+				mtk_ddp_comp_get_blend_modes(comp),
+				mtk_ddp_comp_get_formats(comp),
+				mtk_ddp_comp_get_num_formats(comp), i);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (ret)
 			return ret;
 

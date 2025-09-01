@@ -91,9 +91,15 @@ void nft_dynset_eval(const struct nft_expr *expr,
 		return;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ext = set->ops->update(set, &regs->data[priv->sreg_key], nft_dynset_new,
 			     expr, regs);
 	if (ext) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (set->ops->update(set, &regs->data[priv->sreg_key], nft_dynset_new,
+			     expr, regs, &ext)) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (priv->op == NFT_DYNSET_OP_UPDATE &&
 		    nft_set_ext_exists(ext, NFT_SET_EXT_TIMEOUT) &&
 		    READ_ONCE(nft_set_ext_timeout(ext)->timeout) != 0) {

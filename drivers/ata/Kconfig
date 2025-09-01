@@ -117,6 +117,7 @@ config SATA_AHCI
 
 config SATA_MOBILE_LPM_POLICY
 	int "Default SATA Link Power Management policy"
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	range 0 5
 	default 3
 	depends on SATA_AHCI
@@ -150,6 +151,26 @@ config SATA_MOBILE_LPM_POLICY
 
 	  Excluding the value 0, higher values represent policies with higher
 	  power savings.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	range 0 4
+	default 3
+	depends on SATA_AHCI
+	help
+	  Select the Default SATA Link Power Management (LPM) policy to use
+	  for chipsets / "South Bridges" supporting low-power modes. Such
+	  chipsets are ubiquitous across laptops, desktops and servers.
+
+	  The value set has the following meanings:
+		0 => Keep firmware settings
+		1 => Maximum performance
+		2 => Medium power
+		3 => Medium power with Device Initiated PM enabled
+		4 => Minimum power
+
+	  Note "Minimum power" is known to cause issues, including disk
+	  corruption, with some disks and should not be used.
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 config SATA_AHCI_PLATFORM
 	tristate "Platform AHCI SATA support"

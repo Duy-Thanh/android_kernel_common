@@ -41,6 +41,7 @@ static __poll_t pps_cdev_poll(struct file *file, poll_table *wait)
 
 	poll_wait(file, &pps->queue, wait);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (pps->last_fetched_ev == pps->last_ev)
 		return 0;
 
@@ -281,6 +282,242 @@ static long pps_cdev_compat_ioctl(struct file *file,
 		spin_lock_irq(&pps->lock);
 
 		pps->last_fetched_ev = pps->last_ev;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	return EPOLLIN | EPOLLRDNORM;
+}
+
+static int pps_cdev_fasync(int fd, struct file *file, int on)
+{
+	struct pps_device *pps = file->private_data;
+	return fasync_helper(fd, file, on, &pps->async_queue);
+}
+
+static int pps_cdev_pps_fetch(struct pps_device *pps, struct pps_fdata *fdata)
+{
+	unsigned int ev = pps->last_ev;
+	int err = 0;
+
+	/* Manage the timeout */
+	if (fdata->timeout.flags & PPS_TIME_INVALID)
+		err = wait_event_interruptible(pps->queue,
+				ev != pps->last_ev);
+	else {
+		unsigned long ticks;
+
+		dev_dbg(&pps->dev, "timeout %lld.%09d\n",
+				(long long) fdata->timeout.sec,
+				fdata->timeout.nsec);
+		ticks = fdata->timeout.sec * HZ;
+		ticks += fdata->timeout.nsec / (NSEC_PER_SEC / HZ);
+
+		if (ticks != 0) {
+			err = wait_event_interruptible_timeout(
+					pps->queue,
+					ev != pps->last_ev,
+					ticks);
+			if (err == 0)
+				return -ETIMEDOUT;
+		}
+	}
+
+	/* Check for pending signals */
+	if (err == -ERESTARTSYS) {
+		dev_dbg(&pps->dev, "pending signal caught\n");
+		return -EINTR;
+	}
+
+	return 0;
+}
+
+static long pps_cdev_ioctl(struct file *file,
+		unsigned int cmd, unsigned long arg)
+{
+	struct pps_device *pps = file->private_data;
+	struct pps_kparams params;
+	void __user *uarg = (void __user *) arg;
+	int __user *iuarg = (int __user *) arg;
+	int err;
+
+	switch (cmd) {
+	case PPS_GETPARAMS:
+		dev_dbg(&pps->dev, "PPS_GETPARAMS\n");
+
+		spin_lock_irq(&pps->lock);
+
+		/* Get the current parameters */
+		params = pps->params;
+
+		spin_unlock_irq(&pps->lock);
+
+		err = copy_to_user(uarg, &params, sizeof(struct pps_kparams));
+		if (err)
+			return -EFAULT;
+
+		break;
+
+	case PPS_SETPARAMS:
+		dev_dbg(&pps->dev, "PPS_SETPARAMS\n");
+
+		/* Check the capabilities */
+		if (!capable(CAP_SYS_TIME))
+			return -EPERM;
+
+		err = copy_from_user(&params, uarg, sizeof(struct pps_kparams));
+		if (err)
+			return -EFAULT;
+		if (!(params.mode & (PPS_CAPTUREASSERT | PPS_CAPTURECLEAR))) {
+			dev_dbg(&pps->dev, "capture mode unspecified (%x)\n",
+								params.mode);
+			return -EINVAL;
+		}
+
+		/* Check for supported capabilities */
+		if ((params.mode & ~pps->info.mode) != 0) {
+			dev_dbg(&pps->dev, "unsupported capabilities (%x)\n",
+								params.mode);
+			return -EINVAL;
+		}
+
+		spin_lock_irq(&pps->lock);
+
+		/* Save the new parameters */
+		pps->params = params;
+
+		/* Restore the read only parameters */
+		if ((params.mode & (PPS_TSFMT_TSPEC | PPS_TSFMT_NTPFP)) == 0) {
+			/* section 3.3 of RFC 2783 interpreted */
+			dev_dbg(&pps->dev, "time format unspecified (%x)\n",
+								params.mode);
+			pps->params.mode |= PPS_TSFMT_TSPEC;
+		}
+		if (pps->info.mode & PPS_CANWAIT)
+			pps->params.mode |= PPS_CANWAIT;
+		pps->params.api_version = PPS_API_VERS;
+
+		/*
+		 * Clear unused fields of pps_kparams to avoid leaking
+		 * uninitialized data of the PPS_SETPARAMS caller via
+		 * PPS_GETPARAMS
+		 */
+		pps->params.assert_off_tu.flags = 0;
+		pps->params.clear_off_tu.flags = 0;
+
+		spin_unlock_irq(&pps->lock);
+
+		break;
+
+	case PPS_GETCAP:
+		dev_dbg(&pps->dev, "PPS_GETCAP\n");
+
+		err = put_user(pps->info.mode, iuarg);
+		if (err)
+			return -EFAULT;
+
+		break;
+
+	case PPS_FETCH: {
+		struct pps_fdata fdata;
+
+		dev_dbg(&pps->dev, "PPS_FETCH\n");
+
+		err = copy_from_user(&fdata, uarg, sizeof(struct pps_fdata));
+		if (err)
+			return -EFAULT;
+
+		err = pps_cdev_pps_fetch(pps, &fdata);
+		if (err)
+			return err;
+
+		/* Return the fetched timestamp */
+		spin_lock_irq(&pps->lock);
+
+		fdata.info.assert_sequence = pps->assert_sequence;
+		fdata.info.clear_sequence = pps->clear_sequence;
+		fdata.info.assert_tu = pps->assert_tu;
+		fdata.info.clear_tu = pps->clear_tu;
+		fdata.info.current_mode = pps->current_mode;
+
+		spin_unlock_irq(&pps->lock);
+
+		err = copy_to_user(uarg, &fdata, sizeof(struct pps_fdata));
+		if (err)
+			return -EFAULT;
+
+		break;
+	}
+	case PPS_KC_BIND: {
+		struct pps_bind_args bind_args;
+
+		dev_dbg(&pps->dev, "PPS_KC_BIND\n");
+
+		/* Check the capabilities */
+		if (!capable(CAP_SYS_TIME))
+			return -EPERM;
+
+		if (copy_from_user(&bind_args, uarg,
+					sizeof(struct pps_bind_args)))
+			return -EFAULT;
+
+		/* Check for supported capabilities */
+		if ((bind_args.edge & ~pps->info.mode) != 0) {
+			dev_err(&pps->dev, "unsupported capabilities (%x)\n",
+					bind_args.edge);
+			return -EINVAL;
+		}
+
+		/* Validate parameters roughly */
+		if (bind_args.tsformat != PPS_TSFMT_TSPEC ||
+				(bind_args.edge & ~PPS_CAPTUREBOTH) != 0 ||
+				bind_args.consumer != PPS_KC_HARDPPS) {
+			dev_err(&pps->dev, "invalid kernel consumer bind"
+					" parameters (%x)\n", bind_args.edge);
+			return -EINVAL;
+		}
+
+		err = pps_kc_bind(pps, &bind_args);
+		if (err < 0)
+			return err;
+
+		break;
+	}
+	default:
+		return -ENOTTY;
+	}
+
+	return 0;
+}
+
+#ifdef CONFIG_COMPAT
+static long pps_cdev_compat_ioctl(struct file *file,
+		unsigned int cmd, unsigned long arg)
+{
+	struct pps_device *pps = file->private_data;
+	void __user *uarg = (void __user *) arg;
+
+	cmd = _IOC(_IOC_DIR(cmd), _IOC_TYPE(cmd), _IOC_NR(cmd), sizeof(void *));
+
+	if (cmd == PPS_FETCH) {
+		struct pps_fdata_compat compat;
+		struct pps_fdata fdata;
+		int err;
+
+		dev_dbg(&pps->dev, "PPS_FETCH\n");
+
+		err = copy_from_user(&compat, uarg, sizeof(struct pps_fdata_compat));
+		if (err)
+			return -EFAULT;
+
+		memcpy(&fdata.timeout, &compat.timeout,
+					sizeof(struct pps_ktime_compat));
+
+		err = pps_cdev_pps_fetch(pps, &fdata);
+		if (err)
+			return err;
+
+		/* Return the fetched timestamp */
+		spin_lock_irq(&pps->lock);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		compat.info.assert_sequence = pps->assert_sequence;
 		compat.info.clear_sequence = pps->clear_sequence;

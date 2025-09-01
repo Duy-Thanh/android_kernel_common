@@ -257,6 +257,7 @@ static bool bl_map_stripe(struct pnfs_block_dev *dev, u64 offset,
 	struct pnfs_block_dev *child;
 	u64 chunk;
 	u32 chunk_idx;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u64 disk_chunk;
 	u64 disk_offset;
 
@@ -275,6 +276,26 @@ static bool bl_map_stripe(struct pnfs_block_dev *dev, u64 offset,
 
 	/* disk offset of the stripe */
 	disk_offset = disk_chunk * dev->chunk_size;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u64 disk_offset;
+
+	chunk = div_u64(offset, dev->chunk_size);
+	div_u64_rem(chunk, dev->nr_children, &chunk_idx);
+
+	if (chunk_idx >= dev->nr_children) {
+		dprintk("%s: invalid chunk idx %d (%lld/%lld)\n",
+			__func__, chunk_idx, offset, dev->chunk_size);
+		/* error, should not happen */
+		return false;
+	}
+
+	/* truncate offset to the beginning of the stripe */
+	offset = chunk * dev->chunk_size;
+
+	/* disk offset of the stripe */
+	disk_offset = div_u64(offset, dev->nr_children);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	child = &dev->children[chunk_idx];
 	child->map(child, disk_offset, map);

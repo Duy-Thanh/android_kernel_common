@@ -257,6 +257,7 @@ void mlock_folio(struct folio *folio)
 
 	folio_get(folio);
 	if (!folio_batch_add(fbatch, mlock_lru(folio)) ||
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	    !folio_may_be_lru_cached(folio) || lru_cache_disabled())
 		mlock_folio_batch(fbatch);
 	local_unlock(&mlock_fbatch.lock);
@@ -302,6 +303,54 @@ void munlock_folio(struct folio *folio)
 	folio_get(folio);
 	if (!folio_batch_add(fbatch, folio) ||
 	    !folio_may_be_lru_cached(folio) || lru_cache_disabled())
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	    folio_test_large(folio) || lru_cache_disabled())
+		mlock_folio_batch(fbatch);
+	local_unlock(&mlock_fbatch.lock);
+}
+
+/**
+ * mlock_new_folio - mlock a newly allocated folio not yet on LRU
+ * @folio: folio to be mlocked, either normal or a THP head.
+ */
+void mlock_new_folio(struct folio *folio)
+{
+	struct folio_batch *fbatch;
+	int nr_pages = folio_nr_pages(folio);
+
+	local_lock(&mlock_fbatch.lock);
+	fbatch = this_cpu_ptr(&mlock_fbatch.fbatch);
+	folio_set_mlocked(folio);
+
+	zone_stat_mod_folio(folio, NR_MLOCK, nr_pages);
+	__count_vm_events(UNEVICTABLE_PGMLOCKED, nr_pages);
+
+	folio_get(folio);
+	if (!folio_batch_add(fbatch, mlock_new(folio)) ||
+	    folio_test_large(folio) || lru_cache_disabled())
+		mlock_folio_batch(fbatch);
+	local_unlock(&mlock_fbatch.lock);
+}
+
+/**
+ * munlock_folio - munlock a folio
+ * @folio: folio to be munlocked, either normal or a THP head.
+ */
+void munlock_folio(struct folio *folio)
+{
+	struct folio_batch *fbatch;
+
+	local_lock(&mlock_fbatch.lock);
+	fbatch = this_cpu_ptr(&mlock_fbatch.fbatch);
+	/*
+	 * folio_test_clear_mlocked(folio) must be left to __munlock_folio(),
+	 * which will check whether the folio is multiply mlocked.
+	 */
+	folio_get(folio);
+	if (!folio_batch_add(fbatch, folio) ||
+	    folio_test_large(folio) || lru_cache_disabled())
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		mlock_folio_batch(fbatch);
 	local_unlock(&mlock_fbatch.lock);
 }

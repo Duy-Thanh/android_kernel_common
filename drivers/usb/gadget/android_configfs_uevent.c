@@ -271,3 +271,54 @@ void android_set_unconfigured(struct android_uevent_opts *opts)
 {
 	__android_set_configured(opts, false);
 }
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+struct device *android_create_function_device(char *name, void *drvdata,
+	       const struct attribute_group **groups)
+{
+	struct android_uevent_opts *opts;
+	struct device *dev;
+	unsigned long flags;
+	int id;
+
+	spin_lock_irqsave(&opts_lock, flags);
+	opts = android_opts;
+	if (IS_ERR_OR_NULL(opts) || IS_ERR_OR_NULL(opts->dev)) {
+		spin_unlock_irqrestore(&opts_lock, flags);
+		return ERR_PTR(-ENODEV);
+	}
+
+	id = ida_alloc(&opts->function_ida, GFP_ATOMIC);
+	if (id < 0) {
+		spin_unlock_irqrestore(&opts_lock, flags);
+		return ERR_PTR(id);
+	}
+	// device_create_with_groups can sleep, so we must unlock first
+	spin_unlock_irqrestore(&opts_lock, flags);
+	dev = device_create_with_groups(&android_usb_class, opts->dev,
+	       MKDEV(0, id), drvdata, groups, name);
+	return dev;
+}
+EXPORT_SYMBOL_GPL(android_create_function_device);
+
+void android_remove_function_device(struct device *dev)
+{
+	struct android_uevent_opts *opts;
+	unsigned long flags;
+
+	device_destroy(&android_usb_class, dev->devt);
+
+	spin_lock_irqsave(&opts_lock, flags);
+	opts = android_opts;
+	if (IS_ERR_OR_NULL(opts)) {
+		spin_unlock_irqrestore(&opts_lock, flags);
+		return;
+	}
+
+	ida_free(&opts->function_ida, MINOR(dev->devt));
+	spin_unlock_irqrestore(&opts_lock, flags);
+}
+EXPORT_SYMBOL_GPL(android_remove_function_device);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)

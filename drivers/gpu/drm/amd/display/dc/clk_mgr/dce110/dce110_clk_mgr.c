@@ -120,6 +120,7 @@ void dce110_fill_display_configs(
 	const struct dc_state *context,
 	struct dm_pp_display_configuration *pp_display_cfg)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct dc *dc = context->clk_mgr->ctx->dc;
 	int j;
 	int num_cfgs = 0;
@@ -247,6 +248,130 @@ void dce11_pplib_apply_display_requirements(
 			= context->bw_ctx.bw.dce.sclk_deep_sleep_khz;
 
 	dce110_fill_display_configs(context, pp_display_cfg);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int j;
+	int num_cfgs = 0;
+
+	for (j = 0; j < context->stream_count; j++) {
+		int k;
+
+		const struct dc_stream_state *stream = context->streams[j];
+		struct dm_pp_single_disp_config *cfg =
+			&pp_display_cfg->disp_configs[num_cfgs];
+		const struct pipe_ctx *pipe_ctx = NULL;
+
+		for (k = 0; k < MAX_PIPES; k++)
+			if (stream == context->res_ctx.pipe_ctx[k].stream) {
+				pipe_ctx = &context->res_ctx.pipe_ctx[k];
+				break;
+			}
+
+		ASSERT(pipe_ctx != NULL);
+
+		/* only notify active stream */
+		if (stream->dpms_off)
+			continue;
+
+		num_cfgs++;
+		cfg->signal = pipe_ctx->stream->signal;
+		cfg->pipe_idx = pipe_ctx->stream_res.tg->inst;
+		cfg->src_height = stream->src.height;
+		cfg->src_width = stream->src.width;
+		cfg->ddi_channel_mapping =
+			stream->link->ddi_channel_mapping.raw;
+		cfg->transmitter =
+			stream->link->link_enc->transmitter;
+		cfg->link_settings.lane_count =
+			stream->link->cur_link_settings.lane_count;
+		cfg->link_settings.link_rate =
+			stream->link->cur_link_settings.link_rate;
+		cfg->link_settings.link_spread =
+			stream->link->cur_link_settings.link_spread;
+		cfg->sym_clock = stream->phy_pix_clk;
+		/* Round v_refresh*/
+		cfg->v_refresh = stream->timing.pix_clk_100hz * 100;
+		cfg->v_refresh /= stream->timing.h_total;
+		cfg->v_refresh = (cfg->v_refresh + stream->timing.v_total / 2)
+							/ stream->timing.v_total;
+	}
+
+	pp_display_cfg->display_count = num_cfgs;
+}
+
+void dce11_pplib_apply_display_requirements(
+	struct dc *dc,
+	struct dc_state *context)
+{
+	struct dm_pp_display_configuration *pp_display_cfg = &context->pp_display_cfg;
+	int memory_type_multiplier = MEMORY_TYPE_MULTIPLIER_CZ;
+
+	if (dc->bw_vbios && dc->bw_vbios->memory_type == bw_def_hbm)
+		memory_type_multiplier = MEMORY_TYPE_HBM;
+
+	pp_display_cfg->all_displays_in_sync =
+		context->bw_ctx.bw.dce.all_displays_in_sync;
+	pp_display_cfg->nb_pstate_switch_disable =
+			context->bw_ctx.bw.dce.nbp_state_change_enable == false;
+	pp_display_cfg->cpu_cc6_disable =
+			context->bw_ctx.bw.dce.cpuc_state_change_enable == false;
+	pp_display_cfg->cpu_pstate_disable =
+			context->bw_ctx.bw.dce.cpup_state_change_enable == false;
+	pp_display_cfg->cpu_pstate_separation_time =
+			context->bw_ctx.bw.dce.blackout_recovery_time_us;
+
+	/*
+	 * TODO: determine whether the bandwidth has reached memory's limitation
+	 * , then change minimum memory clock based on real-time bandwidth
+	 * limitation.
+	 */
+	if (dc->bw_vbios && (dc->ctx->asic_id.chip_family == FAMILY_AI) &&
+	     ASICREV_IS_VEGA20_P(dc->ctx->asic_id.hw_internal_rev) && (context->stream_count >= 2)) {
+		pp_display_cfg->min_memory_clock_khz = max(pp_display_cfg->min_memory_clock_khz,
+							   (uint32_t) div64_s64(
+								   div64_s64(dc->bw_vbios->high_yclk.value,
+									     memory_type_multiplier), 10000));
+	} else {
+		pp_display_cfg->min_memory_clock_khz = context->bw_ctx.bw.dce.yclk_khz
+			/ memory_type_multiplier;
+	}
+
+	pp_display_cfg->min_engine_clock_khz = determine_sclk_from_bounding_box(
+			dc,
+			context->bw_ctx.bw.dce.sclk_khz);
+
+	/*
+	 * As workaround for >4x4K lightup set dcfclock to min_engine_clock value.
+	 * This is not required for less than 5 displays,
+	 * thus don't request decfclk in dc to avoid impact
+	 * on power saving.
+	 *
+	 */
+	pp_display_cfg->min_dcfclock_khz = (context->stream_count > 4) ?
+			pp_display_cfg->min_engine_clock_khz : 0;
+
+	pp_display_cfg->min_engine_clock_deep_sleep_khz
+			= context->bw_ctx.bw.dce.sclk_deep_sleep_khz;
+
+	pp_display_cfg->avail_mclk_switch_time_us =
+						dce110_get_min_vblank_time_us(context);
+	/* TODO: dce11.2*/
+	pp_display_cfg->avail_mclk_switch_time_in_disp_active_us = 0;
+
+	pp_display_cfg->disp_clk_khz = dc->clk_mgr->clks.dispclk_khz;
+
+	dce110_fill_display_configs(context, pp_display_cfg);
+
+	/* TODO: is this still applicable?*/
+	if (pp_display_cfg->display_count == 1) {
+		const struct dc_crtc_timing *timing =
+			&context->streams[0]->timing;
+
+		pp_display_cfg->crtc_index =
+			pp_display_cfg->disp_configs[0].pipe_idx;
+		pp_display_cfg->line_time_in_us = timing->h_total * 10000 / timing->pix_clk_100hz;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (memcmp(&dc->current_state->pp_display_cfg, pp_display_cfg, sizeof(*pp_display_cfg)) !=  0)
 		dm_pp_apply_display_requirements(dc->ctx, pp_display_cfg);

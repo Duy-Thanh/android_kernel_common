@@ -121,6 +121,7 @@ int cpc_read_ffh(int cpu, struct cpc_reg *reg, u64 *val)
 
 		*val = data.ret.value;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		return data.ret.error;
 	}
 
@@ -151,6 +152,39 @@ int cpc_write_ffh(int cpu, struct cpc_reg *reg, u64 val)
 		smp_call_function_single(cpu, cppc_ffh_csr_write, &data, 1);
 
 		return data.ret.error;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		return (data.ret.error) ? sbi_err_map_linux_errno(data.ret.error) : 0;
+	}
+
+	return -EINVAL;
+}
+
+int cpc_write_ffh(int cpu, struct cpc_reg *reg, u64 val)
+{
+	struct sbi_cppc_data data;
+
+	if (WARN_ON_ONCE(irqs_disabled()))
+		return -EPERM;
+
+	if (FFH_CPPC_TYPE(reg->address) == FFH_CPPC_SBI) {
+		if (!cppc_ext_present)
+			return -EINVAL;
+
+		data.reg = FFH_CPPC_SBI_REG(reg->address);
+		data.val = val;
+
+		smp_call_function_single(cpu, sbi_cppc_write, &data, 1);
+
+		return (data.ret.error) ? sbi_err_map_linux_errno(data.ret.error) : 0;
+	} else if (FFH_CPPC_TYPE(reg->address) == FFH_CPPC_CSR) {
+		data.reg = FFH_CPPC_CSR_NUM(reg->address);
+		data.val = val;
+
+		smp_call_function_single(cpu, cppc_ffh_csr_write, &data, 1);
+
+		return (data.ret.error) ? sbi_err_map_linux_errno(data.ret.error) : 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	return -EINVAL;

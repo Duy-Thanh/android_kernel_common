@@ -3663,6 +3663,7 @@ static int phy_probe(struct device *dev)
 	/* Get the LEDs from the device tree, and instantiate standard
 	 * LEDs for them.
 	 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (IS_ENABLED(CONFIG_PHYLIB_LEDS) && !phy_driver_is_genphy(phydev) &&
 	    !phy_driver_is_genphy_10g(phydev))
 		err = of_phy_leds(phydev);
@@ -3683,6 +3684,27 @@ static int phy_remove(struct device *dev)
 
 	if (IS_ENABLED(CONFIG_PHYLIB_LEDS) && !phy_driver_is_genphy(phydev) &&
 	    !phy_driver_is_genphy_10g(phydev))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (IS_ENABLED(CONFIG_PHYLIB_LEDS))
+		err = of_phy_leds(phydev);
+
+out:
+	/* Re-assert the reset signal on error */
+	if (err)
+		phy_device_reset(phydev, 1);
+
+	return err;
+}
+
+static int phy_remove(struct device *dev)
+{
+	struct phy_device *phydev = to_phy_device(dev);
+
+	cancel_delayed_work_sync(&phydev->state_queue);
+
+	if (IS_ENABLED(CONFIG_PHYLIB_LEDS))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		phy_leds_unregister(phydev);
 
 	phydev->state = PHY_DOWN;

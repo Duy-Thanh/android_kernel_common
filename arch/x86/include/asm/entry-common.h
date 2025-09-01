@@ -92,6 +92,7 @@ static inline void arch_exit_to_user_mode_prepare(struct pt_regs *regs,
 	 * 8 (ia32) bits.
 	 */
 	choose_random_kstack_offset(rdtsc());
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	/* Avoid unnecessary reads of 'x86_ibpb_exit_to_user' */
 	if (cpu_feature_enabled(X86_FEATURE_IBPB_EXIT_TO_USER) &&
@@ -99,6 +100,9 @@ static inline void arch_exit_to_user_mode_prepare(struct pt_regs *regs,
 		indirect_branch_prediction_barrier();
 		this_cpu_write(x86_ibpb_exit_to_user, false);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 #define arch_exit_to_user_mode_prepare arch_exit_to_user_mode_prepare
 

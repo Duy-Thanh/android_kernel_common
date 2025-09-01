@@ -110,6 +110,7 @@ static inline void mv_cesa_ahash_dma_cleanup(struct ahash_request *req)
 static inline void mv_cesa_ahash_cleanup(struct ahash_request *req)
 {
 	struct mv_cesa_ahash_req *creq = ahash_request_ctx(req);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct mv_cesa_engine *engine = creq->base.engine;
 
 	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
@@ -398,6 +399,296 @@ static void mv_cesa_ahash_complete(struct crypto_async_request *req)
 			}
 		}
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
+		mv_cesa_ahash_dma_cleanup(req);
+}
+
+static void mv_cesa_ahash_last_cleanup(struct ahash_request *req)
+{
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(req);
+
+	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
+		mv_cesa_ahash_dma_last_cleanup(req);
+}
+
+static int mv_cesa_ahash_pad_len(struct mv_cesa_ahash_req *creq)
+{
+	unsigned int index, padlen;
+
+	index = creq->len & CESA_HASH_BLOCK_SIZE_MSK;
+	padlen = (index < 56) ? (56 - index) : (64 + 56 - index);
+
+	return padlen;
+}
+
+static int mv_cesa_ahash_pad_req(struct mv_cesa_ahash_req *creq, u8 *buf)
+{
+	unsigned int padlen;
+
+	buf[0] = 0x80;
+	/* Pad out to 56 mod 64 */
+	padlen = mv_cesa_ahash_pad_len(creq);
+	memset(buf + 1, 0, padlen - 1);
+
+	if (creq->algo_le) {
+		__le64 bits = cpu_to_le64(creq->len << 3);
+
+		memcpy(buf + padlen, &bits, sizeof(bits));
+	} else {
+		__be64 bits = cpu_to_be64(creq->len << 3);
+
+		memcpy(buf + padlen, &bits, sizeof(bits));
+	}
+
+	return padlen + 8;
+}
+
+static void mv_cesa_ahash_std_step(struct ahash_request *req)
+{
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(req);
+	struct mv_cesa_ahash_std_req *sreq = &creq->req.std;
+	struct mv_cesa_engine *engine = creq->base.engine;
+	struct mv_cesa_op_ctx *op;
+	unsigned int new_cache_ptr = 0;
+	u32 frag_mode;
+	size_t  len;
+	unsigned int digsize;
+	int i;
+
+	mv_cesa_adjust_op(engine, &creq->op_tmpl);
+	if (engine->pool)
+		memcpy(engine->sram_pool, &creq->op_tmpl,
+		       sizeof(creq->op_tmpl));
+	else
+		memcpy_toio(engine->sram, &creq->op_tmpl,
+			    sizeof(creq->op_tmpl));
+
+	if (!sreq->offset) {
+		digsize = crypto_ahash_digestsize(crypto_ahash_reqtfm(req));
+		for (i = 0; i < digsize / 4; i++)
+			writel_relaxed(creq->state[i],
+				       engine->regs + CESA_IVDIG(i));
+	}
+
+	if (creq->cache_ptr) {
+		if (engine->pool)
+			memcpy(engine->sram_pool + CESA_SA_DATA_SRAM_OFFSET,
+			       creq->cache, creq->cache_ptr);
+		else
+			memcpy_toio(engine->sram + CESA_SA_DATA_SRAM_OFFSET,
+				    creq->cache, creq->cache_ptr);
+	}
+
+	len = min_t(size_t, req->nbytes + creq->cache_ptr - sreq->offset,
+		    CESA_SA_SRAM_PAYLOAD_SIZE);
+
+	if (!creq->last_req) {
+		new_cache_ptr = len & CESA_HASH_BLOCK_SIZE_MSK;
+		len &= ~CESA_HASH_BLOCK_SIZE_MSK;
+	}
+
+	if (len - creq->cache_ptr)
+		sreq->offset += mv_cesa_sg_copy_to_sram(
+			engine, req->src, creq->src_nents,
+			CESA_SA_DATA_SRAM_OFFSET + creq->cache_ptr,
+			len - creq->cache_ptr, sreq->offset);
+
+	op = &creq->op_tmpl;
+
+	frag_mode = mv_cesa_get_op_cfg(op) & CESA_SA_DESC_CFG_FRAG_MSK;
+
+	if (creq->last_req && sreq->offset == req->nbytes &&
+	    creq->len <= CESA_SA_DESC_MAC_SRC_TOTAL_LEN_MAX) {
+		if (frag_mode == CESA_SA_DESC_CFG_FIRST_FRAG)
+			frag_mode = CESA_SA_DESC_CFG_NOT_FRAG;
+		else if (frag_mode == CESA_SA_DESC_CFG_MID_FRAG)
+			frag_mode = CESA_SA_DESC_CFG_LAST_FRAG;
+	}
+
+	if (frag_mode == CESA_SA_DESC_CFG_NOT_FRAG ||
+	    frag_mode == CESA_SA_DESC_CFG_LAST_FRAG) {
+		if (len &&
+		    creq->len <= CESA_SA_DESC_MAC_SRC_TOTAL_LEN_MAX) {
+			mv_cesa_set_mac_op_total_len(op, creq->len);
+		} else {
+			int trailerlen = mv_cesa_ahash_pad_len(creq) + 8;
+
+			if (len + trailerlen > CESA_SA_SRAM_PAYLOAD_SIZE) {
+				len &= CESA_HASH_BLOCK_SIZE_MSK;
+				new_cache_ptr = 64 - trailerlen;
+				if (engine->pool)
+					memcpy(creq->cache,
+					       engine->sram_pool +
+					       CESA_SA_DATA_SRAM_OFFSET + len,
+					       new_cache_ptr);
+				else
+					memcpy_fromio(creq->cache,
+						      engine->sram +
+						      CESA_SA_DATA_SRAM_OFFSET +
+						      len,
+						      new_cache_ptr);
+			} else {
+				i = mv_cesa_ahash_pad_req(creq, creq->cache);
+				len += i;
+				if (engine->pool)
+					memcpy(engine->sram_pool + len +
+					       CESA_SA_DATA_SRAM_OFFSET,
+					       creq->cache, i);
+				else
+					memcpy_toio(engine->sram + len +
+						    CESA_SA_DATA_SRAM_OFFSET,
+						    creq->cache, i);
+			}
+
+			if (frag_mode == CESA_SA_DESC_CFG_LAST_FRAG)
+				frag_mode = CESA_SA_DESC_CFG_MID_FRAG;
+			else
+				frag_mode = CESA_SA_DESC_CFG_FIRST_FRAG;
+		}
+	}
+
+	mv_cesa_set_mac_op_frag_len(op, len);
+	mv_cesa_update_op_cfg(op, frag_mode, CESA_SA_DESC_CFG_FRAG_MSK);
+
+	/* FIXME: only update enc_len field */
+	if (engine->pool)
+		memcpy(engine->sram_pool, op, sizeof(*op));
+	else
+		memcpy_toio(engine->sram, op, sizeof(*op));
+
+	if (frag_mode == CESA_SA_DESC_CFG_FIRST_FRAG)
+		mv_cesa_update_op_cfg(op, CESA_SA_DESC_CFG_MID_FRAG,
+				      CESA_SA_DESC_CFG_FRAG_MSK);
+
+	creq->cache_ptr = new_cache_ptr;
+
+	mv_cesa_set_int_mask(engine, CESA_SA_INT_ACCEL0_DONE);
+	writel_relaxed(CESA_SA_CFG_PARA_DIS, engine->regs + CESA_SA_CFG);
+	WARN_ON(readl(engine->regs + CESA_SA_CMD) &
+		CESA_SA_CMD_EN_CESA_SA_ACCL0);
+	writel(CESA_SA_CMD_EN_CESA_SA_ACCL0, engine->regs + CESA_SA_CMD);
+}
+
+static int mv_cesa_ahash_std_process(struct ahash_request *req, u32 status)
+{
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(req);
+	struct mv_cesa_ahash_std_req *sreq = &creq->req.std;
+
+	if (sreq->offset < (req->nbytes - creq->cache_ptr))
+		return -EINPROGRESS;
+
+	return 0;
+}
+
+static inline void mv_cesa_ahash_dma_prepare(struct ahash_request *req)
+{
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(req);
+	struct mv_cesa_req *basereq = &creq->base;
+
+	mv_cesa_dma_prepare(basereq, basereq->engine);
+}
+
+static void mv_cesa_ahash_std_prepare(struct ahash_request *req)
+{
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(req);
+	struct mv_cesa_ahash_std_req *sreq = &creq->req.std;
+
+	sreq->offset = 0;
+}
+
+static void mv_cesa_ahash_dma_step(struct ahash_request *req)
+{
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(req);
+	struct mv_cesa_req *base = &creq->base;
+
+	/* We must explicitly set the digest state. */
+	if (base->chain.first->flags & CESA_TDMA_SET_STATE) {
+		struct mv_cesa_engine *engine = base->engine;
+		int i;
+
+		/* Set the hash state in the IVDIG regs. */
+		for (i = 0; i < ARRAY_SIZE(creq->state); i++)
+			writel_relaxed(creq->state[i], engine->regs +
+				       CESA_IVDIG(i));
+	}
+
+	mv_cesa_dma_step(base);
+}
+
+static void mv_cesa_ahash_step(struct crypto_async_request *req)
+{
+	struct ahash_request *ahashreq = ahash_request_cast(req);
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(ahashreq);
+
+	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
+		mv_cesa_ahash_dma_step(ahashreq);
+	else
+		mv_cesa_ahash_std_step(ahashreq);
+}
+
+static int mv_cesa_ahash_process(struct crypto_async_request *req, u32 status)
+{
+	struct ahash_request *ahashreq = ahash_request_cast(req);
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(ahashreq);
+
+	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
+		return mv_cesa_dma_process(&creq->base, status);
+
+	return mv_cesa_ahash_std_process(ahashreq, status);
+}
+
+static void mv_cesa_ahash_complete(struct crypto_async_request *req)
+{
+	struct ahash_request *ahashreq = ahash_request_cast(req);
+	struct mv_cesa_ahash_req *creq = ahash_request_ctx(ahashreq);
+	struct mv_cesa_engine *engine = creq->base.engine;
+	unsigned int digsize;
+	int i;
+
+	digsize = crypto_ahash_digestsize(crypto_ahash_reqtfm(ahashreq));
+
+	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ &&
+	    (creq->base.chain.last->flags & CESA_TDMA_TYPE_MSK) ==
+	     CESA_TDMA_RESULT) {
+		__le32 *data = NULL;
+
+		/*
+		 * Result is already in the correct endianness when the SA is
+		 * used
+		 */
+		data = creq->base.chain.last->op->ctx.hash.hash;
+		for (i = 0; i < digsize / 4; i++)
+			creq->state[i] = le32_to_cpu(data[i]);
+
+		memcpy(ahashreq->result, data, digsize);
+	} else {
+		for (i = 0; i < digsize / 4; i++)
+			creq->state[i] = readl_relaxed(engine->regs +
+						       CESA_IVDIG(i));
+		if (creq->last_req) {
+			/*
+			 * Hardware's MD5 digest is in little endian format, but
+			 * SHA in big endian format
+			 */
+			if (creq->algo_le) {
+				__le32 *result = (void *)ahashreq->result;
+
+				for (i = 0; i < digsize / 4; i++)
+					result[i] = cpu_to_le32(creq->state[i]);
+			} else {
+				__be32 *result = (void *)ahashreq->result;
+
+				for (i = 0; i < digsize / 4; i++)
+					result[i] = cpu_to_be32(creq->state[i]);
+			}
+		}
+	}
+
+	atomic_sub(ahashreq->nbytes, &engine->load);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static void mv_cesa_ahash_prepare(struct crypto_async_request *req,

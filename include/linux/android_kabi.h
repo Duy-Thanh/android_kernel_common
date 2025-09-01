@@ -70,6 +70,7 @@
 				__stringify(_new));			\
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define _ANDROID_KABI_REPLACE(_orig, _new)		      \
 	union {						      \
 		_new;					      \
@@ -78,6 +79,21 @@
 		};					      \
 		_ANDROID_KABI_NORMAL_SIZE_ALIGN(_orig, _new); \
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#if defined(BUILD_VDSO) || defined(__DISABLE_EXPORTS)
+#define _ANDROID_KABI_REPLACE(_orig, _new)	_new
+#else
+#define _ANDROID_KABI_REPLACE(_orig, _new)		      \
+	union {						      \
+		_new;					      \
+		struct {				      \
+			_orig;				      \
+		};					      \
+		_ANDROID_KABI_NORMAL_SIZE_ALIGN(_orig, _new); \
+	}
+#endif
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 
 /*

@@ -572,6 +572,7 @@ remap:
 		dma_map_single(&rtlpci->pdev->dev, skb_tail_pointer(skb),
 			       rtlpci->rxbuffersize, DMA_FROM_DEVICE);
 	bufferaddress = *((dma_addr_t *)skb->cb);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (dma_mapping_error(&rtlpci->pdev->dev, bufferaddress)) {
 		if (!new_skb)
 			kfree_skb(skb);
@@ -818,6 +819,246 @@ no_new:
 				if (new_skb)
 					dev_kfree_skb_any(skb);
 			}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (dma_mapping_error(&rtlpci->pdev->dev, bufferaddress))
+		return 0;
+	rtlpci->rx_ring[rxring_idx].rx_buf[desc_idx] = skb;
+	if (rtlpriv->use_new_trx_flow) {
+		/* skb->cb may be 64 bit address */
+		rtlpriv->cfg->ops->set_desc(hw, (u8 *)entry, false,
+					    HW_DESC_RX_PREPARE,
+					    (u8 *)(dma_addr_t *)skb->cb);
+	} else {
+		rtlpriv->cfg->ops->set_desc(hw, (u8 *)entry, false,
+					    HW_DESC_RXBUFF_ADDR,
+					    (u8 *)&bufferaddress);
+		rtlpriv->cfg->ops->set_desc(hw, (u8 *)entry, false,
+					    HW_DESC_RXPKT_LEN,
+					    (u8 *)&rtlpci->rxbuffersize);
+		rtlpriv->cfg->ops->set_desc(hw, (u8 *)entry, false,
+					    HW_DESC_RXOWN,
+					    (u8 *)&tmp_one);
+	}
+	return 1;
+}
+
+/* inorder to receive 8K AMSDU we have set skb to
+ * 9100bytes in init rx ring, but if this packet is
+ * not a AMSDU, this large packet will be sent to
+ * TCP/IP directly, this cause big packet ping fail
+ * like: "ping -s 65507", so here we will realloc skb
+ * based on the true size of packet, Mac80211
+ * Probably will do it better, but does not yet.
+ *
+ * Some platform will fail when alloc skb sometimes.
+ * in this condition, we will send the old skb to
+ * mac80211 directly, this will not cause any other
+ * issues, but only this packet will be lost by TCP/IP
+ */
+static void _rtl_pci_rx_to_mac80211(struct ieee80211_hw *hw,
+				    struct sk_buff *skb,
+				    struct ieee80211_rx_status rx_status)
+{
+	if (unlikely(!rtl_action_proc(hw, skb, false))) {
+		dev_kfree_skb_any(skb);
+	} else {
+		struct sk_buff *uskb = NULL;
+
+		uskb = dev_alloc_skb(skb->len + 128);
+		if (likely(uskb)) {
+			memcpy(IEEE80211_SKB_RXCB(uskb), &rx_status,
+			       sizeof(rx_status));
+			skb_put_data(uskb, skb->data, skb->len);
+			dev_kfree_skb_any(skb);
+			ieee80211_rx_irqsafe(hw, uskb);
+		} else {
+			ieee80211_rx_irqsafe(hw, skb);
+		}
+	}
+}
+
+/*hsisr interrupt handler*/
+static void _rtl_pci_hs_interrupt(struct ieee80211_hw *hw)
+{
+	struct rtl_priv *rtlpriv = rtl_priv(hw);
+	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
+
+	rtl_write_byte(rtlpriv, rtlpriv->cfg->maps[MAC_HSISR],
+		       rtl_read_byte(rtlpriv, rtlpriv->cfg->maps[MAC_HSISR]) |
+		       rtlpci->sys_irq_mask);
+}
+
+static void _rtl_pci_rx_interrupt(struct ieee80211_hw *hw)
+{
+	struct rtl_priv *rtlpriv = rtl_priv(hw);
+	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
+	int rxring_idx = RTL_PCI_RX_MPDU_QUEUE;
+	struct ieee80211_rx_status rx_status = { 0 };
+	unsigned int count = rtlpci->rxringcount;
+	u8 own;
+	u8 tmp_one;
+	bool unicast = false;
+	u8 hw_queue = 0;
+	unsigned int rx_remained_cnt = 0;
+	struct rtl_stats stats = {
+		.signal = 0,
+		.rate = 0,
+	};
+
+	/*RX NORMAL PKT */
+	while (count--) {
+		struct ieee80211_hdr *hdr;
+		__le16 fc;
+		u16 len;
+		/*rx buffer descriptor */
+		struct rtl_rx_buffer_desc *buffer_desc = NULL;
+		/*if use new trx flow, it means wifi info */
+		struct rtl_rx_desc *pdesc = NULL;
+		/*rx pkt */
+		struct sk_buff *skb = rtlpci->rx_ring[rxring_idx].rx_buf[
+				      rtlpci->rx_ring[rxring_idx].idx];
+		struct sk_buff *new_skb;
+
+		if (rtlpriv->use_new_trx_flow) {
+			if (rx_remained_cnt == 0)
+				rx_remained_cnt =
+				rtlpriv->cfg->ops->rx_desc_buff_remained_cnt(hw,
+								      hw_queue);
+			if (rx_remained_cnt == 0)
+				return;
+			buffer_desc = &rtlpci->rx_ring[rxring_idx].buffer_desc[
+				rtlpci->rx_ring[rxring_idx].idx];
+			pdesc = (struct rtl_rx_desc *)skb->data;
+		} else {	/* rx descriptor */
+			pdesc = &rtlpci->rx_ring[rxring_idx].desc[
+				rtlpci->rx_ring[rxring_idx].idx];
+
+			own = (u8)rtlpriv->cfg->ops->get_desc(hw, (u8 *)pdesc,
+							      false,
+							      HW_DESC_OWN);
+			if (own) /* wait data to be filled by hardware */
+				return;
+		}
+
+		/* Reaching this point means: data is filled already
+		 * AAAAAAttention !!!
+		 * We can NOT access 'skb' before 'pci_unmap_single'
+		 */
+		dma_unmap_single(&rtlpci->pdev->dev, *((dma_addr_t *)skb->cb),
+				 rtlpci->rxbuffersize, DMA_FROM_DEVICE);
+
+		/* get a new skb - if fail, old one will be reused */
+		new_skb = dev_alloc_skb(rtlpci->rxbuffersize);
+		if (unlikely(!new_skb))
+			goto no_new;
+		memset(&rx_status, 0, sizeof(rx_status));
+		rtlpriv->cfg->ops->query_rx_desc(hw, &stats,
+						 &rx_status, (u8 *)pdesc, skb);
+
+		if (rtlpriv->use_new_trx_flow)
+			rtlpriv->cfg->ops->rx_check_dma_ok(hw,
+							   (u8 *)buffer_desc,
+							   hw_queue);
+
+		len = rtlpriv->cfg->ops->get_desc(hw, (u8 *)pdesc, false,
+						  HW_DESC_RXPKT_LEN);
+
+		if (skb->end - skb->tail > len) {
+			skb_put(skb, len);
+			if (rtlpriv->use_new_trx_flow)
+				skb_reserve(skb, stats.rx_drvinfo_size +
+					    stats.rx_bufshift + 24);
+			else
+				skb_reserve(skb, stats.rx_drvinfo_size +
+					    stats.rx_bufshift);
+		} else {
+			rtl_dbg(rtlpriv, COMP_ERR, DBG_WARNING,
+				"skb->end - skb->tail = %d, len is %d\n",
+				skb->end - skb->tail, len);
+			dev_kfree_skb_any(skb);
+			goto new_trx_end;
+		}
+		/* handle command packet here */
+		if (stats.packet_report_type == C2H_PACKET) {
+			rtl_c2hcmd_enqueue(hw, skb);
+			goto new_trx_end;
+		}
+
+		/* NOTICE This can not be use for mac80211,
+		 * this is done in mac80211 code,
+		 * if done here sec DHCP will fail
+		 * skb_trim(skb, skb->len - 4);
+		 */
+
+		hdr = rtl_get_hdr(skb);
+		fc = rtl_get_fc(skb);
+
+		if (!stats.crc && !stats.hwerror && (skb->len > FCS_LEN)) {
+			memcpy(IEEE80211_SKB_RXCB(skb), &rx_status,
+			       sizeof(rx_status));
+
+			if (is_broadcast_ether_addr(hdr->addr1)) {
+				;/*TODO*/
+			} else if (is_multicast_ether_addr(hdr->addr1)) {
+				;/*TODO*/
+			} else {
+				unicast = true;
+				rtlpriv->stats.rxbytesunicast += skb->len;
+			}
+			rtl_is_special_data(hw, skb, false, true);
+
+			if (ieee80211_is_data(fc)) {
+				rtlpriv->cfg->ops->led_control(hw, LED_CTL_RX);
+				if (unicast)
+					rtlpriv->link_info.num_rx_inperiod++;
+			}
+
+			rtl_collect_scan_list(hw, skb);
+
+			/* static bcn for roaming */
+			rtl_beacon_statistic(hw, skb);
+			rtl_p2p_info(hw, (void *)skb->data, skb->len);
+			/* for sw lps */
+			rtl_swlps_beacon(hw, (void *)skb->data, skb->len);
+			rtl_recognize_peer(hw, (void *)skb->data, skb->len);
+			if (rtlpriv->mac80211.opmode == NL80211_IFTYPE_AP &&
+			    rtlpriv->rtlhal.current_bandtype == BAND_ON_2_4G &&
+			    (ieee80211_is_beacon(fc) ||
+			     ieee80211_is_probe_resp(fc))) {
+				dev_kfree_skb_any(skb);
+			} else {
+				_rtl_pci_rx_to_mac80211(hw, skb, rx_status);
+			}
+		} else {
+			/* drop packets with errors or those too short */
+			dev_kfree_skb_any(skb);
+		}
+new_trx_end:
+		if (rtlpriv->use_new_trx_flow) {
+			rtlpci->rx_ring[hw_queue].next_rx_rp += 1;
+			rtlpci->rx_ring[hw_queue].next_rx_rp %=
+					RTL_PCI_MAX_RX_COUNT;
+
+			rx_remained_cnt--;
+			rtl_write_word(rtlpriv, 0x3B4,
+				       rtlpci->rx_ring[hw_queue].next_rx_rp);
+		}
+		if (((rtlpriv->link_info.num_rx_inperiod +
+		      rtlpriv->link_info.num_tx_inperiod) > 8) ||
+		      rtlpriv->link_info.num_rx_inperiod > 2)
+			rtl_lps_leave(hw, false);
+		skb = new_skb;
+no_new:
+		if (rtlpriv->use_new_trx_flow) {
+			_rtl_pci_init_one_rxdesc(hw, skb, (u8 *)buffer_desc,
+						 rxring_idx,
+						 rtlpci->rx_ring[rxring_idx].idx);
+		} else {
+			_rtl_pci_init_one_rxdesc(hw, skb, (u8 *)pdesc,
+						 rxring_idx,
+						 rtlpci->rx_ring[rxring_idx].idx);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			if (rtlpci->rx_ring[rxring_idx].idx ==
 			    rtlpci->rxringcount - 1)
 				rtlpriv->cfg->ops->set_desc(hw, (u8 *)pdesc,

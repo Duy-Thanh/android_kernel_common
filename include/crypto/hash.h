@@ -132,6 +132,7 @@ struct ahash_request {
  *	      This is a counterpart to @init_tfm, used to remove
  *	      various changes set in @init_tfm.
  * @clone_tfm: Copy transform into new object, may allocate memory.
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @reqsize: Size of the request context.
  * @halg: see struct hash_alg_common
  */
@@ -150,6 +151,24 @@ struct ahash_alg {
 	int (*clone_tfm)(struct crypto_ahash *dst, struct crypto_ahash *src);
 
 	unsigned int reqsize;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * @halg: see struct hash_alg_common
+ */
+struct ahash_alg {
+	int (*init)(struct ahash_request *req);
+	int (*update)(struct ahash_request *req);
+	int (*final)(struct ahash_request *req);
+	int (*finup)(struct ahash_request *req);
+	int (*digest)(struct ahash_request *req);
+	int (*export)(struct ahash_request *req, void *out);
+	int (*import)(struct ahash_request *req, const void *in);
+	int (*setkey)(struct crypto_ahash *tfm, const u8 *key,
+		      unsigned int keylen);
+	int (*init_tfm)(struct crypto_ahash *tfm);
+	void (*exit_tfm)(struct crypto_ahash *tfm);
+	int (*clone_tfm)(struct crypto_ahash *dst, struct crypto_ahash *src);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	struct hash_alg_common halg;
 };

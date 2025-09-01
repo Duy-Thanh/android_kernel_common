@@ -253,6 +253,7 @@ nfs_page_group_unlock(struct nfs_page *req)
 	nfs_page_clear_headlock(req);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /**
  * nfs_page_group_sync_on_bit_locked - Test if all requests have @bit set
  * @req: request in page group
@@ -261,6 +262,16 @@ nfs_page_group_unlock(struct nfs_page *req)
  * must be called with page group lock held
  */
 bool nfs_page_group_sync_on_bit_locked(struct nfs_page *req, unsigned int bit)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/*
+ * nfs_page_group_sync_on_bit_locked
+ *
+ * must be called with page group lock held
+ */
+static bool
+nfs_page_group_sync_on_bit_locked(struct nfs_page *req, unsigned int bit)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 {
 	struct nfs_page *head = req->wb_head;
 	struct nfs_page *tmp;

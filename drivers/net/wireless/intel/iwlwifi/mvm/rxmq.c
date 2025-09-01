@@ -854,6 +854,7 @@ static bool iwl_mvm_reorder(struct iwl_mvm *mvm,
 	 * already ahead and it will be dropped.
 	 * If the last sub-frame is not on this queue - we will get frame
 	 * release notification with up to date NSSN.
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	 * If this is the first frame that is stored in the buffer, the head_sn
 	 * may be outdated. Update it based on the last NSSN to make sure it
 	 * will be released when the frame release notification arrives.
@@ -863,6 +864,13 @@ static bool iwl_mvm_reorder(struct iwl_mvm *mvm,
 				       buffer, nssn);
 	else if (buffer->num_stored == 1)
 		buffer->head_sn = nssn;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	 */
+	if (!amsdu || last_subframe)
+		iwl_mvm_release_frames(mvm, sta, napi, baid_data,
+				       buffer, nssn);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	spin_unlock_bh(&buffer->lock);
 	return true;

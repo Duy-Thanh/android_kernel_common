@@ -39,6 +39,7 @@ endif
 
 export LD_BFD
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 # Set default 32 bits cross compilers for vdso.
 # This means that for 64BIT, both the 64-bit tools and the 32-bit tools
 # need to be in the path.
@@ -142,6 +143,110 @@ palo lifimage: vmlinuz
 	@if test ! -f "$(PALOCONF)"; then \
 		cp $(srctree)/arch/parisc/defpalo.conf $(objtree)/palo.conf; \
 		echo 'A generic palo config file ($(objtree)/palo.conf) has been created for you.'; \
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+# Set default 32 bits cross compilers for vdso
+CC_ARCHES_32 = hppa hppa2.0 hppa1.1
+CC_SUFFIXES  = linux linux-gnu unknown-linux-gnu suse-linux
+CROSS32_COMPILE := $(call cc-cross-prefix, \
+	$(foreach a,$(CC_ARCHES_32), \
+	$(foreach s,$(CC_SUFFIXES),$(a)-$(s)-)))
+CROSS32CC := $(CROSS32_COMPILE)gcc
+export CROSS32CC
+
+# Set default cross compiler for kernel build
+ifdef cross_compiling
+    ifeq ($(CROSS_COMPILE),)
+		CC_SUFFIXES = linux linux-gnu unknown-linux-gnu suse-linux
+		CROSS_COMPILE := $(call cc-cross-prefix, \
+			$(foreach a,$(CC_ARCHES), \
+			$(foreach s,$(CC_SUFFIXES),$(a)-$(s)-)))
+    endif
+endif
+
+ifdef CONFIG_DYNAMIC_FTRACE
+ifdef CONFIG_64BIT
+NOP_COUNT := 8
+else
+NOP_COUNT := 5
+endif
+
+export CC_USING_RECORD_MCOUNT:=1
+export CC_USING_PATCHABLE_FUNCTION_ENTRY:=1
+
+KBUILD_AFLAGS += -DCC_USING_PATCHABLE_FUNCTION_ENTRY=1
+KBUILD_CFLAGS += -DCC_USING_PATCHABLE_FUNCTION_ENTRY=1 \
+		 -DFTRACE_PATCHABLE_FUNCTION_SIZE=$(NOP_COUNT)
+
+CC_FLAGS_FTRACE := -fpatchable-function-entry=$(NOP_COUNT),$(shell echo $$(($(NOP_COUNT)-1)))
+endif
+
+OBJCOPY_FLAGS =-O binary -R .note -R .comment -S
+
+cflags-y	:= -pipe
+
+# These flags should be implied by an hppa-linux configuration, but they
+# are not in gcc 3.2.
+cflags-y	+= -mno-space-regs
+
+# -mfast-indirect-calls is only relevant for 32-bit kernels.
+ifndef CONFIG_64BIT
+cflags-y	+= -mfast-indirect-calls
+endif
+
+# Currently we save and restore fpregs on all kernel entry/interruption paths.
+# If that gets optimized, we might need to disable the use of fpregs in the
+# kernel.
+cflags-y	+= -mdisable-fpregs
+
+# Use long jumps instead of long branches (needed if your linker fails to
+# link a too big vmlinux executable). Not enabled for building modules.
+ifdef CONFIG_MLONGCALLS
+KBUILD_CFLAGS_KERNEL += -mlong-calls
+endif
+
+# Without this, "ld -r" results in .text sections that are too big (> 0x40000)
+# for branches to reach stubs. And multiple .text sections trigger a warning
+# when creating the sysfs module information section.
+ifndef CONFIG_64BIT
+KBUILD_CFLAGS_MODULE += -ffunction-sections
+endif
+
+# select which processor to optimise for
+cflags-$(CONFIG_PA7000)		+= -march=1.1 -mschedule=7100
+cflags-$(CONFIG_PA7200)		+= -march=1.1 -mschedule=7200
+cflags-$(CONFIG_PA7100LC)	+= -march=1.1 -mschedule=7100LC
+cflags-$(CONFIG_PA7300LC)	+= -march=1.1 -mschedule=7300
+cflags-$(CONFIG_PA8X00)		+= -march=2.0 -mschedule=8000
+
+KBUILD_CFLAGS	+= $(cflags-y)
+LIBGCC		:= $(shell $(CC) -print-libgcc-file-name)
+export LIBGCC
+
+libs-y	+= arch/parisc/lib/ $(LIBGCC)
+
+drivers-$(CONFIG_VIDEO) += arch/parisc/video/
+
+boot	:= arch/parisc/boot
+
+PALO := $(shell if (which palo 2>&1); then : ; \
+	elif [ -x /sbin/palo ]; then echo /sbin/palo; \
+	fi)
+
+PALOCONF := $(shell if [ -f $(srctree)/palo.conf ]; then echo $(srctree)/palo.conf; \
+	else echo $(objtree)/palo.conf; \
+	fi)
+
+palo lifimage: vmlinuz
+	@if test ! -x "$(PALO)"; then \
+		echo 'ERROR: Please install palo first (apt-get install palo)';\
+		echo 'or build it from source and install it somewhere in your $$PATH';\
+		false; \
+	fi
+	@if test ! -f "$(PALOCONF)"; then \
+		cp $(srctree)/arch/parisc/defpalo.conf $(objtree)/palo.conf; \
+		echo 'A generic palo config file ($(objree)/palo.conf) has been created for you.'; \
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		echo 'You should check it and re-run "make palo".'; \
 		echo 'WARNING: the "lifimage" file is now placed in this directory by default!'; \
 		false; \

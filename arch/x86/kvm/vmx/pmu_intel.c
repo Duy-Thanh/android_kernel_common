@@ -365,6 +365,7 @@ static int intel_pmu_set_msr(struct kvm_vcpu *vcpu, struct msr_data *msr_info)
 		}
 		break;
 	case MSR_IA32_DS_AREA:
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (is_noncanonical_msr_address(data, vcpu))
 			return 1;
 
@@ -702,6 +703,346 @@ warn:
 static void intel_pmu_cleanup(struct kvm_vcpu *vcpu)
 {
 	if (!(vmx_guest_debugctl_read() & DEBUGCTLMSR_LBR))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (is_noncanonical_address(data, vcpu))
+			return 1;
+
+		pmu->ds_area = data;
+		break;
+	case MSR_PEBS_DATA_CFG:
+		if (data & pmu->pebs_data_cfg_rsvd)
+			return 1;
+
+		pmu->pebs_data_cfg = data;
+		break;
+	default:
+		if ((pmc = get_gp_pmc(pmu, msr, MSR_IA32_PERFCTR0)) ||
+		    (pmc = get_gp_pmc(pmu, msr, MSR_IA32_PMC0))) {
+			if ((msr & MSR_PMC_FULL_WIDTH_BIT) &&
+			    (data & ~pmu->counter_bitmask[KVM_PMC_GP]))
+				return 1;
+
+			if (!msr_info->host_initiated &&
+			    !(msr & MSR_PMC_FULL_WIDTH_BIT))
+				data = (s64)(s32)data;
+			pmc_write_counter(pmc, data);
+			break;
+		} else if ((pmc = get_fixed_pmc(pmu, msr))) {
+			pmc_write_counter(pmc, data);
+			break;
+		} else if ((pmc = get_gp_pmc(pmu, msr, MSR_P6_EVNTSEL0))) {
+			reserved_bits = pmu->reserved_bits;
+			if ((pmc->idx == 2) &&
+			    (pmu->raw_event_mask & HSW_IN_TX_CHECKPOINTED))
+				reserved_bits ^= HSW_IN_TX_CHECKPOINTED;
+			if (data & reserved_bits)
+				return 1;
+
+			if (data != pmc->eventsel) {
+				pmc->eventsel = data;
+				kvm_pmu_request_counter_reprogram(pmc);
+			}
+			break;
+		} else if (intel_pmu_handle_lbr_msrs_access(vcpu, msr_info, false)) {
+			break;
+		}
+		/* Not a known PMU MSR. */
+		return 1;
+	}
+
+	return 0;
+}
+
+/*
+ * Map fixed counter events to architectural general purpose event encodings.
+ * Perf doesn't provide APIs to allow KVM to directly program a fixed counter,
+ * and so KVM instead programs the architectural event to effectively request
+ * the fixed counter.  Perf isn't guaranteed to use a fixed counter and may
+ * instead program the encoding into a general purpose counter, e.g. if a
+ * different perf_event is already utilizing the requested counter, but the end
+ * result is the same (ignoring the fact that using a general purpose counter
+ * will likely exacerbate counter contention).
+ *
+ * Forcibly inlined to allow asserting on @index at build time, and there should
+ * never be more than one user.
+ */
+static __always_inline u64 intel_get_fixed_pmc_eventsel(unsigned int index)
+{
+	const enum perf_hw_id fixed_pmc_perf_ids[] = {
+		[0] = PERF_COUNT_HW_INSTRUCTIONS,
+		[1] = PERF_COUNT_HW_CPU_CYCLES,
+		[2] = PERF_COUNT_HW_REF_CPU_CYCLES,
+	};
+	u64 eventsel;
+
+	BUILD_BUG_ON(ARRAY_SIZE(fixed_pmc_perf_ids) != KVM_MAX_NR_INTEL_FIXED_COUTNERS);
+	BUILD_BUG_ON(index >= KVM_MAX_NR_INTEL_FIXED_COUTNERS);
+
+	/*
+	 * Yell if perf reports support for a fixed counter but perf doesn't
+	 * have a known encoding for the associated general purpose event.
+	 */
+	eventsel = perf_get_hw_event_config(fixed_pmc_perf_ids[index]);
+	WARN_ON_ONCE(!eventsel && index < kvm_pmu_cap.num_counters_fixed);
+	return eventsel;
+}
+
+static void intel_pmu_enable_fixed_counter_bits(struct kvm_pmu *pmu, u64 bits)
+{
+	int i;
+
+	for (i = 0; i < pmu->nr_arch_fixed_counters; i++)
+		pmu->fixed_ctr_ctrl_rsvd &= ~intel_fixed_bits_by_idx(i, bits);
+}
+
+static void intel_pmu_refresh(struct kvm_vcpu *vcpu)
+{
+	struct kvm_pmu *pmu = vcpu_to_pmu(vcpu);
+	struct lbr_desc *lbr_desc = vcpu_to_lbr_desc(vcpu);
+	struct kvm_cpuid_entry2 *entry;
+	union cpuid10_eax eax;
+	union cpuid10_edx edx;
+	u64 perf_capabilities;
+	u64 counter_rsvd;
+
+	memset(&lbr_desc->records, 0, sizeof(lbr_desc->records));
+
+	/*
+	 * Setting passthrough of LBR MSRs is done only in the VM-Entry loop,
+	 * and PMU refresh is disallowed after the vCPU has run, i.e. this code
+	 * should never be reached while KVM is passing through MSRs.
+	 */
+	if (KVM_BUG_ON(lbr_desc->msr_passthrough, vcpu->kvm))
+		return;
+
+	entry = kvm_find_cpuid_entry(vcpu, 0xa);
+	if (!entry)
+		return;
+
+	eax.full = entry->eax;
+	edx.full = entry->edx;
+
+	pmu->version = eax.split.version_id;
+	if (!pmu->version)
+		return;
+
+	pmu->nr_arch_gp_counters = min_t(int, eax.split.num_counters,
+					 kvm_pmu_cap.num_counters_gp);
+	eax.split.bit_width = min_t(int, eax.split.bit_width,
+				    kvm_pmu_cap.bit_width_gp);
+	pmu->counter_bitmask[KVM_PMC_GP] = ((u64)1 << eax.split.bit_width) - 1;
+	eax.split.mask_length = min_t(int, eax.split.mask_length,
+				      kvm_pmu_cap.events_mask_len);
+	pmu->available_event_types = ~entry->ebx &
+					((1ull << eax.split.mask_length) - 1);
+
+	if (pmu->version == 1) {
+		pmu->nr_arch_fixed_counters = 0;
+	} else {
+		pmu->nr_arch_fixed_counters = min_t(int, edx.split.num_counters_fixed,
+						    kvm_pmu_cap.num_counters_fixed);
+		edx.split.bit_width_fixed = min_t(int, edx.split.bit_width_fixed,
+						  kvm_pmu_cap.bit_width_fixed);
+		pmu->counter_bitmask[KVM_PMC_FIXED] =
+			((u64)1 << edx.split.bit_width_fixed) - 1;
+	}
+
+	intel_pmu_enable_fixed_counter_bits(pmu, INTEL_FIXED_0_KERNEL |
+						 INTEL_FIXED_0_USER |
+						 INTEL_FIXED_0_ENABLE_PMI);
+
+	counter_rsvd = ~(((1ull << pmu->nr_arch_gp_counters) - 1) |
+		(((1ull << pmu->nr_arch_fixed_counters) - 1) << KVM_FIXED_PMC_BASE_IDX));
+	pmu->global_ctrl_rsvd = counter_rsvd;
+
+	/*
+	 * GLOBAL_STATUS and GLOBAL_OVF_CONTROL (a.k.a. GLOBAL_STATUS_RESET)
+	 * share reserved bit definitions.  The kernel just happens to use
+	 * OVF_CTRL for the names.
+	 */
+	pmu->global_status_rsvd = pmu->global_ctrl_rsvd
+			& ~(MSR_CORE_PERF_GLOBAL_OVF_CTRL_OVF_BUF |
+			    MSR_CORE_PERF_GLOBAL_OVF_CTRL_COND_CHGD);
+	if (vmx_pt_mode_is_host_guest())
+		pmu->global_status_rsvd &=
+				~MSR_CORE_PERF_GLOBAL_OVF_CTRL_TRACE_TOPA_PMI;
+
+	entry = kvm_find_cpuid_entry_index(vcpu, 7, 0);
+	if (entry &&
+	    (boot_cpu_has(X86_FEATURE_HLE) || boot_cpu_has(X86_FEATURE_RTM)) &&
+	    (entry->ebx & (X86_FEATURE_HLE|X86_FEATURE_RTM))) {
+		pmu->reserved_bits ^= HSW_IN_TX;
+		pmu->raw_event_mask |= (HSW_IN_TX|HSW_IN_TX_CHECKPOINTED);
+	}
+
+	bitmap_set(pmu->all_valid_pmc_idx,
+		0, pmu->nr_arch_gp_counters);
+	bitmap_set(pmu->all_valid_pmc_idx,
+		INTEL_PMC_MAX_GENERIC, pmu->nr_arch_fixed_counters);
+
+	perf_capabilities = vcpu_get_perf_capabilities(vcpu);
+	if (cpuid_model_is_consistent(vcpu) &&
+	    (perf_capabilities & PMU_CAP_LBR_FMT))
+		memcpy(&lbr_desc->records, &vmx_lbr_caps, sizeof(vmx_lbr_caps));
+	else
+		lbr_desc->records.nr = 0;
+
+	if (lbr_desc->records.nr)
+		bitmap_set(pmu->all_valid_pmc_idx, INTEL_PMC_IDX_FIXED_VLBR, 1);
+
+	if (perf_capabilities & PERF_CAP_PEBS_FORMAT) {
+		if (perf_capabilities & PERF_CAP_PEBS_BASELINE) {
+			pmu->pebs_enable_rsvd = counter_rsvd;
+			pmu->reserved_bits &= ~ICL_EVENTSEL_ADAPTIVE;
+			pmu->pebs_data_cfg_rsvd = ~0xff00000full;
+			intel_pmu_enable_fixed_counter_bits(pmu, ICL_FIXED_0_ADAPTIVE);
+		} else {
+			pmu->pebs_enable_rsvd =
+				~((1ull << pmu->nr_arch_gp_counters) - 1);
+		}
+	}
+}
+
+static void intel_pmu_init(struct kvm_vcpu *vcpu)
+{
+	int i;
+	struct kvm_pmu *pmu = vcpu_to_pmu(vcpu);
+	struct lbr_desc *lbr_desc = vcpu_to_lbr_desc(vcpu);
+
+	for (i = 0; i < KVM_MAX_NR_INTEL_GP_COUNTERS; i++) {
+		pmu->gp_counters[i].type = KVM_PMC_GP;
+		pmu->gp_counters[i].vcpu = vcpu;
+		pmu->gp_counters[i].idx = i;
+		pmu->gp_counters[i].current_config = 0;
+	}
+
+	for (i = 0; i < KVM_MAX_NR_INTEL_FIXED_COUTNERS; i++) {
+		pmu->fixed_counters[i].type = KVM_PMC_FIXED;
+		pmu->fixed_counters[i].vcpu = vcpu;
+		pmu->fixed_counters[i].idx = i + KVM_FIXED_PMC_BASE_IDX;
+		pmu->fixed_counters[i].current_config = 0;
+		pmu->fixed_counters[i].eventsel = intel_get_fixed_pmc_eventsel(i);
+	}
+
+	lbr_desc->records.nr = 0;
+	lbr_desc->event = NULL;
+	lbr_desc->msr_passthrough = false;
+}
+
+static void intel_pmu_reset(struct kvm_vcpu *vcpu)
+{
+	intel_pmu_release_guest_lbr_event(vcpu);
+}
+
+/*
+ * Emulate LBR_On_PMI behavior for 1 < pmu.version < 4.
+ *
+ * If Freeze_LBR_On_PMI = 1, the LBR is frozen on PMI and
+ * the KVM emulates to clear the LBR bit (bit 0) in IA32_DEBUGCTL.
+ *
+ * Guest needs to re-enable LBR to resume branches recording.
+ */
+static void intel_pmu_legacy_freezing_lbrs_on_pmi(struct kvm_vcpu *vcpu)
+{
+	u64 data = vmcs_read64(GUEST_IA32_DEBUGCTL);
+
+	if (data & DEBUGCTLMSR_FREEZE_LBRS_ON_PMI) {
+		data &= ~DEBUGCTLMSR_LBR;
+		vmcs_write64(GUEST_IA32_DEBUGCTL, data);
+	}
+}
+
+static void intel_pmu_deliver_pmi(struct kvm_vcpu *vcpu)
+{
+	u8 version = vcpu_to_pmu(vcpu)->version;
+
+	if (!intel_pmu_lbr_is_enabled(vcpu))
+		return;
+
+	if (version > 1 && version < 4)
+		intel_pmu_legacy_freezing_lbrs_on_pmi(vcpu);
+}
+
+static void vmx_update_intercept_for_lbr_msrs(struct kvm_vcpu *vcpu, bool set)
+{
+	struct x86_pmu_lbr *lbr = vcpu_to_lbr_records(vcpu);
+	int i;
+
+	for (i = 0; i < lbr->nr; i++) {
+		vmx_set_intercept_for_msr(vcpu, lbr->from + i, MSR_TYPE_RW, set);
+		vmx_set_intercept_for_msr(vcpu, lbr->to + i, MSR_TYPE_RW, set);
+		if (lbr->info)
+			vmx_set_intercept_for_msr(vcpu, lbr->info + i, MSR_TYPE_RW, set);
+	}
+
+	vmx_set_intercept_for_msr(vcpu, MSR_LBR_SELECT, MSR_TYPE_RW, set);
+	vmx_set_intercept_for_msr(vcpu, MSR_LBR_TOS, MSR_TYPE_RW, set);
+}
+
+static inline void vmx_disable_lbr_msrs_passthrough(struct kvm_vcpu *vcpu)
+{
+	struct lbr_desc *lbr_desc = vcpu_to_lbr_desc(vcpu);
+
+	if (!lbr_desc->msr_passthrough)
+		return;
+
+	vmx_update_intercept_for_lbr_msrs(vcpu, true);
+	lbr_desc->msr_passthrough = false;
+}
+
+static inline void vmx_enable_lbr_msrs_passthrough(struct kvm_vcpu *vcpu)
+{
+	struct lbr_desc *lbr_desc = vcpu_to_lbr_desc(vcpu);
+
+	if (lbr_desc->msr_passthrough)
+		return;
+
+	vmx_update_intercept_for_lbr_msrs(vcpu, false);
+	lbr_desc->msr_passthrough = true;
+}
+
+/*
+ * Higher priority host perf events (e.g. cpu pinned) could reclaim the
+ * pmu resources (e.g. LBR) that were assigned to the guest. This is
+ * usually done via ipi calls (more details in perf_install_in_context).
+ *
+ * Before entering the non-root mode (with irq disabled here), double
+ * confirm that the pmu features enabled to the guest are not reclaimed
+ * by higher priority host events. Otherwise, disallow vcpu's access to
+ * the reclaimed features.
+ */
+void vmx_passthrough_lbr_msrs(struct kvm_vcpu *vcpu)
+{
+	struct kvm_pmu *pmu = vcpu_to_pmu(vcpu);
+	struct lbr_desc *lbr_desc = vcpu_to_lbr_desc(vcpu);
+
+	if (!lbr_desc->event) {
+		vmx_disable_lbr_msrs_passthrough(vcpu);
+		if (vmcs_read64(GUEST_IA32_DEBUGCTL) & DEBUGCTLMSR_LBR)
+			goto warn;
+		if (test_bit(INTEL_PMC_IDX_FIXED_VLBR, pmu->pmc_in_use))
+			goto warn;
+		return;
+	}
+
+	if (lbr_desc->event->state < PERF_EVENT_STATE_ACTIVE) {
+		vmx_disable_lbr_msrs_passthrough(vcpu);
+		__clear_bit(INTEL_PMC_IDX_FIXED_VLBR, pmu->pmc_in_use);
+		goto warn;
+	} else
+		vmx_enable_lbr_msrs_passthrough(vcpu);
+
+	return;
+
+warn:
+	pr_warn_ratelimited("vcpu-%d: fail to passthrough LBR.\n", vcpu->vcpu_id);
+}
+
+static void intel_pmu_cleanup(struct kvm_vcpu *vcpu)
+{
+	if (!(vmcs_read64(GUEST_IA32_DEBUGCTL) & DEBUGCTLMSR_LBR))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		intel_pmu_release_guest_lbr_event(vcpu);
 }
 

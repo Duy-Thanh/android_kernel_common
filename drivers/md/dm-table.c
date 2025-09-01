@@ -894,6 +894,7 @@ static bool dm_table_supports_dax(struct dm_table *t,
 	return true;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int device_is_not_rq_stackable(struct dm_target *ti, struct dm_dev *dev,
 				      sector_t start, sector_t len, void *data)
 {
@@ -1001,6 +1002,116 @@ verify_rq_based:
 	/* Non-request-stackable devices can't be used for request-based dm */
 	if (!ti->type->iterate_devices ||
 	    ti->type->iterate_devices(ti, device_is_not_rq_stackable, NULL)) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int device_is_rq_stackable(struct dm_target *ti, struct dm_dev *dev,
+				  sector_t start, sector_t len, void *data)
+{
+	struct block_device *bdev = dev->bdev;
+	struct request_queue *q = bdev_get_queue(bdev);
+
+	/* request-based cannot stack on partitions! */
+	if (bdev_is_partition(bdev))
+		return false;
+
+	return queue_is_mq(q);
+}
+
+static int dm_table_determine_type(struct dm_table *t)
+{
+	unsigned int bio_based = 0, request_based = 0, hybrid = 0;
+	struct dm_target *ti;
+	struct list_head *devices = dm_table_get_devices(t);
+	enum dm_queue_mode live_md_type = dm_get_md_type(t->md);
+
+	if (t->type != DM_TYPE_NONE) {
+		/* target already set the table's type */
+		if (t->type == DM_TYPE_BIO_BASED) {
+			/* possibly upgrade to a variant of bio-based */
+			goto verify_bio_based;
+		}
+		BUG_ON(t->type == DM_TYPE_DAX_BIO_BASED);
+		goto verify_rq_based;
+	}
+
+	for (unsigned int i = 0; i < t->num_targets; i++) {
+		ti = dm_table_get_target(t, i);
+		if (dm_target_hybrid(ti))
+			hybrid = 1;
+		else if (dm_target_request_based(ti))
+			request_based = 1;
+		else
+			bio_based = 1;
+
+		if (bio_based && request_based) {
+			DMERR("Inconsistent table: different target types can't be mixed up");
+			return -EINVAL;
+		}
+	}
+
+	if (hybrid && !bio_based && !request_based) {
+		/*
+		 * The targets can work either way.
+		 * Determine the type from the live device.
+		 * Default to bio-based if device is new.
+		 */
+		if (__table_type_request_based(live_md_type))
+			request_based = 1;
+		else
+			bio_based = 1;
+	}
+
+	if (bio_based) {
+verify_bio_based:
+		/* We must use this table as bio-based */
+		t->type = DM_TYPE_BIO_BASED;
+		if (dm_table_supports_dax(t, device_not_dax_capable) ||
+		    (list_empty(devices) && live_md_type == DM_TYPE_DAX_BIO_BASED)) {
+			t->type = DM_TYPE_DAX_BIO_BASED;
+		}
+		return 0;
+	}
+
+	BUG_ON(!request_based); /* No targets in this table */
+
+	t->type = DM_TYPE_REQUEST_BASED;
+
+verify_rq_based:
+	/*
+	 * Request-based dm supports only tables that have a single target now.
+	 * To support multiple targets, request splitting support is needed,
+	 * and that needs lots of changes in the block-layer.
+	 * (e.g. request completion process for partial completion.)
+	 */
+	if (t->num_targets > 1) {
+		DMERR("request-based DM doesn't support multiple targets");
+		return -EINVAL;
+	}
+
+	if (list_empty(devices)) {
+		int srcu_idx;
+		struct dm_table *live_table = dm_get_live_table(t->md, &srcu_idx);
+
+		/* inherit live table's type */
+		if (live_table)
+			t->type = live_table->type;
+		dm_put_live_table(t->md, srcu_idx);
+		return 0;
+	}
+
+	ti = dm_table_get_immutable_target(t);
+	if (!ti) {
+		DMERR("table load rejected: immutable target is required");
+		return -EINVAL;
+	} else if (ti->max_io_len) {
+		DMERR("table load rejected: immutable target that splits IO is not supported");
+		return -EINVAL;
+	}
+
+	/* Non-request-stackable devices can't be used for request-based dm */
+	if (!ti->type->iterate_devices ||
+	    !ti->type->iterate_devices(ti, device_is_rq_stackable, NULL)) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		DMERR("table load rejected: including non-request-stackable devices");
 		return -EINVAL;
 	}

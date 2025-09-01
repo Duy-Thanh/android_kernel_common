@@ -224,6 +224,7 @@ static void sync_global_pgds(unsigned long start, unsigned long end)
 }
 
 /*
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * Make kernel mappings visible in all page tables in the system.
  * This is necessary except when the init task populates kernel mappings
  * during the boot process. In that case, all processes originating from
@@ -242,6 +243,9 @@ void arch_sync_kernel_mappings(unsigned long start, unsigned long end)
 }
 
 /*
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
  * NOTE: This function is marked __ref because it calls __init function
  * (alloc_bootmem_pages). It's safe to do it ONLY when after_bootmem == 0.
  */

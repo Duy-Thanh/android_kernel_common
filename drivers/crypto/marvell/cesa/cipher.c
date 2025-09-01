@@ -75,6 +75,7 @@ mv_cesa_skcipher_dma_cleanup(struct skcipher_request *req)
 static inline void mv_cesa_skcipher_cleanup(struct skcipher_request *req)
 {
 	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(req);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct mv_cesa_engine *engine = creq->base.engine;
 
 	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
@@ -215,6 +216,147 @@ mv_cesa_skcipher_complete(struct crypto_async_request *req)
 	struct mv_cesa_engine *engine = creq->base.engine;
 	unsigned int ivsize;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
+		mv_cesa_skcipher_dma_cleanup(req);
+}
+
+static void mv_cesa_skcipher_std_step(struct skcipher_request *req)
+{
+	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(req);
+	struct mv_cesa_skcipher_std_req *sreq = &creq->std;
+	struct mv_cesa_engine *engine = creq->base.engine;
+	size_t  len = min_t(size_t, req->cryptlen - sreq->offset,
+			    CESA_SA_SRAM_PAYLOAD_SIZE);
+
+	mv_cesa_adjust_op(engine, &sreq->op);
+	if (engine->pool)
+		memcpy(engine->sram_pool, &sreq->op, sizeof(sreq->op));
+	else
+		memcpy_toio(engine->sram, &sreq->op, sizeof(sreq->op));
+
+	len = mv_cesa_sg_copy_to_sram(engine, req->src, creq->src_nents,
+				      CESA_SA_DATA_SRAM_OFFSET, len,
+				      sreq->offset);
+
+	sreq->size = len;
+	mv_cesa_set_crypt_op_len(&sreq->op, len);
+
+	/* FIXME: only update enc_len field */
+	if (!sreq->skip_ctx) {
+		if (engine->pool)
+			memcpy(engine->sram_pool, &sreq->op, sizeof(sreq->op));
+		else
+			memcpy_toio(engine->sram, &sreq->op, sizeof(sreq->op));
+		sreq->skip_ctx = true;
+	} else if (engine->pool)
+		memcpy(engine->sram_pool, &sreq->op, sizeof(sreq->op.desc));
+	else
+		memcpy_toio(engine->sram, &sreq->op, sizeof(sreq->op.desc));
+
+	mv_cesa_set_int_mask(engine, CESA_SA_INT_ACCEL0_DONE);
+	writel_relaxed(CESA_SA_CFG_PARA_DIS, engine->regs + CESA_SA_CFG);
+	WARN_ON(readl(engine->regs + CESA_SA_CMD) &
+		CESA_SA_CMD_EN_CESA_SA_ACCL0);
+	writel(CESA_SA_CMD_EN_CESA_SA_ACCL0, engine->regs + CESA_SA_CMD);
+}
+
+static int mv_cesa_skcipher_std_process(struct skcipher_request *req,
+					u32 status)
+{
+	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(req);
+	struct mv_cesa_skcipher_std_req *sreq = &creq->std;
+	struct mv_cesa_engine *engine = creq->base.engine;
+	size_t len;
+
+	len = mv_cesa_sg_copy_from_sram(engine, req->dst, creq->dst_nents,
+					CESA_SA_DATA_SRAM_OFFSET, sreq->size,
+					sreq->offset);
+
+	sreq->offset += len;
+	if (sreq->offset < req->cryptlen)
+		return -EINPROGRESS;
+
+	return 0;
+}
+
+static int mv_cesa_skcipher_process(struct crypto_async_request *req,
+				    u32 status)
+{
+	struct skcipher_request *skreq = skcipher_request_cast(req);
+	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(skreq);
+	struct mv_cesa_req *basereq = &creq->base;
+
+	if (mv_cesa_req_get_type(basereq) == CESA_STD_REQ)
+		return mv_cesa_skcipher_std_process(skreq, status);
+
+	return mv_cesa_dma_process(basereq, status);
+}
+
+static void mv_cesa_skcipher_step(struct crypto_async_request *req)
+{
+	struct skcipher_request *skreq = skcipher_request_cast(req);
+	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(skreq);
+
+	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
+		mv_cesa_dma_step(&creq->base);
+	else
+		mv_cesa_skcipher_std_step(skreq);
+}
+
+static inline void
+mv_cesa_skcipher_dma_prepare(struct skcipher_request *req)
+{
+	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(req);
+	struct mv_cesa_req *basereq = &creq->base;
+
+	mv_cesa_dma_prepare(basereq, basereq->engine);
+}
+
+static inline void
+mv_cesa_skcipher_std_prepare(struct skcipher_request *req)
+{
+	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(req);
+	struct mv_cesa_skcipher_std_req *sreq = &creq->std;
+
+	sreq->size = 0;
+	sreq->offset = 0;
+}
+
+static inline void mv_cesa_skcipher_prepare(struct crypto_async_request *req,
+					    struct mv_cesa_engine *engine)
+{
+	struct skcipher_request *skreq = skcipher_request_cast(req);
+	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(skreq);
+
+	creq->base.engine = engine;
+
+	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ)
+		mv_cesa_skcipher_dma_prepare(skreq);
+	else
+		mv_cesa_skcipher_std_prepare(skreq);
+}
+
+static inline void
+mv_cesa_skcipher_req_cleanup(struct crypto_async_request *req)
+{
+	struct skcipher_request *skreq = skcipher_request_cast(req);
+
+	mv_cesa_skcipher_cleanup(skreq);
+}
+
+static void
+mv_cesa_skcipher_complete(struct crypto_async_request *req)
+{
+	struct skcipher_request *skreq = skcipher_request_cast(req);
+	struct mv_cesa_skcipher_req *creq = skcipher_request_ctx(skreq);
+	struct mv_cesa_engine *engine = creq->base.engine;
+	unsigned int ivsize;
+
+	atomic_sub(skreq->cryptlen, &engine->load);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	ivsize = crypto_skcipher_ivsize(crypto_skcipher_reqtfm(skreq));
 
 	if (mv_cesa_req_get_type(&creq->base) == CESA_DMA_REQ) {

@@ -13,6 +13,7 @@
 #include "inv_icm42600.h"
 #include "inv_icm42600_temp.h"
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int inv_icm42600_temp_read(struct inv_icm42600_state *st, s16 *temp)
 {
 	struct device *dev = regmap_get_device(st->map);
@@ -53,6 +54,45 @@ int inv_icm42600_temp_read_raw(struct iio_dev *indio_dev,
 {
 	struct inv_icm42600_state *st = iio_device_get_drvdata(indio_dev);
 	s16 temp;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int inv_icm42600_temp_read(struct inv_icm42600_state *st, int16_t *temp)
+{
+	struct device *dev = regmap_get_device(st->map);
+	__be16 *raw;
+	int ret;
+
+	pm_runtime_get_sync(dev);
+	mutex_lock(&st->lock);
+
+	ret = inv_icm42600_set_temp_conf(st, true, NULL);
+	if (ret)
+		goto exit;
+
+	raw = (__be16 *)&st->buffer[0];
+	ret = regmap_bulk_read(st->map, INV_ICM42600_REG_TEMP_DATA, raw, sizeof(*raw));
+	if (ret)
+		goto exit;
+
+	*temp = (int16_t)be16_to_cpup(raw);
+	if (*temp == INV_ICM42600_DATA_INVALID)
+		ret = -EINVAL;
+
+exit:
+	mutex_unlock(&st->lock);
+	pm_runtime_mark_last_busy(dev);
+	pm_runtime_put_autosuspend(dev);
+
+	return ret;
+}
+
+int inv_icm42600_temp_read_raw(struct iio_dev *indio_dev,
+			       struct iio_chan_spec const *chan,
+			       int *val, int *val2, long mask)
+{
+	struct inv_icm42600_state *st = iio_device_get_drvdata(indio_dev);
+	int16_t temp;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	int ret;
 
 	if (chan->type != IIO_TEMP)

@@ -257,6 +257,7 @@ static int iscsi_get_pr_transport_id_len(
 	return len;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void sas_parse_pr_out_transport_id(char *buf, char *i_str)
 {
 	char hex[17] = {};
@@ -449,4 +450,166 @@ bool target_parse_pr_out_transport_id(struct se_portal_group *tpg,
 	*port_nexus_ptr = NULL;
 	*out_tid_len = 24;
 	return true;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static char *iscsi_parse_pr_out_transport_id(
+	struct se_portal_group *se_tpg,
+	char *buf,
+	u32 *out_tid_len,
+	char **port_nexus_ptr)
+{
+	char *p;
+	int i;
+	u8 format_code = (buf[0] & 0xc0);
+	/*
+	 * Check for FORMAT CODE 00b or 01b from spc4r17, section 7.5.4.6:
+	 *
+	 *       TransportID for initiator ports using SCSI over iSCSI,
+	 *       from Table 388 -- iSCSI TransportID formats.
+	 *
+	 *    00b     Initiator port is identified using the world wide unique
+	 *            SCSI device name of the iSCSI initiator
+	 *            device containing the initiator port (see table 389).
+	 *    01b     Initiator port is identified using the world wide unique
+	 *            initiator port identifier (see table 390).10b to 11b
+	 *            Reserved
+	 */
+	if ((format_code != 0x00) && (format_code != 0x40)) {
+		pr_err("Illegal format code: 0x%02x for iSCSI"
+			" Initiator Transport ID\n", format_code);
+		return NULL;
+	}
+	/*
+	 * If the caller wants the TransportID Length, we set that value for the
+	 * entire iSCSI Tarnsport ID now.
+	 */
+	if (out_tid_len) {
+		/* The shift works thanks to integer promotion rules */
+		*out_tid_len = get_unaligned_be16(&buf[2]);
+		/* Add four bytes for iSCSI Transport ID header */
+		*out_tid_len += 4;
+	}
+
+	/*
+	 * Check for ',i,0x' separator between iSCSI Name and iSCSI Initiator
+	 * Session ID as defined in Table 390 - iSCSI initiator port TransportID
+	 * format.
+	 */
+	if (format_code == 0x40) {
+		p = strstr(&buf[4], ",i,0x");
+		if (!p) {
+			pr_err("Unable to locate \",i,0x\" separator"
+				" for Initiator port identifier: %s\n",
+				&buf[4]);
+			return NULL;
+		}
+		*p = '\0'; /* Terminate iSCSI Name */
+		p += 5; /* Skip over ",i,0x" separator */
+
+		*port_nexus_ptr = p;
+		/*
+		 * Go ahead and do the lower case conversion of the received
+		 * 12 ASCII characters representing the ISID in the TransportID
+		 * for comparison against the running iSCSI session's ISID from
+		 * iscsi_target.c:lio_sess_get_initiator_sid()
+		 */
+		for (i = 0; i < 12; i++) {
+			/*
+			 * The first ISCSI INITIATOR SESSION ID field byte
+			 * containing an ASCII null character terminates the
+			 * ISCSI INITIATOR SESSION ID field without regard for
+			 * the specified length of the iSCSI TransportID or the
+			 * contents of the ADDITIONAL LENGTH field.
+			 */
+			if (*p == '\0')
+				break;
+
+			if (isdigit(*p)) {
+				p++;
+				continue;
+			}
+			*p = tolower(*p);
+			p++;
+		}
+	} else
+		*port_nexus_ptr = NULL;
+
+	return &buf[4];
+}
+
+int target_get_pr_transport_id_len(struct se_node_acl *nacl,
+		struct t10_pr_registration *pr_reg, int *format_code)
+{
+	switch (nacl->se_tpg->proto_id) {
+	case SCSI_PROTOCOL_FCP:
+	case SCSI_PROTOCOL_SBP:
+	case SCSI_PROTOCOL_SRP:
+	case SCSI_PROTOCOL_SAS:
+		break;
+	case SCSI_PROTOCOL_ISCSI:
+		return iscsi_get_pr_transport_id_len(nacl, pr_reg, format_code);
+	default:
+		pr_err("Unknown proto_id: 0x%02x\n", nacl->se_tpg->proto_id);
+		return -EINVAL;
+	}
+
+	/*
+	 * Most transports use a fixed length 24 byte identifier.
+	 */
+	*format_code = 0;
+	return 24;
+}
+
+int target_get_pr_transport_id(struct se_node_acl *nacl,
+		struct t10_pr_registration *pr_reg, int *format_code,
+		unsigned char *buf)
+{
+	switch (nacl->se_tpg->proto_id) {
+	case SCSI_PROTOCOL_SAS:
+		return sas_get_pr_transport_id(nacl, format_code, buf);
+	case SCSI_PROTOCOL_SBP:
+		return sbp_get_pr_transport_id(nacl, format_code, buf);
+	case SCSI_PROTOCOL_SRP:
+		return srp_get_pr_transport_id(nacl, format_code, buf);
+	case SCSI_PROTOCOL_FCP:
+		return fc_get_pr_transport_id(nacl, format_code, buf);
+	case SCSI_PROTOCOL_ISCSI:
+		return iscsi_get_pr_transport_id(nacl, pr_reg, format_code,
+				buf);
+	default:
+		pr_err("Unknown proto_id: 0x%02x\n", nacl->se_tpg->proto_id);
+		return -EINVAL;
+	}
+}
+
+const char *target_parse_pr_out_transport_id(struct se_portal_group *tpg,
+		char *buf, u32 *out_tid_len, char **port_nexus_ptr)
+{
+	u32 offset;
+
+	switch (tpg->proto_id) {
+	case SCSI_PROTOCOL_SAS:
+		/*
+		 * Assume the FORMAT CODE 00b from spc4r17, 7.5.4.7 TransportID
+		 * for initiator ports using SCSI over SAS Serial SCSI Protocol.
+		 */
+		offset = 4;
+		break;
+	case SCSI_PROTOCOL_SBP:
+	case SCSI_PROTOCOL_SRP:
+	case SCSI_PROTOCOL_FCP:
+		offset = 8;
+		break;
+	case SCSI_PROTOCOL_ISCSI:
+		return iscsi_parse_pr_out_transport_id(tpg, buf, out_tid_len,
+					port_nexus_ptr);
+	default:
+		pr_err("Unknown proto_id: 0x%02x\n", tpg->proto_id);
+		return NULL;
+	}
+
+	*port_nexus_ptr = NULL;
+	*out_tid_len = 24;
+	return buf + offset;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }

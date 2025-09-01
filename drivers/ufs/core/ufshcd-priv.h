@@ -9,8 +9,12 @@
 struct ufs_hba_priv {
 	struct ufs_hba hba;
 	bool hid_sup;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* synchronizes PM QoS request and status updates */
 	struct mutex pm_qos_mutex;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 static inline struct ufs_hba_priv *to_hba_priv(struct ufs_hba *hba)

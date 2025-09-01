@@ -447,6 +447,7 @@ struct dma_buf {
 	 */
 	struct module *owner;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/** @list_node: node for dma_buf accounting and debugging. */
 	struct list_head list_node;
 
@@ -750,4 +751,310 @@ long dma_buf_set_name(struct dma_buf *dmabuf, const char *name);
 int dma_buf_get_flags(struct dma_buf *dmabuf, unsigned long *flags);
 struct dma_buf *dma_buf_iter_begin(void);
 struct dma_buf *dma_buf_iter_next(struct dma_buf *dmbuf);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#if IS_ENABLED(CONFIG_DEBUG_FS)
+	/** @list_node: node for dma_buf accounting and debugging. */
+	struct list_head list_node;
+#endif
+
+	/** @priv: exporter specific private data for this buffer object. */
+	void *priv;
+
+	/**
+	 * @resv:
+	 *
+	 * Reservation object linked to this dma-buf.
+	 *
+	 * IMPLICIT SYNCHRONIZATION RULES:
+	 *
+	 * Drivers which support implicit synchronization of buffer access as
+	 * e.g. exposed in `Implicit Fence Poll Support`_ must follow the
+	 * below rules.
+	 *
+	 * - Drivers must add a read fence through dma_resv_add_fence() with the
+	 *   DMA_RESV_USAGE_READ flag for anything the userspace API considers a
+	 *   read access. This highly depends upon the API and window system.
+	 *
+	 * - Similarly drivers must add a write fence through
+	 *   dma_resv_add_fence() with the DMA_RESV_USAGE_WRITE flag for
+	 *   anything the userspace API considers write access.
+	 *
+	 * - Drivers may just always add a write fence, since that only
+	 *   causes unnecessary synchronization, but no correctness issues.
+	 *
+	 * - Some drivers only expose a synchronous userspace API with no
+	 *   pipelining across drivers. These do not set any fences for their
+	 *   access. An example here is v4l.
+	 *
+	 * - Driver should use dma_resv_usage_rw() when retrieving fences as
+	 *   dependency for implicit synchronization.
+	 *
+	 * DYNAMIC IMPORTER RULES:
+	 *
+	 * Dynamic importers, see dma_buf_attachment_is_dynamic(), have
+	 * additional constraints on how they set up fences:
+	 *
+	 * - Dynamic importers must obey the write fences and wait for them to
+	 *   signal before allowing access to the buffer's underlying storage
+	 *   through the device.
+	 *
+	 * - Dynamic importers should set fences for any access that they can't
+	 *   disable immediately from their &dma_buf_attach_ops.move_notify
+	 *   callback.
+	 *
+	 * IMPORTANT:
+	 *
+	 * All drivers and memory management related functions must obey the
+	 * struct dma_resv rules, specifically the rules for updating and
+	 * obeying fences. See enum dma_resv_usage for further descriptions.
+	 */
+	struct dma_resv *resv;
+
+	/** @poll: for userspace poll support */
+	wait_queue_head_t poll;
+
+	/** @cb_in: for userspace poll support */
+	/** @cb_out: for userspace poll support */
+	struct dma_buf_poll_cb_t {
+		struct dma_fence_cb cb;
+		wait_queue_head_t *poll;
+
+		__poll_t active;
+	} cb_in, cb_out;
+#ifdef CONFIG_DMABUF_SYSFS_STATS
+	/**
+	 * @sysfs_entry:
+	 *
+	 * For exposing information about this buffer in sysfs. See also
+	 * `DMA-BUF statistics`_ for the uapi this enables.
+	 */
+	struct dma_buf_sysfs_entry {
+		union {
+			struct kobject kobj;
+
+			/** @sysfs_add_work:
+			 *
+			 * For deferred sysfs kobject creation using a workqueue.
+			 */
+			struct work_struct sysfs_add_work;
+		};
+		struct dma_buf *dmabuf;
+	} *sysfs_entry;
+#endif
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_BACKPORT_RESERVE(1);
+};
+
+/**
+ * struct dma_buf_attach_ops - importer operations for an attachment
+ *
+ * Attachment operations implemented by the importer.
+ */
+struct dma_buf_attach_ops {
+	/**
+	 * @allow_peer2peer:
+	 *
+	 * If this is set to true the importer must be able to handle peer
+	 * resources without struct pages.
+	 */
+	bool allow_peer2peer;
+
+	/**
+	 * @move_notify: [optional] notification that the DMA-buf is moving
+	 *
+	 * If this callback is provided the framework can avoid pinning the
+	 * backing store while mappings exists.
+	 *
+	 * This callback is called with the lock of the reservation object
+	 * associated with the dma_buf held and the mapping function must be
+	 * called with this lock held as well. This makes sure that no mapping
+	 * is created concurrently with an ongoing move operation.
+	 *
+	 * Mappings stay valid and are not directly affected by this callback.
+	 * But the DMA-buf can now be in a different physical location, so all
+	 * mappings should be destroyed and re-created as soon as possible.
+	 *
+	 * New mappings can be created after this callback returns, and will
+	 * point to the new location of the DMA-buf.
+	 */
+	void (*move_notify)(struct dma_buf_attachment *attach);
+
+	ANDROID_KABI_RESERVE(1);
+};
+
+/**
+ * struct dma_buf_attachment - holds device-buffer attachment data
+ * @dmabuf: buffer for this attachment.
+ * @dev: device attached to the buffer.
+ * @node: list of dma_buf_attachment, protected by dma_resv lock of the dmabuf.
+ * @sgt: cached mapping.
+ * @dir: direction of cached mapping.
+ * @peer2peer: true if the importer can handle peer resources without pages.
+ * @priv: exporter specific attachment data.
+ * @importer_ops: importer operations for this attachment, if provided
+ * dma_buf_map/unmap_attachment() must be called with the dma_resv lock held.
+ * @importer_priv: importer specific attachment data.
+ * @dma_map_attrs: DMA attributes to be used when the exporter maps the buffer
+ * through dma_buf_map_attachment.
+ *
+ * This structure holds the attachment information between the dma_buf buffer
+ * and its user device(s). The list contains one attachment struct per device
+ * attached to the buffer.
+ *
+ * An attachment is created by calling dma_buf_attach(), and released again by
+ * calling dma_buf_detach(). The DMA mapping itself needed to initiate a
+ * transfer is created by dma_buf_map_attachment() and freed again by calling
+ * dma_buf_unmap_attachment().
+ */
+struct dma_buf_attachment {
+	struct dma_buf *dmabuf;
+	struct device *dev;
+	struct list_head node;
+	struct sg_table *sgt;
+	enum dma_data_direction dir;
+	bool peer2peer;
+	const struct dma_buf_attach_ops *importer_ops;
+	void *importer_priv;
+	void *priv;
+	unsigned long dma_map_attrs;
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+};
+
+/**
+ * struct dma_buf_export_info - holds information needed to export a dma_buf
+ * @exp_name:	name of the exporter - useful for debugging.
+ * @owner:	pointer to exporter module - used for refcounting kernel module
+ * @ops:	Attach allocator-defined dma buf ops to the new buffer
+ * @size:	Size of the buffer - invariant over the lifetime of the buffer
+ * @flags:	mode flags for the file
+ * @resv:	reservation-object, NULL to allocate default one
+ * @priv:	Attach private data of allocator to this buffer
+ *
+ * This structure holds the information required to export the buffer. Used
+ * with dma_buf_export() only.
+ */
+struct dma_buf_export_info {
+	const char *exp_name;
+	struct module *owner;
+	const struct dma_buf_ops *ops;
+	size_t size;
+	int flags;
+	struct dma_resv *resv;
+	void *priv;
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+};
+
+#if IS_ENABLED(CONFIG_DEBUG_FS)
+int get_dmabuf_debugfs_data(int (*fn)(const struct dma_buf *, void *),
+			void *private);
+#endif
+
+/**
+ * DEFINE_DMA_BUF_EXPORT_INFO - helper macro for exporters
+ * @name: export-info name
+ *
+ * DEFINE_DMA_BUF_EXPORT_INFO macro defines the &struct dma_buf_export_info,
+ * zeroes it out and pre-populates exp_name in it.
+ */
+#define DEFINE_DMA_BUF_EXPORT_INFO(name)	\
+	struct dma_buf_export_info name = { .exp_name = KBUILD_MODNAME, \
+					 .owner = THIS_MODULE }
+
+/**
+ * get_dma_buf - convenience wrapper for get_file.
+ * @dmabuf:	[in]	pointer to dma_buf
+ *
+ * Increments the reference count on the dma-buf, needed in case of drivers
+ * that either need to create additional references to the dmabuf on the
+ * kernel side.  For example, an exporter that needs to keep a dmabuf ptr
+ * so that subsequent exports don't create a new dmabuf.
+ */
+static inline void get_dma_buf(struct dma_buf *dmabuf)
+{
+	get_file(dmabuf->file);
+}
+
+/**
+ * dma_buf_is_dynamic - check if a DMA-buf uses dynamic mappings.
+ * @dmabuf: the DMA-buf to check
+ *
+ * Returns true if a DMA-buf exporter wants to be called with the dma_resv
+ * locked for the map/unmap callbacks, false if it doesn't wants to be called
+ * with the lock held.
+ */
+static inline bool dma_buf_is_dynamic(struct dma_buf *dmabuf)
+{
+	return !!dmabuf->ops->pin;
+}
+
+/**
+ * dma_buf_attachment_is_dynamic - check if a DMA-buf attachment uses dynamic
+ * mappings
+ * @attach: the DMA-buf attachment to check
+ *
+ * Returns true if a DMA-buf importer wants to call the map/unmap functions with
+ * the dma_resv lock held.
+ */
+static inline bool
+dma_buf_attachment_is_dynamic(struct dma_buf_attachment *attach)
+{
+	return !!attach->importer_ops;
+}
+
+int is_dma_buf_file(struct file *file);
+struct dma_buf_attachment *dma_buf_attach(struct dma_buf *dmabuf,
+					  struct device *dev);
+struct dma_buf_attachment *
+dma_buf_dynamic_attach(struct dma_buf *dmabuf, struct device *dev,
+		       const struct dma_buf_attach_ops *importer_ops,
+		       void *importer_priv);
+void dma_buf_detach(struct dma_buf *dmabuf,
+		    struct dma_buf_attachment *attach);
+int dma_buf_pin(struct dma_buf_attachment *attach);
+void dma_buf_unpin(struct dma_buf_attachment *attach);
+
+struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info);
+
+int dma_buf_fd(struct dma_buf *dmabuf, int flags);
+struct dma_buf *dma_buf_get(int fd);
+void dma_buf_put(struct dma_buf *dmabuf);
+
+struct sg_table *dma_buf_map_attachment(struct dma_buf_attachment *,
+					enum dma_data_direction);
+void dma_buf_unmap_attachment(struct dma_buf_attachment *, struct sg_table *,
+				enum dma_data_direction);
+void dma_buf_move_notify(struct dma_buf *dma_buf);
+int dma_buf_begin_cpu_access(struct dma_buf *dma_buf,
+			     enum dma_data_direction dir);
+int dma_buf_begin_cpu_access_partial(struct dma_buf *dma_buf,
+				     enum dma_data_direction dir,
+				     unsigned int offset, unsigned int len);
+int dma_buf_end_cpu_access(struct dma_buf *dma_buf,
+			   enum dma_data_direction dir);
+int dma_buf_end_cpu_access_partial(struct dma_buf *dma_buf,
+				     enum dma_data_direction dir,
+				     unsigned int offset, unsigned int len);
+struct sg_table *
+dma_buf_map_attachment_unlocked(struct dma_buf_attachment *attach,
+				enum dma_data_direction direction);
+void dma_buf_unmap_attachment_unlocked(struct dma_buf_attachment *attach,
+				       struct sg_table *sg_table,
+				       enum dma_data_direction direction);
+
+int dma_buf_mmap(struct dma_buf *, struct vm_area_struct *,
+		 unsigned long);
+int dma_buf_vmap(struct dma_buf *dmabuf, struct iosys_map *map);
+void dma_buf_vunmap(struct dma_buf *dmabuf, struct iosys_map *map);
+int dma_buf_vmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map);
+void dma_buf_vunmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map);
+long dma_buf_set_name(struct dma_buf *dmabuf, const char *name);
+int dma_buf_get_flags(struct dma_buf *dmabuf, unsigned long *flags);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #endif /* __DMA_BUF_H__ */

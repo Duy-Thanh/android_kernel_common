@@ -129,6 +129,7 @@ static int rpl_do_srh_inline(struct sk_buff *skb, const struct rpl_lwt *rlwt,
 			     struct dst_entry *cache_dst)
 {
 	struct ipv6_rpl_sr_hdr *isrh, *csrh;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct ipv6hdr oldhdr;
 	struct ipv6hdr *hdr;
 	unsigned char *buf;
@@ -170,6 +171,50 @@ static int rpl_do_srh_inline(struct sk_buff *skb, const struct rpl_lwt *rlwt,
 
 	hdr = ipv6_hdr(skb);
 	memmove(hdr, &oldhdr, sizeof(*hdr));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	const struct ipv6hdr *oldhdr;
+	struct ipv6hdr *hdr;
+	unsigned char *buf;
+	size_t hdrlen;
+	int err;
+
+	oldhdr = ipv6_hdr(skb);
+
+	buf = kcalloc(struct_size(srh, segments.addr, srh->segments_left), 2, GFP_ATOMIC);
+	if (!buf)
+		return -ENOMEM;
+
+	isrh = (struct ipv6_rpl_sr_hdr *)buf;
+	csrh = (struct ipv6_rpl_sr_hdr *)(buf + ((srh->hdrlen + 1) << 3));
+
+	memcpy(isrh, srh, sizeof(*isrh));
+	memcpy(isrh->rpl_segaddr, &srh->rpl_segaddr[1],
+	       (srh->segments_left - 1) * 16);
+	isrh->rpl_segaddr[srh->segments_left - 1] = oldhdr->daddr;
+
+	ipv6_rpl_srh_compress(csrh, isrh, &srh->rpl_segaddr[0],
+			      isrh->segments_left - 1);
+
+	hdrlen = ((csrh->hdrlen + 1) << 3);
+
+	err = skb_cow_head(skb, hdrlen + dst_dev_overhead(cache_dst, skb));
+	if (unlikely(err)) {
+		kfree(buf);
+		return err;
+	}
+
+	skb_pull(skb, sizeof(struct ipv6hdr));
+	skb_postpull_rcsum(skb, skb_network_header(skb),
+			   sizeof(struct ipv6hdr));
+
+	skb_push(skb, sizeof(struct ipv6hdr) + hdrlen);
+	skb_reset_network_header(skb);
+	skb_mac_header_rebuild(skb);
+
+	hdr = ipv6_hdr(skb);
+	memmove(hdr, oldhdr, sizeof(*hdr));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	isrh = (void *)hdr + sizeof(*hdr);
 	memcpy(isrh, csrh, hdrlen);
 

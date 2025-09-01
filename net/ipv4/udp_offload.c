@@ -61,6 +61,7 @@ static struct sk_buff *__skb_udp_tunnel_segment(struct sk_buff *skb,
 	remcsum = !!(skb_shinfo(skb)->gso_type & SKB_GSO_TUNNEL_REMCSUM);
 	skb->remcsum_offload = remcsum;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	need_ipsec = (skb_dst(skb) && dst_xfrm(skb_dst(skb))) || skb_sec_path(skb);
 	/* Try to offload checksum if possible */
 	offload_csum = !!(need_csum &&
@@ -605,6 +606,552 @@ static struct sk_buff *udp_gro_receive_segment(struct list_head *head,
 					return NULL;
 				}
 				skb_set_network_header(skb, skb_gro_receive_network_offset(skb));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	need_ipsec = skb_dst(skb) && dst_xfrm(skb_dst(skb));
+	/* Try to offload checksum if possible */
+	offload_csum = !!(need_csum &&
+			  !need_ipsec &&
+			  (skb->dev->features &
+			   (is_ipv6 ? (NETIF_F_HW_CSUM | NETIF_F_IPV6_CSUM) :
+				      (NETIF_F_HW_CSUM | NETIF_F_IP_CSUM))));
+
+	features &= skb->dev->hw_enc_features;
+	if (need_csum)
+		features &= ~NETIF_F_SCTP_CRC;
+
+	/* The only checksum offload we care about from here on out is the
+	 * outer one so strip the existing checksum feature flags and
+	 * instead set the flag based on our outer checksum offload value.
+	 */
+	if (remcsum) {
+		features &= ~NETIF_F_CSUM_MASK;
+		if (!need_csum || offload_csum)
+			features |= NETIF_F_HW_CSUM;
+	}
+
+	/* segment inner packet. */
+	segs = gso_inner_segment(skb, features);
+	if (IS_ERR_OR_NULL(segs)) {
+		skb_gso_error_unwind(skb, protocol, tnl_hlen, mac_offset,
+				     mac_len);
+		goto out;
+	}
+
+	gso_partial = !!(skb_shinfo(segs)->gso_type & SKB_GSO_PARTIAL);
+
+	outer_hlen = skb_tnl_header_len(skb);
+	udp_offset = outer_hlen - tnl_hlen;
+	skb = segs;
+	do {
+		unsigned int len;
+
+		if (remcsum)
+			skb->ip_summed = CHECKSUM_NONE;
+
+		/* Set up inner headers if we are offloading inner checksum */
+		if (skb->ip_summed == CHECKSUM_PARTIAL) {
+			skb_reset_inner_headers(skb);
+			skb->encapsulation = 1;
+		}
+
+		skb->mac_len = mac_len;
+		skb->protocol = protocol;
+
+		__skb_push(skb, outer_hlen);
+		skb_reset_mac_header(skb);
+		skb_set_network_header(skb, mac_len);
+		skb_set_transport_header(skb, udp_offset);
+		len = skb->len - udp_offset;
+		uh = udp_hdr(skb);
+
+		/* If we are only performing partial GSO the inner header
+		 * will be using a length value equal to only one MSS sized
+		 * segment instead of the entire frame.
+		 */
+		if (gso_partial && skb_is_gso(skb)) {
+			uh->len = htons(skb_shinfo(skb)->gso_size +
+					SKB_GSO_CB(skb)->data_offset +
+					skb->head - (unsigned char *)uh);
+		} else {
+			uh->len = htons(len);
+		}
+
+		if (!need_csum)
+			continue;
+
+		uh->check = ~csum_fold(csum_add(partial,
+				       (__force __wsum)htonl(len)));
+
+		if (skb->encapsulation || !offload_csum) {
+			uh->check = gso_make_checksum(skb, ~uh->check);
+			if (uh->check == 0)
+				uh->check = CSUM_MANGLED_0;
+		} else {
+			skb->ip_summed = CHECKSUM_PARTIAL;
+			skb->csum_start = skb_transport_header(skb) - skb->head;
+			skb->csum_offset = offsetof(struct udphdr, check);
+		}
+	} while ((skb = skb->next));
+out:
+	return segs;
+}
+
+struct sk_buff *skb_udp_tunnel_segment(struct sk_buff *skb,
+				       netdev_features_t features,
+				       bool is_ipv6)
+{
+	const struct net_offload __rcu **offloads;
+	__be16 protocol = skb->protocol;
+	const struct net_offload *ops;
+	struct sk_buff *segs = ERR_PTR(-EINVAL);
+	struct sk_buff *(*gso_inner_segment)(struct sk_buff *skb,
+					     netdev_features_t features);
+
+	rcu_read_lock();
+
+	switch (skb->inner_protocol_type) {
+	case ENCAP_TYPE_ETHER:
+		protocol = skb->inner_protocol;
+		gso_inner_segment = skb_mac_gso_segment;
+		break;
+	case ENCAP_TYPE_IPPROTO:
+		offloads = is_ipv6 ? inet6_offloads : inet_offloads;
+		ops = rcu_dereference(offloads[skb->inner_ipproto]);
+		if (!ops || !ops->callbacks.gso_segment)
+			goto out_unlock;
+		gso_inner_segment = ops->callbacks.gso_segment;
+		break;
+	default:
+		goto out_unlock;
+	}
+
+	segs = __skb_udp_tunnel_segment(skb, features, gso_inner_segment,
+					protocol, is_ipv6);
+
+out_unlock:
+	rcu_read_unlock();
+
+	return segs;
+}
+EXPORT_SYMBOL(skb_udp_tunnel_segment);
+
+static void __udpv4_gso_segment_csum(struct sk_buff *seg,
+				     __be32 *oldip, __be32 *newip,
+				     __be16 *oldport, __be16 *newport)
+{
+	struct udphdr *uh;
+	struct iphdr *iph;
+
+	if (*oldip == *newip && *oldport == *newport)
+		return;
+
+	uh = udp_hdr(seg);
+	iph = ip_hdr(seg);
+
+	if (uh->check) {
+		inet_proto_csum_replace4(&uh->check, seg, *oldip, *newip,
+					 true);
+		inet_proto_csum_replace2(&uh->check, seg, *oldport, *newport,
+					 false);
+		if (!uh->check)
+			uh->check = CSUM_MANGLED_0;
+	}
+	*oldport = *newport;
+
+	csum_replace4(&iph->check, *oldip, *newip);
+	*oldip = *newip;
+}
+
+static struct sk_buff *__udpv4_gso_segment_list_csum(struct sk_buff *segs)
+{
+	struct sk_buff *seg;
+	struct udphdr *uh, *uh2;
+	struct iphdr *iph, *iph2;
+
+	seg = segs;
+	uh = udp_hdr(seg);
+	iph = ip_hdr(seg);
+
+	if ((udp_hdr(seg)->dest == udp_hdr(seg->next)->dest) &&
+	    (udp_hdr(seg)->source == udp_hdr(seg->next)->source) &&
+	    (ip_hdr(seg)->daddr == ip_hdr(seg->next)->daddr) &&
+	    (ip_hdr(seg)->saddr == ip_hdr(seg->next)->saddr))
+		return segs;
+
+	while ((seg = seg->next)) {
+		uh2 = udp_hdr(seg);
+		iph2 = ip_hdr(seg);
+
+		__udpv4_gso_segment_csum(seg,
+					 &iph2->saddr, &iph->saddr,
+					 &uh2->source, &uh->source);
+		__udpv4_gso_segment_csum(seg,
+					 &iph2->daddr, &iph->daddr,
+					 &uh2->dest, &uh->dest);
+	}
+
+	return segs;
+}
+
+static void __udpv6_gso_segment_csum(struct sk_buff *seg,
+				     struct in6_addr *oldip,
+				     const struct in6_addr *newip,
+				     __be16 *oldport, __be16 newport)
+{
+	struct udphdr *uh = udp_hdr(seg);
+
+	if (ipv6_addr_equal(oldip, newip) && *oldport == newport)
+		return;
+
+	if (uh->check) {
+		inet_proto_csum_replace16(&uh->check, seg, oldip->s6_addr32,
+					  newip->s6_addr32, true);
+
+		inet_proto_csum_replace2(&uh->check, seg, *oldport, newport,
+					 false);
+		if (!uh->check)
+			uh->check = CSUM_MANGLED_0;
+	}
+
+	*oldip = *newip;
+	*oldport = newport;
+}
+
+static struct sk_buff *__udpv6_gso_segment_list_csum(struct sk_buff *segs)
+{
+	const struct ipv6hdr *iph;
+	const struct udphdr *uh;
+	struct ipv6hdr *iph2;
+	struct sk_buff *seg;
+	struct udphdr *uh2;
+
+	seg = segs;
+	uh = udp_hdr(seg);
+	iph = ipv6_hdr(seg);
+	uh2 = udp_hdr(seg->next);
+	iph2 = ipv6_hdr(seg->next);
+
+	if (!(*(const u32 *)&uh->source ^ *(const u32 *)&uh2->source) &&
+	    ipv6_addr_equal(&iph->saddr, &iph2->saddr) &&
+	    ipv6_addr_equal(&iph->daddr, &iph2->daddr))
+		return segs;
+
+	while ((seg = seg->next)) {
+		uh2 = udp_hdr(seg);
+		iph2 = ipv6_hdr(seg);
+
+		__udpv6_gso_segment_csum(seg, &iph2->saddr, &iph->saddr,
+					 &uh2->source, uh->source);
+		__udpv6_gso_segment_csum(seg, &iph2->daddr, &iph->daddr,
+					 &uh2->dest, uh->dest);
+	}
+
+	return segs;
+}
+
+static struct sk_buff *__udp_gso_segment_list(struct sk_buff *skb,
+					      netdev_features_t features,
+					      bool is_ipv6)
+{
+	unsigned int mss = skb_shinfo(skb)->gso_size;
+
+	skb = skb_segment_list(skb, features, skb_mac_header_len(skb));
+	if (IS_ERR(skb))
+		return skb;
+
+	udp_hdr(skb)->len = htons(sizeof(struct udphdr) + mss);
+
+	if (is_ipv6)
+		return __udpv6_gso_segment_list_csum(skb);
+	else
+		return __udpv4_gso_segment_list_csum(skb);
+}
+
+struct sk_buff *__udp_gso_segment(struct sk_buff *gso_skb,
+				  netdev_features_t features, bool is_ipv6)
+{
+	struct sock *sk = gso_skb->sk;
+	unsigned int sum_truesize = 0;
+	struct sk_buff *segs, *seg;
+	struct udphdr *uh;
+	unsigned int mss;
+	bool copy_dtor;
+	__sum16 check;
+	__be16 newlen;
+	int ret = 0;
+
+	mss = skb_shinfo(gso_skb)->gso_size;
+	if (gso_skb->len <= sizeof(*uh) + mss)
+		return ERR_PTR(-EINVAL);
+
+	if (unlikely(skb_checksum_start(gso_skb) !=
+		     skb_transport_header(gso_skb) &&
+		     !(skb_shinfo(gso_skb)->gso_type & SKB_GSO_FRAGLIST)))
+		return ERR_PTR(-EINVAL);
+
+	/* We don't know if egress device can segment and checksum the packet
+	 * when IPv6 extension headers are present. Fall back to software GSO.
+	 */
+	if (gso_skb->ip_summed != CHECKSUM_PARTIAL)
+		features &= ~(NETIF_F_GSO_UDP_L4 | NETIF_F_CSUM_MASK);
+
+	if (skb_gso_ok(gso_skb, features | NETIF_F_GSO_ROBUST)) {
+		/* Packet is from an untrusted source, reset gso_segs. */
+		skb_shinfo(gso_skb)->gso_segs = DIV_ROUND_UP(gso_skb->len - sizeof(*uh),
+							     mss);
+		return NULL;
+	}
+
+	if (skb_shinfo(gso_skb)->gso_type & SKB_GSO_FRAGLIST) {
+		 /* Detect modified geometry and pass those to skb_segment. */
+		if (skb_pagelen(gso_skb) - sizeof(*uh) == skb_shinfo(gso_skb)->gso_size)
+			return __udp_gso_segment_list(gso_skb, features, is_ipv6);
+
+		ret = __skb_linearize(gso_skb);
+		if (ret)
+			return ERR_PTR(ret);
+
+		 /* Setup csum, as fraglist skips this in udp4_gro_receive. */
+		gso_skb->csum_start = skb_transport_header(gso_skb) - gso_skb->head;
+		gso_skb->csum_offset = offsetof(struct udphdr, check);
+		gso_skb->ip_summed = CHECKSUM_PARTIAL;
+
+		uh = udp_hdr(gso_skb);
+		if (is_ipv6)
+			uh->check = ~udp_v6_check(gso_skb->len,
+						  &ipv6_hdr(gso_skb)->saddr,
+						  &ipv6_hdr(gso_skb)->daddr, 0);
+		else
+			uh->check = ~udp_v4_check(gso_skb->len,
+						  ip_hdr(gso_skb)->saddr,
+						  ip_hdr(gso_skb)->daddr, 0);
+	}
+
+	skb_pull(gso_skb, sizeof(*uh));
+
+	/* clear destructor to avoid skb_segment assigning it to tail */
+	copy_dtor = gso_skb->destructor == sock_wfree;
+	if (copy_dtor) {
+		gso_skb->destructor = NULL;
+		gso_skb->sk = NULL;
+	}
+
+	segs = skb_segment(gso_skb, features);
+	if (IS_ERR_OR_NULL(segs)) {
+		if (copy_dtor) {
+			gso_skb->destructor = sock_wfree;
+			gso_skb->sk = sk;
+		}
+		return segs;
+	}
+
+	/* GSO partial and frag_list segmentation only requires splitting
+	 * the frame into an MSS multiple and possibly a remainder, both
+	 * cases return a GSO skb. So update the mss now.
+	 */
+	if (skb_is_gso(segs))
+		mss *= skb_shinfo(segs)->gso_segs;
+
+	seg = segs;
+	uh = udp_hdr(seg);
+
+	/* preserve TX timestamp flags and TS key for first segment */
+	skb_shinfo(seg)->tskey = skb_shinfo(gso_skb)->tskey;
+	skb_shinfo(seg)->tx_flags |=
+			(skb_shinfo(gso_skb)->tx_flags & SKBTX_ANY_TSTAMP);
+
+	/* compute checksum adjustment based on old length versus new */
+	newlen = htons(sizeof(*uh) + mss);
+	check = csum16_add(csum16_sub(uh->check, uh->len), newlen);
+
+	for (;;) {
+		if (copy_dtor) {
+			seg->destructor = sock_wfree;
+			seg->sk = sk;
+			sum_truesize += seg->truesize;
+		}
+
+		if (!seg->next)
+			break;
+
+		uh->len = newlen;
+		uh->check = check;
+
+		if (seg->ip_summed == CHECKSUM_PARTIAL)
+			gso_reset_checksum(seg, ~check);
+		else
+			uh->check = gso_make_checksum(seg, ~check) ? :
+				    CSUM_MANGLED_0;
+
+		seg = seg->next;
+		uh = udp_hdr(seg);
+	}
+
+	/* last packet can be partial gso_size, account for that in checksum */
+	newlen = htons(skb_tail_pointer(seg) - skb_transport_header(seg) +
+		       seg->data_len);
+	check = csum16_add(csum16_sub(uh->check, uh->len), newlen);
+
+	uh->len = newlen;
+	uh->check = check;
+
+	if (seg->ip_summed == CHECKSUM_PARTIAL)
+		gso_reset_checksum(seg, ~check);
+	else
+		uh->check = gso_make_checksum(seg, ~check) ? : CSUM_MANGLED_0;
+
+	/* On the TX path, CHECKSUM_NONE and CHECKSUM_UNNECESSARY have the same
+	 * meaning. However, check for bad offloads in the GSO stack expects the
+	 * latter, if the checksum was calculated in software. To vouch for the
+	 * segment skbs we actually need to set it on the gso_skb.
+	 */
+	if (gso_skb->ip_summed == CHECKSUM_NONE)
+		gso_skb->ip_summed = CHECKSUM_UNNECESSARY;
+
+	/* update refcount for the packet */
+	if (copy_dtor) {
+		int delta = sum_truesize - gso_skb->truesize;
+
+		/* In some pathological cases, delta can be negative.
+		 * We need to either use refcount_add() or refcount_sub_and_test()
+		 */
+		if (likely(delta >= 0))
+			refcount_add(delta, &sk->sk_wmem_alloc);
+		else
+			WARN_ON_ONCE(refcount_sub_and_test(-delta, &sk->sk_wmem_alloc));
+	}
+	return segs;
+}
+EXPORT_SYMBOL_GPL(__udp_gso_segment);
+
+static struct sk_buff *udp4_ufo_fragment(struct sk_buff *skb,
+					 netdev_features_t features)
+{
+	struct sk_buff *segs = ERR_PTR(-EINVAL);
+	unsigned int mss;
+	__wsum csum;
+	struct udphdr *uh;
+	struct iphdr *iph;
+
+	if (skb->encapsulation &&
+	    (skb_shinfo(skb)->gso_type &
+	     (SKB_GSO_UDP_TUNNEL|SKB_GSO_UDP_TUNNEL_CSUM))) {
+		segs = skb_udp_tunnel_segment(skb, features, false);
+		goto out;
+	}
+
+	if (!(skb_shinfo(skb)->gso_type & (SKB_GSO_UDP | SKB_GSO_UDP_L4)))
+		goto out;
+
+	if (!pskb_may_pull(skb, sizeof(struct udphdr)))
+		goto out;
+
+	if (skb_shinfo(skb)->gso_type & SKB_GSO_UDP_L4)
+		return __udp_gso_segment(skb, features, false);
+
+	mss = skb_shinfo(skb)->gso_size;
+	if (unlikely(skb->len <= mss))
+		goto out;
+
+	/* Do software UFO. Complete and fill in the UDP checksum as
+	 * HW cannot do checksum of UDP packets sent as multiple
+	 * IP fragments.
+	 */
+
+	uh = udp_hdr(skb);
+	iph = ip_hdr(skb);
+
+	uh->check = 0;
+	csum = skb_checksum(skb, 0, skb->len, 0);
+	uh->check = udp_v4_check(skb->len, iph->saddr, iph->daddr, csum);
+	if (uh->check == 0)
+		uh->check = CSUM_MANGLED_0;
+
+	skb->ip_summed = CHECKSUM_UNNECESSARY;
+
+	/* If there is no outer header we can fake a checksum offload
+	 * due to the fact that we have already done the checksum in
+	 * software prior to segmenting the frame.
+	 */
+	if (!skb->encap_hdr_csum)
+		features |= NETIF_F_HW_CSUM;
+
+	/* Fragment the skb. IP headers of the fragments are updated in
+	 * inet_gso_segment()
+	 */
+	segs = skb_segment(skb, features);
+out:
+	return segs;
+}
+
+
+#define UDP_GRO_CNT_MAX 64
+static struct sk_buff *udp_gro_receive_segment(struct list_head *head,
+					       struct sk_buff *skb)
+{
+	struct udphdr *uh = udp_gro_udphdr(skb);
+	struct sk_buff *pp = NULL;
+	struct udphdr *uh2;
+	struct sk_buff *p;
+	unsigned int ulen;
+	int ret = 0;
+	int flush;
+
+	/* requires non zero csum, for symmetry with GSO */
+	if (!uh->check) {
+		NAPI_GRO_CB(skb)->flush = 1;
+		return NULL;
+	}
+
+	/* Do not deal with padded or malicious packets, sorry ! */
+	ulen = ntohs(uh->len);
+	if (ulen <= sizeof(*uh) || ulen != skb_gro_len(skb)) {
+		NAPI_GRO_CB(skb)->flush = 1;
+		return NULL;
+	}
+	/* pull encapsulating udp header */
+	skb_gro_pull(skb, sizeof(struct udphdr));
+
+	list_for_each_entry(p, head, list) {
+		if (!NAPI_GRO_CB(p)->same_flow)
+			continue;
+
+		uh2 = udp_hdr(p);
+
+		/* Match ports only, as csum is always non zero */
+		if ((*(u32 *)&uh->source != *(u32 *)&uh2->source)) {
+			NAPI_GRO_CB(p)->same_flow = 0;
+			continue;
+		}
+
+		if (NAPI_GRO_CB(skb)->is_flist != NAPI_GRO_CB(p)->is_flist) {
+			NAPI_GRO_CB(skb)->flush = 1;
+			return p;
+		}
+
+		flush = gro_receive_network_flush(uh, uh2, p);
+
+		/* Terminate the flow on len mismatch or if it grow "too much".
+		 * Under small packet flood GRO count could elsewhere grow a lot
+		 * leading to excessive truesize values.
+		 * On len mismatch merge the first packet shorter than gso_size,
+		 * otherwise complete the GRO packet.
+		 */
+		if (ulen > ntohs(uh2->len) || flush) {
+			pp = p;
+		} else {
+			if (NAPI_GRO_CB(skb)->is_flist) {
+				if (!pskb_may_pull(skb, skb_gro_offset(skb))) {
+					NAPI_GRO_CB(skb)->flush = 1;
+					return NULL;
+				}
+				if ((skb->ip_summed != p->ip_summed) ||
+				    (skb->csum_level != p->csum_level)) {
+					NAPI_GRO_CB(skb)->flush = 1;
+					return NULL;
+				}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				ret = skb_gro_receive_list(p, skb);
 			} else {
 				skb_gro_postpull_rcsum(skb, uh,

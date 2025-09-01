@@ -96,6 +96,7 @@ struct vhost_net_ubuf_ref {
 	atomic_t refcount;
 	wait_queue_head_t wait;
 	struct vhost_virtqueue *vq;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct rcu_head rcu;
 };
 
@@ -268,6 +269,176 @@ static void vhost_net_ubuf_put_wait_and_free(struct vhost_net_ubuf_ref *ubufs)
 {
 	vhost_net_ubuf_put_and_wait(ubufs);
 	kfree_rcu(ubufs, rcu);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+};
+
+#define VHOST_NET_BATCH 64
+struct vhost_net_buf {
+	void **queue;
+	int tail;
+	int head;
+};
+
+struct vhost_net_virtqueue {
+	struct vhost_virtqueue vq;
+	size_t vhost_hlen;
+	size_t sock_hlen;
+	/* vhost zerocopy support fields below: */
+	/* last used idx for outstanding DMA zerocopy buffers */
+	int upend_idx;
+	/* For TX, first used idx for DMA done zerocopy buffers
+	 * For RX, number of batched heads
+	 */
+	int done_idx;
+	/* Number of XDP frames batched */
+	int batched_xdp;
+	/* an array of userspace buffers info */
+	struct ubuf_info_msgzc *ubuf_info;
+	/* Reference counting for outstanding ubufs.
+	 * Protected by vq mutex. Writers must also take device mutex. */
+	struct vhost_net_ubuf_ref *ubufs;
+	struct ptr_ring *rx_ring;
+	struct vhost_net_buf rxq;
+	/* Batched XDP buffs */
+	struct xdp_buff *xdp;
+};
+
+struct vhost_net {
+	struct vhost_dev dev;
+	struct vhost_net_virtqueue vqs[VHOST_NET_VQ_MAX];
+	struct vhost_poll poll[VHOST_NET_VQ_MAX];
+	/* Number of TX recently submitted.
+	 * Protected by tx vq lock. */
+	unsigned tx_packets;
+	/* Number of times zerocopy TX recently failed.
+	 * Protected by tx vq lock. */
+	unsigned tx_zcopy_err;
+	/* Flush in progress. Protected by tx vq lock. */
+	bool tx_flush;
+	/* Private page frag cache */
+	struct page_frag_cache pf_cache;
+};
+
+static unsigned vhost_net_zcopy_mask __read_mostly;
+
+static void *vhost_net_buf_get_ptr(struct vhost_net_buf *rxq)
+{
+	if (rxq->tail != rxq->head)
+		return rxq->queue[rxq->head];
+	else
+		return NULL;
+}
+
+static int vhost_net_buf_get_size(struct vhost_net_buf *rxq)
+{
+	return rxq->tail - rxq->head;
+}
+
+static int vhost_net_buf_is_empty(struct vhost_net_buf *rxq)
+{
+	return rxq->tail == rxq->head;
+}
+
+static void *vhost_net_buf_consume(struct vhost_net_buf *rxq)
+{
+	void *ret = vhost_net_buf_get_ptr(rxq);
+	++rxq->head;
+	return ret;
+}
+
+static int vhost_net_buf_produce(struct vhost_net_virtqueue *nvq)
+{
+	struct vhost_net_buf *rxq = &nvq->rxq;
+
+	rxq->head = 0;
+	rxq->tail = ptr_ring_consume_batched(nvq->rx_ring, rxq->queue,
+					      VHOST_NET_BATCH);
+	return rxq->tail;
+}
+
+static void vhost_net_buf_unproduce(struct vhost_net_virtqueue *nvq)
+{
+	struct vhost_net_buf *rxq = &nvq->rxq;
+
+	if (nvq->rx_ring && !vhost_net_buf_is_empty(rxq)) {
+		ptr_ring_unconsume(nvq->rx_ring, rxq->queue + rxq->head,
+				   vhost_net_buf_get_size(rxq),
+				   tun_ptr_free);
+		rxq->head = rxq->tail = 0;
+	}
+}
+
+static int vhost_net_buf_peek_len(void *ptr)
+{
+	if (tun_is_xdp_frame(ptr)) {
+		struct xdp_frame *xdpf = tun_ptr_to_xdp(ptr);
+
+		return xdpf->len;
+	}
+
+	return __skb_array_len_with_tag(ptr);
+}
+
+static int vhost_net_buf_peek(struct vhost_net_virtqueue *nvq)
+{
+	struct vhost_net_buf *rxq = &nvq->rxq;
+
+	if (!vhost_net_buf_is_empty(rxq))
+		goto out;
+
+	if (!vhost_net_buf_produce(nvq))
+		return 0;
+
+out:
+	return vhost_net_buf_peek_len(vhost_net_buf_get_ptr(rxq));
+}
+
+static void vhost_net_buf_init(struct vhost_net_buf *rxq)
+{
+	rxq->head = rxq->tail = 0;
+}
+
+static void vhost_net_enable_zcopy(int vq)
+{
+	vhost_net_zcopy_mask |= 0x1 << vq;
+}
+
+static struct vhost_net_ubuf_ref *
+vhost_net_ubuf_alloc(struct vhost_virtqueue *vq, bool zcopy)
+{
+	struct vhost_net_ubuf_ref *ubufs;
+	/* No zero copy backend? Nothing to count. */
+	if (!zcopy)
+		return NULL;
+	ubufs = kmalloc(sizeof(*ubufs), GFP_KERNEL);
+	if (!ubufs)
+		return ERR_PTR(-ENOMEM);
+	atomic_set(&ubufs->refcount, 1);
+	init_waitqueue_head(&ubufs->wait);
+	ubufs->vq = vq;
+	return ubufs;
+}
+
+static int vhost_net_ubuf_put(struct vhost_net_ubuf_ref *ubufs)
+{
+	int r = atomic_sub_return(1, &ubufs->refcount);
+	if (unlikely(!r))
+		wake_up(&ubufs->wait);
+	return r;
+}
+
+static void vhost_net_ubuf_put_and_wait(struct vhost_net_ubuf_ref *ubufs)
+{
+	vhost_net_ubuf_put(ubufs);
+	wait_event(ubufs->wait, !atomic_read(&ubufs->refcount));
+}
+
+static void vhost_net_ubuf_put_wait_and_free(struct vhost_net_ubuf_ref *ubufs)
+{
+	vhost_net_ubuf_put_and_wait(ubufs);
+	kfree(ubufs);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static void vhost_net_clear_ubuf_info(struct vhost_net *n)

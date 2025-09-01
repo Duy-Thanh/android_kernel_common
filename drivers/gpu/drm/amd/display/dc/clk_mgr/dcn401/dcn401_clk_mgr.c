@@ -1700,6 +1700,7 @@ struct clk_mgr_internal *dcn401_clk_mgr_construct(
 	clk_mgr->base.bw_params = kzalloc(sizeof(*clk_mgr->base.bw_params), GFP_KERNEL);
 	if (!clk_mgr->base.bw_params) {
 		BREAK_TO_DEBUGGER();
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		kfree(clk_mgr401);
 		return NULL;
 	}
@@ -1712,6 +1713,20 @@ struct clk_mgr_internal *dcn401_clk_mgr_construct(
 		BREAK_TO_DEBUGGER();
 		kfree(clk_mgr->base.bw_params);
 		kfree(clk_mgr401);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		kfree(clk_mgr);
+		return NULL;
+	}
+
+	/* need physical address of table to give to PMFW */
+	clk_mgr->wm_range_table = dm_helpers_allocate_gpu_mem(clk_mgr->base.ctx,
+			DC_MEM_ALLOC_TYPE_GART, sizeof(WatermarksExternal_t),
+			&clk_mgr->wm_range_table_addr);
+	if (!clk_mgr->wm_range_table) {
+		BREAK_TO_DEBUGGER();
+		kfree(clk_mgr->base.bw_params);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return NULL;
 	}
 

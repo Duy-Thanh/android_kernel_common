@@ -104,6 +104,7 @@ static inline bool mmap_lock_speculate_retry(struct mm_struct *mm, unsigned int 
 	return read_seqcount_retry(&mm->mm_lock_seq, seq);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /*
  * Locks next vma pointed by the iterator. Confirms the locked vma has not
  * been modified and will retry under mmap_lock protection if modification
@@ -115,6 +116,9 @@ struct vm_area_struct *lock_next_vma(struct mm_struct *mm,
 				     struct vma_iterator *iter,
 				     unsigned long address);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #else /* CONFIG_PER_VMA_LOCK */
 
 static inline void mm_lock_seqcount_init(struct mm_struct *mm) {}

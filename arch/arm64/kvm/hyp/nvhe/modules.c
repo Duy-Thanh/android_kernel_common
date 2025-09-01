@@ -237,6 +237,7 @@ bool module_handle_guest_smc(struct arm_smccc_1_2_regs *regs, struct arm_smccc_1
 	return false;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static const struct pkvm_module_trng_ops *module_guest_trng_ops;
 
 static int __register_guest_trng_ops(const struct pkvm_module_trng_ops *ops)
@@ -338,6 +339,73 @@ const struct pkvm_module_ops module_ops = {
 	.hyp_smp_processor_id = __hyp_smp_processor_id,
 	.device_register_reset = pkvm_device_register_reset,
 	.register_guest_trng_ops = __register_guest_trng_ops,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+const struct pkvm_module_ops module_ops = {
+	.create_private_mapping = __pkvm_create_private_mapping,
+	.alloc_module_va = __pkvm_alloc_module_va,
+	.map_module_page = __pkvm_map_module_page,
+	.register_serial_driver = __pkvm_register_serial_driver,
+	.putc = hyp_putc,
+	.puts = hyp_puts,
+	.putx64 = hyp_putx64,
+	.fixmap_map = hyp_fixmap_map,
+	.fixmap_unmap = hyp_fixmap_unmap,
+	.fixblock_map = hyp_fixblock_map,
+	.fixblock_unmap = hyp_fixblock_unmap,
+	.linear_map_early = __pkvm_linear_map_early,
+	.linear_unmap_early = __pkvm_linear_unmap_early,
+	.flush_dcache_to_poc = __kvm_flush_dcache_to_poc,
+	.update_hcr_el2 = __update_hcr_el2,
+	.update_hfgwtr_el2 = __update_hfgwtr_el2,
+	.register_host_perm_fault_handler = __register_host_perm_fault_handler,
+	.host_stage2_mod_prot = module_change_host_page_prot,
+	.host_stage2_get_leaf = host_stage2_get_leaf,
+	.host_stage2_enable_lazy_pte = host_stage2_enable_lazy_pte,
+	.host_stage2_disable_lazy_pte = host_stage2_disable_lazy_pte,
+	.register_host_smc_handler = __register_host_smc_handler,
+	.register_guest_smc_handler = __register_guest_smc_handler,
+	.register_default_trap_handler = __pkvm_register_default_trap_handler,
+	.register_illegal_abt_notifier = __pkvm_register_illegal_abt_notifier,
+	.register_psci_notifier = __pkvm_register_psci_notifier,
+	.register_hyp_panic_notifier = __pkvm_register_hyp_panic_notifier,
+	.register_unmask_serror = __pkvm_register_unmask_serror,
+	.host_donate_hyp = ___pkvm_host_donate_hyp,
+	.host_donate_hyp_prot = ___pkvm_host_donate_hyp_prot,
+	.host_donate_sglist_hyp = __pkvm_host_donate_sglist_hyp,
+	.hyp_donate_host = __pkvm_hyp_donate_host,
+	.host_share_hyp = __pkvm_host_share_hyp,
+	.host_unshare_hyp = __pkvm_host_unshare_hyp,
+	.pin_shared_mem = hyp_pin_shared_mem,
+	.unpin_shared_mem = hyp_unpin_shared_mem,
+	.memcpy = __pkvm_module_memcpy,
+	.memset = __pkvm_module_memset,
+	.hyp_pa = hyp_virt_to_phys,
+	.hyp_va = hyp_phys_to_virt,
+	.kern_hyp_va = __kern_hyp_va,
+	.tracing_reserve_entry = tracing_reserve_entry,
+	.tracing_commit_entry = tracing_commit_entry,
+	.tracing_mod_hyp_printk = tracing_mod_hyp_printk,
+	.hyp_alloc = hyp_alloc,
+	.hyp_alloc_errno = hyp_alloc_errno,
+	.hyp_free = hyp_free,
+	.hyp_alloc_missing_donations = hyp_alloc_missing_donations,
+	.iommu_donate_pages = kvm_iommu_donate_pages,
+	.iommu_reclaim_pages = kvm_iommu_reclaim_pages,
+	.iommu_init_device = kvm_iommu_init_device,
+	.udelay = pkvm_udelay,
+	.iommu_iotlb_gather_add_page = kvm_iommu_iotlb_gather_add_page,
+	.pkvm_unuse_dma = iommu_pkvm_unuse_dma,
+#ifdef CONFIG_LIST_HARDENED
+	.list_add_valid_or_report = __list_add_valid_or_report,
+	.list_del_entry_valid_or_report = __list_del_entry_valid_or_report,
+#endif
+	.iommu_snapshot_host_stage2 = kvm_iommu_snapshot_host_stage2,
+	.iommu_donate_pages_atomic = kvm_iommu_donate_pages_atomic,
+	.iommu_reclaim_pages_atomic = kvm_iommu_reclaim_pages_atomic,
+	.hyp_smp_processor_id = __hyp_smp_processor_id,
+	.device_register_reset = pkvm_device_register_reset,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 static void *pkvm_module_hyp_va(struct pkvm_el2_module *mod, void *kern_va)

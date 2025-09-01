@@ -6,6 +6,7 @@
  * Author(s): Michael Holzheu <holzheu@linux.vnet.ibm.com>
  */
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/security.h>
 #include <linux/slab.h>
 #include "hypfs.h"
@@ -88,6 +89,86 @@ void hypfs_dbfs_create_file(struct hypfs_dbfs_file *df)
 	if (df->unlocked_ioctl && !security_locked_down(LOCKDOWN_DEBUGFS))
 		fops = &dbfs_ops_ioctl;
 	df->dentry = debugfs_create_file(df->name, 0400, dbfs_dir, df, fops);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/slab.h>
+#include "hypfs.h"
+
+static struct dentry *dbfs_dir;
+
+static struct hypfs_dbfs_data *hypfs_dbfs_data_alloc(struct hypfs_dbfs_file *f)
+{
+	struct hypfs_dbfs_data *data;
+
+	data = kmalloc(sizeof(*data), GFP_KERNEL);
+	if (!data)
+		return NULL;
+	data->dbfs_file = f;
+	return data;
+}
+
+static void hypfs_dbfs_data_free(struct hypfs_dbfs_data *data)
+{
+	data->dbfs_file->data_free(data->buf_free_ptr);
+	kfree(data);
+}
+
+static ssize_t dbfs_read(struct file *file, char __user *buf,
+			 size_t size, loff_t *ppos)
+{
+	struct hypfs_dbfs_data *data;
+	struct hypfs_dbfs_file *df;
+	ssize_t rc;
+
+	if (*ppos != 0)
+		return 0;
+
+	df = file_inode(file)->i_private;
+	if (mutex_lock_interruptible(&df->lock))
+		return -ERESTARTSYS;
+
+	data = hypfs_dbfs_data_alloc(df);
+	if (!data) {
+		mutex_unlock(&df->lock);
+		return -ENOMEM;
+	}
+	rc = df->data_create(&data->buf, &data->buf_free_ptr, &data->size);
+	if (rc) {
+		mutex_unlock(&df->lock);
+		kfree(data);
+		return rc;
+	}
+	mutex_unlock(&df->lock);
+
+	rc = simple_read_from_buffer(buf, size, ppos, data->buf, data->size);
+	hypfs_dbfs_data_free(data);
+	return rc;
+}
+
+static long dbfs_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+{
+	struct hypfs_dbfs_file *df = file_inode(file)->i_private;
+	long rc;
+
+	mutex_lock(&df->lock);
+	if (df->unlocked_ioctl)
+		rc = df->unlocked_ioctl(file, cmd, arg);
+	else
+		rc = -ENOTTY;
+	mutex_unlock(&df->lock);
+	return rc;
+}
+
+static const struct file_operations dbfs_ops = {
+	.read		= dbfs_read,
+	.unlocked_ioctl = dbfs_ioctl,
+};
+
+void hypfs_dbfs_create_file(struct hypfs_dbfs_file *df)
+{
+	df->dentry = debugfs_create_file(df->name, 0400, dbfs_dir, df,
+					 &dbfs_ops);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	mutex_init(&df->lock);
 }
 

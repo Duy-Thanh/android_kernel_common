@@ -33,6 +33,7 @@ struct mgmt_mesh_tx {
 struct mgmt_pending_cmd {
 	struct list_head list;
 	u16 opcode;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct hci_dev *hdev;
 	void *param;
 	size_t param_len;
@@ -55,6 +56,31 @@ int mgmt_cmd_complete(struct sock *sk, u16 index, u16 cmd, u8 status,
 struct mgmt_pending_cmd *mgmt_pending_find(unsigned short channel, u16 opcode,
 					   struct hci_dev *hdev);
 void mgmt_pending_foreach(u16 opcode, struct hci_dev *hdev, bool remove,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int index;
+	void *param;
+	size_t param_len;
+	struct sock *sk;
+	struct sk_buff *skb;
+	void *user_data;
+	int (*cmd_complete)(struct mgmt_pending_cmd *cmd, u8 status);
+};
+
+struct sk_buff *mgmt_alloc_skb(struct hci_dev *hdev, u16 opcode,
+			       unsigned int size);
+int mgmt_send_event_skb(unsigned short channel, struct sk_buff *skb, int flag,
+			struct sock *skip_sk);
+int mgmt_send_event(u16 event, struct hci_dev *hdev, unsigned short channel,
+		    void *data, u16 data_len, int flag, struct sock *skip_sk);
+int mgmt_cmd_status(struct sock *sk, u16 index, u16 cmd, u8 status);
+int mgmt_cmd_complete(struct sock *sk, u16 index, u16 cmd, u8 status,
+		      void *rp, size_t rp_len);
+
+struct mgmt_pending_cmd *mgmt_pending_find(unsigned short channel, u16 opcode,
+					   struct hci_dev *hdev);
+void mgmt_pending_foreach(u16 opcode, struct hci_dev *hdev,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			  void (*cb)(struct mgmt_pending_cmd *cmd, void *data),
 			  void *data);
 struct mgmt_pending_cmd *mgmt_pending_add(struct sock *sk, u16 opcode,

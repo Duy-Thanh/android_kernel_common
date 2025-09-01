@@ -659,8 +659,14 @@
 
 		vreg_l2j_1p2: ldo2 {
 			regulator-name = "vreg_l2j_1p2";
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			regulator-min-microvolt = <1256000>;
 			regulator-max-microvolt = <1256000>;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 

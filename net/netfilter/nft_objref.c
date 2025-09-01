@@ -111,9 +111,17 @@ void nft_objref_map_eval(const struct nft_expr *expr,
 	struct net *net = nft_net(pkt);
 	const struct nft_set_ext *ext;
 	struct nft_object *obj;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	ext = nft_set_do_lookup(net, set, &regs->data[priv->sreg]);
 	if (!ext) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool found;
+
+	found = nft_set_do_lookup(net, set, &regs->data[priv->sreg], &ext);
+	if (!found) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		ext = nft_set_catchall_lookup(net, set);
 		if (!ext) {
 			regs->verdict.code = NFT_BREAK;

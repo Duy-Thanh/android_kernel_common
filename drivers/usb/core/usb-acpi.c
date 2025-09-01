@@ -157,6 +157,7 @@ EXPORT_SYMBOL_GPL(usb_acpi_set_power_state);
  */
 static int usb_acpi_add_usb4_devlink(struct usb_device *udev)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct device_link *link;
 	struct usb_port *port_dev;
 	struct usb_hub *hub;
@@ -189,6 +190,39 @@ static int usb_acpi_add_usb4_devlink(struct usb_device *udev)
 		dev_name(&port_dev->child->dev), dev_name(nhi_fwnode->dev));
 
 	udev->usb4_link = link;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	const struct device_link *link;
+	struct usb_port *port_dev;
+	struct usb_hub *hub;
+
+	if (!udev->parent || udev->parent->parent)
+		return 0;
+
+	hub = usb_hub_to_struct_hub(udev->parent);
+	if (!hub)
+		return 0;
+	port_dev = hub->ports[udev->portnum - 1];
+
+	struct fwnode_handle *nhi_fwnode __free(fwnode_handle) =
+		fwnode_find_reference(dev_fwnode(&port_dev->dev), "usb4-host-interface", 0);
+
+	if (IS_ERR(nhi_fwnode) || !nhi_fwnode->dev)
+		return 0;
+
+	link = device_link_add(&port_dev->child->dev, nhi_fwnode->dev,
+			       DL_FLAG_STATELESS |
+			       DL_FLAG_RPM_ACTIVE |
+			       DL_FLAG_PM_RUNTIME);
+	if (!link) {
+		dev_err(&port_dev->dev, "Failed to created device link from %s to %s\n",
+			dev_name(&port_dev->child->dev), dev_name(nhi_fwnode->dev));
+		return -EINVAL;
+	}
+
+	dev_dbg(&port_dev->dev, "Created device link from %s to %s\n",
+		dev_name(&port_dev->child->dev), dev_name(nhi_fwnode->dev));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

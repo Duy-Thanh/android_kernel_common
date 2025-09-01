@@ -964,6 +964,7 @@ static void find_hw_thread_mask(uint hw_thread_no, cpumask_var_t hw_thread_mask,
 				struct hfi1_affinity_node_list *affinity)
 {
 	int possible, curr_cpu, i;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	uint num_cores_per_socket;
 
 	cpumask_copy(hw_thread_mask, &affinity->proc.mask);
@@ -993,6 +994,34 @@ static void find_hw_thread_mask(uint hw_thread_no, cpumask_var_t hw_thread_mask,
 			   num_cores_per_socket *
 			   node_affinity.num_online_nodes *
 			   hw_thread_no);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	uint num_cores_per_socket = node_affinity.num_online_cpus /
+					affinity->num_core_siblings /
+						node_affinity.num_online_nodes;
+
+	cpumask_copy(hw_thread_mask, &affinity->proc.mask);
+	if (affinity->num_core_siblings > 0) {
+		/* Removing other siblings not needed for now */
+		possible = cpumask_weight(hw_thread_mask);
+		curr_cpu = cpumask_first(hw_thread_mask);
+		for (i = 0;
+		     i < num_cores_per_socket * node_affinity.num_online_nodes;
+		     i++)
+			curr_cpu = cpumask_next(curr_cpu, hw_thread_mask);
+
+		for (; i < possible; i++) {
+			cpumask_clear_cpu(curr_cpu, hw_thread_mask);
+			curr_cpu = cpumask_next(curr_cpu, hw_thread_mask);
+		}
+
+		/* Identifying correct HW threads within physical cores */
+		cpumask_shift_left(hw_thread_mask, hw_thread_mask,
+				   num_cores_per_socket *
+				   node_affinity.num_online_nodes *
+				   hw_thread_no);
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 int hfi1_get_proc_affinity(int node)

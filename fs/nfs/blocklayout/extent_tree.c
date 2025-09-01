@@ -552,6 +552,7 @@ static int ext_tree_encode_commit(struct pnfs_block_layout *bl, __be32 *p,
 	return ret;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /**
  * ext_tree_prepare_commit - encode extents that need to be committed
  * @arg: layout commit data
@@ -619,6 +620,66 @@ ext_tree_prepare_commit(struct nfs4_layoutcommit_args *arg)
 
 	dprintk("%s found %zu ranges\n", __func__, count);
 	return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+int
+ext_tree_prepare_commit(struct nfs4_layoutcommit_args *arg)
+{
+	struct pnfs_block_layout *bl = BLK_LO2EXT(NFS_I(arg->inode)->layout);
+	size_t count = 0, buffer_size = PAGE_SIZE;
+	__be32 *start_p;
+	int ret;
+
+	dprintk("%s enter\n", __func__);
+
+	arg->layoutupdate_page = alloc_page(GFP_NOFS);
+	if (!arg->layoutupdate_page)
+		return -ENOMEM;
+	start_p = page_address(arg->layoutupdate_page);
+	arg->layoutupdate_pages = &arg->layoutupdate_page;
+
+retry:
+	ret = ext_tree_encode_commit(bl, start_p + 1, buffer_size, &count, &arg->lastbytewritten);
+	if (unlikely(ret)) {
+		ext_tree_free_commitdata(arg, buffer_size);
+
+		buffer_size = ext_tree_layoutupdate_size(bl, count);
+		count = 0;
+
+		arg->layoutupdate_pages =
+			kcalloc(DIV_ROUND_UP(buffer_size, PAGE_SIZE),
+				sizeof(struct page *), GFP_NOFS);
+		if (!arg->layoutupdate_pages)
+			return -ENOMEM;
+
+		start_p = __vmalloc(buffer_size, GFP_NOFS);
+		if (!start_p) {
+			kfree(arg->layoutupdate_pages);
+			return -ENOMEM;
+		}
+
+		goto retry;
+	}
+
+	*start_p = cpu_to_be32(count);
+	arg->layoutupdate_len = ext_tree_layoutupdate_size(bl, count);
+
+	if (unlikely(arg->layoutupdate_pages != &arg->layoutupdate_page)) {
+		void *p = start_p, *end = p + arg->layoutupdate_len;
+		struct page *page = NULL;
+		int i = 0;
+
+		arg->start_p = start_p;
+		for ( ; p < end; p += PAGE_SIZE) {
+			page = vmalloc_to_page(p);
+			arg->layoutupdate_pages[i++] = page;
+			get_page(page);
+		}
+	}
+
+	dprintk("%s found %zu ranges\n", __func__, count);
+	return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 void

@@ -52,6 +52,7 @@ static bool nft_rbtree_elem_expired(const struct nft_rbtree_elem *rbe)
 	return nft_set_elem_expired(&rbe->ext);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static const struct nft_set_ext *
 __nft_rbtree_lookup(const struct net *net, const struct nft_set *set,
 		    const u32 *key, unsigned int seq)
@@ -129,6 +130,88 @@ nft_rbtree_lookup(const struct net *net, const struct nft_set *set,
 	read_unlock_bh(&priv->lock);
 
 	return ext;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static bool __nft_rbtree_lookup(const struct net *net, const struct nft_set *set,
+				const u32 *key, const struct nft_set_ext **ext,
+				unsigned int seq)
+{
+	struct nft_rbtree *priv = nft_set_priv(set);
+	const struct nft_rbtree_elem *rbe, *interval = NULL;
+	u8 genmask = nft_genmask_cur(net);
+	const struct rb_node *parent;
+	int d;
+
+	parent = rcu_dereference_raw(priv->root.rb_node);
+	while (parent != NULL) {
+		if (read_seqcount_retry(&priv->count, seq))
+			return false;
+
+		rbe = rb_entry(parent, struct nft_rbtree_elem, node);
+
+		d = memcmp(nft_set_ext_key(&rbe->ext), key, set->klen);
+		if (d < 0) {
+			parent = rcu_dereference_raw(parent->rb_left);
+			if (interval &&
+			    !nft_rbtree_cmp(set, rbe, interval) &&
+			    nft_rbtree_interval_end(rbe) &&
+			    nft_rbtree_interval_start(interval))
+				continue;
+			interval = rbe;
+		} else if (d > 0)
+			parent = rcu_dereference_raw(parent->rb_right);
+		else {
+			if (!nft_set_elem_active(&rbe->ext, genmask)) {
+				parent = rcu_dereference_raw(parent->rb_left);
+				continue;
+			}
+
+			if (nft_rbtree_elem_expired(rbe))
+				return false;
+
+			if (nft_rbtree_interval_end(rbe)) {
+				if (nft_set_is_anonymous(set))
+					return false;
+				parent = rcu_dereference_raw(parent->rb_left);
+				interval = NULL;
+				continue;
+			}
+
+			*ext = &rbe->ext;
+			return true;
+		}
+	}
+
+	if (set->flags & NFT_SET_INTERVAL && interval != NULL &&
+	    nft_set_elem_active(&interval->ext, genmask) &&
+	    !nft_rbtree_elem_expired(interval) &&
+	    nft_rbtree_interval_start(interval)) {
+		*ext = &interval->ext;
+		return true;
+	}
+
+	return false;
+}
+
+INDIRECT_CALLABLE_SCOPE
+bool nft_rbtree_lookup(const struct net *net, const struct nft_set *set,
+		       const u32 *key, const struct nft_set_ext **ext)
+{
+	struct nft_rbtree *priv = nft_set_priv(set);
+	unsigned int seq = read_seqcount_begin(&priv->count);
+	bool ret;
+
+	ret = __nft_rbtree_lookup(net, set, key, ext, seq);
+	if (ret || !read_seqcount_retry(&priv->count, seq))
+		return ret;
+
+	read_lock_bh(&priv->lock);
+	seq = read_seqcount_begin(&priv->count);
+	ret = __nft_rbtree_lookup(net, set, key, ext, seq);
+	read_unlock_bh(&priv->lock);
+
+	return ret;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static bool __nft_rbtree_get(const struct net *net, const struct nft_set *set,

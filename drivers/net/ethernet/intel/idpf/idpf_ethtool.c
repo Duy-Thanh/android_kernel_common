@@ -1089,6 +1089,7 @@ static int idpf_get_per_q_coalesce(struct net_device *netdev, u32 q_num,
 /**
  * __idpf_set_q_coalesce - set ITR values for specific queue
  * @ec: ethtool structure from user to update ITR settings
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @q_coal: per queue coalesce settings
  * @qv: queue vector for which itr values has to be set
  * @is_rxq: is queue type rx
@@ -1272,6 +1273,172 @@ static int idpf_set_per_q_coalesce(struct net_device *netdev, u32 q_num,
 	}
 
 	err = idpf_set_q_coalesce(vport, q_coal, ec, q_num, true);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * @qv: queue vector for which itr values has to be set
+ * @is_rxq: is queue type rx
+ *
+ * Returns 0 on success, negative otherwise.
+ */
+static int __idpf_set_q_coalesce(const struct ethtool_coalesce *ec,
+				 struct idpf_q_vector *qv, bool is_rxq)
+{
+	u32 use_adaptive_coalesce, coalesce_usecs;
+	bool is_dim_ena = false;
+	u16 itr_val;
+
+	if (is_rxq) {
+		is_dim_ena = IDPF_ITR_IS_DYNAMIC(qv->rx_intr_mode);
+		use_adaptive_coalesce = ec->use_adaptive_rx_coalesce;
+		coalesce_usecs = ec->rx_coalesce_usecs;
+		itr_val = qv->rx_itr_value;
+	} else {
+		is_dim_ena = IDPF_ITR_IS_DYNAMIC(qv->tx_intr_mode);
+		use_adaptive_coalesce = ec->use_adaptive_tx_coalesce;
+		coalesce_usecs = ec->tx_coalesce_usecs;
+		itr_val = qv->tx_itr_value;
+	}
+	if (coalesce_usecs != itr_val && use_adaptive_coalesce) {
+		netdev_err(qv->vport->netdev, "Cannot set coalesce usecs if adaptive enabled\n");
+
+		return -EINVAL;
+	}
+
+	if (is_dim_ena && use_adaptive_coalesce)
+		return 0;
+
+	if (coalesce_usecs > IDPF_ITR_MAX) {
+		netdev_err(qv->vport->netdev,
+			   "Invalid value, %d-usecs range is 0-%d\n",
+			   coalesce_usecs, IDPF_ITR_MAX);
+
+		return -EINVAL;
+	}
+
+	if (coalesce_usecs % 2) {
+		coalesce_usecs--;
+		netdev_info(qv->vport->netdev,
+			    "HW only supports even ITR values, ITR rounded to %d\n",
+			    coalesce_usecs);
+	}
+
+	if (is_rxq) {
+		qv->rx_itr_value = coalesce_usecs;
+		if (use_adaptive_coalesce) {
+			qv->rx_intr_mode = IDPF_ITR_DYNAMIC;
+		} else {
+			qv->rx_intr_mode = !IDPF_ITR_DYNAMIC;
+			idpf_vport_intr_write_itr(qv, qv->rx_itr_value,
+						  false);
+		}
+	} else {
+		qv->tx_itr_value = coalesce_usecs;
+		if (use_adaptive_coalesce) {
+			qv->tx_intr_mode = IDPF_ITR_DYNAMIC;
+		} else {
+			qv->tx_intr_mode = !IDPF_ITR_DYNAMIC;
+			idpf_vport_intr_write_itr(qv, qv->tx_itr_value, true);
+		}
+	}
+
+	/* Update of static/dynamic itr will be taken care when interrupt is
+	 * fired
+	 */
+	return 0;
+}
+
+/**
+ * idpf_set_q_coalesce - set ITR values for specific queue
+ * @vport: vport associated to the queue that need updating
+ * @ec: coalesce settings to program the device with
+ * @q_num: update ITR/INTRL (coalesce) settings for this queue number/index
+ * @is_rxq: is queue type rx
+ *
+ * Return 0 on success, and negative on failure
+ */
+static int idpf_set_q_coalesce(const struct idpf_vport *vport,
+			       const struct ethtool_coalesce *ec,
+			       int q_num, bool is_rxq)
+{
+	struct idpf_q_vector *qv;
+
+	qv = is_rxq ? idpf_find_rxq_vec(vport, q_num) :
+		      idpf_find_txq_vec(vport, q_num);
+
+	if (qv && __idpf_set_q_coalesce(ec, qv, is_rxq))
+		return -EINVAL;
+
+	return 0;
+}
+
+/**
+ * idpf_set_coalesce - set ITR values as requested by user
+ * @netdev: pointer to the netdev associated with this query
+ * @ec: coalesce settings to program the device with
+ * @kec: unused
+ * @extack: unused
+ *
+ * Return 0 on success, and negative on failure
+ */
+static int idpf_set_coalesce(struct net_device *netdev,
+			     struct ethtool_coalesce *ec,
+			     struct kernel_ethtool_coalesce *kec,
+			     struct netlink_ext_ack *extack)
+{
+	struct idpf_netdev_priv *np = netdev_priv(netdev);
+	struct idpf_vport *vport;
+	int i, err = 0;
+
+	idpf_vport_ctrl_lock(netdev);
+	vport = idpf_netdev_to_vport(netdev);
+
+	if (np->state != __IDPF_VPORT_UP)
+		goto unlock_mutex;
+
+	for (i = 0; i < vport->num_txq; i++) {
+		err = idpf_set_q_coalesce(vport, ec, i, false);
+		if (err)
+			goto unlock_mutex;
+	}
+
+	for (i = 0; i < vport->num_rxq; i++) {
+		err = idpf_set_q_coalesce(vport, ec, i, true);
+		if (err)
+			goto unlock_mutex;
+	}
+
+unlock_mutex:
+	idpf_vport_ctrl_unlock(netdev);
+
+	return err;
+}
+
+/**
+ * idpf_set_per_q_coalesce - set ITR values as requested by user
+ * @netdev: pointer to the netdev associated with this query
+ * @q_num: queue for which the itr values has to be set
+ * @ec: coalesce settings to program the device with
+ *
+ * Return 0 on success, and negative on failure
+ */
+static int idpf_set_per_q_coalesce(struct net_device *netdev, u32 q_num,
+				   struct ethtool_coalesce *ec)
+{
+	struct idpf_vport *vport;
+	int err;
+
+	idpf_vport_ctrl_lock(netdev);
+	vport = idpf_netdev_to_vport(netdev);
+
+	err = idpf_set_q_coalesce(vport, ec, q_num, false);
+	if (err) {
+		idpf_vport_ctrl_unlock(netdev);
+
+		return err;
+	}
+
+	err = idpf_set_q_coalesce(vport, ec, q_num, true);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	idpf_vport_ctrl_unlock(netdev);
 

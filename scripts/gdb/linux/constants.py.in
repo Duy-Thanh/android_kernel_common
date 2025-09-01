@@ -20,6 +20,7 @@
 #include <linux/of_fdt.h>
 #include <linux/page_ext.h>
 #include <linux/radix-tree.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/maple_tree.h>
 #include <linux/slab.h>
 #include <linux/threads.h>
@@ -99,6 +100,81 @@ LX_VALUE(MAPLE_NODE_SLOTS)
 LX_VALUE(MAPLE_RANGE64_SLOTS)
 LX_VALUE(MAPLE_ARANGE64_SLOTS)
 LX_GDBPARSED(MAPLE_NODE_MASK)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/slab.h>
+#include <linux/threads.h>
+#include <linux/vmalloc.h>
+
+/* We need to stringify expanded macros so that they can be parsed */
+
+#define STRING(x) #x
+#define XSTRING(x) STRING(x)
+
+#define LX_VALUE(x) LX_##x = x
+#define LX_GDBPARSED(x) LX_##x = gdb.parse_and_eval(XSTRING(x))
+
+/*
+ * IS_ENABLED generates (a || b) which is not compatible with python
+ * We can only switch on configuration items we know are available
+ * Therefore - IS_BUILTIN() is more appropriate
+ */
+#define LX_CONFIG(x) LX_##x = IS_BUILTIN(x)
+
+/* The build system will take care of deleting everything above this marker */
+<!-- end-c-headers -->
+
+import gdb
+
+LX_CONFIG(CONFIG_DEBUG_INFO_REDUCED)
+
+/* linux/clk-provider.h */
+if IS_BUILTIN(CONFIG_COMMON_CLK):
+    LX_GDBPARSED(CLK_GET_RATE_NOCACHE)
+
+/* linux/fs.h */
+LX_GDBPARSED(SB_RDONLY)
+LX_GDBPARSED(SB_SYNCHRONOUS)
+LX_GDBPARSED(SB_MANDLOCK)
+LX_GDBPARSED(SB_DIRSYNC)
+LX_GDBPARSED(SB_NOATIME)
+LX_GDBPARSED(SB_NODIRATIME)
+
+/* linux/htimer.h */
+LX_GDBPARSED(hrtimer_resolution)
+
+/* linux/irq.h */
+LX_GDBPARSED(IRQD_LEVEL)
+LX_GDBPARSED(IRQ_HIDDEN)
+
+/* linux/module.h */
+if IS_BUILTIN(CONFIG_MODULES):
+    LX_GDBPARSED(MOD_TEXT)
+    LX_GDBPARSED(MOD_DATA)
+    LX_GDBPARSED(MOD_RODATA)
+    LX_GDBPARSED(MOD_RO_AFTER_INIT)
+
+/* linux/mount.h */
+LX_VALUE(MNT_NOSUID)
+LX_VALUE(MNT_NODEV)
+LX_VALUE(MNT_NOEXEC)
+LX_VALUE(MNT_NOATIME)
+LX_VALUE(MNT_NODIRATIME)
+LX_VALUE(MNT_RELATIME)
+
+/* linux/threads.h */
+LX_VALUE(NR_CPUS)
+
+/* linux/of_fdt.h> */
+LX_VALUE(OF_DT_HEADER)
+
+/* linux/radix-tree.h */
+LX_GDBPARSED(RADIX_TREE_ENTRY_MASK)
+LX_GDBPARSED(RADIX_TREE_INTERNAL_NODE)
+LX_GDBPARSED(RADIX_TREE_MAP_SIZE)
+LX_GDBPARSED(RADIX_TREE_MAP_SHIFT)
+LX_GDBPARSED(RADIX_TREE_MAP_MASK)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 /* linux/vmalloc.h */
 LX_VALUE(VM_IOREMAP)

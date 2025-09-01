@@ -2683,6 +2683,7 @@ static int anx7625_i2c_probe(struct i2c_client *client)
 		ret = devm_request_threaded_irq(dev, platform->pdata.intp_irq,
 						NULL, anx7625_intr_hpd_isr,
 						IRQF_TRIGGER_FALLING |
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 						IRQF_ONESHOT | IRQF_NO_AUTOEN,
 						"anx7625-intp", platform);
 		if (ret) {
@@ -2757,6 +2758,81 @@ static int anx7625_i2c_probe(struct i2c_client *client)
 		enable_irq(platform->pdata.intp_irq);
 		queue_work(platform->workqueue, &platform->work);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+						IRQF_ONESHOT,
+						"anx7625-intp", platform);
+		if (ret) {
+			DRM_DEV_ERROR(dev, "fail to request irq\n");
+			goto free_wq;
+		}
+	}
+
+	platform->aux.name = "anx7625-aux";
+	platform->aux.dev = dev;
+	platform->aux.transfer = anx7625_aux_transfer;
+	platform->aux.wait_hpd_asserted = anx7625_wait_hpd_asserted;
+	drm_dp_aux_init(&platform->aux);
+
+	ret = anx7625_parse_dt(dev, pdata);
+	if (ret) {
+		if (ret != -EPROBE_DEFER)
+			DRM_DEV_ERROR(dev, "fail to parse DT : %d\n", ret);
+		goto free_wq;
+	}
+
+	if (!platform->pdata.is_dpi) {
+		ret = anx7625_setup_dsi_device(platform);
+		if (ret < 0)
+			goto free_wq;
+	}
+
+	/*
+	 * Registering the i2c devices will retrigger deferred probe, so it
+	 * needs to be done after calls that might return EPROBE_DEFER,
+	 * otherwise we can get an infinite loop.
+	 */
+	if (anx7625_register_i2c_dummy_clients(platform, client) != 0) {
+		ret = -ENOMEM;
+		DRM_DEV_ERROR(dev, "fail to reserve I2C bus.\n");
+		goto free_wq;
+	}
+
+	pm_runtime_enable(dev);
+	pm_runtime_set_autosuspend_delay(dev, 1000);
+	pm_runtime_use_autosuspend(dev);
+	pm_suspend_ignore_children(dev, true);
+	ret = devm_add_action_or_reset(dev, anx7625_runtime_disable, dev);
+	if (ret)
+		goto free_wq;
+
+	/*
+	 * Populating the aux bus will retrigger deferred probe, so it needs to
+	 * be done after calls that might return EPROBE_DEFER, otherwise we can
+	 * get an infinite loop.
+	 */
+	ret = devm_of_dp_aux_populate_bus(&platform->aux, anx7625_link_bridge);
+	if (ret) {
+		if (ret != -ENODEV) {
+			DRM_DEV_ERROR(dev, "failed to populate aux bus : %d\n", ret);
+			goto free_wq;
+		}
+
+		ret = anx7625_link_bridge(&platform->aux);
+		if (ret)
+			goto free_wq;
+	}
+
+	if (!platform->pdata.low_power_mode) {
+		anx7625_disable_pd_protocol(platform);
+		pm_runtime_get_sync(dev);
+		_anx7625_hpd_polling(platform, 5000 * 100);
+	}
+
+	/* Add work function */
+	if (platform->pdata.intp_irq)
+		queue_work(platform->workqueue, &platform->work);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (platform->pdata.audio_en)
 		anx7625_register_audio(dev, platform);

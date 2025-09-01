@@ -5934,6 +5934,7 @@ static int rtw89_fw_read_c2h_reg(struct rtw89_dev *rtwdev,
 	const struct rtw89_chip_info *chip = rtwdev->chip;
 	struct rtw89_fw_info *fw_info = &rtwdev->fw;
 	const u32 *c2h_reg = chip->c2h_regs;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32 ret, timeout;
 	u8 i, val;
 
@@ -5946,6 +5947,16 @@ static int rtw89_fw_read_c2h_reg(struct rtw89_dev *rtwdev,
 
 	ret = read_poll_timeout_atomic(rtw89_read8, val, val, 1,
 				       timeout, false, rtwdev,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u32 ret;
+	u8 i, val;
+
+	info->id = RTW89_FWCMD_C2HREG_FUNC_NULL;
+
+	ret = read_poll_timeout_atomic(rtw89_read8, val, val, 1,
+				       RTW89_C2H_TIMEOUT, false, rtwdev,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				       chip->c2h_ctrl_reg);
 	if (ret) {
 		rtw89_warn(rtwdev, "c2h reg timeout\n");

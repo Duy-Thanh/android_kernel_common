@@ -483,6 +483,7 @@ void dpp1_set_cursor_position(
 	if (src_y_offset + cursor_height <= 0)
 		cur_en = 0;  /* not visible beyond top edge*/
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	REG_UPDATE(CURSOR0_CONTROL,
 			CUR0_ENABLE, cur_en);
 
@@ -526,6 +527,44 @@ void dpp_force_disable_cursor(struct dpp *dpp_base)
 	/* Force disable cursor */
 	REG_UPDATE(CURSOR0_CONTROL, CUR0_ENABLE, 0);
 	dpp_base->pos.cur0_ctl.bits.cur0_enable = 0;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (dpp_base->pos.cur0_ctl.bits.cur0_enable != cur_en) {
+		REG_UPDATE(CURSOR0_CONTROL, CUR0_ENABLE, cur_en);
+
+		dpp_base->pos.cur0_ctl.bits.cur0_enable = cur_en;
+	}
+}
+
+void dpp1_cnv_set_optional_cursor_attributes(
+		struct dpp *dpp_base,
+		struct dpp_cursor_attributes *attr)
+{
+	struct dcn10_dpp *dpp = TO_DCN10_DPP(dpp_base);
+
+	if (attr) {
+		REG_UPDATE(CURSOR0_FP_SCALE_BIAS,  CUR0_FP_BIAS,  attr->bias);
+		REG_UPDATE(CURSOR0_FP_SCALE_BIAS,  CUR0_FP_SCALE, attr->scale);
+	}
+}
+
+void dpp1_dppclk_control(
+		struct dpp *dpp_base,
+		bool dppclk_div,
+		bool enable)
+{
+	struct dcn10_dpp *dpp = TO_DCN10_DPP(dpp_base);
+
+	if (enable) {
+		if (dpp->tf_mask->DPPCLK_RATE_CONTROL)
+			REG_UPDATE_2(DPP_CONTROL,
+				DPPCLK_RATE_CONTROL, dppclk_div,
+				DPP_CLOCK_ENABLE, 1);
+		else
+			REG_UPDATE(DPP_CONTROL, DPP_CLOCK_ENABLE, 1);
+	} else
+		REG_UPDATE(DPP_CONTROL, DPP_CLOCK_ENABLE, 0);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static const struct dpp_funcs dcn10_dpp_funcs = {

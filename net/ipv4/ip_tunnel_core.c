@@ -204,6 +204,7 @@ static int iptunnel_pmtud_build_icmp(struct sk_buff *skb, int mtu)
 	if (!pskb_may_pull(skb, ETH_HLEN + sizeof(struct iphdr)))
 		return -EINVAL;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (skb_is_gso(skb))
 		skb_gso_reset(skb);
 
@@ -303,6 +304,102 @@ static int iptunnel_pmtud_build_icmpv6(struct sk_buff *skb, int mtu)
 
 	if (skb_is_gso(skb))
 		skb_gso_reset(skb);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	skb_copy_bits(skb, skb_mac_offset(skb), &eh, ETH_HLEN);
+	pskb_pull(skb, ETH_HLEN);
+	skb_reset_network_header(skb);
+
+	err = pskb_trim(skb, 576 - sizeof(*niph) - sizeof(*icmph));
+	if (err)
+		return err;
+
+	len = skb->len + sizeof(*icmph);
+	err = skb_cow(skb, sizeof(*niph) + sizeof(*icmph) + ETH_HLEN);
+	if (err)
+		return err;
+
+	icmph = skb_push(skb, sizeof(*icmph));
+	*icmph = (struct icmphdr) {
+		.type			= ICMP_DEST_UNREACH,
+		.code			= ICMP_FRAG_NEEDED,
+		.checksum		= 0,
+		.un.frag.__unused	= 0,
+		.un.frag.mtu		= htons(mtu),
+	};
+	icmph->checksum = csum_fold(skb_checksum(skb, 0, len, 0));
+	skb_reset_transport_header(skb);
+
+	niph = skb_push(skb, sizeof(*niph));
+	*niph = (struct iphdr) {
+		.ihl			= sizeof(*niph) / 4u,
+		.version 		= 4,
+		.tos 			= 0,
+		.tot_len		= htons(len + sizeof(*niph)),
+		.id			= 0,
+		.frag_off		= htons(IP_DF),
+		.ttl			= iph->ttl,
+		.protocol		= IPPROTO_ICMP,
+		.saddr			= iph->daddr,
+		.daddr			= iph->saddr,
+	};
+	ip_send_check(niph);
+	skb_reset_network_header(skb);
+
+	skb->ip_summed = CHECKSUM_NONE;
+
+	eth_header(skb, skb->dev, ntohs(eh.h_proto), eh.h_source, eh.h_dest, 0);
+	skb_reset_mac_header(skb);
+
+	return skb->len;
+}
+
+/**
+ * iptunnel_pmtud_check_icmp() - Trigger ICMP reply if needed and allowed
+ * @skb:	Buffer being sent by encapsulation, L2 headers expected
+ * @mtu:	Network MTU for path
+ *
+ * Return: 0 for no ICMP reply, length if built, negative value on error.
+ */
+static int iptunnel_pmtud_check_icmp(struct sk_buff *skb, int mtu)
+{
+	const struct icmphdr *icmph = icmp_hdr(skb);
+	const struct iphdr *iph = ip_hdr(skb);
+
+	if (mtu < 576 || iph->frag_off != htons(IP_DF))
+		return 0;
+
+	if (ipv4_is_lbcast(iph->daddr)  || ipv4_is_multicast(iph->daddr) ||
+	    ipv4_is_zeronet(iph->saddr) || ipv4_is_loopback(iph->saddr)  ||
+	    ipv4_is_lbcast(iph->saddr)  || ipv4_is_multicast(iph->saddr))
+		return 0;
+
+	if (iph->protocol == IPPROTO_ICMP && icmp_is_err(icmph->type))
+		return 0;
+
+	return iptunnel_pmtud_build_icmp(skb, mtu);
+}
+
+#if IS_ENABLED(CONFIG_IPV6)
+/**
+ * iptunnel_pmtud_build_icmpv6() - Build ICMPv6 error message for PMTUD
+ * @skb:	Original packet with L2 header
+ * @mtu:	MTU value for ICMPv6 error
+ *
+ * Return: length on success, negative error code if message couldn't be built.
+ */
+static int iptunnel_pmtud_build_icmpv6(struct sk_buff *skb, int mtu)
+{
+	const struct ipv6hdr *ip6h = ipv6_hdr(skb);
+	struct icmp6hdr *icmp6h;
+	struct ipv6hdr *nip6h;
+	struct ethhdr eh;
+	int len, err;
+	__wsum csum;
+
+	if (!pskb_may_pull(skb, ETH_HLEN + sizeof(struct ipv6hdr)))
+		return -EINVAL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	skb_copy_bits(skb, skb_mac_offset(skb), &eh, ETH_HLEN);
 	pskb_pull(skb, ETH_HLEN);

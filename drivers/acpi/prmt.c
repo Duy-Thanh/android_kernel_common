@@ -85,6 +85,7 @@ static u64 efi_pa_va_lookup(efi_guid_t *guid, u64 pa)
 		}
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	return 0;
 }
 
@@ -182,6 +183,84 @@ acpi_parse_prmt(union acpi_subtable_headers *header, const unsigned long end)
 		if (unlikely(!th->acpi_param_buffer_addr && handler_info->acpi_param_buffer_address))
 			pr_warn("Failed to find VA of acpi param buffer for GUID: %pUL, PA: 0x%llx",
 				&th->guid, handler_info->acpi_param_buffer_address);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	pr_warn("Failed to find VA for GUID: %pUL, PA: 0x%llx", guid, pa);
+
+	return 0;
+}
+
+#define get_first_handler(a) ((struct acpi_prmt_handler_info *) ((char *) (a) + a->handler_info_offset))
+#define get_next_handler(a) ((struct acpi_prmt_handler_info *) (sizeof(struct acpi_prmt_handler_info) + (char *) a))
+
+static int __init
+acpi_parse_prmt(union acpi_subtable_headers *header, const unsigned long end)
+{
+	struct acpi_prmt_module_info *module_info;
+	struct acpi_prmt_handler_info *handler_info;
+	struct prm_handler_info *th;
+	struct prm_module_info *tm;
+	u64 *mmio_count;
+	u64 cur_handler = 0;
+	u32 module_info_size = 0;
+	u64 mmio_range_size = 0;
+	void *temp_mmio;
+
+	module_info = (struct acpi_prmt_module_info *) header;
+	module_info_size = struct_size(tm, handlers, module_info->handler_info_count);
+	tm = kmalloc(module_info_size, GFP_KERNEL);
+	if (!tm)
+		goto parse_prmt_out1;
+
+	guid_copy(&tm->guid, (guid_t *) module_info->module_guid);
+	tm->major_rev = module_info->major_rev;
+	tm->minor_rev = module_info->minor_rev;
+	tm->handler_count = module_info->handler_info_count;
+	tm->updatable = true;
+
+	if (module_info->mmio_list_pointer) {
+		/*
+		 * Each module is associated with a list of addr
+		 * ranges that it can use during the service
+		 */
+		mmio_count = (u64 *) memremap(module_info->mmio_list_pointer, 8, MEMREMAP_WB);
+		if (!mmio_count)
+			goto parse_prmt_out2;
+
+		mmio_range_size = struct_size(tm->mmio_info, addr_ranges, *mmio_count);
+		tm->mmio_info = kmalloc(mmio_range_size, GFP_KERNEL);
+		if (!tm->mmio_info)
+			goto parse_prmt_out3;
+
+		temp_mmio = memremap(module_info->mmio_list_pointer, mmio_range_size, MEMREMAP_WB);
+		if (!temp_mmio)
+			goto parse_prmt_out4;
+		memmove(tm->mmio_info, temp_mmio, mmio_range_size);
+	} else {
+		tm->mmio_info = kmalloc(sizeof(*tm->mmio_info), GFP_KERNEL);
+		if (!tm->mmio_info)
+			goto parse_prmt_out2;
+
+		tm->mmio_info->mmio_count = 0;
+	}
+
+	INIT_LIST_HEAD(&tm->module_list);
+	list_add(&tm->module_list, &prm_module_list);
+
+	handler_info = get_first_handler(module_info);
+	do {
+		th = &tm->handlers[cur_handler];
+
+		guid_copy(&th->guid, (guid_t *)handler_info->handler_guid);
+		th->handler_addr =
+			(void *)efi_pa_va_lookup(&th->guid, handler_info->handler_address);
+
+		th->static_data_buffer_addr =
+			efi_pa_va_lookup(&th->guid, handler_info->static_data_buffer_address);
+
+		th->acpi_param_buffer_addr =
+			efi_pa_va_lookup(&th->guid, handler_info->acpi_param_buffer_address);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	} while (++cur_handler < tm->handler_count && (handler_info = get_next_handler(handler_info)));
 

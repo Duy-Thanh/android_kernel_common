@@ -42,6 +42,7 @@
 	__gu_err;					\
 })
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define __probe_user_internal(sr, error, ptr)			\
 ({								\
 	__asm__("\tproberi (%%sr%1,%2),%3,%0\n"			\
@@ -60,6 +61,12 @@
 	if (likely(!__gu_err))					\
 		__probe_user_internal(SR_USER, __gu_err, ptr);	\
 	__gu_err;						\
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define __get_user(val, ptr)				\
+({							\
+	__get_user_internal(SR_USER, val, ptr);	\
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 })
 
 #define __get_user_asm(sr, val, ldx, ptr)		\

@@ -1319,6 +1319,7 @@ static int otx2_tc_add_flow(struct otx2_nic *nic,
 
 free_leaf:
 	otx2_tc_del_from_flow_list(flow_cfg, new_node);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (new_node->is_act_police) {
 		mutex_lock(&nic->mbox.lock);
 
@@ -1339,6 +1340,29 @@ free_leaf:
 		mutex_unlock(&nic->mbox.lock);
 	}
 	kfree_rcu(new_node, rcu);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	kfree_rcu(new_node, rcu);
+	if (new_node->is_act_police) {
+		mutex_lock(&nic->mbox.lock);
+
+		err = cn10k_map_unmap_rq_policer(nic, new_node->rq,
+						 new_node->leaf_profile, false);
+		if (err)
+			netdev_err(nic->netdev,
+				   "Unmapping RQ %d & profile %d failed\n",
+				   new_node->rq, new_node->leaf_profile);
+		err = cn10k_free_leaf_profile(nic, new_node->leaf_profile);
+		if (err)
+			netdev_err(nic->netdev,
+				   "Unable to free leaf bandwidth profile(%d)\n",
+				   new_node->leaf_profile);
+
+		__clear_bit(new_node->rq, &nic->rq_bmap);
+
+		mutex_unlock(&nic->mbox.lock);
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return rc;
 }

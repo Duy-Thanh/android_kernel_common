@@ -180,9 +180,13 @@
 /* Used to notify the FW of the current link speed */
 #define PORT_LINK_SPEED_OFFSET                             0x00A8
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* 2k memory pointer reserved for default writes by PRU0*/
 #define DEFAULT_MSMC_Q_OFFSET                              0x00AC
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 /* TAS gate mask for windows list0 */
 #define TAS_GATE_MASK_LIST0                                0x0100
 

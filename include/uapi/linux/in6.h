@@ -152,6 +152,7 @@ struct in6_flowlabel_req {
 /*
  *	IPV6 socket options
  */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define IPV6_ADDRFORM		1
 #define IPV6_2292PKTINFO	2
 #define IPV6_2292HOPOPTS	3
@@ -204,6 +205,61 @@ struct in6_flowlabel_req {
 #define IPV6_IPSEC_POLICY	34
 #define IPV6_XFRM_POLICY	35
 #define IPV6_HDRINCL		36
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#if __UAPI_DEF_IPV6_OPTIONS
+#define IPV6_ADDRFORM		1
+#define IPV6_2292PKTINFO	2
+#define IPV6_2292HOPOPTS	3
+#define IPV6_2292DSTOPTS	4
+#define IPV6_2292RTHDR		5
+#define IPV6_2292PKTOPTIONS	6
+#define IPV6_CHECKSUM		7
+#define IPV6_2292HOPLIMIT	8
+#define IPV6_NEXTHOP		9
+#define IPV6_AUTHHDR		10	/* obsolete */
+#define IPV6_FLOWINFO		11
+
+#define IPV6_UNICAST_HOPS	16
+#define IPV6_MULTICAST_IF	17
+#define IPV6_MULTICAST_HOPS	18
+#define IPV6_MULTICAST_LOOP	19
+#define IPV6_ADD_MEMBERSHIP	20
+#define IPV6_DROP_MEMBERSHIP	21
+#define IPV6_ROUTER_ALERT	22
+#define IPV6_MTU_DISCOVER	23
+#define IPV6_MTU		24
+#define IPV6_RECVERR		25
+#define IPV6_V6ONLY		26
+#define IPV6_JOIN_ANYCAST	27
+#define IPV6_LEAVE_ANYCAST	28
+#define IPV6_MULTICAST_ALL	29
+#define IPV6_ROUTER_ALERT_ISOLATE	30
+#define IPV6_RECVERR_RFC4884	31
+
+/* IPV6_MTU_DISCOVER values */
+#define IPV6_PMTUDISC_DONT		0
+#define IPV6_PMTUDISC_WANT		1
+#define IPV6_PMTUDISC_DO		2
+#define IPV6_PMTUDISC_PROBE		3
+/* same as IPV6_PMTUDISC_PROBE, provided for symetry with IPv4
+ * also see comments on IP_PMTUDISC_INTERFACE
+ */
+#define IPV6_PMTUDISC_INTERFACE		4
+/* weaker version of IPV6_PMTUDISC_INTERFACE, which allows packets to
+ * get fragmented if they exceed the interface mtu
+ */
+#define IPV6_PMTUDISC_OMIT		5
+
+/* Flowlabel */
+#define IPV6_FLOWLABEL_MGR	32
+#define IPV6_FLOWINFO_SEND	33
+
+#define IPV6_IPSEC_POLICY	34
+#define IPV6_XFRM_POLICY	35
+#define IPV6_HDRINCL		36
+#endif
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 /*
  * Multicast:

@@ -896,6 +896,7 @@ void dce110_link_encoder_construct(
 						enc110->base.id, &bp_cap_info);
 
 	/* Override features with DCE-specific values */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (result == BP_RESULT_OK) {
 		enc110->base.features.flags.bits.IS_HBR2_CAPABLE =
 				bp_cap_info.DP_HBR2_EN;
@@ -1805,6 +1806,918 @@ void dce60_link_encoder_construct(
 				bp_cap_info.DP_HBR3_EN;
 		enc110->base.features.flags.bits.HDMI_6GB_EN = bp_cap_info.HDMI_6GB_EN;
 	} else if (result != BP_RESULT_NORECORD) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (BP_RESULT_OK == result) {
+		enc110->base.features.flags.bits.IS_HBR2_CAPABLE =
+				bp_cap_info.DP_HBR2_EN;
+		enc110->base.features.flags.bits.IS_HBR3_CAPABLE =
+				bp_cap_info.DP_HBR3_EN;
+		enc110->base.features.flags.bits.HDMI_6GB_EN = bp_cap_info.HDMI_6GB_EN;
+	} else {
+		DC_LOG_WARNING("%s: Failed to get encoder_cap_info from VBIOS with error code %d!\n",
+				__func__,
+				result);
+	}
+	if (enc110->base.ctx->dc->debug.hdmi20_disable) {
+		enc110->base.features.flags.bits.HDMI_6GB_EN = 0;
+	}
+}
+
+bool dce110_link_encoder_validate_output_with_stream(
+	struct link_encoder *enc,
+	const struct dc_stream_state *stream)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	bool is_valid;
+
+	switch (stream->signal) {
+	case SIGNAL_TYPE_DVI_SINGLE_LINK:
+	case SIGNAL_TYPE_DVI_DUAL_LINK:
+		is_valid = dce110_link_encoder_validate_dvi_output(
+			enc110,
+			stream->link->connector_signal,
+			stream->signal,
+			&stream->timing);
+	break;
+	case SIGNAL_TYPE_HDMI_TYPE_A:
+		is_valid = dce110_link_encoder_validate_hdmi_output(
+				enc110,
+				&stream->timing,
+				stream->phy_pix_clk);
+	break;
+	case SIGNAL_TYPE_DISPLAY_PORT:
+	case SIGNAL_TYPE_DISPLAY_PORT_MST:
+		is_valid = dce110_link_encoder_validate_dp_output(
+					enc110, &stream->timing);
+	break;
+	case SIGNAL_TYPE_EDP:
+	case SIGNAL_TYPE_LVDS:
+		is_valid = stream->timing.pixel_encoding == PIXEL_ENCODING_RGB;
+	break;
+	case SIGNAL_TYPE_VIRTUAL:
+		is_valid = true;
+		break;
+	default:
+		is_valid = false;
+	break;
+	}
+
+	return is_valid;
+}
+
+void dce110_link_encoder_hw_init(
+	struct link_encoder *enc)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct bp_transmitter_control cntl = { 0 };
+	enum bp_result result;
+
+	cntl.action = TRANSMITTER_CONTROL_INIT;
+	cntl.engine_id = ENGINE_ID_UNKNOWN;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.connector_obj_id = enc110->base.connector;
+	cntl.lanes_number = LANE_COUNT_FOUR;
+	cntl.coherent = false;
+	cntl.hpd_sel = enc110->base.hpd_source;
+
+	if (enc110->base.connector.id == CONNECTOR_ID_EDP)
+		cntl.signal = SIGNAL_TYPE_EDP;
+
+	result = link_transmitter_control(enc110, &cntl);
+
+	if (result != BP_RESULT_OK) {
+		DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n",
+			__func__);
+		BREAK_TO_DEBUGGER();
+		return;
+	}
+
+	if (enc110->base.connector.id == CONNECTOR_ID_LVDS) {
+		cntl.action = TRANSMITTER_CONTROL_BACKLIGHT_BRIGHTNESS;
+
+		result = link_transmitter_control(enc110, &cntl);
+
+		ASSERT(result == BP_RESULT_OK);
+
+	}
+	aux_initialize(enc110);
+
+	/* reinitialize HPD.
+	 * hpd_initialize() will pass DIG_FE id to HW context.
+	 * All other routine within HW context will use fe_engine_offset
+	 * as DIG_FE id even caller pass DIG_FE id.
+	 * So this routine must be called first. */
+	hpd_initialize(enc110);
+}
+
+void dce110_link_encoder_destroy(struct link_encoder **enc)
+{
+	kfree(TO_DCE110_LINK_ENC(*enc));
+	*enc = NULL;
+}
+
+void dce110_link_encoder_setup(
+	struct link_encoder *enc,
+	enum signal_type signal)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+
+	switch (signal) {
+	case SIGNAL_TYPE_EDP:
+	case SIGNAL_TYPE_DISPLAY_PORT:
+		/* DP SST */
+		REG_UPDATE(DIG_BE_CNTL, DIG_MODE, 0);
+		break;
+	case SIGNAL_TYPE_LVDS:
+		/* LVDS */
+		REG_UPDATE(DIG_BE_CNTL, DIG_MODE, 1);
+		break;
+	case SIGNAL_TYPE_DVI_SINGLE_LINK:
+	case SIGNAL_TYPE_DVI_DUAL_LINK:
+		/* TMDS-DVI */
+		REG_UPDATE(DIG_BE_CNTL, DIG_MODE, 2);
+		break;
+	case SIGNAL_TYPE_HDMI_TYPE_A:
+		/* TMDS-HDMI */
+		REG_UPDATE(DIG_BE_CNTL, DIG_MODE, 3);
+		break;
+	case SIGNAL_TYPE_DISPLAY_PORT_MST:
+		/* DP MST */
+		REG_UPDATE(DIG_BE_CNTL, DIG_MODE, 5);
+		break;
+	default:
+		ASSERT_CRITICAL(false);
+		/* invalid mode ! */
+		break;
+	}
+
+}
+
+/* TODO: still need depth or just pass in adjusted pixel clock? */
+void dce110_link_encoder_enable_tmds_output(
+	struct link_encoder *enc,
+	enum clock_source_id clock_source,
+	enum dc_color_depth color_depth,
+	enum signal_type signal,
+	uint32_t pixel_clock)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct bp_transmitter_control cntl = { 0 };
+	enum bp_result result;
+
+	/* Enable the PHY */
+	cntl.connector_obj_id = enc110->base.connector;
+	cntl.action = TRANSMITTER_CONTROL_ENABLE;
+	cntl.engine_id = enc->preferred_engine;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.pll_id = clock_source;
+	cntl.signal = signal;
+	if (cntl.signal == SIGNAL_TYPE_DVI_DUAL_LINK)
+		cntl.lanes_number = 8;
+	else
+		cntl.lanes_number = 4;
+
+	cntl.hpd_sel = enc110->base.hpd_source;
+
+	cntl.pixel_clock = pixel_clock;
+	cntl.color_depth = color_depth;
+
+	result = link_transmitter_control(enc110, &cntl);
+
+	if (result != BP_RESULT_OK) {
+		DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n",
+			__func__);
+		BREAK_TO_DEBUGGER();
+	}
+}
+
+/* TODO: still need depth or just pass in adjusted pixel clock? */
+void dce110_link_encoder_enable_lvds_output(
+	struct link_encoder *enc,
+	enum clock_source_id clock_source,
+	uint32_t pixel_clock)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct bp_transmitter_control cntl = { 0 };
+	enum bp_result result;
+
+	/* Enable the PHY */
+	cntl.connector_obj_id = enc110->base.connector;
+	cntl.action = TRANSMITTER_CONTROL_ENABLE;
+	cntl.engine_id = enc->preferred_engine;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.pll_id = clock_source;
+	cntl.signal = SIGNAL_TYPE_LVDS;
+	cntl.lanes_number = 4;
+
+	cntl.hpd_sel = enc110->base.hpd_source;
+
+	cntl.pixel_clock = pixel_clock;
+
+	result = link_transmitter_control(enc110, &cntl);
+
+	if (result != BP_RESULT_OK) {
+		DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n",
+			__func__);
+		BREAK_TO_DEBUGGER();
+	}
+}
+
+/* enables DP PHY output */
+void dce110_link_encoder_enable_dp_output(
+	struct link_encoder *enc,
+	const struct dc_link_settings *link_settings,
+	enum clock_source_id clock_source)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct bp_transmitter_control cntl = { 0 };
+	enum bp_result result;
+
+	/* Enable the PHY */
+
+	/* number_of_lanes is used for pixel clock adjust,
+	 * but it's not passed to asic_control.
+	 * We need to set number of lanes manually.
+	 */
+	configure_encoder(enc110, link_settings);
+	cntl.connector_obj_id = enc110->base.connector;
+	cntl.action = TRANSMITTER_CONTROL_ENABLE;
+	cntl.engine_id = enc->preferred_engine;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.pll_id = clock_source;
+	cntl.signal = SIGNAL_TYPE_DISPLAY_PORT;
+	cntl.lanes_number = link_settings->lane_count;
+	cntl.hpd_sel = enc110->base.hpd_source;
+	cntl.pixel_clock = link_settings->link_rate
+						* LINK_RATE_REF_FREQ_IN_KHZ;
+	/* TODO: check if undefined works */
+	cntl.color_depth = COLOR_DEPTH_UNDEFINED;
+
+	result = link_transmitter_control(enc110, &cntl);
+
+	if (result != BP_RESULT_OK) {
+		DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n",
+			__func__);
+		BREAK_TO_DEBUGGER();
+	}
+}
+
+/* enables DP PHY output in MST mode */
+void dce110_link_encoder_enable_dp_mst_output(
+	struct link_encoder *enc,
+	const struct dc_link_settings *link_settings,
+	enum clock_source_id clock_source)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct bp_transmitter_control cntl = { 0 };
+	enum bp_result result;
+
+	/* Enable the PHY */
+
+	/* number_of_lanes is used for pixel clock adjust,
+	 * but it's not passed to asic_control.
+	 * We need to set number of lanes manually.
+	 */
+	configure_encoder(enc110, link_settings);
+
+	cntl.action = TRANSMITTER_CONTROL_ENABLE;
+	cntl.engine_id = ENGINE_ID_UNKNOWN;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.pll_id = clock_source;
+	cntl.signal = SIGNAL_TYPE_DISPLAY_PORT_MST;
+	cntl.lanes_number = link_settings->lane_count;
+	cntl.hpd_sel = enc110->base.hpd_source;
+	cntl.pixel_clock = link_settings->link_rate
+						* LINK_RATE_REF_FREQ_IN_KHZ;
+	/* TODO: check if undefined works */
+	cntl.color_depth = COLOR_DEPTH_UNDEFINED;
+
+	result = link_transmitter_control(enc110, &cntl);
+
+	if (result != BP_RESULT_OK) {
+		DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n",
+			__func__);
+		BREAK_TO_DEBUGGER();
+	}
+}
+
+#if defined(CONFIG_DRM_AMD_DC_SI)
+/* enables DP PHY output */
+static void dce60_link_encoder_enable_dp_output(
+	struct link_encoder *enc,
+	const struct dc_link_settings *link_settings,
+	enum clock_source_id clock_source)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct bp_transmitter_control cntl = { 0 };
+	enum bp_result result;
+
+	/* Enable the PHY */
+
+	/* number_of_lanes is used for pixel clock adjust,
+	 * but it's not passed to asic_control.
+	 * We need to set number of lanes manually.
+	 */
+	dce60_configure_encoder(enc110, link_settings);
+	cntl.connector_obj_id = enc110->base.connector;
+	cntl.action = TRANSMITTER_CONTROL_ENABLE;
+	cntl.engine_id = enc->preferred_engine;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.pll_id = clock_source;
+	cntl.signal = SIGNAL_TYPE_DISPLAY_PORT;
+	cntl.lanes_number = link_settings->lane_count;
+	cntl.hpd_sel = enc110->base.hpd_source;
+	cntl.pixel_clock = link_settings->link_rate
+						* LINK_RATE_REF_FREQ_IN_KHZ;
+	/* TODO: check if undefined works */
+	cntl.color_depth = COLOR_DEPTH_UNDEFINED;
+
+	result = link_transmitter_control(enc110, &cntl);
+
+	if (result != BP_RESULT_OK) {
+		DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n",
+			__func__);
+		BREAK_TO_DEBUGGER();
+	}
+}
+
+/* enables DP PHY output in MST mode */
+static void dce60_link_encoder_enable_dp_mst_output(
+	struct link_encoder *enc,
+	const struct dc_link_settings *link_settings,
+	enum clock_source_id clock_source)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct bp_transmitter_control cntl = { 0 };
+	enum bp_result result;
+
+	/* Enable the PHY */
+
+	/* number_of_lanes is used for pixel clock adjust,
+	 * but it's not passed to asic_control.
+	 * We need to set number of lanes manually.
+	 */
+	dce60_configure_encoder(enc110, link_settings);
+
+	cntl.action = TRANSMITTER_CONTROL_ENABLE;
+	cntl.engine_id = ENGINE_ID_UNKNOWN;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.pll_id = clock_source;
+	cntl.signal = SIGNAL_TYPE_DISPLAY_PORT_MST;
+	cntl.lanes_number = link_settings->lane_count;
+	cntl.hpd_sel = enc110->base.hpd_source;
+	cntl.pixel_clock = link_settings->link_rate
+						* LINK_RATE_REF_FREQ_IN_KHZ;
+	/* TODO: check if undefined works */
+	cntl.color_depth = COLOR_DEPTH_UNDEFINED;
+
+	result = link_transmitter_control(enc110, &cntl);
+
+	if (result != BP_RESULT_OK) {
+		DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n",
+			__func__);
+		BREAK_TO_DEBUGGER();
+	}
+}
+#endif
+
+/*
+ * @brief
+ * Disable transmitter and its encoder
+ */
+void dce110_link_encoder_disable_output(
+	struct link_encoder *enc,
+	enum signal_type signal)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct bp_transmitter_control cntl = { 0 };
+	enum bp_result result;
+
+	if (!dce110_is_dig_enabled(enc)) {
+		/* OF_SKIP_POWER_DOWN_INACTIVE_ENCODER */
+		return;
+	}
+	/* Power-down RX and disable GPU PHY should be paired.
+	 * Disabling PHY without powering down RX may cause
+	 * symbol lock loss, on which we will get DP Sink interrupt. */
+
+	/* There is a case for the DP active dongles
+	 * where we want to disable the PHY but keep RX powered,
+	 * for those we need to ignore DP Sink interrupt
+	 * by checking lane count that has been set
+	 * on the last do_enable_output(). */
+
+	/* disable transmitter */
+	cntl.action = TRANSMITTER_CONTROL_DISABLE;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.hpd_sel = enc110->base.hpd_source;
+	cntl.signal = signal;
+	cntl.connector_obj_id = enc110->base.connector;
+
+	result = link_transmitter_control(enc110, &cntl);
+
+	if (result != BP_RESULT_OK) {
+		DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n",
+			__func__);
+		BREAK_TO_DEBUGGER();
+		return;
+	}
+
+	/* disable encoder */
+	if (dc_is_dp_signal(signal))
+		link_encoder_disable(enc110);
+}
+
+void dce110_link_encoder_dp_set_lane_settings(
+	struct link_encoder *enc,
+	const struct dc_link_settings *link_settings,
+	const struct dc_lane_settings lane_settings[LANE_COUNT_DP_MAX])
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	union dpcd_training_lane_set training_lane_set = { { 0 } };
+	int32_t lane = 0;
+	struct bp_transmitter_control cntl = { 0 };
+
+	if (!link_settings) {
+		BREAK_TO_DEBUGGER();
+		return;
+	}
+
+	cntl.action = TRANSMITTER_CONTROL_SET_VOLTAGE_AND_PREEMPASIS;
+	cntl.transmitter = enc110->base.transmitter;
+	cntl.connector_obj_id = enc110->base.connector;
+	cntl.lanes_number = link_settings->lane_count;
+	cntl.hpd_sel = enc110->base.hpd_source;
+	cntl.pixel_clock = link_settings->link_rate *
+						LINK_RATE_REF_FREQ_IN_KHZ;
+
+	for (lane = 0; lane < link_settings->lane_count; lane++) {
+		/* translate lane settings */
+
+		training_lane_set.bits.VOLTAGE_SWING_SET =
+				lane_settings[lane].VOLTAGE_SWING;
+		training_lane_set.bits.PRE_EMPHASIS_SET =
+				lane_settings[lane].PRE_EMPHASIS;
+
+		/* post cursor 2 setting only applies to HBR2 link rate */
+		if (link_settings->link_rate == LINK_RATE_HIGH2) {
+			/* this is passed to VBIOS
+			 * to program post cursor 2 level */
+
+			training_lane_set.bits.POST_CURSOR2_SET =
+					lane_settings[lane].POST_CURSOR2;
+		}
+
+		cntl.lane_select = lane;
+		cntl.lane_settings = training_lane_set.raw;
+
+		/* call VBIOS table to set voltage swing and pre-emphasis */
+		if (link_transmitter_control(enc110, &cntl) != BP_RESULT_OK) {
+			DC_LOG_ERROR("%s: Failed to execute VBIOS command table!\n", __func__);
+			BREAK_TO_DEBUGGER();
+		}
+	}
+}
+
+/* set DP PHY test and training patterns */
+void dce110_link_encoder_dp_set_phy_pattern(
+	struct link_encoder *enc,
+	const struct encoder_set_dp_phy_pattern_param *param)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+
+	switch (param->dp_phy_pattern) {
+	case DP_TEST_PATTERN_TRAINING_PATTERN1:
+		dce110_link_encoder_set_dp_phy_pattern_training_pattern(enc, 0);
+		break;
+	case DP_TEST_PATTERN_TRAINING_PATTERN2:
+		dce110_link_encoder_set_dp_phy_pattern_training_pattern(enc, 1);
+		break;
+	case DP_TEST_PATTERN_TRAINING_PATTERN3:
+		dce110_link_encoder_set_dp_phy_pattern_training_pattern(enc, 2);
+		break;
+	case DP_TEST_PATTERN_TRAINING_PATTERN4:
+		dce110_link_encoder_set_dp_phy_pattern_training_pattern(enc, 3);
+		break;
+	case DP_TEST_PATTERN_D102:
+		set_dp_phy_pattern_d102(enc110);
+		break;
+	case DP_TEST_PATTERN_SYMBOL_ERROR:
+		set_dp_phy_pattern_symbol_error(enc110);
+		break;
+	case DP_TEST_PATTERN_PRBS7:
+		set_dp_phy_pattern_prbs7(enc110);
+		break;
+	case DP_TEST_PATTERN_80BIT_CUSTOM:
+		set_dp_phy_pattern_80bit_custom(
+			enc110, param->custom_pattern);
+		break;
+	case DP_TEST_PATTERN_CP2520_1:
+		set_dp_phy_pattern_hbr2_compliance_cp2520_2(enc110, 1);
+		break;
+	case DP_TEST_PATTERN_CP2520_2:
+		set_dp_phy_pattern_hbr2_compliance_cp2520_2(enc110, 2);
+		break;
+	case DP_TEST_PATTERN_CP2520_3:
+		set_dp_phy_pattern_hbr2_compliance_cp2520_2(enc110, 3);
+		break;
+	case DP_TEST_PATTERN_VIDEO_MODE: {
+		set_dp_phy_pattern_passthrough_mode(
+			enc110, param->dp_panel_mode);
+		break;
+	}
+
+	default:
+		/* invalid phy pattern */
+		ASSERT_CRITICAL(false);
+		break;
+	}
+}
+
+#if defined(CONFIG_DRM_AMD_DC_SI)
+/* set DP PHY test and training patterns */
+static void dce60_link_encoder_dp_set_phy_pattern(
+	struct link_encoder *enc,
+	const struct encoder_set_dp_phy_pattern_param *param)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+
+	switch (param->dp_phy_pattern) {
+	case DP_TEST_PATTERN_TRAINING_PATTERN1:
+		dce110_link_encoder_set_dp_phy_pattern_training_pattern(enc, 0);
+		break;
+	case DP_TEST_PATTERN_TRAINING_PATTERN2:
+		dce110_link_encoder_set_dp_phy_pattern_training_pattern(enc, 1);
+		break;
+	case DP_TEST_PATTERN_TRAINING_PATTERN3:
+		dce110_link_encoder_set_dp_phy_pattern_training_pattern(enc, 2);
+		break;
+	case DP_TEST_PATTERN_TRAINING_PATTERN4:
+		dce110_link_encoder_set_dp_phy_pattern_training_pattern(enc, 3);
+		break;
+	case DP_TEST_PATTERN_D102:
+		set_dp_phy_pattern_d102(enc110);
+		break;
+	case DP_TEST_PATTERN_SYMBOL_ERROR:
+		set_dp_phy_pattern_symbol_error(enc110);
+		break;
+	case DP_TEST_PATTERN_PRBS7:
+		set_dp_phy_pattern_prbs7(enc110);
+		break;
+	case DP_TEST_PATTERN_80BIT_CUSTOM:
+		set_dp_phy_pattern_80bit_custom(
+			enc110, param->custom_pattern);
+		break;
+	case DP_TEST_PATTERN_CP2520_1:
+		dce60_set_dp_phy_pattern_hbr2_compliance_cp2520_2(enc110, 1);
+		break;
+	case DP_TEST_PATTERN_CP2520_2:
+		dce60_set_dp_phy_pattern_hbr2_compliance_cp2520_2(enc110, 2);
+		break;
+	case DP_TEST_PATTERN_CP2520_3:
+		dce60_set_dp_phy_pattern_hbr2_compliance_cp2520_2(enc110, 3);
+		break;
+	case DP_TEST_PATTERN_VIDEO_MODE: {
+		dce60_set_dp_phy_pattern_passthrough_mode(
+			enc110, param->dp_panel_mode);
+		break;
+	}
+
+	default:
+		/* invalid phy pattern */
+		ASSERT_CRITICAL(false);
+		break;
+	}
+}
+#endif
+
+static void fill_stream_allocation_row_info(
+	const struct link_mst_stream_allocation *stream_allocation,
+	uint32_t *src,
+	uint32_t *slots)
+{
+	const struct stream_encoder *stream_enc = stream_allocation->stream_enc;
+
+	if (stream_enc) {
+		*src = stream_enc->id;
+		*slots = stream_allocation->slot_count;
+	} else {
+		*src = 0;
+		*slots = 0;
+	}
+}
+
+/* programs DP MST VC payload allocation */
+void dce110_link_encoder_update_mst_stream_allocation_table(
+	struct link_encoder *enc,
+	const struct link_mst_stream_allocation_table *table)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	uint32_t value1 = 0;
+	uint32_t value2 = 0;
+	uint32_t slots = 0;
+	uint32_t src = 0;
+	uint32_t retries = 0;
+
+	/* For CZ, there are only 3 pipes. So Virtual channel is up 3.*/
+
+	/* --- Set MSE Stream Attribute -
+	 * Setup VC Payload Table on Tx Side,
+	 * Issue allocation change trigger
+	 * to commit payload on both tx and rx side */
+
+	/* we should clean-up table each time */
+
+	if (table->stream_count >= 1) {
+		fill_stream_allocation_row_info(
+			&table->stream_allocations[0],
+			&src,
+			&slots);
+	} else {
+		src = 0;
+		slots = 0;
+	}
+
+	REG_UPDATE_2(DP_MSE_SAT0,
+			DP_MSE_SAT_SRC0, src,
+			DP_MSE_SAT_SLOT_COUNT0, slots);
+
+	if (table->stream_count >= 2) {
+		fill_stream_allocation_row_info(
+			&table->stream_allocations[1],
+			&src,
+			&slots);
+	} else {
+		src = 0;
+		slots = 0;
+	}
+
+	REG_UPDATE_2(DP_MSE_SAT0,
+			DP_MSE_SAT_SRC1, src,
+			DP_MSE_SAT_SLOT_COUNT1, slots);
+
+	if (table->stream_count >= 3) {
+		fill_stream_allocation_row_info(
+			&table->stream_allocations[2],
+			&src,
+			&slots);
+	} else {
+		src = 0;
+		slots = 0;
+	}
+
+	REG_UPDATE_2(DP_MSE_SAT1,
+			DP_MSE_SAT_SRC2, src,
+			DP_MSE_SAT_SLOT_COUNT2, slots);
+
+	if (table->stream_count >= 4) {
+		fill_stream_allocation_row_info(
+			&table->stream_allocations[3],
+			&src,
+			&slots);
+	} else {
+		src = 0;
+		slots = 0;
+	}
+
+	REG_UPDATE_2(DP_MSE_SAT1,
+			DP_MSE_SAT_SRC3, src,
+			DP_MSE_SAT_SLOT_COUNT3, slots);
+
+	/* --- wait for transaction finish */
+
+	/* send allocation change trigger (ACT) ?
+	 * this step first sends the ACT,
+	 * then double buffers the SAT into the hardware
+	 * making the new allocation active on the DP MST mode link */
+
+
+	/* DP_MSE_SAT_UPDATE:
+	 * 0 - No Action
+	 * 1 - Update SAT with trigger
+	 * 2 - Update SAT without trigger */
+
+	REG_UPDATE(DP_MSE_SAT_UPDATE,
+			DP_MSE_SAT_UPDATE, 1);
+
+	/* wait for update to complete
+	 * (i.e. DP_MSE_SAT_UPDATE field is reset to 0)
+	 * then wait for the transmission
+	 * of at least 16 MTP headers on immediate local link.
+	 * i.e. DP_MSE_16_MTP_KEEPOUT field (read only) is reset to 0
+	 * a value of 1 indicates that DP MST mode
+	 * is in the 16 MTP keepout region after a VC has been added.
+	 * MST stream bandwidth (VC rate) can be configured
+	 * after this bit is cleared */
+
+	do {
+		udelay(10);
+
+		REG_READ(DP_MSE_SAT_UPDATE);
+
+		REG_GET(DP_MSE_SAT_UPDATE,
+				DP_MSE_SAT_UPDATE, &value1);
+
+		REG_GET(DP_MSE_SAT_UPDATE,
+				DP_MSE_16_MTP_KEEPOUT, &value2);
+
+		/* bit field DP_MSE_SAT_UPDATE is set to 1 already */
+		if (!value1 && !value2)
+			break;
+		++retries;
+	} while (retries < DP_MST_UPDATE_MAX_RETRY);
+}
+
+void dce110_link_encoder_connect_dig_be_to_fe(
+	struct link_encoder *enc,
+	enum engine_id engine,
+	bool connect)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	uint32_t field;
+
+	if (engine != ENGINE_ID_UNKNOWN) {
+
+		REG_GET(DIG_BE_CNTL, DIG_FE_SOURCE_SELECT, &field);
+
+		if (connect)
+			field |= get_frontend_source(engine);
+		else
+			field &= ~get_frontend_source(engine);
+
+		REG_UPDATE(DIG_BE_CNTL, DIG_FE_SOURCE_SELECT, field);
+	}
+}
+
+void dce110_link_encoder_enable_hpd(struct link_encoder *enc)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct dc_context *ctx = enc110->base.ctx;
+	uint32_t addr = HPD_REG(DC_HPD_CONTROL);
+	uint32_t hpd_enable = 0;
+	uint32_t value = dm_read_reg(ctx, addr);
+
+	hpd_enable = get_reg_field_value(hpd_enable, DC_HPD_CONTROL, DC_HPD_EN);
+
+	if (hpd_enable == 0)
+		set_reg_field_value(value, 1, DC_HPD_CONTROL, DC_HPD_EN);
+}
+
+void dce110_link_encoder_disable_hpd(struct link_encoder *enc)
+{
+	struct dce110_link_encoder *enc110 = TO_DCE110_LINK_ENC(enc);
+	struct dc_context *ctx = enc110->base.ctx;
+	uint32_t addr = HPD_REG(DC_HPD_CONTROL);
+	uint32_t value = dm_read_reg(ctx, addr);
+
+	set_reg_field_value(value, 0, DC_HPD_CONTROL, DC_HPD_EN);
+}
+
+void dce110_link_encoder_get_max_link_cap(struct link_encoder *enc,
+	struct dc_link_settings *link_settings)
+{
+	/* Set Default link settings */
+	struct dc_link_settings max_link_cap = {LANE_COUNT_FOUR, LINK_RATE_HIGH,
+			LINK_SPREAD_05_DOWNSPREAD_30KHZ, false, 0};
+
+	/* Higher link settings based on feature supported */
+	if (enc->features.flags.bits.IS_HBR2_CAPABLE)
+		max_link_cap.link_rate = LINK_RATE_HIGH2;
+
+	if (enc->features.flags.bits.IS_HBR3_CAPABLE)
+		max_link_cap.link_rate = LINK_RATE_HIGH3;
+
+	*link_settings = max_link_cap;
+}
+
+#if defined(CONFIG_DRM_AMD_DC_SI)
+static const struct link_encoder_funcs dce60_lnk_enc_funcs = {
+	.validate_output_with_stream =
+		dce110_link_encoder_validate_output_with_stream,
+	.hw_init = dce110_link_encoder_hw_init,
+	.setup = dce110_link_encoder_setup,
+	.enable_tmds_output = dce110_link_encoder_enable_tmds_output,
+	.enable_dp_output = dce60_link_encoder_enable_dp_output,
+	.enable_dp_mst_output = dce60_link_encoder_enable_dp_mst_output,
+	.enable_lvds_output = dce110_link_encoder_enable_lvds_output,
+	.disable_output = dce110_link_encoder_disable_output,
+	.dp_set_lane_settings = dce110_link_encoder_dp_set_lane_settings,
+	.dp_set_phy_pattern = dce60_link_encoder_dp_set_phy_pattern,
+	.update_mst_stream_allocation_table =
+		dce110_link_encoder_update_mst_stream_allocation_table,
+	.psr_program_dp_dphy_fast_training =
+			dce110_psr_program_dp_dphy_fast_training,
+	.psr_program_secondary_packet = dce110_psr_program_secondary_packet,
+	.connect_dig_be_to_fe = dce110_link_encoder_connect_dig_be_to_fe,
+	.enable_hpd = dce110_link_encoder_enable_hpd,
+	.disable_hpd = dce110_link_encoder_disable_hpd,
+	.is_dig_enabled = dce110_is_dig_enabled,
+	.destroy = dce110_link_encoder_destroy,
+	.get_max_link_cap = dce110_link_encoder_get_max_link_cap,
+	.get_dig_frontend = dce110_get_dig_frontend
+};
+
+void dce60_link_encoder_construct(
+	struct dce110_link_encoder *enc110,
+	const struct encoder_init_data *init_data,
+	const struct encoder_feature_support *enc_features,
+	const struct dce110_link_enc_registers *link_regs,
+	const struct dce110_link_enc_aux_registers *aux_regs,
+	const struct dce110_link_enc_hpd_registers *hpd_regs)
+{
+	struct bp_encoder_cap_info bp_cap_info = {0};
+	const struct dc_vbios_funcs *bp_funcs = init_data->ctx->dc_bios->funcs;
+	enum bp_result result = BP_RESULT_OK;
+
+	enc110->base.funcs = &dce60_lnk_enc_funcs;
+	enc110->base.ctx = init_data->ctx;
+	enc110->base.id = init_data->encoder;
+
+	enc110->base.hpd_source = init_data->hpd_source;
+	enc110->base.connector = init_data->connector;
+
+	enc110->base.preferred_engine = ENGINE_ID_UNKNOWN;
+
+	enc110->base.features = *enc_features;
+
+	enc110->base.transmitter = init_data->transmitter;
+
+	/* set the flag to indicate whether driver poll the I2C data pin
+	 * while doing the DP sink detect
+	 */
+
+/*	if (dal_adapter_service_is_feature_supported(as,
+		FEATURE_DP_SINK_DETECT_POLL_DATA_PIN))
+		enc110->base.features.flags.bits.
+			DP_SINK_DETECT_POLL_DATA_PIN = true;*/
+
+	enc110->base.output_signals =
+		SIGNAL_TYPE_DVI_SINGLE_LINK |
+		SIGNAL_TYPE_DVI_DUAL_LINK |
+		SIGNAL_TYPE_LVDS |
+		SIGNAL_TYPE_DISPLAY_PORT |
+		SIGNAL_TYPE_DISPLAY_PORT_MST |
+		SIGNAL_TYPE_EDP |
+		SIGNAL_TYPE_HDMI_TYPE_A;
+
+	/* For DCE 8.0 and 8.1, by design, UNIPHY is hardwired to DIG_BE.
+	 * SW always assign DIG_FE 1:1 mapped to DIG_FE for non-MST UNIPHY.
+	 * SW assign DIG_FE to non-MST UNIPHY first and MST last. So prefer
+	 * DIG is per UNIPHY and used by SST DP, eDP, HDMI, DVI and LVDS.
+	 * Prefer DIG assignment is decided by board design.
+	 * For DCE 8.0, there are only max 6 UNIPHYs, we assume board design
+	 * and VBIOS will filter out 7 UNIPHY for DCE 8.0.
+	 * By this, adding DIGG should not hurt DCE 8.0.
+	 * This will let DCE 8.1 share DCE 8.0 as much as possible
+	 */
+
+	enc110->link_regs = link_regs;
+	enc110->aux_regs = aux_regs;
+	enc110->hpd_regs = hpd_regs;
+
+	switch (enc110->base.transmitter) {
+	case TRANSMITTER_UNIPHY_A:
+		enc110->base.preferred_engine = ENGINE_ID_DIGA;
+	break;
+	case TRANSMITTER_UNIPHY_B:
+		enc110->base.preferred_engine = ENGINE_ID_DIGB;
+	break;
+	case TRANSMITTER_UNIPHY_C:
+		enc110->base.preferred_engine = ENGINE_ID_DIGC;
+	break;
+	case TRANSMITTER_UNIPHY_D:
+		enc110->base.preferred_engine = ENGINE_ID_DIGD;
+	break;
+	case TRANSMITTER_UNIPHY_E:
+		enc110->base.preferred_engine = ENGINE_ID_DIGE;
+	break;
+	case TRANSMITTER_UNIPHY_F:
+		enc110->base.preferred_engine = ENGINE_ID_DIGF;
+	break;
+	case TRANSMITTER_UNIPHY_G:
+		enc110->base.preferred_engine = ENGINE_ID_DIGG;
+	break;
+	default:
+		ASSERT_CRITICAL(false);
+		enc110->base.preferred_engine = ENGINE_ID_UNKNOWN;
+	}
+
+	/* default to one to mirror Windows behavior */
+	enc110->base.features.flags.bits.HDMI_6GB_EN = 1;
+
+	result = bp_funcs->get_encoder_cap_info(enc110->base.ctx->dc_bios,
+						enc110->base.id, &bp_cap_info);
+
+	/* Override features with DCE-specific values */
+	if (BP_RESULT_OK == result) {
+		enc110->base.features.flags.bits.IS_HBR2_CAPABLE =
+				bp_cap_info.DP_HBR2_EN;
+		enc110->base.features.flags.bits.IS_HBR3_CAPABLE =
+				bp_cap_info.DP_HBR3_EN;
+		enc110->base.features.flags.bits.HDMI_6GB_EN = bp_cap_info.HDMI_6GB_EN;
+	} else {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		DC_LOG_WARNING("%s: Failed to get encoder_cap_info from VBIOS with error code %d!\n",
 				__func__,
 				result);

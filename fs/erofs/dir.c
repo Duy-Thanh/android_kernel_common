@@ -47,6 +47,7 @@ static int erofs_readdir(struct file *f, struct dir_context *ctx)
 	struct inode *dir = file_inode(f);
 	struct erofs_buf buf = __EROFS_BUF_INITIALIZER;
 	struct super_block *sb = dir->i_sb;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct file_ra_state *ra = &f->f_ra;
 	unsigned long bsz = sb->s_blocksize;
 	unsigned int ofs = erofs_blkoff(sb, ctx->pos);
@@ -71,6 +72,19 @@ static int erofs_readdir(struct file *f, struct dir_context *ctx)
 				page_cache_sync_readahead(dir->i_mapping, ra,
 							  f, idx, pages);
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	unsigned long bsz = sb->s_blocksize;
+	unsigned int ofs = erofs_blkoff(sb, ctx->pos);
+	int err = 0;
+	bool initial = true;
+
+	buf.mapping = dir->i_mapping;
+	while (ctx->pos < dir->i_size) {
+		erofs_off_t dbstart = ctx->pos - ofs;
+		struct erofs_dirent *de;
+		unsigned int nameoff, maxsize;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		de = erofs_bread(&buf, dbstart, EROFS_KMAP);
 		if (IS_ERR(de)) {

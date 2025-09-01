@@ -441,6 +441,7 @@ static int fanotify_encode_fh(struct fanotify_fh *fh, struct inode *inode,
 	dwords = fh_len >> 2;
 	type = exportfs_encode_fid(inode, buf, &dwords);
 	err = -EINVAL;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * Unlike file_handle, type and len of struct fanotify_fh are u8.
 	 * Traditionally, filesystem return handle_type < 0xff, but there
@@ -448,6 +449,10 @@ static int fanotify_encode_fh(struct fanotify_fh *fh, struct inode *inode,
 	 */
 	BUILD_BUG_ON(MAX_HANDLE_SZ > 0xff || FILEID_INVALID > 0xff);
 	if (type <= 0 || type >= FILEID_INVALID || fh_len != dwords << 2)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (type <= 0 || type == FILEID_INVALID || fh_len != dwords << 2)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		goto out_err;
 
 	fh->type = type;

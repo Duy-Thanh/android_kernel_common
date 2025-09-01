@@ -165,6 +165,7 @@ static const struct i2c_algorithm hdpvr_algo = {
 	.functionality = hdpvr_functionality,
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* prevent invalid 0-length usb_control_msg */
 static const struct i2c_adapter_quirks hdpvr_quirks = {
 	.flags = I2C_AQ_NO_ZERO_LEN_READ,
@@ -175,6 +176,13 @@ static const struct i2c_adapter hdpvr_i2c_adapter_template = {
 	.owner  = THIS_MODULE,
 	.algo   = &hdpvr_algo,
 	.quirks = &hdpvr_quirks,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static const struct i2c_adapter hdpvr_i2c_adapter_template = {
+	.name   = "Hauppauge HD PVR I2C",
+	.owner  = THIS_MODULE,
+	.algo   = &hdpvr_algo,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 static int hdpvr_activate_ir(struct hdpvr_device *dev)

@@ -233,6 +233,7 @@ attempts in order to enforce the LRU property which have increasing impacts on
 other CPUs involved in the following operation attempts:
 
 - Attempt to use CPU-local state to batch operations
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 - Attempt to fetch ``target_free`` free nodes from global lists
 - Attempt to pull any node from a global list and remove it from the hashmap
 - Attempt to pull any node from any CPU's list and remove it from the hashmap
@@ -242,6 +243,12 @@ depends on the size of the map. Larger batch size reduces lock contention, but
 may also exhaust the global structure. The value is computed at map init to
 avoid exhaustion, by limiting aggregate reservation by all CPUs to half the map
 size. With a minimum of a single element and maximum budget of 128 at a time.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+- Attempt to fetch free nodes from global lists
+- Attempt to pull any node from a global list and remove it from the hashmap
+- Attempt to pull any node from any CPU's list and remove it from the hashmap
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 This algorithm is described visually in the following diagram. See the
 description in commit 3a08c2fd7634 ("bpf: LRU List") for a full explanation of

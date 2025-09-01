@@ -1500,6 +1500,7 @@ static void kasan_memchr(struct kunit *test)
 
 	ptr = kmalloc(size, GFP_KERNEL | __GFP_ZERO);
 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	OPTIMIZER_HIDE_VAR(ptr);
 
 	OPTIMIZER_HIDE_VAR(ptr);
@@ -1550,6 +1551,57 @@ static void kasan_strings(struct kunit *test)
 	ptr = kmalloc(size, GFP_KERNEL | __GFP_ZERO);
 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
 	OPTIMIZER_HIDE_VAR(ptr);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	OPTIMIZER_HIDE_VAR(ptr);
+	OPTIMIZER_HIDE_VAR(size);
+	KUNIT_EXPECT_KASAN_FAIL(test,
+		kasan_ptr_result = memchr(ptr, '1', size + 1));
+
+	kfree(ptr);
+}
+
+static void kasan_memcmp(struct kunit *test)
+{
+	char *ptr;
+	size_t size = 24;
+	int arr[9];
+
+	/*
+	 * str* functions are not instrumented with CONFIG_AMD_MEM_ENCRYPT.
+	 * See https://bugzilla.kernel.org/show_bug.cgi?id=206337 for details.
+	 */
+	KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_AMD_MEM_ENCRYPT);
+
+	if (OOB_TAG_OFF)
+		size = round_up(size, OOB_TAG_OFF);
+
+	ptr = kmalloc(size, GFP_KERNEL | __GFP_ZERO);
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
+	memset(arr, 0, sizeof(arr));
+
+	OPTIMIZER_HIDE_VAR(ptr);
+	OPTIMIZER_HIDE_VAR(size);
+	KUNIT_EXPECT_KASAN_FAIL(test,
+		kasan_int_result = memcmp(ptr, arr, size+1));
+	kfree(ptr);
+}
+
+static void kasan_strings(struct kunit *test)
+{
+	char *ptr;
+	size_t size = 24;
+
+	/*
+	 * str* functions are not instrumented with CONFIG_AMD_MEM_ENCRYPT.
+	 * See https://bugzilla.kernel.org/show_bug.cgi?id=206337 for details.
+	 */
+	KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_AMD_MEM_ENCRYPT);
+
+	ptr = kmalloc(size, GFP_KERNEL | __GFP_ZERO);
+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	kfree(ptr);
 

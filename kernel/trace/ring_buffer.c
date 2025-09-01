@@ -5875,6 +5875,7 @@ ring_buffer_consume(struct trace_buffer *buffer, int cpu, u64 *ts,
 EXPORT_SYMBOL_GPL(ring_buffer_consume);
 
 /**
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * ring_buffer_read_start - start a non consuming read of the buffer
  * @buffer: The ring buffer to read from
  * @cpu: The cpu buffer to iterate over
@@ -5920,6 +5921,97 @@ ring_buffer_read_start(struct trace_buffer *buffer, int cpu, gfp_t flags)
 	arch_spin_unlock(&cpu_buffer->lock);
 
 	return iter;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * ring_buffer_read_prepare - Prepare for a non consuming read of the buffer
+ * @buffer: The ring buffer to read from
+ * @cpu: The cpu buffer to iterate over
+ * @flags: gfp flags to use for memory allocation
+ *
+ * This performs the initial preparations necessary to iterate
+ * through the buffer.  Memory is allocated, buffer resizing
+ * is disabled, and the iterator pointer is returned to the caller.
+ *
+ * After a sequence of ring_buffer_read_prepare calls, the user is
+ * expected to make at least one call to ring_buffer_read_prepare_sync.
+ * Afterwards, ring_buffer_read_start is invoked to get things going
+ * for real.
+ *
+ * This overall must be paired with ring_buffer_read_finish.
+ */
+struct ring_buffer_iter *
+ring_buffer_read_prepare(struct trace_buffer *buffer, int cpu, gfp_t flags)
+{
+	struct ring_buffer_per_cpu *cpu_buffer;
+	struct ring_buffer_iter *iter;
+
+	if (!cpumask_test_cpu(cpu, buffer->cpumask) || buffer->writer)
+		return NULL;
+
+	iter = kzalloc(sizeof(*iter), flags);
+	if (!iter)
+		return NULL;
+
+	/* Holds the entire event: data and meta data */
+	iter->event_size = buffer->subbuf_size;
+	iter->event = kmalloc(iter->event_size, flags);
+	if (!iter->event) {
+		kfree(iter);
+		return NULL;
+	}
+
+	cpu_buffer = buffer->buffers[cpu];
+
+	iter->cpu_buffer = cpu_buffer;
+
+	atomic_inc(&cpu_buffer->resize_disabled);
+
+	return iter;
+}
+EXPORT_SYMBOL_GPL(ring_buffer_read_prepare);
+
+/**
+ * ring_buffer_read_prepare_sync - Synchronize a set of prepare calls
+ *
+ * All previously invoked ring_buffer_read_prepare calls to prepare
+ * iterators will be synchronized.  Afterwards, read_buffer_read_start
+ * calls on those iterators are allowed.
+ */
+void
+ring_buffer_read_prepare_sync(void)
+{
+	synchronize_rcu();
+}
+EXPORT_SYMBOL_GPL(ring_buffer_read_prepare_sync);
+
+/**
+ * ring_buffer_read_start - start a non consuming read of the buffer
+ * @iter: The iterator returned by ring_buffer_read_prepare
+ *
+ * This finalizes the startup of an iteration through the buffer.
+ * The iterator comes from a call to ring_buffer_read_prepare and
+ * an intervening ring_buffer_read_prepare_sync must have been
+ * performed.
+ *
+ * Must be paired with ring_buffer_read_finish.
+ */
+void
+ring_buffer_read_start(struct ring_buffer_iter *iter)
+{
+	struct ring_buffer_per_cpu *cpu_buffer;
+	unsigned long flags;
+
+	if (!iter)
+		return;
+
+	cpu_buffer = iter->cpu_buffer;
+
+	raw_spin_lock_irqsave(&cpu_buffer->reader_lock, flags);
+	arch_spin_lock(&cpu_buffer->lock);
+	rb_iter_reset(iter);
+	arch_spin_unlock(&cpu_buffer->lock);
+	raw_spin_unlock_irqrestore(&cpu_buffer->reader_lock, flags);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 EXPORT_SYMBOL_GPL(ring_buffer_read_start);
 

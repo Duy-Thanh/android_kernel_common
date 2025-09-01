@@ -971,6 +971,7 @@ static int asus_input_mapping(struct hid_device *hdev,
 		case 0xc4: asus_map_key_clear(KEY_KBDILLUMUP);		break;
 		case 0xc5: asus_map_key_clear(KEY_KBDILLUMDOWN);		break;
 		case 0xc7: asus_map_key_clear(KEY_KBDILLUMTOGGLE);	break;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		case 0x4e: asus_map_key_clear(KEY_FN_ESC);		break;
 		case 0x7e: asus_map_key_clear(KEY_EMOJI_PICKER);	break;
 
@@ -1220,6 +1221,249 @@ static int asus_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	 * leaving drvdata->input pointing to freed memory.
 	 */
 	if (!drvdata->input || !(hdev->claimed & HID_CLAIMED_INPUT)) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+		case 0x6b: asus_map_key_clear(KEY_F21);		break; /* ASUS touchpad toggle */
+		case 0x38: asus_map_key_clear(KEY_PROG1);	break; /* ROG key */
+		case 0xba: asus_map_key_clear(KEY_PROG2);	break; /* Fn+C ASUS Splendid */
+		case 0x5c: asus_map_key_clear(KEY_PROG3);	break; /* Fn+Space Power4Gear */
+		case 0x99: asus_map_key_clear(KEY_PROG4);	break; /* Fn+F5 "fan" symbol */
+		case 0xae: asus_map_key_clear(KEY_PROG4);	break; /* Fn+F5 "fan" symbol */
+		case 0x92: asus_map_key_clear(KEY_CALC);	break; /* Fn+Ret "Calc" symbol */
+		case 0xb2: asus_map_key_clear(KEY_PROG2);	break; /* Fn+Left previous aura */
+		case 0xb3: asus_map_key_clear(KEY_PROG3);	break; /* Fn+Left next aura */
+		case 0x6a: asus_map_key_clear(KEY_F13);		break; /* Screenpad toggle */
+		case 0x4b: asus_map_key_clear(KEY_F14);		break; /* Arrows/Pg-Up/Dn toggle */
+		case 0xa5: asus_map_key_clear(KEY_F15);		break; /* ROG Ally left back */
+		case 0xa6: asus_map_key_clear(KEY_F16);		break; /* ROG Ally QAM button */
+		case 0xa7: asus_map_key_clear(KEY_F17);		break; /* ROG Ally ROG long-press */
+		case 0xa8: asus_map_key_clear(KEY_F18);		break; /* ROG Ally ROG long-press-release */
+
+		default:
+			/* ASUS lazily declares 256 usages, ignore the rest,
+			 * as some make the keyboard appear as a pointer device. */
+			return -1;
+		}
+
+		/*
+		 * Check and enable backlight only on devices with UsagePage ==
+		 * 0xff31 to avoid initializing the keyboard firmware multiple
+		 * times on devices with multiple HID descriptors but same
+		 * PID/VID.
+		 */
+		if (drvdata->quirks & QUIRK_USE_KBD_BACKLIGHT)
+			drvdata->enable_backlight = true;
+
+		set_bit(EV_REP, hi->input->evbit);
+		return 1;
+	}
+
+	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_MSVENDOR) {
+		switch (usage->hid & HID_USAGE) {
+		case 0xff01: asus_map_key_clear(BTN_1);	break;
+		case 0xff02: asus_map_key_clear(BTN_2);	break;
+		case 0xff03: asus_map_key_clear(BTN_3);	break;
+		case 0xff04: asus_map_key_clear(BTN_4);	break;
+		case 0xff05: asus_map_key_clear(BTN_5);	break;
+		case 0xff06: asus_map_key_clear(BTN_6);	break;
+		case 0xff07: asus_map_key_clear(BTN_7);	break;
+		case 0xff08: asus_map_key_clear(BTN_8);	break;
+		case 0xff09: asus_map_key_clear(BTN_9);	break;
+		case 0xff0a: asus_map_key_clear(BTN_A);	break;
+		case 0xff0b: asus_map_key_clear(BTN_B);	break;
+		case 0x00f1: asus_map_key_clear(KEY_WLAN);	break;
+		case 0x00f2: asus_map_key_clear(KEY_BRIGHTNESSDOWN);	break;
+		case 0x00f3: asus_map_key_clear(KEY_BRIGHTNESSUP);	break;
+		case 0x00f4: asus_map_key_clear(KEY_DISPLAY_OFF);	break;
+		case 0x00f7: asus_map_key_clear(KEY_CAMERA);	break;
+		case 0x00f8: asus_map_key_clear(KEY_PROG1);	break;
+		default:
+			return 0;
+		}
+
+		set_bit(EV_REP, hi->input->evbit);
+		return 1;
+	}
+
+	if (drvdata->quirks & QUIRK_NO_CONSUMER_USAGES &&
+		(usage->hid & HID_USAGE_PAGE) == HID_UP_CONSUMER) {
+		switch (usage->hid & HID_USAGE) {
+		case 0xe2: /* Mute */
+		case 0xe9: /* Volume up */
+		case 0xea: /* Volume down */
+			return 0;
+		default:
+			/* Ignore dummy Consumer usages which make the
+			 * keyboard incorrectly appear as a pointer device.
+			 */
+			return -1;
+		}
+	}
+
+	/*
+	 * The mute button is broken and only sends press events, we
+	 * deal with this in our raw_event handler, so do not map it.
+	 */
+	if ((drvdata->quirks & QUIRK_MEDION_E1239T) &&
+	    usage->hid == (HID_UP_CONSUMER | 0xe2)) {
+		input_set_capability(hi->input, EV_KEY, KEY_MUTE);
+		return -1;
+	}
+
+	return 0;
+}
+
+static int asus_start_multitouch(struct hid_device *hdev)
+{
+	int ret;
+	static const unsigned char buf[] = {
+		FEATURE_REPORT_ID, 0x00, 0x03, 0x01, 0x00
+	};
+	unsigned char *dmabuf = kmemdup(buf, sizeof(buf), GFP_KERNEL);
+
+	if (!dmabuf) {
+		ret = -ENOMEM;
+		hid_err(hdev, "Asus failed to alloc dma buf: %d\n", ret);
+		return ret;
+	}
+
+	ret = hid_hw_raw_request(hdev, dmabuf[0], dmabuf, sizeof(buf),
+					HID_FEATURE_REPORT, HID_REQ_SET_REPORT);
+
+	kfree(dmabuf);
+
+	if (ret != sizeof(buf)) {
+		hid_err(hdev, "Asus failed to start multitouch: %d\n", ret);
+		return ret;
+	}
+
+	return 0;
+}
+
+static int __maybe_unused asus_resume(struct hid_device *hdev) {
+	struct asus_drvdata *drvdata = hid_get_drvdata(hdev);
+	int ret = 0;
+
+	if (drvdata->kbd_backlight) {
+		const u8 buf[] = { FEATURE_KBD_REPORT_ID, 0xba, 0xc5, 0xc4,
+				drvdata->kbd_backlight->cdev.brightness };
+		ret = asus_kbd_set_report(hdev, buf, sizeof(buf));
+		if (ret < 0) {
+			hid_err(hdev, "Asus failed to set keyboard backlight: %d\n", ret);
+			goto asus_resume_err;
+		}
+	}
+
+asus_resume_err:
+	return ret;
+}
+
+static int __maybe_unused asus_reset_resume(struct hid_device *hdev)
+{
+	struct asus_drvdata *drvdata = hid_get_drvdata(hdev);
+
+	if (drvdata->tp)
+		return asus_start_multitouch(hdev);
+
+	return 0;
+}
+
+static int asus_probe(struct hid_device *hdev, const struct hid_device_id *id)
+{
+	int ret;
+	struct asus_drvdata *drvdata;
+
+	drvdata = devm_kzalloc(&hdev->dev, sizeof(*drvdata), GFP_KERNEL);
+	if (drvdata == NULL) {
+		hid_err(hdev, "Can't alloc Asus descriptor\n");
+		return -ENOMEM;
+	}
+
+	hid_set_drvdata(hdev, drvdata);
+
+	drvdata->quirks = id->driver_data;
+
+	/*
+	 * T90CHI's keyboard dock returns same ID values as T100CHI's dock.
+	 * Thus, identify T90CHI dock with product name string.
+	 */
+	if (strstr(hdev->name, "T90CHI")) {
+		drvdata->quirks &= ~QUIRK_T100CHI;
+		drvdata->quirks |= QUIRK_T90CHI;
+	}
+
+	if (drvdata->quirks & QUIRK_IS_MULTITOUCH)
+		drvdata->tp = &asus_i2c_tp;
+
+	if ((drvdata->quirks & QUIRK_T100_KEYBOARD) && hid_is_usb(hdev)) {
+		struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
+
+		if (intf->altsetting->desc.bInterfaceNumber == T100_TPAD_INTF) {
+			drvdata->quirks = QUIRK_SKIP_INPUT_MAPPING;
+			/*
+			 * The T100HA uses the same USB-ids as the T100TAF and
+			 * the T200TA uses the same USB-ids as the T100TA, while
+			 * both have different max x/y values as the T100TA[F].
+			 */
+			if (dmi_match(DMI_PRODUCT_NAME, "T100HAN"))
+				drvdata->tp = &asus_t100ha_tp;
+			else if (dmi_match(DMI_PRODUCT_NAME, "T200TA"))
+				drvdata->tp = &asus_t200ta_tp;
+			else
+				drvdata->tp = &asus_t100ta_tp;
+		}
+	}
+
+	if (drvdata->quirks & QUIRK_T100CHI) {
+		/*
+		 * All functionality is on a single HID interface and for
+		 * userspace the touchpad must be a separate input_dev.
+		 */
+		hdev->quirks |= HID_QUIRK_MULTI_INPUT;
+		drvdata->tp = &asus_t100chi_tp;
+	}
+
+	if ((drvdata->quirks & QUIRK_MEDION_E1239T) && hid_is_usb(hdev)) {
+		struct usb_host_interface *alt =
+			to_usb_interface(hdev->dev.parent)->altsetting;
+
+		if (alt->desc.bInterfaceNumber == MEDION_E1239T_TPAD_INTF) {
+			/* For separate input-devs for tp and tp toggle key */
+			hdev->quirks |= HID_QUIRK_MULTI_INPUT;
+			drvdata->quirks |= QUIRK_SKIP_INPUT_MAPPING;
+			drvdata->tp = &medion_e1239t_tp;
+		}
+	}
+
+	if (drvdata->quirks & QUIRK_NO_INIT_REPORTS)
+		hdev->quirks |= HID_QUIRK_NO_INIT_REPORTS;
+
+	drvdata->hdev = hdev;
+
+	if (drvdata->quirks & (QUIRK_T100CHI | QUIRK_T90CHI)) {
+		ret = asus_battery_probe(hdev);
+		if (ret) {
+			hid_err(hdev,
+			    "Asus hid battery_probe failed: %d\n", ret);
+			return ret;
+		}
+	}
+
+	ret = hid_parse(hdev);
+	if (ret) {
+		hid_err(hdev, "Asus hid parse failed: %d\n", ret);
+		return ret;
+	}
+
+	ret = hid_hw_start(hdev, HID_CONNECT_DEFAULT);
+	if (ret) {
+		hid_err(hdev, "Asus hw start failed: %d\n", ret);
+		return ret;
+	}
+
+	if (!drvdata->input) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		hid_err(hdev, "Asus input not registered\n");
 		ret = -ENOMEM;
 		goto err_stop_hw;

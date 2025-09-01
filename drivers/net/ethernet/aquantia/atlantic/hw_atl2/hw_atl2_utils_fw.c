@@ -462,6 +462,7 @@ static int aq_a2_fw_get_mac_temp(struct aq_hw_s *self, int *temp)
 	return aq_a2_fw_get_phy_temp(self, temp);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int aq_a2_fw_set_wol_params(struct aq_hw_s *self, const u8 *mac, u32 wol)
 {
 	struct mac_address_aligned_s mac_address;
@@ -644,6 +645,152 @@ const struct aq_fw_ops aq_a2_fw_ops = {
 	.update_link_status = aq_a2_fw_update_link_status,
 	.update_stats       = aq_a2_fw_update_stats,
 	.set_power          = aq_a2_fw_set_power,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int aq_a2_fw_set_eee_rate(struct aq_hw_s *self, u32 speed)
+{
+	struct link_options_s link_options;
+
+	hw_atl2_shared_buffer_get(self, link_options, link_options);
+
+	aq_a2_fw_upd_eee_rate_bits(self, &link_options, speed);
+
+	hw_atl2_shared_buffer_write(self, link_options, link_options);
+
+	return hw_atl2_shared_buffer_finish_ack(self);
+}
+
+static int aq_a2_fw_get_eee_rate(struct aq_hw_s *self, u32 *rate,
+				 u32 *supported_rates)
+{
+	struct device_link_caps_s device_link_caps;
+	struct lkp_link_caps_s lkp_link_caps;
+
+	hw_atl2_shared_buffer_read(self, device_link_caps, device_link_caps);
+	hw_atl2_shared_buffer_read(self, lkp_link_caps, lkp_link_caps);
+
+	*supported_rates = a2_fw_dev_to_eee_mask(&device_link_caps);
+	*rate = a2_fw_lkp_to_mask(&lkp_link_caps);
+
+	return 0;
+}
+
+static int aq_a2_fw_renegotiate(struct aq_hw_s *self)
+{
+	struct link_options_s link_options;
+	int err;
+
+	hw_atl2_shared_buffer_get(self, link_options, link_options);
+	link_options.link_renegotiate = 1U;
+	hw_atl2_shared_buffer_write(self, link_options, link_options);
+
+	err = hw_atl2_shared_buffer_finish_ack(self);
+
+	/* We should put renegotiate status back to zero
+	 * after command completes
+	 */
+	link_options.link_renegotiate = 0U;
+	hw_atl2_shared_buffer_write(self, link_options, link_options);
+
+	return err;
+}
+
+static int aq_a2_fw_set_flow_control(struct aq_hw_s *self)
+{
+	struct link_options_s link_options;
+
+	hw_atl2_shared_buffer_get(self, link_options, link_options);
+
+	aq_a2_fw_set_mpi_flow_control(self, &link_options);
+
+	hw_atl2_shared_buffer_write(self, link_options, link_options);
+
+	return hw_atl2_shared_buffer_finish_ack(self);
+}
+
+static u32 aq_a2_fw_get_flow_control(struct aq_hw_s *self, u32 *fcmode)
+{
+	struct link_status_s link_status;
+
+	hw_atl2_shared_buffer_read(self, link_status, link_status);
+
+	*fcmode = ((link_status.pause_rx) ? AQ_NIC_FC_RX : 0) |
+		  ((link_status.pause_tx) ? AQ_NIC_FC_TX : 0);
+	return 0;
+}
+
+static int aq_a2_fw_set_phyloopback(struct aq_hw_s *self, u32 mode, bool enable)
+{
+	struct link_options_s link_options;
+
+	hw_atl2_shared_buffer_get(self, link_options, link_options);
+
+	switch (mode) {
+	case AQ_HW_LOOPBACK_PHYINT_SYS:
+		link_options.internal_loopback = enable;
+		break;
+	case AQ_HW_LOOPBACK_PHYEXT_SYS:
+		link_options.external_loopback = enable;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	hw_atl2_shared_buffer_write(self, link_options, link_options);
+
+	return hw_atl2_shared_buffer_finish_ack(self);
+}
+
+u32 hw_atl2_utils_get_fw_version(struct aq_hw_s *self)
+{
+	struct version_s version;
+
+	hw_atl2_shared_buffer_read_safe(self, version, &version);
+
+	/* A2 FW version is stored in reverse order */
+	return version.bundle.major << 24 |
+	       version.bundle.minor << 16 |
+	       version.bundle.build;
+}
+
+int hw_atl2_utils_get_action_resolve_table_caps(struct aq_hw_s *self,
+						u8 *base_index, u8 *count)
+{
+	struct filter_caps_s filter_caps;
+	int err;
+
+	err = hw_atl2_shared_buffer_read_safe(self, filter_caps, &filter_caps);
+	if (err)
+		return err;
+
+	*base_index = filter_caps.rslv_tbl_base_index;
+	*count = filter_caps.rslv_tbl_count;
+	return 0;
+}
+
+static int aq_a2_fw_set_downshift(struct aq_hw_s *self, u32 counter)
+{
+	struct link_options_s link_options;
+
+	hw_atl2_shared_buffer_get(self, link_options, link_options);
+	link_options.downshift = !!counter;
+	link_options.downshift_retry = counter;
+	hw_atl2_shared_buffer_write(self, link_options, link_options);
+
+	return hw_atl2_shared_buffer_finish_ack(self);
+}
+
+const struct aq_fw_ops aq_a2_fw_ops = {
+	.init               = aq_a2_fw_init,
+	.deinit             = aq_a2_fw_deinit,
+	.reset              = NULL,
+	.renegotiate        = aq_a2_fw_renegotiate,
+	.get_mac_permanent  = aq_a2_fw_get_mac_permanent,
+	.set_link_speed     = aq_a2_fw_set_link_speed,
+	.set_state          = aq_a2_fw_set_state,
+	.update_link_status = aq_a2_fw_update_link_status,
+	.update_stats       = aq_a2_fw_update_stats,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.get_mac_temp       = aq_a2_fw_get_mac_temp,
 	.get_phy_temp       = aq_a2_fw_get_phy_temp,
 	.set_eee_rate       = aq_a2_fw_set_eee_rate,

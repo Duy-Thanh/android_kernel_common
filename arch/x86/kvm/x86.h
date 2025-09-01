@@ -8,6 +8,7 @@
 #include <asm/pvclock.h>
 #include "kvm_cache_regs.h"
 #include "kvm_emulate.h"
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include "cpuid.h"
 
 struct kvm_caps {
@@ -280,6 +281,237 @@ static inline bool is_noncanonical_base_address(u64 la, struct kvm_vcpu *vcpu)
 static inline bool is_noncanonical_invlpg_address(u64 la, struct kvm_vcpu *vcpu)
 {
 	return is_noncanonical_address(la, vcpu, X86EMUL_F_INVLPG);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+struct kvm_caps {
+	/* control of guest tsc rate supported? */
+	bool has_tsc_control;
+	/* maximum supported tsc_khz for guests */
+	u32  max_guest_tsc_khz;
+	/* number of bits of the fractional part of the TSC scaling ratio */
+	u8   tsc_scaling_ratio_frac_bits;
+	/* maximum allowed value of TSC scaling ratio */
+	u64  max_tsc_scaling_ratio;
+	/* 1ull << kvm_caps.tsc_scaling_ratio_frac_bits */
+	u64  default_tsc_scaling_ratio;
+	/* bus lock detection supported? */
+	bool has_bus_lock_exit;
+	/* notify VM exit supported? */
+	bool has_notify_vmexit;
+	/* bit mask of VM types */
+	u32 supported_vm_types;
+
+	u64 supported_mce_cap;
+	u64 supported_xcr0;
+	u64 supported_xss;
+	u64 supported_perf_cap;
+};
+
+struct kvm_host_values {
+	/*
+	 * The host's raw MAXPHYADDR, i.e. the number of non-reserved physical
+	 * address bits irrespective of features that repurpose legal bits,
+	 * e.g. MKTME.
+	 */
+	u8 maxphyaddr;
+
+	u64 efer;
+	u64 xcr0;
+	u64 xss;
+	u64 arch_capabilities;
+};
+
+void kvm_spurious_fault(void);
+
+#define KVM_NESTED_VMENTER_CONSISTENCY_CHECK(consistency_check)		\
+({									\
+	bool failed = (consistency_check);				\
+	if (failed)							\
+		trace_kvm_nested_vmenter_failed(#consistency_check, 0);	\
+	failed;								\
+})
+
+/*
+ * The first...last VMX feature MSRs that are emulated by KVM.  This may or may
+ * not cover all known VMX MSRs, as KVM doesn't emulate an MSR until there's an
+ * associated feature that KVM supports for nested virtualization.
+ */
+#define KVM_FIRST_EMULATED_VMX_MSR	MSR_IA32_VMX_BASIC
+#define KVM_LAST_EMULATED_VMX_MSR	MSR_IA32_VMX_VMFUNC
+
+#define KVM_DEFAULT_PLE_GAP		128
+#define KVM_VMX_DEFAULT_PLE_WINDOW	4096
+#define KVM_DEFAULT_PLE_WINDOW_GROW	2
+#define KVM_DEFAULT_PLE_WINDOW_SHRINK	0
+#define KVM_VMX_DEFAULT_PLE_WINDOW_MAX	UINT_MAX
+#define KVM_SVM_DEFAULT_PLE_WINDOW_MAX	USHRT_MAX
+#define KVM_SVM_DEFAULT_PLE_WINDOW	3000
+
+static inline unsigned int __grow_ple_window(unsigned int val,
+		unsigned int base, unsigned int modifier, unsigned int max)
+{
+	u64 ret = val;
+
+	if (modifier < 1)
+		return base;
+
+	if (modifier < base)
+		ret *= modifier;
+	else
+		ret += modifier;
+
+	return min(ret, (u64)max);
+}
+
+static inline unsigned int __shrink_ple_window(unsigned int val,
+		unsigned int base, unsigned int modifier, unsigned int min)
+{
+	if (modifier < 1)
+		return base;
+
+	if (modifier < base)
+		val /= modifier;
+	else
+		val -= modifier;
+
+	return max(val, min);
+}
+
+#define MSR_IA32_CR_PAT_DEFAULT	\
+	PAT_VALUE(WB, WT, UC_MINUS, UC, WB, WT, UC_MINUS, UC)
+
+void kvm_service_local_tlb_flush_requests(struct kvm_vcpu *vcpu);
+int kvm_check_nested_events(struct kvm_vcpu *vcpu);
+
+/* Forcibly leave the nested mode in cases like a vCPU reset */
+static inline void kvm_leave_nested(struct kvm_vcpu *vcpu)
+{
+	kvm_x86_ops.nested_ops->leave_nested(vcpu);
+}
+
+static inline bool kvm_vcpu_has_run(struct kvm_vcpu *vcpu)
+{
+	return vcpu->arch.last_vmentry_cpu != -1;
+}
+
+static inline bool kvm_is_exception_pending(struct kvm_vcpu *vcpu)
+{
+	return vcpu->arch.exception.pending ||
+	       vcpu->arch.exception_vmexit.pending ||
+	       kvm_test_request(KVM_REQ_TRIPLE_FAULT, vcpu);
+}
+
+static inline void kvm_clear_exception_queue(struct kvm_vcpu *vcpu)
+{
+	vcpu->arch.exception.pending = false;
+	vcpu->arch.exception.injected = false;
+	vcpu->arch.exception_vmexit.pending = false;
+}
+
+static inline void kvm_queue_interrupt(struct kvm_vcpu *vcpu, u8 vector,
+	bool soft)
+{
+	vcpu->arch.interrupt.injected = true;
+	vcpu->arch.interrupt.soft = soft;
+	vcpu->arch.interrupt.nr = vector;
+}
+
+static inline void kvm_clear_interrupt_queue(struct kvm_vcpu *vcpu)
+{
+	vcpu->arch.interrupt.injected = false;
+}
+
+static inline bool kvm_event_needs_reinjection(struct kvm_vcpu *vcpu)
+{
+	return vcpu->arch.exception.injected || vcpu->arch.interrupt.injected ||
+		vcpu->arch.nmi_injected;
+}
+
+static inline bool kvm_exception_is_soft(unsigned int nr)
+{
+	return (nr == BP_VECTOR) || (nr == OF_VECTOR);
+}
+
+static inline bool is_protmode(struct kvm_vcpu *vcpu)
+{
+	return kvm_is_cr0_bit_set(vcpu, X86_CR0_PE);
+}
+
+static inline bool is_long_mode(struct kvm_vcpu *vcpu)
+{
+#ifdef CONFIG_X86_64
+	return !!(vcpu->arch.efer & EFER_LMA);
+#else
+	return false;
+#endif
+}
+
+static inline bool is_64_bit_mode(struct kvm_vcpu *vcpu)
+{
+	int cs_db, cs_l;
+
+	WARN_ON_ONCE(vcpu->arch.guest_state_protected);
+
+	if (!is_long_mode(vcpu))
+		return false;
+	kvm_x86_call(get_cs_db_l_bits)(vcpu, &cs_db, &cs_l);
+	return cs_l;
+}
+
+static inline bool is_64_bit_hypercall(struct kvm_vcpu *vcpu)
+{
+	/*
+	 * If running with protected guest state, the CS register is not
+	 * accessible. The hypercall register values will have had to been
+	 * provided in 64-bit mode, so assume the guest is in 64-bit.
+	 */
+	return vcpu->arch.guest_state_protected || is_64_bit_mode(vcpu);
+}
+
+static inline bool x86_exception_has_error_code(unsigned int vector)
+{
+	static u32 exception_has_error_code = BIT(DF_VECTOR) | BIT(TS_VECTOR) |
+			BIT(NP_VECTOR) | BIT(SS_VECTOR) | BIT(GP_VECTOR) |
+			BIT(PF_VECTOR) | BIT(AC_VECTOR);
+
+	return (1U << vector) & exception_has_error_code;
+}
+
+static inline bool mmu_is_nested(struct kvm_vcpu *vcpu)
+{
+	return vcpu->arch.walk_mmu == &vcpu->arch.nested_mmu;
+}
+
+static inline bool is_pae(struct kvm_vcpu *vcpu)
+{
+	return kvm_is_cr4_bit_set(vcpu, X86_CR4_PAE);
+}
+
+static inline bool is_pse(struct kvm_vcpu *vcpu)
+{
+	return kvm_is_cr4_bit_set(vcpu, X86_CR4_PSE);
+}
+
+static inline bool is_paging(struct kvm_vcpu *vcpu)
+{
+	return likely(kvm_is_cr0_bit_set(vcpu, X86_CR0_PG));
+}
+
+static inline bool is_pae_paging(struct kvm_vcpu *vcpu)
+{
+	return !is_long_mode(vcpu) && is_pae(vcpu) && is_paging(vcpu);
+}
+
+static inline u8 vcpu_virt_addr_bits(struct kvm_vcpu *vcpu)
+{
+	return kvm_is_cr4_bit_set(vcpu, X86_CR4_LA57) ? 57 : 48;
+}
+
+static inline bool is_noncanonical_address(u64 la, struct kvm_vcpu *vcpu)
+{
+	return !__is_canonical_address(la, vcpu_virt_addr_bits(vcpu));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static inline void vcpu_cache_mmio_info(struct kvm_vcpu *vcpu,

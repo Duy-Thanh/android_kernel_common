@@ -488,6 +488,7 @@ unlock:
 }
 
 /*
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * Called by __blk_mq_alloc_request(). The shallow_depth value set by this
  * function is used by __blk_mq_get_tag().
  */
@@ -697,6 +698,235 @@ static void dd_insert_request(struct blk_mq_hw_ctx *hctx, struct request *rq,
 		 */
 		rq->fifo_time = jiffies + dd->fifo_expire[data_dir];
 		list_add_tail(&rq->queuelist, &per_prio->fifo_list[data_dir]);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * 'depth' is a number in the range 1..INT_MAX representing a number of
+ * requests. Scale it with a factor (1 << bt->sb.shift) / q->nr_requests since
+ * 1..(1 << bt->sb.shift) is the range expected by sbitmap_get_shallow().
+ * Values larger than q->nr_requests have the same effect as q->nr_requests.
+ */
+static int dd_to_word_depth(struct blk_mq_hw_ctx *hctx, unsigned int qdepth)
+{
+	struct sbitmap_queue *bt = &hctx->sched_tags->bitmap_tags;
+	const unsigned int nrr = hctx->queue->nr_requests;
+
+	return ((qdepth << bt->sb.shift) + nrr - 1) / nrr;
+}
+
+/*
+ * Called by __blk_mq_alloc_request(). The shallow_depth value set by this
+ * function is used by __blk_mq_get_tag().
+ */
+static void dd_limit_depth(blk_opf_t opf, struct blk_mq_alloc_data *data)
+{
+	struct deadline_data *dd = data->q->elevator->elevator_data;
+
+	/* Do not throttle synchronous reads. */
+	if (op_is_sync(opf) && !op_is_write(opf))
+		return;
+
+	/*
+	 * Throttle asynchronous requests and writes such that these requests
+	 * do not block the allocation of synchronous requests.
+	 */
+	data->shallow_depth = dd_to_word_depth(data->hctx, dd->async_depth);
+}
+
+/* Called by blk_mq_update_nr_requests(). */
+static void dd_depth_updated(struct blk_mq_hw_ctx *hctx)
+{
+	struct request_queue *q = hctx->queue;
+	struct deadline_data *dd = q->elevator->elevator_data;
+	struct blk_mq_tags *tags = hctx->sched_tags;
+
+	dd->async_depth = q->nr_requests;
+
+	sbitmap_queue_min_shallow_depth(&tags->bitmap_tags, 1);
+}
+
+/* Called by blk_mq_init_hctx() and blk_mq_init_sched(). */
+static int dd_init_hctx(struct blk_mq_hw_ctx *hctx, unsigned int hctx_idx)
+{
+	dd_depth_updated(hctx);
+	return 0;
+}
+
+static void dd_exit_sched(struct elevator_queue *e)
+{
+	struct deadline_data *dd = e->elevator_data;
+	enum dd_prio prio;
+
+	for (prio = 0; prio <= DD_PRIO_MAX; prio++) {
+		struct dd_per_prio *per_prio = &dd->per_prio[prio];
+		const struct io_stats_per_prio *stats = &per_prio->stats;
+		uint32_t queued;
+
+		WARN_ON_ONCE(!list_empty(&per_prio->fifo_list[DD_READ]));
+		WARN_ON_ONCE(!list_empty(&per_prio->fifo_list[DD_WRITE]));
+
+		spin_lock(&dd->lock);
+		queued = dd_queued(dd, prio);
+		spin_unlock(&dd->lock);
+
+		WARN_ONCE(queued != 0,
+			  "statistics for priority %d: i %u m %u d %u c %u\n",
+			  prio, stats->inserted, stats->merged,
+			  stats->dispatched, atomic_read(&stats->completed));
+	}
+
+	kfree(dd);
+}
+
+/*
+ * initialize elevator private data (deadline_data).
+ */
+static int dd_init_sched(struct request_queue *q, struct elevator_type *e)
+{
+	struct deadline_data *dd;
+	struct elevator_queue *eq;
+	enum dd_prio prio;
+	int ret = -ENOMEM;
+
+	eq = elevator_alloc(q, e);
+	if (!eq)
+		return ret;
+
+	dd = kzalloc_node(sizeof(*dd), GFP_KERNEL, q->node);
+	if (!dd)
+		goto put_eq;
+
+	eq->elevator_data = dd;
+
+	for (prio = 0; prio <= DD_PRIO_MAX; prio++) {
+		struct dd_per_prio *per_prio = &dd->per_prio[prio];
+
+		INIT_LIST_HEAD(&per_prio->dispatch);
+		INIT_LIST_HEAD(&per_prio->fifo_list[DD_READ]);
+		INIT_LIST_HEAD(&per_prio->fifo_list[DD_WRITE]);
+		per_prio->sort_list[DD_READ] = RB_ROOT;
+		per_prio->sort_list[DD_WRITE] = RB_ROOT;
+	}
+	dd->fifo_expire[DD_READ] = read_expire;
+	dd->fifo_expire[DD_WRITE] = write_expire;
+	dd->writes_starved = writes_starved;
+	dd->front_merges = 1;
+	dd->last_dir = DD_WRITE;
+	dd->fifo_batch = fifo_batch;
+	dd->prio_aging_expire = prio_aging_expire;
+	spin_lock_init(&dd->lock);
+
+	/* We dispatch from request queue wide instead of hw queue */
+	blk_queue_flag_set(QUEUE_FLAG_SQ_SCHED, q);
+
+	q->elevator = eq;
+	return 0;
+
+put_eq:
+	kobject_put(&eq->kobj);
+	return ret;
+}
+
+/*
+ * Try to merge @bio into an existing request. If @bio has been merged into
+ * an existing request, store the pointer to that request into *@rq.
+ */
+static int dd_request_merge(struct request_queue *q, struct request **rq,
+			    struct bio *bio)
+{
+	struct deadline_data *dd = q->elevator->elevator_data;
+	const u8 ioprio_class = IOPRIO_PRIO_CLASS(bio->bi_ioprio);
+	const enum dd_prio prio = ioprio_class_to_prio[ioprio_class];
+	struct dd_per_prio *per_prio = &dd->per_prio[prio];
+	sector_t sector = bio_end_sector(bio);
+	struct request *__rq;
+
+	if (!dd->front_merges)
+		return ELEVATOR_NO_MERGE;
+
+	__rq = elv_rb_find(&per_prio->sort_list[bio_data_dir(bio)], sector);
+	if (__rq) {
+		BUG_ON(sector != blk_rq_pos(__rq));
+
+		if (elv_bio_merge_ok(__rq, bio)) {
+			*rq = __rq;
+			if (blk_discard_mergable(__rq))
+				return ELEVATOR_DISCARD_MERGE;
+			return ELEVATOR_FRONT_MERGE;
+		}
+	}
+
+	return ELEVATOR_NO_MERGE;
+}
+
+/*
+ * Attempt to merge a bio into an existing request. This function is called
+ * before @bio is associated with a request.
+ */
+static bool dd_bio_merge(struct request_queue *q, struct bio *bio,
+		unsigned int nr_segs)
+{
+	struct deadline_data *dd = q->elevator->elevator_data;
+	struct request *free = NULL;
+	bool ret;
+
+	spin_lock(&dd->lock);
+	ret = blk_mq_sched_try_merge(q, bio, nr_segs, &free);
+	spin_unlock(&dd->lock);
+
+	if (free)
+		blk_mq_free_request(free);
+
+	return ret;
+}
+
+/*
+ * add rq to rbtree and fifo
+ */
+static void dd_insert_request(struct blk_mq_hw_ctx *hctx, struct request *rq,
+			      blk_insert_t flags, struct list_head *free)
+{
+	struct request_queue *q = hctx->queue;
+	struct deadline_data *dd = q->elevator->elevator_data;
+	const enum dd_data_dir data_dir = rq_data_dir(rq);
+	u16 ioprio = req_get_ioprio(rq);
+	u8 ioprio_class = IOPRIO_PRIO_CLASS(ioprio);
+	struct dd_per_prio *per_prio;
+	enum dd_prio prio;
+
+	lockdep_assert_held(&dd->lock);
+
+	prio = ioprio_class_to_prio[ioprio_class];
+	per_prio = &dd->per_prio[prio];
+	if (!rq->elv.priv[0])
+		per_prio->stats.inserted++;
+	rq->elv.priv[0] = per_prio;
+
+	if (blk_mq_sched_try_insert_merge(q, rq, free))
+		return;
+
+	trace_block_rq_insert(rq);
+
+	if (flags & BLK_MQ_INSERT_AT_HEAD) {
+		list_add(&rq->queuelist, &per_prio->dispatch);
+		rq->fifo_time = jiffies;
+	} else {
+		struct list_head *insert_before;
+
+		deadline_add_rq_rb(per_prio, rq);
+
+		if (rq_mergeable(rq)) {
+			elv_rqhash_add(q, rq);
+			if (!q->last_merge)
+				q->last_merge = rq;
+		}
+
+		/*
+		 * set expire time and add to fifo list
+		 */
+		rq->fifo_time = jiffies + dd->fifo_expire[data_dir];
+		insert_before = &per_prio->fifo_list[data_dir];
+		list_add_tail(&rq->queuelist, insert_before);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 }
 

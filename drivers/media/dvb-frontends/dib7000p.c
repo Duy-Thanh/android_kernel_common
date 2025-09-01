@@ -2193,6 +2193,7 @@ static int w7090p_tuner_write_serpar(struct i2c_adapter *i2c_adap, struct i2c_ms
 	struct dib7000p_state *state = i2c_get_adapdata(i2c_adap);
 	u8 n_overflow = 1;
 	u16 i = 1000;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (msg[0].len < 3)
 		return -EOPNOTSUPP;
 	u16 serpar_num = msg[0].buf[0];
@@ -2266,6 +2267,74 @@ static int dib7090p_rw_on_apb(struct i2c_adapter *i2c_adap,
 	} else {
 		if (msg[1].len < 2)
 			return -EOPNOTSUPP;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u16 serpar_num = msg[0].buf[0];
+
+	while (n_overflow == 1 && i) {
+		n_overflow = (dib7000p_read_word(state, 1984) >> 1) & 0x1;
+		i--;
+		if (i == 0)
+			dprintk("Tuner ITF: write busy (overflow)\n");
+	}
+	dib7000p_write_word(state, 1985, (1 << 6) | (serpar_num & 0x3f));
+	dib7000p_write_word(state, 1986, (msg[0].buf[1] << 8) | msg[0].buf[2]);
+
+	return num;
+}
+
+static int w7090p_tuner_read_serpar(struct i2c_adapter *i2c_adap, struct i2c_msg msg[], int num)
+{
+	struct dib7000p_state *state = i2c_get_adapdata(i2c_adap);
+	u8 n_overflow = 1, n_empty = 1;
+	u16 i = 1000;
+	u16 serpar_num = msg[0].buf[0];
+	u16 read_word;
+
+	while (n_overflow == 1 && i) {
+		n_overflow = (dib7000p_read_word(state, 1984) >> 1) & 0x1;
+		i--;
+		if (i == 0)
+			dprintk("TunerITF: read busy (overflow)\n");
+	}
+	dib7000p_write_word(state, 1985, (0 << 6) | (serpar_num & 0x3f));
+
+	i = 1000;
+	while (n_empty == 1 && i) {
+		n_empty = dib7000p_read_word(state, 1984) & 0x1;
+		i--;
+		if (i == 0)
+			dprintk("TunerITF: read busy (empty)\n");
+	}
+	read_word = dib7000p_read_word(state, 1987);
+	msg[1].buf[0] = (read_word >> 8) & 0xff;
+	msg[1].buf[1] = (read_word) & 0xff;
+
+	return num;
+}
+
+static int w7090p_tuner_rw_serpar(struct i2c_adapter *i2c_adap, struct i2c_msg msg[], int num)
+{
+	if (map_addr_to_serpar_number(&msg[0]) == 0) {	/* else = Tuner regs to ignore : DIG_CFG, CTRL_RF_LT, PLL_CFG, PWM1_REG, ADCCLK, DIG_CFG_3; SLEEP_EN... */
+		if (num == 1) {	/* write */
+			return w7090p_tuner_write_serpar(i2c_adap, msg, 1);
+		} else {	/* read */
+			return w7090p_tuner_read_serpar(i2c_adap, msg, 2);
+		}
+	}
+	return num;
+}
+
+static int dib7090p_rw_on_apb(struct i2c_adapter *i2c_adap,
+		struct i2c_msg msg[], int num, u16 apb_address)
+{
+	struct dib7000p_state *state = i2c_get_adapdata(i2c_adap);
+	u16 word;
+
+	if (num == 1) {		/* write */
+		dib7000p_write_word(state, apb_address, ((msg[0].buf[1] << 8) | (msg[0].buf[2])));
+	} else {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		word = dib7000p_read_word(state, apb_address);
 		msg[1].buf[0] = (word >> 8) & 0xff;
 		msg[1].buf[1] = (word) & 0xff;

@@ -167,6 +167,7 @@ out:
 EXPORT_SYMBOL_GPL(crypto_del_default_rng);
 #endif
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void rng_default_set_ent(struct crypto_rng *tfm, const u8 *data,
 				unsigned int len)
 {
@@ -185,6 +186,19 @@ int crypto_register_rng(struct rng_alg *alg)
 
 	if (!alg->set_ent)
 		alg->set_ent = rng_default_set_ent;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+int crypto_register_rng(struct rng_alg *alg)
+{
+	struct crypto_alg *base = &alg->base;
+
+	if (alg->seedsize > PAGE_SIZE / 8)
+		return -EINVAL;
+
+	base->cra_type = &crypto_rng_type;
+	base->cra_flags &= ~CRYPTO_ALG_TYPE_MASK;
+	base->cra_flags |= CRYPTO_ALG_TYPE_RNG;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return crypto_register_alg(base);
 }

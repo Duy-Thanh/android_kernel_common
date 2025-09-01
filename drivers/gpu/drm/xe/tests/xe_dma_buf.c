@@ -89,7 +89,20 @@ static void check_residency(struct kunit *test, struct xe_bo *exported,
 		return;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	KUNIT_EXPECT_TRUE(test, xe_bo_is_mem_type(exported, mem_type));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/*
+	 * If on different devices, the exporter is kept in system  if
+	 * possible, saving a migration step as the transfer is just
+	 * likely as fast from system memory.
+	 */
+	if (params->mem_mask & XE_BO_FLAG_SYSTEM)
+		KUNIT_EXPECT_TRUE(test, xe_bo_is_mem_type(exported, XE_PL_TT));
+	else
+		KUNIT_EXPECT_TRUE(test, xe_bo_is_mem_type(exported, mem_type));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (params->force_different_devices)
 		KUNIT_EXPECT_TRUE(test, xe_bo_is_mem_type(imported, XE_PL_TT));

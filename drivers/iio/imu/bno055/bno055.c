@@ -118,6 +118,7 @@ struct bno055_sysfs_attr {
 	int len;
 	int *fusion_vals;
 	int *hw_xlate;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int hw_xlate_len;
 	int type;
 };
@@ -567,6 +568,453 @@ static int bno055_get_regmask(struct bno055_priv *priv, int *val, int *val2,
 	idx = (hwval & mask) >> shift;
 	if (attr->hw_xlate)
 		for (i = 0; i < attr->hw_xlate_len; i++)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int type;
+};
+
+static int bno055_acc_lpf_vals[] = {
+	7, 810000, 15, 630000, 31, 250000, 62, 500000,
+	125, 0, 250, 0, 500, 0, 1000, 0,
+};
+
+static struct bno055_sysfs_attr bno055_acc_lpf = {
+	.vals = bno055_acc_lpf_vals,
+	.len = ARRAY_SIZE(bno055_acc_lpf_vals),
+	.fusion_vals = (int[]){62, 500000},
+	.type = IIO_VAL_INT_PLUS_MICRO,
+};
+
+static int bno055_acc_range_vals[] = {
+  /* G:    2,    4,    8,    16 */
+	1962, 3924, 7848, 15696
+};
+
+static struct bno055_sysfs_attr bno055_acc_range = {
+	.vals = bno055_acc_range_vals,
+	.len = ARRAY_SIZE(bno055_acc_range_vals),
+	.fusion_vals = (int[]){3924}, /* 4G */
+	.type = IIO_VAL_INT,
+};
+
+/*
+ * Theoretically the IMU should return data in a given (i.e. fixed) unit
+ * regardless of the range setting. This happens for the accelerometer, but not
+ * for the gyroscope; the gyroscope range setting affects the scale.
+ * This is probably due to this[0] bug.
+ * For this reason we map the internal range setting onto the standard IIO scale
+ * attribute for gyro.
+ * Since the bug[0] may be fixed in future, we check for the IMU FW version and
+ * eventually warn the user.
+ * Currently we just don't care about "range" attributes for gyro.
+ *
+ * [0]  https://community.bosch-sensortec.com/t5/MEMS-sensors-forum/BNO055-Wrong-sensitivity-resolution-in-datasheet/td-p/10266
+ */
+
+/*
+ * dps = hwval * (dps_range/2^15)
+ * rps = hwval * (rps_range/2^15)
+ *     = hwval * (dps_range/(2^15 * k))
+ * where k is rad-to-deg factor
+ */
+static int bno055_gyr_scale_vals[] = {
+	125, 1877467, 250, 1877467, 500, 1877467,
+	1000, 1877467, 2000, 1877467,
+};
+
+static struct bno055_sysfs_attr bno055_gyr_scale = {
+	.vals = bno055_gyr_scale_vals,
+	.len = ARRAY_SIZE(bno055_gyr_scale_vals),
+	.fusion_vals = (int[]){1, 900},
+	.hw_xlate = (int[]){4, 3, 2, 1, 0},
+	.type = IIO_VAL_FRACTIONAL,
+};
+
+static int bno055_gyr_lpf_vals[] = {12, 23, 32, 47, 64, 116, 230, 523};
+static struct bno055_sysfs_attr bno055_gyr_lpf = {
+	.vals = bno055_gyr_lpf_vals,
+	.len = ARRAY_SIZE(bno055_gyr_lpf_vals),
+	.fusion_vals = (int[]){32},
+	.hw_xlate = (int[]){5, 4, 7, 3, 6, 2, 1, 0},
+	.type = IIO_VAL_INT,
+};
+
+static int bno055_mag_odr_vals[] = {2, 6, 8, 10, 15, 20, 25, 30};
+static struct bno055_sysfs_attr bno055_mag_odr = {
+	.vals = bno055_mag_odr_vals,
+	.len =  ARRAY_SIZE(bno055_mag_odr_vals),
+	.fusion_vals = (int[]){20},
+	.type = IIO_VAL_INT,
+};
+
+struct bno055_priv {
+	struct regmap *regmap;
+	struct device *dev;
+	struct clk *clk;
+	int operation_mode;
+	int xfer_burst_break_thr;
+	struct mutex lock;
+	u8 uid[BNO055_UID_LEN];
+	struct gpio_desc *reset_gpio;
+	bool sw_reset;
+	struct {
+		__le16 chans[BNO055_SCAN_CH_COUNT];
+		s64 timestamp __aligned(8);
+	} buf;
+	struct dentry *debugfs;
+};
+
+static bool bno055_regmap_volatile(struct device *dev, unsigned int reg)
+{
+	/* data and status registers */
+	if (reg >= BNO055_ACC_DATA_X_LSB_REG && reg <= BNO055_SYS_ERR_REG)
+		return true;
+
+	/* when in fusion mode, config is updated by chip */
+	if (reg == BNO055_MAG_CONFIG_REG ||
+	    reg == BNO055_ACC_CONFIG_REG ||
+	    reg == BNO055_GYR_CONFIG_REG)
+		return true;
+
+	/* calibration data may be updated by the IMU */
+	if (reg >= BNO055_CALDATA_START && reg <= BNO055_CALDATA_END)
+		return true;
+
+	return false;
+}
+
+static bool bno055_regmap_readable(struct device *dev, unsigned int reg)
+{
+	/* unnamed PG0 reserved areas */
+	if ((reg < BNO055_PG1(0) && reg > BNO055_CALDATA_END) ||
+	    reg == 0x3C)
+		return false;
+
+	/* unnamed PG1 reserved areas */
+	if (reg > BNO055_PG1(BNO055_UID_HIGHER_REG) ||
+	    (reg < BNO055_PG1(BNO055_UID_LOWER_REG) && reg > BNO055_PG1(BNO055_GYR_AM_SET_REG)) ||
+	    reg == BNO055_PG1(0xE) ||
+	    (reg < BNO055_PG1(BNO055_PAGESEL_REG) && reg >= BNO055_PG1(0x0)))
+		return false;
+	return true;
+}
+
+static bool bno055_regmap_writeable(struct device *dev, unsigned int reg)
+{
+	/*
+	 * Unreadable registers are indeed reserved; there are no WO regs
+	 * (except for a single bit in SYS_TRIGGER register)
+	 */
+	if (!bno055_regmap_readable(dev, reg))
+		return false;
+
+	/* data and status registers */
+	if (reg >= BNO055_ACC_DATA_X_LSB_REG && reg <= BNO055_SYS_ERR_REG)
+		return false;
+
+	/* ID areas */
+	if (reg < BNO055_PAGESEL_REG ||
+	    (reg <= BNO055_UID_HIGHER_REG && reg >= BNO055_UID_LOWER_REG))
+		return false;
+
+	return true;
+}
+
+static const struct regmap_range_cfg bno055_regmap_ranges[] = {
+	{
+		.range_min = 0,
+		.range_max = 0x7f * 2,
+		.selector_reg = BNO055_PAGESEL_REG,
+		.selector_mask = GENMASK(7, 0),
+		.selector_shift = 0,
+		.window_start = 0,
+		.window_len = 0x80,
+	},
+};
+
+const struct regmap_config bno055_regmap_config = {
+	.name = "bno055",
+	.reg_bits = 8,
+	.val_bits = 8,
+	.ranges = bno055_regmap_ranges,
+	.num_ranges = 1,
+	.volatile_reg = bno055_regmap_volatile,
+	.max_register = 0x80 * 2,
+	.writeable_reg = bno055_regmap_writeable,
+	.readable_reg = bno055_regmap_readable,
+	.cache_type = REGCACHE_RBTREE,
+};
+EXPORT_SYMBOL_NS_GPL(bno055_regmap_config, IIO_BNO055);
+
+/* must be called in configuration mode */
+static int bno055_calibration_load(struct bno055_priv *priv, const u8 *data, int len)
+{
+	if (len != BNO055_CALDATA_LEN) {
+		dev_dbg(priv->dev, "Invalid calibration file size %d (expected %d)",
+			len, BNO055_CALDATA_LEN);
+		return -EINVAL;
+	}
+
+	dev_dbg(priv->dev, "loading cal data: %*ph", BNO055_CALDATA_LEN, data);
+	return regmap_bulk_write(priv->regmap, BNO055_CALDATA_START,
+				 data, BNO055_CALDATA_LEN);
+}
+
+static int bno055_operation_mode_do_set(struct bno055_priv *priv,
+					int operation_mode)
+{
+	int ret;
+
+	ret = regmap_write(priv->regmap, BNO055_OPR_MODE_REG,
+			   operation_mode);
+	if (ret)
+		return ret;
+
+	/* Following datasheet specifications: sensor takes 7mS up to 19 mS to switch mode */
+	msleep(20);
+
+	return 0;
+}
+
+static int bno055_system_reset(struct bno055_priv *priv)
+{
+	int ret;
+
+	if (priv->reset_gpio) {
+		gpiod_set_value_cansleep(priv->reset_gpio, 0);
+		usleep_range(5000, 10000);
+		gpiod_set_value_cansleep(priv->reset_gpio, 1);
+	} else if (priv->sw_reset) {
+		ret = regmap_write(priv->regmap, BNO055_SYS_TRIGGER_REG,
+				   BNO055_SYS_TRIGGER_RST_SYS);
+		if (ret)
+			return ret;
+	} else {
+		return 0;
+	}
+
+	regcache_drop_region(priv->regmap, 0x0, 0xff);
+	usleep_range(650000, 700000);
+
+	return 0;
+}
+
+static int bno055_init(struct bno055_priv *priv, const u8 *caldata, int len)
+{
+	int ret;
+
+	ret = bno055_operation_mode_do_set(priv, BNO055_OPR_MODE_CONFIG);
+	if (ret)
+		return ret;
+
+	ret = regmap_write(priv->regmap, BNO055_POWER_MODE_REG,
+			   BNO055_POWER_MODE_NORMAL);
+	if (ret)
+		return ret;
+
+	ret = regmap_write(priv->regmap, BNO055_SYS_TRIGGER_REG,
+			   priv->clk ? BNO055_SYS_TRIGGER_CLK_SEL : 0);
+	if (ret)
+		return ret;
+
+	/* use standard SI units */
+	ret = regmap_write(priv->regmap, BNO055_UNIT_SEL_REG,
+			   BNO055_UNIT_SEL_ANDROID | BNO055_UNIT_SEL_GYR_RPS);
+	if (ret)
+		return ret;
+
+	if (caldata) {
+		ret = bno055_calibration_load(priv, caldata, len);
+		if (ret)
+			dev_warn(priv->dev, "failed to load calibration data with error %d\n",
+				 ret);
+	}
+
+	return 0;
+}
+
+static ssize_t bno055_operation_mode_set(struct bno055_priv *priv,
+					 int operation_mode)
+{
+	u8 caldata[BNO055_CALDATA_LEN];
+	int ret;
+
+	mutex_lock(&priv->lock);
+
+	ret = bno055_operation_mode_do_set(priv, BNO055_OPR_MODE_CONFIG);
+	if (ret)
+		goto exit_unlock;
+
+	if (operation_mode == BNO055_OPR_MODE_FUSION ||
+	    operation_mode == BNO055_OPR_MODE_FUSION_FMC_OFF) {
+		/* for entering fusion mode, reset the chip to clear the algo state */
+		ret = regmap_bulk_read(priv->regmap, BNO055_CALDATA_START, caldata,
+				       BNO055_CALDATA_LEN);
+		if (ret)
+			goto exit_unlock;
+
+		ret = bno055_system_reset(priv);
+		if (ret)
+			goto exit_unlock;
+
+		ret = bno055_init(priv, caldata, BNO055_CALDATA_LEN);
+		if (ret)
+			goto exit_unlock;
+	}
+
+	ret = bno055_operation_mode_do_set(priv, operation_mode);
+	if (ret)
+		goto exit_unlock;
+
+	priv->operation_mode = operation_mode;
+
+exit_unlock:
+	mutex_unlock(&priv->lock);
+	return ret;
+}
+
+static void bno055_uninit(void *arg)
+{
+	struct bno055_priv *priv = arg;
+
+	/* stop the IMU */
+	bno055_operation_mode_do_set(priv, BNO055_OPR_MODE_CONFIG);
+}
+
+#define BNO055_CHANNEL(_type, _axis, _index, _address, _sep, _sh, _avail) {	\
+	.address = _address,							\
+	.type = _type,								\
+	.modified = 1,								\
+	.channel2 = IIO_MOD_##_axis,						\
+	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) | (_sep),			\
+	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE) | (_sh),		\
+	.info_mask_shared_by_type_available = _avail,				\
+	.scan_index = _index,							\
+	.scan_type = {								\
+		.sign = 's',							\
+		.realbits = 16,							\
+		.storagebits = 16,						\
+		.endianness = IIO_LE,						\
+		.repeat = IIO_MOD_##_axis == IIO_MOD_QUATERNION ? 4 : 0,        \
+	},									\
+}
+
+/* scan indexes follow DATA register order */
+enum bno055_scan_axis {
+	BNO055_SCAN_ACCEL_X,
+	BNO055_SCAN_ACCEL_Y,
+	BNO055_SCAN_ACCEL_Z,
+	BNO055_SCAN_MAGN_X,
+	BNO055_SCAN_MAGN_Y,
+	BNO055_SCAN_MAGN_Z,
+	BNO055_SCAN_GYRO_X,
+	BNO055_SCAN_GYRO_Y,
+	BNO055_SCAN_GYRO_Z,
+	BNO055_SCAN_YAW,
+	BNO055_SCAN_ROLL,
+	BNO055_SCAN_PITCH,
+	BNO055_SCAN_QUATERNION,
+	BNO055_SCAN_LIA_X,
+	BNO055_SCAN_LIA_Y,
+	BNO055_SCAN_LIA_Z,
+	BNO055_SCAN_GRAVITY_X,
+	BNO055_SCAN_GRAVITY_Y,
+	BNO055_SCAN_GRAVITY_Z,
+	BNO055_SCAN_TIMESTAMP,
+	_BNO055_SCAN_MAX
+};
+
+static const struct iio_chan_spec bno055_channels[] = {
+	/* accelerometer */
+	BNO055_CHANNEL(IIO_ACCEL, X, BNO055_SCAN_ACCEL_X,
+		       BNO055_ACC_DATA_X_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY)),
+	BNO055_CHANNEL(IIO_ACCEL, Y, BNO055_SCAN_ACCEL_Y,
+		       BNO055_ACC_DATA_Y_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY)),
+	BNO055_CHANNEL(IIO_ACCEL, Z, BNO055_SCAN_ACCEL_Z,
+		       BNO055_ACC_DATA_Z_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY)),
+	/* gyroscope */
+	BNO055_CHANNEL(IIO_ANGL_VEL, X, BNO055_SCAN_GYRO_X,
+		       BNO055_GYR_DATA_X_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY) |
+		       BIT(IIO_CHAN_INFO_SCALE)),
+	BNO055_CHANNEL(IIO_ANGL_VEL, Y, BNO055_SCAN_GYRO_Y,
+		       BNO055_GYR_DATA_Y_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY) |
+		       BIT(IIO_CHAN_INFO_SCALE)),
+	BNO055_CHANNEL(IIO_ANGL_VEL, Z, BNO055_SCAN_GYRO_Z,
+		       BNO055_GYR_DATA_Z_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY),
+		       BIT(IIO_CHAN_INFO_LOW_PASS_FILTER_3DB_FREQUENCY) |
+		       BIT(IIO_CHAN_INFO_SCALE)),
+	/* magnetometer */
+	BNO055_CHANNEL(IIO_MAGN, X, BNO055_SCAN_MAGN_X,
+		       BNO055_MAG_DATA_X_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_SAMP_FREQ), BIT(IIO_CHAN_INFO_SAMP_FREQ)),
+	BNO055_CHANNEL(IIO_MAGN, Y, BNO055_SCAN_MAGN_Y,
+		       BNO055_MAG_DATA_Y_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_SAMP_FREQ), BIT(IIO_CHAN_INFO_SAMP_FREQ)),
+	BNO055_CHANNEL(IIO_MAGN, Z, BNO055_SCAN_MAGN_Z,
+		       BNO055_MAG_DATA_Z_LSB_REG, BIT(IIO_CHAN_INFO_OFFSET),
+		       BIT(IIO_CHAN_INFO_SAMP_FREQ), BIT(IIO_CHAN_INFO_SAMP_FREQ)),
+	/* euler angle */
+	BNO055_CHANNEL(IIO_ROT, YAW, BNO055_SCAN_YAW,
+		       BNO055_EUL_DATA_X_LSB_REG, 0, 0, 0),
+	BNO055_CHANNEL(IIO_ROT, ROLL, BNO055_SCAN_ROLL,
+		       BNO055_EUL_DATA_Y_LSB_REG, 0, 0, 0),
+	BNO055_CHANNEL(IIO_ROT, PITCH, BNO055_SCAN_PITCH,
+		       BNO055_EUL_DATA_Z_LSB_REG, 0, 0, 0),
+	/* quaternion */
+	BNO055_CHANNEL(IIO_ROT, QUATERNION, BNO055_SCAN_QUATERNION,
+		       BNO055_QUAT_DATA_W_LSB_REG, 0, 0, 0),
+
+	/* linear acceleration */
+	BNO055_CHANNEL(IIO_ACCEL, LINEAR_X, BNO055_SCAN_LIA_X,
+		       BNO055_LIA_DATA_X_LSB_REG, 0, 0, 0),
+	BNO055_CHANNEL(IIO_ACCEL, LINEAR_Y, BNO055_SCAN_LIA_Y,
+		       BNO055_LIA_DATA_Y_LSB_REG, 0, 0, 0),
+	BNO055_CHANNEL(IIO_ACCEL, LINEAR_Z, BNO055_SCAN_LIA_Z,
+		       BNO055_LIA_DATA_Z_LSB_REG, 0, 0, 0),
+
+	/* gravity vector */
+	BNO055_CHANNEL(IIO_GRAVITY, X, BNO055_SCAN_GRAVITY_X,
+		       BNO055_GRAVITY_DATA_X_LSB_REG, 0, 0, 0),
+	BNO055_CHANNEL(IIO_GRAVITY, Y, BNO055_SCAN_GRAVITY_Y,
+		       BNO055_GRAVITY_DATA_Y_LSB_REG, 0, 0, 0),
+	BNO055_CHANNEL(IIO_GRAVITY, Z, BNO055_SCAN_GRAVITY_Z,
+		       BNO055_GRAVITY_DATA_Z_LSB_REG, 0, 0, 0),
+
+	{
+		.type = IIO_TEMP,
+		.info_mask_separate = BIT(IIO_CHAN_INFO_PROCESSED),
+		.scan_index = -1,
+	},
+	IIO_CHAN_SOFT_TIMESTAMP(BNO055_SCAN_TIMESTAMP),
+};
+
+static int bno055_get_regmask(struct bno055_priv *priv, int *val, int *val2,
+			      int reg, int mask, struct bno055_sysfs_attr *attr)
+{
+	const int shift = __ffs(mask);
+	int hwval, idx;
+	int ret;
+	int i;
+
+	ret = regmap_read(priv->regmap, reg, &hwval);
+	if (ret)
+		return ret;
+
+	idx = (hwval & mask) >> shift;
+	if (attr->hw_xlate)
+		for (i = 0; i < attr->len; i++)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			if (attr->hw_xlate[i] == idx) {
 				idx = i;
 				break;

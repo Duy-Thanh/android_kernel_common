@@ -924,6 +924,7 @@ macro_rules! __pin_data {
         // We prevent this by creating a trait that will be implemented for all types implementing
         // `Drop`. Additionally we will implement this trait for the struct leading to a conflict,
         // if it also implements `Drop`
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
         #[allow(dead_code)]
         trait MustNotImplDrop {}
         #[expect(drop_bounds)]
@@ -934,6 +935,17 @@ macro_rules! __pin_data {
         // They might implement `PinnedDrop` correctly for the struct, but forget to give
         // `PinnedDrop` as the parameter to `#[pin_data]`.
         #[allow(dead_code)]
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+        trait MustNotImplDrop {}
+        #[expect(drop_bounds)]
+        impl<T: ::core::ops::Drop> MustNotImplDrop for T {}
+        impl<$($impl_generics)*> MustNotImplDrop for $name<$($ty_generics)*>
+        where $($whr)* {}
+        // We also take care to prevent users from writing a useless `PinnedDrop` implementation.
+        // They might implement `PinnedDrop` correctly for the struct, but forget to give
+        // `PinnedDrop` as the parameter to `#[pin_data]`.
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
         #[expect(non_camel_case_types)]
         trait UselessPinnedDropImpl_you_need_to_specify_PinnedDrop {}
         impl<T: $crate::init::PinnedDrop>

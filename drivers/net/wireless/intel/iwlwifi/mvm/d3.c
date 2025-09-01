@@ -2375,6 +2375,7 @@ static void iwl_mvm_convert_gtk_v2(struct iwl_wowlan_status_data *status,
 
 	status->gtk[0].len = data->key_len;
 	status->gtk[0].flags = data->key_flags;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	status->gtk[0].id = status->gtk[0].flags & IWL_WOWLAN_GTK_IDX_MASK;
 
 	memcpy(status->gtk[0].key, data->key, sizeof(data->key));
@@ -2688,6 +2689,320 @@ iwl_mvm_send_wowlan_get_status(struct iwl_mvm *mvm, u8 sta_id)
 		 */
 		status->gtk[0].flags = v6->gtk.key_index | BIT(7);
 		status->gtk[0].id = v6->gtk.key_index;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	memcpy(status->gtk[0].key, data->key, sizeof(data->key));
+
+	/* if it's as long as the TKIP encryption key, copy MIC key */
+	if (status->gtk[0].len == NL80211_TKIP_DATA_OFFSET_TX_MIC_KEY)
+		memcpy(status->gtk[0].key + NL80211_TKIP_DATA_OFFSET_RX_MIC_KEY,
+		       data->tkip_mic_key, sizeof(data->tkip_mic_key));
+}
+
+static void iwl_mvm_convert_gtk_v3(struct iwl_wowlan_status_data *status,
+				   struct iwl_wowlan_gtk_status_v3 *data)
+{
+	int data_idx, status_idx = 0;
+
+	BUILD_BUG_ON(sizeof(status->gtk[0].key) < sizeof(data[0].key));
+	BUILD_BUG_ON(NL80211_TKIP_DATA_OFFSET_RX_MIC_KEY +
+		     sizeof(data[0].tkip_mic_key) >
+		     sizeof(status->gtk[0].key));
+	BUILD_BUG_ON(ARRAY_SIZE(status->gtk) < WOWLAN_GTK_KEYS_NUM);
+	for (data_idx = 0; data_idx < ARRAY_SIZE(status->gtk); data_idx++) {
+		if (!(data[data_idx].key_len))
+			continue;
+		status->gtk[status_idx].len = data[data_idx].key_len;
+		status->gtk[status_idx].flags = data[data_idx].key_flags;
+		status->gtk[status_idx].id = status->gtk[status_idx].flags &
+				    IWL_WOWLAN_GTK_IDX_MASK;
+
+		memcpy(status->gtk[status_idx].key, data[data_idx].key,
+		       sizeof(data[data_idx].key));
+
+		/* if it's as long as the TKIP encryption key, copy MIC key */
+		if (status->gtk[status_idx].len ==
+		    NL80211_TKIP_DATA_OFFSET_TX_MIC_KEY)
+			memcpy(status->gtk[status_idx].key +
+			       NL80211_TKIP_DATA_OFFSET_RX_MIC_KEY,
+			       data[data_idx].tkip_mic_key,
+			       sizeof(data[data_idx].tkip_mic_key));
+		status_idx++;
+	}
+}
+
+static void iwl_mvm_convert_igtk(struct iwl_wowlan_status_data *status,
+				 struct iwl_wowlan_igtk_status *data)
+{
+	int i;
+
+	BUILD_BUG_ON(sizeof(status->igtk.key) < sizeof(data->key));
+	BUILD_BUG_ON(sizeof(status->igtk.ipn) != sizeof(data->ipn));
+
+	if (!data->key_len)
+		return;
+
+	status->igtk.len = data->key_len;
+	status->igtk.flags = data->key_flags;
+	status->igtk.id = u32_get_bits(data->key_flags,
+				       IWL_WOWLAN_IGTK_BIGTK_IDX_MASK)
+		+ WOWLAN_IGTK_MIN_INDEX;
+
+	memcpy(status->igtk.key, data->key, sizeof(data->key));
+
+	/* mac80211 expects big endian for memcmp() to work, convert */
+	for (i = 0; i < sizeof(data->ipn); i++)
+		status->igtk.ipn[i] = data->ipn[sizeof(data->ipn) - i - 1];
+}
+
+static void iwl_mvm_convert_bigtk(struct iwl_wowlan_status_data *status,
+				  const struct iwl_wowlan_igtk_status *data)
+{
+	int data_idx, status_idx = 0;
+
+	BUILD_BUG_ON(ARRAY_SIZE(status->bigtk) < WOWLAN_BIGTK_KEYS_NUM);
+
+	for (data_idx = 0; data_idx < WOWLAN_BIGTK_KEYS_NUM; data_idx++) {
+		if (!data[data_idx].key_len)
+			continue;
+
+		status->bigtk[status_idx].len = data[data_idx].key_len;
+		status->bigtk[status_idx].flags = data[data_idx].key_flags;
+		status->bigtk[status_idx].id =
+			u32_get_bits(data[data_idx].key_flags,
+				     IWL_WOWLAN_IGTK_BIGTK_IDX_MASK)
+			+ WOWLAN_BIGTK_MIN_INDEX;
+
+		BUILD_BUG_ON(sizeof(status->bigtk[status_idx].key) <
+			     sizeof(data[data_idx].key));
+		BUILD_BUG_ON(sizeof(status->bigtk[status_idx].ipn) <
+			     sizeof(data[data_idx].ipn));
+
+		memcpy(status->bigtk[status_idx].key, data[data_idx].key,
+		       sizeof(data[data_idx].key));
+		memcpy(status->bigtk[status_idx].ipn, data[data_idx].ipn,
+		       sizeof(data[data_idx].ipn));
+		status_idx++;
+	}
+}
+
+static void iwl_mvm_parse_wowlan_info_notif(struct iwl_mvm *mvm,
+					    struct iwl_wowlan_info_notif *data,
+					    struct iwl_wowlan_status_data *status,
+					    u32 len, bool has_mlo_keys)
+{
+	u32 i;
+	u32 expected_len = sizeof(*data);
+
+	if (!data) {
+		IWL_ERR(mvm, "iwl_wowlan_info_notif data is NULL\n");
+		status = NULL;
+		return;
+	}
+
+	if (has_mlo_keys)
+		expected_len += (data->num_mlo_link_keys *
+				 sizeof(status->mlo_keys[0]));
+
+	if (len < expected_len) {
+		IWL_ERR(mvm, "Invalid WoWLAN info notification!\n");
+		status = NULL;
+		return;
+	}
+
+	if (mvm->fast_resume)
+		return;
+
+	iwl_mvm_convert_key_counters_v5(status, &data->gtk[0].sc);
+	iwl_mvm_convert_gtk_v3(status, data->gtk);
+	iwl_mvm_convert_igtk(status, &data->igtk[0]);
+	iwl_mvm_convert_bigtk(status, data->bigtk);
+	status->replay_ctr = le64_to_cpu(data->replay_ctr);
+	status->pattern_number = le16_to_cpu(data->pattern_number);
+	for (i = 0; i < IWL_MAX_TID_COUNT; i++)
+		status->qos_seq_ctr[i] =
+			le16_to_cpu(data->qos_seq_ctr[i]);
+	status->wakeup_reasons = le32_to_cpu(data->wakeup_reasons);
+	status->num_of_gtk_rekeys =
+		le32_to_cpu(data->num_of_gtk_rekeys);
+	status->received_beacons = le32_to_cpu(data->received_beacons);
+	status->tid_tear_down = data->tid_tear_down;
+
+	if (has_mlo_keys && data->num_mlo_link_keys) {
+		status->num_mlo_keys = data->num_mlo_link_keys;
+		if (IWL_FW_CHECK(mvm,
+				 status->num_mlo_keys > WOWLAN_MAX_MLO_KEYS,
+				 "Too many mlo keys: %d, max %d\n",
+				 status->num_mlo_keys, WOWLAN_MAX_MLO_KEYS))
+			status->num_mlo_keys = WOWLAN_MAX_MLO_KEYS;
+		memcpy(status->mlo_keys, data->mlo_gtks,
+		       status->num_mlo_keys * sizeof(status->mlo_keys[0]));
+	}
+}
+
+static void
+iwl_mvm_parse_wowlan_info_notif_v2(struct iwl_mvm *mvm,
+				   struct iwl_wowlan_info_notif_v2 *data,
+				   struct iwl_wowlan_status_data *status,
+				   u32 len)
+{
+	u32 i;
+
+	if (!data) {
+		IWL_ERR(mvm, "iwl_wowlan_info_notif data is NULL\n");
+		status = NULL;
+		return;
+	}
+
+	if (len < sizeof(*data)) {
+		IWL_ERR(mvm, "Invalid WoWLAN info notification!\n");
+		status = NULL;
+		return;
+	}
+
+	iwl_mvm_convert_key_counters_v5(status, &data->gtk[0].sc);
+	iwl_mvm_convert_gtk_v3(status, data->gtk);
+	iwl_mvm_convert_igtk(status, &data->igtk[0]);
+	status->replay_ctr = le64_to_cpu(data->replay_ctr);
+	status->pattern_number = le16_to_cpu(data->pattern_number);
+	for (i = 0; i < IWL_MAX_TID_COUNT; i++)
+		status->qos_seq_ctr[i] =
+			le16_to_cpu(data->qos_seq_ctr[i]);
+	status->wakeup_reasons = le32_to_cpu(data->wakeup_reasons);
+	status->num_of_gtk_rekeys =
+		le32_to_cpu(data->num_of_gtk_rekeys);
+	status->received_beacons = le32_to_cpu(data->received_beacons);
+	status->tid_tear_down = data->tid_tear_down;
+}
+
+/* Occasionally, templates would be nice. This is one of those times ... */
+#define iwl_mvm_parse_wowlan_status_common(_ver)			\
+static struct iwl_wowlan_status_data *					\
+iwl_mvm_parse_wowlan_status_common_ ## _ver(struct iwl_mvm *mvm,	\
+					    struct iwl_wowlan_status_ ##_ver *data,\
+					    int len)			\
+{									\
+	struct iwl_wowlan_status_data *status;				\
+	int data_size, i;						\
+									\
+	if (len < sizeof(*data)) {					\
+		IWL_ERR(mvm, "Invalid WoWLAN status response!\n");	\
+		return NULL;						\
+	}								\
+									\
+	data_size = ALIGN(le32_to_cpu(data->wake_packet_bufsize), 4);	\
+	if (len != sizeof(*data) + data_size) {				\
+		IWL_ERR(mvm, "Invalid WoWLAN status response!\n");	\
+		return NULL;						\
+	}								\
+									\
+	status = kzalloc(sizeof(*status), GFP_KERNEL);			\
+	if (!status)							\
+		return NULL;						\
+									\
+	/* copy all the common fields */				\
+	status->replay_ctr = le64_to_cpu(data->replay_ctr);		\
+	status->pattern_number = le16_to_cpu(data->pattern_number);	\
+	status->non_qos_seq_ctr = le16_to_cpu(data->non_qos_seq_ctr);	\
+	for (i = 0; i < 8; i++)						\
+		status->qos_seq_ctr[i] =				\
+			le16_to_cpu(data->qos_seq_ctr[i]);		\
+	status->wakeup_reasons = le32_to_cpu(data->wakeup_reasons);	\
+	status->num_of_gtk_rekeys =					\
+		le32_to_cpu(data->num_of_gtk_rekeys);			\
+	status->received_beacons = le32_to_cpu(data->received_beacons);	\
+	status->wake_packet_length =					\
+		le32_to_cpu(data->wake_packet_length);			\
+	status->wake_packet_bufsize =					\
+		le32_to_cpu(data->wake_packet_bufsize);			\
+	if (status->wake_packet_bufsize) {				\
+		status->wake_packet =					\
+			kmemdup(data->wake_packet,			\
+				status->wake_packet_bufsize,		\
+				GFP_KERNEL);				\
+		if (!status->wake_packet) {				\
+			kfree(status);					\
+			return NULL;					\
+		}							\
+	} else {							\
+		status->wake_packet = NULL;				\
+	}								\
+									\
+	return status;							\
+}
+
+iwl_mvm_parse_wowlan_status_common(v6)
+iwl_mvm_parse_wowlan_status_common(v7)
+iwl_mvm_parse_wowlan_status_common(v9)
+iwl_mvm_parse_wowlan_status_common(v12)
+
+static struct iwl_wowlan_status_data *
+iwl_mvm_send_wowlan_get_status(struct iwl_mvm *mvm, u8 sta_id)
+{
+	struct iwl_wowlan_status_data *status;
+	struct iwl_wowlan_get_status_cmd get_status_cmd = {
+		.sta_id = cpu_to_le32(sta_id),
+	};
+	struct iwl_host_cmd cmd = {
+		.id = WOWLAN_GET_STATUSES,
+		.flags = CMD_WANT_SKB,
+		.data = { &get_status_cmd, },
+		.len = { sizeof(get_status_cmd), },
+	};
+	int ret, len;
+	u8 notif_ver;
+	u8 cmd_ver = iwl_fw_lookup_cmd_ver(mvm->fw, cmd.id,
+					   IWL_FW_CMD_VER_UNKNOWN);
+
+	if (cmd_ver == IWL_FW_CMD_VER_UNKNOWN)
+		cmd.len[0] = 0;
+
+	lockdep_assert_held(&mvm->mutex);
+
+	ret = iwl_mvm_send_cmd(mvm, &cmd);
+	if (ret) {
+		IWL_ERR(mvm, "failed to query wakeup status (%d)\n", ret);
+		return ERR_PTR(ret);
+	}
+
+	len = iwl_rx_packet_payload_len(cmd.resp_pkt);
+
+	/* default to 7 (when we have IWL_UCODE_TLV_API_WOWLAN_KEY_MATERIAL) */
+	notif_ver = iwl_mvm_lookup_wowlan_status_ver(mvm);
+
+	if (notif_ver < 7) {
+		struct iwl_wowlan_status_v6 *v6 = (void *)cmd.resp_pkt->data;
+
+		status = iwl_mvm_parse_wowlan_status_common_v6(mvm, v6, len);
+		if (!status)
+			goto out_free_resp;
+
+		BUILD_BUG_ON(sizeof(v6->gtk.decrypt_key) >
+			     sizeof(status->gtk[0].key));
+		BUILD_BUG_ON(NL80211_TKIP_DATA_OFFSET_RX_MIC_KEY +
+			     sizeof(v6->gtk.tkip_mic_key) >
+			     sizeof(status->gtk[0].key));
+
+		/* copy GTK info to the right place */
+		memcpy(status->gtk[0].key, v6->gtk.decrypt_key,
+		       sizeof(v6->gtk.decrypt_key));
+		memcpy(status->gtk[0].key + NL80211_TKIP_DATA_OFFSET_RX_MIC_KEY,
+		       v6->gtk.tkip_mic_key,
+		       sizeof(v6->gtk.tkip_mic_key));
+
+		iwl_mvm_convert_key_counters(status, &v6->gtk.rsc.all_tsc_rsc);
+
+		/* hardcode the key length to 16 since v6 only supports 16 */
+		status->gtk[0].len = 16;
+
+		/*
+		 * The key index only uses 2 bits (values 0 to 3) and
+		 * we always set bit 7 which means this is the
+		 * currently used key.
+		 */
+		status->gtk[0].flags = v6->gtk.key_index | BIT(7);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	} else if (notif_ver == 7) {
 		struct iwl_wowlan_status_v7 *v7 = (void *)cmd.resp_pkt->data;
 

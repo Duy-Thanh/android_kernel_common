@@ -667,6 +667,7 @@ static int ti_pipe3_get_clk(struct ti_pipe3 *phy)
 	return 0;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void ti_pipe3_put_device(void *_dev)
 {
 	struct device *dev = _dev;
@@ -717,6 +718,46 @@ static int ti_pipe3_get_sysctrl(struct ti_pipe3 *phy)
 					       phy->control_dev);
 		if (ret)
 			return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int ti_pipe3_get_sysctrl(struct ti_pipe3 *phy)
+{
+	struct device *dev = phy->dev;
+	struct device_node *node = dev->of_node;
+	struct device_node *control_node;
+	struct platform_device *control_pdev;
+
+	phy->phy_power_syscon = syscon_regmap_lookup_by_phandle(node,
+							"syscon-phy-power");
+	if (IS_ERR(phy->phy_power_syscon)) {
+		dev_dbg(dev,
+			"can't get syscon-phy-power, using control device\n");
+		phy->phy_power_syscon = NULL;
+	} else {
+		if (of_property_read_u32_index(node,
+					       "syscon-phy-power", 1,
+					       &phy->power_reg)) {
+			dev_err(dev, "couldn't get power reg. offset\n");
+			return -EINVAL;
+		}
+	}
+
+	if (!phy->phy_power_syscon) {
+		control_node = of_parse_phandle(node, "ctrl-module", 0);
+		if (!control_node) {
+			dev_err(dev, "Failed to get control device phandle\n");
+			return -EINVAL;
+		}
+
+		control_pdev = of_find_device_by_node(control_node);
+		of_node_put(control_node);
+		if (!control_pdev) {
+			dev_err(dev, "Failed to get control device\n");
+			return -EINVAL;
+		}
+
+		phy->control_dev = &control_pdev->dev;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	if (phy->mode == PIPE3_MODE_PCIE) {

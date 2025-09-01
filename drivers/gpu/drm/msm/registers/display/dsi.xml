@@ -159,6 +159,7 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
 		<bitfield name="RGB_SWAP" low="12" high="14" type="dsi_rgb_swap"/>
 	</reg32>
 	<reg32 offset="0x00020" name="ACTIVE_H">
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		<bitfield name="START" low="0" high="15" type="uint"/>
 		<bitfield name="END" low="16" high="31" type="uint"/>
 	</reg32>
@@ -211,6 +212,61 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
 	<reg32 offset="0x00058" name="CMD_MDP_STREAM0_TOTAL">
 		<bitfield name="H_TOTAL" low="0" high="15" type="uint"/>
 		<bitfield name="V_TOTAL" low="16" high="31" type="uint"/>
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		<bitfield name="START" low="0" high="11" type="uint"/>
+		<bitfield name="END" low="16" high="27" type="uint"/>
+	</reg32>
+	<reg32 offset="0x00024" name="ACTIVE_V">
+		<bitfield name="START" low="0" high="11" type="uint"/>
+		<bitfield name="END" low="16" high="27" type="uint"/>
+	</reg32>
+	<reg32 offset="0x00028" name="TOTAL">
+		<bitfield name="H_TOTAL" low="0" high="11" type="uint"/>
+		<bitfield name="V_TOTAL" low="16" high="27" type="uint"/>
+	</reg32>
+	<reg32 offset="0x0002c" name="ACTIVE_HSYNC">
+		<bitfield name="START" low="0" high="11" type="uint"/>
+		<bitfield name="END" low="16" high="27" type="uint"/>
+	</reg32>
+	<reg32 offset="0x00030" name="ACTIVE_VSYNC_HPOS">
+		<bitfield name="START" low="0" high="11" type="uint"/>
+		<bitfield name="END" low="16" high="27" type="uint"/>
+	</reg32>
+	<reg32 offset="0x00034" name="ACTIVE_VSYNC_VPOS">
+		<bitfield name="START" low="0" high="11" type="uint"/>
+		<bitfield name="END" low="16" high="27" type="uint"/>
+	</reg32>
+
+	<reg32 offset="0x00038" name="CMD_DMA_CTRL">
+		<bitfield name="BROADCAST_EN" pos="31" type="boolean"/>
+		<bitfield name="FROM_FRAME_BUFFER" pos="28" type="boolean"/>
+		<bitfield name="LOW_POWER" pos="26" type="boolean"/>
+	</reg32>
+	<reg32 offset="0x0003c" name="CMD_CFG0">
+		<bitfield name="DST_FORMAT" low="0" high="3" type="dsi_cmd_dst_format"/>
+		<bitfield name="R_SEL" pos="4" type="boolean"/>
+		<bitfield name="G_SEL" pos="8" type="boolean"/>
+		<bitfield name="B_SEL" pos="12" type="boolean"/>
+		<bitfield name="INTERLEAVE_MAX" low="20" high="23" type="uint"/>
+		<bitfield name="RGB_SWAP" low="16" high="18" type="dsi_rgb_swap"/>
+	</reg32>
+	<reg32 offset="0x00040" name="CMD_CFG1">
+		<bitfield name="WR_MEM_START" low="0" high="7" type="uint"/>
+		<bitfield name="WR_MEM_CONTINUE" low="8" high="15" type="uint"/>
+		<bitfield name="INSERT_DCS_COMMAND" pos="16" type="boolean"/>
+	</reg32>
+	<reg32 offset="0x00044" name="DMA_BASE"/>
+	<reg32 offset="0x00048" name="DMA_LEN"/>
+	<reg32 offset="0x00054" name="CMD_MDP_STREAM0_CTRL">
+		<bitfield name="DATA_TYPE" low="0" high="5" type="uint"/>
+		<bitfield name="VIRTUAL_CHANNEL" low="8" high="9" type="uint"/>
+		<bitfield name="WORD_COUNT" low="16" high="31" type="uint"/>
+	</reg32>
+	<reg32 offset="0x00058" name="CMD_MDP_STREAM0_TOTAL">
+		<bitfield name="H_TOTAL" low="0" high="11" type="uint"/>
+		<bitfield name="V_TOTAL" low="16" high="27" type="uint"/>
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	</reg32>
 	<reg32 offset="0x0005c" name="CMD_MDP_STREAM1_CTRL">
 		<bitfield name="DATA_TYPE" low="0" high="5" type="uint"/>

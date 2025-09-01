@@ -876,6 +876,7 @@ static int cs35l56_hda_system_resume(struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int cs35l56_hda_fixup_yoga9(struct cs35l56_hda *cs35l56, int *bus_addr)
 {
 	/* The cirrus,dev-index property has the wrong values */
@@ -987,6 +988,66 @@ static int cs35l56_hda_read_acpi(struct cs35l56_hda *cs35l56, int hid, int id)
 			goto err;
 		}
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int cs35l56_hda_read_acpi(struct cs35l56_hda *cs35l56, int hid, int id)
+{
+	u32 values[HDA_MAX_COMPONENTS];
+	char hid_string[8];
+	struct acpi_device *adev;
+	const char *property, *sub;
+	size_t nval;
+	int i, ret;
+
+	/*
+	 * ACPI_COMPANION isn't available when this driver was instantiated by
+	 * the serial-multi-instantiate driver, so lookup the node by HID
+	 */
+	if (!ACPI_COMPANION(cs35l56->base.dev)) {
+		snprintf(hid_string, sizeof(hid_string), "CSC%04X", hid);
+		adev = acpi_dev_get_first_match_dev(hid_string, NULL, -1);
+		if (!adev) {
+			dev_err(cs35l56->base.dev, "Failed to find an ACPI device for %s\n",
+				dev_name(cs35l56->base.dev));
+			return -ENODEV;
+		}
+		ACPI_COMPANION_SET(cs35l56->base.dev, adev);
+	}
+
+	property = "cirrus,dev-index";
+	ret = device_property_count_u32(cs35l56->base.dev, property);
+	if (ret <= 0)
+		goto err;
+
+	if (ret > ARRAY_SIZE(values)) {
+		ret = -EINVAL;
+		goto err;
+	}
+	nval = ret;
+
+	ret = device_property_read_u32_array(cs35l56->base.dev, property, values, nval);
+	if (ret)
+		goto err;
+
+	cs35l56->index = -1;
+	for (i = 0; i < nval; i++) {
+		if (values[i] == id) {
+			cs35l56->index = i;
+			break;
+		}
+	}
+	/*
+	 * It's not an error for the ID to be missing: for I2C there can be
+	 * an alias address that is not a real device. So reject silently.
+	 */
+	if (cs35l56->index == -1) {
+		dev_dbg(cs35l56->base.dev, "No index found in %s\n", property);
+		ret = -ENODEV;
+		goto err;
+	}
+
+	sub = acpi_get_subsystem_id(ACPI_HANDLE(cs35l56->base.dev));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (IS_ERR(sub)) {
 		dev_info(cs35l56->base.dev,

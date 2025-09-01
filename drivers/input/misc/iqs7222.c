@@ -2430,9 +2430,13 @@ static int iqs7222_parse_chan(struct iqs7222_private *iqs7222,
 		if (error)
 			return error;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (!iqs7222->kp_type[chan_index][i])
 			continue;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (!dev_desc->event_offset)
 			continue;
 

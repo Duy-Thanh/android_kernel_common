@@ -192,6 +192,7 @@ static void hv_irq_compose_msi_msg(struct irq_data *data, struct msi_msg *msg)
 	struct pci_dev *dev;
 	struct hv_interrupt_entry out_entry, *stored_entry;
 	struct irq_cfg *cfg = irqd_cfg(data);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int cpu;
 	u64 status;
 
@@ -204,6 +205,23 @@ static void hv_irq_compose_msi_msg(struct irq_data *data, struct msi_msg *msg)
 	}
 
 	cpu = cpumask_first(irq_data_get_effective_affinity_mask(data));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	const cpumask_t *affinity;
+	int cpu;
+	u64 status;
+
+	msidesc = irq_data_get_msi_desc(data);
+	dev = msi_desc_to_pci_dev(msidesc);
+
+	if (!cfg) {
+		pr_debug("%s: cfg is NULL", __func__);
+		return;
+	}
+
+	affinity = irq_data_get_effective_affinity_mask(data);
+	cpu = cpumask_first_and(affinity, cpu_online_mask);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (data->chip_data) {
 		/*

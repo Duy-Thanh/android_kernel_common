@@ -89,6 +89,7 @@ struct ccp_device {
 	struct mutex mutex; /* whenever buffer is used, lock before send_usb_cmd */
 	u8 *cmd_buffer;
 	u8 *buffer;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int buffer_recv_size; /* number of received bytes in buffer */
 	int target[6];
 	DECLARE_BITMAP(temp_cnct, NUM_TEMP_SENSORS);
@@ -162,6 +163,77 @@ static int ccp_raw_event(struct hid_device *hdev, struct hid_report *report, u8 
 	if (!completion_done(&ccp->wait_input_report)) {
 		memcpy(ccp->buffer, data, min(IN_BUFFER_SIZE, size));
 		ccp->buffer_recv_size = size;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int target[6];
+	DECLARE_BITMAP(temp_cnct, NUM_TEMP_SENSORS);
+	DECLARE_BITMAP(fan_cnct, NUM_FANS);
+	char fan_label[6][LABEL_LENGTH];
+	u8 firmware_ver[3];
+	u8 bootloader_ver[2];
+};
+
+/* converts response error in buffer to errno */
+static int ccp_get_errno(struct ccp_device *ccp)
+{
+	switch (ccp->buffer[0]) {
+	case 0x00: /* success */
+		return 0;
+	case 0x01: /* called invalid command */
+		return -EOPNOTSUPP;
+	case 0x10: /* called GET_VOLT / GET_TMP with invalid arguments */
+		return -EINVAL;
+	case 0x11: /* requested temps of disconnected sensors */
+	case 0x12: /* requested pwm of not pwm controlled channels */
+		return -ENODATA;
+	default:
+		hid_dbg(ccp->hdev, "unknown device response error: %d", ccp->buffer[0]);
+		return -EIO;
+	}
+}
+
+/* send command, check for error in response, response in ccp->buffer */
+static int send_usb_cmd(struct ccp_device *ccp, u8 command, u8 byte1, u8 byte2, u8 byte3)
+{
+	unsigned long t;
+	int ret;
+
+	memset(ccp->cmd_buffer, 0x00, OUT_BUFFER_SIZE);
+	ccp->cmd_buffer[0] = command;
+	ccp->cmd_buffer[1] = byte1;
+	ccp->cmd_buffer[2] = byte2;
+	ccp->cmd_buffer[3] = byte3;
+
+	/*
+	 * Disable raw event parsing for a moment to safely reinitialize the
+	 * completion. Reinit is done because hidraw could have triggered
+	 * the raw event parsing and marked the ccp->wait_input_report
+	 * completion as done.
+	 */
+	spin_lock_bh(&ccp->wait_input_report_lock);
+	reinit_completion(&ccp->wait_input_report);
+	spin_unlock_bh(&ccp->wait_input_report_lock);
+
+	ret = hid_hw_output_report(ccp->hdev, ccp->cmd_buffer, OUT_BUFFER_SIZE);
+	if (ret < 0)
+		return ret;
+
+	t = wait_for_completion_timeout(&ccp->wait_input_report, msecs_to_jiffies(REQ_TIMEOUT));
+	if (!t)
+		return -ETIMEDOUT;
+
+	return ccp_get_errno(ccp);
+}
+
+static int ccp_raw_event(struct hid_device *hdev, struct hid_report *report, u8 *data, int size)
+{
+	struct ccp_device *ccp = hid_get_drvdata(hdev);
+
+	/* only copy buffer when requested */
+	spin_lock(&ccp->wait_input_report_lock);
+	if (!completion_done(&ccp->wait_input_report)) {
+		memcpy(ccp->buffer, data, min(IN_BUFFER_SIZE, size));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		complete_all(&ccp->wait_input_report);
 	}
 	spin_unlock(&ccp->wait_input_report_lock);

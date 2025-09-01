@@ -6234,6 +6234,7 @@ void kvm_mmu_invalidate_addr(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu,
 	/* It's actually a GPA for vcpu->arch.guest_mmu.  */
 	if (mmu != &vcpu->arch.guest_mmu) {
 		/* INVLPG on a non-canonical address is a NOP according to the SDM.  */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (is_noncanonical_invlpg_address(addr, vcpu))
 			return;
 
@@ -7605,6 +7606,1382 @@ int kvm_mmu_post_init_vm(struct kvm *kvm)
 		return 0;
 
 	return call_once(&kvm->arch.nx_once, kvm_mmu_start_lpage_recovery);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (is_noncanonical_address(addr, vcpu))
+			return;
+
+		kvm_x86_call(flush_tlb_gva)(vcpu, addr);
+	}
+
+	if (!mmu->sync_spte)
+		return;
+
+	if (roots & KVM_MMU_ROOT_CURRENT)
+		__kvm_mmu_invalidate_addr(vcpu, mmu, addr, mmu->root.hpa);
+
+	for (i = 0; i < KVM_MMU_NUM_PREV_ROOTS; i++) {
+		if (roots & KVM_MMU_ROOT_PREVIOUS(i))
+			__kvm_mmu_invalidate_addr(vcpu, mmu, addr, mmu->prev_roots[i].hpa);
+	}
+}
+EXPORT_SYMBOL_GPL(kvm_mmu_invalidate_addr);
+
+void kvm_mmu_invlpg(struct kvm_vcpu *vcpu, gva_t gva)
+{
+	/*
+	 * INVLPG is required to invalidate any global mappings for the VA,
+	 * irrespective of PCID.  Blindly sync all roots as it would take
+	 * roughly the same amount of work/time to determine whether any of the
+	 * previous roots have a global mapping.
+	 *
+	 * Mappings not reachable via the current or previous cached roots will
+	 * be synced when switching to that new cr3, so nothing needs to be
+	 * done here for them.
+	 */
+	kvm_mmu_invalidate_addr(vcpu, vcpu->arch.walk_mmu, gva, KVM_MMU_ROOTS_ALL);
+	++vcpu->stat.invlpg;
+}
+EXPORT_SYMBOL_GPL(kvm_mmu_invlpg);
+
+
+void kvm_mmu_invpcid_gva(struct kvm_vcpu *vcpu, gva_t gva, unsigned long pcid)
+{
+	struct kvm_mmu *mmu = vcpu->arch.mmu;
+	unsigned long roots = 0;
+	uint i;
+
+	if (pcid == kvm_get_active_pcid(vcpu))
+		roots |= KVM_MMU_ROOT_CURRENT;
+
+	for (i = 0; i < KVM_MMU_NUM_PREV_ROOTS; i++) {
+		if (VALID_PAGE(mmu->prev_roots[i].hpa) &&
+		    pcid == kvm_get_pcid(vcpu, mmu->prev_roots[i].pgd))
+			roots |= KVM_MMU_ROOT_PREVIOUS(i);
+	}
+
+	if (roots)
+		kvm_mmu_invalidate_addr(vcpu, mmu, gva, roots);
+	++vcpu->stat.invlpg;
+
+	/*
+	 * Mappings not reachable via the current cr3 or the prev_roots will be
+	 * synced when switching to that cr3, so nothing needs to be done here
+	 * for them.
+	 */
+}
+
+void kvm_configure_mmu(bool enable_tdp, int tdp_forced_root_level,
+		       int tdp_max_root_level, int tdp_huge_page_level)
+{
+	tdp_enabled = enable_tdp;
+	tdp_root_level = tdp_forced_root_level;
+	max_tdp_level = tdp_max_root_level;
+
+#ifdef CONFIG_X86_64
+	tdp_mmu_enabled = tdp_mmu_allowed && tdp_enabled;
+#endif
+	/*
+	 * max_huge_page_level reflects KVM's MMU capabilities irrespective
+	 * of kernel support, e.g. KVM may be capable of using 1GB pages when
+	 * the kernel is not.  But, KVM never creates a page size greater than
+	 * what is used by the kernel for any given HVA, i.e. the kernel's
+	 * capabilities are ultimately consulted by kvm_mmu_hugepage_adjust().
+	 */
+	if (tdp_enabled)
+		max_huge_page_level = tdp_huge_page_level;
+	else if (boot_cpu_has(X86_FEATURE_GBPAGES))
+		max_huge_page_level = PG_LEVEL_1G;
+	else
+		max_huge_page_level = PG_LEVEL_2M;
+}
+EXPORT_SYMBOL_GPL(kvm_configure_mmu);
+
+static void free_mmu_pages(struct kvm_mmu *mmu)
+{
+	if (!tdp_enabled && mmu->pae_root)
+		set_memory_encrypted((unsigned long)mmu->pae_root, 1);
+	free_page((unsigned long)mmu->pae_root);
+	free_page((unsigned long)mmu->pml4_root);
+	free_page((unsigned long)mmu->pml5_root);
+}
+
+static int __kvm_mmu_create(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu)
+{
+	struct page *page;
+	int i;
+
+	mmu->root.hpa = INVALID_PAGE;
+	mmu->root.pgd = 0;
+	for (i = 0; i < KVM_MMU_NUM_PREV_ROOTS; i++)
+		mmu->prev_roots[i] = KVM_MMU_ROOT_INFO_INVALID;
+
+	/* vcpu->arch.guest_mmu isn't used when !tdp_enabled. */
+	if (!tdp_enabled && mmu == &vcpu->arch.guest_mmu)
+		return 0;
+
+	/*
+	 * When using PAE paging, the four PDPTEs are treated as 'root' pages,
+	 * while the PDP table is a per-vCPU construct that's allocated at MMU
+	 * creation.  When emulating 32-bit mode, cr3 is only 32 bits even on
+	 * x86_64.  Therefore we need to allocate the PDP table in the first
+	 * 4GB of memory, which happens to fit the DMA32 zone.  TDP paging
+	 * generally doesn't use PAE paging and can skip allocating the PDP
+	 * table.  The main exception, handled here, is SVM's 32-bit NPT.  The
+	 * other exception is for shadowing L1's 32-bit or PAE NPT on 64-bit
+	 * KVM; that horror is handled on-demand by mmu_alloc_special_roots().
+	 */
+	if (tdp_enabled && kvm_mmu_get_tdp_level(vcpu) > PT32E_ROOT_LEVEL)
+		return 0;
+
+	page = alloc_page(GFP_KERNEL_ACCOUNT | __GFP_DMA32);
+	if (!page)
+		return -ENOMEM;
+
+	mmu->pae_root = page_address(page);
+
+	/*
+	 * CR3 is only 32 bits when PAE paging is used, thus it's impossible to
+	 * get the CPU to treat the PDPTEs as encrypted.  Decrypt the page so
+	 * that KVM's writes and the CPU's reads get along.  Note, this is
+	 * only necessary when using shadow paging, as 64-bit NPT can get at
+	 * the C-bit even when shadowing 32-bit NPT, and SME isn't supported
+	 * by 32-bit kernels (when KVM itself uses 32-bit NPT).
+	 */
+	if (!tdp_enabled)
+		set_memory_decrypted((unsigned long)mmu->pae_root, 1);
+	else
+		WARN_ON_ONCE(shadow_me_value);
+
+	for (i = 0; i < 4; ++i)
+		mmu->pae_root[i] = INVALID_PAE_ROOT;
+
+	return 0;
+}
+
+int kvm_mmu_create(struct kvm_vcpu *vcpu)
+{
+	int ret;
+
+	vcpu->arch.mmu_pte_list_desc_cache.kmem_cache = pte_list_desc_cache;
+	vcpu->arch.mmu_pte_list_desc_cache.gfp_zero = __GFP_ZERO;
+
+	vcpu->arch.mmu_page_header_cache.kmem_cache = mmu_page_header_cache;
+	vcpu->arch.mmu_page_header_cache.gfp_zero = __GFP_ZERO;
+
+	vcpu->arch.mmu_shadow_page_cache.init_value =
+		SHADOW_NONPRESENT_VALUE;
+	if (!vcpu->arch.mmu_shadow_page_cache.init_value)
+		vcpu->arch.mmu_shadow_page_cache.gfp_zero = __GFP_ZERO;
+
+	vcpu->arch.mmu = &vcpu->arch.root_mmu;
+	vcpu->arch.walk_mmu = &vcpu->arch.root_mmu;
+
+	ret = __kvm_mmu_create(vcpu, &vcpu->arch.guest_mmu);
+	if (ret)
+		return ret;
+
+	ret = __kvm_mmu_create(vcpu, &vcpu->arch.root_mmu);
+	if (ret)
+		goto fail_allocate_root;
+
+	return ret;
+ fail_allocate_root:
+	free_mmu_pages(&vcpu->arch.guest_mmu);
+	return ret;
+}
+
+#define BATCH_ZAP_PAGES	10
+static void kvm_zap_obsolete_pages(struct kvm *kvm)
+{
+	struct kvm_mmu_page *sp, *node;
+	int nr_zapped, batch = 0;
+	bool unstable;
+
+restart:
+	list_for_each_entry_safe_reverse(sp, node,
+	      &kvm->arch.active_mmu_pages, link) {
+		/*
+		 * No obsolete valid page exists before a newly created page
+		 * since active_mmu_pages is a FIFO list.
+		 */
+		if (!is_obsolete_sp(kvm, sp))
+			break;
+
+		/*
+		 * Invalid pages should never land back on the list of active
+		 * pages.  Skip the bogus page, otherwise we'll get stuck in an
+		 * infinite loop if the page gets put back on the list (again).
+		 */
+		if (WARN_ON_ONCE(sp->role.invalid))
+			continue;
+
+		/*
+		 * No need to flush the TLB since we're only zapping shadow
+		 * pages with an obsolete generation number and all vCPUS have
+		 * loaded a new root, i.e. the shadow pages being zapped cannot
+		 * be in active use by the guest.
+		 */
+		if (batch >= BATCH_ZAP_PAGES &&
+		    cond_resched_rwlock_write(&kvm->mmu_lock)) {
+			batch = 0;
+			goto restart;
+		}
+
+		unstable = __kvm_mmu_prepare_zap_page(kvm, sp,
+				&kvm->arch.zapped_obsolete_pages, &nr_zapped);
+		batch += nr_zapped;
+
+		if (unstable)
+			goto restart;
+	}
+
+	/*
+	 * Kick all vCPUs (via remote TLB flush) before freeing the page tables
+	 * to ensure KVM is not in the middle of a lockless shadow page table
+	 * walk, which may reference the pages.  The remote TLB flush itself is
+	 * not required and is simply a convenient way to kick vCPUs as needed.
+	 * KVM performs a local TLB flush when allocating a new root (see
+	 * kvm_mmu_load()), and the reload in the caller ensure no vCPUs are
+	 * running with an obsolete MMU.
+	 */
+	kvm_mmu_commit_zap_page(kvm, &kvm->arch.zapped_obsolete_pages);
+}
+
+/*
+ * Fast invalidate all shadow pages and use lock-break technique
+ * to zap obsolete pages.
+ *
+ * It's required when memslot is being deleted or VM is being
+ * destroyed, in these cases, we should ensure that KVM MMU does
+ * not use any resource of the being-deleted slot or all slots
+ * after calling the function.
+ */
+static void kvm_mmu_zap_all_fast(struct kvm *kvm)
+{
+	lockdep_assert_held(&kvm->slots_lock);
+
+	write_lock(&kvm->mmu_lock);
+	trace_kvm_mmu_zap_all_fast(kvm);
+
+	/*
+	 * Toggle mmu_valid_gen between '0' and '1'.  Because slots_lock is
+	 * held for the entire duration of zapping obsolete pages, it's
+	 * impossible for there to be multiple invalid generations associated
+	 * with *valid* shadow pages at any given time, i.e. there is exactly
+	 * one valid generation and (at most) one invalid generation.
+	 */
+	kvm->arch.mmu_valid_gen = kvm->arch.mmu_valid_gen ? 0 : 1;
+
+	/*
+	 * In order to ensure all vCPUs drop their soon-to-be invalid roots,
+	 * invalidating TDP MMU roots must be done while holding mmu_lock for
+	 * write and in the same critical section as making the reload request,
+	 * e.g. before kvm_zap_obsolete_pages() could drop mmu_lock and yield.
+	 */
+	if (tdp_mmu_enabled)
+		kvm_tdp_mmu_invalidate_all_roots(kvm);
+
+	/*
+	 * Notify all vcpus to reload its shadow page table and flush TLB.
+	 * Then all vcpus will switch to new shadow page table with the new
+	 * mmu_valid_gen.
+	 *
+	 * Note: we need to do this under the protection of mmu_lock,
+	 * otherwise, vcpu would purge shadow page but miss tlb flush.
+	 */
+	kvm_make_all_cpus_request(kvm, KVM_REQ_MMU_FREE_OBSOLETE_ROOTS);
+
+	kvm_zap_obsolete_pages(kvm);
+
+	write_unlock(&kvm->mmu_lock);
+
+	/*
+	 * Zap the invalidated TDP MMU roots, all SPTEs must be dropped before
+	 * returning to the caller, e.g. if the zap is in response to a memslot
+	 * deletion, mmu_notifier callbacks will be unable to reach the SPTEs
+	 * associated with the deleted memslot once the update completes, and
+	 * Deferring the zap until the final reference to the root is put would
+	 * lead to use-after-free.
+	 */
+	if (tdp_mmu_enabled)
+		kvm_tdp_mmu_zap_invalidated_roots(kvm);
+}
+
+static bool kvm_has_zapped_obsolete_pages(struct kvm *kvm)
+{
+	return unlikely(!list_empty_careful(&kvm->arch.zapped_obsolete_pages));
+}
+
+void kvm_mmu_init_vm(struct kvm *kvm)
+{
+	kvm->arch.shadow_mmio_value = shadow_mmio_value;
+	INIT_LIST_HEAD(&kvm->arch.active_mmu_pages);
+	INIT_LIST_HEAD(&kvm->arch.zapped_obsolete_pages);
+	INIT_LIST_HEAD(&kvm->arch.possible_nx_huge_pages);
+	spin_lock_init(&kvm->arch.mmu_unsync_pages_lock);
+
+	if (tdp_mmu_enabled)
+		kvm_mmu_init_tdp_mmu(kvm);
+
+	kvm->arch.split_page_header_cache.kmem_cache = mmu_page_header_cache;
+	kvm->arch.split_page_header_cache.gfp_zero = __GFP_ZERO;
+
+	kvm->arch.split_shadow_page_cache.gfp_zero = __GFP_ZERO;
+
+	kvm->arch.split_desc_cache.kmem_cache = pte_list_desc_cache;
+	kvm->arch.split_desc_cache.gfp_zero = __GFP_ZERO;
+}
+
+static void mmu_free_vm_memory_caches(struct kvm *kvm)
+{
+	kvm_mmu_free_memory_cache(&kvm->arch.split_desc_cache);
+	kvm_mmu_free_memory_cache(&kvm->arch.split_page_header_cache);
+	kvm_mmu_free_memory_cache(&kvm->arch.split_shadow_page_cache);
+}
+
+void kvm_mmu_uninit_vm(struct kvm *kvm)
+{
+	if (tdp_mmu_enabled)
+		kvm_mmu_uninit_tdp_mmu(kvm);
+
+	mmu_free_vm_memory_caches(kvm);
+}
+
+static bool kvm_rmap_zap_gfn_range(struct kvm *kvm, gfn_t gfn_start, gfn_t gfn_end)
+{
+	const struct kvm_memory_slot *memslot;
+	struct kvm_memslots *slots;
+	struct kvm_memslot_iter iter;
+	bool flush = false;
+	gfn_t start, end;
+	int i;
+
+	if (!kvm_memslots_have_rmaps(kvm))
+		return flush;
+
+	for (i = 0; i < kvm_arch_nr_memslot_as_ids(kvm); i++) {
+		slots = __kvm_memslots(kvm, i);
+
+		kvm_for_each_memslot_in_gfn_range(&iter, slots, gfn_start, gfn_end) {
+			memslot = iter.slot;
+			start = max(gfn_start, memslot->base_gfn);
+			end = min(gfn_end, memslot->base_gfn + memslot->npages);
+			if (WARN_ON_ONCE(start >= end))
+				continue;
+
+			flush = __kvm_rmap_zap_gfn_range(kvm, memslot, start,
+							 end, true, flush);
+		}
+	}
+
+	return flush;
+}
+
+/*
+ * Invalidate (zap) SPTEs that cover GFNs from gfn_start and up to gfn_end
+ * (not including it)
+ */
+void kvm_zap_gfn_range(struct kvm *kvm, gfn_t gfn_start, gfn_t gfn_end)
+{
+	bool flush;
+
+	if (WARN_ON_ONCE(gfn_end <= gfn_start))
+		return;
+
+	write_lock(&kvm->mmu_lock);
+
+	kvm_mmu_invalidate_begin(kvm);
+
+	kvm_mmu_invalidate_range_add(kvm, gfn_start, gfn_end);
+
+	flush = kvm_rmap_zap_gfn_range(kvm, gfn_start, gfn_end);
+
+	if (tdp_mmu_enabled)
+		flush = kvm_tdp_mmu_zap_leafs(kvm, gfn_start, gfn_end, flush);
+
+	if (flush)
+		kvm_flush_remote_tlbs_range(kvm, gfn_start, gfn_end - gfn_start);
+
+	kvm_mmu_invalidate_end(kvm);
+
+	write_unlock(&kvm->mmu_lock);
+}
+
+static bool slot_rmap_write_protect(struct kvm *kvm,
+				    struct kvm_rmap_head *rmap_head,
+				    const struct kvm_memory_slot *slot)
+{
+	return rmap_write_protect(rmap_head, false);
+}
+
+void kvm_mmu_slot_remove_write_access(struct kvm *kvm,
+				      const struct kvm_memory_slot *memslot,
+				      int start_level)
+{
+	if (kvm_memslots_have_rmaps(kvm)) {
+		write_lock(&kvm->mmu_lock);
+		walk_slot_rmaps(kvm, memslot, slot_rmap_write_protect,
+				start_level, KVM_MAX_HUGEPAGE_LEVEL, false);
+		write_unlock(&kvm->mmu_lock);
+	}
+
+	if (tdp_mmu_enabled) {
+		read_lock(&kvm->mmu_lock);
+		kvm_tdp_mmu_wrprot_slot(kvm, memslot, start_level);
+		read_unlock(&kvm->mmu_lock);
+	}
+}
+
+static inline bool need_topup(struct kvm_mmu_memory_cache *cache, int min)
+{
+	return kvm_mmu_memory_cache_nr_free_objects(cache) < min;
+}
+
+static bool need_topup_split_caches_or_resched(struct kvm *kvm)
+{
+	if (need_resched() || rwlock_needbreak(&kvm->mmu_lock))
+		return true;
+
+	/*
+	 * In the worst case, SPLIT_DESC_CACHE_MIN_NR_OBJECTS descriptors are needed
+	 * to split a single huge page. Calculating how many are actually needed
+	 * is possible but not worth the complexity.
+	 */
+	return need_topup(&kvm->arch.split_desc_cache, SPLIT_DESC_CACHE_MIN_NR_OBJECTS) ||
+	       need_topup(&kvm->arch.split_page_header_cache, 1) ||
+	       need_topup(&kvm->arch.split_shadow_page_cache, 1);
+}
+
+static int topup_split_caches(struct kvm *kvm)
+{
+	/*
+	 * Allocating rmap list entries when splitting huge pages for nested
+	 * MMUs is uncommon as KVM needs to use a list if and only if there is
+	 * more than one rmap entry for a gfn, i.e. requires an L1 gfn to be
+	 * aliased by multiple L2 gfns and/or from multiple nested roots with
+	 * different roles.  Aliasing gfns when using TDP is atypical for VMMs;
+	 * a few gfns are often aliased during boot, e.g. when remapping BIOS,
+	 * but aliasing rarely occurs post-boot or for many gfns.  If there is
+	 * only one rmap entry, rmap->val points directly at that one entry and
+	 * doesn't need to allocate a list.  Buffer the cache by the default
+	 * capacity so that KVM doesn't have to drop mmu_lock to topup if KVM
+	 * encounters an aliased gfn or two.
+	 */
+	const int capacity = SPLIT_DESC_CACHE_MIN_NR_OBJECTS +
+			     KVM_ARCH_NR_OBJS_PER_MEMORY_CACHE;
+	int r;
+
+	lockdep_assert_held(&kvm->slots_lock);
+
+	r = __kvm_mmu_topup_memory_cache(&kvm->arch.split_desc_cache, capacity,
+					 SPLIT_DESC_CACHE_MIN_NR_OBJECTS);
+	if (r)
+		return r;
+
+	r = kvm_mmu_topup_memory_cache(&kvm->arch.split_page_header_cache, 1);
+	if (r)
+		return r;
+
+	return kvm_mmu_topup_memory_cache(&kvm->arch.split_shadow_page_cache, 1);
+}
+
+static struct kvm_mmu_page *shadow_mmu_get_sp_for_split(struct kvm *kvm, u64 *huge_sptep)
+{
+	struct kvm_mmu_page *huge_sp = sptep_to_sp(huge_sptep);
+	struct shadow_page_caches caches = {};
+	union kvm_mmu_page_role role;
+	unsigned int access;
+	gfn_t gfn;
+
+	gfn = kvm_mmu_page_get_gfn(huge_sp, spte_index(huge_sptep));
+	access = kvm_mmu_page_get_access(huge_sp, spte_index(huge_sptep));
+
+	/*
+	 * Note, huge page splitting always uses direct shadow pages, regardless
+	 * of whether the huge page itself is mapped by a direct or indirect
+	 * shadow page, since the huge page region itself is being directly
+	 * mapped with smaller pages.
+	 */
+	role = kvm_mmu_child_role(huge_sptep, /*direct=*/true, access);
+
+	/* Direct SPs do not require a shadowed_info_cache. */
+	caches.page_header_cache = &kvm->arch.split_page_header_cache;
+	caches.shadow_page_cache = &kvm->arch.split_shadow_page_cache;
+
+	/* Safe to pass NULL for vCPU since requesting a direct SP. */
+	return __kvm_mmu_get_shadow_page(kvm, NULL, &caches, gfn, role);
+}
+
+static void shadow_mmu_split_huge_page(struct kvm *kvm,
+				       const struct kvm_memory_slot *slot,
+				       u64 *huge_sptep)
+
+{
+	struct kvm_mmu_memory_cache *cache = &kvm->arch.split_desc_cache;
+	u64 huge_spte = READ_ONCE(*huge_sptep);
+	struct kvm_mmu_page *sp;
+	bool flush = false;
+	u64 *sptep, spte;
+	gfn_t gfn;
+	int index;
+
+	sp = shadow_mmu_get_sp_for_split(kvm, huge_sptep);
+
+	for (index = 0; index < SPTE_ENT_PER_PAGE; index++) {
+		sptep = &sp->spt[index];
+		gfn = kvm_mmu_page_get_gfn(sp, index);
+
+		/*
+		 * The SP may already have populated SPTEs, e.g. if this huge
+		 * page is aliased by multiple sptes with the same access
+		 * permissions. These entries are guaranteed to map the same
+		 * gfn-to-pfn translation since the SP is direct, so no need to
+		 * modify them.
+		 *
+		 * However, if a given SPTE points to a lower level page table,
+		 * that lower level page table may only be partially populated.
+		 * Installing such SPTEs would effectively unmap a potion of the
+		 * huge page. Unmapping guest memory always requires a TLB flush
+		 * since a subsequent operation on the unmapped regions would
+		 * fail to detect the need to flush.
+		 */
+		if (is_shadow_present_pte(*sptep)) {
+			flush |= !is_last_spte(*sptep, sp->role.level);
+			continue;
+		}
+
+		spte = make_huge_page_split_spte(kvm, huge_spte, sp->role, index);
+		mmu_spte_set(sptep, spte);
+		__rmap_add(kvm, cache, slot, sptep, gfn, sp->role.access);
+	}
+
+	__link_shadow_page(kvm, cache, huge_sptep, sp, flush);
+}
+
+static int shadow_mmu_try_split_huge_page(struct kvm *kvm,
+					  const struct kvm_memory_slot *slot,
+					  u64 *huge_sptep)
+{
+	struct kvm_mmu_page *huge_sp = sptep_to_sp(huge_sptep);
+	int level, r = 0;
+	gfn_t gfn;
+	u64 spte;
+
+	/* Grab information for the tracepoint before dropping the MMU lock. */
+	gfn = kvm_mmu_page_get_gfn(huge_sp, spte_index(huge_sptep));
+	level = huge_sp->role.level;
+	spte = *huge_sptep;
+
+	if (kvm_mmu_available_pages(kvm) <= KVM_MIN_FREE_MMU_PAGES) {
+		r = -ENOSPC;
+		goto out;
+	}
+
+	if (need_topup_split_caches_or_resched(kvm)) {
+		write_unlock(&kvm->mmu_lock);
+		cond_resched();
+		/*
+		 * If the topup succeeds, return -EAGAIN to indicate that the
+		 * rmap iterator should be restarted because the MMU lock was
+		 * dropped.
+		 */
+		r = topup_split_caches(kvm) ?: -EAGAIN;
+		write_lock(&kvm->mmu_lock);
+		goto out;
+	}
+
+	shadow_mmu_split_huge_page(kvm, slot, huge_sptep);
+
+out:
+	trace_kvm_mmu_split_huge_page(gfn, spte, level, r);
+	return r;
+}
+
+static bool shadow_mmu_try_split_huge_pages(struct kvm *kvm,
+					    struct kvm_rmap_head *rmap_head,
+					    const struct kvm_memory_slot *slot)
+{
+	struct rmap_iterator iter;
+	struct kvm_mmu_page *sp;
+	u64 *huge_sptep;
+	int r;
+
+restart:
+	for_each_rmap_spte(rmap_head, &iter, huge_sptep) {
+		sp = sptep_to_sp(huge_sptep);
+
+		/* TDP MMU is enabled, so rmap only contains nested MMU SPs. */
+		if (WARN_ON_ONCE(!sp->role.guest_mode))
+			continue;
+
+		/* The rmaps should never contain non-leaf SPTEs. */
+		if (WARN_ON_ONCE(!is_large_pte(*huge_sptep)))
+			continue;
+
+		/* SPs with level >PG_LEVEL_4K should never by unsync. */
+		if (WARN_ON_ONCE(sp->unsync))
+			continue;
+
+		/* Don't bother splitting huge pages on invalid SPs. */
+		if (sp->role.invalid)
+			continue;
+
+		r = shadow_mmu_try_split_huge_page(kvm, slot, huge_sptep);
+
+		/*
+		 * The split succeeded or needs to be retried because the MMU
+		 * lock was dropped. Either way, restart the iterator to get it
+		 * back into a consistent state.
+		 */
+		if (!r || r == -EAGAIN)
+			goto restart;
+
+		/* The split failed and shouldn't be retried (e.g. -ENOMEM). */
+		break;
+	}
+
+	return false;
+}
+
+static void kvm_shadow_mmu_try_split_huge_pages(struct kvm *kvm,
+						const struct kvm_memory_slot *slot,
+						gfn_t start, gfn_t end,
+						int target_level)
+{
+	int level;
+
+	/*
+	 * Split huge pages starting with KVM_MAX_HUGEPAGE_LEVEL and working
+	 * down to the target level. This ensures pages are recursively split
+	 * all the way to the target level. There's no need to split pages
+	 * already at the target level.
+	 */
+	for (level = KVM_MAX_HUGEPAGE_LEVEL; level > target_level; level--)
+		__walk_slot_rmaps(kvm, slot, shadow_mmu_try_split_huge_pages,
+				  level, level, start, end - 1, true, true, false);
+}
+
+/* Must be called with the mmu_lock held in write-mode. */
+void kvm_mmu_try_split_huge_pages(struct kvm *kvm,
+				   const struct kvm_memory_slot *memslot,
+				   u64 start, u64 end,
+				   int target_level)
+{
+	if (!tdp_mmu_enabled)
+		return;
+
+	if (kvm_memslots_have_rmaps(kvm))
+		kvm_shadow_mmu_try_split_huge_pages(kvm, memslot, start, end, target_level);
+
+	kvm_tdp_mmu_try_split_huge_pages(kvm, memslot, start, end, target_level, false);
+
+	/*
+	 * A TLB flush is unnecessary at this point for the same reasons as in
+	 * kvm_mmu_slot_try_split_huge_pages().
+	 */
+}
+
+void kvm_mmu_slot_try_split_huge_pages(struct kvm *kvm,
+					const struct kvm_memory_slot *memslot,
+					int target_level)
+{
+	u64 start = memslot->base_gfn;
+	u64 end = start + memslot->npages;
+
+	if (!tdp_mmu_enabled)
+		return;
+
+	if (kvm_memslots_have_rmaps(kvm)) {
+		write_lock(&kvm->mmu_lock);
+		kvm_shadow_mmu_try_split_huge_pages(kvm, memslot, start, end, target_level);
+		write_unlock(&kvm->mmu_lock);
+	}
+
+	read_lock(&kvm->mmu_lock);
+	kvm_tdp_mmu_try_split_huge_pages(kvm, memslot, start, end, target_level, true);
+	read_unlock(&kvm->mmu_lock);
+
+	/*
+	 * No TLB flush is necessary here. KVM will flush TLBs after
+	 * write-protecting and/or clearing dirty on the newly split SPTEs to
+	 * ensure that guest writes are reflected in the dirty log before the
+	 * ioctl to enable dirty logging on this memslot completes. Since the
+	 * split SPTEs retain the write and dirty bits of the huge SPTE, it is
+	 * safe for KVM to decide if a TLB flush is necessary based on the split
+	 * SPTEs.
+	 */
+}
+
+static bool kvm_mmu_zap_collapsible_spte(struct kvm *kvm,
+					 struct kvm_rmap_head *rmap_head,
+					 const struct kvm_memory_slot *slot)
+{
+	u64 *sptep;
+	struct rmap_iterator iter;
+	int need_tlb_flush = 0;
+	struct kvm_mmu_page *sp;
+
+restart:
+	for_each_rmap_spte(rmap_head, &iter, sptep) {
+		sp = sptep_to_sp(sptep);
+
+		/*
+		 * We cannot do huge page mapping for indirect shadow pages,
+		 * which are found on the last rmap (level = 1) when not using
+		 * tdp; such shadow pages are synced with the page table in
+		 * the guest, and the guest page table is using 4K page size
+		 * mapping if the indirect sp has level = 1.
+		 */
+		if (sp->role.direct &&
+		    sp->role.level < kvm_mmu_max_mapping_level(kvm, slot, sp->gfn,
+							       PG_LEVEL_NUM)) {
+			kvm_zap_one_rmap_spte(kvm, rmap_head, sptep);
+
+			if (kvm_available_flush_remote_tlbs_range())
+				kvm_flush_remote_tlbs_sptep(kvm, sptep);
+			else
+				need_tlb_flush = 1;
+
+			goto restart;
+		}
+	}
+
+	return need_tlb_flush;
+}
+EXPORT_SYMBOL_GPL(kvm_zap_gfn_range);
+
+static void kvm_rmap_zap_collapsible_sptes(struct kvm *kvm,
+					   const struct kvm_memory_slot *slot)
+{
+	/*
+	 * Note, use KVM_MAX_HUGEPAGE_LEVEL - 1 since there's no need to zap
+	 * pages that are already mapped at the maximum hugepage level.
+	 */
+	if (walk_slot_rmaps(kvm, slot, kvm_mmu_zap_collapsible_spte,
+			    PG_LEVEL_4K, KVM_MAX_HUGEPAGE_LEVEL - 1, true))
+		kvm_flush_remote_tlbs_memslot(kvm, slot);
+}
+
+void kvm_mmu_zap_collapsible_sptes(struct kvm *kvm,
+				   const struct kvm_memory_slot *slot)
+{
+	if (kvm_memslots_have_rmaps(kvm)) {
+		write_lock(&kvm->mmu_lock);
+		kvm_rmap_zap_collapsible_sptes(kvm, slot);
+		write_unlock(&kvm->mmu_lock);
+	}
+
+	if (tdp_mmu_enabled) {
+		read_lock(&kvm->mmu_lock);
+		kvm_tdp_mmu_zap_collapsible_sptes(kvm, slot);
+		read_unlock(&kvm->mmu_lock);
+	}
+}
+
+void kvm_mmu_slot_leaf_clear_dirty(struct kvm *kvm,
+				   const struct kvm_memory_slot *memslot)
+{
+	if (kvm_memslots_have_rmaps(kvm)) {
+		write_lock(&kvm->mmu_lock);
+		/*
+		 * Clear dirty bits only on 4k SPTEs since the legacy MMU only
+		 * support dirty logging at a 4k granularity.
+		 */
+		walk_slot_rmaps_4k(kvm, memslot, __rmap_clear_dirty, false);
+		write_unlock(&kvm->mmu_lock);
+	}
+
+	if (tdp_mmu_enabled) {
+		read_lock(&kvm->mmu_lock);
+		kvm_tdp_mmu_clear_dirty_slot(kvm, memslot);
+		read_unlock(&kvm->mmu_lock);
+	}
+
+	/*
+	 * The caller will flush the TLBs after this function returns.
+	 *
+	 * It's also safe to flush TLBs out of mmu lock here as currently this
+	 * function is only used for dirty logging, in which case flushing TLB
+	 * out of mmu lock also guarantees no dirty pages will be lost in
+	 * dirty_bitmap.
+	 */
+}
+
+static void kvm_mmu_zap_all(struct kvm *kvm)
+{
+	struct kvm_mmu_page *sp, *node;
+	LIST_HEAD(invalid_list);
+	int ign;
+
+	write_lock(&kvm->mmu_lock);
+restart:
+	list_for_each_entry_safe(sp, node, &kvm->arch.active_mmu_pages, link) {
+		if (WARN_ON_ONCE(sp->role.invalid))
+			continue;
+		if (__kvm_mmu_prepare_zap_page(kvm, sp, &invalid_list, &ign))
+			goto restart;
+		if (cond_resched_rwlock_write(&kvm->mmu_lock))
+			goto restart;
+	}
+
+	kvm_mmu_commit_zap_page(kvm, &invalid_list);
+
+	if (tdp_mmu_enabled)
+		kvm_tdp_mmu_zap_all(kvm);
+
+	write_unlock(&kvm->mmu_lock);
+}
+
+void kvm_arch_flush_shadow_all(struct kvm *kvm)
+{
+	kvm_mmu_zap_all(kvm);
+}
+
+static void kvm_mmu_zap_memslot_pages_and_flush(struct kvm *kvm,
+						struct kvm_memory_slot *slot,
+						bool flush)
+{
+	LIST_HEAD(invalid_list);
+	unsigned long i;
+
+	if (list_empty(&kvm->arch.active_mmu_pages))
+		goto out_flush;
+
+	/*
+	 * Since accounting information is stored in struct kvm_arch_memory_slot,
+	 * all MMU pages that are shadowing guest PTEs must be zapped before the
+	 * memslot is deleted, as freeing such pages after the memslot is freed
+	 * will result in use-after-free, e.g. in unaccount_shadowed().
+	 */
+	for (i = 0; i < slot->npages; i++) {
+		struct kvm_mmu_page *sp;
+		gfn_t gfn = slot->base_gfn + i;
+
+		for_each_gfn_valid_sp_with_gptes(kvm, sp, gfn)
+			kvm_mmu_prepare_zap_page(kvm, sp, &invalid_list);
+
+		if (need_resched() || rwlock_needbreak(&kvm->mmu_lock)) {
+			kvm_mmu_remote_flush_or_zap(kvm, &invalid_list, flush);
+			flush = false;
+			cond_resched_rwlock_write(&kvm->mmu_lock);
+		}
+	}
+
+out_flush:
+	kvm_mmu_remote_flush_or_zap(kvm, &invalid_list, flush);
+}
+
+static void kvm_mmu_zap_memslot(struct kvm *kvm,
+				struct kvm_memory_slot *slot)
+{
+	struct kvm_gfn_range range = {
+		.slot = slot,
+		.start = slot->base_gfn,
+		.end = slot->base_gfn + slot->npages,
+		.may_block = true,
+	};
+	bool flush;
+
+	write_lock(&kvm->mmu_lock);
+	flush = kvm_unmap_gfn_range(kvm, &range);
+	kvm_mmu_zap_memslot_pages_and_flush(kvm, slot, flush);
+	write_unlock(&kvm->mmu_lock);
+}
+
+static inline bool kvm_memslot_flush_zap_all(struct kvm *kvm)
+{
+	return kvm->arch.vm_type == KVM_X86_DEFAULT_VM &&
+	       kvm_check_has_quirk(kvm, KVM_X86_QUIRK_SLOT_ZAP_ALL);
+}
+
+void kvm_arch_flush_shadow_memslot(struct kvm *kvm,
+				   struct kvm_memory_slot *slot)
+{
+	if (kvm_memslot_flush_zap_all(kvm))
+		kvm_mmu_zap_all_fast(kvm);
+	else
+		kvm_mmu_zap_memslot(kvm, slot);
+}
+
+void kvm_mmu_invalidate_mmio_sptes(struct kvm *kvm, u64 gen)
+{
+	WARN_ON_ONCE(gen & KVM_MEMSLOT_GEN_UPDATE_IN_PROGRESS);
+
+	gen &= MMIO_SPTE_GEN_MASK;
+
+	/*
+	 * Generation numbers are incremented in multiples of the number of
+	 * address spaces in order to provide unique generations across all
+	 * address spaces.  Strip what is effectively the address space
+	 * modifier prior to checking for a wrap of the MMIO generation so
+	 * that a wrap in any address space is detected.
+	 */
+	gen &= ~((u64)kvm_arch_nr_memslot_as_ids(kvm) - 1);
+
+	/*
+	 * The very rare case: if the MMIO generation number has wrapped,
+	 * zap all shadow pages.
+	 */
+	if (unlikely(gen == 0)) {
+		kvm_debug_ratelimited("zapping shadow pages for mmio generation wraparound\n");
+		kvm_mmu_zap_all_fast(kvm);
+	}
+}
+
+static unsigned long mmu_shrink_scan(struct shrinker *shrink,
+				     struct shrink_control *sc)
+{
+	struct kvm *kvm;
+	int nr_to_scan = sc->nr_to_scan;
+	unsigned long freed = 0;
+
+	mutex_lock(&kvm_lock);
+
+	list_for_each_entry(kvm, &vm_list, vm_list) {
+		int idx;
+
+		/*
+		 * Never scan more than sc->nr_to_scan VM instances.
+		 * Will not hit this condition practically since we do not try
+		 * to shrink more than one VM and it is very unlikely to see
+		 * !n_used_mmu_pages so many times.
+		 */
+		if (!nr_to_scan--)
+			break;
+		/*
+		 * n_used_mmu_pages is accessed without holding kvm->mmu_lock
+		 * here. We may skip a VM instance errorneosly, but we do not
+		 * want to shrink a VM that only started to populate its MMU
+		 * anyway.
+		 */
+		if (!kvm->arch.n_used_mmu_pages &&
+		    !kvm_has_zapped_obsolete_pages(kvm))
+			continue;
+
+		idx = srcu_read_lock(&kvm->srcu);
+		write_lock(&kvm->mmu_lock);
+
+		if (kvm_has_zapped_obsolete_pages(kvm)) {
+			kvm_mmu_commit_zap_page(kvm,
+			      &kvm->arch.zapped_obsolete_pages);
+			goto unlock;
+		}
+
+		freed = kvm_mmu_zap_oldest_mmu_pages(kvm, sc->nr_to_scan);
+
+unlock:
+		write_unlock(&kvm->mmu_lock);
+		srcu_read_unlock(&kvm->srcu, idx);
+
+		/*
+		 * unfair on small ones
+		 * per-vm shrinkers cry out
+		 * sadness comes quickly
+		 */
+		list_move_tail(&kvm->vm_list, &vm_list);
+		break;
+	}
+
+	mutex_unlock(&kvm_lock);
+	return freed;
+}
+
+static unsigned long mmu_shrink_count(struct shrinker *shrink,
+				      struct shrink_control *sc)
+{
+	return percpu_counter_read_positive(&kvm_total_used_mmu_pages);
+}
+
+static struct shrinker *mmu_shrinker;
+
+static void mmu_destroy_caches(void)
+{
+	kmem_cache_destroy(pte_list_desc_cache);
+	kmem_cache_destroy(mmu_page_header_cache);
+}
+
+static void kvm_wake_nx_recovery_thread(struct kvm *kvm)
+{
+	/*
+	 * The NX recovery thread is spawned on-demand at the first KVM_RUN and
+	 * may not be valid even though the VM is globally visible.  Do nothing,
+	 * as such a VM can't have any possible NX huge pages.
+	 */
+	struct vhost_task *nx_thread = READ_ONCE(kvm->arch.nx_huge_page_recovery_thread);
+
+	if (nx_thread)
+		vhost_task_wake(nx_thread);
+}
+
+static int get_nx_huge_pages(char *buffer, const struct kernel_param *kp)
+{
+	if (nx_hugepage_mitigation_hard_disabled)
+		return sysfs_emit(buffer, "never\n");
+
+	return param_get_bool(buffer, kp);
+}
+
+static bool get_nx_auto_mode(void)
+{
+	/* Return true when CPU has the bug, and mitigations are ON */
+	return boot_cpu_has_bug(X86_BUG_ITLB_MULTIHIT) && !cpu_mitigations_off();
+}
+
+static void __set_nx_huge_pages(bool val)
+{
+	nx_huge_pages = itlb_multihit_kvm_mitigation = val;
+}
+
+static int set_nx_huge_pages(const char *val, const struct kernel_param *kp)
+{
+	bool old_val = nx_huge_pages;
+	bool new_val;
+
+	if (nx_hugepage_mitigation_hard_disabled)
+		return -EPERM;
+
+	/* In "auto" mode deploy workaround only if CPU has the bug. */
+	if (sysfs_streq(val, "off")) {
+		new_val = 0;
+	} else if (sysfs_streq(val, "force")) {
+		new_val = 1;
+	} else if (sysfs_streq(val, "auto")) {
+		new_val = get_nx_auto_mode();
+	} else if (sysfs_streq(val, "never")) {
+		new_val = 0;
+
+		mutex_lock(&kvm_lock);
+		if (!list_empty(&vm_list)) {
+			mutex_unlock(&kvm_lock);
+			return -EBUSY;
+		}
+		nx_hugepage_mitigation_hard_disabled = true;
+		mutex_unlock(&kvm_lock);
+	} else if (kstrtobool(val, &new_val) < 0) {
+		return -EINVAL;
+	}
+
+	__set_nx_huge_pages(new_val);
+
+	if (new_val != old_val) {
+		struct kvm *kvm;
+
+		mutex_lock(&kvm_lock);
+
+		list_for_each_entry(kvm, &vm_list, vm_list) {
+			mutex_lock(&kvm->slots_lock);
+			kvm_mmu_zap_all_fast(kvm);
+			mutex_unlock(&kvm->slots_lock);
+
+			kvm_wake_nx_recovery_thread(kvm);
+		}
+		mutex_unlock(&kvm_lock);
+	}
+
+	return 0;
+}
+
+/*
+ * nx_huge_pages needs to be resolved to true/false when kvm.ko is loaded, as
+ * its default value of -1 is technically undefined behavior for a boolean.
+ * Forward the module init call to SPTE code so that it too can handle module
+ * params that need to be resolved/snapshot.
+ */
+void __init kvm_mmu_x86_module_init(void)
+{
+	if (nx_huge_pages == -1)
+		__set_nx_huge_pages(get_nx_auto_mode());
+
+	/*
+	 * Snapshot userspace's desire to enable the TDP MMU. Whether or not the
+	 * TDP MMU is actually enabled is determined in kvm_configure_mmu()
+	 * when the vendor module is loaded.
+	 */
+	tdp_mmu_allowed = tdp_mmu_enabled;
+
+	kvm_mmu_spte_module_init();
+}
+
+/*
+ * The bulk of the MMU initialization is deferred until the vendor module is
+ * loaded as many of the masks/values may be modified by VMX or SVM, i.e. need
+ * to be reset when a potentially different vendor module is loaded.
+ */
+int kvm_mmu_vendor_module_init(void)
+{
+	int ret = -ENOMEM;
+
+	/*
+	 * MMU roles use union aliasing which is, generally speaking, an
+	 * undefined behavior. However, we supposedly know how compilers behave
+	 * and the current status quo is unlikely to change. Guardians below are
+	 * supposed to let us know if the assumption becomes false.
+	 */
+	BUILD_BUG_ON(sizeof(union kvm_mmu_page_role) != sizeof(u32));
+	BUILD_BUG_ON(sizeof(union kvm_mmu_extended_role) != sizeof(u32));
+	BUILD_BUG_ON(sizeof(union kvm_cpu_role) != sizeof(u64));
+
+	kvm_mmu_reset_all_pte_masks();
+
+	pte_list_desc_cache = KMEM_CACHE(pte_list_desc, SLAB_ACCOUNT);
+	if (!pte_list_desc_cache)
+		goto out;
+
+	mmu_page_header_cache = kmem_cache_create("kvm_mmu_page_header",
+						  sizeof(struct kvm_mmu_page),
+						  0, SLAB_ACCOUNT, NULL);
+	if (!mmu_page_header_cache)
+		goto out;
+
+	if (percpu_counter_init(&kvm_total_used_mmu_pages, 0, GFP_KERNEL))
+		goto out;
+
+	mmu_shrinker = shrinker_alloc(0, "x86-mmu");
+	if (!mmu_shrinker)
+		goto out_shrinker;
+
+	mmu_shrinker->count_objects = mmu_shrink_count;
+	mmu_shrinker->scan_objects = mmu_shrink_scan;
+	mmu_shrinker->seeks = DEFAULT_SEEKS * 10;
+
+	shrinker_register(mmu_shrinker);
+
+	return 0;
+
+out_shrinker:
+	percpu_counter_destroy(&kvm_total_used_mmu_pages);
+out:
+	mmu_destroy_caches();
+	return ret;
+}
+
+void kvm_mmu_destroy(struct kvm_vcpu *vcpu)
+{
+	kvm_mmu_unload(vcpu);
+	free_mmu_pages(&vcpu->arch.root_mmu);
+	free_mmu_pages(&vcpu->arch.guest_mmu);
+	mmu_free_memory_caches(vcpu);
+}
+
+void kvm_mmu_vendor_module_exit(void)
+{
+	mmu_destroy_caches();
+	percpu_counter_destroy(&kvm_total_used_mmu_pages);
+	shrinker_free(mmu_shrinker);
+}
+
+/*
+ * Calculate the effective recovery period, accounting for '0' meaning "let KVM
+ * select a halving time of 1 hour".  Returns true if recovery is enabled.
+ */
+static bool calc_nx_huge_pages_recovery_period(uint *period)
+{
+	/*
+	 * Use READ_ONCE to get the params, this may be called outside of the
+	 * param setters, e.g. by the kthread to compute its next timeout.
+	 */
+	bool enabled = READ_ONCE(nx_huge_pages);
+	uint ratio = READ_ONCE(nx_huge_pages_recovery_ratio);
+
+	if (!enabled || !ratio)
+		return false;
+
+	*period = READ_ONCE(nx_huge_pages_recovery_period_ms);
+	if (!*period) {
+		/* Make sure the period is not less than one second.  */
+		ratio = min(ratio, 3600u);
+		*period = 60 * 60 * 1000 / ratio;
+	}
+	return true;
+}
+
+static int set_nx_huge_pages_recovery_param(const char *val, const struct kernel_param *kp)
+{
+	bool was_recovery_enabled, is_recovery_enabled;
+	uint old_period, new_period;
+	int err;
+
+	if (nx_hugepage_mitigation_hard_disabled)
+		return -EPERM;
+
+	was_recovery_enabled = calc_nx_huge_pages_recovery_period(&old_period);
+
+	err = param_set_uint(val, kp);
+	if (err)
+		return err;
+
+	is_recovery_enabled = calc_nx_huge_pages_recovery_period(&new_period);
+
+	if (is_recovery_enabled &&
+	    (!was_recovery_enabled || old_period > new_period)) {
+		struct kvm *kvm;
+
+		mutex_lock(&kvm_lock);
+
+		list_for_each_entry(kvm, &vm_list, vm_list)
+			kvm_wake_nx_recovery_thread(kvm);
+
+		mutex_unlock(&kvm_lock);
+	}
+
+	return err;
+}
+
+static void kvm_recover_nx_huge_pages(struct kvm *kvm)
+{
+	unsigned long nx_lpage_splits = kvm->stat.nx_lpage_splits;
+	struct kvm_memory_slot *slot;
+	int rcu_idx;
+	struct kvm_mmu_page *sp;
+	unsigned int ratio;
+	LIST_HEAD(invalid_list);
+	bool flush = false;
+	ulong to_zap;
+
+	rcu_idx = srcu_read_lock(&kvm->srcu);
+	write_lock(&kvm->mmu_lock);
+
+	/*
+	 * Zapping TDP MMU shadow pages, including the remote TLB flush, must
+	 * be done under RCU protection, because the pages are freed via RCU
+	 * callback.
+	 */
+	rcu_read_lock();
+
+	ratio = READ_ONCE(nx_huge_pages_recovery_ratio);
+	to_zap = ratio ? DIV_ROUND_UP(nx_lpage_splits, ratio) : 0;
+	for ( ; to_zap; --to_zap) {
+		if (list_empty(&kvm->arch.possible_nx_huge_pages))
+			break;
+
+		/*
+		 * We use a separate list instead of just using active_mmu_pages
+		 * because the number of shadow pages that be replaced with an
+		 * NX huge page is expected to be relatively small compared to
+		 * the total number of shadow pages.  And because the TDP MMU
+		 * doesn't use active_mmu_pages.
+		 */
+		sp = list_first_entry(&kvm->arch.possible_nx_huge_pages,
+				      struct kvm_mmu_page,
+				      possible_nx_huge_page_link);
+		WARN_ON_ONCE(!sp->nx_huge_page_disallowed);
+		WARN_ON_ONCE(!sp->role.direct);
+
+		/*
+		 * Unaccount and do not attempt to recover any NX Huge Pages
+		 * that are being dirty tracked, as they would just be faulted
+		 * back in as 4KiB pages. The NX Huge Pages in this slot will be
+		 * recovered, along with all the other huge pages in the slot,
+		 * when dirty logging is disabled.
+		 *
+		 * Since gfn_to_memslot() is relatively expensive, it helps to
+		 * skip it if it the test cannot possibly return true.  On the
+		 * other hand, if any memslot has logging enabled, chances are
+		 * good that all of them do, in which case unaccount_nx_huge_page()
+		 * is much cheaper than zapping the page.
+		 *
+		 * If a memslot update is in progress, reading an incorrect value
+		 * of kvm->nr_memslots_dirty_logging is not a problem: if it is
+		 * becoming zero, gfn_to_memslot() will be done unnecessarily; if
+		 * it is becoming nonzero, the page will be zapped unnecessarily.
+		 * Either way, this only affects efficiency in racy situations,
+		 * and not correctness.
+		 */
+		slot = NULL;
+		if (atomic_read(&kvm->nr_memslots_dirty_logging)) {
+			struct kvm_memslots *slots;
+
+			slots = kvm_memslots_for_spte_role(kvm, sp->role);
+			slot = __gfn_to_memslot(slots, sp->gfn);
+			WARN_ON_ONCE(!slot);
+		}
+
+		if (slot && kvm_slot_dirty_track_enabled(slot))
+			unaccount_nx_huge_page(kvm, sp);
+		else if (is_tdp_mmu_page(sp))
+			flush |= kvm_tdp_mmu_zap_sp(kvm, sp);
+		else
+			kvm_mmu_prepare_zap_page(kvm, sp, &invalid_list);
+		WARN_ON_ONCE(sp->nx_huge_page_disallowed);
+
+		if (need_resched() || rwlock_needbreak(&kvm->mmu_lock)) {
+			kvm_mmu_remote_flush_or_zap(kvm, &invalid_list, flush);
+			rcu_read_unlock();
+
+			cond_resched_rwlock_write(&kvm->mmu_lock);
+			flush = false;
+
+			rcu_read_lock();
+		}
+	}
+	kvm_mmu_remote_flush_or_zap(kvm, &invalid_list, flush);
+
+	rcu_read_unlock();
+
+	write_unlock(&kvm->mmu_lock);
+	srcu_read_unlock(&kvm->srcu, rcu_idx);
+}
+
+static void kvm_nx_huge_page_recovery_worker_kill(void *data)
+{
+}
+
+static bool kvm_nx_huge_page_recovery_worker(void *data)
+{
+	struct kvm *kvm = data;
+	bool enabled;
+	uint period;
+	long remaining_time;
+
+	enabled = calc_nx_huge_pages_recovery_period(&period);
+	if (!enabled)
+		return false;
+
+	remaining_time = kvm->arch.nx_huge_page_last + msecs_to_jiffies(period)
+		- get_jiffies_64();
+	if (remaining_time > 0) {
+		schedule_timeout(remaining_time);
+		/* check for signals and come back */
+		return true;
+	}
+
+	__set_current_state(TASK_RUNNING);
+	kvm_recover_nx_huge_pages(kvm);
+	kvm->arch.nx_huge_page_last = get_jiffies_64();
+	return true;
+}
+
+static void kvm_mmu_start_lpage_recovery(struct once *once)
+{
+	struct kvm_arch *ka = container_of(once, struct kvm_arch, nx_once);
+	struct kvm *kvm = container_of(ka, struct kvm, arch);
+	struct vhost_task *nx_thread;
+
+	kvm->arch.nx_huge_page_last = get_jiffies_64();
+	nx_thread = vhost_task_create(kvm_nx_huge_page_recovery_worker,
+				      kvm_nx_huge_page_recovery_worker_kill,
+				      kvm, "kvm-nx-lpage-recovery");
+
+	if (IS_ERR(nx_thread))
+		return;
+
+	vhost_task_start(nx_thread);
+
+	/* Make the task visible only once it is fully started. */
+	WRITE_ONCE(kvm->arch.nx_huge_page_recovery_thread, nx_thread);
+}
+
+int kvm_mmu_post_init_vm(struct kvm *kvm)
+{
+	if (nx_hugepage_mitigation_hard_disabled)
+		return 0;
+
+	call_once(&kvm->arch.nx_once, kvm_mmu_start_lpage_recovery);
+	if (!kvm->arch.nx_huge_page_recovery_thread)
+		return -ENOMEM;
+	return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 void kvm_mmu_pre_destroy_vm(struct kvm *kvm)

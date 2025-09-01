@@ -409,6 +409,7 @@ struct ath11k_vif {
 	bool do_not_send_tmpl;
 	struct ath11k_arp_ns_offload arp_ns_offload;
 	struct ath11k_rekey_data rekey_data;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32 num_stations;
 	bool reinstall_group_keys;
 
@@ -752,6 +753,347 @@ struct ath11k {
 	struct work_struct channel_update_work;
 	/* protected with data_lock */
 	struct list_head channel_update_queue;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	struct ath11k_reg_tpc_power_info reg_tpc_info;
+
+	/* Must be last - ends in a flexible-array member.
+	 *
+	 * FIXME: Driver should not copy struct ieee80211_chanctx_conf,
+	 * especially because it has a flexible array. Find a better way.
+	 */
+	struct ieee80211_chanctx_conf chanctx;
+};
+
+struct ath11k_vif_iter {
+	u32 vdev_id;
+	struct ath11k_vif *arvif;
+};
+
+struct ath11k_rx_peer_stats {
+	u64 num_msdu;
+	u64 num_mpdu_fcs_ok;
+	u64 num_mpdu_fcs_err;
+	u64 tcp_msdu_count;
+	u64 udp_msdu_count;
+	u64 other_msdu_count;
+	u64 ampdu_msdu_count;
+	u64 non_ampdu_msdu_count;
+	u64 stbc_count;
+	u64 beamformed_count;
+	u64 mcs_count[HAL_RX_MAX_MCS + 1];
+	u64 nss_count[HAL_RX_MAX_NSS];
+	u64 bw_count[HAL_RX_BW_MAX];
+	u64 gi_count[HAL_RX_GI_MAX];
+	u64 coding_count[HAL_RX_SU_MU_CODING_MAX];
+	u64 tid_count[IEEE80211_NUM_TIDS + 1];
+	u64 pream_cnt[HAL_RX_PREAMBLE_MAX];
+	u64 reception_type[HAL_RX_RECEPTION_TYPE_MAX];
+	u64 rx_duration;
+	u64 dcm_count;
+	u64 ru_alloc_cnt[HAL_RX_RU_ALLOC_TYPE_MAX];
+};
+
+#define ATH11K_HE_MCS_NUM       12
+#define ATH11K_VHT_MCS_NUM      10
+#define ATH11K_BW_NUM           4
+#define ATH11K_NSS_NUM          4
+#define ATH11K_LEGACY_NUM       12
+#define ATH11K_GI_NUM           4
+#define ATH11K_HT_MCS_NUM       32
+
+enum ath11k_pkt_rx_err {
+	ATH11K_PKT_RX_ERR_FCS,
+	ATH11K_PKT_RX_ERR_TKIP,
+	ATH11K_PKT_RX_ERR_CRYPT,
+	ATH11K_PKT_RX_ERR_PEER_IDX_INVAL,
+	ATH11K_PKT_RX_ERR_MAX,
+};
+
+enum ath11k_ampdu_subfrm_num {
+	ATH11K_AMPDU_SUBFRM_NUM_10,
+	ATH11K_AMPDU_SUBFRM_NUM_20,
+	ATH11K_AMPDU_SUBFRM_NUM_30,
+	ATH11K_AMPDU_SUBFRM_NUM_40,
+	ATH11K_AMPDU_SUBFRM_NUM_50,
+	ATH11K_AMPDU_SUBFRM_NUM_60,
+	ATH11K_AMPDU_SUBFRM_NUM_MORE,
+	ATH11K_AMPDU_SUBFRM_NUM_MAX,
+};
+
+enum ath11k_amsdu_subfrm_num {
+	ATH11K_AMSDU_SUBFRM_NUM_1,
+	ATH11K_AMSDU_SUBFRM_NUM_2,
+	ATH11K_AMSDU_SUBFRM_NUM_3,
+	ATH11K_AMSDU_SUBFRM_NUM_4,
+	ATH11K_AMSDU_SUBFRM_NUM_MORE,
+	ATH11K_AMSDU_SUBFRM_NUM_MAX,
+};
+
+enum ath11k_counter_type {
+	ATH11K_COUNTER_TYPE_BYTES,
+	ATH11K_COUNTER_TYPE_PKTS,
+	ATH11K_COUNTER_TYPE_MAX,
+};
+
+enum ath11k_stats_type {
+	ATH11K_STATS_TYPE_SUCC,
+	ATH11K_STATS_TYPE_FAIL,
+	ATH11K_STATS_TYPE_RETRY,
+	ATH11K_STATS_TYPE_AMPDU,
+	ATH11K_STATS_TYPE_MAX,
+};
+
+struct ath11k_htt_data_stats {
+	u64 legacy[ATH11K_COUNTER_TYPE_MAX][ATH11K_LEGACY_NUM];
+	u64 ht[ATH11K_COUNTER_TYPE_MAX][ATH11K_HT_MCS_NUM];
+	u64 vht[ATH11K_COUNTER_TYPE_MAX][ATH11K_VHT_MCS_NUM];
+	u64 he[ATH11K_COUNTER_TYPE_MAX][ATH11K_HE_MCS_NUM];
+	u64 bw[ATH11K_COUNTER_TYPE_MAX][ATH11K_BW_NUM];
+	u64 nss[ATH11K_COUNTER_TYPE_MAX][ATH11K_NSS_NUM];
+	u64 gi[ATH11K_COUNTER_TYPE_MAX][ATH11K_GI_NUM];
+};
+
+struct ath11k_htt_tx_stats {
+	struct ath11k_htt_data_stats stats[ATH11K_STATS_TYPE_MAX];
+	u64 tx_duration;
+	u64 ba_fails;
+	u64 ack_fails;
+};
+
+struct ath11k_per_ppdu_tx_stats {
+	u16 succ_pkts;
+	u16 failed_pkts;
+	u16 retry_pkts;
+	u32 succ_bytes;
+	u32 failed_bytes;
+	u32 retry_bytes;
+};
+
+DECLARE_EWMA(avg_rssi, 10, 8)
+
+struct ath11k_sta {
+	struct ath11k_vif *arvif;
+
+	/* the following are protected by ar->data_lock */
+	u32 changed; /* IEEE80211_RC_* */
+	u32 bw;
+	u32 nss;
+	u32 smps;
+	enum hal_pn_type pn_type;
+
+	struct work_struct update_wk;
+	struct work_struct set_4addr_wk;
+	struct rate_info txrate;
+	u32 peer_nss;
+	struct rate_info last_txrate;
+	u64 rx_duration;
+	u64 tx_duration;
+	u8 rssi_comb;
+	struct ewma_avg_rssi avg_rssi;
+	s8 rssi_beacon;
+	s8 chain_signal[IEEE80211_MAX_CHAINS];
+	struct ath11k_htt_tx_stats *tx_stats;
+	struct ath11k_rx_peer_stats *rx_stats;
+
+#ifdef CONFIG_MAC80211_DEBUGFS
+	/* protected by conf_mutex */
+	bool aggr_mode;
+#endif
+
+	bool use_4addr_set;
+	u16 tcl_metadata;
+
+	/* Protected with ar->data_lock */
+	enum ath11k_wmi_peer_ps_state peer_ps_state;
+	u64 ps_start_time;
+	u64 ps_start_jiffies;
+	u64 ps_total_duration;
+	bool peer_current_ps_valid;
+
+	u32 bw_prev;
+};
+
+#define ATH11K_MIN_5G_FREQ 4150
+#define ATH11K_MIN_6G_FREQ 5925
+#define ATH11K_MAX_6G_FREQ 7115
+#define ATH11K_NUM_CHANS 102
+#define ATH11K_MAX_5G_CHAN 177
+
+enum ath11k_state {
+	ATH11K_STATE_OFF,
+	ATH11K_STATE_ON,
+	ATH11K_STATE_RESTARTING,
+	ATH11K_STATE_RESTARTED,
+	ATH11K_STATE_WEDGED,
+	ATH11K_STATE_FTM,
+	/* Add other states as required */
+};
+
+/* Antenna noise floor */
+#define ATH11K_DEFAULT_NOISE_FLOOR -95
+
+#define ATH11K_INVALID_RSSI_FULL -1
+
+#define ATH11K_INVALID_RSSI_EMPTY -128
+
+struct ath11k_fw_stats {
+	struct dentry *debugfs_fwstats;
+	u32 pdev_id;
+	u32 stats_id;
+	struct list_head pdevs;
+	struct list_head vdevs;
+	struct list_head bcn;
+	u32 num_vdev_recvd;
+	u32 num_bcn_recvd;
+};
+
+struct ath11k_dbg_htt_stats {
+	u8 type;
+	u8 reset;
+	struct debug_htt_stats_req *stats_req;
+	/* protects shared stats req buffer */
+	spinlock_t lock;
+};
+
+#define MAX_MODULE_ID_BITMAP_WORDS	16
+
+struct ath11k_debug {
+	struct dentry *debugfs_pdev;
+	struct ath11k_dbg_htt_stats htt_stats;
+	u32 extd_tx_stats;
+	u32 extd_rx_stats;
+	u32 pktlog_filter;
+	u32 pktlog_mode;
+	u32 pktlog_peer_valid;
+	u8 pktlog_peer_addr[ETH_ALEN];
+	u32 rx_filter;
+	u32 mem_offset;
+	u32 module_id_bitmap[MAX_MODULE_ID_BITMAP_WORDS];
+	struct ath11k_debug_dbr *dbr_debug[WMI_DIRECT_BUF_MAX];
+};
+
+struct ath11k_per_peer_tx_stats {
+	u32 succ_bytes;
+	u32 retry_bytes;
+	u32 failed_bytes;
+	u16 succ_pkts;
+	u16 retry_pkts;
+	u16 failed_pkts;
+	u32 duration;
+	u8 ba_fails;
+	bool is_ampdu;
+};
+
+#define ATH11K_FLUSH_TIMEOUT (5 * HZ)
+#define ATH11K_VDEV_DELETE_TIMEOUT_HZ (5 * HZ)
+
+struct ath11k {
+	struct ath11k_base *ab;
+	struct ath11k_pdev *pdev;
+	struct ieee80211_hw *hw;
+	struct ath11k_pdev_wmi *wmi;
+	struct ath11k_pdev_dp dp;
+	u8 mac_addr[ETH_ALEN];
+	struct ath11k_he ar_he;
+	enum ath11k_state state;
+	bool supports_6ghz;
+	struct {
+		struct completion started;
+		struct completion completed;
+		struct completion on_channel;
+		struct delayed_work timeout;
+		enum ath11k_scan_state state;
+		bool is_roc;
+		int vdev_id;
+		int roc_freq;
+		bool roc_notify;
+	} scan;
+
+	struct {
+		struct ieee80211_supported_band sbands[NUM_NL80211_BANDS];
+		struct ieee80211_sband_iftype_data
+			iftype[NUM_NL80211_BANDS][NUM_NL80211_IFTYPES];
+	} mac;
+
+	unsigned long dev_flags;
+	unsigned int filter_flags;
+	unsigned long monitor_flags;
+	u32 min_tx_power;
+	u32 max_tx_power;
+	u32 txpower_limit_2g;
+	u32 txpower_limit_5g;
+	u32 txpower_scale;
+	u32 power_scale;
+	u32 chan_tx_pwr;
+	u32 num_stations;
+	u32 max_num_stations;
+	/* To synchronize concurrent synchronous mac80211 callback operations,
+	 * concurrent debugfs configuration and concurrent FW statistics events.
+	 */
+	struct mutex conf_mutex;
+	/* protects the radio specific data like debug stats, ppdu_stats_info stats,
+	 * vdev_stop_status info, scan data, ath11k_sta info, ath11k_vif info,
+	 * channel context data, survey info, test mode data.
+	 */
+	spinlock_t data_lock;
+
+	struct list_head arvifs;
+	/* should never be NULL; needed for regular htt rx */
+	struct ieee80211_channel *rx_channel;
+
+	/* valid during scan; needed for mgmt rx during scan */
+	struct ieee80211_channel *scan_channel;
+
+	u8 cfg_tx_chainmask;
+	u8 cfg_rx_chainmask;
+	u8 num_rx_chains;
+	u8 num_tx_chains;
+	/* pdev_idx starts from 0 whereas pdev->pdev_id starts with 1 */
+	u8 pdev_idx;
+	u8 lmac_id;
+
+	struct completion peer_assoc_done;
+	struct completion peer_delete_done;
+
+	int install_key_status;
+	struct completion install_key_done;
+
+	int last_wmi_vdev_start_status;
+	struct completion vdev_setup_done;
+	struct completion vdev_delete_done;
+
+	int num_peers;
+	int max_num_peers;
+	u32 num_started_vdevs;
+	u32 num_created_vdevs;
+	unsigned long long allocated_vdev_map;
+
+	struct idr txmgmt_idr;
+	/* protects txmgmt_idr data */
+	spinlock_t txmgmt_idr_lock;
+	atomic_t num_pending_mgmt_tx;
+	wait_queue_head_t txmgmt_empty_waitq;
+
+	/* cycle count is reported twice for each visited channel during scan.
+	 * access protected by data_lock
+	 */
+	u32 survey_last_rx_clear_count;
+	u32 survey_last_cycle_count;
+
+	/* Channel info events are expected to come in pairs without and with
+	 * COMPLETE flag set respectively for each channel visit during scan.
+	 *
+	 * However there are deviations from this rule. This flag is used to
+	 * avoid reporting garbage data.
+	 */
+	bool ch_info_can_report_survey;
+	struct survey_info survey[ATH11K_NUM_CHANS];
+	struct completion bss_survey_done;
+
+	struct work_struct regd_update_work;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	struct work_struct wmi_mgmt_tx_work;
 	struct sk_buff_head wmi_mgmt_tx_queue;

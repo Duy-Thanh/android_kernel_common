@@ -2063,8 +2063,14 @@ static int edma_setup_from_hw(struct device *dev, struct edma_soc_info *pdata,
 	 * priority. So Q0 is the highest priority queue and the last queue has
 	 * the lowest priority.
 	 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	queue_priority_map = devm_kcalloc(dev, ecc->num_tc + 1,
 					  sizeof(*queue_priority_map), GFP_KERNEL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	queue_priority_map = devm_kcalloc(dev, ecc->num_tc + 1, sizeof(s8),
+					  GFP_KERNEL);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (!queue_priority_map)
 		return -ENOMEM;
 

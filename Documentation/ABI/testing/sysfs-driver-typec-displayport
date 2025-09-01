@@ -62,6 +62,7 @@ Description:
 			     by VESA DisplayPort Alt Mode on USB Type-C Standard.
 			- 0 when HPD’s logical state is low (HPD_Low) as defined by
 			     VESA DisplayPort Alt Mode on USB Type-C Standard.
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 What:		/sys/bus/typec/devices/.../displayport/irq_hpd
 Date:		June 2025
@@ -72,3 +73,6 @@ Description:
 		and is asserted when an IRQ_HPD has been issued since the last Status
 		Update. This is a read only node that returns the number of IRQ events
 		raised in the driver's lifetime.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)

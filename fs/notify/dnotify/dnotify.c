@@ -309,6 +309,7 @@ int fcntl_dirnotify(int fd, struct file *filp, unsigned int arg)
 		goto out_err;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	error = file_f_owner_allocate(filp);
 	if (error)
 		goto out_err;
@@ -319,6 +320,19 @@ int fcntl_dirnotify(int fd, struct file *filp, unsigned int arg)
 		error = -ENOMEM;
 		goto out_err;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* new fsnotify mark, we expect most fcntl calls to add a new mark */
+	new_dn_mark = kmem_cache_alloc(dnotify_mark_cache, GFP_KERNEL);
+	if (!new_dn_mark) {
+		error = -ENOMEM;
+		goto out_err;
+	}
+
+	error = file_f_owner_allocate(filp);
+	if (error)
+		goto out_err;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* set up the new_fsn_mark and new_dn_mark */
 	new_fsn_mark = &new_dn_mark->fsn_mark;

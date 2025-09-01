@@ -1623,6 +1623,7 @@ static void __usb_hcd_giveback_urb(struct urb *urb)
 	struct usb_hcd *hcd = bus_to_hcd(urb->dev->bus);
 	struct usb_anchor *anchor = urb->anchor;
 	int status = urb->unlinked;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	urb->hcpriv = NULL;
 	if (unlikely((urb->transfer_flags & URB_SHORT_NOT_OK) &&
@@ -2224,6 +2225,606 @@ int ehset_single_step_set_feature(struct usb_hcd *hcd, int port)
 		goto out1;
 	}
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	unsigned long flags;
+
+	urb->hcpriv = NULL;
+	if (unlikely((urb->transfer_flags & URB_SHORT_NOT_OK) &&
+	    urb->actual_length < urb->transfer_buffer_length &&
+	    !status))
+		status = -EREMOTEIO;
+
+	unmap_urb_for_dma(hcd, urb);
+	usbmon_urb_complete(&hcd->self, urb, status);
+	usb_anchor_suspend_wakeups(anchor);
+	usb_unanchor_urb(urb);
+	if (likely(status == 0))
+		usb_led_activity(USB_LED_EVENT_HOST);
+
+	/* pass ownership to the completion handler */
+	urb->status = status;
+	/*
+	 * Only collect coverage in the softirq context and disable interrupts
+	 * to avoid scenarios with nested remote coverage collection sections
+	 * that KCOV does not support.
+	 * See the comment next to kcov_remote_start_usb_softirq() for details.
+	 */
+	flags = kcov_remote_start_usb_softirq((u64)urb->dev->bus->busnum);
+	urb->complete(urb);
+	kcov_remote_stop_softirq(flags);
+
+	usb_anchor_resume_wakeups(anchor);
+	atomic_dec(&urb->use_count);
+	/*
+	 * Order the write of urb->use_count above before the read
+	 * of urb->reject below.  Pairs with the memory barriers in
+	 * usb_kill_urb() and usb_poison_urb().
+	 */
+	smp_mb__after_atomic();
+
+	if (unlikely(atomic_read(&urb->reject)))
+		wake_up(&usb_kill_urb_queue);
+	usb_put_urb(urb);
+}
+
+static void usb_giveback_urb_bh(struct work_struct *work)
+{
+	struct giveback_urb_bh *bh =
+		container_of(work, struct giveback_urb_bh, bh);
+	struct list_head local_list;
+
+	spin_lock_irq(&bh->lock);
+	bh->running = true;
+	list_replace_init(&bh->head, &local_list);
+	spin_unlock_irq(&bh->lock);
+
+	while (!list_empty(&local_list)) {
+		struct urb *urb;
+
+		urb = list_entry(local_list.next, struct urb, urb_list);
+		list_del_init(&urb->urb_list);
+		bh->completing_ep = urb->ep;
+		__usb_hcd_giveback_urb(urb);
+		bh->completing_ep = NULL;
+	}
+
+	/*
+	 * giveback new URBs next time to prevent this function
+	 * from not exiting for a long time.
+	 */
+	spin_lock_irq(&bh->lock);
+	if (!list_empty(&bh->head)) {
+		if (bh->high_prio)
+			queue_work(system_bh_highpri_wq, &bh->bh);
+		else
+			queue_work(system_bh_wq, &bh->bh);
+	}
+	bh->running = false;
+	spin_unlock_irq(&bh->lock);
+}
+
+/**
+ * usb_hcd_giveback_urb - return URB from HCD to device driver
+ * @hcd: host controller returning the URB
+ * @urb: urb being returned to the USB device driver.
+ * @status: completion status code for the URB.
+ *
+ * Context: atomic. The completion callback is invoked in caller's context.
+ * For HCDs with HCD_BH flag set, the completion callback is invoked in BH
+ * context (except for URBs submitted to the root hub which always complete in
+ * caller's context).
+ *
+ * This hands the URB from HCD to its USB device driver, using its
+ * completion function.  The HCD has freed all per-urb resources
+ * (and is done using urb->hcpriv).  It also released all HCD locks;
+ * the device driver won't cause problems if it frees, modifies,
+ * or resubmits this URB.
+ *
+ * If @urb was unlinked, the value of @status will be overridden by
+ * @urb->unlinked.  Erroneous short transfers are detected in case
+ * the HCD hasn't checked for them.
+ */
+void usb_hcd_giveback_urb(struct usb_hcd *hcd, struct urb *urb, int status)
+{
+	struct giveback_urb_bh *bh;
+	bool running;
+
+	/* pass status to BH via unlinked */
+	if (likely(!urb->unlinked))
+		urb->unlinked = status;
+
+	if (!hcd_giveback_urb_in_bh(hcd) && !is_root_hub(urb->dev)) {
+		__usb_hcd_giveback_urb(urb);
+		return;
+	}
+
+	if (usb_pipeisoc(urb->pipe) || usb_pipeint(urb->pipe))
+		bh = &hcd->high_prio_bh;
+	else
+		bh = &hcd->low_prio_bh;
+
+	spin_lock(&bh->lock);
+	list_add_tail(&urb->urb_list, &bh->head);
+	running = bh->running;
+	spin_unlock(&bh->lock);
+
+	if (running)
+		;
+	else if (bh->high_prio)
+		queue_work(system_bh_highpri_wq, &bh->bh);
+	else
+		queue_work(system_bh_wq, &bh->bh);
+}
+EXPORT_SYMBOL_GPL(usb_hcd_giveback_urb);
+
+/*-------------------------------------------------------------------------*/
+
+/* Cancel all URBs pending on this endpoint and wait for the endpoint's
+ * queue to drain completely.  The caller must first insure that no more
+ * URBs can be submitted for this endpoint.
+ */
+void usb_hcd_flush_endpoint(struct usb_device *udev,
+		struct usb_host_endpoint *ep)
+{
+	struct usb_hcd		*hcd;
+	struct urb		*urb;
+
+	if (!ep)
+		return;
+	might_sleep();
+	hcd = bus_to_hcd(udev->bus);
+
+	/* No more submits can occur */
+	spin_lock_irq(&hcd_urb_list_lock);
+rescan:
+	list_for_each_entry_reverse(urb, &ep->urb_list, urb_list) {
+		int	is_in;
+
+		if (urb->unlinked)
+			continue;
+		usb_get_urb (urb);
+		is_in = usb_urb_dir_in(urb);
+		spin_unlock(&hcd_urb_list_lock);
+
+		/* kick hcd */
+		unlink1(hcd, urb, -ESHUTDOWN);
+		dev_dbg (hcd->self.controller,
+			"shutdown urb %pK ep%d%s-%s\n",
+			urb, usb_endpoint_num(&ep->desc),
+			is_in ? "in" : "out",
+			usb_ep_type_string(usb_endpoint_type(&ep->desc)));
+		usb_put_urb (urb);
+
+		/* list contents may have changed */
+		spin_lock(&hcd_urb_list_lock);
+		goto rescan;
+	}
+	spin_unlock_irq(&hcd_urb_list_lock);
+
+	/* Wait until the endpoint queue is completely empty */
+	while (!list_empty (&ep->urb_list)) {
+		spin_lock_irq(&hcd_urb_list_lock);
+
+		/* The list may have changed while we acquired the spinlock */
+		urb = NULL;
+		if (!list_empty (&ep->urb_list)) {
+			urb = list_entry (ep->urb_list.prev, struct urb,
+					urb_list);
+			usb_get_urb (urb);
+		}
+		spin_unlock_irq(&hcd_urb_list_lock);
+
+		if (urb) {
+			usb_kill_urb (urb);
+			usb_put_urb (urb);
+		}
+	}
+}
+
+/**
+ * usb_hcd_alloc_bandwidth - check whether a new bandwidth setting exceeds
+ *				the bus bandwidth
+ * @udev: target &usb_device
+ * @new_config: new configuration to install
+ * @cur_alt: the current alternate interface setting
+ * @new_alt: alternate interface setting that is being installed
+ *
+ * To change configurations, pass in the new configuration in new_config,
+ * and pass NULL for cur_alt and new_alt.
+ *
+ * To reset a device's configuration (put the device in the ADDRESSED state),
+ * pass in NULL for new_config, cur_alt, and new_alt.
+ *
+ * To change alternate interface settings, pass in NULL for new_config,
+ * pass in the current alternate interface setting in cur_alt,
+ * and pass in the new alternate interface setting in new_alt.
+ *
+ * Return: An error if the requested bandwidth change exceeds the
+ * bus bandwidth or host controller internal resources.
+ */
+int usb_hcd_alloc_bandwidth(struct usb_device *udev,
+		struct usb_host_config *new_config,
+		struct usb_host_interface *cur_alt,
+		struct usb_host_interface *new_alt)
+{
+	int num_intfs, i, j;
+	struct usb_host_interface *alt = NULL;
+	int ret = 0;
+	struct usb_hcd *hcd;
+	struct usb_host_endpoint *ep;
+
+	hcd = bus_to_hcd(udev->bus);
+	if (!hcd->driver->check_bandwidth)
+		return 0;
+
+	/* Configuration is being removed - set configuration 0 */
+	if (!new_config && !cur_alt) {
+		for (i = 1; i < 16; ++i) {
+			ep = udev->ep_out[i];
+			if (ep)
+				hcd->driver->drop_endpoint(hcd, udev, ep);
+			ep = udev->ep_in[i];
+			if (ep)
+				hcd->driver->drop_endpoint(hcd, udev, ep);
+		}
+		hcd->driver->check_bandwidth(hcd, udev);
+		return 0;
+	}
+	/* Check if the HCD says there's enough bandwidth.  Enable all endpoints
+	 * each interface's alt setting 0 and ask the HCD to check the bandwidth
+	 * of the bus.  There will always be bandwidth for endpoint 0, so it's
+	 * ok to exclude it.
+	 */
+	if (new_config) {
+		num_intfs = new_config->desc.bNumInterfaces;
+		/* Remove endpoints (except endpoint 0, which is always on the
+		 * schedule) from the old config from the schedule
+		 */
+		for (i = 1; i < 16; ++i) {
+			ep = udev->ep_out[i];
+			if (ep) {
+				ret = hcd->driver->drop_endpoint(hcd, udev, ep);
+				if (ret < 0)
+					goto reset;
+			}
+			ep = udev->ep_in[i];
+			if (ep) {
+				ret = hcd->driver->drop_endpoint(hcd, udev, ep);
+				if (ret < 0)
+					goto reset;
+			}
+		}
+		for (i = 0; i < num_intfs; ++i) {
+			struct usb_host_interface *first_alt;
+			int iface_num;
+
+			first_alt = &new_config->intf_cache[i]->altsetting[0];
+			iface_num = first_alt->desc.bInterfaceNumber;
+			/* Set up endpoints for alternate interface setting 0 */
+			alt = usb_find_alt_setting(new_config, iface_num, 0);
+			if (!alt)
+				/* No alt setting 0? Pick the first setting. */
+				alt = first_alt;
+
+			for (j = 0; j < alt->desc.bNumEndpoints; j++) {
+				ret = hcd->driver->add_endpoint(hcd, udev, &alt->endpoint[j]);
+				if (ret < 0)
+					goto reset;
+			}
+		}
+	}
+	if (cur_alt && new_alt) {
+		struct usb_interface *iface = usb_ifnum_to_if(udev,
+				cur_alt->desc.bInterfaceNumber);
+
+		if (!iface)
+			return -EINVAL;
+		if (iface->resetting_device) {
+			/*
+			 * The USB core just reset the device, so the xHCI host
+			 * and the device will think alt setting 0 is installed.
+			 * However, the USB core will pass in the alternate
+			 * setting installed before the reset as cur_alt.  Dig
+			 * out the alternate setting 0 structure, or the first
+			 * alternate setting if a broken device doesn't have alt
+			 * setting 0.
+			 */
+			cur_alt = usb_altnum_to_altsetting(iface, 0);
+			if (!cur_alt)
+				cur_alt = &iface->altsetting[0];
+		}
+
+		/* Drop all the endpoints in the current alt setting */
+		for (i = 0; i < cur_alt->desc.bNumEndpoints; i++) {
+			ret = hcd->driver->drop_endpoint(hcd, udev,
+					&cur_alt->endpoint[i]);
+			if (ret < 0)
+				goto reset;
+		}
+		/* Add all the endpoints in the new alt setting */
+		for (i = 0; i < new_alt->desc.bNumEndpoints; i++) {
+			ret = hcd->driver->add_endpoint(hcd, udev,
+					&new_alt->endpoint[i]);
+			if (ret < 0)
+				goto reset;
+		}
+	}
+	ret = hcd->driver->check_bandwidth(hcd, udev);
+reset:
+	if (ret < 0)
+		hcd->driver->reset_bandwidth(hcd, udev);
+	return ret;
+}
+
+/* Disables the endpoint: synchronizes with the hcd to make sure all
+ * endpoint state is gone from hardware.  usb_hcd_flush_endpoint() must
+ * have been called previously.  Use for set_configuration, set_interface,
+ * driver removal, physical disconnect.
+ *
+ * example:  a qh stored in ep->hcpriv, holding state related to endpoint
+ * type, maxpacket size, toggle, halt status, and scheduling.
+ */
+void usb_hcd_disable_endpoint(struct usb_device *udev,
+		struct usb_host_endpoint *ep)
+{
+	struct usb_hcd		*hcd;
+
+	might_sleep();
+	hcd = bus_to_hcd(udev->bus);
+	if (hcd->driver->endpoint_disable)
+		hcd->driver->endpoint_disable(hcd, ep);
+}
+
+/**
+ * usb_hcd_reset_endpoint - reset host endpoint state
+ * @udev: USB device.
+ * @ep:   the endpoint to reset.
+ *
+ * Resets any host endpoint state such as the toggle bit, sequence
+ * number and current window.
+ */
+void usb_hcd_reset_endpoint(struct usb_device *udev,
+			    struct usb_host_endpoint *ep)
+{
+	struct usb_hcd *hcd = bus_to_hcd(udev->bus);
+
+	if (hcd->driver->endpoint_reset)
+		hcd->driver->endpoint_reset(hcd, ep);
+	else {
+		int epnum = usb_endpoint_num(&ep->desc);
+		int is_out = usb_endpoint_dir_out(&ep->desc);
+		int is_control = usb_endpoint_xfer_control(&ep->desc);
+
+		usb_settoggle(udev, epnum, is_out, 0);
+		if (is_control)
+			usb_settoggle(udev, epnum, !is_out, 0);
+	}
+}
+
+/**
+ * usb_alloc_streams - allocate bulk endpoint stream IDs.
+ * @interface:		alternate setting that includes all endpoints.
+ * @eps:		array of endpoints that need streams.
+ * @num_eps:		number of endpoints in the array.
+ * @num_streams:	number of streams to allocate.
+ * @mem_flags:		flags hcd should use to allocate memory.
+ *
+ * Sets up a group of bulk endpoints to have @num_streams stream IDs available.
+ * Drivers may queue multiple transfers to different stream IDs, which may
+ * complete in a different order than they were queued.
+ *
+ * Return: On success, the number of allocated streams. On failure, a negative
+ * error code.
+ */
+int usb_alloc_streams(struct usb_interface *interface,
+		struct usb_host_endpoint **eps, unsigned int num_eps,
+		unsigned int num_streams, gfp_t mem_flags)
+{
+	struct usb_hcd *hcd;
+	struct usb_device *dev;
+	int i, ret;
+
+	dev = interface_to_usbdev(interface);
+	hcd = bus_to_hcd(dev->bus);
+	if (!hcd->driver->alloc_streams || !hcd->driver->free_streams)
+		return -EINVAL;
+	if (dev->speed < USB_SPEED_SUPER)
+		return -EINVAL;
+	if (dev->state < USB_STATE_CONFIGURED)
+		return -ENODEV;
+
+	for (i = 0; i < num_eps; i++) {
+		/* Streams only apply to bulk endpoints. */
+		if (!usb_endpoint_xfer_bulk(&eps[i]->desc))
+			return -EINVAL;
+		/* Re-alloc is not allowed */
+		if (eps[i]->streams)
+			return -EINVAL;
+	}
+
+	ret = hcd->driver->alloc_streams(hcd, dev, eps, num_eps,
+			num_streams, mem_flags);
+	if (ret < 0)
+		return ret;
+
+	for (i = 0; i < num_eps; i++)
+		eps[i]->streams = ret;
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(usb_alloc_streams);
+
+/**
+ * usb_free_streams - free bulk endpoint stream IDs.
+ * @interface:	alternate setting that includes all endpoints.
+ * @eps:	array of endpoints to remove streams from.
+ * @num_eps:	number of endpoints in the array.
+ * @mem_flags:	flags hcd should use to allocate memory.
+ *
+ * Reverts a group of bulk endpoints back to not using stream IDs.
+ * Can fail if we are given bad arguments, or HCD is broken.
+ *
+ * Return: 0 on success. On failure, a negative error code.
+ */
+int usb_free_streams(struct usb_interface *interface,
+		struct usb_host_endpoint **eps, unsigned int num_eps,
+		gfp_t mem_flags)
+{
+	struct usb_hcd *hcd;
+	struct usb_device *dev;
+	int i, ret;
+
+	dev = interface_to_usbdev(interface);
+	hcd = bus_to_hcd(dev->bus);
+	if (dev->speed < USB_SPEED_SUPER)
+		return -EINVAL;
+
+	/* Double-free is not allowed */
+	for (i = 0; i < num_eps; i++)
+		if (!eps[i] || !eps[i]->streams)
+			return -EINVAL;
+
+	ret = hcd->driver->free_streams(hcd, dev, eps, num_eps, mem_flags);
+	if (ret < 0)
+		return ret;
+
+	for (i = 0; i < num_eps; i++)
+		eps[i]->streams = 0;
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(usb_free_streams);
+
+/* Protect against drivers that try to unlink URBs after the device
+ * is gone, by waiting until all unlinks for @udev are finished.
+ * Since we don't currently track URBs by device, simply wait until
+ * nothing is running in the locked region of usb_hcd_unlink_urb().
+ */
+void usb_hcd_synchronize_unlinks(struct usb_device *udev)
+{
+	spin_lock_irq(&hcd_urb_unlink_lock);
+	spin_unlock_irq(&hcd_urb_unlink_lock);
+}
+
+/*-------------------------------------------------------------------------*/
+
+/* called in any context */
+int usb_hcd_get_frame_number (struct usb_device *udev)
+{
+	struct usb_hcd	*hcd = bus_to_hcd(udev->bus);
+
+	if (!HCD_RH_RUNNING(hcd))
+		return -ESHUTDOWN;
+	return hcd->driver->get_frame_number (hcd);
+}
+
+/*-------------------------------------------------------------------------*/
+#ifdef CONFIG_USB_HCD_TEST_MODE
+
+static void usb_ehset_completion(struct urb *urb)
+{
+	struct completion  *done = urb->context;
+
+	complete(done);
+}
+/*
+ * Allocate and initialize a control URB. This request will be used by the
+ * EHSET SINGLE_STEP_SET_FEATURE test in which the DATA and STATUS stages
+ * of the GetDescriptor request are sent 15 seconds after the SETUP stage.
+ * Return NULL if failed.
+ */
+static struct urb *request_single_step_set_feature_urb(
+	struct usb_device	*udev,
+	void			*dr,
+	void			*buf,
+	struct completion	*done)
+{
+	struct urb *urb;
+	struct usb_hcd *hcd = bus_to_hcd(udev->bus);
+
+	urb = usb_alloc_urb(0, GFP_KERNEL);
+	if (!urb)
+		return NULL;
+
+	urb->pipe = usb_rcvctrlpipe(udev, 0);
+
+	urb->ep = &udev->ep0;
+	urb->dev = udev;
+	urb->setup_packet = (void *)dr;
+	urb->transfer_buffer = buf;
+	urb->transfer_buffer_length = USB_DT_DEVICE_SIZE;
+	urb->complete = usb_ehset_completion;
+	urb->status = -EINPROGRESS;
+	urb->actual_length = 0;
+	urb->transfer_flags = URB_DIR_IN;
+	usb_get_urb(urb);
+	atomic_inc(&urb->use_count);
+	atomic_inc(&urb->dev->urbnum);
+	if (map_urb_for_dma(hcd, urb, GFP_KERNEL)) {
+		usb_put_urb(urb);
+		usb_free_urb(urb);
+		return NULL;
+	}
+
+	urb->context = done;
+	return urb;
+}
+
+int ehset_single_step_set_feature(struct usb_hcd *hcd, int port)
+{
+	int retval = -ENOMEM;
+	struct usb_ctrlrequest *dr;
+	struct urb *urb;
+	struct usb_device *udev;
+	struct usb_device_descriptor *buf;
+	DECLARE_COMPLETION_ONSTACK(done);
+
+	/* Obtain udev of the rhub's child port */
+	udev = usb_hub_find_child(hcd->self.root_hub, port);
+	if (!udev) {
+		dev_err(hcd->self.controller, "No device attached to the RootHub\n");
+		return -ENODEV;
+	}
+	buf = kmalloc(USB_DT_DEVICE_SIZE, GFP_KERNEL);
+	if (!buf)
+		return -ENOMEM;
+
+	dr = kmalloc(sizeof(struct usb_ctrlrequest), GFP_KERNEL);
+	if (!dr) {
+		kfree(buf);
+		return -ENOMEM;
+	}
+
+	/* Fill Setup packet for GetDescriptor */
+	dr->bRequestType = USB_DIR_IN;
+	dr->bRequest = USB_REQ_GET_DESCRIPTOR;
+	dr->wValue = cpu_to_le16(USB_DT_DEVICE << 8);
+	dr->wIndex = 0;
+	dr->wLength = cpu_to_le16(USB_DT_DEVICE_SIZE);
+	urb = request_single_step_set_feature_urb(udev, dr, buf, &done);
+	if (!urb)
+		goto cleanup;
+
+	/* Submit just the SETUP stage */
+	retval = hcd->driver->submit_single_step_set_feature(hcd, urb, 1);
+	if (retval)
+		goto out1;
+	if (!wait_for_completion_timeout(&done, msecs_to_jiffies(2000))) {
+		usb_kill_urb(urb);
+		retval = -ETIMEDOUT;
+		dev_err(hcd->self.controller,
+			"%s SETUP stage timed out on ep0\n", __func__);
+		goto out1;
+	}
+	msleep(15 * 1000);
+
+	/* Complete remaining DATA and STATUS stages using the same URB */
+	urb->status = -EINPROGRESS;
+	usb_get_urb(urb);
+	atomic_inc(&urb->use_count);
+	atomic_inc(&urb->dev->urbnum);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	retval = hcd->driver->submit_single_step_set_feature(hcd, urb, 0);
 	if (!retval && !wait_for_completion_timeout(&done,
 						msecs_to_jiffies(2000))) {

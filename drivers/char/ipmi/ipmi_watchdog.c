@@ -1189,6 +1189,7 @@ static struct ipmi_smi_watcher smi_watcher = {
 	.smi_gone = ipmi_smi_gone
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int action_op_set_val(const char *inval)
 {
 	if (strcmp(inval, "reset") == 0)
@@ -1325,6 +1326,120 @@ static int __init ipmi_wdog_init(void)
 	}
 
 	if (preop_op_set_val(preop)) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int action_op(const char *inval, char *outval)
+{
+	if (outval)
+		strcpy(outval, action);
+
+	if (!inval)
+		return 0;
+
+	if (strcmp(inval, "reset") == 0)
+		action_val = WDOG_TIMEOUT_RESET;
+	else if (strcmp(inval, "none") == 0)
+		action_val = WDOG_TIMEOUT_NONE;
+	else if (strcmp(inval, "power_cycle") == 0)
+		action_val = WDOG_TIMEOUT_POWER_CYCLE;
+	else if (strcmp(inval, "power_off") == 0)
+		action_val = WDOG_TIMEOUT_POWER_DOWN;
+	else
+		return -EINVAL;
+	strcpy(action, inval);
+	return 0;
+}
+
+static int preaction_op(const char *inval, char *outval)
+{
+	if (outval)
+		strcpy(outval, preaction);
+
+	if (!inval)
+		return 0;
+
+	if (strcmp(inval, "pre_none") == 0)
+		preaction_val = WDOG_PRETIMEOUT_NONE;
+	else if (strcmp(inval, "pre_smi") == 0)
+		preaction_val = WDOG_PRETIMEOUT_SMI;
+#ifdef HAVE_DIE_NMI
+	else if (strcmp(inval, "pre_nmi") == 0)
+		preaction_val = WDOG_PRETIMEOUT_NMI;
+#endif
+	else if (strcmp(inval, "pre_int") == 0)
+		preaction_val = WDOG_PRETIMEOUT_MSG_INT;
+	else
+		return -EINVAL;
+	strcpy(preaction, inval);
+	return 0;
+}
+
+static int preop_op(const char *inval, char *outval)
+{
+	if (outval)
+		strcpy(outval, preop);
+
+	if (!inval)
+		return 0;
+
+	if (strcmp(inval, "preop_none") == 0)
+		preop_val = WDOG_PREOP_NONE;
+	else if (strcmp(inval, "preop_panic") == 0)
+		preop_val = WDOG_PREOP_PANIC;
+	else if (strcmp(inval, "preop_give_data") == 0)
+		preop_val = WDOG_PREOP_GIVE_DATA;
+	else
+		return -EINVAL;
+	strcpy(preop, inval);
+	return 0;
+}
+
+static void check_parms(void)
+{
+#ifdef HAVE_DIE_NMI
+	int do_nmi = 0;
+	int rv;
+
+	if (preaction_val == WDOG_PRETIMEOUT_NMI) {
+		do_nmi = 1;
+		if (preop_val == WDOG_PREOP_GIVE_DATA) {
+			pr_warn("Pretimeout op is to give data but NMI pretimeout is enabled, setting pretimeout op to none\n");
+			preop_op("preop_none", NULL);
+			do_nmi = 0;
+		}
+	}
+	if (do_nmi && !nmi_handler_registered) {
+		rv = register_nmi_handler(NMI_UNKNOWN, ipmi_nmi, 0,
+						"ipmi");
+		if (rv) {
+			pr_warn("Can't register nmi handler\n");
+			return;
+		} else
+			nmi_handler_registered = 1;
+	} else if (!do_nmi && nmi_handler_registered) {
+		unregister_nmi_handler(NMI_UNKNOWN, "ipmi");
+		nmi_handler_registered = 0;
+	}
+#endif
+}
+
+static int __init ipmi_wdog_init(void)
+{
+	int rv;
+
+	if (action_op(action, NULL)) {
+		action_op("reset", NULL);
+		pr_info("Unknown action '%s', defaulting to reset\n", action);
+	}
+
+	if (preaction_op(preaction, NULL)) {
+		preaction_op("pre_none", NULL);
+		pr_info("Unknown preaction '%s', defaulting to none\n",
+			preaction);
+	}
+
+	if (preop_op(preop, NULL)) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		preop_op("preop_none", NULL);
 		pr_info("Unknown preop '%s', defaulting to none\n", preop);
 	}

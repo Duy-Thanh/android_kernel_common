@@ -18,6 +18,7 @@
 #include <linux/i8042.h>
 
 #define ASUS_WMI_KEY_IGNORE (-1)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define ASUS_WMI_KEY_ARMOURY	0xffff01
 #define ASUS_WMI_BRN_DOWN	0x2e
 #define ASUS_WMI_BRN_UP		0x2f
@@ -42,6 +43,32 @@ struct quirk_entry {
 	bool wmi_ignore_fan;
 	bool filter_i8042_e1_extended_codes;
 	int key_wlan_event;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define ASUS_WMI_BRN_DOWN	0x2e
+#define ASUS_WMI_BRN_UP		0x2f
+
+struct module;
+struct key_entry;
+struct asus_wmi;
+
+enum asus_wmi_tablet_switch_mode {
+	asus_wmi_no_tablet_switch,
+	asus_wmi_kbd_dock_devid,
+	asus_wmi_lid_flip_devid,
+	asus_wmi_lid_flip_rog_devid,
+};
+
+struct quirk_entry {
+	bool hotplug_wireless;
+	bool scalar_panel_brightness;
+	bool store_backlight_power;
+	bool wmi_backlight_set_devstate;
+	bool wmi_force_als_set;
+	bool wmi_ignore_fan;
+	bool filter_i8042_e1_extended_codes;
+	bool ignore_key_wlan;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	enum asus_wmi_tablet_switch_mode tablet_switch_mode;
 	int wapf;
 	/*

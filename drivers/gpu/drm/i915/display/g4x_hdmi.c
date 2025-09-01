@@ -683,6 +683,7 @@ static bool assert_hdmi_port_valid(struct drm_i915_private *i915, enum port port
 			 "Platform does not support HDMI %c\n", port_name(port));
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 bool g4x_hdmi_init(struct drm_i915_private *dev_priv,
 		   i915_reg_t hdmi_reg, enum port port)
 {
@@ -800,4 +801,113 @@ err_connector_alloc:
 	kfree(dig_port);
 
 	return false;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void g4x_hdmi_init(struct drm_i915_private *dev_priv,
+		   i915_reg_t hdmi_reg, enum port port)
+{
+	struct intel_display *display = &dev_priv->display;
+	const struct intel_bios_encoder_data *devdata;
+	struct intel_digital_port *dig_port;
+	struct intel_encoder *intel_encoder;
+	struct intel_connector *intel_connector;
+
+	if (!assert_port_valid(dev_priv, port))
+		return;
+
+	if (!assert_hdmi_port_valid(dev_priv, port))
+		return;
+
+	devdata = intel_bios_encoder_data_lookup(display, port);
+
+	/* FIXME bail? */
+	if (!devdata)
+		drm_dbg_kms(&dev_priv->drm, "No VBT child device for HDMI-%c\n",
+			    port_name(port));
+
+	dig_port = kzalloc(sizeof(*dig_port), GFP_KERNEL);
+	if (!dig_port)
+		return;
+
+	dig_port->aux_ch = AUX_CH_NONE;
+
+	intel_connector = intel_connector_alloc();
+	if (!intel_connector) {
+		kfree(dig_port);
+		return;
+	}
+
+	intel_encoder = &dig_port->base;
+
+	intel_encoder->devdata = devdata;
+
+	mutex_init(&dig_port->hdcp_mutex);
+
+	drm_encoder_init(&dev_priv->drm, &intel_encoder->base,
+			 &intel_hdmi_enc_funcs, DRM_MODE_ENCODER_TMDS,
+			 "HDMI %c", port_name(port));
+
+	intel_encoder->hotplug = intel_hdmi_hotplug;
+	intel_encoder->compute_config = g4x_hdmi_compute_config;
+	if (HAS_PCH_SPLIT(dev_priv)) {
+		intel_encoder->disable = pch_disable_hdmi;
+		intel_encoder->post_disable = pch_post_disable_hdmi;
+	} else {
+		intel_encoder->disable = g4x_disable_hdmi;
+	}
+	intel_encoder->get_hw_state = intel_hdmi_get_hw_state;
+	intel_encoder->get_config = intel_hdmi_get_config;
+	if (IS_CHERRYVIEW(dev_priv)) {
+		intel_encoder->pre_pll_enable = chv_hdmi_pre_pll_enable;
+		intel_encoder->pre_enable = chv_hdmi_pre_enable;
+		intel_encoder->enable = vlv_enable_hdmi;
+		intel_encoder->post_disable = chv_hdmi_post_disable;
+		intel_encoder->post_pll_disable = chv_hdmi_post_pll_disable;
+	} else if (IS_VALLEYVIEW(dev_priv)) {
+		intel_encoder->pre_pll_enable = vlv_hdmi_pre_pll_enable;
+		intel_encoder->pre_enable = vlv_hdmi_pre_enable;
+		intel_encoder->enable = vlv_enable_hdmi;
+		intel_encoder->post_disable = vlv_hdmi_post_disable;
+	} else {
+		intel_encoder->pre_enable = intel_hdmi_pre_enable;
+		if (HAS_PCH_CPT(dev_priv))
+			intel_encoder->enable = cpt_enable_hdmi;
+		else if (HAS_PCH_IBX(dev_priv))
+			intel_encoder->enable = ibx_enable_hdmi;
+		else
+			intel_encoder->enable = g4x_enable_hdmi;
+	}
+	intel_encoder->audio_enable = g4x_hdmi_audio_enable;
+	intel_encoder->audio_disable = g4x_hdmi_audio_disable;
+	intel_encoder->shutdown = intel_hdmi_encoder_shutdown;
+
+	intel_encoder->type = INTEL_OUTPUT_HDMI;
+	intel_encoder->power_domain = intel_display_power_ddi_lanes_domain(dev_priv, port);
+	intel_encoder->port = port;
+	if (IS_CHERRYVIEW(dev_priv)) {
+		if (port == PORT_D)
+			intel_encoder->pipe_mask = BIT(PIPE_C);
+		else
+			intel_encoder->pipe_mask = BIT(PIPE_A) | BIT(PIPE_B);
+	} else {
+		intel_encoder->pipe_mask = ~0;
+	}
+	intel_encoder->cloneable = BIT(INTEL_OUTPUT_ANALOG);
+	intel_encoder->hpd_pin = intel_hpd_pin_default(dev_priv, port);
+	/*
+	 * BSpec is unclear about HDMI+HDMI cloning on g4x, but it seems
+	 * to work on real hardware. And since g4x can send infoframes to
+	 * only one port anyway, nothing is lost by allowing it.
+	 */
+	if (IS_G4X(dev_priv))
+		intel_encoder->cloneable |= BIT(INTEL_OUTPUT_HDMI);
+
+	dig_port->hdmi.hdmi_reg = hdmi_reg;
+	dig_port->dp.output_reg = INVALID_MMIO_REG;
+	dig_port->max_lanes = 4;
+
+	intel_infoframe_init(dig_port);
+
+	intel_hdmi_init_connector(dig_port, intel_connector);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }

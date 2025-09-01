@@ -392,8 +392,16 @@ void brcmf_btcoex_detach(struct brcmf_cfg80211_info *cfg)
 	if (!cfg->btcoex)
 		return;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	timer_shutdown_sync(&cfg->btcoex->timer);
 	cfg->btcoex->timer_on = false;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (cfg->btcoex->timer_on) {
+		cfg->btcoex->timer_on = false;
+		timer_shutdown_sync(&cfg->btcoex->timer);
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	cancel_work_sync(&cfg->btcoex->work);
 

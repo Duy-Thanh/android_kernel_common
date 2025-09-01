@@ -543,10 +543,18 @@ static ssize_t hvc_write(struct tty_struct *tty, const u8 *buf, size_t count)
 	}
 
 	/*
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	 * Kick thread to flush if there's still pending data
 	 * or to wakeup the write queue.
 	 */
 	hvc_kick();
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	 * Racy, but harmless, kick thread if there is still pending data.
+	 */
+	if (hp->n_outbuf)
+		hvc_kick();
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return written;
 }

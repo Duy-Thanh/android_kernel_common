@@ -1813,6 +1813,7 @@ static int vcn_v3_0_limit_sched(struct amdgpu_cs_parser *p,
 				struct amdgpu_job *job)
 {
 	struct drm_gpu_scheduler **scheds;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct dma_fence *fence;
 
 	/* if VCN0 is harvested, we can't support AV1 */
@@ -1825,6 +1826,17 @@ static int vcn_v3_0_limit_sched(struct amdgpu_cs_parser *p,
 		dma_fence_wait(fence, false);
 		dma_fence_put(fence);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	/* The create msg must be in the first IB submitted */
+	if (atomic_read(&job->base.entity->fence_seq))
+		return -EINVAL;
+
+	/* if VCN0 is harvested, we can't support AV1 */
+	if (p->adev->vcn.harvest_config & AMDGPU_VCN_HARVEST_VCN0)
+		return -EINVAL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	scheds = p->adev->gpu_sched[AMDGPU_HW_IP_VCN_DEC]
 		[AMDGPU_RING_PRIO_DEFAULT].sched;

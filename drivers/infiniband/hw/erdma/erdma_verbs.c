@@ -597,6 +597,7 @@ err_free_mtt:
 static void erdma_destroy_mtt_buf_sg(struct erdma_dev *dev,
 				     struct erdma_mtt *mtt)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	dma_unmap_sg(&dev->pdev->dev, mtt->sglist,
 		     DIV_ROUND_UP(mtt->size, PAGE_SIZE), DMA_TO_DEVICE);
 	vfree(mtt->sglist);
@@ -994,6 +995,403 @@ int erdma_create_qp(struct ib_qp *ibqp, struct ib_qp_init_attr *attrs,
 		ret = init_kernel_qp(dev, qp, attrs);
 		if (ret)
 			goto err_out_xa;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	dma_unmap_sg(&dev->pdev->dev, mtt->sglist, mtt->nsg, DMA_TO_DEVICE);
+	vfree(mtt->sglist);
+}
+
+static void erdma_destroy_scatter_mtt(struct erdma_dev *dev,
+				      struct erdma_mtt *mtt)
+{
+	erdma_destroy_mtt_buf_sg(dev, mtt);
+	vfree(mtt->buf);
+	kfree(mtt);
+}
+
+static void erdma_init_middle_mtt(struct erdma_mtt *mtt,
+				  struct erdma_mtt *low_mtt)
+{
+	struct scatterlist *sg;
+	u32 idx = 0, i;
+
+	for_each_sg(low_mtt->sglist, sg, low_mtt->nsg, i)
+		mtt->buf[idx++] = sg_dma_address(sg);
+}
+
+static int erdma_create_mtt_buf_sg(struct erdma_dev *dev, struct erdma_mtt *mtt)
+{
+	struct scatterlist *sglist;
+	void *buf = mtt->buf;
+	u32 npages, i, nsg;
+	struct page *pg;
+
+	/* Failed if buf is not page aligned */
+	if ((uintptr_t)buf & ~PAGE_MASK)
+		return -EINVAL;
+
+	npages = DIV_ROUND_UP(mtt->size, PAGE_SIZE);
+	sglist = vzalloc(npages * sizeof(*sglist));
+	if (!sglist)
+		return -ENOMEM;
+
+	sg_init_table(sglist, npages);
+	for (i = 0; i < npages; i++) {
+		pg = vmalloc_to_page(buf);
+		if (!pg)
+			goto err;
+		sg_set_page(&sglist[i], pg, PAGE_SIZE, 0);
+		buf += PAGE_SIZE;
+	}
+
+	nsg = dma_map_sg(&dev->pdev->dev, sglist, npages, DMA_TO_DEVICE);
+	if (!nsg)
+		goto err;
+
+	mtt->sglist = sglist;
+	mtt->nsg = nsg;
+
+	return 0;
+err:
+	vfree(sglist);
+
+	return -ENOMEM;
+}
+
+static struct erdma_mtt *erdma_create_scatter_mtt(struct erdma_dev *dev,
+						  size_t size)
+{
+	struct erdma_mtt *mtt;
+	int ret = -ENOMEM;
+
+	mtt = kzalloc(sizeof(*mtt), GFP_KERNEL);
+	if (!mtt)
+		return ERR_PTR(-ENOMEM);
+
+	mtt->size = ALIGN(size, PAGE_SIZE);
+	mtt->buf = vzalloc(mtt->size);
+	mtt->continuous = false;
+	if (!mtt->buf)
+		goto err_free_mtt;
+
+	ret = erdma_create_mtt_buf_sg(dev, mtt);
+	if (ret)
+		goto err_free_mtt_buf;
+
+	ibdev_dbg(&dev->ibdev, "create scatter mtt, size:%lu, nsg:%u\n",
+		  mtt->size, mtt->nsg);
+
+	return mtt;
+
+err_free_mtt_buf:
+	vfree(mtt->buf);
+
+err_free_mtt:
+	kfree(mtt);
+
+	return ERR_PTR(ret);
+}
+
+static struct erdma_mtt *erdma_create_mtt(struct erdma_dev *dev, size_t size,
+					  bool force_continuous)
+{
+	struct erdma_mtt *mtt, *tmp_mtt;
+	int ret, level = 0;
+
+	ibdev_dbg(&dev->ibdev, "create_mtt, size:%lu, force cont:%d\n", size,
+		  force_continuous);
+
+	if (!(dev->attrs.cap_flags & ERDMA_DEV_CAP_FLAGS_MTT_VA))
+		force_continuous = true;
+
+	if (force_continuous)
+		return erdma_create_cont_mtt(dev, size);
+
+	mtt = erdma_create_scatter_mtt(dev, size);
+	if (IS_ERR(mtt))
+		return mtt;
+	level = 1;
+
+	/* convergence the mtt table. */
+	while (mtt->nsg != 1 && level <= 3) {
+		tmp_mtt = erdma_create_scatter_mtt(dev, MTT_SIZE(mtt->nsg));
+		if (IS_ERR(tmp_mtt)) {
+			ret = PTR_ERR(tmp_mtt);
+			goto err_free_mtt;
+		}
+		erdma_init_middle_mtt(tmp_mtt, mtt);
+		tmp_mtt->low_level = mtt;
+		mtt = tmp_mtt;
+		level++;
+	}
+
+	if (level > 3) {
+		ret = -ENOMEM;
+		goto err_free_mtt;
+	}
+
+	mtt->level = level;
+	ibdev_dbg(&dev->ibdev, "top mtt: level:%d, dma_addr 0x%llx\n",
+		  mtt->level, mtt->sglist[0].dma_address);
+
+	return mtt;
+err_free_mtt:
+	while (mtt) {
+		tmp_mtt = mtt->low_level;
+		erdma_destroy_scatter_mtt(dev, mtt);
+		mtt = tmp_mtt;
+	}
+
+	return ERR_PTR(ret);
+}
+
+static void erdma_destroy_mtt(struct erdma_dev *dev, struct erdma_mtt *mtt)
+{
+	struct erdma_mtt *tmp_mtt;
+
+	if (mtt->continuous) {
+		dma_unmap_single(&dev->pdev->dev, mtt->buf_dma, mtt->size,
+				 DMA_TO_DEVICE);
+		kfree(mtt->buf);
+		kfree(mtt);
+	} else {
+		while (mtt) {
+			tmp_mtt = mtt->low_level;
+			erdma_destroy_scatter_mtt(dev, mtt);
+			mtt = tmp_mtt;
+		}
+	}
+}
+
+static int get_mtt_entries(struct erdma_dev *dev, struct erdma_mem *mem,
+			   u64 start, u64 len, int access, u64 virt,
+			   unsigned long req_page_size, bool force_continuous)
+{
+	int ret = 0;
+
+	mem->umem = ib_umem_get(&dev->ibdev, start, len, access);
+	if (IS_ERR(mem->umem)) {
+		ret = PTR_ERR(mem->umem);
+		mem->umem = NULL;
+		return ret;
+	}
+
+	mem->va = virt;
+	mem->len = len;
+	mem->page_size = ib_umem_find_best_pgsz(mem->umem, req_page_size, virt);
+	mem->page_offset = start & (mem->page_size - 1);
+	mem->mtt_nents = ib_umem_num_dma_blocks(mem->umem, mem->page_size);
+	mem->page_cnt = mem->mtt_nents;
+	mem->mtt = erdma_create_mtt(dev, MTT_SIZE(mem->page_cnt),
+				    force_continuous);
+	if (IS_ERR(mem->mtt)) {
+		ret = PTR_ERR(mem->mtt);
+		goto error_ret;
+	}
+
+	erdma_fill_bottom_mtt(dev, mem);
+
+	return 0;
+
+error_ret:
+	if (mem->umem) {
+		ib_umem_release(mem->umem);
+		mem->umem = NULL;
+	}
+
+	return ret;
+}
+
+static void put_mtt_entries(struct erdma_dev *dev, struct erdma_mem *mem)
+{
+	if (mem->mtt)
+		erdma_destroy_mtt(dev, mem->mtt);
+
+	if (mem->umem) {
+		ib_umem_release(mem->umem);
+		mem->umem = NULL;
+	}
+}
+
+static int erdma_map_user_dbrecords(struct erdma_ucontext *ctx,
+				    u64 dbrecords_va,
+				    struct erdma_user_dbrecords_page **dbr_page,
+				    dma_addr_t *dma_addr)
+{
+	struct erdma_user_dbrecords_page *page = NULL;
+	int rv = 0;
+
+	mutex_lock(&ctx->dbrecords_page_mutex);
+
+	list_for_each_entry(page, &ctx->dbrecords_page_list, list)
+		if (page->va == (dbrecords_va & PAGE_MASK))
+			goto found;
+
+	page = kmalloc(sizeof(*page), GFP_KERNEL);
+	if (!page) {
+		rv = -ENOMEM;
+		goto out;
+	}
+
+	page->va = (dbrecords_va & PAGE_MASK);
+	page->refcnt = 0;
+
+	page->umem = ib_umem_get(ctx->ibucontext.device,
+				 dbrecords_va & PAGE_MASK, PAGE_SIZE, 0);
+	if (IS_ERR(page->umem)) {
+		rv = PTR_ERR(page->umem);
+		kfree(page);
+		goto out;
+	}
+
+	list_add(&page->list, &ctx->dbrecords_page_list);
+
+found:
+	*dma_addr = sg_dma_address(page->umem->sgt_append.sgt.sgl) +
+		    (dbrecords_va & ~PAGE_MASK);
+	*dbr_page = page;
+	page->refcnt++;
+
+out:
+	mutex_unlock(&ctx->dbrecords_page_mutex);
+	return rv;
+}
+
+static void
+erdma_unmap_user_dbrecords(struct erdma_ucontext *ctx,
+			   struct erdma_user_dbrecords_page **dbr_page)
+{
+	if (!ctx || !(*dbr_page))
+		return;
+
+	mutex_lock(&ctx->dbrecords_page_mutex);
+	if (--(*dbr_page)->refcnt == 0) {
+		list_del(&(*dbr_page)->list);
+		ib_umem_release((*dbr_page)->umem);
+		kfree(*dbr_page);
+	}
+
+	*dbr_page = NULL;
+	mutex_unlock(&ctx->dbrecords_page_mutex);
+}
+
+static int init_user_qp(struct erdma_qp *qp, struct erdma_ucontext *uctx,
+			u64 va, u32 len, u64 dbrec_va)
+{
+	dma_addr_t dbrec_dma;
+	u32 rq_offset;
+	int ret;
+
+	if (len < (ALIGN(qp->attrs.sq_size * SQEBB_SIZE, ERDMA_HW_PAGE_SIZE) +
+		   qp->attrs.rq_size * RQE_SIZE))
+		return -EINVAL;
+
+	ret = get_mtt_entries(qp->dev, &qp->user_qp.sq_mem, va,
+			      qp->attrs.sq_size << SQEBB_SHIFT, 0, va,
+			      (SZ_1M - SZ_4K), true);
+	if (ret)
+		return ret;
+
+	rq_offset = ALIGN(qp->attrs.sq_size << SQEBB_SHIFT, ERDMA_HW_PAGE_SIZE);
+	qp->user_qp.rq_offset = rq_offset;
+
+	ret = get_mtt_entries(qp->dev, &qp->user_qp.rq_mem, va + rq_offset,
+			      qp->attrs.rq_size << RQE_SHIFT, 0, va + rq_offset,
+			      (SZ_1M - SZ_4K), true);
+	if (ret)
+		goto put_sq_mtt;
+
+	ret = erdma_map_user_dbrecords(uctx, dbrec_va,
+				       &qp->user_qp.user_dbr_page,
+				       &dbrec_dma);
+	if (ret)
+		goto put_rq_mtt;
+
+	qp->user_qp.sq_dbrec_dma = dbrec_dma;
+	qp->user_qp.rq_dbrec_dma = dbrec_dma + ERDMA_DB_SIZE;
+
+	return 0;
+
+put_rq_mtt:
+	put_mtt_entries(qp->dev, &qp->user_qp.rq_mem);
+
+put_sq_mtt:
+	put_mtt_entries(qp->dev, &qp->user_qp.sq_mem);
+
+	return ret;
+}
+
+static void free_user_qp(struct erdma_qp *qp, struct erdma_ucontext *uctx)
+{
+	put_mtt_entries(qp->dev, &qp->user_qp.sq_mem);
+	put_mtt_entries(qp->dev, &qp->user_qp.rq_mem);
+	erdma_unmap_user_dbrecords(uctx, &qp->user_qp.user_dbr_page);
+}
+
+int erdma_create_qp(struct ib_qp *ibqp, struct ib_qp_init_attr *attrs,
+		    struct ib_udata *udata)
+{
+	struct erdma_qp *qp = to_eqp(ibqp);
+	struct erdma_dev *dev = to_edev(ibqp->device);
+	struct erdma_ucontext *uctx = rdma_udata_to_drv_context(
+		udata, struct erdma_ucontext, ibucontext);
+	struct erdma_ureq_create_qp ureq;
+	struct erdma_uresp_create_qp uresp;
+	int ret;
+
+	ret = erdma_qp_validate_cap(dev, attrs);
+	if (ret)
+		goto err_out;
+
+	ret = erdma_qp_validate_attr(dev, attrs);
+	if (ret)
+		goto err_out;
+
+	qp->scq = to_ecq(attrs->send_cq);
+	qp->rcq = to_ecq(attrs->recv_cq);
+	qp->dev = dev;
+	qp->attrs.cc = dev->attrs.cc;
+
+	init_rwsem(&qp->state_lock);
+	kref_init(&qp->ref);
+	init_completion(&qp->safe_free);
+
+	ret = xa_alloc_cyclic(&dev->qp_xa, &qp->ibqp.qp_num, qp,
+			      XA_LIMIT(1, dev->attrs.max_qp - 1),
+			      &dev->next_alloc_qpn, GFP_KERNEL);
+	if (ret < 0) {
+		ret = -ENOMEM;
+		goto err_out;
+	}
+
+	qp->attrs.sq_size = roundup_pow_of_two(attrs->cap.max_send_wr *
+					       ERDMA_MAX_WQEBB_PER_SQE);
+	qp->attrs.rq_size = roundup_pow_of_two(attrs->cap.max_recv_wr);
+
+	if (uctx) {
+		ret = ib_copy_from_udata(&ureq, udata,
+					 min(sizeof(ureq), udata->inlen));
+		if (ret)
+			goto err_out_xa;
+
+		ret = init_user_qp(qp, uctx, ureq.qbuf_va, ureq.qbuf_len,
+				   ureq.db_record_va);
+		if (ret)
+			goto err_out_xa;
+
+		memset(&uresp, 0, sizeof(uresp));
+
+		uresp.num_sqe = qp->attrs.sq_size;
+		uresp.num_rqe = qp->attrs.rq_size;
+		uresp.qp_id = QP_ID(qp);
+		uresp.rq_offset = qp->user_qp.rq_offset;
+
+		ret = ib_copy_to_udata(udata, &uresp, sizeof(uresp));
+		if (ret)
+			goto err_out_cmd;
+	} else {
+		init_kernel_qp(dev, qp, attrs);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	qp->attrs.max_send_sge = attrs->cap.max_send_sge;

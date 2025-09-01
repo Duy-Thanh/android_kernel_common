@@ -198,6 +198,7 @@ static void folio_batch_move_lru(struct folio_batch *fbatch, move_fn_t move_fn)
 	for (i = 0; i < folio_batch_count(fbatch); i++) {
 		struct folio *folio = fbatch->folios[i];
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		/* block memcg migration while the folio moves between lru */
 		if (move_fn != lru_add && !folio_test_clear_lru(folio))
 			continue;
@@ -763,6 +764,569 @@ void folio_mark_lazyfree(struct folio *folio)
 		return;
 
 	folio_batch_add_and_move(folio, lru_lazyfree);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		folio_lruvec_relock_irqsave(folio, &lruvec, &flags);
+		move_fn(lruvec, folio);
+
+		folio_set_lru(folio);
+	}
+
+	if (lruvec)
+		unlock_page_lruvec_irqrestore(lruvec, flags);
+	folios_put(fbatch);
+}
+
+static void __folio_batch_add_and_move(struct folio_batch __percpu *fbatch,
+		struct folio *folio, move_fn_t move_fn,
+		bool on_lru, bool disable_irq)
+{
+	unsigned long flags;
+
+	if (on_lru && !folio_test_clear_lru(folio))
+		return;
+
+	folio_get(folio);
+
+	if (disable_irq)
+		local_lock_irqsave(&cpu_fbatches.lock_irq, flags);
+	else
+		local_lock(&cpu_fbatches.lock);
+
+	if (!folio_batch_add(this_cpu_ptr(fbatch), folio) || folio_test_large(folio) ||
+	    lru_cache_disabled())
+		folio_batch_move_lru(this_cpu_ptr(fbatch), move_fn);
+
+	if (disable_irq)
+		local_unlock_irqrestore(&cpu_fbatches.lock_irq, flags);
+	else
+		local_unlock(&cpu_fbatches.lock);
+}
+
+#define folio_batch_add_and_move(folio, op, on_lru)						\
+	__folio_batch_add_and_move(								\
+		&cpu_fbatches.op,								\
+		folio,										\
+		op,										\
+		on_lru,										\
+		offsetof(struct cpu_fbatches, op) >= offsetof(struct cpu_fbatches, lock_irq)	\
+	)
+
+static void lru_move_tail(struct lruvec *lruvec, struct folio *folio)
+{
+	if (folio_test_unevictable(folio))
+		return;
+
+	lruvec_del_folio(lruvec, folio);
+	folio_clear_active(folio);
+	lruvec_add_folio_tail(lruvec, folio);
+	__count_vm_events(PGROTATED, folio_nr_pages(folio));
+}
+
+/*
+ * Writeback is about to end against a folio which has been marked for
+ * immediate reclaim.  If it still appears to be reclaimable, move it
+ * to the tail of the inactive list.
+ *
+ * folio_rotate_reclaimable() must disable IRQs, to prevent nasty races.
+ */
+void folio_rotate_reclaimable(struct folio *folio)
+{
+	if (folio_test_locked(folio) || folio_test_dirty(folio) ||
+	    folio_test_unevictable(folio))
+		return;
+
+	folio_batch_add_and_move(folio, lru_move_tail, true);
+}
+
+void lru_note_cost(struct lruvec *lruvec, bool file,
+		   unsigned int nr_io, unsigned int nr_rotated)
+{
+	unsigned long cost;
+
+	/*
+	 * Reflect the relative cost of incurring IO and spending CPU
+	 * time on rotations. This doesn't attempt to make a precise
+	 * comparison, it just says: if reloads are about comparable
+	 * between the LRU lists, or rotations are overwhelmingly
+	 * different between them, adjust scan balance for CPU work.
+	 */
+	cost = nr_io * SWAP_CLUSTER_MAX + nr_rotated;
+
+	do {
+		unsigned long lrusize;
+
+		/*
+		 * Hold lruvec->lru_lock is safe here, since
+		 * 1) The pinned lruvec in reclaim, or
+		 * 2) From a pre-LRU page during refault (which also holds the
+		 *    rcu lock, so would be safe even if the page was on the LRU
+		 *    and could move simultaneously to a new lruvec).
+		 */
+		spin_lock_irq(&lruvec->lru_lock);
+		/* Record cost event */
+		if (file)
+			lruvec->file_cost += cost;
+		else
+			lruvec->anon_cost += cost;
+
+		/*
+		 * Decay previous events
+		 *
+		 * Because workloads change over time (and to avoid
+		 * overflow) we keep these statistics as a floating
+		 * average, which ends up weighing recent refaults
+		 * more than old ones.
+		 */
+		lrusize = lruvec_page_state(lruvec, NR_INACTIVE_ANON) +
+			  lruvec_page_state(lruvec, NR_ACTIVE_ANON) +
+			  lruvec_page_state(lruvec, NR_INACTIVE_FILE) +
+			  lruvec_page_state(lruvec, NR_ACTIVE_FILE);
+
+		if (lruvec->file_cost + lruvec->anon_cost > lrusize / 4) {
+			lruvec->file_cost /= 2;
+			lruvec->anon_cost /= 2;
+		}
+		spin_unlock_irq(&lruvec->lru_lock);
+	} while ((lruvec = parent_lruvec(lruvec)));
+}
+
+void lru_note_cost_refault(struct folio *folio)
+{
+	lru_note_cost(folio_lruvec(folio), folio_is_file_lru(folio),
+		      folio_nr_pages(folio), 0);
+}
+
+static void lru_activate(struct lruvec *lruvec, struct folio *folio)
+{
+	long nr_pages = folio_nr_pages(folio);
+
+	if (folio_test_active(folio) || folio_test_unevictable(folio))
+		return;
+
+
+	lruvec_del_folio(lruvec, folio);
+	folio_set_active(folio);
+	lruvec_add_folio(lruvec, folio);
+	trace_mm_lru_activate(folio);
+
+	__count_vm_events(PGACTIVATE, nr_pages);
+	__count_memcg_events(lruvec_memcg(lruvec), PGACTIVATE, nr_pages);
+}
+
+#ifdef CONFIG_SMP
+static void folio_activate_drain(int cpu)
+{
+	struct folio_batch *fbatch = &per_cpu(cpu_fbatches.lru_activate, cpu);
+
+	if (folio_batch_count(fbatch))
+		folio_batch_move_lru(fbatch, lru_activate);
+}
+
+void folio_activate(struct folio *folio)
+{
+	if (folio_test_active(folio) || folio_test_unevictable(folio))
+		return;
+
+	folio_batch_add_and_move(folio, lru_activate, true);
+}
+
+#else
+static inline void folio_activate_drain(int cpu)
+{
+}
+
+void folio_activate(struct folio *folio)
+{
+	struct lruvec *lruvec;
+
+	if (!folio_test_clear_lru(folio))
+		return;
+
+	lruvec = folio_lruvec_lock_irq(folio);
+	lru_activate(lruvec, folio);
+	unlock_page_lruvec_irq(lruvec);
+	folio_set_lru(folio);
+}
+#endif
+
+static void __lru_cache_activate_folio(struct folio *folio)
+{
+	struct folio_batch *fbatch;
+	int i;
+
+	local_lock(&cpu_fbatches.lock);
+	fbatch = this_cpu_ptr(&cpu_fbatches.lru_add);
+
+	/*
+	 * Search backwards on the optimistic assumption that the folio being
+	 * activated has just been added to this batch. Note that only
+	 * the local batch is examined as a !LRU folio could be in the
+	 * process of being released, reclaimed, migrated or on a remote
+	 * batch that is currently being drained. Furthermore, marking
+	 * a remote batch's folio active potentially hits a race where
+	 * a folio is marked active just after it is added to the inactive
+	 * list causing accounting errors and BUG_ON checks to trigger.
+	 */
+	for (i = folio_batch_count(fbatch) - 1; i >= 0; i--) {
+		struct folio *batch_folio = fbatch->folios[i];
+
+		if (batch_folio == folio) {
+			folio_set_active(folio);
+			break;
+		}
+	}
+
+	local_unlock(&cpu_fbatches.lock);
+}
+
+#ifdef CONFIG_LRU_GEN
+
+static void lru_gen_inc_refs(struct folio *folio)
+{
+	unsigned long new_flags, old_flags = READ_ONCE(folio->flags);
+
+	if (folio_test_unevictable(folio))
+		return;
+
+	/* see the comment on LRU_REFS_FLAGS */
+	if (!folio_test_referenced(folio)) {
+		set_mask_bits(&folio->flags, LRU_REFS_MASK, BIT(PG_referenced));
+		return;
+	}
+
+	do {
+		if ((old_flags & LRU_REFS_MASK) == LRU_REFS_MASK) {
+			if (!folio_test_workingset(folio))
+				folio_set_workingset(folio);
+			return;
+		}
+
+		new_flags = old_flags + BIT(LRU_REFS_PGOFF);
+	} while (!try_cmpxchg(&folio->flags, &old_flags, new_flags));
+}
+
+static bool lru_gen_clear_refs(struct folio *folio)
+{
+	struct lru_gen_folio *lrugen;
+	int gen = folio_lru_gen(folio);
+	int type = folio_is_file_lru(folio);
+
+	if (gen < 0)
+		return true;
+
+	set_mask_bits(&folio->flags, LRU_REFS_FLAGS | BIT(PG_workingset), 0);
+
+	lrugen = &folio_lruvec(folio)->lrugen;
+	/* whether can do without shuffling under the LRU lock */
+	return gen == lru_gen_from_seq(READ_ONCE(lrugen->min_seq[type]));
+}
+
+#else /* !CONFIG_LRU_GEN */
+
+static void lru_gen_inc_refs(struct folio *folio)
+{
+}
+
+static bool lru_gen_clear_refs(struct folio *folio)
+{
+	return false;
+}
+
+#endif /* CONFIG_LRU_GEN */
+
+/**
+ * folio_mark_accessed - Mark a folio as having seen activity.
+ * @folio: The folio to mark.
+ *
+ * This function will perform one of the following transitions:
+ *
+ * * inactive,unreferenced	->	inactive,referenced
+ * * inactive,referenced	->	active,unreferenced
+ * * active,unreferenced	->	active,referenced
+ *
+ * When a newly allocated folio is not yet visible, so safe for non-atomic ops,
+ * __folio_set_referenced() may be substituted for folio_mark_accessed().
+ */
+void folio_mark_accessed(struct folio *folio)
+{
+	if (lru_gen_enabled()) {
+		lru_gen_inc_refs(folio);
+		return;
+	}
+
+	if (!folio_test_referenced(folio)) {
+		folio_set_referenced(folio);
+	} else if (folio_test_unevictable(folio)) {
+		/*
+		 * Unevictable pages are on the "LRU_UNEVICTABLE" list. But,
+		 * this list is never rotated or maintained, so marking an
+		 * unevictable page accessed has no effect.
+		 */
+	} else if (!folio_test_active(folio)) {
+		/*
+		 * If the folio is on the LRU, queue it for activation via
+		 * cpu_fbatches.lru_activate. Otherwise, assume the folio is in a
+		 * folio_batch, mark it active and it'll be moved to the active
+		 * LRU on the next drain.
+		 */
+		if (folio_test_lru(folio))
+			folio_activate(folio);
+		else
+			__lru_cache_activate_folio(folio);
+		folio_clear_referenced(folio);
+		workingset_activation(folio);
+	}
+	if (folio_test_idle(folio))
+		folio_clear_idle(folio);
+}
+EXPORT_SYMBOL(folio_mark_accessed);
+
+/**
+ * folio_add_lru - Add a folio to an LRU list.
+ * @folio: The folio to be added to the LRU.
+ *
+ * Queue the folio for addition to the LRU. The decision on whether
+ * to add the page to the [in]active [file|anon] list is deferred until the
+ * folio_batch is drained. This gives a chance for the caller of folio_add_lru()
+ * have the folio added to the active list using folio_mark_accessed().
+ */
+void folio_add_lru(struct folio *folio)
+{
+	VM_BUG_ON_FOLIO(folio_test_active(folio) &&
+			folio_test_unevictable(folio), folio);
+	VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
+
+	/* see the comment in lru_gen_folio_seq() */
+	if (lru_gen_enabled() && !folio_test_unevictable(folio) &&
+	    lru_gen_in_fault() && !(current->flags & PF_MEMALLOC))
+		folio_set_active(folio);
+
+	folio_batch_add_and_move(folio, lru_add, false);
+}
+EXPORT_SYMBOL(folio_add_lru);
+
+/**
+ * folio_add_lru_vma() - Add a folio to the appropate LRU list for this VMA.
+ * @folio: The folio to be added to the LRU.
+ * @vma: VMA in which the folio is mapped.
+ *
+ * If the VMA is mlocked, @folio is added to the unevictable list.
+ * Otherwise, it is treated the same way as folio_add_lru().
+ */
+void folio_add_lru_vma(struct folio *folio, struct vm_area_struct *vma)
+{
+	VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
+
+	if (unlikely((vma->vm_flags & (VM_LOCKED | VM_SPECIAL)) == VM_LOCKED))
+		mlock_new_folio(folio);
+	else
+		folio_add_lru(folio);
+}
+
+/*
+ * If the folio cannot be invalidated, it is moved to the
+ * inactive list to speed up its reclaim.  It is moved to the
+ * head of the list, rather than the tail, to give the flusher
+ * threads some time to write it out, as this is much more
+ * effective than the single-page writeout from reclaim.
+ *
+ * If the folio isn't mapped and dirty/writeback, the folio
+ * could be reclaimed asap using the reclaim flag.
+ *
+ * 1. active, mapped folio -> none
+ * 2. active, dirty/writeback folio -> inactive, head, reclaim
+ * 3. inactive, mapped folio -> none
+ * 4. inactive, dirty/writeback folio -> inactive, head, reclaim
+ * 5. inactive, clean -> inactive, tail
+ * 6. Others -> none
+ *
+ * In 4, it moves to the head of the inactive list so the folio is
+ * written out by flusher threads as this is much more efficient
+ * than the single-page writeout from reclaim.
+ */
+static void lru_deactivate_file(struct lruvec *lruvec, struct folio *folio)
+{
+	bool active = folio_test_active(folio) || lru_gen_enabled();
+	long nr_pages = folio_nr_pages(folio);
+
+	if (folio_test_unevictable(folio))
+		return;
+
+	/* Some processes are using the folio */
+	if (folio_mapped(folio))
+		return;
+
+	lruvec_del_folio(lruvec, folio);
+	folio_clear_active(folio);
+	folio_clear_referenced(folio);
+
+	if (folio_test_writeback(folio) || folio_test_dirty(folio)) {
+		/*
+		 * Setting the reclaim flag could race with
+		 * folio_end_writeback() and confuse readahead.  But the
+		 * race window is _really_ small and  it's not a critical
+		 * problem.
+		 */
+		lruvec_add_folio(lruvec, folio);
+		folio_set_reclaim(folio);
+	} else {
+		/*
+		 * The folio's writeback ended while it was in the batch.
+		 * We move that folio to the tail of the inactive list.
+		 */
+		lruvec_add_folio_tail(lruvec, folio);
+		__count_vm_events(PGROTATED, nr_pages);
+	}
+
+	if (active) {
+		__count_vm_events(PGDEACTIVATE, nr_pages);
+		__count_memcg_events(lruvec_memcg(lruvec), PGDEACTIVATE,
+				     nr_pages);
+	}
+}
+
+static void lru_deactivate(struct lruvec *lruvec, struct folio *folio)
+{
+	long nr_pages = folio_nr_pages(folio);
+
+	if (folio_test_unevictable(folio) || !(folio_test_active(folio) || lru_gen_enabled()))
+		return;
+
+	lruvec_del_folio(lruvec, folio);
+	folio_clear_active(folio);
+	folio_clear_referenced(folio);
+	lruvec_add_folio(lruvec, folio);
+
+	__count_vm_events(PGDEACTIVATE, nr_pages);
+	__count_memcg_events(lruvec_memcg(lruvec), PGDEACTIVATE, nr_pages);
+}
+
+static void lru_lazyfree(struct lruvec *lruvec, struct folio *folio)
+{
+	long nr_pages = folio_nr_pages(folio);
+	bool folio_added = false;
+
+	if (!folio_test_anon(folio) || !folio_test_swapbacked(folio) ||
+	    folio_test_swapcache(folio) || folio_test_unevictable(folio))
+		return;
+
+	lruvec_del_folio(lruvec, folio);
+	folio_clear_active(folio);
+	if (lru_gen_enabled())
+		lru_gen_clear_refs(folio);
+	else
+		folio_clear_referenced(folio);
+	/*
+	 * Lazyfree folios are clean anonymous folios.  They have
+	 * the swapbacked flag cleared, to distinguish them from normal
+	 * anonymous folios
+	 */
+	folio_clear_swapbacked(folio);
+	trace_android_vh_add_lazyfree_bypass(lruvec, folio, &folio_added);
+	if (!folio_added)
+		lruvec_add_folio(lruvec, folio);
+
+	__count_vm_events(PGLAZYFREE, nr_pages);
+	__count_memcg_events(lruvec_memcg(lruvec), PGLAZYFREE, nr_pages);
+}
+
+/*
+ * Drain pages out of the cpu's folio_batch.
+ * Either "cpu" is the current CPU, and preemption has already been
+ * disabled; or "cpu" is being hot-unplugged, and is already dead.
+ */
+void lru_add_drain_cpu(int cpu)
+{
+	struct cpu_fbatches *fbatches = &per_cpu(cpu_fbatches, cpu);
+	struct folio_batch *fbatch = &fbatches->lru_add;
+
+	if (folio_batch_count(fbatch))
+		folio_batch_move_lru(fbatch, lru_add);
+
+	fbatch = &fbatches->lru_move_tail;
+	/* Disabling interrupts below acts as a compiler barrier. */
+	if (data_race(folio_batch_count(fbatch))) {
+		unsigned long flags;
+
+		/* No harm done if a racing interrupt already did this */
+		local_lock_irqsave(&cpu_fbatches.lock_irq, flags);
+		folio_batch_move_lru(fbatch, lru_move_tail);
+		local_unlock_irqrestore(&cpu_fbatches.lock_irq, flags);
+	}
+
+	fbatch = &fbatches->lru_deactivate_file;
+	if (folio_batch_count(fbatch))
+		folio_batch_move_lru(fbatch, lru_deactivate_file);
+
+	fbatch = &fbatches->lru_deactivate;
+	if (folio_batch_count(fbatch))
+		folio_batch_move_lru(fbatch, lru_deactivate);
+
+	fbatch = &fbatches->lru_lazyfree;
+	if (folio_batch_count(fbatch))
+		folio_batch_move_lru(fbatch, lru_lazyfree);
+
+	folio_activate_drain(cpu);
+}
+
+/**
+ * deactivate_file_folio() - Deactivate a file folio.
+ * @folio: Folio to deactivate.
+ *
+ * This function hints to the VM that @folio is a good reclaim candidate,
+ * for example if its invalidation fails due to the folio being dirty
+ * or under writeback.
+ *
+ * Context: Caller holds a reference on the folio.
+ */
+void deactivate_file_folio(struct folio *folio)
+{
+	/* Deactivating an unevictable folio will not accelerate reclaim */
+	if (folio_test_unevictable(folio))
+		return;
+
+	if (lru_gen_enabled() && lru_gen_clear_refs(folio))
+		return;
+
+	folio_batch_add_and_move(folio, lru_deactivate_file, true);
+}
+
+/*
+ * folio_deactivate - deactivate a folio
+ * @folio: folio to deactivate
+ *
+ * folio_deactivate() moves @folio to the inactive list if @folio was on the
+ * active list and was not unevictable. This is done to accelerate the
+ * reclaim of @folio.
+ */
+void folio_deactivate(struct folio *folio)
+{
+	if (folio_test_unevictable(folio))
+		return;
+
+	if (lru_gen_enabled() ? lru_gen_clear_refs(folio) : !folio_test_active(folio))
+		return;
+
+	folio_batch_add_and_move(folio, lru_deactivate, true);
+}
+EXPORT_SYMBOL_GPL(folio_deactivate);
+
+/**
+ * folio_mark_lazyfree - make an anon folio lazyfree
+ * @folio: folio to deactivate
+ *
+ * folio_mark_lazyfree() moves @folio to the inactive file list.
+ * This is done to accelerate the reclaim of @folio.
+ */
+void folio_mark_lazyfree(struct folio *folio)
+{
+	if (!folio_test_anon(folio) || !folio_test_swapbacked(folio) ||
+	    folio_test_swapcache(folio) || folio_test_unevictable(folio))
+		return;
+
+	folio_batch_add_and_move(folio, lru_lazyfree, true);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 void lru_add_drain(void)

@@ -481,6 +481,7 @@ static int lp50xx_probe_dt(struct lp50xx *priv)
 		}
 
 		fwnode_for_each_child_node(child, led_node) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			int multi_index;
 			ret = fwnode_property_read_u32(led_node, "color",
 						       &color_id);
@@ -499,6 +500,18 @@ static int lp50xx_probe_dt(struct lp50xx *priv)
 			}
 
 			mc_led_info[multi_index].color_index = color_id;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			ret = fwnode_property_read_u32(led_node, "color",
+						       &color_id);
+			if (ret) {
+				fwnode_handle_put(led_node);
+				dev_err(priv->dev, "Cannot read color\n");
+				goto child_out;
+			}
+
+			mc_led_info[num_colors].color_index = color_id;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			num_colors++;
 		}
 

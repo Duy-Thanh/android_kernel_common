@@ -656,6 +656,7 @@ static int rk_nfc_write_page_hwecc(struct nand_chip *chip, const u8 *buf,
 
 	dma_data = dma_map_single(nfc->dev, (void *)nfc->page_buf,
 				  mtd->writesize, DMA_TO_DEVICE);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (dma_mapping_error(nfc->dev, dma_data))
 		return -ENOMEM;
 
@@ -790,6 +791,128 @@ static int rk_nfc_read_page_hwecc(struct nand_chip *chip, u8 *buf, int oob_on,
 				 DMA_FROM_DEVICE);
 		return -ENOMEM;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	dma_oob = dma_map_single(nfc->dev, nfc->oob_buf,
+				 ecc->steps * oob_step,
+				 DMA_TO_DEVICE);
+
+	reinit_completion(&nfc->done);
+	writel(INT_DMA, nfc->regs + nfc->cfg->int_en_off);
+
+	rk_nfc_xfer_start(nfc, NFC_WRITE, ecc->steps, dma_data,
+			  dma_oob);
+	ret = wait_for_completion_timeout(&nfc->done,
+					  msecs_to_jiffies(100));
+	if (!ret)
+		dev_warn(nfc->dev, "write: wait dma done timeout.\n");
+	/*
+	 * Whether the DMA transfer is completed or not. The driver
+	 * needs to check the NFC`s status register to see if the data
+	 * transfer was completed.
+	 */
+	ret = rk_nfc_wait_for_xfer_done(nfc);
+
+	dma_unmap_single(nfc->dev, dma_data, mtd->writesize,
+			 DMA_TO_DEVICE);
+	dma_unmap_single(nfc->dev, dma_oob, ecc->steps * oob_step,
+			 DMA_TO_DEVICE);
+
+	if (boot_rom_mode && rknand->boot_ecc != ecc->strength)
+		rk_nfc_hw_ecc_setup(chip, ecc->strength);
+
+	if (ret) {
+		dev_err(nfc->dev, "write: wait transfer done timeout.\n");
+		return -ETIMEDOUT;
+	}
+
+	return nand_prog_page_end_op(chip);
+}
+
+static int rk_nfc_write_oob(struct nand_chip *chip, int page)
+{
+	return rk_nfc_write_page_hwecc(chip, NULL, 1, page);
+}
+
+static int rk_nfc_read_page_raw(struct nand_chip *chip, u8 *buf, int oob_on,
+				int page)
+{
+	struct rk_nfc_nand_chip *rknand = rk_nfc_to_rknand(chip);
+	struct rk_nfc *nfc = nand_get_controller_data(chip);
+	struct mtd_info *mtd = nand_to_mtd(chip);
+	struct nand_ecc_ctrl *ecc = &chip->ecc;
+	int i, pages_per_blk;
+
+	pages_per_blk = mtd->erasesize / mtd->writesize;
+	if ((chip->options & NAND_IS_BOOT_MEDIUM) &&
+	    (page < (pages_per_blk * rknand->boot_blks)) &&
+	    rknand->boot_ecc != ecc->strength) {
+		/*
+		 * There's currently no method to notify the MTD framework that
+		 * a different ECC strength is in use for the boot blocks.
+		 */
+		return -EIO;
+	}
+
+	nand_read_page_op(chip, page, 0, NULL, 0);
+	rk_nfc_read_buf(nfc, nfc->page_buf, mtd->writesize + mtd->oobsize);
+	for (i = 0; i < ecc->steps; i++) {
+		/*
+		 * The first four bytes of OOB are reserved for the
+		 * boot ROM. In some debugging cases, such as with a read,
+		 * erase and write back test, these 4 bytes also must be
+		 * saved somewhere, otherwise this information will be
+		 * lost during a write back.
+		 */
+		if (!i)
+			memcpy(rk_nfc_buf_to_oob_ptr(chip, ecc->steps - 1),
+			       rk_nfc_oob_ptr(chip, i),
+			       NFC_SYS_DATA_SIZE);
+		else
+			memcpy(rk_nfc_buf_to_oob_ptr(chip, i - 1),
+			       rk_nfc_oob_ptr(chip, i),
+			       NFC_SYS_DATA_SIZE);
+
+		/* Copy ECC data from the NFC buffer. */
+		memcpy(rk_nfc_buf_to_oob_ecc_ptr(chip, i),
+		       rk_nfc_oob_ptr(chip, i) + NFC_SYS_DATA_SIZE,
+		       ecc->bytes);
+
+		/* Copy data from the NFC buffer. */
+		if (buf)
+			memcpy(rk_nfc_buf_to_data_ptr(chip, buf, i),
+			       rk_nfc_data_ptr(chip, i),
+			       ecc->size);
+	}
+
+	return 0;
+}
+
+static int rk_nfc_read_page_hwecc(struct nand_chip *chip, u8 *buf, int oob_on,
+				  int page)
+{
+	struct mtd_info *mtd = nand_to_mtd(chip);
+	struct rk_nfc *nfc = nand_get_controller_data(chip);
+	struct rk_nfc_nand_chip *rknand = rk_nfc_to_rknand(chip);
+	struct nand_ecc_ctrl *ecc = &chip->ecc;
+	int oob_step = (ecc->bytes > 60) ? NFC_MAX_OOB_PER_STEP :
+			NFC_MIN_OOB_PER_STEP;
+	int pages_per_blk = mtd->erasesize / mtd->writesize;
+	dma_addr_t dma_data, dma_oob;
+	int ret = 0, i, cnt, boot_rom_mode = 0;
+	int max_bitflips = 0, bch_st, ecc_fail = 0;
+	u8 *oob;
+	u32 tmp;
+
+	nand_read_page_op(chip, page, 0, NULL, 0);
+
+	dma_data = dma_map_single(nfc->dev, nfc->page_buf,
+				  mtd->writesize,
+				  DMA_FROM_DEVICE);
+	dma_oob = dma_map_single(nfc->dev, nfc->oob_buf,
+				 ecc->steps * oob_step,
+				 DMA_FROM_DEVICE);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/*
 	 * The first blocks (4, 8 or 16 depending on the device)

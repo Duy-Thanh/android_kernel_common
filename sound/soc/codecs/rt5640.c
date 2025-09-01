@@ -3014,11 +3014,15 @@ static int rt5640_i2c_probe(struct i2c_client *i2c)
 
 	regmap_read(rt5640->regmap, RT5640_VENDOR_ID2, &val);
 	if (val != RT5640_DEVICE_ID) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		usleep_range(60000, 100000);
 		regmap_read(rt5640->regmap, RT5640_VENDOR_ID2, &val);
 	}
 
 	if (val != RT5640_DEVICE_ID) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		dev_err(&i2c->dev,
 			"Device with ID register %#x is not rt5640/39\n", val);
 		return -ENODEV;

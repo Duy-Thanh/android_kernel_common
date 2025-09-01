@@ -55,6 +55,7 @@ static int mdsc_show(struct seq_file *s, void *p)
 	struct ceph_mds_client *mdsc = fsc->mdsc;
 	struct ceph_mds_request *req;
 	struct rb_node *rp;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	char *path;
 
 	mutex_lock(&mdsc->mutex);
@@ -110,6 +111,66 @@ static int mdsc_show(struct seq_file *s, void *p)
 				   path ? path : "");
 			spin_unlock(&req->r_old_dentry->d_lock);
 			ceph_mdsc_free_path_info(&path_info);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int pathlen = 0;
+	u64 pathbase;
+	char *path;
+
+	mutex_lock(&mdsc->mutex);
+	for (rp = rb_first(&mdsc->request_tree); rp; rp = rb_next(rp)) {
+		req = rb_entry(rp, struct ceph_mds_request, r_node);
+
+		if (req->r_request && req->r_session)
+			seq_printf(s, "%lld\tmds%d\t", req->r_tid,
+				   req->r_session->s_mds);
+		else if (!req->r_request)
+			seq_printf(s, "%lld\t(no request)\t", req->r_tid);
+		else
+			seq_printf(s, "%lld\t(no session)\t", req->r_tid);
+
+		seq_printf(s, "%s", ceph_mds_op_name(req->r_op));
+
+		if (test_bit(CEPH_MDS_R_GOT_UNSAFE, &req->r_req_flags))
+			seq_puts(s, "\t(unsafe)");
+		else
+			seq_puts(s, "\t");
+
+		if (req->r_inode) {
+			seq_printf(s, " #%llx", ceph_ino(req->r_inode));
+		} else if (req->r_dentry) {
+			path = ceph_mdsc_build_path(mdsc, req->r_dentry, &pathlen,
+						    &pathbase, 0);
+			if (IS_ERR(path))
+				path = NULL;
+			spin_lock(&req->r_dentry->d_lock);
+			seq_printf(s, " #%llx/%pd (%s)",
+				   ceph_ino(d_inode(req->r_dentry->d_parent)),
+				   req->r_dentry,
+				   path ? path : "");
+			spin_unlock(&req->r_dentry->d_lock);
+			ceph_mdsc_free_path(path, pathlen);
+		} else if (req->r_path1) {
+			seq_printf(s, " #%llx/%s", req->r_ino1.ino,
+				   req->r_path1);
+		} else {
+			seq_printf(s, " #%llx", req->r_ino1.ino);
+		}
+
+		if (req->r_old_dentry) {
+			path = ceph_mdsc_build_path(mdsc, req->r_old_dentry, &pathlen,
+						    &pathbase, 0);
+			if (IS_ERR(path))
+				path = NULL;
+			spin_lock(&req->r_old_dentry->d_lock);
+			seq_printf(s, " #%llx/%pd (%s)",
+				   req->r_old_dentry_dir ?
+				   ceph_ino(req->r_old_dentry_dir) : 0,
+				   req->r_old_dentry,
+				   path ? path : "");
+			spin_unlock(&req->r_old_dentry->d_lock);
+			ceph_mdsc_free_path(path, pathlen);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		} else if (req->r_path2 && req->r_op != CEPH_MDS_OP_SYMLINK) {
 			if (req->r_ino2.ino)
 				seq_printf(s, " #%llx/%s", req->r_ino2.ino,

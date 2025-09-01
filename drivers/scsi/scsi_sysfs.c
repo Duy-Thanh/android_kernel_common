@@ -265,6 +265,7 @@ show_shost_supported_mode(struct device *dev, struct device_attribute *attr,
 	return show_shost_mode(supported_mode, buf);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static DEVICE_ATTR(supported_mode, S_IRUGO, show_shost_supported_mode, NULL);
 
 static ssize_t
@@ -280,6 +281,24 @@ show_shost_active_mode(struct device *dev,
 }
 
 static DEVICE_ATTR(active_mode, S_IRUGO, show_shost_active_mode, NULL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static DEVICE_ATTR(supported_mode, S_IRUGO | S_IWUSR, show_shost_supported_mode, NULL);
+
+static ssize_t
+show_shost_active_mode(struct device *dev,
+		       struct device_attribute *attr, char *buf)
+{
+	struct Scsi_Host *shost = class_to_shost(dev);
+
+	if (shost->active_mode == MODE_UNKNOWN)
+		return snprintf(buf, 20, "unknown\n");
+	else
+		return show_shost_mode(shost->active_mode, buf);
+}
+
+static DEVICE_ATTR(active_mode, S_IRUGO | S_IWUSR, show_shost_active_mode, NULL);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 static int check_reset_type(const char *str)
 {

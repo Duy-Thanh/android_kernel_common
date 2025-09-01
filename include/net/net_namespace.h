@@ -291,6 +291,7 @@ static inline int check_net(const struct net *net)
 }
 
 void net_drop_ns(void *);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 void net_passive_dec(struct net *net);
 
 #else
@@ -338,6 +339,40 @@ static inline bool net_initialized(const struct net *net)
 {
 	return READ_ONCE(net->list.next);
 }
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+#else
+
+static inline struct net *get_net(struct net *net)
+{
+	return net;
+}
+
+static inline void put_net(struct net *net)
+{
+}
+
+static inline struct net *maybe_get_net(struct net *net)
+{
+	return net;
+}
+
+static inline
+int net_eq(const struct net *net1, const struct net *net2)
+{
+	return 1;
+}
+
+static inline int check_net(const struct net *net)
+{
+	return 1;
+}
+
+#define net_drop_ns NULL
+#endif
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 static inline void __netns_tracker_alloc(struct net *net,
 					 netns_tracker *tracker,

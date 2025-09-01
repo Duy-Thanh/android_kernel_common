@@ -531,9 +531,13 @@ static int firmware_param_path_get(char *buffer, const struct kernel_param *kp)
 			count += scnprintf(buffer + count, PATH_SIZE, "%s%s", fw_path_para[i], ",");
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (count == 0)
 		return 0;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	buffer[count - 1] = '\0';
 
 	return count - 1;

@@ -29,6 +29,7 @@
 #include <linux/idr.h>
 #include <linux/leds.h>
 #include <linux/rculist.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/spinlock.h>
 #include <linux/srcu.h>
 #include <linux/android_kabi.h>
@@ -1231,6 +1232,1181 @@ static inline struct hci_conn *hci_conn_hash_lookup_role(struct hci_dev *hdev,
 
 	list_for_each_entry_rcu(c, &h->list, list) {
 		if (c->type == type && c->role == role && !bacmp(&c->dst, ba)) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/android_kabi.h>
+
+#include <net/bluetooth/hci.h>
+#include <net/bluetooth/hci_drv.h>
+#include <net/bluetooth/hci_sync.h>
+#include <net/bluetooth/hci_sock.h>
+#include <net/bluetooth/coredump.h>
+
+/* HCI priority */
+#define HCI_PRIO_MAX	7
+
+/* HCI maximum id value */
+#define HCI_MAX_ID 10000
+
+/* HCI Core structures */
+struct inquiry_data {
+	bdaddr_t	bdaddr;
+	__u8		pscan_rep_mode;
+	__u8		pscan_period_mode;
+	__u8		pscan_mode;
+	__u8		dev_class[3];
+	__le16		clock_offset;
+	__s8		rssi;
+	__u8		ssp_mode;
+};
+
+struct inquiry_entry {
+	struct list_head	all;		/* inq_cache.all */
+	struct list_head	list;		/* unknown or resolve */
+	enum {
+		NAME_NOT_KNOWN,
+		NAME_NEEDED,
+		NAME_PENDING,
+		NAME_KNOWN,
+	} name_state;
+	__u32			timestamp;
+	struct inquiry_data	data;
+};
+
+struct discovery_state {
+	int			type;
+	enum {
+		DISCOVERY_STOPPED,
+		DISCOVERY_STARTING,
+		DISCOVERY_FINDING,
+		DISCOVERY_RESOLVING,
+		DISCOVERY_STOPPING,
+	} state;
+	struct list_head	all;	/* All devices found during inquiry */
+	struct list_head	unknown;	/* Name state not known */
+	struct list_head	resolve;	/* Name needs to be resolved */
+	__u32			timestamp;
+	bdaddr_t		last_adv_addr;
+	u8			last_adv_addr_type;
+	s8			last_adv_rssi;
+	u32			last_adv_flags;
+	u8			last_adv_data[HCI_MAX_EXT_AD_LENGTH];
+	u8			last_adv_data_len;
+	bool			report_invalid_rssi;
+	bool			result_filtering;
+	bool			limited;
+	s8			rssi;
+	u16			uuid_count;
+	u8			(*uuids)[16];
+	unsigned long		name_resolve_timeout;
+};
+
+#define SUSPEND_NOTIFIER_TIMEOUT	msecs_to_jiffies(2000) /* 2 seconds */
+
+enum suspend_tasks {
+	SUSPEND_PAUSE_DISCOVERY,
+	SUSPEND_UNPAUSE_DISCOVERY,
+
+	SUSPEND_PAUSE_ADVERTISING,
+	SUSPEND_UNPAUSE_ADVERTISING,
+
+	SUSPEND_SCAN_DISABLE,
+	SUSPEND_SCAN_ENABLE,
+	SUSPEND_DISCONNECTING,
+
+	SUSPEND_POWERING_DOWN,
+
+	SUSPEND_PREPARE_NOTIFIER,
+
+	SUSPEND_SET_ADV_FILTER,
+	__SUSPEND_NUM_TASKS
+};
+
+enum suspended_state {
+	BT_RUNNING = 0,
+	BT_SUSPEND_DISCONNECT,
+	BT_SUSPEND_CONFIGURE_WAKE,
+};
+
+struct hci_conn_hash {
+	struct list_head list;
+	unsigned int     acl_num;
+	unsigned int     sco_num;
+	unsigned int     iso_num;
+	unsigned int     le_num;
+	unsigned int     le_num_peripheral;
+};
+
+struct bdaddr_list {
+	struct list_head list;
+	bdaddr_t bdaddr;
+	u8 bdaddr_type;
+};
+
+struct codec_list {
+	struct list_head list;
+	u8	id;
+	__u16	cid;
+	__u16	vid;
+	u8	transport;
+	u8	num_caps;
+	u32	len;
+	struct hci_codec_caps caps[];
+};
+
+struct bdaddr_list_with_irk {
+	struct list_head list;
+	bdaddr_t bdaddr;
+	u8 bdaddr_type;
+	u8 peer_irk[16];
+	u8 local_irk[16];
+};
+
+/* Bitmask of connection flags */
+enum hci_conn_flags {
+	HCI_CONN_FLAG_REMOTE_WAKEUP = 1,
+	HCI_CONN_FLAG_DEVICE_PRIVACY = 2,
+};
+typedef u8 hci_conn_flags_t;
+
+struct bdaddr_list_with_flags {
+	struct list_head list;
+	bdaddr_t bdaddr;
+	u8 bdaddr_type;
+	hci_conn_flags_t flags;
+};
+
+struct bt_uuid {
+	struct list_head list;
+	u8 uuid[16];
+	u8 size;
+	u8 svc_hint;
+};
+
+struct blocked_key {
+	struct list_head list;
+	struct rcu_head rcu;
+	u8 type;
+	u8 val[16];
+};
+
+struct smp_csrk {
+	bdaddr_t bdaddr;
+	u8 bdaddr_type;
+	u8 type;
+	u8 val[16];
+};
+
+struct smp_ltk {
+	struct list_head list;
+	struct rcu_head rcu;
+	bdaddr_t bdaddr;
+	u8 bdaddr_type;
+	u8 authenticated;
+	u8 type;
+	u8 enc_size;
+	__le16 ediv;
+	__le64 rand;
+	u8 val[16];
+};
+
+struct smp_irk {
+	struct list_head list;
+	struct rcu_head rcu;
+	bdaddr_t rpa;
+	bdaddr_t bdaddr;
+	u8 addr_type;
+	u8 val[16];
+};
+
+struct link_key {
+	struct list_head list;
+	struct rcu_head rcu;
+	bdaddr_t bdaddr;
+	u8 type;
+	u8 val[HCI_LINK_KEY_SIZE];
+	u8 pin_len;
+};
+
+struct oob_data {
+	struct list_head list;
+	bdaddr_t bdaddr;
+	u8 bdaddr_type;
+	u8 present;
+	u8 hash192[16];
+	u8 rand192[16];
+	u8 hash256[16];
+	u8 rand256[16];
+};
+
+struct adv_info {
+	struct list_head list;
+	bool	enabled;
+	bool	pending;
+	bool	periodic;
+	__u8	mesh;
+	__u8	instance;
+	__u8	handle;
+	__u32	flags;
+	__u16	timeout;
+	__u16	remaining_time;
+	__u16	duration;
+	__u16	adv_data_len;
+	__u8	adv_data[HCI_MAX_EXT_AD_LENGTH];
+	bool	adv_data_changed;
+	__u16	scan_rsp_len;
+	__u8	scan_rsp_data[HCI_MAX_EXT_AD_LENGTH];
+	bool	scan_rsp_changed;
+	__u16	per_adv_data_len;
+	__u8	per_adv_data[HCI_MAX_PER_AD_LENGTH];
+	__s8	tx_power;
+	__u32   min_interval;
+	__u32   max_interval;
+	bdaddr_t	random_addr;
+	bool 		rpa_expired;
+	struct delayed_work	rpa_expired_cb;
+};
+
+#define HCI_MAX_ADV_INSTANCES		5
+#define HCI_DEFAULT_ADV_DURATION	2
+
+#define HCI_ADV_TX_POWER_NO_PREFERENCE 0x7F
+
+#define DATA_CMP(_d1, _l1, _d2, _l2) \
+	(_l1 == _l2 ? memcmp(_d1, _d2, _l1) : _l1 - _l2)
+
+#define ADV_DATA_CMP(_adv, _data, _len) \
+	DATA_CMP((_adv)->adv_data, (_adv)->adv_data_len, _data, _len)
+
+#define SCAN_RSP_CMP(_adv, _data, _len) \
+	DATA_CMP((_adv)->scan_rsp_data, (_adv)->scan_rsp_len, _data, _len)
+
+struct monitored_device {
+	struct list_head list;
+
+	bdaddr_t bdaddr;
+	__u8     addr_type;
+	__u16    handle;
+	bool     notified;
+};
+
+struct adv_pattern {
+	struct list_head list;
+	__u8 ad_type;
+	__u8 offset;
+	__u8 length;
+	__u8 value[HCI_MAX_EXT_AD_LENGTH];
+};
+
+struct adv_rssi_thresholds {
+	__s8 low_threshold;
+	__s8 high_threshold;
+	__u16 low_threshold_timeout;
+	__u16 high_threshold_timeout;
+	__u8 sampling_period;
+};
+
+struct adv_monitor {
+	struct list_head patterns;
+	struct adv_rssi_thresholds rssi;
+	__u16		handle;
+
+	enum {
+		ADV_MONITOR_STATE_NOT_REGISTERED,
+		ADV_MONITOR_STATE_REGISTERED,
+		ADV_MONITOR_STATE_OFFLOADED
+	} state;
+};
+
+#define HCI_MIN_ADV_MONITOR_HANDLE		1
+#define HCI_MAX_ADV_MONITOR_NUM_HANDLES		32
+#define HCI_MAX_ADV_MONITOR_NUM_PATTERNS	16
+#define HCI_ADV_MONITOR_EXT_NONE		1
+#define HCI_ADV_MONITOR_EXT_MSFT		2
+
+#define HCI_MAX_SHORT_NAME_LENGTH	10
+
+#define HCI_CONN_HANDLE_MAX		0x0eff
+#define HCI_CONN_HANDLE_UNSET(_handle)	(_handle > HCI_CONN_HANDLE_MAX)
+
+/* Min encryption key size to match with SMP */
+#define HCI_MIN_ENC_KEY_SIZE		7
+
+/* Default LE RPA expiry time, 15 minutes */
+#define HCI_DEFAULT_RPA_TIMEOUT		(15 * 60)
+
+/* Default min/max age of connection information (1s/3s) */
+#define DEFAULT_CONN_INFO_MIN_AGE	1000
+#define DEFAULT_CONN_INFO_MAX_AGE	3000
+/* Default authenticated payload timeout 30s */
+#define DEFAULT_AUTH_PAYLOAD_TIMEOUT   0x0bb8
+
+#define HCI_MAX_PAGES	3
+
+struct hci_dev {
+	struct list_head list;
+	struct mutex	lock;
+
+	struct ida	unset_handle_ida;
+
+	const char	*name;
+	unsigned long	flags;
+	__u16		id;
+	__u8		bus;
+	bdaddr_t	bdaddr;
+	bdaddr_t	setup_addr;
+	bdaddr_t	public_addr;
+	bdaddr_t	random_addr;
+	bdaddr_t	static_addr;
+	__u8		adv_addr_type;
+	__u8		dev_name[HCI_MAX_NAME_LENGTH];
+	__u8		short_name[HCI_MAX_SHORT_NAME_LENGTH];
+	__u8		eir[HCI_MAX_EIR_LENGTH];
+	__u16		appearance;
+	__u8		dev_class[3];
+	__u8		major_class;
+	__u8		minor_class;
+	__u8		max_page;
+	__u8		features[HCI_MAX_PAGES][8];
+	__u8		le_features[8];
+	__u8		le_accept_list_size;
+	__u8		le_resolv_list_size;
+	__u8		le_num_of_adv_sets;
+	__u8		le_states[8];
+	__u8		mesh_ad_types[16];
+	__u8		mesh_send_ref;
+	__u8		commands[64];
+	__u8		hci_ver;
+	__u16		hci_rev;
+	__u8		lmp_ver;
+	__u16		manufacturer;
+	__u16		lmp_subver;
+	__u16		voice_setting;
+	__u8		num_iac;
+	__u16		stored_max_keys;
+	__u16		stored_num_keys;
+	__u8		io_capability;
+	__s8		inq_tx_power;
+	__u8		err_data_reporting;
+	__u16		page_scan_interval;
+	__u16		page_scan_window;
+	__u8		page_scan_type;
+	__u8		le_adv_channel_map;
+	__u16		le_adv_min_interval;
+	__u16		le_adv_max_interval;
+	__u8		le_scan_type;
+	__u16		le_scan_interval;
+	__u16		le_scan_window;
+	__u16		le_scan_int_suspend;
+	__u16		le_scan_window_suspend;
+	__u16		le_scan_int_discovery;
+	__u16		le_scan_window_discovery;
+	__u16		le_scan_int_adv_monitor;
+	__u16		le_scan_window_adv_monitor;
+	__u16		le_scan_int_connect;
+	__u16		le_scan_window_connect;
+	__u16		le_conn_min_interval;
+	__u16		le_conn_max_interval;
+	__u16		le_conn_latency;
+	__u16		le_supv_timeout;
+	__u16		le_def_tx_len;
+	__u16		le_def_tx_time;
+	__u16		le_max_tx_len;
+	__u16		le_max_tx_time;
+	__u16		le_max_rx_len;
+	__u16		le_max_rx_time;
+	__u8		le_max_key_size;
+	__u8		le_min_key_size;
+	__u16		discov_interleaved_timeout;
+	__u16		conn_info_min_age;
+	__u16		conn_info_max_age;
+	__u16		auth_payload_timeout;
+	__u8		min_enc_key_size;
+	__u8		max_enc_key_size;
+	__u8		pairing_opts;
+	__u8		ssp_debug_mode;
+	__u8		hw_error_code;
+	__u32		clock;
+	__u16		advmon_allowlist_duration;
+	__u16		advmon_no_filter_duration;
+	__u8		enable_advmon_interleave_scan;
+
+	__u16		devid_source;
+	__u16		devid_vendor;
+	__u16		devid_product;
+	__u16		devid_version;
+
+	__u8		def_page_scan_type;
+	__u16		def_page_scan_int;
+	__u16		def_page_scan_window;
+	__u8		def_inq_scan_type;
+	__u16		def_inq_scan_int;
+	__u16		def_inq_scan_window;
+	__u16		def_br_lsto;
+	__u16		def_page_timeout;
+	__u16		def_multi_adv_rotation_duration;
+	__u16		def_le_autoconnect_timeout;
+	__s8		min_le_tx_power;
+	__s8		max_le_tx_power;
+
+	__u16		pkt_type;
+	__u16		esco_type;
+	__u16		link_policy;
+	__u16		link_mode;
+
+	__u32		idle_timeout;
+	__u16		sniff_min_interval;
+	__u16		sniff_max_interval;
+
+	unsigned int	auto_accept_delay;
+
+	unsigned long	quirks;
+
+	atomic_t	cmd_cnt;
+	unsigned int	acl_cnt;
+	unsigned int	sco_cnt;
+	unsigned int	le_cnt;
+	unsigned int	iso_cnt;
+
+	unsigned int	acl_mtu;
+	unsigned int	sco_mtu;
+	unsigned int	le_mtu;
+	unsigned int	iso_mtu;
+	unsigned int	acl_pkts;
+	unsigned int	sco_pkts;
+	unsigned int	le_pkts;
+	unsigned int	iso_pkts;
+
+	unsigned long	acl_last_tx;
+	unsigned long	le_last_tx;
+
+	__u8		le_tx_def_phys;
+	__u8		le_rx_def_phys;
+
+	struct workqueue_struct	*workqueue;
+	struct workqueue_struct	*req_workqueue;
+
+	struct work_struct	power_on;
+	struct delayed_work	power_off;
+	struct work_struct	error_reset;
+	struct work_struct	cmd_sync_work;
+	struct list_head	cmd_sync_work_list;
+	struct mutex		cmd_sync_work_lock;
+	struct mutex		unregister_lock;
+	struct work_struct	cmd_sync_cancel_work;
+	struct work_struct	reenable_adv_work;
+
+	__u16			discov_timeout;
+	struct delayed_work	discov_off;
+
+	struct delayed_work	service_cache;
+
+	struct delayed_work	cmd_timer;
+	struct delayed_work	ncmd_timer;
+
+	struct work_struct	rx_work;
+	struct work_struct	cmd_work;
+	struct work_struct	tx_work;
+
+	struct delayed_work	le_scan_disable;
+
+	struct sk_buff_head	rx_q;
+	struct sk_buff_head	raw_q;
+	struct sk_buff_head	cmd_q;
+
+	struct sk_buff		*sent_cmd;
+	struct sk_buff		*recv_event;
+
+	struct mutex		req_lock;
+	wait_queue_head_t	req_wait_q;
+	__u32			req_status;
+	__u32			req_result;
+	struct sk_buff		*req_skb;
+	struct sk_buff		*req_rsp;
+
+	void			*smp_data;
+	void			*smp_bredr_data;
+
+	struct discovery_state	discovery;
+
+	bool			discovery_paused;
+	int			advertising_old_state;
+	bool			advertising_paused;
+
+	struct notifier_block	suspend_notifier;
+	enum suspended_state	suspend_state_next;
+	enum suspended_state	suspend_state;
+	bool			scanning_paused;
+	bool			suspended;
+	u8			wake_reason;
+	bdaddr_t		wake_addr;
+	u8			wake_addr_type;
+
+	struct hci_conn_hash	conn_hash;
+
+	struct list_head	mesh_pending;
+	struct list_head	mgmt_pending;
+	struct list_head	reject_list;
+	struct list_head	accept_list;
+	struct list_head	uuids;
+	struct list_head	link_keys;
+	struct list_head	long_term_keys;
+	struct list_head	identity_resolving_keys;
+	struct list_head	remote_oob_data;
+	struct list_head	le_accept_list;
+	struct list_head	le_resolv_list;
+	struct list_head	le_conn_params;
+	struct list_head	pend_le_conns;
+	struct list_head	pend_le_reports;
+	struct list_head	blocked_keys;
+	struct list_head	local_codecs;
+
+	struct hci_dev_stats	stat;
+
+	atomic_t		promisc;
+
+	const char		*hw_info;
+	const char		*fw_info;
+	struct dentry		*debugfs;
+
+	struct hci_devcoredump	dump;
+
+	struct device		dev;
+
+	struct rfkill		*rfkill;
+
+	DECLARE_BITMAP(dev_flags, __HCI_NUM_FLAGS);
+	hci_conn_flags_t	conn_flags;
+
+	__s8			adv_tx_power;
+	__u8			adv_data[HCI_MAX_EXT_AD_LENGTH];
+	__u8			adv_data_len;
+	__u8			scan_rsp_data[HCI_MAX_EXT_AD_LENGTH];
+	__u8			scan_rsp_data_len;
+	__u8			per_adv_data[HCI_MAX_PER_AD_LENGTH];
+	__u8			per_adv_data_len;
+
+	struct list_head	adv_instances;
+	unsigned int		adv_instance_cnt;
+	__u8			cur_adv_instance;
+	__u16			adv_instance_timeout;
+	struct delayed_work	adv_instance_expire;
+
+	struct idr		adv_monitors_idr;
+	unsigned int		adv_monitors_cnt;
+
+	__u8			irk[16];
+	__u32			rpa_timeout;
+	struct delayed_work	rpa_expired;
+	bdaddr_t		rpa;
+
+	struct delayed_work	mesh_send_done;
+
+	enum {
+		INTERLEAVE_SCAN_NONE,
+		INTERLEAVE_SCAN_NO_FILTER,
+		INTERLEAVE_SCAN_ALLOWLIST
+	} interleave_scan_state;
+
+	struct delayed_work	interleave_scan;
+
+	struct list_head	monitored_devices;
+	bool			advmon_pend_notify;
+
+	struct hci_drv		*hci_drv;
+
+#if IS_ENABLED(CONFIG_BT_LEDS)
+	struct led_trigger	*power_led;
+#endif
+
+#if IS_ENABLED(CONFIG_BT_MSFTEXT)
+	__u16			msft_opcode;
+	void			*msft_data;
+	bool			msft_curve_validity;
+#endif
+
+#if IS_ENABLED(CONFIG_BT_AOSPEXT)
+	bool			aosp_capable;
+	bool			aosp_quality_report;
+#endif
+
+	int (*open)(struct hci_dev *hdev);
+	int (*close)(struct hci_dev *hdev);
+	int (*flush)(struct hci_dev *hdev);
+	int (*setup)(struct hci_dev *hdev);
+	int (*shutdown)(struct hci_dev *hdev);
+	int (*send)(struct hci_dev *hdev, struct sk_buff *skb);
+	void (*notify)(struct hci_dev *hdev, unsigned int evt);
+	void (*hw_error)(struct hci_dev *hdev, u8 code);
+	int (*post_init)(struct hci_dev *hdev);
+	int (*set_diag)(struct hci_dev *hdev, bool enable);
+	int (*set_bdaddr)(struct hci_dev *hdev, const bdaddr_t *bdaddr);
+	void (*reset)(struct hci_dev *hdev);
+	bool (*wakeup)(struct hci_dev *hdev);
+	int (*set_quality_report)(struct hci_dev *hdev, bool enable);
+	int (*get_data_path_id)(struct hci_dev *hdev, __u8 *data_path);
+	int (*get_codec_config_data)(struct hci_dev *hdev, __u8 type,
+				     struct bt_codec *codec, __u8 *vnd_len,
+				     __u8 **vnd_data);
+	u8 (*classify_pkt_type)(struct hci_dev *hdev, struct sk_buff *skb);
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+};
+
+#define HCI_PHY_HANDLE(handle)	(handle & 0xff)
+
+enum conn_reasons {
+	CONN_REASON_PAIR_DEVICE,
+	CONN_REASON_L2CAP_CHAN,
+	CONN_REASON_SCO_CONNECT,
+	CONN_REASON_ISO_CONNECT,
+};
+
+struct hci_conn {
+	struct list_head list;
+
+	atomic_t	refcnt;
+
+	bdaddr_t	dst;
+	__u8		dst_type;
+	bdaddr_t	src;
+	__u8		src_type;
+	bdaddr_t	init_addr;
+	__u8		init_addr_type;
+	bdaddr_t	resp_addr;
+	__u8		resp_addr_type;
+	__u8		adv_instance;
+	__u16		handle;
+	__u16		sync_handle;
+	__u8		sid;
+	__u16		state;
+	__u16		mtu;
+	__u8		mode;
+	__u8		type;
+	__u8		role;
+	bool		out;
+	__u8		attempt;
+	__u8		dev_class[3];
+	__u8		features[HCI_MAX_PAGES][8];
+	__u16		pkt_type;
+	__u16		link_policy;
+	__u8		key_type;
+	__u8		auth_type;
+	__u8		sec_level;
+	__u8		pending_sec_level;
+	__u8		pin_length;
+	__u8		enc_key_size;
+	__u8		io_capability;
+	__u32		passkey_notify;
+	__u8		passkey_entered;
+	__u16		disc_timeout;
+	__u16		conn_timeout;
+	__u16		setting;
+	__u16		auth_payload_timeout;
+	__u16		le_conn_min_interval;
+	__u16		le_conn_max_interval;
+	__u16		le_conn_interval;
+	__u16		le_conn_latency;
+	__u16		le_supv_timeout;
+	__u8		le_adv_data[HCI_MAX_EXT_AD_LENGTH];
+	__u8		le_adv_data_len;
+	__u8		le_per_adv_data[HCI_MAX_PER_AD_TOT_LEN];
+	__u16		le_per_adv_data_len;
+	__u16		le_per_adv_data_offset;
+	__u8		le_adv_phy;
+	__u8		le_adv_sec_phy;
+	__u8		le_tx_phy;
+	__u8		le_rx_phy;
+	__s8		rssi;
+	__s8		tx_power;
+	__s8		max_tx_power;
+	struct bt_iso_qos iso_qos;
+	__u8		num_bis;
+	__u8		bis[HCI_MAX_ISO_BIS];
+
+	unsigned long	flags;
+
+	enum conn_reasons conn_reason;
+	__u8		abort_reason;
+
+	__u32		clock;
+	__u16		clock_accuracy;
+
+	unsigned long	conn_info_timestamp;
+
+	__u8		remote_cap;
+	__u8		remote_auth;
+	__u8		remote_id;
+
+	unsigned int	sent;
+
+	struct sk_buff_head data_q;
+	struct list_head chan_list;
+
+	struct delayed_work disc_work;
+	struct delayed_work auto_accept_work;
+	struct delayed_work idle_work;
+	struct delayed_work le_conn_timeout;
+
+	struct device	dev;
+	struct dentry	*debugfs;
+
+	struct hci_dev	*hdev;
+	void		*l2cap_data;
+	void		*sco_data;
+	void		*iso_data;
+
+	struct list_head link_list;
+	struct hci_conn	*parent;
+	struct hci_link *link;
+
+	struct bt_codec codec;
+
+	void (*connect_cfm_cb)	(struct hci_conn *conn, u8 status);
+	void (*security_cfm_cb)	(struct hci_conn *conn, u8 status);
+	void (*disconn_cfm_cb)	(struct hci_conn *conn, u8 reason);
+
+	void (*cleanup)(struct hci_conn *conn);
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+};
+
+struct hci_link {
+	struct list_head list;
+	struct hci_conn *conn;
+};
+
+struct hci_chan {
+	struct list_head list;
+	__u16 handle;
+	struct hci_conn *conn;
+	struct sk_buff_head data_q;
+	unsigned int	sent;
+	__u8		state;
+
+	ANDROID_KABI_RESERVE(1);
+};
+
+struct hci_conn_params {
+	struct list_head list;
+	struct list_head action;
+
+	bdaddr_t addr;
+	u8 addr_type;
+
+	u16 conn_min_interval;
+	u16 conn_max_interval;
+	u16 conn_latency;
+	u16 supervision_timeout;
+
+	enum {
+		HCI_AUTO_CONN_DISABLED,
+		HCI_AUTO_CONN_REPORT,
+		HCI_AUTO_CONN_DIRECT,
+		HCI_AUTO_CONN_ALWAYS,
+		HCI_AUTO_CONN_LINK_LOSS,
+		HCI_AUTO_CONN_EXPLICIT,
+	} auto_connect;
+
+	struct hci_conn *conn;
+	bool explicit_connect;
+	/* Accessed without hdev->lock: */
+	hci_conn_flags_t flags;
+	u8  privacy_mode;
+
+	ANDROID_KABI_RESERVE(1);
+};
+
+extern struct list_head hci_dev_list;
+extern struct list_head hci_cb_list;
+extern rwlock_t hci_dev_list_lock;
+extern struct mutex hci_cb_list_lock;
+
+#define hci_dev_set_flag(hdev, nr)             set_bit((nr), (hdev)->dev_flags)
+#define hci_dev_clear_flag(hdev, nr)           clear_bit((nr), (hdev)->dev_flags)
+#define hci_dev_change_flag(hdev, nr)          change_bit((nr), (hdev)->dev_flags)
+#define hci_dev_test_flag(hdev, nr)            test_bit((nr), (hdev)->dev_flags)
+#define hci_dev_test_and_set_flag(hdev, nr)    test_and_set_bit((nr), (hdev)->dev_flags)
+#define hci_dev_test_and_clear_flag(hdev, nr)  test_and_clear_bit((nr), (hdev)->dev_flags)
+#define hci_dev_test_and_change_flag(hdev, nr) test_and_change_bit((nr), (hdev)->dev_flags)
+
+#define hci_dev_clear_volatile_flags(hdev)			\
+	do {							\
+		hci_dev_clear_flag(hdev, HCI_LE_SCAN);		\
+		hci_dev_clear_flag(hdev, HCI_LE_ADV);		\
+		hci_dev_clear_flag(hdev, HCI_LL_RPA_RESOLUTION);\
+		hci_dev_clear_flag(hdev, HCI_PERIODIC_INQ);	\
+		hci_dev_clear_flag(hdev, HCI_QUALITY_REPORT);	\
+	} while (0)
+
+#define hci_dev_le_state_simultaneous(hdev) \
+	(!test_bit(HCI_QUIRK_BROKEN_LE_STATES, &hdev->quirks) && \
+	 (hdev->le_states[4] & 0x08) &&	/* Central */ \
+	 (hdev->le_states[4] & 0x40) &&	/* Peripheral */ \
+	 (hdev->le_states[3] & 0x10))	/* Simultaneous */
+
+/* ----- HCI interface to upper protocols ----- */
+int l2cap_connect_ind(struct hci_dev *hdev, bdaddr_t *bdaddr);
+int l2cap_disconn_ind(struct hci_conn *hcon);
+void l2cap_recv_acldata(struct hci_conn *hcon, struct sk_buff *skb, u16 flags);
+
+#if IS_ENABLED(CONFIG_BT_BREDR)
+int sco_connect_ind(struct hci_dev *hdev, bdaddr_t *bdaddr, __u8 *flags);
+void sco_recv_scodata(struct hci_conn *hcon, struct sk_buff *skb);
+#else
+static inline int sco_connect_ind(struct hci_dev *hdev, bdaddr_t *bdaddr,
+				  __u8 *flags)
+{
+	return 0;
+}
+
+static inline void sco_recv_scodata(struct hci_conn *hcon, struct sk_buff *skb)
+{
+}
+#endif
+
+#if IS_ENABLED(CONFIG_BT_LE)
+int iso_connect_ind(struct hci_dev *hdev, bdaddr_t *bdaddr, __u8 *flags);
+void iso_recv(struct hci_conn *hcon, struct sk_buff *skb, u16 flags);
+#else
+static inline int iso_connect_ind(struct hci_dev *hdev, bdaddr_t *bdaddr,
+				  __u8 *flags)
+{
+	return 0;
+}
+static inline void iso_recv(struct hci_conn *hcon, struct sk_buff *skb,
+			    u16 flags)
+{
+}
+#endif
+
+/* ----- Inquiry cache ----- */
+#define INQUIRY_CACHE_AGE_MAX   (HZ*30)   /* 30 seconds */
+#define INQUIRY_ENTRY_AGE_MAX   (HZ*60)   /* 60 seconds */
+
+static inline void discovery_init(struct hci_dev *hdev)
+{
+	hdev->discovery.state = DISCOVERY_STOPPED;
+	INIT_LIST_HEAD(&hdev->discovery.all);
+	INIT_LIST_HEAD(&hdev->discovery.unknown);
+	INIT_LIST_HEAD(&hdev->discovery.resolve);
+	hdev->discovery.report_invalid_rssi = true;
+	hdev->discovery.rssi = HCI_RSSI_INVALID;
+}
+
+static inline void hci_discovery_filter_clear(struct hci_dev *hdev)
+{
+	hdev->discovery.result_filtering = false;
+	hdev->discovery.report_invalid_rssi = true;
+	hdev->discovery.rssi = HCI_RSSI_INVALID;
+	hdev->discovery.uuid_count = 0;
+	kfree(hdev->discovery.uuids);
+	hdev->discovery.uuids = NULL;
+}
+
+bool hci_discovery_active(struct hci_dev *hdev);
+
+void hci_discovery_set_state(struct hci_dev *hdev, int state);
+
+static inline int inquiry_cache_empty(struct hci_dev *hdev)
+{
+	return list_empty(&hdev->discovery.all);
+}
+
+static inline long inquiry_cache_age(struct hci_dev *hdev)
+{
+	struct discovery_state *c = &hdev->discovery;
+	return jiffies - c->timestamp;
+}
+
+static inline long inquiry_entry_age(struct inquiry_entry *e)
+{
+	return jiffies - e->timestamp;
+}
+
+struct inquiry_entry *hci_inquiry_cache_lookup(struct hci_dev *hdev,
+					       bdaddr_t *bdaddr);
+struct inquiry_entry *hci_inquiry_cache_lookup_unknown(struct hci_dev *hdev,
+						       bdaddr_t *bdaddr);
+struct inquiry_entry *hci_inquiry_cache_lookup_resolve(struct hci_dev *hdev,
+						       bdaddr_t *bdaddr,
+						       int state);
+void hci_inquiry_cache_update_resolve(struct hci_dev *hdev,
+				      struct inquiry_entry *ie);
+u32 hci_inquiry_cache_update(struct hci_dev *hdev, struct inquiry_data *data,
+			     bool name_known);
+void hci_inquiry_cache_flush(struct hci_dev *hdev);
+
+/* ----- HCI Connections ----- */
+enum {
+	HCI_CONN_AUTH_PEND,
+	HCI_CONN_ENCRYPT_PEND,
+	HCI_CONN_RSWITCH_PEND,
+	HCI_CONN_MODE_CHANGE_PEND,
+	HCI_CONN_SCO_SETUP_PEND,
+	HCI_CONN_MGMT_CONNECTED,
+	HCI_CONN_SSP_ENABLED,
+	HCI_CONN_SC_ENABLED,
+	HCI_CONN_AES_CCM,
+	HCI_CONN_POWER_SAVE,
+	HCI_CONN_FLUSH_KEY,
+	HCI_CONN_ENCRYPT,
+	HCI_CONN_AUTH,
+	HCI_CONN_SECURE,
+	HCI_CONN_FIPS,
+	HCI_CONN_STK_ENCRYPT,
+	HCI_CONN_AUTH_INITIATOR,
+	HCI_CONN_DROP,
+	HCI_CONN_CANCEL,
+	HCI_CONN_PARAM_REMOVAL_PEND,
+	HCI_CONN_NEW_LINK_KEY,
+	HCI_CONN_SCANNING,
+	HCI_CONN_AUTH_FAILURE,
+	HCI_CONN_PER_ADV,
+	HCI_CONN_BIG_CREATED,
+	HCI_CONN_CREATE_CIS,
+	HCI_CONN_CREATE_BIG_SYNC,
+	HCI_CONN_BIG_SYNC,
+	HCI_CONN_BIG_SYNC_FAILED,
+	HCI_CONN_CREATE_PA_SYNC,
+	HCI_CONN_PA_SYNC,
+	HCI_CONN_PA_SYNC_FAILED,
+};
+
+static inline bool hci_conn_ssp_enabled(struct hci_conn *conn)
+{
+	struct hci_dev *hdev = conn->hdev;
+	return hci_dev_test_flag(hdev, HCI_SSP_ENABLED) &&
+	       test_bit(HCI_CONN_SSP_ENABLED, &conn->flags);
+}
+
+static inline bool hci_conn_sc_enabled(struct hci_conn *conn)
+{
+	struct hci_dev *hdev = conn->hdev;
+	return hci_dev_test_flag(hdev, HCI_SC_ENABLED) &&
+	       test_bit(HCI_CONN_SC_ENABLED, &conn->flags);
+}
+
+static inline void hci_conn_hash_add(struct hci_dev *hdev, struct hci_conn *c)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	list_add_tail_rcu(&c->list, &h->list);
+	switch (c->type) {
+	case ACL_LINK:
+		h->acl_num++;
+		break;
+	case LE_LINK:
+		h->le_num++;
+		if (c->role == HCI_ROLE_SLAVE)
+			h->le_num_peripheral++;
+		break;
+	case SCO_LINK:
+	case ESCO_LINK:
+		h->sco_num++;
+		break;
+	case ISO_LINK:
+		h->iso_num++;
+		break;
+	}
+}
+
+static inline void hci_conn_hash_del(struct hci_dev *hdev, struct hci_conn *c)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+
+	list_del_rcu(&c->list);
+	synchronize_rcu();
+
+	switch (c->type) {
+	case ACL_LINK:
+		h->acl_num--;
+		break;
+	case LE_LINK:
+		h->le_num--;
+		if (c->role == HCI_ROLE_SLAVE)
+			h->le_num_peripheral--;
+		break;
+	case SCO_LINK:
+	case ESCO_LINK:
+		h->sco_num--;
+		break;
+	case ISO_LINK:
+		h->iso_num--;
+		break;
+	}
+}
+
+static inline unsigned int hci_conn_num(struct hci_dev *hdev, __u8 type)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	switch (type) {
+	case ACL_LINK:
+		return h->acl_num;
+	case LE_LINK:
+		return h->le_num;
+	case SCO_LINK:
+	case ESCO_LINK:
+		return h->sco_num;
+	case ISO_LINK:
+		return h->iso_num;
+	default:
+		return 0;
+	}
+}
+
+static inline unsigned int hci_conn_count(struct hci_dev *hdev)
+{
+	struct hci_conn_hash *c = &hdev->conn_hash;
+
+	return c->acl_num + c->sco_num + c->le_num + c->iso_num;
+}
+
+static inline bool hci_conn_valid(struct hci_dev *hdev, struct hci_conn *conn)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	struct hci_conn  *c;
+
+	rcu_read_lock();
+
+	list_for_each_entry_rcu(c, &h->list, list) {
+		if (c == conn) {
+			rcu_read_unlock();
+			return true;
+		}
+	}
+	rcu_read_unlock();
+
+	return false;
+}
+
+static inline __u8 hci_conn_lookup_type(struct hci_dev *hdev, __u16 handle)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	struct hci_conn *c;
+	__u8 type = INVALID_LINK;
+
+	rcu_read_lock();
+
+	list_for_each_entry_rcu(c, &h->list, list) {
+		if (c->handle == handle) {
+			type = c->type;
+			break;
+		}
+	}
+
+	rcu_read_unlock();
+
+	return type;
+}
+
+static inline struct hci_conn *hci_conn_hash_lookup_bis(struct hci_dev *hdev,
+							bdaddr_t *ba, __u8 bis)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	struct hci_conn  *c;
+
+	rcu_read_lock();
+
+	list_for_each_entry_rcu(c, &h->list, list) {
+		if (bacmp(&c->dst, ba) || c->type != ISO_LINK)
+			continue;
+
+		if (c->iso_qos.bcast.bis == bis) {
+			rcu_read_unlock();
+			return c;
+		}
+	}
+	rcu_read_unlock();
+
+	return NULL;
+}
+
+static inline struct hci_conn *
+hci_conn_hash_lookup_create_pa_sync(struct hci_dev *hdev)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	struct hci_conn  *c;
+
+	rcu_read_lock();
+
+	list_for_each_entry_rcu(c, &h->list, list) {
+		if (c->type != ISO_LINK)
+			continue;
+
+		if (!test_bit(HCI_CONN_CREATE_PA_SYNC, &c->flags))
+			continue;
+
+		rcu_read_unlock();
+		return c;
+	}
+
+	rcu_read_unlock();
+
+	return NULL;
+}
+
+static inline struct hci_conn *
+hci_conn_hash_lookup_per_adv_bis(struct hci_dev *hdev,
+				 bdaddr_t *ba,
+				 __u8 big, __u8 bis)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	struct hci_conn  *c;
+
+	rcu_read_lock();
+
+	list_for_each_entry_rcu(c, &h->list, list) {
+		if (bacmp(&c->dst, ba) || c->type != ISO_LINK ||
+			!test_bit(HCI_CONN_PER_ADV, &c->flags))
+			continue;
+
+		if (c->iso_qos.bcast.big == big &&
+		    c->iso_qos.bcast.bis == bis) {
+			rcu_read_unlock();
+			return c;
+		}
+	}
+	rcu_read_unlock();
+
+	return NULL;
+}
+
+static inline struct hci_conn *hci_conn_hash_lookup_handle(struct hci_dev *hdev,
+								__u16 handle)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	struct hci_conn  *c;
+
+	rcu_read_lock();
+
+	list_for_each_entry_rcu(c, &h->list, list) {
+		if (c->handle == handle) {
+			rcu_read_unlock();
+			return c;
+		}
+	}
+	rcu_read_unlock();
+
+	return NULL;
+}
+
+static inline struct hci_conn *hci_conn_hash_lookup_ba(struct hci_dev *hdev,
+							__u8 type, bdaddr_t *ba)
+{
+	struct hci_conn_hash *h = &hdev->conn_hash;
+	struct hci_conn  *c;
+
+	rcu_read_lock();
+
+	list_for_each_entry_rcu(c, &h->list, list) {
+		if (c->type == type && !bacmp(&c->dst, ba)) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			rcu_read_unlock();
 			return c;
 		}

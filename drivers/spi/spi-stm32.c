@@ -2069,6 +2069,7 @@ static int stm32_spi_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct reset_control *rst;
 	struct device_node *np = pdev->dev.of_node;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	const struct stm32_spi_cfg *cfg;
 	bool device_mode;
 	int ret;
@@ -2078,6 +2079,12 @@ static int stm32_spi_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to get match data for platform\n");
 		return -ENODEV;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool device_mode;
+	int ret;
+	const struct stm32_spi_cfg *cfg = of_device_get_match_data(&pdev->dev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	device_mode = of_property_read_bool(np, "spi-slave");
 	if (!cfg->has_device_mode && device_mode) {

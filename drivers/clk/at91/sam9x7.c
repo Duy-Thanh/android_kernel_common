@@ -61,6 +61,7 @@ static const struct clk_master_layout sam9x7_master_layout = {
 
 /* Fractional PLL core output range. */
 static const struct clk_range plla_core_outputs[] = {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	{ .min = 800000000, .max = 1600000000 },
 };
 
@@ -99,6 +100,47 @@ static const struct clk_range audiopll_outputs[] = {
 
 static const struct clk_range plladiv2_outputs[] = {
 	{ .min = 200000000, .max = 400000000 },
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	{ .min = 375000000, .max = 1600000000 },
+};
+
+static const struct clk_range upll_core_outputs[] = {
+	{ .min = 600000000, .max = 1200000000 },
+};
+
+static const struct clk_range lvdspll_core_outputs[] = {
+	{ .min = 400000000, .max = 800000000 },
+};
+
+static const struct clk_range audiopll_core_outputs[] = {
+	{ .min = 400000000, .max = 800000000 },
+};
+
+static const struct clk_range plladiv2_core_outputs[] = {
+	{ .min = 375000000, .max = 1600000000 },
+};
+
+/* Fractional PLL output range. */
+static const struct clk_range plla_outputs[] = {
+	{ .min = 732421, .max = 800000000 },
+};
+
+static const struct clk_range upll_outputs[] = {
+	{ .min = 300000000, .max = 600000000 },
+};
+
+static const struct clk_range lvdspll_outputs[] = {
+	{ .min = 10000000, .max = 800000000 },
+};
+
+static const struct clk_range audiopll_outputs[] = {
+	{ .min = 10000000, .max = 800000000 },
+};
+
+static const struct clk_range plladiv2_outputs[] = {
+	{ .min = 366210, .max = 400000000 },
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 /* PLL characteristics. */

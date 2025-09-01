@@ -227,6 +227,7 @@ static int sd_init(struct gspca_dev *gspca_dev)
 	const struct ihex_binrec *rec;
 	const struct firmware *fw;
 	u8 *firmware_buf;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int len;
 
 	ret = request_ihex_firmware(&fw, VICAM_FIRMWARE,
@@ -250,6 +251,26 @@ static int sd_init(struct gspca_dev *gspca_dev)
 		memcpy(firmware_buf, rec->data, len);
 		ret = vicam_control_msg(gspca_dev, 0xff, 0, 0, firmware_buf,
 					len);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	ret = request_ihex_firmware(&fw, VICAM_FIRMWARE,
+				    &gspca_dev->dev->dev);
+	if (ret) {
+		pr_err("Failed to load \"vicam/firmware.fw\": %d\n", ret);
+		return ret;
+	}
+
+	firmware_buf = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	if (!firmware_buf) {
+		ret = -ENOMEM;
+		goto exit;
+	}
+	for (rec = (void *)fw->data; rec; rec = ihex_next_binrec(rec)) {
+		memcpy(firmware_buf, rec->data, be16_to_cpu(rec->len));
+		ret = vicam_control_msg(gspca_dev, 0xff, 0, 0, firmware_buf,
+					be16_to_cpu(rec->len));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (ret < 0)
 			break;
 	}

@@ -49,6 +49,7 @@ static int tps65912_gpio_direction_output(struct gpio_chip *gc,
 					  unsigned offset, int value)
 {
 	struct tps65912_gpio *gpio = gpiochip_get_data(gc);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int ret;
 
 	/* Set the initial value */
@@ -56,6 +57,13 @@ static int tps65912_gpio_direction_output(struct gpio_chip *gc,
 				 GPIO_SET_MASK, value ? GPIO_SET_MASK : 0);
 	if (ret)
 		return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	/* Set the initial value */
+	regmap_update_bits(gpio->tps->regmap, TPS65912_GPIO1 + offset,
+			   GPIO_SET_MASK, value ? GPIO_SET_MASK : 0);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return regmap_update_bits(gpio->tps->regmap, TPS65912_GPIO1 + offset,
 				  GPIO_CFG_MASK, GPIO_CFG_MASK);

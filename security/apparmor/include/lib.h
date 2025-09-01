@@ -48,11 +48,16 @@ extern struct aa_dfa *stacksplitdfa;
 #define AA_BUG_FMT(X, fmt, args...)					\
 	WARN((X), "AppArmor WARN %s: (" #X "): " fmt, __func__, ##args)
 #else
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define AA_BUG_FMT(X, fmt, args...)					\
 	do {								\
 		BUILD_BUG_ON_INVALID(X);				\
 		no_printk(fmt, ##args);					\
 	} while (0)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define AA_BUG_FMT(X, fmt, args...) no_printk(fmt, ##args)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #endif
 
 #define AA_ERROR(fmt, args...)						\

@@ -1601,6 +1601,7 @@ static int f_midi2_create_card(struct f_midi2 *midi2)
 			strscpy(fb->info.name, ump_fb_name(b),
 				sizeof(fb->info.name));
 		}
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		snd_ump_update_group_attrs(ump);
 	}
 
@@ -1759,6 +1760,160 @@ static int f_midi2_create_usb_configs(struct f_midi2 *midi2,
 			midi2_midi2_ep_in_desc[i].wMaxPacketSize =
 				cpu_to_le16(1024);
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	}
+
+	for (i = 0; i < midi2->num_eps; i++) {
+		err = snd_ump_attach_legacy_rawmidi(midi2->midi2_eps[i].ump,
+						    "Legacy MIDI", id);
+		if (err < 0)
+			goto error;
+		id++;
+	}
+
+	err = snd_ctl_add(card, snd_ctl_new1(&operation_mode_ctl, midi2));
+	if (err < 0)
+		goto error;
+
+	err = snd_card_register(card);
+	if (err < 0)
+		goto error;
+
+	return 0;
+
+ error:
+	f_midi2_free_card(midi2);
+	return err;
+}
+
+/*
+ * Creation of USB descriptors
+ */
+struct f_midi2_usb_config {
+	struct usb_descriptor_header **list;
+	unsigned int size;
+	unsigned int alloc;
+
+	/* MIDI 1.0 jacks */
+	unsigned char jack_in, jack_out, jack_id;
+	struct usb_midi_in_jack_descriptor jack_ins[MAX_CABLES];
+	struct usb_midi_out_jack_descriptor_1 jack_outs[MAX_CABLES];
+};
+
+static int append_config(struct f_midi2_usb_config *config, void *d)
+{
+	unsigned int size;
+	void *buf;
+
+	if (config->size + 2 >= config->alloc) {
+		size = config->size + 16;
+		buf = krealloc(config->list, size * sizeof(void *), GFP_KERNEL);
+		if (!buf)
+			return -ENOMEM;
+		config->list = buf;
+		config->alloc = size;
+	}
+
+	config->list[config->size] = d;
+	config->size++;
+	config->list[config->size] = NULL;
+	return 0;
+}
+
+static int append_configs(struct f_midi2_usb_config *config, void **d)
+{
+	int err;
+
+	for (; *d; d++) {
+		err = append_config(config, *d);
+		if (err)
+			return err;
+	}
+	return 0;
+}
+
+static int append_midi1_in_jack(struct f_midi2 *midi2,
+				struct f_midi2_usb_config *config,
+				struct midi1_cable_mapping *map,
+				unsigned int type)
+{
+	struct usb_midi_in_jack_descriptor *jack =
+		&config->jack_ins[config->jack_in++];
+	int id = ++config->jack_id;
+	int err;
+
+	jack->bLength = 0x06;
+	jack->bDescriptorType = USB_DT_CS_INTERFACE;
+	jack->bDescriptorSubtype = USB_MS_MIDI_IN_JACK;
+	jack->bJackType = type;
+	jack->bJackID = id;
+	/* use the corresponding block name as jack name */
+	if (map->ep)
+		jack->iJack = map->ep->blks[map->block].string_id;
+
+	err = append_config(config, jack);
+	if (err < 0)
+		return err;
+	return id;
+}
+
+static int append_midi1_out_jack(struct f_midi2 *midi2,
+				 struct f_midi2_usb_config *config,
+				 struct midi1_cable_mapping *map,
+				 unsigned int type, unsigned int source)
+{
+	struct usb_midi_out_jack_descriptor_1 *jack =
+		&config->jack_outs[config->jack_out++];
+	int id = ++config->jack_id;
+	int err;
+
+	jack->bLength = 0x09;
+	jack->bDescriptorType = USB_DT_CS_INTERFACE;
+	jack->bDescriptorSubtype = USB_MS_MIDI_OUT_JACK;
+	jack->bJackType = type;
+	jack->bJackID = id;
+	jack->bNrInputPins = 1;
+	jack->pins[0].baSourceID = source;
+	jack->pins[0].baSourcePin = 0x01;
+	/* use the corresponding block name as jack name */
+	if (map->ep)
+		jack->iJack = map->ep->blks[map->block].string_id;
+
+	err = append_config(config, jack);
+	if (err < 0)
+		return err;
+	return id;
+}
+
+static int f_midi2_create_usb_configs(struct f_midi2 *midi2,
+				      struct f_midi2_usb_config *config,
+				      int speed)
+{
+	void **midi1_in_eps, **midi1_out_eps;
+	int i, jack, total;
+	int err;
+
+	switch (speed) {
+	default:
+	case USB_SPEED_HIGH:
+		midi2_midi1_ep_out_desc.wMaxPacketSize = cpu_to_le16(512);
+		midi2_midi1_ep_in_desc.wMaxPacketSize = cpu_to_le16(512);
+		for (i = 0; i < midi2->num_eps; i++)
+			midi2_midi2_ep_out_desc[i].wMaxPacketSize =
+				cpu_to_le16(512);
+		fallthrough;
+	case USB_SPEED_FULL:
+		midi1_in_eps = midi2_midi1_ep_in_descs;
+		midi1_out_eps = midi2_midi1_ep_out_descs;
+		break;
+	case USB_SPEED_SUPER:
+		midi2_midi1_ep_out_desc.wMaxPacketSize = cpu_to_le16(1024);
+		midi2_midi1_ep_in_desc.wMaxPacketSize = cpu_to_le16(1024);
+		for (i = 0; i < midi2->num_eps; i++)
+			midi2_midi2_ep_out_desc[i].wMaxPacketSize =
+				cpu_to_le16(1024);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		midi1_in_eps = midi2_midi1_ep_in_ss_descs;
 		midi1_out_eps = midi2_midi1_ep_out_ss_descs;
 		break;

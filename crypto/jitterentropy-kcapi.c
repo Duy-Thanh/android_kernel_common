@@ -144,6 +144,7 @@ int jent_hash_time(void *hash_state, __u64 time, u8 *addtl,
 	 * Inject the data from the previous loop into the pool. This data is
 	 * not considered to contain any entropy, but it stirs the pool a bit.
 	 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ret = crypto_shash_update(hash_state_desc, intermediary, sizeof(intermediary));
 	if (ret)
 		goto err;
@@ -162,6 +163,26 @@ int jent_hash_time(void *hash_state, __u64 time, u8 *addtl,
 	}
 
 	ret = crypto_shash_update(hash_state_desc, (u8 *)&time, sizeof(__u64));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ret = crypto_shash_update(desc, intermediary, sizeof(intermediary));
+	if (ret)
+		goto err;
+
+	/*
+	 * Insert the time stamp into the hash context representing the pool.
+	 *
+	 * If the time stamp is stuck, do not finally insert the value into the
+	 * entropy pool. Although this operation should not do any harm even
+	 * when the time stamp has no entropy, SP800-90B requires that any
+	 * conditioning operation to have an identical amount of input data
+	 * according to section 3.1.5.
+	 */
+	if (!stuck) {
+		ret = crypto_shash_update(hash_state_desc, (u8 *)&time,
+					  sizeof(__u64));
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 err:
 	shash_desc_zero(desc);

@@ -655,6 +655,7 @@ static void sk_psock_backlog(struct work_struct *work)
 	bool ingress;
 	int ret;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* If sk is quickly removed from the map and then added back, the old
 	 * psock should not be scheduled, because there are now two psocks
 	 * pointing to the same sk.
@@ -662,6 +663,9 @@ static void sk_psock_backlog(struct work_struct *work)
 	if (!sk_psock_test_state(psock, SK_PSOCK_TX_ENABLED))
 		return;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	/* Increment the psock refcnt to synchronize with close(fd) path in
 	 * sock_map_close(), ensuring we wait for backlog thread completion
 	 * before sk_socket freed. If refcnt increment fails, it indicates

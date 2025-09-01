@@ -1415,6 +1415,7 @@ static void rtw89_fw_release_pno_pkt_list(struct rtw89_dev *rtwdev,
 static int rtw89_pno_scan_update_probe_req(struct rtw89_dev *rtwdev,
 					   struct rtw89_vif_link *rtwvif_link)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	static const u8 basic_rate_ie[] = {WLAN_EID_SUPP_RATES, 0x08,
 		 0x0c, 0x12, 0x18, 0x24, 0x30, 0x48, 0x60, 0x6c};
 	struct rtw89_wow_param *rtw_wow = &rtwdev->wow;
@@ -1433,6 +1434,24 @@ static int rtw89_pno_scan_update_probe_req(struct rtw89_dev *rtwdev,
 			return -ENOMEM;
 
 		skb_put_data(skb, basic_rate_ie, sizeof(basic_rate_ie));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct rtw89_wow_param *rtw_wow = &rtwdev->wow;
+	struct cfg80211_sched_scan_request *nd_config = rtw_wow->nd_config;
+	u8 num = nd_config->n_match_sets, i;
+	struct rtw89_pktofld_info *info;
+	struct sk_buff *skb;
+	int ret;
+
+	for (i = 0; i < num; i++) {
+		skb = ieee80211_probereq_get(rtwdev->hw, rtwvif_link->mac_addr,
+					     nd_config->match_sets[i].ssid.ssid,
+					     nd_config->match_sets[i].ssid.ssid_len,
+					     nd_config->ie_len);
+		if (!skb)
+			return -ENOMEM;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		skb_put_data(skb, nd_config->ie, nd_config->ie_len);
 
 		info = kzalloc(sizeof(*info), GFP_KERNEL);

@@ -1061,6 +1061,7 @@ mv_xor_channel_add(struct mv_xor_device *xordev,
 	 */
 	mv_chan->dummy_src_addr = dma_map_single(dma_dev->dev,
 		mv_chan->dummy_src, MV_XOR_MIN_BYTE_COUNT, DMA_FROM_DEVICE);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (dma_mapping_error(dma_dev->dev, mv_chan->dummy_src_addr))
 		return ERR_PTR(-ENOMEM);
 
@@ -1172,6 +1173,103 @@ err_unmap_src:
 	dma_unmap_single(dma_dev->dev, mv_chan->dummy_src_addr,
 			 MV_XOR_MIN_BYTE_COUNT, DMA_FROM_DEVICE);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	mv_chan->dummy_dst_addr = dma_map_single(dma_dev->dev,
+		mv_chan->dummy_dst, MV_XOR_MIN_BYTE_COUNT, DMA_TO_DEVICE);
+
+	/* allocate coherent memory for hardware descriptors
+	 * note: writecombine gives slightly better performance, but
+	 * requires that we explicitly flush the writes
+	 */
+	mv_chan->dma_desc_pool_virt =
+	  dma_alloc_wc(&pdev->dev, MV_XOR_POOL_SIZE, &mv_chan->dma_desc_pool,
+		       GFP_KERNEL);
+	if (!mv_chan->dma_desc_pool_virt)
+		return ERR_PTR(-ENOMEM);
+
+	/* discover transaction capabilities from the platform data */
+	dma_dev->cap_mask = cap_mask;
+
+	INIT_LIST_HEAD(&dma_dev->channels);
+
+	/* set base routines */
+	dma_dev->device_alloc_chan_resources = mv_xor_alloc_chan_resources;
+	dma_dev->device_free_chan_resources = mv_xor_free_chan_resources;
+	dma_dev->device_tx_status = mv_xor_status;
+	dma_dev->device_issue_pending = mv_xor_issue_pending;
+
+	/* set prep routines based on capability */
+	if (dma_has_cap(DMA_INTERRUPT, dma_dev->cap_mask))
+		dma_dev->device_prep_dma_interrupt = mv_xor_prep_dma_interrupt;
+	if (dma_has_cap(DMA_MEMCPY, dma_dev->cap_mask))
+		dma_dev->device_prep_dma_memcpy = mv_xor_prep_dma_memcpy;
+	if (dma_has_cap(DMA_XOR, dma_dev->cap_mask)) {
+		dma_dev->max_xor = 8;
+		dma_dev->device_prep_dma_xor = mv_xor_prep_dma_xor;
+	}
+
+	mv_chan->mmr_base = xordev->xor_base;
+	mv_chan->mmr_high_base = xordev->xor_high_base;
+	tasklet_setup(&mv_chan->irq_tasklet, mv_xor_tasklet);
+
+	/* clear errors before enabling interrupts */
+	mv_chan_clear_err_status(mv_chan);
+
+	ret = request_irq(mv_chan->irq, mv_xor_interrupt_handler,
+			  0, dev_name(&pdev->dev), mv_chan);
+	if (ret)
+		goto err_free_dma;
+
+	mv_chan_unmask_interrupts(mv_chan);
+
+	if (mv_chan->op_in_desc == XOR_MODE_IN_DESC)
+		mv_chan_set_mode(mv_chan, XOR_OPERATION_MODE_IN_DESC);
+	else
+		mv_chan_set_mode(mv_chan, XOR_OPERATION_MODE_XOR);
+
+	spin_lock_init(&mv_chan->lock);
+	INIT_LIST_HEAD(&mv_chan->chain);
+	INIT_LIST_HEAD(&mv_chan->completed_slots);
+	INIT_LIST_HEAD(&mv_chan->free_slots);
+	INIT_LIST_HEAD(&mv_chan->allocated_slots);
+	mv_chan->dmachan.device = dma_dev;
+	dma_cookie_init(&mv_chan->dmachan);
+
+	list_add_tail(&mv_chan->dmachan.device_node, &dma_dev->channels);
+
+	if (dma_has_cap(DMA_MEMCPY, dma_dev->cap_mask)) {
+		ret = mv_chan_memcpy_self_test(mv_chan);
+		dev_dbg(&pdev->dev, "memcpy self test returned %d\n", ret);
+		if (ret)
+			goto err_free_irq;
+	}
+
+	if (dma_has_cap(DMA_XOR, dma_dev->cap_mask)) {
+		ret = mv_chan_xor_self_test(mv_chan);
+		dev_dbg(&pdev->dev, "xor self test returned %d\n", ret);
+		if (ret)
+			goto err_free_irq;
+	}
+
+	dev_info(&pdev->dev, "Marvell XOR (%s): ( %s%s%s)\n",
+		 mv_chan->op_in_desc ? "Descriptor Mode" : "Registers Mode",
+		 dma_has_cap(DMA_XOR, dma_dev->cap_mask) ? "xor " : "",
+		 dma_has_cap(DMA_MEMCPY, dma_dev->cap_mask) ? "cpy " : "",
+		 dma_has_cap(DMA_INTERRUPT, dma_dev->cap_mask) ? "intr " : "");
+
+	ret = dma_async_device_register(dma_dev);
+	if (ret)
+		goto err_free_irq;
+
+	return mv_chan;
+
+err_free_irq:
+	free_irq(mv_chan->irq, mv_chan);
+err_free_dma:
+	dma_free_coherent(&pdev->dev, MV_XOR_POOL_SIZE,
+			  mv_chan->dma_desc_pool_virt, mv_chan->dma_desc_pool);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return ERR_PTR(ret);
 }
 

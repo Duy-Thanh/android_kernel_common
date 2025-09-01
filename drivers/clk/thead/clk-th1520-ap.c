@@ -582,6 +582,7 @@ static const struct clk_parent_data peri2sys_apb_pclk_pd[] = {
 	{ .hw = &peri2sys_apb_pclk.common.hw }
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static struct clk_fixed_factor osc12m_clk = {
 	.div		= 2,
 	.mult		= 1,
@@ -805,6 +806,224 @@ static CCU_GATE(CLK_CPU2PERI_X2H, cpu2peri_x2h_clk, "cpu2peri-x2h", axi4_cpusys2
 		0x140, BIT(9), CLK_IGNORE_UNUSED);
 static CCU_GATE(CLK_PERISYS_APB1_HCLK, perisys_apb1_hclk, "perisys-apb1-hclk", perisys_ahb_hclk_pd,
 		0x150, BIT(9), CLK_IGNORE_UNUSED);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static CLK_FIXED_FACTOR_FW_NAME(osc12m_clk, "osc_12m", "osc_24m", 2, 1, 0);
+
+static const char * const out_parents[] = { "osc_24m", "osc_12m" };
+
+static struct ccu_div out1_clk = {
+	.enable		= BIT(5),
+	.div		= TH_CCU_DIV_FLAGS(0, 3, CLK_DIVIDER_ONE_BASED),
+	.mux		= TH_CCU_ARG(4, 1),
+	.common		= {
+		.clkid          = CLK_OUT1,
+		.cfg0		= 0x1b4,
+		.hw.init	= CLK_HW_INIT_PARENTS("out1",
+						      out_parents,
+						      &ccu_div_ops,
+						      0),
+	},
+};
+
+static struct ccu_div out2_clk = {
+	.enable		= BIT(5),
+	.div		= TH_CCU_DIV_FLAGS(0, 3, CLK_DIVIDER_ONE_BASED),
+	.mux		= TH_CCU_ARG(4, 1),
+	.common		= {
+		.clkid          = CLK_OUT2,
+		.cfg0		= 0x1b8,
+		.hw.init	= CLK_HW_INIT_PARENTS("out2",
+						      out_parents,
+						      &ccu_div_ops,
+						      0),
+	},
+};
+
+static struct ccu_div out3_clk = {
+	.enable		= BIT(5),
+	.div		= TH_CCU_DIV_FLAGS(0, 3, CLK_DIVIDER_ONE_BASED),
+	.mux		= TH_CCU_ARG(4, 1),
+	.common		= {
+		.clkid          = CLK_OUT3,
+		.cfg0		= 0x1bc,
+		.hw.init	= CLK_HW_INIT_PARENTS("out3",
+						      out_parents,
+						      &ccu_div_ops,
+						      0),
+	},
+};
+
+static struct ccu_div out4_clk = {
+	.enable		= BIT(5),
+	.div		= TH_CCU_DIV_FLAGS(0, 3, CLK_DIVIDER_ONE_BASED),
+	.mux		= TH_CCU_ARG(4, 1),
+	.common		= {
+		.clkid          = CLK_OUT4,
+		.cfg0		= 0x1c0,
+		.hw.init	= CLK_HW_INIT_PARENTS("out4",
+						      out_parents,
+						      &ccu_div_ops,
+						      0),
+	},
+};
+
+static const struct clk_parent_data apb_parents[] = {
+	{ .hw = &gmac_pll_clk.common.hw },
+	{ .index = 0 },
+};
+
+static struct ccu_div apb_pclk = {
+	.enable		= BIT(5),
+	.div		= TH_CCU_DIV_FLAGS(0, 4, CLK_DIVIDER_ONE_BASED),
+	.mux		= TH_CCU_ARG(7, 1),
+	.common		= {
+		.clkid          = CLK_APB_PCLK,
+		.cfg0		= 0x1c4,
+		.hw.init	= CLK_HW_INIT_PARENTS_DATA("apb-pclk",
+						      apb_parents,
+						      &ccu_div_ops,
+						      CLK_IGNORE_UNUSED),
+	},
+};
+
+static const struct clk_hw *npu_parents[] = {
+	&gmac_pll_clk.common.hw,
+	&video_pll_clk.common.hw
+};
+
+static struct ccu_div npu_clk = {
+	.enable		= BIT(4),
+	.div		= TH_CCU_DIV_FLAGS(0, 3, CLK_DIVIDER_ONE_BASED),
+	.mux		= TH_CCU_ARG(6, 1),
+	.common		= {
+		.clkid          = CLK_NPU,
+		.cfg0		= 0x1c8,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("npu",
+						      npu_parents,
+						      &ccu_div_ops,
+						      0),
+	},
+};
+
+static struct ccu_div vi_clk = {
+	.div		= TH_CCU_DIV_FLAGS(16, 4, CLK_DIVIDER_ONE_BASED),
+	.common		= {
+		.clkid          = CLK_VI,
+		.cfg0		= 0x1d0,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("vi",
+					      video_pll_clk_parent,
+					      &ccu_div_ops,
+					      0),
+	},
+};
+
+static struct ccu_div vi_ahb_clk = {
+	.div		= TH_CCU_DIV_FLAGS(0, 4, CLK_DIVIDER_ONE_BASED),
+	.common		= {
+		.clkid          = CLK_VI_AHB,
+		.cfg0		= 0x1d0,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("vi-ahb",
+					      video_pll_clk_parent,
+					      &ccu_div_ops,
+					      0),
+	},
+};
+
+static struct ccu_div vo_axi_clk = {
+	.enable		= BIT(5),
+	.div		= TH_CCU_DIV_FLAGS(0, 4, CLK_DIVIDER_ONE_BASED),
+	.common		= {
+		.clkid          = CLK_VO_AXI,
+		.cfg0		= 0x1dc,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("vo-axi",
+					      video_pll_clk_parent,
+					      &ccu_div_ops,
+					      0),
+	},
+};
+
+static struct ccu_div vp_apb_clk = {
+	.div		= TH_CCU_DIV_FLAGS(0, 3, CLK_DIVIDER_ONE_BASED),
+	.common		= {
+		.clkid          = CLK_VP_APB,
+		.cfg0		= 0x1e0,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("vp-apb",
+					      gmac_pll_clk_parent,
+					      &ccu_div_ops,
+					      0),
+	},
+};
+
+static struct ccu_div vp_axi_clk = {
+	.enable		= BIT(15),
+	.div		= TH_CCU_DIV_FLAGS(8, 4, CLK_DIVIDER_ONE_BASED),
+	.common		= {
+		.clkid          = CLK_VP_AXI,
+		.cfg0		= 0x1e0,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("vp-axi",
+					      video_pll_clk_parent,
+					      &ccu_div_ops,
+					      CLK_IGNORE_UNUSED),
+	},
+};
+
+static struct ccu_div venc_clk = {
+	.enable		= BIT(5),
+	.div		= TH_CCU_DIV_FLAGS(0, 3, CLK_DIVIDER_ONE_BASED),
+	.common		= {
+		.clkid          = CLK_VENC,
+		.cfg0		= 0x1e4,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("venc",
+					      gmac_pll_clk_parent,
+					      &ccu_div_ops,
+					      0),
+	},
+};
+
+static struct ccu_div dpu0_clk = {
+	.div		= TH_CCU_DIV_FLAGS(0, 8, CLK_DIVIDER_ONE_BASED),
+	.common		= {
+		.clkid          = CLK_DPU0,
+		.cfg0		= 0x1e8,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("dpu0",
+					      dpu0_pll_clk_parent,
+					      &ccu_div_ops,
+					      0),
+	},
+};
+
+static struct ccu_div dpu1_clk = {
+	.div		= TH_CCU_DIV_FLAGS(0, 8, CLK_DIVIDER_ONE_BASED),
+	.common		= {
+		.clkid          = CLK_DPU1,
+		.cfg0		= 0x1ec,
+		.hw.init	= CLK_HW_INIT_PARENTS_HW("dpu1",
+					      dpu1_pll_clk_parent,
+					      &ccu_div_ops,
+					      0),
+	},
+};
+
+static CLK_FIXED_FACTOR_HW(emmc_sdio_ref_clk, "emmc-sdio-ref",
+			   &video_pll_clk.common.hw, 4, 1, 0);
+
+static const struct clk_parent_data emmc_sdio_ref_clk_pd[] = {
+	{ .hw = &emmc_sdio_ref_clk.hw },
+};
+
+static CCU_GATE(CLK_BROM, brom_clk, "brom", ahb2_cpusys_hclk_pd, 0x100, BIT(4), 0);
+static CCU_GATE(CLK_BMU, bmu_clk, "bmu", axi4_cpusys2_aclk_pd, 0x100, BIT(5), 0);
+static CCU_GATE(CLK_AON2CPU_A2X, aon2cpu_a2x_clk, "aon2cpu-a2x", axi4_cpusys2_aclk_pd,
+		0x134, BIT(8), 0);
+static CCU_GATE(CLK_X2X_CPUSYS, x2x_cpusys_clk, "x2x-cpusys", axi4_cpusys2_aclk_pd,
+		0x134, BIT(7), 0);
+static CCU_GATE(CLK_CPU2AON_X2H, cpu2aon_x2h_clk, "cpu2aon-x2h", axi_aclk_pd, 0x138, BIT(8), 0);
+static CCU_GATE(CLK_CPU2PERI_X2H, cpu2peri_x2h_clk, "cpu2peri-x2h", axi4_cpusys2_aclk_pd,
+		0x140, BIT(9), CLK_IGNORE_UNUSED);
+static CCU_GATE(CLK_PERISYS_APB1_HCLK, perisys_apb1_hclk, "perisys-apb1-hclk", perisys_ahb_hclk_pd,
+		0x150, BIT(9), 0);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 static CCU_GATE(CLK_PERISYS_APB2_HCLK, perisys_apb2_hclk, "perisys-apb2-hclk", perisys_ahb_hclk_pd,
 		0x150, BIT(10), CLK_IGNORE_UNUSED);
 static CCU_GATE(CLK_PERISYS_APB3_HCLK, perisys_apb3_hclk, "perisys-apb3-hclk", perisys_ahb_hclk_pd,

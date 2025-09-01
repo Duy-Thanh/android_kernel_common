@@ -177,6 +177,7 @@ static void octep_pfvf_get_mac_addr(struct octep_device *oct,  u32 vf_id,
 		dev_err(&oct->pdev->dev, "Get VF MAC address failed via host control Mbox\n");
 		return;
 	}
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ether_addr_copy(oct->vf_info[vf_id].mac_addr, rsp->s_set_mac.mac_addr);
 	rsp->s_set_mac.type = OCTEP_PFVF_MBOX_TYPE_RSP_ACK;
 }
@@ -189,6 +190,18 @@ static void octep_pfvf_dev_remove(struct octep_device *oct,  u32 vf_id,
 
 	/* Reset VF-specific information maintained by the PF */
 	memset(&oct->vf_info[vf_id], 0, sizeof(struct octep_pfvf_info));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	rsp->s_set_mac.type = OCTEP_PFVF_MBOX_TYPE_RSP_ACK;
+}
+
+static void octep_pfvf_dev_remove(struct octep_device *oct,  u32 vf_id,
+				  union octep_pfvf_mbox_word cmd,
+				  union octep_pfvf_mbox_word *rsp)
+{
+	int err;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	err = octep_ctrl_net_dev_remove(oct, vf_id);
 	if (err) {
 		rsp->s.type = OCTEP_PFVF_MBOX_TYPE_RSP_NACK;

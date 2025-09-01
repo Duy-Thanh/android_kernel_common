@@ -43,6 +43,7 @@
 #include <linux/timekeeping.h>
 #include <linux/sysctl.h>
 #include <linux/elf.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/pidfs.h>
 #include <uapi/linux/pidfd.h>
 
@@ -686,6 +687,604 @@ void do_coredump(const kernel_siginfo_t *siginfo)
 		sub_info = call_usermodehelper_setup(helper_argv[0],
 						helper_argv, NULL, GFP_KERNEL,
 						umh_coredump_setup, NULL, &cprm);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+#include <linux/uaccess.h>
+#include <asm/mmu_context.h>
+#include <asm/tlb.h>
+#include <asm/exec.h>
+
+#include <trace/events/task.h>
+#include "internal.h"
+
+#include <trace/events/sched.h>
+
+static bool dump_vma_snapshot(struct coredump_params *cprm);
+static void free_vma_snapshot(struct coredump_params *cprm);
+
+#define CORE_FILE_NOTE_SIZE_DEFAULT (4*1024*1024)
+/* Define a reasonable max cap */
+#define CORE_FILE_NOTE_SIZE_MAX (16*1024*1024)
+
+static int core_uses_pid;
+static unsigned int core_pipe_limit;
+static unsigned int core_sort_vma;
+static char core_pattern[CORENAME_MAX_SIZE] = "core";
+static int core_name_size = CORENAME_MAX_SIZE;
+unsigned int core_file_note_size_limit = CORE_FILE_NOTE_SIZE_DEFAULT;
+
+struct core_name {
+	char *corename;
+	int used, size;
+};
+
+static int expand_corename(struct core_name *cn, int size)
+{
+	char *corename;
+
+	size = kmalloc_size_roundup(size);
+	corename = krealloc(cn->corename, size, GFP_KERNEL);
+
+	if (!corename)
+		return -ENOMEM;
+
+	if (size > core_name_size) /* racy but harmless */
+		core_name_size = size;
+
+	cn->size = size;
+	cn->corename = corename;
+	return 0;
+}
+
+static __printf(2, 0) int cn_vprintf(struct core_name *cn, const char *fmt,
+				     va_list arg)
+{
+	int free, need;
+	va_list arg_copy;
+
+again:
+	free = cn->size - cn->used;
+
+	va_copy(arg_copy, arg);
+	need = vsnprintf(cn->corename + cn->used, free, fmt, arg_copy);
+	va_end(arg_copy);
+
+	if (need < free) {
+		cn->used += need;
+		return 0;
+	}
+
+	if (!expand_corename(cn, cn->size + need - free + 1))
+		goto again;
+
+	return -ENOMEM;
+}
+
+static __printf(2, 3) int cn_printf(struct core_name *cn, const char *fmt, ...)
+{
+	va_list arg;
+	int ret;
+
+	va_start(arg, fmt);
+	ret = cn_vprintf(cn, fmt, arg);
+	va_end(arg);
+
+	return ret;
+}
+
+static __printf(2, 3)
+int cn_esc_printf(struct core_name *cn, const char *fmt, ...)
+{
+	int cur = cn->used;
+	va_list arg;
+	int ret;
+
+	va_start(arg, fmt);
+	ret = cn_vprintf(cn, fmt, arg);
+	va_end(arg);
+
+	if (ret == 0) {
+		/*
+		 * Ensure that this coredump name component can't cause the
+		 * resulting corefile path to consist of a ".." or ".".
+		 */
+		if ((cn->used - cur == 1 && cn->corename[cur] == '.') ||
+				(cn->used - cur == 2 && cn->corename[cur] == '.'
+				&& cn->corename[cur+1] == '.'))
+			cn->corename[cur] = '!';
+
+		/*
+		 * Empty names are fishy and could be used to create a "//" in a
+		 * corefile name, causing the coredump to happen one directory
+		 * level too high. Enforce that all components of the core
+		 * pattern are at least one character long.
+		 */
+		if (cn->used == cur)
+			ret = cn_printf(cn, "!");
+	}
+
+	for (; cur < cn->used; ++cur) {
+		if (cn->corename[cur] == '/')
+			cn->corename[cur] = '!';
+	}
+	return ret;
+}
+
+static int cn_print_exe_file(struct core_name *cn, bool name_only)
+{
+	struct file *exe_file;
+	char *pathbuf, *path, *ptr;
+	int ret;
+
+	exe_file = get_mm_exe_file(current->mm);
+	if (!exe_file)
+		return cn_esc_printf(cn, "%s (path unknown)", current->comm);
+
+	pathbuf = kmalloc(PATH_MAX, GFP_KERNEL);
+	if (!pathbuf) {
+		ret = -ENOMEM;
+		goto put_exe_file;
+	}
+
+	path = file_path(exe_file, pathbuf, PATH_MAX);
+	if (IS_ERR(path)) {
+		ret = PTR_ERR(path);
+		goto free_buf;
+	}
+
+	if (name_only) {
+		ptr = strrchr(path, '/');
+		if (ptr)
+			path = ptr + 1;
+	}
+	ret = cn_esc_printf(cn, "%s", path);
+
+free_buf:
+	kfree(pathbuf);
+put_exe_file:
+	fput(exe_file);
+	return ret;
+}
+
+/* format_corename will inspect the pattern parameter, and output a
+ * name into corename, which must have space for at least
+ * CORENAME_MAX_SIZE bytes plus one byte for the zero terminator.
+ */
+static int format_corename(struct core_name *cn, struct coredump_params *cprm,
+			   size_t **argv, int *argc)
+{
+	const struct cred *cred = current_cred();
+	const char *pat_ptr = core_pattern;
+	int ispipe = (*pat_ptr == '|');
+	bool was_space = false;
+	int pid_in_pattern = 0;
+	int err = 0;
+
+	cn->used = 0;
+	cn->corename = NULL;
+	if (expand_corename(cn, core_name_size))
+		return -ENOMEM;
+	cn->corename[0] = '\0';
+
+	if (ispipe) {
+		int argvs = sizeof(core_pattern) / 2;
+		(*argv) = kmalloc_array(argvs, sizeof(**argv), GFP_KERNEL);
+		if (!(*argv))
+			return -ENOMEM;
+		(*argv)[(*argc)++] = 0;
+		++pat_ptr;
+		if (!(*pat_ptr))
+			return -ENOMEM;
+	}
+
+	/* Repeat as long as we have more pattern to process and more output
+	   space */
+	while (*pat_ptr) {
+		/*
+		 * Split on spaces before doing template expansion so that
+		 * %e and %E don't get split if they have spaces in them
+		 */
+		if (ispipe) {
+			if (isspace(*pat_ptr)) {
+				if (cn->used != 0)
+					was_space = true;
+				pat_ptr++;
+				continue;
+			} else if (was_space) {
+				was_space = false;
+				err = cn_printf(cn, "%c", '\0');
+				if (err)
+					return err;
+				(*argv)[(*argc)++] = cn->used;
+			}
+		}
+		if (*pat_ptr != '%') {
+			err = cn_printf(cn, "%c", *pat_ptr++);
+		} else {
+			switch (*++pat_ptr) {
+			/* single % at the end, drop that */
+			case 0:
+				goto out;
+			/* Double percent, output one percent */
+			case '%':
+				err = cn_printf(cn, "%c", '%');
+				break;
+			/* pid */
+			case 'p':
+				pid_in_pattern = 1;
+				err = cn_printf(cn, "%d",
+					      task_tgid_vnr(current));
+				break;
+			/* global pid */
+			case 'P':
+				err = cn_printf(cn, "%d",
+					      task_tgid_nr(current));
+				break;
+			case 'i':
+				err = cn_printf(cn, "%d",
+					      task_pid_vnr(current));
+				break;
+			case 'I':
+				err = cn_printf(cn, "%d",
+					      task_pid_nr(current));
+				break;
+			/* uid */
+			case 'u':
+				err = cn_printf(cn, "%u",
+						from_kuid(&init_user_ns,
+							  cred->uid));
+				break;
+			/* gid */
+			case 'g':
+				err = cn_printf(cn, "%u",
+						from_kgid(&init_user_ns,
+							  cred->gid));
+				break;
+			case 'd':
+				err = cn_printf(cn, "%d",
+					__get_dumpable(cprm->mm_flags));
+				break;
+			/* signal that caused the coredump */
+			case 's':
+				err = cn_printf(cn, "%d",
+						cprm->siginfo->si_signo);
+				break;
+			/* UNIX time of coredump */
+			case 't': {
+				time64_t time;
+
+				time = ktime_get_real_seconds();
+				err = cn_printf(cn, "%lld", time);
+				break;
+			}
+			/* hostname */
+			case 'h':
+				down_read(&uts_sem);
+				err = cn_esc_printf(cn, "%s",
+					      utsname()->nodename);
+				up_read(&uts_sem);
+				break;
+			/* executable, could be changed by prctl PR_SET_NAME etc */
+			case 'e':
+				err = cn_esc_printf(cn, "%s", current->comm);
+				break;
+			/* file name of executable */
+			case 'f':
+				err = cn_print_exe_file(cn, true);
+				break;
+			case 'E':
+				err = cn_print_exe_file(cn, false);
+				break;
+			/* core limit size */
+			case 'c':
+				err = cn_printf(cn, "%lu",
+					      rlimit(RLIMIT_CORE));
+				break;
+			/* CPU the task ran on */
+			case 'C':
+				err = cn_printf(cn, "%d", cprm->cpu);
+				break;
+			default:
+				break;
+			}
+			++pat_ptr;
+		}
+
+		if (err)
+			return err;
+	}
+
+out:
+	/* Backward compatibility with core_uses_pid:
+	 *
+	 * If core_pattern does not include a %p (as is the default)
+	 * and core_uses_pid is set, then .%pid will be appended to
+	 * the filename. Do not do this for piped commands. */
+	if (!ispipe && !pid_in_pattern && core_uses_pid) {
+		err = cn_printf(cn, ".%d", task_tgid_vnr(current));
+		if (err)
+			return err;
+	}
+	return ispipe;
+}
+
+static int zap_process(struct signal_struct *signal, int exit_code)
+{
+	struct task_struct *t;
+	int nr = 0;
+
+	signal->flags = SIGNAL_GROUP_EXIT;
+	signal->group_exit_code = exit_code;
+	signal->group_stop_count = 0;
+
+	__for_each_thread(signal, t) {
+		task_clear_jobctl_pending(t, JOBCTL_PENDING_MASK);
+		if (t != current && !(t->flags & PF_POSTCOREDUMP)) {
+			sigaddset(&t->pending.signal, SIGKILL);
+			signal_wake_up(t, 1);
+			nr++;
+		}
+	}
+
+	return nr;
+}
+
+static int zap_threads(struct task_struct *tsk,
+			struct core_state *core_state, int exit_code)
+{
+	struct signal_struct *signal = tsk->signal;
+	int nr = -EAGAIN;
+
+	spin_lock_irq(&tsk->sighand->siglock);
+	if (!(signal->flags & SIGNAL_GROUP_EXIT) && !signal->group_exec_task) {
+		/* Allow SIGKILL, see prepare_signal() */
+		signal->core_state = core_state;
+		nr = zap_process(signal, exit_code);
+		clear_tsk_thread_flag(tsk, TIF_SIGPENDING);
+		tsk->flags |= PF_DUMPCORE;
+		atomic_set(&core_state->nr_threads, nr);
+	}
+	spin_unlock_irq(&tsk->sighand->siglock);
+	return nr;
+}
+
+static int coredump_wait(int exit_code, struct core_state *core_state)
+{
+	struct task_struct *tsk = current;
+	int core_waiters = -EBUSY;
+
+	init_completion(&core_state->startup);
+	core_state->dumper.task = tsk;
+	core_state->dumper.next = NULL;
+
+	core_waiters = zap_threads(tsk, core_state, exit_code);
+	if (core_waiters > 0) {
+		struct core_thread *ptr;
+
+		wait_for_completion_state(&core_state->startup,
+					  TASK_UNINTERRUPTIBLE|TASK_FREEZABLE);
+		/*
+		 * Wait for all the threads to become inactive, so that
+		 * all the thread context (extended register state, like
+		 * fpu etc) gets copied to the memory.
+		 */
+		ptr = core_state->dumper.next;
+		while (ptr != NULL) {
+			wait_task_inactive(ptr->task, TASK_ANY);
+			ptr = ptr->next;
+		}
+	}
+
+	return core_waiters;
+}
+
+static void coredump_finish(bool core_dumped)
+{
+	struct core_thread *curr, *next;
+	struct task_struct *task;
+
+	spin_lock_irq(&current->sighand->siglock);
+	if (core_dumped && !__fatal_signal_pending(current))
+		current->signal->group_exit_code |= 0x80;
+	next = current->signal->core_state->dumper.next;
+	current->signal->core_state = NULL;
+	spin_unlock_irq(&current->sighand->siglock);
+
+	while ((curr = next) != NULL) {
+		next = curr->next;
+		task = curr->task;
+		/*
+		 * see coredump_task_exit(), curr->task must not see
+		 * ->task == NULL before we read ->next.
+		 */
+		smp_mb();
+		curr->task = NULL;
+		wake_up_process(task);
+	}
+}
+
+static bool dump_interrupted(void)
+{
+	/*
+	 * SIGKILL or freezing() interrupt the coredumping. Perhaps we
+	 * can do try_to_freeze() and check __fatal_signal_pending(),
+	 * but then we need to teach dump_write() to restart and clear
+	 * TIF_SIGPENDING.
+	 */
+	return fatal_signal_pending(current) || freezing(current);
+}
+
+static void wait_for_dump_helpers(struct file *file)
+{
+	struct pipe_inode_info *pipe = file->private_data;
+
+	pipe_lock(pipe);
+	pipe->readers++;
+	pipe->writers--;
+	wake_up_interruptible_sync(&pipe->rd_wait);
+	kill_fasync(&pipe->fasync_readers, SIGIO, POLL_IN);
+	pipe_unlock(pipe);
+
+	/*
+	 * We actually want wait_event_freezable() but then we need
+	 * to clear TIF_SIGPENDING and improve dump_interrupted().
+	 */
+	wait_event_interruptible(pipe->rd_wait, pipe->readers == 1);
+
+	pipe_lock(pipe);
+	pipe->readers--;
+	pipe->writers++;
+	pipe_unlock(pipe);
+}
+
+/*
+ * umh_pipe_setup
+ * helper function to customize the process used
+ * to collect the core in userspace.  Specifically
+ * it sets up a pipe and installs it as fd 0 (stdin)
+ * for the process.  Returns 0 on success, or
+ * PTR_ERR on failure.
+ * Note that it also sets the core limit to 1.  This
+ * is a special value that we use to trap recursive
+ * core dumps
+ */
+static int umh_pipe_setup(struct subprocess_info *info, struct cred *new)
+{
+	struct file *files[2];
+	struct coredump_params *cp = (struct coredump_params *)info->data;
+	int err;
+
+	err = create_pipe_files(files, 0);
+	if (err)
+		return err;
+
+	cp->file = files[1];
+
+	err = replace_fd(0, files[0], 0);
+	fput(files[0]);
+	if (err < 0)
+		return err;
+
+	/* and disallow core files too */
+	current->signal->rlim[RLIMIT_CORE] = (struct rlimit){1, 1};
+
+	return 0;
+}
+
+void do_coredump(const kernel_siginfo_t *siginfo)
+{
+	struct core_state core_state;
+	struct core_name cn;
+	struct mm_struct *mm = current->mm;
+	struct linux_binfmt * binfmt;
+	const struct cred *old_cred;
+	struct cred *cred;
+	int retval = 0;
+	int ispipe;
+	size_t *argv = NULL;
+	int argc = 0;
+	/* require nonrelative corefile path and be extra careful */
+	bool need_suid_safe = false;
+	bool core_dumped = false;
+	static atomic_t core_dump_count = ATOMIC_INIT(0);
+	struct coredump_params cprm = {
+		.siginfo = siginfo,
+		.limit = rlimit(RLIMIT_CORE),
+		/*
+		 * We must use the same mm->flags while dumping core to avoid
+		 * inconsistency of bit flags, since this flag is not protected
+		 * by any locks.
+		 */
+		.mm_flags = mm->flags,
+		.vma_meta = NULL,
+		.cpu = raw_smp_processor_id(),
+	};
+
+	audit_core_dumps(siginfo->si_signo);
+
+	binfmt = mm->binfmt;
+	if (!binfmt || !binfmt->core_dump)
+		goto fail;
+	if (!__get_dumpable(cprm.mm_flags))
+		goto fail;
+
+	cred = prepare_creds();
+	if (!cred)
+		goto fail;
+	/*
+	 * We cannot trust fsuid as being the "true" uid of the process
+	 * nor do we know its entire history. We only know it was tainted
+	 * so we dump it as root in mode 2, and only into a controlled
+	 * environment (pipe handler or fully qualified path).
+	 */
+	if (__get_dumpable(cprm.mm_flags) == SUID_DUMP_ROOT) {
+		/* Setuid core dump mode */
+		cred->fsuid = GLOBAL_ROOT_UID;	/* Dump root private */
+		need_suid_safe = true;
+	}
+
+	retval = coredump_wait(siginfo->si_signo, &core_state);
+	if (retval < 0)
+		goto fail_creds;
+
+	old_cred = override_creds(cred);
+
+	ispipe = format_corename(&cn, &cprm, &argv, &argc);
+
+	if (ispipe) {
+		int argi;
+		int dump_count;
+		char **helper_argv;
+		struct subprocess_info *sub_info;
+
+		if (ispipe < 0) {
+			coredump_report_failure("format_corename failed, aborting core");
+			goto fail_unlock;
+		}
+
+		if (cprm.limit == 1) {
+			/* See umh_pipe_setup() which sets RLIMIT_CORE = 1.
+			 *
+			 * Normally core limits are irrelevant to pipes, since
+			 * we're not writing to the file system, but we use
+			 * cprm.limit of 1 here as a special value, this is a
+			 * consistent way to catch recursive crashes.
+			 * We can still crash if the core_pattern binary sets
+			 * RLIM_CORE = !1, but it runs as root, and can do
+			 * lots of stupid things.
+			 *
+			 * Note that we use task_tgid_vnr here to grab the pid
+			 * of the process group leader.  That way we get the
+			 * right pid if a thread in a multi-threaded
+			 * core_pattern process dies.
+			 */
+			coredump_report_failure("RLIMIT_CORE is set to 1, aborting core");
+			goto fail_unlock;
+		}
+		cprm.limit = RLIM_INFINITY;
+
+		dump_count = atomic_inc_return(&core_dump_count);
+		if (core_pipe_limit && (core_pipe_limit < dump_count)) {
+			coredump_report_failure("over core_pipe_limit, skipping core dump");
+			goto fail_dropcount;
+		}
+
+		helper_argv = kmalloc_array(argc + 1, sizeof(*helper_argv),
+					    GFP_KERNEL);
+		if (!helper_argv) {
+			coredump_report_failure("%s failed to allocate memory", __func__);
+			goto fail_dropcount;
+		}
+		for (argi = 0; argi < argc; argi++)
+			helper_argv[argi] = cn.corename + argv[argi];
+		helper_argv[argi] = NULL;
+
+		retval = -ENOMEM;
+		sub_info = call_usermodehelper_setup(helper_argv[0],
+						helper_argv, NULL, GFP_KERNEL,
+						umh_pipe_setup, NULL, &cprm);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (sub_info)
 			retval = call_usermodehelper_exec(sub_info,
 							  UMH_WAIT_EXEC);

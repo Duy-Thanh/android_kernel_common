@@ -66,6 +66,7 @@ nfs_fh_to_dentry(struct super_block *sb, struct fid *fid,
 {
 	struct nfs_fattr *fattr = NULL;
 	struct nfs_fh *server_fh = nfs_exp_embedfh(fid->raw);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	size_t fh_size = offsetof(struct nfs_fh, data);
 	const struct nfs_rpc_ops *rpc_ops;
 	struct dentry *dentry;
@@ -81,6 +82,17 @@ nfs_fh_to_dentry(struct super_block *sb, struct fid *fid,
 	/* Calculate embedded filehandle size */
 	fh_size += server_fh->size;
 	len += XDR_QUADLEN(fh_size);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	size_t fh_size = offsetof(struct nfs_fh, data) + server_fh->size;
+	const struct nfs_rpc_ops *rpc_ops;
+	struct dentry *dentry;
+	struct inode *inode;
+	int len = EMBED_FH_OFF + XDR_QUADLEN(fh_size);
+	u32 *p = fid->raw;
+	int ret;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	/* NULL translates to ESTALE */
 	if (fh_len < len || fh_type != len)
 		return NULL;

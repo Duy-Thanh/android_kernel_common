@@ -1152,6 +1152,7 @@ static bool rcu_nocb_rdp_offload_wait_cond(struct rcu_data *rdp)
 static int rcu_nocb_rdp_offload(struct rcu_data *rdp)
 {
 	int wake_gp;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	WARN_ON_ONCE(cpu_online(rdp->cpu));
 	/*
@@ -1172,6 +1173,30 @@ static int rcu_nocb_rdp_offload(struct rcu_data *rdp)
 	wake_gp = rcu_nocb_queue_toggle_rdp(rdp);
 	if (wake_gp)
 		wake_up_process(rdp->nocb_gp_kthread);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct rcu_data *rdp_gp = rdp->nocb_gp_rdp;
+
+	WARN_ON_ONCE(cpu_online(rdp->cpu));
+	/*
+	 * For now we only support re-offload, ie: the rdp must have been
+	 * offloaded on boot first.
+	 */
+	if (!rdp->nocb_gp_rdp)
+		return -EINVAL;
+
+	if (WARN_ON_ONCE(!rdp_gp->nocb_gp_kthread))
+		return -EINVAL;
+
+	pr_info("Offloading %d\n", rdp->cpu);
+
+	WARN_ON_ONCE(rcu_cblist_n_cbs(&rdp->nocb_bypass));
+	WARN_ON_ONCE(rcu_segcblist_n_cbs(&rdp->cblist));
+
+	wake_gp = rcu_nocb_queue_toggle_rdp(rdp);
+	if (wake_gp)
+		wake_up_process(rdp_gp->nocb_gp_kthread);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	swait_event_exclusive(rdp->nocb_state_wq,
 			      rcu_nocb_rdp_offload_wait_cond(rdp));

@@ -90,6 +90,7 @@ static void copy_fdtable(struct fdtable *nfdt, struct fdtable *ofdt)
  * 'unsigned long' in some places, but simply because that is how the Linux
  * kernel bitmaps are defined to work: they are not "bits in an array of bytes",
  * they are very much "bits in an array of unsigned long".
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  */
 static struct fdtable *alloc_fdtable(unsigned int slots_wanted)
 {
@@ -400,6 +401,321 @@ struct files_struct *dup_fd(struct files_struct *oldf, struct fd_range *punch_ho
 	rcu_assign_pointer(newf->fdt, new_fdt);
 
 	return newf;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ *
+ * The ALIGN(nr, BITS_PER_LONG) here is for clarity: since we just multiplied
+ * by that "1024/sizeof(ptr)" before, we already know there are sufficient
+ * clear low bits. Clang seems to realize that, gcc ends up being confused.
+ *
+ * On a 128-bit machine, the ALIGN() would actually matter. In the meantime,
+ * let's consider it documentation (and maybe a test-case for gcc to improve
+ * its code generation ;)
+ */
+static struct fdtable * alloc_fdtable(unsigned int nr)
+{
+	struct fdtable *fdt;
+	void *data;
+
+	/*
+	 * Figure out how many fds we actually want to support in this fdtable.
+	 * Allocation steps are keyed to the size of the fdarray, since it
+	 * grows far faster than any of the other dynamic data. We try to fit
+	 * the fdarray into comfortable page-tuned chunks: starting at 1024B
+	 * and growing in powers of two from there on.
+	 */
+	nr /= (1024 / sizeof(struct file *));
+	nr = roundup_pow_of_two(nr + 1);
+	nr *= (1024 / sizeof(struct file *));
+	nr = ALIGN(nr, BITS_PER_LONG);
+	/*
+	 * Note that this can drive nr *below* what we had passed if sysctl_nr_open
+	 * had been set lower between the check in expand_files() and here.  Deal
+	 * with that in caller, it's cheaper that way.
+	 *
+	 * We make sure that nr remains a multiple of BITS_PER_LONG - otherwise
+	 * bitmaps handling below becomes unpleasant, to put it mildly...
+	 */
+	if (unlikely(nr > sysctl_nr_open))
+		nr = ((sysctl_nr_open - 1) | (BITS_PER_LONG - 1)) + 1;
+
+	fdt = kmalloc(sizeof(struct fdtable), GFP_KERNEL_ACCOUNT);
+	if (!fdt)
+		goto out;
+	fdt->max_fds = nr;
+	data = kvmalloc_array(nr, sizeof(struct file *), GFP_KERNEL_ACCOUNT);
+	if (!data)
+		goto out_fdt;
+	fdt->fd = data;
+
+	data = kvmalloc(max_t(size_t,
+				 2 * nr / BITS_PER_BYTE + BITBIT_SIZE(nr), L1_CACHE_BYTES),
+				 GFP_KERNEL_ACCOUNT);
+	if (!data)
+		goto out_arr;
+	fdt->open_fds = data;
+	data += nr / BITS_PER_BYTE;
+	fdt->close_on_exec = data;
+	data += nr / BITS_PER_BYTE;
+	fdt->full_fds_bits = data;
+
+	return fdt;
+
+out_arr:
+	kvfree(fdt->fd);
+out_fdt:
+	kfree(fdt);
+out:
+	return NULL;
+}
+
+/*
+ * Expand the file descriptor table.
+ * This function will allocate a new fdtable and both fd array and fdset, of
+ * the given size.
+ * Return <0 error code on error; 1 on successful completion.
+ * The files->file_lock should be held on entry, and will be held on exit.
+ */
+static int expand_fdtable(struct files_struct *files, unsigned int nr)
+	__releases(files->file_lock)
+	__acquires(files->file_lock)
+{
+	struct fdtable *new_fdt, *cur_fdt;
+
+	spin_unlock(&files->file_lock);
+	new_fdt = alloc_fdtable(nr);
+
+	/* make sure all fd_install() have seen resize_in_progress
+	 * or have finished their rcu_read_lock_sched() section.
+	 */
+	if (atomic_read(&files->count) > 1)
+		synchronize_rcu();
+
+	spin_lock(&files->file_lock);
+	if (!new_fdt)
+		return -ENOMEM;
+	/*
+	 * extremely unlikely race - sysctl_nr_open decreased between the check in
+	 * caller and alloc_fdtable().  Cheaper to catch it here...
+	 */
+	if (unlikely(new_fdt->max_fds <= nr)) {
+		__free_fdtable(new_fdt);
+		return -EMFILE;
+	}
+	cur_fdt = files_fdtable(files);
+	BUG_ON(nr < cur_fdt->max_fds);
+	copy_fdtable(new_fdt, cur_fdt);
+	rcu_assign_pointer(files->fdt, new_fdt);
+	if (cur_fdt != &files->fdtab)
+		call_rcu(&cur_fdt->rcu, free_fdtable_rcu);
+	/* coupled with smp_rmb() in fd_install() */
+	smp_wmb();
+	return 1;
+}
+
+/*
+ * Expand files.
+ * This function will expand the file structures, if the requested size exceeds
+ * the current capacity and there is room for expansion.
+ * Return <0 error code on error; 0 when nothing done; 1 when files were
+ * expanded and execution may have blocked.
+ * The files->file_lock should be held on entry, and will be held on exit.
+ */
+static int expand_files(struct files_struct *files, unsigned int nr)
+	__releases(files->file_lock)
+	__acquires(files->file_lock)
+{
+	struct fdtable *fdt;
+	int expanded = 0;
+
+repeat:
+	fdt = files_fdtable(files);
+
+	/* Do we need to expand? */
+	if (nr < fdt->max_fds)
+		return expanded;
+
+	/* Can we expand? */
+	if (nr >= sysctl_nr_open)
+		return -EMFILE;
+
+	if (unlikely(files->resize_in_progress)) {
+		spin_unlock(&files->file_lock);
+		expanded = 1;
+		wait_event(files->resize_wait, !files->resize_in_progress);
+		spin_lock(&files->file_lock);
+		goto repeat;
+	}
+
+	/* All good, so we try */
+	files->resize_in_progress = true;
+	expanded = expand_fdtable(files, nr);
+	files->resize_in_progress = false;
+
+	wake_up_all(&files->resize_wait);
+	return expanded;
+}
+
+static inline void __set_close_on_exec(unsigned int fd, struct fdtable *fdt)
+{
+	__set_bit(fd, fdt->close_on_exec);
+}
+
+static inline void __clear_close_on_exec(unsigned int fd, struct fdtable *fdt)
+{
+	if (test_bit(fd, fdt->close_on_exec))
+		__clear_bit(fd, fdt->close_on_exec);
+}
+
+static inline void __set_open_fd(unsigned int fd, struct fdtable *fdt)
+{
+	__set_bit(fd, fdt->open_fds);
+	fd /= BITS_PER_LONG;
+	if (!~fdt->open_fds[fd])
+		__set_bit(fd, fdt->full_fds_bits);
+}
+
+static inline void __clear_open_fd(unsigned int fd, struct fdtable *fdt)
+{
+	__clear_bit(fd, fdt->open_fds);
+	__clear_bit(fd / BITS_PER_LONG, fdt->full_fds_bits);
+}
+
+static inline bool fd_is_open(unsigned int fd, const struct fdtable *fdt)
+{
+	return test_bit(fd, fdt->open_fds);
+}
+
+/*
+ * Note that a sane fdtable size always has to be a multiple of
+ * BITS_PER_LONG, since we have bitmaps that are sized by this.
+ *
+ * punch_hole is optional - when close_range() is asked to unshare
+ * and close, we don't need to copy descriptors in that range, so
+ * a smaller cloned descriptor table might suffice if the last
+ * currently opened descriptor falls into that range.
+ */
+static unsigned int sane_fdtable_size(struct fdtable *fdt, struct fd_range *punch_hole)
+{
+	unsigned int last = find_last_bit(fdt->open_fds, fdt->max_fds);
+
+	if (last == fdt->max_fds)
+		return NR_OPEN_DEFAULT;
+	if (punch_hole && punch_hole->to >= last && punch_hole->from <= last) {
+		last = find_last_bit(fdt->open_fds, punch_hole->from);
+		if (last == punch_hole->from)
+			return NR_OPEN_DEFAULT;
+	}
+	return ALIGN(last + 1, BITS_PER_LONG);
+}
+
+/*
+ * Allocate a new descriptor table and copy contents from the passed in
+ * instance.  Returns a pointer to cloned table on success, ERR_PTR()
+ * on failure.  For 'punch_hole' see sane_fdtable_size().
+ */
+struct files_struct *dup_fd(struct files_struct *oldf, struct fd_range *punch_hole)
+{
+	struct files_struct *newf;
+	struct file **old_fds, **new_fds;
+	unsigned int open_files, i;
+	struct fdtable *old_fdt, *new_fdt;
+	int error;
+
+	newf = kmem_cache_alloc(files_cachep, GFP_KERNEL);
+	if (!newf)
+		return ERR_PTR(-ENOMEM);
+
+	atomic_set(&newf->count, 1);
+
+	spin_lock_init(&newf->file_lock);
+	newf->resize_in_progress = false;
+	init_waitqueue_head(&newf->resize_wait);
+	newf->next_fd = 0;
+	new_fdt = &newf->fdtab;
+	new_fdt->max_fds = NR_OPEN_DEFAULT;
+	new_fdt->close_on_exec = newf->close_on_exec_init;
+	new_fdt->open_fds = newf->open_fds_init;
+	new_fdt->full_fds_bits = newf->full_fds_bits_init;
+	new_fdt->fd = &newf->fd_array[0];
+
+	spin_lock(&oldf->file_lock);
+	old_fdt = files_fdtable(oldf);
+	open_files = sane_fdtable_size(old_fdt, punch_hole);
+
+	/*
+	 * Check whether we need to allocate a larger fd array and fd set.
+	 */
+	while (unlikely(open_files > new_fdt->max_fds)) {
+		spin_unlock(&oldf->file_lock);
+
+		if (new_fdt != &newf->fdtab)
+			__free_fdtable(new_fdt);
+
+		new_fdt = alloc_fdtable(open_files - 1);
+		if (!new_fdt) {
+			error = -ENOMEM;
+			goto out_release;
+		}
+
+		/* beyond sysctl_nr_open; nothing to do */
+		if (unlikely(new_fdt->max_fds < open_files)) {
+			__free_fdtable(new_fdt);
+			error = -EMFILE;
+			goto out_release;
+		}
+
+		/*
+		 * Reacquire the oldf lock and a pointer to its fd table
+		 * who knows it may have a new bigger fd table. We need
+		 * the latest pointer.
+		 */
+		spin_lock(&oldf->file_lock);
+		old_fdt = files_fdtable(oldf);
+		open_files = sane_fdtable_size(old_fdt, punch_hole);
+	}
+
+	copy_fd_bitmaps(new_fdt, old_fdt, open_files / BITS_PER_LONG);
+
+	old_fds = old_fdt->fd;
+	new_fds = new_fdt->fd;
+
+	/*
+	 * We may be racing against fd allocation from other threads using this
+	 * files_struct, despite holding ->file_lock.
+	 *
+	 * alloc_fd() might have already claimed a slot, while fd_install()
+	 * did not populate it yet. Note the latter operates locklessly, so
+	 * the file can show up as we are walking the array below.
+	 *
+	 * At the same time we know no files will disappear as all other
+	 * operations take the lock.
+	 *
+	 * Instead of trying to placate userspace racing with itself, we
+	 * ref the file if we see it and mark the fd slot as unused otherwise.
+	 */
+	for (i = open_files; i != 0; i--) {
+		struct file *f = rcu_dereference_raw(*old_fds++);
+		if (f) {
+			get_file(f);
+		} else {
+			__clear_open_fd(open_files - i, new_fdt);
+		}
+		rcu_assign_pointer(*new_fds++, f);
+	}
+	spin_unlock(&oldf->file_lock);
+
+	/* clear the remainder */
+	memset(new_fds, 0, (new_fdt->max_fds - open_files) * sizeof(struct file *));
+
+	rcu_assign_pointer(newf->fdt, new_fdt);
+
+	return newf;
+
+out_release:
+	kmem_cache_free(files_cachep, newf);
+	return ERR_PTR(error);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static struct fdtable *close_files(struct files_struct * files)

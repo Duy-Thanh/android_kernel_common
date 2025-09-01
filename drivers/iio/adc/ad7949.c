@@ -308,6 +308,7 @@ static void ad7949_disable_reg(void *reg)
 
 static int ad7949_spi_probe(struct spi_device *spi)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct device *dev = &spi->dev;
 	const struct ad7949_adc_spec *spec;
 	struct ad7949_adc_chip *ad7949_adc;
@@ -341,6 +342,43 @@ static int ad7949_spi_probe(struct spi_device *spi)
 	} else if (spi_is_bpw_supported(spi, 16)) {
 		spi->bits_per_word = 16;
 	} else if (spi_is_bpw_supported(spi, 8)) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u32 spi_ctrl_mask = spi->controller->bits_per_word_mask;
+	struct device *dev = &spi->dev;
+	const struct ad7949_adc_spec *spec;
+	struct ad7949_adc_chip *ad7949_adc;
+	struct iio_dev *indio_dev;
+	u32 tmp;
+	int ret;
+
+	indio_dev = devm_iio_device_alloc(dev, sizeof(*ad7949_adc));
+	if (!indio_dev) {
+		dev_err(dev, "can not allocate iio device\n");
+		return -ENOMEM;
+	}
+
+	indio_dev->info = &ad7949_spi_info;
+	indio_dev->name = spi_get_device_id(spi)->name;
+	indio_dev->modes = INDIO_DIRECT_MODE;
+	indio_dev->channels = ad7949_adc_channels;
+	spi_set_drvdata(spi, indio_dev);
+
+	ad7949_adc = iio_priv(indio_dev);
+	ad7949_adc->indio_dev = indio_dev;
+	ad7949_adc->spi = spi;
+
+	spec = &ad7949_adc_spec[spi_get_device_id(spi)->driver_data];
+	indio_dev->num_channels = spec->num_channels;
+	ad7949_adc->resolution = spec->resolution;
+
+	/* Set SPI bits per word */
+	if (spi_ctrl_mask & SPI_BPW_MASK(ad7949_adc->resolution)) {
+		spi->bits_per_word = ad7949_adc->resolution;
+	} else if (spi_ctrl_mask == SPI_BPW_MASK(16)) {
+		spi->bits_per_word = 16;
+	} else if (spi_ctrl_mask == SPI_BPW_MASK(8)) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		spi->bits_per_word = 8;
 	} else {
 		dev_err(dev, "unable to find common BPW with spi controller\n");

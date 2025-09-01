@@ -41,11 +41,15 @@ DECLARE_HOOK(android_vh_futex_wake_this,
 DECLARE_HOOK(android_vh_futex_wake_up_q_finish,
 	TP_PROTO(int nr_wake, int target_nr),
 	TP_ARGS(nr_wake, target_nr));
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 DECLARE_HOOK(android_vh_futex_wait_queue_start,
 	TP_PROTO(u32 __user *uaddr,
 		 unsigned int flags,
 		 u32 bitset),
 	TP_ARGS(uaddr, flags, bitset));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 DECLARE_HOOK(android_vh_futex_sleep_start,
 	TP_PROTO(struct task_struct *p),
 	TP_ARGS(p));

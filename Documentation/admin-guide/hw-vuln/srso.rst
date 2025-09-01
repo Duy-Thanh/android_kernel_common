@@ -104,6 +104,7 @@ The possible values in this file are:
 
    (spec_rstack_overflow=ibpb-vmexit)
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * 'Mitigation: Reduced Speculation':
 
    This mitigation gets automatically enabled when the above one "IBPB on
@@ -118,6 +119,10 @@ The possible values in this file are:
    is detected (functionality present on all such machines) and that
    practically overrides IBPB on VMEXIT as it has a lot less performance
    impact and takes care of the guest->host attack vector too.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 In order to exploit vulnerability, an attacker needs to:
 

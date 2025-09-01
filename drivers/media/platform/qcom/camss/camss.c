@@ -2275,6 +2275,7 @@ static int camss_probe(struct platform_device *pdev)
 	ret = v4l2_device_register(camss->dev, &camss->v4l2_dev);
 	if (ret < 0) {
 		dev_err(dev, "Failed to register V4L2 device: %d\n", ret);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		goto err_media_device_cleanup;
 	}
 
@@ -2332,6 +2333,64 @@ err_v4l2_device_unregister:
 	pm_runtime_disable(dev);
 err_media_device_cleanup:
 	media_device_cleanup(&camss->media_dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		goto err_genpd_cleanup;
+	}
+
+	v4l2_async_nf_init(&camss->notifier, &camss->v4l2_dev);
+
+	pm_runtime_enable(dev);
+
+	num_subdevs = camss_of_parse_ports(camss);
+	if (num_subdevs < 0) {
+		ret = num_subdevs;
+		goto err_v4l2_device_unregister;
+	}
+
+	ret = camss_register_entities(camss);
+	if (ret < 0)
+		goto err_v4l2_device_unregister;
+
+	ret = camss->res->link_entities(camss);
+	if (ret < 0)
+		goto err_register_subdevs;
+
+	if (num_subdevs) {
+		camss->notifier.ops = &camss_subdev_notifier_ops;
+
+		ret = v4l2_async_nf_register(&camss->notifier);
+		if (ret) {
+			dev_err(dev,
+				"Failed to register async subdev nodes: %d\n",
+				ret);
+			goto err_register_subdevs;
+		}
+	} else {
+		ret = v4l2_device_register_subdev_nodes(&camss->v4l2_dev);
+		if (ret < 0) {
+			dev_err(dev, "Failed to register subdev nodes: %d\n",
+				ret);
+			goto err_register_subdevs;
+		}
+
+		ret = media_device_register(&camss->media_dev);
+		if (ret < 0) {
+			dev_err(dev, "Failed to register media device: %d\n",
+				ret);
+			goto err_register_subdevs;
+		}
+	}
+
+	return 0;
+
+err_register_subdevs:
+	camss_unregister_entities(camss);
+err_v4l2_device_unregister:
+	v4l2_device_unregister(&camss->v4l2_dev);
+	v4l2_async_nf_cleanup(&camss->notifier);
+	pm_runtime_disable(dev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 err_genpd_cleanup:
 	camss_genpd_cleanup(camss);
 

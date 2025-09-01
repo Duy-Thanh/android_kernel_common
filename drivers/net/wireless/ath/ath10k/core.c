@@ -2484,6 +2484,7 @@ static int ath10k_init_hw_params(struct ath10k *ar)
 	return 0;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static bool ath10k_core_needs_recovery(struct ath10k *ar)
 {
 	long time_left;
@@ -2629,6 +2630,116 @@ static void ath10k_core_restart(struct work_struct *work)
 	if (ret)
 		ath10k_warn(ar, "failed to send firmware crash dump via devcoredump: %d",
 			    ret);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void ath10k_core_start_recovery(struct ath10k *ar)
+{
+	if (test_and_set_bit(ATH10K_FLAG_RESTARTING, &ar->dev_flags)) {
+		ath10k_warn(ar, "already restarting\n");
+		return;
+	}
+
+	queue_work(ar->workqueue, &ar->restart_work);
+}
+EXPORT_SYMBOL(ath10k_core_start_recovery);
+
+void ath10k_core_napi_enable(struct ath10k *ar)
+{
+	lockdep_assert_held(&ar->conf_mutex);
+
+	if (test_bit(ATH10K_FLAG_NAPI_ENABLED, &ar->dev_flags))
+		return;
+
+	napi_enable(&ar->napi);
+	set_bit(ATH10K_FLAG_NAPI_ENABLED, &ar->dev_flags);
+}
+EXPORT_SYMBOL(ath10k_core_napi_enable);
+
+void ath10k_core_napi_sync_disable(struct ath10k *ar)
+{
+	lockdep_assert_held(&ar->conf_mutex);
+
+	if (!test_bit(ATH10K_FLAG_NAPI_ENABLED, &ar->dev_flags))
+		return;
+
+	napi_synchronize(&ar->napi);
+	napi_disable(&ar->napi);
+	clear_bit(ATH10K_FLAG_NAPI_ENABLED, &ar->dev_flags);
+}
+EXPORT_SYMBOL(ath10k_core_napi_sync_disable);
+
+static void ath10k_core_restart(struct work_struct *work)
+{
+	struct ath10k *ar = container_of(work, struct ath10k, restart_work);
+	int ret;
+
+	set_bit(ATH10K_FLAG_CRASH_FLUSH, &ar->dev_flags);
+
+	/* Place a barrier to make sure the compiler doesn't reorder
+	 * CRASH_FLUSH and calling other functions.
+	 */
+	barrier();
+
+	ieee80211_stop_queues(ar->hw);
+	ath10k_drain_tx(ar);
+	complete(&ar->scan.started);
+	complete(&ar->scan.completed);
+	complete(&ar->scan.on_channel);
+	complete(&ar->offchan_tx_completed);
+	complete(&ar->install_key_done);
+	complete(&ar->vdev_setup_done);
+	complete(&ar->vdev_delete_done);
+	complete(&ar->thermal.wmi_sync);
+	complete(&ar->bss_survey_done);
+	wake_up(&ar->htt.empty_tx_wq);
+	wake_up(&ar->wmi.tx_credits_wq);
+	wake_up(&ar->peer_mapping_wq);
+
+	/* TODO: We can have one instance of cancelling coverage_class_work by
+	 * moving it to ath10k_halt(), so that both stop() and restart() would
+	 * call that but it takes conf_mutex() and if we call cancel_work_sync()
+	 * with conf_mutex it will deadlock.
+	 */
+	cancel_work_sync(&ar->set_coverage_class_work);
+
+	mutex_lock(&ar->conf_mutex);
+
+	switch (ar->state) {
+	case ATH10K_STATE_ON:
+		ar->state = ATH10K_STATE_RESTARTING;
+		ath10k_halt(ar);
+		ath10k_scan_finish(ar);
+		ieee80211_restart_hw(ar->hw);
+		break;
+	case ATH10K_STATE_OFF:
+		/* this can happen if driver is being unloaded
+		 * or if the crash happens during FW probing
+		 */
+		ath10k_warn(ar, "cannot restart a device that hasn't been started\n");
+		break;
+	case ATH10K_STATE_RESTARTING:
+		/* hw restart might be requested from multiple places */
+		break;
+	case ATH10K_STATE_RESTARTED:
+		ar->state = ATH10K_STATE_WEDGED;
+		fallthrough;
+	case ATH10K_STATE_WEDGED:
+		ath10k_warn(ar, "device is wedged, will not restart\n");
+		break;
+	case ATH10K_STATE_UTF:
+		ath10k_warn(ar, "firmware restart in UTF mode not supported\n");
+		break;
+	}
+
+	mutex_unlock(&ar->conf_mutex);
+
+	ret = ath10k_coredump_submit(ar);
+	if (ret)
+		ath10k_warn(ar, "failed to send firmware crash dump via devcoredump: %d",
+			    ret);
+
+	complete(&ar->driver_recovery);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static void ath10k_core_set_coverage_class_work(struct work_struct *work)

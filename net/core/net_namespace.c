@@ -458,6 +458,7 @@ static void net_complete_free(void)
 
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 void net_passive_dec(struct net *net)
 {
 	if (refcount_dec_and_test(&net->passive)) {
@@ -663,6 +664,214 @@ static void cleanup_net(struct work_struct *work)
 #endif
 		put_user_ns(net->user_ns);
 		net_passive_dec(net);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void net_free(struct net *net)
+{
+	if (refcount_dec_and_test(&net->passive)) {
+		kfree(rcu_access_pointer(net->gen));
+
+		/* There should not be any trackers left there. */
+		ref_tracker_dir_exit(&net->notrefcnt_tracker);
+
+		/* Wait for an extra rcu_barrier() before final free. */
+		llist_add(&net->defer_free_list, &defer_free_list);
+	}
+}
+
+void net_drop_ns(void *p)
+{
+	struct net *net = (struct net *)p;
+
+	if (net)
+		net_free(net);
+}
+
+struct net *copy_net_ns(unsigned long flags,
+			struct user_namespace *user_ns, struct net *old_net)
+{
+	struct ucounts *ucounts;
+	struct net *net;
+	int rv;
+
+	if (!(flags & CLONE_NEWNET))
+		return get_net(old_net);
+
+	ucounts = inc_net_namespaces(user_ns);
+	if (!ucounts)
+		return ERR_PTR(-ENOSPC);
+
+	net = net_alloc();
+	if (!net) {
+		rv = -ENOMEM;
+		goto dec_ucounts;
+	}
+
+	preinit_net(net, user_ns);
+	net->ucounts = ucounts;
+	get_user_ns(user_ns);
+
+	rv = down_read_killable(&pernet_ops_rwsem);
+	if (rv < 0)
+		goto put_userns;
+
+	rv = setup_net(net);
+
+	up_read(&pernet_ops_rwsem);
+
+	if (rv < 0) {
+put_userns:
+#ifdef CONFIG_KEYS
+		key_remove_domain(net->key_domain);
+#endif
+		put_user_ns(user_ns);
+		net_free(net);
+dec_ucounts:
+		dec_net_namespaces(ucounts);
+		return ERR_PTR(rv);
+	}
+	return net;
+}
+
+/**
+ * net_ns_get_ownership - get sysfs ownership data for @net
+ * @net: network namespace in question (can be NULL)
+ * @uid: kernel user ID for sysfs objects
+ * @gid: kernel group ID for sysfs objects
+ *
+ * Returns the uid/gid pair of root in the user namespace associated with the
+ * given network namespace.
+ */
+void net_ns_get_ownership(const struct net *net, kuid_t *uid, kgid_t *gid)
+{
+	if (net) {
+		kuid_t ns_root_uid = make_kuid(net->user_ns, 0);
+		kgid_t ns_root_gid = make_kgid(net->user_ns, 0);
+
+		if (uid_valid(ns_root_uid))
+			*uid = ns_root_uid;
+
+		if (gid_valid(ns_root_gid))
+			*gid = ns_root_gid;
+	} else {
+		*uid = GLOBAL_ROOT_UID;
+		*gid = GLOBAL_ROOT_GID;
+	}
+}
+EXPORT_SYMBOL_GPL(net_ns_get_ownership);
+
+static void unhash_nsid(struct net *net, struct net *last)
+{
+	struct net *tmp;
+	/* This function is only called from cleanup_net() work,
+	 * and this work is the only process, that may delete
+	 * a net from net_namespace_list. So, when the below
+	 * is executing, the list may only grow. Thus, we do not
+	 * use for_each_net_rcu() or net_rwsem.
+	 */
+	for_each_net(tmp) {
+		int id;
+
+		spin_lock_bh(&tmp->nsid_lock);
+		id = __peernet2id(tmp, net);
+		if (id >= 0)
+			idr_remove(&tmp->netns_ids, id);
+		spin_unlock_bh(&tmp->nsid_lock);
+		if (id >= 0)
+			rtnl_net_notifyid(tmp, RTM_DELNSID, id, 0, NULL,
+					  GFP_KERNEL);
+		if (tmp == last)
+			break;
+	}
+	spin_lock_bh(&net->nsid_lock);
+	idr_destroy(&net->netns_ids);
+	spin_unlock_bh(&net->nsid_lock);
+}
+
+static LLIST_HEAD(cleanup_list);
+
+static void cleanup_net(struct work_struct *work)
+{
+	const struct pernet_operations *ops;
+	struct net *net, *tmp, *last;
+	struct llist_node *net_kill_list;
+	LIST_HEAD(net_exit_list);
+	LIST_HEAD(dev_kill_list);
+
+	/* Atomically snapshot the list of namespaces to cleanup */
+	net_kill_list = llist_del_all(&cleanup_list);
+
+	down_read(&pernet_ops_rwsem);
+
+	/* Don't let anyone else find us. */
+	down_write(&net_rwsem);
+	llist_for_each_entry(net, net_kill_list, cleanup_list)
+		list_del_rcu(&net->list);
+	/* Cache last net. After we unlock rtnl, no one new net
+	 * added to net_namespace_list can assign nsid pointer
+	 * to a net from net_kill_list (see peernet2id_alloc()).
+	 * So, we skip them in unhash_nsid().
+	 *
+	 * Note, that unhash_nsid() does not delete nsid links
+	 * between net_kill_list's nets, as they've already
+	 * deleted from net_namespace_list. But, this would be
+	 * useless anyway, as netns_ids are destroyed there.
+	 */
+	last = list_last_entry(&net_namespace_list, struct net, list);
+	up_write(&net_rwsem);
+
+	llist_for_each_entry(net, net_kill_list, cleanup_list) {
+		unhash_nsid(net, last);
+		list_add_tail(&net->exit_list, &net_exit_list);
+	}
+
+	/* Run all of the network namespace pre_exit methods */
+	list_for_each_entry_reverse(ops, &pernet_list, list)
+		ops_pre_exit_list(ops, &net_exit_list);
+
+	/*
+	 * Another CPU might be rcu-iterating the list, wait for it.
+	 * This needs to be before calling the exit() notifiers, so
+	 * the rcu_barrier() below isn't sufficient alone.
+	 * Also the pre_exit() and exit() methods need this barrier.
+	 */
+	synchronize_rcu_expedited();
+
+	rtnl_lock();
+	list_for_each_entry_reverse(ops, &pernet_list, list) {
+		if (ops->exit_batch_rtnl)
+			ops->exit_batch_rtnl(&net_exit_list, &dev_kill_list);
+	}
+	unregister_netdevice_many(&dev_kill_list);
+	rtnl_unlock();
+
+	/* Run all of the network namespace exit methods */
+	list_for_each_entry_reverse(ops, &pernet_list, list)
+		ops_exit_list(ops, &net_exit_list);
+
+	/* Free the net generic variables */
+	list_for_each_entry_reverse(ops, &pernet_list, list)
+		ops_free_list(ops, &net_exit_list);
+
+	up_read(&pernet_ops_rwsem);
+
+	/* Ensure there are no outstanding rcu callbacks using this
+	 * network namespace.
+	 */
+	rcu_barrier();
+
+	net_complete_free();
+
+	/* Finally it is safe to free my network namespace structure */
+	list_for_each_entry_safe(net, tmp, &net_exit_list, exit_list) {
+		list_del_init(&net->exit_list);
+		dec_net_namespaces(net->ucounts);
+#ifdef CONFIG_KEYS
+		key_remove_domain(net->key_domain);
+#endif
+		put_user_ns(net->user_ns);
+		net_free(net);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 }
 

@@ -4,6 +4,7 @@
 
 #include <asm/sgx.h>
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include "x86.h"
 #include "kvm_cache_regs.h"
 #include "nested.h"
@@ -38,6 +39,44 @@ static int sgx_get_encls_gva(struct kvm_vcpu *vcpu, unsigned long offset,
 	} else if (likely(is_64_bit_mode(vcpu))) {
 		*gva = vmx_get_untagged_addr(vcpu, *gva, 0);
 		fault = is_noncanonical_address(*gva, vcpu, 0);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include "cpuid.h"
+#include "kvm_cache_regs.h"
+#include "nested.h"
+#include "sgx.h"
+#include "vmx.h"
+#include "x86.h"
+
+bool __read_mostly enable_sgx = 1;
+module_param_named(sgx, enable_sgx, bool, 0444);
+
+/* Initial value of guest's virtual SGX_LEPUBKEYHASHn MSRs */
+static u64 sgx_pubkey_hash[4] __ro_after_init;
+
+/*
+ * ENCLS's memory operands use a fixed segment (DS) and a fixed
+ * address size based on the mode.  Related prefixes are ignored.
+ */
+static int sgx_get_encls_gva(struct kvm_vcpu *vcpu, unsigned long offset,
+			     int size, int alignment, gva_t *gva)
+{
+	struct kvm_segment s;
+	bool fault;
+
+	/* Skip vmcs.GUEST_DS retrieval for 64-bit mode to avoid VMREADs. */
+	*gva = offset;
+	if (!is_64_bit_mode(vcpu)) {
+		vmx_get_segment(vcpu, &s, VCPU_SREG_DS);
+		*gva += s.base;
+	}
+
+	if (!IS_ALIGNED(*gva, alignment)) {
+		fault = true;
+	} else if (likely(is_64_bit_mode(vcpu))) {
+		*gva = vmx_get_untagged_addr(vcpu, *gva, 0);
+		fault = is_noncanonical_address(*gva, vcpu);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	} else {
 		*gva &= 0xffffffff;
 		fault = (s.unusable) ||

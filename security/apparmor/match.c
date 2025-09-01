@@ -624,6 +624,7 @@ aa_state_t aa_dfa_matchn_until(struct aa_dfa *dfa, aa_state_t start,
 	return state;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define inc_wb_pos(wb)							\
 do {									\
 	BUILD_BUG_ON_NOT_POWER_OF_2(WB_HISTORY_SIZE);			\
@@ -653,6 +654,37 @@ static bool is_loop(struct match_workbuf *wb, aa_state_t state,
 	}
 
 	return false;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define inc_wb_pos(wb)						\
+do {								\
+	wb->pos = (wb->pos + 1) & (WB_HISTORY_SIZE - 1);		\
+	wb->len = (wb->len + 1) & (WB_HISTORY_SIZE - 1);		\
+} while (0)
+
+/* For DFAs that don't support extended tagging of states */
+static bool is_loop(struct match_workbuf *wb, aa_state_t state,
+		    unsigned int *adjust)
+{
+	aa_state_t pos = wb->pos;
+	aa_state_t i;
+
+	if (wb->history[pos] < state)
+		return false;
+
+	for (i = 0; i <= wb->len; i++) {
+		if (wb->history[pos] == state) {
+			*adjust = i;
+			return true;
+		}
+		if (pos == 0)
+			pos = WB_HISTORY_SIZE;
+		pos--;
+	}
+
+	*adjust = i;
+	return true;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static aa_state_t leftmatch_fb(struct aa_dfa *dfa, aa_state_t start,

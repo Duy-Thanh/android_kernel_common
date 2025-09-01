@@ -96,7 +96,12 @@ static int pm8008_regulator_get_voltage_sel(struct regulator_dev *rdev)
 
 	uV = le16_to_cpu(val) * 1000;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	return regulator_map_voltage_linear_range(rdev, uV, INT_MAX);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	return (uV - preg->desc.min_uV) / preg->desc.uV_step;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static const struct regulator_ops pm8008_regulator_ops = {

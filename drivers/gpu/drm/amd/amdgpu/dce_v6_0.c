@@ -1394,11 +1394,25 @@ static int dce_v6_0_audio_init(struct amdgpu_device *adev)
 
 static void dce_v6_0_audio_fini(struct amdgpu_device *adev)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!amdgpu_audio)
 		return;
 
 	if (!adev->mode_info.audio.enabled)
 		return;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int i;
+
+	if (!amdgpu_audio)
+		return;
+
+	if (!adev->mode_info.audio.enabled)
+		return;
+
+	for (i = 0; i < adev->mode_info.audio.num_pins; i++)
+		dce_v6_0_audio_enable(adev, &adev->mode_info.audio.pin[i], false);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	adev->mode_info.audio.enabled = false;
 }

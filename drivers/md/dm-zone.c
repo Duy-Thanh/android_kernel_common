@@ -56,6 +56,7 @@ int dm_blk_report_zones(struct gendisk *disk, sector_t sector,
 {
 	struct mapped_device *md = disk->private_data;
 	struct dm_table *map;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct dm_table *zone_revalidate_map = md->zone_revalidate_map;
 	int srcu_idx, ret = -EIO;
 	bool put_table = false;
@@ -185,6 +186,129 @@ int dm_revalidate_zones(struct dm_table *t, struct request_queue *q)
 	md->revalidate_map_task = current;
 	ret = blk_revalidate_disk_zones(disk);
 	md->revalidate_map_task = NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int srcu_idx, ret;
+
+	if (!md->zone_revalidate_map) {
+		/* Regular user context */
+		if (dm_suspended_md(md))
+			return -EAGAIN;
+
+		map = dm_get_live_table(md, &srcu_idx);
+		if (!map)
+			return -EIO;
+	} else {
+		/* Zone revalidation during __bind() */
+		map = md->zone_revalidate_map;
+	}
+
+	ret = dm_blk_do_report_zones(md, map, sector, nr_zones, cb, data);
+
+	if (!md->zone_revalidate_map)
+		dm_put_live_table(md, srcu_idx);
+
+	return ret;
+}
+
+static int dm_report_zones_cb(struct blk_zone *zone, unsigned int idx,
+			      void *data)
+{
+	struct dm_report_zones_args *args = data;
+	sector_t sector_diff = args->tgt->begin - args->start;
+
+	/*
+	 * Ignore zones beyond the target range.
+	 */
+	if (zone->start >= args->start + args->tgt->len)
+		return 0;
+
+	/*
+	 * Remap the start sector and write pointer position of the zone
+	 * to match its position in the target range.
+	 */
+	zone->start += sector_diff;
+	if (zone->type != BLK_ZONE_TYPE_CONVENTIONAL) {
+		if (zone->cond == BLK_ZONE_COND_FULL)
+			zone->wp = zone->start + zone->len;
+		else if (zone->cond == BLK_ZONE_COND_EMPTY)
+			zone->wp = zone->start;
+		else
+			zone->wp += sector_diff;
+	}
+
+	args->next_sector = zone->start + zone->len;
+	return args->orig_cb(zone, args->zone_idx++, args->orig_data);
+}
+
+/*
+ * Helper for drivers of zoned targets to implement struct target_type
+ * report_zones operation.
+ */
+int dm_report_zones(struct block_device *bdev, sector_t start, sector_t sector,
+		    struct dm_report_zones_args *args, unsigned int nr_zones)
+{
+	/*
+	 * Set the target mapping start sector first so that
+	 * dm_report_zones_cb() can correctly remap zone information.
+	 */
+	args->start = start;
+
+	return blkdev_report_zones(bdev, sector, nr_zones,
+				   dm_report_zones_cb, args);
+}
+EXPORT_SYMBOL_GPL(dm_report_zones);
+
+bool dm_is_zone_write(struct mapped_device *md, struct bio *bio)
+{
+	struct request_queue *q = md->queue;
+
+	if (!blk_queue_is_zoned(q))
+		return false;
+
+	switch (bio_op(bio)) {
+	case REQ_OP_WRITE_ZEROES:
+	case REQ_OP_WRITE:
+		return !op_is_flush(bio->bi_opf) && bio_sectors(bio);
+	default:
+		return false;
+	}
+}
+
+/*
+ * Revalidate the zones of a mapped device to initialize resource necessary
+ * for zone append emulation. Note that we cannot simply use the block layer
+ * blk_revalidate_disk_zones() function here as the mapped device is suspended
+ * (this is called from __bind() context).
+ */
+int dm_revalidate_zones(struct dm_table *t, struct request_queue *q)
+{
+	struct mapped_device *md = t->md;
+	struct gendisk *disk = md->disk;
+	int ret;
+
+	if (!get_capacity(disk))
+		return 0;
+
+	/* Revalidate only if something changed. */
+	if (!disk->nr_zones || disk->nr_zones != md->nr_zones) {
+		DMINFO("%s using %s zone append",
+		       disk->disk_name,
+		       queue_emulates_zone_append(q) ? "emulated" : "native");
+		md->nr_zones = 0;
+	}
+
+	if (md->nr_zones)
+		return 0;
+
+	/*
+	 * Our table is not live yet. So the call to dm_get_live_table()
+	 * in dm_blk_report_zones() will fail. Set a temporary pointer to
+	 * our table for dm_blk_report_zones() to use directly.
+	 */
+	md->zone_revalidate_map = t;
+	ret = blk_revalidate_disk_zones(disk);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	md->zone_revalidate_map = NULL;
 
 	if (ret) {

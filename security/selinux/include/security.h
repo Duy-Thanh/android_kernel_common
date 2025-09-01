@@ -105,6 +105,7 @@ struct selinux_state {
 	struct mutex policy_mutex;
 } __randomize_layout;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 extern bool selinux_memfd_class_policycap;
 
 void selinux_avc_init(void);
@@ -202,6 +203,99 @@ static inline bool selinux_policycap_userspace_initial_context(void)
 static inline bool selinux_policycap_memfd_class(void)
 {
 	return READ_ONCE(selinux_memfd_class_policycap);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void selinux_avc_init(void);
+
+extern struct selinux_state selinux_state;
+
+static inline bool selinux_initialized(void)
+{
+	/* do a synchronized load to avoid race conditions */
+	return smp_load_acquire(&selinux_state.initialized);
+}
+
+static inline void selinux_mark_initialized(void)
+{
+	/* do a synchronized write to avoid race conditions */
+	smp_store_release(&selinux_state.initialized, true);
+}
+
+#ifdef CONFIG_SECURITY_SELINUX_DEVELOP
+static inline bool enforcing_enabled(void)
+{
+	return READ_ONCE(selinux_state.enforcing);
+}
+
+static inline void enforcing_set(bool value)
+{
+	WRITE_ONCE(selinux_state.enforcing, value);
+}
+#else
+static inline bool enforcing_enabled(void)
+{
+	return true;
+}
+
+static inline void enforcing_set(bool value)
+{
+}
+#endif
+
+static inline bool checkreqprot_get(void)
+{
+	/* non-zero/true checkreqprot values are no longer supported */
+	return 0;
+}
+
+static inline bool selinux_policycap_netpeer(void)
+{
+	return READ_ONCE(selinux_state.policycap[POLICYDB_CAP_NETPEER]);
+}
+
+static inline bool selinux_policycap_openperm(void)
+{
+	return READ_ONCE(selinux_state.policycap[POLICYDB_CAP_OPENPERM]);
+}
+
+static inline bool selinux_policycap_extsockclass(void)
+{
+	return READ_ONCE(selinux_state.policycap[POLICYDB_CAP_EXTSOCKCLASS]);
+}
+
+static inline bool selinux_policycap_alwaysnetwork(void)
+{
+	return READ_ONCE(selinux_state.policycap[POLICYDB_CAP_ALWAYSNETWORK]);
+}
+
+static inline bool selinux_policycap_cgroupseclabel(void)
+{
+	return READ_ONCE(selinux_state.policycap[POLICYDB_CAP_CGROUPSECLABEL]);
+}
+
+static inline bool selinux_policycap_nnp_nosuid_transition(void)
+{
+	return READ_ONCE(
+		selinux_state.policycap[POLICYDB_CAP_NNP_NOSUID_TRANSITION]);
+}
+
+static inline bool selinux_policycap_genfs_seclabel_symlinks(void)
+{
+	return READ_ONCE(
+		selinux_state.policycap[POLICYDB_CAP_GENFS_SECLABEL_SYMLINKS]);
+}
+
+static inline bool selinux_policycap_ioctl_skip_cloexec(void)
+{
+	return READ_ONCE(
+		selinux_state.policycap[POLICYDB_CAP_IOCTL_SKIP_CLOEXEC]);
+}
+
+static inline bool selinux_policycap_userspace_initial_context(void)
+{
+	return READ_ONCE(
+		selinux_state.policycap[POLICYDB_CAP_USERSPACE_INITIAL_CONTEXT]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static inline bool selinux_android_nlroute_getlink(void)

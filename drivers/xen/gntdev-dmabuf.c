@@ -357,6 +357,7 @@ struct gntdev_dmabuf_export_args {
 static int dmabuf_exp_from_pages(struct gntdev_dmabuf_export_args *args)
 {
 	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct gntdev_dmabuf *gntdev_dmabuf __free(kfree) = NULL;
 	CLASS(get_unused_fd, ret)(O_CLOEXEC);
 
@@ -401,6 +402,61 @@ static int dmabuf_exp_from_pages(struct gntdev_dmabuf_export_args *args)
 
 	fd_install(take_fd(ret), no_free_ptr(gntdev_dmabuf)->dmabuf->file);
 	return 0;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct gntdev_dmabuf *gntdev_dmabuf;
+	int ret;
+
+	gntdev_dmabuf = kzalloc(sizeof(*gntdev_dmabuf), GFP_KERNEL);
+	if (!gntdev_dmabuf)
+		return -ENOMEM;
+
+	kref_init(&gntdev_dmabuf->u.exp.refcount);
+
+	gntdev_dmabuf->priv = args->dmabuf_priv;
+	gntdev_dmabuf->nr_pages = args->count;
+	gntdev_dmabuf->pages = args->pages;
+	gntdev_dmabuf->u.exp.priv = args->priv;
+	gntdev_dmabuf->u.exp.map = args->map;
+
+	exp_info.exp_name = KBUILD_MODNAME;
+	if (args->dev->driver && args->dev->driver->owner)
+		exp_info.owner = args->dev->driver->owner;
+	else
+		exp_info.owner = THIS_MODULE;
+	exp_info.ops = &dmabuf_exp_ops;
+	exp_info.size = args->count << PAGE_SHIFT;
+	exp_info.flags = O_RDWR;
+	exp_info.priv = gntdev_dmabuf;
+
+	gntdev_dmabuf->dmabuf = dma_buf_export(&exp_info);
+	if (IS_ERR(gntdev_dmabuf->dmabuf)) {
+		ret = PTR_ERR(gntdev_dmabuf->dmabuf);
+		gntdev_dmabuf->dmabuf = NULL;
+		goto fail;
+	}
+
+	ret = dma_buf_fd(gntdev_dmabuf->dmabuf, O_CLOEXEC);
+	if (ret < 0)
+		goto fail;
+
+	gntdev_dmabuf->fd = ret;
+	args->fd = ret;
+
+	pr_debug("Exporting DMA buffer with fd %d\n", ret);
+
+	mutex_lock(&args->dmabuf_priv->lock);
+	list_add(&gntdev_dmabuf->next, &args->dmabuf_priv->exp_list);
+	mutex_unlock(&args->dmabuf_priv->lock);
+	get_file(gntdev_dmabuf->priv->filp);
+	return 0;
+
+fail:
+	if (gntdev_dmabuf->dmabuf)
+		dma_buf_put(gntdev_dmabuf->dmabuf);
+	kfree(gntdev_dmabuf);
+	return ret;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static struct gntdev_grant_map *

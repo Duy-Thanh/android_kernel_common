@@ -63,6 +63,7 @@ static rx_handler_result_t hsr_handle_frame(struct sk_buff **pskb)
 	skb_push(skb, ETH_HLEN);
 	skb_reset_mac_header(skb);
 	if ((!hsr->prot_version && protocol == htons(ETH_P_PRP)) ||
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	    protocol == htons(ETH_P_HSR)) {
 		if (!pskb_may_pull(skb, ETH_HLEN + HSR_HLEN)) {
 			kfree_skb(skb);
@@ -71,6 +72,11 @@ static rx_handler_result_t hsr_handle_frame(struct sk_buff **pskb)
 
 		skb_set_network_header(skb, ETH_HLEN + HSR_HLEN);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	    protocol == htons(ETH_P_HSR))
+		skb_set_network_header(skb, ETH_HLEN + HSR_HLEN);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	skb_reset_mac_len(skb);
 
 	/* Only the frames received over the interlink port will assign a

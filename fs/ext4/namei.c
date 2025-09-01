@@ -1462,6 +1462,7 @@ static bool ext4_match(struct inode *parent,
 		 * sure cf_name was properly initialized before
 		 * considering the calculated hash.
 		 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (sb_no_casefold_compat_fallback(parent->i_sb) &&
 		    IS_ENCRYPTED(parent) && fname->cf_name.name &&
 		    (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
@@ -1605,6 +1606,146 @@ static struct buffer_head *__ext4_find_entry(struct inode *dir,
 				       "failed, falling back\n"));
 		else
 			goto cleanup_and_exit;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (IS_ENCRYPTED(parent) && fname->cf_name.name &&
+		    (fname->hinfo.hash != EXT4_DIRENT_HASH(de) ||
+		     fname->hinfo.minor_hash != EXT4_DIRENT_MINOR_HASH(de)))
+			return false;
+		/*
+		 * Treat comparison errors as not a match.  The
+		 * only case where it happens is on a disk
+		 * corruption or ENOMEM.
+		 */
+
+		return generic_ci_match(parent, fname->usr_fname,
+					&fname->cf_name, de->name,
+					de->name_len) > 0;
+	}
+#endif
+
+	return fscrypt_match_name(&f, de->name, de->name_len);
+}
+
+/*
+ * Returns 0 if not found, -EFSCORRUPTED on failure, and 1 on success
+ */
+int ext4_search_dir(struct buffer_head *bh, char *search_buf, int buf_size,
+		    struct inode *dir, struct ext4_filename *fname,
+		    unsigned int offset, struct ext4_dir_entry_2 **res_dir)
+{
+	struct ext4_dir_entry_2 * de;
+	char * dlimit;
+	int de_len;
+
+	de = (struct ext4_dir_entry_2 *)search_buf;
+	dlimit = search_buf + buf_size;
+	while ((char *) de < dlimit - EXT4_BASE_DIR_LEN) {
+		/* this code is executed quadratically often */
+		/* do minimal checking `by hand' */
+		if (de->name + de->name_len <= dlimit &&
+		    ext4_match(dir, fname, de)) {
+			/* found a match - just to be sure, do
+			 * a full check */
+			if (ext4_check_dir_entry(dir, NULL, de, bh, search_buf,
+						 buf_size, offset))
+				return -EFSCORRUPTED;
+			*res_dir = de;
+			return 1;
+		}
+		/* prevent looping on a bad block */
+		de_len = ext4_rec_len_from_disk(de->rec_len,
+						dir->i_sb->s_blocksize);
+		if (de_len <= 0)
+			return -EFSCORRUPTED;
+		offset += de_len;
+		de = (struct ext4_dir_entry_2 *) ((char *) de + de_len);
+	}
+	return 0;
+}
+
+static int is_dx_internal_node(struct inode *dir, ext4_lblk_t block,
+			       struct ext4_dir_entry *de)
+{
+	struct super_block *sb = dir->i_sb;
+
+	if (!is_dx(dir))
+		return 0;
+	if (block == 0)
+		return 1;
+	if (de->inode == 0 &&
+	    ext4_rec_len_from_disk(de->rec_len, sb->s_blocksize) ==
+			sb->s_blocksize)
+		return 1;
+	return 0;
+}
+
+/*
+ *	__ext4_find_entry()
+ *
+ * finds an entry in the specified directory with the wanted name. It
+ * returns the cache buffer in which the entry was found, and the entry
+ * itself (as a parameter - res_dir). It does NOT read the inode of the
+ * entry - you'll have to do that yourself if you want to.
+ *
+ * The returned buffer_head has ->b_count elevated.  The caller is expected
+ * to brelse() it when appropriate.
+ */
+static struct buffer_head *__ext4_find_entry(struct inode *dir,
+					     struct ext4_filename *fname,
+					     struct ext4_dir_entry_2 **res_dir,
+					     int *inlined)
+{
+	struct super_block *sb;
+	struct buffer_head *bh_use[NAMEI_RA_SIZE];
+	struct buffer_head *bh, *ret = NULL;
+	ext4_lblk_t start, block;
+	const u8 *name = fname->usr_fname->name;
+	size_t ra_max = 0;	/* Number of bh's in the readahead
+				   buffer, bh_use[] */
+	size_t ra_ptr = 0;	/* Current index into readahead
+				   buffer */
+	ext4_lblk_t  nblocks;
+	int i, namelen, retval;
+
+	*res_dir = NULL;
+	sb = dir->i_sb;
+	namelen = fname->usr_fname->len;
+	if (namelen > EXT4_NAME_LEN)
+		return NULL;
+
+	if (ext4_has_inline_data(dir)) {
+		int has_inline_data = 1;
+		ret = ext4_find_inline_entry(dir, fname, res_dir,
+					     &has_inline_data);
+		if (inlined)
+			*inlined = has_inline_data;
+		if (has_inline_data || IS_ERR(ret))
+			goto cleanup_and_exit;
+	}
+
+	if ((namelen <= 2) && (name[0] == '.') &&
+	    (name[1] == '.' || name[1] == '\0')) {
+		/*
+		 * "." or ".." will only be in the first block
+		 * NFS may look up ".."; "." should be handled by the VFS
+		 */
+		block = start = 0;
+		nblocks = 1;
+		goto restart;
+	}
+	if (is_dx(dir)) {
+		ret = ext4_dx_find_entry(dir, fname, res_dir);
+		/*
+		 * On success, or if the error was file not found,
+		 * return.  Otherwise, fall back to doing a search the
+		 * old fashioned way.
+		 */
+		if (!IS_ERR(ret) || PTR_ERR(ret) != ERR_BAD_DX_DIR)
+			goto cleanup_and_exit;
+		dxtrace(printk(KERN_DEBUG "ext4_find_entry: dx failed, "
+			       "falling back\n"));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		ret = NULL;
 	}
 	nblocks = dir->i_size >> EXT4_BLOCK_SIZE_BITS(sb);

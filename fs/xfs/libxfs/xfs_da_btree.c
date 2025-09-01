@@ -2833,12 +2833,16 @@ xfs_da_read_buf(
 			&bp, ops);
 	if (xfs_metadata_is_sick(error))
 		xfs_dirattr_mark_sick(dp, whichfork);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * ENODATA from disk implies a disk medium failure; ENODATA for
 	 * xattrs means attribute not found, so disambiguate that here.
 	 */
 	if (error == -ENODATA && whichfork == XFS_ATTR_FORK)
 		error = -EIO;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (error)
 		goto out_free;
 

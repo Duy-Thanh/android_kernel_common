@@ -1420,6 +1420,7 @@ static struct sock *tcp_v6_syn_recv_sock(const struct sock *sk, struct sk_buff *
 	ireq = inet_rsk(req);
 
 	if (sk_acceptq_is_full(sk))
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		goto exit_overflow;
 
 	if (!dst) {
@@ -1570,6 +1571,161 @@ put_and_exit:
 	inet_csk_prepare_forced_close(newsk);
 	tcp_done(newsk);
 	goto exit;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		goto out_overflow;
+
+	if (!dst) {
+		dst = inet6_csk_route_req(sk, &fl6, req, IPPROTO_TCP);
+		if (!dst)
+			goto out;
+	}
+
+	newsk = tcp_create_openreq_child(sk, req, skb);
+	if (!newsk)
+		goto out_nonewsk;
+
+	/*
+	 * No need to charge this sock to the relevant IPv6 refcnt debug socks
+	 * count here, tcp_create_openreq_child now does this for us, see the
+	 * comment in that function for the gory details. -acme
+	 */
+
+	newsk->sk_gso_type = SKB_GSO_TCPV6;
+	inet6_sk_rx_dst_set(newsk, skb);
+
+	inet_sk(newsk)->pinet6 = tcp_inet6_sk(newsk);
+
+	newtp = tcp_sk(newsk);
+	newinet = inet_sk(newsk);
+	newnp = tcp_inet6_sk(newsk);
+
+	memcpy(newnp, np, sizeof(struct ipv6_pinfo));
+
+	ip6_dst_store(newsk, dst, NULL, NULL);
+
+	newsk->sk_v6_daddr = ireq->ir_v6_rmt_addr;
+	newnp->saddr = ireq->ir_v6_loc_addr;
+	newsk->sk_v6_rcv_saddr = ireq->ir_v6_loc_addr;
+	newsk->sk_bound_dev_if = ireq->ir_iif;
+
+	/* Now IPv6 options...
+
+	   First: no IPv4 options.
+	 */
+	newinet->inet_opt = NULL;
+	newnp->ipv6_mc_list = NULL;
+	newnp->ipv6_ac_list = NULL;
+	newnp->ipv6_fl_list = NULL;
+
+	/* Clone RX bits */
+	newnp->rxopt.all = np->rxopt.all;
+
+	newnp->pktoptions = NULL;
+	newnp->opt	  = NULL;
+	newnp->mcast_oif  = tcp_v6_iif(skb);
+	newnp->mcast_hops = ipv6_hdr(skb)->hop_limit;
+	newnp->rcv_flowinfo = ip6_flowinfo(ipv6_hdr(skb));
+	if (inet6_test_bit(REPFLOW, sk))
+		newnp->flow_label = ip6_flowlabel(ipv6_hdr(skb));
+
+	/* Set ToS of the new socket based upon the value of incoming SYN.
+	 * ECT bits are set later in tcp_init_transfer().
+	 */
+	if (READ_ONCE(sock_net(sk)->ipv4.sysctl_tcp_reflect_tos))
+		newnp->tclass = tcp_rsk(req)->syn_tos & ~INET_ECN_MASK;
+
+	/* Clone native IPv6 options from listening socket (if any)
+
+	   Yes, keeping reference count would be much more clever,
+	   but we make one more one thing there: reattach optmem
+	   to newsk.
+	 */
+	opt = ireq->ipv6_opt;
+	if (!opt)
+		opt = rcu_dereference(np->opt);
+	if (opt) {
+		opt = ipv6_dup_options(newsk, opt);
+		RCU_INIT_POINTER(newnp->opt, opt);
+	}
+	inet_csk(newsk)->icsk_ext_hdr_len = 0;
+	if (opt)
+		inet_csk(newsk)->icsk_ext_hdr_len = opt->opt_nflen +
+						    opt->opt_flen;
+
+	tcp_ca_openreq_child(newsk, dst);
+
+	tcp_sync_mss(newsk, dst_mtu(dst));
+	newtp->advmss = tcp_mss_clamp(tcp_sk(sk), dst_metric_advmss(dst));
+
+	tcp_initialize_rcv_mss(newsk);
+
+	newinet->inet_daddr = newinet->inet_saddr = LOOPBACK4_IPV6;
+	newinet->inet_rcv_saddr = LOOPBACK4_IPV6;
+
+#ifdef CONFIG_TCP_MD5SIG
+	l3index = l3mdev_master_ifindex_by_index(sock_net(sk), ireq->ir_iif);
+
+	if (!tcp_rsk_used_ao(req)) {
+		/* Copy over the MD5 key from the original socket */
+		key = tcp_v6_md5_do_lookup(sk, &newsk->sk_v6_daddr, l3index);
+		if (key) {
+			const union tcp_md5_addr *addr;
+
+			addr = (union tcp_md5_addr *)&newsk->sk_v6_daddr;
+			if (tcp_md5_key_copy(newsk, addr, AF_INET6, 128, l3index, key)) {
+				inet_csk_prepare_forced_close(newsk);
+				tcp_done(newsk);
+				goto out;
+			}
+		}
+	}
+#endif
+#ifdef CONFIG_TCP_AO
+	/* Copy over tcp_ao_info if any */
+	if (tcp_ao_copy_all_matching(sk, newsk, req, skb, AF_INET6))
+		goto out; /* OOM */
+#endif
+
+	if (__inet_inherit_port(sk, newsk) < 0) {
+		inet_csk_prepare_forced_close(newsk);
+		tcp_done(newsk);
+		goto out;
+	}
+	*own_req = inet_ehash_nolisten(newsk, req_to_sk(req_unhash),
+				       &found_dup_sk);
+	if (*own_req) {
+		tcp_move_syn(newtp, req);
+
+		/* Clone pktoptions received with SYN, if we own the req */
+		if (ireq->pktopts) {
+			newnp->pktoptions = skb_clone_and_charge_r(ireq->pktopts, newsk);
+			consume_skb(ireq->pktopts);
+			ireq->pktopts = NULL;
+			if (newnp->pktoptions)
+				tcp_v6_restore_cb(newnp->pktoptions);
+		}
+	} else {
+		if (!req_unhash && found_dup_sk) {
+			/* This code path should only be executed in the
+			 * syncookie case only
+			 */
+			bh_unlock_sock(newsk);
+			sock_put(newsk);
+			newsk = NULL;
+		}
+	}
+
+	return newsk;
+
+out_overflow:
+	__NET_INC_STATS(sock_net(sk), LINUX_MIB_LISTENOVERFLOWS);
+out_nonewsk:
+	dst_release(dst);
+out:
+	tcp_listendrop(sk);
+	return NULL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 INDIRECT_CALLABLE_DECLARE(struct dst_entry *ipv4_dst_check(struct dst_entry *,

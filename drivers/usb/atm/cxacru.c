@@ -980,6 +980,7 @@ cleanup:
 	return ret;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 static int cxacru_find_firmware(struct cxacru_data *instance,
 				char *phase, const struct firmware **fw_p)
@@ -1104,6 +1105,141 @@ static int cxacru_heavy_init(struct usbatm_data *usbatm_instance,
 	}
 
 done:
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void cxacru_upload_firmware(struct cxacru_data *instance,
+				   const struct firmware *fw,
+				   const struct firmware *bp)
+{
+	int ret;
+	struct usbatm_data *usbatm = instance->usbatm;
+	struct usb_device *usb_dev = usbatm->usb_dev;
+	__le16 signature[] = { usb_dev->descriptor.idVendor,
+			       usb_dev->descriptor.idProduct };
+	__le32 val;
+
+	usb_dbg(usbatm, "%s\n", __func__);
+
+	/* FirmwarePllFClkValue */
+	val = cpu_to_le32(instance->modem_type->pll_f_clk);
+	ret = cxacru_fw(usb_dev, FW_WRITE_MEM, 0x2, 0x0, PLLFCLK_ADDR, (u8 *) &val, 4);
+	if (ret) {
+		usb_err(usbatm, "FirmwarePllFClkValue failed: %d\n", ret);
+		return;
+	}
+
+	/* FirmwarePllBClkValue */
+	val = cpu_to_le32(instance->modem_type->pll_b_clk);
+	ret = cxacru_fw(usb_dev, FW_WRITE_MEM, 0x2, 0x0, PLLBCLK_ADDR, (u8 *) &val, 4);
+	if (ret) {
+		usb_err(usbatm, "FirmwarePllBClkValue failed: %d\n", ret);
+		return;
+	}
+
+	/* Enable SDRAM */
+	val = cpu_to_le32(SDRAM_ENA);
+	ret = cxacru_fw(usb_dev, FW_WRITE_MEM, 0x2, 0x0, SDRAMEN_ADDR, (u8 *) &val, 4);
+	if (ret) {
+		usb_err(usbatm, "Enable SDRAM failed: %d\n", ret);
+		return;
+	}
+
+	/* Firmware */
+	usb_info(usbatm, "loading firmware\n");
+	ret = cxacru_fw(usb_dev, FW_WRITE_MEM, 0x2, 0x0, FW_ADDR, fw->data, fw->size);
+	if (ret) {
+		usb_err(usbatm, "Firmware upload failed: %d\n", ret);
+		return;
+	}
+
+	/* Boot ROM patch */
+	if (instance->modem_type->boot_rom_patch) {
+		usb_info(usbatm, "loading boot ROM patch\n");
+		ret = cxacru_fw(usb_dev, FW_WRITE_MEM, 0x2, 0x0, BR_ADDR, bp->data, bp->size);
+		if (ret) {
+			usb_err(usbatm, "Boot ROM patching failed: %d\n", ret);
+			return;
+		}
+	}
+
+	/* Signature */
+	ret = cxacru_fw(usb_dev, FW_WRITE_MEM, 0x2, 0x0, SIG_ADDR, (u8 *) signature, 4);
+	if (ret) {
+		usb_err(usbatm, "Signature storing failed: %d\n", ret);
+		return;
+	}
+
+	usb_info(usbatm, "starting device\n");
+	if (instance->modem_type->boot_rom_patch) {
+		val = cpu_to_le32(BR_ADDR);
+		ret = cxacru_fw(usb_dev, FW_WRITE_MEM, 0x2, 0x0, BR_STACK_ADDR, (u8 *) &val, 4);
+	} else {
+		ret = cxacru_fw(usb_dev, FW_GOTO_MEM, 0x0, 0x0, FW_ADDR, NULL, 0);
+	}
+	if (ret) {
+		usb_err(usbatm, "Passing control to firmware failed: %d\n", ret);
+		return;
+	}
+
+	/* Delay to allow firmware to start up. */
+	msleep_interruptible(1000);
+
+	usb_clear_halt(usb_dev, usb_sndbulkpipe(usb_dev, CXACRU_EP_CMD));
+	usb_clear_halt(usb_dev, usb_rcvbulkpipe(usb_dev, CXACRU_EP_CMD));
+	usb_clear_halt(usb_dev, usb_sndbulkpipe(usb_dev, CXACRU_EP_DATA));
+	usb_clear_halt(usb_dev, usb_rcvbulkpipe(usb_dev, CXACRU_EP_DATA));
+
+	ret = cxacru_cm(instance, CM_REQUEST_CARD_GET_STATUS, NULL, 0, NULL, 0);
+	if (ret < 0) {
+		usb_err(usbatm, "modem failed to initialize: %d\n", ret);
+		return;
+	}
+}
+
+static int cxacru_find_firmware(struct cxacru_data *instance,
+				char *phase, const struct firmware **fw_p)
+{
+	struct usbatm_data *usbatm = instance->usbatm;
+	struct device *dev = &usbatm->usb_intf->dev;
+	char buf[16];
+
+	sprintf(buf, "cxacru-%s.bin", phase);
+	usb_dbg(usbatm, "cxacru_find_firmware: looking for %s\n", buf);
+
+	if (request_firmware(fw_p, buf, dev)) {
+		usb_dbg(usbatm, "no stage %s firmware found\n", phase);
+		return -ENOENT;
+	}
+
+	usb_info(usbatm, "found firmware %s\n", buf);
+
+	return 0;
+}
+
+static int cxacru_heavy_init(struct usbatm_data *usbatm_instance,
+			     struct usb_interface *usb_intf)
+{
+	const struct firmware *fw, *bp;
+	struct cxacru_data *instance = usbatm_instance->driver_data;
+	int ret = cxacru_find_firmware(instance, "fw", &fw);
+
+	if (ret) {
+		usb_warn(usbatm_instance, "firmware (cxacru-fw.bin) unavailable (system misconfigured?)\n");
+		return ret;
+	}
+
+	if (instance->modem_type->boot_rom_patch) {
+		ret = cxacru_find_firmware(instance, "bp", &bp);
+		if (ret) {
+			usb_warn(usbatm_instance, "boot ROM patch (cxacru-bp.bin) unavailable (system misconfigured?)\n");
+			release_firmware(fw);
+			return ret;
+		}
+	}
+
+	cxacru_upload_firmware(instance, fw, bp);
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (instance->modem_type->boot_rom_patch)
 		release_firmware(bp);
 	release_firmware(fw);

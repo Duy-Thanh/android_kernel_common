@@ -5352,6 +5352,7 @@ int dwc2_gadget_enter_hibernation(struct dwc2_hsotg *hsotg)
 	if (gusbcfg & GUSBCFG_ULPI_UTMI_SEL) {
 		/* ULPI interface */
 		gpwrdn |= GPWRDN_ULPI_LATCH_EN_DURING_HIB_ENTRY;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		dwc2_writel(hsotg, gpwrdn, GPWRDN);
 		udelay(10);
 
@@ -5380,6 +5381,23 @@ int dwc2_gadget_enter_hibernation(struct dwc2_hsotg *hsotg)
 		dwc2_writel(hsotg, pcgcctl, PCGCTL);
 		udelay(10);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	}
+	dwc2_writel(hsotg, gpwrdn, GPWRDN);
+	udelay(10);
+
+	/* Suspend the Phy Clock */
+	pcgcctl = dwc2_readl(hsotg, PCGCTL);
+	pcgcctl |= PCGCTL_STOPPCLK;
+	dwc2_writel(hsotg, pcgcctl, PCGCTL);
+	udelay(10);
+
+	gpwrdn = dwc2_readl(hsotg, GPWRDN);
+	gpwrdn |= GPWRDN_PMUACTV;
+	dwc2_writel(hsotg, gpwrdn, GPWRDN);
+	udelay(10);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* Set flag to indicate that we are in hibernation */
 	hsotg->hibernated = 1;

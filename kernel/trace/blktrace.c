@@ -1896,6 +1896,7 @@ void blk_fill_rwbs(char *rwbs, blk_opf_t opf)
 	case REQ_OP_READ:
 		rwbs[i++] = 'R';
 		break;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	case REQ_OP_ZONE_APPEND:
 		rwbs[i++] = 'Z';
 		rwbs[i++] = 'A';
@@ -1935,6 +1936,21 @@ void blk_fill_rwbs(char *rwbs, blk_opf_t opf)
 		rwbs[i++] = 'U';
 
 	WARN_ON_ONCE(i >= RWBS_LEN);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	default:
+		rwbs[i++] = 'N';
+	}
+
+	if (opf & REQ_FUA)
+		rwbs[i++] = 'F';
+	if (opf & REQ_RAHEAD)
+		rwbs[i++] = 'A';
+	if (opf & REQ_SYNC)
+		rwbs[i++] = 'S';
+	if (opf & REQ_META)
+		rwbs[i++] = 'M';
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	rwbs[i] = '\0';
 }

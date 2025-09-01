@@ -8,6 +8,7 @@
 #ifndef DTS_ARM64_TI_K3_PINCTRL_H
 #define DTS_ARM64_TI_K3_PINCTRL_H
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define ST_EN_SHIFT		(14)
 #define PULLUDEN_SHIFT		(16)
 #define PULLTYPESEL_SHIFT	(17)
@@ -38,6 +39,30 @@
 #define PIN_INPUT_NOST		(INPUT_EN | PULL_DISABLE)
 #define PIN_INPUT_PULLUP_NOST	(INPUT_EN | PULL_UP)
 #define PIN_INPUT_PULLDOWN_NOST	(INPUT_EN | PULL_DOWN)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define PULLUDEN_SHIFT		(16)
+#define PULLTYPESEL_SHIFT	(17)
+#define RXACTIVE_SHIFT		(18)
+#define DEBOUNCE_SHIFT		(11)
+
+#define PULL_DISABLE		(1 << PULLUDEN_SHIFT)
+#define PULL_ENABLE		(0 << PULLUDEN_SHIFT)
+
+#define PULL_UP			(1 << PULLTYPESEL_SHIFT | PULL_ENABLE)
+#define PULL_DOWN		(0 << PULLTYPESEL_SHIFT | PULL_ENABLE)
+
+#define INPUT_EN		(1 << RXACTIVE_SHIFT)
+#define INPUT_DISABLE		(0 << RXACTIVE_SHIFT)
+
+/* Only these macros are expected be used directly in device tree files */
+#define PIN_OUTPUT		(INPUT_DISABLE | PULL_DISABLE)
+#define PIN_OUTPUT_PULLUP	(INPUT_DISABLE | PULL_UP)
+#define PIN_OUTPUT_PULLDOWN	(INPUT_DISABLE | PULL_DOWN)
+#define PIN_INPUT		(INPUT_EN | PULL_DISABLE)
+#define PIN_INPUT_PULLUP	(INPUT_EN | PULL_UP)
+#define PIN_INPUT_PULLDOWN	(INPUT_EN | PULL_DOWN)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #define PIN_DEBOUNCE_DISABLE	(0 << DEBOUNCE_SHIFT)
 #define PIN_DEBOUNCE_CONF1	(1 << DEBOUNCE_SHIFT)

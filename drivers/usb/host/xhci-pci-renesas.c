@@ -47,6 +47,7 @@
 #define RENESAS_ROM_ERASE_MAGIC				0x5A65726F
 #define RENESAS_ROM_WRITE_MAGIC				0x53524F4D
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define RENESAS_RETRY			50000	/* 50000 * RENESAS_DELAY ~= 500ms */
 #define RENESAS_CHIP_ERASE_RETRY	500000	/* 500000 * RENESAS_DELAY ~= 5s */
 #define RENESAS_DELAY			10
@@ -409,6 +410,370 @@ static void renesas_rom_erase(struct pci_dev *pdev)
 	msleep(20);
 
 	for (i = 0; i < RENESAS_CHIP_ERASE_RETRY; i++) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define RENESAS_RETRY	10000
+#define RENESAS_DELAY	10
+
+#define RENESAS_FW_NAME	"renesas_usb_fw.mem"
+
+static int renesas_fw_download_image(struct pci_dev *dev,
+				     const u32 *fw, size_t step, bool rom)
+{
+	size_t i;
+	int err;
+	u8 fw_status;
+	bool data0_or_data1;
+	u32 status_reg;
+
+	if (rom)
+		status_reg = RENESAS_ROM_STATUS_MSB;
+	else
+		status_reg = RENESAS_FW_STATUS_MSB;
+
+	/*
+	 * The hardware does alternate between two 32-bit pages.
+	 * (This is because each row of the firmware is 8 bytes).
+	 *
+	 * for even steps we use DATA0, for odd steps DATA1.
+	 */
+	data0_or_data1 = (step & 1) == 1;
+
+	/* step+1. Read "Set DATAX" and confirm it is cleared. */
+	for (i = 0; i < RENESAS_RETRY; i++) {
+		err = pci_read_config_byte(dev, status_reg, &fw_status);
+		if (err) {
+			dev_err(&dev->dev, "Read Status failed: %d\n",
+				pcibios_err_to_errno(err));
+			return pcibios_err_to_errno(err);
+		}
+		if (!(fw_status & BIT(data0_or_data1)))
+			break;
+
+		udelay(RENESAS_DELAY);
+	}
+	if (i == RENESAS_RETRY) {
+		dev_err(&dev->dev, "Timeout for Set DATAX step: %zd\n", step);
+		return -ETIMEDOUT;
+	}
+
+	/*
+	 * step+2. Write FW data to "DATAX".
+	 * "LSB is left" => force little endian
+	 */
+	err = pci_write_config_dword(dev, data0_or_data1 ?
+				     RENESAS_DATA1 : RENESAS_DATA0,
+				     (__force u32)cpu_to_le32(fw[step]));
+	if (err) {
+		dev_err(&dev->dev, "Write to DATAX failed: %d\n",
+			pcibios_err_to_errno(err));
+		return pcibios_err_to_errno(err);
+	}
+
+	udelay(100);
+
+	/* step+3. Set "Set DATAX". */
+	err = pci_write_config_byte(dev, status_reg, BIT(data0_or_data1));
+	if (err) {
+		dev_err(&dev->dev, "Write config for DATAX failed: %d\n",
+			pcibios_err_to_errno(err));
+		return pcibios_err_to_errno(err);
+	}
+
+	return 0;
+}
+
+static int renesas_fw_verify(const void *fw_data,
+			     size_t length)
+{
+	u16 fw_version_pointer;
+
+	/*
+	 * The Firmware's Data Format is describe in
+	 * "6.3 Data Format" R19UH0078EJ0500 Rev.5.00 page 124
+	 */
+
+	/*
+	 * The bootrom chips of the big brother have sizes up to 64k, let's
+	 * assume that's the biggest the firmware can get.
+	 */
+	if (length < 0x1000 || length >= 0x10000) {
+		pr_err("firmware is size %zd is not (4k - 64k).",
+			length);
+		return -EINVAL;
+	}
+
+	/* The First 2 bytes are fixed value (55aa). "LSB on Left" */
+	if (get_unaligned_le16(fw_data) != 0x55aa) {
+		pr_err("no valid firmware header found.");
+		return -EINVAL;
+	}
+
+	/* verify the firmware version position and print it. */
+	fw_version_pointer = get_unaligned_le16(fw_data + 4);
+	if (fw_version_pointer + 2 >= length) {
+		pr_err("fw ver pointer is outside of the firmware image");
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
+static bool renesas_check_rom(struct pci_dev *pdev)
+{
+	u16 rom_status;
+	int retval;
+
+	/* Check if external ROM exists */
+	retval = pci_read_config_word(pdev, RENESAS_ROM_STATUS, &rom_status);
+	if (retval)
+		return false;
+
+	rom_status &= RENESAS_ROM_STATUS_ROM_EXISTS;
+	if (rom_status) {
+		dev_dbg(&pdev->dev, "External ROM exists\n");
+		return true; /* External ROM exists */
+	}
+
+	return false;
+}
+
+static int renesas_check_rom_state(struct pci_dev *pdev)
+{
+	u16 rom_state;
+	u32 version;
+	int err;
+
+	/* check FW version */
+	err = pci_read_config_dword(pdev, RENESAS_FW_VERSION, &version);
+	if (err)
+		return pcibios_err_to_errno(err);
+
+	version &= RENESAS_FW_VERSION_FIELD;
+	version = version >> RENESAS_FW_VERSION_OFFSET;
+	dev_dbg(&pdev->dev, "Found ROM version: %x\n", version);
+
+	/*
+	 * Test if ROM is present and loaded, if so we can skip everything
+	 */
+	err = pci_read_config_word(pdev, RENESAS_ROM_STATUS, &rom_state);
+	if (err)
+		return pcibios_err_to_errno(err);
+
+	if (rom_state & RENESAS_ROM_STATUS_ROM_EXISTS) {
+		/* ROM exists */
+		dev_dbg(&pdev->dev, "ROM exists\n");
+
+		/* Check the "Result Code" Bits (6:4) and act accordingly */
+		switch (rom_state & RENESAS_ROM_STATUS_RESULT) {
+		case RENESAS_ROM_STATUS_SUCCESS:
+			return 0;
+
+		case RENESAS_ROM_STATUS_NO_RESULT: /* No result yet */
+			dev_dbg(&pdev->dev, "Unknown ROM status ...\n");
+			return -ENOENT;
+
+		case RENESAS_ROM_STATUS_ERROR: /* Error State */
+		default: /* All other states are marked as "Reserved states" */
+			dev_err(&pdev->dev, "Invalid ROM..");
+			break;
+		}
+	}
+
+	return -EIO;
+}
+
+static int renesas_fw_check_running(struct pci_dev *pdev)
+{
+	u8 fw_state;
+	int err;
+
+	/*
+	 * Test if the device is actually needing the firmware. As most
+	 * BIOSes will initialize the device for us. If the device is
+	 * initialized.
+	 */
+	err = pci_read_config_byte(pdev, RENESAS_FW_STATUS, &fw_state);
+	if (err)
+		return pcibios_err_to_errno(err);
+
+	/*
+	 * Check if "FW Download Lock" is locked. If it is and the FW is
+	 * ready we can simply continue. If the FW is not ready, we have
+	 * to give up.
+	 */
+	if (fw_state & RENESAS_FW_STATUS_LOCK) {
+		dev_dbg(&pdev->dev, "FW Download Lock is engaged.");
+
+		if (fw_state & RENESAS_FW_STATUS_SUCCESS)
+			return 0;
+
+		dev_err(&pdev->dev,
+			"FW Download Lock is set and FW is not ready. Giving Up.");
+		return -EIO;
+	}
+
+	/*
+	 * Check if "FW Download Enable" is set. If someone (us?) tampered
+	 * with it and it can't be reset, we have to give up too... and
+	 * ask for a forgiveness and a reboot.
+	 */
+	if (fw_state & RENESAS_FW_STATUS_DOWNLOAD_ENABLE) {
+		dev_err(&pdev->dev,
+			"FW Download Enable is stale. Giving Up (poweroff/reboot needed).");
+		return -EIO;
+	}
+
+	/* Otherwise, Check the "Result Code" Bits (6:4) and act accordingly */
+	switch (fw_state & RENESAS_FW_STATUS_RESULT) {
+	case 0: /* No result yet */
+		dev_dbg(&pdev->dev, "FW is not ready/loaded yet.");
+
+		/* tell the caller, that this device needs the firmware. */
+		return 1;
+
+	case RENESAS_FW_STATUS_SUCCESS: /* Success, device should be working. */
+		dev_dbg(&pdev->dev, "FW is ready.");
+		return 0;
+
+	case RENESAS_FW_STATUS_ERROR: /* Error State */
+		dev_err(&pdev->dev,
+			"hardware is in an error state. Giving up (poweroff/reboot needed).");
+		return -ENODEV;
+
+	default: /* All other states are marked as "Reserved states" */
+		dev_err(&pdev->dev,
+			"hardware is in an invalid state %lx. Giving up (poweroff/reboot needed).",
+			(fw_state & RENESAS_FW_STATUS_RESULT) >> 4);
+		return -EINVAL;
+	}
+}
+
+static int renesas_fw_download(struct pci_dev *pdev,
+			       const struct firmware *fw)
+{
+	const u32 *fw_data = (const u32 *)fw->data;
+	size_t i;
+	int err;
+	u8 fw_status;
+
+	/*
+	 * For more information and the big picture: please look at the
+	 * "Firmware Download Sequence" in "7.1 FW Download Interface"
+	 * of R19UH0078EJ0500 Rev.5.00 page 131
+	 */
+
+	/*
+	 * 0. Set "FW Download Enable" bit in the
+	 * "FW Download Control & Status Register" at 0xF4
+	 */
+	err = pci_write_config_byte(pdev, RENESAS_FW_STATUS,
+				    RENESAS_FW_STATUS_DOWNLOAD_ENABLE);
+	if (err)
+		return pcibios_err_to_errno(err);
+
+	/* 1 - 10 follow one step after the other. */
+	for (i = 0; i < fw->size / 4; i++) {
+		err = renesas_fw_download_image(pdev, fw_data, i, false);
+		if (err) {
+			dev_err(&pdev->dev,
+				"Firmware Download Step %zd failed at position %zd bytes with (%d).",
+				i, i * 4, err);
+			return err;
+		}
+	}
+
+	/*
+	 * This sequence continues until the last data is written to
+	 * "DATA0" or "DATA1". Naturally, we wait until "SET DATA0/1"
+	 * is cleared by the hardware beforehand.
+	 */
+	for (i = 0; i < RENESAS_RETRY; i++) {
+		err = pci_read_config_byte(pdev, RENESAS_FW_STATUS_MSB,
+					   &fw_status);
+		if (err)
+			return pcibios_err_to_errno(err);
+		if (!(fw_status & (BIT(0) | BIT(1))))
+			break;
+
+		udelay(RENESAS_DELAY);
+	}
+	if (i == RENESAS_RETRY)
+		dev_warn(&pdev->dev, "Final Firmware Download step timed out.");
+
+	/*
+	 * 11. After finishing writing the last data of FW, the
+	 * System Software must clear "FW Download Enable"
+	 */
+	err = pci_write_config_byte(pdev, RENESAS_FW_STATUS, 0);
+	if (err)
+		return pcibios_err_to_errno(err);
+
+	/* 12. Read "Result Code" and confirm it is good. */
+	for (i = 0; i < RENESAS_RETRY; i++) {
+		err = pci_read_config_byte(pdev, RENESAS_FW_STATUS, &fw_status);
+		if (err)
+			return pcibios_err_to_errno(err);
+		if (fw_status & RENESAS_FW_STATUS_SUCCESS)
+			break;
+
+		udelay(RENESAS_DELAY);
+	}
+	if (i == RENESAS_RETRY) {
+		/* Timed out / Error - let's see if we can fix this */
+		err = renesas_fw_check_running(pdev);
+		switch (err) {
+		case 0: /*
+			 * we shouldn't end up here.
+			 * maybe it took a little bit longer.
+			 * But all should be well?
+			 */
+			break;
+
+		case 1: /* (No result yet! */
+			dev_err(&pdev->dev, "FW Load timedout");
+			return -ETIMEDOUT;
+
+		default:
+			return err;
+		}
+	}
+
+	return 0;
+}
+
+static void renesas_rom_erase(struct pci_dev *pdev)
+{
+	int retval, i;
+	u8 status;
+
+	dev_dbg(&pdev->dev, "Performing ROM Erase...\n");
+	retval = pci_write_config_dword(pdev, RENESAS_DATA0,
+					RENESAS_ROM_ERASE_MAGIC);
+	if (retval) {
+		dev_err(&pdev->dev, "ROM erase, magic word write failed: %d\n",
+			pcibios_err_to_errno(retval));
+		return;
+	}
+
+	retval = pci_read_config_byte(pdev, RENESAS_ROM_STATUS, &status);
+	if (retval) {
+		dev_err(&pdev->dev, "ROM status read failed: %d\n",
+			pcibios_err_to_errno(retval));
+		return;
+	}
+	status |= RENESAS_ROM_STATUS_ERASE;
+	retval = pci_write_config_byte(pdev, RENESAS_ROM_STATUS, status);
+	if (retval) {
+		dev_err(&pdev->dev, "ROM erase set word write failed\n");
+		return;
+	}
+
+	/* sleep a bit while ROM is erased */
+	msleep(20);
+
+	for (i = 0; i < RENESAS_RETRY; i++) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		retval = pci_read_config_byte(pdev, RENESAS_ROM_STATUS,
 					      &status);
 		status &= RENESAS_ROM_STATUS_ERASE;

@@ -199,6 +199,7 @@ static u32 get_accel_cap(struct adf_accel_dev *accel_dev)
 			  ICP_ACCEL_CAPABILITIES_SM4 |
 			  ICP_ACCEL_CAPABILITIES_AES_V2 |
 			  ICP_ACCEL_CAPABILITIES_ZUC |
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			  ICP_ACCEL_CAPABILITIES_WIRELESS_CRYPTO_EXT |
 			  ICP_ACCEL_CAPABILITIES_EXT_ALGCHAIN;
 
@@ -235,6 +236,52 @@ static u32 get_accel_cap(struct adf_accel_dev *accel_dev)
 
 	if (fusectl1 & ICP_ACCEL_GEN4_MASK_EIA3_SLICE)
 		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_ZUC;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			  ICP_ACCEL_CAPABILITIES_ZUC_256 |
+			  ICP_ACCEL_CAPABILITIES_WIRELESS_CRYPTO_EXT |
+			  ICP_ACCEL_CAPABILITIES_EXT_ALGCHAIN;
+
+	/* A set bit in fusectl1 means the feature is OFF in this SKU */
+	if (fusectl1 & ICP_ACCEL_GEN4_MASK_CIPHER_SLICE) {
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_CRYPTO_SYMMETRIC;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_HKDF;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_CIPHER;
+	}
+
+	if (fusectl1 & ICP_ACCEL_GEN4_MASK_UCS_SLICE) {
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_CHACHA_POLY;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_AESGCM_SPC;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_AES_V2;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_CIPHER;
+	}
+
+	if (fusectl1 & ICP_ACCEL_GEN4_MASK_AUTH_SLICE) {
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_AUTHENTICATION;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_SHA3;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_SHA3_EXT;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_CIPHER;
+	}
+
+	if (fusectl1 & ICP_ACCEL_GEN4_MASK_SMX_SLICE) {
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_SM3;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_SM4;
+	}
+
+	if (fusectl1 & ICP_ACCEL_GEN4_MASK_WCP_WAT_SLICE) {
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_ZUC;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_ZUC_256;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_WIRELESS_CRYPTO_EXT;
+	}
+
+	if (fusectl1 & ICP_ACCEL_GEN4_MASK_EIA3_SLICE) {
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_ZUC;
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_ZUC_256;
+	}
+
+	if (fusectl1 & ICP_ACCEL_GEN4_MASK_ZUC_256_SLICE)
+		capabilities_sym &= ~ICP_ACCEL_CAPABILITIES_ZUC_256;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	capabilities_asym = ICP_ACCEL_CAPABILITIES_CRYPTO_ASYMMETRIC |
 			  ICP_ACCEL_CAPABILITIES_SM2 |

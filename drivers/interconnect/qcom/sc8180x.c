@@ -1492,6 +1492,7 @@ static struct qcom_icc_bcm bcm_sh3 = {
 
 static struct qcom_icc_bcm bcm_sn0 = {
 	.name = "SN0",
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	.num_nodes = 1,
 	.nodes = { &slv_qns_gemnoc_sf }
 };
@@ -1526,6 +1527,37 @@ static struct qcom_icc_bcm bcm_sn3 = {
 static struct qcom_icc_bcm bcm_sn4 = {
 	.name = "SN4",
 	.num_nodes = 1,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	.nodes = { &slv_qns_gemnoc_sf }
+};
+
+static struct qcom_icc_bcm bcm_sn1 = {
+	.name = "SN1",
+	.nodes = { &slv_qxs_imem }
+};
+
+static struct qcom_icc_bcm bcm_sn2 = {
+	.name = "SN2",
+	.keepalive = true,
+	.nodes = { &slv_qns_gemnoc_gc }
+};
+
+static struct qcom_icc_bcm bcm_co2 = {
+	.name = "CO2",
+	.nodes = { &mas_qnm_npu }
+};
+
+static struct qcom_icc_bcm bcm_sn3 = {
+	.name = "SN3",
+	.keepalive = true,
+	.nodes = { &slv_srvc_aggre1_noc,
+		  &slv_qns_cnoc }
+};
+
+static struct qcom_icc_bcm bcm_sn4 = {
+	.name = "SN4",
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.nodes = { &slv_qxs_pimem }
 };
 

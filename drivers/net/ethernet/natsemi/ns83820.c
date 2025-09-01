@@ -820,6 +820,7 @@ static void rx_irq(struct net_device *ndev)
 	struct ns83820 *dev = PRIV(ndev);
 	struct rx_info *info = &dev->rx_info;
 	unsigned next_rx;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int len;
 	u32 cmdsts;
 	__le32 *desc;
@@ -909,6 +910,99 @@ static void rx_irq(struct net_device *ndev)
 		}
 
 netdev_mangle_me_harder_failed:
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int rx_rc, len;
+	u32 cmdsts;
+	__le32 *desc;
+	unsigned long flags;
+	int nr = 0;
+
+	dprintk("rx_irq(%p)\n", ndev);
+	dprintk("rxdp: %08x, descs: %08lx next_rx[%d]: %p next_empty[%d]: %p\n",
+		readl(dev->base + RXDP),
+		(long)(dev->rx_info.phy_descs),
+		(int)dev->rx_info.next_rx,
+		(dev->rx_info.descs + (DESC_SIZE * dev->rx_info.next_rx)),
+		(int)dev->rx_info.next_empty,
+		(dev->rx_info.descs + (DESC_SIZE * dev->rx_info.next_empty))
+		);
+
+	spin_lock_irqsave(&info->lock, flags);
+	if (!info->up)
+		goto out;
+
+	dprintk("walking descs\n");
+	next_rx = info->next_rx;
+	desc = info->next_rx_desc;
+	while ((CMDSTS_OWN & (cmdsts = le32_to_cpu(desc[DESC_CMDSTS]))) &&
+	       (cmdsts != CMDSTS_OWN)) {
+		struct sk_buff *skb;
+		u32 extsts = le32_to_cpu(desc[DESC_EXTSTS]);
+		dma_addr_t bufptr = desc_addr_get(desc + DESC_BUFPTR);
+
+		dprintk("cmdsts: %08x\n", cmdsts);
+		dprintk("link: %08x\n", cpu_to_le32(desc[DESC_LINK]));
+		dprintk("extsts: %08x\n", extsts);
+
+		skb = info->skbs[next_rx];
+		info->skbs[next_rx] = NULL;
+		info->next_rx = (next_rx + 1) % NR_RX_DESC;
+
+		mb();
+		clear_rx_desc(dev, next_rx);
+
+		dma_unmap_single(&dev->pci_dev->dev, bufptr, RX_BUF_SIZE,
+				 DMA_FROM_DEVICE);
+		len = cmdsts & CMDSTS_LEN_MASK;
+#ifdef NS83820_VLAN_ACCEL_SUPPORT
+		/* NH: As was mentioned below, this chip is kinda
+		 * brain dead about vlan tag stripping.  Frames
+		 * that are 64 bytes with a vlan header appended
+		 * like arp frames, or pings, are flagged as Runts
+		 * when the tag is stripped and hardware.  This
+		 * also means that the OK bit in the descriptor
+		 * is cleared when the frame comes in so we have
+		 * to do a specific length check here to make sure
+		 * the frame would have been ok, had we not stripped
+		 * the tag.
+		 */
+		if (likely((CMDSTS_OK & cmdsts) ||
+			((cmdsts & CMDSTS_RUNT) && len >= 56))) {
+#else
+		if (likely(CMDSTS_OK & cmdsts)) {
+#endif
+			skb_put(skb, len);
+			if (unlikely(!skb))
+				goto netdev_mangle_me_harder_failed;
+			if (cmdsts & CMDSTS_DEST_MULTI)
+				ndev->stats.multicast++;
+			ndev->stats.rx_packets++;
+			ndev->stats.rx_bytes += len;
+			if ((extsts & 0x002a0000) && !(extsts & 0x00540000)) {
+				skb->ip_summed = CHECKSUM_UNNECESSARY;
+			} else {
+				skb_checksum_none_assert(skb);
+			}
+			skb->protocol = eth_type_trans(skb, ndev);
+#ifdef NS83820_VLAN_ACCEL_SUPPORT
+			if(extsts & EXTSTS_VPKT) {
+				unsigned short tag;
+
+				tag = ntohs(extsts & EXTSTS_VTG_MASK);
+				__vlan_hwaccel_put_tag(skb, htons(ETH_P_IPV6), tag);
+			}
+#endif
+			rx_rc = netif_rx(skb);
+			if (NET_RX_DROP == rx_rc) {
+netdev_mangle_me_harder_failed:
+				ndev->stats.rx_dropped++;
+			}
+		} else {
+			dev_kfree_skb_irq(skb);
+		}
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		nr++;
 		next_rx = info->next_rx;
 		desc = info->descs + (DESC_SIZE * next_rx);

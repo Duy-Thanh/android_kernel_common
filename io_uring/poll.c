@@ -265,6 +265,7 @@ static int io_poll_check_events(struct io_kiocb *req, struct io_tw_state *ts)
 {
 	int v;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (unlikely(io_should_terminate_tw(req->ctx)))
 		return -ECANCELED;
 
@@ -314,6 +315,61 @@ static int io_poll_check_events(struct io_kiocb *req, struct io_tw_state *ts)
 				return IOU_POLL_REISSUE;
 			}
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* req->task == current here, checking PF_EXITING is safe */
+	if (unlikely(req->task->flags & PF_EXITING))
+		return -ECANCELED;
+
+	do {
+		v = atomic_read(&req->poll_refs);
+
+		if (unlikely(v != 1)) {
+			/* tw should be the owner and so have some refs */
+			if (WARN_ON_ONCE(!(v & IO_POLL_REF_MASK)))
+				return IOU_POLL_NO_ACTION;
+			if (v & IO_POLL_CANCEL_FLAG)
+				return -ECANCELED;
+			/*
+			 * cqe.res contains only events of the first wake up
+			 * and all others are to be lost. Redo vfs_poll() to get
+			 * up to date state.
+			 */
+			if ((v & IO_POLL_REF_MASK) != 1)
+				req->cqe.res = 0;
+
+			if (v & IO_POLL_RETRY_FLAG) {
+				req->cqe.res = 0;
+				/*
+				 * We won't find new events that came in between
+				 * vfs_poll and the ref put unless we clear the
+				 * flag in advance.
+				 */
+				atomic_andnot(IO_POLL_RETRY_FLAG, &req->poll_refs);
+				v &= ~IO_POLL_RETRY_FLAG;
+			}
+		}
+
+		/* the mask was stashed in __io_poll_execute */
+		if (!req->cqe.res) {
+			struct poll_table_struct pt = { ._key = req->apoll_events };
+			req->cqe.res = vfs_poll(req->file, &pt) & req->apoll_events;
+			/*
+			 * We got woken with a mask, but someone else got to
+			 * it first. The above vfs_poll() doesn't add us back
+			 * to the waitqueue, so if we get nothing back, we
+			 * should be safe and attempt a reissue.
+			 */
+			if (unlikely(!req->cqe.res)) {
+				/* Multishot armed need not reissue */
+				if (!(req->apoll_events & EPOLLONESHOT))
+					continue;
+				return IOU_POLL_REISSUE;
+			}
+		}
+		if (unlikely(req->cqe.res & EPOLLERR))
+			req_set_fail(req);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (req->apoll_events & EPOLLONESHOT)
 			return IOU_POLL_DONE;
 

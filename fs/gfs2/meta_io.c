@@ -103,6 +103,7 @@ const struct address_space_operations gfs2_meta_aops = {
 	.invalidate_folio = block_invalidate_folio,
 	.writepages = gfs2_aspace_writepages,
 	.release_folio = gfs2_release_folio,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	.migrate_folio = buffer_migrate_folio_norefs,
 };
 
@@ -112,6 +113,16 @@ const struct address_space_operations gfs2_rgrp_aops = {
 	.writepages = gfs2_aspace_writepages,
 	.release_folio = gfs2_release_folio,
 	.migrate_folio = buffer_migrate_folio_norefs,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+};
+
+const struct address_space_operations gfs2_rgrp_aops = {
+	.dirty_folio	= block_dirty_folio,
+	.invalidate_folio = block_invalidate_folio,
+	.writepages = gfs2_aspace_writepages,
+	.release_folio = gfs2_release_folio,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 /**

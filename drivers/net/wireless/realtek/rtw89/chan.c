@@ -2682,6 +2682,7 @@ int rtw89_chanctx_ops_assign_vif(struct rtw89_dev *rtwdev,
 	rtwvif_link->chanctx_assigned = true;
 	cfg->ref_count++;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (rtwdev->scanning)
 		rtw89_hw_scan_abort(rtwdev, rtwdev->scan_info.scanning_vif);
 
@@ -2720,6 +2721,41 @@ void rtw89_chanctx_ops_unassign_vif(struct rtw89_dev *rtwdev,
 
 	if (rtwdev->scanning)
 		rtw89_hw_scan_abort(rtwdev, rtwdev->scan_info.scanning_vif);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (list_empty(&rtwvif->mgnt_entry))
+		list_add_tail(&rtwvif->mgnt_entry, &mgnt->active_list);
+
+	if (cfg->idx == RTW89_CHANCTX_0)
+		goto out;
+
+	rtw89_entity_calculate_weight(rtwdev, &w);
+	if (w.active_chanctxs != 1)
+		goto out;
+
+	/* put the first active chanctx at RTW89_CHANCTX_0 */
+	rtw89_swap_chanctx(rtwdev, cfg->idx, RTW89_CHANCTX_0);
+
+out:
+	return rtw89_set_channel(rtwdev);
+}
+
+void rtw89_chanctx_ops_unassign_vif(struct rtw89_dev *rtwdev,
+				    struct rtw89_vif_link *rtwvif_link,
+				    struct ieee80211_chanctx_conf *ctx)
+{
+	struct rtw89_chanctx_cfg *cfg = (struct rtw89_chanctx_cfg *)ctx->drv_priv;
+	struct rtw89_vif *rtwvif = rtwvif_link->rtwvif;
+	struct rtw89_hal *hal = &rtwdev->hal;
+	enum rtw89_chanctx_idx roll;
+	enum rtw89_entity_mode cur;
+	enum rtw89_entity_mode new;
+	int ret;
+
+	rtwvif_link->chanctx_idx = RTW89_CHANCTX_0;
+	rtwvif_link->chanctx_assigned = false;
+	cfg->ref_count--;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (!rtw89_vif_is_active_role(rtwvif))
 		list_del_init(&rtwvif->mgnt_entry);

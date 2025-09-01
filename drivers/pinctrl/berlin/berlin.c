@@ -204,6 +204,7 @@ static int berlin_pinctrl_build_state(struct platform_device *pdev)
 	const struct berlin_desc_group *desc_group;
 	const struct berlin_desc_function *desc_function;
 	int i, max_functions = 0;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct pinfunction *new_functions;
 
 	pctrl->nfunctions = 0;
@@ -239,6 +240,40 @@ static int berlin_pinctrl_build_state(struct platform_device *pdev)
 	}
 
 	pctrl->functions = new_functions;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	pctrl->nfunctions = 0;
+
+	for (i = 0; i < pctrl->desc->ngroups; i++) {
+		desc_group = pctrl->desc->groups + i;
+		/* compute the maximum number of functions a group can have */
+		max_functions += 1 << (desc_group->bit_width + 1);
+	}
+
+	/* we will reallocate later */
+	pctrl->functions = kcalloc(max_functions, sizeof(*pctrl->functions), GFP_KERNEL);
+	if (!pctrl->functions)
+		return -ENOMEM;
+
+	/* register all functions */
+	for (i = 0; i < pctrl->desc->ngroups; i++) {
+		desc_group = pctrl->desc->groups + i;
+		desc_function = desc_group->functions;
+
+		while (desc_function->name) {
+			berlin_pinctrl_add_function(pctrl, desc_function->name);
+			desc_function++;
+		}
+	}
+
+	pctrl->functions = krealloc(pctrl->functions,
+				    pctrl->nfunctions * sizeof(*pctrl->functions),
+				    GFP_KERNEL);
+	if (!pctrl->functions)
+		return -ENOMEM;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	/* map functions to theirs groups */
 	for (i = 0; i < pctrl->desc->ngroups; i++) {
 		desc_group = pctrl->desc->groups + i;

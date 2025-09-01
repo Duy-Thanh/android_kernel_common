@@ -5229,6 +5229,7 @@ static int wmi_process_mgmt_tx_comp(struct ath12k *ar, u32 desc_id,
 	dma_unmap_single(ar->ab->dev, skb_cb->paddr, msdu->len, DMA_TO_DEVICE);
 
 	info = IEEE80211_SKB_CB(msdu);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	memset(&info->status, 0, sizeof(info->status));
 
 	/* skip tx rate update from ieee80211_status*/
@@ -6643,6 +6644,1416 @@ static int ath12k_wmi_tlv_services_parser(struct ath12k_base *ab,
 			   __le32_to_cpu(wmi_ext2_service_bitmap[1]),
 			   __le32_to_cpu(wmi_ext2_service_bitmap[2]),
 			   __le32_to_cpu(wmi_ext2_service_bitmap[3]));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if ((!(info->flags & IEEE80211_TX_CTL_NO_ACK)) && !status)
+		info->flags |= IEEE80211_TX_STAT_ACK;
+
+	ieee80211_tx_status_irqsafe(ath12k_ar_to_hw(ar), msdu);
+
+	num_mgmt = atomic_dec_if_positive(&ar->num_pending_mgmt_tx);
+
+	/* WARN when we received this event without doing any mgmt tx */
+	if (num_mgmt < 0)
+		WARN_ON_ONCE(1);
+
+	if (!num_mgmt)
+		wake_up(&ar->txmgmt_empty_waitq);
+
+	return 0;
+}
+
+static int ath12k_pull_mgmt_tx_compl_param_tlv(struct ath12k_base *ab,
+					       struct sk_buff *skb,
+					       struct wmi_mgmt_tx_compl_event *param)
+{
+	const void **tb;
+	const struct wmi_mgmt_tx_compl_event *ev;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_MGMT_TX_COMPL_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch mgmt tx compl ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	param->pdev_id = ev->pdev_id;
+	param->desc_id = ev->desc_id;
+	param->status = ev->status;
+
+	kfree(tb);
+	return 0;
+}
+
+static void ath12k_wmi_event_scan_started(struct ath12k *ar)
+{
+	lockdep_assert_held(&ar->data_lock);
+
+	switch (ar->scan.state) {
+	case ATH12K_SCAN_IDLE:
+	case ATH12K_SCAN_RUNNING:
+	case ATH12K_SCAN_ABORTING:
+		ath12k_warn(ar->ab, "received scan started event in an invalid scan state: %s (%d)\n",
+			    ath12k_scan_state_str(ar->scan.state),
+			    ar->scan.state);
+		break;
+	case ATH12K_SCAN_STARTING:
+		ar->scan.state = ATH12K_SCAN_RUNNING;
+
+		if (ar->scan.is_roc)
+			ieee80211_ready_on_channel(ath12k_ar_to_hw(ar));
+
+		complete(&ar->scan.started);
+		break;
+	}
+}
+
+static void ath12k_wmi_event_scan_start_failed(struct ath12k *ar)
+{
+	lockdep_assert_held(&ar->data_lock);
+
+	switch (ar->scan.state) {
+	case ATH12K_SCAN_IDLE:
+	case ATH12K_SCAN_RUNNING:
+	case ATH12K_SCAN_ABORTING:
+		ath12k_warn(ar->ab, "received scan start failed event in an invalid scan state: %s (%d)\n",
+			    ath12k_scan_state_str(ar->scan.state),
+			    ar->scan.state);
+		break;
+	case ATH12K_SCAN_STARTING:
+		complete(&ar->scan.started);
+		__ath12k_mac_scan_finish(ar);
+		break;
+	}
+}
+
+static void ath12k_wmi_event_scan_completed(struct ath12k *ar)
+{
+	lockdep_assert_held(&ar->data_lock);
+
+	switch (ar->scan.state) {
+	case ATH12K_SCAN_IDLE:
+	case ATH12K_SCAN_STARTING:
+		/* One suspected reason scan can be completed while starting is
+		 * if firmware fails to deliver all scan events to the host,
+		 * e.g. when transport pipe is full. This has been observed
+		 * with spectral scan phyerr events starving wmi transport
+		 * pipe. In such case the "scan completed" event should be (and
+		 * is) ignored by the host as it may be just firmware's scan
+		 * state machine recovering.
+		 */
+		ath12k_warn(ar->ab, "received scan completed event in an invalid scan state: %s (%d)\n",
+			    ath12k_scan_state_str(ar->scan.state),
+			    ar->scan.state);
+		break;
+	case ATH12K_SCAN_RUNNING:
+	case ATH12K_SCAN_ABORTING:
+		__ath12k_mac_scan_finish(ar);
+		break;
+	}
+}
+
+static void ath12k_wmi_event_scan_bss_chan(struct ath12k *ar)
+{
+	lockdep_assert_held(&ar->data_lock);
+
+	switch (ar->scan.state) {
+	case ATH12K_SCAN_IDLE:
+	case ATH12K_SCAN_STARTING:
+		ath12k_warn(ar->ab, "received scan bss chan event in an invalid scan state: %s (%d)\n",
+			    ath12k_scan_state_str(ar->scan.state),
+			    ar->scan.state);
+		break;
+	case ATH12K_SCAN_RUNNING:
+	case ATH12K_SCAN_ABORTING:
+		ar->scan_channel = NULL;
+		break;
+	}
+}
+
+static void ath12k_wmi_event_scan_foreign_chan(struct ath12k *ar, u32 freq)
+{
+	struct ieee80211_hw *hw = ath12k_ar_to_hw(ar);
+
+	lockdep_assert_held(&ar->data_lock);
+
+	switch (ar->scan.state) {
+	case ATH12K_SCAN_IDLE:
+	case ATH12K_SCAN_STARTING:
+		ath12k_warn(ar->ab, "received scan foreign chan event in an invalid scan state: %s (%d)\n",
+			    ath12k_scan_state_str(ar->scan.state),
+			    ar->scan.state);
+		break;
+	case ATH12K_SCAN_RUNNING:
+	case ATH12K_SCAN_ABORTING:
+		ar->scan_channel = ieee80211_get_channel(hw->wiphy, freq);
+
+		if (ar->scan.is_roc && ar->scan.roc_freq == freq)
+			complete(&ar->scan.on_channel);
+
+		break;
+	}
+}
+
+static const char *
+ath12k_wmi_event_scan_type_str(enum wmi_scan_event_type type,
+			       enum wmi_scan_completion_reason reason)
+{
+	switch (type) {
+	case WMI_SCAN_EVENT_STARTED:
+		return "started";
+	case WMI_SCAN_EVENT_COMPLETED:
+		switch (reason) {
+		case WMI_SCAN_REASON_COMPLETED:
+			return "completed";
+		case WMI_SCAN_REASON_CANCELLED:
+			return "completed [cancelled]";
+		case WMI_SCAN_REASON_PREEMPTED:
+			return "completed [preempted]";
+		case WMI_SCAN_REASON_TIMEDOUT:
+			return "completed [timedout]";
+		case WMI_SCAN_REASON_INTERNAL_FAILURE:
+			return "completed [internal err]";
+		case WMI_SCAN_REASON_MAX:
+			break;
+		}
+		return "completed [unknown]";
+	case WMI_SCAN_EVENT_BSS_CHANNEL:
+		return "bss channel";
+	case WMI_SCAN_EVENT_FOREIGN_CHAN:
+		return "foreign channel";
+	case WMI_SCAN_EVENT_DEQUEUED:
+		return "dequeued";
+	case WMI_SCAN_EVENT_PREEMPTED:
+		return "preempted";
+	case WMI_SCAN_EVENT_START_FAILED:
+		return "start failed";
+	case WMI_SCAN_EVENT_RESTARTED:
+		return "restarted";
+	case WMI_SCAN_EVENT_FOREIGN_CHAN_EXIT:
+		return "foreign channel exit";
+	default:
+		return "unknown";
+	}
+}
+
+static int ath12k_pull_scan_ev(struct ath12k_base *ab, struct sk_buff *skb,
+			       struct wmi_scan_event *scan_evt_param)
+{
+	const void **tb;
+	const struct wmi_scan_event *ev;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_SCAN_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch scan ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	scan_evt_param->event_type = ev->event_type;
+	scan_evt_param->reason = ev->reason;
+	scan_evt_param->channel_freq = ev->channel_freq;
+	scan_evt_param->scan_req_id = ev->scan_req_id;
+	scan_evt_param->scan_id = ev->scan_id;
+	scan_evt_param->vdev_id = ev->vdev_id;
+	scan_evt_param->tsf_timestamp = ev->tsf_timestamp;
+
+	kfree(tb);
+	return 0;
+}
+
+static int ath12k_pull_peer_sta_kickout_ev(struct ath12k_base *ab, struct sk_buff *skb,
+					   struct wmi_peer_sta_kickout_arg *arg)
+{
+	const void **tb;
+	const struct wmi_peer_sta_kickout_event *ev;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_PEER_STA_KICKOUT_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch peer sta kickout ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	arg->mac_addr = ev->peer_macaddr.addr;
+
+	kfree(tb);
+	return 0;
+}
+
+static int ath12k_pull_roam_ev(struct ath12k_base *ab, struct sk_buff *skb,
+			       struct wmi_roam_event *roam_ev)
+{
+	const void **tb;
+	const struct wmi_roam_event *ev;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_ROAM_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch roam ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	roam_ev->vdev_id = ev->vdev_id;
+	roam_ev->reason = ev->reason;
+	roam_ev->rssi = ev->rssi;
+
+	kfree(tb);
+	return 0;
+}
+
+static int freq_to_idx(struct ath12k *ar, int freq)
+{
+	struct ieee80211_supported_band *sband;
+	struct ieee80211_hw *hw = ath12k_ar_to_hw(ar);
+	int band, ch, idx = 0;
+
+	for (band = NL80211_BAND_2GHZ; band < NUM_NL80211_BANDS; band++) {
+		if (!ar->mac.sbands[band].channels)
+			continue;
+
+		sband = hw->wiphy->bands[band];
+		if (!sband)
+			continue;
+
+		for (ch = 0; ch < sband->n_channels; ch++, idx++)
+			if (sband->channels[ch].center_freq == freq)
+				goto exit;
+	}
+
+exit:
+	return idx;
+}
+
+static int ath12k_pull_chan_info_ev(struct ath12k_base *ab, struct sk_buff *skb,
+				    struct wmi_chan_info_event *ch_info_ev)
+{
+	const void **tb;
+	const struct wmi_chan_info_event *ev;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_CHAN_INFO_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch chan info ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	ch_info_ev->err_code = ev->err_code;
+	ch_info_ev->freq = ev->freq;
+	ch_info_ev->cmd_flags = ev->cmd_flags;
+	ch_info_ev->noise_floor = ev->noise_floor;
+	ch_info_ev->rx_clear_count = ev->rx_clear_count;
+	ch_info_ev->cycle_count = ev->cycle_count;
+	ch_info_ev->chan_tx_pwr_range = ev->chan_tx_pwr_range;
+	ch_info_ev->chan_tx_pwr_tp = ev->chan_tx_pwr_tp;
+	ch_info_ev->rx_frame_count = ev->rx_frame_count;
+	ch_info_ev->tx_frame_cnt = ev->tx_frame_cnt;
+	ch_info_ev->mac_clk_mhz = ev->mac_clk_mhz;
+	ch_info_ev->vdev_id = ev->vdev_id;
+
+	kfree(tb);
+	return 0;
+}
+
+static int
+ath12k_pull_pdev_bss_chan_info_ev(struct ath12k_base *ab, struct sk_buff *skb,
+				  struct wmi_pdev_bss_chan_info_event *bss_ch_info_ev)
+{
+	const void **tb;
+	const struct wmi_pdev_bss_chan_info_event *ev;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_PDEV_BSS_CHAN_INFO_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch pdev bss chan info ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	bss_ch_info_ev->pdev_id = ev->pdev_id;
+	bss_ch_info_ev->freq = ev->freq;
+	bss_ch_info_ev->noise_floor = ev->noise_floor;
+	bss_ch_info_ev->rx_clear_count_low = ev->rx_clear_count_low;
+	bss_ch_info_ev->rx_clear_count_high = ev->rx_clear_count_high;
+	bss_ch_info_ev->cycle_count_low = ev->cycle_count_low;
+	bss_ch_info_ev->cycle_count_high = ev->cycle_count_high;
+	bss_ch_info_ev->tx_cycle_count_low = ev->tx_cycle_count_low;
+	bss_ch_info_ev->tx_cycle_count_high = ev->tx_cycle_count_high;
+	bss_ch_info_ev->rx_cycle_count_low = ev->rx_cycle_count_low;
+	bss_ch_info_ev->rx_cycle_count_high = ev->rx_cycle_count_high;
+	bss_ch_info_ev->rx_bss_cycle_count_low = ev->rx_bss_cycle_count_low;
+	bss_ch_info_ev->rx_bss_cycle_count_high = ev->rx_bss_cycle_count_high;
+
+	kfree(tb);
+	return 0;
+}
+
+static int
+ath12k_pull_vdev_install_key_compl_ev(struct ath12k_base *ab, struct sk_buff *skb,
+				      struct wmi_vdev_install_key_complete_arg *arg)
+{
+	const void **tb;
+	const struct wmi_vdev_install_key_compl_event *ev;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_VDEV_INSTALL_KEY_COMPLETE_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch vdev install key compl ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	arg->vdev_id = le32_to_cpu(ev->vdev_id);
+	arg->macaddr = ev->peer_macaddr.addr;
+	arg->key_idx = le32_to_cpu(ev->key_idx);
+	arg->key_flags = le32_to_cpu(ev->key_flags);
+	arg->status = le32_to_cpu(ev->status);
+
+	kfree(tb);
+	return 0;
+}
+
+static int ath12k_pull_peer_assoc_conf_ev(struct ath12k_base *ab, struct sk_buff *skb,
+					  struct wmi_peer_assoc_conf_arg *peer_assoc_conf)
+{
+	const void **tb;
+	const struct wmi_peer_assoc_conf_event *ev;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_PEER_ASSOC_CONF_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch peer assoc conf ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	peer_assoc_conf->vdev_id = le32_to_cpu(ev->vdev_id);
+	peer_assoc_conf->macaddr = ev->peer_macaddr.addr;
+
+	kfree(tb);
+	return 0;
+}
+
+static int
+ath12k_pull_pdev_temp_ev(struct ath12k_base *ab, struct sk_buff *skb,
+			 const struct wmi_pdev_temperature_event *ev)
+{
+	const void **tb;
+	int ret;
+
+	tb = ath12k_wmi_tlv_parse_alloc(ab, skb, GFP_ATOMIC);
+	if (IS_ERR(tb)) {
+		ret = PTR_ERR(tb);
+		ath12k_warn(ab, "failed to parse tlv: %d\n", ret);
+		return ret;
+	}
+
+	ev = tb[WMI_TAG_PDEV_TEMPERATURE_EVENT];
+	if (!ev) {
+		ath12k_warn(ab, "failed to fetch pdev temp ev");
+		kfree(tb);
+		return -EPROTO;
+	}
+
+	kfree(tb);
+	return 0;
+}
+
+static void ath12k_wmi_op_ep_tx_credits(struct ath12k_base *ab)
+{
+	/* try to send pending beacons first. they take priority */
+	wake_up(&ab->wmi_ab.tx_credits_wq);
+}
+
+static void ath12k_wmi_htc_tx_complete(struct ath12k_base *ab,
+				       struct sk_buff *skb)
+{
+	dev_kfree_skb(skb);
+}
+
+static bool ath12k_reg_is_world_alpha(char *alpha)
+{
+	if (alpha[0] == '0' && alpha[1] == '0')
+		return true;
+
+	if (alpha[0] == 'n' && alpha[1] == 'a')
+		return true;
+
+	return false;
+}
+
+static int ath12k_reg_chan_list_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct ath12k_reg_info *reg_info = NULL;
+	struct ieee80211_regdomain *regd = NULL;
+	bool intersect = false;
+	int ret = 0, pdev_idx, i, j;
+	struct ath12k *ar;
+
+	reg_info = kzalloc(sizeof(*reg_info), GFP_ATOMIC);
+	if (!reg_info) {
+		ret = -ENOMEM;
+		goto fallback;
+	}
+
+	ret = ath12k_pull_reg_chan_list_ext_update_ev(ab, skb, reg_info);
+
+	if (ret) {
+		ath12k_warn(ab, "failed to extract regulatory info from received event\n");
+		goto fallback;
+	}
+
+	if (reg_info->status_code != REG_SET_CC_STATUS_PASS) {
+		/* In case of failure to set the requested ctry,
+		 * fw retains the current regd. We print a failure info
+		 * and return from here.
+		 */
+		ath12k_warn(ab, "Failed to set the requested Country regulatory setting\n");
+		goto mem_free;
+	}
+
+	pdev_idx = reg_info->phy_id;
+
+	if (pdev_idx >= ab->num_radios) {
+		/* Process the event for phy0 only if single_pdev_only
+		 * is true. If pdev_idx is valid but not 0, discard the
+		 * event. Otherwise, it goes to fallback.
+		 */
+		if (ab->hw_params->single_pdev_only &&
+		    pdev_idx < ab->hw_params->num_rxdma_per_pdev)
+			goto mem_free;
+		else
+			goto fallback;
+	}
+
+	/* Avoid multiple overwrites to default regd, during core
+	 * stop-start after mac registration.
+	 */
+	if (ab->default_regd[pdev_idx] && !ab->new_regd[pdev_idx] &&
+	    !memcmp(ab->default_regd[pdev_idx]->alpha2,
+		    reg_info->alpha2, 2))
+		goto mem_free;
+
+	/* Intersect new rules with default regd if a new country setting was
+	 * requested, i.e a default regd was already set during initialization
+	 * and the regd coming from this event has a valid country info.
+	 */
+	if (ab->default_regd[pdev_idx] &&
+	    !ath12k_reg_is_world_alpha((char *)
+		ab->default_regd[pdev_idx]->alpha2) &&
+	    !ath12k_reg_is_world_alpha((char *)reg_info->alpha2))
+		intersect = true;
+
+	regd = ath12k_reg_build_regd(ab, reg_info, intersect);
+	if (!regd) {
+		ath12k_warn(ab, "failed to build regd from reg_info\n");
+		goto fallback;
+	}
+
+	spin_lock_bh(&ab->base_lock);
+	if (test_bit(ATH12K_FLAG_REGISTERED, &ab->dev_flags)) {
+		/* Once mac is registered, ar is valid and all CC events from
+		 * fw is considered to be received due to user requests
+		 * currently.
+		 * Free previously built regd before assigning the newly
+		 * generated regd to ar. NULL pointer handling will be
+		 * taken care by kfree itself.
+		 */
+		ar = ab->pdevs[pdev_idx].ar;
+		kfree(ab->new_regd[pdev_idx]);
+		ab->new_regd[pdev_idx] = regd;
+		queue_work(ab->workqueue, &ar->regd_update_work);
+	} else {
+		/* Multiple events for the same *ar is not expected. But we
+		 * can still clear any previously stored default_regd if we
+		 * are receiving this event for the same radio by mistake.
+		 * NULL pointer handling will be taken care by kfree itself.
+		 */
+		kfree(ab->default_regd[pdev_idx]);
+		/* This regd would be applied during mac registration */
+		ab->default_regd[pdev_idx] = regd;
+	}
+	ab->dfs_region = reg_info->dfs_region;
+	spin_unlock_bh(&ab->base_lock);
+
+	goto mem_free;
+
+fallback:
+	/* Fallback to older reg (by sending previous country setting
+	 * again if fw has succeeded and we failed to process here.
+	 * The Regdomain should be uniform across driver and fw. Since the
+	 * FW has processed the command and sent a success status, we expect
+	 * this function to succeed as well. If it doesn't, CTRY needs to be
+	 * reverted at the fw and the old SCAN_CHAN_LIST cmd needs to be sent.
+	 */
+	/* TODO: This is rare, but still should also be handled */
+	WARN_ON(1);
+mem_free:
+	if (reg_info) {
+		kfree(reg_info->reg_rules_2g_ptr);
+		kfree(reg_info->reg_rules_5g_ptr);
+		if (reg_info->is_ext_reg_event) {
+			for (i = 0; i < WMI_REG_CURRENT_MAX_AP_TYPE; i++)
+				kfree(reg_info->reg_rules_6g_ap_ptr[i]);
+
+			for (j = 0; j < WMI_REG_CURRENT_MAX_AP_TYPE; j++)
+				for (i = 0; i < WMI_REG_MAX_CLIENT_TYPE; i++)
+					kfree(reg_info->reg_rules_6g_client_ptr[j][i]);
+		}
+		kfree(reg_info);
+	}
+	return ret;
+}
+
+static int ath12k_wmi_rdy_parse(struct ath12k_base *ab, u16 tag, u16 len,
+				const void *ptr, void *data)
+{
+	struct ath12k_wmi_rdy_parse *rdy_parse = data;
+	struct wmi_ready_event fixed_param;
+	struct ath12k_wmi_mac_addr_params *addr_list;
+	struct ath12k_pdev *pdev;
+	u32 num_mac_addr;
+	int i;
+
+	switch (tag) {
+	case WMI_TAG_READY_EVENT:
+		memset(&fixed_param, 0, sizeof(fixed_param));
+		memcpy(&fixed_param, (struct wmi_ready_event *)ptr,
+		       min_t(u16, sizeof(fixed_param), len));
+		ab->wlan_init_status = le32_to_cpu(fixed_param.ready_event_min.status);
+		rdy_parse->num_extra_mac_addr =
+			le32_to_cpu(fixed_param.ready_event_min.num_extra_mac_addr);
+
+		ether_addr_copy(ab->mac_addr,
+				fixed_param.ready_event_min.mac_addr.addr);
+		ab->pktlog_defs_checksum = le32_to_cpu(fixed_param.pktlog_defs_checksum);
+		ab->wmi_ready = true;
+		break;
+	case WMI_TAG_ARRAY_FIXED_STRUCT:
+		addr_list = (struct ath12k_wmi_mac_addr_params *)ptr;
+		num_mac_addr = rdy_parse->num_extra_mac_addr;
+
+		if (!(ab->num_radios > 1 && num_mac_addr >= ab->num_radios))
+			break;
+
+		for (i = 0; i < ab->num_radios; i++) {
+			pdev = &ab->pdevs[i];
+			ether_addr_copy(pdev->mac_addr, addr_list[i].addr);
+		}
+		ab->pdevs_macaddr_valid = true;
+		break;
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+static int ath12k_ready_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct ath12k_wmi_rdy_parse rdy_parse = { };
+	int ret;
+
+	ret = ath12k_wmi_tlv_iter(ab, skb->data, skb->len,
+				  ath12k_wmi_rdy_parse, &rdy_parse);
+	if (ret) {
+		ath12k_warn(ab, "failed to parse tlv %d\n", ret);
+		return ret;
+	}
+
+	complete(&ab->wmi_ab.unified_ready);
+	return 0;
+}
+
+static void ath12k_peer_delete_resp_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct wmi_peer_delete_resp_event peer_del_resp;
+	struct ath12k *ar;
+
+	if (ath12k_pull_peer_del_resp_ev(ab, skb, &peer_del_resp) != 0) {
+		ath12k_warn(ab, "failed to extract peer delete resp");
+		return;
+	}
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_vdev_id(ab, le32_to_cpu(peer_del_resp.vdev_id));
+	if (!ar) {
+		ath12k_warn(ab, "invalid vdev id in peer delete resp ev %d",
+			    peer_del_resp.vdev_id);
+		rcu_read_unlock();
+		return;
+	}
+
+	complete(&ar->peer_delete_done);
+	rcu_read_unlock();
+	ath12k_dbg(ab, ATH12K_DBG_WMI, "peer delete resp for vdev id %d addr %pM\n",
+		   peer_del_resp.vdev_id, peer_del_resp.peer_macaddr.addr);
+}
+
+static void ath12k_vdev_delete_resp_event(struct ath12k_base *ab,
+					  struct sk_buff *skb)
+{
+	struct ath12k *ar;
+	u32 vdev_id = 0;
+
+	if (ath12k_pull_vdev_del_resp_ev(ab, skb, &vdev_id) != 0) {
+		ath12k_warn(ab, "failed to extract vdev delete resp");
+		return;
+	}
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_vdev_id(ab, vdev_id);
+	if (!ar) {
+		ath12k_warn(ab, "invalid vdev id in vdev delete resp ev %d",
+			    vdev_id);
+		rcu_read_unlock();
+		return;
+	}
+
+	complete(&ar->vdev_delete_done);
+
+	rcu_read_unlock();
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI, "vdev delete resp for vdev id %d\n",
+		   vdev_id);
+}
+
+static const char *ath12k_wmi_vdev_resp_print(u32 vdev_resp_status)
+{
+	switch (vdev_resp_status) {
+	case WMI_VDEV_START_RESPONSE_INVALID_VDEVID:
+		return "invalid vdev id";
+	case WMI_VDEV_START_RESPONSE_NOT_SUPPORTED:
+		return "not supported";
+	case WMI_VDEV_START_RESPONSE_DFS_VIOLATION:
+		return "dfs violation";
+	case WMI_VDEV_START_RESPONSE_INVALID_REGDOMAIN:
+		return "invalid regdomain";
+	default:
+		return "unknown";
+	}
+}
+
+static void ath12k_vdev_start_resp_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct wmi_vdev_start_resp_event vdev_start_resp;
+	struct ath12k *ar;
+	u32 status;
+
+	if (ath12k_pull_vdev_start_resp_tlv(ab, skb, &vdev_start_resp) != 0) {
+		ath12k_warn(ab, "failed to extract vdev start resp");
+		return;
+	}
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_vdev_id(ab, le32_to_cpu(vdev_start_resp.vdev_id));
+	if (!ar) {
+		ath12k_warn(ab, "invalid vdev id in vdev start resp ev %d",
+			    vdev_start_resp.vdev_id);
+		rcu_read_unlock();
+		return;
+	}
+
+	ar->last_wmi_vdev_start_status = 0;
+
+	status = le32_to_cpu(vdev_start_resp.status);
+
+	if (WARN_ON_ONCE(status)) {
+		ath12k_warn(ab, "vdev start resp error status %d (%s)\n",
+			    status, ath12k_wmi_vdev_resp_print(status));
+		ar->last_wmi_vdev_start_status = status;
+	}
+
+	complete(&ar->vdev_setup_done);
+
+	rcu_read_unlock();
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI, "vdev start resp for vdev id %d",
+		   vdev_start_resp.vdev_id);
+}
+
+static void ath12k_bcn_tx_status_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	u32 vdev_id, tx_status;
+
+	if (ath12k_pull_bcn_tx_status_ev(ab, skb, &vdev_id, &tx_status) != 0) {
+		ath12k_warn(ab, "failed to extract bcn tx status");
+		return;
+	}
+}
+
+static void ath12k_vdev_stopped_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct ath12k *ar;
+	u32 vdev_id = 0;
+
+	if (ath12k_pull_vdev_stopped_param_tlv(ab, skb, &vdev_id) != 0) {
+		ath12k_warn(ab, "failed to extract vdev stopped event");
+		return;
+	}
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_vdev_id(ab, vdev_id);
+	if (!ar) {
+		ath12k_warn(ab, "invalid vdev id in vdev stopped ev %d",
+			    vdev_id);
+		rcu_read_unlock();
+		return;
+	}
+
+	complete(&ar->vdev_setup_done);
+
+	rcu_read_unlock();
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI, "vdev stopped for vdev id %d", vdev_id);
+}
+
+static void ath12k_mgmt_rx_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct ath12k_wmi_mgmt_rx_arg rx_ev = {0};
+	struct ath12k *ar;
+	struct ieee80211_rx_status *status = IEEE80211_SKB_RXCB(skb);
+	struct ieee80211_hdr *hdr;
+	u16 fc;
+	struct ieee80211_supported_band *sband;
+
+	if (ath12k_pull_mgmt_rx_params_tlv(ab, skb, &rx_ev) != 0) {
+		ath12k_warn(ab, "failed to extract mgmt rx event");
+		dev_kfree_skb(skb);
+		return;
+	}
+
+	memset(status, 0, sizeof(*status));
+
+	ath12k_dbg(ab, ATH12K_DBG_MGMT, "mgmt rx event status %08x\n",
+		   rx_ev.status);
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_pdev_id(ab, rx_ev.pdev_id);
+
+	if (!ar) {
+		ath12k_warn(ab, "invalid pdev_id %d in mgmt_rx_event\n",
+			    rx_ev.pdev_id);
+		dev_kfree_skb(skb);
+		goto exit;
+	}
+
+	if ((test_bit(ATH12K_CAC_RUNNING, &ar->dev_flags)) ||
+	    (rx_ev.status & (WMI_RX_STATUS_ERR_DECRYPT |
+			     WMI_RX_STATUS_ERR_KEY_CACHE_MISS |
+			     WMI_RX_STATUS_ERR_CRC))) {
+		dev_kfree_skb(skb);
+		goto exit;
+	}
+
+	if (rx_ev.status & WMI_RX_STATUS_ERR_MIC)
+		status->flag |= RX_FLAG_MMIC_ERROR;
+
+	if (rx_ev.chan_freq >= ATH12K_MIN_6G_FREQ &&
+	    rx_ev.chan_freq <= ATH12K_MAX_6G_FREQ) {
+		status->band = NL80211_BAND_6GHZ;
+		status->freq = rx_ev.chan_freq;
+	} else if (rx_ev.channel >= 1 && rx_ev.channel <= 14) {
+		status->band = NL80211_BAND_2GHZ;
+	} else if (rx_ev.channel >= 36 && rx_ev.channel <= ATH12K_MAX_5G_CHAN) {
+		status->band = NL80211_BAND_5GHZ;
+	} else {
+		/* Shouldn't happen unless list of advertised channels to
+		 * mac80211 has been changed.
+		 */
+		WARN_ON_ONCE(1);
+		dev_kfree_skb(skb);
+		goto exit;
+	}
+
+	if (rx_ev.phy_mode == MODE_11B &&
+	    (status->band == NL80211_BAND_5GHZ || status->band == NL80211_BAND_6GHZ))
+		ath12k_dbg(ab, ATH12K_DBG_WMI,
+			   "wmi mgmt rx 11b (CCK) on 5/6GHz, band = %d\n", status->band);
+
+	sband = &ar->mac.sbands[status->band];
+
+	if (status->band != NL80211_BAND_6GHZ)
+		status->freq = ieee80211_channel_to_frequency(rx_ev.channel,
+							      status->band);
+
+	status->signal = rx_ev.snr + ATH12K_DEFAULT_NOISE_FLOOR;
+	status->rate_idx = ath12k_mac_bitrate_to_idx(sband, rx_ev.rate / 100);
+
+	hdr = (struct ieee80211_hdr *)skb->data;
+	fc = le16_to_cpu(hdr->frame_control);
+
+	/* Firmware is guaranteed to report all essential management frames via
+	 * WMI while it can deliver some extra via HTT. Since there can be
+	 * duplicates split the reporting wrt monitor/sniffing.
+	 */
+	status->flag |= RX_FLAG_SKIP_MONITOR;
+
+	/* In case of PMF, FW delivers decrypted frames with Protected Bit set
+	 * including group privacy action frames.
+	 */
+	if (ieee80211_has_protected(hdr->frame_control)) {
+		status->flag |= RX_FLAG_DECRYPTED;
+
+		if (!ieee80211_is_robust_mgmt_frame(skb)) {
+			status->flag |= RX_FLAG_IV_STRIPPED |
+					RX_FLAG_MMIC_STRIPPED;
+			hdr->frame_control = __cpu_to_le16(fc &
+					     ~IEEE80211_FCTL_PROTECTED);
+		}
+	}
+
+	if (ieee80211_is_beacon(hdr->frame_control))
+		ath12k_mac_handle_beacon(ar, skb);
+
+	ath12k_dbg(ab, ATH12K_DBG_MGMT,
+		   "event mgmt rx skb %p len %d ftype %02x stype %02x\n",
+		   skb, skb->len,
+		   fc & IEEE80211_FCTL_FTYPE, fc & IEEE80211_FCTL_STYPE);
+
+	ath12k_dbg(ab, ATH12K_DBG_MGMT,
+		   "event mgmt rx freq %d band %d snr %d, rate_idx %d\n",
+		   status->freq, status->band, status->signal,
+		   status->rate_idx);
+
+	ieee80211_rx_ni(ath12k_ar_to_hw(ar), skb);
+
+exit:
+	rcu_read_unlock();
+}
+
+static void ath12k_mgmt_tx_compl_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct wmi_mgmt_tx_compl_event tx_compl_param = {0};
+	struct ath12k *ar;
+
+	if (ath12k_pull_mgmt_tx_compl_param_tlv(ab, skb, &tx_compl_param) != 0) {
+		ath12k_warn(ab, "failed to extract mgmt tx compl event");
+		return;
+	}
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_pdev_id(ab, le32_to_cpu(tx_compl_param.pdev_id));
+	if (!ar) {
+		ath12k_warn(ab, "invalid pdev id %d in mgmt_tx_compl_event\n",
+			    tx_compl_param.pdev_id);
+		goto exit;
+	}
+
+	wmi_process_mgmt_tx_comp(ar, le32_to_cpu(tx_compl_param.desc_id),
+				 le32_to_cpu(tx_compl_param.status));
+
+	ath12k_dbg(ab, ATH12K_DBG_MGMT,
+		   "mgmt tx compl ev pdev_id %d, desc_id %d, status %d",
+		   tx_compl_param.pdev_id, tx_compl_param.desc_id,
+		   tx_compl_param.status);
+
+exit:
+	rcu_read_unlock();
+}
+
+static struct ath12k *ath12k_get_ar_on_scan_state(struct ath12k_base *ab,
+						  u32 vdev_id,
+						  enum ath12k_scan_state state)
+{
+	int i;
+	struct ath12k_pdev *pdev;
+	struct ath12k *ar;
+
+	for (i = 0; i < ab->num_radios; i++) {
+		pdev = rcu_dereference(ab->pdevs_active[i]);
+		if (pdev && pdev->ar) {
+			ar = pdev->ar;
+
+			spin_lock_bh(&ar->data_lock);
+			if (ar->scan.state == state &&
+			    ar->scan.vdev_id == vdev_id) {
+				spin_unlock_bh(&ar->data_lock);
+				return ar;
+			}
+			spin_unlock_bh(&ar->data_lock);
+		}
+	}
+	return NULL;
+}
+
+static void ath12k_scan_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct ath12k *ar;
+	struct wmi_scan_event scan_ev = {0};
+
+	if (ath12k_pull_scan_ev(ab, skb, &scan_ev) != 0) {
+		ath12k_warn(ab, "failed to extract scan event");
+		return;
+	}
+
+	rcu_read_lock();
+
+	/* In case the scan was cancelled, ex. during interface teardown,
+	 * the interface will not be found in active interfaces.
+	 * Rather, in such scenarios, iterate over the active pdev's to
+	 * search 'ar' if the corresponding 'ar' scan is ABORTING and the
+	 * aborting scan's vdev id matches this event info.
+	 */
+	if (le32_to_cpu(scan_ev.event_type) == WMI_SCAN_EVENT_COMPLETED &&
+	    le32_to_cpu(scan_ev.reason) == WMI_SCAN_REASON_CANCELLED) {
+		ar = ath12k_get_ar_on_scan_state(ab, le32_to_cpu(scan_ev.vdev_id),
+						 ATH12K_SCAN_ABORTING);
+		if (!ar)
+			ar = ath12k_get_ar_on_scan_state(ab, le32_to_cpu(scan_ev.vdev_id),
+							 ATH12K_SCAN_RUNNING);
+	} else {
+		ar = ath12k_mac_get_ar_by_vdev_id(ab, le32_to_cpu(scan_ev.vdev_id));
+	}
+
+	if (!ar) {
+		ath12k_warn(ab, "Received scan event for unknown vdev");
+		rcu_read_unlock();
+		return;
+	}
+
+	spin_lock_bh(&ar->data_lock);
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI,
+		   "scan event %s type %d reason %d freq %d req_id %d scan_id %d vdev_id %d state %s (%d)\n",
+		   ath12k_wmi_event_scan_type_str(le32_to_cpu(scan_ev.event_type),
+						  le32_to_cpu(scan_ev.reason)),
+		   le32_to_cpu(scan_ev.event_type),
+		   le32_to_cpu(scan_ev.reason),
+		   le32_to_cpu(scan_ev.channel_freq),
+		   le32_to_cpu(scan_ev.scan_req_id),
+		   le32_to_cpu(scan_ev.scan_id),
+		   le32_to_cpu(scan_ev.vdev_id),
+		   ath12k_scan_state_str(ar->scan.state), ar->scan.state);
+
+	switch (le32_to_cpu(scan_ev.event_type)) {
+	case WMI_SCAN_EVENT_STARTED:
+		ath12k_wmi_event_scan_started(ar);
+		break;
+	case WMI_SCAN_EVENT_COMPLETED:
+		ath12k_wmi_event_scan_completed(ar);
+		break;
+	case WMI_SCAN_EVENT_BSS_CHANNEL:
+		ath12k_wmi_event_scan_bss_chan(ar);
+		break;
+	case WMI_SCAN_EVENT_FOREIGN_CHAN:
+		ath12k_wmi_event_scan_foreign_chan(ar, le32_to_cpu(scan_ev.channel_freq));
+		break;
+	case WMI_SCAN_EVENT_START_FAILED:
+		ath12k_warn(ab, "received scan start failure event\n");
+		ath12k_wmi_event_scan_start_failed(ar);
+		break;
+	case WMI_SCAN_EVENT_DEQUEUED:
+		__ath12k_mac_scan_finish(ar);
+		break;
+	case WMI_SCAN_EVENT_PREEMPTED:
+	case WMI_SCAN_EVENT_RESTARTED:
+	case WMI_SCAN_EVENT_FOREIGN_CHAN_EXIT:
+	default:
+		break;
+	}
+
+	spin_unlock_bh(&ar->data_lock);
+
+	rcu_read_unlock();
+}
+
+static void ath12k_peer_sta_kickout_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct wmi_peer_sta_kickout_arg arg = {};
+	struct ieee80211_sta *sta;
+	struct ath12k_peer *peer;
+	struct ath12k *ar;
+
+	if (ath12k_pull_peer_sta_kickout_ev(ab, skb, &arg) != 0) {
+		ath12k_warn(ab, "failed to extract peer sta kickout event");
+		return;
+	}
+
+	rcu_read_lock();
+
+	spin_lock_bh(&ab->base_lock);
+
+	peer = ath12k_peer_find_by_addr(ab, arg.mac_addr);
+
+	if (!peer) {
+		ath12k_warn(ab, "peer not found %pM\n",
+			    arg.mac_addr);
+		goto exit;
+	}
+
+	ar = ath12k_mac_get_ar_by_vdev_id(ab, peer->vdev_id);
+	if (!ar) {
+		ath12k_warn(ab, "invalid vdev id in peer sta kickout ev %d",
+			    peer->vdev_id);
+		goto exit;
+	}
+
+	sta = ieee80211_find_sta_by_ifaddr(ath12k_ar_to_hw(ar),
+					   arg.mac_addr, NULL);
+	if (!sta) {
+		ath12k_warn(ab, "Spurious quick kickout for STA %pM\n",
+			    arg.mac_addr);
+		goto exit;
+	}
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI, "peer sta kickout event %pM",
+		   arg.mac_addr);
+
+	ieee80211_report_low_ack(sta, 10);
+
+exit:
+	spin_unlock_bh(&ab->base_lock);
+	rcu_read_unlock();
+}
+
+static void ath12k_roam_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct wmi_roam_event roam_ev = {};
+	struct ath12k *ar;
+	u32 vdev_id;
+	u8 roam_reason;
+
+	if (ath12k_pull_roam_ev(ab, skb, &roam_ev) != 0) {
+		ath12k_warn(ab, "failed to extract roam event");
+		return;
+	}
+
+	vdev_id = le32_to_cpu(roam_ev.vdev_id);
+	roam_reason = u32_get_bits(le32_to_cpu(roam_ev.reason),
+				   WMI_ROAM_REASON_MASK);
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI,
+		   "wmi roam event vdev %u reason %d rssi %d\n",
+		   vdev_id, roam_reason, roam_ev.rssi);
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_vdev_id(ab, vdev_id);
+	if (!ar) {
+		ath12k_warn(ab, "invalid vdev id in roam ev %d", vdev_id);
+		rcu_read_unlock();
+		return;
+	}
+
+	if (roam_reason >= WMI_ROAM_REASON_MAX)
+		ath12k_warn(ab, "ignoring unknown roam event reason %d on vdev %i\n",
+			    roam_reason, vdev_id);
+
+	switch (roam_reason) {
+	case WMI_ROAM_REASON_BEACON_MISS:
+		ath12k_mac_handle_beacon_miss(ar, vdev_id);
+		break;
+	case WMI_ROAM_REASON_BETTER_AP:
+	case WMI_ROAM_REASON_LOW_RSSI:
+	case WMI_ROAM_REASON_SUITABLE_AP_FOUND:
+	case WMI_ROAM_REASON_HO_FAILED:
+		ath12k_warn(ab, "ignoring not implemented roam event reason %d on vdev %i\n",
+			    roam_reason, vdev_id);
+		break;
+	}
+
+	rcu_read_unlock();
+}
+
+static void ath12k_chan_info_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct wmi_chan_info_event ch_info_ev = {0};
+	struct ath12k *ar;
+	struct survey_info *survey;
+	int idx;
+	/* HW channel counters frequency value in hertz */
+	u32 cc_freq_hz = ab->cc_freq_hz;
+
+	if (ath12k_pull_chan_info_ev(ab, skb, &ch_info_ev) != 0) {
+		ath12k_warn(ab, "failed to extract chan info event");
+		return;
+	}
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI,
+		   "chan info vdev_id %d err_code %d freq %d cmd_flags %d noise_floor %d rx_clear_count %d cycle_count %d mac_clk_mhz %d\n",
+		   ch_info_ev.vdev_id, ch_info_ev.err_code, ch_info_ev.freq,
+		   ch_info_ev.cmd_flags, ch_info_ev.noise_floor,
+		   ch_info_ev.rx_clear_count, ch_info_ev.cycle_count,
+		   ch_info_ev.mac_clk_mhz);
+
+	if (le32_to_cpu(ch_info_ev.cmd_flags) == WMI_CHAN_INFO_END_RESP) {
+		ath12k_dbg(ab, ATH12K_DBG_WMI, "chan info report completed\n");
+		return;
+	}
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_vdev_id(ab, le32_to_cpu(ch_info_ev.vdev_id));
+	if (!ar) {
+		ath12k_warn(ab, "invalid vdev id in chan info ev %d",
+			    ch_info_ev.vdev_id);
+		rcu_read_unlock();
+		return;
+	}
+	spin_lock_bh(&ar->data_lock);
+
+	switch (ar->scan.state) {
+	case ATH12K_SCAN_IDLE:
+	case ATH12K_SCAN_STARTING:
+		ath12k_warn(ab, "received chan info event without a scan request, ignoring\n");
+		goto exit;
+	case ATH12K_SCAN_RUNNING:
+	case ATH12K_SCAN_ABORTING:
+		break;
+	}
+
+	idx = freq_to_idx(ar, le32_to_cpu(ch_info_ev.freq));
+	if (idx >= ARRAY_SIZE(ar->survey)) {
+		ath12k_warn(ab, "chan info: invalid frequency %d (idx %d out of bounds)\n",
+			    ch_info_ev.freq, idx);
+		goto exit;
+	}
+
+	/* If FW provides MAC clock frequency in Mhz, overriding the initialized
+	 * HW channel counters frequency value
+	 */
+	if (ch_info_ev.mac_clk_mhz)
+		cc_freq_hz = (le32_to_cpu(ch_info_ev.mac_clk_mhz) * 1000);
+
+	if (ch_info_ev.cmd_flags == WMI_CHAN_INFO_START_RESP) {
+		survey = &ar->survey[idx];
+		memset(survey, 0, sizeof(*survey));
+		survey->noise = le32_to_cpu(ch_info_ev.noise_floor);
+		survey->filled = SURVEY_INFO_NOISE_DBM | SURVEY_INFO_TIME |
+				 SURVEY_INFO_TIME_BUSY;
+		survey->time = div_u64(le32_to_cpu(ch_info_ev.cycle_count), cc_freq_hz);
+		survey->time_busy = div_u64(le32_to_cpu(ch_info_ev.rx_clear_count),
+					    cc_freq_hz);
+	}
+exit:
+	spin_unlock_bh(&ar->data_lock);
+	rcu_read_unlock();
+}
+
+static void
+ath12k_pdev_bss_chan_info_event(struct ath12k_base *ab, struct sk_buff *skb)
+{
+	struct wmi_pdev_bss_chan_info_event bss_ch_info_ev = {};
+	struct survey_info *survey;
+	struct ath12k *ar;
+	u32 cc_freq_hz = ab->cc_freq_hz;
+	u64 busy, total, tx, rx, rx_bss;
+	int idx;
+
+	if (ath12k_pull_pdev_bss_chan_info_ev(ab, skb, &bss_ch_info_ev) != 0) {
+		ath12k_warn(ab, "failed to extract pdev bss chan info event");
+		return;
+	}
+
+	busy = (u64)(le32_to_cpu(bss_ch_info_ev.rx_clear_count_high)) << 32 |
+		le32_to_cpu(bss_ch_info_ev.rx_clear_count_low);
+
+	total = (u64)(le32_to_cpu(bss_ch_info_ev.cycle_count_high)) << 32 |
+		le32_to_cpu(bss_ch_info_ev.cycle_count_low);
+
+	tx = (u64)(le32_to_cpu(bss_ch_info_ev.tx_cycle_count_high)) << 32 |
+		le32_to_cpu(bss_ch_info_ev.tx_cycle_count_low);
+
+	rx = (u64)(le32_to_cpu(bss_ch_info_ev.rx_cycle_count_high)) << 32 |
+		le32_to_cpu(bss_ch_info_ev.rx_cycle_count_low);
+
+	rx_bss = (u64)(le32_to_cpu(bss_ch_info_ev.rx_bss_cycle_count_high)) << 32 |
+		le32_to_cpu(bss_ch_info_ev.rx_bss_cycle_count_low);
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI,
+		   "pdev bss chan info:\n pdev_id: %d freq: %d noise: %d cycle: busy %llu total %llu tx %llu rx %llu rx_bss %llu\n",
+		   bss_ch_info_ev.pdev_id, bss_ch_info_ev.freq,
+		   bss_ch_info_ev.noise_floor, busy, total,
+		   tx, rx, rx_bss);
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_pdev_id(ab, le32_to_cpu(bss_ch_info_ev.pdev_id));
+
+	if (!ar) {
+		ath12k_warn(ab, "invalid pdev id %d in bss_chan_info event\n",
+			    bss_ch_info_ev.pdev_id);
+		rcu_read_unlock();
+		return;
+	}
+
+	spin_lock_bh(&ar->data_lock);
+	idx = freq_to_idx(ar, le32_to_cpu(bss_ch_info_ev.freq));
+	if (idx >= ARRAY_SIZE(ar->survey)) {
+		ath12k_warn(ab, "bss chan info: invalid frequency %d (idx %d out of bounds)\n",
+			    bss_ch_info_ev.freq, idx);
+		goto exit;
+	}
+
+	survey = &ar->survey[idx];
+
+	survey->noise     = le32_to_cpu(bss_ch_info_ev.noise_floor);
+	survey->time      = div_u64(total, cc_freq_hz);
+	survey->time_busy = div_u64(busy, cc_freq_hz);
+	survey->time_rx   = div_u64(rx_bss, cc_freq_hz);
+	survey->time_tx   = div_u64(tx, cc_freq_hz);
+	survey->filled   |= (SURVEY_INFO_NOISE_DBM |
+			     SURVEY_INFO_TIME |
+			     SURVEY_INFO_TIME_BUSY |
+			     SURVEY_INFO_TIME_RX |
+			     SURVEY_INFO_TIME_TX);
+exit:
+	spin_unlock_bh(&ar->data_lock);
+	complete(&ar->bss_survey_done);
+
+	rcu_read_unlock();
+}
+
+static void ath12k_vdev_install_key_compl_event(struct ath12k_base *ab,
+						struct sk_buff *skb)
+{
+	struct wmi_vdev_install_key_complete_arg install_key_compl = {0};
+	struct ath12k *ar;
+
+	if (ath12k_pull_vdev_install_key_compl_ev(ab, skb, &install_key_compl) != 0) {
+		ath12k_warn(ab, "failed to extract install key compl event");
+		return;
+	}
+
+	ath12k_dbg(ab, ATH12K_DBG_WMI,
+		   "vdev install key ev idx %d flags %08x macaddr %pM status %d\n",
+		   install_key_compl.key_idx, install_key_compl.key_flags,
+		   install_key_compl.macaddr, install_key_compl.status);
+
+	rcu_read_lock();
+	ar = ath12k_mac_get_ar_by_vdev_id(ab, install_key_compl.vdev_id);
+	if (!ar) {
+		ath12k_warn(ab, "invalid vdev id in install key compl ev %d",
+			    install_key_compl.vdev_id);
+		rcu_read_unlock();
+		return;
+	}
+
+	ar->install_key_status = 0;
+
+	if (install_key_compl.status != WMI_VDEV_INSTALL_KEY_COMPL_STATUS_SUCCESS) {
+		ath12k_warn(ab, "install key failed for %pM status %d\n",
+			    install_key_compl.macaddr, install_key_compl.status);
+		ar->install_key_status = install_key_compl.status;
+	}
+
+	complete(&ar->install_key_done);
+	rcu_read_unlock();
+}
+
+static int ath12k_wmi_tlv_services_parser(struct ath12k_base *ab,
+					  u16 tag, u16 len,
+					  const void *ptr,
+					  void *data)
+{
+	const struct wmi_service_available_event *ev;
+	u32 *wmi_ext2_service_bitmap;
+	int i, j;
+	u16 expected_len;
+
+	expected_len = WMI_SERVICE_SEGMENT_BM_SIZE32 * sizeof(u32);
+	if (len < expected_len) {
+		ath12k_warn(ab, "invalid length %d for the WMI services available tag 0x%x\n",
+			    len, tag);
+		return -EINVAL;
+	}
+
+	switch (tag) {
+	case WMI_TAG_SERVICE_AVAILABLE_EVENT:
+		ev = (struct wmi_service_available_event *)ptr;
+		for (i = 0, j = WMI_MAX_SERVICE;
+		     i < WMI_SERVICE_SEGMENT_BM_SIZE32 && j < WMI_MAX_EXT_SERVICE;
+		     i++) {
+			do {
+				if (le32_to_cpu(ev->wmi_service_segment_bitmap[i]) &
+				    BIT(j % WMI_AVAIL_SERVICE_BITS_IN_SIZE32))
+					set_bit(j, ab->wmi_ab.svc_map);
+			} while (++j % WMI_AVAIL_SERVICE_BITS_IN_SIZE32);
+		}
+
+		ath12k_dbg(ab, ATH12K_DBG_WMI,
+			   "wmi_ext_service_bitmap 0x%x 0x%x 0x%x 0x%x",
+			   ev->wmi_service_segment_bitmap[0],
+			   ev->wmi_service_segment_bitmap[1],
+			   ev->wmi_service_segment_bitmap[2],
+			   ev->wmi_service_segment_bitmap[3]);
+		break;
+	case WMI_TAG_ARRAY_UINT32:
+		wmi_ext2_service_bitmap = (u32 *)ptr;
+		for (i = 0, j = WMI_MAX_EXT_SERVICE;
+		     i < WMI_SERVICE_SEGMENT_BM_SIZE32 && j < WMI_MAX_EXT2_SERVICE;
+		     i++) {
+			do {
+				if (wmi_ext2_service_bitmap[i] &
+				    BIT(j % WMI_AVAIL_SERVICE_BITS_IN_SIZE32))
+					set_bit(j, ab->wmi_ab.svc_map);
+			} while (++j % WMI_AVAIL_SERVICE_BITS_IN_SIZE32);
+		}
+
+		ath12k_dbg(ab, ATH12K_DBG_WMI,
+			   "wmi_ext2_service_bitmap 0x%04x 0x%04x 0x%04x 0x%04x",
+			   wmi_ext2_service_bitmap[0], wmi_ext2_service_bitmap[1],
+			   wmi_ext2_service_bitmap[2], wmi_ext2_service_bitmap[3]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		break;
 	}
 	return 0;

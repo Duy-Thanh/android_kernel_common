@@ -421,6 +421,7 @@ static irqreturn_t max_tcpci_isr(int irq, void *dev_id)
 	return IRQ_WAKE_THREAD;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int max_tcpci_start_toggling(struct tcpci *tcpci, struct tcpci_data *tdata,
 				    enum typec_cc_status cc)
 {
@@ -573,6 +574,147 @@ static struct i2c_driver max_tcpci_i2c_driver = {
 		.name = "maxtcpc",
 		.of_match_table = of_match_ptr(max_tcpci_of_match),
 		.pm = &max_tcpci_pm_ops,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int max_tcpci_init_alert(struct max_tcpci_chip *chip, struct i2c_client *client)
+{
+	int ret;
+
+	ret = devm_request_threaded_irq(chip->dev, client->irq, max_tcpci_isr, max_tcpci_irq,
+					(IRQF_TRIGGER_LOW | IRQF_ONESHOT), dev_name(chip->dev),
+					chip);
+
+	if (ret < 0)
+		return ret;
+
+	enable_irq_wake(client->irq);
+	return 0;
+}
+
+static int max_tcpci_start_toggling(struct tcpci *tcpci, struct tcpci_data *tdata,
+				    enum typec_cc_status cc)
+{
+	struct max_tcpci_chip *chip = tdata_to_max_tcpci(tdata);
+
+	max_tcpci_init_regs(chip);
+
+	return 0;
+}
+
+static int tcpci_init(struct tcpci *tcpci, struct tcpci_data *data)
+{
+	/*
+	 * Generic TCPCI overwrites the regs once this driver initializes
+	 * them. Prevent this by returning -1.
+	 */
+	return -1;
+}
+
+static void max_tcpci_check_contaminant(struct tcpci *tcpci, struct tcpci_data *tdata)
+{
+	struct max_tcpci_chip *chip = tdata_to_max_tcpci(tdata);
+	bool cc_handled;
+
+	if (!max_contaminant_is_contaminant(chip, true, &cc_handled))
+		tcpm_port_clean(chip->port);
+}
+
+static bool max_tcpci_attempt_vconn_swap_discovery(struct tcpci *tcpci, struct tcpci_data *tdata)
+{
+	struct max_tcpci_chip *chip = tdata_to_max_tcpci(tdata);
+
+	if (chip->veto_vconn_swap) {
+		chip->veto_vconn_swap = false;
+		return false;
+	}
+
+	return true;
+}
+
+static void max_tcpci_unregister_tcpci_port(void *tcpci)
+{
+	tcpci_unregister_port(tcpci);
+}
+
+static int max_tcpci_probe(struct i2c_client *client)
+{
+	int ret;
+	struct max_tcpci_chip *chip;
+	u8 power_status;
+
+	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
+	if (!chip)
+		return -ENOMEM;
+
+	chip->client = client;
+	chip->data.regmap = devm_regmap_init_i2c(client, &max_tcpci_regmap_config);
+	if (IS_ERR(chip->data.regmap))
+		return dev_err_probe(&client->dev, PTR_ERR(chip->data.regmap),
+				     "Regmap init failed\n");
+
+	chip->dev = &client->dev;
+	i2c_set_clientdata(client, chip);
+
+	ret = max_tcpci_read8(chip, TCPC_POWER_STATUS, &power_status);
+	if (ret < 0)
+		return dev_err_probe(&client->dev, ret,
+				     "Failed to read TCPC_POWER_STATUS\n");
+
+	/* Chip level tcpci callbacks */
+	chip->data.set_vbus = max_tcpci_set_vbus;
+	chip->data.start_drp_toggling = max_tcpci_start_toggling;
+	chip->data.TX_BUF_BYTE_x_hidden = true;
+	chip->data.init = tcpci_init;
+	chip->data.frs_sourcing_vbus = max_tcpci_frs_sourcing_vbus;
+	chip->data.auto_discharge_disconnect = true;
+	chip->data.vbus_vsafe0v = true;
+	chip->data.set_partner_usb_comm_capable = max_tcpci_set_partner_usb_comm_capable;
+	chip->data.check_contaminant = max_tcpci_check_contaminant;
+	chip->data.cable_comm_capable = true;
+	chip->data.attempt_vconn_swap_discovery = max_tcpci_attempt_vconn_swap_discovery;
+
+	max_tcpci_init_regs(chip);
+	chip->tcpci = tcpci_register_port(chip->dev, &chip->data);
+	if (IS_ERR(chip->tcpci))
+		return dev_err_probe(&client->dev, PTR_ERR(chip->tcpci),
+				     "TCPCI port registration failed\n");
+
+        ret = devm_add_action_or_reset(&client->dev,
+				       max_tcpci_unregister_tcpci_port,
+				       chip->tcpci);
+        if (ret)
+                return ret;
+
+	chip->port = tcpci_get_tcpm_port(chip->tcpci);
+
+	ret = max_tcpci_init_alert(chip, client);
+	if (ret < 0)
+		return dev_err_probe(&client->dev, ret,
+				     "IRQ initialization failed\n");
+
+	device_init_wakeup(chip->dev, true);
+	return 0;
+}
+
+static const struct i2c_device_id max_tcpci_id[] = {
+	{ "maxtcpc" },
+	{ }
+};
+MODULE_DEVICE_TABLE(i2c, max_tcpci_id);
+
+#ifdef CONFIG_OF
+static const struct of_device_id max_tcpci_of_match[] = {
+	{ .compatible = "maxim,max33359", },
+	{},
+};
+MODULE_DEVICE_TABLE(of, max_tcpci_of_match);
+#endif
+
+static struct i2c_driver max_tcpci_i2c_driver = {
+	.driver = {
+		.name = "maxtcpc",
+		.of_match_table = of_match_ptr(max_tcpci_of_match),
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	},
 	.probe = max_tcpci_probe,
 	.id_table = max_tcpci_id,

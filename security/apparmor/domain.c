@@ -509,6 +509,7 @@ static const char *next_name(int xtype, const char *name)
  * @name: returns: name tested to find label (NOT NULL)
  *
  * Returns: refcounted label, or NULL on failure (MAYBE NULL)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  *          @name will always be set with the last name tried
  */
 struct aa_label *x_table_lookup(struct aa_profile *profile, u32 xindex,
@@ -630,6 +631,124 @@ static struct aa_label *x_to_label(struct aa_profile *profile,
 	}
 
 	aa_put_label(stack);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ */
+struct aa_label *x_table_lookup(struct aa_profile *profile, u32 xindex,
+				const char **name)
+{
+	struct aa_ruleset *rules = list_first_entry(&profile->rules,
+						    typeof(*rules), list);
+	struct aa_label *label = NULL;
+	u32 xtype = xindex & AA_X_TYPE_MASK;
+	int index = xindex & AA_X_INDEX_MASK;
+
+	AA_BUG(!name);
+
+	/* index is guaranteed to be in range, validated at load time */
+	/* TODO: move lookup parsing to unpack time so this is a straight
+	 *       index into the resultant label
+	 */
+	for (*name = rules->file->trans.table[index]; !label && *name;
+	     *name = next_name(xtype, *name)) {
+		if (xindex & AA_X_CHILD) {
+			struct aa_profile *new_profile;
+			/* release by caller */
+			new_profile = aa_find_child(profile, *name);
+			if (new_profile)
+				label = &new_profile->label;
+			continue;
+		}
+		label = aa_label_parse(&profile->label, *name, GFP_KERNEL,
+				       true, false);
+		if (IS_ERR(label))
+			label = NULL;
+	}
+
+	/* released by caller */
+
+	return label;
+}
+
+/**
+ * x_to_label - get target label for a given xindex
+ * @profile: current profile  (NOT NULL)
+ * @bprm: binprm structure of transitioning task
+ * @name: name to lookup (NOT NULL)
+ * @xindex: index into x transition table
+ * @lookupname: returns: name used in lookup if one was specified (NOT NULL)
+ * @info: info message if there was an error (NOT NULL)
+ *
+ * find label for a transition index
+ *
+ * Returns: refcounted label or NULL if not found available
+ */
+static struct aa_label *x_to_label(struct aa_profile *profile,
+				   const struct linux_binprm *bprm,
+				   const char *name, u32 xindex,
+				   const char **lookupname,
+				   const char **info)
+{
+	struct aa_ruleset *rules = list_first_entry(&profile->rules,
+						    typeof(*rules), list);
+	struct aa_label *new = NULL;
+	struct aa_ns *ns = profile->ns;
+	u32 xtype = xindex & AA_X_TYPE_MASK;
+	const char *stack = NULL;
+
+	switch (xtype) {
+	case AA_X_NONE:
+		/* fail exec unless ix || ux fallback - handled by caller */
+		*lookupname = NULL;
+		break;
+	case AA_X_TABLE:
+		/* TODO: fix when perm mapping done at unload */
+		stack = rules->file->trans.table[xindex & AA_X_INDEX_MASK];
+		if (*stack != '&') {
+			/* released by caller */
+			new = x_table_lookup(profile, xindex, lookupname);
+			stack = NULL;
+			break;
+		}
+		fallthrough;	/* to X_NAME */
+	case AA_X_NAME:
+		if (xindex & AA_X_CHILD)
+			/* released by caller */
+			new = find_attach(bprm, ns, &profile->base.profiles,
+					  name, info);
+		else
+			/* released by caller */
+			new = find_attach(bprm, ns, &ns->base.profiles,
+					  name, info);
+		*lookupname = name;
+		break;
+	}
+
+	if (!new) {
+		if (xindex & AA_X_INHERIT) {
+			/* (p|c|n)ix - don't change profile but do
+			 * use the newest version
+			 */
+			*info = "ix fallback";
+			/* no profile && no error */
+			new = aa_get_newest_label(&profile->label);
+		} else if (xindex & AA_X_UNCONFINED) {
+			new = aa_get_newest_label(ns_unconfined(profile->ns));
+			*info = "ux fallback";
+		}
+	}
+
+	if (new && stack) {
+		/* base the stack on post domain transition */
+		struct aa_label *base = new;
+
+		new = aa_label_parse(base, stack, GFP_KERNEL, true, false);
+		if (IS_ERR(new))
+			new = NULL;
+		aa_put_label(base);
+	}
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	/* released by caller */
 	return new;
 }

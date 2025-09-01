@@ -203,6 +203,7 @@ static void dwxgmac2_dma_rx_mode(struct stmmac_priv *priv, void __iomem *ioaddr,
 	}
 
 	writel(value, ioaddr + XGMAC_MTL_RXQ_OPMODE(channel));
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 }
 
 static void dwxgmac2_dma_tx_mode(struct stmmac_priv *priv, void __iomem *ioaddr,
@@ -411,6 +412,218 @@ static int dwxgmac2_get_hw_feature(void __iomem *ioaddr,
 	dma_cap->mbps_1000 = (hw_cap & XGMAC_HWFEAT_GMIISEL) >> 1;
 	if (dma_cap->mbps_1000 && priv->synopsys_id >= DWXGMAC_CORE_2_20)
 		dma_cap->mbps_10_100 = 1;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	/* Enable MTL RX overflow */
+	value = readl(ioaddr + XGMAC_MTL_QINTEN(channel));
+	writel(value | XGMAC_RXOIE, ioaddr + XGMAC_MTL_QINTEN(channel));
+}
+
+static void dwxgmac2_dma_tx_mode(struct stmmac_priv *priv, void __iomem *ioaddr,
+				 int mode, u32 channel, int fifosz, u8 qmode)
+{
+	u32 value = readl(ioaddr + XGMAC_MTL_TXQ_OPMODE(channel));
+	unsigned int tqs = fifosz / 256 - 1;
+
+	if (mode == SF_DMA_MODE) {
+		value |= XGMAC_TSF;
+	} else {
+		value &= ~XGMAC_TSF;
+		value &= ~XGMAC_TTC;
+
+		if (mode <= 64)
+			value |= 0x0 << XGMAC_TTC_SHIFT;
+		else if (mode <= 96)
+			value |= 0x2 << XGMAC_TTC_SHIFT;
+		else if (mode <= 128)
+			value |= 0x3 << XGMAC_TTC_SHIFT;
+		else if (mode <= 192)
+			value |= 0x4 << XGMAC_TTC_SHIFT;
+		else if (mode <= 256)
+			value |= 0x5 << XGMAC_TTC_SHIFT;
+		else if (mode <= 384)
+			value |= 0x6 << XGMAC_TTC_SHIFT;
+		else
+			value |= 0x7 << XGMAC_TTC_SHIFT;
+	}
+
+	/* Use static TC to Queue mapping */
+	value |= (channel << XGMAC_Q2TCMAP_SHIFT) & XGMAC_Q2TCMAP;
+
+	value &= ~XGMAC_TXQEN;
+	if (qmode != MTL_QUEUE_AVB)
+		value |= 0x2 << XGMAC_TXQEN_SHIFT;
+	else
+		value |= 0x1 << XGMAC_TXQEN_SHIFT;
+
+	value &= ~XGMAC_TQS;
+	value |= (tqs << XGMAC_TQS_SHIFT) & XGMAC_TQS;
+
+	writel(value, ioaddr +  XGMAC_MTL_TXQ_OPMODE(channel));
+}
+
+static void dwxgmac2_enable_dma_irq(struct stmmac_priv *priv,
+				    void __iomem *ioaddr, u32 chan,
+				    bool rx, bool tx)
+{
+	u32 value = readl(ioaddr + XGMAC_DMA_CH_INT_EN(chan));
+
+	if (rx)
+		value |= XGMAC_DMA_INT_DEFAULT_RX;
+	if (tx)
+		value |= XGMAC_DMA_INT_DEFAULT_TX;
+
+	writel(value, ioaddr + XGMAC_DMA_CH_INT_EN(chan));
+}
+
+static void dwxgmac2_disable_dma_irq(struct stmmac_priv *priv,
+				     void __iomem *ioaddr, u32 chan,
+				     bool rx, bool tx)
+{
+	u32 value = readl(ioaddr + XGMAC_DMA_CH_INT_EN(chan));
+
+	if (rx)
+		value &= ~XGMAC_DMA_INT_DEFAULT_RX;
+	if (tx)
+		value &= ~XGMAC_DMA_INT_DEFAULT_TX;
+
+	writel(value, ioaddr + XGMAC_DMA_CH_INT_EN(chan));
+}
+
+static void dwxgmac2_dma_start_tx(struct stmmac_priv *priv,
+				  void __iomem *ioaddr, u32 chan)
+{
+	u32 value;
+
+	value = readl(ioaddr + XGMAC_DMA_CH_TX_CONTROL(chan));
+	value |= XGMAC_TXST;
+	writel(value, ioaddr + XGMAC_DMA_CH_TX_CONTROL(chan));
+
+	value = readl(ioaddr + XGMAC_TX_CONFIG);
+	value |= XGMAC_CONFIG_TE;
+	writel(value, ioaddr + XGMAC_TX_CONFIG);
+}
+
+static void dwxgmac2_dma_stop_tx(struct stmmac_priv *priv, void __iomem *ioaddr,
+				 u32 chan)
+{
+	u32 value;
+
+	value = readl(ioaddr + XGMAC_DMA_CH_TX_CONTROL(chan));
+	value &= ~XGMAC_TXST;
+	writel(value, ioaddr + XGMAC_DMA_CH_TX_CONTROL(chan));
+
+	value = readl(ioaddr + XGMAC_TX_CONFIG);
+	value &= ~XGMAC_CONFIG_TE;
+	writel(value, ioaddr + XGMAC_TX_CONFIG);
+}
+
+static void dwxgmac2_dma_start_rx(struct stmmac_priv *priv,
+				  void __iomem *ioaddr, u32 chan)
+{
+	u32 value;
+
+	value = readl(ioaddr + XGMAC_DMA_CH_RX_CONTROL(chan));
+	value |= XGMAC_RXST;
+	writel(value, ioaddr + XGMAC_DMA_CH_RX_CONTROL(chan));
+
+	value = readl(ioaddr + XGMAC_RX_CONFIG);
+	value |= XGMAC_CONFIG_RE;
+	writel(value, ioaddr + XGMAC_RX_CONFIG);
+}
+
+static void dwxgmac2_dma_stop_rx(struct stmmac_priv *priv, void __iomem *ioaddr,
+				 u32 chan)
+{
+	u32 value;
+
+	value = readl(ioaddr + XGMAC_DMA_CH_RX_CONTROL(chan));
+	value &= ~XGMAC_RXST;
+	writel(value, ioaddr + XGMAC_DMA_CH_RX_CONTROL(chan));
+}
+
+static int dwxgmac2_dma_interrupt(struct stmmac_priv *priv,
+				  void __iomem *ioaddr,
+				  struct stmmac_extra_stats *x, u32 chan,
+				  u32 dir)
+{
+	struct stmmac_pcpu_stats *stats = this_cpu_ptr(priv->xstats.pcpu_stats);
+	u32 intr_status = readl(ioaddr + XGMAC_DMA_CH_STATUS(chan));
+	u32 intr_en = readl(ioaddr + XGMAC_DMA_CH_INT_EN(chan));
+	int ret = 0;
+
+	if (dir == DMA_DIR_RX)
+		intr_status &= XGMAC_DMA_STATUS_MSK_RX;
+	else if (dir == DMA_DIR_TX)
+		intr_status &= XGMAC_DMA_STATUS_MSK_TX;
+
+	/* ABNORMAL interrupts */
+	if (unlikely(intr_status & XGMAC_AIS)) {
+		if (unlikely(intr_status & XGMAC_RBU)) {
+			x->rx_buf_unav_irq++;
+			ret |= handle_rx;
+		}
+		if (unlikely(intr_status & XGMAC_TPS)) {
+			x->tx_process_stopped_irq++;
+			ret |= tx_hard_error;
+		}
+		if (unlikely(intr_status & XGMAC_FBE)) {
+			x->fatal_bus_error_irq++;
+			ret |= tx_hard_error;
+		}
+	}
+
+	/* TX/RX NORMAL interrupts */
+	if (likely(intr_status & XGMAC_NIS)) {
+		if (likely(intr_status & XGMAC_RI)) {
+			u64_stats_update_begin(&stats->syncp);
+			u64_stats_inc(&stats->rx_normal_irq_n[chan]);
+			u64_stats_update_end(&stats->syncp);
+			ret |= handle_rx;
+		}
+		if (likely(intr_status & (XGMAC_TI | XGMAC_TBU))) {
+			u64_stats_update_begin(&stats->syncp);
+			u64_stats_inc(&stats->tx_normal_irq_n[chan]);
+			u64_stats_update_end(&stats->syncp);
+			ret |= handle_tx;
+		}
+	}
+
+	/* Clear interrupts */
+	writel(intr_en & intr_status, ioaddr + XGMAC_DMA_CH_STATUS(chan));
+
+	return ret;
+}
+
+static int dwxgmac2_get_hw_feature(void __iomem *ioaddr,
+				   struct dma_features *dma_cap)
+{
+	u32 hw_cap;
+
+	/* MAC HW feature 0 */
+	hw_cap = readl(ioaddr + XGMAC_HW_FEATURE0);
+	dma_cap->edma = (hw_cap & XGMAC_HWFEAT_EDMA) >> 31;
+	dma_cap->ediffc = (hw_cap & XGMAC_HWFEAT_EDIFFC) >> 30;
+	dma_cap->vxn = (hw_cap & XGMAC_HWFEAT_VXN) >> 29;
+	dma_cap->vlins = (hw_cap & XGMAC_HWFEAT_SAVLANINS) >> 27;
+	dma_cap->tssrc = (hw_cap & XGMAC_HWFEAT_TSSTSSEL) >> 25;
+	dma_cap->multi_addr = (hw_cap & XGMAC_HWFEAT_ADDMACADRSEL) >> 18;
+	dma_cap->rx_coe = (hw_cap & XGMAC_HWFEAT_RXCOESEL) >> 16;
+	dma_cap->tx_coe = (hw_cap & XGMAC_HWFEAT_TXCOESEL) >> 14;
+	dma_cap->eee = (hw_cap & XGMAC_HWFEAT_EEESEL) >> 13;
+	dma_cap->atime_stamp = (hw_cap & XGMAC_HWFEAT_TSSEL) >> 12;
+	dma_cap->av = (hw_cap & XGMAC_HWFEAT_AVSEL) >> 11;
+	dma_cap->av &= !((hw_cap & XGMAC_HWFEAT_RAVSEL) >> 10);
+	dma_cap->arpoffsel = (hw_cap & XGMAC_HWFEAT_ARPOFFSEL) >> 9;
+	dma_cap->rmon = (hw_cap & XGMAC_HWFEAT_MMCSEL) >> 8;
+	dma_cap->pmt_magic_frame = (hw_cap & XGMAC_HWFEAT_MGKSEL) >> 7;
+	dma_cap->pmt_remote_wake_up = (hw_cap & XGMAC_HWFEAT_RWKSEL) >> 6;
+	dma_cap->sma_mdio = (hw_cap & XGMAC_HWFEAT_SMASEL) >> 5;
+	dma_cap->vlhash = (hw_cap & XGMAC_HWFEAT_VLHASH) >> 4;
+	dma_cap->half_duplex = (hw_cap & XGMAC_HWFEAT_HDSEL) >> 3;
+	dma_cap->mbps_1000 = (hw_cap & XGMAC_HWFEAT_GMIISEL) >> 1;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* MAC HW feature 1 */
 	hw_cap = readl(ioaddr + XGMAC_HW_FEATURE1);

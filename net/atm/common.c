@@ -635,6 +635,7 @@ int vcc_sendmsg(struct socket *sock, struct msghdr *m, size_t size)
 
 	skb->dev = NULL; /* for paths shared with net_device interfaces */
 	if (!copy_from_iter_full(skb_put(skb, size), size, &m->msg_iter)) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		error = -EFAULT;
 		goto free_skb;
 	}
@@ -656,6 +657,21 @@ free_skb:
 	atm_return_tx(vcc, skb);
 	kfree_skb(skb);
 	goto out;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		atm_return_tx(vcc, skb);
+		kfree_skb(skb);
+		error = -EFAULT;
+		goto out;
+	}
+	if (eff != size)
+		memset(skb->data + size, 0, eff-size);
+	error = vcc->dev->ops->send(vcc, skb);
+	error = error ? error : size;
+out:
+	release_sock(sk);
+	return error;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 __poll_t vcc_poll(struct file *file, struct socket *sock, poll_table *wait)

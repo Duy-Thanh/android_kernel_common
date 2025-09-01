@@ -1781,6 +1781,7 @@ static void ahci_update_initial_lpm_policy(struct ata_port *ap)
 		return;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* If no Partial or no Slumber, we cannot support DIPM. */
 	if ((ap->host->flags & ATA_HOST_NO_PART) ||
 	    (ap->host->flags & ATA_HOST_NO_SSC)) {
@@ -1796,6 +1797,14 @@ static void ahci_update_initial_lpm_policy(struct ata_port *ap)
 			"No LPM states supported, forcing LPM max_power\n");
 		ap->flags |= ATA_FLAG_NO_LPM;
 		ap->target_lpm_policy = ATA_LPM_MAX_POWER;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* If no LPM states are supported by the HBA, do not bother with LPM */
+	if ((ap->host->flags & ATA_HOST_NO_PART) &&
+	    (ap->host->flags & ATA_HOST_NO_SSC) &&
+	    (ap->host->flags & ATA_HOST_NO_DEVSLP)) {
+		ata_port_dbg(ap, "no LPM states supported, not enabling LPM\n");
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return;
 	}
 

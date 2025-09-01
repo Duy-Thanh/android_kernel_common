@@ -395,6 +395,7 @@ static int sunxi_pctrl_dt_node_to_map(struct pinctrl_dev *pctldev,
 	const char *function, *pin_prop;
 	const char *group;
 	int ret, npins, nmaps, configlen = 0, i = 0;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct pinctrl_map *new_map;
 
 	*map = NULL;
@@ -477,6 +478,86 @@ static int sunxi_pctrl_dt_node_to_map(struct pinctrl_dev *pctldev,
 	}
 
 	*map = new_map;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	*map = NULL;
+	*num_maps = 0;
+
+	function = sunxi_pctrl_parse_function_prop(node);
+	if (!function) {
+		dev_err(pctl->dev, "missing function property in node %pOFn\n",
+			node);
+		return -EINVAL;
+	}
+
+	pin_prop = sunxi_pctrl_find_pins_prop(node, &npins);
+	if (!pin_prop) {
+		dev_err(pctl->dev, "missing pins property in node %pOFn\n",
+			node);
+		return -EINVAL;
+	}
+
+	/*
+	 * We have two maps for each pin: one for the function, one
+	 * for the configuration (bias, strength, etc).
+	 *
+	 * We might be slightly overshooting, since we might not have
+	 * any configuration.
+	 */
+	nmaps = npins * 2;
+	*map = kmalloc_array(nmaps, sizeof(struct pinctrl_map), GFP_KERNEL);
+	if (!*map)
+		return -ENOMEM;
+
+	pinconfig = sunxi_pctrl_build_pin_config(node, &configlen);
+	if (IS_ERR(pinconfig)) {
+		ret = PTR_ERR(pinconfig);
+		goto err_free_map;
+	}
+
+	of_property_for_each_string(node, pin_prop, prop, group) {
+		struct sunxi_pinctrl_group *grp =
+			sunxi_pinctrl_find_group_by_name(pctl, group);
+
+		if (!grp) {
+			dev_err(pctl->dev, "unknown pin %s", group);
+			continue;
+		}
+
+		if (!sunxi_pinctrl_desc_find_function_by_name(pctl,
+							      grp->name,
+							      function)) {
+			dev_err(pctl->dev, "unsupported function %s on pin %s",
+				function, group);
+			continue;
+		}
+
+		(*map)[i].type = PIN_MAP_TYPE_MUX_GROUP;
+		(*map)[i].data.mux.group = group;
+		(*map)[i].data.mux.function = function;
+
+		i++;
+
+		if (pinconfig) {
+			(*map)[i].type = PIN_MAP_TYPE_CONFIGS_GROUP;
+			(*map)[i].data.configs.group_or_pin = group;
+			(*map)[i].data.configs.configs = pinconfig;
+			(*map)[i].data.configs.num_configs = configlen;
+			i++;
+		}
+	}
+
+	*num_maps = i;
+
+	/*
+	 * We know have the number of maps we need, we can resize our
+	 * map array
+	 */
+	*map = krealloc(*map, i * sizeof(struct pinctrl_map), GFP_KERNEL);
+	if (!*map)
+		return -ENOMEM;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 

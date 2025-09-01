@@ -70,11 +70,18 @@ static inline bool spsc_queue_push(struct spsc_queue *queue, struct spsc_node *n
 
 	preempt_disable();
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	atomic_inc(&queue->job_count);
 	smp_mb__after_atomic();
 
 	tail = (struct spsc_node **)atomic_long_xchg(&queue->tail, (long)&node->next);
 	WRITE_ONCE(*tail, node);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	tail = (struct spsc_node **)atomic_long_xchg(&queue->tail, (long)&node->next);
+	WRITE_ONCE(*tail, node);
+	atomic_inc(&queue->job_count);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/*
 	 * In case of first element verify new node will be visible to the consumer

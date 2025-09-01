@@ -379,6 +379,7 @@ static int ad_sd_buffer_postenable(struct iio_dev *indio_dev)
 			return ret;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	samples_buf_size = ALIGN(slot * indio_dev->channels[0].scan_type.storagebits / 8, 8);
 	samples_buf_size += sizeof(int64_t);
 	samples_buf = devm_krealloc(&sigma_delta->spi->dev, sigma_delta->samples_buf,
@@ -536,6 +537,166 @@ static bool ad_sd_validate_scan_mask(struct iio_dev *indio_dev, const unsigned l
 static const struct iio_buffer_setup_ops ad_sd_buffer_setup_ops = {
 	.postenable = &ad_sd_buffer_postenable,
 	.predisable = &ad_sd_buffer_predisable,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	samples_buf_size = ALIGN(slot * indio_dev->channels[0].scan_type.storagebits, 8);
+	samples_buf_size += sizeof(int64_t);
+	samples_buf = devm_krealloc(&sigma_delta->spi->dev, sigma_delta->samples_buf,
+				    samples_buf_size, GFP_KERNEL);
+	if (!samples_buf)
+		return -ENOMEM;
+
+	sigma_delta->samples_buf = samples_buf;
+
+	spi_bus_lock(sigma_delta->spi->controller);
+	sigma_delta->bus_locked = true;
+	sigma_delta->keep_cs_asserted = true;
+
+	ret = ad_sigma_delta_set_mode(sigma_delta, AD_SD_MODE_CONTINUOUS);
+	if (ret)
+		goto err_unlock;
+
+	sigma_delta->irq_dis = false;
+	enable_irq(sigma_delta->irq_line);
+
+	return 0;
+
+err_unlock:
+	spi_bus_unlock(sigma_delta->spi->controller);
+
+	return ret;
+}
+
+static int ad_sd_buffer_postdisable(struct iio_dev *indio_dev)
+{
+	struct ad_sigma_delta *sigma_delta = iio_device_get_drvdata(indio_dev);
+
+	reinit_completion(&sigma_delta->completion);
+	wait_for_completion_timeout(&sigma_delta->completion, HZ);
+
+	if (!sigma_delta->irq_dis) {
+		disable_irq_nosync(sigma_delta->irq_line);
+		sigma_delta->irq_dis = true;
+	}
+
+	sigma_delta->keep_cs_asserted = false;
+	ad_sigma_delta_set_mode(sigma_delta, AD_SD_MODE_IDLE);
+
+	if (sigma_delta->status_appended)
+		ad_sigma_delta_append_status(sigma_delta, false);
+
+	ad_sigma_delta_disable_all(sigma_delta);
+	sigma_delta->bus_locked = false;
+	return spi_bus_unlock(sigma_delta->spi->controller);
+}
+
+static irqreturn_t ad_sd_trigger_handler(int irq, void *p)
+{
+	struct iio_poll_func *pf = p;
+	struct iio_dev *indio_dev = pf->indio_dev;
+	struct ad_sigma_delta *sigma_delta = iio_device_get_drvdata(indio_dev);
+	uint8_t *data = sigma_delta->rx_buf;
+	unsigned int transfer_size;
+	unsigned int sample_size;
+	unsigned int sample_pos;
+	unsigned int status_pos;
+	unsigned int reg_size;
+	unsigned int data_reg;
+
+	reg_size = indio_dev->channels[0].scan_type.realbits +
+			indio_dev->channels[0].scan_type.shift;
+	reg_size = DIV_ROUND_UP(reg_size, 8);
+
+	if (sigma_delta->info->data_reg != 0)
+		data_reg = sigma_delta->info->data_reg;
+	else
+		data_reg = AD_SD_REG_DATA;
+
+	/* Status word will be appended to the sample during transfer */
+	if (sigma_delta->status_appended)
+		transfer_size = reg_size + 1;
+	else
+		transfer_size = reg_size;
+
+	switch (reg_size) {
+	case 4:
+	case 2:
+	case 1:
+		status_pos = reg_size;
+		ad_sd_read_reg_raw(sigma_delta, data_reg, transfer_size, &data[0]);
+		break;
+	case 3:
+		/*
+		 * Data array after transfer will look like (if status is appended):
+		 * data[] = { [0][sample][sample][sample][status] }
+		 * Keeping the first byte 0 shifts the status postion by 1 byte to the right.
+		 */
+		status_pos = reg_size + 1;
+
+		/* We store 24 bit samples in a 32 bit word. Keep the upper
+		 * byte set to zero. */
+		ad_sd_read_reg_raw(sigma_delta, data_reg, transfer_size, &data[1]);
+		break;
+
+	default:
+		dev_err_ratelimited(&indio_dev->dev, "Unsupported reg_size: %u\n", reg_size);
+		goto irq_handled;
+	}
+
+	/*
+	 * For devices sampling only one channel at
+	 * once, there is no need for sample number tracking.
+	 */
+	if (sigma_delta->active_slots == 1) {
+		iio_push_to_buffers_with_timestamp(indio_dev, data, pf->timestamp);
+		goto irq_handled;
+	}
+
+	if (sigma_delta->status_appended) {
+		u8 converted_channel;
+
+		converted_channel = data[status_pos] & sigma_delta->info->status_ch_mask;
+		if (converted_channel != sigma_delta->slots[sigma_delta->current_slot]) {
+			/*
+			 * Desync occurred during continuous sampling of multiple channels.
+			 * Drop this incomplete sample and start from first channel again.
+			 */
+
+			sigma_delta->current_slot = 0;
+			goto irq_handled;
+		}
+	}
+
+	sample_size = indio_dev->channels[0].scan_type.storagebits / 8;
+	sample_pos = sample_size * sigma_delta->current_slot;
+	memcpy(&sigma_delta->samples_buf[sample_pos], data, sample_size);
+	sigma_delta->current_slot++;
+
+	if (sigma_delta->current_slot == sigma_delta->active_slots) {
+		sigma_delta->current_slot = 0;
+		iio_push_to_buffers_with_timestamp(indio_dev, sigma_delta->samples_buf,
+						   pf->timestamp);
+	}
+
+irq_handled:
+	iio_trigger_notify_done(indio_dev->trig);
+	sigma_delta->irq_dis = false;
+	enable_irq(sigma_delta->irq_line);
+
+	return IRQ_HANDLED;
+}
+
+static bool ad_sd_validate_scan_mask(struct iio_dev *indio_dev, const unsigned long *mask)
+{
+	struct ad_sigma_delta *sigma_delta = iio_device_get_drvdata(indio_dev);
+
+	return bitmap_weight(mask, iio_get_masklength(indio_dev)) <= sigma_delta->num_slots;
+}
+
+static const struct iio_buffer_setup_ops ad_sd_buffer_setup_ops = {
+	.postenable = &ad_sd_buffer_postenable,
+	.postdisable = &ad_sd_buffer_postdisable,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.validate_scan_mask = &ad_sd_validate_scan_mask,
 };
 

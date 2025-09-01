@@ -398,6 +398,7 @@ static bool ixgbe_xmit_zc(struct ixgbe_ring *xdp_ring, unsigned int budget)
 	dma_addr_t dma;
 	u32 cmd_type;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	while (likely(budget)) {
 		if (unlikely(!ixgbe_desc_unused(xdp_ring))) {
 			work_done = false;
@@ -435,6 +436,44 @@ static bool ixgbe_xmit_zc(struct ixgbe_ring *xdp_ring, unsigned int budget)
 			xdp_ring->next_to_use = 0;
 
 		budget--;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	while (budget-- > 0) {
+		if (unlikely(!ixgbe_desc_unused(xdp_ring))) {
+			work_done = false;
+			break;
+		}
+
+		if (!netif_carrier_ok(xdp_ring->netdev))
+			break;
+
+		if (!xsk_tx_peek_desc(pool, &desc))
+			break;
+
+		dma = xsk_buff_raw_get_dma(pool, desc.addr);
+		xsk_buff_raw_dma_sync_for_device(pool, dma, desc.len);
+
+		tx_bi = &xdp_ring->tx_buffer_info[xdp_ring->next_to_use];
+		tx_bi->bytecount = desc.len;
+		tx_bi->xdpf = NULL;
+		tx_bi->gso_segs = 1;
+
+		tx_desc = IXGBE_TX_DESC(xdp_ring, xdp_ring->next_to_use);
+		tx_desc->read.buffer_addr = cpu_to_le64(dma);
+
+		/* put descriptor type bits */
+		cmd_type = IXGBE_ADVTXD_DTYP_DATA |
+			   IXGBE_ADVTXD_DCMD_DEXT |
+			   IXGBE_ADVTXD_DCMD_IFCS;
+		cmd_type |= desc.len | IXGBE_TXD_CMD;
+		tx_desc->read.cmd_type_len = cpu_to_le32(cmd_type);
+		tx_desc->read.olinfo_status =
+			cpu_to_le32(desc.len << IXGBE_ADVTXD_PAYLEN_SHIFT);
+
+		xdp_ring->next_to_use++;
+		if (xdp_ring->next_to_use == xdp_ring->count)
+			xdp_ring->next_to_use = 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	if (tx_desc) {

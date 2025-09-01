@@ -300,6 +300,7 @@ static int emc2305_set_single_tz(struct device *dev, int idx)
 		dev_err(dev, "Failed to register cooling device %s\n", emc2305_fan_name[idx]);
 		return PTR_ERR(data->cdev_data[cdev_idx].cdev);
 	}
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	if (data->cdev_data[cdev_idx].cur_state > 0)
 		/* Update pwm when temperature is above trips */
@@ -323,6 +324,26 @@ static int emc2305_set_single_tz(struct device *dev, int idx)
 				       EMC2305_FAN_MAX);
 	data->cdev_data[cdev_idx].last_hwmon_state =
 		EMC2305_PWM_DUTY2STATE(pwm, data->max_state,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* Set minimal PWM speed. */
+	if (data->pwm_separate) {
+		ret = emc2305_set_pwm(dev, pwm, cdev_idx);
+		if (ret < 0)
+			return ret;
+	} else {
+		for (i = 0; i < data->pwm_num; i++) {
+			ret = emc2305_set_pwm(dev, pwm, i);
+			if (ret < 0)
+				return ret;
+		}
+	}
+	data->cdev_data[cdev_idx].cur_state =
+		EMC2305_PWM_DUTY2STATE(data->pwm_min[cdev_idx], data->max_state,
+				       EMC2305_FAN_MAX);
+	data->cdev_data[cdev_idx].last_hwmon_state =
+		EMC2305_PWM_DUTY2STATE(data->pwm_min[cdev_idx], data->max_state,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				       EMC2305_FAN_MAX);
 	return 0;
 }

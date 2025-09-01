@@ -115,6 +115,7 @@ static inline void pwm_mediatek_writel(struct pwm_mediatek_chip *chip,
 	writel(value, chip->regs + chip->soc->reg_offset[num] + offset);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void pwm_mediatek_enable(struct pwm_chip *chip, struct pwm_device *pwm)
 {
 	struct pwm_mediatek_chip *pc = to_pwm_mediatek_chip(chip);
@@ -230,6 +231,118 @@ static int pwm_mediatek_apply(struct pwm_chip *chip, struct pwm_device *pwm,
 
 	if (!pwm->state.enabled)
 		err = pwm_mediatek_clk_enable(chip, pwm);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int pwm_mediatek_config(struct pwm_chip *chip, struct pwm_device *pwm,
+			       int duty_ns, int period_ns)
+{
+	struct pwm_mediatek_chip *pc = to_pwm_mediatek_chip(chip);
+	u32 clkdiv = 0, cnt_period, cnt_duty, reg_width = PWMDWIDTH,
+	    reg_thres = PWMTHRES;
+	unsigned long clk_rate;
+	u64 resolution;
+	int ret;
+
+	ret = pwm_mediatek_clk_enable(chip, pwm);
+	if (ret < 0)
+		return ret;
+
+	clk_rate = clk_get_rate(pc->clk_pwms[pwm->hwpwm]);
+	if (!clk_rate)
+		return -EINVAL;
+
+	/* Make sure we use the bus clock and not the 26MHz clock */
+	if (pc->soc->has_ck_26m_sel)
+		writel(0, pc->regs + PWM_CK_26M_SEL);
+
+	/* Using resolution in picosecond gets accuracy higher */
+	resolution = (u64)NSEC_PER_SEC * 1000;
+	do_div(resolution, clk_rate);
+
+	cnt_period = DIV_ROUND_CLOSEST_ULL((u64)period_ns * 1000, resolution);
+	while (cnt_period > 8191) {
+		resolution *= 2;
+		clkdiv++;
+		cnt_period = DIV_ROUND_CLOSEST_ULL((u64)period_ns * 1000,
+						   resolution);
+	}
+
+	if (clkdiv > PWM_CLK_DIV_MAX) {
+		pwm_mediatek_clk_disable(chip, pwm);
+		dev_err(pwmchip_parent(chip), "period of %d ns not supported\n", period_ns);
+		return -EINVAL;
+	}
+
+	if (pc->soc->pwm45_fixup && pwm->hwpwm > 2) {
+		/*
+		 * PWM[4,5] has distinct offset for PWMDWIDTH and PWMTHRES
+		 * from the other PWMs on MT7623.
+		 */
+		reg_width = PWM45DWIDTH_FIXUP;
+		reg_thres = PWM45THRES_FIXUP;
+	}
+
+	cnt_duty = DIV_ROUND_CLOSEST_ULL((u64)duty_ns * 1000, resolution);
+	pwm_mediatek_writel(pc, pwm->hwpwm, PWMCON, BIT(15) | clkdiv);
+	pwm_mediatek_writel(pc, pwm->hwpwm, reg_width, cnt_period);
+	pwm_mediatek_writel(pc, pwm->hwpwm, reg_thres, cnt_duty);
+
+	pwm_mediatek_clk_disable(chip, pwm);
+
+	return 0;
+}
+
+static int pwm_mediatek_enable(struct pwm_chip *chip, struct pwm_device *pwm)
+{
+	struct pwm_mediatek_chip *pc = to_pwm_mediatek_chip(chip);
+	u32 value;
+	int ret;
+
+	ret = pwm_mediatek_clk_enable(chip, pwm);
+	if (ret < 0)
+		return ret;
+
+	value = readl(pc->regs);
+	value |= BIT(pwm->hwpwm);
+	writel(value, pc->regs);
+
+	return 0;
+}
+
+static void pwm_mediatek_disable(struct pwm_chip *chip, struct pwm_device *pwm)
+{
+	struct pwm_mediatek_chip *pc = to_pwm_mediatek_chip(chip);
+	u32 value;
+
+	value = readl(pc->regs);
+	value &= ~BIT(pwm->hwpwm);
+	writel(value, pc->regs);
+
+	pwm_mediatek_clk_disable(chip, pwm);
+}
+
+static int pwm_mediatek_apply(struct pwm_chip *chip, struct pwm_device *pwm,
+			      const struct pwm_state *state)
+{
+	int err;
+
+	if (state->polarity != PWM_POLARITY_NORMAL)
+		return -EINVAL;
+
+	if (!state->enabled) {
+		if (pwm->state.enabled)
+			pwm_mediatek_disable(chip, pwm);
+
+		return 0;
+	}
+
+	err = pwm_mediatek_config(chip, pwm, state->duty_cycle, state->period);
+	if (err)
+		return err;
+
+	if (!pwm->state.enabled)
+		err = pwm_mediatek_enable(chip, pwm);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return err;
 }

@@ -539,6 +539,7 @@ static const char **virtio_gpio_get_names(struct virtio_gpio *vgpio,
 
 static int virtio_gpio_probe(struct virtio_device *vdev)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct device *dev = &vdev->dev;
 	struct virtio_gpio *vgpio;
 	u32 gpio_names_size;
@@ -555,6 +556,24 @@ static int virtio_gpio_probe(struct virtio_device *vdev)
 					      gpio_names_size));
 	ngpio =  virtio_cread16(vdev, offsetof(struct virtio_gpio_config,
 					       ngpio));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct virtio_gpio_config config;
+	struct device *dev = &vdev->dev;
+	struct virtio_gpio *vgpio;
+	u32 gpio_names_size;
+	u16 ngpio;
+	int ret, i;
+
+	vgpio = devm_kzalloc(dev, sizeof(*vgpio), GFP_KERNEL);
+	if (!vgpio)
+		return -ENOMEM;
+
+	/* Read configuration */
+	virtio_cread_bytes(vdev, 0, &config, sizeof(config));
+	gpio_names_size = le32_to_cpu(config.gpio_names_size);
+	ngpio = le16_to_cpu(config.ngpio);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (!ngpio) {
 		dev_err(dev, "Number of GPIOs can't be zero\n");
 		return -EINVAL;

@@ -18,6 +18,13 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/spinlock.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+// CRC fix for e307c54ac819 ("crypto: null - Use spin lock instead of mutex") requires us to put
+// back mm.h to preserve a bunch of structure types in the crc generation logic
+#include <linux/mm.h>
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #include <linux/string.h>
 
 static DEFINE_SPINLOCK(crypto_default_null_skcipher_lock);

@@ -215,6 +215,7 @@ static int __init omap_cf_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!res)
 		return -EINVAL;
 
@@ -311,6 +312,97 @@ static void __exit omap_cf_remove(struct platform_device *pdev)
  * triggering a section mismatch warning.
  */
 static struct platform_driver omap_cf_driver __refdata = {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	cf = kzalloc(sizeof *cf, GFP_KERNEL);
+	if (!cf)
+		return -ENOMEM;
+	timer_setup(&cf->timer, omap_cf_timer, 0);
+
+	cf->pdev = pdev;
+	platform_set_drvdata(pdev, cf);
+
+	/* this primarily just shuts up irq handling noise */
+	status = request_irq(irq, omap_cf_irq, IRQF_SHARED,
+			driver_name, cf);
+	if (status < 0)
+		goto fail0;
+	cf->irq = irq;
+	cf->socket.pci_irq = irq;
+	cf->phys_cf = res->start;
+
+	/* pcmcia layer only remaps "real" memory */
+	cf->socket.io_offset = iospace.start;
+	status = pci_remap_iospace(&iospace, cf->phys_cf + SZ_4K);
+	if (status) {
+		status = -ENOMEM;
+		goto fail1;
+	}
+
+	if (!request_mem_region(cf->phys_cf, SZ_8K, driver_name)) {
+		status = -ENXIO;
+		goto fail1;
+	}
+
+	/* NOTE:  CF conflicts with MMC1 */
+	omap_cfg_reg(W11_1610_CF_CD1);
+	omap_cfg_reg(P11_1610_CF_CD2);
+	omap_cfg_reg(R11_1610_CF_IOIS16);
+	omap_cfg_reg(V10_1610_CF_IREQ);
+	omap_cfg_reg(W10_1610_CF_RESET);
+
+	omap_writew(~(1 << seg), CF_CFG);
+
+	pr_info("%s: cs%d on irq %d\n", driver_name, seg, irq);
+
+	/* CF uses armxor_ck, which is "always" available */
+
+	pr_debug("%s: sts %04x cfg %04x control %04x %s\n", driver_name,
+		omap_readw(CF_STATUS), omap_readw(CF_CFG),
+		omap_readw(CF_CONTROL),
+		omap_cf_present() ? "present" : "(not present)");
+
+	cf->socket.owner = THIS_MODULE;
+	cf->socket.dev.parent = &pdev->dev;
+	cf->socket.ops = &omap_cf_ops;
+	cf->socket.resource_ops = &pccard_static_ops;
+	cf->socket.features = SS_CAP_PCCARD | SS_CAP_STATIC_MAP
+				| SS_CAP_MEM_ALIGN;
+	cf->socket.map_size = SZ_2K;
+	cf->socket.io[0].res = &cf->iomem;
+
+	status = pcmcia_register_socket(&cf->socket);
+	if (status < 0)
+		goto fail2;
+
+	cf->active = 1;
+	mod_timer(&cf->timer, jiffies + POLL_INTERVAL);
+	return 0;
+
+fail2:
+	release_mem_region(cf->phys_cf, SZ_8K);
+fail1:
+	free_irq(irq, cf);
+fail0:
+	kfree(cf);
+	return status;
+}
+
+static void __exit omap_cf_remove(struct platform_device *pdev)
+{
+	struct omap_cf_socket *cf = platform_get_drvdata(pdev);
+
+	cf->active = 0;
+	pcmcia_unregister_socket(&cf->socket);
+	timer_shutdown_sync(&cf->timer);
+	release_mem_region(cf->phys_cf, SZ_8K);
+	free_irq(cf->irq, cf);
+	kfree(cf);
+}
+
+static struct platform_driver omap_cf_driver = {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.driver = {
 		.name	= driver_name,
 	},

@@ -888,6 +888,7 @@ static int exfat_check_dir_empty(struct super_block *sb,
 {
 	int i, dentries_per_clu;
 	unsigned int type;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	unsigned int clu_count = 0;
 	struct exfat_chain clu;
 	struct exfat_dentry *ep;
@@ -929,6 +930,45 @@ static int exfat_check_dir_empty(struct super_block *sb,
 			/* break if the cluster chain includes a loop */
 			if (unlikely(++clu_count > EXFAT_DATA_CLUSTER_COUNT(sbi)))
 				break;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct exfat_chain clu;
+	struct exfat_dentry *ep;
+	struct exfat_sb_info *sbi = EXFAT_SB(sb);
+	struct buffer_head *bh;
+
+	dentries_per_clu = sbi->dentries_per_clu;
+
+	if (p_dir->dir == EXFAT_EOF_CLUSTER)
+		return 0;
+
+	exfat_chain_dup(&clu, p_dir);
+
+	while (clu.dir != EXFAT_EOF_CLUSTER) {
+		for (i = 0; i < dentries_per_clu; i++) {
+			ep = exfat_get_dentry(sb, &clu, i, &bh);
+			if (!ep)
+				return -EIO;
+			type = exfat_get_entry_type(ep);
+			brelse(bh);
+			if (type == TYPE_UNUSED)
+				return 0;
+
+			if (type != TYPE_FILE && type != TYPE_DIR)
+				continue;
+
+			return -ENOTEMPTY;
+		}
+
+		if (clu.flags == ALLOC_NO_FAT_CHAIN) {
+			if (--clu.size > 0)
+				clu.dir++;
+			else
+				clu.dir = EXFAT_EOF_CLUSTER;
+		} else {
+			if (exfat_get_next_cluster(sb, &(clu.dir)))
+				return -EIO;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 	}
 

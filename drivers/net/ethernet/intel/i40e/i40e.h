@@ -943,6 +943,7 @@ struct i40e_q_vector {
 	u16 reg_idx;		/* register index of the interrupt */
 
 	struct napi_struct napi;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct rcu_head rcu;	/* to avoid race with update stats on free */
 
 	struct i40e_ring_container rx;
@@ -1279,6 +1280,344 @@ int i40e_del_mac_filter(struct i40e_vsi *vsi, const u8 *macaddr);
 bool i40e_is_vsi_in_vlan(struct i40e_vsi *vsi);
 int i40e_count_all_filters(struct i40e_vsi *vsi);
 int i40e_count_active_filters(struct i40e_vsi *vsi);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	struct i40e_ring_container rx;
+	struct i40e_ring_container tx;
+
+	u8 itr_countdown;	/* when 0 should adjust adaptive ITR */
+	u8 num_ringpairs;	/* total number of ring pairs in vector */
+
+	cpumask_t affinity_mask;
+	struct irq_affinity_notify affinity_notify;
+
+	struct rcu_head rcu;	/* to avoid race with update stats on free */
+	char name[I40E_INT_NAME_STR_LEN];
+	bool arm_wb_state;
+	bool in_busy_poll;
+	int irq_num;		/* IRQ assigned to this q_vector */
+} ____cacheline_internodealigned_in_smp;
+
+/* lan device */
+struct i40e_device {
+	struct list_head list;
+	struct i40e_pf *pf;
+};
+
+/**
+ * i40e_info_nvm_ver - format the NVM version string
+ * @hw: ptr to the hardware info
+ * @buf: string buffer to store
+ * @len: buffer size
+ *
+ * Formats NVM version string as:
+ * <gen>.<snap>.<release> when eetrackid == I40E_OEM_EETRACK_ID
+ * <nvm_major>.<nvm_minor> otherwise
+ **/
+static inline void i40e_info_nvm_ver(struct i40e_hw *hw, char *buf, size_t len)
+{
+	struct i40e_nvm_info *nvm = &hw->nvm;
+
+	if (nvm->eetrack == I40E_OEM_EETRACK_ID) {
+		u32 full_ver = nvm->oem_ver;
+		u8 gen, snap;
+		u16 release;
+
+		gen = FIELD_GET(I40E_OEM_GEN_MASK, full_ver);
+		snap = FIELD_GET(I40E_OEM_SNAP_MASK, full_ver);
+		release = FIELD_GET(I40E_OEM_RELEASE_MASK, full_ver);
+		snprintf(buf, len, "%x.%x.%x", gen, snap, release);
+	} else {
+		u8 major, minor;
+
+		major = FIELD_GET(I40E_NVM_VERSION_HI_MASK, nvm->version);
+		minor = FIELD_GET(I40E_NVM_VERSION_LO_MASK, nvm->version);
+		snprintf(buf, len, "%x.%02x", major, minor);
+	}
+}
+
+/**
+ * i40e_info_eetrack - format the EETrackID string
+ * @hw: ptr to the hardware info
+ * @buf: string buffer to store
+ * @len: buffer size
+ *
+ * Returns hexadecimally formated EETrackID if it is
+ * different from I40E_OEM_EETRACK_ID or empty string.
+ **/
+static inline void i40e_info_eetrack(struct i40e_hw *hw, char *buf, size_t len)
+{
+	struct i40e_nvm_info *nvm = &hw->nvm;
+
+	buf[0] = '\0';
+	if (nvm->eetrack != I40E_OEM_EETRACK_ID)
+		snprintf(buf, len, "0x%08x", nvm->eetrack);
+}
+
+/**
+ * i40e_info_civd_ver - format the NVM version strings
+ * @hw: ptr to the hardware info
+ * @buf: string buffer to store
+ * @len: buffer size
+ *
+ * Returns formated combo image version if adapter's EETrackID is
+ * different from I40E_OEM_EETRACK_ID or empty string.
+ **/
+static inline void i40e_info_civd_ver(struct i40e_hw *hw, char *buf, size_t len)
+{
+	struct i40e_nvm_info *nvm = &hw->nvm;
+
+	buf[0] = '\0';
+	if (nvm->eetrack != I40E_OEM_EETRACK_ID) {
+		u32 full_ver = nvm->oem_ver;
+		u8 major, minor;
+		u16 build;
+
+		major = FIELD_GET(I40E_OEM_VER_MASK, full_ver);
+		build = FIELD_GET(I40E_OEM_VER_BUILD_MASK, full_ver);
+		minor = FIELD_GET(I40E_OEM_VER_PATCH_MASK, full_ver);
+		snprintf(buf, len, "%d.%d.%d", major, build, minor);
+	}
+}
+
+/**
+ * i40e_nvm_version_str - format the NVM version strings
+ * @hw: ptr to the hardware info
+ * @buf: string buffer to store
+ * @len: buffer size
+ **/
+static inline char *i40e_nvm_version_str(struct i40e_hw *hw, char *buf,
+					 size_t len)
+{
+	char ver[16] = " ";
+
+	/* Get NVM version */
+	i40e_info_nvm_ver(hw, buf, len);
+
+	/* Append EETrackID if provided */
+	i40e_info_eetrack(hw, &ver[1], sizeof(ver) - 1);
+	if (strlen(ver) > 1)
+		strlcat(buf, ver, len);
+
+	/* Append combo image version if provided */
+	i40e_info_civd_ver(hw, &ver[1], sizeof(ver) - 1);
+	if (strlen(ver) > 1)
+		strlcat(buf, ver, len);
+
+	return buf;
+}
+
+/**
+ * i40e_netdev_to_pf: Retrieve the PF struct for given netdev
+ * @netdev: the corresponding netdev
+ *
+ * Return the PF struct for the given netdev
+ **/
+static inline struct i40e_pf *i40e_netdev_to_pf(struct net_device *netdev)
+{
+	struct i40e_netdev_priv *np = netdev_priv(netdev);
+	struct i40e_vsi *vsi = np->vsi;
+
+	return vsi->back;
+}
+
+static inline void i40e_vsi_setup_irqhandler(struct i40e_vsi *vsi,
+				irqreturn_t (*irq_handler)(int, void *))
+{
+	vsi->irq_handler = irq_handler;
+}
+
+/**
+ * i40e_get_fd_cnt_all - get the total FD filter space available
+ * @pf: pointer to the PF struct
+ **/
+static inline int i40e_get_fd_cnt_all(struct i40e_pf *pf)
+{
+	return pf->hw.fdir_shared_filter_count + pf->fdir_pf_filter_count;
+}
+
+/**
+ * i40e_read_fd_input_set - reads value of flow director input set register
+ * @pf: pointer to the PF struct
+ * @addr: register addr
+ *
+ * This function reads value of flow director input set register
+ * specified by 'addr' (which is specific to flow-type)
+ **/
+static inline u64 i40e_read_fd_input_set(struct i40e_pf *pf, u16 addr)
+{
+	u64 val;
+
+	val = i40e_read_rx_ctl(&pf->hw, I40E_PRTQF_FD_INSET(addr, 1));
+	val <<= 32;
+	val += i40e_read_rx_ctl(&pf->hw, I40E_PRTQF_FD_INSET(addr, 0));
+
+	return val;
+}
+
+/**
+ * i40e_write_fd_input_set - writes value into flow director input set register
+ * @pf: pointer to the PF struct
+ * @addr: register addr
+ * @val: value to be written
+ *
+ * This function writes specified value to the register specified by 'addr'.
+ * This register is input set register based on flow-type.
+ **/
+static inline void i40e_write_fd_input_set(struct i40e_pf *pf,
+					   u16 addr, u64 val)
+{
+	i40e_write_rx_ctl(&pf->hw, I40E_PRTQF_FD_INSET(addr, 1),
+			  (u32)(val >> 32));
+	i40e_write_rx_ctl(&pf->hw, I40E_PRTQF_FD_INSET(addr, 0),
+			  (u32)(val & 0xFFFFFFFFULL));
+}
+
+/**
+ * i40e_get_pf_count - get PCI PF count.
+ * @hw: pointer to a hw.
+ *
+ * Reports the function number of the highest PCI physical
+ * function plus 1 as it is loaded from the NVM.
+ *
+ * Return: PCI PF count.
+ **/
+static inline u32 i40e_get_pf_count(struct i40e_hw *hw)
+{
+	return FIELD_GET(I40E_GLGEN_PCIFCNCNT_PCIPFCNT_MASK,
+			 rd32(hw, I40E_GLGEN_PCIFCNCNT));
+}
+
+/* needed by i40e_ethtool.c */
+int i40e_up(struct i40e_vsi *vsi);
+void i40e_down(struct i40e_vsi *vsi);
+extern const char i40e_driver_name[];
+void i40e_do_reset_safe(struct i40e_pf *pf, u32 reset_flags);
+void i40e_do_reset(struct i40e_pf *pf, u32 reset_flags, bool lock_acquired);
+int i40e_config_rss(struct i40e_vsi *vsi, u8 *seed, u8 *lut, u16 lut_size);
+int i40e_get_rss(struct i40e_vsi *vsi, u8 *seed, u8 *lut, u16 lut_size);
+void i40e_fill_rss_lut(struct i40e_pf *pf, u8 *lut,
+		       u16 rss_table_size, u16 rss_size);
+struct i40e_vsi *i40e_find_vsi_from_id(struct i40e_pf *pf, u16 id);
+/**
+ * i40e_find_vsi_by_type - Find and return Flow Director VSI
+ * @pf: PF to search for VSI
+ * @type: Value indicating type of VSI we are looking for
+ **/
+static inline struct i40e_vsi *
+i40e_find_vsi_by_type(struct i40e_pf *pf, u16 type)
+{
+	struct i40e_vsi *vsi;
+	int i;
+
+	i40e_pf_for_each_vsi(pf, i, vsi)
+		if (vsi->type == type)
+			return vsi;
+
+	return NULL;
+}
+void i40e_update_stats(struct i40e_vsi *vsi);
+void i40e_update_veb_stats(struct i40e_veb *veb);
+void i40e_update_eth_stats(struct i40e_vsi *vsi);
+struct rtnl_link_stats64 *i40e_get_vsi_stats_struct(struct i40e_vsi *vsi);
+int i40e_fetch_switch_configuration(struct i40e_pf *pf,
+				    bool printconfig);
+
+int i40e_add_del_fdir(struct i40e_vsi *vsi,
+		      struct i40e_fdir_filter *input, bool add);
+void i40e_fdir_check_and_reenable(struct i40e_pf *pf);
+u32 i40e_get_current_fd_count(struct i40e_pf *pf);
+u32 i40e_get_cur_guaranteed_fd_count(struct i40e_pf *pf);
+u32 i40e_get_current_atr_cnt(struct i40e_pf *pf);
+u32 i40e_get_global_fd_count(struct i40e_pf *pf);
+bool i40e_set_ntuple(struct i40e_pf *pf, netdev_features_t features);
+void i40e_set_ethtool_ops(struct net_device *netdev);
+struct i40e_mac_filter *i40e_add_filter(struct i40e_vsi *vsi,
+					const u8 *macaddr, s16 vlan);
+void __i40e_del_filter(struct i40e_vsi *vsi, struct i40e_mac_filter *f);
+void i40e_del_filter(struct i40e_vsi *vsi, const u8 *macaddr, s16 vlan);
+int i40e_sync_vsi_filters(struct i40e_vsi *vsi);
+struct i40e_vsi *i40e_vsi_setup(struct i40e_pf *pf, u8 type,
+				u16 uplink, u32 param1);
+int i40e_vsi_release(struct i40e_vsi *vsi);
+void i40e_service_event_schedule(struct i40e_pf *pf);
+void i40e_notify_client_of_vf_msg(struct i40e_vsi *vsi, u32 vf_id,
+				  u8 *msg, u16 len);
+
+int i40e_control_wait_tx_q(int seid, struct i40e_pf *pf, int pf_q, bool is_xdp,
+			   bool enable);
+int i40e_control_wait_rx_q(struct i40e_pf *pf, int pf_q, bool enable);
+int i40e_vsi_start_rings(struct i40e_vsi *vsi);
+void i40e_vsi_stop_rings(struct i40e_vsi *vsi);
+void i40e_vsi_stop_rings_no_wait(struct  i40e_vsi *vsi);
+int i40e_vsi_wait_queues_disabled(struct i40e_vsi *vsi);
+int i40e_reconfig_rss_queues(struct i40e_pf *pf, int queue_count);
+struct i40e_veb *i40e_veb_setup(struct i40e_pf *pf, u16 uplink_seid,
+				u16 downlink_seid, u8 enabled_tc);
+void i40e_veb_release(struct i40e_veb *veb);
+
+int i40e_veb_config_tc(struct i40e_veb *veb, u8 enabled_tc);
+int i40e_vsi_add_pvid(struct i40e_vsi *vsi, u16 vid);
+void i40e_vsi_remove_pvid(struct i40e_vsi *vsi);
+void i40e_vsi_reset_stats(struct i40e_vsi *vsi);
+void i40e_pf_reset_stats(struct i40e_pf *pf);
+#ifdef CONFIG_DEBUG_FS
+void i40e_dbg_pf_init(struct i40e_pf *pf);
+void i40e_dbg_pf_exit(struct i40e_pf *pf);
+void i40e_dbg_init(void);
+void i40e_dbg_exit(void);
+#else
+static inline void i40e_dbg_pf_init(struct i40e_pf *pf) {}
+static inline void i40e_dbg_pf_exit(struct i40e_pf *pf) {}
+static inline void i40e_dbg_init(void) {}
+static inline void i40e_dbg_exit(void) {}
+#endif /* CONFIG_DEBUG_FS*/
+/* needed by client drivers */
+int i40e_lan_add_device(struct i40e_pf *pf);
+int i40e_lan_del_device(struct i40e_pf *pf);
+void i40e_client_subtask(struct i40e_pf *pf);
+void i40e_notify_client_of_l2_param_changes(struct i40e_pf *pf);
+void i40e_notify_client_of_netdev_close(struct i40e_pf *pf, bool reset);
+void i40e_notify_client_of_vf_enable(struct i40e_pf *pf, u32 num_vfs);
+void i40e_notify_client_of_vf_reset(struct i40e_pf *pf, u32 vf_id);
+void i40e_client_update_msix_info(struct i40e_pf *pf);
+int i40e_vf_client_capable(struct i40e_pf *pf, u32 vf_id);
+/**
+ * i40e_irq_dynamic_enable - Enable default interrupt generation settings
+ * @vsi: pointer to a vsi
+ * @vector: enable a particular Hw Interrupt vector, without base_vector
+ **/
+static inline void i40e_irq_dynamic_enable(struct i40e_vsi *vsi, int vector)
+{
+	struct i40e_pf *pf = vsi->back;
+	struct i40e_hw *hw = &pf->hw;
+	u32 val;
+
+	val = I40E_PFINT_DYN_CTLN_INTENA_MASK |
+	      I40E_PFINT_DYN_CTLN_CLEARPBA_MASK |
+	      (I40E_ITR_NONE << I40E_PFINT_DYN_CTLN_ITR_INDX_SHIFT);
+	wr32(hw, I40E_PFINT_DYN_CTLN(vector + vsi->base_vector - 1), val);
+	/* skip the flush */
+}
+
+void i40e_irq_dynamic_disable_icr0(struct i40e_pf *pf);
+void i40e_irq_dynamic_enable_icr0(struct i40e_pf *pf);
+int i40e_ioctl(struct net_device *netdev, struct ifreq *ifr, int cmd);
+int i40e_open(struct net_device *netdev);
+int i40e_close(struct net_device *netdev);
+int i40e_vsi_open(struct i40e_vsi *vsi);
+void i40e_vlan_stripping_disable(struct i40e_vsi *vsi);
+int i40e_add_vlan_all_mac(struct i40e_vsi *vsi, s16 vid);
+int i40e_vsi_add_vlan(struct i40e_vsi *vsi, u16 vid);
+void i40e_rm_vlan_all_mac(struct i40e_vsi *vsi, s16 vid);
+void i40e_vsi_kill_vlan(struct i40e_vsi *vsi, u16 vid);
+struct i40e_mac_filter *i40e_add_mac_filter(struct i40e_vsi *vsi,
+					    const u8 *macaddr);
+int i40e_del_mac_filter(struct i40e_vsi *vsi, const u8 *macaddr);
+bool i40e_is_vsi_in_vlan(struct i40e_vsi *vsi);
+int i40e_count_filters(struct i40e_vsi *vsi);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 struct i40e_mac_filter *i40e_find_mac(struct i40e_vsi *vsi, const u8 *macaddr);
 void i40e_vlan_stripping_enable(struct i40e_vsi *vsi);
 static inline bool i40e_is_sw_dcb(struct i40e_pf *pf)

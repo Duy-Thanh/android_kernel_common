@@ -1079,6 +1079,7 @@ int main_loop_s(int listensock)
 	struct pollfd polls;
 	socklen_t salen;
 	int remotesock;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int err = 0;
 	int fd = 0;
 
@@ -1245,6 +1246,174 @@ void xdisconnect(int fd)
 	/*
 	 * wait until the pending data is completely flushed and all
 	 * the sockets reached the closed status.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int fd = 0;
+
+again:
+	polls.fd = listensock;
+	polls.events = POLLIN;
+
+	switch (poll(&polls, 1, poll_timeout)) {
+	case -1:
+		perror("poll");
+		return 1;
+	case 0:
+		fprintf(stderr, "%s: timed out\n", __func__);
+		close(listensock);
+		return 2;
+	}
+
+	salen = sizeof(ss);
+	remotesock = accept(listensock, (struct sockaddr *)&ss, &salen);
+	if (remotesock >= 0) {
+		maybe_close(listensock);
+		check_sockaddr(pf, &ss, salen);
+		check_getpeername(remotesock, &ss, salen);
+
+		if (cfg_input) {
+			fd = open(cfg_input, O_RDONLY);
+			if (fd < 0)
+				xerror("can't open %s: %d", cfg_input, errno);
+		}
+
+		SOCK_TEST_TCPULP(remotesock, 0);
+
+		memset(&winfo, 0, sizeof(winfo));
+		copyfd_io(fd, remotesock, 1, true, &winfo);
+	} else {
+		perror("accept");
+		return 1;
+	}
+
+	if (cfg_input)
+		close(fd);
+
+	if (--cfg_repeat > 0)
+		goto again;
+
+	return 0;
+}
+
+static void init_rng(void)
+{
+	unsigned int foo;
+
+	if (getrandom(&foo, sizeof(foo), 0) == -1) {
+		perror("getrandom");
+		exit(1);
+	}
+
+	srand(foo);
+}
+
+static void xsetsockopt(int fd, int level, int optname, const void *optval, socklen_t optlen)
+{
+	int err;
+
+	err = setsockopt(fd, level, optname, optval, optlen);
+	if (err) {
+		perror("setsockopt");
+		exit(1);
+	}
+}
+
+static void apply_cmsg_types(int fd, const struct cfg_cmsg_types *cmsg)
+{
+	static const unsigned int on = 1;
+
+	if (cmsg->timestampns)
+		xsetsockopt(fd, SOL_SOCKET, SO_TIMESTAMPNS_NEW, &on, sizeof(on));
+	if (cmsg->tcp_inq)
+		xsetsockopt(fd, IPPROTO_TCP, TCP_INQ, &on, sizeof(on));
+}
+
+static void parse_cmsg_types(const char *type)
+{
+	char *next = strchr(type, ',');
+	unsigned int len = 0;
+
+	cfg_cmsg_types.cmsg_enabled = 1;
+
+	if (next) {
+		parse_cmsg_types(next + 1);
+		len = next - type;
+	} else {
+		len = strlen(type);
+	}
+
+	if (strncmp(type, "TIMESTAMPNS", len) == 0) {
+		cfg_cmsg_types.timestampns = 1;
+		return;
+	}
+
+	if (strncmp(type, "TCPINQ", len) == 0) {
+		cfg_cmsg_types.tcp_inq = 1;
+		return;
+	}
+
+	fprintf(stderr, "Unrecognized cmsg option %s\n", type);
+	exit(1);
+}
+
+static void parse_setsock_options(const char *name)
+{
+	char *next = strchr(name, ',');
+	unsigned int len = 0;
+
+	if (next) {
+		parse_setsock_options(next + 1);
+		len = next - name;
+	} else {
+		len = strlen(name);
+	}
+
+	if (strncmp(name, "TRANSPARENT", len) == 0) {
+		cfg_sockopt_types.transparent = 1;
+		return;
+	}
+
+	if (strncmp(name, "MPTFO", len) == 0) {
+		cfg_sockopt_types.mptfo = 1;
+		return;
+	}
+
+	fprintf(stderr, "Unrecognized setsockopt option %s\n", name);
+	exit(1);
+}
+
+void xdisconnect(int fd)
+{
+	socklen_t addrlen = sizeof(struct sockaddr_storage);
+	struct sockaddr_storage addr, empty;
+	int msec_sleep = 10;
+	void *raw_addr;
+	int i, cmdlen;
+	char cmd[128];
+
+	/* get the local address and convert it to string */
+	if (getsockname(fd, (struct sockaddr *)&addr, &addrlen) < 0)
+		xerror("getsockname");
+
+	if (addr.ss_family == AF_INET)
+		raw_addr = &(((struct sockaddr_in *)&addr)->sin_addr);
+	else if (addr.ss_family == AF_INET6)
+		raw_addr = &(((struct sockaddr_in6 *)&addr)->sin6_addr);
+	else
+		xerror("bad family");
+
+	strcpy(cmd, "ss -M | grep -q ");
+	cmdlen = strlen(cmd);
+	if (!inet_ntop(addr.ss_family, raw_addr, &cmd[cmdlen],
+		       sizeof(cmd) - cmdlen))
+		xerror("inet_ntop");
+
+	shutdown(fd, SHUT_WR);
+
+	/*
+	 * wait until the pending data is completely flushed and all
+	 * the MPTCP sockets reached the closed status.
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	 * disconnect will bypass/ignore/drop any pending data.
 	 */
 	for (i = 0; ; i += msec_sleep) {

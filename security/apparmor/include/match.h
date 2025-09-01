@@ -135,6 +135,7 @@ aa_state_t aa_dfa_matchn_until(struct aa_dfa *dfa, aa_state_t start,
 
 void aa_dfa_free_kref(struct kref *kref);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* This needs to be a power of 2 */
 #define WB_HISTORY_SIZE 32
 struct match_workbuf {
@@ -144,6 +145,20 @@ struct match_workbuf {
 };
 #define DEFINE_MATCH_WB(N)		\
 struct match_workbuf N = {		\
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define WB_HISTORY_SIZE 24
+struct match_workbuf {
+	unsigned int count;
+	unsigned int pos;
+	unsigned int len;
+	unsigned int size;	/* power of 2, same as history size */
+	unsigned int history[WB_HISTORY_SIZE];
+};
+#define DEFINE_MATCH_WB(N)		\
+struct match_workbuf N = {		\
+	.count = 0,			\
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.pos = 0,			\
 	.len = 0,			\
 }

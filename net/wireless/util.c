@@ -820,6 +820,7 @@ bool ieee80211_is_valid_amsdu(struct sk_buff *skb, u8 mesh_hdr)
 }
 EXPORT_SYMBOL(ieee80211_is_valid_amsdu);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 /*
  * Detects if an MSDU frame was maliciously converted into an A-MSDU
@@ -911,6 +912,52 @@ void ieee80211_amsdu_to_8023s(struct sk_buff *skb, struct sk_buff_head *list,
 		 * checked when processing first subframe (offset == 0).
 		 */
 		if (offset == 0 && is_amsdu_aggregation_attack(&hdr.eth, skb, iftype))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void ieee80211_amsdu_to_8023s(struct sk_buff *skb, struct sk_buff_head *list,
+			      const u8 *addr, enum nl80211_iftype iftype,
+			      const unsigned int extra_headroom,
+			      const u8 *check_da, const u8 *check_sa,
+			      u8 mesh_control)
+{
+	unsigned int hlen = ALIGN(extra_headroom, 4);
+	struct sk_buff *frame = NULL;
+	int offset = 0;
+	struct {
+		struct ethhdr eth;
+		uint8_t flags;
+	} hdr;
+	bool reuse_frag = skb->head_frag && !skb_has_frag_list(skb);
+	bool reuse_skb = false;
+	bool last = false;
+	int copy_len = sizeof(hdr.eth);
+
+	if (iftype == NL80211_IFTYPE_MESH_POINT)
+		copy_len = sizeof(hdr);
+
+	while (!last) {
+		int remaining = skb->len - offset;
+		unsigned int subframe_len;
+		int len, mesh_len = 0;
+		u8 padding;
+
+		if (copy_len > remaining)
+			goto purge;
+
+		skb_copy_bits(skb, offset, &hdr, copy_len);
+		if (iftype == NL80211_IFTYPE_MESH_POINT)
+			mesh_len = __ieee80211_get_mesh_hdrlen(hdr.flags);
+		len = ieee80211_amsdu_subframe_length(&hdr.eth.h_proto, hdr.flags,
+						      mesh_control);
+		subframe_len = sizeof(struct ethhdr) + len;
+		padding = (4 - subframe_len) & 0x3;
+
+		/* the last MSDU has no padding */
+		if (subframe_len > remaining)
+			goto purge;
+		/* mitigate A-MSDU aggregation injection attacks */
+		if (ether_addr_equal(hdr.eth.h_dest, rfc1042_header))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			goto purge;
 
 		offset += sizeof(struct ethhdr);

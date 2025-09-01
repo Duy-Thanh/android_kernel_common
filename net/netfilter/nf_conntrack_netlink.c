@@ -860,6 +860,7 @@ errout:
 
 static int ctnetlink_done(struct netlink_callback *cb)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	kfree(cb->data);
 	return 0;
 }
@@ -1268,6 +1269,415 @@ out:
 		/* nf ct hash resize happened, now clear the leftover. */
 		if (cb->args[1] == last_id)
 			cb->args[1] = 0;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (cb->args[1])
+		nf_ct_put((struct nf_conn *)cb->args[1]);
+	kfree(cb->data);
+	return 0;
+}
+
+struct ctnetlink_filter_u32 {
+	u32 val;
+	u32 mask;
+};
+
+struct ctnetlink_filter {
+	u8 family;
+	bool zone_filter;
+
+	u_int32_t orig_flags;
+	u_int32_t reply_flags;
+
+	struct nf_conntrack_tuple orig;
+	struct nf_conntrack_tuple reply;
+	struct nf_conntrack_zone zone;
+
+	struct ctnetlink_filter_u32 mark;
+	struct ctnetlink_filter_u32 status;
+};
+
+static const struct nla_policy cta_filter_nla_policy[CTA_FILTER_MAX + 1] = {
+	[CTA_FILTER_ORIG_FLAGS]		= { .type = NLA_U32 },
+	[CTA_FILTER_REPLY_FLAGS]	= { .type = NLA_U32 },
+};
+
+static int ctnetlink_parse_filter(const struct nlattr *attr,
+				  struct ctnetlink_filter *filter)
+{
+	struct nlattr *tb[CTA_FILTER_MAX + 1];
+	int ret = 0;
+
+	ret = nla_parse_nested(tb, CTA_FILTER_MAX, attr, cta_filter_nla_policy,
+			       NULL);
+	if (ret)
+		return ret;
+
+	if (tb[CTA_FILTER_ORIG_FLAGS]) {
+		filter->orig_flags = nla_get_u32(tb[CTA_FILTER_ORIG_FLAGS]);
+		if (filter->orig_flags & ~CTA_FILTER_F_ALL)
+			return -EOPNOTSUPP;
+	}
+
+	if (tb[CTA_FILTER_REPLY_FLAGS]) {
+		filter->reply_flags = nla_get_u32(tb[CTA_FILTER_REPLY_FLAGS]);
+		if (filter->reply_flags & ~CTA_FILTER_F_ALL)
+			return -EOPNOTSUPP;
+	}
+
+	return 0;
+}
+
+static int ctnetlink_parse_zone(const struct nlattr *attr,
+				struct nf_conntrack_zone *zone);
+static int ctnetlink_parse_tuple_filter(const struct nlattr * const cda[],
+					 struct nf_conntrack_tuple *tuple,
+					 u32 type, u_int8_t l3num,
+					 struct nf_conntrack_zone *zone,
+					 u_int32_t flags);
+
+static int ctnetlink_filter_parse_mark(struct ctnetlink_filter_u32 *mark,
+				       const struct nlattr * const cda[])
+{
+#ifdef CONFIG_NF_CONNTRACK_MARK
+	if (cda[CTA_MARK]) {
+		mark->val = ntohl(nla_get_be32(cda[CTA_MARK]));
+
+		if (cda[CTA_MARK_MASK])
+			mark->mask = ntohl(nla_get_be32(cda[CTA_MARK_MASK]));
+		else
+			mark->mask = 0xffffffff;
+	} else if (cda[CTA_MARK_MASK]) {
+		return -EINVAL;
+	}
+#endif
+	return 0;
+}
+
+static int ctnetlink_filter_parse_status(struct ctnetlink_filter_u32 *status,
+					 const struct nlattr * const cda[])
+{
+	if (cda[CTA_STATUS]) {
+		status->val = ntohl(nla_get_be32(cda[CTA_STATUS]));
+		if (cda[CTA_STATUS_MASK])
+			status->mask = ntohl(nla_get_be32(cda[CTA_STATUS_MASK]));
+		else
+			status->mask = status->val;
+
+		/* status->val == 0? always true, else always false. */
+		if (status->mask == 0)
+			return -EINVAL;
+	} else if (cda[CTA_STATUS_MASK]) {
+		return -EINVAL;
+	}
+
+	/* CTA_STATUS is NLA_U32, if this fires UAPI needs to be extended */
+	BUILD_BUG_ON(__IPS_MAX_BIT >= 32);
+	return 0;
+}
+
+static struct ctnetlink_filter *
+ctnetlink_alloc_filter(const struct nlattr * const cda[], u8 family)
+{
+	struct ctnetlink_filter *filter;
+	int err;
+
+#ifndef CONFIG_NF_CONNTRACK_MARK
+	if (cda[CTA_MARK] || cda[CTA_MARK_MASK])
+		return ERR_PTR(-EOPNOTSUPP);
+#endif
+
+	filter = kzalloc(sizeof(*filter), GFP_KERNEL);
+	if (filter == NULL)
+		return ERR_PTR(-ENOMEM);
+
+	filter->family = family;
+
+	err = ctnetlink_filter_parse_mark(&filter->mark, cda);
+	if (err)
+		goto err_filter;
+
+	err = ctnetlink_filter_parse_status(&filter->status, cda);
+	if (err)
+		goto err_filter;
+
+	if (cda[CTA_ZONE]) {
+		err = ctnetlink_parse_zone(cda[CTA_ZONE], &filter->zone);
+		if (err < 0)
+			goto err_filter;
+		filter->zone_filter = true;
+	}
+
+	if (!cda[CTA_FILTER])
+		return filter;
+
+	err = ctnetlink_parse_filter(cda[CTA_FILTER], filter);
+	if (err < 0)
+		goto err_filter;
+
+	if (filter->orig_flags) {
+		if (!cda[CTA_TUPLE_ORIG]) {
+			err = -EINVAL;
+			goto err_filter;
+		}
+
+		err = ctnetlink_parse_tuple_filter(cda, &filter->orig,
+						   CTA_TUPLE_ORIG,
+						   filter->family,
+						   &filter->zone,
+						   filter->orig_flags);
+		if (err < 0)
+			goto err_filter;
+	}
+
+	if (filter->reply_flags) {
+		if (!cda[CTA_TUPLE_REPLY]) {
+			err = -EINVAL;
+			goto err_filter;
+		}
+
+		err = ctnetlink_parse_tuple_filter(cda, &filter->reply,
+						   CTA_TUPLE_REPLY,
+						   filter->family,
+						   &filter->zone,
+						   filter->reply_flags);
+		if (err < 0)
+			goto err_filter;
+	}
+
+	return filter;
+
+err_filter:
+	kfree(filter);
+
+	return ERR_PTR(err);
+}
+
+static bool ctnetlink_needs_filter(u8 family, const struct nlattr * const *cda)
+{
+	return family || cda[CTA_MARK] || cda[CTA_FILTER] || cda[CTA_STATUS] || cda[CTA_ZONE];
+}
+
+static int ctnetlink_start(struct netlink_callback *cb)
+{
+	const struct nlattr * const *cda = cb->data;
+	struct ctnetlink_filter *filter = NULL;
+	struct nfgenmsg *nfmsg = nlmsg_data(cb->nlh);
+	u8 family = nfmsg->nfgen_family;
+
+	if (ctnetlink_needs_filter(family, cda)) {
+		filter = ctnetlink_alloc_filter(cda, family);
+		if (IS_ERR(filter))
+			return PTR_ERR(filter);
+	}
+
+	cb->data = filter;
+	return 0;
+}
+
+static int ctnetlink_filter_match_tuple(struct nf_conntrack_tuple *filter_tuple,
+					struct nf_conntrack_tuple *ct_tuple,
+					u_int32_t flags, int family)
+{
+	switch (family) {
+	case NFPROTO_IPV4:
+		if ((flags & CTA_FILTER_FLAG(CTA_IP_SRC)) &&
+		    filter_tuple->src.u3.ip != ct_tuple->src.u3.ip)
+			return  0;
+
+		if ((flags & CTA_FILTER_FLAG(CTA_IP_DST)) &&
+		    filter_tuple->dst.u3.ip != ct_tuple->dst.u3.ip)
+			return  0;
+		break;
+	case NFPROTO_IPV6:
+		if ((flags & CTA_FILTER_FLAG(CTA_IP_SRC)) &&
+		    !ipv6_addr_cmp(&filter_tuple->src.u3.in6,
+				   &ct_tuple->src.u3.in6))
+			return 0;
+
+		if ((flags & CTA_FILTER_FLAG(CTA_IP_DST)) &&
+		    !ipv6_addr_cmp(&filter_tuple->dst.u3.in6,
+				   &ct_tuple->dst.u3.in6))
+			return 0;
+		break;
+	}
+
+	if ((flags & CTA_FILTER_FLAG(CTA_PROTO_NUM)) &&
+	    filter_tuple->dst.protonum != ct_tuple->dst.protonum)
+		return 0;
+
+	switch (ct_tuple->dst.protonum) {
+	case IPPROTO_TCP:
+	case IPPROTO_UDP:
+		if ((flags & CTA_FILTER_FLAG(CTA_PROTO_SRC_PORT)) &&
+		    filter_tuple->src.u.tcp.port != ct_tuple->src.u.tcp.port)
+			return 0;
+
+		if ((flags & CTA_FILTER_FLAG(CTA_PROTO_DST_PORT)) &&
+		    filter_tuple->dst.u.tcp.port != ct_tuple->dst.u.tcp.port)
+			return 0;
+		break;
+	case IPPROTO_ICMP:
+		if ((flags & CTA_FILTER_FLAG(CTA_PROTO_ICMP_TYPE)) &&
+		    filter_tuple->dst.u.icmp.type != ct_tuple->dst.u.icmp.type)
+			return 0;
+		if ((flags & CTA_FILTER_FLAG(CTA_PROTO_ICMP_CODE)) &&
+		    filter_tuple->dst.u.icmp.code != ct_tuple->dst.u.icmp.code)
+			return 0;
+		if ((flags & CTA_FILTER_FLAG(CTA_PROTO_ICMP_ID)) &&
+		    filter_tuple->src.u.icmp.id != ct_tuple->src.u.icmp.id)
+			return 0;
+		break;
+	case IPPROTO_ICMPV6:
+		if ((flags & CTA_FILTER_FLAG(CTA_PROTO_ICMPV6_TYPE)) &&
+		    filter_tuple->dst.u.icmp.type != ct_tuple->dst.u.icmp.type)
+			return 0;
+		if ((flags & CTA_FILTER_FLAG(CTA_PROTO_ICMPV6_CODE)) &&
+		    filter_tuple->dst.u.icmp.code != ct_tuple->dst.u.icmp.code)
+			return 0;
+		if ((flags & CTA_FILTER_FLAG(CTA_PROTO_ICMPV6_ID)) &&
+		    filter_tuple->src.u.icmp.id != ct_tuple->src.u.icmp.id)
+			return 0;
+		break;
+	}
+
+	return 1;
+}
+
+static int ctnetlink_filter_match(struct nf_conn *ct, void *data)
+{
+	struct ctnetlink_filter *filter = data;
+	struct nf_conntrack_tuple *tuple;
+	u32 status;
+
+	if (filter == NULL)
+		goto out;
+
+	/* Match entries of a given L3 protocol number.
+	 * If it is not specified, ie. l3proto == 0,
+	 * then match everything.
+	 */
+	if (filter->family && nf_ct_l3num(ct) != filter->family)
+		goto ignore_entry;
+
+	if (filter->zone_filter &&
+	    !nf_ct_zone_equal_any(ct, &filter->zone))
+		goto ignore_entry;
+
+	if (filter->orig_flags) {
+		tuple = nf_ct_tuple(ct, IP_CT_DIR_ORIGINAL);
+		if (!ctnetlink_filter_match_tuple(&filter->orig, tuple,
+						  filter->orig_flags,
+						  filter->family))
+			goto ignore_entry;
+	}
+
+	if (filter->reply_flags) {
+		tuple = nf_ct_tuple(ct, IP_CT_DIR_REPLY);
+		if (!ctnetlink_filter_match_tuple(&filter->reply, tuple,
+						  filter->reply_flags,
+						  filter->family))
+			goto ignore_entry;
+	}
+
+#ifdef CONFIG_NF_CONNTRACK_MARK
+	if ((READ_ONCE(ct->mark) & filter->mark.mask) != filter->mark.val)
+		goto ignore_entry;
+#endif
+	status = (u32)READ_ONCE(ct->status);
+	if ((status & filter->status.mask) != filter->status.val)
+		goto ignore_entry;
+
+out:
+	return 1;
+
+ignore_entry:
+	return 0;
+}
+
+static int
+ctnetlink_dump_table(struct sk_buff *skb, struct netlink_callback *cb)
+{
+	unsigned int flags = cb->data ? NLM_F_DUMP_FILTERED : 0;
+	struct net *net = sock_net(skb->sk);
+	struct nf_conn *ct, *last;
+	struct nf_conntrack_tuple_hash *h;
+	struct hlist_nulls_node *n;
+	struct nf_conn *nf_ct_evict[8];
+	int res, i;
+	spinlock_t *lockp;
+
+	last = (struct nf_conn *)cb->args[1];
+	i = 0;
+
+	local_bh_disable();
+	for (; cb->args[0] < nf_conntrack_htable_size; cb->args[0]++) {
+restart:
+		while (i) {
+			i--;
+			if (nf_ct_should_gc(nf_ct_evict[i]))
+				nf_ct_kill(nf_ct_evict[i]);
+			nf_ct_put(nf_ct_evict[i]);
+		}
+
+		lockp = &nf_conntrack_locks[cb->args[0] % CONNTRACK_LOCKS];
+		nf_conntrack_lock(lockp);
+		if (cb->args[0] >= nf_conntrack_htable_size) {
+			spin_unlock(lockp);
+			goto out;
+		}
+		hlist_nulls_for_each_entry(h, n, &nf_conntrack_hash[cb->args[0]],
+					   hnnode) {
+			ct = nf_ct_tuplehash_to_ctrack(h);
+			if (nf_ct_is_expired(ct)) {
+				/* need to defer nf_ct_kill() until lock is released */
+				if (i < ARRAY_SIZE(nf_ct_evict) &&
+				    refcount_inc_not_zero(&ct->ct_general.use))
+					nf_ct_evict[i++] = ct;
+				continue;
+			}
+
+			if (!net_eq(net, nf_ct_net(ct)))
+				continue;
+
+			if (NF_CT_DIRECTION(h) != IP_CT_DIR_ORIGINAL)
+				continue;
+
+			if (cb->args[1]) {
+				if (ct != last)
+					continue;
+				cb->args[1] = 0;
+			}
+			if (!ctnetlink_filter_match(ct, cb->data))
+				continue;
+
+			res =
+			ctnetlink_fill_info(skb, NETLINK_CB(cb->skb).portid,
+					    cb->nlh->nlmsg_seq,
+					    NFNL_MSG_TYPE(cb->nlh->nlmsg_type),
+					    ct, true, flags);
+			if (res < 0) {
+				nf_conntrack_get(&ct->ct_general);
+				cb->args[1] = (unsigned long)ct;
+				spin_unlock(lockp);
+				goto out;
+			}
+		}
+		spin_unlock(lockp);
+		if (cb->args[1]) {
+			cb->args[1] = 0;
+			goto restart;
+		}
+	}
+out:
+	local_bh_enable();
+	if (last) {
+		/* nf ct hash resize happened, now clear the leftover. */
+		if ((struct nf_conn *)cb->args[1] == last)
+			cb->args[1] = 0;
+
+		nf_ct_put(last);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	while (i) {

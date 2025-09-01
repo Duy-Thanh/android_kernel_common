@@ -370,6 +370,7 @@ nfs4_ff_layout_prepare_ds(struct pnfs_layout_segment *lseg,
 			  struct nfs4_ff_layout_mirror *mirror,
 			  bool fail_return)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct nfs4_pnfs_ds *ds;
 	struct inode *ino = lseg->pls_layout->plh_inode;
 	struct nfs_server *s = NFS_SERVER(ino);
@@ -419,6 +420,58 @@ noconnect:
 	if (fail_return || !ff_layout_has_available_ds(lseg))
 		pnfs_error_mark_layout_for_return(ino, lseg);
 	ds = ERR_PTR(status);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct nfs4_pnfs_ds *ds = NULL;
+	struct inode *ino = lseg->pls_layout->plh_inode;
+	struct nfs_server *s = NFS_SERVER(ino);
+	unsigned int max_payload;
+	int status;
+
+	if (!ff_layout_init_mirror_ds(lseg->pls_layout, mirror))
+		goto noconnect;
+
+	ds = mirror->mirror_ds->ds;
+	if (READ_ONCE(ds->ds_clp))
+		goto out;
+	/* matching smp_wmb() in _nfs4_pnfs_v3/4_ds_connect */
+	smp_rmb();
+
+	/* FIXME: For now we assume the server sent only one version of NFS
+	 * to use for the DS.
+	 */
+	status = nfs4_pnfs_ds_connect(s, ds, &mirror->mirror_ds->id_node,
+			     dataserver_timeo, dataserver_retrans,
+			     mirror->mirror_ds->ds_versions[0].version,
+			     mirror->mirror_ds->ds_versions[0].minor_version);
+
+	/* connect success, check rsize/wsize limit */
+	if (!status) {
+		/*
+		 * ds_clp is put in destroy_ds().
+		 * keep ds_clp even if DS is local, so that if local IO cannot
+		 * proceed somehow, we can fall back to NFS whenever we want.
+		 */
+		nfs_local_probe(ds->ds_clp);
+		max_payload =
+			nfs_block_size(rpc_max_payload(ds->ds_clp->cl_rpcclient),
+				       NULL);
+		if (mirror->mirror_ds->ds_versions[0].rsize > max_payload)
+			mirror->mirror_ds->ds_versions[0].rsize = max_payload;
+		if (mirror->mirror_ds->ds_versions[0].wsize > max_payload)
+			mirror->mirror_ds->ds_versions[0].wsize = max_payload;
+		goto out;
+	}
+noconnect:
+	ff_layout_track_ds_error(FF_LAYOUT_FROM_HDR(lseg->pls_layout),
+				 mirror, lseg->pls_range.offset,
+				 lseg->pls_range.length, NFS4ERR_NXIO,
+				 OP_ILLEGAL, GFP_NOIO);
+	ff_layout_send_layouterror(lseg);
+	if (fail_return || !ff_layout_has_available_ds(lseg))
+		pnfs_error_mark_layout_for_return(ino, lseg);
+	ds = NULL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 out:
 	return ds;
 }

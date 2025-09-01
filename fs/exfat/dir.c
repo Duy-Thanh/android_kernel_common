@@ -1015,6 +1015,7 @@ int exfat_find_dir_entry(struct super_block *sb, struct exfat_inode_info *ei,
 	struct exfat_hint_femp candi_empty;
 	struct exfat_sb_info *sbi = EXFAT_SB(sb);
 	int num_entries = exfat_calc_num_entries(p_uniname);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	unsigned int clu_count = 0;
 
 	if (num_entries < 0)
@@ -1258,6 +1259,240 @@ int exfat_count_dir_entries(struct super_block *sb, struct exfat_chain *p_dir)
 				return -EIO;
 			}
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (num_entries < 0)
+		return num_entries;
+
+	dentries_per_clu = sbi->dentries_per_clu;
+
+	exfat_chain_dup(&clu, p_dir);
+
+	if (hint_stat->eidx) {
+		clu.dir = hint_stat->clu;
+		dentry = hint_stat->eidx;
+		end_eidx = dentry;
+	}
+
+	exfat_reset_empty_hint(&ei->hint_femp);
+
+rewind:
+	order = 0;
+	step = DIRENT_STEP_FILE;
+	exfat_reset_empty_hint(&candi_empty);
+
+	while (clu.dir != EXFAT_EOF_CLUSTER) {
+		i = dentry & (dentries_per_clu - 1);
+		for (; i < dentries_per_clu; i++, dentry++) {
+			struct exfat_dentry *ep;
+			struct buffer_head *bh;
+
+			if (rewind && dentry == end_eidx)
+				goto not_found;
+
+			ep = exfat_get_dentry(sb, &clu, i, &bh);
+			if (!ep)
+				return -EIO;
+
+			entry_type = exfat_get_entry_type(ep);
+
+			if (entry_type == TYPE_UNUSED ||
+			    entry_type == TYPE_DELETED) {
+				step = DIRENT_STEP_FILE;
+
+				exfat_set_empty_hint(ei, &candi_empty, &clu,
+						dentry, num_entries,
+						entry_type);
+
+				brelse(bh);
+				if (entry_type == TYPE_UNUSED)
+					goto not_found;
+				continue;
+			}
+
+			exfat_reset_empty_hint(&candi_empty);
+
+			if (entry_type == TYPE_FILE || entry_type == TYPE_DIR) {
+				step = DIRENT_STEP_FILE;
+				hint_opt->clu = clu.dir;
+				hint_opt->eidx = i;
+				num_ext = ep->dentry.file.num_ext;
+				step = DIRENT_STEP_STRM;
+				brelse(bh);
+				continue;
+			}
+
+			if (entry_type == TYPE_STREAM) {
+				u16 name_hash;
+
+				if (step != DIRENT_STEP_STRM) {
+					step = DIRENT_STEP_FILE;
+					brelse(bh);
+					continue;
+				}
+				step = DIRENT_STEP_FILE;
+				name_hash = le16_to_cpu(
+						ep->dentry.stream.name_hash);
+				if (p_uniname->name_hash == name_hash &&
+				    p_uniname->name_len ==
+						ep->dentry.stream.name_len) {
+					step = DIRENT_STEP_NAME;
+					order = 1;
+					name_len = 0;
+				}
+				brelse(bh);
+				continue;
+			}
+
+			brelse(bh);
+			if (entry_type == TYPE_EXTEND) {
+				unsigned short entry_uniname[16], unichar;
+
+				if (step != DIRENT_STEP_NAME ||
+				    name_len >= MAX_NAME_LENGTH) {
+					step = DIRENT_STEP_FILE;
+					continue;
+				}
+
+				if (++order == 2)
+					uniname = p_uniname->name;
+				else
+					uniname += EXFAT_FILE_NAME_LEN;
+
+				len = exfat_extract_uni_name(ep, entry_uniname);
+				name_len += len;
+
+				unichar = *(uniname+len);
+				*(uniname+len) = 0x0;
+
+				if (exfat_uniname_ncmp(sb, uniname,
+					entry_uniname, len)) {
+					step = DIRENT_STEP_FILE;
+				} else if (p_uniname->name_len == name_len) {
+					if (order == num_ext)
+						goto found;
+					step = DIRENT_STEP_SECD;
+				}
+
+				*(uniname+len) = unichar;
+				continue;
+			}
+
+			if (entry_type &
+					(TYPE_CRITICAL_SEC | TYPE_BENIGN_SEC)) {
+				if (step == DIRENT_STEP_SECD) {
+					if (++order == num_ext)
+						goto found;
+					continue;
+				}
+			}
+			step = DIRENT_STEP_FILE;
+		}
+
+		if (clu.flags == ALLOC_NO_FAT_CHAIN) {
+			if (--clu.size > 0)
+				clu.dir++;
+			else
+				clu.dir = EXFAT_EOF_CLUSTER;
+		} else {
+			if (exfat_get_next_cluster(sb, &clu.dir))
+				return -EIO;
+		}
+	}
+
+not_found:
+	/*
+	 * We started at not 0 index,so we should try to find target
+	 * from 0 index to the index we started at.
+	 */
+	if (!rewind && end_eidx) {
+		rewind = 1;
+		dentry = 0;
+		clu.dir = p_dir->dir;
+		goto rewind;
+	}
+
+	/*
+	 * set the EXFAT_EOF_CLUSTER flag to avoid search
+	 * from the beginning again when allocated a new cluster
+	 */
+	if (ei->hint_femp.eidx == EXFAT_HINT_NONE) {
+		ei->hint_femp.cur.dir = EXFAT_EOF_CLUSTER;
+		ei->hint_femp.eidx = p_dir->size * dentries_per_clu;
+		ei->hint_femp.count = 0;
+	}
+
+	/* initialized hint_stat */
+	hint_stat->clu = p_dir->dir;
+	hint_stat->eidx = 0;
+	return -ENOENT;
+
+found:
+	/* next dentry we'll find is out of this cluster */
+	if (!((dentry + 1) & (dentries_per_clu - 1))) {
+		int ret = 0;
+
+		if (clu.flags == ALLOC_NO_FAT_CHAIN) {
+			if (--clu.size > 0)
+				clu.dir++;
+			else
+				clu.dir = EXFAT_EOF_CLUSTER;
+		} else {
+			ret = exfat_get_next_cluster(sb, &clu.dir);
+		}
+
+		if (ret || clu.dir == EXFAT_EOF_CLUSTER) {
+			/* just initialized hint_stat */
+			hint_stat->clu = p_dir->dir;
+			hint_stat->eidx = 0;
+			return (dentry - num_ext);
+		}
+	}
+
+	hint_stat->clu = clu.dir;
+	hint_stat->eidx = dentry + 1;
+	return dentry - num_ext;
+}
+
+int exfat_count_dir_entries(struct super_block *sb, struct exfat_chain *p_dir)
+{
+	int i, count = 0;
+	int dentries_per_clu;
+	unsigned int entry_type;
+	struct exfat_chain clu;
+	struct exfat_dentry *ep;
+	struct exfat_sb_info *sbi = EXFAT_SB(sb);
+	struct buffer_head *bh;
+
+	dentries_per_clu = sbi->dentries_per_clu;
+
+	exfat_chain_dup(&clu, p_dir);
+
+	while (clu.dir != EXFAT_EOF_CLUSTER) {
+		for (i = 0; i < dentries_per_clu; i++) {
+			ep = exfat_get_dentry(sb, &clu, i, &bh);
+			if (!ep)
+				return -EIO;
+			entry_type = exfat_get_entry_type(ep);
+			brelse(bh);
+
+			if (entry_type == TYPE_UNUSED)
+				return count;
+			if (entry_type != TYPE_DIR)
+				continue;
+			count++;
+		}
+
+		if (clu.flags == ALLOC_NO_FAT_CHAIN) {
+			if (--clu.size > 0)
+				clu.dir++;
+			else
+				clu.dir = EXFAT_EOF_CLUSTER;
+		} else {
+			if (exfat_get_next_cluster(sb, &(clu.dir)))
+				return -EIO;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 	}
 

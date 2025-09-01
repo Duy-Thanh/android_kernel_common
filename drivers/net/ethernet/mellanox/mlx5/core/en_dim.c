@@ -113,6 +113,7 @@ int mlx5e_dim_rx_change(struct mlx5e_rq *rq, bool enable)
 		__set_bit(MLX5E_RQ_STATE_DIM, &rq->state);
 	} else {
 		__clear_bit(MLX5E_RQ_STATE_DIM, &rq->state);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		synchronize_net();
 		mlx5e_dim_disable(rq->dim);
 		rq->dim = NULL;
@@ -141,6 +142,37 @@ int mlx5e_dim_tx_change(struct mlx5e_txqsq *sq, bool enable)
 	} else {
 		__clear_bit(MLX5E_SQ_STATE_DIM, &sq->state);
 		synchronize_net();
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+		mlx5e_dim_disable(rq->dim);
+		rq->dim = NULL;
+	}
+
+	return 0;
+}
+
+int mlx5e_dim_tx_change(struct mlx5e_txqsq *sq, bool enable)
+{
+	if (enable == !!sq->dim)
+		return 0;
+
+	if (enable) {
+		struct mlx5e_channel *c = sq->channel;
+		struct dim *dim;
+
+		dim = mlx5e_dim_enable(sq->mdev, mlx5e_tx_dim_work, c->cpu,
+				       c->tx_cq_moder.cq_period_mode, &sq->cq.mcq, sq);
+		if (IS_ERR(dim))
+			return PTR_ERR(dim);
+
+		sq->dim = dim;
+
+		__set_bit(MLX5E_SQ_STATE_DIM, &sq->state);
+	} else {
+		__clear_bit(MLX5E_SQ_STATE_DIM, &sq->state);
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		mlx5e_dim_disable(sq->dim);
 		sq->dim = NULL;
 	}

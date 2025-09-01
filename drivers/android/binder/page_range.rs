@@ -673,9 +673,25 @@ unsafe extern "C" fn rust_shrink_scan(
     let nr_to_scan = unsafe { (*sc).nr_to_scan };
     // SAFETY: Accessing the lru list is okay. Just an FFI call.
     unsafe {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
         bindings::list_lru_walk(
             list_lru,
             Some(bindings::rust_shrink_free_page_wrap),
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+        extern "C" {
+            fn rust_shrink_free_page_wrap(
+                item: *mut bindings::list_head,
+                list: *mut bindings::list_lru_one,
+                lock: *mut bindings::spinlock_t,
+                cb_arg: *mut kernel::ffi::c_void,
+            ) -> bindings::lru_status;
+        }
+
+        bindings::list_lru_walk(
+            list_lru,
+            Some(rust_shrink_free_page_wrap),
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
             ptr::null_mut(),
             nr_to_scan,
         )

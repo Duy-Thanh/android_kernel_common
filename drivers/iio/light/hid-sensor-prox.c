@@ -102,6 +102,7 @@ static int prox_read_raw(struct iio_dev *indio_dev,
 		ret_type = prox_state->scale_precision;
 		break;
 	case IIO_CHAN_INFO_OFFSET:
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		*val = 0;
 		ret_type = IIO_VAL_INT;
 		break;
@@ -230,6 +231,133 @@ static int prox_parse_report(struct platform_device *pdev,
 						      &st->prox_attr,
 						      &st->scale_pre_decml,
 						      &st->scale_post_decml);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		*val = hid_sensor_convert_exponent(
+				prox_state->prox_attr.unit_expo);
+		ret_type = IIO_VAL_INT;
+		break;
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		ret_type = hid_sensor_read_samp_freq_value(
+				&prox_state->common_attributes, val, val2);
+		break;
+	case IIO_CHAN_INFO_HYSTERESIS:
+		ret_type = hid_sensor_read_raw_hyst_value(
+				&prox_state->common_attributes, val, val2);
+		break;
+	default:
+		ret_type = -EINVAL;
+		break;
+	}
+
+	return ret_type;
+}
+
+/* Channel write_raw handler */
+static int prox_write_raw(struct iio_dev *indio_dev,
+			       struct iio_chan_spec const *chan,
+			       int val,
+			       int val2,
+			       long mask)
+{
+	struct prox_state *prox_state = iio_priv(indio_dev);
+	int ret = 0;
+
+	switch (mask) {
+	case IIO_CHAN_INFO_SAMP_FREQ:
+		ret = hid_sensor_write_samp_freq_value(
+				&prox_state->common_attributes, val, val2);
+		break;
+	case IIO_CHAN_INFO_HYSTERESIS:
+		ret = hid_sensor_write_raw_hyst_value(
+				&prox_state->common_attributes, val, val2);
+		break;
+	default:
+		ret = -EINVAL;
+	}
+
+	return ret;
+}
+
+static const struct iio_info prox_info = {
+	.read_raw = &prox_read_raw,
+	.write_raw = &prox_write_raw,
+};
+
+/* Function to push data to buffer */
+static void hid_sensor_push_data(struct iio_dev *indio_dev, const void *data,
+					int len)
+{
+	dev_dbg(&indio_dev->dev, "hid_sensor_push_data\n");
+	iio_push_to_buffers(indio_dev, data);
+}
+
+/* Callback handler to send event after all samples are received and captured */
+static int prox_proc_event(struct hid_sensor_hub_device *hsdev,
+				unsigned usage_id,
+				void *priv)
+{
+	struct iio_dev *indio_dev = platform_get_drvdata(priv);
+	struct prox_state *prox_state = iio_priv(indio_dev);
+
+	dev_dbg(&indio_dev->dev, "prox_proc_event\n");
+	if (atomic_read(&prox_state->common_attributes.data_ready))
+		hid_sensor_push_data(indio_dev,
+				&prox_state->human_presence,
+				sizeof(prox_state->human_presence));
+
+	return 0;
+}
+
+/* Capture samples in local storage */
+static int prox_capture_sample(struct hid_sensor_hub_device *hsdev,
+				unsigned usage_id,
+				size_t raw_len, char *raw_data,
+				void *priv)
+{
+	struct iio_dev *indio_dev = platform_get_drvdata(priv);
+	struct prox_state *prox_state = iio_priv(indio_dev);
+	int ret = -EINVAL;
+
+	switch (usage_id) {
+	case HID_USAGE_SENSOR_HUMAN_PRESENCE:
+		switch (raw_len) {
+		case 1:
+			prox_state->human_presence = *(u8 *)raw_data;
+			return 0;
+		case 4:
+			prox_state->human_presence = *(u32 *)raw_data;
+			return 0;
+		default:
+			break;
+		}
+		break;
+	}
+
+	return ret;
+}
+
+/* Parse report which is specific to an usage id*/
+static int prox_parse_report(struct platform_device *pdev,
+				struct hid_sensor_hub_device *hsdev,
+				struct iio_chan_spec *channels,
+				unsigned usage_id,
+				struct prox_state *st)
+{
+	int ret;
+
+	ret = sensor_hub_input_get_attribute_info(hsdev, HID_INPUT_REPORT,
+			usage_id,
+			HID_USAGE_SENSOR_HUMAN_PRESENCE,
+			&st->prox_attr);
+	if (ret < 0)
+		return ret;
+	prox_adjust_channel_bit_mask(channels, CHANNEL_SCAN_INDEX_PRESENCE,
+					st->prox_attr.size);
+
+	dev_dbg(&pdev->dev, "prox %x:%x\n", st->prox_attr.index,
+			st->prox_attr.report_id);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return ret;
 }

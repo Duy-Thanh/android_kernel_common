@@ -1398,6 +1398,7 @@ rzg2l_cpg_register_mod_clk(const struct rzg2l_mod_clk *mod,
 		goto fail;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (mod->is_coupled) {
 		struct mstp_clock *sibling;
 
@@ -1412,6 +1413,23 @@ rzg2l_cpg_register_mod_clk(const struct rzg2l_mod_clk *mod,
 	clk = clock->hw.clk;
 	dev_dbg(dev, "Module clock %pC at %lu Hz\n", clk, clk_get_rate(clk));
 	priv->clks[id] = clk;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	clk = clock->hw.clk;
+	dev_dbg(dev, "Module clock %pC at %lu Hz\n", clk, clk_get_rate(clk));
+	priv->clks[id] = clk;
+
+	if (mod->is_coupled) {
+		struct mstp_clock *sibling;
+
+		clock->enabled = rzg2l_mod_clock_is_enabled(&clock->hw);
+		sibling = rzg2l_mod_clock_get_sibling(clock, priv);
+		if (sibling) {
+			clock->sibling = sibling;
+			sibling->sibling = clock;
+		}
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return;
 

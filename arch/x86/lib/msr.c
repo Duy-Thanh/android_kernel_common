@@ -103,6 +103,7 @@ int msr_set_bit(u32 msr, u8 bit)
 {
 	return __flip_bit(msr, bit, true);
 }
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 EXPORT_SYMBOL_GPL(msr_set_bit);
 
 /**
@@ -120,6 +121,24 @@ int msr_clear_bit(u32 msr, u8 bit)
 	return __flip_bit(msr, bit, false);
 }
 EXPORT_SYMBOL_GPL(msr_clear_bit);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+/**
+ * msr_clear_bit - Clear @bit in a MSR @msr.
+ * @msr: MSR to write
+ * @bit: bit number to clear
+ *
+ * Return:
+ * * < 0: An error was encountered.
+ * * = 0: Bit was already cleared.
+ * * > 0: Hardware accepted the MSR write.
+ */
+int msr_clear_bit(u32 msr, u8 bit)
+{
+	return __flip_bit(msr, bit, false);
+}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #ifdef CONFIG_TRACEPOINTS
 void do_trace_write_msr(unsigned int msr, u64 val, int failed)

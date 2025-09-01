@@ -1161,6 +1161,7 @@ static int sc16is7xx_startup(struct uart_port *port)
 	sc16is7xx_port_write(port, SC16IS7XX_FCR_REG,
 			     SC16IS7XX_FCR_FIFO_BIT);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* Enable TCR/TLR */
 	sc16is7xx_port_update(port, SC16IS7XX_MCR_REG,
 			      SC16IS7XX_MCR_TCRTLR_BIT,
@@ -1174,6 +1175,32 @@ static int sc16is7xx_startup(struct uart_port *port)
 
 	/* Disable TCR/TLR access */
 	sc16is7xx_port_update(port, SC16IS7XX_MCR_REG, SC16IS7XX_MCR_TCRTLR_BIT, 0);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* Enable EFR */
+	sc16is7xx_port_write(port, SC16IS7XX_LCR_REG,
+			     SC16IS7XX_LCR_CONF_MODE_B);
+
+	regcache_cache_bypass(one->regmap, true);
+
+	/* Enable write access to enhanced features and internal clock div */
+	sc16is7xx_port_update(port, SC16IS7XX_EFR_REG,
+			      SC16IS7XX_EFR_ENABLE_BIT,
+			      SC16IS7XX_EFR_ENABLE_BIT);
+
+	/* Enable TCR/TLR */
+	sc16is7xx_port_update(port, SC16IS7XX_MCR_REG,
+			      SC16IS7XX_MCR_TCRTLR_BIT,
+			      SC16IS7XX_MCR_TCRTLR_BIT);
+
+	/* Configure flow control levels */
+	/* Flow control halt level 48, resume level 24 */
+	sc16is7xx_port_write(port, SC16IS7XX_TCR_REG,
+			     SC16IS7XX_TCR_RX_RESUME(24) |
+			     SC16IS7XX_TCR_RX_HALT(48));
+
+	regcache_cache_bypass(one->regmap, false);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* Now, initialize the UART */
 	sc16is7xx_port_write(port, SC16IS7XX_LCR_REG, SC16IS7XX_LCR_WORD_LEN_8);

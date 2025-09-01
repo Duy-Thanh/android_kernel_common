@@ -1156,6 +1156,7 @@ static void mlx5e_lro_update_tcp_hdr(struct mlx5_cqe64 *cqe, struct tcphdr *tcp)
 	}
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static unsigned int mlx5e_lro_update_hdr(struct sk_buff *skb,
 					 struct mlx5_cqe64 *cqe,
 					 u32 cqe_bcnt)
@@ -1570,6 +1571,418 @@ static inline void mlx5e_build_rx_skb(struct mlx5_cqe64 *cqe,
 
 		skb_shinfo(skb)->gso_size = DIV_ROUND_UP(cqe_bcnt - hdrlen, lro_num_seg);
 		skb_shinfo(skb)->gso_segs = lro_num_seg;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void mlx5e_lro_update_hdr(struct sk_buff *skb, struct mlx5_cqe64 *cqe,
+				 u32 cqe_bcnt)
+{
+	struct ethhdr	*eth = (struct ethhdr *)(skb->data);
+	struct tcphdr	*tcp;
+	int network_depth = 0;
+	__wsum check;
+	__be16 proto;
+	u16 tot_len;
+	void *ip_p;
+
+	proto = __vlan_get_protocol(skb, eth->h_proto, &network_depth);
+
+	tot_len = cqe_bcnt - network_depth;
+	ip_p = skb->data + network_depth;
+
+	if (proto == htons(ETH_P_IP)) {
+		struct iphdr *ipv4 = ip_p;
+
+		tcp = ip_p + sizeof(struct iphdr);
+		skb_shinfo(skb)->gso_type = SKB_GSO_TCPV4;
+
+		ipv4->ttl               = cqe->lro.min_ttl;
+		ipv4->tot_len           = cpu_to_be16(tot_len);
+		ipv4->check             = 0;
+		ipv4->check             = ip_fast_csum((unsigned char *)ipv4,
+						       ipv4->ihl);
+
+		mlx5e_lro_update_tcp_hdr(cqe, tcp);
+		check = csum_partial(tcp, tcp->doff * 4,
+				     csum_unfold((__force __sum16)cqe->check_sum));
+		/* Almost done, don't forget the pseudo header */
+		tcp->check = tcp_v4_check(tot_len - sizeof(struct iphdr),
+					  ipv4->saddr, ipv4->daddr, check);
+	} else {
+		u16 payload_len = tot_len - sizeof(struct ipv6hdr);
+		struct ipv6hdr *ipv6 = ip_p;
+
+		tcp = ip_p + sizeof(struct ipv6hdr);
+		skb_shinfo(skb)->gso_type = SKB_GSO_TCPV6;
+
+		ipv6->hop_limit         = cqe->lro.min_ttl;
+		ipv6->payload_len       = cpu_to_be16(payload_len);
+
+		mlx5e_lro_update_tcp_hdr(cqe, tcp);
+		check = csum_partial(tcp, tcp->doff * 4,
+				     csum_unfold((__force __sum16)cqe->check_sum));
+		/* Almost done, don't forget the pseudo header */
+		tcp->check = tcp_v6_check(payload_len, &ipv6->saddr,
+					  &ipv6->daddr, check);
+	}
+}
+
+static void *mlx5e_shampo_get_packet_hd(struct mlx5e_rq *rq, u16 header_index)
+{
+	struct mlx5e_dma_info *last_head = &rq->mpwqe.shampo->info[header_index];
+	u16 head_offset = (last_head->addr & (PAGE_SIZE - 1)) + rq->buff.headroom;
+
+	return page_address(last_head->frag_page->page) + head_offset;
+}
+
+static void mlx5e_shampo_update_ipv4_udp_hdr(struct mlx5e_rq *rq, struct iphdr *ipv4)
+{
+	int udp_off = rq->hw_gro_data->fk.control.thoff;
+	struct sk_buff *skb = rq->hw_gro_data->skb;
+	struct udphdr *uh;
+
+	uh = (struct udphdr *)(skb->data + udp_off);
+	uh->len = htons(skb->len - udp_off);
+
+	if (uh->check)
+		uh->check = ~udp_v4_check(skb->len - udp_off, ipv4->saddr,
+					  ipv4->daddr, 0);
+
+	skb->csum_start = (unsigned char *)uh - skb->head;
+	skb->csum_offset = offsetof(struct udphdr, check);
+
+	skb_shinfo(skb)->gso_type |= SKB_GSO_UDP_L4;
+}
+
+static void mlx5e_shampo_update_ipv6_udp_hdr(struct mlx5e_rq *rq, struct ipv6hdr *ipv6)
+{
+	int udp_off = rq->hw_gro_data->fk.control.thoff;
+	struct sk_buff *skb = rq->hw_gro_data->skb;
+	struct udphdr *uh;
+
+	uh = (struct udphdr *)(skb->data + udp_off);
+	uh->len = htons(skb->len - udp_off);
+
+	if (uh->check)
+		uh->check = ~udp_v6_check(skb->len - udp_off, &ipv6->saddr,
+					  &ipv6->daddr, 0);
+
+	skb->csum_start = (unsigned char *)uh - skb->head;
+	skb->csum_offset = offsetof(struct udphdr, check);
+
+	skb_shinfo(skb)->gso_type |= SKB_GSO_UDP_L4;
+}
+
+static void mlx5e_shampo_update_fin_psh_flags(struct mlx5e_rq *rq, struct mlx5_cqe64 *cqe,
+					      struct tcphdr *skb_tcp_hd)
+{
+	u16 header_index = mlx5e_shampo_get_cqe_header_index(rq, cqe);
+	struct tcphdr *last_tcp_hd;
+	void *last_hd_addr;
+
+	last_hd_addr = mlx5e_shampo_get_packet_hd(rq, header_index);
+	last_tcp_hd =  last_hd_addr + ETH_HLEN + rq->hw_gro_data->fk.control.thoff;
+	tcp_flag_word(skb_tcp_hd) |= tcp_flag_word(last_tcp_hd) & (TCP_FLAG_FIN | TCP_FLAG_PSH);
+}
+
+static void mlx5e_shampo_update_ipv4_tcp_hdr(struct mlx5e_rq *rq, struct iphdr *ipv4,
+					     struct mlx5_cqe64 *cqe, bool match)
+{
+	int tcp_off = rq->hw_gro_data->fk.control.thoff;
+	struct sk_buff *skb = rq->hw_gro_data->skb;
+	struct tcphdr *tcp;
+
+	tcp = (struct tcphdr *)(skb->data + tcp_off);
+	if (match)
+		mlx5e_shampo_update_fin_psh_flags(rq, cqe, tcp);
+
+	tcp->check = ~tcp_v4_check(skb->len - tcp_off, ipv4->saddr,
+				   ipv4->daddr, 0);
+	skb_shinfo(skb)->gso_type |= SKB_GSO_TCPV4;
+	if (ntohs(ipv4->id) == rq->hw_gro_data->second_ip_id)
+		skb_shinfo(skb)->gso_type |= SKB_GSO_TCP_FIXEDID;
+
+	skb->csum_start = (unsigned char *)tcp - skb->head;
+	skb->csum_offset = offsetof(struct tcphdr, check);
+
+	if (tcp->cwr)
+		skb_shinfo(skb)->gso_type |= SKB_GSO_TCP_ECN;
+}
+
+static void mlx5e_shampo_update_ipv6_tcp_hdr(struct mlx5e_rq *rq, struct ipv6hdr *ipv6,
+					     struct mlx5_cqe64 *cqe, bool match)
+{
+	int tcp_off = rq->hw_gro_data->fk.control.thoff;
+	struct sk_buff *skb = rq->hw_gro_data->skb;
+	struct tcphdr *tcp;
+
+	tcp = (struct tcphdr *)(skb->data + tcp_off);
+	if (match)
+		mlx5e_shampo_update_fin_psh_flags(rq, cqe, tcp);
+
+	tcp->check = ~tcp_v6_check(skb->len - tcp_off, &ipv6->saddr,
+				   &ipv6->daddr, 0);
+	skb_shinfo(skb)->gso_type |= SKB_GSO_TCPV6;
+	skb->csum_start = (unsigned char *)tcp - skb->head;
+	skb->csum_offset = offsetof(struct tcphdr, check);
+
+	if (tcp->cwr)
+		skb_shinfo(skb)->gso_type |= SKB_GSO_TCP_ECN;
+}
+
+static void mlx5e_shampo_update_hdr(struct mlx5e_rq *rq, struct mlx5_cqe64 *cqe, bool match)
+{
+	bool is_ipv4 = (rq->hw_gro_data->fk.basic.n_proto == htons(ETH_P_IP));
+	struct sk_buff *skb = rq->hw_gro_data->skb;
+
+	skb_shinfo(skb)->gso_segs = NAPI_GRO_CB(skb)->count;
+	skb->ip_summed = CHECKSUM_PARTIAL;
+
+	if (is_ipv4) {
+		int nhoff = rq->hw_gro_data->fk.control.thoff - sizeof(struct iphdr);
+		struct iphdr *ipv4 = (struct iphdr *)(skb->data + nhoff);
+		__be16 newlen = htons(skb->len - nhoff);
+
+		csum_replace2(&ipv4->check, ipv4->tot_len, newlen);
+		ipv4->tot_len = newlen;
+
+		if (ipv4->protocol == IPPROTO_TCP)
+			mlx5e_shampo_update_ipv4_tcp_hdr(rq, ipv4, cqe, match);
+		else
+			mlx5e_shampo_update_ipv4_udp_hdr(rq, ipv4);
+	} else {
+		int nhoff = rq->hw_gro_data->fk.control.thoff - sizeof(struct ipv6hdr);
+		struct ipv6hdr *ipv6 = (struct ipv6hdr *)(skb->data + nhoff);
+
+		ipv6->payload_len = htons(skb->len - nhoff - sizeof(*ipv6));
+
+		if (ipv6->nexthdr == IPPROTO_TCP)
+			mlx5e_shampo_update_ipv6_tcp_hdr(rq, ipv6, cqe, match);
+		else
+			mlx5e_shampo_update_ipv6_udp_hdr(rq, ipv6);
+	}
+}
+
+static inline void mlx5e_skb_set_hash(struct mlx5_cqe64 *cqe,
+				      struct sk_buff *skb)
+{
+	u8 cht = cqe->rss_hash_type;
+	int ht = (cht & CQE_RSS_HTYPE_L4) ? PKT_HASH_TYPE_L4 :
+		 (cht & CQE_RSS_HTYPE_IP) ? PKT_HASH_TYPE_L3 :
+					    PKT_HASH_TYPE_NONE;
+	skb_set_hash(skb, be32_to_cpu(cqe->rss_hash_result), ht);
+}
+
+static inline bool is_last_ethertype_ip(struct sk_buff *skb, int *network_depth,
+					__be16 *proto)
+{
+	*proto = ((struct ethhdr *)skb->data)->h_proto;
+	*proto = __vlan_get_protocol(skb, *proto, network_depth);
+
+	if (*proto == htons(ETH_P_IP))
+		return pskb_may_pull(skb, *network_depth + sizeof(struct iphdr));
+
+	if (*proto == htons(ETH_P_IPV6))
+		return pskb_may_pull(skb, *network_depth + sizeof(struct ipv6hdr));
+
+	return false;
+}
+
+static inline void mlx5e_enable_ecn(struct mlx5e_rq *rq, struct sk_buff *skb)
+{
+	int network_depth = 0;
+	__be16 proto;
+	void *ip;
+	int rc;
+
+	if (unlikely(!is_last_ethertype_ip(skb, &network_depth, &proto)))
+		return;
+
+	ip = skb->data + network_depth;
+	rc = ((proto == htons(ETH_P_IP)) ? IP_ECN_set_ce((struct iphdr *)ip) :
+					 IP6_ECN_set_ce(skb, (struct ipv6hdr *)ip));
+
+	rq->stats->ecn_mark += !!rc;
+}
+
+static u8 get_ip_proto(struct sk_buff *skb, int network_depth, __be16 proto)
+{
+	void *ip_p = skb->data + network_depth;
+
+	return (proto == htons(ETH_P_IP)) ? ((struct iphdr *)ip_p)->protocol :
+					    ((struct ipv6hdr *)ip_p)->nexthdr;
+}
+
+#define short_frame(size) ((size) <= ETH_ZLEN + ETH_FCS_LEN)
+
+#define MAX_PADDING 8
+
+static void
+tail_padding_csum_slow(struct sk_buff *skb, int offset, int len,
+		       struct mlx5e_rq_stats *stats)
+{
+	stats->csum_complete_tail_slow++;
+	skb->csum = csum_block_add(skb->csum,
+				   skb_checksum(skb, offset, len, 0),
+				   offset);
+}
+
+static void
+tail_padding_csum(struct sk_buff *skb, int offset,
+		  struct mlx5e_rq_stats *stats)
+{
+	u8 tail_padding[MAX_PADDING];
+	int len = skb->len - offset;
+	void *tail;
+
+	if (unlikely(len > MAX_PADDING)) {
+		tail_padding_csum_slow(skb, offset, len, stats);
+		return;
+	}
+
+	tail = skb_header_pointer(skb, offset, len, tail_padding);
+	if (unlikely(!tail)) {
+		tail_padding_csum_slow(skb, offset, len, stats);
+		return;
+	}
+
+	stats->csum_complete_tail++;
+	skb->csum = csum_block_add(skb->csum, csum_partial(tail, len, 0), offset);
+}
+
+static void
+mlx5e_skb_csum_fixup(struct sk_buff *skb, int network_depth, __be16 proto,
+		     struct mlx5e_rq_stats *stats)
+{
+	struct ipv6hdr *ip6;
+	struct iphdr   *ip4;
+	int pkt_len;
+
+	/* Fixup vlan headers, if any */
+	if (network_depth > ETH_HLEN)
+		/* CQE csum is calculated from the IP header and does
+		 * not cover VLAN headers (if present). This will add
+		 * the checksum manually.
+		 */
+		skb->csum = csum_partial(skb->data + ETH_HLEN,
+					 network_depth - ETH_HLEN,
+					 skb->csum);
+
+	/* Fixup tail padding, if any */
+	switch (proto) {
+	case htons(ETH_P_IP):
+		ip4 = (struct iphdr *)(skb->data + network_depth);
+		pkt_len = network_depth + ntohs(ip4->tot_len);
+		break;
+	case htons(ETH_P_IPV6):
+		ip6 = (struct ipv6hdr *)(skb->data + network_depth);
+		pkt_len = network_depth + sizeof(*ip6) + ntohs(ip6->payload_len);
+		break;
+	default:
+		return;
+	}
+
+	if (likely(pkt_len >= skb->len))
+		return;
+
+	tail_padding_csum(skb, pkt_len, stats);
+}
+
+static inline void mlx5e_handle_csum(struct net_device *netdev,
+				     struct mlx5_cqe64 *cqe,
+				     struct mlx5e_rq *rq,
+				     struct sk_buff *skb,
+				     bool   lro)
+{
+	struct mlx5e_rq_stats *stats = rq->stats;
+	int network_depth = 0;
+	__be16 proto;
+
+	if (unlikely(!(netdev->features & NETIF_F_RXCSUM)))
+		goto csum_none;
+
+	if (lro) {
+		skb->ip_summed = CHECKSUM_UNNECESSARY;
+		stats->csum_unnecessary++;
+		return;
+	}
+
+	/* True when explicitly set via priv flag, or XDP prog is loaded */
+	if (test_bit(MLX5E_RQ_STATE_NO_CSUM_COMPLETE, &rq->state) ||
+	    get_cqe_tls_offload(cqe))
+		goto csum_unnecessary;
+
+	/* CQE csum doesn't cover padding octets in short ethernet
+	 * frames. And the pad field is appended prior to calculating
+	 * and appending the FCS field.
+	 *
+	 * Detecting these padded frames requires to verify and parse
+	 * IP headers, so we simply force all those small frames to be
+	 * CHECKSUM_UNNECESSARY even if they are not padded.
+	 */
+	if (short_frame(skb->len))
+		goto csum_unnecessary;
+
+	if (likely(is_last_ethertype_ip(skb, &network_depth, &proto))) {
+		if (unlikely(get_ip_proto(skb, network_depth, proto) == IPPROTO_SCTP))
+			goto csum_unnecessary;
+
+		stats->csum_complete++;
+		skb->ip_summed = CHECKSUM_COMPLETE;
+		skb->csum = csum_unfold((__force __sum16)cqe->check_sum);
+
+		if (test_bit(MLX5E_RQ_STATE_CSUM_FULL, &rq->state))
+			return; /* CQE csum covers all received bytes */
+
+		/* csum might need some fixups ...*/
+		mlx5e_skb_csum_fixup(skb, network_depth, proto, stats);
+		return;
+	}
+
+csum_unnecessary:
+	if (likely((cqe->hds_ip_ext & CQE_L3_OK) &&
+		   (cqe->hds_ip_ext & CQE_L4_OK))) {
+		skb->ip_summed = CHECKSUM_UNNECESSARY;
+		if (cqe_is_tunneled(cqe)) {
+			skb->csum_level = 1;
+			skb->encapsulation = 1;
+			stats->csum_unnecessary_inner++;
+			return;
+		}
+		stats->csum_unnecessary++;
+		return;
+	}
+csum_none:
+	skb->ip_summed = CHECKSUM_NONE;
+	stats->csum_none++;
+}
+
+#define MLX5E_CE_BIT_MASK 0x80
+
+static inline void mlx5e_build_rx_skb(struct mlx5_cqe64 *cqe,
+				      u32 cqe_bcnt,
+				      struct mlx5e_rq *rq,
+				      struct sk_buff *skb)
+{
+	u8 lro_num_seg = be32_to_cpu(cqe->srqn) >> 24;
+	struct mlx5e_rq_stats *stats = rq->stats;
+	struct net_device *netdev = rq->netdev;
+
+	skb->mac_len = ETH_HLEN;
+
+	if (unlikely(get_cqe_tls_offload(cqe)))
+		mlx5e_ktls_handle_rx_skb(rq, skb, cqe, &cqe_bcnt);
+
+	if (unlikely(mlx5_ipsec_is_rx_flow(cqe)))
+		mlx5e_ipsec_offload_handle_rx_skb(netdev, skb,
+						  be32_to_cpu(cqe->ft_metadata));
+
+	if (unlikely(mlx5e_macsec_is_rx_flow(cqe)))
+		mlx5e_macsec_offload_handle_rx_skb(netdev, skb, cqe);
+
+	if (lro_num_seg > 1) {
+		mlx5e_lro_update_hdr(skb, cqe, cqe_bcnt);
+		skb_shinfo(skb)->gso_size = DIV_ROUND_UP(cqe_bcnt, lro_num_seg);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		/* Subtract one since we already counted this as one
 		 * "regular" packet in mlx5e_complete_rx_cqe()
 		 */

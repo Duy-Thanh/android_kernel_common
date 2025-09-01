@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <dirent.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <assert.h>
 #include "subcmd-util.h"
 #include "help.h"
@@ -105,6 +106,100 @@ void exclude_cmds(struct cmdnames *cmds, struct cmdnames *excludes)
 	}
 	for (ci = cj; ci < cmds->cnt; ci++)
 		assert(cmds->names[ci] == NULL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include "subcmd-util.h"
+#include "help.h"
+#include "exec-cmd.h"
+
+void add_cmdname(struct cmdnames *cmds, const char *name, size_t len)
+{
+	struct cmdname *ent = malloc(sizeof(*ent) + len + 1);
+	if (!ent)
+		return;
+
+	ent->len = len;
+	memcpy(ent->name, name, len);
+	ent->name[len] = 0;
+
+	ALLOC_GROW(cmds->names, cmds->cnt + 1, cmds->alloc);
+	cmds->names[cmds->cnt++] = ent;
+}
+
+void clean_cmdnames(struct cmdnames *cmds)
+{
+	unsigned int i;
+
+	for (i = 0; i < cmds->cnt; ++i)
+		zfree(&cmds->names[i]);
+	zfree(&cmds->names);
+	cmds->cnt = 0;
+	cmds->alloc = 0;
+}
+
+int cmdname_compare(const void *a_, const void *b_)
+{
+	struct cmdname *a = *(struct cmdname **)a_;
+	struct cmdname *b = *(struct cmdname **)b_;
+	return strcmp(a->name, b->name);
+}
+
+void uniq(struct cmdnames *cmds)
+{
+	unsigned int i, j;
+
+	if (!cmds->cnt)
+		return;
+
+	for (i = 1; i < cmds->cnt; i++) {
+		if (!strcmp(cmds->names[i]->name, cmds->names[i-1]->name))
+			zfree(&cmds->names[i - 1]);
+	}
+	for (i = 0, j = 0; i < cmds->cnt; i++) {
+		if (cmds->names[i]) {
+			if (i == j)
+				j++;
+			else
+				cmds->names[j++] = cmds->names[i];
+		}
+	}
+	cmds->cnt = j;
+	while (j < i)
+		cmds->names[j++] = NULL;
+}
+
+void exclude_cmds(struct cmdnames *cmds, struct cmdnames *excludes)
+{
+	size_t ci, cj, ei;
+	int cmp;
+
+	ci = cj = ei = 0;
+	while (ci < cmds->cnt && ei < excludes->cnt) {
+		cmp = strcmp(cmds->names[ci]->name, excludes->names[ei]->name);
+		if (cmp < 0) {
+			if (ci == cj) {
+				ci++;
+				cj++;
+			} else {
+				zfree(&cmds->names[cj]);
+				cmds->names[cj++] = cmds->names[ci++];
+			}
+		} else if (cmp == 0) {
+			ci++;
+			ei++;
+		} else if (cmp > 0) {
+			ei++;
+		}
+	}
+	if (ci != cj) {
+		while (ci < cmds->cnt) {
+			zfree(&cmds->names[cj]);
+			cmds->names[cj++] = cmds->names[ci++];
+		}
+	}
+	for (ci = cj; ci < cmds->cnt; ci++)
+		zfree(&cmds->names[ci]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	cmds->cnt = cj;
 }
 

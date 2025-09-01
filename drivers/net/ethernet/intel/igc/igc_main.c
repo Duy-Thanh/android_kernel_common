@@ -6987,6 +6987,7 @@ static int igc_probe(struct pci_dev *pdev,
 	adapter->port_num = hw->bus.func;
 	adapter->msg_enable = netif_msg_init(debug, DEFAULT_MSG_ENABLE);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* PCI config space info */
 	hw->vendor_id = pdev->vendor;
 	hw->device_id = pdev->device;
@@ -7233,6 +7234,249 @@ static void igc_remove(struct pci_dev *pdev)
 	hrtimer_cancel(&adapter->hrtimer);
 
 	if (IS_ENABLED(CONFIG_IGC_LEDS) && adapter->leds_available)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* Disable ASPM L1.2 on I226 devices to avoid packet loss */
+	if (igc_is_device_id_i226(hw))
+		pci_disable_link_state(pdev, PCIE_LINK_STATE_L1_2);
+
+	err = pci_save_state(pdev);
+	if (err)
+		goto err_ioremap;
+
+	err = -EIO;
+	adapter->io_addr = ioremap(pci_resource_start(pdev, 0),
+				   pci_resource_len(pdev, 0));
+	if (!adapter->io_addr)
+		goto err_ioremap;
+
+	/* hw->hw_addr can be zeroed, so use adapter->io_addr for unmap */
+	hw->hw_addr = adapter->io_addr;
+
+	netdev->netdev_ops = &igc_netdev_ops;
+	netdev->xdp_metadata_ops = &igc_xdp_metadata_ops;
+	netdev->xsk_tx_metadata_ops = &igc_xsk_tx_metadata_ops;
+	igc_ethtool_set_ops(netdev);
+	netdev->watchdog_timeo = 5 * HZ;
+
+	netdev->mem_start = pci_resource_start(pdev, 0);
+	netdev->mem_end = pci_resource_end(pdev, 0);
+
+	/* PCI config space info */
+	hw->vendor_id = pdev->vendor;
+	hw->device_id = pdev->device;
+	hw->revision_id = pdev->revision;
+	hw->subsystem_vendor_id = pdev->subsystem_vendor;
+	hw->subsystem_device_id = pdev->subsystem_device;
+
+	/* Copy the default MAC and PHY function pointers */
+	memcpy(&hw->mac.ops, ei->mac_ops, sizeof(hw->mac.ops));
+	memcpy(&hw->phy.ops, ei->phy_ops, sizeof(hw->phy.ops));
+
+	/* Initialize skew-specific constants */
+	err = ei->get_invariants(hw);
+	if (err)
+		goto err_sw_init;
+
+	/* Add supported features to the features list*/
+	netdev->features |= NETIF_F_SG;
+	netdev->features |= NETIF_F_TSO;
+	netdev->features |= NETIF_F_TSO6;
+	netdev->features |= NETIF_F_TSO_ECN;
+	netdev->features |= NETIF_F_RXHASH;
+	netdev->features |= NETIF_F_RXCSUM;
+	netdev->features |= NETIF_F_HW_CSUM;
+	netdev->features |= NETIF_F_SCTP_CRC;
+	netdev->features |= NETIF_F_HW_TC;
+
+#define IGC_GSO_PARTIAL_FEATURES (NETIF_F_GSO_GRE | \
+				  NETIF_F_GSO_GRE_CSUM | \
+				  NETIF_F_GSO_IPXIP4 | \
+				  NETIF_F_GSO_IPXIP6 | \
+				  NETIF_F_GSO_UDP_TUNNEL | \
+				  NETIF_F_GSO_UDP_TUNNEL_CSUM)
+
+	netdev->gso_partial_features = IGC_GSO_PARTIAL_FEATURES;
+	netdev->features |= NETIF_F_GSO_PARTIAL | IGC_GSO_PARTIAL_FEATURES;
+
+	/* setup the private structure */
+	err = igc_sw_init(adapter);
+	if (err)
+		goto err_sw_init;
+
+	/* copy netdev features into list of user selectable features */
+	netdev->hw_features |= NETIF_F_NTUPLE;
+	netdev->hw_features |= NETIF_F_HW_VLAN_CTAG_TX;
+	netdev->hw_features |= NETIF_F_HW_VLAN_CTAG_RX;
+	netdev->hw_features |= netdev->features;
+
+	netdev->features |= NETIF_F_HIGHDMA;
+
+	netdev->vlan_features |= netdev->features | NETIF_F_TSO_MANGLEID;
+	netdev->mpls_features |= NETIF_F_HW_CSUM;
+	netdev->hw_enc_features |= netdev->vlan_features;
+
+	netdev->xdp_features = NETDEV_XDP_ACT_BASIC | NETDEV_XDP_ACT_REDIRECT |
+			       NETDEV_XDP_ACT_XSK_ZEROCOPY;
+
+	/* MTU range: 68 - 9216 */
+	netdev->min_mtu = ETH_MIN_MTU;
+	netdev->max_mtu = MAX_STD_JUMBO_FRAME_SIZE;
+
+	/* before reading the NVM, reset the controller to put the device in a
+	 * known good starting state
+	 */
+	hw->mac.ops.reset_hw(hw);
+
+	if (igc_get_flash_presence_i225(hw)) {
+		if (hw->nvm.ops.validate(hw) < 0) {
+			dev_err(&pdev->dev, "The NVM Checksum Is Not Valid\n");
+			err = -EIO;
+			goto err_eeprom;
+		}
+	}
+
+	if (eth_platform_get_mac_address(&pdev->dev, hw->mac.addr)) {
+		/* copy the MAC address out of the NVM */
+		if (hw->mac.ops.read_mac_addr(hw))
+			dev_err(&pdev->dev, "NVM Read Error\n");
+	}
+
+	eth_hw_addr_set(netdev, hw->mac.addr);
+
+	if (!is_valid_ether_addr(netdev->dev_addr)) {
+		dev_err(&pdev->dev, "Invalid MAC Address\n");
+		err = -EIO;
+		goto err_eeprom;
+	}
+
+	/* configure RXPBSIZE and TXPBSIZE */
+	wr32(IGC_RXPBS, I225_RXPBSIZE_DEFAULT);
+	wr32(IGC_TXPBS, I225_TXPBSIZE_DEFAULT);
+
+	timer_setup(&adapter->watchdog_timer, igc_watchdog, 0);
+	timer_setup(&adapter->phy_info_timer, igc_update_phy_info, 0);
+
+	INIT_WORK(&adapter->reset_task, igc_reset_task);
+	INIT_WORK(&adapter->watchdog_task, igc_watchdog_task);
+
+	hrtimer_init(&adapter->hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+	adapter->hrtimer.function = &igc_qbv_scheduling_timer;
+
+	/* Initialize link properties that are user-changeable */
+	adapter->fc_autoneg = true;
+	hw->mac.autoneg = true;
+	hw->phy.autoneg_advertised = 0xaf;
+
+	hw->fc.requested_mode = igc_fc_default;
+	hw->fc.current_mode = igc_fc_default;
+
+	/* By default, support wake on port A */
+	adapter->flags |= IGC_FLAG_WOL_SUPPORTED;
+
+	/* initialize the wol settings based on the eeprom settings */
+	if (adapter->flags & IGC_FLAG_WOL_SUPPORTED)
+		adapter->wol |= IGC_WUFC_MAG;
+
+	device_set_wakeup_enable(&adapter->pdev->dev,
+				 adapter->flags & IGC_FLAG_WOL_SUPPORTED);
+
+	igc_ptp_init(adapter);
+
+	igc_tsn_clear_schedule(adapter);
+
+	/* reset the hardware with the new settings */
+	igc_reset(adapter);
+
+	/* let the f/w know that the h/w is now under the control of the
+	 * driver.
+	 */
+	igc_get_hw_control(adapter);
+
+	strscpy(netdev->name, "eth%d", sizeof(netdev->name));
+	err = register_netdev(netdev);
+	if (err)
+		goto err_register;
+
+	 /* carrier off reporting is important to ethtool even BEFORE open */
+	netif_carrier_off(netdev);
+
+	/* Check if Media Autosense is enabled */
+	adapter->ei = *ei;
+
+	/* print pcie link status and MAC address */
+	pcie_print_link_status(pdev);
+	netdev_info(netdev, "MAC: %pM\n", netdev->dev_addr);
+
+	dev_pm_set_driver_flags(&pdev->dev, DPM_FLAG_NO_DIRECT_COMPLETE);
+	/* Disable EEE for internal PHY devices */
+	hw->dev_spec._base.eee_enable = false;
+	adapter->flags &= ~IGC_FLAG_EEE;
+	igc_set_eee_i225(hw, false, false, false);
+
+	pm_runtime_put_noidle(&pdev->dev);
+
+	if (IS_ENABLED(CONFIG_IGC_LEDS)) {
+		err = igc_led_setup(adapter);
+		if (err)
+			goto err_register;
+	}
+
+	return 0;
+
+err_register:
+	igc_release_hw_control(adapter);
+	igc_ptp_stop(adapter);
+err_eeprom:
+	if (!igc_check_reset_block(hw))
+		igc_reset_phy(hw);
+err_sw_init:
+	igc_clear_interrupt_scheme(adapter);
+	iounmap(adapter->io_addr);
+err_ioremap:
+	free_netdev(netdev);
+err_alloc_etherdev:
+	pci_release_mem_regions(pdev);
+err_pci_reg:
+err_dma:
+	pci_disable_device(pdev);
+	return err;
+}
+
+/**
+ * igc_remove - Device Removal Routine
+ * @pdev: PCI device information struct
+ *
+ * igc_remove is called by the PCI subsystem to alert the driver
+ * that it should release a PCI device.  This could be caused by a
+ * Hot-Plug event, or because the driver is going to be removed from
+ * memory.
+ */
+static void igc_remove(struct pci_dev *pdev)
+{
+	struct net_device *netdev = pci_get_drvdata(pdev);
+	struct igc_adapter *adapter = netdev_priv(netdev);
+
+	pm_runtime_get_noresume(&pdev->dev);
+
+	igc_flush_nfc_rules(adapter);
+
+	igc_ptp_stop(adapter);
+
+	pci_disable_ptm(pdev);
+	pci_clear_master(pdev);
+
+	set_bit(__IGC_DOWN, &adapter->state);
+
+	del_timer_sync(&adapter->watchdog_timer);
+	del_timer_sync(&adapter->phy_info_timer);
+
+	cancel_work_sync(&adapter->reset_task);
+	cancel_work_sync(&adapter->watchdog_task);
+	hrtimer_cancel(&adapter->hrtimer);
+
+	if (IS_ENABLED(CONFIG_IGC_LEDS))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		igc_led_free(adapter);
 
 	/* Release control of h/w to f/w.  If f/w is AMT enabled, this

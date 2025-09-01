@@ -2246,6 +2246,7 @@ struct sock *sk_alloc(struct net *net, int family, gfp_t priority,
 			get_net_track(net, &sk->ns_tracker, priority);
 			sock_inuse_add(net, 1);
 		} else {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			net_passive_inc(net);
 			__netns_tracker_alloc(net, &sk->ns_tracker,
 					      false, priority);
@@ -2424,6 +2425,170 @@ struct sock *sk_clone_lock(const struct sock *sk, const gfp_t priority)
 		 * destroy time.
 		 */
 		net_passive_inc(sock_net(newsk));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			__netns_tracker_alloc(net, &sk->ns_tracker,
+					      false, priority);
+		}
+
+		sock_net_set(sk, net);
+		refcount_set(&sk->sk_wmem_alloc, 1);
+
+		mem_cgroup_sk_alloc(sk);
+		trace_android_vh_sk_alloc(sk);
+		cgroup_sk_alloc(&sk->sk_cgrp_data);
+		sock_update_classid(&sk->sk_cgrp_data);
+		sock_update_netprioidx(&sk->sk_cgrp_data);
+		sk_tx_queue_clear(sk);
+	}
+
+	return sk;
+}
+EXPORT_SYMBOL(sk_alloc);
+
+/* Sockets having SOCK_RCU_FREE will call this function after one RCU
+ * grace period. This is the case for UDP sockets and TCP listeners.
+ */
+static void __sk_destruct(struct rcu_head *head)
+{
+	struct sock *sk = container_of(head, struct sock, sk_rcu);
+	struct sk_filter *filter;
+
+	if (sk->sk_destruct)
+		sk->sk_destruct(sk);
+
+	filter = rcu_dereference_check(sk->sk_filter,
+				       refcount_read(&sk->sk_wmem_alloc) == 0);
+	if (filter) {
+		sk_filter_uncharge(sk, filter);
+		RCU_INIT_POINTER(sk->sk_filter, NULL);
+	}
+
+	sock_disable_timestamp(sk, SK_FLAGS_TIMESTAMP);
+
+#ifdef CONFIG_BPF_SYSCALL
+	bpf_sk_storage_free(sk);
+#endif
+
+	if (atomic_read(&sk->sk_omem_alloc))
+		pr_debug("%s: optmem leakage (%d bytes) detected\n",
+			 __func__, atomic_read(&sk->sk_omem_alloc));
+
+	if (sk->sk_frag.page) {
+		put_page(sk->sk_frag.page);
+		sk->sk_frag.page = NULL;
+	}
+
+	/* We do not need to acquire sk->sk_peer_lock, we are the last user. */
+	put_cred(sk->sk_peer_cred);
+	put_pid(sk->sk_peer_pid);
+
+	if (likely(sk->sk_net_refcnt))
+		put_net_track(sock_net(sk), &sk->ns_tracker);
+	else
+		__netns_tracker_free(sock_net(sk), &sk->ns_tracker, false);
+
+	sk_prot_free(sk->sk_prot_creator, sk);
+}
+
+void sk_destruct(struct sock *sk)
+{
+	bool use_call_rcu = sock_flag(sk, SOCK_RCU_FREE);
+
+	if (rcu_access_pointer(sk->sk_reuseport_cb)) {
+		reuseport_detach_sock(sk);
+		use_call_rcu = true;
+	}
+
+	if (use_call_rcu)
+		call_rcu(&sk->sk_rcu, __sk_destruct);
+	else
+		__sk_destruct(&sk->sk_rcu);
+}
+
+static void __sk_free(struct sock *sk)
+{
+	if (likely(sk->sk_net_refcnt))
+		sock_inuse_add(sock_net(sk), -1);
+
+	if (unlikely(sk->sk_net_refcnt && sock_diag_has_destroy_listeners(sk)))
+		sock_diag_broadcast_destroy(sk);
+	else
+		sk_destruct(sk);
+}
+
+void sk_free(struct sock *sk)
+{
+	/*
+	 * We subtract one from sk_wmem_alloc and can know if
+	 * some packets are still in some tx queue.
+	 * If not null, sock_wfree() will call __sk_free(sk) later
+	 */
+	if (refcount_dec_and_test(&sk->sk_wmem_alloc))
+		__sk_free(sk);
+}
+EXPORT_SYMBOL(sk_free);
+
+static void sk_init_common(struct sock *sk)
+{
+	skb_queue_head_init(&sk->sk_receive_queue);
+	skb_queue_head_init(&sk->sk_write_queue);
+	skb_queue_head_init(&sk->sk_error_queue);
+
+	rwlock_init(&sk->sk_callback_lock);
+	lockdep_set_class_and_name(&sk->sk_receive_queue.lock,
+			af_rlock_keys + sk->sk_family,
+			af_family_rlock_key_strings[sk->sk_family]);
+	lockdep_set_class_and_name(&sk->sk_write_queue.lock,
+			af_wlock_keys + sk->sk_family,
+			af_family_wlock_key_strings[sk->sk_family]);
+	lockdep_set_class_and_name(&sk->sk_error_queue.lock,
+			af_elock_keys + sk->sk_family,
+			af_family_elock_key_strings[sk->sk_family]);
+	if (sk->sk_kern_sock)
+		lockdep_set_class_and_name(&sk->sk_callback_lock,
+			af_kern_callback_keys + sk->sk_family,
+			af_family_kern_clock_key_strings[sk->sk_family]);
+	else
+		lockdep_set_class_and_name(&sk->sk_callback_lock,
+			af_callback_keys + sk->sk_family,
+			af_family_clock_key_strings[sk->sk_family]);
+}
+
+/**
+ *	sk_clone_lock - clone a socket, and lock its clone
+ *	@sk: the socket to clone
+ *	@priority: for allocation (%GFP_KERNEL, %GFP_ATOMIC, etc)
+ *
+ *	Caller must unlock socket even in error path (bh_unlock_sock(newsk))
+ */
+struct sock *sk_clone_lock(const struct sock *sk, const gfp_t priority)
+{
+	struct proto *prot = READ_ONCE(sk->sk_prot);
+	struct sk_filter *filter;
+	bool is_charged = true;
+	struct sock *newsk;
+
+	newsk = sk_prot_alloc(prot, priority, sk->sk_family);
+	if (!newsk)
+		goto out;
+
+	sock_copy(newsk, sk);
+	trace_android_vh_sk_clone_lock(newsk);
+
+	newsk->sk_prot_creator = prot;
+
+	/* SANITY */
+	if (likely(newsk->sk_net_refcnt)) {
+		get_net_track(sock_net(newsk), &newsk->ns_tracker, priority);
+		sock_inuse_add(sock_net(newsk), 1);
+	} else {
+		/* Kernel sockets are not elevating the struct net refcount.
+		 * Instead, use a tracker to more easily detect if a layer
+		 * is not properly dismantling its kernel sockets at netns
+		 * destroy time.
+		 */
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		__netns_tracker_alloc(sock_net(newsk), &newsk->ns_tracker,
 				      false, priority);
 	}

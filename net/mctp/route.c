@@ -325,6 +325,7 @@ static void mctp_skb_set_flow(struct sk_buff *skb, struct mctp_sk_key *key) {}
 static void mctp_flow_prepare_output(struct sk_buff *skb, struct mctp_dev *dev) {}
 #endif
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* takes ownership of skb, both in success and failure cases */
 static int mctp_frag_queue(struct mctp_sk_key *key, struct sk_buff *skb)
 {
@@ -529,6 +530,210 @@ static int mctp_route_input(struct mctp_route *route, struct sk_buff *skb)
 
 		if (rc)
 			goto out_unlock;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int mctp_frag_queue(struct mctp_sk_key *key, struct sk_buff *skb)
+{
+	struct mctp_hdr *hdr = mctp_hdr(skb);
+	u8 exp_seq, this_seq;
+
+	this_seq = (hdr->flags_seq_tag >> MCTP_HDR_SEQ_SHIFT)
+		& MCTP_HDR_SEQ_MASK;
+
+	if (!key->reasm_head) {
+		/* Since we're manipulating the shared frag_list, ensure it isn't
+		 * shared with any other SKBs.
+		 */
+		key->reasm_head = skb_unshare(skb, GFP_ATOMIC);
+		if (!key->reasm_head)
+			return -ENOMEM;
+
+		key->reasm_tailp = &(skb_shinfo(key->reasm_head)->frag_list);
+		key->last_seq = this_seq;
+		return 0;
+	}
+
+	exp_seq = (key->last_seq + 1) & MCTP_HDR_SEQ_MASK;
+
+	if (this_seq != exp_seq)
+		return -EINVAL;
+
+	if (key->reasm_head->len + skb->len > mctp_message_maxlen)
+		return -EINVAL;
+
+	skb->next = NULL;
+	skb->sk = NULL;
+	*key->reasm_tailp = skb;
+	key->reasm_tailp = &skb->next;
+
+	key->last_seq = this_seq;
+
+	key->reasm_head->data_len += skb->len;
+	key->reasm_head->len += skb->len;
+	key->reasm_head->truesize += skb->truesize;
+
+	return 0;
+}
+
+static int mctp_route_input(struct mctp_route *route, struct sk_buff *skb)
+{
+	struct mctp_sk_key *key, *any_key = NULL;
+	struct net *net = dev_net(skb->dev);
+	struct mctp_sock *msk;
+	struct mctp_hdr *mh;
+	unsigned int netid;
+	unsigned long f;
+	u8 tag, flags;
+	int rc;
+
+	msk = NULL;
+	rc = -EINVAL;
+
+	/* We may be receiving a locally-routed packet; drop source sk
+	 * accounting.
+	 *
+	 * From here, we will either queue the skb - either to a frag_queue, or
+	 * to a receiving socket. When that succeeds, we clear the skb pointer;
+	 * a non-NULL skb on exit will be otherwise unowned, and hence
+	 * kfree_skb()-ed.
+	 */
+	skb_orphan(skb);
+
+	/* ensure we have enough data for a header and a type */
+	if (skb->len < sizeof(struct mctp_hdr) + 1)
+		goto out;
+
+	/* grab header, advance data ptr */
+	mh = mctp_hdr(skb);
+	netid = mctp_cb(skb)->net;
+	skb_pull(skb, sizeof(struct mctp_hdr));
+
+	if (mh->ver != 1)
+		goto out;
+
+	flags = mh->flags_seq_tag & (MCTP_HDR_FLAG_SOM | MCTP_HDR_FLAG_EOM);
+	tag = mh->flags_seq_tag & (MCTP_HDR_TAG_MASK | MCTP_HDR_FLAG_TO);
+
+	rcu_read_lock();
+
+	/* lookup socket / reasm context, exactly matching (src,dest,tag).
+	 * we hold a ref on the key, and key->lock held.
+	 */
+	key = mctp_lookup_key(net, skb, netid, mh->src, &f);
+
+	if (flags & MCTP_HDR_FLAG_SOM) {
+		if (key) {
+			msk = container_of(key->sk, struct mctp_sock, sk);
+		} else {
+			/* first response to a broadcast? do a more general
+			 * key lookup to find the socket, but don't use this
+			 * key for reassembly - we'll create a more specific
+			 * one for future packets if required (ie, !EOM).
+			 *
+			 * this lookup requires key->peer to be MCTP_ADDR_ANY,
+			 * it doesn't match just any key->peer.
+			 */
+			any_key = mctp_lookup_key(net, skb, netid,
+						  MCTP_ADDR_ANY, &f);
+			if (any_key) {
+				msk = container_of(any_key->sk,
+						   struct mctp_sock, sk);
+				spin_unlock_irqrestore(&any_key->lock, f);
+			}
+		}
+
+		if (!key && !msk && (tag & MCTP_HDR_FLAG_TO))
+			msk = mctp_lookup_bind(net, skb);
+
+		if (!msk) {
+			rc = -ENOENT;
+			goto out_unlock;
+		}
+
+		/* single-packet message? deliver to socket, clean up any
+		 * pending key.
+		 */
+		if (flags & MCTP_HDR_FLAG_EOM) {
+			rc = sock_queue_rcv_skb(&msk->sk, skb);
+			if (!rc)
+				skb = NULL;
+			if (key) {
+				/* we've hit a pending reassembly; not much we
+				 * can do but drop it
+				 */
+				__mctp_key_done_in(key, net, f,
+						   MCTP_TRACE_KEY_REPLIED);
+				key = NULL;
+			}
+			goto out_unlock;
+		}
+
+		/* broadcast response or a bind() - create a key for further
+		 * packets for this message
+		 */
+		if (!key) {
+			key = mctp_key_alloc(msk, netid, mh->dest, mh->src,
+					     tag, GFP_ATOMIC);
+			if (!key) {
+				rc = -ENOMEM;
+				goto out_unlock;
+			}
+
+			/* we can queue without the key lock here, as the
+			 * key isn't observable yet
+			 */
+			mctp_frag_queue(key, skb);
+
+			/* if the key_add fails, we've raced with another
+			 * SOM packet with the same src, dest and tag. There's
+			 * no way to distinguish future packets, so all we
+			 * can do is drop; we'll free the skb on exit from
+			 * this function.
+			 */
+			rc = mctp_key_add(key, msk);
+			if (!rc) {
+				trace_mctp_key_acquire(key);
+				skb = NULL;
+			}
+
+			/* we don't need to release key->lock on exit, so
+			 * clean up here and suppress the unlock via
+			 * setting to NULL
+			 */
+			mctp_key_unref(key);
+			key = NULL;
+
+		} else {
+			if (key->reasm_head || key->reasm_dead) {
+				/* duplicate start? drop everything */
+				__mctp_key_done_in(key, net, f,
+						   MCTP_TRACE_KEY_INVALIDATED);
+				rc = -EEXIST;
+				key = NULL;
+			} else {
+				rc = mctp_frag_queue(key, skb);
+				if (!rc)
+					skb = NULL;
+			}
+		}
+
+	} else if (key) {
+		/* this packet continues a previous message; reassemble
+		 * using the message-specific key
+		 */
+
+		/* we need to be continuing an existing reassembly... */
+		if (!key->reasm_head)
+			rc = -EINVAL;
+		else
+			rc = mctp_frag_queue(key, skb);
+
+		if (rc)
+			goto out_unlock;
+
+		/* we've queued; the queue owns the skb now */
+		skb = NULL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		/* end of message? deliver to socket, and we're done with
 		 * the reassembly/response key

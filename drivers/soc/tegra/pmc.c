@@ -1233,6 +1233,7 @@ err:
 }
 
 static int tegra_powergate_of_get_resets(struct tegra_powergate *pg,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 					 struct device_node *np)
 {
 	struct device *dev = pg->pmc->dev;
@@ -1329,6 +1330,98 @@ static int tegra_powergate_add(struct tegra_pmc *pmc, struct device_node *np)
 	}
 
 	err = pm_genpd_init(&pg->genpd, NULL, true);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+					 struct device_node *np, bool off)
+{
+	struct device *dev = pg->pmc->dev;
+	int err;
+
+	pg->reset = of_reset_control_array_get_exclusive_released(np);
+	if (IS_ERR(pg->reset)) {
+		err = PTR_ERR(pg->reset);
+		dev_err(dev, "failed to get device resets: %d\n", err);
+		return err;
+	}
+
+	err = reset_control_acquire(pg->reset);
+	if (err < 0) {
+		pr_err("failed to acquire resets: %d\n", err);
+		goto out;
+	}
+
+	if (off) {
+		err = reset_control_assert(pg->reset);
+	} else {
+		err = reset_control_deassert(pg->reset);
+		if (err < 0)
+			goto out;
+
+		reset_control_release(pg->reset);
+	}
+
+out:
+	if (err) {
+		reset_control_release(pg->reset);
+		reset_control_put(pg->reset);
+	}
+
+	return err;
+}
+
+static int tegra_powergate_add(struct tegra_pmc *pmc, struct device_node *np)
+{
+	struct device *dev = pmc->dev;
+	struct tegra_powergate *pg;
+	int id, err = 0;
+	bool off;
+
+	pg = kzalloc(sizeof(*pg), GFP_KERNEL);
+	if (!pg)
+		return -ENOMEM;
+
+	id = tegra_powergate_lookup(pmc, np->name);
+	if (id < 0) {
+		dev_err(dev, "powergate lookup failed for %pOFn: %d\n", np, id);
+		err = -ENODEV;
+		goto free_mem;
+	}
+
+	/*
+	 * Clear the bit for this powergate so it cannot be managed
+	 * directly via the legacy APIs for controlling powergates.
+	 */
+	clear_bit(id, pmc->powergates_available);
+
+	pg->id = id;
+	pg->genpd.name = np->name;
+	pg->genpd.power_off = tegra_genpd_power_off;
+	pg->genpd.power_on = tegra_genpd_power_on;
+	pg->pmc = pmc;
+
+	off = !tegra_powergate_is_powered(pmc, pg->id);
+
+	err = tegra_powergate_of_get_clks(pg, np);
+	if (err < 0) {
+		dev_err(dev, "failed to get clocks for %pOFn: %d\n", np, err);
+		goto set_available;
+	}
+
+	err = tegra_powergate_of_get_resets(pg, np, off);
+	if (err < 0) {
+		dev_err(dev, "failed to get resets for %pOFn: %d\n", np, err);
+		goto remove_clks;
+	}
+
+	if (!IS_ENABLED(CONFIG_PM_GENERIC_DOMAINS)) {
+		if (off)
+			WARN_ON(tegra_powergate_power_up(pg, true));
+
+		goto remove_resets;
+	}
+
+	err = pm_genpd_init(&pg->genpd, NULL, off);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (err < 0) {
 		dev_err(dev, "failed to initialise PM domain %pOFn: %d\n", np,
 		       err);

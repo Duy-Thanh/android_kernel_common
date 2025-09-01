@@ -345,6 +345,7 @@ int rxe_prepare(struct rxe_av *av, struct rxe_pkt_info *pkt,
 
 static void rxe_skb_tx_dtor(struct sk_buff *skb)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct rxe_qp *qp = skb->sk->sk_user_data;
 	int skb_out;
 
@@ -483,6 +484,160 @@ struct sk_buff *rxe_init_packet(struct rxe_dev *rxe, struct rxe_av *av,
 
 	/* Add time stamp to skb. */
 	skb->tstamp = ktime_get();
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct net_device *ndev = skb->dev;
+	struct rxe_dev *rxe;
+	unsigned int qp_index;
+	struct rxe_qp *qp;
+	int skb_out;
+
+	rxe = rxe_get_dev_from_net(ndev);
+	if (!rxe && is_vlan_dev(ndev))
+		rxe = rxe_get_dev_from_net(vlan_dev_real_dev(ndev));
+	if (WARN_ON(!rxe))
+		return;
+
+	qp_index = (int)(uintptr_t)skb->sk->sk_user_data;
+	if (!qp_index)
+		return;
+
+	qp = rxe_pool_get_index(&rxe->qp_pool, qp_index);
+	if (!qp)
+		goto put_dev;
+
+	skb_out = atomic_dec_return(&qp->skb_out);
+	if (qp->need_req_skb && skb_out < RXE_INFLIGHT_SKBS_PER_QP_LOW)
+		rxe_sched_task(&qp->send_task);
+
+	rxe_put(qp);
+put_dev:
+	ib_device_put(&rxe->ib_dev);
+	sock_put(skb->sk);
+}
+
+static int rxe_send(struct sk_buff *skb, struct rxe_pkt_info *pkt)
+{
+	int err;
+	struct sock *sk = pkt->qp->sk->sk;
+
+	sock_hold(sk);
+	skb->sk = sk;
+	skb->destructor = rxe_skb_tx_dtor;
+	atomic_inc(&pkt->qp->skb_out);
+
+	if (skb->protocol == htons(ETH_P_IP))
+		err = ip_local_out(dev_net(skb_dst(skb)->dev), skb->sk, skb);
+	else
+		err = ip6_local_out(dev_net(skb_dst(skb)->dev), skb->sk, skb);
+
+	return err;
+}
+
+/* fix up a send packet to match the packets
+ * received from UDP before looping them back
+ */
+static int rxe_loopback(struct sk_buff *skb, struct rxe_pkt_info *pkt)
+{
+	struct sock *sk = pkt->qp->sk->sk;
+
+	memcpy(SKB_TO_PKT(skb), pkt, sizeof(*pkt));
+
+	sock_hold(sk);
+	skb->sk = sk;
+	skb->destructor = rxe_skb_tx_dtor;
+	atomic_inc(&pkt->qp->skb_out);
+
+	if (skb->protocol == htons(ETH_P_IP))
+		skb_pull(skb, sizeof(struct iphdr));
+	else
+		skb_pull(skb, sizeof(struct ipv6hdr));
+
+	if (WARN_ON(!ib_device_try_get(&pkt->rxe->ib_dev))) {
+		kfree_skb(skb);
+		return -EIO;
+	}
+
+	/* remove udp header */
+	skb_pull(skb, sizeof(struct udphdr));
+
+	rxe_rcv(skb);
+
+	return 0;
+}
+
+int rxe_xmit_packet(struct rxe_qp *qp, struct rxe_pkt_info *pkt,
+		    struct sk_buff *skb)
+{
+	int err;
+	int is_request = pkt->mask & RXE_REQ_MASK;
+	struct rxe_dev *rxe = to_rdev(qp->ibqp.device);
+	unsigned long flags;
+
+	spin_lock_irqsave(&qp->state_lock, flags);
+	if ((is_request && (qp_state(qp) < IB_QPS_RTS)) ||
+	    (!is_request && (qp_state(qp) < IB_QPS_RTR))) {
+		spin_unlock_irqrestore(&qp->state_lock, flags);
+		rxe_dbg_qp(qp, "Packet dropped. QP is not in ready state\n");
+		goto drop;
+	}
+	spin_unlock_irqrestore(&qp->state_lock, flags);
+
+	rxe_icrc_generate(skb, pkt);
+
+	if (pkt->mask & RXE_LOOPBACK_MASK)
+		err = rxe_loopback(skb, pkt);
+	else
+		err = rxe_send(skb, pkt);
+	if (err) {
+		rxe_counter_inc(rxe, RXE_CNT_SEND_ERR);
+		return err;
+	}
+
+	rxe_counter_inc(rxe, RXE_CNT_SENT_PKTS);
+	goto done;
+
+drop:
+	kfree_skb(skb);
+	err = 0;
+done:
+	return err;
+}
+
+struct sk_buff *rxe_init_packet(struct rxe_dev *rxe, struct rxe_av *av,
+				int paylen, struct rxe_pkt_info *pkt)
+{
+	unsigned int hdr_len;
+	struct sk_buff *skb = NULL;
+	struct net_device *ndev;
+	const struct ib_gid_attr *attr;
+	const int port_num = 1;
+
+	attr = rdma_get_gid_attr(&rxe->ib_dev, port_num, av->grh.sgid_index);
+	if (IS_ERR(attr))
+		return NULL;
+
+	if (av->network_type == RXE_NETWORK_TYPE_IPV4)
+		hdr_len = ETH_HLEN + sizeof(struct udphdr) +
+			sizeof(struct iphdr);
+	else
+		hdr_len = ETH_HLEN + sizeof(struct udphdr) +
+			sizeof(struct ipv6hdr);
+
+	rcu_read_lock();
+	ndev = rdma_read_gid_attr_ndev_rcu(attr);
+	if (IS_ERR(ndev)) {
+		rcu_read_unlock();
+		goto out;
+	}
+	skb = alloc_skb(paylen + hdr_len + LL_RESERVED_SPACE(ndev),
+			GFP_ATOMIC);
+
+	if (unlikely(!skb)) {
+		rcu_read_unlock();
+		goto out;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	skb_reserve(skb, hdr_len + LL_RESERVED_SPACE(ndev));
 

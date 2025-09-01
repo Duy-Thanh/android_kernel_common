@@ -484,6 +484,7 @@ static void ser_l1_reset_pre_st_hdl(struct rtw89_ser *ser, u8 evt)
 static void ser_reset_trx_st_hdl(struct rtw89_ser *ser, u8 evt)
 {
 	struct rtw89_dev *rtwdev = container_of(ser, struct rtw89_dev, ser);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct wiphy *wiphy = rtwdev->hw->wiphy;
 
 	switch (evt) {
@@ -500,6 +501,22 @@ static void ser_reset_trx_st_hdl(struct rtw89_ser *ser, u8 evt)
 		wiphy_lock(wiphy);
 		drv_trx_reset(ser);
 		wiphy_unlock(wiphy);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	switch (evt) {
+	case SER_EV_STATE_IN:
+		cancel_delayed_work_sync(&rtwdev->track_work);
+		drv_stop_tx(ser);
+
+		if (hal_stop_dma(ser)) {
+			ser_state_goto(ser, SER_L2_RESET_ST);
+			break;
+		}
+
+		drv_stop_rx(ser);
+		drv_trx_reset(ser);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		/* wait m3 */
 		hal_send_m2_event(ser);

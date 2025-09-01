@@ -58,6 +58,7 @@ obj-$(CONFIG_X86_PLATFORM_DRIVERS_HP)	+= hp/
 # Hewlett Packard Enterprise
 obj-$(CONFIG_UV_SYSFS)       += uv_sysfs.o
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 obj-$(CONFIG_FW_ATTR_CLASS)	+= firmware_attributes_class.o
 
 # IBM Thinkpad and Lenovo
@@ -122,6 +123,72 @@ obj-$(CONFIG_SYSTEM76_ACPI)	+= system76_acpi.o
 obj-$(CONFIG_TOPSTAR_LAPTOP)	+= topstar-laptop.o
 
 # Platform drivers
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+# IBM Thinkpad and Lenovo
+obj-$(CONFIG_IBM_RTL)		+= ibm_rtl.o
+obj-$(CONFIG_IDEAPAD_LAPTOP)	+= ideapad-laptop.o
+obj-$(CONFIG_LENOVO_YMC)	+= lenovo-ymc.o
+obj-$(CONFIG_SENSORS_HDAPS)	+= hdaps.o
+obj-$(CONFIG_THINKPAD_ACPI)	+= thinkpad_acpi.o
+obj-$(CONFIG_THINKPAD_LMI)	+= think-lmi.o
+obj-$(CONFIG_YOGABOOK)		+= lenovo-yogabook.o
+obj-$(CONFIG_YT2_1380)		+= lenovo-yoga-tab2-pro-1380-fastcharger.o
+obj-$(CONFIG_LENOVO_WMI_CAMERA)	+= lenovo-wmi-camera.o
+
+# Intel
+obj-y				+= intel/
+
+# Microsoft
+obj-$(CONFIG_ACPI_QUICKSTART)  += quickstart.o
+
+# MeeGoPad
+obj-$(CONFIG_MEEGOPAD_ANX7428)	+= meegopad_anx7428.o
+
+# MSI
+obj-$(CONFIG_MSI_EC)		+= msi-ec.o
+obj-$(CONFIG_MSI_LAPTOP)	+= msi-laptop.o
+obj-$(CONFIG_MSI_WMI)		+= msi-wmi.o
+obj-$(CONFIG_MSI_WMI_PLATFORM)	+= msi-wmi-platform.o
+
+# OLPC
+obj-$(CONFIG_XO15_EBOOK)	+= xo15-ebook.o
+obj-$(CONFIG_XO1_RFKILL)	+= xo1-rfkill.o
+
+# PC Engines
+obj-$(CONFIG_PCENGINES_APU2)	+= pcengines-apuv2.o
+
+# Barco
+obj-$(CONFIG_BARCO_P50_GPIO)	+= barco-p50-gpio.o
+
+# Samsung
+obj-$(CONFIG_SAMSUNG_LAPTOP)	+= samsung-laptop.o
+obj-$(CONFIG_SAMSUNG_Q10)	+= samsung-q10.o
+
+# Toshiba
+obj-$(CONFIG_TOSHIBA_BT_RFKILL)	+= toshiba_bluetooth.o
+obj-$(CONFIG_TOSHIBA_HAPS)	+= toshiba_haps.o
+obj-$(CONFIG_TOSHIBA_WMI)	+= toshiba-wmi.o
+
+# toshiba_acpi must link after wmi to ensure that wmi devices are found
+# before toshiba_acpi initializes
+obj-$(CONFIG_ACPI_TOSHIBA)	+= toshiba_acpi.o
+
+# Inspur
+obj-$(CONFIG_INSPUR_PLATFORM_PROFILE)	+= inspur_platform_profile.o
+
+# Laptop drivers
+obj-$(CONFIG_ACPI_CMPC)		+= classmate-laptop.o
+obj-$(CONFIG_COMPAL_LAPTOP)	+= compal-laptop.o
+obj-$(CONFIG_LG_LAPTOP)		+= lg-laptop.o
+obj-$(CONFIG_PANASONIC_LAPTOP)	+= panasonic-laptop.o
+obj-$(CONFIG_SONY_LAPTOP)	+= sony-laptop.o
+obj-$(CONFIG_SYSTEM76_ACPI)	+= system76_acpi.o
+obj-$(CONFIG_TOPSTAR_LAPTOP)	+= topstar-laptop.o
+
+# Platform drivers
+obj-$(CONFIG_FW_ATTR_CLASS)		+= firmware_attributes_class.o
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 obj-$(CONFIG_SERIAL_MULTI_INSTANTIATE)	+= serial-multi-instantiate.o
 obj-$(CONFIG_MLX_PLATFORM)		+= mlx-platform.o
 obj-$(CONFIG_TOUCHSCREEN_DMI)		+= touchscreen_dmi.o

@@ -1629,6 +1629,7 @@ void set_pcie_hotplug_bridge(struct pci_dev *pdev)
 
 	pcie_capability_read_dword(pdev, PCI_EXP_SLTCAP, &reg32);
 	if (reg32 & PCI_EXP_SLTCAP_HPC)
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		pdev->is_hotplug_bridge = pdev->is_pciehp = 1;
 }
 
@@ -1976,6 +1977,353 @@ int pci_setup_device(struct pci_dev *dev)
 
 	if (pci_is_pcie(dev))
 		dev->supported_speeds = pcie_get_supported_speeds(dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		pdev->is_hotplug_bridge = 1;
+}
+
+static void set_pcie_thunderbolt(struct pci_dev *dev)
+{
+	u16 vsec;
+
+	/* Is the device part of a Thunderbolt controller? */
+	vsec = pci_find_vsec_capability(dev, PCI_VENDOR_ID_INTEL, PCI_VSEC_ID_INTEL_TBT);
+	if (vsec)
+		dev->is_thunderbolt = 1;
+}
+
+static void pci_set_requires_dma_protection(struct pci_dev *dev)
+{
+	struct pci_dev *parent = pci_upstream_bridge(dev);
+
+	if (!parent)
+		return;
+	/*
+	 * If the upstream bridge is untrusted we treat this device as
+	 * untrusted as well.
+	 */
+	if (parent->requires_dma_protection) {
+		dev->requires_dma_protection = true;
+		return;
+	}
+
+	if (arch_pci_dev_is_removable(dev)) {
+		pci_dbg(dev, "marking as untrusted\n");
+		dev->requires_dma_protection = true;
+	}
+}
+
+static void pci_set_removable(struct pci_dev *dev)
+{
+	struct pci_dev *parent = pci_upstream_bridge(dev);
+
+	if (!parent)
+		return;
+	/*
+	 * We (only) consider everything tunneled below an external_facing
+	 * device to be removable by the user. We're mainly concerned with
+	 * consumer platforms with user accessible thunderbolt ports that are
+	 * vulnerable to DMA attacks, and we expect those ports to be marked by
+	 * the firmware as external_facing. Devices in traditional hotplug
+	 * slots can technically be removed, but the expectation is that unless
+	 * the port is marked with external_facing, such devices are less
+	 * accessible to user / may not be removed by end user, and thus not
+	 * exposed as "removable" to userspace.
+	 */
+	if (dev_is_removable(&parent->dev)) {
+		dev_set_removable(&dev->dev, DEVICE_REMOVABLE);
+		return;
+	}
+
+	if (arch_pci_dev_is_removable(dev)) {
+		pci_dbg(dev, "marking as removable\n");
+		dev_set_removable(&dev->dev, DEVICE_REMOVABLE);
+	}
+}
+
+/**
+ * pci_ext_cfg_is_aliased - Is ext config space just an alias of std config?
+ * @dev: PCI device
+ *
+ * PCI Express to PCI/PCI-X Bridge Specification, rev 1.0, 4.1.4 says that
+ * when forwarding a type1 configuration request the bridge must check that
+ * the extended register address field is zero.  The bridge is not permitted
+ * to forward the transactions and must handle it as an Unsupported Request.
+ * Some bridges do not follow this rule and simply drop the extended register
+ * bits, resulting in the standard config space being aliased, every 256
+ * bytes across the entire configuration space.  Test for this condition by
+ * comparing the first dword of each potential alias to the vendor/device ID.
+ * Known offenders:
+ *   ASM1083/1085 PCIe-to-PCI Reversible Bridge (1b21:1080, rev 01 & 03)
+ *   AMD/ATI SBx00 PCI to PCI Bridge (1002:4384, rev 40)
+ */
+static bool pci_ext_cfg_is_aliased(struct pci_dev *dev)
+{
+#ifdef CONFIG_PCI_QUIRKS
+	int pos, ret;
+	u32 header, tmp;
+
+	pci_read_config_dword(dev, PCI_VENDOR_ID, &header);
+
+	for (pos = PCI_CFG_SPACE_SIZE;
+	     pos < PCI_CFG_SPACE_EXP_SIZE; pos += PCI_CFG_SPACE_SIZE) {
+		ret = pci_read_config_dword(dev, pos, &tmp);
+		if ((ret != PCIBIOS_SUCCESSFUL) || (header != tmp))
+			return false;
+	}
+
+	return true;
+#else
+	return false;
+#endif
+}
+
+/**
+ * pci_cfg_space_size_ext - Get the configuration space size of the PCI device
+ * @dev: PCI device
+ *
+ * Regular PCI devices have 256 bytes, but PCI-X 2 and PCI Express devices
+ * have 4096 bytes.  Even if the device is capable, that doesn't mean we can
+ * access it.  Maybe we don't have a way to generate extended config space
+ * accesses, or the device is behind a reverse Express bridge.  So we try
+ * reading the dword at 0x100 which must either be 0 or a valid extended
+ * capability header.
+ */
+static int pci_cfg_space_size_ext(struct pci_dev *dev)
+{
+	u32 status;
+	int pos = PCI_CFG_SPACE_SIZE;
+
+	if (pci_read_config_dword(dev, pos, &status) != PCIBIOS_SUCCESSFUL)
+		return PCI_CFG_SPACE_SIZE;
+	if (PCI_POSSIBLE_ERROR(status) || pci_ext_cfg_is_aliased(dev))
+		return PCI_CFG_SPACE_SIZE;
+
+	return PCI_CFG_SPACE_EXP_SIZE;
+}
+
+int pci_cfg_space_size(struct pci_dev *dev)
+{
+	int pos;
+	u32 status;
+	u16 class;
+
+#ifdef CONFIG_PCI_IOV
+	/*
+	 * Per the SR-IOV specification (rev 1.1, sec 3.5), VFs are required to
+	 * implement a PCIe capability and therefore must implement extended
+	 * config space.  We can skip the NO_EXTCFG test below and the
+	 * reachability/aliasing test in pci_cfg_space_size_ext() by virtue of
+	 * the fact that the SR-IOV capability on the PF resides in extended
+	 * config space and must be accessible and non-aliased to have enabled
+	 * support for this VF.  This is a micro performance optimization for
+	 * systems supporting many VFs.
+	 */
+	if (dev->is_virtfn)
+		return PCI_CFG_SPACE_EXP_SIZE;
+#endif
+
+	if (dev->bus->bus_flags & PCI_BUS_FLAGS_NO_EXTCFG)
+		return PCI_CFG_SPACE_SIZE;
+
+	class = dev->class >> 8;
+	if (class == PCI_CLASS_BRIDGE_HOST)
+		return pci_cfg_space_size_ext(dev);
+
+	if (pci_is_pcie(dev))
+		return pci_cfg_space_size_ext(dev);
+
+	pos = pci_find_capability(dev, PCI_CAP_ID_PCIX);
+	if (!pos)
+		return PCI_CFG_SPACE_SIZE;
+
+	pci_read_config_dword(dev, pos + PCI_X_STATUS, &status);
+	if (status & (PCI_X_STATUS_266MHZ | PCI_X_STATUS_533MHZ))
+		return pci_cfg_space_size_ext(dev);
+
+	return PCI_CFG_SPACE_SIZE;
+}
+
+static u32 pci_class(struct pci_dev *dev)
+{
+	u32 class;
+
+#ifdef CONFIG_PCI_IOV
+	if (dev->is_virtfn)
+		return dev->physfn->sriov->class;
+#endif
+	pci_read_config_dword(dev, PCI_CLASS_REVISION, &class);
+	return class;
+}
+
+static void pci_subsystem_ids(struct pci_dev *dev, u16 *vendor, u16 *device)
+{
+#ifdef CONFIG_PCI_IOV
+	if (dev->is_virtfn) {
+		*vendor = dev->physfn->sriov->subsystem_vendor;
+		*device = dev->physfn->sriov->subsystem_device;
+		return;
+	}
+#endif
+	pci_read_config_word(dev, PCI_SUBSYSTEM_VENDOR_ID, vendor);
+	pci_read_config_word(dev, PCI_SUBSYSTEM_ID, device);
+}
+
+static u8 pci_hdr_type(struct pci_dev *dev)
+{
+	u8 hdr_type;
+
+#ifdef CONFIG_PCI_IOV
+	if (dev->is_virtfn)
+		return dev->physfn->sriov->hdr_type;
+#endif
+	pci_read_config_byte(dev, PCI_HEADER_TYPE, &hdr_type);
+	return hdr_type;
+}
+
+#define LEGACY_IO_RESOURCE	(IORESOURCE_IO | IORESOURCE_PCI_FIXED)
+
+/**
+ * pci_intx_mask_broken - Test PCI_COMMAND_INTX_DISABLE writability
+ * @dev: PCI device
+ *
+ * Test whether PCI_COMMAND_INTX_DISABLE is writable for @dev.  Check this
+ * at enumeration-time to avoid modifying PCI_COMMAND at run-time.
+ */
+static int pci_intx_mask_broken(struct pci_dev *dev)
+{
+	u16 orig, toggle, new;
+
+	pci_read_config_word(dev, PCI_COMMAND, &orig);
+	toggle = orig ^ PCI_COMMAND_INTX_DISABLE;
+	pci_write_config_word(dev, PCI_COMMAND, toggle);
+	pci_read_config_word(dev, PCI_COMMAND, &new);
+
+	pci_write_config_word(dev, PCI_COMMAND, orig);
+
+	/*
+	 * PCI_COMMAND_INTX_DISABLE was reserved and read-only prior to PCI
+	 * r2.3, so strictly speaking, a device is not *broken* if it's not
+	 * writable.  But we'll live with the misnomer for now.
+	 */
+	if (new != toggle)
+		return 1;
+	return 0;
+}
+
+static void early_dump_pci_device(struct pci_dev *pdev)
+{
+	u32 value[256 / 4];
+	int i;
+
+	pci_info(pdev, "config space:\n");
+
+	for (i = 0; i < 256; i += 4)
+		pci_read_config_dword(pdev, i, &value[i / 4]);
+
+	print_hex_dump(KERN_INFO, "", DUMP_PREFIX_OFFSET, 16, 1,
+		       value, 256, false);
+}
+
+static const char *pci_type_str(struct pci_dev *dev)
+{
+	static const char * const str[] = {
+		"PCIe Endpoint",
+		"PCIe Legacy Endpoint",
+		"PCIe unknown",
+		"PCIe unknown",
+		"PCIe Root Port",
+		"PCIe Switch Upstream Port",
+		"PCIe Switch Downstream Port",
+		"PCIe to PCI/PCI-X bridge",
+		"PCI/PCI-X to PCIe bridge",
+		"PCIe Root Complex Integrated Endpoint",
+		"PCIe Root Complex Event Collector",
+	};
+	int type;
+
+	if (pci_is_pcie(dev)) {
+		type = pci_pcie_type(dev);
+		if (type < ARRAY_SIZE(str))
+			return str[type];
+
+		return "PCIe unknown";
+	}
+
+	switch (dev->hdr_type) {
+	case PCI_HEADER_TYPE_NORMAL:
+		return "conventional PCI endpoint";
+	case PCI_HEADER_TYPE_BRIDGE:
+		return "conventional PCI bridge";
+	case PCI_HEADER_TYPE_CARDBUS:
+		return "CardBus bridge";
+	default:
+		return "conventional PCI";
+	}
+}
+
+/**
+ * pci_setup_device - Fill in class and map information of a device
+ * @dev: the device structure to fill
+ *
+ * Initialize the device structure with information about the device's
+ * vendor,class,memory and IO-space addresses, IRQ lines etc.
+ * Called at initialisation of the PCI subsystem and by CardBus services.
+ * Returns 0 on success and negative if unknown type of device (not normal,
+ * bridge or CardBus).
+ */
+int pci_setup_device(struct pci_dev *dev)
+{
+	u32 class;
+	u16 cmd;
+	u8 hdr_type;
+	int err, pos = 0;
+	struct pci_bus_region region;
+	struct resource *res;
+
+	hdr_type = pci_hdr_type(dev);
+
+	dev->sysdata = dev->bus->sysdata;
+	dev->dev.parent = dev->bus->bridge;
+	dev->dev.bus = &pci_bus_type;
+	dev->hdr_type = hdr_type & 0x7f;
+	dev->multifunction = !!(hdr_type & 0x80);
+	dev->error_state = pci_channel_io_normal;
+	set_pcie_port_type(dev);
+
+	err = pci_set_of_node(dev);
+	if (err)
+		return err;
+	pci_set_acpi_fwnode(dev);
+
+	pci_dev_assign_slot(dev);
+
+	/*
+	 * Assume 32-bit PCI; let 64-bit PCI cards (which are far rarer)
+	 * set this higher, assuming the system even supports it.
+	 */
+	dev->dma_mask = 0xffffffff;
+
+	dev_set_name(&dev->dev, "%04x:%02x:%02x.%d", pci_domain_nr(dev->bus),
+		     dev->bus->number, PCI_SLOT(dev->devfn),
+		     PCI_FUNC(dev->devfn));
+
+	class = pci_class(dev);
+
+	dev->revision = class & 0xff;
+	dev->class = class >> 8;		    /* upper 3 bytes */
+
+	if (pci_early_dump)
+		early_dump_pci_device(dev);
+
+	/* Need to have dev->class ready */
+	dev->cfg_size = pci_cfg_space_size(dev);
+
+	/* Need to have dev->cfg_size ready */
+	set_pcie_thunderbolt(dev);
+
+	pci_set_requires_dma_protection(dev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* "Unknown power state" */
 	dev->current_state = PCI_UNKNOWN;

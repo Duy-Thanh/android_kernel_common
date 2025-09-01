@@ -159,6 +159,7 @@ static int pptp_xmit(struct ppp_channel *chan, struct sk_buff *skb)
 	int len;
 	unsigned char *data;
 	__u32 seq_recv;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct rtable *rt;
 	struct net_device *tdev;
 	struct iphdr  *iph;
@@ -266,6 +267,112 @@ static int pptp_xmit(struct ppp_channel *chan, struct sk_buff *skb)
 tx_error:
 	ip_rt_put(rt);
 tx_drop:
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+
+	struct rtable *rt;
+	struct net_device *tdev;
+	struct iphdr  *iph;
+	int    max_headroom;
+
+	if (sk_pppox(po)->sk_state & PPPOX_DEAD)
+		goto tx_error;
+
+	rt = pptp_route_output(po, &fl4);
+	if (IS_ERR(rt))
+		goto tx_error;
+
+	tdev = rt->dst.dev;
+
+	max_headroom = LL_RESERVED_SPACE(tdev) + sizeof(*iph) + sizeof(*hdr) + 2;
+
+	if (skb_headroom(skb) < max_headroom || skb_cloned(skb) || skb_shared(skb)) {
+		struct sk_buff *new_skb = skb_realloc_headroom(skb, max_headroom);
+		if (!new_skb) {
+			ip_rt_put(rt);
+			goto tx_error;
+		}
+		if (skb->sk)
+			skb_set_owner_w(new_skb, skb->sk);
+		consume_skb(skb);
+		skb = new_skb;
+	}
+
+	data = skb->data;
+	islcp = ((data[0] << 8) + data[1]) == PPP_LCP && 1 <= data[2] && data[2] <= 7;
+
+	/* compress protocol field */
+	if ((opt->ppp_flags & SC_COMP_PROT) && data[0] == 0 && !islcp)
+		skb_pull(skb, 1);
+
+	/* Put in the address/control bytes if necessary */
+	if ((opt->ppp_flags & SC_COMP_AC) == 0 || islcp) {
+		data = skb_push(skb, 2);
+		data[0] = PPP_ALLSTATIONS;
+		data[1] = PPP_UI;
+	}
+
+	len = skb->len;
+
+	seq_recv = opt->seq_recv;
+
+	if (opt->ack_sent == seq_recv)
+		header_len -= sizeof(hdr->ack);
+
+	/* Push down and install GRE header */
+	skb_push(skb, header_len);
+	hdr = (struct pptp_gre_header *)(skb->data);
+
+	hdr->gre_hd.flags = GRE_KEY | GRE_VERSION_1 | GRE_SEQ;
+	hdr->gre_hd.protocol = GRE_PROTO_PPP;
+	hdr->call_id = htons(opt->dst_addr.call_id);
+
+	hdr->seq = htonl(++opt->seq_sent);
+	if (opt->ack_sent != seq_recv)	{
+		/* send ack with this message */
+		hdr->gre_hd.flags |= GRE_ACK;
+		hdr->ack  = htonl(seq_recv);
+		opt->ack_sent = seq_recv;
+	}
+	hdr->payload_len = htons(len);
+
+	/*	Push down and install the IP header. */
+
+	skb_reset_transport_header(skb);
+	skb_push(skb, sizeof(*iph));
+	skb_reset_network_header(skb);
+	memset(&(IPCB(skb)->opt), 0, sizeof(IPCB(skb)->opt));
+	IPCB(skb)->flags &= ~(IPSKB_XFRM_TUNNEL_SIZE | IPSKB_XFRM_TRANSFORMED | IPSKB_REROUTED);
+
+	iph =	ip_hdr(skb);
+	iph->version =	4;
+	iph->ihl =	sizeof(struct iphdr) >> 2;
+	if (ip_dont_fragment(sk, &rt->dst))
+		iph->frag_off	=	htons(IP_DF);
+	else
+		iph->frag_off	=	0;
+	iph->protocol = IPPROTO_GRE;
+	iph->tos      = 0;
+	iph->daddr    = fl4.daddr;
+	iph->saddr    = fl4.saddr;
+	iph->ttl      = ip4_dst_hoplimit(&rt->dst);
+	iph->tot_len  = htons(skb->len);
+
+	skb_dst_drop(skb);
+	skb_dst_set(skb, &rt->dst);
+
+	nf_reset_ct(skb);
+
+	skb->ip_summed = CHECKSUM_NONE;
+	ip_select_ident(net, skb, NULL);
+	ip_send_check(iph);
+
+	ip_local_out(net, skb->sk, skb);
+	return 1;
+
+tx_error:
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	kfree_skb(skb);
 	return 1;
 }

@@ -205,6 +205,7 @@ static int pwm_imx_tpm_apply_hw(struct pwm_chip *chip,
 		writel(val, tpm->base + PWM_IMX_TPM_SC);
 
 		/*
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		 * if the counter is disabled (CMOD == 0), programming the new
 		 * period length (MOD) will not reset the counter (CNT). If
 		 * CNT.COUNT happens to be bigger than the new MOD value then
@@ -214,6 +215,9 @@ static int pwm_imx_tpm_apply_hw(struct pwm_chip *chip,
 		if (!cmod)
 			writel(0x0, tpm->base + PWM_IMX_TPM_CNT);
 		/*
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		 * set period count:
 		 * if the PWM is disabled (CMOD[1:0] = 2b00), then MOD register
 		 * is updated when MOD register is written.

@@ -3130,6 +3130,7 @@ out_free:
 #endif /* BUILD_EMBED_FIRST_CHUNK */
 
 #ifdef BUILD_PAGE_FIRST_CHUNK
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/pgalloc.h>
 
 #ifndef P4D_TABLE_SIZE
@@ -3167,6 +3168,46 @@ void __init __weak pcpu_populate_pte(unsigned long addr)
 		if (!pud)
 			goto err_alloc;
 		p4d_populate_kernel(addr, p4d, pud);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <asm/pgalloc.h>
+
+#ifndef P4D_TABLE_SIZE
+#define P4D_TABLE_SIZE PAGE_SIZE
+#endif
+
+#ifndef PUD_TABLE_SIZE
+#define PUD_TABLE_SIZE PAGE_SIZE
+#endif
+
+#ifndef PMD_TABLE_SIZE
+#define PMD_TABLE_SIZE PAGE_SIZE
+#endif
+
+#ifndef PTE_TABLE_SIZE
+#define PTE_TABLE_SIZE PAGE_SIZE
+#endif
+void __init __weak pcpu_populate_pte(unsigned long addr)
+{
+	pgd_t *pgd = pgd_offset_k(addr);
+	p4d_t *p4d;
+	pud_t *pud;
+	pmd_t *pmd;
+
+	if (pgd_none(*pgd)) {
+		p4d = memblock_alloc(P4D_TABLE_SIZE, P4D_TABLE_SIZE);
+		if (!p4d)
+			goto err_alloc;
+		pgd_populate(&init_mm, pgd, p4d);
+	}
+
+	p4d = p4d_offset(pgd, addr);
+	if (p4d_none(*p4d)) {
+		pud = memblock_alloc(PUD_TABLE_SIZE, PUD_TABLE_SIZE);
+		if (!pud)
+			goto err_alloc;
+		p4d_populate(&init_mm, p4d, pud);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	pud = pud_offset(p4d, addr);

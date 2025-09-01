@@ -13,6 +13,7 @@
 static DEFINE_XARRAY(ice_adapters);
 static DEFINE_MUTEX(ice_adapters_mutex);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define ICE_ADAPTER_FIXED_INDEX	BIT_ULL(63)
 
 #define ICE_ADAPTER_INDEX_E825C	\
@@ -131,6 +132,100 @@ void ice_adapter_put(struct pci_dev *pdev)
 	unsigned long index;
 
 	index = ice_adapter_xa_index(pdev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static unsigned long ice_adapter_index(u64 dsn)
+{
+#if BITS_PER_LONG == 64
+	return dsn;
+#else
+	return (u32)dsn ^ (u32)(dsn >> 32);
+#endif
+}
+
+static struct ice_adapter *ice_adapter_new(u64 dsn)
+{
+	struct ice_adapter *adapter;
+
+	adapter = kzalloc(sizeof(*adapter), GFP_KERNEL);
+	if (!adapter)
+		return NULL;
+
+	adapter->device_serial_number = dsn;
+	spin_lock_init(&adapter->ptp_gltsyn_time_lock);
+	refcount_set(&adapter->refcount, 1);
+
+	mutex_init(&adapter->ports.lock);
+	INIT_LIST_HEAD(&adapter->ports.ports);
+
+	return adapter;
+}
+
+static void ice_adapter_free(struct ice_adapter *adapter)
+{
+	WARN_ON(!list_empty(&adapter->ports.ports));
+	mutex_destroy(&adapter->ports.lock);
+
+	kfree(adapter);
+}
+
+/**
+ * ice_adapter_get - Get a shared ice_adapter structure.
+ * @pdev: Pointer to the pci_dev whose driver is getting the ice_adapter.
+ *
+ * Gets a pointer to a shared ice_adapter structure. Physical functions (PFs)
+ * of the same multi-function PCI device share one ice_adapter structure.
+ * The ice_adapter is reference-counted. The PF driver must use ice_adapter_put
+ * to release its reference.
+ *
+ * Context: Process, may sleep.
+ * Return:  Pointer to ice_adapter on success.
+ *          ERR_PTR() on error. -ENOMEM is the only possible error.
+ */
+struct ice_adapter *ice_adapter_get(struct pci_dev *pdev)
+{
+	u64 dsn = pci_get_dsn(pdev);
+	struct ice_adapter *adapter;
+	unsigned long index;
+	int err;
+
+	index = ice_adapter_index(dsn);
+	scoped_guard(mutex, &ice_adapters_mutex) {
+		err = xa_insert(&ice_adapters, index, NULL, GFP_KERNEL);
+		if (err == -EBUSY) {
+			adapter = xa_load(&ice_adapters, index);
+			refcount_inc(&adapter->refcount);
+			WARN_ON_ONCE(adapter->device_serial_number != dsn);
+			return adapter;
+		}
+		if (err)
+			return ERR_PTR(err);
+
+		adapter = ice_adapter_new(dsn);
+		if (!adapter)
+			return ERR_PTR(-ENOMEM);
+		xa_store(&ice_adapters, index, adapter, GFP_KERNEL);
+	}
+	return adapter;
+}
+
+/**
+ * ice_adapter_put - Release a reference to the shared ice_adapter structure.
+ * @pdev: Pointer to the pci_dev whose driver is releasing the ice_adapter.
+ *
+ * Releases the reference to ice_adapter previously obtained with
+ * ice_adapter_get.
+ *
+ * Context: Process, may sleep.
+ */
+void ice_adapter_put(struct pci_dev *pdev)
+{
+	u64 dsn = pci_get_dsn(pdev);
+	struct ice_adapter *adapter;
+	unsigned long index;
+
+	index = ice_adapter_index(dsn);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	scoped_guard(mutex, &ice_adapters_mutex) {
 		adapter = xa_load(&ice_adapters, index);
 		if (WARN_ON(!adapter))

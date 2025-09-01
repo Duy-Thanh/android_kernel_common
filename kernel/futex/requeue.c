@@ -225,6 +225,7 @@ static inline
 void requeue_pi_wake_futex(struct futex_q *q, union futex_key *key,
 			   struct futex_hash_bucket *hb)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct task_struct *task;
 
 	q->key = *key;
@@ -239,6 +240,21 @@ void requeue_pi_wake_futex(struct futex_q *q, union futex_key *key,
 	/* Signal locked state to the waiter */
 	futex_requeue_pi_complete(q, 1);
 	wake_up_state(task, TASK_NORMAL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	q->key = *key;
+
+	__futex_unqueue(q);
+
+	WARN_ON(!q->rt_waiter);
+	q->rt_waiter = NULL;
+
+	q->lock_ptr = &hb->lock;
+
+	/* Signal locked state to the waiter */
+	futex_requeue_pi_complete(q, 1);
+	wake_up_state(q->task, TASK_NORMAL);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /**

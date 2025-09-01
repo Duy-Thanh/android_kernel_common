@@ -655,6 +655,7 @@ int dw_pcie_wait_for_link(struct dw_pcie *pci)
 		return -ETIMEDOUT;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * As per PCIe r6.0, sec 6.6.1, a Downstream Port that supports Link
 	 * speeds greater than 5.0 GT/s, software must wait a minimum of 100 ms
@@ -663,6 +664,9 @@ int dw_pcie_wait_for_link(struct dw_pcie *pci)
 	if (pci->max_link_speed > 2)
 		msleep(PCIE_RESET_CONFIG_WAIT_MS);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	offset = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
 	val = dw_pcie_readw_dbi(pci, offset + PCI_EXP_LNKSTA);
 

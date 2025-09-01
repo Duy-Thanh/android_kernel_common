@@ -7,6 +7,7 @@
 #include <net/dscp.h>
 #include <net/ieee8021q.h>
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* verify that table covers all 8 traffic types */
 #define TT_MAP_SIZE_OK(tbl)                                 \
 	compiletime_assert(ARRAY_SIZE(tbl) == IEEE8021Q_TT_MAX, \
@@ -128,6 +129,148 @@ int ieee8021q_tt_to_tc(enum ieee8021q_traffic_type tt, unsigned int num_queues)
 		return ieee8021q_2queue_tt_tc_map[tt];
 	case 1:
 		TT_MAP_SIZE_OK(ieee8021q_1queue_tt_tc_map);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/* The following arrays map Traffic Types (TT) to traffic classes (TC) for
+ * different number of queues as shown in the example provided by
+ * IEEE 802.1Q-2022 in Annex I "I.3 Traffic type to traffic class mapping" and
+ * Table I-1 "Traffic type to traffic class mapping".
+ */
+static const u8 ieee8021q_8queue_tt_tc_map[] = {
+	[IEEE8021Q_TT_BK] = 0,
+	[IEEE8021Q_TT_BE] = 1,
+	[IEEE8021Q_TT_EE] = 2,
+	[IEEE8021Q_TT_CA] = 3,
+	[IEEE8021Q_TT_VI] = 4,
+	[IEEE8021Q_TT_VO] = 5,
+	[IEEE8021Q_TT_IC] = 6,
+	[IEEE8021Q_TT_NC] = 7,
+};
+
+static const u8 ieee8021q_7queue_tt_tc_map[] = {
+	[IEEE8021Q_TT_BK] = 0,
+	[IEEE8021Q_TT_BE] = 1,
+	[IEEE8021Q_TT_EE] = 2,
+	[IEEE8021Q_TT_CA] = 3,
+	[IEEE8021Q_TT_VI] = 4,	[IEEE8021Q_TT_VO] = 4,
+	[IEEE8021Q_TT_IC] = 5,
+	[IEEE8021Q_TT_NC] = 6,
+};
+
+static const u8 ieee8021q_6queue_tt_tc_map[] = {
+	[IEEE8021Q_TT_BK] = 0,
+	[IEEE8021Q_TT_BE] = 1,
+	[IEEE8021Q_TT_EE] = 2,	[IEEE8021Q_TT_CA] = 2,
+	[IEEE8021Q_TT_VI] = 3,	[IEEE8021Q_TT_VO] = 3,
+	[IEEE8021Q_TT_IC] = 4,
+	[IEEE8021Q_TT_NC] = 5,
+};
+
+static const u8 ieee8021q_5queue_tt_tc_map[] = {
+	[IEEE8021Q_TT_BK] = 0, [IEEE8021Q_TT_BE] = 0,
+	[IEEE8021Q_TT_EE] = 1, [IEEE8021Q_TT_CA] = 1,
+	[IEEE8021Q_TT_VI] = 2, [IEEE8021Q_TT_VO] = 2,
+	[IEEE8021Q_TT_IC] = 3,
+	[IEEE8021Q_TT_NC] = 4,
+};
+
+static const u8 ieee8021q_4queue_tt_tc_map[] = {
+	[IEEE8021Q_TT_BK] = 0, [IEEE8021Q_TT_BE] = 0,
+	[IEEE8021Q_TT_EE] = 1, [IEEE8021Q_TT_CA] = 1,
+	[IEEE8021Q_TT_VI] = 2, [IEEE8021Q_TT_VO] = 2,
+	[IEEE8021Q_TT_IC] = 3, [IEEE8021Q_TT_NC] = 3,
+};
+
+static const u8 ieee8021q_3queue_tt_tc_map[] = {
+	[IEEE8021Q_TT_BK] = 0, [IEEE8021Q_TT_BE] = 0,
+	[IEEE8021Q_TT_EE] = 0, [IEEE8021Q_TT_CA] = 0,
+	[IEEE8021Q_TT_VI] = 1, [IEEE8021Q_TT_VO] = 1,
+	[IEEE8021Q_TT_IC] = 2, [IEEE8021Q_TT_NC] = 2,
+};
+
+static const u8 ieee8021q_2queue_tt_tc_map[] = {
+	[IEEE8021Q_TT_BK] = 0, [IEEE8021Q_TT_BE] = 0,
+	[IEEE8021Q_TT_EE] = 0, [IEEE8021Q_TT_CA] = 0,
+	[IEEE8021Q_TT_VI] = 1, [IEEE8021Q_TT_VO] = 1,
+	[IEEE8021Q_TT_IC] = 1, [IEEE8021Q_TT_NC] = 1,
+};
+
+static const u8 ieee8021q_1queue_tt_tc_map[] = {
+	[IEEE8021Q_TT_BK] = 0, [IEEE8021Q_TT_BE] = 0,
+	[IEEE8021Q_TT_EE] = 0, [IEEE8021Q_TT_CA] = 0,
+	[IEEE8021Q_TT_VI] = 0, [IEEE8021Q_TT_VO] = 0,
+	[IEEE8021Q_TT_IC] = 0, [IEEE8021Q_TT_NC] = 0,
+};
+
+/**
+ * ieee8021q_tt_to_tc - Map IEEE 802.1Q Traffic Type to Traffic Class
+ * @tt: IEEE 802.1Q Traffic Type
+ * @num_queues: Number of queues
+ *
+ * This function maps an IEEE 802.1Q Traffic Type to a Traffic Class (TC) based
+ * on the number of queues configured on the NIC. The mapping is based on the
+ * example provided by IEEE 802.1Q-2022 in Annex I "I.3 Traffic type to traffic
+ * class mapping" and Table I-1 "Traffic type to traffic class mapping".
+ *
+ * Return: Traffic Class corresponding to the given Traffic Type or negative
+ * value in case of error.
+ */
+int ieee8021q_tt_to_tc(enum ieee8021q_traffic_type tt, unsigned int num_queues)
+{
+	if (tt < 0 || tt >= IEEE8021Q_TT_MAX) {
+		pr_err("Requested Traffic Type (%d) is out of range (%d)\n", tt,
+		       IEEE8021Q_TT_MAX);
+		return -EINVAL;
+	}
+
+	switch (num_queues) {
+	case 8:
+		compiletime_assert(ARRAY_SIZE(ieee8021q_8queue_tt_tc_map) !=
+				   IEEE8021Q_TT_MAX - 1,
+				   "ieee8021q_8queue_tt_tc_map != max - 1");
+		return ieee8021q_8queue_tt_tc_map[tt];
+	case 7:
+		compiletime_assert(ARRAY_SIZE(ieee8021q_7queue_tt_tc_map) !=
+				   IEEE8021Q_TT_MAX - 1,
+				   "ieee8021q_7queue_tt_tc_map != max - 1");
+
+		return ieee8021q_7queue_tt_tc_map[tt];
+	case 6:
+		compiletime_assert(ARRAY_SIZE(ieee8021q_6queue_tt_tc_map) !=
+				   IEEE8021Q_TT_MAX - 1,
+				   "ieee8021q_6queue_tt_tc_map != max - 1");
+
+		return ieee8021q_6queue_tt_tc_map[tt];
+	case 5:
+		compiletime_assert(ARRAY_SIZE(ieee8021q_5queue_tt_tc_map) !=
+				   IEEE8021Q_TT_MAX - 1,
+				   "ieee8021q_5queue_tt_tc_map != max - 1");
+
+		return ieee8021q_5queue_tt_tc_map[tt];
+	case 4:
+		compiletime_assert(ARRAY_SIZE(ieee8021q_4queue_tt_tc_map) !=
+				   IEEE8021Q_TT_MAX - 1,
+				   "ieee8021q_4queue_tt_tc_map != max - 1");
+
+		return ieee8021q_4queue_tt_tc_map[tt];
+	case 3:
+		compiletime_assert(ARRAY_SIZE(ieee8021q_3queue_tt_tc_map) !=
+				   IEEE8021Q_TT_MAX - 1,
+				   "ieee8021q_3queue_tt_tc_map != max - 1");
+
+		return ieee8021q_3queue_tt_tc_map[tt];
+	case 2:
+		compiletime_assert(ARRAY_SIZE(ieee8021q_2queue_tt_tc_map) !=
+				   IEEE8021Q_TT_MAX - 1,
+				   "ieee8021q_2queue_tt_tc_map != max - 1");
+
+		return ieee8021q_2queue_tt_tc_map[tt];
+	case 1:
+		compiletime_assert(ARRAY_SIZE(ieee8021q_1queue_tt_tc_map) !=
+				   IEEE8021Q_TT_MAX - 1,
+				   "ieee8021q_1queue_tt_tc_map != max - 1");
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return ieee8021q_1queue_tt_tc_map[tt];
 	}
 

@@ -279,6 +279,7 @@ static struct atm_vcc *find_vcc(struct atm_dev *dev, short vpi, int vci)
         return NULL;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int atmtcp_c_pre_send(struct atm_vcc *vcc, struct sk_buff *skb)
 {
 	struct atmtcp_hdr *hdr;
@@ -358,6 +359,77 @@ static const struct atmdev_ops atmtcp_v_dev_ops = {
 static const struct atmdev_ops atmtcp_c_dev_ops = {
 	.close		= atmtcp_c_close,
 	.pre_send	= atmtcp_c_pre_send,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+static int atmtcp_c_send(struct atm_vcc *vcc,struct sk_buff *skb)
+{
+	struct atm_dev *dev;
+	struct atmtcp_hdr *hdr;
+	struct atm_vcc *out_vcc;
+	struct sk_buff *new_skb;
+	int result = 0;
+
+	if (skb->len < sizeof(struct atmtcp_hdr))
+		goto done;
+
+	dev = vcc->dev_data;
+	hdr = (struct atmtcp_hdr *) skb->data;
+	if (hdr->length == ATMTCP_HDR_MAGIC) {
+		result = atmtcp_recv_control(
+		    (struct atmtcp_control *) skb->data);
+		goto done;
+	}
+	read_lock(&vcc_sklist_lock);
+	out_vcc = find_vcc(dev, ntohs(hdr->vpi), ntohs(hdr->vci));
+	read_unlock(&vcc_sklist_lock);
+	if (!out_vcc) {
+		result = -EUNATCH;
+		atomic_inc(&vcc->stats->tx_err);
+		goto done;
+	}
+	skb_pull(skb,sizeof(struct atmtcp_hdr));
+	new_skb = atm_alloc_charge(out_vcc,skb->len,GFP_KERNEL);
+	if (!new_skb) {
+		result = -ENOBUFS;
+		goto done;
+	}
+	__net_timestamp(new_skb);
+	skb_copy_from_linear_data(skb, skb_put(new_skb, skb->len), skb->len);
+	out_vcc->push(out_vcc,new_skb);
+	atomic_inc(&vcc->stats->tx);
+	atomic_inc(&out_vcc->stats->rx);
+done:
+	if (vcc->pop) vcc->pop(vcc,skb);
+	else dev_kfree_skb(skb);
+	return result;
+}
+
+
+/*
+ * Device operations for the virtual ATM devices created by ATMTCP.
+ */
+
+
+static const struct atmdev_ops atmtcp_v_dev_ops = {
+	.dev_close	= atmtcp_v_dev_close,
+	.open		= atmtcp_v_open,
+	.close		= atmtcp_v_close,
+	.ioctl		= atmtcp_v_ioctl,
+	.send		= atmtcp_v_send,
+	.proc_read	= atmtcp_v_proc,
+	.owner		= THIS_MODULE
+};
+
+
+/*
+ * Device operations for the ATMTCP control device.
+ */
+
+
+static const struct atmdev_ops atmtcp_c_dev_ops = {
+	.close		= atmtcp_c_close,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.send		= atmtcp_c_send
 };
 

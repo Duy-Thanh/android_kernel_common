@@ -47,6 +47,7 @@ static int mule_i2c_mux_probe(struct platform_device *pdev)
 	struct mule_i2c_reg_mux *priv;
 	struct i2c_client *client;
 	struct i2c_mux_core *muxc;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	unsigned int readback;
 	int ndev, ret;
 	bool old_fw;
@@ -95,6 +96,58 @@ static int mule_i2c_mux_probe(struct platform_device *pdev)
 
 	/* Create device adapters */
 	for_each_child_of_node_scoped(mux_dev->of_node, dev) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct device_node *dev;
+	unsigned int readback;
+	int ndev, ret;
+	bool old_fw;
+
+	/* Count devices on the mux */
+	ndev = of_get_child_count(mux_dev->of_node);
+	dev_dbg(mux_dev, "%d devices on the mux\n", ndev);
+
+	client = to_i2c_client(mux_dev->parent);
+
+	muxc = i2c_mux_alloc(client->adapter, mux_dev, ndev, sizeof(*priv),
+			     I2C_MUX_LOCKED, mule_i2c_mux_select, mule_i2c_mux_deselect);
+	if (!muxc)
+		return -ENOMEM;
+
+	priv = i2c_mux_priv(muxc);
+
+	priv->regmap = dev_get_regmap(mux_dev->parent, NULL);
+	if (!priv->regmap)
+		return dev_err_probe(mux_dev, -ENODEV,
+				     "No parent i2c register map\n");
+
+	platform_set_drvdata(pdev, muxc);
+
+	/*
+	 * MULE_I2C_MUX_DEFAULT_DEV is guaranteed to exist on all old and new
+	 * mule fw. Mule fw without mux support will accept write ops to the
+	 * config register, but readback returns 0xff (register not updated).
+	 */
+	ret = mule_i2c_mux_select(muxc, MULE_I2C_MUX_DEFAULT_DEV);
+	if (ret)
+		return dev_err_probe(mux_dev, ret,
+				     "Failed to write config register\n");
+
+	ret = regmap_read(priv->regmap, MULE_I2C_MUX_CONFIG_REG, &readback);
+	if (ret)
+		return dev_err_probe(mux_dev, ret,
+				     "Failed to read config register\n");
+
+	old_fw = (readback != MULE_I2C_MUX_DEFAULT_DEV);
+
+	ret = devm_add_action_or_reset(mux_dev, mule_i2c_mux_remove, muxc);
+	if (ret)
+		return dev_err_probe(mux_dev, ret,
+				     "Failed to register mux remove\n");
+
+	/* Create device adapters */
+	for_each_child_of_node(mux_dev->of_node, dev) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		u32 reg;
 
 		ret = of_property_read_u32(dev, "reg", &reg);

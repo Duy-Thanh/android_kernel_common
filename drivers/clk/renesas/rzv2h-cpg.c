@@ -312,7 +312,11 @@ rzv2h_cpg_ddiv_clk_register(const struct cpg_core_clk *core,
 	init.ops = &rzv2h_ddiv_clk_divider_ops;
 	init.parent_names = &parent_name;
 	init.num_parents = 1;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	init.flags = CLK_SET_RATE_PARENT;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	ddiv->priv = priv;
 	ddiv->mon = cfg_ddiv.monbit;

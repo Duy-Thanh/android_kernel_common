@@ -1146,6 +1146,7 @@ static inline void pipapo_resmap_init_avx2(const struct nft_pipapo_match *m, uns
  *
  * Return: true on match, false otherwise.
  */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 const struct nft_set_ext *
 nft_pipapo_avx2_lookup(const struct net *net, const struct nft_set *set,
 		       const u32 *key)
@@ -1266,4 +1267,126 @@ out:
 	local_bh_enable();
 
 	return ext;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+bool nft_pipapo_avx2_lookup(const struct net *net, const struct nft_set *set,
+			    const u32 *key, const struct nft_set_ext **ext)
+{
+	struct nft_pipapo *priv = nft_set_priv(set);
+	struct nft_pipapo_scratch *scratch;
+	u8 genmask = nft_genmask_cur(net);
+	const struct nft_pipapo_match *m;
+	const struct nft_pipapo_field *f;
+	const u8 *rp = (const u8 *)key;
+	unsigned long *res, *fill;
+	bool map_index;
+	int i, ret = 0;
+
+	local_bh_disable();
+
+	if (unlikely(!irq_fpu_usable())) {
+		bool fallback_res = nft_pipapo_lookup(net, set, key, ext);
+
+		local_bh_enable();
+		return fallback_res;
+	}
+
+	m = rcu_dereference(priv->match);
+
+	/* This also protects access to all data related to scratch maps.
+	 *
+	 * Note that we don't need a valid MXCSR state for any of the
+	 * operations we use here, so pass 0 as mask and spare a LDMXCSR
+	 * instruction.
+	 */
+	kernel_fpu_begin_mask(0);
+
+	scratch = *raw_cpu_ptr(m->scratch);
+	if (unlikely(!scratch)) {
+		kernel_fpu_end();
+		local_bh_enable();
+		return false;
+	}
+
+	map_index = scratch->map_index;
+
+	res  = scratch->map + (map_index ? m->bsize_max : 0);
+	fill = scratch->map + (map_index ? 0 : m->bsize_max);
+
+	pipapo_resmap_init_avx2(m, res);
+
+	nft_pipapo_avx2_prepare();
+
+next_match:
+	nft_pipapo_for_each_field(f, i, m) {
+		bool last = i == m->field_count - 1, first = !i;
+
+#define NFT_SET_PIPAPO_AVX2_LOOKUP(b, n)				\
+		(ret = nft_pipapo_avx2_lookup_##b##b_##n(res, fill, f,	\
+							 ret, rp,	\
+							 first, last))
+
+		if (likely(f->bb == 8)) {
+			if (f->groups == 1) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(8, 1);
+			} else if (f->groups == 2) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(8, 2);
+			} else if (f->groups == 4) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(8, 4);
+			} else if (f->groups == 6) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(8, 6);
+			} else if (f->groups == 16) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(8, 16);
+			} else {
+				ret = nft_pipapo_avx2_lookup_slow(m, res, fill, f,
+								  ret, rp,
+								  first, last);
+			}
+		} else {
+			if (f->groups == 2) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(4, 2);
+			} else if (f->groups == 4) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(4, 4);
+			} else if (f->groups == 8) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(4, 8);
+			} else if (f->groups == 12) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(4, 12);
+			} else if (f->groups == 32) {
+				NFT_SET_PIPAPO_AVX2_LOOKUP(4, 32);
+			} else {
+				ret = nft_pipapo_avx2_lookup_slow(m, res, fill, f,
+								  ret, rp,
+								  first, last);
+			}
+		}
+		NFT_PIPAPO_GROUP_BITS_ARE_8_OR_4;
+
+#undef NFT_SET_PIPAPO_AVX2_LOOKUP
+
+		if (ret < 0)
+			goto out;
+
+		if (last) {
+			*ext = &f->mt[ret].e->ext;
+			if (unlikely(nft_set_elem_expired(*ext) ||
+				     !nft_set_elem_active(*ext, genmask))) {
+				ret = 0;
+				goto next_match;
+			}
+
+			goto out;
+		}
+
+		swap(res, fill);
+		rp += NFT_PIPAPO_GROUPS_PADDED_SIZE(f);
+	}
+
+out:
+	if (i % 2)
+		scratch->map_index = !map_index;
+	kernel_fpu_end();
+	local_bh_enable();
+
+	return ret >= 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }

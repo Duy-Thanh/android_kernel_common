@@ -1035,6 +1035,7 @@ static bool msm_gpio_needs_dual_edge_parent_workaround(struct irq_data *d,
 	       test_bit(d->hwirq, pctrl->skip_wake_irqs);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void msm_gpio_irq_init_valid_mask(struct gpio_chip *gc,
 					 unsigned long *valid_mask,
 					 unsigned int ngpios)
@@ -1458,6 +1459,412 @@ static int msm_gpio_init(struct msm_pinctrl *pctrl)
 	girq->handler = handle_bad_irq;
 	girq->parents[0] = pctrl->irq;
 	girq->init_valid_mask = msm_gpio_irq_init_valid_mask;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int msm_gpio_irq_set_type(struct irq_data *d, unsigned int type)
+{
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+	const struct msm_pingroup *g;
+	u32 intr_target_mask = GENMASK(2, 0);
+	unsigned long flags;
+	u32 val, oldval;
+
+	if (msm_gpio_needs_dual_edge_parent_workaround(d, type)) {
+		set_bit(d->hwirq, pctrl->dual_edge_irqs);
+		irq_set_handler_locked(d, handle_fasteoi_ack_irq);
+		msm_gpio_update_dual_edge_parent(d);
+		return 0;
+	}
+
+	if (d->parent_data)
+		irq_chip_set_type_parent(d, type);
+
+	if (test_bit(d->hwirq, pctrl->skip_wake_irqs)) {
+		clear_bit(d->hwirq, pctrl->dual_edge_irqs);
+		irq_set_handler_locked(d, handle_fasteoi_irq);
+		return 0;
+	}
+
+	g = &pctrl->soc->groups[d->hwirq];
+
+	raw_spin_lock_irqsave(&pctrl->lock, flags);
+
+	/*
+	 * For hw without possibility of detecting both edges
+	 */
+	if (g->intr_detection_width == 1 && type == IRQ_TYPE_EDGE_BOTH)
+		set_bit(d->hwirq, pctrl->dual_edge_irqs);
+	else
+		clear_bit(d->hwirq, pctrl->dual_edge_irqs);
+
+	/* Route interrupts to application cpu.
+	 * With intr_target_use_scm interrupts are routed to
+	 * application cpu using scm calls.
+	 */
+	if (g->intr_target_width)
+		intr_target_mask = GENMASK(g->intr_target_width - 1, 0);
+
+	if (pctrl->intr_target_use_scm) {
+		u32 addr = pctrl->phys_base[0] + g->intr_target_reg;
+		int ret;
+
+		qcom_scm_io_readl(addr, &val);
+		val &= ~(intr_target_mask << g->intr_target_bit);
+		val |= g->intr_target_kpss_val << g->intr_target_bit;
+
+		ret = qcom_scm_io_writel(addr, val);
+		if (ret)
+			dev_err(pctrl->dev,
+				"Failed routing %lu interrupt to Apps proc",
+				d->hwirq);
+	} else {
+		val = msm_readl_intr_target(pctrl, g);
+		val &= ~(intr_target_mask << g->intr_target_bit);
+		val |= g->intr_target_kpss_val << g->intr_target_bit;
+		msm_writel_intr_target(val, pctrl, g);
+	}
+
+	/* Update configuration for gpio.
+	 * RAW_STATUS_EN is left on for all gpio irqs. Due to the
+	 * internal circuitry of TLMM, toggling the RAW_STATUS
+	 * could cause the INTR_STATUS to be set for EDGE interrupts.
+	 */
+	val = oldval = msm_readl_intr_cfg(pctrl, g);
+	val |= BIT(g->intr_raw_status_bit);
+	if (g->intr_detection_width == 2) {
+		val &= ~(3 << g->intr_detection_bit);
+		val &= ~(1 << g->intr_polarity_bit);
+		switch (type) {
+		case IRQ_TYPE_EDGE_RISING:
+			val |= 1 << g->intr_detection_bit;
+			val |= BIT(g->intr_polarity_bit);
+			break;
+		case IRQ_TYPE_EDGE_FALLING:
+			val |= 2 << g->intr_detection_bit;
+			val |= BIT(g->intr_polarity_bit);
+			break;
+		case IRQ_TYPE_EDGE_BOTH:
+			val |= 3 << g->intr_detection_bit;
+			val |= BIT(g->intr_polarity_bit);
+			break;
+		case IRQ_TYPE_LEVEL_LOW:
+			break;
+		case IRQ_TYPE_LEVEL_HIGH:
+			val |= BIT(g->intr_polarity_bit);
+			break;
+		}
+	} else if (g->intr_detection_width == 1) {
+		val &= ~(1 << g->intr_detection_bit);
+		val &= ~(1 << g->intr_polarity_bit);
+		switch (type) {
+		case IRQ_TYPE_EDGE_RISING:
+			val |= BIT(g->intr_detection_bit);
+			val |= BIT(g->intr_polarity_bit);
+			break;
+		case IRQ_TYPE_EDGE_FALLING:
+			val |= BIT(g->intr_detection_bit);
+			break;
+		case IRQ_TYPE_EDGE_BOTH:
+			val |= BIT(g->intr_detection_bit);
+			val |= BIT(g->intr_polarity_bit);
+			break;
+		case IRQ_TYPE_LEVEL_LOW:
+			break;
+		case IRQ_TYPE_LEVEL_HIGH:
+			val |= BIT(g->intr_polarity_bit);
+			break;
+		}
+	} else {
+		BUG();
+	}
+	msm_writel_intr_cfg(val, pctrl, g);
+
+	/*
+	 * The first time we set RAW_STATUS_EN it could trigger an interrupt.
+	 * Clear the interrupt.  This is safe because we have
+	 * IRQCHIP_SET_TYPE_MASKED. When changing the interrupt type, we could
+	 * also still have a non-matching interrupt latched, so clear whenever
+	 * making changes to the interrupt configuration.
+	 */
+	if (val != oldval)
+		msm_ack_intr_status(pctrl, g);
+
+	if (test_bit(d->hwirq, pctrl->dual_edge_irqs))
+		msm_gpio_update_dual_edge_pos(pctrl, g, d);
+
+	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+
+	if (type & (IRQ_TYPE_LEVEL_LOW | IRQ_TYPE_LEVEL_HIGH))
+		irq_set_handler_locked(d, handle_level_irq);
+	else if (type & (IRQ_TYPE_EDGE_FALLING | IRQ_TYPE_EDGE_RISING))
+		irq_set_handler_locked(d, handle_edge_irq);
+
+	return 0;
+}
+
+static int msm_gpio_irq_set_wake(struct irq_data *d, unsigned int on)
+{
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+
+	/*
+	 * While they may not wake up when the TLMM is powered off,
+	 * some GPIOs would like to wakeup the system from suspend
+	 * when TLMM is powered on. To allow that, enable the GPIO
+	 * summary line to be wakeup capable at GIC.
+	 */
+	if (d->parent_data && test_bit(d->hwirq, pctrl->skip_wake_irqs))
+		return irq_chip_set_wake_parent(d, on);
+
+	return irq_set_irq_wake(pctrl->irq, on);
+}
+
+static int msm_gpio_irq_reqres(struct irq_data *d)
+{
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+	const struct msm_pingroup *g = &pctrl->soc->groups[d->hwirq];
+	unsigned long flags;
+	int ret;
+
+	if (!try_module_get(gc->owner))
+		return -ENODEV;
+
+	ret = msm_pinmux_request_gpio(pctrl->pctrl, NULL, d->hwirq);
+	if (ret)
+		goto out;
+	msm_gpio_direction_input(gc, d->hwirq);
+
+	if (gpiochip_lock_as_irq(gc, d->hwirq)) {
+		dev_err(gc->parent,
+			"unable to lock HW IRQ %lu for IRQ\n",
+			d->hwirq);
+		ret = -EINVAL;
+		goto out;
+	}
+
+	/*
+	 * The disable / clear-enable workaround we do in msm_pinmux_set_mux()
+	 * only works if disable is not lazy since we only clear any bogus
+	 * interrupt in hardware. Explicitly mark the interrupt as UNLAZY.
+	 */
+	irq_set_status_flags(d->irq, IRQ_DISABLE_UNLAZY);
+
+	/*
+	 * If the wakeup_enable bit is present and marked as available for the
+	 * requested GPIO, it should be enabled when the GPIO is marked as
+	 * wake irq in order to allow the interrupt event to be transfered to
+	 * the PDC HW.
+	 * While the name implies only the wakeup event, it's also required for
+	 * the interrupt event.
+	 */
+	if (test_bit(d->hwirq, pctrl->skip_wake_irqs) && g->intr_wakeup_present_bit) {
+		u32 intr_cfg;
+
+		raw_spin_lock_irqsave(&pctrl->lock, flags);
+
+		intr_cfg = msm_readl_intr_cfg(pctrl, g);
+		if (intr_cfg & BIT(g->intr_wakeup_present_bit)) {
+			intr_cfg |= BIT(g->intr_wakeup_enable_bit);
+			msm_writel_intr_cfg(intr_cfg, pctrl, g);
+		}
+
+		raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+	}
+
+	return 0;
+out:
+	module_put(gc->owner);
+	return ret;
+}
+
+static void msm_gpio_irq_relres(struct irq_data *d)
+{
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+	const struct msm_pingroup *g = &pctrl->soc->groups[d->hwirq];
+	unsigned long flags;
+
+	/* Disable the wakeup_enable bit if it has been set in msm_gpio_irq_reqres() */
+	if (test_bit(d->hwirq, pctrl->skip_wake_irqs) && g->intr_wakeup_present_bit) {
+		u32 intr_cfg;
+
+		raw_spin_lock_irqsave(&pctrl->lock, flags);
+
+		intr_cfg = msm_readl_intr_cfg(pctrl, g);
+		if (intr_cfg & BIT(g->intr_wakeup_present_bit)) {
+			intr_cfg &= ~BIT(g->intr_wakeup_enable_bit);
+			msm_writel_intr_cfg(intr_cfg, pctrl, g);
+		}
+
+		raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+	}
+
+	gpiochip_unlock_as_irq(gc, d->hwirq);
+	module_put(gc->owner);
+}
+
+static int msm_gpio_irq_set_affinity(struct irq_data *d,
+				const struct cpumask *dest, bool force)
+{
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+
+	if (d->parent_data && test_bit(d->hwirq, pctrl->skip_wake_irqs))
+		return irq_chip_set_affinity_parent(d, dest, force);
+
+	return -EINVAL;
+}
+
+static int msm_gpio_irq_set_vcpu_affinity(struct irq_data *d, void *vcpu_info)
+{
+	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+
+	if (d->parent_data && test_bit(d->hwirq, pctrl->skip_wake_irqs))
+		return irq_chip_set_vcpu_affinity_parent(d, vcpu_info);
+
+	return -EINVAL;
+}
+
+static void msm_gpio_irq_handler(struct irq_desc *desc)
+{
+	struct gpio_chip *gc = irq_desc_get_handler_data(desc);
+	const struct msm_pingroup *g;
+	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+	struct irq_chip *chip = irq_desc_get_chip(desc);
+	int handled = 0;
+	u32 val;
+	int i;
+
+	chained_irq_enter(chip, desc);
+
+	/*
+	 * Each pin has it's own IRQ status register, so use
+	 * enabled_irq bitmap to limit the number of reads.
+	 */
+	for_each_set_bit(i, pctrl->enabled_irqs, pctrl->chip.ngpio) {
+		g = &pctrl->soc->groups[i];
+		val = msm_readl_intr_status(pctrl, g);
+		if (val & BIT(g->intr_status_bit)) {
+			generic_handle_domain_irq(gc->irq.domain, i);
+			handled++;
+		}
+	}
+
+	/* No interrupts were flagged */
+	if (handled == 0)
+		handle_bad_irq(desc);
+
+	chained_irq_exit(chip, desc);
+}
+
+static int msm_gpio_wakeirq(struct gpio_chip *gc,
+			    unsigned int child,
+			    unsigned int child_type,
+			    unsigned int *parent,
+			    unsigned int *parent_type)
+{
+	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+	const struct msm_gpio_wakeirq_map *map;
+	int i;
+
+	*parent = GPIO_NO_WAKE_IRQ;
+	*parent_type = IRQ_TYPE_EDGE_RISING;
+
+	for (i = 0; i < pctrl->soc->nwakeirq_map; i++) {
+		map = &pctrl->soc->wakeirq_map[i];
+		if (map->gpio == child) {
+			*parent = map->wakeirq;
+			break;
+		}
+	}
+
+	return 0;
+}
+
+static bool msm_gpio_needs_valid_mask(struct msm_pinctrl *pctrl)
+{
+	if (pctrl->soc->reserved_gpios)
+		return true;
+
+	return device_property_count_u16(pctrl->dev, "gpios") > 0;
+}
+
+static const struct irq_chip msm_gpio_irq_chip = {
+	.name			= "msmgpio",
+	.irq_enable		= msm_gpio_irq_enable,
+	.irq_disable		= msm_gpio_irq_disable,
+	.irq_mask		= msm_gpio_irq_mask,
+	.irq_unmask		= msm_gpio_irq_unmask,
+	.irq_ack		= msm_gpio_irq_ack,
+	.irq_eoi		= msm_gpio_irq_eoi,
+	.irq_set_type		= msm_gpio_irq_set_type,
+	.irq_set_wake		= msm_gpio_irq_set_wake,
+	.irq_request_resources	= msm_gpio_irq_reqres,
+	.irq_release_resources	= msm_gpio_irq_relres,
+	.irq_set_affinity	= msm_gpio_irq_set_affinity,
+	.irq_set_vcpu_affinity	= msm_gpio_irq_set_vcpu_affinity,
+	.flags			= (IRQCHIP_MASK_ON_SUSPEND |
+				   IRQCHIP_SET_TYPE_MASKED |
+				   IRQCHIP_ENABLE_WAKEUP_ON_SUSPEND |
+				   IRQCHIP_IMMUTABLE),
+};
+
+static int msm_gpio_init(struct msm_pinctrl *pctrl)
+{
+	struct gpio_chip *chip;
+	struct gpio_irq_chip *girq;
+	int i, ret;
+	unsigned gpio, ngpio = pctrl->soc->ngpios;
+	struct device_node *np;
+	bool skip;
+
+	if (WARN_ON(ngpio > MAX_NR_GPIO))
+		return -EINVAL;
+
+	chip = &pctrl->chip;
+	chip->base = -1;
+	chip->ngpio = ngpio;
+	chip->label = dev_name(pctrl->dev);
+	chip->parent = pctrl->dev;
+	chip->owner = THIS_MODULE;
+	if (msm_gpio_needs_valid_mask(pctrl))
+		chip->init_valid_mask = msm_gpio_init_valid_mask;
+
+	np = of_parse_phandle(pctrl->dev->of_node, "wakeup-parent", 0);
+	if (np) {
+		chip->irq.parent_domain = irq_find_matching_host(np,
+						 DOMAIN_BUS_WAKEUP);
+		of_node_put(np);
+		if (!chip->irq.parent_domain)
+			return -EPROBE_DEFER;
+		chip->irq.child_to_parent_hwirq = msm_gpio_wakeirq;
+		/*
+		 * Let's skip handling the GPIOs, if the parent irqchip
+		 * is handling the direct connect IRQ of the GPIO.
+		 */
+		skip = irq_domain_qcom_handle_wakeup(chip->irq.parent_domain);
+		for (i = 0; skip && i < pctrl->soc->nwakeirq_map; i++) {
+			gpio = pctrl->soc->wakeirq_map[i].gpio;
+			set_bit(gpio, pctrl->skip_wake_irqs);
+		}
+	}
+
+	girq = &chip->irq;
+	gpio_irq_chip_set_chip(girq, &msm_gpio_irq_chip);
+	girq->parent_handler = msm_gpio_irq_handler;
+	girq->fwnode = dev_fwnode(pctrl->dev);
+	girq->num_parents = 1;
+	girq->parents = devm_kcalloc(pctrl->dev, 1, sizeof(*girq->parents),
+				     GFP_KERNEL);
+	if (!girq->parents)
+		return -ENOMEM;
+	girq->default_type = IRQ_TYPE_NONE;
+	girq->handler = handle_bad_irq;
+	girq->parents[0] = pctrl->irq;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	ret = gpiochip_add_data(&pctrl->chip, pctrl);
 	if (ret) {

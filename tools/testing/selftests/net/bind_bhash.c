@@ -75,6 +75,7 @@ static void *setup(void *arg)
 	int *array = (int *)arg;
 
 	for (i = 0; i < MAX_CONNECTIONS; i++) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		sock_fd = bind_socket(SO_REUSEPORT, setup_addr);
 		if (sock_fd < 0) {
 			ret = sock_fd;
@@ -104,6 +105,38 @@ int main(int argc, const char *argv[])
 	setup_addr = use_v6 ? setup_addr_v6 : setup_addr_v4;
 
 	listener_fd = bind_socket(SO_REUSEPORT, setup_addr);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		sock_fd = bind_socket(SO_REUSEADDR | SO_REUSEPORT, setup_addr);
+		if (sock_fd < 0) {
+			ret = sock_fd;
+			pthread_exit(&ret);
+		}
+		array[i] = sock_fd;
+	}
+
+	return NULL;
+}
+
+int main(int argc, const char *argv[])
+{
+	int listener_fd, sock_fd, i, j;
+	pthread_t tid[MAX_THREADS];
+	clock_t begin, end;
+
+	if (argc != 4) {
+		printf("Usage: listener <port> <ipv6 | ipv4> <bind-addr>\n");
+		return -1;
+	}
+
+	port = argv[1];
+	use_v6 = strcmp(argv[2], "ipv6") == 0;
+	bind_addr = argv[3];
+
+	setup_addr = use_v6 ? setup_addr_v6 : setup_addr_v4;
+
+	listener_fd = bind_socket(SO_REUSEADDR | SO_REUSEPORT, setup_addr);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (listen(listener_fd, 100) < 0) {
 		perror("listen failed");
 		return -1;

@@ -61,6 +61,7 @@ static char *selinux_ima_collect_state(void)
 		WARN_ON(rc >= buf_len);
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * ANDROID: memfd_class is handled separately from the rest of the policycaps to preserve
 	 * the ABI.
@@ -71,6 +72,9 @@ static char *selinux_ima_collect_state(void)
 	rc = strlcat(buf, selinux_memfd_class_policycap ? on : off, buf_len);
 	WARN_ON(rc >= buf_len);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return buf;
 }
 

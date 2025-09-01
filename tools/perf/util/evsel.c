@@ -1477,6 +1477,7 @@ static void evsel__free_config_terms(struct evsel *evsel)
 	free_config_terms(&evsel->config_terms);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void (*evsel__priv_destructor)(void *priv);
 
 void evsel__set_priv_destructor(void (*destructor)(void *priv))
@@ -1513,6 +1514,34 @@ void evsel__exit(struct evsel *evsel)
 	zfree(&evsel->metric_events);
 	if (evsel__priv_destructor)
 		evsel__priv_destructor(evsel->priv);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void evsel__exit(struct evsel *evsel)
+{
+	assert(list_empty(&evsel->core.node));
+	assert(evsel->evlist == NULL);
+	bpf_counter__destroy(evsel);
+	perf_bpf_filter__destroy(evsel);
+	evsel__free_counts(evsel);
+	perf_evsel__free_fd(&evsel->core);
+	perf_evsel__free_id(&evsel->core);
+	evsel__free_config_terms(evsel);
+	cgroup__put(evsel->cgrp);
+	perf_cpu_map__put(evsel->core.cpus);
+	perf_cpu_map__put(evsel->core.own_cpus);
+	perf_thread_map__put(evsel->core.threads);
+	zfree(&evsel->group_name);
+	zfree(&evsel->name);
+	zfree(&evsel->filter);
+	zfree(&evsel->pmu_name);
+	zfree(&evsel->group_pmu_name);
+	zfree(&evsel->unit);
+	zfree(&evsel->metric_id);
+	evsel__zero_per_pkg(evsel);
+	hashmap__free(evsel->per_pkg_mask);
+	evsel->per_pkg_mask = NULL;
+	zfree(&evsel->metric_events);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	perf_evsel__object.fini(evsel);
 	if (evsel__tool_event(evsel) == PERF_TOOL_SYSTEM_TIME ||
 	    evsel__tool_event(evsel) == PERF_TOOL_USER_TIME)

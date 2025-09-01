@@ -100,6 +100,7 @@ int hns_roce_fill_res_qp_entry_raw(struct sk_buff *msg, struct ib_qp *ib_qp)
 		struct hns_roce_v2_qp_context qpc;
 		struct hns_roce_v2_scc_context sccc;
 	} context = {};
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32 sccn = hr_qp->qpn;
 	int ret;
 
@@ -124,6 +125,26 @@ int hns_roce_fill_res_qp_entry_raw(struct sk_buff *msg, struct ib_qp *ib_qp)
 	}
 
 	ret = hr_dev->hw->query_sccc(hr_dev, sccn, &context.sccc);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int ret;
+
+	if (!hr_dev->hw->query_qpc)
+		return -EINVAL;
+
+	ret = hr_dev->hw->query_qpc(hr_dev, hr_qp->qpn, &context.qpc);
+	if (ret)
+		return ret;
+
+	/* If SCC is disabled or the query fails, the queried SCCC will
+	 * be all 0.
+	 */
+	if (!(hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_QP_FLOW_CTRL) ||
+	    !hr_dev->hw->query_sccc)
+		goto out;
+
+	ret = hr_dev->hw->query_sccc(hr_dev, hr_qp->qpn, &context.sccc);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (ret)
 		ibdev_warn_ratelimited(&hr_dev->ib_dev,
 				       "failed to query SCCC, ret = %d.\n",

@@ -396,6 +396,7 @@ static void tbnet_tear_down(struct tbnet *net, bool send_logout)
 
 		ret = tb_xdomain_disable_paths(net->xd,
 					       net->local_transmit_path,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 					       net->tx_ring.ring->hop,
 					       net->remote_transmit_path,
 					       net->rx_ring.ring->hop);
@@ -947,6 +948,561 @@ static int tbnet_open(struct net_device *dev)
 
 	sof_mask = BIT(TBIP_PDF_FRAME_START);
 	eof_mask = BIT(TBIP_PDF_FRAME_END);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+					       net->rx_ring.ring->hop,
+					       net->remote_transmit_path,
+					       net->tx_ring.ring->hop);
+		if (ret)
+			netdev_warn(net->dev, "failed to disable DMA paths\n");
+
+		tb_xdomain_release_in_hopid(net->xd, net->remote_transmit_path);
+		net->remote_transmit_path = 0;
+	}
+
+	net->login_retries = 0;
+	net->login_sent = false;
+	net->login_received = false;
+
+	netdev_dbg(net->dev, "network traffic stopped\n");
+
+	mutex_unlock(&net->connection_lock);
+}
+
+static int tbnet_handle_packet(const void *buf, size_t size, void *data)
+{
+	const struct thunderbolt_ip_login *pkg = buf;
+	struct tbnet *net = data;
+	u32 command_id;
+	int ret = 0;
+	u32 sequence;
+	u64 route;
+
+	/* Make sure the packet is for us */
+	if (size < sizeof(struct thunderbolt_ip_header))
+		return 0;
+	if (!uuid_equal(&pkg->hdr.initiator_uuid, net->xd->remote_uuid))
+		return 0;
+	if (!uuid_equal(&pkg->hdr.target_uuid, net->xd->local_uuid))
+		return 0;
+
+	route = ((u64)pkg->hdr.route_hi << 32) | pkg->hdr.route_lo;
+	route &= ~BIT_ULL(63);
+	if (route != net->xd->route)
+		return 0;
+
+	sequence = pkg->hdr.length_sn & TBIP_HDR_SN_MASK;
+	sequence >>= TBIP_HDR_SN_SHIFT;
+	command_id = pkg->hdr.command_id;
+
+	switch (pkg->hdr.type) {
+	case TBIP_LOGIN:
+		netdev_dbg(net->dev, "remote login request received\n");
+		if (!netif_running(net->dev))
+			break;
+
+		ret = tbnet_login_response(net, route, sequence,
+					   pkg->hdr.command_id);
+		if (!ret) {
+			netdev_dbg(net->dev, "remote login response sent\n");
+
+			mutex_lock(&net->connection_lock);
+			net->login_received = true;
+			net->remote_transmit_path = pkg->transmit_path;
+
+			/* If we reached the number of max retries or
+			 * previous logout, schedule another round of
+			 * login retries
+			 */
+			if (net->login_retries >= TBNET_LOGIN_RETRIES ||
+			    !net->login_sent) {
+				net->login_retries = 0;
+				queue_delayed_work(system_long_wq,
+						   &net->login_work, 0);
+			}
+			mutex_unlock(&net->connection_lock);
+
+			queue_work(system_long_wq, &net->connected_work);
+		}
+		break;
+
+	case TBIP_LOGOUT:
+		netdev_dbg(net->dev, "remote logout request received\n");
+		ret = tbnet_logout_response(net, route, sequence, command_id);
+		if (!ret) {
+			netdev_dbg(net->dev, "remote logout response sent\n");
+			queue_work(system_long_wq, &net->disconnect_work);
+		}
+		break;
+
+	default:
+		return 0;
+	}
+
+	if (ret)
+		netdev_warn(net->dev, "failed to send ThunderboltIP response\n");
+
+	return 1;
+}
+
+static unsigned int tbnet_available_buffers(const struct tbnet_ring *ring)
+{
+	return ring->prod - ring->cons;
+}
+
+static int tbnet_alloc_rx_buffers(struct tbnet *net, unsigned int nbuffers)
+{
+	struct tbnet_ring *ring = &net->rx_ring;
+	int ret;
+
+	while (nbuffers--) {
+		struct device *dma_dev = tb_ring_dma_device(ring->ring);
+		unsigned int index = ring->prod & (TBNET_RING_SIZE - 1);
+		struct tbnet_frame *tf = &ring->frames[index];
+		dma_addr_t dma_addr;
+
+		if (tf->page)
+			break;
+
+		/* Allocate page (order > 0) so that it can hold maximum
+		 * ThunderboltIP frame (4kB) and the additional room for
+		 * SKB shared info required by build_skb().
+		 */
+		tf->page = dev_alloc_pages(TBNET_RX_PAGE_ORDER);
+		if (!tf->page) {
+			ret = -ENOMEM;
+			goto err_free;
+		}
+
+		dma_addr = dma_map_page(dma_dev, tf->page, 0,
+					TBNET_RX_PAGE_SIZE, DMA_FROM_DEVICE);
+		if (dma_mapping_error(dma_dev, dma_addr)) {
+			ret = -ENOMEM;
+			goto err_free;
+		}
+
+		tf->frame.buffer_phy = dma_addr;
+		tf->dev = net->dev;
+
+		trace_tbnet_alloc_rx_frame(index, tf->page, dma_addr,
+					   DMA_FROM_DEVICE);
+
+		tb_ring_rx(ring->ring, &tf->frame);
+
+		ring->prod++;
+	}
+
+	return 0;
+
+err_free:
+	tbnet_free_buffers(ring);
+	return ret;
+}
+
+static struct tbnet_frame *tbnet_get_tx_buffer(struct tbnet *net)
+{
+	struct tbnet_ring *ring = &net->tx_ring;
+	struct device *dma_dev = tb_ring_dma_device(ring->ring);
+	struct tbnet_frame *tf;
+	unsigned int index;
+
+	if (!tbnet_available_buffers(ring))
+		return NULL;
+
+	index = ring->cons++ & (TBNET_RING_SIZE - 1);
+
+	tf = &ring->frames[index];
+	tf->frame.size = 0;
+
+	dma_sync_single_for_cpu(dma_dev, tf->frame.buffer_phy,
+				tbnet_frame_size(tf), DMA_TO_DEVICE);
+
+	return tf;
+}
+
+static void tbnet_tx_callback(struct tb_ring *ring, struct ring_frame *frame,
+			      bool canceled)
+{
+	struct tbnet_frame *tf = container_of(frame, typeof(*tf), frame);
+	struct tbnet *net = netdev_priv(tf->dev);
+
+	/* Return buffer to the ring */
+	net->tx_ring.prod++;
+
+	if (tbnet_available_buffers(&net->tx_ring) >= TBNET_RING_SIZE / 2)
+		netif_wake_queue(net->dev);
+}
+
+static int tbnet_alloc_tx_buffers(struct tbnet *net)
+{
+	struct tbnet_ring *ring = &net->tx_ring;
+	struct device *dma_dev = tb_ring_dma_device(ring->ring);
+	unsigned int i;
+
+	for (i = 0; i < TBNET_RING_SIZE; i++) {
+		struct tbnet_frame *tf = &ring->frames[i];
+		dma_addr_t dma_addr;
+
+		tf->page = alloc_page(GFP_KERNEL);
+		if (!tf->page) {
+			tbnet_free_buffers(ring);
+			return -ENOMEM;
+		}
+
+		dma_addr = dma_map_page(dma_dev, tf->page, 0, TBNET_FRAME_SIZE,
+					DMA_TO_DEVICE);
+		if (dma_mapping_error(dma_dev, dma_addr)) {
+			__free_page(tf->page);
+			tf->page = NULL;
+			tbnet_free_buffers(ring);
+			return -ENOMEM;
+		}
+
+		tf->dev = net->dev;
+		tf->frame.buffer_phy = dma_addr;
+		tf->frame.callback = tbnet_tx_callback;
+		tf->frame.sof = TBIP_PDF_FRAME_START;
+		tf->frame.eof = TBIP_PDF_FRAME_END;
+
+		trace_tbnet_alloc_tx_frame(i, tf->page, dma_addr, DMA_TO_DEVICE);
+	}
+
+	ring->cons = 0;
+	ring->prod = TBNET_RING_SIZE - 1;
+
+	return 0;
+}
+
+static void tbnet_connected_work(struct work_struct *work)
+{
+	struct tbnet *net = container_of(work, typeof(*net), connected_work);
+	bool connected;
+	int ret;
+
+	if (netif_carrier_ok(net->dev))
+		return;
+
+	mutex_lock(&net->connection_lock);
+	connected = net->login_sent && net->login_received;
+	mutex_unlock(&net->connection_lock);
+
+	if (!connected)
+		return;
+
+	netdev_dbg(net->dev, "login successful, enabling paths\n");
+
+	ret = tb_xdomain_alloc_in_hopid(net->xd, net->remote_transmit_path);
+	if (ret != net->remote_transmit_path) {
+		netdev_err(net->dev, "failed to allocate Rx HopID\n");
+		return;
+	}
+
+	/* Both logins successful so enable the rings, high-speed DMA
+	 * paths and start the network device queue.
+	 *
+	 * Note we enable the DMA paths last to make sure we have primed
+	 * the Rx ring before any incoming packets are allowed to
+	 * arrive.
+	 */
+	tb_ring_start(net->tx_ring.ring);
+	tb_ring_start(net->rx_ring.ring);
+
+	ret = tbnet_alloc_rx_buffers(net, TBNET_RING_SIZE);
+	if (ret)
+		goto err_stop_rings;
+
+	ret = tbnet_alloc_tx_buffers(net);
+	if (ret)
+		goto err_free_rx_buffers;
+
+	ret = tb_xdomain_enable_paths(net->xd, net->local_transmit_path,
+				      net->rx_ring.ring->hop,
+				      net->remote_transmit_path,
+				      net->tx_ring.ring->hop);
+	if (ret) {
+		netdev_err(net->dev, "failed to enable DMA paths\n");
+		goto err_free_tx_buffers;
+	}
+
+	netif_carrier_on(net->dev);
+	netif_start_queue(net->dev);
+
+	netdev_dbg(net->dev, "network traffic started\n");
+	return;
+
+err_free_tx_buffers:
+	tbnet_free_buffers(&net->tx_ring);
+err_free_rx_buffers:
+	tbnet_free_buffers(&net->rx_ring);
+err_stop_rings:
+	tb_ring_stop(net->rx_ring.ring);
+	tb_ring_stop(net->tx_ring.ring);
+	tb_xdomain_release_in_hopid(net->xd, net->remote_transmit_path);
+}
+
+static void tbnet_login_work(struct work_struct *work)
+{
+	struct tbnet *net = container_of(work, typeof(*net), login_work.work);
+	unsigned long delay = msecs_to_jiffies(TBNET_LOGIN_DELAY);
+	int ret;
+
+	if (netif_carrier_ok(net->dev))
+		return;
+
+	netdev_dbg(net->dev, "sending login request, retries=%u\n",
+		   net->login_retries);
+
+	ret = tbnet_login_request(net, net->login_retries % 4);
+	if (ret) {
+		netdev_dbg(net->dev, "sending login request failed, ret=%d\n",
+			   ret);
+		if (net->login_retries++ < TBNET_LOGIN_RETRIES) {
+			queue_delayed_work(system_long_wq, &net->login_work,
+					   delay);
+		} else {
+			netdev_info(net->dev, "ThunderboltIP login timed out\n");
+		}
+	} else {
+		netdev_dbg(net->dev, "received login reply\n");
+
+		net->login_retries = 0;
+
+		mutex_lock(&net->connection_lock);
+		net->login_sent = true;
+		mutex_unlock(&net->connection_lock);
+
+		queue_work(system_long_wq, &net->connected_work);
+	}
+}
+
+static void tbnet_disconnect_work(struct work_struct *work)
+{
+	struct tbnet *net = container_of(work, typeof(*net), disconnect_work);
+
+	tbnet_tear_down(net, false);
+}
+
+static bool tbnet_check_frame(struct tbnet *net, const struct tbnet_frame *tf,
+			      const struct thunderbolt_ip_frame_header *hdr)
+{
+	u32 frame_id, frame_count, frame_size, frame_index;
+	unsigned int size;
+
+	if (tf->frame.flags & RING_DESC_CRC_ERROR) {
+		net->stats.rx_crc_errors++;
+		return false;
+	} else if (tf->frame.flags & RING_DESC_BUFFER_OVERRUN) {
+		net->stats.rx_over_errors++;
+		return false;
+	}
+
+	/* Should be greater than just header i.e. contains data */
+	size = tbnet_frame_size(tf);
+	if (size <= sizeof(*hdr)) {
+		net->stats.rx_length_errors++;
+		return false;
+	}
+
+	frame_count = le32_to_cpu(hdr->frame_count);
+	frame_size = le32_to_cpu(hdr->frame_size);
+	frame_index = le16_to_cpu(hdr->frame_index);
+	frame_id = le16_to_cpu(hdr->frame_id);
+
+	if ((frame_size > size - sizeof(*hdr)) || !frame_size) {
+		net->stats.rx_length_errors++;
+		return false;
+	}
+
+	/* In case we're in the middle of packet, validate the frame
+	 * header based on first fragment of the packet.
+	 */
+	if (net->skb && net->rx_hdr.frame_count) {
+		/* Check the frame count fits the count field */
+		if (frame_count != le32_to_cpu(net->rx_hdr.frame_count)) {
+			net->stats.rx_length_errors++;
+			return false;
+		}
+
+		/* Check the frame identifiers are incremented correctly,
+		 * and id is matching.
+		 */
+		if (frame_index != le16_to_cpu(net->rx_hdr.frame_index) + 1 ||
+		    frame_id != le16_to_cpu(net->rx_hdr.frame_id)) {
+			net->stats.rx_missed_errors++;
+			return false;
+		}
+
+		if (net->skb->len + frame_size > TBNET_MAX_MTU) {
+			net->stats.rx_length_errors++;
+			return false;
+		}
+
+		return true;
+	}
+
+	/* Start of packet, validate the frame header */
+	if (frame_count == 0 || frame_count > TBNET_RING_SIZE / 4) {
+		net->stats.rx_length_errors++;
+		return false;
+	}
+	if (frame_index != 0) {
+		net->stats.rx_missed_errors++;
+		return false;
+	}
+
+	return true;
+}
+
+static int tbnet_poll(struct napi_struct *napi, int budget)
+{
+	struct tbnet *net = container_of(napi, struct tbnet, napi);
+	unsigned int cleaned_count = tbnet_available_buffers(&net->rx_ring);
+	struct device *dma_dev = tb_ring_dma_device(net->rx_ring.ring);
+	unsigned int rx_packets = 0;
+
+	while (rx_packets < budget) {
+		const struct thunderbolt_ip_frame_header *hdr;
+		unsigned int hdr_size = sizeof(*hdr);
+		struct sk_buff *skb = NULL;
+		struct ring_frame *frame;
+		struct tbnet_frame *tf;
+		struct page *page;
+		bool last = true;
+		u32 frame_size;
+
+		/* Return some buffers to hardware, one at a time is too
+		 * slow so allocate MAX_SKB_FRAGS buffers at the same
+		 * time.
+		 */
+		if (cleaned_count >= MAX_SKB_FRAGS) {
+			tbnet_alloc_rx_buffers(net, cleaned_count);
+			cleaned_count = 0;
+		}
+
+		frame = tb_ring_poll(net->rx_ring.ring);
+		if (!frame)
+			break;
+
+		dma_unmap_page(dma_dev, frame->buffer_phy,
+			       TBNET_RX_PAGE_SIZE, DMA_FROM_DEVICE);
+
+		tf = container_of(frame, typeof(*tf), frame);
+
+		page = tf->page;
+		tf->page = NULL;
+		net->rx_ring.cons++;
+		cleaned_count++;
+
+		hdr = page_address(page);
+		if (!tbnet_check_frame(net, tf, hdr)) {
+			trace_tbnet_invalid_rx_ip_frame(hdr->frame_size,
+				hdr->frame_id, hdr->frame_index, hdr->frame_count);
+			__free_pages(page, TBNET_RX_PAGE_ORDER);
+			dev_kfree_skb_any(net->skb);
+			net->skb = NULL;
+			continue;
+		}
+
+		trace_tbnet_rx_ip_frame(hdr->frame_size, hdr->frame_id,
+					hdr->frame_index, hdr->frame_count);
+		frame_size = le32_to_cpu(hdr->frame_size);
+
+		skb = net->skb;
+		if (!skb) {
+			skb = build_skb(page_address(page),
+					TBNET_RX_PAGE_SIZE);
+			if (!skb) {
+				__free_pages(page, TBNET_RX_PAGE_ORDER);
+				net->stats.rx_errors++;
+				break;
+			}
+
+			skb_reserve(skb, hdr_size);
+			skb_put(skb, frame_size);
+
+			net->skb = skb;
+		} else {
+			skb_add_rx_frag(skb, skb_shinfo(skb)->nr_frags,
+					page, hdr_size, frame_size,
+					TBNET_RX_PAGE_SIZE - hdr_size);
+		}
+
+		net->rx_hdr.frame_size = hdr->frame_size;
+		net->rx_hdr.frame_count = hdr->frame_count;
+		net->rx_hdr.frame_index = hdr->frame_index;
+		net->rx_hdr.frame_id = hdr->frame_id;
+		last = le16_to_cpu(net->rx_hdr.frame_index) ==
+		       le32_to_cpu(net->rx_hdr.frame_count) - 1;
+
+		rx_packets++;
+		net->stats.rx_bytes += frame_size;
+
+		if (last) {
+			skb->protocol = eth_type_trans(skb, net->dev);
+			trace_tbnet_rx_skb(skb);
+			napi_gro_receive(&net->napi, skb);
+			net->skb = NULL;
+		}
+	}
+
+	net->stats.rx_packets += rx_packets;
+
+	if (cleaned_count)
+		tbnet_alloc_rx_buffers(net, cleaned_count);
+
+	if (rx_packets >= budget)
+		return budget;
+
+	napi_complete_done(napi, rx_packets);
+	/* Re-enable the ring interrupt */
+	tb_ring_poll_complete(net->rx_ring.ring);
+
+	return rx_packets;
+}
+
+static void tbnet_start_poll(void *data)
+{
+	struct tbnet *net = data;
+
+	napi_schedule(&net->napi);
+}
+
+static int tbnet_open(struct net_device *dev)
+{
+	struct tbnet *net = netdev_priv(dev);
+	struct tb_xdomain *xd = net->xd;
+	u16 sof_mask, eof_mask;
+	struct tb_ring *ring;
+	unsigned int flags;
+	int hopid;
+
+	netif_carrier_off(dev);
+
+	ring = tb_ring_alloc_tx(xd->tb->nhi, -1, TBNET_RING_SIZE,
+				RING_FLAG_FRAME);
+	if (!ring) {
+		netdev_err(dev, "failed to allocate Tx ring\n");
+		return -ENOMEM;
+	}
+	net->tx_ring.ring = ring;
+
+	hopid = tb_xdomain_alloc_out_hopid(xd, -1);
+	if (hopid < 0) {
+		netdev_err(dev, "failed to allocate Tx HopID\n");
+		tb_ring_free(net->tx_ring.ring);
+		net->tx_ring.ring = NULL;
+		return hopid;
+	}
+	net->local_transmit_path = hopid;
+
+	sof_mask = BIT(TBIP_PDF_FRAME_START);
+	eof_mask = BIT(TBIP_PDF_FRAME_END);
+
+	flags = RING_FLAG_FRAME;
+	/* Only enable full E2E if the other end supports it too */
+	if (tbnet_e2e && net->svc->prtcstns & TBNET_E2E)
+		flags |= RING_FLAG_E2E;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	ring = tb_ring_alloc_rx(xd->tb->nhi, -1, TBNET_RING_SIZE, flags,
 				net->tx_ring.ring->hop, sof_mask,

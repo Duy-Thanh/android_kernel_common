@@ -50,6 +50,7 @@ struct nilfs_sysfs_dev_subgroups {
 	struct completion sg_segments_kobj_unregister;
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define NILFS_KOBJ_ATTR_STRUCT(name) \
 struct nilfs_##name##_attr { \
 	struct attribute attr; \
@@ -60,6 +61,19 @@ struct nilfs_##name##_attr { \
 }
 
 NILFS_KOBJ_ATTR_STRUCT(feature);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define NILFS_COMMON_ATTR_STRUCT(name) \
+struct nilfs_##name##_attr { \
+	struct attribute attr; \
+	ssize_t (*show)(struct kobject *, struct attribute *, \
+			char *); \
+	ssize_t (*store)(struct kobject *, struct attribute *, \
+			 const char *, size_t); \
+}
+
+NILFS_COMMON_ATTR_STRUCT(feature);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #define NILFS_DEV_ATTR_STRUCT(name) \
 struct nilfs_##name##_attr { \

@@ -3526,6 +3526,7 @@ void ionic_lif_free(struct ionic_lif *lif)
 	lif->info = NULL;
 	lif->info_pa = 0;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	mutex_destroy(&lif->config_lock);
 	mutex_destroy(&lif->queue_lock);
 
@@ -3553,6 +3554,37 @@ void ionic_lif_deinit(struct ionic_lif *lif)
 
 	ionic_bus_unmap_dbpage(lif->ionic, lif->kern_dbpage);
 	lif->kern_dbpage = NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* unmap doorbell page */
+	ionic_bus_unmap_dbpage(lif->ionic, lif->kern_dbpage);
+	lif->kern_dbpage = NULL;
+
+	mutex_destroy(&lif->config_lock);
+	mutex_destroy(&lif->queue_lock);
+
+	/* free netdev & lif */
+	ionic_debugfs_del_lif(lif);
+	free_netdev(lif->netdev);
+}
+
+void ionic_lif_deinit(struct ionic_lif *lif)
+{
+	if (!test_and_clear_bit(IONIC_LIF_F_INITED, lif->state))
+		return;
+
+	if (!test_bit(IONIC_LIF_F_FW_RESET, lif->state)) {
+		cancel_work_sync(&lif->deferred.work);
+		cancel_work_sync(&lif->tx_timeout_work);
+		ionic_rx_filters_deinit(lif);
+		if (lif->netdev->features & NETIF_F_RXHASH)
+			ionic_lif_rss_deinit(lif);
+	}
+
+	napi_disable(&lif->adminqcq->napi);
+	ionic_lif_qcq_deinit(lif, lif->notifyqcq);
+	ionic_lif_qcq_deinit(lif, lif->adminqcq);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	ionic_lif_reset(lif);
 }

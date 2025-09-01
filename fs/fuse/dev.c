@@ -408,6 +408,7 @@ void fuse_request_end(struct fuse_req *req)
 		/* Wake up waiter sleeping in request_wait_answer() */
 		wake_up(&req->waitq);
 		trace_android_vh_fuse_request_end(current);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		trace_android_vh_fuse_request_end_ext(req, current);
 	}
 
@@ -485,6 +486,84 @@ static void __fuse_request_send(struct fuse_req *req)
 
 	trace_android_vh_fuse_request_send(&fiq->waitq);
 	trace_android_vh_fuse_request_send_ext(req, &fiq->waitq);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	}
+
+	if (test_bit(FR_ASYNC, &req->flags))
+		req->args->end(fm, req->args, req->out.h.error);
+put_request:
+	fuse_put_request(req);
+}
+EXPORT_SYMBOL_GPL(fuse_request_end);
+
+static int queue_interrupt(struct fuse_req *req)
+{
+	struct fuse_iqueue *fiq = &req->fm->fc->iq;
+
+	/* Check for we've sent request to interrupt this req */
+	if (unlikely(!test_bit(FR_INTERRUPTED, &req->flags)))
+		return -EINVAL;
+
+	fiq->ops->send_interrupt(fiq, req, false);
+
+	return 0;
+}
+
+static void request_wait_answer(struct fuse_req *req)
+{
+	struct fuse_conn *fc = req->fm->fc;
+	struct fuse_iqueue *fiq = &fc->iq;
+	int err;
+
+	if (!fc->no_interrupt) {
+		/* Any signal may interrupt this */
+		err = wait_event_interruptible(req->waitq,
+					test_bit(FR_FINISHED, &req->flags));
+		if (!err)
+			return;
+
+		set_bit(FR_INTERRUPTED, &req->flags);
+		/* matches barrier in fuse_dev_do_read() */
+		smp_mb__after_atomic();
+		if (test_bit(FR_SENT, &req->flags))
+			queue_interrupt(req);
+	}
+
+	if (!test_bit(FR_FORCE, &req->flags)) {
+		/* Only fatal signals may interrupt this */
+		err = wait_event_killable(req->waitq,
+					test_bit(FR_FINISHED, &req->flags));
+		if (!err)
+			return;
+
+		spin_lock(&fiq->lock);
+		/* Request is not yet in userspace, bail out */
+		if (test_bit(FR_PENDING, &req->flags)) {
+			list_del(&req->list);
+			spin_unlock(&fiq->lock);
+			__fuse_put_request(req);
+			req->out.h.error = -EINTR;
+			return;
+		}
+		spin_unlock(&fiq->lock);
+	}
+
+	/*
+	 * Either request is already in userspace, or it was forced.
+	 * Wait it out.
+	 */
+	wait_event(req->waitq, test_bit(FR_FINISHED, &req->flags));
+}
+
+static void __fuse_request_send(struct fuse_req *req)
+{
+	struct fuse_iqueue *fiq = &req->fm->fc->iq;
+
+	BUG_ON(test_bit(FR_BACKGROUND, &req->flags));
+
+	trace_android_vh_fuse_request_send(&fiq->waitq);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	/* acquire extra reference, since request is still needed after
 	   fuse_request_end() */
 	__fuse_get_request(req);

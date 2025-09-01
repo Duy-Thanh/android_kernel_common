@@ -288,6 +288,7 @@ static int prueth_fw_offload_buffer_setup(struct prueth_emac *emac)
 	int i;
 
 	addr = lower_32_bits(prueth->msmcram.pa);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (slice) {
 		if (prueth->pdata.banked_ms_ram)
 			addr += MSMC_RAM_BANK_SIZE;
@@ -447,6 +448,114 @@ static int prueth_emac_buffer_setup(struct prueth_emac *emac)
 	 */
 	rxq_ctx = emac->dram.va + DEFAULT_MSMC_Q_OFFSET;
 	writel(addr, &rxq_ctx->start[0]);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (slice)
+		addr += PRUETH_NUM_BUF_POOLS * PRUETH_EMAC_BUF_POOL_SIZE;
+
+	if (addr % SZ_64K) {
+		dev_warn(prueth->dev, "buffer pool needs to be 64KB aligned\n");
+		return -EINVAL;
+	}
+
+	bpool_cfg = emac->dram.va + BUFFER_POOL_0_ADDR_OFFSET;
+	/* workaround for f/w bug. bpool 0 needs to be initialized */
+	for (i = 0; i <  PRUETH_NUM_BUF_POOLS; i++) {
+		writel(addr, &bpool_cfg[i].addr);
+		writel(PRUETH_EMAC_BUF_POOL_SIZE, &bpool_cfg[i].len);
+		addr += PRUETH_EMAC_BUF_POOL_SIZE;
+	}
+
+	if (!slice)
+		addr += PRUETH_NUM_BUF_POOLS * PRUETH_EMAC_BUF_POOL_SIZE;
+	else
+		addr += PRUETH_SW_NUM_BUF_POOLS_HOST * PRUETH_SW_BUF_POOL_SIZE_HOST;
+
+	for (i = PRUETH_NUM_BUF_POOLS;
+	     i < 2 * PRUETH_SW_NUM_BUF_POOLS_HOST + PRUETH_NUM_BUF_POOLS;
+	     i++) {
+		/* The driver only uses first 4 queues per PRU so only initialize them */
+		if (i % PRUETH_SW_NUM_BUF_POOLS_HOST < PRUETH_SW_NUM_BUF_POOLS_PER_PRU) {
+			writel(addr, &bpool_cfg[i].addr);
+			writel(PRUETH_SW_BUF_POOL_SIZE_HOST, &bpool_cfg[i].len);
+			addr += PRUETH_SW_BUF_POOL_SIZE_HOST;
+		} else {
+			writel(0, &bpool_cfg[i].addr);
+			writel(0, &bpool_cfg[i].len);
+		}
+	}
+
+	if (!slice)
+		addr += PRUETH_SW_NUM_BUF_POOLS_HOST * PRUETH_SW_BUF_POOL_SIZE_HOST;
+	else
+		addr += PRUETH_EMAC_RX_CTX_BUF_SIZE;
+
+	rxq_ctx = emac->dram.va + HOST_RX_Q_PRE_CONTEXT_OFFSET;
+	for (i = 0; i < 3; i++)
+		writel(addr, &rxq_ctx->start[i]);
+
+	addr += PRUETH_EMAC_RX_CTX_BUF_SIZE;
+	writel(addr - SZ_2K, &rxq_ctx->end);
+
+	return 0;
+}
+
+static int prueth_emac_buffer_setup(struct prueth_emac *emac)
+{
+	struct icssg_buffer_pool_cfg __iomem *bpool_cfg;
+	struct icssg_rxq_ctx __iomem *rxq_ctx;
+	struct prueth *prueth = emac->prueth;
+	int slice = prueth_emac_slice(emac);
+	u32 addr;
+	int i;
+
+	/* Layout to have 64KB aligned buffer pool
+	 * |BPOOL0|BPOOL1|RX_CTX0|RX_CTX1|
+	 */
+
+	addr = lower_32_bits(prueth->msmcram.pa);
+	if (slice)
+		addr += PRUETH_NUM_BUF_POOLS * PRUETH_EMAC_BUF_POOL_SIZE;
+
+	if (addr % SZ_64K) {
+		dev_warn(prueth->dev, "buffer pool needs to be 64KB aligned\n");
+		return -EINVAL;
+	}
+
+	bpool_cfg = emac->dram.va + BUFFER_POOL_0_ADDR_OFFSET;
+	/* workaround for f/w bug. bpool 0 needs to be initilalized */
+	writel(addr, &bpool_cfg[0].addr);
+	writel(0, &bpool_cfg[0].len);
+
+	for (i = PRUETH_EMAC_BUF_POOL_START;
+	     i < PRUETH_EMAC_BUF_POOL_START + PRUETH_NUM_BUF_POOLS;
+	     i++) {
+		writel(addr, &bpool_cfg[i].addr);
+		writel(PRUETH_EMAC_BUF_POOL_SIZE, &bpool_cfg[i].len);
+		addr += PRUETH_EMAC_BUF_POOL_SIZE;
+	}
+
+	if (!slice)
+		addr += PRUETH_NUM_BUF_POOLS * PRUETH_EMAC_BUF_POOL_SIZE;
+	else
+		addr += PRUETH_EMAC_RX_CTX_BUF_SIZE * 2;
+
+	/* Pre-emptible RX buffer queue */
+	rxq_ctx = emac->dram.va + HOST_RX_Q_PRE_CONTEXT_OFFSET;
+	for (i = 0; i < 3; i++)
+		writel(addr, &rxq_ctx->start[i]);
+
+	addr += PRUETH_EMAC_RX_CTX_BUF_SIZE;
+	writel(addr, &rxq_ctx->end);
+
+	/* Express RX buffer queue */
+	rxq_ctx = emac->dram.va + HOST_RX_Q_EXP_CONTEXT_OFFSET;
+	for (i = 0; i < 3; i++)
+		writel(addr, &rxq_ctx->start[i]);
+
+	addr += PRUETH_EMAC_RX_CTX_BUF_SIZE;
+	writel(addr, &rxq_ctx->end);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

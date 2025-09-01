@@ -31,6 +31,7 @@ void __printk_deferred_enter(void)
 	cant_migrate();
 	__printk_safe_enter();
 }
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 EXPORT_SYMBOL(__printk_deferred_enter);
 
 void __printk_deferred_exit(void)
@@ -39,6 +40,15 @@ void __printk_deferred_exit(void)
 	__printk_safe_exit();
 }
 EXPORT_SYMBOL(__printk_deferred_exit);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+void __printk_deferred_exit(void)
+{
+	cant_migrate();
+	__printk_safe_exit();
+}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 bool is_printk_legacy_deferred(void)
 {

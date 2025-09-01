@@ -830,6 +830,7 @@ static struct request *attempt_merge(struct request_queue *q,
 	if (rq_data_dir(req) != rq_data_dir(next))
 		return NULL;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (req->bio && next->bio) {
 		/* Don't merge requests with different write hints. */
 		if (req->bio->bi_write_hint != next->bio->bi_write_hint)
@@ -972,6 +973,149 @@ bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 		if (rq->bio->bi_ioprio != bio->bi_ioprio)
 			return false;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* Don't merge requests with different write hints. */
+	if (req->write_hint != next->write_hint)
+		return NULL;
+
+	if (req->ioprio != next->ioprio)
+		return NULL;
+
+	if (!blk_atomic_write_mergeable_rqs(req, next))
+		return NULL;
+
+	/*
+	 * If we are allowed to merge, then append bio list
+	 * from next to rq and release next. merge_requests_fn
+	 * will have updated segment counts, update sector
+	 * counts here. Handle DISCARDs separately, as they
+	 * have separate settings.
+	 */
+
+	switch (blk_try_req_merge(req, next)) {
+	case ELEVATOR_DISCARD_MERGE:
+		if (!req_attempt_discard_merge(q, req, next))
+			return NULL;
+		break;
+	case ELEVATOR_BACK_MERGE:
+		if (!ll_merge_requests_fn(q, req, next))
+			return NULL;
+		break;
+	default:
+		return NULL;
+	}
+
+	/*
+	 * If failfast settings disagree or any of the two is already
+	 * a mixed merge, mark both as mixed before proceeding.  This
+	 * makes sure that all involved bios have mixable attributes
+	 * set properly.
+	 */
+	if (((req->rq_flags | next->rq_flags) & RQF_MIXED_MERGE) ||
+	    (req->cmd_flags & REQ_FAILFAST_MASK) !=
+	    (next->cmd_flags & REQ_FAILFAST_MASK)) {
+		blk_rq_set_mixed_merge(req);
+		blk_rq_set_mixed_merge(next);
+	}
+
+	/*
+	 * At this point we have either done a back merge or front merge. We
+	 * need the smaller start_time_ns of the merged requests to be the
+	 * current request for accounting purposes.
+	 */
+	if (next->start_time_ns < req->start_time_ns)
+		req->start_time_ns = next->start_time_ns;
+
+	req->biotail->bi_next = next->bio;
+	req->biotail = next->biotail;
+
+	req->__data_len += blk_rq_bytes(next);
+
+	if (!blk_discard_mergable(req))
+		elv_merge_requests(q, req, next);
+
+	blk_crypto_rq_put_keyslot(next);
+
+	/*
+	 * 'next' is going away, so update stats accordingly
+	 */
+	blk_account_io_merge_request(next);
+
+	trace_block_rq_merge(next);
+
+	/*
+	 * ownership of bio passed from next to req, return 'next' for
+	 * the caller to free
+	 */
+	next->bio = NULL;
+	return next;
+}
+
+static struct request *attempt_back_merge(struct request_queue *q,
+		struct request *rq)
+{
+	struct request *next = elv_latter_request(q, rq);
+
+	if (next)
+		return attempt_merge(q, rq, next);
+
+	return NULL;
+}
+
+static struct request *attempt_front_merge(struct request_queue *q,
+		struct request *rq)
+{
+	struct request *prev = elv_former_request(q, rq);
+
+	if (prev)
+		return attempt_merge(q, prev, rq);
+
+	return NULL;
+}
+
+/*
+ * Try to merge 'next' into 'rq'. Return true if the merge happened, false
+ * otherwise. The caller is responsible for freeing 'next' if the merge
+ * happened.
+ */
+bool blk_attempt_req_merge(struct request_queue *q, struct request *rq,
+			   struct request *next)
+{
+	return attempt_merge(q, rq, next);
+}
+
+bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
+{
+	if (!rq_mergeable(rq) || !bio_mergeable(bio))
+		return false;
+
+	if (req_op(rq) != bio_op(bio))
+		return false;
+
+	/* different data direction or already started, don't merge */
+	if (bio_data_dir(bio) != rq_data_dir(rq))
+		return false;
+
+	/* don't merge across cgroup boundaries */
+	if (!blk_cgroup_mergeable(rq, bio))
+		return false;
+
+	/* only merge integrity protected bio into ditto rq */
+	if (blk_integrity_merge_bio(rq->q, rq, bio) == false)
+		return false;
+
+	/* Only merge if the crypt contexts are compatible */
+	if (!bio_crypt_rq_ctx_compatible(rq, bio))
+		return false;
+
+	/* Don't merge requests with different write hints. */
+	if (rq->write_hint != bio->bi_write_hint)
+		return false;
+
+	if (rq->ioprio != bio_prio(bio))
+		return false;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (blk_atomic_write_mergeable_rq_bio(rq, bio) == false)
 		return false;

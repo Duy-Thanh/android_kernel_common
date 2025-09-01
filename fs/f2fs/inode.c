@@ -934,6 +934,7 @@ retry:
 		f2fs_update_inode_page(inode);
 		if (dquot_initialize_needed(inode))
 			set_sbi_flag(sbi, SBI_QUOTA_NEED_REPAIR);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 		/*
 		 * If both f2fs_truncate() and f2fs_update_inode_page() failed
@@ -969,6 +970,27 @@ no_delete:
 	 * list to avoid UAF in f2fs_sync_inode_meta() during checkpoint.
 	 */
 	f2fs_inode_synced(inode);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	}
+	if (freeze_protected)
+		sb_end_intwrite(inode->i_sb);
+no_delete:
+	dquot_drop(inode);
+
+	stat_dec_inline_xattr(inode);
+	stat_dec_inline_dir(inode);
+	stat_dec_inline_inode(inode);
+	stat_dec_compr_inode(inode);
+	stat_sub_compr_blocks(inode,
+			atomic_read(&fi->i_compr_blocks));
+
+	if (likely(!f2fs_cp_error(sbi) &&
+				!is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
+		f2fs_bug_on(sbi, is_inode_flag_set(inode, FI_DIRTY_INODE));
+	else
+		f2fs_inode_synced(inode);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* for the case f2fs_new_inode() was failed, .i_ino is zero, skip it */
 	if (inode->i_ino)

@@ -354,6 +354,7 @@ static ssize_t orangefs_debug_read(struct file *file,
 		goto out;
 
 	mutex_lock(&orangefs_debug_lock);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	sprintf_ret = scnprintf(buf, ORANGEFS_MAX_DEBUG_STRING_LEN, "%s", (char *)file->private_data);
 	mutex_unlock(&orangefs_debug_lock);
 
@@ -757,6 +758,412 @@ static void do_c_string(void *c_mask, int index)
 		if ((strlen(client_debug_string) +
 		     strlen(cdm_array[index].keyword) + 1)
 			< ORANGEFS_MAX_DEBUG_STRING_LEN) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	sprintf_ret = sprintf(buf, "%s", (char *)file->private_data);
+	mutex_unlock(&orangefs_debug_lock);
+
+	read_ret = simple_read_from_buffer(ubuf, count, ppos, buf, sprintf_ret);
+
+	kfree(buf);
+
+out:
+	gossip_debug(GOSSIP_DEBUGFS_DEBUG,
+		     "orangefs_debug_read: ret: %zu\n",
+		     read_ret);
+
+	return read_ret;
+}
+
+static ssize_t orangefs_debug_write(struct file *file,
+				  const char __user *ubuf,
+				  size_t count,
+				  loff_t *ppos)
+{
+	char *buf;
+	int rc = -EFAULT;
+	size_t silly = 0;
+	char *debug_string;
+	struct orangefs_kernel_op_s *new_op = NULL;
+	struct client_debug_mask c_mask = { NULL, 0, 0 };
+	char *s;
+
+	gossip_debug(GOSSIP_DEBUGFS_DEBUG,
+		"orangefs_debug_write: %pD\n",
+		file);
+
+	if (count == 0)
+		return 0;
+
+	/*
+	 * Thwart users who try to jamb a ridiculous number
+	 * of bytes into the debug file...
+	 */
+	if (count > ORANGEFS_MAX_DEBUG_STRING_LEN) {
+		silly = count;
+		count = ORANGEFS_MAX_DEBUG_STRING_LEN;
+	}
+
+	buf = kzalloc(ORANGEFS_MAX_DEBUG_STRING_LEN, GFP_KERNEL);
+	if (!buf)
+		goto out;
+
+	if (copy_from_user(buf, ubuf, count - 1)) {
+		gossip_debug(GOSSIP_DEBUGFS_DEBUG,
+			     "%s: copy_from_user failed!\n",
+			     __func__);
+		goto out;
+	}
+
+	/*
+	 * Map the keyword string from userspace into a valid debug mask.
+	 * The mapping process involves mapping the human-inputted string
+	 * into a valid mask, and then rebuilding the string from the
+	 * verified valid mask.
+	 *
+	 * A service operation is required to set a new client-side
+	 * debug mask.
+	 */
+	if (!strcmp(file->f_path.dentry->d_name.name,
+		    ORANGEFS_KMOD_DEBUG_FILE)) {
+		debug_string_to_mask(buf, &orangefs_gossip_debug_mask, 0);
+		debug_mask_to_string(&orangefs_gossip_debug_mask, 0);
+		debug_string = kernel_debug_string;
+		gossip_debug(GOSSIP_DEBUGFS_DEBUG,
+			     "New kernel debug string is %s\n",
+			     kernel_debug_string);
+	} else {
+		/* Can't reset client debug mask if client is not running. */
+		if (is_daemon_in_service()) {
+			pr_info("%s: Client not running :%d:\n",
+				__func__,
+				is_daemon_in_service());
+			goto out;
+		}
+
+		debug_string_to_mask(buf, &c_mask, 1);
+		debug_mask_to_string(&c_mask, 1);
+		debug_string = client_debug_string;
+
+		new_op = op_alloc(ORANGEFS_VFS_OP_PARAM);
+		if (!new_op) {
+			pr_info("%s: op_alloc failed!\n", __func__);
+			goto out;
+		}
+
+		new_op->upcall.req.param.op =
+			ORANGEFS_PARAM_REQUEST_OP_TWO_MASK_VALUES;
+		new_op->upcall.req.param.type = ORANGEFS_PARAM_REQUEST_SET;
+		memset(new_op->upcall.req.param.s_value,
+		       0,
+		       ORANGEFS_MAX_DEBUG_STRING_LEN);
+		sprintf(new_op->upcall.req.param.s_value,
+			"%llx %llx\n",
+			c_mask.mask1,
+			c_mask.mask2);
+
+		/* service_operation returns 0 on success... */
+		rc = service_operation(new_op,
+				       "orangefs_param",
+					ORANGEFS_OP_INTERRUPTIBLE);
+
+		if (rc)
+			gossip_debug(GOSSIP_DEBUGFS_DEBUG,
+				     "%s: service_operation failed! rc:%d:\n",
+				     __func__,
+				     rc);
+
+		op_release(new_op);
+	}
+
+	mutex_lock(&orangefs_debug_lock);
+	s = file_inode(file)->i_private;
+	memset(s, 0, ORANGEFS_MAX_DEBUG_STRING_LEN);
+	sprintf(s, "%s\n", debug_string);
+	mutex_unlock(&orangefs_debug_lock);
+
+	*ppos += count;
+	if (silly)
+		rc = silly;
+	else
+		rc = count;
+
+out:
+	gossip_debug(GOSSIP_DEBUGFS_DEBUG,
+		     "orangefs_debug_write: rc: %d\n",
+		     rc);
+	kfree(buf);
+	return rc;
+}
+
+/*
+ * After obtaining a string representation of the client's debug
+ * keywords and their associated masks, this function is called to build an
+ * array of these values.
+ */
+static int orangefs_prepare_cdm_array(char *debug_array_string)
+{
+	int i;
+	int rc = -EINVAL;
+	char *cds_head = NULL;
+	char *cds_delimiter = NULL;
+	int keyword_len = 0;
+
+	gossip_debug(GOSSIP_UTILS_DEBUG, "%s: start\n", __func__);
+
+	/*
+	 * figure out how many elements the cdm_array needs.
+	 */
+	for (i = 0; i < strlen(debug_array_string); i++)
+		if (debug_array_string[i] == '\n')
+			cdm_element_count++;
+
+	if (!cdm_element_count) {
+		pr_info("No elements in client debug array string!\n");
+		goto out;
+	}
+
+	cdm_array = kcalloc(cdm_element_count, sizeof(*cdm_array), GFP_KERNEL);
+	if (!cdm_array) {
+		rc = -ENOMEM;
+		goto out;
+	}
+
+	cds_head = debug_array_string;
+
+	for (i = 0; i < cdm_element_count; i++) {
+		cds_delimiter = strchr(cds_head, '\n');
+		*cds_delimiter = '\0';
+
+		keyword_len = strcspn(cds_head, " ");
+
+		cdm_array[i].keyword = kzalloc(keyword_len + 1, GFP_KERNEL);
+		if (!cdm_array[i].keyword) {
+			rc = -ENOMEM;
+			goto out;
+		}
+
+		sscanf(cds_head,
+		       "%s %llx %llx",
+		       cdm_array[i].keyword,
+		       (unsigned long long *)&(cdm_array[i].mask1),
+		       (unsigned long long *)&(cdm_array[i].mask2));
+
+		if (!strcmp(cdm_array[i].keyword, ORANGEFS_VERBOSE))
+			client_verbose_index = i;
+
+		if (!strcmp(cdm_array[i].keyword, ORANGEFS_ALL))
+			client_all_index = i;
+
+		cds_head = cds_delimiter + 1;
+	}
+
+	rc = cdm_element_count;
+
+	gossip_debug(GOSSIP_UTILS_DEBUG, "%s: rc:%d:\n", __func__, rc);
+
+out:
+
+	return rc;
+
+}
+
+/*
+ * /sys/kernel/debug/orangefs/debug-help can be catted to
+ * see all the available kernel and client debug keywords.
+ *
+ * When orangefs.ko initializes, we have no idea what keywords the
+ * client supports, nor their associated masks.
+ *
+ * We pass through this function once at module-load and stamp a
+ * boilerplate "we don't know" message for the client in the
+ * debug-help file. We pass through here again when the client
+ * starts and then we can fill out the debug-help file fully.
+ *
+ * The client might be restarted any number of times between
+ * module reloads, we only build the debug-help file the first time.
+ */
+int orangefs_prepare_debugfs_help_string(int at_boot)
+{
+	char *client_title = "Client Debug Keywords:\n";
+	char *kernel_title = "Kernel Debug Keywords:\n";
+	size_t string_size =  DEBUG_HELP_STRING_SIZE;
+	size_t result_size;
+	size_t i;
+	char *new;
+	int rc = -EINVAL;
+
+	gossip_debug(GOSSIP_UTILS_DEBUG, "%s: start\n", __func__);
+
+	if (at_boot)
+		client_title = HELP_STRING_UNINITIALIZED;
+
+	/* build a new debug_help_string. */
+	new = kzalloc(DEBUG_HELP_STRING_SIZE, GFP_KERNEL);
+	if (!new) {
+		rc = -ENOMEM;
+		goto out;
+	}
+
+	/*
+	 * strlcat(dst, src, size) will append at most
+	 * "size - strlen(dst) - 1" bytes of src onto dst,
+	 * null terminating the result, and return the total
+	 * length of the string it tried to create.
+	 *
+	 * We'll just plow through here building our new debug
+	 * help string and let strlcat take care of assuring that
+	 * dst doesn't overflow.
+	 */
+	strlcat(new, client_title, string_size);
+
+	if (!at_boot) {
+
+                /*
+		 * fill the client keyword/mask array and remember
+		 * how many elements there were.
+		 */
+		cdm_element_count =
+			orangefs_prepare_cdm_array(client_debug_array_string);
+		if (cdm_element_count <= 0) {
+			kfree(new);
+			goto out;
+		}
+
+		for (i = 0; i < cdm_element_count; i++) {
+			strlcat(new, "\t", string_size);
+			strlcat(new, cdm_array[i].keyword, string_size);
+			strlcat(new, "\n", string_size);
+		}
+	}
+
+	strlcat(new, "\n", string_size);
+	strlcat(new, kernel_title, string_size);
+
+	for (i = 0; i < num_kmod_keyword_mask_map; i++) {
+		strlcat(new, "\t", string_size);
+		strlcat(new, s_kmod_keyword_mask_map[i].keyword, string_size);
+		result_size = strlcat(new, "\n", string_size);
+	}
+
+	/* See if we tried to put too many bytes into "new"... */
+	if (result_size >= string_size) {
+		kfree(new);
+		goto out;
+	}
+
+	if (at_boot) {
+		debug_help_string = new;
+	} else {
+		mutex_lock(&orangefs_help_file_lock);
+		memset(debug_help_string, 0, DEBUG_HELP_STRING_SIZE);
+		strlcat(debug_help_string, new, string_size);
+		mutex_unlock(&orangefs_help_file_lock);
+		kfree(new);
+	}
+
+	rc = 0;
+
+out:	return rc;
+
+}
+
+/*
+ * kernel = type 0
+ * client = type 1
+ */
+static void debug_mask_to_string(void *mask, int type)
+{
+	int i;
+	int len = 0;
+	char *debug_string;
+	int element_count = 0;
+
+	gossip_debug(GOSSIP_UTILS_DEBUG, "%s: start\n", __func__);
+
+	if (type) {
+		debug_string = client_debug_string;
+		element_count = cdm_element_count;
+	} else {
+		debug_string = kernel_debug_string;
+		element_count = num_kmod_keyword_mask_map;
+	}
+
+	memset(debug_string, 0, ORANGEFS_MAX_DEBUG_STRING_LEN);
+
+	/*
+	 * Some keywords, like "all" or "verbose", are amalgams of
+	 * numerous other keywords. Make a special check for those
+	 * before grinding through the whole mask only to find out
+	 * later...
+	 */
+	if (check_amalgam_keyword(mask, type))
+		goto out;
+
+	/* Build the debug string. */
+	for (i = 0; i < element_count; i++)
+		if (type)
+			do_c_string(mask, i);
+		else
+			do_k_string(mask, i);
+
+	len = strlen(debug_string);
+
+	if ((len) && (type))
+		client_debug_string[len - 1] = '\0';
+	else if (len)
+		kernel_debug_string[len - 1] = '\0';
+	else if (type)
+		strcpy(client_debug_string, "none");
+	else
+		strcpy(kernel_debug_string, "none");
+
+out:
+gossip_debug(GOSSIP_UTILS_DEBUG, "%s: string:%s:\n", __func__, debug_string);
+
+	return;
+
+}
+
+static void do_k_string(void *k_mask, int index)
+{
+	__u64 *mask = (__u64 *) k_mask;
+
+	if (keyword_is_amalgam((char *) s_kmod_keyword_mask_map[index].keyword))
+		goto out;
+
+	if (*mask & s_kmod_keyword_mask_map[index].mask_val) {
+		if ((strlen(kernel_debug_string) +
+		     strlen(s_kmod_keyword_mask_map[index].keyword))
+			< ORANGEFS_MAX_DEBUG_STRING_LEN - 1) {
+				strcat(kernel_debug_string,
+				       s_kmod_keyword_mask_map[index].keyword);
+				strcat(kernel_debug_string, ",");
+			} else {
+				gossip_err("%s: overflow!\n", __func__);
+				strcpy(kernel_debug_string, ORANGEFS_ALL);
+				goto out;
+			}
+	}
+
+out:
+
+	return;
+}
+
+static void do_c_string(void *c_mask, int index)
+{
+	struct client_debug_mask *mask = (struct client_debug_mask *) c_mask;
+
+	if (keyword_is_amalgam(cdm_array[index].keyword))
+		goto out;
+
+	if ((mask->mask1 & cdm_array[index].mask1) ||
+	    (mask->mask2 & cdm_array[index].mask2)) {
+		if ((strlen(client_debug_string) +
+		     strlen(cdm_array[index].keyword) + 1)
+			< ORANGEFS_MAX_DEBUG_STRING_LEN - 2) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				strcat(client_debug_string,
 				       cdm_array[index].keyword);
 				strcat(client_debug_string, ",");

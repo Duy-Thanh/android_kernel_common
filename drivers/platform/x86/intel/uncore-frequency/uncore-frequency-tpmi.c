@@ -189,6 +189,7 @@ static int uncore_read_control_freq(struct uncore_data *data, unsigned int *valu
 static int write_eff_lat_ctrl(struct uncore_data *data, unsigned int val, enum uncore_index index)
 {
 	struct tpmi_uncore_cluster_info *cluster_info;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct tpmi_uncore_struct *uncore_root;
 	u64 control;
 
@@ -197,6 +198,12 @@ static int write_eff_lat_ctrl(struct uncore_data *data, unsigned int val, enum u
 
 	if (uncore_root->write_blocked)
 		return -EPERM;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u64 control;
+
+	cluster_info = container_of(data, struct tpmi_uncore_cluster_info, uncore_data);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (cluster_info->root_domain)
 		return -ENODATA;

@@ -39,6 +39,7 @@ int amd_sfh_get_report(struct hid_device *hid, int report_id, int report_type)
 	struct amdtp_hid_data *hid_data = hid->driver_data;
 	struct amdtp_cl_data *cli_data = hid_data->cli_data;
 	struct request_list *req_list = &cli_data->req_list;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct amd_input_data *in_data = cli_data->in_data;
 	struct amd_mp2_dev *mp2;
 	int i;
@@ -128,6 +129,90 @@ void amd_sfh_work_buffer(struct work_struct *work)
 	guard(mutex)(&mp2->lock);
 	for (i = 0; i < cli_data->num_hid_devices; i++) {
 		if (cli_data->sensor_sts[i] == SENSOR_ENABLED) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int i;
+
+	for (i = 0; i < cli_data->num_hid_devices; i++) {
+		if (cli_data->hid_sensor_hubs[i] == hid) {
+			struct request_list *new = kzalloc(sizeof(*new), GFP_KERNEL);
+
+			if (!new)
+				return -ENOMEM;
+
+			new->current_index = i;
+			new->sensor_idx = cli_data->sensor_idx[i];
+			new->hid = hid;
+			new->report_type = report_type;
+			new->report_id = report_id;
+			cli_data->report_id[i] = report_id;
+			cli_data->request_done[i] = false;
+			list_add(&new->list, &req_list->list);
+			break;
+		}
+	}
+	schedule_delayed_work(&cli_data->work, 0);
+	return 0;
+}
+
+void amd_sfh_work(struct work_struct *work)
+{
+	struct amdtp_cl_data *cli_data = container_of(work, struct amdtp_cl_data, work.work);
+	struct request_list *req_list = &cli_data->req_list;
+	struct amd_input_data *in_data = cli_data->in_data;
+	struct request_list *req_node;
+	u8 current_index, sensor_index;
+	struct amd_mp2_ops *mp2_ops;
+	struct amd_mp2_dev *mp2;
+	u8 report_id, node_type;
+	u8 report_size = 0;
+
+	req_node = list_last_entry(&req_list->list, struct request_list, list);
+	list_del(&req_node->list);
+	current_index = req_node->current_index;
+	sensor_index = req_node->sensor_idx;
+	report_id = req_node->report_id;
+	node_type = req_node->report_type;
+	kfree(req_node);
+
+	mp2 = container_of(in_data, struct amd_mp2_dev, in_data);
+	mp2_ops = mp2->mp2_ops;
+	if (node_type == HID_FEATURE_REPORT) {
+		report_size = mp2_ops->get_feat_rep(sensor_index, report_id,
+						    cli_data->feature_report[current_index]);
+		if (report_size)
+			hid_input_report(cli_data->hid_sensor_hubs[current_index],
+					 cli_data->report_type[current_index],
+					 cli_data->feature_report[current_index], report_size, 0);
+		else
+			pr_err("AMDSFH: Invalid report size\n");
+
+	} else if (node_type == HID_INPUT_REPORT) {
+		report_size = mp2_ops->get_in_rep(current_index, sensor_index, report_id, in_data);
+		if (report_size)
+			hid_input_report(cli_data->hid_sensor_hubs[current_index],
+					 cli_data->report_type[current_index],
+					 in_data->input_report[current_index], report_size, 0);
+		else
+			pr_err("AMDSFH: Invalid report size\n");
+	}
+	cli_data->cur_hid_dev = current_index;
+	cli_data->sensor_requested_cnt[current_index] = 0;
+	amdtp_hid_wakeup(cli_data->hid_sensor_hubs[current_index]);
+}
+
+void amd_sfh_work_buffer(struct work_struct *work)
+{
+	struct amdtp_cl_data *cli_data = container_of(work, struct amdtp_cl_data, work_buffer.work);
+	struct amd_input_data *in_data = cli_data->in_data;
+	struct amd_mp2_dev *mp2;
+	u8 report_size;
+	int i;
+
+	for (i = 0; i < cli_data->num_hid_devices; i++) {
+		if (cli_data->sensor_sts[i] == SENSOR_ENABLED) {
+			mp2 = container_of(in_data, struct amd_mp2_dev, in_data);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			report_size = mp2->mp2_ops->get_in_rep(i, cli_data->sensor_idx[i],
 							       cli_data->report_id[i], in_data);
 			hid_input_report(cli_data->hid_sensor_hubs[i], HID_INPUT_REPORT,

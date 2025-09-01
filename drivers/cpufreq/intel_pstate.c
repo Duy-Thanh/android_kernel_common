@@ -2654,6 +2654,7 @@ static const struct x86_cpu_id intel_pstate_cpu_ids[] = {
 	X86_MATCH(INTEL_TIGERLAKE,		core_funcs),
 	X86_MATCH(INTEL_SAPPHIRERAPIDS_X,	core_funcs),
 	X86_MATCH(INTEL_EMERALDRAPIDS_X,	core_funcs),
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	X86_MATCH(INTEL_GRANITERAPIDS_D,	core_funcs),
 	X86_MATCH(INTEL_GRANITERAPIDS_X,	core_funcs),
 	{}
@@ -3132,6 +3133,485 @@ static int intel_cpufreq_update_pstate(struct cpufreq_policy *policy,
 
 		intel_cpufreq_hwp_update(cpu, target_pstate, max_pstate,
 					 target_pstate, fast_switch);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	{}
+};
+MODULE_DEVICE_TABLE(x86cpu, intel_pstate_cpu_ids);
+
+#ifdef CONFIG_ACPI
+static const struct x86_cpu_id intel_pstate_cpu_oob_ids[] __initconst = {
+	X86_MATCH(INTEL_BROADWELL_D,		core_funcs),
+	X86_MATCH(INTEL_BROADWELL_X,		core_funcs),
+	X86_MATCH(INTEL_SKYLAKE_X,		core_funcs),
+	X86_MATCH(INTEL_ICELAKE_X,		core_funcs),
+	X86_MATCH(INTEL_SAPPHIRERAPIDS_X,	core_funcs),
+	X86_MATCH(INTEL_EMERALDRAPIDS_X,	core_funcs),
+	X86_MATCH(INTEL_GRANITERAPIDS_D,	core_funcs),
+	X86_MATCH(INTEL_GRANITERAPIDS_X,	core_funcs),
+	X86_MATCH(INTEL_ATOM_CRESTMONT,		core_funcs),
+	X86_MATCH(INTEL_ATOM_CRESTMONT_X,	core_funcs),
+	{}
+};
+#endif
+
+static const struct x86_cpu_id intel_pstate_cpu_ee_disable_ids[] = {
+	X86_MATCH(INTEL_KABYLAKE,		core_funcs),
+	{}
+};
+
+static int intel_pstate_init_cpu(unsigned int cpunum)
+{
+	struct cpudata *cpu;
+
+	cpu = all_cpu_data[cpunum];
+
+	if (!cpu) {
+		cpu = kzalloc(sizeof(*cpu), GFP_KERNEL);
+		if (!cpu)
+			return -ENOMEM;
+
+		WRITE_ONCE(all_cpu_data[cpunum], cpu);
+
+		cpu->cpu = cpunum;
+
+		cpu->epp_default = -EINVAL;
+
+		if (hwp_active) {
+			intel_pstate_hwp_enable(cpu);
+
+			if (intel_pstate_acpi_pm_profile_server())
+				hwp_boost = true;
+		}
+	} else if (hwp_active) {
+		/*
+		 * Re-enable HWP in case this happens after a resume from ACPI
+		 * S3 if the CPU was offline during the whole system/resume
+		 * cycle.
+		 */
+		intel_pstate_hwp_reenable(cpu);
+	}
+
+	cpu->epp_powersave = -EINVAL;
+	cpu->epp_policy = 0;
+
+	intel_pstate_get_cpu_pstates(cpu);
+
+	pr_debug("controlling: cpu %d\n", cpunum);
+
+	return 0;
+}
+
+static void intel_pstate_set_update_util_hook(unsigned int cpu_num)
+{
+	struct cpudata *cpu = all_cpu_data[cpu_num];
+
+	if (hwp_active && !hwp_boost)
+		return;
+
+	if (cpu->update_util_set)
+		return;
+
+	/* Prevent intel_pstate_update_util() from using stale data. */
+	cpu->sample.time = 0;
+	cpufreq_add_update_util_hook(cpu_num, &cpu->update_util,
+				     (hwp_active ?
+				      intel_pstate_update_util_hwp :
+				      intel_pstate_update_util));
+	cpu->update_util_set = true;
+}
+
+static void intel_pstate_clear_update_util_hook(unsigned int cpu)
+{
+	struct cpudata *cpu_data = all_cpu_data[cpu];
+
+	if (!cpu_data->update_util_set)
+		return;
+
+	cpufreq_remove_update_util_hook(cpu);
+	cpu_data->update_util_set = false;
+	synchronize_rcu();
+}
+
+static int intel_pstate_get_max_freq(struct cpudata *cpu)
+{
+	return READ_ONCE(global.no_turbo) ?
+			cpu->pstate.max_freq : cpu->pstate.turbo_freq;
+}
+
+static void intel_pstate_update_perf_limits(struct cpudata *cpu,
+					    unsigned int policy_min,
+					    unsigned int policy_max)
+{
+	int perf_ctl_scaling = cpu->pstate.perf_ctl_scaling;
+	int32_t max_policy_perf, min_policy_perf;
+
+	max_policy_perf = policy_max / perf_ctl_scaling;
+	if (policy_max == policy_min) {
+		min_policy_perf = max_policy_perf;
+	} else {
+		min_policy_perf = policy_min / perf_ctl_scaling;
+		min_policy_perf = clamp_t(int32_t, min_policy_perf,
+					  0, max_policy_perf);
+	}
+
+	/*
+	 * HWP needs some special consideration, because HWP_REQUEST uses
+	 * abstract values to represent performance rather than pure ratios.
+	 */
+	if (hwp_active && cpu->pstate.scaling != perf_ctl_scaling) {
+		int freq;
+
+		freq = max_policy_perf * perf_ctl_scaling;
+		max_policy_perf = intel_pstate_freq_to_hwp(cpu, freq);
+		freq = min_policy_perf * perf_ctl_scaling;
+		min_policy_perf = intel_pstate_freq_to_hwp(cpu, freq);
+	}
+
+	pr_debug("cpu:%d min_policy_perf:%d max_policy_perf:%d\n",
+		 cpu->cpu, min_policy_perf, max_policy_perf);
+
+	/* Normalize user input to [min_perf, max_perf] */
+	if (per_cpu_limits) {
+		cpu->min_perf_ratio = min_policy_perf;
+		cpu->max_perf_ratio = max_policy_perf;
+	} else {
+		int turbo_max = cpu->pstate.turbo_pstate;
+		int32_t global_min, global_max;
+
+		/* Global limits are in percent of the maximum turbo P-state. */
+		global_max = DIV_ROUND_UP(turbo_max * global.max_perf_pct, 100);
+		global_min = DIV_ROUND_UP(turbo_max * global.min_perf_pct, 100);
+		global_min = clamp_t(int32_t, global_min, 0, global_max);
+
+		pr_debug("cpu:%d global_min:%d global_max:%d\n", cpu->cpu,
+			 global_min, global_max);
+
+		cpu->min_perf_ratio = max(min_policy_perf, global_min);
+		cpu->min_perf_ratio = min(cpu->min_perf_ratio, max_policy_perf);
+		cpu->max_perf_ratio = min(max_policy_perf, global_max);
+		cpu->max_perf_ratio = max(min_policy_perf, cpu->max_perf_ratio);
+
+		/* Make sure min_perf <= max_perf */
+		cpu->min_perf_ratio = min(cpu->min_perf_ratio,
+					  cpu->max_perf_ratio);
+
+	}
+	pr_debug("cpu:%d max_perf_ratio:%d min_perf_ratio:%d\n", cpu->cpu,
+		 cpu->max_perf_ratio,
+		 cpu->min_perf_ratio);
+}
+
+static int intel_pstate_set_policy(struct cpufreq_policy *policy)
+{
+	struct cpudata *cpu;
+
+	if (!policy->cpuinfo.max_freq)
+		return -ENODEV;
+
+	pr_debug("set_policy cpuinfo.max %u policy->max %u\n",
+		 policy->cpuinfo.max_freq, policy->max);
+
+	cpu = all_cpu_data[policy->cpu];
+	cpu->policy = policy->policy;
+
+	mutex_lock(&intel_pstate_limits_lock);
+
+	intel_pstate_update_perf_limits(cpu, policy->min, policy->max);
+
+	if (cpu->policy == CPUFREQ_POLICY_PERFORMANCE) {
+		int pstate = max(cpu->pstate.min_pstate, cpu->max_perf_ratio);
+
+		/*
+		 * NOHZ_FULL CPUs need this as the governor callback may not
+		 * be invoked on them.
+		 */
+		intel_pstate_clear_update_util_hook(policy->cpu);
+		intel_pstate_set_pstate(cpu, pstate);
+	} else {
+		intel_pstate_set_update_util_hook(policy->cpu);
+	}
+
+	if (hwp_active) {
+		/*
+		 * When hwp_boost was active before and dynamically it
+		 * was turned off, in that case we need to clear the
+		 * update util hook.
+		 */
+		if (!hwp_boost)
+			intel_pstate_clear_update_util_hook(policy->cpu);
+		intel_pstate_hwp_set(policy->cpu);
+	}
+	/*
+	 * policy->cur is never updated with the intel_pstate driver, but it
+	 * is used as a stale frequency value. So, keep it within limits.
+	 */
+	policy->cur = policy->min;
+
+	mutex_unlock(&intel_pstate_limits_lock);
+
+	return 0;
+}
+
+static void intel_pstate_adjust_policy_max(struct cpudata *cpu,
+					   struct cpufreq_policy_data *policy)
+{
+	if (!hwp_active &&
+	    cpu->pstate.max_pstate_physical > cpu->pstate.max_pstate &&
+	    policy->max < policy->cpuinfo.max_freq &&
+	    policy->max > cpu->pstate.max_freq) {
+		pr_debug("policy->max > max non turbo frequency\n");
+		policy->max = policy->cpuinfo.max_freq;
+	}
+}
+
+static void intel_pstate_verify_cpu_policy(struct cpudata *cpu,
+					   struct cpufreq_policy_data *policy)
+{
+	int max_freq;
+
+	if (hwp_active) {
+		intel_pstate_get_hwp_cap(cpu);
+		max_freq = READ_ONCE(global.no_turbo) ?
+				cpu->pstate.max_freq : cpu->pstate.turbo_freq;
+	} else {
+		max_freq = intel_pstate_get_max_freq(cpu);
+	}
+	cpufreq_verify_within_limits(policy, policy->cpuinfo.min_freq, max_freq);
+
+	intel_pstate_adjust_policy_max(cpu, policy);
+}
+
+static int intel_pstate_verify_policy(struct cpufreq_policy_data *policy)
+{
+	intel_pstate_verify_cpu_policy(all_cpu_data[policy->cpu], policy);
+
+	return 0;
+}
+
+static int intel_cpufreq_cpu_offline(struct cpufreq_policy *policy)
+{
+	struct cpudata *cpu = all_cpu_data[policy->cpu];
+
+	pr_debug("CPU %d going offline\n", cpu->cpu);
+
+	if (cpu->suspended)
+		return 0;
+
+	/*
+	 * If the CPU is an SMT thread and it goes offline with the performance
+	 * settings different from the minimum, it will prevent its sibling
+	 * from getting to lower performance levels, so force the minimum
+	 * performance on CPU offline to prevent that from happening.
+	 */
+	if (hwp_active)
+		intel_pstate_hwp_offline(cpu);
+	else
+		intel_pstate_set_min_pstate(cpu);
+
+	intel_pstate_exit_perf_limits(policy);
+
+	return 0;
+}
+
+static int intel_pstate_cpu_online(struct cpufreq_policy *policy)
+{
+	struct cpudata *cpu = all_cpu_data[policy->cpu];
+
+	pr_debug("CPU %d going online\n", cpu->cpu);
+
+	intel_pstate_init_acpi_perf_limits(policy);
+
+	if (hwp_active) {
+		/*
+		 * Re-enable HWP and clear the "suspended" flag to let "resume"
+		 * know that it need not do that.
+		 */
+		intel_pstate_hwp_reenable(cpu);
+		cpu->suspended = false;
+
+		hybrid_update_capacity(cpu);
+	}
+
+	return 0;
+}
+
+static int intel_pstate_cpu_offline(struct cpufreq_policy *policy)
+{
+	intel_pstate_clear_update_util_hook(policy->cpu);
+
+	return intel_cpufreq_cpu_offline(policy);
+}
+
+static void intel_pstate_cpu_exit(struct cpufreq_policy *policy)
+{
+	pr_debug("CPU %d exiting\n", policy->cpu);
+
+	policy->fast_switch_possible = false;
+}
+
+static int __intel_pstate_cpu_init(struct cpufreq_policy *policy)
+{
+	struct cpudata *cpu;
+	int rc;
+
+	rc = intel_pstate_init_cpu(policy->cpu);
+	if (rc)
+		return rc;
+
+	cpu = all_cpu_data[policy->cpu];
+
+	cpu->max_perf_ratio = 0xFF;
+	cpu->min_perf_ratio = 0;
+
+	/* cpuinfo and default policy values */
+	policy->cpuinfo.min_freq = cpu->pstate.min_freq;
+	policy->cpuinfo.max_freq = READ_ONCE(global.no_turbo) ?
+			cpu->pstate.max_freq : cpu->pstate.turbo_freq;
+
+	policy->min = policy->cpuinfo.min_freq;
+	policy->max = policy->cpuinfo.max_freq;
+
+	intel_pstate_init_acpi_perf_limits(policy);
+
+	policy->fast_switch_possible = true;
+
+	return 0;
+}
+
+static int intel_pstate_cpu_init(struct cpufreq_policy *policy)
+{
+	int ret = __intel_pstate_cpu_init(policy);
+
+	if (ret)
+		return ret;
+
+	/*
+	 * Set the policy to powersave to provide a valid fallback value in case
+	 * the default cpufreq governor is neither powersave nor performance.
+	 */
+	policy->policy = CPUFREQ_POLICY_POWERSAVE;
+
+	if (hwp_active) {
+		struct cpudata *cpu = all_cpu_data[policy->cpu];
+
+		cpu->epp_cached = intel_pstate_get_epp(cpu, 0);
+	}
+
+	return 0;
+}
+
+static struct cpufreq_driver intel_pstate = {
+	.flags		= CPUFREQ_CONST_LOOPS,
+	.verify		= intel_pstate_verify_policy,
+	.setpolicy	= intel_pstate_set_policy,
+	.suspend	= intel_pstate_suspend,
+	.resume		= intel_pstate_resume,
+	.init		= intel_pstate_cpu_init,
+	.exit		= intel_pstate_cpu_exit,
+	.offline	= intel_pstate_cpu_offline,
+	.online		= intel_pstate_cpu_online,
+	.update_limits	= intel_pstate_update_limits,
+	.name		= "intel_pstate",
+};
+
+static int intel_cpufreq_verify_policy(struct cpufreq_policy_data *policy)
+{
+	struct cpudata *cpu = all_cpu_data[policy->cpu];
+
+	intel_pstate_verify_cpu_policy(cpu, policy);
+	intel_pstate_update_perf_limits(cpu, policy->min, policy->max);
+
+	return 0;
+}
+
+/* Use of trace in passive mode:
+ *
+ * In passive mode the trace core_busy field (also known as the
+ * performance field, and lablelled as such on the graphs; also known as
+ * core_avg_perf) is not needed and so is re-assigned to indicate if the
+ * driver call was via the normal or fast switch path. Various graphs
+ * output from the intel_pstate_tracer.py utility that include core_busy
+ * (or performance or core_avg_perf) have a fixed y-axis from 0 to 100%,
+ * so we use 10 to indicate the normal path through the driver, and
+ * 90 to indicate the fast switch path through the driver.
+ * The scaled_busy field is not used, and is set to 0.
+ */
+
+#define	INTEL_PSTATE_TRACE_TARGET 10
+#define	INTEL_PSTATE_TRACE_FAST_SWITCH 90
+
+static void intel_cpufreq_trace(struct cpudata *cpu, unsigned int trace_type, int old_pstate)
+{
+	struct sample *sample;
+
+	if (!trace_pstate_sample_enabled())
+		return;
+
+	if (!intel_pstate_sample(cpu, ktime_get()))
+		return;
+
+	sample = &cpu->sample;
+	trace_pstate_sample(trace_type,
+		0,
+		old_pstate,
+		cpu->pstate.current_pstate,
+		sample->mperf,
+		sample->aperf,
+		sample->tsc,
+		get_avg_frequency(cpu),
+		fp_toint(cpu->iowait_boost * 100));
+}
+
+static void intel_cpufreq_hwp_update(struct cpudata *cpu, u32 min, u32 max,
+				     u32 desired, bool fast_switch)
+{
+	u64 prev = READ_ONCE(cpu->hwp_req_cached), value = prev;
+
+	value &= ~HWP_MIN_PERF(~0L);
+	value |= HWP_MIN_PERF(min);
+
+	value &= ~HWP_MAX_PERF(~0L);
+	value |= HWP_MAX_PERF(max);
+
+	value &= ~HWP_DESIRED_PERF(~0L);
+	value |= HWP_DESIRED_PERF(desired);
+
+	if (value == prev)
+		return;
+
+	WRITE_ONCE(cpu->hwp_req_cached, value);
+	if (fast_switch)
+		wrmsrl(MSR_HWP_REQUEST, value);
+	else
+		wrmsrl_on_cpu(cpu->cpu, MSR_HWP_REQUEST, value);
+}
+
+static void intel_cpufreq_perf_ctl_update(struct cpudata *cpu,
+					  u32 target_pstate, bool fast_switch)
+{
+	if (fast_switch)
+		wrmsrl(MSR_IA32_PERF_CTL,
+		       pstate_funcs.get_val(cpu, target_pstate));
+	else
+		wrmsrl_on_cpu(cpu->cpu, MSR_IA32_PERF_CTL,
+			      pstate_funcs.get_val(cpu, target_pstate));
+}
+
+static int intel_cpufreq_update_pstate(struct cpufreq_policy *policy,
+				       int target_pstate, bool fast_switch)
+{
+	struct cpudata *cpu = all_cpu_data[policy->cpu];
+	int old_pstate = cpu->pstate.current_pstate;
+
+	target_pstate = intel_pstate_prepare_request(cpu, target_pstate);
+	if (hwp_active) {
+		int max_pstate = policy->strict_target ?
+					target_pstate : cpu->max_perf_ratio;
+
+		intel_cpufreq_hwp_update(cpu, target_pstate, max_pstate, 0,
+					 fast_switch);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	} else if (target_pstate != old_pstate) {
 		intel_cpufreq_perf_ctl_update(cpu, target_pstate, fast_switch);
 	}

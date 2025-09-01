@@ -83,6 +83,7 @@ struct mtk_ddp_comp_funcs {
 	u32 (*get_blend_modes)(struct device *dev);
 	const u32 *(*get_formats)(struct device *dev);
 	size_t (*get_num_formats)(struct device *dev);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool (*is_afbc_supported)(struct device *dev);
 	void (*connect)(struct device *dev, struct device *mmsys_dev, unsigned int next);
 	void (*disconnect)(struct device *dev, struct device *mmsys_dev, unsigned int next);
@@ -301,6 +302,218 @@ static inline bool mtk_ddp_comp_is_afbc_supported(struct mtk_ddp_comp *comp)
 		return comp->funcs->is_afbc_supported(comp->dev);
 
 	return false;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	void (*connect)(struct device *dev, struct device *mmsys_dev, unsigned int next);
+	void (*disconnect)(struct device *dev, struct device *mmsys_dev, unsigned int next);
+	void (*add)(struct device *dev, struct mtk_mutex *mutex);
+	void (*remove)(struct device *dev, struct mtk_mutex *mutex);
+	unsigned int (*encoder_index)(struct device *dev);
+	enum drm_mode_status (*mode_valid)(struct device *dev, const struct drm_display_mode *mode);
+};
+
+struct mtk_ddp_comp {
+	struct device *dev;
+	int irq;
+	unsigned int id;
+	int encoder_index;
+	const struct mtk_ddp_comp_funcs *funcs;
+};
+
+static inline int mtk_ddp_comp_power_on(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->power_on)
+		return comp->funcs->power_on(comp->dev);
+	else
+		return pm_runtime_resume_and_get(comp->dev);
+	return 0;
+}
+
+static inline void mtk_ddp_comp_power_off(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->power_off)
+		comp->funcs->power_off(comp->dev);
+	else
+		pm_runtime_put(comp->dev);
+}
+
+static inline int mtk_ddp_comp_clk_enable(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->clk_enable)
+		return comp->funcs->clk_enable(comp->dev);
+
+	return 0;
+}
+
+static inline void mtk_ddp_comp_clk_disable(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->clk_disable)
+		comp->funcs->clk_disable(comp->dev);
+}
+
+static inline
+enum drm_mode_status mtk_ddp_comp_mode_valid(struct mtk_ddp_comp *comp,
+					     const struct drm_display_mode *mode)
+{
+	if (comp && comp->funcs && comp->funcs->mode_valid)
+		return comp->funcs->mode_valid(comp->dev, mode);
+	return MODE_OK;
+}
+
+static inline void mtk_ddp_comp_config(struct mtk_ddp_comp *comp,
+				       unsigned int w, unsigned int h,
+				       unsigned int vrefresh, unsigned int bpc,
+				       struct cmdq_pkt *cmdq_pkt)
+{
+	if (comp->funcs && comp->funcs->config)
+		comp->funcs->config(comp->dev, w, h, vrefresh, bpc, cmdq_pkt);
+}
+
+static inline void mtk_ddp_comp_start(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->start)
+		comp->funcs->start(comp->dev);
+}
+
+static inline void mtk_ddp_comp_stop(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->stop)
+		comp->funcs->stop(comp->dev);
+}
+
+static inline void mtk_ddp_comp_register_vblank_cb(struct mtk_ddp_comp *comp,
+						   void (*vblank_cb)(void *),
+						   void *vblank_cb_data)
+{
+	if (comp->funcs && comp->funcs->register_vblank_cb)
+		comp->funcs->register_vblank_cb(comp->dev, vblank_cb,
+						vblank_cb_data);
+}
+
+static inline void mtk_ddp_comp_unregister_vblank_cb(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->unregister_vblank_cb)
+		comp->funcs->unregister_vblank_cb(comp->dev);
+}
+
+static inline void mtk_ddp_comp_enable_vblank(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->enable_vblank)
+		comp->funcs->enable_vblank(comp->dev);
+}
+
+static inline void mtk_ddp_comp_disable_vblank(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->disable_vblank)
+		comp->funcs->disable_vblank(comp->dev);
+}
+
+static inline
+unsigned int mtk_ddp_comp_supported_rotations(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->supported_rotations)
+		return comp->funcs->supported_rotations(comp->dev);
+
+	/*
+	 * In order to pass IGT tests, DRM_MODE_ROTATE_0 is required when
+	 * rotation is not supported.
+	 */
+	return DRM_MODE_ROTATE_0;
+}
+
+static inline unsigned int mtk_ddp_comp_layer_nr(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->layer_nr)
+		return comp->funcs->layer_nr(comp->dev);
+
+	return 0;
+}
+
+static inline int mtk_ddp_comp_layer_check(struct mtk_ddp_comp *comp,
+					   unsigned int idx,
+					   struct mtk_plane_state *state)
+{
+	if (comp->funcs && comp->funcs->layer_check)
+		return comp->funcs->layer_check(comp->dev, idx, state);
+	return 0;
+}
+
+static inline void mtk_ddp_comp_layer_config(struct mtk_ddp_comp *comp,
+					     unsigned int idx,
+					     struct mtk_plane_state *state,
+					     struct cmdq_pkt *cmdq_pkt)
+{
+	if (comp->funcs && comp->funcs->layer_config)
+		comp->funcs->layer_config(comp->dev, idx, state, cmdq_pkt);
+}
+
+static inline unsigned int mtk_ddp_gamma_get_lut_size(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->gamma_get_lut_size)
+		return comp->funcs->gamma_get_lut_size(comp->dev);
+
+	return 0;
+}
+
+static inline void mtk_ddp_gamma_set(struct mtk_ddp_comp *comp,
+				     struct drm_crtc_state *state)
+{
+	if (comp->funcs && comp->funcs->gamma_set)
+		comp->funcs->gamma_set(comp->dev, state);
+}
+
+static inline void mtk_ddp_comp_bgclr_in_on(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->bgclr_in_on)
+		comp->funcs->bgclr_in_on(comp->dev);
+}
+
+static inline void mtk_ddp_comp_bgclr_in_off(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->bgclr_in_off)
+		comp->funcs->bgclr_in_off(comp->dev);
+}
+
+static inline void mtk_ddp_ctm_set(struct mtk_ddp_comp *comp,
+				   struct drm_crtc_state *state)
+{
+	if (comp->funcs && comp->funcs->ctm_set)
+		comp->funcs->ctm_set(comp->dev, state);
+}
+
+static inline struct device *mtk_ddp_comp_dma_dev_get(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->dma_dev_get)
+		return comp->funcs->dma_dev_get(comp->dev);
+	return comp->dev;
+}
+
+static inline
+u32 mtk_ddp_comp_get_blend_modes(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->get_blend_modes)
+		return comp->funcs->get_blend_modes(comp->dev);
+
+	return 0;
+}
+
+static inline
+const u32 *mtk_ddp_comp_get_formats(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->get_formats)
+		return comp->funcs->get_formats(comp->dev);
+
+	return NULL;
+}
+
+static inline
+size_t mtk_ddp_comp_get_num_formats(struct mtk_ddp_comp *comp)
+{
+	if (comp->funcs && comp->funcs->get_num_formats)
+		return comp->funcs->get_num_formats(comp->dev);
+
+	return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static inline bool mtk_ddp_comp_add(struct mtk_ddp_comp *comp, struct mtk_mutex *mutex)

@@ -2208,12 +2208,16 @@ static void ksz_update_port_member(struct ksz_device *dev, int port)
 		dev->dev_ops->cfg_port_member(dev, i, val | cpu_port);
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* HSR ports are setup once so need to use the assigned membership
 	 * when the port is enabled.
 	 */
 	if (!port_member && p->stp_state == BR_STATE_FORWARDING &&
 	    (dev->hsr_ports & BIT(port)))
 		port_member = dev->hsr_ports;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	dev->dev_ops->cfg_port_member(dev, port, port_member | cpu_port);
 }
 

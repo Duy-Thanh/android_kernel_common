@@ -1472,6 +1472,7 @@ static bool kvm_xen_schedop_poll(struct kvm_vcpu *vcpu, bool longmode,
 	if (kvm_read_guest_virt(vcpu, (gva_t)sched_poll.ports, ports,
 				sched_poll.nr_ports * sizeof(*ports), &e)) {
 		*r = -EFAULT;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		goto out;
 	}
 
@@ -1929,6 +1930,455 @@ int kvm_xen_setup_evtchn(struct kvm *kvm,
 	 * Xen 'long mode' flag, which changes max_evtchn_port() to allow 4096
 	 * instead of 1024 event channels.
 	 */
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		return true;
+	}
+
+	for (i = 0; i < sched_poll.nr_ports; i++) {
+		if (ports[i] >= max_evtchn_port(vcpu->kvm)) {
+			*r = -EINVAL;
+			goto out;
+		}
+	}
+
+	if (sched_poll.nr_ports == 1)
+		vcpu->arch.xen.poll_evtchn = port;
+	else
+		vcpu->arch.xen.poll_evtchn = -1;
+
+	set_bit(vcpu->vcpu_idx, vcpu->kvm->arch.xen.poll_mask);
+
+	if (!wait_pending_event(vcpu, sched_poll.nr_ports, ports)) {
+		vcpu->arch.mp_state = KVM_MP_STATE_HALTED;
+
+		if (sched_poll.timeout)
+			mod_timer(&vcpu->arch.xen.poll_timer,
+				  jiffies + nsecs_to_jiffies(sched_poll.timeout));
+
+		kvm_vcpu_halt(vcpu);
+
+		if (sched_poll.timeout)
+			del_timer(&vcpu->arch.xen.poll_timer);
+
+		vcpu->arch.mp_state = KVM_MP_STATE_RUNNABLE;
+	}
+
+	vcpu->arch.xen.poll_evtchn = 0;
+	*r = 0;
+out:
+	/* Really, this is only needed in case of timeout */
+	clear_bit(vcpu->vcpu_idx, vcpu->kvm->arch.xen.poll_mask);
+
+	if (unlikely(sched_poll.nr_ports > 1))
+		kfree(ports);
+	return true;
+}
+
+static void cancel_evtchn_poll(struct timer_list *t)
+{
+	struct kvm_vcpu *vcpu = from_timer(vcpu, t, arch.xen.poll_timer);
+
+	kvm_make_request(KVM_REQ_UNBLOCK, vcpu);
+	kvm_vcpu_kick(vcpu);
+}
+
+static bool kvm_xen_hcall_sched_op(struct kvm_vcpu *vcpu, bool longmode,
+				   int cmd, u64 param, u64 *r)
+{
+	switch (cmd) {
+	case SCHEDOP_poll:
+		if (kvm_xen_schedop_poll(vcpu, longmode, param, r))
+			return true;
+		fallthrough;
+	case SCHEDOP_yield:
+		kvm_vcpu_on_spin(vcpu, true);
+		*r = 0;
+		return true;
+	default:
+		break;
+	}
+
+	return false;
+}
+
+struct compat_vcpu_set_singleshot_timer {
+    uint64_t timeout_abs_ns;
+    uint32_t flags;
+} __attribute__((packed));
+
+static bool kvm_xen_hcall_vcpu_op(struct kvm_vcpu *vcpu, bool longmode, int cmd,
+				  int vcpu_id, u64 param, u64 *r)
+{
+	struct vcpu_set_singleshot_timer oneshot;
+	struct x86_exception e;
+
+	if (!kvm_xen_timer_enabled(vcpu))
+		return false;
+
+	switch (cmd) {
+	case VCPUOP_set_singleshot_timer:
+		if (vcpu->arch.xen.vcpu_id != vcpu_id) {
+			*r = -EINVAL;
+			return true;
+		}
+
+		/*
+		 * The only difference for 32-bit compat is the 4 bytes of
+		 * padding after the interesting part of the structure. So
+		 * for a faithful emulation of Xen we have to *try* to copy
+		 * the padding and return -EFAULT if we can't. Otherwise we
+		 * might as well just have copied the 12-byte 32-bit struct.
+		 */
+		BUILD_BUG_ON(offsetof(struct compat_vcpu_set_singleshot_timer, timeout_abs_ns) !=
+			     offsetof(struct vcpu_set_singleshot_timer, timeout_abs_ns));
+		BUILD_BUG_ON(sizeof_field(struct compat_vcpu_set_singleshot_timer, timeout_abs_ns) !=
+			     sizeof_field(struct vcpu_set_singleshot_timer, timeout_abs_ns));
+		BUILD_BUG_ON(offsetof(struct compat_vcpu_set_singleshot_timer, flags) !=
+			     offsetof(struct vcpu_set_singleshot_timer, flags));
+		BUILD_BUG_ON(sizeof_field(struct compat_vcpu_set_singleshot_timer, flags) !=
+			     sizeof_field(struct vcpu_set_singleshot_timer, flags));
+
+		if (kvm_read_guest_virt(vcpu, param, &oneshot, longmode ? sizeof(oneshot) :
+					sizeof(struct compat_vcpu_set_singleshot_timer), &e)) {
+			*r = -EFAULT;
+			return true;
+		}
+
+		kvm_xen_start_timer(vcpu, oneshot.timeout_abs_ns, false);
+		*r = 0;
+		return true;
+
+	case VCPUOP_stop_singleshot_timer:
+		if (vcpu->arch.xen.vcpu_id != vcpu_id) {
+			*r = -EINVAL;
+			return true;
+		}
+		kvm_xen_stop_timer(vcpu);
+		*r = 0;
+		return true;
+	}
+
+	return false;
+}
+
+static bool kvm_xen_hcall_set_timer_op(struct kvm_vcpu *vcpu, uint64_t timeout,
+				       u64 *r)
+{
+	if (!kvm_xen_timer_enabled(vcpu))
+		return false;
+
+	if (timeout)
+		kvm_xen_start_timer(vcpu, timeout, true);
+	else
+		kvm_xen_stop_timer(vcpu);
+
+	*r = 0;
+	return true;
+}
+
+int kvm_xen_hypercall(struct kvm_vcpu *vcpu)
+{
+	bool longmode;
+	u64 input, params[6], r = -ENOSYS;
+	bool handled = false;
+	u8 cpl;
+
+	input = (u64)kvm_register_read(vcpu, VCPU_REGS_RAX);
+
+	/* Hyper-V hypercalls get bit 31 set in EAX */
+	if ((input & 0x80000000) &&
+	    kvm_hv_hypercall_enabled(vcpu))
+		return kvm_hv_hypercall(vcpu);
+
+	longmode = is_64_bit_hypercall(vcpu);
+	if (!longmode) {
+		params[0] = (u32)kvm_rbx_read(vcpu);
+		params[1] = (u32)kvm_rcx_read(vcpu);
+		params[2] = (u32)kvm_rdx_read(vcpu);
+		params[3] = (u32)kvm_rsi_read(vcpu);
+		params[4] = (u32)kvm_rdi_read(vcpu);
+		params[5] = (u32)kvm_rbp_read(vcpu);
+	}
+#ifdef CONFIG_X86_64
+	else {
+		params[0] = (u64)kvm_rdi_read(vcpu);
+		params[1] = (u64)kvm_rsi_read(vcpu);
+		params[2] = (u64)kvm_rdx_read(vcpu);
+		params[3] = (u64)kvm_r10_read(vcpu);
+		params[4] = (u64)kvm_r8_read(vcpu);
+		params[5] = (u64)kvm_r9_read(vcpu);
+	}
+#endif
+	cpl = kvm_x86_call(get_cpl)(vcpu);
+	trace_kvm_xen_hypercall(cpl, input, params[0], params[1], params[2],
+				params[3], params[4], params[5]);
+
+	/*
+	 * Only allow hypercall acceleration for CPL0. The rare hypercalls that
+	 * are permitted in guest userspace can be handled by the VMM.
+	 */
+	if (unlikely(cpl > 0))
+		goto handle_in_userspace;
+
+	switch (input) {
+	case __HYPERVISOR_xen_version:
+		if (params[0] == XENVER_version && vcpu->kvm->arch.xen.xen_version) {
+			r = vcpu->kvm->arch.xen.xen_version;
+			handled = true;
+		}
+		break;
+	case __HYPERVISOR_event_channel_op:
+		if (params[0] == EVTCHNOP_send)
+			handled = kvm_xen_hcall_evtchn_send(vcpu, params[1], &r);
+		break;
+	case __HYPERVISOR_sched_op:
+		handled = kvm_xen_hcall_sched_op(vcpu, longmode, params[0],
+						 params[1], &r);
+		break;
+	case __HYPERVISOR_vcpu_op:
+		handled = kvm_xen_hcall_vcpu_op(vcpu, longmode, params[0], params[1],
+						params[2], &r);
+		break;
+	case __HYPERVISOR_set_timer_op: {
+		u64 timeout = params[0];
+		/* In 32-bit mode, the 64-bit timeout is in two 32-bit params. */
+		if (!longmode)
+			timeout |= params[1] << 32;
+		handled = kvm_xen_hcall_set_timer_op(vcpu, timeout, &r);
+		break;
+	}
+	default:
+		break;
+	}
+
+	if (handled)
+		return kvm_xen_hypercall_set_result(vcpu, r);
+
+handle_in_userspace:
+	vcpu->run->exit_reason = KVM_EXIT_XEN;
+	vcpu->run->xen.type = KVM_EXIT_XEN_HCALL;
+	vcpu->run->xen.u.hcall.longmode = longmode;
+	vcpu->run->xen.u.hcall.cpl = cpl;
+	vcpu->run->xen.u.hcall.input = input;
+	vcpu->run->xen.u.hcall.params[0] = params[0];
+	vcpu->run->xen.u.hcall.params[1] = params[1];
+	vcpu->run->xen.u.hcall.params[2] = params[2];
+	vcpu->run->xen.u.hcall.params[3] = params[3];
+	vcpu->run->xen.u.hcall.params[4] = params[4];
+	vcpu->run->xen.u.hcall.params[5] = params[5];
+	vcpu->arch.xen.hypercall_rip = kvm_get_linear_rip(vcpu);
+	vcpu->arch.complete_userspace_io =
+		kvm_xen_hypercall_complete_userspace;
+
+	return 0;
+}
+
+static void kvm_xen_check_poller(struct kvm_vcpu *vcpu, int port)
+{
+	int poll_evtchn = vcpu->arch.xen.poll_evtchn;
+
+	if ((poll_evtchn == port || poll_evtchn == -1) &&
+	    test_and_clear_bit(vcpu->vcpu_idx, vcpu->kvm->arch.xen.poll_mask)) {
+		kvm_make_request(KVM_REQ_UNBLOCK, vcpu);
+		kvm_vcpu_kick(vcpu);
+	}
+}
+
+/*
+ * The return value from this function is propagated to kvm_set_irq() API,
+ * so it returns:
+ *  < 0   Interrupt was ignored (masked or not delivered for other reasons)
+ *  = 0   Interrupt was coalesced (previous irq is still pending)
+ *  > 0   Number of CPUs interrupt was delivered to
+ *
+ * It is also called directly from kvm_arch_set_irq_inatomic(), where the
+ * only check on its return value is a comparison with -EWOULDBLOCK'.
+ */
+int kvm_xen_set_evtchn_fast(struct kvm_xen_evtchn *xe, struct kvm *kvm)
+{
+	struct gfn_to_pfn_cache *gpc = &kvm->arch.xen.shinfo_cache;
+	struct kvm_vcpu *vcpu;
+	unsigned long *pending_bits, *mask_bits;
+	unsigned long flags;
+	int port_word_bit;
+	bool kick_vcpu = false;
+	int vcpu_idx, idx, rc;
+
+	vcpu_idx = READ_ONCE(xe->vcpu_idx);
+	if (vcpu_idx >= 0)
+		vcpu = kvm_get_vcpu(kvm, vcpu_idx);
+	else {
+		vcpu = kvm_get_vcpu_by_id(kvm, xe->vcpu_id);
+		if (!vcpu)
+			return -EINVAL;
+		WRITE_ONCE(xe->vcpu_idx, vcpu->vcpu_idx);
+	}
+
+	if (xe->port >= max_evtchn_port(kvm))
+		return -EINVAL;
+
+	rc = -EWOULDBLOCK;
+
+	idx = srcu_read_lock(&kvm->srcu);
+
+	read_lock_irqsave(&gpc->lock, flags);
+	if (!kvm_gpc_check(gpc, PAGE_SIZE))
+		goto out_rcu;
+
+	if (IS_ENABLED(CONFIG_64BIT) && kvm->arch.xen.long_mode) {
+		struct shared_info *shinfo = gpc->khva;
+		pending_bits = (unsigned long *)&shinfo->evtchn_pending;
+		mask_bits = (unsigned long *)&shinfo->evtchn_mask;
+		port_word_bit = xe->port / 64;
+	} else {
+		struct compat_shared_info *shinfo = gpc->khva;
+		pending_bits = (unsigned long *)&shinfo->evtchn_pending;
+		mask_bits = (unsigned long *)&shinfo->evtchn_mask;
+		port_word_bit = xe->port / 32;
+	}
+
+	/*
+	 * If this port wasn't already set, and if it isn't masked, then
+	 * we try to set the corresponding bit in the in-kernel shadow of
+	 * evtchn_pending_sel for the target vCPU. And if *that* wasn't
+	 * already set, then we kick the vCPU in question to write to the
+	 * *real* evtchn_pending_sel in its own guest vcpu_info struct.
+	 */
+	if (test_and_set_bit(xe->port, pending_bits)) {
+		rc = 0; /* It was already raised */
+	} else if (test_bit(xe->port, mask_bits)) {
+		rc = -ENOTCONN; /* Masked */
+		kvm_xen_check_poller(vcpu, xe->port);
+	} else {
+		rc = 1; /* Delivered to the bitmap in shared_info. */
+		/* Now switch to the vCPU's vcpu_info to set the index and pending_sel */
+		read_unlock_irqrestore(&gpc->lock, flags);
+		gpc = &vcpu->arch.xen.vcpu_info_cache;
+
+		read_lock_irqsave(&gpc->lock, flags);
+		if (!kvm_gpc_check(gpc, sizeof(struct vcpu_info))) {
+			/*
+			 * Could not access the vcpu_info. Set the bit in-kernel
+			 * and prod the vCPU to deliver it for itself.
+			 */
+			if (!test_and_set_bit(port_word_bit, &vcpu->arch.xen.evtchn_pending_sel))
+				kick_vcpu = true;
+			goto out_rcu;
+		}
+
+		if (IS_ENABLED(CONFIG_64BIT) && kvm->arch.xen.long_mode) {
+			struct vcpu_info *vcpu_info = gpc->khva;
+			if (!test_and_set_bit(port_word_bit, &vcpu_info->evtchn_pending_sel)) {
+				WRITE_ONCE(vcpu_info->evtchn_upcall_pending, 1);
+				kick_vcpu = true;
+			}
+		} else {
+			struct compat_vcpu_info *vcpu_info = gpc->khva;
+			if (!test_and_set_bit(port_word_bit,
+					      (unsigned long *)&vcpu_info->evtchn_pending_sel)) {
+				WRITE_ONCE(vcpu_info->evtchn_upcall_pending, 1);
+				kick_vcpu = true;
+			}
+		}
+
+		/* For the per-vCPU lapic vector, deliver it as MSI. */
+		if (kick_vcpu && vcpu->arch.xen.upcall_vector) {
+			kvm_xen_inject_vcpu_vector(vcpu);
+			kick_vcpu = false;
+		}
+	}
+
+ out_rcu:
+	read_unlock_irqrestore(&gpc->lock, flags);
+	srcu_read_unlock(&kvm->srcu, idx);
+
+	if (kick_vcpu) {
+		kvm_make_request(KVM_REQ_UNBLOCK, vcpu);
+		kvm_vcpu_kick(vcpu);
+	}
+
+	return rc;
+}
+
+static int kvm_xen_set_evtchn(struct kvm_xen_evtchn *xe, struct kvm *kvm)
+{
+	bool mm_borrowed = false;
+	int rc;
+
+	rc = kvm_xen_set_evtchn_fast(xe, kvm);
+	if (rc != -EWOULDBLOCK)
+		return rc;
+
+	if (current->mm != kvm->mm) {
+		/*
+		 * If not on a thread which already belongs to this KVM,
+		 * we'd better be in the irqfd workqueue.
+		 */
+		if (WARN_ON_ONCE(current->mm))
+			return -EINVAL;
+
+		kthread_use_mm(kvm->mm);
+		mm_borrowed = true;
+	}
+
+	/*
+	 * It is theoretically possible for the page to be unmapped
+	 * and the MMU notifier to invalidate the shared_info before
+	 * we even get to use it. In that case, this looks like an
+	 * infinite loop. It was tempting to do it via the userspace
+	 * HVA instead... but that just *hides* the fact that it's
+	 * an infinite loop, because if a fault occurs and it waits
+	 * for the page to come back, it can *still* immediately
+	 * fault and have to wait again, repeatedly.
+	 *
+	 * Conversely, the page could also have been reinstated by
+	 * another thread before we even obtain the mutex above, so
+	 * check again *first* before remapping it.
+	 */
+	do {
+		struct gfn_to_pfn_cache *gpc = &kvm->arch.xen.shinfo_cache;
+		int idx;
+
+		rc = kvm_xen_set_evtchn_fast(xe, kvm);
+		if (rc != -EWOULDBLOCK)
+			break;
+
+		idx = srcu_read_lock(&kvm->srcu);
+		rc = kvm_gpc_refresh(gpc, PAGE_SIZE);
+		srcu_read_unlock(&kvm->srcu, idx);
+	} while(!rc);
+
+	if (mm_borrowed)
+		kthread_unuse_mm(kvm->mm);
+
+	return rc;
+}
+
+/* This is the version called from kvm_set_irq() as the .set function */
+static int evtchn_set_fn(struct kvm_kernel_irq_routing_entry *e, struct kvm *kvm,
+			 int irq_source_id, int level, bool line_status)
+{
+	if (!level)
+		return -EINVAL;
+
+	return kvm_xen_set_evtchn(&e->xen_evtchn, kvm);
+}
+
+/*
+ * Set up an event channel interrupt from the KVM IRQ routing table.
+ * Used for e.g. PIRQ from passed through physical devices.
+ */
+int kvm_xen_setup_evtchn(struct kvm *kvm,
+			 struct kvm_kernel_irq_routing_entry *e,
+			 const struct kvm_irq_routing_entry *ue)
+
+{
+	struct kvm_vcpu *vcpu;
+
+	if (ue->u.xen_evtchn.port >= max_evtchn_port(kvm))
+		return -EINVAL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* We only support 2 level event channels for now */
 	if (ue->u.xen_evtchn.priority != KVM_IRQ_ROUTING_XEN_EVTCHN_PRIO_2LEVEL)

@@ -341,6 +341,7 @@ snd_pcm_chmap_elem *convert_chmap_v3(struct uac3_cluster_header_descriptor
 
 	len = le16_to_cpu(cluster->wLength);
 	c = 0;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	p += sizeof(*cluster);
 	len -= sizeof(*cluster);
 
@@ -1024,6 +1025,673 @@ snd_usb_get_audioformat_uac3(struct snd_usb_audio *chip,
 	    cluster_wLength > wLength) {
 		dev_err(&dev->dev,
 			"%u:%d : invalid Cluster Descriptor size\n",
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	p += sizeof(struct uac3_cluster_header_descriptor);
+
+	while (((p - (void *)cluster) < len) && (c < channels)) {
+		struct uac3_cluster_segment_descriptor *cs_desc = p;
+		u16 cs_len;
+		u8 cs_type;
+
+		cs_len = le16_to_cpu(cs_desc->wLength);
+		cs_type = cs_desc->bSegmentType;
+
+		if (cs_type == UAC3_CHANNEL_INFORMATION) {
+			struct uac3_cluster_information_segment_descriptor *is = p;
+			unsigned char map;
+
+			/*
+			 * TODO: this conversion is not complete, update it
+			 * after adding UAC3 values to asound.h
+			 */
+			switch (is->bChRelationship) {
+			case UAC3_CH_MONO:
+				map = SNDRV_CHMAP_MONO;
+				break;
+			case UAC3_CH_LEFT:
+			case UAC3_CH_FRONT_LEFT:
+			case UAC3_CH_HEADPHONE_LEFT:
+				map = SNDRV_CHMAP_FL;
+				break;
+			case UAC3_CH_RIGHT:
+			case UAC3_CH_FRONT_RIGHT:
+			case UAC3_CH_HEADPHONE_RIGHT:
+				map = SNDRV_CHMAP_FR;
+				break;
+			case UAC3_CH_FRONT_CENTER:
+				map = SNDRV_CHMAP_FC;
+				break;
+			case UAC3_CH_FRONT_LEFT_OF_CENTER:
+				map = SNDRV_CHMAP_FLC;
+				break;
+			case UAC3_CH_FRONT_RIGHT_OF_CENTER:
+				map = SNDRV_CHMAP_FRC;
+				break;
+			case UAC3_CH_SIDE_LEFT:
+				map = SNDRV_CHMAP_SL;
+				break;
+			case UAC3_CH_SIDE_RIGHT:
+				map = SNDRV_CHMAP_SR;
+				break;
+			case UAC3_CH_BACK_LEFT:
+				map = SNDRV_CHMAP_RL;
+				break;
+			case UAC3_CH_BACK_RIGHT:
+				map = SNDRV_CHMAP_RR;
+				break;
+			case UAC3_CH_BACK_CENTER:
+				map = SNDRV_CHMAP_RC;
+				break;
+			case UAC3_CH_BACK_LEFT_OF_CENTER:
+				map = SNDRV_CHMAP_RLC;
+				break;
+			case UAC3_CH_BACK_RIGHT_OF_CENTER:
+				map = SNDRV_CHMAP_RRC;
+				break;
+			case UAC3_CH_TOP_CENTER:
+				map = SNDRV_CHMAP_TC;
+				break;
+			case UAC3_CH_TOP_FRONT_LEFT:
+				map = SNDRV_CHMAP_TFL;
+				break;
+			case UAC3_CH_TOP_FRONT_RIGHT:
+				map = SNDRV_CHMAP_TFR;
+				break;
+			case UAC3_CH_TOP_FRONT_CENTER:
+				map = SNDRV_CHMAP_TFC;
+				break;
+			case UAC3_CH_TOP_FRONT_LOC:
+				map = SNDRV_CHMAP_TFLC;
+				break;
+			case UAC3_CH_TOP_FRONT_ROC:
+				map = SNDRV_CHMAP_TFRC;
+				break;
+			case UAC3_CH_TOP_SIDE_LEFT:
+				map = SNDRV_CHMAP_TSL;
+				break;
+			case UAC3_CH_TOP_SIDE_RIGHT:
+				map = SNDRV_CHMAP_TSR;
+				break;
+			case UAC3_CH_TOP_BACK_LEFT:
+				map = SNDRV_CHMAP_TRL;
+				break;
+			case UAC3_CH_TOP_BACK_RIGHT:
+				map = SNDRV_CHMAP_TRR;
+				break;
+			case UAC3_CH_TOP_BACK_CENTER:
+				map = SNDRV_CHMAP_TRC;
+				break;
+			case UAC3_CH_BOTTOM_CENTER:
+				map = SNDRV_CHMAP_BC;
+				break;
+			case UAC3_CH_LOW_FREQUENCY_EFFECTS:
+				map = SNDRV_CHMAP_LFE;
+				break;
+			case UAC3_CH_LFE_LEFT:
+				map = SNDRV_CHMAP_LLFE;
+				break;
+			case UAC3_CH_LFE_RIGHT:
+				map = SNDRV_CHMAP_RLFE;
+				break;
+			case UAC3_CH_RELATIONSHIP_UNDEFINED:
+			default:
+				map = SNDRV_CHMAP_UNKNOWN;
+				break;
+			}
+			chmap->map[c++] = map;
+		}
+		p += cs_len;
+	}
+
+	if (channels < c)
+		pr_err("%s: channel number mismatch\n", __func__);
+
+	chmap->channels = channels;
+
+	for (; c < channels; c++)
+		chmap->map[c] = SNDRV_CHMAP_UNKNOWN;
+
+	return chmap;
+}
+
+/*
+ * add this endpoint to the chip instance.
+ * if a stream with the same endpoint already exists, append to it.
+ * if not, create a new pcm stream. note, fp is added to the substream
+ * fmt_list and will be freed on the chip instance release. do not free
+ * fp or do remove it from the substream fmt_list to avoid double-free.
+ */
+static int __snd_usb_add_audio_stream(struct snd_usb_audio *chip,
+				      int stream,
+				      struct audioformat *fp,
+				      struct snd_usb_power_domain *pd)
+
+{
+	struct snd_usb_stream *as;
+	struct snd_usb_substream *subs;
+	struct snd_pcm *pcm;
+	int err;
+
+	list_for_each_entry(as, &chip->pcm_list, list) {
+		if (as->fmt_type != fp->fmt_type)
+			continue;
+		subs = &as->substream[stream];
+		if (subs->ep_num == fp->endpoint) {
+			list_add_tail(&fp->list, &subs->fmt_list);
+			subs->num_formats++;
+			subs->formats |= fp->formats;
+			return 0;
+		}
+	}
+
+	if (chip->card->registered)
+		chip->need_delayed_register = true;
+
+	/* look for an empty stream */
+	list_for_each_entry(as, &chip->pcm_list, list) {
+		if (as->fmt_type != fp->fmt_type)
+			continue;
+		subs = &as->substream[stream];
+		if (subs->ep_num)
+			continue;
+		err = snd_pcm_new_stream(as->pcm, stream, 1);
+		if (err < 0)
+			return err;
+		snd_usb_init_substream(as, stream, fp, pd);
+		return add_chmap(as->pcm, stream, subs);
+	}
+
+	/* create a new pcm */
+	as = kzalloc(sizeof(*as), GFP_KERNEL);
+	if (!as)
+		return -ENOMEM;
+	as->pcm_index = chip->pcm_devs;
+	as->chip = chip;
+	as->fmt_type = fp->fmt_type;
+	err = snd_pcm_new(chip->card, "USB Audio", chip->pcm_devs,
+			  stream == SNDRV_PCM_STREAM_PLAYBACK ? 1 : 0,
+			  stream == SNDRV_PCM_STREAM_PLAYBACK ? 0 : 1,
+			  &pcm);
+	if (err < 0) {
+		kfree(as);
+		return err;
+	}
+	as->pcm = pcm;
+	pcm->private_data = as;
+	pcm->private_free = snd_usb_audio_pcm_free;
+	pcm->info_flags = 0;
+	if (chip->pcm_devs > 0)
+		sprintf(pcm->name, "USB Audio #%d", chip->pcm_devs);
+	else
+		strcpy(pcm->name, "USB Audio");
+
+	snd_usb_init_substream(as, stream, fp, pd);
+
+	/*
+	 * Keep using head insertion for M-Audio Audiophile USB (tm) which has a
+	 * fix to swap capture stream order in conf/cards/USB-audio.conf
+	 */
+	if (chip->usb_id == USB_ID(0x0763, 0x2003))
+		list_add(&as->list, &chip->pcm_list);
+	else
+		list_add_tail(&as->list, &chip->pcm_list);
+
+	chip->pcm_devs++;
+
+	snd_usb_proc_pcm_format_add(as);
+
+	return add_chmap(pcm, stream, &as->substream[stream]);
+}
+
+int snd_usb_add_audio_stream(struct snd_usb_audio *chip,
+			     int stream,
+			     struct audioformat *fp)
+{
+	return __snd_usb_add_audio_stream(chip, stream, fp, NULL);
+}
+
+static int snd_usb_add_audio_stream_v3(struct snd_usb_audio *chip,
+				       int stream,
+				       struct audioformat *fp,
+				       struct snd_usb_power_domain *pd)
+{
+	return __snd_usb_add_audio_stream(chip, stream, fp, pd);
+}
+
+static int parse_uac_endpoint_attributes(struct snd_usb_audio *chip,
+					 struct usb_host_interface *alts,
+					 int protocol, int iface_no)
+{
+	/* parsed with a v1 header here. that's ok as we only look at the
+	 * header first which is the same for both versions */
+	struct uac_iso_endpoint_descriptor *csep;
+	struct usb_interface_descriptor *altsd = get_iface_desc(alts);
+	int attributes = 0;
+
+	csep = snd_usb_find_desc(alts->endpoint[0].extra, alts->endpoint[0].extralen, NULL, USB_DT_CS_ENDPOINT);
+
+	/* Creamware Noah has this descriptor after the 2nd endpoint */
+	if (!csep && altsd->bNumEndpoints >= 2)
+		csep = snd_usb_find_desc(alts->endpoint[1].extra, alts->endpoint[1].extralen, NULL, USB_DT_CS_ENDPOINT);
+
+	/*
+	 * If we can't locate the USB_DT_CS_ENDPOINT descriptor in the extra
+	 * bytes after the first endpoint, go search the entire interface.
+	 * Some devices have it directly *before* the standard endpoint.
+	 */
+	if (!csep)
+		csep = snd_usb_find_desc(alts->extra, alts->extralen, NULL, USB_DT_CS_ENDPOINT);
+
+	if (!csep || csep->bLength < 7 ||
+	    csep->bDescriptorSubtype != UAC_EP_GENERAL)
+		goto error;
+
+	if (protocol == UAC_VERSION_1) {
+		attributes = csep->bmAttributes;
+	} else if (protocol == UAC_VERSION_2) {
+		struct uac2_iso_endpoint_descriptor *csep2 =
+			(struct uac2_iso_endpoint_descriptor *) csep;
+
+		if (csep2->bLength < sizeof(*csep2))
+			goto error;
+		attributes = csep->bmAttributes & UAC_EP_CS_ATTR_FILL_MAX;
+
+		/* emulate the endpoint attributes of a v1 device */
+		if (csep2->bmControls & UAC2_CONTROL_PITCH)
+			attributes |= UAC_EP_CS_ATTR_PITCH_CONTROL;
+	} else { /* UAC_VERSION_3 */
+		struct uac3_iso_endpoint_descriptor *csep3 =
+			(struct uac3_iso_endpoint_descriptor *) csep;
+
+		if (csep3->bLength < sizeof(*csep3))
+			goto error;
+		/* emulate the endpoint attributes of a v1 device */
+		if (le32_to_cpu(csep3->bmControls) & UAC2_CONTROL_PITCH)
+			attributes |= UAC_EP_CS_ATTR_PITCH_CONTROL;
+	}
+
+	return attributes;
+
+ error:
+	usb_audio_warn(chip,
+		       "%u:%d : no or invalid class specific endpoint descriptor\n",
+		       iface_no, altsd->bAlternateSetting);
+	return 0;
+}
+
+/* find an input terminal descriptor (either UAC1 or UAC2) with the given
+ * terminal id
+ */
+static void *
+snd_usb_find_input_terminal_descriptor(struct usb_host_interface *ctrl_iface,
+				       int terminal_id, int protocol)
+{
+	struct uac2_input_terminal_descriptor *term = NULL;
+
+	while ((term = snd_usb_find_csint_desc(ctrl_iface->extra,
+					       ctrl_iface->extralen,
+					       term, UAC_INPUT_TERMINAL))) {
+		if (!snd_usb_validate_audio_desc(term, protocol))
+			continue;
+		if (term->bTerminalID == terminal_id)
+			return term;
+	}
+
+	return NULL;
+}
+
+static void *
+snd_usb_find_output_terminal_descriptor(struct usb_host_interface *ctrl_iface,
+					int terminal_id, int protocol)
+{
+	/* OK to use with both UAC2 and UAC3 */
+	struct uac2_output_terminal_descriptor *term = NULL;
+
+	while ((term = snd_usb_find_csint_desc(ctrl_iface->extra,
+					       ctrl_iface->extralen,
+					       term, UAC_OUTPUT_TERMINAL))) {
+		if (!snd_usb_validate_audio_desc(term, protocol))
+			continue;
+		if (term->bTerminalID == terminal_id)
+			return term;
+	}
+
+	return NULL;
+}
+
+static struct audioformat *
+audio_format_alloc_init(struct snd_usb_audio *chip,
+		       struct usb_host_interface *alts,
+		       int protocol, int iface_no, int altset_idx,
+		       int altno, int num_channels, int clock)
+{
+	struct audioformat *fp;
+
+	fp = kzalloc(sizeof(*fp), GFP_KERNEL);
+	if (!fp)
+		return NULL;
+
+	fp->iface = iface_no;
+	fp->altsetting = altno;
+	fp->altset_idx = altset_idx;
+	fp->endpoint = get_endpoint(alts, 0)->bEndpointAddress;
+	fp->ep_attr = get_endpoint(alts, 0)->bmAttributes;
+	fp->datainterval = snd_usb_parse_datainterval(chip, alts);
+	fp->protocol = protocol;
+	fp->maxpacksize = le16_to_cpu(get_endpoint(alts, 0)->wMaxPacketSize);
+	fp->channels = num_channels;
+	if (snd_usb_get_speed(chip->dev) == USB_SPEED_HIGH)
+		fp->maxpacksize = (((fp->maxpacksize >> 11) & 3) + 1)
+				* (fp->maxpacksize & 0x7ff);
+	fp->clock = clock;
+	INIT_LIST_HEAD(&fp->list);
+
+	return fp;
+}
+
+static struct audioformat *
+snd_usb_get_audioformat_uac12(struct snd_usb_audio *chip,
+			      struct usb_host_interface *alts,
+			      int protocol, int iface_no, int altset_idx,
+			      int altno, int stream, int bm_quirk)
+{
+	struct usb_device *dev = chip->dev;
+	struct uac_format_type_i_continuous_descriptor *fmt;
+	unsigned int num_channels = 0, chconfig = 0;
+	struct usb_host_interface *ctrl_intf;
+	struct audioformat *fp;
+	int clock = 0;
+	u64 format;
+
+	ctrl_intf = snd_usb_find_ctrl_interface(chip, iface_no);
+
+	/* get audio formats */
+	if (protocol == UAC_VERSION_1) {
+		struct uac1_as_header_descriptor *as =
+			snd_usb_find_csint_desc(alts->extra, alts->extralen,
+						NULL, UAC_AS_GENERAL);
+		struct uac_input_terminal_descriptor *iterm;
+
+		if (!as) {
+			dev_err(&dev->dev,
+				"%u:%d : UAC_AS_GENERAL descriptor not found\n",
+				iface_no, altno);
+			return NULL;
+		}
+
+		if (as->bLength < sizeof(*as)) {
+			dev_err(&dev->dev,
+				"%u:%d : invalid UAC_AS_GENERAL desc\n",
+				iface_no, altno);
+			return NULL;
+		}
+
+		format = le16_to_cpu(as->wFormatTag); /* remember the format value */
+
+		iterm = snd_usb_find_input_terminal_descriptor(ctrl_intf,
+							       as->bTerminalLink,
+							       protocol);
+		if (iterm) {
+			num_channels = iterm->bNrChannels;
+			chconfig = le16_to_cpu(iterm->wChannelConfig);
+		}
+	} else { /* UAC_VERSION_2 */
+		struct uac2_input_terminal_descriptor *input_term;
+		struct uac2_output_terminal_descriptor *output_term;
+		struct uac2_as_header_descriptor *as =
+			snd_usb_find_csint_desc(alts->extra, alts->extralen,
+						NULL, UAC_AS_GENERAL);
+
+		if (!as) {
+			dev_err(&dev->dev,
+				"%u:%d : UAC_AS_GENERAL descriptor not found\n",
+				iface_no, altno);
+			return NULL;
+		}
+
+		if (as->bLength < sizeof(*as)) {
+			dev_err(&dev->dev,
+				"%u:%d : invalid UAC_AS_GENERAL desc\n",
+				iface_no, altno);
+			return NULL;
+		}
+
+		num_channels = as->bNrChannels;
+		format = le32_to_cpu(as->bmFormats);
+		chconfig = le32_to_cpu(as->bmChannelConfig);
+
+		/*
+		 * lookup the terminal associated to this interface
+		 * to extract the clock
+		 */
+		input_term = snd_usb_find_input_terminal_descriptor(ctrl_intf,
+								    as->bTerminalLink,
+								    protocol);
+		if (input_term) {
+			clock = input_term->bCSourceID;
+			if (!chconfig && (num_channels == input_term->bNrChannels))
+				chconfig = le32_to_cpu(input_term->bmChannelConfig);
+			goto found_clock;
+		}
+
+		output_term = snd_usb_find_output_terminal_descriptor(ctrl_intf,
+								      as->bTerminalLink,
+								      protocol);
+		if (output_term) {
+			clock = output_term->bCSourceID;
+			goto found_clock;
+		}
+
+		dev_err(&dev->dev,
+			"%u:%d : bogus bTerminalLink %d\n",
+			iface_no, altno, as->bTerminalLink);
+		return NULL;
+	}
+
+found_clock:
+	/* get format type */
+	fmt = snd_usb_find_csint_desc(alts->extra, alts->extralen,
+				      NULL, UAC_FORMAT_TYPE);
+	if (!fmt) {
+		dev_err(&dev->dev,
+			"%u:%d : no UAC_FORMAT_TYPE desc\n",
+			iface_no, altno);
+		return NULL;
+	}
+	if (((protocol == UAC_VERSION_1) && (fmt->bLength < 8))
+			|| ((protocol == UAC_VERSION_2) &&
+					(fmt->bLength < 6))) {
+		dev_err(&dev->dev,
+			"%u:%d : invalid UAC_FORMAT_TYPE desc\n",
+			iface_no, altno);
+		return NULL;
+	}
+
+	/*
+	 * Blue Microphones workaround: The last altsetting is
+	 * identical with the previous one, except for a larger
+	 * packet size, but is actually a mislabeled two-channel
+	 * setting; ignore it.
+	 *
+	 * Part 2: analyze quirk flag and format
+	 */
+	if (bm_quirk && fmt->bNrChannels == 1 && fmt->bSubframeSize == 2)
+		return NULL;
+
+	fp = audio_format_alloc_init(chip, alts, protocol, iface_no,
+				     altset_idx, altno, num_channels, clock);
+	if (!fp)
+		return ERR_PTR(-ENOMEM);
+
+	fp->attributes = parse_uac_endpoint_attributes(chip, alts, protocol,
+						       iface_no);
+
+	/* some quirks for attributes here */
+	snd_usb_audioformat_attributes_quirk(chip, fp, stream);
+
+	/* ok, let's parse further... */
+	if (snd_usb_parse_audio_format(chip, fp, format,
+					fmt, stream) < 0) {
+		audioformat_free(fp);
+		return NULL;
+	}
+
+	/* Create chmap */
+	if (fp->channels != num_channels)
+		chconfig = 0;
+
+	fp->chmap = convert_chmap(fp->channels, chconfig, protocol);
+
+	return fp;
+}
+
+static struct audioformat *
+snd_usb_get_audioformat_uac3(struct snd_usb_audio *chip,
+			     struct usb_host_interface *alts,
+			     struct snd_usb_power_domain **pd_out,
+			     int iface_no, int altset_idx,
+			     int altno, int stream)
+{
+	struct usb_device *dev = chip->dev;
+	struct uac3_input_terminal_descriptor *input_term;
+	struct uac3_output_terminal_descriptor *output_term;
+	struct uac3_cluster_header_descriptor *cluster;
+	struct uac3_as_header_descriptor *as = NULL;
+	struct uac3_hc_descriptor_header hc_header;
+	struct usb_host_interface *ctrl_intf;
+	struct snd_pcm_chmap_elem *chmap;
+	struct snd_usb_power_domain *pd;
+	unsigned char badd_profile;
+	u64 badd_formats = 0;
+	unsigned int num_channels;
+	struct audioformat *fp;
+	u16 cluster_id, wLength;
+	int clock = 0;
+	int err;
+
+	badd_profile = chip->badd_profile;
+	ctrl_intf = snd_usb_find_ctrl_interface(chip, iface_no);
+
+	if (badd_profile >= UAC3_FUNCTION_SUBCLASS_GENERIC_IO) {
+		unsigned int maxpacksize =
+			le16_to_cpu(get_endpoint(alts, 0)->wMaxPacketSize);
+
+		switch (maxpacksize) {
+		default:
+			dev_err(&dev->dev,
+				"%u:%d : incorrect wMaxPacketSize for BADD profile\n",
+				iface_no, altno);
+			return NULL;
+		case UAC3_BADD_EP_MAXPSIZE_SYNC_MONO_16:
+		case UAC3_BADD_EP_MAXPSIZE_ASYNC_MONO_16:
+			badd_formats = SNDRV_PCM_FMTBIT_S16_LE;
+			num_channels = 1;
+			break;
+		case UAC3_BADD_EP_MAXPSIZE_SYNC_MONO_24:
+		case UAC3_BADD_EP_MAXPSIZE_ASYNC_MONO_24:
+			badd_formats = SNDRV_PCM_FMTBIT_S24_3LE;
+			num_channels = 1;
+			break;
+		case UAC3_BADD_EP_MAXPSIZE_SYNC_STEREO_16:
+		case UAC3_BADD_EP_MAXPSIZE_ASYNC_STEREO_16:
+			badd_formats = SNDRV_PCM_FMTBIT_S16_LE;
+			num_channels = 2;
+			break;
+		case UAC3_BADD_EP_MAXPSIZE_SYNC_STEREO_24:
+		case UAC3_BADD_EP_MAXPSIZE_ASYNC_STEREO_24:
+			badd_formats = SNDRV_PCM_FMTBIT_S24_3LE;
+			num_channels = 2;
+			break;
+		}
+
+		chmap = kzalloc(sizeof(*chmap), GFP_KERNEL);
+		if (!chmap)
+			return ERR_PTR(-ENOMEM);
+
+		if (num_channels == 1) {
+			chmap->map[0] = SNDRV_CHMAP_MONO;
+		} else {
+			chmap->map[0] = SNDRV_CHMAP_FL;
+			chmap->map[1] = SNDRV_CHMAP_FR;
+		}
+
+		chmap->channels = num_channels;
+		clock = UAC3_BADD_CS_ID9;
+		goto found_clock;
+	}
+
+	as = snd_usb_find_csint_desc(alts->extra, alts->extralen,
+				     NULL, UAC_AS_GENERAL);
+	if (!as) {
+		dev_err(&dev->dev,
+			"%u:%d : UAC_AS_GENERAL descriptor not found\n",
+			iface_no, altno);
+		return NULL;
+	}
+
+	if (as->bLength < sizeof(*as)) {
+		dev_err(&dev->dev,
+			"%u:%d : invalid UAC_AS_GENERAL desc\n",
+			iface_no, altno);
+		return NULL;
+	}
+
+	cluster_id = le16_to_cpu(as->wClusterDescrID);
+	if (!cluster_id) {
+		dev_err(&dev->dev,
+			"%u:%d : no cluster descriptor\n",
+			iface_no, altno);
+		return NULL;
+	}
+
+	/*
+	 * Get number of channels and channel map through
+	 * High Capability Cluster Descriptor
+	 *
+	 * First step: get High Capability header and
+	 * read size of Cluster Descriptor
+	 */
+	err = snd_usb_ctl_msg(chip->dev,
+			usb_rcvctrlpipe(chip->dev, 0),
+			UAC3_CS_REQ_HIGH_CAPABILITY_DESCRIPTOR,
+			USB_RECIP_INTERFACE | USB_TYPE_CLASS | USB_DIR_IN,
+			cluster_id,
+			snd_usb_ctrl_intf(ctrl_intf),
+			&hc_header, sizeof(hc_header));
+	if (err < 0)
+		return ERR_PTR(err);
+	else if (err != sizeof(hc_header)) {
+		dev_err(&dev->dev,
+			"%u:%d : can't get High Capability descriptor\n",
+			iface_no, altno);
+		return ERR_PTR(-EIO);
+	}
+
+	/*
+	 * Second step: allocate needed amount of memory
+	 * and request Cluster Descriptor
+	 */
+	wLength = le16_to_cpu(hc_header.wLength);
+	if (wLength < sizeof(cluster))
+		return NULL;
+	cluster = kzalloc(wLength, GFP_KERNEL);
+	if (!cluster)
+		return ERR_PTR(-ENOMEM);
+	err = snd_usb_ctl_msg(chip->dev,
+			usb_rcvctrlpipe(chip->dev, 0),
+			UAC3_CS_REQ_HIGH_CAPABILITY_DESCRIPTOR,
+			USB_RECIP_INTERFACE | USB_TYPE_CLASS | USB_DIR_IN,
+			cluster_id,
+			snd_usb_ctrl_intf(ctrl_intf),
+			cluster, wLength);
+	if (err < 0) {
+		kfree(cluster);
+		return ERR_PTR(err);
+	} else if (err != wLength) {
+		dev_err(&dev->dev,
+			"%u:%d : can't get Cluster Descriptor\n",
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			iface_no, altno);
 		kfree(cluster);
 		return ERR_PTR(-EIO);

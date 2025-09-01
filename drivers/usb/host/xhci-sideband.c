@@ -267,6 +267,7 @@ xhci_sideband_get_event_buffer(struct xhci_sideband *sb)
 EXPORT_SYMBOL_GPL(xhci_sideband_get_event_buffer);
 
 /**
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * xhci_sideband_check - check the existence of active sidebands
  * @hcd: the host controller driver associated with the target host controller
  *
@@ -366,6 +367,72 @@ xhci_sideband_remove_interrupter(struct xhci_sideband *sb)
 	if (udev->state != USB_STATE_NOTATTACHED)
 		usb_offload_put(udev);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * xhci_sideband_create_interrupter - creates a new interrupter for this sideband
+ * @sb: sideband instance for this usb device
+ * @num_seg: number of event ring segments to allocate
+ * @ip_autoclear: IP autoclearing support such as MSI implemented
+ *
+ * Sets up a xhci interrupter that can be used for this sideband accessed usb
+ * device. Transfer events for this device can be routed to this interrupters
+ * event ring by setting the 'Interrupter Target' field correctly when queueing
+ * the transfer TRBs.
+ * Once this interrupter is created the interrupter target ID can be obtained
+ * by calling xhci_sideband_interrupter_id()
+ *
+ * Returns 0 on success, negative error otherwise
+ */
+int
+xhci_sideband_create_interrupter(struct xhci_sideband *sb, int num_seg,
+				 bool ip_autoclear, u32 imod_interval, int intr_num)
+{
+	int ret = 0;
+
+	if (!sb || !sb->xhci)
+		return -ENODEV;
+
+	mutex_lock(&sb->mutex);
+	if (sb->ir) {
+		ret = -EBUSY;
+		goto out;
+	}
+
+	sb->ir = xhci_create_secondary_interrupter(xhci_to_hcd(sb->xhci),
+						   num_seg, imod_interval,
+						   intr_num);
+	if (!sb->ir) {
+		ret = -ENOMEM;
+		goto out;
+	}
+
+	sb->ir->ip_autoclear = ip_autoclear;
+
+out:
+	mutex_unlock(&sb->mutex);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(xhci_sideband_create_interrupter);
+
+/**
+ * xhci_sideband_remove_interrupter - remove the interrupter from a sideband
+ * @sb: sideband instance for this usb device
+ *
+ * Removes a registered interrupt for a sideband.  This would allow for other
+ * sideband users to utilize this interrupter.
+ */
+void
+xhci_sideband_remove_interrupter(struct xhci_sideband *sb)
+{
+	if (!sb || !sb->ir)
+		return;
+
+	mutex_lock(&sb->mutex);
+	xhci_remove_secondary_interrupter(xhci_to_hcd(sb->xhci), sb->ir);
+
+	sb->ir = NULL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	mutex_unlock(&sb->mutex);
 }
 EXPORT_SYMBOL_GPL(xhci_sideband_remove_interrupter);

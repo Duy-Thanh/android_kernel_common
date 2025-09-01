@@ -657,6 +657,7 @@ static int optee_ffa_do_call_with_arg(struct tee_context *ctx,
  * with a matching configuration.
  */
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static bool optee_ffa_api_is_compatible(struct ffa_device *ffa_dev,
 					const struct ffa_ops *ops)
 {
@@ -909,6 +910,261 @@ static int optee_ffa_probe(struct ffa_device *ffa_dev)
 	notif_ops = ffa_ops->notifier_ops;
 
 	if (!optee_ffa_api_is_compatible(ffa_dev, ffa_ops))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static bool optee_ffa_api_is_compatbile(struct ffa_device *ffa_dev,
+					const struct ffa_ops *ops)
+{
+	const struct ffa_msg_ops *msg_ops = ops->msg_ops;
+	struct ffa_send_direct_data data = {
+		.data0 = OPTEE_FFA_GET_API_VERSION,
+	};
+	int rc;
+
+	msg_ops->mode_32bit_set(ffa_dev);
+
+	rc = msg_ops->sync_send_receive(ffa_dev, &data);
+	if (rc) {
+		pr_err("Unexpected error %d\n", rc);
+		return false;
+	}
+	if (data.data0 != OPTEE_FFA_VERSION_MAJOR ||
+	    data.data1 < OPTEE_FFA_VERSION_MINOR) {
+		pr_err("Incompatible OP-TEE API version %lu.%lu",
+		       data.data0, data.data1);
+		return false;
+	}
+
+	data = (struct ffa_send_direct_data){
+		.data0 = OPTEE_FFA_GET_OS_VERSION,
+	};
+	rc = msg_ops->sync_send_receive(ffa_dev, &data);
+	if (rc) {
+		pr_err("Unexpected error %d\n", rc);
+		return false;
+	}
+	if (data.data2)
+		pr_info("revision %lu.%lu (%08lx)",
+			data.data0, data.data1, data.data2);
+	else
+		pr_info("revision %lu.%lu", data.data0, data.data1);
+
+	return true;
+}
+
+static bool optee_ffa_exchange_caps(struct ffa_device *ffa_dev,
+				    const struct ffa_ops *ops,
+				    u32 *sec_caps,
+				    unsigned int *rpc_param_count,
+				    unsigned int *max_notif_value)
+{
+	struct ffa_send_direct_data data = {
+		.data0 = OPTEE_FFA_EXCHANGE_CAPABILITIES,
+	};
+	int rc;
+
+	rc = ops->msg_ops->sync_send_receive(ffa_dev, &data);
+	if (rc) {
+		pr_err("Unexpected error %d", rc);
+		return false;
+	}
+	if (data.data0) {
+		pr_err("Unexpected exchange error %lu", data.data0);
+		return false;
+	}
+
+	*rpc_param_count = (u8)data.data1;
+	*sec_caps = data.data2;
+	if (data.data3)
+		*max_notif_value = data.data3;
+	else
+		*max_notif_value = OPTEE_DEFAULT_MAX_NOTIF_VALUE;
+
+	return true;
+}
+
+static void notif_work_fn(struct work_struct *work)
+{
+	struct optee_ffa *optee_ffa = container_of(work, struct optee_ffa,
+						   notif_work);
+	struct optee *optee = container_of(optee_ffa, struct optee, ffa);
+
+	optee_do_bottom_half(optee->ctx);
+}
+
+static void notif_callback(int notify_id, void *cb_data)
+{
+	struct optee *optee = cb_data;
+
+	if (notify_id == optee->ffa.bottom_half_value)
+		queue_work(optee->ffa.notif_wq, &optee->ffa.notif_work);
+	else
+		optee_notif_send(optee, notify_id);
+}
+
+static int enable_async_notif(struct optee *optee)
+{
+	struct ffa_device *ffa_dev = optee->ffa.ffa_dev;
+	struct ffa_send_direct_data data = {
+		.data0 = OPTEE_FFA_ENABLE_ASYNC_NOTIF,
+		.data1 = optee->ffa.bottom_half_value,
+	};
+	int rc;
+
+	rc = ffa_dev->ops->msg_ops->sync_send_receive(ffa_dev, &data);
+	if (rc)
+		return rc;
+	return data.data0;
+}
+
+static void optee_ffa_get_version(struct tee_device *teedev,
+				  struct tee_ioctl_version_data *vers)
+{
+	struct tee_ioctl_version_data v = {
+		.impl_id = TEE_IMPL_ID_OPTEE,
+		.impl_caps = TEE_OPTEE_CAP_TZ,
+		.gen_caps = TEE_GEN_CAP_GP | TEE_GEN_CAP_REG_MEM |
+			    TEE_GEN_CAP_MEMREF_NULL,
+	};
+
+	*vers = v;
+}
+
+static int optee_ffa_open(struct tee_context *ctx)
+{
+	return optee_open(ctx, true);
+}
+
+static const struct tee_driver_ops optee_ffa_clnt_ops = {
+	.get_version = optee_ffa_get_version,
+	.open = optee_ffa_open,
+	.release = optee_release,
+	.open_session = optee_open_session,
+	.close_session = optee_close_session,
+	.invoke_func = optee_invoke_func,
+	.cancel_req = optee_cancel_req,
+	.shm_register = optee_ffa_shm_register,
+	.shm_unregister = optee_ffa_shm_unregister,
+};
+
+static const struct tee_desc optee_ffa_clnt_desc = {
+	.name = DRIVER_NAME "-ffa-clnt",
+	.ops = &optee_ffa_clnt_ops,
+	.owner = THIS_MODULE,
+};
+
+static const struct tee_driver_ops optee_ffa_supp_ops = {
+	.get_version = optee_ffa_get_version,
+	.open = optee_ffa_open,
+	.release = optee_release_supp,
+	.supp_recv = optee_supp_recv,
+	.supp_send = optee_supp_send,
+	.shm_register = optee_ffa_shm_register, /* same as for clnt ops */
+	.shm_unregister = optee_ffa_shm_unregister_supp,
+};
+
+static const struct tee_desc optee_ffa_supp_desc = {
+	.name = DRIVER_NAME "-ffa-supp",
+	.ops = &optee_ffa_supp_ops,
+	.owner = THIS_MODULE,
+	.flags = TEE_DESC_PRIVILEGED,
+};
+
+static const struct optee_ops optee_ffa_ops = {
+	.do_call_with_arg = optee_ffa_do_call_with_arg,
+	.to_msg_param = optee_ffa_to_msg_param,
+	.from_msg_param = optee_ffa_from_msg_param,
+};
+
+static void optee_ffa_remove(struct ffa_device *ffa_dev)
+{
+	struct optee *optee = ffa_dev_get_drvdata(ffa_dev);
+	u32 bottom_half_id = optee->ffa.bottom_half_value;
+
+	if (bottom_half_id != U32_MAX) {
+		ffa_dev->ops->notifier_ops->notify_relinquish(ffa_dev,
+							      bottom_half_id);
+		destroy_workqueue(optee->ffa.notif_wq);
+	}
+	optee_remove_common(optee);
+
+	mutex_destroy(&optee->ffa.mutex);
+	rhashtable_free_and_destroy(&optee->ffa.global_ids, rh_free_fn, NULL);
+
+	kfree(optee);
+}
+
+static int optee_ffa_async_notif_init(struct ffa_device *ffa_dev,
+				      struct optee *optee)
+{
+	bool is_per_vcpu = false;
+	u32 notif_id = 0;
+	int rc;
+
+	INIT_WORK(&optee->ffa.notif_work, notif_work_fn);
+	optee->ffa.notif_wq = create_workqueue("optee_notification");
+	if (!optee->ffa.notif_wq) {
+		rc = -EINVAL;
+		goto err;
+	}
+
+	while (true) {
+		rc = ffa_dev->ops->notifier_ops->notify_request(ffa_dev,
+								is_per_vcpu,
+								notif_callback,
+								optee,
+								notif_id);
+		if (!rc)
+			break;
+		/*
+		 * -EACCES means that the notification ID was
+		 * already bound, try the next one as long as we
+		 * haven't reached the max. Any other error is a
+		 * permanent error, so skip asynchronous
+		 * notifications in that case.
+		 */
+		if (rc != -EACCES)
+			goto err_wq;
+		notif_id++;
+		if (notif_id >= OPTEE_FFA_MAX_ASYNC_NOTIF_VALUE)
+			goto err_wq;
+	}
+	optee->ffa.bottom_half_value = notif_id;
+
+	rc = enable_async_notif(optee);
+	if (rc < 0)
+		goto err_rel;
+
+	return 0;
+err_rel:
+	ffa_dev->ops->notifier_ops->notify_relinquish(ffa_dev, notif_id);
+err_wq:
+	destroy_workqueue(optee->ffa.notif_wq);
+err:
+	optee->ffa.bottom_half_value = U32_MAX;
+
+	return rc;
+}
+
+static int optee_ffa_probe(struct ffa_device *ffa_dev)
+{
+	const struct ffa_notifier_ops *notif_ops;
+	const struct ffa_ops *ffa_ops;
+	unsigned int max_notif_value;
+	unsigned int rpc_param_count;
+	struct tee_shm_pool *pool;
+	struct tee_device *teedev;
+	struct tee_context *ctx;
+	u32 arg_cache_flags = 0;
+	struct optee *optee;
+	u32 sec_caps;
+	int rc;
+
+	ffa_ops = ffa_dev->ops;
+	notif_ops = ffa_ops->notifier_ops;
+
+	if (!optee_ffa_api_is_compatbile(ffa_dev, ffa_ops))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return -EINVAL;
 
 	if (!optee_ffa_exchange_caps(ffa_dev, ffa_ops, &sec_caps,

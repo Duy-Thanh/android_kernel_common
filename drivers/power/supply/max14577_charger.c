@@ -501,6 +501,7 @@ static struct max14577_charger_platform_data *max14577_charger_dt_init(
 static struct max14577_charger_platform_data *max14577_charger_dt_init(
 		struct platform_device *pdev)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	return ERR_PTR(-ENODATA);
 }
 #endif /* CONFIG_OF */
@@ -573,6 +574,81 @@ static int max14577_charger_probe(struct platform_device *pdev)
 
 	chg->pdata = max14577_charger_dt_init(pdev);
 	if (IS_ERR(chg->pdata))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	return NULL;
+}
+#endif /* CONFIG_OF */
+
+static ssize_t show_fast_charge_timer(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	struct max14577_charger *chg = dev_get_drvdata(dev);
+	u8 reg_data;
+	int ret;
+	unsigned int val;
+
+	ret = max14577_read_reg(chg->max14577->regmap, MAX14577_REG_CHGCTRL1,
+			&reg_data);
+	if (ret)
+		return ret;
+
+	reg_data &= CHGCTRL1_TCHW_MASK;
+	reg_data >>= CHGCTRL1_TCHW_SHIFT;
+	switch (reg_data) {
+	case 0x2 ... 0x4:
+		val = reg_data + 3;
+		break;
+	case 0x7:
+		val = 0;
+		break;
+	default:
+		val = 5;
+		break;
+	}
+
+	return sysfs_emit(buf, "%u\n", val);
+}
+
+static ssize_t store_fast_charge_timer(struct device *dev,
+		struct device_attribute *attr, const char *buf, size_t count)
+{
+	struct max14577_charger *chg = dev_get_drvdata(dev);
+	unsigned long val;
+	int ret;
+
+	ret = kstrtoul(buf, 10, &val);
+	if (ret)
+		return ret;
+
+	ret = max14577_set_fast_charge_timer(chg, val);
+	if (ret)
+		return ret;
+
+	return count;
+}
+
+static DEVICE_ATTR(fast_charge_timer, S_IRUGO | S_IWUSR,
+		show_fast_charge_timer, store_fast_charge_timer);
+
+static int max14577_charger_probe(struct platform_device *pdev)
+{
+	struct max14577_charger *chg;
+	struct power_supply_config psy_cfg = {};
+	struct max14577 *max14577 = dev_get_drvdata(pdev->dev.parent);
+	int ret;
+
+	chg = devm_kzalloc(&pdev->dev, sizeof(*chg), GFP_KERNEL);
+	if (!chg)
+		return -ENOMEM;
+
+	platform_set_drvdata(pdev, chg);
+	chg->dev = &pdev->dev;
+	chg->max14577 = max14577;
+
+	chg->pdata = max14577_charger_dt_init(pdev);
+	if (IS_ERR_OR_NULL(chg->pdata))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return PTR_ERR(chg->pdata);
 
 	ret = max14577_charger_reg_init(chg);

@@ -80,6 +80,7 @@ static bool parse_8000_001e(struct topo_scan *tscan, bool has_topoext)
 
 	cpuid_leaf(0x8000001e, &leaf);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/*
 	 * If leaf 0xb/0x26 is available, then the APIC ID and the domain
 	 * shifts are set already.
@@ -195,6 +196,116 @@ static void parse_topology_amd(struct topo_scan *tscan)
 	 * the initial APIC ID if XTOPOLOGY leaves are not available.
 	 */
 	if (parse_8000_001e(tscan, has_xtopology))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	tscan->c->topo.initial_apicid = leaf.ext_apic_id;
+
+	/*
+	 * If leaf 0xb is available, then the domain shifts are set
+	 * already and nothing to do here. Only valid for family >= 0x17.
+	 */
+	if (!has_topoext && tscan->c->x86 >= 0x17) {
+		/*
+		 * Leaf 0x80000008 set the CORE domain shift already.
+		 * Update the SMT domain, but do not propagate it.
+		 */
+		unsigned int nthreads = leaf.core_nthreads + 1;
+
+		topology_update_dom(tscan, TOPO_SMT_DOMAIN, get_count_order(nthreads), nthreads);
+	}
+
+	store_node(tscan, leaf.nnodes_per_socket + 1, leaf.node_id);
+
+	if (tscan->c->x86_vendor == X86_VENDOR_AMD) {
+		if (tscan->c->x86 == 0x15)
+			tscan->c->topo.cu_id = leaf.core_id;
+
+		cacheinfo_amd_init_llc_id(tscan->c, leaf.node_id);
+	} else {
+		/*
+		 * Package ID is ApicId[6..] on certain Hygon CPUs. See
+		 * commit e0ceeae708ce for explanation. The topology info
+		 * is screwed up: The package shift is always 6 and the
+		 * node ID is bit [4:5].
+		 */
+		if (!boot_cpu_has(X86_FEATURE_HYPERVISOR) && tscan->c->x86_model <= 0x3) {
+			topology_set_dom(tscan, TOPO_CORE_DOMAIN, 6,
+					 tscan->dom_ncpus[TOPO_CORE_DOMAIN]);
+		}
+		cacheinfo_hygon_init_llc_id(tscan->c);
+	}
+	return true;
+}
+
+static void parse_fam10h_node_id(struct topo_scan *tscan)
+{
+	union {
+		struct {
+			u64	node_id		:  3,
+				nodes_per_pkg	:  3,
+				unused		: 58;
+		};
+		u64		msr;
+	} nid;
+
+	if (!boot_cpu_has(X86_FEATURE_NODEID_MSR))
+		return;
+
+	rdmsrl(MSR_FAM10H_NODE_ID, nid.msr);
+	store_node(tscan, nid.nodes_per_pkg + 1, nid.node_id);
+	tscan->c->topo.llc_id = nid.node_id;
+}
+
+static void legacy_set_llc(struct topo_scan *tscan)
+{
+	unsigned int apicid = tscan->c->topo.initial_apicid;
+
+	/* If none of the parsers set LLC ID then use the die ID for it. */
+	if (tscan->c->topo.llc_id == BAD_APICID)
+		tscan->c->topo.llc_id = apicid >> tscan->dom_shifts[TOPO_CORE_DOMAIN];
+}
+
+static void topoext_fixup(struct topo_scan *tscan)
+{
+	struct cpuinfo_x86 *c = tscan->c;
+	u64 msrval;
+
+	/* Try to re-enable TopologyExtensions if switched off by BIOS */
+	if (cpu_has(c, X86_FEATURE_TOPOEXT) || c->x86_vendor != X86_VENDOR_AMD ||
+	    c->x86 != 0x15 || c->x86_model < 0x10 || c->x86_model > 0x6f)
+		return;
+
+	if (msr_set_bit(0xc0011005, 54) <= 0)
+		return;
+
+	rdmsrl(0xc0011005, msrval);
+	if (msrval & BIT_64(54)) {
+		set_cpu_cap(c, X86_FEATURE_TOPOEXT);
+		pr_info_once(FW_INFO "CPU: Re-enabling disabled Topology Extensions Support.\n");
+	}
+}
+
+static void parse_topology_amd(struct topo_scan *tscan)
+{
+	bool has_topoext = false;
+
+	/*
+	 * If the extended topology leaf 0x8000_001e is available
+	 * try to get SMT, CORE, TILE, and DIE shifts from extended
+	 * CPUID leaf 0x8000_0026 on supported processors first. If
+	 * extended CPUID leaf 0x8000_0026 is not supported, try to
+	 * get SMT and CORE shift from leaf 0xb first, then try to
+	 * get the CORE shift from leaf 0x8000_0008.
+	 */
+	if (cpu_feature_enabled(X86_FEATURE_TOPOEXT))
+		has_topoext = cpu_parse_topology_ext(tscan);
+
+	if (!has_topoext && !parse_8000_0008(tscan))
+		return;
+
+	/* Prefer leaf 0x8000001e if available */
+	if (parse_8000_001e(tscan, has_topoext))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return;
 
 	/* Try the NODEID MSR */

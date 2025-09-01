@@ -143,6 +143,7 @@ static efi_status_t mm_communicate(u8 *comm_buf, size_t payload_size)
 	return var_hdr->ret_status;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define COMM_BUF_SIZE(__payload_size)	(MM_COMMUNICATE_HEADER_SIZE + \
 					 MM_VARIABLE_COMMUNICATE_SIZE + \
 					 (__payload_size))
@@ -511,6 +512,374 @@ static efi_status_t tee_query_variable_info(u32 attributes,
 
 out:
 	free_pages_exact(comm_buf, COMM_BUF_SIZE(payload_size));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/**
+ * setup_mm_hdr() -	Allocate a buffer for StandAloneMM and initialize the
+ *			header data.
+ *
+ * @dptr:		pointer address to store allocated buffer
+ * @payload_size:	payload size
+ * @func:		standAloneMM function number
+ * @ret:		EFI return code
+ * Return:		pointer to corresponding StandAloneMM function buffer or NULL
+ */
+static void *setup_mm_hdr(u8 **dptr, size_t payload_size, size_t func,
+			  efi_status_t *ret)
+{
+	const efi_guid_t mm_var_guid = EFI_MM_VARIABLE_GUID;
+	struct efi_mm_communicate_header *mm_hdr;
+	struct smm_variable_communicate_header *var_hdr;
+	u8 *comm_buf;
+
+	/* In the init function we initialize max_buffer_size with
+	 * get_max_payload(). So skip the test if max_buffer_size is initialized
+	 * StandAloneMM will perform similar checks and drop the buffer if it's
+	 * too long
+	 */
+	if (max_buffer_size &&
+	    max_buffer_size < (MM_COMMUNICATE_HEADER_SIZE +
+			       MM_VARIABLE_COMMUNICATE_SIZE + payload_size)) {
+		*ret = EFI_INVALID_PARAMETER;
+		return NULL;
+	}
+
+	comm_buf = kzalloc(MM_COMMUNICATE_HEADER_SIZE +
+				   MM_VARIABLE_COMMUNICATE_SIZE + payload_size,
+			   GFP_KERNEL);
+	if (!comm_buf) {
+		*ret = EFI_OUT_OF_RESOURCES;
+		return NULL;
+	}
+
+	mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
+	memcpy(&mm_hdr->header_guid, &mm_var_guid, sizeof(mm_hdr->header_guid));
+	mm_hdr->message_len = MM_VARIABLE_COMMUNICATE_SIZE + payload_size;
+
+	var_hdr = (struct smm_variable_communicate_header *)mm_hdr->data;
+	var_hdr->function = func;
+	if (dptr)
+		*dptr = comm_buf;
+	*ret = EFI_SUCCESS;
+
+	return var_hdr->data;
+}
+
+/**
+ * get_max_payload() - Get variable payload size from StandAloneMM.
+ *
+ * @size:    size of the variable in storage
+ * Return:   status code
+ */
+static efi_status_t get_max_payload(size_t *size)
+{
+	struct smm_variable_payload_size *var_payload = NULL;
+	size_t payload_size;
+	u8 *comm_buf = NULL;
+	efi_status_t ret;
+
+	if (!size)
+		return EFI_INVALID_PARAMETER;
+
+	payload_size = sizeof(*var_payload);
+	var_payload = setup_mm_hdr(&comm_buf, payload_size,
+				   SMM_VARIABLE_FUNCTION_GET_PAYLOAD_SIZE,
+				   &ret);
+	if (!var_payload)
+		return EFI_OUT_OF_RESOURCES;
+
+	ret = mm_communicate(comm_buf, payload_size);
+	if (ret != EFI_SUCCESS)
+		goto out;
+
+	/* Make sure the buffer is big enough for storing variables */
+	if (var_payload->size < MM_VARIABLE_ACCESS_HEADER_SIZE + 0x20) {
+		ret = EFI_DEVICE_ERROR;
+		goto out;
+	}
+	*size = var_payload->size;
+	/*
+	 * There seems to be a bug in EDK2 miscalculating the boundaries and
+	 * size checks, so deduct 2 more bytes to fulfill this requirement. Fix
+	 * it up here to ensure backwards compatibility with older versions
+	 * (cf. StandaloneMmPkg/Drivers/StandaloneMmCpu/AArch64/EventHandle.c.
+	 * sizeof (EFI_MM_COMMUNICATE_HEADER) instead the size minus the
+	 * flexible array member).
+	 *
+	 * size is guaranteed to be > 2 due to checks on the beginning.
+	 */
+	*size -= 2;
+out:
+	kfree(comm_buf);
+	return ret;
+}
+
+static efi_status_t get_property_int(u16 *name, size_t name_size,
+				     const efi_guid_t *vendor,
+				     struct var_check_property *var_property)
+{
+	struct smm_variable_var_check_property *smm_property;
+	size_t payload_size;
+	u8 *comm_buf = NULL;
+	efi_status_t ret;
+
+	memset(var_property, 0, sizeof(*var_property));
+	payload_size = sizeof(*smm_property) + name_size;
+	if (payload_size > max_payload_size)
+		return EFI_INVALID_PARAMETER;
+
+	smm_property = setup_mm_hdr(
+		&comm_buf, payload_size,
+		SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_GET, &ret);
+	if (!smm_property)
+		return EFI_OUT_OF_RESOURCES;
+
+	memcpy(&smm_property->guid, vendor, sizeof(smm_property->guid));
+	smm_property->name_size = name_size;
+	memcpy(smm_property->name, name, name_size);
+
+	ret = mm_communicate(comm_buf, payload_size);
+	/*
+	 * Currently only R/O property is supported in StMM.
+	 * Variables that are not set to R/O will not set the property in StMM
+	 * and the call will return EFI_NOT_FOUND. We are setting the
+	 * properties to 0x0 so checking against that is enough for the
+	 * EFI_NOT_FOUND case.
+	 */
+	if (ret == EFI_NOT_FOUND)
+		ret = EFI_SUCCESS;
+	if (ret != EFI_SUCCESS)
+		goto out;
+	memcpy(var_property, &smm_property->property, sizeof(*var_property));
+
+out:
+	kfree(comm_buf);
+	return ret;
+}
+
+static efi_status_t tee_get_variable(u16 *name, efi_guid_t *vendor,
+				     u32 *attributes, unsigned long *data_size,
+				     void *data)
+{
+	struct var_check_property var_property;
+	struct smm_variable_access *var_acc;
+	size_t payload_size;
+	size_t name_size;
+	size_t tmp_dsize;
+	u8 *comm_buf = NULL;
+	efi_status_t ret;
+
+	if (!name || !vendor || !data_size)
+		return EFI_INVALID_PARAMETER;
+
+	name_size = (ucs2_strnlen(name, EFI_VAR_NAME_LEN) + 1) * sizeof(u16);
+	if (name_size > max_payload_size - MM_VARIABLE_ACCESS_HEADER_SIZE)
+		return EFI_INVALID_PARAMETER;
+
+	/* Trim output buffer size */
+	tmp_dsize = *data_size;
+	if (name_size + tmp_dsize >
+	    max_payload_size - MM_VARIABLE_ACCESS_HEADER_SIZE) {
+		tmp_dsize = max_payload_size - MM_VARIABLE_ACCESS_HEADER_SIZE -
+			    name_size;
+	}
+
+	payload_size = MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + tmp_dsize;
+	var_acc = setup_mm_hdr(&comm_buf, payload_size,
+			       SMM_VARIABLE_FUNCTION_GET_VARIABLE, &ret);
+	if (!var_acc)
+		return EFI_OUT_OF_RESOURCES;
+
+	/* Fill in contents */
+	memcpy(&var_acc->guid, vendor, sizeof(var_acc->guid));
+	var_acc->data_size = tmp_dsize;
+	var_acc->name_size = name_size;
+	var_acc->attr = attributes ? *attributes : 0;
+	memcpy(var_acc->name, name, name_size);
+
+	ret = mm_communicate(comm_buf, payload_size);
+	if (ret == EFI_SUCCESS || ret == EFI_BUFFER_TOO_SMALL)
+		/* Update with reported data size for trimmed case */
+		*data_size = var_acc->data_size;
+	if (ret != EFI_SUCCESS)
+		goto out;
+
+	ret = get_property_int(name, name_size, vendor, &var_property);
+	if (ret != EFI_SUCCESS)
+		goto out;
+
+	if (attributes)
+		*attributes = var_acc->attr;
+
+	if (!data) {
+		ret = EFI_INVALID_PARAMETER;
+		goto out;
+	}
+	memcpy(data, (u8 *)var_acc->name + var_acc->name_size,
+	       var_acc->data_size);
+out:
+	kfree(comm_buf);
+	return ret;
+}
+
+static efi_status_t tee_get_next_variable(unsigned long *name_size,
+					  efi_char16_t *name, efi_guid_t *guid)
+{
+	struct smm_variable_getnext *var_getnext;
+	size_t payload_size;
+	size_t out_name_size;
+	size_t in_name_size;
+	u8 *comm_buf = NULL;
+	efi_status_t ret;
+
+	if (!name_size || !name || !guid)
+		return EFI_INVALID_PARAMETER;
+
+	out_name_size = *name_size;
+	in_name_size = (ucs2_strnlen(name, EFI_VAR_NAME_LEN) + 1) * sizeof(u16);
+
+	if (out_name_size < in_name_size)
+		return EFI_INVALID_PARAMETER;
+
+	if (in_name_size > max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE)
+		return EFI_INVALID_PARAMETER;
+
+	/* Trim output buffer size */
+	if (out_name_size > max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE)
+		out_name_size =
+			max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE;
+
+	payload_size = MM_VARIABLE_GET_NEXT_HEADER_SIZE + out_name_size;
+	var_getnext = setup_mm_hdr(&comm_buf, payload_size,
+				   SMM_VARIABLE_FUNCTION_GET_NEXT_VARIABLE_NAME,
+				   &ret);
+	if (!var_getnext)
+		return EFI_OUT_OF_RESOURCES;
+
+	/* Fill in contents */
+	memcpy(&var_getnext->guid, guid, sizeof(var_getnext->guid));
+	var_getnext->name_size = out_name_size;
+	memcpy(var_getnext->name, name, in_name_size);
+	memset((u8 *)var_getnext->name + in_name_size, 0x0,
+	       out_name_size - in_name_size);
+
+	ret = mm_communicate(comm_buf, payload_size);
+	if (ret == EFI_SUCCESS || ret == EFI_BUFFER_TOO_SMALL) {
+		/* Update with reported data size for trimmed case */
+		*name_size = var_getnext->name_size;
+	}
+	if (ret != EFI_SUCCESS)
+		goto out;
+
+	memcpy(guid, &var_getnext->guid, sizeof(*guid));
+	memcpy(name, var_getnext->name, var_getnext->name_size);
+
+out:
+	kfree(comm_buf);
+	return ret;
+}
+
+static efi_status_t tee_set_variable(efi_char16_t *name, efi_guid_t *vendor,
+				     u32 attributes, unsigned long data_size,
+				     void *data)
+{
+	efi_status_t ret;
+	struct var_check_property var_property;
+	struct smm_variable_access *var_acc;
+	size_t payload_size;
+	size_t name_size;
+	u8 *comm_buf = NULL;
+
+	if (!name || name[0] == 0 || !vendor)
+		return EFI_INVALID_PARAMETER;
+
+	if (data_size > 0 && !data)
+		return EFI_INVALID_PARAMETER;
+
+	/* Check payload size */
+	name_size = (ucs2_strnlen(name, EFI_VAR_NAME_LEN) + 1) * sizeof(u16);
+	payload_size = MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + data_size;
+	if (payload_size > max_payload_size)
+		return EFI_INVALID_PARAMETER;
+
+	/*
+	 * Allocate the buffer early, before switching to RW (if needed)
+	 * so we won't need to account for any failures in reading/setting
+	 * the properties, if the allocation fails
+	 */
+	var_acc = setup_mm_hdr(&comm_buf, payload_size,
+			       SMM_VARIABLE_FUNCTION_SET_VARIABLE, &ret);
+	if (!var_acc)
+		return EFI_OUT_OF_RESOURCES;
+
+	/*
+	 * The API has the ability to override RO flags. If no RO check was
+	 * requested switch the variable to RW for the duration of this call
+	 */
+	ret = get_property_int(name, name_size, vendor, &var_property);
+	if (ret != EFI_SUCCESS) {
+		dev_err(pvt_data.dev, "Getting variable property failed\n");
+		goto out;
+	}
+
+	if (var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY) {
+		ret = EFI_WRITE_PROTECTED;
+		goto out;
+	}
+
+	/* Fill in contents */
+	memcpy(&var_acc->guid, vendor, sizeof(var_acc->guid));
+	var_acc->data_size = data_size;
+	var_acc->name_size = name_size;
+	var_acc->attr = attributes;
+	memcpy(var_acc->name, name, name_size);
+	memcpy((u8 *)var_acc->name + name_size, data, data_size);
+
+	ret = mm_communicate(comm_buf, payload_size);
+	dev_dbg(pvt_data.dev, "Set Variable %s %d %lx\n", __FILE__, __LINE__, ret);
+out:
+	kfree(comm_buf);
+	return ret;
+}
+
+static efi_status_t tee_set_variable_nonblocking(efi_char16_t *name,
+						 efi_guid_t *vendor,
+						 u32 attributes,
+						 unsigned long data_size,
+						 void *data)
+{
+	return EFI_UNSUPPORTED;
+}
+
+static efi_status_t tee_query_variable_info(u32 attributes,
+					    u64 *max_variable_storage_size,
+					    u64 *remain_variable_storage_size,
+					    u64 *max_variable_size)
+{
+	struct smm_variable_query_info *mm_query_info;
+	size_t payload_size;
+	efi_status_t ret;
+	u8 *comm_buf;
+
+	payload_size = sizeof(*mm_query_info);
+	mm_query_info = setup_mm_hdr(&comm_buf, payload_size,
+				SMM_VARIABLE_FUNCTION_QUERY_VARIABLE_INFO,
+				&ret);
+	if (!mm_query_info)
+		return EFI_OUT_OF_RESOURCES;
+
+	mm_query_info->attr = attributes;
+	ret = mm_communicate(comm_buf, payload_size);
+	if (ret != EFI_SUCCESS)
+		goto out;
+	*max_variable_storage_size = mm_query_info->max_variable_storage;
+	*remain_variable_storage_size =
+		mm_query_info->remaining_variable_storage;
+	*max_variable_size = mm_query_info->max_variable_size;
+
+out:
+	kfree(comm_buf);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return ret;
 }
 

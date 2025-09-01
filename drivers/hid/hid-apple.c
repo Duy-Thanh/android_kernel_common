@@ -890,6 +890,7 @@ static int apple_magic_backlight_init(struct hid_device *hdev)
 	backlight->brightness = report_enum->report_id_hash[APPLE_MAGIC_REPORT_ID_BRIGHTNESS];
 	backlight->power = report_enum->report_id_hash[APPLE_MAGIC_REPORT_ID_POWER];
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!backlight->brightness || backlight->brightness->maxfield < 2 ||
 	    !backlight->power || backlight->power->maxfield < 2)
 		return -ENODEV;
@@ -966,6 +967,79 @@ static void apple_remove(struct hid_device *hdev)
 
 	if (asc->quirks & APPLE_RDESC_BATTERY)
 		del_timer_sync(&asc->battery_timer);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (!backlight->brightness || !backlight->power)
+		return -ENODEV;
+
+	backlight->cdev.name = ":white:" LED_FUNCTION_KBD_BACKLIGHT;
+	backlight->cdev.max_brightness = backlight->brightness->field[0]->logical_maximum;
+	backlight->cdev.brightness_set_blocking = apple_magic_backlight_led_set;
+
+	apple_magic_backlight_set(backlight, 0, 0);
+
+	return devm_led_classdev_register(&hdev->dev, &backlight->cdev);
+
+}
+
+static int apple_probe(struct hid_device *hdev,
+		const struct hid_device_id *id)
+{
+	unsigned long quirks = id->driver_data;
+	struct apple_sc *asc;
+	int ret;
+
+	asc = devm_kzalloc(&hdev->dev, sizeof(*asc), GFP_KERNEL);
+	if (asc == NULL) {
+		hid_err(hdev, "can't alloc apple descriptor\n");
+		return -ENOMEM;
+	}
+
+	asc->hdev = hdev;
+	asc->quirks = quirks;
+
+	hid_set_drvdata(hdev, asc);
+
+	ret = hid_parse(hdev);
+	if (ret) {
+		hid_err(hdev, "parse failed\n");
+		return ret;
+	}
+
+	ret = hid_hw_start(hdev, HID_CONNECT_DEFAULT);
+	if (ret) {
+		hid_err(hdev, "hw start failed\n");
+		return ret;
+	}
+
+	timer_setup(&asc->battery_timer, apple_battery_timer_tick, 0);
+	mod_timer(&asc->battery_timer,
+		  jiffies + msecs_to_jiffies(APPLE_BATTERY_TIMEOUT_MS));
+	apple_fetch_battery(hdev);
+
+	if (quirks & APPLE_BACKLIGHT_CTL)
+		apple_backlight_init(hdev);
+
+	if (quirks & APPLE_MAGIC_BACKLIGHT) {
+		ret = apple_magic_backlight_init(hdev);
+		if (ret)
+			goto out_err;
+	}
+
+	return 0;
+
+out_err:
+	del_timer_sync(&asc->battery_timer);
+	hid_hw_stop(hdev);
+	return ret;
+}
+
+static void apple_remove(struct hid_device *hdev)
+{
+	struct apple_sc *asc = hid_get_drvdata(hdev);
+
+	del_timer_sync(&asc->battery_timer);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	hid_hw_stop(hdev);
 }

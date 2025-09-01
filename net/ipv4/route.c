@@ -1684,6 +1684,7 @@ struct rtable *rt_dst_clone(struct net_device *dev, struct rtable *rt)
 		else if (rt->rt_gw_family == AF_INET6)
 			new_rt->rt_gw6 = rt->rt_gw6;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		new_rt->dst.input = READ_ONCE(rt->dst.input);
 		new_rt->dst.output = READ_ONCE(rt->dst.output);
 		new_rt->dst.error = rt->dst.error;
@@ -2549,6 +2550,871 @@ static struct rtable *__mkroute_output(const struct fib_result *res,
 	do_cache = true;
 	if (type == RTN_BROADCAST) {
 		flags |= RTCF_BROADCAST | RTCF_LOCAL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		new_rt->dst.input = rt->dst.input;
+		new_rt->dst.output = rt->dst.output;
+		new_rt->dst.error = rt->dst.error;
+		new_rt->dst.lastuse = jiffies;
+		new_rt->dst.lwtstate = lwtstate_get(rt->dst.lwtstate);
+	}
+	return new_rt;
+}
+EXPORT_SYMBOL(rt_dst_clone);
+
+/* called in rcu_read_lock() section */
+int ip_mc_validate_source(struct sk_buff *skb, __be32 daddr, __be32 saddr,
+			  u8 tos, struct net_device *dev,
+			  struct in_device *in_dev, u32 *itag)
+{
+	int err;
+
+	/* Primary sanity checks. */
+	if (!in_dev)
+		return -EINVAL;
+
+	if (ipv4_is_multicast(saddr) || ipv4_is_lbcast(saddr) ||
+	    skb->protocol != htons(ETH_P_IP))
+		return -EINVAL;
+
+	if (ipv4_is_loopback(saddr) && !IN_DEV_ROUTE_LOCALNET(in_dev))
+		return -EINVAL;
+
+	if (ipv4_is_zeronet(saddr)) {
+		if (!ipv4_is_local_multicast(daddr) &&
+		    ip_hdr(skb)->protocol != IPPROTO_IGMP)
+			return -EINVAL;
+	} else {
+		err = fib_validate_source(skb, saddr, 0, tos, 0, dev,
+					  in_dev, itag);
+		if (err < 0)
+			return err;
+	}
+	return 0;
+}
+
+/* called in rcu_read_lock() section */
+static int ip_route_input_mc(struct sk_buff *skb, __be32 daddr, __be32 saddr,
+			     u8 tos, struct net_device *dev, int our)
+{
+	struct in_device *in_dev = __in_dev_get_rcu(dev);
+	unsigned int flags = RTCF_MULTICAST;
+	struct rtable *rth;
+	u32 itag = 0;
+	int err;
+
+	err = ip_mc_validate_source(skb, daddr, saddr, tos, dev, in_dev, &itag);
+	if (err)
+		return err;
+
+	if (our)
+		flags |= RTCF_LOCAL;
+
+	if (IN_DEV_ORCONF(in_dev, NOPOLICY))
+		IPCB(skb)->flags |= IPSKB_NOPOLICY;
+
+	rth = rt_dst_alloc(dev_net(dev)->loopback_dev, flags, RTN_MULTICAST,
+			   false);
+	if (!rth)
+		return -ENOBUFS;
+
+#ifdef CONFIG_IP_ROUTE_CLASSID
+	rth->dst.tclassid = itag;
+#endif
+	rth->dst.output = ip_rt_bug;
+	rth->rt_is_input= 1;
+
+#ifdef CONFIG_IP_MROUTE
+	if (!ipv4_is_local_multicast(daddr) && IN_DEV_MFORWARD(in_dev))
+		rth->dst.input = ip_mr_input;
+#endif
+	RT_CACHE_STAT_INC(in_slow_mc);
+
+	skb_dst_drop(skb);
+	skb_dst_set(skb, &rth->dst);
+	return 0;
+}
+
+
+static void ip_handle_martian_source(struct net_device *dev,
+				     struct in_device *in_dev,
+				     struct sk_buff *skb,
+				     __be32 daddr,
+				     __be32 saddr)
+{
+	RT_CACHE_STAT_INC(in_martian_src);
+#ifdef CONFIG_IP_ROUTE_VERBOSE
+	if (IN_DEV_LOG_MARTIANS(in_dev) && net_ratelimit()) {
+		/*
+		 *	RFC1812 recommendation, if source is martian,
+		 *	the only hint is MAC header.
+		 */
+		pr_warn("martian source %pI4 from %pI4, on dev %s\n",
+			&daddr, &saddr, dev->name);
+		if (dev->hard_header_len && skb_mac_header_was_set(skb)) {
+			print_hex_dump(KERN_WARNING, "ll header: ",
+				       DUMP_PREFIX_OFFSET, 16, 1,
+				       skb_mac_header(skb),
+				       dev->hard_header_len, false);
+		}
+	}
+#endif
+}
+
+/* called in rcu_read_lock() section */
+static int __mkroute_input(struct sk_buff *skb,
+			   const struct fib_result *res,
+			   struct in_device *in_dev,
+			   __be32 daddr, __be32 saddr, u32 tos)
+{
+	struct fib_nh_common *nhc = FIB_RES_NHC(*res);
+	struct net_device *dev = nhc->nhc_dev;
+	struct fib_nh_exception *fnhe;
+	struct rtable *rth;
+	int err;
+	struct in_device *out_dev;
+	bool do_cache;
+	u32 itag = 0;
+
+	/* get a working reference to the output device */
+	out_dev = __in_dev_get_rcu(dev);
+	if (!out_dev) {
+		net_crit_ratelimited("Bug in ip_route_input_slow(). Please report.\n");
+		return -EINVAL;
+	}
+
+	err = fib_validate_source(skb, saddr, daddr, tos, FIB_RES_OIF(*res),
+				  in_dev->dev, in_dev, &itag);
+	if (err < 0) {
+		ip_handle_martian_source(in_dev->dev, in_dev, skb, daddr,
+					 saddr);
+
+		goto cleanup;
+	}
+
+	do_cache = res->fi && !itag;
+	if (out_dev == in_dev && err && IN_DEV_TX_REDIRECTS(out_dev) &&
+	    skb->protocol == htons(ETH_P_IP)) {
+		__be32 gw;
+
+		gw = nhc->nhc_gw_family == AF_INET ? nhc->nhc_gw.ipv4 : 0;
+		if (IN_DEV_SHARED_MEDIA(out_dev) ||
+		    inet_addr_onlink(out_dev, saddr, gw))
+			IPCB(skb)->flags |= IPSKB_DOREDIRECT;
+	}
+
+	if (skb->protocol != htons(ETH_P_IP)) {
+		/* Not IP (i.e. ARP). Do not create route, if it is
+		 * invalid for proxy arp. DNAT routes are always valid.
+		 *
+		 * Proxy arp feature have been extended to allow, ARP
+		 * replies back to the same interface, to support
+		 * Private VLAN switch technologies. See arp.c.
+		 */
+		if (out_dev == in_dev &&
+		    IN_DEV_PROXY_ARP_PVLAN(in_dev) == 0) {
+			err = -EINVAL;
+			goto cleanup;
+		}
+	}
+
+	if (IN_DEV_ORCONF(in_dev, NOPOLICY))
+		IPCB(skb)->flags |= IPSKB_NOPOLICY;
+
+	fnhe = find_exception(nhc, daddr);
+	if (do_cache) {
+		if (fnhe)
+			rth = rcu_dereference(fnhe->fnhe_rth_input);
+		else
+			rth = rcu_dereference(nhc->nhc_rth_input);
+		if (rt_cache_valid(rth)) {
+			skb_dst_set_noref(skb, &rth->dst);
+			goto out;
+		}
+	}
+
+	rth = rt_dst_alloc(out_dev->dev, 0, res->type,
+			   IN_DEV_ORCONF(out_dev, NOXFRM));
+	if (!rth) {
+		err = -ENOBUFS;
+		goto cleanup;
+	}
+
+	rth->rt_is_input = 1;
+	RT_CACHE_STAT_INC(in_slow_tot);
+
+	rth->dst.input = ip_forward;
+
+	rt_set_nexthop(rth, daddr, res, fnhe, res->fi, res->type, itag,
+		       do_cache);
+	lwtunnel_set_redirect(&rth->dst);
+	skb_dst_set(skb, &rth->dst);
+out:
+	err = 0;
+ cleanup:
+	return err;
+}
+
+#ifdef CONFIG_IP_ROUTE_MULTIPATH
+/* To make ICMP packets follow the right flow, the multipath hash is
+ * calculated from the inner IP addresses.
+ */
+static void ip_multipath_l3_keys(const struct sk_buff *skb,
+				 struct flow_keys *hash_keys)
+{
+	const struct iphdr *outer_iph = ip_hdr(skb);
+	const struct iphdr *key_iph = outer_iph;
+	const struct iphdr *inner_iph;
+	const struct icmphdr *icmph;
+	struct iphdr _inner_iph;
+	struct icmphdr _icmph;
+
+	if (likely(outer_iph->protocol != IPPROTO_ICMP))
+		goto out;
+
+	if (unlikely((outer_iph->frag_off & htons(IP_OFFSET)) != 0))
+		goto out;
+
+	icmph = skb_header_pointer(skb, outer_iph->ihl * 4, sizeof(_icmph),
+				   &_icmph);
+	if (!icmph)
+		goto out;
+
+	if (!icmp_is_err(icmph->type))
+		goto out;
+
+	inner_iph = skb_header_pointer(skb,
+				       outer_iph->ihl * 4 + sizeof(_icmph),
+				       sizeof(_inner_iph), &_inner_iph);
+	if (!inner_iph)
+		goto out;
+
+	key_iph = inner_iph;
+out:
+	hash_keys->addrs.v4addrs.src = key_iph->saddr;
+	hash_keys->addrs.v4addrs.dst = key_iph->daddr;
+}
+
+static u32 fib_multipath_custom_hash_outer(const struct net *net,
+					   const struct sk_buff *skb,
+					   bool *p_has_inner)
+{
+	u32 hash_fields = READ_ONCE(net->ipv4.sysctl_fib_multipath_hash_fields);
+	struct flow_keys keys, hash_keys;
+
+	if (!(hash_fields & FIB_MULTIPATH_HASH_FIELD_OUTER_MASK))
+		return 0;
+
+	memset(&hash_keys, 0, sizeof(hash_keys));
+	skb_flow_dissect_flow_keys(skb, &keys, FLOW_DISSECTOR_F_STOP_AT_ENCAP);
+
+	hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_SRC_IP)
+		hash_keys.addrs.v4addrs.src = keys.addrs.v4addrs.src;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_DST_IP)
+		hash_keys.addrs.v4addrs.dst = keys.addrs.v4addrs.dst;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_IP_PROTO)
+		hash_keys.basic.ip_proto = keys.basic.ip_proto;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_SRC_PORT)
+		hash_keys.ports.src = keys.ports.src;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_DST_PORT)
+		hash_keys.ports.dst = keys.ports.dst;
+
+	*p_has_inner = !!(keys.control.flags & FLOW_DIS_ENCAPSULATION);
+	return fib_multipath_hash_from_keys(net, &hash_keys);
+}
+
+static u32 fib_multipath_custom_hash_inner(const struct net *net,
+					   const struct sk_buff *skb,
+					   bool has_inner)
+{
+	u32 hash_fields = READ_ONCE(net->ipv4.sysctl_fib_multipath_hash_fields);
+	struct flow_keys keys, hash_keys;
+
+	/* We assume the packet carries an encapsulation, but if none was
+	 * encountered during dissection of the outer flow, then there is no
+	 * point in calling the flow dissector again.
+	 */
+	if (!has_inner)
+		return 0;
+
+	if (!(hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_MASK))
+		return 0;
+
+	memset(&hash_keys, 0, sizeof(hash_keys));
+	skb_flow_dissect_flow_keys(skb, &keys, 0);
+
+	if (!(keys.control.flags & FLOW_DIS_ENCAPSULATION))
+		return 0;
+
+	if (keys.control.addr_type == FLOW_DISSECTOR_KEY_IPV4_ADDRS) {
+		hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+		if (hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_SRC_IP)
+			hash_keys.addrs.v4addrs.src = keys.addrs.v4addrs.src;
+		if (hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_DST_IP)
+			hash_keys.addrs.v4addrs.dst = keys.addrs.v4addrs.dst;
+	} else if (keys.control.addr_type == FLOW_DISSECTOR_KEY_IPV6_ADDRS) {
+		hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV6_ADDRS;
+		if (hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_SRC_IP)
+			hash_keys.addrs.v6addrs.src = keys.addrs.v6addrs.src;
+		if (hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_DST_IP)
+			hash_keys.addrs.v6addrs.dst = keys.addrs.v6addrs.dst;
+		if (hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_FLOWLABEL)
+			hash_keys.tags.flow_label = keys.tags.flow_label;
+	}
+
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_IP_PROTO)
+		hash_keys.basic.ip_proto = keys.basic.ip_proto;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_SRC_PORT)
+		hash_keys.ports.src = keys.ports.src;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_INNER_DST_PORT)
+		hash_keys.ports.dst = keys.ports.dst;
+
+	return fib_multipath_hash_from_keys(net, &hash_keys);
+}
+
+static u32 fib_multipath_custom_hash_skb(const struct net *net,
+					 const struct sk_buff *skb)
+{
+	u32 mhash, mhash_inner;
+	bool has_inner = true;
+
+	mhash = fib_multipath_custom_hash_outer(net, skb, &has_inner);
+	mhash_inner = fib_multipath_custom_hash_inner(net, skb, has_inner);
+
+	return jhash_2words(mhash, mhash_inner, 0);
+}
+
+static u32 fib_multipath_custom_hash_fl4(const struct net *net,
+					 const struct flowi4 *fl4)
+{
+	u32 hash_fields = READ_ONCE(net->ipv4.sysctl_fib_multipath_hash_fields);
+	struct flow_keys hash_keys;
+
+	if (!(hash_fields & FIB_MULTIPATH_HASH_FIELD_OUTER_MASK))
+		return 0;
+
+	memset(&hash_keys, 0, sizeof(hash_keys));
+	hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_SRC_IP)
+		hash_keys.addrs.v4addrs.src = fl4->saddr;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_DST_IP)
+		hash_keys.addrs.v4addrs.dst = fl4->daddr;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_IP_PROTO)
+		hash_keys.basic.ip_proto = fl4->flowi4_proto;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_SRC_PORT)
+		hash_keys.ports.src = fl4->fl4_sport;
+	if (hash_fields & FIB_MULTIPATH_HASH_FIELD_DST_PORT)
+		hash_keys.ports.dst = fl4->fl4_dport;
+
+	return fib_multipath_hash_from_keys(net, &hash_keys);
+}
+
+/* if skb is set it will be used and fl4 can be NULL */
+int fib_multipath_hash(const struct net *net, const struct flowi4 *fl4,
+		       const struct sk_buff *skb, struct flow_keys *flkeys)
+{
+	u32 multipath_hash = fl4 ? fl4->flowi4_multipath_hash : 0;
+	struct flow_keys hash_keys;
+	u32 mhash = 0;
+
+	switch (READ_ONCE(net->ipv4.sysctl_fib_multipath_hash_policy)) {
+	case 0:
+		memset(&hash_keys, 0, sizeof(hash_keys));
+		hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+		if (skb) {
+			ip_multipath_l3_keys(skb, &hash_keys);
+		} else {
+			hash_keys.addrs.v4addrs.src = fl4->saddr;
+			hash_keys.addrs.v4addrs.dst = fl4->daddr;
+		}
+		mhash = fib_multipath_hash_from_keys(net, &hash_keys);
+		break;
+	case 1:
+		/* skb is currently provided only when forwarding */
+		if (skb) {
+			unsigned int flag = FLOW_DISSECTOR_F_STOP_AT_ENCAP;
+			struct flow_keys keys;
+
+			/* short-circuit if we already have L4 hash present */
+			if (skb->l4_hash)
+				return skb_get_hash_raw(skb) >> 1;
+
+			memset(&hash_keys, 0, sizeof(hash_keys));
+
+			if (!flkeys) {
+				skb_flow_dissect_flow_keys(skb, &keys, flag);
+				flkeys = &keys;
+			}
+
+			hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+			hash_keys.addrs.v4addrs.src = flkeys->addrs.v4addrs.src;
+			hash_keys.addrs.v4addrs.dst = flkeys->addrs.v4addrs.dst;
+			hash_keys.ports.src = flkeys->ports.src;
+			hash_keys.ports.dst = flkeys->ports.dst;
+			hash_keys.basic.ip_proto = flkeys->basic.ip_proto;
+		} else {
+			memset(&hash_keys, 0, sizeof(hash_keys));
+			hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+			hash_keys.addrs.v4addrs.src = fl4->saddr;
+			hash_keys.addrs.v4addrs.dst = fl4->daddr;
+			hash_keys.ports.src = fl4->fl4_sport;
+			hash_keys.ports.dst = fl4->fl4_dport;
+			hash_keys.basic.ip_proto = fl4->flowi4_proto;
+		}
+		mhash = fib_multipath_hash_from_keys(net, &hash_keys);
+		break;
+	case 2:
+		memset(&hash_keys, 0, sizeof(hash_keys));
+		/* skb is currently provided only when forwarding */
+		if (skb) {
+			struct flow_keys keys;
+
+			skb_flow_dissect_flow_keys(skb, &keys, 0);
+			/* Inner can be v4 or v6 */
+			if (keys.control.addr_type == FLOW_DISSECTOR_KEY_IPV4_ADDRS) {
+				hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+				hash_keys.addrs.v4addrs.src = keys.addrs.v4addrs.src;
+				hash_keys.addrs.v4addrs.dst = keys.addrs.v4addrs.dst;
+			} else if (keys.control.addr_type == FLOW_DISSECTOR_KEY_IPV6_ADDRS) {
+				hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV6_ADDRS;
+				hash_keys.addrs.v6addrs.src = keys.addrs.v6addrs.src;
+				hash_keys.addrs.v6addrs.dst = keys.addrs.v6addrs.dst;
+				hash_keys.tags.flow_label = keys.tags.flow_label;
+				hash_keys.basic.ip_proto = keys.basic.ip_proto;
+			} else {
+				/* Same as case 0 */
+				hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+				ip_multipath_l3_keys(skb, &hash_keys);
+			}
+		} else {
+			/* Same as case 0 */
+			hash_keys.control.addr_type = FLOW_DISSECTOR_KEY_IPV4_ADDRS;
+			hash_keys.addrs.v4addrs.src = fl4->saddr;
+			hash_keys.addrs.v4addrs.dst = fl4->daddr;
+		}
+		mhash = fib_multipath_hash_from_keys(net, &hash_keys);
+		break;
+	case 3:
+		if (skb)
+			mhash = fib_multipath_custom_hash_skb(net, skb);
+		else
+			mhash = fib_multipath_custom_hash_fl4(net, fl4);
+		break;
+	}
+
+	if (multipath_hash)
+		mhash = jhash_2words(mhash, multipath_hash, 0);
+
+	return mhash >> 1;
+}
+#endif /* CONFIG_IP_ROUTE_MULTIPATH */
+
+static int ip_mkroute_input(struct sk_buff *skb,
+			    struct fib_result *res,
+			    struct in_device *in_dev,
+			    __be32 daddr, __be32 saddr, u32 tos,
+			    struct flow_keys *hkeys)
+{
+#ifdef CONFIG_IP_ROUTE_MULTIPATH
+	if (res->fi && fib_info_num_path(res->fi) > 1) {
+		int h = fib_multipath_hash(res->fi->fib_net, NULL, skb, hkeys);
+
+		fib_select_multipath(res, h);
+		IPCB(skb)->flags |= IPSKB_MULTIPATH;
+	}
+#endif
+
+	/* create a routing cache entry */
+	return __mkroute_input(skb, res, in_dev, daddr, saddr, tos);
+}
+
+/* Implements all the saddr-related checks as ip_route_input_slow(),
+ * assuming daddr is valid and the destination is not a local broadcast one.
+ * Uses the provided hint instead of performing a route lookup.
+ */
+int ip_route_use_hint(struct sk_buff *skb, __be32 daddr, __be32 saddr,
+		      u8 tos, struct net_device *dev,
+		      const struct sk_buff *hint)
+{
+	struct in_device *in_dev = __in_dev_get_rcu(dev);
+	struct rtable *rt = skb_rtable(hint);
+	struct net *net = dev_net(dev);
+	int err = -EINVAL;
+	u32 tag = 0;
+
+	if (!in_dev)
+		return -EINVAL;
+
+	if (ipv4_is_multicast(saddr) || ipv4_is_lbcast(saddr))
+		goto martian_source;
+
+	if (ipv4_is_zeronet(saddr))
+		goto martian_source;
+
+	if (ipv4_is_loopback(saddr) && !IN_DEV_NET_ROUTE_LOCALNET(in_dev, net))
+		goto martian_source;
+
+	if (rt->rt_type != RTN_LOCAL)
+		goto skip_validate_source;
+
+	tos &= INET_DSCP_MASK;
+	err = fib_validate_source(skb, saddr, daddr, tos, 0, dev, in_dev, &tag);
+	if (err < 0)
+		goto martian_source;
+
+skip_validate_source:
+	skb_dst_copy(skb, hint);
+	return 0;
+
+martian_source:
+	ip_handle_martian_source(dev, in_dev, skb, daddr, saddr);
+	return err;
+}
+
+/* get device for dst_alloc with local routes */
+static struct net_device *ip_rt_get_dev(struct net *net,
+					const struct fib_result *res)
+{
+	struct fib_nh_common *nhc = res->fi ? res->nhc : NULL;
+	struct net_device *dev = NULL;
+
+	if (nhc)
+		dev = l3mdev_master_dev_rcu(nhc->nhc_dev);
+
+	return dev ? : net->loopback_dev;
+}
+
+/*
+ *	NOTE. We drop all the packets that has local source
+ *	addresses, because every properly looped back packet
+ *	must have correct destination already attached by output routine.
+ *	Changes in the enforced policies must be applied also to
+ *	ip_route_use_hint().
+ *
+ *	Such approach solves two big problems:
+ *	1. Not simplex devices are handled properly.
+ *	2. IP spoofing attempts are filtered with 100% of guarantee.
+ *	called with rcu_read_lock()
+ */
+
+static int ip_route_input_slow(struct sk_buff *skb, __be32 daddr, __be32 saddr,
+			       u8 tos, struct net_device *dev,
+			       struct fib_result *res)
+{
+	struct in_device *in_dev = __in_dev_get_rcu(dev);
+	struct flow_keys *flkeys = NULL, _flkeys;
+	struct net    *net = dev_net(dev);
+	struct ip_tunnel_info *tun_info;
+	int		err = -EINVAL;
+	unsigned int	flags = 0;
+	u32		itag = 0;
+	struct rtable	*rth;
+	struct flowi4	fl4;
+	bool do_cache = true;
+
+	/* IP on this device is disabled. */
+
+	if (!in_dev)
+		goto out;
+
+	/* Check for the most weird martians, which can be not detected
+	 * by fib_lookup.
+	 */
+
+	tun_info = skb_tunnel_info(skb);
+	if (tun_info && !(tun_info->mode & IP_TUNNEL_INFO_TX))
+		fl4.flowi4_tun_key.tun_id = tun_info->key.tun_id;
+	else
+		fl4.flowi4_tun_key.tun_id = 0;
+	skb_dst_drop(skb);
+
+	if (ipv4_is_multicast(saddr) || ipv4_is_lbcast(saddr))
+		goto martian_source;
+
+	res->fi = NULL;
+	res->table = NULL;
+	if (ipv4_is_lbcast(daddr) || (saddr == 0 && daddr == 0))
+		goto brd_input;
+
+	/* Accept zero addresses only to limited broadcast;
+	 * I even do not know to fix it or not. Waiting for complains :-)
+	 */
+	if (ipv4_is_zeronet(saddr))
+		goto martian_source;
+
+	if (ipv4_is_zeronet(daddr))
+		goto martian_destination;
+
+	/* Following code try to avoid calling IN_DEV_NET_ROUTE_LOCALNET(),
+	 * and call it once if daddr or/and saddr are loopback addresses
+	 */
+	if (ipv4_is_loopback(daddr)) {
+		if (!IN_DEV_NET_ROUTE_LOCALNET(in_dev, net))
+			goto martian_destination;
+	} else if (ipv4_is_loopback(saddr)) {
+		if (!IN_DEV_NET_ROUTE_LOCALNET(in_dev, net))
+			goto martian_source;
+	}
+
+	/*
+	 *	Now we are ready to route packet.
+	 */
+	fl4.flowi4_l3mdev = 0;
+	fl4.flowi4_oif = 0;
+	fl4.flowi4_iif = dev->ifindex;
+	fl4.flowi4_mark = skb->mark;
+	fl4.flowi4_tos = tos;
+	fl4.flowi4_scope = RT_SCOPE_UNIVERSE;
+	fl4.flowi4_flags = 0;
+	fl4.daddr = daddr;
+	fl4.saddr = saddr;
+	fl4.flowi4_uid = sock_net_uid(net, NULL);
+	fl4.flowi4_multipath_hash = 0;
+
+	if (fib4_rules_early_flow_dissect(net, skb, &fl4, &_flkeys)) {
+		flkeys = &_flkeys;
+	} else {
+		fl4.flowi4_proto = 0;
+		fl4.fl4_sport = 0;
+		fl4.fl4_dport = 0;
+	}
+
+	err = fib_lookup(net, &fl4, res, 0);
+	if (err != 0) {
+		if (!IN_DEV_FORWARD(in_dev))
+			err = -EHOSTUNREACH;
+		goto no_route;
+	}
+
+	if (res->type == RTN_BROADCAST) {
+		if (IN_DEV_BFORWARD(in_dev))
+			goto make_route;
+		/* not do cache if bc_forwarding is enabled */
+		if (IPV4_DEVCONF_ALL_RO(net, BC_FORWARDING))
+			do_cache = false;
+		goto brd_input;
+	}
+
+	if (res->type == RTN_LOCAL) {
+		err = fib_validate_source(skb, saddr, daddr, tos,
+					  0, dev, in_dev, &itag);
+		if (err < 0)
+			goto martian_source;
+		goto local_input;
+	}
+
+	if (!IN_DEV_FORWARD(in_dev)) {
+		err = -EHOSTUNREACH;
+		goto no_route;
+	}
+	if (res->type != RTN_UNICAST)
+		goto martian_destination;
+
+make_route:
+	err = ip_mkroute_input(skb, res, in_dev, daddr, saddr, tos, flkeys);
+out:	return err;
+
+brd_input:
+	if (skb->protocol != htons(ETH_P_IP))
+		goto e_inval;
+
+	if (!ipv4_is_zeronet(saddr)) {
+		err = fib_validate_source(skb, saddr, 0, tos, 0, dev,
+					  in_dev, &itag);
+		if (err < 0)
+			goto martian_source;
+	}
+	flags |= RTCF_BROADCAST;
+	res->type = RTN_BROADCAST;
+	RT_CACHE_STAT_INC(in_brd);
+
+local_input:
+	if (IN_DEV_ORCONF(in_dev, NOPOLICY))
+		IPCB(skb)->flags |= IPSKB_NOPOLICY;
+
+	do_cache &= res->fi && !itag;
+	if (do_cache) {
+		struct fib_nh_common *nhc = FIB_RES_NHC(*res);
+
+		rth = rcu_dereference(nhc->nhc_rth_input);
+		if (rt_cache_valid(rth)) {
+			skb_dst_set_noref(skb, &rth->dst);
+			err = 0;
+			goto out;
+		}
+	}
+
+	rth = rt_dst_alloc(ip_rt_get_dev(net, res),
+			   flags | RTCF_LOCAL, res->type, false);
+	if (!rth)
+		goto e_nobufs;
+
+	rth->dst.output= ip_rt_bug;
+#ifdef CONFIG_IP_ROUTE_CLASSID
+	rth->dst.tclassid = itag;
+#endif
+	rth->rt_is_input = 1;
+
+	RT_CACHE_STAT_INC(in_slow_tot);
+	if (res->type == RTN_UNREACHABLE) {
+		rth->dst.input= ip_error;
+		rth->dst.error= -err;
+		rth->rt_flags	&= ~RTCF_LOCAL;
+	}
+
+	if (do_cache) {
+		struct fib_nh_common *nhc = FIB_RES_NHC(*res);
+
+		rth->dst.lwtstate = lwtstate_get(nhc->nhc_lwtstate);
+		if (lwtunnel_input_redirect(rth->dst.lwtstate)) {
+			WARN_ON(rth->dst.input == lwtunnel_input);
+			rth->dst.lwtstate->orig_input = rth->dst.input;
+			rth->dst.input = lwtunnel_input;
+		}
+
+		if (unlikely(!rt_cache_route(nhc, rth)))
+			rt_add_uncached_list(rth);
+	}
+	skb_dst_set(skb, &rth->dst);
+	err = 0;
+	goto out;
+
+no_route:
+	RT_CACHE_STAT_INC(in_no_route);
+	res->type = RTN_UNREACHABLE;
+	res->fi = NULL;
+	res->table = NULL;
+	goto local_input;
+
+	/*
+	 *	Do not cache martian addresses: they should be logged (RFC1812)
+	 */
+martian_destination:
+	RT_CACHE_STAT_INC(in_martian_dst);
+#ifdef CONFIG_IP_ROUTE_VERBOSE
+	if (IN_DEV_LOG_MARTIANS(in_dev))
+		net_warn_ratelimited("martian destination %pI4 from %pI4, dev %s\n",
+				     &daddr, &saddr, dev->name);
+#endif
+
+e_inval:
+	err = -EINVAL;
+	goto out;
+
+e_nobufs:
+	err = -ENOBUFS;
+	goto out;
+
+martian_source:
+	ip_handle_martian_source(dev, in_dev, skb, daddr, saddr);
+	goto out;
+}
+
+/* called with rcu_read_lock held */
+static int ip_route_input_rcu(struct sk_buff *skb, __be32 daddr, __be32 saddr,
+			      u8 tos, struct net_device *dev, struct fib_result *res)
+{
+	/* Multicast recognition logic is moved from route cache to here.
+	 * The problem was that too many Ethernet cards have broken/missing
+	 * hardware multicast filters :-( As result the host on multicasting
+	 * network acquires a lot of useless route cache entries, sort of
+	 * SDR messages from all the world. Now we try to get rid of them.
+	 * Really, provided software IP multicast filter is organized
+	 * reasonably (at least, hashed), it does not result in a slowdown
+	 * comparing with route cache reject entries.
+	 * Note, that multicast routers are not affected, because
+	 * route cache entry is created eventually.
+	 */
+	if (ipv4_is_multicast(daddr)) {
+		struct in_device *in_dev = __in_dev_get_rcu(dev);
+		int our = 0;
+		int err = -EINVAL;
+
+		if (!in_dev)
+			return err;
+		our = ip_check_mc_rcu(in_dev, daddr, saddr,
+				      ip_hdr(skb)->protocol);
+
+		/* check l3 master if no match yet */
+		if (!our && netif_is_l3_slave(dev)) {
+			struct in_device *l3_in_dev;
+
+			l3_in_dev = __in_dev_get_rcu(skb->dev);
+			if (l3_in_dev)
+				our = ip_check_mc_rcu(l3_in_dev, daddr, saddr,
+						      ip_hdr(skb)->protocol);
+		}
+
+		if (our
+#ifdef CONFIG_IP_MROUTE
+			||
+		    (!ipv4_is_local_multicast(daddr) &&
+		     IN_DEV_MFORWARD(in_dev))
+#endif
+		   ) {
+			err = ip_route_input_mc(skb, daddr, saddr,
+						tos, dev, our);
+		}
+		return err;
+	}
+
+	return ip_route_input_slow(skb, daddr, saddr, tos, dev, res);
+}
+
+int ip_route_input_noref(struct sk_buff *skb, __be32 daddr, __be32 saddr,
+			 u8 tos, struct net_device *dev)
+{
+	struct fib_result res;
+	int err;
+
+	tos &= INET_DSCP_MASK;
+	rcu_read_lock();
+	err = ip_route_input_rcu(skb, daddr, saddr, tos, dev, &res);
+	rcu_read_unlock();
+
+	return err;
+}
+EXPORT_SYMBOL(ip_route_input_noref);
+
+/* called with rcu_read_lock() */
+static struct rtable *__mkroute_output(const struct fib_result *res,
+				       const struct flowi4 *fl4, int orig_oif,
+				       struct net_device *dev_out,
+				       unsigned int flags)
+{
+	struct fib_info *fi = res->fi;
+	struct fib_nh_exception *fnhe;
+	struct in_device *in_dev;
+	u16 type = res->type;
+	struct rtable *rth;
+	bool do_cache;
+
+	in_dev = __in_dev_get_rcu(dev_out);
+	if (!in_dev)
+		return ERR_PTR(-EINVAL);
+
+	if (likely(!IN_DEV_ROUTE_LOCALNET(in_dev)))
+		if (ipv4_is_loopback(fl4->saddr) &&
+		    !(dev_out->flags & IFF_LOOPBACK) &&
+		    !netif_is_l3_master(dev_out))
+			return ERR_PTR(-EINVAL);
+
+	if (ipv4_is_lbcast(fl4->daddr))
+		type = RTN_BROADCAST;
+	else if (ipv4_is_multicast(fl4->daddr))
+		type = RTN_MULTICAST;
+	else if (ipv4_is_zeronet(fl4->daddr))
+		return ERR_PTR(-EINVAL);
+
+	if (dev_out->flags & IFF_LOOPBACK)
+		flags |= RTCF_LOCAL;
+
+	do_cache = true;
+	if (type == RTN_BROADCAST) {
+		flags |= RTCF_BROADCAST | RTCF_LOCAL;
+		fi = NULL;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	} else if (type == RTN_MULTICAST) {
 		flags |= RTCF_MULTICAST | RTCF_LOCAL;
 		if (!ip_check_mc_rcu(in_dev, fl4->daddr, fl4->saddr,

@@ -102,6 +102,7 @@ static int gbphy_dev_uevent(const struct device *dev, struct kobj_uevent_env *en
 }
 
 static const struct gbphy_device_id *
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 gbphy_dev_match_id(const struct gbphy_device *gbphy_dev,
 		   const struct gbphy_driver *gbphy_drv)
 {
@@ -120,6 +121,27 @@ gbphy_dev_match_id(const struct gbphy_device *gbphy_dev,
 static int gbphy_dev_match(struct device *dev, const struct device_driver *drv)
 {
 	const struct gbphy_driver *gbphy_drv = to_gbphy_driver(drv);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+gbphy_dev_match_id(struct gbphy_device *gbphy_dev,
+		   struct gbphy_driver *gbphy_drv)
+{
+	const struct gbphy_device_id *id = gbphy_drv->id_table;
+
+	if (!id)
+		return NULL;
+
+	for (; id->protocol_id; id++)
+		if (id->protocol_id == gbphy_dev->cport_desc->protocol_id)
+			return id;
+
+	return NULL;
+}
+
+static int gbphy_dev_match(struct device *dev, const struct device_driver *drv)
+{
+	struct gbphy_driver *gbphy_drv = to_gbphy_driver(drv);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	struct gbphy_device *gbphy_dev = to_gbphy_dev(dev);
 	const struct gbphy_device_id *id;
 

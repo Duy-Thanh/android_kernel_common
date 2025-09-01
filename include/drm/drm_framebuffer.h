@@ -23,6 +23,7 @@
 #ifndef __DRM_FRAMEBUFFER_H__
 #define __DRM_FRAMEBUFFER_H__
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/bits.h>
 #include <linux/ctype.h>
 #include <linux/list.h>
@@ -195,6 +196,174 @@ struct drm_framebuffer {
 	 * @internal_flags: Framebuffer flags like DRM_FRAMEBUFFER_HAS_HANDLE_REF.
 	 */
 	unsigned int internal_flags;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/ctype.h>
+#include <linux/list.h>
+#include <linux/sched.h>
+
+#include <drm/drm_fourcc.h>
+#include <drm/drm_mode_object.h>
+
+struct drm_clip_rect;
+struct drm_device;
+struct drm_file;
+struct drm_framebuffer;
+struct drm_gem_object;
+
+/**
+ * struct drm_framebuffer_funcs - framebuffer hooks
+ */
+struct drm_framebuffer_funcs {
+	/**
+	 * @destroy:
+	 *
+	 * Clean up framebuffer resources, specifically also unreference the
+	 * backing storage. The core guarantees to call this function for every
+	 * framebuffer successfully created by calling
+	 * &drm_mode_config_funcs.fb_create. Drivers must also call
+	 * drm_framebuffer_cleanup() to release DRM core resources for this
+	 * framebuffer.
+	 */
+	void (*destroy)(struct drm_framebuffer *framebuffer);
+
+	/**
+	 * @create_handle:
+	 *
+	 * Create a buffer handle in the driver-specific buffer manager (either
+	 * GEM or TTM) valid for the passed-in &struct drm_file. This is used by
+	 * the core to implement the GETFB IOCTL, which returns (for
+	 * sufficiently priviledged user) also a native buffer handle. This can
+	 * be used for seamless transitions between modesetting clients by
+	 * copying the current screen contents to a private buffer and blending
+	 * between that and the new contents.
+	 *
+	 * GEM based drivers should call drm_gem_handle_create() to create the
+	 * handle.
+	 *
+	 * RETURNS:
+	 *
+	 * 0 on success or a negative error code on failure.
+	 */
+	int (*create_handle)(struct drm_framebuffer *fb,
+			     struct drm_file *file_priv,
+			     unsigned int *handle);
+	/**
+	 * @dirty:
+	 *
+	 * Optional callback for the dirty fb IOCTL.
+	 *
+	 * Userspace can notify the driver via this callback that an area of the
+	 * framebuffer has changed and should be flushed to the display
+	 * hardware. This can also be used internally, e.g. by the fbdev
+	 * emulation, though that's not the case currently.
+	 *
+	 * See documentation in drm_mode.h for the struct drm_mode_fb_dirty_cmd
+	 * for more information as all the semantics and arguments have a one to
+	 * one mapping on this function.
+	 *
+	 * Atomic drivers should use drm_atomic_helper_dirtyfb() to implement
+	 * this hook.
+	 *
+	 * RETURNS:
+	 *
+	 * 0 on success or a negative error code on failure.
+	 */
+	int (*dirty)(struct drm_framebuffer *framebuffer,
+		     struct drm_file *file_priv, unsigned flags,
+		     unsigned color, struct drm_clip_rect *clips,
+		     unsigned num_clips);
+};
+
+/**
+ * struct drm_framebuffer - frame buffer object
+ *
+ * Note that the fb is refcounted for the benefit of driver internals,
+ * for example some hw, disabling a CRTC/plane is asynchronous, and
+ * scanout does not actually complete until the next vblank.  So some
+ * cleanup (like releasing the reference(s) on the backing GEM bo(s))
+ * should be deferred.  In cases like this, the driver would like to
+ * hold a ref to the fb even though it has already been removed from
+ * userspace perspective. See drm_framebuffer_get() and
+ * drm_framebuffer_put().
+ *
+ * The refcount is stored inside the mode object @base.
+ */
+struct drm_framebuffer {
+	/**
+	 * @dev: DRM device this framebuffer belongs to
+	 */
+	struct drm_device *dev;
+	/**
+	 * @head: Place on the &drm_mode_config.fb_list, access protected by
+	 * &drm_mode_config.fb_lock.
+	 */
+	struct list_head head;
+
+	/**
+	 * @base: base modeset object structure, contains the reference count.
+	 */
+	struct drm_mode_object base;
+
+	/**
+	 * @comm: Name of the process allocating the fb, used for fb dumping.
+	 */
+	char comm[TASK_COMM_LEN];
+
+	/**
+	 * @format: framebuffer format information
+	 */
+	const struct drm_format_info *format;
+	/**
+	 * @funcs: framebuffer vfunc table
+	 */
+	const struct drm_framebuffer_funcs *funcs;
+	/**
+	 * @pitches: Line stride per buffer. For userspace created object this
+	 * is copied from drm_mode_fb_cmd2.
+	 */
+	unsigned int pitches[DRM_FORMAT_MAX_PLANES];
+	/**
+	 * @offsets: Offset from buffer start to the actual pixel data in bytes,
+	 * per buffer. For userspace created object this is copied from
+	 * drm_mode_fb_cmd2.
+	 *
+	 * Note that this is a linear offset and does not take into account
+	 * tiling or buffer layout per @modifier. It is meant to be used when
+	 * the actual pixel data for this framebuffer plane starts at an offset,
+	 * e.g. when multiple planes are allocated within the same backing
+	 * storage buffer object. For tiled layouts this generally means its
+	 * @offsets must at least be tile-size aligned, but hardware often has
+	 * stricter requirements.
+	 *
+	 * This should not be used to specifiy x/y pixel offsets into the buffer
+	 * data (even for linear buffers). Specifying an x/y pixel offset is
+	 * instead done through the source rectangle in &struct drm_plane_state.
+	 */
+	unsigned int offsets[DRM_FORMAT_MAX_PLANES];
+	/**
+	 * @modifier: Data layout modifier. This is used to describe
+	 * tiling, or also special layouts (like compression) of auxiliary
+	 * buffers. For userspace created object this is copied from
+	 * drm_mode_fb_cmd2.
+	 */
+	uint64_t modifier;
+	/**
+	 * @width: Logical width of the visible area of the framebuffer, in
+	 * pixels.
+	 */
+	unsigned int width;
+	/**
+	 * @height: Logical height of the visible area of the framebuffer, in
+	 * pixels.
+	 */
+	unsigned int height;
+	/**
+	 * @flags: Framebuffer flags like DRM_MODE_FB_INTERLACED or
+	 * DRM_MODE_FB_MODIFIERS.
+	 */
+	int flags;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	/**
 	 * @filp_head: Placed on &drm_file.fbs, protected by &drm_file.fbs_lock.
 	 */

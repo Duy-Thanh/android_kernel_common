@@ -568,6 +568,7 @@ static const struct snd_pcm_hardware catpt_pcm_hardware = {
 				  SNDRV_PCM_INFO_RESUME |
 				  SNDRV_PCM_INFO_NO_PERIOD_WAKEUP,
 	.formats		= SNDRV_PCM_FMTBIT_S16_LE |
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 				  SNDRV_PCM_FMTBIT_S32_LE,
 	.subformats		= SNDRV_PCM_SUBFMTBIT_MSBITS_24 |
 				  SNDRV_PCM_SUBFMTBIT_MSBITS_MAX,
@@ -754,6 +755,184 @@ static struct snd_soc_dai_driver dai_drivers[] = {
 		.formats = SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S32_LE,
 		.subformats = SNDRV_PCM_SUBFMTBIT_MSBITS_24 |
 			      SNDRV_PCM_SUBFMTBIT_MSBITS_MAX,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+				  SNDRV_PCM_FMTBIT_S24_LE |
+				  SNDRV_PCM_FMTBIT_S32_LE,
+	.period_bytes_min	= PAGE_SIZE,
+	.period_bytes_max	= CATPT_BUFFER_MAX_SIZE / CATPT_PCM_PERIODS_MIN,
+	.periods_min		= CATPT_PCM_PERIODS_MIN,
+	.periods_max		= CATPT_PCM_PERIODS_MAX,
+	.buffer_bytes_max	= CATPT_BUFFER_MAX_SIZE,
+};
+
+static int catpt_component_pcm_construct(struct snd_soc_component *component,
+					 struct snd_soc_pcm_runtime *rtm)
+{
+	struct catpt_dev *cdev = dev_get_drvdata(component->dev);
+
+	snd_pcm_set_managed_buffer_all(rtm->pcm, SNDRV_DMA_TYPE_DEV_SG,
+				       cdev->dev,
+				       catpt_pcm_hardware.buffer_bytes_max,
+				       catpt_pcm_hardware.buffer_bytes_max);
+
+	return 0;
+}
+
+static int catpt_component_open(struct snd_soc_component *component,
+				struct snd_pcm_substream *substream)
+{
+	struct snd_soc_pcm_runtime *rtm = snd_soc_substream_to_rtd(substream);
+
+	if (!rtm->dai_link->no_pcm)
+		snd_soc_set_runtime_hwparams(substream, &catpt_pcm_hardware);
+	return 0;
+}
+
+static snd_pcm_uframes_t
+catpt_component_pointer(struct snd_soc_component *component,
+			struct snd_pcm_substream *substream)
+{
+	struct snd_soc_pcm_runtime *rtm = snd_soc_substream_to_rtd(substream);
+	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtm, 0);
+	struct catpt_stream_runtime *stream;
+	struct catpt_dev *cdev = dev_get_drvdata(component->dev);
+	u32 pos;
+
+	if (rtm->dai_link->no_pcm)
+		return 0;
+
+	stream = snd_soc_dai_get_dma_data(cpu_dai, substream);
+	pos = catpt_stream_read_position(cdev, stream);
+
+	return bytes_to_frames(substream->runtime, pos);
+}
+
+static const struct snd_soc_dai_ops catpt_fe_dai_ops = {
+	.startup = catpt_dai_startup,
+	.shutdown = catpt_dai_shutdown,
+	.hw_params = catpt_dai_hw_params,
+	.hw_free = catpt_dai_hw_free,
+	.prepare = catpt_dai_prepare,
+	.trigger = catpt_dai_trigger,
+};
+
+static int catpt_dai_pcm_new(struct snd_soc_pcm_runtime *rtm,
+			     struct snd_soc_dai *dai)
+{
+	struct snd_soc_dai *codec_dai = snd_soc_rtd_to_codec(rtm, 0);
+	struct catpt_ssp_device_format devfmt;
+	struct catpt_dev *cdev = dev_get_drvdata(dai->dev);
+	int ret;
+
+	devfmt.iface = dai->driver->id;
+	devfmt.channels = codec_dai->driver->capture.channels_max;
+
+	switch (devfmt.iface) {
+	case CATPT_SSP_IFACE_0:
+		devfmt.mclk = CATPT_MCLK_FREQ_24_MHZ;
+
+		switch (devfmt.channels) {
+		case 4:
+			devfmt.mode = CATPT_SSP_MODE_TDM_PROVIDER;
+			devfmt.clock_divider = 4;
+			break;
+		case 2:
+		default:
+			devfmt.mode = CATPT_SSP_MODE_I2S_PROVIDER;
+			devfmt.clock_divider = 9;
+			break;
+		}
+		break;
+
+	case CATPT_SSP_IFACE_1:
+		devfmt.mclk = CATPT_MCLK_OFF;
+		devfmt.mode = CATPT_SSP_MODE_I2S_CONSUMER;
+		devfmt.clock_divider = 0;
+		break;
+	}
+
+	/* see if this is a new configuration */
+	if (!memcmp(&cdev->devfmt[devfmt.iface], &devfmt, sizeof(devfmt)))
+		return 0;
+
+	ret = pm_runtime_resume_and_get(cdev->dev);
+	if (ret < 0 && ret != -EACCES)
+		return ret;
+
+	ret = catpt_ipc_set_device_format(cdev, &devfmt);
+
+	pm_runtime_mark_last_busy(cdev->dev);
+	pm_runtime_put_autosuspend(cdev->dev);
+
+	if (ret)
+		return CATPT_IPC_ERROR(ret);
+
+	/* store device format set for given SSP */
+	memcpy(&cdev->devfmt[devfmt.iface], &devfmt, sizeof(devfmt));
+	return 0;
+}
+
+static const struct snd_soc_dai_ops catpt_dai_ops = {
+	.pcm_new = catpt_dai_pcm_new,
+};
+
+static struct snd_soc_dai_driver dai_drivers[] = {
+/* FE DAIs */
+{
+	.name  = "System Pin",
+	.id = CATPT_STRM_TYPE_SYSTEM,
+	.ops = &catpt_fe_dai_ops,
+	.playback = {
+		.stream_name = "System Playback",
+		.channels_min = 2,
+		.channels_max = 2,
+		.rates = SNDRV_PCM_RATE_48000,
+		.formats = SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S24_LE,
+	},
+	.capture = {
+		.stream_name = "Analog Capture",
+		.channels_min = 2,
+		.channels_max = 4,
+		.rates = SNDRV_PCM_RATE_48000,
+		.formats = SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S24_LE,
+	},
+},
+{
+	.name  = "Offload0 Pin",
+	.id = CATPT_STRM_TYPE_RENDER,
+	.ops = &catpt_fe_dai_ops,
+	.playback = {
+		.stream_name = "Offload0 Playback",
+		.channels_min = 2,
+		.channels_max = 2,
+		.rates = SNDRV_PCM_RATE_8000_192000,
+		.formats = SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S24_LE,
+	},
+},
+{
+	.name  = "Offload1 Pin",
+	.id = CATPT_STRM_TYPE_RENDER,
+	.ops = &catpt_fe_dai_ops,
+	.playback = {
+		.stream_name = "Offload1 Playback",
+		.channels_min = 2,
+		.channels_max = 2,
+		.rates = SNDRV_PCM_RATE_8000_192000,
+		.formats = SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S24_LE,
+	},
+},
+{
+	.name  = "Loopback Pin",
+	.id = CATPT_STRM_TYPE_LOOPBACK,
+	.ops = &catpt_fe_dai_ops,
+	.capture = {
+		.stream_name = "Loopback Capture",
+		.channels_min = 2,
+		.channels_max = 2,
+		.rates = SNDRV_PCM_RATE_48000,
+		.formats = SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S24_LE,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	},
 },
 {

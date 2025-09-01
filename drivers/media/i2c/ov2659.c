@@ -1469,6 +1469,7 @@ static int ov2659_probe(struct i2c_client *client)
 				     V4L2_CID_TEST_PATTERN,
 				     ARRAY_SIZE(ov2659_test_pattern_menu) - 1,
 				     0, 0, ov2659_test_pattern_menu);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 	if (ov2659->ctrls.error) {
 		dev_err(&client->dev, "%s: control initialization error %d\n",
@@ -1478,6 +1479,17 @@ static int ov2659_probe(struct i2c_client *client)
 	}
 
 	ov2659->sd.ctrl_handler = &ov2659->ctrls;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ov2659->sd.ctrl_handler = &ov2659->ctrls;
+
+	if (ov2659->ctrls.error) {
+		dev_err(&client->dev, "%s: control initialization error %d\n",
+			__func__, ov2659->ctrls.error);
+		return  ov2659->ctrls.error;
+	}
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	sd = &ov2659->sd;
 	client->flags |= I2C_CLIENT_SCCB;
 

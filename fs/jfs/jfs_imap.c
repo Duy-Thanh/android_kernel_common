@@ -3029,6 +3029,7 @@ static void duplicateIXtree(struct super_block *sb, s64 blkno,
  *
  * RETURN VALUES:
  *	0	- success
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  *	-EINVAL	- unexpected inode type
  */
 static int copy_from_dinode(struct dinode * dip, struct inode *ip)
@@ -3046,6 +3047,17 @@ static int copy_from_dinode(struct dinode * dip, struct inode *ip)
 	}
 
 	jfs_ip->fileset = fileset;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ *	-ENOMEM	- insufficient memory
+ */
+static int copy_from_dinode(struct dinode * dip, struct inode *ip)
+{
+	struct jfs_inode_info *jfs_ip = JFS_IP(ip);
+	struct jfs_sb_info *sbi = JFS_SBI(ip->i_sb);
+
+	jfs_ip->fileset = le32_to_cpu(dip->di_fileset);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	jfs_ip->mode2 = le32_to_cpu(dip->di_mode);
 	jfs_set_inode_flags(ip);
 

@@ -317,6 +317,7 @@ pvr_power_device_idle(struct device *dev)
 	return pvr_power_is_idle(pvr_dev) ? 0 : -EBUSY;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int
 pvr_power_clear_error(struct pvr_device *pvr_dev)
 {
@@ -427,6 +428,62 @@ pvr_power_reset(struct pvr_device *pvr_dev, bool hard_reset)
 					goto err_device_lost;
 
 				err = pvr_power_device_resume(from_pvr_device(pvr_dev)->dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/**
+ * pvr_power_reset() - Reset the GPU
+ * @pvr_dev: Device pointer
+ * @hard_reset: %true for hard reset, %false for soft reset
+ *
+ * If @hard_reset is %false and the FW processor fails to respond during the reset process, this
+ * function will attempt a hard reset.
+ *
+ * If a hard reset fails then the GPU device is reported as lost.
+ *
+ * Returns:
+ *  * 0 on success, or
+ *  * Any error code returned by pvr_power_get, pvr_power_fw_disable or pvr_power_fw_enable().
+ */
+int
+pvr_power_reset(struct pvr_device *pvr_dev, bool hard_reset)
+{
+	bool queues_disabled = false;
+	int err;
+
+	/*
+	 * Take a power reference during the reset. This should prevent any interference with the
+	 * power state during reset.
+	 */
+	WARN_ON(pvr_power_get(pvr_dev));
+
+	down_write(&pvr_dev->reset_sem);
+
+	if (pvr_dev->lost) {
+		err = -EIO;
+		goto err_up_write;
+	}
+
+	/* Disable IRQs for the duration of the reset. */
+	disable_irq(pvr_dev->irq);
+
+	do {
+		if (hard_reset) {
+			pvr_queue_device_pre_reset(pvr_dev);
+			queues_disabled = true;
+		}
+
+		err = pvr_power_fw_disable(pvr_dev, hard_reset);
+		if (!err) {
+			if (hard_reset) {
+				pvr_dev->fw_dev.booted = false;
+				WARN_ON(pm_runtime_force_suspend(from_pvr_device(pvr_dev)->dev));
+
+				err = pvr_fw_hard_reset(pvr_dev);
+				if (err)
+					goto err_device_lost;
+
+				err = pm_runtime_force_resume(from_pvr_device(pvr_dev)->dev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				pvr_dev->fw_dev.booted = true;
 				if (err)
 					goto err_device_lost;

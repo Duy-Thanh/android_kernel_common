@@ -123,6 +123,12 @@ DECLARE_RESTRICTED_HOOK(android_rvh_bpf_skb_load_bytes,
 	TP_PROTO(const struct sk_buff *skb, u32 offset, void *to, u32 len,
 		int *handled, int *err),
 	TP_ARGS(skb, offset, to, len, handled, err), 1);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_tcp_rcv_spurious_retrans,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk), 1);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 DECLARE_HOOK(android_vh_tcp_rtt_estimator,
 	TP_PROTO(struct sock *sk, long mrtt_us), TP_ARGS(sk, mrtt_us));
 DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,

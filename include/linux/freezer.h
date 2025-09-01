@@ -47,6 +47,7 @@ extern int freeze_processes(void);
 extern int freeze_kernel_threads(void);
 extern void thaw_processes(void);
 extern void thaw_kernel_threads(void);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 extern void thaw_process(struct task_struct *p);
 
 static inline bool try_to_freeze(void)
@@ -82,6 +83,42 @@ static inline int freeze_kernel_threads(void) { return -ENOSYS; }
 static inline void thaw_processes(void) {}
 static inline void thaw_kernel_threads(void) {}
 static inline void thaw_process(struct task_struct *p) {}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+static inline bool try_to_freeze(void)
+{
+	might_sleep();
+	if (likely(!freezing(current)))
+		return false;
+	if (!(current->flags & PF_NOFREEZE))
+		debug_check_no_locks_held();
+	return __refrigerator(false);
+}
+
+extern bool freeze_task(struct task_struct *p);
+extern bool set_freezable(void);
+
+#ifdef CONFIG_CGROUP_FREEZER
+extern bool cgroup_freezing(struct task_struct *task);
+#else /* !CONFIG_CGROUP_FREEZER */
+static inline bool cgroup_freezing(struct task_struct *task)
+{
+	return false;
+}
+#endif /* !CONFIG_CGROUP_FREEZER */
+
+#else /* !CONFIG_FREEZER */
+static inline bool frozen(struct task_struct *p) { return false; }
+static inline bool freezing(struct task_struct *p) { return false; }
+static inline void __thaw_task(struct task_struct *t) {}
+
+static inline bool __refrigerator(bool check_kthr_stop) { return false; }
+static inline int freeze_processes(void) { return -ENOSYS; }
+static inline int freeze_kernel_threads(void) { return -ENOSYS; }
+static inline void thaw_processes(void) {}
+static inline void thaw_kernel_threads(void) {}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 static inline bool try_to_freeze(void) { return false; }
 

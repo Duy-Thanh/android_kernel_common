@@ -244,6 +244,7 @@ static int ntfs_rename(struct mnt_idmap *idmap, struct inode *dir,
 	struct ntfs_inode *ni = ntfs_i(inode);
 	struct inode *new_inode = d_inode(new_dentry);
 	struct NTFS_DE *de, *new_de;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool is_same;
 	/*
 	 * de		- memory of PATH_MAX bytes:
@@ -315,6 +316,84 @@ static int ntfs_rename(struct mnt_idmap *idmap, struct inode *dir,
 
 	err = ni_rename(dir_ni, new_dir_ni, ni, de, new_de);
 	if (!err) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool is_same, is_bad;
+	/*
+	 * de		- memory of PATH_MAX bytes:
+	 * [0-1024)	- original name (dentry->d_name)
+	 * [1024-2048)	- paired to original name, usually DOS variant of dentry->d_name
+	 * [2048-3072)	- new name (new_dentry->d_name)
+	 */
+	static_assert(SIZEOF_ATTRIBUTE_FILENAME_MAX + SIZEOF_RESIDENT < 1024);
+	static_assert(SIZEOF_ATTRIBUTE_FILENAME_MAX + sizeof(struct NTFS_DE) <
+		      1024);
+	static_assert(PATH_MAX >= 4 * 1024);
+
+	if (unlikely(ntfs3_forced_shutdown(sb)))
+		return -EIO;
+
+	if (flags & ~RENAME_NOREPLACE)
+		return -EINVAL;
+
+	is_same = dentry->d_name.len == new_dentry->d_name.len &&
+		  !memcmp(dentry->d_name.name, new_dentry->d_name.name,
+			  dentry->d_name.len);
+
+	if (is_same && dir == new_dir) {
+		/* Nothing to do. */
+		return 0;
+	}
+
+	if (ntfs_is_meta_file(sbi, inode->i_ino)) {
+		/* Should we print an error? */
+		return -EINVAL;
+	}
+
+	if (new_inode) {
+		/* Target name exists. Unlink it. */
+		dget(new_dentry);
+		ni_lock_dir(new_dir_ni);
+		err = ntfs_unlink_inode(new_dir, new_dentry);
+		ni_unlock(new_dir_ni);
+		dput(new_dentry);
+		if (err)
+			return err;
+	}
+
+	/* Allocate PATH_MAX bytes. */
+	de = __getname();
+	if (!de)
+		return -ENOMEM;
+
+	/* Translate dentry->d_name into unicode form. */
+	err = fill_name_de(sbi, de, &dentry->d_name, NULL);
+	if (err < 0)
+		goto out;
+
+	if (is_same) {
+		/* Reuse 'de'. */
+		new_de = de;
+	} else {
+		/* Translate new_dentry->d_name into unicode form. */
+		new_de = Add2Ptr(de, 2048);
+		err = fill_name_de(sbi, new_de, &new_dentry->d_name, NULL);
+		if (err < 0)
+			goto out;
+	}
+
+	ni_lock_dir(dir_ni);
+	ni_lock(ni);
+	if (dir_ni != new_dir_ni)
+		ni_lock_dir2(new_dir_ni);
+
+	is_bad = false;
+	err = ni_rename(dir_ni, new_dir_ni, ni, de, new_de, &is_bad);
+	if (is_bad) {
+		/* Restore after failed rename failed too. */
+		_ntfs_bad_inode(inode);
+	} else if (!err) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		simple_rename_timestamp(dir, dentry, new_dir, new_dentry);
 		mark_inode_dirty(inode);
 		mark_inode_dirty(dir);

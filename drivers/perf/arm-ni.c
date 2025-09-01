@@ -545,6 +545,7 @@ static int arm_ni_init_cd(struct arm_ni *ni, struct arm_ni_node *node, u64 res_s
 		return err;
 
 	cd->cpu = cpumask_local_spread(0, dev_to_node(ni->dev));
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	irq_set_affinity(cd->irq, cpumask_of(cd->cpu));
 
 	cd->pmu = (struct pmu) {
@@ -711,6 +712,172 @@ static struct platform_driver arm_ni_driver = {
 		.of_match_table = of_match_ptr(arm_ni_of_match),
 		.acpi_match_table = ACPI_PTR(arm_ni_acpi_match),
 		.suppress_bind_attrs = true,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	cd->pmu = (struct pmu) {
+		.module = THIS_MODULE,
+		.parent = ni->dev,
+		.attr_groups = arm_ni_attr_groups,
+		.capabilities = PERF_PMU_CAP_NO_EXCLUDE,
+		.task_ctx_nr = perf_invalid_context,
+		.pmu_enable = arm_ni_pmu_enable,
+		.pmu_disable = arm_ni_pmu_disable,
+		.event_init = arm_ni_event_init,
+		.add = arm_ni_event_add,
+		.del = arm_ni_event_del,
+		.start = arm_ni_event_start,
+		.stop = arm_ni_event_stop,
+		.read = arm_ni_event_read,
+	};
+
+	name = devm_kasprintf(ni->dev, GFP_KERNEL, "arm_ni_%d_cd_%d", ni->id, cd->id);
+	if (!name)
+		return -ENOMEM;
+
+	err = cpuhp_state_add_instance_nocalls(arm_ni_hp_state, &cd->cpuhp_node);
+	if (err)
+		return err;
+
+	err = perf_pmu_register(&cd->pmu, name, -1);
+	if (err)
+		cpuhp_state_remove_instance_nocalls(arm_ni_hp_state, &cd->cpuhp_node);
+
+	return err;
+}
+
+static void arm_ni_remove(struct platform_device *pdev)
+{
+	struct arm_ni *ni = platform_get_drvdata(pdev);
+
+	for (int i = 0; i < ni->num_cds; i++) {
+		struct arm_ni_cd *cd = ni->cds + i;
+
+		if (!cd->pmu_base)
+			continue;
+
+		writel_relaxed(0, cd->pmu_base + NI_PMCR);
+		writel_relaxed(U32_MAX, cd->pmu_base + NI_PMINTENCLR);
+		perf_pmu_unregister(&cd->pmu);
+		cpuhp_state_remove_instance_nocalls(arm_ni_hp_state, &cd->cpuhp_node);
+	}
+}
+
+static void arm_ni_probe_domain(void __iomem *base, struct arm_ni_node *node)
+{
+	u32 reg = readl_relaxed(base + NI_NODE_TYPE);
+
+	node->base = base;
+	node->type = FIELD_GET(NI_NODE_TYPE_NODE_TYPE, reg);
+	node->id = FIELD_GET(NI_NODE_TYPE_NODE_ID, reg);
+	node->num_components = readl_relaxed(base + NI_CHILD_NODE_INFO);
+}
+
+static int arm_ni_probe(struct platform_device *pdev)
+{
+	struct arm_ni_node cfg, vd, pd, cd;
+	struct arm_ni *ni;
+	struct resource *res;
+	void __iomem *base;
+	static atomic_t id;
+	int num_cds;
+	u32 reg, part;
+
+	/*
+	 * We want to map the whole configuration space for ease of discovery,
+	 * but the PMU pages are the only ones for which we can honestly claim
+	 * exclusive ownership, so we'll request them explicitly once found.
+	 */
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	base = devm_ioremap(&pdev->dev, res->start, resource_size(res));
+	if (!base)
+		return -ENOMEM;
+
+	arm_ni_probe_domain(base, &cfg);
+	if (cfg.type != NI_GLOBAL)
+		return -ENODEV;
+
+	reg = readl_relaxed(cfg.base + NI_PERIPHERAL_ID0);
+	part = FIELD_GET(NI_PIDR0_PART_7_0, reg);
+	reg = readl_relaxed(cfg.base + NI_PERIPHERAL_ID1);
+	part |= FIELD_GET(NI_PIDR1_PART_11_8, reg) << 8;
+
+	switch (part) {
+	case PART_NI_700:
+	case PART_NI_710AE:
+		break;
+	default:
+		dev_WARN(&pdev->dev, "Unknown part number: 0x%03x, this may go badly\n", part);
+		break;
+	}
+
+	num_cds = 0;
+	for (int v = 0; v < cfg.num_components; v++) {
+		reg = readl_relaxed(cfg.base + NI_CHILD_PTR(v));
+		arm_ni_probe_domain(base + reg, &vd);
+		for (int p = 0; p < vd.num_components; p++) {
+			reg = readl_relaxed(vd.base + NI_CHILD_PTR(p));
+			arm_ni_probe_domain(base + reg, &pd);
+			num_cds += pd.num_components;
+		}
+	}
+
+	ni = devm_kzalloc(&pdev->dev, struct_size(ni, cds, num_cds), GFP_KERNEL);
+	if (!ni)
+		return -ENOMEM;
+
+	ni->dev = &pdev->dev;
+	ni->base = base;
+	ni->num_cds = num_cds;
+	ni->part = part;
+	ni->id = atomic_fetch_inc(&id);
+	platform_set_drvdata(pdev, ni);
+
+	for (int v = 0; v < cfg.num_components; v++) {
+		reg = readl_relaxed(cfg.base + NI_CHILD_PTR(v));
+		arm_ni_probe_domain(base + reg, &vd);
+		for (int p = 0; p < vd.num_components; p++) {
+			reg = readl_relaxed(vd.base + NI_CHILD_PTR(p));
+			arm_ni_probe_domain(base + reg, &pd);
+			for (int c = 0; c < pd.num_components; c++) {
+				int ret;
+
+				reg = readl_relaxed(pd.base + NI_CHILD_PTR(c));
+				arm_ni_probe_domain(base + reg, &cd);
+				ret = arm_ni_init_cd(ni, &cd, res->start);
+				if (ret) {
+					ni->cds[cd.id].pmu_base = NULL;
+					arm_ni_remove(pdev);
+					return ret;
+				}
+			}
+		}
+	}
+
+	return 0;
+}
+
+#ifdef CONFIG_OF
+static const struct of_device_id arm_ni_of_match[] = {
+	{ .compatible = "arm,ni-700" },
+	{}
+};
+MODULE_DEVICE_TABLE(of, arm_ni_of_match);
+#endif
+
+#ifdef CONFIG_ACPI
+static const struct acpi_device_id arm_ni_acpi_match[] = {
+	{ "ARMHCB70" },
+	{}
+};
+MODULE_DEVICE_TABLE(acpi, arm_ni_acpi_match);
+#endif
+
+static struct platform_driver arm_ni_driver = {
+	.driver = {
+		.name = "arm-ni",
+		.of_match_table = of_match_ptr(arm_ni_of_match),
+		.acpi_match_table = ACPI_PTR(arm_ni_acpi_match),
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	},
 	.probe = arm_ni_probe,
 	.remove = arm_ni_remove,

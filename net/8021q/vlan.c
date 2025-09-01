@@ -358,6 +358,7 @@ static int __vlan_device_event(struct net_device *dev, unsigned long event)
 	return err;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void vlan_vid0_add(struct net_device *dev)
 {
 	struct vlan_info *vlan_info;
@@ -412,6 +413,39 @@ static int vlan_device_event(struct notifier_block *unused, unsigned long event,
 		vlan_vid0_add(dev);
 	else if (event == NETDEV_DOWN)
 		vlan_vid0_del(dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int vlan_device_event(struct notifier_block *unused, unsigned long event,
+			     void *ptr)
+{
+	struct netlink_ext_ack *extack = netdev_notifier_info_to_extack(ptr);
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+	struct vlan_group *grp;
+	struct vlan_info *vlan_info;
+	int i, flgs;
+	struct net_device *vlandev;
+	struct vlan_dev_priv *vlan;
+	bool last = false;
+	LIST_HEAD(list);
+	int err;
+
+	if (is_vlan_dev(dev)) {
+		int err = __vlan_device_event(dev, event);
+
+		if (err)
+			return notifier_from_errno(err);
+	}
+
+	if ((event == NETDEV_UP) &&
+	    (dev->features & NETIF_F_HW_VLAN_CTAG_FILTER)) {
+		pr_info("adding VLAN 0 to HW filter on device %s\n",
+			dev->name);
+		vlan_vid_add(dev, htons(ETH_P_8021Q), 0);
+	}
+	if (event == NETDEV_DOWN &&
+	    (dev->features & NETIF_F_HW_VLAN_CTAG_FILTER))
+		vlan_vid_del(dev, htons(ETH_P_8021Q), 0);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	vlan_info = rtnl_dereference(dev->vlan_info);
 	if (!vlan_info)

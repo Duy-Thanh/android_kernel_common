@@ -4808,6 +4808,7 @@ void br_multicast_set_query_intvl(struct net_bridge_mcast *brmctx,
 		intvl_jiffies = BR_MULTICAST_QUERY_INTVL_MIN;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (intvl_jiffies > BR_MULTICAST_QUERY_INTVL_MAX) {
 		br_info(brmctx->br,
 			"trying to set multicast query interval above maximum, setting to %lu (%ums)\n",
@@ -4838,6 +4839,23 @@ void br_multicast_set_startup_query_intvl(struct net_bridge_mcast *brmctx,
 			jiffies_to_clock_t(BR_MULTICAST_STARTUP_QUERY_INTVL_MAX),
 			jiffies_to_msecs(BR_MULTICAST_STARTUP_QUERY_INTVL_MAX));
 		intvl_jiffies = BR_MULTICAST_STARTUP_QUERY_INTVL_MAX;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	brmctx->multicast_query_interval = intvl_jiffies;
+}
+
+void br_multicast_set_startup_query_intvl(struct net_bridge_mcast *brmctx,
+					  unsigned long val)
+{
+	unsigned long intvl_jiffies = clock_t_to_jiffies(val);
+
+	if (intvl_jiffies < BR_MULTICAST_STARTUP_QUERY_INTVL_MIN) {
+		br_info(brmctx->br,
+			"trying to set multicast startup query interval below minimum, setting to %lu (%ums)\n",
+			jiffies_to_clock_t(BR_MULTICAST_STARTUP_QUERY_INTVL_MIN),
+			jiffies_to_msecs(BR_MULTICAST_STARTUP_QUERY_INTVL_MIN));
+		intvl_jiffies = BR_MULTICAST_STARTUP_QUERY_INTVL_MIN;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	brmctx->multicast_startup_query_interval = intvl_jiffies;

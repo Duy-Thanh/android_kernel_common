@@ -183,6 +183,7 @@ static int debugfs_reconfigure(struct fs_context *fc)
 	struct debugfs_fs_info *sb_opts = sb->s_fs_info;
 	struct debugfs_fs_info *new_opts = fc->s_fs_info;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!new_opts)
 		return 0;
 
@@ -282,6 +283,99 @@ static int debugfs_get_tree(struct fs_context *fc)
 		return err;
 
 	return debugfs_reconfigure(fc);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	sync_filesystem(sb);
+
+	/* structure copy of new mount options to sb */
+	*sb_opts = *new_opts;
+	debugfs_apply_options_remount(sb);
+
+	return 0;
+}
+
+static int debugfs_show_options(struct seq_file *m, struct dentry *root)
+{
+	struct debugfs_fs_info *fsi = root->d_sb->s_fs_info;
+
+	if (!uid_eq(fsi->uid, GLOBAL_ROOT_UID))
+		seq_printf(m, ",uid=%u",
+			   from_kuid_munged(&init_user_ns, fsi->uid));
+	if (!gid_eq(fsi->gid, GLOBAL_ROOT_GID))
+		seq_printf(m, ",gid=%u",
+			   from_kgid_munged(&init_user_ns, fsi->gid));
+	if (fsi->mode != DEBUGFS_DEFAULT_MODE)
+		seq_printf(m, ",mode=%o", fsi->mode);
+
+	return 0;
+}
+
+static void debugfs_free_inode(struct inode *inode)
+{
+	if (S_ISLNK(inode->i_mode))
+		kfree(inode->i_link);
+	free_inode_nonrcu(inode);
+}
+
+static const struct super_operations debugfs_super_operations = {
+	.statfs		= simple_statfs,
+	.show_options	= debugfs_show_options,
+	.free_inode	= debugfs_free_inode,
+};
+
+static void debugfs_release_dentry(struct dentry *dentry)
+{
+	struct debugfs_fsdata *fsd = dentry->d_fsdata;
+
+	if ((unsigned long)fsd & DEBUGFS_FSDATA_IS_REAL_FOPS_BIT)
+		return;
+
+	/* check it wasn't a dir (no fsdata) or automount (no real_fops) */
+	if (fsd && fsd->real_fops) {
+		WARN_ON(!list_empty(&fsd->cancellations));
+		mutex_destroy(&fsd->cancellations_mtx);
+	}
+
+	kfree(fsd);
+}
+
+static struct vfsmount *debugfs_automount(struct path *path)
+{
+	struct debugfs_fsdata *fsd = path->dentry->d_fsdata;
+
+	return fsd->automount(path->dentry, d_inode(path->dentry)->i_private);
+}
+
+static const struct dentry_operations debugfs_dops = {
+	.d_delete = always_delete_dentry,
+	.d_release = debugfs_release_dentry,
+	.d_automount = debugfs_automount,
+};
+
+static int debugfs_fill_super(struct super_block *sb, struct fs_context *fc)
+{
+	static const struct tree_descr debug_files[] = {{""}};
+	int err;
+
+	err = simple_fill_super(sb, DEBUGFS_MAGIC, debug_files);
+	if (err)
+		return err;
+
+	sb->s_op = &debugfs_super_operations;
+	sb->s_d_op = &debugfs_dops;
+
+	debugfs_apply_options(sb);
+
+	return 0;
+}
+
+static int debugfs_get_tree(struct fs_context *fc)
+{
+	if (!(debugfs_allow & DEBUGFS_ALLOW_API))
+		return -EPERM;
+
+	return get_tree_single(fc, debugfs_fill_super);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static void debugfs_free_fc(struct fs_context *fc)

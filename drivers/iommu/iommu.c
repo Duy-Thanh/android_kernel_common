@@ -2705,6 +2705,7 @@ ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
 		phys_addr_t s_phys = sg_phys(sg);
 
 		if (len && s_phys != start + len) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			if (deferred_sg) {
 				ret = __iommu_add_sg(cookie_sg, iova + mapped, start, len);
 				/* Override mapped with the actual value and free the lists. */
@@ -2714,6 +2715,14 @@ ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
 				ret = iommu_map_nosync(domain, iova + mapped, start,
 						  len, prot, gfp);
 			}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			if (deferred_sg)
+				ret = __iommu_add_sg(cookie_sg, iova + mapped, start, len);
+			else
+				ret = iommu_map_nosync(domain, iova + mapped, start,
+						  len, prot, gfp);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			if (ret)
 				goto out_err;
 

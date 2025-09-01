@@ -530,6 +530,7 @@ static int epf_ntb_db_bar_init(struct epf_ntb *ntb)
 	struct device *dev = &ntb->epf->dev;
 	int ret;
 	struct pci_epf_bar *epf_bar;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	void *mw_addr;
 	enum pci_barno barno;
 	size_t size = sizeof(u32) * ntb->db_count;
@@ -701,6 +702,180 @@ static int epf_ntb_init_epc_bar(struct epf_ntb *ntb)
 		if (barno < 0) {
 			dev_err(dev, "Fail to get NTB function BAR\n");
 			return -ENOENT;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	void __iomem *mw_addr;
+	enum pci_barno barno;
+	size_t size = sizeof(u32) * ntb->db_count;
+
+	epc_features = pci_epc_get_features(ntb->epf->epc,
+					    ntb->epf->func_no,
+					    ntb->epf->vfunc_no);
+	barno = ntb->epf_ntb_bar[BAR_DB];
+
+	mw_addr = pci_epf_alloc_space(ntb->epf, size, barno, epc_features, 0);
+	if (!mw_addr) {
+		dev_err(dev, "Failed to allocate OB address\n");
+		return -ENOMEM;
+	}
+
+	ntb->epf_db = mw_addr;
+
+	epf_bar = &ntb->epf->bar[barno];
+
+	ret = pci_epc_set_bar(ntb->epf->epc, ntb->epf->func_no, ntb->epf->vfunc_no, epf_bar);
+	if (ret) {
+		dev_err(dev, "Doorbell BAR set failed\n");
+			goto err_alloc_peer_mem;
+	}
+	return ret;
+
+err_alloc_peer_mem:
+	pci_epf_free_space(ntb->epf, mw_addr, barno, 0);
+	return -1;
+}
+
+static void epf_ntb_mw_bar_clear(struct epf_ntb *ntb, int num_mws);
+
+/**
+ * epf_ntb_db_bar_clear() - Clear doorbell BAR and free memory
+ *   allocated in peer's outbound address space
+ * @ntb: NTB device that facilitates communication between HOST and VHOST
+ */
+static void epf_ntb_db_bar_clear(struct epf_ntb *ntb)
+{
+	enum pci_barno barno;
+
+	barno = ntb->epf_ntb_bar[BAR_DB];
+	pci_epf_free_space(ntb->epf, ntb->epf_db, barno, 0);
+	pci_epc_clear_bar(ntb->epf->epc,
+			  ntb->epf->func_no,
+			  ntb->epf->vfunc_no,
+			  &ntb->epf->bar[barno]);
+}
+
+/**
+ * epf_ntb_mw_bar_init() - Configure Memory window BARs
+ * @ntb: NTB device that facilitates communication between HOST and VHOST
+ *
+ * Returns: Zero for success, or an error code in case of failure
+ */
+static int epf_ntb_mw_bar_init(struct epf_ntb *ntb)
+{
+	int ret = 0;
+	int i;
+	u64 size;
+	enum pci_barno barno;
+	struct device *dev = &ntb->epf->dev;
+
+	for (i = 0; i < ntb->num_mws; i++) {
+		size = ntb->mws_size[i];
+		barno = ntb->epf_ntb_bar[BAR_MW0 + i];
+
+		ntb->epf->bar[barno].barno = barno;
+		ntb->epf->bar[barno].size = size;
+		ntb->epf->bar[barno].addr = NULL;
+		ntb->epf->bar[barno].phys_addr = 0;
+		ntb->epf->bar[barno].flags |= upper_32_bits(size) ?
+				PCI_BASE_ADDRESS_MEM_TYPE_64 :
+				PCI_BASE_ADDRESS_MEM_TYPE_32;
+
+		ret = pci_epc_set_bar(ntb->epf->epc,
+				      ntb->epf->func_no,
+				      ntb->epf->vfunc_no,
+				      &ntb->epf->bar[barno]);
+		if (ret) {
+			dev_err(dev, "MW set failed\n");
+			goto err_alloc_mem;
+		}
+
+		/* Allocate EPC outbound memory windows to vpci vntb device */
+		ntb->vpci_mw_addr[i] = pci_epc_mem_alloc_addr(ntb->epf->epc,
+							      &ntb->vpci_mw_phy[i],
+							      size);
+		if (!ntb->vpci_mw_addr[i]) {
+			ret = -ENOMEM;
+			dev_err(dev, "Failed to allocate source address\n");
+			goto err_set_bar;
+		}
+	}
+
+	return ret;
+
+err_set_bar:
+	pci_epc_clear_bar(ntb->epf->epc,
+			  ntb->epf->func_no,
+			  ntb->epf->vfunc_no,
+			  &ntb->epf->bar[barno]);
+err_alloc_mem:
+	epf_ntb_mw_bar_clear(ntb, i);
+	return ret;
+}
+
+/**
+ * epf_ntb_mw_bar_clear() - Clear Memory window BARs
+ * @ntb: NTB device that facilitates communication between HOST and VHOST
+ * @num_mws: the number of Memory window BARs that to be cleared
+ */
+static void epf_ntb_mw_bar_clear(struct epf_ntb *ntb, int num_mws)
+{
+	enum pci_barno barno;
+	int i;
+
+	for (i = 0; i < num_mws; i++) {
+		barno = ntb->epf_ntb_bar[BAR_MW0 + i];
+		pci_epc_clear_bar(ntb->epf->epc,
+				  ntb->epf->func_no,
+				  ntb->epf->vfunc_no,
+				  &ntb->epf->bar[barno]);
+
+		pci_epc_mem_free_addr(ntb->epf->epc,
+				      ntb->vpci_mw_phy[i],
+				      ntb->vpci_mw_addr[i],
+				      ntb->mws_size[i]);
+	}
+}
+
+/**
+ * epf_ntb_epc_destroy() - Cleanup NTB EPC interface
+ * @ntb: NTB device that facilitates communication between HOST and VHOST
+ *
+ * Wrapper for epf_ntb_epc_destroy_interface() to cleanup all the NTB interfaces
+ */
+static void epf_ntb_epc_destroy(struct epf_ntb *ntb)
+{
+	pci_epc_remove_epf(ntb->epf->epc, ntb->epf, 0);
+	pci_epc_put(ntb->epf->epc);
+}
+
+/**
+ * epf_ntb_init_epc_bar() - Identify BARs to be used for each of the NTB
+ * constructs (scratchpad region, doorbell, memorywindow)
+ * @ntb: NTB device that facilitates communication between HOST and VHOST
+ *
+ * Returns: Zero for success, or an error code in case of failure
+ */
+static int epf_ntb_init_epc_bar(struct epf_ntb *ntb)
+{
+	const struct pci_epc_features *epc_features;
+	enum pci_barno barno;
+	enum epf_ntb_bar bar;
+	struct device *dev;
+	u32 num_mws;
+	int i;
+
+	barno = BAR_0;
+	num_mws = ntb->num_mws;
+	dev = &ntb->epf->dev;
+	epc_features = pci_epc_get_features(ntb->epf->epc, ntb->epf->func_no, ntb->epf->vfunc_no);
+
+	/* These are required BARs which are mandatory for NTB functionality */
+	for (bar = BAR_CONFIG; bar <= BAR_MW0; bar++, barno++) {
+		barno = pci_epc_get_next_free_bar(epc_features, barno);
+		if (barno < 0) {
+			dev_err(dev, "Fail to get NTB function BAR\n");
+			return barno;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 		ntb->epf_ntb_bar[bar] = barno;
 	}

@@ -1243,6 +1243,7 @@ static int ad7173_fw_parse_channel_config(struct iio_dev *indio_dev)
 		chan_st_priv->cfg.bipolar = false;
 		chan_st_priv->cfg.input_buf = st->info->has_input_buf;
 		chan_st_priv->cfg.ref_sel = AD7173_SETUP_REF_SEL_INT_REF;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		chan_st_priv->cfg.odr = st->info->odr_start_value;
 		st->adc_mode |= AD7173_ADC_MODE_REF_EN;
 
@@ -1309,6 +1310,74 @@ static int ad7173_fw_parse_channel_config(struct iio_dev *indio_dev)
 		chan_st_priv->chan_reg = chan_index;
 		chan_st_priv->cfg.input_buf = st->info->has_input_buf;
 		chan_st_priv->cfg.odr = st->info->odr_start_value;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		st->adc_mode |= AD7173_ADC_MODE_REF_EN;
+
+		chan_index++;
+	}
+
+	device_for_each_child_node_scoped(dev, child) {
+		bool is_current_chan = false;
+
+		chan = &chan_arr[chan_index];
+		*chan = ad7173_channel_template;
+		chan_st_priv = &chans_st_arr[chan_index];
+		ret = fwnode_property_read_u32_array(child, "diff-channels",
+						     ain, ARRAY_SIZE(ain));
+		if (ret) {
+			ret = fwnode_property_read_u32(child, "single-channel",
+						       ain);
+			if (ret)
+				return dev_err_probe(dev, ret,
+					"Channel must define one of diff-channels or single-channel.\n");
+
+			is_current_chan = fwnode_property_read_bool(child, "adi,current-channel");
+		} else {
+			chan->differential = true;
+		}
+
+		if (is_current_chan) {
+			ret = ad4111_validate_current_ain(st, ain);
+			if (ret)
+				return ret;
+		} else {
+			if (!chan->differential) {
+				ret = fwnode_property_read_u32(child,
+					"common-mode-channel", ain + 1);
+				if (ret)
+					return dev_err_probe(dev, ret,
+						"common-mode-channel must be defined for single-ended channels.\n");
+			}
+			ret = ad7173_validate_voltage_ain_inputs(st, ain[0], ain[1]);
+			if (ret)
+				return ret;
+		}
+
+		ret = fwnode_property_match_property_string(child,
+							    "adi,reference-select",
+							    ad7173_ref_sel_str,
+							    ARRAY_SIZE(ad7173_ref_sel_str));
+		if (ret < 0)
+			ref_sel = AD7173_SETUP_REF_SEL_INT_REF;
+		else
+			ref_sel = ret;
+
+		ret = ad7173_validate_reference(st, ref_sel);
+		if (ret)
+			return ret;
+
+		if (ref_sel == AD7173_SETUP_REF_SEL_INT_REF)
+			st->adc_mode |= AD7173_ADC_MODE_REF_EN;
+		chan_st_priv->cfg.ref_sel = ref_sel;
+
+		chan->address = chan_index;
+		chan->scan_index = chan_index;
+		chan->channel = ain[0];
+		chan_st_priv->chan_reg = chan_index;
+		chan_st_priv->cfg.input_buf = st->info->has_input_buf;
+		chan_st_priv->cfg.odr = 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		chan_st_priv->cfg.bipolar = fwnode_property_read_bool(child, "bipolar");
 		if (chan_st_priv->cfg.bipolar)

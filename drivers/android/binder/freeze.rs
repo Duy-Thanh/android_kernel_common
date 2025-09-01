@@ -106,6 +106,7 @@ impl DeliverToRead for FreezeMessage {
             return Ok(true);
         }
         if freeze.is_clearing {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
             assert_eq!(freeze.num_cleared_duplicates, 0);
             if freeze.num_pending_duplicates > 0 {
                 // The primary freeze listener was deleted, so convert a pending duplicate back
@@ -258,6 +259,151 @@ impl Process {
             let is_frozen = freeze.node.owner.inner.lock().is_frozen.is_fully_frozen();
             if freeze.is_clearing || freeze.last_is_frozen != Some(is_frozen) {
                 // Immediately send another FreezeMessage.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+            _removed_listener = freeze_entry.remove_node();
+            drop(node_refs);
+            writer.write_code(BR_CLEAR_FREEZE_NOTIFICATION_DONE)?;
+            writer.write_payload(&self.cookie.0)?;
+            Ok(true)
+        } else {
+            let is_frozen = freeze.node.owner.inner.lock().is_frozen;
+            if freeze.last_is_frozen == Some(is_frozen) {
+                return Ok(true);
+            }
+
+            let mut state_info = BinderFrozenStateInfo::default();
+            state_info.is_frozen = is_frozen as u32;
+            state_info.cookie = freeze.cookie.0;
+            freeze.is_pending = true;
+            freeze.last_is_frozen = Some(is_frozen);
+            drop(node_refs);
+
+            writer.write_code(BR_FROZEN_BINDER)?;
+            writer.write_payload(&state_info)?;
+            // BR_FROZEN_BINDER notifications can cause transactions
+            Ok(false)
+        }
+    }
+
+    fn cancel(self: DArc<Self>) {}
+    fn on_thread_selected(&self, _thread: &Thread) {}
+
+    fn should_sync_wakeup(&self) -> bool {
+        false
+    }
+
+    #[inline(never)]
+    fn debug_print(&self, m: &SeqFile, prefix: &str, _tprefix: &str) -> Result<()> {
+        seq_print!(m, "{}has frozen binder\n", prefix);
+        Ok(())
+    }
+}
+
+impl FreezeListener {
+    pub(crate) fn on_process_exit(&self, proc: &Arc<Process>) {
+        if !self.is_clearing {
+            self.node.remove_freeze_listener(proc);
+        }
+    }
+}
+
+impl Process {
+    pub(crate) fn request_freeze_notif(
+        self: &Arc<Self>,
+        reader: &mut UserSliceReader,
+    ) -> Result<()> {
+        let hc = reader.read::<BinderHandleCookie>()?;
+        let handle = hc.handle;
+        let cookie = FreezeCookie(hc.cookie);
+
+        let msg = FreezeMessage::new(GFP_KERNEL)?;
+        let alloc = RBTreeNodeReservation::new(GFP_KERNEL)?;
+
+        let mut node_refs_guard = self.node_refs.lock();
+        let node_refs = &mut *node_refs_guard;
+        let Some(info) = node_refs.by_handle.get_mut(&handle) else {
+            pr_warn!("BC_REQUEST_FREEZE_NOTIFICATION invalid ref {}\n", handle);
+            return Err(EINVAL);
+        };
+        if info.freeze().is_some() {
+            pr_warn!("BC_REQUEST_FREEZE_NOTIFICATION already set\n");
+            return Err(EINVAL);
+        }
+        let node_ref = info.node_ref();
+        let freeze_entry = node_refs.freeze_listeners.entry(cookie);
+
+        if let rbtree::Entry::Occupied(ref dupe) = freeze_entry {
+            if !dupe.get().allow_duplicate(&node_ref.node) {
+                pr_warn!("BC_REQUEST_FREEZE_NOTIFICATION duplicate cookie\n");
+                return Err(EINVAL);
+            }
+        }
+
+        // All failure paths must come before this call, and all modifications must come after this
+        // call.
+        node_ref.node.add_freeze_listener(self, GFP_KERNEL)?;
+
+        match freeze_entry {
+            rbtree::Entry::Vacant(entry) => {
+                entry.insert(
+                    FreezeListener {
+                        cookie,
+                        node: node_ref.node.clone(),
+                        last_is_frozen: None,
+                        is_pending: false,
+                        is_clearing: false,
+                        num_pending_duplicates: 0,
+                        num_cleared_duplicates: 0,
+                    },
+                    alloc,
+                );
+            }
+            rbtree::Entry::Occupied(mut dupe) => {
+                let dupe = dupe.get_mut();
+                if dupe.is_pending {
+                    dupe.num_pending_duplicates += 1;
+                } else {
+                    dupe.num_cleared_duplicates += 1;
+                }
+                dupe.last_is_frozen = None;
+                dupe.is_pending = false;
+                dupe.is_clearing = false;
+            }
+        }
+
+        *info.freeze() = Some(cookie);
+        let msg = FreezeMessage::init(msg, cookie);
+        drop(node_refs_guard);
+        let _ = self.push_work(msg);
+        Ok(())
+    }
+
+    pub(crate) fn freeze_notif_done(self: &Arc<Self>, reader: &mut UserSliceReader) -> Result<()> {
+        let cookie = FreezeCookie(reader.read()?);
+        let alloc = FreezeMessage::new(GFP_KERNEL)?;
+        let mut node_refs_guard = self.node_refs.lock();
+        let node_refs = &mut *node_refs_guard;
+        let Some(freeze) = node_refs.freeze_listeners.get_mut(&cookie) else {
+            pr_warn!("BC_FREEZE_NOTIFICATION_DONE {:016x} not found\n", cookie.0);
+            return Err(EINVAL);
+        };
+        let mut clear_msg = None;
+        if freeze.num_pending_duplicates > 0 {
+            clear_msg = Some(FreezeMessage::init(alloc, cookie));
+            freeze.num_pending_duplicates -= 1;
+            freeze.num_cleared_duplicates += 1;
+        } else {
+            if !freeze.is_pending {
+                pr_warn!(
+                    "BC_FREEZE_NOTIFICATION_DONE {:016x} not pending\n",
+                    cookie.0
+                );
+                return Err(EINVAL);
+            }
+            if freeze.is_clearing {
+                // Immediately send another FreezeMessage for BR_CLEAR_FREEZE_NOTIFICATION_DONE.
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
                 clear_msg = Some(FreezeMessage::init(alloc, cookie));
             }
             freeze.is_pending = false;

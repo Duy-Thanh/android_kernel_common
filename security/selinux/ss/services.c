@@ -2136,6 +2136,7 @@ static void security_load_policycaps(struct selinux_policy *policy)
 		WRITE_ONCE(selinux_state.policycap[i],
 			ebitmap_get_bit(&p->policycaps, i));
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	WRITE_ONCE(selinux_memfd_class_policycap, ebitmap_get_bit(&p->policycaps,
 								  POLICYDB_CAP_MEMFD_CLASS));
 
@@ -2149,6 +2150,16 @@ static void security_load_policycaps(struct selinux_policy *policy)
 
 	ebitmap_for_each_positive_bit(&p->policycaps, node, i) {
 		if (i >= ARRAY_SIZE(selinux_policycap_names) && i != POLICYDB_CAP_MEMFD_CLASS)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	for (i = 0; i < ARRAY_SIZE(selinux_policycap_names); i++)
+		pr_info("SELinux:  policy capability %s=%d\n",
+			selinux_policycap_names[i],
+			ebitmap_get_bit(&p->policycaps, i));
+
+	ebitmap_for_each_positive_bit(&p->policycaps, node, i) {
+		if (i >= ARRAY_SIZE(selinux_policycap_names))
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			pr_info("SELinux:  unknown policy capability %u\n",
 				i);
 	}

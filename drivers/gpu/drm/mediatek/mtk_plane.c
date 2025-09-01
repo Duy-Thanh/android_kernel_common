@@ -285,6 +285,7 @@ static void mtk_plane_atomic_disable(struct drm_plane *plane,
 	struct drm_plane_state *new_state = drm_atomic_get_new_plane_state(state,
 									   plane);
 	struct mtk_plane_state *mtk_plane_state = to_mtk_plane_state(new_state);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct drm_plane_state *old_state = drm_atomic_get_old_plane_state(state,
 									   plane);
 
@@ -342,6 +343,57 @@ int mtk_plane_init(struct drm_device *dev, struct drm_plane *plane,
 				       num_formats,
 				       supports_afbc ? modifiers : NULL,
 				       type, NULL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	mtk_plane_state->pending.enable = false;
+	wmb(); /* Make sure the above parameter is set before update */
+	mtk_plane_state->pending.dirty = true;
+}
+
+static void mtk_plane_atomic_update(struct drm_plane *plane,
+				    struct drm_atomic_state *state)
+{
+	struct drm_plane_state *new_state = drm_atomic_get_new_plane_state(state,
+									   plane);
+	struct mtk_plane_state *mtk_plane_state = to_mtk_plane_state(new_state);
+
+	if (!new_state->crtc || WARN_ON(!new_state->fb))
+		return;
+
+	if (!new_state->visible) {
+		mtk_plane_atomic_disable(plane, state);
+		return;
+	}
+
+	mtk_plane_update_new_state(new_state, mtk_plane_state);
+	wmb(); /* Make sure the above parameters are set before update */
+	mtk_plane_state->pending.dirty = true;
+}
+
+static const struct drm_plane_helper_funcs mtk_plane_helper_funcs = {
+	.atomic_check = mtk_plane_atomic_check,
+	.atomic_update = mtk_plane_atomic_update,
+	.atomic_disable = mtk_plane_atomic_disable,
+	.atomic_async_update = mtk_plane_atomic_async_update,
+	.atomic_async_check = mtk_plane_atomic_async_check,
+};
+
+int mtk_plane_init(struct drm_device *dev, struct drm_plane *plane,
+		   unsigned long possible_crtcs, enum drm_plane_type type,
+		   unsigned int supported_rotations, const u32 blend_modes,
+		   const u32 *formats, size_t num_formats, unsigned int plane_idx)
+{
+	int err;
+
+	if (!formats || !num_formats) {
+		DRM_ERROR("no formats for plane\n");
+		return -EINVAL;
+	}
+
+	err = drm_universal_plane_init(dev, plane, possible_crtcs,
+				       &mtk_plane_funcs, formats,
+				       num_formats, modifiers, type, NULL);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (err) {
 		DRM_ERROR("failed to initialize plane\n");
 		return err;

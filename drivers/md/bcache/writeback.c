@@ -908,6 +908,7 @@ static int bch_dirty_init_thread(void *arg)
 	struct dirty_init_thrd_info *info = arg;
 	struct bch_dirty_init_state *state = info->state;
 	struct cache_set *c = state->c;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct btree_iter_stack iter;
 	struct bkey *k, *p;
 	int cur_idx, prev_idx, skip_nr;
@@ -983,6 +984,87 @@ void bch_sectors_dirty_init(struct bcache_device *d)
 	struct sectors_dirty_init op;
 	struct cache_set *c = d->c;
 	struct bch_dirty_init_state state;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct btree_iter iter;
+	struct bkey *k, *p;
+	int cur_idx, prev_idx, skip_nr;
+
+	k = p = NULL;
+	prev_idx = 0;
+
+	min_heap_init(&iter.heap, NULL, MAX_BSETS);
+	bch_btree_iter_init(&c->root->keys, &iter, NULL);
+	k = bch_btree_iter_next_filter(&iter, &c->root->keys, bch_ptr_bad);
+	BUG_ON(!k);
+
+	p = k;
+
+	while (k) {
+		spin_lock(&state->idx_lock);
+		cur_idx = state->key_idx;
+		state->key_idx++;
+		spin_unlock(&state->idx_lock);
+
+		skip_nr = cur_idx - prev_idx;
+
+		while (skip_nr) {
+			k = bch_btree_iter_next_filter(&iter,
+						       &c->root->keys,
+						       bch_ptr_bad);
+			if (k)
+				p = k;
+			else {
+				atomic_set(&state->enough, 1);
+				/* Update state->enough earlier */
+				smp_mb__after_atomic();
+				goto out;
+			}
+			skip_nr--;
+		}
+
+		if (p) {
+			if (bch_root_node_dirty_init(c, state->d, p) < 0)
+				goto out;
+		}
+
+		p = NULL;
+		prev_idx = cur_idx;
+	}
+
+out:
+	/* In order to wake up state->wait in time */
+	smp_mb__before_atomic();
+	if (atomic_dec_and_test(&state->started))
+		wake_up(&state->wait);
+
+	return 0;
+}
+
+static int bch_btre_dirty_init_thread_nr(void)
+{
+	int n = num_online_cpus()/2;
+
+	if (n == 0)
+		n = 1;
+	else if (n > BCH_DIRTY_INIT_THRD_MAX)
+		n = BCH_DIRTY_INIT_THRD_MAX;
+
+	return n;
+}
+
+void bch_sectors_dirty_init(struct bcache_device *d)
+{
+	int i;
+	struct btree *b = NULL;
+	struct bkey *k = NULL;
+	struct btree_iter iter;
+	struct sectors_dirty_init op;
+	struct cache_set *c = d->c;
+	struct bch_dirty_init_state state;
+
+	min_heap_init(&iter.heap, NULL, MAX_BSETS);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 retry_lock:
 	b = c->root;

@@ -947,6 +947,7 @@ err_unmap_dmpt:
 static void hns_roce_teardown_hca(struct hns_roce_dev *hr_dev)
 {
 	hns_roce_cleanup_bitmap(hr_dev);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	mutex_destroy(&hr_dev->pgdir_mutex);
 }
 
@@ -1126,6 +1127,196 @@ int hns_roce_init(struct hns_roce_dev *hr_dev)
 			goto error_failed_engine_init;
 		}
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_CQ_RECORD_DB ||
+	    hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_QP_RECORD_DB)
+		mutex_destroy(&hr_dev->pgdir_mutex);
+}
+
+/**
+ * hns_roce_setup_hca - setup host channel adapter
+ * @hr_dev: pointer to hns roce device
+ * Return : int
+ */
+static int hns_roce_setup_hca(struct hns_roce_dev *hr_dev)
+{
+	struct device *dev = hr_dev->dev;
+	int ret;
+
+	spin_lock_init(&hr_dev->sm_lock);
+
+	if (hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_CQ_RECORD_DB ||
+	    hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_QP_RECORD_DB) {
+		INIT_LIST_HEAD(&hr_dev->pgdir_list);
+		mutex_init(&hr_dev->pgdir_mutex);
+	}
+
+	hns_roce_init_uar_table(hr_dev);
+
+	ret = hns_roce_uar_alloc(hr_dev, &hr_dev->priv_uar);
+	if (ret) {
+		dev_err(dev, "failed to allocate priv_uar.\n");
+		goto err_uar_table_free;
+	}
+
+	ret = hns_roce_init_qp_table(hr_dev);
+	if (ret) {
+		dev_err(dev, "failed to init qp_table.\n");
+		goto err_uar_table_free;
+	}
+
+	hns_roce_init_pd_table(hr_dev);
+
+	if (hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_XRC)
+		hns_roce_init_xrcd_table(hr_dev);
+
+	hns_roce_init_mr_table(hr_dev);
+
+	hns_roce_init_cq_table(hr_dev);
+
+	if (hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_SRQ)
+		hns_roce_init_srq_table(hr_dev);
+
+	return 0;
+
+err_uar_table_free:
+	ida_destroy(&hr_dev->uar_ida.ida);
+	if (hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_CQ_RECORD_DB ||
+	    hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_QP_RECORD_DB)
+		mutex_destroy(&hr_dev->pgdir_mutex);
+
+	return ret;
+}
+
+static void check_and_get_armed_cq(struct list_head *cq_list, struct ib_cq *cq)
+{
+	struct hns_roce_cq *hr_cq = to_hr_cq(cq);
+	unsigned long flags;
+
+	spin_lock_irqsave(&hr_cq->lock, flags);
+	if (cq->comp_handler) {
+		if (!hr_cq->is_armed) {
+			hr_cq->is_armed = 1;
+			list_add_tail(&hr_cq->node, cq_list);
+		}
+	}
+	spin_unlock_irqrestore(&hr_cq->lock, flags);
+}
+
+void hns_roce_handle_device_err(struct hns_roce_dev *hr_dev)
+{
+	struct hns_roce_qp *hr_qp;
+	struct hns_roce_cq *hr_cq;
+	struct list_head cq_list;
+	unsigned long flags_qp;
+	unsigned long flags;
+
+	INIT_LIST_HEAD(&cq_list);
+
+	spin_lock_irqsave(&hr_dev->qp_list_lock, flags);
+	list_for_each_entry(hr_qp, &hr_dev->qp_list, node) {
+		spin_lock_irqsave(&hr_qp->sq.lock, flags_qp);
+		if (hr_qp->sq.tail != hr_qp->sq.head)
+			check_and_get_armed_cq(&cq_list, hr_qp->ibqp.send_cq);
+		spin_unlock_irqrestore(&hr_qp->sq.lock, flags_qp);
+
+		spin_lock_irqsave(&hr_qp->rq.lock, flags_qp);
+		if ((!hr_qp->ibqp.srq) && (hr_qp->rq.tail != hr_qp->rq.head))
+			check_and_get_armed_cq(&cq_list, hr_qp->ibqp.recv_cq);
+		spin_unlock_irqrestore(&hr_qp->rq.lock, flags_qp);
+	}
+
+	list_for_each_entry(hr_cq, &cq_list, node)
+		hns_roce_cq_completion(hr_dev, hr_cq->cqn);
+
+	spin_unlock_irqrestore(&hr_dev->qp_list_lock, flags);
+}
+
+static int hns_roce_alloc_dfx_cnt(struct hns_roce_dev *hr_dev)
+{
+	hr_dev->dfx_cnt = kvcalloc(HNS_ROCE_DFX_CNT_TOTAL, sizeof(atomic64_t),
+				   GFP_KERNEL);
+	if (!hr_dev->dfx_cnt)
+		return -ENOMEM;
+
+	return 0;
+}
+
+static void hns_roce_dealloc_dfx_cnt(struct hns_roce_dev *hr_dev)
+{
+	kvfree(hr_dev->dfx_cnt);
+}
+
+int hns_roce_init(struct hns_roce_dev *hr_dev)
+{
+	struct device *dev = hr_dev->dev;
+	int ret;
+
+	hr_dev->is_reset = false;
+
+	ret = hns_roce_alloc_dfx_cnt(hr_dev);
+	if (ret)
+		return ret;
+
+	if (hr_dev->hw->cmq_init) {
+		ret = hr_dev->hw->cmq_init(hr_dev);
+		if (ret) {
+			dev_err(dev, "init RoCE Command Queue failed!\n");
+			goto error_failed_alloc_dfx_cnt;
+		}
+	}
+
+	ret = hr_dev->hw->hw_profile(hr_dev);
+	if (ret) {
+		dev_err(dev, "get RoCE engine profile failed!\n");
+		goto error_failed_cmd_init;
+	}
+
+	ret = hns_roce_cmd_init(hr_dev);
+	if (ret) {
+		dev_err(dev, "cmd init failed!\n");
+		goto error_failed_cmd_init;
+	}
+
+	/* EQ depends on poll mode, event mode depends on EQ */
+	ret = hr_dev->hw->init_eq(hr_dev);
+	if (ret) {
+		dev_err(dev, "eq init failed!\n");
+		goto error_failed_eq_table;
+	}
+
+	if (hr_dev->cmd_mod) {
+		ret = hns_roce_cmd_use_events(hr_dev);
+		if (ret)
+			dev_warn(dev,
+				 "Cmd event  mode failed, set back to poll!\n");
+	}
+
+	ret = hns_roce_init_hem(hr_dev);
+	if (ret) {
+		dev_err(dev, "init HEM(Hardware Entry Memory) failed!\n");
+		goto error_failed_init_hem;
+	}
+
+	ret = hns_roce_setup_hca(hr_dev);
+	if (ret) {
+		dev_err(dev, "setup hca failed!\n");
+		goto error_failed_setup_hca;
+	}
+
+	if (hr_dev->hw->hw_init) {
+		ret = hr_dev->hw->hw_init(hr_dev);
+		if (ret) {
+			dev_err(dev, "hw_init failed!\n");
+			goto error_failed_engine_init;
+		}
+	}
+
+	INIT_LIST_HEAD(&hr_dev->qp_list);
+	spin_lock_init(&hr_dev->qp_list_lock);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	ret = hns_roce_register_device(hr_dev);
 	if (ret)

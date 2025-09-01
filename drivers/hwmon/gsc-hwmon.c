@@ -65,6 +65,7 @@ static ssize_t pwm_auto_point_temp_show(struct device *dev,
 		return ret;
 
 	ret = regs[0] | regs[1] << 8;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	return sprintf(buf, "%d\n", ret * 100);
 }
 
@@ -101,6 +102,45 @@ static ssize_t pwm_auto_point_pwm_show(struct device *dev,
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 
 	return sprintf(buf, "%d\n", 255 * (50 + (attr->index * 10)) / 100);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	return sprintf(buf, "%d\n", ret * 10);
+}
+
+static ssize_t pwm_auto_point_temp_store(struct device *dev,
+					 struct device_attribute *devattr,
+					 const char *buf, size_t count)
+{
+	struct gsc_hwmon_data *hwmon = dev_get_drvdata(dev);
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
+	u8 reg = hwmon->pdata->fan_base + (2 * attr->index);
+	u8 regs[2];
+	long temp;
+	int err;
+
+	if (kstrtol(buf, 10, &temp))
+		return -EINVAL;
+
+	temp = clamp_val(temp, 0, 100000);
+	temp = DIV_ROUND_CLOSEST(temp, 100);
+
+	regs[0] = temp & 0xff;
+	regs[1] = (temp >> 8) & 0xff;
+	err = regmap_bulk_write(hwmon->regmap, reg, regs, 2);
+	if (err)
+		return err;
+
+	return count;
+}
+
+static ssize_t pwm_auto_point_pwm_show(struct device *dev,
+				       struct device_attribute *devattr,
+				       char *buf)
+{
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
+
+	return sprintf(buf, "%d\n", 255 * (50 + (attr->index * 10)));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static SENSOR_DEVICE_ATTR_RO(pwm1_auto_point1_pwm, pwm_auto_point_pwm, 0);

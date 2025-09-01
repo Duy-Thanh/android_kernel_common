@@ -186,6 +186,7 @@ void drm_gem_private_object_fini(struct drm_gem_object *obj)
 }
 EXPORT_SYMBOL(drm_gem_private_object_fini);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void drm_gem_object_handle_get(struct drm_gem_object *obj)
 {
 	struct drm_device *dev = obj->dev;
@@ -448,6 +449,217 @@ drm_gem_handle_create_tail(struct drm_file *file_priv,
 	obj = idr_replace(&file_priv->object_idr, obj, handle);
 	WARN_ON(obj != NULL);
 	spin_unlock(&file_priv->table_lock);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/**
+ * drm_gem_object_handle_free - release resources bound to userspace handles
+ * @obj: GEM object to clean up.
+ *
+ * Called after the last handle to the object has been closed
+ *
+ * Removes any name for the object. Note that this must be
+ * called before drm_gem_object_free or we'll be touching
+ * freed memory
+ */
+static void drm_gem_object_handle_free(struct drm_gem_object *obj)
+{
+	struct drm_device *dev = obj->dev;
+
+	/* Remove any name for this object */
+	if (obj->name) {
+		idr_remove(&dev->object_name_idr, obj->name);
+		obj->name = 0;
+	}
+}
+
+static void drm_gem_object_exported_dma_buf_free(struct drm_gem_object *obj)
+{
+	/* Unbreak the reference cycle if we have an exported dma_buf. */
+	if (obj->dma_buf) {
+		dma_buf_put(obj->dma_buf);
+		obj->dma_buf = NULL;
+	}
+}
+
+static void
+drm_gem_object_handle_put_unlocked(struct drm_gem_object *obj)
+{
+	struct drm_device *dev = obj->dev;
+	bool final = false;
+
+	if (WARN_ON(READ_ONCE(obj->handle_count) == 0))
+		return;
+
+	/*
+	* Must bump handle count first as this may be the last
+	* ref, in which case the object would disappear before we
+	* checked for a name
+	*/
+
+	mutex_lock(&dev->object_name_lock);
+	if (--obj->handle_count == 0) {
+		drm_gem_object_handle_free(obj);
+		drm_gem_object_exported_dma_buf_free(obj);
+		final = true;
+	}
+	mutex_unlock(&dev->object_name_lock);
+
+	if (final)
+		drm_gem_object_put(obj);
+}
+
+/*
+ * Called at device or object close to release the file's
+ * handle references on objects.
+ */
+static int
+drm_gem_object_release_handle(int id, void *ptr, void *data)
+{
+	struct drm_file *file_priv = data;
+	struct drm_gem_object *obj = ptr;
+
+	if (obj->funcs->close)
+		obj->funcs->close(obj, file_priv);
+
+	drm_prime_remove_buf_handle(&file_priv->prime, id);
+	drm_vma_node_revoke(&obj->vma_node, file_priv);
+
+	drm_gem_object_handle_put_unlocked(obj);
+
+	return 0;
+}
+
+/**
+ * drm_gem_handle_delete - deletes the given file-private handle
+ * @filp: drm file-private structure to use for the handle look up
+ * @handle: userspace handle to delete
+ *
+ * Removes the GEM handle from the @filp lookup table which has been added with
+ * drm_gem_handle_create(). If this is the last handle also cleans up linked
+ * resources like GEM names.
+ */
+int
+drm_gem_handle_delete(struct drm_file *filp, u32 handle)
+{
+	struct drm_gem_object *obj;
+
+	spin_lock(&filp->table_lock);
+
+	/* Check if we currently have a reference on the object */
+	obj = idr_replace(&filp->object_idr, NULL, handle);
+	spin_unlock(&filp->table_lock);
+	if (IS_ERR_OR_NULL(obj))
+		return -EINVAL;
+
+	/* Release driver's reference and decrement refcount. */
+	drm_gem_object_release_handle(handle, obj, filp);
+
+	/* And finally make the handle available for future allocations. */
+	spin_lock(&filp->table_lock);
+	idr_remove(&filp->object_idr, handle);
+	spin_unlock(&filp->table_lock);
+
+	return 0;
+}
+EXPORT_SYMBOL(drm_gem_handle_delete);
+
+/**
+ * drm_gem_dumb_map_offset - return the fake mmap offset for a gem object
+ * @file: drm file-private structure containing the gem object
+ * @dev: corresponding drm_device
+ * @handle: gem object handle
+ * @offset: return location for the fake mmap offset
+ *
+ * This implements the &drm_driver.dumb_map_offset kms driver callback for
+ * drivers which use gem to manage their backing storage.
+ *
+ * Returns:
+ * 0 on success or a negative error code on failure.
+ */
+int drm_gem_dumb_map_offset(struct drm_file *file, struct drm_device *dev,
+			    u32 handle, u64 *offset)
+{
+	struct drm_gem_object *obj;
+	int ret;
+
+	obj = drm_gem_object_lookup(file, handle);
+	if (!obj)
+		return -ENOENT;
+
+	/* Don't allow imported objects to be mapped */
+	if (drm_gem_is_imported(obj)) {
+		ret = -EINVAL;
+		goto out;
+	}
+
+	ret = drm_gem_create_mmap_offset(obj);
+	if (ret)
+		goto out;
+
+	*offset = drm_vma_node_offset_addr(&obj->vma_node);
+out:
+	drm_gem_object_put(obj);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(drm_gem_dumb_map_offset);
+
+/**
+ * drm_gem_handle_create_tail - internal functions to create a handle
+ * @file_priv: drm file-private structure to register the handle for
+ * @obj: object to register
+ * @handlep: pointer to return the created handle to the caller
+ *
+ * This expects the &drm_device.object_name_lock to be held already and will
+ * drop it before returning. Used to avoid races in establishing new handles
+ * when importing an object from either an flink name or a dma-buf.
+ *
+ * Handles must be release again through drm_gem_handle_delete(). This is done
+ * when userspace closes @file_priv for all attached handles, or through the
+ * GEM_CLOSE ioctl for individual handles.
+ */
+int
+drm_gem_handle_create_tail(struct drm_file *file_priv,
+			   struct drm_gem_object *obj,
+			   u32 *handlep)
+{
+	struct drm_device *dev = obj->dev;
+	u32 handle;
+	int ret;
+
+	WARN_ON(!mutex_is_locked(&dev->object_name_lock));
+	if (obj->handle_count++ == 0)
+		drm_gem_object_get(obj);
+
+	/*
+	 * Get the user-visible handle using idr.  Preload and perform
+	 * allocation under our spinlock.
+	 */
+	idr_preload(GFP_KERNEL);
+	spin_lock(&file_priv->table_lock);
+
+	ret = idr_alloc(&file_priv->object_idr, obj, 1, 0, GFP_NOWAIT);
+
+	spin_unlock(&file_priv->table_lock);
+	idr_preload_end();
+
+	mutex_unlock(&dev->object_name_lock);
+	if (ret < 0)
+		goto err_unref;
+
+	handle = ret;
+
+	ret = drm_vma_node_allow(&obj->vma_node, file_priv);
+	if (ret)
+		goto err_remove;
+
+	if (obj->funcs->open) {
+		ret = obj->funcs->open(obj, file_priv);
+		if (ret)
+			goto err_revoke;
+	}
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	*handlep = handle;
 	return 0;
 

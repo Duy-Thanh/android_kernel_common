@@ -187,6 +187,7 @@ struct bset_tree {
 };
 
 struct btree_keys_ops {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool		(*sort_cmp)(struct btree_iter_set l,
 				    struct btree_iter_set r);
 	struct bkey	*(*sort_fixup)(struct btree_iter *iter,
@@ -365,6 +366,181 @@ static inline struct bkey *bch_bset_search(struct btree_keys *b,
 #define for_each_key(b, k, stack_iter)                           \
 	for (bch_btree_iter_stack_init((b), (stack_iter), NULL); \
 	     ((k) = bch_btree_iter_next(&((stack_iter)->iter)));)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool		(*sort_cmp)(const void *l,
+				    const void *r,
+					void *args);
+	struct bkey	*(*sort_fixup)(struct btree_iter *iter,
+				       struct bkey *tmp);
+	bool		(*insert_fixup)(struct btree_keys *b,
+					struct bkey *insert,
+					struct btree_iter *iter,
+					struct bkey *replace_key);
+	bool		(*key_invalid)(struct btree_keys *bk,
+				       const struct bkey *k);
+	bool		(*key_bad)(struct btree_keys *bk,
+				   const struct bkey *k);
+	bool		(*key_merge)(struct btree_keys *bk,
+				     struct bkey *l, struct bkey *r);
+	void		(*key_to_text)(char *buf,
+				       size_t size,
+				       const struct bkey *k);
+	void		(*key_dump)(struct btree_keys *keys,
+				    const struct bkey *k);
+
+	/*
+	 * Only used for deciding whether to use START_KEY(k) or just the key
+	 * itself in a couple places
+	 */
+	bool		is_extents;
+};
+
+struct btree_keys {
+	const struct btree_keys_ops	*ops;
+	uint8_t			page_order;
+	uint8_t			nsets;
+	unsigned int		last_set_unwritten:1;
+	bool			*expensive_debug_checks;
+
+	/*
+	 * Sets of sorted keys - the real btree node - plus a binary search tree
+	 *
+	 * set[0] is special; set[0]->tree, set[0]->prev and set[0]->data point
+	 * to the memory we have allocated for this btree node. Additionally,
+	 * set[0]->data points to the entire btree node as it exists on disk.
+	 */
+	struct bset_tree	set[MAX_BSETS];
+};
+
+static inline struct bset_tree *bset_tree_last(struct btree_keys *b)
+{
+	return b->set + b->nsets;
+}
+
+static inline bool bset_written(struct btree_keys *b, struct bset_tree *t)
+{
+	return t <= b->set + b->nsets - b->last_set_unwritten;
+}
+
+static inline bool bkey_written(struct btree_keys *b, struct bkey *k)
+{
+	return !b->last_set_unwritten || k < b->set[b->nsets].data->start;
+}
+
+static inline unsigned int bset_byte_offset(struct btree_keys *b,
+					    struct bset *i)
+{
+	return ((size_t) i) - ((size_t) b->set->data);
+}
+
+static inline unsigned int bset_sector_offset(struct btree_keys *b,
+					      struct bset *i)
+{
+	return bset_byte_offset(b, i) >> 9;
+}
+
+#define __set_bytes(i, k)	(sizeof(*(i)) + (k) * sizeof(uint64_t))
+#define set_bytes(i)		__set_bytes(i, i->keys)
+
+#define __set_blocks(i, k, block_bytes)				\
+	DIV_ROUND_UP(__set_bytes(i, k), block_bytes)
+#define set_blocks(i, block_bytes)				\
+	__set_blocks(i, (i)->keys, block_bytes)
+
+static inline size_t bch_btree_keys_u64s_remaining(struct btree_keys *b)
+{
+	struct bset_tree *t = bset_tree_last(b);
+
+	BUG_ON((PAGE_SIZE << b->page_order) <
+	       (bset_byte_offset(b, t->data) + set_bytes(t->data)));
+
+	if (!b->last_set_unwritten)
+		return 0;
+
+	return ((PAGE_SIZE << b->page_order) -
+		(bset_byte_offset(b, t->data) + set_bytes(t->data))) /
+		sizeof(u64);
+}
+
+static inline struct bset *bset_next_set(struct btree_keys *b,
+					 unsigned int block_bytes)
+{
+	struct bset *i = bset_tree_last(b)->data;
+
+	return ((void *) i) + roundup(set_bytes(i), block_bytes);
+}
+
+void bch_btree_keys_free(struct btree_keys *b);
+int bch_btree_keys_alloc(struct btree_keys *b, unsigned int page_order,
+			 gfp_t gfp);
+void bch_btree_keys_init(struct btree_keys *b, const struct btree_keys_ops *ops,
+			 bool *expensive_debug_checks);
+
+void bch_bset_init_next(struct btree_keys *b, struct bset *i, uint64_t magic);
+void bch_bset_build_written_tree(struct btree_keys *b);
+void bch_bset_fix_invalidated_key(struct btree_keys *b, struct bkey *k);
+bool bch_bkey_try_merge(struct btree_keys *b, struct bkey *l, struct bkey *r);
+void bch_bset_insert(struct btree_keys *b, struct bkey *where,
+		     struct bkey *insert);
+unsigned int bch_btree_insert_key(struct btree_keys *b, struct bkey *k,
+			      struct bkey *replace_key);
+
+enum {
+	BTREE_INSERT_STATUS_NO_INSERT = 0,
+	BTREE_INSERT_STATUS_INSERT,
+	BTREE_INSERT_STATUS_BACK_MERGE,
+	BTREE_INSERT_STATUS_OVERWROTE,
+	BTREE_INSERT_STATUS_FRONT_MERGE,
+};
+
+struct btree_iter_set {
+	struct bkey *k, *end;
+};
+
+/* Btree key iteration */
+
+struct btree_iter {
+#ifdef CONFIG_BCACHE_DEBUG
+	struct btree_keys *b;
+#endif
+	MIN_HEAP_PREALLOCATED(struct btree_iter_set, btree_iter_heap, MAX_BSETS) heap;
+};
+
+typedef bool (*ptr_filter_fn)(struct btree_keys *b, const struct bkey *k);
+
+struct bkey *bch_btree_iter_next(struct btree_iter *iter);
+struct bkey *bch_btree_iter_next_filter(struct btree_iter *iter,
+					struct btree_keys *b,
+					ptr_filter_fn fn);
+
+void bch_btree_iter_push(struct btree_iter *iter, struct bkey *k,
+			 struct bkey *end);
+struct bkey *bch_btree_iter_init(struct btree_keys *b,
+				 struct btree_iter *iter,
+				 struct bkey *search);
+
+struct bkey *__bch_bset_search(struct btree_keys *b, struct bset_tree *t,
+			       const struct bkey *search);
+
+/*
+ * Returns the first key that is strictly greater than search
+ */
+static inline struct bkey *bch_bset_search(struct btree_keys *b,
+					   struct bset_tree *t,
+					   const struct bkey *search)
+{
+	return search ? __bch_bset_search(b, t, search) : t->data->start;
+}
+
+#define for_each_key_filter(b, k, iter, filter)				\
+	for (bch_btree_iter_init((b), (iter), NULL);			\
+	     ((k) = bch_btree_iter_next_filter((iter), (b), filter));)
+
+#define for_each_key(b, k, iter)					\
+	for (bch_btree_iter_init((b), (iter), NULL);			\
+	     ((k) = bch_btree_iter_next(iter));)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 /* Sorting */
 

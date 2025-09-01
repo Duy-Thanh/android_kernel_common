@@ -8,6 +8,7 @@
 #include <linux/gunyah.h>
 #include <linux/notifier.h>
 #include <linux/types.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 #define GUNYAH_VMID_INVAL U16_MAX
 #define GUNYAH_MEM_HANDLE_INVAL U32_MAX
@@ -51,6 +52,54 @@ enum gunyah_rm_vm_status {
 	GUNYAH_RM_VM_STATUS_RESET_FAILED	= 12,
 	/* clang-format on */
 };
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/android_kabi.h>
+
+#define GUNYAH_VMID_INVAL U16_MAX
+#define GUNYAH_MEM_HANDLE_INVAL U32_MAX
+
+struct gunyah_rm;
+
+int gunyah_rm_notifier_register(struct gunyah_rm *rm,
+				struct notifier_block *nb);
+int gunyah_rm_notifier_unregister(struct gunyah_rm *rm,
+				  struct notifier_block *nb);
+struct device *gunyah_rm_get(struct gunyah_rm *rm);
+void gunyah_rm_put(struct gunyah_rm *rm);
+
+struct gunyah_rm_vm_exited_payload {
+	__le16 vmid;
+	__le16 exit_type;
+	__le32 exit_reason_size;
+	u8 exit_reason[];
+} __packed;
+
+enum gunyah_rm_notification_id {
+	/* clang-format off */
+	GUNYAH_RM_NOTIFICATION_VM_EXITED		 = 0x56100001,
+	GUNYAH_RM_NOTIFICATION_VM_STATUS		 = 0x56100008,
+	/* clang-format on */
+};
+
+enum gunyah_rm_vm_status {
+	/* clang-format off */
+	GUNYAH_RM_VM_STATUS_NO_STATE		= 0,
+	GUNYAH_RM_VM_STATUS_INIT		= 1,
+	GUNYAH_RM_VM_STATUS_READY		= 2,
+	GUNYAH_RM_VM_STATUS_RUNNING		= 3,
+	GUNYAH_RM_VM_STATUS_PAUSED		= 4,
+	GUNYAH_RM_VM_STATUS_LOAD		= 5,
+	GUNYAH_RM_VM_STATUS_AUTH		= 6,
+	GUNYAH_RM_VM_STATUS_INIT_FAILED		= 8,
+	GUNYAH_RM_VM_STATUS_EXITED		= 9,
+	GUNYAH_RM_VM_STATUS_RESETTING		= 10,
+	GUNYAH_RM_VM_STATUS_RESET		= 11,
+	GUNYAH_RM_VM_STATUS_RESET_FAILED	= 12,
+	/* clang-format on */
+};
+ANDROID_KABI_ENUMERATOR_IGNORE(gunyah_rm_vm_status, GUNYAH_RM_VM_STATUS_RESET_FAILED);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 struct gunyah_rm_vm_status_payload {
 	__le16 vmid;

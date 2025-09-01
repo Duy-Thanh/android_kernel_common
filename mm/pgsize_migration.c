@@ -154,6 +154,7 @@ static __always_inline bool str_has_suffix(const char *str, const char *suffix)
 	return !strncmp(str + str_len - suffix_len, suffix, suffix_len);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #ifdef CONFIG_PER_VMA_LOCK
 /*
  * The dynamic linker, or interpreter, operates within the process context
@@ -290,6 +291,111 @@ void madvise_vma_pad_pages(struct vm_area_struct *vma,
 
 	/* Keep this as the last check to avoid IO if possible. */
 	if (!is_elf_file(vma->vm_file))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/*
+ * The dynamic linker, or interpreter, operates within the process context
+ * of the binary that necessitated dynamic linking.
+ *
+ * Consequently, process context identifiers; like PID, comm, ...; cannot
+ * be used to differentiate whether the execution context belongs to the
+ * dynamic linker or not.
+ *
+ * linker_ctx() deduces whether execution is currently in the dynamic linker's
+ * context by correlating the current userspace instruction pointer with the
+ * VMAs of the current task.
+ *
+ * Returns true if in linker context, otherwise false.
+ *
+ * Caller must hold mmap lock in read mode.
+ */
+static inline bool linker_ctx(void)
+{
+	struct pt_regs *regs = task_pt_regs(current);
+	struct mm_struct *mm = current->mm;
+	struct vm_area_struct *vma;
+	struct file *file;
+
+	if (!regs)
+		return false;
+
+	vma = find_vma(mm, instruction_pointer(regs));
+
+	/* Current execution context, the VMA must be present */
+	BUG_ON(!vma);
+
+	file = vma->vm_file;
+	if (!file)
+		return false;
+
+	if ((vma->vm_flags & VM_EXEC)) {
+		char buf[64];
+		const int bufsize = sizeof(buf);
+		char *path;
+
+		memset(buf, 0, bufsize);
+		path = d_path(&file->f_path, buf, bufsize);
+
+		/*
+		 * Depending on interpreter requested, valid paths could be any of:
+		 *   1. /system/bin/bootstrap/linker64
+		 *   2. /system/bin/linker64
+		 *   3. /apex/com.android.runtime/bin/linker64
+		 *
+		 * Check the base name (linker64).
+		 */
+		if (!strcmp(kbasename(path), "linker64"))
+			return true;
+	}
+
+	return false;
+}
+
+/*
+ * Saves the number of padding pages for an ELF segment mapping
+ * in vm_flags.
+ *
+ * The number of padding pages is deduced from the madvise DONTNEED range [start, end)
+ * if the following conditions are met:
+ *    1) The range is enclosed by a single VMA
+ *    2) The range ends at the end address of the VMA
+ *    3) The range starts at an address greater than the start address of the VMA
+ *    4) The number of the pages in the range does not exceed VM_TOTAL_PAD_PAGES.
+ *    5) The VMA is a file backed VMA.
+ *    6) The file backing the VMA is a shared library (*.so)
+ *    7) The madvise was requested by bionic's dynamic linker.
+ */
+void madvise_vma_pad_pages(struct vm_area_struct *vma,
+			   unsigned long start, unsigned long end)
+{
+	unsigned long nr_pad_pages;
+
+	if (!is_pgsize_migration_enabled())
+		return;
+
+	/*
+	 * If the madvise range is it at the end of the file save the number of
+	 * pages in vm_flags (only need 4 bits are needed for up to 64kB aligned ELFs).
+	 */
+	if (start <= vma->vm_start || end != vma->vm_end)
+		return;
+
+	nr_pad_pages = (end - start) >> PAGE_SHIFT;
+
+	if (!nr_pad_pages || nr_pad_pages > VM_TOTAL_PAD_PAGES)
+		return;
+
+	/* Only handle this for file backed VMAs */
+	if (!vma->vm_file)
+		return;
+
+	/* Limit this to only shared libraries (*.so) */
+	if (!str_has_suffix(vma->vm_file->f_path.dentry->d_name.name, ".so"))
+		return;
+
+	/* Only bionic's dynamic linker needs to hint padding pages. */
+	if (!linker_ctx())
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return;
 
 	vma_set_pad_pages(vma, nr_pad_pages);

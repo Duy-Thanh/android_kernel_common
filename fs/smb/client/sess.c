@@ -360,6 +360,7 @@ cifs_chan_update_iface(struct cifs_ses *ses, struct TCP_Server_Info *server)
 	struct cifs_server_iface *old_iface = NULL;
 	struct cifs_server_iface *last_iface = NULL;
 	struct sockaddr_storage ss;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int retry = 0;
 
 	spin_lock(&ses->chan_lock);
@@ -434,6 +435,74 @@ try_again:
 		if (!retry++)
 			goto try_again;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	spin_lock(&ses->chan_lock);
+	chan_index = cifs_ses_get_chan_index(ses, server);
+	if (chan_index == CIFS_INVAL_CHAN_INDEX) {
+		spin_unlock(&ses->chan_lock);
+		return;
+	}
+
+	if (ses->chans[chan_index].iface) {
+		old_iface = ses->chans[chan_index].iface;
+		if (old_iface->is_active) {
+			spin_unlock(&ses->chan_lock);
+			return;
+		}
+	}
+	spin_unlock(&ses->chan_lock);
+
+	spin_lock(&server->srv_lock);
+	ss = server->dstaddr;
+	spin_unlock(&server->srv_lock);
+
+	spin_lock(&ses->iface_lock);
+	if (!ses->iface_count) {
+		spin_unlock(&ses->iface_lock);
+		cifs_dbg(ONCE, "server %s does not advertise interfaces\n", ses->server->hostname);
+		return;
+	}
+
+	last_iface = list_last_entry(&ses->iface_list, struct cifs_server_iface,
+				     iface_head);
+	iface_min_speed = last_iface->speed;
+
+	/* then look for a new one */
+	list_for_each_entry(iface, &ses->iface_list, iface_head) {
+		if (!chan_index) {
+			/* if we're trying to get the updated iface for primary channel */
+			if (!cifs_match_ipaddr((struct sockaddr *) &ss,
+					       (struct sockaddr *) &iface->sockaddr))
+				continue;
+
+			kref_get(&iface->refcount);
+			break;
+		}
+
+		/* do not mix rdma and non-rdma interfaces */
+		if (iface->rdma_capable != server->rdma)
+			continue;
+
+		if (!iface->is_active ||
+		    (is_ses_using_iface(ses, iface) &&
+		     !iface->rss_capable)) {
+			continue;
+		}
+
+		/* check if we already allocated enough channels */
+		iface_weight = iface->speed / iface_min_speed;
+
+		if (iface->weight_fulfilled >= iface_weight)
+			continue;
+
+		kref_get(&iface->refcount);
+		break;
+	}
+
+	if (list_entry_is_head(iface, &ses->iface_list, iface_head)) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		iface = NULL;
 		cifs_dbg(FYI, "unable to find a suitable iface\n");
 	}

@@ -335,6 +335,7 @@ static inline void clear_and_wake_up_bit(int bit, void *word)
 	wake_up_bit(word, bit);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /**
  * test_and_clear_wake_up_bit - clear a bit if it was set: wake up anyone waiting on that bit
  * @bit: the bit of the word being waited on
@@ -395,4 +396,7 @@ do {									\
 	wake_up_var(var);						\
 } while (0)
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 #endif /* _LINUX_WAIT_BIT_H */

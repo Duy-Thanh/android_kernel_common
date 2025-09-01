@@ -33,6 +33,7 @@
 
 #include <drm/drm_util.h>
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* Detach the cursor from the bulk move list*/
 static void
 ttm_resource_cursor_clear_bulk(struct ttm_resource_cursor *cursor)
@@ -503,6 +504,480 @@ int ttm_resource_manager_evict_all(struct ttm_device *bdev,
 
 	if (ret && ret != -ENOENT)
 		return ret;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(dma_buf);
+ANDROID_KABI_DECLONLY(dma_buf_attachment);
+
+/* Detach the cursor from the bulk move list*/
+static void
+ttm_resource_cursor_clear_bulk(struct ttm_resource_cursor *cursor)
+{
+	lockdep_assert_held(&cursor->man->bdev->lru_lock);
+
+	cursor->bulk = NULL;
+	list_del_init(&cursor->bulk_link);
+}
+
+/* Move the cursor to the end of the bulk move list it's in */
+static void ttm_resource_cursor_move_bulk_tail(struct ttm_lru_bulk_move *bulk,
+					       struct ttm_resource_cursor *cursor)
+{
+	struct ttm_lru_bulk_move_pos *pos;
+
+	lockdep_assert_held(&cursor->man->bdev->lru_lock);
+
+	if (WARN_ON_ONCE(bulk != cursor->bulk)) {
+		list_del_init(&cursor->bulk_link);
+		return;
+	}
+
+	pos = &bulk->pos[cursor->mem_type][cursor->priority];
+	if (pos->last)
+		list_move(&cursor->hitch.link, &pos->last->lru.link);
+	ttm_resource_cursor_clear_bulk(cursor);
+}
+
+/* Move all cursors attached to a bulk move to its end */
+static void ttm_bulk_move_adjust_cursors(struct ttm_lru_bulk_move *bulk)
+{
+	struct ttm_resource_cursor *cursor, *next;
+
+	list_for_each_entry_safe(cursor, next, &bulk->cursor_list, bulk_link)
+		ttm_resource_cursor_move_bulk_tail(bulk, cursor);
+}
+
+/* Remove a cursor from an empty bulk move list */
+static void ttm_bulk_move_drop_cursors(struct ttm_lru_bulk_move *bulk)
+{
+	struct ttm_resource_cursor *cursor, *next;
+
+	list_for_each_entry_safe(cursor, next, &bulk->cursor_list, bulk_link)
+		ttm_resource_cursor_clear_bulk(cursor);
+}
+
+/**
+ * ttm_resource_cursor_fini() - Finalize the LRU list cursor usage
+ * @cursor: The struct ttm_resource_cursor to finalize.
+ *
+ * The function pulls the LRU list cursor off any lists it was previusly
+ * attached to. Needs to be called with the LRU lock held. The function
+ * can be called multiple times after eachother.
+ */
+void ttm_resource_cursor_fini(struct ttm_resource_cursor *cursor)
+{
+	lockdep_assert_held(&cursor->man->bdev->lru_lock);
+	list_del_init(&cursor->hitch.link);
+	ttm_resource_cursor_clear_bulk(cursor);
+}
+
+/**
+ * ttm_lru_bulk_move_init - initialize a bulk move structure
+ * @bulk: the structure to init
+ *
+ * For now just memset the structure to zero.
+ */
+void ttm_lru_bulk_move_init(struct ttm_lru_bulk_move *bulk)
+{
+	memset(bulk, 0, sizeof(*bulk));
+	INIT_LIST_HEAD(&bulk->cursor_list);
+}
+EXPORT_SYMBOL(ttm_lru_bulk_move_init);
+
+/**
+ * ttm_lru_bulk_move_fini - finalize a bulk move structure
+ * @bdev: The struct ttm_device
+ * @bulk: the structure to finalize
+ *
+ * Sanity checks that bulk moves don't have any
+ * resources left and hence no cursors attached.
+ */
+void ttm_lru_bulk_move_fini(struct ttm_device *bdev,
+			    struct ttm_lru_bulk_move *bulk)
+{
+	spin_lock(&bdev->lru_lock);
+	ttm_bulk_move_drop_cursors(bulk);
+	spin_unlock(&bdev->lru_lock);
+}
+EXPORT_SYMBOL(ttm_lru_bulk_move_fini);
+
+/**
+ * ttm_lru_bulk_move_tail - bulk move range of resources to the LRU tail.
+ *
+ * @bulk: bulk move structure
+ *
+ * Bulk move BOs to the LRU tail, only valid to use when driver makes sure that
+ * resource order never changes. Should be called with &ttm_device.lru_lock held.
+ */
+void ttm_lru_bulk_move_tail(struct ttm_lru_bulk_move *bulk)
+{
+	unsigned i, j;
+
+	ttm_bulk_move_adjust_cursors(bulk);
+	for (i = 0; i < TTM_NUM_MEM_TYPES; ++i) {
+		for (j = 0; j < TTM_MAX_BO_PRIORITY; ++j) {
+			struct ttm_lru_bulk_move_pos *pos = &bulk->pos[i][j];
+			struct ttm_resource_manager *man;
+
+			if (!pos->first)
+				continue;
+
+			lockdep_assert_held(&pos->first->bo->bdev->lru_lock);
+			dma_resv_assert_held(pos->first->bo->base.resv);
+			dma_resv_assert_held(pos->last->bo->base.resv);
+
+			man = ttm_manager_type(pos->first->bo->bdev, i);
+			list_bulk_move_tail(&man->lru[j], &pos->first->lru.link,
+					    &pos->last->lru.link);
+		}
+	}
+}
+EXPORT_SYMBOL(ttm_lru_bulk_move_tail);
+
+/* Return the bulk move pos object for this resource */
+static struct ttm_lru_bulk_move_pos *
+ttm_lru_bulk_move_pos(struct ttm_lru_bulk_move *bulk, struct ttm_resource *res)
+{
+	return &bulk->pos[res->mem_type][res->bo->priority];
+}
+
+/* Return the previous resource on the list (skip over non-resource list items) */
+static struct ttm_resource *ttm_lru_prev_res(struct ttm_resource *cur)
+{
+	struct ttm_lru_item *lru = &cur->lru;
+
+	do {
+		lru = list_prev_entry(lru, link);
+	} while (!ttm_lru_item_is_res(lru));
+
+	return ttm_lru_item_to_res(lru);
+}
+
+/* Return the next resource on the list (skip over non-resource list items) */
+static struct ttm_resource *ttm_lru_next_res(struct ttm_resource *cur)
+{
+	struct ttm_lru_item *lru = &cur->lru;
+
+	do {
+		lru = list_next_entry(lru, link);
+	} while (!ttm_lru_item_is_res(lru));
+
+	return ttm_lru_item_to_res(lru);
+}
+
+/* Move the resource to the tail of the bulk move range */
+static void ttm_lru_bulk_move_pos_tail(struct ttm_lru_bulk_move_pos *pos,
+				       struct ttm_resource *res)
+{
+	if (pos->last != res) {
+		if (pos->first == res)
+			pos->first = ttm_lru_next_res(res);
+		list_move(&res->lru.link, &pos->last->lru.link);
+		pos->last = res;
+	}
+}
+
+/* Add the resource to a bulk_move cursor */
+static void ttm_lru_bulk_move_add(struct ttm_lru_bulk_move *bulk,
+				  struct ttm_resource *res)
+{
+	struct ttm_lru_bulk_move_pos *pos = ttm_lru_bulk_move_pos(bulk, res);
+
+	if (!pos->first) {
+		pos->first = res;
+		pos->last = res;
+	} else {
+		WARN_ON(pos->first->bo->base.resv != res->bo->base.resv);
+		ttm_lru_bulk_move_pos_tail(pos, res);
+	}
+}
+
+/* Remove the resource from a bulk_move range */
+static void ttm_lru_bulk_move_del(struct ttm_lru_bulk_move *bulk,
+				  struct ttm_resource *res)
+{
+	struct ttm_lru_bulk_move_pos *pos = ttm_lru_bulk_move_pos(bulk, res);
+
+	if (unlikely(WARN_ON(!pos->first || !pos->last) ||
+		     (pos->first == res && pos->last == res))) {
+		pos->first = NULL;
+		pos->last = NULL;
+	} else if (pos->first == res) {
+		pos->first = ttm_lru_next_res(res);
+	} else if (pos->last == res) {
+		pos->last = ttm_lru_prev_res(res);
+	} else {
+		list_move(&res->lru.link, &pos->last->lru.link);
+	}
+}
+
+/* Add the resource to a bulk move if the BO is configured for it */
+void ttm_resource_add_bulk_move(struct ttm_resource *res,
+				struct ttm_buffer_object *bo)
+{
+	if (bo->bulk_move && !bo->pin_count)
+		ttm_lru_bulk_move_add(bo->bulk_move, res);
+}
+
+/* Remove the resource from a bulk move if the BO is configured for it */
+void ttm_resource_del_bulk_move(struct ttm_resource *res,
+				struct ttm_buffer_object *bo)
+{
+	if (bo->bulk_move && !bo->pin_count)
+		ttm_lru_bulk_move_del(bo->bulk_move, res);
+}
+
+/* Move a resource to the LRU or bulk tail */
+void ttm_resource_move_to_lru_tail(struct ttm_resource *res)
+{
+	struct ttm_buffer_object *bo = res->bo;
+	struct ttm_device *bdev = bo->bdev;
+
+	lockdep_assert_held(&bo->bdev->lru_lock);
+
+	if (bo->pin_count) {
+		list_move_tail(&res->lru.link, &bdev->pinned);
+
+	} else	if (bo->bulk_move) {
+		struct ttm_lru_bulk_move_pos *pos =
+			ttm_lru_bulk_move_pos(bo->bulk_move, res);
+
+		ttm_lru_bulk_move_pos_tail(pos, res);
+	} else {
+		struct ttm_resource_manager *man;
+
+		man = ttm_manager_type(bdev, res->mem_type);
+		list_move_tail(&res->lru.link, &man->lru[bo->priority]);
+	}
+}
+
+/**
+ * ttm_resource_init - resource object constructure
+ * @bo: buffer object this resources is allocated for
+ * @place: placement of the resource
+ * @res: the resource object to inistilize
+ *
+ * Initialize a new resource object. Counterpart of ttm_resource_fini().
+ */
+void ttm_resource_init(struct ttm_buffer_object *bo,
+                       const struct ttm_place *place,
+                       struct ttm_resource *res)
+{
+	struct ttm_resource_manager *man;
+
+	res->start = 0;
+	res->size = bo->base.size;
+	res->mem_type = place->mem_type;
+	res->placement = place->flags;
+	res->bus.addr = NULL;
+	res->bus.offset = 0;
+	res->bus.is_iomem = false;
+	res->bus.caching = ttm_cached;
+	res->bo = bo;
+
+	man = ttm_manager_type(bo->bdev, place->mem_type);
+	spin_lock(&bo->bdev->lru_lock);
+	if (bo->pin_count)
+		list_add_tail(&res->lru.link, &bo->bdev->pinned);
+	else
+		list_add_tail(&res->lru.link, &man->lru[bo->priority]);
+	man->usage += res->size;
+	spin_unlock(&bo->bdev->lru_lock);
+}
+EXPORT_SYMBOL(ttm_resource_init);
+
+/**
+ * ttm_resource_fini - resource destructor
+ * @man: the resource manager this resource belongs to
+ * @res: the resource to clean up
+ *
+ * Should be used by resource manager backends to clean up the TTM resource
+ * objects before freeing the underlying structure. Makes sure the resource is
+ * removed from the LRU before destruction.
+ * Counterpart of ttm_resource_init().
+ */
+void ttm_resource_fini(struct ttm_resource_manager *man,
+		       struct ttm_resource *res)
+{
+	struct ttm_device *bdev = man->bdev;
+
+	spin_lock(&bdev->lru_lock);
+	list_del_init(&res->lru.link);
+	man->usage -= res->size;
+	spin_unlock(&bdev->lru_lock);
+}
+EXPORT_SYMBOL(ttm_resource_fini);
+
+int ttm_resource_alloc(struct ttm_buffer_object *bo,
+		       const struct ttm_place *place,
+		       struct ttm_resource **res_ptr)
+{
+	struct ttm_resource_manager *man =
+		ttm_manager_type(bo->bdev, place->mem_type);
+	int ret;
+
+	ret = man->func->alloc(man, bo, place, res_ptr);
+	if (ret)
+		return ret;
+
+	spin_lock(&bo->bdev->lru_lock);
+	ttm_resource_add_bulk_move(*res_ptr, bo);
+	spin_unlock(&bo->bdev->lru_lock);
+	return 0;
+}
+EXPORT_SYMBOL_FOR_TESTS_ONLY(ttm_resource_alloc);
+
+void ttm_resource_free(struct ttm_buffer_object *bo, struct ttm_resource **res)
+{
+	struct ttm_resource_manager *man;
+
+	if (!*res)
+		return;
+
+	spin_lock(&bo->bdev->lru_lock);
+	ttm_resource_del_bulk_move(*res, bo);
+	spin_unlock(&bo->bdev->lru_lock);
+	man = ttm_manager_type(bo->bdev, (*res)->mem_type);
+	man->func->free(man, *res);
+	*res = NULL;
+}
+EXPORT_SYMBOL(ttm_resource_free);
+
+/**
+ * ttm_resource_intersects - test for intersection
+ *
+ * @bdev: TTM device structure
+ * @res: The resource to test
+ * @place: The placement to test
+ * @size: How many bytes the new allocation needs.
+ *
+ * Test if @res intersects with @place and @size. Used for testing if evictions
+ * are valueable or not.
+ *
+ * Returns true if the res placement intersects with @place and @size.
+ */
+bool ttm_resource_intersects(struct ttm_device *bdev,
+			     struct ttm_resource *res,
+			     const struct ttm_place *place,
+			     size_t size)
+{
+	struct ttm_resource_manager *man;
+
+	if (!res)
+		return false;
+
+	man = ttm_manager_type(bdev, res->mem_type);
+	if (!place || !man->func->intersects)
+		return true;
+
+	return man->func->intersects(man, res, place, size);
+}
+
+/**
+ * ttm_resource_compatible - check if resource is compatible with placement
+ *
+ * @res: the resource to check
+ * @placement: the placement to check against
+ * @evicting: true if the caller is doing evictions
+ *
+ * Returns true if the placement is compatible.
+ */
+bool ttm_resource_compatible(struct ttm_resource *res,
+			     struct ttm_placement *placement,
+			     bool evicting)
+{
+	struct ttm_buffer_object *bo = res->bo;
+	struct ttm_device *bdev = bo->bdev;
+	unsigned i;
+
+	if (res->placement & TTM_PL_FLAG_TEMPORARY)
+		return false;
+
+	for (i = 0; i < placement->num_placement; i++) {
+		const struct ttm_place *place = &placement->placement[i];
+		struct ttm_resource_manager *man;
+
+		if (res->mem_type != place->mem_type)
+			continue;
+
+		if (place->flags & (evicting ? TTM_PL_FLAG_DESIRED :
+				    TTM_PL_FLAG_FALLBACK))
+			continue;
+
+		if (place->flags & TTM_PL_FLAG_CONTIGUOUS &&
+		    !(res->placement & TTM_PL_FLAG_CONTIGUOUS))
+			continue;
+
+		man = ttm_manager_type(bdev, res->mem_type);
+		if (man->func->compatible &&
+		    !man->func->compatible(man, res, place, bo->base.size))
+			continue;
+
+		return true;
+	}
+	return false;
+}
+
+void ttm_resource_set_bo(struct ttm_resource *res,
+			 struct ttm_buffer_object *bo)
+{
+	spin_lock(&bo->bdev->lru_lock);
+	res->bo = bo;
+	spin_unlock(&bo->bdev->lru_lock);
+}
+
+/**
+ * ttm_resource_manager_init
+ *
+ * @man: memory manager object to init
+ * @bdev: ttm device this manager belongs to
+ * @size: size of managed resources in arbitrary units
+ *
+ * Initialise core parts of a manager object.
+ */
+void ttm_resource_manager_init(struct ttm_resource_manager *man,
+			       struct ttm_device *bdev,
+			       uint64_t size)
+{
+	unsigned i;
+
+	spin_lock_init(&man->move_lock);
+	man->bdev = bdev;
+	man->size = size;
+	man->usage = 0;
+
+	for (i = 0; i < TTM_MAX_BO_PRIORITY; ++i)
+		INIT_LIST_HEAD(&man->lru[i]);
+	man->move = NULL;
+}
+EXPORT_SYMBOL(ttm_resource_manager_init);
+
+/*
+ * ttm_resource_manager_evict_all
+ *
+ * @bdev - device to use
+ * @man - manager to use
+ *
+ * Evict all the objects out of a memory manager until it is empty.
+ * Part of memory manager cleanup sequence.
+ */
+int ttm_resource_manager_evict_all(struct ttm_device *bdev,
+				   struct ttm_resource_manager *man)
+{
+	struct ttm_operation_ctx ctx = {
+		.interruptible = false,
+		.no_wait_gpu = false,
+		.force_alloc = true
+	};
+	struct dma_fence *fence;
+	int ret;
+
+	do {
+		ret = ttm_bo_evict_first(bdev, man, &ctx);
+		cond_resched();
+	} while (!ret);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	spin_lock(&man->move_lock);
 	fence = dma_fence_get(man->move);

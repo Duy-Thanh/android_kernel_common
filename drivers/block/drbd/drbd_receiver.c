@@ -2500,11 +2500,16 @@ static int handle_write_conflicts(struct drbd_device *device,
 			peer_req->w.cb = superseded ? e_send_superseded :
 						   e_send_retry_write;
 			list_add_tail(&peer_req->w.list, &device->done_ee);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			/* put is in drbd_send_acks_wf() */
 			kref_get(&device->kref);
 			if (!queue_work(connection->ack_sender,
 					&peer_req->peer_device->send_acks_work))
 				kref_put(&device->kref, drbd_destroy_device);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			queue_work(connection->ack_sender, &peer_req->peer_device->send_acks_work);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 			err = -ENOENT;
 			goto out;

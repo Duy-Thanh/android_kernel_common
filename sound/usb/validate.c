@@ -221,6 +221,7 @@ static bool validate_uac3_feature_unit(const void *p,
 	return d->bLength >= sizeof(*d) + 4 + 2;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static bool validate_uac3_power_domain_unit(const void *p,
 					    const struct usb_desc_validator *v)
 {
@@ -297,6 +298,73 @@ static const struct usb_desc_validator audio_validators[] = {
 	/* UAC_VERSION_3, UAC3_SAMPLE_RATE_CONVERTER: not implemented yet */
 	/* UAC_VERSION_3, UAC3_CONNECTORS: not implemented yet */
 	FUNC(UAC_VERSION_3, UAC3_POWER_DOMAIN, validate_uac3_power_domain_unit),
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static bool validate_midi_out_jack(const void *p,
+				   const struct usb_desc_validator *v)
+{
+	const struct usb_midi_out_jack_descriptor *d = p;
+
+	return d->bLength >= sizeof(*d) &&
+		d->bLength >= sizeof(*d) + d->bNrInputPins * 2;
+}
+
+#define FIXED(p, t, s) { .protocol = (p), .type = (t), .size = sizeof(s) }
+#define FUNC(p, t, f) { .protocol = (p), .type = (t), .func = (f) }
+
+static const struct usb_desc_validator audio_validators[] = {
+	/* UAC1 */
+	FUNC(UAC_VERSION_1, UAC_HEADER, validate_uac1_header),
+	FIXED(UAC_VERSION_1, UAC_INPUT_TERMINAL,
+	      struct uac_input_terminal_descriptor),
+	FIXED(UAC_VERSION_1, UAC_OUTPUT_TERMINAL,
+	      struct uac1_output_terminal_descriptor),
+	FUNC(UAC_VERSION_1, UAC_MIXER_UNIT, validate_mixer_unit),
+	FUNC(UAC_VERSION_1, UAC_SELECTOR_UNIT, validate_selector_unit),
+	FUNC(UAC_VERSION_1, UAC_FEATURE_UNIT, validate_uac1_feature_unit),
+	FUNC(UAC_VERSION_1, UAC1_PROCESSING_UNIT, validate_processing_unit),
+	FUNC(UAC_VERSION_1, UAC1_EXTENSION_UNIT, validate_processing_unit),
+
+	/* UAC2 */
+	FIXED(UAC_VERSION_2, UAC_HEADER, struct uac2_ac_header_descriptor),
+	FIXED(UAC_VERSION_2, UAC_INPUT_TERMINAL,
+	      struct uac2_input_terminal_descriptor),
+	FIXED(UAC_VERSION_2, UAC_OUTPUT_TERMINAL,
+	      struct uac2_output_terminal_descriptor),
+	FUNC(UAC_VERSION_2, UAC_MIXER_UNIT, validate_mixer_unit),
+	FUNC(UAC_VERSION_2, UAC_SELECTOR_UNIT, validate_selector_unit),
+	FUNC(UAC_VERSION_2, UAC_FEATURE_UNIT, validate_uac2_feature_unit),
+	/* UAC_VERSION_2, UAC2_EFFECT_UNIT: not implemented yet */
+	FUNC(UAC_VERSION_2, UAC2_PROCESSING_UNIT_V2, validate_processing_unit),
+	FUNC(UAC_VERSION_2, UAC2_EXTENSION_UNIT_V2, validate_processing_unit),
+	FIXED(UAC_VERSION_2, UAC2_CLOCK_SOURCE,
+	      struct uac_clock_source_descriptor),
+	FUNC(UAC_VERSION_2, UAC2_CLOCK_SELECTOR, validate_selector_unit),
+	FIXED(UAC_VERSION_2, UAC2_CLOCK_MULTIPLIER,
+	      struct uac_clock_multiplier_descriptor),
+	/* UAC_VERSION_2, UAC2_SAMPLE_RATE_CONVERTER: not implemented yet */
+
+	/* UAC3 */
+	FIXED(UAC_VERSION_2, UAC_HEADER, struct uac3_ac_header_descriptor),
+	FIXED(UAC_VERSION_3, UAC_INPUT_TERMINAL,
+	      struct uac3_input_terminal_descriptor),
+	FIXED(UAC_VERSION_3, UAC_OUTPUT_TERMINAL,
+	      struct uac3_output_terminal_descriptor),
+	/* UAC_VERSION_3, UAC3_EXTENDED_TERMINAL: not implemented yet */
+	FUNC(UAC_VERSION_3, UAC3_MIXER_UNIT, validate_mixer_unit),
+	FUNC(UAC_VERSION_3, UAC3_SELECTOR_UNIT, validate_selector_unit),
+	FUNC(UAC_VERSION_3, UAC_FEATURE_UNIT, validate_uac3_feature_unit),
+	/*  UAC_VERSION_3, UAC3_EFFECT_UNIT: not implemented yet */
+	FUNC(UAC_VERSION_3, UAC3_PROCESSING_UNIT, validate_processing_unit),
+	FUNC(UAC_VERSION_3, UAC3_EXTENSION_UNIT, validate_processing_unit),
+	FIXED(UAC_VERSION_3, UAC3_CLOCK_SOURCE,
+	      struct uac3_clock_source_descriptor),
+	FUNC(UAC_VERSION_3, UAC3_CLOCK_SELECTOR, validate_selector_unit),
+	FIXED(UAC_VERSION_3, UAC3_CLOCK_MULTIPLIER,
+	      struct uac3_clock_multiplier_descriptor),
+	/* UAC_VERSION_3, UAC3_SAMPLE_RATE_CONVERTER: not implemented yet */
+	/* UAC_VERSION_3, UAC3_CONNECTORS: not implemented yet */
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	{ } /* terminator */
 };
 

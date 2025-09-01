@@ -12,6 +12,7 @@
 #include <linux/mutex.h>
 #include <linux/err.h>
 #include <linux/spi/spi.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/types.h>
 #include <linux/iio/iio.h>
 #include <linux/iio/sysfs.h>
@@ -176,6 +177,167 @@ static irqreturn_t maxim_thermocouple_trigger_handler(int irq, void *private)
 	ret = spi_read(data->spi, data->buffer.raw, data->chip->read_size);
 	if (!ret) {
 		iio_push_to_buffers_with_timestamp(indio_dev, &data->buffer,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/iio/iio.h>
+#include <linux/iio/sysfs.h>
+#include <linux/iio/trigger.h>
+#include <linux/iio/buffer.h>
+#include <linux/iio/triggered_buffer.h>
+#include <linux/iio/trigger_consumer.h>
+
+#define MAXIM_THERMOCOUPLE_DRV_NAME	"maxim_thermocouple"
+
+enum {
+	MAX6675,
+	MAX31855,
+	MAX31855K,
+	MAX31855J,
+	MAX31855N,
+	MAX31855S,
+	MAX31855T,
+	MAX31855E,
+	MAX31855R,
+};
+
+static const char maxim_tc_types[] = {
+	'K', '?', 'K', 'J', 'N', 'S', 'T', 'E', 'R'
+};
+
+static const struct iio_chan_spec max6675_channels[] = {
+	{	/* thermocouple temperature */
+		.type = IIO_TEMP,
+		.info_mask_separate =
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE) |
+			BIT(IIO_CHAN_INFO_THERMOCOUPLE_TYPE),
+		.scan_index = 0,
+		.scan_type = {
+			.sign = 's',
+			.realbits = 13,
+			.storagebits = 16,
+			.shift = 3,
+			.endianness = IIO_BE,
+		},
+	},
+	IIO_CHAN_SOFT_TIMESTAMP(1),
+};
+
+static const struct iio_chan_spec max31855_channels[] = {
+	{	/* thermocouple temperature */
+		.type = IIO_TEMP,
+		.address = 2,
+		.info_mask_separate =
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE) |
+			BIT(IIO_CHAN_INFO_THERMOCOUPLE_TYPE),
+		.scan_index = 0,
+		.scan_type = {
+			.sign = 's',
+			.realbits = 14,
+			.storagebits = 16,
+			.shift = 2,
+			.endianness = IIO_BE,
+		},
+	},
+	{	/* cold junction temperature */
+		.type = IIO_TEMP,
+		.address = 0,
+		.channel2 = IIO_MOD_TEMP_AMBIENT,
+		.modified = 1,
+		.info_mask_separate =
+			BIT(IIO_CHAN_INFO_RAW) | BIT(IIO_CHAN_INFO_SCALE),
+		.scan_index = 1,
+		.scan_type = {
+			.sign = 's',
+			.realbits = 12,
+			.storagebits = 16,
+			.shift = 4,
+			.endianness = IIO_BE,
+		},
+	},
+	IIO_CHAN_SOFT_TIMESTAMP(2),
+};
+
+static const unsigned long max31855_scan_masks[] = {0x3, 0};
+
+struct maxim_thermocouple_chip {
+	const struct iio_chan_spec *channels;
+	const unsigned long *scan_masks;
+	u8 num_channels;
+	u8 read_size;
+
+	/* bit-check for valid input */
+	u32 status_bit;
+};
+
+static const struct maxim_thermocouple_chip maxim_thermocouple_chips[] = {
+	[MAX6675] = {
+			.channels = max6675_channels,
+			.num_channels = ARRAY_SIZE(max6675_channels),
+			.read_size = 2,
+			.status_bit = BIT(2),
+		},
+	[MAX31855] = {
+			.channels = max31855_channels,
+			.num_channels = ARRAY_SIZE(max31855_channels),
+			.read_size = 4,
+			.scan_masks = max31855_scan_masks,
+			.status_bit = BIT(16),
+		},
+};
+
+struct maxim_thermocouple_data {
+	struct spi_device *spi;
+	const struct maxim_thermocouple_chip *chip;
+	char tc_type;
+
+	u8 buffer[16] __aligned(IIO_DMA_MINALIGN);
+};
+
+static int maxim_thermocouple_read(struct maxim_thermocouple_data *data,
+				   struct iio_chan_spec const *chan, int *val)
+{
+	unsigned int storage_bytes = data->chip->read_size;
+	unsigned int shift = chan->scan_type.shift + (chan->address * 8);
+	__be16 buf16;
+	__be32 buf32;
+	int ret;
+
+	switch (storage_bytes) {
+	case 2:
+		ret = spi_read(data->spi, (void *)&buf16, storage_bytes);
+		*val = be16_to_cpu(buf16);
+		break;
+	case 4:
+		ret = spi_read(data->spi, (void *)&buf32, storage_bytes);
+		*val = be32_to_cpu(buf32);
+		break;
+	default:
+		ret = -EINVAL;
+	}
+
+	if (ret)
+		return ret;
+
+	/* check to be sure this is a valid reading */
+	if (*val & data->chip->status_bit)
+		return -EINVAL;
+
+	*val = sign_extend32(*val >> shift, chan->scan_type.realbits - 1);
+
+	return 0;
+}
+
+static irqreturn_t maxim_thermocouple_trigger_handler(int irq, void *private)
+{
+	struct iio_poll_func *pf = private;
+	struct iio_dev *indio_dev = pf->indio_dev;
+	struct maxim_thermocouple_data *data = iio_priv(indio_dev);
+	int ret;
+
+	ret = spi_read(data->spi, data->buffer, data->chip->read_size);
+	if (!ret) {
+		iio_push_to_buffers_with_timestamp(indio_dev, data->buffer,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 						   iio_get_time_ns(indio_dev));
 	}
 

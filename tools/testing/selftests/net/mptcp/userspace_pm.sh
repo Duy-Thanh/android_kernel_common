@@ -173,6 +173,7 @@ make_connection()
 		is_v6="v4"
 	fi
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	# set this on the client side only: will not affect the rest
 	ip netns exec "$ns2" sysctl -q net.mptcp.allow_join_initial_addr_port=0
 
@@ -220,6 +221,48 @@ make_connection()
 		print_title "Connection info: ${client_addr}:${client_port} -> ${connect_addr}:${app_port}"
 	else
 		test_fail "Expected tokens (c:${client_token} - s:${server_token}), server (c:${client_serverside} - s:${server_serverside}), nojoin (c:${client_nojoin} - s:${server_nojoin})"
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	:>"$client_evts"
+	:>"$server_evts"
+
+	# Run the server
+	ip netns exec "$ns1" \
+	   ./mptcp_connect -s MPTCP -w 300 -p $app_port -l $listen_addr > /dev/null 2>&1 &
+	local server_pid=$!
+	sleep 0.5
+
+	# Run the client, transfer $file and stay connected to the server
+	# to conduct tests
+	ip netns exec "$ns2" \
+	   ./mptcp_connect -s MPTCP -w 300 -m sendfile -p $app_port $connect_addr\
+	   2>&1 > /dev/null < "$file" &
+	local client_pid=$!
+	sleep 1
+
+	# Capture client/server attributes from MPTCP connection netlink events
+
+	local client_token
+	local client_port
+	local client_serverside
+	local server_token
+	local server_serverside
+
+	client_token=$(mptcp_lib_evts_get_info token "$client_evts")
+	client_port=$(mptcp_lib_evts_get_info sport "$client_evts")
+	client_serverside=$(mptcp_lib_evts_get_info server_side "$client_evts")
+	server_token=$(mptcp_lib_evts_get_info token "$server_evts")
+	server_serverside=$(mptcp_lib_evts_get_info server_side "$server_evts")
+
+	print_test "Established IP${is_v6} MPTCP Connection ns2 => ns1"
+	if [ "$client_token" != "" ] && [ "$server_token" != "" ] && [ "$client_serverside" = 0 ] &&
+		   [ "$server_serverside" = 1 ]
+	then
+		test_pass
+		print_title "Connection info: ${client_addr}:${client_port} -> ${connect_addr}:${app_port}"
+	else
+		test_fail "Expected tokens (c:${client_token} - s:${server_token}) and server (c:${client_serverside} - s:${server_serverside})"
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		mptcp_lib_result_print_all_tap
 		exit ${KSFT_FAIL}
 	fi

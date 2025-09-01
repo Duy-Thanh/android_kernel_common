@@ -414,6 +414,7 @@ void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage)
 	struct f2fs_extent *i_ext = &F2FS_INODE(ipage)->i_ext;
 	struct extent_tree *et;
 	struct extent_node *en;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct extent_info ei = {0};
 
 	if (!__may_extent_tree(inode, EX_READ)) {
@@ -611,6 +612,200 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
 				en->ei.last_blocks, ei->fofs, ei->blk, ei->len, ei->age, ei->last_blocks);
 			f2fs_bug_on(sbi, 1);
 			return NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct extent_info ei;
+
+	if (!__may_extent_tree(inode, EX_READ)) {
+		/* drop largest read extent */
+		if (i_ext->len) {
+			f2fs_wait_on_page_writeback(ipage, NODE, true, true);
+			i_ext->len = 0;
+			set_page_dirty(ipage);
+		}
+		set_inode_flag(inode, FI_NO_EXTENT);
+		return;
+	}
+
+	et = __grab_extent_tree(inode, EX_READ);
+
+	get_read_extent_info(&ei, i_ext);
+
+	write_lock(&et->lock);
+	if (atomic_read(&et->node_cnt) || !ei.len)
+		goto skip;
+
+	if (IS_DEVICE_ALIASING(inode)) {
+		et->largest = ei;
+		goto skip;
+	}
+
+	en = __attach_extent_node(sbi, et, &ei, NULL,
+				&et->root.rb_root.rb_node, true);
+	if (en) {
+		et->largest = en->ei;
+		et->cached_en = en;
+
+		spin_lock(&eti->extent_lock);
+		list_add_tail(&en->list, &eti->extent_list);
+		spin_unlock(&eti->extent_lock);
+	}
+skip:
+	/* Let's drop, if checkpoint got corrupted. */
+	if (f2fs_cp_error(sbi)) {
+		et->largest.len = 0;
+		et->largest_updated = true;
+	}
+	write_unlock(&et->lock);
+}
+
+void f2fs_init_age_extent_tree(struct inode *inode)
+{
+	if (!__init_may_extent_tree(inode, EX_BLOCK_AGE))
+		return;
+	__grab_extent_tree(inode, EX_BLOCK_AGE);
+}
+
+void f2fs_init_extent_tree(struct inode *inode)
+{
+	/* initialize read cache */
+	if (__init_may_extent_tree(inode, EX_READ))
+		__grab_extent_tree(inode, EX_READ);
+
+	/* initialize block age cache */
+	if (__init_may_extent_tree(inode, EX_BLOCK_AGE))
+		__grab_extent_tree(inode, EX_BLOCK_AGE);
+}
+
+static bool __lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
+			struct extent_info *ei, enum extent_type type)
+{
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	struct extent_tree_info *eti = &sbi->extent_tree[type];
+	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
+	struct extent_node *en;
+	bool ret = false;
+
+	if (!et)
+		return false;
+
+	trace_f2fs_lookup_extent_tree_start(inode, pgofs, type);
+
+	read_lock(&et->lock);
+
+	if (type == EX_READ &&
+			et->largest.fofs <= pgofs &&
+			(pgoff_t)et->largest.fofs + et->largest.len > pgofs) {
+		*ei = et->largest;
+		ret = true;
+		stat_inc_largest_node_hit(sbi);
+		goto out;
+	}
+
+	if (IS_DEVICE_ALIASING(inode)) {
+		ret = false;
+		goto out;
+	}
+
+	en = __lookup_extent_node(&et->root, et->cached_en, pgofs);
+	if (!en)
+		goto out;
+
+	if (en == et->cached_en)
+		stat_inc_cached_node_hit(sbi, type);
+	else
+		stat_inc_rbtree_node_hit(sbi, type);
+
+	*ei = en->ei;
+	spin_lock(&eti->extent_lock);
+	if (!list_empty(&en->list)) {
+		list_move_tail(&en->list, &eti->extent_list);
+		et->cached_en = en;
+	}
+	spin_unlock(&eti->extent_lock);
+	ret = true;
+out:
+	stat_inc_total_hit(sbi, type);
+	read_unlock(&et->lock);
+
+	if (type == EX_READ)
+		trace_f2fs_lookup_read_extent_tree_end(inode, pgofs, ei);
+	else if (type == EX_BLOCK_AGE)
+		trace_f2fs_lookup_age_extent_tree_end(inode, pgofs, ei);
+	return ret;
+}
+
+static struct extent_node *__try_merge_extent_node(struct f2fs_sb_info *sbi,
+				struct extent_tree *et, struct extent_info *ei,
+				struct extent_node *prev_ex,
+				struct extent_node *next_ex)
+{
+	struct extent_tree_info *eti = &sbi->extent_tree[et->type];
+	struct extent_node *en = NULL;
+
+	if (prev_ex && __is_back_mergeable(ei, &prev_ex->ei, et->type)) {
+		prev_ex->ei.len += ei->len;
+		ei = &prev_ex->ei;
+		en = prev_ex;
+	}
+
+	if (next_ex && __is_front_mergeable(ei, &next_ex->ei, et->type)) {
+		next_ex->ei.fofs = ei->fofs;
+		next_ex->ei.len += ei->len;
+		if (et->type == EX_READ)
+			next_ex->ei.blk = ei->blk;
+		if (en)
+			__release_extent_node(sbi, et, prev_ex);
+
+		en = next_ex;
+	}
+
+	if (!en)
+		return NULL;
+
+	__try_update_largest_extent(et, en);
+
+	spin_lock(&eti->extent_lock);
+	if (!list_empty(&en->list)) {
+		list_move_tail(&en->list, &eti->extent_list);
+		et->cached_en = en;
+	}
+	spin_unlock(&eti->extent_lock);
+	return en;
+}
+
+static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
+				struct extent_tree *et, struct extent_info *ei,
+				struct rb_node **insert_p,
+				struct rb_node *insert_parent,
+				bool leftmost)
+{
+	struct extent_tree_info *eti = &sbi->extent_tree[et->type];
+	struct rb_node **p = &et->root.rb_root.rb_node;
+	struct rb_node *parent = NULL;
+	struct extent_node *en = NULL;
+
+	if (insert_p && insert_parent) {
+		parent = insert_parent;
+		p = insert_p;
+		goto do_insert;
+	}
+
+	leftmost = true;
+
+	/* look up extent_node in the rb tree */
+	while (*p) {
+		parent = *p;
+		en = rb_entry(parent, struct extent_node, rb_node);
+
+		if (ei->fofs < en->ei.fofs) {
+			p = &(*p)->rb_left;
+		} else if (ei->fofs >= en->ei.fofs + en->ei.len) {
+			p = &(*p)->rb_right;
+			leftmost = false;
+		} else {
+			f2fs_bug_on(sbi, 1);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 	}
 

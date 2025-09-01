@@ -192,6 +192,7 @@ static inline unsigned long get_tod_clock_fast(void)
 	asm volatile("stckf %0" : "=Q" (clk) : : "cc");
 	return clk;
 }
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 int get_phys_clock(unsigned long *clock);
 void init_cpu_timer(void);
 
@@ -224,6 +225,42 @@ static inline cycles_t get_cycles(void)
 	return (cycles_t)get_tod_clock_monotonic() >> 2;
 }
 #define get_cycles get_cycles
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+static inline cycles_t get_cycles(void)
+{
+	return (cycles_t) get_tod_clock() >> 2;
+}
+#define get_cycles get_cycles
+
+int get_phys_clock(unsigned long *clock);
+void init_cpu_timer(void);
+
+extern union tod_clock tod_clock_base;
+
+static __always_inline unsigned long __get_tod_clock_monotonic(void)
+{
+	return get_tod_clock() - tod_clock_base.tod;
+}
+
+/**
+ * get_clock_monotonic - returns current time in clock rate units
+ *
+ * The clock and tod_clock_base get changed via stop_machine.
+ * Therefore preemption must be disabled, otherwise the returned
+ * value is not guaranteed to be monotonic.
+ */
+static inline unsigned long get_tod_clock_monotonic(void)
+{
+	unsigned long tod;
+
+	preempt_disable_notrace();
+	tod = __get_tod_clock_monotonic();
+	preempt_enable_notrace();
+	return tod;
+}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 /**
  * tod_to_ns - convert a TOD format value to nanoseconds

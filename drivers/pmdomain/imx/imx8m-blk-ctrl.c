@@ -665,6 +665,7 @@ static const struct imx8m_blk_ctrl_data imx8mn_disp_blk_ctl_dev_data = {
 #define  LCDIF_1_RD_HURRY	GENMASK(15, 13)
 #define  LCDIF_0_RD_HURRY	GENMASK(12, 10)
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define ISI_CACHE_CTRL		0x50
 #define  ISI_V_WR_HURRY		GENMASK(28, 26)
 #define  ISI_U_WR_HURRY		GENMASK(25, 23)
@@ -704,6 +705,38 @@ static int imx8mp_media_power_notifier(struct notifier_block *nb,
 				FIELD_PREP(ISI_V_WR_HURRY, 7) |
 				FIELD_PREP(ISI_U_WR_HURRY, 7) |
 				FIELD_PREP(ISI_Y_WR_HURRY, 7));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int imx8mp_media_power_notifier(struct notifier_block *nb,
+				unsigned long action, void *data)
+{
+	struct imx8m_blk_ctrl *bc = container_of(nb, struct imx8m_blk_ctrl,
+						 power_nb);
+
+	if (action != GENPD_NOTIFY_ON && action != GENPD_NOTIFY_PRE_OFF)
+		return NOTIFY_OK;
+
+	/* Enable bus clock and deassert bus reset */
+	regmap_set_bits(bc->regmap, BLK_CLK_EN, BIT(8));
+	regmap_set_bits(bc->regmap, BLK_SFT_RSTN, BIT(8));
+
+	if (action == GENPD_NOTIFY_ON) {
+		/*
+		 * On power up we have no software backchannel to the GPC to
+		 * wait for the ADB handshake to happen, so we just delay for a
+		 * bit. On power down the GPC driver waits for the handshake.
+		 */
+		udelay(5);
+
+		/*
+		 * Set panic read hurry level for both LCDIF interfaces to
+		 * maximum priority to minimize chances of display FIFO
+		 * underflow.
+		 */
+		regmap_set_bits(bc->regmap, LCDIF_ARCACHE_CTRL,
+				FIELD_PREP(LCDIF_1_RD_HURRY, 7) |
+				FIELD_PREP(LCDIF_0_RD_HURRY, 7));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	return NOTIFY_OK;

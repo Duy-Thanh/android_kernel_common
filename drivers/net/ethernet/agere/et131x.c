@@ -2459,6 +2459,7 @@ static int nic_send_packet(struct et131x_adapter *adapter, struct tcb *tcb)
 							  skb->data,
 							  skb_headlen(skb),
 							  DMA_TO_DEVICE);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 				if (dma_mapping_error(&adapter->pdev->dev,
 						      dma_addr))
 					return -ENOMEM;
@@ -2614,6 +2615,128 @@ unmap_first_out:
 	}
 
 	return -ENOMEM;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+				desc[frag].addr_lo = lower_32_bits(dma_addr);
+				desc[frag].addr_hi = upper_32_bits(dma_addr);
+				frag++;
+			} else {
+				desc[frag].len_vlan = skb_headlen(skb) / 2;
+				dma_addr = dma_map_single(&adapter->pdev->dev,
+							  skb->data,
+							  skb_headlen(skb) / 2,
+							  DMA_TO_DEVICE);
+				desc[frag].addr_lo = lower_32_bits(dma_addr);
+				desc[frag].addr_hi = upper_32_bits(dma_addr);
+				frag++;
+
+				desc[frag].len_vlan = skb_headlen(skb) / 2;
+				dma_addr = dma_map_single(&adapter->pdev->dev,
+							  skb->data +
+							  skb_headlen(skb) / 2,
+							  skb_headlen(skb) / 2,
+							  DMA_TO_DEVICE);
+				desc[frag].addr_lo = lower_32_bits(dma_addr);
+				desc[frag].addr_hi = upper_32_bits(dma_addr);
+				frag++;
+			}
+		} else {
+			desc[frag].len_vlan = skb_frag_size(&frags[i - 1]);
+			dma_addr = skb_frag_dma_map(&adapter->pdev->dev,
+						    &frags[i - 1],
+						    0,
+						    desc[frag].len_vlan,
+						    DMA_TO_DEVICE);
+			desc[frag].addr_lo = lower_32_bits(dma_addr);
+			desc[frag].addr_hi = upper_32_bits(dma_addr);
+			frag++;
+		}
+	}
+
+	if (phydev && phydev->speed == SPEED_1000) {
+		if (++tx_ring->since_irq == PARM_TX_NUM_BUFS_DEF) {
+			/* Last element & Interrupt flag */
+			desc[frag - 1].flags =
+				    TXDESC_FLAG_INTPROC | TXDESC_FLAG_LASTPKT;
+			tx_ring->since_irq = 0;
+		} else { /* Last element */
+			desc[frag - 1].flags = TXDESC_FLAG_LASTPKT;
+		}
+	} else {
+		desc[frag - 1].flags =
+				    TXDESC_FLAG_INTPROC | TXDESC_FLAG_LASTPKT;
+	}
+
+	desc[0].flags |= TXDESC_FLAG_FIRSTPKT;
+
+	tcb->index_start = tx_ring->send_idx;
+	tcb->stale = 0;
+
+	thiscopy = NUM_DESC_PER_RING_TX - INDEX10(tx_ring->send_idx);
+
+	if (thiscopy >= frag) {
+		remainder = 0;
+		thiscopy = frag;
+	} else {
+		remainder = frag - thiscopy;
+	}
+
+	memcpy(tx_ring->tx_desc_ring + INDEX10(tx_ring->send_idx),
+	       desc,
+	       sizeof(struct tx_desc) * thiscopy);
+
+	add_10bit(&tx_ring->send_idx, thiscopy);
+
+	if (INDEX10(tx_ring->send_idx) == 0 ||
+	    INDEX10(tx_ring->send_idx) == NUM_DESC_PER_RING_TX) {
+		tx_ring->send_idx &= ~ET_DMA10_MASK;
+		tx_ring->send_idx ^= ET_DMA10_WRAP;
+	}
+
+	if (remainder) {
+		memcpy(tx_ring->tx_desc_ring,
+		       desc + thiscopy,
+		       sizeof(struct tx_desc) * remainder);
+
+		add_10bit(&tx_ring->send_idx, remainder);
+	}
+
+	if (INDEX10(tx_ring->send_idx) == 0) {
+		if (tx_ring->send_idx)
+			tcb->index = NUM_DESC_PER_RING_TX - 1;
+		else
+			tcb->index = ET_DMA10_WRAP|(NUM_DESC_PER_RING_TX - 1);
+	} else {
+		tcb->index = tx_ring->send_idx - 1;
+	}
+
+	spin_lock(&adapter->tcb_send_qlock);
+
+	if (tx_ring->send_tail)
+		tx_ring->send_tail->next = tcb;
+	else
+		tx_ring->send_head = tcb;
+
+	tx_ring->send_tail = tcb;
+
+	WARN_ON(tcb->next != NULL);
+
+	tx_ring->used++;
+
+	spin_unlock(&adapter->tcb_send_qlock);
+
+	/* Write the new write pointer back to the device. */
+	writel(tx_ring->send_idx, &adapter->regs->txdma.service_request);
+
+	/* For Gig only, we use Tx Interrupt coalescing.  Enable the software
+	 * timer to wake us up if this packet isn't followed by N more.
+	 */
+	if (phydev && phydev->speed == SPEED_1000) {
+		writel(PARM_TX_TIME_INT_DEF * NANO_IN_A_MICRO,
+		       &adapter->regs->global.watchdog_timer);
+	}
+	return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static int send_packet(struct sk_buff *skb, struct et131x_adapter *adapter)

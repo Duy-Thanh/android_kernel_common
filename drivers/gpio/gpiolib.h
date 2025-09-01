@@ -112,6 +112,7 @@ extern const char *const gpio_suffixes[];
  *
  * @desc:		Array of pointers to the GPIO descriptors
  * @size:		Number of elements in desc
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @gdev:		Parent GPIO device
  * @get_mask:		Get mask used in fastpath
  * @set_mask:		Set mask used in fastpath
@@ -125,6 +126,22 @@ struct gpio_array {
 	struct gpio_desc	**desc;
 	unsigned int		size;
 	struct gpio_device	*gdev;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * @chip:		Parent GPIO chip
+ * @get_mask:		Get mask used in fastpath
+ * @set_mask:		Set mask used in fastpath
+ * @invert_mask:	Invert mask used in fastpath
+ *
+ * This structure is attached to struct gpiod_descs obtained from
+ * gpiod_get_array() and can be passed back to get/set array functions in order
+ * to activate fast processing path if applicable.
+ */
+struct gpio_array {
+	struct gpio_desc	**desc;
+	unsigned int		size;
+	struct gpio_chip	*chip;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	unsigned long		*get_mask;
 	unsigned long		*set_mask;
 	ANDROID_KABI_RESERVE(1);

@@ -3015,6 +3015,7 @@ void intel_infoframe_init(struct intel_digital_port *dig_port)
 	}
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 bool intel_hdmi_init_connector(struct intel_digital_port *dig_port,
 			       struct intel_connector *intel_connector)
 {
@@ -3090,6 +3091,82 @@ bool intel_hdmi_init_connector(struct intel_digital_port *dig_port,
 		drm_dbg_kms(display->drm, "CEC notifier get failed\n");
 
 	return true;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void intel_hdmi_init_connector(struct intel_digital_port *dig_port,
+			       struct intel_connector *intel_connector)
+{
+	struct intel_display *display = to_intel_display(dig_port);
+	struct drm_connector *connector = &intel_connector->base;
+	struct intel_hdmi *intel_hdmi = &dig_port->hdmi;
+	struct intel_encoder *intel_encoder = &dig_port->base;
+	struct drm_device *dev = intel_encoder->base.dev;
+	struct drm_i915_private *dev_priv = to_i915(dev);
+	enum port port = intel_encoder->port;
+	struct cec_connector_info conn_info;
+	u8 ddc_pin;
+
+	drm_dbg_kms(display->drm,
+		    "Adding HDMI connector on [ENCODER:%d:%s]\n",
+		    intel_encoder->base.base.id, intel_encoder->base.name);
+
+	if (DISPLAY_VER(display) < 12 && drm_WARN_ON(dev, port == PORT_A))
+		return;
+
+	if (drm_WARN(dev, dig_port->max_lanes < 4,
+		     "Not enough lanes (%d) for HDMI on [ENCODER:%d:%s]\n",
+		     dig_port->max_lanes, intel_encoder->base.base.id,
+		     intel_encoder->base.name))
+		return;
+
+	ddc_pin = intel_hdmi_ddc_pin(intel_encoder);
+	if (!ddc_pin)
+		return;
+
+	drm_connector_init_with_ddc(dev, connector,
+				    &intel_hdmi_connector_funcs,
+				    DRM_MODE_CONNECTOR_HDMIA,
+				    intel_gmbus_get_adapter(dev_priv, ddc_pin));
+
+	drm_connector_helper_add(connector, &intel_hdmi_connector_helper_funcs);
+
+	if (DISPLAY_VER(display) < 12)
+		connector->interlace_allowed = true;
+
+	connector->stereo_allowed = true;
+
+	if (DISPLAY_VER(display) >= 10)
+		connector->ycbcr_420_allowed = true;
+
+	intel_connector->polled = DRM_CONNECTOR_POLL_HPD;
+	intel_connector->base.polled = intel_connector->polled;
+
+	if (HAS_DDI(display))
+		intel_connector->get_hw_state = intel_ddi_connector_get_hw_state;
+	else
+		intel_connector->get_hw_state = intel_connector_get_hw_state;
+
+	intel_hdmi_add_properties(intel_hdmi, connector);
+
+	intel_connector_attach_encoder(intel_connector, intel_encoder);
+	intel_hdmi->attached_connector = intel_connector;
+
+	if (is_hdcp_supported(dev_priv, port)) {
+		int ret = intel_hdcp_init(intel_connector, dig_port,
+					  &intel_hdmi_hdcp_shim);
+		if (ret)
+			drm_dbg_kms(display->drm,
+				    "HDCP init failed, skipping.\n");
+	}
+
+	cec_fill_conn_info_from_drm(&conn_info, connector);
+
+	intel_hdmi->cec_notifier =
+		cec_notifier_conn_register(dev->dev, port_identifier(port),
+					   &conn_info);
+	if (!intel_hdmi->cec_notifier)
+		drm_dbg_kms(display->drm, "CEC notifier get failed\n");
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /*

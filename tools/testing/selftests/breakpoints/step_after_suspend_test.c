@@ -127,6 +127,7 @@ int run_test(int cpu)
 	return KSFT_PASS;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /*
  * Reads the suspend success count from sysfs.
  * Returns the count on success or exits on failure.
@@ -181,6 +182,42 @@ void suspend(void)
 		ksft_exit_fail_msg("Failed to enter Suspend state\n");
 
 	close(timerfd);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+void suspend(void)
+{
+	int power_state_fd;
+	int timerfd;
+	int err;
+	struct itimerspec spec = {};
+
+	if (getuid() != 0)
+		ksft_exit_skip("Please run the test as root - Exiting.\n");
+
+	power_state_fd = open("/sys/power/state", O_RDWR);
+	if (power_state_fd < 0)
+		ksft_exit_fail_msg(
+			"open(\"/sys/power/state\") failed %s)\n",
+			strerror(errno));
+
+	timerfd = timerfd_create(CLOCK_BOOTTIME_ALARM, 0);
+	if (timerfd < 0)
+		ksft_exit_fail_msg("timerfd_create() failed\n");
+
+	spec.it_value.tv_sec = 5;
+	err = timerfd_settime(timerfd, 0, &spec, NULL);
+	if (err < 0)
+		ksft_exit_fail_msg("timerfd_settime() failed\n");
+
+	system("(echo mem > /sys/power/state) 2> /dev/null");
+
+	timerfd_gettime(timerfd, &spec);
+	if (spec.it_value.tv_sec != 0 || spec.it_value.tv_nsec != 0)
+		ksft_exit_fail_msg("Failed to enter Suspend state\n");
+
+	close(timerfd);
+	close(power_state_fd);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 int main(int argc, char **argv)

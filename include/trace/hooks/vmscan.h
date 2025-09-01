@@ -15,6 +15,7 @@ struct lruvec;
 DECLARE_RESTRICTED_HOOK(android_rvh_set_balance_anon_file_reclaim,
 			TP_PROTO(bool *balance_anon_file_reclaim),
 			TP_ARGS(balance_anon_file_reclaim), 1);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 DECLARE_RESTRICTED_HOOK(android_rvh_kswapd_shrink_node,
 			TP_PROTO(unsigned long *nr_reclaimed),
 			TP_ARGS(nr_reclaimed), 1);
@@ -63,6 +64,41 @@ DECLARE_HOOK(android_vh_mglru_should_abort_scan,
 DECLARE_HOOK(android_vh_mglru_should_abort_scan_ex,
 	TP_PROTO(u64 *ext, bool *bypass),
 	TP_ARGS(ext, bypass));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+DECLARE_HOOK(android_vh_check_folio_look_around_ref,
+	TP_PROTO(struct folio *folio, int *skip),
+	TP_ARGS(folio, skip));
+DECLARE_HOOK(android_vh_tune_swappiness,
+	TP_PROTO(int *swappiness),
+	TP_ARGS(swappiness));
+DECLARE_HOOK(android_vh_shrink_folio_list,
+	TP_PROTO(struct folio *folio, bool dirty, bool writeback,
+		bool *activate, bool *keep),
+	TP_ARGS(folio, dirty, writeback, activate, keep));
+DECLARE_HOOK(android_vh_inode_lru_isolate,
+	TP_PROTO(struct inode *inode, bool *skip),
+	TP_ARGS(inode, skip));
+DECLARE_HOOK(android_vh_invalidate_mapping_pagevec,
+	TP_PROTO(struct address_space *mapping, bool *skip),
+	TP_ARGS(mapping, skip));
+DECLARE_HOOK(android_vh_modify_scan_control,
+	TP_PROTO(u64 *ext, unsigned long *nr_to_reclaim,
+	struct mem_cgroup *target_mem_cgroup,
+	bool *file_is_tiny, bool *may_writepage),
+	TP_ARGS(ext, nr_to_reclaim, target_mem_cgroup, file_is_tiny, may_writepage));
+DECLARE_HOOK(android_vh_should_continue_reclaim,
+	TP_PROTO(u64 *ext, unsigned long *nr_to_reclaim,
+	unsigned long *nr_reclaimed, bool *continue_reclaim),
+	TP_ARGS(ext, nr_to_reclaim, nr_reclaimed, continue_reclaim));
+DECLARE_HOOK(android_vh_async_psi_bypass,
+	TP_PROTO(bool *bypass),
+	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_mglru_should_abort_scan,
+	TP_PROTO(unsigned long nr_reclaimed, unsigned long nr_to_reclaim,
+	unsigned int order, bool *bypass),
+	TP_ARGS(nr_to_reclaim, nr_reclaimed, order, bypass));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 DECLARE_HOOK(android_vh_mglru_aging_bypass,
 	TP_PROTO(struct lruvec *lruvec, unsigned long max_seq,
 	int swappiness, bool *bypass, bool *young),

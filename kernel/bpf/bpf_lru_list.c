@@ -337,6 +337,7 @@ static void bpf_lru_list_pop_free_to_local(struct bpf_lru *lru,
 				 list) {
 		__bpf_lru_node_move_to_free(l, node, local_free_list(loc_l),
 					    BPF_LRU_LOCAL_LIST_T_FREE);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (++nfree == lru->target_free)
 			break;
 	}
@@ -580,6 +581,249 @@ static void bpf_common_lru_populate(struct bpf_lru *lru, void *buf,
 
 	lru->target_free = clamp((nr_elems / num_possible_cpus()) / 2,
 				 1, LOCAL_FREE_TARGET);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (++nfree == LOCAL_FREE_TARGET)
+			break;
+	}
+
+	if (nfree < LOCAL_FREE_TARGET)
+		__bpf_lru_list_shrink(lru, l, LOCAL_FREE_TARGET - nfree,
+				      local_free_list(loc_l),
+				      BPF_LRU_LOCAL_LIST_T_FREE);
+
+	raw_spin_unlock(&l->lock);
+}
+
+static void __local_list_add_pending(struct bpf_lru *lru,
+				     struct bpf_lru_locallist *loc_l,
+				     int cpu,
+				     struct bpf_lru_node *node,
+				     u32 hash)
+{
+	*(u32 *)((void *)node + lru->hash_offset) = hash;
+	node->cpu = cpu;
+	node->type = BPF_LRU_LOCAL_LIST_T_PENDING;
+	bpf_lru_node_clear_ref(node);
+	list_add(&node->list, local_pending_list(loc_l));
+}
+
+static struct bpf_lru_node *
+__local_list_pop_free(struct bpf_lru_locallist *loc_l)
+{
+	struct bpf_lru_node *node;
+
+	node = list_first_entry_or_null(local_free_list(loc_l),
+					struct bpf_lru_node,
+					list);
+	if (node)
+		list_del(&node->list);
+
+	return node;
+}
+
+static struct bpf_lru_node *
+__local_list_pop_pending(struct bpf_lru *lru, struct bpf_lru_locallist *loc_l)
+{
+	struct bpf_lru_node *node;
+	bool force = false;
+
+ignore_ref:
+	/* Get from the tail (i.e. older element) of the pending list. */
+	list_for_each_entry_reverse(node, local_pending_list(loc_l),
+				    list) {
+		if ((!bpf_lru_node_is_ref(node) || force) &&
+		    lru->del_from_htab(lru->del_arg, node)) {
+			list_del(&node->list);
+			return node;
+		}
+	}
+
+	if (!force) {
+		force = true;
+		goto ignore_ref;
+	}
+
+	return NULL;
+}
+
+static struct bpf_lru_node *bpf_percpu_lru_pop_free(struct bpf_lru *lru,
+						    u32 hash)
+{
+	struct list_head *free_list;
+	struct bpf_lru_node *node = NULL;
+	struct bpf_lru_list *l;
+	unsigned long flags;
+	int cpu = raw_smp_processor_id();
+
+	l = per_cpu_ptr(lru->percpu_lru, cpu);
+
+	raw_spin_lock_irqsave(&l->lock, flags);
+
+	__bpf_lru_list_rotate(lru, l);
+
+	free_list = &l->lists[BPF_LRU_LIST_T_FREE];
+	if (list_empty(free_list))
+		__bpf_lru_list_shrink(lru, l, PERCPU_FREE_TARGET, free_list,
+				      BPF_LRU_LIST_T_FREE);
+
+	if (!list_empty(free_list)) {
+		node = list_first_entry(free_list, struct bpf_lru_node, list);
+		*(u32 *)((void *)node + lru->hash_offset) = hash;
+		bpf_lru_node_clear_ref(node);
+		__bpf_lru_node_move(l, node, BPF_LRU_LIST_T_INACTIVE);
+	}
+
+	raw_spin_unlock_irqrestore(&l->lock, flags);
+
+	return node;
+}
+
+static struct bpf_lru_node *bpf_common_lru_pop_free(struct bpf_lru *lru,
+						    u32 hash)
+{
+	struct bpf_lru_locallist *loc_l, *steal_loc_l;
+	struct bpf_common_lru *clru = &lru->common_lru;
+	struct bpf_lru_node *node;
+	int steal, first_steal;
+	unsigned long flags;
+	int cpu = raw_smp_processor_id();
+
+	loc_l = per_cpu_ptr(clru->local_list, cpu);
+
+	raw_spin_lock_irqsave(&loc_l->lock, flags);
+
+	node = __local_list_pop_free(loc_l);
+	if (!node) {
+		bpf_lru_list_pop_free_to_local(lru, loc_l);
+		node = __local_list_pop_free(loc_l);
+	}
+
+	if (node)
+		__local_list_add_pending(lru, loc_l, cpu, node, hash);
+
+	raw_spin_unlock_irqrestore(&loc_l->lock, flags);
+
+	if (node)
+		return node;
+
+	/* No free nodes found from the local free list and
+	 * the global LRU list.
+	 *
+	 * Steal from the local free/pending list of the
+	 * current CPU and remote CPU in RR.  It starts
+	 * with the loc_l->next_steal CPU.
+	 */
+
+	first_steal = loc_l->next_steal;
+	steal = first_steal;
+	do {
+		steal_loc_l = per_cpu_ptr(clru->local_list, steal);
+
+		raw_spin_lock_irqsave(&steal_loc_l->lock, flags);
+
+		node = __local_list_pop_free(steal_loc_l);
+		if (!node)
+			node = __local_list_pop_pending(lru, steal_loc_l);
+
+		raw_spin_unlock_irqrestore(&steal_loc_l->lock, flags);
+
+		steal = get_next_cpu(steal);
+	} while (!node && steal != first_steal);
+
+	loc_l->next_steal = steal;
+
+	if (node) {
+		raw_spin_lock_irqsave(&loc_l->lock, flags);
+		__local_list_add_pending(lru, loc_l, cpu, node, hash);
+		raw_spin_unlock_irqrestore(&loc_l->lock, flags);
+	}
+
+	return node;
+}
+
+struct bpf_lru_node *bpf_lru_pop_free(struct bpf_lru *lru, u32 hash)
+{
+	if (lru->percpu)
+		return bpf_percpu_lru_pop_free(lru, hash);
+	else
+		return bpf_common_lru_pop_free(lru, hash);
+}
+
+static void bpf_common_lru_push_free(struct bpf_lru *lru,
+				     struct bpf_lru_node *node)
+{
+	u8 node_type = READ_ONCE(node->type);
+	unsigned long flags;
+
+	if (WARN_ON_ONCE(node_type == BPF_LRU_LIST_T_FREE) ||
+	    WARN_ON_ONCE(node_type == BPF_LRU_LOCAL_LIST_T_FREE))
+		return;
+
+	if (node_type == BPF_LRU_LOCAL_LIST_T_PENDING) {
+		struct bpf_lru_locallist *loc_l;
+
+		loc_l = per_cpu_ptr(lru->common_lru.local_list, node->cpu);
+
+		raw_spin_lock_irqsave(&loc_l->lock, flags);
+
+		if (unlikely(node->type != BPF_LRU_LOCAL_LIST_T_PENDING)) {
+			raw_spin_unlock_irqrestore(&loc_l->lock, flags);
+			goto check_lru_list;
+		}
+
+		node->type = BPF_LRU_LOCAL_LIST_T_FREE;
+		bpf_lru_node_clear_ref(node);
+		list_move(&node->list, local_free_list(loc_l));
+
+		raw_spin_unlock_irqrestore(&loc_l->lock, flags);
+		return;
+	}
+
+check_lru_list:
+	bpf_lru_list_push_free(&lru->common_lru.lru_list, node);
+}
+
+static void bpf_percpu_lru_push_free(struct bpf_lru *lru,
+				     struct bpf_lru_node *node)
+{
+	struct bpf_lru_list *l;
+	unsigned long flags;
+
+	l = per_cpu_ptr(lru->percpu_lru, node->cpu);
+
+	raw_spin_lock_irqsave(&l->lock, flags);
+
+	__bpf_lru_node_move(l, node, BPF_LRU_LIST_T_FREE);
+
+	raw_spin_unlock_irqrestore(&l->lock, flags);
+}
+
+void bpf_lru_push_free(struct bpf_lru *lru, struct bpf_lru_node *node)
+{
+	if (lru->percpu)
+		bpf_percpu_lru_push_free(lru, node);
+	else
+		bpf_common_lru_push_free(lru, node);
+}
+
+static void bpf_common_lru_populate(struct bpf_lru *lru, void *buf,
+				    u32 node_offset, u32 elem_size,
+				    u32 nr_elems)
+{
+	struct bpf_lru_list *l = &lru->common_lru.lru_list;
+	u32 i;
+
+	for (i = 0; i < nr_elems; i++) {
+		struct bpf_lru_node *node;
+
+		node = (struct bpf_lru_node *)(buf + node_offset);
+		node->type = BPF_LRU_LIST_T_FREE;
+		bpf_lru_node_clear_ref(node);
+		list_add(&node->list, &l->lists[BPF_LRU_LIST_T_FREE]);
+		buf += elem_size;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static void bpf_percpu_lru_populate(struct bpf_lru *lru, void *buf,

@@ -562,6 +562,7 @@ struct sched_entity {
 	u64				sum_exec_runtime;
 	u64				prev_sum_exec_runtime;
 	u64				vruntime;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	union {
 		/*
 		 * When !@on_rq this field is vlag.
@@ -736,6 +737,203 @@ struct sched_dl_entity {
 	struct sched_dl_entity *pi_se;
 #endif
 };
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	s64				vlag;
+	u64				slice;
+
+	u64				nr_migrations;
+
+#ifdef CONFIG_FAIR_GROUP_SCHED
+	int				depth;
+	struct sched_entity		*parent;
+	/* rq on which this entity is (to be) queued: */
+	struct cfs_rq			*cfs_rq;
+	/* rq "owned" by this entity/group: */
+	struct cfs_rq			*my_q;
+	/* cached value of my_q->h_nr_running */
+	unsigned long			runnable_weight;
+#endif
+
+#ifdef CONFIG_SMP
+	/*
+	 * Per entity load average tracking.
+	 *
+	 * Put into separate cache line so it does not
+	 * collide with read-mostly values above.
+	 */
+	struct sched_avg		avg;
+#endif
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+};
+
+struct sched_rt_entity {
+	struct list_head		run_list;
+	unsigned long			timeout;
+	unsigned long			watchdog_stamp;
+	unsigned int			time_slice;
+	unsigned short			on_rq;
+	unsigned short			on_list;
+
+	struct sched_rt_entity		*back;
+#ifdef CONFIG_RT_GROUP_SCHED
+	struct sched_rt_entity		*parent;
+	/* rq on which this entity is (to be) queued: */
+	struct rt_rq			*rt_rq;
+	/* rq "owned" by this entity/group: */
+	struct rt_rq			*my_q;
+#endif
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+} __randomize_layout;
+
+typedef bool (*dl_server_has_tasks_f)(struct sched_dl_entity *);
+typedef struct task_struct *(*dl_server_pick_f)(struct sched_dl_entity *);
+
+struct sched_dl_entity {
+	struct rb_node			rb_node;
+
+	/*
+	 * Original scheduling parameters. Copied here from sched_attr
+	 * during sched_setattr(), they will remain the same until
+	 * the next sched_setattr().
+	 */
+	u64				dl_runtime;	/* Maximum runtime for each instance	*/
+	u64				dl_deadline;	/* Relative deadline of each instance	*/
+	u64				dl_period;	/* Separation of two instances (period) */
+	u64				dl_bw;		/* dl_runtime / dl_period		*/
+	u64				dl_density;	/* dl_runtime / dl_deadline		*/
+
+	/*
+	 * Actual scheduling parameters. Initialized with the values above,
+	 * they are continuously updated during task execution. Note that
+	 * the remaining runtime could be < 0 in case we are in overrun.
+	 */
+	s64				runtime;	/* Remaining runtime for this instance	*/
+	u64				deadline;	/* Absolute deadline for this instance	*/
+	unsigned int			flags;		/* Specifying the scheduler behaviour	*/
+
+	/*
+	 * Some bool flags:
+	 *
+	 * @dl_throttled tells if we exhausted the runtime. If so, the
+	 * task has to wait for a replenishment to be performed at the
+	 * next firing of dl_timer.
+	 *
+	 * @dl_yielded tells if task gave up the CPU before consuming
+	 * all its available runtime during the last job.
+	 *
+	 * @dl_non_contending tells if the task is inactive while still
+	 * contributing to the active utilization. In other words, it
+	 * indicates if the inactive timer has been armed and its handler
+	 * has not been executed yet. This flag is useful to avoid race
+	 * conditions between the inactive timer handler and the wakeup
+	 * code.
+	 *
+	 * @dl_overrun tells if the task asked to be informed about runtime
+	 * overruns.
+	 *
+	 * @dl_server tells if this is a server entity.
+	 *
+	 * @dl_defer tells if this is a deferred or regular server. For
+	 * now only defer server exists.
+	 *
+	 * @dl_defer_armed tells if the deferrable server is waiting
+	 * for the replenishment timer to activate it.
+	 *
+	 * @dl_server_active tells if the dlserver is active(started).
+	 * dlserver is started on first cfs enqueue on an idle runqueue
+	 * and is stopped when a dequeue results in 0 cfs tasks on the
+	 * runqueue. In other words, dlserver is active only when cpu's
+	 * runqueue has atleast one cfs task.
+	 *
+	 * @dl_defer_running tells if the deferrable server is actually
+	 * running, skipping the defer phase.
+	 */
+	unsigned int			dl_throttled      : 1;
+	unsigned int			dl_yielded        : 1;
+	unsigned int			dl_non_contending : 1;
+	unsigned int			dl_overrun	  : 1;
+	unsigned int			dl_server         : 1;
+	unsigned int			dl_server_active  : 1;
+	unsigned int			dl_defer	  : 1;
+	unsigned int			dl_defer_armed	  : 1;
+	unsigned int			dl_defer_running  : 1;
+	unsigned int			dl_server_idle    : 1;
+
+	/*
+	 * Bandwidth enforcement timer. Each -deadline task has its
+	 * own bandwidth to be enforced, thus we need one timer per task.
+	 */
+	struct hrtimer			dl_timer;
+
+	/*
+	 * Inactive timer, responsible for decreasing the active utilization
+	 * at the "0-lag time". When a -deadline task blocks, it contributes
+	 * to GRUB's active utilization until the "0-lag time", hence a
+	 * timer is needed to decrease the active utilization at the correct
+	 * time.
+	 */
+	struct hrtimer			inactive_timer;
+
+	/*
+	 * Bits for DL-server functionality. Also see the comment near
+	 * dl_server_update().
+	 *
+	 * @rq the runqueue this server is for
+	 *
+	 * @server_has_tasks() returns true if @server_pick return a
+	 * runnable task.
+	 */
+	struct rq			*rq;
+	dl_server_has_tasks_f		server_has_tasks;
+	dl_server_pick_f		server_pick_task;
+
+#ifdef CONFIG_RT_MUTEXES
+	/*
+	 * Priority Inheritance. When a DEADLINE scheduling entity is boosted
+	 * pi_se points to the donor, otherwise points to the dl_se it belongs
+	 * to (the original one/itself).
+	 */
+	struct sched_dl_entity *pi_se;
+#endif
+};
+
+ANDROID_KABI_TYPE_STRING("s#sched_dl_entity", "structure_type sched_dl_entity "
+	"{ member s#rb_node rb_node data_member_location(0) , member t#u64 "
+	"dl_runtime data_member_location(24) , member t#u64 dl_deadline "
+	"data_member_location(32) , member t#u64 dl_period data_member_location(40) "
+	", member t#u64 dl_bw data_member_location(48) , member t#u64 dl_density "
+	"data_member_location(56) , member t#s64 runtime data_member_location(64) , "
+	"member t#u64 deadline data_member_location(72) , member base_type unsigned "
+	"int byte_size(4) encoding(7) flags data_member_location(80) , member base_type "
+	"unsigned int byte_size(4) encoding(7) dl_throttled bit_size(1) "
+	"data_bit_offset(672) , member base_type unsigned int byte_size(4) encoding(7) "
+	"dl_yielded bit_size(1) data_bit_offset(673) , member base_type unsigned int "
+	"byte_size(4) encoding(7) dl_non_contending bit_size(1) data_bit_offset(674) , "
+	"member base_type unsigned int byte_size(4) encoding(7) dl_overrun bit_size(1) "
+	"data_bit_offset(675) , member base_type unsigned int byte_size(4) encoding(7) "
+	"dl_server bit_size(1) data_bit_offset(676) , member base_type unsigned int "
+	"byte_size(4) encoding(7) dl_server_active bit_size(1) data_bit_offset(677) , "
+	"member base_type unsigned int byte_size(4) encoding(7) dl_defer bit_size(1) "
+	"data_bit_offset(678) , member base_type unsigned int byte_size(4) encoding(7) "
+	"dl_defer_armed bit_size(1) data_bit_offset(679) , member base_type unsigned "
+	"int byte_size(4) encoding(7) dl_defer_running bit_size(1) "
+	"data_bit_offset(680) , member s#hrtimer dl_timer data_member_location(88) , "
+	"member s#hrtimer inactive_timer data_member_location(152) , member "
+	"pointer_type { s#rq } rq data_member_location(216) , member "
+	"t#dl_server_has_tasks_f server_has_tasks data_member_location(224) , member "
+	"t#dl_server_pick_f server_pick_task data_member_location(232) , member "
+	"pointer_type { s#sched_dl_entity } pi_se data_member_location(240) } "
+	"byte_size(248)");
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #ifdef CONFIG_UCLAMP_TASK
 /* Number of utilization clamp buckets (shorter alias) */

@@ -676,6 +676,7 @@ struct nfs_client *nfs_init_client(struct nfs_client *clp,
 }
 EXPORT_SYMBOL_GPL(nfs_init_client);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void nfs4_server_set_init_caps(struct nfs_server *server)
 {
 #if IS_ENABLED(CONFIG_NFS_V4)
@@ -1202,6 +1203,493 @@ struct nfs_server *nfs_clone_server(struct nfs_server *source,
 		goto out_free_server;
 
 	nfs_server_set_init_caps(server);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/*
+ * Create a version 2 or 3 client
+ */
+static int nfs_init_server(struct nfs_server *server,
+			   const struct fs_context *fc)
+{
+	const struct nfs_fs_context *ctx = nfs_fc2context(fc);
+	struct rpc_timeout timeparms;
+	struct nfs_client_initdata cl_init = {
+		.hostname = ctx->nfs_server.hostname,
+		.addr = &ctx->nfs_server._address,
+		.addrlen = ctx->nfs_server.addrlen,
+		.nfs_mod = ctx->nfs_mod,
+		.proto = ctx->nfs_server.protocol,
+		.net = fc->net_ns,
+		.timeparms = &timeparms,
+		.cred = server->cred,
+		.nconnect = ctx->nfs_server.nconnect,
+		.init_flags = (1UL << NFS_CS_REUSEPORT),
+		.xprtsec = ctx->xprtsec,
+	};
+	struct nfs_client *clp;
+	int error;
+
+	nfs_init_timeout_values(&timeparms, ctx->nfs_server.protocol,
+				ctx->timeo, ctx->retrans);
+	if (ctx->flags & NFS_MOUNT_NORESVPORT)
+		set_bit(NFS_CS_NORESVPORT, &cl_init.init_flags);
+
+	/* Allocate or find a client reference we can use */
+	clp = nfs_get_client(&cl_init);
+	if (IS_ERR(clp))
+		return PTR_ERR(clp);
+
+	server->nfs_client = clp;
+	nfs_sysfs_add_server(server);
+	nfs_sysfs_link_rpc_client(server, clp->cl_rpcclient, "_state");
+
+	/* Initialise the client representation from the mount data */
+	server->flags = ctx->flags;
+	server->options = ctx->options;
+	server->caps |= NFS_CAP_HARDLINKS | NFS_CAP_SYMLINKS;
+
+	switch (clp->rpc_ops->version) {
+	case 2:
+		server->fattr_valid = NFS_ATTR_FATTR_V2;
+		break;
+	case 3:
+		server->fattr_valid = NFS_ATTR_FATTR_V3;
+		break;
+	default:
+		server->fattr_valid = NFS_ATTR_FATTR_V4;
+	}
+
+	if (ctx->rsize)
+		server->rsize = nfs_io_size(ctx->rsize, clp->cl_proto);
+	if (ctx->wsize)
+		server->wsize = nfs_io_size(ctx->wsize, clp->cl_proto);
+
+	server->acregmin = ctx->acregmin * HZ;
+	server->acregmax = ctx->acregmax * HZ;
+	server->acdirmin = ctx->acdirmin * HZ;
+	server->acdirmax = ctx->acdirmax * HZ;
+
+	/* Start lockd here, before we might error out */
+	error = nfs_start_lockd(server);
+	if (error < 0)
+		goto error;
+
+	server->port = ctx->nfs_server.port;
+	server->auth_info = ctx->auth_info;
+
+	error = nfs_init_server_rpcclient(server, &timeparms,
+					  ctx->selected_flavor);
+	if (error < 0)
+		goto error;
+
+	/* Preserve the values of mount_server-related mount options */
+	if (ctx->mount_server.addrlen) {
+		memcpy(&server->mountd_address, &ctx->mount_server.address,
+			ctx->mount_server.addrlen);
+		server->mountd_addrlen = ctx->mount_server.addrlen;
+	}
+	server->mountd_version = ctx->mount_server.version;
+	server->mountd_port = ctx->mount_server.port;
+	server->mountd_protocol = ctx->mount_server.protocol;
+
+	server->namelen  = ctx->namlen;
+	return 0;
+
+error:
+	server->nfs_client = NULL;
+	nfs_put_client(clp);
+	return error;
+}
+
+/*
+ * Load up the server record from information gained in an fsinfo record
+ */
+static void nfs_server_set_fsinfo(struct nfs_server *server,
+				  struct nfs_fsinfo *fsinfo)
+{
+	struct nfs_client *clp = server->nfs_client;
+	unsigned long max_rpc_payload, raw_max_rpc_payload;
+
+	/* Work out a lot of parameters */
+	if (server->rsize == 0)
+		server->rsize = nfs_io_size(fsinfo->rtpref, clp->cl_proto);
+	if (server->wsize == 0)
+		server->wsize = nfs_io_size(fsinfo->wtpref, clp->cl_proto);
+
+	if (fsinfo->rtmax >= 512 && server->rsize > fsinfo->rtmax)
+		server->rsize = nfs_io_size(fsinfo->rtmax, clp->cl_proto);
+	if (fsinfo->wtmax >= 512 && server->wsize > fsinfo->wtmax)
+		server->wsize = nfs_io_size(fsinfo->wtmax, clp->cl_proto);
+
+	raw_max_rpc_payload = rpc_max_payload(server->client);
+	max_rpc_payload = nfs_block_size(raw_max_rpc_payload, NULL);
+
+	if (server->rsize > max_rpc_payload)
+		server->rsize = max_rpc_payload;
+	if (server->rsize > NFS_MAX_FILE_IO_SIZE)
+		server->rsize = NFS_MAX_FILE_IO_SIZE;
+	server->rpages = (server->rsize + PAGE_SIZE - 1) >> PAGE_SHIFT;
+
+	if (server->wsize > max_rpc_payload)
+		server->wsize = max_rpc_payload;
+	if (server->wsize > NFS_MAX_FILE_IO_SIZE)
+		server->wsize = NFS_MAX_FILE_IO_SIZE;
+	server->wpages = (server->wsize + PAGE_SIZE - 1) >> PAGE_SHIFT;
+
+	server->wtmult = nfs_block_bits(fsinfo->wtmult, NULL);
+
+	server->dtsize = nfs_block_size(fsinfo->dtpref, NULL);
+	if (server->dtsize > NFS_MAX_FILE_IO_SIZE)
+		server->dtsize = NFS_MAX_FILE_IO_SIZE;
+	if (server->dtsize > server->rsize)
+		server->dtsize = server->rsize;
+
+	if (server->flags & NFS_MOUNT_NOAC) {
+		server->acregmin = server->acregmax = 0;
+		server->acdirmin = server->acdirmax = 0;
+	}
+
+	server->maxfilesize = fsinfo->maxfilesize;
+
+	server->time_delta = fsinfo->time_delta;
+	server->change_attr_type = fsinfo->change_attr_type;
+
+	server->clone_blksize = fsinfo->clone_blksize;
+	/* We're airborne Set socket buffersize */
+	rpc_setbufsize(server->client, server->wsize + 100, server->rsize + 100);
+
+#ifdef CONFIG_NFS_V4_2
+	/*
+	 * Defaults until limited by the session parameters.
+	 */
+	server->gxasize = min_t(unsigned int, raw_max_rpc_payload,
+				XATTR_SIZE_MAX);
+	server->sxasize = min_t(unsigned int, raw_max_rpc_payload,
+				XATTR_SIZE_MAX);
+	server->lxasize = min_t(unsigned int, raw_max_rpc_payload,
+				nfs42_listxattr_xdrsize(XATTR_LIST_MAX));
+
+	if (fsinfo->xattr_support)
+		server->caps |= NFS_CAP_XATTR;
+#endif
+}
+
+/*
+ * Probe filesystem information, including the FSID on v2/v3
+ */
+static int nfs_probe_fsinfo(struct nfs_server *server, struct nfs_fh *mntfh, struct nfs_fattr *fattr)
+{
+	struct nfs_fsinfo fsinfo;
+	struct nfs_client *clp = server->nfs_client;
+	int error;
+
+	if (clp->rpc_ops->set_capabilities != NULL) {
+		error = clp->rpc_ops->set_capabilities(server, mntfh);
+		if (error < 0)
+			return error;
+	}
+
+	fsinfo.fattr = fattr;
+	fsinfo.nlayouttypes = 0;
+	memset(fsinfo.layouttype, 0, sizeof(fsinfo.layouttype));
+	error = clp->rpc_ops->fsinfo(server, mntfh, &fsinfo);
+	if (error < 0)
+		return error;
+
+	nfs_server_set_fsinfo(server, &fsinfo);
+
+	/* Get some general file system info */
+	if (server->namelen == 0) {
+		struct nfs_pathconf pathinfo;
+
+		pathinfo.fattr = fattr;
+		nfs_fattr_init(fattr);
+
+		if (clp->rpc_ops->pathconf(server, mntfh, &pathinfo) >= 0)
+			server->namelen = pathinfo.max_namelen;
+	}
+
+	if (clp->rpc_ops->discover_trunking != NULL &&
+			(server->caps & NFS_CAP_FS_LOCATIONS &&
+			 (server->flags & NFS_MOUNT_TRUNK_DISCOVERY))) {
+		error = clp->rpc_ops->discover_trunking(server, mntfh);
+		if (error < 0)
+			return error;
+	}
+
+	return 0;
+}
+
+/*
+ * Grab the destination's particulars, including lease expiry time.
+ *
+ * Returns zero if probe succeeded and retrieved FSID matches the FSID
+ * we have cached.
+ */
+int nfs_probe_server(struct nfs_server *server, struct nfs_fh *mntfh)
+{
+	struct nfs_fattr *fattr;
+	int error;
+
+	fattr = nfs_alloc_fattr();
+	if (fattr == NULL)
+		return -ENOMEM;
+
+	/* Sanity: the probe won't work if the destination server
+	 * does not recognize the migrated FH. */
+	error = nfs_probe_fsinfo(server, mntfh, fattr);
+
+	nfs_free_fattr(fattr);
+	return error;
+}
+EXPORT_SYMBOL_GPL(nfs_probe_server);
+
+/*
+ * Copy useful information when duplicating a server record
+ */
+void nfs_server_copy_userdata(struct nfs_server *target, struct nfs_server *source)
+{
+	target->flags = source->flags;
+	target->rsize = source->rsize;
+	target->wsize = source->wsize;
+	target->acregmin = source->acregmin;
+	target->acregmax = source->acregmax;
+	target->acdirmin = source->acdirmin;
+	target->acdirmax = source->acdirmax;
+	target->caps = source->caps;
+	target->options = source->options;
+	target->auth_info = source->auth_info;
+	target->port = source->port;
+}
+EXPORT_SYMBOL_GPL(nfs_server_copy_userdata);
+
+void nfs_server_insert_lists(struct nfs_server *server)
+{
+	struct nfs_client *clp = server->nfs_client;
+	struct nfs_net *nn = net_generic(clp->cl_net, nfs_net_id);
+
+	spin_lock(&nn->nfs_client_lock);
+	list_add_tail_rcu(&server->client_link, &clp->cl_superblocks);
+	list_add_tail(&server->master_link, &nn->nfs_volume_list);
+	clear_bit(NFS_CS_STOP_RENEW, &clp->cl_res_state);
+	spin_unlock(&nn->nfs_client_lock);
+
+}
+EXPORT_SYMBOL_GPL(nfs_server_insert_lists);
+
+void nfs_server_remove_lists(struct nfs_server *server)
+{
+	struct nfs_client *clp = server->nfs_client;
+	struct nfs_net *nn;
+
+	if (clp == NULL)
+		return;
+	nn = net_generic(clp->cl_net, nfs_net_id);
+	spin_lock(&nn->nfs_client_lock);
+	list_del_rcu(&server->client_link);
+	if (list_empty(&clp->cl_superblocks))
+		set_bit(NFS_CS_STOP_RENEW, &clp->cl_res_state);
+	list_del(&server->master_link);
+	spin_unlock(&nn->nfs_client_lock);
+
+	synchronize_rcu();
+}
+EXPORT_SYMBOL_GPL(nfs_server_remove_lists);
+
+static DEFINE_IDA(s_sysfs_ids);
+
+/*
+ * Allocate and initialise a server record
+ */
+struct nfs_server *nfs_alloc_server(void)
+{
+	struct nfs_server *server;
+
+	server = kzalloc(sizeof(struct nfs_server), GFP_KERNEL);
+	if (!server)
+		return NULL;
+
+	server->s_sysfs_id = ida_alloc(&s_sysfs_ids, GFP_KERNEL);
+	if (server->s_sysfs_id < 0) {
+		kfree(server);
+		return NULL;
+	}
+
+	server->client = server->client_acl = ERR_PTR(-EINVAL);
+
+	/* Zero out the NFS state stuff */
+	INIT_LIST_HEAD(&server->client_link);
+	INIT_LIST_HEAD(&server->master_link);
+	INIT_LIST_HEAD(&server->delegations);
+	INIT_LIST_HEAD(&server->layouts);
+	INIT_LIST_HEAD(&server->state_owners_lru);
+	INIT_LIST_HEAD(&server->ss_copies);
+	INIT_LIST_HEAD(&server->ss_src_copies);
+
+	atomic_set(&server->active, 0);
+
+	server->io_stats = nfs_alloc_iostats();
+	if (!server->io_stats) {
+		kfree(server);
+		return NULL;
+	}
+
+	server->change_attr_type = NFS4_CHANGE_TYPE_IS_UNDEFINED;
+
+	init_waitqueue_head(&server->write_congestion_wait);
+	atomic_long_set(&server->writeback, 0);
+
+	atomic64_set(&server->owner_ctr, 0);
+
+	pnfs_init_server(server);
+	rpc_init_wait_queue(&server->uoc_rpcwaitq, "NFS UOC");
+
+	return server;
+}
+EXPORT_SYMBOL_GPL(nfs_alloc_server);
+
+static void delayed_free(struct rcu_head *p)
+{
+	struct nfs_server *server = container_of(p, struct nfs_server, rcu);
+
+	nfs_free_iostats(server->io_stats);
+	kfree(server);
+}
+
+/*
+ * Free up a server record
+ */
+void nfs_free_server(struct nfs_server *server)
+{
+	nfs_server_remove_lists(server);
+
+	if (server->destroy != NULL)
+		server->destroy(server);
+
+	if (!IS_ERR(server->client_acl))
+		rpc_shutdown_client(server->client_acl);
+	if (!IS_ERR(server->client))
+		rpc_shutdown_client(server->client);
+
+	nfs_put_client(server->nfs_client);
+
+	if (server->kobj.state_initialized) {
+		nfs_sysfs_remove_server(server);
+		kobject_put(&server->kobj);
+	}
+	ida_free(&s_sysfs_ids, server->s_sysfs_id);
+
+	put_cred(server->cred);
+	nfs_release_automount_timer();
+	call_rcu(&server->rcu, delayed_free);
+}
+EXPORT_SYMBOL_GPL(nfs_free_server);
+
+/*
+ * Create a version 2 or 3 volume record
+ * - keyed on server and FSID
+ */
+struct nfs_server *nfs_create_server(struct fs_context *fc)
+{
+	struct nfs_fs_context *ctx = nfs_fc2context(fc);
+	struct nfs_server *server;
+	struct nfs_fattr *fattr;
+	int error;
+
+	server = nfs_alloc_server();
+	if (!server)
+		return ERR_PTR(-ENOMEM);
+
+	server->cred = get_cred(fc->cred);
+
+	error = -ENOMEM;
+	fattr = nfs_alloc_fattr();
+	if (fattr == NULL)
+		goto error;
+
+	/* Get a client representation */
+	error = nfs_init_server(server, fc);
+	if (error < 0)
+		goto error;
+
+	/* Probe the root fh to retrieve its FSID */
+	error = nfs_probe_fsinfo(server, ctx->mntfh, fattr);
+	if (error < 0)
+		goto error;
+	if (server->nfs_client->rpc_ops->version == 3) {
+		if (server->namelen == 0 || server->namelen > NFS3_MAXNAMLEN)
+			server->namelen = NFS3_MAXNAMLEN;
+		if (!(ctx->flags & NFS_MOUNT_NORDIRPLUS))
+			server->caps |= NFS_CAP_READDIRPLUS;
+	} else {
+		if (server->namelen == 0 || server->namelen > NFS2_MAXNAMLEN)
+			server->namelen = NFS2_MAXNAMLEN;
+	}
+	/* Linux 'subtree_check' borkenness mandates this setting */
+	server->fh_expire_type = NFS_FH_VOL_RENAME;
+
+	if (!(fattr->valid & NFS_ATTR_FATTR)) {
+		error = ctx->nfs_mod->rpc_ops->getattr(server, ctx->mntfh,
+						       fattr, NULL);
+		if (error < 0) {
+			dprintk("nfs_create_server: getattr error = %d\n", -error);
+			goto error;
+		}
+	}
+	memcpy(&server->fsid, &fattr->fsid, sizeof(server->fsid));
+
+	dprintk("Server FSID: %llx:%llx\n",
+		(unsigned long long) server->fsid.major,
+		(unsigned long long) server->fsid.minor);
+
+	nfs_server_insert_lists(server);
+	server->mount_time = jiffies;
+	nfs_free_fattr(fattr);
+	return server;
+
+error:
+	nfs_free_fattr(fattr);
+	nfs_free_server(server);
+	return ERR_PTR(error);
+}
+EXPORT_SYMBOL_GPL(nfs_create_server);
+
+/*
+ * Clone an NFS2, NFS3 or NFS4 server record
+ */
+struct nfs_server *nfs_clone_server(struct nfs_server *source,
+				    struct nfs_fh *fh,
+				    struct nfs_fattr *fattr,
+				    rpc_authflavor_t flavor)
+{
+	struct nfs_server *server;
+	int error;
+
+	server = nfs_alloc_server();
+	if (!server)
+		return ERR_PTR(-ENOMEM);
+
+	server->cred = get_cred(source->cred);
+
+	/* Copy data from the source */
+	server->nfs_client = source->nfs_client;
+	server->destroy = source->destroy;
+	refcount_inc(&server->nfs_client->cl_count);
+	nfs_server_copy_userdata(server, source);
+
+	server->fsid = fattr->fsid;
+
+	nfs_sysfs_add_server(server);
+
+	nfs_sysfs_link_rpc_client(server,
+		server->nfs_client->cl_rpcclient, "_state");
+
+	error = nfs_init_server_rpcclient(server,
+			source->client->cl_timeout,
+			flavor);
+	if (error < 0)
+		goto out_free_server;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* probe the filesystem info for this server filesystem */
 	error = nfs_probe_server(server, fh);

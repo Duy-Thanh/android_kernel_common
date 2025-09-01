@@ -508,6 +508,7 @@ static int __init set_ntlb(char *str)
 
 __setup("ntlb=", set_ntlb);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* Initialise all TLB entries with unique values */
 static void r4k_tlb_uniquify(void)
 {
@@ -602,6 +603,49 @@ static void r4k_tlb_configure(void)
 
 	/* From this point on the ARC firmware is dead.	 */
 	r4k_tlb_uniquify();
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/*
+ * Configure TLB (for init or after a CPU has been powered off).
+ */
+static void r4k_tlb_configure(void)
+{
+	/*
+	 * You should never change this register:
+	 *   - On R4600 1.7 the tlbp never hits for pages smaller than
+	 *     the value in the c0_pagemask register.
+	 *   - The entire mm handling assumes the c0_pagemask register to
+	 *     be set to fixed-size pages.
+	 */
+	write_c0_pagemask(PM_DEFAULT_MASK);
+	back_to_back_c0_hazard();
+	if (read_c0_pagemask() != PM_DEFAULT_MASK)
+		panic("MMU doesn't support PAGE_SIZE=0x%lx", PAGE_SIZE);
+
+	write_c0_wired(0);
+	if (current_cpu_type() == CPU_R10000 ||
+	    current_cpu_type() == CPU_R12000 ||
+	    current_cpu_type() == CPU_R14000 ||
+	    current_cpu_type() == CPU_R16000)
+		write_c0_framemask(0);
+
+	if (cpu_has_rixi) {
+		/*
+		 * Enable the no read, no exec bits, and enable large physical
+		 * address.
+		 */
+#ifdef CONFIG_64BIT
+		set_c0_pagegrain(PG_RIE | PG_XIE | PG_ELPA);
+#else
+		set_c0_pagegrain(PG_RIE | PG_XIE);
+#endif
+	}
+
+	temp_tlb_entry = current_cpu_data.tlbsize - 1;
+
+	/* From this point on the ARC firmware is dead.	 */
+	local_flush_tlb_all();
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* Did I tell you that ARC SUCKS?  */
 }

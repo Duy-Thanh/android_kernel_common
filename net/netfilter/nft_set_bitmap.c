@@ -75,6 +75,7 @@ nft_bitmap_active(const u8 *bitmap, u32 idx, u32 off, u8 genmask)
 }
 
 INDIRECT_CALLABLE_SCOPE
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 const struct nft_set_ext *
 nft_bitmap_lookup(const struct net *net, const struct nft_set *set,
 		  const u32 *key)
@@ -90,6 +91,19 @@ nft_bitmap_lookup(const struct net *net, const struct nft_set *set,
 		return &found;
 
 	return NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+bool nft_bitmap_lookup(const struct net *net, const struct nft_set *set,
+		       const u32 *key, const struct nft_set_ext **ext)
+{
+	const struct nft_bitmap *priv = nft_set_priv(set);
+	u8 genmask = nft_genmask_cur(net);
+	u32 idx, off;
+
+	nft_bitmap_location(set, key, &idx, &off);
+
+	return nft_bitmap_active(priv->bitmap, idx, off, genmask);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static struct nft_bitmap_elem *

@@ -281,6 +281,7 @@ static bool decode_insn_reg2i16_fomat(union loongarch_instruction inst,
 	return true;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static bool decode_insn_reg3_fomat(union loongarch_instruction inst,
 				   struct instruction *insn)
 {
@@ -344,6 +345,45 @@ int arch_decode_instruction(struct objtool_file *file, const struct section *sec
 	} else if (inst.reg0i15_format.opcode == break_op &&
 		   inst.reg0i15_format.immediate == 0x1) {
 		/* break 0x1 */
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+int arch_decode_instruction(struct objtool_file *file, const struct section *sec,
+			    unsigned long offset, unsigned int maxlen,
+			    struct instruction *insn)
+{
+	struct stack_op **ops_list = &insn->stack_ops;
+	const struct elf *elf = file->elf;
+	struct stack_op *op = NULL;
+	union loongarch_instruction inst;
+
+	if (!is_loongarch(elf))
+		return -1;
+
+	if (maxlen < LOONGARCH_INSN_SIZE)
+		return 0;
+
+	insn->len = LOONGARCH_INSN_SIZE;
+	insn->type = INSN_OTHER;
+	insn->immediate = 0;
+
+	inst = *(union loongarch_instruction *)(sec->data->d_buf + offset);
+
+	if (decode_insn_reg0i26_fomat(inst, insn))
+		return 0;
+	if (decode_insn_reg1i21_fomat(inst, insn))
+		return 0;
+	if (decode_insn_reg2i12_fomat(inst, insn, ops_list, op))
+		return 0;
+	if (decode_insn_reg2i14_fomat(inst, insn, ops_list, op))
+		return 0;
+	if (decode_insn_reg2i16_fomat(inst, insn))
+		return 0;
+
+	if (inst.word == 0)
+		insn->type = INSN_NOP;
+	else if (inst.reg0i15_format.opcode == break_op) {
+		/* break */
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		insn->type = INSN_BUG;
 	} else if (inst.reg2_format.opcode == ertn_op) {
 		/* ertn */

@@ -66,6 +66,7 @@ static int xpcs_mmio_read_reg_indirect(struct dw_xpcs_plat *pxpcs,
 	switch (pxpcs->reg_width) {
 	case 4:
 		writel(page, pxpcs->reg_base + (DW_VR_CSR_VIEWPORT << 2));
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		ret = readl(pxpcs->reg_base + (ofs << 2)) & 0xffff;
 		break;
 	default:
@@ -125,6 +126,68 @@ static int xpcs_mmio_read_reg_direct(struct dw_xpcs_plat *pxpcs,
 	switch (pxpcs->reg_width) {
 	case 4:
 		ret = readl(pxpcs->reg_base + (csr << 2)) & 0xffff;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		ret = readl(pxpcs->reg_base + (ofs << 2));
+		break;
+	default:
+		writew(page, pxpcs->reg_base + (DW_VR_CSR_VIEWPORT << 1));
+		ret = readw(pxpcs->reg_base + (ofs << 1));
+		break;
+	}
+
+	pm_runtime_put(&pxpcs->pdev->dev);
+
+	return ret;
+}
+
+static int xpcs_mmio_write_reg_indirect(struct dw_xpcs_plat *pxpcs,
+					int dev, int reg, u16 val)
+{
+	ptrdiff_t csr, ofs;
+	u16 page;
+	int ret;
+
+	csr = xpcs_mmio_addr_format(dev, reg);
+	page = xpcs_mmio_addr_page(csr);
+	ofs = xpcs_mmio_addr_offset(csr);
+
+	ret = pm_runtime_resume_and_get(&pxpcs->pdev->dev);
+	if (ret)
+		return ret;
+
+	switch (pxpcs->reg_width) {
+	case 4:
+		writel(page, pxpcs->reg_base + (DW_VR_CSR_VIEWPORT << 2));
+		writel(val, pxpcs->reg_base + (ofs << 2));
+		break;
+	default:
+		writew(page, pxpcs->reg_base + (DW_VR_CSR_VIEWPORT << 1));
+		writew(val, pxpcs->reg_base + (ofs << 1));
+		break;
+	}
+
+	pm_runtime_put(&pxpcs->pdev->dev);
+
+	return 0;
+}
+
+static int xpcs_mmio_read_reg_direct(struct dw_xpcs_plat *pxpcs,
+				     int dev, int reg)
+{
+	ptrdiff_t csr;
+	int ret;
+
+	csr = xpcs_mmio_addr_format(dev, reg);
+
+	ret = pm_runtime_resume_and_get(&pxpcs->pdev->dev);
+	if (ret)
+		return ret;
+
+	switch (pxpcs->reg_width) {
+	case 4:
+		ret = readl(pxpcs->reg_base + (csr << 2));
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		break;
 	default:
 		ret = readw(pxpcs->reg_base + (csr << 1));

@@ -830,6 +830,7 @@ static int caam_ctrl_suspend(struct device *dev)
 {
 	const struct caam_drv_private *ctrlpriv = dev_get_drvdata(dev);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (ctrlpriv->caam_off_during_pm && !ctrlpriv->no_page0)
 		caam_state_save(dev);
 
@@ -908,6 +909,86 @@ static int caam_probe(struct platform_device *pdev)
 		imx_soc_data = imx_soc_match->data;
 		reg_access = reg_access && imx_soc_data->page0_access;
 		ctrlpriv->no_page0 = !reg_access;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (ctrlpriv->caam_off_during_pm && !ctrlpriv->optee_en)
+		caam_state_save(dev);
+
+	return 0;
+}
+
+static int caam_ctrl_resume(struct device *dev)
+{
+	struct caam_drv_private *ctrlpriv = dev_get_drvdata(dev);
+	int ret = 0;
+
+	if (ctrlpriv->caam_off_during_pm && !ctrlpriv->optee_en) {
+		caam_state_restore(dev);
+
+		/* HW and rng will be reset so deinstantiation can be removed */
+		devm_remove_action(dev, devm_deinstantiate_rng, dev);
+		ret = caam_ctrl_rng_init(dev);
+	}
+
+	return ret;
+}
+
+static DEFINE_SIMPLE_DEV_PM_OPS(caam_ctrl_pm_ops, caam_ctrl_suspend, caam_ctrl_resume);
+
+/* Probe routine for CAAM top (controller) level */
+static int caam_probe(struct platform_device *pdev)
+{
+	int ret, ring;
+	u64 caam_id;
+	const struct soc_device_attribute *imx_soc_match;
+	struct device *dev;
+	struct device_node *nprop, *np;
+	struct caam_ctrl __iomem *ctrl;
+	struct caam_drv_private *ctrlpriv;
+	struct caam_perfmon __iomem *perfmon;
+	struct dentry *dfs_root;
+	u32 scfgr, comp_params;
+	int pg_size;
+	int BLOCK_OFFSET = 0;
+	bool reg_access = true;
+	const struct caam_imx_data *imx_soc_data;
+
+	ctrlpriv = devm_kzalloc(&pdev->dev, sizeof(*ctrlpriv), GFP_KERNEL);
+	if (!ctrlpriv)
+		return -ENOMEM;
+
+	dev = &pdev->dev;
+	dev_set_drvdata(dev, ctrlpriv);
+	nprop = pdev->dev.of_node;
+
+	imx_soc_match = soc_device_match(caam_imx_soc_table);
+	if (!imx_soc_match && of_match_node(imx8m_machine_match, of_root))
+		return -EPROBE_DEFER;
+
+	caam_imx = (bool)imx_soc_match;
+
+	ctrlpriv->caam_off_during_pm = caam_imx && caam_off_during_pm();
+
+	if (imx_soc_match) {
+		/*
+		 * Until Layerscape and i.MX OP-TEE get in sync,
+		 * only i.MX OP-TEE use cases disallow access to
+		 * caam page 0 (controller) registers.
+		 */
+		np = of_find_compatible_node(NULL, NULL, "linaro,optee-tz");
+		ctrlpriv->optee_en = !!np;
+		of_node_put(np);
+
+		reg_access = !ctrlpriv->optee_en;
+
+		if (!imx_soc_match->data) {
+			dev_err(dev, "No clock data provided for i.MX SoC");
+			return -EINVAL;
+		}
+
+		imx_soc_data = imx_soc_match->data;
+		reg_access = reg_access && imx_soc_data->page0_access;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		/*
 		 * CAAM clocks cannot be controlled from kernel.
 		 */

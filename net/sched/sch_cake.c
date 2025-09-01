@@ -1745,6 +1745,7 @@ static s32 cake_enqueue(struct sk_buff *skb, struct Qdisc *sch,
 	ktime_t now = ktime_get();
 	struct cake_tin_data *b;
 	struct cake_flow *flow;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32 idx, tin;
 
 	/* choose flow to insert into */
@@ -1939,6 +1940,193 @@ static s32 cake_enqueue(struct sk_buff *skb, struct Qdisc *sch,
 
 		if (same_flow)
 			return NET_XMIT_CN;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u32 idx;
+
+	/* choose flow to insert into */
+	idx = cake_classify(sch, &b, skb, q->flow_mode, &ret);
+	if (idx == 0) {
+		if (ret & __NET_XMIT_BYPASS)
+			qdisc_qstats_drop(sch);
+		__qdisc_drop(skb, to_free);
+		return ret;
+	}
+	idx--;
+	flow = &b->flows[idx];
+
+	/* ensure shaper state isn't stale */
+	if (!b->tin_backlog) {
+		if (ktime_before(b->time_next_packet, now))
+			b->time_next_packet = now;
+
+		if (!sch->q.qlen) {
+			if (ktime_before(q->time_next_packet, now)) {
+				q->failsafe_next_packet = now;
+				q->time_next_packet = now;
+			} else if (ktime_after(q->time_next_packet, now) &&
+				   ktime_after(q->failsafe_next_packet, now)) {
+				u64 next = \
+					min(ktime_to_ns(q->time_next_packet),
+					    ktime_to_ns(
+						   q->failsafe_next_packet));
+				sch->qstats.overlimits++;
+				qdisc_watchdog_schedule_ns(&q->watchdog, next);
+			}
+		}
+	}
+
+	if (unlikely(len > b->max_skblen))
+		b->max_skblen = len;
+
+	if (skb_is_gso(skb) && q->rate_flags & CAKE_FLAG_SPLIT_GSO) {
+		struct sk_buff *segs, *nskb;
+		netdev_features_t features = netif_skb_features(skb);
+		unsigned int slen = 0, numsegs = 0;
+
+		segs = skb_gso_segment(skb, features & ~NETIF_F_GSO_MASK);
+		if (IS_ERR_OR_NULL(segs))
+			return qdisc_drop(skb, sch, to_free);
+
+		skb_list_walk_safe(segs, segs, nskb) {
+			skb_mark_not_on_list(segs);
+			qdisc_skb_cb(segs)->pkt_len = segs->len;
+			cobalt_set_enqueue_time(segs, now);
+			get_cobalt_cb(segs)->adjusted_len = cake_overhead(q,
+									  segs);
+			flow_queue_add(flow, segs);
+
+			sch->q.qlen++;
+			numsegs++;
+			slen += segs->len;
+			q->buffer_used += segs->truesize;
+			b->packets++;
+		}
+
+		/* stats */
+		b->bytes	    += slen;
+		b->backlogs[idx]    += slen;
+		b->tin_backlog      += slen;
+		sch->qstats.backlog += slen;
+		q->avg_window_bytes += slen;
+
+		qdisc_tree_reduce_backlog(sch, 1-numsegs, len-slen);
+		consume_skb(skb);
+	} else {
+		/* not splitting */
+		cobalt_set_enqueue_time(skb, now);
+		get_cobalt_cb(skb)->adjusted_len = cake_overhead(q, skb);
+		flow_queue_add(flow, skb);
+
+		if (q->ack_filter)
+			ack = cake_ack_filter(q, flow);
+
+		if (ack) {
+			b->ack_drops++;
+			sch->qstats.drops++;
+			b->bytes += qdisc_pkt_len(ack);
+			len -= qdisc_pkt_len(ack);
+			q->buffer_used += skb->truesize - ack->truesize;
+			if (q->rate_flags & CAKE_FLAG_INGRESS)
+				cake_advance_shaper(q, b, ack, now, true);
+
+			qdisc_tree_reduce_backlog(sch, 1, qdisc_pkt_len(ack));
+			consume_skb(ack);
+		} else {
+			sch->q.qlen++;
+			q->buffer_used      += skb->truesize;
+		}
+
+		/* stats */
+		b->packets++;
+		b->bytes	    += len;
+		b->backlogs[idx]    += len;
+		b->tin_backlog      += len;
+		sch->qstats.backlog += len;
+		q->avg_window_bytes += len;
+	}
+
+	if (q->overflow_timeout)
+		cake_heapify_up(q, b->overflow_idx[idx]);
+
+	/* incoming bandwidth capacity estimate */
+	if (q->rate_flags & CAKE_FLAG_AUTORATE_INGRESS) {
+		u64 packet_interval = \
+			ktime_to_ns(ktime_sub(now, q->last_packet_time));
+
+		if (packet_interval > NSEC_PER_SEC)
+			packet_interval = NSEC_PER_SEC;
+
+		/* filter out short-term bursts, eg. wifi aggregation */
+		q->avg_packet_interval = \
+			cake_ewma(q->avg_packet_interval,
+				  packet_interval,
+				  (packet_interval > q->avg_packet_interval ?
+					  2 : 8));
+
+		q->last_packet_time = now;
+
+		if (packet_interval > q->avg_packet_interval) {
+			u64 window_interval = \
+				ktime_to_ns(ktime_sub(now,
+						      q->avg_window_begin));
+			u64 b = q->avg_window_bytes * (u64)NSEC_PER_SEC;
+
+			b = div64_u64(b, window_interval);
+			q->avg_peak_bandwidth =
+				cake_ewma(q->avg_peak_bandwidth, b,
+					  b > q->avg_peak_bandwidth ? 2 : 8);
+			q->avg_window_bytes = 0;
+			q->avg_window_begin = now;
+
+			if (ktime_after(now,
+					ktime_add_ms(q->last_reconfig_time,
+						     250))) {
+				q->rate_bps = (q->avg_peak_bandwidth * 15) >> 4;
+				cake_reconfigure(sch);
+			}
+		}
+	} else {
+		q->avg_window_bytes = 0;
+		q->last_packet_time = now;
+	}
+
+	/* flowchain */
+	if (!flow->set || flow->set == CAKE_SET_DECAYING) {
+		if (!flow->set) {
+			list_add_tail(&flow->flowchain, &b->new_flows);
+		} else {
+			b->decaying_flow_count--;
+			list_move_tail(&flow->flowchain, &b->new_flows);
+		}
+		flow->set = CAKE_SET_SPARSE;
+		b->sparse_flow_count++;
+
+		flow->deficit = cake_get_flow_quantum(b, flow, q->flow_mode);
+	} else if (flow->set == CAKE_SET_SPARSE_WAIT) {
+		/* this flow was empty, accounted as a sparse flow, but actually
+		 * in the bulk rotation.
+		 */
+		flow->set = CAKE_SET_BULK;
+		b->sparse_flow_count--;
+		b->bulk_flow_count++;
+
+		cake_inc_srchost_bulk_flow_count(b, flow, q->flow_mode);
+		cake_inc_dsthost_bulk_flow_count(b, flow, q->flow_mode);
+	}
+
+	if (q->buffer_used > q->buffer_max_used)
+		q->buffer_max_used = q->buffer_used;
+
+	if (q->buffer_used > q->buffer_limit) {
+		u32 dropped = 0;
+
+		while (q->buffer_used > q->buffer_limit) {
+			dropped++;
+			cake_drop(sch, to_free);
+		}
+		b->drop_overlimit += dropped;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 	return NET_XMIT_SUCCESS;
 }

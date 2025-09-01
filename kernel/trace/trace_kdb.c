@@ -43,6 +43,7 @@ static void ftrace_dump_buf(int skip_entries, long cpu_file)
 	if (cpu_file == RING_BUFFER_ALL_CPUS) {
 		for_each_tracing_cpu(cpu) {
 			iter.buffer_iter[cpu] =
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			ring_buffer_read_start(iter.array_buffer->buffer,
 					       cpu, GFP_ATOMIC);
 			tracing_iter_reset(&iter, cpu);
@@ -52,6 +53,20 @@ static void ftrace_dump_buf(int skip_entries, long cpu_file)
 		iter.buffer_iter[cpu_file] =
 			ring_buffer_read_start(iter.array_buffer->buffer,
 						 cpu_file, GFP_ATOMIC);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			ring_buffer_read_prepare(iter.array_buffer->buffer,
+						 cpu, GFP_ATOMIC);
+			ring_buffer_read_start(iter.buffer_iter[cpu]);
+			tracing_iter_reset(&iter, cpu);
+		}
+	} else {
+		iter.cpu_file = cpu_file;
+		iter.buffer_iter[cpu_file] =
+			ring_buffer_read_prepare(iter.array_buffer->buffer,
+						 cpu_file, GFP_ATOMIC);
+		ring_buffer_read_start(iter.buffer_iter[cpu_file]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		tracing_iter_reset(&iter, cpu_file);
 	}
 

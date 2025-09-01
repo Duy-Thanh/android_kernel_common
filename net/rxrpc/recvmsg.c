@@ -351,6 +351,7 @@ try_again:
 		goto try_again;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	rxrpc_see_call(call, rxrpc_call_see_recvmsg);
 	if (test_bit(RXRPC_CALL_RELEASED, &call->flags)) {
 		rxrpc_see_call(call, rxrpc_call_see_already_released);
@@ -391,6 +392,34 @@ try_again:
 			rxrpc_put_call(call, rxrpc_call_put_recvmsg);
 		goto try_again;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (!(flags & MSG_PEEK))
+		list_del_init(&call->recvmsg_link);
+	else
+		rxrpc_get_call(call, rxrpc_call_get_recvmsg);
+	spin_unlock(&rx->recvmsg_lock);
+
+	call_debug_id = call->debug_id;
+	trace_rxrpc_recvmsg(call_debug_id, rxrpc_recvmsg_dequeue, 0);
+
+	/* We're going to drop the socket lock, so we need to lock the call
+	 * against interference by sendmsg.
+	 */
+	if (!mutex_trylock(&call->user_mutex)) {
+		ret = -EWOULDBLOCK;
+		if (flags & MSG_DONTWAIT)
+			goto error_requeue_call;
+		ret = -ERESTARTSYS;
+		if (mutex_lock_interruptible(&call->user_mutex) < 0)
+			goto error_requeue_call;
+	}
+
+	release_sock(&rx->sk);
+
+	if (test_bit(RXRPC_CALL_RELEASED, &call->flags))
+		BUG();
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (test_bit(RXRPC_CALL_HAS_USERID, &call->flags)) {
 		if (flags & MSG_CMSG_COMPAT) {

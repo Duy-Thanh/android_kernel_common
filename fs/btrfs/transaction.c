@@ -1739,6 +1739,7 @@ static noinline int create_pending_snapshot(struct btrfs_trans_handle *trans,
 
 	ret = btrfs_create_qgroup(trans, objectid);
 	if (ret && ret != -EEXIST) {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		if (ret != -ENOTCONN || btrfs_qgroup_enabled(fs_info)) {
 			btrfs_abort_transaction(trans, ret);
 			goto fail;
@@ -2114,6 +2115,381 @@ static void btrfs_cleanup_pending_block_groups(struct btrfs_trans_handle *trans)
 	       spin_lock(&fs_info->unused_bgs_lock);
                list_del_init(&block_group->bg_list);
 	       btrfs_put_block_group(block_group);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+
+	/*
+	 * pull in the delayed directory update
+	 * and the delayed inode item
+	 * otherwise we corrupt the FS during
+	 * snapshot
+	 */
+	ret = btrfs_run_delayed_items(trans);
+	if (ret) {	/* Transaction aborted */
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+
+	ret = record_root_in_trans(trans, root, 0);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+	btrfs_set_root_last_snapshot(&root->root_item, trans->transid);
+	memcpy(new_root_item, &root->root_item, sizeof(*new_root_item));
+	btrfs_check_and_init_root_item(new_root_item);
+
+	root_flags = btrfs_root_flags(new_root_item);
+	if (pending->readonly)
+		root_flags |= BTRFS_ROOT_SUBVOL_RDONLY;
+	else
+		root_flags &= ~BTRFS_ROOT_SUBVOL_RDONLY;
+	btrfs_set_root_flags(new_root_item, root_flags);
+
+	btrfs_set_root_generation_v2(new_root_item,
+			trans->transid);
+	generate_random_guid(new_root_item->uuid);
+	memcpy(new_root_item->parent_uuid, root->root_item.uuid,
+			BTRFS_UUID_SIZE);
+	if (!(root_flags & BTRFS_ROOT_SUBVOL_RDONLY)) {
+		memset(new_root_item->received_uuid, 0,
+		       sizeof(new_root_item->received_uuid));
+		memset(&new_root_item->stime, 0, sizeof(new_root_item->stime));
+		memset(&new_root_item->rtime, 0, sizeof(new_root_item->rtime));
+		btrfs_set_root_stransid(new_root_item, 0);
+		btrfs_set_root_rtransid(new_root_item, 0);
+	}
+	btrfs_set_stack_timespec_sec(&new_root_item->otime, cur_time.tv_sec);
+	btrfs_set_stack_timespec_nsec(&new_root_item->otime, cur_time.tv_nsec);
+	btrfs_set_root_otransid(new_root_item, trans->transid);
+
+	old = btrfs_lock_root_node(root);
+	ret = btrfs_cow_block(trans, root, old, NULL, 0, &old,
+			      BTRFS_NESTING_COW);
+	if (ret) {
+		btrfs_tree_unlock(old);
+		free_extent_buffer(old);
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+
+	ret = btrfs_copy_root(trans, root, old, &tmp, objectid);
+	/* clean up in any case */
+	btrfs_tree_unlock(old);
+	free_extent_buffer(old);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+	/* see comments in should_cow_block() */
+	set_bit(BTRFS_ROOT_FORCE_COW, &root->state);
+	smp_wmb();
+
+	btrfs_set_root_node(new_root_item, tmp);
+	/* record when the snapshot was created in key.offset */
+	key.offset = trans->transid;
+	ret = btrfs_insert_root(trans, tree_root, &key, new_root_item);
+	btrfs_tree_unlock(tmp);
+	free_extent_buffer(tmp);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+
+	/*
+	 * insert root back/forward references
+	 */
+	ret = btrfs_add_root_ref(trans, objectid,
+				 btrfs_root_id(parent_root),
+				 btrfs_ino(BTRFS_I(parent_inode)), index,
+				 &fname.disk_name);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+
+	key.offset = (u64)-1;
+	pending->snap = btrfs_get_new_fs_root(fs_info, objectid, &pending->anon_dev);
+	if (IS_ERR(pending->snap)) {
+		ret = PTR_ERR(pending->snap);
+		pending->snap = NULL;
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+
+	ret = btrfs_reloc_post_snapshot(trans, pending);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+
+	/*
+	 * Do special qgroup accounting for snapshot, as we do some qgroup
+	 * snapshot hack to do fast snapshot.
+	 * To co-operate with that hack, we do hack again.
+	 * Or snapshot will be greatly slowed down by a subtree qgroup rescan
+	 */
+	if (btrfs_qgroup_mode(fs_info) == BTRFS_QGROUP_MODE_FULL)
+		ret = qgroup_account_snapshot(trans, root, parent_root,
+					      pending->inherit, objectid);
+	else if (btrfs_qgroup_mode(fs_info) == BTRFS_QGROUP_MODE_SIMPLE)
+		ret = btrfs_qgroup_inherit(trans, btrfs_root_id(root), objectid,
+					   btrfs_root_id(parent_root), pending->inherit);
+	if (ret < 0)
+		goto fail;
+
+	ret = btrfs_insert_dir_item(trans, &fname.disk_name,
+				    BTRFS_I(parent_inode), &key, BTRFS_FT_DIR,
+				    index);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+
+	btrfs_i_size_write(BTRFS_I(parent_inode), parent_inode->i_size +
+						  fname.disk_name.len * 2);
+	inode_set_mtime_to_ts(parent_inode,
+			      inode_set_ctime_current(parent_inode));
+	ret = btrfs_update_inode_fallback(trans, BTRFS_I(parent_inode));
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+	ret = btrfs_uuid_tree_add(trans, new_root_item->uuid,
+				  BTRFS_UUID_KEY_SUBVOL,
+				  objectid);
+	if (ret) {
+		btrfs_abort_transaction(trans, ret);
+		goto fail;
+	}
+	if (!btrfs_is_empty_uuid(new_root_item->received_uuid)) {
+		ret = btrfs_uuid_tree_add(trans, new_root_item->received_uuid,
+					  BTRFS_UUID_KEY_RECEIVED_SUBVOL,
+					  objectid);
+		if (ret && ret != -EEXIST) {
+			btrfs_abort_transaction(trans, ret);
+			goto fail;
+		}
+	}
+
+fail:
+	pending->error = ret;
+dir_item_existed:
+	trans->block_rsv = rsv;
+	trans->bytes_reserved = 0;
+clear_skip_qgroup:
+	btrfs_clear_skip_qgroup(trans);
+free_fname:
+	fscrypt_free_filename(&fname);
+free_pending:
+	kfree(new_root_item);
+	pending->root_item = NULL;
+	btrfs_free_path(path);
+	pending->path = NULL;
+
+	return ret;
+}
+
+/*
+ * create all the snapshots we've scheduled for creation
+ */
+static noinline int create_pending_snapshots(struct btrfs_trans_handle *trans)
+{
+	struct btrfs_pending_snapshot *pending, *next;
+	struct list_head *head = &trans->transaction->pending_snapshots;
+	int ret = 0;
+
+	list_for_each_entry_safe(pending, next, head, list) {
+		list_del(&pending->list);
+		ret = create_pending_snapshot(trans, pending);
+		if (ret)
+			break;
+	}
+	return ret;
+}
+
+static void update_super_roots(struct btrfs_fs_info *fs_info)
+{
+	struct btrfs_root_item *root_item;
+	struct btrfs_super_block *super;
+
+	super = fs_info->super_copy;
+
+	root_item = &fs_info->chunk_root->root_item;
+	super->chunk_root = root_item->bytenr;
+	super->chunk_root_generation = root_item->generation;
+	super->chunk_root_level = root_item->level;
+
+	root_item = &fs_info->tree_root->root_item;
+	super->root = root_item->bytenr;
+	super->generation = root_item->generation;
+	super->root_level = root_item->level;
+	if (btrfs_test_opt(fs_info, SPACE_CACHE))
+		super->cache_generation = root_item->generation;
+	else if (test_bit(BTRFS_FS_CLEANUP_SPACE_CACHE_V1, &fs_info->flags))
+		super->cache_generation = 0;
+	if (test_bit(BTRFS_FS_UPDATE_UUID_TREE_GEN, &fs_info->flags))
+		super->uuid_tree_generation = root_item->generation;
+}
+
+int btrfs_transaction_blocked(struct btrfs_fs_info *info)
+{
+	struct btrfs_transaction *trans;
+	int ret = 0;
+
+	spin_lock(&info->trans_lock);
+	trans = info->running_transaction;
+	if (trans)
+		ret = is_transaction_blocked(trans);
+	spin_unlock(&info->trans_lock);
+	return ret;
+}
+
+void btrfs_commit_transaction_async(struct btrfs_trans_handle *trans)
+{
+	struct btrfs_fs_info *fs_info = trans->fs_info;
+	struct btrfs_transaction *cur_trans;
+
+	/* Kick the transaction kthread. */
+	set_bit(BTRFS_FS_COMMIT_TRANS, &fs_info->flags);
+	wake_up_process(fs_info->transaction_kthread);
+
+	/* take transaction reference */
+	cur_trans = trans->transaction;
+	refcount_inc(&cur_trans->use_count);
+
+	btrfs_end_transaction(trans);
+
+	/*
+	 * Wait for the current transaction commit to start and block
+	 * subsequent transaction joins
+	 */
+	btrfs_might_wait_for_state(fs_info, BTRFS_LOCKDEP_TRANS_COMMIT_PREP);
+	wait_event(fs_info->transaction_blocked_wait,
+		   cur_trans->state >= TRANS_STATE_COMMIT_START ||
+		   TRANS_ABORTED(cur_trans));
+	btrfs_put_transaction(cur_trans);
+}
+
+/*
+ * If there is a running transaction commit it or if it's already committing,
+ * wait for its commit to complete. Does not start and commit a new transaction
+ * if there isn't any running.
+ */
+int btrfs_commit_current_transaction(struct btrfs_root *root)
+{
+	struct btrfs_trans_handle *trans;
+
+	trans = btrfs_attach_transaction_barrier(root);
+	if (IS_ERR(trans)) {
+		int ret = PTR_ERR(trans);
+
+		return (ret == -ENOENT) ? 0 : ret;
+	}
+
+	return btrfs_commit_transaction(trans);
+}
+
+static void cleanup_transaction(struct btrfs_trans_handle *trans, int err)
+{
+	struct btrfs_fs_info *fs_info = trans->fs_info;
+	struct btrfs_transaction *cur_trans = trans->transaction;
+
+	WARN_ON(refcount_read(&trans->use_count) > 1);
+
+	btrfs_abort_transaction(trans, err);
+
+	spin_lock(&fs_info->trans_lock);
+
+	/*
+	 * If the transaction is removed from the list, it means this
+	 * transaction has been committed successfully, so it is impossible
+	 * to call the cleanup function.
+	 */
+	BUG_ON(list_empty(&cur_trans->list));
+
+	if (cur_trans == fs_info->running_transaction) {
+		cur_trans->state = TRANS_STATE_COMMIT_DOING;
+		spin_unlock(&fs_info->trans_lock);
+
+		/*
+		 * The thread has already released the lockdep map as reader
+		 * already in btrfs_commit_transaction().
+		 */
+		btrfs_might_wait_for_event(fs_info, btrfs_trans_num_writers);
+		wait_event(cur_trans->writer_wait,
+			   atomic_read(&cur_trans->num_writers) == 1);
+
+		spin_lock(&fs_info->trans_lock);
+	}
+
+	/*
+	 * Now that we know no one else is still using the transaction we can
+	 * remove the transaction from the list of transactions. This avoids
+	 * the transaction kthread from cleaning up the transaction while some
+	 * other task is still using it, which could result in a use-after-free
+	 * on things like log trees, as it forces the transaction kthread to
+	 * wait for this transaction to be cleaned up by us.
+	 */
+	list_del_init(&cur_trans->list);
+
+	spin_unlock(&fs_info->trans_lock);
+
+	btrfs_cleanup_one_transaction(trans->transaction, fs_info);
+
+	spin_lock(&fs_info->trans_lock);
+	if (cur_trans == fs_info->running_transaction)
+		fs_info->running_transaction = NULL;
+	spin_unlock(&fs_info->trans_lock);
+
+	if (trans->type & __TRANS_FREEZABLE)
+		sb_end_intwrite(fs_info->sb);
+	btrfs_put_transaction(cur_trans);
+	btrfs_put_transaction(cur_trans);
+
+	trace_btrfs_transaction_commit(fs_info);
+
+	if (current->journal_info == trans)
+		current->journal_info = NULL;
+
+	/*
+	 * If relocation is running, we can't cancel scrub because that will
+	 * result in a deadlock. Before relocating a block group, relocation
+	 * pauses scrub, then starts and commits a transaction before unpausing
+	 * scrub. If the transaction commit is being done by the relocation
+	 * task or triggered by another task and the relocation task is waiting
+	 * for the commit, and we end up here due to an error in the commit
+	 * path, then calling btrfs_scrub_cancel() will deadlock, as we are
+	 * asking for scrub to stop while having it asked to be paused higher
+	 * above in relocation code.
+	 */
+	if (!test_bit(BTRFS_FS_RELOC_RUNNING, &fs_info->flags))
+		btrfs_scrub_cancel(fs_info);
+
+	kmem_cache_free(btrfs_trans_handle_cachep, trans);
+}
+
+/*
+ * Release reserved delayed ref space of all pending block groups of the
+ * transaction and remove them from the list
+ */
+static void btrfs_cleanup_pending_block_groups(struct btrfs_trans_handle *trans)
+{
+       struct btrfs_fs_info *fs_info = trans->fs_info;
+       struct btrfs_block_group *block_group, *tmp;
+
+       list_for_each_entry_safe(block_group, tmp, &trans->new_bgs, bg_list) {
+               btrfs_dec_delayed_refs_rsv_bg_inserts(fs_info);
+		/*
+		* Not strictly necessary to lock, as no other task will be using a
+		* block_group on the new_bgs list during a transaction abort.
+		*/
+	       spin_lock(&fs_info->unused_bgs_lock);
+               list_del_init(&block_group->bg_list);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	       spin_unlock(&fs_info->unused_bgs_lock);
        }
 }

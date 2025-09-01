@@ -1383,6 +1383,7 @@ static int pcf2127_i2c_probe(struct i2c_client *client)
 		variant = &pcf21xx_cfg[type];
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	config.max_register = variant->max_register,
 
 	regmap = devm_regmap_init(&client->dev, &pcf2127_i2c_regmap,
@@ -1459,6 +1460,85 @@ static int pcf2127_spi_probe(struct spi_device *spi)
 	if (variant->type == PCF2131) {
 		config.read_flag_mask = 0x0;
 		config.write_flag_mask = 0x0;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (variant->type == PCF2131) {
+		config.read_flag_mask = 0x0;
+		config.write_flag_mask = 0x0;
+	}
+
+	config.max_register = variant->max_register,
+
+	regmap = devm_regmap_init(&client->dev, &pcf2127_i2c_regmap,
+					&client->dev, &config);
+	if (IS_ERR(regmap)) {
+		dev_err(&client->dev, "%s: regmap allocation failed: %ld\n",
+			__func__, PTR_ERR(regmap));
+		return PTR_ERR(regmap);
+	}
+
+	return pcf2127_probe(&client->dev, regmap, client->irq, variant);
+}
+
+static struct i2c_driver pcf2127_i2c_driver = {
+	.driver		= {
+		.name	= "rtc-pcf2127-i2c",
+		.of_match_table = of_match_ptr(pcf2127_of_match),
+	},
+	.probe		= pcf2127_i2c_probe,
+	.id_table	= pcf2127_i2c_id,
+};
+
+static int pcf2127_i2c_register_driver(void)
+{
+	return i2c_add_driver(&pcf2127_i2c_driver);
+}
+
+static void pcf2127_i2c_unregister_driver(void)
+{
+	i2c_del_driver(&pcf2127_i2c_driver);
+}
+
+#else
+
+static int pcf2127_i2c_register_driver(void)
+{
+	return 0;
+}
+
+static void pcf2127_i2c_unregister_driver(void)
+{
+}
+
+#endif
+
+#if IS_ENABLED(CONFIG_SPI_MASTER)
+
+static struct spi_driver pcf2127_spi_driver;
+static const struct spi_device_id pcf2127_spi_id[];
+
+static int pcf2127_spi_probe(struct spi_device *spi)
+{
+	static struct regmap_config config = {
+		.reg_bits = 8,
+		.val_bits = 8,
+		.read_flag_mask = 0xa0,
+		.write_flag_mask = 0x20,
+	};
+	struct regmap *regmap;
+	const struct pcf21xx_config *variant;
+
+	if (spi->dev.of_node) {
+		variant = of_device_get_match_data(&spi->dev);
+		if (!variant)
+			return -ENODEV;
+	} else {
+		enum pcf21xx_type type = spi_get_device_id(spi)->driver_data;
+
+		if (type >= PCF21XX_LAST_ID)
+			return -ENODEV;
+		variant = &pcf21xx_cfg[type];
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	config.max_register = variant->max_register;

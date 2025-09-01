@@ -127,6 +127,7 @@ static int efivarfs_d_compare(const struct dentry *dentry,
 {
 	int guid = len - EFI_VARIABLE_GUID_LEN;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* Parallel lookups may produce a temporary invalid filename */
 	if (guid <= 0)
 		return 1;
@@ -368,6 +369,240 @@ static const struct fs_context_operations efivarfs_context_ops = {
 	.parse_param	= efivarfs_parse_param,
 	.reconfigure	= efivarfs_reconfigure,
 	.free		= efivarfs_free,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (name->len != len)
+		return 1;
+
+	/* Case-sensitive compare for the variable name */
+	if (memcmp(str, name->name, guid))
+		return 1;
+
+	/* Case-insensitive compare for the GUID */
+	return strncasecmp(name->name + guid, str + guid, EFI_VARIABLE_GUID_LEN);
+}
+
+static int efivarfs_d_hash(const struct dentry *dentry, struct qstr *qstr)
+{
+	unsigned long hash = init_name_hash(dentry);
+	const unsigned char *s = qstr->name;
+	unsigned int len = qstr->len;
+
+	while (len-- > EFI_VARIABLE_GUID_LEN)
+		hash = partial_name_hash(*s++, hash);
+
+	/* GUID is case-insensitive. */
+	while (len--)
+		hash = partial_name_hash(tolower(*s++), hash);
+
+	qstr->hash = end_name_hash(hash);
+	return 0;
+}
+
+static const struct dentry_operations efivarfs_d_ops = {
+	.d_compare = efivarfs_d_compare,
+	.d_hash = efivarfs_d_hash,
+	.d_delete = always_delete_dentry,
+};
+
+static struct dentry *efivarfs_alloc_dentry(struct dentry *parent, char *name)
+{
+	struct dentry *d;
+	struct qstr q;
+	int err;
+
+	q.name = name;
+	q.len = strlen(name);
+
+	err = efivarfs_d_hash(parent, &q);
+	if (err)
+		return ERR_PTR(err);
+
+	d = d_alloc(parent, &q);
+	if (d)
+		return d;
+
+	return ERR_PTR(-ENOMEM);
+}
+
+static int efivarfs_callback(efi_char16_t *name16, efi_guid_t vendor,
+			     unsigned long name_size, void *data,
+			     struct list_head *list)
+{
+	struct super_block *sb = (struct super_block *)data;
+	struct efivar_entry *entry;
+	struct inode *inode = NULL;
+	struct dentry *dentry, *root = sb->s_root;
+	unsigned long size = 0;
+	char *name;
+	int len;
+	int err = -ENOMEM;
+	bool is_removable = false;
+
+	if (guid_equal(&vendor, &LINUX_EFI_RANDOM_SEED_TABLE_GUID))
+		return 0;
+
+	entry = kzalloc(sizeof(*entry), GFP_KERNEL);
+	if (!entry)
+		return err;
+
+	memcpy(entry->var.VariableName, name16, name_size);
+	memcpy(&(entry->var.VendorGuid), &vendor, sizeof(efi_guid_t));
+
+	len = ucs2_utf8size(entry->var.VariableName);
+
+	/* name, plus '-', plus GUID, plus NUL*/
+	name = kmalloc(len + 1 + EFI_VARIABLE_GUID_LEN + 1, GFP_KERNEL);
+	if (!name)
+		goto fail;
+
+	ucs2_as_utf8(name, entry->var.VariableName, len);
+
+	if (efivar_variable_is_removable(entry->var.VendorGuid, name, len))
+		is_removable = true;
+
+	name[len] = '-';
+
+	efi_guid_to_str(&entry->var.VendorGuid, name + len + 1);
+
+	name[len + EFI_VARIABLE_GUID_LEN+1] = '\0';
+
+	/* replace invalid slashes like kobject_set_name_vargs does for /sys/firmware/efi/vars. */
+	strreplace(name, '/', '!');
+
+	inode = efivarfs_get_inode(sb, d_inode(root), S_IFREG | 0644, 0,
+				   is_removable);
+	if (!inode)
+		goto fail_name;
+
+	dentry = efivarfs_alloc_dentry(root, name);
+	if (IS_ERR(dentry)) {
+		err = PTR_ERR(dentry);
+		goto fail_inode;
+	}
+
+	__efivar_entry_get(entry, NULL, &size, NULL);
+	__efivar_entry_add(entry, list);
+
+	/* copied by the above to local storage in the dentry. */
+	kfree(name);
+
+	inode_lock(inode);
+	inode->i_private = entry;
+	i_size_write(inode, size + sizeof(entry->var.Attributes));
+	inode_unlock(inode);
+	d_add(dentry, inode);
+
+	return 0;
+
+fail_inode:
+	iput(inode);
+fail_name:
+	kfree(name);
+fail:
+	kfree(entry);
+	return err;
+}
+
+static int efivarfs_destroy(struct efivar_entry *entry, void *data)
+{
+	efivar_entry_remove(entry);
+	kfree(entry);
+	return 0;
+}
+
+enum {
+	Opt_uid, Opt_gid,
+};
+
+static const struct fs_parameter_spec efivarfs_parameters[] = {
+	fsparam_uid("uid", Opt_uid),
+	fsparam_gid("gid", Opt_gid),
+	{},
+};
+
+static int efivarfs_parse_param(struct fs_context *fc, struct fs_parameter *param)
+{
+	struct efivarfs_fs_info *sbi = fc->s_fs_info;
+	struct efivarfs_mount_opts *opts = &sbi->mount_opts;
+	struct fs_parse_result result;
+	int opt;
+
+	opt = fs_parse(fc, efivarfs_parameters, param, &result);
+	if (opt < 0)
+		return opt;
+
+	switch (opt) {
+	case Opt_uid:
+		opts->uid = result.uid;
+		break;
+	case Opt_gid:
+		opts->gid = result.gid;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
+static int efivarfs_fill_super(struct super_block *sb, struct fs_context *fc)
+{
+	struct efivarfs_fs_info *sfi = sb->s_fs_info;
+	struct inode *inode = NULL;
+	struct dentry *root;
+	int err;
+
+	sb->s_maxbytes          = MAX_LFS_FILESIZE;
+	sb->s_blocksize         = PAGE_SIZE;
+	sb->s_blocksize_bits    = PAGE_SHIFT;
+	sb->s_magic             = EFIVARFS_MAGIC;
+	sb->s_op                = &efivarfs_ops;
+	sb->s_d_op		= &efivarfs_d_ops;
+	sb->s_time_gran         = 1;
+
+	if (!efivar_supports_writes())
+		sb->s_flags |= SB_RDONLY;
+
+	inode = efivarfs_get_inode(sb, NULL, S_IFDIR | 0755, 0, true);
+	if (!inode)
+		return -ENOMEM;
+	inode->i_op = &efivarfs_dir_inode_operations;
+
+	root = d_make_root(inode);
+	sb->s_root = root;
+	if (!root)
+		return -ENOMEM;
+
+	sfi->sb = sb;
+	sfi->nb.notifier_call = efivarfs_ops_notifier;
+	err = blocking_notifier_chain_register(&efivar_ops_nh, &sfi->nb);
+	if (err)
+		return err;
+
+	return efivar_init(efivarfs_callback, sb, &sfi->efivarfs_list);
+}
+
+static int efivarfs_get_tree(struct fs_context *fc)
+{
+	return get_tree_single(fc, efivarfs_fill_super);
+}
+
+static int efivarfs_reconfigure(struct fs_context *fc)
+{
+	if (!efivar_supports_writes() && !(fc->sb_flags & SB_RDONLY)) {
+		pr_err("Firmware does not support SetVariableRT. Can not remount with rw\n");
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
+static const struct fs_context_operations efivarfs_context_ops = {
+	.get_tree	= efivarfs_get_tree,
+	.parse_param	= efivarfs_parse_param,
+	.reconfigure	= efivarfs_reconfigure,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 static int efivarfs_init_fs_context(struct fs_context *fc)

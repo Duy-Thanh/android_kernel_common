@@ -112,6 +112,7 @@ static int nfs42_proc_fallocate(struct rpc_message *msg, struct file *filep,
 	exception.inode = inode;
 	exception.state = lock->open_context->state;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	nfs_file_block_o_direct(NFS_I(inode));
 	err = nfs_sync_inode(inode);
 	if (err)
@@ -357,6 +358,252 @@ static ssize_t _nfs42_proc_copy(struct file *src,
 	}
 
 	nfs_file_block_o_direct(NFS_I(dst_inode));
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	err = nfs_sync_inode(inode);
+	if (err)
+		goto out;
+
+	do {
+		err = _nfs42_proc_fallocate(msg, filep, lock, offset, len);
+		if (err == -ENOTSUPP) {
+			err = -EOPNOTSUPP;
+			break;
+		}
+		err = nfs4_handle_exception(server, err, &exception);
+	} while (exception.retry);
+out:
+	nfs_put_lock_context(lock);
+	return err;
+}
+
+int nfs42_proc_allocate(struct file *filep, loff_t offset, loff_t len)
+{
+	struct rpc_message msg = {
+		.rpc_proc = &nfs4_procedures[NFSPROC4_CLNT_ALLOCATE],
+	};
+	struct inode *inode = file_inode(filep);
+	int err;
+
+	if (!nfs_server_capable(inode, NFS_CAP_ALLOCATE))
+		return -EOPNOTSUPP;
+
+	inode_lock(inode);
+
+	err = nfs42_proc_fallocate(&msg, filep, offset, len);
+	if (err == -EOPNOTSUPP)
+		NFS_SERVER(inode)->caps &= ~NFS_CAP_ALLOCATE;
+
+	inode_unlock(inode);
+	return err;
+}
+
+int nfs42_proc_deallocate(struct file *filep, loff_t offset, loff_t len)
+{
+	struct rpc_message msg = {
+		.rpc_proc = &nfs4_procedures[NFSPROC4_CLNT_DEALLOCATE],
+	};
+	struct inode *inode = file_inode(filep);
+	int err;
+
+	if (!nfs_server_capable(inode, NFS_CAP_DEALLOCATE))
+		return -EOPNOTSUPP;
+
+	inode_lock(inode);
+
+	err = nfs42_proc_fallocate(&msg, filep, offset, len);
+	if (err == 0)
+		truncate_pagecache_range(inode, offset, (offset + len) -1);
+	if (err == -EOPNOTSUPP)
+		NFS_SERVER(inode)->caps &= ~NFS_CAP_DEALLOCATE;
+
+	inode_unlock(inode);
+	return err;
+}
+
+static int handle_async_copy(struct nfs42_copy_res *res,
+			     struct nfs_server *dst_server,
+			     struct nfs_server *src_server,
+			     struct file *src,
+			     struct file *dst,
+			     nfs4_stateid *src_stateid,
+			     bool *restart)
+{
+	struct nfs4_copy_state *copy, *tmp_copy = NULL, *iter;
+	int status = NFS4_OK;
+	struct nfs_open_context *dst_ctx = nfs_file_open_context(dst);
+	struct nfs_open_context *src_ctx = nfs_file_open_context(src);
+
+	copy = kzalloc(sizeof(struct nfs4_copy_state), GFP_KERNEL);
+	if (!copy)
+		return -ENOMEM;
+
+	spin_lock(&dst_server->nfs_client->cl_lock);
+	list_for_each_entry(iter,
+				&dst_server->nfs_client->pending_cb_stateids,
+				copies) {
+		if (memcmp(&res->write_res.stateid, &iter->stateid,
+				NFS4_STATEID_SIZE))
+			continue;
+		tmp_copy = iter;
+		list_del(&iter->copies);
+		break;
+	}
+	if (tmp_copy) {
+		spin_unlock(&dst_server->nfs_client->cl_lock);
+		kfree(copy);
+		copy = tmp_copy;
+		goto out;
+	}
+
+	memcpy(&copy->stateid, &res->write_res.stateid, NFS4_STATEID_SIZE);
+	init_completion(&copy->completion);
+	copy->parent_dst_state = dst_ctx->state;
+	copy->parent_src_state = src_ctx->state;
+
+	list_add_tail(&copy->copies, &dst_server->ss_copies);
+	spin_unlock(&dst_server->nfs_client->cl_lock);
+
+	if (dst_server != src_server) {
+		spin_lock(&src_server->nfs_client->cl_lock);
+		list_add_tail(&copy->src_copies, &src_server->ss_src_copies);
+		spin_unlock(&src_server->nfs_client->cl_lock);
+	}
+
+	status = wait_for_completion_interruptible(&copy->completion);
+	spin_lock(&dst_server->nfs_client->cl_lock);
+	list_del_init(&copy->copies);
+	spin_unlock(&dst_server->nfs_client->cl_lock);
+	if (dst_server != src_server) {
+		spin_lock(&src_server->nfs_client->cl_lock);
+		list_del_init(&copy->src_copies);
+		spin_unlock(&src_server->nfs_client->cl_lock);
+	}
+	if (status == -ERESTARTSYS) {
+		goto out_cancel;
+	} else if (copy->flags || copy->error == NFS4ERR_PARTNER_NO_AUTH) {
+		status = -EAGAIN;
+		*restart = true;
+		goto out_cancel;
+	}
+out:
+	res->write_res.count = copy->count;
+	memcpy(&res->write_res.verifier, &copy->verf, sizeof(copy->verf));
+	status = -copy->error;
+
+out_free:
+	kfree(copy);
+	return status;
+out_cancel:
+	nfs42_do_offload_cancel_async(dst, &copy->stateid);
+	if (!nfs42_files_from_same_server(src, dst))
+		nfs42_do_offload_cancel_async(src, src_stateid);
+	goto out_free;
+}
+
+static int process_copy_commit(struct file *dst, loff_t pos_dst,
+			       struct nfs42_copy_res *res)
+{
+	struct nfs_commitres cres;
+	int status = -ENOMEM;
+
+	cres.verf = kzalloc(sizeof(struct nfs_writeverf), GFP_KERNEL);
+	if (!cres.verf)
+		goto out;
+
+	status = nfs4_proc_commit(dst, pos_dst, res->write_res.count, &cres);
+	if (status)
+		goto out_free;
+	if (nfs_write_verifier_cmp(&res->write_res.verifier.verifier,
+				    &cres.verf->verifier)) {
+		dprintk("commit verf differs from copy verf\n");
+		status = -EAGAIN;
+	}
+out_free:
+	kfree(cres.verf);
+out:
+	return status;
+}
+
+/**
+ * nfs42_copy_dest_done - perform inode cache updates after clone/copy offload
+ * @inode: pointer to destination inode
+ * @pos: destination offset
+ * @len: copy length
+ *
+ * Punch a hole in the inode page cache, so that the NFS client will
+ * know to retrieve new data.
+ * Update the file size if necessary, and then mark the inode as having
+ * invalid cached values for change attribute, ctime, mtime and space used.
+ */
+static void nfs42_copy_dest_done(struct inode *inode, loff_t pos, loff_t len)
+{
+	loff_t newsize = pos + len;
+	loff_t end = newsize - 1;
+
+	WARN_ON_ONCE(invalidate_inode_pages2_range(inode->i_mapping,
+				pos >> PAGE_SHIFT, end >> PAGE_SHIFT));
+
+	spin_lock(&inode->i_lock);
+	if (newsize > i_size_read(inode))
+		i_size_write(inode, newsize);
+	nfs_set_cache_invalid(inode, NFS_INO_INVALID_CHANGE |
+					     NFS_INO_INVALID_CTIME |
+					     NFS_INO_INVALID_MTIME |
+					     NFS_INO_INVALID_BLOCKS);
+	spin_unlock(&inode->i_lock);
+}
+
+static ssize_t _nfs42_proc_copy(struct file *src,
+				struct nfs_lock_context *src_lock,
+				struct file *dst,
+				struct nfs_lock_context *dst_lock,
+				struct nfs42_copy_args *args,
+				struct nfs42_copy_res *res,
+				struct nl4_server *nss,
+				nfs4_stateid *cnr_stateid,
+				bool *restart)
+{
+	struct rpc_message msg = {
+		.rpc_proc = &nfs4_procedures[NFSPROC4_CLNT_COPY],
+		.rpc_argp = args,
+		.rpc_resp = res,
+	};
+	struct inode *dst_inode = file_inode(dst);
+	struct inode *src_inode = file_inode(src);
+	struct nfs_server *dst_server = NFS_SERVER(dst_inode);
+	struct nfs_server *src_server = NFS_SERVER(src_inode);
+	loff_t pos_src = args->src_pos;
+	loff_t pos_dst = args->dst_pos;
+	size_t count = args->count;
+	ssize_t status;
+
+	if (nss) {
+		args->cp_src = nss;
+		nfs4_stateid_copy(&args->src_stateid, cnr_stateid);
+	} else {
+		status = nfs4_set_rw_stateid(&args->src_stateid,
+				src_lock->open_context, src_lock, FMODE_READ);
+		if (status) {
+			if (status == -EAGAIN)
+				status = -NFS4ERR_BAD_STATEID;
+			return status;
+		}
+	}
+	status = nfs_filemap_write_and_wait_range(src->f_mapping,
+			pos_src, pos_src + (loff_t)count - 1);
+	if (status)
+		return status;
+
+	status = nfs4_set_rw_stateid(&args->dst_stateid, dst_lock->open_context,
+				     dst_lock, FMODE_WRITE);
+	if (status) {
+		if (status == -EAGAIN)
+			status = -NFS4ERR_BAD_STATEID;
+		return status;
+	}
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	status = nfs_sync_inode(dst_inode);
 	if (status)
 		return status;

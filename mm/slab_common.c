@@ -990,6 +990,7 @@ void __init create_kmalloc_caches(void)
 size_t __ksize(const void *object)
 {
 	struct folio *folio;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	size_t up_size = 0;
 
 	if (unlikely(object == ZERO_SIZE_PTR))
@@ -1007,6 +1008,20 @@ size_t __ksize(const void *object)
 		if (WARN_ON(object != folio_address(folio)))
 			return 0;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (unlikely(object == ZERO_SIZE_PTR))
+		return 0;
+
+	folio = virt_to_folio(object);
+
+	if (unlikely(!folio_test_slab(folio))) {
+		if (WARN_ON(folio_size(folio) <= KMALLOC_MAX_CACHE_SIZE))
+			return 0;
+		if (WARN_ON(object != folio_address(folio)))
+			return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return folio_size(folio);
 	}
 

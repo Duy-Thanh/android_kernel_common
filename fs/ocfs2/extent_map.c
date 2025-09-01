@@ -696,6 +696,7 @@ out:
  * it not only handles the fiemap for inlined files, but also deals
  * with the fast symlink, cause they have no difference for extent
  * mapping per se.
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  *
  * Must be called with ip_alloc_sem semaphore held.
  */
@@ -803,6 +804,108 @@ int ocfs2_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
 		ret = fiemap_fill_next_extent(fieinfo, virt_bytes, phys_bytes,
 					      len_bytes, fe_flags);
 		down_read(&OCFS2_I(inode)->ip_alloc_sem);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ */
+static int ocfs2_fiemap_inline(struct inode *inode, struct buffer_head *di_bh,
+			       struct fiemap_extent_info *fieinfo,
+			       u64 map_start)
+{
+	int ret;
+	unsigned int id_count;
+	struct ocfs2_dinode *di;
+	u64 phys;
+	u32 flags = FIEMAP_EXTENT_DATA_INLINE|FIEMAP_EXTENT_LAST;
+	struct ocfs2_inode_info *oi = OCFS2_I(inode);
+
+	di = (struct ocfs2_dinode *)di_bh->b_data;
+	if (ocfs2_inode_is_fast_symlink(inode))
+		id_count = ocfs2_fast_symlink_chars(inode->i_sb);
+	else
+		id_count = le16_to_cpu(di->id2.i_data.id_count);
+
+	if (map_start < id_count) {
+		phys = oi->ip_blkno << inode->i_sb->s_blocksize_bits;
+		if (ocfs2_inode_is_fast_symlink(inode))
+			phys += offsetof(struct ocfs2_dinode, id2.i_symlink);
+		else
+			phys += offsetof(struct ocfs2_dinode,
+					 id2.i_data.id_data);
+
+		ret = fiemap_fill_next_extent(fieinfo, 0, phys, id_count,
+					      flags);
+		if (ret < 0)
+			return ret;
+	}
+
+	return 0;
+}
+
+int ocfs2_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+		 u64 map_start, u64 map_len)
+{
+	int ret, is_last;
+	u32 mapping_end, cpos;
+	unsigned int hole_size;
+	struct ocfs2_super *osb = OCFS2_SB(inode->i_sb);
+	u64 len_bytes, phys_bytes, virt_bytes;
+	struct buffer_head *di_bh = NULL;
+	struct ocfs2_extent_rec rec;
+
+	ret = fiemap_prep(inode, fieinfo, map_start, &map_len, 0);
+	if (ret)
+		return ret;
+
+	ret = ocfs2_inode_lock(inode, &di_bh, 0);
+	if (ret) {
+		mlog_errno(ret);
+		goto out;
+	}
+
+	down_read(&OCFS2_I(inode)->ip_alloc_sem);
+
+	/*
+	 * Handle inline-data and fast symlink separately.
+	 */
+	if ((OCFS2_I(inode)->ip_dyn_features & OCFS2_INLINE_DATA_FL) ||
+	    ocfs2_inode_is_fast_symlink(inode)) {
+		ret = ocfs2_fiemap_inline(inode, di_bh, fieinfo, map_start);
+		goto out_unlock;
+	}
+
+	cpos = map_start >> osb->s_clustersize_bits;
+	mapping_end = ocfs2_clusters_for_bytes(inode->i_sb,
+					       map_start + map_len);
+	is_last = 0;
+	while (cpos < mapping_end && !is_last) {
+		u32 fe_flags;
+
+		ret = ocfs2_get_clusters_nocache(inode, di_bh, cpos,
+						 &hole_size, &rec, &is_last);
+		if (ret) {
+			mlog_errno(ret);
+			goto out_unlock;
+		}
+
+		if (rec.e_blkno == 0ULL) {
+			cpos += hole_size;
+			continue;
+		}
+
+		fe_flags = 0;
+		if (rec.e_flags & OCFS2_EXT_UNWRITTEN)
+			fe_flags |= FIEMAP_EXTENT_UNWRITTEN;
+		if (rec.e_flags & OCFS2_EXT_REFCOUNTED)
+			fe_flags |= FIEMAP_EXTENT_SHARED;
+		if (is_last)
+			fe_flags |= FIEMAP_EXTENT_LAST;
+		len_bytes = (u64)le16_to_cpu(rec.e_leaf_clusters) << osb->s_clustersize_bits;
+		phys_bytes = le64_to_cpu(rec.e_blkno) << osb->sb->s_blocksize_bits;
+		virt_bytes = (u64)le32_to_cpu(rec.e_cpos) << osb->s_clustersize_bits;
+
+		ret = fiemap_fill_next_extent(fieinfo, virt_bytes, phys_bytes,
+					      len_bytes, fe_flags);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		if (ret)
 			break;
 

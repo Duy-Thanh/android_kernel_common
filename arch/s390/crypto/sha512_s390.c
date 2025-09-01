@@ -32,6 +32,7 @@ static int sha512_init(struct shash_desc *desc)
 	*(__u64 *)&ctx->state[14] = SHA512_H7;
 	ctx->count = 0;
 	ctx->func = CPACF_KIMD_SHA_512;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	ctx->first_message_part = 0;
 
 	return 0;
@@ -100,6 +101,74 @@ static int sha384_init(struct shash_desc *desc)
 	ctx->count = 0;
 	ctx->func = CPACF_KIMD_SHA_512;
 	ctx->first_message_part = 0;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	return 0;
+}
+
+static int sha512_export(struct shash_desc *desc, void *out)
+{
+	struct s390_sha_ctx *sctx = shash_desc_ctx(desc);
+	struct sha512_state *octx = out;
+
+	octx->count[0] = sctx->count;
+	octx->count[1] = 0;
+	memcpy(octx->state, sctx->state, sizeof(octx->state));
+	memcpy(octx->buf, sctx->buf, sizeof(octx->buf));
+	return 0;
+}
+
+static int sha512_import(struct shash_desc *desc, const void *in)
+{
+	struct s390_sha_ctx *sctx = shash_desc_ctx(desc);
+	const struct sha512_state *ictx = in;
+
+	if (unlikely(ictx->count[1]))
+		return -ERANGE;
+	sctx->count = ictx->count[0];
+
+	memcpy(sctx->state, ictx->state, sizeof(ictx->state));
+	memcpy(sctx->buf, ictx->buf, sizeof(ictx->buf));
+	sctx->func = CPACF_KIMD_SHA_512;
+	return 0;
+}
+
+static struct shash_alg sha512_alg = {
+	.digestsize	=	SHA512_DIGEST_SIZE,
+	.init		=	sha512_init,
+	.update		=	s390_sha_update,
+	.final		=	s390_sha_final,
+	.export		=	sha512_export,
+	.import		=	sha512_import,
+	.descsize	=	sizeof(struct s390_sha_ctx),
+	.statesize	=	sizeof(struct sha512_state),
+	.base		=	{
+		.cra_name	=	"sha512",
+		.cra_driver_name=	"sha512-s390",
+		.cra_priority	=	300,
+		.cra_blocksize	=	SHA512_BLOCK_SIZE,
+		.cra_module	=	THIS_MODULE,
+	}
+};
+
+MODULE_ALIAS_CRYPTO("sha512");
+
+static int sha384_init(struct shash_desc *desc)
+{
+	struct s390_sha_ctx *ctx = shash_desc_ctx(desc);
+
+	*(__u64 *)&ctx->state[0] = SHA384_H0;
+	*(__u64 *)&ctx->state[2] = SHA384_H1;
+	*(__u64 *)&ctx->state[4] = SHA384_H2;
+	*(__u64 *)&ctx->state[6] = SHA384_H3;
+	*(__u64 *)&ctx->state[8] = SHA384_H4;
+	*(__u64 *)&ctx->state[10] = SHA384_H5;
+	*(__u64 *)&ctx->state[12] = SHA384_H6;
+	*(__u64 *)&ctx->state[14] = SHA384_H7;
+	ctx->count = 0;
+	ctx->func = CPACF_KIMD_SHA_512;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

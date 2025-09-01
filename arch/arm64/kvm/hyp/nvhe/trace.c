@@ -543,6 +543,7 @@ int __pkvm_load_tracing(unsigned long desc_hva, size_t desc_size)
 	struct hyp_trace_desc *desc = (struct hyp_trace_desc *)kern_hyp_va(desc_hva);
 	struct trace_page_desc *trace_pdesc = &desc->page_desc;
 	struct rb_page_desc *pdesc;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int ret, pdesc_cpu;
 
 	if (!desc_size || !PAGE_ALIGNED(desc_hva) || !PAGE_ALIGNED(desc_size))
@@ -558,6 +559,24 @@ int __pkvm_load_tracing(unsigned long desc_hva, size_t desc_size)
 	for_each_rb_page_desc(pdesc, pdesc_cpu, trace_pdesc) {
 		struct hyp_rb_per_cpu *cpu_buffer;
 		unsigned int cpu;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int ret, cpu;
+
+	if (!desc_size || !PAGE_ALIGNED(desc_hva) || !PAGE_ALIGNED(desc_size))
+		return -EINVAL;
+
+	ret = __pkvm_host_donate_hyp(hyp_virt_to_pfn((void *)desc),
+				     desc_size >> PAGE_SHIFT);
+	if (ret)
+		return ret;
+
+	hyp_spin_lock(&trace_rb_lock);
+
+	for_each_rb_page_desc(pdesc, cpu, trace_pdesc) {
+		struct hyp_rb_per_cpu *cpu_buffer;
+		int cpu;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		ret = -EINVAL;
 		if (!rb_cpu_fits_desc(pdesc, desc_hva + desc_size))

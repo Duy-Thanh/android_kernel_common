@@ -613,6 +613,7 @@ lws_compare_and_swap32:
 lws_compare_and_swap:
 	/* Trigger memory reference interruptions without writing to memory */
 1:	ldw	0(%r26), %r28
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	proberi	(%r26), PRIV_USER, %r28
 	comb,=,n	%r28, %r0, lws_fault /* backwards, likely not taken */
 	nop
@@ -998,6 +999,382 @@ atomic_xchg_begin:
 	proberi	(%r24), PRIV_USER, %r20
 	comb,=,n	%r20, %r0, lws_fault /* backwards, likely not taken */
 	nop
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+2:	stbys,e	%r0, 0(%r26)
+
+	/* Calculate 8-bit hash index from virtual address */
+	extru_safe	%r26, 27, 8, %r20
+
+	/* Load start of lock table */
+	ldil	L%lws_lock_start, %r28
+	ldo	R%lws_lock_start(%r28), %r28
+
+	/* Find lock to use, the hash index is one of 0 to
+	   255, multiplied by 16 (keep it 16-byte aligned)
+	   and add to the lock table offset. */
+	shlw	%r20, 4, %r20
+	add	%r20, %r28, %r20
+
+	rsm	PSW_SM_I, %r0				/* Disable interrupts */
+
+	/* Try to acquire the lock */
+	LDCW	0(%sr2,%r20), %r28
+	spinlock_check	%r28, %r21
+	comclr,<>	%r0, %r28, %r0
+	b,n	lws_wouldblock
+
+	/* Disable page faults to prevent sleeping in critical region */
+	lws_pagefault_disable	%r21,%r28
+
+	/*
+		prev = *addr;
+		if ( prev == old )
+		  *addr = new;
+		return prev;
+	*/
+
+	/* NOTES:
+		This all works because intr_do_signal
+		and schedule both check the return iasq
+		and see that we are on the kernel page
+		so this process is never scheduled off
+		or is ever sent any signal of any sort,
+		thus it is wholly atomic from usrspace's
+		perspective
+	*/
+	/* The load and store could fail */
+3:	ldw	0(%r26), %r28
+	sub,<>	%r28, %r25, %r0
+4:	stw	%r24, 0(%r26)
+	b,n	lws_exit_noerror
+
+	/* A fault occurred on load or stbys,e store */
+5:	b,n	lws_fault
+	ASM_EXCEPTIONTABLE_ENTRY(1b-linux_gateway_page, 5b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(2b-linux_gateway_page, 5b-linux_gateway_page)
+
+	/* A page fault occurred in critical region */
+6:	b,n	lws_pagefault
+	ASM_EXCEPTIONTABLE_ENTRY(3b-linux_gateway_page, 6b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(4b-linux_gateway_page, 6b-linux_gateway_page)
+
+
+	/***************************************************
+		New CAS implementation which uses pointers and variable size
+		information. The value pointed by old and new MUST NOT change
+		while performing CAS. The lock only protects the value at %r26.
+
+		%r26 - Address to examine
+		%r25 - Pointer to the value to check (old)
+		%r24 - Pointer to the value to set (new)
+		%r23 - Size of the variable (0/1/2/3 for 8/16/32/64 bit)
+		%r28 - Return non-zero on failure
+		%r21 - Kernel error code
+
+		%r21 returns the following error codes:
+		EAGAIN - CAS is busy, ldcw failed, try again.
+		EFAULT - Read or write failed.
+
+		If EAGAIN is returned, %r28 indicates the busy reason:
+		r28 == 1 - CAS is busy. lock contended.
+		r28 == 2 - CAS is busy. ldcw failed.
+		r28 == 3 - CAS is busy. page fault.
+
+		Scratch: r20, r22, r28, r29, r1, fr4 (32bit for 64bit CAS only)
+
+	****************************************************/
+
+lws_compare_and_swap_2:
+#ifdef CONFIG_64BIT
+	/* Wide mode user process? */
+	bb,<,n	%sp, 31, cas2_begin
+
+	/* Clip the input registers for 32-bit processes. We don't
+	   need to clip %r23 as we only use it for word operations */
+	depdi	0, 31, 32, %r26
+	depdi	0, 31, 32, %r25
+	depdi	0, 31, 32, %r24
+#endif
+
+cas2_begin:
+	/* Check the validity of the size pointer */
+	subi,>>= 3, %r23, %r0
+	b,n	lws_exit_nosys
+
+	/* Jump to the functions which will load the old and new values into
+	   registers depending on the their size */
+	shlw	%r23, 2, %r29
+	blr	%r29, %r0
+	nop
+
+	/* 8-bit load */
+1:	ldb	0(%r25), %r25
+	b	cas2_lock_start
+2:	ldb	0(%r24), %r24
+	nop
+	nop
+	nop
+	nop
+	nop
+
+	/* 16-bit load */
+3:	ldh	0(%r25), %r25
+	b	cas2_lock_start
+4:	ldh	0(%r24), %r24
+	nop
+	nop
+	nop
+	nop
+	nop
+
+	/* 32-bit load */
+5:	ldw	0(%r25), %r25
+	b	cas2_lock_start
+6:	ldw	0(%r24), %r24
+	nop
+	nop
+	nop
+	nop
+	nop
+
+	/* 64-bit load */
+#ifdef CONFIG_64BIT
+7:	ldd	0(%r25), %r25
+8:	ldd	0(%r24), %r24
+#else
+	/* Load old value into r22/r23 - high/low */
+7:	ldw	0(%r25), %r22
+8:	ldw	4(%r25), %r23
+	/* Load new value into fr4 for atomic store later */
+9:	flddx	0(%r24), %fr4
+#endif
+
+cas2_lock_start:
+	/* Trigger memory reference interruptions without writing to memory */
+	copy	%r26, %r28
+	depi_safe	0, 31, 2, %r28
+10:	ldw	0(%r28), %r1
+11:	stbys,e	%r0, 0(%r28)
+
+	/* Calculate 8-bit hash index from virtual address */
+	extru_safe	%r26, 27, 8, %r20
+
+	/* Load start of lock table */
+	ldil	L%lws_lock_start, %r28
+	ldo	R%lws_lock_start(%r28), %r28
+
+	/* Find lock to use, the hash index is one of 0 to
+	   255, multiplied by 16 (keep it 16-byte aligned)
+	   and add to the lock table offset. */
+	shlw	%r20, 4, %r20
+	add	%r20, %r28, %r20
+
+	rsm	PSW_SM_I, %r0			/* Disable interrupts */
+
+	/* Try to acquire the lock */
+	LDCW	0(%sr2,%r20), %r28
+	spinlock_check	%r28, %r21
+	comclr,<>	%r0, %r28, %r0
+	b,n	lws_wouldblock
+
+	/* Disable page faults to prevent sleeping in critical region */
+	lws_pagefault_disable	%r21,%r28
+
+	/*
+		prev = *addr;
+		if ( prev == old )
+		  *addr = new;
+		return prev;
+	*/
+
+	/* NOTES:
+		This all works because intr_do_signal
+		and schedule both check the return iasq
+		and see that we are on the kernel page
+		so this process is never scheduled off
+		or is ever sent any signal of any sort,
+		thus it is wholly atomic from usrspace's
+		perspective
+	*/
+
+	/* Jump to the correct function */
+	blr	%r29, %r0
+	/* Set %r28 as non-zero for now */
+	ldo	1(%r0),%r28
+
+	/* 8-bit CAS */
+12:	ldb	0(%r26), %r29
+	sub,=	%r29, %r25, %r0
+	b,n	lws_exit_noerror
+13:	stb	%r24, 0(%r26)
+	b	lws_exit_noerror
+	copy	%r0, %r28
+	nop
+	nop
+
+	/* 16-bit CAS */
+14:	ldh	0(%r26), %r29
+	sub,=	%r29, %r25, %r0
+	b,n	lws_exit_noerror
+15:	sth	%r24, 0(%r26)
+	b	lws_exit_noerror
+	copy	%r0, %r28
+	nop
+	nop
+
+	/* 32-bit CAS */
+16:	ldw	0(%r26), %r29
+	sub,=	%r29, %r25, %r0
+	b,n	lws_exit_noerror
+17:	stw	%r24, 0(%r26)
+	b	lws_exit_noerror
+	copy	%r0, %r28
+	nop
+	nop
+
+	/* 64-bit CAS */
+#ifdef CONFIG_64BIT
+18:	ldd	0(%r26), %r29
+	sub,*=	%r29, %r25, %r0
+	b,n	lws_exit_noerror
+19:	std	%r24, 0(%r26)
+	copy	%r0, %r28
+#else
+	/* Compare first word */
+18:	ldw	0(%r26), %r29
+	sub,=	%r29, %r22, %r0
+	b,n	lws_exit_noerror
+	/* Compare second word */
+19:	ldw	4(%r26), %r29
+	sub,=	%r29, %r23, %r0
+	b,n	lws_exit_noerror
+	/* Perform the store */
+20:	fstdx	%fr4, 0(%r26)
+	copy	%r0, %r28
+#endif
+	b	lws_exit_noerror
+	copy	%r0, %r28
+
+	/* A fault occurred on load or stbys,e store */
+30:	b,n	lws_fault
+	ASM_EXCEPTIONTABLE_ENTRY(1b-linux_gateway_page, 30b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(2b-linux_gateway_page, 30b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(3b-linux_gateway_page, 30b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(4b-linux_gateway_page, 30b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(5b-linux_gateway_page, 30b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(6b-linux_gateway_page, 30b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(7b-linux_gateway_page, 30b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(8b-linux_gateway_page, 30b-linux_gateway_page)
+#ifndef CONFIG_64BIT
+	ASM_EXCEPTIONTABLE_ENTRY(9b-linux_gateway_page, 30b-linux_gateway_page)
+#endif
+
+	ASM_EXCEPTIONTABLE_ENTRY(10b-linux_gateway_page, 30b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(11b-linux_gateway_page, 30b-linux_gateway_page)
+
+	/* A page fault occurred in critical region */
+31:	b,n	lws_pagefault
+	ASM_EXCEPTIONTABLE_ENTRY(12b-linux_gateway_page, 31b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(13b-linux_gateway_page, 31b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(14b-linux_gateway_page, 31b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(15b-linux_gateway_page, 31b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(16b-linux_gateway_page, 31b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(17b-linux_gateway_page, 31b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(18b-linux_gateway_page, 31b-linux_gateway_page)
+	ASM_EXCEPTIONTABLE_ENTRY(19b-linux_gateway_page, 31b-linux_gateway_page)
+#ifndef CONFIG_64BIT
+	ASM_EXCEPTIONTABLE_ENTRY(20b-linux_gateway_page, 31b-linux_gateway_page)
+#endif
+
+
+	/***************************************************
+		LWS atomic exchange.
+
+		%r26 - Exchange address
+		%r25 - Size of the variable (0/1/2/3 for 8/16/32/64 bit)
+		%r24 - Address of new value
+		%r23 - Address of old value
+		%r28 - Return non-zero on failure
+		%r21 - Kernel error code
+
+		%r21 returns the following error codes:
+		EAGAIN - CAS is busy, ldcw failed, try again.
+		EFAULT - Read or write failed.
+
+		If EAGAIN is returned, %r28 indicates the busy reason:
+		r28 == 1 - CAS is busy. lock contended.
+		r28 == 2 - CAS is busy. ldcw failed.
+		r28 == 3 - CAS is busy. page fault.
+
+		Scratch: r20, r1
+
+	****************************************************/
+
+lws_atomic_xchg:
+#ifdef CONFIG_64BIT
+	/* Wide mode user process? */
+	bb,<,n	%sp, 31, atomic_xchg_begin
+
+	/* Clip the input registers for 32-bit processes. We don't
+	   need to clip %r23 as we only use it for word operations */
+	depdi	0, 31, 32, %r26
+	depdi	0, 31, 32, %r25
+	depdi	0, 31, 32, %r24
+	depdi	0, 31, 32, %r23
+#endif
+
+atomic_xchg_begin:
+	/* Check the validity of the size pointer */
+	subi,>>= 3, %r25, %r0
+	b,n	lws_exit_nosys
+
+	/* Jump to the functions which will load the old and new values into
+	   registers depending on the their size */
+	shlw	%r25, 2, %r1
+	blr	%r1, %r0
+	nop
+
+	/* Perform exception checks */
+
+	/* 8-bit exchange */
+1:	ldb	0(%r24), %r20
+	copy	%r23, %r20
+	depi_safe	0, 31, 2, %r20
+	b	atomic_xchg_start
+2:	stbys,e	%r0, 0(%r20)
+	nop
+	nop
+	nop
+
+	/* 16-bit exchange */
+3:	ldh	0(%r24), %r20
+	copy	%r23, %r20
+	depi_safe	0, 31, 2, %r20
+	b	atomic_xchg_start
+4:	stbys,e	%r0, 0(%r20)
+	nop
+	nop
+	nop
+
+	/* 32-bit exchange */
+5:	ldw	0(%r24), %r20
+	b	atomic_xchg_start
+6:	stbys,e	%r0, 0(%r23)
+	nop
+	nop
+	nop
+	nop
+	nop
+
+	/* 64-bit exchange */
+#ifdef CONFIG_64BIT
+7:	ldd	0(%r24), %r20
+8:	stdby,e	%r0, 0(%r23)
+#else
+7:	ldw	0(%r24), %r20
+8:	ldw	4(%r24), %r20
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	copy	%r23, %r20
 	depi_safe	0, 31, 2, %r20
 9:	stbys,e	%r0, 0(%r20)

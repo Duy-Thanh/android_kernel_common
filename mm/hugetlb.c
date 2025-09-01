@@ -5512,6 +5512,7 @@ void __unmap_hugepage_range(struct mmu_gather *tlb, struct vm_area_struct *vma,
 	struct page *page;
 	struct hstate *h = hstate_vma(vma);
 	unsigned long sz = huge_page_size(h);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool adjust_reservation;
 	unsigned long last_addr_mask;
 	bool force_flush = false;
@@ -5622,6 +5623,116 @@ void __unmap_hugepage_range(struct mmu_gather *tlb, struct vm_area_struct *vma,
 			adjust_reservation = true;
 		}
 		spin_unlock_irq(&hugetlb_lock);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	bool adjust_reservation = false;
+	unsigned long last_addr_mask;
+	bool force_flush = false;
+
+	WARN_ON(!is_vm_hugetlb_page(vma));
+	BUG_ON(start & ~huge_page_mask(h));
+	BUG_ON(end & ~huge_page_mask(h));
+
+	/*
+	 * This is a hugetlb vma, all the pte entries should point
+	 * to huge page.
+	 */
+	tlb_change_page_size(tlb, sz);
+	tlb_start_vma(tlb, vma);
+
+	last_addr_mask = hugetlb_mask_last_page(h);
+	address = start;
+	for (; address < end; address += sz) {
+		ptep = hugetlb_walk(vma, address, sz);
+		if (!ptep) {
+			address |= last_addr_mask;
+			continue;
+		}
+
+		ptl = huge_pte_lock(h, mm, ptep);
+		if (huge_pmd_unshare(mm, vma, address, ptep)) {
+			spin_unlock(ptl);
+			tlb_flush_pmd_range(tlb, address & PUD_MASK, PUD_SIZE);
+			force_flush = true;
+			address |= last_addr_mask;
+			continue;
+		}
+
+		pte = huge_ptep_get(mm, address, ptep);
+		if (huge_pte_none(pte)) {
+			spin_unlock(ptl);
+			continue;
+		}
+
+		/*
+		 * Migrating hugepage or HWPoisoned hugepage is already
+		 * unmapped and its refcount is dropped, so just clear pte here.
+		 */
+		if (unlikely(!pte_present(pte))) {
+			/*
+			 * If the pte was wr-protected by uffd-wp in any of the
+			 * swap forms, meanwhile the caller does not want to
+			 * drop the uffd-wp bit in this zap, then replace the
+			 * pte with a marker.
+			 */
+			if (pte_swp_uffd_wp_any(pte) &&
+			    !(zap_flags & ZAP_FLAG_DROP_MARKER))
+				set_huge_pte_at(mm, address, ptep,
+						make_pte_marker(PTE_MARKER_UFFD_WP),
+						sz);
+			else
+				huge_pte_clear(mm, address, ptep, sz);
+			spin_unlock(ptl);
+			continue;
+		}
+
+		page = pte_page(pte);
+		/*
+		 * If a reference page is supplied, it is because a specific
+		 * page is being unmapped, not a range. Ensure the page we
+		 * are about to unmap is the actual page of interest.
+		 */
+		if (ref_page) {
+			if (page != ref_page) {
+				spin_unlock(ptl);
+				continue;
+			}
+			/*
+			 * Mark the VMA as having unmapped its page so that
+			 * future faults in this VMA will fail rather than
+			 * looking like data was lost
+			 */
+			set_vma_resv_flags(vma, HPAGE_RESV_UNMAPPED);
+		}
+
+		pte = huge_ptep_get_and_clear(mm, address, ptep, sz);
+		tlb_remove_huge_tlb_entry(h, tlb, ptep, address);
+		if (huge_pte_dirty(pte))
+			set_page_dirty(page);
+		/* Leave a uffd-wp pte marker if needed */
+		if (huge_pte_uffd_wp(pte) &&
+		    !(zap_flags & ZAP_FLAG_DROP_MARKER))
+			set_huge_pte_at(mm, address, ptep,
+					make_pte_marker(PTE_MARKER_UFFD_WP),
+					sz);
+		hugetlb_count_sub(pages_per_huge_page(h), mm);
+		hugetlb_remove_rmap(page_folio(page));
+
+		/*
+		 * Restore the reservation for anonymous page, otherwise the
+		 * backing page could be stolen by someone.
+		 * If there we are freeing a surplus, do not set the restore
+		 * reservation bit.
+		 */
+		if (!h->surplus_huge_pages && __vma_private_lock(vma) &&
+		    folio_test_anon(page_folio(page))) {
+			folio_set_hugetlb_restore_reserve(page_folio(page));
+			/* Reservation to be adjusted after the spin lock */
+			adjust_reservation = true;
+		}
+
+		spin_unlock(ptl);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		/*
 		 * Adjust the reservation for the region that will have the

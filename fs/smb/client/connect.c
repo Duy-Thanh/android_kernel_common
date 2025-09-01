@@ -3165,6 +3165,7 @@ generic_ip_connect(struct TCP_Server_Info *server)
 		struct net *net = cifs_net_ns(server);
 		struct sock *sk;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		rc = sock_create_kern(net, sfamily, SOCK_STREAM,
 				      IPPROTO_TCP, &server->ssocket);
 		if (rc < 0) {
@@ -3998,6 +3999,846 @@ retry:
 		return 0;
 	}
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		rc = __sock_create(net, sfamily, SOCK_STREAM,
+				   IPPROTO_TCP, &server->ssocket, 1);
+		if (rc < 0) {
+			cifs_server_dbg(VFS, "Error %d creating socket\n", rc);
+			return rc;
+		}
+
+		sk = server->ssocket->sk;
+		__netns_tracker_free(net, &sk->ns_tracker, false);
+		sk->sk_net_refcnt = 1;
+		get_net_track(net, &sk->ns_tracker, GFP_KERNEL);
+		sock_inuse_add(net, 1);
+
+		/* BB other socket options to set KEEPALIVE, NODELAY? */
+		cifs_dbg(FYI, "Socket created\n");
+		socket = server->ssocket;
+		socket->sk->sk_allocation = GFP_NOFS;
+		socket->sk->sk_use_task_frag = false;
+		if (sfamily == AF_INET6)
+			cifs_reclassify_socket6(socket);
+		else
+			cifs_reclassify_socket4(socket);
+	}
+
+	rc = bind_socket(server);
+	if (rc < 0)
+		return rc;
+
+	/*
+	 * Eventually check for other socket options to change from
+	 * the default. sock_setsockopt not used because it expects
+	 * user space buffer
+	 */
+	socket->sk->sk_rcvtimeo = 7 * HZ;
+	socket->sk->sk_sndtimeo = 5 * HZ;
+
+	/* make the bufsizes depend on wsize/rsize and max requests */
+	if (server->noautotune) {
+		if (socket->sk->sk_sndbuf < (200 * 1024))
+			socket->sk->sk_sndbuf = 200 * 1024;
+		if (socket->sk->sk_rcvbuf < (140 * 1024))
+			socket->sk->sk_rcvbuf = 140 * 1024;
+	}
+
+	if (server->tcp_nodelay)
+		tcp_sock_set_nodelay(socket->sk);
+
+	cifs_dbg(FYI, "sndbuf %d rcvbuf %d rcvtimeo 0x%lx\n",
+		 socket->sk->sk_sndbuf,
+		 socket->sk->sk_rcvbuf, socket->sk->sk_rcvtimeo);
+
+	rc = kernel_connect(socket, saddr, slen,
+			    server->noblockcnt ? O_NONBLOCK : 0);
+	/*
+	 * When mounting SMB root file systems, we do not want to block in
+	 * connect. Otherwise bail out and then let cifs_reconnect() perform
+	 * reconnect failover - if possible.
+	 */
+	if (server->noblockcnt && rc == -EINPROGRESS)
+		rc = 0;
+	if (rc < 0) {
+		cifs_dbg(FYI, "Error %d connecting to server\n", rc);
+		trace_smb3_connect_err(server->hostname, server->conn_id, &server->dstaddr, rc);
+		sock_release(socket);
+		server->ssocket = NULL;
+		return rc;
+	}
+	trace_smb3_connect_done(server->hostname, server->conn_id, &server->dstaddr);
+	if (sport == htons(RFC1001_PORT))
+		rc = ip_rfc1001_connect(server);
+
+	return rc;
+}
+
+static int
+ip_connect(struct TCP_Server_Info *server)
+{
+	__be16 *sport;
+	struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)&server->dstaddr;
+	struct sockaddr_in *addr = (struct sockaddr_in *)&server->dstaddr;
+
+	if (server->dstaddr.ss_family == AF_INET6)
+		sport = &addr6->sin6_port;
+	else
+		sport = &addr->sin_port;
+
+	if (*sport == 0) {
+		int rc;
+
+		/* try with 445 port at first */
+		*sport = htons(CIFS_PORT);
+
+		rc = generic_ip_connect(server);
+		if (rc >= 0)
+			return rc;
+
+		/* if it failed, try with 139 port */
+		*sport = htons(RFC1001_PORT);
+	}
+
+	return generic_ip_connect(server);
+}
+
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+void reset_cifs_unix_caps(unsigned int xid, struct cifs_tcon *tcon,
+			  struct cifs_sb_info *cifs_sb, struct smb3_fs_context *ctx)
+{
+	/*
+	 * If we are reconnecting then should we check to see if
+	 * any requested capabilities changed locally e.g. via
+	 * remount but we can not do much about it here
+	 * if they have (even if we could detect it by the following)
+	 * Perhaps we could add a backpointer to array of sb from tcon
+	 * or if we change to make all sb to same share the same
+	 * sb as NFS - then we only have one backpointer to sb.
+	 * What if we wanted to mount the server share twice once with
+	 * and once without posixacls or posix paths?
+	 */
+	__u64 saved_cap = le64_to_cpu(tcon->fsUnixInfo.Capability);
+
+	if (ctx && ctx->no_linux_ext) {
+		tcon->fsUnixInfo.Capability = 0;
+		tcon->unix_ext = 0; /* Unix Extensions disabled */
+		cifs_dbg(FYI, "Linux protocol extensions disabled\n");
+		return;
+	} else if (ctx)
+		tcon->unix_ext = 1; /* Unix Extensions supported */
+
+	if (!tcon->unix_ext) {
+		cifs_dbg(FYI, "Unix extensions disabled so not set on reconnect\n");
+		return;
+	}
+
+	if (!CIFSSMBQFSUnixInfo(xid, tcon)) {
+		__u64 cap = le64_to_cpu(tcon->fsUnixInfo.Capability);
+
+		cifs_dbg(FYI, "unix caps which server supports %lld\n", cap);
+		/*
+		 * check for reconnect case in which we do not
+		 * want to change the mount behavior if we can avoid it
+		 */
+		if (ctx == NULL) {
+			/*
+			 * turn off POSIX ACL and PATHNAMES if not set
+			 * originally at mount time
+			 */
+			if ((saved_cap & CIFS_UNIX_POSIX_ACL_CAP) == 0)
+				cap &= ~CIFS_UNIX_POSIX_ACL_CAP;
+			if ((saved_cap & CIFS_UNIX_POSIX_PATHNAMES_CAP) == 0) {
+				if (cap & CIFS_UNIX_POSIX_PATHNAMES_CAP)
+					cifs_dbg(VFS, "POSIXPATH support change\n");
+				cap &= ~CIFS_UNIX_POSIX_PATHNAMES_CAP;
+			} else if ((cap & CIFS_UNIX_POSIX_PATHNAMES_CAP) == 0) {
+				cifs_dbg(VFS, "possible reconnect error\n");
+				cifs_dbg(VFS, "server disabled POSIX path support\n");
+			}
+		}
+
+		if (cap & CIFS_UNIX_TRANSPORT_ENCRYPTION_MANDATORY_CAP)
+			cifs_dbg(VFS, "per-share encryption not supported yet\n");
+
+		cap &= CIFS_UNIX_CAP_MASK;
+		if (ctx && ctx->no_psx_acl)
+			cap &= ~CIFS_UNIX_POSIX_ACL_CAP;
+		else if (CIFS_UNIX_POSIX_ACL_CAP & cap) {
+			cifs_dbg(FYI, "negotiated posix acl support\n");
+			if (cifs_sb)
+				cifs_sb->mnt_cifs_flags |=
+					CIFS_MOUNT_POSIXACL;
+		}
+
+		if (ctx && ctx->posix_paths == 0)
+			cap &= ~CIFS_UNIX_POSIX_PATHNAMES_CAP;
+		else if (cap & CIFS_UNIX_POSIX_PATHNAMES_CAP) {
+			cifs_dbg(FYI, "negotiate posix pathnames\n");
+			if (cifs_sb)
+				cifs_sb->mnt_cifs_flags |=
+					CIFS_MOUNT_POSIX_PATHS;
+		}
+
+		cifs_dbg(FYI, "Negotiate caps 0x%x\n", (int)cap);
+#ifdef CONFIG_CIFS_DEBUG2
+		if (cap & CIFS_UNIX_FCNTL_CAP)
+			cifs_dbg(FYI, "FCNTL cap\n");
+		if (cap & CIFS_UNIX_EXTATTR_CAP)
+			cifs_dbg(FYI, "EXTATTR cap\n");
+		if (cap & CIFS_UNIX_POSIX_PATHNAMES_CAP)
+			cifs_dbg(FYI, "POSIX path cap\n");
+		if (cap & CIFS_UNIX_XATTR_CAP)
+			cifs_dbg(FYI, "XATTR cap\n");
+		if (cap & CIFS_UNIX_POSIX_ACL_CAP)
+			cifs_dbg(FYI, "POSIX ACL cap\n");
+		if (cap & CIFS_UNIX_LARGE_READ_CAP)
+			cifs_dbg(FYI, "very large read cap\n");
+		if (cap & CIFS_UNIX_LARGE_WRITE_CAP)
+			cifs_dbg(FYI, "very large write cap\n");
+		if (cap & CIFS_UNIX_TRANSPORT_ENCRYPTION_CAP)
+			cifs_dbg(FYI, "transport encryption cap\n");
+		if (cap & CIFS_UNIX_TRANSPORT_ENCRYPTION_MANDATORY_CAP)
+			cifs_dbg(FYI, "mandatory transport encryption cap\n");
+#endif /* CIFS_DEBUG2 */
+		if (CIFSSMBSetFSUnixInfo(xid, tcon, cap)) {
+			if (ctx == NULL)
+				cifs_dbg(FYI, "resetting capabilities failed\n");
+			else
+				cifs_dbg(VFS, "Negotiating Unix capabilities with the server failed. Consider mounting with the Unix Extensions disabled if problems are found by specifying the nounix mount option.\n");
+
+		}
+	}
+}
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+
+int cifs_setup_cifs_sb(struct cifs_sb_info *cifs_sb)
+{
+	struct smb3_fs_context *ctx = cifs_sb->ctx;
+
+	INIT_DELAYED_WORK(&cifs_sb->prune_tlinks, cifs_prune_tlinks);
+
+	spin_lock_init(&cifs_sb->tlink_tree_lock);
+	cifs_sb->tlink_tree = RB_ROOT;
+
+	cifs_dbg(FYI, "file mode: %04ho  dir mode: %04ho\n",
+		 ctx->file_mode, ctx->dir_mode);
+
+	/* this is needed for ASCII cp to Unicode converts */
+	if (ctx->iocharset == NULL) {
+		/* load_nls_default cannot return null */
+		cifs_sb->local_nls = load_nls_default();
+	} else {
+		cifs_sb->local_nls = load_nls(ctx->iocharset);
+		if (cifs_sb->local_nls == NULL) {
+			cifs_dbg(VFS, "CIFS mount error: iocharset %s not found\n",
+				 ctx->iocharset);
+			return -ELIBACC;
+		}
+	}
+	ctx->local_nls = cifs_sb->local_nls;
+
+	smb3_update_mnt_flags(cifs_sb);
+
+	if (ctx->direct_io)
+		cifs_dbg(FYI, "mounting share using direct i/o\n");
+	if (ctx->cache_ro) {
+		cifs_dbg(VFS, "mounting share with read only caching. Ensure that the share will not be modified while in use.\n");
+		cifs_sb->mnt_cifs_flags |= CIFS_MOUNT_RO_CACHE;
+	} else if (ctx->cache_rw) {
+		cifs_dbg(VFS, "mounting share in single client RW caching mode. Ensure that no other systems will be accessing the share.\n");
+		cifs_sb->mnt_cifs_flags |= (CIFS_MOUNT_RO_CACHE |
+					    CIFS_MOUNT_RW_CACHE);
+	}
+
+	if ((ctx->cifs_acl) && (ctx->dynperm))
+		cifs_dbg(VFS, "mount option dynperm ignored if cifsacl mount option supported\n");
+
+	if (ctx->prepath) {
+		cifs_sb->prepath = kstrdup(ctx->prepath, GFP_KERNEL);
+		if (cifs_sb->prepath == NULL)
+			return -ENOMEM;
+		cifs_sb->mnt_cifs_flags |= CIFS_MOUNT_USE_PREFIX_PATH;
+	}
+
+	return 0;
+}
+
+/* Release all succeed connections */
+void cifs_mount_put_conns(struct cifs_mount_ctx *mnt_ctx)
+{
+	int rc = 0;
+
+	if (mnt_ctx->tcon)
+		cifs_put_tcon(mnt_ctx->tcon, netfs_trace_tcon_ref_put_mnt_ctx);
+	else if (mnt_ctx->ses)
+		cifs_put_smb_ses(mnt_ctx->ses);
+	else if (mnt_ctx->server)
+		cifs_put_tcp_session(mnt_ctx->server, 0);
+	mnt_ctx->ses = NULL;
+	mnt_ctx->tcon = NULL;
+	mnt_ctx->server = NULL;
+	mnt_ctx->cifs_sb->mnt_cifs_flags &= ~CIFS_MOUNT_POSIX_PATHS;
+	free_xid(mnt_ctx->xid);
+}
+
+int cifs_mount_get_session(struct cifs_mount_ctx *mnt_ctx)
+{
+	struct TCP_Server_Info *server = NULL;
+	struct smb3_fs_context *ctx;
+	struct cifs_ses *ses = NULL;
+	unsigned int xid;
+	int rc = 0;
+
+	xid = get_xid();
+
+	if (WARN_ON_ONCE(!mnt_ctx || !mnt_ctx->fs_ctx)) {
+		rc = -EINVAL;
+		goto out;
+	}
+	ctx = mnt_ctx->fs_ctx;
+
+	/* get a reference to a tcp session */
+	server = cifs_get_tcp_session(ctx, NULL);
+	if (IS_ERR(server)) {
+		rc = PTR_ERR(server);
+		server = NULL;
+		goto out;
+	}
+
+	/* get a reference to a SMB session */
+	ses = cifs_get_smb_ses(server, ctx);
+	if (IS_ERR(ses)) {
+		rc = PTR_ERR(ses);
+		ses = NULL;
+		goto out;
+	}
+
+	if ((ctx->persistent == true) && (!(ses->server->capabilities &
+					    SMB2_GLOBAL_CAP_PERSISTENT_HANDLES))) {
+		cifs_server_dbg(VFS, "persistent handles not supported by server\n");
+		rc = -EOPNOTSUPP;
+	}
+
+out:
+	mnt_ctx->xid = xid;
+	mnt_ctx->server = server;
+	mnt_ctx->ses = ses;
+	mnt_ctx->tcon = NULL;
+
+	return rc;
+}
+
+int cifs_mount_get_tcon(struct cifs_mount_ctx *mnt_ctx)
+{
+	struct TCP_Server_Info *server;
+	struct cifs_sb_info *cifs_sb;
+	struct smb3_fs_context *ctx;
+	struct cifs_tcon *tcon = NULL;
+	int rc = 0;
+
+	if (WARN_ON_ONCE(!mnt_ctx || !mnt_ctx->server || !mnt_ctx->ses || !mnt_ctx->fs_ctx ||
+			 !mnt_ctx->cifs_sb)) {
+		rc = -EINVAL;
+		goto out;
+	}
+	server = mnt_ctx->server;
+	ctx = mnt_ctx->fs_ctx;
+	cifs_sb = mnt_ctx->cifs_sb;
+
+	/* search for existing tcon to this server share */
+	tcon = cifs_get_tcon(mnt_ctx->ses, ctx);
+	if (IS_ERR(tcon)) {
+		rc = PTR_ERR(tcon);
+		tcon = NULL;
+		goto out;
+	}
+
+	/* if new SMB3.11 POSIX extensions are supported do not remap / and \ */
+	if (tcon->posix_extensions)
+		cifs_sb->mnt_cifs_flags |= CIFS_MOUNT_POSIX_PATHS;
+
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+	/* tell server which Unix caps we support */
+	if (cap_unix(tcon->ses)) {
+		/*
+		 * reset of caps checks mount to see if unix extensions disabled
+		 * for just this mount.
+		 */
+		reset_cifs_unix_caps(mnt_ctx->xid, tcon, cifs_sb, ctx);
+		spin_lock(&tcon->ses->server->srv_lock);
+		if ((tcon->ses->server->tcpStatus == CifsNeedReconnect) &&
+		    (le64_to_cpu(tcon->fsUnixInfo.Capability) &
+		     CIFS_UNIX_TRANSPORT_ENCRYPTION_MANDATORY_CAP)) {
+			spin_unlock(&tcon->ses->server->srv_lock);
+			rc = -EACCES;
+			goto out;
+		}
+		spin_unlock(&tcon->ses->server->srv_lock);
+	} else
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+		tcon->unix_ext = 0; /* server does not support them */
+
+	/* do not care if a following call succeed - informational */
+	if (!tcon->pipe && server->ops->qfs_tcon) {
+		server->ops->qfs_tcon(mnt_ctx->xid, tcon, cifs_sb);
+		if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_RO_CACHE) {
+			if (tcon->fsDevInfo.DeviceCharacteristics &
+			    cpu_to_le32(FILE_READ_ONLY_DEVICE))
+				cifs_dbg(VFS, "mounted to read only share\n");
+			else if ((cifs_sb->mnt_cifs_flags &
+				  CIFS_MOUNT_RW_CACHE) == 0)
+				cifs_dbg(VFS, "read only mount of RW share\n");
+			/* no need to log a RW mount of a typical RW share */
+		}
+	}
+
+	/*
+	 * Clamp the rsize/wsize mount arguments if they are too big for the server
+	 * and set the rsize/wsize to the negotiated values if not passed in by
+	 * the user on mount
+	 */
+	if ((cifs_sb->ctx->wsize == 0) ||
+	    (cifs_sb->ctx->wsize > server->ops->negotiate_wsize(tcon, ctx))) {
+		cifs_sb->ctx->wsize =
+			round_down(server->ops->negotiate_wsize(tcon, ctx), PAGE_SIZE);
+		/*
+		 * in the very unlikely event that the server sent a max write size under PAGE_SIZE,
+		 * (which would get rounded down to 0) then reset wsize to absolute minimum eg 4096
+		 */
+		if (cifs_sb->ctx->wsize == 0) {
+			cifs_sb->ctx->wsize = PAGE_SIZE;
+			cifs_dbg(VFS, "wsize too small, reset to minimum ie PAGE_SIZE, usually 4096\n");
+		}
+	}
+	if ((cifs_sb->ctx->rsize == 0) ||
+	    (cifs_sb->ctx->rsize > server->ops->negotiate_rsize(tcon, ctx)))
+		cifs_sb->ctx->rsize = server->ops->negotiate_rsize(tcon, ctx);
+
+	/*
+	 * The cookie is initialized from volume info returned above.
+	 * Inside cifs_fscache_get_super_cookie it checks
+	 * that we do not get super cookie twice.
+	 */
+	if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_FSCACHE)
+		cifs_fscache_get_super_cookie(tcon);
+
+out:
+	mnt_ctx->tcon = tcon;
+	return rc;
+}
+
+static int mount_setup_tlink(struct cifs_sb_info *cifs_sb, struct cifs_ses *ses,
+			     struct cifs_tcon *tcon)
+{
+	struct tcon_link *tlink;
+
+	/* hang the tcon off of the superblock */
+	tlink = kzalloc(sizeof(*tlink), GFP_KERNEL);
+	if (tlink == NULL)
+		return -ENOMEM;
+
+	tlink->tl_uid = ses->linux_uid;
+	tlink->tl_tcon = tcon;
+	tlink->tl_time = jiffies;
+	set_bit(TCON_LINK_MASTER, &tlink->tl_flags);
+	set_bit(TCON_LINK_IN_TREE, &tlink->tl_flags);
+
+	cifs_sb->master_tlink = tlink;
+	spin_lock(&cifs_sb->tlink_tree_lock);
+	tlink_rb_insert(&cifs_sb->tlink_tree, tlink);
+	spin_unlock(&cifs_sb->tlink_tree_lock);
+
+	queue_delayed_work(cifsiod_wq, &cifs_sb->prune_tlinks,
+				TLINK_IDLE_EXPIRE);
+	return 0;
+}
+
+static int
+cifs_are_all_path_components_accessible(struct TCP_Server_Info *server,
+					unsigned int xid,
+					struct cifs_tcon *tcon,
+					struct cifs_sb_info *cifs_sb,
+					char *full_path,
+					int added_treename)
+{
+	int rc;
+	char *s;
+	char sep, tmp;
+	int skip = added_treename ? 1 : 0;
+
+	sep = CIFS_DIR_SEP(cifs_sb);
+	s = full_path;
+
+	rc = server->ops->is_path_accessible(xid, tcon, cifs_sb, "");
+	while (rc == 0) {
+		/* skip separators */
+		while (*s == sep)
+			s++;
+		if (!*s)
+			break;
+		/* next separator */
+		while (*s && *s != sep)
+			s++;
+		/*
+		 * if the treename is added, we then have to skip the first
+		 * part within the separators
+		 */
+		if (skip) {
+			skip = 0;
+			continue;
+		}
+		/*
+		 * temporarily null-terminate the path at the end of
+		 * the current component
+		 */
+		tmp = *s;
+		*s = 0;
+		rc = server->ops->is_path_accessible(xid, tcon, cifs_sb,
+						     full_path);
+		*s = tmp;
+	}
+	return rc;
+}
+
+/*
+ * Check if path is remote (i.e. a DFS share).
+ *
+ * Return -EREMOTE if it is, otherwise 0 or -errno.
+ */
+int cifs_is_path_remote(struct cifs_mount_ctx *mnt_ctx)
+{
+	int rc;
+	struct cifs_sb_info *cifs_sb = mnt_ctx->cifs_sb;
+	struct TCP_Server_Info *server = mnt_ctx->server;
+	unsigned int xid = mnt_ctx->xid;
+	struct cifs_tcon *tcon = mnt_ctx->tcon;
+	struct smb3_fs_context *ctx = mnt_ctx->fs_ctx;
+	char *full_path;
+
+	if (!server->ops->is_path_accessible)
+		return -EOPNOTSUPP;
+
+	/*
+	 * cifs_build_path_to_root works only when we have a valid tcon
+	 */
+	full_path = cifs_build_path_to_root(ctx, cifs_sb, tcon,
+					    tcon->Flags & SMB_SHARE_IS_IN_DFS);
+	if (full_path == NULL)
+		return -ENOMEM;
+
+	cifs_dbg(FYI, "%s: full_path: %s\n", __func__, full_path);
+
+	rc = server->ops->is_path_accessible(xid, tcon, cifs_sb,
+					     full_path);
+	if (rc != 0 && rc != -EREMOTE)
+		goto out;
+
+	if (rc != -EREMOTE) {
+		rc = cifs_are_all_path_components_accessible(server, xid, tcon,
+			cifs_sb, full_path, tcon->Flags & SMB_SHARE_IS_IN_DFS);
+		if (rc != 0) {
+			cifs_server_dbg(VFS, "cannot query dirs between root and final path, enabling CIFS_MOUNT_USE_PREFIX_PATH\n");
+			cifs_sb->mnt_cifs_flags |= CIFS_MOUNT_USE_PREFIX_PATH;
+			rc = 0;
+		}
+	}
+
+out:
+	kfree(full_path);
+	return rc;
+}
+
+#ifdef CONFIG_CIFS_DFS_UPCALL
+int cifs_mount(struct cifs_sb_info *cifs_sb, struct smb3_fs_context *ctx)
+{
+	struct cifs_mount_ctx mnt_ctx = { .cifs_sb = cifs_sb, .fs_ctx = ctx, };
+	int rc;
+
+	rc = dfs_mount_share(&mnt_ctx);
+	if (rc)
+		goto error;
+	if (!ctx->dfs_conn)
+		goto out;
+
+	/*
+	 * After reconnecting to a different server, unique ids won't match anymore, so we disable
+	 * serverino. This prevents dentry revalidation to think the dentry are stale (ESTALE).
+	 */
+	cifs_autodisable_serverino(cifs_sb);
+	/*
+	 * Force the use of prefix path to support failover on DFS paths that resolve to targets
+	 * that have different prefix paths.
+	 */
+	cifs_sb->mnt_cifs_flags |= CIFS_MOUNT_USE_PREFIX_PATH;
+	kfree(cifs_sb->prepath);
+	cifs_sb->prepath = ctx->prepath;
+	ctx->prepath = NULL;
+
+out:
+	cifs_try_adding_channels(mnt_ctx.ses);
+	rc = mount_setup_tlink(cifs_sb, mnt_ctx.ses, mnt_ctx.tcon);
+	if (rc)
+		goto error;
+
+	free_xid(mnt_ctx.xid);
+	return rc;
+
+error:
+	cifs_mount_put_conns(&mnt_ctx);
+	return rc;
+}
+#else
+int cifs_mount(struct cifs_sb_info *cifs_sb, struct smb3_fs_context *ctx)
+{
+	int rc = 0;
+	struct cifs_mount_ctx mnt_ctx = { .cifs_sb = cifs_sb, .fs_ctx = ctx, };
+
+	rc = cifs_mount_get_session(&mnt_ctx);
+	if (rc)
+		goto error;
+
+	rc = cifs_mount_get_tcon(&mnt_ctx);
+	if (!rc) {
+		/*
+		 * Prevent superblock from being created with any missing
+		 * connections.
+		 */
+		if (WARN_ON(!mnt_ctx.server))
+			rc = -EHOSTDOWN;
+		else if (WARN_ON(!mnt_ctx.ses))
+			rc = -EACCES;
+		else if (WARN_ON(!mnt_ctx.tcon))
+			rc = -ENOENT;
+	}
+	if (rc)
+		goto error;
+
+	rc = cifs_is_path_remote(&mnt_ctx);
+	if (rc == -EREMOTE)
+		rc = -EOPNOTSUPP;
+	if (rc)
+		goto error;
+
+	rc = mount_setup_tlink(cifs_sb, mnt_ctx.ses, mnt_ctx.tcon);
+	if (rc)
+		goto error;
+
+	free_xid(mnt_ctx.xid);
+	return rc;
+
+error:
+	cifs_mount_put_conns(&mnt_ctx);
+	return rc;
+}
+#endif
+
+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
+/*
+ * Issue a TREE_CONNECT request.
+ */
+int
+CIFSTCon(const unsigned int xid, struct cifs_ses *ses,
+	 const char *tree, struct cifs_tcon *tcon,
+	 const struct nls_table *nls_codepage)
+{
+	struct smb_hdr *smb_buffer;
+	struct smb_hdr *smb_buffer_response;
+	TCONX_REQ *pSMB;
+	TCONX_RSP *pSMBr;
+	unsigned char *bcc_ptr;
+	int rc = 0;
+	int length;
+	__u16 bytes_left, count;
+
+	if (ses == NULL)
+		return -EIO;
+
+	smb_buffer = cifs_buf_get();
+	if (smb_buffer == NULL)
+		return -ENOMEM;
+
+	smb_buffer_response = smb_buffer;
+
+	header_assemble(smb_buffer, SMB_COM_TREE_CONNECT_ANDX,
+			NULL /*no tid */, 4 /*wct */);
+
+	smb_buffer->Mid = get_next_mid(ses->server);
+	smb_buffer->Uid = ses->Suid;
+	pSMB = (TCONX_REQ *) smb_buffer;
+	pSMBr = (TCONX_RSP *) smb_buffer_response;
+
+	pSMB->AndXCommand = 0xFF;
+	pSMB->Flags = cpu_to_le16(TCON_EXTENDED_SECINFO);
+	bcc_ptr = &pSMB->Password[0];
+
+	pSMB->PasswordLength = cpu_to_le16(1);	/* minimum */
+	*bcc_ptr = 0; /* password is null byte */
+	bcc_ptr++;              /* skip password */
+	/* already aligned so no need to do it below */
+
+	if (ses->server->sign)
+		smb_buffer->Flags2 |= SMBFLG2_SECURITY_SIGNATURE;
+
+	if (ses->capabilities & CAP_STATUS32)
+		smb_buffer->Flags2 |= SMBFLG2_ERR_STATUS;
+
+	if (ses->capabilities & CAP_DFS)
+		smb_buffer->Flags2 |= SMBFLG2_DFS;
+
+	if (ses->capabilities & CAP_UNICODE) {
+		smb_buffer->Flags2 |= SMBFLG2_UNICODE;
+		length =
+		    cifs_strtoUTF16((__le16 *) bcc_ptr, tree,
+			6 /* max utf8 char length in bytes */ *
+			(/* server len*/ + 256 /* share len */), nls_codepage);
+		bcc_ptr += 2 * length;	/* convert num 16 bit words to bytes */
+		bcc_ptr += 2;	/* skip trailing null */
+	} else {		/* ASCII */
+		strcpy(bcc_ptr, tree);
+		bcc_ptr += strlen(tree) + 1;
+	}
+	strcpy(bcc_ptr, "?????");
+	bcc_ptr += strlen("?????");
+	bcc_ptr += 1;
+	count = bcc_ptr - &pSMB->Password[0];
+	be32_add_cpu(&pSMB->hdr.smb_buf_length, count);
+	pSMB->ByteCount = cpu_to_le16(count);
+
+	rc = SendReceive(xid, ses, smb_buffer, smb_buffer_response, &length,
+			 0);
+
+	/* above now done in SendReceive */
+	if (rc == 0) {
+		bool is_unicode;
+
+		tcon->tid = smb_buffer_response->Tid;
+		bcc_ptr = pByteArea(smb_buffer_response);
+		bytes_left = get_bcc(smb_buffer_response);
+		length = strnlen(bcc_ptr, bytes_left - 2);
+		if (smb_buffer->Flags2 & SMBFLG2_UNICODE)
+			is_unicode = true;
+		else
+			is_unicode = false;
+
+
+		/* skip service field (NB: this field is always ASCII) */
+		if (length == 3) {
+			if ((bcc_ptr[0] == 'I') && (bcc_ptr[1] == 'P') &&
+			    (bcc_ptr[2] == 'C')) {
+				cifs_dbg(FYI, "IPC connection\n");
+				tcon->ipc = true;
+				tcon->pipe = true;
+			}
+		} else if (length == 2) {
+			if ((bcc_ptr[0] == 'A') && (bcc_ptr[1] == ':')) {
+				/* the most common case */
+				cifs_dbg(FYI, "disk share connection\n");
+			}
+		}
+		bcc_ptr += length + 1;
+		bytes_left -= (length + 1);
+		strscpy(tcon->tree_name, tree, sizeof(tcon->tree_name));
+
+		/* mostly informational -- no need to fail on error here */
+		kfree(tcon->nativeFileSystem);
+		tcon->nativeFileSystem = cifs_strndup_from_utf16(bcc_ptr,
+						      bytes_left, is_unicode,
+						      nls_codepage);
+
+		cifs_dbg(FYI, "nativeFileSystem=%s\n", tcon->nativeFileSystem);
+
+		if ((smb_buffer_response->WordCount == 3) ||
+			 (smb_buffer_response->WordCount == 7))
+			/* field is in same location */
+			tcon->Flags = le16_to_cpu(pSMBr->OptionalSupport);
+		else
+			tcon->Flags = 0;
+		cifs_dbg(FYI, "Tcon flags: 0x%x\n", tcon->Flags);
+
+		/*
+		 * reset_cifs_unix_caps calls QFSInfo which requires
+		 * need_reconnect to be false, but we would not need to call
+		 * reset_caps if this were not a reconnect case so must check
+		 * need_reconnect flag here.  The caller will also clear
+		 * need_reconnect when tcon was successful but needed to be
+		 * cleared earlier in the case of unix extensions reconnect
+		 */
+		if (tcon->need_reconnect && tcon->unix_ext) {
+			cifs_dbg(FYI, "resetting caps for %s\n", tcon->tree_name);
+			tcon->need_reconnect = false;
+			reset_cifs_unix_caps(xid, tcon, NULL, NULL);
+		}
+	}
+	cifs_buf_release(smb_buffer);
+	return rc;
+}
+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
+
+static void delayed_free(struct rcu_head *p)
+{
+	struct cifs_sb_info *cifs_sb = container_of(p, struct cifs_sb_info, rcu);
+
+	unload_nls(cifs_sb->local_nls);
+	smb3_cleanup_fs_context(cifs_sb->ctx);
+	kfree(cifs_sb);
+}
+
+void
+cifs_umount(struct cifs_sb_info *cifs_sb)
+{
+	struct rb_root *root = &cifs_sb->tlink_tree;
+	struct rb_node *node;
+	struct tcon_link *tlink;
+
+	cancel_delayed_work_sync(&cifs_sb->prune_tlinks);
+
+	spin_lock(&cifs_sb->tlink_tree_lock);
+	while ((node = rb_first(root))) {
+		tlink = rb_entry(node, struct tcon_link, tl_rbnode);
+		cifs_get_tlink(tlink);
+		clear_bit(TCON_LINK_IN_TREE, &tlink->tl_flags);
+		rb_erase(node, root);
+
+		spin_unlock(&cifs_sb->tlink_tree_lock);
+		cifs_put_tlink(tlink);
+		spin_lock(&cifs_sb->tlink_tree_lock);
+	}
+	spin_unlock(&cifs_sb->tlink_tree_lock);
+
+	kfree(cifs_sb->prepath);
+	call_rcu(&cifs_sb->rcu, delayed_free);
+}
+
+int
+cifs_negotiate_protocol(const unsigned int xid, struct cifs_ses *ses,
+			struct TCP_Server_Info *server)
+{
+	bool in_retry = false;
+	int rc = 0;
+
+	if (!server->ops->need_neg || !server->ops->negotiate)
+		return -ENOSYS;
+
+retry:
+	/* only send once per connect */
+	spin_lock(&server->srv_lock);
+	if (server->tcpStatus != CifsGood &&
+	    server->tcpStatus != CifsNew &&
+	    server->tcpStatus != CifsNeedNegotiate) {
+		spin_unlock(&server->srv_lock);
+		return -EHOSTDOWN;
+	}
+
+	if (!server->ops->need_neg(server) &&
+	    server->tcpStatus == CifsGood) {
+		spin_unlock(&server->srv_lock);
+		return 0;
+	}
+
+	server->lstrp = jiffies;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	server->tcpStatus = CifsInNegotiate;
 	server->neg_start = jiffies;
 	spin_unlock(&server->srv_lock);

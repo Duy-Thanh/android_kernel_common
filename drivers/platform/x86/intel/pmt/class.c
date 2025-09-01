@@ -97,6 +97,7 @@ intel_pmt_read(struct file *filp, struct kobject *kobj,
 	if (count > entry->size - off)
 		count = entry->size - off;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	count = pmt_telem_read_mmio(entry->pcidev, entry->cb, entry->header.guid, buf,
 				    entry->base, off, count);
 
@@ -253,6 +254,164 @@ static int intel_pmt_populate_entry(struct intel_pmt_entry *entry,
 	}
 
 	entry->pcidev = pci_dev;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	count = pmt_telem_read_mmio(entry->ep->pcidev, entry->cb, entry->header.guid, buf,
+				    entry->base, off, count);
+
+	return count;
+}
+
+static int
+intel_pmt_mmap(struct file *filp, struct kobject *kobj,
+		struct bin_attribute *attr, struct vm_area_struct *vma)
+{
+	struct intel_pmt_entry *entry = container_of(attr,
+						     struct intel_pmt_entry,
+						     pmt_bin_attr);
+	unsigned long vsize = vma->vm_end - vma->vm_start;
+	struct device *dev = kobj_to_dev(kobj);
+	unsigned long phys = entry->base_addr;
+	unsigned long pfn = PFN_DOWN(phys);
+	unsigned long psize;
+
+	if (vma->vm_flags & (VM_WRITE | VM_MAYWRITE))
+		return -EROFS;
+
+	psize = (PFN_UP(entry->base_addr + entry->size) - pfn) * PAGE_SIZE;
+	if (vsize > psize) {
+		dev_err(dev, "Requested mmap size is too large\n");
+		return -EINVAL;
+	}
+
+	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
+	if (io_remap_pfn_range(vma, vma->vm_start, pfn,
+		vsize, vma->vm_page_prot))
+		return -EAGAIN;
+
+	return 0;
+}
+
+static ssize_t
+guid_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	struct intel_pmt_entry *entry = dev_get_drvdata(dev);
+
+	return sprintf(buf, "0x%x\n", entry->guid);
+}
+static DEVICE_ATTR_RO(guid);
+
+static ssize_t size_show(struct device *dev, struct device_attribute *attr,
+			 char *buf)
+{
+	struct intel_pmt_entry *entry = dev_get_drvdata(dev);
+
+	return sprintf(buf, "%zu\n", entry->size);
+}
+static DEVICE_ATTR_RO(size);
+
+static ssize_t
+offset_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	struct intel_pmt_entry *entry = dev_get_drvdata(dev);
+
+	return sprintf(buf, "%lu\n", offset_in_page(entry->base_addr));
+}
+static DEVICE_ATTR_RO(offset);
+
+static struct attribute *intel_pmt_attrs[] = {
+	&dev_attr_guid.attr,
+	&dev_attr_size.attr,
+	&dev_attr_offset.attr,
+	NULL
+};
+ATTRIBUTE_GROUPS(intel_pmt);
+
+static struct class intel_pmt_class = {
+	.name = "intel_pmt",
+	.dev_groups = intel_pmt_groups,
+};
+
+static int intel_pmt_populate_entry(struct intel_pmt_entry *entry,
+				    struct intel_vsec_device *ivdev,
+				    struct resource *disc_res)
+{
+	struct pci_dev *pci_dev = ivdev->pcidev;
+	struct device *dev = &ivdev->auxdev.dev;
+	struct intel_pmt_header *header = &entry->header;
+	u8 bir;
+
+	/*
+	 * The base offset should always be 8 byte aligned.
+	 *
+	 * For non-local access types the lower 3 bits of base offset
+	 * contains the index of the base address register where the
+	 * telemetry can be found.
+	 */
+	bir = GET_BIR(header->base_offset);
+
+	/* Local access and BARID only for now */
+	switch (header->access_type) {
+	case ACCESS_LOCAL:
+		if (bir) {
+			dev_err(dev,
+				"Unsupported BAR index %d for access type %d\n",
+				bir, header->access_type);
+			return -EINVAL;
+		}
+		/*
+		 * For access_type LOCAL, the base address is as follows:
+		 * base address = end of discovery region + base offset
+		 */
+		entry->base_addr = disc_res->end + 1 + header->base_offset;
+
+		/*
+		 * Some hardware use a different calculation for the base address
+		 * when access_type == ACCESS_LOCAL. On the these systems
+		 * ACCCESS_LOCAL refers to an address in the same BAR as the
+		 * header but at a fixed offset. But as the header address was
+		 * supplied to the driver, we don't know which BAR it was in.
+		 * So search for the bar whose range includes the header address.
+		 */
+		if (intel_pmt_is_early_client_hw(dev)) {
+			int i;
+
+			entry->base_addr = 0;
+			for (i = 0; i < 6; i++)
+				if (disc_res->start >= pci_resource_start(pci_dev, i) &&
+				   (disc_res->start <= pci_resource_end(pci_dev, i))) {
+					entry->base_addr = pci_resource_start(pci_dev, i) +
+							   header->base_offset;
+					break;
+				}
+			if (!entry->base_addr)
+				return -EINVAL;
+		}
+
+		break;
+	case ACCESS_BARID:
+		/* Use the provided base address if it exists */
+		if (ivdev->base_addr) {
+			entry->base_addr = ivdev->base_addr +
+				   GET_ADDRESS(header->base_offset);
+			break;
+		}
+
+		/*
+		 * If another BAR was specified then the base offset
+		 * represents the offset within that BAR. SO retrieve the
+		 * address from the parent PCI device and add offset.
+		 */
+		entry->base_addr = pci_resource_start(pci_dev, bir) +
+				   GET_ADDRESS(header->base_offset);
+		break;
+	default:
+		dev_err(dev, "Unsupported access type %d\n",
+			header->access_type);
+		return -EINVAL;
+	}
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	entry->guid = header->guid;
 	entry->size = header->size;
 	entry->cb = ivdev->priv_data;

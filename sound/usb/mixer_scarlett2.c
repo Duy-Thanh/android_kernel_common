@@ -2329,6 +2329,7 @@ static int scarlett2_usb(
 	struct scarlett2_usb_packet *req, *resp = NULL;
 	size_t req_buf_size = struct_size(req, data, req_size);
 	size_t resp_buf_size = struct_size(resp, data, resp_size);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int retries = 0;
 	const int max_retries = 5;
 	int err;
@@ -2363,6 +2364,36 @@ retry:
 			msleep(5 * (1 << (retries - 1)));
 			goto retry;
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	int err;
+
+	req = kmalloc(req_buf_size, GFP_KERNEL);
+	if (!req) {
+		err = -ENOMEM;
+		goto error;
+	}
+
+	resp = kmalloc(resp_buf_size, GFP_KERNEL);
+	if (!resp) {
+		err = -ENOMEM;
+		goto error;
+	}
+
+	mutex_lock(&private->usb_mutex);
+
+	/* build request message and send it */
+
+	scarlett2_fill_request_header(private, req, cmd, req_size);
+
+	if (req_size)
+		memcpy(req->data, req_data, req_size);
+
+	err = scarlett2_usb_tx(dev, private->bInterfaceNumber,
+			       req, req_buf_size);
+
+	if (err != req_buf_size) {
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		usb_audio_err(
 			mixer->chip,
 			"%s USB request result cmd %x was %d\n",

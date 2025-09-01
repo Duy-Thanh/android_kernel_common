@@ -203,9 +203,18 @@ static int ptdump_show(struct seq_file *m, void *v)
 		.marker = markers,
 	};
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	mutex_lock(&cpa_mutex);
 	ptdump_walk_pgd(&st.ptdump, &init_mm, NULL);
 	mutex_unlock(&cpa_mutex);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	get_online_mems();
+	mutex_lock(&cpa_mutex);
+	ptdump_walk_pgd(&st.ptdump, &init_mm, NULL);
+	mutex_unlock(&cpa_mutex);
+	put_online_mems();
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return 0;
 }
 DEFINE_SHOW_ATTRIBUTE(ptdump);

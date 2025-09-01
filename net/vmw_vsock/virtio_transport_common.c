@@ -105,6 +105,7 @@ static int virtio_transport_fill_skb(struct sk_buff *skb,
 				     size_t len,
 				     bool zcopy)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct msghdr *msg = info->msg;
 
 	if (zcopy)
@@ -113,6 +114,16 @@ static int virtio_transport_fill_skb(struct sk_buff *skb,
 
 	virtio_vsock_skb_put(skb, len);
 	return skb_copy_datagram_from_iter_full(skb, 0, &msg->msg_iter, len);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (zcopy)
+		return __zerocopy_sg_from_iter(info->msg, NULL, skb,
+					       &info->msg->msg_iter,
+					       len);
+
+	virtio_vsock_skb_put(skb, len);
+	return skb_copy_datagram_from_iter(skb, 0, &info->msg->msg_iter, len);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static void virtio_transport_init_hdr(struct sk_buff *skb,

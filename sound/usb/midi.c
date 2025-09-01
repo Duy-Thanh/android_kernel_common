@@ -1522,6 +1522,7 @@ static void snd_usbmidi_free(struct snd_usb_midi *umidi)
 {
 	int i;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!umidi->disconnected)
 		snd_usbmidi_disconnect(&umidi->list);
 
@@ -1554,6 +1555,41 @@ void snd_usbmidi_disconnect(struct list_head *p)
 	up_write(&umidi->disc_rwsem);
 
 	timer_shutdown_sync(&umidi->error_timer);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	for (i = 0; i < MIDI_MAX_ENDPOINTS; ++i) {
+		struct snd_usb_midi_endpoint *ep = &umidi->endpoints[i];
+		if (ep->out)
+			snd_usbmidi_out_endpoint_delete(ep->out);
+		if (ep->in)
+			snd_usbmidi_in_endpoint_delete(ep->in);
+	}
+	mutex_destroy(&umidi->mutex);
+	kfree(umidi);
+}
+
+/*
+ * Unlinks all URBs (must be done before the usb_device is deleted).
+ */
+void snd_usbmidi_disconnect(struct list_head *p)
+{
+	struct snd_usb_midi *umidi;
+	unsigned int i, j;
+
+	umidi = list_entry(p, struct snd_usb_midi, list);
+	/*
+	 * an URB's completion handler may start the timer and
+	 * a timer may submit an URB. To reliably break the cycle
+	 * a flag under lock must be used
+	 */
+	down_write(&umidi->disc_rwsem);
+	spin_lock_irq(&umidi->disc_lock);
+	umidi->disconnected = 1;
+	spin_unlock_irq(&umidi->disc_lock);
+	up_write(&umidi->disc_rwsem);
+
+	del_timer_sync(&umidi->error_timer);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	for (i = 0; i < MIDI_MAX_ENDPOINTS; ++i) {
 		struct snd_usb_midi_endpoint *ep = &umidi->endpoints[i];

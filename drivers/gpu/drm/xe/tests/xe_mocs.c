@@ -43,6 +43,7 @@ static void read_l3cc_table(struct xe_gt *gt,
 {
 	struct kunit *test = kunit_get_current_test();
 	u32 l3cc, l3cc_expected;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	unsigned int i;
 	u32 reg_val;
 	u32 ret;
@@ -107,6 +108,74 @@ static void read_mocs_table(struct xe_gt *gt,
 	}
 
 	xe_force_wake_put(gt_to_fw(gt), XE_FW_GT);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	unsigned int fw_ref, i;
+	u32 reg_val;
+
+	fw_ref = xe_force_wake_get(gt_to_fw(gt), XE_FORCEWAKE_ALL);
+	if (!xe_force_wake_ref_has_domain(fw_ref, XE_FORCEWAKE_ALL)) {
+		xe_force_wake_put(gt_to_fw(gt), fw_ref);
+		KUNIT_ASSERT_TRUE_MSG(test, true, "Forcewake Failed.\n");
+	}
+
+	for (i = 0; i < info->num_mocs_regs; i++) {
+		if (!(i & 1)) {
+			if (regs_are_mcr(gt))
+				reg_val = xe_gt_mcr_unicast_read_any(gt, XEHP_LNCFCMOCS(i >> 1));
+			else
+				reg_val = xe_mmio_read32(gt, XELP_LNCFCMOCS(i >> 1));
+
+			mocs_dbg(gt, "reg_val=0x%x\n", reg_val);
+		} else {
+			/* Just re-use value read on previous iteration */
+			reg_val >>= 16;
+		}
+
+		l3cc_expected = get_entry_l3cc(info, i);
+		l3cc = reg_val & 0xffff;
+
+		mocs_dbg(gt, "[%u] expected=0x%x actual=0x%x\n",
+			 i, l3cc_expected, l3cc);
+
+		KUNIT_EXPECT_EQ_MSG(test, l3cc_expected, l3cc,
+				    "l3cc idx=%u has incorrect val.\n", i);
+	}
+	xe_force_wake_put(gt_to_fw(gt), fw_ref);
+}
+
+static void read_mocs_table(struct xe_gt *gt,
+			    const struct xe_mocs_info *info)
+{
+	struct kunit *test = kunit_get_current_test();
+	u32 mocs, mocs_expected;
+	unsigned int fw_ref, i;
+	u32 reg_val;
+
+	KUNIT_EXPECT_TRUE_MSG(test, info->unused_entries_index,
+			      "Unused entries index should have been defined\n");
+
+	fw_ref = xe_force_wake_get(gt_to_fw(gt), XE_FW_GT);
+	KUNIT_ASSERT_NE_MSG(test, fw_ref, 0, "Forcewake Failed.\n");
+
+	for (i = 0; i < info->num_mocs_regs; i++) {
+		if (regs_are_mcr(gt))
+			reg_val = xe_gt_mcr_unicast_read_any(gt, XEHP_GLOBAL_MOCS(i));
+		else
+			reg_val = xe_mmio_read32(gt, XELP_GLOBAL_MOCS(i));
+
+		mocs_expected = get_entry_control(info, i);
+		mocs = reg_val;
+
+		mocs_dbg(gt, "[%u] expected=0x%x actual=0x%x\n",
+			 i, mocs_expected, mocs);
+
+		KUNIT_EXPECT_EQ_MSG(test, mocs_expected, mocs,
+				    "mocs reg 0x%x has incorrect val.\n", i);
+	}
+
+	xe_force_wake_put(gt_to_fw(gt), fw_ref);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static int mocs_kernel_test_run_device(struct xe_device *xe)

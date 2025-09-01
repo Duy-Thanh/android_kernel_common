@@ -1748,6 +1748,7 @@ static int ice_vc_cfg_qs_msg(struct ice_vf *vf, u8 *msg)
 			    (qpi->rxq.databuffer_size > ((16 * 1024) - 128) ||
 			     qpi->rxq.databuffer_size < 1024))
 				goto error_param;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 			ring->rx_buf_len = qpi->rxq.databuffer_size;
 			if (qpi->rxq.max_pkt_size > max_frame_size ||
 			    qpi->rxq.max_pkt_size < 64)
@@ -1760,6 +1761,22 @@ static int ice_vc_cfg_qs_msg(struct ice_vf *vf, u8 *msg)
 			 */
 			if (ice_vf_is_port_vlan_ena(vf))
 				ring->max_frame += VLAN_HLEN;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+			vsi->rx_buf_len = qpi->rxq.databuffer_size;
+			ring->rx_buf_len = vsi->rx_buf_len;
+			if (qpi->rxq.max_pkt_size > max_frame_size ||
+			    qpi->rxq.max_pkt_size < 64)
+				goto error_param;
+
+			vsi->max_frame = qpi->rxq.max_pkt_size;
+			/* add space for the port VLAN since the VF driver is
+			 * not expected to account for it in the MTU
+			 * calculation
+			 */
+			if (ice_vf_is_port_vlan_ena(vf))
+				vsi->max_frame += VLAN_HLEN;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 			if (ice_vsi_cfg_single_rxq(vsi, q_idx)) {
 				dev_warn(ice_pf_to_dev(pf), "VF-%d failed to configure RX queue %d\n",

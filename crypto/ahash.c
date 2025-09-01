@@ -473,6 +473,7 @@ static int crypto_ahash_init_tfm(struct crypto_tfm *tfm)
 	struct ahash_alg *alg = crypto_ahash_alg(hash);
 
 	crypto_ahash_set_statesize(hash, alg->halg.statesize);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	crypto_ahash_set_reqsize(hash, alg->reqsize);
 
 	if (tfm->__crt_alg->cra_type == &crypto_shash_type)
@@ -640,6 +641,172 @@ static int ahash_prepare_alg(struct ahash_alg *alg)
 		return -EINVAL;
 
 	if (alg->reqsize && alg->reqsize < alg->halg.statesize)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if (tfm->__crt_alg->cra_type == &crypto_shash_type)
+		return crypto_init_ahash_using_shash(tfm);
+
+	ahash_set_needkey(hash, alg);
+
+	if (alg->exit_tfm)
+		tfm->exit = crypto_ahash_exit_tfm;
+
+	return alg->init_tfm ? alg->init_tfm(hash) : 0;
+}
+
+static unsigned int crypto_ahash_extsize(struct crypto_alg *alg)
+{
+	if (alg->cra_type == &crypto_shash_type)
+		return sizeof(struct crypto_shash *);
+
+	return crypto_alg_extsize(alg);
+}
+
+static void crypto_ahash_free_instance(struct crypto_instance *inst)
+{
+	struct ahash_instance *ahash = ahash_instance(inst);
+
+	ahash->free(ahash);
+}
+
+static int __maybe_unused crypto_ahash_report(
+	struct sk_buff *skb, struct crypto_alg *alg)
+{
+	struct crypto_report_hash rhash;
+
+	memset(&rhash, 0, sizeof(rhash));
+
+	strscpy(rhash.type, "ahash", sizeof(rhash.type));
+
+	rhash.blocksize = alg->cra_blocksize;
+	rhash.digestsize = __crypto_hash_alg_common(alg)->digestsize;
+
+	return nla_put(skb, CRYPTOCFGA_REPORT_HASH, sizeof(rhash), &rhash);
+}
+
+static void crypto_ahash_show(struct seq_file *m, struct crypto_alg *alg)
+	__maybe_unused;
+static void crypto_ahash_show(struct seq_file *m, struct crypto_alg *alg)
+{
+	seq_printf(m, "type         : ahash\n");
+	seq_printf(m, "async        : %s\n", alg->cra_flags & CRYPTO_ALG_ASYNC ?
+					     "yes" : "no");
+	seq_printf(m, "blocksize    : %u\n", alg->cra_blocksize);
+	seq_printf(m, "digestsize   : %u\n",
+		   __crypto_hash_alg_common(alg)->digestsize);
+}
+
+static const struct crypto_type crypto_ahash_type = {
+	.extsize = crypto_ahash_extsize,
+	.init_tfm = crypto_ahash_init_tfm,
+	.free = crypto_ahash_free_instance,
+#ifdef CONFIG_PROC_FS
+	.show = crypto_ahash_show,
+#endif
+#if IS_ENABLED(CONFIG_CRYPTO_USER)
+	.report = crypto_ahash_report,
+#endif
+	.maskclear = ~CRYPTO_ALG_TYPE_MASK,
+	.maskset = CRYPTO_ALG_TYPE_AHASH_MASK,
+	.type = CRYPTO_ALG_TYPE_AHASH,
+	.tfmsize = offsetof(struct crypto_ahash, base),
+};
+
+int crypto_grab_ahash(struct crypto_ahash_spawn *spawn,
+		      struct crypto_instance *inst,
+		      const char *name, u32 type, u32 mask)
+{
+	spawn->base.frontend = &crypto_ahash_type;
+	return crypto_grab_spawn(&spawn->base, inst, name, type, mask);
+}
+EXPORT_SYMBOL_GPL(crypto_grab_ahash);
+
+struct crypto_ahash *crypto_alloc_ahash(const char *alg_name, u32 type,
+					u32 mask)
+{
+	return crypto_alloc_tfm(alg_name, &crypto_ahash_type, type, mask);
+}
+EXPORT_SYMBOL_GPL(crypto_alloc_ahash);
+
+int crypto_has_ahash(const char *alg_name, u32 type, u32 mask)
+{
+	return crypto_type_has_alg(alg_name, &crypto_ahash_type, type, mask);
+}
+EXPORT_SYMBOL_GPL(crypto_has_ahash);
+
+static bool crypto_hash_alg_has_setkey(struct hash_alg_common *halg)
+{
+	struct crypto_alg *alg = &halg->base;
+
+	if (alg->cra_type == &crypto_shash_type)
+		return crypto_shash_alg_has_setkey(__crypto_shash_alg(alg));
+
+	return __crypto_ahash_alg(alg)->setkey != ahash_nosetkey;
+}
+
+struct crypto_ahash *crypto_clone_ahash(struct crypto_ahash *hash)
+{
+	struct hash_alg_common *halg = crypto_hash_alg_common(hash);
+	struct crypto_tfm *tfm = crypto_ahash_tfm(hash);
+	struct crypto_ahash *nhash;
+	struct ahash_alg *alg;
+	int err;
+
+	if (!crypto_hash_alg_has_setkey(halg)) {
+		tfm = crypto_tfm_get(tfm);
+		if (IS_ERR(tfm))
+			return ERR_CAST(tfm);
+
+		return hash;
+	}
+
+	nhash = crypto_clone_tfm(&crypto_ahash_type, tfm);
+
+	if (IS_ERR(nhash))
+		return nhash;
+
+	nhash->reqsize = hash->reqsize;
+	nhash->statesize = hash->statesize;
+
+	if (likely(hash->using_shash)) {
+		struct crypto_shash **nctx = crypto_ahash_ctx(nhash);
+		struct crypto_shash *shash;
+
+		shash = crypto_clone_shash(ahash_to_shash(hash));
+		if (IS_ERR(shash)) {
+			err = PTR_ERR(shash);
+			goto out_free_nhash;
+		}
+		nhash->using_shash = true;
+		*nctx = shash;
+		return nhash;
+	}
+
+	err = -ENOSYS;
+	alg = crypto_ahash_alg(hash);
+	if (!alg->clone_tfm)
+		goto out_free_nhash;
+
+	err = alg->clone_tfm(nhash, hash);
+	if (err)
+		goto out_free_nhash;
+
+	return nhash;
+
+out_free_nhash:
+	crypto_free_ahash(nhash);
+	return ERR_PTR(err);
+}
+EXPORT_SYMBOL_GPL(crypto_clone_ahash);
+
+static int ahash_prepare_alg(struct ahash_alg *alg)
+{
+	struct crypto_alg *base = &alg->halg.base;
+	int err;
+
+	if (alg->halg.statesize == 0)
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		return -EINVAL;
 
 	err = hash_prepare_alg(&alg->halg);

@@ -367,6 +367,7 @@ struct ucsi_debugfs_entry {
 		u64 low;
 		u64 high;
 	} response;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	int status;
 	struct dentry *dentry;
 };
@@ -416,6 +417,57 @@ struct ucsi {
 #define UCSI_TYPEC_DEFAULT_CURRENT	 100
 #define UCSI_TYPEC_1_5_CURRENT		1500
 #define UCSI_TYPEC_3_0_CURRENT		3000
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	u32 status;
+	struct dentry *dentry;
+};
+
+struct ucsi {
+	u16 version;
+	struct device *dev;
+	void *driver_data;
+
+	const struct ucsi_operations *ops;
+
+	struct ucsi_capability cap;
+	struct ucsi_connector *connector;
+	struct ucsi_debugfs_entry *debugfs;
+
+	struct work_struct resume_work;
+	struct delayed_work work;
+	int work_count;
+#define UCSI_ROLE_SWITCH_RETRY_PER_HZ	10
+#define UCSI_ROLE_SWITCH_INTERVAL	(HZ / UCSI_ROLE_SWITCH_RETRY_PER_HZ)
+#define UCSI_ROLE_SWITCH_WAIT_COUNT	(10 * UCSI_ROLE_SWITCH_RETRY_PER_HZ)
+
+	/* PPM Communication lock */
+	struct mutex ppm_lock;
+
+	/* The latest "Notification Enable" bits (SET_NOTIFICATION_ENABLE) */
+	u64 ntfy;
+
+	/* PPM communication flags */
+	unsigned long flags;
+#define EVENT_PENDING	0
+#define COMMAND_PENDING	1
+#define ACK_PENDING	2
+	struct completion complete;
+
+	unsigned long quirks;
+#define UCSI_NO_PARTNER_PDOS	BIT(0)	/* Don't read partner's PDOs */
+#define UCSI_DELAY_DEVICE_PDOS	BIT(1)	/* Reading PDOs fails until the parter is in PD mode */
+};
+
+#define UCSI_MAX_DATA_LENGTH(u) (((u)->version < UCSI_VERSION_2_0) ? 0x10 : 0xff)
+
+#define UCSI_MAX_SVID		5
+#define UCSI_MAX_ALTMODES	(UCSI_MAX_SVID * 6)
+
+#define UCSI_TYPEC_VSAFE5V	5000
+#define UCSI_TYPEC_1_5_CURRENT	1500
+#define UCSI_TYPEC_3_0_CURRENT	3000
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 struct ucsi_connector {
 	int num;

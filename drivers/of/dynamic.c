@@ -935,6 +935,7 @@ static int of_changeset_add_prop_helper(struct of_changeset *ocs,
 		return -ENOMEM;
 
 	ret = of_changeset_add_property(ocs, np, new_pp);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (ret) {
 		__of_prop_free(new_pp);
 		return ret;
@@ -944,6 +945,13 @@ static int of_changeset_add_prop_helper(struct of_changeset *ocs,
 	np->deadprops = new_pp;
 
 	return 0;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (ret)
+		__of_prop_free(new_pp);
+
+	return ret;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /**

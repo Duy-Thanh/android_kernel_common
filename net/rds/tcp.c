@@ -504,8 +504,18 @@ bool rds_tcp_tune(struct socket *sock)
 			release_sock(sk);
 			return false;
 		}
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		sk_net_refcnt_upgrade(sk);
 		put_net(net);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		/* Update ns_tracker to current stack trace and refcounted tracker */
+		__netns_tracker_free(net, &sk->ns_tracker, false);
+
+		sk->sk_net_refcnt = 1;
+		netns_tracker_alloc(net, &sk->ns_tracker, GFP_KERNEL);
+		sock_inuse_add(net, 1);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 	rtn = net_generic(net, rds_tcp_netid);
 	if (rtn->sndbuf_size > 0) {

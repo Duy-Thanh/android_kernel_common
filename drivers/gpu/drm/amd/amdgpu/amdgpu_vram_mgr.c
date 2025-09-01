@@ -648,6 +648,7 @@ static void amdgpu_vram_mgr_del(struct ttm_resource_manager *man,
 	list_for_each_entry(block, &vres->blocks, link)
 		vis_usage += amdgpu_vram_mgr_vis_size(adev, block);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	drm_buddy_free_list(mm, &vres->blocks, vres->flags);
 	amdgpu_vram_mgr_do_reserve(man);
 	mutex_unlock(&mgr->lock);
@@ -796,6 +797,141 @@ void amdgpu_vram_mgr_clear_reset_blocks(struct amdgpu_device *adev)
 	mutex_lock(&mgr->lock);
 	drm_buddy_reset_clear(mm, false);
 	mutex_unlock(&mgr->lock);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	amdgpu_vram_mgr_do_reserve(man);
+
+	drm_buddy_free_list(mm, &vres->blocks, vres->flags);
+	mutex_unlock(&mgr->lock);
+
+	atomic64_sub(vis_usage, &mgr->vis_usage);
+
+	ttm_resource_fini(man, res);
+	kfree(vres);
+}
+
+/**
+ * amdgpu_vram_mgr_alloc_sgt - allocate and fill a sg table
+ *
+ * @adev: amdgpu device pointer
+ * @res: TTM memory object
+ * @offset: byte offset from the base of VRAM BO
+ * @length: number of bytes to export in sg_table
+ * @dev: the other device
+ * @dir: dma direction
+ * @sgt: resulting sg table
+ *
+ * Allocate and fill a sg table from a VRAM allocation.
+ */
+int amdgpu_vram_mgr_alloc_sgt(struct amdgpu_device *adev,
+			      struct ttm_resource *res,
+			      u64 offset, u64 length,
+			      struct device *dev,
+			      enum dma_data_direction dir,
+			      struct sg_table **sgt)
+{
+	struct amdgpu_res_cursor cursor;
+	struct scatterlist *sg;
+	int num_entries = 0;
+	int i, r;
+
+	*sgt = kmalloc(sizeof(**sgt), GFP_KERNEL);
+	if (!*sgt)
+		return -ENOMEM;
+
+	/* Determine the number of DRM_BUDDY blocks to export */
+	amdgpu_res_first(res, offset, length, &cursor);
+	while (cursor.remaining) {
+		num_entries++;
+		amdgpu_res_next(&cursor, min(cursor.size, AMDGPU_MAX_SG_SEGMENT_SIZE));
+	}
+
+	r = sg_alloc_table(*sgt, num_entries, GFP_KERNEL);
+	if (r)
+		goto error_free;
+
+	/* Initialize scatterlist nodes of sg_table */
+	for_each_sgtable_sg((*sgt), sg, i)
+		sg->length = 0;
+
+	/*
+	 * Walk down DRM_BUDDY blocks to populate scatterlist nodes
+	 * @note: Use iterator api to get first the DRM_BUDDY block
+	 * and the number of bytes from it. Access the following
+	 * DRM_BUDDY block(s) if more buffer needs to exported
+	 */
+	amdgpu_res_first(res, offset, length, &cursor);
+	for_each_sgtable_sg((*sgt), sg, i) {
+		phys_addr_t phys = cursor.start + adev->gmc.aper_base;
+		unsigned long size = min(cursor.size, AMDGPU_MAX_SG_SEGMENT_SIZE);
+		dma_addr_t addr;
+
+		addr = dma_map_resource(dev, phys, size, dir,
+					DMA_ATTR_SKIP_CPU_SYNC);
+		r = dma_mapping_error(dev, addr);
+		if (r)
+			goto error_unmap;
+
+		sg_set_page(sg, NULL, size, 0);
+		sg_dma_address(sg) = addr;
+		sg_dma_len(sg) = size;
+
+		amdgpu_res_next(&cursor, size);
+	}
+
+	return 0;
+
+error_unmap:
+	for_each_sgtable_sg((*sgt), sg, i) {
+		if (!sg->length)
+			continue;
+
+		dma_unmap_resource(dev, sg->dma_address,
+				   sg->length, dir,
+				   DMA_ATTR_SKIP_CPU_SYNC);
+	}
+	sg_free_table(*sgt);
+
+error_free:
+	kfree(*sgt);
+	return r;
+}
+
+/**
+ * amdgpu_vram_mgr_free_sgt - allocate and fill a sg table
+ *
+ * @dev: device pointer
+ * @dir: data direction of resource to unmap
+ * @sgt: sg table to free
+ *
+ * Free a previously allocate sg table.
+ */
+void amdgpu_vram_mgr_free_sgt(struct device *dev,
+			      enum dma_data_direction dir,
+			      struct sg_table *sgt)
+{
+	struct scatterlist *sg;
+	int i;
+
+	for_each_sgtable_sg(sgt, sg, i)
+		dma_unmap_resource(dev, sg->dma_address,
+				   sg->length, dir,
+				   DMA_ATTR_SKIP_CPU_SYNC);
+	sg_free_table(sgt);
+	kfree(sgt);
+}
+
+/**
+ * amdgpu_vram_mgr_vis_usage - how many bytes are used in the visible part
+ *
+ * @mgr: amdgpu_vram_mgr pointer
+ *
+ * Returns how many bytes are used in the visible part of VRAM
+ */
+uint64_t amdgpu_vram_mgr_vis_usage(struct amdgpu_vram_mgr *mgr)
+{
+	return atomic64_read(&mgr->vis_usage);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 /**

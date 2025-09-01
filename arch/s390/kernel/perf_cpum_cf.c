@@ -761,6 +761,7 @@ static int __hw_perf_event_init(struct perf_event *event, unsigned int type)
 		break;
 
 	case PERF_TYPE_HARDWARE:
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		ev = attr->config;
 		if (!attr->exclude_user && attr->exclude_kernel) {
 			/*
@@ -860,6 +861,108 @@ static int cpumf_pmu_event_init(struct perf_event *event)
 
 	if (is_sampling_event(event))	/* No sampling support */
 		return err;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		if (is_sampling_event(event))	/* No sampling support */
+			return -ENOENT;
+		ev = attr->config;
+		if (!attr->exclude_user && attr->exclude_kernel) {
+			/*
+			 * Count user space (problem-state) only
+			 * Handle events 32 and 33 as 0:u and 1:u
+			 */
+			if (!is_userspace_event(ev)) {
+				if (ev >= ARRAY_SIZE(cpumf_generic_events_user))
+					return -EOPNOTSUPP;
+				ev = cpumf_generic_events_user[ev];
+			}
+		} else if (!attr->exclude_kernel && attr->exclude_user) {
+			/* No support for kernel space counters only */
+			return -EOPNOTSUPP;
+		} else {
+			/* Count user and kernel space, incl. events 32 + 33 */
+			if (!is_userspace_event(ev)) {
+				if (ev >= ARRAY_SIZE(cpumf_generic_events_basic))
+					return -EOPNOTSUPP;
+				ev = cpumf_generic_events_basic[ev];
+			}
+		}
+		break;
+
+	default:
+		return -ENOENT;
+	}
+
+	if (ev == -1)
+		return -ENOENT;
+
+	if (ev > PERF_CPUM_CF_MAX_CTR)
+		return -ENOENT;
+
+	/* Obtain the counter set to which the specified counter belongs */
+	set = get_counter_set(ev);
+	switch (set) {
+	case CPUMF_CTR_SET_BASIC:
+	case CPUMF_CTR_SET_USER:
+	case CPUMF_CTR_SET_CRYPTO:
+	case CPUMF_CTR_SET_EXT:
+	case CPUMF_CTR_SET_MT_DIAG:
+		/*
+		 * Use the hardware perf event structure to store the
+		 * counter number in the 'config' member and the counter
+		 * set number in the 'config_base' as bit mask.
+		 * It is later used to enable/disable the counter(s).
+		 */
+		hwc->config = ev;
+		hwc->config_base = cpumf_ctr_ctl[set];
+		break;
+	case CPUMF_CTR_SET_MAX:
+		/* The counter could not be associated to a counter set */
+		return -EINVAL;
+	}
+
+	/* Initialize for using the CPU-measurement counter facility */
+	if (cpum_cf_alloc(event->cpu))
+		return -ENOMEM;
+	event->destroy = hw_perf_event_destroy;
+
+	/*
+	 * Finally, validate version and authorization of the counter set.
+	 * If the particular CPU counter set is not authorized,
+	 * return with -ENOENT in order to fall back to other
+	 * PMUs that might suffice the event request.
+	 */
+	if (!(hwc->config_base & cpumf_ctr_info.auth_ctl))
+		return -ENOENT;
+	return validate_ctr_version(hwc->config, set);
+}
+
+/* Events CPU_CYLCES and INSTRUCTIONS can be submitted with two different
+ * attribute::type values:
+ * - PERF_TYPE_HARDWARE:
+ * - pmu->type:
+ * Handle both type of invocations identical. They address the same hardware.
+ * The result is different when event modifiers exclude_kernel and/or
+ * exclude_user are also set.
+ */
+static int cpumf_pmu_event_type(struct perf_event *event)
+{
+	u64 ev = event->attr.config;
+
+	if (cpumf_generic_events_basic[PERF_COUNT_HW_CPU_CYCLES] == ev ||
+	    cpumf_generic_events_basic[PERF_COUNT_HW_INSTRUCTIONS] == ev ||
+	    cpumf_generic_events_user[PERF_COUNT_HW_CPU_CYCLES] == ev ||
+	    cpumf_generic_events_user[PERF_COUNT_HW_INSTRUCTIONS] == ev)
+		return PERF_TYPE_HARDWARE;
+	return PERF_TYPE_RAW;
+}
+
+static int cpumf_pmu_event_init(struct perf_event *event)
+{
+	unsigned int type = event->attr.type;
+	int err = -ENOENT;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (type == PERF_TYPE_HARDWARE || type == PERF_TYPE_RAW)
 		err = __hw_perf_event_init(event, type);
 	else if (event->pmu->type == type)

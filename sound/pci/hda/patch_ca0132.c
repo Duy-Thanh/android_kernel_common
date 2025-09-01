@@ -4410,6 +4410,7 @@ static int add_tuning_control(struct hda_codec *codec,
 	}
 	knew.private_value =
 		HDA_COMPOSE_AMP_VAL(nid, 1, 0, type);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	snprintf(namestr, sizeof(namestr), "%s %s Volume", name, dirstr[dir]);
 	return snd_hda_ctl_add(codec, nid, snd_ctl_new1(&knew, codec));
 }
@@ -4895,6 +4896,491 @@ static int ca0132_alt_select_out(struct hda_codec *codec)
 		err = ca0132_alt_surround_set_bass_redirection(codec, 0);
 	if (err < 0)
 		goto exit;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	sprintf(namestr, "%s %s Volume", name, dirstr[dir]);
+	return snd_hda_ctl_add(codec, nid, snd_ctl_new1(&knew, codec));
+}
+
+static int add_tuning_ctls(struct hda_codec *codec)
+{
+	int i;
+	int err;
+
+	for (i = 0; i < TUNING_CTLS_COUNT; i++) {
+		err = add_tuning_control(codec,
+					ca0132_tuning_ctls[i].parent_nid,
+					ca0132_tuning_ctls[i].nid,
+					ca0132_tuning_ctls[i].name,
+					ca0132_tuning_ctls[i].direct);
+		if (err < 0)
+			return err;
+	}
+
+	return 0;
+}
+
+static void ca0132_init_tuning_defaults(struct hda_codec *codec)
+{
+	struct ca0132_spec *spec = codec->spec;
+	int i;
+
+	/* Wedge Angle defaults to 30.  10 below is 30 - 20.  20 is min. */
+	spec->cur_ctl_vals[WEDGE_ANGLE - TUNING_CTL_START_NID] = 10;
+	/* SVM level defaults to 0.74. */
+	spec->cur_ctl_vals[SVM_LEVEL - TUNING_CTL_START_NID] = 74;
+
+	/* EQ defaults to 0dB. */
+	for (i = 2; i < TUNING_CTLS_COUNT; i++)
+		spec->cur_ctl_vals[i] = 24;
+}
+#endif /*ENABLE_TUNING_CONTROLS*/
+
+/*
+ * Select the active output.
+ * If autodetect is enabled, output will be selected based on jack detection.
+ * If jack inserted, headphone will be selected, else built-in speakers
+ * If autodetect is disabled, output will be selected based on selection.
+ */
+static int ca0132_select_out(struct hda_codec *codec)
+{
+	struct ca0132_spec *spec = codec->spec;
+	unsigned int pin_ctl;
+	int jack_present;
+	int auto_jack;
+	unsigned int tmp;
+	int err;
+
+	codec_dbg(codec, "ca0132_select_out\n");
+
+	snd_hda_power_up_pm(codec);
+
+	auto_jack = spec->vnode_lswitch[VNID_HP_ASEL - VNODE_START_NID];
+
+	if (auto_jack)
+		jack_present = snd_hda_jack_detect(codec, spec->unsol_tag_hp);
+	else
+		jack_present =
+			spec->vnode_lswitch[VNID_HP_SEL - VNODE_START_NID];
+
+	if (jack_present)
+		spec->cur_out_type = HEADPHONE_OUT;
+	else
+		spec->cur_out_type = SPEAKER_OUT;
+
+	if (spec->cur_out_type == SPEAKER_OUT) {
+		codec_dbg(codec, "ca0132_select_out speaker\n");
+		/*speaker out config*/
+		tmp = FLOAT_ONE;
+		err = dspio_set_uint_param(codec, 0x80, 0x04, tmp);
+		if (err < 0)
+			goto exit;
+		/*enable speaker EQ*/
+		tmp = FLOAT_ONE;
+		err = dspio_set_uint_param(codec, 0x8f, 0x00, tmp);
+		if (err < 0)
+			goto exit;
+
+		/* Setup EAPD */
+		snd_hda_codec_write(codec, spec->out_pins[1], 0,
+				    VENDOR_CHIPIO_EAPD_SEL_SET, 0x02);
+		snd_hda_codec_write(codec, spec->out_pins[0], 0,
+				    AC_VERB_SET_EAPD_BTLENABLE, 0x00);
+		snd_hda_codec_write(codec, spec->out_pins[0], 0,
+				    VENDOR_CHIPIO_EAPD_SEL_SET, 0x00);
+		snd_hda_codec_write(codec, spec->out_pins[0], 0,
+				    AC_VERB_SET_EAPD_BTLENABLE, 0x02);
+
+		/* disable headphone node */
+		pin_ctl = snd_hda_codec_read(codec, spec->out_pins[1], 0,
+					AC_VERB_GET_PIN_WIDGET_CONTROL, 0);
+		snd_hda_set_pin_ctl(codec, spec->out_pins[1],
+				    pin_ctl & ~PIN_HP);
+		/* enable speaker node */
+		pin_ctl = snd_hda_codec_read(codec, spec->out_pins[0], 0,
+				AC_VERB_GET_PIN_WIDGET_CONTROL, 0);
+		snd_hda_set_pin_ctl(codec, spec->out_pins[0],
+				    pin_ctl | PIN_OUT);
+	} else {
+		codec_dbg(codec, "ca0132_select_out hp\n");
+		/*headphone out config*/
+		tmp = FLOAT_ZERO;
+		err = dspio_set_uint_param(codec, 0x80, 0x04, tmp);
+		if (err < 0)
+			goto exit;
+		/*disable speaker EQ*/
+		tmp = FLOAT_ZERO;
+		err = dspio_set_uint_param(codec, 0x8f, 0x00, tmp);
+		if (err < 0)
+			goto exit;
+
+		/* Setup EAPD */
+		snd_hda_codec_write(codec, spec->out_pins[0], 0,
+				    VENDOR_CHIPIO_EAPD_SEL_SET, 0x00);
+		snd_hda_codec_write(codec, spec->out_pins[0], 0,
+				    AC_VERB_SET_EAPD_BTLENABLE, 0x00);
+		snd_hda_codec_write(codec, spec->out_pins[1], 0,
+				    VENDOR_CHIPIO_EAPD_SEL_SET, 0x02);
+		snd_hda_codec_write(codec, spec->out_pins[0], 0,
+				    AC_VERB_SET_EAPD_BTLENABLE, 0x02);
+
+		/* disable speaker*/
+		pin_ctl = snd_hda_codec_read(codec, spec->out_pins[0], 0,
+					AC_VERB_GET_PIN_WIDGET_CONTROL, 0);
+		snd_hda_set_pin_ctl(codec, spec->out_pins[0],
+				    pin_ctl & ~PIN_HP);
+		/* enable headphone*/
+		pin_ctl = snd_hda_codec_read(codec, spec->out_pins[1], 0,
+					AC_VERB_GET_PIN_WIDGET_CONTROL, 0);
+		snd_hda_set_pin_ctl(codec, spec->out_pins[1],
+				    pin_ctl | PIN_HP);
+	}
+
+exit:
+	snd_hda_power_down_pm(codec);
+
+	return err < 0 ? err : 0;
+}
+
+static int ae5_headphone_gain_set(struct hda_codec *codec, long val);
+static int zxr_headphone_gain_set(struct hda_codec *codec, long val);
+static int ca0132_effects_set(struct hda_codec *codec, hda_nid_t nid, long val);
+
+static void ae5_mmio_select_out(struct hda_codec *codec)
+{
+	struct ca0132_spec *spec = codec->spec;
+	const struct ae_ca0113_output_set *out_cmds;
+	unsigned int i;
+
+	if (ca0132_quirk(spec) == QUIRK_AE5)
+		out_cmds = &ae5_ca0113_output_presets;
+	else
+		out_cmds = &ae7_ca0113_output_presets;
+
+	for (i = 0; i < AE_CA0113_OUT_SET_COMMANDS; i++)
+		ca0113_mmio_command_set(codec, out_cmds->group[i],
+				out_cmds->target[i],
+				out_cmds->vals[spec->cur_out_type][i]);
+}
+
+static int ca0132_alt_set_full_range_speaker(struct hda_codec *codec)
+{
+	struct ca0132_spec *spec = codec->spec;
+	int quirk = ca0132_quirk(spec);
+	unsigned int tmp;
+	int err;
+
+	/* 2.0/4.0 setup has no LFE channel, so setting full-range does nothing. */
+	if (spec->channel_cfg_val == SPEAKER_CHANNELS_4_0
+			|| spec->channel_cfg_val == SPEAKER_CHANNELS_2_0)
+		return 0;
+
+	/* Set front L/R full range. Zero for full-range, one for redirection. */
+	tmp = spec->speaker_range_val[0] ? FLOAT_ZERO : FLOAT_ONE;
+	err = dspio_set_uint_param(codec, 0x96,
+			SPEAKER_FULL_RANGE_FRONT_L_R, tmp);
+	if (err < 0)
+		return err;
+
+	/* When setting full-range rear, both rear and center/lfe are set. */
+	tmp = spec->speaker_range_val[1] ? FLOAT_ZERO : FLOAT_ONE;
+	err = dspio_set_uint_param(codec, 0x96,
+			SPEAKER_FULL_RANGE_CENTER_LFE, tmp);
+	if (err < 0)
+		return err;
+
+	err = dspio_set_uint_param(codec, 0x96,
+			SPEAKER_FULL_RANGE_REAR_L_R, tmp);
+	if (err < 0)
+		return err;
+
+	/*
+	 * Only the AE series cards set this value when setting full-range,
+	 * and it's always 1.0f.
+	 */
+	if (quirk == QUIRK_AE5 || quirk == QUIRK_AE7) {
+		err = dspio_set_uint_param(codec, 0x96,
+				SPEAKER_FULL_RANGE_SURROUND_L_R, FLOAT_ONE);
+		if (err < 0)
+			return err;
+	}
+
+	return 0;
+}
+
+static int ca0132_alt_surround_set_bass_redirection(struct hda_codec *codec,
+		bool val)
+{
+	struct ca0132_spec *spec = codec->spec;
+	unsigned int tmp;
+	int err;
+
+	if (val && spec->channel_cfg_val != SPEAKER_CHANNELS_4_0 &&
+			spec->channel_cfg_val != SPEAKER_CHANNELS_2_0)
+		tmp = FLOAT_ONE;
+	else
+		tmp = FLOAT_ZERO;
+
+	err = dspio_set_uint_param(codec, 0x96, SPEAKER_BASS_REDIRECT, tmp);
+	if (err < 0)
+		return err;
+
+	/* If it is enabled, make sure to set the crossover frequency. */
+	if (tmp) {
+		tmp = float_xbass_xover_lookup[spec->xbass_xover_freq];
+		err = dspio_set_uint_param(codec, 0x96,
+				SPEAKER_BASS_REDIRECT_XOVER_FREQ, tmp);
+		if (err < 0)
+			return err;
+	}
+
+	return 0;
+}
+
+/*
+ * These are the commands needed to setup output on each of the different card
+ * types.
+ */
+static void ca0132_alt_select_out_get_quirk_data(struct hda_codec *codec,
+		const struct ca0132_alt_out_set_quirk_data **quirk_data)
+{
+	struct ca0132_spec *spec = codec->spec;
+	int quirk = ca0132_quirk(spec);
+	unsigned int i;
+
+	*quirk_data = NULL;
+	for (i = 0; i < ARRAY_SIZE(quirk_out_set_data); i++) {
+		if (quirk_out_set_data[i].quirk_id == quirk) {
+			*quirk_data = &quirk_out_set_data[i];
+			return;
+		}
+	}
+}
+
+static int ca0132_alt_select_out_quirk_set(struct hda_codec *codec)
+{
+	const struct ca0132_alt_out_set_quirk_data *quirk_data;
+	const struct ca0132_alt_out_set_info *out_info;
+	struct ca0132_spec *spec = codec->spec;
+	unsigned int i, gpio_data;
+	int err;
+
+	ca0132_alt_select_out_get_quirk_data(codec, &quirk_data);
+	if (!quirk_data)
+		return 0;
+
+	out_info = &quirk_data->out_set_info[spec->cur_out_type];
+	if (quirk_data->is_ae_series)
+		ae5_mmio_select_out(codec);
+
+	if (out_info->has_hda_gpio) {
+		gpio_data = snd_hda_codec_read(codec, codec->core.afg, 0,
+				AC_VERB_GET_GPIO_DATA, 0);
+
+		if (out_info->hda_gpio_set)
+			gpio_data |= (1 << out_info->hda_gpio_pin);
+		else
+			gpio_data &= ~(1 << out_info->hda_gpio_pin);
+
+		snd_hda_codec_write(codec, codec->core.afg, 0,
+				    AC_VERB_SET_GPIO_DATA, gpio_data);
+	}
+
+	if (out_info->mmio_gpio_count) {
+		for (i = 0; i < out_info->mmio_gpio_count; i++) {
+			ca0113_mmio_gpio_set(codec, out_info->mmio_gpio_pin[i],
+					out_info->mmio_gpio_set[i]);
+		}
+	}
+
+	if (out_info->scp_cmds_count) {
+		for (i = 0; i < out_info->scp_cmds_count; i++) {
+			err = dspio_set_uint_param(codec,
+					out_info->scp_cmd_mid[i],
+					out_info->scp_cmd_req[i],
+					out_info->scp_cmd_val[i]);
+			if (err < 0)
+				return err;
+		}
+	}
+
+	chipio_set_control_param(codec, 0x0d, out_info->dac2port);
+
+	if (out_info->has_chipio_write) {
+		chipio_write(codec, out_info->chipio_write_addr,
+				out_info->chipio_write_data);
+	}
+
+	if (quirk_data->has_headphone_gain) {
+		if (spec->cur_out_type != HEADPHONE_OUT) {
+			if (quirk_data->is_ae_series)
+				ae5_headphone_gain_set(codec, 2);
+			else
+				zxr_headphone_gain_set(codec, 0);
+		} else {
+			if (quirk_data->is_ae_series)
+				ae5_headphone_gain_set(codec,
+						spec->ae5_headphone_gain_val);
+			else
+				zxr_headphone_gain_set(codec,
+						spec->zxr_gain_set);
+		}
+	}
+
+	return 0;
+}
+
+static void ca0132_set_out_node_pincfg(struct hda_codec *codec, hda_nid_t nid,
+		bool out_enable, bool hp_enable)
+{
+	unsigned int pin_ctl;
+
+	pin_ctl = snd_hda_codec_read(codec, nid, 0,
+			AC_VERB_GET_PIN_WIDGET_CONTROL, 0);
+
+	pin_ctl = hp_enable ? pin_ctl | PIN_HP_AMP : pin_ctl & ~PIN_HP_AMP;
+	pin_ctl = out_enable ? pin_ctl | PIN_OUT : pin_ctl & ~PIN_OUT;
+	snd_hda_set_pin_ctl(codec, nid, pin_ctl);
+}
+
+/*
+ * This function behaves similarly to the ca0132_select_out funciton above,
+ * except with a few differences. It adds the ability to select the current
+ * output with an enumerated control "output source" if the auto detect
+ * mute switch is set to off. If the auto detect mute switch is enabled, it
+ * will detect either headphone or lineout(SPEAKER_OUT) from jack detection.
+ * It also adds the ability to auto-detect the front headphone port.
+ */
+static int ca0132_alt_select_out(struct hda_codec *codec)
+{
+	struct ca0132_spec *spec = codec->spec;
+	unsigned int tmp, outfx_set;
+	int jack_present;
+	int auto_jack;
+	int err;
+	/* Default Headphone is rear headphone */
+	hda_nid_t headphone_nid = spec->out_pins[1];
+
+	codec_dbg(codec, "%s\n", __func__);
+
+	snd_hda_power_up_pm(codec);
+
+	auto_jack = spec->vnode_lswitch[VNID_HP_ASEL - VNODE_START_NID];
+
+	/*
+	 * If headphone rear or front is plugged in, set to headphone.
+	 * If neither is plugged in, set to rear line out. Only if
+	 * hp/speaker auto detect is enabled.
+	 */
+	if (auto_jack) {
+		jack_present = snd_hda_jack_detect(codec, spec->unsol_tag_hp) ||
+			   snd_hda_jack_detect(codec, spec->unsol_tag_front_hp);
+
+		if (jack_present)
+			spec->cur_out_type = HEADPHONE_OUT;
+		else
+			spec->cur_out_type = SPEAKER_OUT;
+	} else
+		spec->cur_out_type = spec->out_enum_val;
+
+	outfx_set = spec->effects_switch[PLAY_ENHANCEMENT - EFFECT_START_NID];
+
+	/* Begin DSP output switch, mute DSP volume. */
+	err = dspio_set_uint_param(codec, 0x96, SPEAKER_TUNING_MUTE, FLOAT_ONE);
+	if (err < 0)
+		goto exit;
+
+	if (ca0132_alt_select_out_quirk_set(codec) < 0)
+		goto exit;
+
+	switch (spec->cur_out_type) {
+	case SPEAKER_OUT:
+		codec_dbg(codec, "%s speaker\n", __func__);
+
+		/* Enable EAPD */
+		snd_hda_codec_write(codec, spec->out_pins[0], 0,
+			AC_VERB_SET_EAPD_BTLENABLE, 0x01);
+
+		/* Disable headphone node. */
+		ca0132_set_out_node_pincfg(codec, spec->out_pins[1], 0, 0);
+		/* Set front L-R to output. */
+		ca0132_set_out_node_pincfg(codec, spec->out_pins[0], 1, 0);
+		/* Set Center/LFE to output. */
+		ca0132_set_out_node_pincfg(codec, spec->out_pins[2], 1, 0);
+		/* Set rear surround to output. */
+		ca0132_set_out_node_pincfg(codec, spec->out_pins[3], 1, 0);
+
+		/*
+		 * Without PlayEnhancement being enabled, if we've got a 2.0
+		 * setup, set it to floating point eight to disable any DSP
+		 * processing effects.
+		 */
+		if (!outfx_set && spec->channel_cfg_val == SPEAKER_CHANNELS_2_0)
+			tmp = FLOAT_EIGHT;
+		else
+			tmp = speaker_channel_cfgs[spec->channel_cfg_val].val;
+
+		err = dspio_set_uint_param(codec, 0x80, 0x04, tmp);
+		if (err < 0)
+			goto exit;
+
+		break;
+	case HEADPHONE_OUT:
+		codec_dbg(codec, "%s hp\n", __func__);
+		snd_hda_codec_write(codec, spec->out_pins[0], 0,
+			AC_VERB_SET_EAPD_BTLENABLE, 0x00);
+
+		/* Disable all speaker nodes. */
+		ca0132_set_out_node_pincfg(codec, spec->out_pins[0], 0, 0);
+		ca0132_set_out_node_pincfg(codec, spec->out_pins[2], 0, 0);
+		ca0132_set_out_node_pincfg(codec, spec->out_pins[3], 0, 0);
+
+		/* enable headphone, either front or rear */
+		if (snd_hda_jack_detect(codec, spec->unsol_tag_front_hp))
+			headphone_nid = spec->out_pins[2];
+		else if (snd_hda_jack_detect(codec, spec->unsol_tag_hp))
+			headphone_nid = spec->out_pins[1];
+
+		ca0132_set_out_node_pincfg(codec, headphone_nid, 1, 1);
+
+		if (outfx_set)
+			err = dspio_set_uint_param(codec, 0x80, 0x04, FLOAT_ONE);
+		else
+			err = dspio_set_uint_param(codec, 0x80, 0x04, FLOAT_ZERO);
+
+		if (err < 0)
+			goto exit;
+		break;
+	}
+	/*
+	 * If output effects are enabled, set the X-Bass effect value again to
+	 * make sure that it's properly enabled/disabled for speaker
+	 * configurations with an LFE channel.
+	 */
+	if (outfx_set)
+		ca0132_effects_set(codec, X_BASS,
+			spec->effects_switch[X_BASS - EFFECT_START_NID]);
+
+	/* Set speaker EQ bypass attenuation to 0. */
+	err = dspio_set_uint_param(codec, 0x8f, 0x01, FLOAT_ZERO);
+	if (err < 0)
+		goto exit;
+
+	/*
+	 * Although unused on all cards but the AE series, this is always set
+	 * to zero when setting the output.
+	 */
+	err = dspio_set_uint_param(codec, 0x96,
+			SPEAKER_TUNING_USE_SPEAKER_EQ, FLOAT_ZERO);
+	if (err < 0)
+		goto exit;
+
+	if (spec->cur_out_type == SPEAKER_OUT)
+		err = ca0132_alt_surround_set_bass_redirection(codec,
+				spec->bass_redirection_val);
+	else
+		err = ca0132_alt_surround_set_bass_redirection(codec, 0);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* Unmute DSP now that we're done with output selection. */
 	err = dspio_set_uint_param(codec, 0x96,

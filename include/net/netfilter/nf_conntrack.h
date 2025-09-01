@@ -314,6 +314,7 @@ static inline bool nf_ct_is_expired(const struct nf_conn *ct)
 /* use after obtaining a reference count */
 static inline bool nf_ct_should_gc(const struct nf_conn *ct)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!nf_ct_is_confirmed(ct))
 		return false;
 
@@ -327,6 +328,11 @@ static inline bool nf_ct_should_gc(const struct nf_conn *ct)
 	smp_acquire__after_ctrl_dep();
 
 	return nf_ct_is_expired(ct) && !nf_ct_is_dying(ct);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	return nf_ct_is_expired(ct) && nf_ct_is_confirmed(ct) &&
+	       !nf_ct_is_dying(ct);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 #define	NF_CT_DAY	(86400 * HZ)

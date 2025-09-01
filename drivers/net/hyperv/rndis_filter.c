@@ -1252,6 +1252,7 @@ static void netvsc_sc_open(struct vmbus_channel *new_sc)
 	new_sc->rqstor_size = netvsc_rqstor_size(netvsc_ring_bytes);
 	new_sc->max_pkt_size = NETVSC_MAX_PKT_SIZE;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* Enable napi before opening the vmbus channel to avoid races
 	 * as the host placing data on the host->guest ring may be left
 	 * out if napi was not enabled.
@@ -1273,6 +1274,16 @@ static void netvsc_sc_open(struct vmbus_channel *new_sc)
 				     NULL);
 		napi_disable(&nvchan->napi);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	ret = vmbus_open(new_sc, netvsc_ring_bytes,
+			 netvsc_ring_bytes, NULL, 0,
+			 netvsc_channel_cb, nvchan);
+	if (ret == 0)
+		napi_enable(&nvchan->napi);
+	else
+		netdev_notice(ndev, "sub channel open failed: %d\n", ret);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (atomic_inc_return(&nvscdev->open_chn) == nvscdev->num_chn)
 		wake_up(&nvscdev->subchan_open);

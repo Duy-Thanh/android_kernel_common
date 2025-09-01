@@ -277,9 +277,14 @@ static void virt_wifi_connect_complete(struct work_struct *work)
 		priv->is_connected = true;
 
 	/* Schedules an event that acquires the rtnl lock. */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	cfg80211_connect_result(priv->upperdev,
 				priv->is_connected ? fake_router_bssid : NULL,
 				NULL, 0, NULL, 0,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	cfg80211_connect_result(priv->upperdev, requested_bss, NULL, 0, NULL, 0,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				status, GFP_KERNEL);
 	netif_carrier_on(priv->upperdev);
 }

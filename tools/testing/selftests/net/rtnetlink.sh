@@ -738,6 +738,7 @@ kci_test_ipsec_offload()
 	sysfsf=$sysfsd/ipsec
 	sysfsnet=/sys/bus/netdevsim/devices/netdevsim0/net/
 	probed=false
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	esp4_offload_probed_default=false
 
 	if lsmod | grep -q esp4_offload; then
@@ -837,6 +838,102 @@ EOF
 
 	# clean up any leftovers
 	! "$esp4_offload_probed_default" && lsmod | grep -q esp4_offload && rmmod esp4_offload
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	if ! mount | grep -q debugfs; then
+		mount -t debugfs none /sys/kernel/debug/ &> /dev/null
+	fi
+
+	# setup netdevsim since dummydev doesn't have offload support
+	if [ ! -w /sys/bus/netdevsim/new_device ] ; then
+		run_cmd modprobe -q netdevsim
+		if [ $ret -ne 0 ]; then
+			end_test "SKIP: ipsec_offload can't load netdevsim"
+			return $ksft_skip
+		fi
+		probed=true
+	fi
+
+	echo "0" > /sys/bus/netdevsim/new_device
+	while [ ! -d $sysfsnet ] ; do :; done
+	udevadm settle
+	dev=`ls $sysfsnet`
+
+	ip addr add $srcip dev $dev
+	ip link set $dev up
+	if [ ! -d $sysfsd ] ; then
+		end_test "FAIL: ipsec_offload can't create device $dev"
+		return 1
+	fi
+	if [ ! -f $sysfsf ] ; then
+		end_test "FAIL: ipsec_offload netdevsim doesn't support IPsec offload"
+		return 1
+	fi
+
+	# flush to be sure there's nothing configured
+	ip x s flush ; ip x p flush
+
+	# create offloaded SAs, both in and out
+	run_cmd ip x p add dir out src $srcip/24 dst $dstip/24 \
+	    tmpl proto esp src $srcip dst $dstip spi 9 \
+	    mode transport reqid 42
+
+	run_cmd ip x p add dir in src $dstip/24 dst $srcip/24 \
+	    tmpl proto esp src $dstip dst $srcip spi 9 \
+	    mode transport reqid 42
+
+	run_cmd ip x s add proto esp src $srcip dst $dstip spi 9 \
+	    mode transport reqid 42 $algo sel src $srcip/24 dst $dstip/24 \
+	    offload dev $dev dir out
+
+	run_cmd ip x s add proto esp src $dstip dst $srcip spi 9 \
+	    mode transport reqid 42 $algo sel src $dstip/24 dst $srcip/24 \
+	    offload dev $dev dir in
+
+	if [ $ret -ne 0 ]; then
+		end_test "FAIL: ipsec_offload can't create SA"
+		return 1
+	fi
+
+	# does offload show up in ip output
+	lines=`ip x s list | grep -c "crypto offload parameters: dev $dev dir"`
+	if [ $lines -ne 2 ] ; then
+		check_err 1
+		end_test "FAIL: ipsec_offload SA offload missing from list output"
+	fi
+
+	# we didn't create a peer, make sure we can Tx
+	ip neigh add $dstip dev $dev lladdr 00:11:22:33:44:55
+	# use ping to exercise the Tx path
+	ping -I $dev -c 3 -W 1 -i 0 $dstip >/dev/null
+
+	# does driver have correct offload info
+	run_cmd diff $sysfsf - << EOF
+SA count=2 tx=3
+sa[0] tx ipaddr=$dstip
+sa[0]    spi=0x00000009 proto=0x32 salt=0x61626364 crypt=1
+sa[0]    key=0x34333231 38373635 32313039 36353433
+sa[1] rx ipaddr=$srcip
+sa[1]    spi=0x00000009 proto=0x32 salt=0x61626364 crypt=1
+sa[1]    key=0x34333231 38373635 32313039 36353433
+EOF
+	if [ $? -ne 0 ] ; then
+		end_test "FAIL: ipsec_offload incorrect driver data"
+		check_err 1
+	fi
+
+	# does offload get removed from driver
+	ip x s flush
+	ip x p flush
+	lines=`grep -c "SA count=0" $sysfsf`
+	if [ $lines -ne 1 ] ; then
+		check_err 1
+		end_test "FAIL: ipsec_offload SA not removed from driver"
+	fi
+
+	# clean up any leftovers
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	echo 0 > /sys/bus/netdevsim/del_device
 	$probed && rmmod netdevsim
 

@@ -592,6 +592,7 @@ htb_change_class_mode(struct htb_sched *q, struct htb_class *cl, s64 *diff)
  */
 static inline void htb_activate(struct htb_sched *q, struct htb_class *cl)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	WARN_ON(cl->level || !cl->leaf.q);
 
 	if (!cl->prio_activity) {
@@ -824,6 +825,239 @@ static struct htb_class *htb_lookup_leaf(struct htb_prio *hprio, const int prio)
 	if (unlikely(!hprio->row.rb_node))
 		return NULL;
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	WARN_ON(cl->level || !cl->leaf.q || !cl->leaf.q->q.qlen);
+
+	if (!cl->prio_activity) {
+		cl->prio_activity = 1 << cl->prio;
+		htb_activate_prios(q, cl);
+	}
+}
+
+/**
+ * htb_deactivate - remove leaf cl from active feeds
+ * @q: the priority event queue
+ * @cl: the target class
+ *
+ * Make sure that leaf is active. In the other words it can't be called
+ * with non-active leaf. It also removes class from the drop list.
+ */
+static inline void htb_deactivate(struct htb_sched *q, struct htb_class *cl)
+{
+	if (!cl->prio_activity)
+		return;
+	htb_deactivate_prios(q, cl);
+	cl->prio_activity = 0;
+}
+
+static int htb_enqueue(struct sk_buff *skb, struct Qdisc *sch,
+		       struct sk_buff **to_free)
+{
+	int ret;
+	unsigned int len = qdisc_pkt_len(skb);
+	struct htb_sched *q = qdisc_priv(sch);
+	struct htb_class *cl = htb_classify(skb, sch, &ret);
+
+	if (cl == HTB_DIRECT) {
+		/* enqueue to helper queue */
+		if (q->direct_queue.qlen < q->direct_qlen) {
+			__qdisc_enqueue_tail(skb, &q->direct_queue);
+			q->direct_pkts++;
+		} else {
+			return qdisc_drop(skb, sch, to_free);
+		}
+#ifdef CONFIG_NET_CLS_ACT
+	} else if (!cl) {
+		if (ret & __NET_XMIT_BYPASS)
+			qdisc_qstats_drop(sch);
+		__qdisc_drop(skb, to_free);
+		return ret;
+#endif
+	} else if ((ret = qdisc_enqueue(skb, cl->leaf.q,
+					to_free)) != NET_XMIT_SUCCESS) {
+		if (net_xmit_drop_count(ret)) {
+			qdisc_qstats_drop(sch);
+			cl->drops++;
+		}
+		return ret;
+	} else {
+		htb_activate(q, cl);
+	}
+
+	sch->qstats.backlog += len;
+	sch->q.qlen++;
+	return NET_XMIT_SUCCESS;
+}
+
+static inline void htb_accnt_tokens(struct htb_class *cl, int bytes, s64 diff)
+{
+	s64 toks = diff + cl->tokens;
+
+	if (toks > cl->buffer)
+		toks = cl->buffer;
+	toks -= (s64) psched_l2t_ns(&cl->rate, bytes);
+	if (toks <= -cl->mbuffer)
+		toks = 1 - cl->mbuffer;
+
+	cl->tokens = toks;
+}
+
+static inline void htb_accnt_ctokens(struct htb_class *cl, int bytes, s64 diff)
+{
+	s64 toks = diff + cl->ctokens;
+
+	if (toks > cl->cbuffer)
+		toks = cl->cbuffer;
+	toks -= (s64) psched_l2t_ns(&cl->ceil, bytes);
+	if (toks <= -cl->mbuffer)
+		toks = 1 - cl->mbuffer;
+
+	cl->ctokens = toks;
+}
+
+/**
+ * htb_charge_class - charges amount "bytes" to leaf and ancestors
+ * @q: the priority event queue
+ * @cl: the class to start iterate
+ * @level: the minimum level to account
+ * @skb: the socket buffer
+ *
+ * Routine assumes that packet "bytes" long was dequeued from leaf cl
+ * borrowing from "level". It accounts bytes to ceil leaky bucket for
+ * leaf and all ancestors and to rate bucket for ancestors at levels
+ * "level" and higher. It also handles possible change of mode resulting
+ * from the update. Note that mode can also increase here (MAY_BORROW to
+ * CAN_SEND) because we can use more precise clock that event queue here.
+ * In such case we remove class from event queue first.
+ */
+static void htb_charge_class(struct htb_sched *q, struct htb_class *cl,
+			     int level, struct sk_buff *skb)
+{
+	int bytes = qdisc_pkt_len(skb);
+	enum htb_cmode old_mode;
+	s64 diff;
+
+	while (cl) {
+		diff = min_t(s64, q->now - cl->t_c, cl->mbuffer);
+		if (cl->level >= level) {
+			if (cl->level == level)
+				cl->xstats.lends++;
+			htb_accnt_tokens(cl, bytes, diff);
+		} else {
+			cl->xstats.borrows++;
+			cl->tokens += diff;	/* we moved t_c; update tokens */
+		}
+		htb_accnt_ctokens(cl, bytes, diff);
+		cl->t_c = q->now;
+
+		old_mode = cl->cmode;
+		diff = 0;
+		htb_change_class_mode(q, cl, &diff);
+		if (old_mode != cl->cmode) {
+			if (old_mode != HTB_CAN_SEND)
+				htb_safe_rb_erase(&cl->pq_node, &q->hlevel[cl->level].wait_pq);
+			if (cl->cmode != HTB_CAN_SEND)
+				htb_add_to_wait_tree(q, cl, diff);
+		}
+
+		/* update basic stats except for leaves which are already updated */
+		if (cl->level)
+			bstats_update(&cl->bstats, skb);
+
+		cl = cl->parent;
+	}
+}
+
+/**
+ * htb_do_events - make mode changes to classes at the level
+ * @q: the priority event queue
+ * @level: which wait_pq in 'q->hlevel'
+ * @start: start jiffies
+ *
+ * Scans event queue for pending events and applies them. Returns time of
+ * next pending event (0 for no event in pq, q->now for too many events).
+ * Note: Applied are events whose have cl->pq_key <= q->now.
+ */
+static s64 htb_do_events(struct htb_sched *q, const int level,
+			 unsigned long start)
+{
+	/* don't run for longer than 2 jiffies; 2 is used instead of
+	 * 1 to simplify things when jiffy is going to be incremented
+	 * too soon
+	 */
+	unsigned long stop_at = start + 2;
+	struct rb_root *wait_pq = &q->hlevel[level].wait_pq;
+
+	while (time_before(jiffies, stop_at)) {
+		struct htb_class *cl;
+		s64 diff;
+		struct rb_node *p = rb_first(wait_pq);
+
+		if (!p)
+			return 0;
+
+		cl = rb_entry(p, struct htb_class, pq_node);
+		if (cl->pq_key > q->now)
+			return cl->pq_key;
+
+		htb_safe_rb_erase(p, wait_pq);
+		diff = min_t(s64, q->now - cl->t_c, cl->mbuffer);
+		htb_change_class_mode(q, cl, &diff);
+		if (cl->cmode != HTB_CAN_SEND)
+			htb_add_to_wait_tree(q, cl, diff);
+	}
+
+	/* too much load - let's continue after a break for scheduling */
+	if (!(q->warned & HTB_WARN_TOOMANYEVENTS)) {
+		pr_warn("htb: too many events!\n");
+		q->warned |= HTB_WARN_TOOMANYEVENTS;
+	}
+
+	return q->now;
+}
+
+/* Returns class->node+prio from id-tree where classe's id is >= id. NULL
+ * is no such one exists.
+ */
+static struct rb_node *htb_id_find_next_upper(int prio, struct rb_node *n,
+					      u32 id)
+{
+	struct rb_node *r = NULL;
+	while (n) {
+		struct htb_class *cl =
+		    rb_entry(n, struct htb_class, node[prio]);
+
+		if (id > cl->common.classid) {
+			n = n->rb_right;
+		} else if (id < cl->common.classid) {
+			r = n;
+			n = n->rb_left;
+		} else {
+			return n;
+		}
+	}
+	return r;
+}
+
+/**
+ * htb_lookup_leaf - returns next leaf class in DRR order
+ * @hprio: the current one
+ * @prio: which prio in class
+ *
+ * Find leaf where current feed pointers points to.
+ */
+static struct htb_class *htb_lookup_leaf(struct htb_prio *hprio, const int prio)
+{
+	int i;
+	struct {
+		struct rb_node *root;
+		struct rb_node **pptr;
+		u32 *pid;
+	} stk[TC_HTB_MAXDEPTH], *sp = stk;
+
+	BUG_ON(!hprio->row.rb_node);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	sp->root = hprio->row.rb_node;
 	sp->pptr = &hprio->ptr;
 	sp->pid = &hprio->last_ptr_id;

@@ -29,6 +29,7 @@ int big_alloc1(void *ctx)
 	if (!page1)
 		return 1;
 	*page1 = 1;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	page2 = bpf_arena_alloc_pages(&arena, base + ARENA_SIZE - PAGE_SIZE * 2,
 				      1, NUMA_NO_NODE, 0);
 	if (!page2)
@@ -172,4 +173,44 @@ int big_alloc2(void *ctx)
 	return 0;
 }
 #endif
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	page2 = bpf_arena_alloc_pages(&arena, base + ARENA_SIZE - PAGE_SIZE,
+				      1, NUMA_NO_NODE, 0);
+	if (!page2)
+		return 2;
+	*page2 = 2;
+	no_page = bpf_arena_alloc_pages(&arena, base + ARENA_SIZE,
+					1, NUMA_NO_NODE, 0);
+	if (no_page)
+		return 3;
+	if (*page1 != 1)
+		return 4;
+	if (*page2 != 2)
+		return 5;
+	bpf_arena_free_pages(&arena, (void __arena *)page1, 1);
+	if (*page2 != 2)
+		return 6;
+	if (*page1 != 0) /* use-after-free should return 0 */
+		return 7;
+	page3 = bpf_arena_alloc_pages(&arena, NULL, 1, NUMA_NO_NODE, 0);
+	if (!page3)
+		return 8;
+	*page3 = 3;
+	if (page1 != page3)
+		return 9;
+	if (*page2 != 2)
+		return 10;
+	if (*(page1 + PAGE_SIZE) != 0)
+		return 11;
+	if (*(page1 - PAGE_SIZE) != 0)
+		return 12;
+	if (*(page2 + PAGE_SIZE) != 0)
+		return 13;
+	if (*(page2 - PAGE_SIZE) != 0)
+		return 14;
+#endif
+	return 0;
+}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 char _license[] SEC("license") = "GPL";

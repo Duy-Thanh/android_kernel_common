@@ -12,6 +12,7 @@
 /**
  * enum mptcp_event_type
  * @MPTCP_EVENT_UNSPEC: unused event
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @MPTCP_EVENT_CREATED: A new MPTCP connection has been created. It is the
  *   good time to allocate memory and send ADD_ADDR if needed. Depending on the
  *   traffic-patterns it can take a long time until the MPTCP_EVENT_ESTABLISHED
@@ -39,6 +40,34 @@
  *   family, sport, saddr4 | saddr6.
  * @MPTCP_EVENT_LISTENER_CLOSED: A PM listener is closed. Attributes: family,
  *   sport, saddr4 | saddr6.
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * @MPTCP_EVENT_CREATED: token, family, saddr4 | saddr6, daddr4 | daddr6,
+ *   sport, dport A new MPTCP connection has been created. It is the good time
+ *   to allocate memory and send ADD_ADDR if needed. Depending on the
+ *   traffic-patterns it can take a long time until the MPTCP_EVENT_ESTABLISHED
+ *   is sent.
+ * @MPTCP_EVENT_ESTABLISHED: token, family, saddr4 | saddr6, daddr4 | daddr6,
+ *   sport, dport A MPTCP connection is established (can start new subflows).
+ * @MPTCP_EVENT_CLOSED: token A MPTCP connection has stopped.
+ * @MPTCP_EVENT_ANNOUNCED: token, rem_id, family, daddr4 | daddr6 [, dport] A
+ *   new address has been announced by the peer.
+ * @MPTCP_EVENT_REMOVED: token, rem_id An address has been lost by the peer.
+ * @MPTCP_EVENT_SUB_ESTABLISHED: token, family, loc_id, rem_id, saddr4 |
+ *   saddr6, daddr4 | daddr6, sport, dport, backup, if_idx [, error] A new
+ *   subflow has been established. 'error' should not be set.
+ * @MPTCP_EVENT_SUB_CLOSED: token, family, loc_id, rem_id, saddr4 | saddr6,
+ *   daddr4 | daddr6, sport, dport, backup, if_idx [, error] A subflow has been
+ *   closed. An error (copy of sk_err) could be set if an error has been
+ *   detected for this subflow.
+ * @MPTCP_EVENT_SUB_PRIORITY: token, family, loc_id, rem_id, saddr4 | saddr6,
+ *   daddr4 | daddr6, sport, dport, backup, if_idx [, error] The priority of a
+ *   subflow has changed. 'error' should not be set.
+ * @MPTCP_EVENT_LISTENER_CREATED: family, sport, saddr4 | saddr6 A new PM
+ *   listener is created.
+ * @MPTCP_EVENT_LISTENER_CLOSED: family, sport, saddr4 | saddr6 A PM listener
+ *   is closed.
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
  */
 enum mptcp_event_type {
 	MPTCP_EVENT_UNSPEC,

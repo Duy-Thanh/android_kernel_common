@@ -164,6 +164,7 @@ static void bch_invalidate_one_bucket(struct cache *ca, struct bucket *b)
  * prio is worth 1/8th of what INITIAL_PRIO is worth.
  */
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define bucket_prio(b)							\
 ({									\
 	unsigned int min_prio = (INITIAL_PRIO - ca->set->min_prio) / 8;	\
@@ -206,6 +207,81 @@ static void invalidate_buckets_lru(struct cache *ca)
 			wake_up_gc(ca->set);
 			return;
 		}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static inline unsigned int new_bucket_prio(struct cache *ca, struct bucket *b)
+{
+	unsigned int min_prio = (INITIAL_PRIO - ca->set->min_prio) / 8;
+
+	return (b->prio - ca->set->min_prio + min_prio) * GC_SECTORS_USED(b);
+}
+
+static inline bool new_bucket_max_cmp(const void *l, const void *r, void *args)
+{
+	struct bucket **lhs = (struct bucket **)l;
+	struct bucket **rhs = (struct bucket **)r;
+	struct cache *ca = args;
+
+	return new_bucket_prio(ca, *lhs) > new_bucket_prio(ca, *rhs);
+}
+
+static inline bool new_bucket_min_cmp(const void *l, const void *r, void *args)
+{
+	struct bucket **lhs = (struct bucket **)l;
+	struct bucket **rhs = (struct bucket **)r;
+	struct cache *ca = args;
+
+	return new_bucket_prio(ca, *lhs) < new_bucket_prio(ca, *rhs);
+}
+
+static inline void new_bucket_swap(void *l, void *r, void __always_unused *args)
+{
+	struct bucket **lhs = l, **rhs = r;
+
+	swap(*lhs, *rhs);
+}
+
+static void invalidate_buckets_lru(struct cache *ca)
+{
+	struct bucket *b;
+	const struct min_heap_callbacks bucket_max_cmp_callback = {
+		.less = new_bucket_max_cmp,
+		.swp = new_bucket_swap,
+	};
+	const struct min_heap_callbacks bucket_min_cmp_callback = {
+		.less = new_bucket_min_cmp,
+		.swp = new_bucket_swap,
+	};
+
+	ca->heap.nr = 0;
+
+	for_each_bucket(b, ca) {
+		if (!bch_can_invalidate_bucket(ca, b))
+			continue;
+
+		if (!min_heap_full(&ca->heap))
+			min_heap_push(&ca->heap, &b, &bucket_max_cmp_callback, ca);
+		else if (!new_bucket_max_cmp(&b, min_heap_peek(&ca->heap), ca)) {
+			ca->heap.data[0] = b;
+			min_heap_sift_down(&ca->heap, 0, &bucket_max_cmp_callback, ca);
+		}
+	}
+
+	min_heapify_all(&ca->heap, &bucket_min_cmp_callback, ca);
+
+	while (!fifo_full(&ca->free_inc)) {
+		if (!ca->heap.nr) {
+			/*
+			 * We don't want to be calling invalidate_buckets()
+			 * multiple times when it can't do anything
+			 */
+			ca->invalidate_needs_gc = 1;
+			wake_up_gc(ca->set);
+			return;
+		}
+		b = min_heap_peek(&ca->heap)[0];
+		min_heap_pop(&ca->heap, &bucket_min_cmp_callback, ca);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 		bch_invalidate_one_bucket(ca, b);
 	}

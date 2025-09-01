@@ -114,6 +114,7 @@ struct pci_epf_driver {
  * @phys_addr: physical address that should be mapped to the BAR
  * @addr: virtual address corresponding to the @phys_addr
  * @size: the size of the address space present in BAR
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
  * @aligned_size: the size actually allocated to accommodate the iATU alignment
  *                requirement
  * @barno: BAR number
@@ -124,6 +125,16 @@ struct pci_epf_bar {
 	void		*addr;
 	size_t		size;
 	size_t		aligned_size;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+ * @barno: BAR number
+ * @flags: flags that are set for the BAR
+ */
+struct pci_epf_bar {
+	dma_addr_t	phys_addr;
+	void		*addr;
+	size_t		size;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	enum pci_barno	barno;
 	int		flags;
 };

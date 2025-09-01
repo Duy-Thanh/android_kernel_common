@@ -37,6 +37,7 @@
 
 #include <drm/drm_cache.h>
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 struct ttm_transfer_obj {
 	struct ttm_buffer_object base;
 	struct ttm_buffer_object *bo;
@@ -267,6 +268,242 @@ static int ttm_buffer_object_transfer(struct ttm_buffer_object *bo,
 		ttm_bo_set_bulk_move(&fbo->base, NULL);
 	} else {
 		fbo->base.bulk_move = NULL;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(dma_buf);
+ANDROID_KABI_DECLONLY(dma_buf_attachment);
+
+struct ttm_transfer_obj {
+	struct ttm_buffer_object base;
+	struct ttm_buffer_object *bo;
+};
+
+int ttm_mem_io_reserve(struct ttm_device *bdev,
+		       struct ttm_resource *mem)
+{
+	if (mem->bus.offset || mem->bus.addr)
+		return 0;
+
+	mem->bus.is_iomem = false;
+	if (!bdev->funcs->io_mem_reserve)
+		return 0;
+
+	return bdev->funcs->io_mem_reserve(bdev, mem);
+}
+
+void ttm_mem_io_free(struct ttm_device *bdev,
+		     struct ttm_resource *mem)
+{
+	if (!mem)
+		return;
+
+	if (!mem->bus.offset && !mem->bus.addr)
+		return;
+
+	if (bdev->funcs->io_mem_free)
+		bdev->funcs->io_mem_free(bdev, mem);
+
+	mem->bus.offset = 0;
+	mem->bus.addr = NULL;
+}
+
+/**
+ * ttm_move_memcpy - Helper to perform a memcpy ttm move operation.
+ * @clear: Whether to clear rather than copy.
+ * @num_pages: Number of pages of the operation.
+ * @dst_iter: A struct ttm_kmap_iter representing the destination resource.
+ * @src_iter: A struct ttm_kmap_iter representing the source resource.
+ *
+ * This function is intended to be able to move out async under a
+ * dma-fence if desired.
+ */
+void ttm_move_memcpy(bool clear,
+		     u32 num_pages,
+		     struct ttm_kmap_iter *dst_iter,
+		     struct ttm_kmap_iter *src_iter)
+{
+	const struct ttm_kmap_iter_ops *dst_ops = dst_iter->ops;
+	const struct ttm_kmap_iter_ops *src_ops = src_iter->ops;
+	struct iosys_map src_map, dst_map;
+	pgoff_t i;
+
+	/* Single TTM move. NOP */
+	if (dst_ops->maps_tt && src_ops->maps_tt)
+		return;
+
+	/* Don't move nonexistent data. Clear destination instead. */
+	if (clear) {
+		for (i = 0; i < num_pages; ++i) {
+			dst_ops->map_local(dst_iter, &dst_map, i);
+			if (dst_map.is_iomem)
+				memset_io(dst_map.vaddr_iomem, 0, PAGE_SIZE);
+			else
+				memset(dst_map.vaddr, 0, PAGE_SIZE);
+			if (dst_ops->unmap_local)
+				dst_ops->unmap_local(dst_iter, &dst_map);
+		}
+		return;
+	}
+
+	for (i = 0; i < num_pages; ++i) {
+		dst_ops->map_local(dst_iter, &dst_map, i);
+		src_ops->map_local(src_iter, &src_map, i);
+
+		drm_memcpy_from_wc(&dst_map, &src_map, PAGE_SIZE);
+
+		if (src_ops->unmap_local)
+			src_ops->unmap_local(src_iter, &src_map);
+		if (dst_ops->unmap_local)
+			dst_ops->unmap_local(dst_iter, &dst_map);
+	}
+}
+EXPORT_SYMBOL(ttm_move_memcpy);
+
+/**
+ * ttm_bo_move_memcpy
+ *
+ * @bo: A pointer to a struct ttm_buffer_object.
+ * @ctx: operation context
+ * @dst_mem: struct ttm_resource indicating where to move.
+ *
+ * Fallback move function for a mappable buffer object in mappable memory.
+ * The function will, if successful,
+ * free any old aperture space, and set (@new_mem)->mm_node to NULL,
+ * and update the (@bo)->mem placement flags. If unsuccessful, the old
+ * data remains untouched, and it's up to the caller to free the
+ * memory space indicated by @new_mem.
+ * Returns:
+ * !0: Failure.
+ */
+int ttm_bo_move_memcpy(struct ttm_buffer_object *bo,
+		       struct ttm_operation_ctx *ctx,
+		       struct ttm_resource *dst_mem)
+{
+	struct ttm_device *bdev = bo->bdev;
+	struct ttm_resource_manager *dst_man =
+		ttm_manager_type(bo->bdev, dst_mem->mem_type);
+	struct ttm_tt *ttm = bo->ttm;
+	struct ttm_resource *src_mem = bo->resource;
+	struct ttm_resource_manager *src_man;
+	union {
+		struct ttm_kmap_iter_tt tt;
+		struct ttm_kmap_iter_linear_io io;
+	} _dst_iter, _src_iter;
+	struct ttm_kmap_iter *dst_iter, *src_iter;
+	bool clear;
+	int ret = 0;
+
+	if (WARN_ON(!src_mem))
+		return -EINVAL;
+
+	src_man = ttm_manager_type(bdev, src_mem->mem_type);
+	if (ttm && ((ttm->page_flags & TTM_TT_FLAG_SWAPPED) ||
+		    dst_man->use_tt)) {
+		ret = ttm_tt_populate(bdev, ttm, ctx);
+		if (ret)
+			return ret;
+	}
+
+	dst_iter = ttm_kmap_iter_linear_io_init(&_dst_iter.io, bdev, dst_mem);
+	if (PTR_ERR(dst_iter) == -EINVAL && dst_man->use_tt)
+		dst_iter = ttm_kmap_iter_tt_init(&_dst_iter.tt, bo->ttm);
+	if (IS_ERR(dst_iter))
+		return PTR_ERR(dst_iter);
+
+	src_iter = ttm_kmap_iter_linear_io_init(&_src_iter.io, bdev, src_mem);
+	if (PTR_ERR(src_iter) == -EINVAL && src_man->use_tt)
+		src_iter = ttm_kmap_iter_tt_init(&_src_iter.tt, bo->ttm);
+	if (IS_ERR(src_iter)) {
+		ret = PTR_ERR(src_iter);
+		goto out_src_iter;
+	}
+
+	clear = src_iter->ops->maps_tt && (!ttm || !ttm_tt_is_populated(ttm));
+	if (!(clear && ttm && !(ttm->page_flags & TTM_TT_FLAG_ZERO_ALLOC)))
+		ttm_move_memcpy(clear, PFN_UP(dst_mem->size), dst_iter, src_iter);
+
+	if (!src_iter->ops->maps_tt)
+		ttm_kmap_iter_linear_io_fini(&_src_iter.io, bdev, src_mem);
+	ttm_bo_move_sync_cleanup(bo, dst_mem);
+
+out_src_iter:
+	if (!dst_iter->ops->maps_tt)
+		ttm_kmap_iter_linear_io_fini(&_dst_iter.io, bdev, dst_mem);
+
+	return ret;
+}
+EXPORT_SYMBOL(ttm_bo_move_memcpy);
+
+static void ttm_transfered_destroy(struct ttm_buffer_object *bo)
+{
+	struct ttm_transfer_obj *fbo;
+
+	fbo = container_of(bo, struct ttm_transfer_obj, base);
+	dma_resv_fini(&fbo->base.base._resv);
+	ttm_bo_put(fbo->bo);
+	kfree(fbo);
+}
+
+/**
+ * ttm_buffer_object_transfer
+ *
+ * @bo: A pointer to a struct ttm_buffer_object.
+ * @new_obj: A pointer to a pointer to a newly created ttm_buffer_object,
+ * holding the data of @bo with the old placement.
+ *
+ * This is a utility function that may be called after an accelerated move
+ * has been scheduled. A new buffer object is created as a placeholder for
+ * the old data while it's being copied. When that buffer object is idle,
+ * it can be destroyed, releasing the space of the old placement.
+ * Returns:
+ * !0: Failure.
+ */
+
+static int ttm_buffer_object_transfer(struct ttm_buffer_object *bo,
+				      struct ttm_buffer_object **new_obj)
+{
+	struct ttm_transfer_obj *fbo;
+	int ret;
+
+	fbo = kmalloc(sizeof(*fbo), GFP_KERNEL);
+	if (!fbo)
+		return -ENOMEM;
+
+	fbo->base = *bo;
+
+	/**
+	 * Fix up members that we shouldn't copy directly:
+	 * TODO: Explicit member copy would probably be better here.
+	 */
+
+	atomic_inc(&ttm_glob.bo_count);
+	drm_vma_node_reset(&fbo->base.base.vma_node);
+
+	kref_init(&fbo->base.kref);
+	fbo->base.destroy = &ttm_transfered_destroy;
+	fbo->base.pin_count = 0;
+	if (bo->type != ttm_bo_type_sg)
+		fbo->base.base.resv = &fbo->base.base._resv;
+
+	dma_resv_init(&fbo->base.base._resv);
+	fbo->base.base.dev = NULL;
+	ret = dma_resv_trylock(&fbo->base.base._resv);
+	WARN_ON(!ret);
+
+	if (fbo->base.resource) {
+		ttm_resource_set_bo(fbo->base.resource, &fbo->base);
+		bo->resource = NULL;
+		ttm_bo_set_bulk_move(&fbo->base, NULL);
+	} else {
+		fbo->base.bulk_move = NULL;
+	}
+
+	ret = dma_resv_reserve_fences(&fbo->base.base._resv, 1);
+	if (ret) {
+		kfree(fbo);
+		return ret;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	}
 
 	ttm_bo_get(bo);

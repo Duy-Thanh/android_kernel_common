@@ -114,6 +114,7 @@ DEFINE_EVENT(dma_unmap, dma_unmap_resource,
 		 enum dma_data_direction dir, unsigned long attrs),
 	TP_ARGS(dev, addr, size, dir, attrs));
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 DECLARE_EVENT_CLASS(dma_alloc_class,
 	TP_PROTO(struct device *dev, void *virt_addr, dma_addr_t dma_addr,
 		 size_t size, enum dma_data_direction dir, gfp_t flags,
@@ -355,6 +356,113 @@ TRACE_EVENT(dma_map_sg_err,
 			      __get_dynamic_array_len(phys_addrs) /
 				sizeof(u64), sizeof(u64)),
 		__entry->err,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+TRACE_EVENT(dma_alloc,
+	TP_PROTO(struct device *dev, void *virt_addr, dma_addr_t dma_addr,
+		 size_t size, gfp_t flags, unsigned long attrs),
+	TP_ARGS(dev, virt_addr, dma_addr, size, flags, attrs),
+
+	TP_STRUCT__entry(
+		__string(device, dev_name(dev))
+		__field(void *, virt_addr)
+		__field(u64, dma_addr)
+		__field(size_t, size)
+		__field(gfp_t, flags)
+		__field(unsigned long, attrs)
+	),
+
+	TP_fast_assign(
+		__assign_str(device);
+		__entry->virt_addr = virt_addr;
+		__entry->dma_addr = dma_addr;
+		__entry->size = size;
+		__entry->flags = flags;
+		__entry->attrs = attrs;
+	),
+
+	TP_printk("%s dma_addr=%llx size=%zu virt_addr=%p flags=%s attrs=%s",
+		__get_str(device),
+		__entry->dma_addr,
+		__entry->size,
+		__entry->virt_addr,
+		show_gfp_flags(__entry->flags),
+		decode_dma_attrs(__entry->attrs))
+);
+
+TRACE_EVENT(dma_free,
+	TP_PROTO(struct device *dev, void *virt_addr, dma_addr_t dma_addr,
+		 size_t size, unsigned long attrs),
+	TP_ARGS(dev, virt_addr, dma_addr, size, attrs),
+
+	TP_STRUCT__entry(
+		__string(device, dev_name(dev))
+		__field(void *, virt_addr)
+		__field(u64, dma_addr)
+		__field(size_t, size)
+		__field(unsigned long, attrs)
+	),
+
+	TP_fast_assign(
+		__assign_str(device);
+		__entry->virt_addr = virt_addr;
+		__entry->dma_addr = dma_addr;
+		__entry->size = size;
+		__entry->attrs = attrs;
+	),
+
+	TP_printk("%s dma_addr=%llx size=%zu virt_addr=%p attrs=%s",
+		__get_str(device),
+		__entry->dma_addr,
+		__entry->size,
+		__entry->virt_addr,
+		decode_dma_attrs(__entry->attrs))
+);
+
+TRACE_EVENT(dma_map_sg,
+	TP_PROTO(struct device *dev, struct scatterlist *sgl, int nents,
+		 int ents, enum dma_data_direction dir, unsigned long attrs),
+	TP_ARGS(dev, sgl, nents, ents, dir, attrs),
+
+	TP_STRUCT__entry(
+		__string(device, dev_name(dev))
+		__dynamic_array(u64, phys_addrs, nents)
+		__dynamic_array(u64, dma_addrs, ents)
+		__dynamic_array(unsigned int, lengths, ents)
+		__field(enum dma_data_direction, dir)
+		__field(unsigned long, attrs)
+	),
+
+	TP_fast_assign(
+		struct scatterlist *sg;
+		int i;
+
+		__assign_str(device);
+		for_each_sg(sgl, sg, nents, i)
+			((u64 *)__get_dynamic_array(phys_addrs))[i] = sg_phys(sg);
+		for_each_sg(sgl, sg, ents, i) {
+			((u64 *)__get_dynamic_array(dma_addrs))[i] =
+				sg_dma_address(sg);
+			((unsigned int *)__get_dynamic_array(lengths))[i] =
+				sg_dma_len(sg);
+		}
+		__entry->dir = dir;
+		__entry->attrs = attrs;
+	),
+
+	TP_printk("%s dir=%s dma_addrs=%s sizes=%s phys_addrs=%s attrs=%s",
+		__get_str(device),
+		decode_dma_data_direction(__entry->dir),
+		__print_array(__get_dynamic_array(dma_addrs),
+			      __get_dynamic_array_len(dma_addrs) /
+				sizeof(u64), sizeof(u64)),
+		__print_array(__get_dynamic_array(lengths),
+			      __get_dynamic_array_len(lengths) /
+				sizeof(unsigned int), sizeof(unsigned int)),
+		__print_array(__get_dynamic_array(phys_addrs),
+			      __get_dynamic_array_len(phys_addrs) /
+				sizeof(u64), sizeof(u64)),
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		decode_dma_attrs(__entry->attrs))
 );
 

@@ -739,6 +739,7 @@ static void stm32f7_i2c_disable_dma_req(struct stm32f7_i2c_dev *i2c_dev)
 
 static void stm32f7_i2c_dma_callback(void *arg)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct stm32f7_i2c_dev *i2c_dev = arg;
 	struct stm32_i2c_dma *dma = i2c_dev->dma;
 
@@ -1636,6 +1637,912 @@ static irqreturn_t stm32f7_i2c_isr_event_thread(int irq, void *data)
 			if (!ret) {
 				dev_dbg(i2c_dev->dev, "<%s>: Timed out\n", __func__);
 				stm32f7_i2c_dma_callback(i2c_dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct stm32f7_i2c_dev *i2c_dev = (struct stm32f7_i2c_dev *)arg;
+	struct stm32_i2c_dma *dma = i2c_dev->dma;
+	struct device *dev = dma->chan_using->device->dev;
+
+	stm32f7_i2c_disable_dma_req(i2c_dev);
+	dma_unmap_single(dev, dma->dma_buf, dma->dma_len, dma->dma_data_dir);
+	complete(&dma->dma_complete);
+}
+
+static void stm32f7_i2c_hw_config(struct stm32f7_i2c_dev *i2c_dev)
+{
+	struct stm32f7_i2c_timings *t = &i2c_dev->timing;
+	u32 timing = 0;
+
+	/* Timing settings */
+	timing |= STM32F7_I2C_TIMINGR_PRESC(t->presc);
+	timing |= STM32F7_I2C_TIMINGR_SCLDEL(t->scldel);
+	timing |= STM32F7_I2C_TIMINGR_SDADEL(t->sdadel);
+	timing |= STM32F7_I2C_TIMINGR_SCLH(t->sclh);
+	timing |= STM32F7_I2C_TIMINGR_SCLL(t->scll);
+	writel_relaxed(timing, i2c_dev->base + STM32F7_I2C_TIMINGR);
+
+	/* Configure the Analog Filter */
+	if (i2c_dev->analog_filter)
+		stm32f7_i2c_clr_bits(i2c_dev->base + STM32F7_I2C_CR1,
+				     STM32F7_I2C_CR1_ANFOFF);
+	else
+		stm32f7_i2c_set_bits(i2c_dev->base + STM32F7_I2C_CR1,
+				     STM32F7_I2C_CR1_ANFOFF);
+
+	/* Program the Digital Filter */
+	stm32f7_i2c_clr_bits(i2c_dev->base + STM32F7_I2C_CR1,
+			     STM32F7_I2C_CR1_DNF_MASK);
+	stm32f7_i2c_set_bits(i2c_dev->base + STM32F7_I2C_CR1,
+			     STM32F7_I2C_CR1_DNF(i2c_dev->dnf));
+
+	stm32f7_i2c_set_bits(i2c_dev->base + STM32F7_I2C_CR1,
+			     STM32F7_I2C_CR1_PE);
+}
+
+static void stm32f7_i2c_write_tx_data(struct stm32f7_i2c_dev *i2c_dev)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	void __iomem *base = i2c_dev->base;
+
+	if (f7_msg->count) {
+		writeb_relaxed(*f7_msg->buf++, base + STM32F7_I2C_TXDR);
+		f7_msg->count--;
+	}
+}
+
+static void stm32f7_i2c_read_rx_data(struct stm32f7_i2c_dev *i2c_dev)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	void __iomem *base = i2c_dev->base;
+
+	if (f7_msg->count) {
+		*f7_msg->buf++ = readb_relaxed(base + STM32F7_I2C_RXDR);
+		f7_msg->count--;
+	} else {
+		/* Flush RX buffer has no data is expected */
+		readb_relaxed(base + STM32F7_I2C_RXDR);
+	}
+}
+
+static void stm32f7_i2c_reload(struct stm32f7_i2c_dev *i2c_dev)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	u32 cr2;
+
+	if (i2c_dev->use_dma)
+		f7_msg->count -= STM32F7_I2C_MAX_LEN;
+
+	cr2 = readl_relaxed(i2c_dev->base + STM32F7_I2C_CR2);
+
+	cr2 &= ~STM32F7_I2C_CR2_NBYTES_MASK;
+	if (f7_msg->count > STM32F7_I2C_MAX_LEN) {
+		cr2 |= STM32F7_I2C_CR2_NBYTES(STM32F7_I2C_MAX_LEN);
+	} else {
+		cr2 &= ~STM32F7_I2C_CR2_RELOAD;
+		cr2 |= STM32F7_I2C_CR2_NBYTES(f7_msg->count);
+	}
+
+	writel_relaxed(cr2, i2c_dev->base + STM32F7_I2C_CR2);
+}
+
+static void stm32f7_i2c_smbus_reload(struct stm32f7_i2c_dev *i2c_dev)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	u32 cr2;
+	u8 *val;
+
+	/*
+	 * For I2C_SMBUS_BLOCK_DATA && I2C_SMBUS_BLOCK_PROC_CALL, the first
+	 * data received inform us how many data will follow.
+	 */
+	stm32f7_i2c_read_rx_data(i2c_dev);
+
+	/*
+	 * Update NBYTES with the value read to continue the transfer
+	 */
+	val = f7_msg->buf - sizeof(u8);
+	f7_msg->count = *val;
+	cr2 = readl_relaxed(i2c_dev->base + STM32F7_I2C_CR2);
+	cr2 &= ~(STM32F7_I2C_CR2_NBYTES_MASK | STM32F7_I2C_CR2_RELOAD);
+	cr2 |= STM32F7_I2C_CR2_NBYTES(f7_msg->count);
+	writel_relaxed(cr2, i2c_dev->base + STM32F7_I2C_CR2);
+}
+
+static void stm32f7_i2c_release_bus(struct i2c_adapter *i2c_adap)
+{
+	struct stm32f7_i2c_dev *i2c_dev = i2c_get_adapdata(i2c_adap);
+
+	stm32f7_i2c_clr_bits(i2c_dev->base + STM32F7_I2C_CR1,
+			     STM32F7_I2C_CR1_PE);
+
+	stm32f7_i2c_hw_config(i2c_dev);
+}
+
+static int stm32f7_i2c_wait_free_bus(struct stm32f7_i2c_dev *i2c_dev)
+{
+	u32 status;
+	int ret;
+
+	ret = readl_relaxed_poll_timeout(i2c_dev->base + STM32F7_I2C_ISR,
+					 status,
+					 !(status & STM32F7_I2C_ISR_BUSY),
+					 10, 1000);
+	if (!ret)
+		return 0;
+
+	stm32f7_i2c_release_bus(&i2c_dev->adap);
+
+	return -EBUSY;
+}
+
+static void stm32f7_i2c_xfer_msg(struct stm32f7_i2c_dev *i2c_dev,
+				 struct i2c_msg *msg)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	void __iomem *base = i2c_dev->base;
+	u32 cr1, cr2;
+	int ret;
+
+	f7_msg->addr = msg->addr;
+	f7_msg->buf = msg->buf;
+	f7_msg->count = msg->len;
+	f7_msg->result = 0;
+	f7_msg->stop = (i2c_dev->msg_id >= i2c_dev->msg_num - 1);
+
+	reinit_completion(&i2c_dev->complete);
+
+	cr1 = readl_relaxed(base + STM32F7_I2C_CR1);
+	cr2 = readl_relaxed(base + STM32F7_I2C_CR2);
+
+	/* Set transfer direction */
+	cr2 &= ~STM32F7_I2C_CR2_RD_WRN;
+	if (msg->flags & I2C_M_RD)
+		cr2 |= STM32F7_I2C_CR2_RD_WRN;
+
+	/* Set slave address */
+	cr2 &= ~(STM32F7_I2C_CR2_HEAD10R | STM32F7_I2C_CR2_ADD10);
+	if (msg->flags & I2C_M_TEN) {
+		cr2 &= ~STM32F7_I2C_CR2_SADD10_MASK;
+		cr2 |= STM32F7_I2C_CR2_SADD10(f7_msg->addr);
+		cr2 |= STM32F7_I2C_CR2_ADD10;
+	} else {
+		cr2 &= ~STM32F7_I2C_CR2_SADD7_MASK;
+		cr2 |= STM32F7_I2C_CR2_SADD7(f7_msg->addr);
+	}
+
+	/* Set nb bytes to transfer and reload if needed */
+	cr2 &= ~(STM32F7_I2C_CR2_NBYTES_MASK | STM32F7_I2C_CR2_RELOAD);
+	if (f7_msg->count > STM32F7_I2C_MAX_LEN) {
+		cr2 |= STM32F7_I2C_CR2_NBYTES(STM32F7_I2C_MAX_LEN);
+		cr2 |= STM32F7_I2C_CR2_RELOAD;
+	} else {
+		cr2 |= STM32F7_I2C_CR2_NBYTES(f7_msg->count);
+	}
+
+	/* Enable NACK, STOP, error and transfer complete interrupts */
+	cr1 |= STM32F7_I2C_CR1_ERRIE | STM32F7_I2C_CR1_TCIE |
+		STM32F7_I2C_CR1_STOPIE | STM32F7_I2C_CR1_NACKIE;
+
+	/* Clear DMA req and TX/RX interrupt */
+	cr1 &= ~(STM32F7_I2C_CR1_RXIE | STM32F7_I2C_CR1_TXIE |
+			STM32F7_I2C_CR1_RXDMAEN | STM32F7_I2C_CR1_TXDMAEN);
+
+	/* Configure DMA or enable RX/TX interrupt */
+	i2c_dev->use_dma = false;
+	if (i2c_dev->dma && f7_msg->count >= STM32F7_I2C_DMA_LEN_MIN
+	    && !i2c_dev->atomic) {
+		ret = stm32_i2c_prep_dma_xfer(i2c_dev->dev, i2c_dev->dma,
+					      msg->flags & I2C_M_RD,
+					      f7_msg->count, f7_msg->buf,
+					      stm32f7_i2c_dma_callback,
+					      i2c_dev);
+		if (!ret)
+			i2c_dev->use_dma = true;
+		else
+			dev_warn(i2c_dev->dev, "can't use DMA\n");
+	}
+
+	if (!i2c_dev->use_dma) {
+		if (msg->flags & I2C_M_RD)
+			cr1 |= STM32F7_I2C_CR1_RXIE;
+		else
+			cr1 |= STM32F7_I2C_CR1_TXIE;
+	} else {
+		if (msg->flags & I2C_M_RD)
+			cr1 |= STM32F7_I2C_CR1_RXDMAEN;
+		else
+			cr1 |= STM32F7_I2C_CR1_TXDMAEN;
+	}
+
+	if (i2c_dev->atomic)
+		cr1 &= ~STM32F7_I2C_ALL_IRQ_MASK; /* Disable all interrupts */
+
+	/* Configure Start/Repeated Start */
+	cr2 |= STM32F7_I2C_CR2_START;
+
+	i2c_dev->master_mode = true;
+
+	/* Write configurations registers */
+	writel_relaxed(cr1, base + STM32F7_I2C_CR1);
+	writel_relaxed(cr2, base + STM32F7_I2C_CR2);
+}
+
+static int stm32f7_i2c_smbus_xfer_msg(struct stm32f7_i2c_dev *i2c_dev,
+				      unsigned short flags, u8 command,
+				      union i2c_smbus_data *data)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	struct device *dev = i2c_dev->dev;
+	void __iomem *base = i2c_dev->base;
+	u32 cr1, cr2;
+	int i, ret;
+
+	f7_msg->result = 0;
+	reinit_completion(&i2c_dev->complete);
+
+	cr2 = readl_relaxed(base + STM32F7_I2C_CR2);
+	cr1 = readl_relaxed(base + STM32F7_I2C_CR1);
+
+	/* Set transfer direction */
+	cr2 &= ~STM32F7_I2C_CR2_RD_WRN;
+	if (f7_msg->read_write)
+		cr2 |= STM32F7_I2C_CR2_RD_WRN;
+
+	/* Set slave address */
+	cr2 &= ~(STM32F7_I2C_CR2_ADD10 | STM32F7_I2C_CR2_SADD7_MASK);
+	cr2 |= STM32F7_I2C_CR2_SADD7(f7_msg->addr);
+
+	f7_msg->smbus_buf[0] = command;
+	switch (f7_msg->size) {
+	case I2C_SMBUS_QUICK:
+		f7_msg->stop = true;
+		f7_msg->count = 0;
+		break;
+	case I2C_SMBUS_BYTE:
+		f7_msg->stop = true;
+		f7_msg->count = 1;
+		break;
+	case I2C_SMBUS_BYTE_DATA:
+		if (f7_msg->read_write) {
+			f7_msg->stop = false;
+			f7_msg->count = 1;
+			cr2 &= ~STM32F7_I2C_CR2_RD_WRN;
+		} else {
+			f7_msg->stop = true;
+			f7_msg->count = 2;
+			f7_msg->smbus_buf[1] = data->byte;
+		}
+		break;
+	case I2C_SMBUS_WORD_DATA:
+		if (f7_msg->read_write) {
+			f7_msg->stop = false;
+			f7_msg->count = 1;
+			cr2 &= ~STM32F7_I2C_CR2_RD_WRN;
+		} else {
+			f7_msg->stop = true;
+			f7_msg->count = 3;
+			f7_msg->smbus_buf[1] = data->word & 0xff;
+			f7_msg->smbus_buf[2] = data->word >> 8;
+		}
+		break;
+	case I2C_SMBUS_BLOCK_DATA:
+		if (f7_msg->read_write) {
+			f7_msg->stop = false;
+			f7_msg->count = 1;
+			cr2 &= ~STM32F7_I2C_CR2_RD_WRN;
+		} else {
+			f7_msg->stop = true;
+			if (data->block[0] > I2C_SMBUS_BLOCK_MAX ||
+			    !data->block[0]) {
+				dev_err(dev, "Invalid block write size %d\n",
+					data->block[0]);
+				return -EINVAL;
+			}
+			f7_msg->count = data->block[0] + 2;
+			for (i = 1; i < f7_msg->count; i++)
+				f7_msg->smbus_buf[i] = data->block[i - 1];
+		}
+		break;
+	case I2C_SMBUS_PROC_CALL:
+		f7_msg->stop = false;
+		f7_msg->count = 3;
+		f7_msg->smbus_buf[1] = data->word & 0xff;
+		f7_msg->smbus_buf[2] = data->word >> 8;
+		cr2 &= ~STM32F7_I2C_CR2_RD_WRN;
+		f7_msg->read_write = I2C_SMBUS_READ;
+		break;
+	case I2C_SMBUS_BLOCK_PROC_CALL:
+		f7_msg->stop = false;
+		if (data->block[0] > I2C_SMBUS_BLOCK_MAX - 1) {
+			dev_err(dev, "Invalid block write size %d\n",
+				data->block[0]);
+			return -EINVAL;
+		}
+		f7_msg->count = data->block[0] + 2;
+		for (i = 1; i < f7_msg->count; i++)
+			f7_msg->smbus_buf[i] = data->block[i - 1];
+		cr2 &= ~STM32F7_I2C_CR2_RD_WRN;
+		f7_msg->read_write = I2C_SMBUS_READ;
+		break;
+	case I2C_SMBUS_I2C_BLOCK_DATA:
+		/* Rely on emulated i2c transfer (through master_xfer) */
+		return -EOPNOTSUPP;
+	default:
+		dev_err(dev, "Unsupported smbus protocol %d\n", f7_msg->size);
+		return -EOPNOTSUPP;
+	}
+
+	f7_msg->buf = f7_msg->smbus_buf;
+
+	/* Configure PEC */
+	if ((flags & I2C_CLIENT_PEC) && f7_msg->size != I2C_SMBUS_QUICK) {
+		cr1 |= STM32F7_I2C_CR1_PECEN;
+		if (!f7_msg->read_write) {
+			cr2 |= STM32F7_I2C_CR2_PECBYTE;
+			f7_msg->count++;
+		}
+	} else {
+		cr1 &= ~STM32F7_I2C_CR1_PECEN;
+		cr2 &= ~STM32F7_I2C_CR2_PECBYTE;
+	}
+
+	/* Set number of bytes to be transferred */
+	cr2 &= ~(STM32F7_I2C_CR2_NBYTES_MASK | STM32F7_I2C_CR2_RELOAD);
+	cr2 |= STM32F7_I2C_CR2_NBYTES(f7_msg->count);
+
+	/* Enable NACK, STOP, error and transfer complete interrupts */
+	cr1 |= STM32F7_I2C_CR1_ERRIE | STM32F7_I2C_CR1_TCIE |
+		STM32F7_I2C_CR1_STOPIE | STM32F7_I2C_CR1_NACKIE;
+
+	/* Clear DMA req and TX/RX interrupt */
+	cr1 &= ~(STM32F7_I2C_CR1_RXIE | STM32F7_I2C_CR1_TXIE |
+			STM32F7_I2C_CR1_RXDMAEN | STM32F7_I2C_CR1_TXDMAEN);
+
+	/* Configure DMA or enable RX/TX interrupt */
+	i2c_dev->use_dma = false;
+	if (i2c_dev->dma && f7_msg->count >= STM32F7_I2C_DMA_LEN_MIN) {
+		ret = stm32_i2c_prep_dma_xfer(i2c_dev->dev, i2c_dev->dma,
+					      cr2 & STM32F7_I2C_CR2_RD_WRN,
+					      f7_msg->count, f7_msg->buf,
+					      stm32f7_i2c_dma_callback,
+					      i2c_dev);
+		if (!ret)
+			i2c_dev->use_dma = true;
+		else
+			dev_warn(i2c_dev->dev, "can't use DMA\n");
+	}
+
+	if (!i2c_dev->use_dma) {
+		if (cr2 & STM32F7_I2C_CR2_RD_WRN)
+			cr1 |= STM32F7_I2C_CR1_RXIE;
+		else
+			cr1 |= STM32F7_I2C_CR1_TXIE;
+	} else {
+		if (cr2 & STM32F7_I2C_CR2_RD_WRN)
+			cr1 |= STM32F7_I2C_CR1_RXDMAEN;
+		else
+			cr1 |= STM32F7_I2C_CR1_TXDMAEN;
+	}
+
+	/* Set Start bit */
+	cr2 |= STM32F7_I2C_CR2_START;
+
+	i2c_dev->master_mode = true;
+
+	/* Write configurations registers */
+	writel_relaxed(cr1, base + STM32F7_I2C_CR1);
+	writel_relaxed(cr2, base + STM32F7_I2C_CR2);
+
+	return 0;
+}
+
+static void stm32f7_i2c_smbus_rep_start(struct stm32f7_i2c_dev *i2c_dev)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	void __iomem *base = i2c_dev->base;
+	u32 cr1, cr2;
+	int ret;
+
+	cr2 = readl_relaxed(base + STM32F7_I2C_CR2);
+	cr1 = readl_relaxed(base + STM32F7_I2C_CR1);
+
+	/* Set transfer direction */
+	cr2 |= STM32F7_I2C_CR2_RD_WRN;
+
+	switch (f7_msg->size) {
+	case I2C_SMBUS_BYTE_DATA:
+		f7_msg->count = 1;
+		break;
+	case I2C_SMBUS_WORD_DATA:
+	case I2C_SMBUS_PROC_CALL:
+		f7_msg->count = 2;
+		break;
+	case I2C_SMBUS_BLOCK_DATA:
+	case I2C_SMBUS_BLOCK_PROC_CALL:
+		f7_msg->count = 1;
+		cr2 |= STM32F7_I2C_CR2_RELOAD;
+		break;
+	}
+
+	f7_msg->buf = f7_msg->smbus_buf;
+	f7_msg->stop = true;
+
+	/* Add one byte for PEC if needed */
+	if (cr1 & STM32F7_I2C_CR1_PECEN) {
+		cr2 |= STM32F7_I2C_CR2_PECBYTE;
+		f7_msg->count++;
+	}
+
+	/* Set number of bytes to be transferred */
+	cr2 &= ~(STM32F7_I2C_CR2_NBYTES_MASK);
+	cr2 |= STM32F7_I2C_CR2_NBYTES(f7_msg->count);
+
+	/*
+	 * Configure RX/TX interrupt:
+	 */
+	cr1 &= ~(STM32F7_I2C_CR1_RXIE | STM32F7_I2C_CR1_TXIE);
+	cr1 |= STM32F7_I2C_CR1_RXIE;
+
+	/*
+	 * Configure DMA or enable RX/TX interrupt:
+	 * For I2C_SMBUS_BLOCK_DATA and I2C_SMBUS_BLOCK_PROC_CALL we don't use
+	 * dma as we don't know in advance how many data will be received
+	 */
+	cr1 &= ~(STM32F7_I2C_CR1_RXIE | STM32F7_I2C_CR1_TXIE |
+		 STM32F7_I2C_CR1_RXDMAEN | STM32F7_I2C_CR1_TXDMAEN);
+
+	i2c_dev->use_dma = false;
+	if (i2c_dev->dma && f7_msg->count >= STM32F7_I2C_DMA_LEN_MIN &&
+	    f7_msg->size != I2C_SMBUS_BLOCK_DATA &&
+	    f7_msg->size != I2C_SMBUS_BLOCK_PROC_CALL) {
+		ret = stm32_i2c_prep_dma_xfer(i2c_dev->dev, i2c_dev->dma,
+					      cr2 & STM32F7_I2C_CR2_RD_WRN,
+					      f7_msg->count, f7_msg->buf,
+					      stm32f7_i2c_dma_callback,
+					      i2c_dev);
+
+		if (!ret)
+			i2c_dev->use_dma = true;
+		else
+			dev_warn(i2c_dev->dev, "can't use DMA\n");
+	}
+
+	if (!i2c_dev->use_dma)
+		cr1 |= STM32F7_I2C_CR1_RXIE;
+	else
+		cr1 |= STM32F7_I2C_CR1_RXDMAEN;
+
+	/* Configure Repeated Start */
+	cr2 |= STM32F7_I2C_CR2_START;
+
+	/* Write configurations registers */
+	writel_relaxed(cr1, base + STM32F7_I2C_CR1);
+	writel_relaxed(cr2, base + STM32F7_I2C_CR2);
+}
+
+static int stm32f7_i2c_smbus_check_pec(struct stm32f7_i2c_dev *i2c_dev)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	u8 count, internal_pec, received_pec;
+
+	internal_pec = readl_relaxed(i2c_dev->base + STM32F7_I2C_PECR);
+
+	switch (f7_msg->size) {
+	case I2C_SMBUS_BYTE:
+	case I2C_SMBUS_BYTE_DATA:
+		received_pec = f7_msg->smbus_buf[1];
+		break;
+	case I2C_SMBUS_WORD_DATA:
+	case I2C_SMBUS_PROC_CALL:
+		received_pec = f7_msg->smbus_buf[2];
+		break;
+	case I2C_SMBUS_BLOCK_DATA:
+	case I2C_SMBUS_BLOCK_PROC_CALL:
+		count = f7_msg->smbus_buf[0];
+		received_pec = f7_msg->smbus_buf[count];
+		break;
+	default:
+		dev_err(i2c_dev->dev, "Unsupported smbus protocol for PEC\n");
+		return -EINVAL;
+	}
+
+	if (internal_pec != received_pec) {
+		dev_err(i2c_dev->dev, "Bad PEC 0x%02x vs. 0x%02x\n",
+			internal_pec, received_pec);
+		return -EBADMSG;
+	}
+
+	return 0;
+}
+
+static bool stm32f7_i2c_is_addr_match(struct i2c_client *slave, u32 addcode)
+{
+	u32 addr;
+
+	if (!slave)
+		return false;
+
+	if (slave->flags & I2C_CLIENT_TEN) {
+		/*
+		 * For 10-bit addr, addcode = 11110XY with
+		 * X = Bit 9 of slave address
+		 * Y = Bit 8 of slave address
+		 */
+		addr = slave->addr >> 8;
+		addr |= 0x78;
+		if (addr == addcode)
+			return true;
+	} else {
+		addr = slave->addr & 0x7f;
+		if (addr == addcode)
+			return true;
+	}
+
+	return false;
+}
+
+static void stm32f7_i2c_slave_start(struct stm32f7_i2c_dev *i2c_dev)
+{
+	struct i2c_client *slave = i2c_dev->slave_running;
+	void __iomem *base = i2c_dev->base;
+	u32 mask;
+	u8 value = 0;
+
+	if (i2c_dev->slave_dir) {
+		/* Notify i2c slave that new read transfer is starting */
+		i2c_slave_event(slave, I2C_SLAVE_READ_REQUESTED, &value);
+
+		/*
+		 * Disable slave TX config in case of I2C combined message
+		 * (I2C Write followed by I2C Read)
+		 */
+		mask = STM32F7_I2C_CR2_RELOAD;
+		stm32f7_i2c_clr_bits(base + STM32F7_I2C_CR2, mask);
+		mask = STM32F7_I2C_CR1_SBC | STM32F7_I2C_CR1_RXIE |
+		       STM32F7_I2C_CR1_TCIE;
+		stm32f7_i2c_clr_bits(base + STM32F7_I2C_CR1, mask);
+
+		/* Enable TX empty, STOP, NACK interrupts */
+		mask =  STM32F7_I2C_CR1_STOPIE | STM32F7_I2C_CR1_NACKIE |
+			STM32F7_I2C_CR1_TXIE;
+		stm32f7_i2c_set_bits(base + STM32F7_I2C_CR1, mask);
+
+		/* Write 1st data byte */
+		writel_relaxed(value, base + STM32F7_I2C_TXDR);
+	} else {
+		/* Notify i2c slave that new write transfer is starting */
+		i2c_slave_event(slave, I2C_SLAVE_WRITE_REQUESTED, &value);
+
+		/* Set reload mode to be able to ACK/NACK each received byte */
+		mask = STM32F7_I2C_CR2_RELOAD;
+		stm32f7_i2c_set_bits(base + STM32F7_I2C_CR2, mask);
+
+		/*
+		 * Set STOP, NACK, RX empty and transfer complete interrupts.*
+		 * Set Slave Byte Control to be able to ACK/NACK each data
+		 * byte received
+		 */
+		mask =  STM32F7_I2C_CR1_STOPIE | STM32F7_I2C_CR1_NACKIE |
+			STM32F7_I2C_CR1_SBC | STM32F7_I2C_CR1_RXIE |
+			STM32F7_I2C_CR1_TCIE;
+		stm32f7_i2c_set_bits(base + STM32F7_I2C_CR1, mask);
+	}
+}
+
+static void stm32f7_i2c_slave_addr(struct stm32f7_i2c_dev *i2c_dev)
+{
+	void __iomem *base = i2c_dev->base;
+	u32 isr, addcode, dir, mask;
+	int i;
+
+	isr = readl_relaxed(i2c_dev->base + STM32F7_I2C_ISR);
+	addcode = STM32F7_I2C_ISR_ADDCODE_GET(isr);
+	dir = isr & STM32F7_I2C_ISR_DIR;
+
+	for (i = 0; i < STM32F7_I2C_MAX_SLAVE; i++) {
+		if (stm32f7_i2c_is_addr_match(i2c_dev->slave[i], addcode)) {
+			i2c_dev->slave_running = i2c_dev->slave[i];
+			i2c_dev->slave_dir = dir;
+
+			/* Start I2C slave processing */
+			stm32f7_i2c_slave_start(i2c_dev);
+
+			/* Clear ADDR flag */
+			mask = STM32F7_I2C_ICR_ADDRCF;
+			writel_relaxed(mask, base + STM32F7_I2C_ICR);
+			break;
+		}
+	}
+}
+
+static int stm32f7_i2c_get_slave_id(struct stm32f7_i2c_dev *i2c_dev,
+				    struct i2c_client *slave, int *id)
+{
+	int i;
+
+	for (i = 0; i < STM32F7_I2C_MAX_SLAVE; i++) {
+		if (i2c_dev->slave[i] == slave) {
+			*id = i;
+			return 0;
+		}
+	}
+
+	dev_err(i2c_dev->dev, "Slave 0x%x not registered\n", slave->addr);
+
+	return -ENODEV;
+}
+
+static int stm32f7_i2c_get_free_slave_id(struct stm32f7_i2c_dev *i2c_dev,
+					 struct i2c_client *slave, int *id)
+{
+	struct device *dev = i2c_dev->dev;
+	int i;
+
+	/*
+	 * slave[STM32F7_SLAVE_HOSTNOTIFY] support only SMBus Host address (0x8)
+	 * slave[STM32F7_SLAVE_7_10_BITS_ADDR] supports 7-bit and 10-bit slave address
+	 * slave[STM32F7_SLAVE_7_BITS_ADDR] supports 7-bit slave address only
+	 */
+	if (i2c_dev->smbus_mode && (slave->addr == 0x08)) {
+		if (i2c_dev->slave[STM32F7_SLAVE_HOSTNOTIFY])
+			goto fail;
+		*id = STM32F7_SLAVE_HOSTNOTIFY;
+		return 0;
+	}
+
+	for (i = STM32F7_I2C_MAX_SLAVE - 1; i > STM32F7_SLAVE_HOSTNOTIFY; i--) {
+		if ((i == STM32F7_SLAVE_7_BITS_ADDR) &&
+		    (slave->flags & I2C_CLIENT_TEN))
+			continue;
+		if (!i2c_dev->slave[i]) {
+			*id = i;
+			return 0;
+		}
+	}
+
+fail:
+	dev_err(dev, "Slave 0x%x could not be registered\n", slave->addr);
+
+	return -EINVAL;
+}
+
+static bool stm32f7_i2c_is_slave_registered(struct stm32f7_i2c_dev *i2c_dev)
+{
+	int i;
+
+	for (i = 0; i < STM32F7_I2C_MAX_SLAVE; i++) {
+		if (i2c_dev->slave[i])
+			return true;
+	}
+
+	return false;
+}
+
+static bool stm32f7_i2c_is_slave_busy(struct stm32f7_i2c_dev *i2c_dev)
+{
+	int i, busy;
+
+	busy = 0;
+	for (i = 0; i < STM32F7_I2C_MAX_SLAVE; i++) {
+		if (i2c_dev->slave[i])
+			busy++;
+	}
+
+	return i == busy;
+}
+
+static irqreturn_t stm32f7_i2c_slave_isr_event(struct stm32f7_i2c_dev *i2c_dev, u32 status)
+{
+	void __iomem *base = i2c_dev->base;
+	u32 cr2, mask;
+	u8 val;
+	int ret;
+
+	/* Slave transmitter mode */
+	if (status & STM32F7_I2C_ISR_TXIS) {
+		i2c_slave_event(i2c_dev->slave_running,
+				I2C_SLAVE_READ_PROCESSED,
+				&val);
+
+		/* Write data byte */
+		writel_relaxed(val, base + STM32F7_I2C_TXDR);
+	}
+
+	/* Transfer Complete Reload for Slave receiver mode */
+	if (status & STM32F7_I2C_ISR_TCR || status & STM32F7_I2C_ISR_RXNE) {
+		/*
+		 * Read data byte then set NBYTES to receive next byte or NACK
+		 * the current received byte
+		 */
+		val = readb_relaxed(i2c_dev->base + STM32F7_I2C_RXDR);
+		ret = i2c_slave_event(i2c_dev->slave_running,
+				      I2C_SLAVE_WRITE_RECEIVED,
+				      &val);
+		if (!ret) {
+			cr2 = readl_relaxed(i2c_dev->base + STM32F7_I2C_CR2);
+			cr2 |= STM32F7_I2C_CR2_NBYTES(1);
+			writel_relaxed(cr2, i2c_dev->base + STM32F7_I2C_CR2);
+		} else {
+			mask = STM32F7_I2C_CR2_NACK;
+			stm32f7_i2c_set_bits(base + STM32F7_I2C_CR2, mask);
+		}
+	}
+
+	/* NACK received */
+	if (status & STM32F7_I2C_ISR_NACKF) {
+		dev_dbg(i2c_dev->dev, "<%s>: Receive NACK\n", __func__);
+		writel_relaxed(STM32F7_I2C_ICR_NACKCF, base + STM32F7_I2C_ICR);
+	}
+
+	/* STOP received */
+	if (status & STM32F7_I2C_ISR_STOPF) {
+		/* Disable interrupts */
+		stm32f7_i2c_disable_irq(i2c_dev, STM32F7_I2C_XFER_IRQ_MASK);
+
+		if (i2c_dev->slave_dir) {
+			/*
+			 * Flush TX buffer in order to not used the byte in
+			 * TXDR for the next transfer
+			 */
+			mask = STM32F7_I2C_ISR_TXE;
+			stm32f7_i2c_set_bits(base + STM32F7_I2C_ISR, mask);
+		}
+
+		/* Clear STOP flag */
+		writel_relaxed(STM32F7_I2C_ICR_STOPCF, base + STM32F7_I2C_ICR);
+
+		/* Notify i2c slave that a STOP flag has been detected */
+		i2c_slave_event(i2c_dev->slave_running, I2C_SLAVE_STOP, &val);
+
+		i2c_dev->slave_running = NULL;
+	}
+
+	/* Address match received */
+	if (status & STM32F7_I2C_ISR_ADDR)
+		stm32f7_i2c_slave_addr(i2c_dev);
+
+	return IRQ_HANDLED;
+}
+
+static irqreturn_t stm32f7_i2c_handle_isr_errs(struct stm32f7_i2c_dev *i2c_dev, u32 status)
+{
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	u16 addr = f7_msg->addr;
+	void __iomem *base = i2c_dev->base;
+	struct device *dev = i2c_dev->dev;
+	struct stm32_i2c_dma *dma = i2c_dev->dma;
+
+	/* Bus error */
+	if (status & STM32F7_I2C_ISR_BERR) {
+		dev_err(dev, "Bus error accessing addr 0x%x\n", addr);
+		writel_relaxed(STM32F7_I2C_ICR_BERRCF, base + STM32F7_I2C_ICR);
+		stm32f7_i2c_release_bus(&i2c_dev->adap);
+		f7_msg->result = -EIO;
+	}
+
+	/* Arbitration loss */
+	if (status & STM32F7_I2C_ISR_ARLO) {
+		dev_dbg(dev, "Arbitration loss accessing addr 0x%x\n", addr);
+		writel_relaxed(STM32F7_I2C_ICR_ARLOCF, base + STM32F7_I2C_ICR);
+		f7_msg->result = -EAGAIN;
+	}
+
+	if (status & STM32F7_I2C_ISR_PECERR) {
+		dev_err(dev, "PEC error in reception accessing addr 0x%x\n", addr);
+		writel_relaxed(STM32F7_I2C_ICR_PECCF, base + STM32F7_I2C_ICR);
+		f7_msg->result = -EINVAL;
+	}
+
+	if (status & STM32F7_I2C_ISR_ALERT) {
+		dev_dbg(dev, "SMBus alert received\n");
+		writel_relaxed(STM32F7_I2C_ICR_ALERTCF, base + STM32F7_I2C_ICR);
+		i2c_handle_smbus_alert(i2c_dev->alert->ara);
+		return IRQ_HANDLED;
+	}
+
+	if (!i2c_dev->slave_running) {
+		u32 mask;
+		/* Disable interrupts */
+		if (stm32f7_i2c_is_slave_registered(i2c_dev))
+			mask = STM32F7_I2C_XFER_IRQ_MASK;
+		else
+			mask = STM32F7_I2C_ALL_IRQ_MASK;
+		stm32f7_i2c_disable_irq(i2c_dev, mask);
+	}
+
+	/* Disable dma */
+	if (i2c_dev->use_dma) {
+		stm32f7_i2c_disable_dma_req(i2c_dev);
+		dmaengine_terminate_async(dma->chan_using);
+	}
+
+	i2c_dev->master_mode = false;
+	complete(&i2c_dev->complete);
+
+	return IRQ_HANDLED;
+}
+
+#define STM32F7_ERR_EVENTS (STM32F7_I2C_ISR_BERR | STM32F7_I2C_ISR_ARLO |\
+			    STM32F7_I2C_ISR_PECERR | STM32F7_I2C_ISR_ALERT)
+static irqreturn_t stm32f7_i2c_isr_event(int irq, void *data)
+{
+	struct stm32f7_i2c_dev *i2c_dev = data;
+	u32 status;
+
+	status = readl_relaxed(i2c_dev->base + STM32F7_I2C_ISR);
+
+	/*
+	 * Check if the interrupt is for a slave device or related
+	 * to errors flags (in case of single it line mode)
+	 */
+	if (!i2c_dev->master_mode ||
+	    (i2c_dev->setup.single_it_line && (status & STM32F7_ERR_EVENTS)))
+		return IRQ_WAKE_THREAD;
+
+	/* Tx empty */
+	if (status & STM32F7_I2C_ISR_TXIS)
+		stm32f7_i2c_write_tx_data(i2c_dev);
+
+	/* RX not empty */
+	if (status & STM32F7_I2C_ISR_RXNE)
+		stm32f7_i2c_read_rx_data(i2c_dev);
+
+	/* Wake up the thread if other flags are raised */
+	if (status &
+	    (STM32F7_I2C_ISR_NACKF | STM32F7_I2C_ISR_STOPF |
+	     STM32F7_I2C_ISR_TC | STM32F7_I2C_ISR_TCR))
+		return IRQ_WAKE_THREAD;
+
+	return IRQ_HANDLED;
+}
+
+static irqreturn_t stm32f7_i2c_isr_event_thread(int irq, void *data)
+{
+	struct stm32f7_i2c_dev *i2c_dev = data;
+	struct stm32f7_i2c_msg *f7_msg = &i2c_dev->f7_msg;
+	struct stm32_i2c_dma *dma = i2c_dev->dma;
+	void __iomem *base = i2c_dev->base;
+	u32 status, mask;
+	int ret;
+
+	status = readl_relaxed(i2c_dev->base + STM32F7_I2C_ISR);
+
+	if (!i2c_dev->master_mode)
+		return stm32f7_i2c_slave_isr_event(i2c_dev, status);
+
+	/* Handle errors in case of this handler is used for events/errors */
+	if (i2c_dev->setup.single_it_line && (status & STM32F7_ERR_EVENTS))
+		return stm32f7_i2c_handle_isr_errs(i2c_dev, status);
+
+	/* NACK received */
+	if (status & STM32F7_I2C_ISR_NACKF) {
+		dev_dbg(i2c_dev->dev, "<%s>: Receive NACK (addr %x)\n",
+			__func__, f7_msg->addr);
+		writel_relaxed(STM32F7_I2C_ICR_NACKCF, base + STM32F7_I2C_ICR);
+		if (i2c_dev->use_dma) {
+			stm32f7_i2c_disable_dma_req(i2c_dev);
+			dmaengine_terminate_async(dma->chan_using);
+		}
+		f7_msg->result = -ENXIO;
+	}
+
+	if (status & STM32F7_I2C_ISR_TCR) {
+		if (f7_msg->smbus)
+			stm32f7_i2c_smbus_reload(i2c_dev);
+		else
+			stm32f7_i2c_reload(i2c_dev);
+	}
+
+	/* Transfer complete */
+	if (status & STM32F7_I2C_ISR_TC) {
+		/* Wait for dma transfer completion before sending next message */
+		if (i2c_dev->use_dma && !f7_msg->result) {
+			ret = wait_for_completion_timeout(&i2c_dev->dma->dma_complete, HZ);
+			if (!ret) {
+				dev_dbg(i2c_dev->dev, "<%s>: Timed out\n", __func__);
+				stm32f7_i2c_disable_dma_req(i2c_dev);
+				dmaengine_terminate_async(dma->chan_using);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 				f7_msg->result = -ETIMEDOUT;
 			}
 		}

@@ -12,6 +12,7 @@
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <linux/slab.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #include <linux/if_ether.h>	/* ETH_ALEN */
 
 enum fuse_type {
@@ -124,6 +125,118 @@ static int imx_ocotp_cell_pp(void *context, const char *id, int index,
 		for (i = 0; i < bytes / 2; i++)
 			swap(buf[i], buf[bytes - i - 1]);
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+enum fuse_type {
+	FUSE_FSB = BIT(0),
+	FUSE_ELE = BIT(1),
+	FUSE_ECC = BIT(2),
+	FUSE_INVALID = -1
+};
+
+struct ocotp_map_entry {
+	u32 start; /* start word */
+	u32 num; /* num words */
+	enum fuse_type type;
+};
+
+struct ocotp_devtype_data {
+	u32 reg_off;
+	char *name;
+	u32 size;
+	u32 num_entry;
+	u32 flag;
+	nvmem_reg_read_t reg_read;
+	struct ocotp_map_entry entry[];
+};
+
+struct imx_ocotp_priv {
+	struct device *dev;
+	void __iomem *base;
+	struct nvmem_config config;
+	struct mutex lock;
+	const struct ocotp_devtype_data *data;
+};
+
+static enum fuse_type imx_ocotp_fuse_type(void *context, u32 index)
+{
+	struct imx_ocotp_priv *priv = context;
+	const struct ocotp_devtype_data *data = priv->data;
+	u32 start, end;
+	int i;
+
+	for (i = 0; i < data->num_entry; i++) {
+		start = data->entry[i].start;
+		end = data->entry[i].start + data->entry[i].num;
+
+		if (index >= start && index < end)
+			return data->entry[i].type;
+	}
+
+	return FUSE_INVALID;
+}
+
+static int imx_ocotp_reg_read(void *context, unsigned int offset, void *val, size_t bytes)
+{
+	struct imx_ocotp_priv *priv = context;
+	void __iomem *reg = priv->base + priv->data->reg_off;
+	u32 count, index, num_bytes;
+	enum fuse_type type;
+	u32 *buf;
+	void *p;
+	int i;
+	u8 skipbytes;
+
+	if (offset + bytes > priv->data->size)
+		bytes = priv->data->size - offset;
+
+	index = offset >> 2;
+	skipbytes = offset - (index << 2);
+	num_bytes = round_up(bytes + skipbytes, 4);
+	count = num_bytes >> 2;
+
+	p = kzalloc(num_bytes, GFP_KERNEL);
+	if (!p)
+		return -ENOMEM;
+
+	mutex_lock(&priv->lock);
+
+	buf = p;
+
+	for (i = index; i < (index + count); i++) {
+		type = imx_ocotp_fuse_type(context, i);
+		if (type == FUSE_INVALID || type == FUSE_ELE) {
+			*buf++ = 0;
+			continue;
+		}
+
+		if (type & FUSE_ECC)
+			*buf++ = readl_relaxed(reg + (i << 2)) & GENMASK(15, 0);
+		else
+			*buf++ = readl_relaxed(reg + (i << 2));
+	}
+
+	memcpy(val, ((u8 *)p) + skipbytes, bytes);
+
+	mutex_unlock(&priv->lock);
+
+	kfree(p);
+
+	return 0;
+};
+
+static int imx_ocotp_cell_pp(void *context, const char *id, int index,
+			     unsigned int offset, void *data, size_t bytes)
+{
+	u8 *buf = data;
+	int i;
+
+	/* Deal with some post processing of nvmem cell data */
+	if (id && !strcmp(id, "mac-address"))
+		for (i = 0; i < bytes / 2; i++)
+			swap(buf[i], buf[bytes - i - 1]);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

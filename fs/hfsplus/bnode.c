@@ -18,6 +18,7 @@
 #include "hfsplus_fs.h"
 #include "hfsplus_raw.h"
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static inline
 bool is_bnode_offset_valid(struct hfs_bnode *node, int off)
 {
@@ -279,6 +280,178 @@ void hfs_bnode_move(struct hfs_bnode *node, int dst, int src, int len)
 	len = check_and_correct_requested_length(node, src, len);
 	len = check_and_correct_requested_length(node, dst, len);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/* Copy a specified range of bytes from the raw data of a node */
+void hfs_bnode_read(struct hfs_bnode *node, void *buf, int off, int len)
+{
+	struct page **pagep;
+	int l;
+
+	off += node->page_offset;
+	pagep = node->page + (off >> PAGE_SHIFT);
+	off &= ~PAGE_MASK;
+
+	l = min_t(int, len, PAGE_SIZE - off);
+	memcpy_from_page(buf, *pagep, off, l);
+
+	while ((len -= l) != 0) {
+		buf += l;
+		l = min_t(int, len, PAGE_SIZE);
+		memcpy_from_page(buf, *++pagep, 0, l);
+	}
+}
+
+u16 hfs_bnode_read_u16(struct hfs_bnode *node, int off)
+{
+	__be16 data;
+	/* TODO: optimize later... */
+	hfs_bnode_read(node, &data, off, 2);
+	return be16_to_cpu(data);
+}
+
+u8 hfs_bnode_read_u8(struct hfs_bnode *node, int off)
+{
+	u8 data;
+	/* TODO: optimize later... */
+	hfs_bnode_read(node, &data, off, 1);
+	return data;
+}
+
+void hfs_bnode_read_key(struct hfs_bnode *node, void *key, int off)
+{
+	struct hfs_btree *tree;
+	int key_len;
+
+	tree = node->tree;
+	if (node->type == HFS_NODE_LEAF ||
+	    tree->attributes & HFS_TREE_VARIDXKEYS ||
+	    node->tree->cnid == HFSPLUS_ATTR_CNID)
+		key_len = hfs_bnode_read_u16(node, off) + 2;
+	else
+		key_len = tree->max_key_len + 2;
+
+	if (key_len > sizeof(hfsplus_btree_key) || key_len < 1) {
+		memset(key, 0, sizeof(hfsplus_btree_key));
+		pr_err("hfsplus: Invalid key length: %d\n", key_len);
+		return;
+	}
+
+	hfs_bnode_read(node, key, off, key_len);
+}
+
+void hfs_bnode_write(struct hfs_bnode *node, void *buf, int off, int len)
+{
+	struct page **pagep;
+	int l;
+
+	off += node->page_offset;
+	pagep = node->page + (off >> PAGE_SHIFT);
+	off &= ~PAGE_MASK;
+
+	l = min_t(int, len, PAGE_SIZE - off);
+	memcpy_to_page(*pagep, off, buf, l);
+	set_page_dirty(*pagep);
+
+	while ((len -= l) != 0) {
+		buf += l;
+		l = min_t(int, len, PAGE_SIZE);
+		memcpy_to_page(*++pagep, 0, buf, l);
+		set_page_dirty(*pagep);
+	}
+}
+
+void hfs_bnode_write_u16(struct hfs_bnode *node, int off, u16 data)
+{
+	__be16 v = cpu_to_be16(data);
+	/* TODO: optimize later... */
+	hfs_bnode_write(node, &v, off, 2);
+}
+
+void hfs_bnode_clear(struct hfs_bnode *node, int off, int len)
+{
+	struct page **pagep;
+	int l;
+
+	off += node->page_offset;
+	pagep = node->page + (off >> PAGE_SHIFT);
+	off &= ~PAGE_MASK;
+
+	l = min_t(int, len, PAGE_SIZE - off);
+	memzero_page(*pagep, off, l);
+	set_page_dirty(*pagep);
+
+	while ((len -= l) != 0) {
+		l = min_t(int, len, PAGE_SIZE);
+		memzero_page(*++pagep, 0, l);
+		set_page_dirty(*pagep);
+	}
+}
+
+void hfs_bnode_copy(struct hfs_bnode *dst_node, int dst,
+		    struct hfs_bnode *src_node, int src, int len)
+{
+	struct page **src_page, **dst_page;
+	int l;
+
+	hfs_dbg(BNODE_MOD, "copybytes: %u,%u,%u\n", dst, src, len);
+	if (!len)
+		return;
+	src += src_node->page_offset;
+	dst += dst_node->page_offset;
+	src_page = src_node->page + (src >> PAGE_SHIFT);
+	src &= ~PAGE_MASK;
+	dst_page = dst_node->page + (dst >> PAGE_SHIFT);
+	dst &= ~PAGE_MASK;
+
+	if (src == dst) {
+		l = min_t(int, len, PAGE_SIZE - src);
+		memcpy_page(*dst_page, src, *src_page, src, l);
+		set_page_dirty(*dst_page);
+
+		while ((len -= l) != 0) {
+			l = min_t(int, len, PAGE_SIZE);
+			memcpy_page(*++dst_page, 0, *++src_page, 0, l);
+			set_page_dirty(*dst_page);
+		}
+	} else {
+		void *src_ptr, *dst_ptr;
+
+		do {
+			dst_ptr = kmap_local_page(*dst_page) + dst;
+			src_ptr = kmap_local_page(*src_page) + src;
+			if (PAGE_SIZE - src < PAGE_SIZE - dst) {
+				l = PAGE_SIZE - src;
+				src = 0;
+				dst += l;
+			} else {
+				l = PAGE_SIZE - dst;
+				src += l;
+				dst = 0;
+			}
+			l = min(len, l);
+			memcpy(dst_ptr, src_ptr, l);
+			kunmap_local(src_ptr);
+			set_page_dirty(*dst_page);
+			kunmap_local(dst_ptr);
+			if (!dst)
+				dst_page++;
+			else
+				src_page++;
+		} while ((len -= l));
+	}
+}
+
+void hfs_bnode_move(struct hfs_bnode *node, int dst, int src, int len)
+{
+	struct page **src_page, **dst_page;
+	void *src_ptr, *dst_ptr;
+	int l;
+
+	hfs_dbg(BNODE_MOD, "movebytes: %u,%u,%u\n", dst, src, len);
+	if (!len)
+		return;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	src += node->page_offset;
 	dst += node->page_offset;
 	if (dst > src) {

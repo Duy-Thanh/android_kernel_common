@@ -168,6 +168,7 @@ static void ptrace_set_get_inherit(pid_t child, const struct vec_type *type)
 	memset(&sve, 0, sizeof(sve));
 	sve.size = sizeof(sve);
 	sve.vl = sve_vl_from_vq(SVE_VQ_MIN);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	sve.flags = SVE_PT_VL_INHERIT | SVE_PT_REGS_SVE;
 	ret = set_sve(child, type, &sve);
 	if (ret != 0) {
@@ -253,6 +254,93 @@ static void ptrace_set_get_vl(pid_t child, const struct vec_type *type,
 	}
 
 	ksft_test_result(new_sve->vl == prctl_vl, "Set %s VL %u\n",
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	sve.flags = SVE_PT_VL_INHERIT;
+	ret = set_sve(child, type, &sve);
+	if (ret != 0) {
+		ksft_test_result_fail("Failed to set %s SVE_PT_VL_INHERIT\n",
+				      type->name);
+		return;
+	}
+
+	/*
+	 * Read back the new register state and verify that we have
+	 * set the flags we expected.
+	 */
+	if (!get_sve(child, type, (void **)&new_sve, &new_sve_size)) {
+		ksft_test_result_fail("Failed to read %s SVE flags\n",
+				      type->name);
+		return;
+	}
+
+	ksft_test_result(new_sve->flags & SVE_PT_VL_INHERIT,
+			 "%s SVE_PT_VL_INHERIT set\n", type->name);
+
+	/* Now clear */
+	sve.flags &= ~SVE_PT_VL_INHERIT;
+	ret = set_sve(child, type, &sve);
+	if (ret != 0) {
+		ksft_test_result_fail("Failed to clear %s SVE_PT_VL_INHERIT\n",
+				      type->name);
+		return;
+	}
+
+	if (!get_sve(child, type, (void **)&new_sve, &new_sve_size)) {
+		ksft_test_result_fail("Failed to read %s SVE flags\n",
+				      type->name);
+		return;
+	}
+
+	ksft_test_result(!(new_sve->flags & SVE_PT_VL_INHERIT),
+			 "%s SVE_PT_VL_INHERIT cleared\n", type->name);
+
+	free(new_sve);
+}
+
+/* Validate attempting to set the specfied VL via ptrace */
+static void ptrace_set_get_vl(pid_t child, const struct vec_type *type,
+			      unsigned int vl, bool *supported)
+{
+	struct user_sve_header sve;
+	struct user_sve_header *new_sve = NULL;
+	size_t new_sve_size = 0;
+	int ret, prctl_vl;
+
+	*supported = false;
+
+	/* Check if the VL is supported in this process */
+	prctl_vl = prctl(type->prctl_set, vl);
+	if (prctl_vl == -1)
+		ksft_exit_fail_msg("prctl(PR_%s_SET_VL) failed: %s (%d)\n",
+				   type->name, strerror(errno), errno);
+
+	/* If the VL is not supported then a supported VL will be returned */
+	*supported = (prctl_vl == vl);
+
+	/* Set the VL by doing a set with no register payload */
+	memset(&sve, 0, sizeof(sve));
+	sve.size = sizeof(sve);
+	sve.vl = vl;
+	ret = set_sve(child, type, &sve);
+	if (ret != 0) {
+		ksft_test_result_fail("Failed to set %s VL %u\n",
+				      type->name, vl);
+		return;
+	}
+
+	/*
+	 * Read back the new register state and verify that we have the
+	 * same VL that we got from prctl() on ourselves.
+	 */
+	if (!get_sve(child, type, (void **)&new_sve, &new_sve_size)) {
+		ksft_test_result_fail("Failed to read %s VL %u\n",
+				      type->name, vl);
+		return;
+	}
+
+	ksft_test_result(new_sve->vl = prctl_vl, "Set %s VL %u\n",
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			 type->name, vl);
 
 	free(new_sve);

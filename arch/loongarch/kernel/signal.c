@@ -677,6 +677,7 @@ static int setup_sigcontext(struct pt_regs *regs, struct sigcontext __user *sc,
 	for (i = 1; i < 32; i++)
 		err |= __put_user(regs->regs[i], &sc->sc_regs[i]);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #ifdef CONFIG_CPU_HAS_LBT
 	if (extctx->lbt.addr)
 		err |= protected_save_lbt_context(extctx);
@@ -688,6 +689,20 @@ static int setup_sigcontext(struct pt_regs *regs, struct sigcontext __user *sc,
 		err |= protected_save_lsx_context(extctx);
 	else if (extctx->fpu.addr)
 		err |= protected_save_fpu_context(extctx);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (extctx->lasx.addr)
+		err |= protected_save_lasx_context(extctx);
+	else if (extctx->lsx.addr)
+		err |= protected_save_lsx_context(extctx);
+	else if (extctx->fpu.addr)
+		err |= protected_save_fpu_context(extctx);
+
+#ifdef CONFIG_CPU_HAS_LBT
+	if (extctx->lbt.addr)
+		err |= protected_save_lbt_context(extctx);
+#endif
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* Set the "end" magic */
 	info = (struct sctx_info *)extctx->end.addr;

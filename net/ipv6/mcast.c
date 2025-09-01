@@ -804,6 +804,7 @@ static void mld_del_delrec(struct inet6_dev *idev, struct ifmcaddr6 *im)
 		} else {
 			im->mca_crcount = idev->mc_qrv;
 		}
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		ip6_mc_clear_src(pmc);
 		in6_dev_put(pmc->idev);
 		kfree_rcu(pmc, rcu);
@@ -923,6 +924,129 @@ static int __ipv6_dev_mc_inc(struct net_device *dev,
 		return -ENODEV;
 	}
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		in6_dev_put(pmc->idev);
+		ip6_mc_clear_src(pmc);
+		kfree_rcu(pmc, rcu);
+	}
+}
+
+/* called with mc_lock */
+static void mld_clear_delrec(struct inet6_dev *idev)
+{
+	struct ifmcaddr6 *pmc, *nextpmc;
+
+	pmc = mc_dereference(idev->mc_tomb, idev);
+	RCU_INIT_POINTER(idev->mc_tomb, NULL);
+
+	for (; pmc; pmc = nextpmc) {
+		nextpmc = mc_dereference(pmc->next, idev);
+		ip6_mc_clear_src(pmc);
+		in6_dev_put(pmc->idev);
+		kfree_rcu(pmc, rcu);
+	}
+
+	/* clear dead sources, too */
+	for_each_mc_mclock(idev, pmc) {
+		struct ip6_sf_list *psf, *psf_next;
+
+		psf = mc_dereference(pmc->mca_tomb, idev);
+		RCU_INIT_POINTER(pmc->mca_tomb, NULL);
+		for (; psf; psf = psf_next) {
+			psf_next = mc_dereference(psf->sf_next, idev);
+			kfree_rcu(psf, rcu);
+		}
+	}
+}
+
+static void mld_clear_query(struct inet6_dev *idev)
+{
+	struct sk_buff *skb;
+
+	spin_lock_bh(&idev->mc_query_lock);
+	while ((skb = __skb_dequeue(&idev->mc_query_queue)))
+		kfree_skb(skb);
+	spin_unlock_bh(&idev->mc_query_lock);
+}
+
+static void mld_clear_report(struct inet6_dev *idev)
+{
+	struct sk_buff *skb;
+
+	spin_lock_bh(&idev->mc_report_lock);
+	while ((skb = __skb_dequeue(&idev->mc_report_queue)))
+		kfree_skb(skb);
+	spin_unlock_bh(&idev->mc_report_lock);
+}
+
+static void mca_get(struct ifmcaddr6 *mc)
+{
+	refcount_inc(&mc->mca_refcnt);
+}
+
+static void ma_put(struct ifmcaddr6 *mc)
+{
+	if (refcount_dec_and_test(&mc->mca_refcnt)) {
+		in6_dev_put(mc->idev);
+		kfree_rcu(mc, rcu);
+	}
+}
+
+/* called with mc_lock */
+static struct ifmcaddr6 *mca_alloc(struct inet6_dev *idev,
+				   const struct in6_addr *addr,
+				   unsigned int mode)
+{
+	struct ifmcaddr6 *mc;
+
+	mc = kzalloc(sizeof(*mc), GFP_KERNEL);
+	if (!mc)
+		return NULL;
+
+	INIT_DELAYED_WORK(&mc->mca_work, mld_mca_work);
+
+	mc->mca_addr = *addr;
+	mc->idev = idev; /* reference taken by caller */
+	mc->mca_users = 1;
+	/* mca_stamp should be updated upon changes */
+	mc->mca_cstamp = mc->mca_tstamp = jiffies;
+	refcount_set(&mc->mca_refcnt, 1);
+
+	mc->mca_sfmode = mode;
+	mc->mca_sfcount[mode] = 1;
+
+	if (ipv6_addr_is_ll_all_nodes(&mc->mca_addr) ||
+	    IPV6_ADDR_MC_SCOPE(&mc->mca_addr) < IPV6_ADDR_SCOPE_LINKLOCAL)
+		mc->mca_flags |= MAF_NOREPORT;
+
+	return mc;
+}
+
+/*
+ *	device multicast group inc (add if not found)
+ */
+static int __ipv6_dev_mc_inc(struct net_device *dev,
+			     const struct in6_addr *addr, unsigned int mode)
+{
+	struct ifmcaddr6 *mc;
+	struct inet6_dev *idev;
+
+	ASSERT_RTNL();
+
+	/* we need to take a reference on idev */
+	idev = in6_dev_get(dev);
+
+	if (!idev)
+		return -EINVAL;
+
+	if (idev->dead) {
+		in6_dev_put(idev);
+		return -ENODEV;
+	}
+
+	mutex_lock(&idev->mc_lock);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	for_each_mc_mclock(idev, mc) {
 		if (ipv6_addr_equal(&mc->mca_addr, addr)) {
 			mc->mca_users++;

@@ -174,6 +174,7 @@ static void cgroup_freeze_task(struct task_struct *task, bool freeze)
 /*
  * Freeze or unfreeze all tasks in the given cgroup.
  */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static void cgroup_do_freeze(struct cgroup *cgrp, bool freeze, u64 ts_nsec)
 {
 	struct css_task_iter it;
@@ -312,6 +313,139 @@ void cgroup_freeze(struct cgroup *cgrp, bool freeze)
 		 * Do change actual state: freeze or unfreeze.
 		 */
 		cgroup_do_freeze(dsct, freeze, ts_nsec);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void cgroup_do_freeze(struct cgroup *cgrp, bool freeze)
+{
+	struct css_task_iter it;
+	struct task_struct *task;
+
+	lockdep_assert_held(&cgroup_mutex);
+
+	spin_lock_irq(&css_set_lock);
+	if (freeze)
+		set_bit(CGRP_FREEZE, &cgrp->flags);
+	else
+		clear_bit(CGRP_FREEZE, &cgrp->flags);
+	spin_unlock_irq(&css_set_lock);
+
+	if (freeze)
+		TRACE_CGROUP_PATH(freeze, cgrp);
+	else
+		TRACE_CGROUP_PATH(unfreeze, cgrp);
+
+	css_task_iter_start(&cgrp->self, 0, &it);
+	while ((task = css_task_iter_next(&it))) {
+		/*
+		 * Ignore kernel threads here. Freezing cgroups containing
+		 * kthreads isn't supported.
+		 */
+		if (task->flags & PF_KTHREAD)
+			continue;
+		cgroup_freeze_task(task, freeze);
+	}
+	css_task_iter_end(&it);
+
+	/*
+	 * Cgroup state should be revisited here to cover empty leaf cgroups
+	 * and cgroups which descendants are already in the desired state.
+	 */
+	spin_lock_irq(&css_set_lock);
+	if (cgrp->nr_descendants == cgrp->freezer.nr_frozen_descendants)
+		cgroup_update_frozen(cgrp);
+	spin_unlock_irq(&css_set_lock);
+}
+
+/*
+ * Adjust the task state (freeze or unfreeze) and revisit the state of
+ * source and destination cgroups.
+ */
+void cgroup_freezer_migrate_task(struct task_struct *task,
+				 struct cgroup *src, struct cgroup *dst)
+{
+	lockdep_assert_held(&css_set_lock);
+
+	/*
+	 * Kernel threads are not supposed to be frozen at all.
+	 */
+	if (task->flags & PF_KTHREAD)
+		return;
+
+	/*
+	 * It's not necessary to do changes if both of the src and dst cgroups
+	 * are not freezing and task is not frozen.
+	 */
+	if (!test_bit(CGRP_FREEZE, &src->flags) &&
+	    !test_bit(CGRP_FREEZE, &dst->flags) &&
+	    !task->frozen)
+		return;
+
+	/*
+	 * Adjust counters of freezing and frozen tasks.
+	 * Note, that if the task is frozen, but the destination cgroup is not
+	 * frozen, we bump both counters to keep them balanced.
+	 */
+	if (task->frozen) {
+		cgroup_inc_frozen_cnt(dst);
+		cgroup_dec_frozen_cnt(src);
+	}
+	cgroup_update_frozen(dst);
+	cgroup_update_frozen(src);
+
+	/*
+	 * Force the task to the desired state.
+	 */
+	cgroup_freeze_task(task, test_bit(CGRP_FREEZE, &dst->flags));
+}
+
+void cgroup_freeze(struct cgroup *cgrp, bool freeze)
+{
+	struct cgroup_subsys_state *css;
+	struct cgroup *dsct;
+	bool applied = false;
+
+	lockdep_assert_held(&cgroup_mutex);
+
+	/*
+	 * Nothing changed? Just exit.
+	 */
+	if (cgrp->freezer.freeze == freeze)
+		return;
+
+	cgrp->freezer.freeze = freeze;
+
+	/*
+	 * Propagate changes downwards the cgroup tree.
+	 */
+	css_for_each_descendant_pre(css, &cgrp->self) {
+		dsct = css->cgroup;
+
+		if (cgroup_is_dead(dsct))
+			continue;
+
+		if (freeze) {
+			dsct->freezer.e_freeze++;
+			/*
+			 * Already frozen because of ancestor's settings?
+			 */
+			if (dsct->freezer.e_freeze > 1)
+				continue;
+		} else {
+			dsct->freezer.e_freeze--;
+			/*
+			 * Still frozen because of ancestor's settings?
+			 */
+			if (dsct->freezer.e_freeze > 0)
+				continue;
+
+			WARN_ON_ONCE(dsct->freezer.e_freeze < 0);
+		}
+
+		/*
+		 * Do change actual state: freeze or unfreeze.
+		 */
+		cgroup_do_freeze(dsct, freeze);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		applied = true;
 	}
 

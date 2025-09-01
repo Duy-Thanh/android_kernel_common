@@ -243,8 +243,13 @@ static const struct v4l2_ctrl_config vivid_ctrl_u8_pixel_array = {
 	.min = 0x00,
 	.max = 0xff,
 	.step = 1,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	.dims = { DIV_ROUND_UP(360, PIXEL_ARRAY_DIV),
 		  DIV_ROUND_UP(640, PIXEL_ARRAY_DIV) },
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	.dims = { 640 / PIXEL_ARRAY_DIV, 360 / PIXEL_ARRAY_DIV },
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 };
 
 static const struct v4l2_ctrl_config vivid_ctrl_s32_array = {

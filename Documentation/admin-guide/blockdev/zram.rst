@@ -385,6 +385,7 @@ they could write a page index into the interface::
 
 	echo "page_index=1251" > /sys/block/zramX/writeback
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 In Linux 6.16 this interface underwent some rework.  First, the interface
 now supports `key=value` format for all of its parameters (`type=huge_idle`,
 etc.)  Second, the support for `page_indexes` was introduced, which specify
@@ -402,6 +403,9 @@ single pages and page ranges::
 	echo page_index=42 page_index=99 page_indexes=100-200 \
 		page_indexes=500-700 > /sys/block/zramX/writeback
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 If there are lots of write IO with flash device, potentially, it has
 flash wearout problem so that admin needs to design write limitation
 to guarantee storage health for entire product life.

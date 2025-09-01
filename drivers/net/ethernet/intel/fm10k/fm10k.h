@@ -189,6 +189,7 @@ struct fm10k_q_vector {
 	struct fm10k_ring_container rx, tx;
 
 	struct napi_struct napi;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct rcu_head rcu;	/* to avoid race with update stats on free */
 
 	cpumask_t affinity_mask;
@@ -197,6 +198,16 @@ struct fm10k_q_vector {
 #ifdef CONFIG_DEBUG_FS
 	struct dentry *dbg_q_vector;
 #endif /* CONFIG_DEBUG_FS */
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	cpumask_t affinity_mask;
+	char name[IFNAMSIZ + 9];
+
+#ifdef CONFIG_DEBUG_FS
+	struct dentry *dbg_q_vector;
+#endif /* CONFIG_DEBUG_FS */
+	struct rcu_head rcu;	/* to avoid race with update stats on free */
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	/* for dynamic allocation of rings associated with this q_vector */
 	struct fm10k_ring ring[] ____cacheline_internodealigned_in_smp;

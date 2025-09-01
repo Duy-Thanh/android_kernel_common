@@ -174,8 +174,17 @@ static struct graphics_object_id bios_parser_get_connector_id(
 		return object_id;
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (tbl->ucNumberOfObjects <= i)
 		return object_id;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (tbl->ucNumberOfObjects <= i) {
+		dm_error("Can't find connector id %d in connector table of size %d.\n",
+			 i, tbl->ucNumberOfObjects);
+		return object_id;
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	id = le16_to_cpu(tbl->asObjects[i].usObjectID);
 	object_id = object_id_from_bios_object_id(id);

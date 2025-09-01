@@ -92,6 +92,7 @@ struct irq_cfg {
 
 extern struct irq_cfg *irq_cfg(unsigned int irq);
 extern struct irq_cfg *irqd_cfg(struct irq_data *irq_data);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #ifdef CONFIG_SMP
 extern void vector_schedule_cleanup(struct irq_cfg *);
 extern void irq_complete_move(struct irq_cfg *cfg);
@@ -109,6 +110,24 @@ extern void unlock_vector_lock(void);
 static inline void lock_vector_lock(void) {}
 static inline void unlock_vector_lock(void) {}
 #endif
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+extern void lock_vector_lock(void);
+extern void unlock_vector_lock(void);
+#ifdef CONFIG_SMP
+extern void vector_schedule_cleanup(struct irq_cfg *);
+extern void irq_complete_move(struct irq_cfg *cfg);
+#else
+static inline void vector_schedule_cleanup(struct irq_cfg *c) { }
+static inline void irq_complete_move(struct irq_cfg *c) { }
+#endif
+
+extern void apic_ack_edge(struct irq_data *data);
+#else	/*  CONFIG_IRQ_DOMAIN_HIERARCHY */
+static inline void lock_vector_lock(void) {}
+static inline void unlock_vector_lock(void) {}
+#endif	/* CONFIG_IRQ_DOMAIN_HIERARCHY */
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 /* Statistics */
 extern atomic_t irq_err_count;

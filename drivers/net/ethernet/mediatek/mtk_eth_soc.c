@@ -1606,6 +1606,7 @@ static netdev_tx_t mtk_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	bool gso = false;
 	int tx_num;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (skb_vlan_tag_present(skb) &&
 	    !eth_proto_is_802_3(eth_hdr(skb)->h_proto)) {
 		skb = __vlan_hwaccel_push_inside(skb);
@@ -1661,6 +1662,56 @@ drop:
 	dev_kfree_skb_any(skb);
 dropped:
 	stats->tx_dropped++;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* normally we can rely on the stack not calling this more than once,
+	 * however we have 2 queues running on the same ring so we need to lock
+	 * the ring access
+	 */
+	spin_lock(&eth->page_lock);
+
+	if (unlikely(test_bit(MTK_RESETTING, &eth->state)))
+		goto drop;
+
+	tx_num = mtk_cal_txd_req(eth, skb);
+	if (unlikely(atomic_read(&ring->free_count) <= tx_num)) {
+		netif_tx_stop_all_queues(dev);
+		netif_err(eth, tx_queued, dev,
+			  "Tx Ring full when queue awake!\n");
+		spin_unlock(&eth->page_lock);
+		return NETDEV_TX_BUSY;
+	}
+
+	/* TSO: fill MSS info in tcp checksum field */
+	if (skb_is_gso(skb)) {
+		if (skb_cow_head(skb, 0)) {
+			netif_warn(eth, tx_err, dev,
+				   "GSO expand head fail.\n");
+			goto drop;
+		}
+
+		if (skb_shinfo(skb)->gso_type &
+				(SKB_GSO_TCPV4 | SKB_GSO_TCPV6)) {
+			gso = true;
+			tcp_hdr(skb)->check = htons(skb_shinfo(skb)->gso_size);
+		}
+	}
+
+	if (mtk_tx_map(skb, dev, tx_num, ring, gso) < 0)
+		goto drop;
+
+	if (unlikely(atomic_read(&ring->free_count) <= ring->thresh))
+		netif_tx_stop_all_queues(dev);
+
+	spin_unlock(&eth->page_lock);
+
+	return NETDEV_TX_OK;
+
+drop:
+	spin_unlock(&eth->page_lock);
+	stats->tx_dropped++;
+	dev_kfree_skb_any(skb);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return NETDEV_TX_OK;
 }
 

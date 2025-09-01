@@ -517,6 +517,7 @@ ga100_fifo_nonstall_intr(struct nvkm_inth *inth)
 static void
 ga100_fifo_nonstall_block(struct nvkm_event *event, int type, int index)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 }
 
 static void
@@ -606,6 +607,91 @@ ga100_fifo = {
 	.mmu_fault = &tu102_fifo_mmu_fault,
 	.nonstall_ctor = ga100_fifo_nonstall_ctor,
 	.nonstall_dtor = ga100_fifo_nonstall_dtor,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct nvkm_fifo *fifo = container_of(event, typeof(*fifo), nonstall.event);
+	struct nvkm_runl *runl = nvkm_runl_get(fifo, index, 0);
+
+	nvkm_inth_block(&runl->nonstall.inth);
+}
+
+static void
+ga100_fifo_nonstall_allow(struct nvkm_event *event, int type, int index)
+{
+	struct nvkm_fifo *fifo = container_of(event, typeof(*fifo), nonstall.event);
+	struct nvkm_runl *runl = nvkm_runl_get(fifo, index, 0);
+
+	nvkm_inth_allow(&runl->nonstall.inth);
+}
+
+const struct nvkm_event_func
+ga100_fifo_nonstall = {
+	.init = ga100_fifo_nonstall_allow,
+	.fini = ga100_fifo_nonstall_block,
+};
+
+int
+ga100_fifo_nonstall_ctor(struct nvkm_fifo *fifo)
+{
+	struct nvkm_subdev *subdev = &fifo->engine.subdev;
+	struct nvkm_vfn *vfn = subdev->device->vfn;
+	struct nvkm_runl *runl;
+	int ret, nr = 0;
+
+	nvkm_runl_foreach(runl, fifo) {
+		struct nvkm_engn *engn = list_first_entry(&runl->engns, typeof(*engn), head);
+
+		runl->nonstall.vector = engn->func->nonstall(engn);
+
+		/* if no nonstall vector just keep going */
+		if (runl->nonstall.vector == -1)
+			continue;
+		if (runl->nonstall.vector < 0) {
+			RUNL_ERROR(runl, "nonstall %d", runl->nonstall.vector);
+			return runl->nonstall.vector;
+		}
+
+		ret = nvkm_inth_add(&vfn->intr, runl->nonstall.vector, NVKM_INTR_PRIO_NORMAL,
+				    subdev, ga100_fifo_nonstall_intr, &runl->nonstall.inth);
+		if (ret)
+			return ret;
+
+		nr = max(nr, runl->id + 1);
+	}
+
+	return nr;
+}
+
+int
+ga100_fifo_runl_ctor(struct nvkm_fifo *fifo)
+{
+	struct nvkm_device *device = fifo->engine.subdev.device;
+	struct nvkm_top_device *tdev;
+	struct nvkm_runl *runl;
+	int id = 0, ret;
+
+	nvkm_list_foreach(tdev, &device->top->device, head, tdev->runlist >= 0) {
+		runl = nvkm_runl_get(fifo, -1, tdev->runlist);
+		if (!runl) {
+			ret = ga100_runl_new(fifo, id++, tdev->runlist, &runl);
+			if (ret) {
+				if (runl)
+					nvkm_runl_del(runl);
+
+				continue;
+			}
+		}
+	}
+
+	return 0;
+}
+
+static const struct nvkm_fifo_func
+ga100_fifo = {
+	.runl_ctor = ga100_fifo_runl_ctor,
+	.mmu_fault = &tu102_fifo_mmu_fault,
+	.nonstall_ctor = ga100_fifo_nonstall_ctor,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	.nonstall = &ga100_fifo_nonstall,
 	.runl = &ga100_runl,
 	.runq = &ga100_runq,

@@ -117,6 +117,7 @@ static int preemptirq_delay_run(void *data)
 {
 	int i;
 	int s = MIN(burst_size, NR_TEST_FUNCS);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	cpumask_var_t cpu_mask;
 
 	if (!alloc_cpumask_var(&cpu_mask, GFP_KERNEL))
@@ -143,6 +144,30 @@ static int preemptirq_delay_run(void *data)
 	__set_current_state(TASK_RUNNING);
 
 	free_cpumask_var(cpu_mask);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct cpumask cpu_mask;
+
+	if (cpu_affinity > -1) {
+		cpumask_clear(&cpu_mask);
+		cpumask_set_cpu(cpu_affinity, &cpu_mask);
+		if (set_cpus_allowed_ptr(current, &cpu_mask))
+			pr_err("cpu_affinity:%d, failed\n", cpu_affinity);
+	}
+
+	for (i = 0; i < s; i++)
+		(testfuncs[i])(i);
+
+	complete(&done);
+
+	set_current_state(TASK_INTERRUPTIBLE);
+	while (!kthread_should_stop()) {
+		schedule();
+		set_current_state(TASK_INTERRUPTIBLE);
+	}
+
+	__set_current_state(TASK_RUNNING);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

@@ -496,6 +496,7 @@ int hclge_ptp_init(struct hclge_dev *hdev)
 	if (ret) {
 		dev_err(&hdev->pdev->dev,
 			"failed to init freq, ret = %d\n", ret);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 		goto out_clear_int;
 	}
 
@@ -522,6 +523,32 @@ int hclge_ptp_init(struct hclge_dev *hdev)
 out_clear_int:
 	clear_bit(HCLGE_PTP_FLAG_EN, &hdev->ptp->flags);
 	hclge_ptp_int_en(hdev, false);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+		goto out;
+	}
+
+	ret = hclge_ptp_set_ts_mode(hdev, &hdev->ptp->ts_cfg);
+	if (ret) {
+		dev_err(&hdev->pdev->dev,
+			"failed to init ts mode, ret = %d\n", ret);
+		goto out;
+	}
+
+	ktime_get_real_ts64(&ts);
+	ret = hclge_ptp_settime(&hdev->ptp->info, &ts);
+	if (ret) {
+		dev_err(&hdev->pdev->dev,
+			"failed to init ts time, ret = %d\n", ret);
+		goto out;
+	}
+
+	set_bit(HCLGE_STATE_PTP_EN, &hdev->state);
+	dev_info(&hdev->pdev->dev, "phc initializes ok!\n");
+
+	return 0;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 out:
 	hclge_ptp_destroy_clock(hdev);
 

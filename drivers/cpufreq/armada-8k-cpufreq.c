@@ -103,6 +103,7 @@ static void armada_8k_cpufreq_free_table(struct freq_table *freq_tables)
 {
 	int opps_index, nb_cpus = num_possible_cpus();
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	for (opps_index = 0 ; opps_index < nb_cpus; opps_index++) {
 		int i;
 
@@ -154,6 +155,61 @@ static int __init armada_8k_cpufreq_init(void)
 	 * divisions of it).
 	 */
 	for_each_cpu(cpu, &cpus) {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	for (opps_index = 0 ; opps_index <= nb_cpus; opps_index++) {
+		int i;
+
+		/* If cpu_dev is NULL then we reached the end of the array */
+		if (!freq_tables[opps_index].cpu_dev)
+			break;
+
+		for (i = 0; i < ARRAY_SIZE(opps_div); i++) {
+			/*
+			 * A 0Hz frequency is not valid, this meant
+			 * that it was not yet initialized so there is
+			 * no more opp to free
+			 */
+			if (freq_tables[opps_index].freq[i] == 0)
+				break;
+
+			dev_pm_opp_remove(freq_tables[opps_index].cpu_dev,
+					  freq_tables[opps_index].freq[i]);
+		}
+	}
+
+	kfree(freq_tables);
+}
+
+static int __init armada_8k_cpufreq_init(void)
+{
+	int ret = 0, opps_index = 0, cpu, nb_cpus;
+	struct freq_table *freq_tables;
+	struct device_node *node;
+	static struct cpumask cpus;
+
+	node = of_find_matching_node_and_match(NULL, armada_8k_cpufreq_of_match,
+					       NULL);
+	if (!node || !of_device_is_available(node)) {
+		of_node_put(node);
+		return -ENODEV;
+	}
+	of_node_put(node);
+
+	nb_cpus = num_possible_cpus();
+	freq_tables = kcalloc(nb_cpus, sizeof(*freq_tables), GFP_KERNEL);
+	if (!freq_tables)
+		return -ENOMEM;
+	cpumask_copy(&cpus, cpu_possible_mask);
+
+	/*
+	 * For each CPU, this loop registers the operating points
+	 * supported (which are the nominal CPU frequency and full integer
+	 * divisions of it).
+	 */
+	for_each_cpu(cpu, &cpus) {
+		struct cpumask shared_cpus;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		struct device *cpu_dev;
 		struct clk *clk;
 

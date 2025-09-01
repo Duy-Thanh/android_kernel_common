@@ -1524,6 +1524,7 @@ static void con_fault_finish(struct ceph_connection *con)
 	 * in case we faulted due to authentication, invalidate our
 	 * current tickets so that we can get new ones.
 	 */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (!ceph_msgr2(from_msgr(con->msgr)) && con->v1.auth_retry) {
 		dout("auth_retry %d, invalidating\n", con->v1.auth_retry);
 		if (con->ops->invalidate_authorizer)
@@ -1718,6 +1719,202 @@ static void clear_standby(struct ceph_connection *con)
 		con->state = CEPH_CON_S_PREOPEN;
 		if (!ceph_msgr2(from_msgr(con->msgr)))
 			con->v1.connect_seq++;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (con->v1.auth_retry) {
+		dout("auth_retry %d, invalidating\n", con->v1.auth_retry);
+		if (con->ops->invalidate_authorizer)
+			con->ops->invalidate_authorizer(con);
+		con->v1.auth_retry = 0;
+	}
+
+	if (con->ops->fault)
+		con->ops->fault(con);
+}
+
+/*
+ * Do some work on a connection.  Drop a connection ref when we're done.
+ */
+static void ceph_con_workfn(struct work_struct *work)
+{
+	struct ceph_connection *con = container_of(work, struct ceph_connection,
+						   work.work);
+	bool fault;
+
+	mutex_lock(&con->mutex);
+	while (true) {
+		int ret;
+
+		if ((fault = con_sock_closed(con))) {
+			dout("%s: con %p SOCK_CLOSED\n", __func__, con);
+			break;
+		}
+		if (con_backoff(con)) {
+			dout("%s: con %p BACKOFF\n", __func__, con);
+			break;
+		}
+		if (con->state == CEPH_CON_S_STANDBY) {
+			dout("%s: con %p STANDBY\n", __func__, con);
+			break;
+		}
+		if (con->state == CEPH_CON_S_CLOSED) {
+			dout("%s: con %p CLOSED\n", __func__, con);
+			BUG_ON(con->sock);
+			break;
+		}
+		if (con->state == CEPH_CON_S_PREOPEN) {
+			dout("%s: con %p PREOPEN\n", __func__, con);
+			BUG_ON(con->sock);
+		}
+
+		if (ceph_msgr2(from_msgr(con->msgr)))
+			ret = ceph_con_v2_try_read(con);
+		else
+			ret = ceph_con_v1_try_read(con);
+		if (ret < 0) {
+			if (ret == -EAGAIN)
+				continue;
+			if (!con->error_msg)
+				con->error_msg = "socket error on read";
+			fault = true;
+			break;
+		}
+
+		if (ceph_msgr2(from_msgr(con->msgr)))
+			ret = ceph_con_v2_try_write(con);
+		else
+			ret = ceph_con_v1_try_write(con);
+		if (ret < 0) {
+			if (ret == -EAGAIN)
+				continue;
+			if (!con->error_msg)
+				con->error_msg = "socket error on write";
+			fault = true;
+		}
+
+		break;	/* If we make it to here, we're done */
+	}
+	if (fault)
+		con_fault(con);
+	mutex_unlock(&con->mutex);
+
+	if (fault)
+		con_fault_finish(con);
+
+	con->ops->put(con);
+}
+
+/*
+ * Generic error/fault handler.  A retry mechanism is used with
+ * exponential backoff
+ */
+static void con_fault(struct ceph_connection *con)
+{
+	dout("fault %p state %d to peer %s\n",
+	     con, con->state, ceph_pr_addr(&con->peer_addr));
+
+	pr_warn("%s%lld %s %s\n", ENTITY_NAME(con->peer_name),
+		ceph_pr_addr(&con->peer_addr), con->error_msg);
+	con->error_msg = NULL;
+
+	WARN_ON(con->state == CEPH_CON_S_STANDBY ||
+		con->state == CEPH_CON_S_CLOSED);
+
+	ceph_con_reset_protocol(con);
+
+	if (ceph_con_flag_test(con, CEPH_CON_F_LOSSYTX)) {
+		dout("fault on LOSSYTX channel, marking CLOSED\n");
+		con->state = CEPH_CON_S_CLOSED;
+		return;
+	}
+
+	/* Requeue anything that hasn't been acked */
+	list_splice_init(&con->out_sent, &con->out_queue);
+
+	/* If there are no messages queued or keepalive pending, place
+	 * the connection in a STANDBY state */
+	if (list_empty(&con->out_queue) &&
+	    !ceph_con_flag_test(con, CEPH_CON_F_KEEPALIVE_PENDING)) {
+		dout("fault %p setting STANDBY clearing WRITE_PENDING\n", con);
+		ceph_con_flag_clear(con, CEPH_CON_F_WRITE_PENDING);
+		con->state = CEPH_CON_S_STANDBY;
+	} else {
+		/* retry after a delay. */
+		con->state = CEPH_CON_S_PREOPEN;
+		if (!con->delay) {
+			con->delay = BASE_DELAY_INTERVAL;
+		} else if (con->delay < MAX_DELAY_INTERVAL) {
+			con->delay *= 2;
+			if (con->delay > MAX_DELAY_INTERVAL)
+				con->delay = MAX_DELAY_INTERVAL;
+		}
+		ceph_con_flag_set(con, CEPH_CON_F_BACKOFF);
+		queue_con(con);
+	}
+}
+
+void ceph_messenger_reset_nonce(struct ceph_messenger *msgr)
+{
+	u32 nonce = le32_to_cpu(msgr->inst.addr.nonce) + 1000000;
+	msgr->inst.addr.nonce = cpu_to_le32(nonce);
+	ceph_encode_my_addr(msgr);
+}
+
+/*
+ * initialize a new messenger instance
+ */
+void ceph_messenger_init(struct ceph_messenger *msgr,
+			 struct ceph_entity_addr *myaddr)
+{
+	spin_lock_init(&msgr->global_seq_lock);
+
+	if (myaddr) {
+		memcpy(&msgr->inst.addr.in_addr, &myaddr->in_addr,
+		       sizeof(msgr->inst.addr.in_addr));
+		ceph_addr_set_port(&msgr->inst.addr, 0);
+	}
+
+	/*
+	 * Since nautilus, clients are identified using type ANY.
+	 * For msgr1, ceph_encode_banner_addr() munges it to NONE.
+	 */
+	msgr->inst.addr.type = CEPH_ENTITY_ADDR_TYPE_ANY;
+
+	/* generate a random non-zero nonce */
+	do {
+		get_random_bytes(&msgr->inst.addr.nonce,
+				 sizeof(msgr->inst.addr.nonce));
+	} while (!msgr->inst.addr.nonce);
+	ceph_encode_my_addr(msgr);
+
+	atomic_set(&msgr->stopping, 0);
+	write_pnet(&msgr->net, get_net(current->nsproxy->net_ns));
+
+	dout("%s %p\n", __func__, msgr);
+}
+
+void ceph_messenger_fini(struct ceph_messenger *msgr)
+{
+	put_net(read_pnet(&msgr->net));
+}
+
+static void msg_con_set(struct ceph_msg *msg, struct ceph_connection *con)
+{
+	if (msg->con)
+		msg->con->ops->put(msg->con);
+
+	msg->con = con ? con->ops->get(con) : NULL;
+	BUG_ON(msg->con != con);
+}
+
+static void clear_standby(struct ceph_connection *con)
+{
+	/* come back from STANDBY? */
+	if (con->state == CEPH_CON_S_STANDBY) {
+		dout("clear_standby %p and ++connect_seq\n", con);
+		con->state = CEPH_CON_S_PREOPEN;
+		con->v1.connect_seq++;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		WARN_ON(ceph_con_flag_test(con, CEPH_CON_F_WRITE_PENDING));
 		WARN_ON(ceph_con_flag_test(con, CEPH_CON_F_KEEPALIVE_PENDING));
 	}

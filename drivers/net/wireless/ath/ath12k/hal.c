@@ -2107,6 +2107,7 @@ void *ath12k_hal_srng_src_get_next_reaped(struct ath12k_base *ab,
 
 void ath12k_hal_srng_access_begin(struct ath12k_base *ab, struct hal_srng *srng)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	u32 hp;
 
 	lockdep_assert_held(&srng->lock);
@@ -2172,6 +2173,48 @@ void ath12k_hal_srng_access_end(struct ath12k_base *ab, struct hal_srng *srng)
 			 * tail pointer.
 			 */
 			mb();
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	lockdep_assert_held(&srng->lock);
+
+	if (srng->ring_dir == HAL_SRNG_DIR_SRC)
+		srng->u.src_ring.cached_tp =
+			*(volatile u32 *)srng->u.src_ring.tp_addr;
+	else
+		srng->u.dst_ring.cached_hp = READ_ONCE(*srng->u.dst_ring.hp_addr);
+}
+
+/* Update cached ring head/tail pointers to HW. ath12k_hal_srng_access_begin()
+ * should have been called before this.
+ */
+void ath12k_hal_srng_access_end(struct ath12k_base *ab, struct hal_srng *srng)
+{
+	lockdep_assert_held(&srng->lock);
+
+	/* TODO: See if we need a write memory barrier here */
+	if (srng->flags & HAL_SRNG_FLAGS_LMAC_RING) {
+		/* For LMAC rings, ring pointer updates are done through FW and
+		 * hence written to a shared memory location that is read by FW
+		 */
+		if (srng->ring_dir == HAL_SRNG_DIR_SRC) {
+			srng->u.src_ring.last_tp =
+				*(volatile u32 *)srng->u.src_ring.tp_addr;
+			*srng->u.src_ring.hp_addr = srng->u.src_ring.hp;
+		} else {
+			srng->u.dst_ring.last_hp = *srng->u.dst_ring.hp_addr;
+			*srng->u.dst_ring.tp_addr = srng->u.dst_ring.tp;
+		}
+	} else {
+		if (srng->ring_dir == HAL_SRNG_DIR_SRC) {
+			srng->u.src_ring.last_tp =
+				*(volatile u32 *)srng->u.src_ring.tp_addr;
+			ath12k_hif_write32(ab,
+					   (unsigned long)srng->u.src_ring.hp_addr -
+					   (unsigned long)ab->mem,
+					   srng->u.src_ring.hp);
+		} else {
+			srng->u.dst_ring.last_hp = *srng->u.dst_ring.hp_addr;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 			ath12k_hif_write32(ab,
 					   (unsigned long)srng->u.dst_ring.tp_addr -
 					   (unsigned long)ab->mem,

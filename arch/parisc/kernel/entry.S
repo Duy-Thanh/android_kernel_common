@@ -499,6 +499,7 @@
 	 * this happens is quite subtle, read below */
 	.macro		make_insert_tlb	spc,pte,prot,tmp
 	space_to_prot   \spc \prot        /* create prot id from space */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 
 #if _PAGE_SPECIAL_BIT == _PAGE_DMB_BIT
 	/* need to drop DMB bit, as it's used as SPECIAL flag */
@@ -529,6 +530,32 @@
 	extrd,u,*=      \pte,_PAGE_USER_BIT+32,1,%r0
 	depdi		7,11,3,\prot
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* The following is the real subtlety.  This is depositing
+	 * T <-> _PAGE_REFTRAP
+	 * D <-> _PAGE_DIRTY
+	 * B <-> _PAGE_DMB (memory break)
+	 *
+	 * Then incredible subtlety: The access rights are
+	 * _PAGE_GATEWAY, _PAGE_EXEC and _PAGE_WRITE
+	 * See 3-14 of the parisc 2.0 manual
+	 *
+	 * Finally, _PAGE_READ goes in the top bit of PL1 (so we
+	 * trigger an access rights trap in user space if the user
+	 * tries to read an unreadable page */
+#if _PAGE_SPECIAL_BIT == _PAGE_DMB_BIT
+	/* need to drop DMB bit, as it's used as SPECIAL flag */
+	depi		0,_PAGE_SPECIAL_BIT,1,\pte
+#endif
+	depd            \pte,8,7,\prot
+
+	/* PAGE_USER indicates the page can be read with user privileges,
+	 * so deposit X1|11 to PL1|PL2 (remember the upper bit of PL1
+	 * contains _PAGE_READ) */
+	extrd,u,*=      \pte,_PAGE_USER_BIT+32,1,%r0
+	depdi		7,11,3,\prot
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	/* If we're a gateway page, drop PL2 back to zero for promotion
 	 * to kernel privilege (so we can execute the page as kernel).
 	 * Any privilege promotion page always denys read and write */

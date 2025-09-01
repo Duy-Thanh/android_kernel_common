@@ -3164,6 +3164,7 @@ tegra210_xusb_padctl_probe(struct device *dev,
 	}
 
 	pdev = of_find_device_by_node(np);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	of_node_put(np);
 	if (!pdev) {
 		dev_warn(dev, "PMC device is not available\n");
@@ -3180,6 +3181,21 @@ tegra210_xusb_padctl_probe(struct device *dev,
 		dev_info(dev, "failed to find PMC regmap\n");
 
 	put_device(&pdev->dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (!pdev) {
+		dev_warn(dev, "PMC device is not available\n");
+		goto out;
+	}
+
+	if (!platform_get_drvdata(pdev))
+		return ERR_PTR(-EPROBE_DEFER);
+
+	padctl->regmap = dev_get_regmap(&pdev->dev, "usb_sleepwalk");
+	if (!padctl->regmap)
+		dev_info(dev, "failed to find PMC regmap\n");
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 out:
 	return &padctl->base;
 }

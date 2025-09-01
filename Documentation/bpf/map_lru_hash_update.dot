@@ -35,6 +35,7 @@ digraph {
   fn_bpf_lru_list_pop_free_to_local [shape=rectangle,fillcolor=2,
     label="Flush local pending,
     Rotate Global list, move
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
     target_free
     from global -> local"]
   // Also corresponds to:
@@ -47,6 +48,21 @@ digraph {
     label="Shrink inactive list
       up to remaining
       target_free
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+    LOCAL_FREE_TARGET
+    from global -> local"]
+  // Also corresponds to:
+  // fn__local_list_flush()
+  // fn_bpf_lru_list_rotate()
+  fn___bpf_lru_node_move_to_free[shape=diamond,fillcolor=2,
+    label="Able to free\nLOCAL_FREE_TARGET\nnodes?"]
+
+  fn___bpf_lru_list_shrink_inactive [shape=rectangle,fillcolor=3,
+    label="Shrink inactive list
+      up to remaining
+      LOCAL_FREE_TARGET
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
       (global LRU -> local)"]
   fn___bpf_lru_list_shrink [shape=diamond,fillcolor=2,
     label="> 0 entries in\nlocal free list?"]

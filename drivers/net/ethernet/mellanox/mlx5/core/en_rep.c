@@ -1497,6 +1497,7 @@ static const struct mlx5e_profile mlx5e_uplink_rep_profile = {
 static int
 mlx5e_vport_uplink_rep_load(struct mlx5_core_dev *dev, struct mlx5_eswitch_rep *rep)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct mlx5e_rep_priv *rpriv = mlx5e_rep_to_rep_priv(rep);
 	struct net_device *netdev;
 	struct mlx5e_priv *priv;
@@ -1648,6 +1649,143 @@ mlx5e_vport_rep_unload(struct mlx5_eswitch_rep *rep)
 
 	priv = netdev_priv(netdev);
 	ppriv = priv->ppriv;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	struct mlx5e_priv *priv = netdev_priv(mlx5_uplink_netdev_get(dev));
+	struct mlx5e_rep_priv *rpriv = mlx5e_rep_to_rep_priv(rep);
+
+	rpriv->netdev = priv->netdev;
+	return mlx5e_netdev_change_profile(priv, &mlx5e_uplink_rep_profile,
+					   rpriv);
+}
+
+static void
+mlx5e_vport_uplink_rep_unload(struct mlx5e_rep_priv *rpriv)
+{
+	struct net_device *netdev = rpriv->netdev;
+	struct mlx5e_priv *priv;
+
+	priv = netdev_priv(netdev);
+
+	/* This bit is set when using devlink to change eswitch mode from
+	 * switchdev to legacy. As need to keep uplink netdev ifindex, we
+	 * detach uplink representor profile and attach NIC profile only.
+	 * The netdev will be unregistered later when unload NIC auxiliary
+	 * driver for this case.
+	 * We explicitly block devlink eswitch mode change if any IPSec rules
+	 * offloaded, but can't block other cases, such as driver unload
+	 * and devlink reload. We have to unregister netdev before profile
+	 * change for those cases. This is to avoid resource leak because
+	 * the offloaded rules don't have the chance to be unoffloaded before
+	 * cleanup which is triggered by detach uplink representor profile.
+	 */
+	if (!(priv->mdev->priv.flags & MLX5_PRIV_FLAGS_SWITCH_LEGACY))
+		unregister_netdev(netdev);
+
+	mlx5e_netdev_attach_nic_profile(priv);
+}
+
+static int
+mlx5e_vport_vf_rep_load(struct mlx5_core_dev *dev, struct mlx5_eswitch_rep *rep)
+{
+	struct mlx5e_rep_priv *rpriv = mlx5e_rep_to_rep_priv(rep);
+	const struct mlx5e_profile *profile;
+	struct devlink_port *dl_port;
+	struct net_device *netdev;
+	struct mlx5e_priv *priv;
+	int err;
+
+	profile = &mlx5e_rep_profile;
+	netdev = mlx5e_create_netdev(dev, profile);
+	if (!netdev) {
+		mlx5_core_warn(dev,
+			       "Failed to create representor netdev for vport %d\n",
+			       rep->vport);
+		return -EINVAL;
+	}
+
+	mlx5e_build_rep_netdev(netdev, dev);
+	rpriv->netdev = netdev;
+
+	priv = netdev_priv(netdev);
+	priv->profile = profile;
+	priv->ppriv = rpriv;
+	err = profile->init(dev, netdev);
+	if (err) {
+		netdev_warn(netdev, "rep profile init failed, %d\n", err);
+		goto err_destroy_netdev;
+	}
+
+	err = mlx5e_attach_netdev(netdev_priv(netdev));
+	if (err) {
+		netdev_warn(netdev,
+			    "Failed to attach representor netdev for vport %d\n",
+			    rep->vport);
+		goto err_cleanup_profile;
+	}
+
+	dl_port = mlx5_esw_offloads_devlink_port(dev->priv.eswitch,
+						 rpriv->rep->vport);
+	if (!IS_ERR(dl_port)) {
+		SET_NETDEV_DEVLINK_PORT(netdev, dl_port);
+		mlx5e_rep_vnic_reporter_create(priv, dl_port);
+	}
+
+	err = register_netdev(netdev);
+	if (err) {
+		netdev_warn(netdev,
+			    "Failed to register representor netdev for vport %d\n",
+			    rep->vport);
+		goto err_detach_netdev;
+	}
+
+	return 0;
+
+err_detach_netdev:
+	mlx5e_rep_vnic_reporter_destroy(priv);
+	mlx5e_detach_netdev(netdev_priv(netdev));
+err_cleanup_profile:
+	priv->profile->cleanup(priv);
+
+err_destroy_netdev:
+	mlx5e_destroy_netdev(netdev_priv(netdev));
+	return err;
+}
+
+static int
+mlx5e_vport_rep_load(struct mlx5_core_dev *dev, struct mlx5_eswitch_rep *rep)
+{
+	struct mlx5e_rep_priv *rpriv;
+	int err;
+
+	rpriv = kvzalloc(sizeof(*rpriv), GFP_KERNEL);
+	if (!rpriv)
+		return -ENOMEM;
+
+	/* rpriv->rep to be looked up when profile->init() is called */
+	rpriv->rep = rep;
+	rep->rep_data[REP_ETH].priv = rpriv;
+	INIT_LIST_HEAD(&rpriv->vport_sqs_list);
+
+	if (rep->vport == MLX5_VPORT_UPLINK)
+		err = mlx5e_vport_uplink_rep_load(dev, rep);
+	else
+		err = mlx5e_vport_vf_rep_load(dev, rep);
+
+	if (err)
+		kvfree(rpriv);
+
+	return err;
+}
+
+static void
+mlx5e_vport_rep_unload(struct mlx5_eswitch_rep *rep)
+{
+	struct mlx5e_rep_priv *rpriv = mlx5e_rep_to_rep_priv(rep);
+	struct net_device *netdev = rpriv->netdev;
+	struct mlx5e_priv *priv = netdev_priv(netdev);
+	void *ppriv = priv->ppriv;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (rep->vport == MLX5_VPORT_UPLINK) {
 		mlx5e_vport_uplink_rep_unload(rpriv);

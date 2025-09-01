@@ -94,6 +94,7 @@ DECLARE_STATIC_CALL(xen_hypercall, xen_hypercall_func);
 #ifdef MODULE
 #define __ADDRESSABLE_xen_hypercall
 #else
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 #define __ADDRESSABLE_xen_hypercall \
 	__stringify(.global STATIC_CALL_KEY(xen_hypercall);)
 #endif
@@ -101,6 +102,15 @@ DECLARE_STATIC_CALL(xen_hypercall, xen_hypercall_func);
 #define __HYPERCALL					\
 	__ADDRESSABLE_xen_hypercall			\
 	__stringify(call STATIC_CALL_TRAMP(xen_hypercall))
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#define __ADDRESSABLE_xen_hypercall __ADDRESSABLE_ASM_STR(__SCK__xen_hypercall)
+#endif
+
+#define __HYPERCALL					\
+	__ADDRESSABLE_xen_hypercall			\
+	"call __SCT__xen_hypercall"
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #define __HYPERCALL_ENTRY(x)	"a" (x)
 

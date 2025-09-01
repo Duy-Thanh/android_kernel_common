@@ -4655,6 +4655,7 @@ static int dpaa2_eth_connect_mac(struct dpaa2_eth_priv *priv)
 		return PTR_ERR(dpmac_dev);
 	}
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (IS_ERR(dpmac_dev))
 		return 0;
 
@@ -4703,6 +4704,48 @@ err_free_mac:
 	kfree(mac);
 out_put_device:
 	put_device(&dpmac_dev->dev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	if (IS_ERR(dpmac_dev) || dpmac_dev->dev.type != &fsl_mc_bus_dpmac_type)
+		return 0;
+
+	mac = kzalloc(sizeof(struct dpaa2_mac), GFP_KERNEL);
+	if (!mac)
+		return -ENOMEM;
+
+	mac->mc_dev = dpmac_dev;
+	mac->mc_io = priv->mc_io;
+	mac->net_dev = priv->net_dev;
+
+	err = dpaa2_mac_open(mac);
+	if (err)
+		goto err_free_mac;
+
+	if (dpaa2_mac_is_type_phy(mac)) {
+		err = dpaa2_mac_connect(mac);
+		if (err) {
+			if (err == -EPROBE_DEFER)
+				netdev_dbg(priv->net_dev,
+					   "could not connect to MAC\n");
+			else
+				netdev_err(priv->net_dev,
+					   "Error connecting to the MAC endpoint: %pe",
+					   ERR_PTR(err));
+			goto err_close_mac;
+		}
+	}
+
+	mutex_lock(&priv->mac_lock);
+	priv->mac = mac;
+	mutex_unlock(&priv->mac_lock);
+
+	return 0;
+
+err_close_mac:
+	dpaa2_mac_close(mac);
+err_free_mac:
+	kfree(mac);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return err;
 }
 

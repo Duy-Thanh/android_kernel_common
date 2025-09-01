@@ -1615,6 +1615,7 @@ static void bnxt_re_free_nqr_mem(struct bnxt_re_dev *rdev)
 	rdev->nqr = NULL;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 /* When DEL_GID fails, driver is not freeing GID ctx memory.
  * To avoid the memory leak, free the memory during unload
  */
@@ -1646,6 +1647,17 @@ static void bnxt_re_dev_uninit(struct bnxt_re_dev *rdev, u8 op_type)
 		cancel_delayed_work_sync(&rdev->worker);
 
 	bnxt_re_free_gid_ctx(rdev);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static void bnxt_re_dev_uninit(struct bnxt_re_dev *rdev, u8 op_type)
+{
+	u8 type;
+	int rc;
+
+	if (test_and_clear_bit(BNXT_RE_FLAG_QOS_WORK_REG, &rdev->flags))
+		cancel_delayed_work_sync(&rdev->worker);
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	if (test_and_clear_bit(BNXT_RE_FLAG_RESOURCES_INITIALIZED,
 			       &rdev->flags))
 		bnxt_re_cleanup_res(rdev);

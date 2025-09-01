@@ -300,6 +300,7 @@ struct drm_file {
 	 *
 	 * Mapping of mm object handles to object pointers. Used by the GEM
 	 * subsystem. Protected by @table_lock.
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	 *
 	 * Note that allocated entries might be NULL as a transient state when
 	 * creating or deleting a handle.
@@ -490,6 +491,191 @@ void drm_fdinfo_print_size(struct drm_printer *p,
 			   const char *stat,
 			   const char *region,
 			   u64 sz);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	 */
+	struct idr object_idr;
+
+	/** @table_lock: Protects @object_idr. */
+	spinlock_t table_lock;
+
+	/** @syncobj_idr: Mapping of sync object handles to object pointers. */
+	struct idr syncobj_idr;
+	/** @syncobj_table_lock: Protects @syncobj_idr. */
+	spinlock_t syncobj_table_lock;
+
+	/** @filp: Pointer to the core file structure. */
+	struct file *filp;
+
+	/**
+	 * @driver_priv:
+	 *
+	 * Optional pointer for driver private data. Can be allocated in
+	 * &drm_driver.open and should be freed in &drm_driver.postclose.
+	 */
+	void *driver_priv;
+
+	/**
+	 * @fbs:
+	 *
+	 * List of &struct drm_framebuffer associated with this file, using the
+	 * &drm_framebuffer.filp_head entry.
+	 *
+	 * Protected by @fbs_lock. Note that the @fbs list holds a reference on
+	 * the framebuffer object to prevent it from untimely disappearing.
+	 */
+	struct list_head fbs;
+
+	/** @fbs_lock: Protects @fbs. */
+	struct mutex fbs_lock;
+
+	/**
+	 * @blobs:
+	 *
+	 * User-created blob properties; this retains a reference on the
+	 * property.
+	 *
+	 * Protected by @drm_mode_config.blob_lock;
+	 */
+	struct list_head blobs;
+
+	/** @event_wait: Waitqueue for new events added to @event_list. */
+	wait_queue_head_t event_wait;
+
+	/**
+	 * @pending_event_list:
+	 *
+	 * List of pending &struct drm_pending_event, used to clean up pending
+	 * events in case this file gets closed before the event is signalled.
+	 * Uses the &drm_pending_event.pending_link entry.
+	 *
+	 * Protect by &drm_device.event_lock.
+	 */
+	struct list_head pending_event_list;
+
+	/**
+	 * @event_list:
+	 *
+	 * List of &struct drm_pending_event, ready for delivery to userspace
+	 * through drm_read(). Uses the &drm_pending_event.link entry.
+	 *
+	 * Protect by &drm_device.event_lock.
+	 */
+	struct list_head event_list;
+
+	/**
+	 * @event_space:
+	 *
+	 * Available event space to prevent userspace from
+	 * exhausting kernel memory. Currently limited to the fairly arbitrary
+	 * value of 4KB.
+	 */
+	int event_space;
+
+	/** @event_read_lock: Serializes drm_read(). */
+	struct mutex event_read_lock;
+
+	/**
+	 * @prime:
+	 *
+	 * Per-file buffer caches used by the PRIME buffer sharing code.
+	 */
+	struct drm_prime_file_private prime;
+};
+
+/**
+ * drm_is_primary_client - is this an open file of the primary node
+ * @file_priv: DRM file
+ *
+ * Returns true if this is an open file of the primary node, i.e.
+ * &drm_file.minor of @file_priv is a primary minor.
+ *
+ * See also the :ref:`section on primary nodes and authentication
+ * <drm_primary_node>`.
+ */
+static inline bool drm_is_primary_client(const struct drm_file *file_priv)
+{
+	return file_priv->minor->type == DRM_MINOR_PRIMARY;
+}
+
+/**
+ * drm_is_render_client - is this an open file of the render node
+ * @file_priv: DRM file
+ *
+ * Returns true if this is an open file of the render node, i.e.
+ * &drm_file.minor of @file_priv is a render minor.
+ *
+ * See also the :ref:`section on render nodes <drm_render_node>`.
+ */
+static inline bool drm_is_render_client(const struct drm_file *file_priv)
+{
+	return file_priv->minor->type == DRM_MINOR_RENDER;
+}
+
+/**
+ * drm_is_accel_client - is this an open file of the compute acceleration node
+ * @file_priv: DRM file
+ *
+ * Returns true if this is an open file of the compute acceleration node, i.e.
+ * &drm_file.minor of @file_priv is a accel minor.
+ *
+ * See also :doc:`Introduction to compute accelerators subsystem
+ * </accel/introduction>`.
+ */
+static inline bool drm_is_accel_client(const struct drm_file *file_priv)
+{
+	return file_priv->minor->type == DRM_MINOR_ACCEL;
+}
+
+void drm_file_update_pid(struct drm_file *);
+
+struct drm_minor *drm_minor_acquire(struct xarray *minors_xa, unsigned int minor_id);
+void drm_minor_release(struct drm_minor *minor);
+
+int drm_open(struct inode *inode, struct file *filp);
+int drm_open_helper(struct file *filp, struct drm_minor *minor);
+ssize_t drm_read(struct file *filp, char __user *buffer,
+		 size_t count, loff_t *offset);
+int drm_release(struct inode *inode, struct file *filp);
+int drm_release_noglobal(struct inode *inode, struct file *filp);
+__poll_t drm_poll(struct file *filp, struct poll_table_struct *wait);
+int drm_event_reserve_init_locked(struct drm_device *dev,
+				  struct drm_file *file_priv,
+				  struct drm_pending_event *p,
+				  struct drm_event *e);
+int drm_event_reserve_init(struct drm_device *dev,
+			   struct drm_file *file_priv,
+			   struct drm_pending_event *p,
+			   struct drm_event *e);
+void drm_event_cancel_free(struct drm_device *dev,
+			   struct drm_pending_event *p);
+void drm_send_event_locked(struct drm_device *dev, struct drm_pending_event *e);
+void drm_send_event(struct drm_device *dev, struct drm_pending_event *e);
+void drm_send_event_timestamp_locked(struct drm_device *dev,
+				     struct drm_pending_event *e,
+				     ktime_t timestamp);
+
+/**
+ * struct drm_memory_stats - GEM object stats associated
+ * @shared: Total size of GEM objects shared between processes
+ * @private: Total size of GEM objects
+ * @resident: Total size of GEM objects backing pages
+ * @purgeable: Total size of GEM objects that can be purged (resident and not active)
+ * @active: Total size of GEM objects active on one or more engines
+ *
+ * Used by drm_print_memory_stats()
+ */
+struct drm_memory_stats {
+	u64 shared;
+	u64 private;
+	u64 resident;
+	u64 purgeable;
+	u64 active;
+};
+
+enum drm_gem_object_status;
+
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 void drm_print_memory_stats(struct drm_printer *p,
 			    const struct drm_memory_stats *stats,
 			    enum drm_gem_object_status supported_status,

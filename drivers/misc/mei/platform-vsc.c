@@ -379,6 +379,7 @@ err_stop:
 err_cancel:
 	mei_cancel_work(mei_dev);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	vsc_tp_register_event_cb(tp, NULL, NULL);
 
 	mei_disable_interrupts(mei_dev);
@@ -396,6 +397,21 @@ static void mei_vsc_remove(struct platform_device *pdev)
 	mei_stop(mei_dev);
 
 	vsc_tp_register_event_cb(hw->tp, NULL, NULL);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	mei_disable_interrupts(mei_dev);
+
+	return ret;
+}
+
+static void mei_vsc_remove(struct platform_device *pdev)
+{
+	struct mei_device *mei_dev = platform_get_drvdata(pdev);
+
+	pm_runtime_disable(mei_dev->dev);
+
+	mei_stop(mei_dev);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	mei_disable_interrupts(mei_dev);
 

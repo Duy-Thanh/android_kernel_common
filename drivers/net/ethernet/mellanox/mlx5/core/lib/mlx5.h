@@ -52,6 +52,7 @@ static inline struct net *mlx5_core_net(struct mlx5_core_dev *dev)
 
 static inline struct net_device *mlx5_uplink_netdev_get(struct mlx5_core_dev *mdev)
 {
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct mlx5e_resources *mlx5e_res = &mdev->mlx5e_res;
 	struct net_device *netdev;
 
@@ -66,6 +67,10 @@ static inline void mlx5_uplink_netdev_put(struct mlx5_core_dev *mdev,
 					  struct net_device *netdev)
 {
 	netdev_put(netdev, &mdev->mlx5e_res.tracker);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	return mdev->mlx5e_res.uplink_netdev;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 struct mlx5_sd;

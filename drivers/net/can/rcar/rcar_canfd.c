@@ -732,6 +732,7 @@ static int rcar_canfd_reset_controller(struct rcar_canfd_global *gpriv)
 	/* Reset Global error flags */
 	rcar_canfd_write(gpriv->base, RCANFD_GERFL, 0x0);
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	/* Transition all Channels to reset mode */
 	for_each_set_bit(ch, &gpriv->channels_mask, gpriv->info->max_channels) {
 		rcar_canfd_clear_bit(gpriv->base,
@@ -755,6 +756,31 @@ static int rcar_canfd_reset_controller(struct rcar_canfd_global *gpriv)
 	/* Set the controller into appropriate mode */
 	rcar_canfd_set_mode(gpriv);
 
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	/* Set the controller into appropriate mode */
+	rcar_canfd_set_mode(gpriv);
+
+	/* Transition all Channels to reset mode */
+	for_each_set_bit(ch, &gpriv->channels_mask, gpriv->info->max_channels) {
+		rcar_canfd_clear_bit(gpriv->base,
+				     RCANFD_CCTR(ch), RCANFD_CCTR_CSLPR);
+
+		rcar_canfd_update_bit(gpriv->base, RCANFD_CCTR(ch),
+				      RCANFD_CCTR_CHMDC_MASK,
+				      RCANFD_CCTR_CHDMC_CRESET);
+
+		/* Ensure Channel reset mode */
+		err = readl_poll_timeout((gpriv->base + RCANFD_CSTS(ch)), sts,
+					 (sts & RCANFD_CSTS_CRSTSTS),
+					 2, 500000);
+		if (err) {
+			dev_dbg(&gpriv->pdev->dev,
+				"channel %u reset failed\n", ch);
+			return err;
+		}
+	}
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	return 0;
 }
 

@@ -1668,6 +1668,7 @@ static int smu_v14_0_2_get_power_limit(struct smu_context *smu,
 				       uint32_t *min_power_limit)
 {
 	struct smu_table_context *table_context = &smu->smu_table;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	struct smu_14_0_2_powerplay_table *powerplay_table =
 		table_context->power_play_table;
 	PPTable_t *pptable = table_context->driver_pptable;
@@ -1708,6 +1709,29 @@ static int smu_v14_0_2_get_power_limit(struct smu_context *smu,
 		*min_power_limit = power_limit * (100 + od_percent_lower);
 		*min_power_limit /= 100;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	PPTable_t *pptable = table_context->driver_pptable;
+	CustomSkuTable_t *skutable = &pptable->CustomSkuTable;
+	uint32_t power_limit;
+	uint32_t msg_limit = pptable->SkuTable.MsgLimits.Power[PPT_THROTTLER_PPT0][POWER_SOURCE_AC];
+
+	if (smu_v14_0_get_current_power_limit(smu, &power_limit))
+		power_limit = smu->adev->pm.ac_power ?
+			      skutable->SocketPowerLimitAc[PPT_THROTTLER_PPT0] :
+			      skutable->SocketPowerLimitDc[PPT_THROTTLER_PPT0];
+
+	if (current_power_limit)
+		*current_power_limit = power_limit;
+	if (default_power_limit)
+		*default_power_limit = power_limit;
+
+	if (max_power_limit)
+		*max_power_limit = msg_limit;
+
+	if (min_power_limit)
+		*min_power_limit = 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	return 0;
 }

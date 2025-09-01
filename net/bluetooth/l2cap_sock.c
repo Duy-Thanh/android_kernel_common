@@ -1409,6 +1409,7 @@ static int l2cap_sock_release(struct socket *sock)
 	if (!sk)
 		return 0;
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	lock_sock_nested(sk, L2CAP_NESTING_PARENT);
 	l2cap_sock_cleanup_listen(sk);
 	release_sock(sk);
@@ -1695,6 +1696,289 @@ static void l2cap_sock_resume_cb(struct l2cap_chan *chan)
 
 	if (!sk)
 		return;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	l2cap_sock_cleanup_listen(sk);
+	bt_sock_unlink(&l2cap_sk_list, sk);
+
+	err = l2cap_sock_shutdown(sock, SHUT_RDWR);
+	chan = l2cap_pi(sk)->chan;
+
+	l2cap_chan_hold(chan);
+	l2cap_chan_lock(chan);
+
+	sock_orphan(sk);
+	l2cap_sock_kill(sk);
+
+	l2cap_chan_unlock(chan);
+	l2cap_chan_put(chan);
+
+	return err;
+}
+
+static void l2cap_sock_cleanup_listen(struct sock *parent)
+{
+	struct sock *sk;
+
+	BT_DBG("parent %p state %s", parent,
+	       state_to_string(parent->sk_state));
+
+	/* Close not yet accepted channels */
+	while ((sk = bt_accept_dequeue(parent, NULL))) {
+		struct l2cap_chan *chan = l2cap_pi(sk)->chan;
+
+		BT_DBG("child chan %p state %s", chan,
+		       state_to_string(chan->state));
+
+		l2cap_chan_hold(chan);
+		l2cap_chan_lock(chan);
+
+		__clear_chan_timer(chan);
+		l2cap_chan_close(chan, ECONNRESET);
+		l2cap_sock_kill(sk);
+
+		l2cap_chan_unlock(chan);
+		l2cap_chan_put(chan);
+	}
+}
+
+static struct l2cap_chan *l2cap_sock_new_connection_cb(struct l2cap_chan *chan)
+{
+	struct sock *sk, *parent = chan->data;
+
+	lock_sock(parent);
+
+	/* Check for backlog size */
+	if (sk_acceptq_is_full(parent)) {
+		BT_DBG("backlog full %d", parent->sk_ack_backlog);
+		release_sock(parent);
+		return NULL;
+	}
+
+	sk = l2cap_sock_alloc(sock_net(parent), NULL, BTPROTO_L2CAP,
+			      GFP_ATOMIC, 0);
+	if (!sk) {
+		release_sock(parent);
+		return NULL;
+        }
+
+	bt_sock_reclassify_lock(sk, BTPROTO_L2CAP);
+
+	l2cap_sock_init(sk, parent);
+
+	bt_accept_enqueue(parent, sk, false);
+
+	release_sock(parent);
+
+	return l2cap_pi(sk)->chan;
+}
+
+static int l2cap_sock_recv_cb(struct l2cap_chan *chan, struct sk_buff *skb)
+{
+	struct sock *sk;
+	struct l2cap_pinfo *pi;
+	int err;
+
+	sk = chan->data;
+	if (!sk)
+		return -ENXIO;
+
+	pi = l2cap_pi(sk);
+	lock_sock(sk);
+	if (chan->mode == L2CAP_MODE_ERTM && !list_empty(&pi->rx_busy)) {
+		err = -ENOMEM;
+		goto done;
+	}
+
+	if (chan->mode != L2CAP_MODE_ERTM &&
+	    chan->mode != L2CAP_MODE_STREAMING &&
+	    chan->mode != L2CAP_MODE_LE_FLOWCTL &&
+	    chan->mode != L2CAP_MODE_EXT_FLOWCTL) {
+		/* Even if no filter is attached, we could potentially
+		 * get errors from security modules, etc.
+		 */
+		err = sk_filter(sk, skb);
+		if (err)
+			goto done;
+	}
+
+	err = __sock_queue_rcv_skb(sk, skb);
+
+	l2cap_publish_rx_avail(chan);
+
+	/* For ERTM and LE, handle a skb that doesn't fit into the recv
+	 * buffer.  This is important to do because the data frames
+	 * have already been acked, so the skb cannot be discarded.
+	 *
+	 * Notify the l2cap core that the buffer is full, so the
+	 * LOCAL_BUSY state is entered and no more frames are
+	 * acked and reassembled until there is buffer space
+	 * available.
+	 */
+	if (err < 0 &&
+	    (chan->mode == L2CAP_MODE_ERTM ||
+	     chan->mode == L2CAP_MODE_LE_FLOWCTL ||
+	     chan->mode == L2CAP_MODE_EXT_FLOWCTL)) {
+		struct l2cap_rx_busy *rx_busy =
+			kmalloc(sizeof(*rx_busy), GFP_KERNEL);
+		if (!rx_busy) {
+			err = -ENOMEM;
+			goto done;
+		}
+		rx_busy->skb = skb;
+		list_add_tail(&rx_busy->list, &pi->rx_busy);
+		l2cap_chan_busy(chan, 1);
+		err = 0;
+	}
+
+done:
+	release_sock(sk);
+
+	return err;
+}
+
+static void l2cap_sock_close_cb(struct l2cap_chan *chan)
+{
+	struct sock *sk = chan->data;
+
+	if (!sk)
+		return;
+
+	l2cap_sock_kill(sk);
+}
+
+static void l2cap_sock_teardown_cb(struct l2cap_chan *chan, int err)
+{
+	struct sock *sk = chan->data;
+	struct sock *parent;
+
+	if (!sk)
+		return;
+
+	BT_DBG("chan %p state %s", chan, state_to_string(chan->state));
+
+	/* This callback can be called both for server (BT_LISTEN)
+	 * sockets as well as "normal" ones. To avoid lockdep warnings
+	 * with child socket locking (through l2cap_sock_cleanup_listen)
+	 * we need separation into separate nesting levels. The simplest
+	 * way to accomplish this is to inherit the nesting level used
+	 * for the channel.
+	 */
+	lock_sock_nested(sk, atomic_read(&chan->nesting));
+
+	parent = bt_sk(sk)->parent;
+
+	switch (chan->state) {
+	case BT_OPEN:
+	case BT_BOUND:
+	case BT_CLOSED:
+		break;
+	case BT_LISTEN:
+		l2cap_sock_cleanup_listen(sk);
+		sk->sk_state = BT_CLOSED;
+		chan->state = BT_CLOSED;
+
+		break;
+	default:
+		sk->sk_state = BT_CLOSED;
+		chan->state = BT_CLOSED;
+
+		sk->sk_err = err;
+
+		if (parent) {
+			bt_accept_unlink(sk);
+			parent->sk_data_ready(parent);
+		} else {
+			sk->sk_state_change(sk);
+		}
+
+		break;
+	}
+	release_sock(sk);
+
+	/* Only zap after cleanup to avoid use after free race */
+	sock_set_flag(sk, SOCK_ZAPPED);
+
+}
+
+static void l2cap_sock_state_change_cb(struct l2cap_chan *chan, int state,
+				       int err)
+{
+	struct sock *sk = chan->data;
+
+	sk->sk_state = state;
+
+	if (err)
+		sk->sk_err = err;
+}
+
+static struct sk_buff *l2cap_sock_alloc_skb_cb(struct l2cap_chan *chan,
+					       unsigned long hdr_len,
+					       unsigned long len, int nb)
+{
+	struct sock *sk = chan->data;
+	struct sk_buff *skb;
+	int err;
+
+	l2cap_chan_unlock(chan);
+	skb = bt_skb_send_alloc(sk, hdr_len + len, nb, &err);
+	l2cap_chan_lock(chan);
+
+	if (!skb)
+		return ERR_PTR(err);
+
+	/* Channel lock is released before requesting new skb and then
+	 * reacquired thus we need to recheck channel state.
+	 */
+	if (chan->state != BT_CONNECTED) {
+		kfree_skb(skb);
+		return ERR_PTR(-ENOTCONN);
+	}
+
+	skb->priority = READ_ONCE(sk->sk_priority);
+
+	bt_cb(skb)->l2cap.chan = chan;
+
+	return skb;
+}
+
+static void l2cap_sock_ready_cb(struct l2cap_chan *chan)
+{
+	struct sock *sk = chan->data;
+	struct sock *parent;
+
+	lock_sock(sk);
+
+	parent = bt_sk(sk)->parent;
+
+	BT_DBG("sk %p, parent %p", sk, parent);
+
+	sk->sk_state = BT_CONNECTED;
+	sk->sk_state_change(sk);
+
+	if (parent)
+		parent->sk_data_ready(parent);
+
+	release_sock(sk);
+}
+
+static void l2cap_sock_defer_cb(struct l2cap_chan *chan)
+{
+	struct sock *parent, *sk = chan->data;
+
+	lock_sock(sk);
+
+	parent = bt_sk(sk)->parent;
+	if (parent)
+		parent->sk_data_ready(parent);
+
+	release_sock(sk);
+}
+
+static void l2cap_sock_resume_cb(struct l2cap_chan *chan)
+{
+	struct sock *sk = chan->data;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (test_and_clear_bit(FLAG_PENDING_SECURITY, &chan->flags)) {
 		sk->sk_state = BT_CONNECTED;

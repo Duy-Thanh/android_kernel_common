@@ -2334,6 +2334,7 @@ static void pofs_unpin(struct pages_or_folios *pofs)
 		unpin_user_pages(pofs->pages, pofs->nr_entries);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static struct folio *pofs_next_folio(struct folio *folio,
 		struct pages_or_folios *pofs, long *index_ptr)
 {
@@ -2398,6 +2399,43 @@ static unsigned long collect_longterm_unpinnable_folios(
 				folio_expected_ref_count(folio) + 1) {
 			lru_add_drain_all();
 			drained = 2;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+/*
+ * Returns the number of collected folios. Return value is always >= 0.
+ */
+static unsigned long collect_longterm_unpinnable_folios(
+		struct list_head *movable_folio_list,
+		struct pages_or_folios *pofs)
+{
+	unsigned long i, collected = 0;
+	struct folio *prev_folio = NULL;
+	bool drain_allow = true;
+
+	for (i = 0; i < pofs->nr_entries; i++) {
+		struct folio *folio = pofs_get_folio(pofs, i);
+
+		if (folio == prev_folio)
+			continue;
+		prev_folio = folio;
+
+		if (folio_is_longterm_pinnable(folio))
+			continue;
+
+		collected++;
+
+		if (folio_is_device_coherent(folio))
+			continue;
+
+		if (folio_test_hugetlb(folio)) {
+			isolate_hugetlb(folio, movable_folio_list);
+			continue;
+		}
+
+		if (!folio_test_lru(folio) && drain_allow) {
+			lru_add_drain_all();
+			drain_allow = false;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 		}
 
 		if (!folio_isolate_lru(folio))

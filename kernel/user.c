@@ -22,6 +22,21 @@
 #include <linux/proc_ns.h>
 
 #include <trace/hooks/user.h>
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+#include <linux/android_kabi.h>
+
+ANDROID_KABI_DECLONLY(address_space);
+ANDROID_KABI_DECLONLY(cred);
+ANDROID_KABI_DECLONLY(dentry);
+ANDROID_KABI_DECLONLY(file);
+ANDROID_KABI_DECLONLY(io_context);
+ANDROID_KABI_DECLONLY(module);
+ANDROID_KABI_DECLONLY(pid);
+ANDROID_KABI_DECLONLY(sighand_struct);
+ANDROID_KABI_DECLONLY(signal_struct);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 #if IS_ENABLED(CONFIG_BINFMT_MISC)
 struct binfmt_misc init_binfmt_misc = {

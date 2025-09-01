@@ -208,6 +208,7 @@ static int sbitmap_find_bit_in_word(struct sbitmap_word *map,
 	return nr;
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static unsigned int __map_depth_with_shallow(const struct sbitmap *sb,
 					     int index,
 					     unsigned int shallow_depth)
@@ -429,6 +430,228 @@ static unsigned int sbq_calc_wake_batch(struct sbitmap_queue *sbq,
 	return clamp_t(unsigned int,
 		       min(depth, sbq->min_shallow_depth) / SBQ_WAIT_QUEUES,
 		       1, SBQ_WAKE_BATCH);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int sbitmap_find_bit(struct sbitmap *sb,
+			    unsigned int depth,
+			    unsigned int index,
+			    unsigned int alloc_hint,
+			    bool wrap)
+{
+	unsigned int i;
+	int nr = -1;
+
+	for (i = 0; i < sb->map_nr; i++) {
+		nr = sbitmap_find_bit_in_word(&sb->map[index],
+					      min_t(unsigned int,
+						    __map_depth(sb, index),
+						    depth),
+					      alloc_hint, wrap);
+
+		if (nr != -1) {
+			nr += index << sb->shift;
+			break;
+		}
+
+		/* Jump to next index. */
+		alloc_hint = 0;
+		if (++index >= sb->map_nr)
+			index = 0;
+	}
+
+	return nr;
+}
+
+static int __sbitmap_get(struct sbitmap *sb, unsigned int alloc_hint)
+{
+	unsigned int index;
+
+	index = SB_NR_TO_INDEX(sb, alloc_hint);
+
+	/*
+	 * Unless we're doing round robin tag allocation, just use the
+	 * alloc_hint to find the right word index. No point in looping
+	 * twice in find_next_zero_bit() for that case.
+	 */
+	if (sb->round_robin)
+		alloc_hint = SB_NR_TO_BIT(sb, alloc_hint);
+	else
+		alloc_hint = 0;
+
+	return sbitmap_find_bit(sb, UINT_MAX, index, alloc_hint,
+				!sb->round_robin);
+}
+
+int sbitmap_get(struct sbitmap *sb)
+{
+	int nr;
+	unsigned int hint, depth;
+
+	if (WARN_ON_ONCE(unlikely(!sb->alloc_hint)))
+		return -1;
+
+	depth = READ_ONCE(sb->depth);
+	hint = update_alloc_hint_before_get(sb, depth);
+	nr = __sbitmap_get(sb, hint);
+	update_alloc_hint_after_get(sb, depth, hint, nr);
+
+	return nr;
+}
+EXPORT_SYMBOL_GPL(sbitmap_get);
+
+static int __sbitmap_get_shallow(struct sbitmap *sb,
+				 unsigned int alloc_hint,
+				 unsigned long shallow_depth)
+{
+	unsigned int index;
+
+	index = SB_NR_TO_INDEX(sb, alloc_hint);
+	alloc_hint = SB_NR_TO_BIT(sb, alloc_hint);
+
+	return sbitmap_find_bit(sb, shallow_depth, index, alloc_hint, true);
+}
+
+int sbitmap_get_shallow(struct sbitmap *sb, unsigned long shallow_depth)
+{
+	int nr;
+	unsigned int hint, depth;
+
+	if (WARN_ON_ONCE(unlikely(!sb->alloc_hint)))
+		return -1;
+
+	depth = READ_ONCE(sb->depth);
+	hint = update_alloc_hint_before_get(sb, depth);
+	nr = __sbitmap_get_shallow(sb, hint, shallow_depth);
+	update_alloc_hint_after_get(sb, depth, hint, nr);
+
+	return nr;
+}
+EXPORT_SYMBOL_GPL(sbitmap_get_shallow);
+
+bool sbitmap_any_bit_set(const struct sbitmap *sb)
+{
+	unsigned int i;
+
+	for (i = 0; i < sb->map_nr; i++) {
+		if (sb->map[i].word & ~sb->map[i].cleared)
+			return true;
+	}
+	return false;
+}
+EXPORT_SYMBOL_GPL(sbitmap_any_bit_set);
+
+static unsigned int __sbitmap_weight(const struct sbitmap *sb, bool set)
+{
+	unsigned int i, weight = 0;
+
+	for (i = 0; i < sb->map_nr; i++) {
+		const struct sbitmap_word *word = &sb->map[i];
+		unsigned int word_depth = __map_depth(sb, i);
+
+		if (set)
+			weight += bitmap_weight(&word->word, word_depth);
+		else
+			weight += bitmap_weight(&word->cleared, word_depth);
+	}
+	return weight;
+}
+
+static unsigned int sbitmap_cleared(const struct sbitmap *sb)
+{
+	return __sbitmap_weight(sb, false);
+}
+
+unsigned int sbitmap_weight(const struct sbitmap *sb)
+{
+	return __sbitmap_weight(sb, true) - sbitmap_cleared(sb);
+}
+EXPORT_SYMBOL_GPL(sbitmap_weight);
+
+void sbitmap_show(struct sbitmap *sb, struct seq_file *m)
+{
+	seq_printf(m, "depth=%u\n", sb->depth);
+	seq_printf(m, "busy=%u\n", sbitmap_weight(sb));
+	seq_printf(m, "cleared=%u\n", sbitmap_cleared(sb));
+	seq_printf(m, "bits_per_word=%u\n", 1U << sb->shift);
+	seq_printf(m, "map_nr=%u\n", sb->map_nr);
+}
+EXPORT_SYMBOL_GPL(sbitmap_show);
+
+static inline void emit_byte(struct seq_file *m, unsigned int offset, u8 byte)
+{
+	if ((offset & 0xf) == 0) {
+		if (offset != 0)
+			seq_putc(m, '\n');
+		seq_printf(m, "%08x:", offset);
+	}
+	if ((offset & 0x1) == 0)
+		seq_putc(m, ' ');
+	seq_printf(m, "%02x", byte);
+}
+
+void sbitmap_bitmap_show(struct sbitmap *sb, struct seq_file *m)
+{
+	u8 byte = 0;
+	unsigned int byte_bits = 0;
+	unsigned int offset = 0;
+	int i;
+
+	for (i = 0; i < sb->map_nr; i++) {
+		unsigned long word = READ_ONCE(sb->map[i].word);
+		unsigned long cleared = READ_ONCE(sb->map[i].cleared);
+		unsigned int word_bits = __map_depth(sb, i);
+
+		word &= ~cleared;
+
+		while (word_bits > 0) {
+			unsigned int bits = min(8 - byte_bits, word_bits);
+
+			byte |= (word & (BIT(bits) - 1)) << byte_bits;
+			byte_bits += bits;
+			if (byte_bits == 8) {
+				emit_byte(m, offset, byte);
+				byte = 0;
+				byte_bits = 0;
+				offset++;
+			}
+			word >>= bits;
+			word_bits -= bits;
+		}
+	}
+	if (byte_bits) {
+		emit_byte(m, offset, byte);
+		offset++;
+	}
+	if (offset)
+		seq_putc(m, '\n');
+}
+EXPORT_SYMBOL_GPL(sbitmap_bitmap_show);
+
+static unsigned int sbq_calc_wake_batch(struct sbitmap_queue *sbq,
+					unsigned int depth)
+{
+	unsigned int wake_batch;
+	unsigned int shallow_depth;
+
+	/*
+	 * Each full word of the bitmap has bits_per_word bits, and there might
+	 * be a partial word. There are depth / bits_per_word full words and
+	 * depth % bits_per_word bits left over. In bitwise arithmetic:
+	 *
+	 * bits_per_word = 1 << shift
+	 * depth / bits_per_word = depth >> shift
+	 * depth % bits_per_word = depth & ((1 << shift) - 1)
+	 *
+	 * Each word can be limited to sbq->min_shallow_depth bits.
+	 */
+	shallow_depth = min(1U << sbq->sb.shift, sbq->min_shallow_depth);
+	depth = ((depth >> sbq->sb.shift) * shallow_depth +
+		 min(depth & ((1U << sbq->sb.shift) - 1), shallow_depth));
+	wake_batch = clamp_t(unsigned int, depth / SBQ_WAIT_QUEUES, 1,
+			     SBQ_WAKE_BATCH);
+
+	return wake_batch;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 int sbitmap_queue_init_node(struct sbitmap_queue *sbq, unsigned int depth,

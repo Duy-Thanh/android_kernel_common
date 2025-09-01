@@ -1213,6 +1213,7 @@ static bool ag71xx_fill_rx_buf(struct ag71xx *ag, struct ag71xx_buf *buf,
 	buf->rx.rx_buf = data;
 	buf->rx.dma_addr = dma_map_single(&ag->pdev->dev, data, ag->rx_buf_size,
 					  DMA_FROM_DEVICE);
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	if (dma_mapping_error(&ag->pdev->dev, buf->rx.dma_addr)) {
 		skb_free_frag(data);
 		buf->rx.rx_buf = NULL;
@@ -1520,6 +1521,307 @@ static netdev_tx_t ag71xx_hard_start_xmit(struct sk_buff *skb,
 		netif_dbg(ag, tx_err, ndev, "DMA mapping error\n");
 		goto err_drop;
 	}
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	desc->data = (u32)buf->rx.dma_addr + offset;
+	return true;
+}
+
+static int ag71xx_ring_rx_init(struct ag71xx *ag)
+{
+	struct ag71xx_ring *ring = &ag->rx_ring;
+	struct net_device *ndev = ag->ndev;
+	int ring_mask = BIT(ring->order) - 1;
+	int ring_size = BIT(ring->order);
+	unsigned int i;
+	int ret;
+
+	ret = 0;
+	for (i = 0; i < ring_size; i++) {
+		struct ag71xx_desc *desc = ag71xx_ring_desc(ring, i);
+
+		desc->next = (u32)(ring->descs_dma +
+			AG71XX_DESC_SIZE * ((i + 1) & ring_mask));
+
+		netif_dbg(ag, rx_status, ndev, "RX desc at %p, next is %08x\n",
+			  desc, desc->next);
+	}
+
+	for (i = 0; i < ring_size; i++) {
+		struct ag71xx_desc *desc = ag71xx_ring_desc(ring, i);
+
+		if (!ag71xx_fill_rx_buf(ag, &ring->buf[i], ag->rx_buf_offset,
+					netdev_alloc_frag)) {
+			ret = -ENOMEM;
+			break;
+		}
+
+		desc->ctrl = DESC_EMPTY;
+	}
+
+	/* flush descriptors */
+	wmb();
+
+	ring->curr = 0;
+	ring->dirty = 0;
+
+	return ret;
+}
+
+static int ag71xx_ring_rx_refill(struct ag71xx *ag)
+{
+	struct ag71xx_ring *ring = &ag->rx_ring;
+	int ring_mask = BIT(ring->order) - 1;
+	int offset = ag->rx_buf_offset;
+	unsigned int count;
+
+	count = 0;
+	for (; ring->curr - ring->dirty > 0; ring->dirty++) {
+		struct ag71xx_desc *desc;
+		unsigned int i;
+
+		i = ring->dirty & ring_mask;
+		desc = ag71xx_ring_desc(ring, i);
+
+		if (!ring->buf[i].rx.rx_buf &&
+		    !ag71xx_fill_rx_buf(ag, &ring->buf[i], offset,
+					napi_alloc_frag))
+			break;
+
+		desc->ctrl = DESC_EMPTY;
+		count++;
+	}
+
+	/* flush descriptors */
+	wmb();
+
+	netif_dbg(ag, rx_status, ag->ndev, "%u rx descriptors refilled\n",
+		  count);
+
+	return count;
+}
+
+static int ag71xx_rings_init(struct ag71xx *ag)
+{
+	struct ag71xx_ring *tx = &ag->tx_ring;
+	struct ag71xx_ring *rx = &ag->rx_ring;
+	int ring_size, tx_size;
+
+	ring_size = BIT(tx->order) + BIT(rx->order);
+	tx_size = BIT(tx->order);
+
+	tx->buf = kcalloc(ring_size, sizeof(*tx->buf), GFP_KERNEL);
+	if (!tx->buf)
+		return -ENOMEM;
+
+	tx->descs_cpu = dma_alloc_coherent(&ag->pdev->dev,
+					   ring_size * AG71XX_DESC_SIZE,
+					   &tx->descs_dma, GFP_KERNEL);
+	if (!tx->descs_cpu) {
+		kfree(tx->buf);
+		tx->buf = NULL;
+		return -ENOMEM;
+	}
+
+	rx->buf = &tx->buf[tx_size];
+	rx->descs_cpu = ((void *)tx->descs_cpu) + tx_size * AG71XX_DESC_SIZE;
+	rx->descs_dma = tx->descs_dma + tx_size * AG71XX_DESC_SIZE;
+
+	ag71xx_ring_tx_init(ag);
+	return ag71xx_ring_rx_init(ag);
+}
+
+static void ag71xx_rings_free(struct ag71xx *ag)
+{
+	struct ag71xx_ring *tx = &ag->tx_ring;
+	struct ag71xx_ring *rx = &ag->rx_ring;
+	int ring_size;
+
+	ring_size = BIT(tx->order) + BIT(rx->order);
+
+	if (tx->descs_cpu)
+		dma_free_coherent(&ag->pdev->dev, ring_size * AG71XX_DESC_SIZE,
+				  tx->descs_cpu, tx->descs_dma);
+
+	kfree(tx->buf);
+
+	tx->descs_cpu = NULL;
+	rx->descs_cpu = NULL;
+	tx->buf = NULL;
+	rx->buf = NULL;
+}
+
+static void ag71xx_rings_cleanup(struct ag71xx *ag)
+{
+	ag71xx_ring_rx_clean(ag);
+	ag71xx_ring_tx_clean(ag);
+	ag71xx_rings_free(ag);
+
+	netdev_reset_queue(ag->ndev);
+}
+
+static void ag71xx_hw_init(struct ag71xx *ag)
+{
+	ag71xx_hw_stop(ag);
+
+	ag71xx_sb(ag, AG71XX_REG_MAC_CFG1, MAC_CFG1_SR);
+	usleep_range(20, 30);
+
+	reset_control_assert(ag->mac_reset);
+	msleep(100);
+	reset_control_deassert(ag->mac_reset);
+	msleep(200);
+
+	ag71xx_hw_setup(ag);
+
+	ag71xx_dma_reset(ag);
+}
+
+static int ag71xx_hw_enable(struct ag71xx *ag)
+{
+	int ret;
+
+	ret = ag71xx_rings_init(ag);
+	if (ret)
+		return ret;
+
+	napi_enable(&ag->napi);
+	ag71xx_wr(ag, AG71XX_REG_TX_DESC, ag->tx_ring.descs_dma);
+	ag71xx_wr(ag, AG71XX_REG_RX_DESC, ag->rx_ring.descs_dma);
+	netif_start_queue(ag->ndev);
+
+	return 0;
+}
+
+static void ag71xx_hw_disable(struct ag71xx *ag)
+{
+	netif_stop_queue(ag->ndev);
+
+	ag71xx_hw_stop(ag);
+	ag71xx_dma_reset(ag);
+
+	napi_disable(&ag->napi);
+	del_timer_sync(&ag->oom_timer);
+
+	ag71xx_rings_cleanup(ag);
+}
+
+static int ag71xx_open(struct net_device *ndev)
+{
+	struct ag71xx *ag = netdev_priv(ndev);
+	unsigned int max_frame_len;
+	int ret;
+
+	ret = phylink_of_phy_connect(ag->phylink, ag->pdev->dev.of_node, 0);
+	if (ret) {
+		netif_err(ag, link, ndev, "phylink_of_phy_connect filed with err: %i\n",
+			  ret);
+		return ret;
+	}
+
+	max_frame_len = ag71xx_max_frame_len(ndev->mtu);
+	ag->rx_buf_size =
+		SKB_DATA_ALIGN(max_frame_len + NET_SKB_PAD + NET_IP_ALIGN);
+
+	/* setup max frame length */
+	ag71xx_wr(ag, AG71XX_REG_MAC_MFL, max_frame_len);
+	ag71xx_hw_set_macaddr(ag, ndev->dev_addr);
+
+	ret = ag71xx_hw_enable(ag);
+	if (ret)
+		goto err;
+
+	phylink_start(ag->phylink);
+
+	return 0;
+
+err:
+	ag71xx_rings_cleanup(ag);
+	phylink_disconnect_phy(ag->phylink);
+	return ret;
+}
+
+static int ag71xx_stop(struct net_device *ndev)
+{
+	struct ag71xx *ag = netdev_priv(ndev);
+
+	phylink_stop(ag->phylink);
+	phylink_disconnect_phy(ag->phylink);
+	ag71xx_hw_disable(ag);
+
+	return 0;
+}
+
+static int ag71xx_fill_dma_desc(struct ag71xx_ring *ring, u32 addr, int len)
+{
+	int i, ring_mask, ndesc, split;
+	struct ag71xx_desc *desc;
+
+	ring_mask = BIT(ring->order) - 1;
+	ndesc = 0;
+	split = ring->desc_split;
+
+	if (!split)
+		split = len;
+
+	while (len > 0) {
+		unsigned int cur_len = len;
+
+		i = (ring->curr + ndesc) & ring_mask;
+		desc = ag71xx_ring_desc(ring, i);
+
+		if (!ag71xx_desc_empty(desc))
+			return -1;
+
+		if (cur_len > split) {
+			cur_len = split;
+
+			/*  TX will hang if DMA transfers <= 4 bytes,
+			 * make sure next segment is more than 4 bytes long.
+			 */
+			if (len <= split + 4)
+				cur_len -= 4;
+		}
+
+		desc->data = addr;
+		addr += cur_len;
+		len -= cur_len;
+
+		if (len > 0)
+			cur_len |= DESC_MORE;
+
+		/* prevent early tx attempt of this descriptor */
+		if (!ndesc)
+			cur_len |= DESC_EMPTY;
+
+		desc->ctrl = cur_len;
+		ndesc++;
+	}
+
+	return ndesc;
+}
+
+static netdev_tx_t ag71xx_hard_start_xmit(struct sk_buff *skb,
+					  struct net_device *ndev)
+{
+	int i, n, ring_min, ring_mask, ring_size;
+	struct ag71xx *ag = netdev_priv(ndev);
+	struct ag71xx_ring *ring;
+	struct ag71xx_desc *desc;
+	dma_addr_t dma_addr;
+
+	ring = &ag->tx_ring;
+	ring_mask = BIT(ring->order) - 1;
+	ring_size = BIT(ring->order);
+
+	if (skb->len <= 4) {
+		netif_dbg(ag, tx_err, ndev, "packet len is too small\n");
+		goto err_drop;
+	}
+
+	dma_addr = dma_map_single(&ag->pdev->dev, skb->data, skb->len,
+				  DMA_TO_DEVICE);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	i = ring->curr & ring_mask;
 	desc = ag71xx_ring_desc(ring, i);

@@ -261,6 +261,7 @@ static inline bool lru_gen_add_folio(struct lruvec *lruvec, struct folio *folio,
 	int type = folio_is_file_lru(folio);
 	int zone = folio_zonenum(folio);
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	bool skip = false;
 
 	trace_android_vh_lru_gen_add_folio_skip(lruvec, folio, &skip);
@@ -297,6 +298,35 @@ static inline bool lru_gen_del_folio(struct lruvec *lruvec, struct folio *folio,
 	trace_android_vh_lru_gen_del_folio_skip(lruvec, folio, &skip);
 	if (skip)
 		return true;
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+
+	VM_WARN_ON_ONCE_FOLIO(gen != -1, folio);
+
+	if (folio_test_unevictable(folio) || !lrugen->enabled)
+		return false;
+
+	seq = lru_gen_folio_seq(lruvec, folio, reclaiming);
+	gen = lru_gen_from_seq(seq);
+	flags = (gen + 1UL) << LRU_GEN_PGOFF;
+	/* see the comment on MIN_NR_GENS about PG_active */
+	set_mask_bits(&folio->flags, LRU_GEN_MASK | BIT(PG_active), flags);
+
+	lru_gen_update_size(lruvec, folio, -1, gen);
+	/* for folio_rotate_reclaimable() */
+	if (reclaiming)
+		list_add_tail(&folio->lru, &lrugen->folios[gen][type][zone]);
+	else
+		list_add(&folio->lru, &lrugen->folios[gen][type][zone]);
+
+	return true;
+}
+
+static inline bool lru_gen_del_folio(struct lruvec *lruvec, struct folio *folio, bool reclaiming)
+{
+	unsigned long flags;
+	int gen = folio_lru_gen(folio);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 
 	if (gen < 0)
 		return false;

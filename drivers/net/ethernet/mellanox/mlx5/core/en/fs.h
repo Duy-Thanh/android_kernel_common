@@ -18,6 +18,7 @@ enum {
 
 enum {
 	MLX5E_TC_PRIO = 0,
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	MLX5E_PROMISC_PRIO,
 	MLX5E_NIC_PRIO,
 };
@@ -76,6 +77,62 @@ enum {
 
 /* NIC prio FTS */
 enum {
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	MLX5E_NIC_PRIO
+};
+
+struct mlx5e_flow_table {
+	int num_groups;
+	struct mlx5_flow_table *t;
+	struct mlx5_flow_group **g;
+};
+
+struct mlx5e_l2_rule {
+	u8  addr[ETH_ALEN + 2];
+	struct mlx5_flow_handle *rule;
+};
+
+#define MLX5E_L2_ADDR_HASH_SIZE BIT(BITS_PER_BYTE)
+
+struct mlx5e_promisc_table {
+	struct mlx5e_flow_table	ft;
+	struct mlx5_flow_handle	*rule;
+};
+
+/* Forward declaration and APIs to get private fields of vlan_table */
+struct mlx5e_vlan_table;
+unsigned long *mlx5e_vlan_get_active_svlans(struct mlx5e_vlan_table *vlan);
+struct mlx5_flow_table *mlx5e_vlan_get_flowtable(struct mlx5e_vlan_table *vlan);
+
+struct mlx5e_l2_table {
+	struct mlx5e_flow_table    ft;
+	struct hlist_head          netdev_uc[MLX5E_L2_ADDR_HASH_SIZE];
+	struct hlist_head          netdev_mc[MLX5E_L2_ADDR_HASH_SIZE];
+	struct mlx5e_l2_rule	   broadcast;
+	struct mlx5e_l2_rule	   allmulti;
+	struct mlx5_flow_handle    *trap_rule;
+	bool                       broadcast_enabled;
+	bool                       allmulti_enabled;
+	bool                       promisc_enabled;
+};
+
+#define MLX5E_NUM_INDIR_TIRS (MLX5_NUM_TT - 1)
+
+#define MLX5_HASH_IP		(MLX5_HASH_FIELD_SEL_SRC_IP   |\
+				 MLX5_HASH_FIELD_SEL_DST_IP)
+#define MLX5_HASH_IP_L4PORTS	(MLX5_HASH_FIELD_SEL_SRC_IP   |\
+				 MLX5_HASH_FIELD_SEL_DST_IP   |\
+				 MLX5_HASH_FIELD_SEL_L4_SPORT |\
+				 MLX5_HASH_FIELD_SEL_L4_DPORT)
+#define MLX5_HASH_IP_IPSEC_SPI	(MLX5_HASH_FIELD_SEL_SRC_IP   |\
+				 MLX5_HASH_FIELD_SEL_DST_IP   |\
+				 MLX5_HASH_FIELD_SEL_IPSEC_SPI)
+
+/* NIC prio FTS */
+enum {
+	MLX5E_PROMISC_FT_LEVEL,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	MLX5E_VLAN_FT_LEVEL,
 	MLX5E_L2_FT_LEVEL,
 	MLX5E_TTC_FT_LEVEL,

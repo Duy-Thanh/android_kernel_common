@@ -203,6 +203,7 @@ static int ad7768_spi_reg_write(struct ad7768_state *st,
 	return spi_write(st->spi, st->data.d8, 2);
 }
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static int ad7768_send_sync_pulse(struct ad7768_state *st)
 {
 	/*
@@ -307,6 +308,98 @@ static int ad7768_set_dig_fil(struct ad7768_state *st,
 
 	/* A sync-in pulse is required every time the filter dec rate changes */
 	return ad7768_send_sync_pulse(st);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static int ad7768_set_mode(struct ad7768_state *st,
+			   enum ad7768_conv_mode mode)
+{
+	int regval;
+
+	regval = ad7768_spi_reg_read(st, AD7768_REG_CONVERSION, 1);
+	if (regval < 0)
+		return regval;
+
+	regval &= ~AD7768_CONV_MODE_MSK;
+	regval |= AD7768_CONV_MODE(mode);
+
+	return ad7768_spi_reg_write(st, AD7768_REG_CONVERSION, regval);
+}
+
+static int ad7768_scan_direct(struct iio_dev *indio_dev)
+{
+	struct ad7768_state *st = iio_priv(indio_dev);
+	int readval, ret;
+
+	reinit_completion(&st->completion);
+
+	ret = ad7768_set_mode(st, AD7768_ONE_SHOT);
+	if (ret < 0)
+		return ret;
+
+	ret = wait_for_completion_timeout(&st->completion,
+					  msecs_to_jiffies(1000));
+	if (!ret)
+		return -ETIMEDOUT;
+
+	readval = ad7768_spi_reg_read(st, AD7768_REG_ADC_DATA, 3);
+	if (readval < 0)
+		return readval;
+	/*
+	 * Any SPI configuration of the AD7768-1 can only be
+	 * performed in continuous conversion mode.
+	 */
+	ret = ad7768_set_mode(st, AD7768_CONTINUOUS);
+	if (ret < 0)
+		return ret;
+
+	return readval;
+}
+
+static int ad7768_reg_access(struct iio_dev *indio_dev,
+			     unsigned int reg,
+			     unsigned int writeval,
+			     unsigned int *readval)
+{
+	struct ad7768_state *st = iio_priv(indio_dev);
+	int ret;
+
+	mutex_lock(&st->lock);
+	if (readval) {
+		ret = ad7768_spi_reg_read(st, reg, 1);
+		if (ret < 0)
+			goto err_unlock;
+		*readval = ret;
+		ret = 0;
+	} else {
+		ret = ad7768_spi_reg_write(st, reg, writeval);
+	}
+err_unlock:
+	mutex_unlock(&st->lock);
+
+	return ret;
+}
+
+static int ad7768_set_dig_fil(struct ad7768_state *st,
+			      enum ad7768_dec_rate dec_rate)
+{
+	unsigned int mode;
+	int ret;
+
+	if (dec_rate == AD7768_DEC_RATE_8 || dec_rate == AD7768_DEC_RATE_16)
+		mode = AD7768_DIG_FIL_FIL(dec_rate);
+	else
+		mode = AD7768_DIG_FIL_DEC_RATE(dec_rate);
+
+	ret = ad7768_spi_reg_write(st, AD7768_REG_DIGITAL_FILTER, mode);
+	if (ret < 0)
+		return ret;
+
+	/* A sync-in pulse is required every time the filter dec rate changes */
+	gpiod_set_value(st->gpio_sync_in, 1);
+	gpiod_set_value(st->gpio_sync_in, 0);
+
+	return 0;
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 }
 
 static int ad7768_set_freq(struct ad7768_state *st,

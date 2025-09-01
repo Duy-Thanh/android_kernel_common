@@ -433,6 +433,7 @@ static const struct sdhci_cdns_drv_data sdhci_elba_drv_data = {
 	},
 };
 
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 static const struct sdhci_cdns_drv_data sdhci_eyeq_drv_data = {
 	.pltfm_data = {
 		.ops = &sdhci_cdns_ops,
@@ -605,6 +606,170 @@ static const struct of_device_id sdhci_cdns_match[] = {
 	{
 		.compatible = "mobileye,eyeq-sd4hc",
 		.data = &sdhci_eyeq_drv_data,
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+static const struct sdhci_cdns_drv_data sdhci_cdns_drv_data = {
+	.pltfm_data = {
+		.ops = &sdhci_cdns_ops,
+	},
+};
+
+static void sdhci_cdns_hs400_enhanced_strobe(struct mmc_host *mmc,
+					     struct mmc_ios *ios)
+{
+	struct sdhci_host *host = mmc_priv(mmc);
+	struct sdhci_cdns_priv *priv = sdhci_cdns_priv(host);
+	u32 mode;
+
+	priv->enhanced_strobe = ios->enhanced_strobe;
+
+	mode = sdhci_cdns_get_emmc_mode(priv);
+
+	if (mode == SDHCI_CDNS_HRS06_MODE_MMC_HS400 && ios->enhanced_strobe)
+		sdhci_cdns_set_emmc_mode(priv,
+					 SDHCI_CDNS_HRS06_MODE_MMC_HS400ES);
+
+	if (mode == SDHCI_CDNS_HRS06_MODE_MMC_HS400ES && !ios->enhanced_strobe)
+		sdhci_cdns_set_emmc_mode(priv,
+					 SDHCI_CDNS_HRS06_MODE_MMC_HS400);
+}
+
+static void sdhci_cdns_mmc_hw_reset(struct mmc_host *mmc)
+{
+	struct sdhci_host *host = mmc_priv(mmc);
+	struct sdhci_cdns_priv *priv = sdhci_cdns_priv(host);
+
+	dev_dbg(mmc_dev(host->mmc), "emmc hardware reset\n");
+
+	reset_control_assert(priv->rst_hw);
+	/* For eMMC, minimum is 1us but give it 3us for good measure */
+	udelay(3);
+
+	reset_control_deassert(priv->rst_hw);
+	/* For eMMC, minimum is 200us but give it 300us for good measure */
+	usleep_range(300, 1000);
+}
+
+static int sdhci_cdns_probe(struct platform_device *pdev)
+{
+	struct sdhci_host *host;
+	const struct sdhci_cdns_drv_data *data;
+	struct sdhci_pltfm_host *pltfm_host;
+	struct sdhci_cdns_priv *priv;
+	struct clk *clk;
+	unsigned int nr_phy_params;
+	int ret;
+	struct device *dev = &pdev->dev;
+	static const u16 version = SDHCI_SPEC_400 << SDHCI_SPEC_VER_SHIFT;
+
+	clk = devm_clk_get_enabled(dev, NULL);
+	if (IS_ERR(clk))
+		return PTR_ERR(clk);
+
+	data = of_device_get_match_data(dev);
+	if (!data)
+		data = &sdhci_cdns_drv_data;
+
+	nr_phy_params = sdhci_cdns_phy_param_count(dev->of_node);
+	host = sdhci_pltfm_init(pdev, &data->pltfm_data,
+				struct_size(priv, phy_params, nr_phy_params));
+	if (IS_ERR(host))
+		return PTR_ERR(host);
+
+	pltfm_host = sdhci_priv(host);
+	pltfm_host->clk = clk;
+
+	priv = sdhci_pltfm_priv(pltfm_host);
+	priv->nr_phy_params = nr_phy_params;
+	priv->hrs_addr = host->ioaddr;
+	priv->enhanced_strobe = false;
+	priv->priv_writel = cdns_writel;
+	host->ioaddr += SDHCI_CDNS_SRS_BASE;
+	host->mmc_host_ops.hs400_enhanced_strobe =
+				sdhci_cdns_hs400_enhanced_strobe;
+	if (data->init) {
+		ret = data->init(pdev);
+		if (ret)
+			goto free;
+	}
+	sdhci_enable_v4_mode(host);
+	__sdhci_read_caps(host, &version, NULL, NULL);
+
+	sdhci_get_of_property(pdev);
+
+	ret = mmc_of_parse(host->mmc);
+	if (ret)
+		goto free;
+
+	sdhci_cdns_phy_param_parse(dev->of_node, priv);
+
+	ret = sdhci_cdns_phy_init(priv);
+	if (ret)
+		goto free;
+
+	if (host->mmc->caps & MMC_CAP_HW_RESET) {
+		priv->rst_hw = devm_reset_control_get_optional_exclusive(dev, NULL);
+		if (IS_ERR(priv->rst_hw)) {
+			ret = dev_err_probe(mmc_dev(host->mmc), PTR_ERR(priv->rst_hw),
+					    "reset controller error\n");
+			goto free;
+		}
+		if (priv->rst_hw)
+			host->mmc_host_ops.card_hw_reset = sdhci_cdns_mmc_hw_reset;
+	}
+
+	ret = sdhci_add_host(host);
+	if (ret)
+		goto free;
+
+	return 0;
+free:
+	sdhci_pltfm_free(pdev);
+	return ret;
+}
+
+#ifdef CONFIG_PM_SLEEP
+static int sdhci_cdns_resume(struct device *dev)
+{
+	struct sdhci_host *host = dev_get_drvdata(dev);
+	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
+	struct sdhci_cdns_priv *priv = sdhci_pltfm_priv(pltfm_host);
+	int ret;
+
+	ret = clk_prepare_enable(pltfm_host->clk);
+	if (ret)
+		return ret;
+
+	ret = sdhci_cdns_phy_init(priv);
+	if (ret)
+		goto disable_clk;
+
+	ret = sdhci_resume_host(host);
+	if (ret)
+		goto disable_clk;
+
+	return 0;
+
+disable_clk:
+	clk_disable_unprepare(pltfm_host->clk);
+
+	return ret;
+}
+#endif
+
+static const struct dev_pm_ops sdhci_cdns_pm_ops = {
+	SET_SYSTEM_SLEEP_PM_OPS(sdhci_pltfm_suspend, sdhci_cdns_resume)
+};
+
+static const struct of_device_id sdhci_cdns_match[] = {
+	{
+		.compatible = "socionext,uniphier-sd4hc",
+		.data = &sdhci_cdns_uniphier_drv_data,
+	},
+	{
+		.compatible = "amd,pensando-elba-sd4hc",
+		.data = &sdhci_elba_drv_data,
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	},
 	{ .compatible = "cdns,sd4hc" },
 	{ /* sentinel */ }

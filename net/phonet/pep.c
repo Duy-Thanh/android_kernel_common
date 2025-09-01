@@ -826,6 +826,7 @@ static struct sock *pep_sock_accept(struct sock *sk,
 	}
 
 	/* Check for duplicate pipe handle */
+<<<<<<< HEAD   (bdc81b76cc3e91b2a805bff546c72244ef2504fd Merge android16-6.12 into android16-6.12-kminext)
 	pn_skb_get_dst_sockaddr(skb, &dst);
 	newsk = pep_find_pipe(&pn->hlist, &dst, pipe_handle);
 	if (unlikely(newsk)) {
@@ -851,6 +852,34 @@ static struct sock *pep_sock_accept(struct sock *sk,
 	newsk->sk_destruct = pipe_destruct;
 
 	newpn = pep_sk(newsk);
+||||||| BASE   (648e13791289125f4447184856d1b211f32d5daf Android Common Kernel: Initial commit)
+=======
+	newsk = pep_find_pipe(&pn->hlist, &dst, pipe_handle);
+	if (unlikely(newsk)) {
+		__sock_put(newsk);
+		newsk = NULL;
+		pep_reject_conn(sk, skb, PN_PIPE_ERR_PEP_IN_USE, GFP_KERNEL);
+		goto drop;
+	}
+
+	/* Create a new to-be-accepted sock */
+	newsk = sk_alloc(sock_net(sk), PF_PHONET, GFP_KERNEL, sk->sk_prot,
+			 arg->kern);
+	if (!newsk) {
+		pep_reject_conn(sk, skb, PN_PIPE_ERR_OVERLOAD, GFP_KERNEL);
+		err = -ENOBUFS;
+		goto drop;
+	}
+
+	sock_init_data(NULL, newsk);
+	newsk->sk_state = TCP_SYN_RECV;
+	newsk->sk_backlog_rcv = pipe_do_rcv;
+	newsk->sk_protocol = sk->sk_protocol;
+	newsk->sk_destruct = pipe_destruct;
+
+	newpn = pep_sk(newsk);
+	pn_skb_get_dst_sockaddr(skb, &dst);
+>>>>>>> CHANGE (efe70d86de873c3b4d76fdd8e6ef37ffa3a1c4c4 ANDROID: Initialize android16-6.12-2025-09)
 	pn_skb_get_src_sockaddr(skb, &src);
 	newpn->pn_sk.sobject = pn_sockaddr_get_object(&dst);
 	newpn->pn_sk.dobject = pn_sockaddr_get_object(&src);
