@@ -34,6 +34,24 @@
       "parentUuid": "262259d1_3822fdc8",
       "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "260d14d9_0d6b568b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-01T08:27:28Z",
+      "side": 1,
+      "message": "It will not be exported as no kernel driver should ever be calling this function.  That is not how inter-module communication works.  The patch has been submitted upstream now  to remove this symbol entirely.",
+      "parentUuid": "3387ff07_f7330295",
+      "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
