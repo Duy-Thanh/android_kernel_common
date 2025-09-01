@@ -52,6 +52,24 @@
       "parentUuid": "3387ff07_f7330295",
       "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "063f6c79_1241eeac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1264179
+      },
+      "writtenOn": "2025-09-01T08:37:54Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I understood it to be the same case as other functions like vfs_read, vfs_write. I\u0027ll find an another way to implement my module.",
+      "parentUuid": "260d14d9_0d6b568b",
+      "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
