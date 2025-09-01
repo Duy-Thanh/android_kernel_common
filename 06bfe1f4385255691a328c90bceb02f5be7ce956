@@ -16,6 +16,24 @@
       "message": "This patch breaks an ABI which is enforced on android16-6.12-desktop branch. We can\u0027t merge it.",
       "revId": "06bfe1f4385255691a328c90bceb02f5be7ce956",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b69095_02de6010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-09-01T03:46:04Z",
+      "side": 1,
+      "message": "I looked once again into this - there is a padding added to this structure so theoretically it is possible to add a new field, but this should be sent to android16-6.12.",
+      "parentUuid": "cc183ea1_00b1de29",
+      "revId": "06bfe1f4385255691a328c90bceb02f5be7ce956",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
