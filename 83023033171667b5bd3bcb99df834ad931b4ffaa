@@ -104,6 +104,24 @@
       "parentUuid": "4fa612ae_ad7876d9",
       "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ebd68e1_59cb0d35",
+        "filename": "include/ufs/ufs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-09-01T14:41:20Z",
+      "side": 1,
+      "message": "`CMD` means command instead of \"completion\". Please choose a better enumeration label than `UFS_CMD_ERR`.",
+      "parentUuid": "e28fe44e_188b6857",
+      "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
