@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc183ea1_00b1de29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2025-09-01T03:41:42Z",
+      "side": 1,
+      "message": "This patch breaks an ABI which is enforced on android16-6.12-desktop branch. We can\u0027t merge it.",
+      "revId": "06bfe1f4385255691a328c90bceb02f5be7ce956",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
