@@ -70,6 +70,24 @@
       "parentUuid": "260d14d9_0d6b568b",
       "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c060cc06_bd418c42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-01T09:01:12Z",
+      "side": 1,
+      "message": "drivers should also never be calling those functions either, please do not do that.",
+      "parentUuid": "063f6c79_1241eeac",
+      "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
