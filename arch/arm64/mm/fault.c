@@ -829,7 +829,12 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 		 */
 		siaddr  = untagged_addr(far);
 	}
+<<<<<<< HEAD   (e3bf97db2b636b3fc807f1219ccb926f06f66c48 Revert "io_uring: don't use int for ABI")
 	trace_android_rvh_do_sea(siaddr, esr, regs);
+||||||| BASE   (ecc39c79d913e52693da5db950081d7cd876e644 io_uring: don't use int for ABI)
+=======
+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;

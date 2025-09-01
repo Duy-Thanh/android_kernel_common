@@ -1225,7 +1225,13 @@ static int cros_typec_probe(struct platform_device *pdev)
 	typec->dev = dev;
 
 	typec->ec = dev_get_drvdata(pdev->dev.parent);
+<<<<<<< HEAD   (e3bf97db2b636b3fc807f1219ccb926f06f66c48 Revert "io_uring: don't use int for ABI")
 	if (!typec->ec || !typec->ec->ec) {
+||||||| BASE   (ecc39c79d913e52693da5db950081d7cd876e644 io_uring: don't use int for ABI)
+	if (!typec->ec) {
+=======
+	if (!typec->ec) {
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 		dev_warn(dev, "couldn't find parent EC device\n");
 		return -EPROBE_DEFER;
 	}

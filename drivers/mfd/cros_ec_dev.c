@@ -87,7 +87,6 @@ static const struct mfd_cell cros_ec_sensorhub_cells[] = {
 };
 
 static const struct mfd_cell cros_usbpd_charger_cells[] = {
-	{ .name = "cros-charge-control", },
 	{ .name = "cros-usbpd-charger", },
 	{ .name = "cros-usbpd-logger", },
 };
@@ -108,8 +107,14 @@ static const struct mfd_cell cros_ec_keyboard_leds_cells[] = {
 	{ .name = "cros-keyboard-leds", },
 };
 
+<<<<<<< HEAD   (e3bf97db2b636b3fc807f1219ccb926f06f66c48 Revert "io_uring: don't use int for ABI")
 static const struct mfd_cell cros_ec_ucsi_cells[] = {
 	{ .name = "cros_ec_ucsi", },
+||||||| BASE   (ecc39c79d913e52693da5db950081d7cd876e644 io_uring: don't use int for ABI)
+=======
+static const struct mfd_cell cros_ec_charge_control_cells[] = {
+	{ .name = "cros-charge-control", },
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 };
 
 static const struct cros_feature_to_cells cros_subdevices[] = {
@@ -147,6 +152,11 @@ static const struct cros_feature_to_cells cros_subdevices[] = {
 		.id		= EC_FEATURE_PWM_KEYB,
 		.mfd_cells	= cros_ec_keyboard_leds_cells,
 		.num_cells	= ARRAY_SIZE(cros_ec_keyboard_leds_cells),
+	},
+	{
+		.id		= EC_FEATURE_CHARGER,
+		.mfd_cells	= cros_ec_charge_control_cells,
+		.num_cells	= ARRAY_SIZE(cros_ec_charge_control_cells),
 	},
 };
 
