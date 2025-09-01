@@ -276,6 +276,12 @@ void page_cache_ra_unbounded(struct readahead_control *ractl,
 			read_pages(ractl);
 			ractl->_index += min_nrpages;
 			i = ractl->_index + ractl->_nr_pages - index;
+			ractl->_index++;
+			i = ractl->_index + ractl->_nr_pages - index - 1;
+#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
+			trace_android_vh_page_cache_ra_unbounded(mapping, folio,
+					&ractl->android_oem_data1);
+#endif
 			continue;
 		}
 
@@ -301,6 +307,11 @@ void page_cache_ra_unbounded(struct readahead_control *ractl,
 		ractl->_workingset |= folio_test_workingset(folio);
 		ractl->_nr_pages += min_nrpages;
 		i += min_nrpages;
+		ractl->_nr_pages++;
+#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
+		trace_android_vh_page_cache_ra_unbounded(mapping, folio,
+				&ractl->android_oem_data1);
+#endif
 	}
 
 	/*
@@ -363,6 +374,9 @@ void force_page_cache_ra(struct readahead_control *ractl,
 	 */
 	max_pages = max_t(unsigned long, bdi->io_pages, ra->ra_pages);
 	nr_to_read = min_t(unsigned long, nr_to_read, max_pages);
+#ifdef CONFIG_ANDROID_VENDOR_OEM_DATA
+	trace_android_vh_force_page_cache_ra(mapping, &ractl->android_oem_data1);
+#endif
 	while (nr_to_read) {
 		unsigned long this_chunk = (2 * 1024 * 1024) / PAGE_SIZE;
 
