@@ -88,6 +88,24 @@
       "parentUuid": "063f6c79_1241eeac",
       "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2300c67_be6be6bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1264179
+      },
+      "writtenOn": "2025-09-01T09:07:14Z",
+      "side": 1,
+      "message": "Okay, so if there\u0027s a requirement in a vendor module to call some common function like f2fs , how can we implement it without violating the GKI? In this case, should that module also be included in the GKI?",
+      "parentUuid": "c060cc06_bd418c42",
+      "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
