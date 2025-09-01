@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "698dc840_ad9d8ba1",
+        "filename": "include/ufs/ufs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1005551
+      },
+      "writtenOn": "2025-09-01T01:21:08Z",
+      "side": 1,
+      "message": "Thank you for your review.\nI understand that the values of the enum changes when I insert a new enum.\nHowever, since what is shown in the trace log has been converted to a string(with #define UFS_CMD_TRACE_STRINGS in include/trace/events/ufs.h),\nI think it would be no problem.\n\nAlso, in terms of UFS command processing, it seems like the current location is more appropriate than having UFS_CMD_ERR at the end.",
+      "parentUuid": "ca1c07ad_2c7036c8",
+      "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fa612ae_ad7876d9",
@@ -66,6 +84,24 @@
       "writtenOn": "2025-08-29T15:15:58Z",
       "side": 1,
       "message": "Does UFS_CMD_ERR stand for \"command error\" or \"completion error\"? Please\nmake the enum label and the text that is displayed in error messages\nconsistent.",
+      "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28fe44e_188b6857",
+        "filename": "include/ufs/ufs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1005551
+      },
+      "writtenOn": "2025-09-01T01:21:08Z",
+      "side": 1,
+      "message": "UFS_CMD_ERR stands for \"completion error\".\nThe enum is converted to a string in the trace log according to the definition below.\n#define UFS_CMD_TRACE_STRINGS in include/trace/events/ufs.h",
+      "parentUuid": "4fa612ae_ad7876d9",
       "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
