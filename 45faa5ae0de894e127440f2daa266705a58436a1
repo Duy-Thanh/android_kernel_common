@@ -16,6 +16,24 @@
       "message": "No code should be calling this function, it should not even be exported.  I\u0027ll go remove that export from upstream, thanks for pointing it out.",
       "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3387ff07_f7330295",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1264179
+      },
+      "writtenOn": "2025-09-01T01:47:19Z",
+      "side": 1,
+      "message": "Hello, could you explain why it won\u0027t be exported? Our vendor module requires this.",
+      "parentUuid": "262259d1_3822fdc8",
+      "revId": "45faa5ae0de894e127440f2daa266705a58436a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
