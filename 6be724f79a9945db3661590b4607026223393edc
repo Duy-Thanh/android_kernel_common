@@ -70,6 +70,24 @@
       "parentUuid": "eb148410_6b662ff8",
       "revId": "6be724f79a9945db3661590b4607026223393edc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af48dfe8_378734fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2025-09-01T07:45:41Z",
+      "side": 1,
+      "message": "Can we just enable `CONFIG_INET_ESP_OFFLOAD` and `CONFIG_INET6_ESP_OFFLOAD` as GKI modules? AFAIK, we\u0027re going to use these modules and not just for enabling `CONFIG_XFRM_OFFLOAD`.\nUnless you\u0027re going to modify them or I don\u0027t think there is a reason we want them as vendor modules instead of GKI modules.",
+      "parentUuid": "c03b3c20_d51cf330",
+      "revId": "6be724f79a9945db3661590b4607026223393edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
