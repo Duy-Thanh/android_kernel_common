@@ -16,6 +16,24 @@
       "message": "Please add the line Bypass-Upstream-Divergence-Tracking to fix the lint check.",
       "revId": "60c227af5118cdefd44d714e7a9e34891f5ca8c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f906add2_b3832f24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-09-02T18:53:30Z",
+      "side": 1,
+      "message": "FWIW, `BACKPORT` CLs without `FROMLIST` shouldn\u0027t require an \u0027Upstream-Task\u0027 bug, since the patch is already upstreamed. I\u0027ve opened b/442614083 to get this fixed.",
+      "parentUuid": "76af635d_0291e806",
+      "revId": "60c227af5118cdefd44d714e7a9e34891f5ca8c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
