@@ -78,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1eccc3c_47c377a1",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2638,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2025-09-03T12:50:59Z",
+      "side": 1,
+      "message": "I think `-EOPNOTSUPP` might make more sense.",
+      "parentUuid": "081972dd_f7f87b02",
+      "range": {
+        "startLine": 2638,
+        "startChar": 0,
+        "endLine": 2638,
+        "endChar": 0
+      },
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4338805_7b23afcf",
         "filename": "drivers/block/zram/zram_ioctl.h",
         "patchSetId": 3
