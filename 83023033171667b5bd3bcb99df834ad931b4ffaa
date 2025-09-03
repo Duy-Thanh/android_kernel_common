@@ -157,6 +157,24 @@
       "parentUuid": "3ebd68e1_59cb0d35",
       "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ce78c8f_00e2829f",
+        "filename": "include/ufs/ufs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1005551
+      },
+      "writtenOn": "2025-09-03T06:41:57Z",
+      "side": 1,
+      "message": "When I reviewed the UFS_CMD_TRACE_STRINGS definition, (in include/trace/events/ufs.h)\nI noticed that \"query_complete_err\" is referred to as UFS_QUERY_ERR,\nand \"tm_complete_err\" is referred to as UFS_TM_ERR.\n\nI followed the naming convention specified in this STRINGS definition,\nbut I’m not entirely clear on what changes are being requested.\n\nCould you please provide some guidance or suggestions?\n\nThank you.\nDooHyun Hwang.",
+      "parentUuid": "955738d8_479ead12",
+      "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
