@@ -334,22 +334,17 @@ out:
 	return q;
 }
 
-static struct Qdisc *qdisc_leaf(struct Qdisc *p, u32 classid,
-				struct netlink_ext_ack *extack)
+static struct Qdisc *qdisc_leaf(struct Qdisc *p, u32 classid)
 {
 	unsigned long cl;
 	const struct Qdisc_class_ops *cops = p->ops->cl_ops;
 
-	if (cops == NULL) {
-		NL_SET_ERR_MSG(extack, "Parent qdisc is not classful");
-		return ERR_PTR(-EOPNOTSUPP);
-	}
+	if (cops == NULL)
+		return NULL;
 	cl = cops->find(p, classid);
 
-	if (cl == 0) {
-		NL_SET_ERR_MSG(extack, "Specified class not found");
-		return ERR_PTR(-ENOENT);
-	}
+	if (cl == 0)
+		return NULL;
 	return cops->leaf(p, cl);
 }
 
@@ -1532,7 +1527,7 @@ static int tc_get_qdisc(struct sk_buff *skb, struct nlmsghdr *n,
 					NL_SET_ERR_MSG(extack, "Failed to find qdisc with specified classid");
 					return -ENOENT;
 				}
-				q = qdisc_leaf(p, clid, extack);
+				q = qdisc_leaf(p, clid);
 			} else if (dev_ingress_queue(dev)) {
 				q = rtnl_dereference(dev_ingress_queue(dev)->qdisc_sleeping);
 			}
@@ -1543,8 +1538,6 @@ static int tc_get_qdisc(struct sk_buff *skb, struct nlmsghdr *n,
 			NL_SET_ERR_MSG(extack, "Cannot find specified qdisc on specified device");
 			return -ENOENT;
 		}
-		if (IS_ERR(q))
-			return PTR_ERR(q);
 
 		if (tcm->tcm_handle && q->handle != tcm->tcm_handle) {
 			NL_SET_ERR_MSG(extack, "Invalid handle");
@@ -1638,9 +1631,7 @@ replay:
 					NL_SET_ERR_MSG(extack, "Failed to find specified qdisc");
 					return -ENOENT;
 				}
-				q = qdisc_leaf(p, clid, extack);
-				if (IS_ERR(q))
-					return PTR_ERR(q);
+				q = qdisc_leaf(p, clid);
 			} else if (dev_ingress_queue_create(dev)) {
 				q = rtnl_dereference(dev_ingress_queue(dev)->qdisc_sleeping);
 			}
