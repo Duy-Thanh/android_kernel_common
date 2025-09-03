@@ -22,7 +22,6 @@
 #include <linux/atomic.h>
 #include <linux/jump_label.h>
 #include <asm/sections.h>
-#include <trace/hooks/mm.h>
 #include "slab.h"
 
 /*
@@ -166,7 +165,6 @@ static inline void check_heap_object(const void *ptr, unsigned long n,
 	unsigned long addr = (unsigned long)ptr;
 	unsigned long offset;
 	struct folio *folio;
-	bool bypass = false;
 
 	if (is_kmap_addr(ptr)) {
 		offset = offset_in_page(ptr);
@@ -197,10 +195,6 @@ static inline void check_heap_object(const void *ptr, unsigned long n,
 		/* Check slab allocator for flags and size. */
 		__check_heap_object(ptr, n, folio_slab(folio), to_user);
 	} else if (folio_test_large(folio)) {
-		trace_android_vh_check_heap_object_bypass(folio, &bypass);
-		if (bypass)
-			return;
-
 		offset = ptr - folio_address(folio);
 		if (n > folio_size(folio) - offset)
 			usercopy_abort("page alloc", NULL, to_user, offset, n);
