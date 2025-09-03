@@ -51,6 +51,24 @@
       "parentUuid": "a3c0e150_e4d0c4eb",
       "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "864a0773_9ac528f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-03T07:30:54Z",
+      "side": 1,
+      "message": "No, this is fine where it is. But the symbols you are exporting cannot be used by a vendor modules (zram.ko in this case) unless it is added to your symbol list (gki/aarch64/symbols/pixel?) and the STG file.",
+      "parentUuid": "639add97_e1e41700",
+      "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
