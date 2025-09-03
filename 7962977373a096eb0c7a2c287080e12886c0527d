@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bfa1041_fdffaf18",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-09-03T09:16:17Z",
+      "side": 1,
+      "message": "I find this ambiguous as to the polarity of the check. Prefer f.ex HOST_CHECK_IS_MEMORY. Also this is unclear that these are bitflags, please initialise each explicitly BIT(0), BIT(1) etc like f.ex kvm_pgtable_stage2_flags.",
+      "revId": "7962977373a096eb0c7a2c287080e12886c0527d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a65ec2ec_e1dfdfe2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-09-03T09:16:17Z",
+      "side": 1,
+      "message": "Maybe not for this commit, but I wonder about getting rid of this wrapper, and making all callers pass flags explicitly.",
+      "revId": "7962977373a096eb0c7a2c287080e12886c0527d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
