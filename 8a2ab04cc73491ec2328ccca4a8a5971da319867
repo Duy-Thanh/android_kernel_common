@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af91513_ef0f9997",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-09-03T13:58:15Z",
+      "side": 1,
+      "message": "nit: should this be `c1c77c26591063044958d60bc3cd351b3f92f091`?\n\nnit2: Is it worth keeping the `Bug: 276339429` tag for discoverability?",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "8a2ab04cc73491ec2328ccca4a8a5971da319867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58700427_7c45ae61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-09-03T13:58:15Z",
+      "side": 1,
+      "message": "IMHO this could be the/a new fix, and not really a revert of the previous workaround.",
+      "revId": "8a2ab04cc73491ec2328ccca4a8a5971da319867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
