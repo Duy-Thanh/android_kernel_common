@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd569af_43958def",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-09-03T09:29:58Z",
+      "side": 1,
+      "message": "This can update the memcache and also needs a subsequent copy-back from tmp to host_mc, doesn\u0027t it?",
+      "revId": "c3d7cea9c860d5df206de632ece7a737e6423633",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
