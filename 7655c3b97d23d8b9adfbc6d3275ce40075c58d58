@@ -52,6 +52,24 @@
       "parentUuid": "73c8efc4_24e642ad",
       "revId": "7655c3b97d23d8b9adfbc6d3275ce40075c58d58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0607fdfc_c083bce5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-03T11:45:49Z",
+      "side": 1,
+      "message": "Ok I saw the discussion on the chat, LGTM",
+      "parentUuid": "dcbeac0d_11362bf8",
+      "revId": "7655c3b97d23d8b9adfbc6d3275ce40075c58d58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
