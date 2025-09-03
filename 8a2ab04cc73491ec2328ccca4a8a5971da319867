@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a29fdcf_e231a0bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-09-03T15:28:08Z",
+      "side": 1,
+      "message": "Yes, you are right. The commit has now changed since I originally reverted it. I suppose there is a chance that it might change again during submit so I\u0027ll be careful. Also yes, I think it is worth keeping the bug number. I\u0027ll fix both.",
+      "parentUuid": "1af91513_ef0f9997",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "8a2ab04cc73491ec2328ccca4a8a5971da319867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "58700427_7c45ae61",
