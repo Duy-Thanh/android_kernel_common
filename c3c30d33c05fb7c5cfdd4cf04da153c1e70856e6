@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "483441ad_d24b74e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-03T07:33:01Z",
+      "side": 1,
+      "message": "Since zram is a vendor module, what will happen if the zram.ko loaded by a partner doesn\u0027t have this ioctl? Does the caller of this gracefully handle errors?",
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "081972dd_f7f87b02",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 3
