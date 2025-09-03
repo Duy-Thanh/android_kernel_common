@@ -303708,6 +303708,15 @@ elf_symbol {
   full_name: "complete_all"
 }
 elf_symbol {
+  id: 0x9bc8eb84
+  name: "completion_done"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x57858c37
+  type_id: 0xfffcea5d
+  full_name: "completion_done"
+}
+elf_symbol {
   id: 0x53eb2602
   name: "component_add_typed"
   is_defined: true
@@ -334006,6 +334015,7 @@ interface {
   symbol_id: 0x4f627b39
   symbol_id: 0xda163e44
   symbol_id: 0xb375007c
+  symbol_id: 0x9bc8eb84
   symbol_id: 0x53eb2602
   symbol_id: 0xcce97787
   symbol_id: 0x98bdb018
