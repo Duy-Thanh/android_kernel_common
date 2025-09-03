@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e1b3eca_16277d03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-03T06:46:15Z",
+      "side": 1,
+      "message": "Why do you need to regenerate ABI without any accompanying changes?",
+      "revId": "7655c3b97d23d8b9adfbc6d3275ce40075c58d58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
