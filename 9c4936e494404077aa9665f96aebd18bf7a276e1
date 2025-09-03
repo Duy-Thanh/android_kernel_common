@@ -69,6 +69,24 @@
       "parentUuid": "639add97_e1e41700",
       "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb08035d_0d6b74c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-03T08:28:39Z",
+      "side": 1,
+      "message": "The implementation is in the aosp zram driver, not vendor zram driver.\nDo we still need to update the symbol list?",
+      "parentUuid": "864a0773_9ac528f6",
+      "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
