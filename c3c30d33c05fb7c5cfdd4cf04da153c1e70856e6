@@ -20,6 +20,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "081972dd_f7f87b02",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2638,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-03T07:22:55Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:ENOSYS: ENOSYS means \u0027invalid syscall nr\u0027 and nothing else\n\nWARNING:ENOSYS: ENOSYS means \u0027invalid syscall nr\u0027 and nothing else\n\nShould this be -EINVAL?",
+      "range": {
+        "startLine": 2638,
+        "startChar": 0,
+        "endLine": 2638,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ecdd406b_55c7f9a8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 2638,
+                "startChar": 0,
+                "endLine": 2639,
+                "endChar": 0
+              },
+              "replacement": "\treturn -EINVAL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4338805_7b23afcf",
         "filename": "drivers/block/zram/zram_ioctl.h",
         "patchSetId": 3
@@ -31,6 +72,30 @@
       "writtenOn": "2025-08-29T08:39:40Z",
       "side": 1,
       "message": "not a valid user/kernel api type at all.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "267e6151_6cebb03a",
+        "filename": "drivers/block/zram/zram_ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-03T07:22:55Z",
+      "side": 1,
+      "message": "define as `__s32 pidfd`?",
+      "parentUuid": "b4338805_7b23afcf",
       "range": {
         "startLine": 7,
         "startChar": 0,
