@@ -87,6 +87,24 @@
       "parentUuid": "864a0773_9ac528f6",
       "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0225850_5aa7af16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-03T11:41:33Z",
+      "side": 1,
+      "message": "zram is an \"unprotected\" GKI module, which means it can be overridden by partner implementations. See https://source.android.com/docs/core/architecture/kernel/modules#unprotected-GKI-module\n\nThis means that to use it, the symbols need to be part of the KMI, so a symbol list update is required - and the platform must be able to gracefully deal with the case where the ioctl isn\u0027t implemented by partner version of zram.ko.",
+      "parentUuid": "eb08035d_0d6b74c2",
+      "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
