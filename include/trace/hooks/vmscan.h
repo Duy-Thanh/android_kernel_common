@@ -21,6 +21,21 @@ DECLARE_HOOK(android_vh_shrink_slab_bypass,
 DECLARE_HOOK(android_vh_do_shrink_slab,
 	TP_PROTO(struct shrinker *shrinker, long *freeable),
 	TP_ARGS(shrinker, freeable));
+<<<<<<< HEAD   (8e304f04e1ff1fb4696d88c8e05d8645b038a846 ANDROID: GKI: Update symbol list for vivo)
+||||||| BASE   (65affddf72ba37b49538c7bfb3453ce433e7ef4f ANDROID: KVM: arm64: Configure size of pKVM linear map on th)
+DECLARE_HOOK(android_vh_do_shrink_slab_ex,
+	TP_PROTO(struct shrink_control *shrinkctl, struct shrinker *shrinker,
+	        long *freeable, int priority),
+	TP_ARGS(shrinkctl, shrinker, freeable, priority));
+=======
+DECLARE_HOOK(android_vh_do_shrink_slab_ex,
+	TP_PROTO(struct shrink_control *shrinkctl, struct shrinker *shrinker,
+	        long *freeable, int priority),
+	TP_ARGS(shrinkctl, shrinker, freeable, priority));
+DECLARE_HOOK(android_vh_throttle_direct_reclaim_bypass,
+	TP_PROTO(bool *bypass),
+	TP_ARGS(bypass));
+>>>>>>> CHANGE (ed1da72b3c04f1bba7c03e58e73bfde6ca4f70d4 ANDROID: vendor hooks: skip mem reclaim throttle to speed up)
 DECLARE_HOOK(android_vh_shrink_node_memcgs,
 	TP_PROTO(struct mem_cgroup *memcg, bool *skip),
 	TP_ARGS(memcg, skip));
