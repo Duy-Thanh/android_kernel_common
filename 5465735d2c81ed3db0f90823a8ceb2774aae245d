@@ -51,6 +51,24 @@
       "message": "nit pick: please use braces for else too as we are using for if",
       "revId": "5465735d2c81ed3db0f90823a8ceb2774aae245d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c4b4e78_7e3504d9",
+        "filename": "drivers/virt/gunyah/rsc_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 3516203
+      },
+      "writtenOn": "2025-09-04T09:50:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15261df3_645b1da0",
+      "revId": "5465735d2c81ed3db0f90823a8ceb2774aae245d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
