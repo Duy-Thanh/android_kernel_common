@@ -142,6 +142,24 @@
       "parentUuid": "f81fefb0_1ec4aae5",
       "revId": "7655c3b97d23d8b9adfbc6d3275ce40075c58d58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9165368_ec49ac57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-09-04T20:17:07Z",
+      "side": 1,
+      "message": "Done.\n\n```\n$ gerrit -g android search \"project:kernel/common branch:android16-6.12-desktop owner:mac.chiang@intel.com status:merged\" | xargs -I {} gerrit -g android hashtags \"{}\" desktop-6.12-x86-64-kmi-breakage\n```",
+      "parentUuid": "f9799859_f3955142",
+      "revId": "7655c3b97d23d8b9adfbc6d3275ce40075c58d58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
