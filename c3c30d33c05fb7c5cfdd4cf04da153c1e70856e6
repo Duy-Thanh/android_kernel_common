@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19e81c1c_43d1f070",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-04T09:40:30Z",
+      "side": 1,
+      "message": "Yes, the MMD will check the ioctl interface existed or not before using.",
+      "parentUuid": "483441ad_d24b74e4",
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "081972dd_f7f87b02",
@@ -124,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0063d753_d2cec39e",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2638,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-04T09:40:30Z",
+      "side": 1,
+      "message": "Use -EINVAL here.",
+      "parentUuid": "3df80948_514837ab",
+      "range": {
+        "startLine": 2638,
+        "startChar": 0,
+        "endLine": 2638,
+        "endChar": 0
+      },
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4338805_7b23afcf",
@@ -171,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f6cc2ba_f33a8533",
+        "filename": "drivers/block/zram/zram_ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-04T09:40:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "267e6151_6cebb03a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e59dfc3_5305e970",
@@ -184,6 +250,30 @@
       "writtenOn": "2025-08-29T08:40:07Z",
       "side": 1,
       "message": "not the correct way to create new ioctls at all.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 59
+      },
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43aa1e8a_dfd4f53b",
+        "filename": "drivers/block/zram/zram_ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-04T09:40:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e59dfc3_5305e970",
       "range": {
         "startLine": 12,
         "startChar": 0,
