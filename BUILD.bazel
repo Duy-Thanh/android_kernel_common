@@ -8,6 +8,7 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@rules_pkg//pkg:install.bzl", "pkg_install")
 load("@rules_pkg//pkg:mappings.bzl", "pkg_filegroup", "pkg_files", "strip_prefix")
 load("@rules_pkg//pkg:pkg.bzl", "pkg_zip")
+load("@rules_python//python:defs.bzl", "py_library")
 load(
     "//build/kernel/kleaf:common_kernels.bzl",
     "common_kernel",
@@ -203,6 +204,7 @@ filegroup(
         "gki/aarch64/symbols/qcom",
         "gki/aarch64/symbols/rtkstb",
         "gki/aarch64/symbols/rtktv",
+        "gki/aarch64/symbols/tcl",
         "gki/aarch64/symbols/transsion",
         "gki/aarch64/symbols/trusty",
         "gki/aarch64/symbols/tuxera",
@@ -1568,6 +1570,16 @@ pkg_install(
         ":kunit_tests_x86_64_pkg_files",
     ],
     visibility = ["//visibility:private"],
+)
+
+py_library(
+    name = "kunit_parser",
+    srcs = [
+        "tools/testing/kunit/kunit_parser.py",
+        "tools/testing/kunit/kunit_printer.py",
+    ],
+    imports = ["tools/testing/kunit"],
+    visibility = ["//visibility:public"],
 )
 
 # DDK Headers
