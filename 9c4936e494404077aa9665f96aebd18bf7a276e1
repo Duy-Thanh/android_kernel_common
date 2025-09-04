@@ -159,6 +159,24 @@
       "parentUuid": "984a4144_e70a9580",
       "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4e31c0_9ffe465c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-04T09:48:08Z",
+      "side": 1,
+      "message": "For the symbol list, I can\u0027t find the files in android-mainline. Maybe I can add symbols when backport to android16-6.12?",
+      "parentUuid": "bd5ed9d8_dc5af14a",
+      "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
