@@ -177,6 +177,30 @@
       },
       "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42f0c41_6d6c2da0",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-04T11:43:58Z",
+      "side": 1,
+      "message": "I suggested __s32 based on the example in include/uapi/linux/fanotify.h, but __s64 would certainly be safe.",
+      "parentUuid": "4fa47b4c_be4810fd",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
