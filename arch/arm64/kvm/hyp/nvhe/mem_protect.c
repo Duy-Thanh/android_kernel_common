@@ -1136,8 +1136,13 @@ static int guest_request_walker(const struct kvm_pgtable_visit_ctx *ctx,
 	u32 level = ctx->level;
 
 	state = guest_get_page_state(pte, 0);
-	if (data->desired_state != (state & data->desired_mask))
-		return (state & PKVM_NOPAGE) ? -EFAULT : -EPERM;
+	if (data->desired_state != (state & data->desired_mask)) {
+		if (state == PKVM_NOPAGE)
+			return -EFAULT;
+		else if (data->desired_mask & PKVM_NOPAGE)
+			return -EEXIST;
+		return -EPERM;
+	}
 
 	data->max_ptes--;
 
@@ -2608,10 +2613,23 @@ int __pkvm_install_ioguard_page(struct pkvm_hyp_vcpu *hyp_vcpu, u64 ipa,
 
 	ret = kvm_pgtable_walk(&vm->pgt, ipa, nr_pages << PAGE_SHIFT, &walker);
 	/* Walker reached data.max_ptes */
-	if (ret == -E2BIG)
+	if (ret == -E2BIG) {
 		ret = 0;
-	else if (ret)
+	} else if (ret == -EEXIST) {
+		/*
+		 * Mapping already exists for this page, if it is MMIO
+		 * as they are mapped as RW
+		 */
+		data = (struct guest_request_walker_data)GUEST_WALKER_DATA_INIT(PKVM_PAGE_RESTRICTED_PROT);
+		if (kvm_pgtable_walk(&vm->pgt, ipa, nr_pages << PAGE_SHIFT, &walker) == 0) {
+			ret = 0;
+			*nr_guarded = nr_pages;
+		}
 		goto unlock;
+	}
+	else if (ret) {
+		goto unlock;
+	}
 
 	/*
 	 * Intersection between the requested region and what has been verified
