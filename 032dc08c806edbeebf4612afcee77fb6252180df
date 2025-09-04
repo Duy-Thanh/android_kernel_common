@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da069b75_63dac17c",
+        "filename": "drivers/virt/gunyah/rsc_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 3516203
+      },
+      "writtenOn": "2025-09-04T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81d5b080_17233207",
+      "revId": "032dc08c806edbeebf4612afcee77fb6252180df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45588487_79f35e07",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-08-18T07:53:06Z",
       "side": 1,
       "message": "This is a very unlikely scenario, so it is okay to call this unregister though we might not have called register. because the unregistering code is handling that and it may return -ENOENT. however, pls test this. i.e without register call unregister.",
+      "revId": "032dc08c806edbeebf4612afcee77fb6252180df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b902dba_73dbae2e",
+        "filename": "drivers/virt/gunyah/rsc_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 3516203
+      },
+      "writtenOn": "2025-09-04T07:28:33Z",
+      "side": 1,
+      "message": "Correct. Without calling register, the call to unregister simply returns -ENOENT.",
+      "parentUuid": "45588487_79f35e07",
       "revId": "032dc08c806edbeebf4612afcee77fb6252180df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
