@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d4f2d91_4fceea8f",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-04T13:48:48Z",
+      "side": 1,
+      "message": "Note that Git and Gerrit will automatically generate this text, so perhaps tweak the instructions to make clear that it should not be deleted or modified.\n\nIt\u0027s also not clear what expected ordering of the commit is: revert line, reasoning, fixup comments or something else. So perhaps include an example with the typical /expected order.",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 32
+      },
+      "revId": "86f7e6680c00f26a49669e237e571d2b14a6ad03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
