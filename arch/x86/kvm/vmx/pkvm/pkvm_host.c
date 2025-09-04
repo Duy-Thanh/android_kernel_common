@@ -28,6 +28,12 @@ bool __read_mostly enable_pkvm = false;
 
 static bool relax_cpu_bugs = true;
 
+static int __init early_pkvm_relax_cpu_bugs_parse_cmdline(char *buf)
+{
+	return kstrtobool(buf, &relax_cpu_bugs);
+}
+early_param("kvm-intel.pkvm_relax_cpu_bugs", early_pkvm_relax_cpu_bugs_parse_cmdline);
+
 static bool cmdline_pvmfw_present;
 static u64 cmdline_pvmfw_base;
 static u64 cmdline_pvmfw_size;
@@ -1702,6 +1708,8 @@ static int __init __vmx_pkvm_init(void)
 	if (pkvm_has_unmitigated_cpu_bugs()) {
 		if (relax_cpu_bugs) {
 			pr_warn("pkvm: Allow pkvm to run with unmitigated CPU bugs\n");
+			pr_warn("pkvm: To prevent pkvm running on such CPU,");
+			pr_cont("reboot with kvm-intel.pkvm_cpu_bug_relax=false\n");
 		} else {
 			pr_err("pkvm: Prevent pkvm to run due to unmitigated CPU bugs\n");
 			ret = -EOPNOTSUPP;
