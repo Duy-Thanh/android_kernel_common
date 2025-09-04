@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae286891_6b946380",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-04T09:56:53Z",
+      "side": 1,
+      "message": "This is driven by an Android feature that requires this interface. It is an Android only API.",
+      "parentUuid": "ab8d83e8_3d36f139",
+      "revId": "c3c30d33c05fb7c5cfdd4cf04da153c1e70856e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "081972dd_f7f87b02",
