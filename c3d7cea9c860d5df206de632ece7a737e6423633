@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd946c6a_90ee5994",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-09-04T09:44:22Z",
+      "side": 1,
+      "message": "Should this use `READ_ONCE()` to prevent the compiler from optimising away the copy and using `host_mc` directly? That might mean you need to do it a field at a time, though :/",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 40
+      },
+      "revId": "c3d7cea9c860d5df206de632ece7a737e6423633",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bd569af_43958def",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
         "patchSetId": 1
