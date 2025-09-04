@@ -177,6 +177,42 @@
       "parentUuid": "bd5ed9d8_dc5af14a",
       "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c25711f_2049228f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-04T09:51:18Z",
+      "side": 1,
+      "message": "Oh, good point. No ABI enforcement in android-mainline. Sorry about the noise.",
+      "parentUuid": "ce4e31c0_9ffe465c",
+      "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79068e4b_ef9b40af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-04T09:51:18Z",
+      "side": 1,
+      "message": "zram is an unprotected GKI module (and has been since 5.10). It must be a module.",
+      "parentUuid": "8f08ecd4_7718fdf2",
+      "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
