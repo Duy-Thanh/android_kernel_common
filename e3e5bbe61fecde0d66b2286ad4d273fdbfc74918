@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2263ea87_353c4203",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-09-04T22:08:54Z",
+      "side": 1,
+      "message": "Will backport to the other GKI kernels as well.",
+      "revId": "e3e5bbe61fecde0d66b2286ad4d273fdbfc74918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
