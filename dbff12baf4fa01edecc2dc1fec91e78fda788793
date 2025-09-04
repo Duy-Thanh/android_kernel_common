@@ -158,6 +158,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8e7f242_04f51455",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T15:15:59Z",
+      "side": 1,
+      "message": "add android_ as a prefix as this is android-only.",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fa47b4c_be4810fd",
         "filename": "include/uapi/linux/zram_ioctl.h",
         "patchSetId": 4
