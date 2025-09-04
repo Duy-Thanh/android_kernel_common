@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c053b15_5aeb4908",
+        "filename": "drivers/virt/gunyah/rsc_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1967274
+      },
+      "writtenOn": "2025-09-04T10:59:24Z",
+      "side": 1,
+      "message": "nit: memunmap() is needed here. btw, please move this to a different function so it becomes a bit cleaner.",
+      "revId": "0d214d5cdb8e2d75ee81d045318f73d8aa59e84b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
