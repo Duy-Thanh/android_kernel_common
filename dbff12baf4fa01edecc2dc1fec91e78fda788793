@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1155c952_3358ac7c",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T10:09:54Z",
+      "side": 1,
+      "message": "everything is \"internal\", you can drop that from the name.  but why do you even need a whole new .h file for just one function?",
+      "range": {
+        "startLine": 39,
+        "startChar": 20,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01182982_251c3c23",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T10:09:54Z",
+      "side": 1,
+      "message": "#ifdefs belong in .h files, NOT in .c files.",
+      "range": {
+        "startLine": 2592,
+        "startChar": 0,
+        "endLine": 2592,
+        "endChar": 37
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb58d30_79539f25",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2599,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T10:09:54Z",
+      "side": 1,
+      "message": "use a guard() please, easier to audit and verify you got this all correct.",
+      "range": {
+        "startLine": 2599,
+        "startChar": 1,
+        "endLine": 2599,
+        "endChar": 10
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "383410a1_44a3b13a",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2649,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T10:09:54Z",
+      "side": 1,
+      "message": "do not copy before you check the cmd.  That\u0027s a sure way to cause problems.",
+      "range": {
+        "startLine": 2649,
+        "startChar": 0,
+        "endLine": 2649,
+        "endChar": 55
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0a59ce_0accf7f9",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T10:09:54Z",
+      "side": 1,
+      "message": "are you _sure_?  (I have to ask...)\n\nAnd no copyright line?",
+      "range": {
+        "startLine": 1,
+        "startChar": 35,
+        "endLine": 1,
+        "endChar": 44
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eebe43bb_7cf0b071",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T10:09:54Z",
+      "side": 1,
+      "message": "as the whole file is in an ifdef, why is this even being built if it is not set?  Fix this in the  makefile please.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fa47b4c_be4810fd",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T10:09:54Z",
+      "side": 1,
+      "message": "are you SURE this will work?  A file descriptor is a s32?  I thought it was a __u64?  See `struct clone_args` for one example of this.",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
