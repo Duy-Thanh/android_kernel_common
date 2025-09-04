@@ -160,3 +160,8 @@ a maintainer tree)
     - tag the patch subject with `ANDROID:`
     - add a `Bug:` tag with the Android bug (required for android-specific features)
 
+## Requirements for revert patches:
+
+- Add a reason for the revert
+- Add revert information with a `This reverts commit <SHA>.` line
+- If modifications have been made after creating the revert, include a list of these in the commit message
