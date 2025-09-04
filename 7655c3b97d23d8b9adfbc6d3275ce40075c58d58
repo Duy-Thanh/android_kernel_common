@@ -106,6 +106,24 @@
       "parentUuid": "da95a13b_eed60dd3",
       "revId": "7655c3b97d23d8b9adfbc6d3275ce40075c58d58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f81fefb0_1ec4aae5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-09-04T15:25:55Z",
+      "side": 1,
+      "message": "It\u0027s aosp/3746051, mentioned in both the commit message and this comment chain.\n\nThere are 38 patches in the breaking relation chain, so I don\u0027t know which one exactly broke the KMI, so I only added it to the final patch in the chain. It\u0027s easy enough to add it to all of them in the chain, if that\u0027s preferable.",
+      "parentUuid": "9d97101c_1c73d609",
+      "revId": "7655c3b97d23d8b9adfbc6d3275ce40075c58d58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
