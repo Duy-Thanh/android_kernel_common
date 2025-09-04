@@ -79,6 +79,7 @@ checkpatch(
     checkpatch_pl = "scripts/checkpatch.pl",
 )
 
+# Test comment.
 # Deprecated - Use arch specific files from below.
 fail_rule(
     name = "gki_system_dlkm_modules",
