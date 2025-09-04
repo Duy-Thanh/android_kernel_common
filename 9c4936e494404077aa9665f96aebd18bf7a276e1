@@ -141,6 +141,24 @@
       "parentUuid": "a6a38b5a_72181f5d",
       "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5ed9d8_dc5af14a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-04T06:49:27Z",
+      "side": 1,
+      "message": "Then let\u0027s take the upstream submitted  patches please.  Why do  these have to go into `android-mainline` now?  What is the rush?",
+      "parentUuid": "984a4144_e70a9580",
+      "revId": "9c4936e494404077aa9665f96aebd18bf7a276e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
