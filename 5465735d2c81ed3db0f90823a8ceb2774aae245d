@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03363872_a4ed2a49",
+        "filename": "drivers/virt/gunyah/rsc_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1967274
+      },
+      "writtenOn": "2025-09-04T07:53:29Z",
+      "side": 1,
+      "message": "where do we undo this w/ memunmap()? I prefer this to be at the end of this block it self instead of pushing it to HIBERNATION_PREPARE.",
+      "revId": "5465735d2c81ed3db0f90823a8ceb2774aae245d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15261df3_645b1da0",
+        "filename": "drivers/virt/gunyah/rsc_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1967274
+      },
+      "writtenOn": "2025-09-04T07:53:29Z",
+      "side": 1,
+      "message": "nit pick: please use braces for else too as we are using for if",
+      "revId": "5465735d2c81ed3db0f90823a8ceb2774aae245d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
