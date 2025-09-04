@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ff5dc19_4c125987",
+        "filename": "include/ufs/ufs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-04T07:29:03Z",
+      "side": 1,
+      "message": "But the current location changes the values of all the other enum values which breaks the KMI. It cannot be accepted.",
+      "parentUuid": "698dc840_ad9d8ba1",
+      "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fa612ae_ad7876d9",
         "filename": "include/ufs/ufs.h",
         "patchSetId": 5
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "When I reviewed the UFS_CMD_TRACE_STRINGS definition, (in include/trace/events/ufs.h)\nI noticed that \"query_complete_err\" is referred to as UFS_QUERY_ERR,\nand \"tm_complete_err\" is referred to as UFS_TM_ERR.\n\nI followed the naming convention specified in this STRINGS definition,\nbut I’m not entirely clear on what changes are being requested.\n\nCould you please provide some guidance or suggestions?\n\nThank you.\nDooHyun Hwang.",
       "parentUuid": "955738d8_479ead12",
+      "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b23792_c775b7fc",
+        "filename": "include/ufs/ufs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-04T07:29:03Z",
+      "side": 1,
+      "message": "Marked as unresolved.",
+      "parentUuid": "3ce78c8f_00e2829f",
       "revId": "83023033171667b5bd3bcb99df834ad931b4ffaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
