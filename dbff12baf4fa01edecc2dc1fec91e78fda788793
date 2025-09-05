@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39124fc4_e223795d",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-05T19:50:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1155c952_3358ac7c",
+      "range": {
+        "startLine": 39,
+        "startChar": 20,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01182982_251c3c23",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-09-04T10:09:54Z",
       "side": 1,
       "message": "#ifdefs belong in .h files, NOT in .c files.",
+      "range": {
+        "startLine": 2592,
+        "startChar": 0,
+        "endLine": 2592,
+        "endChar": 37
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65607a5f_7d916644",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-05T19:50:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "01182982_251c3c23",
       "range": {
         "startLine": 2592,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ce60f4_14efd3de",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2599,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-05T19:50:11Z",
+      "side": 1,
+      "message": "init_lock existed in many place. I think it\u0027s better to replace as a refactor in separate commit.",
+      "parentUuid": "0eb58d30_79539f25",
+      "range": {
+        "startLine": 2599,
+        "startChar": 1,
+        "endLine": 2599,
+        "endChar": 10
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "383410a1_44a3b13a",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-09-04T10:09:54Z",
       "side": 1,
       "message": "do not copy before you check the cmd.  That\u0027s a sure way to cause problems.",
+      "range": {
+        "startLine": 2649,
+        "startChar": 0,
+        "endLine": 2649,
+        "endChar": 55
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4017ebe1_0b65549e",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2649,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-05T19:50:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "383410a1_44a3b13a",
       "range": {
         "startLine": 2649,
         "startChar": 0,
@@ -135,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf2f67e8_7594626e",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-05T19:50:11Z",
+      "side": 1,
+      "message": "I use the same License-Identifier in zram, may I have your suggestions?",
+      "parentUuid": "ef0a59ce_0accf7f9",
+      "range": {
+        "startLine": 1,
+        "startChar": 35,
+        "endLine": 1,
+        "endChar": 44
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eebe43bb_7cf0b071",
         "filename": "drivers/block/zram/zram_ioctl.c",
         "patchSetId": 4
@@ -146,6 +266,30 @@
       "writtenOn": "2025-09-04T10:09:54Z",
       "side": 1,
       "message": "as the whole file is in an ifdef, why is this even being built if it is not set?  Fix this in the  makefile please.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce40db80_5549a9aa",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-05T19:50:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eebe43bb_7cf0b071",
       "range": {
         "startLine": 22,
         "startChar": 0,
@@ -169,6 +313,30 @@
       "writtenOn": "2025-09-04T15:15:59Z",
       "side": 1,
       "message": "add android_ as a prefix as this is android-only.",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9871879_956061ef",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-05T19:50:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8e7f242_04f51455",
       "range": {
         "startLine": 9,
         "startChar": 7,
@@ -240,6 +408,30 @@
       "side": 1,
       "message": "How can a pidfd be signed?",
       "parentUuid": "e42f0c41_6d6c2da0",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75bd043b_96839f20",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-05T19:50:11Z",
+      "side": 1,
+      "message": "Align with struct clone_args, `__aligned_u64 pidfd`",
+      "parentUuid": "c1b51abc_949433d4",
       "range": {
         "startLine": 10,
         "startChar": 7,
