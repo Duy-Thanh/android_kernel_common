@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb15c3d9_fc0fc644",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-09-05T18:00:46Z",
+      "side": 1,
+      "message": "True, that means the getter is also as wrong as it is missing the equal.",
+      "parentUuid": "6c0c75f1_deaa2ac5",
+      "range": {
+        "startLine": 312,
+        "startChar": 12,
+        "endLine": 312,
+        "endChar": 13
+      },
+      "revId": "d88bc8a2c0020b6bd3b93cbf7bd462ce37cecbd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "798856ae_a03c525f",
@@ -100,6 +124,24 @@
           ]
         }
       ],
+      "revId": "d88bc8a2c0020b6bd3b93cbf7bd462ce37cecbd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8313a95_c2bcd0cb",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-09-05T18:00:46Z",
+      "side": 1,
+      "message": "I see we only harden the SMMU_id against specter, I think if we need to do it for the SID, it\u0027s better in a separate patch and also, done at the beginning of the operation on the sid itself.",
+      "parentUuid": "798856ae_a03c525f",
       "revId": "d88bc8a2c0020b6bd3b93cbf7bd462ce37cecbd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
