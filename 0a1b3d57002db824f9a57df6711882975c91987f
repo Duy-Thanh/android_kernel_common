@@ -586,6 +586,30 @@
       },
       "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f98d053b_3ee5cb7d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-09-05T12:25:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8ad827e0_0717207e",
+      "range": {
+        "startLine": 1749,
+        "startChar": 0,
+        "endLine": 1756,
+        "endChar": 0
+      },
+      "revId": "0a1b3d57002db824f9a57df6711882975c91987f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
