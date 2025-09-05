@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ba4a26_c4d0a841",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-05T11:54:10Z",
+      "side": 1,
+      "message": "it\u0027s a divergence that should be tracked. Please file a bug on https://issuetracker.google.com/hotlists/6284861 hotlist and add add `Upstream-Task: b/\u003cbug-id\u003e` tag",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
