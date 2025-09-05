@@ -16,6 +16,92 @@
       "message": "That\u0027s good",
       "revId": "d88bc8a2c0020b6bd3b93cbf7bd462ce37cecbd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0c75f1_deaa2ac5",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-09-05T16:55:44Z",
+      "side": 1,
+      "message": "`\u003e\u003d` ?",
+      "range": {
+        "startLine": 312,
+        "startChar": 12,
+        "endLine": 312,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0d5fc614_96d5497e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+              "range": {
+                "startLine": 312,
+                "startChar": 0,
+                "endLine": 313,
+                "endChar": 0
+              },
+              "replacement": "\tif (l1_idx \u003e\u003d cfg-\u003el2.num_l1_ents)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d88bc8a2c0020b6bd3b93cbf7bd462ce37cecbd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798856ae_a03c525f",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2025-09-05T16:55:44Z",
+      "side": 1,
+      "message": "Do we need\n```\nl1_idx \u003d array_index_nospec(l1_idx, cfg-\u003el2.num_l1_ents);\n```?",
+      "fixSuggestions": [
+        {
+          "fixId": "e0141fa8_81de82b9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+              "range": {
+                "startLine": 312,
+                "startChar": 0,
+                "endLine": 313,
+                "endChar": 0
+              },
+              "replacement": "\tif (l1_idx \u003e\u003d cfg-\u003el2.num_l1_ents)\n"
+            },
+            {
+              "path": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+              "range": {
+                "startLine": 315,
+                "startChar": 0,
+                "endLine": 315,
+                "endChar": 0
+              },
+              "replacement": "\tl1_idx \u003d array_index_nospec(l1_idx, cfg-\u003el2.num_l1_ents);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d88bc8a2c0020b6bd3b93cbf7bd462ce37cecbd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
