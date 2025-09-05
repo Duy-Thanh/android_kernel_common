@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "459353be_ce2a1d93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-05T08:16:29Z",
+      "side": 1,
+      "message": "Build-break for arm64 allmodconfig build:\n```\nERROR: modpost: \"irq_domain_free_irqs\" [drivers/virt/gunyah/gunyah.ko] undefined!\n```",
+      "revId": "b3bb56a1f4a965b63acbd83ca774e343fdb4bec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
