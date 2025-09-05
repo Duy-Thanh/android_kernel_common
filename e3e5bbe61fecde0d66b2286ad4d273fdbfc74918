@@ -16,6 +16,23 @@
       "message": "Will backport to the other GKI kernels as well.",
       "revId": "e3e5bbe61fecde0d66b2286ad4d273fdbfc74918",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a249a4b_27c9b758",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-09-05T00:01:30Z",
+      "side": 1,
+      "message": "+tweek@google.com- This is what I was discussing about policycaps being in the KMI and having to remove them - you can see them fail checks in the history of previous patchsets.",
+      "revId": "e3e5bbe61fecde0d66b2286ad4d273fdbfc74918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
