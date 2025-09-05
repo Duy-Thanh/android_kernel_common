@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbffb720_5b5cf52f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-09-05T12:22:40Z",
+      "side": 1,
+      "message": "Should this be zero-initialised?\n\nI\u0027m worried that if nbits is e.g. 128 then the module might not populate all of the buffer and we\u0027ll end up copying uninitialised hypervisor stack to the guest.",
+      "range": {
+        "startLine": 1729,
+        "startChar": 5,
+        "endLine": 1729,
+        "endChar": 12
+      },
+      "revId": "cc5065e232453e68886f65611bc701eb888c949a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
