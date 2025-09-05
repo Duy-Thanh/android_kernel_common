@@ -22,6 +22,30 @@
       },
       "revId": "19104aa96ba254512df813cc25540504b70a2f38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04afb0d1_48162365",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-09-05T17:47:08Z",
+      "side": 1,
+      "message": "I think we can start with kernel boot parameter first and will introduce sysctl later if someone needs it with strong justification.",
+      "parentUuid": "0116e0ab_921e1a0d",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 641,
+        "endChar": 0
+      },
+      "revId": "19104aa96ba254512df813cc25540504b70a2f38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
