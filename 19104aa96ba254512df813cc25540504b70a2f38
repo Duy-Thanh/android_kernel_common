@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0116e0ab_921e1a0d",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-05T17:30:37Z",
+      "side": 1,
+      "message": "@minchan@google.com What do you think about the runtime sysctrl? I think we should still try to clean up previously allocated `dmabuf_info`s here if the feature gets turned off at runtime (instead of at boot time) to avoid leaking memory.\nAlso if it gets disabled then re-enabled the accounting won\u0027t be correct so not sure if we should keep it at all.",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 641,
+        "endChar": 0
+      },
+      "revId": "19104aa96ba254512df813cc25540504b70a2f38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
