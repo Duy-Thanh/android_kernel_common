@@ -1219,6 +1219,7 @@ int netlink_attachskb(struct sock *sk, struct sk_buff *skb,
 
 	nlk = nlk_sk(sk);
 
+<<<<<<< HEAD   (7d34e6030c03bbbedd0da2f8c2f08bc4e019df3a Revert "sched: Add wrapper for get_wchan() to keep task bloc)
 	if ((atomic_read(&sk->sk_rmem_alloc) > sk->sk_rcvbuf ||
 	     test_bit(NETLINK_S_CONGESTED, &nlk->state))) {
 		DECLARE_WAITQUEUE(wait, current);
@@ -1229,6 +1230,19 @@ int netlink_attachskb(struct sock *sk, struct sk_buff *skb,
 			kfree_skb(skb);
 			return -EAGAIN;
 		}
+||||||| BASE   (b62c8ee41b81a0e91056970e6c11daef09fecd1d x86: Pin task-stack in __get_wchan())
+	if ((rmem == skb->truesize || rmem < READ_ONCE(sk->sk_rcvbuf)) &&
+	    !test_bit(NETLINK_S_CONGESTED, &nlk->state)) {
+		netlink_skb_set_owner_r(skb, sk);
+		return 0;
+	}
+=======
+	if ((rmem == skb->truesize || rmem <= READ_ONCE(sk->sk_rcvbuf)) &&
+	    !test_bit(NETLINK_S_CONGESTED, &nlk->state)) {
+		netlink_skb_set_owner_r(skb, sk);
+		return 0;
+	}
+>>>>>>> BRANCH (01879f56bddeda429ecc7cd67bafdb291fbd7775 Linux 5.15.190)
 
 		__set_current_state(TASK_INTERRUPTIBLE);
 		add_wait_queue(&nlk->wait, &wait);

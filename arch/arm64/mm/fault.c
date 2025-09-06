@@ -817,7 +817,12 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 		 */
 		siaddr  = untagged_addr(far);
 	}
+<<<<<<< HEAD   (7d34e6030c03bbbedd0da2f8c2f08bc4e019df3a Revert "sched: Add wrapper for get_wchan() to keep task bloc)
 	trace_android_rvh_do_sea(siaddr, esr, regs);
+||||||| BASE   (b62c8ee41b81a0e91056970e6c11daef09fecd1d x86: Pin task-stack in __get_wchan())
+=======
+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+>>>>>>> BRANCH (01879f56bddeda429ecc7cd67bafdb291fbd7775 Linux 5.15.190)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;

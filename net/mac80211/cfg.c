@@ -1698,6 +1698,7 @@ static int sta_apply_parameters(struct ieee80211_local *local,
 	if (params->listen_interval >= 0)
 		sta->listen_interval = params->listen_interval;
 
+<<<<<<< HEAD   (7d34e6030c03bbbedd0da2f8c2f08bc4e019df3a Revert "sched: Add wrapper for get_wchan() to keep task bloc)
 	if (params->link_sta_params.supported_rates &&
 	    params->link_sta_params.supported_rates_len) {
 		ieee80211_parse_bitrates(&sdata->vif.bss_conf.chandef,
@@ -1705,6 +1706,40 @@ static int sta_apply_parameters(struct ieee80211_local *local,
 					 params->link_sta_params.supported_rates_len,
 					 &sta->sta.deflink.supp_rates[sband->band]);
 	}
+||||||| BASE   (b62c8ee41b81a0e91056970e6c11daef09fecd1d x86: Pin task-stack in __get_wchan())
+	if (params->sta_modify_mask & STATION_PARAM_APPLY_STA_TXPOWER) {
+		sta->sta.txpwr.type = params->txpwr.type;
+		if (params->txpwr.type == NL80211_TX_POWER_LIMITED)
+			sta->sta.txpwr.power = params->txpwr.power;
+		ret = drv_sta_set_txpwr(local, sdata, sta);
+		if (ret)
+			return ret;
+	}
+
+	if (params->supported_rates && params->supported_rates_len) {
+		ieee80211_parse_bitrates(&sdata->vif.bss_conf.chandef,
+					 sband, params->supported_rates,
+					 params->supported_rates_len,
+					 &sta->sta.supp_rates[sband->band]);
+	}
+=======
+	if (params->sta_modify_mask & STATION_PARAM_APPLY_STA_TXPOWER) {
+		sta->sta.txpwr.type = params->txpwr.type;
+		if (params->txpwr.type == NL80211_TX_POWER_LIMITED)
+			sta->sta.txpwr.power = params->txpwr.power;
+		ret = drv_sta_set_txpwr(local, sdata, sta);
+		if (ret)
+			return ret;
+	}
+
+	if (params->supported_rates &&
+	    params->supported_rates_len &&
+	    !ieee80211_parse_bitrates(&sdata->vif.bss_conf.chandef,
+				      sband, params->supported_rates,
+				      params->supported_rates_len,
+				      &sta->sta.supp_rates[sband->band]))
+		return -EINVAL;
+>>>>>>> BRANCH (01879f56bddeda429ecc7cd67bafdb291fbd7775 Linux 5.15.190)
 
 	if (params->link_sta_params.ht_capa)
 		ieee80211_ht_cap_ie_to_sta_ht_cap(sdata, sband,
