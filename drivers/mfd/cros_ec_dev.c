@@ -87,7 +87,6 @@ static const struct mfd_cell cros_ec_sensorhub_cells[] = {
 };
 
 static const struct mfd_cell cros_usbpd_charger_cells[] = {
-	{ .name = "cros-charge-control", },
 	{ .name = "cros-usbpd-charger", },
 	{ .name = "cros-usbpd-logger", },
 };
@@ -108,8 +107,14 @@ static const struct mfd_cell cros_ec_keyboard_leds_cells[] = {
 	{ .name = "cros-keyboard-leds", },
 };
 
+<<<<<<< HEAD   (7ef32367add4e758d08c22c80fb3cace49170811 Merge caf7f7c1a050 ("ata: libata-sata: Disallow changing LPM)
 static const struct mfd_cell cros_ec_ucsi_cells[] = {
 	{ .name = "cros_ec_ucsi", },
+||||||| BASE   (caf7f7c1a050774ca8b05d2c474fb09b1b5e78e4 ata: libata-sata: Disallow changing LPM state if not support)
+=======
+static const struct mfd_cell cros_ec_charge_control_cells[] = {
+	{ .name = "cros-charge-control", },
+>>>>>>> BRANCH (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
 };
 
 static const struct cros_feature_to_cells cros_subdevices[] = {
@@ -147,6 +152,11 @@ static const struct cros_feature_to_cells cros_subdevices[] = {
 		.id		= EC_FEATURE_PWM_KEYB,
 		.mfd_cells	= cros_ec_keyboard_leds_cells,
 		.num_cells	= ARRAY_SIZE(cros_ec_keyboard_leds_cells),
+	},
+	{
+		.id		= EC_FEATURE_CHARGER,
+		.mfd_cells	= cros_ec_charge_control_cells,
+		.num_cells	= ARRAY_SIZE(cros_ec_charge_control_cells),
 	},
 };
 
