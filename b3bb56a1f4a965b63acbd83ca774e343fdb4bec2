@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e67deb6b_04473b24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-06T02:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "459353be_ce2a1d93",
+      "revId": "b3bb56a1f4a965b63acbd83ca774e343fdb4bec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7247fbb_31a5a05f",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-05T09:24:15Z",
       "side": 1,
       "message": "irq_dispose_mapping() for the build failure",
+      "revId": "b3bb56a1f4a965b63acbd83ca774e343fdb4bec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7accf981_efdfb7be",
+        "filename": "drivers/virt/gunyah/rsc_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-06T02:41:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a7247fbb_31a5a05f",
       "revId": "b3bb56a1f4a965b63acbd83ca774e343fdb4bec2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
