@@ -253,6 +253,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ac375a_37a0d08f",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-06T07:58:37Z",
+      "side": 1,
+      "message": "If it\u0027s what  you use elsewhere, that\u0027s fine, no objection but I have to ask when I  see \"or later\", to ensure that the submitter understands it.",
+      "parentUuid": "cf2f67e8_7594626e",
+      "range": {
+        "startLine": 1,
+        "startChar": 35,
+        "endLine": 1,
+        "endChar": 44
+      },
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eebe43bb_7cf0b071",
