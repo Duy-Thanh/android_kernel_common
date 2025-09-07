@@ -829,7 +829,12 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 		 */
 		siaddr  = untagged_addr(far);
 	}
+<<<<<<< HEAD   (b2f19989d191ddeee7aa347dc8078b504c58babb Merge 9314cd0fb179 ("ASoC: qcom: use drvdata instead of comp)
 	trace_android_rvh_do_sea(siaddr, esr, regs);
+||||||| BASE   (9314cd0fb179898b0985bc370fa7a91cbe091f00 ASoC: qcom: use drvdata instead of component to keep id)
+=======
+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+>>>>>>> BRANCH (3a1f6b418c34a75e0920132df7b392bfe2e89a0f drm/amd/display: Separate set_gsl from set_gsl_source_select)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;
