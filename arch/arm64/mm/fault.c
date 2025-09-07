@@ -829,7 +829,12 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 		 */
 		siaddr  = untagged_addr(far);
 	}
+<<<<<<< HEAD   (f188db0c9d0f410ceac734a8ed9f7c676c9655da Merge 29fe6bb14f20 ("wifi: rtw89: Lower the timeout in rtw89)
 	trace_android_rvh_do_sea(siaddr, esr, regs);
+||||||| BASE   (29fe6bb14f2071efb88834c512b11ebf88a6af08 wifi: rtw89: Lower the timeout in rtw89_fw_read_c2h_reg() fo)
+=======
+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+>>>>>>> BRANCH (a83ffafd02a7af59848755c109d544e3894af737 drm/amd/pm: fix null pointer access)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;
