@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1bbcb3f_efd0bdbc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-08T12:24:18Z",
+      "side": 1,
+      "message": "this is not upstream yet",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "fe90eded741001c48bcb6c615eedc16437e3d10f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "28865d6c_0c9e8408",
