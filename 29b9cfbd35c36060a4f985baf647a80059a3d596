@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fe14560_8cc93991",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-08T08:40:51Z",
+      "side": 1,
+      "message": "can you also please document this in the ioctl-number.rst file?",
+      "range": {
+        "startLine": 19,
+        "startChar": 31,
+        "endLine": 19,
+        "endChar": 35
+      },
+      "revId": "29b9cfbd35c36060a4f985baf647a80059a3d596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
