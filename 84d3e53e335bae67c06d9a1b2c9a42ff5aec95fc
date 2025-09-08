@@ -46,6 +46,30 @@
       },
       "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "101265c6_138beb1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-08T11:40:39Z",
+      "side": 1,
+      "message": "How come it\u0027s not a divergence from Android GKI if it lands on desktop branch?\n\nAny reason why this is not sent to the `android-mainline` kernel branch directly and cherry-picked here?",
+      "parentUuid": "d27717ed_ea3f70b9",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
