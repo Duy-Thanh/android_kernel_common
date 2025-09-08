@@ -243,6 +243,7 @@ write_file(
 
 common_kernel(
     name = "kernel_aarch64",
+    clang_autofdo_profile = ":gki/aarch64/afdo/kernel.afdo",
     outs = DEFAULT_GKI_OUTS,
     abi_definition_stg = "gki/aarch64/abi.stg",
     additional_kmi_symbol_lists = [":aarch64_additional_kmi_symbol_lists"],
