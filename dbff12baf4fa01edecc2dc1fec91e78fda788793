@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd5aec9f_d40ceb07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-08T08:40:46Z",
+      "side": 1,
+      "message": "Discussed in https://b.corp.google.com/issues/421065577#comment18",
+      "parentUuid": "50fe2f51_85a25a84",
+      "revId": "dbff12baf4fa01edecc2dc1fec91e78fda788793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1155c952_3358ac7c",

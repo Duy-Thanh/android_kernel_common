@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcfdc70b_20897f16",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-08T08:40:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "569721fb_e34bf883",
+      "range": {
+        "startLine": 2592,
+        "startChar": 0,
+        "endLine": 2592,
+        "endChar": 41
+      },
+      "revId": "74625ba640bbe8fa4cb0b46030532488bf719490",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e02cc800_80b3053b",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-09-06T07:58:37Z",
       "side": 1,
       "message": "this conflicts with other drivers, are you sure you should use this value?  Why not \u0027Z\u0027 instead?",
+      "range": {
+        "startLine": 19,
+        "startChar": 32,
+        "endLine": 19,
+        "endChar": 33
+      },
+      "revId": "74625ba640bbe8fa4cb0b46030532488bf719490",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ed1093_98a54428",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-08T08:40:46Z",
+      "side": 1,
+      "message": "I\u0027ve checked Documentation/userspace-api/ioctl/ioctl-number.rst, and it seems \u0027z\u0027 and \u0027Z\u0027 are both conflict. Change to 0xBB instead.",
+      "parentUuid": "e02cc800_80b3053b",
       "range": {
         "startLine": 19,
         "startChar": 32,
