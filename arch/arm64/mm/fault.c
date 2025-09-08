@@ -772,7 +772,12 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 		 */
 		siaddr  = untagged_addr(far);
 	}
+<<<<<<< HEAD   (ab81af1bf46e0676057d2eed718d3eefddc5a0bc Merge 035858eeb3a0 ("xen/netfront: Fix TX response spurious )
 	trace_android_rvh_do_sea(siaddr, esr, regs);
+||||||| BASE   (035858eeb3a0ac706d04f086f601d5fb45c81239 xen/netfront: Fix TX response spurious interrupts)
+=======
+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+>>>>>>> BRANCH (3662c20e079821dcbe582c44407fd6f3a58112d0 net: dsa: b53: fix IP_MULTICAST_CTRL on BCM5325)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;
