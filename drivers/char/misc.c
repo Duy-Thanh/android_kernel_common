@@ -228,6 +228,8 @@ int misc_register(struct miscdevice *misc)
 	int err = 0;
 	bool is_dynamic = (misc->minor == MISC_DYNAMIC_MINOR);
 
+	BUG_ON(misc->this_device);
+
 	INIT_LIST_HEAD(&misc->list);
 
 	mutex_lock(&misc_mtx);
@@ -269,6 +271,7 @@ int misc_register(struct miscdevice *misc)
 			misc->minor = MISC_DYNAMIC_MINOR;
 		}
 		err = PTR_ERR(misc->this_device);
+		misc->this_device = NULL;
 		goto out;
 	}
 
@@ -293,12 +296,12 @@ EXPORT_SYMBOL(misc_register);
 
 void misc_deregister(struct miscdevice *misc)
 {
-	if (WARN_ON(list_empty(&misc->list)))
-		return;
+	BUG_ON(!misc->this_device);
 
 	mutex_lock(&misc_mtx);
 	list_del(&misc->list);
 	device_destroy(&misc_class, MKDEV(MISC_MAJOR, misc->minor));
+	misc->this_device = NULL;
 	misc_minor_free(misc->minor);
 	mutex_unlock(&misc_mtx);
 }
