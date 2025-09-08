@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a25388c0_ee4a99c7",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-08T08:43:58Z",
+      "side": 1,
+      "message": "this should all go into the new zram_ioctl.c file, not in here.",
+      "range": {
+        "startLine": 2592,
+        "startChar": 11,
+        "endLine": 2592,
+        "endChar": 39
+      },
+      "revId": "29b9cfbd35c36060a4f985baf647a80059a3d596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0f1671_10faf332",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-08T08:43:58Z",
+      "side": 1,
+      "message": "this too should to into the new file.",
+      "range": {
+        "startLine": 2634,
+        "startChar": 11,
+        "endLine": 2634,
+        "endChar": 21
+      },
+      "revId": "29b9cfbd35c36060a4f985baf647a80059a3d596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fe14560_8cc93991",
         "filename": "include/uapi/linux/zram_ioctl.h",
         "patchSetId": 6
