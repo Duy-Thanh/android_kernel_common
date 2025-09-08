@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "143a4b9b_99ee0855",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-08T12:41:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a25388c0_ee4a99c7",
+      "range": {
+        "startLine": 2592,
+        "startChar": 11,
+        "endLine": 2592,
+        "endChar": 39
+      },
+      "revId": "29b9cfbd35c36060a4f985baf647a80059a3d596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a0f1671_10faf332",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab6c236_c8aefb9b",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-08T12:41:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a0f1671_10faf332",
+      "range": {
+        "startLine": 2634,
+        "startChar": 11,
+        "endLine": 2634,
+        "endChar": 21
+      },
+      "revId": "29b9cfbd35c36060a4f985baf647a80059a3d596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fe14560_8cc93991",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-09-08T08:40:51Z",
       "side": 1,
       "message": "can you also please document this in the ioctl-number.rst file?",
+      "range": {
+        "startLine": 19,
+        "startChar": 31,
+        "endLine": 19,
+        "endChar": 35
+      },
+      "revId": "29b9cfbd35c36060a4f985baf647a80059a3d596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b37e7ba_b0da656e",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-08T12:41:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fe14560_8cc93991",
       "range": {
         "startLine": 19,
         "startChar": 31,
