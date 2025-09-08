@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc22da53_f3a45c26",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-08T16:33:39Z",
+      "side": 1,
+      "message": "shouldn\u0027t this just be the \"internal\" structure so you don\u0027t have to dereference it deeper in the function?",
+      "range": {
+        "startLine": 201,
+        "startChar": 44,
+        "endLine": 201,
+        "endChar": 52
+      },
+      "revId": "f7e029b6ba8a2e3646c81586db980e77ea140549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a73a9fa_70c57163",
+        "filename": "drivers/block/zram/zram_ioctl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-08T16:33:39Z",
+      "side": 1,
+      "message": "just put this in the .c file, not need for it here.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "f7e029b6ba8a2e3646c81586db980e77ea140549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
