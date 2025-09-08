@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c52481_e76fe49f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-09-08T16:42:15Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. Let\u0027s do the `TAR\u003d\"tar --dereference\"` in a follow up patch.",
+      "revId": "9531007d919725f1d148c1ae12df280845430f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
