@@ -16,6 +16,24 @@
       "message": "Do we need a signed-off tag for Chuanxiao as well as its a backport of his patch?",
       "revId": "cd25946b73e818d4bbbf78c941a2d1adcc43b3f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9bc985_5d8c13c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-08T18:16:47Z",
+      "side": 1,
+      "message": "It is not a specific patch but small pieces of different patches:\n\nhttps://github.com/intel-staging/pKVM-IA/pull/39/commits/ca711f4970934e567fec05afd8e7429629b8d9b7\nhttps://github.com/intel-staging/pKVM-IA/pull/40/commits/07743115d226aa0352515dda4c94eb3ab73c3e46\n\n@chuanxiao.dong@intel.corp-partner.google.com would you mind if I add your SoB to this patch?",
+      "parentUuid": "a73ddf48_d2442396",
+      "revId": "cd25946b73e818d4bbbf78c941a2d1adcc43b3f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
