@@ -568,6 +568,8 @@ void put_task_stack(struct task_struct *tsk)
 }
 #endif
 
+extern void deduct_fpsimd_state_cnt(void);
+
 void free_task(struct task_struct *tsk)
 {
 #ifdef CONFIG_SECCOMP
@@ -577,6 +579,8 @@ void free_task(struct task_struct *tsk)
 	release_user_cpus_ptr(tsk);
 	scs_release(tsk);
 
+	if(tsk->has_saved_fpsimd_state)
+		deduct_fpsimd_state_cnt();
 	trace_android_vh_free_task(tsk);
 #ifndef CONFIG_THREAD_INFO_IN_TASK
 	/*
@@ -1158,6 +1162,8 @@ static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
 	kcov_task_init(tsk);
 	kmsan_task_create(tsk);
 	kmap_local_fork(tsk);
+
+	tsk->has_saved_fpsimd_state = false;
 
 #ifdef CONFIG_FAULT_INJECTION
 	tsk->fail_nth = 0;

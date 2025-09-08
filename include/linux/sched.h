@@ -840,6 +840,7 @@ struct task_struct {
 	 */
 	struct thread_info		thread_info;
 #endif
+	bool                            has_saved_fpsimd_state;
 	unsigned int			__state;
 
 	/* saved state for "spinlock sleepers" */
