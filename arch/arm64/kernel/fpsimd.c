@@ -422,6 +422,13 @@ static void task_fpsimd_load(void)
 	}
 }
 
+static unsigned int user_save_state_count;
+
+void deduct_fpsimd_state_cnt(void)
+{
+	--user_save_state_count;
+	return;
+}
 /*
  * Ensure FPSIMD/SVE storage in memory for the loaded context is up to
  * date with respect to the CPU registers. Note carefully that the
@@ -434,6 +441,12 @@ static void task_fpsimd_load(void)
  */
 static void fpsimd_save_user_state(void)
 {
+	if(!(current->has_saved_fpsimd_state)) {
+		++user_save_state_count;
+		current->has_saved_fpsimd_state = true;
+		pr_err("user_save_state_count: %d\n", user_save_state_count);
+	}
+
 	struct cpu_fp_state const *last =
 		this_cpu_ptr(&fpsimd_last_state);
 	/* set by fpsimd_bind_task_to_cpu() or fpsimd_bind_state_to_cpu() */
@@ -2102,6 +2115,9 @@ static int __init fpsimd_init(void)
 
 	sve_sysctl_init();
 	sme_sysctl_init();
+
+	pr_err("init user_save_state_count\n");
+	user_save_state_count = 0;
 
 	return 0;
 }
