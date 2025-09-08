@@ -16,6 +16,24 @@
       "message": "upstream first?",
       "revId": "8ebbceabbc4a44f7f0d912b0dbea81a3ae885bdc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f1d8ee9_bd7dfcf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-08T08:38:30Z",
+      "side": 1,
+      "message": "Discussed in https://b.corp.google.com/issues/421065577#comment18",
+      "parentUuid": "314b4dbc_54b337b9",
+      "revId": "8ebbceabbc4a44f7f0d912b0dbea81a3ae885bdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
