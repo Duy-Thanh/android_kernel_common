@@ -20,6 +20,7 @@
   gpiod_cansleep
   gpio_device_find
   gpio_device_get_chip
+  is_slub_debug_enabled
   mas_walk
   mas_prev
   mas_next
