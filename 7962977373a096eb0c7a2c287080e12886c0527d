@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed2d909a_f486effc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-09-08T00:49:21Z",
+      "side": 1,
+      "message": "Yes, I can update this to reflect that these are bitflags",
+      "parentUuid": "3bfa1041_fdffaf18",
+      "revId": "7962977373a096eb0c7a2c287080e12886c0527d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a65ec2ec_e1dfdfe2",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-03T09:16:17Z",
       "side": 1,
       "message": "Maybe not for this commit, but I wonder about getting rid of this wrapper, and making all callers pass flags explicitly.",
+      "revId": "7962977373a096eb0c7a2c287080e12886c0527d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c3b9eac_fd7c3ea4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-09-08T00:49:21Z",
+      "side": 1,
+      "message": "Right, I agree that this code path need improvement",
+      "parentUuid": "a65ec2ec_e1dfdfe2",
       "revId": "7962977373a096eb0c7a2c287080e12886c0527d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
