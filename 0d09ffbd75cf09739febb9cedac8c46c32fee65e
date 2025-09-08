@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf4023f_a8604ed0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-08T12:13:52Z",
+      "side": 1,
+      "message": "Please add `desktop-6.12-x86-64-kmi-breakage` hashtag to the change. (https://gerrit-review.googlesource.com/Documentation/user-upload.html#hashtag). Otherwise LGTM",
+      "revId": "0d09ffbd75cf09739febb9cedac8c46c32fee65e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
