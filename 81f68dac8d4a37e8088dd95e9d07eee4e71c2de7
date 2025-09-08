@@ -16,6 +16,24 @@
       "message": "The tools are being unhelpful here (\"Unexpected tooling failure due to unknown reason.\"!) but you\u0027ll need to update the ABI as per: https://source.android.com/docs/core/architecture/kernel/howto-abi-monitor#update-abi",
       "revId": "81f68dac8d4a37e8088dd95e9d07eee4e71c2de7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0ca352_f66ec592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-09-08T12:57:15Z",
+      "side": 1,
+      "message": "Thanks for the pointer! Should I do it in a separate CL or the same CL?",
+      "parentUuid": "b10fcefa_b2d5f1ec",
+      "revId": "81f68dac8d4a37e8088dd95e9d07eee4e71c2de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
