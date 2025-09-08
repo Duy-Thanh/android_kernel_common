@@ -33,6 +33,23 @@
       "message": "This patch has conflict markers. Please resolve the conflicts and make sure this doesn\u0027t break the build",
       "revId": "a170974a84e1a16d12d090f167a4664ea6e43d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "989922ed_79fd81b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-08T22:13:26Z",
+      "side": 1,
+      "message": "rebase on top of aosp/3758008",
+      "revId": "a170974a84e1a16d12d090f167a4664ea6e43d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
