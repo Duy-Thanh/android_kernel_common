@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a46bbbe_8787358c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-08T21:30:40Z",
+      "side": 1,
+      "message": "Temporary CR-2: Wait for CR+1 from Xiaomi since they have the f2fs_submit_folio_write tracepoint in their symbol list.",
+      "revId": "371d1691def9418a818b9c3913bee3f69e2f2240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
