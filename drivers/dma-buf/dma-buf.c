@@ -201,8 +201,9 @@ static void dma_buf_release(struct dentry *dentry)
 	if (dmabuf->resv == (struct dma_resv *)&dmabuf[1])
 		dma_resv_fini(dmabuf->resv);
 
-	if (atomic64_read(&dmabuf->nr_task_refs))
-		pr_alert("destroying dmabuf with non-zero task refs\n");
+	if (WARN_ON(atomic64_read(&dmabuf->nr_task_refs)))
+		pr_alert("destroying dmabuf with non-zero task refs %llu\n",
+			 atomic64_read(&dmabuf->nr_task_refs));
 
 	WARN_ON(!list_empty(&dmabuf->attachments));
 	module_put(dmabuf->owner);
@@ -386,6 +387,8 @@ static void add_task_dmabuf_record(struct task_dma_buf_info *dmabuf_info,
 				   bool remote)
 {
 	lockdep_assert_held(&dmabuf_info->lock);
+	if (WARN_ON(!rec))
+		return;
 
 	rec->dmabuf = dmabuf;
 	static_assert(NUM_REF_TYPES == 2);
@@ -494,6 +497,8 @@ static void put_shared_list(struct task_dma_buf_shared_list *list)
 	if (!refcount_dec_and_test(&list->refcnt))
 		return;
 
+	WARN_ON(list->count != 0);
+
 	kfree(list);
 }
 
@@ -517,6 +522,7 @@ retry:
 	}
 
 	spin_lock_irqsave(&list->lock, flags);
+	WARN_ON(list_count_nodes(&list->list) != list->count);
 	if (list->count > prealloc_count) {
 		prealloc_count = list->count;
 		spin_unlock_irqrestore(&list->lock, flags);
@@ -854,7 +860,7 @@ int copy_dmabuf_info(u64 clone_flags, struct task_struct *task)
 		return 0;
 	}
 
-	if (!parent_dmabuf_info) {
+	if (WARN_ON(!parent_dmabuf_info)) {
 		pr_alert("Non-kthread task has no dmabuf info\n");
 		task->dmabuf_info = NULL;
 		return 0;
@@ -955,10 +961,11 @@ void put_dmabuf_info(struct task_struct *task)
 
 
 
-	if (dmabuf_info->rss)
+	if (WARN_ON(dmabuf_info->rss))
 		pr_alert("destroying task %d with non-zero dmabuf rss %lu\n",
 			 task_pid_nr(task), dmabuf_info->rss);
-	if (!list_empty(&dmabuf_info->dmabufs) || dmabuf_info->dmabuf_count > 0)
+	if (WARN_ON(!list_empty(&dmabuf_info->dmabufs)) ||
+	    WARN_ON(dmabuf_info->dmabuf_count > 0))
 		pr_alert("destroying task with non-empty dmabuf list still containing %u elements\n",
 			 dmabuf_info->dmabuf_count);
 
@@ -980,6 +987,9 @@ void dma_buf_exec_mmap(void)
 	unsigned long flags;
 
 	if (!dmabuf_info)
+		return;
+
+	if (WARN_ON(refcount_read(&dmabuf_info->refcnt) > 1))
 		return;
 
 	INIT_LIST_HEAD(&deferred_free);
