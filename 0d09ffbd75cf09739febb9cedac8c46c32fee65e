@@ -16,6 +16,24 @@
       "message": "Please add `desktop-6.12-x86-64-kmi-breakage` hashtag to the change. (https://gerrit-review.googlesource.com/Documentation/user-upload.html#hashtag). Otherwise LGTM",
       "revId": "0d09ffbd75cf09739febb9cedac8c46c32fee65e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3374984_19d58a66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976195
+      },
+      "writtenOn": "2025-09-08T16:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cf4023f_a8604ed0",
+      "revId": "0d09ffbd75cf09739febb9cedac8c46c32fee65e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
