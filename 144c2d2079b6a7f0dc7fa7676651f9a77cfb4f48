@@ -122,6 +122,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f329c2f_4b9e4599",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ef61d32_44fbdc08",
+      "range": {
+        "startLine": 316,
+        "startChar": 64,
+        "endLine": 316,
+        "endChar": 100
+      },
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78a3ff59_b62bdce6",
@@ -135,6 +159,30 @@
       "writtenOn": "2025-08-12T18:16:38Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 353,
+        "startChar": 58,
+        "endLine": 353,
+        "endChar": 94
+      },
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ac97f08_4ea6cefd",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78a3ff59_b62bdce6",
       "range": {
         "startLine": 353,
         "startChar": 58,
@@ -400,6 +448,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edfe7fec_43b87186",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c836bb9f_8b8a12bf",
+      "range": {
+        "startLine": 386,
+        "startChar": 13,
+        "endLine": 386,
+        "endChar": 20
+      },
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96cccd81_c864aec1",
@@ -437,6 +509,30 @@
           ]
         }
       ],
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e489486_d584b528",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96cccd81_c864aec1",
+      "range": {
+        "startLine": 398,
+        "startChar": 1,
+        "endLine": 398,
+        "endChar": 11
+      },
       "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -518,6 +614,30 @@
           ]
         }
       ],
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dd5c5da_de1ddac9",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "215095cb_ee590b3a",
+      "range": {
+        "startLine": 441,
+        "startChar": 33,
+        "endLine": 441,
+        "endChar": 85
+      },
       "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -643,6 +763,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "584419f3_1327e59f",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b18fed8_fb64feb9",
+      "range": {
+        "startLine": 594,
+        "startChar": 47,
+        "endLine": 594,
+        "endChar": 169
+      },
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "046958ff_f6ce5238",
@@ -748,6 +892,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f12e704_bde18039",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "046958ff_f6ce5238",
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb91f70c_85790ab0",
@@ -839,6 +1001,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af93624_3ad14c61",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Don\u0027t think it\u0027s possible in C because of `mm_node` `fd_node`",
+      "parentUuid": "eb91f70c_85790ab0",
+      "range": {
+        "startLine": 638,
+        "startChar": 2,
+        "endLine": 656,
+        "endChar": 3
+      },
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f774c0d7_2fa80bcf",
@@ -896,6 +1082,30 @@
           ]
         }
       ],
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53c8af1e_1f5fc146",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f774c0d7_2fa80bcf",
+      "range": {
+        "startLine": 714,
+        "startChar": 2,
+        "endLine": 721,
+        "endChar": 3
+      },
       "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -995,6 +1205,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7157e0cb_9082d404",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ed83607_1a42ba67",
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b57a150_2c430845",
@@ -1008,6 +1236,30 @@
       "writtenOn": "2025-08-12T18:16:38Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 691,
+        "startChar": 69,
+        "endLine": 691,
+        "endChar": 73
+      },
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8c704ad_5d6a53e5",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b57a150_2c430845",
       "range": {
         "startLine": 691,
         "startChar": 69,
@@ -1125,6 +1377,30 @@
           ]
         }
       ],
+      "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "983bf7b1_c9ee2a71",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-08T23:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b578c545_282cf8d4",
+      "range": {
+        "startLine": 706,
+        "startChar": 13,
+        "endLine": 706,
+        "endChar": 17
+      },
       "revId": "144c2d2079b6a7f0dc7fa7676651f9a77cfb4f48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
