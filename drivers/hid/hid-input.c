@@ -596,6 +596,7 @@ static void hidinput_cleanup_battery(struct hid_device *dev)
 }
 
 static bool hidinput_update_battery_charge_status(struct hid_device *dev,
+<<<<<<< HEAD   (6d79183f1cefa377048bfd89551fa7f22bcd75ef Revert "netfs: Fix unbuffered write error handling")
 			                                       unsigned int usage, int value)
 {
 	switch (usage) {
@@ -604,6 +605,17 @@ static bool hidinput_update_battery_charge_status(struct hid_device *dev,
 					POWER_SUPPLY_STATUS_CHARGING :
 					POWER_SUPPLY_STATUS_DISCHARGING;
 			return true;
+||||||| BASE   (11a24528d080a6ac23f07d6031da9e271728d62d Linux 6.12.44)
+=======
+						  unsigned int usage, int value)
+{
+	switch (usage) {
+	case HID_BAT_CHARGING:
+		dev->battery_charge_status = value ?
+					     POWER_SUPPLY_STATUS_CHARGING :
+					     POWER_SUPPLY_STATUS_DISCHARGING;
+		return true;
+>>>>>>> BRANCH (b0c51e95f54e5f4e13a7ada6629125b0bc427a96 Linux 6.12.45)
 	}
 
 	return false;
