@@ -16,6 +16,24 @@
       "message": "The link check is breaking due the the parentheses and the end of the links. Please remove or use the Link: ... notation of the UPSTREAM commits.",
       "revId": "59525f3bfd0ea5591847535e8a082ecd62b88520",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe47e6f9_9082a989",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3845040
+      },
+      "writtenOn": "2025-09-09T04:06:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e3375ae_b5e4e662",
+      "revId": "59525f3bfd0ea5591847535e8a082ecd62b88520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
