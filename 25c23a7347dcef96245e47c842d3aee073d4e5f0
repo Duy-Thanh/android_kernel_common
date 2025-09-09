@@ -153,6 +153,23 @@
       "message": "git push origin HEAD:refs/for/studio-2024.3.1",
       "revId": "25c23a7347dcef96245e47c842d3aee073d4e5f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e8a58e_c87d7092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4341149
+      },
+      "writtenOn": "2025-09-09T06:15:54Z",
+      "side": 1,
+      "message": "mda957018@gmail.com",
+      "revId": "25c23a7347dcef96245e47c842d3aee073d4e5f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
