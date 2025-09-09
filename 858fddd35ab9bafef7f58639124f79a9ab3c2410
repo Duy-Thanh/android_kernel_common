@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d6c6d46_255749c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-09T09:51:08Z",
+      "side": 1,
+      "message": "Hook is not actually placed anywhere, which is required.",
+      "revId": "858fddd35ab9bafef7f58639124f79a9ab3c2410",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
