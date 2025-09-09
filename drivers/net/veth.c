@@ -1381,6 +1381,7 @@ static void veth_free_queues(struct net_device *dev)
 
 static int veth_dev_init(struct net_device *dev)
 {
+<<<<<<< HEAD   (92ae7438ff39025b30b68487ba737bb74d6f4e6d Merge 945994f59773 ("pwm: mediatek: Fix duty and period sett)
 	int err;
 
 	dev->lstats = netdev_alloc_pcpu_stats(struct pcpu_lstats);
@@ -1394,6 +1395,12 @@ static int veth_dev_init(struct net_device *dev)
 	}
 
 	return 0;
+||||||| BASE   (945994f5977352646f1ace300de70055957ef6bb pwm: mediatek: Fix duty and period setting)
+	return veth_alloc_queues(dev);
+=======
+	netdev_lockdep_set_classes(dev);
+	return veth_alloc_queues(dev);
+>>>>>>> BRANCH (3372691721712d8d6f39bc72e945191af0d39b52 btrfs: send: use fallocate for hole punching with send strea)
 }
 
 static void veth_dev_free(struct net_device *dev)

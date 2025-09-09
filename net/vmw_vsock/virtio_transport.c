@@ -529,8 +529,17 @@ static void virtio_transport_rx_work(struct work_struct *work)
 	do {
 		virtqueue_disable_cb(vq);
 		for (;;) {
+<<<<<<< HEAD   (92ae7438ff39025b30b68487ba737bb74d6f4e6d Merge 945994f59773 ("pwm: mediatek: Fix duty and period sett)
 			struct virtio_vsock_pkt *pkt;
 			unsigned int len;
+||||||| BASE   (945994f5977352646f1ace300de70055957ef6bb pwm: mediatek: Fix duty and period setting)
+			struct sk_buff *skb;
+			unsigned int len;
+=======
+			unsigned int len, payload_len;
+			struct virtio_vsock_hdr *hdr;
+			struct sk_buff *skb;
+>>>>>>> BRANCH (3372691721712d8d6f39bc72e945191af0d39b52 btrfs: send: use fallocate for hole punching with send strea)
 
 			if (!virtio_transport_more_replies(vsock)) {
 				/* Stop rx until the device processes already
@@ -548,15 +557,42 @@ static void virtio_transport_rx_work(struct work_struct *work)
 			vsock->rx_buf_nr--;
 
 			/* Drop short/long packets */
+<<<<<<< HEAD   (92ae7438ff39025b30b68487ba737bb74d6f4e6d Merge 945994f59773 ("pwm: mediatek: Fix duty and period sett)
 			if (unlikely(len < sizeof(pkt->hdr) ||
 				     len > sizeof(pkt->hdr) + pkt->len)) {
 				virtio_transport_free_pkt(pkt);
+||||||| BASE   (945994f5977352646f1ace300de70055957ef6bb pwm: mediatek: Fix duty and period setting)
+			if (unlikely(len < sizeof(struct virtio_vsock_hdr) ||
+				     len > virtio_vsock_skb_len(skb))) {
+				kfree_skb(skb);
+=======
+			if (unlikely(len < sizeof(*hdr) ||
+				     len > virtio_vsock_skb_len(skb))) {
+				kfree_skb(skb);
+>>>>>>> BRANCH (3372691721712d8d6f39bc72e945191af0d39b52 btrfs: send: use fallocate for hole punching with send strea)
 				continue;
 			}
 
+<<<<<<< HEAD   (92ae7438ff39025b30b68487ba737bb74d6f4e6d Merge 945994f59773 ("pwm: mediatek: Fix duty and period sett)
 			pkt->len = len - sizeof(pkt->hdr);
 			virtio_transport_deliver_tap_pkt(pkt);
 			virtio_transport_recv_pkt(&virtio_transport, pkt);
+||||||| BASE   (945994f5977352646f1ace300de70055957ef6bb pwm: mediatek: Fix duty and period setting)
+			virtio_vsock_skb_rx_put(skb);
+			virtio_transport_deliver_tap_pkt(skb);
+			virtio_transport_recv_pkt(&virtio_transport, skb);
+=======
+			hdr = virtio_vsock_hdr(skb);
+			payload_len = le32_to_cpu(hdr->len);
+			if (unlikely(payload_len > len - sizeof(*hdr))) {
+				kfree_skb(skb);
+				continue;
+			}
+
+			virtio_vsock_skb_rx_put(skb);
+			virtio_transport_deliver_tap_pkt(skb);
+			virtio_transport_recv_pkt(&virtio_transport, skb);
+>>>>>>> BRANCH (3372691721712d8d6f39bc72e945191af0d39b52 btrfs: send: use fallocate for hole punching with send strea)
 		}
 	} while (!virtqueue_enable_cb(vq));
 
