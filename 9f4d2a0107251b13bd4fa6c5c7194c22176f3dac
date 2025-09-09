@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c189f64_4abf1ae6",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-09T08:12:18Z",
+      "side": 1,
+      "message": "shouldn\u0027t this have been checked way earlier when the ioctl was first called for this \"command\"?",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 30
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec3e629c_2f82138c",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-09T08:12:18Z",
+      "side": 1,
+      "message": "why not use a guard() style here, that prevents the need for the goto logic and manual verification that you got the cleanup paths correct.",
+      "range": {
+        "startLine": 154,
+        "startChar": 1,
+        "endLine": 154,
+        "endChar": 10
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7456237_606759ff",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-09T08:12:18Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be covered by the init lock?  why does it need to be an atomic?",
+      "range": {
+        "startLine": 166,
+        "startChar": 5,
+        "endLine": 166,
+        "endChar": 16
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30168904_64b0c189",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-09T08:12:18Z",
+      "side": 1,
+      "message": "this is not a \"read/write\" ioctl according to the code implementation here, nothing is being copied back into this structure from the kernel to userspace.  Or am I missing something?",
+      "range": {
+        "startLine": 20,
+        "startChar": 43,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
