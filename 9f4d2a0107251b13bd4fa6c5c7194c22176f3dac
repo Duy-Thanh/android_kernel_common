@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7909390b_bbbb0aba",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2025-09-09T08:51:14Z",
+      "side": 1,
+      "message": "Yeah, I\u0027m not a huge fan of that init_lock myself.  It literally just says \"don\u0027t reset the device and its data, because I\u0027m currently using it\". It probably can become some smart ref-counter or something of that nature.\n\nSwitching recompression/writeback knobs to a writer init_lock will basically block other zram device attrs for the duration of post-processing, e.g. mm_stat monitoring etc.  Which *maybe* isn\u0027t the end of the world, but a little difficult to reason about.",
+      "parentUuid": "b8359652_cbb3f286",
+      "range": {
+        "startLine": 166,
+        "startChar": 5,
+        "endLine": 166,
+        "endChar": 16
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30168904_64b0c189",
