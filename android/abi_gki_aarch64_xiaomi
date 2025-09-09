@@ -30,6 +30,10 @@
   __tracepoint_android_vh_lz4_decompress_bypass
   __traceiter_android_vh_lz4_decompress_bypass
 
+# required by health_report module
+  __tracepoint_android_vh_health_report
+  __traceiter_android_vh_health_report
+
 # required by SAGT module
   __traceiter_android_rvh_before_do_sched_yield
   __tracepoint_android_rvh_before_do_sched_yield
