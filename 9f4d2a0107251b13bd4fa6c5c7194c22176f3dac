@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc02b323_25e0a2f6",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-09T10:56:19Z",
+      "side": 1,
+      "message": "Good suggestion. I\u0027ve moved it to the beginning of the cmd function.",
+      "parentUuid": "5c189f64_4abf1ae6",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 30
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec3e629c_2f82138c",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-09-09T08:12:18Z",
       "side": 1,
       "message": "why not use a guard() style here, that prevents the need for the goto logic and manual verification that you got the cleanup paths correct.",
+      "range": {
+        "startLine": 154,
+        "startChar": 1,
+        "endLine": 154,
+        "endChar": 10
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8b5d67_06e1c267",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-09T10:56:19Z",
+      "side": 1,
+      "message": "Originally I think there are multiple init_lock in zram_drv.c, can be refactored in another commit. Now we move the logic to zram_ioctl.c, I am fine to change with guard() style. Thanks.",
+      "parentUuid": "ec3e629c_2f82138c",
       "range": {
         "startLine": 154,
         "startChar": 1,
@@ -155,6 +203,30 @@
       "writtenOn": "2025-09-09T08:12:18Z",
       "side": 1,
       "message": "this is not a \"read/write\" ioctl according to the code implementation here, nothing is being copied back into this structure from the kernel to userspace.  Or am I missing something?",
+      "range": {
+        "startLine": 20,
+        "startChar": 43,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e67cbb_923c7888",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-09T10:56:19Z",
+      "side": 1,
+      "message": "Yes, you are right. Only write flow is necessary. Change to _IOW.",
+      "parentUuid": "30168904_64b0c189",
       "range": {
         "startLine": 20,
         "startChar": 43,
