@@ -128,6 +128,7 @@ def get_gki_modules_list(arch = None):
     Returns:
       The list of GKI modules for the given |arch|.
     """
+<<<<<<< TARGET BRANCH (ee200af4a9d0a20b4a1d4085d32156ecdf0fa10d Merge 3bb38c52719b ("Merge tag 'm68k-for-v6.17-tag1' of git:)
     gki_modules_list = [] + _COMMON_GKI_MODULES_LIST
     if arch == "arm":
         gki_modules_list += _ARM_GKI_MODULES_LIST
@@ -141,9 +142,37 @@ def get_gki_modules_list(arch = None):
         gki_modules_list += _RISCV64_GKI_MODULES_LIST
     else:
         fail("{}: arch {} not supported. Use one of [arm, arm64, i386, x86_64, riscv64]".format(
+||||||| BASE          (b106f5ab59664adf6d20d2d7997a0e2c32544c67 Merge 3bb38c52719b ("Merge tag 'm68k-for-v6.17-tag1' of git:)
+    gki_modules_list = [] + _COMMON_GKI_MODULES_LIST
+    if arch == "arm":
+        gki_modules_list += _ARM_GKI_MODULES_LIST
+    elif arch == "arm64":
+        gki_modules_list += _ARM64_GKI_MODULES_LIST
+    elif arch == "i386":
+        gki_modules_list += _X86_GKI_MODULES_LIST
+    elif arch == "x86_64":
+        gki_modules_list += _X86_64_GKI_MODULES_LIST
+    else:
+        fail("{}: arch {} not supported. Use one of [arm, arm64, i386, x86_64]".format(
+=======
+    if not arch in ("arm64", "x86_64", "arm", "i386"):
+        fail("{}: arch {} not supported. Use one of [arm, arm64, i386, x86_64]".format(
+>>>>>>> SOURCE BRANCH (1748ad54f2af989db49108a4fd6c88bba31bd1aa ANDROID: refactor get_gki_modules_list.)
             str(native.package_relative_label(":x")).removesuffix(":x"),
             arch,
         ))
+
+    if arch == "arm":
+        return _COMMON_GKI_MODULES_LIST + _ARM_GKI_MODULES_LIST
+
+    if arch == "i386":
+        return _COMMON_GKI_MODULES_LIST + _X86_GKI_MODULES_LIST
+
+    gki_modules_list = [] + _COMMON_GKI_MODULES_LIST
+    if arch == "arm64":
+        gki_modules_list += _ARM64_GKI_MODULES_LIST
+    elif arch == "x86_64":
+        gki_modules_list += _X86_64_GKI_MODULES_LIST
 
     return gki_modules_list
 
