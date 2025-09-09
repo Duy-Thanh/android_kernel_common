@@ -611,6 +611,7 @@ static int f2fs_file_open(struct inode *inode, struct file *filp)
 
 	filp->f_mode |= FMODE_NOWAIT | FMODE_BUF_RASYNC;
 	filp->f_mode |= FMODE_CAN_ODIRECT;
+	filp->f_dontcache |= FOP_DONTCACHE;
 
 	trace_android_vh_f2fs_file_open(inode, filp);
 
@@ -5146,6 +5147,11 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 		ret = -EIO;
 		goto out;
 	}
+
+        if (iocb->ki_flags & IOCB_DONTCACHE) {
+                ret = -EOPNOTSUPP;
+                goto out;
+        }
 
 	if (!f2fs_is_compress_backend_ready(inode)) {
 		ret = -EOPNOTSUPP;
