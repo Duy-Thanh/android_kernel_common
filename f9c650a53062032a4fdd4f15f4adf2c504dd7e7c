@@ -40,6 +40,30 @@
       ],
       "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b79ef6_ea15fa32",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2025-09-09T22:56:03Z",
+      "side": 1,
+      "message": "I like this idea, or the number of pages.",
+      "parentUuid": "e093f7e7_b557b5d4",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 28
+      },
+      "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
