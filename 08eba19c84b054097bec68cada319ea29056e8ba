@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "897d1889_2d103802",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279898
+      },
+      "writtenOn": "2025-09-09T05:03:54Z",
+      "side": 1,
+      "message": "I am aware that the presubmits are not building, but the conflicts are preventing the upstream CL that I need to make the fix from landing (oddly, I\u0027m stuck in a situation where one of the projects has rolled up to September but this project is stuck in August). @elsk@google.com I should be able to fix the presubmit error trivially once I am synced to a point past aosp/3740148 .",
+      "revId": "08eba19c84b054097bec68cada319ea29056e8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
