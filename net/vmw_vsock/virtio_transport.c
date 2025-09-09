@@ -246,9 +246,17 @@ out_rcu:
 
 static void virtio_vsock_rx_fill(struct virtio_vsock *vsock)
 {
+<<<<<<< HEAD   (9bc09eb3ec9f6a2a96bcb1b07a2a1d86724339f5 ANDROID: GKI: add ww_mutex_trylock to db845c symbol list)
 	int buf_len = VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE;
 	struct virtio_vsock_pkt *pkt;
 	struct scatterlist hdr, buf, *sgs[2];
+||||||| BASE   (3662c20e079821dcbe582c44407fd6f3a58112d0 net: dsa: b53: fix IP_MULTICAST_CTRL on BCM5325)
+	int total_len = VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE + VIRTIO_VSOCK_SKB_HEADROOM;
+	struct scatterlist pkt, *p;
+=======
+	int total_len = VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE;
+	struct scatterlist pkt, *p;
+>>>>>>> BRANCH (1fc8b74dc540cf5fa8dd6d9ed6def9270bb3c76e vsock/virtio: Resize receive buffers so that each SKB fits i)
 	struct virtqueue *vq;
 	int ret;
 

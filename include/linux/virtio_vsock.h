@@ -7,7 +7,224 @@
 #include <net/sock.h>
 #include <net/af_vsock.h>
 
+<<<<<<< HEAD   (9bc09eb3ec9f6a2a96bcb1b07a2a1d86724339f5 ANDROID: GKI: add ww_mutex_trylock to db845c symbol list)
 #define VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE	(1024 * 4)
+||||||| BASE   (3662c20e079821dcbe582c44407fd6f3a58112d0 net: dsa: b53: fix IP_MULTICAST_CTRL on BCM5325)
+#define VIRTIO_VSOCK_SKB_HEADROOM (sizeof(struct virtio_vsock_hdr))
+
+struct virtio_vsock_skb_cb {
+	bool reply;
+	bool tap_delivered;
+};
+
+#define VIRTIO_VSOCK_SKB_CB(skb) ((struct virtio_vsock_skb_cb *)((skb)->cb))
+
+static inline struct virtio_vsock_hdr *virtio_vsock_hdr(struct sk_buff *skb)
+{
+	return (struct virtio_vsock_hdr *)skb->head;
+}
+
+static inline bool virtio_vsock_skb_reply(struct sk_buff *skb)
+{
+	return VIRTIO_VSOCK_SKB_CB(skb)->reply;
+}
+
+static inline void virtio_vsock_skb_set_reply(struct sk_buff *skb)
+{
+	VIRTIO_VSOCK_SKB_CB(skb)->reply = true;
+}
+
+static inline bool virtio_vsock_skb_tap_delivered(struct sk_buff *skb)
+{
+	return VIRTIO_VSOCK_SKB_CB(skb)->tap_delivered;
+}
+
+static inline void virtio_vsock_skb_set_tap_delivered(struct sk_buff *skb)
+{
+	VIRTIO_VSOCK_SKB_CB(skb)->tap_delivered = true;
+}
+
+static inline void virtio_vsock_skb_clear_tap_delivered(struct sk_buff *skb)
+{
+	VIRTIO_VSOCK_SKB_CB(skb)->tap_delivered = false;
+}
+
+static inline void virtio_vsock_skb_rx_put(struct sk_buff *skb)
+{
+	u32 len;
+
+	len = le32_to_cpu(virtio_vsock_hdr(skb)->len);
+
+	if (len > 0)
+		skb_put(skb, len);
+}
+
+static inline struct sk_buff *virtio_vsock_alloc_skb(unsigned int size, gfp_t mask)
+{
+	struct sk_buff *skb;
+
+	if (size < VIRTIO_VSOCK_SKB_HEADROOM)
+		return NULL;
+
+	skb = alloc_skb(size, mask);
+	if (!skb)
+		return NULL;
+
+	skb_reserve(skb, VIRTIO_VSOCK_SKB_HEADROOM);
+	return skb;
+}
+
+static inline void
+virtio_vsock_skb_queue_head(struct sk_buff_head *list, struct sk_buff *skb)
+{
+	spin_lock_bh(&list->lock);
+	__skb_queue_head(list, skb);
+	spin_unlock_bh(&list->lock);
+}
+
+static inline void
+virtio_vsock_skb_queue_tail(struct sk_buff_head *list, struct sk_buff *skb)
+{
+	spin_lock_bh(&list->lock);
+	__skb_queue_tail(list, skb);
+	spin_unlock_bh(&list->lock);
+}
+
+static inline struct sk_buff *virtio_vsock_skb_dequeue(struct sk_buff_head *list)
+{
+	struct sk_buff *skb;
+
+	spin_lock_bh(&list->lock);
+	skb = __skb_dequeue(list);
+	spin_unlock_bh(&list->lock);
+
+	return skb;
+}
+
+static inline void virtio_vsock_skb_queue_purge(struct sk_buff_head *list)
+{
+	spin_lock_bh(&list->lock);
+	__skb_queue_purge(list);
+	spin_unlock_bh(&list->lock);
+}
+
+static inline size_t virtio_vsock_skb_len(struct sk_buff *skb)
+{
+	return (size_t)(skb_end_pointer(skb) - skb->head);
+}
+
+#define VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE	(1024 * 4)
+=======
+#define VIRTIO_VSOCK_SKB_HEADROOM (sizeof(struct virtio_vsock_hdr))
+
+struct virtio_vsock_skb_cb {
+	bool reply;
+	bool tap_delivered;
+};
+
+#define VIRTIO_VSOCK_SKB_CB(skb) ((struct virtio_vsock_skb_cb *)((skb)->cb))
+
+static inline struct virtio_vsock_hdr *virtio_vsock_hdr(struct sk_buff *skb)
+{
+	return (struct virtio_vsock_hdr *)skb->head;
+}
+
+static inline bool virtio_vsock_skb_reply(struct sk_buff *skb)
+{
+	return VIRTIO_VSOCK_SKB_CB(skb)->reply;
+}
+
+static inline void virtio_vsock_skb_set_reply(struct sk_buff *skb)
+{
+	VIRTIO_VSOCK_SKB_CB(skb)->reply = true;
+}
+
+static inline bool virtio_vsock_skb_tap_delivered(struct sk_buff *skb)
+{
+	return VIRTIO_VSOCK_SKB_CB(skb)->tap_delivered;
+}
+
+static inline void virtio_vsock_skb_set_tap_delivered(struct sk_buff *skb)
+{
+	VIRTIO_VSOCK_SKB_CB(skb)->tap_delivered = true;
+}
+
+static inline void virtio_vsock_skb_clear_tap_delivered(struct sk_buff *skb)
+{
+	VIRTIO_VSOCK_SKB_CB(skb)->tap_delivered = false;
+}
+
+static inline void virtio_vsock_skb_rx_put(struct sk_buff *skb)
+{
+	u32 len;
+
+	len = le32_to_cpu(virtio_vsock_hdr(skb)->len);
+
+	if (len > 0)
+		skb_put(skb, len);
+}
+
+static inline struct sk_buff *virtio_vsock_alloc_skb(unsigned int size, gfp_t mask)
+{
+	struct sk_buff *skb;
+
+	if (size < VIRTIO_VSOCK_SKB_HEADROOM)
+		return NULL;
+
+	skb = alloc_skb(size, mask);
+	if (!skb)
+		return NULL;
+
+	skb_reserve(skb, VIRTIO_VSOCK_SKB_HEADROOM);
+	return skb;
+}
+
+static inline void
+virtio_vsock_skb_queue_head(struct sk_buff_head *list, struct sk_buff *skb)
+{
+	spin_lock_bh(&list->lock);
+	__skb_queue_head(list, skb);
+	spin_unlock_bh(&list->lock);
+}
+
+static inline void
+virtio_vsock_skb_queue_tail(struct sk_buff_head *list, struct sk_buff *skb)
+{
+	spin_lock_bh(&list->lock);
+	__skb_queue_tail(list, skb);
+	spin_unlock_bh(&list->lock);
+}
+
+static inline struct sk_buff *virtio_vsock_skb_dequeue(struct sk_buff_head *list)
+{
+	struct sk_buff *skb;
+
+	spin_lock_bh(&list->lock);
+	skb = __skb_dequeue(list);
+	spin_unlock_bh(&list->lock);
+
+	return skb;
+}
+
+static inline void virtio_vsock_skb_queue_purge(struct sk_buff_head *list)
+{
+	spin_lock_bh(&list->lock);
+	__skb_queue_purge(list);
+	spin_unlock_bh(&list->lock);
+}
+
+static inline size_t virtio_vsock_skb_len(struct sk_buff *skb)
+{
+	return (size_t)(skb_end_pointer(skb) - skb->head);
+}
+
+/* Dimension the RX SKB so that the entire thing fits exactly into
+ * a single 4KiB page. This avoids wasting memory due to alloc_skb()
+ * rounding up to the next page order and also means that we
+ * don't leave higher-order pages sitting around in the RX queue.
+ */
+#define VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE	SKB_WITH_OVERHEAD(1024 * 4)
+>>>>>>> BRANCH (1fc8b74dc540cf5fa8dd6d9ed6def9270bb3c76e vsock/virtio: Resize receive buffers so that each SKB fits i)
 #define VIRTIO_VSOCK_MAX_BUF_SIZE		0xFFFFFFFFUL
 #define VIRTIO_VSOCK_MAX_PKT_BUF_SIZE		virtio_transport_max_vsock_pkt_buf_size
 extern uint virtio_transport_max_vsock_pkt_buf_size;
