@@ -571,9 +571,14 @@ static void virtio_transport_rx_work(struct work_struct *work)
 				continue;
 			}
 
+<<<<<<< HEAD   (dc3583600756e5d5d3742e9585e9a9a4d2d55a82 Revert "xfrm: Duplicate SPI Handling")
 			if (payload_len)
 				virtio_vsock_skb_put(skb, payload_len);
 
+||||||| BASE   (868f23286c1a13162330fa6c614fe350f78e3f82 exfat: add cluster chain loop check for dir)
+=======
+			virtio_vsock_skb_rx_put(skb);
+>>>>>>> BRANCH (0ed2068de1f9afdde56436af91aba8cbb77c2741 kbuild: userprogs: use correct linker when mixing clang and )
 			virtio_transport_deliver_tap_pkt(skb);
 			virtio_transport_recv_pkt(&virtio_transport, skb);
 		}

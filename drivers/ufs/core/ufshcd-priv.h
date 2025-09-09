@@ -346,6 +346,20 @@ static inline int ufshcd_rpm_get_sync(struct ufs_hba *hba)
 	return pm_runtime_get_sync(&hba->ufs_device_wlun->sdev_gendev);
 }
 
+<<<<<<< HEAD   (dc3583600756e5d5d3742e9585e9a9a4d2d55a82 Revert "xfrm: Duplicate SPI Handling")
+||||||| BASE   (868f23286c1a13162330fa6c614fe350f78e3f82 exfat: add cluster chain loop check for dir)
+static inline int ufshcd_rpm_get_if_active(struct ufs_hba *hba)
+{
+	return pm_runtime_get_if_active(&hba->ufs_device_wlun->sdev_gendev, true);
+}
+
+=======
+static inline int ufshcd_rpm_get_if_active(struct ufs_hba *hba)
+{
+	return pm_runtime_get_if_active(&hba->ufs_device_wlun->sdev_gendev);
+}
+
+>>>>>>> BRANCH (0ed2068de1f9afdde56436af91aba8cbb77c2741 kbuild: userprogs: use correct linker when mixing clang and )
 static inline int ufshcd_rpm_put_sync(struct ufs_hba *hba)
 {
 	return pm_runtime_put_sync(&hba->ufs_device_wlun->sdev_gendev);

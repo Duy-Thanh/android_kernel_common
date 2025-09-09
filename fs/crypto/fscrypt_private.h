@@ -27,6 +27,7 @@
  */
 #define FSCRYPT_MIN_KEY_SIZE	16
 
+<<<<<<< HEAD   (dc3583600756e5d5d3742e9585e9a9a4d2d55a82 Revert "xfrm: Duplicate SPI Handling")
 /* Maximum size of a standard fscrypt master key */
 #define FSCRYPT_MAX_STANDARD_KEY_SIZE	64
 
@@ -48,6 +49,25 @@
  */
 #undef FSCRYPT_MAX_KEY_SIZE
 
+||||||| BASE   (868f23286c1a13162330fa6c614fe350f78e3f82 exfat: add cluster chain loop check for dir)
+=======
+/*
+ * This mask is passed as the third argument to the crypto_alloc_*() functions
+ * to prevent fscrypt from using the Crypto API drivers for non-inline crypto
+ * engines.  Those drivers have been problematic for fscrypt.  fscrypt users
+ * have reported hangs and even incorrect en/decryption with these drivers.
+ * Since going to the driver, off CPU, and back again is really slow, such
+ * drivers can be over 50 times slower than the CPU-based code for fscrypt's
+ * workload.  Even on platforms that lack AES instructions on the CPU, using the
+ * offloads has been shown to be slower, even staying with AES.  (Of course,
+ * Adiantum is faster still, and is the recommended option on such platforms...)
+ *
+ * Note that fscrypt also supports inline crypto engines.  Those don't use the
+ * Crypto API and work much better than the old-style (non-inline) engines.
+ */
+#define FSCRYPT_CRYPTOAPI_MASK \
+	(CRYPTO_ALG_ALLOCATES_MEMORY | CRYPTO_ALG_KERN_DRIVER_ONLY)
+>>>>>>> BRANCH (0ed2068de1f9afdde56436af91aba8cbb77c2741 kbuild: userprogs: use correct linker when mixing clang and )
 #define FSCRYPT_CONTEXT_V1	1
 #define FSCRYPT_CONTEXT_V2	2
 
