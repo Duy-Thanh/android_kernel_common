@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e093f7e7_b557b5d4",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-09-09T15:35:40Z",
+      "side": 1,
+      "message": "How about returning how many bytes we successfully try to write via zram_android_ioc_data_process_writeback.written_bytes?",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9ce9a06f_c89df92a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 169,
+                "startChar": 0,
+                "endLine": 171,
+                "endChar": 0
+              },
+              "replacement": "\tif (!ret) {\n\t\tint written \u003d zram_writeback_slots(zram, ctl);\n\n\t\tif (written \u003e\u003d 0) {\n\t\t\tioc_data_pwb-\u003ewritten_bytes \u003d written;\n\t\t\tret \u003d 0;\n\t\t} else {\n\t\t\tret \u003d written;\n\t\t}\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
