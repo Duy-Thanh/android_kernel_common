@@ -94,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8359652_cbb3f286",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-09T08:39:05Z",
+      "side": 1,
+      "message": "Messy, you have both a lock AND an atomic flag for the same thing, that feels like a design issue.  But as the zram core is doing this, you are stuck with also doing this here I guess, so no further complaints other than \"I trust you all got this right and it\u0027s been tested\" 😊",
+      "parentUuid": "8c29a993_70c10a36",
+      "range": {
+        "startLine": 166,
+        "startChar": 5,
+        "endLine": 166,
+        "endChar": 16
+      },
+      "revId": "9f4d2a0107251b13bd4fa6c5c7194c22176f3dac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30168904_64b0c189",
