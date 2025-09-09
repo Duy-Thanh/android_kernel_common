@@ -30,8 +30,15 @@ struct ivpu_cmdq {
 	u32 entry_count;
 	u32 id;
 	u32 db_id;
+<<<<<<< HEAD   (b35af1e3cfa947b4447968903845ace580362cb3 FROMGIT: ASoC: SOF: Intel: only detect codecs when HDA DSP p)
 	u8 priority;
 	bool is_legacy;
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	bool db_registered;
+=======
+	bool db_registered;
+	u8 priority;
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 };
 
 /**
