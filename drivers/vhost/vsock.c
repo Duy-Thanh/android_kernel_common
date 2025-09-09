@@ -366,8 +366,25 @@ vhost_vsock_alloc_pkt(struct vhost_virtqueue *vq,
 		return NULL;
 	}
 
+<<<<<<< HEAD   (f89692af9965ddabe4d4cc8a88f03998bd6c83eb Revert "ASoC: soc-dai.c: add missing flag check at snd_soc_p)
 	pkt = kzalloc(sizeof(*pkt), GFP_KERNEL);
 	if (!pkt)
+||||||| BASE   (945994f5977352646f1ace300de70055957ef6bb pwm: mediatek: Fix duty and period setting)
+	len = iov_length(vq->iov, out);
+
+	/* len contains both payload and hdr */
+	skb = virtio_vsock_alloc_skb(len, GFP_KERNEL);
+	if (!skb)
+=======
+	len = iov_length(vq->iov, out);
+
+	if (len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE + VIRTIO_VSOCK_SKB_HEADROOM)
+		return NULL;
+
+	/* len contains both payload and hdr */
+	skb = virtio_vsock_alloc_skb(len, GFP_KERNEL);
+	if (!skb)
+>>>>>>> BRANCH (3372691721712d8d6f39bc72e945191af0d39b52 btrfs: send: use fallocate for hole punching with send strea)
 		return NULL;
 
 	len = iov_length(vq->iov, out);
@@ -387,9 +404,20 @@ vhost_vsock_alloc_pkt(struct vhost_virtqueue *vq,
 	if (!pkt->len)
 		return pkt;
 
+<<<<<<< HEAD   (f89692af9965ddabe4d4cc8a88f03998bd6c83eb Revert "ASoC: soc-dai.c: add missing flag check at snd_soc_p)
 	/* The pkt is too big */
 	if (pkt->len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE) {
 		kfree(pkt);
+||||||| BASE   (945994f5977352646f1ace300de70055957ef6bb pwm: mediatek: Fix duty and period setting)
+	/* The pkt is too big or the length in the header is invalid */
+	if (payload_len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE ||
+	    payload_len + sizeof(*hdr) > len) {
+		kfree_skb(skb);
+=======
+	/* The pkt is too big or the length in the header is invalid */
+	if (payload_len + sizeof(*hdr) > len) {
+		kfree_skb(skb);
+>>>>>>> BRANCH (3372691721712d8d6f39bc72e945191af0d39b52 btrfs: send: use fallocate for hole punching with send strea)
 		return NULL;
 	}
 

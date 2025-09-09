@@ -1381,6 +1381,7 @@ static void veth_free_queues(struct net_device *dev)
 
 static int veth_dev_init(struct net_device *dev)
 {
+<<<<<<< HEAD   (f89692af9965ddabe4d4cc8a88f03998bd6c83eb Revert "ASoC: soc-dai.c: add missing flag check at snd_soc_p)
 	int err;
 
 	dev->lstats = netdev_alloc_pcpu_stats(struct pcpu_lstats);
@@ -1394,6 +1395,12 @@ static int veth_dev_init(struct net_device *dev)
 	}
 
 	return 0;
+||||||| BASE   (945994f5977352646f1ace300de70055957ef6bb pwm: mediatek: Fix duty and period setting)
+	return veth_alloc_queues(dev);
+=======
+	netdev_lockdep_set_classes(dev);
+	return veth_alloc_queues(dev);
+>>>>>>> BRANCH (3372691721712d8d6f39bc72e945191af0d39b52 btrfs: send: use fallocate for hole punching with send strea)
 }
 
 static void veth_dev_free(struct net_device *dev)
