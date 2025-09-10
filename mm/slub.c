@@ -761,8 +761,19 @@ void object_err(struct kmem_cache *s, struct page *page,
 			u8 *object, char *reason)
 {
 	slab_bug(s, "%s", reason);
+<<<<<<< HEAD   (48647f2c6800c3eaa375f44ec58f3da7867eb85b Merge 5.10.242 into android13-5.10-lts)
 	print_trailer(s, page, object);
 	add_taint(TAINT_BAD_PAGE, LOCKDEP_NOW_UNRELIABLE);
+||||||| BASE   (c30b4019ea89633d790f0bfcbb03234f0d006f87 Linux 5.10.242)
+	print_trailer(s, page, object);
+=======
+	if (!object || !check_valid_pointer(s, page, object)) {
+		print_page_info(page);
+		pr_err("Invalid pointer 0x%p\n", object);
+	} else {
+		print_trailer(s, page, object);
+	}
+>>>>>>> BRANCH (9d9b1219d04c43d3d8e71abb6b75d0c7a35bf87a Linux 5.10.243)
 }
 
 static __printf(3, 4) void slab_err(struct kmem_cache *s, struct page *page,
