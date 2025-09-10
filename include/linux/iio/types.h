@@ -8,6 +8,7 @@
 #define _IIO_TYPES_H_
 
 #include <uapi/linux/iio/types.h>
+#include <linux/android_kabi.h>
 
 enum iio_event_info {
 	IIO_EV_INFO_ENABLE,
@@ -70,5 +71,7 @@ enum iio_chan_info_enum {
 	IIO_CHAN_INFO_ZEROPOINT,
 	IIO_CHAN_INFO_TROUGH,
 };
+
+ANDROID_KABI_ENUMERATOR_IGNORE(iio_chan_type, IIO_ATTENTION);
 
 #endif /* _IIO_TYPES_H_ */
