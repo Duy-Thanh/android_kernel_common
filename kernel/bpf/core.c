@@ -2103,11 +2103,22 @@ bool bpf_prog_map_compatible(struct bpf_map *map,
 			     const struct bpf_prog *fp)
 {
 	enum bpf_prog_type prog_type = resolve_prog_type(fp);
+<<<<<<< HEAD   (0620c28ab0642aa07e4d2bb5674ede26c3edede0 Merge 6.1.150 into android14-6.1-lts)
 	bool ret;
+||||||| BASE   (28c695c365e10b534e6d01d15a2186098ab815d1 Linux 6.1.150)
+	bool ret;
+	struct bpf_prog_aux *aux = fp->aux;
+=======
+	struct bpf_prog_aux *aux = fp->aux;
+	enum bpf_cgroup_storage_type i;
+	bool ret = false;
+	u64 cookie;
+>>>>>>> BRANCH (66da7cee78590259b400e51a70622ccd41da7bb2 bpf: Fix oob access in cgroup local storage)
 
 	if (fp->kprobe_override)
-		return false;
+		return ret;
 
+<<<<<<< HEAD   (0620c28ab0642aa07e4d2bb5674ede26c3edede0 Merge 6.1.150 into android14-6.1-lts)
 	spin_lock(&map->owner.lock);
 	if (!map->owner.type) {
 		/* There's no owner yet where we could check for
@@ -2116,14 +2127,85 @@ bool bpf_prog_map_compatible(struct bpf_map *map,
 		map->owner.type  = prog_type;
 		map->owner.jited = fp->jited;
 		map->owner.xdp_has_frags = fp->aux->xdp_has_frags;
+||||||| BASE   (28c695c365e10b534e6d01d15a2186098ab815d1 Linux 6.1.150)
+	spin_lock(&map->owner.lock);
+	if (!map->owner.type) {
+		/* There's no owner yet where we could check for
+		 * compatibility.
+		 */
+		map->owner.type  = prog_type;
+		map->owner.jited = fp->jited;
+		map->owner.xdp_has_frags = aux->xdp_has_frags;
+		map->owner.attach_func_proto = aux->attach_func_proto;
+=======
+	spin_lock(&map->owner_lock);
+	/* There's no owner yet where we could check for compatibility. */
+	if (!map->owner) {
+		map->owner = bpf_map_owner_alloc(map);
+		if (!map->owner)
+			goto err;
+		map->owner->type  = prog_type;
+		map->owner->jited = fp->jited;
+		map->owner->xdp_has_frags = aux->xdp_has_frags;
+		map->owner->attach_func_proto = aux->attach_func_proto;
+		for_each_cgroup_storage_type(i) {
+			map->owner->storage_cookie[i] =
+				aux->cgroup_storage[i] ?
+				aux->cgroup_storage[i]->cookie : 0;
+		}
+>>>>>>> BRANCH (66da7cee78590259b400e51a70622ccd41da7bb2 bpf: Fix oob access in cgroup local storage)
 		ret = true;
 	} else {
+<<<<<<< HEAD   (0620c28ab0642aa07e4d2bb5674ede26c3edede0 Merge 6.1.150 into android14-6.1-lts)
 		ret = map->owner.type  == prog_type &&
 		      map->owner.jited == fp->jited &&
 		      map->owner.xdp_has_frags == fp->aux->xdp_has_frags;
+||||||| BASE   (28c695c365e10b534e6d01d15a2186098ab815d1 Linux 6.1.150)
+		ret = map->owner.type  == prog_type &&
+		      map->owner.jited == fp->jited &&
+		      map->owner.xdp_has_frags == aux->xdp_has_frags;
+		if (ret &&
+		    map->owner.attach_func_proto != aux->attach_func_proto) {
+			switch (prog_type) {
+			case BPF_PROG_TYPE_TRACING:
+			case BPF_PROG_TYPE_LSM:
+			case BPF_PROG_TYPE_EXT:
+			case BPF_PROG_TYPE_STRUCT_OPS:
+				ret = false;
+				break;
+			default:
+				break;
+			}
+		}
+=======
+		ret = map->owner->type  == prog_type &&
+		      map->owner->jited == fp->jited &&
+		      map->owner->xdp_has_frags == aux->xdp_has_frags;
+		for_each_cgroup_storage_type(i) {
+			if (!ret)
+				break;
+			cookie = aux->cgroup_storage[i] ?
+				 aux->cgroup_storage[i]->cookie : 0;
+			ret = map->owner->storage_cookie[i] == cookie ||
+			      !cookie;
+		}
+		if (ret &&
+		    map->owner->attach_func_proto != aux->attach_func_proto) {
+			switch (prog_type) {
+			case BPF_PROG_TYPE_TRACING:
+			case BPF_PROG_TYPE_LSM:
+			case BPF_PROG_TYPE_EXT:
+			case BPF_PROG_TYPE_STRUCT_OPS:
+				ret = false;
+				break;
+			default:
+				break;
+			}
+		}
+>>>>>>> BRANCH (66da7cee78590259b400e51a70622ccd41da7bb2 bpf: Fix oob access in cgroup local storage)
 	}
-	spin_unlock(&map->owner.lock);
-
+err:
+	spin_unlock(&map->owner_lock);
 	return ret;
 }
 
