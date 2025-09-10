@@ -16,6 +16,24 @@
       "message": "Why is this needed in android-mainline? Please submit this series upstream first.",
       "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5d77b9_3dc364d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063916
+      },
+      "writtenOn": "2025-09-10T11:55:13Z",
+      "side": 1,
+      "message": "Because the Halla kernel driver will be used only for Android16 on Samsung Mobile products. After discussing with the Google pKVM team, it was agreed that Halla hypervisor will be temporarily applied only to the Android16 project for Samsung Mobile. Therefore, we believe the Halla kernel driver is required only for ACK and not for kernel mainline.",
+      "parentUuid": "b199f976_bf54b5a0",
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
