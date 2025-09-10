@@ -16,6 +16,24 @@
       "message": "Please fix this INFO reported by KernelCommit: Cherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](...\n\nCherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/b0e0369bca338bb6a07466838cef6c6e5a1a55b9) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003db0e0369bca338bb6a07466838cef6c6e5a1a55b9).\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\n----\n\nThe bot says this is a clean cherrypick. Is there actually a conflict in `intel_display_device.h`? Or should the tag be updated to `UPSTREAM`?",
       "revId": "657095fb63b1af1fc3528dacc248c44416427dbc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd503d41_76e361c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4043531
+      },
+      "writtenOn": "2025-09-10T05:15:59Z",
+      "side": 1,
+      "message": "Hi Tim,\nI double checked today . Checked out till the parent patch in the series. Then i git-cherrypick \u003cupstream commit\u003e . It shows conflict in drivers/gpu/drm/i915/display/intel_display_device.h so the BACKPORT tag is valid.\nCopy pasting the commands for reference \n\nkraj@cs2n2:~/aluminium-kernel/common$ git fetch https://android.googlesource.com/kernel/common refs/changes/01/3718601/4 \u0026\u0026 git checkout -b change-3718601 FETCH_HEAD\nFrom https://android.googlesource.com/kernel/common\n * branch                      refs/changes/01/3718601/4 -\u003e FETCH_HEAD\nSwitched to a new branch \u0027change-3718601\u0027\nkraj@cs2n2:~/aluminium-kernel/common$ git cherry-pick b0e0369bca338bb6a07466838cef6c6e5a1a55b9\nAuto-merging drivers/gpu/drm/i915/display/intel_color.c\nAuto-merging drivers/gpu/drm/i915/display/intel_display.c\nAuto-merging drivers/gpu/drm/i915/display/intel_display_device.h\nCONFLICT (content): Merge conflict in drivers/gpu/drm/i915/display/intel_display_device.h\nerror: could not apply b0e0369bca33... drm/i915/display: use GOSUB to program double buffered LUT registers\nhint: After resolving the conflicts, mark them with\nhint: \"git add/rm \u003cpathspec\u003e\", then run\nhint: \"git cherry-pick --continue\".\nhint: You can instead skip this commit with \"git cherry-pick --skip\".\nhint: To abort and get back to the state before \"git cherry-pick\",\nhint: run \"git cherry-pick --abort\".\nkraj@cs2n2:~/aluminium-kernel/common$ git status\nOn branch change-3718601\nYou are currently cherry-picking commit b0e0369bca33.\n  (fix conflicts and run \"git cherry-pick --continue\")\n  (use \"git cherry-pick --skip\" to skip this patch)\n  (use \"git cherry-pick --abort\" to cancel the cherry-pick operation)\n\nChanges to be committed:\n        modified:   drivers/gpu/drm/i915/display/intel_color.c\n        modified:   drivers/gpu/drm/i915/display/intel_color.h\n        modified:   drivers/gpu/drm/i915/display/intel_display.c\n\nUnmerged paths:\n  (use \"git add \u003cfile\u003e...\" to mark resolution)\n        both modified:   drivers/gpu/drm/i915/display/intel_display_device.h\n\nkraj@cs2n2:~/aluminium-kernel/common$",
+      "parentUuid": "b58d8d87_744fa36f",
+      "revId": "657095fb63b1af1fc3528dacc248c44416427dbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
