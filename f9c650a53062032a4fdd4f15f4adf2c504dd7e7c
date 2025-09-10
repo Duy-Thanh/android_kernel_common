@@ -160,6 +160,30 @@
       },
       "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a35fe77d_48864a34",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-10T10:33:07Z",
+      "side": 1,
+      "message": "Add aosp/3762032 to support counting written slots.\nAnd support passing written_bytes to userspace. \nPlease help take a look. Thanks.",
+      "parentUuid": "ab114451_3117ca8b",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 28
+      },
+      "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
