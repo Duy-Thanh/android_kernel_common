@@ -54,6 +54,12 @@ enum iio_chan_type {
 	IIO_ATTENTION,
 };
 
+#ifdef __KERNEL__
+#include <linux/android_kabi.h>
+
+ANDROID_KABI_ENUMERATOR_IGNORE(iio_chan_type, IIO_ATTENTION);
+#endif
+
 enum iio_modifier {
 	IIO_NO_MOD,
 	IIO_MOD_X,
