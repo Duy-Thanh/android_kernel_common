@@ -88,6 +88,30 @@
       },
       "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a62ba236_a26c7231",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-09-10T03:50:12Z",
+      "side": 1,
+      "message": "Unless there\u0027s a strong reason otherwise, I\u0027d like to avoid using PAGE_SIZE. It isn\u0027t portable because its value varies depending on the architecture and configuration. In my opinion, using bytes is more straightforward and is consistent with the write() syscall.",
+      "parentUuid": "1a2302c5_8c121136",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 28
+      },
+      "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
