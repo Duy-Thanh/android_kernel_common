@@ -64,6 +64,30 @@
       },
       "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a2302c5_8c121136",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-10T03:33:47Z",
+      "side": 1,
+      "message": "How about both? If we applied compressed writeback in the future, we can know such as written_page \u003d 3 and written_bytes \u003d 4096.",
+      "parentUuid": "59b79ef6_ea15fa32",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 28
+      },
+      "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
