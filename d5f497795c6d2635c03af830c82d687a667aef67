@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46488d6f_1b548608",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-09-10T09:21:32Z",
+      "side": 1,
+      "message": "Could we assert that the attached devices are in the blocked state?",
+      "revId": "d5f497795c6d2635c03af830c82d687a667aef67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
