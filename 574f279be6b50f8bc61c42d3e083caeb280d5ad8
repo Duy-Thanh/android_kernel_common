@@ -51,6 +51,75 @@
       "parentUuid": "b199f976_bf54b5a0",
       "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061c4c26_ba8cd96b",
+        "filename": "drivers/virt/halla/hvm_debug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-10T12:42:40Z",
+      "side": 1,
+      "message": "use the built-in kernel function for  this.",
+      "range": {
+        "startLine": 15,
+        "startChar": 16,
+        "endLine": 15,
+        "endChar": 36
+      },
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d88f5156_bcb78e5c",
+        "filename": "drivers/virt/halla/hvm_debug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-10T12:42:40Z",
+      "side": 1,
+      "message": "wrong check, never check the return value of a debugfs call.",
+      "range": {
+        "startLine": 150,
+        "startChar": 5,
+        "endLine": 150,
+        "endChar": 9
+      },
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3111f77b_b25f608d",
+        "filename": "drivers/virt/halla/hvm_debug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-10T12:42:40Z",
+      "side": 1,
+      "message": "no need to save this, look it up and remove it when you unload.",
+      "range": {
+        "startLine": 155,
+        "startChar": 6,
+        "endLine": 155,
+        "endChar": 17
+      },
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
