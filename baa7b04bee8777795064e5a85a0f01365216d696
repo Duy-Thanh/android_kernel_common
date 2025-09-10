@@ -33,6 +33,24 @@
       "message": "rebase on top of aosp/3758007 to resolve conflicts",
       "revId": "baa7b04bee8777795064e5a85a0f01365216d696",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b6af1d_9d0c7705",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-10T16:20:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a59dce6d_18c8c604",
+      "revId": "baa7b04bee8777795064e5a85a0f01365216d696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
