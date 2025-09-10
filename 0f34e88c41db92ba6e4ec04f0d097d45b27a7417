@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e0d0f9_a2d3c125",
+        "filename": "README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-09-10T09:31:15Z",
+      "side": 1,
+      "message": "... that is generated when using `git revert`",
+      "range": {
+        "startLine": 166,
+        "startChar": 37,
+        "endLine": 166,
+        "endChar": 48
+      },
+      "revId": "0f34e88c41db92ba6e4ec04f0d097d45b27a7417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed4304c3_d42ee156",
+        "filename": "README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-09-10T09:31:15Z",
+      "side": 1,
+      "message": "max columns are ~80",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 106
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "06beeea3_0b15ad7f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "README.md",
+              "range": {
+                "startLine": 167,
+                "startChar": 0,
+                "endLine": 168,
+                "endChar": 0
+              },
+              "replacement": "- If modifications have been made after creating the revert, include a list of\n  these in the commit message\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f34e88c41db92ba6e4ec04f0d097d45b27a7417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
