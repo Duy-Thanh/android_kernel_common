@@ -112,6 +112,30 @@
       },
       "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb35a3c_0ece472c",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2025-09-10T05:23:39Z",
+      "side": 1,
+      "message": "The only time returned value will be 100% accurate is when we do in-compressible objects writeback, because we immediately release PAGE_SIZE for each such object and we writeback PAGE_SIZE. In all other cases things are unclear - we just punch holes in zspages during writeback. Punching holes is not guaranteed to result in any memory savings, because zspage still can hold N alive objects, so we cannot actually say that we \"saved M bytes of memory\". If we take the last object from zspage then we release not \"size of the object\" bytes, but \"the number of physical pages that zspage held\" of bytes.",
+      "parentUuid": "a62ba236_a26c7231",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 28
+      },
+      "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
