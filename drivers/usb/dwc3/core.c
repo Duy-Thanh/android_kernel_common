@@ -221,11 +221,17 @@ static void __dwc3_set_mode(struct work_struct *work)
 		 * keep it consistent across different IPs, let's wait up to
 		 * 100ms before clearing GCTL.CORESOFTRESET.
 		 */
-		msleep(100);
 
+	}
+
+	msleep(100);
+
+	if (dwc->current_dr_role && ((DWC3_IP_IS(DWC3) ||
+                       DWC3_VER_IS_PRIOR(DWC31, 190A)) &&
+		       desired_dr_role != DWC3_GCTL_PRTCAP_OTG)) {
 		reg = dwc3_readl(dwc->regs, DWC3_GCTL);
-		reg &= ~DWC3_GCTL_CORESOFTRESET;
-		dwc3_writel(dwc->regs, DWC3_GCTL, reg);
+	        reg &= ~DWC3_GCTL_CORESOFTRESET;
+	        dwc3_writel(dwc->regs, DWC3_GCTL, reg);
 	}
 
 	spin_lock_irqsave(&dwc->lock, flags);
