@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59821006_4840489b",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-10T15:28:47Z",
+      "side": 1,
+      "message": "Per the comment below, if pgt_entry_present is false but pgt_entry_mapped is true (i.e. the present bit in the PTE is cleared but some other bits are set), it means we have a bug, since the guest doesn\u0027t donate its pages to anyone.",
+      "parentUuid": "0686e6fc_f0e22ed2",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a60fb7ca_caa75236",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 14
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-10T06:33:03Z",
       "side": 1,
       "message": "nit: is the clflush to prevent leaking pVM data to the host? Just want to understand if there is a real issue without calling clflush or this is for paranoid security?",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0880e49d_ece44103",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-10T15:28:47Z",
+      "side": 1,
+      "message": "It is just to prevent leaking pVM data to the host.",
+      "parentUuid": "a60fb7ca_caa75236",
       "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
