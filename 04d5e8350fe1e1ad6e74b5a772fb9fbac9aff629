@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b65e238c_42cc389e",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2025-09-10T13:00:08Z",
+      "side": 1,
+      "message": "I think we should return the bytes written directly in ctl. Once we do compressed writeback this will not work.",
+      "range": {
+        "startLine": 172,
+        "startChar": 31,
+        "endLine": 172,
+        "endChar": 70
+      },
+      "revId": "04d5e8350fe1e1ad6e74b5a772fb9fbac9aff629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

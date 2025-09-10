@@ -184,6 +184,30 @@
       },
       "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18367c9_beca402e",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2025-09-10T13:00:08Z",
+      "side": 1,
+      "message": "I commented in that CL but we should also return bytes written then we will be able to easily handle the compressed writeback case.",
+      "parentUuid": "a35fe77d_48864a34",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 28
+      },
+      "revId": "f9c650a53062032a4fdd4f15f4adf2c504dd7e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
