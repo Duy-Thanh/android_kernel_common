@@ -94,6 +94,30 @@
       },
       "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "046926e8_77ce3f6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-10T08:07:30Z",
+      "side": 1,
+      "message": "desktop branch will not be maintained over 6.12 kernel, on all future LTS versions we will use pure Android kernel and hence GKI, that\u0027s why it\u0027s a divergence we need to track.\n\nplease see https://docs.google.com/document/d/1rtuPa_RLGkSGMmRvauOgoZbwQPa4dMiUHOgHelIk1uA/edit?resourcekey\u003d0-K9mvI8Oc9FSUGjyN6yFZHA\u0026tab\u003dt.vjtki81v3phi#heading\u003dh.9h3p6b1ka4v\n\nThis GKI defconfig change will *need to* land in `android-mainline` -\u003e can we submit this divergence straight away to android-mainline and cherry pick here?",
+      "parentUuid": "67bb1dbf_ca222745",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
