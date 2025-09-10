@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d1b04f42_51b669eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4043531
+      },
+      "writtenOn": "2025-09-10T05:18:23Z",
+      "side": 1,
+      "message": "Hi Sasha, This patch is already in upstream so the TAG will not be applicable",
+      "parentUuid": "16919166_4ba91650",
+      "revId": "b04420faa72ce4332978b201350dd4c7f3f940f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "193c09f8_5c7371db",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
