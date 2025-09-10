@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0686e6fc_f0e22ed2",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-10T06:33:03Z",
+      "side": 1,
+      "message": "nit: any reason to check pgt_entry_mapped here with a WARN_ON_ONCE(!pgt_entry_present) below? Looks like we only want pgt_entry_preset \u003d\u003d true. If so, seems we can check pgt_entry_present here rather than pgt_entry_mapped?",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a60fb7ca_caa75236",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-10T06:33:03Z",
+      "side": 1,
+      "message": "nit: is the clflush to prevent leaking pVM data to the host? Just want to understand if there is a real issue without calling clflush or this is for paranoid security?",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
