@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4fc9925_b0152261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-09-10T20:52:26Z",
+      "side": 1,
+      "message": "my understanding is that Halla is needed for android 16 launching devices, for their entire support windows (7 years?), not just android16 kernels. i don\u0027t know exactly how that maps to kernel branches",
+      "parentUuid": "d75c178f_fc940cde",
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "061c4c26_ba8cd96b",
         "filename": "drivers/virt/halla/hvm_debug.c",
         "patchSetId": 1
