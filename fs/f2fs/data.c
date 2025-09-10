@@ -3753,7 +3753,28 @@ void f2fs_invalidate_folio(struct folio *folio, size_t offset, size_t length)
 			f2fs_remove_dirty_inode(inode);
 		}
 	}
+<<<<<<< HEAD   (1a5eed92b358c044f17fc6652420d277775f5459 Merge 54aeb486404f ("mm: reinstate ability to map write-seal)
 	clear_page_private_all(&folio->page);
+||||||| BASE   (54aeb486404fcfcc6316c9c09c25f3653ee4cd5f mm: reinstate ability to map write-sealed memfd mappings rea)
+
+	clear_page_private_gcing(&folio->page);
+
+	if (test_opt(sbi, COMPRESS_CACHE) &&
+			inode->i_ino == F2FS_COMPRESS_INO(sbi))
+		clear_page_private_data(&folio->page);
+
+	folio_detach_private(folio);
+=======
+
+	clear_page_private_reference(&folio->page);
+	clear_page_private_gcing(&folio->page);
+
+	if (test_opt(sbi, COMPRESS_CACHE) &&
+			inode->i_ino == F2FS_COMPRESS_INO(sbi))
+		clear_page_private_data(&folio->page);
+
+	folio_detach_private(folio);
+>>>>>>> BRANCH (f89b6e15694c1e24f78d889b29a54d46e5267413 Linux 6.1.149)
 }
 
 bool f2fs_release_folio(struct folio *folio, gfp_t wait)
@@ -3762,7 +3783,34 @@ bool f2fs_release_folio(struct folio *folio, gfp_t wait)
 	if (folio_test_dirty(folio))
 		return false;
 
+<<<<<<< HEAD   (1a5eed92b358c044f17fc6652420d277775f5459 Merge 54aeb486404f ("mm: reinstate ability to map write-seal)
 	clear_page_private_all(&folio->page);
+||||||| BASE   (54aeb486404fcfcc6316c9c09c25f3653ee4cd5f mm: reinstate ability to map write-sealed memfd mappings rea)
+	sbi = F2FS_M_SB(folio->mapping);
+	if (test_opt(sbi, COMPRESS_CACHE)) {
+		struct inode *inode = folio->mapping->host;
+
+		if (inode->i_ino == F2FS_COMPRESS_INO(sbi))
+			clear_page_private_data(&folio->page);
+	}
+
+	clear_page_private_gcing(&folio->page);
+
+	folio_detach_private(folio);
+=======
+	sbi = F2FS_M_SB(folio->mapping);
+	if (test_opt(sbi, COMPRESS_CACHE)) {
+		struct inode *inode = folio->mapping->host;
+
+		if (inode->i_ino == F2FS_COMPRESS_INO(sbi))
+			clear_page_private_data(&folio->page);
+	}
+
+	clear_page_private_reference(&folio->page);
+	clear_page_private_gcing(&folio->page);
+
+	folio_detach_private(folio);
+>>>>>>> BRANCH (f89b6e15694c1e24f78d889b29a54d46e5267413 Linux 6.1.149)
 	return true;
 }
 

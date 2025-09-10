@@ -731,10 +731,22 @@ static int hwpoison_hugetlb_range(pte_t *ptep, unsigned long hmask,
 #define hwpoison_hugetlb_range	NULL
 #endif
 
+static int hwpoison_test_walk(unsigned long start, unsigned long end,
+			     struct mm_walk *walk)
+{
+	/* We also want to consider pages mapped into VM_PFNMAP. */
+	return 0;
+}
+
 static const struct mm_walk_ops hwp_walk_ops = {
 	.pmd_entry = hwpoison_pte_range,
 	.hugetlb_entry = hwpoison_hugetlb_range,
+<<<<<<< HEAD   (1a5eed92b358c044f17fc6652420d277775f5459 Merge 54aeb486404f ("mm: reinstate ability to map write-seal)
 	.walk_lock = PGWALK_RDLOCK,
+||||||| BASE   (54aeb486404fcfcc6316c9c09c25f3653ee4cd5f mm: reinstate ability to map write-sealed memfd mappings rea)
+=======
+	.test_walk = hwpoison_test_walk,
+>>>>>>> BRANCH (f89b6e15694c1e24f78d889b29a54d46e5267413 Linux 6.1.149)
 };
 
 /*
