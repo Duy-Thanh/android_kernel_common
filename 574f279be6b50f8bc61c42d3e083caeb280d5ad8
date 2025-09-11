@@ -144,6 +144,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d81be28d_00963315",
+        "filename": "drivers/virt/halla/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-11T09:18:34Z",
+      "side": 1,
+      "message": "should not be needed, as this references this same exact directory.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 33
+      },
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "061c4c26_ba8cd96b",
         "filename": "drivers/virt/halla/hvm_debug.c",
         "patchSetId": 1
@@ -205,6 +228,75 @@
         "startLine": 155,
         "startChar": 6,
         "endLine": 155,
+        "endChar": 17
+      },
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d5df9f4_1c6fad11",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-11T09:18:34Z",
+      "side": 1,
+      "message": "`unit32_t` is not a correct kernel type.  THat is a userspace type, please use `u32` instead.  Same for this whole drive.",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 15
+      },
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c0814c_1b7c5172",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-11T09:18:34Z",
+      "side": 1,
+      "message": "wrong type for storing an irq.  Needs to be fixed for all of these.",
+      "range": {
+        "startLine": 22,
+        "startChar": 7,
+        "endLine": 22,
+        "endChar": 15
+      },
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d0e6ca7_07733e66",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-11T09:18:34Z",
+      "side": 1,
+      "message": "you allocate this, read from it, but never actually set it to any real value, are you sure it is still even needed?",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 142,
         "endChar": 17
       },
       "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
