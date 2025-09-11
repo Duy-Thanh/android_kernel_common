@@ -109,6 +109,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a108f010_93e48cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-11T09:13:38Z",
+      "side": 1,
+      "message": "why can this not just be an external vendor module?",
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c460eaa_1de47d81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-11T09:13:38Z",
+      "side": 1,
+      "message": "Please see the android kernel documentation for how the branches work, and what they are named.",
+      "parentUuid": "e48b86b7_9b651650",
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "061c4c26_ba8cd96b",
         "filename": "drivers/virt/halla/hvm_debug.c",
         "patchSetId": 1
