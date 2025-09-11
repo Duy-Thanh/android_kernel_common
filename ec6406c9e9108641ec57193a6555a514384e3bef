@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "800ed4c7_c6f5ed00",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-11T01:42:17Z",
+      "side": 1,
+      "message": "I see. Probably a BUG_ON is more accurate if it means we have a code bug?",
+      "parentUuid": "59821006_4840489b",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a60fb7ca_caa75236",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 14
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "It is just to prevent leaking pVM data to the host.",
       "parentUuid": "a60fb7ca_caa75236",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2181e2b0_dd1d0ab2",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-11T01:42:17Z",
+      "side": 1,
+      "message": "Asked his because seems we just free pVM memory by memset to 0 without calling clflush in the emulated code, so would like to understand if that caused any issue or not. Now sounds like this is for paranoid security but not for a real issue?",
+      "parentUuid": "0880e49d_ece44103",
       "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
