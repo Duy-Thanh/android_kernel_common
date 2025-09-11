@@ -394,7 +394,7 @@ retry:
 		struct kvm_pinned_page *next;
 
 		ret = kvm_call_hyp_nvhe(__pkvm_reclaim_dying_guest_page, host_kvm->arch.pkvm.handle,
-					page_to_pfn(ppage->page), ppage->ipa >> PAGE_SHIFT,
+					ppage->pfn, ppage->ipa >> PAGE_SHIFT,
 					ppage->order);
 		cond_resched();
 		if (ret == -EBUSY) {
@@ -405,7 +405,7 @@ retry:
 		}
 		WARN_ON(ret);
 
-		unpin_user_pages_dirty_lock(&ppage->page, 1, true);
+		unpin_user_pages_dirty_lock(&ppage->_page, 1, true);
 		next = kvm_pinned_pages_iter_next(ppage, 0, ~(0UL));
 		kvm_pinned_pages_remove(ppage, &host_kvm->arch.pkvm.pinned_pages);
 		pages += 1 << ppage->order;
@@ -757,7 +757,7 @@ void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa)
 		return;
 
 	account_locked_vm(mm, 1 << ppage->order, false);
-	unpin_user_pages_dirty_lock(&ppage->page, 1, true);
+	unpin_user_pages_dirty_lock(&ppage->_page, 1, true);
 	kfree(ppage);
 }
 
