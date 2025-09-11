@@ -325105,8 +325105,8 @@ elf_symbol {
   name: "snd_soc_acpi_intel_arl_sdw_machines"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0xf5981925
-  type_id: 0x67e91768
+  crc: 0xad82efc7
+  type_id: 0xd8fed48e
   full_name: "snd_soc_acpi_intel_arl_sdw_machines"
 }
 elf_symbol {
