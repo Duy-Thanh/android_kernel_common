@@ -141,6 +141,24 @@
       "parentUuid": "2181e2b0_dd1d0ab2",
       "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0195ae6_7cbcf342",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-11T11:04:55Z",
+      "side": 1,
+      "message": "Most likely what remains in the cache should be the 0, which is written by memset, but not the pVM\u0027s data as we will memset every pVM\u0027s memory page, and most likely we will full fill the cache during this. Anyway, thanks for letting me know this is not for any functional issue 😊",
+      "parentUuid": "0f3c72c5_46ea7aa9",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
