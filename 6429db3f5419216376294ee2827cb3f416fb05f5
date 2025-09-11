@@ -34,6 +34,24 @@
       "parentUuid": "97f39724_d85fdcef",
       "revId": "6429db3f5419216376294ee2827cb3f416fb05f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b4fe692_25dbc2bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-11T17:11:41Z",
+      "side": 1,
+      "message": "For FROMGIT, the annotation needs to point to the patch in a maintainer tree. Please look at the example in https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "c66361dc_ad133de0",
+      "revId": "6429db3f5419216376294ee2827cb3f416fb05f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
