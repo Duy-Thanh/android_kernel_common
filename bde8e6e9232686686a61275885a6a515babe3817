@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ceb63ce_433c5e1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-09-11T13:27:50Z",
+      "side": 1,
+      "message": "a space is needed before the number and after the \":\"",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 13
+      },
+      "revId": "bde8e6e9232686686a61275885a6a515babe3817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
