@@ -132,6 +132,30 @@
       },
       "revId": "3e046a3a1ed086e0df5926982b9830f463da758a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd395e4f_3b956907",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-09-11T17:25:59Z",
+      "side": 1,
+      "message": "Resolved via discussion on LKML. Link: https://lore.kernel.org/all/20250722-shrewd-hyena-from-saturn-dbcfc1@sudeepholla/",
+      "parentUuid": "6f2b6e87_1ca56c2f",
+      "range": {
+        "startLine": 124,
+        "startChar": 21,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "3e046a3a1ed086e0df5926982b9830f463da758a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
