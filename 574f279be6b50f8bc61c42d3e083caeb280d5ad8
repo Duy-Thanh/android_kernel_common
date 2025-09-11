@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e48b86b7_9b651650",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063916
+      },
+      "writtenOn": "2025-09-11T00:57:11Z",
+      "side": 1,
+      "message": "@Frederick Mayle, Right, Halla is needed for android 16 launching devices and we have to support it 7 or 8 years including Andorid MR update. In this case, which branch do we have to use?",
+      "parentUuid": "e4fc9925_b0152261",
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "061c4c26_ba8cd96b",
         "filename": "drivers/virt/halla/hvm_debug.c",
         "patchSetId": 1
