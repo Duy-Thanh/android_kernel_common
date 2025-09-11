@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39522dae_1be6b7c6",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-11T15:07:14Z",
+      "side": 1,
+      "message": "Changed to BUG_ON and reshuffled the code a bit, to make it clearer.",
+      "parentUuid": "30b546d4_636b25e1",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a60fb7ca_caa75236",
@@ -175,6 +193,24 @@
       "side": 1,
       "message": "\u003e Most likely what remains in the cache should be the 0, which is written by memset\n\nHmm, yes... So this clflush might be unnecessary (apart from, possibly, some paranoid protection against potential CPU bugs or whatever). Don\u0027t know why I thought it was necessary. Probably just because pKVM-ARM does it, for some reason.",
       "parentUuid": "b0195ae6_7cbcf342",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23c55ca9_80e8ffb8",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-11T15:07:14Z",
+      "side": 1,
+      "message": "Removed this clflush as superfluous.",
+      "parentUuid": "69350ab2_9e9b1625",
       "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
