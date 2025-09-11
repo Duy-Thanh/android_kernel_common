@@ -16,6 +16,24 @@
       "message": "Please make this a patch series.",
       "revId": "68d44ba1f18fdadc085895cded8f66bdbafeb21d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac3fa1be_7f40f51d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3657368
+      },
+      "writtenOn": "2025-09-11T06:04:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9a3557e9_2a88c65c",
+      "revId": "68d44ba1f18fdadc085895cded8f66bdbafeb21d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
