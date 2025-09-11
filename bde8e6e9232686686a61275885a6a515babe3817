@@ -39,6 +39,24 @@
       "message": "Please reformat the commit message from:\n\n```\nBug:443883933\n```\n\nto:\n\n```\nBug: 443883933\n```",
       "revId": "bde8e6e9232686686a61275885a6a515babe3817",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bca9354a_6aac6bfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-11T13:29:14Z",
+      "side": 1,
+      "message": "You will need to do this on the cherry-pick to `android15-6.6-2025-04` as well.",
+      "parentUuid": "5cb45cf2_5cb4f38f",
+      "revId": "bde8e6e9232686686a61275885a6a515babe3817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
