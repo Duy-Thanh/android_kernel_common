@@ -52,6 +52,24 @@
       "parentUuid": "0c6178ab_a6fcf334",
       "revId": "c8b874567515eec8ee64649756682023801761e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d17fb78_171dfcef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-09-11T07:48:33Z",
+      "side": 1,
+      "message": "In particular, this does not seem to have landed upstream as it is not part of Linus\u0027s tree ...",
+      "parentUuid": "b96214af_e24c5bae",
+      "revId": "c8b874567515eec8ee64649756682023801761e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
