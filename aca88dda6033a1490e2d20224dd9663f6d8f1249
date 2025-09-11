@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b5bf5a_7474f129",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-09-11T22:34:42Z",
+      "side": 1,
+      "message": "Do we need the fix for the headers?\n\n```\naf74e5fe7453 tools headers: Update the VFS headers with the kernel sources\n```",
+      "revId": "aca88dda6033a1490e2d20224dd9663f6d8f1249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
